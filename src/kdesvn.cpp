@@ -62,10 +62,16 @@ kdesvn::kdesvn()
     statusBar()->show();
 
     // Apply the create the main window and ask the mainwindow to
-		// automatically save settings if changed: window size, toolbar
+        // automatically save settings if changed: window size, toolbar
     // position, icon size, etc.  Also to add actions for the statusbar
-		// toolbar, and keybindings if necessary.
-    setupGUI();
+        // toolbar, and keybindings if necessary.
+    //setupGUI();
+    createStandardStatusBarAction();
+    setStandardToolBarMenuEnabled( true );
+    KStdAction::configureToolbars(this,SLOT(configureToolbars() ), actionCollection());
+
+    setAutoSaveSettings();
+    //setupGUI(Save|StatusBar|ToolBar);
 
     // allow the view to change the statusbar and caption
     connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),

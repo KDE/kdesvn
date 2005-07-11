@@ -28,6 +28,7 @@
 
 class QPainter;
 class KURL;
+class kdesvnfilelist;
 
 /**
  * This is the main view class for kdesvn.  Most of the non-menu,
@@ -44,14 +45,14 @@ class kdesvnView : public QWidget, public kdesvnIface
 {
     Q_OBJECT
 public:
-	/**
-	 * Default constructor
-	 */
+    /**
+     * Default constructor
+     */
     kdesvnView(QWidget *parent);
 
-	/**
-	 * Destructor
-	 */
+    /**
+     * Destructor
+     */
     virtual ~kdesvnView();
 
     /**
@@ -90,7 +91,8 @@ private slots:
     void slotSetTitle(const QString& title);
 
 private:
-    KParts::ReadOnlyPart *m_html;
+    //KParts::ReadOnlyPart *m_html;
+    kdesvnfilelist*m_flist;
 };
 
 #endif // _KDESVNVIEW_H_

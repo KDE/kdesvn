@@ -11,11 +11,11 @@ INCLUDES         = $(all_includes)
 kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 
 # the libraries to link against.
-kdesvn_LDADD   = $(LIB_KFILE) $(LIB_KDEPRINT)
+kdesvn_LDADD = $(top_builddir)/src/listview/liblistview.a $(LIB_KFILE) \
+	$(LIB_KDEPRINT)
 
 # which sources should be compiled for kdesvn
-kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp \
-		      pref.cpp kdesvniface.skel
+kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp kdesvniface.skel
 
 # these are the headers for your project
 noinst_HEADERS = kdesvn.h kdesvnview.h pref.h
@@ -41,3 +41,5 @@ kdelnk_DATA = kdesvn.desktop
 # this is where the XML-GUI resource file goes
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
+
+SUBDIRS = listview

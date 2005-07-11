@@ -20,6 +20,7 @@
 
 
 #include "kdesvnview.h"
+#include "listview/kdesvnfilelist.h"
 
 #include <qpainter.h>
 #include <qlayout.h>
@@ -39,7 +40,10 @@ kdesvnView::kdesvnView(QWidget *parent)
     // setup our layout manager to automatically add our widgets
     QHBoxLayout *top_layout = new QHBoxLayout(this);
     top_layout->setAutoAdd(true);
+    m_flist=new kdesvnfilelist(this);
+    m_flist->openURL(KURL("/home/ral/progs"));
 
+#if 0
     // we want to look for all components that satisfy our needs.  the
     // trader will actually search through *all* registered KDE
     // applications and components -- not just KParts.  So we have to
@@ -86,7 +90,7 @@ kdesvnView::kdesvnView(QWidget *parent)
             this,   SLOT(slotSetTitle(const QString&)));
     connect(m_html, SIGNAL(setStatusBarText(const QString&)),
             this,   SLOT(slotOnURL(const QString&)));
-
+#endif
 }
 
 kdesvnView::~kdesvnView()
@@ -101,7 +105,9 @@ void kdesvnView::print(QPainter *p, int height, int width)
 
 QString kdesvnView::currentURL()
 {
+#if 0
     return m_html->url().url();
+#endif
 }
 
 void kdesvnView::openURL(QString url)
@@ -111,7 +117,7 @@ void kdesvnView::openURL(QString url)
 
 void kdesvnView::openURL(const KURL& url)
 {
-    m_html->openURL(url);
+    m_flist->openURL(url);
 }
 
 void kdesvnView::slotOnURL(const QString& url)

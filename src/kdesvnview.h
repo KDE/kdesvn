@@ -29,6 +29,13 @@
 class QPainter;
 class KURL;
 class kdesvnfilelist;
+class KdeSvnDirList;
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
+class QSpacerItem;
+class QSplitter;
+
 
 /**
  * This is the main view class for kdesvn.  Most of the non-menu,
@@ -93,6 +100,8 @@ private slots:
 private:
     //KParts::ReadOnlyPart *m_html;
     kdesvnfilelist*m_flist;
+    KdeSvnDirList*m_LeftList;
+    QSplitter* m_Splitter;
 };
 
 #endif // _KDESVNVIEW_H_

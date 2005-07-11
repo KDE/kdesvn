@@ -107,8 +107,9 @@ void kdesvn::load(const KURL& url)
     }
     #endif
 
-    setCaption(url.prettyURL());
     m_view->openURL(url);
+
+    setCaption(url.prettyURL());
 }
 
 void kdesvn::setupActions()

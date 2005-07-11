@@ -21,9 +21,15 @@
 
 #include "kdesvnview.h"
 #include "listview/kdesvnfilelist.h"
+#include "listview/kdesvndirlist.h"
 
 #include <qpainter.h>
 #include <qlayout.h>
+#include <qfileinfo.h>
+#include <qheader.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
+#include <qsplitter.h>
 
 #include <kurl.h>
 
@@ -39,9 +45,13 @@ kdesvnView::kdesvnView(QWidget *parent)
 {
     // setup our layout manager to automatically add our widgets
     QHBoxLayout *top_layout = new QHBoxLayout(this);
-    top_layout->setAutoAdd(true);
-    m_flist=new kdesvnfilelist(this);
-    m_flist->openURL(KURL("/home/ral/progs"));
+    m_Splitter = new QSplitter(this,"m_Splitter");
+    m_Splitter->setOrientation( QSplitter::Horizontal );
+    //top_layout->setAutoAdd(true);
+    m_LeftList=new KdeSvnDirList(m_Splitter);
+    m_flist=new kdesvnfilelist(m_Splitter);
+    m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 3, 0, m_flist->sizePolicy().hasHeightForWidth() ) );
+    top_layout->addWidget(m_Splitter);
 
 #if 0
     // we want to look for all components that satisfy our needs.  the
@@ -117,6 +127,14 @@ void kdesvnView::openURL(QString url)
 
 void kdesvnView::openURL(const KURL& url)
 {
+    /* check later against http/https protocol - then it should be a webdav-svn url */
+    if (!url.isLocalFile()) {
+        return;
+    }
+    QFileInfo f(url.path());
+    if (!f.isDir()) {
+        return;
+    }
     m_flist->openURL(url);
 }
 

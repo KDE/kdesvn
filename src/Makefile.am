@@ -11,8 +11,8 @@ INCLUDES         = $(all_includes)
 kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 
 # the libraries to link against.
-kdesvn_LDADD = $(top_builddir)/src/listview/liblistview.a $(LIB_KFILE) \
-	$(LIB_KDEPRINT)
+kdesvn_LDADD = $(top_builddir)/src/listview/liblistview.a \
+	$(top_builddir)/src/svncpp/libsvncpp.a $(APR_LIBS) $(NEON_LIBS) $(LIB_KFILE) $(LIB_KDEPRINT) $(SVN_LIBS)
 
 # which sources should be compiled for kdesvn
 kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp kdesvniface.skel
@@ -22,7 +22,7 @@ noinst_HEADERS = kdesvn.h kdesvnview.h pref.h
 
 # client stuff
 kdesvn_client_LDFLAGS = $(KDE_RPATH) $(all_libraries)
-kdesvn_client_LDADD   = $(LIB_KDECORE)
+kdesvn_client_LDADD = $(LIB_KDECORE)
 kdesvn_client_SOURCES = kdesvn_client.cpp
 
 # let automoc handle all of the meta source files (moc)
@@ -42,4 +42,4 @@ kdelnk_DATA = kdesvn.desktop
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
-SUBDIRS = listview
+SUBDIRS = listview svncpp

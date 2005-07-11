@@ -15,12 +15,16 @@
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
     <description/>
-    <ignoreparts/>
+    <ignoreparts>
+      <part>Unterstützung für ClearCase (KDevelop)</part>
+      <part>Unterstützung für CVSService (KDevelop)</part>
+    </ignoreparts>
     <versioncontrol>kdevsubversion</versioncontrol>
+    <secondaryLanguages/>
   </general>
   <kdevautoproject>
     <general>
-      <activetarget>src/kdesvn</activetarget>
+      <activetarget>src/listview/liblistview.a</activetarget>
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
@@ -28,7 +32,8 @@
       <terminal>false</terminal>
       <directoryradio>executable</directoryradio>
       <runarguments>
-        <kdesvn></kdesvn>
+        <kdesvn/>
+        <kdesvn_client/>
       </runarguments>
     </run>
     <make>
@@ -56,6 +61,7 @@
         <cxxcompiler>kdevgppoptions</cxxcompiler>
         <f77compiler>kdevg77options</f77compiler>
         <cxxflags>-O0 -g3</cxxflags>
+        <envvars/>
       </debug>
     </configurations>
   </kdevautoproject>
@@ -120,10 +126,14 @@
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
       <runappinappdirectory>true</runappinappdirectory>
+      <configGdbScript/>
+      <runShellScript/>
+      <runGdbScript/>
     </general>
     <display>
       <staticmembers>false</staticmembers>
       <demanglenames>true</demanglenames>
+      <outputradix>10</outputradix>
     </display>
   </kdevdebugger>
   <kdevfilecreate>
@@ -179,10 +189,7 @@
     <dest>/home/ral/progs/Projekte/kdesvn</dest>
   </substmap>
   <kdevcppsupport>
-    <references>
-      <pcs>KDElibs</pcs>
-      <pcs>Qt</pcs>
-    </references>
+    <references/>
     <codecompletion>
       <includeGlobalFunctions>true</includeGlobalFunctions>
       <includeTypes>true</includeTypes>

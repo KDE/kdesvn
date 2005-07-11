@@ -34,15 +34,14 @@ class FileListViewItem : public KListViewItem
 public:
     FileListViewItem(kdesvnfilelist*,KFileItem*);
 
-    ~FileListViewItem();
+    virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
 protected:
     KFileItem* m_Item;
     short int sortChar;
-
-    void update();
-
+    kdesvnfilelist*m_Ksvnfilelist;
+    virtual void update();
 };
 
 #endif

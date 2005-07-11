@@ -19,34 +19,46 @@
  ***************************************************************************/
 #include "kdesvnfilelist.h"
 #include "filelistviewitem.h"
+#include "svncpp/revision.hpp"
+#include "svncpp/dirent.hpp"
+#include "svncpp/client.hpp"
+#include "svncpp/status.hpp"
 #include <kdirlister.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
- : KListView(parent, name),m_dirLister(new KDirLister(true))
+ : KListView(parent, name),m_dirLister(new KDirLister(true)),m_Svnclient()
 {
     m_dirLister->setMainWindow(this);
     setMultiSelection(true);
     setSelectionModeExt( FileManager );
+    setShowSortIndicator(true);
+    setAllColumnsShowFocus (true);
     setDragEnabled(true);
     setItemsMovable(false);
+    addColumn(" ");
     addColumn("Name");
+    addColumn("Status");
+    setSortColumn(1);
+
     m_dirLister->setNameFilter("*");
     m_dirLister->clearMimeFilter();
+    m_dirLister->setShowingDotFiles(true);
 
    connect( m_dirLister, SIGNAL(started( const KURL & )),
             this, SLOT(slotStarted()) );
-   connect( m_dirLister, SIGNAL(completed()), this, SLOT(slotCompleted()) );
-   connect( m_dirLister, SIGNAL(canceled()), this, SLOT(slotCanceled()) );
+   //connect( m_dirLister, SIGNAL(completed()), this, SLOT(slotCompleted()) );
+   //connect( m_dirLister, SIGNAL(canceled()), this, SLOT(slotCanceled()) );
    connect( m_dirLister, SIGNAL(clear()), this, SLOT(slotClear()) );
    connect( m_dirLister, SIGNAL(newItems( const KFileItemList & ) ),
             this, SLOT(slotNewItems( const KFileItemList & )) );
+#if 0
    connect( m_dirLister, SIGNAL(deleteItem( KFileItem * )),
             this, SLOT(slotDeleteItem( KFileItem * )) );
    connect( m_dirLister, SIGNAL(refreshItems( const KFileItemList & )),
             this, SLOT( slotRefreshItems( const KFileItemList & )) );
    connect( m_dirLister, SIGNAL(redirection( const KURL & )),
             this, SLOT(slotRedirection( const KURL & )) );
-#if 0
+
    connect( m_dirLister, SIGNAL(itemsFilteredByMime( const KFileItemList & )),
             m_pBrowserView, SIGNAL(itemsFilteredByMime( const KFileItemList & )) );
    connect( m_dirLister, SIGNAL(infoMessage( const QString& )),
@@ -62,14 +74,43 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
 bool kdesvnfilelist::openURL( const KURL &url )
 {
     clear();
-    qDebug("Open url "+url.prettyURL());
+    svn::Context*nc = new svn::Context();
+    svn::Context*oc = (svn::Context*)m_Svnclient.getContext();
+    if (oc) {
+        delete oc;
+    }
+    m_Svnclient.setContext(nc);
+    svn::Revision rev(svn::Revision::HEAD);
+
+    svn::StatusEntries dlist;
+    try {
+        dlist = m_Svnclient.status(url.path().ascii());
+    } catch (svn::ClientException e) {
+//        setText(2,e.message());
+        return;
+    } catch (...) {
+        return false;
+    }
+    KFileItemList fk;
+    svn::StatusEntries::iterator it = dlist.begin();
+    for (;it!=dlist.end();++it) {
+        KFileItem *i=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,KURL(it->path()));
+        fk.append(i);
+    }
+    slotNewItems(fk);
+/*
     m_dirLister->openURL(url);
+*/
     return true;
 }
 
 kdesvnfilelist::~kdesvnfilelist()
 {
     delete m_dirLister;
+    svn::Context*oc = (svn::Context*)m_Svnclient.getContext();
+    if (oc) {
+        delete oc;
+    }
 }
 
 void kdesvnfilelist::slotStarted()
@@ -82,7 +123,6 @@ void kdesvnfilelist::slotClear()
 
 void kdesvnfilelist::slotNewItems( const KFileItemList & entries)
 {
-    qDebug("New items");
     for ( QPtrListIterator<KFileItem> kit ( entries ); kit.current(); ++kit ) {
         new FileListViewItem(this,kit);
     }

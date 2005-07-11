@@ -17,36 +17,17 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KDESVNFILELIST_H
-#define KDESVNFILELIST_H
+#include "kdesvndirlist.h"
 
-#include <klistview.h>
-#include <kdirlister.h>
-#include "svncpp/client.hpp"
-
-/**
-@author Rajko Albrecht
-*/
-class kdesvnfilelist : public KListView
+KdeSvnDirList::KdeSvnDirList(QWidget * parent, const char*name)
+  : KListView(parent,name)
 {
-    Q_OBJECT
-    friend class FileListViewItem;
-public:
-    kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
-    virtual ~kdesvnfilelist();
+}
 
-    bool openURL( const KURL &url );
 
-protected:
-    KDirLister *m_dirLister;
-    svn::Client m_Svnclient;
+KdeSvnDirList::~KdeSvnDirList()
+{
+}
 
-    svn::Client* svnclient(){return &m_Svnclient;}
 
-protected slots:
-    virtual void slotStarted();
-    virtual void slotClear();
-    virtual void slotNewItems( const KFileItemList & );
-};
-
-#endif
+#include "kdesvndirlist.moc"

@@ -19,15 +19,19 @@
  ***************************************************************************/
 #include "filelistviewitem.h"
 #include "kdesvnfilelist.h"
+#include "svncpp/status.hpp"
+#include "svncpp/revision.hpp"
+
+#include <klocale.h>
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,KFileItem*_item)
  : KListViewItem(_parent),
  m_Item(_item),
- sortChar(0)
+ sortChar(0),
+ m_Ksvnfilelist(_parent)
 {
     update();
 }
-
 
 FileListViewItem::~FileListViewItem()
 {
@@ -35,10 +39,65 @@ FileListViewItem::~FileListViewItem()
 
 void FileListViewItem::update()
 {
-    setText(0,m_Item->name());
+    setText(1,m_Item->name());
+    setPixmap(0,m_Item->pixmap(16,0));
     sortChar = S_ISDIR( m_Item->mode() ) ? 1 : 3;
-    if ( m_Item->text()[0] == '.' )
+    if ( m_Item->name()[0] == '.' )
         --sortChar;
+    svn::Status stat;
+    //svn::Entry ent;
+    try {
+      stat = m_Ksvnfilelist->svnclient()->singleStatus(m_Item->url().path());
+    } catch (svn::ClientException e) {
+        setText(2,e.message());
+        return;
+    } catch (...) {
+        qDebug("Execption catched");
+        setText(2,"?");
+        return;
+    }
+
+    if (!stat.isVersioned()) {
+        setText(2,"Not versioned");
+        return;
+    }
+    QString info_text = "";
+    switch(stat.textStatus ()) {
+    case svn_wc_status_modified:
+        info_text = i18n("Localy modified");
+        break;
+    case svn_wc_status_added:
+        info_text = i18n("Localy added");
+        break;
+    case svn_wc_status_missing:
+        info_text = i18n("Missing");
+        break;
+    case svn_wc_status_deleted:
+        info_text = i18n("Deleted");
+        break;
+    case svn_wc_status_replaced:
+        info_text = i18n("Replaced");
+        break;
+    case svn_wc_status_ignored:
+        info_text = i18n("Ignored");
+        break;
+    case svn_wc_status_external:
+        info_text=i18n("External");
+        break;
+    default:
+        break;
+    }
+    if (info_text.isEmpty()) {
+        switch (stat.propStatus ()) {
+        case svn_wc_status_modified:
+            info_text = i18n("Property modified");
+            break;
+        default:
+            break;
+        }
+    }
+    setText(2,info_text);
+    //ent = stat.entry();
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const

@@ -45,6 +45,7 @@ protected:
     virtual void update(KFileItem*_item);
     virtual void update();
     svn::Status stat;
+    QString m_shortName;
 };
 
 #endif

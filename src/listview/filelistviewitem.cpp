@@ -22,6 +22,7 @@
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"
 
+#include <qfileinfo.h>
 #include <klocale.h>
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,KFileItem*_item)
@@ -30,6 +31,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,KFileItem*_item)
  m_Ksvnfilelist(_parent),
  stat()
 {
+    m_shortName = QString(_item->name());
     update(_item);
 }
 
@@ -39,7 +41,11 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_sta
  m_Ksvnfilelist(_parent),
  stat(_stat)
 {
-    setText(1,stat.path());
+    QFileInfo f(stat.path());
+    m_shortName = f.fileName ();
+    setText(1,m_shortName);
+    sortChar = f.isDir()?1:3;
+    if (m_shortName[0]=='.') --sortChar;
     update();
 }
 

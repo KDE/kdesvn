@@ -5503,3 +5503,8 @@ fi
 SVN_LIBS="-L$SVN_LIB -lsvn_client-1 -lsvn_wc-1 -lsvn_ra-1 -lsvn_delta-1 -lsvn_subr-1"
 AC_SUBST(SVN_LIBS)
 ])
+
+AC_DEFUN([AC_EXTRAS_INC],
+[
+ all_includes="$all_includes -I\$(top_srcdir) -I\$(top_srcdir)/src"
+])

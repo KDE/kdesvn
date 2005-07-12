@@ -24,6 +24,7 @@
 
 #include <qfileinfo.h>
 #include <klocale.h>
+#include <kiconloader.h>
 
 #include <svn_time.h>
 
@@ -34,21 +35,25 @@ const int FileListViewItem::COL_LAST_REV = 2;
 const int FileListViewItem::COL_LAST_AUTHOR = 3;
 const int FileListViewItem::COL_LAST_DATE = 4;
 
-FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,KFileItem*_item)
- : KListViewItem(_parent),
- sortChar(0),
- m_Ksvnfilelist(_parent),
- stat()
-{
-    m_shortName = QString(_item->name());
-    update(_item);
-}
-
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
  : KListViewItem(_parent),
  sortChar(0),
  m_Ksvnfilelist(_parent),
  stat(_stat)
+{
+    init();
+}
+
+FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::Status&_stat)
+    : KListViewItem(_parentItem),
+    sortChar(0),
+    m_Ksvnfilelist(_parent),
+    stat(_stat)
+{
+    init();
+}
+
+void FileListViewItem::init()
 {
     m_fullName = stat.path();
     while (m_fullName.endsWith("/")) {
@@ -109,7 +114,12 @@ void FileListViewItem::makePixmap()
     QPixmap p;
     if (QString::compare(stat.entry().url(),stat.path())==0) {
         /* remote access */
-        p = KMimeType::pixmapForURL(KURL(stat.entry().url()),0,KIcon::Desktop,16);
+        if (isDir()) {
+            p = KGlobal::iconLoader()->loadIcon("folder",KIcon::Desktop,16);
+        } else {
+            p = KGlobal::iconLoader()->loadIcon("unknown",KIcon::Desktop,16);
+            //p = KMimeType::pixmapForURL(KURL(stat.entry().url()),0,KIcon::Desktop,16);
+        }
     } else {
         p = KMimeType::pixmapForURL(stat.path(),0,KIcon::Desktop,16);
     }

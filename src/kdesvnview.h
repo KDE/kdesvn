@@ -35,6 +35,7 @@ class QHBoxLayout;
 class QGridLayout;
 class QSpacerItem;
 class QSplitter;
+class KActionCollection;
 
 
 /**
@@ -82,6 +83,8 @@ public:
      */
     void print(QPainter *, int height, int width);
 
+    KActionCollection*filesActions();
+
 signals:
     /**
      * Use this signal to change the content of the statusbar
@@ -94,14 +97,14 @@ signals:
     void signalChangeCaption(const QString& text);
 
 private slots:
-    void slotOnURL(const QString& url);
-    void slotSetTitle(const QString& title);
+    virtual void slotOnURL(const QString& url);
+    virtual void slotSetTitle(const QString& title);
 
 private:
     //KParts::ReadOnlyPart *m_html;
     kdesvnfilelist*m_flist;
-    KdeSvnDirList*m_LeftList;
-    QSplitter* m_Splitter;
+//    KdeSvnDirList*m_LeftList;
+//    QSplitter* m_Splitter;
 protected:
     QString m_currentURL;
 };

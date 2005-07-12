@@ -102,13 +102,25 @@ void kdesvn::setupActions()
 {
     KActionMenu*m_FileMenu=new KActionMenu(I18N_NOOP("&File"),this);
     m_DirOpen = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
+    m_UrlOpen = new KAction(I18N_NOOP("Open remote repository"),KShortcut(),this,SLOT(urlOpen()),actionCollection());
 
     m_FileMenu->insert(m_DirOpen);
+    m_FileMenu->insert(m_UrlOpen);
     m_FileMenu->insert(KStdAction::quit(kapp, SLOT(quit()), actionCollection()));
 
     m_FileMenu->plug(menuBar());
 
     KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
+    KActionCollection*t=m_view->filesActions();
+    if (t) {
+        KActionMenu*svnmenu = new KActionMenu(I18N_NOOP("Subversion"),this);
+        KActionPtrList l = t->actions();
+        KActionPtrList::iterator it;
+        for (it=l.begin();it!=l.end();++it) {
+            svnmenu->insert((*it));
+        }
+        svnmenu->plug(menuBar());
+    }
 
     // this doesn't do anything useful.  it's just here to illustrate
     // how to insert a custom menu and menu item
@@ -179,6 +191,13 @@ void kdesvn::fileNew()
 
     // create a new window
     (new kdesvn)->show();
+}
+
+void kdesvn::urlOpen()
+{
+    KURL url = KFileDialog::getOpenURL(QString::null,QString::null,this, i18n("Open remote"));
+    if (!url.isEmpty())
+        m_view->openURL(url);
 }
 
 void kdesvn::fileOpen()

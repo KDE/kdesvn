@@ -21,7 +21,6 @@
 
 #include "kdesvnview.h"
 #include "listview/kdesvnfilelist.h"
-#include "listview/kdesvndirlist.h"
 
 #include <qpainter.h>
 #include <qlayout.h>
@@ -45,16 +44,18 @@ kdesvnView::kdesvnView(QWidget *parent)
       m_currentURL("")
 {
     QHBoxLayout *top_layout = new QHBoxLayout(this);
-    m_Splitter = new QSplitter(this,"m_Splitter");
-    m_Splitter->setOrientation( QSplitter::Horizontal );
-    m_LeftList=new KdeSvnDirList(m_Splitter);
-    m_flist=new kdesvnfilelist(m_Splitter);
+    m_flist=new kdesvnfilelist(this);
     m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 1, 0, m_flist->sizePolicy().hasHeightForWidth() ) );
-    top_layout->addWidget(m_Splitter);
+    top_layout->addWidget(m_flist);
 }
 
 kdesvnView::~kdesvnView()
 {
+}
+
+KActionCollection*kdesvnView::filesActions()
+{
+    return m_flist->filesActions();
 }
 
 //void kdesvnView::print(QPainter *p, int height, int width)
@@ -90,7 +91,7 @@ void kdesvnView::openURL(const KURL& url)
         slotOnURL(i18n("Repository opened"));
         m_currentURL=url.url();
         //m_LeftList->setCurrentUrl(url.url());
-        svn::StatusEntries temp; temp.push_back(m_flist->maindir());
+        //svn::StatusEntries temp; temp.push_back(m_flist->maindir());
         //m_LeftList->appendEntries(temp);
         //m_LeftList->appendEntries(m_flist->directories());
     } else {
@@ -111,4 +112,5 @@ void kdesvnView::slotSetTitle(const QString& title)
 {
     emit signalChangeCaption(title);
 }
+
 #include "kdesvnview.moc"

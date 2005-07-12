@@ -22,8 +22,13 @@
 
 #include <klistview.h>
 #include <kdirlister.h>
+#include <qmap.h>
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
+
+class KAction;
+class KActionMenu;
+class KActionCollection;
 
 /**
 @author Rajko Albrecht
@@ -41,17 +46,32 @@ public:
     const svn::StatusEntries&directories()const{return m_directoryList;}
     const svn::Status&maindir()const{return m_mainEntry;}
 
+    KActionCollection*filesActions();
+
 protected:
     svn::Client m_Svnclient;
     svn::StatusEntries m_directoryList;
     svn::Status m_mainEntry;
+    bool m_isLocal;
 
     QString m_LastException;
+    QMap<QString,bool> m_Dirsread;
 
+    KActionCollection* m_filesAction;
+    KAction*m_LogAction;
+    /* the parent entry must removed from list before */
+    void insertDirs(FileListViewItem * _parent,svn::StatusEntries&);
+    bool checkDirs(const QString&,FileListViewItem * _parent);
     svn::Client* svnclient(){return &m_Svnclient;}
+    void setupActions();
 
+    FileListViewItem* singleSelected();
 
 protected slots:
+    virtual void slotItemClicked(QListViewItem*);
+    virtual void slotSelectionChanged();
+
+    virtual void slotMakeLog();
 };
 
 #endif

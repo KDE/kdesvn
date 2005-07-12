@@ -88,6 +88,7 @@ protected:
 private slots:
     void fileNew();
     void fileOpen();
+    void urlOpen();
     void fileSave();
     void fileSaveAs();
     void filePrint();

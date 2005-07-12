@@ -17,38 +17,34 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef DIRLISTVIEWITEM_H
-#define DIRLISTVIEWITEM_H
-
+#include "svnlogdlgimp.h"
+#include <qdatetime.h>
 #include <klistview.h>
-#include "svncpp/status.hpp"
 
-class KdeSvnDirList;
-
-/**
-@author Rajko Albrecht
-*/
-class DirListViewItem : public KListViewItem
+SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
+    :SvnLogDialogData(parent, name)
 {
-public:
-    DirListViewItem(KdeSvnDirList*,const svn::Status&);
-    DirListViewItem(KdeSvnDirList*,DirListViewItem*,const svn::Status&);
-    virtual ~DirListViewItem();
-    const QString& displayName()const;
-    const QString& subName()const;
+    m_LogView->setSorting(-1);
+}
 
-    DirListViewItem* findSubItem(const QString&,DirListViewItem*start);
-    bool matchName(const QString&);
+void SvnLogDlgImp::dispLog(const svn::LogEntries*_log)
+{
+    if (!_log) return;
+    svn::LogEntries::const_iterator lit;
+    KListViewItem * item,*pitem;
+    pitem =0;
+    for (lit=_log->begin();lit!=_log->end();++lit) {
+        item = new KListViewItem(m_LogView,pitem);
+        item->setMultiLinesEnabled(true);
+        item->setText(0,QString("%1").arg(lit->revision));
+        item->setText(1,lit->author.c_str());
+        QDateTime t;
+        t.setTime_t(lit->date/(1000*1000),Qt::UTC);
+        item->setText(2,t.toString(Qt::LocalDate));
+        item->setText(3,lit->message.c_str());
+        pitem = item;
+        //qDebug("***\n%i: %s\n---",lit->revision,lit->message.size()?lit->message.c_str():"*** empty log ***");
+    }
+}
 
-    static QString cleanDirname(const QString&);
-protected:
-    void init();
-
-    QString m_DisplayName;
-    QString m_SubName;
-    QString m_fullName;
-    svn::Status m_Status;
-    KdeSvnDirList*m_Parent;
-};
-
-#endif
+#include "svnlogdlgimp.moc"

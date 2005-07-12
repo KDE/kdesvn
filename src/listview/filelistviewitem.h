@@ -33,8 +33,8 @@ class kdesvnfilelist;
 class FileListViewItem : public KListViewItem
 {
 public:
-    FileListViewItem(kdesvnfilelist*,KFileItem*);
     FileListViewItem(kdesvnfilelist*,const svn::Status&);
+    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
 
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
@@ -51,6 +51,7 @@ protected:
     svn::Status stat;
     QString m_shortName,m_fullName;
     void makePixmap();
+    void init();
 };
 
 #endif

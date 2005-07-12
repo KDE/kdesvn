@@ -17,30 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KDESVNDIRLIST_H
-#define KDESVNDIRLIST_H
+#ifndef SVNLOGDLGIMP_H
+#define SVNLOGDLGIMP_H
 
-#include <klistview.h>
+#include "src/svndialogs/svnlogdlg.h"
+#include "src/svncpp/log_entry.hpp"
+#include "src/svncpp/client.hpp"
 
-#include "svncpp/client.hpp"
-#include "svncpp/status.hpp"
-
-/**
-@author Rajko Albrecht
-*/
-class KdeSvnDirList : public KListView
-{
-    Q_OBJECT
+class SvnLogDlgImp: public SvnLogDialogData {
+Q_OBJECT
 public:
-    KdeSvnDirList(QWidget * parent=0, const char*name=0);
-    virtual ~KdeSvnDirList();
+    SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
 
-    void setCurrentUrl(const QString&);
-    const QString&currentUrl()const;
-    void appendEntries(const svn::StatusEntries&);
-
-protected:
-    QString m_currentURL;
+    void dispLog(const svn::LogEntries*);
 };
 
 #endif

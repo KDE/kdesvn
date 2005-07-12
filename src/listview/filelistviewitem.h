@@ -38,6 +38,10 @@ public:
 
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
+    bool isDir()const;
+    const QString&fullName()const{return m_fullName;}
+
+    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS;
 
 protected:
     short int sortChar;
@@ -45,7 +49,8 @@ protected:
     virtual void update(KFileItem*_item);
     virtual void update();
     svn::Status stat;
-    QString m_shortName;
+    QString m_shortName,m_fullName;
+    void makePixmap();
 };
 
 #endif

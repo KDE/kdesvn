@@ -27,7 +27,7 @@
 #include <klocale.h>
 
 static const char description[] =
-    I18N_NOOP("A KDE Application");
+    I18N_NOOP("A SVN Client for KDE");
 
 static const char version[] = "0.1";
 

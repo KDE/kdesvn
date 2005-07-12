@@ -33,6 +33,8 @@
 
 class KPrinter;
 class KURL;
+class KAction;
+class KActionMenu;
 
 /**
  * This class serves as the main window for kdesvn.  It handles the
@@ -102,6 +104,8 @@ private:
     kdesvnView *m_view;
 
     KPrinter   *m_printer;
+    KAction     *m_UrlOpen,*m_DirOpen;
+    KActionMenu *m_FileMenu;
 };
 
 #endif // _KDESVN_H_

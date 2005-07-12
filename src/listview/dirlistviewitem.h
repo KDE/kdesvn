@@ -17,41 +17,38 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KDESVNFILELIST_H
-#define KDESVNFILELIST_H
+#ifndef DIRLISTVIEWITEM_H
+#define DIRLISTVIEWITEM_H
 
 #include <klistview.h>
-#include <kdirlister.h>
-#include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
+
+class KdeSvnDirList;
 
 /**
 @author Rajko Albrecht
 */
-class kdesvnfilelist : public KListView
+class DirListViewItem : public KListViewItem
 {
-    Q_OBJECT
-    friend class FileListViewItem;
 public:
-    kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
-    virtual ~kdesvnfilelist();
+    DirListViewItem(KdeSvnDirList*,const svn::Status&);
+    DirListViewItem(KdeSvnDirList*,DirListViewItem*,const svn::Status&);
+    virtual ~DirListViewItem();
+    const QString& displayName()const;
+    const QString& subName()const;
 
-    bool openURL( const KURL &url );
-    const QString&lastError()const{return m_LastException;}
-    const svn::StatusEntries&directories()const{return m_directoryList;}
-    const svn::Status&maindir()const{return m_mainEntry;}
+    DirListViewItem* findSubItem(const QString&,DirListViewItem*start);
+    bool matchName(const QString&);
 
+    static QString cleanDirname(const QString&);
 protected:
-    svn::Client m_Svnclient;
-    svn::StatusEntries m_directoryList;
-    svn::Status m_mainEntry;
+    void init();
 
-    QString m_LastException;
-
-    svn::Client* svnclient(){return &m_Svnclient;}
-
-
-protected slots:
+    QString m_DisplayName;
+    QString m_SubName;
+    QString m_fullName;
+    svn::Status m_Status;
+    KdeSvnDirList*m_Parent;
 };
 
 #endif

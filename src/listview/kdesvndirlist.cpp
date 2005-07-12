@@ -18,10 +18,16 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "kdesvndirlist.h"
+#include "dirlistviewitem.h"
+#include <klocale.h>
+#include <qfileinfo.h>
 
 KdeSvnDirList::KdeSvnDirList(QWidget * parent, const char*name)
   : KListView(parent,name)
 {
+    addColumn(I18N_NOOP("Directory"));
+    setRootIsDecorated(true);
+    setMultiSelection(false);
 }
 
 
@@ -29,5 +35,48 @@ KdeSvnDirList::~KdeSvnDirList()
 {
 }
 
+void KdeSvnDirList::setCurrentUrl(const QString&_url)
+{
+    m_currentURL=DirListViewItem::cleanDirname(_url);
+    clear();
+    qDebug("Setting current url %s",m_currentURL.ascii());
+
+}
+
+const QString&KdeSvnDirList::currentUrl()const
+{
+    return m_currentURL;
+}
+
+void KdeSvnDirList::appendEntries(const svn::StatusEntries&_list)
+{
+    svn::StatusEntries::const_iterator it = _list.begin();
+
+    DirListViewItem*pitem;
+
+    for (;it!=_list.end();++it) {
+        pitem = (DirListViewItem*)firstChild();
+        if (!pitem) {
+            new DirListViewItem(this,*it);
+            continue;
+        }
+        QFileInfo f(DirListViewItem::cleanDirname(it->path()));
+        QString p = f.dirPath();
+        qDebug("Path = %s",p.ascii());
+        /* we just have one toplevel element! (the URI) */
+        if (pitem->matchName(p)) {
+            new DirListViewItem(this,pitem,*it);
+            pitem->setOpen(true);
+            continue;
+        }
+        pitem = pitem->findSubItem(p,0);
+        if (pitem) {
+            new DirListViewItem(this,pitem,*it);
+
+        } else {
+            qDebug("Errrorrrrrr");
+        }
+    }
+}
 
 #include "kdesvndirlist.moc"

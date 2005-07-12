@@ -24,56 +24,29 @@
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
 #include <kdirlister.h>
+#include <klocale.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
- : KListView(parent, name),m_dirLister(new KDirLister(true)),m_Svnclient()
+ : KListView(parent, name),m_Svnclient()
 {
-    m_dirLister->setMainWindow(this);
     setMultiSelection(true);
-    setSelectionModeExt( FileManager );
+    setSelectionMode(QListView::Multi);
     setShowSortIndicator(true);
     setAllColumnsShowFocus (true);
     setDragEnabled(true);
     setItemsMovable(false);
-    addColumn(" ");
-    addColumn("Name");
-    addColumn("Status");
-    setSortColumn(1);
-
-    m_dirLister->setNameFilter("*");
-    m_dirLister->clearMimeFilter();
-    m_dirLister->setShowingDotFiles(true);
-
-   connect( m_dirLister, SIGNAL(started( const KURL & )),
-            this, SLOT(slotStarted()) );
-   //connect( m_dirLister, SIGNAL(completed()), this, SLOT(slotCompleted()) );
-   //connect( m_dirLister, SIGNAL(canceled()), this, SLOT(slotCanceled()) );
-   connect( m_dirLister, SIGNAL(clear()), this, SLOT(slotClear()) );
-   connect( m_dirLister, SIGNAL(newItems( const KFileItemList & ) ),
-            this, SLOT(slotNewItems( const KFileItemList & )) );
-#if 0
-   connect( m_dirLister, SIGNAL(deleteItem( KFileItem * )),
-            this, SLOT(slotDeleteItem( KFileItem * )) );
-   connect( m_dirLister, SIGNAL(refreshItems( const KFileItemList & )),
-            this, SLOT( slotRefreshItems( const KFileItemList & )) );
-   connect( m_dirLister, SIGNAL(redirection( const KURL & )),
-            this, SLOT(slotRedirection( const KURL & )) );
-
-   connect( m_dirLister, SIGNAL(itemsFilteredByMime( const KFileItemList & )),
-            m_pBrowserView, SIGNAL(itemsFilteredByMime( const KFileItemList & )) );
-   connect( m_dirLister, SIGNAL(infoMessage( const QString& )),
-            m_pBrowserView->extension(), SIGNAL(infoMessage( const QString& )) );
-   connect( m_dirLister, SIGNAL(percent( int )),
-            m_pBrowserView->extension(), SIGNAL(loadingProgress( int )) );
-   connect( m_dirLister, SIGNAL(speed( int )),
-            m_pBrowserView->extension(), SIGNAL(speedProgress( int )) );
-#endif
-
+    addColumn(i18n("Name"));
+    addColumn(i18n("Status"));
+    addColumn(i18n("Revision"));
+    addColumn(i18n("Author"));
+    addColumn(i18n("Date"));
+    setSortColumn(FileListViewItem::COL_NAME);
 }
 
 bool kdesvnfilelist::openURL( const KURL &url )
 {
     clear();
+    m_LastException="";
     svn::Context*nc = new svn::Context();
     svn::Context*oc = (svn::Context*)m_Svnclient.getContext();
     if (oc) {
@@ -83,50 +56,44 @@ bool kdesvnfilelist::openURL( const KURL &url )
     svn::Revision rev(svn::Revision::HEAD);
 
     svn::StatusEntries dlist;
+    m_directoryList.clear();
+
+    QString what = url.url();
+    if (url.isLocalFile()) {
+        what = url.path();
+    }
     try {
-        dlist = m_Svnclient.status(url.path().ascii());
+        /* settings about unknown and ignored files must be setable */
+        dlist = m_Svnclient.status(what.ascii());//,false,true,true);
     } catch (svn::ClientException e) {
-//        setText(2,e.message());
+        //Message box!
+        m_LastException = e.message();
         return false;
     } catch (...) {
+        qDebug("Other exception");
         return false;
     }
     KFileItemList fk;
     svn::StatusEntries::iterator it = dlist.begin();
+
     for (;it!=dlist.end();++it) {
-        if (it->path()==url.path())continue;
-        //KFileItem *i=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,KURL(it->path()));
-        //fk.append(i);
-        new FileListViewItem(this,*it);
+        if (it->path()==url.path()){
+            m_mainEntry = *it;
+            continue;
+        }
+        FileListViewItem * item = new FileListViewItem(this,*it);
+        if (item->isDir()) {
+            m_directoryList.push_back(*it);
+        }
     }
-    //slotNewItems(fk);
-/*
-    m_dirLister->openURL(url);
-*/
     return true;
 }
 
 kdesvnfilelist::~kdesvnfilelist()
 {
-    delete m_dirLister;
     svn::Context*oc = (svn::Context*)m_Svnclient.getContext();
     if (oc) {
         delete oc;
-    }
-}
-
-void kdesvnfilelist::slotStarted()
-{
-}
-
-void kdesvnfilelist::slotClear()
-{
-}
-
-void kdesvnfilelist::slotNewItems( const KFileItemList & entries)
-{
-    for ( QPtrListIterator<KFileItem> kit ( entries ); kit.current(); ++kit ) {
-        new FileListViewItem(this,kit);
     }
 }
 

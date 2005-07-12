@@ -22,6 +22,9 @@
 
 #include <klistview.h>
 
+#include "svncpp/client.hpp"
+#include "svncpp/status.hpp"
+
 /**
 @author Rajko Albrecht
 */
@@ -30,9 +33,14 @@ class KdeSvnDirList : public KListView
     Q_OBJECT
 public:
     KdeSvnDirList(QWidget * parent=0, const char*name=0);
-
     virtual ~KdeSvnDirList();
 
+    void setCurrentUrl(const QString&);
+    const QString&currentUrl()const;
+    void appendEntries(const svn::StatusEntries&);
+
+protected:
+    QString m_currentURL;
 };
 
 #endif

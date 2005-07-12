@@ -39,6 +39,10 @@
 #include <kurl.h>
 #include <kurldrag.h>
 #include <kurlrequesterdlg.h>
+#include <khelpmenu.h>
+#include <kmenubar.h>
+#include <kpopupmenu.h>
+#include <kactionclasses.h>
 
 #include <kstdaccel.h>
 #include <kaction.h>
@@ -60,6 +64,9 @@ kdesvn::kdesvn()
 
     // and a status bar
     statusBar()->show();
+    setHelpMenuEnabled(true);
+    KPopupMenu *help = helpMenu();
+    menuBar()->insertItem(i18n("&Help"),help);
 
     // Apply the create the main window and ask the mainwindow to
         // automatically save settings if changed: window size, toolbar
@@ -87,47 +94,29 @@ kdesvn::~kdesvn()
 
 void kdesvn::load(const KURL& url)
 {
-    QString target;
-    // the below code is what you should normally do.  in this
-    // example case, we want the url to our own.  you probably
-    // want to use this code instead for your app
-
-    #if 0
-    // download the contents
-    if (KIO::NetAccess::download(url, target))
-    {
-        // set our caption
-        setCaption(url);
-
-        // load in the file (target is always local)
-        loadFile(target);
-
-        // and remove the temp file
-        KIO::NetAccess::removeTempFile(target);
-    }
-    #endif
-
-    m_view->openURL(url);
-
     setCaption(url.prettyURL());
+    m_view->openURL(url);
 }
 
 void kdesvn::setupActions()
 {
-    KStdAction::openNew(this, SLOT(fileNew()), actionCollection());
-    KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    KStdAction::save(this, SLOT(fileSave()), actionCollection());
-    KStdAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
-    KStdAction::print(this, SLOT(filePrint()), actionCollection());
-    KStdAction::quit(kapp, SLOT(quit()), actionCollection());
+    KActionMenu*m_FileMenu=new KActionMenu(I18N_NOOP("&File"),this);
+    m_DirOpen = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
+
+    m_FileMenu->insert(m_DirOpen);
+    m_FileMenu->insert(KStdAction::quit(kapp, SLOT(quit()), actionCollection()));
+
+    m_FileMenu->plug(menuBar());
 
     KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
     // this doesn't do anything useful.  it's just here to illustrate
     // how to insert a custom menu and menu item
+/*
     KAction *custom = new KAction(i18n("Cus&tom Menuitem"), 0,
                                   this, SLOT(optionsPreferences()),
                                   actionCollection(), "custom_action");
+*/
 }
 
 void kdesvn::saveProperties(KConfig *config)
@@ -202,7 +191,7 @@ void kdesvn::fileOpen()
     KURL url = KURLRequesterDlg::getURL(QString::null, this, i18n("Open Location") );
 */
     // standard filedialog
-    KURL url = KFileDialog::getOpenURL(QString::null, QString::null, this, i18n("Open Location"));
+    KURL url = KFileDialog::getExistingDirectory(QString::null, this, i18n("Open Location"));
     if (!url.isEmpty())
         m_view->openURL(url);
 }

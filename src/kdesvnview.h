@@ -102,6 +102,8 @@ private:
     kdesvnfilelist*m_flist;
     KdeSvnDirList*m_LeftList;
     QSplitter* m_Splitter;
+protected:
+    QString m_currentURL;
 };
 
 #endif // _KDESVNVIEW_H_

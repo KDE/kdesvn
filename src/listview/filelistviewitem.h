@@ -21,6 +21,7 @@
 #define FILELISTVIEWITEM_H
 
 #include <klistview.h>
+#include "svncpp/status.hpp"
 
 class QPainter;
 class KFileItem;
@@ -33,15 +34,17 @@ class FileListViewItem : public KListViewItem
 {
 public:
     FileListViewItem(kdesvnfilelist*,KFileItem*);
+    FileListViewItem(kdesvnfilelist*,const svn::Status&);
 
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
 protected:
-    KFileItem* m_Item;
     short int sortChar;
     kdesvnfilelist*m_Ksvnfilelist;
+    virtual void update(KFileItem*_item);
     virtual void update();
+    svn::Status stat;
 };
 
 #endif

@@ -26,10 +26,20 @@
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,KFileItem*_item)
  : KListViewItem(_parent),
- m_Item(_item),
  sortChar(0),
- m_Ksvnfilelist(_parent)
+ m_Ksvnfilelist(_parent),
+ stat()
 {
+    update(_item);
+}
+
+FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
+ : KListViewItem(_parent),
+ sortChar(0),
+ m_Ksvnfilelist(_parent),
+ stat(_stat)
+{
+    setText(1,stat.path());
     update();
 }
 
@@ -37,17 +47,15 @@ FileListViewItem::~FileListViewItem()
 {
 }
 
-void FileListViewItem::update()
+void FileListViewItem::update(KFileItem*_item)
 {
-    setText(1,m_Item->name());
-    setPixmap(0,m_Item->pixmap(16,0));
-    sortChar = S_ISDIR( m_Item->mode() ) ? 1 : 3;
-    if ( m_Item->name()[0] == '.' )
+    setText(1,_item->name());
+    setPixmap(0,_item->pixmap(16,0));
+    sortChar = S_ISDIR( _item->mode() ) ? 1 : 3;
+    if ( _item->name()[0] == '.' )
         --sortChar;
-    svn::Status stat;
-    //svn::Entry ent;
     try {
-      stat = m_Ksvnfilelist->svnclient()->singleStatus(m_Item->url().path());
+      stat = m_Ksvnfilelist->svnclient()->singleStatus(_item->url().path());
     } catch (svn::ClientException e) {
         setText(2,e.message());
         return;
@@ -56,6 +64,11 @@ void FileListViewItem::update()
         setText(2,"?");
         return;
     }
+    update();
+}
+
+void FileListViewItem::update()
+{
 
     if (!stat.isVersioned()) {
         setText(2,"Not versioned");
@@ -97,7 +110,6 @@ void FileListViewItem::update()
         }
     }
     setText(2,info_text);
-    //ent = stat.entry();
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const

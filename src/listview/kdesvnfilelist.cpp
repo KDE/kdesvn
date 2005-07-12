@@ -87,17 +87,19 @@ bool kdesvnfilelist::openURL( const KURL &url )
         dlist = m_Svnclient.status(url.path().ascii());
     } catch (svn::ClientException e) {
 //        setText(2,e.message());
-        return;
+        return false;
     } catch (...) {
         return false;
     }
     KFileItemList fk;
     svn::StatusEntries::iterator it = dlist.begin();
     for (;it!=dlist.end();++it) {
-        KFileItem *i=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,KURL(it->path()));
-        fk.append(i);
+        if (it->path()==url.path())continue;
+        //KFileItem *i=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,KURL(it->path()));
+        //fk.append(i);
+        new FileListViewItem(this,*it);
     }
-    slotNewItems(fk);
+    //slotNewItems(fk);
 /*
     m_dirLister->openURL(url);
 */

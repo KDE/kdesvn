@@ -51,7 +51,8 @@
 kdesvn::kdesvn()
     : KMainWindow( 0, "kdesvn" ),
       m_view(new kdesvnView(this)),
-      m_printer(0)
+      m_printer(0),
+      statusResetTimer(new QTimer(this))
 {
     // accept dnd
     setAcceptDrops(true);
@@ -85,7 +86,7 @@ kdesvn::kdesvn()
             this,   SLOT(changeStatusbar(const QString&)));
     connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
             this,   SLOT(changeCaption(const QString&)));
-
+    connect(statusResetTimer,SIGNAL(timeout()),this,SLOT(resetStatusBar()));
 }
 
 kdesvn::~kdesvn()
@@ -270,7 +271,9 @@ void kdesvn::optionsPreferences()
 void kdesvn::changeStatusbar(const QString& text)
 {
     // display the text on the statusbar
+    statusResetTimer->stop();
     statusBar()->message(text);
+    statusResetTimer->start( 5000, TRUE );
 }
 
 void kdesvn::changeCaption(const QString& text)
@@ -278,4 +281,10 @@ void kdesvn::changeCaption(const QString& text)
     // display the text on the caption
     setCaption(text);
 }
+
+void kdesvn::resetStatusBar()
+{
+    statusBar()->message(I18N_NOOP("Ready"));
+}
+
 #include "kdesvn.moc"

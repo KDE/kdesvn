@@ -28,6 +28,7 @@
 
 #include <kapplication.h>
 #include <kmainwindow.h>
+#include <qtimer.h>
 
 #include "kdesvnview.h"
 
@@ -96,6 +97,7 @@ private slots:
 
     void changeStatusbar(const QString& text);
     void changeCaption(const QString& text);
+    void resetStatusBar();
 
 private:
     void setupAccel();
@@ -107,6 +109,7 @@ private:
     KPrinter   *m_printer;
     KAction     *m_UrlOpen,*m_DirOpen;
     KActionMenu *m_FileMenu;
+    QTimer *statusResetTimer;
 };
 
 #endif // _KDESVN_H_

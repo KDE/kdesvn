@@ -42,14 +42,18 @@ protected:
     SvnActions(QObject *parent = 0, const char *name = 0);
     void makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k);
+    void makeCat(svn::Revision start, FileListViewItem*k);
     kdesvnfilelist* m_ParentList;
 
-    template<class T> QDialog* createDialog(T**ptr);
+    template<class T> QDialog* createDialog(T**ptr,const QString&_);
 
 public slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
     virtual void slotBlame();
+    virtual void slotRangeBlame();
+    virtual void slotCat();
+
 signals:
     void clientException(const QString&);
 };

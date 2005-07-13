@@ -31,6 +31,7 @@
 #include <kdialog.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
+#include <kglobalsettings.h>
 #if 0
 #include <khtml_part.h>
 #include <khtmlview.h>
@@ -88,20 +89,23 @@ void SvnActions::slotMakeLog()
 void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
 {
     const svn::LogEntries * logs;
+    QString ex;
     try {
         logs = m_ParentList->svnclient()->log(k->fullName().ascii(),start,end,true);
     } catch (svn::ClientException e) {
-        QString ex = e.message();
+        ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
         return;
     }
     if (!logs) {
-        qDebug("No logs");
+        ex = I18N_NOOP("Got no logs");
+        emit clientException(ex);
         return;
     }
     SvnLogDlgImp disp;
     disp.dispLog(logs);
     disp.exec();
+    delete logs;
 }
 
 
@@ -118,10 +122,11 @@ void SvnActions::slotBlame()
     makeBlame(start,end,k);
 }
 
-template<class T> QDialog* SvnActions::createDialog(T**ptr)
+template<class T> QDialog* SvnActions::createDialog(T**ptr,const QString&_head)
 {
     KDialog * dlg = new KDialog();
     if (!dlg) return dlg;
+    dlg->setCaption(_head);
     QHBoxLayout* Dialog1Layout;
 
     QVBoxLayout* blayout;
@@ -157,7 +162,11 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     try {
         blame = m_ParentList->svnclient()->annotate(k->fullName().ascii(),start,end);
     } catch (svn::ClientException e) {
-        ex = QString::fromLatin1(e.message());
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    } catch (...) {
+        ex = I18N_NOOP("Error getting blame");
         emit clientException(ex);
         return;
     }
@@ -168,24 +177,87 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     }
     svn::AnnotatedFile::const_iterator bit;
     static QString rowb = "<tr><td>";
-    static QString rowc = "<tr bgcolor=\"#DDDDDD\"><td>";
+    static QString rowc = "<tr bgcolor=\"#EEEEEE\"><td>";
     static QString rows = "</td><td>";
     static QString rowe = "</td></tr>\n";
-    QString text = "<html><table>"+rowb+"Rev"+rows+I18N_NOOP("Author")+rows+"Line"+rows+"&nbsp;"+rowe;
+    QString text = "<html><table>"+rowb+"Rev"+rows+I18N_NOOP("Author")+rows+I18N_NOOP("Line")+rows+"&nbsp;"+rowe;
     bool second = false;
+    QString codetext = "";
     for (bit=blame->begin();bit!=blame->end();++bit) {
+        codetext = bit->line().c_str();
+        codetext.replace(" ","&nbsp;");
+        codetext.replace("\"","&quot;");
+        codetext.replace("<","&lt;");
+        codetext.replace(">","&gt;");
+        codetext.replace("\t","&nbsp;&nbsp;&nbsp;&nbsp;");
         text+=(second?rowb:rowc)+QString("%1").arg(bit->revision())+
             rows+QString("%1").arg(bit->author().c_str())+rows+
             QString("%1").arg(bit->lineNumber())+rows+
-            QString("<pre>%1</pre>").arg(bit->line().c_str())+rowe;
+            QString("<code>%1</code>").arg(codetext)+rowe;
             second = !second;
     }
     text += "</table></html>";
     KTextBrowser*ptr;
-    QDialog*dlg = createDialog(&ptr);
+    QDialog*dlg = createDialog(&ptr,QString(I18N_NOOP("Blame %1")).arg(k->text(0)));
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
         delete dlg;
     }
+    delete blame;
+}
+
+
+/*!
+    \fn SvnActions::slotMakeRangeBlame()
+ */
+void SvnActions::slotRangeBlame()
+{
+    return;
+    if (!m_ParentList) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    if (!k) return;
+    Rangeinput_impl rdlg;
+    if (rdlg.exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg.getRange();
+        makeBlame(r.first,r.second,k);
+    }
+}
+
+void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
+{
+    std::string content;
+    QString ex;
+    try {
+        content = m_ParentList->svnclient()->cat(k->fullName().ascii(),start);
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    } catch (...) {
+        ex = I18N_NOOP("Error getting content");
+        emit clientException(ex);
+        return;
+    }
+    if (content.size()==0) {
+        emit clientException(I18N_NOOP("Got no content"));
+        return;
+    }
+    KTextBrowser*ptr;
+    QDialog*dlg = createDialog(&ptr,QString(I18N_NOOP("Content of %1")).arg(k->text(0)));
+    if (dlg) {
+        ptr->setFont(KGlobalSettings::fixedFont());
+        ptr->setWordWrap(QTextEdit::NoWrap);
+        ptr->setText(QString::fromLocal8Bit(content.c_str()));
+        dlg->exec();
+        delete dlg;
+    }
+}
+
+void SvnActions::slotCat()
+{
+    if (!m_ParentList) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    if (!k) return;
+    makeCat(svn::Revision::HEAD, k);
 }

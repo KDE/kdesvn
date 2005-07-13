@@ -31,6 +31,8 @@ Q_OBJECT
 public:
     SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
     void dispLog(const svn::LogEntries*);
+protected slots:
+    virtual void slotItemChanged(QListViewItem*);
 };
 
 #endif

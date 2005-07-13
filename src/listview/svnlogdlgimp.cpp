@@ -20,6 +20,7 @@
 #include "svnlogdlgimp.h"
 #include <qdatetime.h>
 #include <klistview.h>
+#include <ktextbrowser.h>
 
 class LogListViewItem:public KListViewItem
 {
@@ -27,17 +28,17 @@ public:
     LogListViewItem (KListView *parent,const svn::LogEntry&);
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
-    static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
-
+    static const int COL_REV,COL_AUTHOR,COL_DATE;
+    const QString&message()const;
 protected:
     svn_revnum_t _revision;
     QDateTime fullDate;
+    QString _message;
 };
 
-const int LogListViewItem::COL_REV = 2;
-const int LogListViewItem::COL_AUTHOR = 1;
-const int LogListViewItem::COL_DATE = 3;
-const int LogListViewItem::COL_MSG = 0;
+const int LogListViewItem::COL_REV = 1;
+const int LogListViewItem::COL_AUTHOR = 0;
+const int LogListViewItem::COL_DATE = 2;
 
 LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     : KListViewItem(_parent)
@@ -46,9 +47,14 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     _revision=_entry.revision;
     fullDate.setTime_t(_entry.date/(1000*1000),Qt::UTC);
     setText(COL_REV,QString("%1").arg(_revision));
-    setText(COL_AUTHOR,_entry.author.c_str());
+    setText(COL_AUTHOR,QString::fromLocal8Bit(_entry.author.c_str()));
     setText(COL_DATE,fullDate.toString(Qt::LocalDate));
-    setText(COL_MSG,_entry.message.c_str());
+    _message = QString::fromLocal8Bit(_entry.message.c_str());
+    //setText(COL_MSG,_entry.message.c_str());
+}
+const QString&LogListViewItem::message()const
+{
+    return _message;
 }
 
 int LogListViewItem::compare( QListViewItem* item, int col, bool ) const
@@ -80,3 +86,14 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log)
 }
 
 #include "svnlogdlgimp.moc"
+
+
+/*!
+    \fn SvnLogDlgImp::slotItemClicked(QListViewItem*)
+ */
+void SvnLogDlgImp::slotItemChanged(QListViewItem*_it)
+{
+    if (!_it) return;
+    LogListViewItem* k = static_cast<LogListViewItem*>( _it );
+    m_LogDisplay->setText(k->message());
+}

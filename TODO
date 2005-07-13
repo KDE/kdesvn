@@ -1,0 +1,31 @@
+Implement the SVN commands:
+(implemented one will deleted from list)
+
+   add
+   checkout (co)
+   cleanup
+   commit (ci)
+   copy (cp)
+   delete (del, remove, rm)
+   diff (di)
+   export
+   import
+   info
+   list (ls)
+   merge
+   mkdir
+   move (mv, rename, ren)
+   propdel (pdel, pd)
+   propedit (pedit, pe)
+   propget (pget, pg)
+   proplist (plist, pl)
+   propset (pset, ps)
+   resolved
+   revert
+   status (stat, st)
+   switch (sw)
+   update (up)
+
+Problems:
+    - blame over a range let application crash.
+

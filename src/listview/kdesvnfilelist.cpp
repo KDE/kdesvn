@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "kdesvnfilelist.h"
+#include "ccontextlistener.h"
 #include "filelistviewitem.h"
 #include "svnactions.h"
 #include "svncpp/revision.hpp"
@@ -31,7 +32,8 @@
 #include <kmessagebox.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
- : KListView(parent, name),m_Svnclient(),m_SvnWrapper(new SvnActions(this))
+ : KListView(parent, name),m_Svnclient(),m_SvnWrapper(new SvnActions(this)),
+    m_SvnContext(new CContextListener(this))
 {
     setMultiSelection(true);
     setSelectionModeExt(FileManager);
@@ -51,6 +53,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
+    connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
 
 void kdesvnfilelist::setupActions()
@@ -60,6 +63,8 @@ void kdesvnfilelist::setupActions()
     m_LogRangeAction = new KAction("&Log...",KShortcut(),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
     m_LogFullAction = new KAction("&Full Log",KShortcut(),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log");
     m_BlameAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
+    // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
+    m_CatAction = new KAction("&Cat head",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
 
     enableSingleActions(false);
 }
@@ -93,6 +98,7 @@ bool kdesvnfilelist::openURL( const KURL &url )
     if (oc) {
         delete oc;
     }
+    nc->setListener(m_SvnContext);
     m_directoryList.clear();
     m_Svnclient.setContext(nc);
     QString what = url.url();
@@ -118,7 +124,8 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         dlist = m_Svnclient.status(what.ascii(),false,true,false,true);
     } catch (svn::ClientException e) {
         //Message box!
-        m_LastException = e.message();
+        m_LastException = QString::fromLocal8Bit(e.message());
+        emit sigLogMessage(m_LastException);
         return false;
     } catch (...) {
         qDebug("Other exception");
@@ -189,6 +196,8 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
     m_LogFullAction->setEnabled(how);
     m_LogRangeAction->setEnabled(how);
     m_BlameAction->setEnabled(how&&!_Dir);
+    m_CatAction->setEnabled(how&&!_Dir);
+    //m_BlameRangeAction->setEnabled(how&&!_Dir);
 }
 
 void kdesvnfilelist::slotSelectionChanged()
@@ -210,6 +219,15 @@ void kdesvnfilelist::slotSelectionChanged()
  */
 void kdesvnfilelist::slotClientException(const QString&what)
 {
-    qDebug("client exception: %s",what.ascii());
+    emit sigLogMessage(what);
     KMessageBox::sorry(0,what,I18N_NOOP("SVN Error"));
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotNotifyMessage(const QString&)
+ */
+void kdesvnfilelist::slotNotifyMessage(const QString&what)
+{
+    emit sigLogMessage(what);
 }

@@ -29,6 +29,7 @@
 class KAction;
 class KActionMenu;
 class KActionCollection;
+class CContextListener;
 
 /**
 @author Rajko Albrecht
@@ -59,8 +60,9 @@ protected:
     QMap<QString,bool> m_Dirsread;
 
     KActionCollection* m_filesAction;
-    KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction;
+    KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction;
     SvnActions*m_SvnWrapper;
+    CContextListener*m_SvnContext;
     /* the parent entry must removed from list before */
     void insertDirs(FileListViewItem * _parent,svn::StatusEntries&);
     bool checkDirs(const QString&,FileListViewItem * _parent);
@@ -74,6 +76,9 @@ protected slots:
     virtual void slotItemClicked(QListViewItem*);
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
+    virtual void slotNotifyMessage(const QString&);
+signals:
+    void sigLogMessage(const QString&);
 };
 
 #endif

@@ -37,6 +37,7 @@ class kdesvnfilelist : public KListView
 {
     Q_OBJECT
     friend class FileListViewItem;
+    friend class SvnActions;
 public:
     kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
@@ -58,20 +59,21 @@ protected:
     QMap<QString,bool> m_Dirsread;
 
     KActionCollection* m_filesAction;
-    KAction*m_LogAction;
+    KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction;
+    SvnActions*m_SvnWrapper;
     /* the parent entry must removed from list before */
     void insertDirs(FileListViewItem * _parent,svn::StatusEntries&);
     bool checkDirs(const QString&,FileListViewItem * _parent);
     svn::Client* svnclient(){return &m_Svnclient;}
     void setupActions();
+    void enableSingleActions(bool how,bool forDir=false);
 
     FileListViewItem* singleSelected();
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
     virtual void slotSelectionChanged();
-
-    virtual void slotMakeLog();
+    virtual void slotClientException(const QString&);
 };
 
 #endif

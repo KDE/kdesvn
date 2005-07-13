@@ -17,20 +17,31 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef SVNLOGDLGIMP_H
-#define SVNLOGDLGIMP_H
+#ifndef RANGEINPUT_IMPL_H
+#define RANGEINPUT_IMPL_H
 
-#include "svnlogdlg.h"
-#include "src/svncpp/log_entry.hpp"
-#include "src/svncpp/client.hpp"
+#include "rangeinput.h"
+#include "svncpp/revision.hpp"
+#include <qpair.h>
 
-class LogListViewItem;
-
-class SvnLogDlgImp: public SvnLogDialogData {
+class Rangeinput_impl: public RangeInputDlg {
 Q_OBJECT
 public:
-    SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
-    void dispLog(const svn::LogEntries*);
+    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~Rangeinput_impl();
+
+    typedef QPair<svn::Revision,svn::Revision> revision_range;
+
+    revision_range getRange();
+
+protected slots:
+    virtual void onHelp();
+    virtual void stopHeadToggled(bool);
+    virtual void stopBaseToggled(bool);
+    virtual void stopNumberToggled(bool);
+    virtual void startHeadToggled(bool);
+    virtual void startBaseToggled(bool);
+    virtual void startNumberToggled(bool);
 };
 
 #endif

@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "kdesvnfilelist.h"
 #include "filelistviewitem.h"
-#include "svndialogs/svnlogdlgimp.h"
+#include "svnactions.h"
 #include "svncpp/revision.hpp"
 #include "svncpp/dirent.hpp"
 #include "svncpp/client.hpp"
@@ -28,9 +28,10 @@
 #include <klocale.h>
 #include <kactioncollection.h>
 #include <kshortcut.h>
+#include <kmessagebox.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
- : KListView(parent, name),m_Svnclient()
+ : KListView(parent, name),m_Svnclient(),m_SvnWrapper(new SvnActions(this))
 {
     setMultiSelection(true);
     setSelectionModeExt(FileManager);
@@ -49,13 +50,18 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
 
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
+    connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
 }
 
 void kdesvnfilelist::setupActions()
 {
     m_filesAction = new KActionCollection(this);
-    m_LogAction = new KAction("&Log",KShortcut(),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log");
-    m_LogAction->setEnabled(false);
+
+    m_LogRangeAction = new KAction("&Log...",KShortcut(),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    m_LogFullAction = new KAction("&Full Log",KShortcut(),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log");
+    m_BlameAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
+
+    enableSingleActions(false);
 }
 
 KActionCollection*kdesvnfilelist::filesActions()
@@ -72,41 +78,9 @@ FileListViewItem* kdesvnfilelist::singleSelected()
         ++it;
     }
     if (lst.count()==1) {
-        FileListViewItem*k;
-        k =static_cast<FileListViewItem*>(lst.at(0));
-        return k;
+        return static_cast<FileListViewItem*>(lst.at(0));
     }
     return 0;
-}
-
-void kdesvnfilelist::slotMakeLog()
-{
-    FileListViewItem*k = singleSelected();
-    if (!k) return;
-    svn::Revision start(svn::Revision::START);
-    svn::Revision end(svn::Revision::HEAD);
-    const svn::LogEntries * logs;
-    try {
-        logs = m_Svnclient.log(k->fullName().ascii(),start,end,true);
-    } catch (svn::ClientException e) {
-        //Message box!
-        m_LastException = e.message();
-        qDebug(m_LastException);
-        return;
-    }
-    if (!logs) {
-        qDebug("No logs");
-        return;
-    }
-    SvnLogDlgImp disp;
-    disp.dispLog(logs);
-    disp.exec();
-/*
-    svn::LogEntries::const_iterator lit;
-    for (lit=logs->begin();lit!=logs->end();++lit) {
-        qDebug("***\n%i: %s\n---",lit->revision,lit->message.size()?lit->message.c_str():"*** empty log ***");
-    }
-*/
 }
 
 bool kdesvnfilelist::openURL( const KURL &url )
@@ -210,19 +184,32 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
     }
 }
 
+void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
+{
+    m_LogFullAction->setEnabled(how);
+    m_LogRangeAction->setEnabled(how);
+    m_BlameAction->setEnabled(how&&!_Dir);
+}
+
 void kdesvnfilelist::slotSelectionChanged()
 {
-    QPtrList<QListViewItem> lst;
+    QPtrList<FileListViewItem> lst;
     QListViewItemIterator it( this, QListViewItemIterator::Selected );
     while ( it.current() ) {
-        lst.append( it.current() );
+        lst.append( static_cast<FileListViewItem*>(it.current()) );
         ++it;
     }
-    if (lst.count()!=1) {
-        m_LogAction->setEnabled(false);
-    } else {
-        m_LogAction->setEnabled(true);
-    }
+    enableSingleActions(lst.count()==1,lst.count()>0?lst.at(0)->isDir():false);
 }
 
 #include "kdesvnfilelist.moc"
+
+
+/*!
+    \fn kdesvnfilelist::slotClientException(const QString&)
+ */
+void kdesvnfilelist::slotClientException(const QString&what)
+{
+    qDebug("client exception: %s",what.ascii());
+    KMessageBox::sorry(0,what,I18N_NOOP("SVN Error"));
+}

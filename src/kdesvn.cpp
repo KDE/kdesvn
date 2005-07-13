@@ -195,7 +195,7 @@ void kdesvn::fileNew()
 
 void kdesvn::urlOpen()
 {
-    KURL url = KFileDialog::getOpenURL(QString::null,QString::null,this, i18n("Open remote"));
+    KURL url = KURLRequesterDlg::getURL("http://",this,i18n("Open remote"));
     if (!url.isEmpty())
         m_view->openURL(url);
 }

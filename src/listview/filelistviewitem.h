@@ -21,6 +21,7 @@
 #define FILELISTVIEWITEM_H
 
 #include <klistview.h>
+#include <qdatetime.h>
 #include "svncpp/status.hpp"
 
 class QPainter;
@@ -50,6 +51,7 @@ protected:
     virtual void update();
     svn::Status stat;
     QString m_shortName,m_fullName;
+    QDateTime fullDate;
     void makePixmap();
     void init();
 };

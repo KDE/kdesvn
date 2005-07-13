@@ -170,24 +170,23 @@ void FileListViewItem::update()
     }
     setText(COL_STATUS,info_text);
     setText(COL_LAST_AUTHOR,stat.entry().cmtAuthor());
-    apr_time_t d = stat.entry().cmtDate();
-    svn::Pool pool;
-    QDateTime t;
-    t.setTime_t(d/(1000*1000),Qt::UTC);
-    setText(COL_LAST_DATE,t.toString(Qt::LocalDate));
+    fullDate.setTime_t(stat.entry().cmtDate()/(1000*1000),Qt::UTC);
+    setText(COL_LAST_DATE,fullDate.toString(Qt::LocalDate));
     setText(COL_LAST_REV,QString("%1").arg(stat.entry().cmtRev()));
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const
 {
     FileListViewItem* k = static_cast<FileListViewItem*>( item );
-    if (col==COL_LAST_DATE) {
-        int j = k->stat.entry().cmtDate()-stat.entry().cmtDate();
-        return j;
-    }
     if ( sortChar != k->sortChar ) {
         // Dirs are always first, even when sorting in descending order
         return !ascending ? k->sortChar - sortChar : sortChar - k->sortChar;
+    }
+    if (col==COL_LAST_DATE) {
+        return fullDate.secsTo(k->fullDate);
+    }
+    if (col==COL_LAST_REV) {
+        return k->stat.entry().cmtRev()-stat.entry().cmtRev();
     }
     return text(col).localeAwareCompare(k->text(col));
 }

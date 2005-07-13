@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>396</width>
-            <height>278</height>
+            <width>573</width>
+            <height>407</height>
         </rect>
     </property>
     <property name="caption">
@@ -25,10 +25,10 @@
         <widget class="KListView">
             <column>
                 <property name="text">
-                    <string>Revison</string>
+                    <string>Message</string>
                 </property>
                 <property name="clickable">
-                    <bool>false</bool>
+                    <bool>true</bool>
                 </property>
                 <property name="resizable">
                     <bool>true</bool>
@@ -39,7 +39,18 @@
                     <string>Author</string>
                 </property>
                 <property name="clickable">
-                    <bool>false</bool>
+                    <bool>true</bool>
+                </property>
+                <property name="resizable">
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property name="text">
+                    <string>Revison</string>
+                </property>
+                <property name="clickable">
+                    <bool>true</bool>
                 </property>
                 <property name="resizable">
                     <bool>true</bool>
@@ -50,18 +61,7 @@
                     <string>Date</string>
                 </property>
                 <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
                     <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Entry</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
                 </property>
                 <property name="resizable">
                     <bool>true</bool>
@@ -70,14 +70,23 @@
             <property name="name">
                 <cstring>m_LogView</cstring>
             </property>
+            <property name="vScrollBarMode">
+                <enum>Auto</enum>
+            </property>
+            <property name="hScrollBarMode">
+                <enum>Auto</enum>
+            </property>
             <property name="allColumnsShowFocus">
                 <bool>true</bool>
             </property>
+            <property name="showSortIndicator">
+                <bool>true</bool>
+            </property>
             <property name="resizeMode">
-                <enum>LastColumn</enum>
+                <enum>AllColumns</enum>
             </property>
             <property name="fullWidth">
-                <bool>true</bool>
+                <bool>false</bool>
             </property>
         </widget>
         <widget class="QLayoutWidget">
@@ -99,29 +108,15 @@
                         <cstring>buttonOk</cstring>
                     </property>
                     <property name="text">
-                        <string>&amp;OK</string>
+                        <string>&amp;Close</string>
                     </property>
                     <property name="accel">
-                        <string></string>
+                        <string>Alt+C</string>
                     </property>
                     <property name="autoDefault">
                         <bool>true</bool>
                     </property>
                     <property name="default">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>buttonCancel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Cancel</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
                         <bool>true</bool>
                     </property>
                 </widget>
@@ -168,12 +163,6 @@
         <signal>clicked()</signal>
         <receiver>MyDialog1</receiver>
         <slot>accept()</slot>
-    </connection>
-    <connection>
-        <sender>buttonCancel</sender>
-        <signal>clicked()</signal>
-        <receiver>MyDialog1</receiver>
-        <slot>reject()</slot>
     </connection>
 </connections>
 <layoutdefaults spacing="2" margin="2"/>

@@ -17,20 +17,41 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef SVNLOGDLGIMP_H
-#define SVNLOGDLGIMP_H
+#ifndef SVNACTIONS_H
+#define SVNACTIONS_H
 
-#include "svnlogdlg.h"
-#include "src/svncpp/log_entry.hpp"
-#include "src/svncpp/client.hpp"
+#include <qobject.h>
+#include "svncpp/revision.hpp"
 
-class LogListViewItem;
+class kdesvnfilelist;
+class FileListViewItem;
+class KDialog;
+class QDialog;
 
-class SvnLogDlgImp: public SvnLogDialogData {
-Q_OBJECT
+/**
+@author Rajko Albrecht
+*/
+class SvnActions : public QObject
+{
+    Q_OBJECT
 public:
-    SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
-    void dispLog(const svn::LogEntries*);
+    SvnActions(kdesvnfilelist *parent = 0, const char *name = 0);
+    ~SvnActions();
+
+protected:
+    SvnActions(QObject *parent = 0, const char *name = 0);
+    void makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k);
+    void makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k);
+    kdesvnfilelist* m_ParentList;
+
+    template<class T> QDialog* createDialog(T**ptr);
+
+public slots:
+    virtual void slotMakeRangeLog();
+    virtual void slotMakeLog();
+    virtual void slotBlame();
+signals:
+    void clientException(const QString&);
 };
 
 #endif

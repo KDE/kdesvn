@@ -36,6 +36,7 @@ class QGridLayout;
 class QSpacerItem;
 class QSplitter;
 class KActionCollection;
+class KTextBrowser;
 
 
 /**
@@ -96,17 +97,16 @@ signals:
      */
     void signalChangeCaption(const QString& text);
 
-private slots:
+protected slots:
     virtual void slotOnURL(const QString& url);
     virtual void slotSetTitle(const QString& title);
+    virtual void slotAppendLog(const QString& text);
 
-private:
-    //KParts::ReadOnlyPart *m_html;
-    kdesvnfilelist*m_flist;
-//    KdeSvnDirList*m_LeftList;
-//    QSplitter* m_Splitter;
 protected:
+    kdesvnfilelist*m_flist;
+    QSplitter* m_Splitter;
     QString m_currentURL;
+    KTextBrowser*m_LogWindow;
 };
 
 #endif // _KDESVNVIEW_H_

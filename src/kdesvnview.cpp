@@ -37,16 +37,27 @@
 #include <kmessagebox.h>
 #include <krun.h>
 #include <klocale.h>
+#include <ktextbrowser.h>
 
 kdesvnView::kdesvnView(QWidget *parent)
     : QWidget(parent),
       DCOPObject("kdesvnIface"),
       m_currentURL("")
 {
-    QHBoxLayout *top_layout = new QHBoxLayout(this);
-    m_flist=new kdesvnfilelist(this);
-    m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 1, 0, m_flist->sizePolicy().hasHeightForWidth() ) );
-    top_layout->addWidget(m_flist);
+    QVBoxLayout *top_layout = new QVBoxLayout(this);
+    m_Splitter = new QSplitter( this, "m_Splitter" );
+    m_Splitter->setOrientation( QSplitter::Vertical );
+
+    m_flist=new kdesvnfilelist(m_Splitter);
+    m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_flist->sizePolicy().hasHeightForWidth() ) );
+    m_LogWindow=new KTextBrowser(m_Splitter);
+    top_layout->addWidget(m_Splitter);
+    connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
+}
+
+void kdesvnView::slotAppendLog(const QString& text)
+{
+    m_LogWindow->append(text);
 }
 
 kdesvnView::~kdesvnView()
@@ -86,14 +97,11 @@ void kdesvnView::openURL(const KURL& url)
     } else if (url.protocol()!="http"&&url.protocol()!="https") {
         return;
     }
+    m_LogWindow->setText("");
     slotSetTitle(url.prettyURL());
     if (m_flist->openURL(url)) {
         slotOnURL(i18n("Repository opened"));
         m_currentURL=url.url();
-        //m_LeftList->setCurrentUrl(url.url());
-        //svn::StatusEntries temp; temp.push_back(m_flist->maindir());
-        //m_LeftList->appendEntries(temp);
-        //m_LeftList->appendEntries(m_flist->directories());
     } else {
         QString t = m_flist->lastError();
         if (t.isEmpty()) {

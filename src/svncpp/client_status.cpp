@@ -168,6 +168,7 @@ namespace svn
       static_cast<svn_wc_entry_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
 
+    //memset(e,0,sizeof(svn_wc_entry_t));
     std::string url (path);
     url += "/";
     url += dirEntry.name ();
@@ -186,6 +187,8 @@ namespace svn
     svn_wc_status_t * s =
       static_cast<svn_wc_status_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_status_t)));
+    memset(s,0,sizeof (svn_wc_status_t));
+
     s->entry = e;
     s->text_status = svn_wc_status_normal;
     s->prop_status = svn_wc_status_normal;

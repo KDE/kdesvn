@@ -47,6 +47,8 @@ public:
     const QString&lastError()const{return m_LastException;}
     const svn::StatusEntries&directories()const{return m_directoryList;}
     const svn::Status&maindir()const{return m_mainEntry;}
+    const QString&baseUri()const{return m_baseUri;}
+    bool isLocal()const{return m_isLocal;}
 
     KActionCollection*filesActions();
 
@@ -56,11 +58,11 @@ protected:
     svn::Status m_mainEntry;
     bool m_isLocal;
 
-    QString m_LastException;
+    QString m_LastException,m_baseUri;
     QMap<QString,bool> m_Dirsread;
 
     KActionCollection* m_filesAction;
-    KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction;
+    KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction,*m_MkdirAction;
     SvnActions*m_SvnWrapper;
     CContextListener*m_SvnContext;
     /* the parent entry must removed from list before */
@@ -77,6 +79,7 @@ protected slots:
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);
+    virtual void slotDirAdded(const QString&,FileListViewItem*);
 signals:
     void sigLogMessage(const QString&);
 };

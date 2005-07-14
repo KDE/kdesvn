@@ -54,6 +54,8 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
     connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
+    connect(m_SvnWrapper,SIGNAL(dirAdded(const QString&,FileListViewItem*)),this,
+        SLOT(slotDirAdded(const QString&,FileListViewItem*)));
 }
 
 void kdesvnfilelist::setupActions()
@@ -65,7 +67,9 @@ void kdesvnfilelist::setupActions()
     m_BlameAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
     // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_CatAction = new KAction("&Cat head",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
 
+    m_MkdirAction->setEnabled(false);
     enableSingleActions(false);
 }
 
@@ -101,13 +105,18 @@ bool kdesvnfilelist::openURL( const KURL &url )
     nc->setListener(m_SvnContext);
     m_directoryList.clear();
     m_Svnclient.setContext(nc);
-    QString what = url.url();
+    m_baseUri = url.url();
     m_isLocal = false;
     if (url.isLocalFile()) {
-        what = url.path();
+        m_baseUri = url.path();
         m_isLocal = true;
     }
-    return checkDirs(what,0);
+    while (m_baseUri.endsWith("/")) {
+        m_baseUri.truncate(m_baseUri.length()-1);
+    }
+    bool result = checkDirs(m_baseUri,0);
+    m_MkdirAction->setEnabled(result);
+    return result;
 }
 
 bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
@@ -121,7 +130,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     try {
         /* settings about unknown and ignored files must be setable */
         //                                       rec   all  up    noign
-        dlist = m_Svnclient.status(what.ascii(),false,true,false,true);
+        dlist = m_Svnclient.status(what.local8Bit(),false,true,false,true);
     } catch (svn::ClientException e) {
         //Message box!
         m_LastException = QString::fromLocal8Bit(e.message());
@@ -165,10 +174,59 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         if (item->isDir()) {
             item->setOpen(true);
             m_directoryList.push_back(*it);
+            m_Dirsread[item->fullName()]=false;
         }
     }
     if (_parent) {
         _parent->setOpen(true);
+    }
+}
+
+/* newdir is the NEW directory! just required if local */
+void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
+{
+    if (k) {
+        k->refreshStatus();
+    }
+    if (!m_isLocal) {
+        if (k) {
+            k->removeChilds();
+            m_Dirsread[k->fullName()]=false;
+            slotItemClicked(k);
+            return;
+        }
+        QListViewItem*temp;
+        while ((temp=firstChild())) {
+            delete temp;
+        }
+        m_Dirsread.clear();
+        checkDirs(m_baseUri,0);
+        return;
+    }
+    svn::Status stat;
+    try {
+        stat = m_Svnclient.singleStatus(newdir.local8Bit());
+    } catch (svn::ClientException e) {
+        m_LastException = QString::fromLocal8Bit(e.message());
+        emit sigLogMessage(m_LastException);
+        return;
+    }
+    FileListViewItem * item,*pitem;
+    pitem = k;
+    if (!pitem) {
+        pitem = (FileListViewItem*)firstChild();
+        if (pitem->fullName()!=m_baseUri) {
+            pitem = 0;
+        }
+    }
+    if (!pitem) {
+        item = new FileListViewItem(this,stat);
+    } else {
+        item = new FileListViewItem(this,pitem,stat);
+    }
+    if (item->isDir()) {
+        item->setOpen(true);
+        m_Dirsread[item->fullName()]=false;
     }
 }
 
@@ -195,8 +253,10 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
 {
     m_LogFullAction->setEnabled(how);
     m_LogRangeAction->setEnabled(how);
-    m_BlameAction->setEnabled(how&&!_Dir);
     m_CatAction->setEnabled(how&&!_Dir);
+    /* blame buggy in lib */
+    m_BlameAction->setEnabled(false);
+    //m_BlameAction->setEnabled(how&&!_Dir);
     //m_BlameRangeAction->setEnabled(how&&!_Dir);
 }
 

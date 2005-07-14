@@ -55,7 +55,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_pare
 
 void FileListViewItem::init()
 {
-    m_fullName = stat.path();
+    m_fullName = QString::fromLocal8Bit(stat.path());
     while (m_fullName.endsWith("/")) {
         /* dir name possible */
         m_fullName.truncate(m_fullName.length()-1);
@@ -107,6 +107,25 @@ void FileListViewItem::update(KFileItem*_item)
         return;
     }
     update();
+}
+
+void FileListViewItem::refreshStatus()
+{
+    try {
+      stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
+    } catch (svn::ClientException e) {
+        setText(COL_STATUS,e.message());
+        return;
+    } catch (...) {
+        qDebug("Execption catched");
+        setText(COL_STATUS,"?");
+        return;
+    }
+    update();
+    if (parent()) {
+        ((FileListViewItem*)parent())->refreshStatus();
+    }
+    repaint();
 }
 
 void FileListViewItem::makePixmap()
@@ -189,4 +208,12 @@ int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) co
         return k->stat.entry().cmtRev()-stat.entry().cmtRev();
     }
     return text(col).localeAwareCompare(k->text(col));
+}
+
+void FileListViewItem::removeChilds()
+{
+    QListViewItem*temp;
+    while ((temp=firstChild())) {
+        delete temp;
+    }
 }

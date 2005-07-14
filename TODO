@@ -13,7 +13,6 @@ Implement the SVN commands:
    info
    list (ls)
    merge
-   mkdir
    move (mv, rename, ren)
    propdel (pdel, pd)
    propedit (pedit, pe)
@@ -27,5 +26,5 @@ Implement the SVN commands:
    update (up)
 
 Problems:
-    - blame over a range let application crash.
+    - blame let application crash.
 

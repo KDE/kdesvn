@@ -24,7 +24,7 @@
   </general>
   <kdevautoproject>
     <general>
-      <activetarget>src/kdesvn</activetarget>
+      <activetarget>src/listview/liblistview.a</activetarget>
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
@@ -32,7 +32,7 @@
       <terminal>false</terminal>
       <directoryradio>executable</directoryradio>
       <runarguments>
-        <kdesvn></kdesvn>
+        <kdesvn/>
         <kdesvn_client/>
       </runarguments>
     </run>
@@ -204,6 +204,7 @@
     </codecompletion>
     <designerintegration>
       <qtdesigner>
+        <implementation class="AuthDialogImpl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/authdlg.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/authdialogimpl.h" />
         <implementation class="Rangeinput_impl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/rangeinput.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/rangeinput_impl.h" />
       </qtdesigner>
     </designerintegration>

@@ -53,9 +53,11 @@ public slots:
     virtual void slotBlame();
     virtual void slotRangeBlame();
     virtual void slotCat();
+    virtual void slotMkdir();
 
 signals:
     void clientException(const QString&);
+    void dirAdded(const QString&,FileListViewItem*);
 };
 
 #endif

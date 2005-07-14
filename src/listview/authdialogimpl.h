@@ -17,45 +17,24 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef FILELISTVIEWITEM_H
-#define FILELISTVIEWITEM_H
+#ifndef AUTHDIALOGIMPL_H
+#define AUTHDIALOGIMPL_H
 
-#include <klistview.h>
-#include <qdatetime.h>
-#include "svncpp/status.hpp"
+#include "authdlg.h"
+#include <qstring.h>
 
-class QPainter;
-class KFileItem;
-class kdesvnfilelist;
-
-/**
-@author Rajko Albrecht
-*/
-class FileListViewItem : public KListViewItem
-{
+class AuthDialogImpl: public AuthDialogData {
+Q_OBJECT
 public:
-    FileListViewItem(kdesvnfilelist*,const svn::Status&);
-    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
+    AuthDialogImpl(const QString & realm = "", QWidget *parent = 0, const char *name = 0);
 
-    virtual ~FileListViewItem();
-    virtual int compare( QListViewItem* i, int col, bool ascending ) const;
-    bool isDir()const;
-    const QString&fullName()const{return m_fullName;}
-    void refreshStatus();
-    void removeChilds();
-
-    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS;
-
+    const QString Username()const;
+    const QString Password();
+    bool maySave()const;
+protected slots:
+    virtual void slotHelp();
 protected:
-    short int sortChar;
-    kdesvnfilelist*m_Ksvnfilelist;
-    virtual void update(KFileItem*_item);
-    virtual void update();
-    svn::Status stat;
-    QString m_shortName,m_fullName;
-    QDateTime fullDate;
-    void makePixmap();
-    void init();
+    QString curPass;
 };
 
 #endif

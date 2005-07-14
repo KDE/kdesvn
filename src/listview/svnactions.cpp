@@ -24,6 +24,7 @@
 #include "svnlogdlgimp.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
+#include "svncpp/context_listener.hpp"
 
 #include <qstring.h>
 #include <qpushbutton.h>
@@ -32,6 +33,9 @@
 #include <ktextbrowser.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
+#include <kmessagebox.h>
+#include <kinputdialog.h>
+
 #if 0
 #include <khtml_part.h>
 #include <khtmlview.h>
@@ -91,7 +95,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     const svn::LogEntries * logs;
     QString ex;
     try {
-        logs = m_ParentList->svnclient()->log(k->fullName().ascii(),start,end,true);
+        logs = m_ParentList->svnclient()->log(k->fullName().local8Bit(),start,end,true);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -157,10 +161,13 @@ template<class T> QDialog* SvnActions::createDialog(T**ptr,const QString&_head)
  */
 void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
 {
+    return;
     svn::AnnotatedFile * blame;
     QString ex;
+    svn::Path p(k->fullName().local8Bit());
+
     try {
-        blame = m_ParentList->svnclient()->annotate(k->fullName().ascii(),start,end);
+        blame = m_ParentList->svnclient()->annotate(p,start,end);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -228,8 +235,9 @@ void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
 {
     std::string content;
     QString ex;
+    svn::Path p(k->fullName().local8Bit());
     try {
-        content = m_ParentList->svnclient()->cat(k->fullName().ascii(),start);
+        content = m_ParentList->svnclient()->cat(p,start);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -260,4 +268,49 @@ void SvnActions::slotCat()
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
     makeCat(svn::Revision::HEAD, k);
+}
+
+void SvnActions::slotMkdir()
+{
+    if (!m_ParentList) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    QString parentDir,ex;
+    if (k) {
+        if (!k->isDir()) {
+            KMessageBox::sorry(0,I18N_NOOP("May not make subdirs of a file"));
+            return;
+        }
+        parentDir=k->fullName();
+    } else {
+        parentDir=m_ParentList->baseUri();
+    }
+    bool isOk=false;
+    ex = KInputDialog::getText(I18N_NOOP("New Dir"),I18N_NOOP("Enter (sub-)directory name:"),QString::null,&isOk);
+    if (!isOk) {
+        return;
+    }
+    svn::Path target(parentDir.local8Bit());
+    target.addComponent(ex.local8Bit());
+    ex = "";
+    std::string message;
+
+    QString logMessage="";
+    if (!m_ParentList->isLocal()) {
+        isOk = false;
+        logMessage = KInputDialog::getMultiLineText(I18N_NOOP("Logmessage"),I18N_NOOP("Enter a logmessage"),QString::null,&isOk);
+        if (!isOk) {
+            return;
+        }
+    }
+
+    try {
+        m_ParentList->svnclient()->mkdir(target,logMessage.local8Bit());
+    }catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+
+    ex = target.path().c_str();
+    emit dirAdded(ex,k);
 }

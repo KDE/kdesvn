@@ -18,6 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "ccontextlistener.h"
+#include "authdialogimpl.h"
+#include <klocale.h>
+#include <kinputdialog.h>
 #include <klocale.h>
 
 const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
@@ -65,11 +68,19 @@ CContextListener::~CContextListener()
 }
 
 bool CContextListener::contextGetLogin (
-                    const std::string & /*realm*/,
-                    std::string & /*username*/,
-                    std::string & /* password */,
-                    bool & /* maySave*/)
+                    const std::string & realm,
+                    std::string & username,
+                    std::string & password,
+                    bool & maySave)
 {
+    emit sendNotify(QString::fromLocal8Bit(realm.c_str()));
+    AuthDialogImpl auth(QString::fromLocal8Bit(realm.c_str()));
+    if (auth.exec()==QDialog::Accepted) {
+        username.assign(auth.Username().local8Bit());
+        password.assign(auth.Password().local8Bit());
+        maySave = auth.maySave();
+        return true;
+    }
     return false;
 }
 
@@ -99,7 +110,12 @@ bool CContextListener::contextCancel()
 
 bool CContextListener::contextGetLogMessage (std::string & msg)
 {
-    return false;
+    bool isOk = false;
+    QString logMessage = KInputDialog::getMultiLineText(I18N_NOOP("Logmessage"),I18N_NOOP("Enter a logmessage"),QString::null,&isOk);
+    if (isOk) {
+        msg.assign(logMessage.local8Bit());
+    }
+    return isOk;
 }
 
 svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTrustPrompt (

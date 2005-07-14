@@ -63,6 +63,8 @@ protected:
 
     KActionCollection* m_filesAction;
     KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction,*m_MkdirAction;
+    KAction*m_InfoAction;
+
     SvnActions*m_SvnWrapper;
     CContextListener*m_SvnContext;
     /* the parent entry must removed from list before */
@@ -73,6 +75,7 @@ protected:
     void enableSingleActions(bool how,bool forDir=false);
 
     FileListViewItem* singleSelected();
+    QPtrList<FileListViewItem> allSelected();
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);

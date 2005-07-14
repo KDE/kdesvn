@@ -34,6 +34,7 @@ const int FileListViewItem::COL_STATUS = 1;
 const int FileListViewItem::COL_LAST_REV = 2;
 const int FileListViewItem::COL_LAST_AUTHOR = 3;
 const int FileListViewItem::COL_LAST_DATE = 4;
+const int FileListViewItem::COL_CURRENT_REV = 5;
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
  : KListViewItem(_parent),
@@ -77,7 +78,8 @@ void FileListViewItem::init()
 
 bool FileListViewItem::isDir()const
 {
-    if (stat.isVersioned()) {
+//    if (QString::compare(stat.entry().url(),stat.path())==0) {
+    if (stat.entry().isValid()) {
         return stat.entry().kind()==svn_node_dir;
     }
     /* must be a local file */
@@ -131,6 +133,9 @@ void FileListViewItem::refreshStatus()
 void FileListViewItem::makePixmap()
 {
     QPixmap p;
+    /* yes - different way to "isDir" above 'cause here we try to use the
+       mime-features of KDE on ALL not just unversioned entries.
+     */
     if (QString::compare(stat.entry().url(),stat.path())==0) {
         /* remote access */
         if (isDir()) {
@@ -192,6 +197,7 @@ void FileListViewItem::update()
     fullDate.setTime_t(stat.entry().cmtDate()/(1000*1000),Qt::UTC);
     setText(COL_LAST_DATE,fullDate.toString(Qt::LocalDate));
     setText(COL_LAST_REV,QString("%1").arg(stat.entry().cmtRev()));
+//    setText(COL_CURRENT_REV,QString("%1").arg(stat.entry().revision()));
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const

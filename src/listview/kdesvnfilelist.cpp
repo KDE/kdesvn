@@ -44,9 +44,10 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     setRootIsDecorated(true);
     addColumn(i18n("Name"));
     addColumn(i18n("Status"));
-    addColumn(i18n("Last Revision"));
-    addColumn(i18n("Author"));
-    addColumn(i18n("Last Date"));
+    addColumn(i18n("Last changed Revision"));
+    addColumn(i18n("Last author"));
+    addColumn(i18n("Last change date"));
+//    addColumn(i18n("Current revision"));
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 
@@ -65,11 +66,13 @@ void kdesvnfilelist::setupActions()
     m_LogRangeAction = new KAction("&Log...",KShortcut(),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
     m_LogFullAction = new KAction("&Full Log",KShortcut(),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log");
     m_BlameAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
-    // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_CatAction = new KAction("&Cat head",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
+    m_InfoAction = new KAction("Details",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
 
     m_MkdirAction->setEnabled(false);
+    m_InfoAction->setEnabled(false);
     enableSingleActions(false);
 }
 
@@ -78,16 +81,22 @@ KActionCollection*kdesvnfilelist::filesActions()
     return m_filesAction;
 }
 
-FileListViewItem* kdesvnfilelist::singleSelected()
+QPtrList<FileListViewItem> kdesvnfilelist::allSelected()
 {
-    QPtrList<QListViewItem> lst;
+    QPtrList<FileListViewItem> lst;
     QListViewItemIterator it( this, QListViewItemIterator::Selected );
     while ( it.current() ) {
-        lst.append( it.current() );
+        lst.append( static_cast<FileListViewItem*>(it.current()) );
         ++it;
     }
+    return lst;
+}
+
+FileListViewItem* kdesvnfilelist::singleSelected()
+{
+    QPtrList<FileListViewItem> lst = allSelected();
     if (lst.count()==1) {
-        return static_cast<FileListViewItem*>(lst.at(0));
+        return lst.at(0);
     }
     return 0;
 }
@@ -116,6 +125,7 @@ bool kdesvnfilelist::openURL( const KURL &url )
     }
     bool result = checkDirs(m_baseUri,0);
     m_MkdirAction->setEnabled(result);
+    m_InfoAction->setEnabled(m_isLocal);
     return result;
 }
 
@@ -255,8 +265,8 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
     m_LogRangeAction->setEnabled(how);
     m_CatAction->setEnabled(how&&!_Dir);
     /* blame buggy in lib */
-    m_BlameAction->setEnabled(false);
-    //m_BlameAction->setEnabled(how&&!_Dir);
+    //m_BlameAction->setEnabled(false);
+    m_BlameAction->setEnabled(how&&!_Dir);
     //m_BlameRangeAction->setEnabled(how&&!_Dir);
 }
 

@@ -35,6 +35,7 @@
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
+#include <qvaluelist.h>
 
 #if 0
 #include <khtml_part.h>
@@ -161,7 +162,6 @@ template<class T> QDialog* SvnActions::createDialog(T**ptr,const QString&_head)
  */
 void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
 {
-    return;
     svn::AnnotatedFile * blame;
     QString ex;
     svn::Path p(k->fullName().local8Bit());
@@ -214,6 +214,11 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     delete blame;
 }
 
+QDateTime SvnActions::apr2qttime(apr_time_t atime)
+{
+    QDateTime t;t.setTime_t(atime/(1000*1000),Qt::UTC);
+    return t;
+}
 
 /*!
     \fn SvnActions::slotMakeRangeBlame()
@@ -313,4 +318,104 @@ void SvnActions::slotMkdir()
 
     ex = target.path().c_str();
     emit dirAdded(ex,k);
+}
+
+void SvnActions::slotInfo()
+{
+    if (!m_ParentList) return;
+    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    QValueList<svn::Entry> entries;
+    QString ex;
+    try {
+        if (lst.count()==0) {
+            entries.push_back(m_ParentList->svnclient()->info(m_ParentList->baseUri().local8Bit()));
+        } else {
+            FileListViewItem*item;
+            for (item=lst.first();item;item=lst.next()) {
+                entries.push_back(m_ParentList->svnclient()->info(item->fullName().local8Bit()));
+            }
+        }
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+    QString text = "<html>";
+    QValueList<svn::Entry>::const_iterator it;
+    QString rb = "<tr><td align=\"right\"><b>";
+    QString re = "</td></tr>\n";
+    QString cs = "</b>:</td><td>";
+    for (it=entries.begin();it!=entries.end();++it) {
+        text+="<p><table>";
+        if ((*it).name()&&strlen((*it).name())) {
+            text+=rb+I18N_NOOP("Name")+cs+QString((*it).name())+re;
+        }
+        text+=rb+I18N_NOOP("URL")+cs+QString((*it).url())+re;
+        if ((*it).repos()&&strlen((*it).repos())) {
+            text+=rb+I18N_NOOP("Canonical repository url")+cs+QString((*it).repos())+re;
+        }
+        text+=rb+I18N_NOOP("Type")+cs;
+        switch ((*it).kind()) {
+        case svn_node_none:
+            text+=i18n("Absent");
+            break;
+        case svn_node_file:
+            text+=i18n("File");
+            break;
+        case svn_node_dir:
+            text+=i18n("Directory");
+            break;
+        case svn_node_unknown:
+        default:
+            text+=i18n("Unknown");
+            break;
+        }
+        text+=re;
+        text+=rb+I18N_NOOP("Schedule")+cs;
+        switch ((*it).schedule()) {
+        case svn_wc_schedule_normal:
+            text+=i18n("Normal");
+            break;
+        case svn_wc_schedule_add:
+            text+=i18n("Addition");
+            break;
+        case svn_wc_schedule_delete:
+            text+=i18n("Deletion");
+            break;
+        case svn_wc_schedule_replace:
+            text+=i18n("Replace");
+            break;
+        default:
+            text+=i18n("Unknow");
+            break;
+        }
+        text+=re;
+        text+=rb+I18N_NOOP("UUID")+cs+QString((*it).uuid())+re;
+        text+=rb+I18N_NOOP("Last author")+cs+QString((*it).cmtAuthor())+re;
+        text+=rb+I18N_NOOP("Last changed")+cs+apr2qttime((*it).cmtDate()).toString(Qt::LocalDate)+re;
+        text+=rb+I18N_NOOP("Property last changed")+cs+apr2qttime((*it).propTime()).toString(Qt::LocalDate)+re;
+        text+=rb+I18N_NOOP("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
+        if ((*it).conflictNew()&&strlen((*it).conflictNew())) {
+            text+=rb+I18N_NOOP("New version of conflicted file")+cs+QString((*it).conflictNew())+re;
+        }
+        if ((*it).conflictOld()&&strlen((*it).conflictOld())) {
+            text+=rb+I18N_NOOP("Old version of conflicted file")+cs+QString((*it).conflictOld())+re;
+        }
+        if ((*it).conflictWrk()&&strlen((*it).conflictWrk())) {
+            text+=rb+I18N_NOOP("Working version of conflicted file")+cs+QString((*it).conflictWrk())+re;
+        }
+        if ((*it).copyfromUrl()&&strlen((*it).copyfromUrl())) {
+            text+=rb+I18N_NOOP("Copy from URL")+cs+QString((*it).copyfromUrl())+re;
+        }
+
+        text+="</table></p>\n";
+    }
+    text+="</html>";
+    KTextBrowser*ptr;
+    QDialog*dlg = createDialog(&ptr,QString(I18N_NOOP("Infolist")));
+    if (dlg) {
+        ptr->setText(text);
+        dlg->exec();
+        delete dlg;
+    }
 }

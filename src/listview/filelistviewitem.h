@@ -44,7 +44,7 @@ public:
     void refreshStatus();
     void removeChilds();
 
-    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS;
+    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS,COL_CURRENT_REV;
 
 protected:
     short int sortChar;

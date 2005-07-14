@@ -21,6 +21,7 @@
 #define SVNACTIONS_H
 
 #include <qobject.h>
+#include <qdatetime.h>
 #include "svncpp/revision.hpp"
 
 class kdesvnfilelist;
@@ -46,6 +47,7 @@ protected:
     kdesvnfilelist* m_ParentList;
 
     template<class T> QDialog* createDialog(T**ptr,const QString&_);
+    static QDateTime apr2qttime(apr_time_t);
 
 public slots:
     virtual void slotMakeRangeLog();
@@ -54,6 +56,7 @@ public slots:
     virtual void slotRangeBlame();
     virtual void slotCat();
     virtual void slotMkdir();
+    virtual void slotInfo();
 
 signals:
     void clientException(const QString&);

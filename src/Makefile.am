@@ -5,7 +5,7 @@
 bin_PROGRAMS = kdesvn kdesvn_client
 
 # set the include path for X, qt and KDE
-INCLUDES         = $(all_includes)
+INCLUDES = -I$(top_srcdir)/src $(all_includes)
 
 # the library search path. 
 kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
@@ -36,7 +36,7 @@ messages: rc.cpp
 KDE_ICON = AUTO
 
 # this is where the kdelnk file will go 
-kdelnkdir   = $(kde_appsdir)/Utilities
+kdelnkdir = $(kde_appsdir)/Utilities
 kdelnk_DATA = kdesvn.desktop
 
 # this is where the XML-GUI resource file goes

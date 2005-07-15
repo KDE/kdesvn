@@ -12,6 +12,9 @@
 
 #include <qvariant.h>
 #include <kdialog.h>
+#include <qvaluelist.h>
+#include <qmap.h>
+#include <qstring.h>
 
 #include "svncpp/revision.hpp"
 
@@ -33,10 +36,15 @@ class PropertiesDlg : public KDialog
     Q_OBJECT
 
 public:
-    PropertiesDlg(const QString&, svn::Client*,const svn::Revision&aRev=svn::Revision::HEAD,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    typedef QMap<QString,QString> tPropEntries;
+
+    PropertiesDlg(const QString&, svn::Client*,
+        const svn::Revision&aRev=svn::Revision(svn_opt_revision_working),
+        QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~PropertiesDlg();
 
     bool hasChanged()const;
+    void changedItems(tPropEntries&toSet,QValueList<QString>&toDelete);
 
 protected:
     QLabel* m_Headlabel;
@@ -60,6 +68,8 @@ protected:
     svn::Client*m_Client;
     svn::Revision m_Rev;
 
+    bool checkExisting(const QString&aName,QListViewItem*it=0);
+
 protected slots:
     virtual void languageChange();
 
@@ -67,6 +77,9 @@ protected slots:
     virtual void slotSelectionChanged(QListViewItem*);
     virtual void slotSelectionExecuted(QListViewItem*);
     virtual void slotItemRenamed(QListViewItem*item,const QString & str,int col );
+    virtual void slotAdd();
+    virtual void slotDelete();
+    virtual void slotModify();
 
 protected:
     virtual void initItem();

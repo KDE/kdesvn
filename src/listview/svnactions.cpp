@@ -28,6 +28,7 @@
 #include "svncpp/context_listener.hpp"
 
 #include <qstring.h>
+#include <qmap.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <kdialog.h>
@@ -429,7 +430,29 @@ void SvnActions::slotProperties()
 {
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
-    PropertiesDlg dlg(k->fullName(),m_ParentList->svnclient());
+    PropertiesDlg dlg(k->fullName(),m_ParentList->svnclient(),
+        m_ParentList->isLocal()?svn_opt_revision_working:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_ParentList,SLOT(slotClientException(const QString&)));
-    dlg.exec();
+    if (dlg.exec()!=QDialog::Accepted) {
+        return;
+    }
+    QString ex;
+    PropertiesDlg::tPropEntries setList;
+    QValueList<QString> delList;
+    dlg.changedItems(setList,delList);
+    try {
+        unsigned int pos;
+        for (pos = 0; pos<delList.size();++pos) {
+            m_ParentList->svnclient()->propdel(delList[pos].local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
+        }
+        PropertiesDlg::tPropEntries::Iterator it;
+        for (it=setList.begin(); it!=setList.end();++it) {
+            m_ParentList->svnclient()->propset(it.key().local8Bit(),it.data().local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
+        }
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+    k->refreshStatus();
 }

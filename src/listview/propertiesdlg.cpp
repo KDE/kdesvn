@@ -8,6 +8,7 @@
 ****************************************************************************/
 
 #include "propertiesdlg.h"
+#include "editproperty_impl.h"
 #include "svncpp/client.hpp"
 
 #include <qvariant.h>
@@ -19,6 +20,8 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 #include <klocale.h>
+#include <kmessagebox.h>
+#include <kiconloader.h>
 
 class PropertyListViewItem:public KListViewItem
 {
@@ -77,6 +80,18 @@ void PropertyListViewItem::checkName()
 bool PropertyListViewItem::different()const
 {
     return m_currentName!=m_startName || m_currentValue!=m_startValue || deleted();
+}
+
+void PropertyListViewItem::deleteIt()
+{
+    m_deleted = true;
+    setPixmap(0,KGlobal::iconLoader()->loadIcon("cancel",KIcon::Desktop,16));
+}
+
+void PropertyListViewItem::unDeleteIt()
+{
+    m_deleted = false;
+    setPixmap(0,QPixmap());
 }
 
 /*
@@ -140,17 +155,23 @@ PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn
     m_ButtonLayout->addItem( m_bottomSpacer );
     PropertiesDlgLayout->addLayout( m_ButtonLayout );
 
+    m_DeleteButton->setEnabled(false);
+    m_ModifyButton->setEnabled(false);
+
     languageChange();
     resize( QSize(489, 236).expandedTo(minimumSizeHint()) );
     clearWState( WState_Polished );
 
     // signals and slots connections
-    connect( m_CloseButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
-    connect( m_CancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
-    connect( m_HelpButton, SIGNAL( clicked() ), this, SLOT( slotHelp() ) );
+    connect( m_CloseButton, SIGNAL(clicked()), this, SLOT(accept()));
+    connect( m_CancelButton, SIGNAL(clicked()), this, SLOT( reject()));
+    connect( m_HelpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
+    connect( m_AddButton, SIGNAL(clicked()), this, SLOT(slotAdd()));
+    connect( m_ModifyButton, SIGNAL(clicked()), this, SLOT(slotModify()));
+    connect( m_DeleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
 
     connect(m_PropertiesListview,SIGNAL(itemRenamed(QListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(QListViewItem*,const QString&,int)));
-//    connect(m_PropertiesListview,SIGNAL(selectionChanged(QListViewItem*)),this,SLOT(slotSelectionChanged(QListViewItem*)));
+    connect(m_PropertiesListview,SIGNAL(selectionChanged(QListViewItem*)),this,SLOT(slotSelectionChanged(QListViewItem*)));
 //    connect(m_PropertiesListview,SIGNAL(executed(QListViewItem*)),this,SLOT(slotSelectionExecuted(QListViewItem*)));
     if (!m_Client) {
         m_PropertiesListview->setEnabled(false);
@@ -194,9 +215,17 @@ void PropertiesDlg::slotHelp()
     qWarning( "PropertiesDlg::slotHelp(): Not implemented yet" );
 }
 
-void PropertiesDlg::slotSelectionChanged(QListViewItem*)
+void PropertiesDlg::slotSelectionChanged(QListViewItem*item)
 {
-    qWarning( "PropertiesDlg::slotSelectionChanged(QListViewItem*): Not implemented yet" );
+    m_DeleteButton->setEnabled(item);
+    m_ModifyButton->setEnabled(item);
+    if (!item) return;
+    PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (item);
+    if (ki->deleted()) {
+        m_DeleteButton->setText(i18n("Undelete property"));
+    } else {
+        m_DeleteButton->setText(i18n("Delete property"));
+    }
 }
 
 
@@ -257,9 +286,7 @@ int PropertiesDlg::exec()
  */
 void PropertiesDlg::slotSelectionExecuted(QListViewItem*)
 {
-    qWarning( "PropertiesDlg::slotSelectionExecuted(QListViewItem*): Not implemented yet" );
 }
-
 
 /*!
     \fn PropertiesDlg::slotItemRenamed(QListViewItem*item,const QString & str,int col )
@@ -272,5 +299,105 @@ void PropertiesDlg::slotItemRenamed(QListViewItem*_item,const QString &,int col 
         item->checkName();
     } else {
         item->checkValue();
+    }
+}
+
+
+/*!
+    \fn PropertiesDlg::slotAdd()
+ */
+void PropertiesDlg::slotAdd()
+{
+    EditProperty_impl dlg(this);
+    if (dlg.exec()==QDialog::Accepted) {
+        if (checkExisting(dlg.PropName())) {
+            KMessageBox::error(this,i18n("An property with that name exists.\nRejecting it."),i18n("Double property"));
+            return;
+        }
+        PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview);
+        ki->setMultiLinesEnabled(true);
+        ki->setText(0,dlg.PropName());
+        ki->setText(1,dlg.PropValue());
+        ki->checkName();
+        ki->checkValue();
+    }
+}
+
+/*!
+    \fn PropertiesDlg::slotDelete
+ */
+void PropertiesDlg::slotDelete()
+{
+    QListViewItem*qi = m_PropertiesListview->selectedItem();
+    if (!qi) return;
+    PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
+    if (ki->deleted()) {
+        ki->unDeleteIt();
+    } else {
+        ki->deleteIt();
+    }
+    slotSelectionChanged(qi);
+}
+
+
+/*!
+    \fn PropertiesDlg::slotModify()
+ */
+void PropertiesDlg::slotModify()
+{
+    QListViewItem*qi = m_PropertiesListview->selectedItem();
+    if (!qi) return;
+    PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
+    EditProperty_impl dlg(this);
+    dlg.setPropName(ki->currentName());
+    dlg.setPropValue(ki->currentValue());
+    if (dlg.exec()==QDialog::Accepted) {
+        if (checkExisting(dlg.PropName(),qi)) {
+            KMessageBox::error(this,i18n("An property with that name exists.\nRejecting it."),i18n("Double property"));
+            return;
+        }
+        ki->setText(0,dlg.PropName());
+        ki->setText(1,dlg.PropValue());
+        ki->checkName();
+        ki->checkValue();
+    }
+}
+
+bool PropertiesDlg::checkExisting(const QString&aName,QListViewItem*it)
+{
+    if (!it) {
+        return m_PropertiesListview->findItem(aName,0)!=0;
+    }
+    QListViewItemIterator iter( m_PropertiesListview );
+    while ( iter.current() ) {
+        if ( iter.current()==it) {
+            ++iter;
+            continue;
+        }
+        if (iter.current()->text(0)==aName) {
+            return true;
+        }
+        ++iter;
+    }
+    return false;
+}
+
+void PropertiesDlg::changedItems(tPropEntries&toSet,QValueList<QString>&toDelete)
+{
+    toSet.clear();
+    toDelete.clear();
+    QListViewItemIterator iter( m_PropertiesListview );
+    PropertyListViewItem*ki;
+    while ( iter.current() ) {
+        ki = static_cast<PropertyListViewItem*> (iter.current());
+        if (ki->deleted()) {
+            toDelete.push_back(ki->currentName());
+        } else if (ki->currentName()!=ki->startName()){
+            toDelete.push_back(ki->startName());
+            toSet[ki->currentName()]=ki->currentValue();
+        } else if (ki->currentValue()!=ki->startValue()) {
+            toSet[ki->currentName()]=ki->currentValue();
+        }
+        ++iter;
     }
 }

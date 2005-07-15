@@ -290,7 +290,7 @@ void kdesvnfilelist::slotSelectionChanged()
 void kdesvnfilelist::slotClientException(const QString&what)
 {
     emit sigLogMessage(what);
-    KMessageBox::sorry(0,what,I18N_NOOP("SVN Error"));
+    KMessageBox::sorry(0,what,i18n("SVN Error"));
 }
 
 

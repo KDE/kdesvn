@@ -103,7 +103,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
         return;
     }
     if (!logs) {
-        ex = I18N_NOOP("Got no logs");
+        ex = i18n("Got no logs");
         emit clientException(ex);
         return;
     }
@@ -173,12 +173,12 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
         emit clientException(ex);
         return;
     } catch (...) {
-        ex = I18N_NOOP("Error getting blame");
+        ex = i18n("Error getting blame");
         emit clientException(ex);
         return;
     }
     if (!blame) {
-        ex = I18N_NOOP("Got no annotate");
+        ex = i18n("Got no annotate");
         emit clientException(ex);
         return;
     }
@@ -187,7 +187,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     static QString rowc = "<tr bgcolor=\"#EEEEEE\"><td>";
     static QString rows = "</td><td>";
     static QString rowe = "</td></tr>\n";
-    QString text = "<html><table>"+rowb+"Rev"+rows+I18N_NOOP("Author")+rows+I18N_NOOP("Line")+rows+"&nbsp;"+rowe;
+    QString text = "<html><table>"+rowb+"Rev"+rows+i18n("Author")+rows+i18n("Line")+rows+"&nbsp;"+rowe;
     bool second = false;
     QString codetext = "";
     for (bit=blame->begin();bit!=blame->end();++bit) {
@@ -205,7 +205,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     }
     text += "</table></html>";
     KTextBrowser*ptr;
-    QDialog*dlg = createDialog(&ptr,QString(I18N_NOOP("Blame %1")).arg(k->text(0)));
+    QDialog*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->text(0)));
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
@@ -248,16 +248,16 @@ void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
         emit clientException(ex);
         return;
     } catch (...) {
-        ex = I18N_NOOP("Error getting content");
+        ex = i18n("Error getting content");
         emit clientException(ex);
         return;
     }
     if (content.size()==0) {
-        emit clientException(I18N_NOOP("Got no content"));
+        emit clientException(i18n("Got no content"));
         return;
     }
     KTextBrowser*ptr;
-    QDialog*dlg = createDialog(&ptr,QString(I18N_NOOP("Content of %1")).arg(k->text(0)));
+    QDialog*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(k->text(0)));
     if (dlg) {
         ptr->setFont(KGlobalSettings::fixedFont());
         ptr->setWordWrap(QTextEdit::NoWrap);
@@ -282,7 +282,7 @@ void SvnActions::slotMkdir()
     QString parentDir,ex;
     if (k) {
         if (!k->isDir()) {
-            KMessageBox::sorry(0,I18N_NOOP("May not make subdirs of a file"));
+            KMessageBox::sorry(0,i18n("May not make subdirs of a file"));
             return;
         }
         parentDir=k->fullName();
@@ -290,7 +290,7 @@ void SvnActions::slotMkdir()
         parentDir=m_ParentList->baseUri();
     }
     bool isOk=false;
-    ex = KInputDialog::getText(I18N_NOOP("New Dir"),I18N_NOOP("Enter (sub-)directory name:"),QString::null,&isOk);
+    ex = KInputDialog::getText(i18n("New Dir"),i18n("Enter (sub-)directory name:"),QString::null,&isOk);
     if (!isOk) {
         return;
     }
@@ -302,7 +302,7 @@ void SvnActions::slotMkdir()
     QString logMessage="";
     if (!m_ParentList->isLocal()) {
         isOk = false;
-        logMessage = KInputDialog::getMultiLineText(I18N_NOOP("Logmessage"),I18N_NOOP("Enter a logmessage"),QString::null,&isOk);
+        logMessage = KInputDialog::getMultiLineText(i18n("Logmessage"),i18n("Enter a logmessage"),QString::null,&isOk);
         if (!isOk) {
             return;
         }
@@ -348,13 +348,13 @@ void SvnActions::slotInfo()
     for (it=entries.begin();it!=entries.end();++it) {
         text+="<p><table>";
         if ((*it).name()&&strlen((*it).name())) {
-            text+=rb+I18N_NOOP("Name")+cs+QString((*it).name())+re;
+            text+=rb+i18n("Name")+cs+QString((*it).name())+re;
         }
-        text+=rb+I18N_NOOP("URL")+cs+QString((*it).url())+re;
+        text+=rb+i18n("URL")+cs+QString((*it).url())+re;
         if ((*it).repos()&&strlen((*it).repos())) {
-            text+=rb+I18N_NOOP("Canonical repository url")+cs+QString((*it).repos())+re;
+            text+=rb+i18n("Canonical repository url")+cs+QString((*it).repos())+re;
         }
-        text+=rb+I18N_NOOP("Type")+cs;
+        text+=rb+i18n("Type")+cs;
         switch ((*it).kind()) {
         case svn_node_none:
             text+=i18n("Absent");
@@ -371,7 +371,7 @@ void SvnActions::slotInfo()
             break;
         }
         text+=re;
-        text+=rb+I18N_NOOP("Schedule")+cs;
+        text+=rb+i18n("Schedule")+cs;
         switch ((*it).schedule()) {
         case svn_wc_schedule_normal:
             text+=i18n("Normal");
@@ -390,29 +390,29 @@ void SvnActions::slotInfo()
             break;
         }
         text+=re;
-        text+=rb+I18N_NOOP("UUID")+cs+QString((*it).uuid())+re;
-        text+=rb+I18N_NOOP("Last author")+cs+QString((*it).cmtAuthor())+re;
-        text+=rb+I18N_NOOP("Last changed")+cs+apr2qttime((*it).cmtDate()).toString(Qt::LocalDate)+re;
-        text+=rb+I18N_NOOP("Property last changed")+cs+apr2qttime((*it).propTime()).toString(Qt::LocalDate)+re;
-        text+=rb+I18N_NOOP("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
+        text+=rb+i18n("UUID")+cs+QString((*it).uuid())+re;
+        text+=rb+i18n("Last author")+cs+QString((*it).cmtAuthor())+re;
+        text+=rb+i18n("Last changed")+cs+apr2qttime((*it).cmtDate()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Property last changed")+cs+apr2qttime((*it).propTime()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
         if ((*it).conflictNew()&&strlen((*it).conflictNew())) {
-            text+=rb+I18N_NOOP("New version of conflicted file")+cs+QString((*it).conflictNew())+re;
+            text+=rb+i18n("New version of conflicted file")+cs+QString((*it).conflictNew())+re;
         }
         if ((*it).conflictOld()&&strlen((*it).conflictOld())) {
-            text+=rb+I18N_NOOP("Old version of conflicted file")+cs+QString((*it).conflictOld())+re;
+            text+=rb+i18n("Old version of conflicted file")+cs+QString((*it).conflictOld())+re;
         }
         if ((*it).conflictWrk()&&strlen((*it).conflictWrk())) {
-            text+=rb+I18N_NOOP("Working version of conflicted file")+cs+QString((*it).conflictWrk())+re;
+            text+=rb+i18n("Working version of conflicted file")+cs+QString((*it).conflictWrk())+re;
         }
         if ((*it).copyfromUrl()&&strlen((*it).copyfromUrl())) {
-            text+=rb+I18N_NOOP("Copy from URL")+cs+QString((*it).copyfromUrl())+re;
+            text+=rb+i18n("Copy from URL")+cs+QString((*it).copyfromUrl())+re;
         }
 
         text+="</table></p>\n";
     }
     text+="</html>";
     KTextBrowser*ptr;
-    QDialog*dlg = createDialog(&ptr,QString(I18N_NOOP("Infolist")));
+    QDialog*dlg = createDialog(&ptr,QString(i18n("Infolist")));
     if (dlg) {
         ptr->setText(text);
         dlg->exec();

@@ -26,27 +26,27 @@
 const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
 
 const QString CContextListener::action_strings[]={
-    I18N_NOOP("Add"),
-    I18N_NOOP("Copy"),
-    I18N_NOOP("Delete"),
-    I18N_NOOP("Restore"),
-    I18N_NOOP("Revert"),
-    I18N_NOOP("Revert failed"),
-    I18N_NOOP("Resolved"),
-    I18N_NOOP("Skip"),
-    I18N_NOOP("Deleted"),
-    I18N_NOOP("Added"),
-    I18N_NOOP("Updated"),
-    I18N_NOOP("Update complete"),
-    I18N_NOOP("Update external"),
-    I18N_NOOP("Status complete"),
-    I18N_NOOP("Status external"),
-    I18N_NOOP("Commit Modified"),
-    I18N_NOOP("Commit Added"),
-    I18N_NOOP("Commit Deleted"),
-    I18N_NOOP("Commit Replaced"),
-    I18N_NOOP("Postfix txdelta"),
-    I18N_NOOP("Blame")
+    i18n("Add"),
+    i18n("Copy"),
+    i18n("Delete"),
+    i18n("Restore"),
+    i18n("Revert"),
+    i18n("Revert failed"),
+    i18n("Resolved"),
+    i18n("Skip"),
+    i18n("Deleted"),
+    i18n("Added"),
+    i18n("Updated"),
+    i18n("Update complete"),
+    i18n("Update external"),
+    i18n("Status complete"),
+    i18n("Status external"),
+    i18n("Commit Modified"),
+    i18n("Commit Added"),
+    i18n("Commit Deleted"),
+    i18n("Commit Replaced"),
+    i18n("Postfix txdelta"),
+    i18n("Blame")
 };
 
 QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
@@ -111,7 +111,7 @@ bool CContextListener::contextCancel()
 bool CContextListener::contextGetLogMessage (std::string & msg)
 {
     bool isOk = false;
-    QString logMessage = KInputDialog::getMultiLineText(I18N_NOOP("Logmessage"),I18N_NOOP("Enter a logmessage"),QString::null,&isOk);
+    QString logMessage = KInputDialog::getMultiLineText(i18n("Logmessage"),i18n("Enter a logmessage"),QString::null,&isOk);
     if (isOk) {
         msg.assign(logMessage.local8Bit());
     }

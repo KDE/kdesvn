@@ -21,6 +21,7 @@
 #include "kdesvnfilelist.h"
 #include "filelistviewitem.h"
 #include "rangeinput_impl.h"
+#include "propertiesdlg.h"
 #include "svnlogdlgimp.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
@@ -418,4 +419,17 @@ void SvnActions::slotInfo()
         dlg->exec();
         delete dlg;
     }
+}
+
+
+/*!
+    \fn SvnActions::slotProperties()
+ */
+void SvnActions::slotProperties()
+{
+    if (!m_ParentList) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    PropertiesDlg dlg(k->fullName(),m_ParentList->svnclient());
+    connect(&dlg,SIGNAL(clientException(const QString&)),m_ParentList,SLOT(slotClientException(const QString&)));
+    dlg.exec();
 }

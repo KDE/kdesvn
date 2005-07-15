@@ -57,6 +57,7 @@ public slots:
     virtual void slotCat();
     virtual void slotMkdir();
     virtual void slotInfo();
+    virtual void slotProperties();
 
 signals:
     void clientException(const QString&);

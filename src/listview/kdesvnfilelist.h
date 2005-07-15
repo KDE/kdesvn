@@ -63,7 +63,7 @@ protected:
 
     KActionCollection* m_filesAction;
     KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction,*m_MkdirAction;
-    KAction*m_InfoAction;
+    KAction*m_InfoAction,*m_propertyAction;
 
     SvnActions*m_SvnWrapper;
     CContextListener*m_SvnContext;

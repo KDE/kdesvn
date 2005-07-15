@@ -67,8 +67,9 @@ void kdesvnfilelist::setupActions()
     m_LogFullAction = new KAction("&Full Log",KShortcut(),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log");
     m_BlameAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
     m_CatAction = new KAction("&Cat head",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    m_propertyAction = new KAction("Properties",KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
-    m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
+    m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_mkdir");
     m_InfoAction = new KAction("Details",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
 
     m_MkdirAction->setEnabled(false);
@@ -263,6 +264,7 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
 {
     m_LogFullAction->setEnabled(how);
     m_LogRangeAction->setEnabled(how);
+    m_propertyAction->setEnabled(how);
     m_CatAction->setEnabled(how&&!_Dir);
     /* blame buggy in lib */
     //m_BlameAction->setEnabled(false);

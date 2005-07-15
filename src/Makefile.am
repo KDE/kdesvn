@@ -31,7 +31,7 @@ METASOURCES = AUTO
 
 messages: rc.cpp
 	$(EXTRACTRC) `find . -name \*.ui -o -name \*.rc` > rc.cpp
-	$(XGETTEXT) *.cpp -o $(podir)/kdesvn.pot
+	find . -name '*.cpp' | xargs $(XGETTEXT) -o $(podir)/kdesvn.pot
 
 KDE_ICON = AUTO
 

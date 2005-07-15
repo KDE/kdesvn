@@ -14,11 +14,8 @@
     </keywords>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description></description>
-    <ignoreparts>
-      <part>Unterstützung für ClearCase (KDevelop)</part>
-      <part>Unterstützung für CVSService (KDevelop)</part>
-    </ignoreparts>
+    <description/>
+    <ignoreparts/>
     <versioncontrol>kdevsubversion</versioncontrol>
     <secondaryLanguages/>
   </general>
@@ -36,7 +33,7 @@
         <kdesvn_client/>
       </runarguments>
       <customdirectory>/</customdirectory>
-      <programargs>../../</programargs>
+      <programargs>../../tests/playground</programargs>
       <autocompile>true</autocompile>
       <envvars/>
     </run>
@@ -124,15 +121,15 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs></programargs>
-      <gdbpath></gdbpath>
+      <programargs/>
+      <gdbpath/>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
       <runappinappdirectory>true</runappinappdirectory>
-      <configGdbScript></configGdbScript>
-      <runShellScript></runShellScript>
-      <runGdbScript></runGdbScript>
+      <configGdbScript/>
+      <runShellScript/>
+      <runGdbScript/>
     </general>
     <display>
       <staticmembers>false</staticmembers>
@@ -212,5 +209,13 @@
         <implementation class="Rangeinput_impl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/rangeinput.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/rangeinput_impl.h" />
       </qtdesigner>
     </designerintegration>
+    <creategettersetter>
+      <prefixGet/>
+      <prefixSet>set</prefixSet>
+      <prefixVariable>m_,_</prefixVariable>
+      <parameterName>theValue</parameterName>
+      <inlineGet>true</inlineGet>
+      <inlineSet>true</inlineSet>
+    </creategettersetter>
   </kdevcppsupport>
 </kdevelop>

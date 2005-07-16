@@ -21,7 +21,7 @@
   </general>
   <kdevautoproject>
     <general>
-      <activetarget>src/listview/liblistview.a</activetarget>
+      <activetarget>src/svnfrontend/libsvnfrontend.a</activetarget>
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
@@ -205,8 +205,8 @@
     </codecompletion>
     <designerintegration>
       <qtdesigner>
-        <implementation class="AuthDialogImpl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/authdlg.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/authdialogimpl.h" />
-        <implementation class="Rangeinput_impl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/rangeinput.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/listview/rangeinput_impl.h" />
+        <implementation class="AuthDialogImpl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/svnfrontend/authdlg.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/svnfrontend/authdialogimpl.h" />
+        <implementation class="Rangeinput_impl" path="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/svnfrontend/rangeinput.ui" implementationpath="/home/ralbrecht/Sonst/PrivProjekte/kdesvn/src/svnfrontend/rangeinput_impl.h" />
       </qtdesigner>
     </designerintegration>
     <creategettersetter>

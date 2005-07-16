@@ -11,7 +11,7 @@ INCLUDES = -I$(top_srcdir)/src $(all_includes)
 kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 
 # the libraries to link against.
-kdesvn_LDADD = $(top_builddir)/src/listview/liblistview.a \
+kdesvn_LDADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
 	$(top_builddir)/src/svncpp/libsvncpp.a $(APR_LIBS) $(NEON_LIBS) $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEPRINT) \
 	$(SVN_LIBS)
 
@@ -43,4 +43,4 @@ kdelnk_DATA = kdesvn.desktop
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
-SUBDIRS = listview svncpp
+SUBDIRS = svnfrontend svncpp

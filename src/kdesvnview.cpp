@@ -20,7 +20,7 @@
 
 
 #include "kdesvnview.h"
-#include "listview/kdesvnfilelist.h"
+#include "svnfrontend/kdesvnfilelist.h"
 
 #include <qpainter.h>
 #include <qlayout.h>

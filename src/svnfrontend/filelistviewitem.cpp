@@ -112,21 +112,36 @@ void FileListViewItem::update(KFileItem*_item)
     update();
 }
 
-void FileListViewItem::refreshStatus()
+void FileListViewItem::refreshStatus(bool childs,QPtrList<FileListViewItem>*exclude,bool depsonly)
 {
-    try {
-      stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
-    } catch (svn::ClientException e) {
-        setText(COL_STATUS,e.message());
-        return;
-    } catch (...) {
-        qDebug("Execption catched");
-        setText(COL_STATUS,"?");
-        return;
+    FileListViewItem*it;
+
+    if (!depsonly) {
+        try {
+        stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
+        } catch (svn::ClientException e) {
+            setText(COL_STATUS,e.message());
+            return;
+        } catch (...) {
+            qDebug("Execption catched");
+            setText(COL_STATUS,"?");
+            return;
+        }
+        update();
     }
-    update();
-    if (parent()) {
-        ((FileListViewItem*)parent())->refreshStatus();
+    it = static_cast<FileListViewItem*>(parent());;
+    if (!childs) {
+        if (it && (!exclude || exclude->find(it)==-1)) {
+            it->refreshStatus(false,exclude);
+        }
+    } else if (firstChild()){
+        it = static_cast<FileListViewItem*>(firstChild());
+        while (it) {
+            if (!exclude || exclude->find(it)==-1) {
+                it->refreshStatus(true,exclude);
+            }
+            it = static_cast<FileListViewItem*>(it->nextSibling());
+        }
     }
     repaint();
 }

@@ -22,6 +22,7 @@
 
 #include <klistview.h>
 #include <qdatetime.h>
+#include <qptrlist.h>
 #include "svncpp/status.hpp"
 
 class QPainter;
@@ -41,7 +42,7 @@ public:
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
     bool isDir()const;
     const QString&fullName()const{return m_fullName;}
-    void refreshStatus();
+    void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
     void removeChilds();
 
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS,COL_CURRENT_REV;

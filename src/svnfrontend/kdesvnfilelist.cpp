@@ -72,11 +72,13 @@ void kdesvnfilelist::setupActions()
     m_CatAction = new KAction("&Cat head",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_propertyAction = new KAction("Properties",KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
-    m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_mkdir");
+    m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_InfoAction = new KAction("Details",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
+    m_commitAction = new KAction("Commit",KShortcut(),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
+    m_commitAction->setEnabled(false);
     enableSingleActions(false);
 }
 
@@ -125,6 +127,8 @@ bool kdesvnfilelist::openURL( const KURL &url )
     bool result = checkDirs(m_baseUri,0);
     m_MkdirAction->setEnabled(result);
     m_InfoAction->setEnabled(m_isLocal);
+    m_commitAction->setEnabled(m_isLocal);
+
     return result;
 }
 

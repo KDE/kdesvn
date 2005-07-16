@@ -59,7 +59,7 @@ protected:
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 
-    template<class T> QDialog* createDialog(T**ptr,const QString&_);
+    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
     static QDateTime apr2qttime(apr_time_t);
 
 public slots:
@@ -72,6 +72,7 @@ public slots:
     virtual void slotInfo();
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
+    virtual void slotCommit();
 
 signals:
     void clientException(const QString&);

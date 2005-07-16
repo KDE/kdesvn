@@ -24,9 +24,11 @@
 #include "propertiesdlg.h"
 #include "ccontextlistener.h"
 #include "svnlogdlgimp.h"
+#include "logmsg_impl.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
 #include "svncpp/context_listener.hpp"
+#include "svncpp/targets.hpp"
 
 #include <qstring.h>
 #include <qmap.h>
@@ -120,6 +122,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     const svn::LogEntries * logs;
     QString ex;
     try {
+        /// @fixme Last parameter should be user setable (follow nodes moving or not)
         logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true,false);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
@@ -151,7 +154,8 @@ void SvnActions::slotBlame()
     makeBlame(start,end,k);
 }
 
-template<class T> QDialog* SvnActions::createDialog(T**ptr,const QString&_head)
+/// @todo move it to extra include file
+template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel)
 {
     KDialog * dlg = new KDialog();
     if (!dlg) return dlg;
@@ -171,7 +175,15 @@ template<class T> QDialog* SvnActions::createDialog(T**ptr,const QString&_head)
     buttonOk->setAutoDefault( TRUE );
     buttonOk->setDefault( TRUE );
     blayout->addWidget( buttonOk );
-    buttonOk->setText( i18n( "&Close" ) );
+    if (!OkCancel) {
+        buttonOk->setText( i18n( "&Close" ) );
+    } else {
+        buttonOk->setText( i18n( "&Ok" ) );
+        QPushButton*buttonCancel = new QPushButton( dlg, "buttonCancel" );
+        buttonCancel->setText(i18n("&Cancel"));
+        blayout->addWidget( buttonCancel );
+        connect( buttonCancel, SIGNAL(clicked()), dlg, SLOT(reject()));
+    }
     Spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     blayout->addItem( Spacer1 );
     Dialog1Layout->addLayout(blayout);
@@ -452,6 +464,7 @@ void SvnActions::slotProperties()
 {
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
+    if (!k) return;
     PropertiesDlg dlg(k->fullName(),svnclient(),
         m_ParentList->isLocal()?svn_opt_revision_working:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_ParentList,SLOT(slotClientException(const QString&)));
@@ -477,4 +490,45 @@ void SvnActions::slotProperties()
         return;
     }
     k->refreshStatus();
+}
+
+
+/*!
+    \fn SvnActions::slotCommit()
+ */
+void SvnActions::slotCommit()
+{
+    Logmsg_impl*ptr;
+    QDialog*dlg = createDialog(&ptr,QString(i18n("Commit log")),true);
+    if (!dlg) return;
+    ptr->initHistory();
+    if (dlg->exec()!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    QString msg = ptr->getMessage();
+    bool rec = ptr->isRecursive();
+    ptr->saveHistory();
+    QPtrList<FileListViewItem> which = m_ParentList->allSelected();
+    FileListViewItem*cur;
+    std::vector<svn::Path> targets;
+    if (which.count()==0) {
+        targets.push_back(svn::Path(m_ParentList->baseUri().local8Bit()));
+    } else {
+        for (cur=which.first();cur;cur=which.next()) {
+            targets.push_back(svn::Path(cur->fullName().local8Bit()));
+        }
+    }
+    svn_revnum_t nnum;
+    try {
+        nnum = m_Svnclient.commit(svn::Targets(targets),msg.local8Bit(),rec);
+    } catch (svn::ClientException e) {
+        QString ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+    for (cur=which.first();cur;cur=which.next()) {
+        cur->refreshStatus(true,&which,false);
+        cur->refreshStatus(false,&which,true);
+    }
 }

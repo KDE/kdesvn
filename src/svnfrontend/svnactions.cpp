@@ -499,6 +499,7 @@ void SvnActions::slotProperties()
 void SvnActions::slotCommit()
 {
     Logmsg_impl*ptr;
+    if (!m_ParentList->firstChild()) return;
     QDialog*dlg = createDialog(&ptr,QString(i18n("Commit log")),true);
     if (!dlg) return;
     ptr->initHistory();
@@ -527,8 +528,15 @@ void SvnActions::slotCommit()
         emit clientException(ex);
         return;
     }
-    for (cur=which.first();cur;cur=which.next()) {
-        cur->refreshStatus(true,&which,false);
-        cur->refreshStatus(false,&which,true);
+    if (which.count()==0 && m_ParentList->firstChild()) {
+        which.append(static_cast<FileListViewItem*>(m_ParentList->firstChild()));
+    }
+    for (unsigned j = 0; j<which.count();++j) {
+        if (rec) {
+            which.at(j)->refreshStatus(true,&which,false);
+            which.at(j)->refreshStatus(false,&which,true);
+        } else {
+            which.at(j)->refreshStatus(false,&which,false);
+        }
     }
 }

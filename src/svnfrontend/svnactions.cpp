@@ -120,7 +120,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     const svn::LogEntries * logs;
     QString ex;
     try {
-        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true);
+        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true,false);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);

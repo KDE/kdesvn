@@ -22,12 +22,18 @@
 
 #include <qobject.h>
 #include <qdatetime.h>
+#include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 
 class kdesvnfilelist;
 class FileListViewItem;
 class KDialog;
 class QDialog;
+class CContextListener;
+
+namespace svn {
+    class Context;
+}
 
 /**
 @author Rajko Albrecht
@@ -38,6 +44,9 @@ class SvnActions : public QObject
 public:
     SvnActions(kdesvnfilelist *parent = 0, const char *name = 0);
     ~SvnActions();
+    void reInitClient();
+    //svn::Client&svnClient(){return m_Svnclient;}
+    svn::Client* svnclient(){return &m_Svnclient;}
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);
@@ -45,6 +54,10 @@ protected:
     void makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k);
     void makeCat(svn::Revision start, FileListViewItem*k);
     kdesvnfilelist* m_ParentList;
+
+    CContextListener*m_SvnContext;
+    svn::Context* m_CurrentContext;
+    svn::Client m_Svnclient;
 
     template<class T> QDialog* createDialog(T**ptr,const QString&_);
     static QDateTime apr2qttime(apr_time_t);
@@ -58,10 +71,12 @@ public slots:
     virtual void slotMkdir();
     virtual void slotInfo();
     virtual void slotProperties();
+    virtual void slotNotifyMessage(const QString&);
 
 signals:
     void clientException(const QString&);
     void dirAdded(const QString&,FileListViewItem*);
+    void sendNotify(const QString&);
 };
 
 #endif

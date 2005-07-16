@@ -23,13 +23,12 @@
 #include <klistview.h>
 #include <kdirlister.h>
 #include <qmap.h>
-#include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
+#include "svncpp/client.hpp"
 
 class KAction;
 class KActionMenu;
 class KActionCollection;
-class CContextListener;
 
 /**
 @author Rajko Albrecht
@@ -53,7 +52,6 @@ public:
     KActionCollection*filesActions();
 
 protected:
-    svn::Client m_Svnclient;
     svn::StatusEntries m_directoryList;
     svn::Status m_mainEntry;
     bool m_isLocal;
@@ -66,12 +64,12 @@ protected:
     KAction*m_InfoAction,*m_propertyAction;
 
     SvnActions*m_SvnWrapper;
-    CContextListener*m_SvnContext;
     /* the parent entry must removed from list before */
     void insertDirs(FileListViewItem * _parent,svn::StatusEntries&);
     bool checkDirs(const QString&,FileListViewItem * _parent);
-    svn::Client* svnclient(){return &m_Svnclient;}
     void setupActions();
+    svn::Client*svnclient();
+
     void enableSingleActions(bool how,bool forDir=false);
 
     FileListViewItem* singleSelected();

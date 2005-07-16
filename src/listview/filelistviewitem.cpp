@@ -21,6 +21,7 @@
 #include "kdesvnfilelist.h"
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"
+#include "svncpp/exception.hpp"
 
 #include <qfileinfo.h>
 #include <klocale.h>

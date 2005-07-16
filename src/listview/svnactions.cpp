@@ -22,6 +22,7 @@
 #include "filelistviewitem.h"
 #include "rangeinput_impl.h"
 #include "propertiesdlg.h"
+#include "ccontextlistener.h"
 #include "svnlogdlgimp.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
@@ -45,19 +46,40 @@
 #endif
 
 SvnActions::SvnActions(QObject *parent, const char *name)
- : QObject(parent, name),m_ParentList(0)
+ : QObject(parent, name),m_ParentList(0),m_CurrentContext(0),m_SvnContext(new CContextListener(this))
 {
+    connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
 
 SvnActions::SvnActions(kdesvnfilelist *parent, const char *name)
- : QObject(parent, name),m_ParentList(parent)
+ : QObject(parent, name),m_ParentList(parent),m_CurrentContext(0),m_SvnContext(new CContextListener(this))
 {
+    connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
 
 SvnActions::~SvnActions()
 {
+    if (m_CurrentContext) {
+        delete m_CurrentContext;
+        m_CurrentContext = 0;
+    }
 }
 
+void SvnActions::slotNotifyMessage(const QString&aMsg)
+{
+    emit sendNotify(aMsg);
+}
+
+void SvnActions::reInitClient()
+{
+    if (m_CurrentContext) {
+        delete m_CurrentContext;
+        m_CurrentContext = 0;
+    }
+    m_CurrentContext = new svn::Context();
+    m_CurrentContext->setListener(m_SvnContext);
+    m_Svnclient.setContext(m_CurrentContext);
+}
 
 #include "svnactions.moc"
 
@@ -98,7 +120,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     const svn::LogEntries * logs;
     QString ex;
     try {
-        logs = m_ParentList->svnclient()->log(k->fullName().local8Bit(),start,end,true);
+        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -169,7 +191,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     svn::Path p(k->fullName().local8Bit());
 
     try {
-        blame = m_ParentList->svnclient()->annotate(p,start,end);
+        blame = m_Svnclient.annotate(p,start,end);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -244,7 +266,7 @@ void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
     QString ex;
     svn::Path p(k->fullName().local8Bit());
     try {
-        content = m_ParentList->svnclient()->cat(p,start);
+        content = m_Svnclient.cat(p,start);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -311,7 +333,7 @@ void SvnActions::slotMkdir()
     }
 
     try {
-        m_ParentList->svnclient()->mkdir(target,logMessage.local8Bit());
+        m_Svnclient.mkdir(target,logMessage.local8Bit());
     }catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -330,11 +352,11 @@ void SvnActions::slotInfo()
     QString ex;
     try {
         if (lst.count()==0) {
-            entries.push_back(m_ParentList->svnclient()->info(m_ParentList->baseUri().local8Bit()));
+            entries.push_back(m_Svnclient.info(m_ParentList->baseUri().local8Bit()));
         } else {
             FileListViewItem*item;
             for (item=lst.first();item;item=lst.next()) {
-                entries.push_back(m_ParentList->svnclient()->info(item->fullName().local8Bit()));
+                entries.push_back(m_Svnclient.info(item->fullName().local8Bit()));
             }
         }
     } catch (svn::ClientException e) {
@@ -430,7 +452,7 @@ void SvnActions::slotProperties()
 {
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
-    PropertiesDlg dlg(k->fullName(),m_ParentList->svnclient(),
+    PropertiesDlg dlg(k->fullName(),svnclient(),
         m_ParentList->isLocal()?svn_opt_revision_working:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_ParentList,SLOT(slotClientException(const QString&)));
     if (dlg.exec()!=QDialog::Accepted) {
@@ -443,11 +465,11 @@ void SvnActions::slotProperties()
     try {
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_ParentList->svnclient()->propdel(delList[pos].local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
+            m_Svnclient.propdel(delList[pos].local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
         }
         PropertiesDlg::tPropEntries::Iterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_ParentList->svnclient()->propset(it.key().local8Bit(),it.data().local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
+            m_Svnclient.propset(it.key().local8Bit(),it.data().local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
         }
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());

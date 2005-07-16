@@ -18,7 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "kdesvnfilelist.h"
-#include "ccontextlistener.h"
 #include "filelistviewitem.h"
 #include "svnactions.h"
 #include "svncpp/revision.hpp"
@@ -32,8 +31,7 @@
 #include <kmessagebox.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
- : KListView(parent, name),m_Svnclient(),m_SvnWrapper(new SvnActions(this)),
-    m_SvnContext(new CContextListener(this))
+ : KListView(parent, name),m_SvnWrapper(new SvnActions(this))
 {
     setMultiSelection(true);
     setSelectionModeExt(FileManager);
@@ -54,9 +52,14 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
-    connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
+    connect(m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
     connect(m_SvnWrapper,SIGNAL(dirAdded(const QString&,FileListViewItem*)),this,
         SLOT(slotDirAdded(const QString&,FileListViewItem*)));
+}
+
+svn::Client*kdesvnfilelist::svnclient()
+{
+    return m_SvnWrapper->svnclient();
 }
 
 void kdesvnfilelist::setupActions()
@@ -107,14 +110,9 @@ bool kdesvnfilelist::openURL( const KURL &url )
     clear();
     m_Dirsread.clear();
     m_LastException="";
-    svn::Context*nc = new svn::Context();
-    svn::Context*oc = (svn::Context*)m_Svnclient.getContext();
-    if (oc) {
-        delete oc;
-    }
-    nc->setListener(m_SvnContext);
+    m_SvnWrapper->reInitClient();
+
     m_directoryList.clear();
-    m_Svnclient.setContext(nc);
     m_baseUri = url.url();
     m_isLocal = false;
     if (url.isLocalFile()) {
@@ -141,7 +139,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     try {
         /* settings about unknown and ignored files must be setable */
         //                                       rec   all  up    noign
-        dlist = m_Svnclient.status(what.local8Bit(),false,true,false,true);
+        dlist = m_SvnWrapper->svnclient()->status(what.local8Bit(),false,true,false,true);
     } catch (svn::ClientException e) {
         //Message box!
         m_LastException = QString::fromLocal8Bit(e.message());
@@ -216,7 +214,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
     }
     svn::Status stat;
     try {
-        stat = m_Svnclient.singleStatus(newdir.local8Bit());
+        stat = m_SvnWrapper->svnclient()->singleStatus(newdir.local8Bit());
     } catch (svn::ClientException e) {
         m_LastException = QString::fromLocal8Bit(e.message());
         emit sigLogMessage(m_LastException);
@@ -243,10 +241,6 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
 
 kdesvnfilelist::~kdesvnfilelist()
 {
-    svn::Context*oc = (svn::Context*)m_Svnclient.getContext();
-    if (oc) {
-        delete oc;
-    }
 }
 
 void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)

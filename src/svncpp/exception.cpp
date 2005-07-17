@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -25,6 +25,7 @@
 
 // stl
 #include <string>
+#include <sstream>
 
 // svncpp
 #include "svncpp/exception.hpp"
@@ -43,14 +44,14 @@ namespace svn
       : message (msg)
     {
     }
-  
-  
-    Data (const Data& other) 
+
+
+    Data (const Data& other)
       : message(other.message), apr_err(other.apr_err)
     {
     }
   };
-   
+
   Exception::Exception (const char * message) throw ()
   {
     m = new Data (message);
@@ -79,7 +80,7 @@ namespace svn
   }
 
 
-  ClientException::ClientException (svn_error_t * error) throw () 
+  ClientException::ClientException (svn_error_t * error) throw ()
     : Exception ("")
   {
     if (error == 0)
@@ -87,8 +88,20 @@ namespace svn
 
     m->apr_err = error->apr_err;
     svn_error_t * next = error->child;
+    /// @todo send rapidsvn an hint that error->message may sometimes NULL!
     std::string & message = m->message;
-    message = error->message;
+    if (error->message) {
+        message = error->message;
+    } else {
+        message = "Unknown error!\n";
+        if (error->file) {
+            message+="In file ";
+            message+=error->file;
+            std::stringstream num;
+            num << " Line " << error->line;
+            message+=num.str();
+        }
+    }
     while (next != NULL && next->message != NULL)
     {
       message = message + "\n" + next->message;
@@ -99,7 +112,7 @@ namespace svn
   }
 
 
-  ClientException::ClientException (apr_status_t status) throw () 
+  ClientException::ClientException (apr_status_t status) throw ()
     : Exception ("")
   {
     m->apr_err = status;

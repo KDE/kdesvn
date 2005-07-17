@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>RangeInputDlg</class>
-<widget class="QDialog">
+<widget class="QWidget">
     <property name="name">
         <cstring>RangeInput</cstring>
     </property>
@@ -8,229 +8,164 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>473</width>
-            <height>177</height>
+            <width>364</width>
+            <height>97</height>
         </rect>
     </property>
     <property name="caption">
-        <string>Revision range</string>
+        <string>Revisions</string>
     </property>
-    <property name="sizeGripEnabled">
-        <bool>true</bool>
-    </property>
-    <vbox>
+    <hbox>
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLayoutWidget">
+        <widget class="QButtonGroup">
             <property name="name">
-                <cstring>layout18</cstring>
+                <cstring>m_startRevBox</cstring>
             </property>
-            <hbox>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>3</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="title">
+                <string>Start with revision</string>
+            </property>
+            <vbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QButtonGroup">
+                <widget class="QLayoutWidget">
                     <property name="name">
-                        <cstring>m_startRevBox</cstring>
+                        <cstring>layout16</cstring>
                     </property>
-                    <property name="title">
-                        <string>Start with revision</string>
-                    </property>
-                    <vbox>
+                    <grid>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLayoutWidget">
+                        <widget class="QRadioButton" row="1" column="0">
                             <property name="name">
-                                <cstring>layout16</cstring>
+                                <cstring>m_startStartButton</cstring>
                             </property>
-                            <grid>
-                                <property name="name">
-                                    <cstring>unnamed</cstring>
-                                </property>
-                                <widget class="QRadioButton" row="1" column="0">
-                                    <property name="name">
-                                        <cstring>m_startStartButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>START</string>
-                                    </property>
-                                </widget>
-                                <widget class="QRadioButton" row="2" column="0">
-                                    <property name="name">
-                                        <cstring>m_startHeadButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>HEAD</string>
-                                    </property>
-                                </widget>
-                                <widget class="QRadioButton" row="0" column="0">
-                                    <property name="name">
-                                        <cstring>m_startNumberButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>Number</string>
-                                    </property>
-                                    <property name="checked">
-                                        <bool>true</bool>
-                                    </property>
-                                </widget>
-                                <widget class="KIntNumInput" row="0" column="1">
-                                    <property name="name">
-                                        <cstring>m_startRevInput</cstring>
-                                    </property>
-                                </widget>
-                            </grid>
+                            <property name="text">
+                                <string>S&amp;TART</string>
+                            </property>
                         </widget>
-                    </vbox>
-                </widget>
-                <widget class="QButtonGroup">
-                    <property name="name">
-                        <cstring>m_stopRevBox</cstring>
-                    </property>
-                    <property name="title">
-                        <string>Stop with revision</string>
-                    </property>
-                    <vbox>
-                        <property name="name">
-                            <cstring>unnamed</cstring>
-                        </property>
-                        <widget class="QLayoutWidget">
+                        <widget class="QRadioButton" row="2" column="0">
                             <property name="name">
-                                <cstring>layout15</cstring>
+                                <cstring>m_startHeadButton</cstring>
                             </property>
-                            <grid>
-                                <property name="name">
-                                    <cstring>unnamed</cstring>
-                                </property>
-                                <widget class="QRadioButton" row="1" column="0">
-                                    <property name="name">
-                                        <cstring>m_stopStartButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>START</string>
-                                    </property>
-                                </widget>
-                                <widget class="KIntNumInput" row="0" column="1">
-                                    <property name="name">
-                                        <cstring>m_endRevInput</cstring>
-                                    </property>
-                                </widget>
-                                <widget class="QRadioButton" row="0" column="0">
-                                    <property name="name">
-                                        <cstring>m_stopNumberButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>Number</string>
-                                    </property>
-                                    <property name="checked">
-                                        <bool>true</bool>
-                                    </property>
-                                </widget>
-                                <widget class="QRadioButton" row="2" column="0">
-                                    <property name="name">
-                                        <cstring>m_stopHeadButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>HEAD</string>
-                                    </property>
-                                </widget>
-                            </grid>
+                            <property name="text">
+                                <string>HEAD</string>
+                            </property>
                         </widget>
-                    </vbox>
+                        <widget class="QRadioButton" row="0" column="0">
+                            <property name="name">
+                                <cstring>m_startNumberButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Number</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="KIntNumInput" row="0" column="1">
+                            <property name="name">
+                                <cstring>m_startRevInput</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>1</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                    </grid>
                 </widget>
-            </hbox>
+            </vbox>
         </widget>
-        <widget class="QLayoutWidget">
+        <widget class="QButtonGroup">
             <property name="name">
-                <cstring>layout17</cstring>
+                <cstring>m_stopRevBox</cstring>
             </property>
-            <hbox>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>3</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="title">
+                <string>Stop with revision</string>
+            </property>
+            <vbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton">
+                <widget class="QLayoutWidget">
                     <property name="name">
-                        <cstring>buttonOk</cstring>
+                        <cstring>layout15</cstring>
                     </property>
-                    <property name="text">
-                        <string>&amp;OK</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                    <property name="default">
-                        <bool>true</bool>
-                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QRadioButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_stopStartButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>START</string>
+                            </property>
+                        </widget>
+                        <widget class="KIntNumInput" row="0" column="1">
+                            <property name="name">
+                                <cstring>m_endRevInput</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>1</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="0" column="0">
+                            <property name="name">
+                                <cstring>m_stopNumberButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Number</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="2" column="0">
+                            <property name="name">
+                                <cstring>m_stopHeadButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>HEAD</string>
+                            </property>
+                        </widget>
+                    </grid>
                 </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>buttonCancel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Cancel</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <spacer>
-                    <property name="name">
-                        <cstring>Horizontal Spacing2</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>254</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>buttonHelp</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Help</string>
-                    </property>
-                    <property name="accel">
-                        <string>F1</string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-            </hbox>
+            </vbox>
         </widget>
-    </vbox>
+    </hbox>
 </widget>
 <customwidgets>
 </customwidgets>
 <connections>
-    <connection>
-        <sender>buttonOk</sender>
-        <signal>clicked()</signal>
-        <receiver>RangeInput</receiver>
-        <slot>accept()</slot>
-    </connection>
-    <connection>
-        <sender>buttonCancel</sender>
-        <signal>clicked()</signal>
-        <receiver>RangeInput</receiver>
-        <slot>reject()</slot>
-    </connection>
     <connection>
         <sender>m_startNumberButton</sender>
         <signal>toggled(bool)</signal>
@@ -267,12 +202,6 @@
         <receiver>RangeInput</receiver>
         <slot>stopNumberToggled(bool)</slot>
     </connection>
-    <connection>
-        <sender>buttonHelp</sender>
-        <signal>clicked()</signal>
-        <receiver>RangeInput</receiver>
-        <slot>onHelp()</slot>
-    </connection>
 </connections>
 <tabstops>
     <tabstop>m_startNumberButton</tabstop>
@@ -283,9 +212,6 @@
     <tabstop>m_endRevInput</tabstop>
     <tabstop>m_stopStartButton</tabstop>
     <tabstop>m_stopHeadButton</tabstop>
-    <tabstop>buttonOk</tabstop>
-    <tabstop>buttonCancel</tabstop>
-    <tabstop>buttonHelp</tabstop>
 </tabstops>
 <slots>
     <slot access="protected">stopHeadToggled(bool)</slot>
@@ -294,7 +220,6 @@
     <slot access="protected">startHeadToggled(bool)</slot>
     <slot access="protected">startBaseToggled(bool)</slot>
     <slot access="protected">startNumberToggled(bool)</slot>
-    <slot access="protected">onHelp()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

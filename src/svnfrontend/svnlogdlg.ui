@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>437</height>
+            <width>526</width>
+            <height>380</height>
         </rect>
     </property>
     <property name="caption">
@@ -24,20 +24,20 @@
         </property>
         <widget class="QSplitter">
             <property name="name">
-                <cstring>m_mainSplitter</cstring>
+                <cstring>splitter2</cstring>
             </property>
             <property name="orientation">
                 <enum>Vertical</enum>
             </property>
             <widget class="QLayoutWidget">
                 <property name="name">
-                    <cstring>layout2</cstring>
+                    <cstring>layout5</cstring>
                 </property>
-                <grid>
+                <hbox>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="KListView" row="0" column="0">
+                    <widget class="KListView">
                         <column>
                             <property name="text">
                                 <string>Author</string>
@@ -90,22 +90,16 @@
                             <enum>AllColumns</enum>
                         </property>
                         <property name="fullWidth">
-                            <bool>false</bool>
+                            <bool>true</bool>
                         </property>
                     </widget>
-                    <widget class="QLayoutWidget" row="0" column="1">
+                    <widget class="QLayoutWidget">
                         <property name="name">
-                            <cstring>Layout5</cstring>
+                            <cstring>layout3</cstring>
                         </property>
                         <vbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
-                            </property>
-                            <property name="margin">
-                                <number>0</number>
-                            </property>
-                            <property name="spacing">
-                                <number>6</number>
                             </property>
                             <widget class="QPushButton">
                                 <property name="name">
@@ -122,6 +116,20 @@
                                 </property>
                                 <property name="default">
                                     <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget class="KPushButton">
+                                <property name="name">
+                                    <cstring>m_DispPrevButton</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="text">
+                                    <string>Diff previous</string>
+                                </property>
+                                <property name="accel">
+                                    <string></string>
                                 </property>
                             </widget>
                             <widget class="QPushButton">
@@ -151,13 +159,13 @@
                                 <property name="sizeHint">
                                     <size>
                                         <width>20</width>
-                                        <height>20</height>
+                                        <height>40</height>
                                     </size>
                                 </property>
                             </spacer>
                         </vbox>
                     </widget>
-                </grid>
+                </hbox>
             </widget>
             <widget class="KTextBrowser">
                 <property name="name">
@@ -177,19 +185,27 @@
         <slot>accept()</slot>
     </connection>
     <connection>
+        <sender>m_DispPrevButton</sender>
+        <signal>clicked()</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotDispPrevious()</slot>
+    </connection>
+    <connection>
         <sender>m_LogView</sender>
         <signal>selectionChanged(QListViewItem*)</signal>
         <receiver>LogDialog</receiver>
-        <slot>slotItemChanged(QListViewItem*)</slot>
+        <slot>slotSelectionChanged(QListViewItem*)</slot>
     </connection>
 </connections>
 <slots>
-    <slot access="protected">slotItemClicked(QListViewItem*)</slot>
+    <slot access="protected">slotSelectionChanged(QListViewItem*)</slot>
     <slot access="protected">slotItemChanged(QListViewItem*)</slot>
+    <slot access="protected">slotDispPrevious()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>
     <includehint>klistview.h</includehint>
+    <includehint>kpushbutton.h</includehint>
     <includehint>ktextbrowser.h</includehint>
 </includehints>
 </UI>

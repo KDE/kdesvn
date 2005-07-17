@@ -21,8 +21,10 @@
 #include <qdatetime.h>
 #include <klistview.h>
 #include <ktextbrowser.h>
+#include <kpushbutton.h>
 
-class LogListViewItem:public KListViewItem
+#define INHERITED KListViewItem
+class LogListViewItem:public INHERITED
 {
 public:
     LogListViewItem (KListView *parent,const svn::LogEntry&);
@@ -30,6 +32,8 @@ public:
 
     static const int COL_REV,COL_AUTHOR,COL_DATE;
     const QString&message()const;
+    svn_revnum_t rev()const{return _revision;}
+
 protected:
     svn_revnum_t _revision;
     QDateTime fullDate;
@@ -41,7 +45,7 @@ const int LogListViewItem::COL_AUTHOR = 0;
 const int LogListViewItem::COL_DATE = 2;
 
 LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
-    : KListViewItem(_parent)
+    : INHERITED(_parent)
 {
     setMultiLinesEnabled(true);
     _revision=_entry.revision;
@@ -70,12 +74,12 @@ int LogListViewItem::compare( QListViewItem* item, int col, bool ) const
 }
 
 SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
-    :SvnLogDialogData(parent, name)
+    :SvnLogDialogData(parent, name),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
 }
 
-void SvnLogDlgImp::dispLog(const svn::LogEntries*_log)
+void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
 {
     if (!_log) return;
     svn::LogEntries::const_iterator lit;
@@ -83,6 +87,7 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log)
     for (lit=_log->begin();lit!=_log->end();++lit) {
         item = new LogListViewItem(m_LogView,*lit);
     }
+    _name = what;
 }
 
 #include "svnlogdlgimp.moc"
@@ -91,9 +96,38 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log)
 /*!
     \fn SvnLogDlgImp::slotItemClicked(QListViewItem*)
  */
-void SvnLogDlgImp::slotItemChanged(QListViewItem*_it)
+void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
 {
-    if (!_it) return;
+    if (!_it) {
+        m_DispPrevButton->setEnabled(false);
+        return;
+    }
+
     LogListViewItem* k = static_cast<LogListViewItem*>( _it );
     m_LogDisplay->setText(k->message());
+    k = static_cast<LogListViewItem*>(_it->nextSibling());
+    if (!k) {
+        m_DispPrevButton->setEnabled(false);
+    } else {
+        m_DispPrevButton->setEnabled(true);
+    }
+}
+
+
+/*!
+    \fn SvnLogDlgImp::slotDispPrevious()
+ */
+void SvnLogDlgImp::slotDispPrevious()
+{
+    LogListViewItem* k = static_cast<LogListViewItem*>(m_LogView->selectedItem());
+    if (!k) {
+        m_DispPrevButton->setEnabled(false);
+        return;
+    }
+    LogListViewItem* p = static_cast<LogListViewItem*>(k->nextSibling());
+    if (!p) {
+        m_DispPrevButton->setEnabled(false);
+        return;
+    }
+    emit makeDiff(_name,k->rev(),p->rev());
 }

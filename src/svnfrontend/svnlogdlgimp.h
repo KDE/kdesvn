@@ -30,9 +30,17 @@ class SvnLogDlgImp: public SvnLogDialogData {
 Q_OBJECT
 public:
     SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
-    void dispLog(const svn::LogEntries*);
+    void dispLog(const svn::LogEntries*,const QString&);
+
+signals:
+    void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
+
 protected slots:
-    virtual void slotItemChanged(QListViewItem*);
+    virtual void slotSelectionChanged(QListViewItem*);
+protected slots:
+    virtual void slotDispPrevious();
+protected:
+    QString _name;
 };
 
 #endif

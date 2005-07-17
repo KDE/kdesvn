@@ -21,6 +21,7 @@
 
 #include "kdesvnview.h"
 #include "svnfrontend/kdesvnfilelist.h"
+#include "svncpp/url.hpp"
 
 #include <qpainter.h>
 #include <qlayout.h>
@@ -94,8 +95,12 @@ void kdesvnView::openURL(const KURL& url)
         if (!f.isDir()) {
             return;
         }
-    } else if (url.protocol()!="http"&&url.protocol()!="https") {
-        return;
+    } else {
+        QString prot = url.protocol();
+        if (!prot.endsWith(":")) prot+=":";
+        if (!svn::Url::isValid(prot.local8Bit())) {
+            return;
+        }
     }
     m_LogWindow->setText("");
     slotSetTitle(url.prettyURL());

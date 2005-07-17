@@ -196,7 +196,7 @@ void kdesvn::fileNew()
 
 void kdesvn::urlOpen()
 {
-    KURL url = KURLRequesterDlg::getURL("http://",this,i18n("Open remote"));
+    KURL url = KURLRequesterDlg::getURL("http://",this,i18n("Open remote repository"));
     if (!url.isEmpty())
         m_view->openURL(url);
 }
@@ -211,7 +211,7 @@ void kdesvn::fileOpen()
     KURL url = KURLRequesterDlg::getURL(QString::null, this, i18n("Open Location") );
 */
     // standard filedialog
-    KURL url = KFileDialog::getExistingDirectory(QString::null, this, i18n("Open Location"));
+    KURL url = KFileDialog::getExistingDirectory(QString::null, this, i18n("Open working copy"));
     if (!url.isEmpty())
         m_view->openURL(url);
 }
@@ -284,7 +284,7 @@ void kdesvn::changeCaption(const QString& text)
 
 void kdesvn::resetStatusBar()
 {
-    statusBar()->message(I18N_NOOP("Ready"));
+    statusBar()->message(i18n("Ready"));
 }
 
 #include "kdesvn.moc"

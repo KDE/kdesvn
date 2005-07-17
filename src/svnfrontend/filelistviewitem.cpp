@@ -112,22 +112,27 @@ void FileListViewItem::update(KFileItem*_item)
     update();
 }
 
+void FileListViewItem::refreshMe()
+{
+    try {
+        stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
+    } catch (svn::ClientException e) {
+        setText(COL_STATUS,e.message());
+        return;
+    } catch (...) {
+        qDebug("Execption catched");
+        setText(COL_STATUS,"?");
+        return;
+    }
+    update();
+}
+
 void FileListViewItem::refreshStatus(bool childs,QPtrList<FileListViewItem>*exclude,bool depsonly)
 {
     FileListViewItem*it;
 
     if (!depsonly) {
-        try {
-        stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
-        } catch (svn::ClientException e) {
-            setText(COL_STATUS,e.message());
-            return;
-        } catch (...) {
-            qDebug("Execption catched");
-            setText(COL_STATUS,"?");
-            return;
-        }
-        update();
+        refreshMe();
     }
     it = static_cast<FileListViewItem*>(parent());;
     if (!childs) {

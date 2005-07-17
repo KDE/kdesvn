@@ -8,14 +8,14 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>364</width>
-            <height>97</height>
+            <width>401</width>
+            <height>308</height>
         </rect>
     </property>
     <property name="caption">
         <string>Revisions</string>
     </property>
-    <hbox>
+    <vbox>
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
@@ -40,40 +40,13 @@
                 </property>
                 <widget class="QLayoutWidget">
                     <property name="name">
-                        <cstring>layout16</cstring>
+                        <cstring>layout5</cstring>
                     </property>
                     <grid>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QRadioButton" row="1" column="0">
-                            <property name="name">
-                                <cstring>m_startStartButton</cstring>
-                            </property>
-                            <property name="text">
-                                <string>S&amp;TART</string>
-                            </property>
-                        </widget>
-                        <widget class="QRadioButton" row="2" column="0">
-                            <property name="name">
-                                <cstring>m_startHeadButton</cstring>
-                            </property>
-                            <property name="text">
-                                <string>HEAD</string>
-                            </property>
-                        </widget>
-                        <widget class="QRadioButton" row="0" column="0">
-                            <property name="name">
-                                <cstring>m_startNumberButton</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Number</string>
-                            </property>
-                            <property name="checked">
-                                <bool>true</bool>
-                            </property>
-                        </widget>
-                        <widget class="KIntNumInput" row="0" column="1">
+                        <widget class="KIntNumInput" row="0" column="2">
                             <property name="name">
                                 <cstring>m_startRevInput</cstring>
                             </property>
@@ -84,6 +57,55 @@
                                     <horstretch>0</horstretch>
                                     <verstretch>0</verstretch>
                                 </sizepolicy>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="3" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_startHeadButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>HEAD</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="0" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_startNumberButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>N&amp;umber</string>
+                            </property>
+                            <property name="accel">
+                                <string>Alt+U</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_startDateButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Date</string>
+                            </property>
+                            <property name="accel">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="2" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_startStartButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>S&amp;TART</string>
+                            </property>
+                            <property name="accel">
+                                <string>Alt+T</string>
+                            </property>
+                        </widget>
+                        <widget class="KDateTimeWidget" row="1" column="1" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_startDateInput</cstring>
                             </property>
                         </widget>
                     </grid>
@@ -111,13 +133,13 @@
                 </property>
                 <widget class="QLayoutWidget">
                     <property name="name">
-                        <cstring>layout15</cstring>
+                        <cstring>layout6</cstring>
                     </property>
                     <grid>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QRadioButton" row="1" column="0">
+                        <widget class="QRadioButton" row="2" column="0" rowspan="1" colspan="2">
                             <property name="name">
                                 <cstring>m_stopStartButton</cstring>
                             </property>
@@ -125,7 +147,42 @@
                                 <string>START</string>
                             </property>
                         </widget>
-                        <widget class="KIntNumInput" row="0" column="1">
+                        <widget class="QRadioButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_stopDateButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Date</string>
+                            </property>
+                            <property name="accel">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="3" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_stopHeadButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>HEAD</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="0" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_stopNumberButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Number</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="KDateTimeWidget" row="1" column="1" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_stopDateInput</cstring>
+                            </property>
+                        </widget>
+                        <widget class="KIntNumInput" row="0" column="2">
                             <property name="name">
                                 <cstring>m_endRevInput</cstring>
                             </property>
@@ -138,30 +195,11 @@
                                 </sizepolicy>
                             </property>
                         </widget>
-                        <widget class="QRadioButton" row="0" column="0">
-                            <property name="name">
-                                <cstring>m_stopNumberButton</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Number</string>
-                            </property>
-                            <property name="checked">
-                                <bool>true</bool>
-                            </property>
-                        </widget>
-                        <widget class="QRadioButton" row="2" column="0">
-                            <property name="name">
-                                <cstring>m_stopHeadButton</cstring>
-                            </property>
-                            <property name="text">
-                                <string>HEAD</string>
-                            </property>
-                        </widget>
                     </grid>
                 </widget>
             </vbox>
         </widget>
-    </hbox>
+    </vbox>
 </widget>
 <customwidgets>
 </customwidgets>
@@ -202,6 +240,18 @@
         <receiver>RangeInput</receiver>
         <slot>stopNumberToggled(bool)</slot>
     </connection>
+    <connection>
+        <sender>m_stopDateButton</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>RangeInput</receiver>
+        <slot>stopDateToggled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_startDateButton</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>RangeInput</receiver>
+        <slot>startDateToggled(bool)</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>m_startNumberButton</tabstop>
@@ -220,11 +270,19 @@
     <slot access="protected">startHeadToggled(bool)</slot>
     <slot access="protected">startBaseToggled(bool)</slot>
     <slot access="protected">startNumberToggled(bool)</slot>
+    <slot access="protected">startDateToggled(bool)</slot>
+    <slot access="protected">stopDateToggled(bool)</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>
+    <includehint>kdatetimewidget.h</includehint>
+    <includehint>kdatewidget.h</includehint>
+    <includehint>ktimewidget.h</includehint>
+    <includehint>kdatetimewidget.h</includehint>
+    <includehint>kdatewidget.h</includehint>
+    <includehint>ktimewidget.h</includehint>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>
 </includehints>

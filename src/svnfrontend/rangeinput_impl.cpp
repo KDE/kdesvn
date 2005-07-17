@@ -22,12 +22,19 @@
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <knuminput.h>
+#include <kdatetimewidget.h>
+#include <qbuttongroup.h>
+#include <klocale.h>
 
 Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
     :RangeInputDlg(parent, name)
 {
     m_startRevInput->setRange(0,INT_MAX,1,false);
     m_endRevInput->setRange(0,INT_MAX,1,false);
+    m_startDateInput->setDateTime(QDateTime::currentDateTime ());
+    m_stopDateInput->setDateTime(QDateTime::currentDateTime ());
+    m_stopDateInput->setEnabled(false);
+    m_startDateInput->setEnabled(false);
 }
 
 Rangeinput_impl::~Rangeinput_impl()
@@ -37,16 +44,25 @@ Rangeinput_impl::~Rangeinput_impl()
 void Rangeinput_impl::startNumberToggled(bool how)
 {
     m_startRevInput->setEnabled(how);
+    if (how) {
+        m_startDateInput->setEnabled(!how);
+    }
 }
 
 void Rangeinput_impl::startBaseToggled(bool how)
 {
-    if (how) m_startRevInput->setEnabled(!how);
+    if (how) {
+        m_startRevInput->setEnabled(!how);
+        m_startDateInput->setEnabled(!how);
+    }
 }
 
 void Rangeinput_impl::startHeadToggled(bool how)
 {
-    if (how) m_startRevInput->setEnabled(!how);
+    if (how) {
+        m_startRevInput->setEnabled(!how);
+        m_startDateInput->setEnabled(!how);
+    }
 }
 
 void Rangeinput_impl::onHelp()
@@ -56,23 +72,33 @@ void Rangeinput_impl::onHelp()
 
 void Rangeinput_impl::stopHeadToggled(bool how)
 {
-    if (how) m_endRevInput->setEnabled(!how);
+    if (how) {
+        m_endRevInput->setEnabled(!how);
+        m_stopDateInput->setEnabled(!how);
+    }
 }
 
 
 void Rangeinput_impl::stopBaseToggled(bool how)
 {
-    if (how) m_endRevInput->setEnabled(!how);
+    if (how) {
+        m_endRevInput->setEnabled(!how);
+        m_stopDateInput->setEnabled(!how);
+    }
 }
 
 
 void Rangeinput_impl::stopNumberToggled(bool how)
 {
     m_endRevInput->setEnabled(how);
+    if (how) {
+        m_stopDateInput->setEnabled(!how);
+    }
 }
 
 Rangeinput_impl::revision_range Rangeinput_impl::getRange()
 {
+    apr_time_t r;
     revision_range ret;
     if (m_startStartButton->isChecked()) {
         ret.first = svn::Revision::START;
@@ -80,6 +106,10 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
         ret.first = svn::Revision::HEAD;
     } else if (m_startNumberButton->isChecked()) {
         ret.first = m_startRevInput->value();
+    } else if (m_startDateButton->isChecked()) {
+        QDateTime f = m_startDateInput->dateTime();
+        apr_time_ansi_put(&r,f.toTime_t());
+        ret.first=svn::DateTime(r);
     }
     if (m_stopStartButton->isChecked()) {
         ret.second = svn::Revision::START;
@@ -87,8 +117,48 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
         ret.second = svn::Revision::HEAD;
     } else if (m_stopNumberButton->isChecked()) {
         ret.second = m_endRevInput->value();
+    } else if (m_stopDateButton->isChecked()) {
+        QDateTime f = m_stopDateInput->dateTime();
+        apr_time_ansi_put(&r,f.toTime_t());
+        ret.second=svn::DateTime(r);
     }
     return ret;
 }
 
+void Rangeinput_impl::stopDateToggled(bool how)
+{
+    m_stopDateInput->setEnabled(how);
+    if (how) {
+        m_endRevInput->setEnabled(!how);
+    }
+}
+
+
+void Rangeinput_impl::startDateToggled(bool how)
+{
+    m_startDateInput->setEnabled(how);
+    if (how) {
+        m_startRevInput->setEnabled(!how);
+    }
+}
+
 #include "rangeinput_impl.moc"
+
+
+bool Rangeinput_impl::StartOnly() const
+{
+    return m_StartOnly;
+}
+
+
+void Rangeinput_impl::setStartOnly(bool theValue)
+{
+    m_StartOnly = theValue;
+    if (m_StartOnly) {
+        m_stopRevBox->hide();
+        m_startRevBox->setTitle(i18n("Select revision"));
+    } else {
+        m_stopRevBox->show();
+        m_startRevBox->setTitle(i18n( "Start with revision" ));
+    }
+}

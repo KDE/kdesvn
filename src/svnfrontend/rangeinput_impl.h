@@ -34,6 +34,12 @@ public:
 
     revision_range getRange();
 
+    void setStartOnly(bool theValue);
+
+
+    bool StartOnly() const;
+
+
 protected slots:
     virtual void onHelp();
     virtual void stopHeadToggled(bool);
@@ -42,6 +48,10 @@ protected slots:
     virtual void startHeadToggled(bool);
     virtual void startBaseToggled(bool);
     virtual void startNumberToggled(bool);
+    virtual void stopDateToggled(bool);
+    virtual void startDateToggled(bool);
+protected:
+    bool m_StartOnly;
 };
 
 #endif

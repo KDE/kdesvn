@@ -197,7 +197,7 @@ template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,b
     Dialog1Layout->addLayout(blayout);
     connect( buttonOk, SIGNAL( clicked() ), dlg, SLOT( accept() ) );
 
-    dlg->resize( QSize(640,480).expandedTo(dlg->minimumSizeHint()) );
+    dlg->resize( QSize(320,240).expandedTo(dlg->minimumSizeHint()) );
     return dlg;
 }
 
@@ -640,10 +640,91 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     delete proc;
 #endif
     KTextBrowser*ptr;
-    QDialog*dlg = createDialog(&ptr,QString(i18n("Diffdisp")));
+    QDialog*dlg = createDialog(&ptr,QString(i18n("Diff display")));
     if (dlg) {
         ptr->setText(ex);
         dlg->exec();
         delete dlg;
     }
+}
+
+
+/*!
+    \fn SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
+ */
+void SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
+{
+    QString ex;
+    try {
+        ex = m_Svnclient.update(svn::Path(what.local8Bit()),
+            rev, recurse);
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+}
+
+/*!
+    \fn SvnActions::slotUpdateHeadRec()
+ */
+void SvnActions::slotUpdateHeadRec()
+{
+    prepareUpdate(false);
+}
+
+
+/*!
+    \fn SvnActions::prepareUpdate(bool ask)
+ */
+void SvnActions::prepareUpdate(bool ask)
+{
+    if (!m_ParentList||!m_ParentList->isLocal()) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    QString what;
+    if (!k) {
+        if (m_ParentList->allSelected().count()>0) {
+            KMessageBox::error(m_ParentList,i18n("Cannot make multiple updates"));
+            return;
+        } else {
+            what=m_ParentList->baseUri();
+            k=static_cast<FileListViewItem*>(m_ParentList->firstChild());
+        }
+    } else {
+        what=k->fullName();
+    }
+    svn::Revision r(svn::Revision::HEAD);
+    if (ask) {
+        Rangeinput_impl*rdlg;
+        QDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true);
+        if (!dlg) {
+            return;
+        }
+        rdlg->setStartOnly(true);
+        /* just here cause layout has changed meanwhile */
+        dlg->resize( QSize(120,60).expandedTo(dlg->minimumSizeHint()) );
+        int result;
+        if ((result=dlg->exec())==QDialog::Accepted) {
+            Rangeinput_impl::revision_range range = rdlg->getRange();
+            r=range.first;
+        }
+        delete dlg;
+        if (result!=QDialog::Accepted) return;
+    }
+    makeUpdate(what,r,true);
+    if (k) {
+        k->removeChilds();
+        k->refreshMe();
+        m_ParentList->checkDirs(what,k);
+        k->refreshStatus();
+    }
+}
+
+
+/*!
+    \fn SvnActions::slotUpdateTo()
+ */
+void SvnActions::slotUpdateTo()
+{
+    prepareUpdate(true);
 }

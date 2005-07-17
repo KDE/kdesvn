@@ -29,6 +29,7 @@
 #include <kactioncollection.h>
 #include <kshortcut.h>
 #include <kmessagebox.h>
+#include <kapp.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
  : KListView(parent, name),m_SvnWrapper(new SvnActions(this))
@@ -74,6 +75,8 @@ void kdesvnfilelist::setupActions()
     // m_BlameRangeAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_InfoAction = new KAction("Details",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
+    m_UpdateHead = new KAction("Update to head",KShortcut(),m_SvnWrapper,SLOT(slotUpdateHeadRec()),m_filesAction,"make_svn_headupdate");
+    m_UpdateRev = new KAction("Update to revision...",KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
     m_commitAction = new KAction("Commit",KShortcut(),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
     m_simpleDiffHead = new KAction("Diff against head",KShortcut(),m_SvnWrapper,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
 
@@ -131,6 +134,8 @@ bool kdesvnfilelist::openURL( const KURL &url )
     m_InfoAction->setEnabled(m_isLocal);
     m_commitAction->setEnabled(m_isLocal);
     m_simpleDiffHead->setEnabled(m_isLocal);
+    m_UpdateHead->setEnabled(m_isLocal);
+    m_UpdateRev->setEnabled(m_isLocal);
 
     return result;
 }
@@ -304,4 +309,5 @@ void kdesvnfilelist::slotClientException(const QString&what)
 void kdesvnfilelist::slotNotifyMessage(const QString&what)
 {
     emit sigLogMessage(what);
+    kapp->processEvents(20);
 }

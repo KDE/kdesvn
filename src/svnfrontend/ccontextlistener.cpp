@@ -22,6 +22,7 @@
 #include <klocale.h>
 #include <kinputdialog.h>
 #include <klocale.h>
+#include <qtextstream.h>
 
 const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
 
@@ -36,7 +37,7 @@ const QString CContextListener::action_strings[]={
     i18n("Skip"),
     i18n("Deleted"),
     i18n("Added"),
-    i18n("Updated"),
+    i18n("Update"),
     i18n("Update complete"),
     i18n("Update external"),
     i18n("Status complete"),
@@ -97,9 +98,13 @@ void CContextListener::contextNotify (const char *path,
     if (aString.isEmpty()) {
         return;
     }
-    QString msg = QString("%1 %2 (Rev %3)").arg(NotifyAction(action)).
-        arg(QString::fromLocal8Bit(path)).
-        arg(revision);
+    QString msg;
+    QTextStream ts(&msg,IO_WriteOnly);
+
+    ts << NotifyAction(action) << " " << QString::fromLocal8Bit(path);
+    if (revision>-1) {
+        ts << " (Rev "<<revision<<")";
+    }
     emit sendNotify(msg);
 }
 
@@ -133,6 +138,5 @@ bool CContextListener::contextSslClientCertPwPrompt (std::string & /* password *
 {
     return false;
 }
-
 
 #include "ccontextlistener.moc"

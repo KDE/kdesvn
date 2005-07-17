@@ -30,6 +30,7 @@ class FileListViewItem;
 class KDialog;
 class QDialog;
 class CContextListener;
+class KProcess;
 
 namespace svn {
     class Context;
@@ -73,11 +74,17 @@ public slots:
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();
+    virtual void slotSimpleDiff();
+    virtual void slotSimpleDiffBase();
+    virtual void makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end);
 
 signals:
     void clientException(const QString&);
     void dirAdded(const QString&,FileListViewItem*);
     void sendNotify(const QString&);
+protected slots:
+    virtual void wroteStdin(KProcess*);
+    virtual void procClosed(KProcess*);
 };
 
 #endif

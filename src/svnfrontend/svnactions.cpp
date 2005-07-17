@@ -41,6 +41,8 @@
 #include <kmessagebox.h>
 #include <kinputdialog.h>
 #include <qvaluelist.h>
+#include <kprocess.h>
+#include <ktempfile.h>
 
 #if 0
 #include <khtml_part.h>
@@ -94,9 +96,13 @@ void SvnActions::slotMakeRangeLog()
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
-    Rangeinput_impl rdlg;
-    if (rdlg.exec()==QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg.getRange();
+    Rangeinput_impl*rdlg;
+    QDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true);
+    if (!dlg) {
+        return;
+    }
+    if (dlg->exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
         makeLog(r.first,r.second,k);
     }
 }
@@ -135,7 +141,9 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
         return;
     }
     SvnLogDlgImp disp;
-    disp.dispLog(logs);
+    disp.dispLog(logs,k->fullName());
+    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
+            this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
     disp.exec();
     delete logs;
 }
@@ -160,17 +168,17 @@ template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,b
     KDialog * dlg = new KDialog();
     if (!dlg) return dlg;
     dlg->setCaption(_head);
-    QHBoxLayout* Dialog1Layout;
+    QVBoxLayout* Dialog1Layout;
 
-    QVBoxLayout* blayout;
+    QHBoxLayout* blayout;
     QSpacerItem* Spacer1;
-    Dialog1Layout = new QHBoxLayout( dlg, 2, 2, "Dialog1Layout");
+    Dialog1Layout = new QVBoxLayout( dlg, 2, 2, "Dialog1Layout");
     *ptr = new T(dlg);
 
     Dialog1Layout->addWidget( *ptr );
 
     /* button */
-    blayout = new QVBoxLayout( 0, 0, 6, "blayout");
+    blayout = new QHBoxLayout( 0, 2, 2, "blayout");
     QPushButton*buttonOk = new QPushButton( dlg, "buttonOk" );
     buttonOk->setAutoDefault( TRUE );
     buttonOk->setDefault( TRUE );
@@ -184,7 +192,7 @@ template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,b
         blayout->addWidget( buttonCancel );
         connect( buttonCancel, SIGNAL(clicked()), dlg, SLOT(reject()));
     }
-    Spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    Spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     blayout->addItem( Spacer1 );
     Dialog1Layout->addLayout(blayout);
     connect( buttonOk, SIGNAL( clicked() ), dlg, SLOT( accept() ) );
@@ -265,11 +273,16 @@ void SvnActions::slotRangeBlame()
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
-    Rangeinput_impl rdlg;
-    if (rdlg.exec()==QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg.getRange();
+    Rangeinput_impl*rdlg;
+    QDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true);
+    if (!dlg) {
+        return;
+    }
+    if (dlg->exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
         makeBlame(r.first,r.second,k);
     }
+    delete dlg;
 }
 
 void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
@@ -466,7 +479,7 @@ void SvnActions::slotProperties()
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
     PropertiesDlg dlg(k->fullName(),svnclient(),
-        m_ParentList->isLocal()?svn_opt_revision_working:svn::Revision::HEAD);
+        m_ParentList->isLocal()?svn::Revision::WORKING:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_ParentList,SLOT(slotClientException(const QString&)));
     if (dlg.exec()!=QDialog::Accepted) {
         return;
@@ -538,5 +551,99 @@ void SvnActions::slotCommit()
         } else {
             which.at(j)->refreshStatus(false,&which,false);
         }
+    }
+}
+
+/*!
+    \fn SvnActions::slotSimpleDiffBase
+    /// @error sinnlos da es nicht funktioniert :(
+ */
+void SvnActions::slotSimpleDiffBase()
+{
+    if (!m_ParentList) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    QString what;
+    if (k) {
+        what=k->fullName();
+    } else {
+        if (m_ParentList->isLocal()) {
+            what=m_ParentList->baseUri();
+        } else {
+            KMessageBox::error(m_ParentList,"On remote brosing you must select an item!");
+            return;
+        }
+    }
+    makeDiff(what,svn::Revision::HEAD,svn::Revision::BASE);
+}
+
+/*!
+    \fn SvnActions::slotSimpleDiff()
+ */
+void SvnActions::slotSimpleDiff()
+{
+    if (!m_ParentList) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    QString what;
+    if (!k) {
+        what=m_ParentList->baseUri();
+    }else{
+        what=k->fullName();
+    }
+    makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD);
+}
+
+
+/*!
+    \fn SvnActions::wroteStdin(KProcess*)
+ */
+void SvnActions::wroteStdin(KProcess*proc)
+{
+    if (!proc) return;
+    proc->closeStdin();
+}
+
+void SvnActions::procClosed(KProcess*proc)
+{
+    if (!proc) return;
+    delete proc;
+}
+
+
+/*!
+    \fn SvnActions::makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end)
+ */
+void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
+{
+    QString ex;
+    KTempFile tfile;
+    try {
+        ex = m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
+            svn::Path(what.local8Bit()),
+            start, end,
+            true,false,false);
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+#if 1
+    /// @todo make it setable
+    KProcess *proc = new KProcess();
+    *proc << "kompare";
+    *proc << "-";
+    connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
+    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+    if (proc->start(KProcess::NotifyOnExit,KProcess::Stdin)) {
+        proc->writeStdin(ex.ascii(),ex.length());
+        return;
+    }
+    delete proc;
+#endif
+    KTextBrowser*ptr;
+    QDialog*dlg = createDialog(&ptr,QString(i18n("Diffdisp")));
+    if (dlg) {
+        ptr->setText(ex);
+        dlg->exec();
+        delete dlg;
     }
 }

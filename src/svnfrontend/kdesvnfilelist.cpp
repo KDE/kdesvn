@@ -75,10 +75,12 @@ void kdesvnfilelist::setupActions()
     m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_InfoAction = new KAction("Details",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_commitAction = new KAction("Commit",KShortcut(),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
+    m_simpleDiffHead = new KAction("Diff against head",KShortcut(),m_SvnWrapper,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
     m_commitAction->setEnabled(false);
+    m_simpleDiffHead->setEnabled(false);
     enableSingleActions(false);
 }
 
@@ -128,6 +130,7 @@ bool kdesvnfilelist::openURL( const KURL &url )
     m_MkdirAction->setEnabled(result);
     m_InfoAction->setEnabled(m_isLocal);
     m_commitAction->setEnabled(m_isLocal);
+    m_simpleDiffHead->setEnabled(m_isLocal);
 
     return result;
 }
@@ -267,6 +270,7 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
     /* blame buggy in lib */
     //m_BlameAction->setEnabled(false);
     m_BlameAction->setEnabled(how&&!_Dir);
+//    m_simpleDiffHead->setEnabled(how&&m_isLocal);
     //m_BlameRangeAction->setEnabled(how&&!_Dir);
 }
 

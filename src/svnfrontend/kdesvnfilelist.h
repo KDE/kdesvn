@@ -61,7 +61,7 @@ protected:
 
     KActionCollection* m_filesAction;
     KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction,*m_MkdirAction;
-    KAction*m_InfoAction,*m_propertyAction,*m_commitAction;
+    KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead;
 
     SvnActions*m_SvnWrapper;
     /* the parent entry must removed from list before */

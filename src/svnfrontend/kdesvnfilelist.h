@@ -84,6 +84,7 @@ protected slots:
     virtual void slotDirAdded(const QString&,FileListViewItem*);
 signals:
     void sigLogMessage(const QString&);
+    void changeCaption(const QString&);
 };
 
 #endif

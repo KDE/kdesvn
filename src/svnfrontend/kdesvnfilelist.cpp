@@ -144,6 +144,11 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_AddCurrent->setEnabled(m_isLocal);
     m_DelCurrent->setEnabled(true);
 
+    if (result) {
+        emit changeCaption(m_baseUri);
+    } else {
+        emit changeCaption(i18n("No repository opend"));
+    }
     return result;
 }
 

@@ -52,13 +52,13 @@
 #endif
 
 SvnActions::SvnActions(QObject *parent, const char *name)
- : QObject(parent, name),m_ParentList(0),m_CurrentContext(0),m_SvnContext(new CContextListener(this))
+ : QObject(parent, name),m_ParentList(0),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
 {
     connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
 
 SvnActions::SvnActions(kdesvnfilelist *parent, const char *name)
- : QObject(parent, name),m_ParentList(parent),m_CurrentContext(0),m_SvnContext(new CContextListener(this))
+ : QObject(parent, name),m_ParentList(parent),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
 {
     connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
@@ -830,6 +830,9 @@ void SvnActions::slotCheckout()
             svn::Revision r = ptr->toRevision();
             svn::Path p(ptr->targetDir().local8Bit());
             QString fUrl = ptr->reposURL();
+            while (fUrl.endsWith("/")) {
+                fUrl.truncate(fUrl.length()-1);
+            }
             bool force = ptr->forceIt();
             reInitClient();
             try {

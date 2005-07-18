@@ -54,6 +54,7 @@ kdesvnView::kdesvnView(QWidget *parent)
     m_LogWindow=new KTextBrowser(m_Splitter);
     top_layout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
+    connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString& title)));
 }
 
 void kdesvnView::slotAppendLog(const QString& text)

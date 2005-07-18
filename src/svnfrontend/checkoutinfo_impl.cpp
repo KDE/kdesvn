@@ -55,4 +55,9 @@ bool CheckoutInfo_impl::forceIt()
     return m_forceButton->isChecked();
 }
 
+void CheckoutInfo_impl::setStartUrl(const QString&what)
+{
+    m_UrlEdit->setText(what);
+}
+
 #include "checkoutinfo_impl.moc"

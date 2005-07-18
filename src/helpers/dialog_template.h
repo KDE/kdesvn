@@ -17,25 +17,12 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef CHECKOUTINFO_IMPL_H
-#define CHECKOUTINFO_IMPL_H
 
-#include "checkoutinfo.h"
-#include "svncpp/revision.hpp"
-#include "kurl.h"
+#ifndef __DIALOG_HELPER_H
+#define __DIALOG_HELPER_H
 
-class CheckoutInfo_impl: public CheckoutInfo {
-Q_OBJECT
-public:
-    CheckoutInfo_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~CheckoutInfo_impl();
+namespace extras {
 
-    svn::Revision toRevision();
-    QString reposURL();
-    QString targetDir();
 
-    bool forceIt();
-    void setStartUrl(const QString&);
-};
-
+} // namespace extras end
 #endif

@@ -14,7 +14,7 @@
     </keywords>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
+    <description></description>
     <ignoreparts/>
     <versioncontrol>kdevsubversion</versioncontrol>
     <secondaryLanguages/>
@@ -121,15 +121,15 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs/>
-      <gdbpath/>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
       <runappinappdirectory>true</runappinappdirectory>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
     </general>
     <display>
       <staticmembers>false</staticmembers>
@@ -172,8 +172,9 @@
   </kdevclassview>
   <kdevdocumentation>
     <projectdoc>
-      <docsystem>Doxygen Documentation Collection</docsystem>
+      <docsystem>Doxygen-Dokumentation</docsystem>
       <docurl>kdesvn.tag</docurl>
+      <usermanualurl></usermanualurl>
     </projectdoc>
   </kdevdocumentation>
   <substmap>
@@ -190,7 +191,10 @@
     <dest>/home/ral/progs/Projekte/kdesvn</dest>
   </substmap>
   <kdevcppsupport>
-    <references/>
+    <references>
+      <pcs>KDElibs</pcs>
+      <pcs>Qt</pcs>
+    </references>
     <codecompletion>
       <includeGlobalFunctions>true</includeGlobalFunctions>
       <includeTypes>true</includeTypes>
@@ -211,7 +215,7 @@
       </qtdesigner>
     </designerintegration>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>

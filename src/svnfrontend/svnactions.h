@@ -22,6 +22,7 @@
 
 #include <qobject.h>
 #include <qdatetime.h>
+#include <qstringlist.h>
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 
@@ -83,7 +84,13 @@ public slots:
     virtual void slotUpdateTo();
     virtual void slotAdd();
     virtual void slotDelete();
+
+    virtual void makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force);
+    virtual void slotCheckoutCurrent();
     virtual void slotCheckout();
+
+    virtual void slotRevert();
+    virtual void slotRevertItems(const QStringList&);
 
 signals:
     void clientException(const QString&);

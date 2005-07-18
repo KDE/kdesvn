@@ -31,6 +31,7 @@
 #include "svncpp/annotate_line.hpp"
 #include "svncpp/context_listener.hpp"
 #include "svncpp/targets.hpp"
+#include "helpers/dialog_template.h"
 
 #include <qstring.h>
 #include <qmap.h>
@@ -45,6 +46,7 @@
 #include <qvaluelist.h>
 #include <kprocess.h>
 #include <ktempfile.h>
+#include <kdialogbase.h>
 
 #if 0
 #include <khtml_part.h>
@@ -88,6 +90,44 @@ void SvnActions::reInitClient()
 }
 
 #include "svnactions.moc"
+
+template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel)
+{
+    KDialog * dlg = new KDialog();
+    if (!dlg) return dlg;
+    dlg->setCaption(_head);
+    QVBoxLayout* Dialog1Layout;
+
+    QHBoxLayout* blayout;
+    QSpacerItem* Spacer1;
+    Dialog1Layout = new QVBoxLayout( dlg, 2, 2, "Dialog1Layout");
+    *ptr = new T(dlg);
+
+    Dialog1Layout->addWidget( *ptr );
+
+    /* button */
+    blayout = new QHBoxLayout( 0, 2, 2, "blayout");
+    QPushButton*buttonOk = new QPushButton( dlg, "buttonOk" );
+    buttonOk->setAutoDefault( TRUE );
+    buttonOk->setDefault( TRUE );
+    blayout->addWidget( buttonOk );
+    if (!OkCancel) {
+        buttonOk->setText( i18n( "&Close" ) );
+    } else {
+        buttonOk->setText( i18n( "&Ok" ) );
+        QPushButton*buttonCancel = new QPushButton( dlg, "buttonCancel" );
+        buttonCancel->setText(i18n("&Cancel"));
+        blayout->addWidget( buttonCancel );
+        connect( buttonCancel, SIGNAL(clicked()), dlg, SLOT(reject()));
+    }
+    Spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
+    blayout->addItem( Spacer1 );
+    Dialog1Layout->addLayout(blayout);
+    QObject::connect( buttonOk, SIGNAL( clicked() ), dlg, SLOT( accept() ) );
+
+    dlg->resize( QSize(320,240).expandedTo(dlg->minimumSizeHint()) );
+    return dlg;
+}
 
 
 /*!
@@ -164,46 +204,6 @@ void SvnActions::slotBlame()
     svn::Revision end(svn::Revision::HEAD);
     makeBlame(start,end,k);
 }
-
-/// @todo move it to extra include file
-template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel)
-{
-    KDialog * dlg = new KDialog();
-    if (!dlg) return dlg;
-    dlg->setCaption(_head);
-    QVBoxLayout* Dialog1Layout;
-
-    QHBoxLayout* blayout;
-    QSpacerItem* Spacer1;
-    Dialog1Layout = new QVBoxLayout( dlg, 2, 2, "Dialog1Layout");
-    *ptr = new T(dlg);
-
-    Dialog1Layout->addWidget( *ptr );
-
-    /* button */
-    blayout = new QHBoxLayout( 0, 2, 2, "blayout");
-    QPushButton*buttonOk = new QPushButton( dlg, "buttonOk" );
-    buttonOk->setAutoDefault( TRUE );
-    buttonOk->setDefault( TRUE );
-    blayout->addWidget( buttonOk );
-    if (!OkCancel) {
-        buttonOk->setText( i18n( "&Close" ) );
-    } else {
-        buttonOk->setText( i18n( "&Ok" ) );
-        QPushButton*buttonCancel = new QPushButton( dlg, "buttonCancel" );
-        buttonCancel->setText(i18n("&Cancel"));
-        blayout->addWidget( buttonCancel );
-        connect( buttonCancel, SIGNAL(clicked()), dlg, SLOT(reject()));
-    }
-    Spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    blayout->addItem( Spacer1 );
-    Dialog1Layout->addLayout(blayout);
-    connect( buttonOk, SIGNAL( clicked() ), dlg, SLOT( accept() ) );
-
-    dlg->resize( QSize(320,240).expandedTo(dlg->minimumSizeHint()) );
-    return dlg;
-}
-
 
 /*!
     \fn SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
@@ -823,29 +823,120 @@ void SvnActions::slotDelete()
 void SvnActions::slotCheckout()
 {
     CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,"Checkout a repository",true);
-    QString ex;
+    KDialog * dlg = createDialog(&ptr,i18n("Checkout a repository"),true);
     if (dlg) {
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            svn::Path p(ptr->targetDir().local8Bit());
-            QString fUrl = ptr->reposURL();
-            while (fUrl.endsWith("/")) {
-                fUrl.truncate(fUrl.length()-1);
-            }
-            bool force = ptr->forceIt();
-            reInitClient();
-            try {
-                StopDlg sdlg(m_SvnContext,0,0,"Checkout","Checking out - hit cancel for abort");
-                m_Svnclient.checkout(fUrl.local8Bit(),p,r,force);
-            } catch (svn::ClientException e) {
-                ex = QString::fromLocal8Bit(e.message());
-                emit clientException(ex);
-                delete dlg;
-                return;
-            }
-            m_ParentList->openURL(ptr->targetDir(),true);
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt());
         }
         delete dlg;
+    }
+}
+
+void SvnActions::slotCheckoutCurrent()
+{
+    if (!m_ParentList||m_ParentList->isLocal()) return;
+    FileListViewItem*k = m_ParentList->singleSelected();
+    if (k && !k->isDir()) {
+        KMessageBox::error(m_ParentList,i18n("Checking out a file?"));
+        return;
+    }
+    QString what;
+    if (!k) {
+        what = m_ParentList->baseUri();
+    } else {
+        what = k->fullName();
+    }
+    CheckoutInfo_impl*ptr;
+    KDialog * dlg = createDialog(&ptr,"Checkout a repository",true);
+    if (dlg) {
+        ptr->setStartUrl(what);
+        if (dlg->exec()==QDialog::Accepted) {
+            svn::Revision r = ptr->toRevision();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt());
+        }
+        delete dlg;
+    }
+}
+
+void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force)
+{
+    QString fUrl = rUrl;
+    QString ex;
+    while (fUrl.endsWith("/")) {
+        fUrl.truncate(fUrl.length()-1);
+    }
+    svn::Path p(tPath.local8Bit());
+    reInitClient();
+    try {
+        StopDlg sdlg(m_SvnContext,0,0,i18n("Checkout"),i18n("Checking out - hit cancel for abort"));
+        m_Svnclient.checkout(fUrl.local8Bit(),p,r,force);
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+    m_ParentList->openURL(tPath,true);
+}
+
+void SvnActions::slotRevert()
+{
+    qDebug("slotRevert");
+    if (!m_ParentList||!m_ParentList->isLocal()) return;
+    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    qDebug("Selected items");
+    QStringList displist;
+    if (lst.count()>0) {
+        for (unsigned j = 0; j<lst.count();++j){
+            if (!lst.at(j)->svnStatus().isVersioned()) {
+                KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
+                    .arg(lst.at(j)->svnStatus().path()));
+                return;
+            }
+            displist.append(lst.at(j)->svnStatus().path());
+        }
+    } else {
+        displist.push_back(m_ParentList->baseUri());
+    }
+    slotRevertItems(displist);
+    for (unsigned j = 0; j<lst.count();++j){
+        lst.at(j)->refreshStatus(true,&lst,false);
+        lst.at(j)->refreshStatus(false,&lst,true);
+    }
+}
+
+void SvnActions::slotRevertItems(const QStringList&displist)
+{
+    if (displist.count()==0) {
+        return;
+    }
+    KDialogBase*dialog = new KDialogBase(
+                i18n("Revert entries"),
+                KDialogBase::Yes | KDialogBase::No,
+                KDialogBase::No, KDialogBase::No,
+                m_ParentList,"warningRevert",true,true);
+
+    bool checkboxres = false;
+
+    int result = KMessageBox::createKMessageBox(dialog,QMessageBox::Warning,
+        i18n("Realy revert that entries to pristine state?"), displist, i18n("Recursive"),
+        &checkboxres,
+        KMessageBox::Dangerous);
+    if (result != KDialogBase::Yes) {
+        return;
+    }
+
+    std::vector<svn::Path> items;
+    for (unsigned j = 0; j<displist.count();++j) {
+        items.push_back( (*(displist.at(j))).latin1());
+    }
+    QString ex;
+
+    try {
+        svn::Targets target(items);
+        m_Svnclient.revert(target,checkboxres);
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
     }
 }

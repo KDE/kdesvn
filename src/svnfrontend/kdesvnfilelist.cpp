@@ -85,11 +85,15 @@ void kdesvnfilelist::setupActions()
     m_AddCurrent = new KAction("Add selected files/dirs",KShortcut(),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
     m_DelCurrent = new KAction("Delete selecte files/dirs",KShortcut(),m_SvnWrapper,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
     m_CheckoutAction = new KAction("Checkout a repository",KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
+    m_CheckoutCurrentAction = new KAction("Checkout current repository path",KShortcut(),
+        m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
+    m_RevertAction  = new KAction("Revert current changes",KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
     m_commitAction->setEnabled(false);
     m_simpleDiffHead->setEnabled(false);
+    m_RevertAction->setEnabled(false);
     enableSingleActions(false);
 }
 
@@ -142,6 +146,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_UpdateHead->setEnabled(m_isLocal);
     m_UpdateRev->setEnabled(m_isLocal);
     m_AddCurrent->setEnabled(m_isLocal);
+    m_RevertAction->setEnabled(m_isLocal);
     m_DelCurrent->setEnabled(true);
 
     if (result) {
@@ -287,6 +292,7 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
     /* blame buggy in lib */
     //m_BlameAction->setEnabled(false);
     m_BlameAction->setEnabled(how&&!_Dir);
+    //m_CheckoutCurrentAction->setEnabled(how&&!isLocal()&&_Dir);
 //    m_simpleDiffHead->setEnabled(how&&m_isLocal);
     //m_BlameRangeAction->setEnabled(how&&!_Dir);
 }

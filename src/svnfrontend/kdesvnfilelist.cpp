@@ -88,6 +88,8 @@ void kdesvnfilelist::setupActions()
     m_CheckoutCurrentAction = new KAction("Checkout current repository path",KShortcut(),
         m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
     m_RevertAction  = new KAction("Revert current changes",KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
+    m_changeToRepository = new KAction("Switch to repository",KShortcut(),
+        this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
@@ -147,7 +149,9 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_UpdateRev->setEnabled(m_isLocal);
     m_AddCurrent->setEnabled(m_isLocal);
     m_RevertAction->setEnabled(m_isLocal);
+    m_changeToRepository->setEnabled(m_isLocal);
     m_DelCurrent->setEnabled(true);
+    m_CheckoutCurrentAction->setEnabled(!m_isLocal);
 
     if (result) {
         emit changeCaption(m_baseUri);
@@ -328,4 +332,18 @@ void kdesvnfilelist::slotNotifyMessage(const QString&what)
 {
     emit sigLogMessage(what);
     kapp->processEvents(20);
+}
+
+void kdesvnfilelist::slotChangeToRepository()
+{
+    if (!isLocal()) {
+        return;
+    }
+    FileListViewItem*k = static_cast<FileListViewItem*>(firstChild());
+    /* huh... */
+    if (!k||!k->isDir()) return;
+    QString ex = baseUri();
+    if (!openURL(k->svnStatus().entry().url())) {
+        openURL(ex);
+    }
 }

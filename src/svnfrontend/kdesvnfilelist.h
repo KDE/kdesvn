@@ -63,6 +63,7 @@ protected:
     KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction,*m_MkdirAction;
     KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead,*m_UpdateHead,*m_UpdateRev;
     KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction,*m_CheckoutCurrentAction,*m_RevertAction;
+    KAction*m_changeToRepository;
 
     SvnActions*m_SvnWrapper;
     /* the parent entry must removed from list before */
@@ -82,6 +83,8 @@ protected slots:
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);
     virtual void slotDirAdded(const QString&,FileListViewItem*);
+    virtual void slotChangeToRepository();
+
 signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);

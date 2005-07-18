@@ -129,5 +129,5 @@ void SvnLogDlgImp::slotDispPrevious()
         m_DispPrevButton->setEnabled(false);
         return;
     }
-    emit makeDiff(_name,k->rev(),p->rev());
+    emit makeDiff(_name,p->rev(),k->rev());
 }

@@ -47,9 +47,13 @@
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>
+#include <kstandarddirs.h>
+#include <kbookmarkmanager.h>
+#include <kbookmarkmenu.h>
 
 kdesvn::kdesvn()
     : KMainWindow( 0, "kdesvn" ),
+      KBookmarkOwner(),
       m_view(new kdesvnView(this)),
       m_printer(0),
       statusResetTimer(new QTimer(this))
@@ -65,7 +69,34 @@ kdesvn::kdesvn()
 
     // and a status bar
     statusBar()->show();
+
+    m_bookmarkFile = locateLocal("appdata",QString::fromLatin1("bookmarks.xml"),true);
+
+    m_BookmarkManager = KBookmarkManager::managerForFile(m_bookmarkFile,false);
+    m_BookmarkManager->setShowNSBookmarks(false);
+    m_BookmarkManager->setEditorOptions(QString::fromLatin1("KDE Svn"),false);
+
+    m_BookmarksActionmenu = new KActionMenu(i18n("&Bookmarks"),"bookmark",actionCollection(),"bookmarks");
+    m_BookmarksActionmenu->setDelayed(false);
+    m_BookmarksActionmenu->setEnabled(true);
+
+    m_Bookmarkactions = new KActionCollection( this );
+    m_Bookmarkactions->setHighlightingEnabled( true );
+    connectActionCollection( m_Bookmarkactions );
+
+    m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager,this,m_BookmarksActionmenu->popupMenu(),m_Bookmarkactions,true);
+/*
+    connect( m_pBookmarkMenu,
+        SIGNAL( aboutToShowContextMenu(const KBookmark &, QPopupMenu*) ),
+        this, SLOT( slotFillContextMenu(const KBookmark &, QPopupMenu*) ));
+    connect( m_pBookmarkMenu,
+        SIGNAL( openBookmark(const QString &, Qt::ButtonState) ),
+        this, SLOT( slotOpenBookmarkURL(const QString &, Qt::ButtonState) ));
+*/
+    m_BookmarksActionmenu->plug(menuBar());
+    //menuBar()->insertItem(i18n("Bookmarks"),bookpopup);
     setHelpMenuEnabled(true);
+
     KPopupMenu *help = helpMenu();
     menuBar()->insertItem(i18n("&Help"),help);
 
@@ -87,6 +118,20 @@ kdesvn::kdesvn()
     connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
             this,   SLOT(changeCaption(const QString&)));
     connect(statusResetTimer,SIGNAL(timeout()),this,SLOT(resetStatusBar()));
+}
+
+void kdesvn::connectActionCollection( KActionCollection *coll )
+{
+    if (!coll)return;
+    connect( coll, SIGNAL( actionStatusText( const QString & ) ),
+             this, SLOT( changeStatusbar( const QString & ) ) );
+    connect( coll, SIGNAL( clearStatusText() ),
+             this, SLOT( resetStatusBar() ) );
+}
+
+void kdesvn::disconnectActionCollection( KActionCollection *coll )
+{
+    if (!coll)return;
 }
 
 kdesvn::~kdesvn()
@@ -273,7 +318,6 @@ void kdesvn::changeStatusbar(const QString& text)
     // display the text on the statusbar
     statusResetTimer->stop();
     statusBar()->message(text);
-    statusResetTimer->start( 5000, TRUE );
 }
 
 void kdesvn::changeCaption(const QString& text)
@@ -285,6 +329,22 @@ void kdesvn::changeCaption(const QString& text)
 void kdesvn::resetStatusBar()
 {
     statusBar()->message(i18n("Ready"));
+}
+
+void kdesvn::openBookmarkURL (const QString &_url)
+{
+    if (!_url.isEmpty())
+        m_view->openURL(_url);
+}
+
+QString kdesvn::currentTitle () const
+{
+    return m_view->currentURL();
+}
+
+QString kdesvn::currentURL () const
+{
+    return m_view->currentURL();
 }
 
 #include "kdesvn.moc"

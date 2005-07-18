@@ -55,7 +55,7 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
     if (action>=smax_actionstring||action<0) {
         return QString::null;
     }
-    return action_strings[action];
+    return i18n(action_strings[action]);
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)
@@ -93,7 +93,6 @@ void CContextListener::contextNotify (const char *path,
                     svn_wc_notify_state_t prop_state,
                     svn_revnum_t revision)
 {
-    //qDebug("Notify: %s - %i - %s",path,action,mime_type);
     QString aString = NotifyAction(action);
     if (aString.isEmpty()) {
         return;

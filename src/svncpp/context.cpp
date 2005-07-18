@@ -570,7 +570,6 @@ namespace svn
             svn_wc_notify_state_t prop_state,
             svn_revnum_t revision)
     {
-      std::cout << "Notify " << path << " " << action << std::endl;
       if (listener != 0)
       {
         listener->contextNotify (path, action, kind, mime_type,

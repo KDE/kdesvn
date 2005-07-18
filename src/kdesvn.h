@@ -29,6 +29,7 @@
 #include <kapplication.h>
 #include <kmainwindow.h>
 #include <qtimer.h>
+#include <kbookmarkmanager.h>
 
 #include "kdesvnview.h"
 
@@ -36,6 +37,7 @@ class KPrinter;
 class KURL;
 class KAction;
 class KActionMenu;
+class KBookmarkMenu;
 
 /**
  * This class serves as the main window for kdesvn.  It handles the
@@ -45,7 +47,7 @@ class KActionMenu;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
-class kdesvn : public KMainWindow
+class kdesvn : public KMainWindow,public KBookmarkOwner
 {
     Q_OBJECT
 public:
@@ -64,6 +66,9 @@ public:
      */
     void load(const KURL& url);
 
+    virtual void openBookmarkURL (const QString &_url);
+    virtual QString currentTitle () const;
+    virtual QString currentURL () const;
 protected:
     /**
      * Overridden virtuals for Qt drag 'n drop (XDND)
@@ -102,6 +107,8 @@ private slots:
 private:
     void setupAccel();
     void setupActions();
+    void connectActionCollection( KActionCollection *coll );
+    void disconnectActionCollection( KActionCollection *coll );
 
 private:
     kdesvnView *m_view;
@@ -110,7 +117,11 @@ private:
     KAction     *m_UrlOpen,*m_DirOpen;
     KActionMenu *m_FileMenu;
     QTimer *statusResetTimer;
+    QString m_bookmarkFile;
+    KBookmarkManager * m_BookmarkManager;
+    KActionMenu* m_BookmarksActionmenu;
+    KActionCollection*m_Bookmarkactions;
+    KBookmarkMenu * m_pBookmarkMenu;
 };
 
 #endif // _KDESVN_H_
-

@@ -60,12 +60,14 @@ public:
                                    const std::string & realm, bool & maySave);
     static QString NotifyAction(svn_wc_notify_action_t action);
 
+    void setCancelled(bool how){m_cancelMe = how;}
 signals:
     void sendNotify(const QString&);
 
 protected:
     static const int smax_actionstring;
     static const QString action_strings[];
+    bool m_cancelMe;
 };
 
 #endif

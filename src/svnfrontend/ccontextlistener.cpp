@@ -59,7 +59,7 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)
- : QObject(parent, name), svn::ContextListener()
+ : QObject(parent, name), svn::ContextListener(),m_cancelMe(false)
 {
 }
 
@@ -110,6 +110,10 @@ void CContextListener::contextNotify (const char *path,
 
 bool CContextListener::contextCancel()
 {
+    if (m_cancelMe) {
+        m_cancelMe=false;
+        return true;
+    }
     return false;
 }
 

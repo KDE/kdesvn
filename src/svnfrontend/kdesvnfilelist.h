@@ -42,7 +42,7 @@ public:
     kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
 
-    bool openURL( const KURL &url );
+    bool openURL( const KURL &url,bool noReinit=false );
     const QString&lastError()const{return m_LastException;}
     const svn::StatusEntries&directories()const{return m_directoryList;}
     const svn::Status&maindir()const{return m_mainEntry;}
@@ -62,6 +62,7 @@ protected:
     KActionCollection* m_filesAction;
     KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction/*,*m_BlameRangeAction*/,*m_CatAction,*m_MkdirAction;
     KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead,*m_UpdateHead,*m_UpdateRev;
+    KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction;
 
     SvnActions*m_SvnWrapper;
     /* the parent entry must removed from list before */

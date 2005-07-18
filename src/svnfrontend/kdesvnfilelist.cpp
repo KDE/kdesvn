@@ -30,6 +30,9 @@
 #include <kshortcut.h>
 #include <kmessagebox.h>
 #include <kapp.h>
+#include <kdirselectdialog.h>
+#include <klineedit.h>
+#include <qlayout.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
  : KListView(parent, name),m_SvnWrapper(new SvnActions(this))
@@ -79,6 +82,9 @@ void kdesvnfilelist::setupActions()
     m_UpdateRev = new KAction("Update to revision...",KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
     m_commitAction = new KAction("Commit",KShortcut(),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
     m_simpleDiffHead = new KAction("Diff against head",KShortcut(),m_SvnWrapper,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
+    m_AddCurrent = new KAction("Add selected files/dirs",KShortcut(),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
+    m_DelCurrent = new KAction("Delete selecte files/dirs",KShortcut(),m_SvnWrapper,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
+    m_CheckoutAction = new KAction("Checkout a repository",KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
@@ -112,13 +118,12 @@ FileListViewItem* kdesvnfilelist::singleSelected()
     return 0;
 }
 
-bool kdesvnfilelist::openURL( const KURL &url )
+bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 {
     clear();
     m_Dirsread.clear();
     m_LastException="";
-    m_SvnWrapper->reInitClient();
-
+    if (!noReinit) m_SvnWrapper->reInitClient();
     m_directoryList.clear();
     m_baseUri = url.url();
     m_isLocal = false;
@@ -136,6 +141,8 @@ bool kdesvnfilelist::openURL( const KURL &url )
     m_simpleDiffHead->setEnabled(m_isLocal);
     m_UpdateHead->setEnabled(m_isLocal);
     m_UpdateRev->setEnabled(m_isLocal);
+    m_AddCurrent->setEnabled(m_isLocal);
+    m_DelCurrent->setEnabled(true);
 
     return result;
 }

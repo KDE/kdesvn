@@ -17,41 +17,57 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef RANGEINPUT_IMPL_H
-#define RANGEINPUT_IMPL_H
+#include "stopdlg.h"
+#include "ccontextlistener.h"
+#include <kapplication.h>
+#include <klocale.h>
+#include <kwin.h>
+#include <qtimer.h>
+#include <qpushbutton.h>
+#include <qlayout.h>
+#include <qlabel.h>
 
-#include "rangeinput.h"
-#include "svncpp/revision.hpp"
-#include <qpair.h>
+StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
+ : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
+    ,m_Context(listener),m_MinDuration(2000),mCancelled(false),mShown(false)
+{
+    KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
+    mShowTimer = new QTimer(this);
+    showButton(KDialogBase::Close, false);
+    mCancelText = actionButton(KDialogBase::Cancel)->text();
 
-class Rangeinput_impl: public RangeInputDlg {
-Q_OBJECT
-public:
-    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~Rangeinput_impl();
+    QFrame* mainWidget = plainPage();
+    QVBoxLayout* layout = new QVBoxLayout(mainWidget, 10);
+    mLabel = new QLabel(text, mainWidget);
+    layout->addWidget(mLabel);
 
-    typedef QPair<svn::Revision,svn::Revision> revision_range;
+    connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
+    mShowTimer->start(m_MinDuration, true);
+}
 
-    revision_range getRange();
+StopDlg::~StopDlg()
+{
+}
 
-    void setStartOnly(bool theValue);
+void StopDlg::slotAutoShow()
+{
+    if (mShown) {
+        return;
+    }
+    show();
+    kapp->processEvents();
+    mShown = true;
+}
 
+void StopDlg::slotCancel()
+{
+    mCancelled = true;
+    m_Context->setCancelled(true);
+}
 
-    bool StartOnly() const;
-    void setHeadDefault();
+bool StopDlg::cancelld()
+{
+    return mCancelled;
+}
 
-protected slots:
-    virtual void onHelp();
-    virtual void stopHeadToggled(bool);
-    virtual void stopBaseToggled(bool);
-    virtual void stopNumberToggled(bool);
-    virtual void startHeadToggled(bool);
-    virtual void startBaseToggled(bool);
-    virtual void startNumberToggled(bool);
-    virtual void stopDateToggled(bool);
-    virtual void startDateToggled(bool);
-protected:
-    bool m_StartOnly;
-};
-
-#endif
+#include "stopdlg.moc"

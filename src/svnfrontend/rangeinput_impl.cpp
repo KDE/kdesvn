@@ -150,6 +150,11 @@ bool Rangeinput_impl::StartOnly() const
     return m_StartOnly;
 }
 
+void Rangeinput_impl::setHeadDefault()
+{
+    m_stopHeadButton->setChecked(true);
+    m_startHeadButton->setChecked(true);
+}
 
 void Rangeinput_impl::setStartOnly(bool theValue)
 {

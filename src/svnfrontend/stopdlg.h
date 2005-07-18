@@ -17,41 +17,39 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef RANGEINPUT_IMPL_H
-#define RANGEINPUT_IMPL_H
+#ifndef STOPDLG_H
+#define STOPDLG_H
 
-#include "rangeinput.h"
-#include "svncpp/revision.hpp"
-#include <qpair.h>
+#include <kdialogbase.h>
 
-class Rangeinput_impl: public RangeInputDlg {
+class QTimer;
+
+class CContextListener;
+class QLabel;
+/**
+@author Rajko Albrecht
+*/
+class StopDlg : public KDialogBase
+{
 Q_OBJECT
 public:
-    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~Rangeinput_impl();
+    StopDlg(CContextListener*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
+    ~StopDlg();
 
-    typedef QPair<svn::Revision,svn::Revision> revision_range;
+    bool cancelld();
 
-    revision_range getRange();
-
-    void setStartOnly(bool theValue);
-
-
-    bool StartOnly() const;
-    void setHeadDefault();
+protected:
+    CContextListener*m_Context;
+    int m_MinDuration;
+    bool mCancelled;
+    QTimer * mShowTimer;
+    QString mCancelText;
+    bool mShown;
+    QLabel*mLabel;
 
 protected slots:
-    virtual void onHelp();
-    virtual void stopHeadToggled(bool);
-    virtual void stopBaseToggled(bool);
-    virtual void stopNumberToggled(bool);
-    virtual void startHeadToggled(bool);
-    virtual void startBaseToggled(bool);
-    virtual void startNumberToggled(bool);
-    virtual void stopDateToggled(bool);
-    virtual void startDateToggled(bool);
-protected:
-    bool m_StartOnly;
+    virtual void slotAutoShow();
+    virtual void slotCancel();
 };
 
 #endif

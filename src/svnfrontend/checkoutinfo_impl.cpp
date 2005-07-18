@@ -17,41 +17,42 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef RANGEINPUT_IMPL_H
-#define RANGEINPUT_IMPL_H
+#include "checkoutinfo_impl.h"
+#include "rangeinput_impl.h"
+#include <kurlrequester.h>
+#include <qlabel.h>
+#include <klineedit.h>
+#include <qcheckbox.h>
 
-#include "rangeinput.h"
-#include "svncpp/revision.hpp"
-#include <qpair.h>
+CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent, const char *name)
+    :CheckoutInfo(parent, name)
+{
+    m_RangeInput->setStartOnly(true);
+    m_RangeInput->setHeadDefault();
+}
 
-class Rangeinput_impl: public RangeInputDlg {
-Q_OBJECT
-public:
-    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~Rangeinput_impl();
+CheckoutInfo_impl::~CheckoutInfo_impl()
+{
+}
 
-    typedef QPair<svn::Revision,svn::Revision> revision_range;
+svn::Revision CheckoutInfo_impl::toRevision()
+{
+    return m_RangeInput->getRange().first;
+}
 
-    revision_range getRange();
+QString CheckoutInfo_impl::reposURL()
+{
+    return m_UrlEdit->text();
+}
 
-    void setStartOnly(bool theValue);
+QString CheckoutInfo_impl::targetDir()
+{
+    return  m_TargetSelector->url();
+}
 
+bool CheckoutInfo_impl::forceIt()
+{
+    return m_forceButton->isChecked();
+}
 
-    bool StartOnly() const;
-    void setHeadDefault();
-
-protected slots:
-    virtual void onHelp();
-    virtual void stopHeadToggled(bool);
-    virtual void stopBaseToggled(bool);
-    virtual void stopNumberToggled(bool);
-    virtual void startHeadToggled(bool);
-    virtual void startBaseToggled(bool);
-    virtual void startNumberToggled(bool);
-    virtual void stopDateToggled(bool);
-    virtual void startDateToggled(bool);
-protected:
-    bool m_StartOnly;
-};
-
-#endif
+#include "checkoutinfo_impl.moc"

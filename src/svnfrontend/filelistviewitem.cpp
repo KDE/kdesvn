@@ -201,6 +201,15 @@ void FileListViewItem::update()
     case svn_wc_status_external:
         info_text=i18n("External");
         break;
+    case svn_wc_status_conflicted:
+        info_text=i18n("Conflict");
+        break;
+    case svn_wc_status_merged:
+        info_text=i18n("Merged");
+        break;
+    case svn_wc_status_incomplete:
+        info_text=i18n("Incomplete");
+        break;
     default:
         break;
     }

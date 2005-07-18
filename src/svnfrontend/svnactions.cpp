@@ -18,12 +18,14 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "svnactions.h"
+#include "checkoutinfo_impl.h"
 #include "kdesvnfilelist.h"
 #include "filelistviewitem.h"
 #include "rangeinput_impl.h"
 #include "propertiesdlg.h"
 #include "ccontextlistener.h"
 #include "svnlogdlgimp.h"
+#include "stopdlg.h"
 #include "logmsg_impl.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
@@ -128,6 +130,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     const svn::LogEntries * logs;
     QString ex;
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @fixme Last parameter should be user setable (follow nodes moving or not)
         logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true,false);
     } catch (svn::ClientException e) {
@@ -201,6 +204,7 @@ template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,b
     return dlg;
 }
 
+
 /*!
     \fn SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
  */
@@ -211,6 +215,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     svn::Path p(k->fullName().local8Bit());
 
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Annotate","Blaming - hit cancel for abort");
         blame = m_Svnclient.annotate(p,start,end);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
@@ -291,6 +296,7 @@ void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
     QString ex;
     svn::Path p(k->fullName().local8Bit());
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
         content = m_Svnclient.cat(p,start);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
@@ -376,6 +382,7 @@ void SvnActions::slotInfo()
     QValueList<svn::Entry> entries;
     QString ex;
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
         if (lst.count()==0) {
             entries.push_back(m_Svnclient.info(m_ParentList->baseUri().local8Bit()));
         } else {
@@ -489,6 +496,7 @@ void SvnActions::slotProperties()
     QValueList<QString> delList;
     dlg.changedItems(setList,delList);
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
             m_Svnclient.propdel(delList[pos].local8Bit(),svn::Path(k->fullName().local8Bit()),svn::Revision::HEAD);
@@ -535,6 +543,7 @@ void SvnActions::slotCommit()
     }
     svn_revnum_t nnum;
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
         nnum = m_Svnclient.commit(svn::Targets(targets),msg.local8Bit(),rec);
     } catch (svn::ClientException e) {
         QString ex = QString::fromLocal8Bit(e.message());
@@ -569,7 +578,7 @@ void SvnActions::slotSimpleDiffBase()
         if (m_ParentList->isLocal()) {
             what=m_ParentList->baseUri();
         } else {
-            KMessageBox::error(m_ParentList,"On remote brosing you must select an item!");
+            KMessageBox::error(m_ParentList,i18n("On remote browsing you must select an item!"));
             return;
         }
     }
@@ -617,6 +626,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     QString ex;
     KTempFile tfile;
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
         ex = m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
             svn::Path(what.local8Bit()),
             start, end,
@@ -656,6 +666,7 @@ void SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recu
 {
     QString ex;
     try {
+        StopDlg sdlg(m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
         ex = m_Svnclient.update(svn::Path(what.local8Bit()),
             rev, recurse);
     } catch (svn::ClientException e) {
@@ -714,8 +725,8 @@ void SvnActions::prepareUpdate(bool ask)
     makeUpdate(what,r,true);
     if (k) {
         k->removeChilds();
-        k->refreshMe();
         m_ParentList->checkDirs(what,k);
+        k->refreshMe();
         k->refreshStatus();
     }
 }
@@ -727,4 +738,111 @@ void SvnActions::prepareUpdate(bool ask)
 void SvnActions::slotUpdateTo()
 {
     prepareUpdate(true);
+}
+
+
+/*!
+    \fn SvnActions::slotAdd()
+ */
+void SvnActions::slotAdd()
+{
+    if (!m_ParentList) return;
+    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    if (lst.count()==0) {
+        KMessageBox::error(m_ParentList,i18n("Which files or directories should I add?"));
+        return;
+    }
+    QValueList<svn::Path> items;
+    for (unsigned j = 0; j<lst.count();++j){
+        if (lst.at(j)->svnStatus().isVersioned()) {
+            KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is versioned - break.</center>")
+                .arg(lst.at(j)->svnStatus().path()));
+            return;
+        }
+        items.push_back(lst.at(j)->svnStatus().path());
+    }
+    QString ex;
+    try {
+        QValueList<svn::Path>::iterator piter;
+        for (piter=items.begin();piter!=items.end();++piter) {
+            m_Svnclient.add((*piter),false);
+        }
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+    for (unsigned j = 0; j<lst.count();++j){
+        lst.at(j)->refreshStatus();
+    }
+}
+
+/*!
+    \fn SvnActions::slotDelete()
+ */
+void SvnActions::slotDelete()
+{
+    if (!m_ParentList) return;
+    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    if (lst.count()==0) {
+        KMessageBox::error(m_ParentList,i18n("Nothing selected for delete"));
+        return;
+    }
+    std::vector<svn::Path> items;
+    QStringList displist;
+        for (unsigned j = 0; j<lst.count();++j){
+        if (!lst.at(j)->svnStatus().isVersioned()) {
+            KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
+                .arg(lst.at(j)->svnStatus().path()));
+            return;
+        }
+        items.push_back(lst.at(j)->svnStatus().path());
+        displist.append(lst.at(j)->svnStatus().path());
+    }
+    int answer = KMessageBox::questionYesNoList(m_ParentList,i18n("Realy delete that entries?"),displist,"Delete from repository");
+    if (answer!=KMessageBox::Yes) {
+        return;
+    }
+    QString ex;
+    try {
+        svn::Targets target(items);
+        m_Svnclient.remove(target,false);
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
+    }
+    for (unsigned j = 0; j<lst.count();++j){
+        lst.at(j)->refreshStatus();
+    }
+}
+
+/*!
+    \fn kdesvnfilelist::slotCheckout()
+ */
+void SvnActions::slotCheckout()
+{
+    CheckoutInfo_impl*ptr;
+    KDialog * dlg = createDialog(&ptr,"Checkout a repository",true);
+    QString ex;
+    if (dlg) {
+        if (dlg->exec()==QDialog::Accepted) {
+            svn::Revision r = ptr->toRevision();
+            svn::Path p(ptr->targetDir().local8Bit());
+            QString fUrl = ptr->reposURL();
+            bool force = ptr->forceIt();
+            reInitClient();
+            try {
+                StopDlg sdlg(m_SvnContext,0,0,"Checkout","Checking out - hit cancel for abort");
+                m_Svnclient.checkout(fUrl.local8Bit(),p,r,force);
+            } catch (svn::ClientException e) {
+                ex = QString::fromLocal8Bit(e.message());
+                emit clientException(ex);
+                delete dlg;
+                return;
+            }
+            m_ParentList->openURL(ptr->targetDir(),true);
+        }
+        delete dlg;
+    }
 }

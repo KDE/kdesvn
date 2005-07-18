@@ -17,41 +17,23 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef RANGEINPUT_IMPL_H
-#define RANGEINPUT_IMPL_H
+#ifndef CHECKOUTINFO_IMPL_H
+#define CHECKOUTINFO_IMPL_H
 
-#include "rangeinput.h"
+#include "checkoutinfo.h"
 #include "svncpp/revision.hpp"
-#include <qpair.h>
+#include "kurl.h"
 
-class Rangeinput_impl: public RangeInputDlg {
+class CheckoutInfo_impl: public CheckoutInfo {
 Q_OBJECT
 public:
-    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~Rangeinput_impl();
+    CheckoutInfo_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~CheckoutInfo_impl();
 
-    typedef QPair<svn::Revision,svn::Revision> revision_range;
-
-    revision_range getRange();
-
-    void setStartOnly(bool theValue);
-
-
-    bool StartOnly() const;
-    void setHeadDefault();
-
-protected slots:
-    virtual void onHelp();
-    virtual void stopHeadToggled(bool);
-    virtual void stopBaseToggled(bool);
-    virtual void stopNumberToggled(bool);
-    virtual void startHeadToggled(bool);
-    virtual void startBaseToggled(bool);
-    virtual void startNumberToggled(bool);
-    virtual void stopDateToggled(bool);
-    virtual void startDateToggled(bool);
-protected:
-    bool m_StartOnly;
+    svn::Revision toRevision();
+    QString reposURL();
+    QString targetDir();
+    bool forceIt();
 };
 
 #endif

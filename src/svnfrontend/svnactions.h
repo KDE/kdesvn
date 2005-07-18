@@ -49,6 +49,7 @@ public:
     //svn::Client&svnClient(){return m_Svnclient;}
     svn::Client* svnclient(){return &m_Svnclient;}
     void prepareUpdate(bool ask);
+    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);
@@ -61,7 +62,6 @@ protected:
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 
-    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
     static QDateTime apr2qttime(apr_time_t);
     void makeUpdate(const QString&what,const svn::Revision&rev,bool recurse);
 
@@ -81,6 +81,9 @@ public slots:
     virtual void makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end);
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();
+    virtual void slotAdd();
+    virtual void slotDelete();
+    virtual void slotCheckout();
 
 signals:
     void clientException(const QString&);

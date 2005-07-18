@@ -1,11 +1,8 @@
 Implement the SVN commands:
 (implemented one will deleted from list)
 
-   add
-   checkout (co)
    cleanup
    copy (cp)
-   delete (del, remove, rm)
    export
    import
    merge
@@ -13,7 +10,6 @@ Implement the SVN commands:
    resolved
    revert
    switch (sw)
-   update (up)
 
 Problems:
     - blame let application crash.

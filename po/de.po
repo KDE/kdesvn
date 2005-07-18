@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-15 19:40+0200\n"
-"PO-Revision-Date: 2005-07-15 19:01+0200\n"
+"POT-Creation-Date: 2005-07-17 20:38+0200\n"
+"PO-Revision-Date: 2005-07-17 23:04+0200\n"
 "Last-Translator: Rajko Albrecht <ral@alwins-world.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,400 +14,18 @@ msgstr ""
 "X-Generator: KBabel 1.10.1\n"
 
 #: _translatorinfo.cpp:1
+#, fuzzy
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr ""
+msgstr "Rajko Albrecht"
 
 #: _translatorinfo.cpp:3
+#, fuzzy
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:104 listview/propertiesdlg.cpp:182
-msgid "Value"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:180
-msgid "<font size=\"+1\">View and modify properties</font>"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:183
-msgid "List of properties set"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:184
-msgid "&Accept"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:187
-msgid "Add property"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:188
-msgid "Modify property"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:189
-msgid "Delete property"
-msgstr ""
-
-#: listview/propertiesdlg.cpp:211
-msgid "Missing SVN link"
-msgstr ""
-
-#: listview/authdlg.cpp:113 rc.cpp:68
-#, no-c-format
-msgid "Authentification"
-msgstr ""
-
-#: listview/authdlg.cpp:114 rc.cpp:71
-#, no-c-format
-msgid "Enter authentification info for"
-msgstr ""
-
-#: listview/authdlg.cpp:115 rc.cpp:74
-#, no-c-format
-msgid "Username:"
-msgstr ""
-
-#: listview/authdlg.cpp:116 rc.cpp:77
-#, no-c-format
-msgid "Password:"
-msgstr ""
-
-#: listview/authdlg.cpp:117 rc.cpp:80
-#, no-c-format
-msgid "Store password"
-msgstr ""
-
-#: listview/authdlg.cpp:123 listview/rangeinput.cpp:170 rc.cpp:65 rc.cpp:94
-#, no-c-format
-msgid "F1"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:33
-msgid "Revert"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:34
-msgid "Revert failed"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:35
-msgid "Resolved"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:36
-msgid "Skip"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:37 listview/filelistviewitem.cpp:172
-msgid "Deleted"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:38
-msgid "Added"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:39
-msgid "Updated"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:40
-msgid "Update complete"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:41
-msgid "Update external"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:42
-msgid "Status complete"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:43
-msgid "Status external"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:44
-msgid "Commit Modified"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:45
-msgid "Commit Added"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:46
-msgid "Commit Deleted"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:47
-msgid "Commit Replaced"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:48
-msgid "Postfix txdelta"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:49
-msgid "Blame"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:114 listview/svnactions.cpp:306
-msgid "Logmessage"
-msgstr ""
-
-#: listview/ccontextlistener.cpp:114 listview/svnactions.cpp:306
-msgid "Enter a logmessage"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:46 listview/svnlogdlg.cpp:99
-#: listview/svnactions.cpp:191 rc.cpp:6
-#, no-c-format
-msgid "Author"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:47 listview/svnlogdlg.cpp:100 rc.cpp:9
-#, no-c-format
-msgid "Revison"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:48 listview/svnlogdlg.cpp:101 rc.cpp:12
-#, no-c-format
-msgid "Date"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:98 rc.cpp:3
-#, no-c-format
-msgid "SVN Log"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:103 rc.cpp:18
-#, no-c-format
-msgid "Alt+C"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:104 rc.cpp:21
-#, no-c-format
-msgid "He&lp"
-msgstr ""
-
-#: listview/svnlogdlg.cpp:105 rc.cpp:24
-#, no-c-format
-msgid "Alt+L"
-msgstr ""
-
-#: listview/propertiesdlg.moc.cpp:34 listview/propertiesdlg.moc.cpp:42
-msgid "PropertiesDlg"
-msgstr ""
-
-#: listview/rangeinput.cpp:156 rc.cpp:27
-#, no-c-format
-msgid "Revision range"
-msgstr ""
-
-#: listview/rangeinput.cpp:157 rc.cpp:30
-#, no-c-format
-msgid "Start with revision"
-msgstr ""
-
-#: listview/rangeinput.cpp:158 listview/rangeinput.cpp:162 rc.cpp:33 rc.cpp:45
-#, no-c-format
-msgid "START"
-msgstr ""
-
-#: listview/rangeinput.cpp:159 listview/rangeinput.cpp:164 rc.cpp:36 rc.cpp:51
-#, no-c-format
-msgid "HEAD"
-msgstr ""
-
-#: listview/rangeinput.cpp:160 listview/rangeinput.cpp:163 rc.cpp:39 rc.cpp:48
-#, no-c-format
-msgid "Number"
-msgstr ""
-
-#: listview/rangeinput.cpp:161 rc.cpp:42
-#, no-c-format
-msgid "Stop with revision"
-msgstr ""
-
-#: listview/svnactions.cpp:107
-msgid "Got no logs"
-msgstr ""
-
-#: listview/svnactions.cpp:177
-msgid "Error getting blame"
-msgstr ""
-
-#: listview/svnactions.cpp:182
-msgid "Got no annotate"
-msgstr ""
-
-#: listview/svnactions.cpp:191
-msgid "Line"
-msgstr ""
-
-#: listview/svnactions.cpp:209
-msgid "Blame %1"
-msgstr ""
-
-#: listview/svnactions.cpp:252
-msgid "Error getting content"
-msgstr ""
-
-#: listview/svnactions.cpp:257
-msgid "Got no content"
-msgstr ""
-
-#: listview/svnactions.cpp:261
-msgid "Content of %1"
-msgstr ""
-
-#: listview/svnactions.cpp:286
-msgid "May not make subdirs of a file"
-msgstr ""
-
-#: listview/svnactions.cpp:294
-msgid "New Dir"
-msgstr ""
-
-#: listview/svnactions.cpp:294
-msgid "Enter (sub-)directory name:"
-msgstr ""
-
-#: listview/svnactions.cpp:352 listview/kdesvnfilelist.cpp:45
-msgid "Name"
-msgstr ""
-
-#: listview/svnactions.cpp:354
-msgid "URL"
-msgstr ""
-
-#: listview/svnactions.cpp:356
-msgid "Canonical repository url"
-msgstr ""
-
-#: listview/svnactions.cpp:358
-msgid "Type"
-msgstr ""
-
-#: listview/svnactions.cpp:361
-msgid "Absent"
-msgstr ""
-
-#: listview/svnactions.cpp:367
-msgid "Directory"
-msgstr ""
-
-#: listview/svnactions.cpp:371
-msgid "Unknown"
-msgstr ""
-
-#: listview/svnactions.cpp:375
-msgid "Schedule"
-msgstr ""
-
-#: listview/svnactions.cpp:378
-msgid "Normal"
-msgstr ""
-
-#: listview/svnactions.cpp:381
-msgid "Addition"
-msgstr ""
-
-#: listview/svnactions.cpp:384
-msgid "Deletion"
-msgstr ""
-
-#: listview/svnactions.cpp:390
-msgid "Unknow"
-msgstr ""
-
-#: listview/svnactions.cpp:394
-msgid "UUID"
-msgstr ""
-
-#: listview/svnactions.cpp:395 listview/kdesvnfilelist.cpp:48
-msgid "Last author"
-msgstr ""
-
-#: listview/svnactions.cpp:396
-msgid "Last changed"
-msgstr ""
-
-#: listview/svnactions.cpp:397
-msgid "Property last changed"
-msgstr ""
-
-#: listview/svnactions.cpp:398
-msgid "Last revision"
-msgstr ""
-
-#: listview/svnactions.cpp:400
-msgid "New version of conflicted file"
-msgstr ""
-
-#: listview/svnactions.cpp:403
-msgid "Old version of conflicted file"
-msgstr ""
-
-#: listview/svnactions.cpp:406
-msgid "Working version of conflicted file"
-msgstr ""
-
-#: listview/svnactions.cpp:409
-msgid "Copy from URL"
-msgstr ""
-
-#: listview/svnactions.cpp:416
-msgid "Infolist"
-msgstr ""
-
-#: listview/kdesvnfilelist.cpp:46
-msgid "Status"
-msgstr ""
-
-#: listview/kdesvnfilelist.cpp:47
-msgid "Last changed Revision"
-msgstr ""
-
-#: listview/kdesvnfilelist.cpp:49
-msgid "Last change date"
-msgstr ""
-
-#: listview/kdesvnfilelist.cpp:295
-msgid "SVN Error"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:163
-msgid "Localy modified"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:166
-msgid "Localy added"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:169
-msgid "Missing"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:175
-msgid "Replaced"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:178
-msgid "Ignored"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:181
-msgid "External"
-msgstr ""
-
-#: listview/filelistviewitem.cpp:189
-msgid "Property modified"
-msgstr ""
+msgstr "ral@alwins-world.de"
 
 #: pref.cpp:30
 msgid "kdesvn Preferences"
@@ -435,7 +53,7 @@ msgstr ""
 
 #: main.cpp:30
 msgid "A SVN Client for KDE"
-msgstr ""
+msgstr "Ein SVN-Client für KDE"
 
 #: main.cpp:36
 msgid "Document to open"
@@ -443,37 +61,510 @@ msgstr ""
 
 #: main.cpp:42
 msgid "kdesvn"
-msgstr ""
-
-#: kdesvnview.cpp:103
-msgid "Repository opened"
-msgstr ""
+msgstr "kdesvn"
 
 #: kdesvnview.cpp:108
-msgid "Could not open repository"
-msgstr ""
+msgid "Repository opened"
+msgstr "Repository geöffnet"
 
-#: rc.cpp:97
+#: kdesvnview.cpp:113
+msgid "Could not open repository"
+msgstr "Konnte Repository nicht öffnen"
+
+#: rc.cpp:3
 #, no-c-format
 msgid "C&ustom"
 msgstr ""
 
-#: kdesvn.cpp:106
+#: rc.cpp:6
+#, no-c-format
+msgid "SVN Log"
+msgstr ""
+
+#: rc.cpp:9 svnfrontend/svnactions.cpp:234
+#, no-c-format
+msgid "Author"
+msgstr "Autor"
+
+#: rc.cpp:12
+#, no-c-format
+msgid "Revison"
+msgstr "Revision"
+
+#: rc.cpp:15 rc.cpp:88 rc.cpp:104
+#, no-c-format
+msgid "Date"
+msgstr "Datum"
+
+#: rc.cpp:21
+#, no-c-format
+msgid "Alt+C"
+msgstr "Alt+C"
+
+#: rc.cpp:24
+#, no-c-format
+msgid "Diff previous"
+msgstr "Diff zu vorherigen"
+
+#: rc.cpp:28 rc.cpp:67
+#, no-c-format
+msgid "He&lp"
+msgstr "Hi&lfe"
+
+#: rc.cpp:31 rc.cpp:70
+#, no-c-format
+msgid "Alt+L"
+msgstr "Alt+L"
+
+#: rc.cpp:34 svnfrontend/ccontextlistener.cpp:119
+#: svnfrontend/svnactions.cpp:354
+#, no-c-format
+msgid "Logmessage"
+msgstr "Logeintrag"
+
+#: rc.cpp:37
+#, no-c-format
+msgid "Enter a log message"
+msgstr "Gebe einen Logeintrage ein"
+
+#: rc.cpp:40
+#, no-c-format
+msgid "Or insert one of the last:"
+msgstr "Oder nutze einen der letzten:"
+
+#: rc.cpp:44
+#, no-c-format
+msgid "&Recursive"
+msgstr "&Rekursiv"
+
+#: rc.cpp:47
+#, no-c-format
+msgid "Alt+R"
+msgstr "Alt+R"
+
+#: rc.cpp:50
+#, no-c-format
+msgid "Edit property"
+msgstr "Bearbeite Eigenschaft"
+
+#: rc.cpp:53
+#, no-c-format
+msgid "Property value:"
+msgstr "Eigenschaftswert:"
+
+#: rc.cpp:56
+#, no-c-format
+msgid "Property name:"
+msgstr "Eigenschaftsname:"
+
+#: rc.cpp:73 svnfrontend/svnactions.cpp:100 svnfrontend/svnactions.cpp:277
+#: svnfrontend/svnactions.cpp:699
+#, no-c-format
+msgid "Revisions"
+msgstr "Revisionen"
+
+#: rc.cpp:76 svnfrontend/rangeinput_impl.cpp:162
+#, no-c-format
+msgid "Start with revision"
+msgstr "Beginne bei Revision"
+
+#: rc.cpp:79 rc.cpp:108
+#, no-c-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#: rc.cpp:82
+#, no-c-format
+msgid "N&umber"
+msgstr "N&ummer"
+
+#: rc.cpp:85
+#, no-c-format
+msgid "Alt+U"
+msgstr "Alt+U"
+
+#: rc.cpp:92
+#, no-c-format
+msgid "S&TART"
+msgstr "S&TART"
+
+#: rc.cpp:95
+#, no-c-format
+msgid "Alt+T"
+msgstr "Alt+T"
+
+#: rc.cpp:98
+#, no-c-format
+msgid "Stop with revision"
+msgstr "Stoppe bei Revision"
+
+#: rc.cpp:101
+#, no-c-format
+msgid "START"
+msgstr "START"
+
+#: rc.cpp:111
+#, no-c-format
+msgid "Number"
+msgstr "Nummer"
+
+#: rc.cpp:114
+#, no-c-format
+msgid "Authentification"
+msgstr "Authentifizierung"
+
+#: rc.cpp:117
+#, no-c-format
+msgid "Enter authentification info for"
+msgstr "Gebe Anmeldeinfos ein für"
+
+#: rc.cpp:120
+#, no-c-format
+msgid "Username:"
+msgstr "Nutzername:"
+
+#: rc.cpp:123
+#, no-c-format
+msgid "Password:"
+msgstr "Passwort:"
+
+#: rc.cpp:126
+#, no-c-format
+msgid "Store password"
+msgstr "Speichere Passwort"
+
+#: rc.cpp:140
+#, no-c-format
+msgid "F1"
+msgstr "F1"
+
+#: kdesvn.cpp:106 kdesvn.cpp:199
 msgid "Open remote repository"
 msgstr "Öffne entfernte Repository"
 
 #: kdesvn.cpp:117
 msgid "Subversion"
-msgstr ""
-
-#: kdesvn.cpp:199
-msgid "Open remote"
-msgstr ""
+msgstr "Subversion"
 
 #: kdesvn.cpp:214
-msgid "Open Location"
-msgstr ""
+msgid "Open working copy"
+msgstr "Öffne Arbeitskopie"
 
 #: kdesvn.cpp:287
 msgid "Ready"
+msgstr "Fertig"
+
+#: svnfrontend/propertiesdlg.cpp:119 svnfrontend/propertiesdlg.cpp:203
+msgid "Value"
+msgstr "Wert"
+
+#: svnfrontend/propertiesdlg.cpp:201
+msgid "<font size=\"+1\">View and modify properties</font>"
+msgstr "<font size=\"+1\">Betrachte und Bearbeite Eigenschaften</font>"
+
+#: svnfrontend/propertiesdlg.cpp:204
+msgid "List of properties set"
+msgstr "Liste von gesetzten Eigenschaften"
+
+#: svnfrontend/propertiesdlg.cpp:205
+msgid "&Accept"
+msgstr "&Akzeptiere"
+
+#: svnfrontend/propertiesdlg.cpp:208
+msgid "Add property"
+msgstr "Neue Eigenschaft"
+
+#: svnfrontend/propertiesdlg.cpp:209
+msgid "Modify property"
+msgstr "Bearbeite Eigenschaft"
+
+#: svnfrontend/propertiesdlg.cpp:210 svnfrontend/propertiesdlg.cpp:227
+msgid "Delete property"
+msgstr "Lösche Eigenschaft"
+
+#: svnfrontend/propertiesdlg.cpp:225
+msgid "Undelete property"
+msgstr "Löschen rückgangi"
+
+#: svnfrontend/propertiesdlg.cpp:240
+msgid "Missing SVN link"
+msgstr "Fehlende Verbindung zu SVN"
+
+#: svnfrontend/propertiesdlg.cpp:314 svnfrontend/propertiesdlg.cpp:356
+msgid ""
+"An property with that name exists.\n"
+"Rejecting it."
+msgstr "Eine Eigenschaft mit diesem Namen existiert. \nAbgewiesen."
+
+#: svnfrontend/propertiesdlg.cpp:314 svnfrontend/propertiesdlg.cpp:356
+msgid "Double property"
+msgstr "Doppelte Eigenschaft"
+
+#: svnfrontend/rangeinput_impl.cpp:159
+msgid "Select revision"
+msgstr "Wähle Revision"
+
+#: svnfrontend/ccontextlistener.cpp:34
+msgid "Revert"
+msgstr "Rückgängig"
+
+#: svnfrontend/ccontextlistener.cpp:35
+msgid "Revert failed"
+msgstr "Rückgängig machen fehlgeschlagen"
+
+#: svnfrontend/ccontextlistener.cpp:36
+msgid "Resolved"
+msgstr "Gelöst"
+
+#: svnfrontend/ccontextlistener.cpp:37
+msgid "Skip"
+msgstr "Überspringe"
+
+#: svnfrontend/ccontextlistener.cpp:38 svnfrontend/filelistviewitem.cpp:193
+msgid "Deleted"
+msgstr "Gelöscht"
+
+#: svnfrontend/ccontextlistener.cpp:39
+msgid "Added"
+msgstr "Hinzugefügt"
+
+#: svnfrontend/ccontextlistener.cpp:40
+msgid "Update"
+msgstr "Erneuere"
+
+#: svnfrontend/ccontextlistener.cpp:41
+msgid "Update complete"
+msgstr "Erneuern fertig"
+
+#: svnfrontend/ccontextlistener.cpp:42
+msgid "Update external"
+msgstr "Erneuere extern"
+
+#: svnfrontend/ccontextlistener.cpp:43
+msgid "Status complete"
+msgstr "Status fertig"
+
+#: svnfrontend/ccontextlistener.cpp:44
+msgid "Status external"
+msgstr "Status extern"
+
+#: svnfrontend/ccontextlistener.cpp:45
+msgid "Commit Modified"
+msgstr "Sende bearbeitetes"
+
+#: svnfrontend/ccontextlistener.cpp:46
+msgid "Commit Added"
+msgstr "Sende hinzugefügtes"
+
+#: svnfrontend/ccontextlistener.cpp:47
+msgid "Commit Deleted"
+msgstr "Sende gelöschtes"
+
+#: svnfrontend/ccontextlistener.cpp:48
+msgid "Commit Replaced"
+msgstr "Sende ersetztes"
+
+#: svnfrontend/ccontextlistener.cpp:49
+msgid "Postfix txdelta"
 msgstr ""
+
+#: svnfrontend/ccontextlistener.cpp:50
+msgid "Blame"
+msgstr "Blame"
+
+#: svnfrontend/ccontextlistener.cpp:119 svnfrontend/svnactions.cpp:354
+msgid "Enter a logmessage"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:139
+msgid "Got no logs"
+msgstr "Habe keine Logs erhalten"
+
+#: svnfrontend/svnactions.cpp:189
+msgid "&Ok"
+msgstr "&Ok"
+
+#: svnfrontend/svnactions.cpp:220
+msgid "Error getting blame"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:225
+msgid "Got no annotate"
+msgstr "Kein Annotate erhalten"
+
+#: svnfrontend/svnactions.cpp:234
+msgid "Line"
+msgstr "Zeile"
+
+#: svnfrontend/svnactions.cpp:252
+msgid "Blame %1"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:300
+msgid "Error getting content"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:305
+msgid "Got no content"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:309
+msgid "Content of %1"
+msgstr "Inhalt von %1"
+
+#: svnfrontend/svnactions.cpp:334
+msgid "May not make subdirs of a file"
+msgstr "Kann kein Unterverzeichnis einer Datei anlegen"
+
+#: svnfrontend/svnactions.cpp:342
+msgid "New Dir"
+msgstr "Neues Verzeichnis"
+
+#: svnfrontend/svnactions.cpp:342
+msgid "Enter (sub-)directory name:"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:400 svnfrontend/kdesvnfilelist.cpp:44
+msgid "Name"
+msgstr "Name"
+
+#: svnfrontend/svnactions.cpp:402
+msgid "URL"
+msgstr "URL"
+
+#: svnfrontend/svnactions.cpp:404
+msgid "Canonical repository url"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:406
+msgid "Type"
+msgstr "Typ"
+
+#: svnfrontend/svnactions.cpp:409
+msgid "Absent"
+msgstr "Abwesend"
+
+#: svnfrontend/svnactions.cpp:415
+msgid "Directory"
+msgstr "Verzeichnis"
+
+#: svnfrontend/svnactions.cpp:419
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: svnfrontend/svnactions.cpp:423
+msgid "Schedule"
+msgstr "Schedule"
+
+#: svnfrontend/svnactions.cpp:426
+msgid "Normal"
+msgstr "Normal"
+
+#: svnfrontend/svnactions.cpp:429
+msgid "Addition"
+msgstr "Hinzufügen"
+
+#: svnfrontend/svnactions.cpp:432
+msgid "Deletion"
+msgstr "Löschen"
+
+#: svnfrontend/svnactions.cpp:438
+msgid "Unknow"
+msgstr "Unbekannt"
+
+#: svnfrontend/svnactions.cpp:442
+msgid "UUID"
+msgstr "UUID"
+
+#: svnfrontend/svnactions.cpp:443 svnfrontend/kdesvnfilelist.cpp:47
+msgid "Last author"
+msgstr "Letzter Autor"
+
+#: svnfrontend/svnactions.cpp:444
+msgid "Last changed"
+msgstr "Zuletzt geändert"
+
+#: svnfrontend/svnactions.cpp:445
+msgid "Property last changed"
+msgstr "Eigenschaft zuletzt geändert"
+
+#: svnfrontend/svnactions.cpp:446
+msgid "Last revision"
+msgstr "Letzte Revision"
+
+#: svnfrontend/svnactions.cpp:448
+msgid "New version of conflicted file"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:451
+msgid "Old version of conflicted file"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:454
+msgid "Working version of conflicted file"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:457
+msgid "Copy from URL"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:464
+msgid "Infolist"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:516
+msgid "Commit log"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:643
+msgid "Diff display"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:687
+msgid "Cannot make multiple updates"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:45
+msgid "Status"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:46
+msgid "Last changed Revision"
+msgstr "Letzte geänderte Revision"
+
+#: svnfrontend/kdesvnfilelist.cpp:48
+msgid "Last change date"
+msgstr "Letztes Änderungsdatum"
+
+#: svnfrontend/kdesvnfilelist.cpp:302
+msgid "SVN Error"
+msgstr ""
+
+#: svnfrontend/filelistviewitem.cpp:184
+msgid "Localy modified"
+msgstr "Lokal bearbeitet"
+
+#: svnfrontend/filelistviewitem.cpp:187
+msgid "Localy added"
+msgstr "Lokal hinzugefügt"
+
+#: svnfrontend/filelistviewitem.cpp:190
+msgid "Missing"
+msgstr "Fehlt"
+
+#: svnfrontend/filelistviewitem.cpp:196
+msgid "Replaced"
+msgstr "Ersetzt"
+
+#: svnfrontend/filelistviewitem.cpp:199
+msgid "Ignored"
+msgstr "Ignoriert"
+
+#: svnfrontend/filelistviewitem.cpp:202
+msgid "External"
+msgstr "Extern"
+
+#: svnfrontend/filelistviewitem.cpp:210
+msgid "Property modified"
+msgstr "Eigenschaft verändert"
+

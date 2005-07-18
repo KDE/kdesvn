@@ -205,16 +205,18 @@
     </codecompletion>
     <designerintegration>
       <qtdesigner>
+        <implementation class="CheckoutInfo_impl" path="src/svnfrontend/checkoutinfo.ui" implementationpath="src/svnfrontend/checkoutinfo_impl.h" />
         <implementation class="Logmsg_impl" path="src/svnfrontend/logmessage.ui" implementationpath="src/svnfrontend/logmsg_impl.h" />
+        <implementation class="Rangeinput_impl" path="src/svnfrontend/rangeinput.ui" implementationpath="src/svnfrontend/rangeinput_impl.h" />
       </qtdesigner>
     </designerintegration>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
-      <inlineGet>true</inlineGet>
-      <inlineSet>true</inlineSet>
+      <inlineGet>false</inlineGet>
+      <inlineSet>false</inlineSet>
     </creategettersetter>
   </kdevcppsupport>
 </kdevelop>

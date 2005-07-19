@@ -274,7 +274,6 @@ QDateTime SvnActions::apr2qttime(apr_time_t atime)
  */
 void SvnActions::slotRangeBlame()
 {
-    return;
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;

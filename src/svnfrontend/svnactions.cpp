@@ -48,6 +48,7 @@
 #include <ktempfile.h>
 #include <kdialogbase.h>
 #include <qvbox.h>
+#include <kapplication.h>
 
 #if 0
 #include <khtml_part.h>
@@ -707,10 +708,9 @@ void SvnActions::prepareUpdate(bool ask)
     }
     makeUpdate(what,r,true);
     if (k) {
-        k->removeChilds();
-        m_ParentList->checkDirs(what,k);
-        k->refreshMe();
         k->refreshStatus();
+        emit reinitItem(k);
+        k->refreshMe();
     }
 }
 
@@ -800,28 +800,40 @@ void SvnActions::slotDelete()
     }
 }
 
+
+
 /*!
     \fn kdesvnfilelist::slotCheckout()
  */
-void SvnActions::slotCheckout()
+void SvnActions::CheckoutExport(bool _exp)
 {
     CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,i18n("Checkout a repository"),true);
+    KDialog * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true);
     if (dlg) {
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt());
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp);
         }
         delete dlg;
     }
 }
 
-void SvnActions::slotCheckoutCurrent()
+void SvnActions::slotCheckout()
 {
-    if (!m_ParentList||m_ParentList->isLocal()) return;
+    CheckoutExport(false);
+}
+
+void SvnActions::slotExport()
+{
+    CheckoutExport(true);
+}
+
+void SvnActions::CheckoutExportCurrent(bool _exp)
+{
+    if (!m_ParentList|| !_exp&&m_ParentList->isLocal()) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (k && !k->isDir()) {
-        KMessageBox::error(m_ParentList,i18n("Checking out a file?"));
+        KMessageBox::error(m_ParentList,_exp?i18n("Exporting a file"):i18n("Checking out a file?"));
         return;
     }
     QString what;
@@ -831,18 +843,28 @@ void SvnActions::slotCheckoutCurrent()
         what = k->fullName();
     }
     CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,"Checkout a repository",true);
+    KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
     if (dlg) {
         ptr->setStartUrl(what);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt());
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp);
         }
         delete dlg;
     }
 }
 
-void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force)
+void SvnActions::slotCheckoutCurrent()
+{
+    CheckoutExportCurrent(false);
+}
+
+void SvnActions::slotExportCurrent()
+{
+    CheckoutExportCurrent(true);
+}
+
+void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force,bool _exp)
 {
     QString fUrl = rUrl;
     QString ex;
@@ -850,16 +872,22 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         fUrl.truncate(fUrl.length()-1);
     }
     svn::Path p(tPath.local8Bit());
-    reInitClient();
+    if (!_exp) reInitClient();
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Checkout"),i18n("Checking out"));
-        m_Svnclient.checkout(fUrl.local8Bit(),p,r,force);
+        StopDlg sdlg(m_SvnContext,0,0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
+        if (_exp) {
+            m_Svnclient.doExport(svn::Path(fUrl.local8Bit()),p,r,force);
+        } else {
+            m_Svnclient.checkout(fUrl.local8Bit(),p,r,force);
+        }
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
         return;
     }
-    m_ParentList->openURL(tPath,true);
+    if (!_exp) m_ParentList->openURL(tPath,true);
+    /// @todo make invoking browser a option
+    else kapp->invokeBrowser(tPath);
 }
 
 void SvnActions::slotRevert()

@@ -46,7 +46,7 @@ const QString CContextListener::action_strings[]={
     i18n("Commit Added"),
     i18n("Commit Deleted"),
     i18n("Commit Replaced"),
-    i18n("Postfix txdelta"),
+    QString::null, //tx delta -> making ticks instead
     i18n("Blame")
 };
 
@@ -66,6 +66,7 @@ CContextListener::CContextListener(QObject *parent, const char *name)
 
 CContextListener::~CContextListener()
 {
+    disconnect();
 }
 
 bool CContextListener::contextGetLogin (
@@ -95,7 +96,7 @@ void CContextListener::contextNotify (const char *path,
 {
     QString aString = NotifyAction(action);
     if (aString.isEmpty()) {
-        kapp->processEvents(20);
+        emit tickProgress();
         return;
     }
     QString msg;

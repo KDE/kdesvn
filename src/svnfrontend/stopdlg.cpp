@@ -26,6 +26,7 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlabel.h>
+#include <kprogress.h>
 
 StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
@@ -40,8 +41,14 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
     QVBoxLayout* layout = new QVBoxLayout(mainWidget, 10);
     mLabel = new QLabel(text, mainWidget);
     layout->addWidget(mLabel);
+    m_ProgressBar=new KProgress(15,mainWidget);
+    m_ProgressBar->setCenterIndicator (false);
+    m_ProgressBar->setTextEnabled(false);
+
+    layout->addWidget(m_ProgressBar);
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
+    connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
     mShowTimer->start(m_MinDuration, true);
 }
 
@@ -68,6 +75,16 @@ void StopDlg::slotCancel()
 bool StopDlg::cancelld()
 {
     return mCancelled;
+}
+
+void StopDlg::slotTick()
+{
+    if (m_ProgressBar->progress()==15) {
+        m_ProgressBar->reset();
+    } else {
+        m_ProgressBar->setProgress(m_ProgressBar->progress()+1);
+    }
+    kapp->processEvents();
 }
 
 #include "stopdlg.moc"

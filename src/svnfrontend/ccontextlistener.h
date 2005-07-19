@@ -63,6 +63,7 @@ public:
     void setCancelled(bool how){m_cancelMe = how;}
 signals:
     void sendNotify(const QString&);
+    void tickProgress();
 
 protected:
     static const int smax_actionstring;

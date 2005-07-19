@@ -66,6 +66,9 @@ protected:
     static QDateTime apr2qttime(apr_time_t);
     void makeUpdate(const QString&what,const svn::Revision&rev,bool recurse);
 
+    void CheckoutExport(bool _exp);
+    void CheckoutExportCurrent(bool _exp);
+
 public slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
@@ -85,9 +88,13 @@ public slots:
     virtual void slotAdd();
     virtual void slotDelete();
 
-    virtual void makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force);
+    virtual void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool);
+
     virtual void slotCheckoutCurrent();
+    virtual void slotExportCurrent();
+
     virtual void slotCheckout();
+    virtual void slotExport();
 
     virtual void slotRevert();
     virtual void slotRevertItems(const QStringList&);

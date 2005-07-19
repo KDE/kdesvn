@@ -33,6 +33,7 @@
 #include <kdirselectdialog.h>
 #include <klineedit.h>
 #include <qlayout.h>
+#include <kfileitem.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
  : KListView(parent, name),m_SvnWrapper(new SvnActions(this))
@@ -54,6 +55,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     setupActions();
 
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
+    connect(this,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
     connect(m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
@@ -93,6 +95,9 @@ void kdesvnfilelist::setupActions()
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
     m_switchRepository = new KAction("Switch repository",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
+    m_ExportAction = new KAction("Export a repository",KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
+    m_ExportCurrentAction = new KAction("Export current repository path",KShortcut(),
+        m_SvnWrapper,SLOT(slotExportCurrent()),m_filesAction,"make_svn_export_current");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
@@ -360,4 +365,21 @@ void kdesvnfilelist::slotChangeToRepository()
     if (!openURL(k->svnStatus().entry().url())) {
         openURL(ex);
     }
+}
+
+void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
+{
+    if (!item) return;
+
+    FileListViewItem*fki = static_cast<FileListViewItem*>(item);
+    if (fki->isDir()) {
+        if (fki->isOpen()) {
+            fki->setOpen(false);
+        } else {
+            fki->setOpen(true);
+        }
+        return;
+    }
+    KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
+    fitem.run();
 }

@@ -26,6 +26,8 @@ class QTimer;
 
 class CContextListener;
 class QLabel;
+class KProgress;
+
 /**
 @author Rajko Albrecht
 */
@@ -46,6 +48,10 @@ protected:
     QString mCancelText;
     bool mShown;
     QLabel*mLabel;
+    KProgress*m_ProgressBar;
+
+public slots:
+    virtual void slotTick();
 
 protected slots:
     virtual void slotAutoShow();

@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St,
+ * License along with this library (in the file LGPL.txt); if not, 
+ * write to the Free Software Foundation, Inc., 51 Franklin St, 
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -32,13 +32,13 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "client.hpp"
-#include "dirent.hpp"
-#include "exception.hpp"
-#include "pool.hpp"
-#include "status.hpp"
-#include "targets.hpp"
-#include "url.hpp"
+#include "svncpp/client.hpp"
+#include "svncpp/dirent.hpp"
+#include "svncpp/exception.hpp"
+#include "svncpp/pool.hpp"
+#include "svncpp/status.hpp"
+#include "svncpp/targets.hpp"
+#include "svncpp/url.hpp"
 
 
 namespace svn
@@ -48,11 +48,11 @@ namespace svn
                    apr_hash_t * changedPaths,
                    svn_revnum_t rev,
                    const char *author,
-                   const char *date,
-                   const char *msg,
+                   const char *date, 
+                   const char *msg, 
                    apr_pool_t * pool)
   {
-    LogEntries * entries =
+    LogEntries * entries = 
       (LogEntries *) baton;
     entries->insert (entries->begin (), LogEntry (rev, author, date, msg));
     if (changedPaths != NULL)
@@ -68,7 +68,7 @@ namespace svn
         apr_hash_this (hi, (const void **) &path, NULL, &val);
 
         svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
-
+        
         entry.changedPaths.push_back (
               LogChangePathEntry (path,
                                   log_item->action,
@@ -136,7 +136,7 @@ namespace svn
       throw ClientException (error);
     }
 
-    apr_array_header_t *statusarray =
+    apr_array_header_t *statusarray = 
       svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
                             pool);
     int i;
@@ -155,11 +155,11 @@ namespace svn
 
       entries.push_back (Status (filePath, status));
     }
-
+    
     return entries;
   }
-
-  static Status
+  
+  static Status 
   dirEntryToStatus (const char * path, const DirEntry & dirEntry)
   {
     Pool pool;
@@ -168,7 +168,6 @@ namespace svn
       static_cast<svn_wc_entry_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
 
-    //memset(e,0,sizeof(svn_wc_entry_t));
     std::string url (path);
     url += "/";
     url += dirEntry.name ();
@@ -187,8 +186,6 @@ namespace svn
     svn_wc_status_t * s =
       static_cast<svn_wc_status_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_status_t)));
-    memset(s,0,sizeof (svn_wc_status_t));
-
     s->entry = e;
     s->text_status = svn_wc_status_normal;
     s->prop_status = svn_wc_status_normal;
@@ -212,7 +209,7 @@ namespace svn
     Revision rev (Revision::HEAD);
     DirEntries dirEntries = client->list (path, rev, descend);
     DirEntries::const_iterator it;
-
+    
     StatusEntries entries;
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
@@ -225,7 +222,7 @@ namespace svn
     return entries;
   }
 
-  StatusEntries
+  StatusEntries 
   Client::status (const char * path,
                   const bool descend,
                   const bool get_all,
@@ -233,13 +230,13 @@ namespace svn
                   const bool no_ignore) throw (ClientException)
   {
     if (Url::isValid (path))
-      return remoteStatus (this, path, descend, get_all, update,
+      return remoteStatus (this, path, descend, get_all, update, 
                            no_ignore, m_context);
     else
-      return localStatus (path, descend, get_all, update,
+      return localStatus (path, descend, get_all, update, 
                           no_ignore, m_context);
   }
-
+  
   static Status
   localSingleStatus (const char * path, Context * context)
   {
@@ -271,8 +268,8 @@ namespace svn
     {
       throw ClientException (error);
     }
-
-    apr_array_header_t *statusarray =
+    
+    apr_array_header_t *statusarray = 
       svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
                             pool);
     const svn_sort__item_t *item;
@@ -282,7 +279,7 @@ namespace svn
     item = &APR_ARRAY_IDX (statusarray, 0, const svn_sort__item_t);
     status = (svn_wc_status_t *) item->value;
     filePath = (const char *) item->key;
-
+    
     return Status (filePath, status);
   };
 
@@ -299,7 +296,7 @@ namespace svn
       return dirEntryToStatus (path, dirEntries [0]);
   }
 
-  Status
+  Status 
   Client::singleStatus (const char * path) throw (ClientException)
   {
     if (Url::isValid (path))
@@ -309,7 +306,7 @@ namespace svn
   }
 
   const LogEntries *
-  Client::log (const char * path, const Revision & revisionStart,
+  Client::log (const char * path, const Revision & revisionStart, 
                const Revision & revisionEnd, bool discoverChangedPaths,
                bool strictNodeHistory ) throw (ClientException)
   {
@@ -318,13 +315,13 @@ namespace svn
     LogEntries * entries = new LogEntries ();
     svn_error_t *error;
     error = svn_client_log (
-      target.array (pool),
-      revisionStart.revision (),
-      revisionEnd.revision (),
+      target.array (pool), 
+      revisionStart.revision (), 
+      revisionEnd.revision (), 
       discoverChangedPaths ? 1 : 0,
       strictNodeHistory ? 1 : 0,
       logReceiver,
-      entries,
+      entries, 
       *m_context, // client ctx
       pool);
 

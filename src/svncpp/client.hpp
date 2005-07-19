@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St,
+ * License along with this library (in the file LGPL.txt); if not, 
+ * write to the Free Software Foundation, Inc., 51 Franklin St, 
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -26,19 +26,30 @@
 #ifndef _SVNCPP_CLIENT_H_
 #define _SVNCPP_CLIENT_H_
 
+// Ignore MSVC 6 compiler warning: debug symbol truncated
+#if defined (_MSC_VER) && _MSC_VER <= 1200
+#pragma warning (disable: 4786)
+#endif
+
+// Ignore MSVC 7 compiler warning: C++ exception specification
+#if defined (_MSC_VER) && _MSC_VER > 1200 && _MSC_VER <= 1310
+#pragma warning (disable: 4290)
+#endif
+
+
 // stl
 #include <vector>
 #include <utility>
 #include <map>
 
 // svncpp
-#include "context.hpp"
-#include "exception.hpp"
-#include "path.hpp"
-#include "entry.hpp"
-#include "revision.hpp"
-#include "log_entry.hpp"
-#include "annotate_line.hpp"
+#include "svncpp/context.hpp"
+#include "svncpp/exception.hpp"
+#include "svncpp/path.hpp"
+#include "svncpp/entry.hpp"
+#include "svncpp/revision.hpp"
+#include "svncpp/log_entry.hpp"
+#include "svncpp/annotate_line.hpp"
 
 
 namespace svn
@@ -78,7 +89,7 @@ namespace svn
     /**
      * @return returns the Client context
      */
-    const Context *
+    const Context * 
     getContext () const;
 
     /**
@@ -88,7 +99,7 @@ namespace svn
      *
      * @param context new context to use
      */
-    void
+    void 
     setContext (Context * context = NULL);
 
     /**
@@ -103,7 +114,7 @@ namespace svn
      * @param no_ignore Disregard default and svn:ignore property ignores.
      * @return vector with Status entries.
      */
-    StatusEntries
+    StatusEntries 
     status (const char * path,
             const bool descend = false,
             const bool get_all = true,
@@ -118,7 +129,7 @@ namespace svn
      * @param path File to gather status.
      * @return a Status with Statis.isVersioned = FALSE
      */
-    Status
+    Status 
     singleStatus (const char * path) throw (ClientException);
 
   /**
@@ -131,15 +142,15 @@ namespace svn
      * @exception ClientException
      */
     svn_revnum_t
-    checkout (const char * moduleName, const Path & destPath,
-              const Revision & revision,
+    checkout (const char * moduleName, const Path & destPath, 
+              const Revision & revision, 
               bool recurse) throw (ClientException);
-
+  
     /**
      * relocate wc @a from to @a to
      * @exception ClientException
      */
-    void
+    void 
     relocate (const Path & path, const char *from_url,
               const char *to_url, bool recurse) throw (ClientException);
 
@@ -147,7 +158,7 @@ namespace svn
      * Sets a single file for deletion.
      * @exception ClientException
      */
-    void
+    void 
     remove (const Path & path, bool force) throw (ClientException);
 
     /**
@@ -157,8 +168,8 @@ namespace svn
      * @param force force if files are locally modified
      * @exception ClientException
      */
-    void
-    remove (const Targets & targets,
+    void 
+    remove (const Targets & targets, 
             bool force) throw (ClientException);
 
     /**
@@ -173,20 +184,20 @@ namespace svn
      * Adds a file to the repository.
      * @exception ClientException
      */
-    void
+    void 
     add (const Path & path, bool recurse) throw (ClientException);
 
     /**
      * Updates the file or directory.
      * @param path target file.
-     * @param revision the revision number to checkout.
-     *                 Revision::HEAD will checkout the
+     * @param revision the revision number to checkout. 
+     *                 Revision::HEAD will checkout the 
      *                 latest revision.
      * @param recurse recursively update.
      * @exception ClientException
      */
-    svn_revnum_t
-    update (const Path & path, const Revision & revision,
+    svn_revnum_t 
+    update (const Path & path, const Revision & revision, 
             bool recurse) throw (ClientException);
 
     /**
@@ -198,7 +209,7 @@ namespace svn
      * @return contents of the file
      */
     std::string
-    cat (const Path & path,
+    cat (const Path & path, 
          const Revision & revision) throw (ClientException);
 
 
@@ -214,7 +225,7 @@ namespace svn
      *
      * @param dstPath Filename in which the contents
      *                of the file file will be safed.
-     * @param path path or url
+     * @param path path or url 
      * @param revision
      */
     void
@@ -232,14 +243,14 @@ namespace svn
      * @return contents of the file
      */
     AnnotatedFile *
-    annotate (const Path & path,
-              const Revision & revisionStart,
+    annotate (const Path & path, 
+              const Revision & revisionStart, 
               const Revision & revisionEnd) throw (ClientException);
 
     /**
-     * Commits changes to the repository. This usually requires
+     * Commits changes to the repository. This usually requires 
      * authentication, see Auth.
-     * @return Returns a long representing the revision. It returns a
+     * @return Returns a long representing the revision. It returns a 
      *         -1 if the revision number is invalid.
      * @param targets files to commit.
      * @param message log message.
@@ -247,16 +258,16 @@ namespace svn
      * @exception ClientException
      */
     svn_revnum_t
-    commit (const Targets & targets,
-            const char * message,
+    commit (const Targets & targets, 
+            const char * message, 
             bool recurse) throw (ClientException);
 
     /**
      * Copies a versioned file with the history preserved.
      * @exception ClientException
      */
-    void
-    copy (const Path & srcPath,
+    void 
+    copy (const Path & srcPath, 
           const Revision & srcRevision,
           const Path & destPath) throw (ClientException);
 
@@ -264,26 +275,26 @@ namespace svn
      * Moves or renames a file.
      * @exception ClientException
      */
-    void
-    move (const Path & srcPath,
-          const Revision & srcRevision,
-          const Path & destPath,
+    void 
+    move (const Path & srcPath, 
+          const Revision & srcRevision, 
+          const Path & destPath, 
           bool force) throw (ClientException);
 
     /**
-     * Creates a directory directly in a repository or creates a
+     * Creates a directory directly in a repository or creates a 
      * directory on disk and schedules it for addition. If <i>path</i>
      * is a URL then authentication is usually required, see Auth.
-     *
+     * 
      * @param path
      * @param message log message.
      * @exception ClientException
      */
-    void
-    mkdir (const Path & path,
+    void 
+    mkdir (const Path & path, 
            const char * message) throw (ClientException);
-    void
-    mkdir (const Targets & targets,
+    void 
+    mkdir (const Targets & targets, 
            const char * message) throw (ClientException);
 
     /**
@@ -292,19 +303,19 @@ namespace svn
      * @param path a local directory.
      * @exception ClientException
      */
-    void
+    void 
     cleanup (const Path & path) throw (ClientException);
 
     /**
      * Removes the 'conflicted' state on a file.
      * @exception ClientException
      */
-    void
+    void 
     resolved (const Path & path, bool recurse) throw (ClientException);
 
     /**
-     * Exports the contents of either a subversion repository into a
-     * 'clean' directory (meaning a directory with no administrative
+     * Exports the contents of either a subversion repository into a 
+     * 'clean' directory (meaning a directory with no administrative 
      * directories).
      * @exception ClientException
      * @param srcPath source path
@@ -313,19 +324,19 @@ namespace svn
      * @param force force export
      */
     svn_revnum_t
-    doExport (const Path & srcPath,
-              const Path & destPath,
-              const Revision & revision,
+    doExport (const Path & srcPath, 
+              const Path & destPath, 
+              const Revision & revision, 
               bool force=false) throw (ClientException);
 
     /**
-     * Update local copy to mirror a new url. This excapsulates the
+     * Update local copy to mirror a new url. This excapsulates the 
      * svn_client_switch() client method.
      * @exception ClientException
      */
     svn_revnum_t
-    doSwitch (const Path & path, const char * url,
-              const Revision & revision,
+    doSwitch (const Path & path, const char * url, 
+              const Revision & revision, 
               bool recurse) throw (ClientException);
 
     /**
@@ -337,19 +348,19 @@ namespace svn
      * @param recurse
      * @exception ClientException
      */
-    void
+    void 
     import (const Path & path, const char * url,
-            const char * message,
+            const char * message, 
             bool recurse) throw (ClientException);
 
     /**
      * Merge changes from two paths into a new local path.
      * @exception ClientException
      */
-    void
-    merge (const Path & path1, const Revision & revision1,
+    void 
+    merge (const Path & path1, const Revision & revision1, 
            const Path & path2, const Revision & revision2,
-           const Path & localPath, bool force,
+           const Path & localPath, bool force, 
            bool recurse,
            bool notice_ancestry=false,
            bool dry_run=false) throw (ClientException);
@@ -380,9 +391,9 @@ namespace svn
      * @return a vector with log entries
      */
     const LogEntries *
-    log (const char * path, const Revision & revisionStart,
+    log (const char * path, const Revision & revisionStart, 
          const Revision & revisionEnd,
-         bool discoverChangedPaths=false,
+         bool discoverChangedPaths=false, 
          bool strictNodeHistory=true) throw (ClientException);
 
     /**
@@ -420,9 +431,9 @@ namespace svn
      * @remark Please do not use the method anymore. Since it
      *         tries to return entries with absolute paths
      *         it has to add @a pathOrUrl to the beginning of
-     *         the enrties. This works fine if @a pathOrUrl
+     *         the enrties. This works fine if @a pathOrUrl 
      *         points to a directory. But if it point to a file
-     *         "file:///foo/bar.txt", the path of the returned
+     *         "file:///foo/bar.txt", the path of the returned 
      *         entry will be "file:///foo/bar.txt/bar.txt".
      *         Please use @a list instead.
      *
@@ -452,9 +463,9 @@ namespace svn
      *         a relative path (only filename)
      */
     DirEntries
-    list(const char * pathOrUrl,
-        svn_opt_revision_t * revision,
-        bool recurse) throw (ClientException);
+    list (const char * pathOrUrl,
+          svn_opt_revision_t * revision,
+          bool recurse) throw (ClientException);
 
     /**
      * lists properties in @a path no matter whether local or

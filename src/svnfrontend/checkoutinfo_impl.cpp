@@ -23,6 +23,7 @@
 #include <qlabel.h>
 #include <klineedit.h>
 #include <qcheckbox.h>
+#include <klocale.h>
 
 CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent, const char *name)
     :CheckoutInfo(parent, name)
@@ -58,6 +59,41 @@ bool CheckoutInfo_impl::forceIt()
 void CheckoutInfo_impl::setStartUrl(const QString&what)
 {
     m_UrlEdit->setText(what);
+}
+
+void CheckoutInfo_impl::disableForce(bool how)
+{
+    if (how) {
+        m_forceButton->setEnabled(false);
+        m_forceButton->hide();
+    } else if (!how) {
+        m_forceButton->setEnabled(false);
+        m_forceButton->show();
+    }
+}
+
+void CheckoutInfo_impl::forceAsRecursive(bool how)
+{
+    if (how) {
+        m_forceButton->setText(i18n("Recursive"));
+        m_forceButton->setChecked(true);
+    } else  {
+        m_forceButton->setText(i18n("Force"));
+        m_forceButton->setChecked(false);
+    }
+}
+
+void CheckoutInfo_impl::disableTargetDir(bool how)
+{
+    if (how) {
+        m_TargetSelector->setEnabled(false);
+        m_TargetSelector->hide();
+        m_TargetLabel->hide();
+    } else if (!how) {
+        m_TargetSelector->setEnabled(true);
+        m_TargetSelector->show();
+        m_TargetLabel->show();
+    }
 }
 
 #include "checkoutinfo_impl.moc"

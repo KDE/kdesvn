@@ -36,6 +36,10 @@ public:
 
     bool forceIt();
     void setStartUrl(const QString&);
+
+    void disableForce(bool how);
+    void disableTargetDir(bool how);
+    void forceAsRecursive(bool how);
 };
 
 #endif

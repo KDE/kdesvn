@@ -8,10 +8,6 @@ Implement the SVN commands:
    merge
    move (mv, rename, ren)
    resolved
-   switch (sw)
-
-Problems:
-    - blame let application crash.
 
 Work:
     - let user setup how logs will made, "strict node" (eg. dont follow moves/copies)

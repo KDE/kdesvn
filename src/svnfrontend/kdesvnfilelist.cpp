@@ -59,6 +59,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
     connect(m_SvnWrapper,SIGNAL(dirAdded(const QString&,FileListViewItem*)),this,
         SLOT(slotDirAdded(const QString&,FileListViewItem*)));
+    connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
 }
 
 svn::Client*kdesvnfilelist::svnclient()
@@ -90,6 +91,8 @@ void kdesvnfilelist::setupActions()
     m_RevertAction  = new KAction("Revert current changes",KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
     m_changeToRepository = new KAction("Switch to repository",KShortcut(),
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
+    m_switchRepository = new KAction("Switch repository",KShortcut(),
+        m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
@@ -152,6 +155,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_changeToRepository->setEnabled(m_isLocal);
     m_DelCurrent->setEnabled(true);
     m_CheckoutCurrentAction->setEnabled(!m_isLocal);
+    m_switchRepository->setEnabled(m_isLocal);
 
     if (result) {
         emit changeCaption(m_baseUri);
@@ -285,6 +289,16 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
             m_Dirsread[k->fullName()]=true;
         }
     }
+}
+
+void kdesvnfilelist::slotReinitItem(FileListViewItem*k)
+{
+    if (!k) return;
+    if (k->isDir()) {
+        k->removeChilds();
+        m_Dirsread[k->fullName()]=false;;
+    }
+    slotItemClicked(k);
 }
 
 void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)

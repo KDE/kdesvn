@@ -20,8 +20,8 @@
 #include "ccontextlistener.h"
 #include "authdialogimpl.h"
 #include <klocale.h>
+#include <kapp.h>
 #include <kinputdialog.h>
-#include <klocale.h>
 #include <qtextstream.h>
 
 const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
@@ -95,6 +95,7 @@ void CContextListener::contextNotify (const char *path,
 {
     QString aString = NotifyAction(action);
     if (aString.isEmpty()) {
+        kapp->processEvents(20);
         return;
     }
     QString msg;

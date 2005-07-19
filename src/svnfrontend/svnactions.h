@@ -92,10 +92,14 @@ public slots:
     virtual void slotRevert();
     virtual void slotRevertItems(const QStringList&);
 
+    virtual void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
+    virtual void slotSwitch();
+
 signals:
     void clientException(const QString&);
     void dirAdded(const QString&,FileListViewItem*);
     void sendNotify(const QString&);
+    void reinitItem(FileListViewItem*);
 protected slots:
     virtual void wroteStdin(KProcess*);
     virtual void procClosed(KProcess*);

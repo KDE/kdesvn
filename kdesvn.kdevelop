@@ -3,7 +3,7 @@
   <general>
     <author>Rajko Albrecht</author>
     <email>ral@alwins-world.de</email>
-    <version>0.1</version>
+    <version>0.2</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -14,7 +14,7 @@
     </keywords>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
+    <description>kdesvn is a subversion client for KDE.</description>
     <ignoreparts/>
     <versioncontrol>kdevsubversion</versioncontrol>
     <secondaryLanguages/>
@@ -46,6 +46,7 @@
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
       <makebin/>
+      <prio>0</prio>
     </make>
     <configurations>
       <optimized>
@@ -184,9 +185,9 @@
     <APPNAMEUC>KDESVN</APPNAMEUC>
     <AUTHOR>Rajko Albrecht</AUTHOR>
     <EMAIL>ral@alwins-world.de</EMAIL>
-    <LICENSE>GPL</LICENSE>
+    <LICENSE>LGPL</LICENSE>
     <LICENSEFILE>COPYING</LICENSEFILE>
-    <VERSION>0.1</VERSION>
+    <VERSION>0.2</VERSION>
     <YEAR>2005</YEAR>
     <dest>/home/ral/progs/Projekte/kdesvn</dest>
   </substmap>
@@ -227,24 +228,28 @@
     <custom>false</custom>
     <bzip>false</bzip>
     <archname/>
-    <appname>kdesvn.kdevelop</appname>
-    <version>0.1</version>
+    <appname>kdesvn</appname>
+    <version>0.2</version>
     <release/>
     <vendor/>
-    <licence/>
-    <summary/>
-    <group/>
-    <packager/>
+    <licence>LGPL</licence>
+    <summary>Subversion client for KDE</summary>
+    <group>Development/Tools</group>
+    <packager>Rajko Albrecht</packager>
     <description/>
     <changelog/>
     <devpackage>false</devpackage>
     <docspackage>false</docspackage>
     <appicon>false</appicon>
-    <arch>0</arch>
+    <arch>2</arch>
     <genHTML>false</genHTML>
     <useRPM>false</useRPM>
     <ftpkde>false</ftpkde>
     <appskde>false</appskde>
     <url/>
   </dist>
+  <ctagspart>
+    <customArguments/>
+    <customTagfilePath/>
+  </ctagspart>
 </kdevelop>

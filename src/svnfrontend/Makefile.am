@@ -1,6 +1,6 @@
 INCLUDES = $(all_includes)
 METASOURCES = AUTO
-lib_LIBRARIES = libsvnfrontend.a
+noinst_LIBRARIES = libsvnfrontend.a
 noinst_HEADERS = kdesvnfilelist.h filelistviewitem.h svnlogdlgimp.h \
 							svnactions.h rangeinput_impl.h ccontextlistener.h authdialogimpl.h propertiesdlg.h \
 			editproperty_impl.h logmsg_impl.h checkoutinfo_impl.h stopdlg.h

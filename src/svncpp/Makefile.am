@@ -1,6 +1,6 @@
 INCLUDES = $(all_includes)
 METASOURCES = AUTO
-lib_LIBRARIES = libsvncpp.a
+noinst_LIBRARIES = libsvncpp.a
 libsvncpp_a_SOURCES = apr.cpp client_annotate.cpp client_cat.cpp client.cpp \
 	client_diff.cpp client_ls.cpp client_modify.cpp client_property.cpp client_status.cpp \
 	context.cpp datetime.cpp dirent.cpp entry.cpp exception.cpp log_entry.cpp path.cpp \

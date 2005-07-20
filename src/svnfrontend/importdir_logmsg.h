@@ -17,51 +17,27 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef FILELISTVIEWITEM_H
-#define FILELISTVIEWITEM_H
+#ifndef IMPORTDIR_LOGMSG_H
+#define IMPORTDIR_LOGMSG_H
 
-#include <klistview.h>
-#include <qdatetime.h>
-#include <qptrlist.h>
-#include "svncpp/status.hpp"
+#include "logmsg_impl.h"
 
-class QPainter;
-class KFileItem;
-class kdesvnfilelist;
-
+class QCheckBox;
 /**
 @author Rajko Albrecht
 */
-class FileListViewItem : public KListViewItem
+class Importdir_logmsg : public Logmsg_impl
 {
+Q_OBJECT
 public:
-    FileListViewItem(kdesvnfilelist*,const svn::Status&);
-    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
+    Importdir_logmsg(QWidget *parent = 0, const char *name = 0);
 
-    virtual ~FileListViewItem();
-    virtual int compare( QListViewItem* i, int col, bool ascending ) const;
-    bool isDir()const;
-    const QString&fullName()const{return m_fullName;}
-    void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
-    void refreshMe();
-    void removeChilds();
-    const svn::Status svnStatus()const{return stat;}
-    bool isVersioned();
-    bool isValid();
-    bool isParent(QListViewItem*which);
+    virtual ~Importdir_logmsg();
 
-    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS,COL_CURRENT_REV;
+    bool createDir();
 
 protected:
-    short int sortChar;
-    kdesvnfilelist*m_Ksvnfilelist;
-    virtual void update(KFileItem*_item);
-    virtual void update();
-    svn::Status stat;
-    QString m_shortName,m_fullName;
-    QDateTime fullDate;
-    void makePixmap();
-    void init();
+    QCheckBox*m_createDirBox;
 };
 
 #endif

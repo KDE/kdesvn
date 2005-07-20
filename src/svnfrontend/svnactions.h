@@ -69,6 +69,9 @@ protected:
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);
 
+    virtual void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
+    virtual void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool);
+
 public slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
@@ -82,25 +85,21 @@ public slots:
     virtual void slotCommit();
     virtual void slotSimpleDiff();
     virtual void slotSimpleDiffBase();
-    virtual void makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end);
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();
     virtual void slotAdd();
     virtual void slotDelete();
-
-    virtual void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool);
-
     virtual void slotCheckoutCurrent();
     virtual void slotExportCurrent();
-
     virtual void slotCheckout();
     virtual void slotExport();
-
     virtual void slotRevert();
     virtual void slotRevertItems(const QStringList&);
-
-    virtual void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     virtual void slotSwitch();
+    virtual void slotCleanup(const QString&);
+    virtual void slotResolved(const QString&);
+    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
+    virtual void slotImport(const QString&,const QString&,const QString&,bool);
 
 signals:
     void clientException(const QString&);

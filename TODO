@@ -1,12 +1,9 @@
 Implement the SVN commands:
 (implemented one will deleted from list)
 
-   cleanup
    copy (cp)
-   import
    merge
    move (mv, rename, ren)
-   resolved
 
 Work:
     - let user setup how logs will made, "strict node" (eg. dont follow moves/copies)

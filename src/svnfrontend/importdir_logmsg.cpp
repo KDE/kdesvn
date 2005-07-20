@@ -17,12 +17,26 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#include "importdir_logmsg.h"
+#include <klocale.h>
+#include <qcheckbox.h>
+#include <qlayout.h>
+#include <qvbox.h>
 
-#ifndef __DIALOG_HELPER_H
-#define __DIALOG_HELPER_H
+Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
+ : Logmsg_impl(parent, name)
+{
+    m_createDirBox = new QCheckBox(i18n("Create subdir on import"),this,"create_dir_checkbox");
+    m_ItemsLayout->addWidget(m_createDirBox);
+    m_createDirBox->setChecked(true);
+}
 
-namespace extras {
+Importdir_logmsg::~Importdir_logmsg()
+{
+}
 
-
-} // namespace extras end
-#endif
+bool Importdir_logmsg::createDir()
+{
+    return m_createDirBox->isChecked();
+}
+#include "importdir_logmsg.moc"

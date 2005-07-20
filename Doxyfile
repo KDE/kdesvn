@@ -4,7 +4,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 PROJECT_NAME           = kdesvn.kdevelop
-PROJECT_NUMBER         = 0.1
+PROJECT_NUMBER         = 0.2
 OUTPUT_DIRECTORY       = api_doc
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
@@ -80,7 +80,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = .
+INPUT                  = . /usr/include/subversion-1
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \
@@ -130,7 +130,7 @@ FILE_PATTERNS          = *.c \
 RECURSIVE              = yes
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
-EXCLUDE_PATTERNS       =
+EXCLUDE_PATTERNS       = *moc*
 EXAMPLE_PATH           =
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO

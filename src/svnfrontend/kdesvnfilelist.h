@@ -29,6 +29,7 @@
 class KAction;
 class KActionMenu;
 class KActionCollection;
+class KDialog;
 
 /**
 @author Rajko Albrecht
@@ -64,6 +65,7 @@ protected:
     KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead,*m_UpdateHead,*m_UpdateRev;
     KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction,*m_CheckoutCurrentAction,*m_RevertAction;
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
+    KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent;
 
     SvnActions*m_SvnWrapper;
     /* the parent entry must removed from list before */
@@ -77,19 +79,28 @@ protected:
     FileListViewItem* singleSelected();
     QPtrList<FileListViewItem> allSelected();
 
+    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
+
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);
     virtual void slotDirAdded(const QString&,FileListViewItem*);
-    virtual void slotChangeToRepository();
     virtual void slotReinitItem(FileListViewItem*);
     virtual void slotItemDoubleClicked(QListViewItem*);
+    virtual void slotImportIntoCurrent(bool);
+    virtual void slotImportDirsIntoCurrent();
+
+    /* subversion slots */
+    virtual void slotChangeToRepository();
+    virtual void slotCleanupAction();
+    virtual void slotResolved();
 
 signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);
+public slots:
 };
 
 #endif

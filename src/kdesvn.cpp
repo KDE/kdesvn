@@ -85,28 +85,14 @@ kdesvn::kdesvn()
     connectActionCollection( m_Bookmarkactions );
 
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager,this,m_BookmarksActionmenu->popupMenu(),m_Bookmarkactions,true);
-/*
-    connect( m_pBookmarkMenu,
-        SIGNAL( aboutToShowContextMenu(const KBookmark &, QPopupMenu*) ),
-        this, SLOT( slotFillContextMenu(const KBookmark &, QPopupMenu*) ));
-    connect( m_pBookmarkMenu,
-        SIGNAL( openBookmark(const QString &, Qt::ButtonState) ),
-        this, SLOT( slotOpenBookmarkURL(const QString &, Qt::ButtonState) ));
-*/
     m_BookmarksActionmenu->plug(menuBar());
-    //menuBar()->insertItem(i18n("Bookmarks"),bookpopup);
     setHelpMenuEnabled(true);
 
     KPopupMenu *help = helpMenu();
     menuBar()->insertItem(i18n("&Help"),help);
 
-    // Apply the create the main window and ask the mainwindow to
-        // automatically save settings if changed: window size, toolbar
-    // position, icon size, etc.  Also to add actions for the statusbar
-        // toolbar, and keybindings if necessary.
-    //setupGUI();
     createStandardStatusBarAction();
-    setStandardToolBarMenuEnabled( true );
+    setStandardToolBarMenuEnabled(true);
     KStdAction::configureToolbars(this,SLOT(configureToolbars() ), actionCollection());
 
     setAutoSaveSettings();
@@ -166,6 +152,7 @@ void kdesvn::setupActions()
             svnmenu->insert((*it));
         }
         svnmenu->plug(menuBar());
+        connectActionCollection(t);
     }
 
     // this doesn't do anything useful.  it's just here to illustrate

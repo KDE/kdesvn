@@ -134,6 +134,9 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<FileListViewItem>*excl
     if (!depsonly) {
         refreshMe();
     }
+    if (!isValid()) {
+        return;
+    }
     it = static_cast<FileListViewItem*>(parent());;
     if (!childs) {
         if (it && (!exclude || exclude->find(it)==-1)) {
@@ -171,11 +174,38 @@ void FileListViewItem::makePixmap()
     setPixmap(COL_ICON,p);
 }
 
+bool FileListViewItem::isVersioned()
+{
+    return stat.isVersioned();
+}
+
+bool FileListViewItem::isValid()
+{
+    if (isVersioned()) {
+        return true;
+    }
+    /* must be a local file */
+    QFileInfo f(stat.path());
+    return f.exists();
+}
+
+bool FileListViewItem::isParent(QListViewItem*which)
+{
+    if (!which) return false;
+    QListViewItem*item = this;
+    while ( (item=item->parent())) {
+        if (item==which) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void FileListViewItem::update()
 {
     makePixmap();
     if (!stat.isVersioned()) {
-        setText(COL_STATUS,"Not versioned");
+        setText(COL_STATUS,i18n("Not versioned"));
         return;
     }
     QString info_text = "";

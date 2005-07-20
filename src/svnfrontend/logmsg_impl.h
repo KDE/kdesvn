@@ -35,6 +35,7 @@ public:
 protected slots:
     virtual void slotHistoryActivated(const QString&);
 
+protected:
     static QValueList<QString> sLogHistory;
 };
 

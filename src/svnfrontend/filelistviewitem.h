@@ -64,4 +64,7 @@ protected:
     void init();
 };
 
+typedef QPtrList<FileListViewItem> FileListViewItemList;
+typedef QPtrListIterator<FileListViewItem> FileListViewItemListIterator;
+
 #endif

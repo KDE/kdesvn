@@ -26,6 +26,7 @@
 #include <qfileinfo.h>
 #include <klocale.h>
 #include <kiconloader.h>
+#include <kfileitem.h>
 
 #include <svn_time.h>
 
@@ -90,6 +91,7 @@ bool FileListViewItem::isDir()const
 
 FileListViewItem::~FileListViewItem()
 {
+    qDebug("Delete %s",fullName().latin1());
 }
 
 void FileListViewItem::update(KFileItem*_item)
@@ -114,6 +116,7 @@ void FileListViewItem::update(KFileItem*_item)
 
 void FileListViewItem::refreshMe()
 {
+    stat = svn::Status(0,0);
     try {
         stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
     } catch (svn::ClientException e) {
@@ -185,7 +188,10 @@ bool FileListViewItem::isValid()
         return true;
     }
     /* must be a local file */
+    qDebug("Pfad = %s",stat.path());
+
     QFileInfo f(stat.path());
+    qDebug("Behaupte das es existiert: %i",f.exists());
     return f.exists();
 }
 

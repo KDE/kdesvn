@@ -66,6 +66,8 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(m_SvnWrapper,SIGNAL(dirAdded(const QString&,FileListViewItem*)),this,
         SLOT(slotDirAdded(const QString&,FileListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
+
+    m_SelectedItems = 0;
 }
 
 svn::Client*kdesvnfilelist::svnclient()
@@ -142,22 +144,18 @@ KActionCollection*kdesvnfilelist::filesActions()
     return m_filesAction;
 }
 
-QPtrList<FileListViewItem> kdesvnfilelist::allSelected()
+FileListViewItemList* kdesvnfilelist::allSelected()
 {
-    QPtrList<FileListViewItem> lst;
-    QListViewItemIterator it( this, QListViewItemIterator::Selected );
-    while ( it.current() ) {
-        lst.append( static_cast<FileListViewItem*>(it.current()) );
-        ++it;
+    if (!m_SelectedItems) {
+        m_SelectedItems = new FileListViewItemList;
     }
-    return lst;
+    return m_SelectedItems;
 }
 
 FileListViewItem* kdesvnfilelist::singleSelected()
 {
-    QPtrList<FileListViewItem> lst = allSelected();
-    if (lst.count()==1) {
-        return lst.at(0);
+    if (m_SelectedItems && m_SelectedItems->count()==1) {
+        return m_SelectedItems->at(0);
     }
     return 0;
 }
@@ -352,13 +350,19 @@ void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
 
 void kdesvnfilelist::slotSelectionChanged()
 {
-    QPtrList<FileListViewItem> lst;
+    if (m_SelectedItems==0) {
+        m_SelectedItems = new FileListViewItemList;
+        m_SelectedItems->setAutoDelete(false);
+    }
+    qDebug("Selected items changed");
+    m_SelectedItems->clear();
+
     QListViewItemIterator it( this, QListViewItemIterator::Selected );
     while ( it.current() ) {
-        lst.append( static_cast<FileListViewItem*>(it.current()) );
+        m_SelectedItems->append( static_cast<FileListViewItem*>(it.current()) );
         ++it;
     }
-    enableSingleActions(lst.count()==1,lst.count()>0?lst.at(0)->isDir():false);
+    enableSingleActions(m_SelectedItems->count()==1,m_SelectedItems->count()>0?m_SelectedItems->at(0)->isDir():false);
 }
 
 #include "kdesvnfilelist.moc"
@@ -461,16 +465,15 @@ void kdesvnfilelist::slotImportDirsIntoCurrent()
  */
 void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
 {
-    QPtrList<FileListViewItem> lst = allSelected();
-    if (lst.count()>1) {
+    if (allSelected()->count()>1) {
         KMessageBox::error(this,i18n("Cannot import into multiple targets!"));
         return;
     }
     QString targetUri;
-    if (lst.count()==0) {
+    if (allSelected()->count()==0) {
         targetUri=baseUri();
     } else {
-        targetUri = QString::fromLocal8Bit(lst.at(0)->svnStatus().entry().url());
+        targetUri = QString::fromLocal8Bit(allSelected()->at(0)->svnStatus().entry().url());
     }
     while (targetUri.endsWith("/")) {
         targetUri.truncate(targetUri.length()-1);
@@ -521,10 +524,10 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
     }
     m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec);
     if (!isLocal()) {
-        if (lst.count()==0) {
+        if (allSelected()->count()==0) {
             openURL(baseUri());
         } else {
-            slotReinitItem(lst.at(0));
+            slotReinitItem(allSelected()->at(0));
         }
     }
 }

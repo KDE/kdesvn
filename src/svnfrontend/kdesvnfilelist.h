@@ -20,11 +20,14 @@
 #ifndef KDESVNFILELIST_H
 #define KDESVNFILELIST_H
 
-#include <klistview.h>
-#include <kdirlister.h>
-#include <qmap.h>
+#include "filelistviewitem.h"
 #include "svncpp/status.hpp"
 #include "svncpp/client.hpp"
+
+#include <klistview.h>
+#include <kurl.h>
+#include <qmap.h>
+#include <qptrlist.h>
 
 class KAction;
 class KActionMenu;
@@ -68,6 +71,7 @@ protected:
     KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent;
 
     SvnActions*m_SvnWrapper;
+
     /* the parent entry must removed from list before */
     void insertDirs(FileListViewItem * _parent,svn::StatusEntries&);
     bool checkDirs(const QString&,FileListViewItem * _parent);
@@ -77,9 +81,11 @@ protected:
     void enableSingleActions(bool how,bool forDir=false);
 
     FileListViewItem* singleSelected();
-    QPtrList<FileListViewItem> allSelected();
+    FileListViewItemList* allSelected();
 
     template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
+
+    FileListViewItemList* m_SelectedItems;
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);

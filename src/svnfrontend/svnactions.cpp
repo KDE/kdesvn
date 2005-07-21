@@ -373,16 +373,16 @@ void SvnActions::slotMkdir()
 void SvnActions::slotInfo()
 {
     if (!m_ParentList) return;
-    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    QPtrList<FileListViewItem> *lst = m_ParentList->allSelected();
     QValueList<svn::Entry> entries;
     QString ex;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
-        if (lst.count()==0) {
+        if (lst->count()==0) {
             entries.push_back(m_Svnclient.info(m_ParentList->baseUri().local8Bit()));
         } else {
             FileListViewItem*item;
-            for (item=lst.first();item;item=lst.next()) {
+            for (item=lst->first();item;item=lst->next()) {
                 entries.push_back(m_Svnclient.info(item->fullName().local8Bit()));
             }
         }
@@ -528,13 +528,15 @@ void SvnActions::slotCommit()
     QString msg = ptr->getMessage();
     bool rec = ptr->isRecursive();
     ptr->saveHistory();
-    QPtrList<FileListViewItem> which = m_ParentList->allSelected();
+    QPtrList<FileListViewItem>*which = m_ParentList->allSelected();
     FileListViewItem*cur;
+    FileListViewItemListIterator liter(*which);
     std::vector<svn::Path> targets;
-    if (which.count()==0) {
+    if (which->count()==0) {
         targets.push_back(svn::Path(m_ParentList->baseUri().local8Bit()));
     } else {
-        for (cur=which.first();cur;cur=which.next()) {
+        while ( (cur=liter.current())!=0) {
+            ++liter;
             targets.push_back(svn::Path(cur->fullName().local8Bit()));
         }
     }
@@ -546,40 +548,6 @@ void SvnActions::slotCommit()
         QString ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
         return;
-    }
-    if (which.count()==0 && m_ParentList->firstChild()) {
-        which.append(static_cast<FileListViewItem*>(m_ParentList->firstChild()));
-    }
-    QPtrList<FileListViewItem> removeItems;
-    unsigned j,k;
-    bool doNothing;
-    for (j = 0; j<which.count();++j) {
-        doNothing = false;
-        if (which.at(j)->listView()==0) {
-            removeItems.append(which.at(j));
-            continue;
-        }
-        for (k=0;k<removeItems.count();++k) {
-            if (which.at(j)->isParent(removeItems.at(k))) {
-                doNothing = true;
-                break;
-            }
-        }
-        if (doNothing) continue;
-        which.at(j)->refreshMe();
-        if (!which.at(j)->isValid()) {
-            removeItems.append(which.at(j));
-            continue;
-        }
-        if (rec) {
-            which.at(j)->refreshStatus(true,&which,true);
-            which.at(j)->refreshStatus(false,&which,true);
-        } else {
-            which.at(j)->refreshStatus(false,&which,false);
-        }
-    }
-    for (j = 0; j<removeItems.count();++j) {
-        delete removeItems.at(j);
     }
     EMIT_FINISHED;
 }
@@ -717,7 +685,7 @@ void SvnActions::prepareUpdate(bool ask)
     FileListViewItem*k = m_ParentList->singleSelected();
     QString what;
     if (!k) {
-        if (m_ParentList->allSelected().count()>1) {
+        if (m_ParentList->allSelected()->count()>1) {
             KMessageBox::error(m_ParentList,i18n("Cannot make multiple updates"));
             return;
         } else {
@@ -769,19 +737,22 @@ void SvnActions::slotUpdateTo()
 void SvnActions::slotAdd()
 {
     if (!m_ParentList) return;
-    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
-    if (lst.count()==0) {
+    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
+    if (lst->count()==0) {
         KMessageBox::error(m_ParentList,i18n("Which files or directories should I add?"));
         return;
     }
     QValueList<svn::Path> items;
-    for (unsigned j = 0; j<lst.count();++j){
-        if (lst.at(j)->svnStatus().isVersioned()) {
+    FileListViewItemListIterator liter(*lst);
+    FileListViewItem*cur;
+    while ((cur=liter.current())!=0){
+        ++liter;
+        if (cur->svnStatus().isVersioned()) {
             KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is versioned - break.</center>")
-                .arg(lst.at(j)->svnStatus().path()));
+                .arg(cur->svnStatus().path()));
             return;
         }
-        items.push_back(lst.at(j)->svnStatus().path());
+        items.push_back(cur->svnStatus().path());
     }
     QString ex;
     try {
@@ -794,8 +765,10 @@ void SvnActions::slotAdd()
         emit clientException(ex);
         return;
     }
-    for (unsigned j = 0; j<lst.count();++j){
-        lst.at(j)->refreshStatus();
+    liter.toFirst();
+    while ((cur=liter.current())!=0){
+        ++liter;
+        cur->refreshStatus();
     }
 }
 
@@ -805,21 +778,26 @@ void SvnActions::slotAdd()
 void SvnActions::slotDelete()
 {
     if (!m_ParentList) return;
-    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
-    if (lst.count()==0) {
+    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
+
+    if (lst->count()==0) {
         KMessageBox::error(m_ParentList,i18n("Nothing selected for delete"));
         return;
     }
+    FileListViewItemListIterator liter(*lst);
+    FileListViewItem*cur;
+
     std::vector<svn::Path> items;
     QStringList displist;
-        for (unsigned j = 0; j<lst.count();++j){
-        if (!lst.at(j)->svnStatus().isVersioned()) {
+    while ((cur=liter.current())!=0){
+        ++liter;
+        if (!cur->svnStatus().isVersioned()) {
             KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
-                .arg(lst.at(j)->svnStatus().path()));
+                .arg(cur->svnStatus().path()));
             return;
         }
-        items.push_back(lst.at(j)->svnStatus().path());
-        displist.append(lst.at(j)->svnStatus().path());
+        items.push_back(cur->svnStatus().path());
+        displist.append(cur->svnStatus().path());
     }
     int answer = KMessageBox::questionYesNoList(m_ParentList,i18n("Realy delete that entries?"),displist,"Delete from repository");
     if (answer!=KMessageBox::Yes) {
@@ -835,12 +813,7 @@ void SvnActions::slotDelete()
         return;
     }
     EMIT_FINISHED;
-    for (unsigned j = 0; j<lst.count();++j){
-        lst.at(j)->refreshStatus();
-    }
 }
-
-
 
 /*!
     \fn kdesvnfilelist::slotCheckout()
@@ -935,25 +908,30 @@ void SvnActions::slotRevert()
 {
     qDebug("slotRevert");
     if (!m_ParentList||!m_ParentList->isLocal()) return;
-    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
     qDebug("Selected items");
     QStringList displist;
-    if (lst.count()>0) {
-        for (unsigned j = 0; j<lst.count();++j){
-            if (!lst.at(j)->svnStatus().isVersioned()) {
+    FileListViewItemListIterator liter(*lst);
+    FileListViewItem*cur;
+    if (lst->count()>0) {
+        ++liter;
+        while ((cur=liter.current())!=0){
+            if (!cur->svnStatus().isVersioned()) {
                 KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
-                    .arg(lst.at(j)->svnStatus().path()));
+                    .arg(cur->svnStatus().path()));
                 return;
             }
-            displist.append(lst.at(j)->svnStatus().path());
+            displist.append(cur->svnStatus().path());
         }
     } else {
         displist.push_back(m_ParentList->baseUri());
     }
     slotRevertItems(displist);
-    for (unsigned j = 0; j<lst.count();++j){
-        lst.at(j)->refreshStatus(true,&lst,false);
-        lst.at(j)->refreshStatus(false,&lst,true);
+    liter.toFirst();
+    while ((cur=liter.current())!=0){
+        ++liter;
+        cur->refreshStatus(true,lst,false);
+        cur->refreshStatus(false,lst,true);
     }
 }
 
@@ -1019,18 +997,18 @@ void SvnActions::slotSwitch()
 {
     if (!m_ParentList||!m_ParentList->isLocal()) return;
 
-    QPtrList<FileListViewItem> lst = m_ParentList->allSelected();
+    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
 
-    if (lst.count()>1) {
+    if (lst->count()>1) {
         KMessageBox::error(0,i18n("Can only switch one item at time"));
         return;
     }
     FileListViewItem*k;
 
-    if (lst.count()==0) {
+    if (lst->count()==0) {
         k=static_cast<FileListViewItem*>(m_ParentList->firstChild());
     } else {
-        k = lst.at(0);
+        k = lst->at(0);
     }
 
     if (!k) {

@@ -33,6 +33,7 @@ class KAction;
 class KActionMenu;
 class KActionCollection;
 class KDialog;
+class DirNotify;
 
 /**
 @author Rajko Albrecht
@@ -85,6 +86,7 @@ protected:
 
     FileListViewItemList* m_SelectedItems;
     virtual void refreshRecursive(FileListViewItem*);
+    DirNotify*m_DirNotify;
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);

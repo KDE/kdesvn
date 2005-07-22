@@ -771,6 +771,7 @@ void SvnActions::slotAdd()
     while ((cur=liter.current())!=0){
         ++liter;
         cur->refreshStatus();
+        emit sigRefreshCurrent(static_cast<FileListViewItem*>(cur->parent()));
     }
 }
 
@@ -814,8 +815,8 @@ void SvnActions::slotDelete()
         emit clientException(ex);
         return;
     }
-    EMIT_FINISHED;
     EMIT_REFRESH;
+    EMIT_FINISHED;
 }
 
 /*!

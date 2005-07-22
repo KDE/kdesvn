@@ -25,6 +25,7 @@
 #include "svncpp/dirent.hpp"
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
+#include "helpers/dirnotify.h"
 #include <kdirlister.h>
 #include <klocale.h>
 #include <kactioncollection.h>
@@ -54,7 +55,6 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     addColumn(i18n("Last changed Revision"));
     addColumn(i18n("Last author"));
     addColumn(i18n("Last change date"));
-//    addColumn(i18n("Current revision"));
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 
@@ -68,7 +68,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(FileListViewItem*)),this,SLOT(refreshCurrent(FileListViewItem*)));
-
+    m_DirNotify = new DirNotify();
     m_SelectedItems = 0;
 }
 
@@ -178,6 +178,13 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     while (m_baseUri.endsWith("/")) {
         m_baseUri.truncate(m_baseUri.length()-1);
     }
+#if 0
+    if (m_isLocal) {
+        m_DirNotify->setBase(m_baseUri);
+    } else {
+        m_DirNotify->stop();
+    }
+#endif
     bool result = checkDirs(m_baseUri,0);
     m_MkdirAction->setEnabled(result);
     m_InfoAction->setEnabled(m_isLocal);
@@ -531,7 +538,6 @@ void kdesvnfilelist::refreshCurrentTree()
 {
     FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
     if (!item) return;
-    sigLogMessage(i18n("Refreshing display"));
     kapp->processEvents();
     setUpdatesEnabled(false);
     if (item->fullName()==baseUri()) {
@@ -547,7 +553,6 @@ void kdesvnfilelist::refreshCurrentTree()
     }
     setUpdatesEnabled(true);
     viewport()->repaint();
-    sigLogMessage(i18n("Refreshing done"));
 }
 
 void kdesvnfilelist::refreshCurrent(FileListViewItem*cur)
@@ -556,13 +561,11 @@ void kdesvnfilelist::refreshCurrent(FileListViewItem*cur)
         refreshCurrentTree();
         return;
     }
-    sigLogMessage(i18n("Refreshing display"));
     kapp->processEvents();
     setUpdatesEnabled(false);
     refreshRecursive(cur);
     setUpdatesEnabled(true);
     viewport()->repaint();
-    sigLogMessage(i18n("Refreshing done"));
 }
 
 void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)

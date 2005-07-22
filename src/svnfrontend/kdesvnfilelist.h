@@ -48,7 +48,6 @@ public:
 
     bool openURL( const KURL &url,bool noReinit=false );
     const QString&lastError()const{return m_LastException;}
-    const svn::StatusEntries&directories()const{return m_directoryList;}
     const svn::Status&maindir()const{return m_mainEntry;}
     const QString&baseUri()const{return m_baseUri;}
     bool isLocal()const{return m_isLocal;}
@@ -56,7 +55,6 @@ public:
     KActionCollection*filesActions();
 
 protected:
-    svn::StatusEntries m_directoryList;
     svn::Status m_mainEntry;
     bool m_isLocal;
 
@@ -68,7 +66,7 @@ protected:
     KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead,*m_UpdateHead,*m_UpdateRev;
     KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction,*m_CheckoutCurrentAction,*m_RevertAction;
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
-    KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent;
+    KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction;
 
     SvnActions*m_SvnWrapper;
 
@@ -86,6 +84,7 @@ protected:
     template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
 
     FileListViewItemList* m_SelectedItems;
+    virtual void refreshRecursive(FileListViewItem*);
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
@@ -107,6 +106,8 @@ signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);
 public slots:
+    virtual void refreshCurrentTree();
+    virtual void refreshCurrent(FileListViewItem*);
 };
 
 #endif

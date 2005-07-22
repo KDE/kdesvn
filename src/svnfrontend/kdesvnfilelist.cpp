@@ -66,6 +66,8 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(m_SvnWrapper,SIGNAL(dirAdded(const QString&,FileListViewItem*)),this,
         SLOT(slotDirAdded(const QString&,FileListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
+    connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
+    connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(FileListViewItem*)),this,SLOT(refreshCurrent(FileListViewItem*)));
 
     m_SelectedItems = 0;
 }
@@ -128,6 +130,7 @@ void kdesvnfilelist::setupActions()
     /* independe actions */
     m_CheckoutAction = new KAction("Checkout a repository",KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
     m_ExportAction = new KAction("Export a repository",KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
+    m_RefreshViewAction = new KAction(i18n("Refresh view"),KShortcut(),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
@@ -166,7 +169,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_Dirsread.clear();
     m_LastException="";
     if (!noReinit) m_SvnWrapper->reInitClient();
-    m_directoryList.clear();
     m_baseUri = url.url();
     m_isLocal = false;
     if (url.isLocalFile()) {
@@ -208,7 +210,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
 
     try {
         /* settings about unknown and ignored files must be setable */
-        //                                       rec   all  up    noign
+        //                                                          rec   all  up    noign
         dlist = m_SvnWrapper->svnclient()->status(what.local8Bit(),false,true,false,true);
     } catch (svn::ClientException e) {
         //Message box!
@@ -251,13 +253,8 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             item = new FileListViewItem(this,_parent,*it);
         }
         if (item->isDir()) {
-            item->setOpen(true);
-            m_directoryList.push_back(*it);
             m_Dirsread[item->fullName()]=false;
         }
-    }
-    if (_parent) {
-        _parent->setOpen(true);
     }
 }
 
@@ -304,7 +301,6 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
         item = new FileListViewItem(this,pitem,stat);
     }
     if (item->isDir()) {
-        item->setOpen(true);
         m_Dirsread[item->fullName()]=false;
     }
 }
@@ -354,7 +350,6 @@ void kdesvnfilelist::slotSelectionChanged()
         m_SelectedItems = new FileListViewItemList;
         m_SelectedItems->setAutoDelete(false);
     }
-    qDebug("Selected items changed");
     m_SelectedItems->clear();
 
     QListViewItemIterator it( this, QListViewItemIterator::Selected );
@@ -529,5 +524,126 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
         } else {
             slotReinitItem(allSelected()->at(0));
         }
+    }
+}
+
+void kdesvnfilelist::refreshCurrentTree()
+{
+    FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
+    if (!item) return;
+    sigLogMessage(i18n("Refreshing display"));
+    kapp->processEvents();
+    setUpdatesEnabled(false);
+    if (item->fullName()==baseUri()) {
+        item->refreshMe();
+        if (!item->isValid()) {
+            delete item;
+            return;
+        } else {
+            refreshRecursive(item);
+        }
+    } else {
+        refreshRecursive(0);
+    }
+    setUpdatesEnabled(true);
+    viewport()->repaint();
+    sigLogMessage(i18n("Refreshing done"));
+}
+
+void kdesvnfilelist::refreshCurrent(FileListViewItem*cur)
+{
+    if (!cur) {
+        refreshCurrentTree();
+        return;
+    }
+    sigLogMessage(i18n("Refreshing display"));
+    kapp->processEvents();
+    setUpdatesEnabled(false);
+    refreshRecursive(cur);
+    setUpdatesEnabled(true);
+    viewport()->repaint();
+    sigLogMessage(i18n("Refreshing done"));
+}
+
+void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
+{
+    FileListViewItem*item;
+    if (_parent) {
+        item = static_cast<FileListViewItem*>(_parent->firstChild());
+    } else {
+        item = static_cast<FileListViewItem*>(firstChild());
+    }
+
+    if (!item) return;
+    kapp->processEvents();
+
+    FileListViewItemList currentSync;
+    currentSync.setAutoDelete(false);
+
+    while (item) {
+        currentSync.append(item);
+        item = static_cast<FileListViewItem*>(item->nextSibling());
+    }
+
+    QString what = (_parent!=NULL?_parent->fullName():baseUri());
+    svn::StatusEntries dlist;
+    try {
+        /* settings about unknown and ignored files must be setable */
+        //                                                              rec   all  up    noign
+        dlist = m_SvnWrapper->svnclient()->status(what.local8Bit(),false,true,false,true);
+    } catch (svn::ClientException e) {
+        //Message box!
+        m_LastException = QString::fromLocal8Bit(e.message());
+        emit sigLogMessage(m_LastException);
+        return;
+    } catch (...) {
+        qDebug("Other exception");
+        return;
+    }
+    svn::StatusEntries::iterator it = dlist.begin();
+    FileListViewItem*k;
+    bool gotit = false;
+    for (;it!=dlist.end();++it) {
+        if (QString::compare(it->path(),what)==0) {
+            continue;
+        }
+        FileListViewItemListIterator clistIter(currentSync);
+        gotit = false;
+        while ( (k=clistIter.current()) ) {
+            ++clistIter;
+            if ( QString::compare(k->fullName(),QString::fromLocal8Bit(it->path()))==0) {
+                currentSync.removeRef(k);
+                k->updateStatus(*it);
+                gotit = true;
+                break;
+            }
+        }
+        if (!gotit) {
+            FileListViewItem * item;
+            if (!_parent) {
+                item = new FileListViewItem(this,*it);
+            } else {
+                item = new FileListViewItem(this,_parent,*it);
+            }
+            if (item->isDir()) {
+                m_Dirsread[item->fullName()]=false;
+            }
+        }
+    }
+    FileListViewItemListIterator dIter(currentSync);
+    while ( (k=dIter.current()) ) {
+        ++dIter;
+        delete k;
+    }
+    if (_parent) {
+        item = static_cast<FileListViewItem*>(_parent->firstChild());
+    } else {
+        item = static_cast<FileListViewItem*>(firstChild());
+    }
+    while (item) {
+        if (item->isDir()&&(m_Dirsread.find(item->fullName())!=m_Dirsread.end()&&m_Dirsread[item->fullName()]==true)) {
+            refreshRecursive(item);
+        }
+        item = static_cast<FileListViewItem*>(item->nextSibling());
     }
 }

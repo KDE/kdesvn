@@ -55,6 +55,7 @@
 #endif
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
+#define EMIT_REFRESH emit sigRefreshAll()
 
 SvnActions::SvnActions(QObject *parent, const char *name)
  : QObject(parent, name),m_ParentList(0),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
@@ -549,6 +550,7 @@ void SvnActions::slotCommit()
         emit clientException(ex);
         return;
     }
+    EMIT_REFRESH;
     EMIT_FINISHED;
 }
 
@@ -813,6 +815,7 @@ void SvnActions::slotDelete()
         return;
     }
     EMIT_FINISHED;
+    EMIT_REFRESH;
 }
 
 /*!
@@ -914,7 +917,6 @@ void SvnActions::slotRevert()
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
     if (lst->count()>0) {
-        ++liter;
         while ((cur=liter.current())!=0){
             if (!cur->svnStatus().isVersioned()) {
                 KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
@@ -922,6 +924,7 @@ void SvnActions::slotRevert()
                 return;
             }
             displist.append(cur->svnStatus().path());
+            ++liter;
         }
     } else {
         displist.push_back(m_ParentList->baseUri());

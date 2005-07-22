@@ -106,6 +106,9 @@ signals:
     void dirAdded(const QString&,FileListViewItem*);
     void sendNotify(const QString&);
     void reinitItem(FileListViewItem*);
+    void sigRefreshAll();
+    void sigRefreshCurrent(FileListViewItem*);
+
 protected slots:
     virtual void wroteStdin(KProcess*);
     virtual void procClosed(KProcess*);

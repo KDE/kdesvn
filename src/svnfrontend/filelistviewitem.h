@@ -45,10 +45,11 @@ public:
     void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
     void refreshMe();
     void removeChilds();
-    const svn::Status svnStatus()const{return stat;}
+    const svn::Status svnStatus()const{return m_Stat;}
     bool isVersioned();
     bool isValid();
     bool isParent(QListViewItem*which);
+    void updateStatus(const svn::Status&s);
 
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS,COL_CURRENT_REV;
 
@@ -57,7 +58,7 @@ protected:
     kdesvnfilelist*m_Ksvnfilelist;
     virtual void update(KFileItem*_item);
     virtual void update();
-    svn::Status stat;
+    svn::Status m_Stat;
     QString m_shortName,m_fullName;
     QDateTime fullDate;
     void makePixmap();

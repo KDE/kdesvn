@@ -30,7 +30,7 @@
 
 StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
-    ,m_Context(listener),m_MinDuration(2000),mCancelled(false),mShown(false)
+    ,m_Context(listener),m_MinDuration(2000),mCancelled(false),mShown(false),m_BarShown(false)
 {
     KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
     mShowTimer = new QTimer(this);
@@ -61,6 +61,8 @@ void StopDlg::slotAutoShow()
     if (mShown) {
         return;
     }
+    m_ProgressBar->hide();
+    m_BarShown=false;
     show();
     kapp->processEvents();
     mShown = true;
@@ -79,6 +81,10 @@ bool StopDlg::cancelld()
 
 void StopDlg::slotTick()
 {
+    if (!m_BarShown) {
+        m_ProgressBar->show();
+        m_BarShown=true;
+    }
     if (m_ProgressBar->progress()==15) {
         m_ProgressBar->reset();
     } else {

@@ -49,6 +49,7 @@ protected:
     bool mShown;
     QLabel*mLabel;
     KProgress*m_ProgressBar;
+    bool m_BarShown;
 
 public slots:
     virtual void slotTick();

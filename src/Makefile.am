@@ -12,7 +12,7 @@ kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 
 # the libraries to link against.
 kdesvn_LDADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
-	$(top_builddir)/src/helpers/libhelper.a $(top_builddir)/src/svncpp/libsvncpp.a $(APR_LIBS) $(NEON_LIBS) \
+	$(top_builddir)/src/helpers/libhelper.a $(top_builddir)/src/svncpp/libsvnwrapper.a $(APR_LIBS) $(NEON_LIBS) \
 	$(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEPRINT) $(SVN_LIBS)
 
 # which sources should be compiled for kdesvn

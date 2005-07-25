@@ -43,4 +43,4 @@ kdelnk_DATA = kdesvn.desktop
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
-SUBDIRS = svnfrontend svncpp helpers
+SUBDIRS = svnfrontend svncpp helpers pics

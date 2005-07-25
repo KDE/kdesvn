@@ -26,6 +26,7 @@
 #include <kprinter.h>
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
+#include <qcursor.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -86,17 +87,13 @@ kdesvn::kdesvn()
 
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager,this,m_BookmarksActionmenu->popupMenu(),m_Bookmarkactions,true);
     m_BookmarksActionmenu->plug(menuBar());
-    setHelpMenuEnabled(true);
-
-    KPopupMenu *help = helpMenu();
-    menuBar()->insertItem(i18n("&Help"),help);
 
     createStandardStatusBarAction();
     setStandardToolBarMenuEnabled(true);
+    createGUI();
     KStdAction::configureToolbars(this,SLOT(configureToolbars() ), actionCollection());
 
     setAutoSaveSettings();
-    //setupGUI(Save|StatusBar|ToolBar);
 
     // allow the view to change the statusbar and caption
     connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
@@ -132,29 +129,18 @@ void kdesvn::load(const KURL& url)
 
 void kdesvn::setupActions()
 {
-    KActionMenu*m_FileMenu=new KActionMenu(I18N_NOOP("&File"),this);
     m_DirOpen = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    m_UrlOpen = new KAction(I18N_NOOP("Open remote repository"),KShortcut(),this,SLOT(urlOpen()),actionCollection());
+    m_DirOpen->setText(i18n("Open working copy"));
+    m_UrlOpen = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
 
-    m_FileMenu->insert(m_DirOpen);
-    m_FileMenu->insert(m_UrlOpen);
-    m_FileMenu->insert(KStdAction::quit(kapp, SLOT(quit()), actionCollection()));
-
-    m_FileMenu->plug(menuBar());
+    KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
     KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
     KActionCollection*t=m_view->filesActions();
     if (t) {
-        KActionMenu*svnmenu = new KActionMenu(I18N_NOOP("Subversion"),this);
-        KActionPtrList l = t->actions();
-        KActionPtrList::iterator it;
-        for (it=l.begin();it!=l.end();++it) {
-            svnmenu->insert((*it));
-        }
-        svnmenu->plug(menuBar());
         connectActionCollection(t);
+        (*actionCollection())+=(*t);
     }
-
     // this doesn't do anything useful.  it's just here to illustrate
     // how to insert a custom menu and menu item
 /*
@@ -332,6 +318,13 @@ QString kdesvn::currentTitle () const
 QString kdesvn::currentURL () const
 {
     return m_view->currentURL();
+}
+
+void kdesvn::slotDispPopup(const QString&name)
+{
+    QWidget *w = factory()->container(name, this);
+    QPopupMenu *popup = static_cast<QPopupMenu *>(w);
+    popup->exec(QCursor::pos());
 }
 
 #include "kdesvn.moc"

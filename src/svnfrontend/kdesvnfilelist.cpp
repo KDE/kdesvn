@@ -43,6 +43,9 @@
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
  : KListView(parent, name),m_SvnWrapper(new SvnActions(this))
 {
+    m_SelectedItems = 0;
+    m_baseUri="";
+
     setMultiSelection(true);
     setSelectionModeExt(FileManager);
     setShowSortIndicator(true);
@@ -59,6 +62,8 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     setupActions();
 
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
+    connect(this,SIGNAL(rightButtonPressed(QListViewItem *, const QPoint &, int)),this,
+        SLOT(slotRightButton(QListViewItem *, const QPoint &, int)));
     connect(this,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
@@ -69,7 +74,6 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(FileListViewItem*)),this,SLOT(refreshCurrent(FileListViewItem*)));
     m_DirNotify = new DirNotify();
-    m_SelectedItems = 0;
 }
 
 svn::Client*kdesvnfilelist::svnclient()
@@ -83,38 +87,42 @@ void kdesvnfilelist::setupActions()
 
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction = new KAction("&Log...","history",KShortcut(),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
-    m_LogFullAction = new KAction("&Full Log","history",KShortcut(),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log");
-    m_propertyAction = new KAction("Properties","edit",KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
-    m_InfoAction = new KAction("Details","documentinfo",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
-    m_RevertAction  = new KAction("Revert current changes",KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
-    m_ResolvedAction = new KAction("Resolve recursive",KShortcut(),
-        this,SLOT(slotResolved()),m_filesAction,"make_resolved");
-    m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
+    m_LogRangeAction = new KAction(i18n("&Log..."),"history",KShortcut(),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    m_LogFullAction = new KAction(i18n("&Full Log"),"history",KShortcut(),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    m_propertyAction = new KAction(i18n("Properties"),"edit",KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+    m_InfoAction = new KAction(i18n("Details"),"text_block",KShortcut(),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
 
     /* 2. actions only on files */
-    m_BlameAction = new KAction("&Blame",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
-    m_BlameRangeAction = new KAction("Blame range",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
-    m_CatAction = new KAction("&Cat head",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    m_BlameAction = new KAction("&Blame","flag",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
+    m_BlameRangeAction = new KAction("Blame range","flag",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
+    m_CatAction = new KAction("&Cat head","contents",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
 
     /* 3. actions only on dirs */
-    m_MkdirAction = new KAction("Make (sub-)directory",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
+    m_MkdirAction = new KAction("Make (sub-)directory","folder_new",KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_switchRepository = new KAction("Switch repository","goto",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
-    m_changeToRepository = new KAction("Switch to repository",KShortcut(),
+    m_switchRepository->setToolTip(i18n("Switch repository of working copy (\"svn switch\")"));
+
+    m_changeToRepository = new KAction("Switch to repository","gohome",KShortcut(),
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
+    m_changeToRepository->setToolTip(i18n("Switch to repository of current working copy"));
+
     m_CleanupAction = new KAction("Cleanup",KShortcut(),
         this,SLOT(slotCleanupAction()),m_filesAction,"make_cleanup");
-    m_ImportDirsIntoCurrent  = new KAction(i18n("Import directories into current"),KShortcut(),
+    m_ImportDirsIntoCurrent  = new KAction(i18n("Import directories into current"),"fileimport",KShortcut(),
         this,SLOT(slotImportDirsIntoCurrent()),m_filesAction,"make_import_dirs_into_current");
     m_ImportDirsIntoCurrent->setToolTip(i18n("Import directory content into current url"));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
-    m_AddCurrent = new KAction("Add selected files/dirs","item_add",KShortcut(),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
+    m_AddCurrent = new KAction("Add selected files/dirs","add",KShortcut(),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
     m_AddCurrent->setToolTip(i18n("Adding selected files and/or directories to repository"));
-    m_DelCurrent = new KAction("Delete selected files/dirs","item_remove",KShortcut(),m_SvnWrapper,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
+    m_DelCurrent = new KAction("Delete selected files/dirs","editdelete",KShortcut(),m_SvnWrapper,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
+    m_RevertAction  = new KAction("Revert current changes","revert",KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
+    m_ResolvedAction = new KAction("Resolve recursive",KShortcut(),
+        this,SLOT(slotResolved()),m_filesAction,"make_resolved");
+    m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
 
     m_UpdateHead = new KAction("Update to head","bottom",KShortcut(),m_SvnWrapper,SLOT(slotUpdateHeadRec()),m_filesAction,"make_svn_headupdate");
     m_UpdateRev = new KAction("Update to revision...","down",KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
@@ -130,15 +138,15 @@ void kdesvnfilelist::setupActions()
     /* independe actions */
     m_CheckoutAction = new KAction("Checkout a repository",KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
     m_ExportAction = new KAction("Export a repository",KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
-    m_RefreshViewAction = new KAction(i18n("Refresh view"),KShortcut(),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
+    m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 
     m_MkdirAction->setEnabled(false);
     m_InfoAction->setEnabled(false);
     m_commitAction->setEnabled(false);
     m_simpleDiffHead->setEnabled(false);
     m_RevertAction->setEnabled(false);
-    enableSingleActions(false);
 
+    enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
 
@@ -198,6 +206,8 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_DelCurrent->setEnabled(true);
     m_CheckoutCurrentAction->setEnabled(!m_isLocal);
     m_switchRepository->setEnabled(m_isLocal);
+
+    if (result) enableActions();
 
     if (result) {
         emit changeCaption(m_baseUri);
@@ -337,18 +347,50 @@ void kdesvnfilelist::slotReinitItem(FileListViewItem*k)
     slotItemClicked(k);
 }
 
-void kdesvnfilelist::enableSingleActions(bool how,bool _Dir)
+void kdesvnfilelist::enableActions()
 {
-    m_LogFullAction->setEnabled(how);
-    m_LogRangeAction->setEnabled(how);
-    m_propertyAction->setEnabled(how);
-    m_CatAction->setEnabled(how&&!_Dir);
-    /* blame buggy in lib */
-    //m_BlameAction->setEnabled(false);
-    m_BlameAction->setEnabled(how&&!_Dir);
-    //m_CheckoutCurrentAction->setEnabled(how&&!isLocal()&&_Dir);
-//    m_simpleDiffHead->setEnabled(how&&m_isLocal);
-    //m_BlameRangeAction->setEnabled(how&&!_Dir);
+    bool isopen = m_baseUri.length()>0;
+    bool single = allSelected()->count()==1&&isopen;
+    bool multi = allSelected()->count()>1&&isopen;
+    bool none = allSelected()->count()==0&&isopen;
+    bool dir = false;
+    if (single && allSelected()->at(0)->isDir()) {
+        dir = true;
+    }
+    /* local and remote actions */
+    /* 1. actions on dirs AND files */
+    m_LogRangeAction->setEnabled(single||(isLocal()&&!single&&!multi&&isopen));
+    m_LogFullAction->setEnabled(single||(isLocal()&&!single&&!multi&&isopen));
+    m_propertyAction->setEnabled(single);
+    m_InfoAction->setEnabled(single);
+    /* 2. only on files */
+    m_BlameAction->setEnabled(single&&!dir);
+    m_BlameRangeAction->setEnabled(single&&!dir);
+    m_CatAction->setEnabled(single&&!dir);
+    /* 3. actions only on dirs */
+    m_MkdirAction->setEnabled(dir);
+    m_switchRepository->setEnabled(dir);
+    m_changeToRepository->setEnabled(isLocal());
+    m_CleanupAction->setEnabled(isLocal()&&dir);
+    m_ImportDirsIntoCurrent->setEnabled(isLocal()&&dir);
+    /* local only actions */
+    /* 1. actions on files AND dirs*/
+    m_AddCurrent->setEnabled( (multi||single) && isLocal());
+    m_DelCurrent->setEnabled( (multi||single) && isLocal());
+    m_RevertAction->setEnabled( (multi||single) && isLocal());
+    m_ResolvedAction->setEnabled( (multi||single) && isLocal());
+
+    m_UpdateHead->setEnabled( (multi||single) && isLocal());
+    m_UpdateRev->setEnabled( (multi||single) && isLocal());
+    m_commitAction->setEnabled( (multi||single) && isLocal());
+    m_simpleDiffHead->setEnabled( (single || none) && isLocal());
+    /* remote actions only */
+    m_CheckoutCurrentAction->setEnabled( (single&&dir) && !isLocal());
+    m_ExportCurrentAction->setEnabled( (single&&dir) && !isLocal());
+    /* independ actions */
+    m_CheckoutAction->setEnabled(true);
+    m_ExportAction->setEnabled(true);
+    m_RefreshViewAction->setEnabled(isopen);
 }
 
 void kdesvnfilelist::slotSelectionChanged()
@@ -364,7 +406,7 @@ void kdesvnfilelist::slotSelectionChanged()
         m_SelectedItems->append( static_cast<FileListViewItem*>(it.current()) );
         ++it;
     }
-    enableSingleActions(m_SelectedItems->count()==1,m_SelectedItems->count()>0?m_SelectedItems->at(0)->isDir():false);
+    enableActions();
 }
 
 #include "kdesvnfilelist.moc"
@@ -648,5 +690,17 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
             refreshRecursive(item);
         }
         item = static_cast<FileListViewItem*>(item->nextSibling());
+    }
+}
+
+void kdesvnfilelist::slotRightButton(QListViewItem *_item, const QPoint &, int)
+{
+    /// @todo enable it for null-point item
+    if (!_item) return;
+    FileListViewItem*item = static_cast<FileListViewItem*>(_item);
+    if (isLocal()) {
+        emit sigShowPopup("local_context");
+    } else {
+        emit sigShowPopup("remote_context");
     }
 }

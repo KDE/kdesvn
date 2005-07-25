@@ -91,6 +91,8 @@ protected:
     void readProperties(KConfig *);
 
 
+public slots:
+    virtual void slotDispPopup(const QString&);
 private slots:
     void fileNew();
     void fileOpen();

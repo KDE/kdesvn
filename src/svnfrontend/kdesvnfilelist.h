@@ -77,7 +77,7 @@ protected:
     void setupActions();
     svn::Client*svnclient();
 
-    void enableSingleActions(bool how,bool forDir=false);
+    void enableActions();
 
     FileListViewItem* singleSelected();
     FileListViewItemList* allSelected();
@@ -90,6 +90,8 @@ protected:
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
+    virtual void slotRightButton(QListViewItem *, const QPoint &, int);
+
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);
@@ -107,6 +109,8 @@ protected slots:
 signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);
+    void sigShowPopup(const QString&);
+
 public slots:
     virtual void refreshCurrentTree();
     virtual void refreshCurrent(FileListViewItem*);

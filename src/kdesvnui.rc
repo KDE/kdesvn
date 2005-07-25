@@ -88,6 +88,10 @@
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />
  </Menu>
+ <Menu name="general_empty">
+    <Action name="make_svn_checkout" />
+    <Action name="make_svn_export" />
+ </Menu>
  <ToolBar hidden="false" name="subversionToolBar" fullWidth="true" >
   <text>Subversion toolbar</text>
   <Action name="make_svn_headupdate" />

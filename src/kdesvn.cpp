@@ -44,6 +44,7 @@
 #include <kmenubar.h>
 #include <kpopupmenu.h>
 #include <kactionclasses.h>
+#include <kmessagebox.h>
 
 #include <kstdaccel.h>
 #include <kaction.h>
@@ -123,7 +124,7 @@ kdesvn::~kdesvn()
 
 void kdesvn::load(const KURL& url)
 {
-    setCaption(url.prettyURL());
+//    setCaption(url.prettyURL());
     m_view->openURL(url);
 }
 
@@ -279,11 +280,14 @@ void kdesvn::filePrint()
 void kdesvn::optionsPreferences()
 {
     // popup some sort of preference dialog, here
+    KMessageBox::error(this,i18n("Sorry, not finished. Will follow as soon as possible."),i18n("Settings"));
+#if 0
     kdesvnPreferences dlg;
     if (dlg.exec())
     {
         // redo your settings
     }
+#endif
 }
 
 void kdesvn::changeStatusbar(const QString& text)

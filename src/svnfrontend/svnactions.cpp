@@ -174,6 +174,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     disp.dispLog(logs,k->fullName());
     connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
+    disp.resize( QSize(560,420).expandedTo(disp.minimumSizeHint()));
     disp.exec();
     delete logs;
     EMIT_FINISHED;
@@ -246,6 +247,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     KDialog*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->text(0)));
     if (dlg) {
         ptr->setText(text);
+        dlg->resize( QSize(560,420).expandedTo(dlg->minimumSizeHint()));
         dlg->exec();
         delete dlg;
     }
@@ -306,6 +308,7 @@ void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
         ptr->setFont(KGlobalSettings::fixedFont());
         ptr->setWordWrap(QTextEdit::NoWrap);
         ptr->setText(QString::fromLocal8Bit(content.c_str()));
+        dlg->resize( QSize(560,420).expandedTo(dlg->minimumSizeHint()));
         dlg->exec();
         delete dlg;
     }
@@ -468,6 +471,7 @@ void SvnActions::slotInfo()
     KDialog*dlg = createDialog(&ptr,QString(i18n("Infolist")));
     if (dlg) {
         ptr->setText(text);
+        dlg->resize( QSize(560,420).expandedTo(dlg->minimumSizeHint()));
         dlg->exec();
         delete dlg;
     }

@@ -21,6 +21,9 @@
 #include <ktextedit.h>
 #include <kcombobox.h>
 #include <qcheckbox.h>
+#include <kdialogbase.h>
+#include <klocale.h>
+#include <qvbox.h>
 
 QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
 
@@ -74,6 +77,7 @@ void Logmsg_impl::initHistory()
  */
 void Logmsg_impl::saveHistory()
 {
+    if (m_LogEdit->text().length()==0) return;
     /// @todo make static threadsafe
     QValueList<QString>::iterator it;
     if ( (it=sLogHistory.find(m_LogEdit->text()))!=sLogHistory.end()) {
@@ -83,4 +87,35 @@ void Logmsg_impl::saveHistory()
     if (sLogHistory.size()>10) {
         sLogHistory.erase(sLogHistory.fromLast());
     }
+}
+
+QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*name)
+{
+    bool _ok,_rec;
+    QString msg("");
+
+    Logmsg_impl*ptr=0;
+    KDialogBase dlg(parent,name,true,i18n("Commit log"),
+            KDialogBase::Ok|KDialogBase::Cancel,
+            KDialogBase::Ok,true);
+    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+
+    ptr = new Logmsg_impl(Dialog1Layout);
+    if (!rec) {
+        qDebug("Rec == false");
+        ptr->m_RecursiveButton->hide();
+    }
+    ptr->initHistory();
+    dlg.resize( QSize(480,360).expandedTo(dlg.minimumSizeHint()) );
+    if (dlg.exec()!=QDialog::Accepted) {
+        _ok = false;
+    } else {
+        _ok = true;
+        _rec = ptr->isRecursive();
+        msg=ptr->getMessage();
+        ptr->saveHistory();
+    }
+    if (ok) *ok = _ok;
+    if (rec) *rec = _rec;
+    return msg;
 }

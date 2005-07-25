@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "ccontextlistener.h"
 #include "authdialogimpl.h"
+#include "logmsg_impl.h"
 #include <klocale.h>
 #include <kapp.h>
 #include <kinputdialog.h>
@@ -121,7 +122,7 @@ bool CContextListener::contextCancel()
 bool CContextListener::contextGetLogMessage (std::string & msg)
 {
     bool isOk = false;
-    QString logMessage = KInputDialog::getMultiLineText(i18n("Logmessage"),i18n("Enter a logmessage"),QString::null,&isOk);
+    QString logMessage = Logmsg_impl::getLogmessage(&isOk,0,0,0);
     if (isOk) {
         msg.assign(logMessage.local8Bit());
     }

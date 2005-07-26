@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St,
+ * License along with this library (in the file LGPL.txt); if not, 
+ * write to the Free Software Foundation, Inc., 51 Franklin St, 
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -30,13 +30,12 @@
 
 // svncpp
 #include "svncpp/pool.hpp"
-#include "svncpp/lock_entry.hpp"
 
 
 namespace svn
 {
   /**
-   * C++ API for Subversion.
+   * C++ API for Subversion. 
    * This class wraps around @a svn_wc_entry_t.
    */
   class Entry
@@ -44,7 +43,7 @@ namespace svn
   public:
     /**
      * default constructor. if @a src is set,
-     * copy its contents.
+     * copy its contents. 
      *
      * If @a src is not set (=0) this will be
      * a non-versioned entry. This can be checked
@@ -60,13 +59,13 @@ namespace svn
     Entry (const Entry & src);
 
     /**
-     * destructor
+     * destructor 
      */
     virtual ~Entry ();
 
     /**
      * returns whether this is a valid=versioned
-     * entry.
+     * entry.    
      *
      * @return is entry valid
      * @retval true valid entry
@@ -89,7 +88,7 @@ namespace svn
     /**
      * @return base revision
      */
-    const svn_revnum_t
+    const svn_revnum_t 
     revision () const
     {
       return m_entry->revision;
@@ -98,7 +97,7 @@ namespace svn
     /**
      * @return url in repository
      */
-    const char *
+    const char * 
     url () const
     {
       return m_entry->url;
@@ -143,12 +142,12 @@ namespace svn
     /**
      * @return TRUE if copied
      */
-    const bool
+    const bool 
     isCopied () const
     {
       return m_entry->copied != 0;
     }
-
+    
     /**
      * @return true if deleted
      */
@@ -202,7 +201,7 @@ namespace svn
     {
       return m_entry->conflict_new;
     }
-
+    
     /**
      * @return working version of conflicted file
      */
@@ -230,7 +229,7 @@ namespace svn
     {
       return m_entry->text_time;
     }
-
+    
     /**
      * @return last up-to-date time for properties
      * @retval 0 no information available
@@ -277,14 +276,7 @@ namespace svn
     {
       return m_entry->cmt_author;
     }
-    /**
-     * @return info about entry locked
-     */
-    const LockEntry&
-    Lock () const
-    {
-      return m_lock;
-    }
+
     /**
      * @return svn_wc_entry_t for this class
      */
@@ -303,12 +295,11 @@ namespace svn
     svn_wc_entry_t * m_entry;
     Pool m_pool;
     bool m_valid;
-    LockEntry m_lock;
 
     /**
      * initializes the members
      */
-    void
+    void 
     init (const svn_wc_entry_t * src);
  };
 

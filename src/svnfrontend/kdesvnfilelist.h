@@ -67,7 +67,7 @@ protected:
     KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead,*m_UpdateHead,*m_UpdateRev;
     KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction,*m_CheckoutCurrentAction,*m_RevertAction;
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
-    KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction;
+    KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction,*m_MergeRevisionAction;
 
     SvnActions*m_SvnWrapper;
 
@@ -88,6 +88,12 @@ protected:
     virtual void refreshRecursive(FileListViewItem*);
     DirNotify*m_DirNotify;
 
+    /**
+     * Overridden virtuals for Qt drag 'n drop (XDND)
+     */
+    virtual void dragEnterEvent(QDragEnterEvent *event);
+    virtual void dropEvent(QDropEvent *event);
+
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
     virtual void slotRightButton(QListViewItem *, const QPoint &, int);
@@ -105,6 +111,7 @@ protected slots:
     virtual void slotChangeToRepository();
     virtual void slotCleanupAction();
     virtual void slotResolved();
+    virtual void slotMergeRevisions();
 
 signals:
     void sigLogMessage(const QString&);

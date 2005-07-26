@@ -6,5 +6,5 @@ noinst_LIBRARIES = libhelper.a
 
 
 
-libhelper_a_SOURCES = dirnotify.cpp
-noinst_HEADERS = dirnotify.h
+libhelper_a_SOURCES = dirnotify.cpp sub2qt.cpp
+noinst_HEADERS = dirnotify.h sub2qt.h

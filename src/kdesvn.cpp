@@ -45,13 +45,13 @@
 #include <kpopupmenu.h>
 #include <kactionclasses.h>
 #include <kmessagebox.h>
-
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>
 #include <kstandarddirs.h>
 #include <kbookmarkmanager.h>
 #include <kbookmarkmenu.h>
+#include <kdebug.h>
 
 kdesvn::kdesvn()
     : KMainWindow( 0, "kdesvn" ),
@@ -179,10 +179,12 @@ void kdesvn::readProperties(KConfig *config)
         m_view->openURL(KURL(url));
 }
 
+#if 0
 void kdesvn::dragEnterEvent(QDragEnterEvent *event)
 {
     // accept uri drops only
     event->accept(KURLDrag::canDecode(event));
+    kdDebug(0)<<"Dragenter"<<endl;
 }
 
 void kdesvn::dropEvent(QDropEvent *event)
@@ -191,6 +193,8 @@ void kdesvn::dropEvent(QDropEvent *event)
     // will only accept a dropped URL.  the Qt dnd code can do *much*
     // much more, so please read the docs there
     KURL::List urls;
+
+    kdDebug(0)<<"Dropevent"<<endl;
 
     // see if we can decode a URI.. if not, just ignore it
     if (KURLDrag::decode(event, urls) && !urls.isEmpty())
@@ -202,6 +206,7 @@ void kdesvn::dropEvent(QDropEvent *event)
         load(url);
     }
 }
+#endif
 
 void kdesvn::fileNew()
 {

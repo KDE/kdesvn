@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "filelistviewitem.h"
 #include "kdesvnfilelist.h"
+#include "helpers/sub2qt.h"
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"
 #include "svncpp/exception.hpp"
@@ -260,8 +261,8 @@ void FileListViewItem::update()
     }
     setText(COL_STATUS,info_text);
     setText(COL_LAST_AUTHOR,m_Stat.entry().cmtAuthor());
-    fullDate.setTime_t(m_Stat.entry().cmtDate()/(1000*1000),Qt::UTC);
-    setText(COL_LAST_DATE,fullDate.toString(Qt::LocalDate));
+    fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
+    setText(COL_LAST_DATE,fullDate.toString());
     setText(COL_LAST_REV,QString("%1").arg(m_Stat.entry().cmtRev()));
 #if 0
     if (m_Stat.lockEntry().Locked()) {

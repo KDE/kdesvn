@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "rangeinput_impl.h"
+#include "helpers/sub2qt.h"
 
 #include <qpushbutton.h>
 #include <qradiobutton.h>
@@ -98,7 +99,6 @@ void Rangeinput_impl::stopNumberToggled(bool how)
 
 Rangeinput_impl::revision_range Rangeinput_impl::getRange()
 {
-    apr_time_t r;
     revision_range ret;
     if (m_startStartButton->isChecked()) {
         ret.first = svn::Revision::START;
@@ -107,9 +107,7 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
     } else if (m_startNumberButton->isChecked()) {
         ret.first = m_startRevInput->value();
     } else if (m_startDateButton->isChecked()) {
-        QDateTime f = m_startDateInput->dateTime();
-        apr_time_ansi_put(&r,f.toTime_t());
-        ret.first=svn::DateTime(r);
+        ret.first=svn::DateTime(helpers::sub2qt::qt_time2apr(m_startDateInput->dateTime()));
     }
     if (m_stopStartButton->isChecked()) {
         ret.second = svn::Revision::START;
@@ -118,9 +116,7 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
     } else if (m_stopNumberButton->isChecked()) {
         ret.second = m_endRevInput->value();
     } else if (m_stopDateButton->isChecked()) {
-        QDateTime f = m_stopDateInput->dateTime();
-        apr_time_ansi_put(&r,f.toTime_t());
-        ret.second=svn::DateTime(r);
+        ret.second=svn::DateTime(helpers::sub2qt::qt_time2apr(m_stopDateInput->dateTime()));
     }
     return ret;
 }

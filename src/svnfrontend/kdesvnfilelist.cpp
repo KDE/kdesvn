@@ -39,6 +39,7 @@
 #include <kdialog.h>
 #include <kfiledialog.h>
 #include <kdebug.h>
+#include <kurldrag.h>
 #include <qvbox.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
@@ -59,7 +60,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     addColumn(i18n("Last changed Revision"));
     addColumn(i18n("Last author"));
     addColumn(i18n("Last change date"));
-    addColumn(i18n("Locked by"));
+//    addColumn(i18n("Locked by"));
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 
@@ -138,8 +139,11 @@ void kdesvnfilelist::setupActions()
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
     m_commitAction = new KAction("Commit","vcs_commit",
         KShortcut(),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
-    m_simpleDiffHead = new KAction("Diff against head","vcs_diff",
+    m_simpleDiffHead = new KAction(i18n("Diff against head"),"vcs_diff",
         KShortcut(),m_SvnWrapper,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
+    m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"merge",
+        KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
+    m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of that entry into itself"));
 
     /* remote actions only */
     m_CheckoutCurrentAction = new KAction("Checkout current repository path",KShortcut(),
@@ -377,6 +381,8 @@ void kdesvnfilelist::enableActions()
     m_LogFullAction->setEnabled(single||(isLocal()&&!single&&!multi&&isopen));
     m_propertyAction->setEnabled(single);
     m_InfoAction->setEnabled(single&&m_isLocal);
+    m_MergeRevisionAction->setEnabled(single&&m_isLocal);
+
     /* 2. only on files */
     m_BlameAction->setEnabled(single&&!dir);
     m_BlameRangeAction->setEnabled(single&&!dir);
@@ -738,4 +744,31 @@ void kdesvnfilelist::slotRightButton(QListViewItem *_item, const QPoint &, int)
     } else {
         emit sigShowPopup("general_empty");
     }
+}
+
+/**
+* Overridden virtuals for Qt drag 'n drop (XDND)
+*/
+void kdesvnfilelist::dragEnterEvent(QDragEnterEvent *event)
+{
+    kdDebug(0)<<"kdesvnfilelist::dragEnterEvent(QDragEnterEvent *event)"<<endl;
+    if (m_baseUri.length()==0) {
+        event->accept(false);
+    } else {
+        event->accept(KURLDrag::canDecode(event));
+    }
+}
+
+void kdesvnfilelist::dropEvent(QDropEvent *event)
+{
+    kdDebug(0)<<"kdesvnfilelist::dropEvent(QDropEvent *event)"<<endl;
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotMergeRevisions()
+ */
+void kdesvnfilelist::slotMergeRevisions()
+{
+    /// @todo implement me
 }

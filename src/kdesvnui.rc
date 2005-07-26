@@ -37,6 +37,7 @@
     <Action name="make_svn_add" />
     <Action name="make_svn_revert" />
     <Action name="make_resolved" />
+    <Action name="make_svn_merge_revisions" />
     <Separator/>
     <Action name="make_svn_switch" />
     <Separator/>
@@ -70,6 +71,7 @@
   <Action name="make_svn_remove" />
   <Action name="make_svn_revert" />
   <Action name="make_resolved" />
+  <Action name="make_svn_merge_revisions" />
   <Separator/>
   <Action name="make_svn_mkdir" />
   <Action name="make_cleanup" />
@@ -88,9 +90,9 @@
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />
  </Menu>
- <Menu name="general_empty">
-    <Action name="make_svn_checkout" />
-    <Action name="make_svn_export" />
+ <Menu name="general_empty" >
+  <Action name="make_svn_checkout" />
+  <Action name="make_svn_export" />
  </Menu>
  <ToolBar hidden="false" name="subversionToolBar" fullWidth="true" >
   <text>Subversion toolbar</text>
@@ -103,6 +105,7 @@
   <Separator name="separator_2" />
   <Action name="make_svn_add" />
   <Action name="make_svn_remove" />
+  <Action name="make_svn_merge_revisions" />
   <Separator name="separator_1" />
   <Action name="make_svn_checkout" />
   <Action name="make_svn_export" />

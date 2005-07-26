@@ -70,11 +70,13 @@ public:
     virtual QString currentTitle () const;
     virtual QString currentURL () const;
 protected:
+#if 0
     /**
      * Overridden virtuals for Qt drag 'n drop (XDND)
      */
     virtual void dragEnterEvent(QDragEnterEvent *event);
     virtual void dropEvent(QDropEvent *event);
+#endif
 
 protected:
     /**

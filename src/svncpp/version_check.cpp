@@ -37,4 +37,13 @@ namespace svn {
         }
         return curr_version_string.c_str();
     }
+    int Version::version_major()
+    {
+      return svn_client_version()->major;
+    }
+
+    int Version::version_minor()
+    {
+      return svn_client_version()->minor;
+    }
 }

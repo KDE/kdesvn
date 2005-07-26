@@ -25,30 +25,41 @@
 #include <kinputdialog.h>
 #include <qtextstream.h>
 
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+const int CContextListener::smax_actionstring=svn_wc_notify_failed_unlock+1;
+#else
 const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
+#endif
 
 const QString CContextListener::action_strings[]={
-    i18n("Add"),
+    i18n("Add to revision control"),
     i18n("Copy"),
     i18n("Delete"),
-    i18n("Restore"),
+    i18n("Restore missing"),
     i18n("Revert"),
     i18n("Revert failed"),
     i18n("Resolved"),
     i18n("Skip"),
     i18n("Deleted"),
     i18n("Added"),
-    i18n("Update"),
+    i18n("Update"), //svn_wc_notify_update_update
     i18n("Update complete"),
-    i18n("Update external"),
+    i18n("Update external module"),
     i18n("Status complete"),
-    i18n("Status external"),
+    i18n("Status on external"), //svn_wc_notify_status_external
     i18n("Commit Modified"),
     i18n("Commit Added"),
     i18n("Commit Deleted"),
     i18n("Commit Replaced"),
     QString::null, //tx delta -> making ticks instead
-    i18n("Blame")
+    i18n("Blame") //svn_wc_notify_blame_revision
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    ,
+    i18n("Locking"),
+    i18n("Unlocked"),
+    i18n("Lock failed"),
+    i18n("Unlock failed")
+#endif
 };
 
 QString CContextListener::NotifyAction(svn_wc_notify_action_t action)

@@ -38,6 +38,7 @@
 #include <kfileitem.h>
 #include <kdialog.h>
 #include <kfiledialog.h>
+#include <kdebug.h>
 #include <qvbox.h>
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
@@ -254,7 +255,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         emit sigLogMessage(m_LastException);
         return false;
     } catch (...) {
-        qDebug("Other exception");
+        kdDebug()<<"Other exception"<<endl;
         return false;
     }
     svn::StatusEntries::iterator it = dlist.begin();
@@ -663,7 +664,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
         emit sigLogMessage(m_LastException);
         return;
     } catch (...) {
-        qDebug("Other exception");
+        kdDebug()<< "Other exception" << endl;
         return;
     }
     svn::StatusEntries::iterator it = dlist.begin();
@@ -699,7 +700,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
     FileListViewItemListIterator dIter(currentSync);
 #ifndef NDEBUG
     slotSelectionChanged();
-    qDebug("Selected items %i",m_SelectedItems->count());
+    kdDebug() << "Selected items " << m_SelectedItems->count()<< endl;
 #endif
     while ( (k=dIter.current()) ) {
         ++dIter;
@@ -712,7 +713,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
             m_SelectedItems->append( static_cast<FileListViewItem*>(qlvit.current()) );
             ++qlvit;
         }
-        qDebug("Selected items %i",m_SelectedItems->count());
+        kdDebug() << "Selected items " << m_SelectedItems->count() << endl;
 #endif
     }
     if (_parent) {

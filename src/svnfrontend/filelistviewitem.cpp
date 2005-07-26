@@ -27,6 +27,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kfileitem.h>
+#include <kdebug.h>
 
 #include <svn_time.h>
 
@@ -108,7 +109,6 @@ void FileListViewItem::update(KFileItem*_item)
         setText(COL_STATUS,e.message());
         return;
     } catch (...) {
-        qDebug("Execption catched");
         setText(COL_STATUS,"?");
         return;
     }
@@ -124,7 +124,6 @@ void FileListViewItem::refreshMe()
         setText(COL_STATUS,e.message());
         return;
     } catch (...) {
-        qDebug("Execption catched");
         setText(COL_STATUS,"?");
         return;
     }
@@ -189,10 +188,10 @@ bool FileListViewItem::isValid()
         return true;
     }
     /* must be a local file */
-    qDebug("Pfad = %s",m_Stat.path());
+    kdDebug()<< "Pfad = " << m_Stat.path();
 
     QFileInfo f(m_Stat.path());
-    qDebug("Behaupte das es existiert: %i",f.exists());
+    kdDebug()<< "Behaupte das es existiert: "<<f.exists()<<endl;
     return f.exists();
 }
 

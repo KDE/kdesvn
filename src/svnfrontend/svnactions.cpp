@@ -129,7 +129,6 @@ void SvnActions::slotMakeRangeLog()
         return;
     }
     int i = dlg->exec();
-    qDebug("Button code: %i",i);
     if (i==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
         makeLog(r.first,r.second,k);
@@ -914,10 +913,8 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
 
 void SvnActions::slotRevert()
 {
-    qDebug("slotRevert");
     if (!m_ParentList||!m_ParentList->isLocal()) return;
     QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
-    qDebug("Selected items");
     QStringList displist;
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;

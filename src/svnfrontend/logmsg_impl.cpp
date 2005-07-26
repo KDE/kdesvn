@@ -24,6 +24,7 @@
 #include <kdialogbase.h>
 #include <klocale.h>
 #include <qvbox.h>
+#include <kdebug.h>
 
 QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
 
@@ -102,7 +103,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
 
     ptr = new Logmsg_impl(Dialog1Layout);
     if (!rec) {
-        qDebug("Rec == false");
+        kdDebug()<< "Rec == false"<< endl;
         ptr->m_RecursiveButton->hide();
     }
     ptr->initHistory();

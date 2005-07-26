@@ -1,11 +1,11 @@
 #include "dirnotify.h"
 #include <kio/job.h>
 #include <kdirlister.h>
+#include <kdebug.h>
 
 DirNotify::DirNotify()
     : QObject(),m_Lister(0)
 {
-    qDebug("Creating dirnotify");
 }
 
 DirNotify::~DirNotify()
@@ -15,7 +15,7 @@ DirNotify::~DirNotify()
 
 void DirNotify::setBase(const KURL&_b)
 {
-    qDebug("Setting base to %s",_b.path().latin1());
+    kdDebug()<<"Setting base to " << _b.path()<<endl;
     if (!m_Lister) {
         m_Lister = new KDirLister(true);
     }
@@ -32,35 +32,35 @@ void DirNotify::stop()
 
 void DirNotify::FilesAdded( const KURL &directory )
 {
-    qDebug("Files added: %s",directory.url().latin1());
+    kdDebug() << "Files added: " << directory.url()<< endl;
 }
 
 void DirNotify::FilesRemoved( const KURL::List &fileList )
 {
-    qDebug("files removed");
+    kdDebug() << "files removed"<<endl;
 }
 
 void DirNotify::FilesChanged( const KURL::List &fileList )
 {
-    qDebug("Files changed");
+    kdDebug()<< "Files changed"<<endl;
 }
 
 void DirNotify::FileRenamed( const KURL &src, const KURL &dst )
 {
-    qDebug("files removed");
+    kdDebug()<< "files removed"<<endl;
 }
 
 void DirNotify::slotFileDirty( const QString &_file )
 {
-    qDebug("File dirty %s",_file.latin1());
+    kdDebug()<< "File dirty "<<_file<<endl;
 }
 
 void DirNotify::slotFileCreated( const QString &_file )
 {
-    qDebug("File new %s",_file.latin1());
+    kdDebug()<< "File new "<<_file<<endl;
 }
 
 void DirNotify::slotFileDeleted( const QString &_file )
 {
-    qDebug("File deleted %s",_file.latin1());
+    kdDebug()<< "File deleted "<<_file<<endl;
 }

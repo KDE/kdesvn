@@ -154,12 +154,6 @@ void kdesvnfilelist::setupActions()
         KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
     m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 
-    m_MkdirAction->setEnabled(false);
-    m_InfoAction->setEnabled(false);
-    m_commitAction->setEnabled(false);
-    m_simpleDiffHead->setEnabled(false);
-    m_RevertAction->setEnabled(false);
-
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
@@ -404,6 +398,9 @@ void kdesvnfilelist::enableActions()
     m_UpdateRev->setEnabled( (multi||single) && isLocal());
     m_commitAction->setEnabled( (multi||single) && isLocal());
     m_simpleDiffHead->setEnabled( (single || none) && isLocal());
+
+    m_changeToRepository->setEnabled(single&&dir&&isLocal());
+
     /* remote actions only */
     m_CheckoutCurrentAction->setEnabled( (single&&dir) && !isLocal());
     m_ExportCurrentAction->setEnabled( (single&&dir) && !isLocal());

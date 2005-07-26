@@ -1,0 +1,168 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>MergeDlg</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>MergeDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>350</width>
+            <height>306</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>MergeSettings</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout6</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="KURLRequester" row="0" column="1">
+                    <property name="name">
+                        <cstring>m_SrcOneInput</cstring>
+                    </property>
+                </widget>
+                <widget class="KURLRequester" row="1" column="1">
+                    <property name="name">
+                        <cstring>m_SrcTwoInput</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_SrcOneLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Source 1:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KURLRequester" row="2" column="1">
+                    <property name="name">
+                        <cstring>m_OutInput</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>m_SrcTwoLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Source 2:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>m_OutLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Output to:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="Rangeinput_impl">
+            <property name="name">
+                <cstring>m_RangeInput</cstring>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_RecursiveCheck</cstring>
+            </property>
+            <property name="text">
+                <string>Recursive</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+            <property name="checked">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_RelatedCheck</cstring>
+            </property>
+            <property name="text">
+                <string>Handle unrelated as related items</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_ForceCheck</cstring>
+            </property>
+            <property name="text">
+                <string>Force delete on modified/unversioned</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_DryCheck</cstring>
+            </property>
+            <property name="text">
+                <string>Just dry run &amp;without modifications</string>
+            </property>
+            <property name="accel">
+                <string>Alt+W</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>Rangeinput_impl</class>
+        <header location="local">rangeinput_impl.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+        <property type="Bool">StartOnly</property>
+    </customwidget>
+</customwidgets>
+<images>
+    <image name="image0">
+        <data format="XBM.GZ" length="79">789c534e494dcbcc4b554829cdcdad8c2fcf4c29c95030e0524611cd48cd4ccf28010a1797249664262b2467241641a592324b8aa363156c15aab914146aadb90067111b1f</data>
+    </image>
+</images>
+<layoutdefaults spacing="2" margin="2"/>
+<includehints>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>rangeinput_impl.h</includehint>
+</includehints>
+</UI>

@@ -1075,3 +1075,19 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
         return;
     }
 }
+
+void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
+                    const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
+{
+    try {
+        m_Svnclient.merge(svn::Path(_entry.local8Bit()),
+            rev1,
+            svn::Path(_entry.local8Bit()),
+            rev2,
+            svn::Path(_entry.local8Bit()),
+            forceIt,rec,ancestry,dry);
+    } catch (svn::ClientException e) {
+        emit clientException(QString::fromLocal8Bit(e.message()));
+        return;
+    }
+}

@@ -100,6 +100,7 @@ public slots:
     virtual void slotResolved(const QString&);
     virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
+    virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
 
 signals:
     void clientException(const QString&);

@@ -20,6 +20,7 @@
 #include "kdesvnfilelist.h"
 #include "filelistviewitem.h"
 #include "importdir_logmsg.h"
+#include "mergedlg_impl.h"
 #include "svnactions.h"
 #include "svncpp/revision.hpp"
 #include "svncpp/dirent.hpp"
@@ -770,5 +771,17 @@ void kdesvnfilelist::dropEvent(QDropEvent *event)
  */
 void kdesvnfilelist::slotMergeRevisions()
 {
-    /// @todo implement me
+    if (!isLocal()) return;
+    FileListViewItem*which= singleSelected();
+    if (!which) {
+        return;
+    }
+    bool force,dry,rec,irelated;
+    Rangeinput_impl::revision_range range;
+    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,this,"merge_range")) {
+        return;
+    }
+    m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,irelated,force,dry);
+    which->refreshMe();
+    refreshRecursive(which);
 }

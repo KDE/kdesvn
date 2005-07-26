@@ -263,10 +263,12 @@ void FileListViewItem::update()
     fullDate.setTime_t(m_Stat.entry().cmtDate()/(1000*1000),Qt::UTC);
     setText(COL_LAST_DATE,fullDate.toString(Qt::LocalDate));
     setText(COL_LAST_REV,QString("%1").arg(m_Stat.entry().cmtRev()));
-    if (m_Stat.entry().Lock().Locked()) {
+#if 0
+    if (m_Stat.lockEntry().Locked()) {
         setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));
     }
-    setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.entry().Lock().Owner().c_str()));
+    setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.lockEntry().Owner().c_str()));
+#endif
 //    setText(COL_CURRENT_REV,QString("%1").arg(stat.entry().revision()));
 }
 

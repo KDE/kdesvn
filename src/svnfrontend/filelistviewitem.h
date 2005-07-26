@@ -51,7 +51,7 @@ public:
     bool isParent(QListViewItem*which);
     void updateStatus(const svn::Status&s);
 
-    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS,COL_CURRENT_REV;
+    static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
 
 protected:
     short int sortChar;

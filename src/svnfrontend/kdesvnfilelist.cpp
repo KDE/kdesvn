@@ -58,6 +58,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     addColumn(i18n("Last changed Revision"));
     addColumn(i18n("Last author"));
     addColumn(i18n("Last change date"));
+    addColumn(i18n("Locked by"));
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 

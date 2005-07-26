@@ -36,7 +36,9 @@ const int FileListViewItem::COL_STATUS = 1;
 const int FileListViewItem::COL_LAST_REV = 2;
 const int FileListViewItem::COL_LAST_AUTHOR = 3;
 const int FileListViewItem::COL_LAST_DATE = 4;
-const int FileListViewItem::COL_CURRENT_REV = 5;
+const int FileListViewItem::COL_IS_LOCKED = 5;
+
+//const int FileListViewItem::COL_CURRENT_REV = 5;
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
  : KListViewItem(_parent),
@@ -262,6 +264,10 @@ void FileListViewItem::update()
     fullDate.setTime_t(m_Stat.entry().cmtDate()/(1000*1000),Qt::UTC);
     setText(COL_LAST_DATE,fullDate.toString(Qt::LocalDate));
     setText(COL_LAST_REV,QString("%1").arg(m_Stat.entry().cmtRev()));
+    if (m_Stat.entry().Lock().Locked()) {
+        setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));
+    }
+    setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.entry().Lock().Owner().c_str()));
 //    setText(COL_CURRENT_REV,QString("%1").arg(stat.entry().revision()));
 }
 

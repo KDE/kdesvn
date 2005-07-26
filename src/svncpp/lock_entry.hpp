@@ -23,61 +23,51 @@
  * ====================================================================
  */
 
-// svncpp
-#include "svncpp/entry.hpp"
+#ifndef _SVNCPP_LOCK_ENTRY_H_
+#define _SVNCPP_LOCK_ENTRY_H_
 
+// stl
+#include <string>
+#include <list>
+
+// apr
+#include "apr_time.h"
+
+// subversion api
+#include "svn_types.h"
+#include "svn_wc.h"
 
 namespace svn
 {
-  Entry::Entry (const svn_wc_entry_t * src)
-    : m_entry (0), m_pool (0), m_valid (false)
+  class LockEntry
   {
-    init (src);
-  }
+  public:
+    LockEntry ();
 
-  Entry::Entry (const Entry & src)
-    : m_entry (0), m_pool (0), m_valid (false)
-  {
-    init (src);
-  }
+    LockEntry (const apr_time_t lock_time,
+              const char * lock_owner,
+              const char * lock_comment,
+              const char * lock_token);
+    void init(const svn_wc_entry_t * src);
+    const std::string&Comment()const;
+    const std::string&Owner()const;
+    const std::string&Token()const;
+    const apr_time_t Date()const;
+    const bool Locked()const;
 
-  Entry::~Entry ()
-  {
-    // no need to explicitely de-allocate m_entry
-    // since this will be handled by m_pool
-  }
-
-  void
-  Entry::init (const svn_wc_entry_t * src)
-  {
-    if (src)
-    {
-      // copy the contents of src
-      m_entry = svn_wc_entry_dup (src, m_pool);
-      m_valid = true;
-    }
-    else
-    {
-      // create an empty entry
-      m_entry = (svn_wc_entry_t*)
-        apr_pcalloc (m_pool, sizeof (svn_wc_entry_t));
-    }
-    m_lock.init(src);
-  }
-
-  Entry &
-  Entry::operator = (const Entry & src)
-  {
-    if (this == &src)
-      return *this;
-
-    init (src);
-    return *this;
-  }
+  protected:
+    apr_time_t date;
+    std::string owner;
+    std::string comment;
+    std::string token;
+    bool locked;
+  };
 }
 
+#endif
 /* -----------------------------------------------------------------
  * local variables:
  * eval: (load-file "../../rapidsvn-dev.el")
  * end:
  */
+

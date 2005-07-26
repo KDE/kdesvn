@@ -45,10 +45,16 @@ namespace svn
     LockEntry ();
 
     LockEntry (const apr_time_t lock_time,
+              const apr_time_t expiration_time,
               const char * lock_owner,
               const char * lock_comment,
               const char * lock_token);
     void init(const svn_wc_entry_t * src);
+    void init(const apr_time_t lock_time,
+              const apr_time_t expiration_time,
+              const char * lock_owner,
+              const char * lock_comment,
+              const char * lock_token);
     const std::string&Comment()const;
     const std::string&Owner()const;
     const std::string&Token()const;
@@ -57,6 +63,7 @@ namespace svn
 
   protected:
     apr_time_t date;
+    apr_time_t exp;
     std::string owner;
     std::string comment;
     std::string token;

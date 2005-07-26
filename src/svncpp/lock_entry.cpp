@@ -44,10 +44,11 @@ namespace svn
 
   LockEntry::LockEntry (
     const apr_time_t lock_time,
+    const apr_time_t expiration_time,
     const char * lock_owner,
     const char * lock_comment,
     const char * lock_token)
-    : date(lock_time),owner(lock_owner?lock_owner:""),comment(lock_comment?lock_comment:""),token(lock_token?lock_token:""),
+    : date(lock_time),exp(expiration_time),owner(lock_owner?lock_owner:""),comment(lock_comment?lock_comment:""),token(lock_token?lock_token:""),
       locked(lock_token?true:false)
   {
   }
@@ -91,6 +92,21 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     }
 #endif
+    exp = 0;
+  }
+  void LockEntry::init(
+    const apr_time_t lock_time,
+    const apr_time_t expiration_time,
+    const char * lock_owner,
+    const char * lock_comment,
+    const char * lock_token)
+  {
+    date = lock_time;
+    exp = expiration_time;
+    locked = lock_token?true:false;
+    token = lock_token?lock_token:"";
+    owner = lock_owner?lock_owner:"";
+    comment = lock_comment?lock_comment:"";
   }
 }
 

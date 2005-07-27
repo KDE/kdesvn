@@ -34,6 +34,7 @@ class KActionMenu;
 class KActionCollection;
 class KDialog;
 class DirNotify;
+class KdesvnFileListPrivate;
 
 /**
 @author Rajko Albrecht
@@ -91,8 +92,13 @@ protected:
     /**
      * Overridden virtuals for Qt drag 'n drop (XDND)
      */
-    virtual void dragEnterEvent(QDragEnterEvent *event);
-    virtual void dropEvent(QDropEvent *event);
+    virtual void contentsDragEnterEvent( QDragEnterEvent* );
+    virtual void contentsDragMoveEvent( QDragMoveEvent* );
+    virtual void contentsDropEvent( QDropEvent* );
+    virtual bool acceptDrag(QDropEvent *event)const;
+private:
+    KdesvnFileListPrivate*m_pList;
+    void cleanHighLighter();
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
@@ -112,15 +118,19 @@ protected slots:
     virtual void slotCleanupAction();
     virtual void slotResolved();
     virtual void slotMergeRevisions();
+    virtual void slotDropped(QDropEvent *,QListViewItem*);
+    virtual void viewportPaintEvent(QPaintEvent *);
 
 signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);
     void sigShowPopup(const QString&);
+    void sigUrlOpend(bool);
 
 public slots:
     virtual void refreshCurrentTree();
     virtual void refreshCurrent(FileListViewItem*);
+    virtual void closeMe();
 };
 
 #endif

@@ -95,6 +95,7 @@ protected:
 
 public slots:
     virtual void slotDispPopup(const QString&);
+    void slotUrlOpened(bool);
 private slots:
     void fileNew();
     void fileOpen();
@@ -102,6 +103,7 @@ private slots:
     void fileSave();
     void fileSaveAs();
     void filePrint();
+    void fileClose();
     void optionsPreferences();
 
     void changeStatusbar(const QString& text);
@@ -118,7 +120,6 @@ private:
     kdesvnView *m_view;
 
     KPrinter   *m_printer;
-    KAction     *m_UrlOpen,*m_DirOpen;
     KActionMenu *m_FileMenu;
     QTimer *statusResetTimer;
     QString m_bookmarkFile;

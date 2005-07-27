@@ -91,7 +91,12 @@ kdesvn::kdesvn()
 
     createStandardStatusBarAction();
     setStandardToolBarMenuEnabled(true);
+#ifdef TESTING_RC
+    createGUI(TESTING_RC);
+    kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
+#else
     createGUI();
+#endif
     KStdAction::configureToolbars(this,SLOT(configureToolbars() ), actionCollection());
 
     setAutoSaveSettings();
@@ -124,15 +129,17 @@ kdesvn::~kdesvn()
 
 void kdesvn::load(const KURL& url)
 {
-//    setCaption(url.prettyURL());
     m_view->openURL(url);
 }
 
 void kdesvn::setupActions()
 {
-    m_DirOpen = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    m_DirOpen->setText(i18n("Open working copy"));
-    m_UrlOpen = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
+    KAction*tmpAction;
+    tmpAction = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
+    tmpAction->setText(i18n("Open working copy"));
+    tmpAction = KStdAction::close(this,SLOT(fileClose()),actionCollection());
+    tmpAction->setEnabled(false);
+    tmpAction = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
 
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
@@ -149,6 +156,11 @@ void kdesvn::setupActions()
                                   this, SLOT(optionsPreferences()),
                                   actionCollection(), "custom_action");
 */
+}
+
+void kdesvn::fileClose()
+{
+    m_view->closeMe();
 }
 
 void kdesvn::saveProperties(KConfig *config)
@@ -333,7 +345,23 @@ void kdesvn::slotDispPopup(const QString&name)
 {
     QWidget *w = factory()->container(name, this);
     QPopupMenu *popup = static_cast<QPopupMenu *>(w);
+    if (!popup) {
+        kdDebug()<<"Error getting popupMenu"<<endl;
+        return;
+    }
     popup->exec(QCursor::pos());
 }
 
 #include "kdesvn.moc"
+
+
+/*!
+    \fn kdesvn::slotUrlOpened(bool)
+ */
+void kdesvn::slotUrlOpened(bool how)
+{
+    KAction * ac;
+    if ( (ac=actionCollection()->action("file_close"))) {
+        ac->setEnabled(how);
+    }
+}

@@ -58,23 +58,21 @@
 #define EMIT_REFRESH emit sigRefreshAll()
 
 SvnActions::SvnActions(QObject *parent, const char *name)
- : QObject(parent, name),m_ParentList(0),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
+ : QObject(parent, name),m_ParentList(0),m_SvnContext(new CContextListener(this)),m_CurrentContext(NULL)
 {
     connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
 
 SvnActions::SvnActions(kdesvnfilelist *parent, const char *name)
- : QObject(parent, name),m_ParentList(parent),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
+ : QObject(parent, name),m_ParentList(parent),m_SvnContext(new CContextListener(this)),m_CurrentContext(NULL)
 {
     connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
 
 SvnActions::~SvnActions()
 {
-    if (m_CurrentContext) {
-        delete m_CurrentContext;
-        m_CurrentContext = 0;
-    }
+    delete m_CurrentContext;
+    m_CurrentContext = 0;
 }
 
 void SvnActions::slotNotifyMessage(const QString&aMsg)
@@ -84,10 +82,8 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 
 void SvnActions::reInitClient()
 {
-    if (m_CurrentContext) {
-        delete m_CurrentContext;
-        m_CurrentContext = 0;
-    }
+    delete m_CurrentContext;
+    m_CurrentContext = NULL;
     m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(m_SvnContext);
     m_Svnclient.setContext(m_CurrentContext);
@@ -155,6 +151,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
 {
     const svn::LogEntries * logs;
     QString ex;
+    if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @fixme Last parameter should be user setable (follow nodes moving or not)
@@ -198,6 +195,7 @@ void SvnActions::slotBlame()
  */
 void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
 {
+    if (!m_CurrentContext) return;
     svn::AnnotatedFile * blame;
     QString ex;
     svn::Path p(k->fullName().local8Bit());
@@ -281,6 +279,7 @@ void SvnActions::slotRangeBlame()
 
 void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
 {
+    if (!m_CurrentContext) return;
     std::string content;
     QString ex;
     svn::Path p(k->fullName().local8Bit());
@@ -323,6 +322,7 @@ void SvnActions::slotCat()
 
 void SvnActions::slotMkdir()
 {
+    if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     QString parentDir,ex;
@@ -375,6 +375,7 @@ void SvnActions::slotMkdir()
 
 void SvnActions::slotInfo()
 {
+    if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     QPtrList<FileListViewItem> *lst = m_ParentList->allSelected();
     QValueList<svn::Entry> entries;
@@ -482,6 +483,7 @@ void SvnActions::slotInfo()
  */
 void SvnActions::slotProperties()
 {
+    if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
@@ -520,6 +522,7 @@ void SvnActions::slotProperties()
  */
 void SvnActions::slotCommit()
 {
+    if (!m_CurrentContext) return;
     Logmsg_impl*ptr;
     if (!m_ParentList->firstChild()) return;
     KDialog*dlg = createDialog(&ptr,QString(i18n("Commit log")),true);
@@ -617,6 +620,7 @@ void SvnActions::procClosed(KProcess*proc)
  */
 void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
 {
+    if (!m_CurrentContext) return;
     QString ex;
     KTempFile tfile;
     try {
@@ -659,6 +663,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
  */
 void SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
 {
+    if (!m_CurrentContext) return;
     QString ex;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
@@ -741,6 +746,7 @@ void SvnActions::slotUpdateTo()
  */
 void SvnActions::slotAdd()
 {
+    if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
     if (lst->count()==0) {
@@ -783,6 +789,7 @@ void SvnActions::slotAdd()
  */
 void SvnActions::slotDelete()
 {
+    if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
 
@@ -886,6 +893,7 @@ void SvnActions::slotExportCurrent()
 
 void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force,bool _exp)
 {
+    if (!m_CurrentContext) return;
     QString fUrl = rUrl;
     QString ex;
     while (fUrl.endsWith("/")) {
@@ -942,6 +950,7 @@ void SvnActions::slotRevert()
 
 void SvnActions::slotRevertItems(const QStringList&displist)
 {
+    if (!m_CurrentContext) return;
     if (displist.count()==0) {
         return;
     }
@@ -981,6 +990,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
 
 void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec)
 {
+    if (!m_CurrentContext) return;
     QString fUrl = rUrl;
     QString ex;
     while (fUrl.endsWith("/")) {
@@ -1000,6 +1010,7 @@ void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
 
 void SvnActions::slotSwitch()
 {
+    if (!m_CurrentContext) return;
     if (!m_ParentList||!m_ParentList->isLocal()) return;
 
     QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
@@ -1045,6 +1056,7 @@ void SvnActions::slotSwitch()
 
 void SvnActions::slotCleanup(const QString&path)
 {
+    if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Cleanup"),i18n("Cleaning up directory"));
         m_Svnclient.cleanup(svn::Path(path.local8Bit()));
@@ -1056,6 +1068,7 @@ void SvnActions::slotCleanup(const QString&path)
 
 void SvnActions::slotResolved(const QString&path)
 {
+    if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Resolve"),i18n("Marking resolved"));
         m_Svnclient.resolved(svn::Path(path.local8Bit()),true);
@@ -1067,6 +1080,7 @@ void SvnActions::slotResolved(const QString&path)
 
 void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
 {
+    if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Import"),i18n("Importing items"));
         m_Svnclient.import(svn::Path(path.local8Bit()),target.local8Bit(),message.local8Bit(),rec);
@@ -1079,6 +1093,7 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
                     const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
 {
+    if (!m_CurrentContext) return;
     try {
         m_Svnclient.merge(svn::Path(_entry.local8Bit()),
             rev1,

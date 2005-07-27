@@ -56,6 +56,7 @@ kdesvnView::kdesvnView(QWidget *parent)
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
     connect(m_flist,SIGNAL(sigShowPopup(const QString&)),parent,SLOT(slotDispPopup(const QString&)));
+    connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
 }
 
 void kdesvnView::slotAppendLog(const QString& text)
@@ -129,3 +130,13 @@ void kdesvnView::slotSetTitle(const QString& title)
 }
 
 #include "kdesvnview.moc"
+
+/*!
+    \fn kdesvnView::closeMe()
+ */
+void kdesvnView::closeMe()
+{
+    m_flist->closeMe();
+    m_LogWindow->setText("");
+    slotOnURL(i18n("No repository open"));
+}

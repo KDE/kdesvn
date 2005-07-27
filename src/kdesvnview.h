@@ -96,7 +96,8 @@ signals:
      * Use this signal to change the content of the caption
      */
     void signalChangeCaption(const QString& text);
-
+public slots:
+    virtual void closeMe();
 protected slots:
     virtual void slotOnURL(const QString& url);
     virtual void slotSetTitle(const QString& title);

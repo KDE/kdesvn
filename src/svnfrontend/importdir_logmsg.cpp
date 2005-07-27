@@ -26,9 +26,9 @@
 Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
  : Logmsg_impl(parent, name)
 {
-    m_createDirBox = new QCheckBox(i18n("Create subdir on import"),this,"create_dir_checkbox");
+    m_createDirBox = new QCheckBox(i18n("Create subdir on import (Be carefull!)"),this,"create_dir_checkbox");
     m_ItemsLayout->addWidget(m_createDirBox);
-    m_createDirBox->setChecked(true);
+    m_createDirBox->setChecked(false);
 }
 
 Importdir_logmsg::~Importdir_logmsg()

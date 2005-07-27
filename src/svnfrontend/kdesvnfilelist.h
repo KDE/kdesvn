@@ -93,6 +93,7 @@ protected:
      * Overridden virtuals for Qt drag 'n drop (XDND)
      */
     virtual void contentsDragEnterEvent( QDragEnterEvent* );
+    virtual void contentsDragLeaveEvent( QDragLeaveEvent* );
     virtual void contentsDragMoveEvent( QDragMoveEvent* );
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
@@ -112,6 +113,7 @@ protected slots:
     virtual void slotItemDoubleClicked(QListViewItem*);
     virtual void slotImportIntoCurrent(bool);
     virtual void slotImportDirsIntoCurrent();
+    virtual void slotImportIntoDir(const KURL&,const QString&,bool);
 
     /* subversion slots */
     virtual void slotChangeToRepository();

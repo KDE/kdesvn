@@ -37,6 +37,10 @@ namespace svn {
     class Context;
 }
 
+namespace KIO {
+    class Job;
+}
+
 /**
 @author Rajko Albrecht
 */
@@ -113,6 +117,7 @@ signals:
 protected slots:
     virtual void wroteStdin(KProcess*);
     virtual void procClosed(KProcess*);
+    virtual void jobResult(KIO::Job*);
 };
 
 #endif

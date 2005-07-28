@@ -48,6 +48,8 @@
 #include <kdialogbase.h>
 #include <qvbox.h>
 #include <kapplication.h>
+#include <kio/jobclasses.h>
+#include <kio/job.h>
 
 #if 0
 #include <khtml_part.h>
@@ -802,19 +804,23 @@ void SvnActions::slotDelete()
 
     std::vector<svn::Path> items;
     QStringList displist;
+    KURL::List kioList;
     while ((cur=liter.current())!=0){
         ++liter;
         if (!cur->svnStatus().isVersioned()) {
-            KMessageBox::error(m_ParentList,i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
-                .arg(cur->svnStatus().path()));
-            return;
+            kioList.append(cur->svnStatus().path());
+        } else {
+            items.push_back(cur->svnStatus().path());
         }
-        items.push_back(cur->svnStatus().path());
         displist.append(cur->svnStatus().path());
     }
     int answer = KMessageBox::questionYesNoList(m_ParentList,i18n("Realy delete that entries?"),displist,"Delete from repository");
     if (answer!=KMessageBox::Yes) {
         return;
+    }
+    if (kioList.count()>0) {
+        KIO::Job*aJob = KIO::del(kioList);
+        connect(aJob,SIGNAL(result (KIO::Job *)),this,SLOT(jobResult(KIO::Job*)));
     }
     QString ex;
     try {
@@ -1105,4 +1111,9 @@ void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&r
         emit clientException(QString::fromLocal8Bit(e.message()));
         return;
     }
+}
+
+void SvnActions::jobResult(KIO::Job*job)
+{
+    EMIT_REFRESH;
 }

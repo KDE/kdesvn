@@ -3,7 +3,7 @@
   <general>
     <author>Rajko Albrecht</author>
     <email>ral@alwins-world.de</email>
-    <version>0.2</version>
+    <version>0.3</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -84,6 +84,10 @@
         <f77flags/>
       </debug>
     </configurations>
+    <subclassing>
+      <subclass uifile="/src/svnfrontend/copymoveview.ui" sourcefile="/src/svnfrontend/copymoveview_impl.cpp" />
+      <subclass uifile="/src/svnfrontend/copymoveview.ui" sourcefile="/src/svnfrontend/copymoveview_impl.h" />
+    </subclassing>
   </kdevautoproject>
   <kdevfileview>
     <groups>
@@ -98,7 +102,7 @@
     <tree>
       <hidenonprojectfiles>false</hidenonprojectfiles>
       <hidepatterns>*.o,*.lo,CVS</hidepatterns>
-      <showvcsfields>false</showvcsfields>
+      <showvcsfields>true</showvcsfields>
     </tree>
   </kdevfileview>
   <kdevdoctreeview>
@@ -140,15 +144,15 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs/>
-      <gdbpath/>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
       <runappinappdirectory>true</runappinappdirectory>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
     </general>
     <display>
       <staticmembers>false</staticmembers>
@@ -205,7 +209,7 @@
     <EMAIL>ral@alwins-world.de</EMAIL>
     <LICENSE>LGPL</LICENSE>
     <LICENSEFILE>COPYING</LICENSEFILE>
-    <VERSION>0.2</VERSION>
+    <VERSION>0.3</VERSION>
     <YEAR>2005</YEAR>
     <dest>/home/ral/progs/Projekte/kdesvn</dest>
   </substmap>
@@ -232,7 +236,7 @@
       </qtdesigner>
     </designerintegration>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
@@ -245,7 +249,7 @@
     <bzip>false</bzip>
     <archname/>
     <appname>kdesvn</appname>
-    <version>0.2</version>
+    <version>0.3</version>
     <release/>
     <vendor/>
     <licence>LGPL</licence>

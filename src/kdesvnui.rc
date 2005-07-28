@@ -82,12 +82,12 @@
   <Action name="make_cleanup" />
  </Menu>
  <Menu name="remote_context" >
-     <Action name="make_svn_rename" />
-     <Action name="make_svn_copy" />
-     <Separator/>
   <Action name="make_svn_log_full" />
   <Action name="make_svn_log" />
   <Action name="make_svn_info" />
+  <Separator/>
+  <Action name="make_svn_rename" />
+  <Action name="make_svn_copy" />
   <Separator/>
   <Action name="make_svn_blame" />
   <Action name="make_svn_range_blame" />

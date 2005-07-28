@@ -410,8 +410,9 @@ void kdesvnfilelist::enableActions()
     m_LogFullAction->setEnabled(single||(isLocal()&&!single&&!multi&&isopen));
     m_propertyAction->setEnabled(single);
     m_DelCurrent->setEnabled( (multi||single));
-    m_RenameAction->setEnabled(single);
-    m_CopyAction->setEnabled(single);
+
+    m_RenameAction->setEnabled(single && (!m_isLocal||singleSelected()!=firstChild()));
+    m_CopyAction->setEnabled(single && (!m_isLocal||singleSelected()!=firstChild()));
 
     /* 2. only on files */
     m_BlameAction->setEnabled(single&&!dir);
@@ -996,6 +997,9 @@ void kdesvnfilelist::slotCopy()
 
 void kdesvnfilelist::copy_move(bool move)
 {
+    if (m_isLocal&&singleSelected()==firstChild()) {
+        return;
+    }
     bool ok, force;
     FileListViewItem*which = singleSelected();
     if (!which) return;

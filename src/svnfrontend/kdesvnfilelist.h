@@ -100,6 +100,7 @@ protected:
 private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
+    bool validDropEvent(QDropEvent*event,QListViewItem*&item);
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);

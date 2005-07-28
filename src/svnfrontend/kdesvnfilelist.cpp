@@ -87,10 +87,6 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(FileListViewItem*)),this,SLOT(refreshCurrent(FileListViewItem*)));
-#if 0
-    connect(this,SIGNAL(dropped (KListView*, QDropEvent*, QListViewItem*, QListViewItem*)),
-            this,SLOT(slotDropped(KListView*,QDropEvent *,QListViewItem *,QListViewItem *)));
-#endif
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
 
@@ -417,8 +413,7 @@ void kdesvnfilelist::enableActions()
     m_MkdirAction->setEnabled(dir);
     m_switchRepository->setEnabled(dir);
     m_changeToRepository->setEnabled(isLocal());
-    m_CleanupAction->setEnabled(isLocal()&&dir);
-    m_ImportDirsIntoCurrent->setEnabled(isLocal()&&dir);
+    m_ImportDirsIntoCurrent->setEnabled(dir);
     /* local only actions */
     /* 1. actions on files AND dirs*/
     m_AddCurrent->setEnabled( (multi||single) && isLocal());
@@ -433,6 +428,8 @@ void kdesvnfilelist::enableActions()
     m_simpleDiffHead->setEnabled(isLocal()&&isopen);
 
     m_changeToRepository->setEnabled(single&&dir&&isLocal());
+    /* 2. on dirs only */
+    m_CleanupAction->setEnabled(isLocal()&&dir);
 
     /* remote actions only */
     m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isLocal());
@@ -571,10 +568,6 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
     } else {
         targetUri = QString::fromLocal8Bit(allSelected()->at(0)->svnStatus().entry().url());
     }
-    while (targetUri.endsWith("/")) {
-        targetUri.truncate(targetUri.length()-1);
-    }
-
     KURL uri;
     if (dirs) uri = KFileDialog::getExistingDirectory(QString::null,this,"Import files from directory");
     else uri = KFileDialog::getImageOpenURL(QString::null,this,"Import file");
@@ -596,39 +589,45 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     KDialog*dlg;
     KURL uri = importUrl;
     QString targetUri = target;
+    while (targetUri.endsWith("/")) {
+        targetUri.truncate(targetUri.length()-1);
+    }
 
     if (dirs) {
          dlg = createDialog(&ptr2,QString(i18n("Import log")),true);
          ptr = ptr2;
+         ptr2->createDirboxDir("\""+uri.fileName(true)+"\"");
     } else {
         dlg = createDialog(&ptr,QString(i18n("Import log")),true);
     }
+
     if (!dlg) return;
+
     ptr->initHistory();
+
     if (dlg->exec()!=QDialog::Accepted) {
         delete dlg;
         return;
     }
+
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
     ptr->saveHistory();
-    bool isMkdir = false;
     uri.setProtocol("");
     QString iurl = uri.path();
-
-    if (dirs && ptr2) {
-        isMkdir=ptr2->createDir();
-        if (isMkdir) {
-            targetUri+= uri.path();
-        }
-    }
     while (iurl.endsWith("/")) {
         iurl.truncate(iurl.length()-1);
     }
+
+    if (dirs && ptr2 && ptr2->createDir()) {
+        targetUri+= "/"+uri.fileName(true);
+    }
     m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec);
+
     if (!isLocal()) {
         if (allSelected()->count()==0) {
-            openURL(baseUri());
+            refreshCurrentTree();
+//            openURL(baseUri());
         } else {
             slotReinitItem(allSelected()->at(0));
         }
@@ -801,7 +800,9 @@ void kdesvnfilelist::slotRightButton(QListViewItem *_item, const QPoint &, int)
 */
 void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
 {
-    bool ok = false;
+    QListViewItem*item;
+    bool ok = validDropEvent(event,item);
+#if 0
 //    kdDebug(0)<<"kdesvnfilelist::dragEnterEvent(QDragEnterEvent *event)"<<endl;
     if (KURLDrag::canDecode(event)) {
         KURL::List urlList;
@@ -812,6 +813,7 @@ void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
             }
         }
     }
+#endif
     kdDebug()<<"Accept enter: " << ok << endl;
     if (ok) {
         event->accept();
@@ -826,30 +828,42 @@ void kdesvnfilelist::contentsDragLeaveEvent( QDragLeaveEvent * )
     cleanHighLighter();
 }
 
-void kdesvnfilelist::contentsDropEvent(QDropEvent * event)
+bool kdesvnfilelist::acceptDrag(QDropEvent *event)const
 {
+    return KURLDrag::canDecode(event);
+}
+
+bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
+{
+    if (!event) return false;
     bool ok = false;
-    QListViewItem *item = 0;
-    kdDebug(0)<<"kdesvnfilelist::contentsDropEvent(QDropEvent *event)"<<endl;
+    item = 0;
     if (KURLDrag::canDecode(event)) {
-        if (m_baseUri.length()==0) {
-            KURL::List urlList;
-            if( KURLDrag::decode( event, urlList ) ) {
-                if (urlList.count()==1) {
-                    ok = true;
-                }
-            }
-        } else if (!m_isLocal){
-            QPoint vp = contentsToViewport( event->pos() );
-            item = isExecuteArea( vp ) ? itemAt( vp ) : 0L;
-            if (item) {
+        KURL::List urlList;
+        KURLDrag::decode( event, urlList );
+        if (urlList.count()==1) {
+            if (m_baseUri.length()==0) {
+                ok = true;
+            } else {
+                QPoint vp = contentsToViewport( event->pos() );
+                item = isExecuteArea( vp ) ? itemAt( vp ) : 0L;
                 FileListViewItem*which=static_cast<FileListViewItem*>(item);
-                if (which->isDir()) {
-                    ok = true;
+                if (!m_isLocal){
+                    ok = (!item || (which->isDir()))&&urlList[0].isLocalFile();
+                } else {
+                    // not yet
                 }
             }
         }
     }
+    return ok;
+}
+
+void kdesvnfilelist::contentsDropEvent(QDropEvent * event)
+{
+    kdDebug(0)<<"kdesvnfilelist::contentsDropEvent(QDropEvent *event)"<<endl;
+    QListViewItem *item = 0;
+    bool ok = validDropEvent(event,item);
     kdDebug()<<"Accept drop: " << ok << endl;
     cleanHighLighter();
     if (ok) {
@@ -860,40 +874,21 @@ void kdesvnfilelist::contentsDropEvent(QDropEvent * event)
     }
 }
 
-bool kdesvnfilelist::acceptDrag(QDropEvent *event)const
-{
-    return KURLDrag::canDecode(event);
-}
-
 void kdesvnfilelist::contentsDragMoveEvent( QDragMoveEvent* event)
 {
-    bool ok = false;
-    if (KURLDrag::canDecode(event)) {
-        KURL::List urlList;
-        KURLDrag::decode( event, urlList );
-        if (m_baseUri.length()==0) {
-            if (urlList.count()==1) {
-                ok = true;
-            }
-        } else if (!m_isLocal){
-            QPoint vp = contentsToViewport( event->pos() );
-            QListViewItem *item = isExecuteArea( vp ) ? itemAt( vp ) : 0L;
-            if (item!=m_pList->dragOverItem) {
-                m_pList->dragOverItem=item;
-                m_pList->dragOverPoint = vp;
-                QRect tmpRect = drawItemHighlighter(0, m_pList->dragOverItem);
-                if (tmpRect!=m_pList->mOldDropHighlighter) {
-                    cleanHighLighter();
-                    m_pList->mOldDropHighlighter=tmpRect;
-                    viewport()->repaint(tmpRect);
-                }
-            }
-            if (item) {
-                FileListViewItem*which=static_cast<FileListViewItem*>(item);
-                if (which->isDir()&&urlList.count()==1 && urlList[0].isLocalFile()) {
-                    ok = true;
-                }
-            }
+    QListViewItem * item;
+    bool ok = validDropEvent(event,item);
+
+    if (item!=m_pList->dragOverItem) {
+        QPoint vp = contentsToViewport( event->pos() );
+        m_pList->dragOverItem=item;
+        m_pList->dragOverPoint = vp;
+        QRect tmpRect = drawItemHighlighter(0, m_pList->dragOverItem);
+        if (tmpRect!=m_pList->mOldDropHighlighter) {
+            cleanHighLighter();
+            m_pList->mOldDropHighlighter=tmpRect;
+            viewport()->repaint(tmpRect);
+            kapp->processEvents();
         }
     }
     if (ok) {
@@ -906,7 +901,7 @@ void kdesvnfilelist::contentsDragMoveEvent( QDragMoveEvent* event)
 void kdesvnfilelist::viewportPaintEvent(QPaintEvent *ev)
 {
     KListView::viewportPaintEvent(ev);
-    if (m_pList->mOldDropHighlighter.isValid()) {
+    if (m_pList->mOldDropHighlighter.isValid() && ev->rect().intersects(m_pList->mOldDropHighlighter)) {
         QPainter painter(viewport());
         style().drawPrimitive(QStyle::PE_FocusRect, &painter, m_pList->mOldDropHighlighter, colorGroup(),
                 QStyle::Style_FocusAtBorder);
@@ -955,13 +950,20 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             openURL(urlList[0]);
             return;
         }
-        if (m_baseUri.length()>0 && item && urlList[0].isLocalFile() && !m_isLocal) {
+        if (m_baseUri.length()>0 && urlList[0].isLocalFile() && !m_isLocal) {
             QString path = urlList[0].path();
             QFileInfo fi(path);
-            FileListViewItem*which = static_cast<FileListViewItem*>(item);
-            clearSelection();
-            which->setSelected(true);
-            slotImportIntoDir(urlList[0],which->fullName(),fi.isDir());
+            QString tdir;
+            if (item) {
+                FileListViewItem*which = static_cast<FileListViewItem*>(item);
+                clearSelection();
+                which->setSelected(true);
+                kapp->processEvents();
+                tdir = which->fullName();
+            } else {
+                tdir = m_baseUri;
+            }
+            slotImportIntoDir(urlList[0],tdir,fi.isDir());
         }
     }
 }

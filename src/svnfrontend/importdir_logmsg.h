@@ -35,6 +35,7 @@ public:
     virtual ~Importdir_logmsg();
 
     bool createDir();
+    void createDirboxDir(const QString & which=QString::null);
 
 protected:
     QCheckBox*m_createDirBox;

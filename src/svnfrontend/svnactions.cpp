@@ -50,6 +50,7 @@
 #include <kapplication.h>
 #include <kio/jobclasses.h>
 #include <kio/job.h>
+#include <kdebug.h>
 
 #if 0
 #include <khtml_part.h>
@@ -1113,7 +1114,31 @@ void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&r
     }
 }
 
-void SvnActions::jobResult(KIO::Job*job)
+void SvnActions::jobResult(KIO::Job*)
 {
+    EMIT_REFRESH;
+}
+
+
+/*!
+    \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)
+ */
+void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool force)
+{
+    if (!m_CurrentContext) return;
+    try {
+        StopDlg sdlg(m_SvnContext,0,0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
+        if (move) {
+            kdDebug()<<"Moving" << endl;
+            m_Svnclient.move(svn::Path(Old.local8Bit()),svn::Revision::HEAD,
+                svn::Path(New.local8Bit()),force);
+        } else {
+            m_Svnclient.copy(svn::Path(Old.local8Bit()),svn::Revision::HEAD,
+                svn::Path(New.local8Bit()));
+        }
+    } catch (svn::ClientException e) {
+        emit clientException(QString::fromLocal8Bit(e.message()));
+        return;
+    }
     EMIT_REFRESH;
 }

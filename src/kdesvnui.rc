@@ -18,6 +18,8 @@
     <Action name="make_svn_range_blame" />
     <Action name="make_svn_cat" />
     <Separator/>
+    <Action name="make_svn_rename" />
+    <Action name="make_svn_copy" />
     <Action name="make_svn_remove" />
     <Action name="make_svn_mkdir" />
     <Action name="make_cleanup" />
@@ -53,6 +55,9 @@
  </MenuBar>
  <Menu name="local_context" >
   <text>Actions</text>
+  <Action name="make_svn_rename" />
+  <Action name="make_svn_copy" />
+  <Separator/>
   <Action name="make_svn_log_full" />
   <Action name="make_svn_log" />
   <Action name="make_svn_property" />
@@ -77,6 +82,9 @@
   <Action name="make_cleanup" />
  </Menu>
  <Menu name="remote_context" >
+     <Action name="make_svn_rename" />
+     <Action name="make_svn_copy" />
+     <Separator/>
   <Action name="make_svn_log_full" />
   <Action name="make_svn_log" />
   <Action name="make_svn_info" />

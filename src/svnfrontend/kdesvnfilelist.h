@@ -69,6 +69,7 @@ protected:
     KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction,*m_CheckoutCurrentAction,*m_RevertAction;
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
     KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction,*m_MergeRevisionAction;
+    KAction*m_RenameAction,*m_CopyAction;
 
     SvnActions*m_SvnWrapper;
 
@@ -101,6 +102,7 @@ private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
     bool validDropEvent(QDropEvent*event,QListViewItem*&item);
+    void copy_move(bool move);
 
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
@@ -123,6 +125,8 @@ protected slots:
     virtual void slotMergeRevisions();
     virtual void slotDropped(QDropEvent *,QListViewItem*);
     virtual void viewportPaintEvent(QPaintEvent *);
+    virtual void slotRename();
+    virtual void slotCopy();
 
 signals:
     void sigLogMessage(const QString&);

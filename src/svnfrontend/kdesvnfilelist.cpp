@@ -20,6 +20,7 @@
 #include "kdesvnfilelist.h"
 #include "filelistviewitem.h"
 #include "importdir_logmsg.h"
+#include "copymoveview_impl.h"
 #include "mergedlg_impl.h"
 #include "svnactions.h"
 #include "svncpp/revision.hpp"
@@ -111,9 +112,14 @@ void kdesvnfilelist::setupActions()
     /* 1. actions on dirs AND files */
     m_LogRangeAction = new KAction(i18n("&Log..."),"history",KShortcut(SHIFT+CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
     m_LogFullAction = new KAction(i18n("&Full Log"),"history",KShortcut(CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
-    m_propertyAction = new KAction(i18n("Properties"),"edit",KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+    m_propertyAction = new KAction(i18n("Properties"),"edit",
+        KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     m_InfoAction = new KAction(i18n("Details"),"vcs_status",
         KShortcut(Key_I),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
+    m_RenameAction = new KAction(i18n("Move"),"move",
+        KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
+    m_CopyAction = new KAction(i18n("Copy"),"editcopy",
+        KShortcut(Key_F5),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
 
     /* 2. actions only on files */
     m_BlameAction = new KAction("&Blame","flag",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
@@ -404,6 +410,8 @@ void kdesvnfilelist::enableActions()
     m_LogFullAction->setEnabled(single||(isLocal()&&!single&&!multi&&isopen));
     m_propertyAction->setEnabled(single);
     m_DelCurrent->setEnabled( (multi||single));
+    m_RenameAction->setEnabled(single);
+    m_CopyAction->setEnabled(single);
 
     /* 2. only on files */
     m_BlameAction->setEnabled(single&&!dir);
@@ -971,4 +979,30 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
 KdesvnFileListPrivate::KdesvnFileListPrivate()
     : dragOverItem(0),dragOverPoint(QPoint(0,0)),mOldDropHighlighter()
 {
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotRename()
+ */
+void kdesvnfilelist::slotRename()
+{
+    copy_move(true);
+}
+void kdesvnfilelist::slotCopy()
+{
+    copy_move(false);
+}
+
+void kdesvnfilelist::copy_move(bool move)
+{
+    bool ok, force;
+    FileListViewItem*which = singleSelected();
+    if (!which) return;
+    QString nName =  CopyMoveView_impl::getMoveCopyTo(&ok,&force,move,
+        which->fullName(),m_baseUri,this,"move_name");
+    if (!ok) {
+        return;
+    }
+    m_SvnWrapper->slotCopyMove(move,which->fullName(),nName,force);
 }

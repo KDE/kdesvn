@@ -82,9 +82,9 @@ bool CopyMoveView_impl::force()
 QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
     const QString&old,const QString&base,QWidget*parent,const char*name)
 {
-    KDialogBase dlg(parent,name,true,move?i18n("Move/Rename file/dir"):i18n("Copy file/dir"),
+    KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
             KDialogBase::Ok|KDialogBase::Cancel,
-            KDialogBase::Ok,true);
+            KDialogBase::NoDefault);
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     CopyMoveView_impl*ptr=new CopyMoveView_impl(base,old,(move),Dialog1Layout);
     QString nName = QString::null;

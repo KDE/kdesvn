@@ -87,14 +87,17 @@ bool CContextListener::contextGetLogin (
                     std::string & password,
                     bool & maySave)
 {
+    emit waitShow(true);
     emit sendNotify(QString::fromLocal8Bit(realm.c_str()));
     AuthDialogImpl auth(QString::fromLocal8Bit(realm.c_str()));
     if (auth.exec()==QDialog::Accepted) {
         username.assign(auth.Username().local8Bit());
         password.assign(auth.Password().local8Bit());
         maySave = auth.maySave();
+        emit waitShow(false);
         return true;
     }
+    emit waitShow(false);
     return false;
 }
 
@@ -133,10 +136,12 @@ bool CContextListener::contextCancel()
 bool CContextListener::contextGetLogMessage (std::string & msg)
 {
     bool isOk = false;
+    emit waitShow(true);
     QString logMessage = Logmsg_impl::getLogmessage(&isOk,0,0,0);
     if (isOk) {
         msg.assign(logMessage.local8Bit());
     }
+    emit waitShow(false);
     return isOk;
 }
 

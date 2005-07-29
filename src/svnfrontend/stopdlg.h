@@ -46,13 +46,14 @@ protected:
     bool mCancelled;
     QTimer * mShowTimer;
     QString mCancelText;
-    bool mShown;
+    bool mShown,mWait;
     QLabel*mLabel;
     KProgress*m_ProgressBar;
     bool m_BarShown;
 
 public slots:
     virtual void slotTick();
+    virtual void slotWait(bool);
 
 protected slots:
     virtual void slotAutoShow();

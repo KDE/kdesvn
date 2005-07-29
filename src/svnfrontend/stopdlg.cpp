@@ -27,6 +27,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <kprogress.h>
+#include <kdebug.h>
 
 StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
@@ -46,10 +47,21 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
     m_ProgressBar->setTextEnabled(false);
 
     layout->addWidget(m_ProgressBar);
+    mWait = true;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
     connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
+    connect(m_Context,SIGNAL(waitShow(bool)),this,SLOT(slotWait(bool)));
     mShowTimer->start(m_MinDuration, true);
+}
+
+void StopDlg::slotWait(bool how)
+{
+    mWait = true;
+    if (mShown && mWait) {
+        hide();
+        mShown = false;
+    }
 }
 
 StopDlg::~StopDlg()
@@ -58,7 +70,11 @@ StopDlg::~StopDlg()
 
 void StopDlg::slotAutoShow()
 {
-    if (mShown) {
+    if (mShown||mWait) {
+        if (mWait) {
+            kdDebug() << "Waiting for show"<<endl;
+            mShowTimer->start(m_MinDuration, true);
+        }
         return;
     }
     m_ProgressBar->hide();

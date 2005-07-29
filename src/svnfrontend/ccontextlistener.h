@@ -64,6 +64,7 @@ public:
 signals:
     void sendNotify(const QString&);
     void tickProgress();
+    void waitShow(bool);
 
 protected:
     static const int smax_actionstring;

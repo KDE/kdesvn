@@ -1008,5 +1008,6 @@ void kdesvnfilelist::copy_move(bool move)
     if (!ok) {
         return;
     }
+    kdDebug()<<"Got out"<< endl;
     m_SvnWrapper->slotCopyMove(move,which->fullName(),nName,force);
 }

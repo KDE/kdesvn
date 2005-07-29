@@ -25,8 +25,13 @@
 #include <klocale.h>
 #include <qvbox.h>
 #include <kdebug.h>
+#include <kglobal.h>
+#include <kapp.h>
+#include <kconfigbase.h>
+#include <kconfig.h>
 
 QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
+const char* Logmsg_impl::groupName = "logmsg_dialog_size";
 
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
@@ -103,11 +108,10 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
 
     ptr = new Logmsg_impl(Dialog1Layout);
     if (!rec) {
-        kdDebug()<< "Rec == false"<< endl;
         ptr->m_RecursiveButton->hide();
     }
     ptr->initHistory();
-    dlg.resize( QSize(480,360).expandedTo(dlg.minimumSizeHint()) );
+    dlg.resize(dlg.configDialogSize(groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
     } else {
@@ -116,6 +120,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
+    dlg.saveDialogSize(groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
     return msg;

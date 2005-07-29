@@ -59,6 +59,7 @@
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
 #define EMIT_REFRESH emit sigRefreshAll()
+#define DIALOGS_SIZES "display_dialogs_sizes"
 
 SvnActions::SvnActions(QObject *parent, const char *name)
  : QObject(parent, name),m_ParentList(0),m_SvnContext(new CContextListener(this)),m_CurrentContext(NULL)
@@ -94,11 +95,11 @@ void SvnActions::reInitClient()
 
 #include "svnactions.moc"
 
-template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel)
+template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(
         0,
-        0,
+        name,
         true,
         _head,
         (OkCancel?KDialogBase::Ok|KDialogBase::Cancel:KDialogBase::Ok)/*,
@@ -109,7 +110,7 @@ template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,b
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize( QSize(320,240).expandedTo(dlg->minimumSizeHint()) );
+    dlg->resize(dlg->configDialogSize(name?name:DIALOGS_SIZES));
     return dlg;
 }
 
@@ -123,7 +124,7 @@ void SvnActions::slotMakeRangeLog()
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
     Rangeinput_impl*rdlg;
-    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true);
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -132,6 +133,7 @@ void SvnActions::slotMakeRangeLog()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         makeLog(r.first,r.second,k);
     }
+    dlg->saveDialogSize("revisions_dlg",false);
 }
 
 /*!
@@ -173,8 +175,8 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     disp.dispLog(logs,k->fullName());
     connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
-    disp.resize( QSize(560,420).expandedTo(disp.minimumSizeHint()));
     disp.exec();
+    disp.saveSize();
     delete logs;
     EMIT_FINISHED;
 }
@@ -244,11 +246,11 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     }
     text += "</table></html>";
     KTextBrowser*ptr;
-    KDialog*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->text(0)));
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->text(0)),false,"blame_dlg");
     if (dlg) {
         ptr->setText(text);
-        dlg->resize( QSize(560,420).expandedTo(dlg->minimumSizeHint()));
         dlg->exec();
+        dlg->saveDialogSize("blame_dlg",false);
         delete dlg;
     }
     delete blame;
@@ -269,7 +271,7 @@ void SvnActions::slotRangeBlame()
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
     Rangeinput_impl*rdlg;
-    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true);
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -277,15 +279,16 @@ void SvnActions::slotRangeBlame()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         makeBlame(r.first,r.second,k);
     }
+    dlg->saveDialogSize("revisions_dlg",false);
     delete dlg;
 }
 
-void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
+void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&disp)
 {
     if (!m_CurrentContext) return;
     std::string content;
     QString ex;
-    svn::Path p(k->fullName().local8Bit());
+    svn::Path p(what.local8Bit());
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
         content = m_Svnclient.cat(p,start);
@@ -304,23 +307,15 @@ void SvnActions::makeCat(svn::Revision start, FileListViewItem*k)
     }
     EMIT_FINISHED;
     KTextBrowser*ptr;
-    KDialog*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(k->text(0)));
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
     if (dlg) {
         ptr->setFont(KGlobalSettings::fixedFont());
         ptr->setWordWrap(QTextEdit::NoWrap);
         ptr->setText(QString::fromLocal8Bit(content.c_str()));
-        dlg->resize( QSize(560,420).expandedTo(dlg->minimumSizeHint()));
         dlg->exec();
+        dlg->saveDialogSize("cat_display_dlg",false);
         delete dlg;
     }
-}
-
-void SvnActions::slotCat()
-{
-    if (!m_ParentList) return;
-    FileListViewItem*k = m_ParentList->singleSelected();
-    if (!k) return;
-    makeCat(svn::Revision::HEAD, k);
 }
 
 void SvnActions::slotMkdir()
@@ -350,17 +345,11 @@ void SvnActions::slotMkdir()
 
     QString logMessage="";
     if (!m_ParentList->isLocal()) {
-        Logmsg_impl*ptr;
-        KDialog*dlg = createDialog(&ptr,QString(i18n("Commit log")),true);
-        if (!dlg) return;
-        ptr->initHistory();
-        if (dlg->exec()!=QDialog::Accepted) {
-            delete dlg;
+        bool ok;
+        logMessage = Logmsg_impl::getLogmessage(&ok,0,m_ParentList,"logmsg_impl");
+        if (!ok) {
             return;
         }
-        QString logMessage = ptr->getMessage();
-//        bool rec = ptr->isRecursive();
-        ptr->saveHistory();
     }
 
     try {
@@ -471,11 +460,11 @@ void SvnActions::slotInfo()
     }
     text+="</html>";
     KTextBrowser*ptr;
-    KDialog*dlg = createDialog(&ptr,QString(i18n("Infolist")));
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
     if (dlg) {
         ptr->setText(text);
-        dlg->resize( QSize(560,420).expandedTo(dlg->minimumSizeHint()));
         dlg->exec();
+        dlg->saveDialogSize("info_dialog",false);
         delete dlg;
     }
 }
@@ -526,18 +515,12 @@ void SvnActions::slotProperties()
 void SvnActions::slotCommit()
 {
     if (!m_CurrentContext) return;
-    Logmsg_impl*ptr;
     if (!m_ParentList->firstChild()) return;
-    KDialog*dlg = createDialog(&ptr,QString(i18n("Commit log")),true);
-    if (!dlg) return;
-    ptr->initHistory();
-    if (dlg->exec()!=QDialog::Accepted) {
-        delete dlg;
+    bool ok,rec;
+    QString msg = Logmsg_impl::getLogmessage(&ok,&rec,m_ParentList,"logmsg_impl");
+    if (!ok) {
         return;
     }
-    QString msg = ptr->getMessage();
-    bool rec = ptr->isRecursive();
-    ptr->saveHistory();
     QPtrList<FileListViewItem>*which = m_ParentList->allSelected();
     FileListViewItem*cur;
     FileListViewItemListIterator liter(*which);
@@ -664,19 +647,23 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
 /*!
     \fn SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
  */
-void SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
+void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse)
 {
     if (!m_CurrentContext) return;
     QString ex;
+    svn_revnum_t ret;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
-        ex = m_Svnclient.update(svn::Path(what.local8Bit()),
-            rev, recurse);
+        for (unsigned int i = 0; i<what.count();++i) {
+            ret = m_Svnclient.update(svn::Path(what[i].local8Bit()),
+                rev, recurse);
+        }
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
         return;
     }
+    EMIT_REFRESH;
     EMIT_FINISHED;
 }
 
@@ -695,18 +682,18 @@ void SvnActions::slotUpdateHeadRec()
 void SvnActions::prepareUpdate(bool ask)
 {
     if (!m_ParentList||!m_ParentList->isLocal()) return;
-    FileListViewItem*k = m_ParentList->singleSelected();
-    QString what;
-    if (!k) {
-        if (m_ParentList->allSelected()->count()>1) {
-            KMessageBox::error(m_ParentList,i18n("Cannot make multiple updates"));
-            return;
-        } else {
-            what=m_ParentList->baseUri();
-            k=static_cast<FileListViewItem*>(m_ParentList->firstChild());
-        }
+    FileListViewItemList*k = m_ParentList->allSelected();
+
+    QStringList what;
+    if (!k||k->count()==0) {
+        what.append(m_ParentList->baseUri());
     } else {
-        what=k->fullName();
+        FileListViewItemListIterator liter(*k);
+        FileListViewItem*cur;
+        while ((cur=liter.current())!=0){
+            ++liter;
+            what.append(cur->fullName());
+        }
     }
     svn::Revision r(svn::Revision::HEAD);
     if (ask) {
@@ -727,11 +714,6 @@ void SvnActions::prepareUpdate(bool ask)
         if (result!=QDialog::Accepted) return;
     }
     makeUpdate(what,r,true);
-    if (k) {
-        k->refreshStatus();
-        emit reinitItem(k);
-        k->refreshMe();
-    }
 }
 
 
@@ -1118,7 +1100,6 @@ void SvnActions::jobResult(KIO::Job*)
 {
     EMIT_REFRESH;
 }
-
 
 /*!
     \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)

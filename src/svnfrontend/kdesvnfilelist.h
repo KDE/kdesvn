@@ -33,6 +33,7 @@ class KAction;
 class KActionMenu;
 class KActionCollection;
 class KDialog;
+class KDialogBase;
 class DirNotify;
 class KdesvnFileListPrivate;
 
@@ -84,7 +85,11 @@ protected:
     FileListViewItem* singleSelected();
     FileListViewItemList* allSelected();
 
-    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
+    template<class T> KDialogBase* createDialog(T**ptr,
+        const QString&_head,
+        bool OkCancel=false,
+        const char*name="dialog"
+        );
 
     FileListViewItemList* m_SelectedItems;
     virtual void refreshRecursive(FileListViewItem*);
@@ -127,6 +132,7 @@ protected slots:
     virtual void viewportPaintEvent(QPaintEvent *);
     virtual void slotRename();
     virtual void slotCopy();
+    virtual void slotCat();
 
 signals:
     void sigLogMessage(const QString&);

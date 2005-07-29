@@ -29,6 +29,7 @@
 class kdesvnfilelist;
 class FileListViewItem;
 class KDialog;
+class KDialogBase;
 class QDialog;
 class CContextListener;
 class KProcess;
@@ -54,13 +55,13 @@ public:
     //svn::Client&svnClient(){return m_Svnclient;}
     svn::Client* svnclient(){return &m_Svnclient;}
     void prepareUpdate(bool ask);
-    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false);
+    template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog");
+    void makeCat(svn::Revision start, const QString&what,const QString&disp);
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);
     void makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k);
-    void makeCat(svn::Revision start, FileListViewItem*k);
     kdesvnfilelist* m_ParentList;
 
     CContextListener*m_SvnContext;
@@ -68,7 +69,7 @@ protected:
     svn::Client m_Svnclient;
 
     static QDateTime apr2qttime(apr_time_t);
-    void makeUpdate(const QString&what,const svn::Revision&rev,bool recurse);
+    void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
 
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);
@@ -81,7 +82,6 @@ public slots:
     virtual void slotMakeLog();
     virtual void slotBlame();
     virtual void slotRangeBlame();
-    virtual void slotCat();
     virtual void slotMkdir();
     virtual void slotInfo();
     virtual void slotProperties();

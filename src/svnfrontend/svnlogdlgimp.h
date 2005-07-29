@@ -24,6 +24,8 @@
 #include "src/svncpp/log_entry.hpp"
 #include "src/svncpp/client.hpp"
 
+#include <qsize.h>
+
 class LogListViewItem;
 
 class SvnLogDlgImp: public SvnLogDialogData {
@@ -31,6 +33,8 @@ Q_OBJECT
 public:
     SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
     void dispLog(const svn::LogEntries*,const QString&);
+    void saveSize();
+    QSize dialogSize();
 
 signals:
     void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
@@ -41,6 +45,7 @@ protected slots:
     virtual void slotDispPrevious();
 protected:
     QString _name;
+    static const char* groupName;
 };
 
 #endif

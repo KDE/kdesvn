@@ -126,7 +126,7 @@ void kdesvnfilelist::setupActions()
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_BlameRangeAction = new KAction("Blame range","flag",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_CatAction = new KAction("&Cat head","contents",KShortcut(),m_SvnWrapper,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    m_CatAction = new KAction("&Cat head","contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
 
     /* 3. actions only on dirs */
@@ -538,22 +538,19 @@ void kdesvnfilelist::slotResolved()
     which->refreshStatus(true);
 }
 
-template<class T> KDialog* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel)
+template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(
         0,
-        0,
+        name,
         true,
         _head,
-        (OkCancel?KDialogBase::Ok|KDialogBase::Cancel:KDialogBase::Ok)/*,
-        (OkCancel?KDialogBase::Cancel:KDialogBase::Close),
-        KDialogBase::Cancel,
-        true*//*,(OkCancel?KStdGuiItem::ok():KStdGuiItem::close())*/);
+        (OkCancel?KDialogBase::Ok|KDialogBase::Cancel:KDialogBase::Ok));
 
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize( QSize(320,240).expandedTo(dlg->minimumSizeHint()) );
+    dlg->resize(dlg->configDialogSize(name?name:"standard_size"));
     return dlg;
 }
 
@@ -595,7 +592,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     Logmsg_impl*ptr;
     Importdir_logmsg*ptr2 = 0;
 
-    KDialog*dlg;
+    KDialogBase*dlg;
     KURL uri = importUrl;
     QString targetUri = target;
     while (targetUri.endsWith("/")) {
@@ -603,11 +600,11 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     }
 
     if (dirs) {
-         dlg = createDialog(&ptr2,QString(i18n("Import log")),true);
+         dlg = createDialog(&ptr2,QString(i18n("Import log")),true,"import_log_msg");
          ptr = ptr2;
          ptr2->createDirboxDir("\""+uri.fileName(true)+"\"");
     } else {
-        dlg = createDialog(&ptr,QString(i18n("Import log")),true);
+        dlg = createDialog(&ptr,QString(i18n("Import log")),true,"import_log_msg");
     }
 
     if (!dlg) return;
@@ -618,6 +615,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
         delete dlg;
         return;
     }
+    dlg->saveDialogSize("import_log_msg",false);
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
@@ -636,11 +634,11 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     if (!isLocal()) {
         if (allSelected()->count()==0) {
             refreshCurrentTree();
-//            openURL(baseUri());
         } else {
             slotReinitItem(allSelected()->at(0));
         }
     }
+    delete dlg;
 }
 
 void kdesvnfilelist::refreshCurrentTree()
@@ -1010,4 +1008,12 @@ void kdesvnfilelist::copy_move(bool move)
     }
     kdDebug()<<"Got out"<< endl;
     m_SvnWrapper->slotCopyMove(move,which->fullName(),nName,force);
+}
+
+
+void kdesvnfilelist::slotCat()
+{
+    FileListViewItem*k = singleSelected();
+    if (!k) return;
+    m_SvnWrapper->makeCat(svn::Revision::HEAD, k->fullName(),k->text(0));
 }

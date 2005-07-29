@@ -47,7 +47,7 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
     m_ProgressBar->setTextEnabled(false);
 
     layout->addWidget(m_ProgressBar);
-    mWait = true;
+    mWait = false;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
     connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
@@ -57,7 +57,7 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
 
 void StopDlg::slotWait(bool how)
 {
-    mWait = true;
+    mWait = how;
     if (mShown && mWait) {
         hide();
         mShown = false;

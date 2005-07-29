@@ -40,6 +40,7 @@ public:
     void disableForce(bool how);
     void disableTargetDir(bool how);
     void forceAsRecursive(bool how);
+    bool openAfterJob();
 };
 
 #endif

@@ -189,10 +189,10 @@ bool FileListViewItem::isValid()
         return true;
     }
     /* must be a local file */
-    kdDebug()<< "Pfad = " << m_Stat.path();
+    //kdDebug()<< "Pfad = " << m_Stat.path()<<endl;
 
     QFileInfo f(m_Stat.path());
-    kdDebug()<< "Behaupte das es existiert: "<<f.exists()<<endl;
+    //kdDebug()<< "Behaupte das es existiert: "<<f.exists()<<endl;
     return f.exists();
 }
 

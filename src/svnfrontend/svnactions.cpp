@@ -51,6 +51,8 @@
 #include <kio/jobclasses.h>
 #include <kio/job.h>
 #include <kdebug.h>
+#include <qstylesheet.h>
+#include <kconfig.h>
 
 #if 0
 #include <khtml_part.h>
@@ -611,34 +613,35 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     KTempFile tfile;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
-        ex = m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
+        ex = QString::fromLocal8Bit(m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
             svn::Path(what.local8Bit()),
             start, end,
-            true,false,false);
+            true,false,false).c_str());
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
         return;
     }
     EMIT_FINISHED;
-#if 1
-    /// @todo make it setable
-    KProcess *proc = new KProcess();
-    *proc << "kompare";
-    *proc << "-";
-    connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
-    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-    if (proc->start(KProcess::NotifyOnExit,KProcess::Stdin)) {
-        proc->writeStdin(ex.ascii(),ex.length());
-        return;
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    if (cs.readBoolEntry("use_kompare_for_diff",true)) {
+        KProcess *proc = new KProcess();
+        *proc << "kompare";
+        *proc << "-";
+        connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
+        connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+        if (proc->start(KProcess::NotifyOnExit,KProcess::Stdin)) {
+            proc->writeStdin(ex.ascii(),ex.length());
+            return;
+        }
+        delete proc;
     }
-    delete proc;
-#endif
     KTextBrowser*ptr;
-    KDialog*dlg = createDialog(&ptr,QString(i18n("Diff display")));
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,"diff_display");
     if (dlg) {
-        ptr->setText(ex);
+        ptr->setText("<code>"+QStyleSheet::convertFromPlainText(ex)+"</code>");
         dlg->exec();
+        dlg->saveDialogSize("diff_display",false);
         delete dlg;
     }
 }
@@ -657,6 +660,10 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
         for (unsigned int i = 0; i<what.count();++i) {
             ret = m_Svnclient.update(svn::Path(what[i].local8Bit()),
                 rev, recurse);
+            kapp->processEvents();
+            if (sdlg.cancelld()) {
+                break;
+            }
         }
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
@@ -824,12 +831,14 @@ void SvnActions::slotDelete()
 void SvnActions::CheckoutExport(bool _exp)
 {
     CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true);
+    KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
     if (dlg) {
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp);
+            bool openit = ptr->openAfterJob();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
         }
+        dlg->saveDialogSize("checkout_export_dialog",false);
         delete dlg;
     }
 }
@@ -864,7 +873,8 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
         ptr->setStartUrl(what);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp);
+            bool openIt = ptr->openAfterJob();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openIt);
         }
         delete dlg;
     }
@@ -880,7 +890,7 @@ void SvnActions::slotExportCurrent()
     CheckoutExportCurrent(true);
 }
 
-void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force,bool _exp)
+void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force,bool _exp,bool openIt)
 {
     if (!m_CurrentContext) return;
     QString fUrl = rUrl;
@@ -902,9 +912,10 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         emit clientException(ex);
         return;
     }
-    if (!_exp) m_ParentList->openURL(tPath,true);
-    /// @todo make invoking browser a option
-    else kapp->invokeBrowser(tPath);
+    if (openIt) {
+        if (!_exp) m_ParentList->openURL(tPath,true);
+        else kapp->invokeBrowser(tPath);
+    }
     EMIT_FINISHED;
 }
 

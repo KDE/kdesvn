@@ -75,7 +75,7 @@ protected:
     void CheckoutExportCurrent(bool _exp);
 
     virtual void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
-    virtual void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool);
+    virtual void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
 
 public slots:
     virtual void slotMakeRangeLog();

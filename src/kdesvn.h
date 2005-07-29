@@ -37,6 +37,7 @@ class KPrinter;
 class KURL;
 class KAction;
 class KActionMenu;
+class KToggleAction;
 class KBookmarkMenu;
 
 /**
@@ -105,6 +106,7 @@ private slots:
     void filePrint();
     void fileClose();
     void optionsPreferences();
+    void slotUseKompare(bool);
 
     void changeStatusbar(const QString& text);
     void changeCaption(const QString& text);
@@ -127,6 +129,8 @@ private:
     KActionMenu* m_BookmarksActionmenu;
     KActionCollection*m_Bookmarkactions;
     KBookmarkMenu * m_pBookmarkMenu;
+
+    KToggleAction *m_UseKompareAction;
 };
 
 #endif // _KDESVN_H_

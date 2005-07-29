@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>289</width>
-            <height>230</height>
+            <width>329</width>
+            <height>228</height>
         </rect>
     </property>
     <property name="caption">
@@ -86,6 +86,17 @@
             </property>
             <property name="accel">
                 <string></string>
+            </property>
+            <property name="checked">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_ShowExplorer</cstring>
+            </property>
+            <property name="text">
+                <string>Open after job</string>
             </property>
             <property name="checked">
                 <bool>true</bool>

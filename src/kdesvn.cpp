@@ -140,6 +140,12 @@ void kdesvn::setupActions()
     tmpAction = KStdAction::close(this,SLOT(fileClose()),actionCollection());
     tmpAction->setEnabled(false);
     tmpAction = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
+    m_UseKompareAction = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
+        actionCollection(),"toggle_use_kompare");
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    m_UseKompareAction->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
+
+    connect(m_UseKompareAction,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
@@ -364,4 +370,11 @@ void kdesvn::slotUrlOpened(bool how)
     if ( (ac=actionCollection()->action("file_close"))) {
         ac->setEnabled(how);
     }
+}
+
+void kdesvn::slotUseKompare(bool how)
+{
+    /// @todo make it into a settings class
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    cs.writeEntry("use_kompare_for_diff",how);
 }

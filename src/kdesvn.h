@@ -130,7 +130,8 @@ private:
     KActionCollection*m_Bookmarkactions;
     KBookmarkMenu * m_pBookmarkMenu;
 
-    KToggleAction *m_UseKompareAction;
+protected slots:
+    virtual void slotLogFollowNodes(bool);
 };
 
 #endif // _KDESVN_H_

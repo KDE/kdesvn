@@ -140,12 +140,18 @@ void kdesvn::setupActions()
     tmpAction = KStdAction::close(this,SLOT(fileClose()),actionCollection());
     tmpAction->setEnabled(false);
     tmpAction = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
-    m_UseKompareAction = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
-        actionCollection(),"toggle_use_kompare");
-    KConfigGroup cs(KGlobal::config(), "general_items");
-    m_UseKompareAction->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
 
-    connect(m_UseKompareAction,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
+    KToggleAction *toggletemp;
+    toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
+            actionCollection(),"toggle_use_kompare");
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    toggletemp->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
+
+    toggletemp = new KToggleAction(i18n("Logs follows node changes"),KShortcut(),
+            actionCollection(),"toggle_log_follows");
+    toggletemp->setChecked(cs.readBoolEntry("log_follows_nodes",true));
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
 
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
@@ -377,4 +383,14 @@ void kdesvn::slotUseKompare(bool how)
     /// @todo make it into a settings class
     KConfigGroup cs(KGlobal::config(), "general_items");
     cs.writeEntry("use_kompare_for_diff",how);
+}
+
+
+/*!
+    \fn kdesvn::slotLogFollowNodes(bool)
+ */
+void kdesvn::slotLogFollowNodes(bool how)
+{
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    cs.writeEntry("toggle_log_follows",how);
 }

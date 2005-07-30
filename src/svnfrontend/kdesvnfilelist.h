@@ -36,6 +36,7 @@ class KDialog;
 class KDialogBase;
 class DirNotify;
 class KdesvnFileListPrivate;
+class SvnActions;
 
 namespace KIO {
     class Job;

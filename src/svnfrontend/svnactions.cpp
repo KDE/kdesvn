@@ -159,10 +159,13 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
     const svn::LogEntries * logs;
     QString ex;
     if (!m_CurrentContext) return;
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    bool follow = cs.readBoolEntry("toggle_log_follows",true);
+
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @fixme Last parameter should be user setable (follow nodes moving or not)
-        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true,false);
+        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true,!follow);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -436,7 +439,7 @@ void SvnActions::slotInfo()
             text+=i18n("Replace");
             break;
         default:
-            text+=i18n("Unknow");
+            text+=i18n("Unknown");
             break;
         }
         text+=re;
@@ -809,7 +812,7 @@ void SvnActions::slotDelete()
         }
         displist.append(cur->svnStatus().path());
     }
-    int answer = KMessageBox::questionYesNoList(m_ParentList,i18n("Realy delete that entries?"),displist,"Delete from repository");
+    int answer = KMessageBox::questionYesNoList(m_ParentList,i18n("Really delete that entries?"),displist,"Delete from repository");
     if (answer!=KMessageBox::Yes) {
         return;
     }
@@ -968,7 +971,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     bool checkboxres = false;
 
     int result = KMessageBox::createKMessageBox(dialog,QMessageBox::Warning,
-        i18n("Realy revert that entries to pristine state?"), displist, i18n("Recursive"),
+        i18n("Really revert that entries to pristine state?"), displist, i18n("Recursive"),
         &checkboxres,
         KMessageBox::Dangerous);
     if (result != KDialogBase::Yes) {

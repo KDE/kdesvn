@@ -37,6 +37,9 @@ class KDialogBase;
 class DirNotify;
 class KdesvnFileListPrivate;
 
+namespace KIO {
+    class Job;
+}
 /**
 @author Rajko Albrecht
 */
@@ -144,6 +147,8 @@ public slots:
     virtual void refreshCurrentTree();
     virtual void refreshCurrent(FileListViewItem*);
     virtual void closeMe();
+protected slots:
+    virtual void slotCopyFinished( KIO::Job *);
 };
 
 #endif

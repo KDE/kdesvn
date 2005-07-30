@@ -757,22 +757,27 @@ void SvnActions::slotAdd()
         }
         items.push_back(cur->svnStatus().path());
     }
-    QString ex;
-    try {
-        QValueList<svn::Path>::iterator piter;
-        for (piter=items.begin();piter!=items.end();++piter) {
-            m_Svnclient.add((*piter),false);
-        }
-    } catch (svn::ClientException e) {
-        ex = QString::fromLocal8Bit(e.message());
-        emit clientException(ex);
-        return;
-    }
+    addItems(items);
     liter.toFirst();
     while ((cur=liter.current())!=0){
         ++liter;
         cur->refreshStatus();
         emit sigRefreshCurrent(static_cast<FileListViewItem*>(cur->parent()));
+    }
+}
+
+void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
+{
+    QString ex;
+    try {
+        QValueList<svn::Path>::const_iterator piter;
+        for (piter=items.begin();piter!=items.end();++piter) {
+            m_Svnclient.add((*piter),rec);
+        }
+    } catch (svn::ClientException e) {
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return;
     }
 }
 

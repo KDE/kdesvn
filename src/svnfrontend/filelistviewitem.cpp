@@ -218,10 +218,10 @@ void FileListViewItem::update()
     QString info_text = "";
     switch(m_Stat.textStatus ()) {
     case svn_wc_status_modified:
-        info_text = i18n("Localy modified");
+        info_text = i18n("Locally modified");
         break;
     case svn_wc_status_added:
-        info_text = i18n("Localy added");
+        info_text = i18n("Locally added");
         break;
     case svn_wc_status_missing:
         info_text = i18n("Missing");

@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -30,13 +30,13 @@
 namespace svn
 {
   Entry::Entry (const svn_wc_entry_t * src)
-    : m_entry (0), m_pool (0), m_valid (false)
+    : m_entry (0), m_pool (0), m_valid (false),m_Lock()
   {
     init (src);
   }
 
   Entry::Entry (const Entry & src)
-    : m_entry (0), m_pool (0), m_valid (false)
+    : m_entry (0), m_pool (0), m_valid (false),m_Lock()
   {
     init (src);
   }
@@ -54,6 +54,7 @@ namespace svn
     {
       // copy the contents of src
       m_entry = svn_wc_entry_dup (src, m_pool);
+      m_Lock.init(m_entry);
       m_valid = true;
     }
     else

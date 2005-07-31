@@ -77,7 +77,7 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     addColumn(i18n("Last changed Revision"));
     addColumn(i18n("Last author"));
     addColumn(i18n("Last change date"));
-//    addColumn(i18n("Locked by"));
+    addColumn(i18n("Locked by"));
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 
@@ -379,6 +379,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
 kdesvnfilelist::~kdesvnfilelist()
 {
     delete m_pList;
+    delete m_SelectedItems;
 }
 
 void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
@@ -438,7 +439,7 @@ void kdesvnfilelist::enableActions()
     m_AddCurrent->setEnabled( (multi||single) && isLocal());
     m_RevertAction->setEnabled( (multi||single) && isLocal());
     m_ResolvedAction->setEnabled( (multi||single) && isLocal());
-    m_InfoAction->setEnabled( (single||multi) &&isLocal());
+    m_InfoAction->setEnabled( (single||multi));
     m_MergeRevisionAction->setEnabled(single&&m_isLocal);
 
     m_UpdateHead->setEnabled(isLocal()&&isopen);

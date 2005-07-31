@@ -45,11 +45,20 @@ namespace svn
     init (path, status);
   }
 
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+  Status::Status (const char *path, svn_wc_status2_t * status)
+    : m_status (0), m_path (0)
+  {
+    init (path, status);
+  }
+#endif
+
   Status::~Status ()
   {
   }
 
-  void Status::init (const char *path, const svn_wc_status_t * status)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+  void Status::init (const char *path, const svn_wc_status2_t * status)
   {
     if (path)
     {
@@ -59,9 +68,9 @@ namespace svn
     {
       m_path = svn_string_create ("", m_pool);
     }
+    m_status = (svn_wc_status2_t *)
+      apr_pcalloc (m_pool, sizeof (svn_wc_status2_t));
 
-    m_status = (svn_wc_status_t *)
-      apr_pcalloc (m_pool, sizeof (svn_wc_status_t));
     if (!status)
     {
       m_isVersioned = false;
@@ -83,6 +92,59 @@ namespace svn
       m_status->switched = status->switched;
       m_status->repos_text_status = status->repos_text_status;
       m_status->repos_prop_status = status->repos_prop_status;
+      if (status->repos_lock) {
+        m_status->repos_lock = svn_lock_dup(status->repos_lock,m_pool);
+        m_Lock.init(m_status->repos_lock->creation_date,
+                    m_status->repos_lock->expiration_date,
+                    m_status->repos_lock->owner,
+                    m_status->repos_lock->comment,
+                    m_status->repos_lock->comment);
+      }
+    }
+  }
+#endif
+
+  void Status::init (const char *path, const svn_wc_status_t * status)
+  {
+    if (path)
+    {
+      m_path = svn_string_create (path, m_pool);
+    }
+    else
+    {
+      m_path = svn_string_create ("", m_pool);
+    }
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    m_status = (svn_wc_status2_t *)
+      apr_pcalloc (m_pool, sizeof (svn_wc_status2_t));
+#else
+    m_status = (svn_wc_status_t *)
+      apr_pcalloc (m_pool, sizeof (svn_wc_status_t));
+#endif
+    if (!status)
+    {
+      m_isVersioned = false;
+      m_hasReal = false;
+    }
+    else
+    {
+      m_isVersioned = status->text_status > svn_wc_status_unversioned;
+      m_hasReal = m_isVersioned && status->text_status!=svn_wc_status_ignored;
+      // now duplicate the contents
+      if (status->entry)
+      {
+        m_status->entry = svn_wc_entry_dup (status->entry, m_pool);
+      }
+      m_status->text_status = status->text_status;
+      m_status->prop_status = status->prop_status;
+      m_status->locked = status->locked;
+      m_status->copied = status->copied;
+      m_status->switched = status->switched;
+      m_status->repos_text_status = status->repos_text_status;
+      m_status->repos_prop_status = status->repos_prop_status;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+      m_status->repos_lock = svn_lock_create(m_pool);
+#endif
     }
   }
 

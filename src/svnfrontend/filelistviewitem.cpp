@@ -118,7 +118,7 @@ void FileListViewItem::update(KFileItem*_item)
 
 void FileListViewItem::refreshMe()
 {
-    m_Stat = svn::Status(0,0);
+    m_Stat = svn::Status();
     try {
         m_Stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
     } catch (svn::ClientException e) {
@@ -264,11 +264,13 @@ void FileListViewItem::update()
     fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
     setText(COL_LAST_DATE,fullDate.toString());
     setText(COL_LAST_REV,QString("%1").arg(m_Stat.entry().cmtRev()));
-#if 0
-    if (m_Stat.lockEntry().Locked()) {
+#if 1
+    if (m_Stat.entry().lockEntry().Locked()) {
         setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));
+    } else {
+        setPixmap(COL_IS_LOCKED,QPixmap());
     }
-    setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.lockEntry().Owner().c_str()));
+    setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.entry().lockEntry().Owner().c_str()));
 #endif
 //    setText(COL_CURRENT_REV,QString("%1").arg(stat.entry().revision()));
 }

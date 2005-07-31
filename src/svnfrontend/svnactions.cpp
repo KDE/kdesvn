@@ -376,16 +376,23 @@ void SvnActions::slotInfo()
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     QPtrList<FileListViewItem> *lst = m_ParentList->allSelected();
-    QValueList<svn::Entry> entries;
+    svn::InfoEntries entries;
+    svn::Revision peg(svn_opt_revision_unspecified);
+    svn::Revision rev(svn_opt_revision_unspecified);
+    if (!m_ParentList->isLocal()) {
+        rev = svn::Revision::HEAD;
+    }
     QString ex;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
         if (lst->count()==0) {
-            entries.push_back(m_Svnclient.info(m_ParentList->baseUri().local8Bit()));
+            entries = m_Svnclient.info2(m_ParentList->baseUri().local8Bit(),true,rev,peg);
         } else {
             FileListViewItem*item;
+            svn::InfoEntries e;
             for (item=lst->first();item;item=lst->next()) {
-                entries.push_back(m_Svnclient.info(item->fullName().local8Bit()));
+                e = (m_Svnclient.info2(item->fullName().local8Bit(),true,rev,peg));
+                entries.insert(entries.end(),e.begin(),e.end());
             }
         }
     } catch (svn::ClientException e) {
@@ -395,18 +402,18 @@ void SvnActions::slotInfo()
     }
     EMIT_FINISHED;
     QString text = "<html>";
-    QValueList<svn::Entry>::const_iterator it;
+    svn::InfoEntries::const_iterator it;
     QString rb = "<tr><td align=\"right\"><b>";
     QString re = "</td></tr>\n";
     QString cs = "</b>:</td><td>";
     for (it=entries.begin();it!=entries.end();++it) {
         text+="<p><table>";
-        if ((*it).name()&&strlen((*it).name())) {
-            text+=rb+i18n("Name")+cs+QString((*it).name())+re;
+        if ((*it).Name().size()) {
+            text+=rb+i18n("Name")+cs+QString((*it).Name().c_str())+re;
         }
         text+=rb+i18n("URL")+cs+QString((*it).url())+re;
-        if ((*it).repos()&&strlen((*it).repos())) {
-            text+=rb+i18n("Canonical repository url")+cs+QString((*it).repos())+re;
+        if ((*it).reposRoot().size()) {
+            text+=rb+i18n("Canonical repository url")+cs+QString((*it).reposRoot().c_str())+re;
         }
         text+=rb+i18n("Type")+cs;
         switch ((*it).kind()) {
@@ -426,7 +433,7 @@ void SvnActions::slotInfo()
         }
         text+=re;
         text+=rb+i18n("Schedule")+cs;
-        switch ((*it).schedule()) {
+        switch ((*it).Schedule()) {
         case svn_wc_schedule_normal:
             text+=i18n("Normal");
             break;
@@ -449,19 +456,33 @@ void SvnActions::slotInfo()
         text+=rb+i18n("Last changed")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
-        if ((*it).conflictNew()&&strlen((*it).conflictNew())) {
-            text+=rb+i18n("New version of conflicted file")+cs+QString((*it).conflictNew())+re;
+        if ((*it).conflictNew().size()) {
+            text+=rb+i18n("New version of conflicted file")+cs+QString((*it).conflictNew().c_str())+re;
         }
-        if ((*it).conflictOld()&&strlen((*it).conflictOld())) {
-            text+=rb+i18n("Old version of conflicted file")+cs+QString((*it).conflictOld())+re;
+        if ((*it).conflictOld().size()) {
+            text+=rb+i18n("Old version of conflicted file")+cs+QString((*it).conflictOld().c_str())+re;
         }
-        if ((*it).conflictWrk()&&strlen((*it).conflictWrk())) {
-            text+=rb+i18n("Working version of conflicted file")+cs+QString((*it).conflictWrk())+re;
+        if ((*it).conflictWrk().size()) {
+            text+=rb+i18n("Working version of conflicted file")+
+                cs+QString((*it).conflictWrk().c_str())+re;
         }
-        if ((*it).copyfromUrl()&&strlen((*it).copyfromUrl())) {
-            text+=rb+i18n("Copy from URL")+cs+QString((*it).copyfromUrl())+re;
+        if ((*it).prejfile().size()) {
+            text+=rb+i18n("Reject file")+
+                cs+QString((*it).prejfile().c_str())+re;
         }
 
+        if ((*it).copyfromUrl().size()) {
+            text+=rb+i18n("Copy from URL")+cs+QString((*it).copyfromUrl().c_str())+re;
+        }
+        if ((*it).lockEntry().Locked()) {
+            text+=rb+i18n("Lock token")+cs+QString((*it).lockEntry().Token().c_str())+re;
+            text+=rb+i18n("Owner")+cs+QString((*it).lockEntry().Owner().c_str())+re;
+            text+=rb+i18n("Locked on")+cs+
+                helpers::sub2qt::apr_time2qt((*it).lockEntry().Date()).toString(Qt::LocalDate)+
+                re;
+            text+=rb+i18n("Lock comment")+cs+
+                QString((*it).lockEntry().Comment().c_str())+re;
+        }
         text+="</table></p>\n";
     }
     text+="</html>";

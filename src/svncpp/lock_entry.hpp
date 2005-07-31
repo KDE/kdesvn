@@ -49,12 +49,17 @@ namespace svn
               const char * lock_owner,
               const char * lock_comment,
               const char * lock_token);
+
     void init(const svn_wc_entry_t * src);
+
     void init(const apr_time_t lock_time,
               const apr_time_t expiration_time,
               const char * lock_owner,
               const char * lock_comment,
               const char * lock_token);
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    void init(svn_lock_t*);
+#endif
     const std::string&Comment()const;
     const std::string&Owner()const;
     const std::string&Token()const;

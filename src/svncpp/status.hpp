@@ -31,7 +31,7 @@
 // svncpp
 #include "svncpp/entry.hpp"
 #include "svncpp/pool.hpp"
-
+#include "svncpp/lock_entry.hpp"
 
 namespace svn
 {
@@ -50,13 +50,23 @@ namespace svn
      */
     Status (const Status & src);
 
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     /**
      * default constructor
      *
      * @param path path for this status entry
      * @param status status entry
      */
-    Status (const char *path = NULL, svn_wc_status_t * status = NULL);
+    Status (const char *path = NULL, svn_wc_status2_t * status = NULL);
+#endif
+    /**
+     * default constructor
+     *
+     * @param path path for this status entry
+     * @param status status entry
+     * @deprecated
+     */
+    Status (const char *path, svn_wc_status_t * status);
 
     /**
      * destructor
@@ -162,26 +172,58 @@ namespace svn
       return m_status->repos_prop_status;
     }
 
+    const LockEntry&
+    lockEntry () const
+    {
+        return m_Lock;
+    }
+    /**
+     * @return svn_wc_status2_t value
+     * @since subversion 1.2
+     */
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    operator svn_wc_status2_t * () const
+    {
+      return m_status;
+    }
+#else
     /**
      * @return svn_wc_status_t value
+     * @deprecated Only if build against subversion prior 1.2
      */
     operator svn_wc_status_t * () const
     {
       return m_status;
     }
-
+#endif
     /**
      * assignment operator
      */
     Status &
     operator = (const Status &);
   private:
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    svn_wc_status2_t * m_status;
+#else
     svn_wc_status_t * m_status;
+#endif
     svn_string_t * m_path;
     Pool m_pool;
     bool m_isVersioned;
     bool m_hasReal;
+    LockEntry m_Lock;
 
+    /**
+     * Initialize structures
+     *
+     * @param path
+     * @param status if NULL isVersioned will be false
+     * @deprecated
+     */
+    void
+    init (const char *path, const svn_wc_status_t * status);
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     /**
      * Initialize structures
      *
@@ -189,7 +231,8 @@ namespace svn
      * @param status if NULL isVersioned will be false
      */
     void
-    init (const char *path, const svn_wc_status_t * status);
+    init (const char *path, const svn_wc_status2_t * status);
+#endif
   };
 }
 

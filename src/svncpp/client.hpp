@@ -49,6 +49,7 @@
 #include "svncpp/entry.hpp"
 #include "svncpp/revision.hpp"
 #include "svncpp/log_entry.hpp"
+#include "svncpp/info_entry.hpp"
 #include "svncpp/annotate_line.hpp"
 
 
@@ -61,6 +62,7 @@ namespace svn
   class DirEntry;
 
   typedef std::vector<LogEntry> LogEntries;
+  typedef std::vector<InfoEntry> InfoEntries;
   typedef std::vector<Status> StatusEntries;
   typedef std::vector<DirEntry> DirEntries;
   typedef std::vector<AnnotateLine> AnnotatedFile;
@@ -374,7 +376,23 @@ namespace svn
      */
     Entry
     info (const char *path );
-
+    /**
+     * Retrieve information for the given path
+     * remote or local. Only gives with subversion 1.2
+     * usefull results
+     *
+     * @param path path for info
+     * @param rec recursive (if dir)
+     * @param rev for which revision
+     * @param peg_revision peg revision
+     * @return InfoEntries
+     * @since subversion 1.2
+     */
+    InfoEntries
+    info2(const char *path,
+          bool rec,
+          const Revision & rev,
+          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. The first

@@ -48,6 +48,10 @@ public:
                    svn_wc_notify_state_t prop_state,
                    svn_revnum_t revision);
 
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    virtual void contextNotify (const svn_wc_notify_t *action);
+#endif
+
     virtual bool contextCancel();
     /*!
      * Get logmessage for checkin and so on...
@@ -59,6 +63,7 @@ public:
     virtual bool contextSslClientCertPwPrompt (std::string & password,
                                    const std::string & realm, bool & maySave);
     static QString NotifyAction(svn_wc_notify_action_t action);
+    static QString NotifyState(svn_wc_notify_state_t);
 
     void setCancelled(bool how){m_cancelMe = how;}
 signals:
@@ -69,6 +74,7 @@ signals:
 protected:
     static const int smax_actionstring;
     static const QString action_strings[];
+    static const QString notify_state_strings[];
     bool m_cancelMe;
 };
 

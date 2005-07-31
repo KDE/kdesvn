@@ -156,7 +156,7 @@ void kdesvnfilelist::setupActions()
     m_AddCurrent = new KAction("Add selected files/dirs","vcs_add",KShortcut(Key_Insert),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
     m_AddCurrent->setToolTip(i18n("Adding selected files and/or directories to repository"));
     m_DelCurrent = new KAction("Delete selected files/dirs","vcs_remove",
-        KShortcut(Key_Delete),m_SvnWrapper,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
+        KShortcut(Key_Delete),this,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
     m_RevertAction  = new KAction("Revert current changes","revert",
         KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
@@ -970,18 +970,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
                 KIO::Job * job = 0L;
                 job = KIO::copy(urlList,tdir);
                 connect( job, SIGNAL( result( KIO::Job * ) ),SLOT( slotCopyFinished( KIO::Job * ) ) );
-                // wait for job
-                QLabel dummy(this,0,WStyle_NoBorder|WShowModal);
-                QSize csize = size();
-                dummy.setText(i18n("Please hold the line"));
-                dummy.resize(dummy.minimumSizeHint());
-                if (dummy.width()<=width()&&dummy.height()<=height()) {
-                    dummy.move(csize.width()/2-dummy.width()/2,csize.height()/2-dummy.height()/2);
-                }
-                dummy.show();
-                qApp->enter_loop();
-                dummy.setEnabled(true);
-                dummy.hide();
+                dispDummy();
                 return;
             }
         }
@@ -1061,3 +1050,79 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
     }
 }
 
+
+
+/*!
+    \fn kdesvnfilelist::slotDelete()
+ */
+void kdesvnfilelist::slotDelete()
+{
+    /// @todo implement me
+    m_deletePerfect = true;
+    QPtrList<FileListViewItem>*lst = allSelected();
+
+    if (lst->count()==0) {
+        KMessageBox::error(this,i18n("Nothing selected for delete"));
+        return;
+    }
+    FileListViewItemListIterator liter(*lst);
+    FileListViewItem*cur;
+
+    std::vector<svn::Path> items;
+    QStringList displist;
+    KURL::List kioList;
+    while ((cur=liter.current())!=0){
+        ++liter;
+        if (!cur->svnStatus().isVersioned()) {
+            kioList.append(cur->svnStatus().path());
+        } else {
+            items.push_back(cur->svnStatus().path());
+        }
+        displist.append(cur->svnStatus().path());
+    }
+    int answer = KMessageBox::questionYesNoList(this,i18n("Really delete that entries?"),displist,"Delete from repository");
+    if (answer!=KMessageBox::Yes) {
+        return;
+    }
+    if (kioList.count()>0) {
+        KIO::Job*aJob = KIO::del(kioList);
+        connect(aJob,SIGNAL(result (KIO::Job *)),this,SLOT(slotDeleteFinished(KIO::Job*)));
+        dispDummy();
+    }
+    if (m_deletePerfect && items.size()>0) {
+        m_SvnWrapper->makeDelete(items);
+    }
+    refreshCurrentTree();
+}
+
+/*!
+    \fn kdesvnfilelist::slotDeleteFinished(KIO::Job*)
+ */
+void kdesvnfilelist::slotDeleteFinished(KIO::Job*job)
+{
+    if (job) {
+        qApp->exit_loop();
+        if (job->error()) {
+            job->showErrorDialog(this);
+            m_deletePerfect = false;
+        }
+    }
+}
+
+/*!
+    \fn kdesvnfilelist::dispDummy()
+ */
+void kdesvnfilelist::dispDummy()
+{
+    // wait for job
+    QLabel dummy(this,0,WStyle_NoBorder|WShowModal);
+    QSize csize = size();
+    dummy.setText(i18n("Please hold the line"));
+    dummy.resize(dummy.minimumSizeHint());
+    if (dummy.width()<=width()&&dummy.height()<=height()) {
+        dummy.move(csize.width()/2-dummy.width()/2,csize.height()/2-dummy.height()/2);
+    }
+    dummy.show();
+    qApp->enter_loop();
+    dummy.hide();
+}

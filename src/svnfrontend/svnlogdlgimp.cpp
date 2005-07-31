@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "svnlogdlgimp.h"
+#include "svncpp/log_entry.hpp"
 #include <qdatetime.h>
 #include <klistview.h>
 #include <ktextbrowser.h>
@@ -26,6 +27,11 @@
 #include <kapp.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
+#include <ktabwidget.h>
+#include <kdebug.h>
+
+#include <list>
+
 
 const char* SvnLogDlgImp::groupName = "log_dialog_size";
 
@@ -93,6 +99,14 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
     LogListViewItem * item;
     for (lit=_log->begin();lit!=_log->end();++lit) {
         item = new LogListViewItem(m_LogView,*lit);
+#if 0
+        if (lit->changedPaths.size()>0) {
+            std::list< svn::LogChangePathEntry >::const_iterator peiter;
+            for (peiter = lit->changedPaths.begin();peiter!=lit->changedPaths.end();++peiter) {
+                kdDebug()<<peiter->action<<": from " << peiter->copyFromPath << " to " << peiter->path << endl;
+            }
+        }
+#endif
     }
     _name = what;
 }

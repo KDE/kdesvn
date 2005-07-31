@@ -40,16 +40,19 @@ public:
 
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
+
     bool isDir()const;
     const QString&fullName()const{return m_fullName;}
-    void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
-    void refreshMe();
-    void removeChilds();
+    const QString&shortName()const{return m_shortName;}
     const svn::Status svnStatus()const{return m_Stat;}
     bool isVersioned();
     bool isValid();
-    bool isParent(QListViewItem*which);
     void updateStatus(const svn::Status&s);
+
+    void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
+    void refreshMe();
+    void removeChilds();
+    bool isParent(QListViewItem*which);
 
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
 

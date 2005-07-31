@@ -31,6 +31,7 @@
 #include "svncpp/annotate_line.hpp"
 #include "svncpp/context_listener.hpp"
 #include "svncpp/targets.hpp"
+#include "helpers/sub2qt.h"
 
 #include <qstring.h>
 #include <qmap.h>
@@ -122,6 +123,7 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
  */
 void SvnActions::slotMakeRangeLog()
 {
+    /// @todo remove reference to parentlist
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
@@ -143,6 +145,7 @@ void SvnActions::slotMakeRangeLog()
  */
 void SvnActions::slotMakeLog()
 {
+    /// @todo remove reference to parentlist
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
@@ -164,8 +167,8 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
 
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
-        /// @fixme Last parameter should be user setable (follow nodes moving or not)
-        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,true,!follow);
+        /// @todo second last parameter user settable (printing infos about copy/move etc) moment false so traffic reduced
+        logs = m_Svnclient.log(k->fullName().local8Bit(),start,end,false,!follow);
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -192,6 +195,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
  */
 void SvnActions::slotBlame()
 {
+    /// @todo remove reference to parentlist
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
@@ -261,17 +265,12 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     delete blame;
 }
 
-QDateTime SvnActions::apr2qttime(apr_time_t atime)
-{
-    QDateTime t;t.setTime_t(atime/(1000*1000),Qt::UTC);
-    return t;
-}
-
 /*!
     \fn SvnActions::slotMakeRangeBlame()
  */
 void SvnActions::slotRangeBlame()
 {
+    /// @todo remove reference to parentlist
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     if (!k) return;
@@ -325,6 +324,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
 
 void SvnActions::slotMkdir()
 {
+    /// @todo remove reference to parentlist
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
@@ -372,6 +372,7 @@ void SvnActions::slotMkdir()
 
 void SvnActions::slotInfo()
 {
+    /// @todo remove reference to parentlist
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     QPtrList<FileListViewItem> *lst = m_ParentList->allSelected();
@@ -445,8 +446,8 @@ void SvnActions::slotInfo()
         text+=re;
         text+=rb+i18n("UUID")+cs+QString((*it).uuid())+re;
         text+=rb+i18n("Last author")+cs+QString((*it).cmtAuthor())+re;
-        text+=rb+i18n("Last changed")+cs+apr2qttime((*it).cmtDate()).toString(Qt::LocalDate)+re;
-        text+=rb+i18n("Property last changed")+cs+apr2qttime((*it).propTime()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Last changed")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
         if ((*it).conflictNew()&&strlen((*it).conflictNew())) {
             text+=rb+i18n("New version of conflicted file")+cs+QString((*it).conflictNew())+re;
@@ -480,6 +481,7 @@ void SvnActions::slotInfo()
  */
 void SvnActions::slotProperties()
 {
+    /// @todo remove reference to parentlist
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
@@ -519,6 +521,7 @@ void SvnActions::slotProperties()
  */
 void SvnActions::slotCommit()
 {
+    /// @todo remove reference to parentlist
     if (!m_CurrentContext) return;
     if (!m_ParentList->firstChild()) return;
     bool ok,rec;
@@ -557,6 +560,7 @@ void SvnActions::slotCommit()
  */
 void SvnActions::slotSimpleDiffBase()
 {
+    /// @todo remove reference to parentlist
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     QString what;
@@ -578,6 +582,7 @@ void SvnActions::slotSimpleDiffBase()
  */
 void SvnActions::slotSimpleDiff()
 {
+    /// @todo remove reference to parentlist
     if (!m_ParentList) return;
     FileListViewItem*k = m_ParentList->singleSelected();
     QString what;
@@ -785,41 +790,11 @@ void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
 }
 
 /*!
-    \fn SvnActions::slotDelete()
+    \fn SvnActions::makeDelete()
  */
-void SvnActions::slotDelete()
+void SvnActions::makeDelete(const std::vector<svn::Path>&items)
 {
     if (!m_CurrentContext) return;
-    if (!m_ParentList) return;
-    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
-
-    if (lst->count()==0) {
-        KMessageBox::error(m_ParentList,i18n("Nothing selected for delete"));
-        return;
-    }
-    FileListViewItemListIterator liter(*lst);
-    FileListViewItem*cur;
-
-    std::vector<svn::Path> items;
-    QStringList displist;
-    KURL::List kioList;
-    while ((cur=liter.current())!=0){
-        ++liter;
-        if (!cur->svnStatus().isVersioned()) {
-            kioList.append(cur->svnStatus().path());
-        } else {
-            items.push_back(cur->svnStatus().path());
-        }
-        displist.append(cur->svnStatus().path());
-    }
-    int answer = KMessageBox::questionYesNoList(m_ParentList,i18n("Really delete that entries?"),displist,"Delete from repository");
-    if (answer!=KMessageBox::Yes) {
-        return;
-    }
-    if (kioList.count()>0) {
-        KIO::Job*aJob = KIO::del(kioList);
-        connect(aJob,SIGNAL(result (KIO::Job *)),this,SLOT(jobResult(KIO::Job*)));
-    }
     QString ex;
     try {
         svn::Targets target(items);
@@ -829,7 +804,6 @@ void SvnActions::slotDelete()
         emit clientException(ex);
         return;
     }
-    EMIT_REFRESH;
     EMIT_FINISHED;
 }
 

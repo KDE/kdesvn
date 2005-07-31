@@ -23,6 +23,7 @@
 #include <klocale.h>
 #include <kapp.h>
 #include <kinputdialog.h>
+#include <kdebug.h>
 #include <qtextstream.h>
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
@@ -32,34 +33,45 @@ const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
 #endif
 
 const QString CContextListener::action_strings[]={
-    i18n("Add to revision control"),
-    i18n("Copy"),
-    i18n("Delete"),
-    i18n("Restore missing"),
-    i18n("Revert"),
-    i18n("Revert failed"),
-    i18n("Resolved"),
-    i18n("Skip"),
-    i18n("Deleted"),
-    i18n("Added"),
-    i18n("Update"), //svn_wc_notify_update_update
-    i18n("Update complete"),
-    i18n("Update external module"),
-    i18n("Status complete"),
-    i18n("Status on external"), //svn_wc_notify_status_external
-    i18n("Commit Modified"),
-    i18n("Commit Added"),
-    i18n("Commit Deleted"),
-    i18n("Commit Replaced"),
+    I18N_NOOP("Add to revision control"),
+    I18N_NOOP("Copy"),
+    I18N_NOOP("Delete"),
+    I18N_NOOP("Restore missing"),
+    I18N_NOOP("Revert"),
+    I18N_NOOP("Revert failed"),
+    I18N_NOOP("Resolved"),
+    I18N_NOOP("Skip"),
+    I18N_NOOP("Deleted"),
+    I18N_NOOP("Added"),
+    I18N_NOOP("Update"), //svn_wc_notify_update_update
+    I18N_NOOP("Update complete"),
+    I18N_NOOP("Update external module"),
+    I18N_NOOP("Status complete"),
+    I18N_NOOP("Status on external"), //svn_wc_notify_status_external
+    I18N_NOOP("Commit Modified"),
+    I18N_NOOP("Commit Added"),
+    I18N_NOOP("Commit Deleted"),
+    I18N_NOOP("Commit Replaced"),
     QString::null, //tx delta -> making ticks instead
-    i18n("Blame") //svn_wc_notify_blame_revision
+    I18N_NOOP("Blame") //svn_wc_notify_blame_revision
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     ,
-    i18n("Locking"),
-    i18n("Unlocked"),
-    i18n("Lock failed"),
-    i18n("Unlock failed")
+    I18N_NOOP("Locking"),
+    I18N_NOOP("Unlocked"),
+    I18N_NOOP("Lock failed"),
+    I18N_NOOP("Unlock failed")
 #endif
+};
+
+const QString CContextListener::notify_state_strings[]={
+    QString::null, // = 0
+    QString::null,
+    I18N_NOOP("unchanged"),
+    I18N_NOOP("item wasn't present"),
+    I18N_NOOP("unversioned item obstructed work"),
+    I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
+    I18N_NOOP("Modified state had mods merged in."),
+    I18N_NOOP("Modified state got conflicting mods.")
 };
 
 QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
@@ -68,6 +80,12 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
         return QString::null;
     }
     return i18n(action_strings[action]);
+}
+
+QString CContextListener::NotifyState(svn_wc_notify_state_t state)
+{
+    if (state > svn_wc_notify_state_conflicted || state<0) return QString::null;
+    return i18n(notify_state_strings[state]);
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)
@@ -121,8 +139,25 @@ void CContextListener::contextNotify (const char *path,
     if (revision>-1) {
         ts << " (Rev "<<revision<<")";
     }
+    aString = NotifyState(content_state);
+    if (!aString.isEmpty()) {
+        ts << "\n" << aString;
+    }
     emit sendNotify(msg);
 }
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+void CContextListener::contextNotify (const svn_wc_notify_t *action)
+{
+    if (!action) return;
+    if (action->action<svn_wc_notify_locked) {
+        contextNotify(action->path,action->action,action->kind,action->mime_type,
+            action->content_state,action->prop_state,action->revision);
+        return;
+    }
+    QString aString = NotifyAction(action->action);
+}
+#endif
 
 bool CContextListener::contextCancel()
 {

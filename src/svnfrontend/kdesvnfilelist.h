@@ -64,6 +64,7 @@ public:
 protected:
     svn::Status m_mainEntry;
     bool m_isLocal;
+    bool m_deletePerfect;
 
     QString m_LastException,m_baseUri;
     QMap<QString,bool> m_Dirsread;
@@ -107,6 +108,7 @@ protected:
     virtual void contentsDragMoveEvent( QDragMoveEvent* );
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
+    void dispDummy();
 private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
@@ -137,6 +139,11 @@ protected slots:
     virtual void slotRename();
     virtual void slotCopy();
     virtual void slotCat();
+    virtual void slotDelete();
+
+    /* callback slots */
+    virtual void slotCopyFinished( KIO::Job *);
+    virtual void slotDeleteFinished(KIO::Job*);
 
 signals:
     void sigLogMessage(const QString&);
@@ -148,8 +155,6 @@ public slots:
     virtual void refreshCurrentTree();
     virtual void refreshCurrent(FileListViewItem*);
     virtual void closeMe();
-protected slots:
-    virtual void slotCopyFinished( KIO::Job *);
 };
 
 #endif

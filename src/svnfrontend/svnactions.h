@@ -58,6 +58,7 @@ public:
     template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog");
     void makeCat(svn::Revision start, const QString&what,const QString&disp);
     void addItems(const QValueList<svn::Path> &items,bool rec=false);
+    void makeDelete(const std::vector<svn::Path>&);
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);
@@ -69,7 +70,6 @@ protected:
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 
-    static QDateTime apr2qttime(apr_time_t);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
 
     void CheckoutExport(bool _exp);
@@ -93,7 +93,6 @@ public slots:
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();
     virtual void slotAdd();
-    virtual void slotDelete();
     virtual void slotCheckoutCurrent();
     virtual void slotExportCurrent();
     virtual void slotCheckout();

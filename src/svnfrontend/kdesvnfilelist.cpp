@@ -1077,7 +1077,7 @@ void kdesvnfilelist::slotDelete()
     KURL::List kioList;
     while ((cur=liter.current())!=0){
         ++liter;
-        if (!cur->svnStatus().isVersioned()) {
+        if (!cur->svnStatus().isRealVersioned()) {
             kioList.append(cur->svnStatus().path());
         } else {
             items.push_back(cur->svnStatus().path());

@@ -134,6 +134,9 @@ void kdesvnfilelist::setupActions()
     m_CatAction = new KAction("&Cat head","contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
 
+    m_LockAction = new KAction(i18n("Lock current items"),"lock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
+    m_UnlockAction = new KAction(i18n("Unlock current items"),"unlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
+
     /* 3. actions only on dirs */
     m_MkdirAction = new KAction("Make (sub-)directory","folder_new",
         KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
@@ -415,6 +418,8 @@ void kdesvnfilelist::enableActions()
     m_LogFullAction->setEnabled(single||(isLocal()&&!single&&!multi&&isopen));
     m_propertyAction->setEnabled(single);
     m_DelCurrent->setEnabled( (multi||single));
+    m_LockAction->setEnabled( (multi||single));
+    m_UnlockAction->setEnabled( (multi||single));
 
     m_RenameAction->setEnabled(single && (!m_isLocal||singleSelected()!=firstChild()));
     m_CopyAction->setEnabled(single && (!m_isLocal||singleSelected()!=firstChild()));
@@ -1057,7 +1062,6 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
  */
 void kdesvnfilelist::slotDelete()
 {
-    /// @todo implement me
     m_deletePerfect = true;
     QPtrList<FileListViewItem>*lst = allSelected();
 
@@ -1125,4 +1129,71 @@ void kdesvnfilelist::dispDummy()
     dummy.show();
     qApp->enter_loop();
     dummy.hide();
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotLock()
+ */
+void kdesvnfilelist::slotLock()
+{
+    QPtrList<FileListViewItem>*lst = allSelected();
+    FileListViewItemListIterator liter(*lst);
+    FileListViewItem*cur;
+    if (lst->count()==0) {
+        KMessageBox::error(this,i18n("Nothing selected for lock"));
+        return;
+    }
+    KDialogBase*dlg;
+    Logmsg_impl*ptr;
+    dlg = createDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
+    if (!dlg) return;
+    ptr->initHistory();
+    ptr->setRecCheckboxtext(i18n("Steal lock?"));
+
+    if (dlg->exec()!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    dlg->saveDialogSize("locking_log_msg",false);
+
+    QString logMessage = ptr->getMessage();
+    bool rec = ptr->isRecursive();
+    ptr->saveHistory();
+
+    QStringList displist;
+    while ((cur=liter.current())!=0){
+        ++liter;
+        displist.append(cur->svnStatus().path());
+    }
+    m_SvnWrapper->makeLock(displist,logMessage,rec);
+    refreshCurrentTree();
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotUnlock()
+ */
+void kdesvnfilelist::slotUnlock()
+{
+    QPtrList<FileListViewItem>*lst = allSelected();
+    FileListViewItemListIterator liter(*lst);
+    FileListViewItem*cur;
+    if (lst->count()==0) {
+        KMessageBox::error(this,i18n("Nothing selected for unlock"));
+        return;
+    }
+    int res = KMessageBox::questionYesNoCancel(this,i18n("Break lock or ignore missing locks?"),i18n("Unlocking items"));
+    if (res == KMessageBox::Cancel) {
+        return;
+    }
+    bool breakit = res==KMessageBox::Yes;
+
+    QStringList displist;
+    while ((cur=liter.current())!=0){
+        ++liter;
+        displist.append(cur->svnStatus().path());
+    }
+    m_SvnWrapper->makeUnlock(displist,breakit);
+    refreshCurrentTree();
 }

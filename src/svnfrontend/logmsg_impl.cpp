@@ -125,3 +125,12 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     if (rec) *rec = _rec;
     return msg;
 }
+
+
+/*!
+    \fn Logmsg_impl::setRecCheckboxtext(const QString&what)
+ */
+void Logmsg_impl::setRecCheckboxtext(const QString&what)
+{
+    m_RecursiveButton->setText(what);
+}

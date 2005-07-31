@@ -150,12 +150,12 @@ void CContextListener::contextNotify (const char *path,
 void CContextListener::contextNotify (const svn_wc_notify_t *action)
 {
     if (!action) return;
-    if (action->action<svn_wc_notify_locked) {
+//    if (action->action<svn_wc_notify_locked) {
         contextNotify(action->path,action->action,action->kind,action->mime_type,
             action->content_state,action->prop_state,action->revision);
-        return;
-    }
-    QString aString = NotifyAction(action->action);
+//        return;
+//    }
+//    QString aString = NotifyAction(action->action);
 }
 #endif
 

@@ -76,6 +76,7 @@ protected:
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
     KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction,*m_MergeRevisionAction;
     KAction*m_RenameAction,*m_CopyAction;
+    KAction*m_LockAction,*m_UnlockAction;
 
     SvnActions*m_SvnWrapper;
 
@@ -155,6 +156,9 @@ public slots:
     virtual void refreshCurrentTree();
     virtual void refreshCurrent(FileListViewItem*);
     virtual void closeMe();
+protected slots:
+    virtual void slotLock();
+    virtual void slotUnlock();
 };
 
 #endif

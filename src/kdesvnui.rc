@@ -27,6 +27,9 @@
     <Separator/>
     <Action name="make_svn_checkout" />
     <Action name="make_svn_export" />
+    <Separator/>
+    <Action name="make_svn_lock"/>
+    <Action name="make_svn_unlock"/>
    </Menu>
    <Menu name="subversion_working_copy" >
     <text>Working copy</text>
@@ -87,6 +90,9 @@
   <Separator/>
   <Action name="make_svn_mkdir" />
   <Action name="make_cleanup" />
+  <Separator/>
+  <Action name="make_svn_lock"/>
+  <Action name="make_svn_unlock"/>
  </Menu>
  <Menu name="remote_context" >
   <Action name="make_svn_log_full" />
@@ -101,6 +107,9 @@
   <Action name="make_svn_cat" />
   <Action name="make_svn_remove" />
   <Action name="make_svn_mkdir" />
+  <Separator/>
+  <Action name="make_svn_lock"/>
+  <Action name="make_svn_unlock"/>
   <Separator/>
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />

@@ -954,7 +954,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
 
     std::vector<svn::Path> items;
     for (unsigned j = 0; j<displist.count();++j) {
-        items.push_back( (*(displist.at(j))).latin1());
+        items.push_back(svn::Path((*(displist.at(j))).local8Bit()));
     }
     QString ex;
 
@@ -1103,7 +1103,6 @@ void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         if (move) {
-            kdDebug()<<"Moving" << endl;
             m_Svnclient.move(svn::Path(Old.local8Bit()),svn::Revision::HEAD,
                 svn::Path(New.local8Bit()),force);
         } else {
@@ -1115,4 +1114,43 @@ void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool
         return;
     }
     EMIT_REFRESH;
+}
+
+
+/*!
+    \fn SvnActions::makeLock(const QStringList&)
+ */
+void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit)
+{
+    std::vector<svn::Path> targets;
+    for (unsigned int i = 0; i<what.count();++i) {
+        targets.push_back(svn::Path((*(what.at(i))).local8Bit()));
+    }
+    if (!m_CurrentContext) return;
+    try {
+        m_Svnclient.lock(svn::Targets(targets),_msg.local8Bit(),breakit);
+    } catch (svn::ClientException e) {
+        emit clientException(QString::fromLocal8Bit(e.message()));
+        return;
+    }
+}
+
+
+/*!
+    \fn SvnActions::makeUnlock(const QStringList&)
+ */
+void SvnActions::makeUnlock(const QStringList&what,bool breakit)
+{
+    std::vector<svn::Path> targets;
+    if (!m_CurrentContext) return;
+    for (unsigned int i = 0; i<what.count();++i) {
+        targets.push_back(svn::Path((*(what.at(i))).local8Bit()));
+    }
+
+    try {
+        m_Svnclient.unlock(svn::Targets(targets),breakit);
+    } catch (svn::ClientException e) {
+        emit clientException(QString::fromLocal8Bit(e.message()));
+        return;
+    }
 }

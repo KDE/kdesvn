@@ -33,6 +33,7 @@ public:
     void saveHistory();
 
     static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
+    void setRecCheckboxtext(const QString&what);
 
 protected slots:
     virtual void slotHistoryActivated(const QString&);

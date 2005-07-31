@@ -59,6 +59,8 @@ public:
     void makeCat(svn::Revision start, const QString&what,const QString&disp);
     void addItems(const QValueList<svn::Path> &items,bool rec=false);
     void makeDelete(const std::vector<svn::Path>&);
+    void makeLock(const QStringList&,const QString&,bool);
+    void makeUnlock(const QStringList&,bool);
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);

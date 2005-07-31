@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -37,7 +37,7 @@ namespace svn
 {
   /**
    * Subversion status API. This class wraps around
-   * @a svn_wc_status_t. 
+   * @a svn_wc_status_t.
    *
    * @see svn_wc.hpp
    * @see svn_wc_status_t
@@ -76,26 +76,26 @@ namespace svn
      * @return entry for this path
      * @retval entry.isValid () = false item is not versioned
      */
-    const Entry 
+    const Entry
     entry () const
     {
       return Entry (m_status->entry);
     }
 
     /**
-     * @return file status property enum of the "textual" component. 
+     * @return file status property enum of the "textual" component.
      */
-    const svn_wc_status_kind 
-    textStatus () const 
+    const svn_wc_status_kind
+    textStatus () const
     {
       return m_status->text_status;
     }
 
     /**
-     * @return file status property enum of the "property" component. 
+     * @return file status property enum of the "property" component.
      */
-    const svn_wc_status_kind 
-    propStatus () const 
+    const svn_wc_status_kind
+    propStatus () const
     {
       return m_status->prop_status;
     }
@@ -103,17 +103,25 @@ namespace svn
     /**
      * @retval TRUE if under version control
      */
-    const bool 
-    isVersioned () const 
+    const bool
+    isVersioned () const
     {
       return m_isVersioned;
     }
 
     /**
+     * @retval TRUE if under version control and not ignored
+     */
+    const bool
+    isRealVersioned()const
+    {
+      return m_hasReal;
+    }
+    /**
      * @retval TRUE if locked
      */
-    const bool 
-    isLocked () const 
+    const bool
+    isLocked () const
     {
       return m_status->locked != 0;
     }
@@ -121,8 +129,8 @@ namespace svn
     /**
      * @retval TRUE if copied
      */
-    const bool 
-    isCopied () const 
+    const bool
+    isCopied () const
     {
       return m_status->copied != 0;
     }
@@ -131,7 +139,7 @@ namespace svn
      * @retval TRUE if switched
      */
     const bool
-    isSwitched () const 
+    isSwitched () const
     {
       return m_status->switched != 0;
     }
@@ -140,7 +148,7 @@ namespace svn
      * @return the entry's text status in the repository
      */
     const svn_wc_status_kind
-    reposTextStatus () const 
+    reposTextStatus () const
     {
       return m_status->repos_text_status;
     }
@@ -157,7 +165,7 @@ namespace svn
     /**
      * @return svn_wc_status_t value
      */
-    operator svn_wc_status_t * () const 
+    operator svn_wc_status_t * () const
     {
       return m_status;
     }
@@ -172,6 +180,7 @@ namespace svn
     svn_string_t * m_path;
     Pool m_pool;
     bool m_isVersioned;
+    bool m_hasReal;
 
     /**
      * Initialize structures
@@ -179,7 +188,7 @@ namespace svn
      * @param path
      * @param status if NULL isVersioned will be false
      */
-    void 
+    void
     init (const char *path, const svn_wc_status_t * status);
   };
 }

@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -24,7 +24,7 @@
  */
 
 #ifndef _SVNCPP_CONTEXT_LISTENER_HPP_
-#define _SVNCPP_CONTEXT_LISTENER_HPP_ 
+#define _SVNCPP_CONTEXT_LISTENER_HPP_
 
 // stl
 #include <string>
@@ -48,10 +48,14 @@ namespace svn
   {
   public:
     /**
+     * empty destructor avoids a lot of compiler warnings
+     */
+    virtual ~ContextListener(){}
+    /**
      * this method will be called to retrieve
      * authentication information
      *
-     * WORKAROUND FOR apr_xlate PROBLEM: 
+     * WORKAROUND FOR apr_xlate PROBLEM:
      * STRINGS ALREADY HAVE TO BE UTF8!!!
      *
      * @param username
@@ -61,13 +65,13 @@ namespace svn
      * @return continue action?
      * @retval true continue
      */
-    virtual bool 
+    virtual bool
     contextGetLogin (const std::string & realm,
-                     std::string & username, 
+                     std::string & username,
                      std::string & password,
                      bool & maySave) = 0;
 
-    /** 
+    /**
      * this method will be called to notify about
      * the progress of an ongoing action
      *
@@ -87,7 +91,17 @@ namespace svn
                    svn_wc_notify_state_t content_state,
                    svn_wc_notify_state_t prop_state,
                    svn_revnum_t revision) = 0;
-
+    /**
+     * this method will be called to notify about
+     * the progress of an ongoing action
+     *
+     * @param svn_wc_notify_t
+     * @since subversion 1.2
+     */
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    virtual void
+    contextNotify (const svn_wc_notify_t *action) = 0;
+#endif
     /*
      * this method will be called periodically to allow
      * the app to cancel long running operations
@@ -102,7 +116,7 @@ namespace svn
      * this method will be called to retrieve
      * a log message
      *
-     * WORKAROUND FOR apr_xlate PROBLEM: 
+     * WORKAROUND FOR apr_xlate PROBLEM:
      * STRINGS ALREADY HAVE TO BE UTF8!!!
      *
      * @param msg log message
@@ -152,19 +166,19 @@ namespace svn
      * this method is called if there is ssl server
      * information, that has to be confirmed by the user
      *
-     * @param data 
+     * @param data
      * @param acceptedFailures
      * @return @a SslServerTrustAnswer
      */
     virtual SslServerTrustAnswer
-    contextSslServerTrustPrompt (const SslServerTrustData & data, 
+    contextSslServerTrustPrompt (const SslServerTrustData & data,
                                  apr_uint32_t & acceptedFailures) = 0;
 
     /**
      * this method is called to retrieve client side
      * information
      */
-    virtual bool 
+    virtual bool
     contextSslClientCertPrompt (std::string & certFile) = 0;
 
     /**
@@ -176,8 +190,8 @@ namespace svn
      * @param maySave
      */
     virtual bool
-    contextSslClientCertPwPrompt (std::string & password, 
-                                  const std::string & realm, 
+    contextSslClientCertPwPrompt (std::string & password,
+                                  const std::string & realm,
                                   bool & maySave) = 0;
   };
 }

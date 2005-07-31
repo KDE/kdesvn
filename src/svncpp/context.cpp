@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -84,9 +84,9 @@ namespace svn
     std::string configDir;
 
     /**
-     * translate native c-string to utf8 
+     * translate native c-string to utf8
      */
-    static svn_error_t * 
+    static svn_error_t *
     translateString (const char * str, const char ** newStr,
                      apr_pool_t * pool)
     {
@@ -94,15 +94,15 @@ namespace svn
       // any conversion at this place. YOU will have to make
       // sure any strings passed are UTF 8 strings
       // svn_string_t *string = svn_string_create ("", pool);
-      // 
+      //
       // string->data = str;
       // string->len = strlen (str);
-      // 
+      //
       // const char * encoding = APR_LOCALE_CHARSET;
-      // 
+      //
       // SVN_ERR (svn_subst_translate_string (&string, string,
       //                                      encoding, pool));
-      // 
+      //
       // *newStr = string->data;
       *newStr = str;
       return SVN_NO_ERROR;
@@ -124,7 +124,7 @@ namespace svn
     getData (void * baton, Data ** data)
     {
       if (baton == NULL)
-        return svn_error_create (SVN_ERR_CANCELLED, NULL, 
+        return svn_error_create (SVN_ERR_CANCELLED, NULL,
                                  "invalid baton");
 
       Data * data_ = static_cast <Data *>(baton);
@@ -138,7 +138,7 @@ namespace svn
     }
 
     Data (const std::string & configDir_)
-      : listener (0), logIsSet (false), 
+      : listener (0), logIsSet (false),
         promptCounter (0), configDir (configDir_)
     {
       const char * c_configDir = 0;
@@ -150,10 +150,10 @@ namespace svn
 
 
       // intialize authentication providers
-      // * simple 
+      // * simple
       // * username
       // * simple prompt
-      // * ssl server trust file 
+      // * ssl server trust file
       // * ssl server trust prompt
       // * ssl client cert pw file
       // * ssl client cert pw prompt
@@ -161,8 +161,8 @@ namespace svn
       // ===================
       // 8 providers
 
-      apr_array_header_t *providers = 
-        apr_array_make (pool, 8, 
+      apr_array_header_t *providers =
+        apr_array_make (pool, 8,
                         sizeof (svn_auth_provider_object_t *));
       svn_auth_provider_object_t *provider;
 
@@ -184,33 +184,33 @@ namespace svn
         this,
         100000000, // not very nice. should be infinite...
         pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) = 
+      *(svn_auth_provider_object_t **)apr_array_push (providers) =
         provider;
 
-      // add ssl providers 
+      // add ssl providers
 
       // file first then prompt providers
       svn_client_get_ssl_server_trust_file_provider (&provider, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) = 
+      *(svn_auth_provider_object_t **)apr_array_push (providers) =
         provider;
 
       svn_client_get_ssl_client_cert_file_provider (&provider, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) = 
+      *(svn_auth_provider_object_t **)apr_array_push (providers) =
         provider;
 
       svn_client_get_ssl_client_cert_pw_file_provider (&provider, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) = 
+      *(svn_auth_provider_object_t **)apr_array_push (providers) =
         provider;
 
       svn_client_get_ssl_server_trust_prompt_provider (
         &provider, onSslServerTrustPrompt, this, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) = 
+      *(svn_auth_provider_object_t **)apr_array_push (providers) =
         provider;
 
-      // plugged in 3 as the retry limit - what is a good limit?       
+      // plugged in 3 as the retry limit - what is a good limit?
       svn_client_get_ssl_client_cert_pw_prompt_provider (
         &provider, onSslClientCertPwPrompt, this, 3, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) = 
+      *(svn_auth_provider_object_t **)apr_array_push (providers) =
         provider;
 
       svn_auth_baton_t *ab;
@@ -246,7 +246,7 @@ namespace svn
       void *param = 0;
       if (!value)
         param = (void *)"1";
- 
+
       svn_auth_set_parameter (ctx.auth_baton,
                               SVN_AUTH_PARAM_NO_AUTH_CACHE,
                               param);
@@ -259,9 +259,9 @@ namespace svn
       password = pwd;
 
       svn_auth_baton_t * ab = ctx.auth_baton;
-      svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_USERNAME, 
+      svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_USERNAME,
                               username.c_str ());
-      svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD, 
+      svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD,
                               password.c_str ());
 
     }
@@ -279,7 +279,7 @@ namespace svn
      * for example
      */
     static svn_error_t *
-    onLogMsg (const char **log_msg, 
+    onLogMsg (const char **log_msg,
               const char **tmp_file,
               apr_array_header_t *, //UNUSED commit_items
               void *baton,
@@ -300,7 +300,7 @@ namespace svn
       *log_msg = apr_pstrdup (pool, msg.c_str ());
 
       *tmp_file = NULL;
-    
+
       return SVN_NO_ERROR;
     }
 
@@ -308,7 +308,7 @@ namespace svn
      * this is the callback function for the subversion
      * api functions to signal the progress of an action
      */
-    static void 
+    static void
     onNotify (void * baton,
               const char *path,
               svn_wc_notify_action_t action,
@@ -332,7 +332,7 @@ namespace svn
     /**
      * this is the callback function for the subversion 1.2
      * api functions to signal the progress of an action
-     * 
+     *
      * @todo right now we forward only to @a onNotify,
      *       but maybe we should a notify2 to the listener
      * @since subversion 1.2
@@ -342,12 +342,9 @@ namespace svn
     {
       if (!baton)
         return;
-       
-      // for now forward the call to @a onNotify
-      onNotify (baton, action->path, action->action,
-                action->kind, action->mime_type,
-                action->content_state, action->prop_state,
-                action->revision);
+      Data * data = static_cast <Data *> (baton);
+
+      data->notify (action);
     }
 #endif
 
@@ -356,7 +353,7 @@ namespace svn
      * this is the callback function for the subversion
      * api functions to signal the progress of an action
      */
-    static svn_error_t * 
+    static svn_error_t *
     onCancel (void * baton)
     {
       if (baton == 0)
@@ -377,7 +374,7 @@ namespace svn
     onSimplePrompt (svn_auth_cred_simple_t **cred,
                     void *baton,
                     const char *realm,
-                    const char *username, 
+                    const char *username,
                     svn_boolean_t _may_save,
                     apr_pool_t *pool)
     {
@@ -390,10 +387,10 @@ namespace svn
 
       svn_auth_cred_simple_t* lcred = (svn_auth_cred_simple_t*)
         apr_palloc (pool, sizeof (svn_auth_cred_simple_t));
-/*      SVN_ERR (svn_utf_cstring_to_utf8 ( 
+/*      SVN_ERR (svn_utf_cstring_to_utf8 (
                  &lcred->password,
                  data->getPassword (), pool));
-      SVN_ERR (svn_utf_cstring_to_utf8 ( 
+      SVN_ERR (svn_utf_cstring_to_utf8 (
                  &lcred->username,
                  data->getUsername (), pool)); */
       lcred->password = data->getPassword ();
@@ -410,7 +407,7 @@ namespace svn
      * @see svn_auth_ssl_server_trust_prompt_func_t
      */
     static svn_error_t *
-    onSslServerTrustPrompt (svn_auth_cred_ssl_server_trust_t **cred, 
+    onSslServerTrustPrompt (svn_auth_cred_ssl_server_trust_t **cred,
                             void *baton,
                             const char *realm,
                             apr_uint32_t failures,
@@ -420,7 +417,7 @@ namespace svn
     {
       Data * data;
       SVN_ERR (getData (baton, &data));
-      
+
       ContextListener::SslServerTrustData trustData (failures);
       if (realm != NULL)
         trustData.realm = realm;
@@ -440,10 +437,10 @@ namespace svn
         *cred = NULL;
       else
       {
-        svn_auth_cred_ssl_server_trust_t *cred_ = 
+        svn_auth_cred_ssl_server_trust_t *cred_ =
           (svn_auth_cred_ssl_server_trust_t*)
           apr_palloc (pool, sizeof (svn_auth_cred_ssl_server_trust_t));
-      
+
         if (answer == ContextListener::ACCEPT_PERMANENTLY)
         {
           cred_->may_save = 1;
@@ -451,7 +448,7 @@ namespace svn
         }
         *cred = cred_;
       }
-      
+
       return SVN_NO_ERROR;
     }
 
@@ -459,8 +456,8 @@ namespace svn
      * @see svn_auth_ssl_client_cert_prompt_func_t
      */
     static svn_error_t *
-    onSslClientCertPrompt (svn_auth_cred_ssl_client_cert_t **cred, 
-                           void *baton, 
+    onSslClientCertPrompt (svn_auth_cred_ssl_client_cert_t **cred,
+                           void *baton,
                            apr_pool_t *pool)
     {
       Data * data;
@@ -470,10 +467,10 @@ namespace svn
       if (!data->listener->contextSslClientCertPrompt (certFile))
         return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
 
-      svn_auth_cred_ssl_client_cert_t *cred_ = 
+      svn_auth_cred_ssl_client_cert_t *cred_ =
         (svn_auth_cred_ssl_client_cert_t*)
         apr_palloc (pool, sizeof (svn_auth_cred_ssl_client_cert_t));
-        
+
 /*      SVN_ERR (svn_utf_cstring_to_utf8 (
                  &cred_->cert_file,
                  certFile.c_str (),
@@ -486,12 +483,12 @@ namespace svn
     }
 
     /**
-     * @see svn_auth_ssl_client_cert_pw_prompt_func_t  
+     * @see svn_auth_ssl_client_cert_pw_prompt_func_t
      */
     static svn_error_t *
     onSslClientCertPwPrompt (
-      svn_auth_cred_ssl_client_cert_pw_t **cred, 
-      void *baton, 
+      svn_auth_cred_ssl_client_cert_pw_t **cred,
+      void *baton,
       const char *realm,
       svn_boolean_t maySave,
       apr_pool_t *pool)
@@ -504,7 +501,7 @@ namespace svn
       if (!data->listener->contextSslClientCertPwPrompt (password, realm, may_save))
         return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
 
-      svn_auth_cred_ssl_client_cert_pw_t *cred_ = 
+      svn_auth_cred_ssl_client_cert_pw_t *cred_ =
         (svn_auth_cred_ssl_client_cert_pw_t *)
         apr_palloc (pool, sizeof (svn_auth_cred_ssl_client_cert_pw_t));
 
@@ -513,14 +510,14 @@ namespace svn
                  password.c_str (),
                  pool)); */
       cred_->password = password.c_str ();
-      
+
       cred_->may_save = may_save;
       *cred = cred_;
 
       return SVN_NO_ERROR;
     }
 
-    const char * 
+    const char *
     getUsername () const
     {
       return username.c_str ();
@@ -540,7 +537,7 @@ namespace svn
 
     /**
      * if the @a listener is set, use it to retrieve the log
-     * message using ContextListener::contextGetLogMessage. 
+     * message using ContextListener::contextGetLogMessage.
      * This return values is given back, then.
      *
      * if the @a listener is not set the its checked whether
@@ -550,7 +547,7 @@ namespace svn
      * @param msg log message
      * @retval false cancel
      */
-    bool 
+    bool
     retrieveLogMessage (std::string & msg)
     {
       bool ok;
@@ -569,11 +566,11 @@ namespace svn
 
     /**
      * if the @a listener is set and no password has been
-     * set yet, use it to retrieve login and password using 
+     * set yet, use it to retrieve login and password using
      * ContextListener::contextGetLogin.
-     * 
+     *
      * if the @a listener is not set, check if setLogin
-     * has been called yet. 
+     * has been called yet.
      *
      * @return continue?
      * @retval false cancel
@@ -602,7 +599,7 @@ namespace svn
      * if the @a listener is set call the method
      * @a contextNotify
      */
-    void 
+    void
     notify (const char *path,
             svn_wc_notify_action_t action,
             svn_node_kind_t kind,
@@ -618,11 +615,20 @@ namespace svn
       }
     }
 
+    void
+    notify (const svn_wc_notify_t *action)
+    {
+      if (listener != 0)
+      {
+        listener->contextNotify(action);
+      }
+    }
+
     /**
      * if the @a listener is set call the method
      * @a contextCancel
      */
-    bool 
+    bool
     cancel ()
     {
       if (listener != 0)
@@ -652,7 +658,7 @@ namespace svn
   {
     delete m;
   }
-  
+
   void
   Context::setAuthCache (bool value)
   {
@@ -665,18 +671,18 @@ namespace svn
     m->setLogin (username, password);
   }
 
-  Context::operator svn_client_ctx_t * () 
+  Context::operator svn_client_ctx_t * ()
   {
     return &(m->ctx);
   }
 
-  svn_client_ctx_t * 
+  svn_client_ctx_t *
   Context::ctx ()
   {
     return &(m->ctx);
   }
-  
-  void 
+
+  void
   Context::setLogMessage (const char * msg)
   {
     m->setLogMessage (msg);
@@ -700,13 +706,13 @@ namespace svn
     return m->getLogMessage ();
   }
 
-  void 
+  void
   Context::setListener (ContextListener * listener)
   {
     m->listener = listener;
   }
 
-  ContextListener * 
+  ContextListener *
   Context::getListener () const
   {
     return m->listener;

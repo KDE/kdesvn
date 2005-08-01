@@ -17,25 +17,22 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef HELPERSSUB2QT_H
-#define HELPERSSUB2QT_H
 
-#include <qdatetime.h>
-#include <svn_time.h>
+#ifndef __STL_2_QT_H
+#define __STL_2_QT_H
+
+#include <qstring.h>
+#include <string>
 
 namespace helpers {
-
-/**
-@author Rajko Albrecht
-*/
-class sub2qt{
+class stl2qt {
 public:
-    sub2qt();
-    ~sub2qt();
-
-    static QDateTime apr_time2qt(apr_time_t _time);
-    static apr_time_t qt_time2apr(const QDateTime&);
+    stl2qt();
+    ~stl2qt();
+    static QString stl2qtstring(const std::string&);
+    static std::string qt2stlstring(const QString&);
 };
 
 }
+
 #endif

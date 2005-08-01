@@ -23,6 +23,7 @@
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"
 #include "svncpp/exception.hpp"
+#include "svncpp/url.hpp"
 
 #include <qfileinfo.h>
 #include <klocale.h>
@@ -109,9 +110,6 @@ void FileListViewItem::update(KFileItem*_item)
     } catch (svn::ClientException e) {
         setText(COL_STATUS,e.message());
         return;
-    } catch (...) {
-        setText(COL_STATUS,"?");
-        return;
     }
     update();
 }
@@ -124,11 +122,20 @@ void FileListViewItem::refreshMe()
     } catch (svn::ClientException e) {
         setText(COL_STATUS,e.message());
         return;
-    } catch (...) {
-        setText(COL_STATUS,"?");
-        return;
     }
     update();
+}
+
+void FileListViewItem::checkNewer()
+{
+#if 0
+    if (!svn::Url::isValid (fullName().local8Bit()) && m_Stat.isRealVersioned()) {
+        svn::Status tmpStat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit(),true);
+        if (tmpStat.reposTextStatus()!=svn_wc_status_none||tmpStat.reposPropStatus()!=svn_wc_status_none) {
+            setText(COL_STATUS,i18n("Needs update"));
+        }
+    }
+#endif
 }
 
 void FileListViewItem::refreshStatus(bool childs,QPtrList<FileListViewItem>*exclude,bool depsonly)
@@ -272,6 +279,7 @@ void FileListViewItem::update()
     }
     setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.entry().lockEntry().Owner().c_str()));
 #endif
+    checkNewer();
 //    setText(COL_CURRENT_REV,QString("%1").arg(stat.entry().revision()));
 }
 

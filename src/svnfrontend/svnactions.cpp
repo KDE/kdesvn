@@ -32,6 +32,7 @@
 #include "svncpp/context_listener.hpp"
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
+#include "helpers/stl2qt.h"
 
 #include <qstring.h>
 #include <qmap.h>
@@ -241,15 +242,15 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     bool second = false;
     QString codetext = "";
     for (bit=blame->begin();bit!=blame->end();++bit) {
-        codetext = bit->line().c_str();
+        codetext = helpers::stl2qt::stl2qtstring(bit->line());
         codetext.replace(" ","&nbsp;");
         codetext.replace("\"","&quot;");
         codetext.replace("<","&lt;");
         codetext.replace(">","&gt;");
         codetext.replace("\t","&nbsp;&nbsp;&nbsp;&nbsp;");
         text+=(second?rowb:rowc)+QString("%1").arg(bit->revision())+
-            rows+QString("%1").arg(bit->author().c_str())+rows+
-            QString("%1").arg(bit->lineNumber())+rows+
+            rows+(bit->author().size()?helpers::stl2qt::stl2qtstring(bit->author()):i18n("Unknown"))+
+            rows+QString("%1").arg(bit->lineNumber())+rows+
             QString("<code>%1</code>").arg(codetext)+rowe;
             second = !second;
     }
@@ -315,7 +316,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
     if (dlg) {
         ptr->setFont(KGlobalSettings::fixedFont());
         ptr->setWordWrap(QTextEdit::NoWrap);
-        ptr->setText(QString::fromLocal8Bit(content.c_str()));
+        ptr->setText(helpers::stl2qt::stl2qtstring(content));
         dlg->exec();
         dlg->saveDialogSize("cat_display_dlg",false);
         delete dlg;
@@ -365,7 +366,7 @@ void SvnActions::slotMkdir()
         return;
     }
 
-    ex = target.path().c_str();
+    ex = helpers::stl2qt::stl2qtstring(target.path());
     emit dirAdded(ex,k);
     EMIT_FINISHED;
 }
@@ -403,17 +404,20 @@ void SvnActions::slotInfo()
     EMIT_FINISHED;
     QString text = "<html>";
     svn::InfoEntries::const_iterator it;
-    QString rb = "<tr><td align=\"right\"><b>";
-    QString re = "</td></tr>\n";
-    QString cs = "</b>:</td><td>";
+    static QString rb = "<tr><td align=\"right\"><b>";
+    static QString re = "</td></tr>\n";
+    static QString cs = "</b>:</td><td>";
     for (it=entries.begin();it!=entries.end();++it) {
         text+="<p><table>";
         if ((*it).Name().size()) {
-            text+=rb+i18n("Name")+cs+QString((*it).Name().c_str())+re;
+            text+=rb+i18n("Name")+cs+helpers::stl2qt::stl2qtstring((*it).Name())+re;
         }
         text+=rb+i18n("URL")+cs+QString((*it).url())+re;
         if ((*it).reposRoot().size()) {
-            text+=rb+i18n("Canonical repository url")+cs+QString((*it).reposRoot().c_str())+re;
+            text+=rb+i18n("Canonical repository url")+cs+helpers::stl2qt::stl2qtstring((*it).reposRoot())+re;
+        }
+        if ((*it).checksum().size()) {
+            text+=rb+i18n("Checksum")+cs+helpers::stl2qt::stl2qtstring((*it).checksum())+re;
         }
         text+=rb+i18n("Type")+cs;
         switch ((*it).kind()) {
@@ -452,36 +456,37 @@ void SvnActions::slotInfo()
         }
         text+=re;
         text+=rb+i18n("UUID")+cs+QString((*it).uuid())+re;
-        text+=rb+i18n("Last author")+cs+QString((*it).cmtAuthor())+re;
-        text+=rb+i18n("Last changed")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
-        text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Last author")+cs+helpers::stl2qt::stl2qtstring((*it).cmtAuthor())+re;
+        text+=rb+i18n("Last commited")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
+        text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qt((*it).textTime()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
         if ((*it).conflictNew().size()) {
-            text+=rb+i18n("New version of conflicted file")+cs+QString((*it).conflictNew().c_str())+re;
+            text+=rb+i18n("New version of conflicted file")+cs+helpers::stl2qt::stl2qtstring((*it).conflictNew())+re;
         }
         if ((*it).conflictOld().size()) {
-            text+=rb+i18n("Old version of conflicted file")+cs+QString((*it).conflictOld().c_str())+re;
+            text+=rb+i18n("Old version of conflicted file")+cs+helpers::stl2qt::stl2qtstring((*it).conflictOld())+re;
         }
         if ((*it).conflictWrk().size()) {
             text+=rb+i18n("Working version of conflicted file")+
-                cs+QString((*it).conflictWrk().c_str())+re;
+                cs+helpers::stl2qt::stl2qtstring((*it).conflictWrk())+re;
         }
         if ((*it).prejfile().size()) {
-            text+=rb+i18n("Reject file")+
-                cs+QString((*it).prejfile().c_str())+re;
+            text+=rb+i18n("Property reject file")+
+                cs+helpers::stl2qt::stl2qtstring((*it).prejfile())+re;
         }
 
         if ((*it).copyfromUrl().size()) {
-            text+=rb+i18n("Copy from URL")+cs+QString((*it).copyfromUrl().c_str())+re;
+            text+=rb+i18n("Copy from URL")+cs+helpers::stl2qt::stl2qtstring((*it).copyfromUrl())+re;
         }
         if ((*it).lockEntry().Locked()) {
-            text+=rb+i18n("Lock token")+cs+QString((*it).lockEntry().Token().c_str())+re;
-            text+=rb+i18n("Owner")+cs+QString((*it).lockEntry().Owner().c_str())+re;
+            text+=rb+i18n("Lock token")+cs+helpers::stl2qt::stl2qtstring((*it).lockEntry().Token())+re;
+            text+=rb+i18n("Owner")+cs+helpers::stl2qt::stl2qtstring((*it).lockEntry().Owner())+re;
             text+=rb+i18n("Locked on")+cs+
                 helpers::sub2qt::apr_time2qt((*it).lockEntry().Date()).toString(Qt::LocalDate)+
                 re;
             text+=rb+i18n("Lock comment")+cs+
-                QString((*it).lockEntry().Comment().c_str())+re;
+                helpers::stl2qt::stl2qtstring((*it).lockEntry().Comment())+re;
         }
         text+="</table></p>\n";
     }
@@ -642,10 +647,10 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     KTempFile tfile;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
-        ex = QString::fromLocal8Bit(m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
+        ex = helpers::stl2qt::stl2qtstring(m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
             svn::Path(what.local8Bit()),
             start, end,
-            true,false,false).c_str());
+            true,false,false));
     } catch (svn::ClientException e) {
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
@@ -1110,11 +1115,6 @@ void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&r
     }
 }
 
-void SvnActions::jobResult(KIO::Job*)
-{
-    EMIT_REFRESH;
-}
-
 /*!
     \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)
  */
@@ -1174,4 +1174,24 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
         emit clientException(QString::fromLocal8Bit(e.message()));
         return;
     }
+}
+
+
+/*!
+    \fn SvnActions::makeStatus(const QString&what,bool rec, bool all, bool noign)
+ */
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
+{
+    QString ex;
+    try {
+        /* settings about unknown and ignored files must be setable */
+        //                                          rec   all  up   noign
+        dlist = m_Svnclient.status(what.local8Bit(),false,true,false,true);
+    } catch (svn::ClientException e) {
+        //Message box!
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return false;
+    }
+    return true;
 }

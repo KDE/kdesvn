@@ -129,10 +129,11 @@ namespace svn
      * Throws an exception if an error occurs
      *
      * @param path File to gather status.
+     * @param update if check against repository if new updates are there (for WC only)
      * @return a Status with Statis.isVersioned = FALSE
      */
     Status
-    singleStatus (const char * path) throw (ClientException);
+    singleStatus (const char * path,bool update=false) throw (ClientException);
 
   /**
      * Executes a revision checkout.

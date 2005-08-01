@@ -276,19 +276,11 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         what.truncate(what.length()-1);
     }
 
-    try {
-        /* settings about unknown and ignored files must be setable */
-        //                                                          rec   all  up    noign
-        dlist = m_SvnWrapper->svnclient()->status(what.local8Bit(),false,true,false,true);
-    } catch (svn::ClientException e) {
-        //Message box!
-        m_LastException = QString::fromLocal8Bit(e.message());
-        emit sigLogMessage(m_LastException);
-        return false;
-    } catch (...) {
-        kdDebug()<<"Other exception"<<endl;
+    if (!m_SvnWrapper->makeStatus(what,dlist)) {
         return false;
     }
+
+    viewport()->setUpdatesEnabled(false);
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem * pitem = 0;
     bool main_found = false;
@@ -308,6 +300,8 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         pitem = _parent;
     }
     insertDirs(pitem,dlist);
+    viewport()->setUpdatesEnabled(true);
+    viewport()->repaint();
     return true;
 }
 
@@ -708,6 +702,10 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
 
     QString what = (_parent!=NULL?_parent->fullName():baseUri());
     svn::StatusEntries dlist;
+    if (!m_SvnWrapper->makeStatus(what,dlist)) {
+        return;
+    }
+#if 0
     try {
         /* settings about unknown and ignored files must be setable */
         //                                                              rec   all  up    noign
@@ -721,6 +719,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
         kdDebug()<< "Other exception" << endl;
         return;
     }
+#endif
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem*k;
     bool gotit = false;

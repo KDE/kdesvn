@@ -41,7 +41,6 @@
 #include "svncpp/info_entry.hpp"
 #include "svncpp/url.hpp"
 
-
 namespace svn
 {
   static svn_error_t *
@@ -93,8 +92,10 @@ namespace svn
                             const svn_info_t*info,
                             apr_pool_t *pool)
   {
-    InfoEntries*ieb = (InfoEntries*)baton;
-    ieb->push_back(InfoEntry(info,path));
+    StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
+    path = apr_pstrdup (seb->pool, path);
+    InfoEntry*e = new InfoEntry(info,path);
+    apr_hash_set (seb->hash, path, APR_HASH_KEY_STRING, e);
     return NULL;
   }
 #endif
@@ -151,10 +152,10 @@ namespace svn
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
-      descend,
-      get_all,
-      update,
-      no_ignore,
+      descend,       // recurse (true) or immediate childs
+      get_all,       // get all not only interesting
+      update,        // check for updates
+      no_ignore,     // hide ignored files or not
       false,       /// @todo first shot - should get a parameter
       *context,    //client ctx
       pool);
@@ -295,7 +296,7 @@ namespace svn
   }
 
   static Status
-  localSingleStatus (const char * path, Context * context)
+  localSingleStatus (const char * path, Context * context,bool update=false)
   {
     svn_error_t *error;
     apr_hash_t *status_hash;
@@ -317,7 +318,7 @@ namespace svn
       &baton,        // status baton
       false,
       true,
-      false,
+      update,
       false,
       false,
       *context,    //client ctx
@@ -331,7 +332,7 @@ namespace svn
       &baton,        // status baton
       false,
       true,
-      false,
+      update,
       false,
       *context,    //client ctx
       pool);
@@ -378,12 +379,12 @@ namespace svn
   }
 
   Status
-  Client::singleStatus (const char * path) throw (ClientException)
+  Client::singleStatus (const char * path,bool update) throw (ClientException)
   {
     if (Url::isValid (path))
       return remoteSingleStatus (this, path, m_context);
     else
-      return localSingleStatus (path, m_context);
+      return localSingleStatus (path, m_context,update);
   }
 
   const LogEntries *
@@ -445,15 +446,39 @@ namespace svn
     InfoEntries ientries;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     Pool pool;
-    svn_error_t *error =
+    svn_error_t *error = NULL;
+    StatusEntriesBaton baton;
+    apr_hash_t *status_hash;
+
+    status_hash = apr_hash_make (pool);
+    baton.hash = status_hash;
+    baton.pool = pool;
+
+    error =
       svn_client_info(path,
                       peg_revision.revision (),
                       rev.revision (),
                       &InfoEntryFunc,
-                      &ientries,
+                      &baton,
                       rec,
                       *m_context,    //client ctx
                       pool);
+
+    apr_array_header_t *statusarray =
+      svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
+                            pool);
+    int i;
+
+    /* Loop over array, printing each name/status-structure */
+    for (i=0; i< statusarray->nelts; ++i)
+    {
+      const svn_sort__item_t *item;
+      InfoEntry*e = NULL;
+      item = &APR_ARRAY_IDX (statusarray, i, const svn_sort__item_t);
+      e = (InfoEntry *) item->value;
+      ientries.push_back(*e);
+      delete e;
+    }
     if (error != NULL)
       throw ClientException (error);
 #endif

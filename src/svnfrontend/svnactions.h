@@ -61,6 +61,7 @@ public:
     void makeDelete(const std::vector<svn::Path>&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist);
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);
@@ -120,7 +121,6 @@ signals:
 protected slots:
     virtual void wroteStdin(KProcess*);
     virtual void procClosed(KProcess*);
-    virtual void jobResult(KIO::Job*);
 };
 
 #endif

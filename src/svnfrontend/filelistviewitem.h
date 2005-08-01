@@ -66,6 +66,7 @@ protected:
     QDateTime fullDate;
     void makePixmap();
     void init();
+    void checkNewer();
 };
 
 typedef QPtrList<FileListViewItem> FileListViewItemList;

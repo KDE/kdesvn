@@ -46,7 +46,7 @@ const QString CContextListener::action_strings[]={
     I18N_NOOP("Update"), //svn_wc_notify_update_update
     I18N_NOOP("Update complete"),
     I18N_NOOP("Update external module"),
-    I18N_NOOP("Status complete"),
+    QString::null, // status completed - will not send is just noisy
     I18N_NOOP("Status on external"), //svn_wc_notify_status_external
     I18N_NOOP("Commit Modified"),
     I18N_NOOP("Commit Added"),
@@ -79,13 +79,13 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
     if (action>=smax_actionstring||action<0) {
         return QString::null;
     }
-    return i18n(action_strings[action]);
+    return action_strings[action].isEmpty()?QString::null:i18n(action_strings[action]);
 }
 
 QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 {
     if (state > svn_wc_notify_state_conflicted || state<0) return QString::null;
-    return i18n(notify_state_strings[state]);
+    return notify_state_strings[state].isEmpty()?QString::null:i18n(notify_state_strings[state]);
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)

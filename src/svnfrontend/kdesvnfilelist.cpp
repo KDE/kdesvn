@@ -424,7 +424,7 @@ void kdesvnfilelist::enableActions()
     m_BlameRangeAction->setEnabled(single&&!dir);
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
-    m_MkdirAction->setEnabled(dir);
+    m_MkdirAction->setEnabled(dir||!m_isLocal&&isopen);
     m_switchRepository->setEnabled(dir);
     m_changeToRepository->setEnabled(isLocal());
     m_ImportDirsIntoCurrent->setEnabled(dir);

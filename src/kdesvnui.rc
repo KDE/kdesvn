@@ -119,6 +119,8 @@
   <Action name="make_svn_commit" />
  </Menu>
  <Menu name="general_remote">
+  <Action name="make_svn_mkdir" />
+  <Separator/>
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />
  </Menu>

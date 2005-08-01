@@ -28,6 +28,7 @@
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
 #include "helpers/dirnotify.h"
+#include "helpers/sshagent.h"
 
 #include <qvbox.h>
 #include <qpainter.h>
@@ -66,6 +67,9 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     m_SelectedItems = 0;
     m_baseUri="";
     m_pList = new KdesvnFileListPrivate;
+
+    SshAgent ssh;
+    ssh.querySshAgent();
 
     setMultiSelection(true);
     setSelectionModeExt(FileManager);
@@ -225,6 +229,11 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         m_SelectedItems->clear();
     }
     m_LastException="";
+
+/*
+    SshAgent ssh;
+    ssh.addSshIdentities();
+*/
     if (!noReinit) m_SvnWrapper->reInitClient();
     m_baseUri = url.url();
     m_isLocal = false;
@@ -234,6 +243,12 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     }
     while (m_baseUri.endsWith("/")) {
         m_baseUri.truncate(m_baseUri.length()-1);
+    }
+    kdDebug()<<"Protokoll " << url.protocol()<<endl;
+    SshAgent *ssh = 0;
+    if (url.protocol()=="svn+ssh") {
+        ssh = new SshAgent();
+        ssh->addSshIdentities();
     }
 #if 0
     if (m_isLocal) {
@@ -254,6 +269,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     enableActions();
     emit changeCaption(m_baseUri);
     emit sigUrlOpend(result);
+    delete ssh;
     return result;
 }
 
@@ -374,6 +390,8 @@ kdesvnfilelist::~kdesvnfilelist()
 {
     delete m_pList;
     delete m_SelectedItems;
+    SshAgent ssh;
+    ssh.killSshAgent();
 }
 
 void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)

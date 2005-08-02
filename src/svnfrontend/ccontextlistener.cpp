@@ -20,12 +20,17 @@
 #include "ccontextlistener.h"
 #include "authdialogimpl.h"
 #include "logmsg_impl.h"
+#include "ssltrustprompt_impl.h"
+#include "helpers/stl2qt.h"
+
 #include <klocale.h>
 #include <kapp.h>
 #include <kinputdialog.h>
+#include <kpassdlg.h>
 #include <kdebug.h>
+#include <kfiledialog.h>
+
 #include <qtextstream.h>
-#include "ssltrustprompt_impl.h"
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 const int CContextListener::smax_actionstring=svn_wc_notify_failed_unlock+1;
@@ -201,20 +206,34 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
     return ACCEPT_PERMANENTLY;
 }
 
-/* fragt nach einer datei wo ein PKCS#12 cert enthalten ist -> filedialog */
 bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
 {
     kdDebug()<<"CContextListener::contextSslClientCertPrompt " << certFile << endl;
-
-    return false;
+    QString afile = KFileDialog::getOpenFileName(QString::null,
+        QString::null,
+        0,
+        i18n("Open a file with a #PKCS12 certificate"));
+    if (afile.isEmpty()) {
+        return false;
+    }
+    certFile = helpers::stl2qt::qt2stlstring(afile);
+    return true;
 }
 
-/* passwort abfrage */
-bool CContextListener::contextSslClientCertPwPrompt (std::string & /* password */,
-                                   const std::string & realm, bool & /* maySave*/)
+bool CContextListener::contextSslClientCertPwPrompt (std::string & password,
+                                   const std::string & realm, bool & maysave)
 {
-    kdDebug()<<"SslClientCertPwPrompt: " << realm.c_str() << endl;
-    return false;
+    QCString npass;
+    int keep = 1;
+    int res = KPasswordDialog::getPassword(npass,
+        i18n("Enter password for realm %1").arg(helpers::stl2qt::stl2qtstring(realm)),
+        &keep);
+    if (res!=KPasswordDialog::Accepted) {
+        return false;
+    }
+    maysave = keep!=0;
+    password = helpers::stl2qt::qt2stlstring(npass);
+    return true;
 }
 
 #include "ccontextlistener.moc"

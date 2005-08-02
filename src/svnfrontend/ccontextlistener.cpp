@@ -190,7 +190,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
     const svn::ContextListener::SslServerTrustData & data , apr_uint32_t & /* acceptedFailures */)
 {
     bool ok,saveit;
-
+    emit waitShow(true);
     if (!SslTrustPrompt_impl::sslTrust(data.hostname,
         data.fingerprint,
         data.validFrom,
@@ -200,6 +200,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
         &ok,&saveit)) {
         return DONT_ACCEPT;
     }
+    emit waitShow(false);
     if (!saveit) {
         return ACCEPT_TEMPORARILY;
     }
@@ -209,10 +210,12 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
 {
     kdDebug()<<"CContextListener::contextSslClientCertPrompt " << certFile << endl;
+    emit waitShow(true);
     QString afile = KFileDialog::getOpenFileName(QString::null,
         QString::null,
         0,
         i18n("Open a file with a #PKCS12 certificate"));
+    emit waitShow(false);
     if (afile.isEmpty()) {
         return false;
     }
@@ -223,11 +226,13 @@ bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
 bool CContextListener::contextSslClientCertPwPrompt (std::string & password,
                                    const std::string & realm, bool & maysave)
 {
+    emit waitShow(true);
     QCString npass;
     int keep = 1;
     int res = KPasswordDialog::getPassword(npass,
         i18n("Enter password for realm %1").arg(helpers::stl2qt::stl2qtstring(realm)),
         &keep);
+    emit waitShow(false);
     if (res!=KPasswordDialog::Accepted) {
         return false;
     }

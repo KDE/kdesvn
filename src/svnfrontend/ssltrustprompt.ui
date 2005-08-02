@@ -1,0 +1,43 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>SslTrustPrompt</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>SslTrustPrompt</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>303</width>
+            <height>185</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>SslTrustPrompt</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>m_MainLabel</cstring>
+            </property>
+            <property name="text">
+                <string>c</string>
+            </property>
+        </widget>
+        <widget class="KTextBrowser">
+            <property name="name">
+                <cstring>m_ContentText</cstring>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<customwidgets>
+</customwidgets>
+<layoutdefaults spacing="2" margin="2"/>
+<includehints>
+    <includehint>ktextbrowser.h</includehint>
+</includehints>
+</UI>

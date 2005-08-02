@@ -25,6 +25,7 @@
 #include <kinputdialog.h>
 #include <kdebug.h>
 #include <qtextstream.h>
+#include "ssltrustprompt_impl.h"
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 const int CContextListener::smax_actionstring=svn_wc_notify_failed_unlock+1;
@@ -181,18 +182,38 @@ bool CContextListener::contextGetLogMessage (std::string & msg)
 }
 
 svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTrustPrompt (
-    const svn::ContextListener::SslServerTrustData & /* data */, apr_uint32_t & /* acceptedFailures */)
+    const svn::ContextListener::SslServerTrustData & data , apr_uint32_t & /* acceptedFailures */)
 {
+    bool ok,saveit;
+
+    if (!SslTrustPrompt_impl::sslTrust(data.hostname,
+        data.fingerprint,
+        data.validFrom,
+        data.validUntil,
+        data.issuerDName,
+        data.realm,
+        &ok,&saveit)) {
+        return DONT_ACCEPT;
+    }
+    if (!saveit) {
+        return ACCEPT_TEMPORARILY;
+    }
+    return ACCEPT_PERMANENTLY;
 }
 
-bool CContextListener::contextSslClientCertPrompt (std::string & /* certFile*/)
+/* fragt nach einer datei wo ein PKCS#12 cert enthalten ist -> filedialog */
+bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
 {
+    kdDebug()<<"CContextListener::contextSslClientCertPrompt " << certFile << endl;
+
     return false;
 }
 
+/* passwort abfrage */
 bool CContextListener::contextSslClientCertPwPrompt (std::string & /* password */,
-                                   const std::string & /* realm */, bool & /* maySave*/)
+                                   const std::string & realm, bool & /* maySave*/)
 {
+    kdDebug()<<"SslClientCertPwPrompt: " << realm.c_str() << endl;
     return false;
 }
 

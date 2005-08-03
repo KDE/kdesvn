@@ -1178,20 +1178,33 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 
 
 /*!
-    \fn SvnActions::makeStatus(const QString&what,bool rec, bool all, bool noign)
+    \fn SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
  */
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
 {
+    KConfigGroup cs(KGlobal::config(), "subversion");
+    bool display_ignores = cs.readBoolEntry("display_ignored_files",true);
+    //bool display_unknown = cs.readBoolEntry("display_unknown_files",true);
+
     QString ex;
     try {
-        /* settings about unknown and ignored files must be setable */
-        //                                          rec   all  up   noign
-        dlist = m_Svnclient.status(what.local8Bit(),false,true,false,true);
+        //                                          rec    all  up     noign
+        dlist = m_Svnclient.status(what.local8Bit(),false,true,false,display_ignores);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);
         return false;
     }
+    return true;
+}
+
+
+/*!
+    \fn SvnActions::makeIgnoreEntry(const QString&which)
+ */
+bool SvnActions::makeIgnoreEntry(const QString&which)
+{
+    if (!which.isEmpty()) return false;
     return true;
 }

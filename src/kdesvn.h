@@ -97,6 +97,8 @@ protected:
 public slots:
     virtual void slotDispPopup(const QString&);
     void slotUrlOpened(bool);
+    virtual void slotDisplayIgnored(bool);
+    virtual void slotDisplayUnkown(bool);
 private slots:
     void fileNew();
     void fileOpen();
@@ -132,6 +134,8 @@ private:
 
 protected slots:
     virtual void slotLogFollowNodes(bool);
+signals:
+    void refreshTree();
 };
 
 #endif // _KDESVN_H_

@@ -60,6 +60,7 @@
      <text>Quick settings</text>
      <Action name="toggle_use_kompare" />
      <Action name="toggle_log_follows" />
+     <Action name="toggle_ignored_files" />
    </Menu>
   </Menu>
  </MenuBar>
@@ -93,6 +94,8 @@
   <Separator/>
   <Action name="make_svn_lock"/>
   <Action name="make_svn_unlock"/>
+  <Separator/>
+  <Action name="make_view_refresh" />
  </Menu>
  <Menu name="remote_context" >
   <Action name="make_svn_log_full" />
@@ -113,16 +116,22 @@
   <Separator/>
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />
+  <Separator/>
+  <Action name="make_view_refresh" />
  </Menu>
  <Menu name="general_local">
   <Action name="make_svn_headupdate" />
   <Action name="make_svn_commit" />
+  <Separator/>
+  <Action name="make_view_refresh" />
  </Menu>
  <Menu name="general_remote">
   <Action name="make_svn_mkdir" />
   <Separator/>
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />
+  <Separator/>
+  <Action name="make_view_refresh" />
  </Menu>
  <Menu name="general_empty" >
   <Action name="file_open" />

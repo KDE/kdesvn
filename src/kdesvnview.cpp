@@ -57,6 +57,7 @@ kdesvnView::kdesvnView(QWidget *parent)
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
     connect(m_flist,SIGNAL(sigShowPopup(const QString&)),parent,SLOT(slotDispPopup(const QString&)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
+    connect(parent,SIGNAL(refreshTree()),m_flist,SLOT(refreshCurrentTree()));
 }
 
 void kdesvnView::slotAppendLog(const QString& text)

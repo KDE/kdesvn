@@ -141,10 +141,12 @@ void kdesvn::setupActions()
     tmpAction->setEnabled(false);
     tmpAction = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
 
+    KConfigGroup cs(KGlobal::config(), "general_items");
+    KConfigGroup cs2(KGlobal::config(), "subversion");
+
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
             actionCollection(),"toggle_use_kompare");
-    KConfigGroup cs(KGlobal::config(), "general_items");
     toggletemp->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
@@ -152,6 +154,15 @@ void kdesvn::setupActions()
             actionCollection(),"toggle_log_follows");
     toggletemp->setChecked(cs.readBoolEntry("log_follows_nodes",true));
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
+
+    toggletemp = new KToggleAction(i18n("Display ignored files"),KShortcut(),
+            actionCollection(),"toggle_ignored_files");
+    toggletemp->setChecked(cs2.readBoolEntry("display_ignored_files",true));
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
+    toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
+            actionCollection(),"toggle_unknown_files");
+    toggletemp->setChecked(cs2.readBoolEntry("display_unknown_files",true));
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
 
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
@@ -202,35 +213,6 @@ void kdesvn::readProperties(KConfig *config)
     if (!url.isEmpty())
         m_view->openURL(KURL(url));
 }
-
-#if 0
-void kdesvn::dragEnterEvent(QDragEnterEvent *event)
-{
-    // accept uri drops only
-    event->accept(KURLDrag::canDecode(event));
-    kdDebug(0)<<"Dragenter"<<endl;
-}
-
-void kdesvn::dropEvent(QDropEvent *event)
-{
-    // this is a very simplistic implementation of a drop event.  we
-    // will only accept a dropped URL.  the Qt dnd code can do *much*
-    // much more, so please read the docs there
-    KURL::List urls;
-
-    kdDebug(0)<<"Dropevent"<<endl;
-
-    // see if we can decode a URI.. if not, just ignore it
-    if (KURLDrag::decode(event, urls) && !urls.isEmpty())
-    {
-        // okay, we have a URI.. process it
-        const KURL &url = urls.first();
-
-        // load in the file
-        load(url);
-    }
-}
-#endif
 
 void kdesvn::fileNew()
 {
@@ -393,4 +375,25 @@ void kdesvn::slotLogFollowNodes(bool how)
 {
     KConfigGroup cs(KGlobal::config(), "general_items");
     cs.writeEntry("toggle_log_follows",how);
+}
+
+
+/*!
+    \fn kdesvn::slotDisplayIgnored(bool)
+ */
+void kdesvn::slotDisplayIgnored(bool how)
+{
+    KConfigGroup cs(KGlobal::config(), "subversion");
+    cs.writeEntry("display_ignored_files",how);
+    emit refreshTree();
+}
+
+
+/*!
+    \fn kdesvn::slotDisplayUnkown(bool)
+ */
+void kdesvn::slotDisplayUnkown(bool how)
+{
+    KConfigGroup cs(KGlobal::config(), "subversion");
+    cs.writeEntry("display_unknown_files",how);
 }

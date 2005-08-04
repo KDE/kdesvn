@@ -244,6 +244,9 @@ or menu bars. -->
 </sect2>
 <sect2>
 <title>The <guimenu>Bookmark</guimenu> Menu</title>
+<para>
+see konqueror help
+</para>
 </sect2>
 <sect2 id="kdesvn-subversion-menu">
 <title>The <guimenu>Subversion</guimenu> Menu</title>
@@ -264,14 +267,16 @@ current status.
 <title>General subversion actions</title>
 <variablelist>
 <varlistentry>
-<term><menuchoice>
+<term>
+<menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo></shortcut>
 <guimenu>Subversion</guimenu>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Full log</guimenuitem>
 </menuchoice></term>
-<listitem><action>Display</action> lifetime log of the current selected item.
-Be carefull, that may real long!
+<listitem>
+<para><action>Display</action> lifetime log of the current selected item.
+Be carefull, that may real long!</para>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -281,7 +286,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Log...</guimenuitem>
 </menuchoice></term>
-<listitem>Displays a log where a revision/date range may selected before.</listitem>
+<listitem><para>Displays a log where a revision/date range may selected before.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -290,7 +295,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Details</guimenuitem>
 </menuchoice></term>
-<listitem>Displays detailed information about selected item(s)</listitem>
+<listitem><para>Displays detailed information about selected item(s)</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -298,7 +303,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Blame</guimenuitem>
 </menuchoice></term>
-<listitem>Makes annotate list over all checkins. That may consume time!</listitem>
+<listitem><para>Makes annotate list over all checkins. That may consume time!</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -306,7 +311,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Blame range</guimenuitem>
 </menuchoice></term>
-<listitem>Annotate a range of commits for a file.</listitem>
+<listitem><para>Annotate a range of commits for a file.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -314,7 +319,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Cat head</guimenuitem>
 </menuchoice></term>
-<listitem>Shows the content of the last commited version of that entry. (May different to working copy version if working on a WC!)</listitem>
+<listitem><para>Shows the content of the last commited version of that entry. (May different to working copy version if working on a WC!)</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -323,7 +328,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Move</guimenuitem>
 </menuchoice></term>
-<listitem>Move or rename item inside working copy or in repository</listitem>
+<listitem><para>Move or rename item inside working copy or in repository</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -332,7 +337,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Copy</guimenuitem>
 </menuchoice></term>
-<listitem>Copy item inside working copy or in repository</listitem>
+<listitem><para>Copy item inside working copy or in repository</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -341,7 +346,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Delete selected files/dirs</guimenuitem>
 </menuchoice></term>
-<listitem>Delete selected entries. If working in a working copy you must commit your deletions after that.</listitem>
+<listitem><para>Delete selected entries. If working in a working copy you must commit your deletions after that.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -349,7 +354,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Make (sub-)directory</guimenuitem>
 </menuchoice></term>
-<listitem>Create a new directory</listitem>
+<listitem><para>Create a new directory</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -357,7 +362,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Import directories into current</guimenuitem>
 </menuchoice></term>
-<listitem>Let you select directories you want to import into current selected directory</listitem>
+<listitem><para>Let you select directories you want to import into current selected directory</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -365,7 +370,7 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Checkout a repository</guimenuitem>
 </menuchoice></term>
-<listitem>Creates a new working copy of a repository</listitem>
+<listitem><para>Creates a new working copy of a repository</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -373,9 +378,9 @@ Be carefull, that may real long!
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Export a repository</guimenuitem>
 </menuchoice></term>
-<listitem>Exports a repository to filesystem, eg. creates a clean directory tree without
+<listitem><para>Exports a repository to filesystem, eg. creates a clean directory tree without
 subversion information.
-</listitem>
+</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -383,8 +388,8 @@ subversion information.
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Lock current items</guimenuitem>
 </menuchoice></term>
-<listitem>Mark current items as locked. Read the subversion handbook before using that!
-</listitem>
+<listitem><para>Mark current items as locked. Read the subversion handbook before using that!
+</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -392,8 +397,8 @@ subversion information.
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Unlock current items</guimenuitem>
 </menuchoice></term>
-<listitem>Remove locks on current items. Read the subversion handbook before using that!
-</listitem>
+<listitem><para>Remove locks on current items. Read the subversion handbook before using that!
+</para></listitem>
 </varlistentry>
 </variablelist>
 </sect3>
@@ -406,7 +411,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Update to head</guimenuitem>
 </menuchoice></term>
-<listitem>Update working copy to HEAD of repository</listitem>
+<listitem><para>Update working copy to HEAD of repository</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -414,7 +419,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Update to revision...</guimenuitem>
 </menuchoice></term>
-<listitem>Update working copy to a specific revision of repository</listitem>
+<listitem><para>Update working copy to a specific revision of repository</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -423,7 +428,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Commit</guimenuitem>
 </menuchoice></term>
-<listitem>Commit changes inside working copy for selected items to repository.</listitem>
+<listitem><para>Commit changes inside working copy for selected items to repository.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -432,7 +437,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Diff against head</guimenuitem>
 </menuchoice></term>
-<listitem>Diffs current working copy against head of repository.</listitem>
+<listitem><para>Diffs current working copy against head of repository.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -441,7 +446,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Properties</guimenuitem>
 </menuchoice></term>
-<listitem>View/Edit properties assigend with current entry.</listitem>
+<listitem><para>View/Edit properties assigend with current entry.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -450,7 +455,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Add selected files/dirs</guimenuitem>
 </menuchoice></term>
-<listitem>Add selecte files and/or directories to version control.</listitem>
+<listitem><para>Add selected files and/or directories to version control.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -458,7 +463,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Revert current changes</guimenuitem>
 </menuchoice></term>
-<listitem>Revert changes made in working copy and updates to last updated state.</listitem>
+<listitem><para>Revert changes made in working copy and updates to last updated state.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -466,7 +471,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Resolve recursive</guimenuitem>
 </menuchoice></term>
-<listitem>Mark conflicted items as not conflicted and removes associated files.</listitem>
+<listitem><para>Mark conflicted items as not conflicted and removes associated files.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -474,7 +479,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Merge two revisions</guimenuitem>
 </menuchoice></term>
-<listitem>Merge two revisions of that entry into working copy.</listitem>
+<listitem><para>Merge two revisions of that entry into working copy.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -482,7 +487,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Cleanup</guimenuitem>
 </menuchoice></term>
-<listitem>Cleanup the working copy and removes (commit-)locks if any</listitem>
+<listitem><para>Cleanup the working copy and removes (commit-)locks if any</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -490,7 +495,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Switch repository</guimenuitem>
 </menuchoice></term>
-<listitem>Switch the root of the current working copy. &quot;relocate&quot; is not supported this moment.</listitem>
+<listitem><para>Switch the root of the current working copy. &quot;relocate&quot; is not supported this moment.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -498,7 +503,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Switch to repository</guimenuitem>
 </menuchoice></term>
-<listitem>Opens the repository browsing this working copy comes from.</listitem>
+<listitem><para>Opens the repository browsing this working copy comes from.</para></listitem>
 </varlistentry>
 </variablelist>
 </sect3>
@@ -511,7 +516,7 @@ subversion information.
 <guisubmenu>Repository</guisubmenu>
 <guimenuitem>Checkout current repository path</guimenuitem>
 </menuchoice></term>
-<listitem>Create a working copy from the current selected entry if a directory.</listitem>
+<listitem><para>Create a working copy from the current selected entry if a directory.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -519,7 +524,7 @@ subversion information.
 <guisubmenu>Repository</guisubmenu>
 <guimenuitem>Export current repository path</guimenuitem>
 </menuchoice></term>
-<listitem>Create a clean copy on local filesystem from the current selected entry if a directory.</listitem>
+<listitem><para>Create a clean copy on local filesystem from the current selected entry if a directory.</para></listitem>
 </varlistentry>
 </variablelist>
 </sect3>
@@ -543,7 +548,7 @@ subversion information.
 <term>
 <guibutton>Open</guibutton>
 </term>
-<listitem>Open a working copy</listitem>
+<listitem><para>Open a working copy</para></listitem>
 </varlistentry>
 </variablelist>
 </sect2>
@@ -617,7 +622,6 @@ Documentation copyright 2005 Rajko Albrecht <email>ral@alwins-world.de</email>
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
 &underFDL;               <!-- FDL: do not remove -->
- ara
 <!-- Determine which license your application is licensed under, 
      and delete all the remaining licenses below:
 

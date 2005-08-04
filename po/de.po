@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-02 22:20+0200\n"
-"PO-Revision-Date: 2005-08-02 22:30+0200\n"
+"POT-Creation-Date: 2005-08-04 21:13+0200\n"
+"PO-Revision-Date: 2005-08-04 21:16+0200\n"
 "Last-Translator: Rajko Albrecht <ral@alwins-world.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,15 +69,15 @@ msgstr "Ausgeführte Subversionbibliothek: %1"
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: kdesvnview.cpp:111
+#: kdesvnview.cpp:112
 msgid "Repository opened"
 msgstr "Repository geöffnet"
 
-#: kdesvnview.cpp:116
+#: kdesvnview.cpp:117
 msgid "Could not open repository"
 msgstr "Konnte Repository nicht öffnen"
 
-#: kdesvnview.cpp:141
+#: kdesvnview.cpp:142
 msgid "No repository open"
 msgstr "Keine Repository geöffnet"
 
@@ -124,9 +124,9 @@ msgstr "Subversion Werkzeugleiste"
 #: rc.cpp:30
 #, no-c-format
 msgid "SVN Log"
-msgstr ""
+msgstr "SVN Log"
 
-#: rc.cpp:33 svnfrontend/svnactions.cpp:241
+#: rc.cpp:33 svnfrontend/svnactions.cpp:242
 #, no-c-format
 msgid "Author"
 msgstr "Autor"
@@ -162,7 +162,7 @@ msgid "Or insert one of the last:"
 msgstr "Oder nutze einen der letzten:"
 
 #: rc.cpp:64 rc.cpp:86 svnfrontend/checkoutinfo_impl.cpp:78
-#: svnfrontend/svnactions.cpp:974
+#: svnfrontend/svnactions.cpp:975
 #, no-c-format
 msgid "Recursive"
 msgstr "Rekursiv"
@@ -200,7 +200,7 @@ msgstr "Ausgabe nach:"
 #: rc.cpp:90
 #, no-c-format
 msgid "Handle unrelated as related items"
-msgstr ""
+msgstr "Behandle nicht zugehörige als zugehörige Items"
 
 #: rc.cpp:93
 #, no-c-format
@@ -227,10 +227,10 @@ msgstr "Eigenschaftswert:"
 msgid "Property name:"
 msgstr "Eigenschaftsname:"
 
-#: rc.cpp:122 svnfrontend/svnactions.cpp:1125
+#: rc.cpp:122 svnfrontend/svnactions.cpp:1126
 #, no-c-format
 msgid "Copy / Move"
-msgstr ""
+msgstr "Kopieren / Bewegen"
 
 #: rc.cpp:125
 #, no-c-format
@@ -280,10 +280,10 @@ msgstr "Erzwinge"
 #: rc.cpp:154
 #, no-c-format
 msgid "Open after job"
-msgstr ""
+msgstr "Öffne nach Ausführung"
 
-#: rc.cpp:157 svnfrontend/svnactions.cpp:132 svnfrontend/svnactions.cpp:279
-#: svnfrontend/svnactions.cpp:742
+#: rc.cpp:157 svnfrontend/svnactions.cpp:133 svnfrontend/svnactions.cpp:280
+#: svnfrontend/svnactions.cpp:743
 #, no-c-format
 msgid "Revisions"
 msgstr "Revisionen"
@@ -358,31 +358,39 @@ msgstr "Passwort:"
 msgid "Store password"
 msgstr "Speichere Passwort"
 
-#: kdesvn.cpp:139 kdesvn.cpp:262
+#: kdesvn.cpp:139 kdesvn.cpp:244
 msgid "Open working copy"
 msgstr "Öffne Arbeitskopie"
 
-#: kdesvn.cpp:142 kdesvn.cpp:247
+#: kdesvn.cpp:142 kdesvn.cpp:229
 msgid "Open remote repository"
 msgstr "Öffne entfernte Repository"
 
-#: kdesvn.cpp:145
+#: kdesvn.cpp:148
 msgid "Use \"Kompare\" for displaying diffs"
 msgstr "Nutze \"Kompare\" zur Unterschieddarstellung"
 
-#: kdesvn.cpp:151
+#: kdesvn.cpp:153
 msgid "Logs follows node changes"
 msgstr "Logs folgen Knotenänderungen"
 
-#: kdesvn.cpp:312
+#: kdesvn.cpp:158
+msgid "Display ignored files"
+msgstr "Zeige ignorierte Dateien an"
+
+#: kdesvn.cpp:162
+msgid "Display unknown files"
+msgstr ""
+
+#: kdesvn.cpp:294
 msgid "Sorry, not finished. Will follow as soon as possible."
 msgstr ""
 
-#: kdesvn.cpp:312
+#: kdesvn.cpp:294
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: kdesvn.cpp:337
+#: kdesvn.cpp:319
 msgid "Ready"
 msgstr "Fertig"
 
@@ -436,7 +444,7 @@ msgstr "Doppelte Eigenschaft"
 
 #: svnfrontend/logmsg_impl.cpp:104
 msgid "Commit log"
-msgstr ""
+msgstr "Commit log"
 
 #: svnfrontend/importdir_logmsg.cpp:46
 msgid "Create subdir %1 on import"
@@ -466,7 +474,7 @@ msgstr "Füge zur Versionskontrolle hinzu"
 msgid "Restore missing"
 msgstr "Stelle fehlendes wieder her"
 
-#: svnfrontend/ccontextlistener.cpp:46 svnfrontend/svnactions.cpp:988
+#: svnfrontend/ccontextlistener.cpp:46 svnfrontend/svnactions.cpp:989
 msgid "Revert"
 msgstr "Rückgängig"
 
@@ -482,7 +490,7 @@ msgstr "Gelöst"
 msgid "Skip"
 msgstr "Überspringe"
 
-#: svnfrontend/ccontextlistener.cpp:50 svnfrontend/filelistviewitem.cpp:237
+#: svnfrontend/ccontextlistener.cpp:50 svnfrontend/filelistviewitem.cpp:247
 msgid "Deleted"
 msgstr "Gelöscht"
 
@@ -566,277 +574,277 @@ msgstr ""
 msgid "Modified state got conflicting mods."
 msgstr ""
 
-#: svnfrontend/ccontextlistener.cpp:215
+#: svnfrontend/ccontextlistener.cpp:217
 msgid "Open a file with a #PKCS12 certificate"
 msgstr ""
 
-#: svnfrontend/ccontextlistener.cpp:229
+#: svnfrontend/ccontextlistener.cpp:233
 msgid "Enter password for realm %1"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:64
+#: svnfrontend/svnactions.cpp:65
 msgid "Finished"
 msgstr "Beendet"
 
-#: svnfrontend/svnactions.cpp:179
+#: svnfrontend/svnactions.cpp:180
 msgid "Got no logs"
 msgstr "Habe keine Logs erhalten"
 
-#: svnfrontend/svnactions.cpp:226
+#: svnfrontend/svnactions.cpp:227
 msgid "Error getting blame"
 msgstr "Fehler beim Holen der Zuweisung"
 
-#: svnfrontend/svnactions.cpp:231
+#: svnfrontend/svnactions.cpp:232
 msgid "Got no annotate"
 msgstr "Kein Annotate erhalten"
 
-#: svnfrontend/svnactions.cpp:241
+#: svnfrontend/svnactions.cpp:242
 msgid "Line"
 msgstr "Zeile"
 
-#: svnfrontend/svnactions.cpp:252 svnfrontend/svnactions.cpp:435
-#: svnfrontend/svnactions.cpp:454
+#: svnfrontend/svnactions.cpp:253 svnfrontend/svnactions.cpp:436
+#: svnfrontend/svnactions.cpp:455
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: svnfrontend/svnactions.cpp:259
+#: svnfrontend/svnactions.cpp:260
 msgid "Blame %1"
 msgstr "Zuweisung %1"
 
-#: svnfrontend/svnactions.cpp:305
+#: svnfrontend/svnactions.cpp:306
 msgid "Error getting content"
 msgstr "Fehler beim Inhalt holen"
 
-#: svnfrontend/svnactions.cpp:310
+#: svnfrontend/svnactions.cpp:311
 msgid "Got no content"
 msgstr "Keinen Inhalt erhalten"
 
-#: svnfrontend/svnactions.cpp:315
+#: svnfrontend/svnactions.cpp:316
 msgid "Content of %1"
 msgstr "Inhalt von %1"
 
-#: svnfrontend/svnactions.cpp:335
+#: svnfrontend/svnactions.cpp:336
 msgid "May not make subdirs of a file"
 msgstr "Kann kein Unterverzeichnis einer Datei anlegen"
 
-#: svnfrontend/svnactions.cpp:343
+#: svnfrontend/svnactions.cpp:344
 msgid "New Dir"
 msgstr "Neues Verzeichnis"
 
-#: svnfrontend/svnactions.cpp:343
+#: svnfrontend/svnactions.cpp:344
 msgid "Enter (sub-)directory name:"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:413 svnfrontend/kdesvnfilelist.cpp:79
+#: svnfrontend/svnactions.cpp:414 svnfrontend/kdesvnfilelist.cpp:79
 msgid "Name"
 msgstr "Name"
 
-#: svnfrontend/svnactions.cpp:415
+#: svnfrontend/svnactions.cpp:416
 msgid "URL"
 msgstr "URL"
 
-#: svnfrontend/svnactions.cpp:417
+#: svnfrontend/svnactions.cpp:418
 msgid "Canonical repository url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:420
+#: svnfrontend/svnactions.cpp:421
 msgid "Checksum"
 msgstr "Prüfsumme"
 
-#: svnfrontend/svnactions.cpp:422
+#: svnfrontend/svnactions.cpp:423
 msgid "Type"
 msgstr "Typ"
 
-#: svnfrontend/svnactions.cpp:425
+#: svnfrontend/svnactions.cpp:426
 msgid "Absent"
 msgstr "Abwesend"
 
-#: svnfrontend/svnactions.cpp:431
+#: svnfrontend/svnactions.cpp:432
 msgid "Directory"
 msgstr "Verzeichnis"
 
-#: svnfrontend/svnactions.cpp:439
+#: svnfrontend/svnactions.cpp:440
 msgid "Schedule"
 msgstr "Schedule"
 
-#: svnfrontend/svnactions.cpp:442
+#: svnfrontend/svnactions.cpp:443
 msgid "Normal"
 msgstr "Normal"
 
-#: svnfrontend/svnactions.cpp:445
+#: svnfrontend/svnactions.cpp:446
 msgid "Addition"
 msgstr "Hinzufügen"
 
-#: svnfrontend/svnactions.cpp:448
+#: svnfrontend/svnactions.cpp:449
 msgid "Deletion"
 msgstr "Löschen"
 
-#: svnfrontend/svnactions.cpp:458
+#: svnfrontend/svnactions.cpp:459
 msgid "UUID"
 msgstr "UUID"
 
-#: svnfrontend/svnactions.cpp:459 svnfrontend/kdesvnfilelist.cpp:82
+#: svnfrontend/svnactions.cpp:460 svnfrontend/kdesvnfilelist.cpp:82
 msgid "Last author"
 msgstr "Letzter Autor"
 
-#: svnfrontend/svnactions.cpp:460
+#: svnfrontend/svnactions.cpp:461
 msgid "Last commited"
 msgstr "Zuletzt geschickt"
 
-#: svnfrontend/svnactions.cpp:461
+#: svnfrontend/svnactions.cpp:462
 msgid "Last revision"
 msgstr "Letzte Revision"
 
-#: svnfrontend/svnactions.cpp:462
+#: svnfrontend/svnactions.cpp:463
 msgid "Content last changed"
 msgstr "Inhalt zuletzt geändert"
 
-#: svnfrontend/svnactions.cpp:463
+#: svnfrontend/svnactions.cpp:464
 msgid "Property last changed"
 msgstr "Eigenschaft zuletzt geändert"
 
-#: svnfrontend/svnactions.cpp:465
+#: svnfrontend/svnactions.cpp:466
 msgid "New version of conflicted file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:468
+#: svnfrontend/svnactions.cpp:469
 msgid "Old version of conflicted file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:471
+#: svnfrontend/svnactions.cpp:472
 msgid "Working version of conflicted file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:475
+#: svnfrontend/svnactions.cpp:476
 msgid "Property reject file"
 msgstr "Eigenschaftszurückweisungsdatei"
 
-#: svnfrontend/svnactions.cpp:480
+#: svnfrontend/svnactions.cpp:481
 msgid "Copy from URL"
 msgstr "Kopie von URL"
 
-#: svnfrontend/svnactions.cpp:483
+#: svnfrontend/svnactions.cpp:484
 msgid "Lock token"
 msgstr "Sperrmerkmal"
 
-#: svnfrontend/svnactions.cpp:484
+#: svnfrontend/svnactions.cpp:485
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: svnfrontend/svnactions.cpp:485
+#: svnfrontend/svnactions.cpp:486
 msgid "Locked on"
 msgstr "Gesperrt auf"
 
-#: svnfrontend/svnactions.cpp:488
+#: svnfrontend/svnactions.cpp:489
 msgid "Lock comment"
 msgstr "Sperrkommentar"
 
-#: svnfrontend/svnactions.cpp:495
+#: svnfrontend/svnactions.cpp:496
 msgid "Infolist"
 msgstr "Infoliste"
 
-#: svnfrontend/svnactions.cpp:599
+#: svnfrontend/svnactions.cpp:600
 msgid "On remote browsing you must select an item!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:674
+#: svnfrontend/svnactions.cpp:675
 msgid "Diff display"
 msgstr "Diff-Anzeige"
 
-#: svnfrontend/svnactions.cpp:779
+#: svnfrontend/svnactions.cpp:780
 msgid "Which files or directories should I add?"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:788
+#: svnfrontend/svnactions.cpp:789
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr "<center>Der Eintrag<br>%1<br>ist versioniert - breche ab.</center>"
 
-#: svnfrontend/svnactions.cpp:842
+#: svnfrontend/svnactions.cpp:843
 msgid "Export repository"
 msgstr "Exportiere Repository"
 
-#: svnfrontend/svnactions.cpp:842 svnfrontend/svnactions.cpp:879
-#: svnfrontend/kdesvnfilelist.cpp:193
+#: svnfrontend/svnactions.cpp:843 svnfrontend/svnactions.cpp:880
+#: svnfrontend/kdesvnfilelist.cpp:194
 msgid "Checkout a repository"
 msgstr "Checkout einer Repository"
 
-#: svnfrontend/svnactions.cpp:869
+#: svnfrontend/svnactions.cpp:870
 msgid "Exporting a file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:869
+#: svnfrontend/svnactions.cpp:870
 msgid "Checking out a file?"
 msgstr "Eine Datei auschecken?"
 
-#: svnfrontend/svnactions.cpp:879 svnfrontend/kdesvnfilelist.cpp:195
+#: svnfrontend/svnactions.cpp:880 svnfrontend/kdesvnfilelist.cpp:196
 msgid "Export a repository"
 msgstr "Exportiere Repository"
 
-#: svnfrontend/svnactions.cpp:912
+#: svnfrontend/svnactions.cpp:913
 msgid "Checkout"
 msgstr "Auschecken"
 
-#: svnfrontend/svnactions.cpp:912
+#: svnfrontend/svnactions.cpp:913
 msgid "Exporting"
 msgstr "Exportiere"
 
-#: svnfrontend/svnactions.cpp:912
+#: svnfrontend/svnactions.cpp:913
 msgid "Checking out"
 msgstr "Checke aus"
 
-#: svnfrontend/svnactions.cpp:940
+#: svnfrontend/svnactions.cpp:941
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr "<center>Der Eintrag<br>%1</br>ist nicht versionier. Breche ab.</center>"
 
-#: svnfrontend/svnactions.cpp:966
+#: svnfrontend/svnactions.cpp:967
 msgid "Revert entries"
 msgstr "Mache Einträge rückgängig"
 
-#: svnfrontend/svnactions.cpp:974
+#: svnfrontend/svnactions.cpp:975
 msgid "Really revert that entries to pristine state?"
 msgstr "Einträge wirklich auf den vorherigen Zustand zurück setzen?"
 
-#: svnfrontend/svnactions.cpp:988
+#: svnfrontend/svnactions.cpp:989
 msgid "Reverting items"
 msgstr "Mache Einträge rückgängig"
 
-#: svnfrontend/svnactions.cpp:1009 svnfrontend/svnactions.cpp:1047
+#: svnfrontend/svnactions.cpp:1010 svnfrontend/svnactions.cpp:1048
 msgid "Switch url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1009
+#: svnfrontend/svnactions.cpp:1010
 msgid "Switching url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1027
+#: svnfrontend/svnactions.cpp:1028
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1039
+#: svnfrontend/svnactions.cpp:1040
 msgid "Error getting entry to switch"
 msgstr "Fehler beim Switch"
 
-#: svnfrontend/svnactions.cpp:1069
+#: svnfrontend/svnactions.cpp:1070
 msgid "Cleanup"
 msgstr "Aufräumen"
 
-#: svnfrontend/svnactions.cpp:1069
+#: svnfrontend/svnactions.cpp:1070
 msgid "Cleaning up directory"
 msgstr "Räume Verzeichnis auf"
 
-#: svnfrontend/svnactions.cpp:1081
+#: svnfrontend/svnactions.cpp:1082
 msgid "Resolve"
 msgstr "Auflösen"
 
-#: svnfrontend/svnactions.cpp:1081
+#: svnfrontend/svnactions.cpp:1082
 msgid "Marking resolved"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1093
+#: svnfrontend/svnactions.cpp:1094
 msgid "Importing items"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1125
+#: svnfrontend/svnactions.cpp:1126
 msgid "Copy or Moving entries"
 msgstr ""
 
@@ -914,75 +922,79 @@ msgstr ""
 msgid "Marking files or dirs resolved"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:180
+#: svnfrontend/kdesvnfilelist.cpp:173
+msgid "Ignore/Unignore current item"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:181
 msgid "Diff against head"
 msgstr "Differenz gegen HEAD"
 
-#: svnfrontend/kdesvnfilelist.cpp:182
+#: svnfrontend/kdesvnfilelist.cpp:183
 msgid "Merge two revisions"
 msgstr "Merge zwei Revisionen"
 
-#: svnfrontend/kdesvnfilelist.cpp:184
+#: svnfrontend/kdesvnfilelist.cpp:185
 msgid "Merge two revisions of that entry into itself"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:189
+#: svnfrontend/kdesvnfilelist.cpp:190
 msgid "Export current repository path"
 msgstr "Exportiere aktuellen Repositorypfad"
 
-#: svnfrontend/kdesvnfilelist.cpp:197
+#: svnfrontend/kdesvnfilelist.cpp:198
 msgid "Refresh view"
 msgstr "Ansicht erneuern"
 
-#: svnfrontend/kdesvnfilelist.cpp:500
+#: svnfrontend/kdesvnfilelist.cpp:502
 msgid "SVN Error"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:591
+#: svnfrontend/kdesvnfilelist.cpp:593
 msgid "Cannot import into multiple targets!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:607
+#: svnfrontend/kdesvnfilelist.cpp:609
 msgid "Cannot import into remote targets!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:626 svnfrontend/kdesvnfilelist.cpp:630
+#: svnfrontend/kdesvnfilelist.cpp:628 svnfrontend/kdesvnfilelist.cpp:632
 msgid "Import log"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1087
+#: svnfrontend/kdesvnfilelist.cpp:1089
 msgid "Nothing selected for delete"
 msgstr "Nichts zum Löschen ausgewählt"
 
-#: svnfrontend/kdesvnfilelist.cpp:1105
+#: svnfrontend/kdesvnfilelist.cpp:1107
 msgid "Really delete that entries?"
 msgstr "Diese Einträge wirklich löschen?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1142
+#: svnfrontend/kdesvnfilelist.cpp:1144
 msgid "Please hold the line"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1162
+#: svnfrontend/kdesvnfilelist.cpp:1164
 msgid "Nothing selected for lock"
 msgstr "Nichts zum Sperren ausgewählt"
 
-#: svnfrontend/kdesvnfilelist.cpp:1167
+#: svnfrontend/kdesvnfilelist.cpp:1169
 msgid "Lock message"
 msgstr "Sperrmeldung"
 
-#: svnfrontend/kdesvnfilelist.cpp:1170
+#: svnfrontend/kdesvnfilelist.cpp:1172
 msgid "Steal lock?"
 msgstr "Sperre übernehmen?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1201
+#: svnfrontend/kdesvnfilelist.cpp:1203
 msgid "Nothing selected for unlock"
 msgstr "Nichts zum Entsperren ausgewählt"
 
-#: svnfrontend/kdesvnfilelist.cpp:1204
+#: svnfrontend/kdesvnfilelist.cpp:1206
 msgid "Break lock or ignore missing locks?"
 msgstr "Breche Sperre oder ignoriere fehlende Sperren?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1204
+#: svnfrontend/kdesvnfilelist.cpp:1206
 msgid "Unlocking items"
 msgstr "Entsperre Einträge"
 
@@ -1042,51 +1054,51 @@ msgstr ""
 msgid "Enter merge range"
 msgstr "Gebe Mergebereich an"
 
-#: svnfrontend/filelistviewitem.cpp:135
+#: svnfrontend/filelistviewitem.cpp:140
 msgid "Needs update"
 msgstr ""
 
-#: svnfrontend/filelistviewitem.cpp:222
+#: svnfrontend/filelistviewitem.cpp:232
 msgid "Not versioned"
 msgstr "Nicht versioniert"
 
-#: svnfrontend/filelistviewitem.cpp:228
+#: svnfrontend/filelistviewitem.cpp:238
 msgid "Locally modified"
 msgstr "Lokal bearbeitet"
 
-#: svnfrontend/filelistviewitem.cpp:231
+#: svnfrontend/filelistviewitem.cpp:241
 msgid "Locally added"
 msgstr "Lokal hinzugefügt"
 
-#: svnfrontend/filelistviewitem.cpp:234
+#: svnfrontend/filelistviewitem.cpp:244
 msgid "Missing"
 msgstr "Fehlt"
 
-#: svnfrontend/filelistviewitem.cpp:240
+#: svnfrontend/filelistviewitem.cpp:250
 msgid "Replaced"
 msgstr "Ersetzt"
 
-#: svnfrontend/filelistviewitem.cpp:243
+#: svnfrontend/filelistviewitem.cpp:253
 msgid "Ignored"
 msgstr "Ignoriert"
 
-#: svnfrontend/filelistviewitem.cpp:246
+#: svnfrontend/filelistviewitem.cpp:256
 msgid "External"
 msgstr "Extern"
 
-#: svnfrontend/filelistviewitem.cpp:249
+#: svnfrontend/filelistviewitem.cpp:259
 msgid "Conflict"
 msgstr ""
 
-#: svnfrontend/filelistviewitem.cpp:252
+#: svnfrontend/filelistviewitem.cpp:262
 msgid "Merged"
 msgstr ""
 
-#: svnfrontend/filelistviewitem.cpp:255
+#: svnfrontend/filelistviewitem.cpp:265
 msgid "Incomplete"
 msgstr "Unvollständig"
 
-#: svnfrontend/filelistviewitem.cpp:263
+#: svnfrontend/filelistviewitem.cpp:273
 msgid "Property modified"
 msgstr "Eigenschaft verändert"
 

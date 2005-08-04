@@ -22,7 +22,6 @@
     <Action name="make_svn_copy" />
     <Action name="make_svn_remove" />
     <Action name="make_svn_mkdir" />
-    <Action name="make_cleanup" />
     <Action name="make_import_dirs_into_current" />
     <Separator/>
     <Action name="make_svn_checkout" />
@@ -44,6 +43,7 @@
     <Action name="make_resolved" />
     <Action name="make_svn_merge_revisions" />
     <Separator/>
+    <Action name="make_cleanup" />
     <Action name="make_svn_switch" />
     <Separator/>
     <Action name="make_switch_to_repo" />
@@ -124,6 +124,7 @@
   <Action name="make_svn_commit" />
   <Separator/>
   <Action name="make_view_refresh" />
+  <Action name="make_cleanup" />
  </Menu>
  <Menu name="general_remote">
   <Action name="make_svn_mkdir" />

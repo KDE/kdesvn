@@ -485,6 +485,14 @@ subversion information.
 <term><menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Ignore/Unignore current item</guimenuitem>
+</menuchoice></term>
+<listitem><para>Edit property of parent directory of current item so that selected item will marked as ignored if not set otherwise remove it from ignorelist.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Cleanup</guimenuitem>
 </menuchoice></term>
 <listitem><para>Cleanup the working copy and removes (commit-)locks if any</para></listitem>

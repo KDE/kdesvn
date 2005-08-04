@@ -245,11 +245,9 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     while (m_baseUri.endsWith("/")) {
         m_baseUri.truncate(m_baseUri.length()-1);
     }
-    kdDebug()<<"Protokoll " << url.protocol()<<endl;
-    SshAgent *ssh = 0;
     if (url.protocol()=="svn+ssh") {
-        ssh = new SshAgent();
-        ssh->addSshIdentities();
+        SshAgent ssh;
+        ssh.addSshIdentities();
     }
 #if 0
     if (m_isLocal) {
@@ -270,7 +268,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     enableActions();
     emit changeCaption(m_baseUri);
     emit sigUrlOpend(result);
-    delete ssh;
     return result;
 }
 

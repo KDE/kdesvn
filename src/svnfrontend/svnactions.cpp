@@ -1227,17 +1227,14 @@ bool SvnActions::makeIgnoreEntry(FileListViewItem*which,bool unignore)
         svn::PropertiesMap mp = pm[0].second;
         data = helpers::stl2qt::stl2qtstring(mp["svn:ignore"]);
     }
-    kdDebug()<<"Data " << data << endl;
     bool result = false;
     QRegExp reg("\\b"+QRegExp::escape(name)+"\\n");
     if (reg.search(data)!=-1) {
-        kdDebug()<<"Remove " << endl;
         if (unignore) {
             data.replace(reg,"");
             result = true;
         }
     } else {
-        kdDebug()<<"Insert"<< endl;
         data = data.stripWhiteSpace();
         if (!unignore) {
             if (!data.isEmpty())

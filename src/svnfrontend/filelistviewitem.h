@@ -55,6 +55,9 @@ public:
     bool isParent(QListViewItem*which);
 
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
+    QString getParentDir()const;
+    bool isRealVersioned()const;
+    bool isIgnored()const;
 
 protected:
     short int sortChar;

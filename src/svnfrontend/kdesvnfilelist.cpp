@@ -170,6 +170,7 @@ void kdesvnfilelist::setupActions()
     m_ResolvedAction = new KAction("Resolve recursive",KShortcut(),
         this,SLOT(slotResolved()),m_filesAction,"make_resolved");
     m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
+    m_IgnoreAction = new KAction(i18n("Ignore/Unignore current item"),KShortcut(),this,SLOT(slotIgnore()),m_filesAction,"make_svn_ignore");
 
     m_UpdateHead = new KAction("Update to head","vcs_update",
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateHeadRec()),m_filesAction,"make_svn_headupdate");
@@ -433,6 +434,7 @@ void kdesvnfilelist::enableActions()
     m_DelCurrent->setEnabled( (multi||single));
     m_LockAction->setEnabled( (multi||single));
     m_UnlockAction->setEnabled( (multi||single));
+    m_IgnoreAction->setEnabled((single)&&singleSelected()->parent()!=0&&!singleSelected()->isRealVersioned());
 
     m_RenameAction->setEnabled(single && (!m_isLocal||singleSelected()!=firstChild()));
     m_CopyAction->setEnabled(single && (!m_isLocal||singleSelected()!=firstChild()));
@@ -1214,4 +1216,17 @@ void kdesvnfilelist::slotUnlock()
     }
     m_SvnWrapper->makeUnlock(displist,breakit);
     refreshCurrentTree();
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotIgnore()
+ */
+void kdesvnfilelist::slotIgnore()
+{
+    FileListViewItem*item = singleSelected();
+    if (!item || item->isRealVersioned()) return;
+    if (m_SvnWrapper->makeIgnoreEntry(item,item->isIgnored())) {
+        refreshCurrentTree();
+    }
 }

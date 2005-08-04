@@ -55,6 +55,7 @@
 #include <kdebug.h>
 #include <qstylesheet.h>
 #include <kconfig.h>
+#include <qregexp.h>
 
 #if 0
 #include <khtml_part.h>
@@ -1203,8 +1204,58 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
 /*!
     \fn SvnActions::makeIgnoreEntry(const QString&which)
  */
-bool SvnActions::makeIgnoreEntry(const QString&which)
+bool SvnActions::makeIgnoreEntry(FileListViewItem*which,bool unignore)
 {
-    if (!which.isEmpty()) return false;
-    return true;
+    if (!which) return false;
+    QString parentName = which->getParentDir();
+    if (parentName.isEmpty()) return false;
+    QString name = which->shortName();
+    QString ex;
+    svn::Path p(helpers::stl2qt::qt2stlstring(parentName));
+    svn::Revision r(svn_opt_revision_unspecified);
+    svn::PathPropertiesMapList pm;
+    try {
+        pm = m_Svnclient.propget("svn:ignore",p,r);
+    } catch (svn::ClientException e) {
+        //Message box!
+        ex = QString::fromLocal8Bit(e.message());
+        emit clientException(ex);
+        return false;
+    }
+    QString data = "";
+    if (pm.size()>0) {
+        svn::PropertiesMap mp = pm[0].second;
+        data = helpers::stl2qt::stl2qtstring(mp["svn:ignore"]);
+    }
+    kdDebug()<<"Data " << data << endl;
+    bool result = false;
+    QRegExp reg("\\b"+QRegExp::escape(name)+"\\n");
+    if (reg.search(data)!=-1) {
+        kdDebug()<<"Remove " << endl;
+        if (unignore) {
+            data.replace(reg,"");
+            result = true;
+        }
+    } else {
+        kdDebug()<<"Insert"<< endl;
+        data = data.stripWhiteSpace();
+        if (!unignore) {
+            if (!data.isEmpty())
+                data+="\n";
+            data+=name;
+            result = true;
+        }
+    }
+    if (result) {
+
+        try {
+            m_Svnclient.propset("svn:ignore",helpers::stl2qt::qt2stlstring(data).c_str(),p,r);
+        } catch (svn::ClientException e) {
+            //Message box!
+            ex = QString::fromLocal8Bit(e.message());
+            emit clientException(ex);
+            return false;
+        }
+    }
+    return result;
 }

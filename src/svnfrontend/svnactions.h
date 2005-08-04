@@ -62,7 +62,7 @@ public:
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
     bool makeStatus(const QString&what, svn::StatusEntries&dlist);
-    bool makeIgnoreEntry(const QString&which);
+    bool makeIgnoreEntry(FileListViewItem*which,bool unignore);
 
 protected:
     SvnActions(QObject *parent = 0, const char *name = 0);

@@ -126,6 +126,11 @@ void FileListViewItem::refreshMe()
     update();
 }
 
+bool FileListViewItem::isRealVersioned()const
+{
+    return m_Stat.isRealVersioned();
+}
+
 void FileListViewItem::checkNewer()
 {
 #if 0
@@ -213,6 +218,11 @@ bool FileListViewItem::isParent(QListViewItem*which)
         }
     }
     return false;
+}
+
+bool FileListViewItem::isIgnored()const
+{
+    return m_Stat.textStatus()==svn_wc_status_ignored;
 }
 
 void FileListViewItem::update()
@@ -311,4 +321,15 @@ void FileListViewItem::updateStatus(const svn::Status&s)
 {
     m_Stat = s;
     init();
+}
+
+
+/*!
+    \fn FileListViewItem::getParentDir()const
+ */
+ QString FileListViewItem::getParentDir()const
+{
+    FileListViewItem*temp = static_cast<FileListViewItem*>(parent());
+    if (!temp) return QString::null;
+    return temp->fullName();
 }

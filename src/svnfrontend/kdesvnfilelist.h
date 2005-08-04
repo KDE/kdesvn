@@ -76,7 +76,7 @@ protected:
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
     KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction,*m_MergeRevisionAction;
     KAction*m_RenameAction,*m_CopyAction;
-    KAction*m_LockAction,*m_UnlockAction;
+    KAction*m_LockAction,*m_UnlockAction,*m_IgnoreAction;
 
     SvnActions*m_SvnWrapper;
 
@@ -159,6 +159,8 @@ public slots:
 protected slots:
     virtual void slotLock();
     virtual void slotUnlock();
+protected slots:
+    void slotIgnore();
 };
 
 #endif

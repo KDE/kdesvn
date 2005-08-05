@@ -615,6 +615,7 @@ namespace svn
       }
     }
 
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     void
     notify (const svn_wc_notify_t *action)
     {
@@ -623,6 +624,7 @@ namespace svn
         listener->contextNotify(action);
       }
     }
+#endif
 
     /**
      * if the @a listener is set call the method

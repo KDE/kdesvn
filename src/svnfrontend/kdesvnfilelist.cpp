@@ -62,7 +62,7 @@ public:
 };
 
 kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
- : KListView(parent, name),m_SvnWrapper(new SvnActions(this))
+ : KListView(parent, name),ItemDisplay(),m_SvnWrapper(new SvnActions(this))
 {
     m_SelectedItems = 0;
     m_baseUri="";
@@ -92,8 +92,6 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
     connect(m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
-    connect(m_SvnWrapper,SIGNAL(dirAdded(const QString&,FileListViewItem*)),this,
-        SLOT(slotDirAdded(const QString&,FileListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(FileListViewItem*)),this,SLOT(refreshCurrent(FileListViewItem*)));
@@ -131,9 +129,9 @@ void kdesvnfilelist::setupActions()
         KShortcut(Key_F5),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
 
     /* 2. actions only on files */
-    m_BlameAction = new KAction("&Blame","flag",KShortcut(),m_SvnWrapper,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
+    m_BlameAction = new KAction("&Blame","flag",KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_BlameRangeAction = new KAction("Blame range","flag",KShortcut(),m_SvnWrapper,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
+    m_BlameRangeAction = new KAction("Blame range","flag",KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_CatAction = new KAction("&Cat head","contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
@@ -143,7 +141,7 @@ void kdesvnfilelist::setupActions()
 
     /* 3. actions only on dirs */
     m_MkdirAction = new KAction("Make (sub-)directory","folder_new",
-        KShortcut(),m_SvnWrapper,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
+        KShortcut(),this,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_switchRepository = new KAction("Switch repository","goto",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
     m_switchRepository->setToolTip(i18n("Switch repository of working copy (\"svn switch\")"));
@@ -179,7 +177,7 @@ void kdesvnfilelist::setupActions()
     m_commitAction = new KAction("Commit","vcs_commit",
         KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
     m_simpleDiffHead = new KAction(i18n("Diff against head"),"vcs_diff",
-        KShortcut(CTRL+Key_H),m_SvnWrapper,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
+        KShortcut(CTRL+Key_H),this,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
     m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"merge",
         KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
     m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of that entry into itself"));
@@ -212,6 +210,22 @@ FileListViewItemList* kdesvnfilelist::allSelected()
         m_SelectedItems = new FileListViewItemList;
     }
     return m_SelectedItems;
+}
+
+FileListViewItem*kdesvnfilelist::singleSelectedOrMain()
+{
+    if (singleSelected()!=0) {
+        return singleSelected();
+    }
+    if (m_isLocal&&firstChild()) {
+        return static_cast<FileListViewItem*>(firstChild());
+    }
+    return 0;
+}
+
+QWidget*kdesvnfilelist::realWidget()
+{
+    return this;
 }
 
 FileListViewItem* kdesvnfilelist::singleSelected()
@@ -1225,5 +1239,78 @@ void kdesvnfilelist::slotIgnore()
     if (!item || item->isRealVersioned()) return;
     if (m_SvnWrapper->makeIgnoreEntry(item,item->isIgnored())) {
         refreshCurrentTree();
+    }
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotBlame()
+ */
+void kdesvnfilelist::slotBlame()
+{
+    FileListViewItem*k = singleSelected();
+    if (!k) return;
+    svn::Revision start(svn::Revision::START);
+    svn::Revision end(svn::Revision::HEAD);
+    m_SvnWrapper->makeBlame(start,end,k);
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotRangeBlame()
+ */
+void kdesvnfilelist::slotRangeBlame()
+{
+    FileListViewItem*k = singleSelected();
+    if (!k) return;
+    Rangeinput_impl*rdlg;
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    if (!dlg) {
+        return;
+    }
+    if (dlg->exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
+        m_SvnWrapper->makeBlame(r.first,r.second,k);
+    }
+    dlg->saveDialogSize("revisions_dlg",false);
+    delete dlg;
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotSimpleDiff()
+ */
+void kdesvnfilelist::slotSimpleDiff()
+{
+    FileListViewItem*k = singleSelected();
+    QString what;
+    if (!k) {
+        what=baseUri();
+    }else{
+        what=k->fullName();
+    }
+    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD);
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotMkdir()
+ */
+void kdesvnfilelist::slotMkdir()
+{
+    FileListViewItem*k = singleSelected();
+    QString parentDir;
+    if (k) {
+        if (!k->isDir()) {
+            KMessageBox::sorry(0,i18n("May not make subdirs of a file"));
+            return;
+        }
+        parentDir=k->fullName();
+    } else {
+        parentDir=baseUri();
+    }
+    QString ex = m_SvnWrapper->makeMkdir(parentDir);
+    if (!ex.isEmpty()) {
+        slotDirAdded(ex,k);
     }
 }

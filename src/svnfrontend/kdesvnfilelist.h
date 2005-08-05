@@ -21,6 +21,7 @@
 #define KDESVNFILELIST_H
 
 #include "filelistviewitem.h"
+#include "itemdisplay.h"
 #include "svncpp/status.hpp"
 #include "svncpp/client.hpp"
 
@@ -44,7 +45,7 @@ namespace KIO {
 /**
 @author Rajko Albrecht
 */
-class kdesvnfilelist : public KListView
+class kdesvnfilelist : public KListView,public ItemDisplay
 {
     Q_OBJECT
     friend class FileListViewItem;
@@ -53,11 +54,13 @@ public:
     kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
 
-    bool openURL( const KURL &url,bool noReinit=false );
+    virtual bool openURL( const KURL &url,bool noReinit=false );
+    virtual const QString&baseUri()const{return m_baseUri;}
+    virtual bool isLocal()const{return m_isLocal;}
+    virtual FileListViewItem*singleSelectedOrMain();
+    virtual QWidget*realWidget();
     const QString&lastError()const{return m_LastException;}
     const svn::Status&maindir()const{return m_mainEntry;}
-    const QString&baseUri()const{return m_baseUri;}
-    bool isLocal()const{return m_isLocal;}
 
     KActionCollection*filesActions();
 
@@ -156,11 +159,14 @@ public slots:
     virtual void refreshCurrentTree();
     virtual void refreshCurrent(FileListViewItem*);
     virtual void closeMe();
+    virtual void slotMkdir();
 protected slots:
     virtual void slotLock();
     virtual void slotUnlock();
-protected slots:
-    void slotIgnore();
+    virtual void slotIgnore();
+    virtual void slotBlame();
+    virtual void slotRangeBlame();
+    virtual void slotSimpleDiff();
 };
 
 #endif

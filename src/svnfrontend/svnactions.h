@@ -26,7 +26,7 @@
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 
-class kdesvnfilelist;
+class ItemDisplay;
 class FileListViewItem;
 class KDialog;
 class KDialogBase;
@@ -49,7 +49,7 @@ class SvnActions : public QObject
 {
     Q_OBJECT
 public:
-    SvnActions(kdesvnfilelist *parent = 0, const char *name = 0);
+    SvnActions(ItemDisplay *parent, const char *name = 0);
     ~SvnActions();
     void reInitClient();
     //svn::Client&svnClient(){return m_Svnclient;}
@@ -63,37 +63,30 @@ public:
     void makeUnlock(const QStringList&,bool);
     bool makeStatus(const QString&what, svn::StatusEntries&dlist);
     bool makeIgnoreEntry(FileListViewItem*which,bool unignore);
-
-protected:
-    SvnActions(QObject *parent = 0, const char *name = 0);
     void makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k);
-    kdesvnfilelist* m_ParentList;
+    void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
+    void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
+    void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
+    QString makeMkdir(const QString&);
+
+protected:
+    ItemDisplay* m_ParentList;
 
     CContextListener*m_SvnContext;
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 
-    void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
-
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);
-
-    virtual void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
-    virtual void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
 
 public slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
-    virtual void slotBlame();
-    virtual void slotRangeBlame();
-    virtual void slotMkdir();
     virtual void slotInfo();
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();
-    virtual void slotSimpleDiff();
-    virtual void slotSimpleDiffBase();
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();
     virtual void slotAdd();
@@ -113,7 +106,6 @@ public slots:
 
 signals:
     void clientException(const QString&);
-    void dirAdded(const QString&,FileListViewItem*);
     void sendNotify(const QString&);
     void reinitItem(FileListViewItem*);
     void sigRefreshAll();

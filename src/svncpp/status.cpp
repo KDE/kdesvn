@@ -39,14 +39,14 @@ namespace svn
     }
   }
 
-  Status::Status (const char *path, svn_wc_status_t * status)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+  Status::Status (const char *path, svn_wc_status2_t * status)
     : m_status (0), m_path (0)
   {
     init (path, status);
   }
-
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
-  Status::Status (const char *path, svn_wc_status2_t * status)
+#else
+  Status::Status (const char *path, svn_wc_status_t * status)
     : m_status (0), m_path (0)
   {
     init (path, status);

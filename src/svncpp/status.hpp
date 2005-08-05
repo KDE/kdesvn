@@ -58,7 +58,7 @@ namespace svn
      * @param status status entry
      */
     Status (const char *path = NULL, svn_wc_status2_t * status = NULL);
-#endif
+#else
     /**
      * default constructor
      *
@@ -66,8 +66,8 @@ namespace svn
      * @param status status entry
      * @deprecated
      */
-    Status (const char *path, svn_wc_status_t * status);
-
+    Status (const char *path = NULL, svn_wc_status_t * status = NULL);
+#endif
     /**
      * destructor
      */

@@ -20,6 +20,7 @@
 #ifndef FILELISTVIEWITEM_H
 #define FILELISTVIEWITEM_H
 
+#include "svnitem.h"
 #include <klistview.h>
 #include <qdatetime.h>
 #include <qptrlist.h>
@@ -32,7 +33,7 @@ class kdesvnfilelist;
 /**
 @author Rajko Albrecht
 */
-class FileListViewItem : public KListViewItem
+class FileListViewItem : public KListViewItem,public SvnItem
 {
 public:
     FileListViewItem(kdesvnfilelist*,const svn::Status&);
@@ -41,36 +42,25 @@ public:
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
-    virtual bool isDir()const;
-    virtual const QString&fullName()const;
-    virtual const QString&shortName()const;
-    virtual const QString Url()const;
-    virtual bool isVersioned()const;
-    virtual bool isValid();
-
     virtual void updateStatus(const svn::Status&s);
-
-    void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
-    void refreshMe();
+    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = NULL,bool depsonly=false);
+    virtual void refreshMe();
     void removeChilds();
     bool isParent(QListViewItem*which);
 
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
-    QString getParentDir()const;
-    bool isRealVersioned()const;
-    bool isIgnored()const;
+
+    virtual QString getParentDir()const;
+    FileListViewItem*fItem(){return this;}
 
 protected:
     short int sortChar;
     kdesvnfilelist*m_Ksvnfilelist;
-    virtual void update(KFileItem*_item);
+
     virtual void update();
-    svn::Status m_Stat;
-    QString m_shortName,m_fullName;
-    QDateTime fullDate;
+
     void makePixmap();
     void init();
-    void checkNewer();
 };
 
 typedef QPtrList<FileListViewItem> FileListViewItemList;

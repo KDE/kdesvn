@@ -20,7 +20,7 @@
 #include "svnactions.h"
 #include "checkoutinfo_impl.h"
 #include "itemdisplay.h"
-#include "filelistviewitem.h"
+#include "svnitem.h"
 #include "rangeinput_impl.h"
 #include "propertiesdlg.h"
 #include "ccontextlistener.h"
@@ -121,7 +121,7 @@ void SvnActions::slotMakeRangeLog()
 {
     /// @todo remove reference to parentlist
     if (!m_ParentList) return;
-    FileListViewItem*k = m_ParentList->singleSelected();
+    SvnItem*k = m_ParentList->Selected();
     if (!k) return;
     Rangeinput_impl*rdlg;
     KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
@@ -143,7 +143,7 @@ void SvnActions::slotMakeLog()
 {
     /// @todo remove reference to parentlist
     if (!m_ParentList) return;
-    FileListViewItem*k = m_ParentList->singleSelected();
+    SvnItem*k = m_ParentList->Selected();
     if (!k) return;
     svn::Revision start(svn::Revision::START);
     svn::Revision end(svn::Revision::HEAD);
@@ -153,7 +153,7 @@ void SvnActions::slotMakeLog()
 /*!
     \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
  */
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
+void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
 {
     const svn::LogEntries * logs;
     QString ex;
@@ -188,7 +188,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*
 /*!
     \fn SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
  */
-void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
+void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
 {
     if (!m_CurrentContext) return;
     svn::AnnotatedFile * blame;
@@ -321,7 +321,8 @@ void SvnActions::slotInfo()
     /// @todo remove reference to parentlist
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
-    QPtrList<FileListViewItem> *lst = m_ParentList->allSelected();
+    QPtrList<SvnItem> lst;
+    m_ParentList->SelectionList(&lst);
     svn::InfoEntries entries;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
@@ -331,12 +332,12 @@ void SvnActions::slotInfo()
     QString ex;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
-        if (lst->count()==0) {
+        if (lst.count()==0) {
             entries = m_Svnclient.info2(m_ParentList->baseUri().local8Bit(),true,rev,peg);
         } else {
-            FileListViewItem*item;
+            SvnItem*item;
             svn::InfoEntries e;
-            for (item=lst->first();item;item=lst->next()) {
+            for (item=lst.first();item;item=lst.next()) {
                 e = (m_Svnclient.info2(item->fullName().local8Bit(),true,rev,peg));
                 entries.insert(entries.end(),e.begin(),e.end());
             }
@@ -455,7 +456,7 @@ void SvnActions::slotProperties()
     /// @todo remove reference to parentlist
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
-    FileListViewItem*k = m_ParentList->singleSelected();
+    SvnItem*k = m_ParentList->Selected();
     if (!k) return;
     PropertiesDlg dlg(k->fullName(),svnclient(),
         m_ParentList->isLocal()?svn::Revision::WORKING:svn::Revision::HEAD);
@@ -500,11 +501,13 @@ void SvnActions::slotCommit()
     if (!ok) {
         return;
     }
-    QPtrList<FileListViewItem>*which = m_ParentList->allSelected();
-    FileListViewItem*cur;
-    FileListViewItemListIterator liter(*which);
+    QPtrList<SvnItem> which;
+    m_ParentList->SelectionList(&which);
+    SvnItem*cur;
+    QPtrListIterator<SvnItem> liter(which);
+
     std::vector<svn::Path> targets;
-    if (which->count()==0) {
+    if (which.count()==0) {
         targets.push_back(svn::Path(m_ParentList->baseUri().local8Bit()));
     } else {
         while ( (cur=liter.current())!=0) {
@@ -627,14 +630,15 @@ void SvnActions::slotUpdateHeadRec()
 void SvnActions::prepareUpdate(bool ask)
 {
     if (!m_ParentList||!m_ParentList->isLocal()) return;
-    FileListViewItemList*k = m_ParentList->allSelected();
+    SvnItemList k;
+    m_ParentList->SelectionList(&k);
 
     QStringList what;
-    if (!k||k->count()==0) {
+    if (k.count()==0) {
         what.append(m_ParentList->baseUri());
     } else {
-        FileListViewItemListIterator liter(*k);
-        FileListViewItem*cur;
+        SvnItemListIterator liter(k);
+        SvnItem*cur;
         while ((cur=liter.current())!=0){
             ++liter;
             what.append(cur->fullName());
@@ -678,14 +682,15 @@ void SvnActions::slotAdd()
 {
     if (!m_CurrentContext) return;
     if (!m_ParentList) return;
-    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
-    if (lst->count()==0) {
+    QPtrList<SvnItem> lst;
+    m_ParentList->SelectionList(&lst);
+    if (lst.count()==0) {
         KMessageBox::error(m_ParentList->realWidget(),i18n("Which files or directories should I add?"));
         return;
     }
     QValueList<svn::Path> items;
-    FileListViewItemListIterator liter(*lst);
-    FileListViewItem*cur;
+    SvnItemListIterator liter(lst);
+    SvnItem*cur;
     while ((cur=liter.current())!=0){
         ++liter;
         if (cur->isVersioned()) {
@@ -700,7 +705,7 @@ void SvnActions::slotAdd()
     while ((cur=liter.current())!=0){
         ++liter;
         cur->refreshStatus();
-        emit sigRefreshCurrent(static_cast<FileListViewItem*>(cur->parent()));
+        //emit sigRefreshCurrent(static_cast<FileListViewItem*>(cur->parent()));
     }
 }
 
@@ -768,7 +773,7 @@ void SvnActions::slotExport()
 void SvnActions::CheckoutExportCurrent(bool _exp)
 {
     if (!m_ParentList|| !_exp&&m_ParentList->isLocal()) return;
-    FileListViewItem*k = m_ParentList->singleSelected();
+    SvnItem*k = m_ParentList->Selected();
     if (k && !k->isDir()) {
         KMessageBox::error(m_ParentList->realWidget(),_exp?i18n("Exporting a file"):i18n("Checking out a file?"));
         return;
@@ -834,11 +839,12 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
 void SvnActions::slotRevert()
 {
     if (!m_ParentList||!m_ParentList->isLocal()) return;
-    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
+    QPtrList<SvnItem> lst;
+    m_ParentList->SelectionList(&lst);
     QStringList displist;
-    FileListViewItemListIterator liter(*lst);
-    FileListViewItem*cur;
-    if (lst->count()>0) {
+    SvnItemListIterator liter(lst);
+    SvnItem*cur;
+    if (lst.count()>0) {
         while ((cur=liter.current())!=0){
             if (!cur->isVersioned()) {
                 KMessageBox::error(m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
@@ -855,8 +861,8 @@ void SvnActions::slotRevert()
     liter.toFirst();
     while ((cur=liter.current())!=0){
         ++liter;
-        cur->refreshStatus(true,lst,false);
-        cur->refreshStatus(false,lst,true);
+        cur->refreshStatus(true,&lst,false);
+        cur->refreshStatus(false,&lst,true);
     }
 }
 
@@ -925,15 +931,16 @@ void SvnActions::slotSwitch()
     if (!m_CurrentContext) return;
     if (!m_ParentList||!m_ParentList->isLocal()) return;
 
-    QPtrList<FileListViewItem>*lst = m_ParentList->allSelected();
+    QPtrList<SvnItem> lst;
+    m_ParentList->SelectionList(&lst);
 
-    if (lst->count()>1) {
+    if (lst.count()>1) {
         KMessageBox::error(0,i18n("Can only switch one item at time"));
         return;
     }
-    FileListViewItem*k;
+    SvnItem*k;
 
-    k = m_ParentList->singleSelectedOrMain();
+    k = m_ParentList->SelectedOrMain();
 #if 0
     if (lst->count()==0) {
         k=static_cast<FileListViewItem*>(m_ParentList->firstChild());
@@ -965,7 +972,7 @@ void SvnActions::slotSwitch()
         if (!done) return;
     }
     k->refreshMe();
-    emit reinitItem(k);
+//    emit reinitItem(k);
 }
 
 void SvnActions::slotCleanup(const QString&path)
@@ -1109,7 +1116,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
 /*!
     \fn SvnActions::makeIgnoreEntry(const QString&which)
  */
-bool SvnActions::makeIgnoreEntry(FileListViewItem*which,bool unignore)
+bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
 {
     if (!which) return false;
     QString parentName = which->getParentDir();

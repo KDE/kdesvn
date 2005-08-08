@@ -44,106 +44,46 @@ const int FileListViewItem::COL_IS_LOCKED = 5;
 //const int FileListViewItem::COL_CURRENT_REV = 5;
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
- : KListViewItem(_parent),
+ : KListViewItem(_parent),SvnItem(_stat),
  sortChar(0),
- m_Ksvnfilelist(_parent),
- m_Stat(_stat)
+ m_Ksvnfilelist(_parent)
 {
     init();
 }
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::Status&_stat)
-    : KListViewItem(_parentItem),
+    : KListViewItem(_parentItem),SvnItem(_stat),
     sortChar(0),
-    m_Ksvnfilelist(_parent),
-    m_Stat(_stat)
+    m_Ksvnfilelist(_parent)
 {
     init();
 }
 
 void FileListViewItem::init()
 {
-    m_fullName = QString::fromLocal8Bit(m_Stat.path());
-    while (m_fullName.endsWith("/")) {
-        /* dir name possible */
-        m_fullName.truncate(m_fullName.length()-1);
-    }
-    int p = m_fullName.findRev("/");
-    if (p>-1) {
-        ++p;
-        m_shortName = m_fullName.right(m_fullName.length()-p);
-    } else {
-        m_shortName = m_fullName;
-    }
-
-    setText(COL_NAME,m_shortName);
-
+    setText(COL_NAME,shortName());
     sortChar = isDir()?1:3;
-    if (m_shortName[0]=='.') --sortChar;
+    if (shortName()[0]=='.') --sortChar;
     update();
-}
-
-bool FileListViewItem::isDir()const
-{
-//    if (QString::compare(stat.entry().url(),stat.path())==0) {
-    if (m_Stat.entry().isValid()) {
-        return m_Stat.entry().kind()==svn_node_dir;
-    }
-    /* must be a local file */
-    QFileInfo f(m_Stat.path());
-    return f.isDir();
 }
 
 FileListViewItem::~FileListViewItem()
 {
 }
 
-void FileListViewItem::update(KFileItem*_item)
-{
-    setText(COL_NAME,_item->name());
-    setPixmap(COL_ICON,_item->pixmap(16,0));
-    sortChar = S_ISDIR( _item->mode() ) ? 1 : 3;
-    if ( _item->name()[0] == '.' )
-        --sortChar;
-    try {
-      m_Stat = m_Ksvnfilelist->svnclient()->singleStatus(_item->url().path());
-    } catch (svn::ClientException e) {
-        setText(COL_STATUS,e.message());
-        return;
-    }
-    init();
-}
-
 void FileListViewItem::refreshMe()
 {
-    m_Stat = svn::Status();
     try {
-        m_Stat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit());
+        setStat(m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit()));
     } catch (svn::ClientException e) {
+        setStat(svn::Status());
         setText(COL_STATUS,e.message());
         return;
     }
     init();
 }
 
-bool FileListViewItem::isRealVersioned()const
-{
-    return m_Stat.isRealVersioned();
-}
-
-void FileListViewItem::checkNewer()
-{
-#if 0
-    if (!svn::Url::isValid (fullName().local8Bit()) && m_Stat.isRealVersioned()) {
-        svn::Status tmpStat = m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit(),true);
-        if (tmpStat.reposTextStatus()!=svn_wc_status_none||tmpStat.reposPropStatus()!=svn_wc_status_none) {
-            setText(COL_STATUS,i18n("Needs update"));
-        }
-    }
-#endif
-}
-
-void FileListViewItem::refreshStatus(bool childs,QPtrList<FileListViewItem>*exclude,bool depsonly)
+void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool depsonly)
 {
     FileListViewItem*it;
 
@@ -172,40 +112,7 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<FileListViewItem>*excl
 
 void FileListViewItem::makePixmap()
 {
-    QPixmap p;
-    /* yes - different way to "isDir" above 'cause here we try to use the
-       mime-features of KDE on ALL not just unversioned entries.
-     */
-    if (QString::compare(m_Stat.entry().url(),m_Stat.path())==0) {
-        /* remote access */
-        if (isDir()) {
-            p = KGlobal::iconLoader()->loadIcon("folder",KIcon::Desktop,16);
-        } else {
-            p = KGlobal::iconLoader()->loadIcon("unknown",KIcon::Desktop,16);
-            //p = KMimeType::pixmapForURL(KURL(stat.entry().url()),0,KIcon::Desktop,16);
-        }
-    } else {
-        p = KMimeType::pixmapForURL(m_Stat.path(),0,KIcon::Desktop,16);
-    }
-    setPixmap(COL_ICON,p);
-}
-
-bool FileListViewItem::isVersioned()const
-{
-    return m_Stat.isVersioned();
-}
-
-bool FileListViewItem::isValid()
-{
-    if (isVersioned()) {
-        return true;
-    }
-    /* must be a local file */
-    //kdDebug()<< "Pfad = " << m_Stat.path()<<endl;
-
-    QFileInfo f(m_Stat.path());
-    //kdDebug()<< "Behaupte das es existiert: "<<f.exists()<<endl;
-    return f.exists();
+    setPixmap(COL_ICON,getPixmap(16));
 }
 
 bool FileListViewItem::isParent(QListViewItem*which)
@@ -220,77 +127,25 @@ bool FileListViewItem::isParent(QListViewItem*which)
     return false;
 }
 
-bool FileListViewItem::isIgnored()const
-{
-    return m_Stat.textStatus()==svn_wc_status_ignored;
-}
-
 void FileListViewItem::update()
 {
     makePixmap();
-    if (!m_Stat.isVersioned()) {
+    if (!isVersioned()) {
         setText(COL_STATUS,i18n("Not versioned"));
         return;
     }
-    QString info_text = "";
-    switch(m_Stat.textStatus ()) {
-    case svn_wc_status_modified:
-        info_text = i18n("Locally modified");
-        break;
-    case svn_wc_status_added:
-        info_text = i18n("Locally added");
-        break;
-    case svn_wc_status_missing:
-        info_text = i18n("Missing");
-        break;
-    case svn_wc_status_deleted:
-        info_text = i18n("Deleted");
-        break;
-    case svn_wc_status_replaced:
-        info_text = i18n("Replaced");
-        break;
-    case svn_wc_status_ignored:
-        info_text = i18n("Ignored");
-        break;
-    case svn_wc_status_external:
-        info_text=i18n("External");
-        break;
-    case svn_wc_status_conflicted:
-        info_text=i18n("Conflict");
-        break;
-    case svn_wc_status_merged:
-        info_text=i18n("Merged");
-        break;
-    case svn_wc_status_incomplete:
-        info_text=i18n("Incomplete");
-        break;
-    default:
-        break;
-    }
-    if (info_text.isEmpty()) {
-        switch (m_Stat.propStatus ()) {
-        case svn_wc_status_modified:
-            info_text = i18n("Property modified");
-            break;
-        default:
-            break;
-        }
-    }
-    setText(COL_STATUS,info_text);
-    setText(COL_LAST_AUTHOR,m_Stat.entry().cmtAuthor());
-    fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
-    setText(COL_LAST_DATE,fullDate.toString());
-    setText(COL_LAST_REV,QString("%1").arg(m_Stat.entry().cmtRev()));
+    setText(COL_STATUS,infoText());
+    setText(COL_LAST_AUTHOR,cmtAuthor());
+    setText(COL_LAST_DATE,fullDate().toString());
+    setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
 #if 1
-    if (m_Stat.entry().lockEntry().Locked()) {
+    if (isLocked()) {
         setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));
     } else {
         setPixmap(COL_IS_LOCKED,QPixmap());
     }
-    setText(COL_IS_LOCKED,QString::fromLocal8Bit(m_Stat.entry().lockEntry().Owner().c_str()));
+    setText(COL_IS_LOCKED,lockOwner());
 #endif
-    checkNewer();
-//    setText(COL_CURRENT_REV,QString("%1").arg(stat.entry().revision()));
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const
@@ -301,10 +156,10 @@ int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) co
         return !ascending ? k->sortChar - sortChar : sortChar - k->sortChar;
     }
     if (col==COL_LAST_DATE) {
-        return fullDate.secsTo(k->fullDate);
+        return fullDate().secsTo(k->fullDate());
     }
     if (col==COL_LAST_REV) {
-        return k->m_Stat.entry().cmtRev()-m_Stat.entry().cmtRev();
+        return k->cmtRev()-cmtRev();
     }
     return text(col).localeAwareCompare(k->text(col));
 }
@@ -319,10 +174,9 @@ void FileListViewItem::removeChilds()
 
 void FileListViewItem::updateStatus(const svn::Status&s)
 {
-    m_Stat = s;
+    setStat(s);
     init();
 }
-
 
 /*!
     \fn FileListViewItem::getParentDir()const
@@ -332,19 +186,4 @@ void FileListViewItem::updateStatus(const svn::Status&s)
     FileListViewItem*temp = static_cast<FileListViewItem*>(parent());
     if (!temp) return QString::null;
     return temp->fullName();
-}
-
-const QString&FileListViewItem::fullName()const
-{
-    return m_fullName;
-}
-
-const QString&FileListViewItem::shortName()const
-{
-    return m_shortName;
-}
-
-const QString FileListViewItem::Url()const
-{
-    return QString::fromLocal8Bit(m_Stat.entry().url());
 }

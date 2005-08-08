@@ -25,7 +25,9 @@
 #include <qstring.h>
 #include <kurl.h>
 
-class FileListViewItem;
+class QWidget;
+
+class SvnItem;
 
 class ItemDisplay
 {
@@ -34,12 +36,12 @@ public:
     virtual ~ItemDisplay(){}
 
     virtual QWidget*realWidget() = 0;
-    virtual FileListViewItem*singleSelected()=0;
+    virtual SvnItem*Selected()=0;
     virtual bool isLocal()const = 0;
-    virtual QPtrList<FileListViewItem> * allSelected()=0;
+    virtual void SelectionList(QPtrList<SvnItem>*)=0;
     virtual const QString&baseUri()const=0;
     virtual bool openURL( const KURL &url,bool noReinit=false )=0;
-    virtual FileListViewItem*singleSelectedOrMain()=0;
+    virtual SvnItem*SelectedOrMain()=0;
 };
 
 #endif

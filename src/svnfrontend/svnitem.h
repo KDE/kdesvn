@@ -21,12 +21,55 @@
 #ifndef __SVN_ITEM_H
 #define __SVN_ITEM_H
 
+#include "helpers/smart_pointer.h"
+#include "svncpp/status.hpp"
+#include <qstring.h>
+#include <qdatetime.h>
+#include <qpixmap.h>
+#include <qptrlist.h>
+
+class SvnItem_p;
+namespace svn {
+    class Status;
+}
+
+class FileListViewItem;
 
 class SvnItem
 {
 public:
     SvnItem();
+    SvnItem(const svn::Status&);
     virtual ~SvnItem();
+
+    virtual const QString&fullName()const;
+    virtual const QString&shortName()const;
+    virtual const QString&Url()const;
+    virtual const QDateTime&fullDate()const;
+    virtual bool isDir()const;
+    virtual bool isVersioned()const;
+    virtual bool isValid()const;
+    virtual bool isRealVersioned()const;
+    virtual bool isIgnored()const;
+    virtual QString infoText()const;
+    virtual QString cmtAuthor()const;
+    virtual unsigned int cmtRev()const;
+    virtual bool isLocked()const;
+    virtual QString lockOwner()const;
+    virtual QString getParentDir()const=0;
+    virtual void refreshMe()=0;
+    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = NULL,bool depsonly=false)=0;
+
+    QPixmap getPixmap(int size);
+
+    FileListViewItem*fItem(){return 0;}
+
+protected:
+    smart_pointer<SvnItem_p> p_Item;
+    void setStat(const svn::Status&);
 };
+
+typedef QPtrList<SvnItem> SvnItemList;
+typedef QPtrListIterator<SvnItem> SvnItemListIterator;
 
 #endif

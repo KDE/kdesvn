@@ -20,8 +20,8 @@
 #ifndef KDESVNFILELIST_H
 #define KDESVNFILELIST_H
 
-#include "filelistviewitem.h"
 #include "itemdisplay.h"
+#include "filelistviewitem.h"
 #include "svncpp/status.hpp"
 #include "svncpp/client.hpp"
 
@@ -49,7 +49,6 @@ class kdesvnfilelist : public KListView,public ItemDisplay
 {
     Q_OBJECT
     friend class FileListViewItem;
-    friend class SvnActions;
 public:
     kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
@@ -57,7 +56,10 @@ public:
     virtual bool openURL( const KURL &url,bool noReinit=false );
     virtual const QString&baseUri()const{return m_baseUri;}
     virtual bool isLocal()const{return m_isLocal;}
-    virtual FileListViewItem*singleSelectedOrMain();
+    virtual SvnItem*SelectedOrMain();
+    virtual SvnItem*Selected();
+    virtual void SelectionList(SvnItemList*target);
+
     virtual QWidget*realWidget();
     const QString&lastError()const{return m_LastException;}
     const svn::Status&maindir()const{return m_mainEntry;}
@@ -101,6 +103,7 @@ protected:
         );
 
     FileListViewItemList* m_SelectedItems;
+
     virtual void refreshRecursive(FileListViewItem*);
     DirNotify*m_DirNotify;
 
@@ -127,7 +130,7 @@ protected slots:
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);
     virtual void slotDirAdded(const QString&,FileListViewItem*);
-    virtual void slotReinitItem(FileListViewItem*);
+    virtual void slotReinitItem(SvnItem*);
     virtual void slotItemDoubleClicked(QListViewItem*);
     virtual void slotImportIntoCurrent(bool);
     virtual void slotImportDirsIntoCurrent();
@@ -157,7 +160,7 @@ signals:
 
 public slots:
     virtual void refreshCurrentTree();
-    virtual void refreshCurrent(FileListViewItem*);
+    virtual void refreshCurrent(SvnItem*);
     virtual void closeMe();
     virtual void slotMkdir();
 protected slots:

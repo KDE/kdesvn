@@ -93,9 +93,9 @@ kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
     connect(m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
-    connect(m_SvnWrapper,SIGNAL(reinitItem(FileListViewItem*)),this,SLOT(slotReinitItem(FileListViewItem*)));
+    connect(m_SvnWrapper,SIGNAL(reinitItem(SvnItem*)),this,SLOT(slotReinitItem(SvnItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
-    connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(FileListViewItem*)),this,SLOT(refreshCurrent(FileListViewItem*)));
+    connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(SvnItem*)),this,SLOT(refreshCurrent(SvnItem*)));
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
 
@@ -213,7 +213,18 @@ FileListViewItemList* kdesvnfilelist::allSelected()
     return m_SelectedItems;
 }
 
-FileListViewItem*kdesvnfilelist::singleSelectedOrMain()
+void kdesvnfilelist::SelectionList(SvnItemList*target)
+{
+    if (!m_SelectedItems||!target) return;
+    FileListViewItemListIterator iter(*m_SelectedItems);
+    FileListViewItem*cur;
+    while ( (cur=iter.current())!=0) {
+        ++iter;
+        target->append(cur);
+    }
+}
+
+SvnItem*kdesvnfilelist::SelectedOrMain()
 {
     if (singleSelected()!=0) {
         return singleSelected();
@@ -235,6 +246,11 @@ FileListViewItem* kdesvnfilelist::singleSelected()
         return m_SelectedItems->at(0);
     }
     return 0;
+}
+
+SvnItem*kdesvnfilelist::Selected()
+{
+    return singleSelected();
 }
 
 bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
@@ -418,9 +434,10 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
     }
 }
 
-void kdesvnfilelist::slotReinitItem(FileListViewItem*k)
+void kdesvnfilelist::slotReinitItem(SvnItem*item)
 {
-    if (!k) return;
+    if (!item) return;
+    FileListViewItem*k = item->fItem();
     if (k->isDir()) {
         k->removeChilds();
         m_Dirsread[k->fullName()]=false;;
@@ -699,15 +716,15 @@ void kdesvnfilelist::refreshCurrentTree()
     viewport()->repaint();
 }
 
-void kdesvnfilelist::refreshCurrent(FileListViewItem*cur)
+void kdesvnfilelist::refreshCurrent(SvnItem*cur)
 {
-    if (!cur) {
+    if (!cur||!cur->fItem()) {
         refreshCurrentTree();
         return;
     }
     kapp->processEvents();
     setUpdatesEnabled(false);
-    refreshRecursive(cur);
+    refreshRecursive(cur->fItem());
     setUpdatesEnabled(true);
     viewport()->repaint();
 }
@@ -1049,7 +1066,6 @@ void kdesvnfilelist::copy_move(bool move)
     m_SvnWrapper->slotCopyMove(move,which->fullName(),nName,force);
 }
 
-
 void kdesvnfilelist::slotCat()
 {
     FileListViewItem*k = singleSelected();
@@ -1236,7 +1252,7 @@ void kdesvnfilelist::slotUnlock()
  */
 void kdesvnfilelist::slotIgnore()
 {
-    FileListViewItem*item = singleSelected();
+    SvnItem*item = singleSelected();
     if (!item || item->isRealVersioned()) return;
     if (m_SvnWrapper->makeIgnoreEntry(item,item->isIgnored())) {
         refreshCurrentTree();
@@ -1249,7 +1265,7 @@ void kdesvnfilelist::slotIgnore()
  */
 void kdesvnfilelist::slotBlame()
 {
-    FileListViewItem*k = singleSelected();
+    SvnItem*k = singleSelected();
     if (!k) return;
     svn::Revision start(svn::Revision::START);
     svn::Revision end(svn::Revision::HEAD);
@@ -1262,7 +1278,7 @@ void kdesvnfilelist::slotBlame()
  */
 void kdesvnfilelist::slotRangeBlame()
 {
-    FileListViewItem*k = singleSelected();
+    SvnItem*k = singleSelected();
     if (!k) return;
     Rangeinput_impl*rdlg;
     KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
@@ -1283,7 +1299,7 @@ void kdesvnfilelist::slotRangeBlame()
  */
 void kdesvnfilelist::slotSimpleDiff()
 {
-    FileListViewItem*k = singleSelected();
+    SvnItem*k = singleSelected();
     QString what;
     if (!k) {
         what=baseUri();
@@ -1299,7 +1315,7 @@ void kdesvnfilelist::slotSimpleDiff()
  */
 void kdesvnfilelist::slotMkdir()
 {
-    FileListViewItem*k = singleSelected();
+    SvnItem*k = singleSelected();
     QString parentDir;
     if (k) {
         if (!k->isDir()) {
@@ -1312,6 +1328,6 @@ void kdesvnfilelist::slotMkdir()
     }
     QString ex = m_SvnWrapper->makeMkdir(parentDir);
     if (!ex.isEmpty()) {
-        slotDirAdded(ex,k);
+        slotDirAdded(ex,static_cast<FileListViewItem*>(k));
     }
 }

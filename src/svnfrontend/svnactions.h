@@ -27,7 +27,7 @@
 #include "svncpp/revision.hpp"
 
 class ItemDisplay;
-class FileListViewItem;
+class SvnItem;
 class KDialog;
 class KDialogBase;
 class QDialog;
@@ -62,9 +62,9 @@ public:
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
     bool makeStatus(const QString&what, svn::StatusEntries&dlist);
-    bool makeIgnoreEntry(FileListViewItem*which,bool unignore);
-    void makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k);
-    void makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k);
+    bool makeIgnoreEntry(SvnItem*which,bool unignore);
+    void makeLog(svn::Revision start,svn::Revision end,SvnItem*k);
+    void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
     void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
@@ -107,9 +107,9 @@ public slots:
 signals:
     void clientException(const QString&);
     void sendNotify(const QString&);
-    void reinitItem(FileListViewItem*);
+    void reinitItem(SvnItem*);
     void sigRefreshAll();
-    void sigRefreshCurrent(FileListViewItem*);
+    void sigRefreshCurrent(SvnItem*);
 
 protected slots:
     virtual void wroteStdin(KProcess*);

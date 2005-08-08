@@ -30,6 +30,7 @@ public:
     stl2qt();
     ~stl2qt();
     static QString stl2qtstring(const std::string&);
+    static QString stl2qtstring(const char*);
     static std::string qt2stlstring(const QString&);
 };
 

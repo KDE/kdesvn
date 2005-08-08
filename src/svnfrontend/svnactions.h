@@ -25,6 +25,7 @@
 #include <qstringlist.h>
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
+#include "helpers/smart_pointer.h"
 
 class ItemDisplay;
 class SvnItem;
@@ -73,7 +74,7 @@ public:
 protected:
     ItemDisplay* m_ParentList;
 
-    CContextListener*m_SvnContext;
+    smart_pointer<CContextListener> m_SvnContext;
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 

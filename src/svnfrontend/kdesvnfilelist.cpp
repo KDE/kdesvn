@@ -196,6 +196,8 @@ void kdesvnfilelist::setupActions()
         KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
     m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(CTRL+Key_U),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 
+    new KAction(i18n("Diff revisions"),"vcs_diff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
+
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
@@ -501,6 +503,12 @@ void kdesvnfilelist::enableActions()
     m_CheckoutAction->setEnabled(true);
     m_ExportAction->setEnabled(true);
     m_RefreshViewAction->setEnabled(isopen);
+
+    KAction * temp;
+    temp = filesActions()->action("make_revisions_diff");
+    if (temp) {
+        temp->setEnabled(isopen);
+    }
 }
 
 void kdesvnfilelist::slotSelectionChanged()
@@ -749,7 +757,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
         item = static_cast<FileListViewItem*>(item->nextSibling());
     }
 
-    QString what = (_parent!=NULL?_parent->fullName():baseUri());
+    QString what = (_parent!=0?_parent->fullName():baseUri());
     svn::StatusEntries dlist;
     if (!m_SvnWrapper->makeStatus(what,dlist)) {
         return;
@@ -1330,4 +1338,31 @@ void kdesvnfilelist::slotMkdir()
     if (!ex.isEmpty()) {
         slotDirAdded(ex,static_cast<FileListViewItem*>(k));
     }
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotDiffRevisions()
+ */
+void kdesvnfilelist::slotDiffRevisions()
+{
+    SvnItem*k = singleSelected();
+    QString what;
+    if (!k) {
+        what=baseUri();
+    }else{
+        what=k->fullName();
+    }
+    Rangeinput_impl*rdlg;
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    if (!dlg) {
+        return;
+    }
+    if (dlg->exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
+        m_SvnWrapper->makeDiff(what,r.first,r.second);
+    }
+    dlg->saveDialogSize("revisions_dlg",false);
+    delete dlg;
+
 }

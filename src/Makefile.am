@@ -2,7 +2,7 @@
 
 # this is the program that gets installed.  it's name is used for all
 # of the other Makefile.am variables
-bin_PROGRAMS = kdesvn kdesvn_client
+bin_PROGRAMS = kdesvn
 
 # set the include path for X, qt and KDE
 INCLUDES = -I$(top_srcdir)/src $(all_includes)
@@ -16,15 +16,12 @@ kdesvn_LDADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
 	$(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEPRINT) $(SVN_LIBS)
 
 # which sources should be compiled for kdesvn
-kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp kdesvniface.skel
+kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp
 
 # these are the headers for your project
 noinst_HEADERS = kdesvn.h kdesvnview.h pref.h
 
 # client stuff
-kdesvn_client_LDFLAGS = $(KDE_RPATH) $(all_libraries)
-kdesvn_client_LDADD = $(LIB_KDECORE)
-kdesvn_client_SOURCES = kdesvn_client.cpp
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

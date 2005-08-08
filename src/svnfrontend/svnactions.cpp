@@ -67,7 +67,7 @@
 #define DIALOGS_SIZES "display_dialogs_sizes"
 
 SvnActions::SvnActions(ItemDisplay *parent, const char *name)
- : QObject(parent->realWidget(), name),m_ParentList(parent),m_SvnContext(new CContextListener(this)),m_CurrentContext(NULL)
+ : QObject(parent->realWidget(), name),m_ParentList(parent),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
 {
     connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
 }
@@ -86,7 +86,6 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 void SvnActions::reInitClient()
 {
     delete m_CurrentContext;
-    m_CurrentContext = NULL;
     m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(m_SvnContext);
     m_Svnclient.setContext(m_CurrentContext);

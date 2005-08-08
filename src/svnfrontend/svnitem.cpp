@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "svnitem.h"
+#include "helpers/smart_pointer.h"
 #include "svncpp/status.hpp"
 #include "helpers/stl2qt.h"
 #include "helpers/sub2qt.h"

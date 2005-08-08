@@ -95,7 +95,7 @@ QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)
- : QObject(parent, name), svn::ContextListener(),m_cancelMe(false)
+ : QObject(parent, name), svn::ContextListener(),ref_count(),m_cancelMe(false)
 {
 }
 

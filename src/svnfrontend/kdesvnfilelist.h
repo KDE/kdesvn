@@ -170,6 +170,8 @@ protected slots:
     virtual void slotBlame();
     virtual void slotRangeBlame();
     virtual void slotSimpleDiff();
+protected slots:
+    virtual void slotDiffRevisions();
 };
 
 #endif

@@ -34,6 +34,11 @@ QString stl2qt::stl2qtstring(const std::string&what)
     return QString::fromLocal8Bit(what.c_str());
 }
 
+QString stl2qt::stl2qtstring(const char*what)
+{
+    return what?QString::fromLocal8Bit(what):QString("");
+}
+
 std::string stl2qt::qt2stlstring(const QString&what)
 {
     return std::string(what.isEmpty()?"":what.local8Bit());

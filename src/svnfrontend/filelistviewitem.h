@@ -43,7 +43,7 @@ public:
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
     virtual void updateStatus(const svn::Status&s);
-    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = NULL,bool depsonly=false);
+    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false);
     virtual void refreshMe();
     void removeChilds();
     bool isParent(QListViewItem*which);

@@ -42,7 +42,6 @@
 
 kdesvnView::kdesvnView(QWidget *parent)
     : QWidget(parent),
-      DCOPObject("kdesvnIface"),
       m_currentURL("")
 {
     QVBoxLayout *top_layout = new QVBoxLayout(this);

@@ -24,7 +24,6 @@
 
 #include <qwidget.h>
 #include <kparts/part.h>
-#include <kdesvniface.h>
 
 class QPainter;
 class KURL;
@@ -44,13 +43,11 @@ class KTextBrowser;
  * non-toolbar, and non-statusbar (e.g., non frame) GUI code should go
  * here.
  *
- * This kdesvn uses an HTML component as an example.
- *
  * @short Main view
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
-class kdesvnView : public QWidget, public kdesvnIface
+class kdesvnView : public QWidget
 {
     Q_OBJECT
 public:

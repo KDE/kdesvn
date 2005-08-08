@@ -59,7 +59,7 @@ template<class T> class smart_pointer {
     T *ptr;
 public:
     //! standart constructor
-    smart_pointer() { ptr = NULL; }
+    smart_pointer() { ptr = 0; }
     //! standart destructor
     /*!
      * release the reference, if it were the last reference, destroys
@@ -98,9 +98,9 @@ public:
     //! cast to conventional pointer
     operator T* () const { return ptr; }
 
-    //! deref: fails for NULL pointer
+    //! deref: fails for 0 pointer
     T& operator* () {return *ptr; }
-    //! deref: fails for NULL pointer
+    //! deref: fails for 0 pointer
     const T& operator* ()const {return *ptr; }
 
     //! deref with method call
@@ -109,14 +109,14 @@ public:
     const T* operator-> ()const {return ptr; }
 
     //! supports "if (pointer)"
-    operator bool () const { return (ptr != NULL); }
+    operator bool () const { return (ptr != 0); }
     //! "if (pointer)" as non const
-    operator bool () { return ptr != NULL;}
+    operator bool () { return ptr != 0;}
 
     //! support if (!pointer)"
-    bool operator! () const { return (ptr == NULL); }
+    bool operator! () const { return (ptr == 0); }
     //! support if (!pointer)" as non const
-    bool operator! () { return (ptr == NULL); }
+    bool operator! () { return (ptr == 0); }
 };
 
 #endif

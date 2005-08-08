@@ -28,12 +28,8 @@
 #include <qpixmap.h>
 #include <qptrlist.h>
 
-class SvnItem_p;
-namespace svn {
-    class Status;
-}
-
 class FileListViewItem;
+class SvnItem_p;
 
 class SvnItem
 {
@@ -58,7 +54,7 @@ public:
     virtual QString lockOwner()const;
     virtual QString getParentDir()const=0;
     virtual void refreshMe()=0;
-    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = NULL,bool depsonly=false)=0;
+    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
 
     QPixmap getPixmap(int size);
 

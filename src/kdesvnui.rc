@@ -13,6 +13,7 @@
     <Action name="make_svn_log_full" />
     <Action name="make_svn_log" />
     <Action name="make_svn_info" />
+    <Action name="make_revisions_diff" />
     <Separator/>
     <Action name="make_svn_blame" />
     <Action name="make_svn_range_blame" />
@@ -83,6 +84,7 @@
   <Action name="make_svn_revupdate" />
   <Action name="make_svn_commit" />
   <Action name="make_svn_headdiff" />
+  <Action name="make_revisions_diff" />
   <Separator/>
   <Action name="make_svn_add" />
   <Action name="make_svn_remove" />
@@ -110,6 +112,7 @@
   <Action name="make_svn_blame" />
   <Action name="make_svn_range_blame" />
   <Action name="make_svn_cat" />
+  <Action name="make_revisions_diff" />
   <Action name="make_svn_remove" />
   <Action name="make_svn_mkdir" />
   <Separator/>

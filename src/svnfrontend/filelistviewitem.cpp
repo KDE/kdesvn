@@ -111,7 +111,7 @@ void FileListViewItem::update(KFileItem*_item)
         setText(COL_STATUS,e.message());
         return;
     }
-    update();
+    init();
 }
 
 void FileListViewItem::refreshMe()
@@ -123,7 +123,7 @@ void FileListViewItem::refreshMe()
         setText(COL_STATUS,e.message());
         return;
     }
-    update();
+    init();
 }
 
 bool FileListViewItem::isRealVersioned()const
@@ -190,7 +190,7 @@ void FileListViewItem::makePixmap()
     setPixmap(COL_ICON,p);
 }
 
-bool FileListViewItem::isVersioned()
+bool FileListViewItem::isVersioned()const
 {
     return m_Stat.isVersioned();
 }
@@ -332,4 +332,19 @@ void FileListViewItem::updateStatus(const svn::Status&s)
     FileListViewItem*temp = static_cast<FileListViewItem*>(parent());
     if (!temp) return QString::null;
     return temp->fullName();
+}
+
+const QString&FileListViewItem::fullName()const
+{
+    return m_fullName;
+}
+
+const QString&FileListViewItem::shortName()const
+{
+    return m_shortName;
+}
+
+const QString FileListViewItem::Url()const
+{
+    return QString::fromLocal8Bit(m_Stat.entry().url());
 }

@@ -7,4 +7,4 @@ noinst_LIBRARIES = libhelper.a
 
 
 libhelper_a_SOURCES = dirnotify.cpp sub2qt.cpp stl2qt.cpp sshagent.cpp
-noinst_HEADERS = dirnotify.h sub2qt.h stl2qt.h
+noinst_HEADERS = dirnotify.h sub2qt.h stl2qt.h smart_pointer.h

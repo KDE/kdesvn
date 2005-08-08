@@ -29,6 +29,7 @@
 #include "svncpp/status.hpp"
 #include "helpers/dirnotify.h"
 #include "helpers/sshagent.h"
+#include "helpers/stl2qt.h"
 
 #include <qvbox.h>
 #include <qpainter.h>
@@ -532,7 +533,7 @@ void kdesvnfilelist::slotChangeToRepository()
     /* huh... */
     if (!k||!k->isDir()) return;
     QString ex = baseUri();
-    if (!openURL(k->svnStatus().entry().url())) {
+    if (!openURL(k->Url())) {
         openURL(ex);
     }
 }
@@ -608,7 +609,7 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
     if (allSelected()->count()==0) {
         targetUri=baseUri();
     } else {
-        targetUri = QString::fromLocal8Bit(allSelected()->at(0)->svnStatus().entry().url());
+        targetUri = QString::fromLocal8Bit(allSelected()->at(0)->Url());
     }
     KURL uri;
     if (dirs) uri = KFileDialog::getExistingDirectory(QString::null,this,"Import files from directory");
@@ -1108,12 +1109,12 @@ void kdesvnfilelist::slotDelete()
     KURL::List kioList;
     while ((cur=liter.current())!=0){
         ++liter;
-        if (!cur->svnStatus().isRealVersioned()) {
-            kioList.append(cur->svnStatus().path());
+        if (!cur->isRealVersioned()) {
+            kioList.append(cur->fullName());
         } else {
-            items.push_back(cur->svnStatus().path());
+            items.push_back(helpers::stl2qt::qt2stlstring(cur->fullName()));
         }
-        displist.append(cur->svnStatus().path());
+        displist.append(cur->fullName());
     }
     int answer = KMessageBox::questionYesNoList(this,i18n("Really delete that entries?"),displist,"Delete from repository");
     if (answer!=KMessageBox::Yes) {
@@ -1195,7 +1196,7 @@ void kdesvnfilelist::slotLock()
     QStringList displist;
     while ((cur=liter.current())!=0){
         ++liter;
-        displist.append(cur->svnStatus().path());
+        displist.append(cur->fullName());
     }
     m_SvnWrapper->makeLock(displist,logMessage,rec);
     refreshCurrentTree();
@@ -1223,7 +1224,7 @@ void kdesvnfilelist::slotUnlock()
     QStringList displist;
     while ((cur=liter.current())!=0){
         ++liter;
-        displist.append(cur->svnStatus().path());
+        displist.append(cur->fullName());
     }
     m_SvnWrapper->makeUnlock(displist,breakit);
     refreshCurrentTree();

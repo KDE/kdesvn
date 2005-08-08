@@ -236,7 +236,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewI
     }
     text += "</table></html>";
     KTextBrowser*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->text(0)),false,"blame_dlg");
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->shortName()),false,"blame_dlg");
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
@@ -688,12 +688,12 @@ void SvnActions::slotAdd()
     FileListViewItem*cur;
     while ((cur=liter.current())!=0){
         ++liter;
-        if (cur->svnStatus().isVersioned()) {
+        if (cur->isVersioned()) {
             KMessageBox::error(m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is versioned - break.</center>")
-                .arg(cur->svnStatus().path()));
+                .arg(cur->fullName()));
             return;
         }
-        items.push_back(cur->svnStatus().path());
+        items.push_back(svn::Path(helpers::stl2qt::qt2stlstring(cur->fullName())));
     }
     addItems(items);
     liter.toFirst();
@@ -840,12 +840,12 @@ void SvnActions::slotRevert()
     FileListViewItem*cur;
     if (lst->count()>0) {
         while ((cur=liter.current())!=0){
-            if (!cur->svnStatus().isVersioned()) {
+            if (!cur->isVersioned()) {
                 KMessageBox::error(m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
-                    .arg(cur->svnStatus().path()));
+                    .arg(cur->fullName()));
                 return;
             }
-            displist.append(cur->svnStatus().path());
+            displist.append(cur->fullName());
             ++liter;
         }
     } else {
@@ -947,7 +947,7 @@ void SvnActions::slotSwitch()
     }
     QString path,what;
     path = k->fullName();
-    what = QString::fromLocal8Bit(k->svnStatus().entry().url());
+    what = k->Url();
 
     CheckoutInfo_impl*ptr;
     KDialog * dlg = createDialog(&ptr,i18n("Switch url"),true);

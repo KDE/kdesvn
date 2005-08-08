@@ -41,13 +41,14 @@ public:
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
-    bool isDir()const;
-    const QString&fullName()const{return m_fullName;}
-    const QString&shortName()const{return m_shortName;}
-    const svn::Status svnStatus()const{return m_Stat;}
-    bool isVersioned();
-    bool isValid();
-    void updateStatus(const svn::Status&s);
+    virtual bool isDir()const;
+    virtual const QString&fullName()const;
+    virtual const QString&shortName()const;
+    virtual const QString Url()const;
+    virtual bool isVersioned()const;
+    virtual bool isValid();
+
+    virtual void updateStatus(const svn::Status&s);
 
     void refreshStatus(bool childs=false,QPtrList<FileListViewItem> *exclude = NULL,bool depsonly=false);
     void refreshMe();

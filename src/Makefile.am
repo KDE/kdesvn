@@ -16,10 +16,10 @@ kdesvn_LDADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
 	$(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEPRINT) $(SVN_LIBS)
 
 # which sources should be compiled for kdesvn
-kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp
+kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp urldlg.cpp
 
 # these are the headers for your project
-noinst_HEADERS = kdesvn.h kdesvnview.h pref.h
+noinst_HEADERS = kdesvn.h kdesvnview.h pref.h urldlg.h
 
 # client stuff
 

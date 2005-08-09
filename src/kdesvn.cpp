@@ -21,6 +21,7 @@
 
 #include "kdesvn.h"
 #include "pref.h"
+#include "urldlg.h"
 
 #include <qdragobject.h>
 #include <kprinter.h>
@@ -226,7 +227,8 @@ void kdesvn::fileNew()
 
 void kdesvn::urlOpen()
 {
-    KURL url = KURLRequesterDlg::getURL("http://",this,i18n("Open remote repository"));
+//    KURL url = KURLRequesterDlg::getURL(QString::null,this,i18n("Open remote repository"));
+    KURL url = UrlDlg::getURL(this);
     if (!url.isEmpty())
         m_view->openURL(url);
 }

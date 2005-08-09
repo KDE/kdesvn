@@ -172,6 +172,8 @@ protected slots:
     virtual void slotSimpleDiff();
 protected slots:
     virtual void slotDiffRevisions();
+protected slots:
+    virtual void slotRevisionCat();
 };
 
 #endif

@@ -273,7 +273,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
     if (dlg) {
         ptr->setFont(KGlobalSettings::fixedFont());
         ptr->setWordWrap(QTextEdit::NoWrap);
-        ptr->setText(helpers::stl2qt::stl2qtstring(content));
+        ptr->setText("<code>"+QStyleSheet::convertFromPlainText(helpers::stl2qt::stl2qtstring(content))+"</code>");
         dlg->exec();
         dlg->saveDialogSize("cat_display_dlg",false);
         delete dlg;

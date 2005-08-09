@@ -116,6 +116,7 @@ void kdesvnfilelist::setupActions()
 {
     m_filesAction = new KActionCollection(this);
 
+    KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
     m_LogRangeAction = new KAction(i18n("&Log..."),"history",KShortcut(SHIFT+CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
@@ -134,8 +135,10 @@ void kdesvnfilelist::setupActions()
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_BlameRangeAction = new KAction("Blame range","flag",KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_CatAction = new KAction("&Cat head","contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    m_CatAction = new KAction(i18n("Cat head"),"contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
+    tmp_action = new KAction(i18n("Cat revision..."),"contents",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
+    tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
 
     m_LockAction = new KAction(i18n("Lock current items"),"lock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
     m_UnlockAction = new KAction(i18n("Unlock current items"),"unlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
@@ -509,6 +512,11 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(isopen);
     }
+    temp = filesActions()->action("make_revisions_cat");
+    if (temp) {
+        temp->setEnabled(isopen && !dir && single);
+    }
+
 }
 
 void kdesvnfilelist::slotSelectionChanged()
@@ -1365,4 +1373,26 @@ void kdesvnfilelist::slotDiffRevisions()
     dlg->saveDialogSize("revisions_dlg",false);
     delete dlg;
 
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotRevisionCat()
+ */
+void kdesvnfilelist::slotRevisionCat()
+{
+    SvnItem*k = singleSelected();
+    if (!k) return;
+    Rangeinput_impl*rdlg;
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    if (!dlg) {
+        return;
+    }
+    rdlg->setStartOnly(true);
+    if (dlg->exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
+        m_SvnWrapper->makeCat(r.first, k->fullName(),k->shortName());
+    }
+    dlg->saveDialogSize("revisions_dlg",false);
+    delete dlg;
 }

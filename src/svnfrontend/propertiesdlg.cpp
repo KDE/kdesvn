@@ -101,59 +101,52 @@ void PropertyListViewItem::unDeleteIt()
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
  */
-PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal, WFlags fl )
-    : KDialog( parent, name, modal, fl ),m_Item(which),m_changed(false),m_Client(aClient),m_Rev(aRev)
+PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
+    : KDialogBase(Plain,i18n("Modify properties"),Ok|Cancel|Help/*|User1|User2*/, Ok,
+      parent, name, modal, true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
+      m_Item(which),m_changed(false),
+      m_Client(aClient),m_Rev(aRev)
 {
     if ( !name )
     setName( "PropertiesDlg" );
-    PropertiesDlgLayout = new QVBoxLayout( this, 2, 2, "PropertiesDlgLayout");
 
-    m_Headlabel = new QLabel( this, "m_Headlabel" );
+    PropertiesDlgLayout = new QVBoxLayout( plainPage(), 2, 2, "PropertiesDlgLayout");
+
+    m_Headlabel = new QLabel( plainPage(), "m_Headlabel" );
     m_Headlabel->setAlignment( int( QLabel::WordBreak | QLabel::AlignCenter ) );
     PropertiesDlgLayout->addWidget( m_Headlabel );
 
     midLayout = new QHBoxLayout( 0, 0, 2, "midLayout");
 
-    m_PropertiesListview = new KListView( this, "m_PropertiesListview" );
+    m_PropertiesListview = new KListView( plainPage(), "m_PropertiesListview" );
     m_PropertiesListview->addColumn( i18n( "Properties" ) );
     m_PropertiesListview->addColumn( i18n( "Value" ) );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
     m_PropertiesListview->setShowSortIndicator( TRUE );
     //m_PropertiesListview->setDefaultRenameAction( KListView::Accept );
+#if 0
     m_PropertiesListview->setItemsRenameable(true);
     m_PropertiesListview->setRenameable(0,true);
     m_PropertiesListview->setRenameable(1,true);
+#endif
     m_PropertiesListview->setFullWidth( TRUE );
     midLayout->addWidget( m_PropertiesListview );
 
     m_rightLayout = new QVBoxLayout( 0, 0, 2, "m_rightLayout");
 
-    m_AddButton = new KPushButton( this, "m_AddButton" );
+    m_AddButton = new KPushButton( plainPage(), "m_AddButton" );
     m_rightLayout->addWidget( m_AddButton );
 
-    m_ModifyButton = new KPushButton( this, "m_ModifyButton" );
+    m_ModifyButton = new KPushButton( plainPage(), "m_ModifyButton" );
     m_rightLayout->addWidget( m_ModifyButton );
 
-    m_DeleteButton = new KPushButton( this, "m_DeleteButton" );
+    m_DeleteButton = new KPushButton( plainPage(), "m_DeleteButton" );
     m_rightLayout->addWidget( m_DeleteButton );
 
-    m_HelpButton = new KPushButton( this, "m_HelpButton" );
-    m_rightLayout->addWidget( m_HelpButton );
     m_rightSpacer = new QSpacerItem( 20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_rightLayout->addItem( m_rightSpacer );
     midLayout->addLayout( m_rightLayout );
     PropertiesDlgLayout->addLayout( midLayout );
-
-    m_ButtonLayout = new QHBoxLayout( 0, 0, 2, "m_ButtonLayout");
-
-    m_CloseButton = new KPushButton( this, "m_CloseButton" );
-    m_ButtonLayout->addWidget( m_CloseButton );
-
-    m_CancelButton = new KPushButton( this, "m_CancelButton" );
-    m_ButtonLayout->addWidget( m_CancelButton );
-    m_bottomSpacer = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    m_ButtonLayout->addItem( m_bottomSpacer );
-    PropertiesDlgLayout->addLayout( m_ButtonLayout );
 
     m_DeleteButton->setEnabled(false);
     m_ModifyButton->setEnabled(false);
@@ -163,12 +156,10 @@ PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn
     clearWState( WState_Polished );
 
     // signals and slots connections
-    connect( m_CloseButton, SIGNAL(clicked()), this, SLOT(accept()));
-    connect( m_CancelButton, SIGNAL(clicked()), this, SLOT( reject()));
-    connect( m_HelpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
     connect( m_AddButton, SIGNAL(clicked()), this, SLOT(slotAdd()));
     connect( m_ModifyButton, SIGNAL(clicked()), this, SLOT(slotModify()));
     connect( m_DeleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(this,SIGNAL(helpClicked()),SLOT(slotHelp()));
 
     connect(m_PropertiesListview,SIGNAL(itemRenamed(QListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(QListViewItem*,const QString&,int)));
     connect(m_PropertiesListview,SIGNAL(selectionChanged(QListViewItem*)),this,SLOT(slotSelectionChanged(QListViewItem*)));
@@ -202,9 +193,6 @@ void PropertiesDlg::languageChange()
     m_PropertiesListview->header()->setLabel( 0, i18n( "Properties" ) );
     m_PropertiesListview->header()->setLabel( 1, i18n( "Value" ) );
     QToolTip::add( m_PropertiesListview, i18n( "List of properties set" ) );
-    m_CloseButton->setText( i18n( "&Accept" ) );
-    m_CancelButton->setText( i18n( "&Cancel" ) );
-    m_HelpButton->setText( i18n( "&Help" ) );
     m_AddButton->setText(i18n("Add property"));
     m_ModifyButton->setText(i18n("Modify property"));
     m_DeleteButton->setText(i18n("Delete property"));
@@ -221,6 +209,11 @@ void PropertiesDlg::slotSelectionChanged(QListViewItem*item)
     m_ModifyButton->setEnabled(item);
     if (!item) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (item);
+    if (protected_Property(ki->currentName())) {
+        m_DeleteButton->setEnabled(false);
+        m_ModifyButton->setEnabled(false);
+        return;
+    }
     if (ki->deleted()) {
         m_DeleteButton->setText(i18n("Undelete property"));
     } else {
@@ -310,6 +303,10 @@ void PropertiesDlg::slotAdd()
 {
     EditProperty_impl dlg(this);
     if (dlg.exec()==QDialog::Accepted) {
+        if (protected_Property(dlg.PropName())) {
+            KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
+            return;
+        }
         if (checkExisting(dlg.PropName())) {
             KMessageBox::error(this,i18n("An property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
@@ -331,6 +328,7 @@ void PropertiesDlg::slotDelete()
     QListViewItem*qi = m_PropertiesListview->selectedItem();
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
+    if (protected_Property(ki->currentName())) return;
     if (ki->deleted()) {
         ki->unDeleteIt();
     } else {
@@ -348,10 +346,15 @@ void PropertiesDlg::slotModify()
     QListViewItem*qi = m_PropertiesListview->selectedItem();
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
+    if (protected_Property(ki->currentName())) return;
     EditProperty_impl dlg(this);
     dlg.setPropName(ki->currentName());
     dlg.setPropValue(ki->currentValue());
     if (dlg.exec()==QDialog::Accepted) {
+        if (protected_Property(dlg.PropName())) {
+            KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
+            return;
+        }
         if (checkExisting(dlg.PropName(),qi)) {
             KMessageBox::error(this,i18n("An property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
@@ -390,6 +393,10 @@ void PropertiesDlg::changedItems(tPropEntries&toSet,QValueList<QString>&toDelete
     PropertyListViewItem*ki;
     while ( iter.current() ) {
         ki = static_cast<PropertyListViewItem*> (iter.current());
+        ++iter;
+        if (protected_Property(ki->currentName())||protected_Property(ki->startName())) {
+            continue;
+        }
         if (ki->deleted()) {
             toDelete.push_back(ki->currentName());
         } else if (ki->currentName()!=ki->startName()){
@@ -398,6 +405,11 @@ void PropertiesDlg::changedItems(tPropEntries&toSet,QValueList<QString>&toDelete
         } else if (ki->currentValue()!=ki->startValue()) {
             toSet[ki->currentName()]=ki->currentValue();
         }
-        ++iter;
     }
+}
+
+bool PropertiesDlg::protected_Property(const QString&what)
+{
+    if (what.compare("svn:special")!=0) return false;
+    return true;
 }

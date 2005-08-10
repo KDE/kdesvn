@@ -11,7 +11,7 @@
 #define PROPERTIESDLG_H
 
 #include <qvariant.h>
-#include <kdialog.h>
+#include <kdialogbase.h>
 #include <qvaluelist.h>
 #include <qmap.h>
 #include <qstring.h>
@@ -31,7 +31,7 @@ namespace svn {
     class Client;
 }
 
-class PropertiesDlg : public KDialog
+class PropertiesDlg : public KDialogBase
 {
     Q_OBJECT
 
@@ -40,7 +40,7 @@ public:
 
     PropertiesDlg(const QString&, svn::Client*,
         const svn::Revision&aRev=svn::Revision(svn_opt_revision_working),
-        QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+        QWidget* parent = 0, const char* name = 0, bool modal = true);
     ~PropertiesDlg();
 
     bool hasChanged()const;
@@ -49,12 +49,10 @@ public:
 protected:
     QLabel* m_Headlabel;
     KListView* m_PropertiesListview;
-    KPushButton* m_CloseButton;
-    KPushButton* m_HelpButton;
     KPushButton* m_AddButton;
     KPushButton* m_DeleteButton;
     KPushButton* m_ModifyButton;
-    KPushButton* m_CancelButton;
+
     QVBoxLayout* PropertiesDlgLayout;
     QHBoxLayout* midLayout;
     QHBoxLayout* m_ButtonLayout;
@@ -83,6 +81,15 @@ protected slots:
 
 protected:
     virtual void initItem();
+
+    //! Check if a specific property may just internale
+    /*!
+     * That means, a property of that may not edit,added or deleted.
+     *
+     * This moment it just checks for "svn:special"
+     * \return true if protected property otherwise false
+     */
+    static bool protected_Property(const QString&);
 public slots:
     int exec();
 signals:

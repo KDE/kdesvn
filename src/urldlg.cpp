@@ -52,7 +52,7 @@ UrlDlg::~UrlDlg()
 void UrlDlg::init_dlg()
 {
     QVBoxLayout * topLayout = new QVBoxLayout( plainPage(), 0, spacingHint());
-    QLabel * label = new QLabel(i18n("Open repository") , plainPage());
+    QLabel * label = new QLabel(i18n("Open repository or working copy") , plainPage());
     topLayout->addWidget(label);
     KHistoryCombo * combo = new KHistoryCombo(0,"history_combo");
     combo->setDuplicatesEnabled(false);
@@ -61,6 +61,8 @@ void UrlDlg::init_dlg()
     urlRequester_->setMinimumWidth( urlRequester_->sizeHint().width() * 3 );
     topLayout->addWidget( urlRequester_ );
     urlRequester_->setFocus();
+    KFile::Mode mode = static_cast<KFile::Mode>(KFile::ExistingOnly|KFile::Directory);
+    urlRequester_->setMode(mode);
     connect(urlRequester_->comboBox(),SIGNAL(textChanged(const QString&)),SLOT(slotTextChanged(const QString&)));
 //    bool state = !urlName.isEmpty();
     enableButtonOK( false );

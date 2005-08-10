@@ -137,10 +137,9 @@ void kdesvn::setupActions()
 {
     KAction*tmpAction;
     tmpAction = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    tmpAction->setText(i18n("Open working copy"));
+    tmpAction->setText(i18n("Open repository or working copy"));
     tmpAction = KStdAction::close(this,SLOT(fileClose()),actionCollection());
     tmpAction->setEnabled(false);
-    tmpAction = new KAction(i18n("Open remote repository"),"connect_no",KShortcut(),this,SLOT(urlOpen()),actionCollection(),"open_remote_repository");
 
     KConfigGroup cs(KGlobal::config(), "general_items");
     KConfigGroup cs2(KGlobal::config(), "subversion");
@@ -225,25 +224,9 @@ void kdesvn::fileNew()
     (new kdesvn)->show();
 }
 
-void kdesvn::urlOpen()
-{
-//    KURL url = KURLRequesterDlg::getURL(QString::null,this,i18n("Open remote repository"));
-    KURL url = UrlDlg::getURL(this);
-    if (!url.isEmpty())
-        m_view->openURL(url);
-}
-
 void kdesvn::fileOpen()
 {
-    // this slot is called whenever the File->Open menu is selected,
-    // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
-    // button is clicked
-/*
-    // this brings up the generic open dialog
-    KURL url = KURLRequesterDlg::getURL(QString::null, this, i18n("Open Location") );
-*/
-    // standard filedialog
-    KURL url = KFileDialog::getExistingDirectory(QString::null, this, i18n("Open working copy"));
+    KURL url = UrlDlg::getURL(this);
     if (!url.isEmpty())
         m_view->openURL(url);
 }

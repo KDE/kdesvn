@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "svnlogdlgimp.h"
 #include "svncpp/log_entry.hpp"
+#include "helpers/sub2qt.h"
 #include <qdatetime.h>
 #include <klistview.h>
 #include <ktextbrowser.h>
@@ -61,7 +62,7 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
 {
     setMultiLinesEnabled(true);
     _revision=_entry.revision;
-    fullDate.setTime_t(_entry.date/(1000*1000),Qt::UTC);
+    fullDate=helpers::sub2qt::apr_time2qt(_entry.date);
     setText(COL_REV,QString("%1").arg(_revision));
     setText(COL_AUTHOR,QString::fromLocal8Bit(_entry.author.c_str()));
     setText(COL_DATE,fullDate.toString(Qt::LocalDate));

@@ -228,7 +228,7 @@ QString SvnItem::cmtAuthor()const
     return QString::fromLocal8Bit(p_Item->m_Stat.entry().cmtAuthor());
 }
 
-unsigned int SvnItem::cmtRev()const
+long int SvnItem::cmtRev()const
 {
     return p_Item->m_Stat.entry().cmtRev();
 }

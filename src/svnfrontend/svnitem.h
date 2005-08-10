@@ -49,7 +49,7 @@ public:
     virtual bool isIgnored()const;
     virtual QString infoText()const;
     virtual QString cmtAuthor()const;
-    virtual unsigned int cmtRev()const;
+    virtual long int cmtRev()const;
     virtual bool isLocked()const;
     virtual QString lockOwner()const;
     virtual QString getParentDir()const=0;

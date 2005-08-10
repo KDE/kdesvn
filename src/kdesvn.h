@@ -46,7 +46,7 @@ class KBookmarkMenu;
  *
  * @short Main window class
  * @author Rajko Albrecht <ral@alwins-world.de>
- * @version 0.1
+ * @version $Rev$
  */
 class kdesvn : public KMainWindow,public KBookmarkOwner
 {

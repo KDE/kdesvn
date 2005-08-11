@@ -1,17 +1,23 @@
+version 0.4.2
+    * bugfix for not deleted (but empty) temporary files
+
+version 0.4.1
+    * bugfix for building against subversion 1.1.x
+
 version 0.4
-	* Lock/Unlock items
-	* Ignore/Unignore files
-	* fix buildproblems with gcc 4
-	* some basic settings implemented
-	* fixed some wrong actions activating/deactivating
-	* SSL interface 
+    * Lock/Unlock items
+    * Ignore/Unignore files
+    * fix buildproblems with gcc 4
+    * some basic settings implemented
+    * fixed some wrong actions activating/deactivating
+    * SSL interface
 
 version 0.3:
 
-	* Adding files & dirs to working copy via drag&drop works
-	* Importing files & dirs to repository via drag&drop works
-	* Renaming/Copy of files/dirs works
-	* Merge between two revisions of a file works
-	* fixed enabling/disabling menu/toolbar entries
-	* exchanged logo
-	* started a Changelog
+    * Adding files & dirs to working copy via drag&drop works
+    * Importing files & dirs to repository via drag&drop works
+    * Renaming/Copy of files/dirs works
+    * Merge between two revisions of a file works
+    * fixed enabling/disabling menu/toolbar entries
+    * exchanged logo
+    * started a Changelog

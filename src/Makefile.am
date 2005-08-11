@@ -2,7 +2,7 @@
 
 # this is the program that gets installed.  it's name is used for all
 # of the other Makefile.am variables
-bin_PROGRAMS = kdesvn
+bin_PROGRAMS = kdesvn kdesvnaskpass
 
 # set the include path for X, qt and KDE
 INCLUDES = -I$(top_srcdir)/src $(all_includes)
@@ -41,3 +41,6 @@ rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
 SUBDIRS = svnfrontend svncpp helpers pics
+kdesvnaskpass_LDFLAGS = $(KDE_RPATH) $(all_libraries)
+kdesvnaskpass_SOURCES = kdesvn-askpass.cpp
+kdesvnaskpass_LDADD = $(LIB_KDEUI)

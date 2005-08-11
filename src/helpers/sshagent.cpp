@@ -49,7 +49,7 @@ SshAgent::~SshAgent()
 
 bool SshAgent::querySshAgent()
 {
-    kdDebug(8051) << "SshAgent::querySshAgent(): ENTER" << endl;
+    kdDebug() << "SshAgent::querySshAgent(): ENTER" << endl;
 
     if( m_isRunning )
         return true;
@@ -58,7 +58,7 @@ bool SshAgent::querySshAgent()
     char* pid;
     if( (pid = ::getenv("SSH_AGENT_PID")) != 0 )
     {
-        kdDebug(8051) << "SshAgent::querySshAgent(): ssh-agent already exists"
+        kdDebug() << "SshAgent::querySshAgent(): ssh-agent already exists"
                       << endl;
 
         m_pid = QString::fromLocal8Bit(pid);
@@ -73,7 +73,7 @@ bool SshAgent::querySshAgent()
     // We have to start a new ssh-agent process
     else
     {
-        kdDebug(8051) << "SshAgent::querySshAgent(): start ssh-agent" << endl;
+        kdDebug() << "SshAgent::querySshAgent(): start ssh-agent" << endl;
 
         m_isOurAgent = true;
         m_isRunning  = startSshAgent();
@@ -85,10 +85,10 @@ bool SshAgent::querySshAgent()
 
 bool SshAgent::addSshIdentities()
 {
-    kdDebug(8051) << "SshAgent::addSshIdentities(): ENTER" << endl;
+    kdDebug() << "SshAgent::addSshIdentities(): ENTER" << endl;
 
     if( !m_isRunning || !m_isOurAgent ) {
-        kdDebug(8051) << "SshAgent::addSshIdentities(): Not ours" << endl;
+        kdDebug() << "SshAgent::addSshIdentities(): Not ours" << endl;
         return false;
     }
 
@@ -97,7 +97,7 @@ bool SshAgent::addSshIdentities()
 
     proc.setEnvironment("SSH_AGENT_PID", m_pid);
     proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
-    proc.setEnvironment("SSH_ASKPASS", "cvsaskpass");
+    proc.setEnvironment("SSH_ASKPASS", "kdesvnaskpass");
 
     proc << "ssh-add";
 
@@ -112,7 +112,7 @@ bool SshAgent::addSshIdentities()
     // TODO CL use timeout?
     proc.wait();
 
-    kdDebug(8051) << "SshAgent::slotProcessExited(): added identities" << endl;
+    kdDebug() << "SshAgent::slotProcessExited(): added identities" << endl;
 
     return (proc.normalExit() && proc.exitStatus() == 0);
 }
@@ -120,7 +120,7 @@ bool SshAgent::addSshIdentities()
 
 void SshAgent::killSshAgent()
 {
-    kdDebug(8051) << "SshAgent::killSshAgent(): ENTER" << endl;
+    kdDebug() << "SshAgent::killSshAgent(): ENTER" << endl;
 
     if( !m_isRunning || !m_isOurAgent )
         return;
@@ -131,13 +131,13 @@ void SshAgent::killSshAgent()
 
     proc.start(KProcess::DontCare, KProcess::NoCommunication);
 
-    kdDebug(8051) << "SshAgent::killSshAgent(): killed pid = " << m_pid << endl;
+    kdDebug() << "SshAgent::killSshAgent(): killed pid = " << m_pid << endl;
 }
 
 
 void SshAgent::slotProcessExited(KProcess*)
 {
-    kdDebug(8051) << "SshAgent::slotProcessExited(): ENTER" << endl;
+    kdDebug() << "SshAgent::slotProcessExited(): ENTER" << endl;
 
     QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
     QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
@@ -184,7 +184,7 @@ void SshAgent::slotProcessExited(KProcess*)
         }
     }
 
-    kdDebug(8051) << "SshAgent::slotProcessExited(): pid = " << m_pid
+    kdDebug() << "SshAgent::slotProcessExited(): pid = " << m_pid
                   << ", socket = " << m_authSock << endl;
 }
 
@@ -196,7 +196,7 @@ void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
     QString output = QString::fromLocal8Bit(buffer, buflen);
     m_outputLines += QStringList::split("\n", output);
 
-    kdDebug(8051) << "SshAgent::slotReceivedStdout(): output = " << output << endl;
+    kdDebug() << "SshAgent::slotReceivedStdout(): output = " << output << endl;
 }
 
 
@@ -207,13 +207,13 @@ void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
     QString output = QString::fromLocal8Bit(buffer, buflen);
     m_outputLines += QStringList::split("\n", output);
 
-    kdDebug(8051) << "SshAgent::slotReceivedStderr(): output = " << output << endl;
+    kdDebug() << "SshAgent::slotReceivedStderr(): output = " << output << endl;
 }
 
 
 bool SshAgent::startSshAgent()
 {
-    kdDebug(8051) << "SshAgent::startSshAgent(): ENTER" << endl;
+    kdDebug() << "SshAgent::startSshAgent(): ENTER" << endl;
 
     KProcess proc;
 

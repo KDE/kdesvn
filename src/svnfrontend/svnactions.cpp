@@ -46,7 +46,7 @@
 #include <kinputdialog.h>
 #include <qvaluelist.h>
 #include <kprocess.h>
-#include <ktempfile.h>
+#include <ktempdir.h>
 #include <kdialogbase.h>
 #include <qvbox.h>
 #include <kapplication.h>
@@ -645,10 +645,11 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
 {
     if (!m_CurrentContext) return;
     QString ex;
-    KTempFile tfile;
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
-        ex = helpers::stl2qt::stl2qtstring(m_Svnclient.diff(svn::Path(tfile.name().local8Bit()),
+        ex = helpers::stl2qt::stl2qtstring(m_Svnclient.diff(svn::Path(tdir.name().local8Bit()),
             svn::Path(what.local8Bit()),
             start, end,
             true,false,false));

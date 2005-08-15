@@ -902,14 +902,13 @@ void SvnActions::slotExportCurrent()
 
 void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force,bool _exp,bool openIt)
 {
-    if (!m_CurrentContext) return;
     QString fUrl = rUrl;
     QString ex;
     while (fUrl.endsWith("/")) {
         fUrl.truncate(fUrl.length()-1);
     }
     svn::Path p(tPath.local8Bit());
-    if (!_exp) reInitClient();
+    if (!_exp||!m_CurrentContext) reInitClient();
     try {
         StopDlg sdlg(m_SvnContext,0,0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
         if (_exp) {

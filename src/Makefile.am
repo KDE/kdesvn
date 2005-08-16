@@ -57,7 +57,8 @@ libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
 
 # this is where the desktop file will go
 partdesktopdir   = $(kde_servicesdir)
-partdesktop_DATA = kdesvn_part.desktop
+# is set via the application file
+# partdesktop_DATA = kdesvn_part.desktop
 
 # this is where the part's XML-GUI resource file goes
 partrcdir   = $(kde_datadir)/kdesvnpart

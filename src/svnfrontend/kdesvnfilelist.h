@@ -50,7 +50,7 @@ class kdesvnfilelist : public KListView,public ItemDisplay
     Q_OBJECT
     friend class FileListViewItem;
 public:
-    kdesvnfilelist(QWidget *parent = 0, const char *name = 0);
+    kdesvnfilelist(KActionCollection*,QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
 
     virtual bool openURL( const KURL &url,bool noReinit=false );
@@ -125,7 +125,6 @@ private:
 protected slots:
     virtual void slotItemClicked(QListViewItem*);
     virtual void slotRightButton(QListViewItem *, const QPoint &, int);
-
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);

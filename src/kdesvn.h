@@ -27,13 +27,10 @@
 #endif
 
 #include <kapplication.h>
-#include <kmainwindow.h>
+#include <kparts/mainwindow.h>
 #include <qtimer.h>
 #include <kbookmarkmanager.h>
 
-#include "kdesvnview.h"
-
-class KPrinter;
 class KURL;
 class KAction;
 class KActionMenu;
@@ -48,7 +45,7 @@ class KBookmarkMenu;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version $Rev$
  */
-class kdesvn : public KMainWindow,public KBookmarkOwner
+class kdesvn : public KParts::MainWindow,public KBookmarkOwner
 {
     Q_OBJECT
 public:
@@ -95,24 +92,16 @@ protected:
 
 
 public slots:
-    virtual void slotDispPopup(const QString&);
     void slotUrlOpened(bool);
-    virtual void slotDisplayIgnored(bool);
-    virtual void slotDisplayUnkown(bool);
 private slots:
     void fileNew();
-    void fileOpen();
-    void fileSave();
-    void fileSaveAs();
-    void filePrint();
     void fileClose();
     void optionsPreferences();
-    void slotUseKompare(bool);
+    void optionsShowToolbar();
+    void optionsShowStatusbar();
 
-    void changeStatusbar(const QString& text);
-    void changeCaption(const QString& text);
+    void changeStatusbar(const QString&);
     void resetStatusBar();
-
 private:
     void setupAccel();
     void setupActions();
@@ -120,21 +109,19 @@ private:
     void disconnectActionCollection( KActionCollection *coll );
 
 private:
-    kdesvnView *m_view;
-
-    KPrinter   *m_printer;
     KActionMenu *m_FileMenu;
-    QTimer *statusResetTimer;
     QString m_bookmarkFile;
     KBookmarkManager * m_BookmarkManager;
     KActionMenu* m_BookmarksActionmenu;
     KActionCollection*m_Bookmarkactions;
     KBookmarkMenu * m_pBookmarkMenu;
-
+    KParts::ReadOnlyPart *m_part;
+    KToggleAction *m_toolbarAction;
+    KToggleAction *m_statusbarAction;
 protected slots:
-    virtual void slotLogFollowNodes(bool);
-signals:
-    void refreshTree();
+    virtual void optionsConfigureToolbars();
+    virtual void optionsConfigureKeys();
+    virtual void applyNewToolbarConfig();
 };
 
 #endif // _KDESVN_H_

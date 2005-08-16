@@ -21,7 +21,6 @@
 
 #include "kdesvn.h"
 #include "pref.h"
-#include "urldlg.h"
 
 #include <qdragobject.h>
 #include <kprinter.h>
@@ -53,23 +52,22 @@
 #include <kbookmarkmanager.h>
 #include <kbookmarkmenu.h>
 #include <kdebug.h>
+#include <klibloader.h>
+#include <kedittoolbar.h>
+#include <kkeydialog.h>
 
 kdesvn::kdesvn()
-    : KMainWindow( 0, "kdesvn" ),
-      KBookmarkOwner(),
-      m_view(new kdesvnView(this)),
-      m_printer(0),
-      statusResetTimer(new QTimer(this))
+    : KParts::MainWindow( 0, "kdesvn" ),
+      KBookmarkOwner()
 {
-    // accept dnd
-    setAcceptDrops(true);
-
-    // tell the KMainWindow that this is indeed the main widget
-    setCentralWidget(m_view);
-
+#ifdef TESTING_RC
+    setXMLFile(TESTING_RC);
+    kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
+#else
+    setXMLFile("kdesvnui.rc");
+#endif
     // then, setup our actions
     setupActions();
-
     // and a status bar
     statusBar()->show();
 
@@ -88,26 +86,39 @@ kdesvn::kdesvn()
     connectActionCollection( m_Bookmarkactions );
 
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager,this,m_BookmarksActionmenu->popupMenu(),m_Bookmarkactions,true);
-    m_BookmarksActionmenu->plug(menuBar());
+//    m_BookmarksActionmenu->plug(menuBar());
+    // this routine will find and load our Part.  it finds the Part by
+    // name which is a bad idea usually.. but it's alright in this
+    // case since our Part is made for this Shell
+    KLibFactory *factory = KLibLoader::self()->factory("libkdesvnpart");
+    if (factory)
+    {
+        // now that the Part is loaded, we cast it to a Part to get
+        // our hands on it
+        m_part = static_cast<KParts::ReadOnlyPart *>(factory->create(this,
+                                "kdesvn_part", "KParts::ReadOnlyPart" ));
 
-    createStandardStatusBarAction();
-    setStandardToolBarMenuEnabled(true);
-#ifdef TESTING_RC
-    createGUI(TESTING_RC);
-    kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
-#else
-    createGUI();
-#endif
-    KStdAction::configureToolbars(this,SLOT(configureToolbars() ), actionCollection());
+        if (m_part)
+        {
+            // tell the KParts::MainWindow that this is indeed the main widget
+            setCentralWidget(m_part->widget());
+
+            // and integrate the part's GUI with the shell's
+            createGUI(m_part);
+        }
+    }
+    else
+    {
+        // if we couldn't find our Part, we exit since the Shell by
+        // itself can't do anything useful
+        KMessageBox::error(this, i18n("Could not find our part."));
+        kapp->quit();
+        // we return here, cause kapp->quit() only means "exit the
+        // next time we enter the event loop...
+        return;
+    }
 
     setAutoSaveSettings();
-
-    // allow the view to change the statusbar and caption
-    connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
-            this,   SLOT(changeStatusbar(const QString&)));
-    connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
-            this,   SLOT(changeCaption(const QString&)));
-    connect(statusResetTimer,SIGNAL(timeout()),this,SLOT(resetStatusBar()));
 }
 
 void kdesvn::connectActionCollection( KActionCollection *coll )
@@ -130,48 +141,21 @@ kdesvn::~kdesvn()
 
 void kdesvn::load(const KURL& url)
 {
-    m_view->openURL(url);
+    if (m_part) m_part->openURL(url);
 }
 
 void kdesvn::setupActions()
 {
-    KAction*tmpAction;
-    tmpAction = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    tmpAction->setText(i18n("Open repository or working copy"));
-    tmpAction = KStdAction::close(this,SLOT(fileClose()),actionCollection());
-    tmpAction->setEnabled(false);
-
-    KConfigGroup cs(KGlobal::config(), "general_items");
-    KConfigGroup cs2(KGlobal::config(), "subversion");
-
-    KToggleAction *toggletemp;
-    toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
-            actionCollection(),"toggle_use_kompare");
-    toggletemp->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
-
-    toggletemp = new KToggleAction(i18n("Logs follows node changes"),KShortcut(),
-            actionCollection(),"toggle_log_follows");
-    toggletemp->setChecked(cs.readBoolEntry("log_follows_nodes",true));
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
-
-    toggletemp = new KToggleAction(i18n("Display ignored files"),KShortcut(),
-            actionCollection(),"toggle_ignored_files");
-    toggletemp->setChecked(cs2.readBoolEntry("display_ignored_files",true));
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
-    toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
-            actionCollection(),"toggle_unknown_files");
-    toggletemp->setChecked(cs2.readBoolEntry("display_unknown_files",true));
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
-
+    KStdAction::close(this,SLOT(fileClose()),actionCollection());
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
-    KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
-    KActionCollection*t=m_view->filesActions();
-    if (t) {
-        connectActionCollection(t);
-        (*actionCollection())+=(*t);
-    }
+    KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
+    KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
+
+    m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
+    m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
+
+//    KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
     // this doesn't do anything useful.  it's just here to illustrate
     // how to insert a custom menu and menu item
 /*
@@ -181,9 +165,29 @@ void kdesvn::setupActions()
 */
 }
 
+void kdesvn::optionsShowToolbar()
+{
+    // this is all very cut and paste code for showing/hiding the
+    // toolbar
+    if (m_toolbarAction->isChecked())
+        toolBar()->show();
+    else
+        toolBar()->hide();
+}
+
+void kdesvn::optionsShowStatusbar()
+{
+    // this is all very cut and paste code for showing/hiding the
+    // statusbar
+    if (m_statusbarAction->isChecked())
+        statusBar()->show();
+    else
+        statusBar()->hide();
+}
+
 void kdesvn::fileClose()
 {
-    m_view->closeMe();
+    if (m_part) m_part->closeURL();
 }
 
 void kdesvn::saveProperties(KConfig *config)
@@ -191,12 +195,12 @@ void kdesvn::saveProperties(KConfig *config)
     // the 'config' object points to the session managed
     // config file.  anything you write here will be available
     // later when this app is restored
-
-    if (!m_view->currentURL().isEmpty()) {
+    if (!m_part) return;
+    if (!m_part->url().isEmpty()) {
 #if KDE_IS_VERSION(3,1,3)
-        config->writePathEntry("lastURL", m_view->currentURL());
+        config->writePathEntry("lastURL", m_part->url().prettyURL());
 #else
-        config->writeEntry("lastURL", m_view->currentURL());
+        config->writeEntry("lastURL", m_part->url().prettyURL());
 #endif
     }
 }
@@ -210,8 +214,8 @@ void kdesvn::readProperties(KConfig *config)
 
     QString url = config->readPathEntry("lastURL");
 
-    if (!url.isEmpty())
-        m_view->openURL(KURL(url));
+    if (!url.isEmpty() && m_part)
+        m_part->openURL(KURL(url));
 }
 
 void kdesvn::fileNew()
@@ -224,54 +228,14 @@ void kdesvn::fileNew()
     (new kdesvn)->show();
 }
 
+#if 0
 void kdesvn::fileOpen()
 {
     KURL url = UrlDlg::getURL(this);
     if (!url.isEmpty())
-        m_view->openURL(url);
+        m_part->openURL(url);
 }
-
-void kdesvn::fileSave()
-{
-    // this slot is called whenever the File->Save menu is selected,
-    // the Save shortcut is pressed (usually CTRL+S) or the Save toolbar
-    // button is clicked
-
-    // save the current file
-}
-
-void kdesvn::fileSaveAs()
-{
-    // this slot is called whenever the File->Save As menu is selected,
-    KURL file_url = KFileDialog::getSaveURL();
-    if (!file_url.isEmpty() && file_url.isValid())
-    {
-        // save your info, here
-    }
-}
-
-void kdesvn::filePrint()
-{
-    // this slot is called whenever the File->Print menu is selected,
-    // the Print shortcut is pressed (usually CTRL+P) or the Print toolbar
-    // button is clicked
-    if (!m_printer) m_printer = new KPrinter;
-    if (m_printer->setup(this))
-    {
-        // setup the printer.  with Qt, you always "print" to a
-        // QPainter.. whether the output medium is a pixmap, a screen,
-        // or paper
-        QPainter p;
-        p.begin(m_printer);
-
-        // we let our view do the actual printing
-        QPaintDeviceMetrics metrics(m_printer);
-        m_view->print(&p, metrics.height(), metrics.width());
-
-        // and send the result to the printer
-        p.end();
-    }
-}
+#endif
 
 void kdesvn::optionsPreferences()
 {
@@ -289,14 +253,7 @@ void kdesvn::optionsPreferences()
 void kdesvn::changeStatusbar(const QString& text)
 {
     // display the text on the statusbar
-    statusResetTimer->stop();
     statusBar()->message(text);
-}
-
-void kdesvn::changeCaption(const QString& text)
-{
-    // display the text on the caption
-    setCaption(text);
 }
 
 void kdesvn::resetStatusBar()
@@ -306,8 +263,8 @@ void kdesvn::resetStatusBar()
 
 void kdesvn::openBookmarkURL (const QString &_url)
 {
-    if (!_url.isEmpty())
-        m_view->openURL(_url);
+    if (!_url.isEmpty() && m_part)
+        m_part->openURL(_url);
 }
 
 QString kdesvn::currentTitle () const
@@ -317,18 +274,8 @@ QString kdesvn::currentTitle () const
 
 QString kdesvn::currentURL () const
 {
-    return m_view->currentURL();
-}
-
-void kdesvn::slotDispPopup(const QString&name)
-{
-    QWidget *w = factory()->container(name, this);
-    QPopupMenu *popup = static_cast<QPopupMenu *>(w);
-    if (!popup) {
-        kdDebug()<<"Error getting popupMenu"<<endl;
-        return;
-    }
-    popup->exec(QCursor::pos());
+    if (!m_part) return "";
+    return m_part->url().prettyURL();
 }
 
 #include "kdesvn.moc"
@@ -345,40 +292,47 @@ void kdesvn::slotUrlOpened(bool how)
     }
 }
 
-void kdesvn::slotUseKompare(bool how)
+
+/*!
+    \fn kdesvn::optionsConfigureToolbars()
+ */
+void kdesvn::optionsConfigureToolbars()
 {
-    /// @todo make it into a settings class
-    KConfigGroup cs(KGlobal::config(), "general_items");
-    cs.writeEntry("use_kompare_for_diff",how);
+#if defined(KDE_MAKE_VERSION)
+# if KDE_VERSION >= KDE_MAKE_VERSION(3,1,0)
+    saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
+# else
+    saveMainWindowSettings(KGlobal::config() );
+# endif
+#else
+    saveMainWindowSettings(KGlobal::config() );
+#endif
+
+    // use the standard toolbar editor
+    KEditToolbar dlg(factory());
+    connect(&dlg, SIGNAL(newToolbarConfig()),
+            this, SLOT(applyNewToolbarConfig()));
+    dlg.exec();
 }
 
 
 /*!
-    \fn kdesvn::slotLogFollowNodes(bool)
+    \fn kdesvn::applyNewToolbarConfig()
  */
-void kdesvn::slotLogFollowNodes(bool how)
+void kdesvn::applyNewToolbarConfig()
 {
-    KConfigGroup cs(KGlobal::config(), "general_items");
-    cs.writeEntry("toggle_log_follows",how);
+#if defined(KDE_MAKE_VERSION)
+# if KDE_VERSION >= KDE_MAKE_VERSION(3,1,0)
+    applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
+# else
+    applyMainWindowSettings(KGlobal::config());
+# endif
+#else
+    applyMainWindowSettings(KGlobal::config());
+#endif
 }
 
-
-/*!
-    \fn kdesvn::slotDisplayIgnored(bool)
- */
-void kdesvn::slotDisplayIgnored(bool how)
+void kdesvn::optionsConfigureKeys()
 {
-    KConfigGroup cs(KGlobal::config(), "subversion");
-    cs.writeEntry("display_ignored_files",how);
-    emit refreshTree();
-}
-
-
-/*!
-    \fn kdesvn::slotDisplayUnkown(bool)
- */
-void kdesvn::slotDisplayUnkown(bool how)
-{
-    KConfigGroup cs(KGlobal::config(), "subversion");
-    cs.writeEntry("display_unknown_files",how);
+    KKeyDialog::configure(actionCollection());
 }

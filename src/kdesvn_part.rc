@@ -1,0 +1,169 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="kdesvn_part" version="1">
+<MenuBar>
+  <Menu name="file">
+    <Action name="file_open"/>
+  </Menu>
+  <Menu noMerge="1" name="settings">
+    <Menu name="quicksettings">
+     <text>Quick settings</text>
+     <Action name="toggle_use_kompare" />
+     <Action name="toggle_log_follows" />
+     <Action name="toggle_ignored_files" />
+   </Menu>
+  </Menu>
+  <Menu name="subversion_main" >
+   <text>Subversion</text>
+   <Menu name="subversion_general" >
+    <text>General</text>
+    <Action name="make_svn_log_full" />
+    <Action name="make_svn_log" />
+    <Action name="make_svn_info" />
+    <Action name="make_revisions_diff" />
+    <Separator/>
+    <Action name="make_svn_blame" />
+    <Action name="make_svn_range_blame" />
+    <Action name="make_svn_cat" />
+    <Action name="make_revisions_cat" />
+    <Separator/>
+    <Action name="make_svn_rename" />
+    <Action name="make_svn_copy" />
+    <Action name="make_svn_remove" />
+    <Action name="make_svn_mkdir" />
+    <Action name="make_import_dirs_into_current" />
+    <Separator/>
+    <Action name="make_svn_checkout" />
+    <Action name="make_svn_export" />
+    <Separator/>
+    <Action name="make_svn_lock"/>
+    <Action name="make_svn_unlock"/>
+   </Menu>
+   <Menu name="subversion_working_copy" >
+    <text>Working copy</text>
+    <Action name="make_svn_headupdate" />
+    <Action name="make_svn_revupdate" />
+    <Action name="make_svn_commit" />
+    <Action name="make_svn_headdiff" />
+    <Action name="make_svn_property" />
+    <Separator/>
+    <Action name="make_svn_add" />
+    <Action name="make_svn_revert" />
+    <Action name="make_resolved" />
+    <Action name="make_svn_merge_revisions" />
+    <Action name="make_svn_ignore" />
+    <Separator/>
+    <Action name="make_cleanup" />
+    <Action name="make_svn_switch" />
+    <Separator/>
+    <Action name="make_switch_to_repo" />
+   </Menu>
+   <Menu name="subversion_repo" >
+    <text>Repository</text>
+    <Action name="make_svn_checkout_current" />
+    <Action name="make_svn_export_current" />
+   </Menu>
+   <Action name="make_view_refresh" />
+  </Menu>
+</MenuBar>
+ <Menu name="local_context" >
+  <text>Actions</text>
+  <Action name="make_svn_log_full" />
+  <Action name="make_svn_log" />
+  <Action name="make_svn_property" />
+  <Action name="make_svn_info" />
+  <Separator/>
+  <Action name="make_svn_rename" />
+  <Action name="make_svn_copy" />
+  <Separator/>
+  <Action name="make_svn_blame" />
+  <Action name="make_svn_cat" />
+  <Separator/>
+  <Action name="make_svn_headupdate" />
+  <Action name="make_svn_revupdate" />
+  <Action name="make_svn_commit" />
+  <Action name="make_svn_headdiff" />
+  <Separator/>
+  <Action name="make_svn_add" />
+  <Action name="make_svn_remove" />
+  <Action name="make_svn_ignore" />
+  <Action name="make_svn_revert" />
+  <Action name="make_resolved" />
+  <Separator/>
+  <Action name="make_svn_mkdir" />
+  <Action name="make_cleanup" />
+  <Separator/>
+  <Action name="make_svn_lock"/>
+  <Action name="make_svn_unlock"/>
+  <Separator/>
+  <Action name="make_view_refresh" />
+ </Menu>
+ <Menu name="remote_context" >
+  <Action name="make_svn_log_full" />
+  <Action name="make_svn_log" />
+  <Action name="make_svn_info" />
+  <Separator/>
+  <Action name="make_svn_rename" />
+  <Action name="make_svn_copy" />
+  <Separator/>
+  <Action name="make_svn_blame" />
+  <Action name="make_svn_cat" />
+  <Action name="make_revisions_diff" />
+  <Action name="make_svn_remove" />
+  <Action name="make_svn_mkdir" />
+  <Separator/>
+  <Action name="make_svn_lock"/>
+  <Action name="make_svn_unlock"/>
+  <Separator/>
+  <Action name="make_svn_checkout_current" />
+  <Action name="make_svn_export_current" />
+  <Separator/>
+  <Action name="make_view_refresh" />
+ </Menu>
+ <Menu name="general_local">
+  <Action name="make_svn_headupdate" />
+  <Action name="make_svn_commit" />
+  <Separator/>
+  <Action name="make_view_refresh" />
+  <Action name="make_cleanup" />
+ </Menu>
+ <Menu name="general_remote">
+  <Action name="make_svn_mkdir" />
+  <Separator/>
+  <Action name="make_svn_checkout_current" />
+  <Action name="make_svn_export_current" />
+  <Separator/>
+  <Action name="make_view_refresh" />
+ </Menu>
+ <Menu name="general_empty" >
+  <Action name="file_open" />
+  <Action name="open_remote_repository" />
+  <Separator/>
+  <Action name="bookmarks" />
+  <Separator/>
+  <Action name="make_svn_checkout" />
+  <Action name="make_svn_export" />
+ </Menu>
+ <ToolBar name="subversionToolBar">
+  <text>Subversion toolbar</text>
+  <Action name="make_svn_headupdate" />
+  <Action name="make_svn_commit" />
+  <Separator name="separator_3" />
+  <Action name="make_svn_log_full" />
+  <Action name="make_svn_info" />
+  <Action name="make_svn_blame" />
+  <Separator name="separator_2" />
+  <Action name="make_svn_add" />
+  <Action name="make_svn_remove" />
+  <Action name="make_svn_merge_revisions" />
+  <Separator name="separator_1" />
+  <Action name="make_svn_checkout" />
+  <Action name="make_svn_export" />
+  <Separator name="separator_0" />
+  <Action name="make_view_refresh" />
+ </ToolBar>
+ <ToolBar name="mainToolBar" >
+  <text>Main Toolbar</text>
+  <Action name="file_open" />
+  <Action name="file_close" />
+ </ToolBar>
+</kpartgui>

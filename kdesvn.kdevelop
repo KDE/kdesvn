@@ -29,8 +29,8 @@
       <terminal>false</terminal>
       <directoryradio>executable</directoryradio>
       <runarguments>
-        <kdesvn/>
-        <kdesvnaskpass></kdesvnaskpass>
+        <kdesvn></kdesvn>
+        <kdesvnaskpass/>
       </runarguments>
       <customdirectory>/</customdirectory>
       <programargs/>
@@ -74,14 +74,14 @@
         <f77compiler>kdevg77options</f77compiler>
         <cxxflags>-O0 -g3</cxxflags>
         <envvars/>
-        <topsourcedir/>
-        <cppflags>-DTESTING_RC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvnui.rc\\\&quot;\&quot;</cppflags>
-        <ldflags/>
-        <ccompilerbinary/>
-        <cxxcompilerbinary/>
-        <f77compilerbinary/>
-        <cflags/>
-        <f77flags/>
+        <topsourcedir></topsourcedir>
+        <cppflags>-DTESTING_RC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvnui.rc\\\&quot;\&quot; -DTESTING_PARTRC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvn_part.rc\\\&quot;\&quot;</cppflags>
+        <ldflags></ldflags>
+        <ccompilerbinary></ccompilerbinary>
+        <cxxcompilerbinary></cxxcompilerbinary>
+        <f77compilerbinary></f77compilerbinary>
+        <cflags></cflags>
+        <f77flags></f77flags>
       </debug>
     </configurations>
     <subclassing>
@@ -144,15 +144,15 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs/>
-      <gdbpath/>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
       <runappinappdirectory>true</runappinappdirectory>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
     </general>
     <display>
       <staticmembers>false</staticmembers>

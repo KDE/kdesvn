@@ -54,7 +54,7 @@ public:
     /**
      * Default constructor
      */
-    kdesvnView(QWidget *parent);
+    kdesvnView(KActionCollection*,QWidget *parent,const char*name=0);
 
     /**
      * Destructor
@@ -69,32 +69,35 @@ public:
     /**
      * Random 'set' function accessed by DCOP
      */
-    virtual void openURL(QString url);
+    virtual bool openURL(QString url);
 
     /**
      * Random 'set' function
      */
-    virtual void openURL(const KURL& url);
+    virtual bool openURL(const KURL& url);
 
     /**
      * Print this view to any medium -- paper or not
      */
     void print(QPainter *, int height, int width);
 
-    KActionCollection*filesActions();
-
 signals:
     /**
      * Use this signal to change the content of the statusbar
      */
-    void signalChangeStatusbar(const QString& text);
+    void signalChangeStatusbar(const QString&);
 
     /**
      * Use this signal to change the content of the caption
      */
-    void signalChangeCaption(const QString& text);
+    void signalChangeCaption(const QString&);
+
+    void sigShowPopup(const QString&);
 public slots:
     virtual void closeMe();
+    virtual void slotDispPopup(const QString&);
+    virtual void refreshCurrentTree();
+
 protected slots:
     virtual void slotOnURL(const QString& url);
     virtual void slotSetTitle(const QString& title);
@@ -102,6 +105,8 @@ protected slots:
 
 protected:
     kdesvnfilelist*m_flist;
+    KActionCollection*m_Collection;
+
     QSplitter* m_Splitter;
     QString m_currentURL;
     KTextBrowser*m_LogWindow;

@@ -40,23 +40,22 @@
 #include <klocale.h>
 #include <ktextbrowser.h>
 
-kdesvnView::kdesvnView(QWidget *parent)
-    : QWidget(parent),
+kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name)
+    : QWidget(parent,name),m_Collection(aCollection),
       m_currentURL("")
 {
     QVBoxLayout *top_layout = new QVBoxLayout(this);
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
+    m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
 
-    m_flist=new kdesvnfilelist(m_Splitter);
     m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_flist->sizePolicy().hasHeightForWidth() ) );
     m_LogWindow=new KTextBrowser(m_Splitter);
     top_layout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
-    connect(m_flist,SIGNAL(sigShowPopup(const QString&)),parent,SLOT(slotDispPopup(const QString&)));
+    connect(m_flist,SIGNAL(sigShowPopup(const QString&)),this,SLOT(slotDispPopup(const QString&)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
-    connect(parent,SIGNAL(refreshTree()),m_flist,SLOT(refreshCurrentTree()));
 }
 
 void kdesvnView::slotAppendLog(const QString& text)
@@ -66,11 +65,6 @@ void kdesvnView::slotAppendLog(const QString& text)
 
 kdesvnView::~kdesvnView()
 {
-}
-
-KActionCollection*kdesvnView::filesActions()
-{
-    return m_flist->filesActions();
 }
 
 //void kdesvnView::print(QPainter *p, int height, int width)
@@ -85,24 +79,25 @@ QString kdesvnView::currentURL()
     return m_currentURL;
 }
 
-void kdesvnView::openURL(QString url)
+bool kdesvnView::openURL(QString url)
 {
-    openURL(KURL(url));
+    return openURL(KURL(url));
 }
 
-void kdesvnView::openURL(const KURL& url)
+bool kdesvnView::openURL(const KURL& url)
 {
     m_currentURL = "";
+    bool open = false;
     if (url.isLocalFile()) {
         QFileInfo f(url.path());
         if (!f.isDir()) {
-            return;
+            return open;
         }
     } else {
         QString prot = url.protocol();
         if (!prot.endsWith(":")) prot+=":";
         if (!svn::Url::isValid(prot.local8Bit())) {
-            return;
+            return open;
         }
     }
     m_LogWindow->setText("");
@@ -110,6 +105,7 @@ void kdesvnView::openURL(const KURL& url)
     if (m_flist->openURL(url)) {
         slotOnURL(i18n("Repository opened"));
         m_currentURL=url.url();
+        open = true;
     } else {
         QString t = m_flist->lastError();
         if (t.isEmpty()) {
@@ -117,6 +113,7 @@ void kdesvnView::openURL(const KURL& url)
         }
         slotOnURL(t);
     }
+    return open;
 }
 
 void kdesvnView::slotOnURL(const QString& url)
@@ -139,4 +136,18 @@ void kdesvnView::closeMe()
     m_flist->closeMe();
     m_LogWindow->setText("");
     slotOnURL(i18n("No repository open"));
+}
+
+void kdesvnView::slotDispPopup(const QString&item)
+{
+    emit sigShowPopup(item);
+}
+
+
+/*!
+    \fn kdesvnView::refreshCurrentTree()
+ */
+void kdesvnView::refreshCurrentTree()
+{
+    m_flist->refreshCurrentTree();
 }

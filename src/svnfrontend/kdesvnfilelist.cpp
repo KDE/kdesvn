@@ -62,12 +62,13 @@ public:
     QRect mOldDropHighlighter;
 };
 
-kdesvnfilelist::kdesvnfilelist(QWidget *parent, const char *name)
+kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const char *name)
  : KListView(parent, name),ItemDisplay(),m_SvnWrapper(new SvnActions(this))
 {
     m_SelectedItems = 0;
     m_baseUri="";
     m_pList = new KdesvnFileListPrivate;
+    m_filesAction = aCollect;
 
     SshAgent ssh;
     ssh.querySshAgent();
@@ -114,8 +115,7 @@ svn::Client*kdesvnfilelist::svnclient()
 
 void kdesvnfilelist::setupActions()
 {
-    m_filesAction = new KActionCollection(this);
-
+    if (!m_filesAction) return;
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */

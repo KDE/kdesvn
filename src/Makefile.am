@@ -11,12 +11,10 @@ INCLUDES = -I$(top_srcdir)/src $(all_includes)
 kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 
 # the libraries to link against.
-kdesvn_LDADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
-	$(top_builddir)/src/helpers/libhelper.a $(top_builddir)/src/svncpp/libsvnwrapper.a $(APR_LIBS) $(NEON_LIBS) \
-	$(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEPRINT) $(SVN_LIBS)
+
 
 # which sources should be compiled for kdesvn
-kdesvn_SOURCES = main.cpp kdesvn.cpp kdesvnview.cpp pref.cpp urldlg.cpp
+kdesvn_SOURCES = main.cpp kdesvn.cpp pref.cpp
 
 # these are the headers for your project
 noinst_HEADERS = kdesvn.h kdesvnview.h pref.h urldlg.h
@@ -44,3 +42,25 @@ SUBDIRS = svnfrontend svncpp helpers pics
 kdesvnaskpass_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 kdesvnaskpass_SOURCES = kdesvn-askpass.cpp
 kdesvnaskpass_LDADD = $(LIB_KDEUI)
+
+#########################################################################
+# KPART SECTION
+#########################################################################
+kde_module_LTLIBRARIES = libkdesvnpart.la
+
+# the Part's source, library search path, and link libraries
+libkdesvnpart_la_SOURCES = kdesvn_part.cpp urldlg.cpp kdesvnview.cpp
+libkdesvnpart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
+libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
+	$(top_builddir)/src/svncpp/libsvnwrapper.a $(top_builddir)/src/helpers/libhelper.a $(SVN_LIBS) $(NEON_LIBS) \
+	$(APR_LIBS) $(LIB_KPARTS) $(LIB_KFILE)
+
+# this is where the desktop file will go
+partdesktopdir   = $(kde_servicesdir)
+partdesktop_DATA = kdesvn_part.desktop
+
+# this is where the part's XML-GUI resource file goes
+partrcdir   = $(kde_datadir)/kdesvnpart
+partrc_DATA = kdesvn_part.rc
+
+kdesvn_LDADD = $(LIB_KPARTS)

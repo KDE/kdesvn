@@ -20,7 +20,6 @@
 
 
 #include "kdesvn.h"
-#include "svncpp/version_check.hpp"
 #include "../config.h"
 #include <kapplication.h>
 #include <dcopclient.h>
@@ -41,8 +40,11 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char **argv)
 {
-    QString text = QString(I18N_NOOP("Build with subversion lib: %1\n")).arg(svn::Version::linked_version());
+    QString text = "";
+#if 0
+    QString(I18N_NOOP("Build with subversion lib: %1\n")).arg(svn::Version::linked_version());
     text+=QString(I18N_NOOP("Running subversion lib: %1")).arg(svn::Version::running_version());
+#endif
     KAboutData about("kdesvn", I18N_NOOP("kdesvn"), version, description,
                      KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",text,
                          0, "ral@alwins-world.de");

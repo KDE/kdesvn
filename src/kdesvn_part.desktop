@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=$APPNAME$Part
+Name[et]=$APPNAME$ komponent
+Name[hi]=$APPNAME$पार्ट
+Name[sv]=$APPNAME$-del
+Name[ta]=$APPNAME$பாகம்
+MimeType=inode/directory
+ServiceTypes=KParts/ReadOnlyPart,Browser/View
+X-KDE-BrowserView-Args=DetailedList
+X-KDE-Library=lib$APPNAMELC$part
+Type=Service
+Categories=Qt;KDE;Development;
+Icon=kdesvn

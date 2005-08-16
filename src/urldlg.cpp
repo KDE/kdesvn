@@ -26,6 +26,7 @@
 #include <kglobal.h>
 #include <klineedit.h>
 #include <kurl.h>
+#include <kdebug.h>
 
 #include <qlabel.h>
 
@@ -34,7 +35,8 @@ UrlDlg::UrlDlg(QWidget *parent, const char *name)
                 true,true, KStdGuiItem::clear())
 {
     init_dlg();
-    resize( QSize(333,50));
+    resize( QSize(420,106));
+    clearWState(Qt::WState_Polished);
 }
 
 

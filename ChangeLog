@@ -1,3 +1,7 @@
+version 0.5.1
+    * fixed a bug in buildsystem which let build fail on some systems
+    * fixed a convertion stl -> qtstring in svnactions which let build fail on some systems
+
 version 0.5.0
     * KPart based application and integration into konqueror in first stage finished
 

@@ -51,8 +51,8 @@ kde_module_LTLIBRARIES = libkdesvnpart.la
 # the Part's source, library search path, and link libraries
 libkdesvnpart_la_SOURCES = kdesvn_part.cpp urldlg.cpp kdesvnview.cpp
 libkdesvnpart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.a \
-	$(top_builddir)/src/svncpp/libsvnwrapper.a $(top_builddir)/src/helpers/libhelper.a $(SVN_LIBS) $(NEON_LIBS) \
+libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.la \
+	$(top_builddir)/src/svncpp/libsvnwrapper.la $(top_builddir)/src/helpers/libhelper.la $(SVN_LIBS) $(NEON_LIBS) \
 	$(APR_LIBS) $(LIB_KPARTS) $(LIB_KFILE)
 
 # this is where the desktop file will go

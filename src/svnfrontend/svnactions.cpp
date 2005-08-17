@@ -357,7 +357,7 @@ void SvnActions::slotInfo()
         if ((*it).Name().size()) {
             text+=rb+i18n("Name")+cs+helpers::stl2qt::stl2qtstring((*it).Name())+re;
         }
-        text+=rb+i18n("URL")+cs+QString((*it).url())+re;
+        text+=rb+i18n("URL")+cs+helpers::stl2qt::stl2qtstring((*it).url())+re;
         if ((*it).reposRoot().size()) {
             text+=rb+i18n("Canonical repository url")+cs+helpers::stl2qt::stl2qtstring((*it).reposRoot())+re;
         }
@@ -400,7 +400,7 @@ void SvnActions::slotInfo()
             break;
         }
         text+=re;
-        text+=rb+i18n("UUID")+cs+QString((*it).uuid())+re;
+        text+=rb+i18n("UUID")+cs+helpers::stl2qt::stl2qtstring((*it).uuid())+re;
         text+=rb+i18n("Last author")+cs+helpers::stl2qt::stl2qtstring((*it).cmtAuthor())+re;
         text+=rb+i18n("Last commited")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;

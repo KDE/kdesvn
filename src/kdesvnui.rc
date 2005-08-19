@@ -9,6 +9,10 @@
     <Action name="file_quit"/>
  </Menu>
   <Action name="bookmarks" />
+  <Menu noMerge="1" name="subversion_main" >
+   <text>Subversion</text>
+   <Merge/>
+  </Menu>
   <Menu noMerge="1" name="settings">
     <text>&amp;Settings</text>
     <Action name="options_show_toolbar"/>

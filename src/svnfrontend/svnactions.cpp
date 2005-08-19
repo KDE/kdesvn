@@ -517,7 +517,7 @@ void SvnActions::slotCommit()
     svn_revnum_t nnum;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
-        nnum = m_Svnclient.commit(svn::Targets(targets),msg.local8Bit(),rec);
+        nnum = m_Svnclient.commit(svn::Targets(targets),msg.utf8(),rec);
     } catch (svn::ClientException e) {
         QString ex = QString::fromLocal8Bit(e.message());
         emit clientException(ex);

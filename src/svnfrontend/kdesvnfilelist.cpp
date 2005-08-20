@@ -144,7 +144,7 @@ void kdesvnfilelist::setupActions()
     m_UnlockAction = new KAction(i18n("Unlock current items"),"unlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
 
     /* 3. actions only on dirs */
-    m_MkdirAction = new KAction("Make (sub-)directory","folder_new",
+    m_MkdirAction = new KAction("New folder","folder_new",
         KShortcut(),this,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_switchRepository = new KAction("Switch repository","goto",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
@@ -156,9 +156,9 @@ void kdesvnfilelist::setupActions()
 
     m_CleanupAction = new KAction("Cleanup",KShortcut(),
         this,SLOT(slotCleanupAction()),m_filesAction,"make_cleanup");
-    m_ImportDirsIntoCurrent  = new KAction(i18n("Import directories into current"),"fileimport",KShortcut(),
+    m_ImportDirsIntoCurrent  = new KAction(i18n("Import folders into current"),"fileimport",KShortcut(),
         this,SLOT(slotImportDirsIntoCurrent()),m_filesAction,"make_import_dirs_into_current");
-    m_ImportDirsIntoCurrent->setToolTip(i18n("Import directory content into current url"));
+    m_ImportDirsIntoCurrent->setToolTip(i18n("Import folder content into current url"));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
@@ -335,7 +335,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
-        if (it->path()==what||QString::compare(it->entry().url(),what)==0){
+        if (helpers::stl2qt::stl2qtstring(it->path())==what||QString::compare(it->entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
                 m_Dirsread[pitem->fullName()]=true;
@@ -395,9 +395,9 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
     }
     svn::Status stat;
     try {
-        stat = m_SvnWrapper->svnclient()->singleStatus(newdir.local8Bit());
+        stat = m_SvnWrapper->svnclient()->singleStatus(newdir.utf8());
     } catch (svn::ClientException e) {
-        m_LastException = QString::fromLocal8Bit(e.message());
+        m_LastException = QString::fromUtf8(e.message());
         emit sigLogMessage(m_LastException);
         return;
     }
@@ -642,10 +642,10 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
     if (allSelected()->count()==0) {
         targetUri=baseUri();
     } else {
-        targetUri = QString::fromLocal8Bit(allSelected()->at(0)->Url());
+        targetUri = QString::fromUtf8(allSelected()->at(0)->Url());
     }
     KURL uri;
-    if (dirs) uri = KFileDialog::getExistingDirectory(QString::null,this,"Import files from directory");
+    if (dirs) uri = KFileDialog::getExistingDirectory(QString::null,this,"Import files from folder");
     else uri = KFileDialog::getImageOpenURL(QString::null,this,"Import file");
 
     if (uri.url().isEmpty()) return;
@@ -774,10 +774,10 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
     try {
         /* settings about unknown and ignored files must be setable */
         //                                                              rec   all  up    noign
-        dlist = m_SvnWrapper->svnclient()->status(what.local8Bit(),false,true,false,true);
+        dlist = m_SvnWrapper->svnclient()->status(what.utf8(),false,true,false,true);
     } catch (svn::ClientException e) {
         //Message box!
-        m_LastException = QString::fromLocal8Bit(e.message());
+        m_LastException = QString::fromUtf8(e.message());
         emit sigLogMessage(m_LastException);
         return;
     } catch (...) {
@@ -789,14 +789,14 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
     FileListViewItem*k;
     bool gotit = false;
     for (;it!=dlist.end();++it) {
-        if (QString::compare(it->path(),what)==0) {
+        if (QString::compare(helpers::stl2qt::stl2qtstring(it->path()),what)==0) {
             continue;
         }
         FileListViewItemListIterator clistIter(currentSync);
         gotit = false;
         while ( (k=clistIter.current()) ) {
             ++clistIter;
-            if ( QString::compare(k->fullName(),QString::fromLocal8Bit(it->path()))==0) {
+            if ( QString::compare(k->fullName(),QString::fromUtf8(it->path()))==0) {
                 currentSync.removeRef(k);
                 k->updateStatus(*it);
                 gotit = true;
@@ -1111,7 +1111,7 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
             KURL::List::iterator iter;
             QValueList<svn::Path> tmp;
             for (iter=lst.begin();iter!=lst.end();++iter) {
-                tmp.push_back(svn::Path((base+(*iter).fileName(true)).local8Bit()));
+                tmp.push_back(svn::Path((base+(*iter).fileName(true)).utf8()));
             }
             m_SvnWrapper->addItems(tmp,true);
         }

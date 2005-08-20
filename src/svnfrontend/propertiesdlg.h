@@ -47,18 +47,14 @@ public:
     void changedItems(tPropEntries&toSet,QValueList<QString>&toDelete);
 
 protected:
-    QLabel* m_Headlabel;
     KListView* m_PropertiesListview;
     KPushButton* m_AddButton;
     KPushButton* m_DeleteButton;
     KPushButton* m_ModifyButton;
 
-    QVBoxLayout* PropertiesDlgLayout;
-    QHBoxLayout* midLayout;
-    QHBoxLayout* m_ButtonLayout;
+    QHBoxLayout* PropertiesDlgLayout;
     QVBoxLayout* m_rightLayout;
     QSpacerItem* m_rightSpacer;
-    QSpacerItem* m_bottomSpacer;
 
     QString m_Item;
     bool m_changed;
@@ -92,6 +88,8 @@ protected:
     static bool protected_Property(const QString&);
 public slots:
     int exec();
+    virtual void polish();
+
 signals:
     void clientException(const QString&);
 };

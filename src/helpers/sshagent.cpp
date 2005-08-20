@@ -61,11 +61,11 @@ bool SshAgent::querySshAgent()
         kdDebug() << "SshAgent::querySshAgent(): ssh-agent already exists"
                       << endl;
 
-        m_pid = QString::fromLocal8Bit(pid);
+        m_pid = QString::fromUtf8(pid);
 
         char* sock = ::getenv("SSH_AUTH_SOCK");
         if( sock )
-            m_authSock = QString::fromLocal8Bit(sock);
+            m_authSock = QString::fromUtf8(sock);
 
         m_isOurAgent = false;
         m_isRunning  = true;
@@ -193,7 +193,7 @@ void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
 {
     Q_UNUSED(proc);
 
-    QString output = QString::fromLocal8Bit(buffer, buflen);
+    QString output = QString::fromUtf8(buffer, buflen);
     m_outputLines += QStringList::split("\n", output);
 
     kdDebug() << "SshAgent::slotReceivedStdout(): output = " << output << endl;
@@ -204,7 +204,7 @@ void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
 {
     Q_UNUSED(proc);
 
-    QString output = QString::fromLocal8Bit(buffer, buflen);
+    QString output = QString::fromUtf8(buffer, buflen);
     m_outputLines += QStringList::split("\n", output);
 
     kdDebug() << "SshAgent::slotReceivedStderr(): output = " << output << endl;

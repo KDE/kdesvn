@@ -28,6 +28,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kmimetype.h>
+#include <kdebug.h>
 
 #include <qstring.h>
 #include <qfileinfo.h>
@@ -120,7 +121,7 @@ bool SvnItem::isDir()const
         return p_Item->m_Stat.entry().kind()==svn_node_dir;
     }
     /* must be a local file */
-    QFileInfo f(p_Item->m_Stat.path());
+    QFileInfo f(fullName());
     return f.isDir();
 }
 
@@ -145,7 +146,7 @@ QPixmap SvnItem::getPixmap(int size)
             //p = KMimeType::pixmapForURL(KURL(stat.entry().url()),0,KIcon::Desktop,16);
         }
     } else {
-        p = KMimeType::pixmapForURL(p_Item->m_Stat.path(),0,KIcon::Desktop,size);
+        p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
     }
     return p;
 }
@@ -160,7 +161,7 @@ bool SvnItem::isValid()const
     if (isVersioned()) {
         return true;
     }
-    QFileInfo f(p_Item->m_Stat.path());
+    QFileInfo f(fullName());
     return f.exists();
 }
 
@@ -225,7 +226,7 @@ QString SvnItem::infoText()const
 
 QString SvnItem::cmtAuthor()const
 {
-    return QString::fromLocal8Bit(p_Item->m_Stat.entry().cmtAuthor());
+    return QString::fromUtf8(p_Item->m_Stat.entry().cmtAuthor());
 }
 
 long int SvnItem::cmtRev()const

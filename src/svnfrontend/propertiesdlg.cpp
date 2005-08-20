@@ -22,6 +22,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
+#include <kdebug.h>
 
 class PropertyListViewItem:public KListViewItem
 {
@@ -102,23 +103,19 @@ void PropertyListViewItem::unDeleteIt()
  *  TRUE to construct a modal dialog.
  */
 PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
-    : KDialogBase(Plain,i18n("Modify properties"),Ok|Cancel|Help/*|User1|User2*/, Ok,
-      parent, name, modal, true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
+    :
+    KDialogBase(parent,name,modal,i18n("Modify properties"),Ok|Cancel/*|Help|User1|User2*/, Ok,
+      true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
       m_Item(which),m_changed(false),
       m_Client(aClient),m_Rev(aRev)
 {
     if ( !name )
     setName( "PropertiesDlg" );
 
-    PropertiesDlgLayout = new QVBoxLayout( plainPage(), 2, 2, "PropertiesDlgLayout");
+    QWidget * m = makeMainWidget();
+    PropertiesDlgLayout = new QHBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
 
-    m_Headlabel = new QLabel( plainPage(), "m_Headlabel" );
-    m_Headlabel->setAlignment( int( QLabel::WordBreak | QLabel::AlignCenter ) );
-    PropertiesDlgLayout->addWidget( m_Headlabel );
-
-    midLayout = new QHBoxLayout( 0, 0, 2, "midLayout");
-
-    m_PropertiesListview = new KListView( plainPage(), "m_PropertiesListview" );
+    m_PropertiesListview = new KListView(m, "m_PropertiesListview" );
     m_PropertiesListview->addColumn( i18n( "Properties" ) );
     m_PropertiesListview->addColumn( i18n( "Value" ) );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
@@ -130,27 +127,22 @@ PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn
     m_PropertiesListview->setRenameable(1,true);
 #endif
     m_PropertiesListview->setFullWidth( TRUE );
-    midLayout->addWidget( m_PropertiesListview );
+    PropertiesDlgLayout->addWidget( m_PropertiesListview);
 
-    m_rightLayout = new QVBoxLayout( 0, 0, 2, "m_rightLayout");
-
-    m_AddButton = new KPushButton( plainPage(), "m_AddButton" );
+    m_rightLayout = new QVBoxLayout(0, marginHint(), spacingHint(), "m_rightLayout");
+    m_AddButton = new KPushButton(m, "m_AddButton" );
     m_rightLayout->addWidget( m_AddButton );
-
-    m_ModifyButton = new KPushButton( plainPage(), "m_ModifyButton" );
+    m_ModifyButton = new KPushButton(m, "m_ModifyButton" );
     m_rightLayout->addWidget( m_ModifyButton );
-
-    m_DeleteButton = new KPushButton( plainPage(), "m_DeleteButton" );
+    m_DeleteButton = new KPushButton(m, "m_DeleteButton" );
     m_rightLayout->addWidget( m_DeleteButton );
-
     m_rightSpacer = new QSpacerItem( 20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    m_rightLayout->addItem( m_rightSpacer );
-    midLayout->addLayout( m_rightLayout );
-    PropertiesDlgLayout->addLayout( midLayout );
-
+    m_rightLayout->addItem(m_rightSpacer);
+    PropertiesDlgLayout->addLayout(m_rightLayout);
     m_DeleteButton->setEnabled(false);
     m_ModifyButton->setEnabled(false);
 
+    //PropertiesDlgLayout->addLayout(midLayout);
     languageChange();
     resize( QSize(489, 236).expandedTo(minimumSizeHint()) );
     clearWState( WState_Polished );
@@ -160,10 +152,10 @@ PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn
     connect( m_ModifyButton, SIGNAL(clicked()), this, SLOT(slotModify()));
     connect( m_DeleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(this,SIGNAL(helpClicked()),SLOT(slotHelp()));
-
     connect(m_PropertiesListview,SIGNAL(itemRenamed(QListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(QListViewItem*,const QString&,int)));
     connect(m_PropertiesListview,SIGNAL(selectionChanged(QListViewItem*)),this,SLOT(slotSelectionChanged(QListViewItem*)));
 //    connect(m_PropertiesListview,SIGNAL(executed(QListViewItem*)),this,SLOT(slotSelectionExecuted(QListViewItem*)));
+
     if (!m_Client) {
         m_PropertiesListview->setEnabled(false);
     }
@@ -188,11 +180,10 @@ PropertiesDlg::~PropertiesDlg()
  */
 void PropertiesDlg::languageChange()
 {
-    setCaption( i18n( "Properties" ) );
-    m_Headlabel->setText( i18n( "<font size=\"+1\">View and modify properties</font>" ) );
+    setCaption( i18n("View and modify properties") );
     m_PropertiesListview->header()->setLabel( 0, i18n( "Properties" ) );
     m_PropertiesListview->header()->setLabel( 1, i18n( "Value" ) );
-    QToolTip::add( m_PropertiesListview, i18n( "List of properties set" ) );
+    QToolTip::add(m_PropertiesListview, i18n( "List of properties set" ));
     m_AddButton->setText(i18n("Add property"));
     m_ModifyButton->setText(i18n("Modify property"));
     m_DeleteButton->setText(i18n("Delete property"));
@@ -234,12 +225,12 @@ void PropertiesDlg::initItem()
         emit clientException(ex);
         return;
     }
-    svn::Path what(m_Item.local8Bit());
+    svn::Path what(m_Item.utf8());
     svn::PathPropertiesMapList propList;
     try {
         propList = m_Client->proplist(what,m_Rev);
     } catch (svn::ClientException e) {
-        ex = QString::fromLocal8Bit(e.message());
+        ex = QString::fromUtf8(e.message());
         emit clientException(ex);
         return;
     }
@@ -253,8 +244,8 @@ void PropertiesDlg::initItem()
     svn::PropertiesMap::const_iterator pit;
     for (pit=pmap.begin();pit!=pmap.end();++pit) {
         PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview,
-            QString::fromLocal8Bit(pit->first.c_str()),
-            QString::fromLocal8Bit(pit->second.c_str()));
+            QString::fromUtf8(pit->first.c_str()),
+            QString::fromUtf8(pit->second.c_str()));
         ki->setMultiLinesEnabled(true);
     }
     initDone = true;
@@ -265,14 +256,15 @@ void PropertiesDlg::initItem()
  */
 int PropertiesDlg::exec()
 {
-    initDone = false;
-    initItem();
-    if (!initDone) {
-        return Rejected;
-    }
-    return KDialog::exec();
+    kdDebug()<<"Exec"<<endl;
+    return KDialogBase::exec();
 }
 
+void PropertiesDlg::polish()
+{
+    KDialogBase::polish();
+    initItem();
+}
 
 /*!
     \fn PropertiesDlg::slotSelectionExecuted(QListViewItem*)

@@ -31,17 +31,17 @@ stl2qt::~stl2qt()
 
 QString stl2qt::stl2qtstring(const std::string&what)
 {
-    return QString::fromLocal8Bit(what.c_str());
+    return QString::fromUtf8(what.c_str());
 }
 
 QString stl2qt::stl2qtstring(const char*what)
 {
-    return what?QString::fromLocal8Bit(what):QString("");
+    return what?QString::fromUtf8(what):QString("");
 }
 
 std::string stl2qt::qt2stlstring(const QString&what)
 {
-    return std::string(what.isEmpty()?"":what.local8Bit());
+    return std::string(what.isEmpty()?"":what.utf8());
 }
 
 }

@@ -64,9 +64,9 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     _revision=_entry.revision;
     fullDate=helpers::sub2qt::apr_time2qt(_entry.date);
     setText(COL_REV,QString("%1").arg(_revision));
-    setText(COL_AUTHOR,QString::fromLocal8Bit(_entry.author.c_str()));
+    setText(COL_AUTHOR,QString::fromUtf8(_entry.author.c_str()));
     setText(COL_DATE,fullDate.toString(Qt::LocalDate));
-    _message = QString::fromLocal8Bit(_entry.message.c_str());
+    _message = QString::fromUtf8(_entry.message.c_str());
     //setText(COL_MSG,_entry.message.c_str());
 }
 const QString&LogListViewItem::message()const

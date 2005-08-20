@@ -74,7 +74,7 @@ FileListViewItem::~FileListViewItem()
 void FileListViewItem::refreshMe()
 {
     try {
-        setStat(m_Ksvnfilelist->svnclient()->singleStatus(fullName().local8Bit()));
+        setStat(m_Ksvnfilelist->svnclient()->singleStatus(fullName().utf8()));
     } catch (svn::ClientException e) {
         setStat(svn::Status());
         setText(COL_STATUS,e.message());

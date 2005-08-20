@@ -112,11 +112,11 @@ bool CContextListener::contextGetLogin (
                     bool & maySave)
 {
     emit waitShow(true);
-    emit sendNotify(QString::fromLocal8Bit(realm.c_str()));
-    AuthDialogImpl auth(QString::fromLocal8Bit(realm.c_str()));
+    emit sendNotify(QString::fromUtf8(realm.c_str()));
+    AuthDialogImpl auth(QString::fromUtf8(realm.c_str()));
     if (auth.exec()==QDialog::Accepted) {
-        username.assign(auth.Username().local8Bit());
-        password.assign(auth.Password().local8Bit());
+        username.assign(auth.Username().utf8());
+        password.assign(auth.Password().utf8());
         maySave = auth.maySave();
         emit waitShow(false);
         return true;
@@ -141,7 +141,7 @@ void CContextListener::contextNotify (const char *path,
     QString msg;
     QTextStream ts(&msg,IO_WriteOnly);
 
-    ts << NotifyAction(action) << " " << QString::fromLocal8Bit(path);
+    ts << NotifyAction(action) << " " << QString::fromUtf8(path);
     if (revision>-1) {
         ts << " (Rev "<<revision<<")";
     }
@@ -180,7 +180,7 @@ bool CContextListener::contextGetLogMessage (std::string & msg)
     emit waitShow(true);
     QString logMessage = Logmsg_impl::getLogmessage(&isOk,0,0,0);
     if (isOk) {
-        msg.assign(logMessage.local8Bit());
+        msg.assign(logMessage.utf8());
     }
     emit waitShow(false);
     return isOk;
@@ -191,12 +191,13 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 {
     bool ok,saveit;
     emit waitShow(true);
-    if (!SslTrustPrompt_impl::sslTrust(data.hostname,
-        data.fingerprint,
-        data.validFrom,
-        data.validUntil,
-        data.issuerDName,
-        data.realm,
+    if (!SslTrustPrompt_impl::sslTrust(
+        helpers::stl2qt::stl2qtstring(data.hostname),
+        helpers::stl2qt::stl2qtstring(data.fingerprint),
+        helpers::stl2qt::stl2qtstring(data.validFrom),
+        helpers::stl2qt::stl2qtstring(data.validUntil),
+        helpers::stl2qt::stl2qtstring(data.issuerDName),
+        helpers::stl2qt::stl2qtstring(data.realm),
         &ok,&saveit)) {
         return DONT_ACCEPT;
     }
@@ -209,7 +210,8 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 
 bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
 {
-    kdDebug()<<"CContextListener::contextSslClientCertPrompt " << certFile << endl;
+    kdDebug()<<"CContextListener::contextSslClientCertPrompt "
+        << helpers::stl2qt::stl2qtstring(certFile) << endl;
     emit waitShow(true);
     QString afile = KFileDialog::getOpenFileName(QString::null,
         QString::null,

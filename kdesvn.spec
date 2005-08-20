@@ -3,7 +3,7 @@
 # the error to ian geiser <geiseri@msoe.edu>
 Summary:   A subversion client for the KDE
 Name:      kdesvn
-Version:   0.5.1
+Version:   0.5.2
 Release:   1
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>

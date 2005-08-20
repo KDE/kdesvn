@@ -27,7 +27,7 @@
 #define _SVNCPP_LOG_ENTRY_H_
 
 // stl
-#include <string>
+#include <qstring.h>
 #include <list>
 
 // apr
@@ -46,9 +46,9 @@ namespace svn
                         const char *copyFromPath_,
                         const svn_revnum_t copyFromRevision_);
 
-    std::string path;
+    QString path;
     char action;
-    std::string copyFromPath;
+    QString copyFromPath;
     svn_revnum_t copyFromRevision;
   };
 
@@ -64,8 +64,8 @@ namespace svn
               const char * message);
 
     svn_revnum_t revision;
-    std::string author;
-    std::string message;
+    QString author;
+    QString message;
     std::list<LogChangePathEntry> changedPaths;
     apr_time_t date;
   };

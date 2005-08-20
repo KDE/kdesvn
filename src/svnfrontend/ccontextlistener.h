@@ -37,9 +37,9 @@ public:
     ~CContextListener();
 
     /* context-listener methods */
-    virtual bool contextGetLogin (const std::string & realm,
-                     std::string & username,
-                     std::string & password,
+    virtual bool contextGetLogin (const QString & realm,
+                     QString & username,
+                     QString & password,
                      bool & maySave);
     virtual void contextNotify (const char *path,
                    svn_wc_notify_action_t action,
@@ -57,12 +57,12 @@ public:
     /*!
      * Get logmessage for checkin and so on...
      */
-    virtual bool contextGetLogMessage (std::string & msg);
+    virtual bool contextGetLogMessage (QString & msg);
     virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
                                  apr_uint32_t & acceptedFailures);
-    virtual bool contextSslClientCertPrompt (std::string & certFile);
-    virtual bool contextSslClientCertPwPrompt (std::string & password,
-                                   const std::string & realm, bool & maySave);
+    virtual bool contextSslClientCertPrompt (QString & certFile);
+    virtual bool contextSslClientCertPwPrompt (QString & password,
+                                   const QString & realm, bool & maySave);
     static QString NotifyAction(svn_wc_notify_action_t action);
     static QString NotifyState(svn_wc_notify_state_t);
 

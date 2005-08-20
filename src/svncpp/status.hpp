@@ -57,7 +57,14 @@ namespace svn
      * @param path path for this status entry
      * @param status status entry
      */
-    Status (const char *path = NULL, svn_wc_status2_t * status = NULL);
+    Status (const QString&path=QString::null, svn_wc_status2_t * status = NULL);
+    /**
+     * default constructor
+     *
+     * @param path path for this status entry
+     * @param status status entry
+     */
+    Status (const char*path, svn_wc_status2_t * status = NULL);
 #else
     /**
      * default constructor
@@ -66,7 +73,15 @@ namespace svn
      * @param status status entry
      * @deprecated
      */
-    Status (const char *path = NULL, svn_wc_status_t * status = NULL);
+    Status (const QString&path = QString::null, svn_wc_status_t * status = NULL);
+    /**
+     * default constructor
+     *
+     * @param path path for this status entry
+     * @param status status entry
+     * @deprecated
+     */
+    Status (const char *path, svn_wc_status_t * status = NULL);
 #endif
     /**
      * destructor
@@ -76,10 +91,10 @@ namespace svn
     /**
      * @return path of status entry
      */
-    const char *
+    const QString&
     path () const
     {
-      return m_path->data;
+      return m_Path;
     }
 
     /**
@@ -207,7 +222,7 @@ namespace svn
 #else
     svn_wc_status_t * m_status;
 #endif
-    svn_string_t * m_path;
+    QString m_Path;
     Pool m_pool;
     bool m_isVersioned;
     bool m_hasReal;
@@ -221,7 +236,7 @@ namespace svn
      * @deprecated
      */
     void
-    init (const char *path, const svn_wc_status_t * status);
+    init (const QString&path, const svn_wc_status_t * status);
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     /**
@@ -231,7 +246,7 @@ namespace svn
      * @param status if NULL isVersioned will be false
      */
     void
-    init (const char *path, const svn_wc_status2_t * status);
+    init (const QString&path, const svn_wc_status2_t * status);
 #endif
   };
 }

@@ -26,9 +26,7 @@
 #ifndef _SVNCPP_LOCK_ENTRY_H_
 #define _SVNCPP_LOCK_ENTRY_H_
 
-// stl
-#include <string>
-#include <list>
+#include <qstring.h>
 
 // apr
 #include "apr_time.h"
@@ -60,18 +58,18 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     void init(svn_lock_t*);
 #endif
-    const std::string&Comment()const;
-    const std::string&Owner()const;
-    const std::string&Token()const;
+    const QString&Comment()const;
+    const QString&Owner()const;
+    const QString&Token()const;
     const apr_time_t Date()const;
     const bool Locked()const;
 
   protected:
     apr_time_t date;
     apr_time_t exp;
-    std::string owner;
-    std::string comment;
-    std::string token;
+    QString owner;
+    QString comment;
+    QString token;
     bool locked;
   };
 }

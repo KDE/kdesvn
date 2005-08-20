@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -24,11 +24,12 @@
  */
 
 #ifndef _SVNCPP_DIRENT_HPP_
-#define _SVNCPP_DIRENT_HPP_ 
+#define _SVNCPP_DIRENT_HPP_
 
 // subversion api
 #include "svn_client.h"
 
+#include <qstring.h>
 
 namespace svn
 {
@@ -43,7 +44,7 @@ namespace svn
     /**
      * constructor for existing @a svn_dirent_t entries
      */
-    DirEntry (const char * name, svn_dirent_t * dirEntry);
+    DirEntry (const QString& name, svn_dirent_t * dirEntry);
 
     /**
      * copy constructor
@@ -61,10 +62,10 @@ namespace svn
     DirEntry &
     operator = (const DirEntry &);
 
-    const char *
+    const QString&
     name () const;
 
-    svn_node_kind_t 
+    svn_node_kind_t
     kind () const;
 
     svn_filesize_t
@@ -79,7 +80,7 @@ namespace svn
     apr_time_t
     time () const;
 
-    const char *
+    const QString&
     lastAuthor () const;
 
 

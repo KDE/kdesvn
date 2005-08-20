@@ -3,7 +3,7 @@
 
 #include "svncpp/lock_entry.hpp"
 
-#include <string>
+#include <qstring.h>
 
 struct svn_info_t;
 
@@ -44,51 +44,51 @@ public:
     /**
      * @return last commit author of this file
      */
-    const std::string&
+    const QString&
     cmtAuthor () const
     {
       return m_last_author;
     }
-    const std::string&
+    const QString&
     Name()const
     {
       return m_name;
     }
 
-    const std::string& checksum()const
+    const QString& checksum()const
     {
       return m_checksum;
     }
 
-    const std::string& conflictNew()const
+    const QString& conflictNew()const
     {
       return m_conflict_new;
     }
-    const std::string& conflictOld()const
+    const QString& conflictOld()const
     {
       return m_conflict_old;
     }
-    const std::string& conflictWrk()const
+    const QString& conflictWrk()const
     {
       return m_conflict_wrk;
     }
-    const std::string& copyfromUrl()const
+    const QString& copyfromUrl()const
     {
       return m_copyfrom_url;
     }
-    const std::string& prejfile()const
+    const QString& prejfile()const
     {
       return m_prejfile;
     }
-    const std::string& reposRoot()const
+    const QString& reposRoot()const
     {
       return m_repos_root;
     }
-    const std::string& url()const
+    const QString& url()const
     {
       return m_url;
     }
-    const std::string& uuid()const
+    const QString& uuid()const
     {
       return m_UUID;
     }
@@ -119,17 +119,17 @@ protected:
     apr_time_t m_prop_time;
     bool m_hasWc;
     LockEntry m_Lock;
-    std::string m_name;
-    std::string m_checksum;
-    std::string m_conflict_new;
-    std::string m_conflict_old;
-    std::string m_conflict_wrk;
-    std::string m_copyfrom_url;
-    std::string m_last_author;
-    std::string m_prejfile;
-    std::string m_repos_root;
-    std::string m_url;
-    std::string m_UUID;
+    QString m_name;
+    QString m_checksum;
+    QString m_conflict_new;
+    QString m_conflict_old;
+    QString m_conflict_wrk;
+    QString m_copyfrom_url;
+    QString m_last_author;
+    QString m_prejfile;
+    QString m_repos_root;
+    QString m_url;
+    QString m_UUID;
     svn_node_kind_t m_kind;
     svn_revnum_t m_copy_from_rev;
     svn_revnum_t m_last_changed_rev;

@@ -41,6 +41,8 @@
 #include "svncpp/info_entry.hpp"
 #include "svncpp/url.hpp"
 
+#include <kdebug.h>
+
 namespace svn
 {
   static svn_error_t *
@@ -203,10 +205,8 @@ namespace svn
 #endif
 
       filePath = (const char *) item->key;
-
-      entries.push_back (Status (filePath, status));
+      entries.push_back (Status(filePath, status));
     }
-
     return entries;
   }
 
@@ -218,13 +218,13 @@ namespace svn
       static_cast<svn_wc_entry_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
 
-    std::string url (path);
+    QString url = QString::fromUtf8(path);
     url += "/";
     url += dirEntry.name ();
 
-    e->name = dirEntry.name ();
+    e->name = dirEntry.name();
     e->revision = dirEntry.createdRev ();
-    e->url = url.c_str ();
+    e->url = url.utf8();
     e->kind = dirEntry.kind ();
     e->schedule = svn_wc_schedule_normal;
     e->text_time = dirEntry.time ();
@@ -252,7 +252,7 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     s->repos_lock = 0;
 #endif
-    return Status (url.c_str (), s);
+    return Status (url, s);
   }
 
   static StatusEntries

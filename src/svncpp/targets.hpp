@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -26,8 +26,7 @@
 #ifndef _SVNCPP_TARGETS_HPP_
 #define _SVNCPP_TARGETS_HPP_
 
-// stl
-#include <vector>
+#include <qvaluelist.h>
 
 // apr api
 #include "apr_tables.h"
@@ -45,13 +44,13 @@ namespace svn
   class Targets
   {
   public:
-    /** 
+    /**
      * Constructor
      *
      * @param targets vector of paths
      */
-    Targets (const std::vector<Path> & targets);
-    
+    Targets (const QValueList<Path> & targets);
+
     /**
      * Constructor from an APR array containing
      * char *.
@@ -94,7 +93,7 @@ namespace svn
      *
      * @return vector of paths
      */
-    const std::vector<Path> &
+    const QValueList<Path> &
     targets() const;
 
     /**
@@ -107,7 +106,7 @@ namespace svn
      *
      * @return vector with targets
      */
-    operator const std::vector<Path> & () const
+    operator const QValueList<Path> & () const
     {
       return m_targets;
     }
@@ -122,10 +121,10 @@ namespace svn
      */
     const Path
     target () const;
-    
+
 
   private:
-    std::vector<Path> m_targets;
+    QValueList<Path> m_targets;
   };
 }
 

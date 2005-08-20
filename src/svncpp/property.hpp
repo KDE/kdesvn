@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -37,10 +37,9 @@
 #pragma warning (disable: 4290)
 #endif
 
-
-// stl 
-#include <vector>
-#include <string>
+// qt
+#include <qstring.h>
+#include <qvaluelist.h>
 
 // svncpp
 #include "svncpp/context.hpp"
@@ -51,11 +50,11 @@ namespace svn
 {
   struct PropertyEntry
   {
-    std::string name;
-    std::string value;
+    QString name;
+    QString value;
 
-    PropertyEntry (const char * name, const char * value);
-  };    
+    PropertyEntry (const char * name = 0, const char * value = 0);
+  };
 
   // forward declarations
   class Path;
@@ -63,7 +62,7 @@ namespace svn
   /**
    * Class for manipulating Subversion properties.
    */
-  class Property 
+  class Property
   {
   public:
     Property (Context * context = 0,
@@ -75,22 +74,22 @@ namespace svn
      * get the list of properties for the path.
      * throws an exception if the path isnt versioned.
      */
-    const std::vector<PropertyEntry> &
+    const QValueList<PropertyEntry> &
     entries () const
     {
       return m_entries;
     }
 
     /**
-     * Sets an existing property with a new value or adds a new 
-     * property.  If a result is added it does not reload the 
+     * Sets an existing property with a new value or adds a new
+     * property.  If a result is added it does not reload the
      * result set.  Run loadPath again.
      * @exception ClientException
      */
     void set (const char * name, const char * value);
 
     /**
-     * Deletes a property.  
+     * Deletes a property.
      * @exception ClientException
      */
     void remove (const char * name);
@@ -98,9 +97,9 @@ namespace svn
   private:
     Context * m_context;
     Path m_path;
-    std::vector<PropertyEntry> m_entries;
+    QValueList<PropertyEntry> m_entries;
 
-    std::string getValue (const char * name);
+    QString getValue (const char * name);
     void list ();
 
   };

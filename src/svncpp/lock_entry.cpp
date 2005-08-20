@@ -23,9 +23,6 @@
  * ====================================================================
  */
 
-// stl
-#include <string>
-
 // svncpp
 #include "svncpp/lock_entry.hpp"
 #include "svncpp/pool.hpp"
@@ -52,15 +49,15 @@ namespace svn
       locked(lock_token?true:false)
   {
   }
-  const std::string&LockEntry::Comment()const
+  const QString&LockEntry::Comment()const
   {
     return comment;
   }
-  const std::string&LockEntry::Owner()const
+  const QString&LockEntry::Owner()const
   {
     return owner;
   }
-  const std::string&LockEntry::Token()const
+  const QString&LockEntry::Token()const
   {
     return token;
   }

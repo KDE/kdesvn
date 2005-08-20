@@ -37,10 +37,11 @@
 #endif
 
 
-// stl
-#include <vector>
-#include <utility>
-#include <map>
+// qt
+#include <qstring.h>
+#include <qpair.h>
+#include <qvaluelist.h>
+#include <qmap.h>
 
 // svncpp
 #include "svncpp/context.hpp"
@@ -61,18 +62,18 @@ namespace svn
   class Targets;
   class DirEntry;
 
-  typedef std::vector<LogEntry> LogEntries;
-  typedef std::vector<InfoEntry> InfoEntries;
-  typedef std::vector<Status> StatusEntries;
-  typedef std::vector<DirEntry> DirEntries;
-  typedef std::vector<AnnotateLine> AnnotatedFile;
+  typedef QValueList<LogEntry> LogEntries;
+  typedef QValueList<InfoEntry> InfoEntries;
+  typedef QValueList<Status> StatusEntries;
+  typedef QValueList<DirEntry> DirEntries;
+  typedef QValueList<AnnotateLine> AnnotatedFile;
 
   // map of property names to values
-  typedef std::map<std::string,std::string> PropertiesMap;
+  typedef QMap<QString,QString> PropertiesMap;
   // pair of path, PropertiesMap
-  typedef std::pair<std::string, PropertiesMap> PathPropertiesMapEntry;
+  typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
   // vector of path, Properties pairs
-  typedef std::vector<PathPropertiesMapEntry> PathPropertiesMapList;
+  typedef QValueList<PathPropertiesMapEntry> PathPropertiesMapList;
 
   /**
    * Subversion client API.
@@ -211,7 +212,7 @@ namespace svn
      * @param revision revision to retrieve
      * @return contents of the file
      */
-    std::string
+    QString
     cat (const Path & path,
          const Revision & revision) throw (ClientException);
 
@@ -437,7 +438,7 @@ namespace svn
      * @return delta between the files
      * @exception ClientException
      */
-    std::string
+    QString
     diff (const Path & tmpPath, const Path & path,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
@@ -558,7 +559,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    std::pair<svn_revnum_t,PropertiesMap>
+    QPair<svn_revnum_t,PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision);
 
@@ -571,7 +572,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    std::pair<svn_revnum_t,std::string>
+    QPair<svn_revnum_t,QString>
     revpropget(const char *propName,
                const Path &path,
                const Revision &revision);

@@ -26,8 +26,8 @@
 #ifndef _SVNCPP_CONTEXT_HPP_
 #define _SVNCPP_CONTEXT_HPP_ 
 
-// stl
-#include <string>
+// qt 
+#include <qstring.h>
 
 // Subversion api
 #include "svn_client.h"
@@ -56,7 +56,7 @@ namespace svn
      *                  subversion api stores its
      *                  configuration
      */
-    Context (const std::string & configDir="");
+    Context (const QString & configDir="");
 
     /**
      * copy constructor

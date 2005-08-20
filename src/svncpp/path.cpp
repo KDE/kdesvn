@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -29,31 +29,33 @@
 // apr api
 #include "apr_file_io.h"
 
-// svncpp 
+// svncpp
 #include "svncpp/path.hpp"
 #include "svncpp/pool.hpp"
 #include "svncpp/url.hpp"
 
 
+#include <kdebug.h>
+
 namespace svn
 {
   Path::Path (const char * path)
   {
+    init(QString::fromUtf8(path));
+  }
+
+  Path::Path (const QString & path)
+  {
     init (path);
   }
 
-  Path::Path (const std::string & path) 
+  Path::Path (const Path & path)
+    : m_path(path.m_path)
   {
-    init (path.c_str ());
-  }
-
-  Path::Path (const Path & path) 
-  {
-    init (path.c_str ());
   }
 
   void
-  Path::init (const char * path)
+  Path::init (const QString& path)
   {
     Pool pool;
 
@@ -61,31 +63,31 @@ namespace svn
       m_path = "";
     else
     {
-      const char * int_path = 
-        svn_path_internal_style (path, pool.pool () );
-    
-      m_path = int_path;
+      const char * int_path =
+        svn_path_internal_style (path.utf8(), pool.pool () );
+
+      m_path = QString::fromUtf8(int_path);
     }
   }
 
-  const std::string &
+  const QString &
   Path::path () const
   {
     return m_path;
   }
 
-  const char * 
+  const char *
   Path::c_str() const
   {
-    return m_path.c_str ();
+    return m_path.utf8();
   }
 
-  Path& 
+  Path&
   Path::operator=(const Path & path)
   {
     if (this == &path)
       return *this;
-    m_path = path.c_str();
+    m_path = path.path();
     return *this;
   }
 
@@ -96,22 +98,22 @@ namespace svn
   }
 
   void
-  Path::addComponent (const char * component)
+  Path::addComponent (const QString& component)
   {
     Pool pool;
 
-    if (Url::isValid (m_path.c_str ()))
+    if (Url::isValid (m_path))
     {
       const char * newPath =
-        svn_path_url_add_component (m_path.c_str (),
-                                    component,
+        svn_path_url_add_component (m_path.utf8(),
+                                    component.utf8(),
                                     pool);
       m_path = newPath;
     }
     else
     {
-      svn_stringbuf_t * pathStringbuf = 
-        svn_stringbuf_create (m_path.c_str (), pool);
+      svn_stringbuf_t * pathStringbuf =
+        svn_stringbuf_create (m_path.utf8(), pool);
 
       svn_path_add_component (pathStringbuf,
                               component);
@@ -121,47 +123,48 @@ namespace svn
   }
 
 
-  void 
-  Path::addComponent (const std::string & component)
+  void
+  Path::addComponent (const char* component)
   {
-    addComponent (component.c_str ());
+    addComponent (QString::fromUtf8(component));
   }
 
 
   void
-  Path::split (std::string & dirpath, std::string & basename) const
+  Path::split (QString & dirpath, QString & basename) const
   {
     Pool pool;
 
     const char * cdirpath;
     const char * cbasename;
 
-    svn_path_split (m_path.c_str (), &cdirpath, &cbasename, pool);
+    svn_path_split (m_path.utf8(), &cdirpath, &cbasename, pool);
 
-    dirpath = cdirpath;
-    basename = cbasename;
+    dirpath = QString::fromUtf8(cdirpath);
+    basename = QString::fromUtf8(cbasename);
   }
 
 
   void
-  Path::split (std::string & dir, std::string & filename, std::string & ext) const
+  Path::split (QString & dir, QString & filename, QString & ext) const
   {
-    std::string basename;
+    QString basename;
 
     // first split path into dir and filename+ext
     split (dir, basename);
 
     // next search for last .
-    size_t pos = basename.find_last_of (".");
-    if (pos == std::string::npos)
+    int pos = basename.findRev(".");
+
+    if (pos == -1)
     {
       filename = basename;
       ext = "";
     }
     else
     {
-      filename = basename.substr (0, pos);
-      ext = basename.substr (pos);
+      filename = basename.left(pos);
+      ext = basename.mid(pos+1);
     }
   }
 
@@ -177,9 +180,9 @@ namespace svn
 
 #define test_tempdir    Fixed_test_tempdir
 #define apr_temp_dir_get    Fixed_apr_temp_dir_get
-  
+
   static char global_temp_dir[APR_PATH_MAX+1] = { 0 };
-  
+
   /* Try to open a temporary file in the temporary dir, write to it,
     and then close it. */
   static int Fixed_test_tempdir(const char *temp_dir, apr_pool_t *p)
@@ -187,7 +190,7 @@ namespace svn
       apr_file_t *dummy_file;
       // This is the only actual fix - adding the ".XXXXXX"!
       const char *path = apr_pstrcat(p, temp_dir, "/apr-tmp.XXXXXX", NULL);
-  
+
       if (apr_file_mktemp(&dummy_file, (char *)path, 0, p) == APR_SUCCESS) {
           if (apr_file_putc('!', dummy_file) == APR_SUCCESS) {
               if (apr_file_close(dummy_file) == APR_SUCCESS) {
@@ -218,7 +221,7 @@ namespace svn
           "/tmp"
           "/var/tmp"
           "/usr/tmp"
-          `pwd` 
+          `pwd`
 
        NOTE: This algorithm is basically the same one used by Python
        2.2's tempfile.py module.  */
@@ -263,35 +266,35 @@ end:
   /* ===================================================================
    * End of inserted fixed APR code
    */
-   
+
   Path
   Path::getTempDir ()
   {
-    const char * tempdir = NULL;
+    const char * tempdir = 0;
     Pool pool;
 
     if (apr_temp_dir_get (&tempdir, pool) != APR_SUCCESS)
     {
-      tempdir = NULL;
+      tempdir = 0;
     }
 
     return tempdir;
   }
 
 
-  size_t 
+  unsigned int
   Path::length () const
   {
     return m_path.length ();
   }
 
 
-  std::string
+  QString
   Path::native () const
   {
     Pool pool;
 
-    return svn_path_local_style (m_path.c_str (), pool);
+    return QString::fromUtf8(svn_path_local_style (m_path.utf8(), pool));
   }
 
 }

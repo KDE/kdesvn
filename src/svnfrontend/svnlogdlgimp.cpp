@@ -64,9 +64,9 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     _revision=_entry.revision;
     fullDate=helpers::sub2qt::apr_time2qt(_entry.date);
     setText(COL_REV,QString("%1").arg(_revision));
-    setText(COL_AUTHOR,QString::fromUtf8(_entry.author.c_str()));
+    setText(COL_AUTHOR,_entry.author);
     setText(COL_DATE,fullDate.toString(Qt::LocalDate));
-    _message = QString::fromUtf8(_entry.message.c_str());
+    _message = _entry.message;
     //setText(COL_MSG,_entry.message.c_str());
 }
 const QString&LogListViewItem::message()const
@@ -100,14 +100,6 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
     LogListViewItem * item;
     for (lit=_log->begin();lit!=_log->end();++lit) {
         item = new LogListViewItem(m_LogView,*lit);
-#if 0
-        if (lit->changedPaths.size()>0) {
-            std::list< svn::LogChangePathEntry >::const_iterator peiter;
-            for (peiter = lit->changedPaths.begin();peiter!=lit->changedPaths.end();++peiter) {
-                kdDebug()<<peiter->action<<": from " << peiter->copyFromPath << " to " << peiter->path << endl;
-            }
-        }
-#endif
     }
     _name = what;
 }

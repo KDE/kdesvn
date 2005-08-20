@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -26,8 +26,7 @@
 #ifndef _SVNCPP_PATH_HPP_
 #define _SVNCPP_PATH_HPP_
 
-// stl
-#include <string>
+#include <qstring.h>
 
 
 namespace svn
@@ -38,14 +37,14 @@ namespace svn
   class Path
   {
   private:
-    std::string m_path;
+    QString m_path;
 
     /**
      * initialize the class
      *
      * @param path Path string
      */
-    void init (const char * path);
+    void init (const QString& path);
 
   public:
     /**
@@ -55,12 +54,12 @@ namespace svn
      *
      * @param path Path string
      */
-    Path (const std::string & path = "");
-    
+    Path (const QString & path = "");
+
     /**
      * Constructor
      *
-     * @see Path::Path (const std::string &)
+     * @see Path::Path (const QString &)
      * @param path Path string
      */
     Path (const char * path);
@@ -80,13 +79,13 @@ namespace svn
     /**
      * @return Path string
      */
-    const std::string &
+    const QString &
     path () const;
 
     /**
      * @return Path string as c string
      */
-    const char * 
+    const char *
     c_str() const;
 
     /**
@@ -96,7 +95,7 @@ namespace svn
      *
      * @return true if there is a path set
      */
-    bool 
+    bool
     isset() const;
 
 
@@ -115,7 +114,7 @@ namespace svn
      * @param component new component to add
      */
     void
-    addComponent (const std::string & component);
+    addComponent (const QString & component);
 
 
     /**
@@ -125,7 +124,7 @@ namespace svn
      * @param basename filename
      */
     void
-    split (std::string & dirpath, std::string & basename) const;
+    split (QString & dirpath, QString & basename) const;
 
 
     /**
@@ -137,7 +136,7 @@ namespace svn
      * @param ext extension (including leading dot ".")
      */
     void
-    split (std::string & dir, std::string & filename, std::string & ext) const;
+    split (QString & dir, QString & filename, QString & ext) const;
 
 
     /**
@@ -148,12 +147,12 @@ namespace svn
 
 
     /** return the length of the path-string */
-    size_t 
+    unsigned int
     length () const;
 
 
     /** returns the path with native separators */
-    std::string
+    QString
     native () const;
   };
 }

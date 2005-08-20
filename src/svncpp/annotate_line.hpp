@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -24,6 +24,8 @@
  */
 #ifndef _SVNCPP_ANNOTATE_LINE_HPP_
 #define _SVNCPP_ANNOTATE_LINE_HPP_
+
+#include <qstring.h>
 
 namespace svn
 {
@@ -38,52 +40,59 @@ namespace svn
                   const char *author,
                   const char *date,
                   const char *line)
-    : m_line_no (line_no), m_revision (revision), 
-      m_author (author), m_date (date), m_line (line)
+    : m_line_no (line_no), m_revision (revision),
+      m_author(QString::fromUtf8(author)),
+      m_date(QString::fromUtf8(date)),
+      m_line(QString::fromUtf8(line))
     {
     }
 
     AnnotateLine ( const AnnotateLine &other)
-    : m_line_no (other.m_line_no), m_revision (other.m_revision), 
-      m_author (other.m_author), m_date (other.m_date), 
+    : m_line_no (other.m_line_no), m_revision (other.m_revision),
+      m_author (other.m_author), m_date (other.m_date),
       m_line (other.m_line)
+    {
+    }
+    AnnotateLine()
+    : m_line_no(0),m_revision(-1),
+      m_author(""),m_date(""),m_line(0)
     {
     }
 
     /**
-     * destructor 
+     * destructor
      */
     virtual ~AnnotateLine ()
     {
     }
 
-    apr_int64_t 
+    apr_int64_t
     lineNumber () const
     {
         return m_line_no;
     }
-    svn_revnum_t 
+    svn_revnum_t
     revision () const
     {
         return m_revision;
     }
 
 
-    const std::string &
+    const QString &
     author () const
     {
         return m_author;
     }
 
 
-    const std::string &
+    const QString &
     date () const
     {
         return m_date;
     }
 
 
-    const std::string &
+    const QString &
     line () const
     {
         return m_line;
@@ -92,9 +101,9 @@ namespace svn
   private:
     apr_int64_t m_line_no;
     svn_revnum_t m_revision;
-    std::string m_author;
-    std::string m_date;
-    std::string m_line;
+    QString m_author;
+    QString m_date;
+    QString m_line;
   };
 }
 

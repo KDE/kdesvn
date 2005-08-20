@@ -26,8 +26,8 @@
 #ifndef _SVNCPP_CONTEXT_LISTENER_HPP_
 #define _SVNCPP_CONTEXT_LISTENER_HPP_
 
-// stl
-#include <string>
+// qt
+#include <qstring.h>
 
 // Subversion api
 #include "svn_client.h"
@@ -66,9 +66,9 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetLogin (const std::string & realm,
-                     std::string & username,
-                     std::string & password,
+    contextGetLogin (const QString & realm,
+                     QString & username,
+                     QString & password,
                      bool & maySave) = 0;
 
     /**
@@ -124,7 +124,7 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetLogMessage (std::string & msg) = 0;
+    contextGetLogMessage (QString & msg) = 0;
 
     typedef enum
     {
@@ -145,12 +145,12 @@ namespace svn
       const apr_uint32_t failures;
 
       /** certificate information */
-      std::string hostname;
-      std::string fingerprint;
-      std::string validFrom;
-      std::string validUntil;
-      std::string issuerDName;
-      std::string realm;
+      QString hostname;
+      QString fingerprint;
+      QString validFrom;
+      QString validUntil;
+      QString issuerDName;
+      QString realm;
       bool maySave;
 
       SslServerTrustData (const apr_uint32_t failures_ = 0)
@@ -179,7 +179,7 @@ namespace svn
      * information
      */
     virtual bool
-    contextSslClientCertPrompt (std::string & certFile) = 0;
+    contextSslClientCertPrompt (QString & certFile) = 0;
 
     /**
      * this method is called to retrieve the password
@@ -190,8 +190,8 @@ namespace svn
      * @param maySave
      */
     virtual bool
-    contextSslClientCertPwPrompt (std::string & password,
-                                  const std::string & realm,
+    contextSslClientCertPwPrompt (QString & password,
+                                  const QString & realm,
                                   bool & maySave) = 0;
   };
 }

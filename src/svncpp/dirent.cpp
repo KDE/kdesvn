@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -23,8 +23,7 @@
  * ====================================================================
  */
 
-// stl
-#include <string>
+#include <qstring.h>
 
 // svncpp
 #include "svncpp/dirent.hpp"
@@ -35,26 +34,26 @@ namespace svn
   struct DirEntry::Data
   {
   public:
-    std::string name;
+    QString name;
     svn_node_kind_t kind;
     svn_filesize_t size;
     bool hasProps;
     svn_revnum_t createdRev;
     apr_time_t time;
-    std::string lastAuthor;
+    QString lastAuthor;
 
     Data ()
-      : kind (svn_node_unknown), size (0), hasProps(false), 
+      : kind (svn_node_unknown), size (0), hasProps(false),
         createdRev (0), time (0)
     {
     }
 
-    Data (const char * _name, svn_dirent_t * dirEntry)
-      : name (_name), kind (dirEntry->kind), size (dirEntry->size), 
-        hasProps (dirEntry->has_props != 0), 
+    Data (const QString& _name, svn_dirent_t * dirEntry)
+      : name (_name), kind (dirEntry->kind), size (dirEntry->size),
+        hasProps (dirEntry->has_props != 0),
         createdRev (dirEntry->created_rev), time (dirEntry->time)
     {
-      lastAuthor = dirEntry->last_author == 0 ? "" : dirEntry->last_author;
+      lastAuthor = dirEntry->last_author == 0 ? "" : QString::fromUtf8(dirEntry->last_author);
     }
 
     Data (const DirEntry & src)
@@ -80,7 +79,7 @@ namespace svn
   {
   }
 
-  DirEntry::DirEntry (const char * name, svn_dirent_t * DirEntry)
+  DirEntry::DirEntry (const QString& name, svn_dirent_t * DirEntry)
     : m (new Data (name, DirEntry))
   {
   }
@@ -125,16 +124,16 @@ namespace svn
     return m->time;
   }
 
-  const char *
+  const QString&
   DirEntry::lastAuthor () const
   {
-    return m->lastAuthor.c_str ();
+    return m->lastAuthor;
   }
 
-  const char *
+  const QString&
   DirEntry::name () const
   {
-    return m->name.c_str ();
+    return m->name;
   }
 
   DirEntry &

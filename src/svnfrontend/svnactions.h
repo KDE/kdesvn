@@ -59,7 +59,7 @@ public:
     template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog");
     void makeCat(svn::Revision start, const QString&what,const QString&disp);
     void addItems(const QValueList<svn::Path> &items,bool rec=false);
-    void makeDelete(const std::vector<svn::Path>&);
+    void makeDelete(const QValueList<svn::Path>&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
     bool makeStatus(const QString&what, svn::StatusEntries&dlist);

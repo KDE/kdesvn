@@ -3,8 +3,7 @@
 #include <svn_version.h>
 #include <svn_client.h>
 
-#include <string>
-#include <sstream>
+#include <qstring.h>
 
 namespace svn {
     static const svn_version_t Linkedtag = {
@@ -14,7 +13,7 @@ namespace svn {
         SVN_VER_NUMTAG
     };
 
-    static std::string curr_version_string;
+    static QString curr_version_string;
 
     bool Version::client_version_compatible()
     {
@@ -27,15 +26,12 @@ namespace svn {
     }
     const char*Version::running_version()
     {
-        if (curr_version_string.size()==0) {
-            std::ostringstream so;
-            so << svn_client_version()->major << "."
-                << svn_client_version()->minor << "."
-                << svn_client_version()->patch
-                << svn_client_version()->tag;
-            curr_version_string = so.str();
+        if (curr_version_string.length()==0) {
+            curr_version_string =
+                QString("%1.%2.%3.%4").arg(svn_client_version()->major).arg(svn_client_version()->minor)
+                    .arg(svn_client_version()->patch).arg(svn_client_version()->tag);
         }
-        return curr_version_string.c_str();
+        return curr_version_string.ascii();
     }
     int Version::version_major()
     {

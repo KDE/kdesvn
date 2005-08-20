@@ -335,7 +335,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
-        if (helpers::stl2qt::stl2qtstring(it->path())==what||QString::compare(it->entry().url(),what)==0){
+        if ((*it).path()==what||QString::compare((*it).entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
                 m_Dirsread[pitem->fullName()]=true;
@@ -395,7 +395,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
     }
     svn::Status stat;
     try {
-        stat = m_SvnWrapper->svnclient()->singleStatus(newdir.utf8());
+        stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
     } catch (svn::ClientException e) {
         m_LastException = QString::fromUtf8(e.message());
         emit sigLogMessage(m_LastException);
@@ -789,14 +789,14 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
     FileListViewItem*k;
     bool gotit = false;
     for (;it!=dlist.end();++it) {
-        if (QString::compare(helpers::stl2qt::stl2qtstring(it->path()),what)==0) {
+        if (QString::compare((*it).path(),what)==0) {
             continue;
         }
         FileListViewItemListIterator clistIter(currentSync);
         gotit = false;
         while ( (k=clistIter.current()) ) {
             ++clistIter;
-            if ( QString::compare(k->fullName(),QString::fromUtf8(it->path()))==0) {
+            if ( QString::compare(k->fullName(),(*it).path())==0) {
                 currentSync.removeRef(k);
                 k->updateStatus(*it);
                 gotit = true;
@@ -1111,7 +1111,7 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
             KURL::List::iterator iter;
             QValueList<svn::Path> tmp;
             for (iter=lst.begin();iter!=lst.end();++iter) {
-                tmp.push_back(svn::Path((base+(*iter).fileName(true)).utf8()));
+                tmp.push_back(svn::Path((base+(*iter).fileName(true))));
             }
             m_SvnWrapper->addItems(tmp,true);
         }
@@ -1136,7 +1136,7 @@ void kdesvnfilelist::slotDelete()
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
 
-    std::vector<svn::Path> items;
+    QValueList<svn::Path> items;
     QStringList displist;
     KURL::List kioList;
     while ((cur=liter.current())!=0){
@@ -1144,7 +1144,7 @@ void kdesvnfilelist::slotDelete()
         if (!cur->isRealVersioned()) {
             kioList.append(cur->fullName());
         } else {
-            items.push_back(helpers::stl2qt::qt2stlstring(cur->fullName()));
+            items.push_back(cur->fullName());
         }
         displist.append(cur->fullName());
     }

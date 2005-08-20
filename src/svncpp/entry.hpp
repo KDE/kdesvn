@@ -32,6 +32,7 @@
 #include "svncpp/pool.hpp"
 #include "svncpp/lock_entry.hpp"
 
+#include <qstring.h>
 
 namespace svn
 {
@@ -80,10 +81,10 @@ namespace svn
     /**
      * @return entry's name
      */
-    const char *
+    const QString
     name () const
     {
-      return m_entry->name;
+      return QString::fromUtf8(m_entry->name);
     }
 
     /**
@@ -98,28 +99,28 @@ namespace svn
     /**
      * @return url in repository
      */
-    const char *
+    const QString
     url () const
     {
-      return m_entry->url;
+      return QString::fromUtf8(m_entry->url);
     }
 
     /**
      * @return canonical repository url
      */
-    const char *
+    const QString
     repos () const
     {
-      return m_entry->repos;
+      return QString::fromUtf8(m_entry->repos);
     }
 
     /**
      * @return repository uuid
      */
-    const char *
+    const QString
     uuid () const
     {
-      return m_entry->uuid;
+      return QString::fromUtf8(m_entry->uuid);
     }
 
     /**
@@ -170,10 +171,10 @@ namespace svn
     /**
      * @return copyfrom location
      */
-    const char *
+    const QString
     copyfromUrl () const
     {
-      return m_entry->copyfrom_url;
+      return QString::fromUtf8(m_entry->copyfrom_url);
     }
 
     /**
@@ -188,37 +189,37 @@ namespace svn
     /**
      * @return old version of conflicted file
      */
-    const char *
+    const QString
     conflictOld () const
     {
-      return m_entry->conflict_old;
+      return QString::fromUtf8(m_entry->conflict_old);
     }
 
     /**
      * @return new version of conflicted file
      */
-    const char *
+    const QString
     conflictNew () const
     {
-      return m_entry->conflict_new;
+      return QString::fromUtf8(m_entry->conflict_new);
     }
 
     /**
      * @return working version of conflicted file
      */
-    const char *
+    const QString
     conflictWrk () const
     {
-      return m_entry->conflict_wrk;
+      return QString::fromUtf8(m_entry->conflict_wrk);
     }
 
     /**
      * @return property reject file
      */
-    const char *
+    const QString
     prejfile () const
     {
-      return m_entry->prejfile;
+      return QString::fromUtf8(m_entry->prejfile);
     }
 
     /**
@@ -245,10 +246,10 @@ namespace svn
      * @return base64 encoded checksum
      * @retval NULL for backwards compatibility
      */
-    const char *
+    const QString
     checksum () const
     {
-      return m_entry->checksum;
+      return QString::fromUtf8(m_entry->checksum);
     }
 
     /**
@@ -272,10 +273,10 @@ namespace svn
     /**
      * @return last commit author of this file
      */
-    const char *
+    const QString
     cmtAuthor () const
     {
-      return m_entry->cmt_author;
+      return QString::fromUtf8(m_entry->cmt_author);
     }
 
     /**

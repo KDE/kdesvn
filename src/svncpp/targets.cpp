@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -22,9 +22,6 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-
-// stl
-#include <vector>
 
 // subversion api
 #include "svn_types.h"
@@ -41,32 +38,32 @@
 
 namespace svn
 {
-  Targets::Targets (const std::vector<Path> & targets)
+  Targets::Targets (const QValueList<Path> & targets)
   {
     m_targets = targets;
   }
-  
+
   Targets::Targets (const apr_array_header_t * apr_targets)
   {
     int i;
-    
+
     m_targets.clear ();
-    m_targets.reserve (apr_targets->nelts);
-    
+    //m_targets.reserve (apr_targets->nelts);
+
     for (i = 0; i < apr_targets->nelts; i++)
     {
-      const char ** target = 
+      const char ** target =
         &APR_ARRAY_IDX (apr_targets, i, const char *);
-      
+
       m_targets.push_back (Path (*target));
     }
   }
-  
+
   Targets::Targets (const Targets & targets)
   {
     m_targets = targets.targets ();
   }
-  
+
   Targets::Targets (const char * target)
   {
     if (target != 0)
@@ -82,33 +79,33 @@ namespace svn
   const apr_array_header_t *
   Targets::array (const Pool & pool) const
   {
-    std::vector<Path>::const_iterator it;
-    
+    QValueList<Path>::const_iterator it;
+
     apr_pool_t *apr_pool = pool.pool ();
-    apr_array_header_t *apr_targets = 
+    apr_array_header_t *apr_targets =
       apr_array_make (apr_pool,
                       m_targets.size(),
                       sizeof (const char *));
-    
+
     for (it = m_targets.begin (); it != m_targets.end (); it++)
     {
       const Path &path = *it;
       const char * target =
         apr_pstrdup (apr_pool, path.c_str());
-      
+
       (*((const char **) apr_array_push (apr_targets))) = target;
     }
-    
+
     return apr_targets;
   }
-  
-  const std::vector<Path> &
+
+  const QValueList<Path> &
   Targets::targets () const
   {
     return m_targets;
   }
 
-  size_t 
+  size_t
   Targets::size () const
   {
     return m_targets.size ();

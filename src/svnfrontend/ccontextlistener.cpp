@@ -106,17 +106,17 @@ CContextListener::~CContextListener()
 }
 
 bool CContextListener::contextGetLogin (
-                    const std::string & realm,
-                    std::string & username,
-                    std::string & password,
+                    const QString & realm,
+                    QString & username,
+                    QString & password,
                     bool & maySave)
 {
     emit waitShow(true);
-    emit sendNotify(QString::fromUtf8(realm.c_str()));
-    AuthDialogImpl auth(QString::fromUtf8(realm.c_str()));
+    emit sendNotify(realm);
+    AuthDialogImpl auth(realm);
     if (auth.exec()==QDialog::Accepted) {
-        username.assign(auth.Username().utf8());
-        password.assign(auth.Password().utf8());
+        username=auth.Username();
+        password=auth.Password();
         maySave = auth.maySave();
         emit waitShow(false);
         return true;
@@ -174,13 +174,13 @@ bool CContextListener::contextCancel()
     return false;
 }
 
-bool CContextListener::contextGetLogMessage (std::string & msg)
+bool CContextListener::contextGetLogMessage (QString & msg)
 {
     bool isOk = false;
     emit waitShow(true);
     QString logMessage = Logmsg_impl::getLogmessage(&isOk,0,0,0);
     if (isOk) {
-        msg.assign(logMessage.utf8());
+        msg = logMessage;
     }
     emit waitShow(false);
     return isOk;
@@ -192,12 +192,12 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
     bool ok,saveit;
     emit waitShow(true);
     if (!SslTrustPrompt_impl::sslTrust(
-        helpers::stl2qt::stl2qtstring(data.hostname),
-        helpers::stl2qt::stl2qtstring(data.fingerprint),
-        helpers::stl2qt::stl2qtstring(data.validFrom),
-        helpers::stl2qt::stl2qtstring(data.validUntil),
-        helpers::stl2qt::stl2qtstring(data.issuerDName),
-        helpers::stl2qt::stl2qtstring(data.realm),
+        data.hostname,
+        data.fingerprint,
+        data.validFrom,
+        data.validUntil,
+        data.issuerDName,
+        data.realm,
         &ok,&saveit)) {
         return DONT_ACCEPT;
     }
@@ -208,10 +208,10 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
     return ACCEPT_PERMANENTLY;
 }
 
-bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
+bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 {
     kdDebug()<<"CContextListener::contextSslClientCertPrompt "
-        << helpers::stl2qt::stl2qtstring(certFile) << endl;
+        << certFile << endl;
     emit waitShow(true);
     QString afile = KFileDialog::getOpenFileName(QString::null,
         QString::null,
@@ -221,25 +221,25 @@ bool CContextListener::contextSslClientCertPrompt (std::string & certFile)
     if (afile.isEmpty()) {
         return false;
     }
-    certFile = helpers::stl2qt::qt2stlstring(afile);
+    certFile = afile;
     return true;
 }
 
-bool CContextListener::contextSslClientCertPwPrompt (std::string & password,
-                                   const std::string & realm, bool & maysave)
+bool CContextListener::contextSslClientCertPwPrompt (QString & password,
+                                   const QString & realm, bool & maysave)
 {
     emit waitShow(true);
     QCString npass;
     int keep = 1;
     int res = KPasswordDialog::getPassword(npass,
-        i18n("Enter password for realm %1").arg(helpers::stl2qt::stl2qtstring(realm)),
+        i18n("Enter password for realm %1").arg(realm),
         &keep);
     emit waitShow(false);
     if (res!=KPasswordDialog::Accepted) {
         return false;
     }
     maysave = keep!=0;
-    password = helpers::stl2qt::qt2stlstring(npass);
+    password = npass;
     return true;
 }
 

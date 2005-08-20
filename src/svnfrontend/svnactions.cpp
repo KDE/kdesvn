@@ -163,7 +163,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @todo second last parameter user settable (printing infos about copy/move etc) moment false so traffic reduced
-        logs = m_Svnclient.log(k->fullName().utf8(),start,end,false,!follow);
+        logs = m_Svnclient.log(k->fullName(),start,end,false,!follow);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -192,7 +192,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
     if (!m_CurrentContext) return;
     svn::AnnotatedFile * blame;
     QString ex;
-    svn::Path p(k->fullName().utf8());
+    svn::Path p(k->fullName());
 
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Annotate","Blaming - hit cancel for abort");
@@ -220,16 +220,19 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
     QString text = "<html><table>"+rowb+"Rev"+rows+i18n("Author")+rows+i18n("Line")+rows+"&nbsp;"+rowe;
     bool second = false;
     QString codetext = "";
-    for (bit=blame->begin();bit!=blame->end();++bit) {
-        codetext = helpers::stl2qt::stl2qtstring(bit->line());
+    for (
+        bit=blame->begin();
+        bit!=blame->end();
+        ++bit) {
+        codetext = (*bit).line();
         codetext.replace(" ","&nbsp;");
         codetext.replace("\"","&quot;");
         codetext.replace("<","&lt;");
         codetext.replace(">","&gt;");
         codetext.replace("\t","&nbsp;&nbsp;&nbsp;&nbsp;");
-        text+=(second?rowb:rowc)+QString("%1").arg(bit->revision())+
-            rows+(bit->author().size()?helpers::stl2qt::stl2qtstring(bit->author()):i18n("Unknown"))+
-            rows+QString("%1").arg(bit->lineNumber())+rows+
+        text+=(second?rowb:rowc)+QString("%1").arg((*bit).revision())+
+            rows+((*bit).author().length()?(*bit).author():i18n("Unknown"))+
+            rows+QString("%1").arg((*bit).lineNumber())+rows+
             QString("<code>%1</code>").arg(codetext)+rowe;
             second = !second;
     }
@@ -248,9 +251,9 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
 void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&disp)
 {
     if (!m_CurrentContext) return;
-    std::string content;
+    QString content;
     QString ex;
-    svn::Path p(what.utf8());
+    svn::Path p(what);
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
         content = m_Svnclient.cat(p,start);
@@ -263,7 +266,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
         emit clientException(ex);
         return;
     }
-    if (content.size()==0) {
+    if (content.length()==0) {
         emit clientException(i18n("Got no content"));
         return;
     }
@@ -273,7 +276,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
     if (dlg) {
         ptr->setFont(KGlobalSettings::fixedFont());
         ptr->setWordWrap(QTextEdit::NoWrap);
-        ptr->setText("<code>"+QStyleSheet::convertFromPlainText(helpers::stl2qt::stl2qtstring(content))+"</code>");
+        ptr->setText("<code>"+QStyleSheet::convertFromPlainText(content)+"</code>");
         dlg->exec();
         dlg->saveDialogSize("cat_display_dlg",false);
         delete dlg;
@@ -289,10 +292,9 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     if (!isOk) {
         return QString::null;
     }
-    svn::Path target(parentDir.utf8());
-    target.addComponent(ex.utf8());
+    svn::Path target(parentDir);
+    target.addComponent(ex);
     ex = "";
-    std::string message;
 
     QString logMessage="";
     if (!m_ParentList->isLocal()) {
@@ -311,7 +313,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
         return QString::null;
     }
 
-    ex = helpers::stl2qt::stl2qtstring(target.path());
+    ex = target.path();
     return ex;
 }
 
@@ -332,13 +334,15 @@ void SvnActions::slotInfo()
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
         if (lst.count()==0) {
-            entries = m_Svnclient.info2(m_ParentList->baseUri().utf8(),true,rev,peg);
+            entries = m_Svnclient.info2(m_ParentList->baseUri(),true,rev,peg);
         } else {
             SvnItem*item;
             svn::InfoEntries e;
             for (item=lst.first();item;item=lst.next()) {
-                e = (m_Svnclient.info2(item->fullName().utf8(),true,rev,peg));
-                entries.insert(entries.end(),e.begin(),e.end());
+                e = (m_Svnclient.info2(item->fullName(),true,rev,peg));
+                // stl like - hold it for qt4?
+                //entries.insert(entries.end(),e.begin(),e.end());
+                entries+=e;
             }
         }
     } catch (svn::ClientException e) {
@@ -354,15 +358,15 @@ void SvnActions::slotInfo()
     static QString cs = "</b>:</td><td>";
     for (it=entries.begin();it!=entries.end();++it) {
         text+="<p><table>";
-        if ((*it).Name().size()) {
-            text+=rb+i18n("Name")+cs+helpers::stl2qt::stl2qtstring((*it).Name())+re;
+        if ((*it).Name().length()) {
+            text+=rb+i18n("Name")+cs+((*it).Name())+re;
         }
-        text+=rb+i18n("URL")+cs+helpers::stl2qt::stl2qtstring((*it).url())+re;
-        if ((*it).reposRoot().size()) {
-            text+=rb+i18n("Canonical repository url")+cs+helpers::stl2qt::stl2qtstring((*it).reposRoot())+re;
+        text+=rb+i18n("URL")+cs+((*it).url())+re;
+        if ((*it).reposRoot().length()) {
+            text+=rb+i18n("Canonical repository url")+cs+((*it).reposRoot())+re;
         }
-        if ((*it).checksum().size()) {
-            text+=rb+i18n("Checksum")+cs+helpers::stl2qt::stl2qtstring((*it).checksum())+re;
+        if ((*it).checksum().length()) {
+            text+=rb+i18n("Checksum")+cs+((*it).checksum())+re;
         }
         text+=rb+i18n("Type")+cs;
         switch ((*it).kind()) {
@@ -400,38 +404,38 @@ void SvnActions::slotInfo()
             break;
         }
         text+=re;
-        text+=rb+i18n("UUID")+cs+helpers::stl2qt::stl2qtstring((*it).uuid())+re;
-        text+=rb+i18n("Last author")+cs+helpers::stl2qt::stl2qtstring((*it).cmtAuthor())+re;
+        text+=rb+i18n("UUID")+cs+((*it).uuid())+re;
+        text+=rb+i18n("Last author")+cs+((*it).cmtAuthor())+re;
         text+=rb+i18n("Last commited")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
         text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qt((*it).textTime()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
-        if ((*it).conflictNew().size()) {
-            text+=rb+i18n("New version of conflicted file")+cs+helpers::stl2qt::stl2qtstring((*it).conflictNew())+re;
+        if ((*it).conflictNew().length()) {
+            text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
         }
-        if ((*it).conflictOld().size()) {
-            text+=rb+i18n("Old version of conflicted file")+cs+helpers::stl2qt::stl2qtstring((*it).conflictOld())+re;
+        if ((*it).conflictOld().length()) {
+            text+=rb+i18n("Old version of conflicted file")+cs+((*it).conflictOld())+re;
         }
-        if ((*it).conflictWrk().size()) {
+        if ((*it).conflictWrk().length()) {
             text+=rb+i18n("Working version of conflicted file")+
-                cs+helpers::stl2qt::stl2qtstring((*it).conflictWrk())+re;
+                cs+((*it).conflictWrk())+re;
         }
-        if ((*it).prejfile().size()) {
+        if ((*it).prejfile().length()) {
             text+=rb+i18n("Property reject file")+
-                cs+helpers::stl2qt::stl2qtstring((*it).prejfile())+re;
+                cs+((*it).prejfile())+re;
         }
 
-        if ((*it).copyfromUrl().size()) {
-            text+=rb+i18n("Copy from URL")+cs+helpers::stl2qt::stl2qtstring((*it).copyfromUrl())+re;
+        if ((*it).copyfromUrl().length()) {
+            text+=rb+i18n("Copy from URL")+cs+((*it).copyfromUrl())+re;
         }
         if ((*it).lockEntry().Locked()) {
-            text+=rb+i18n("Lock token")+cs+helpers::stl2qt::stl2qtstring((*it).lockEntry().Token())+re;
-            text+=rb+i18n("Owner")+cs+helpers::stl2qt::stl2qtstring((*it).lockEntry().Owner())+re;
+            text+=rb+i18n("Lock token")+cs+((*it).lockEntry().Token())+re;
+            text+=rb+i18n("Owner")+cs+((*it).lockEntry().Owner())+re;
             text+=rb+i18n("Locked on")+cs+
                 helpers::sub2qt::apr_time2qt((*it).lockEntry().Date()).toString(Qt::LocalDate)+
                 re;
             text+=rb+i18n("Lock comment")+cs+
-                helpers::stl2qt::stl2qtstring((*it).lockEntry().Comment())+re;
+                (*it).lockEntry().Comment()+re;
         }
         text+="</table></p>\n";
     }
@@ -473,11 +477,11 @@ void SvnActions::slotProperties()
         StopDlg sdlg(m_SvnContext,0,0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_Svnclient.propdel(delList[pos].utf8(),svn::Path(k->fullName().utf8()),svn::Revision::HEAD);
+            m_Svnclient.propdel(delList[pos],svn::Path(k->fullName()),svn::Revision::HEAD);
         }
         PropertiesDlg::tPropEntries::Iterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_Svnclient.propset(it.key().utf8(),it.data().utf8(),svn::Path(k->fullName().utf8()),svn::Revision::HEAD);
+            m_Svnclient.propset(it.key(),it.data(),svn::Path(k->fullName()),svn::Revision::HEAD);
         }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
@@ -507,19 +511,20 @@ void SvnActions::slotCommit()
     SvnItem*cur;
     QPtrListIterator<SvnItem> liter(which);
 
-    std::vector<svn::Path> targets;
+    QValueList<svn::Path> targets;
+    kdDebug()<<"Commit baseuri" << m_ParentList->baseUri()<<endl;
     if (which.count()==0) {
-        targets.push_back(svn::Path(m_ParentList->baseUri().utf8()));
+        targets.push_back(svn::Path(m_ParentList->baseUri()));
     } else {
         while ( (cur=liter.current())!=0) {
             ++liter;
-            targets.push_back(svn::Path(cur->fullName().utf8()));
+            targets.push_back(svn::Path(cur->fullName()));
         }
     }
     svn_revnum_t nnum;
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
-        nnum = m_Svnclient.commit(svn::Targets(targets),msg.utf8(),rec);
+        nnum = m_Svnclient.commit(svn::Targets(targets),msg,rec);
     } catch (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -556,10 +561,10 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     tdir.setAutoDelete(true);
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
-        ex = helpers::stl2qt::stl2qtstring(m_Svnclient.diff(svn::Path(tdir.name().utf8()),
-            svn::Path(what.utf8()),
+        ex = m_Svnclient.diff(svn::Path(tdir.name()),
+            svn::Path(what),
             start, end,
-            true,false,false));
+            true,false,false);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -601,7 +606,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
     try {
         StopDlg sdlg(m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
         for (unsigned int i = 0; i<what.count();++i) {
-            ret = m_Svnclient.update(svn::Path(what[i].utf8()),
+            ret = m_Svnclient.update(svn::Path(what[i]),
                 rev, recurse);
             kapp->processEvents();
             if (sdlg.cancelld()) {
@@ -729,7 +734,7 @@ void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
 /*!
     \fn SvnActions::makeDelete()
  */
-void SvnActions::makeDelete(const std::vector<svn::Path>&items)
+void SvnActions::makeDelete(const QValueList<svn::Path>&items)
 {
     if (!m_CurrentContext) return;
     QString ex;
@@ -816,14 +821,14 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
     while (fUrl.endsWith("/")) {
         fUrl.truncate(fUrl.length()-1);
     }
-    svn::Path p(tPath.utf8());
+    svn::Path p(tPath);
     if (!_exp||!m_CurrentContext) reInitClient();
     try {
         StopDlg sdlg(m_SvnContext,0,0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
         if (_exp) {
-            m_Svnclient.doExport(svn::Path(fUrl.utf8()),p,r,force);
+            m_Svnclient.doExport(svn::Path(fUrl),p,r,force);
         } else {
-            m_Svnclient.checkout(fUrl.utf8(),p,r,force);
+            m_Svnclient.checkout(fUrl,p,r,force);
         }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
@@ -889,9 +894,9 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         return;
     }
 
-    std::vector<svn::Path> items;
+    QValueList<svn::Path> items;
     for (unsigned j = 0; j<displist.count();++j) {
-        items.push_back(svn::Path((*(displist.at(j))).utf8()));
+        items.push_back(svn::Path((*(displist.at(j)))));
     }
     QString ex;
 
@@ -915,10 +920,10 @@ void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     while (fUrl.endsWith("/")) {
         fUrl.truncate(fUrl.length()-1);
     }
-    svn::Path p(tPath.utf8());
+    svn::Path p(tPath);
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Switch url"),i18n("Switching url"));
-        m_Svnclient.doSwitch(p,fUrl.utf8(),r,rec);
+        m_Svnclient.doSwitch(p,fUrl,r,rec);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -981,7 +986,7 @@ void SvnActions::slotCleanup(const QString&path)
     if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Cleanup"),i18n("Cleaning up folder"));
-        m_Svnclient.cleanup(svn::Path(path.utf8()));
+        m_Svnclient.cleanup(svn::Path(path));
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -993,7 +998,7 @@ void SvnActions::slotResolved(const QString&path)
     if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Resolve"),i18n("Marking resolved"));
-        m_Svnclient.resolved(svn::Path(path.utf8()),true);
+        m_Svnclient.resolved(svn::Path(path),true);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1005,7 +1010,7 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
     if (!m_CurrentContext) return;
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Import"),i18n("Importing items"));
-        m_Svnclient.import(svn::Path(path.utf8()),target.utf8(),message.utf8(),rec);
+        m_Svnclient.import(svn::Path(path),target,message,rec);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1017,11 +1022,11 @@ void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&r
 {
     if (!m_CurrentContext) return;
     try {
-        m_Svnclient.merge(svn::Path(_entry.utf8()),
+        m_Svnclient.merge(svn::Path(_entry),
             rev1,
-            svn::Path(_entry.utf8()),
+            svn::Path(_entry),
             rev2,
-            svn::Path(_entry.utf8()),
+            svn::Path(_entry),
             forceIt,rec,ancestry,dry);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
@@ -1038,11 +1043,11 @@ void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool
     try {
         StopDlg sdlg(m_SvnContext,0,0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         if (move) {
-            m_Svnclient.move(svn::Path(Old.utf8()),svn::Revision::HEAD,
-                svn::Path(New.utf8()),force);
+            m_Svnclient.move(svn::Path(Old),svn::Revision::HEAD,
+                svn::Path(New),force);
         } else {
-            m_Svnclient.copy(svn::Path(Old.utf8()),svn::Revision::HEAD,
-                svn::Path(New.utf8()));
+            m_Svnclient.copy(svn::Path(Old),svn::Revision::HEAD,
+                svn::Path(New));
         }
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
@@ -1057,13 +1062,13 @@ void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool
  */
 void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit)
 {
-    std::vector<svn::Path> targets;
+    QValueList<svn::Path> targets;
     for (unsigned int i = 0; i<what.count();++i) {
-        targets.push_back(svn::Path((*(what.at(i))).utf8()));
+        targets.push_back(svn::Path((*(what.at(i)))));
     }
     if (!m_CurrentContext) return;
     try {
-        m_Svnclient.lock(svn::Targets(targets),_msg.utf8(),breakit);
+        m_Svnclient.lock(svn::Targets(targets),_msg,breakit);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1076,10 +1081,10 @@ void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit
  */
 void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 {
-    std::vector<svn::Path> targets;
+    QValueList<svn::Path> targets;
     if (!m_CurrentContext) return;
     for (unsigned int i = 0; i<what.count();++i) {
-        targets.push_back(svn::Path((*(what.at(i))).utf8()));
+        targets.push_back(svn::Path((*(what.at(i)))));
     }
 
     try {
@@ -1103,7 +1108,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
     QString ex;
     try {
         //                                          rec    all  up     noign
-        dlist = m_Svnclient.status(what.utf8(),false,true,false,display_ignores);
+        dlist = m_Svnclient.status(what,false,true,false,display_ignores);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());
@@ -1138,7 +1143,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     QString data = "";
     if (pm.size()>0) {
         svn::PropertiesMap mp = pm[0].second;
-        data = helpers::stl2qt::stl2qtstring(mp["svn:ignore"]);
+        data = mp["svn:ignore"];
     }
     bool result = false;
     QRegExp reg("\\b"+QRegExp::escape(name)+"\\n");

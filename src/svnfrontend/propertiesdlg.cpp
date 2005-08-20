@@ -225,7 +225,7 @@ void PropertiesDlg::initItem()
         emit clientException(ex);
         return;
     }
-    svn::Path what(m_Item.utf8());
+    svn::Path what(m_Item);
     svn::PathPropertiesMapList propList;
     try {
         propList = m_Client->proplist(what,m_Rev);
@@ -237,15 +237,15 @@ void PropertiesDlg::initItem()
     svn::PathPropertiesMapList::const_iterator lit;
     svn::PropertiesMap pmap;
     for (lit=propList.begin();lit!=propList.end();++lit) {
-        pmap = lit->second;
+        pmap = (*lit).second;
         /* just want the first one */
         break;
     }
     svn::PropertiesMap::const_iterator pit;
     for (pit=pmap.begin();pit!=pmap.end();++pit) {
         PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview,
-            QString::fromUtf8(pit->first.c_str()),
-            QString::fromUtf8(pit->second.c_str()));
+            pit.key(),
+            pit.data());
         ki->setMultiLinesEnabled(true);
     }
     initDone = true;

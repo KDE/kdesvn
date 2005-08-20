@@ -65,7 +65,7 @@ SvnItem_p::~SvnItem_p()
 
 void SvnItem_p::init()
 {
-    m_full = helpers::stl2qt::stl2qtstring(m_Stat.path());
+    m_full = m_Stat.path();
     while (m_full.endsWith("/")) {
         /* dir name possible */
         m_full.truncate(m_full.length()-1);
@@ -77,7 +77,7 @@ void SvnItem_p::init()
     } else {
         m_short = m_full;
     }
-    m_url = helpers::stl2qt::stl2qtstring(m_Stat.entry().url());
+    m_url = m_Stat.entry().url();
     m_fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
 }
 
@@ -143,7 +143,7 @@ QPixmap SvnItem::getPixmap(int size)
             p = KGlobal::iconLoader()->loadIcon("folder",KIcon::Desktop,size);
         } else {
             p = KGlobal::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
-            //p = KMimeType::pixmapForURL(KURL(stat.entry().url()),0,KIcon::Desktop,16);
+            //KMimeType::pixmapForURL(p_Item->m_Stat.path(),0,KIcon::Desktop,size);
         }
     } else {
         p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
@@ -241,5 +241,5 @@ bool SvnItem::isLocked()const
 
 QString SvnItem::lockOwner()const
 {
-    return helpers::stl2qt::stl2qtstring(p_Item->m_Stat.entry().lockEntry().Owner());
+    return p_Item->m_Stat.entry().lockEntry().Owner();
 }

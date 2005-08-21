@@ -66,11 +66,19 @@ namespace svn
     m_targets = targets.targets ();
   }
 
-  Targets::Targets (const char * target)
+  Targets::Targets (const QString& target)
   {
-    if (target != 0)
+    if (!target.isEmpty())
     {
-      m_targets.push_back (target);
+      m_targets.push_back(target);
+    }
+  }
+
+  Targets::Targets (const char* target)
+  {
+    if (target)
+    {
+      m_targets.push_back(QString::fromUtf8(target));
     }
   }
 
@@ -91,11 +99,12 @@ namespace svn
 
     for (it = m_targets.begin (); it != m_targets.end (); it++)
     {
-      kdDebug()<<"Arraying :" << (*it).c_str()<<":"<<endl;
-      const char * target =
-        apr_pstrdup (apr_pool, (*it).c_str());
+      QCString s = (*it).path().utf8();
 
-      (*((const char **) apr_array_push (apr_targets))) = target;
+      char * t2 =
+        apr_pstrndup (apr_pool,s,s.length());
+
+      (*((const char **) apr_array_push (apr_targets))) = t2;
     }
 
     return apr_targets;
@@ -122,7 +131,7 @@ namespace svn
     }
     else
     {
-      return "";
+      return Path();
     }
   }
 }

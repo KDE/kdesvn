@@ -226,7 +226,7 @@ QString SvnItem::infoText()const
 
 QString SvnItem::cmtAuthor()const
 {
-    return QString::fromUtf8(p_Item->m_Stat.entry().cmtAuthor());
+    return p_Item->m_Stat.entry().cmtAuthor();
 }
 
 long int SvnItem::cmtRev()const

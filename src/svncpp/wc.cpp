@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -37,7 +37,7 @@ namespace svn
 {
   const char * Wc::ADM_DIR_NAME = SVN_WC_ADM_DIR_NAME;
 
-  bool 
+  bool
   Wc::checkWc (const char * dir)
   {
     Pool pool;
@@ -45,7 +45,7 @@ namespace svn
     int wc;
 
     svn_error_t * error =
-      svn_wc_check_wc (path.c_str (), &wc, pool);
+      svn_wc_check_wc (path.path().utf8(), &wc, pool);
 
     if ((error != NULL) || (wc == 0))
     {
@@ -56,7 +56,7 @@ namespace svn
   }
 
   void
-  Wc::ensureAdm (const char * dir, const char *uuid, 
+  Wc::ensureAdm (const char * dir, const char *uuid,
                  const char * url, const Revision & revision)
   {
     Pool pool;
@@ -64,9 +64,9 @@ namespace svn
     Path urlPath (url);
 
     svn_error_t * error =
-      svn_wc_ensure_adm (dirPath.c_str (),    // path 
-                         uuid,                // UUID 
-                         urlPath.c_str (),    // url
+      svn_wc_ensure_adm (dirPath.path().utf8(),    // path
+                         uuid,                // UUID
+                         urlPath.path().utf8(),    // url
                          revision.revnum (),  // revision
                          pool);
 

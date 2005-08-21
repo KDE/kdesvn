@@ -47,6 +47,19 @@ namespace svn
   {
   }
 
+  LogChangePathEntry::LogChangePathEntry (const QString &path_,
+                      char action_,
+                      const QString &copyFromPath_,
+                      const svn_revnum_t copyFromRevision_)
+    : path(path_),action(action_),copyFromPath(copyFromPath_),
+        copyFromRevision(copyFromRevision_)
+  {
+  }
+
+  LogChangePathEntry::LogChangePathEntry()
+    : path(QString::null),action(0),copyFromPath(QString::null),copyFromRevision(-1)
+  {
+  }
 
   LogEntry::LogEntry ()
   {

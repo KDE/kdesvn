@@ -306,7 +306,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     }
 
     try {
-        m_Svnclient.mkdir(target,logMessage.utf8());
+        m_Svnclient.mkdir(target,logMessage);
     }catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -706,7 +706,7 @@ void SvnActions::slotAdd()
                 .arg(cur->fullName()));
             return;
         }
-        items.push_back(svn::Path(helpers::stl2qt::qt2stlstring(cur->fullName())));
+        items.push_back(svn::Path(cur->fullName()));
     }
     addItems(items);
     liter.toFirst();
@@ -1130,7 +1130,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     if (parentName.isEmpty()) return false;
     QString name = which->shortName();
     QString ex;
-    svn::Path p(helpers::stl2qt::qt2stlstring(parentName));
+    svn::Path p(parentName);
     svn::Revision r(svn_opt_revision_unspecified);
     svn::PathPropertiesMapList pm;
     try {
@@ -1165,7 +1165,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     if (result) {
 
         try {
-            m_Svnclient.propset("svn:ignore",helpers::stl2qt::qt2stlstring(data).c_str(),p,r);
+            m_Svnclient.propset("svn:ignore",data,p,r);
         } catch (svn::ClientException e) {
             //Message box!
             ex = QString::fromUtf8(e.message());

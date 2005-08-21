@@ -129,7 +129,7 @@ namespace svn
   }
 
   static StatusEntries
-  localStatus (const char * path,
+  localStatus (const QString& path,
                const bool descend,
                const bool get_all,
                const bool update,
@@ -150,7 +150,7 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     error = svn_client_status2 (
       &revnum,      // revnum
-      path,         // path
+      path.utf8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -164,7 +164,7 @@ namespace svn
 #else
     error = svn_client_status (
       &revnum,      // revnum
-      path,         // path
+      path.utf8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -211,18 +211,18 @@ namespace svn
   }
 
   static Status
-  dirEntryToStatus (const char * path, const DirEntry & dirEntry)
+  dirEntryToStatus (const QString& path, const DirEntry & dirEntry)
   {
     Pool pool;
     svn_wc_entry_t * e =
       static_cast<svn_wc_entry_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
 
-    QString url = QString::fromUtf8(path);
+    QString url = path;
     url += "/";
     url += dirEntry.name ();
 
-    e->name = dirEntry.name();
+    e->name = dirEntry.name().utf8();
     e->revision = dirEntry.createdRev ();
     e->url = url.utf8();
     e->kind = dirEntry.kind ();
@@ -257,7 +257,7 @@ namespace svn
 
   static StatusEntries
   remoteStatus (Client * client,
-                const char * path,
+                const QString& path,
                 const bool descend,
                 const bool get_all,
                 const bool update,
@@ -265,7 +265,7 @@ namespace svn
                 Context * context)
   {
     Revision rev (Revision::HEAD);
-    DirEntries dirEntries = client->list (path, rev, descend);
+    DirEntries dirEntries = client->list(path, rev, descend);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
@@ -281,12 +281,13 @@ namespace svn
   }
 
   StatusEntries
-  Client::status (const char * path,
+  Client::status (const QString& path,
                   const bool descend,
                   const bool get_all,
                   const bool update,
                   const bool no_ignore) throw (ClientException)
   {
+    kdDebug()<<"status " << path << endl;
     if (Url::isValid (path))
       return remoteStatus (this, path, descend, get_all, update,
                            no_ignore, m_context);
@@ -296,7 +297,7 @@ namespace svn
   }
 
   static Status
-  localSingleStatus (const char * path, Context * context,bool update=false)
+  localSingleStatus (const QString& path, Context * context,bool update=false)
   {
     svn_error_t *error;
     apr_hash_t *status_hash;
@@ -312,7 +313,7 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     error = svn_client_status2 (
       &revnum,      // revnum
-      path,         // path
+      path.ascii(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -366,7 +367,7 @@ namespace svn
   };
 
   static Status
-  remoteSingleStatus (Client * client, const char * path, Context * context)
+  remoteSingleStatus (Client * client, const QString& path, Context * context)
   {
     Revision rev (Revision::HEAD);
 
@@ -379,7 +380,7 @@ namespace svn
   }
 
   Status
-  Client::singleStatus (const char * path,bool update) throw (ClientException)
+  Client::singleStatus (const QString& path,bool update) throw (ClientException)
   {
     if (Url::isValid (path))
       return remoteSingleStatus (this, path, m_context);
@@ -388,11 +389,11 @@ namespace svn
   }
 
   const LogEntries *
-  Client::log (const char * path, const Revision & revisionStart,
+  Client::log (const QString& path, const Revision & revisionStart,
                const Revision & revisionEnd, bool discoverChangedPaths,
                bool strictNodeHistory ) throw (ClientException)
   {
-    Targets target (path);
+    Targets target(path);
     Pool pool;
     LogEntries * entries = new LogEntries ();
     svn_error_t *error;
@@ -417,7 +418,7 @@ namespace svn
   }
 
   Entry
-  Client::info (const char *path )
+  Client::info (const QString& path )
   {
     Pool pool;
     svn_wc_adm_access_t *adm_access;
@@ -429,7 +430,7 @@ namespace svn
       throw ClientException (error);
 
     const svn_wc_entry_t *entry;
-    error = svn_wc_entry (&entry, path, adm_access, FALSE, pool);
+    error = svn_wc_entry (&entry, path.utf8(), adm_access, FALSE, pool);
     if (error != NULL)
       throw ClientException (error);
 
@@ -438,7 +439,7 @@ namespace svn
   }
 
   InfoEntries
-  Client::info2(const char *path,
+  Client::info2(const QString& path,
                 bool rec,
                 const Revision & rev,
                 const Revision & peg_revision) throw (ClientException)
@@ -455,7 +456,7 @@ namespace svn
     baton.pool = pool;
 
     error =
-      svn_client_info(path,
+      svn_client_info(path.utf8(),
                       peg_revision.revision (),
                       rev.revision (),
                       &InfoEntryFunc,

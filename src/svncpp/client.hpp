@@ -118,7 +118,7 @@ namespace svn
      * @return vector with Status entries.
      */
     StatusEntries
-    status (const char * path,
+    status (const QString& path,
             const bool descend = false,
             const bool get_all = true,
             const bool update = false,
@@ -134,7 +134,7 @@ namespace svn
      * @return a Status with Statis.isVersioned = FALSE
      */
     Status
-    singleStatus (const char * path,bool update=false) throw (ClientException);
+    singleStatus (const QString& path,bool update=false) throw (ClientException);
 
   /**
      * Executes a revision checkout.
@@ -146,7 +146,7 @@ namespace svn
      * @exception ClientException
      */
     svn_revnum_t
-    checkout (const char * moduleName, const Path & destPath,
+    checkout (const QString& moduleName, const Path & destPath,
               const Revision & revision,
               bool recurse) throw (ClientException);
 
@@ -155,8 +155,8 @@ namespace svn
      * @exception ClientException
      */
     void
-    relocate (const Path & path, const char *from_url,
-              const char *to_url, bool recurse) throw (ClientException);
+    relocate (const Path & path, const QString &from_url,
+              const QString &to_url, bool recurse) throw (ClientException);
 
     /**
      * Sets a single file for deletion.
@@ -263,7 +263,7 @@ namespace svn
      */
     svn_revnum_t
     commit (const Targets & targets,
-            const char * message,
+            const QString& message,
             bool recurse) throw (ClientException);
 
     /**
@@ -296,10 +296,10 @@ namespace svn
      */
     void
     mkdir (const Path & path,
-           const char * message) throw (ClientException);
+           const QString& message) throw (ClientException);
     void
     mkdir (const Targets & targets,
-           const char * message) throw (ClientException);
+           const QString& message) throw (ClientException);
 
     /**
      * Recursively cleans up a local directory, finishing any
@@ -339,7 +339,7 @@ namespace svn
      * @exception ClientException
      */
     svn_revnum_t
-    doSwitch (const Path & path, const char * url,
+    doSwitch (const Path & path, const QString& url,
               const Revision & revision,
               bool recurse) throw (ClientException);
 
@@ -353,8 +353,8 @@ namespace svn
      * @exception ClientException
      */
     void
-    import (const Path & path, const char * url,
-            const char * message,
+    import (const Path & path, const QString& url,
+            const QString& message,
             bool recurse) throw (ClientException);
 
     /**
@@ -377,7 +377,7 @@ namespace svn
      * @return Entry
      */
     Entry
-    info (const char *path );
+    info (const QString& path );
     /**
      * Retrieve information for the given path
      * remote or local. Only gives with subversion 1.2
@@ -391,7 +391,7 @@ namespace svn
      * @since subversion 1.2
      */
     InfoEntries
-    info2(const char *path,
+    info2(const QString &path,
           bool rec,
           const Revision & rev,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
@@ -411,7 +411,7 @@ namespace svn
      * @return a vector with log entries
      */
     const LogEntries *
-    log (const char * path, const Revision & revisionStart,
+    log (const QString& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true) throw (ClientException);
@@ -448,34 +448,6 @@ namespace svn
      * lists entries in @a pathOrUrl no matter whether local or
      * repository
      *
-     * @remark Please do not use the method anymore. Since it
-     *         tries to return entries with absolute paths
-     *         it has to add @a pathOrUrl to the beginning of
-     *         the enrties. This works fine if @a pathOrUrl
-     *         points to a directory. But if it point to a file
-     *         "file:///foo/bar.txt", the path of the returned
-     *         entry will be "file:///foo/bar.txt/bar.txt".
-     *         Please use @a list instead.
-     *
-     * @deprecated
-     *
-     * @see list
-     *
-     * @param pathOrUrl
-     * @param revision
-     * @param recurse
-     * @return a vector of directory entries, each
-     *         with an absolute path
-     */
-    DirEntries
-    ls (const char * pathOrUrl,
-        svn_opt_revision_t * revision,
-        bool recurse) throw (ClientException);
-
-    /**
-     * lists entries in @a pathOrUrl no matter whether local or
-     * repository
-     *
      * @param pathOrUrl
      * @param revision
      * @param recurse
@@ -483,7 +455,7 @@ namespace svn
      *         a relative path (only filename)
      */
     DirEntries
-    list (const char * pathOrUrl,
+    list (const QString& pathOrUrl,
           svn_opt_revision_t * revision,
           bool recurse) throw (ClientException);
 
@@ -512,7 +484,7 @@ namespace svn
      * @return PathPropertiesMapList
      */
     PathPropertiesMapList
-    propget(const char *propName,
+    propget(const QString& propName,
             const Path &path,
             const Revision &revision,
             bool recurse=false);
@@ -529,8 +501,8 @@ namespace svn
      * @return PropertiesList
      */
     void
-    propset(const char *propName,
-            const char *propValue,
+    propset(const QString& propName,
+            const QString& propValue,
             const Path &path,
             const Revision &revision,
             bool recurse=false);
@@ -545,7 +517,7 @@ namespace svn
      * @param recurse
      */
     void
-    propdel(const char *propName,
+    propdel(const QString& propName,
             const Path &path,
             const Revision &revision,
             bool recurse=false);
@@ -573,7 +545,7 @@ namespace svn
      * @return PropertiesList
      */
     QPair<svn_revnum_t,QString>
-    revpropget(const char *propName,
+    revpropget(const QString& propName,
                const Path &path,
                const Revision &revision);
 
@@ -589,8 +561,8 @@ namespace svn
      * @return Revision
      */
     svn_revnum_t
-    revpropset(const char *propName,
-               const char *propValue,
+    revpropset(const QString& propName,
+               const QString& propValue,
                const Path &path,
                const Revision &revision,
                bool force=false);
@@ -606,7 +578,7 @@ namespace svn
      * @return Revision
      */
     svn_revnum_t
-    revpropdel(const char *propName,
+    revpropdel(const QString& propName,
                const Path &path,
                const Revision &revision,
                bool force=false);
@@ -620,7 +592,7 @@ namespace svn
    */
    void
    lock (const Targets & targets,
-        const char *message,
+        const QString& message,
         bool steal_lock) throw (ClientException);
     /**
      * unlock files in repository or working copy

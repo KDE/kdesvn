@@ -13,6 +13,11 @@ namespace svn
     init(info,path);
   }
 
+  InfoEntry::InfoEntry(const svn_info_t*info,const QString&path)
+  {
+    init(info,path);
+  }
+
   InfoEntry::~InfoEntry()
   {
   }
@@ -48,17 +53,22 @@ void svn::InfoEntry::init()
   m_schedule = svn_wc_schedule_normal;
 }
 
+void svn::InfoEntry::init(const svn_info_t*item,const char*path)
+{
+    init(item,QString::fromUtf8(path));
+}
+
 /*!
     \fn svn::InfoEntry::init(const svn_info_t*)
  */
-void svn::InfoEntry::init(const svn_info_t*item,const char*path)
+void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
 {
   if (!item) {
     init();
     return;
   }
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
-  m_name = path?path:"";
+  m_name = path;
   m_last_changed_date=item->last_changed_date;
   m_text_time = item->text_time;
   m_prop_time = item->prop_time;
@@ -67,16 +77,16 @@ void svn::InfoEntry::init(const svn_info_t*item,const char*path)
   } else {
     m_Lock = LockEntry();
   }
-  m_checksum = item->checksum?item->checksum:"";
-  m_conflict_new = item->conflict_new?item->conflict_new:"";
-  m_conflict_old = item->conflict_old?item->conflict_old:"";
-  m_conflict_wrk = item->conflict_wrk?item->conflict_wrk:"";
-  m_copyfrom_url = item->copyfrom_url?item->copyfrom_url:"";
-  m_last_author = item->last_changed_author?item->last_changed_author:"";
-  m_prejfile = item->prejfile?item->prejfile:"";
-  m_repos_root = item->repos_root_URL?item->repos_root_URL:"";
-  m_url = item->URL?item->URL:"";
-  m_UUID = item->repos_UUID?item->repos_UUID:"";
+  m_checksum = QString::fromUtf8(item->checksum);
+  m_conflict_new = QString::fromUtf8(item->conflict_new);
+  m_conflict_old = QString::fromUtf8(item->conflict_old);
+  m_conflict_wrk = QString::fromUtf8(item->conflict_wrk);
+  m_copyfrom_url = QString::fromUtf8(item->copyfrom_url);
+  m_last_author = QString::fromUtf8(item->last_changed_author);
+  m_prejfile = QString::fromUtf8(item->prejfile);
+  m_repos_root = QString::fromUtf8(item->repos_root_URL);
+  m_url = QString::fromUtf8(item->URL);
+  m_UUID = QString::fromUtf8(item->repos_UUID);
   m_kind = item->kind;
   m_copy_from_rev = item->copyfrom_rev;
   m_last_changed_rev = item->last_changed_rev;

@@ -46,63 +46,9 @@ compare_items_as_paths (const svn_sort__item_t *a, const svn_sort__item_t *b)
 
 namespace svn
 {
-  DirEntries
-  Client::ls (const char * pathOrUrl,
-              svn_opt_revision_t * revision,
-              bool recurse) throw (ClientException)
-  {
-    Pool pool;
-
-    apr_hash_t * hash;
-    svn_error_t * error =
-      svn_client_ls (&hash,
-                     pathOrUrl,
-                     revision,
-                     recurse,
-                     *m_context,
-                     pool);
-
-    if (error != 0)
-      throw ClientException (error);
-
-    apr_array_header_t *
-      array = svn_sort__hash (
-        hash, compare_items_as_paths, pool);
-
-    DirEntries entries;
-
-    QString basePath;
-    if (pathOrUrl != 0 && *pathOrUrl != '\0')
-    {
-      basePath = pathOrUrl;
-      basePath += '/';
-    }
-
-    for (int i = 0; i < array->nelts; ++i)
-    {
-      const char *entryname;
-      svn_dirent_t *dirent;
-      svn_sort__item_t *item;
-
-      item = &APR_ARRAY_IDX (array, i, svn_sort__item_t);
-
-      entryname = static_cast<const char *>(item->key);
-
-      dirent = static_cast<svn_dirent_t *>
-        (apr_hash_get (hash, entryname, item->klen));
-
-      QString fullname (basePath);
-      fullname += entryname;
-
-      entries.push_back (DirEntry (fullname.utf8(), dirent));
-    }
-
-    return entries;
-  }
-
 
   DirEntries
-  Client::list (const char * pathOrUrl,
+  Client::list (const QString& pathOrUrl,
                 svn_opt_revision_t * revision,
                 bool recurse) throw (ClientException)
   {
@@ -111,7 +57,7 @@ namespace svn
     apr_hash_t * hash;
     svn_error_t * error =
       svn_client_ls (&hash,
-                     pathOrUrl,
+                     pathOrUrl.utf8(),
                      revision,
                      recurse,
                      *m_context,
@@ -139,7 +85,7 @@ namespace svn
       dirent = static_cast<svn_dirent_t *>
         (apr_hash_get (hash, entryname, item->klen));
 
-      entries.push_back (DirEntry (entryname, dirent));
+      entries.push_back (DirEntry(QString::fromUtf8(entryname), dirent));
     }
 
     return entries;

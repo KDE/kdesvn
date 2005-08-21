@@ -98,7 +98,7 @@ namespace svn
 
     // svn_client_diff needs a temporary file to write diff output to
     error = svn_io_open_unique_file (&outfile, &outfileName,
-                                     tmpPath.c_str(), ".tmp",
+                                     tmpPath.path().utf8(), ".tmp",
                                      FALSE, pool);
 
     if (error != NULL)
@@ -109,7 +109,7 @@ namespace svn
 
     // and another one to write errors to
     error = svn_io_open_unique_file (&errfile, &errfileName,
-                                     tmpPath.c_str(), ".tmp",
+                                     tmpPath.cstr(), ".tmp",
                                      FALSE, pool);
 
     if (error != NULL)
@@ -120,8 +120,8 @@ namespace svn
 
     // run diff
     error = svn_client_diff (options,
-                             path.c_str (), revision1.revision (),
-                             path.c_str (), revision2.revision (),
+                             path.cstr (), revision1.revision (),
+                             path.cstr (), revision2.revision (),
                              recurse, ignoreAncestry, noDiffDeleted,
                              outfile, errfile,
                              *m_context,

@@ -65,7 +65,14 @@ namespace svn
      *
      * @param target
      */
-    Targets (const char * target = 0);
+    Targets (const QString& target = QString::null);
+    /**
+     * Constructor. Initializes list with just
+     * one entry
+     *
+     * @param target
+     */
+    Targets (const char * target);
 
     /**
      * Copy Constructor

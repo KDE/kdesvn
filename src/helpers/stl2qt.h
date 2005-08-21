@@ -29,9 +29,9 @@ class stl2qt {
 public:
     stl2qt();
     ~stl2qt();
-    static QString stl2qtstring(const std::string&);
-    static QString stl2qtstring(const char*);
-    static std::string qt2stlstring(const QString&);
+    static QString stl2qtstring_(const std::string&);
+    static QString stl2qtstring_(const char*);
+    static std::string qt2stlstring_(const QString&);
 };
 
 }

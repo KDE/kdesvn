@@ -63,7 +63,7 @@ namespace svn
     AnnotatedFile * entries = new AnnotatedFile;
     svn_error_t *error;
     error = svn_client_blame (
-      path.c_str (),
+      path.path().utf8(),
       revisionStart.revision (),
       revisionEnd.revision (),
       annotateReceiver,

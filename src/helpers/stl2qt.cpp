@@ -29,17 +29,17 @@ stl2qt::~stl2qt()
 {
 }
 
-QString stl2qt::stl2qtstring(const std::string&what)
+QString stl2qt::stl2qtstring_(const std::string&what)
 {
     return QString::fromUtf8(what.c_str());
 }
 
-QString stl2qt::stl2qtstring(const char*what)
+QString stl2qt::stl2qtstring_(const char*what)
 {
     return what?QString::fromUtf8(what):QString("");
 }
 
-std::string stl2qt::qt2stlstring(const QString&what)
+std::string stl2qt::qt2stlstring_(const QString&what)
 {
     return std::string(what.isEmpty()?"":what.utf8());
 }

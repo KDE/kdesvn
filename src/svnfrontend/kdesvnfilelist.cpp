@@ -642,7 +642,7 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
     if (allSelected()->count()==0) {
         targetUri=baseUri();
     } else {
-        targetUri = QString::fromUtf8(allSelected()->at(0)->Url());
+        targetUri = allSelected()->at(0)->Url();
     }
     KURL uri;
     if (dirs) uri = KFileDialog::getExistingDirectory(QString::null,this,"Import files from folder");
@@ -774,7 +774,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
     try {
         /* settings about unknown and ignored files must be setable */
         //                                                              rec   all  up    noign
-        dlist = m_SvnWrapper->svnclient()->status(what.utf8(),false,true,false,true);
+        dlist = m_SvnWrapper->svnclient()->status(what,false,true,false,true);
     } catch (svn::ClientException e) {
         //Message box!
         m_LastException = QString::fromUtf8(e.message());

@@ -34,14 +34,14 @@ namespace svn
 
   void
   Client::lock (const Targets & targets,
-    const char *message,
+    const QString& message,
     bool steal_lock)  throw (ClientException)
   {
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     Pool pool;
     svn_error_t * error =
       svn_client_lock(const_cast<apr_array_header_t*> (targets.array (pool)),
-                      message,
+                      message.utf8(),
                       steal_lock,
                       *m_context,
                       pool);

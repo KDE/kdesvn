@@ -253,7 +253,7 @@ namespace svn
     }
 
     /** @see Context::setLogin */
-    void setLogin (const char * usr, const char * pwd)
+    void setLogin (const QString& usr, const QString& pwd)
     {
       username = usr;
       password = pwd;
@@ -267,7 +267,7 @@ namespace svn
     }
 
     /** @see Context::setLogMessage */
-    void setLogMessage (const char * msg)
+    void setLogMessage (const QString& msg)
     {
       logMessage = msg;
       logIsSet = true;
@@ -393,8 +393,8 @@ namespace svn
       SVN_ERR (svn_utf_cstring_to_utf8 (
                  &lcred->username,
                  data->getUsername (), pool)); */
-      lcred->password = data->getPassword ();
-      lcred->username = data->getUsername ();
+      lcred->password = data->getPassword().utf8();
+      lcred->username = data->getUsername().utf8();
 
       // tell svn if the credentials need to be saved
       lcred->may_save = may_save;
@@ -509,7 +509,7 @@ namespace svn
                  &cred_->password,
                  password.c_str (),
                  pool)); */
-      cred_->password = password.ascii();
+      cred_->password = password.utf8();
 
       cred_->may_save = may_save;
       *cred = cred_;
@@ -517,22 +517,22 @@ namespace svn
       return SVN_NO_ERROR;
     }
 
-    const char *
+    const QString&
     getUsername () const
     {
-      return username.ascii();
+      return username;
     }
 
-    const char *
+    const QString&
     getPassword () const
     {
-      return password.ascii();
+      return password;
     }
 
-    const char *
+    const QString&
     getLogMessage () const
     {
-      return logMessage.ascii();
+      return logMessage;
     }
 
     /**
@@ -668,7 +668,7 @@ namespace svn
   }
 
   void
-  Context::setLogin (const char * username, const char * password)
+  Context::setLogin (const QString& username, const QString& password)
   {
     m->setLogin (username, password);
   }
@@ -685,24 +685,24 @@ namespace svn
   }
 
   void
-  Context::setLogMessage (const char * msg)
+  Context::setLogMessage (const QString& msg)
   {
     m->setLogMessage (msg);
   }
 
-  const char *
+  const QString&
   Context::getUsername () const
   {
     return m->getUsername ();
   }
 
-  const char *
+  const QString&
   Context::getPassword () const
   {
     return m->getPassword ();
   }
 
-  const char *
+  const QString&
   Context::getLogMessage () const
   {
     return m->getLogMessage ();

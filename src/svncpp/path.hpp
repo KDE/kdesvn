@@ -85,8 +85,8 @@ namespace svn
     /**
      * @return Path string as c string
      */
-    const char *
-    c_str() const;
+    const QCString
+    cstr() const;
 
     /**
      * check whether a path is set. Right now

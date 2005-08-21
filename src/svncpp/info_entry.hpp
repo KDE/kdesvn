@@ -13,8 +13,11 @@ namespace svn {
 public:
     InfoEntry();
     InfoEntry(const svn_info_t*,const char*path);
+    InfoEntry(const svn_info_t*,const QString&path);
     ~InfoEntry();
+
     void init(const svn_info_t*,const char*path);
+    void init(const svn_info_t*,const QString&path);
 
     apr_time_t cmtDate()const
     {

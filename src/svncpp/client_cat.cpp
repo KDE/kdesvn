@@ -49,7 +49,7 @@ namespace svn
     svn_stream_t * stream = svn_stream_from_stringbuf (stringbuf, pool);
 
     svn_error_t * error;
-    error = svn_client_cat (stream, path.c_str(),
+    error = svn_client_cat (stream, path.path().utf8(),
                             revision.revision (),
                             *m_context,
                             pool);
@@ -88,7 +88,7 @@ namespace svn
     if (dstPath.length () > 0)
     {
       apr_status_t status =
-        apr_file_open (&file, dstPath.c_str (),
+        apr_file_open (&file, dstPath.path().utf8(),
                        APR_WRITE | APR_CREATE |
                        APR_TRUNCATE | APR_BINARY,
                        APR_OS_DEFAULT,
@@ -119,7 +119,7 @@ namespace svn
       svn_error_t * error =
         svn_io_open_unique_file (
           &file, &unique_name,
-          tempPath.c_str (), // path
+          tempPath.path().utf8(), // path
           ext.utf8 (), // suffix
           0, // dont delete on close
           pool);
@@ -152,7 +152,7 @@ namespace svn
     if (stream != 0)
     {
       svn_error_t * error = svn_client_cat (
-        stream, path.c_str (), revision.revision (),
+        stream, path.path().utf8(), revision.revision (),
         *m_context, pool);
       if (error != 0)
         throw ClientException (error);

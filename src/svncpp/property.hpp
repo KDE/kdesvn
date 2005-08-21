@@ -53,7 +53,8 @@ namespace svn
     QString name;
     QString value;
 
-    PropertyEntry (const char * name = 0, const char * value = 0);
+    PropertyEntry (const char * name, const char * value);
+    PropertyEntry (const QString& name = QString::null, const QString& value = QString::null);
   };
 
   // forward declarations
@@ -86,20 +87,20 @@ namespace svn
      * result set.  Run loadPath again.
      * @exception ClientException
      */
-    void set (const char * name, const char * value);
+    void set (const QString& name, const QString& value);
 
     /**
      * Deletes a property.
      * @exception ClientException
      */
-    void remove (const char * name);
+    void remove (const QString& name);
 
   private:
     Context * m_context;
     Path m_path;
     QValueList<PropertyEntry> m_entries;
 
-    QString getValue (const char * name);
+    QString getValue (const QString& name);
     void list ();
 
   };

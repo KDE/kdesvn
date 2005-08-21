@@ -76,10 +76,10 @@ namespace svn
     return m_path;
   }
 
-  const char *
-  Path::c_str() const
+  const QCString
+  Path::cstr() const
   {
-    return m_path.ascii();
+    return m_path.utf8();
   }
 
   Path&
@@ -108,7 +108,7 @@ namespace svn
         svn_path_url_add_component (m_path.utf8(),
                                     component.utf8(),
                                     pool);
-      m_path = newPath;
+      m_path = QString::fromUtf8(newPath);
     }
     else
     {
@@ -118,7 +118,7 @@ namespace svn
       svn_path_add_component (pathStringbuf,
                               component);
 
-      m_path = pathStringbuf->data;
+      m_path = QString::fromUtf8(pathStringbuf->data);
     }
   }
 

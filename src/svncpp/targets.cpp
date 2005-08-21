@@ -35,6 +35,8 @@
 #include "svncpp/path.hpp"
 #include "svncpp/pool.hpp"
 
+#include <kdebug.h>
+
 
 namespace svn
 {
@@ -89,9 +91,9 @@ namespace svn
 
     for (it = m_targets.begin (); it != m_targets.end (); it++)
     {
-      const Path &path = *it;
+      kdDebug()<<"Arraying :" << (*it).c_str()<<":"<<endl;
       const char * target =
-        apr_pstrdup (apr_pool, path.c_str());
+        apr_pstrdup (apr_pool, (*it).c_str());
 
       (*((const char **) apr_array_push (apr_targets))) = target;
     }

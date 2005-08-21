@@ -79,7 +79,7 @@ namespace svn
   const char *
   Path::c_str() const
   {
-    return m_path.utf8();
+    return m_path.ascii();
   }
 
   Path&

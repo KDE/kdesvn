@@ -518,6 +518,7 @@ void SvnActions::slotCommit()
     } else {
         while ( (cur=liter.current())!=0) {
             ++liter;
+            kdDebug()<<"Commiting " << cur->fullName()<<endl;
             targets.push_back(svn::Path(cur->fullName()));
         }
     }

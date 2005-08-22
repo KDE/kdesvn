@@ -33,6 +33,7 @@
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
 #include "helpers/stl2qt.h"
+#include "kdesvn_part.h"
 
 #include <qstring.h>
 #include <qmap.h>
@@ -108,7 +109,7 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(name?name:DIALOGS_SIZES));
+    dlg->resize(dlg->configDialogSize(*(kdesvnPart::config()),name?name:DIALOGS_SIZES));
     return dlg;
 }
 
@@ -132,7 +133,7 @@ void SvnActions::slotMakeRangeLog()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         makeLog(r.first,r.second,k);
     }
-    dlg->saveDialogSize("revisions_dlg",false);
+    dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
 }
 
 /*!
@@ -157,7 +158,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
     const svn::LogEntries * logs;
     QString ex;
     if (!m_CurrentContext) return;
-    KConfigGroup cs(KGlobal::config(), "general_items");
+    KConfigGroup cs(kdesvnPart::config(), "general_items");
     bool follow = cs.readBoolEntry("toggle_log_follows",true);
 
     try {
@@ -239,7 +240,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize("blame_dlg",false);
+        dlg->saveDialogSize(*(kdesvnPart::config()),"blame_dlg",false);
         delete dlg;
     }
     delete blame;
@@ -275,7 +276,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
         ptr->setWordWrap(QTextEdit::NoWrap);
         ptr->setText("<code>"+QStyleSheet::convertFromPlainText(helpers::stl2qt::stl2qtstring(content))+"</code>");
         dlg->exec();
-        dlg->saveDialogSize("cat_display_dlg",false);
+        dlg->saveDialogSize(*(kdesvnPart::config()),"cat_display_dlg",false);
         delete dlg;
     }
 }
@@ -441,7 +442,7 @@ void SvnActions::slotInfo()
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize("info_dialog",false);
+        dlg->saveDialogSize(*(kdesvnPart::config()),"info_dialog",false);
         delete dlg;
     }
 }
@@ -464,7 +465,7 @@ void SvnActions::slotProperties()
     if (dlg.exec()!=QDialog::Accepted) {
         return;
     }
-    dlg.saveDialogSize("kdesvn_properties_dlg",false);
+    dlg.saveDialogSize(*(kdesvnPart::config()),"kdesvn_properties_dlg",false);
     QString ex;
     PropertiesDlg::tPropEntries setList;
     QValueList<QString> delList;
@@ -566,7 +567,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
         return;
     }
     EMIT_FINISHED;
-    KConfigGroup cs(KGlobal::config(), "general_items");
+    KConfigGroup cs(kdesvnPart::config(), "general_items");
     if (cs.readBoolEntry("use_kompare_for_diff",true)) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
@@ -584,7 +585,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     if (dlg) {
         ptr->setText("<code>"+QStyleSheet::convertFromPlainText(ex)+"</code>");
         dlg->exec();
-        dlg->saveDialogSize("diff_display",false);
+        dlg->saveDialogSize(*(kdesvnPart::config()),"diff_display",false);
         delete dlg;
     }
 }
@@ -757,7 +758,7 @@ void SvnActions::CheckoutExport(bool _exp)
             bool openit = ptr->openAfterJob();
             makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
         }
-        dlg->saveDialogSize("checkout_export_dialog",false);
+        dlg->saveDialogSize(*(kdesvnPart::config()),"checkout_export_dialog",false);
         delete dlg;
     }
 }
@@ -1096,7 +1097,7 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
  */
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
 {
-    KConfigGroup cs(KGlobal::config(), "subversion");
+    KConfigGroup cs(kdesvnPart::config(), "subversion");
     bool display_ignores = cs.readBoolEntry("display_ignored_files",true);
     //bool display_unknown = cs.readBoolEntry("display_unknown_files",true);
 

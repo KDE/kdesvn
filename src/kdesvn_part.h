@@ -37,6 +37,8 @@ public:
     virtual ~kdesvnPart();
     virtual bool closeURL();
     static KAboutData* createAboutData();
+    static KConfig* config();
+    static KIconLoader* iconLoader();
 
 signals:
     void refreshTree();
@@ -53,7 +55,6 @@ protected:
     virtual void setupActions();
 
 protected slots:
-    void fileOpen();
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);

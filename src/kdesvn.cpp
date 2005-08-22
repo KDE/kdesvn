@@ -21,6 +21,7 @@
 
 #include "kdesvn.h"
 #include "pref.h"
+#include "urldlg.h"
 
 #include <qdragobject.h>
 #include <kprinter.h>
@@ -146,6 +147,7 @@ void kdesvn::load(const KURL& url)
 
 void kdesvn::setupActions()
 {
+    KStdAction::open(this, SLOT(fileOpen()), actionCollection());
     KStdAction::close(this,SLOT(fileClose()),actionCollection());
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
@@ -228,14 +230,12 @@ void kdesvn::fileNew()
     (new kdesvn)->show();
 }
 
-#if 0
 void kdesvn::fileOpen()
 {
     KURL url = UrlDlg::getURL(this);
     if (!url.isEmpty())
         m_part->openURL(url);
 }
-#endif
 
 void kdesvn::optionsPreferences()
 {
@@ -325,10 +325,10 @@ void kdesvn::applyNewToolbarConfig()
 # if KDE_VERSION >= KDE_MAKE_VERSION(3,1,0)
     applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
 # else
-    applyMainWindowSettings(KGlobal::config());
+    applyMainWindowSettings(kdesvnPart::config());
 # endif
 #else
-    applyMainWindowSettings(KGlobal::config());
+    applyMainWindowSettings(kdesvnPart::config());
 #endif
 }
 

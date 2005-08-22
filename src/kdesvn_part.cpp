@@ -1,6 +1,5 @@
 
 #include "kdesvn_part.h"
-#include "urldlg.h"
 #include "svncpp/version_check.hpp"
 #include "../config.h"
 
@@ -66,17 +65,6 @@ bool kdesvnPart::openFile()
     return true;
 }
 
-void kdesvnPart::fileOpen()
-{
-    // this slot is called whenever the File->Open menu is selected,
-    // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
-    // button is clicked
-    KURL url = UrlDlg::getURL(m_view);
-
-    if (url.isEmpty() == false)
-        openURL(url);
-}
-
 bool kdesvnPart::openURL(const KURL &url)
 {
     m_url=url;
@@ -116,54 +104,6 @@ KAboutData* kdesvnPart::createAboutData()
 #include <kaboutdata.h>
 #include <klocale.h>
 
-#if 0
-KInstance*  kdesvnPartFactory::s_instance = 0L;
-KAboutData* kdesvnPartFactory::s_about = 0L;
-
-kdesvnPartFactory::kdesvnPartFactory()
-    : KParts::Factory()
-{
-}
-
-kdesvnPartFactory::~kdesvnPartFactory()
-{
-    delete s_instance;
-    delete s_about;
-
-    s_instance = 0L;
-}
-
-KParts::Part* kdesvnPartFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
-                                                        QObject *parent, const char *name,
-                                                        const char *classname, const QStringList &args )
-{
-    // Create an instance of our Part
-    kdesvnPart* obj = new kdesvnPart( parentWidget, widgetName, parent, name );
-
-    return obj;
-}
-
-KInstance* kdesvnPartFactory::instance()
-{
-    if( !s_instance )
-    {
-        s_about = new KAboutData("kdesvnpart", I18N_NOOP("kdesvnPart"), "0.1");
-        s_about->addAuthor("Rajko Albrecht", 0, "rajko.albrecht@tecways.com");
-        s_instance = new KInstance(s_about);
-    }
-    return s_instance;
-}
-
-extern "C"
-{
-    void* init_libkdesvnpart()
-    {
-        return new kdesvnPartFactory;
-    }
-};
-
-#endif
-
 #include "kdesvn_part.moc"
 
 
@@ -172,10 +112,8 @@ extern "C"
  */
 void kdesvnPart::setupActions()
 {
-    KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-
-    KConfigGroup cs(KGlobal::config(), "general_items");
-    KConfigGroup cs2(KGlobal::config(), "subversion");
+    KConfigGroup cs(config(), "general_items");
+    KConfigGroup cs2(config(), "subversion");
 
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
@@ -204,7 +142,7 @@ void kdesvnPart::setupActions()
  */
 void kdesvnPart::slotLogFollowNodes(bool how)
 {
-    KConfigGroup cs(KGlobal::config(), "general_items");
+    KConfigGroup cs(config(), "general_items");
     cs.writeEntry("toggle_log_follows",how);
 }
 
@@ -214,7 +152,7 @@ void kdesvnPart::slotLogFollowNodes(bool how)
  */
 void kdesvnPart::slotDisplayIgnored(bool how)
 {
-    KConfigGroup cs(KGlobal::config(), "subversion");
+    KConfigGroup cs(config(), "subversion");
     cs.writeEntry("display_ignored_files",how);
     emit refreshTree();
 }
@@ -225,7 +163,7 @@ void kdesvnPart::slotDisplayIgnored(bool how)
  */
 void kdesvnPart::slotDisplayUnkown(bool how)
 {
-    KConfigGroup cs(KGlobal::config(), "subversion");
+    KConfigGroup cs(config(), "subversion");
     cs.writeEntry("display_unknown_files",how);
 }
 
@@ -236,7 +174,7 @@ void kdesvnPart::slotDisplayUnkown(bool how)
 void kdesvnPart::slotUseKompare(bool how)
 {
     /// @todo make it into a settings class
-    KConfigGroup cs(KGlobal::config(), "general_items");
+    KConfigGroup cs(config(), "general_items");
     cs.writeEntry("use_kompare_for_diff",how);
 }
 
@@ -252,7 +190,7 @@ bool kdesvnPart::closeURL()
 }
 
 KdesvnBrowserExtension::KdesvnBrowserExtension( kdesvnPart *p )
-    : KParts::BrowserExtension( p, "CervisiaBrowserExtension" )
+    : KParts::BrowserExtension( p, "KdesvnBrowserExtension" )
 {
     KGlobal::locale()->insertCatalogue("kdesvn");
 }
@@ -272,4 +210,22 @@ void KdesvnBrowserExtension::setPropertiesActionEnabled(bool enabled)
 void KdesvnBrowserExtension::properties()
 {
     static_cast<kdesvnPart*>(parent())->slotFileProperties();
+}
+
+
+/*!
+    \fn kdesvnPart::config()
+ */
+KConfig* kdesvnPart::config()
+{
+    return kdesvnPartFactory::instance()->config();
+}
+
+
+/*!
+    \fn kdesvnPart::iconloader()
+ */
+KIconLoader* kdesvnPart::iconLoader()
+{
+    return kdesvnPartFactory::instance()->iconLoader();
 }

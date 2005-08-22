@@ -94,6 +94,7 @@ protected:
 public slots:
     void slotUrlOpened(bool);
 private slots:
+    void fileOpen();
     void fileNew();
     void fileClose();
     void optionsPreferences();

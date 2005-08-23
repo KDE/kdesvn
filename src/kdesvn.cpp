@@ -107,6 +107,7 @@ kdesvn::kdesvn()
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
         }
+        connectActionCollection(m_part->actionCollection());
     }
     else
     {

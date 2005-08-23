@@ -300,7 +300,7 @@ void PropertiesDlg::slotAdd()
             return;
         }
         if (checkExisting(dlg.PropName())) {
-            KMessageBox::error(this,i18n("An property with that name exists.\nRejecting it."),i18n("Double property"));
+            KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
         PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview);
@@ -348,7 +348,7 @@ void PropertiesDlg::slotModify()
             return;
         }
         if (checkExisting(dlg.PropName(),qi)) {
-            KMessageBox::error(this,i18n("An property with that name exists.\nRejecting it."),i18n("Double property"));
+            KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
         ki->setText(0,dlg.PropName());

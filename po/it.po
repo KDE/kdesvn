@@ -1,3 +1,4 @@
+# translation of kdesvn.po to Italian
 # translation of it.po to Italian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
@@ -5,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: it\n"
+"Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-23 13:39+0200\n"
-"PO-Revision-Date: 2005-08-20 18:42+0200\n"
+"PO-Revision-Date: 2005-08-23 15:34+0200\n"
 "Last-Translator: Luciano Montanaro <mikelima@cirulla.net>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,12 +33,12 @@ msgstr "mikelima@cirulla.net"
 #: rc.cpp:2
 #, no-c-format
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticazione"
 
 #: rc.cpp:4
 #, no-c-format
 msgid "Enter authentification info for"
-msgstr ""
+msgstr "Inserisci informazioni di autenticazione per"
 
 #: rc.cpp:6
 #, no-c-format
@@ -87,7 +88,7 @@ msgstr "Sorgente 2:"
 #: rc.cpp:42
 #, no-c-format
 msgid "Output to:"
-msgstr ""
+msgstr "Uscita su:"
 
 #: rc.cpp:44 rc.cpp:135 svnfrontend/checkoutinfo_impl.cpp:78
 #: svnfrontend/svnactions.cpp:886
@@ -103,7 +104,7 @@ msgstr ""
 #: rc.cpp:49
 #, no-c-format
 msgid "Force delete on modified/unversioned"
-msgstr ""
+msgstr "Forza eliminazione dei modificati/non revisionati"
 
 #: rc.cpp:52
 #, no-c-format
@@ -123,7 +124,7 @@ msgstr ""
 #: rc.cpp:59
 #, no-c-format
 msgid "SVN Log"
-msgstr ""
+msgstr "Log di SVN"
 
 #: rc.cpp:61 svnfrontend/svnactions.cpp:221
 #, no-c-format
@@ -255,12 +256,12 @@ msgstr "Forza operazione"
 #: rc.cpp:128
 #, no-c-format
 msgid "Logmessage"
-msgstr ""
+msgstr "Messaggio di log"
 
 #: rc.cpp:130
 #, no-c-format
 msgid "Enter a log message"
-msgstr ""
+msgstr "Inserisci un messaggio di log"
 
 #: rc.cpp:132
 #, no-c-format
@@ -303,9 +304,8 @@ msgid "Actions"
 msgstr "Azioni"
 
 #: kdesvn_part.cpp:26
-#, fuzzy
 msgid "A Subversion Client for KDE (dynamic Part component)"
-msgstr "Un'interfaccia a Subversion per KDE"
+msgstr "Un'interfaccia a Subversion per KDE (componente dinamica)"
 
 #: kdesvn_part.cpp:104
 msgid "Build with subversion lib: %1\n"
@@ -316,9 +316,8 @@ msgid "Running subversion lib: %1"
 msgstr ""
 
 #: kdesvn_part.cpp:107
-#, fuzzy
 msgid "kdesvn Part"
-msgstr "kdesvn"
+msgstr "Componente kdesvn"
 
 #: kdesvn_part.cpp:114
 #, fuzzy
@@ -348,20 +347,19 @@ msgstr "Visualizza i file sconosciuti"
 
 #: kdesvn_part.cpp:156
 msgid "&About kdesvn part"
-msgstr ""
+msgstr "Inform&azioni sul componente kdesvn"
 
 #: kdesvn_part.cpp:158
 msgid "Kdesvn &Handbook"
-msgstr ""
+msgstr "&Manuale di Kdesvn"
 
 #: kdesvn_part.cpp:160
 msgid "Send Bugreport"
-msgstr ""
+msgstr "Segnala un bug"
 
 #: kdesvn.cpp:115
-#, fuzzy
 msgid "Could not find our part."
-msgstr "Impossibile aprire il deposito"
+msgstr "Il componente non è stato trovato"
 
 #: kdesvn.cpp:243
 msgid "Sorry, not finished. Will follow as soon as possible."
@@ -376,7 +374,6 @@ msgid "Ready"
 msgstr "Pronto"
 
 #: svnfrontend/propertiesdlg.cpp:107
-#, fuzzy
 msgid "Modify properties"
 msgstr "Modifica proprietà"
 
@@ -385,9 +382,8 @@ msgid "Value"
 msgstr "Valore"
 
 #: svnfrontend/propertiesdlg.cpp:183
-#, fuzzy
 msgid "View and modify properties"
-msgstr "<font size=\"+1\">Mostra e modifica le proprietà</font>"
+msgstr "Mostra e modifica le proprietà"
 
 #: svnfrontend/propertiesdlg.cpp:186
 msgid "List of properties set"
@@ -418,21 +414,24 @@ msgid ""
 "This property may not set by users.\n"
 "Rejecting it."
 msgstr ""
+"Questa proprietà non può essere impostata dagli utenti.\n"
+"Modifica rifiutata."
 
 #: svnfrontend/propertiesdlg.cpp:299 svnfrontend/propertiesdlg.cpp:347
-#, fuzzy
 msgid "Protected property"
-msgstr "Elimina proprietà"
+msgstr "Proprietà protetta"
 
 #: svnfrontend/propertiesdlg.cpp:303 svnfrontend/propertiesdlg.cpp:351
 msgid ""
 "An property with that name exists.\n"
 "Rejecting it."
 msgstr ""
+"Una proprietà con questo nome è già presente.\n"
+"Modifica rifiutata."
 
 #: svnfrontend/propertiesdlg.cpp:303 svnfrontend/propertiesdlg.cpp:351
 msgid "Double property"
-msgstr ""
+msgstr "Proprietà duplicata"
 
 #: svnfrontend/ccontextlistener.cpp:42
 msgid "Add to revision control"
@@ -500,7 +499,7 @@ msgstr ""
 
 #: svnfrontend/ccontextlistener.cpp:62
 msgid "Blame"
-msgstr ""
+msgstr "Incolpa"
 
 #: svnfrontend/ccontextlistener.cpp:65
 msgid "Locking"
@@ -552,7 +551,7 @@ msgstr "Inserisci password per il dominio %1"
 
 #: svnfrontend/filelistviewitem.cpp:134
 msgid "Not versioned"
-msgstr ""
+msgstr "Senza revisione"
 
 #: svnfrontend/mergedlg_impl.cpp:105
 msgid "Enter merge range"
@@ -584,11 +583,11 @@ msgstr "Bloccato da"
 
 #: svnfrontend/kdesvnfilelist.cpp:123
 msgid "&Log..."
-msgstr ""
+msgstr "&Log..."
 
 #: svnfrontend/kdesvnfilelist.cpp:124
 msgid "&Full Log"
-msgstr ""
+msgstr "Log &completo"
 
 #: svnfrontend/kdesvnfilelist.cpp:127
 msgid "Details"
@@ -619,24 +618,23 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:144
 msgid "Lock current items"
-msgstr ""
+msgstr "Blocca gli elementi attuali"
 
 #: svnfrontend/kdesvnfilelist.cpp:145
 msgid "Unlock current items"
-msgstr ""
+msgstr "Sblocca gli elementi attuali"
 
 #: svnfrontend/kdesvnfilelist.cpp:152
 msgid "Switch repository of working copy (\"svn switch\")"
 msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:154
-#, fuzzy
 msgid "Open repository of working copy"
-msgstr "Apri copia di lavoro"
+msgstr "Apri il deposito della copia di lavoro"
 
 #: svnfrontend/kdesvnfilelist.cpp:156
 msgid "Opens the repository the current working copy was checked out from"
-msgstr ""
+msgstr "Apre il deposito da cui è stata prelevata la copia di lavoro corrente"
 
 #: svnfrontend/kdesvnfilelist.cpp:160
 msgid "Import folders into current"
@@ -676,7 +674,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:193
 msgid "Export current repository path"
-msgstr ""
+msgstr "Esporta il percorso del deposito corrente"
 
 #: svnfrontend/kdesvnfilelist.cpp:197 svnfrontend/svnactions.cpp:754
 #: svnfrontend/svnactions.cpp:791
@@ -714,11 +712,11 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:1131
 msgid "Nothing selected for delete"
-msgstr ""
+msgstr "Nessuna selezione da eliminare"
 
 #: svnfrontend/kdesvnfilelist.cpp:1149
 msgid "Really delete that entries?"
-msgstr ""
+msgstr "Vuoi veramente eliminare queste voci?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1186
 msgid "Please hold the line"
@@ -730,11 +728,11 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:1211
 msgid "Lock message"
-msgstr ""
+msgstr "Messaggio di blocco"
 
 #: svnfrontend/kdesvnfilelist.cpp:1214
 msgid "Steal lock?"
-msgstr ""
+msgstr "Vuoi \"rubare\" il blocco?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1245
 msgid "Nothing selected for unlock"
@@ -746,7 +744,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:1248
 msgid "Unlocking items"
-msgstr ""
+msgstr "Sblocco degli elementi"
 
 #: svnfrontend/kdesvnfilelist.cpp:1336
 msgid "May not make subdirs of a file"
@@ -766,7 +764,7 @@ msgstr "Modificato localmente"
 
 #: svnfrontend/svnitem.cpp:195
 msgid "Locally added"
-msgstr ""
+msgstr "Aggiunto localmente"
 
 #: svnfrontend/svnitem.cpp:198
 msgid "Missing"
@@ -790,7 +788,7 @@ msgstr "Conflitto"
 
 #: svnfrontend/svnitem.cpp:216
 msgid "Merged"
-msgstr ""
+msgstr "Fuso"
 
 #: svnfrontend/svnitem.cpp:219
 msgid "Incomplete"
@@ -806,7 +804,7 @@ msgstr "Finito"
 
 #: svnfrontend/svnactions.cpp:174
 msgid "Got no logs"
-msgstr ""
+msgstr "Non ci sono log"
 
 #: svnfrontend/svnactions.cpp:206
 msgid "Error getting blame"
@@ -827,7 +825,7 @@ msgstr "Sconosciuto"
 
 #: svnfrontend/svnactions.cpp:239
 msgid "Blame %1"
-msgstr ""
+msgstr "Incolpa %1"
 
 #: svnfrontend/svnactions.cpp:263
 msgid "Error getting content"
@@ -843,12 +841,11 @@ msgstr "Contenuto di %1"
 
 #: svnfrontend/svnactions.cpp:289
 msgid "New folder"
-msgstr ""
+msgstr "Nuova cartella"
 
 #: svnfrontend/svnactions.cpp:289
-#, fuzzy
 msgid "Enter folder name:"
-msgstr "Inserisci il nome della (sotto-)directory:"
+msgstr "Inserisci il nome della cartella:"
 
 #: svnfrontend/svnactions.cpp:361
 msgid "URL"
@@ -872,7 +869,7 @@ msgstr "Assente"
 
 #: svnfrontend/svnactions.cpp:377
 msgid "Folder"
-msgstr ""
+msgstr "Cartella"
 
 #: svnfrontend/svnactions.cpp:385
 msgid "Schedule"
@@ -972,7 +969,7 @@ msgstr "Esportazione di un file"
 
 #: svnfrontend/svnactions.cpp:781
 msgid "Checking out a file?"
-msgstr ""
+msgstr "Prelievo di un file?"
 
 #: svnfrontend/svnactions.cpp:823
 msgid "Checkout"
@@ -984,7 +981,7 @@ msgstr "Esportazione"
 
 #: svnfrontend/svnactions.cpp:823
 msgid "Checking out"
-msgstr ""
+msgstr "Prelievo"
 
 #: svnfrontend/svnactions.cpp:852
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
@@ -1020,11 +1017,11 @@ msgstr ""
 
 #: svnfrontend/svnactions.cpp:984
 msgid "Cleanup"
-msgstr ""
+msgstr "Pulisci"
 
 #: svnfrontend/svnactions.cpp:984
 msgid "Cleaning up folder"
-msgstr ""
+msgstr "Pulizia della cartella"
 
 #: svnfrontend/svnactions.cpp:996
 msgid "Resolve"
@@ -1056,15 +1053,15 @@ msgstr "Copia file/dir"
 
 #: svnfrontend/importdir_logmsg.cpp:46
 msgid "Create subdir %1 on import"
-msgstr ""
+msgstr "Crea la sottodirectory %1 durante l'importazione"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:37
 msgid "Error validating server certificate for '%1'"
-msgstr ""
+msgstr "Errore di convalida del certificato del server per \"%1\""
 
 #: svnfrontend/ssltrustprompt_impl.cpp:39
 msgid "The certificate is not issued by a trusted authority."
-msgstr ""
+msgstr "Il certificato non è stato emesso da un'autorità riconosciuta."
 
 #: svnfrontend/ssltrustprompt_impl.cpp:41
 msgid "Use the fingerprint to validate the certificate manually!"
@@ -1076,35 +1073,35 @@ msgstr ""
 
 #: svnfrontend/ssltrustprompt_impl.cpp:55
 msgid "Accept permanently"
-msgstr ""
+msgstr "Accetta permanentemente"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:56
 msgid "Accept temporarily"
-msgstr ""
+msgstr "Accetta temporaneamente"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:57
 msgid "Reject"
-msgstr ""
+msgstr "Rifiuta"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:63
 msgid "Realm"
-msgstr ""
+msgstr "Dominio"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:64
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:65
 msgid "Valid from"
-msgstr ""
+msgstr "Valido dal"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:66
 msgid "Valid until"
-msgstr ""
+msgstr "Valido fino al"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:67
 msgid "Issuer name"
-msgstr ""
+msgstr "Nome dell'emittente"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:68
 msgid "Fingerprint"
@@ -1123,18 +1120,16 @@ msgid "No repository open"
 msgstr "Nessun deposito da aprire"
 
 #: urldlg.cpp:57
-#, fuzzy
 msgid "Open repository or working copy"
-msgstr "Apri copia di lavoro"
+msgstr "Apri deposito o copia di lavoro"
 
 #: kdesvn-askpass.cpp:30
 msgid "prompt"
 msgstr ""
 
 #: kdesvn-askpass.cpp:36
-#, fuzzy
 msgid "kdesvnaskpass"
-msgstr "kdesvn"
+msgstr "kdesvnaskpass"
 
 #: kdesvn-askpass.cpp:37
 msgid "ssh-askpass for kdesvn"
@@ -1142,16 +1137,15 @@ msgstr ""
 
 #: kdesvn-askpass.cpp:39
 msgid "Copyright (c) 2005 Rajko Albrecht"
-msgstr ""
+msgstr "Copyright (c) 2005 Rajko Albrecht"
 
 #: kdesvn-askpass.cpp:51
 msgid "Please type in your password below."
-msgstr ""
+msgstr "Inserisci la password qui sotto."
 
 #: main.cpp:31
-#, fuzzy
 msgid "A Subversion Client for KDE (standalone application)"
-msgstr "Un'interfaccia a Subversion per KDE"
+msgstr "Un'interfaccia a Subversion per KDE (applicazione indipendente)"
 
 #: main.cpp:37
 msgid "Document to open"
@@ -1185,17 +1179,3 @@ msgstr "Opzioni pagina due"
 msgid "Add something here"
 msgstr "Aggiungi qualcosa qui"
 
-#~ msgid "&Location"
-#~ msgstr "&Percorso"
-
-#~ msgid "Open remote repository"
-#~ msgstr "Apri deposito remoto"
-
-#~ msgid "&Accept"
-#~ msgstr "&Accetta"
-
-#~ msgid "New Dir"
-#~ msgstr "Nuova dir."
-
-#~ msgid "Directory"
-#~ msgstr "Directory"

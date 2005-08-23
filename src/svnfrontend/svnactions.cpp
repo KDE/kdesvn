@@ -403,7 +403,7 @@ void SvnActions::slotInfo()
         text+=re;
         text+=rb+i18n("UUID")+cs+helpers::stl2qt::stl2qtstring((*it).uuid())+re;
         text+=rb+i18n("Last author")+cs+helpers::stl2qt::stl2qtstring((*it).cmtAuthor())+re;
-        text+=rb+i18n("Last commited")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
         text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qt((*it).textTime()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
@@ -883,7 +883,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     bool checkboxres = false;
 
     int result = KMessageBox::createKMessageBox(dialog,QMessageBox::Warning,
-        i18n("Really revert that entries to pristine state?"), displist, i18n("Recursive"),
+        i18n("Really revert these entries to pristine state?"), displist, i18n("Recursive"),
         &checkboxres,
         KMessageBox::Dangerous);
     if (result != KDialogBase::Yes) {

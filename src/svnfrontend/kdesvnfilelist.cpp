@@ -185,7 +185,7 @@ void kdesvnfilelist::setupActions()
         KShortcut(CTRL+Key_H),this,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
     m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"merge",
         KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
-    m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of that entry into itself"));
+    m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of these entry into itself"));
 
     /* remote actions only */
     m_CheckoutCurrentAction = new KAction("Checkout current repository path",KShortcut(),
@@ -1146,7 +1146,7 @@ void kdesvnfilelist::slotDelete()
         }
         displist.append(cur->fullName());
     }
-    int answer = KMessageBox::questionYesNoList(this,i18n("Really delete that entries?"),displist,"Delete from repository");
+    int answer = KMessageBox::questionYesNoList(this,i18n("Really delete these entries?"),displist,"Delete from repository");
     if (answer!=KMessageBox::Yes) {
         return;
     }

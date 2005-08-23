@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 static const char description[] =
-    I18N_NOOP("A Subversion Client for KDE");
+    I18N_NOOP("A Subversion Client for KDE (standalone application)");
 
 static const char version[] = VERSION;
 
@@ -40,16 +40,13 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char **argv)
 {
-    QString text = "";
-#if 0
-    QString(I18N_NOOP("Build with subversion lib: %1\n")).arg(svn::Version::linked_version());
-    text+=QString(I18N_NOOP("Running subversion lib: %1")).arg(svn::Version::running_version());
-#endif
     KAboutData about("kdesvn", I18N_NOOP("kdesvn"), version, description,
-                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",text,
+                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",0,
                          0, "ral@alwins-world.de");
     about.addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
     about.setHomepage("http://www.alwins-world.de/programs/kdesvn/");
+    about.setBugAddress("kdesvn-bugs@alwins-world.de");
+
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;

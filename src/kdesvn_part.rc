@@ -1,9 +1,6 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <kpartgui name="kdesvn_part" version="1">
 <MenuBar>
-  <Menu name="file">
-    <Action name="file_open"/>
-  </Menu>
   <Menu noMerge="1" name="settings">
     <Menu name="quicksettings">
      <text>Quick settings</text>
@@ -63,6 +60,12 @@
     <Action name="make_svn_export_current" />
    </Menu>
    <Action name="make_view_refresh" />
+  </Menu>
+  <Menu name="help"><text>&amp;Help</text>
+   <Separator/>
+   <Action name="help_about_kdesvnpart" />
+   <Action name="help_kdesvn" />
+   <Action name="report_bug" />
   </Menu>
 </MenuBar>
  <Menu name="local_context" >

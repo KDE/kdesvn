@@ -21,6 +21,7 @@
 
 #include "kdesvn.h"
 #include "pref.h"
+#include "urldlg.h"
 
 #include <qdragobject.h>
 #include <kprinter.h>
@@ -106,6 +107,7 @@ kdesvn::kdesvn()
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
         }
+        connectActionCollection(m_part->actionCollection());
     }
     else
     {
@@ -146,6 +148,7 @@ void kdesvn::load(const KURL& url)
 
 void kdesvn::setupActions()
 {
+    KStdAction::open(this, SLOT(fileOpen()), actionCollection());
     KStdAction::close(this,SLOT(fileClose()),actionCollection());
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
@@ -228,14 +231,12 @@ void kdesvn::fileNew()
     (new kdesvn)->show();
 }
 
-#if 0
 void kdesvn::fileOpen()
 {
     KURL url = UrlDlg::getURL(this);
     if (!url.isEmpty())
         m_part->openURL(url);
 }
-#endif
 
 void kdesvn::optionsPreferences()
 {
@@ -265,11 +266,6 @@ void kdesvn::openBookmarkURL (const QString &_url)
 {
     if (!_url.isEmpty() && m_part)
         m_part->openURL(_url);
-}
-
-QString kdesvn::currentTitle () const
-{
-    return caption();
 }
 
 QString kdesvn::currentURL () const
@@ -325,10 +321,10 @@ void kdesvn::applyNewToolbarConfig()
 # if KDE_VERSION >= KDE_MAKE_VERSION(3,1,0)
     applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
 # else
-    applyMainWindowSettings(KGlobal::config());
+    applyMainWindowSettings(kdesvnPart::config());
 # endif
 #else
-    applyMainWindowSettings(KGlobal::config());
+    applyMainWindowSettings(kdesvnPart::config());
 #endif
 }
 

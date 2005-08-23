@@ -23,15 +23,18 @@
 #include "svncpp/status.hpp"
 #include "helpers/stl2qt.h"
 #include "helpers/sub2qt.h"
+#include "kdesvn_part.h"
 
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kmimetype.h>
 #include <kdebug.h>
+#include <kiconeffect.h>
 
 #include <qstring.h>
 #include <qfileinfo.h>
+#include <qimage.h>
 
 class SvnItem_p:public ref_count
 {
@@ -140,13 +143,19 @@ QPixmap SvnItem::getPixmap(int size)
     if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
         /* remote access */
         if (isDir()) {
-            p = KGlobal::iconLoader()->loadIcon("folder",KIcon::Desktop,size);
+            p = kdesvnPart::iconLoader()->loadIcon("folder",KIcon::Desktop,size);
         } else {
-            p = KGlobal::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
-            //KMimeType::pixmapForURL(p_Item->m_Stat.path(),0,KIcon::Desktop,size);
+            p = kdesvnPart::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
         }
     } else {
         p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
+    }
+    if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified) {
+        QPixmap p2 = kdesvnPart::iconLoader()->loadIcon("exclam",KIcon::Desktop,size);
+        QImage i1; i1 = p;
+        QImage i2; i2 = p2;
+        KIconEffect::overlay(i1,i2);
+        p = i1;
     }
     return p;
 }

@@ -156,6 +156,7 @@ signals:
     void changeCaption(const QString&);
     void sigShowPopup(const QString&);
     void sigUrlOpend(bool);
+    void sigSwitchUrl(const KURL&);
 
 public slots:
     virtual void refreshCurrentTree();

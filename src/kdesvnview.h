@@ -93,6 +93,8 @@ signals:
     void signalChangeCaption(const QString&);
 
     void sigShowPopup(const QString&);
+    void sigSwitchUrl(const KURL&);
+
 public slots:
     virtual void closeMe();
     virtual void slotDispPopup(const QString&);

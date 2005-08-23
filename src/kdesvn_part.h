@@ -12,6 +12,7 @@ class kdesvnView;
 class QPainter;
 class KURL;
 class KdesvnBrowserExtension;
+class KAboutApplication;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -44,25 +45,31 @@ signals:
     void refreshTree();
 
 public slots:
-    virtual bool openURL (const KURL &url);
     virtual void slotDispPopup(const QString&);
     virtual void slotFileProperties();
+    virtual bool openURL(const KURL&);
+
 protected:
     /**
      * This must be implemented by each part
      */
     virtual bool openFile();
     virtual void setupActions();
+    KAboutApplication* m_aboutDlg;
 
 protected slots:
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
     virtual void slotUseKompare(bool);
+    void reportBug();
+    void showAboutApplication();
+    void appHelpActivated();
 
 private:
     kdesvnView *m_view;
     KdesvnBrowserExtension*m_browserExt;
+    static QString m_Extratext;
 };
 
 typedef KParts::GenericFactory<kdesvnPart> kdesvnPartFactory;

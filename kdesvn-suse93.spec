@@ -12,7 +12,7 @@ Name:		kdesvn
 Summary:	A Subversion client for KDE
 Summary(de):Ein Subversionclient für KDE
 Summary(es):Un cliente de Subversion para KDE
-Version:	0.4.2
+Version:	0.5.3
 Release:	1polinux
 URL:		http://www.alwins-world.de/programs/kdesvn/
 Source:		http://www.alwins-world.de/programs/download/kdesvn/%{name}-%{version}.tar.gz

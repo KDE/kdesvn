@@ -65,7 +65,7 @@ public:
     void load(const KURL& url);
 
     virtual void openBookmarkURL (const QString &_url);
-    virtual QString currentTitle () const;
+//    virtual QString currentTitle () const;
     virtual QString currentURL () const;
 protected:
 #if 0

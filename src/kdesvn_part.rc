@@ -61,6 +61,12 @@
    </Menu>
    <Action name="make_view_refresh" />
   </Menu>
+  <Menu name="help"><text>&amp;Help</text>
+   <Separator/>
+   <Action name="help_about_kdesvnpart" />
+   <Action name="help_kdesvn" />
+   <Action name="report_bug" />
+  </Menu>
 </MenuBar>
  <Menu name="local_context" >
   <text>Actions</text>

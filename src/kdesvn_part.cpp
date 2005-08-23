@@ -9,14 +9,18 @@
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <kdesvnview.h>
+#include <kbugreport.h>
 #include <qpopupmenu.h>
 #include <kxmlguifactory.h>
+#include <kaboutapplication.h>
+#include <kapp.h>
 
 #include <qcursor.h>
 
 K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
 
 static const char version[] = VERSION;
+QString kdesvnPart::m_Extratext = "";
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (dynamic Part component)");
@@ -25,6 +29,7 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name , const QStringList&)
     : KParts::ReadOnlyPart(parent, name)
 {
+    m_aboutDlg = 0;
     KGlobal::locale()->insertCatalogue("kdesvn");
     // we need an instance
     setInstance( kdesvnPartFactory::instance() );
@@ -56,19 +61,26 @@ kdesvnPart::~kdesvnPart()
 
 bool kdesvnPart::openFile()
 {
-//    if (!m_file.isEmpty())
-        //m_view->openURL(m_file);
-
+    m_view->openURL(m_url);
     // just for fun, set the status bar
     emit setStatusBarText( m_url.prettyURL() );
 
     return true;
 }
 
-bool kdesvnPart::openURL(const KURL &url)
+bool kdesvnPart::openURL(const KURL&url)
 {
-    m_url=url;
-    return m_view->openURL(url);
+    if (!url.isValid()||!closeURL()) {
+        return false;
+    }
+    m_url = url;
+    emit started(0);
+    bool ret = m_view->openURL(m_url);
+    if (ret) {
+        emit completed();
+        emit setWindowCaption( m_url.prettyURL() );
+    }
+    return ret;
 }
 
 void kdesvnPart::slotFileProperties()
@@ -88,14 +100,18 @@ void kdesvnPart::slotDispPopup(const QString&name)
 
 KAboutData* kdesvnPart::createAboutData()
 {
-    QString text = QString(I18N_NOOP("Build with subversion lib: %1\n")).arg(svn::Version::linked_version());
-    text+=QString(I18N_NOOP("Running subversion lib: %1")).arg(svn::Version::running_version());
+    m_Extratext = QString(I18N_NOOP("Build with subversion lib: %1\n")).arg(svn::Version::linked_version());
+    m_Extratext+=QString(I18N_NOOP("Running subversion lib: %1")).arg(svn::Version::running_version());
 
     KAboutData*about = new KAboutData("kdesvnpart", I18N_NOOP("kdesvn Part"), version, description,
-                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",text,
+                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",0,
                          0, "ral@alwins-world.de");
     about->addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
+    about->setOtherText(m_Extratext);
     about->setHomepage("http://www.alwins-world.de/programs/kdesvn/");
+    about->setBugAddress("kdesvn-bugs@alwins-world.de");
+    about->setTranslator(I18N_NOOP("kdesvn: NAME OF TRANSLATORS\\nYour names"),
+        I18N_NOOP("kdesvn: EMAIL OF TRANSLATORS\\nYour emails"));
     return about;
 }
 
@@ -133,7 +149,15 @@ void kdesvnPart::setupActions()
     toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
             actionCollection(),"toggle_unknown_files");
     toggletemp->setChecked(cs2.readBoolEntry("display_unknown_files",true));
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
+
+    kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
+
+    (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
+    if (QString(kapp->instanceName())!=QString("kdesvn")) {
+        (void)new KAction(i18n("Kdesvn &Handbook"), "help", 0, this, SLOT(appHelpActivated()), actionCollection(), "help_kdesvn");
+    }
+    (void)new KAction(i18n("Send Bugreport"), 0, 0, this, SLOT(reportBug()), actionCollection(), "report_bug");
+    actionCollection()->setHighlightingEnabled(true);
 }
 
 
@@ -228,4 +252,39 @@ KConfig* kdesvnPart::config()
 KIconLoader* kdesvnPart::iconLoader()
 {
     return kdesvnPartFactory::instance()->iconLoader();
+}
+
+
+/*!
+    \fn kdesvnPart::reportBug()
+ */
+void kdesvnPart::reportBug()
+{
+  KBugReport dlg(m_view, true, createAboutData());
+  dlg.exec();
+}
+
+
+/*!
+    \fn kdesvnPart::showAboutApplication()
+ */
+void kdesvnPart::showAboutApplication()
+{
+    /// @todo implement me
+    if (!m_aboutDlg) m_aboutDlg = new KAboutApplication(createAboutData(), (QWidget *)0, (const char *)0, false);
+    if(m_aboutDlg == 0)
+        return;
+    if(!m_aboutDlg->isVisible())
+        m_aboutDlg->show();
+    else
+        m_aboutDlg->raise();
+}
+
+
+/*!
+    \fn kdesvnPart::appHelpActivated()
+ */
+void kdesvnPart::appHelpActivated()
+{
+    kapp->invokeHelp(QString::null, "kdesvn");
 }

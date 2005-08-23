@@ -3,7 +3,7 @@
 # the error to ian geiser <geiseri@msoe.edu>
 Summary:   A subversion client for the KDE
 Name:      kdesvn
-Version:   0.5.2
+Version:   0.5.3
 Release:   1
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
@@ -27,7 +27,7 @@ Kdsvn is a subversion client for KDE
 CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" ./configure \
                 --prefix=`kde-config --prefix` \
                 --disable-no-exceptions \
-                --enable-debug=none
+                --disable-debug=none
 %build
 # Setup for parallel builds
 numprocs=`egrep -c ^cpu[0-9]+ /proc/stat || :`

@@ -267,11 +267,6 @@ void kdesvn::openBookmarkURL (const QString &_url)
         m_part->openURL(_url);
 }
 
-QString kdesvn::currentTitle () const
-{
-    return caption();
-}
-
 QString kdesvn::currentURL () const
 {
     if (!m_part) return "";

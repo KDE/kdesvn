@@ -124,7 +124,7 @@ void kdesvnfilelist::setupActions()
     m_LogFullAction = new KAction(i18n("&Full Log"),"history",KShortcut(CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
     m_propertyAction = new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
-    m_InfoAction = new KAction(i18n("Details"),"vcs_status",
+    m_InfoAction = new KAction(i18n("Details"),"svninfo",
         KShortcut(Key_I),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_RenameAction = new KAction(i18n("Move"),"move",
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");

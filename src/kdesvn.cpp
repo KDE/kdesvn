@@ -241,7 +241,7 @@ void kdesvn::fileOpen()
 void kdesvn::optionsPreferences()
 {
     // popup some sort of preference dialog, here
-    KMessageBox::error(this,i18n("Sorry, not finished. Will follow as soon as possible."),i18n("Settings"));
+    KMessageBox::error(this,i18n("Sorry, the configuration dialog is not finished yet. It will be implemented as soon as possible."),i18n("Settings"));
 #if 0
     kdesvnPreferences dlg;
     if (dlg.exec())

@@ -287,7 +287,6 @@ namespace svn
                   const bool update,
                   const bool no_ignore) throw (ClientException)
   {
-    kdDebug()<<"status " << path << endl;
     if (Url::isValid (path))
       return remoteStatus (this, path, descend, get_all, update,
                            no_ignore, m_context);

@@ -101,8 +101,8 @@ void kdesvnPart::slotDispPopup(const QString&name)
 
 KAboutData* kdesvnPart::createAboutData()
 {
-    m_Extratext = QString(I18N_NOOP("Build with subversion lib: %1\n")).arg(svn::Version::linked_version());
-    m_Extratext+=QString(I18N_NOOP("Running subversion lib: %1")).arg(svn::Version::running_version());
+    m_Extratext = QString(I18N_NOOP("Built with Subversion library: %1\n")).arg(svn::Version::linked_version());
+    m_Extratext+=QString(I18N_NOOP("Running Subversion library: %1")).arg(svn::Version::running_version());
 
     KAboutData*about = new KAboutData("kdesvnpart", I18N_NOOP("kdesvn Part"), version, description,
                      KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",0,

@@ -19,19 +19,20 @@
  ***************************************************************************/
 #include "filelistviewitem.h"
 #include "kdesvnfilelist.h"
+#include "kdesvn_part.h"
 #include "helpers/sub2qt.h"
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"
 #include "svncpp/exception.hpp"
 #include "svncpp/url.hpp"
 
-#include <qfileinfo.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kfileitem.h>
 #include <kdebug.h>
+#include <kconfig.h>
 
-#include <svn_time.h>
+#include <qfileinfo.h>
 
 const int FileListViewItem::COL_ICON = 0;
 const int FileListViewItem::COL_NAME = 0;
@@ -48,6 +49,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_sta
  sortChar(0),
  m_Ksvnfilelist(_parent)
 {
+    m_SvnWrapper = _parent->m_SvnWrapper;
     init();
 }
 
@@ -56,7 +58,13 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_pare
     sortChar(0),
     m_Ksvnfilelist(_parent)
 {
+    m_SvnWrapper = _parent->m_SvnWrapper;
     init();
+}
+
+SvnActions*FileListViewItem::getWrapper()
+{
+    return m_SvnWrapper;
 }
 
 void FileListViewItem::init()
@@ -112,7 +120,15 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool 
 
 void FileListViewItem::makePixmap()
 {
-    setPixmap(COL_ICON,getPixmap(16));
+    KConfig*conf = kdesvnPart::config();
+    if (!conf) {
+        setPixmap(COL_ICON,getPixmap(22));
+        return;
+    }
+    KConfigGroup cs(conf, "display_settings");
+    int s = cs.readNumEntry("listview_icon_size",22);
+    int o = cs.readBoolEntry("display_overlays",true);
+    setPixmap(COL_ICON,getPixmap(s,o));
 }
 
 bool FileListViewItem::isParent(QListViewItem*which)

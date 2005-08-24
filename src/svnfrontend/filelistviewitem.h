@@ -29,6 +29,7 @@
 class QPainter;
 class KFileItem;
 class kdesvnfilelist;
+class SvnActions;
 
 /**
 @author Rajko Albrecht
@@ -61,6 +62,8 @@ protected:
 
     void makePixmap();
     void init();
+    virtual SvnActions*getWrapper();
+    SvnActions*m_SvnWrapper;
 };
 
 typedef QPtrList<FileListViewItem> FileListViewItemList;

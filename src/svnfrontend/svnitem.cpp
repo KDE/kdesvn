@@ -24,6 +24,7 @@
 #include "helpers/stl2qt.h"
 #include "helpers/sub2qt.h"
 #include "kdesvn_part.h"
+#include "svnactions.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -134,9 +135,10 @@ const QDateTime&SvnItem::fullDate()const
 }
 
 
-QPixmap SvnItem::getPixmap(int size)
+QPixmap SvnItem::getPixmap(int size,bool overlay)
 {
     QPixmap p;
+    bool local = false;
     /* yes - different way to "isDir" above 'cause here we try to use the
        mime-features of KDE on ALL not just unversioned entries.
      */
@@ -148,14 +150,35 @@ QPixmap SvnItem::getPixmap(int size)
             p = kdesvnPart::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
         }
     } else {
+        local = true;
         p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
     }
-    if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified) {
-        QPixmap p2 = kdesvnPart::iconLoader()->loadIcon("exclam",KIcon::Desktop,size);
-        QImage i1; i1 = p;
-        QImage i2; i2 = p2;
-        KIconEffect::overlay(i1,i2);
-        p = i1;
+    if (overlay && local && isRealVersioned()) {
+        SvnActions*wrap = getWrapper();
+        bool mod = false;
+        QPixmap p2 = QPixmap();
+        if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
+            p2 = kdesvnPart::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
+        } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
+            p2 = kdesvnPart::iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
+        } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified) {
+            mod = true;
+        } else if (isDir()&&wrap) {
+            svn::StatusEntries dlist;
+            bool y = wrap->makeStatus(fullName(),dlist,true,false);
+            if (dlist.count()>0) {
+                mod = true;
+            }
+        }
+        if (mod) {
+            p2 = kdesvnPart::iconLoader()->loadIcon("exclam",KIcon::Desktop,size);
+        }
+        if (!p2.isNull()) {
+            QImage i1; i1 = p;
+            QImage i2; i2 = p2;
+            KIconEffect::overlay(i1,i2);
+            p = i1;
+        }
     }
     return p;
 }

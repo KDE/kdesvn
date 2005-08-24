@@ -1101,7 +1101,7 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 /*!
     \fn SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
  */
-bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec,bool all)
 {
     KConfigGroup cs(kdesvnPart::config(), "subversion");
     bool display_ignores = cs.readBoolEntry("display_ignored_files",true);
@@ -1109,8 +1109,8 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
 
     QString ex;
     try {
-        //                                          rec    all  up     noign
-        dlist = m_Svnclient.status(what,false,true,false,display_ignores);
+        //                              rec all  up     noign
+        dlist = m_Svnclient.status(what,rec,all,false,display_ignores);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());

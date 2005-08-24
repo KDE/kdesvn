@@ -62,7 +62,7 @@ public:
     void makeDelete(const QValueList<svn::Path>&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
-    bool makeStatus(const QString&what, svn::StatusEntries&dlist);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec=false,bool all=true);
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);

@@ -48,7 +48,7 @@ int main(int argc, char** argv)
     QString prompt;
 
     if( !KCmdLineArgs::parsedArgs()->count() ) {
-        prompt = i18n("Please type in your password below.");
+        prompt = i18n("Please enter your password below.");
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
     }

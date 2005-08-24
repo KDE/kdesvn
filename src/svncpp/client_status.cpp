@@ -312,7 +312,7 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.ascii(),         // path
+      path.utf8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -326,7 +326,7 @@ namespace svn
 #else
     error = svn_client_status (
       &revnum,      // revnum
-      path,         // path
+      path.utf8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -423,7 +423,7 @@ namespace svn
     svn_wc_adm_access_t *adm_access;
 
     svn_error_t *error
-      = svn_wc_adm_probe_open (&adm_access, NULL, path, FALSE,
+      = svn_wc_adm_probe_open (&adm_access, NULL, path.utf8(), FALSE,
                                     FALSE, pool);
     if (error != NULL)
       throw ClientException (error);

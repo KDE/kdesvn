@@ -17,45 +17,11 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#include "displaysettings_impl.h"
 
-
-#include "pref.h"
-
-#include <klocale.h>
-
-#include <qlayout.h>
-#include <qlabel.h>
-
-kdesvnPreferences::kdesvnPreferences()
-    : KDialogBase(TreeList, i18n("kdesvn Preferences"),
-                  Help|Default|Ok|Apply|Cancel, Ok)
+DisplaySettings_impl::DisplaySettings_impl(QWidget *parent, const char *name)
+    :DisplaySettings(parent, name)
 {
-    // this is the base class for your preferences dialog.  it is now
-    // a Treelist dialog.. but there are a number of other
-    // possibilities (including Tab, Swallow, and just Plain)
-    QFrame *frame;
-    frame = addPage(i18n("First Page"), i18n("Page One Options"));
-    m_pageOne = new kdesvnPrefPageOne(frame);
-
-    frame = addPage(i18n("Second Page"), i18n("Page Two Options"));
-    m_pageTwo = new kdesvnPrefPageTwo(frame);
 }
 
-kdesvnPrefPageOne::kdesvnPrefPageOne(QWidget *parent)
-    : QFrame(parent)
-{
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->setAutoAdd(true);
-
-    new QLabel(i18n("Add something here"), this);
-}
-
-kdesvnPrefPageTwo::kdesvnPrefPageTwo(QWidget *parent)
-    : QFrame(parent)
-{
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->setAutoAdd(true);
-
-    new QLabel(i18n("Add something here"), this);
-}
-#include "pref.moc"
+#include "displaysettings_impl.moc"

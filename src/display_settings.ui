@@ -1,0 +1,75 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>DisplaySettings</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>DisplaySettings</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>311</width>
+            <height>74</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Form1</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout1</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_ListIconsSize_label</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Size of Listviewicons</string>
+                    </property>
+                </widget>
+                <widget class="KIntSpinBox" row="0" column="1">
+                    <property name="name">
+                        <cstring>kcfg_listview_icon_size</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>128</number>
+                    </property>
+                    <property name="minValue">
+                        <number>16</number>
+                    </property>
+                    <property name="value">
+                        <number>22</number>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_overlays</cstring>
+            </property>
+            <property name="text">
+                <string>Mark changed items</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Check (if needed recursive) if items are changed (added/delete/changed) and mark these items with an overlayed icon.
+
+If it works slow (low connection and so on) you should turn of this feature.</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<customwidgets>
+</customwidgets>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>knuminput.h</includehint>
+</includehints>
+</UI>

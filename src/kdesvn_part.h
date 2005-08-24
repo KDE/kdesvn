@@ -65,6 +65,7 @@ protected slots:
     void reportBug();
     void showAboutApplication();
     void appHelpActivated();
+    virtual void slotShowSettings();
 
 private:
     kdesvnView *m_view;

@@ -17,40 +17,15 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#ifndef DISPLAYSETTINGS_IMPL_H
+#define DISPLAYSETTINGS_IMPL_H
 
+#include "display_settings.h"
 
-#ifndef _KDESVNPREF_H_
-#define _KDESVNPREF_H_
-
-#include <kdialogbase.h>
-#include <qframe.h>
-
-class kdesvnPrefPageOne;
-class kdesvnPrefPageTwo;
-
-class kdesvnPreferences : public KDialogBase
-{
-    Q_OBJECT
+class DisplaySettings_impl: public DisplaySettings {
+Q_OBJECT
 public:
-    kdesvnPreferences();
-
-private:
-    kdesvnPrefPageOne *m_pageOne;
-    kdesvnPrefPageTwo *m_pageTwo;
+    DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
 };
 
-class kdesvnPrefPageOne : public QFrame
-{
-    Q_OBJECT
-public:
-    kdesvnPrefPageOne(QWidget *parent = 0);
-};
-
-class kdesvnPrefPageTwo : public QFrame
-{
-    Q_OBJECT
-public:
-    kdesvnPrefPageTwo(QWidget *parent = 0);
-};
-
-#endif // _KDESVNPREF_H_
+#endif

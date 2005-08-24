@@ -99,6 +99,7 @@ public slots:
     virtual void closeMe();
     virtual void slotDispPopup(const QString&);
     virtual void refreshCurrentTree();
+    virtual void slotSettingsChanged();
 
 protected slots:
     virtual void slotOnURL(const QString& url);

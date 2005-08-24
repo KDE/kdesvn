@@ -20,7 +20,6 @@
 
 
 #include "kdesvn.h"
-#include "pref.h"
 #include "urldlg.h"
 
 #include <qdragobject.h>

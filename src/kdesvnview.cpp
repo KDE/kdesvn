@@ -152,3 +152,12 @@ void kdesvnView::refreshCurrentTree()
 {
     m_flist->refreshCurrentTree();
 }
+
+
+/*!
+    \fn kdesvnView::slotSettingsChanged()
+ */
+void kdesvnView::slotSettingsChanged()
+{
+    m_flist->refreshCurrentTree();
+}

@@ -2,6 +2,7 @@
 <kpartgui name="kdesvn_part" version="1">
 <MenuBar>
   <Menu noMerge="1" name="settings">
+    <Action name="kdesvnpart_pref" />
     <Menu name="quicksettings">
      <text>Quick settings</text>
      <Action name="toggle_use_kompare" />

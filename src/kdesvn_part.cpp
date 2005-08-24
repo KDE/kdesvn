@@ -1,5 +1,6 @@
 
 #include "kdesvn_part.h"
+#include "displaysettings_impl.h"
 #include "svncpp/version_check.hpp"
 #include "../config.h"
 
@@ -14,6 +15,8 @@
 #include <kxmlguifactory.h>
 #include <kaboutapplication.h>
 #include <kapp.h>
+#include <kconfigdialog.h>
+#include <kconfigskeleton.h>
 
 #include <qcursor.h>
 
@@ -24,6 +27,33 @@ QString kdesvnPart::m_Extratext = "";
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (dynamic Part component)");
+
+ class kdesvnPart_Prefs : public KConfigSkeleton
+ {
+    public:
+        kdesvnPart_Prefs(KSharedConfig::Ptr config)
+            : KConfigSkeleton(config)
+        {
+            setCurrentGroup("display_settings");
+            addItemInt("listview_icon_size",mlist_icon_size,22);
+            addItemBool("display_overlays",mdisp_overlay,true);
+        }
+
+        static kdesvnPart_Prefs*self()
+        {
+            if (!_me) {
+                _me = new kdesvnPart_Prefs(kdesvnPartFactory::instance()->sharedConfig());
+                _me->readConfig();
+            }
+            return _me;
+        }
+        int mlist_icon_size;
+        bool mdisp_overlay;
+    private:
+        static kdesvnPart_Prefs*_me;
+ };
+
+kdesvnPart_Prefs*kdesvnPart_Prefs::_me=0;
 
 kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name , const QStringList&)
@@ -153,6 +183,7 @@ void kdesvnPart::setupActions()
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
+    KStdAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
     (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
     if (QString(kapp->instanceName())!=QString("kdesvn")) {
         (void)new KAction(i18n("Kdesvn &Handbook"), "help", 0, this, SLOT(appHelpActivated()), actionCollection(), "help_kdesvn");
@@ -288,4 +319,22 @@ void kdesvnPart::showAboutApplication()
 void kdesvnPart::appHelpActivated()
 {
     kapp->invokeHelp(QString::null, "kdesvn");
+}
+
+
+/*!
+    \fn kdesvnPart::slotShowSettings()
+ */
+void kdesvnPart::slotShowSettings()
+{
+    if (KConfigDialog::showDialog("kdesvnpart_settings")) {
+        return;
+    }
+    KConfigDialog *dialog = new KConfigDialog(widget(),
+         "kdesvnpart_settings",
+         kdesvnPart_Prefs::self(),
+         KDialogBase::IconList);
+    dialog->addPage(new DisplaySettings_impl(0,"display_settings"),i18n("Display settings"),"display",i18n("Display"),true);
+    connect(dialog,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
+    dialog->show();
 }

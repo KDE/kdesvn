@@ -280,14 +280,6 @@ namespace svn
     }
 
     /**
-     * @return svn_wc_entry_t for this class
-     */
-    operator svn_wc_entry_t * () const
-    {
-      return m_entry;
-    }
-
-    /**
      * @return lock for that entry
      * @since subversion 1.2
      */

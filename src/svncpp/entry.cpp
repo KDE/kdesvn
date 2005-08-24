@@ -38,7 +38,7 @@ namespace svn
   Entry::Entry (const Entry & src)
     : m_entry (0), m_pool (0), m_valid (false),m_Lock()
   {
-    init (src);
+    init (src.m_entry);
   }
 
   Entry::~Entry ()
@@ -71,7 +71,7 @@ namespace svn
     if (this == &src)
       return *this;
 
-    init (src);
+    init (src.m_entry);
     return *this;
   }
 }

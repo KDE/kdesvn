@@ -220,11 +220,11 @@ namespace svn
 
     QString url = path;
     url += "/";
-    url += dirEntry.name ();
+    url += dirEntry.name();
 
-    e->name = dirEntry.name().utf8();
+    e->name = apr_pstrdup(pool,dirEntry.name().utf8());
     e->revision = dirEntry.createdRev ();
-    e->url = url.utf8();
+    e->url = apr_pstrdup(pool,url.utf8());
     e->kind = dirEntry.kind ();
     e->schedule = svn_wc_schedule_normal;
     e->text_time = dirEntry.time ();

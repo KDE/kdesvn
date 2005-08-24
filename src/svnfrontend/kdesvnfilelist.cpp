@@ -165,7 +165,7 @@ void kdesvnfilelist::setupActions()
     /* 1. actions on files AND dirs*/
     m_AddCurrent = new KAction("Add selected files/dirs","vcs_add",KShortcut(Key_Insert),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
     m_AddCurrent->setToolTip(i18n("Adding selected files and/or directories to repository"));
-    m_DelCurrent = new KAction("Delete selected files/dirs","vcs_remove",
+    m_DelCurrent = new KAction("Delete selected files/dirs","svndelete",
         KShortcut(Key_Delete),this,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
     m_RevertAction  = new KAction("Revert current changes","revert",

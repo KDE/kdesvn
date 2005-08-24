@@ -138,7 +138,7 @@ const QDateTime&SvnItem::fullDate()const
 QPixmap SvnItem::getPixmap(int size,bool overlay)
 {
     QPixmap p;
-    bool local = false;
+    bool _local = false;
     /* yes - different way to "isDir" above 'cause here we try to use the
        mime-features of KDE on ALL not just unversioned entries.
      */
@@ -150,10 +150,10 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             p = kdesvnPart::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
         }
     } else {
-        local = true;
+        _local = true;
         p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
     }
-    if (overlay && local && isRealVersioned()) {
+    if (overlay && _local && isRealVersioned()) {
         SvnActions*wrap = getWrapper();
         bool mod = false;
         QPixmap p2 = QPixmap();
@@ -165,9 +165,15 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             mod = true;
         } else if (isDir()&&wrap) {
             svn::StatusEntries dlist;
-            bool y = wrap->makeStatus(fullName(),dlist,true,false);
-            if (dlist.count()>0) {
+            wrap->makeStatus(fullName(),dlist,true,false);
+            svn::StatusEntries::const_iterator it;
+            for (it=dlist.begin();it!=dlist.end();++it) {
+                if ( (*it).textStatus()==svn_wc_status_modified||
+                    (*it).textStatus()==svn_wc_status_added||
+                    (*it).textStatus()==svn_wc_status_deleted||
+                    (*it).textStatus()==svn_wc_status_conflicted )
                 mod = true;
+                break;
             }
         }
         if (mod) {

@@ -784,7 +784,7 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     if (!m_ParentList|| !_exp&&m_ParentList->isLocal()) return;
     SvnItem*k = m_ParentList->Selected();
     if (k && !k->isDir()) {
-        KMessageBox::error(m_ParentList->realWidget(),_exp?i18n("Exporting a file"):i18n("Checking out a file?"));
+        KMessageBox::error(m_ParentList->realWidget(),_exp?i18n("Exporting a file?"):i18n("Checking out a file?"));
         return;
     }
     QString what;

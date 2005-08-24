@@ -302,7 +302,6 @@ void kdesvnPart::reportBug()
  */
 void kdesvnPart::showAboutApplication()
 {
-    /// @todo implement me
     if (!m_aboutDlg) m_aboutDlg = new KAboutApplication(createAboutData(), (QWidget *)0, (const char *)0, false);
     if(m_aboutDlg == 0)
         return;

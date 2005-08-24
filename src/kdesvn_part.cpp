@@ -138,7 +138,7 @@ void kdesvnPart::setupActions()
     toggletemp->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
-    toggletemp = new KToggleAction(i18n("Logs follows node changes"),KShortcut(),
+    toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
             actionCollection(),"toggle_log_follows");
     toggletemp->setChecked(cs.readBoolEntry("log_follows_nodes",true));
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
@@ -157,7 +157,7 @@ void kdesvnPart::setupActions()
     if (QString(kapp->instanceName())!=QString("kdesvn")) {
         (void)new KAction(i18n("Kdesvn &Handbook"), "help", 0, this, SLOT(appHelpActivated()), actionCollection(), "help_kdesvn");
     }
-    (void)new KAction(i18n("Send Bugreport"), 0, 0, this, SLOT(reportBug()), actionCollection(), "report_bug");
+    (void)new KAction(i18n("Send Bugreport for kdesvn"), 0, 0, this, SLOT(reportBug()), actionCollection(), "report_bug");
     actionCollection()->setHighlightingEnabled(true);
 }
 

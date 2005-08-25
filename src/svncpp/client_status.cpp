@@ -187,7 +187,7 @@ namespace svn
     int i;
 
     /* Loop over array, printing each name/status-structure */
-    for (i = statusarray->nelts-1; i >= 0; i--)
+    for (i = 0; i < statusarray->nelts; ++i)
     {
       const svn_sort__item_t *item;
       const char *filePath;

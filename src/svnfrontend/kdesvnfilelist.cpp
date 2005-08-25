@@ -73,6 +73,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     m_baseUri="";
     m_pList = new KdesvnFileListPrivate;
     m_filesAction = aCollect;
+    m_isLocal = false;
 
     SshAgent ssh;
     ssh.querySshAgent();
@@ -784,24 +785,11 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
 
     QString what = (_parent!=0?_parent->fullName():baseUri());
     svn::StatusEntries dlist;
+
     if (!m_SvnWrapper->makeStatus(what,dlist)) {
         return;
     }
-#if 0
-    try {
-        /* settings about unknown and ignored files must be setable */
-        //                                                              rec   all  up    noign
-        dlist = m_SvnWrapper->svnclient()->status(what,false,true,false,true);
-    } catch (svn::ClientException e) {
-        //Message box!
-        m_LastException = QString::fromUtf8(e.message());
-        emit sigLogMessage(m_LastException);
-        return;
-    } catch (...) {
-        kdDebug()<< "Other exception" << endl;
-        return;
-    }
-#endif
+
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem*k;
     bool gotit = false;

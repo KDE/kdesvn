@@ -49,7 +49,7 @@ namespace svn
 
   DirEntries
   Client::list (const QString& pathOrUrl,
-                svn_opt_revision_t * revision,
+                Revision& revision,
                 bool recurse) throw (ClientException)
   {
     Pool pool;

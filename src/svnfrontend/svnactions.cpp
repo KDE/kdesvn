@@ -1172,7 +1172,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool re
 {
     QString ex;
     try {
-        //                              rec all  up     noign
+        //                                      rec all  up    noign
         dlist = m_Data->m_Svnclient.status(what,rec,all,false,display_ignores);
     } catch (svn::ClientException e) {
         //Message box!

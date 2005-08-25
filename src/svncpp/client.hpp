@@ -115,6 +115,7 @@ namespace svn
      * @param get_all Return all entries, not just the interesting ones.
      * @param update Query the repository for updates.
      * @param no_ignore Disregard default and svn:ignore property ignores.
+     * @param revision list specific revision when browsing remote, on working copies parameter will ignored
      * @return vector with Status entries.
      */
     StatusEntries
@@ -122,7 +123,8 @@ namespace svn
             const bool descend = false,
             const bool get_all = true,
             const bool update = false,
-            const bool no_ignore = false) throw (ClientException);
+            const bool no_ignore = false,
+            Revision revision = svn::Revision::HEAD) throw (ClientException);
 
     /**
      * Returns the status of a single file in the path.
@@ -131,10 +133,11 @@ namespace svn
      *
      * @param path File to gather status.
      * @param update if check against repository if new updates are there (for WC only)
+     * @param revision list specific revision when browsing remote, on working copies parameter will ignored
      * @return a Status with Statis.isVersioned = FALSE
      */
     Status
-    singleStatus (const QString& path,bool update=false) throw (ClientException);
+    singleStatus (const QString& path,bool update=false,Revision revision = svn::Revision::HEAD) throw (ClientException);
 
   /**
      * Executes a revision checkout.
@@ -456,7 +459,7 @@ namespace svn
      */
     DirEntries
     list (const QString& pathOrUrl,
-          svn_opt_revision_t * revision,
+          Revision& revision,
           bool recurse) throw (ClientException);
 
     /**

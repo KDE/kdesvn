@@ -160,7 +160,7 @@ namespace svn
     diffCleanup (outfile, outfileName, errfile, errfileName, pool);
     QByteArray res;
     res.duplicate(stringbuf->data,stringbuf->len);
-    return res;
+    return QString::fromUtf8(res);
   }
 
 }

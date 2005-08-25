@@ -39,7 +39,7 @@
 
 namespace svn
 {
-  QString
+  QByteArray
   Client::cat (const Path & path,
                const Revision & revision) throw (ClientException)
   {
@@ -59,7 +59,7 @@ namespace svn
     QByteArray res;
     /// @todo check if realy dup or just assign!
     res.duplicate(stringbuf->data,stringbuf->len);
-    return QString(res);
+    return res;
   }
 
 

@@ -212,7 +212,7 @@ namespace svn
      * @param revision revision to retrieve
      * @return contents of the file
      */
-    QString
+    QByteArray
     cat (const Path & path,
          const Revision & revision) throw (ClientException);
 

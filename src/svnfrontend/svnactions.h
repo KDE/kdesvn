@@ -61,6 +61,7 @@ public:
     void prepareUpdate(bool ask);
     template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog");
     void makeCat(svn::Revision start, const QString&what,const QString&disp);
+    QByteArray makeGet(svn::Revision start, const QString&what);
     void addItems(const QValueList<svn::Path> &items,bool rec=false);
     void makeDelete(const QValueList<svn::Path>&);
     void makeLock(const QStringList&,const QString&,bool);

@@ -30,6 +30,7 @@
 #include "helpers/dirnotify.h"
 #include "helpers/sshagent.h"
 #include "helpers/stl2qt.h"
+#include "helpers/runtempfile.h"
 #include "kdesvn_part.h"
 
 #include <qvbox.h>
@@ -52,7 +53,9 @@
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <kurldrag.h>
+#include <ktempfile.h>
 #include <kio/job.h>
+#include <krun.h>
 
 class KdesvnFileListPrivate{
 public:
@@ -288,6 +291,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         }
     }
     kdDebug()<<"Open url now" << endl;
+    /* otherwise subversion lib asserts! */
     while (m_baseUri.endsWith("/")) {
         m_baseUri.truncate(m_baseUri.length()-1);
     }
@@ -303,7 +307,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     if (result && m_isLocal) {
         if (firstChild()) firstChild()->setOpen(true);
     }
-    /// @todo setup a cache of (recursive) changed items
     if (!result) {
         m_baseUri="";
         m_isLocal=false;
@@ -589,8 +592,14 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         }
         return;
     }
-    KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
-    fitem.run();
+    if (isLocal()) {
+        KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
+        fitem.run();
+    } else {
+        QByteArray content = m_SvnWrapper->makeGet(svn::Revision::HEAD,fki->fullName());
+        if (content.size()==0) return;
+        new RunTempfile(content);
+    }
 }
 
 void kdesvnfilelist::slotCleanupAction()

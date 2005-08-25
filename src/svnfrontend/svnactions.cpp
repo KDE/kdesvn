@@ -276,10 +276,10 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
     delete blame;
 }
 
-void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&disp)
+QByteArray SvnActions::makeGet(svn::Revision start, const QString&what)
 {
-    if (!m_Data->m_CurrentContext) return;
     QByteArray content;
+    if (!m_Data->m_CurrentContext) return content;
     QString ex;
     svn::Path p(what);
     try {
@@ -288,12 +288,16 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
-        return;
     } catch (...) {
         ex = i18n("Error getting content");
         emit clientException(ex);
-        return;
     }
+    return content;
+}
+
+void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&disp)
+{
+    QByteArray content = makeGet(start,what);
     if (content.size()==0) {
         emit clientException(i18n("Got no content"));
         return;

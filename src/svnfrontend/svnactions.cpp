@@ -1254,3 +1254,27 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     }
     return result;
 }
+
+
+/*!
+    \fn SvnActions::isLocalWorkingCopy(const KURL&url)
+ */
+bool SvnActions::isLocalWorkingCopy(const KURL&url)
+{
+    if (url.isEmpty()||!url.isLocalFile()) return false;
+    QString cleanpath = url.path();
+    while (cleanpath.endsWith("/")) {
+        cleanpath.truncate(cleanpath.length()-1);
+    }
+
+    kdDebug()<<"Url: " << url << " - path: " << cleanpath << endl;
+    svn::Revision peg(svn_opt_revision_unspecified);
+    svn::Revision rev(svn_opt_revision_unspecified);
+    try {
+        m_Data->m_Svnclient.info2(cleanpath,false,rev,peg);
+    } catch (svn::ClientException e) {
+        kdDebug()<< e.message()<<endl;
+        return false;
+    }
+    return true;
+}

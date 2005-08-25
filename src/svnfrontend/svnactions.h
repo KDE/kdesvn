@@ -23,6 +23,7 @@
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 #include "helpers/smart_pointer.h"
+#include "kurl.h"
 
 #include <qobject.h>
 #include <qdatetime.h>
@@ -77,6 +78,7 @@ public:
     void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
     QString makeMkdir(const QString&);
+    bool isLocalWorkingCopy(const KURL&url);
 
 protected:
     smart_pointer<SvnActionsData> m_Data;

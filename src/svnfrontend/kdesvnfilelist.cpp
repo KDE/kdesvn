@@ -278,8 +278,16 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     /// @todo check if we opend a local repository!
     if (url.isLocalFile()) {
         m_baseUri = url.path();
-        m_isLocal = true;
+        if (m_SvnWrapper->isLocalWorkingCopy(url)) {
+            m_isLocal = true;
+        } else {
+            // yes! KURL sometimes makes a correct localfile url (file:///)
+            // to a simple file:/ - that brakes subverision lib. so we make sure
+            // that we have a correct url
+            m_baseUri="file://"+m_baseUri;
+        }
     }
+    kdDebug()<<"Open url now" << endl;
     while (m_baseUri.endsWith("/")) {
         m_baseUri.truncate(m_baseUri.length()-1);
     }

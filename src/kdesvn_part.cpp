@@ -242,6 +242,7 @@ bool kdesvnPart::closeURL()
 {
     m_url=KURL();
     m_view->closeMe();
+    emit setWindowCaption("");
     return true;
 }
 

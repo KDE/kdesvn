@@ -161,19 +161,22 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             p2 = kdesvnPart::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
             p2 = kdesvnPart::iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
-        } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified) {
+        } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified) {
             mod = true;
         } else if (isDir()&&wrap) {
             svn::StatusEntries dlist;
-            wrap->makeStatus(fullName(),dlist,true,false);
+            wrap->checkUpdatesCached(fullName(),dlist);
             svn::StatusEntries::const_iterator it;
+
             for (it=dlist.begin();it!=dlist.end();++it) {
                 if ( (*it).textStatus()==svn_wc_status_modified||
                     (*it).textStatus()==svn_wc_status_added||
                     (*it).textStatus()==svn_wc_status_deleted||
-                    (*it).textStatus()==svn_wc_status_conflicted )
-                mod = true;
-                break;
+                    (*it).textStatus()==svn_wc_status_conflicted ||
+                    (*it).propStatus()==svn_wc_status_modified) {
+                    mod = true;
+                    break;
+                }
             }
         }
         if (mod) {

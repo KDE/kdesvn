@@ -39,6 +39,7 @@
 #include <qmap.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
+#include <qcanvas.h>
 #include <kdialog.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
@@ -57,26 +58,52 @@
 #include <qstylesheet.h>
 #include <kconfig.h>
 #include <qregexp.h>
+#include <qimage.h>
 
-#if 0
-#include <khtml_part.h>
-#include <khtmlview.h>
-#endif
+class SvnActionsData:public ref_count
+{
+public:
+    SvnActionsData():ref_count()
+    {
+        m_CurrentContext = 0;
+        m_Cache.clear();
+    }
+
+    virtual ~SvnActionsData()
+    {
+        delete m_CurrentContext;
+        m_CurrentContext = 0;
+    }
+
+    ItemDisplay* m_ParentList;
+
+    smart_pointer<CContextListener> m_SvnContext;
+    svn::Context* m_CurrentContext;
+    svn::Client m_Svnclient;
+
+    svn::StatusEntries m_Cache;
+};
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
 #define EMIT_REFRESH emit sigRefreshAll()
 #define DIALOGS_SIZES "display_dialogs_sizes"
 
 SvnActions::SvnActions(ItemDisplay *parent, const char *name)
- : QObject(parent->realWidget(), name),m_ParentList(parent),m_SvnContext(new CContextListener(this)),m_CurrentContext(0)
+ : QObject(parent->realWidget(), name)
 {
-    connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
+    m_Data = new SvnActionsData();
+    m_Data->m_ParentList = parent;
+    m_Data->m_SvnContext = new CContextListener(this);
+    connect(m_Data->m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
+}
+
+svn::Client* SvnActions::svnclient()
+{
+    return &(m_Data->m_Svnclient);
 }
 
 SvnActions::~SvnActions()
 {
-    delete m_CurrentContext;
-    m_CurrentContext = 0;
 }
 
 void SvnActions::slotNotifyMessage(const QString&aMsg)
@@ -86,10 +113,10 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 
 void SvnActions::reInitClient()
 {
-    delete m_CurrentContext;
-    m_CurrentContext = new svn::Context();
-    m_CurrentContext->setListener(m_SvnContext);
-    m_Svnclient.setContext(m_CurrentContext);
+    delete m_Data->m_CurrentContext;
+    m_Data->m_CurrentContext = new svn::Context();
+    m_Data->m_CurrentContext->setListener(m_Data->m_SvnContext);
+    m_Data->m_Svnclient.setContext(m_Data->m_CurrentContext);
 }
 
 #include "svnactions.moc"
@@ -120,8 +147,8 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
 void SvnActions::slotMakeRangeLog()
 {
     /// @todo remove reference to parentlist
-    if (!m_ParentList) return;
-    SvnItem*k = m_ParentList->Selected();
+    if (!m_Data->m_ParentList) return;
+    SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
     Rangeinput_impl*rdlg;
     KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
@@ -142,8 +169,8 @@ void SvnActions::slotMakeRangeLog()
 void SvnActions::slotMakeLog()
 {
     /// @todo remove reference to parentlist
-    if (!m_ParentList) return;
-    SvnItem*k = m_ParentList->Selected();
+    if (!m_Data->m_ParentList) return;
+    SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
     svn::Revision start(svn::Revision::START);
     svn::Revision end(svn::Revision::HEAD);
@@ -157,14 +184,14 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
 {
     const svn::LogEntries * logs;
     QString ex;
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     KConfigGroup cs(kdesvnPart::config(), "general_items");
     bool follow = cs.readBoolEntry("toggle_log_follows",true);
 
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @todo second last parameter user settable (printing infos about copy/move etc) moment false so traffic reduced
-        logs = m_Svnclient.log(k->fullName(),start,end,false,!follow);
+        logs = m_Data->m_Svnclient.log(k->fullName(),start,end,false,!follow);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -190,14 +217,14 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
  */
 void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     svn::AnnotatedFile * blame;
     QString ex;
     svn::Path p(k->fullName());
 
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Annotate","Blaming - hit cancel for abort");
-        blame = m_Svnclient.annotate(p,start,end);
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Annotate","Blaming - hit cancel for abort");
+        blame = m_Data->m_Svnclient.annotate(p,start,end);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -251,13 +278,13 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
 
 void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&disp)
 {
-    if (!m_CurrentContext) return;
-    QString content;
+    if (!m_Data->m_CurrentContext) return;
+    QByteArray content;
     QString ex;
     svn::Path p(what);
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
-        content = m_Svnclient.cat(p,start);
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
+        content = m_Data->m_Svnclient.cat(p,start);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -267,26 +294,46 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
         emit clientException(ex);
         return;
     }
-    if (content.length()==0) {
+    if (content.size()==0) {
         emit clientException(i18n("Got no content"));
         return;
     }
     EMIT_FINISHED;
-    KTextBrowser*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
-    if (dlg) {
-        ptr->setFont(KGlobalSettings::fixedFont());
-        ptr->setWordWrap(QTextEdit::NoWrap);
-        ptr->setText("<code>"+QStyleSheet::convertFromPlainText(content)+"</code>");
+    // a bit fun must be ;)
+    QImage img(content);
+    if (img.isNull()) {
+        KTextBrowser*ptr;
+        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
+        if (dlg) {
+            ptr->setFont(KGlobalSettings::fixedFont());
+            ptr->setWordWrap(QTextEdit::NoWrap);
+            ptr->setText("<code>"+QStyleSheet::convertFromPlainText(content)+"</code>");
+            dlg->exec();
+            dlg->saveDialogSize(*(kdesvnPart::config()),"cat_display_dlg",false);
+            delete dlg;
+        }
+    } else {
+        QCanvasView*ptr;
+        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
+        QCanvas*can = new QCanvas;
+        can->resize(img.size().width()+10,img.size().height()+10);
+        QCanvasPixmap* qpix = new QCanvasPixmap(img);
+        QCanvasPixmapArray*parr=new QCanvasPixmapArray();
+        parr->setImage(0,qpix);
+        QCanvasSprite* qspr = new QCanvasSprite(parr,can);
+        qspr->move(5,5,0);
+        ptr->setCanvas(can);
+        qspr->show();
         dlg->exec();
         dlg->saveDialogSize(*(kdesvnPart::config()),"cat_display_dlg",false);
         delete dlg;
+        delete can;
     }
 }
 
 QString SvnActions::makeMkdir(const QString&parentDir)
 {
-    if (!m_CurrentContext) return QString::null;
+    if (!m_Data->m_CurrentContext) return QString::null;
     QString ex;
     bool isOk=false;
     ex = KInputDialog::getText(i18n("New folder"),i18n("Enter folder name:"),QString::null,&isOk);
@@ -298,16 +345,16 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     ex = "";
 
     QString logMessage="";
-    if (!m_ParentList->isLocal()) {
+    if (!m_Data->m_ParentList->isLocal()) {
         bool ok;
-        logMessage = Logmsg_impl::getLogmessage(&ok,0,m_ParentList->realWidget(),"logmsg_impl");
+        logMessage = Logmsg_impl::getLogmessage(&ok,0,m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok) {
             return QString::null;
         }
     }
 
     try {
-        m_Svnclient.mkdir(target,logMessage);
+        m_Data->m_Svnclient.mkdir(target,logMessage);
     }catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -321,26 +368,26 @@ QString SvnActions::makeMkdir(const QString&parentDir)
 void SvnActions::slotInfo()
 {
     /// @todo remove reference to parentlist
-    if (!m_CurrentContext) return;
-    if (!m_ParentList) return;
+    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_ParentList) return;
     QPtrList<SvnItem> lst;
-    m_ParentList->SelectionList(&lst);
+    m_Data->m_ParentList->SelectionList(&lst);
     svn::InfoEntries entries;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
-    if (!m_ParentList->isLocal()) {
+    if (!m_Data->m_ParentList->isLocal()) {
         rev = svn::Revision::HEAD;
     }
     QString ex;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
         if (lst.count()==0) {
-            entries = m_Svnclient.info2(m_ParentList->baseUri(),true,rev,peg);
+            entries = m_Data->m_Svnclient.info2(m_Data->m_ParentList->baseUri(),true,rev,peg);
         } else {
             SvnItem*item;
             svn::InfoEntries e;
             for (item=lst.first();item;item=lst.next()) {
-                e = (m_Svnclient.info2(item->fullName(),true,rev,peg));
+                e = (m_Data->m_Svnclient.info2(item->fullName(),true,rev,peg));
                 // stl like - hold it for qt4?
                 //entries.insert(entries.end(),e.begin(),e.end());
                 entries+=e;
@@ -458,13 +505,13 @@ void SvnActions::slotInfo()
 void SvnActions::slotProperties()
 {
     /// @todo remove reference to parentlist
-    if (!m_CurrentContext) return;
-    if (!m_ParentList) return;
-    SvnItem*k = m_ParentList->Selected();
+    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_ParentList) return;
+    SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
     PropertiesDlg dlg(k->fullName(),svnclient(),
-        m_ParentList->isLocal()?svn::Revision::WORKING:svn::Revision::HEAD);
-    connect(&dlg,SIGNAL(clientException(const QString&)),m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
+        m_Data->m_ParentList->isLocal()?svn::Revision::WORKING:svn::Revision::HEAD);
+    connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
     dlg.resize(dlg.configDialogSize("kdesvn_properties_dlg"));
     if (dlg.exec()!=QDialog::Accepted) {
         return;
@@ -475,14 +522,14 @@ void SvnActions::slotProperties()
     QValueList<QString> delList;
     dlg.changedItems(setList,delList);
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_Svnclient.propdel(delList[pos],svn::Path(k->fullName()),svn::Revision::HEAD);
+            m_Data->m_Svnclient.propdel(delList[pos],svn::Path(k->fullName()),svn::Revision::HEAD);
         }
         PropertiesDlg::tPropEntries::Iterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_Svnclient.propset(it.key(),it.data(),svn::Path(k->fullName()),svn::Revision::HEAD);
+            m_Data->m_Svnclient.propset(it.key(),it.data(),svn::Path(k->fullName()),svn::Revision::HEAD);
         }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
@@ -500,22 +547,21 @@ void SvnActions::slotProperties()
 void SvnActions::slotCommit()
 {
     /// @todo remove reference to parentlist
-    if (!m_CurrentContext) return;
-    if (!m_ParentList->isLocal()) return;
+    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_ParentList->isLocal()) return;
     bool ok,rec;
-    QString msg = Logmsg_impl::getLogmessage(&ok,&rec,m_ParentList->realWidget(),"logmsg_impl");
+    QString msg = Logmsg_impl::getLogmessage(&ok,&rec,m_Data->m_ParentList->realWidget(),"logmsg_impl");
     if (!ok) {
         return;
     }
     QPtrList<SvnItem> which;
-    m_ParentList->SelectionList(&which);
+    m_Data->m_ParentList->SelectionList(&which);
     SvnItem*cur;
     QPtrListIterator<SvnItem> liter(which);
 
     QValueList<svn::Path> targets;
-    kdDebug()<<"Commit baseuri" << m_ParentList->baseUri()<<endl;
     if (which.count()==0) {
-        targets.push_back(svn::Path(m_ParentList->baseUri()));
+        targets.push_back(svn::Path(m_Data->m_ParentList->baseUri()));
     } else {
         while ( (cur=liter.current())!=0) {
             ++liter;
@@ -525,8 +571,8 @@ void SvnActions::slotCommit()
     }
     svn_revnum_t nnum;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
-        nnum = m_Svnclient.commit(svn::Targets(targets),msg,rec);
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
+        nnum = m_Data->m_Svnclient.commit(svn::Targets(targets),msg,rec);
     } catch (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -557,13 +603,13 @@ void SvnActions::procClosed(KProcess*proc)
  */
 void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     QString ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
-        ex = m_Svnclient.diff(svn::Path(tdir.name()),
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
+        ex = m_Data->m_Svnclient.diff(svn::Path(tdir.name()),
             svn::Path(what),
             start, end,
             true,false,false);
@@ -602,13 +648,13 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
  */
 void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     QString ex;
     svn_revnum_t ret;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
         for (unsigned int i = 0; i<what.count();++i) {
-            ret = m_Svnclient.update(svn::Path(what[i]),
+            ret = m_Data->m_Svnclient.update(svn::Path(what[i]),
                 rev, recurse);
             kapp->processEvents();
             if (sdlg.cancelld()) {
@@ -638,13 +684,13 @@ void SvnActions::slotUpdateHeadRec()
  */
 void SvnActions::prepareUpdate(bool ask)
 {
-    if (!m_ParentList||!m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isLocal()) return;
     SvnItemList k;
-    m_ParentList->SelectionList(&k);
+    m_Data->m_ParentList->SelectionList(&k);
 
     QStringList what;
     if (k.count()==0) {
-        what.append(m_ParentList->baseUri());
+        what.append(m_Data->m_ParentList->baseUri());
     } else {
         SvnItemListIterator liter(k);
         SvnItem*cur;
@@ -689,12 +735,12 @@ void SvnActions::slotUpdateTo()
  */
 void SvnActions::slotAdd()
 {
-    if (!m_CurrentContext) return;
-    if (!m_ParentList) return;
+    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_ParentList) return;
     QPtrList<SvnItem> lst;
-    m_ParentList->SelectionList(&lst);
+    m_Data->m_ParentList->SelectionList(&lst);
     if (lst.count()==0) {
-        KMessageBox::error(m_ParentList->realWidget(),i18n("Which files or directories should I add?"));
+        KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("Which files or directories should I add?"));
         return;
     }
     QValueList<svn::Path> items;
@@ -703,7 +749,7 @@ void SvnActions::slotAdd()
     while ((cur=liter.current())!=0){
         ++liter;
         if (cur->isVersioned()) {
-            KMessageBox::error(m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is versioned - break.</center>")
+            KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is versioned - break.</center>")
                 .arg(cur->fullName()));
             return;
         }
@@ -724,7 +770,7 @@ void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
     try {
         QValueList<svn::Path>::const_iterator piter;
         for (piter=items.begin();piter!=items.end();++piter) {
-            m_Svnclient.add((*piter),rec);
+            m_Data->m_Svnclient.add((*piter),rec);
         }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
@@ -738,11 +784,11 @@ void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
  */
 void SvnActions::makeDelete(const QValueList<svn::Path>&items)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     QString ex;
     try {
         svn::Targets target(items);
-        m_Svnclient.remove(target,false);
+        m_Data->m_Svnclient.remove(target,false);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -781,15 +827,15 @@ void SvnActions::slotExport()
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
 {
-    if (!m_ParentList|| !_exp&&m_ParentList->isLocal()) return;
-    SvnItem*k = m_ParentList->Selected();
+    if (!m_Data->m_ParentList|| !_exp&&m_Data->m_ParentList->isLocal()) return;
+    SvnItem*k = m_Data->m_ParentList->Selected();
     if (k && !k->isDir()) {
-        KMessageBox::error(m_ParentList->realWidget(),_exp?i18n("Exporting a file?"):i18n("Checking out a file?"));
+        KMessageBox::error(m_Data->m_ParentList->realWidget(),_exp?i18n("Exporting a file?"):i18n("Checking out a file?"));
         return;
     }
     QString what;
     if (!k) {
-        what = m_ParentList->baseUri();
+        what = m_Data->m_ParentList->baseUri();
     } else {
         what = k->fullName();
     }
@@ -824,13 +870,13 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         fUrl.truncate(fUrl.length()-1);
     }
     svn::Path p(tPath);
-    if (!_exp||!m_CurrentContext) reInitClient();
+    if (!_exp||!m_Data->m_CurrentContext) reInitClient();
     try {
-        StopDlg sdlg(m_SvnContext,0,0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
         if (_exp) {
-            m_Svnclient.doExport(svn::Path(fUrl),p,r,force);
+            m_Data->m_Svnclient.doExport(svn::Path(fUrl),p,r,force);
         } else {
-            m_Svnclient.checkout(fUrl,p,r,force);
+            m_Data->m_Svnclient.checkout(fUrl,p,r,force);
         }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
@@ -838,7 +884,7 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         return;
     }
     if (openIt) {
-        if (!_exp) m_ParentList->openURL(tPath,true);
+        if (!_exp) m_Data->m_ParentList->openURL(tPath,true);
         else kapp->invokeBrowser(tPath);
     }
     EMIT_FINISHED;
@@ -846,16 +892,16 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
 
 void SvnActions::slotRevert()
 {
-    if (!m_ParentList||!m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isLocal()) return;
     QPtrList<SvnItem> lst;
-    m_ParentList->SelectionList(&lst);
+    m_Data->m_ParentList->SelectionList(&lst);
     QStringList displist;
     SvnItemListIterator liter(lst);
     SvnItem*cur;
     if (lst.count()>0) {
         while ((cur=liter.current())!=0){
             if (!cur->isVersioned()) {
-                KMessageBox::error(m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
+                KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is not versioned - break.</center>")
                     .arg(cur->fullName()));
                 return;
             }
@@ -863,7 +909,7 @@ void SvnActions::slotRevert()
             ++liter;
         }
     } else {
-        displist.push_back(m_ParentList->baseUri());
+        displist.push_back(m_Data->m_ParentList->baseUri());
     }
     slotRevertItems(displist);
     liter.toFirst();
@@ -876,7 +922,7 @@ void SvnActions::slotRevert()
 
 void SvnActions::slotRevertItems(const QStringList&displist)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     if (displist.count()==0) {
         return;
     }
@@ -884,7 +930,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
                 i18n("Revert entries"),
                 KDialogBase::Yes | KDialogBase::No,
                 KDialogBase::No, KDialogBase::No,
-                m_ParentList->realWidget(),"warningRevert",true,true);
+                m_Data->m_ParentList->realWidget(),"warningRevert",true,true);
 
     bool checkboxres = false;
 
@@ -903,20 +949,30 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     QString ex;
 
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Revert"),i18n("Reverting items"));
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Revert"),i18n("Reverting items"));
         svn::Targets target(items);
-        m_Svnclient.revert(target,checkboxres);
+        m_Data->m_Svnclient.revert(target,checkboxres);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
         return;
+    }
+    // remove them from cache
+    svn::StatusEntries::iterator it;
+    for (unsigned int j = 0; j<items.count();++j) {
+        for (it = m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
+            if ( (*it).path()==items[j].path() ) {
+                m_Data->m_Cache.erase(it);
+                break;
+            }
+        }
     }
     EMIT_FINISHED;
 }
 
 void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     QString fUrl = rUrl;
     QString ex;
     while (fUrl.endsWith("/")) {
@@ -924,8 +980,8 @@ void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     }
     svn::Path p(tPath);
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Switch url"),i18n("Switching url"));
-        m_Svnclient.doSwitch(p,fUrl,r,rec);
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Switch url"),i18n("Switching url"));
+        m_Data->m_Svnclient.doSwitch(p,fUrl,r,rec);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -936,11 +992,11 @@ void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
 
 void SvnActions::slotSwitch()
 {
-    if (!m_CurrentContext) return;
-    if (!m_ParentList||!m_ParentList->isLocal()) return;
+    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isLocal()) return;
 
     QPtrList<SvnItem> lst;
-    m_ParentList->SelectionList(&lst);
+    m_Data->m_ParentList->SelectionList(&lst);
 
     if (lst.count()>1) {
         KMessageBox::error(0,i18n("Can only switch one item at time"));
@@ -948,10 +1004,10 @@ void SvnActions::slotSwitch()
     }
     SvnItem*k;
 
-    k = m_ParentList->SelectedOrMain();
+    k = m_Data->m_ParentList->SelectedOrMain();
 #if 0
     if (lst->count()==0) {
-        k=static_cast<FileListViewItem*>(m_ParentList->firstChild());
+        k=static_cast<FileListViewItem*>(m_Data->m_ParentList->firstChild());
     } else {
         k = lst->at(0);
     }
@@ -985,10 +1041,10 @@ void SvnActions::slotSwitch()
 
 void SvnActions::slotCleanup(const QString&path)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Cleanup"),i18n("Cleaning up folder"));
-        m_Svnclient.cleanup(svn::Path(path));
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Cleanup"),i18n("Cleaning up folder"));
+        m_Data->m_Svnclient.cleanup(svn::Path(path));
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -997,10 +1053,10 @@ void SvnActions::slotCleanup(const QString&path)
 
 void SvnActions::slotResolved(const QString&path)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Resolve"),i18n("Marking resolved"));
-        m_Svnclient.resolved(svn::Path(path),true);
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Resolve"),i18n("Marking resolved"));
+        m_Data->m_Svnclient.resolved(svn::Path(path),true);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1009,10 +1065,10 @@ void SvnActions::slotResolved(const QString&path)
 
 void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Import"),i18n("Importing items"));
-        m_Svnclient.import(svn::Path(path),target,message,rec);
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Import"),i18n("Importing items"));
+        m_Data->m_Svnclient.import(svn::Path(path),target,message,rec);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1022,9 +1078,9 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
                     const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     try {
-        m_Svnclient.merge(svn::Path(_entry),
+        m_Data->m_Svnclient.merge(svn::Path(_entry),
             rev1,
             svn::Path(_entry),
             rev2,
@@ -1041,14 +1097,14 @@ void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&r
  */
 void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool force)
 {
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     try {
-        StopDlg sdlg(m_SvnContext,0,0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         if (move) {
-            m_Svnclient.move(svn::Path(Old),svn::Revision::HEAD,
+            m_Data->m_Svnclient.move(svn::Path(Old),svn::Revision::HEAD,
                 svn::Path(New),force);
         } else {
-            m_Svnclient.copy(svn::Path(Old),svn::Revision::HEAD,
+            m_Data->m_Svnclient.copy(svn::Path(Old),svn::Revision::HEAD,
                 svn::Path(New));
         }
     } catch (svn::ClientException e) {
@@ -1068,9 +1124,9 @@ void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit
     for (unsigned int i = 0; i<what.count();++i) {
         targets.push_back(svn::Path((*(what.at(i)))));
     }
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     try {
-        m_Svnclient.lock(svn::Targets(targets),_msg,breakit);
+        m_Data->m_Svnclient.lock(svn::Targets(targets),_msg,breakit);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1084,13 +1140,13 @@ void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit
 void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 {
     QValueList<svn::Path> targets;
-    if (!m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return;
     for (unsigned int i = 0; i<what.count();++i) {
         targets.push_back(svn::Path((*(what.at(i)))));
     }
 
     try {
-        m_Svnclient.unlock(svn::Targets(targets),breakit);
+        m_Data->m_Svnclient.unlock(svn::Targets(targets),breakit);
     } catch (svn::ClientException e) {
         emit clientException(QString::fromUtf8(e.message()));
         return;
@@ -1105,12 +1161,15 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool re
 {
     KConfigGroup cs(kdesvnPart::config(), "subversion");
     bool display_ignores = cs.readBoolEntry("display_ignored_files",true);
-    //bool display_unknown = cs.readBoolEntry("display_unknown_files",true);
+    return makeStatus(what,dlist,rec,all,display_ignores);
+}
 
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec,bool all,bool display_ignores)
+{
     QString ex;
     try {
         //                              rec all  up     noign
-        dlist = m_Svnclient.status(what,rec,all,false,display_ignores);
+        dlist = m_Data->m_Svnclient.status(what,rec,all,false,display_ignores);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());
@@ -1120,6 +1179,25 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool re
     return true;
 }
 
+bool SvnActions::createUpdatesCache(const QString&what)
+{
+    m_Data->m_Cache.clear();
+    kdDebug()<<"Create cache for " << what << endl;
+    KConfigGroup cs(kdesvnPart::config(), "display_settings");
+    if (cs.readBoolEntry("display_overlays",true)) {
+        return makeStatus(what,m_Data->m_Cache,true,false,false);
+    }
+    return false;
+}
+
+void SvnActions::checkUpdatesCached(const QString&path,svn::StatusEntries&dlist)
+{
+    for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
+        if (m_Data->m_Cache[i].path().startsWith(path)) {
+            dlist.push_back(m_Data->m_Cache[i]);
+        }
+    }
+}
 
 /*!
     \fn SvnActions::makeIgnoreEntry(const QString&which)
@@ -1135,7 +1213,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     svn::Revision r(svn_opt_revision_unspecified);
     svn::PathPropertiesMapList pm;
     try {
-        pm = m_Svnclient.propget("svn:ignore",p,r);
+        pm = m_Data->m_Svnclient.propget("svn:ignore",p,r);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());
@@ -1166,7 +1244,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     if (result) {
 
         try {
-            m_Svnclient.propset("svn:ignore",data,p,r);
+            m_Data->m_Svnclient.propset("svn:ignore",data,p,r);
         } catch (svn::ClientException e) {
             //Message box!
             ex = QString::fromUtf8(e.message());

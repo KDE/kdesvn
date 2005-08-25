@@ -275,6 +275,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     if (!noReinit) m_SvnWrapper->reInitClient();
     m_baseUri = url.url();
     m_isLocal = false;
+    /// @todo check if we opend a local repository!
     if (url.isLocalFile()) {
         m_baseUri = url.path();
         m_isLocal = true;
@@ -286,17 +287,15 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         SshAgent ssh;
         ssh.addSshIdentities();
     }
-#if 0
+
     if (m_isLocal) {
-        m_DirNotify->setBase(m_baseUri);
-    } else {
-        m_DirNotify->stop();
+        m_SvnWrapper->createUpdatesCache(m_baseUri);
     }
-#endif
     bool result = checkDirs(m_baseUri,0);
     if (result && m_isLocal) {
         if (firstChild()) firstChild()->setOpen(true);
     }
+    /// @todo setup a cache of (recursive) changed items
     if (!result) {
         m_baseUri="";
         m_isLocal=false;
@@ -715,6 +714,9 @@ void kdesvnfilelist::refreshCurrentTree()
     if (!item) return;
     kapp->processEvents();
     setUpdatesEnabled(false);
+    if (m_isLocal) {
+        m_SvnWrapper->createUpdatesCache(m_baseUri);
+    }
     if (item->fullName()==baseUri()) {
         item->refreshMe();
         if (!item->isValid()) {

@@ -20,12 +20,13 @@
 #ifndef SVNACTIONS_H
 #define SVNACTIONS_H
 
-#include <qobject.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 #include "helpers/smart_pointer.h"
+
+#include <qobject.h>
+#include <qdatetime.h>
+#include <qstringlist.h>
 
 class ItemDisplay;
 class SvnItem;
@@ -34,6 +35,7 @@ class KDialogBase;
 class QDialog;
 class CContextListener;
 class KProcess;
+class SvnActionsData;
 
 namespace svn {
     class Context;
@@ -54,7 +56,7 @@ public:
     ~SvnActions();
     void reInitClient();
     //svn::Client&svnClient(){return m_Svnclient;}
-    svn::Client* svnclient(){return &m_Svnclient;}
+    svn::Client* svnclient();
     void prepareUpdate(bool ask);
     template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog");
     void makeCat(svn::Revision start, const QString&what,const QString&disp);
@@ -62,7 +64,12 @@ public:
     void makeDelete(const QValueList<svn::Path>&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
+
     bool makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec=false,bool all=true);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec,bool all,bool display_ignored);
+    bool createUpdatesCache(const QString&base);
+    void checkUpdatesCached(const QString&path,svn::StatusEntries&dlist);
+
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
@@ -72,11 +79,7 @@ public:
     QString makeMkdir(const QString&);
 
 protected:
-    ItemDisplay* m_ParentList;
-
-    smart_pointer<CContextListener> m_SvnContext;
-    svn::Context* m_CurrentContext;
-    svn::Client m_Svnclient;
+    smart_pointer<SvnActionsData> m_Data;
 
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);

@@ -183,7 +183,8 @@ void kdesvnPart::setupActions()
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
-    KStdAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
+    KAction * t = KStdAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
+    t->setText(i18n("&Configure %1...").arg("Kdesvn"));
     (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
     if (QString(kapp->instanceName())!=QString("kdesvn")) {
         (void)new KAction(i18n("Kdesvn &Handbook"), "help", 0, this, SLOT(appHelpActivated()), actionCollection(), "help_kdesvn");

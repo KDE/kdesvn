@@ -65,6 +65,7 @@ public:
     const svn::Status&maindir()const{return m_mainEntry;}
 
     KActionCollection*filesActions();
+    bool refreshItem(FileListViewItem*);
 
 protected:
     svn::Status m_mainEntry;
@@ -123,6 +124,7 @@ private:
     void copy_move(bool move);
 
 protected slots:
+    virtual void slotSelectBrowsingRevision();
     virtual void slotItemClicked(QListViewItem*);
     virtual void slotRightButton(QListViewItem *, const QPoint &, int);
     virtual void slotSelectionChanged();

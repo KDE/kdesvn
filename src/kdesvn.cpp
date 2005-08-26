@@ -233,6 +233,7 @@ void kdesvn::fileNew()
 void kdesvn::fileOpen()
 {
     KURL url = UrlDlg::getURL(this);
+    kdDebug()<<"kdesvn::fileOpen(): Url to open " << url.url()<<endl;
     if (!url.isEmpty())
         m_part->openURL(url);
 }

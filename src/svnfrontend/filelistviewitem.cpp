@@ -79,6 +79,13 @@ FileListViewItem::~FileListViewItem()
 {
 }
 
+void FileListViewItem::setStat(const svn::Status&stat)
+{
+    SvnItem::setStat(stat);
+    init();
+}
+
+#if 0
 void FileListViewItem::refreshMe()
 {
     try {
@@ -90,13 +97,16 @@ void FileListViewItem::refreshMe()
     }
     init();
 }
+#endif
 
 void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool depsonly)
 {
     FileListViewItem*it;
 
     if (!depsonly) {
-        refreshMe();
+        if (!m_Ksvnfilelist->refreshItem(this)) {
+            return;
+        }
     }
     if (!isValid()) {
         return;

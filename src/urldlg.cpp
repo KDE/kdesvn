@@ -121,7 +121,9 @@ void UrlDlg::slotClear()
 KURL UrlDlg::selectedURL()
 {
     if ( result() == QDialog::Accepted ) {
-        return KURL::fromPathOrURL( urlRequester_->url() );
+        KURL uri = urlRequester_->url();
+        return uri;
+        //return KURL::fromPathOrURL( urlRequester_->url() );
     } else {
         return KURL();
     }

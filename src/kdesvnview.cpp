@@ -39,6 +39,7 @@
 #include <krun.h>
 #include <klocale.h>
 #include <ktextbrowser.h>
+#include <kdebug.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name)
     : QWidget(parent,name),m_Collection(aCollection),
@@ -88,11 +89,20 @@ bool kdesvnView::openURL(QString url)
 bool kdesvnView::openURL(const KURL& url)
 {
     m_currentURL = "";
+    KURL _url;
     bool open = false;
-    if (url.isLocalFile()) {
-        QFileInfo f(url.path());
+    _url = url;
+    if (_url.isLocalFile()) {
+        QString query = _url.query();
+        _url.setQuery("");
+        QString _f = _url.path();
+        QFileInfo f(_f);
         if (!f.isDir()) {
+            m_currentURL="";
             return open;
+        }
+        if (query.length()>1) {
+            _url.setQuery(query);
         }
     } else {
         QString prot = url.protocol();

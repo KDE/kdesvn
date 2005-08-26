@@ -1039,8 +1039,8 @@ void SvnActions::slotSwitch()
         delete dlg;
         if (!done) return;
     }
-    k->refreshMe();
-//    emit reinitItem(k);
+//    k->refreshMe();
+    emit reinitItem(k);
 }
 
 void SvnActions::slotCleanup(const QString&path)
@@ -1161,19 +1161,19 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 /*!
     \fn SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)
  */
-bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec,bool all)
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all)
 {
     KConfigGroup cs(kdesvnPart::config(), "subversion");
     bool display_ignores = cs.readBoolEntry("display_ignored_files",true);
-    return makeStatus(what,dlist,rec,all,display_ignores);
+    return makeStatus(what,dlist,where,rec,all,display_ignores);
 }
 
-bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec,bool all,bool display_ignores)
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all,bool display_ignores)
 {
     QString ex;
     try {
         //                                      rec all  up    noign
-        dlist = m_Data->m_Svnclient.status(what,rec,all,false,display_ignores);
+        dlist = m_Data->m_Svnclient.status(what,rec,all,false,display_ignores,where);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());
@@ -1188,8 +1188,9 @@ bool SvnActions::createUpdatesCache(const QString&what)
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
     KConfigGroup cs(kdesvnPart::config(), "display_settings");
+    svn::Revision r = svn::Revision::HEAD;
     if (cs.readBoolEntry("display_overlays",true)) {
-        return makeStatus(what,m_Data->m_Cache,true,false,false);
+        return makeStatus(what,m_Data->m_Cache,r,true,false,false);
     }
     return false;
 }

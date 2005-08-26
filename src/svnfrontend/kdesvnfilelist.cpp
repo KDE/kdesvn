@@ -64,6 +64,7 @@ public:
     QListViewItem *dragOverItem;
     QPoint dragOverPoint;
     QRect mOldDropHighlighter;
+    svn::Revision m_remoteRevision;
 };
 
 kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const char *name)
@@ -196,6 +197,7 @@ void kdesvnfilelist::setupActions()
         m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
     m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"fileexport",KShortcut(),
         m_SvnWrapper,SLOT(slotExportCurrent()),m_filesAction,"make_svn_export_current");
+    new KAction(i18n("Select browse revision"),KShortcut(),this,SLOT(slotSelectBrowsingRevision()),m_filesAction,"switch_browse_revision");
 
     /* independe actions */
     m_CheckoutAction = new KAction(i18n("Checkout a repository"),"bottom",
@@ -279,7 +281,9 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     if (!noReinit) m_SvnWrapper->reInitClient();
     m_baseUri = url.url();
     m_isLocal = false;
-    /// @todo check if we opend a local repository!
+    m_pList->m_remoteRevision=svn::Revision::HEAD;
+
+    QString query = url.query();
     if (url.isLocalFile()) {
         m_baseUri = url.path();
         if (m_SvnWrapper->isLocalWorkingCopy(url)) {
@@ -291,7 +295,13 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
             m_baseUri="file://"+m_baseUri;
         }
     }
-    kdDebug()<<"Open url now" << endl;
+    if (query.length()>1) {
+        QMap<QString,QString> q = url.queryItems();
+        if (q.find("rev")!=q.end()) {
+            QString v = q["rev"];
+            m_pList->m_remoteRevision=v.toInt();
+        }
+    }
     /* otherwise subversion lib asserts! */
     while (m_baseUri.endsWith("/")) {
         m_baseUri.truncate(m_baseUri.length()-1);
@@ -338,7 +348,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         what.truncate(what.length()-1);
     }
 
-    if (!m_SvnWrapper->makeStatus(what,dlist)) {
+    if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
         return false;
     }
 
@@ -455,6 +465,7 @@ void kdesvnfilelist::slotReinitItem(SvnItem*item)
 {
     if (!item) return;
     FileListViewItem*k = item->fItem();
+    refreshItem(k);
     if (k->isDir()) {
         k->removeChilds();
         m_Dirsread[k->fullName()]=false;;
@@ -527,6 +538,10 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(isopen && !dir && single);
     }
+    temp = filesActions()->action("switch_browse_revision");
+    if (temp) {
+        temp->setEnabled(!isLocal()&&isopen);
+    }
 
 }
 
@@ -597,7 +612,7 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
         fitem.run();
     } else {
-        QByteArray content = m_SvnWrapper->makeGet(svn::Revision::HEAD,fki->fullName());
+        QByteArray content = m_SvnWrapper->makeGet(m_pList->m_remoteRevision,fki->fullName());
         if (content.size()==0) return;
         new RunTempfile(content);
     }
@@ -736,8 +751,7 @@ void kdesvnfilelist::refreshCurrentTree()
         m_SvnWrapper->createUpdatesCache(m_baseUri);
     }
     if (item->fullName()==baseUri()) {
-        item->refreshMe();
-        if (!item->isValid()) {
+        if (!refreshItem(item)) {
             delete item;
             return;
         } else {
@@ -786,7 +800,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent)
     QString what = (_parent!=0?_parent->fullName():baseUri());
     svn::StatusEntries dlist;
 
-    if (!m_SvnWrapper->makeStatus(what,dlist)) {
+    if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
         return;
     }
 
@@ -1009,7 +1023,7 @@ void kdesvnfilelist::slotMergeRevisions()
         return;
     }
     m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,irelated,force,dry);
-    which->refreshMe();
+    refreshItem(which);
     refreshRecursive(which);
 }
 
@@ -1055,6 +1069,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
 KdesvnFileListPrivate::KdesvnFileListPrivate()
     : dragOverItem(0),dragOverPoint(QPoint(0,0)),mOldDropHighlighter()
 {
+    m_remoteRevision = svn::Revision::HEAD;
 }
 
 
@@ -1380,6 +1395,27 @@ void kdesvnfilelist::slotDiffRevisions()
 
 }
 
+void kdesvnfilelist::slotSelectBrowsingRevision()
+{
+    if (isLocal()) return;
+    Rangeinput_impl*rdlg;
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    if (!dlg) {
+        return;
+    }
+    rdlg->setStartOnly(true);
+    if (dlg->exec()==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
+        m_pList->m_remoteRevision= r.first;
+        if (childCount()==0) {
+            checkDirs(m_baseUri,0);
+        } else {
+            refreshCurrentTree();
+        }
+    }
+    dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
+    delete dlg;
+}
 
 /*!
     \fn kdesvnfilelist::slotRevisionCat()
@@ -1400,4 +1436,22 @@ void kdesvnfilelist::slotRevisionCat()
     }
     dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
     delete dlg;
+}
+
+
+/*!
+    \fn kdesvnfilelist::refreshItem(FileListViewItem*)
+ */
+bool kdesvnfilelist::refreshItem(FileListViewItem*item)
+{
+    if (!item) {
+        return false;
+    }
+    try {
+        item->setStat(svnclient()->singleStatus(item->fullName(),m_pList->m_remoteRevision));
+    } catch (svn::ClientException e) {
+        item->setStat(svn::Status());
+        return false;
+    }
+    return true;
 }

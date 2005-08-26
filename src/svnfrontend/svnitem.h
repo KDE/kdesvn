@@ -54,16 +54,15 @@ public:
     virtual bool isLocked()const;
     virtual QString lockOwner()const;
     virtual QString getParentDir()const=0;
-    virtual void refreshMe()=0;
     virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
 
     QPixmap getPixmap(int size,bool overlay=true);
 
     FileListViewItem*fItem(){return 0;}
+    virtual void setStat(const svn::Status&);
 
 protected:
     smart_pointer<SvnItem_p> p_Item;
-    void setStat(const svn::Status&);
     virtual SvnActions*getWrapper() = 0;
 
 };

@@ -67,8 +67,8 @@ public:
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
 
-    bool makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec=false,bool all=true);
-    bool makeStatus(const QString&what, svn::StatusEntries&dlist,bool rec,bool all,bool display_ignored);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec=false,bool all=true);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec,bool all,bool display_ignored);
     bool createUpdatesCache(const QString&base);
     void checkUpdatesCached(const QString&path,svn::StatusEntries&dlist);
 

@@ -45,7 +45,11 @@ public:
 
     virtual void updateStatus(const svn::Status&s);
     virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false);
+
+#if 0
     virtual void refreshMe();
+#endif
+
     void removeChilds();
     bool isParent(QListViewItem*which);
 
@@ -53,6 +57,7 @@ public:
 
     virtual QString getParentDir()const;
     FileListViewItem*fItem(){return this;}
+    virtual void setStat(const svn::Status&);
 
 protected:
     short int sortChar;

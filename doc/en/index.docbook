@@ -162,7 +162,7 @@ patent issues. -->
 
 
 <sect1 id="kdesvn-features">
-<title>More &kdesvn; features</title>
+<title>&kdesvn; features</title>
 <para>
 </para>
 <!--
@@ -182,6 +182,15 @@ The Squiggle Tool <guiicon><inlinemediaobject>
 the &kdesvn; main window. It's not a bug, it's a feature!
 </para>
 -->
+</sect1>
+<sect1>
+<title>What &kdesvn; is not</title>
+<para>
+&kdesvn; has NOT the capability to modify on subversion servers. This is not 'cause it is not implemented, this is 'cause except on special configured webserver based repositories this feature is not part of subversion itself. Subversion is NOT a transfer protocol like ftp or sftp. So you must always modify your data in working copies. Importing new files or folders into a repository with drag and drop is a different idea.
+</para>
+<para>
+
+</para>
 </sect1>
 </chapter>
 

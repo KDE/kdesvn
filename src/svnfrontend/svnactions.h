@@ -68,9 +68,9 @@ public:
     void makeUnlock(const QStringList&,bool);
 
     bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec=false,bool all=true);
-    bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec,bool all,bool display_ignored);
-    bool createUpdatesCache(const QString&base);
-    void checkUpdatesCached(const QString&path,svn::StatusEntries&dlist);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec,bool all,bool display_ignored,bool updates=false);
+    bool createModifiedCache(const QString&base);
+    void checkModifiedCache(const QString&path,svn::StatusEntries&dlist);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k);
@@ -80,6 +80,9 @@ public:
     void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
     QString makeMkdir(const QString&);
     bool isLocalWorkingCopy(const KURL&url);
+    bool createUpdateCache(const QString&what);
+    void checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const;
+    bool isUpdated(const QString&path)const;
 
 protected:
     smart_pointer<SvnActionsData> m_Data;

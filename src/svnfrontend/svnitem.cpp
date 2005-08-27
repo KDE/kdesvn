@@ -157,7 +157,9 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         SvnActions*wrap = getWrapper();
         bool mod = false;
         QPixmap p2 = QPixmap();
-        if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
+        if (wrap->isUpdated(p_Item->m_Stat.path())) {
+            mod = true;
+        } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
             p2 = kdesvnPart::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
             p2 = kdesvnPart::iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
@@ -165,7 +167,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             mod = true;
         } else if (isDir()&&wrap) {
             svn::StatusEntries dlist;
-            wrap->checkUpdatesCached(fullName(),dlist);
+            wrap->checkModifiedCache(fullName(),dlist);
             svn::StatusEntries::const_iterator it;
 
             for (it=dlist.begin();it!=dlist.end();++it) {
@@ -219,6 +221,9 @@ bool SvnItem::isIgnored()const
 QString SvnItem::infoText()const
 {
     QString info_text = "";
+    if (getWrapper()->isUpdated(p_Item->m_Stat.path())) {
+        info_text = i18n("Needs update");
+    } else {
     switch(p_Item->m_Stat.textStatus ()) {
     case svn_wc_status_modified:
         info_text = i18n("Locally modified");
@@ -261,6 +266,7 @@ QString SvnItem::infoText()const
         default:
             break;
         }
+    }
     }
     return info_text;
 }

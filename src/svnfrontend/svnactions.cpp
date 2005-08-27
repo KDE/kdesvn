@@ -82,6 +82,7 @@ public:
     svn::Client m_Svnclient;
 
     svn::StatusEntries m_Cache;
+    svn::StatusEntries m_UpdateCache;
 };
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
@@ -670,6 +671,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
         emit clientException(ex);
         return;
     }
+    /// @todo remove items from update needed cache
     EMIT_REFRESH;
     EMIT_FINISHED;
 }
@@ -1168,12 +1170,12 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
     return makeStatus(what,dlist,where,rec,all,display_ignores);
 }
 
-bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all,bool display_ignores)
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all,bool display_ignores,bool updates)
 {
     QString ex;
     try {
         //                                      rec all  up    noign
-        dlist = m_Data->m_Svnclient.status(what,rec,all,false,display_ignores,where);
+        dlist = m_Data->m_Svnclient.status(what,rec,all,updates,display_ignores,where);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());
@@ -1183,7 +1185,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
     return true;
 }
 
-bool SvnActions::createUpdatesCache(const QString&what)
+bool SvnActions::createModifiedCache(const QString&what)
 {
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
@@ -1195,13 +1197,52 @@ bool SvnActions::createUpdatesCache(const QString&what)
     return false;
 }
 
-void SvnActions::checkUpdatesCached(const QString&path,svn::StatusEntries&dlist)
+void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
     for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
         if (m_Data->m_Cache[i].path().startsWith(path)) {
             dlist.push_back(m_Data->m_Cache[i]);
         }
     }
+}
+
+/*!
+    \fn SvnActions::createUpdateCache(const QString&what)
+ */
+bool SvnActions::createUpdateCache(const QString&what)
+{
+    m_Data->m_UpdateCache.clear();
+    kdDebug()<<"Create updatecache for " << what << endl;
+    svn::Revision r = svn::Revision::HEAD;
+    svn::StatusEntries dlist;
+    if (!makeStatus(what,dlist,r,true,false,false,true)) {
+        return false;
+    }
+    for (unsigned int i = 0; i < dlist.count();++i) {
+        if (dlist[i].reposTextStatus()!=svn_wc_status_none||dlist[i].reposPropStatus()!=svn_wc_status_none) {
+            m_Data->m_UpdateCache.push_back(dlist[i]);
+        }
+    }
+    return true;
+}
+
+void SvnActions::checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const
+{
+    for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
+        if (m_Data->m_UpdateCache[i].path().startsWith(path)) {
+            dlist.push_back(m_Data->m_UpdateCache[i]);
+        }
+    }
+}
+
+bool SvnActions::isUpdated(const QString&path)const
+{
+    for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
+        if (m_Data->m_UpdateCache[i].path()==path) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*!

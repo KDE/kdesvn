@@ -63,7 +63,7 @@ public:
 
 protected:
     smart_pointer<SvnItem_p> p_Item;
-    virtual SvnActions*getWrapper() = 0;
+    virtual SvnActions*getWrapper()const = 0;
 
 };
 

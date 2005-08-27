@@ -135,13 +135,15 @@ void kdesvnfilelist::setupActions()
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
     m_CopyAction = new KAction(i18n("Copy"),"editcopy",
         KShortcut(Key_F5),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
+    new KAction(i18n("Check for updates"),KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
 
     /* 2. actions only on files */
     m_BlameAction = new KAction("&Blame","flag",KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_BlameRangeAction = new KAction("Blame range","flag",KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_CatAction = new KAction(i18n("Cat head"),"contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+    m_CatAction = new KAction(i18n("Cat head"),
+        "contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
     tmp_action = new KAction(i18n("Cat revision..."),"contents",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
@@ -312,7 +314,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     }
 
     if (m_isLocal) {
-        m_SvnWrapper->createUpdatesCache(m_baseUri);
+        m_SvnWrapper->createModifiedCache(m_baseUri);
     }
     bool result = checkDirs(m_baseUri,0);
     if (result && m_isLocal) {
@@ -542,7 +544,10 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(!isLocal()&&isopen);
     }
-
+    temp = filesActions()->action("make_check_updates");
+    if (temp) {
+        temp->setEnabled(isLocal()&&isopen);
+    }
 }
 
 void kdesvnfilelist::slotSelectionChanged()
@@ -748,7 +753,7 @@ void kdesvnfilelist::refreshCurrentTree()
     kapp->processEvents();
     setUpdatesEnabled(false);
     if (m_isLocal) {
-        m_SvnWrapper->createUpdatesCache(m_baseUri);
+        m_SvnWrapper->createModifiedCache(m_baseUri);
     }
     if (item->fullName()==baseUri()) {
         if (!refreshItem(item)) {
@@ -1106,7 +1111,7 @@ void kdesvnfilelist::slotCat()
 {
     FileListViewItem*k = singleSelected();
     if (!k) return;
-    m_SvnWrapper->makeCat(svn::Revision::HEAD, k->fullName(),k->text(0));
+    m_SvnWrapper->makeCat(isLocal()?svn::Revision::HEAD:m_pList->m_remoteRevision, k->fullName(),k->text(0));
 }
 
 
@@ -1454,4 +1459,37 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
         return false;
     }
     return true;
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotCheckUpdates()
+ */
+void kdesvnfilelist::slotCheckUpdates()
+{
+    m_SvnWrapper->createUpdateCache(baseUri());
+    reinitItems(0);
+}
+
+
+/*!
+    \fn kdesvnfilelist::reinitItems(FileListViewItem*_item = 0)
+ */
+void kdesvnfilelist::reinitItems(FileListViewItem*_item)
+{
+    FileListViewItem*item;
+    if (_item) {
+        item = _item;
+    } else {
+        item = static_cast<FileListViewItem*>(firstChild());
+    }
+    if (!item) {
+        return;
+    }
+    item->init();
+    item = static_cast<FileListViewItem*>(item->firstChild());
+    while(item) {
+        reinitItems(item);
+        item = static_cast<FileListViewItem*>(item->nextSibling());
+    }
 }

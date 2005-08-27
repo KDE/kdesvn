@@ -36,6 +36,7 @@ class SvnActions;
 */
 class FileListViewItem : public KListViewItem,public SvnItem
 {
+    friend class kdesvnfilelist;
 public:
     FileListViewItem(kdesvnfilelist*,const svn::Status&);
     FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
@@ -67,7 +68,7 @@ protected:
 
     void makePixmap();
     void init();
-    virtual SvnActions*getWrapper();
+    virtual SvnActions*getWrapper()const;
     SvnActions*m_SvnWrapper;
 };
 

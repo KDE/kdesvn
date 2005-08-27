@@ -62,7 +62,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_pare
     init();
 }
 
-SvnActions*FileListViewItem::getWrapper()
+SvnActions*FileListViewItem::getWrapper()const
 {
     return m_SvnWrapper;
 }
@@ -111,7 +111,7 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool 
     if (!isValid()) {
         return;
     }
-    it = static_cast<FileListViewItem*>(parent());;
+    it = static_cast<FileListViewItem*>(parent());
     if (!childs) {
         if (it && (!exclude || exclude->find(it)==-1)) {
             it->refreshStatus(false,exclude);

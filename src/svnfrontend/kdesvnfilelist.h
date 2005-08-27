@@ -117,6 +117,7 @@ protected:
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
     void dispDummy();
+    void reinitItems(FileListViewItem*_item = 0);
 private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
@@ -176,6 +177,8 @@ protected slots:
     virtual void slotDiffRevisions();
 protected slots:
     virtual void slotRevisionCat();
+protected slots:
+    virtual void slotCheckUpdates();
 };
 
 #endif

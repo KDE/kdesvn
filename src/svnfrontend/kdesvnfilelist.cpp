@@ -1173,7 +1173,7 @@ void kdesvnfilelist::slotDelete()
         }
         displist.append(cur->fullName());
     }
-    int answer = KMessageBox::questionYesNoList(this,i18n("Really delete these entries?"),displist,"Delete from repository");
+    int answer = KMessageBox::questionYesNoList(this,i18n("Really delete these entries?"),displist,i18n("Delete from repository"));
     if (answer!=KMessageBox::Yes) {
         return;
     }

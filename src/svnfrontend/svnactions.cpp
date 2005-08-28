@@ -671,7 +671,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
         emit clientException(ex);
         return;
     }
-    /// @todo remove items from update needed cache
+    removeFromUpdateCache(what,!recurse);
     EMIT_REFRESH;
     EMIT_FINISHED;
 }
@@ -1211,7 +1211,7 @@ void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
  */
 bool SvnActions::createUpdateCache(const QString&what)
 {
-    m_Data->m_UpdateCache.clear();
+    clearUpdateCache();
     kdDebug()<<"Create updatecache for " << what << endl;
     svn::Revision r = svn::Revision::HEAD;
     svn::StatusEntries dlist;
@@ -1235,6 +1235,26 @@ void SvnActions::checkUpdateCache(const QString&path,svn::StatusEntries&dlist)co
     }
 }
 
+void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
+{
+    svn::StatusEntries::iterator it;
+    for (unsigned int i = 0; i < what.count(); ++i) {
+        for (it = m_Data->m_UpdateCache.begin();it!=m_Data->m_UpdateCache.end();++it) {
+            if (exact_only) {
+                if ( (*it).path()==what[i]) {
+                    it = m_Data->m_UpdateCache.erase(it);
+                }
+                break;
+            } else {
+                if ( (*it).path().startsWith(what[i]) ) {
+                    it = m_Data->m_UpdateCache.erase(it);
+                    --it;
+                }
+            }
+        }
+    }
+}
+
 bool SvnActions::isUpdated(const QString&path)const
 {
     for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
@@ -1243,6 +1263,11 @@ bool SvnActions::isUpdated(const QString&path)const
         }
     }
     return false;
+}
+
+void SvnActions::clearUpdateCache()
+{
+    m_Data->m_UpdateCache.clear();
 }
 
 /*!

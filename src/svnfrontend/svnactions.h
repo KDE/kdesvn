@@ -83,6 +83,8 @@ public:
     bool createUpdateCache(const QString&what);
     void checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const;
     bool isUpdated(const QString&path)const;
+    void clearUpdateCache();
+    void removeFromUpdateCache(const QStringList&what,bool exact_only);
 
 protected:
     smart_pointer<SvnActionsData> m_Data;

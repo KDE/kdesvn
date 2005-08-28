@@ -128,65 +128,108 @@ You may send bugreports and featurewishes on <ulink url="http://www.alwins-world
 http://www.alwins-world.de/programs/mantis.
 </ulink>
 </para>
+
+<sect1 id="kdesvn-terms">
+<title>Terms</title>
+<para>
+If you're familiar with revision control systems you may skip that - or read and correct the author ;)
+</para>
+<para>
+<variablelist>
+<varlistentry>
+<term>Repository</term>
+<listitem><para>
+Central store of data. That may be a database or a flat filesystem. Without special clients you're not able to read
+data in it. For Subversion repositories &kdesvn; is such a client.
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>Working copy</term>
+<listitem><para>
+A flat copy of a repository on local filesystem. In here you can browse via every normal filemanager, edit files and so on.
+RCS-information you may read with clients like &kdesvn;.
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>WebDav</term>
+<listitem><para>
+WebDav is a protocol which let you modify files on a remote webserver. Subversion is a special kind of WebDAV when repositories are accessed
+via webserver. In normal this is read-only. With special configures you may get a read-write enabled WebDAV which you may access via
+specialized browser. &kdesvn; is NOT a webdav-client, but Konqueror is via the &quot;webdav://&quot; protocol. But with &kdesvn; you
+may browse trough the versions of that repositories (via &quot;http://&quot;)
+</para></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
 </chapter>
 
 <chapter id="using-kdesvn">
 <title>Using &kdesvn;</title>
-
-<!-- This chapter should tell the user how to use your app. You should use as
-many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-your application. -->
-
-<para>
-
-<!-- Note that all graphics should be in .png format. Use no gifs because of
-patent issues. -->
-
-<!--
-<screenshot>
-<screeninfo>Here's a screenshot of &kdesvn;</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="screenshot.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="screenshot.eps" format="EPS"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Screenshot</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
--->
-</para>
-
-
 <sect1 id="kdesvn-features">
 <title>&kdesvn; features</title>
 <para>
+&kdesvn; understands following protocols for browsing repositories:
+<variablelist>
+
+<varlistentry>
+<term>http</term>
+<listitem><para>
+Standard webbrowser protocol.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>https</term>
+<listitem><para>
+Standard encrypted webbrowser protocol
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>http+svn</term>
+<listitem><para>
+Standard webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>https+svn</term>
+<listitem><para>
+Standard encrypted webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>svn</term>
+<listitem><para>
+Subversions own server protocol.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>svn+ssh</term>
+<listitem><para>
+Subversion over ssh. See <link linkend="faq">FAQ</link> for details
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>file</term>
+<listitem><para>
+Direct repository accesss. &kdesvn; checks if a given path is a repository or a working copy and opens it in the right mode. For subversion 
+<prompt>file:///dir</prompt> and <prompt>/dir</prompt> is not the same!
+</para></listitem>
+</varlistentry>
+</variablelist>
+
 </para>
-<!--
-<para>It slices! It dices! and it comes with a free toaster!</para>
-<para>
-The Squiggle Tool <guiicon><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.png" format="PNG"></imagedata>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.eps" format="EPS"></imagedata>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Squiggle</phrase>
-	  </textobject>
-</inlinemediaobject></guiicon> is used to draw squiggly lines all over
-the &kdesvn; main window. It's not a bug, it's a feature!
-</para>
--->
 </sect1>
+
 <sect1>
 <title>What &kdesvn; is not</title>
 <para>
-&kdesvn; has NOT the capability to modify on subversion servers. This is not 'cause it is not implemented, this is 'cause except on special configured webserver based repositories this feature is not part of subversion itself. Subversion is NOT a transfer protocol like ftp or sftp. So you must always modify your data in working copies. Importing new files or folders into a repository with drag and drop is a different idea.
+&kdesvn; has NOT the capability to modify direct on subversion repositories. This is not 'cause it is not implemented, this is 'cause except on special configured webserver based repositories this feature is not part of subversion itself. Subversion is NOT a transfer protocol like ftp or sftp. So you must always modify your data in working copies. Importing new files or folders into a repository with drag and drop is a different idea.
 </para>
 <para>
 
@@ -216,16 +259,9 @@ or menu bars. -->
 <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>
-<guimenuitem>Open working copy</guimenuitem>
+<guimenuitem>Open</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Opens a local working copy previous checked out</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><menuchoice>
-<guimenu>File</guimenu>
-<guimenuitem>Open remote repository</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Browse trough a repository not checked out to working copy</action></para></listitem>
+<listitem><para><action>Opens a local working copy previous checked out or a repository</action></para></listitem>
 </varlistentry>
 <varlistentry>
 <term>

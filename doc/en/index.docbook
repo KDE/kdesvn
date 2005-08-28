@@ -225,16 +225,69 @@ Direct repository accesss. &kdesvn; checks if a given path is a repository or a 
 
 </para>
 </sect1>
+<sect1 id="overlay-meaning">
+<title>Meaning of icon overlays</title>
+<para>
+Entries may marked with overlayed icons when not in &quot;normal&quot; state.
+<variablelist>
 
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
+<imagedata fileref="exclam.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>Esclam</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry or - if folder - an entry below was changed on local disc or this entry has an newer version on repository.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
+<imagedata fileref="svnadded.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>overlay added</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry is localy added to subversion but not yet committed.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
+<imagedata fileref="svndeleted.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>overlay deleted</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry is localy deleted from subversion but this isn't yet committed.
+</para></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect1>
+
+<!--
 <sect1>
 <title>What &kdesvn; is not</title>
 <para>
 &kdesvn; has NOT the capability to modify direct on subversion repositories. This is not 'cause it is not implemented, this is 'cause except on special configured webserver based repositories this feature is not part of subversion itself. Subversion is NOT a transfer protocol like ftp or sftp. So you must always modify your data in working copies. Importing new files or folders into a repository with drag and drop is a different idea.
 </para>
-<para>
-
-</para>
 </sect1>
+-->
 </chapter>
 
 <chapter id="commands">

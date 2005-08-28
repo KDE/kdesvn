@@ -101,10 +101,16 @@ bool kdesvnPart::openFile()
 
 bool kdesvnPart::openURL(const KURL&url)
 {
-    if (!url.isValid()||!closeURL()) {
+    KURL _url = url;
+    if (_url.protocol()=="https+svn") {
+        _url.setProtocol("https");
+    } else if (_url.protocol()=="http+svn") {
+        _url.setProtocol("http");
+    }
+    if (!_url.isValid()||!closeURL()) {
         return false;
     }
-    m_url = url;
+    m_url = _url;
     emit started(0);
     bool ret = m_view->openURL(m_url);
     if (ret) {

@@ -1,3 +1,12 @@
+version 0.6.0
+    * status display due overlayed icons
+    * config dialog
+    * open local repositories for browsing (file:///<path>), autodetect if local path is a working copy or a
+      repository
+    * select revision to browse for repositories
+    * fixed up some messages
+    * converted all internal stuff to QT/KDE classes
+
 version 0.5.3
     * italian translation by Luciano Montanaro
     * fixed up KPart integration (#0000019 and others)

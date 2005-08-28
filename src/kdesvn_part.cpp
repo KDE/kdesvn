@@ -34,9 +34,10 @@ static const char description[] =
         kdesvnPart_Prefs(KSharedConfig::Ptr config)
             : KConfigSkeleton(config)
         {
-            setCurrentGroup("display_settings");
+            setCurrentGroup("general_items");
             addItemInt("listview_icon_size",mlist_icon_size,22);
             addItemBool("display_overlays",mdisp_overlay,true);
+            addItemBool("use_kompare_for_diff",muse_kompare,true);
         }
 
         static kdesvnPart_Prefs*self()
@@ -49,6 +50,7 @@ static const char description[] =
         }
         int mlist_icon_size;
         bool mdisp_overlay;
+        bool muse_kompare;
     private:
         static kdesvnPart_Prefs*_me;
  };
@@ -115,7 +117,7 @@ bool kdesvnPart::openURL(const KURL&url)
     bool ret = m_view->openURL(m_url);
     if (ret) {
         emit completed();
-        emit setWindowCaption( m_url.prettyURL() );
+        emit setWindowCaption(url.prettyURL());
     }
     return ret;
 }
@@ -236,9 +238,7 @@ void kdesvnPart::slotDisplayUnkown(bool how)
  */
 void kdesvnPart::slotUseKompare(bool how)
 {
-    /// @todo make it into a settings class
-    KConfigGroup cs(config(), "general_items");
-    cs.writeEntry("use_kompare_for_diff",how);
+    kdesvnPart_Prefs::self()->muse_kompare=how;
 }
 
 
@@ -341,7 +341,8 @@ void kdesvnPart::slotShowSettings()
          "kdesvnpart_settings",
          kdesvnPart_Prefs::self(),
          KDialogBase::IconList);
-    dialog->addPage(new DisplaySettings_impl(0,"display_settings"),i18n("Display settings"),"display",i18n("Display"),true);
+    dialog->addPage(new DisplaySettings_impl(0,"general_items"),
+        i18n("General"),"misc",i18n("General"),true);
     connect(dialog,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
     dialog->show();
 }

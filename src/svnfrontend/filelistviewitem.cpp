@@ -135,7 +135,7 @@ void FileListViewItem::makePixmap()
         setPixmap(COL_ICON,getPixmap(22));
         return;
     }
-    KConfigGroup cs(conf, "display_settings");
+    KConfigGroup cs(conf, "general_items");
     int s = cs.readNumEntry("listview_icon_size",22);
     int o = cs.readBoolEntry("display_overlays",true);
     setPixmap(COL_ICON,getPixmap(s,o));

@@ -1189,7 +1189,7 @@ bool SvnActions::createModifiedCache(const QString&what)
 {
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
-    KConfigGroup cs(kdesvnPart::config(), "display_settings");
+    KConfigGroup cs(kdesvnPart::config(), "general_items");
     svn::Revision r = svn::Revision::HEAD;
     if (cs.readBoolEntry("display_overlays",true)) {
         return makeStatus(what,m_Data->m_Cache,r,true,false,false);

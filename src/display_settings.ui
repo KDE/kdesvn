@@ -8,12 +8,12 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>311</width>
-            <height>74</height>
+            <width>316</width>
+            <height>98</height>
         </rect>
     </property>
     <property name="caption">
-        <string>Form1</string>
+        <string>Settings</string>
     </property>
     <vbox>
         <property name="name">
@@ -62,6 +62,14 @@
                 <string>Check (if needed recursive) if items are changed (added/delete/changed) and mark these items with an overlayed icon.
 
 If it works slow (low connection and so on) you should turn of this feature.</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_use_kompare_for_diff</cstring>
+            </property>
+            <property name="text">
+                <string>Use "Kompare" for displaying diffs</string>
             </property>
         </widget>
     </vbox>

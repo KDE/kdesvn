@@ -97,7 +97,6 @@ private slots:
     void fileOpen();
     void fileNew();
     void fileClose();
-    void optionsPreferences();
     void optionsShowToolbar();
     void optionsShowStatusbar();
 

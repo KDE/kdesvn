@@ -40,9 +40,11 @@ public:
     static KAboutData* createAboutData();
     static KConfig* config();
     static KIconLoader* iconLoader();
+    static QVariant configItem(const QString& name);
 
 signals:
     void refreshTree();
+    void settingsChanged();
 
 public slots:
     virtual void slotDispPopup(const QString&);
@@ -71,6 +73,8 @@ private:
     kdesvnView *m_view;
     KdesvnBrowserExtension*m_browserExt;
     static QString m_Extratext;
+protected slots:
+    void slotSettingsChanged();
 };
 
 typedef KParts::GenericFactory<kdesvnPart> kdesvnPartFactory;

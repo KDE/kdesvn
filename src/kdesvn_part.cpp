@@ -37,7 +37,13 @@ static const char description[] =
             setCurrentGroup("general_items");
             addItemInt("listview_icon_size",mlist_icon_size,22);
             addItemBool("display_overlays",mdisp_overlay,true);
-            addItemBool("use_kompare_for_diff",muse_kompare,true);
+            addItemInt("use_kompare_for_diff",muse_kompare,1);
+            addItemString("external_diff_display",mdiff_display,"kompare");
+
+            setCurrentGroup("subversion");
+            addItemBool("display_unknown_files",mdisp_unknown_files,true);
+            addItemBool("display_ignored_files",mdisp_ignored_files,true);
+            addItemBool("log_follows_nodes",mlog_follows_nodes,true);
         }
 
         static kdesvnPart_Prefs*self()
@@ -50,7 +56,12 @@ static const char description[] =
         }
         int mlist_icon_size;
         bool mdisp_overlay;
-        bool muse_kompare;
+        int muse_kompare;
+        bool mdisp_unknown_files;
+        bool mdisp_ignored_files;
+        bool mlog_follows_nodes;
+        QString mdiff_display;
+
     private:
         static kdesvnPart_Prefs*_me;
  };
@@ -167,27 +178,25 @@ KAboutData* kdesvnPart::createAboutData()
  */
 void kdesvnPart::setupActions()
 {
-    KConfigGroup cs(config(), "general_items");
-    KConfigGroup cs2(config(), "subversion");
-
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
             actionCollection(),"toggle_use_kompare");
-    toggletemp->setChecked(cs.readBoolEntry("use_kompare_for_diff",true));
+    toggletemp->setChecked(kdesvnPart_Prefs::self()->muse_kompare);
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
     toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
             actionCollection(),"toggle_log_follows");
-    toggletemp->setChecked(cs.readBoolEntry("log_follows_nodes",true));
+    toggletemp->setChecked(kdesvnPart_Prefs::self()->mlog_follows_nodes);
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
 
     toggletemp = new KToggleAction(i18n("Display ignored files"),KShortcut(),
             actionCollection(),"toggle_ignored_files");
-    toggletemp->setChecked(cs2.readBoolEntry("display_ignored_files",true));
+    toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_ignored_files);
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
     toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
             actionCollection(),"toggle_unknown_files");
-    toggletemp->setChecked(cs2.readBoolEntry("display_unknown_files",true));
+    toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_unknown_files);
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
@@ -207,8 +216,8 @@ void kdesvnPart::setupActions()
  */
 void kdesvnPart::slotLogFollowNodes(bool how)
 {
-    KConfigGroup cs(config(), "general_items");
-    cs.writeEntry("toggle_log_follows",how);
+    kdesvnPart_Prefs::self()->mlog_follows_nodes=how;
+    kdesvnPart_Prefs::self()->writeConfig();
 }
 
 
@@ -217,8 +226,8 @@ void kdesvnPart::slotLogFollowNodes(bool how)
  */
 void kdesvnPart::slotDisplayIgnored(bool how)
 {
-    KConfigGroup cs(config(), "subversion");
-    cs.writeEntry("display_ignored_files",how);
+    kdesvnPart_Prefs::self()->mdisp_ignored_files = how;
+    kdesvnPart_Prefs::self()->writeConfig();
     emit refreshTree();
 }
 
@@ -228,8 +237,8 @@ void kdesvnPart::slotDisplayIgnored(bool how)
  */
 void kdesvnPart::slotDisplayUnkown(bool how)
 {
-    KConfigGroup cs(config(), "subversion");
-    cs.writeEntry("display_unknown_files",how);
+    kdesvnPart_Prefs::self()->mdisp_unknown_files=how;
+    kdesvnPart_Prefs::self()->writeConfig();
 }
 
 
@@ -238,7 +247,8 @@ void kdesvnPart::slotDisplayUnkown(bool how)
  */
 void kdesvnPart::slotUseKompare(bool how)
 {
-    kdesvnPart_Prefs::self()->muse_kompare=how;
+    kdesvnPart_Prefs::self()->muse_kompare=how?1:0;
+    kdesvnPart_Prefs::self()->writeConfig();
 }
 
 
@@ -342,7 +352,43 @@ void kdesvnPart::slotShowSettings()
          kdesvnPart_Prefs::self(),
          KDialogBase::IconList);
     dialog->addPage(new DisplaySettings_impl(0,"general_items"),
-        i18n("General"),"misc",i18n("General"),true);
-    connect(dialog,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
+        i18n("General"),"kdesvn",i18n("General"),true);
+    connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
+    connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
     dialog->show();
+}
+
+
+/*!
+    \fn kdesvnPart::slotSettingsChanged()
+ */
+void kdesvnPart::slotSettingsChanged()
+{
+    KAction * temp;
+    temp = actionCollection()->action("toggle_use_kompare");
+    if (temp) {
+        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->muse_kompare==1);
+    }
+    temp = actionCollection()->action("toggle_log_follows");
+    if (temp) {
+        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mlog_follows_nodes);
+    }
+    temp = actionCollection()->action("toggle_ignored_files");
+    if (temp) {
+        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mdisp_ignored_files);
+    }
+    temp = actionCollection()->action("toggle_unknown_files");
+    if (temp) {
+        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mdisp_unknown_files);
+    }
+    emit settingsChanged();
+}
+
+QVariant kdesvnPart::configItem(const QString& name)
+{
+    KConfigSkeletonItem*it = kdesvnPart_Prefs::self()->findItem(name);
+    if (!it) {
+        return QVariant();
+    }
+    return it->property();
 }

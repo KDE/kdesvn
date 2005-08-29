@@ -130,14 +130,8 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool 
 
 void FileListViewItem::makePixmap()
 {
-    KConfig*conf = kdesvnPart::config();
-    if (!conf) {
-        setPixmap(COL_ICON,getPixmap(22));
-        return;
-    }
-    KConfigGroup cs(conf, "general_items");
-    int s = cs.readNumEntry("listview_icon_size",22);
-    int o = cs.readBoolEntry("display_overlays",true);
+    int s = kdesvnPart::configItem("listview_icon_size").toInt();
+    bool o = kdesvnPart::configItem("display_overlays").toBool();
     setPixmap(COL_ICON,getPixmap(s,o));
 }
 

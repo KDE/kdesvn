@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>316</width>
-            <height>98</height>
+            <width>339</width>
+            <height>241</height>
         </rect>
     </property>
     <property name="caption">
@@ -64,13 +64,93 @@
 If it works slow (low connection and so on) you should turn of this feature.</string>
             </property>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="QButtonGroup">
             <property name="name">
                 <cstring>kcfg_use_kompare_for_diff</cstring>
             </property>
-            <property name="text">
-                <string>Use "Kompare" for displaying diffs</string>
+            <property name="title">
+                <string>Diff display</string>
             </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_internal</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Internal</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_kompare</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Use Kompare for diff</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_other</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Use other diff display</string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>m_extern_hint</cstring>
+            </property>
+            <property name="text">
+                <string>see "Whats this" for details</string>
+            </property>
+            <property name="alignment">
+                <set>WordBreak|AlignVCenter</set>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>mdiff_display_label</cstring>
+                    </property>
+                    <property name="text">
+                        <string>External diff display:</string>
+                    </property>
+                </widget>
+                <widget class="KLineEdit" row="0" column="1">
+                    <property name="name">
+                        <cstring>kcfg_external_diff_display</cstring>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;p align="left"&gt;
+Enter an external program in form
+&lt;br&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; &amp;lt;%f&amp;gt;&lt;/tt&gt;
+&lt;br&gt;
+%f will replaced with a temporary filename. If external may read data from
+stdin, you may just type
+&lt;br&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt&gt;
+&lt;br&gt;
+and Kdesvn will pipe data direct.
+&lt;/p&gt;</string>
+                    </property>
+                </widget>
+            </grid>
         </widget>
     </vbox>
 </widget>
@@ -79,5 +159,6 @@ If it works slow (low connection and so on) you should turn of this feature.</st
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>
+    <includehint>klineedit.h</includehint>
 </includehints>
 </UI>

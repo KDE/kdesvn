@@ -156,15 +156,6 @@ void kdesvn::setupActions()
 
     m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
     m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
-
-//    KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
-    // this doesn't do anything useful.  it's just here to illustrate
-    // how to insert a custom menu and menu item
-/*
-    KAction *custom = new KAction(i18n("Cus&tom Menuitem"), 0,
-                                  this, SLOT(optionsPreferences()),
-                                  actionCollection(), "custom_action");
-*/
 }
 
 void kdesvn::optionsShowToolbar()
@@ -236,19 +227,6 @@ void kdesvn::fileOpen()
     kdDebug()<<"kdesvn::fileOpen(): Url to open " << url.url()<<endl;
     if (!url.isEmpty())
         m_part->openURL(url);
-}
-
-void kdesvn::optionsPreferences()
-{
-    // popup some sort of preference dialog, here
-    KMessageBox::error(this,i18n("Sorry, the configuration dialog is not finished yet. It will be implemented as soon as possible."),i18n("Settings"));
-#if 0
-    kdesvnPreferences dlg;
-    if (dlg.exec())
-    {
-        // redo your settings
-    }
-#endif
 }
 
 void kdesvn::changeStatusbar(const QString& text)

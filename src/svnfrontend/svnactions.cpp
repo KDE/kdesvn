@@ -49,6 +49,7 @@
 #include <qvaluelist.h>
 #include <kprocess.h>
 #include <ktempdir.h>
+#include <ktempfile.h>
 #include <kdialogbase.h>
 #include <qvbox.h>
 #include <kapplication.h>
@@ -73,6 +74,10 @@ public:
     {
         delete m_CurrentContext;
         m_CurrentContext = 0;
+        QMap<KProcess*,QString>::iterator it;
+        for (it=m_tempfilelist.begin();it!=m_tempfilelist.end();++it) {
+            ::unlink((*it).ascii());
+        }
     }
 
     ItemDisplay* m_ParentList;
@@ -83,6 +88,8 @@ public:
 
     svn::StatusEntries m_Cache;
     svn::StatusEntries m_UpdateCache;
+
+    QMap<KProcess*,QString> m_tempfilelist;
 };
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
@@ -186,8 +193,8 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
     const svn::LogEntries * logs;
     QString ex;
     if (!m_Data->m_CurrentContext) return;
-    KConfigGroup cs(kdesvnPart::config(), "general_items");
-    bool follow = cs.readBoolEntry("toggle_log_follows",true);
+
+    bool follow = kdesvnPart::configItem("toggle_log_follows").toBool();
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
@@ -599,6 +606,11 @@ void SvnActions::wroteStdin(KProcess*proc)
 void SvnActions::procClosed(KProcess*proc)
 {
     if (!proc) return;
+    QMap<KProcess*,QString>::iterator it;
+    if ( (it=m_Data->m_tempfilelist.find(proc))!=m_Data->m_tempfilelist.end()) {
+        ::unlink((*it).ascii());
+        m_Data->m_tempfilelist.erase(it);
+    }
     delete proc;
 }
 
@@ -624,8 +636,8 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
         return;
     }
     EMIT_FINISHED;
-    KConfigGroup cs(kdesvnPart::config(), "general_items");
-    if (cs.readBoolEntry("use_kompare_for_diff",true)) {
+    int disp = kdesvnPart::configItem("use_kompare_for_diff").toInt();
+    if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
         *proc << "-";
@@ -633,6 +645,37 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
         if (proc->start(KProcess::NotifyOnExit,KProcess::Stdin)) {
             proc->writeStdin(ex.ascii(),ex.length());
+            return;
+        }
+        delete proc;
+    } else if (disp>1) {
+        QString what = kdesvnPart::configItem("external_diff_display").toString();
+        QStringList wlist = QStringList::split(" ",what);
+        KProcess*proc = new KProcess();
+        bool fname_used = false;
+        KTempFile tfile;
+        tfile.setAutoDelete(false);
+
+        for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
+            if (*it=="%f") {
+                fname_used = true;
+                QByteArray ut = ex.utf8();
+                QDataStream*ds = tfile.dataStream();
+                ds->writeRawBytes(ut,ut.size());
+                tfile.close();
+                *proc<<tfile.name();
+            } else {
+                *proc << *it;
+            }
+        }
+        connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+        if (!fname_used) {
+            connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
+        }
+
+        if (proc->start(KProcess::NotifyOnExit,fname_used?KProcess::NoCommunication:KProcess::Stdin)) {
+            if (!fname_used) proc->writeStdin(ex.ascii(),ex.length());
+            else m_Data->m_tempfilelist[proc]=tfile.name();
             return;
         }
         delete proc;
@@ -1165,8 +1208,7 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
  */
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all)
 {
-    KConfigGroup cs(kdesvnPart::config(), "subversion");
-    bool display_ignores = cs.readBoolEntry("display_ignored_files",true);
+    bool display_ignores = kdesvnPart::configItem("display_ignored_files").toBool();
     return makeStatus(what,dlist,where,rec,all,display_ignores);
 }
 
@@ -1189,9 +1231,8 @@ bool SvnActions::createModifiedCache(const QString&what)
 {
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
-    KConfigGroup cs(kdesvnPart::config(), "general_items");
     svn::Revision r = svn::Revision::HEAD;
-    if (cs.readBoolEntry("display_overlays",true)) {
+    if (kdesvnPart::configItem("display_overlays").toBool()) {
         return makeStatus(what,m_Data->m_Cache,r,true,false,false);
     }
     return false;

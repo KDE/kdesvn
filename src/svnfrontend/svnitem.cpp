@@ -158,7 +158,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         bool mod = false;
         QPixmap p2 = QPixmap();
         if (wrap->isUpdated(p_Item->m_Stat.path())) {
-            mod = true;
+            p2 = kdesvnPart::iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
             p2 = kdesvnPart::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
@@ -167,17 +167,21 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             mod = true;
         } else if (isDir()&&wrap) {
             svn::StatusEntries dlist;
-            wrap->checkModifiedCache(fullName(),dlist);
             svn::StatusEntries::const_iterator it;
-
-            for (it=dlist.begin();it!=dlist.end();++it) {
-                if ( (*it).textStatus()==svn_wc_status_modified||
-                    (*it).textStatus()==svn_wc_status_added||
-                    (*it).textStatus()==svn_wc_status_deleted||
-                    (*it).textStatus()==svn_wc_status_conflicted ||
-                    (*it).propStatus()==svn_wc_status_modified) {
-                    mod = true;
-                    break;
+            wrap->checkUpdateCache(fullName(),dlist);
+            if (dlist.size()>0) {
+                p2 = kdesvnPart::iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
+            } else {
+                wrap->checkModifiedCache(fullName(),dlist);
+                for (it=dlist.begin();it!=dlist.end();++it) {
+                    if ( (*it).textStatus()==svn_wc_status_modified||
+                        (*it).textStatus()==svn_wc_status_added||
+                        (*it).textStatus()==svn_wc_status_deleted||
+                        (*it).textStatus()==svn_wc_status_conflicted ||
+                        (*it).propStatus()==svn_wc_status_modified) {
+                        mod = true;
+                        break;
+                    }
                 }
             }
         }

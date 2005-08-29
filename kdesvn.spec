@@ -3,7 +3,7 @@
 # the error to ian geiser <geiseri@msoe.edu>
 Summary:   A subversion client for the KDE
 Name:      kdesvn
-Version:   0.5.3
+Version:   0.6.0
 Release:   1
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
@@ -16,7 +16,7 @@ BuildRoot: /tmp/kdebuild
 BuildPreReq: apr-devel
 BuildPreReq: apr-util-devel
 BuildPreReq: neon-devel
-BuildPreReq: subversion-devel >= 0.37.0
+BuildPreReq: subversion-devel >= 1.1.0
 Requires: subversion
 
 %description

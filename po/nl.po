@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-28 10:57+0200\n"
+"POT-Creation-Date: 2005-08-29 14:14+0200\n"
 "PO-Revision-Date: 2005-08-24 15:11+0200\n"
 "Last-Translator: Bram Schoenmakers <bramschoenmakers@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -30,156 +30,256 @@ msgid ""
 "Your emails"
 msgstr "bramschoenmakers@kde.nl"
 
-#: main.cpp:31
-#, fuzzy
-msgid "A Subversion Client for KDE (standalone application)"
-msgstr "Een Subversion-client voor KDE"
-
-#: main.cpp:37
-msgid "Document to open"
-msgstr "Te openen document"
-
-#: main.cpp:43
-msgid "kdesvn"
-msgstr "kdesvn"
-
-#: urldlg.cpp:57
-#, fuzzy
-msgid "Open repository or working copy"
-msgstr "Switchen naar repository van huidige werkkopie"
-
-#: kdesvnview.cpp:117
-msgid "Repository opened"
-msgstr "Repository geopend"
-
-#: kdesvnview.cpp:123
-msgid "Could not open repository"
-msgstr "Kon de repository niet openen"
-
-#: kdesvnview.cpp:149
-msgid "No repository open"
-msgstr "Geen repository geopend"
-
-#: kdesvn_part.cpp:29
-#, fuzzy
-msgid "A Subversion Client for KDE (dynamic Part component)"
-msgstr "Een Subversion-client voor KDE"
-
-#: kdesvn_part.cpp:134
-#, fuzzy
-msgid "Built with Subversion library: %1\n"
-msgstr "Gebouwd met Subversion-bibliotheek: %1\n"
-
-#: kdesvn_part.cpp:135
-#, fuzzy
-msgid "Running Subversion library: %1"
-msgstr "Actieve Subversion-bibliotheek: %1"
-
-#: kdesvn_part.cpp:137
-#, fuzzy
-msgid "kdesvn Part"
-msgstr "kdesvn"
-
-#: kdesvn_part.cpp:144
-#, fuzzy
-msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
-msgstr "Bram Schoenmakers"
-
-#: kdesvn_part.cpp:145
-#, fuzzy
-msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
-msgstr "bramschoenmakers@kde.nl"
-
-#: kdesvn_part.cpp:166
-msgid "Use \"Kompare\" for displaying diffs"
-msgstr "\"Kompare\" gebruiken voor het tonen van diff-bestanden"
-
-#: kdesvn_part.cpp:171
-#, fuzzy
-msgid "Logs follow node changes"
-msgstr "Logbestanden houden node-veranderingen bij"
-
-#: kdesvn_part.cpp:176
-msgid "Display ignored files"
-msgstr "Genegeerde bestanden tonen"
-
-#: kdesvn_part.cpp:180
-msgid "Display unknown files"
-msgstr "Onbekende bestanden tonen"
-
-#: kdesvn_part.cpp:187
-msgid "&Configure %1..."
-msgstr ""
-
-#: kdesvn_part.cpp:188
-msgid "&About kdesvn part"
-msgstr ""
-
-#: kdesvn_part.cpp:190
-msgid "Kdesvn &Handbook"
-msgstr ""
-
-#: kdesvn_part.cpp:192
-msgid "Send Bugreport for kdesvn"
-msgstr ""
-
-#: kdesvn_part.cpp:338
-#, fuzzy
-msgid "Display settings"
-msgstr "Instellingen"
-
-#: kdesvn_part.cpp:338
-#, fuzzy
-msgid "Display"
-msgstr "Verschilweergave"
-
-#: kdesvn-askpass.cpp:30
-msgid "prompt"
-msgstr ""
-
-#: kdesvn-askpass.cpp:36
-#, fuzzy
-msgid "kdesvnaskpass"
-msgstr "kdesvn"
-
-#: kdesvn-askpass.cpp:37
-msgid "ssh-askpass for kdesvn"
-msgstr ""
-
-#: kdesvn-askpass.cpp:39
-msgid "Copyright (c) 2005 Rajko Albrecht"
-msgstr ""
-
-#: kdesvn-askpass.cpp:51
-msgid "Please enter your password below."
-msgstr ""
-
-#: rc.cpp:6 rc.cpp:228
-#, no-c-format
-msgid "Subversion"
-msgstr "Subversion"
-
-#: rc.cpp:12 rc.cpp:246
-#, no-c-format
-msgid "Subversion toolbar"
-msgstr "Subversion-werkbalk"
-
-#: rc.cpp:18
+#: rc.cpp:2
 #, fuzzy, no-c-format
-msgid "Form1"
-msgstr "Forceren"
+msgid "Authentication"
+msgstr "Authentificatie"
+
+#: rc.cpp:4
+#, no-c-format
+msgid "Enter authentification info for"
+msgstr "Voer de authentificatie-informatie in voor"
+
+#: rc.cpp:6
+#, no-c-format
+msgid "Username:"
+msgstr "Gebruikersnaam:"
+
+#: rc.cpp:8
+#, no-c-format
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+#: rc.cpp:10
+#, no-c-format
+msgid "Store password"
+msgstr "Wachtwoord opslaan"
 
 #: rc.cpp:21
+#, no-c-format
+msgid "Edit property"
+msgstr "Eigenschap bewerken"
+
+#: rc.cpp:23
+#, no-c-format
+msgid "Property value:"
+msgstr "Eigenschapwaarde:"
+
+#: rc.cpp:25
+#, no-c-format
+msgid "Property name:"
+msgstr "Eigenschapnaam:"
+
+#: rc.cpp:36
+#, no-c-format
+msgid "MergeSettings"
+msgstr "MergeSettings"
+
+#: rc.cpp:38
+#, no-c-format
+msgid "Source 1:"
+msgstr "Bron 1:"
+
+#: rc.cpp:40
+#, no-c-format
+msgid "Source 2:"
+msgstr "Bron 2:"
+
+#: rc.cpp:42
+#, no-c-format
+msgid "Output to:"
+msgstr "Uitvoeren naar:"
+
+#: rc.cpp:44 rc.cpp:134 svnfrontend/checkoutinfo_impl.cpp:78
+#: svnfrontend/svnactions.cpp:987
+#, no-c-format
+msgid "Recursive"
+msgstr "Recursief"
+
+#: rc.cpp:47
+#, no-c-format
+msgid "Handle unrelated as related items"
+msgstr "Ongerelateerde items behandelen als gerelateerde items"
+
+#: rc.cpp:49
+#, no-c-format
+msgid "Force delete on modified/unversioned"
+msgstr "Verwijderen forceren bij gewijzigd/niet in versiebeheer"
+
+#: rc.cpp:52
+#, no-c-format
+msgid "Just dry run without modifications"
+msgstr "Uitvoeren zonder wijzigingen"
+
+#: rc.cpp:55
+#, no-c-format
+msgid "SslTrustPrompt"
+msgstr "SslTrustPrompt"
+
+#: rc.cpp:58
+#, no-c-format
+msgid "SVN Log"
+msgstr "SVN-log"
+
+#: rc.cpp:60 svnfrontend/svnactions.cpp:256
+#, no-c-format
+msgid "Author"
+msgstr "Auteur"
+
+#: rc.cpp:62
+#, no-c-format
+msgid "Revison"
+msgstr "Revisie"
+
+#: rc.cpp:64 rc.cpp:96 rc.cpp:107
+#, no-c-format
+msgid "Date"
+msgstr "Datum"
+
+#: rc.cpp:69
+#, no-c-format
+msgid "Diff previous"
+msgstr "Verschil met vorige"
+
+#: rc.cpp:75
+#, no-c-format
+msgid "Checkout info"
+msgstr "Checkout-informatie"
+
+#: rc.cpp:77
+#, no-c-format
+msgid "Select target directory:"
+msgstr "Selecteer een doelmap:"
+
+#: rc.cpp:79
+#, no-c-format
+msgid "Enter URL:"
+msgstr "Voer een URL in:"
+
+#: rc.cpp:81 svnfrontend/checkoutinfo_impl.cpp:81
+#, no-c-format
+msgid "Force"
+msgstr "Forceren"
+
+#: rc.cpp:84
+#, no-c-format
+msgid "Open after job"
+msgstr "Openen na handeling"
+
+#: rc.cpp:86 svnfrontend/kdesvnfilelist.cpp:1326
+#: svnfrontend/kdesvnfilelist.cpp:1391 svnfrontend/kdesvnfilelist.cpp:1408
+#: svnfrontend/kdesvnfilelist.cpp:1434 svnfrontend/svnactions.cpp:162
+#: svnfrontend/svnactions.cpp:754
+#, no-c-format
+msgid "Revisions"
+msgstr "Revisies"
+
+#: rc.cpp:88 svnfrontend/rangeinput_impl.cpp:165
+#, no-c-format
+msgid "Start with revision"
+msgstr "Begin met revisie"
+
+#: rc.cpp:90 rc.cpp:110
+#, no-c-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#: rc.cpp:92
+#, no-c-format
+msgid "N&umber"
+msgstr "N&ummer"
+
+#: rc.cpp:94
+#, no-c-format
+msgid "Alt+U"
+msgstr "Alt+U"
+
+#: rc.cpp:99
+#, no-c-format
+msgid "S&TART"
+msgstr "BE&GIN"
+
+#: rc.cpp:101
+#, no-c-format
+msgid "Alt+T"
+msgstr "Alt+T"
+
+#: rc.cpp:103
+#, no-c-format
+msgid "Stop with revision"
+msgstr "Eindig met revisie"
+
+#: rc.cpp:105
+#, no-c-format
+msgid "START"
+msgstr "START"
+
+#: rc.cpp:112
+#, no-c-format
+msgid "Number"
+msgstr "Nummer"
+
+#: rc.cpp:114 svnfrontend/svnactions.cpp:1151
+#, no-c-format
+msgid "Copy / Move"
+msgstr "Kopiëren / Verplaatsen"
+
+#: rc.cpp:116
+#, no-c-format
+msgid "<p align=\"right\">Rename</p>"
+msgstr "<p align=\"right\">Hernoemen</p>"
+
+#: rc.cpp:118
+#, no-c-format
+msgid "this long text"
+msgstr "deze lange tekst"
+
+#: rc.cpp:120
+#, no-c-format
+msgid "to"
+msgstr "naar"
+
+#: rc.cpp:122
+#, no-c-format
+msgid "/there/"
+msgstr "/daar/"
+
+#: rc.cpp:124
+#, no-c-format
+msgid "Force operation"
+msgstr "Handeling forceren"
+
+#: rc.cpp:127
+#, no-c-format
+msgid "Logmessage"
+msgstr "Logbericht"
+
+#: rc.cpp:129
+#, no-c-format
+msgid "Enter a log message"
+msgstr "Voer een logbericht in"
+
+#: rc.cpp:131
+#, no-c-format
+msgid "Or insert one of the last:"
+msgstr "Of voer één van de vorige berichten in:"
+
+#: rc.cpp:137
+#, no-c-format
+msgid "Settings"
+msgstr "Instellingen"
+
+#: rc.cpp:139
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr ""
 
-#: rc.cpp:24
+#: rc.cpp:141
 #, fuzzy, no-c-format
 msgid "Mark changed items"
 msgstr "Datum laatste revisie"
 
-#: rc.cpp:27
+#: rc.cpp:143
 #, no-c-format
 msgid ""
 "Check (if needed recursive) if items are changed (added/delete/changed) and "
@@ -188,281 +288,157 @@ msgid ""
 "If it works slow (low connection and so on) you should turn of this feature."
 msgstr ""
 
-#: rc.cpp:32
+#: rc.cpp:147 svnfrontend/svnactions.cpp:684
 #, no-c-format
-msgid "SVN Log"
-msgstr "SVN-log"
+msgid "Diff display"
+msgstr "Verschilweergave"
 
-#: rc.cpp:35 svnfrontend/svnactions.cpp:249
-#, no-c-format
-msgid "Author"
-msgstr "Auteur"
+#: rc.cpp:149
+#, fuzzy, no-c-format
+msgid "Internal"
+msgstr "Extern"
 
-#: rc.cpp:38
-#, no-c-format
-msgid "Revison"
-msgstr "Revisie"
+#: rc.cpp:151
+#, fuzzy, no-c-format
+msgid "Use Kompare for diff"
+msgstr "\"Kompare\" gebruiken voor het tonen van diff-bestanden"
 
-#: rc.cpp:41 rc.cpp:172 rc.cpp:188
-#, no-c-format
-msgid "Date"
-msgstr "Datum"
+#: rc.cpp:153
+#, fuzzy, no-c-format
+msgid "Use other diff display"
+msgstr "Verschilweergave"
 
-#: rc.cpp:48
+#: rc.cpp:155
 #, no-c-format
-msgid "Diff previous"
-msgstr "Verschil met vorige"
+msgid "see \"Whats this\" for details"
+msgstr ""
 
-#: rc.cpp:56
-#, no-c-format
-msgid "Logmessage"
-msgstr "Logbericht"
+#: rc.cpp:157
+#, fuzzy, no-c-format
+msgid "External diff display:"
+msgstr "Verschilweergave"
 
-#: rc.cpp:59
+#: rc.cpp:159
 #, no-c-format
-msgid "Enter a log message"
-msgstr "Voer een logbericht in"
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<br>\n"
+"<tt>&lt;program&gt; &lt;param&gt; &lt;%f&gt;</tt>\n"
+"<br>\n"
+"%f will replaced with a temporary filename. If external may read data from\n"
+"stdin, you may just type\n"
+"<br>\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"<br>\n"
+"and Kdesvn will pipe data direct.\n"
+"</p>"
+msgstr ""
 
-#: rc.cpp:62
+#: rc.cpp:174 rc.cpp:184
 #, no-c-format
-msgid "Or insert one of the last:"
-msgstr "Of voer één van de vorige berichten in:"
+msgid "Subversion"
+msgstr "Subversion"
 
-#: rc.cpp:66 rc.cpp:86 svnfrontend/checkoutinfo_impl.cpp:78
-#: svnfrontend/svnactions.cpp:944
+#: rc.cpp:178 rc.cpp:196
 #, no-c-format
-msgid "Recursive"
-msgstr "Recursief"
-
-#: rc.cpp:70
-#, no-c-format
-msgid "SslTrustPrompt"
-msgstr "SslTrustPrompt"
-
-#: rc.cpp:74
-#, no-c-format
-msgid "MergeSettings"
-msgstr "MergeSettings"
-
-#: rc.cpp:77
-#, no-c-format
-msgid "Source 1:"
-msgstr "Bron 1:"
-
-#: rc.cpp:80
-#, no-c-format
-msgid "Source 2:"
-msgstr "Bron 2:"
-
-#: rc.cpp:83
-#, no-c-format
-msgid "Output to:"
-msgstr "Uitvoeren naar:"
-
-#: rc.cpp:90
-#, no-c-format
-msgid "Handle unrelated as related items"
-msgstr "Ongerelateerde items behandelen als gerelateerde items"
-
-#: rc.cpp:93
-#, no-c-format
-msgid "Force delete on modified/unversioned"
-msgstr "Verwijderen forceren bij gewijzigd/niet in versiebeheer"
-
-#: rc.cpp:97
-#, no-c-format
-msgid "Just dry run without modifications"
-msgstr "Uitvoeren zonder wijzigingen"
-
-#: rc.cpp:101
-#, no-c-format
-msgid "Edit property"
-msgstr "Eigenschap bewerken"
-
-#: rc.cpp:104
-#, no-c-format
-msgid "Property value:"
-msgstr "Eigenschapwaarde:"
-
-#: rc.cpp:107
-#, no-c-format
-msgid "Property name:"
-msgstr "Eigenschapnaam:"
-
-#: rc.cpp:122 svnfrontend/svnactions.cpp:1108
-#, no-c-format
-msgid "Copy / Move"
-msgstr "Kopiëren / Verplaatsen"
-
-#: rc.cpp:125
-#, no-c-format
-msgid "<p align=\"right\">Rename</p>"
-msgstr "<p align=\"right\">Hernoemen</p>"
-
-#: rc.cpp:128
-#, no-c-format
-msgid "this long text"
-msgstr "deze lange tekst"
-
-#: rc.cpp:131
-#, no-c-format
-msgid "to"
-msgstr "naar"
-
-#: rc.cpp:134
-#, no-c-format
-msgid "/there/"
-msgstr "/daar/"
-
-#: rc.cpp:137
-#, no-c-format
-msgid "Force operation"
-msgstr "Handeling forceren"
-
-#: rc.cpp:141
-#, no-c-format
-msgid "Checkout info"
-msgstr "Checkout-informatie"
-
-#: rc.cpp:144
-#, no-c-format
-msgid "Select target directory:"
-msgstr "Selecteer een doelmap:"
-
-#: rc.cpp:147
-#, no-c-format
-msgid "Enter URL:"
-msgstr "Voer een URL in:"
-
-#: rc.cpp:150 svnfrontend/checkoutinfo_impl.cpp:81
-#, no-c-format
-msgid "Force"
-msgstr "Forceren"
-
-#: rc.cpp:154
-#, no-c-format
-msgid "Open after job"
-msgstr "Openen na handeling"
-
-#: rc.cpp:157 svnfrontend/svnactions.cpp:155 svnfrontend/svnactions.cpp:711
-#: svnfrontend/kdesvnfilelist.cpp:1325 svnfrontend/kdesvnfilelist.cpp:1390
-#: svnfrontend/kdesvnfilelist.cpp:1407 svnfrontend/kdesvnfilelist.cpp:1433
-#, no-c-format
-msgid "Revisions"
-msgstr "Revisies"
-
-#: rc.cpp:160 svnfrontend/rangeinput_impl.cpp:165
-#, no-c-format
-msgid "Start with revision"
-msgstr "Begin met revisie"
-
-#: rc.cpp:163 rc.cpp:192
-#, no-c-format
-msgid "HEAD"
-msgstr "HEAD"
-
-#: rc.cpp:166
-#, no-c-format
-msgid "N&umber"
-msgstr "N&ummer"
-
-#: rc.cpp:169
-#, no-c-format
-msgid "Alt+U"
-msgstr "Alt+U"
-
-#: rc.cpp:176
-#, no-c-format
-msgid "S&TART"
-msgstr "BE&GIN"
-
-#: rc.cpp:179
-#, no-c-format
-msgid "Alt+T"
-msgstr "Alt+T"
+msgid "Subversion toolbar"
+msgstr "Subversion-werkbalk"
 
 #: rc.cpp:182
-#, no-c-format
-msgid "Stop with revision"
-msgstr "Eindig met revisie"
-
-#: rc.cpp:185
-#, no-c-format
-msgid "START"
-msgstr "START"
-
-#: rc.cpp:195
-#, no-c-format
-msgid "Number"
-msgstr "Nummer"
-
-#: rc.cpp:198
-#, fuzzy, no-c-format
-msgid "Authentication"
-msgstr "Authentificatie"
-
-#: rc.cpp:201
-#, no-c-format
-msgid "Enter authentification info for"
-msgstr "Voer de authentificatie-informatie in voor"
-
-#: rc.cpp:204
-#, no-c-format
-msgid "Username:"
-msgstr "Gebruikersnaam:"
-
-#: rc.cpp:207
-#, no-c-format
-msgid "Password:"
-msgstr "Wachtwoord:"
-
-#: rc.cpp:210
-#, no-c-format
-msgid "Store password"
-msgstr "Wachtwoord opslaan"
-
-#: rc.cpp:225
 #, no-c-format
 msgid "Quick settings"
 msgstr "Instellingen"
 
-#: rc.cpp:231
+#: rc.cpp:186 kdesvn_part.cpp:355
 #, no-c-format
 msgid "General"
 msgstr "Algemeen"
 
-#: rc.cpp:234
+#: rc.cpp:188
 #, no-c-format
 msgid "Working copy"
 msgstr "Werkkopie"
 
-#: rc.cpp:237
+#: rc.cpp:190
 #, no-c-format
 msgid "Repository"
 msgstr "Repository"
 
-#: rc.cpp:243
+#: rc.cpp:194
 #, no-c-format
 msgid "Actions"
 msgstr "Handelingen"
+
+#: kdesvn_part.cpp:29
+#, fuzzy
+msgid "A Subversion Client for KDE (dynamic Part component)"
+msgstr "Een Subversion-client voor KDE"
+
+#: kdesvn_part.cpp:153
+#, fuzzy
+msgid "Built with Subversion library: %1\n"
+msgstr "Gebouwd met Subversion-bibliotheek: %1\n"
+
+#: kdesvn_part.cpp:154
+#, fuzzy
+msgid "Running Subversion library: %1"
+msgstr "Actieve Subversion-bibliotheek: %1"
+
+#: kdesvn_part.cpp:156
+#, fuzzy
+msgid "kdesvn Part"
+msgstr "kdesvn"
+
+#: kdesvn_part.cpp:163
+#, fuzzy
+msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
+msgstr "Bram Schoenmakers"
+
+#: kdesvn_part.cpp:164
+#, fuzzy
+msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
+msgstr "bramschoenmakers@kde.nl"
+
+#: kdesvn_part.cpp:182
+msgid "Use \"Kompare\" for displaying diffs"
+msgstr "\"Kompare\" gebruiken voor het tonen van diff-bestanden"
+
+#: kdesvn_part.cpp:187
+#, fuzzy
+msgid "Logs follow node changes"
+msgstr "Logbestanden houden node-veranderingen bij"
+
+#: kdesvn_part.cpp:192
+msgid "Display ignored files"
+msgstr "Genegeerde bestanden tonen"
+
+#: kdesvn_part.cpp:196
+msgid "Display unknown files"
+msgstr "Onbekende bestanden tonen"
+
+#: kdesvn_part.cpp:204
+msgid "&Configure %1..."
+msgstr ""
+
+#: kdesvn_part.cpp:205
+msgid "&About kdesvn part"
+msgstr ""
+
+#: kdesvn_part.cpp:207
+msgid "Kdesvn &Handbook"
+msgstr ""
+
+#: kdesvn_part.cpp:209
+msgid "Send Bugreport for kdesvn"
+msgstr ""
 
 #: kdesvn.cpp:115
 #, fuzzy
 msgid "Could not find our part."
 msgstr "Kon de repository niet openen"
 
-#: kdesvn.cpp:244
-#, fuzzy
-msgid ""
-"Sorry, the configuration dialog is not finished yet. It will be implemented "
-"as soon as possible."
-msgstr "Helaas, niet voltooid. Dit zal zo spoedig mogelijk beschikbaar zijn."
-
-#: kdesvn.cpp:244
-msgid "Settings"
-msgstr "Instellingen"
-
-#: kdesvn.cpp:262
+#: kdesvn.cpp:240
 msgid "Ready"
 msgstr "Gereed"
 
@@ -531,78 +507,6 @@ msgstr ""
 msgid "Double property"
 msgstr "Dubbele eigenschap"
 
-#: svnfrontend/logmsg_impl.cpp:104
-msgid "Commit log"
-msgstr "Commit-log"
-
-#: svnfrontend/importdir_logmsg.cpp:46
-msgid "Create subdir %1 on import"
-msgstr "Submap %1 aanmaken bij importeren"
-
-#: svnfrontend/svnitem.cpp:225
-msgid "Needs update"
-msgstr "Bijwerken benodigd"
-
-#: svnfrontend/svnitem.cpp:229
-msgid "Locally modified"
-msgstr "Lokaal gewijzigd"
-
-#: svnfrontend/svnitem.cpp:232
-msgid "Locally added"
-msgstr "Lokaal toegevoegd"
-
-#: svnfrontend/svnitem.cpp:235
-msgid "Missing"
-msgstr "Ontbreekt"
-
-#: svnfrontend/svnitem.cpp:238 svnfrontend/ccontextlistener.cpp:50
-msgid "Deleted"
-msgstr "Verwijderd"
-
-#: svnfrontend/svnitem.cpp:241
-msgid "Replaced"
-msgstr "Vervangen"
-
-#: svnfrontend/svnitem.cpp:244
-msgid "Ignored"
-msgstr "Genegeerd"
-
-#: svnfrontend/svnitem.cpp:247
-msgid "External"
-msgstr "Extern"
-
-#: svnfrontend/svnitem.cpp:250
-msgid "Conflict"
-msgstr "Conflict"
-
-#: svnfrontend/svnitem.cpp:253
-msgid "Merged"
-msgstr "Samengevoegd"
-
-#: svnfrontend/svnitem.cpp:256
-msgid "Incomplete"
-msgstr "Incompleet"
-
-#: svnfrontend/svnitem.cpp:264
-msgid "Property modified"
-msgstr "Eigenschap gewijzigd"
-
-#: svnfrontend/rangeinput_impl.cpp:162
-msgid "Select revision"
-msgstr "Revisie selecteren"
-
-#: svnfrontend/copymoveview_impl.cpp:44
-msgid "Rename/move"
-msgstr "Hernoemen/verplaatsen"
-
-#: svnfrontend/copymoveview_impl.cpp:85
-msgid "Move/Rename file/dir"
-msgstr "Verplaatsen/Bestand of map hernoemen"
-
-#: svnfrontend/copymoveview_impl.cpp:85
-msgid "Copy file/dir"
-msgstr "Bestand/map kopiëren"
-
 #: svnfrontend/ccontextlistener.cpp:42
 msgid "Add to revision control"
 msgstr "Toevoegen aan repository: "
@@ -611,7 +515,7 @@ msgstr "Toevoegen aan repository: "
 msgid "Restore missing"
 msgstr "Ontbrekende bestand herstellen"
 
-#: svnfrontend/ccontextlistener.cpp:46 svnfrontend/svnactions.cpp:958
+#: svnfrontend/ccontextlistener.cpp:46 svnfrontend/svnactions.cpp:1001
 msgid "Revert"
 msgstr "Ongedaan maken (revert)"
 
@@ -626,6 +530,10 @@ msgstr "Opgelost"
 #: svnfrontend/ccontextlistener.cpp:49
 msgid "Skip"
 msgstr "Overslaan"
+
+#: svnfrontend/ccontextlistener.cpp:50 svnfrontend/svnitem.cpp:242
+msgid "Deleted"
+msgstr "Verwijderd"
 
 #: svnfrontend/ccontextlistener.cpp:51
 msgid "Added"
@@ -715,271 +623,17 @@ msgstr "Bestand openen met een #PKCS12-certificaat"
 msgid "Enter password for realm %1"
 msgstr "Voer een wachtwoord in voor domein %1"
 
-#: svnfrontend/svnactions.cpp:88
-msgid "Finished"
-msgstr "Voltooid"
+#: svnfrontend/filelistviewitem.cpp:154
+msgid "Not versioned"
+msgstr "Niet in versiebeheer"
 
-#: svnfrontend/svnactions.cpp:202
-msgid "Got no logs"
-msgstr "Geen logs gevonden"
+#: svnfrontend/mergedlg_impl.cpp:105
+msgid "Enter merge range"
+msgstr "Voer het bereik van de samenvoeging in"
 
-#: svnfrontend/svnactions.cpp:234
-msgid "Error getting blame"
-msgstr "Er deed zich een fout voor tijdens het ophalen van de blame-gegevens"
-
-#: svnfrontend/svnactions.cpp:239
-msgid "Got no annotate"
-msgstr "Geen annotatie gevonden"
-
-#: svnfrontend/svnactions.cpp:249
-msgid "Line"
-msgstr "Regel"
-
-#: svnfrontend/svnactions.cpp:263 svnfrontend/svnactions.cpp:437
-#: svnfrontend/svnactions.cpp:456
-msgid "Unknown"
-msgstr "Onbekend"
-
-#: svnfrontend/svnactions.cpp:270
-msgid "Blame %1"
-msgstr "Blame %1"
-
-#: svnfrontend/svnactions.cpp:293
-msgid "Error getting content"
-msgstr "Fout bij het ophalen van de inhoud"
-
-#: svnfrontend/svnactions.cpp:303
-msgid "Got no content"
-msgstr "Geen inhoud gevonden"
-
-#: svnfrontend/svnactions.cpp:311 svnfrontend/svnactions.cpp:322
-msgid "Content of %1"
-msgstr "Inhoud van %1"
-
-#: svnfrontend/svnactions.cpp:344
-msgid "New folder"
-msgstr ""
-
-#: svnfrontend/svnactions.cpp:344
-#, fuzzy
-msgid "Enter folder name:"
-msgstr "Voer een naam in voor de (sub)map:"
-
-#: svnfrontend/svnactions.cpp:415 svnfrontend/kdesvnfilelist.cpp:87
+#: svnfrontend/kdesvnfilelist.cpp:87 svnfrontend/svnactions.cpp:422
 msgid "Name"
 msgstr "Naam"
-
-#: svnfrontend/svnactions.cpp:417
-msgid "URL"
-msgstr "URL-adres"
-
-#: svnfrontend/svnactions.cpp:419
-msgid "Canonical repository url"
-msgstr "Canonische repository-URL"
-
-#: svnfrontend/svnactions.cpp:422
-msgid "Checksum"
-msgstr "Checksum"
-
-#: svnfrontend/svnactions.cpp:424
-msgid "Type"
-msgstr "Type"
-
-#: svnfrontend/svnactions.cpp:427
-msgid "Absent"
-msgstr "Afwezig"
-
-#: svnfrontend/svnactions.cpp:433
-msgid "Folder"
-msgstr ""
-
-#: svnfrontend/svnactions.cpp:441
-msgid "Schedule"
-msgstr "Schema"
-
-#: svnfrontend/svnactions.cpp:444
-msgid "Normal"
-msgstr "Normaal"
-
-#: svnfrontend/svnactions.cpp:447
-msgid "Addition"
-msgstr "Toevoeging"
-
-#: svnfrontend/svnactions.cpp:450
-msgid "Deletion"
-msgstr "Verwijdering"
-
-#: svnfrontend/svnactions.cpp:460
-msgid "UUID"
-msgstr "UUID"
-
-#: svnfrontend/svnactions.cpp:461 svnfrontend/kdesvnfilelist.cpp:90
-msgid "Last author"
-msgstr "Laatste auteur"
-
-#: svnfrontend/svnactions.cpp:462
-#, fuzzy
-msgid "Last committed"
-msgstr "Laatst vastgelegd"
-
-#: svnfrontend/svnactions.cpp:463
-msgid "Last revision"
-msgstr "Laatste revisie"
-
-#: svnfrontend/svnactions.cpp:464
-msgid "Content last changed"
-msgstr "Inhoud laatst gewijzigd"
-
-#: svnfrontend/svnactions.cpp:465
-msgid "Property last changed"
-msgstr "Laatst gewijzigde eigenschap"
-
-#: svnfrontend/svnactions.cpp:467
-msgid "New version of conflicted file"
-msgstr "Nieuwste versie van conflicterend bestand"
-
-#: svnfrontend/svnactions.cpp:470
-msgid "Old version of conflicted file"
-msgstr "Oude versie van conflicterend bestand"
-
-#: svnfrontend/svnactions.cpp:473
-msgid "Working version of conflicted file"
-msgstr "Werkversie van conflicterend bestand"
-
-#: svnfrontend/svnactions.cpp:477
-msgid "Property reject file"
-msgstr "Eigenschap bestand verwerpen"
-
-#: svnfrontend/svnactions.cpp:482
-msgid "Copy from URL"
-msgstr "Kopiëren van URL-adres"
-
-#: svnfrontend/svnactions.cpp:485
-msgid "Lock token"
-msgstr "Vergrendelteken"
-
-#: svnfrontend/svnactions.cpp:486
-msgid "Owner"
-msgstr "Eigenaar"
-
-#: svnfrontend/svnactions.cpp:487
-msgid "Locked on"
-msgstr "Vergrendeld op"
-
-#: svnfrontend/svnactions.cpp:490
-msgid "Lock comment"
-msgstr "Commentaar vergrendelen"
-
-#: svnfrontend/svnactions.cpp:497
-msgid "Infolist"
-msgstr "Informatielijst"
-
-#: svnfrontend/svnactions.cpp:641
-msgid "Diff display"
-msgstr "Verschilweergave"
-
-#: svnfrontend/svnactions.cpp:749
-msgid "Which files or directories should I add?"
-msgstr "Welke bestanden of mappen moeten toegevoegd worden?"
-
-#: svnfrontend/svnactions.cpp:758
-msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
-msgstr ""
-"<center>Het item <br>%1<br> valt onder het versiebeheer - afbreken.</center>"
-
-#: svnfrontend/svnactions.cpp:812
-msgid "Export repository"
-msgstr "Repository exporteren"
-
-#: svnfrontend/svnactions.cpp:812 svnfrontend/svnactions.cpp:849
-#: svnfrontend/kdesvnfilelist.cpp:205
-msgid "Checkout a repository"
-msgstr "Repository uitchecken"
-
-#: svnfrontend/svnactions.cpp:839
-#, fuzzy
-msgid "Exporting a file?"
-msgstr "Een bestand exporteren"
-
-#: svnfrontend/svnactions.cpp:839
-msgid "Checking out a file?"
-msgstr "Bestand uitchecken?"
-
-#: svnfrontend/svnactions.cpp:849 svnfrontend/kdesvnfilelist.cpp:207
-msgid "Export a repository"
-msgstr "Een repository exporteren"
-
-#: svnfrontend/svnactions.cpp:881
-msgid "Checkout"
-msgstr "Checkout"
-
-#: svnfrontend/svnactions.cpp:881
-msgid "Exporting"
-msgstr "Bezig met exporteren"
-
-#: svnfrontend/svnactions.cpp:881
-msgid "Checking out"
-msgstr "Bezig met uitchecken"
-
-#: svnfrontend/svnactions.cpp:910
-msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>Het item <br>%1<br> valt niet onder het versiebeheer - afbreken.</"
-"center>"
-
-#: svnfrontend/svnactions.cpp:936
-msgid "Revert entries"
-msgstr "Items terugdraaien"
-
-#: svnfrontend/svnactions.cpp:944
-#, fuzzy
-msgid "Really revert these entries to pristine state?"
-msgstr "Wilt u de items terugbrengen naar de oorspronkelijke staat?"
-
-#: svnfrontend/svnactions.cpp:958
-msgid "Reverting items"
-msgstr "Items worden teruggedraaid"
-
-#: svnfrontend/svnactions.cpp:989 svnfrontend/svnactions.cpp:1030
-msgid "Switch url"
-msgstr "URL-adres switchen"
-
-#: svnfrontend/svnactions.cpp:989
-msgid "Switching url"
-msgstr "URL-adres wordt geswitcht"
-
-#: svnfrontend/svnactions.cpp:1008
-msgid "Can only switch one item at time"
-msgstr "Er kan maar één item tegelijkertijd geswitcht worden"
-
-#: svnfrontend/svnactions.cpp:1022
-msgid "Error getting entry to switch"
-msgstr "Er deed zich een fout voor bij het switchen van een item"
-
-#: svnfrontend/svnactions.cpp:1052
-msgid "Cleanup"
-msgstr "Opruimen"
-
-#: svnfrontend/svnactions.cpp:1052
-#, fuzzy
-msgid "Cleaning up folder"
-msgstr "Map wordt opgeruimd"
-
-#: svnfrontend/svnactions.cpp:1064
-msgid "Resolve"
-msgstr "Oplossen"
-
-#: svnfrontend/svnactions.cpp:1064
-msgid "Marking resolved"
-msgstr "Wordt gemarkeerd als opgelost"
-
-#: svnfrontend/svnactions.cpp:1076
-msgid "Importing items"
-msgstr "Items worden geïmporteerd"
-
-#: svnfrontend/svnactions.cpp:1108
-msgid "Copy or Moving entries"
-msgstr "Items kopiëren of verplaatsen"
 
 #: svnfrontend/kdesvnfilelist.cpp:88
 msgid "Status"
@@ -988,6 +642,10 @@ msgstr "Status"
 #: svnfrontend/kdesvnfilelist.cpp:89
 msgid "Last changed Revision"
 msgstr "Revisie laatste wijziging"
+
+#: svnfrontend/kdesvnfilelist.cpp:90 svnfrontend/svnactions.cpp:468
+msgid "Last author"
+msgstr "Laatste auteur"
 
 #: svnfrontend/kdesvnfilelist.cpp:91
 msgid "Last change date"
@@ -1072,111 +730,438 @@ msgstr "Mappen importeren in huidige map"
 msgid "Import folder content into current url"
 msgstr "Mapinhoud importeren naar huidig URL-adres"
 
-#: svnfrontend/kdesvnfilelist.cpp:174
+#: svnfrontend/kdesvnfilelist.cpp:175
 msgid "Adding selected files and/or directories to repository"
 msgstr ""
 "Geselecteerde mappen en/of bestanden worden toegevoegd aan de repository."
 
-#: svnfrontend/kdesvnfilelist.cpp:177
+#: svnfrontend/kdesvnfilelist.cpp:178
 msgid "Deleting selected files and/or directories from repository"
 msgstr ""
 "Geselecteerde mappen en/of bestanden worden verwijderd uit de repository"
 
-#: svnfrontend/kdesvnfilelist.cpp:182
+#: svnfrontend/kdesvnfilelist.cpp:183
 msgid "Marking files or dirs resolved"
 msgstr "Bestanden of mappen worden gemarkeerd als opgelost"
 
-#: svnfrontend/kdesvnfilelist.cpp:183
+#: svnfrontend/kdesvnfilelist.cpp:184
 msgid "Ignore/Unignore current item"
 msgstr "Huidige item negeren/negeren opheffen"
 
-#: svnfrontend/kdesvnfilelist.cpp:191
+#: svnfrontend/kdesvnfilelist.cpp:192
 msgid "Diff against head"
 msgstr "Verschil met HEAD"
 
-#: svnfrontend/kdesvnfilelist.cpp:193
+#: svnfrontend/kdesvnfilelist.cpp:194
 msgid "Merge two revisions"
 msgstr "Twee revisies samenvoegen"
 
-#: svnfrontend/kdesvnfilelist.cpp:195
+#: svnfrontend/kdesvnfilelist.cpp:196
 #, fuzzy
 msgid "Merge two revisions of these entry into itself"
 msgstr "Twee revisies van dit item in zichzelf samenvoegen"
 
-#: svnfrontend/kdesvnfilelist.cpp:200
+#: svnfrontend/kdesvnfilelist.cpp:201
 msgid "Export current repository path"
 msgstr "Huidige repositorypad exporteren"
 
-#: svnfrontend/kdesvnfilelist.cpp:202
+#: svnfrontend/kdesvnfilelist.cpp:203
 #, fuzzy
 msgid "Select browse revision"
 msgstr "Revisie selecteren"
 
-#: svnfrontend/kdesvnfilelist.cpp:209
+#: svnfrontend/kdesvnfilelist.cpp:206 svnfrontend/svnactions.cpp:855
+#: svnfrontend/svnactions.cpp:892
+msgid "Checkout a repository"
+msgstr "Repository uitchecken"
+
+#: svnfrontend/kdesvnfilelist.cpp:208 svnfrontend/svnactions.cpp:892
+msgid "Export a repository"
+msgstr "Een repository exporteren"
+
+#: svnfrontend/kdesvnfilelist.cpp:210
 msgid "Refresh view"
 msgstr "Weergave vernieuwen"
 
-#: svnfrontend/kdesvnfilelist.cpp:211
+#: svnfrontend/kdesvnfilelist.cpp:212
 #, fuzzy
 msgid "Diff revisions"
 msgstr "Verschil met vorige"
 
-#: svnfrontend/kdesvnfilelist.cpp:578
+#: svnfrontend/kdesvnfilelist.cpp:579
 msgid "SVN Error"
 msgstr "SVN-fout"
 
-#: svnfrontend/kdesvnfilelist.cpp:673
+#: svnfrontend/kdesvnfilelist.cpp:674
 msgid "Cannot import into multiple targets!"
 msgstr "Kan niet naar meerdere bestemmingen importeren!"
 
-#: svnfrontend/kdesvnfilelist.cpp:689
+#: svnfrontend/kdesvnfilelist.cpp:690
 msgid "Cannot import into remote targets!"
 msgstr "Kan niet importeren in bestemmingen op afstand!"
 
-#: svnfrontend/kdesvnfilelist.cpp:708 svnfrontend/kdesvnfilelist.cpp:712
+#: svnfrontend/kdesvnfilelist.cpp:709 svnfrontend/kdesvnfilelist.cpp:713
 msgid "Import log"
 msgstr "Import-log"
 
-#: svnfrontend/kdesvnfilelist.cpp:1158
+#: svnfrontend/kdesvnfilelist.cpp:1159
 msgid "Nothing selected for delete"
 msgstr "Niets geselecteerd voor verwijdering"
 
-#: svnfrontend/kdesvnfilelist.cpp:1176
+#: svnfrontend/kdesvnfilelist.cpp:1177
 #, fuzzy
 msgid "Really delete these entries?"
 msgstr "Wilt u deze items verwijderen?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1213
+#: svnfrontend/kdesvnfilelist.cpp:1177
+#, fuzzy
+msgid "Delete from repository"
+msgstr "Repository op afstand openen"
+
+#: svnfrontend/kdesvnfilelist.cpp:1214
 msgid "Please hold the line"
 msgstr "Een ogenblik geduld a.u.b."
 
-#: svnfrontend/kdesvnfilelist.cpp:1233
+#: svnfrontend/kdesvnfilelist.cpp:1234
 msgid "Nothing selected for lock"
 msgstr "Niets geselecteerd voor vergrendeling"
 
-#: svnfrontend/kdesvnfilelist.cpp:1238
+#: svnfrontend/kdesvnfilelist.cpp:1239
 msgid "Lock message"
 msgstr "Vergrendelbericht"
 
-#: svnfrontend/kdesvnfilelist.cpp:1241
+#: svnfrontend/kdesvnfilelist.cpp:1242
 msgid "Steal lock?"
 msgstr "Vergrendeling overnemen?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1272
+#: svnfrontend/kdesvnfilelist.cpp:1273
 msgid "Nothing selected for unlock"
 msgstr "Niets geselecteerd voor ontgrendeling"
 
-#: svnfrontend/kdesvnfilelist.cpp:1275
+#: svnfrontend/kdesvnfilelist.cpp:1276
 msgid "Break lock or ignore missing locks?"
 msgstr "Vergrendeling verbreken of ontbrekende vergrendelingen negeren?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1275
+#: svnfrontend/kdesvnfilelist.cpp:1276
 msgid "Unlocking items"
 msgstr "Items worden ontgrendeld"
 
-#: svnfrontend/kdesvnfilelist.cpp:1363
+#: svnfrontend/kdesvnfilelist.cpp:1364
 msgid "May not make subdirs of a file"
 msgstr "Kan mogelijk geen submappen aanmaken van een bestand"
+
+#: svnfrontend/rangeinput_impl.cpp:162
+msgid "Select revision"
+msgstr "Revisie selecteren"
+
+#: svnfrontend/logmsg_impl.cpp:104
+msgid "Commit log"
+msgstr "Commit-log"
+
+#: svnfrontend/svnitem.cpp:229
+msgid "Needs update"
+msgstr "Bijwerken benodigd"
+
+#: svnfrontend/svnitem.cpp:233
+msgid "Locally modified"
+msgstr "Lokaal gewijzigd"
+
+#: svnfrontend/svnitem.cpp:236
+msgid "Locally added"
+msgstr "Lokaal toegevoegd"
+
+#: svnfrontend/svnitem.cpp:239
+msgid "Missing"
+msgstr "Ontbreekt"
+
+#: svnfrontend/svnitem.cpp:245
+msgid "Replaced"
+msgstr "Vervangen"
+
+#: svnfrontend/svnitem.cpp:248
+msgid "Ignored"
+msgstr "Genegeerd"
+
+#: svnfrontend/svnitem.cpp:251
+msgid "External"
+msgstr "Extern"
+
+#: svnfrontend/svnitem.cpp:254
+msgid "Conflict"
+msgstr "Conflict"
+
+#: svnfrontend/svnitem.cpp:257
+msgid "Merged"
+msgstr "Samengevoegd"
+
+#: svnfrontend/svnitem.cpp:260
+msgid "Incomplete"
+msgstr "Incompleet"
+
+#: svnfrontend/svnitem.cpp:268
+msgid "Property modified"
+msgstr "Eigenschap gewijzigd"
+
+#: svnfrontend/svnactions.cpp:95
+msgid "Finished"
+msgstr "Voltooid"
+
+#: svnfrontend/svnactions.cpp:209
+msgid "Got no logs"
+msgstr "Geen logs gevonden"
+
+#: svnfrontend/svnactions.cpp:241
+msgid "Error getting blame"
+msgstr "Er deed zich een fout voor tijdens het ophalen van de blame-gegevens"
+
+#: svnfrontend/svnactions.cpp:246
+msgid "Got no annotate"
+msgstr "Geen annotatie gevonden"
+
+#: svnfrontend/svnactions.cpp:256
+msgid "Line"
+msgstr "Regel"
+
+#: svnfrontend/svnactions.cpp:270 svnfrontend/svnactions.cpp:444
+#: svnfrontend/svnactions.cpp:463
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: svnfrontend/svnactions.cpp:277
+msgid "Blame %1"
+msgstr "Blame %1"
+
+#: svnfrontend/svnactions.cpp:300
+msgid "Error getting content"
+msgstr "Fout bij het ophalen van de inhoud"
+
+#: svnfrontend/svnactions.cpp:310
+msgid "Got no content"
+msgstr "Geen inhoud gevonden"
+
+#: svnfrontend/svnactions.cpp:318 svnfrontend/svnactions.cpp:329
+msgid "Content of %1"
+msgstr "Inhoud van %1"
+
+#: svnfrontend/svnactions.cpp:351
+msgid "New folder"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:351
+#, fuzzy
+msgid "Enter folder name:"
+msgstr "Voer een naam in voor de (sub)map:"
+
+#: svnfrontend/svnactions.cpp:424
+msgid "URL"
+msgstr "URL-adres"
+
+#: svnfrontend/svnactions.cpp:426
+msgid "Canonical repository url"
+msgstr "Canonische repository-URL"
+
+#: svnfrontend/svnactions.cpp:429
+msgid "Checksum"
+msgstr "Checksum"
+
+#: svnfrontend/svnactions.cpp:431
+msgid "Type"
+msgstr "Type"
+
+#: svnfrontend/svnactions.cpp:434
+msgid "Absent"
+msgstr "Afwezig"
+
+#: svnfrontend/svnactions.cpp:440
+msgid "Folder"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:448
+msgid "Schedule"
+msgstr "Schema"
+
+#: svnfrontend/svnactions.cpp:451
+msgid "Normal"
+msgstr "Normaal"
+
+#: svnfrontend/svnactions.cpp:454
+msgid "Addition"
+msgstr "Toevoeging"
+
+#: svnfrontend/svnactions.cpp:457
+msgid "Deletion"
+msgstr "Verwijdering"
+
+#: svnfrontend/svnactions.cpp:467
+msgid "UUID"
+msgstr "UUID"
+
+#: svnfrontend/svnactions.cpp:469
+#, fuzzy
+msgid "Last committed"
+msgstr "Laatst vastgelegd"
+
+#: svnfrontend/svnactions.cpp:470
+msgid "Last revision"
+msgstr "Laatste revisie"
+
+#: svnfrontend/svnactions.cpp:471
+msgid "Content last changed"
+msgstr "Inhoud laatst gewijzigd"
+
+#: svnfrontend/svnactions.cpp:472
+msgid "Property last changed"
+msgstr "Laatst gewijzigde eigenschap"
+
+#: svnfrontend/svnactions.cpp:474
+msgid "New version of conflicted file"
+msgstr "Nieuwste versie van conflicterend bestand"
+
+#: svnfrontend/svnactions.cpp:477
+msgid "Old version of conflicted file"
+msgstr "Oude versie van conflicterend bestand"
+
+#: svnfrontend/svnactions.cpp:480
+msgid "Working version of conflicted file"
+msgstr "Werkversie van conflicterend bestand"
+
+#: svnfrontend/svnactions.cpp:484
+msgid "Property reject file"
+msgstr "Eigenschap bestand verwerpen"
+
+#: svnfrontend/svnactions.cpp:489
+msgid "Copy from URL"
+msgstr "Kopiëren van URL-adres"
+
+#: svnfrontend/svnactions.cpp:492
+msgid "Lock token"
+msgstr "Vergrendelteken"
+
+#: svnfrontend/svnactions.cpp:493
+msgid "Owner"
+msgstr "Eigenaar"
+
+#: svnfrontend/svnactions.cpp:494
+msgid "Locked on"
+msgstr "Vergrendeld op"
+
+#: svnfrontend/svnactions.cpp:497
+msgid "Lock comment"
+msgstr "Commentaar vergrendelen"
+
+#: svnfrontend/svnactions.cpp:504
+msgid "Infolist"
+msgstr "Informatielijst"
+
+#: svnfrontend/svnactions.cpp:792
+msgid "Which files or directories should I add?"
+msgstr "Welke bestanden of mappen moeten toegevoegd worden?"
+
+#: svnfrontend/svnactions.cpp:801
+msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
+msgstr ""
+"<center>Het item <br>%1<br> valt onder het versiebeheer - afbreken.</center>"
+
+#: svnfrontend/svnactions.cpp:855
+msgid "Export repository"
+msgstr "Repository exporteren"
+
+#: svnfrontend/svnactions.cpp:882
+#, fuzzy
+msgid "Exporting a file?"
+msgstr "Een bestand exporteren"
+
+#: svnfrontend/svnactions.cpp:882
+msgid "Checking out a file?"
+msgstr "Bestand uitchecken?"
+
+#: svnfrontend/svnactions.cpp:924
+msgid "Checkout"
+msgstr "Checkout"
+
+#: svnfrontend/svnactions.cpp:924
+msgid "Exporting"
+msgstr "Bezig met exporteren"
+
+#: svnfrontend/svnactions.cpp:924
+msgid "Checking out"
+msgstr "Bezig met uitchecken"
+
+#: svnfrontend/svnactions.cpp:953
+msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
+msgstr ""
+"<center>Het item <br>%1<br> valt niet onder het versiebeheer - afbreken.</"
+"center>"
+
+#: svnfrontend/svnactions.cpp:979
+msgid "Revert entries"
+msgstr "Items terugdraaien"
+
+#: svnfrontend/svnactions.cpp:987
+#, fuzzy
+msgid "Really revert these entries to pristine state?"
+msgstr "Wilt u de items terugbrengen naar de oorspronkelijke staat?"
+
+#: svnfrontend/svnactions.cpp:1001
+msgid "Reverting items"
+msgstr "Items worden teruggedraaid"
+
+#: svnfrontend/svnactions.cpp:1032 svnfrontend/svnactions.cpp:1073
+msgid "Switch url"
+msgstr "URL-adres switchen"
+
+#: svnfrontend/svnactions.cpp:1032
+msgid "Switching url"
+msgstr "URL-adres wordt geswitcht"
+
+#: svnfrontend/svnactions.cpp:1051
+msgid "Can only switch one item at time"
+msgstr "Er kan maar één item tegelijkertijd geswitcht worden"
+
+#: svnfrontend/svnactions.cpp:1065
+msgid "Error getting entry to switch"
+msgstr "Er deed zich een fout voor bij het switchen van een item"
+
+#: svnfrontend/svnactions.cpp:1095
+msgid "Cleanup"
+msgstr "Opruimen"
+
+#: svnfrontend/svnactions.cpp:1095
+#, fuzzy
+msgid "Cleaning up folder"
+msgstr "Map wordt opgeruimd"
+
+#: svnfrontend/svnactions.cpp:1107
+msgid "Resolve"
+msgstr "Oplossen"
+
+#: svnfrontend/svnactions.cpp:1107
+msgid "Marking resolved"
+msgstr "Wordt gemarkeerd als opgelost"
+
+#: svnfrontend/svnactions.cpp:1119
+msgid "Importing items"
+msgstr "Items worden geïmporteerd"
+
+#: svnfrontend/svnactions.cpp:1151
+msgid "Copy or Moving entries"
+msgstr "Items kopiëren of verplaatsen"
+
+#: svnfrontend/copymoveview_impl.cpp:44
+msgid "Rename/move"
+msgstr "Hernoemen/verplaatsen"
+
+#: svnfrontend/copymoveview_impl.cpp:85
+msgid "Move/Rename file/dir"
+msgstr "Verplaatsen/Bestand of map hernoemen"
+
+#: svnfrontend/copymoveview_impl.cpp:85
+msgid "Copy file/dir"
+msgstr "Bestand/map kopiëren"
+
+#: svnfrontend/importdir_logmsg.cpp:46
+msgid "Create subdir %1 on import"
+msgstr "Submap %1 aanmaken bij importeren"
 
 #: svnfrontend/ssltrustprompt_impl.cpp:37
 msgid "Error validating server certificate for '%1'"
@@ -1232,13 +1217,75 @@ msgstr "Naam uitgever"
 msgid "Fingerprint"
 msgstr "Fingerprint"
 
-#: svnfrontend/mergedlg_impl.cpp:105
-msgid "Enter merge range"
-msgstr "Voer het bereik van de samenvoeging in"
+#: kdesvnview.cpp:117
+msgid "Repository opened"
+msgstr "Repository geopend"
 
-#: svnfrontend/filelistviewitem.cpp:160
-msgid "Not versioned"
-msgstr "Niet in versiebeheer"
+#: kdesvnview.cpp:123
+msgid "Could not open repository"
+msgstr "Kon de repository niet openen"
+
+#: kdesvnview.cpp:149
+msgid "No repository open"
+msgstr "Geen repository geopend"
+
+#: urldlg.cpp:57
+#, fuzzy
+msgid "Open repository or working copy"
+msgstr "Switchen naar repository van huidige werkkopie"
+
+#: kdesvn-askpass.cpp:30
+msgid "prompt"
+msgstr ""
+
+#: kdesvn-askpass.cpp:36
+#, fuzzy
+msgid "kdesvnaskpass"
+msgstr "kdesvn"
+
+#: kdesvn-askpass.cpp:37
+msgid "ssh-askpass for kdesvn"
+msgstr ""
+
+#: kdesvn-askpass.cpp:39
+msgid "Copyright (c) 2005 Rajko Albrecht"
+msgstr ""
+
+#: kdesvn-askpass.cpp:51
+msgid "Please enter your password below."
+msgstr ""
+
+#: main.cpp:31
+#, fuzzy
+msgid "A Subversion Client for KDE (standalone application)"
+msgstr "Een Subversion-client voor KDE"
+
+#: main.cpp:37
+msgid "Document to open"
+msgstr "Te openen document"
+
+#: main.cpp:43
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#, fuzzy
+#~ msgid "Display settings"
+#~ msgstr "Instellingen"
+
+#, fuzzy
+#~ msgid "Display"
+#~ msgstr "Verschilweergave"
+
+#, fuzzy
+#~ msgid "Form1"
+#~ msgstr "Forceren"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, the configuration dialog is not finished yet. It will be "
+#~ "implemented as soon as possible."
+#~ msgstr ""
+#~ "Helaas, niet voltooid. Dit zal zo spoedig mogelijk beschikbaar zijn."
 
 #~ msgid "kdesvn Preferences"
 #~ msgstr "kdesvn instellingen"
@@ -1266,9 +1313,6 @@ msgstr "Niet in versiebeheer"
 
 #~ msgid "Open working copy"
 #~ msgstr "Werkkopie openen"
-
-#~ msgid "Open remote repository"
-#~ msgstr "Repository op afstand openen"
 
 #~ msgid "&Accept"
 #~ msgstr "&Accepteren"

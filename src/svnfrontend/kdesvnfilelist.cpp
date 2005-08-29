@@ -31,7 +31,7 @@
 #include "helpers/sshagent.h"
 #include "helpers/stl2qt.h"
 #include "helpers/runtempfile.h"
-#include "kdesvn_part.h"
+#include "kdesvn_part_config.h"
 
 #include <qvbox.h>
 #include <qpainter.h>
@@ -656,7 +656,7 @@ template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(kdesvnPart::config()),name?name:"standard_size"));
+    dlg->resize(dlg->configDialogSize(*(kdesvnPart_config::config()),name?name:"standard_size"));
     return dlg;
 }
 
@@ -721,7 +721,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(*(kdesvnPart::config()),"import_log_msg",false);
+    dlg->saveDialogSize(*(kdesvnPart_config::config()),"import_log_msg",false);
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
@@ -1245,7 +1245,7 @@ void kdesvnfilelist::slotLock()
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(*(kdesvnPart::config()),"locking_log_msg",false);
+    dlg->saveDialogSize(*(kdesvnPart_config::config()),"locking_log_msg",false);
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
@@ -1331,7 +1331,7 @@ void kdesvnfilelist::slotRangeBlame()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeBlame(r.first,r.second,k);
     }
-    dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
     delete dlg;
 }
 
@@ -1396,7 +1396,7 @@ void kdesvnfilelist::slotDiffRevisions()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeDiff(what,r.first,r.second);
     }
-    dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
     delete dlg;
 
 }
@@ -1419,7 +1419,7 @@ void kdesvnfilelist::slotSelectBrowsingRevision()
             refreshCurrentTree();
         }
     }
-    dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
     delete dlg;
 }
 
@@ -1440,7 +1440,7 @@ void kdesvnfilelist::slotRevisionCat()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeCat(r.first, k->fullName(),k->shortName());
     }
-    dlg->saveDialogSize(*(kdesvnPart::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
     delete dlg;
 }
 

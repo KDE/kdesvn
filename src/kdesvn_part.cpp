@@ -1,5 +1,6 @@
 
 #include "kdesvn_part.h"
+#include "kdesvn_part_config.h"
 #include "displaysettings_impl.h"
 #include "svncpp/version_check.hpp"
 #include "../config.h"
@@ -39,6 +40,7 @@ static const char description[] =
             addItemBool("display_overlays",mdisp_overlay,true);
             addItemInt("use_kompare_for_diff",muse_kompare,1);
             addItemString("external_diff_display",mdiff_display,"kompare");
+            addItemInt("max_log_messages",mmax_log_messages,20);
 
             setCurrentGroup("subversion");
             addItemBool("display_unknown_files",mdisp_unknown_files,true);
@@ -60,6 +62,7 @@ static const char description[] =
         bool mdisp_unknown_files;
         bool mdisp_ignored_files;
         bool mlog_follows_nodes;
+        int mmax_log_messages;
         QString mdiff_display;
 
     private:
@@ -288,24 +291,6 @@ void KdesvnBrowserExtension::properties()
 
 
 /*!
-    \fn kdesvnPart::config()
- */
-KConfig* kdesvnPart::config()
-{
-    return kdesvnPartFactory::instance()->config();
-}
-
-
-/*!
-    \fn kdesvnPart::iconloader()
- */
-KIconLoader* kdesvnPart::iconLoader()
-{
-    return kdesvnPartFactory::instance()->iconLoader();
-}
-
-
-/*!
     \fn kdesvnPart::reportBug()
  */
 void kdesvnPart::reportBug()
@@ -384,11 +369,27 @@ void kdesvnPart::slotSettingsChanged()
     emit settingsChanged();
 }
 
-QVariant kdesvnPart::configItem(const QString& name)
+QVariant kdesvnPart_config::configItem(const QString& name)
 {
     KConfigSkeletonItem*it = kdesvnPart_Prefs::self()->findItem(name);
     if (!it) {
         return QVariant();
     }
     return it->property();
+}
+
+/*!
+    \fn kdesvnPart_config::config()
+ */
+KConfig* kdesvnPart_config::config()
+{
+    return kdesvnPartFactory::instance()->config();
+}
+
+/*!
+    \fn kdesvnPart::iconloader()
+ */
+KIconLoader* kdesvnPart_config::iconLoader()
+{
+    return kdesvnPartFactory::instance()->iconLoader();
 }

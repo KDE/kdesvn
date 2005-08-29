@@ -38,9 +38,6 @@ public:
     virtual ~kdesvnPart();
     virtual bool closeURL();
     static KAboutData* createAboutData();
-    static KConfig* config();
-    static KIconLoader* iconLoader();
-    static QVariant configItem(const QString& name);
 
 signals:
     void refreshTree();

@@ -23,7 +23,7 @@
 #include "svncpp/status.hpp"
 #include "helpers/stl2qt.h"
 #include "helpers/sub2qt.h"
-#include "kdesvn_part.h"
+#include "kdesvn_part_config.h"
 #include "svnactions.h"
 
 #include <kglobal.h>
@@ -145,9 +145,9 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
     if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
         /* remote access */
         if (isDir()) {
-            p = kdesvnPart::iconLoader()->loadIcon("folder",KIcon::Desktop,size);
+            p = kdesvnPart_config::iconLoader()->loadIcon("folder",KIcon::Desktop,size);
         } else {
-            p = kdesvnPart::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
+            p = kdesvnPart_config::iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
         }
     } else {
         _local = true;
@@ -158,11 +158,11 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         bool mod = false;
         QPixmap p2 = QPixmap();
         if (wrap->isUpdated(p_Item->m_Stat.path())) {
-            p2 = kdesvnPart::iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
+            p2 = kdesvnPart_config::iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
-            p2 = kdesvnPart::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
+            p2 = kdesvnPart_config::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
-            p2 = kdesvnPart::iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
+            p2 = kdesvnPart_config::iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified) {
             mod = true;
         } else if (isDir()&&wrap) {
@@ -170,7 +170,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             svn::StatusEntries::const_iterator it;
             wrap->checkUpdateCache(fullName(),dlist);
             if (dlist.size()>0) {
-                p2 = kdesvnPart::iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
+                p2 = kdesvnPart_config::iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
             } else {
                 wrap->checkModifiedCache(fullName(),dlist);
                 for (it=dlist.begin();it!=dlist.end();++it) {
@@ -186,7 +186,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             }
         }
         if (mod) {
-            p2 = kdesvnPart::iconLoader()->loadIcon("exclam",KIcon::Desktop,size);
+            p2 = kdesvnPart_config::iconLoader()->loadIcon("exclam",KIcon::Desktop,size);
         }
         if (!p2.isNull()) {
             QImage i1; i1 = p;

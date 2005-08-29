@@ -18,6 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "logmsg_impl.h"
+#include "kdesvn_part_config.h"
+
 #include <ktextedit.h>
 #include <kcombobox.h>
 #include <qcheckbox.h>
@@ -30,8 +32,12 @@
 #include <kconfigbase.h>
 #include <kconfig.h>
 
+#define MAX_MESSAGE_HISTORY 10
+
 QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
 const char* Logmsg_impl::groupName = "logmsg_dialog_size";
+
+int Logmsg_impl::smax_message_history = -1;
 
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
@@ -70,7 +76,25 @@ bool Logmsg_impl::isRecursive()const
  */
 void Logmsg_impl::initHistory()
 {
-    /// @todo make static threadsafe
+    if (smax_message_history==-1) {
+        smax_message_history = kdesvnPart_config::configItem("max_log_messages").toInt();
+        KConfigGroup cs(kdesvnPart_config::config(),"log_messages");
+        QString s = QString::null;
+        int current = 0;
+        QString key = QString("log_%0").arg(current);
+        s = cs.readEntry(key,QString::null);
+        while (s!=QString::null) {
+            if (current<smax_message_history) {
+                sLogHistory.push_back(s);
+            } else {
+                cs.deleteEntry(key);
+            }
+            ++current;
+            key = QString("log_%0").arg(current);
+            s = cs.readEntry(key,QString::null);
+        }
+    }
+    kdDebug()<<"Max history: " << smax_message_history << endl;
     QValueList<QString>::const_iterator it;
     for (it=sLogHistory.begin();it!=sLogHistory.end();++it) {
         m_LogHistory->insertItem((*it));
@@ -90,9 +114,14 @@ void Logmsg_impl::saveHistory()
         sLogHistory.erase(it);
     }
     sLogHistory.push_front(m_LogEdit->text());
-    if (sLogHistory.size()>10) {
+    if (sLogHistory.size()>smax_message_history) {
         sLogHistory.erase(sLogHistory.fromLast());
     }
+    KConfigGroup cs(kdesvnPart_config::config(),"log_messages");
+    for (unsigned int i = 0; i < sLogHistory.size();++i) {
+        cs.writeEntry(QString("log_%0").arg(i),sLogHistory[i]);
+    }
+    cs.sync();
 }
 
 QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*name)

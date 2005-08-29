@@ -17,7 +17,8 @@ kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 kdesvn_SOURCES = main.cpp kdesvn.cpp urldlg.cpp
 
 # these are the headers for your project
-noinst_HEADERS = kdesvn.h kdesvnview.h urldlg.h displaysettings_impl.h
+noinst_HEADERS = kdesvn.h kdesvnview.h urldlg.h displaysettings_impl.h \
+	kdesvn_part_config.h
 
 # client stuff
 

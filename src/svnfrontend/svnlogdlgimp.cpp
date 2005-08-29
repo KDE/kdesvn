@@ -30,7 +30,7 @@
 #include <kconfig.h>
 #include <ktabwidget.h>
 #include <kdebug.h>
-#include "kdesvn_part.h"
+#include "kdesvn_part_config.h"
 
 #include <list>
 
@@ -155,11 +155,11 @@ void SvnLogDlgImp::saveSize()
 {
     int scnum = QApplication::desktop()->screenNumber(parentWidget());
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
-    KConfigGroupSaver cs(kdesvnPart::config(), groupName);
+    KConfigGroupSaver cs(kdesvnPart_config::config(), groupName);
     QSize sizeToSave = size();
-    kdesvnPart::config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
+    kdesvnPart_config::config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
         QString::number( sizeToSave.width()), true, false);
-    kdesvnPart::config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
+    kdesvnPart_config::config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
         QString::number( sizeToSave.height()), true, false);
 }
 
@@ -170,8 +170,8 @@ QSize SvnLogDlgImp::dialogSize()
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
     w = sizeHint().width();
     h = sizeHint().height();
-    KConfigGroupSaver cs(kdesvnPart::config(), groupName);
-    w = kdesvnPart::config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
-    h = kdesvnPart::config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
+    KConfigGroupSaver cs(kdesvnPart_config::config(), groupName);
+    w = kdesvnPart_config::config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
+    h = kdesvnPart_config::config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
     return( QSize( w, h ) );
 }

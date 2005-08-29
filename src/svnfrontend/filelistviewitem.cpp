@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "filelistviewitem.h"
 #include "kdesvnfilelist.h"
-#include "kdesvn_part.h"
+#include "kdesvn_part_config.h"
 #include "helpers/sub2qt.h"
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"
@@ -130,8 +130,8 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool 
 
 void FileListViewItem::makePixmap()
 {
-    int s = kdesvnPart::configItem("listview_icon_size").toInt();
-    bool o = kdesvnPart::configItem("display_overlays").toBool();
+    int s = kdesvnPart_config::configItem("listview_icon_size").toInt();
+    bool o = kdesvnPart_config::configItem("display_overlays").toBool();
     setPixmap(COL_ICON,getPixmap(s,o));
 }
 

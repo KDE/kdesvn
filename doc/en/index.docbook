@@ -225,11 +225,58 @@ Direct repository accesss. &kdesvn; checks if a given path is a repository or a 
 
 </para>
 </sect1>
+<sect1 id="first_steps">
+<title>Beginning with subversion and kdesvn</title>
+<para>
+This section is mostly for beginners not familiar with subversion which tries to understand how subversions and/or RCS works.
+</para>
+<sect2>
+<title>Creating a working copy</title>
+<para>
+First of all a you must create a working copy of your repository. For that select
+
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>General</guisubmenu>
+<guimenuitem>Checkout a repository</guimenuitem>
+</menuchoice>. Inside the following dialog you must select the URL of the repository you want to use. Eg, something like
+<prompt>http://localhost/repos/myproject</prompt>. Subfolders of repository are possible, too, eg,
+<prompt>http://localhost/repos/myproject/trunk</prompt> or similiar.
+</para>
+<para>
+Select and/or create a local folder, where this working copy should reside.
+</para>
+<para>
+Last but not least, the revision to checkout. Mostly that should be &quot;HEAD&quot;. That means that always the last stored version
+is the referenced version.
+</para>
+<para>
+After clicking on &quot;ok&quot; &kdesvn; create your new working copy and (if box was checked) opens it.
+</para>
+</sect2>
+
+</sect1>
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>
 <para>
 Entries may marked with overlayed icons when not in &quot;normal&quot; state.
 <variablelist>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
+<imagedata fileref="snvupdates.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>Updates</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry or - if folder - an entry below has newer version in repository.
+</para></listitem>
+</varlistentry>
+
 
 <varlistentry>
 <term><inlinemediaobject>
@@ -242,7 +289,7 @@ Entries may marked with overlayed icons when not in &quot;normal&quot; state.
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry or - if folder - an entry below was changed on local disc or this entry has an newer version on repository.
+This entry or - if folder - an entry below was changed on local disc.
 </para></listitem>
 </varlistentry>
 

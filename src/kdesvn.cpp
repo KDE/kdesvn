@@ -308,5 +308,11 @@ void kdesvn::applyNewToolbarConfig()
 
 void kdesvn::optionsConfigureKeys()
 {
-    KKeyDialog::configure(actionCollection());
+    KKeyDialog kdlg(true,m_part->widget());
+    kdlg.insert(actionCollection());
+    kdlg.insert(m_part->actionCollection());
+    bool b = kdlg.configure(true);
+    if (b) {
+        kdlg.commitChanges();
+    }
 }

@@ -171,6 +171,7 @@ bool CContextListener::contextCancel()
         m_cancelMe=false;
         return true;
     }
+    emit tickProgress();
     return false;
 }
 

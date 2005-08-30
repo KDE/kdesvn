@@ -27,7 +27,7 @@ Kdsvn is a subversion client for KDE
 CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" ./configure \
                 --prefix=`kde-config --prefix` \
                 --disable-no-exceptions \
-                --disable-debug=none
+                --disable-debug
 %build
 # Setup for parallel builds
 numprocs=`egrep -c ^cpu[0-9]+ /proc/stat || :`

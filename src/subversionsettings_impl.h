@@ -17,18 +17,31 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef DISPLAYSETTINGS_IMPL_H
-#define DISPLAYSETTINGS_IMPL_H
 
-#include "display_settings.h"
+#ifndef SUBVERSIONSETTINGS_IMPL_H
+#define SUBVERSIONSETTINGS_IMPL_H
 
-class DisplaySettings_impl: public DisplaySettings {
-Q_OBJECT
+#include "subversion_settings.h"
+
+class SubversionSettings_impl : public SubversionSettings
+{
+  Q_OBJECT
+
 public:
-    DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~DisplaySettings_impl();
+  SubversionSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  ~SubversionSettings_impl();
+  /*$PUBLIC_FUNCTIONS$*/
+
+public slots:
+  /*$PUBLIC_SLOTS$*/
+
+protected:
+  /*$PROTECTED_FUNCTIONS$*/
+
 protected slots:
-    virtual void diffDispChanged();
+  /*$PROTECTED_SLOTS$*/
+
 };
 
 #endif
+

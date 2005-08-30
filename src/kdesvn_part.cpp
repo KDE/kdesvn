@@ -2,6 +2,7 @@
 #include "kdesvn_part.h"
 #include "kdesvn_part_config.h"
 #include "displaysettings_impl.h"
+#include "subversionsettings_impl.h"
 #include "svncpp/version_check.hpp"
 #include "../config.h"
 
@@ -46,6 +47,7 @@ static const char description[] =
             addItemBool("display_unknown_files",mdisp_unknown_files,true);
             addItemBool("display_ignored_files",mdisp_ignored_files,true);
             addItemBool("log_follows_nodes",mlog_follows_nodes,true);
+            addItemBool("info_recursive",minfo_recursive,false);
         }
 
         static kdesvnPart_Prefs*self()
@@ -62,6 +64,7 @@ static const char description[] =
         bool mdisp_unknown_files;
         bool mdisp_ignored_files;
         bool mlog_follows_nodes;
+        bool minfo_recursive;
         int mmax_log_messages;
         QString mdiff_display;
 
@@ -338,6 +341,8 @@ void kdesvnPart::slotShowSettings()
          KDialogBase::IconList);
     dialog->addPage(new DisplaySettings_impl(0,"general_items"),
         i18n("General"),"kdesvn",i18n("General"),true);
+    dialog->addPage(new SubversionSettings_impl(0,"subversion_items"),
+        i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
     connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
     dialog->show();

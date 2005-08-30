@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>304</width>
-            <height>263</height>
+            <width>302</width>
+            <height>245</height>
         </rect>
     </property>
     <property name="caption">
@@ -50,19 +50,6 @@
                     </property>
                 </widget>
             </grid>
-        </widget>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_display_overlays</cstring>
-            </property>
-            <property name="text">
-                <string>Mark changed items</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>Check (if needed recursive) if items are changed (added/delete/changed) and mark these items with an overlayed icon.
-
-If it works slow (low connection and so on) you should turn of this feature.</string>
-            </property>
         </widget>
         <widget class="QButtonGroup">
             <property name="name">
@@ -185,6 +172,35 @@ and Kdesvn will pipe data direct.
 </widget>
 <customwidgets>
 </customwidgets>
+<connections>
+    <connection>
+        <sender>kcfg_external_diff_display</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>DisplaySettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+    <connection>
+        <sender>m_internal</sender>
+        <signal>clicked()</signal>
+        <receiver>DisplaySettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+    <connection>
+        <sender>m_kompare</sender>
+        <signal>clicked()</signal>
+        <receiver>DisplaySettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+    <connection>
+        <sender>m_other</sender>
+        <signal>clicked()</signal>
+        <receiver>DisplaySettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+</connections>
+<slots>
+    <slot access="protected">diffDispChanged()</slot>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>

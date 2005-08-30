@@ -78,6 +78,7 @@ public:
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
     void makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
+    void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     QString makeMkdir(const QString&);
     bool isLocalWorkingCopy(const KURL&url);
     bool createUpdateCache(const QString&what);
@@ -95,7 +96,6 @@ protected:
 public slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
-    virtual void slotInfo();
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();

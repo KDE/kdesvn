@@ -377,33 +377,20 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     return ex;
 }
 
-void SvnActions::slotInfo()
+void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
-    /// @todo remove reference to parentlist
     if (!m_Data->m_CurrentContext) return;
-    if (!m_Data->m_ParentList) return;
-    QPtrList<SvnItem> lst;
-    m_Data->m_ParentList->SelectionList(&lst);
-    svn::InfoEntries entries;
-    svn::Revision peg(svn_opt_revision_unspecified);
-    svn::Revision rev(svn_opt_revision_unspecified);
-    if (!m_Data->m_ParentList->isLocal()) {
-        rev = svn::Revision::HEAD;
-    }
     QString ex;
+    svn::InfoEntries entries;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
-        if (lst.count()==0) {
-            entries = m_Data->m_Svnclient.info2(m_Data->m_ParentList->baseUri(),true,rev,peg);
-        } else {
-            SvnItem*item;
-            svn::InfoEntries e;
-            for (item=lst.first();item;item=lst.next()) {
-                e = (m_Data->m_Svnclient.info2(item->fullName(),true,rev,peg));
-                // stl like - hold it for qt4?
-                //entries.insert(entries.end(),e.begin(),e.end());
-                entries+=e;
-            }
+        SvnItem*item;
+        svn::InfoEntries e;
+        for (item=lst.first();item;item=lst.next()) {
+            e = (m_Data->m_Svnclient.info2(item->fullName(),recursive,rev,peg));
+            // stl like - hold it for qt4?
+            //entries.insert(entries.end(),e.begin(),e.end());
+            entries+=e;
         }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
@@ -1216,7 +1203,8 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 {
     QString ex;
     try {
-        //                                      rec all  up    noign
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Status / List"),i18n("Creating list / check status"));
+        //                                      rec all  up     noign
         dlist = m_Data->m_Svnclient.status(what,rec,all,updates,display_ignores,where);
     } catch (svn::ClientException e) {
         //Message box!

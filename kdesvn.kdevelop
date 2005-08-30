@@ -87,6 +87,8 @@
     <subclassing>
       <subclass uifile="/src/svnfrontend/copymoveview.ui" sourcefile="/src/svnfrontend/copymoveview_impl.cpp" />
       <subclass uifile="/src/svnfrontend/copymoveview.ui" sourcefile="/src/svnfrontend/copymoveview_impl.h" />
+      <subclass uifile="/src/subversion_settings.ui" sourcefile="/src/subversionsettings_impl.cpp" />
+      <subclass uifile="/src/subversion_settings.ui" sourcefile="/src/subversionsettings_impl.h" />
     </subclassing>
   </kdevautoproject>
   <kdevfileview>
@@ -235,6 +237,7 @@
         <implementation class="Rangeinput_impl" path="src/svnfrontend/rangeinput.ui" implementationpath="src/svnfrontend/rangeinput_impl.h" />
         <implementation class="SslTrustPrompt_impl" path="src/svnfrontend/ssltrustprompt.ui" implementationpath="src/svnfrontend/ssltrustprompt_impl.h" />
         <implementation class="DisplaySettings_impl" path="src/display_settings.ui" implementationpath="src/displaysettings_impl.h" />
+        <implementation class="SubversionSettings_impl" path="src/subversion_settings.ui" implementationpath="src/subversionsettings_impl.h" />
       </qtdesigner>
     </designerintegration>
     <creategettersetter>

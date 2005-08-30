@@ -1,0 +1,70 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>SubversionSettings</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>SubversionSettings</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>280</width>
+            <height>151</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Subversion Settings</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_overlays</cstring>
+            </property>
+            <property name="text">
+                <string>Mark changed items</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Check (if needed recursive) if items are changed (added/delete/changed) and mark these items with an overlayed icon.
+
+If it works slow (low connection and so on) you should turn of this feature.</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_info_recursive</cstring>
+            </property>
+            <property name="text">
+                <string>Retrieve item info recursive</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_unknown_files</cstring>
+            </property>
+            <property name="text">
+                <string>Display unknown files</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_ignored_files</cstring>
+            </property>
+            <property name="text">
+                <string>Display ignored files</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_log_follows_nodes</cstring>
+            </property>
+            <property name="text">
+                <string>Log follows node changes</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

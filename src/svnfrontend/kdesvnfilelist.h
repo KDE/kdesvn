@@ -179,6 +179,7 @@ protected slots:
     virtual void slotRevisionCat();
 protected slots:
     virtual void slotCheckUpdates();
+    void slotInfo();
 };
 
 #endif

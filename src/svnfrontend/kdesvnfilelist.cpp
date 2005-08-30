@@ -130,7 +130,7 @@ void kdesvnfilelist::setupActions()
     m_propertyAction = new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     m_InfoAction = new KAction(i18n("Details"),"svninfo",
-        KShortcut(Key_I),m_SvnWrapper,SLOT(slotInfo()),m_filesAction,"make_svn_info");
+        KShortcut(Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_RenameAction = new KAction(i18n("Move"),"move",
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
     m_CopyAction = new KAction(i18n("Copy"),"editcopy",
@@ -1493,4 +1493,23 @@ void kdesvnfilelist::reinitItems(FileListViewItem*_item)
         reinitItems(item);
         item = static_cast<FileListViewItem*>(item->nextSibling());
     }
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotInfo()
+ */
+void kdesvnfilelist::slotInfo()
+{
+    QPtrList<SvnItem> lst;
+    SelectionList(&lst);
+    svn::Revision peg(svn_opt_revision_unspecified);
+    svn::Revision rev(svn_opt_revision_unspecified);
+    if (!isLocal()) {
+        rev = svn::Revision::HEAD;
+    }
+    if (lst.count()==0) {
+        lst.append(SelectedOrMain());
+    }
+    m_SvnWrapper->makeInfo(lst,rev,peg,kdesvnPart_config::configItem("info_recursive").toBool());
 }

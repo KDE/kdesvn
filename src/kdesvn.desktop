@@ -1,12 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=kdesvn
+GenericName=SVN client
+GenericName[de]=Graphische Oberfläche für SVN
 Exec=kdesvn %i %m -caption "%c"
 Icon=kdesvn
 Type=Application
-DocPath=kdesvn/kdesvn.html
+DocPath=kdesvn/index.html
 Comment=A Subversion client for KDE
-Comment[de]=Ein Subversionclient f�r KDE
+Comment[de]=Ein Subversionclient für KDE
 Comment[nl]=Een Subversion-client voor KDE
 Terminal=false
 MimeType=inode/directory

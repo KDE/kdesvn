@@ -313,7 +313,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         SshAgent ssh;
         ssh.addSshIdentities();
     }
-
+    m_SvnWrapper->clearUpdateCache();
     if (m_isLocal) {
         m_SvnWrapper->createModifiedCache(m_baseUri);
     }
@@ -1211,7 +1211,7 @@ void kdesvnfilelist::dispDummy()
     // wait for job
     QLabel dummy(this,0,WStyle_NoBorder|WShowModal);
     QSize csize = size();
-    dummy.setText(i18n("Please hold the line"));
+    dummy.setText(i18n("Please wait until job is finished"));
     dummy.resize(dummy.minimumSizeHint());
     if (dummy.width()<=width()&&dummy.height()<=height()) {
         dummy.move(csize.width()/2-dummy.width()/2,csize.height()/2-dummy.height()/2);

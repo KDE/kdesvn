@@ -163,7 +163,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             p2 = kdesvnPart_config::iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
             p2 = kdesvnPart_config::iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
-        } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified) {
+        } else if (isModified()) {
             mod = true;
         } else if (isDir()&&wrap) {
             svn::StatusEntries dlist;
@@ -293,4 +293,18 @@ bool SvnItem::isLocked()const
 QString SvnItem::lockOwner()const
 {
     return p_Item->m_Stat.entry().lockEntry().Owner();
+}
+
+
+/*!
+    \fn SvnItem::isModified()
+ */
+bool SvnItem::isModified()
+{
+    return p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified;
+}
+
+const svn::Status& SvnItem::stat()const
+{
+    return p_Item->m_Stat;
 }

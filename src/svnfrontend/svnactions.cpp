@@ -1226,6 +1226,30 @@ bool SvnActions::createModifiedCache(const QString&what)
     return false;
 }
 
+void SvnActions::addModifiedCache(const svn::Status&what)
+{
+    if (!kdesvnPart_config::configItem("display_overlays").toBool()||what.path().isEmpty()) {
+        return;
+    }
+    for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
+        if (m_Data->m_Cache[i].path()==what.path()) {
+            return;
+        }
+    }
+    m_Data->m_Cache.push_back(what);
+}
+
+void SvnActions::deleteFromModifiedCache(const QString&what)
+{
+    svn::StatusEntries::iterator it;
+    for (it=m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
+        if ((*it).path()==what) {
+            m_Data->m_Cache.erase(it);
+            return;
+        }
+    }
+}
+
 void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
     for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {

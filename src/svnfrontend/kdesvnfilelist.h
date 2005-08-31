@@ -35,7 +35,6 @@ class KActionMenu;
 class KActionCollection;
 class KDialog;
 class KDialogBase;
-class DirNotify;
 class KdesvnFileListPrivate;
 class SvnActions;
 
@@ -104,9 +103,10 @@ protected:
         );
 
     FileListViewItemList* m_SelectedItems;
+    FileListViewItem* findEntryItem(const QString&,FileListViewItem*startAt=0);
 
     virtual void refreshRecursive(FileListViewItem*);
-    DirNotify*m_DirNotify;
+    virtual void updateParents(FileListViewItem*);
 
     /**
      * Overridden virtuals for Qt drag 'n drop (XDND)
@@ -180,6 +180,9 @@ protected slots:
 protected slots:
     virtual void slotCheckUpdates();
     void slotInfo();
+    virtual void slotDirItemCreated(const QString&);
+    virtual void slotDirItemDirty(const QString&);
+    virtual void slotDirItemDeleted(const QString&);
 };
 
 #endif

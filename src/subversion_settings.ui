@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>280</width>
-            <height>151</height>
+            <width>206</width>
+            <height>124</height>
         </rect>
     </property>
     <property name="caption">
@@ -38,14 +38,6 @@ If it works slow (low connection and so on) you should turn of this feature.</st
             </property>
             <property name="text">
                 <string>Gain item info recursive</string>
-            </property>
-        </widget>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_display_unknown_files</cstring>
-            </property>
-            <property name="text">
-                <string>Display unknown files</string>
             </property>
         </widget>
         <widget class="QCheckBox">

@@ -44,7 +44,10 @@ static const char description[] =
             addItemInt("max_log_messages",mmax_log_messages,20);
 
             setCurrentGroup("subversion");
+#if 0
+            /// not needed this moment
             addItemBool("display_unknown_files",mdisp_unknown_files,true);
+#endif
             addItemBool("display_ignored_files",mdisp_ignored_files,true);
             addItemBool("log_follows_nodes",mlog_follows_nodes,true);
             addItemBool("info_recursive",minfo_recursive,false);
@@ -61,7 +64,10 @@ static const char description[] =
         int mlist_icon_size;
         bool mdisp_overlay;
         int muse_kompare;
+#if 0
+        /// not needed this moment
         bool mdisp_unknown_files;
+#endif
         bool mdisp_ignored_files;
         bool mlog_follows_nodes;
         bool minfo_recursive;
@@ -199,10 +205,13 @@ void kdesvnPart::setupActions()
             actionCollection(),"toggle_ignored_files");
     toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_ignored_files);
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
+#if 0
+    /// not needed this moment
     toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
             actionCollection(),"toggle_unknown_files");
     toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_unknown_files);
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
+#endif
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
@@ -241,10 +250,12 @@ void kdesvnPart::slotDisplayIgnored(bool how)
 /*!
     \fn kdesvnPart::slotDisplayUnknown(bool)
  */
-void kdesvnPart::slotDisplayUnkown(bool how)
+void kdesvnPart::slotDisplayUnkown(bool )
 {
+#if 0
     kdesvnPart_Prefs::self()->mdisp_unknown_files=how;
     kdesvnPart_Prefs::self()->writeConfig();
+#endif
 }
 
 
@@ -367,10 +378,13 @@ void kdesvnPart::slotSettingsChanged()
     if (temp) {
         ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mdisp_ignored_files);
     }
+#if 0
+    /// not needed this momenta
     temp = actionCollection()->action("toggle_unknown_files");
     if (temp) {
         ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mdisp_unknown_files);
     }
+#endif
     emit settingsChanged();
 }
 

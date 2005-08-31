@@ -1241,7 +1241,6 @@ void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 bool SvnActions::createUpdateCache(const QString&what)
 {
     clearUpdateCache();
-    kdDebug()<<"Create updatecache for " << what << endl;
     svn::Revision r = svn::Revision::HEAD;
     svn::StatusEntries dlist;
     if (!makeStatus(what,dlist,r,true,false,false,true)) {
@@ -1252,6 +1251,7 @@ bool SvnActions::createUpdateCache(const QString&what)
             m_Data->m_UpdateCache.push_back(dlist[i]);
         }
     }
+    emit sendNotify(i18n("Checking for updates finished"));
     return true;
 }
 

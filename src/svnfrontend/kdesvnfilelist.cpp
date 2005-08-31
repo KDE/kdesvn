@@ -135,7 +135,8 @@ void kdesvnfilelist::setupActions()
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
     m_CopyAction = new KAction(i18n("Copy"),"editcopy",
         KShortcut(Key_F5),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
-    new KAction(i18n("Check for updates"),KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
+    tmp_action = new KAction(i18n("Check for updates"),"svncheckupdates",KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
+    tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
     /* 2. actions only on files */
     m_BlameAction = new KAction("&Blame","flag",KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");

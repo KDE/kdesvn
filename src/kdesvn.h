@@ -65,16 +65,8 @@ public:
     void load(const KURL& url);
 
     virtual void openBookmarkURL (const QString &_url);
-//    virtual QString currentTitle () const;
     virtual QString currentURL () const;
-protected:
-#if 0
-    /**
-     * Overridden virtuals for Qt drag 'n drop (XDND)
-     */
-    virtual void dragEnterEvent(QDragEnterEvent *event);
-    virtual void dropEvent(QDropEvent *event);
-#endif
+    void checkReload();
 
 protected:
     /**
@@ -89,6 +81,7 @@ protected:
      * with @ref saveProperties
      */
     void readProperties(KConfig *);
+    virtual bool queryExit();
 
 
 public slots:
@@ -122,6 +115,7 @@ protected slots:
     virtual void optionsConfigureToolbars();
     virtual void optionsConfigureKeys();
     virtual void applyNewToolbarConfig();
+    virtual void slotLoadLast(bool);
 };
 
 #endif // _KDESVN_H_

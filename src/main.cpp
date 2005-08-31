@@ -67,6 +67,7 @@ int main(int argc, char **argv)
         {
             kdesvn *widget = new kdesvn;
             widget->show();
+            widget->checkReload();
         }
         else
         {

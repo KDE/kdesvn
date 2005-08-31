@@ -18,6 +18,8 @@
     <text>&amp;Settings</text>
     <Action name="options_show_toolbar"/>
     <Action name="options_show_statusbar"/>
+    <Separator />
+    <Action name="toggle_load_last_url" />
     <Action name="show_merge" />
     <Separator />
     <Action name="options_configure_keybinding"/>

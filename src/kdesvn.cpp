@@ -147,8 +147,10 @@ void kdesvn::load(const KURL& url)
 
 void kdesvn::setupActions()
 {
+    KAction*ac;
     KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    KStdAction::close(this,SLOT(fileClose()),actionCollection());
+    ac = KStdAction::close(this,SLOT(fileClose()),actionCollection());
+    ac->setEnabled(false);
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
     KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
@@ -156,6 +158,14 @@ void kdesvn::setupActions()
 
     m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
     m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
+
+    KToggleAction *toggletemp;
+    toggletemp = new KToggleAction(i18n("Load last opened URL on start"),KShortcut(),
+            actionCollection(),"toggle_load_last_url");
+    toggletemp->setToolTip(i18n("Reload last opend url if no one is given on commandline"));
+    KConfigGroup cs(KGlobal::config(),"startup");
+    toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLoadLast(bool)));
 }
 
 void kdesvn::optionsShowToolbar()
@@ -315,4 +325,47 @@ void kdesvn::optionsConfigureKeys()
     if (b) {
         kdlg.commitChanges();
     }
+}
+
+
+/*!
+    \fn kdesvn::queryExit()
+ */
+bool kdesvn::queryExit()
+{
+    if (m_part) {
+        KConfigGroup cs(KGlobal::config(),"startup");
+#if KDE_IS_VERSION(3,1,3)
+        cs.writePathEntry("lastURL", m_part->url().prettyURL());
+#else
+        cs.writeEntry("lastURL", m_part->url().prettyURL());
+#endif
+    }
+    return KParts::MainWindow::queryExit();
+}
+
+
+/*!
+    \fn kdesvn::checkReload()
+ */
+void kdesvn::checkReload()
+{
+    KConfigGroup cs(KGlobal::config(),"startup");
+    if (!cs.readBoolEntry("load_last_on_start",false))
+        return;
+
+    QString url = cs.readPathEntry("lastURL");
+
+    if (!url.isEmpty() && m_part)
+        m_part->openURL(KURL(url));
+}
+
+
+/*!
+    \fn kdesvn::slotLoadLast(bool)
+ */
+void kdesvn::slotLoadLast(bool how)
+{
+    KConfigGroup cs(KGlobal::config(),"startup");
+    cs.writeEntry("load_last_on_start",how);
 }

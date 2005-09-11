@@ -1236,6 +1236,7 @@ void SvnActions::addModifiedCache(const svn::Status&what)
             return;
         }
     }
+    kdDebug()<<"Adding to cache " << what.path()<<endl;
     m_Data->m_Cache.push_back(what);
 }
 
@@ -1244,10 +1245,12 @@ void SvnActions::deleteFromModifiedCache(const QString&what)
     svn::StatusEntries::iterator it;
     for (it=m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
         if ((*it).path()==what) {
+            kdDebug()<<"Removing cache " << what<<endl;
             m_Data->m_Cache.erase(it);
             return;
         }
     }
+    kdDebug()<<"Removing cache " << what<< " not found" << endl;
 }
 
 void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)

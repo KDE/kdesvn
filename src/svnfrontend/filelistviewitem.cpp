@@ -85,20 +85,6 @@ void FileListViewItem::setStat(const svn::Status&stat)
     init();
 }
 
-#if 0
-void FileListViewItem::refreshMe()
-{
-    try {
-        setStat(m_Ksvnfilelist->svnclient()->singleStatus(fullName()));
-    } catch (svn::ClientException e) {
-        setStat(svn::Status());
-        setText(COL_STATUS,e.message());
-        return;
-    }
-    init();
-}
-#endif
-
 void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool depsonly)
 {
     FileListViewItem*it;
@@ -158,14 +144,12 @@ void FileListViewItem::update()
     setText(COL_LAST_AUTHOR,cmtAuthor());
     setText(COL_LAST_DATE,fullDate().toString());
     setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
-#if 1
     if (isLocked()) {
         setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));
     } else {
         setPixmap(COL_IS_LOCKED,QPixmap());
     }
     setText(COL_IS_LOCKED,lockOwner());
-#endif
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const
@@ -195,7 +179,6 @@ void FileListViewItem::removeChilds()
 void FileListViewItem::updateStatus(const svn::Status&s)
 {
     setStat(s);
-    init();
 }
 
 /*!

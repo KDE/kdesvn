@@ -299,7 +299,7 @@ QString SvnItem::lockOwner()const
 /*!
     \fn SvnItem::isModified()
  */
-bool SvnItem::isModified()
+bool SvnItem::isModified()const
 {
     return p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified;
 }
@@ -307,4 +307,13 @@ bool SvnItem::isModified()
 const svn::Status& SvnItem::stat()const
 {
     return p_Item->m_Stat;
+}
+
+
+/*!
+    \fn SvnItem::isNormal()const
+ */
+bool SvnItem::isNormal()const
+{
+    return p_Item->m_Stat.textStatus()==svn_wc_status_normal;
 }

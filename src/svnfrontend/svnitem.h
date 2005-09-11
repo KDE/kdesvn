@@ -61,7 +61,8 @@ public:
     FileListViewItem*fItem(){return 0;}
     virtual void setStat(const svn::Status&);
     virtual const svn::Status& stat()const;
-    virtual bool isModified();
+    virtual bool isModified()const;
+    bool isNormal()const;
 
 protected:
     smart_pointer<SvnItem_p> p_Item;

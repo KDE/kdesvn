@@ -132,6 +132,7 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
 
 kdesvnPart::~kdesvnPart()
 {
+    kdesvnPartFactory::instance()->config()->sync();
 }
 
 bool kdesvnPart::openFile()

@@ -105,7 +105,7 @@ protected:
     FileListViewItemList* m_SelectedItems;
     FileListViewItem* findEntryItem(const QString&,FileListViewItem*startAt=0);
 
-    virtual void refreshRecursive(FileListViewItem*);
+    virtual void refreshRecursive(FileListViewItem*,bool down=true);
     virtual void updateParents(FileListViewItem*);
 
     /**

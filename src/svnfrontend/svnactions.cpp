@@ -806,11 +806,16 @@ void SvnActions::slotAdd()
     }
     addItems(items);
     liter.toFirst();
+#if 0
     while ((cur=liter.current())!=0){
         ++liter;
-        cur->refreshStatus();
+        //cur->refreshStatus();
+
         //emit sigRefreshCurrent(static_cast<FileListViewItem*>(cur->parent()));
     }
+#else
+    emit sigRefreshCurrent(0);
+#endif
 }
 
 void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)

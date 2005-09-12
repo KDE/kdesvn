@@ -18,42 +18,52 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef __ITEMDISPLAY_H
-#define __ITEMDISPLAY_H
+#include "itemdisplay.h"
 
-#include <qptrlist.h>
-#include <qstring.h>
-#include <kurl.h>
 
-class QWidget;
-
-class SvnItem;
-
-class ItemDisplay
+ItemDisplay::ItemDisplay()
+    :m_LastException(""),m_isWorkingCopy(false),m_isNetworked(false),m_baseUri("")
 {
-public:
-    ItemDisplay();
-    virtual ~ItemDisplay(){}
-    virtual bool isWorkingCopy()const;
-    virtual QWidget*realWidget() = 0;
-    virtual SvnItem*Selected()=0;
-    virtual void SelectionList(QPtrList<SvnItem>*)=0;
-    virtual const QString&baseUri()const;
-    virtual bool openURL( const KURL &url,bool noReinit=false )=0;
-    virtual SvnItem*SelectedOrMain()=0;
-    virtual bool isNetworked()const;
-    virtual const QString&lastError()const;
+}
 
-protected:
-    void setWorkingCopy(bool);
-    void setNetworked(bool);
-    void setBaseUri(const QString&);
-    QString m_LastException;
+bool ItemDisplay::isWorkingCopy()const
+{
+    return m_isWorkingCopy;
+}
 
-private:
-    bool m_isWorkingCopy;
-    bool m_isNetworked;
-    QString m_baseUri;
-};
+const QString&ItemDisplay::baseUri()const
+{
+    return m_baseUri;
+}
 
-#endif
+/*!
+    \fn ItemDisplay::isNetworked()const
+ */
+bool ItemDisplay::isNetworked()const
+{
+    return m_isNetworked;
+}
+
+void ItemDisplay::setWorkingCopy(bool how)
+{
+    m_isWorkingCopy=how;
+}
+
+void ItemDisplay::setNetworked(bool how)
+{
+    m_isNetworked=how;
+}
+
+void ItemDisplay::setBaseUri(const QString&uri)
+{
+    m_baseUri = uri;
+    /* otherwise subversion lib asserts! */
+    while (m_baseUri.endsWith("/")) {
+        m_baseUri.truncate(m_baseUri.length()-1);
+    }
+}
+
+const QString&ItemDisplay::lastError()const
+{
+    return m_LastException;
+}

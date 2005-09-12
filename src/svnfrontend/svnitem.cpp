@@ -32,10 +32,12 @@
 #include <kmimetype.h>
 #include <kdebug.h>
 #include <kiconeffect.h>
+#include <kfileitem.h>
 
 #include <qstring.h>
 #include <qfileinfo.h>
 #include <qimage.h>
+#include <qptrlist.h>
 
 class SvnItem_p:public ref_count
 {
@@ -49,6 +51,9 @@ protected:
     void init();
     QString m_url,m_full,m_short;
     QDateTime m_fullDate;
+    QString m_infoText;
+    KFileItem*m_fitem;
+    bool isWc;
 };
 
 SvnItem_p::SvnItem_p()
@@ -65,6 +70,7 @@ SvnItem_p::SvnItem_p(const svn::Status&aStat)
 
 SvnItem_p::~SvnItem_p()
 {
+    delete m_fitem;
 }
 
 void SvnItem_p::init()
@@ -83,6 +89,13 @@ void SvnItem_p::init()
     }
     m_url = m_Stat.entry().url();
     m_fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
+    m_infoText = QString::null;
+    isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
+    if (!isWc) {
+        m_fitem=0;
+    } else {
+        m_fitem = new KFileItem(KFileItem::Unknown,KFileItem::Unknown,m_Stat.path());
+    }
 }
 
 SvnItem::SvnItem()
@@ -316,4 +329,38 @@ const svn::Status& SvnItem::stat()const
 bool SvnItem::isNormal()const
 {
     return p_Item->m_Stat.textStatus()==svn_wc_status_normal;
+}
+
+
+/*!
+    \fn SvnItem::getToolTipText()
+ */
+const QString& SvnItem::getToolTipText()
+{
+    if (p_Item->m_infoText.isNull()) {
+        if (isRealVersioned()) {
+            SvnActions*wrap = getWrapper();
+            svn::Revision peg(svn_opt_revision_unspecified);
+            svn::Revision rev(svn_opt_revision_unspecified);
+            if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
+                /* remote */
+                rev = svn::Revision::HEAD;
+            } else {
+                /* local */
+            }
+            if (wrap) {
+                QPtrList<SvnItem> lst; lst.append(this);
+                p_Item->m_infoText = wrap->getInfo(lst,rev,peg,false,false);
+                if (p_Item->m_fitem) p_Item->m_infoText+=p_Item->m_fitem->getToolTipText(0);
+            }
+        } else if (p_Item->m_fitem){
+            p_Item->m_infoText=p_Item->m_fitem->getToolTipText(6);
+        }
+    }
+    return p_Item->m_infoText;
+}
+
+KFileItem*SvnItem::fileItem()
+{
+    return p_Item->m_fitem;
 }

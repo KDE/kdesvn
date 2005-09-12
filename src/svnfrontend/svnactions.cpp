@@ -357,7 +357,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     ex = "";
 
     QString logMessage="";
-    if (!m_Data->m_ParentList->isLocal()) {
+    if (!m_Data->m_ParentList->isWorkingCopy()) {
         bool ok;
         logMessage = Logmsg_impl::getLogmessage(&ok,0,m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok) {
@@ -377,9 +377,9 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     return ex;
 }
 
-void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
+QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
 {
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return QString::null;
     QString ex;
     svn::InfoEntries entries;
     try {
@@ -395,25 +395,27 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
-        return;
+        return QString::null;
     }
     EMIT_FINISHED;
-    QString text = "<html>";
+    QString text = "";
     svn::InfoEntries::const_iterator it;
-    static QString rb = "<tr><td align=\"right\"><b>";
-    static QString re = "</td></tr>\n";
-    static QString cs = "</b>:</td><td>";
+    static QString rb = "<tr><td><nobr><font color=\"black\">";
+    static QString re = "</font></nobr></td></tr>\n";
+    static QString cs = "</font></nobr>:</td><td><nobr><font color=\"black\">";
     for (it=entries.begin();it!=entries.end();++it) {
-        text+="<p><table>";
+        text+="<br><table cellspacing=0 cellpadding=0>";
         if ((*it).Name().length()) {
             text+=rb+i18n("Name")+cs+((*it).Name())+re;
         }
-        text+=rb+i18n("URL")+cs+((*it).url())+re;
-        if ((*it).reposRoot().length()) {
-            text+=rb+i18n("Canonical repository url")+cs+((*it).reposRoot())+re;
-        }
-        if ((*it).checksum().length()) {
-            text+=rb+i18n("Checksum")+cs+((*it).checksum())+re;
+        if (all) {
+            text+=rb+i18n("URL")+cs+((*it).url())+re;
+            if ((*it).reposRoot().length()) {
+                text+=rb+i18n("Canonical repository url")+cs+((*it).reposRoot())+re;
+            }
+            if ((*it).checksum().length()) {
+                text+=rb+i18n("Checksum")+cs+((*it).checksum())+re;
+            }
         }
         text+=rb+i18n("Type")+cs;
         switch ((*it).kind()) {
@@ -432,61 +434,72 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
             break;
         }
         text+=re;
-        text+=rb+i18n("Schedule")+cs;
-        switch ((*it).Schedule()) {
-        case svn_wc_schedule_normal:
-            text+=i18n("Normal");
-            break;
-        case svn_wc_schedule_add:
-            text+=i18n("Addition");
-            break;
-        case svn_wc_schedule_delete:
-            text+=i18n("Deletion");
-            break;
-        case svn_wc_schedule_replace:
-            text+=i18n("Replace");
-            break;
-        default:
-            text+=i18n("Unknown");
-            break;
+        if (all) {
+            text+=rb+i18n("Schedule")+cs;
+            switch ((*it).Schedule()) {
+            case svn_wc_schedule_normal:
+                text+=i18n("Normal");
+                break;
+            case svn_wc_schedule_add:
+                text+=i18n("Addition");
+                break;
+            case svn_wc_schedule_delete:
+                text+=i18n("Deletion");
+                break;
+            case svn_wc_schedule_replace:
+                text+=i18n("Replace");
+                break;
+            default:
+                text+=i18n("Unknown");
+                break;
+            }
+            text+=re;
+            text+=rb+i18n("UUID")+cs+((*it).uuid())+re;
         }
-        text+=re;
-        text+=rb+i18n("UUID")+cs+((*it).uuid())+re;
         text+=rb+i18n("Last author")+cs+((*it).cmtAuthor())+re;
         text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
         text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qt((*it).textTime()).toString(Qt::LocalDate)+re;
-        text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
-        if ((*it).conflictNew().length()) {
-            text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
-        }
-        if ((*it).conflictOld().length()) {
-            text+=rb+i18n("Old version of conflicted file")+cs+((*it).conflictOld())+re;
-        }
-        if ((*it).conflictWrk().length()) {
-            text+=rb+i18n("Working version of conflicted file")+
-                cs+((*it).conflictWrk())+re;
-        }
-        if ((*it).prejfile().length()) {
-            text+=rb+i18n("Property reject file")+
-                cs+((*it).prejfile())+re;
-        }
+        if (all) {
+            text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
+            if ((*it).conflictNew().length()) {
+                text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
+            }
+            if ((*it).conflictOld().length()) {
+                text+=rb+i18n("Old version of conflicted file")+cs+((*it).conflictOld())+re;
+            }
+            if ((*it).conflictWrk().length()) {
+                text+=rb+i18n("Working version of conflicted file")+
+                    cs+((*it).conflictWrk())+re;
+            }
+            if ((*it).prejfile().length()) {
+                text+=rb+i18n("Property reject file")+
+                    cs+((*it).prejfile())+re;
+            }
 
-        if ((*it).copyfromUrl().length()) {
-            text+=rb+i18n("Copy from URL")+cs+((*it).copyfromUrl())+re;
+            if ((*it).copyfromUrl().length()) {
+                text+=rb+i18n("Copy from URL")+cs+((*it).copyfromUrl())+re;
+            }
+            if ((*it).lockEntry().Locked()) {
+                text+=rb+i18n("Lock token")+cs+((*it).lockEntry().Token())+re;
+                text+=rb+i18n("Owner")+cs+((*it).lockEntry().Owner())+re;
+                text+=rb+i18n("Locked on")+cs+
+                    helpers::sub2qt::apr_time2qt((*it).lockEntry().Date()).toString(Qt::LocalDate)+
+                    re;
+                text+=rb+i18n("Lock comment")+cs+
+                    (*it).lockEntry().Comment()+re;
+            }
         }
-        if ((*it).lockEntry().Locked()) {
-            text+=rb+i18n("Lock token")+cs+((*it).lockEntry().Token())+re;
-            text+=rb+i18n("Owner")+cs+((*it).lockEntry().Owner())+re;
-            text+=rb+i18n("Locked on")+cs+
-                helpers::sub2qt::apr_time2qt((*it).lockEntry().Date()).toString(Qt::LocalDate)+
-                re;
-            text+=rb+i18n("Lock comment")+cs+
-                (*it).lockEntry().Comment()+re;
-        }
-        text+="</table></p>\n";
+        text+="</table>\n";
     }
-    text+="</html>";
+    return text;
+}
+
+void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
+{
+    QString text = getInfo(lst,rev,peg,recursive);
+    if (text.isNull()) return;
+    text = "<html>"+text+"</html>";
     KTextBrowser*ptr;
     KDialogBase*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
     if (dlg) {
@@ -509,7 +522,7 @@ void SvnActions::slotProperties()
     SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
     PropertiesDlg dlg(k->fullName(),svnclient(),
-        m_Data->m_ParentList->isLocal()?svn::Revision::WORKING:svn::Revision::HEAD);
+        m_Data->m_ParentList->isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
     dlg.resize(dlg.configDialogSize("kdesvn_properties_dlg"));
     if (dlg.exec()!=QDialog::Accepted) {
@@ -547,7 +560,7 @@ void SvnActions::slotCommit()
 {
     /// @todo remove reference to parentlist
     if (!m_Data->m_CurrentContext) return;
-    if (!m_Data->m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList->isWorkingCopy()) return;
     bool ok,rec;
     QString msg = Logmsg_impl::getLogmessage(&ok,&rec,m_Data->m_ParentList->realWidget(),"logmsg_impl");
     if (!ok) {
@@ -720,7 +733,7 @@ void SvnActions::slotUpdateHeadRec()
  */
 void SvnActions::prepareUpdate(bool ask)
 {
-    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isWorkingCopy()) return;
     SvnItemList k;
     m_Data->m_ParentList->SelectionList(&k);
 
@@ -863,7 +876,7 @@ void SvnActions::slotExport()
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
 {
-    if (!m_Data->m_ParentList|| !_exp&&m_Data->m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList|| !_exp&&m_Data->m_ParentList->isWorkingCopy()) return;
     SvnItem*k = m_Data->m_ParentList->Selected();
     if (k && !k->isDir()) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(),_exp?i18n("Exporting a file?"):i18n("Checking out a file?"));
@@ -928,7 +941,7 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
 
 void SvnActions::slotRevert()
 {
-    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isWorkingCopy()) return;
     QPtrList<SvnItem> lst;
     m_Data->m_ParentList->SelectionList(&lst);
     QStringList displist;
@@ -1029,7 +1042,7 @@ void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
 void SvnActions::slotSwitch()
 {
     if (!m_Data->m_CurrentContext) return;
-    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isLocal()) return;
+    if (!m_Data->m_ParentList||!m_Data->m_ParentList->isWorkingCopy()) return;
 
     QPtrList<SvnItem> lst;
     m_Data->m_ParentList->SelectionList(&lst);

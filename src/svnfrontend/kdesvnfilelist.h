@@ -53,14 +53,11 @@ public:
     virtual ~kdesvnfilelist();
 
     virtual bool openURL( const KURL &url,bool noReinit=false );
-    virtual const QString&baseUri()const{return m_baseUri;}
-    virtual bool isLocal()const{return m_isLocal;}
     virtual SvnItem*SelectedOrMain();
     virtual SvnItem*Selected();
     virtual void SelectionList(SvnItemList*target);
 
     virtual QWidget*realWidget();
-    const QString&lastError()const{return m_LastException;}
     const svn::Status&maindir()const{return m_mainEntry;}
 
     KActionCollection*filesActions();
@@ -68,10 +65,7 @@ public:
 
 protected:
     svn::Status m_mainEntry;
-    bool m_isLocal;
     bool m_deletePerfect;
-
-    QString m_LastException,m_baseUri;
     QMap<QString,bool> m_Dirsread;
 
     KActionCollection* m_filesAction;
@@ -118,6 +112,9 @@ protected:
     virtual bool acceptDrag(QDropEvent *event)const;
     void dispDummy();
     void reinitItems(FileListViewItem*_item = 0);
+    virtual void contentsMouseMoveEvent( QMouseEvent *e );
+    virtual void contentsWheelEvent( QWheelEvent * e );
+
 private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
@@ -166,6 +163,7 @@ public slots:
     virtual void refreshCurrent(SvnItem*);
     virtual void closeMe();
     virtual void slotMkdir();
+
 protected slots:
     virtual void slotLock();
     virtual void slotUnlock();
@@ -173,13 +171,10 @@ protected slots:
     virtual void slotBlame();
     virtual void slotRangeBlame();
     virtual void slotSimpleDiff();
-protected slots:
     virtual void slotDiffRevisions();
-protected slots:
     virtual void slotRevisionCat();
-protected slots:
     virtual void slotCheckUpdates();
-    void slotInfo();
+    virtual void slotInfo();
     virtual void slotDirItemCreated(const QString&);
     virtual void slotDirItemDirty(const QString&);
     virtual void slotDirItemDeleted(const QString&);

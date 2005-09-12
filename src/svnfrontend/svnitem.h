@@ -31,6 +31,7 @@
 class FileListViewItem;
 class SvnItem_p;
 class SvnActions;
+class KFileItem;
 
 class SvnItem
 {
@@ -63,6 +64,8 @@ public:
     virtual const svn::Status& stat()const;
     virtual bool isModified()const;
     bool isNormal()const;
+    const QString& getToolTipText();
+    KFileItem*fileItem();
 
 protected:
     smart_pointer<SvnItem_p> p_Item;

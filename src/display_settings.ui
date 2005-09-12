@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>302</width>
-            <height>245</height>
+            <width>280</width>
+            <height>299</height>
         </rect>
     </property>
     <property name="caption">
@@ -50,6 +50,28 @@
                     </property>
                 </widget>
             </grid>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_file_tips</cstring>
+            </property>
+            <property name="text">
+                <string>Show file info</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_previews_in_file_tips</cstring>
+            </property>
+            <property name="text">
+                <string>Display previews in file tips</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
+            </property>
         </widget>
         <widget class="QButtonGroup">
             <property name="name">
@@ -197,9 +219,16 @@ and Kdesvn will pipe data direct.
         <receiver>DisplaySettings</receiver>
         <slot>diffDispChanged()</slot>
     </connection>
+    <connection>
+        <sender>kcfg_display_file_tips</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>DisplaySettings</receiver>
+        <slot>dispFileInfotoggled(bool)</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">diffDispChanged()</slot>
+    <slot access="protected">dispFileInfotoggled(bool)</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>

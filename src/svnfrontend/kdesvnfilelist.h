@@ -114,6 +114,7 @@ protected:
     void reinitItems(FileListViewItem*_item = 0);
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
     virtual void contentsWheelEvent( QWheelEvent * e );
+    virtual void leaveEvent(QEvent*e);
 
 private:
     KdesvnFileListPrivate*m_pList;
@@ -163,6 +164,7 @@ public slots:
     virtual void refreshCurrent(SvnItem*);
     virtual void closeMe();
     virtual void slotMkdir();
+    virtual void slotSettingsChanged();
 
 protected slots:
     virtual void slotLock();

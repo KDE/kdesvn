@@ -61,6 +61,8 @@ static const char description[] =
             addItemInt("use_kompare_for_diff",muse_kompare,1);
             addItemString("external_diff_display",mdiff_display,"kompare");
             addItemInt("max_log_messages",mmax_log_messages,20);
+            addItemBool("display_file_tips",m_show_file_tips,true);
+            addItemBool("display_previews_in_file_tips",m_show_preview_in_file_tips,false);
 
             setCurrentGroup("subversion");
 #if 0
@@ -92,6 +94,8 @@ static const char description[] =
         bool minfo_recursive;
         int mmax_log_messages;
         QString mdiff_display;
+        bool m_show_file_tips;
+        bool m_show_preview_in_file_tips;
 
     private:
         static kdesvnPart_Prefs*_me;

@@ -86,7 +86,8 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     m_filesAction = aCollect;
     m_pList->m_fileTip=new SvnFileTip(this);
     /// @todo read values from config
-    m_pList->m_fileTip->setOptions(QToolTip::isGloballyEnabled(),true,6);
+    m_pList->m_fileTip->setOptions(kdesvnPart_config::configItem("display_file_tips").toBool()&&
+        QToolTip::isGloballyEnabled(),true,6);
 
     SshAgent ssh;
     ssh.querySshAgent();
@@ -365,6 +366,7 @@ void kdesvnfilelist::closeMe()
     enableActions();
     delete m_pList->m_DirWatch;
     m_pList->m_DirWatch = 0;
+    m_pList->m_fileTip->setItem(0);
 }
 
 bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
@@ -1665,15 +1667,22 @@ FileListViewItem* kdesvnfilelist::findEntryItem(const QString&what,FileListViewI
  */
 void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
 {
-    QPoint vp = contentsToViewport( e->pos() );
-    FileListViewItem*item = isExecuteArea( vp ) ? static_cast<FileListViewItem*>(itemAt( vp )) : 0L;
+    if (kdesvnPart_config::configItem("display_file_tips").toBool()) {
 
-    if (item) {
-        vp.setY( itemRect( item ).y() );
-        QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
-        m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(16));
-        m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())&&isWorkingCopy());
-        setShowToolTips(true);
+        QPoint vp = contentsToViewport( e->pos() );
+        FileListViewItem*item = isExecuteArea( vp ) ? static_cast<FileListViewItem*>(itemAt( vp )) : 0L;
+
+        if (item) {
+            vp.setY( itemRect( item ).y() );
+            QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
+            m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
+            m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())&&isWorkingCopy()
+                &&kdesvnPart_config::configItem("display_previews_in_file_tips").toBool());
+            setShowToolTips(false);
+        } else {
+            m_pList->m_fileTip->setItem(0);
+            setShowToolTips(true);
+        }
     } else {
         m_pList->m_fileTip->setItem(0);
         setShowToolTips(true);
@@ -1690,4 +1699,16 @@ void kdesvnfilelist::contentsWheelEvent( QWheelEvent * e )
    // when scrolling with mousewheel, stop possible pending filetip
    m_pList->m_fileTip->setItem(0);
    KListView::contentsWheelEvent( e );
+}
+
+void kdesvnfilelist::leaveEvent(QEvent*e)
+{
+    m_pList->m_fileTip->setItem( 0 );
+    KListView::leaveEvent( e );
+}
+
+void kdesvnfilelist::slotSettingsChanged()
+{
+    m_pList->m_fileTip->setOptions(kdesvnPart_config::configItem("display_file_tips").toBool()&&
+        QToolTip::isGloballyEnabled(),true,6);
 }

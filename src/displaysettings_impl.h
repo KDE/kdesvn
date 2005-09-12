@@ -29,6 +29,7 @@ public:
     virtual ~DisplaySettings_impl();
 protected slots:
     virtual void diffDispChanged();
+    virtual void dispFileInfotoggled(bool);
 };
 
 #endif

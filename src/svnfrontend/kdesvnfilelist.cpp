@@ -76,7 +76,38 @@ public:
     svn::Revision m_remoteRevision;
     KDirWatch*m_DirWatch;
     SvnFileTip*m_fileTip;
+    int mlist_icon_size;
+    bool mdisp_ignored_files;
+    bool mdisp_overlay;
+    /* returns true if the display must refreshed */
+    bool reReadSettings();
+private:
+    void readSettings();
 };
+
+KdesvnFileListPrivate::KdesvnFileListPrivate()
+    : dragOverItem(0),dragOverPoint(QPoint(0,0)),mOldDropHighlighter()
+{
+    m_remoteRevision = svn::Revision::HEAD;
+    m_DirWatch = 0;
+    readSettings();
+}
+
+void KdesvnFileListPrivate::readSettings()
+{
+    mlist_icon_size = kdesvnPart_config::configItem("listview_icon_size").toInt();
+    mdisp_ignored_files = kdesvnPart_config::configItem("display_ignored_files").toBool();
+    mdisp_overlay = kdesvnPart_config::configItem("display_overlays").toBool();
+}
+
+bool KdesvnFileListPrivate::reReadSettings()
+{
+    int _size = mlist_icon_size;
+    bool _ignored = mdisp_ignored_files;
+    bool _overlay = mdisp_overlay;
+    readSettings();
+    return (_size != mlist_icon_size||_ignored!=mdisp_ignored_files||_overlay!=mdisp_overlay);
+}
 
 kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const char *name)
  : KListView(parent, name),ItemDisplay(),m_SvnWrapper(new SvnActions(this))
@@ -1117,14 +1148,6 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
     }
 }
 
-KdesvnFileListPrivate::KdesvnFileListPrivate()
-    : dragOverItem(0),dragOverPoint(QPoint(0,0)),mOldDropHighlighter()
-{
-    m_remoteRevision = svn::Revision::HEAD;
-    m_DirWatch = 0;
-}
-
-
 /*!
     \fn kdesvnfilelist::slotRename()
  */
@@ -1711,4 +1734,7 @@ void kdesvnfilelist::slotSettingsChanged()
 {
     m_pList->m_fileTip->setOptions(kdesvnPart_config::configItem("display_file_tips").toBool()&&
         QToolTip::isGloballyEnabled(),true,6);
+    if (m_pList->reReadSettings()) {
+        refreshCurrentTree();
+    }
 }

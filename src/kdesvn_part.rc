@@ -75,69 +75,19 @@
 </MenuBar>
  <Menu name="local_context" >
   <text>Actions</text>
-  <Menu name="local_context_info">
-  <text>Info</text>
-   <Action name="make_svn_log_full" />
-   <Action name="make_svn_property" />
-   <Action name="make_svn_info" />
-   <Action name="make_svn_blame" />
-   <Action name="make_svn_cat" />
-  </Menu>
-  <Separator/>
-  <Menu name="local_context_wc">
-   <text>Item</text>
-   <Action name="make_svn_add" />
-   <Action name="make_svn_remove" />
-   <Action name="make_svn_ignore" />
-   <Action name="make_svn_revert" />
-   <Action name="make_resolved" />
-   <Separator/>
-   <Action name="make_svn_rename" />
-   <Action name="make_svn_copy" />
-   <Separator/>
-   <Action name="make_svn_mkdir" />
-   <Action name="make_cleanup" />
-   <Separator/>
-   <Action name="make_svn_lock"/>
-   <Action name="make_svn_unlock"/>
-  </Menu>
-  <Separator/>
-  <Menu name="local_context_repo">
-   <text>Repository</text>
-   <Action name="make_svn_headupdate" />
-   <Action name="make_svn_revupdate" />
-   <Action name="make_svn_commit" />
-   <Action name="make_svn_headdiff" />
-  </Menu>
-  <Separator/>
+  <Action name="make_svn_headupdate"/>
+  <Action name="make_svn_commit" />
+  <Action name="make_svn_log_full" />
+  <Action name="make_svn_headdiff" />
+  <Action name="make_svn_blame" />
   <Action name="make_view_refresh" />
  </Menu>
  <Menu name="remote_context" >
-  <Menu name="remote_context_info">
-   <text>Info</text>
-   <Action name="make_svn_log_full" />
-   <Action name="make_svn_log" />
-   <Action name="make_svn_info" />
-   <Action name="make_svn_blame" />
-   <Action name="make_svn_cat" />
-  </Menu>
-  <Separator/>
-  <Menu name="remote_context_actions">
-  <text>Actions</text>
-  <Action name="make_svn_rename" />
-  <Action name="make_svn_copy" />
-  <Separator/>
-  <Action name="make_revisions_diff" />
-  <Action name="make_svn_remove" />
-  <Action name="make_svn_mkdir" />
-  <Separator/>
-  <Action name="make_svn_lock"/>
-  <Action name="make_svn_unlock"/>
-  </Menu>
-  <Separator/>
+  <Action name="make_svn_log_full" />
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />
-  <Separator/>
+  <Action name="make_svn_blame" />
+  <Action name="make_svn_cat" />
   <Action name="make_view_refresh" />
  </Menu>
  <Menu name="general_local">

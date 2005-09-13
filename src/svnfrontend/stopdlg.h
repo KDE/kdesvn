@@ -22,6 +22,8 @@
 
 #include <kdialogbase.h>
 
+#include <qdatetime.h>
+
 class QTimer;
 
 class CContextListener;
@@ -50,6 +52,7 @@ protected:
     QLabel*mLabel;
     KProgress*m_ProgressBar;
     bool m_BarShown;
+    QTime m_StopTick;
 
 public slots:
     virtual void slotTick();

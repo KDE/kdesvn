@@ -35,6 +35,7 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
 {
     KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
     mShowTimer = new QTimer(this);
+    m_StopTick.start();
     showButton(KDialogBase::Close, false);
     mCancelText = actionButton(KDialogBase::Cancel)->text();
 
@@ -101,10 +102,13 @@ void StopDlg::slotTick()
         m_ProgressBar->show();
         m_BarShown=true;
     }
-    if (m_ProgressBar->progress()==15) {
-        m_ProgressBar->reset();
-    } else {
-        m_ProgressBar->setProgress(m_ProgressBar->progress()+1);
+    if (m_StopTick.elapsed()>500) {
+        if (m_ProgressBar->progress()==15) {
+            m_ProgressBar->reset();
+        } else {
+            m_ProgressBar->setProgress(m_ProgressBar->progress()+1);
+        }
+        m_StopTick.restart();
     }
     kapp->processEvents();
 }

@@ -116,7 +116,6 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     m_pList = new KdesvnFileListPrivate;
     m_filesAction = aCollect;
     m_pList->m_fileTip=new SvnFileTip(this);
-    /// @todo read values from config
     m_pList->m_fileTip->setOptions(kdesvnPart_config::configItem("display_file_tips").toBool()&&
         QToolTip::isGloballyEnabled(),true,6);
 
@@ -379,6 +378,9 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         clear();
     }
     enableActions();
+    m_pList->m_fileTip->setOptions(!isNetworked()&&kdesvnPart_config::configItem("display_file_tips").toBool()&&
+        QToolTip::isGloballyEnabled(),true,6);
+
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     return result;
@@ -1733,7 +1735,7 @@ void kdesvnfilelist::leaveEvent(QEvent*e)
 
 void kdesvnfilelist::slotSettingsChanged()
 {
-    m_pList->m_fileTip->setOptions(kdesvnPart_config::configItem("display_file_tips").toBool()&&
+    m_pList->m_fileTip->setOptions(!isNetworked()&&kdesvnPart_config::configItem("display_file_tips").toBool()&&
         QToolTip::isGloballyEnabled(),true,6);
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();

@@ -825,7 +825,8 @@ void kdesvnfilelist::refreshCurrentTree()
     }
     if (item->fullName()==baseUri()) {
         if (!refreshItem(item)) {
-            delete item;
+            setUpdatesEnabled(true);
+            viewport()->repaint();
             return;
         } else {
             refreshRecursive(item);
@@ -834,7 +835,7 @@ void kdesvnfilelist::refreshCurrentTree()
         refreshRecursive(0);
     }
     setUpdatesEnabled(true);
-    viewport()->repaint();
+
 }
 
 void kdesvnfilelist::refreshCurrent(SvnItem*cur)
@@ -1524,7 +1525,7 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
         return false;
     }
     try {
-        item->setStat(svnclient()->singleStatus(item->fullName(),m_pList->m_remoteRevision));
+        item->setStat(svnclient()->singleStatus(item->fullName(),false,m_pList->m_remoteRevision));
     } catch (svn::ClientException e) {
         item->setStat(svn::Status());
         return false;

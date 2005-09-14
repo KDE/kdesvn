@@ -837,7 +837,7 @@ void kdesvnfilelist::refreshCurrentTree()
         refreshRecursive(0);
     }
     setUpdatesEnabled(true);
-
+    viewport()->repaint();
 }
 
 void kdesvnfilelist::refreshCurrent(SvnItem*cur)

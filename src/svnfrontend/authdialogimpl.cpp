@@ -26,6 +26,8 @@
 AuthDialogImpl::AuthDialogImpl(const QString & realm,QWidget *parent, const char *name)
     :AuthDialogData(parent, name),curPass("")
 {
+    m_UsernameEdit->setText("");
+    m_PasswordEdit->setText("");
     if (!realm.isEmpty()) {
         m_RealmLabel->setText(m_RealmLabel->text()+" "+realm);
         resize( QSize(334, 158).expandedTo(minimumSizeHint()) );

@@ -1,15 +1,15 @@
-# translation of kdesvn.po to Italian
 # translation of it.po to Italian
+# translation of kdesvn.po to Italian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Luciano Montanaro <mikelima@cirulla.net>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kdesvn\n"
+"Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-13 15:28+0200\n"
-"PO-Revision-Date: 2005-08-23 15:34+0200\n"
+"PO-Revision-Date: 2005-09-14 18:04+0200\n"
 "Last-Translator: Luciano Montanaro <mikelima@cirulla.net>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,14 +31,14 @@ msgid ""
 msgstr "mikelima@cirulla.net"
 
 #: rc.cpp:2 kdesvn_part.cpp:380
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Subversion Settings"
-msgstr "Subversion"
+msgstr "Impostazioni di Subversion"
 
 #: rc.cpp:4
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark changed items"
-msgstr "Data ultima modifica"
+msgstr "Evidenzia elementi modificati"
 
 #: rc.cpp:6
 #, no-c-format
@@ -52,7 +52,7 @@ msgstr ""
 #: rc.cpp:10
 #, no-c-format
 msgid "Gain item info recursive"
-msgstr ""
+msgstr "Ottieni ricorsivamente informazioni sull'elemento"
 
 #: rc.cpp:12 kdesvn_part.cpp:228
 #, no-c-format
@@ -296,7 +296,7 @@ msgstr "Inserisci un messaggio di log"
 #: rc.cpp:145
 #, no-c-format
 msgid "Or insert one of the last:"
-msgstr ""
+msgstr "O inserisci uno degli ultimi:"
 
 #: rc.cpp:151
 #, no-c-format
@@ -311,7 +311,7 @@ msgstr ""
 #: rc.cpp:155
 #, no-c-format
 msgid "Show file info"
-msgstr ""
+msgstr "Mostra informazioni sul file"
 
 #: rc.cpp:157
 #, no-c-format
@@ -321,9 +321,9 @@ msgid ""
 msgstr ""
 
 #: rc.cpp:159
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Display previews in file tips"
-msgstr "Visualizza i file ignorati"
+msgstr "Mostra anteprime nei suggerimenti dei file"
 
 #: rc.cpp:161
 #, no-c-format
@@ -335,32 +335,32 @@ msgstr ""
 #: rc.cpp:163 svnfrontend/svnactions.cpp:684
 #, no-c-format
 msgid "Diff display"
-msgstr ""
+msgstr "Visore di diff"
 
 #: rc.cpp:165
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Internal"
-msgstr "Esterno"
+msgstr "Interno"
 
 #: rc.cpp:167
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use Kompare for diff"
-msgstr "Usa \"Kompare\" per mostrare le differenze"
+msgstr "Usa \"Kompare\" per i diff"
 
 #: rc.cpp:169
 #, no-c-format
 msgid "Use other diff display"
-msgstr ""
+msgstr "Usa un altro visore di diff"
 
 #: rc.cpp:171
 #, no-c-format
 msgid "see \"Whats this\" for details"
-msgstr ""
+msgstr "vedi \"Che cos'è\" per i dettagli"
 
 #: rc.cpp:173
 #, no-c-format
 msgid "External diff display:"
-msgstr ""
+msgstr "Visore di diff esterno:"
 
 #: rc.cpp:175
 #, no-c-format
@@ -425,24 +425,21 @@ msgstr "Un'interfaccia a Subversion per KDE (componente dinamica)"
 
 #: kdesvn_part.cpp:189
 msgid "Built with Subversion library: %1\n"
-msgstr ""
+msgstr "Generato con la libreria di Subversion: %1\n"
 
 #: kdesvn_part.cpp:190
-#, fuzzy
 msgid "Running Subversion library: %1"
-msgstr "Barra degli strumenti di Subversion"
+msgstr "Libreria di Subversion in esecuzione: %1"
 
 #: kdesvn_part.cpp:192
 msgid "kdesvn Part"
 msgstr "Componente kdesvn"
 
 #: kdesvn_part.cpp:199
-#, fuzzy
 msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
 msgstr "Luciano Montanaro"
 
 #: kdesvn_part.cpp:200
-#, fuzzy
 msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
 msgstr "mikelima@cirulla.net"
 
@@ -460,7 +457,7 @@ msgstr "Visualizza i file sconosciuti"
 
 #: kdesvn_part.cpp:243
 msgid "&Configure %1..."
-msgstr ""
+msgstr "&Configura %1..."
 
 #: kdesvn_part.cpp:244
 msgid "&About kdesvn part"
@@ -471,9 +468,8 @@ msgid "Kdesvn &Handbook"
 msgstr "&Manuale di Kdesvn"
 
 #: kdesvn_part.cpp:248
-#, fuzzy
 msgid "Send Bugreport for kdesvn"
-msgstr "Segnala un bug"
+msgstr "Segnala un bug per kdesvn"
 
 #: kdesvn.cpp:115
 msgid "Could not find our part."
@@ -481,11 +477,11 @@ msgstr "Il componente non è stato trovato"
 
 #: kdesvn.cpp:163
 msgid "Load last opened URL on start"
-msgstr ""
+msgstr "Carica l'URL aperto per ultimo all'avvio"
 
 #: kdesvn.cpp:165
 msgid "Reload last opend url if no one is given on commandline"
-msgstr ""
+msgstr "Ricarica l'URL aperto per ultimo se non ne viene fornito un altro sulla riga di comando"
 
 #: kdesvn.cpp:250
 msgid "Ready"
@@ -540,7 +536,6 @@ msgid "Protected property"
 msgstr "Proprietà protetta"
 
 #: svnfrontend/propertiesdlg.cpp:303 svnfrontend/propertiesdlg.cpp:351
-#, fuzzy
 msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
@@ -558,7 +553,7 @@ msgstr "Aggiungi al controllo delle revisioni"
 
 #: svnfrontend/ccontextlistener.cpp:45
 msgid "Restore missing"
-msgstr ""
+msgstr "Ripristina elementi mancanti"
 
 #: svnfrontend/ccontextlistener.cpp:46 svnfrontend/svnactions.cpp:1006
 msgid "Revert"
@@ -673,8 +668,9 @@ msgid "Not versioned"
 msgstr "Senza revisione"
 
 #: svnfrontend/mergedlg_impl.cpp:105
+#, fuzzy
 msgid "Enter merge range"
-msgstr ""
+msgstr "Inserisci ? per la fusione"
 
 #: svnfrontend/kdesvnfilelist.cpp:130 svnfrontend/svnactions.cpp:409
 msgid "Name"
@@ -713,14 +709,12 @@ msgid "Details"
 msgstr "Dettagli"
 
 #: svnfrontend/kdesvnfilelist.cpp:180
-#, fuzzy
 msgid "Check for updates"
-msgstr "Prelievo"
+msgstr "Controlla se ci sono aggiornamenti"
 
 #: svnfrontend/kdesvnfilelist.cpp:181
-msgid ""
-"Check if current working copy has items with newer version in repository"
-msgstr ""
+msgid "Check if current working copy has items with newer version in repository"
+msgstr "Controlla se la copia di lavoro attuale ha elementi con versioni più recenti nel deposito"
 
 #: svnfrontend/kdesvnfilelist.cpp:185 svnfrontend/kdesvnfilelist.cpp:187
 msgid ""
@@ -734,7 +728,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:190
 msgid "Output the content of specified files or URLs."
-msgstr ""
+msgstr "Mostra il contenuto dei file o degli URL specificati."
 
 #: svnfrontend/kdesvnfilelist.cpp:191
 #, fuzzy
@@ -743,7 +737,7 @@ msgstr "Ultima revisione"
 
 #: svnfrontend/kdesvnfilelist.cpp:192
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
+msgstr "Mostra il contenuto dei file o degli URL specificati con la revisione specificata."
 
 #: svnfrontend/kdesvnfilelist.cpp:194
 msgid "Lock current items"
@@ -755,7 +749,7 @@ msgstr "Sblocca gli elementi attuali"
 
 #: svnfrontend/kdesvnfilelist.cpp:202
 msgid "Switch repository of working copy (\"svn switch\")"
-msgstr ""
+msgstr "Scambia deposito o copia di lavoro (\"svn switch\")"
 
 #: svnfrontend/kdesvnfilelist.cpp:204
 msgid "Open repository of working copy"
@@ -779,7 +773,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:221
 msgid "Deleting selected files and/or directories from repository"
-msgstr ""
+msgstr "Eliminazione delle cartelle e/o dei file selezionati dal deposito"
 
 #: svnfrontend/kdesvnfilelist.cpp:226
 msgid "Marking files or dirs resolved"
@@ -849,22 +843,20 @@ msgid "Nothing selected for delete"
 msgstr "Nessuna selezione da eliminare"
 
 #: svnfrontend/kdesvnfilelist.cpp:1250
-#, fuzzy
 msgid "Really delete these entries?"
 msgstr "Vuoi veramente eliminare queste voci?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1250
-#, fuzzy
 msgid "Delete from repository"
-msgstr "Preleva da un deposito"
+msgstr "Elimina dal deposito"
 
 #: svnfrontend/kdesvnfilelist.cpp:1287
 msgid "Please wait until job is finished"
-msgstr ""
+msgstr "Attendi che l'operazione sia finita"
 
 #: svnfrontend/kdesvnfilelist.cpp:1307
 msgid "Nothing selected for lock"
-msgstr ""
+msgstr "Non è selezionato niente per il blocco"
 
 #: svnfrontend/kdesvnfilelist.cpp:1312
 msgid "Lock message"
@@ -876,11 +868,11 @@ msgstr "Vuoi \"rubare\" il blocco?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1346
 msgid "Nothing selected for unlock"
-msgstr ""
+msgstr "Non è selezionato niente per lo sblocco"
 
 #: svnfrontend/kdesvnfilelist.cpp:1349
 msgid "Break lock or ignore missing locks?"
-msgstr ""
+msgstr "Forza il blocco o ignora il blocco mancante?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1349
 msgid "Unlocking items"
@@ -900,7 +892,7 @@ msgstr ""
 
 #: svnfrontend/svnitem.cpp:242
 msgid "Needs update"
-msgstr ""
+msgstr "Da aggiornare"
 
 #: svnfrontend/svnitem.cpp:246
 msgid "Locally modified"
@@ -1017,7 +1009,7 @@ msgstr "Cartella"
 
 #: svnfrontend/svnactions.cpp:438
 msgid "Schedule"
-msgstr ""
+msgstr "Pianificazione"
 
 #: svnfrontend/svnactions.cpp:441
 msgid "Normal"
@@ -1191,9 +1183,8 @@ msgid "Creating list / check status"
 msgstr ""
 
 #: svnfrontend/svnactions.cpp:1299
-#, fuzzy
 msgid "Checking for updates finished"
-msgstr "Prelievo"
+msgstr "Controllo per aggiornamenti finito"
 
 #: svnfrontend/copymoveview_impl.cpp:44
 msgid "Rename/move"
@@ -1296,7 +1287,6 @@ msgid "Copyright (c) 2005 Rajko Albrecht"
 msgstr "Copyright (c) 2005 Rajko Albrecht"
 
 #: kdesvn-askpass.cpp:51
-#, fuzzy
 msgid "Please enter your password below."
 msgstr "Inserisci la password qui sotto."
 
@@ -1312,28 +1302,3 @@ msgstr "Documento da aprire"
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#, fuzzy
-#~ msgid "Display settings"
-#~ msgstr "Impostazioni veloci"
-
-#, fuzzy
-#~ msgid "Form1"
-#~ msgstr "Forza"
-
-#~ msgid "kdesvn Preferences"
-#~ msgstr "Preferenze di kdesvn"
-
-#~ msgid "First Page"
-#~ msgstr "Prima pagina"
-
-#~ msgid "Page One Options"
-#~ msgstr "Opzioni pagina uno"
-
-#~ msgid "Second Page"
-#~ msgstr "Seconda pagina"
-
-#~ msgid "Page Two Options"
-#~ msgstr "Opzioni pagina due"
-
-#~ msgid "Add something here"
-#~ msgstr "Aggiungi qualcosa qui"

@@ -176,7 +176,7 @@ void kdesvnfilelist::setupActions()
     m_RenameAction = new KAction(i18n("Move"),"move",
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
     m_CopyAction = new KAction(i18n("Copy"),"editcopy",
-        KShortcut(Key_F5),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
+        KShortcut(Key_C),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
     tmp_action = new KAction(i18n("Check for updates"),"svncheckupdates",KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
@@ -250,7 +250,7 @@ void kdesvnfilelist::setupActions()
         KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
     m_ExportAction = new KAction(i18n("Export a repository"),"fileexport",
         KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
-    m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(CTRL+Key_U),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
+    m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(Key_F5),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 
     new KAction(i18n("Diff revisions"),"vcs_diff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
 

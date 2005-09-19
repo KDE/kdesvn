@@ -226,11 +226,11 @@ void kdesvnfilelist::setupActions()
     m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
     m_IgnoreAction = new KAction(i18n("Ignore/Unignore current item"),KShortcut(),this,SLOT(slotIgnore()),m_filesAction,"make_svn_ignore");
 
-    m_UpdateHead = new KAction("Update to head","vcs_update",
+    m_UpdateHead = new KAction("Update to head","svnupdate",
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateHeadRec()),m_filesAction,"make_svn_headupdate");
-    m_UpdateRev = new KAction("Update to revision...","vcs_update",
+    m_UpdateRev = new KAction("Update to revision...","svnupdate",
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
-    m_commitAction = new KAction("Commit","vcs_commit",
+    m_commitAction = new KAction("Commit","svncommit",
         KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
     m_simpleDiffHead = new KAction(i18n("Diff against head"),"vcs_diff",
         KShortcut(CTRL+Key_H),this,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
@@ -1593,6 +1593,7 @@ void kdesvnfilelist::slotInfo()
  */
 void kdesvnfilelist::slotDirItemCreated(const QString&what)
 {
+    m_pList->m_DirWatch->stopScan();
     FileListViewItem*item = findEntryItem(what);
     if (item) {
         refreshItem(item);
@@ -1600,6 +1601,7 @@ void kdesvnfilelist::slotDirItemCreated(const QString&what)
         m_pList->m_DirWatch->removeDir(what);
         m_pList->m_DirWatch->removeFile(what);
     }
+    m_pList->m_DirWatch->startScan();
 }
 
 
@@ -1616,8 +1618,7 @@ void kdesvnfilelist::updateParents(FileListViewItem*item)
  */
 void kdesvnfilelist::slotDirItemDirty(const QString&what)
 {
-    QTime _stoptime;
-    _stoptime.start();
+    m_pList->m_DirWatch->stopScan();
     FileListViewItem*item = findEntryItem(what);
     if (item) {
         refreshItem(item);
@@ -1635,6 +1636,7 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
         m_pList->m_DirWatch->removeFile(what);
         m_SvnWrapper->deleteFromModifiedCache(what);
     }
+    m_pList->m_DirWatch->startScan();
 }
 
 /*!
@@ -1642,6 +1644,7 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
  */
 void kdesvnfilelist::slotDirItemDeleted(const QString&what)
 {
+    m_pList->m_DirWatch->stopScan();
     FileListViewItem*item = findEntryItem(what);
     if (item) {
         refreshItem(item);
@@ -1656,6 +1659,7 @@ void kdesvnfilelist::slotDirItemDeleted(const QString&what)
         m_pList->m_DirWatch->removeFile(what);
         m_SvnWrapper->deleteFromModifiedCache(what);
     }
+    m_pList->m_DirWatch->startScan();
 }
 
 FileListViewItem* kdesvnfilelist::findEntryItem(const QString&what,FileListViewItem*startAt)

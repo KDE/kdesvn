@@ -21,6 +21,7 @@
 #include "svncpp/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include <qdatetime.h>
+#include <qheader.h>
 #include <klistview.h>
 #include <ktextbrowser.h>
 #include <kpushbutton.h>
@@ -44,7 +45,7 @@ public:
     LogListViewItem (KListView *parent,const svn::LogEntry&);
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
-    static const int COL_REV,COL_AUTHOR,COL_DATE;
+    static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
     const QString&message()const;
     svn_revnum_t rev()const{return _revision;}
 
@@ -54,20 +55,27 @@ protected:
     QString _message;
 };
 
-const int LogListViewItem::COL_REV = 1;
-const int LogListViewItem::COL_AUTHOR = 0;
-const int LogListViewItem::COL_DATE = 2;
+const int LogListViewItem::COL_REV = 2;
+const int LogListViewItem::COL_AUTHOR = 1;
+const int LogListViewItem::COL_DATE = 3;
+const int LogListViewItem::COL_MSG = 4;
 
 LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     : INHERITED(_parent)
 {
-    setMultiLinesEnabled(true);
+    setMultiLinesEnabled(false);
     _revision=_entry.revision;
     fullDate=helpers::sub2qt::apr_time2qt(_entry.date);
     setText(COL_REV,QString("%1").arg(_revision));
     setText(COL_AUTHOR,_entry.author);
     setText(COL_DATE,fullDate.toString(Qt::LocalDate));
     _message = _entry.message;
+    QStringList sp = QStringList::split("\n",_message);
+    if (sp.count()==0) {
+        setText(COL_MSG,_message);
+    } else {
+        setText(COL_MSG,sp[0]);
+    }
     //setText(COL_MSG,_entry.message.c_str());
 }
 const QString&LogListViewItem::message()const
@@ -91,6 +99,7 @@ SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
     :SvnLogDialogData(parent, name),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
+    m_LogView->header()->setLabel( 0, "");
     resize(dialogSize());
 }
 

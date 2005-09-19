@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>526</width>
-            <height>380</height>
+            <width>471</width>
+            <height>310</height>
         </rect>
     </property>
     <property name="caption">
@@ -40,6 +40,17 @@
                     <widget class="KListView">
                         <column>
                             <property name="text">
+                                <string> </string>
+                            </property>
+                            <property name="clickable">
+                                <bool>false</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>false</bool>
+                            </property>
+                        </column>
+                        <column>
+                            <property name="text">
                                 <string>Author</string>
                             </property>
                             <property name="clickable">
@@ -66,6 +77,17 @@
                             </property>
                             <property name="clickable">
                                 <bool>true</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <column>
+                            <property name="text">
+                                <string>Message</string>
+                            </property>
+                            <property name="clickable">
+                                <bool>false</bool>
                             </property>
                             <property name="resizable">
                                 <bool>true</bool>

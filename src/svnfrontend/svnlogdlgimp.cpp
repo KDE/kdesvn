@@ -103,6 +103,8 @@ SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
     m_LogView->setSorting(LogListViewItem::COL_REV);
     m_LogView->header()->setLabel( 0, "");
     resize(dialogSize());
+    m_first = 0;
+    m_second = 0;
 }
 
 void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
@@ -183,6 +185,43 @@ QSize SvnLogDlgImp::dialogSize()
     w = Settings::self()->config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
     h = Settings::self()->config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
     return( QSize( w, h ) );
+}
+
+void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,int col)
+{
+    if (!item||col>0) return;
+    kdDebug()<<"item clicked (" << button << " - " << (item!=0?"selected":"none")<<" - " << col << ")" << endl;
+    LogListViewItem*which = static_cast<LogListViewItem*>(item);
+    if (button == 1) {
+        if (m_first) m_first->setText(0,"");
+        if (m_first == which) {
+            m_first = 0;
+        } else {
+            m_first = which;
+            m_first->setText(0,"1");
+        }
+        if (m_first==m_second) {
+            m_second = 0;
+        }
+    } else if ( button==2 ) {
+        if (m_second) m_second->setText(0,"");
+        if (m_second == which) {
+            m_second = 0;
+        } else {
+            m_second = which;
+            m_second->setText(0,"2");
+        }
+        if (m_first==m_second) {
+            m_first = 0;
+        }
+    }
+    m_DispSpecDiff->setEnabled(m_first!=0 && m_second!=0);
+}
+
+void SvnLogDlgImp::slotDispSelected()
+{
+    if (!m_first || !m_second) return;
+    emit makeDiff(_name,m_first->rev(),m_second->rev());
 }
 
 #include "svnlogdlgimp.moc"

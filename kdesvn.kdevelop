@@ -231,13 +231,14 @@
     </codecompletion>
     <designerintegration>
       <qtdesigner>
+        <implementation class="DisplaySettings_impl" path="src/display_settings.ui" implementationpath="src/displaysettings_impl.h" />
+        <implementation class="SubversionSettings_impl" path="src/subversion_settings.ui" implementationpath="src/subversionsettings_impl.h" />
         <implementation class="CheckoutInfo_impl" path="src/svnfrontend/checkoutinfo.ui" implementationpath="src/svnfrontend/checkoutinfo_impl.h" />
         <implementation class="Logmsg_impl" path="src/svnfrontend/logmessage.ui" implementationpath="src/svnfrontend/logmsg_impl.h" />
         <implementation class="MergeDlg_impl" path="src/svnfrontend/merge_dlg.ui" implementationpath="src/svnfrontend/mergedlg_impl.h" />
         <implementation class="Rangeinput_impl" path="src/svnfrontend/rangeinput.ui" implementationpath="src/svnfrontend/rangeinput_impl.h" />
         <implementation class="SslTrustPrompt_impl" path="src/svnfrontend/ssltrustprompt.ui" implementationpath="src/svnfrontend/ssltrustprompt_impl.h" />
-        <implementation class="DisplaySettings_impl" path="src/display_settings.ui" implementationpath="src/displaysettings_impl.h" />
-        <implementation class="SubversionSettings_impl" path="src/subversion_settings.ui" implementationpath="src/subversionsettings_impl.h" />
+        <implementation class="SvnLogDlgImp" path="src/svnfrontend/svnlogdlg.ui" implementationpath="src/svnfrontend/svnlogdlgimp.h" />
       </qtdesigner>
     </designerintegration>
     <creategettersetter>

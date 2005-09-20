@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>471</width>
-            <height>310</height>
+            <width>361</width>
+            <height>260</height>
         </rect>
     </property>
     <property name="caption">
@@ -22,178 +22,184 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QSplitter">
+        <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>splitter2</cstring>
+                <cstring>layout4</cstring>
             </property>
-            <property name="orientation">
-                <enum>Vertical</enum>
-            </property>
-            <widget class="QLayoutWidget">
+            <hbox>
                 <property name="name">
-                    <cstring>layout5</cstring>
+                    <cstring>unnamed</cstring>
                 </property>
-                <hbox>
+                <widget class="KListView">
+                    <column>
+                        <property name="text">
+                            <string></string>
+                        </property>
+                        <property name="clickable">
+                            <bool>false</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>false</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Author</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Revison</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Date</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Message</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>false</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
                     <property name="name">
-                        <cstring>unnamed</cstring>
+                        <cstring>m_LogView</cstring>
                     </property>
-                    <widget class="KListView">
-                        <column>
-                            <property name="text">
-                                <string> </string>
-                            </property>
-                            <property name="clickable">
-                                <bool>false</bool>
-                            </property>
-                            <property name="resizable">
-                                <bool>false</bool>
-                            </property>
-                        </column>
-                        <column>
-                            <property name="text">
-                                <string>Author</string>
-                            </property>
-                            <property name="clickable">
-                                <bool>true</bool>
-                            </property>
-                            <property name="resizable">
-                                <bool>true</bool>
-                            </property>
-                        </column>
-                        <column>
-                            <property name="text">
-                                <string>Revison</string>
-                            </property>
-                            <property name="clickable">
-                                <bool>true</bool>
-                            </property>
-                            <property name="resizable">
-                                <bool>true</bool>
-                            </property>
-                        </column>
-                        <column>
-                            <property name="text">
-                                <string>Date</string>
-                            </property>
-                            <property name="clickable">
-                                <bool>true</bool>
-                            </property>
-                            <property name="resizable">
-                                <bool>true</bool>
-                            </property>
-                        </column>
-                        <column>
-                            <property name="text">
-                                <string>Message</string>
-                            </property>
-                            <property name="clickable">
-                                <bool>false</bool>
-                            </property>
-                            <property name="resizable">
-                                <bool>true</bool>
-                            </property>
-                        </column>
+                    <property name="vScrollBarMode">
+                        <enum>Auto</enum>
+                    </property>
+                    <property name="hScrollBarMode">
+                        <enum>Auto</enum>
+                    </property>
+                    <property name="allColumnsShowFocus">
+                        <bool>true</bool>
+                    </property>
+                    <property name="showSortIndicator">
+                        <bool>true</bool>
+                    </property>
+                    <property name="resizeMode">
+                        <enum>AllColumns</enum>
+                    </property>
+                    <property name="fullWidth">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>layout3</cstring>
+                    </property>
+                    <vbox>
                         <property name="name">
-                            <cstring>m_LogView</cstring>
+                            <cstring>unnamed</cstring>
                         </property>
-                        <property name="vScrollBarMode">
-                            <enum>Auto</enum>
-                        </property>
-                        <property name="hScrollBarMode">
-                            <enum>Auto</enum>
-                        </property>
-                        <property name="allColumnsShowFocus">
-                            <bool>true</bool>
-                        </property>
-                        <property name="showSortIndicator">
-                            <bool>true</bool>
-                        </property>
-                        <property name="resizeMode">
-                            <enum>AllColumns</enum>
-                        </property>
-                        <property name="fullWidth">
-                            <bool>true</bool>
-                        </property>
-                    </widget>
-                    <widget class="QLayoutWidget">
-                        <property name="name">
-                            <cstring>layout3</cstring>
-                        </property>
-                        <vbox>
+                        <widget class="QPushButton">
                             <property name="name">
-                                <cstring>unnamed</cstring>
+                                <cstring>buttonOk</cstring>
                             </property>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>buttonOk</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Close</string>
-                                </property>
-                                <property name="accel">
-                                    <string></string>
-                                </property>
-                                <property name="autoDefault">
-                                    <bool>true</bool>
-                                </property>
-                                <property name="default">
-                                    <bool>true</bool>
-                                </property>
-                            </widget>
-                            <widget class="KPushButton">
-                                <property name="name">
-                                    <cstring>m_DispPrevButton</cstring>
-                                </property>
-                                <property name="enabled">
-                                    <bool>false</bool>
-                                </property>
-                                <property name="text">
-                                    <string>Diff previous</string>
-                                </property>
-                                <property name="accel">
-                                    <string></string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>buttonHelp</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Help</string>
-                                </property>
-                                <property name="accel">
-                                    <string></string>
-                                </property>
-                                <property name="autoDefault">
-                                    <bool>true</bool>
-                                </property>
-                            </widget>
-                            <spacer>
-                                <property name="name">
-                                    <cstring>Spacer1</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Vertical</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>20</width>
-                                        <height>40</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                        </vbox>
-                    </widget>
-                </hbox>
-            </widget>
-            <widget class="KTextBrowser">
-                <property name="name">
-                    <cstring>m_LogDisplay</cstring>
-                </property>
-            </widget>
+                            <property name="text">
+                                <string>C&amp;lose</string>
+                            </property>
+                            <property name="accel">
+                                <string>Alt+L</string>
+                            </property>
+                            <property name="autoDefault">
+                                <bool>true</bool>
+                            </property>
+                            <property name="default">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="KPushButton">
+                            <property name="name">
+                                <cstring>m_DispPrevButton</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
+                            <property name="text">
+                                <string>Diff previous</string>
+                            </property>
+                            <property name="accel">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <widget class="KPushButton">
+                            <property name="name">
+                                <cstring>m_DispSpecDiff</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
+                            <property name="text">
+                                <string>Diff revisions</string>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Diff selected revisions</string>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>buttonHelp</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Help</string>
+                            </property>
+                            <property name="accel">
+                                <string></string>
+                            </property>
+                            <property name="autoDefault">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property name="name">
+                                <cstring>Spacer1</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Vertical</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </vbox>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="KTextBrowser">
+            <property name="name">
+                <cstring>m_LogDisplay</cstring>
+            </property>
         </widget>
     </vbox>
 </widget>
@@ -218,15 +224,30 @@
         <receiver>LogDialog</receiver>
         <slot>slotSelectionChanged(QListViewItem*)</slot>
     </connection>
+    <connection>
+        <sender>m_LogView</sender>
+        <signal>mouseButtonClicked(int,QListViewItem*,const QPoint&amp;,int)</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotItemClicked(int,QListViewItem*,const QPoint&amp;,int)</slot>
+    </connection>
+    <connection>
+        <sender>m_DispSpecDiff</sender>
+        <signal>clicked()</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotDispSelected()</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotSelectionChanged(QListViewItem*)</slot>
     <slot access="protected">slotItemChanged(QListViewItem*)</slot>
     <slot access="protected">slotDispPrevious()</slot>
+    <slot access="protected">slotItemClicked(int,QListViewItem*,const QPoint &amp;,int)</slot>
+    <slot access="protected">slotDispSelected()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>
     <includehint>klistview.h</includehint>
+    <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>
     <includehint>ktextbrowser.h</includehint>
 </includehints>

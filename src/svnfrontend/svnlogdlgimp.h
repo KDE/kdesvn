@@ -43,9 +43,12 @@ protected slots:
     virtual void slotSelectionChanged(QListViewItem*);
 protected slots:
     virtual void slotDispPrevious();
+    virtual void slotDispSelected();
+    virtual void slotItemClicked(int,QListViewItem*,const QPoint &,int);
 protected:
     QString _name;
     static const char* groupName;
+    LogListViewItem *m_first,*m_second;
 };
 
 #endif

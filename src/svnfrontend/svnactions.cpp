@@ -27,37 +27,38 @@
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "logmsg_impl.h"
+#include "../settings.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
 #include "svncpp/context_listener.hpp"
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
 #include "helpers/stl2qt.h"
-#include "kdesvn_part_config.h"
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qcanvas.h>
 #include <kdialog.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
-#include <qvaluelist.h>
 #include <kprocess.h>
 #include <ktempdir.h>
 #include <ktempfile.h>
 #include <kdialogbase.h>
-#include <qvbox.h>
 #include <kapplication.h>
 #include <kio/jobclasses.h>
 #include <kio/job.h>
 #include <kdebug.h>
-#include <qstylesheet.h>
 #include <kconfig.h>
+
+#include <qstring.h>
+#include <qmap.h>
+#include <qpushbutton.h>
+#include <qlayout.h>
+#include <qcanvas.h>
+#include <qvaluelist.h>
+#include <qvbox.h>
+#include <qstylesheet.h>
 #include <qregexp.h>
 #include <qimage.h>
 
@@ -144,7 +145,7 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(kdesvnPart_config::config()),name?name:DIALOGS_SIZES));
+    dlg->resize(dlg->configDialogSize(*(Settings::self()->config()),name?name:DIALOGS_SIZES));
     return dlg;
 }
 
@@ -168,7 +169,7 @@ void SvnActions::slotMakeRangeLog()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         makeLog(r.first,r.second,k);
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
 }
 
 /*!
@@ -193,9 +194,13 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
     const svn::LogEntries * logs;
     QString ex;
     if (!m_Data->m_CurrentContext) return;
-
-    bool follow = kdesvnPart_config::configItem("toggle_log_follows").toBool();
-
+    
+//    bool follow = kdesvnPart_config::configItem("toggle_log_follows").toBool();
+    // TODO toggle_log_follows existiert bisher nicht im Konfigurationsdialog
+    // Heisst es vielleicht log_follows_nodes?
+    // Falls ja, einfach diese Kommentare lÃ¶schen
+    bool follow = Settings::log_follows_nodes();
+    
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @todo second last parameter user settable (printing infos about copy/move etc) moment false so traffic reduced
@@ -278,7 +283,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize(*(kdesvnPart_config::config()),"blame_dlg",false);
+        dlg->saveDialogSize(*(Settings::self()->config()),"blame_dlg",false);
         delete dlg;
     }
     delete blame;
@@ -321,7 +326,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
             ptr->setWordWrap(QTextEdit::NoWrap);
             ptr->setText("<code>"+QStyleSheet::convertFromPlainText(content)+"</code>");
             dlg->exec();
-            dlg->saveDialogSize(*(kdesvnPart_config::config()),"cat_display_dlg",false);
+            dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);
             delete dlg;
         }
     } else {
@@ -337,7 +342,7 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
         ptr->setCanvas(can);
         qspr->show();
         dlg->exec();
-        dlg->saveDialogSize(*(kdesvnPart_config::config()),"cat_display_dlg",false);
+        dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);
         delete dlg;
         delete can;
     }
@@ -505,7 +510,7 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize(*(kdesvnPart_config::config()),"info_dialog",false);
+        dlg->saveDialogSize(*(Settings::self()->config()),"info_dialog",false);
         delete dlg;
     }
 }
@@ -528,7 +533,7 @@ void SvnActions::slotProperties()
     if (dlg.exec()!=QDialog::Accepted) {
         return;
     }
-    dlg.saveDialogSize(*(kdesvnPart_config::config()),"kdesvn_properties_dlg",false);
+    dlg.saveDialogSize(*(Settings::self()->config()),"kdesvn_properties_dlg",false);
     QString ex;
     PropertiesDlg::tPropEntries setList;
     QValueList<QString> delList;
@@ -636,7 +641,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
         return;
     }
     EMIT_FINISHED;
-    int disp = kdesvnPart_config::configItem("use_kompare_for_diff").toInt();
+    int disp = Settings::use_kompare_for_diff();
     if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
@@ -649,7 +654,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
         }
         delete proc;
     } else if (disp>1) {
-        QString what = kdesvnPart_config::configItem("external_diff_display").toString();
+        QString what = Settings::external_diff_display();
         QStringList wlist = QStringList::split(" ",what);
         KProcess*proc = new KProcess();
         bool fname_used = false;
@@ -685,7 +690,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     if (dlg) {
         ptr->setText("<code>"+QStyleSheet::convertFromPlainText(ex)+"</code>");
         dlg->exec();
-        dlg->saveDialogSize(*(kdesvnPart_config::config()),"diff_display",false);
+        dlg->saveDialogSize(*(Settings::self()->config()),"diff_display",false);
         delete dlg;
     }
 }
@@ -864,7 +869,7 @@ void SvnActions::CheckoutExport(bool _exp)
             bool openit = ptr->openAfterJob();
             makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
         }
-        dlg->saveDialogSize(*(kdesvnPart_config::config()),"checkout_export_dialog",false);
+        dlg->saveDialogSize(*(Settings::self()->config()),"checkout_export_dialog",false);
         delete dlg;
     }
 }
@@ -1213,7 +1218,7 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
  */
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all)
 {
-    bool display_ignores = kdesvnPart_config::configItem("display_ignored_files").toBool();
+    bool display_ignores = Settings::display_ignored_files();
     return makeStatus(what,dlist,where,rec,all,display_ignores);
 }
 
@@ -1238,7 +1243,7 @@ bool SvnActions::createModifiedCache(const QString&what)
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
     svn::Revision r = svn::Revision::HEAD;
-    if (kdesvnPart_config::configItem("display_overlays").toBool()) {
+    if (Settings::display_overlays()) {
         return makeStatus(what,m_Data->m_Cache,r,true,false,false);
     }
     return false;
@@ -1246,7 +1251,7 @@ bool SvnActions::createModifiedCache(const QString&what)
 
 void SvnActions::addModifiedCache(const svn::Status&what)
 {
-    if (!kdesvnPart_config::configItem("display_overlays").toBool()||what.path().isEmpty()) {
+    if (!Settings::display_overlays()||what.path().isEmpty()) {
         return;
     }
     for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {

@@ -51,12 +51,6 @@ CopyMoveView_impl::~CopyMoveView_impl()
 {
 }
 
-/*$SPECIALIZATION$*/
-
-
-#include "copymoveview_impl.moc"
-
-
 
 /*!
     \fn CopyMoveView_impl::newName()
@@ -98,3 +92,5 @@ QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
     }
     return nName;
 }
+
+#include "copymoveview_impl.moc"

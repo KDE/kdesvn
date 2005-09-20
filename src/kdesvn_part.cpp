@@ -19,27 +19,28 @@
  ***************************************************************************/
 
 #include "kdesvn_part.h"
-#include "kdesvn_part_config.h"
+#include "settings.h"
 #include "displaysettings_impl.h"
 #include "subversionsettings_impl.h"
-#include "svncpp/version_check.hpp"
+#include "kdesvnview.h"
 #include "../config.h"
+#include "svncpp/version_check.hpp"
 
 #include <kinstance.h>
 #include <kaction.h>
 #include <kstdaction.h>
 #include <kfiledialog.h>
 #include <kdebug.h>
-#include <kdesvnview.h>
 #include <kbugreport.h>
-#include <qpopupmenu.h>
 #include <kxmlguifactory.h>
 #include <kaboutapplication.h>
 #include <kapp.h>
 #include <kconfigdialog.h>
-#include <kconfigskeleton.h>
+#include <kaboutdata.h>
+#include <klocale.h>
 
 #include <qcursor.h>
+#include <qpopupmenu.h>
 
 K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
 
@@ -48,60 +49,6 @@ QString kdesvnPart::m_Extratext = "";
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (dynamic Part component)");
-
- class kdesvnPart_Prefs : public KConfigSkeleton
- {
-    public:
-        kdesvnPart_Prefs(KSharedConfig::Ptr config)
-            : KConfigSkeleton(config)
-        {
-            setCurrentGroup("general_items");
-            addItemInt("listview_icon_size",mlist_icon_size,22);
-            addItemBool("display_overlays",mdisp_overlay,true);
-            addItemInt("use_kompare_for_diff",muse_kompare,1);
-            addItemString("external_diff_display",mdiff_display,"kompare");
-            addItemInt("max_log_messages",mmax_log_messages,20);
-            addItemBool("display_file_tips",m_show_file_tips,true);
-            addItemBool("display_previews_in_file_tips",m_show_preview_in_file_tips,false);
-
-            setCurrentGroup("subversion");
-#if 0
-            /// not needed this moment
-            addItemBool("display_unknown_files",mdisp_unknown_files,true);
-#endif
-            addItemBool("display_ignored_files",mdisp_ignored_files,true);
-            addItemBool("log_follows_nodes",mlog_follows_nodes,true);
-            addItemBool("info_recursive",minfo_recursive,false);
-        }
-
-        static kdesvnPart_Prefs*self()
-        {
-            if (!_me) {
-                _me = new kdesvnPart_Prefs(kdesvnPartFactory::instance()->sharedConfig());
-                _me->readConfig();
-            }
-            return _me;
-        }
-        int mlist_icon_size;
-        bool mdisp_overlay;
-        int muse_kompare;
-#if 0
-        /// not needed this moment
-        bool mdisp_unknown_files;
-#endif
-        bool mdisp_ignored_files;
-        bool mlog_follows_nodes;
-        bool minfo_recursive;
-        int mmax_log_messages;
-        QString mdiff_display;
-        bool m_show_file_tips;
-        bool m_show_preview_in_file_tips;
-
-    private:
-        static kdesvnPart_Prefs*_me;
- };
-
-kdesvnPart_Prefs*kdesvnPart_Prefs::_me=0;
 
 kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name , const QStringList&)
@@ -184,6 +131,8 @@ void kdesvnPart::slotDispPopup(const QString&name)
     popup->exec(QCursor::pos());
 }
 
+// It's usually safe to leave the factory code alone.. with the
+// notable exception of the KAboutData data
 KAboutData* kdesvnPart::createAboutData()
 {
     m_Extratext = QString(I18N_NOOP("Built with Subversion library: %1\n")).arg(svn::Version::linked_version());
@@ -201,13 +150,6 @@ KAboutData* kdesvnPart::createAboutData()
     return about;
 }
 
-// It's usually safe to leave the factory code alone.. with the
-// notable exception of the KAboutData data
-#include <kaboutdata.h>
-#include <klocale.h>
-
-#include "kdesvn_part.moc"
-
 
 /*!
     \fn kdesvnPart::setupActions()
@@ -217,17 +159,17 @@ void kdesvnPart::setupActions()
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
             actionCollection(),"toggle_use_kompare");
-    toggletemp->setChecked(kdesvnPart_Prefs::self()->muse_kompare);
+    toggletemp->setChecked(Settings::use_kompare_for_diff());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
     toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
             actionCollection(),"toggle_log_follows");
-    toggletemp->setChecked(kdesvnPart_Prefs::self()->mlog_follows_nodes);
+    toggletemp->setChecked(Settings::log_follows_nodes());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
 
     toggletemp = new KToggleAction(i18n("Display ignored files"),KShortcut(),
             actionCollection(),"toggle_ignored_files");
-    toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_ignored_files);
+    toggletemp->setChecked(Settings::display_ignored_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
 #if 0
     /// not needed this moment
@@ -255,8 +197,8 @@ void kdesvnPart::setupActions()
  */
 void kdesvnPart::slotLogFollowNodes(bool how)
 {
-    kdesvnPart_Prefs::self()->mlog_follows_nodes=how;
-    kdesvnPart_Prefs::self()->writeConfig();
+    Settings::setLog_follows_nodes(how);
+    Settings::writeConfig();
 }
 
 
@@ -265,8 +207,8 @@ void kdesvnPart::slotLogFollowNodes(bool how)
  */
 void kdesvnPart::slotDisplayIgnored(bool how)
 {
-    kdesvnPart_Prefs::self()->mdisp_ignored_files = how;
-    kdesvnPart_Prefs::self()->writeConfig();
+    Settings::setDisplay_ignored_files(how);
+    Settings::writeConfig();
     emit refreshTree();
 }
 
@@ -288,8 +230,9 @@ void kdesvnPart::slotDisplayUnkown(bool )
  */
 void kdesvnPart::slotUseKompare(bool how)
 {
-    kdesvnPart_Prefs::self()->muse_kompare=how?1:0;
-    kdesvnPart_Prefs::self()->writeConfig();
+    int selected = how ? 1 : 0;
+    Settings::setUse_kompare_for_diff(selected);
+    Settings::writeConfig();
 }
 
 
@@ -372,7 +315,7 @@ void kdesvnPart::slotShowSettings()
     }
     KConfigDialog *dialog = new KConfigDialog(widget(),
          "kdesvnpart_settings",
-         kdesvnPart_Prefs::self(),
+         Settings::self(),
          KDialogBase::IconList);
     dialog->addPage(new DisplaySettings_impl(0,"general_items"),
         i18n("General"),"kdesvn",i18n("General"),true);
@@ -392,15 +335,15 @@ void kdesvnPart::slotSettingsChanged()
     KAction * temp;
     temp = actionCollection()->action("toggle_use_kompare");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->muse_kompare==1);
+        ((KToggleAction*)temp)->setChecked(Settings::use_kompare_for_diff()==1);
     }
     temp = actionCollection()->action("toggle_log_follows");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mlog_follows_nodes);
+        ((KToggleAction*)temp)->setChecked(Settings::log_follows_nodes());
     }
     temp = actionCollection()->action("toggle_ignored_files");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(kdesvnPart_Prefs::self()->mdisp_ignored_files);
+        ((KToggleAction*)temp)->setChecked(Settings::display_ignored_files());
     }
 #if 0
     /// not needed this momenta
@@ -412,27 +355,4 @@ void kdesvnPart::slotSettingsChanged()
     emit settingsChanged();
 }
 
-QVariant kdesvnPart_config::configItem(const QString& name)
-{
-    KConfigSkeletonItem*it = kdesvnPart_Prefs::self()->findItem(name);
-    if (!it) {
-        return QVariant();
-    }
-    return it->property();
-}
-
-/*!
-    \fn kdesvnPart_config::config()
- */
-KConfig* kdesvnPart_config::config()
-{
-    return kdesvnPartFactory::instance()->config();
-}
-
-/*!
-    \fn kdesvnPart::iconloader()
- */
-KIconLoader* kdesvnPart_config::iconLoader()
-{
-    return kdesvnPartFactory::instance()->iconLoader();
-}
+#include "kdesvn_part.moc"

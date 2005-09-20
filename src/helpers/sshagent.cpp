@@ -235,5 +235,4 @@ bool SshAgent::startSshAgent()
     return (proc.normalExit() && proc.exitStatus() == 0);
 }
 
-
 #include "sshagent.moc"

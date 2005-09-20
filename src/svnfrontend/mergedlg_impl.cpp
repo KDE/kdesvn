@@ -92,8 +92,6 @@ Rangeinput_impl::revision_range MergeDlg_impl::getRange()const
     return m_RangeInput->getRange();
 }
 
-#include "mergedlg_impl.moc"
-
 
 /*!
     \fn MergeDlg_impl::getMergeRange(bool*force,bool*recursive,bool*related,bool*dry)
@@ -118,3 +116,5 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     *dry = ptr->dryrun();
     return true;
 }
+
+#include "mergedlg_impl.moc"

@@ -23,7 +23,8 @@
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 #include "helpers/smart_pointer.h"
-#include "kurl.h"
+
+#include <kurl.h>
 
 #include <qobject.h>
 #include <qdatetime.h>

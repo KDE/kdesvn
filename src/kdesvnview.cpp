@@ -137,7 +137,6 @@ void kdesvnView::slotSetTitle(const QString& title)
     emit signalChangeCaption(title);
 }
 
-#include "kdesvnview.moc"
 
 /*!
     \fn kdesvnView::closeMe()
@@ -171,3 +170,5 @@ void kdesvnView::slotSettingsChanged()
 {
     m_flist->slotSettingsChanged();
 }
+
+#include "kdesvnview.moc"

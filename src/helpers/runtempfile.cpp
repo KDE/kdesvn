@@ -43,3 +43,6 @@ void RunTempfile::timeout()
         delete this;
     }
 }
+
+#include "runtempfile.moc"
+

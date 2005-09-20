@@ -262,8 +262,6 @@ QString kdesvn::currentURL () const
     return m_part->url().prettyURL();
 }
 
-#include "kdesvn.moc"
-
 
 /*!
     \fn kdesvn::slotUrlOpened(bool)
@@ -369,3 +367,5 @@ void kdesvn::slotLoadLast(bool how)
     KConfigGroup cs(KGlobal::config(),"startup");
     cs.writeEntry("load_last_on_start",how);
 }
+
+#include "kdesvn.moc"

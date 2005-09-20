@@ -140,8 +140,6 @@ void Rangeinput_impl::startDateToggled(bool how)
     }
 }
 
-#include "rangeinput_impl.moc"
-
 
 bool Rangeinput_impl::StartOnly() const
 {
@@ -165,3 +163,5 @@ void Rangeinput_impl::setStartOnly(bool theValue)
         m_startRevBox->setTitle(i18n( "Start with revision" ));
     }
 }
+
+#include "rangeinput_impl.moc"

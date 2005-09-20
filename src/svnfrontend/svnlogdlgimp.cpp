@@ -18,10 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "svnlogdlgimp.h"
+#include "../settings.h"
 #include "svncpp/log_entry.hpp"
 #include "helpers/sub2qt.h"
-#include <qdatetime.h>
-#include <qheader.h>
+
 #include <klistview.h>
 #include <ktextbrowser.h>
 #include <kpushbutton.h>
@@ -31,7 +31,9 @@
 #include <kconfig.h>
 #include <ktabwidget.h>
 #include <kdebug.h>
-#include "kdesvn_part_config.h"
+
+#include <qdatetime.h>
+#include <qheader.h>
 
 #include <list>
 
@@ -114,8 +116,6 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
     _name = what;
 }
 
-#include "svnlogdlgimp.moc"
-
 
 /*!
     \fn SvnLogDlgImp::slotItemClicked(QListViewItem*)
@@ -164,11 +164,11 @@ void SvnLogDlgImp::saveSize()
 {
     int scnum = QApplication::desktop()->screenNumber(parentWidget());
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
-    KConfigGroupSaver cs(kdesvnPart_config::config(), groupName);
+    KConfigGroupSaver cs(Settings::self()->config(), groupName);
     QSize sizeToSave = size();
-    kdesvnPart_config::config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
+    Settings::self()->config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
         QString::number( sizeToSave.width()), true, false);
-    kdesvnPart_config::config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
+    Settings::self()->config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
         QString::number( sizeToSave.height()), true, false);
 }
 
@@ -179,8 +179,10 @@ QSize SvnLogDlgImp::dialogSize()
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
     w = sizeHint().width();
     h = sizeHint().height();
-    KConfigGroupSaver cs(kdesvnPart_config::config(), groupName);
-    w = kdesvnPart_config::config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
-    h = kdesvnPart_config::config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
+    KConfigGroupSaver cs(Settings::self()->config(), groupName);
+    w = Settings::self()->config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
+    h = Settings::self()->config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
     return( QSize( w, h ) );
 }
+
+#include "svnlogdlgimp.moc"

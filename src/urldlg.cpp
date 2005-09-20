@@ -45,9 +45,6 @@ UrlDlg::~UrlDlg()
 }
 
 
-#include "urldlg.moc"
-
-
 /*!
     \fn UrlDlg::init_dlg
  */
@@ -141,3 +138,5 @@ KURL UrlDlg::getURL(QWidget*parent)
     const KURL& url = dlg.selectedURL();
     return url;
 }
+
+#include "urldlg.moc"

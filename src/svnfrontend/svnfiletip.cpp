@@ -295,5 +295,4 @@ bool SvnFileTip::eventFilter( QObject *, QEvent *e )
     return false;
 }
 
-
 #include "svnfiletip.moc"

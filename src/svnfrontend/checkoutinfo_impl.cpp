@@ -96,8 +96,6 @@ void CheckoutInfo_impl::disableTargetDir(bool how)
     }
 }
 
-#include "checkoutinfo_impl.moc"
-
 
 /*!
     \fn CheckoutInfo_impl::openAfterJob()
@@ -106,3 +104,5 @@ bool CheckoutInfo_impl::openAfterJob()
 {
     return m_ShowExplorer->isChecked();
 }
+
+#include "checkoutinfo_impl.moc"

@@ -18,7 +18,7 @@ kdesvn_SOURCES = main.cpp kdesvn.cpp urldlg.cpp
 
 # these are the headers for your project
 noinst_HEADERS = kdesvn.h kdesvnview.h urldlg.h displaysettings_impl.h \
-		kdesvn_part_config.h subversionsettings_impl.h
+	subversionsettings_impl.h
 
 # client stuff
 
@@ -33,6 +33,7 @@ KDE_ICON = AUTO
 
 # this is where the kdelnk file will go 
 xdg_apps_DATA = kdesvn.desktop
+kde_kcfg_DATA = kdesvn_part.kcfg
 
 # this is where the XML-GUI resource file goes
 rcdir = $(kde_datadir)/kdesvn
@@ -49,7 +50,8 @@ kdesvnaskpass_LDADD = $(LIB_KDEUI)
 kde_module_LTLIBRARIES = libkdesvnpart.la
 
 # the Part's source, library search path, and link libraries
-libkdesvnpart_la_SOURCES = kdesvn_part.cpp kdesvnview.cpp display_settings.ui \
+BUILT_SOURCES = settings.h
+libkdesvnpart_la_SOURCES = settings.kcfgc kdesvn_part.cpp kdesvnview.cpp display_settings.ui \
 		displaysettings_impl.cpp subversion_settings.ui subversionsettings_impl.cpp
 libkdesvnpart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.la \

@@ -41,9 +41,6 @@ SslTrustPrompt_impl::SslTrustPrompt_impl(const QString&host,QWidget *parent, con
         i18n("Use the fingerprint to validate the certificate manually!")+"</p>");
 }
 
-#include "ssltrustprompt_impl.moc"
-
-
 
 /*!
     \fn SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,bool*ok,bool*saveit)
@@ -83,3 +80,4 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     }
     return *ok;
 }
+#include "ssltrustprompt_impl.moc"

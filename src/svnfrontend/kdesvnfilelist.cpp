@@ -24,6 +24,7 @@
 #include "mergedlg_impl.h"
 #include "svnactions.h"
 #include "svnfiletip.h"
+#include "../settings.h"
 #include "svncpp/revision.hpp"
 #include "svncpp/dirent.hpp"
 #include "svncpp/client.hpp"
@@ -31,15 +32,6 @@
 #include "helpers/sshagent.h"
 #include "helpers/stl2qt.h"
 #include "helpers/runtempfile.h"
-#include "kdesvn_part_config.h"
-
-#include <qvbox.h>
-#include <qpainter.h>
-#include <qstyle.h>
-#include <qapplication.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qtooltip.h>
 
 #include <kapplication.h>
 #include <kdirwatch.h>
@@ -57,6 +49,14 @@
 #include <ktempfile.h>
 #include <kio/job.h>
 #include <krun.h>
+
+#include <qvbox.h>
+#include <qpainter.h>
+#include <qstyle.h>
+#include <qapplication.h>
+#include <qlayout.h>
+#include <qlabel.h>
+#include <qtooltip.h>
 
 class KdesvnFileListPrivate{
 public:
@@ -95,9 +95,9 @@ KdesvnFileListPrivate::KdesvnFileListPrivate()
 
 void KdesvnFileListPrivate::readSettings()
 {
-    mlist_icon_size = kdesvnPart_config::configItem("listview_icon_size").toInt();
-    mdisp_ignored_files = kdesvnPart_config::configItem("display_ignored_files").toBool();
-    mdisp_overlay = kdesvnPart_config::configItem("display_overlays").toBool();
+    mlist_icon_size = Settings::listview_icon_size();
+    mdisp_ignored_files = Settings::display_ignored_files();
+    mdisp_overlay = Settings::display_overlays();
 }
 
 bool KdesvnFileListPrivate::reReadSettings()
@@ -116,7 +116,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     m_pList = new KdesvnFileListPrivate;
     m_filesAction = aCollect;
     m_pList->m_fileTip=new SvnFileTip(this);
-    m_pList->m_fileTip->setOptions(kdesvnPart_config::configItem("display_file_tips").toBool()&&
+    m_pList->m_fileTip->setOptions(Settings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
 
     SshAgent ssh;
@@ -378,7 +378,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         clear();
     }
     enableActions();
-    m_pList->m_fileTip->setOptions(!isNetworked()&&kdesvnPart_config::configItem("display_file_tips").toBool()&&
+    m_pList->m_fileTip->setOptions(!isNetworked()&&Settings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
 
     emit changeCaption(baseUri());
@@ -725,7 +725,7 @@ template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(kdesvnPart_config::config()),name?name:"standard_size"));
+    dlg->resize(dlg->configDialogSize(*(Settings::self()->config()),name?name:"standard_size"));
     return dlg;
 }
 
@@ -790,7 +790,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"import_log_msg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"import_log_msg",false);
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
@@ -1318,7 +1318,7 @@ void kdesvnfilelist::slotLock()
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"locking_log_msg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"locking_log_msg",false);
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
@@ -1404,7 +1404,7 @@ void kdesvnfilelist::slotRangeBlame()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeBlame(r.first,r.second,k);
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
     delete dlg;
 }
 
@@ -1469,7 +1469,7 @@ void kdesvnfilelist::slotDiffRevisions()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeDiff(what,r.first,r.second);
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
     delete dlg;
 
 }
@@ -1492,7 +1492,7 @@ void kdesvnfilelist::slotSelectBrowsingRevision()
             refreshCurrentTree();
         }
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
     delete dlg;
 }
 
@@ -1513,7 +1513,7 @@ void kdesvnfilelist::slotRevisionCat()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeCat(r.first, k->fullName(),k->shortName());
     }
-    dlg->saveDialogSize(*(kdesvnPart_config::config()),"revisions_dlg",false);
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
     delete dlg;
 }
 
@@ -1584,7 +1584,7 @@ void kdesvnfilelist::slotInfo()
     if (lst.count()==0) {
         lst.append(SelectedOrMain());
     }
-    m_SvnWrapper->makeInfo(lst,rev,peg,kdesvnPart_config::configItem("info_recursive").toBool());
+    m_SvnWrapper->makeInfo(lst,rev,peg,Settings::info_recursive());
 }
 
 
@@ -1697,7 +1697,7 @@ FileListViewItem* kdesvnfilelist::findEntryItem(const QString&what,FileListViewI
  */
 void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
 {
-    if (kdesvnPart_config::configItem("display_file_tips").toBool()) {
+    if (Settings::display_file_tips()) {
 
         QPoint vp = contentsToViewport( e->pos() );
         FileListViewItem*item = isExecuteArea( vp ) ? static_cast<FileListViewItem*>(itemAt( vp )) : 0L;
@@ -1707,7 +1707,7 @@ void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
             QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
             m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
             m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())&&isWorkingCopy()
-                &&kdesvnPart_config::configItem("display_previews_in_file_tips").toBool());
+                &&Settings::display_previews_in_file_tips());
             setShowToolTips(false);
         } else {
             m_pList->m_fileTip->setItem(0);
@@ -1739,7 +1739,7 @@ void kdesvnfilelist::leaveEvent(QEvent*e)
 
 void kdesvnfilelist::slotSettingsChanged()
 {
-    m_pList->m_fileTip->setOptions(!isNetworked()&&kdesvnPart_config::configItem("display_file_tips").toBool()&&
+    m_pList->m_fileTip->setOptions(!isNetworked()&&Settings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();

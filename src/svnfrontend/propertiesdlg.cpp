@@ -405,3 +405,6 @@ bool PropertiesDlg::protected_Property(const QString&what)
     if (what.compare("svn:special")!=0) return false;
     return true;
 }
+
+#include "propertiesdlg.moc"
+

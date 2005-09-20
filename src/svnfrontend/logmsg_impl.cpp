@@ -18,19 +18,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "logmsg_impl.h"
-#include "kdesvn_part_config.h"
+#include "../settings.h"
 
 #include <ktextedit.h>
 #include <kcombobox.h>
-#include <qcheckbox.h>
 #include <kdialogbase.h>
 #include <klocale.h>
-#include <qvbox.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kapp.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
+
+#include <qvbox.h>
+#include <qcheckbox.h>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -48,9 +49,6 @@ void Logmsg_impl::slotHistoryActivated(const QString&aMessage)
 {
     m_LogEdit->setText(aMessage);
 }
-
-
-#include "logmsg_impl.moc"
 
 
 /*!
@@ -77,8 +75,8 @@ bool Logmsg_impl::isRecursive()const
 void Logmsg_impl::initHistory()
 {
     if (smax_message_history==-1) {
-        smax_message_history = kdesvnPart_config::configItem("max_log_messages").toInt();
-        KConfigGroup cs(kdesvnPart_config::config(),"log_messages");
+        smax_message_history = Settings::max_log_messages();
+        KConfigGroup cs(Settings::self()->config(),"log_messages");
         QString s = QString::null;
         int current = 0;
         QString key = QString("log_%0").arg(current);
@@ -117,7 +115,7 @@ void Logmsg_impl::saveHistory()
     if (sLogHistory.size()>smax_message_history) {
         sLogHistory.erase(sLogHistory.fromLast());
     }
-    KConfigGroup cs(kdesvnPart_config::config(),"log_messages");
+    KConfigGroup cs(Settings::self()->config(),"log_messages");
     for (unsigned int i = 0; i < sLogHistory.size();++i) {
         cs.writeEntry(QString("log_%0").arg(i),sLogHistory[i]);
     }
@@ -163,3 +161,5 @@ void Logmsg_impl::setRecCheckboxtext(const QString&what)
 {
     m_RecursiveButton->setText(what);
 }
+
+#include "logmsg_impl.moc"

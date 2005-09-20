@@ -107,6 +107,9 @@
                     <property name="fullWidth">
                         <bool>true</bool>
                     </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Select in first column revisions for diff</string>
+                    </property>
                 </widget>
                 <widget class="QLayoutWidget">
                     <property name="name">

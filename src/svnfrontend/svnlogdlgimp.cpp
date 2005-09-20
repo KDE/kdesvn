@@ -189,9 +189,10 @@ QSize SvnLogDlgImp::dialogSize()
 
 void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,int col)
 {
-    if (!item||col>0) return;
+    if (!item) return;
     kdDebug()<<"item clicked (" << button << " - " << (item!=0?"selected":"none")<<" - " << col << ")" << endl;
     LogListViewItem*which = static_cast<LogListViewItem*>(item);
+    /* left mouse */
     if (button == 1) {
         if (m_first) m_first->setText(0,"");
         if (m_first == which) {
@@ -203,7 +204,8 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
         if (m_first==m_second) {
             m_second = 0;
         }
-    } else if ( button==2 ) {
+    /* other mouse */
+    } else {
         if (m_second) m_second->setText(0,"");
         if (m_second == which) {
             m_second = 0;

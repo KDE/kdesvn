@@ -194,13 +194,9 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
     const svn::LogEntries * logs;
     QString ex;
     if (!m_Data->m_CurrentContext) return;
-    
-//    bool follow = kdesvnPart_config::configItem("toggle_log_follows").toBool();
-    // TODO toggle_log_follows existiert bisher nicht im Konfigurationsdialog
-    // Heisst es vielleicht log_follows_nodes?
-    // Falls ja, einfach diese Kommentare lÃ¶schen
+
     bool follow = Settings::log_follows_nodes();
-    
+
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         /// @todo second last parameter user settable (printing infos about copy/move etc) moment false so traffic reduced
@@ -626,7 +622,7 @@ void SvnActions::procClosed(KProcess*proc)
 void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
 {
     if (!m_Data->m_CurrentContext) return;
-    QString ex;
+    QString ex = "";
     KTempDir tdir;
     tdir.setAutoDelete(true);
     try {

@@ -1594,6 +1594,7 @@ void kdesvnfilelist::slotInfo()
 void kdesvnfilelist::slotDirItemCreated(const QString&what)
 {
     m_pList->m_DirWatch->stopScan();
+    m_pList->m_fileTip->setItem(0);
     FileListViewItem*item = findEntryItem(what);
     if (item) {
         refreshItem(item);
@@ -1619,6 +1620,7 @@ void kdesvnfilelist::updateParents(FileListViewItem*item)
 void kdesvnfilelist::slotDirItemDirty(const QString&what)
 {
     m_pList->m_DirWatch->stopScan();
+    m_pList->m_fileTip->setItem(0);
     FileListViewItem*item = findEntryItem(what);
     if (item) {
         refreshItem(item);
@@ -1645,6 +1647,7 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
 void kdesvnfilelist::slotDirItemDeleted(const QString&what)
 {
     m_pList->m_DirWatch->stopScan();
+    m_pList->m_fileTip->setItem(0);
     FileListViewItem*item = findEntryItem(what);
     if (item) {
         refreshItem(item);

@@ -77,7 +77,7 @@ namespace svn
       svn_error_clear (svn_io_remove_file (errfileName, pool));
   }
 
-  QString
+  QCString
   Client::diff (const Path & tmpPath, const Path & path,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
@@ -158,9 +158,10 @@ namespace svn
     }
 
     diffCleanup (outfile, outfileName, errfile, errfileName, pool);
-    QByteArray res;
+    QCString res;
     res.duplicate(stringbuf->data,stringbuf->len);
-    return QString::fromUtf8(res);
+    res.resize(stringbuf->len+1);
+    return res;
   }
 
 }

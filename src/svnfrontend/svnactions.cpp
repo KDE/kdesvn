@@ -128,7 +128,6 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient.setContext(m_Data->m_CurrentContext);
 }
 
-#include "svnactions.moc"
 
 template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
@@ -539,11 +538,11 @@ void SvnActions::slotProperties()
     PropertiesDlg dlg(k->fullName(),svnclient(),
         m_Data->m_ParentList->isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
-    dlg.resize(dlg.configDialogSize("kdesvn_properties_dlg"));
+    dlg.resize(dlg.configDialogSize(*(Settings::self()->config()), "properties_dlg"));
     if (dlg.exec()!=QDialog::Accepted) {
         return;
     }
-    dlg.saveDialogSize(*(Settings::self()->config()),"kdesvn_properties_dlg",false);
+    dlg.saveDialogSize(*(Settings::self()->config()),"properties_dlg",false);
     QString ex;
     PropertiesDlg::tPropEntries setList;
     QValueList<QString> delList;
@@ -1438,3 +1437,5 @@ bool SvnActions::isLocalWorkingCopy(const KURL&url)
     }
     return true;
 }
+
+#include "svnactions.moc"

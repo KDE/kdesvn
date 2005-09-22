@@ -26,6 +26,7 @@
 #include <ktextbrowser.h>
 #include <kpushbutton.h>
 #include <kglobal.h>
+#include <klocale.h>
 #include <kapp.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
@@ -50,11 +51,13 @@ public:
     static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
     const QString&message()const;
     svn_revnum_t rev()const{return _revision;}
+    void showChangedEntries(KListView*);
 
 protected:
     svn_revnum_t _revision;
     QDateTime fullDate;
     QString _message;
+    QValueList<svn::LogChangePathEntry> changedPaths;
 };
 
 const int LogListViewItem::COL_REV = 2;
@@ -78,6 +81,7 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     } else {
         setText(COL_MSG,sp[0]);
     }
+    changedPaths = _entry.changedPaths;
     //setText(COL_MSG,_entry.message.c_str());
 }
 const QString&LogListViewItem::message()const
@@ -95,6 +99,22 @@ int LogListViewItem::compare( QListViewItem* item, int col, bool ) const
         return fullDate.secsTo(k->fullDate);
     }
     return text(col).localeAwareCompare(k->text(col));
+}
+
+void LogListViewItem::showChangedEntries(KListView*where)
+{
+    if (!where)return;
+    if (changedPaths.count()==0) {
+        return;
+    }
+    for (unsigned i = 0; i < changedPaths.count();++i) {
+        KListViewItem*it = new KListViewItem(where);
+        it->setText(0,QString(QChar(changedPaths[i].action)));
+        it->setText(1,changedPaths[i].path);
+        if (changedPaths[i].copyFromRevision>-1) {
+            it->setText(2,i18n("%1 at revision %2").arg(changedPaths[i].copyFromPath).arg(changedPaths[i].copyFromRevision));
+        }
+    }
 }
 
 SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
@@ -131,6 +151,9 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
 
     LogListViewItem* k = static_cast<LogListViewItem*>( _it );
     m_LogDisplay->setText(k->message());
+    m_ChangedList->clear();
+    k->showChangedEntries(m_ChangedList);
+
     k = static_cast<LogListViewItem*>(_it->nextSibling());
     if (!k) {
         m_DispPrevButton->setEnabled(false);
@@ -190,7 +213,6 @@ QSize SvnLogDlgImp::dialogSize()
 void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,int col)
 {
     if (!item) return;
-    kdDebug()<<"item clicked (" << button << " - " << (item!=0?"selected":"none")<<" - " << col << ")" << endl;
     LogListViewItem*which = static_cast<LogListViewItem*>(item);
     /* left mouse */
     if (button == 1) {

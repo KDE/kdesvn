@@ -164,10 +164,11 @@ void SvnActions::slotMakeRangeLog()
     if (!dlg) {
         return;
     }
+    bool list = Settings::self()->log_always_list_changed_files();
     int i = dlg->exec();
     if (i==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        makeLog(r.first,r.second,k);
+        makeLog(r.first,r.second,k,list);
     }
     dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
 }
@@ -183,13 +184,20 @@ void SvnActions::slotMakeLog()
     if (!k) return;
     svn::Revision start(svn::Revision::START);
     svn::Revision end(svn::Revision::HEAD);
-    makeLog(start,end,k);
+    bool list = Settings::self()->log_always_list_changed_files();
+    makeLog(start,end,k,list);
 }
 
 /*!
     \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
  */
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
+void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files)
+{
+    if (!k)return;
+    makeLog(start,end,k->fullName(),list_files);
+}
+
+void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files)
 {
     const svn::LogEntries * logs;
     QString ex;
@@ -199,8 +207,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
-        /// @todo second last parameter user settable (printing infos about copy/move etc) moment false so traffic reduced
-        logs = m_Data->m_Svnclient.log(k->fullName(),start,end,false,!follow);
+        logs = m_Data->m_Svnclient.log(which,start,end,list_files,!follow);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -212,7 +219,7 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k)
         return;
     }
     SvnLogDlgImp disp;
-    disp.dispLog(logs,k->fullName());
+    disp.dispLog(logs,which);
     connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
     disp.exec();
@@ -865,7 +872,7 @@ void SvnActions::CheckoutExport(bool _exp)
             bool openit = ptr->openAfterJob();
             makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
         }
-        dlg->saveDialogSize(*(Settings::self()->config()),"checkout_export_dialog",false);
+                dlg->saveDialogSize(*(Settings::self()->config()),"checkout_export_dialog",false);
         delete dlg;
     }
 }

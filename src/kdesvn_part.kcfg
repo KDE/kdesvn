@@ -47,5 +47,9 @@
       <label>Log follows node changes</label>
       <default>true</default>
     </entry>
+    <entry name="log_always_list_changed_files" type="Bool">
+      <label>Logs always reads list of changed files</label>
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

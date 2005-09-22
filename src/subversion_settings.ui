@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>206</width>
-            <height>124</height>
+            <width>271</width>
+            <height>151</height>
         </rect>
     </property>
     <property name="caption">
@@ -54,6 +54,14 @@ If it works slow (low connection and so on) you should turn of this feature.</st
             </property>
             <property name="text">
                 <string>Log follows node changes</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_log_always_list_changed_files</cstring>
+            </property>
+            <property name="text">
+                <string>Logs always reads list of changed files</string>
             </property>
         </widget>
     </vbox>

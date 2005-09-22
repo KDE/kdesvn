@@ -144,7 +144,6 @@ PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn
 
     //PropertiesDlgLayout->addLayout(midLayout);
     languageChange();
-    resize( QSize(489, 236).expandedTo(minimumSizeHint()) );
     clearWState( WState_Polished );
 
     // signals and slots connections
@@ -294,6 +293,8 @@ void PropertiesDlg::slotItemRenamed(QListViewItem*_item,const QString &,int col 
 void PropertiesDlg::slotAdd()
 {
     EditProperty_impl dlg(this);
+    // TODO decide if selected item is a directory or a file
+    dlg.setDir(true);
     if (dlg.exec()==QDialog::Accepted) {
         if (protected_Property(dlg.PropName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
@@ -342,6 +343,8 @@ void PropertiesDlg::slotModify()
     EditProperty_impl dlg(this);
     dlg.setPropName(ki->currentName());
     dlg.setPropValue(ki->currentValue());
+    // TODO decide if selected item is a directory or a file
+    dlg.setDir(false);
     if (dlg.exec()==QDialog::Accepted) {
         if (protected_Property(dlg.PropName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));

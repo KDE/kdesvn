@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>310</width>
-            <height>195</height>
+            <width>410</width>
+            <height>275</height>
         </rect>
     </property>
     <property name="caption">
@@ -18,49 +18,13 @@
     <property name="sizeGripEnabled">
         <bool>true</bool>
     </property>
-    <vbox>
+    <grid>
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLayoutWidget">
+        <widget class="QLayoutWidget" row="1" column="0">
             <property name="name">
-                <cstring>layout4</cstring>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QLabel" row="1" column="0">
-                    <property name="name">
-                        <cstring>m_ValueLabel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Property value:</string>
-                    </property>
-                </widget>
-                <widget class="KTextEdit" row="1" column="1">
-                    <property name="name">
-                        <cstring>m_ValueEdit</cstring>
-                    </property>
-                </widget>
-                <widget class="KLineEdit" row="0" column="1">
-                    <property name="name">
-                        <cstring>m_NameEdit</cstring>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>m_NameLabel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Property name:</string>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
-        <widget class="QLayoutWidget">
-            <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>layout1</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -68,30 +32,13 @@
                 </property>
                 <widget class="QPushButton">
                     <property name="name">
-                        <cstring>buttonOk</cstring>
+                        <cstring>buttonHelp</cstring>
                     </property>
                     <property name="text">
-                        <string>OK</string>
+                        <string>He&amp;lp</string>
                     </property>
                     <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                    <property name="default">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>buttonCancel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Cancel</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
+                        <string>Alt+L</string>
                     </property>
                     <property name="autoDefault">
                         <bool>true</bool>
@@ -109,20 +56,37 @@
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>40</width>
+                            <width>107</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
                 <widget class="QPushButton">
                     <property name="name">
-                        <cstring>buttonHelp</cstring>
+                        <cstring>buttonOk</cstring>
                     </property>
                     <property name="text">
-                        <string>Help</string>
+                        <string>O&amp;K</string>
                     </property>
                     <property name="accel">
-                        <string></string>
+                        <string>Alt+K</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+C</string>
                     </property>
                     <property name="autoDefault">
                         <bool>true</bool>
@@ -130,10 +94,44 @@
                 </widget>
             </hbox>
         </widget>
-    </vbox>
+        <widget class="QLayoutWidget" row="0" column="0">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_NameLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Property name:</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>m_ValueLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Property value:</string>
+                    </property>
+                </widget>
+                <widget class="KTextEdit" row="1" column="1">
+                    <property name="name">
+                        <cstring>m_ValueEdit</cstring>
+                    </property>
+                </widget>
+                <widget class="KHistoryCombo" row="0" column="1">
+                    <property name="name">
+                        <cstring>m_NameEdit</cstring>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
 </widget>
-<customwidgets>
-</customwidgets>
 <connections>
     <connection>
         <sender>buttonOk</sender>
@@ -155,7 +153,6 @@
     </connection>
 </connections>
 <tabstops>
-    <tabstop>m_NameEdit</tabstop>
     <tabstop>m_ValueEdit</tabstop>
     <tabstop>buttonOk</tabstop>
     <tabstop>buttonCancel</tabstop>
@@ -166,9 +163,10 @@
     <slot access="protected">nameChanged(const QString&amp;)</slot>
     <slot access="protected">valueChanged()</slot>
 </slots>
-<layoutdefaults spacing="2" margin="2"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>ktextedit.h</includehint>
+    <includehint>kcombobox.h</includehint>
     <includehint>klineedit.h</includehint>
 </includehints>
 </UI>

@@ -22,18 +22,31 @@
 
 #include "editpropsdlg.h"
 
+class QStringList;
+
 class EditProperty_impl: public EditPropsDlgData {
 Q_OBJECT
 public:
     EditProperty_impl(QWidget *parent = 0, const char *name = 0);
+    ~EditProperty_impl();
 
     QString PropName()const;
     QString PropValue()const;
     void setPropName(const QString&);
     void setPropValue(const QString&);
+    void setDir(bool dir);
 
 protected slots:
     virtual void slotHelp();
+    void updateToolTip(const QString&);
+
+private:
+    QStringList fileProperties;
+    QStringList fileComments;
+    QStringList dirProperties;
+    QStringList dirComments;
+    bool isDir;
+
 };
 
 #endif

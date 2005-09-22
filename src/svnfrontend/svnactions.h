@@ -41,6 +41,7 @@ class SvnActionsData;
 
 namespace svn {
     class Context;
+    class LogEntry;
 }
 
 namespace KIO {
@@ -78,6 +79,7 @@ public:
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false);
     void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false);
+    const QValueList<svn::LogEntry> * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files);
 
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);

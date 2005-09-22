@@ -21,6 +21,7 @@
 #include "../settings.h"
 #include "svncpp/log_entry.hpp"
 #include "helpers/sub2qt.h"
+#include "svnactions.h"
 
 #include <klistview.h>
 #include <ktextbrowser.h>
@@ -52,6 +53,8 @@ public:
     const QString&message()const;
     svn_revnum_t rev()const{return _revision;}
     void showChangedEntries(KListView*);
+    unsigned int numChangedEntries(){return changedPaths.count();}
+    void setChangedEntries(const svn::LogEntry&);
 
 protected:
     svn_revnum_t _revision;
@@ -117,7 +120,12 @@ void LogListViewItem::showChangedEntries(KListView*where)
     }
 }
 
-SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
+void LogListViewItem::setChangedEntries(const svn::LogEntry&_entry)
+{
+    changedPaths = _entry.changedPaths;
+}
+
+SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     :SvnLogDialogData(parent, name),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
@@ -125,6 +133,12 @@ SvnLogDlgImp::SvnLogDlgImp(QWidget *parent, const char *name)
     resize(dialogSize());
     m_first = 0;
     m_second = 0;
+    if (Settings::self()->log_always_list_changed_files()) {
+        buttonListFiles->hide();
+    } else {
+        m_ChangedList->hide();
+    }
+    m_Actions = ac;
 }
 
 void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
@@ -146,10 +160,21 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
 {
     if (!_it) {
         m_DispPrevButton->setEnabled(false);
+        buttonListFiles->setEnabled(false);
         return;
     }
-
     LogListViewItem* k = static_cast<LogListViewItem*>( _it );
+    if (k->numChangedEntries()==0) {
+        buttonListFiles->setEnabled(true);
+        if (m_ChangedList->isVisible()){
+            m_ChangedList->hide();
+        }
+    } else {
+        buttonListFiles->setEnabled(false);
+        if (!m_ChangedList->isVisible()){
+            m_ChangedList->show();
+        }
+    }
     m_LogDisplay->setText(k->message());
     m_ChangedList->clear();
     k->showChangedEntries(m_ChangedList);
@@ -247,5 +272,26 @@ void SvnLogDlgImp::slotDispSelected()
     if (!m_first || !m_second) return;
     emit makeDiff(_name,m_first->rev(),m_second->rev());
 }
+
+void SvnLogDlgImp::slotListEntries()
+{
+    LogListViewItem * it = static_cast<LogListViewItem*>(m_LogView->selectedItem());
+    if (!it||it->numChangedEntries()>0||!m_Actions) {
+        buttonListFiles->setEnabled(false);
+        return;
+    }
+    const svn::LogEntries*_log = m_Actions->getLog(it->rev(),it->rev(),_name,true);
+    if (!_log) {
+        return;
+    }
+    if (_log->count()>0) {
+        it->setChangedEntries((*_log)[0]);
+        it->showChangedEntries(m_ChangedList);
+        if (!m_ChangedList->isVisible()) m_ChangedList->show();
+    }
+    buttonListFiles->setEnabled(false);
+    delete _log;
+}
+
 
 #include "svnlogdlgimp.moc"

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>499</width>
-            <height>456</height>
+            <width>425</width>
+            <height>333</height>
         </rect>
     </property>
     <property name="caption">
@@ -148,27 +148,18 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout6</cstring>
+                <cstring>layout2</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton">
+                <widget class="KPushButton">
                     <property name="name">
-                        <cstring>buttonOk</cstring>
+                        <cstring>buttonClose</cstring>
                     </property>
                     <property name="text">
                         <string>Close</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                    <property name="default">
-                        <bool>true</bool>
                     </property>
                 </widget>
                 <widget class="KPushButton">
@@ -199,18 +190,15 @@
                         <string>Diff selected revisions</string>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="KPushButton">
                     <property name="name">
-                        <cstring>buttonHelp</cstring>
+                        <cstring>buttonListFiles</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
                     </property>
                     <property name="text">
-                        <string>Help</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
+                        <string>List entries</string>
                     </property>
                 </widget>
                 <spacer>
@@ -225,7 +213,7 @@
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>40</width>
+                            <width>20</width>
                             <height>20</height>
                         </size>
                     </property>
@@ -238,7 +226,7 @@
 </customwidgets>
 <connections>
     <connection>
-        <sender>buttonOk</sender>
+        <sender>buttonClose</sender>
         <signal>clicked()</signal>
         <receiver>LogDialog</receiver>
         <slot>accept()</slot>
@@ -267,6 +255,12 @@
         <receiver>LogDialog</receiver>
         <slot>slotDispSelected()</slot>
     </connection>
+    <connection>
+        <sender>buttonListFiles</sender>
+        <signal>clicked()</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotListEntries()</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotSelectionChanged(QListViewItem*)</slot>
@@ -274,12 +268,15 @@
     <slot access="protected">slotDispPrevious()</slot>
     <slot access="protected">slotItemClicked(int,QListViewItem*,const QPoint &amp;,int)</slot>
     <slot access="protected">slotDispSelected()</slot>
+    <slot access="protected">slotListEntries()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>klistview.h</includehint>
     <includehint>ktextbrowser.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>
 </includehints>

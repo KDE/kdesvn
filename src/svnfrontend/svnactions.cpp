@@ -197,11 +197,11 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool li
     makeLog(start,end,k->fullName(),list_files);
 }
 
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files)
+const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files)
 {
-    const svn::LogEntries * logs;
+    const svn::LogEntries * logs = 0;
     QString ex;
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return 0;
 
     bool follow = Settings::log_follows_nodes();
 
@@ -211,14 +211,21 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&whi
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
-        return;
+        return 0;
     }
     if (!logs) {
         ex = i18n("Got no logs");
         emit clientException(ex);
-        return;
+        return 0;
     }
-    SvnLogDlgImp disp;
+    return logs;
+}
+
+void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files)
+{
+    const svn::LogEntries * logs = getLog(start,end,which,list_files);
+    if (!logs) return;
+    SvnLogDlgImp disp(this);
     disp.dispLog(logs,which);
     connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));

@@ -27,11 +27,12 @@
 #include <qsize.h>
 
 class LogListViewItem;
+class SvnActions;
 
 class SvnLogDlgImp: public SvnLogDialogData {
 Q_OBJECT
 public:
-    SvnLogDlgImp(QWidget *parent = 0, const char *name = 0);
+    SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
     void dispLog(const svn::LogEntries*,const QString&);
     void saveSize();
     QSize dialogSize();
@@ -49,6 +50,9 @@ protected:
     QString _name;
     static const char* groupName;
     LogListViewItem *m_first,*m_second;
+    SvnActions*m_Actions;
+protected slots:
+    virtual void slotListEntries();
 };
 
 #endif

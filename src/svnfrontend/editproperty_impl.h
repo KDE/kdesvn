@@ -23,6 +23,7 @@
 #include "editpropsdlg.h"
 
 class QStringList;
+class QString;
 
 class EditProperty_impl: public EditPropsDlgData {
 Q_OBJECT
@@ -44,7 +45,10 @@ private:
     QStringList fileComments;
     QStringList dirProperties;
     QStringList dirComments;
+    QString comment;
     bool isDir;
+protected slots:
+    virtual void showHelp();
 };
 
 #endif

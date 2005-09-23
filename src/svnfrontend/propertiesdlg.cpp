@@ -342,9 +342,9 @@ void PropertiesDlg::slotModify()
     if (protected_Property(ki->currentName())) return;
     /// @TODO Use a object variable to store a reference to dlg for further reuse
     EditProperty_impl dlg(this);
+    dlg.setDir(m_Item->isDir());
     dlg.setPropName(ki->currentName());
     dlg.setPropValue(ki->currentValue());
-    dlg.setDir(m_Item->isDir());
     if (dlg.exec()==QDialog::Accepted) {
         if (protected_Property(dlg.propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));

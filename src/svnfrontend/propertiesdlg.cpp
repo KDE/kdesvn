@@ -9,6 +9,7 @@
 
 #include "propertiesdlg.h"
 #include "editproperty_impl.h"
+#include "svnitem.h"
 #include "svncpp/client.hpp"
 
 #include <qvariant.h>
@@ -102,7 +103,7 @@ void PropertyListViewItem::unDeleteIt()
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
  */
-PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
+PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
     :
     KDialogBase(parent,name,modal,i18n("Modify properties"),Ok|Cancel/*|Help|User1|User2*/, Ok,
       true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
@@ -111,7 +112,6 @@ PropertiesDlg::PropertiesDlg(const QString&which, svn::Client*aClient, const svn
 {
     if ( !name )
     setName( "PropertiesDlg" );
-
     QWidget * m = makeMainWidget();
     PropertiesDlgLayout = new QHBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
 
@@ -224,7 +224,7 @@ void PropertiesDlg::initItem()
         emit clientException(ex);
         return;
     }
-    svn::Path what(m_Item);
+    svn::Path what(m_Item->fullName());
     svn::PathPropertiesMapList propList;
     try {
         propList = m_Client->proplist(what,m_Rev);
@@ -292,22 +292,22 @@ void PropertiesDlg::slotItemRenamed(QListViewItem*_item,const QString &,int col 
  */
 void PropertiesDlg::slotAdd()
 {
+    /// @TODO Use a object variable to store a reference to dlg for further reuse
     EditProperty_impl dlg(this);
-    // TODO decide if selected item is a directory or a file
-    dlg.setDir(true);
+    dlg.setDir(m_Item->isDir());
     if (dlg.exec()==QDialog::Accepted) {
-        if (protected_Property(dlg.PropName())) {
+        if (protected_Property(dlg.propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
             return;
         }
-        if (checkExisting(dlg.PropName())) {
+        if (checkExisting(dlg.propName())) {
             KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
         PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview);
         ki->setMultiLinesEnabled(true);
-        ki->setText(0,dlg.PropName());
-        ki->setText(1,dlg.PropValue());
+        ki->setText(0,dlg.propName());
+        ki->setText(1,dlg.propValue());
         ki->checkName();
         ki->checkValue();
     }
@@ -340,22 +340,22 @@ void PropertiesDlg::slotModify()
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
     if (protected_Property(ki->currentName())) return;
+    /// @TODO Use a object variable to store a reference to dlg for further reuse
     EditProperty_impl dlg(this);
     dlg.setPropName(ki->currentName());
     dlg.setPropValue(ki->currentValue());
-    // TODO decide if selected item is a directory or a file
-    dlg.setDir(false);
+    dlg.setDir(m_Item->isDir());
     if (dlg.exec()==QDialog::Accepted) {
-        if (protected_Property(dlg.PropName())) {
+        if (protected_Property(dlg.propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
             return;
         }
-        if (checkExisting(dlg.PropName(),qi)) {
+        if (checkExisting(dlg.propName(),qi)) {
             KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
-        ki->setText(0,dlg.PropName());
-        ki->setText(1,dlg.PropValue());
+        ki->setText(0,dlg.propName());
+        ki->setText(1,dlg.propValue());
         ki->checkName();
         ki->checkValue();
     }

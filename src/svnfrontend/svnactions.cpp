@@ -535,7 +535,7 @@ void SvnActions::slotProperties()
     if (!m_Data->m_ParentList) return;
     SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
-    PropertiesDlg dlg(k->fullName(),svnclient(),
+    PropertiesDlg dlg(k,svnclient(),
         m_Data->m_ParentList->isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
     dlg.resize(dlg.configDialogSize(*(Settings::self()->config()), "properties_dlg"));

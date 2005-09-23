@@ -27,6 +27,8 @@ class KListView;
 class QListViewItem;
 class KPushButton;
 class FileListViewItem;
+class SvnItem;
+
 namespace svn {
     class Client;
 }
@@ -38,7 +40,7 @@ class PropertiesDlg : public KDialogBase
 public:
     typedef QMap<QString,QString> tPropEntries;
 
-    PropertiesDlg(const QString&, svn::Client*,
+    PropertiesDlg(SvnItem*, svn::Client*,
         const svn::Revision&aRev=svn::Revision(svn_opt_revision_working),
         QWidget* parent = 0, const char* name = 0, bool modal = true);
     ~PropertiesDlg();
@@ -56,7 +58,7 @@ protected:
     QVBoxLayout* m_rightLayout;
     QSpacerItem* m_rightSpacer;
 
-    QString m_Item;
+    SvnItem *m_Item;
     bool m_changed;
     bool initDone;
     svn::Client*m_Client;

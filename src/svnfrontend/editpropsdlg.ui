@@ -15,9 +15,6 @@
     <property name="caption">
         <string>Edit property</string>
     </property>
-    <property name="sizeGripEnabled">
-        <bool>true</bool>
-    </property>
     <grid>
         <property name="name">
             <cstring>unnamed</cstring>
@@ -30,20 +27,6 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>buttonHelp</cstring>
-                    </property>
-                    <property name="text">
-                        <string>He&amp;lp</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+L</string>
-                    </property>
-                    <property name="autoDefault">
-                        <bool>true</bool>
-                    </property>
-                </widget>
                 <spacer>
                     <property name="name">
                         <cstring>m_ButtonSpacer</cstring>
@@ -96,7 +79,7 @@
         </widget>
         <widget class="QLayoutWidget" row="0" column="0">
             <property name="name">
-                <cstring>layout3</cstring>
+                <cstring>layout2</cstring>
             </property>
             <grid>
                 <property name="name">
@@ -145,21 +128,13 @@
         <receiver>EditPropsDlg</receiver>
         <slot>reject()</slot>
     </connection>
-    <connection>
-        <sender>buttonHelp</sender>
-        <signal>clicked()</signal>
-        <receiver>EditPropsDlg</receiver>
-        <slot>slotHelp()</slot>
-    </connection>
 </connections>
 <tabstops>
     <tabstop>m_ValueEdit</tabstop>
     <tabstop>buttonOk</tabstop>
     <tabstop>buttonCancel</tabstop>
-    <tabstop>buttonHelp</tabstop>
 </tabstops>
 <slots>
-    <slot access="protected">slotHelp()</slot>
     <slot access="protected">nameChanged(const QString&amp;)</slot>
     <slot access="protected">valueChanged()</slot>
 </slots>

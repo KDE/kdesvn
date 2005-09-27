@@ -535,7 +535,7 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
 
 void kdesvnfilelist::slotReinitItem(SvnItem*item)
 {
-    if (!item) return;
+    if (!item||!item->fItem()) return;
     FileListViewItem*k = item->fItem();
     refreshItem(k);
     if (k->isDir()) {

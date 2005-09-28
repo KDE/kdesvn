@@ -180,6 +180,8 @@ protected slots:
     virtual void slotDirItemCreated(const QString&);
     virtual void slotDirItemDirty(const QString&);
     virtual void slotDirItemDeleted(const QString&);
+protected slots:
+    virtual void slotRelocate();
 };
 
 #endif

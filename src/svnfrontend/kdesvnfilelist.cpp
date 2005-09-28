@@ -24,6 +24,7 @@
 #include "mergedlg_impl.h"
 #include "svnactions.h"
 #include "svnfiletip.h"
+#include "checkoutinfo_impl.h"
 #include "../settings.h"
 #include "svncpp/revision.hpp"
 #include "svncpp/dirent.hpp"
@@ -200,6 +201,9 @@ void kdesvnfilelist::setupActions()
     m_switchRepository = new KAction("Switch repository","goto",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
     m_switchRepository->setToolTip(i18n("Switch repository of working copy (\"svn switch\")"));
+    tmp_action = new KAction(i18n("Relocate working copy url"),"goto",KShortcut(),
+        this,SLOT(slotRelocate()),m_filesAction,"make_svn_relocate");
+    tmp_action->setToolTip(i18n("Relocate url of current working copy to a new one"));
 
     m_changeToRepository = new KAction(i18n("Open repository of working copy"),"gohome",KShortcut(),
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
@@ -535,9 +539,18 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
 
 void kdesvnfilelist::slotReinitItem(SvnItem*item)
 {
-    if (!item) return;
+    if (!item) {
+        kdDebug()<<"kdesvnfilelist::slotReinitItem(SvnItem*item): item == null" << endl;
+        return;
+    }
     FileListViewItem*k = item->fItem();
+    if (!k) {
+        kdDebug()<<"kdesvnfilelist::slotReinitItem(SvnItem*item): k == null" << endl;
+    }
     refreshItem(k);
+    if (!k) {
+        return;
+    }
     if (k->isDir()) {
         k->removeChilds();
         m_Dirsread[k->fullName()]=false;;
@@ -555,6 +568,7 @@ void kdesvnfilelist::enableActions()
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
     }
+    KAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
     m_LogRangeAction->setEnabled(single||(isWorkingCopy()&&!single&&!multi&&isopen));
@@ -574,9 +588,14 @@ void kdesvnfilelist::enableActions()
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
     m_MkdirAction->setEnabled(dir||!isWorkingCopy()&&isopen);
-    m_switchRepository->setEnabled(dir && isWorkingCopy());
+    m_switchRepository->setEnabled(isWorkingCopy()&& (single||none));
     m_changeToRepository->setEnabled(isWorkingCopy());
     m_ImportDirsIntoCurrent->setEnabled(dir);
+    temp = filesActions()->action("make_svn_relocate");
+    if (temp) {
+        temp->setEnabled(isWorkingCopy()&& (single||none));
+    }
+
     /* local only actions */
     /* 1. actions on files AND dirs*/
     m_AddCurrent->setEnabled( (multi||single) && isWorkingCopy());
@@ -601,7 +620,6 @@ void kdesvnfilelist::enableActions()
     m_ExportAction->setEnabled(true);
     m_RefreshViewAction->setEnabled(isopen);
 
-    KAction * temp;
     temp = filesActions()->action("make_revisions_diff");
     if (temp) {
         temp->setEnabled(isopen);
@@ -1747,4 +1765,38 @@ void kdesvnfilelist::slotSettingsChanged()
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();
     }
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotRelocate()
+ */
+void kdesvnfilelist::slotRelocate()
+{
+    if (!isWorkingCopy()) return;
+    SvnItem*k = SelectedOrMain();
+    if (!k) {
+        KMessageBox::error(0,i18n("Error getting entry to relocate"));
+        return;
+    }
+    QString path,fromUrl;
+    path = k->fullName();
+    fromUrl = k->Url();
+    CheckoutInfo_impl*ptr;
+    KDialogBase * dlg = createDialog(&ptr,i18n("Relocate working copy"),true,"relocate_dlg");
+    if (dlg) {
+        ptr->setStartUrl(fromUrl);
+        ptr->forceAsRecursive(true);
+        ptr->disableTargetDir(true);
+        ptr->disableRange(true);
+        ptr->disableOpen(true);
+        bool done = false;
+        if (dlg->exec()==QDialog::Accepted) {
+            done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->forceIt());
+        }
+        dlg->saveDialogSize(*(Settings::self()->config()),"relocate_dlg",false);
+        delete dlg;
+        if (!done) return;
+    }
+    refreshItem(k->fItem());
 }

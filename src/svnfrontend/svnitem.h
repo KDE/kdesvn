@@ -59,7 +59,7 @@ public:
 
     QPixmap getPixmap(int size,bool overlay=true);
 
-    FileListViewItem*fItem(){return 0;}
+    virtual FileListViewItem*fItem(){return 0;}
     virtual void setStat(const svn::Status&);
     virtual const svn::Status& stat()const;
     virtual bool isModified()const;

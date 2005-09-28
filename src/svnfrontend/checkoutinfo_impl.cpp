@@ -96,6 +96,17 @@ void CheckoutInfo_impl::disableTargetDir(bool how)
     }
 }
 
+void CheckoutInfo_impl::disableOpen(bool how)
+{
+    if (how) {
+        m_ShowExplorer->setEnabled(false);
+        m_ShowExplorer->hide();
+    } else if (!how) {
+        m_ShowExplorer->setEnabled(true);
+        m_ShowExplorer->show();
+    }
+}
+
 
 /*!
     \fn CheckoutInfo_impl::openAfterJob()
@@ -103,6 +114,20 @@ void CheckoutInfo_impl::disableTargetDir(bool how)
 bool CheckoutInfo_impl::openAfterJob()
 {
     return m_ShowExplorer->isChecked();
+}
+
+/*!
+    \fn CheckoutInfo_impl::disableRange(bool how)
+ */
+void CheckoutInfo_impl::disableRange(bool how)
+{
+    if (how) {
+        m_RangeInput->setEnabled(false);
+        m_RangeInput->hide();
+    } else {
+        m_RangeInput->setEnabled(true);
+        m_RangeInput->show();
+    }
 }
 
 #include "checkoutinfo_impl.moc"

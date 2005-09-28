@@ -1059,6 +1059,32 @@ bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     return true;
 }
 
+bool SvnActions::makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec)
+{
+    if (!m_Data->m_CurrentContext) return false;
+    QString _f = fUrl;
+    QString _t = tUrl;
+    QString ex;
+    while (_f.endsWith("/")) {
+        _f.truncate(_f.length()-1);
+    }
+    while (_t.endsWith("/")) {
+        _t.truncate(_t.length()-1);
+    }
+    svn::Path p(path);
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Relocate url"),i18n("Relocate repository to new URL"));
+        m_Data->m_Svnclient.relocate(p,_f,_t,rec);
+    } catch (svn::ClientException e) {
+        ex = QString::fromUtf8(e.message());
+        emit clientException(ex);
+        return false;
+    }
+    EMIT_FINISHED;
+    return true;
+
+}
+
 void SvnActions::slotSwitch()
 {
     if (!m_Data->m_CurrentContext) return;
@@ -1074,13 +1100,6 @@ void SvnActions::slotSwitch()
     SvnItem*k;
 
     k = m_Data->m_ParentList->SelectedOrMain();
-#if 0
-    if (lst->count()==0) {
-        k=static_cast<FileListViewItem*>(m_Data->m_ParentList->firstChild());
-    } else {
-        k = lst->at(0);
-    }
-#endif
     if (!k) {
         KMessageBox::error(0,i18n("Error getting entry to switch"));
         return;
@@ -1090,20 +1109,21 @@ void SvnActions::slotSwitch()
     what = k->Url();
 
     CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,i18n("Switch url"),true);
+    KDialogBase * dlg = createDialog(&ptr,i18n("Switch url"),true,"switch_url_dlg");
     if (dlg) {
         ptr->setStartUrl(what);
         ptr->forceAsRecursive(true);
         ptr->disableTargetDir(true);
+        ptr->disableOpen(true);
         bool done = false;
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             done = makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
         }
+        dlg->saveDialogSize(*(Settings::self()->config()),"switch_url_dlg",false);
         delete dlg;
         if (!done) return;
     }
-//    k->refreshMe();
     emit reinitItem(k);
 }
 

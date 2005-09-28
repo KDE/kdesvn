@@ -1038,9 +1038,9 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     EMIT_FINISHED;
 }
 
-void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec)
+bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec)
 {
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return false;
     QString fUrl = rUrl;
     QString ex;
     while (fUrl.endsWith("/")) {
@@ -1053,9 +1053,10 @@ void SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
-        return;
+        return false;
     }
     EMIT_FINISHED;
+    return true;
 }
 
 void SvnActions::slotSwitch()
@@ -1096,9 +1097,8 @@ void SvnActions::slotSwitch()
         ptr->disableTargetDir(true);
         bool done = false;
         if (dlg->exec()==QDialog::Accepted) {
-            done = true;
             svn::Revision r = ptr->toRevision();
-            makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
+            done = makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
         }
         delete dlg;
         if (!done) return;

@@ -57,7 +57,7 @@ public:
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
 
     virtual QString getParentDir()const;
-    FileListViewItem*fItem(){return this;}
+    virtual FileListViewItem*fItem(){return this;}
     virtual void setStat(const svn::Status&);
 
 protected:

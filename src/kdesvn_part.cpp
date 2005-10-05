@@ -78,6 +78,7 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
     connect(m_view,SIGNAL(sigShowPopup(const QString&)),this,SLOT(slotDispPopup(const QString&)));
     connect(m_view,SIGNAL(sigSwitchUrl(const KURL&)),this,SLOT(openURL(const KURL&)));
     connect(this,SIGNAL(refreshTree()),m_view,SLOT(refreshCurrentTree()));
+    connect(m_view,SIGNAL(setWindowCaption(const QString&)),this,SIGNAL(setWindowCaption(const QString&)));
     m_browserExt->setPropertiesActionEnabled(false);
 }
 

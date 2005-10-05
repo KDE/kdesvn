@@ -878,7 +878,7 @@ void SvnActions::CheckoutExport(bool _exp)
             bool openit = ptr->openAfterJob();
             makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
         }
-                dlg->saveDialogSize(*(Settings::self()->config()),"checkout_export_dialog",false);
+        dlg->saveDialogSize(*(Settings::self()->config()),"checkout_export_dialog",false);
         delete dlg;
     }
 }

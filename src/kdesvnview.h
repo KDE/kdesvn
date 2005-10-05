@@ -94,6 +94,7 @@ signals:
 
     void sigShowPopup(const QString&);
     void sigSwitchUrl(const KURL&);
+    void setWindowCaption(const QString&);
 
 public slots:
     virtual void closeMe();

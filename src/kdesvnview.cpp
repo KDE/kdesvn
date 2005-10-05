@@ -134,7 +134,8 @@ void kdesvnView::slotOnURL(const QString& url)
 
 void kdesvnView::slotSetTitle(const QString& title)
 {
-    emit signalChangeCaption(title);
+    //emit signalChangeCaption(title);
+    emit setWindowCaption(title);
 }
 
 

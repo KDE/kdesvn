@@ -6,22 +6,22 @@
 # package are under the same license as the package itself.
 #
 # norootforbuild
-BuildRequires:	kdelibs3-devel subversion-devel update-desktop-files
+BuildRequires:  kdelibs3-devel subversion-devel update-desktop-files
 
-Name:		kdesvn
-Summary:	A Subversion client for KDE
+Name:       kdesvn
+Summary:    A Subversion client for KDE
 Summary(de):Ein Subversionclient für KDE
 Summary(es):Un cliente de Subversion para KDE
-Version:	0.6.0
-Release:	1polinux
-URL:		http://www.alwins-world.de/programs/kdesvn/
-Source:		http://www.alwins-world.de/programs/download/kdesvn/%{name}-%{version}.tar.gz
-License:	LGPL
-Group:		Development/Tools/Version Control
-Buildroot:	%{_tmppath}/%{name}-%{version}-root
-Requires:	kdelibs3
-Requires:	subversion
-Packager:	Víctor Fernández <vfernandez@polinux.upv.es>
+Version:    0.6.2
+Release:    1polinux
+URL:        http://www.alwins-world.de/programs/kdesvn/
+Source:     http://www.alwins-world.de/programs/download/kdesvn/%{name}-%{version}.tar.gz
+License:    LGPL
+Group:      Development/Tools/Version Control
+Buildroot:  %{_tmppath}/%{name}-%{version}-root
+Requires:   kdelibs3
+Requires:   subversion
+Packager:   Víctor Fernández <vfernandez@polinux.upv.es>
 
 %description
 KDESvn is a frontend to the subversion vcs. In difference to most other tools

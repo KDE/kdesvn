@@ -392,15 +392,18 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 
 void kdesvnfilelist::closeMe()
 {
+    selectAll(false);
     clear();
     setWorkingCopy("");
     setNetworked(false);
     setWorkingCopy(false);
+    setBaseUri("");
 
-    m_SvnWrapper->reInitClient();
     emit changeCaption("");
     emit sigUrlOpend(false);
+
     enableActions();
+    m_SvnWrapper->reInitClient();
     delete m_pList->m_DirWatch;
     m_pList->m_DirWatch = 0;
     m_pList->m_fileTip->setItem(0);

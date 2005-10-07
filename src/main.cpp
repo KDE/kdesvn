@@ -21,11 +21,13 @@
 
 #include "kdesvn.h"
 #include "../config.h"
+#include "commandline.h"
 #include <kapplication.h>
 #include <dcopclient.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
+#include <kdebug.h>
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (standalone application)");
@@ -34,6 +36,7 @@ static const char version[] = VERSION;
 
 static KCmdLineOptions options[] =
 {
+    { "+exec <command>",I18N_NOOP("Execute subversion command (\"exec help\" for more information)"),0},
     { "+[URL]", I18N_NOOP( "Document to open" ), 0 },
     KCmdLineLastOption
 };
@@ -49,6 +52,8 @@ int main(int argc, char **argv)
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
+
+
     KApplication app;
 
     // register ourselves as a dcop client
@@ -71,16 +76,21 @@ int main(int argc, char **argv)
         }
         else
         {
-            int i = 0;
-            for (; i < args->count(); i++)
-            {
-                kdesvn *widget = new kdesvn;
-                widget->show();
-                widget->load(args->url(i));
+            if (QString(args->arg(0))==QString("exec")) {
+                kdDebug()<<"Execute a command" << endl;
+                CommandLine cl(args);
+                return cl.exec();
+            } else {
+                int i = 0;
+                for (; i < args->count(); i++)
+                {
+                    kdesvn *widget = new kdesvn;
+                    widget->show();
+                    widget->load(args->url(i));
+                }
             }
         }
         args->clear();
     }
-
     return app.exec();
 }

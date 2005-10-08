@@ -24,6 +24,7 @@
 #include <qstring.h>
 
 class pCPart;
+class KCmdLineArgs;
 
 /**
 @author Rajko Albrecht
@@ -32,7 +33,7 @@ class commandline_part : public QObject
 {
     Q_OBJECT
 public:
-    commandline_part(QObject *parent, const char *name, const QStringList &args );
+    commandline_part(QObject *parent, const char *name, KCmdLineArgs *args);
     virtual ~commandline_part();
     virtual int exec();
 private:
@@ -40,6 +41,16 @@ private:
 
 protected slots:
     virtual void clientException(const QString&);
+    virtual void slotNotifyMessage(const QString&);
+    virtual void slotCmd_log();
+    virtual void slotCmd_update();
+    virtual void slotCmd_diff();
+    virtual void slotCmd_blame();
+
+signals:
+    void executeMe();
+protected:
+    virtual bool scanRevision();
 };
 
 #endif

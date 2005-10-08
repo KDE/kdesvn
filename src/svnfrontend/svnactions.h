@@ -82,6 +82,7 @@ public:
     const QValueList<svn::LogEntry> * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files);
 
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
+    void makeBlame(svn::Revision start, svn::Revision end, const QString&);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);

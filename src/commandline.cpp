@@ -72,11 +72,7 @@ int CommandLine::exec()
             return -1;
         }
         cFactory*cfa = static_cast<cFactory*>(factory);
-        QStringList s;
-        for (int i = 1; i < m_args->count(); i++) {
-            s.append(m_args->arg(i));
-        }
-        commandline_part * cpart = cfa->createCommandIf((QObject*)0,(const char*)0,s);
+        commandline_part * cpart = cfa->createCommandIf((QObject*)0,(const char*)0,m_args);
         int res = cpart->exec();
         return res;
     }

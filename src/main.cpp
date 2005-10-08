@@ -36,6 +36,9 @@ static const char version[] = VERSION;
 
 static KCmdLineOptions options[] =
 {
+    { "r startrev[:endrev]",I18N_NOOP("Execute single subversion command on specific revision(-range)"),0},
+    {"R",I18N_NOOP("Ask for revision when executing single command"),0},
+    {"o <file>",I18N_NOOP("Save output of subversion command (eg \"cat\") into file <file>"),0},
     { "+exec <command>",I18N_NOOP("Execute subversion command (\"exec help\" for more information)"),0},
     { "+[URL]", I18N_NOOP( "Document to open" ), 0 },
     KCmdLineLastOption

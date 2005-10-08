@@ -234,15 +234,17 @@ void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&whi
     EMIT_FINISHED;
 }
 
-/*!
-    \fn SvnActions::makeBlame(svn::Revision start, svn::Revision end, FileListViewItem*k)
- */
 void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
+{
+    if (k) makeBlame(start,end,k->fullName());
+}
+
+void SvnActions::makeBlame(svn::Revision start, svn::Revision end, const QString&k)
 {
     if (!m_Data->m_CurrentContext) return;
     svn::AnnotatedFile * blame;
     QString ex;
-    svn::Path p(k->fullName());
+    svn::Path p(k);
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Annotate","Blaming - hit cancel for abort");
@@ -288,7 +290,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
     }
     text += "</table></html>";
     KTextBrowser*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k->shortName()),false,"blame_dlg");
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k),false,"blame_dlg");
     if (dlg) {
         ptr->setText(text);
         dlg->exec();

@@ -94,9 +94,7 @@ protected slots:
 };
 
 class commandline_part;
-
-
-class commandline_part;
+class KCmdLineArgs;
 
 /* we make it ourself 'cause we will enhance a little bit! */
 class cFactory : public KParts::Factory
@@ -108,7 +106,7 @@ public:
     virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
                                             QObject *parent, const char *name,
                                             const char *classname, const QStringList &args );
-    virtual commandline_part*createCommandIf(QObject*parent,const char*name,const QStringList&args);
+    virtual commandline_part*createCommandIf(QObject*parent,const char*name, KCmdLineArgs *args);
 
     static KInstance* instance();
 

@@ -389,7 +389,7 @@ KInstance* cFactory::instance()
     return s_instance;
 }
 
-commandline_part*cFactory::createCommandIf(QObject*parent,const char*name,const QStringList&args)
+commandline_part*cFactory::createCommandIf(QObject*parent,const char*name, KCmdLineArgs *args)
 {
     if (!s_cline) {
         s_cline = new commandline_part(parent,name,args);

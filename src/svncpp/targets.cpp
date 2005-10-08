@@ -71,6 +71,8 @@ namespace svn
     if (!target.isEmpty())
     {
       m_targets.push_back(target);
+    } else {
+        m_targets.push_back("");
     }
   }
 

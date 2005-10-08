@@ -43,6 +43,7 @@ int Logmsg_impl::smax_message_history = -1;
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
 {
+    m_LogEdit->setFocus();
 }
 
 void Logmsg_impl::slotHistoryActivated(const QString&aMessage)

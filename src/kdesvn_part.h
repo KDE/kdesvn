@@ -93,7 +93,32 @@ protected slots:
     void slotSettingsChanged();
 };
 
-typedef KParts::GenericFactory<kdesvnPart> kdesvnPartFactory;
+class commandline_part;
+
+
+class commandline_part;
+
+/* we make it ourself 'cause we will enhance a little bit! */
+class cFactory : public KParts::Factory
+{
+    Q_OBJECT
+public:
+    cFactory():KParts::Factory(){}
+    virtual ~cFactory();
+    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
+                                            QObject *parent, const char *name,
+                                            const char *classname, const QStringList &args );
+    virtual commandline_part*createCommandIf(QObject*parent,const char*name,const QStringList&args);
+
+    static KInstance* instance();
+
+private:
+    static KInstance* s_instance;
+    static KAboutData* s_about;
+    static commandline_part*s_cline;
+};
+
+typedef cFactory kdesvnPartFactory;
 
 class KdesvnBrowserExtension : public KParts::BrowserExtension
 {

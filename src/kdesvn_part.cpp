@@ -23,6 +23,7 @@
 #include "displaysettings_impl.h"
 #include "subversionsettings_impl.h"
 #include "kdesvnview.h"
+#include "commandline_part.h"
 #include "../config.h"
 #include "svncpp/version_check.hpp"
 
@@ -132,8 +133,6 @@ void kdesvnPart::slotDispPopup(const QString&name)
     popup->exec(QCursor::pos());
 }
 
-// It's usually safe to leave the factory code alone.. with the
-// notable exception of the KAboutData data
 KAboutData* kdesvnPart::createAboutData()
 {
     m_Extratext = QString(I18N_NOOP("Built with Subversion library: %1\n")).arg(svn::Version::linked_version());
@@ -354,6 +353,48 @@ void kdesvnPart::slotSettingsChanged()
     }
 #endif
     emit settingsChanged();
+}
+
+/*
+ * we may not use generic factory 'cause we make some specials */
+KInstance*  cFactory::s_instance = 0L;
+KAboutData* cFactory::s_about = 0L;
+commandline_part* cFactory::s_cline = 0L;
+
+KParts::Part* cFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
+                                                        QObject *parent, const char *name,
+                                                        const char *classname, const QStringList &args )
+{
+    // Create an instance of our Part
+    kdesvnPart* obj = new kdesvnPart( parentWidget, widgetName, parent, name, args );
+    return obj;
+}
+
+cFactory::~cFactory()
+{
+    delete s_instance;
+    delete s_about;
+    delete s_cline;
+
+    s_instance = 0L;
+    s_cline = 0L;
+}
+
+KInstance* cFactory::instance()
+{
+    if( !s_instance ) {
+        s_about = kdesvnPart::createAboutData();
+        s_instance = new KInstance(s_about);
+    }
+    return s_instance;
+}
+
+commandline_part*cFactory::createCommandIf(QObject*parent,const char*name,const QStringList&args)
+{
+    if (!s_cline) {
+        s_cline = new commandline_part(parent,name,args);
+    }
+    return s_cline;
 }
 
 #include "kdesvn_part.moc"

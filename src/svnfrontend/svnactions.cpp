@@ -98,7 +98,7 @@ public:
 #define DIALOGS_SIZES "display_dialogs_sizes"
 
 SvnActions::SvnActions(ItemDisplay *parent, const char *name)
- : QObject(parent->realWidget(), name)
+ : QObject(parent?parent->realWidget():0, name)
 {
     m_Data = new SvnActionsData();
     m_Data->m_ParentList = parent;

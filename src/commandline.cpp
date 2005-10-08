@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandline.h"
+#include "kdesvn_part.h"
+#include "commandline_part.h"
 #include <kcmdlineargs.h>
 #include <kdialogbase.h>
 #include <ktextbrowser.h>
@@ -62,6 +64,21 @@ int CommandLine::exec()
     if (m_data->cmd=="help") {
         m_data->displayHelp();
         return 0;
+    }
+    KLibFactory *factory = KLibLoader::self()->factory("libkdesvnpart");
+    if (factory) {
+        if (QCString(factory->className())!="cFactory") {
+            kdDebug()<<"wrong factory"<<endl;
+            return -1;
+        }
+        cFactory*cfa = static_cast<cFactory*>(factory);
+        QStringList s;
+        for (int i = 1; i < m_args->count(); i++) {
+            s.append(m_args->arg(i));
+        }
+        commandline_part * cpart = cfa->createCommandIf((QObject*)0,(const char*)0,s);
+        int res = cpart->exec();
+        return res;
     }
     return 0;
 }

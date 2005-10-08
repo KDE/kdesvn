@@ -20,21 +20,26 @@
 #ifndef COMMANDLINE_PART_H
 #define COMMANDLINE_PART_H
 
-#include <kgenericfactory.h>
 #include <qobject.h>
+#include <qstring.h>
+
+class pCPart;
 
 /**
 @author Rajko Albrecht
 */
 class commandline_part : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     commandline_part(QObject *parent, const char *name, const QStringList &args );
-    ~commandline_part();
+    virtual ~commandline_part();
+    virtual int exec();
+private:
+    pCPart*m_pCPart;
 
+protected slots:
+    virtual void clientException(const QString&);
 };
-
-typedef KGenericFactory<commandline_part,QObject> kdesvnCommandlineFactory;
 
 #endif

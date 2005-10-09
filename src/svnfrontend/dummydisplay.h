@@ -17,42 +17,24 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef COMMANDLINE_PART_H
-#define COMMANDLINE_PART_H
+#ifndef DUMMYDISPLAY_H
+#define DUMMYDISPLAY_H
 
-#include <qobject.h>
-#include <qstring.h>
-
-class pCPart;
-class KCmdLineArgs;
+#include "itemdisplay.h"
 
 /**
 @author Rajko Albrecht
 */
-class commandline_part : public QObject
+class DummyDisplay : public ItemDisplay
 {
-    Q_OBJECT
 public:
-    commandline_part(QObject *parent, const char *name, KCmdLineArgs *args);
-    virtual ~commandline_part();
-    virtual int exec();
-private:
-    pCPart*m_pCPart;
-
-protected slots:
-    virtual void clientException(const QString&);
-    virtual void slotNotifyMessage(const QString&);
-    virtual void slotCmd_log();
-    virtual void slotCmd_update();
-    virtual void slotCmd_diff();
-    virtual void slotCmd_blame();
-    virtual void slotCmd_info();
-    virtual void slotCmd_commit();
-
-signals:
-    void executeMe();
-protected:
-    virtual bool scanRevision();
+    DummyDisplay();
+    virtual ~DummyDisplay();
+    virtual QWidget*realWidget();
+    virtual SvnItem*Selected();
+    virtual void SelectionList(QPtrList<SvnItem>*);
+    virtual bool openURL( const KURL &url,bool noReinit=false );
+    virtual SvnItem*SelectedOrMain();
 };
 
 #endif

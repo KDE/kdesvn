@@ -89,6 +89,8 @@ public:
     void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
     void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
+    bool makeCommit(const svn::Targets&);
+
     QString getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
     QString getInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
 

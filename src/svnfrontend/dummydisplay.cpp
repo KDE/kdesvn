@@ -17,42 +17,39 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef COMMANDLINE_PART_H
-#define COMMANDLINE_PART_H
+#include "dummydisplay.h"
 
-#include <qobject.h>
-#include <qstring.h>
-
-class pCPart;
-class KCmdLineArgs;
-
-/**
-@author Rajko Albrecht
-*/
-class commandline_part : public QObject
+DummyDisplay::DummyDisplay()
+ : ItemDisplay()
 {
-    Q_OBJECT
-public:
-    commandline_part(QObject *parent, const char *name, KCmdLineArgs *args);
-    virtual ~commandline_part();
-    virtual int exec();
-private:
-    pCPart*m_pCPart;
+}
 
-protected slots:
-    virtual void clientException(const QString&);
-    virtual void slotNotifyMessage(const QString&);
-    virtual void slotCmd_log();
-    virtual void slotCmd_update();
-    virtual void slotCmd_diff();
-    virtual void slotCmd_blame();
-    virtual void slotCmd_info();
-    virtual void slotCmd_commit();
 
-signals:
-    void executeMe();
-protected:
-    virtual bool scanRevision();
-};
+DummyDisplay::~DummyDisplay()
+{
+}
 
-#endif
+QWidget*DummyDisplay::realWidget()
+{
+    return 0L;
+}
+
+SvnItem*DummyDisplay::Selected()
+{
+    return 0L;
+}
+
+void DummyDisplay::SelectionList(QPtrList<SvnItem>*)
+{
+}
+
+bool DummyDisplay::openURL( const KURL &,bool)
+{
+    return false;
+}
+
+SvnItem*DummyDisplay::SelectedOrMain()
+{
+    return 0;
+}
+

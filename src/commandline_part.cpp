@@ -21,6 +21,8 @@
 #include "kdesvn_part.h"
 #include "settings.h"
 #include "svnfrontend/svnactions.h"
+#include "svnfrontend/dummydisplay.h"
+#include "svncpp/targets.hpp"
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -30,6 +32,7 @@
 
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qvaluelist.h>
 
 class pCPart
 {
@@ -48,6 +51,7 @@ public:
     // for output
     QFile toStdout,toStderr;
     QTextStream Stdout,Stderr;
+    DummyDisplay * disp;
 };
 
 pCPart::pCPart()
@@ -60,11 +64,14 @@ pCPart::pCPart()
     toStderr.open(IO_WriteOnly, stderr);
     Stdout.setDevice(&toStdout);
     Stderr.setDevice(&toStderr);
+    disp = new DummyDisplay();
+    m_SvnWrapper = new SvnActions(disp);
 }
 
 pCPart::~pCPart()
 {
     delete m_SvnWrapper;
+    delete disp;
 }
 
 commandline_part::commandline_part(QObject *parent, const char *name,KCmdLineArgs *args)
@@ -79,7 +86,6 @@ commandline_part::commandline_part(QObject *parent, const char *name,KCmdLineArg
     m_pCPart = new pCPart;
     m_pCPart->args = args;
 
-    m_pCPart->m_SvnWrapper = new SvnActions(0);
     connect(m_pCPart->m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(clientException(const QString&)));
     connect(m_pCPart->m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
     m_pCPart->m_SvnWrapper->reInitClient();
@@ -115,6 +121,9 @@ int commandline_part::exec()
         slotCmd=SLOT(slotCmd_diff());
     } else if (!QString::compare(m_pCPart->cmd,"info")) {
         slotCmd=SLOT(slotCmd_info());
+    } else if (!QString::compare(m_pCPart->cmd,"commit")||
+               !QString::compare(m_pCPart->cmd,"ci")) {
+        slotCmd=SLOT(slotCmd_commit());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -124,9 +133,26 @@ int commandline_part::exec()
         return -1;
     }
 
-    QString tmp;
+    QString tmp,query,proto;
+    KURL tmpurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
-        tmp = m_pCPart->args->arg(j);
+        tmpurl = m_pCPart->args->url(j);
+        query = tmpurl.query();
+        if (tmpurl.protocol()=="https+svn") {
+            tmpurl.setProtocol("https");
+        } else if (tmpurl.protocol()=="http+svn") {
+            tmpurl.setProtocol("http");
+        }
+
+        if (tmpurl.isLocalFile()) {
+            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(tmpurl)) {
+                tmp = tmpurl.path();
+            } else {
+                tmp = "file://"+tmpurl.path();
+            }
+        } else {
+            tmp = tmpurl.url();
+        }
         while (tmp.endsWith("/")) {
             tmp.truncate(tmp.length()-1);
         }
@@ -188,6 +214,15 @@ void commandline_part::slotCmd_info()
 {
     svn::Revision peg(svn_opt_revision_unspecified);
     m_pCPart->m_SvnWrapper->makeInfo(m_pCPart->url,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),peg,false);
+}
+
+void commandline_part::slotCmd_commit()
+{
+    QValueList<svn::Path> targets;
+    for (unsigned j=0; j<m_pCPart->url.count();++j) {
+        targets.push_back(svn::Path(m_pCPart->url[j]));
+    }
+    m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
 }
 
 /*!

@@ -596,11 +596,6 @@ void SvnActions::slotCommit()
     /// @todo remove reference to parentlist
     if (!m_Data->m_CurrentContext) return;
     if (!m_Data->m_ParentList->isWorkingCopy()) return;
-    bool ok,rec;
-    QString msg = Logmsg_impl::getLogmessage(&ok,&rec,m_Data->m_ParentList->realWidget(),"logmsg_impl");
-    if (!ok) {
-        return;
-    }
     QPtrList<SvnItem> which;
     m_Data->m_ParentList->SelectionList(&which);
     SvnItem*cur;
@@ -616,6 +611,18 @@ void SvnActions::slotCommit()
             targets.push_back(svn::Path(cur->fullName()));
         }
     }
+    makeCommit(targets);
+}
+
+bool SvnActions::makeCommit(const svn::Targets&targets)
+{
+    bool ok,rec;
+    QString msg = Logmsg_impl::getLogmessage(&ok,&rec,
+        m_Data->m_ParentList->realWidget(),"logmsg_impl");
+    if (!ok) {
+        return false;
+    }
+
     svn_revnum_t nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
@@ -623,10 +630,11 @@ void SvnActions::slotCommit()
     } catch (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         emit clientException(ex);
-        return;
+        return false;
     }
     EMIT_REFRESH;
     EMIT_FINISHED;
+    return true;
 }
 
 /*!

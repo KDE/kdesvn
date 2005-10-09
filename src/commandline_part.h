@@ -46,6 +46,7 @@ protected slots:
     virtual void slotCmd_update();
     virtual void slotCmd_diff();
     virtual void slotCmd_blame();
+    virtual void slotCmd_info();
 
 signals:
     void executeMe();

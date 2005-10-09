@@ -28,6 +28,9 @@
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
 
+#include <qfile.h>
+#include <qtextstream.h>
+
 class pCPart
 {
 public:
@@ -35,20 +38,28 @@ public:
     ~pCPart();
 
     QString cmd;
-    QString url;
+    QStringList url;
     bool ask_revision;
     bool rev_set;
     SvnActions*m_SvnWrapper;
     KCmdLineArgs *args;
     svn::Revision start,end;
+
+    // for output
+    QFile toStdout,toStderr;
+    QTextStream Stdout,Stderr;
 };
 
 pCPart::pCPart()
-    :cmd(""),url(""),ask_revision(false),rev_set(false)
+    :cmd(""),url(),ask_revision(false),rev_set(false)
 {
     m_SvnWrapper = 0;
     start = svn::Revision::START;
     end = svn::Revision::HEAD;
+    toStdout.open(IO_WriteOnly, stdout);
+    toStderr.open(IO_WriteOnly, stderr);
+    Stdout.setDevice(&toStdout);
+    Stderr.setDevice(&toStderr);
 }
 
 pCPart::~pCPart()
@@ -84,9 +95,6 @@ int commandline_part::exec()
     if (!m_pCPart->args) {
         return -1;
     }
-    for (int i = 0; i < m_pCPart->args->count();++i) {
-        kdDebug()<<"Arg at " << i << " == " << m_pCPart->args->arg(i)<<endl;
-    }
     if (m_pCPart->args->count()>=2) {
         m_pCPart->cmd=m_pCPart->args->arg(1);
         m_pCPart->cmd=m_pCPart->cmd.lower();
@@ -105,6 +113,8 @@ int commandline_part::exec()
         slotCmd=SLOT(slotCmd_update());
     } else if (!QString::compare(m_pCPart->cmd,"diff")) {
         slotCmd=SLOT(slotCmd_diff());
+    } else if (!QString::compare(m_pCPart->cmd,"info")) {
+        slotCmd=SLOT(slotCmd_info());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -114,16 +124,17 @@ int commandline_part::exec()
         return -1;
     }
 
-    if (m_pCPart->args->count()>=3) {
-        m_pCPart->url=m_pCPart->args->arg(2);
+    QString tmp;
+    for (int j = 2; j<m_pCPart->args->count();++j) {
+        tmp = m_pCPart->args->arg(j);
+        while (tmp.endsWith("/")) {
+            tmp.truncate(tmp.length()-1);
+        }
+        m_pCPart->url.append(tmp);
+        kdDebug()<<"Uri zum testen: " << tmp<<endl;
     }
-
-    while (m_pCPart->url.endsWith("/")) {
-        m_pCPart->url.truncate(m_pCPart->url.length()-1);
-    }
-
-    if (m_pCPart->url.isEmpty()) {
-        m_pCPart->url = ".";
+    if (m_pCPart->url.count()==0) {
+        m_pCPart->url.append(".");
     }
 
     if (m_pCPart->args->isSet("R")) {
@@ -143,7 +154,7 @@ int commandline_part::exec()
  */
 void commandline_part::clientException(const QString&what)
 {
-    kdDebug()<<what<<endl;
+    m_pCPart->Stderr<<what<<endl;
     KMessageBox::sorry(0,what,i18n("SVN Error"));
 }
 
@@ -153,30 +164,30 @@ void commandline_part::clientException(const QString&what)
  */
 void commandline_part::slotCmd_log()
 {
-    kdDebug()<<"Executing log" << endl;
     bool list = Settings::self()->log_always_list_changed_files();
-    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url,list);
+    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list);
 }
 
 void commandline_part::slotCmd_blame()
 {
-    kdDebug()<<"Executing blame" << endl;
-    m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start,m_pCPart->end,m_pCPart->url);
+    m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start,m_pCPart->end,m_pCPart->url[0]);
 }
 
 void commandline_part::slotCmd_update()
 {
-    kdDebug()<<"Executing update" << endl;
-    QStringList t;
-    t.append(m_pCPart->url);
-    m_pCPart->m_SvnWrapper->makeUpdate(t,
+    m_pCPart->m_SvnWrapper->makeUpdate(m_pCPart->url,
         (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),true);
 }
 
 void commandline_part::slotCmd_diff()
 {
-    kdDebug()<<"Executing diff" << endl;
-    m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url,m_pCPart->start,m_pCPart->end);
+    m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->end);
+}
+
+void commandline_part::slotCmd_info()
+{
+    svn::Revision peg(svn_opt_revision_unspecified);
+    m_pCPart->m_SvnWrapper->makeInfo(m_pCPart->url,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),peg,false);
 }
 
 /*!
@@ -200,7 +211,7 @@ bool commandline_part::scanRevision()
 
 void commandline_part::slotNotifyMessage(const QString&msg)
 {
-    kdDebug()<<msg<<endl;
+    m_pCPart->Stdout << msg << endl;
 }
 
 #include "commandline_part.moc"

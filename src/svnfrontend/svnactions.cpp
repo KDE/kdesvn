@@ -395,15 +395,24 @@ QString SvnActions::makeMkdir(const QString&parentDir)
 
 QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
 {
+    QStringList l;
+    SvnItem*item;
+    for (item=lst.first();item;item=lst.next()) {
+        l.append(item->fullName());
+    }
+    return getInfo(l,rev,peg,recursive,all);
+}
+
+QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
+{
     if (!m_Data->m_CurrentContext) return QString::null;
     QString ex;
     svn::InfoEntries entries;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Details","Retrieving infos - hit cancel for abort");
-        SvnItem*item;
         svn::InfoEntries e;
-        for (item=lst.first();item;item=lst.next()) {
-            e = (m_Data->m_Svnclient.info2(item->fullName(),recursive,rev,peg));
+        for (unsigned item=0;item<lst.count();++item) {
+            e = (m_Data->m_Svnclient.info2(lst[item],recursive,rev,peg));
             // stl like - hold it for qt4?
             //entries.insert(entries.end(),e.begin(),e.end());
             entries+=e;
@@ -512,6 +521,16 @@ QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const 
 }
 
 void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
+{
+    QStringList l;
+    SvnItem*item;
+    for (item=lst.first();item;item=lst.next()) {
+        l.append(item->fullName());
+    }
+    makeInfo(l,rev,peg,recursive);
+}
+
+void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
     QString text = getInfo(lst,rev,peg,recursive);
     if (text.isNull()) return;

@@ -335,18 +335,23 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_pList->m_remoteRevision=svn::Revision::HEAD;
 
     QString query = url.query();
-    if (url.isLocalFile()) {
-        setBaseUri(url.path());
-        if (m_SvnWrapper->isLocalWorkingCopy(url)) {
-            setWorkingCopy(true);
-        } else {
-            // yes! KURL sometimes makes a correct localfile url (file:///)
-            // to a simple file:/ - that brakes subverision lib. so we make sure
-            // that we have a correct url
-            setBaseUri("file://"+baseUri());
-        }
+
+    if (!QString::compare("svn+file",url.protocol())) {
+        setBaseUri("file://"+url.path());
     } else {
-        setNetworked(true);
+        if (url.isLocalFile()) {
+            setBaseUri(url.path());
+            if (m_SvnWrapper->isLocalWorkingCopy(url)) {
+                setWorkingCopy(true);
+            } else {
+                // yes! KURL sometimes makes a correct localfile url (file:///)
+                // to a simple file:/ - that brakes subverision lib. so we make sure
+                // that we have a correct url
+                setBaseUri("file://"+baseUri());
+            }
+        } else {
+            setNetworked(true);
+        }
     }
     if (query.length()>1) {
         QMap<QString,QString> q = url.queryItems();

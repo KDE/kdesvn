@@ -107,7 +107,7 @@ bool kdesvnView::openURL(const KURL& url)
     } else {
         QString prot = url.protocol();
         if (!prot.endsWith(":")) prot+=":";
-        if (!svn::Url::isValid(prot.utf8())) {
+        if (!svn::Url::isValid(prot.utf8()) && QString::compare("svn+file",url.protocol())!=0) {
             return open;
         }
     }

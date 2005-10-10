@@ -187,16 +187,23 @@ Standard encrypted webbrowser protocol
 </varlistentry>
 
 <varlistentry>
-<term>http+svn</term>
+<term>svn+http</term>
 <listitem><para>
 Standard webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term>https+svn</term>
+<term>svn+https</term>
 <listitem><para>
 Standard encrypted webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>svn+file</term>
+<listitem><para>
+Local repository protocol. May used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
@@ -335,6 +342,22 @@ This entry is localy deleted from subversion but this isn't yet committed.
 </para>
 </sect1>
 -->
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title>Using kdesvn via commandline</title>
+<sect1>
+<title>Overview</title>
+<para>
+Some subversion operation may used via commandline, eg., like a standard commandline client but user intaraction are made via KDE-UI. The standard syntax 
+is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>
+
+<table>
+<row></row >
+</table >
+
+</para>
+</sect1>
 </chapter>
 
 <chapter id="commands">

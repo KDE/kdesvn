@@ -229,7 +229,9 @@ Direct repository accesss. &kdesvn; checks if a given path is a repository or a 
 </para></listitem>
 </varlistentry>
 </variablelist>
-
+</para>
+<para>
+This list may used for urls given for <link linkend="kdesvn-commandline">commandline</link>, too.
 </para>
 </sect1>
 <sect1 id="first_steps">
@@ -349,13 +351,75 @@ This entry is localy deleted from subversion but this isn't yet committed.
 <sect1>
 <title>Overview</title>
 <para>
-Some subversion operation may used via commandline, eg., like a standard commandline client but user intaraction are made via KDE-UI. The standard syntax 
-is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>
+Some subversion operation may used via commandline, eg., like a standard commandline client but user intaraction are made via KDE-UI. The standard syntax is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>.
+</para>
+<para>
+If a single revision on a single url is wantet it may set as parameter of the url 
+<prompt>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</prompt>
+</para>
+</sect1>
+<sect1>
+<title>Commandlist</title>
+<para>
+If in following overview as possible parameter <prompt>-r revision</prompt> is given, this revision may set as <prompt>&lt;url&gt;?rev=the-revision</prompt>.
+<table id="svn-commands-table">
+<title>Subversion commands</title>
+<tgroup cols="3">
 
-<table>
-<row></row >
-</table >
+<thead>
+<row>
+<entry>Command</entry>
+<entry>Meaning</entry>
+<entry>Accepted options</entry>
+</row>
+</thead>
 
+<tbody>
+<row>
+<entry>commit (or ci)</entry>
+<entry>commit changes of item to repository</entry>
+<entry></entry>
+</row>
+<row>
+<entry>log</entry>
+<entry>Print log of item</entry>
+<entry>-r startrevision:endrevision</entry>
+</row>
+<row>
+<entry>cat</entry>
+<entry>Display content of item</entry>
+<entry>-r revision </entry>
+</row>
+<row>
+<entry>get</entry>
+<entry>Get content of item and save it</entry>
+<entry>-r revision -o &lt;outputfile&gt; (output is required!)</entry>
+</row>
+<row>
+<entry>blame (or annotate)</entry>
+<entry>annotate file</entry>
+<entry>-r startrevision:endrevision</entry>
+</row>
+<row>
+<entry>update</entry>
+<entry>Update item in working copy</entry>
+<entry>-r revision</entry>
+</row>
+<row>
+<entry>diff</entry>
+<entry>Diff two revisions of item (if not set START:HEAD)</entry>
+<entry>-r startrev:endrev</entry>
+</row>
+<row>
+<entry>info</entry>
+<entry>Detailled info about item</entry>
+<entry>-r revision</entry>
+</row>
+
+</tbody>
+</tgroup>
+
+</table>
 </para>
 </sect1>
 </chapter>

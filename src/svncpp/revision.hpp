@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -24,7 +24,7 @@
  */
 
 #ifndef _SVNCPP_REVISION_HPP_
-#define _SVNCPP_REVISION_HPP_ 
+#define _SVNCPP_REVISION_HPP_
 
 // subversion api
 #include "svn_types.h"
@@ -53,6 +53,7 @@ namespace svn
     static const svn_opt_revision_kind BASE;
     static const svn_opt_revision_kind HEAD;
     static const svn_opt_revision_kind WORKING;
+    static const svn_opt_revision_kind UNDEFINED;
 
     /**
      * Constructor
@@ -107,13 +108,13 @@ namespace svn
     /**
      * @return revision numver
      */
-    const svn_revnum_t 
+    const svn_revnum_t
     revnum () const;
 
     /**
      * @return revision kind
      */
-    const svn_opt_revision_kind 
+    const svn_opt_revision_kind
     kind () const;
 
     /**
@@ -121,6 +122,10 @@ namespace svn
      */
     const apr_time_t
     date () const;
+
+    bool operator==(const Revision&);
+    bool operator!=(const svn_opt_revision_kind);
+    bool operator==(const svn_opt_revision_kind);
   };
 }
 

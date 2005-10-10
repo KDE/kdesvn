@@ -25,6 +25,11 @@
 
 class pCPart;
 class KCmdLineArgs;
+class KURL;
+
+namespace svn {
+    class Revision;
+}
 
 /**
 @author Rajko Albrecht
@@ -48,6 +53,8 @@ protected slots:
     virtual void slotCmd_blame();
     virtual void slotCmd_info();
     virtual void slotCmd_commit();
+    virtual void slotCmd_cat();
+    virtual void slotCmd_get();
 
 signals:
     void executeMe();

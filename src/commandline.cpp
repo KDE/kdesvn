@@ -120,7 +120,8 @@ QString CommandLineData::genericText()
     result+=I18N_NOOP("Commands known");
     result+="</th></tr>\n";
     result+=lb;
-    result+=QString("cat")+ts+I18N_NOOP("Get content and print them out to stdout or file")+le;
+    result+=QString("cat")+ts+I18N_NOOP("Get content and display it")+le;
+    result+=lb+QString("get")+ts+I18N_NOOP("Get content and save it. Requires \"-o &lt;file&gt;\"")+le;
     result+=lb+QString("log")+ts+I18N_NOOP("Display log of item")+le;
     result+="</table>";
     return result;

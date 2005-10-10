@@ -23,6 +23,7 @@
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
 #include "svncpp/targets.hpp"
+#include "helpers/sub2qt.h"
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -44,18 +45,21 @@ public:
     QStringList url;
     bool ask_revision;
     bool rev_set;
+    bool outfile_set;
     SvnActions*m_SvnWrapper;
     KCmdLineArgs *args;
     svn::Revision start,end;
 
     // for output
     QFile toStdout,toStderr;
+    QString outfile;
     QTextStream Stdout,Stderr;
     DummyDisplay * disp;
+    QMap<int,svn::Revision> extraRevisions;
 };
 
 pCPart::pCPart()
-    :cmd(""),url(),ask_revision(false),rev_set(false)
+    :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false)
 {
     m_SvnWrapper = 0;
     start = svn::Revision::START;
@@ -110,6 +114,8 @@ int commandline_part::exec()
         slotCmd=SLOT(slotCmd_log());
     } else if (!QString::compare(m_pCPart->cmd,"cat")) {
         slotCmd=SLOT(slotCmd_cat());
+    } else if (!QString::compare(m_pCPart->cmd,"get")) {
+        slotCmd=SLOT(slotCmd_get());
     } else if (!QString::compare(m_pCPart->cmd,"help")) {
         slotCmd=SLOT(slotCmd_help());
     } else if (!QString::compare(m_pCPart->cmd,"blame")||
@@ -144,8 +150,9 @@ int commandline_part::exec()
             tmpurl.setProtocol("http");
         }
 
+        kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
         if (tmpurl.isLocalFile()) {
-            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(tmpurl)) {
+            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path())) {
                 tmp = tmpurl.path();
             } else {
                 tmp = "file://"+tmpurl.path();
@@ -157,7 +164,12 @@ int commandline_part::exec()
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
-        kdDebug()<<"Uri zum testen: " << tmp<<endl;
+        svn::Revision re = helpers::sub2qt::urlToRev(m_pCPart->args->url(j));
+        if (re != svn::Revision::UNDEFINED) {
+            kdDebug()<<"Revision " << re << " gefunden. " << endl;
+            m_pCPart->extraRevisions[j-2]=re;
+        }
+        kdDebug()<<"Uri zum testen: " << tmpurl<<endl;
     }
     if (m_pCPart->url.count()==0) {
         m_pCPart->url.append(".");
@@ -167,6 +179,10 @@ int commandline_part::exec()
         m_pCPart->ask_revision = true;
     } else if (m_pCPart->args->isSet("r")){
         scanRevision();
+    }
+    if (m_pCPart->args->isSet("o")) {
+        m_pCPart->outfile_set=true;
+        m_pCPart->outfile = m_pCPart->args->getOption("o");
     }
 
     emit executeMe();
@@ -199,6 +215,38 @@ void commandline_part::slotCmd_blame()
     m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start,m_pCPart->end,m_pCPart->url[0]);
 }
 
+void commandline_part::slotCmd_cat()
+{
+    if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
+        m_pCPart->rev_set=true;
+        m_pCPart->start=m_pCPart->extraRevisions[0];
+        kdDebug()<<"Using url revision" << endl;
+    }
+    m_pCPart->m_SvnWrapper->makeCat((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0],m_pCPart->url[0]);
+}
+
+void commandline_part::slotCmd_get()
+{
+    if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
+        m_pCPart->rev_set=true;
+        m_pCPart->start=m_pCPart->extraRevisions[0];
+        kdDebug()<<"Using url revision" << endl;
+    }
+    if (!m_pCPart->outfile_set || m_pCPart->outfile.isEmpty()) {
+        clientException(i18n("\"GET\" requires output file!"));
+        return;
+    }
+    QFile of(m_pCPart->outfile);
+    if (!of.open(IO_WriteOnly)) {
+        clientException(i18n("Could not open %1 for writing").arg(m_pCPart->outfile));
+        return;
+    }
+    QByteArray content = m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0]);
+    if (content.size()) {
+        of.writeBlock(content,content.size());
+    }
+}
+
 void commandline_part::slotCmd_update()
 {
     m_pCPart->m_SvnWrapper->makeUpdate(m_pCPart->url,
@@ -212,8 +260,12 @@ void commandline_part::slotCmd_diff()
 
 void commandline_part::slotCmd_info()
 {
-    svn::Revision peg(svn_opt_revision_unspecified);
-    m_pCPart->m_SvnWrapper->makeInfo(m_pCPart->url,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),peg,false);
+    if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
+        m_pCPart->rev_set=true;
+        m_pCPart->start=m_pCPart->extraRevisions[0];
+        kdDebug()<<"Using url revision" << endl;
+    }
+    m_pCPart->m_SvnWrapper->makeInfo(m_pCPart->url,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),svn::Revision::UNDEFINED,false);
 }
 
 void commandline_part::slotCmd_commit()
@@ -236,10 +288,10 @@ bool commandline_part::scanRevision()
     if (revl.count()==0) {
         return false;
     }
-    m_pCPart->start=revl[0].toInt();
+    m_pCPart->start=helpers::sub2qt::stringToRev(revl[0]);
     m_pCPart->rev_set=true;
     if (revl.count()>1) {
-        m_pCPart->end=revl[1].toInt();
+        m_pCPart->end=helpers::sub2qt::stringToRev(revl[1]);
     }
     return true;
 }

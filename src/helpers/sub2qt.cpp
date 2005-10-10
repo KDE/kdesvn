@@ -19,6 +19,9 @@
  ***************************************************************************/
 #include "sub2qt.h"
 
+#include "svncpp/revision.hpp"
+#include <qmap.h>
+
 namespace helpers {
 
 sub2qt::sub2qt()
@@ -45,6 +48,34 @@ apr_time_t sub2qt::qt_time2apr(const QDateTime&_time)
 {
     apr_time_t r;
     apr_time_ansi_put(&r,_time.toTime_t());
+    return r;
+}
+
+svn::Revision sub2qt::urlToRev(const KURL&url)
+{
+    svn::Revision r = svn::Revision::UNDEFINED;
+    QMap<QString,QString> q = url.queryItems();
+    if (q.find("rev")!=q.end()) {
+        QString v = q["rev"];
+        if (!v.isEmpty()) {
+            r = stringToRev(v);
+        }
+    }
+    return r;
+}
+
+svn::Revision sub2qt::stringToRev(const QString&v)
+{
+    svn::Revision r = svn::Revision::UNDEFINED;
+    if (!QString::compare(v,"HEAD")) {
+        r = svn::Revision::HEAD;
+    } else if (!QString::compare(v,"BASE")) {
+        r = svn::Revision::BASE;
+    } else if (!QString::compare(v,"START")) {
+        r = svn::Revision::START;
+    } else {
+        r = v.toInt();
+    }
     return r;
 }
 

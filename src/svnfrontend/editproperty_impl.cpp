@@ -65,7 +65,7 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
 
     dirProperties += i18n("svn:eol-style");
     dirProperties += i18n("svn:executable");
-    dirProperties += i18n("svn:external");
+    dirProperties += i18n("svn:externals");
     dirProperties += i18n("svn:ignore");
     dirProperties += i18n("svn:needs-lock");
     dirProperties += i18n("svn:mime-type");

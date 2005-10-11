@@ -355,7 +355,8 @@ Some subversion operation may used via commandline, eg., like a standard command
 </para>
 <para>
 If a single revision on a single url is wantet it may set as parameter of the url 
-<prompt>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</prompt>
+<prompt>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</prompt>. This will overwrite the option <prompt>-r &lt;rev&gt;</prompt>. A revision may given as
+number or one of <prompt>HEAD</prompt>, <prompt>START</prompt> or <prompt>BASE</prompt>.
 </para>
 </sect1>
 <sect1>
@@ -420,6 +421,37 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 </tgroup>
 
 </table>
+
+<table id="parameter-list">
+<title>Parameter for subversion commands</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>Parameter</entry>
+<entry>Possible values</entry>
+<entry>allowed for</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>-r</entry>
+<entry><prompt>revision</prompt> or <prompt>startrev:endrev</prompt></entry>
+<entry>all except commit</entry>
+</row>
+<row>
+<entry>-R</entry>
+<entry>(none)</entry>
+<entry>all except commit</entry>
+</row>
+<row>
+<entry><prompt>-o</prompt></entry>
+<entry><prompt>&lt;filename&gt;</prompt></entry>
+<entry>get</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
 </para>
 </sect1>
 </chapter>

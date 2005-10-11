@@ -23,6 +23,7 @@
 #include <kcmdlineargs.h>
 #include <kdialogbase.h>
 #include <ktextbrowser.h>
+#include <kapplication.h>
 #include <klocale.h>
 #include <qstring.h>
 #include <qlayout.h>
@@ -36,9 +37,7 @@ public:
 
     void displayHelp();
 
-    static QString genericText();
     QString cmd;
-
 };
 
 CommandLine::CommandLine(KCmdLineArgs*_args)
@@ -81,48 +80,5 @@ int CommandLine::exec()
 
 void CommandLineData::displayHelp()
 {
-    KDialogBase * dlg = new KDialogBase(
-        0,
-        "help_dlg",
-        true,
-        "Commandline help",
-        KDialogBase::Ok/*,
-        (OkCancel?KDialogBase::Cancel:KDialogBase::Close),
-        KDialogBase::Cancel,
-        true*//*,(OkCancel?KStdGuiItem::ok():KStdGuiItem::close())*/);
-
-    if (!dlg) return;
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
-    KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
-    QString text;
-    text = "<html><head></head><body>";
-    text+=I18N_NOOP("<code>kdesvn exec &lt;command&gt;&nbsp;&lt;param&gt;&nbsp;path</code><br>");
-    text+=genericText();
-    text+="</body></html>";
-    ptr->setText(text);
-    dlg->resize(600,400);
-    dlg->exec();
-    delete dlg;
-//    dlg->resize(dlg->configDialogSize(*(Settings::self()->config()),"help_window"));
-}
-
-QString CommandLineData::genericText()
-{
-    QString result = "";
-    static QString br = "<br>";
-    static QString lb = "<tr><td>";
-    static QString ts = "</td><td>";
-    static QString le = "</td></tr>\n";
-
-
-    result+=br;
-    result+="<table><tr><th colspan=\"2\">";
-    result+=I18N_NOOP("Commands known");
-    result+="</th></tr>\n";
-    result+=lb;
-    result+=QString("cat")+ts+I18N_NOOP("Get content and display it")+le;
-    result+=lb+QString("get")+ts+I18N_NOOP("Get content and save it. Requires \"-o &lt;file&gt;\"")+le;
-    result+=lb+QString("log")+ts+I18N_NOOP("Display log of item")+le;
-    result+="</table>";
-    return result;
+    kapp->invokeHelp("kdesvn-commandline","kdesvn");
 }

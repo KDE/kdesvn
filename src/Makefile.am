@@ -18,7 +18,7 @@ kdesvn_SOURCES = main.cpp kdesvn.cpp urldlg.cpp commandline.cpp
 
 # these are the headers for your project
 noinst_HEADERS = kdesvn.h kdesvnview.h urldlg.h displaysettings_impl.h \
-			subversionsettings_impl.h commandline.h commandline_part.h
+	subversionsettings_impl.h commandline.h commandline_part.h
 
 # client stuff
 
@@ -52,7 +52,7 @@ kde_module_LTLIBRARIES = libkdesvnpart.la
 # the Part's source, library search path, and link libraries
 BUILT_SOURCES = settings.h
 libkdesvnpart_la_SOURCES = settings.kcfgc kdesvn_part.cpp kdesvnview.cpp \
-	display_settings.ui 		displaysettings_impl.cpp subversion_settings.ui \
+	display_settings.ui displaysettings_impl.cpp subversion_settings.ui \
 	subversionsettings_impl.cpp commandline_part.cpp
 libkdesvnpart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnfrontend/libsvnfrontend.la \

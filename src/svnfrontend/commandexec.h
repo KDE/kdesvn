@@ -17,26 +17,51 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef COMMANDLINE_PART_H
-#define COMMANDLINE_PART_H
+#ifndef COMMANDEXEC_H
+#define COMMANDEXEC_H
 
 #include <qobject.h>
+#include <qstring.h>
 
-class CommandExec;
 class KCmdLineArgs;
+class KURL;
+class pCPart;
+
+namespace svn {
+    class Revision;
+}
 
 /**
 @author Rajko Albrecht
 */
-class commandline_part : public QObject
+class CommandExec : public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 public:
-    commandline_part(QObject *parent, const char *name, KCmdLineArgs *args);
-    virtual ~commandline_part();
+    CommandExec(QObject*parent,const char *name,KCmdLineArgs *args);
+    virtual ~CommandExec();
     virtual int exec();
+
+protected slots:
+    virtual void clientException(const QString&);
+    virtual void slotNotifyMessage(const QString&);
+    virtual void slotCmd_log();
+    virtual void slotCmd_update();
+    virtual void slotCmd_diff();
+    virtual void slotCmd_blame();
+    virtual void slotCmd_info();
+    virtual void slotCmd_commit();
+    virtual void slotCmd_cat();
+    virtual void slotCmd_get();
+
+signals:
+    void executeMe();
+protected:
+    virtual bool scanRevision();
+    virtual bool askRevision();
+
 private:
-    CommandExec*m_pCPart;
+    pCPart*m_pCPart;
 
 };
 

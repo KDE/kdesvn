@@ -34,11 +34,11 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
     :EditPropsDlgData(parent, name)
 {
     /// @TODO Read these values from a text or config file
-    fileProperties += i18n("svn:eol-style");
-    fileProperties += i18n("svn:executable");
-    fileProperties += i18n("svn:keywords");
-    fileProperties += i18n("svn:needs-lock");
-    fileProperties += i18n("svn:mime-type");
+    fileProperties += ("svn:eol-style");
+    fileProperties += ("svn:executable");
+    fileProperties += ("svn:keywords");
+    fileProperties += ("svn:needs-lock");
+    fileProperties += ("svn:mime-type");
 
     fileComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>.");
     fileComments += i18n("If present, make the file executable.<br>\
@@ -63,19 +63,19 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
         Apache. A mimetype beginning with <b>'text/'</b> (or an absent\
         mimetype) is treated as text. Anything else is treated as binary.");
 
-    dirProperties += i18n("svn:eol-style");
-    dirProperties += i18n("svn:executable");
-    dirProperties += i18n("svn:externals");
-    dirProperties += i18n("svn:ignore");
-    dirProperties += i18n("svn:needs-lock");
-    dirProperties += i18n("svn:mime-type");
-    dirProperties += i18n("bugtraq:label");
-    dirProperties += i18n("bugtraq:url");
-    dirProperties += i18n("bugtraq:message");
-    dirProperties += i18n("bugtraq:warnifnoissue");
-    dirProperties += i18n("bugtraq:number");
-    dirProperties += i18n("bugtraq:append");
-    dirProperties += i18n("bugtraq:logregex");
+    dirProperties += ("svn:eol-style");
+    dirProperties += ("svn:executable");
+    dirProperties += ("svn:externals");
+    dirProperties += ("svn:ignore");
+    dirProperties += ("svn:needs-lock");
+    dirProperties += ("svn:mime-type");
+    dirProperties += ("bugtraq:label");
+    dirProperties += ("bugtraq:url");
+    dirProperties += ("bugtraq:message");
+    dirProperties += ("bugtraq:warnifnoissue");
+    dirProperties += ("bugtraq:number");
+    dirProperties += ("bugtraq:append");
+    dirProperties += ("bugtraq:logregex");
 
     dirComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>.");
     dirComments += i18n("If present, make the file executable.<br>\

@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "filelistviewitem.h"
 #include "kdesvnfilelist.h"
-#include "../settings.h"
+#include "settings.h"
 #include "helpers/sub2qt.h"
 #include "svncpp/status.hpp"
 #include "svncpp/revision.hpp"

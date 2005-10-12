@@ -1,11 +1,14 @@
 INCLUDES = $(all_includes)
 METASOURCES = AUTO
+BUILT_SOURCES = settings.h
+kde_kcfg_DATA = kdesvn_part.kcfg
+
 noinst_LTLIBRARIES = libsvnfrontend.la
 noinst_HEADERS = kdesvnfilelist.h filelistviewitem.h svnlogdlgimp.h \
 															svnactions.h rangeinput_impl.h ccontextlistener.h authdialogimpl.h propertiesdlg.h \
 											editproperty_impl.h logmsg_impl.h checkoutinfo_impl.h stopdlg.h importdir_logmsg.h \
 							mergedlg_impl.h copymoveview_impl.h ssltrustprompt_impl.h itemdisplay.h svnfiletip.h \
-		dummydisplay.h commandexec.h
+		dummydisplay.h commandexec.h displaysettings_impl.h subversionsettings_impl.h
 
 libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 				svnactions.cpp rangeinput.ui rangeinput_impl.cpp ccontextlistener.cpp authdlg.ui \
@@ -13,4 +16,5 @@ libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 				logmsg_impl.cpp checkoutinfo.ui checkoutinfo_impl.cpp stopdlg.cpp importdir_logmsg.cpp \
 				merge_dlg.ui mergedlg_impl.cpp copymoveview.ui copymoveview_impl.cpp \
 				ssltrustprompt.ui ssltrustprompt_impl.cpp svnitem.cpp kdesvnfilelist.cpp itemdisplay.cpp \
-			svnfiletip.cpp dummydisplay.cpp commandexec.cpp
+			svnfiletip.cpp dummydisplay.cpp commandexec.cpp subversion_settings.ui \
+			display_settings.ui displaysettings_impl.cpp subversionsettings_impl.cpp settings.kcfgc

@@ -38,11 +38,12 @@
 
 namespace svn
 {
-  static const int SCHEMA_COUNT=5;
   static const char *
-  VALID_SCHEMAS [SCHEMA_COUNT] =
+  VALID_SCHEMAS [] =
   {
-    "http:", "https:", "svn:", "svn+ssh:", "file:"
+    "http","https","file",
+    "svn","svn+ssh","svn+http","svn+https","svn+file",
+    0
   };
 
   static bool mSchemasInitialized = false;
@@ -56,19 +57,36 @@ namespace svn
   Url::isValid (const QString& url)
   {
     QString urlTest(url);
-    for (int index=0; index < SCHEMA_COUNT; index++)
+    unsigned int index = 0;
+    while (VALID_SCHEMAS[index]!=0)
     {
       QString schema = VALID_SCHEMAS[index];
-      QString urlComp = urlTest.mid(0, schema.length ());
+      QString urlComp = urlTest.mid(0, schema.length());
 
       if (schema == urlComp)
       {
         return true;
       }
+      ++index;
     }
 
     return false;
   }
+
+  QString
+  Url::transformProtokoll(const QString&prot)
+  {
+    QString _prot = prot.lower();
+    if (QString::compare(_prot,"svn+http")==0) {
+        return QString("http");
+    } else if (QString::compare(_prot,"svn+https")==0) {
+        return QString("https");
+    }else if (QString::compare(_prot,"svn+file")==0) {
+        return QString("file");
+    }
+    return _prot;
+  }
+
 
   /**
    * the implementation of the function that pull the supported

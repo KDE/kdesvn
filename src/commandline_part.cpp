@@ -18,11 +18,21 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandline_part.h"
+#include "kdesvn_part.h"
 #include "svnfrontend/commandexec.h"
+
+#include <kstandarddirs.h>
 
 commandline_part::commandline_part(QObject *parent, const char *name,KCmdLineArgs *args)
  : QObject(parent, name)
 {
+    KGlobal::locale()->insertCatalogue("kdesvn");
+    KInstance * inst = kdesvnPartFactory::instance();
+    KGlobal::locale()->insertCatalogue(inst->instanceName());
+    KGlobal::dirs()->addResourceType( inst->instanceName() + "data",
+        KStandardDirs::kde_default("data")+ QString::fromLatin1( inst->instanceName() ) + '/' );
+
+
     m_pCPart = new CommandExec(this,name?QString(name)+QString("_exec"):"command_executer",args);
 }
 

@@ -17,53 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef COMMANDEXEC_H
-#define COMMANDEXEC_H
+#ifndef DISPLAYSETTINGS_IMPL_H
+#define DISPLAYSETTINGS_IMPL_H
 
-#include <qobject.h>
-#include <qstring.h>
+#include "src/svnfrontend/display_settings.h"
 
-class KCmdLineArgs;
-class KURL;
-class pCPart;
-
-namespace svn {
-    class Revision;
-}
-
-/**
-@author Rajko Albrecht
-*/
-class CommandExec : public QObject
-{
+class DisplaySettings_impl: public DisplaySettings {
 Q_OBJECT
 public:
-    CommandExec(QObject*parent,const char *name,KCmdLineArgs *args);
-    virtual ~CommandExec();
-    virtual int exec();
-
+    DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~DisplaySettings_impl();
 protected slots:
-    virtual void clientException(const QString&);
-    virtual void slotNotifyMessage(const QString&);
-    virtual void slotCmd_log();
-    virtual void slotCmd_update();
-    virtual void slotCmd_diff();
-    virtual void slotCmd_blame();
-    virtual void slotCmd_info();
-    virtual void slotCmd_commit();
-    virtual void slotCmd_cat();
-    virtual void slotCmd_get();
-    virtual void slotCmd_list();
-
-signals:
-    void executeMe();
-protected:
-    virtual bool scanRevision();
-    virtual bool askRevision();
-
-private:
-    pCPart*m_pCPart;
-
+    virtual void diffDispChanged();
+    virtual void dispFileInfotoggled(bool);
 };
 
 #endif

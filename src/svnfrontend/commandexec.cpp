@@ -18,16 +18,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandexec.h"
-#include "kdesvn_part.h"
-#include "../settings.h"
+#include "settings.h"
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
 #include "svncpp/targets.hpp"
+#include "svncpp/url.hpp"
+#include "svncpp/dirent.hpp"
 #include "helpers/sub2qt.h"
 #include "svnfrontend/rangeinput_impl.h"
 
 #include <kglobal.h>
-#include <kstandarddirs.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
@@ -86,12 +86,6 @@ pCPart::~pCPart()
 CommandExec::CommandExec(QObject*parent, const char *name,KCmdLineArgs *args)
     : QObject(parent,name)
 {
-    KGlobal::locale()->insertCatalogue("kdesvn");
-    KInstance * inst = kdesvnPartFactory::instance();
-    KGlobal::locale()->insertCatalogue(inst->instanceName());
-    KGlobal::dirs()->addResourceType( inst->instanceName() + "data",
-        KStandardDirs::kde_default("data")+ QString::fromLatin1( inst->instanceName() ) + '/' );
-
     m_pCPart = new pCPart;
     m_pCPart->args = args;
 
@@ -133,6 +127,7 @@ int CommandExec::exec()
         slotCmd=SLOT(slotCmd_update());
         m_pCPart->single_revision=true;
     } else if (!QString::compare(m_pCPart->cmd,"diff")) {
+        m_pCPart->start = svn::Revision::WORKING;
         slotCmd=SLOT(slotCmd_diff());
     } else if (!QString::compare(m_pCPart->cmd,"info")) {
         slotCmd=SLOT(slotCmd_info());
@@ -140,6 +135,9 @@ int CommandExec::exec()
     } else if (!QString::compare(m_pCPart->cmd,"commit")||
                !QString::compare(m_pCPart->cmd,"ci")) {
         slotCmd=SLOT(slotCmd_commit());
+    } else if (!QString::compare(m_pCPart->cmd,"list")||
+               !QString::compare(m_pCPart->cmd,"ls")) {
+        slotCmd=SLOT(slotCmd_list());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -154,12 +152,7 @@ int CommandExec::exec()
     for (int j = 2; j<m_pCPart->args->count();++j) {
         tmpurl = m_pCPart->args->url(j);
         query = tmpurl.query();
-        if (tmpurl.protocol()=="https+svn") {
-            tmpurl.setProtocol("https");
-        } else if (tmpurl.protocol()=="http+svn") {
-            tmpurl.setProtocol("http");
-        }
-
+        tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
         if (tmpurl.isLocalFile()) {
             if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path())) {
@@ -266,6 +259,10 @@ void CommandExec::slotCmd_update()
 
 void CommandExec::slotCmd_diff()
 {
+    if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
+        kdDebug()<<"Local diff" << endl;
+        m_pCPart->start = svn::Revision::WORKING;
+    }
     m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->end);
 }
 
@@ -285,6 +282,21 @@ void CommandExec::slotCmd_commit()
         targets.push_back(svn::Path(m_pCPart->url[j]));
     }
     m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
+}
+
+void CommandExec::slotCmd_list()
+{
+    svn::DirEntries res;
+    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),false)) {
+        return;
+    }
+    for (unsigned int i = 0; i < res.count();++i) {
+        QString d = helpers::sub2qt::apr_time2qt(res[i].time()).toString(QString("yy-MM-dd hh:mm::ss"));
+        m_pCPart->Stdout
+            << (res[i].kind()==svn_node_dir?"D":"F")<<" "
+            << d << " "
+            << res[i].name()<<endl;
+    }
 }
 
 /*!

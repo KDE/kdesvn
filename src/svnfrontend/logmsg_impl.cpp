@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "logmsg_impl.h"
-#include "../settings.h"
+#include "settings.h"
 
 #include <ktextedit.h>
 #include <kcombobox.h>

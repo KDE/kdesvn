@@ -27,10 +27,11 @@
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "logmsg_impl.h"
-#include "../settings.h"
+#include "settings.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
 #include "svncpp/context_listener.hpp"
+#include "svncpp/dirent.hpp"
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
 #include "helpers/stl2qt.h"
@@ -1463,6 +1464,20 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     return result;
 }
 
+bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec)
+{
+    if (!m_Data->m_CurrentContext) return false;
+    QString ex;
+    try {
+        dlist = m_Data->m_Svnclient.list(url,where,rec);
+    } catch (svn::ClientException e) {
+            //Message box!
+            ex = QString::fromUtf8(e.message());
+            emit clientException(ex);
+            return false;
+    }
+    return true;
+}
 
 /*!
     \fn SvnActions::isLocalWorkingCopy(const KURL&url)

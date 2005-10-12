@@ -73,6 +73,8 @@ svn::Revision sub2qt::stringToRev(const QString&v)
         r = svn::Revision::BASE;
     } else if (!QString::compare(v,"START")) {
         r = svn::Revision::START;
+    } else if (!QString::compare(v,"WORKING")) {
+        r = svn::Revision::WORKING;
     } else {
         r = v.toInt();
     }

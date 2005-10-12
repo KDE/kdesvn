@@ -17,31 +17,36 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#ifndef KIOSVN_H
+#define KIOSVN_H
 
-#ifndef SUBVERSIONSETTINGS_IMPL_H
-#define SUBVERSIONSETTINGS_IMPL_H
+#include <qstring.h>
+#include <qcstring.h>
+#include <kurl.h>
 
-#include "subversion_settings.h"
+#include <kio/global.h>
+#include <kio/slavebase.h>
 
-class SubversionSettings_impl : public SubversionSettings
+
+#include <sys/stat.h>
+#include <qvaluelist.h>
+
+class KioSvnData;
+
+/**
+@author Rajko Albrecht
+*/
+class kio_svnProtocol : public KIO::SlaveBase
 {
-  Q_OBJECT
-
 public:
-  SubversionSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-  ~SubversionSettings_impl();
-  /*$PUBLIC_FUNCTIONS$*/
+    kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket);
+    virtual ~kio_svnProtocol();
+    virtual void listDir (const KURL&url);
+    virtual void stat(const KURL& url);
 
-public slots:
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
-
+private:
+    KioSvnData*m_pData;
+    bool createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);
+    static QString makeSvnUrl(const KURL&url);
 };
-
 #endif
-

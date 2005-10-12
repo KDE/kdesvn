@@ -19,13 +19,14 @@
  ***************************************************************************/
 
 #include "kdesvn_part.h"
-#include "settings.h"
-#include "displaysettings_impl.h"
+#include "svnfrontend/settings.h"
+#include "svnfrontend/displaysettings_impl.h"
 #include "subversionsettings_impl.h"
 #include "kdesvnview.h"
 #include "commandline_part.h"
 #include "../config.h"
 #include "svncpp/version_check.hpp"
+#include "svncpp/url.hpp"
 
 #include <kinstance.h>
 #include <kaction.h>
@@ -100,12 +101,10 @@ bool kdesvnPart::openFile()
 bool kdesvnPart::openURL(const KURL&url)
 {
     KURL _url = url;
-    if (_url.protocol()=="svn+https") {
-        _url.setProtocol("https");
-    } else if (_url.protocol()=="svn+http") {
-        _url.setProtocol("http");
-    }
-    if ((!_url.isValid()&&QString::compare("svn+file",_url.protocol())!=0) ||!closeURL()) {
+
+    _url.setProtocol(svn::Url::transformProtokoll(_url.protocol()));
+
+    if (!_url.isValid()||!closeURL()) {
         return false;
     }
     m_url = _url;

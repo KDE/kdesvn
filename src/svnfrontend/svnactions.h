@@ -71,6 +71,8 @@ public:
 
     bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec=false,bool all=true);
     bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec,bool all,bool display_ignored,bool updates=false);
+    bool makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec=false);
+
     bool createModifiedCache(const QString&base);
     void checkModifiedCache(const QString&path,svn::StatusEntries&dlist);
     void addModifiedCache(const svn::Status&what);

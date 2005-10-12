@@ -53,6 +53,9 @@ namespace svn
     static bool
     isValid (const QString& url);
 
+    static QString
+    transformProtokoll(const QString&);
+
     /**
      * returns a vector with url schemas that are
      * supported by svn

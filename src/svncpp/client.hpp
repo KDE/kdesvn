@@ -441,7 +441,7 @@ namespace svn
      * @return delta between the files
      * @exception ClientException
      */
-    QCString
+    QString
     diff (const Path & tmpPath, const Path & path,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,

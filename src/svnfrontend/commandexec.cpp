@@ -105,6 +105,7 @@ int CommandExec::exec()
     if (!m_pCPart->args) {
         return -1;
     }
+    bool dont_check_second = false;
     if (m_pCPart->args->count()>=2) {
         m_pCPart->cmd=m_pCPart->args->arg(1);
         m_pCPart->cmd=m_pCPart->cmd.lower();
@@ -138,6 +139,15 @@ int CommandExec::exec()
     } else if (!QString::compare(m_pCPart->cmd,"list")||
                !QString::compare(m_pCPart->cmd,"ls")) {
         slotCmd=SLOT(slotCmd_list());
+    } else if (!QString::compare(m_pCPart->cmd,"copy")||
+               !QString::compare(m_pCPart->cmd,"cp")) {
+        slotCmd=SLOT(slotCmd_copy());
+        dont_check_second = true;
+    } else if (!QString::compare(m_pCPart->cmd,"move")||
+               !QString::compare(m_pCPart->cmd,"rename")||
+               !QString::compare(m_pCPart->cmd,"mv")) {
+        slotCmd=SLOT(slotCmd_move());
+        dont_check_second = true;
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -151,6 +161,7 @@ int CommandExec::exec()
     QMap<QString,QString> q;
 
     KURL tmpurl;
+    QString mainProto;
     for (int j = 2; j<m_pCPart->args->count();++j) {
         tmpurl = m_pCPart->args->url(j);
         query = tmpurl.query();
@@ -162,19 +173,28 @@ int CommandExec::exec()
         }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
-        if (tmpurl.isLocalFile()) {
+        if (tmpurl.isLocalFile() && (j==2 || !dont_check_second)) {
             if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path())) {
                 tmp = tmpurl.path();
+                if (j==2) mainProto = "";
             } else {
                 tmp = "file://"+tmpurl.path();
+                if (j==2) mainProto = "file://";
             }
         } else {
             tmp = tmpurl.url();
+            if (j==2) mainProto=tmpurl.protocol();
+        }
+        if (j>2 && dont_check_second) {
+            tmp = mainProto+tmpurl.path();
         }
         while (tmp.endsWith("/")) {
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
+        if (j>2 && dont_check_second) {
+            continue;
+        }
         svn::Revision re,ra;
         m_pCPart->m_SvnWrapper->svnclient()->url2Revision(v,re,ra);
 
@@ -307,6 +327,24 @@ void CommandExec::slotCmd_list()
             << d << " "
             << res[i].name()<<endl;
     }
+}
+
+void CommandExec::slotCmd_copy()
+{
+    if (m_pCPart->url.count()<2) {
+        clientException(i18n("copy <source> <target>"));
+        return;
+    }
+    m_pCPart->m_SvnWrapper->slotCopyMove(false,m_pCPart->url[0],m_pCPart->url[1],false);
+}
+
+void CommandExec::slotCmd_move()
+{
+    if (m_pCPart->url.count()<2) {
+        clientException(i18n("move <source> <target>"));
+        return;
+    }
+    m_pCPart->m_SvnWrapper->slotCopyMove(true,m_pCPart->url[0],m_pCPart->url[1],false);
 }
 
 /*!

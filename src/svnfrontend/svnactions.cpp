@@ -129,7 +129,6 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient.setContext(m_Data->m_CurrentContext);
 }
 
-
 template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(

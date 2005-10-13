@@ -18,6 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "kiosvn.h"
+#include "kiolistener.h"
 
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
@@ -60,21 +61,32 @@ public:
     KioSvnData();
     virtual ~KioSvnData();
 
-    SvnActions*m_SvnWrapper;
-    DummyDisplay * disp;
+    void reInitClient();
+
+    KioListener m_Listener;
+    svn::Context* m_CurrentContext;
+    svn::Client m_Svnclient;
 
     svn::Revision urlToRev(const KURL&);
 };
 
 KioSvnData::KioSvnData()
 {
-    disp = new DummyDisplay();
-    m_SvnWrapper = new SvnActions(disp);
-    m_SvnWrapper->reInitClient();
+    m_CurrentContext = 0;
+    reInitClient();
+}
+
+void KioSvnData::reInitClient()
+{
+    delete m_CurrentContext;
+    m_CurrentContext = new svn::Context();
+    m_CurrentContext->setListener(&m_Listener);
+    m_Svnclient.setContext(m_CurrentContext);
 }
 
 KioSvnData::~KioSvnData()
 {
+
 }
 
 svn::Revision KioSvnData::urlToRev(const KURL&url)
@@ -84,7 +96,7 @@ svn::Revision KioSvnData::urlToRev(const KURL&url)
     rev = svn::Revision::UNDEFINED;
     if (q.find("rev")!=q.end()) {
         QString v = q["rev"];
-        m_SvnWrapper->svnclient()->url2Revision(v,rev,tmp);
+        m_Svnclient.url2Revision(v,rev,tmp);
     }
     return rev;
 }
@@ -102,6 +114,16 @@ kio_svnProtocol::~kio_svnProtocol()
 
 extern "C"
 {
+/* we will get trouble on old fedora 2 systems with the origin compiler - don't know whats up
+ * with there gcc
+ */
+ #define GCC_VERSION (__GNUC__ * 10000 \
+                               + __GNUC_MINOR__ * 100 \
+                               + __GNUC_PATCHLEVEL__)
+#if GCC_VERSION == 30303
+#undef KDE_EXPORT
+#define KDE_EXPORT
+#endif
     KDE_EXPORT int kdemain(int argc, char **argv);
 }
 
@@ -130,14 +152,14 @@ int kdemain(int argc, char **argv)    {
 void kio_svnProtocol::listDir(const KURL&url)
 {
     kdDebug() << "kio_svn::listDir(const KURL& url) : " << url.url() << endl ;
-    m_pData->m_SvnWrapper->reInitClient();
+    m_pData->reInitClient();
     svn::DirEntries dlist;
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
     try {
-        dlist = m_pData->m_SvnWrapper->svnclient()->list(makeSvnUrl(url),rev,false);
+        dlist = m_pData->m_Svnclient.list(makeSvnUrl(url),rev,false);
     } catch (svn::ClientException e) {
             QString ex = QString::fromUtf8(e.message());
             kdDebug()<<ex<<endl;
@@ -161,14 +183,14 @@ void kio_svnProtocol::listDir(const KURL&url)
 void kio_svnProtocol::stat(const KURL& url)
 {
     kdDebug()<<"kio_svn::stat "<< url << endl;
-    m_pData->m_SvnWrapper->reInitClient();
+    m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
     svn::Status _stat;
     try {
-        m_pData->m_SvnWrapper->svnclient()->singleStatus(makeSvnUrl(url),false,rev);
+        m_pData->m_Svnclient.singleStatus(makeSvnUrl(url),false,rev);
     } catch  (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         kdDebug()<<ex<<endl;
@@ -192,14 +214,14 @@ void kio_svnProtocol::stat(const KURL& url)
 void kio_svnProtocol::get(const KURL& url)
 {
     kdDebug()<<"kio_svn::get "<< url << endl;
-    m_pData->m_SvnWrapper->reInitClient();
+    m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
     QByteArray content;
     try {
-        content = m_pData->m_SvnWrapper->svnclient()->cat(makeSvnUrl(url),rev);
+        content = m_pData->m_Svnclient.cat(makeSvnUrl(url),rev);
     } catch (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         kdDebug()<<ex<<endl;
@@ -235,8 +257,8 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
     return res;
 }
 
-bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry) {
-    assert(entry.count() == 0);
+bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)
+{
         kdDebug() << "MTime : " << ( long )mtime << endl;
         kdDebug() << "UDS filename : " << filename << endl;
         kdDebug()<< "UDS Size: " << size << endl;

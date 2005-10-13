@@ -147,11 +147,19 @@ int CommandExec::exec()
         return -1;
     }
 
-    QString tmp,query,proto;
+    QString tmp,query,proto,v;
+    QMap<QString,QString> q;
+
     KURL tmpurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
         tmpurl = m_pCPart->args->url(j);
         query = tmpurl.query();
+        q = m_pCPart->args->url(j).queryItems();
+        if (q.find("rev")!=q.end()) {
+             v = q["rev"];
+        } else {
+            v = "";
+        }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
         if (tmpurl.isLocalFile()) {
@@ -167,7 +175,9 @@ int CommandExec::exec()
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
-        svn::Revision re = helpers::sub2qt::urlToRev(m_pCPart->args->url(j));
+        svn::Revision re,ra;
+        m_pCPart->m_SvnWrapper->svnclient()->url2Revision(v,re,ra);
+
         if (re != svn::Revision::UNDEFINED) {
             kdDebug()<<"Revision " << re << " gefunden. " << endl;
             m_pCPart->extraRevisions[j-2]=re;
@@ -310,11 +320,8 @@ bool CommandExec::scanRevision()
     if (revl.count()==0) {
         return false;
     }
-    m_pCPart->start=helpers::sub2qt::stringToRev(revl[0]);
+    m_pCPart->m_SvnWrapper->svnclient()->url2Revision(revstring,m_pCPart->start,m_pCPart->end);
     m_pCPart->rev_set=true;
-    if (revl.count()>1) {
-        m_pCPart->end=helpers::sub2qt::stringToRev(revl[1]);
-    }
     return true;
 }
 

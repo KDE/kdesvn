@@ -357,7 +357,11 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         QMap<QString,QString> q = url.queryItems();
         if (q.find("rev")!=q.end()) {
             QString v = q["rev"];
-            m_pList->m_remoteRevision=v.toInt();
+            svn::Revision tmp;
+            m_SvnWrapper->svnclient()->url2Revision(v,m_pList->m_remoteRevision,tmp);
+            if (m_pList->m_remoteRevision==svn::Revision::UNDEFINED) {
+                m_pList->m_remoteRevision = svn::Revision::HEAD;
+            }
         }
     }
 

@@ -43,6 +43,7 @@ public:
     virtual ~kio_svnProtocol();
     virtual void listDir (const KURL&url);
     virtual void stat(const KURL& url);
+    virtual void get(const KURL& url);
 
 private:
     KioSvnData*m_pData;

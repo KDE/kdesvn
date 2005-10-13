@@ -62,6 +62,8 @@ public:
 
     SvnActions*m_SvnWrapper;
     DummyDisplay * disp;
+
+    svn::Revision urlToRev(const KURL&);
 };
 
 KioSvnData::KioSvnData()
@@ -73,8 +75,18 @@ KioSvnData::KioSvnData()
 
 KioSvnData::~KioSvnData()
 {
-    delete m_SvnWrapper;
-    delete disp;
+}
+
+svn::Revision KioSvnData::urlToRev(const KURL&url)
+{
+    QMap<QString,QString> q = url.queryItems();
+    svn::Revision rev,tmp;
+    rev = svn::Revision::UNDEFINED;
+    if (q.find("rev")!=q.end()) {
+        QString v = q["rev"];
+        m_SvnWrapper->svnclient()->url2Revision(v,rev,tmp);
+    }
+    return rev;
 }
 
 kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket)
@@ -120,42 +132,87 @@ void kio_svnProtocol::listDir(const KURL&url)
     kdDebug() << "kio_svn::listDir(const KURL& url) : " << url.url() << endl ;
     m_pData->m_SvnWrapper->reInitClient();
     svn::DirEntries dlist;
-    svn::Revision rev = helpers::sub2qt::urlToRev(url);
+    svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    bool ret = m_pData->m_SvnWrapper->makeList(makeSvnUrl(url),dlist,rev,false);
-    if (!ret) {
-        return;
+    try {
+        dlist = m_pData->m_SvnWrapper->svnclient()->list(makeSvnUrl(url),rev,false);
+    } catch (svn::ClientException e) {
+            QString ex = QString::fromUtf8(e.message());
+            kdDebug()<<ex<<endl;
+            error(KIO::ERR_SLAVE_DEFINED,ex);
+            return;
     }
+
     KIO::UDSEntry entry;
     for (unsigned int i=0; i < dlist.size();++i) {
-        if ( createUDSEntry(dlist[i].name(),dlist[i].lastAuthor(),dlist[i].size(),
-            dlist[i].kind()==svn_node_dir?true:false,0,entry) ) {
+        QDateTime dt = helpers::sub2qt::apr_time2qt(dlist[i].time());
+        if (createUDSEntry(dlist[i].name(),dlist[i].lastAuthor(),dlist[i].size(),
+            dlist[i].kind()==svn_node_dir?true:false,dt.toTime_t(),entry) ) {
             listEntry(entry,false);
         }
+        entry.clear();
     }
+    listEntry(entry, true );
+    finished();
 }
 
 void kio_svnProtocol::stat(const KURL& url)
 {
-    kdDebug()<<"kio_svn::stat"<<endl;
+    kdDebug()<<"kio_svn::stat "<< url << endl;
     m_pData->m_SvnWrapper->reInitClient();
-    svn::Revision rev = helpers::sub2qt::urlToRev(url);
+    svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    svn::StatusEntries dlist;
-    bool ret = m_pData->m_SvnWrapper->makeStatus(makeSvnUrl(url),dlist,rev,false,true,false,false);
-    if (!ret || dlist.size()<1) {
+    svn::Status _stat;
+    try {
+        m_pData->m_SvnWrapper->svnclient()->singleStatus(makeSvnUrl(url),false,rev);
+    } catch  (svn::ClientException e) {
+        QString ex = QString::fromUtf8(e.message());
+        kdDebug()<<ex<<endl;
+        error( KIO::ERR_SLAVE_DEFINED,ex);
         return;
     }
+
     KIO::UDSEntry entry;
-    if (dlist[0].entry().kind()==svn_node_file) {
-        createUDSEntry(url.filename(),"",0,false,0,entry);
+    QDateTime dt;
+    dt = helpers::sub2qt::apr_time2qt(_stat.entry().cmtDate());
+    kdDebug()<<"DateTime: " << dt << endl;
+    if (_stat.entry().kind()==svn_node_file) {
+        createUDSEntry(url.filename(),"",0,false,dt.toTime_t(),entry);
     } else {
-        createUDSEntry(url.filename(),"",0,true,0,entry);
+        createUDSEntry(url.filename(),"",0,true,dt.toTime_t(),entry);
     }
+    statEntry(entry);
+    finished();
+}
+
+void kio_svnProtocol::get(const KURL& url)
+{
+    kdDebug()<<"kio_svn::get "<< url << endl;
+    m_pData->m_SvnWrapper->reInitClient();
+    svn::Revision rev = m_pData->urlToRev(url);
+    if (rev == svn::Revision::UNDEFINED) {
+        rev = svn::Revision::HEAD;
+    }
+    QByteArray content;
+    try {
+        content = m_pData->m_SvnWrapper->svnclient()->cat(makeSvnUrl(url),rev);
+    } catch (svn::ClientException e) {
+        QString ex = QString::fromUtf8(e.message());
+        kdDebug()<<ex<<endl;
+        error( KIO::ERR_SLAVE_DEFINED,ex);
+        return;
+    }
+    KMimeType::Ptr mt = KMimeType::findByContent(content);
+    kdDebug(7128) << "KMimeType returned : " << mt->name() << endl;
+    mimeType( mt->name() );
+    totalSize(content.size());
+    //send data
+    data(content);
+    data(QByteArray()); // empty array means we're done sending the data
     finished();
 }
 
@@ -167,12 +224,22 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
     _url.cleanPath(true);
     _url.setProtocol(proto);
     res = _url.url(-1);
+    QStringList s = QStringList::split("?",res);
+    if (s.size()>1) {
+        res = s[0];
+    }
+    while (res.endsWith("/")) {
+        res.truncate(res.length()-1);
+    }
+    kdDebug()<<"Resulting url: " << res << endl;
     return res;
 }
 
 bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry) {
+    assert(entry.count() == 0);
         kdDebug() << "MTime : " << ( long )mtime << endl;
         kdDebug() << "UDS filename : " << filename << endl;
+        kdDebug()<< "UDS Size: " << size << endl;
         KIO::UDSAtom atom;
         atom.m_uds = KIO::UDS_NAME;
         atom.m_str = filename;

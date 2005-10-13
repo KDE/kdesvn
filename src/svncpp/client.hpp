@@ -606,6 +606,10 @@ namespace svn
     unlock (const Targets&targets,
             bool break_lock) throw (ClientException);
 
+    void
+    url2Revision(const QString&revstring,
+        Revision&start,Revision&end);
+
   private:
     Context * m_context;
 

@@ -38,20 +38,6 @@ public:
 
     static QDateTime apr_time2qt(apr_time_t _time);
     static apr_time_t qt_time2apr(const QDateTime&);
-    //! forms a string to a revision
-    /*!
-     * \param r Revision string. may be a number, or HEAD, BASE, START
-     * \return a revision number
-     */
-    static svn::Revision stringToRev(const QString&r);
-    //! extracts a revions number from an url
-    /*!
-     * \param url a url containing a query with revision number<br>
-     * eg http://somewhere/item?rev=10<br>
-     * rev may be a number or HEAD/BASE/START
-     * \return a revision number
-     */
-    static svn::Revision urlToRev(const KURL&url);
 };
 
 }

@@ -51,35 +51,5 @@ apr_time_t sub2qt::qt_time2apr(const QDateTime&_time)
     return r;
 }
 
-svn::Revision sub2qt::urlToRev(const KURL&url)
-{
-    svn::Revision r = svn::Revision::UNDEFINED;
-    QMap<QString,QString> q = url.queryItems();
-    if (q.find("rev")!=q.end()) {
-        QString v = q["rev"];
-        if (!v.isEmpty()) {
-            r = stringToRev(v);
-        }
-    }
-    return r;
-}
-
-svn::Revision sub2qt::stringToRev(const QString&v)
-{
-    svn::Revision r = svn::Revision::UNDEFINED;
-    if (!QString::compare(v,"HEAD")) {
-        r = svn::Revision::HEAD;
-    } else if (!QString::compare(v,"BASE")) {
-        r = svn::Revision::BASE;
-    } else if (!QString::compare(v,"START")) {
-        r = svn::Revision::START;
-    } else if (!QString::compare(v,"WORKING")) {
-        r = svn::Revision::WORKING;
-    } else {
-        r = v.toInt();
-    }
-    return r;
-}
-
 };
 

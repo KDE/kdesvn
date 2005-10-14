@@ -186,7 +186,9 @@ int CommandExec::exec()
             if (j==2) mainProto=tmpurl.protocol();
         }
         if (j>2 && dont_check_second) {
-            tmp = mainProto+tmpurl.path();
+            if (mainProto.isEmpty()) {
+                tmp = tmpurl.path();
+            }
         }
         while (tmp.endsWith("/")) {
             tmp.truncate(tmp.length()-1);

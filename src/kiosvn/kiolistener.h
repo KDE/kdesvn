@@ -22,13 +22,19 @@
 
 #include "svncpp/context_listener.hpp"
 
+namespace KIO {
+    class SlaveBase;
+}
+
+class kio_svnProtocol;
+
 /**
 @author Rajko Albrecht
 */
 class KioListener : public svn::ContextListener
 {
 public:
-    KioListener();
+    KioListener(kio_svnProtocol*_par);
     virtual ~KioListener();
 
     /* context-listener methods */
@@ -55,6 +61,8 @@ public:
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave);
     /* context listener virtuals end */
+private:
+    kio_svnProtocol *par;
 };
 
 #endif

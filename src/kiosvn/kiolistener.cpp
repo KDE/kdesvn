@@ -18,10 +18,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "kiolistener.h"
+#include "kiosvn.h"
 
-KioListener::KioListener()
+#include <kdebug.h>
+
+#include <dcopclient.h>
+
+KioListener::KioListener(kio_svnProtocol*_par)
  : svn::ContextListener()
 {
+    par = _par;
 }
 
 
@@ -91,11 +97,27 @@ bool KioListener::contextSslClientCertPwPrompt (QString & password,
     return false;
 }
 
-bool KioListener::contextGetLogin (const QString & /*realm*/,
+bool KioListener::contextGetLogin (const QString & realm,
                      QString & /*username*/,
                      QString & /*password*/,
                      bool & /*maySave*/)
 {
-    return false;
+    QByteArray reply;
+    QByteArray params;
+    QCString replyType;
+
+    QDataStream stream(params,IO_WriteOnly);
+    stream << realm;
+
+    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface","get_login(QString)",params,replyType,reply)) {
+        kdWarning()<<"Communication with dcop failed"<<endl;
+        return false;
+    }
+    if (replyType!="QStringList") {
+        kdWarning()<<"Wrong reply type"<<endl;
+    }
+    QDataStream stream2(reply,IO_ReadOnly);
+    stream2>>reply;
+
 }
 

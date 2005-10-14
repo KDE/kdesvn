@@ -20,7 +20,7 @@
 #ifndef SSLTRUSTPROMPT_IMPL_H
 #define SSLTRUSTPROMPT_IMPL_H
 
-#include "ssltrustprompt.h"
+#include "src/svnfrontend/ssltrustprompt.h"
 
 class SslTrustPrompt_impl: public SslTrustPrompt {
 Q_OBJECT

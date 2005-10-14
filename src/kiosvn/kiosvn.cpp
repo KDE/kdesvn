@@ -58,7 +58,7 @@
 class KioSvnData
 {
 public:
-    KioSvnData();
+    KioSvnData(kio_svnProtocol*);
     virtual ~KioSvnData();
 
     void reInitClient();
@@ -70,7 +70,8 @@ public:
     svn::Revision urlToRev(const KURL&);
 };
 
-KioSvnData::KioSvnData()
+KioSvnData::KioSvnData(kio_svnProtocol*par)
+    : m_Listener(par)
 {
     m_CurrentContext = 0;
     reInitClient();
@@ -104,7 +105,7 @@ svn::Revision KioSvnData::urlToRev(const KURL&url)
 kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket)
     : SlaveBase("kio_svn", pool_socket, app_socket)
 {
-    m_pData=new KioSvnData;
+    m_pData=new KioSvnData(this);
 }
 
 kio_svnProtocol::~kio_svnProtocol()

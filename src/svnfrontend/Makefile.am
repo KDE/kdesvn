@@ -3,18 +3,23 @@ METASOURCES = AUTO
 BUILT_SOURCES = settings.h
 kde_kcfg_DATA = kdesvn_part.kcfg
 
-noinst_LTLIBRARIES = libsvnfrontend.la
+noinst_LTLIBRARIES = libsvnfrontend.la libsvnfrontend_helpers.la
+
 noinst_HEADERS = kdesvnfilelist.h filelistviewitem.h svnlogdlgimp.h \
-															svnactions.h rangeinput_impl.h ccontextlistener.h authdialogimpl.h propertiesdlg.h \
-											editproperty_impl.h logmsg_impl.h checkoutinfo_impl.h stopdlg.h importdir_logmsg.h \
-							mergedlg_impl.h copymoveview_impl.h ssltrustprompt_impl.h itemdisplay.h svnfiletip.h \
-		dummydisplay.h commandexec.h displaysettings_impl.h subversionsettings_impl.h
+				svnactions.h rangeinput_impl.h ccontextlistener.h authdialogimpl.h propertiesdlg.h \
+				editproperty_impl.h logmsg_impl.h checkoutinfo_impl.h stopdlg.h importdir_logmsg.h \
+				mergedlg_impl.h copymoveview_impl.h ssltrustprompt_impl.h itemdisplay.h svnfiletip.h \
+				dummydisplay.h commandexec.h displaysettings_impl.h subversionsettings_impl.h
 
 libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
-				svnactions.cpp rangeinput.ui rangeinput_impl.cpp ccontextlistener.cpp authdlg.ui \
-				authdialogimpl.cpp propertiesdlg.cpp editpropsdlg.ui editproperty_impl.cpp logmessage.ui \
-				logmsg_impl.cpp checkoutinfo.ui checkoutinfo_impl.cpp stopdlg.cpp importdir_logmsg.cpp \
-				merge_dlg.ui mergedlg_impl.cpp copymoveview.ui copymoveview_impl.cpp \
-				ssltrustprompt.ui ssltrustprompt_impl.cpp svnitem.cpp kdesvnfilelist.cpp itemdisplay.cpp \
+			svnactions.cpp ccontextlistener.cpp \
+			propertiesdlg.cpp editpropsdlg.ui editproperty_impl.cpp \
+			checkoutinfo.ui checkoutinfo_impl.cpp stopdlg.cpp importdir_logmsg.cpp \
+			merge_dlg.ui mergedlg_impl.cpp copymoveview.ui copymoveview_impl.cpp \
+			svnitem.cpp kdesvnfilelist.cpp itemdisplay.cpp \
 			svnfiletip.cpp dummydisplay.cpp commandexec.cpp subversion_settings.ui \
-			display_settings.ui displaysettings_impl.cpp subversionsettings_impl.cpp settings.kcfgc
+			display_settings.ui displaysettings_impl.cpp subversionsettings_impl.cpp
+
+libsvnfrontend_helpers_la_SOURCES = rangeinput.ui rangeinput_impl.cpp  authdlg.ui \
+		authdialogimpl.cpp ssltrustprompt.ui ssltrustprompt_impl.cpp \
+		logmessage.ui logmsg_impl.cpp  settings.kcfgc

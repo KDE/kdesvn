@@ -43,6 +43,7 @@ namespace svn
   {
     "http","https","file",
     "svn","svn+ssh","svn+http","svn+https","svn+file",
+    "ksvn","ksvn+ssh","ksvn+http","ksvn+https","ksvn+file","ksvn",
     0
   };
 
@@ -77,12 +78,19 @@ namespace svn
   Url::transformProtokoll(const QString&prot)
   {
     QString _prot = prot.lower();
-    if (QString::compare(_prot,"svn+http")==0) {
+    if (QString::compare(_prot,"svn+http")==0||
+        QString::compare(_prot,"ksvn+http")==0) {
         return QString("http");
-    } else if (QString::compare(_prot,"svn+https")==0) {
+    } else if (QString::compare(_prot,"svn+https")==0||
+               QString::compare(_prot,"ksvn+https")==0) {
         return QString("https");
-    }else if (QString::compare(_prot,"svn+file")==0) {
+    }else if (QString::compare(_prot,"svn+file")==0||
+              QString::compare(_prot,"ksvn+file")==0) {
         return QString("file");
+    } else if (QString::compare(_prot,"ksvn+ssh")==0) {
+        return QString("svn+ssh");
+    } else if (QString::compare(_prot,"ksvn")==0) {
+        return QString("svn");
     }
     return _prot;
   }

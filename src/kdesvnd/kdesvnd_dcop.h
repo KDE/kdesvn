@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2005 by Rajko Albrecht                                  *
- *   ral@alwins-world.de                                                   *
+ *   rajko.albrecht@tecways.com                                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -15,26 +15,51 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef AUTHDIALOGIMPL_H
-#define AUTHDIALOGIMPL_H
 
-#include "src/svnfrontend/authdlg.h"
+
+#ifndef _kdesvnd_dcop_H
+#define _kdesvnd_dcop_H
+
+#include <qstringlist.h>
 #include <qstring.h>
+#include <dcopobject.h>
 
-class AuthDialogImpl: public AuthDialogData {
-Q_OBJECT
-public:
-    AuthDialogImpl(const QString & realm = "", QWidget *parent = 0, const char *name = 0);
+class kdesvnd_dcop :  public DCOPObject
+{
+    K_DCOP
 
-    const QString Username()const;
-    const QString Password();
-    bool maySave()const;
-protected slots:
-    virtual void slotHelp();
-protected:
-    QString curPass;
+    private:
+        QStringList m_List;
+
+    public:
+        kdesvnd_dcop();
+
+        virtual ~kdesvnd_dcop();
+
+    k_dcop:
+        QString string(int);
+
+        QStringList list();
+
+        void add(QString);
+
+        bool remove(QString);
+
+        bool exit();
+
+        //! get a subversion login
+        /*!
+         * \param realm the realm
+         * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
+         */
+        QStringList get_login(QString);
+
+        //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
+        // return: -1 dont accept 0 accept temporary 1 accept always
+        int get_sslaccept(QString, QString,     QString,   QString,    QString,     QString);
+
+
 };
-
 #endif

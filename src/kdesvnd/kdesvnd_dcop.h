@@ -52,5 +52,7 @@ k_dcop:
 
     // returns cert file or empty string
     QString get_sslclientcertfile();
+    // return a logmessage at pos 0, null-size list if cancel hit
+    QStringList get_logmsg();
 };
 #endif

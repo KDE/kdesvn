@@ -22,6 +22,7 @@
 #include "kdesvnd_dcop.h"
 #include "authdialogimpl.h"
 #include "ssltrustprompt_impl.h"
+#include "logmsg_impl.h"
 
 #include <kdebug.h>
 #include <kapplication.h>
@@ -88,4 +89,16 @@ QString kdesvnd_dcop::get_sslclientcertfile()
         0,
         i18n("Open a file with a #PKCS12 certificate"));
     return afile;
+}
+
+QStringList kdesvnd_dcop::get_logmsg()
+{
+    QStringList res;
+    bool ok;
+    QString logMessage = Logmsg_impl::getLogmessage(&ok,0,0,"logmsg_impl");
+    if (!ok) {
+        return res;
+    }
+    res.append(logMessage);
+    return res;
 }

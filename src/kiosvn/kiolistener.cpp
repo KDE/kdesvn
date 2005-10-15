@@ -52,7 +52,32 @@ bool KioListener::contextCancel()
  */
 bool KioListener::contextGetLogMessage (QString & msg)
 {
-    msg = "";
+#if 0
+    QByteArray reply;
+    QByteArray params;
+    QCString replyType;
+
+    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface","get_logmsg()",params,replyType,reply)) {
+        msg = "Communication with dcop failed";
+        kdWarning()<<msg<<endl;
+        return false;
+    }
+    if (replyType!="QStringList") {
+        msg = "Wrong reply type";
+        kdWarning()<<msg<<endl;
+        return false;
+    }
+    QDataStream stream2(reply,IO_ReadOnly);
+    QStringList lt;
+    stream2>>lt;
+    if (lt.count()!=1) {
+        msg = "Wrong or missing log (may cancel pressed).";
+        kdDebug()<< msg << endl;
+        return false;
+    }
+    msg = lt[0];
+#endif
+    msg = "Made with a kio::svn client";
     return true;
 }
 

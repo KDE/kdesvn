@@ -44,10 +44,15 @@ public:
     virtual void listDir (const KURL&url);
     virtual void stat(const KURL& url);
     virtual void get(const KURL& url);
+    virtual void mkdir (const KURL &url, int permissions);
+    virtual void rename(const KURL&src,const KURL&target,bool force);
+    virtual void del(const KURL&url,bool isfile);
+    virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
 
 private:
     KioSvnData*m_pData;
     bool createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);
     static QString makeSvnUrl(const KURL&url);
+    bool getLogMsg(QString&);
 };
 #endif

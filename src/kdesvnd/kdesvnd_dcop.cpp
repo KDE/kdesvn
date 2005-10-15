@@ -25,6 +25,9 @@
 
 #include <kdebug.h>
 #include <kapplication.h>
+#include <kmessagebox.h>
+#include <klocale.h>
+#include <kfiledialog.h>
 
 kdesvnd_dcop::kdesvnd_dcop() : DCOPObject("kdesvndInterface")
 {
@@ -35,34 +38,6 @@ kdesvnd_dcop::kdesvnd_dcop() : DCOPObject("kdesvndInterface")
 kdesvnd_dcop::~kdesvnd_dcop()
 {
     kdDebug() << "Going away... " << endl;
-}
-
-QString kdesvnd_dcop::string(int idx)
-{
-    return *m_List.at(idx);
-}
-
-QStringList kdesvnd_dcop::list()
-{
-    return m_List;
-}
-
-void kdesvnd_dcop::add(QString arg)
-{
-    kdDebug() << "Adding " << arg << " to the list" << endl;
-    m_List << arg;
-}
-
-bool kdesvnd_dcop::remove(QString arg)
-{
-    QStringList::Iterator it = m_List.find(arg);
-    if (it != m_List.end())
-    {
-        m_List.remove(it);
-    }
-    else
-        return false;
-    return true;
 }
 
 bool kdesvnd_dcop::exit()
@@ -104,4 +79,13 @@ int kdesvnd_dcop::get_sslaccept(QString hostname,QString fingerprint,QString val
         return 0;
     }
     return 1;
+}
+
+QString kdesvnd_dcop::get_sslclientcertfile()
+{
+    QString afile = KFileDialog::getOpenFileName(QString::null,
+        QString::null,
+        0,
+        i18n("Open a file with a #PKCS12 certificate"));
+    return afile;
 }

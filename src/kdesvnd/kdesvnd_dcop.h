@@ -30,36 +30,27 @@ class kdesvnd_dcop :  public DCOPObject
 {
     K_DCOP
 
-    private:
-        QStringList m_List;
+private:
+    QStringList m_List;
 
-    public:
-        kdesvnd_dcop();
+public:
+    kdesvnd_dcop();
+    virtual ~kdesvnd_dcop();
 
-        virtual ~kdesvnd_dcop();
+k_dcop:
+    bool exit();
+    //! get a subversion login
+    /*!
+    * \param realm the realm
+    * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
+    */
+    QStringList get_login(QString);
 
-    k_dcop:
-        QString string(int);
+    // return: -1 dont accept 0 accept temporary 1 accept always
+    //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
+    int get_sslaccept(QString, QString,     QString,   QString,    QString,     QString);
 
-        QStringList list();
-
-        void add(QString);
-
-        bool remove(QString);
-
-        bool exit();
-
-        //! get a subversion login
-        /*!
-         * \param realm the realm
-         * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
-         */
-        QStringList get_login(QString);
-
-        //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
-        // return: -1 dont accept 0 accept temporary 1 accept always
-        int get_sslaccept(QString, QString,     QString,   QString,    QString,     QString);
-
-
+    // returns cert file or empty string
+    QString get_sslclientcertfile();
 };
 #endif

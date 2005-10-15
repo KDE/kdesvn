@@ -64,14 +64,16 @@ public:
     void reInitClient();
 
     KioListener m_Listener;
+    bool first_done;
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 
     svn::Revision urlToRev(const KURL&);
+
 };
 
 KioSvnData::KioSvnData(kio_svnProtocol*par)
-    : m_Listener(par)
+    : m_Listener(par),first_done(false)
 {
     m_CurrentContext = 0;
     reInitClient();
@@ -79,6 +81,10 @@ KioSvnData::KioSvnData(kio_svnProtocol*par)
 
 void KioSvnData::reInitClient()
 {
+    if (first_done) {
+        return;
+    }
+    first_done = true;
     delete m_CurrentContext;
     m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(&m_Listener);
@@ -103,7 +109,7 @@ svn::Revision KioSvnData::urlToRev(const KURL&url)
 }
 
 kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket)
-    : SlaveBase("kio_svn", pool_socket, app_socket)
+    : SlaveBase("kio_ksvn", pool_socket, app_socket)
 {
     m_pData=new KioSvnData(this);
 }
@@ -128,21 +134,28 @@ extern "C"
     KDE_EXPORT int kdemain(int argc, char **argv);
 }
 
-int kdemain(int argc, char **argv)    {
+int kdemain(int argc, char **argv)
+{
     kdDebug()<<"kdemain" << endl;
-    KInstance instance( "kio_svn" );
+    KInstance instance( "kio_ksvn" );
+   // start the kdesvnd DCOP service
+    QString error;
+    QCString appId;
 
-    kdDebug(7101) << "*** Starting kio_svn " << endl;
+    kdDebug(7101) << "*** Starting kdesvnd " << endl;
+    KApplication::startServiceByDesktopName("kdesvnd", QStringList(), &error, &appId);
+
+    kdDebug(7101) << "*** Starting kio_ksvn " << endl;
 
     if (argc != 4) {
-        kdDebug(7101) << "Usage: kio_svn  protocol domain-socket1 domain-socket2" << endl;
+        kdDebug(7101) << "Usage: kio_ksvn  protocol domain-socket1 domain-socket2" << endl;
         exit(-1);
     }
 
     kio_svnProtocol slave(argv[2], argv[3]);
     slave.dispatchLoop();
 
-    kdDebug(7101) << "*** kio_svn Done" << endl;
+    kdDebug(7101) << "*** kio_ksvn Done" << endl;
     return 0;
 }
 
@@ -169,6 +182,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     }
 
     KIO::UDSEntry entry;
+    totalSize(dlist.size());
     for (unsigned int i=0; i < dlist.size();++i) {
         QDateTime dt = helpers::sub2qt::apr_time2qt(dlist[i].time());
         if (createUDSEntry(dlist[i].name(),dlist[i].lastAuthor(),dlist[i].size(),
@@ -202,7 +216,6 @@ void kio_svnProtocol::stat(const KURL& url)
     KIO::UDSEntry entry;
     QDateTime dt;
     dt = helpers::sub2qt::apr_time2qt(_stat.entry().cmtDate());
-    kdDebug()<<"DateTime: " << dt << endl;
     if (_stat.entry().kind()==svn_node_file) {
         createUDSEntry(url.filename(),"",0,false,dt.toTime_t(),entry);
     } else {
@@ -260,9 +273,11 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
 
 bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)
 {
+#if 0
         kdDebug() << "MTime : " << ( long )mtime << endl;
         kdDebug() << "UDS filename : " << filename << endl;
         kdDebug()<< "UDS Size: " << size << endl;
+#endif
         KIO::UDSAtom atom;
         atom.m_uds = KIO::UDS_NAME;
         atom.m_str = filename;

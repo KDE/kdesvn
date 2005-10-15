@@ -23,3 +23,5 @@ libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 libsvnfrontend_helpers_la_SOURCES = rangeinput.ui rangeinput_impl.cpp  authdlg.ui \
 		authdialogimpl.cpp ssltrustprompt.ui ssltrustprompt_impl.cpp \
 		logmessage.ui logmsg_impl.cpp  settings.kcfgc
+libsvnfrontend_la_LIBADD =\
+	$(top_builddir)/src/svnfrontend/libsvnfrontend_helpers.la

@@ -20,7 +20,7 @@
 #ifndef LOGMSG_IMPL_H
 #define LOGMSG_IMPL_H
 
-#include "logmessage.h"
+#include "src/svnfrontend/logmessage.h"
 #include <qvaluelist.h>
 
 class Logmsg_impl: public LogmessageData {

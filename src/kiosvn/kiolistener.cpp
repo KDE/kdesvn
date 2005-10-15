@@ -43,7 +43,7 @@ KioListener::~KioListener()
  */
 bool KioListener::contextCancel()
 {
-    return false;
+    return par->wasKilled();
 }
 
 
@@ -83,12 +83,67 @@ svn::ContextListener::SslServerTrustAnswer
 KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
                                  apr_uint32_t & acceptedFailures)
 {
+    QByteArray reply;
+    QByteArray params;
+    QCString replyType;
+    QDataStream stream(params,IO_WriteOnly);
+    stream << data.hostname
+        << data.fingerprint
+        << data.validFrom
+        << data.validUntil
+        << data.issuerDName
+        << data.realm;
+
+    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface",
+        "get_sslaccept(QString,QString,QString,QString,QString,QString)",
+        params,replyType,reply)) {
+        kdWarning()<<"Communication with dcop failed"<<endl;
+        return DONT_ACCEPT;
+    }
+    if (replyType!="int") {
+        kdWarning()<<"Wrong reply type"<<endl;
+        return DONT_ACCEPT;
+    }
+    QDataStream stream2(reply,IO_ReadOnly);
+    int res;
+    stream2>>res;
+    switch (res) {
+        case -1:
+            return DONT_ACCEPT;
+            break;
+        case 1:
+            return ACCEPT_PERMANENTLY;
+            break;
+        default:
+        case 0:
+            return ACCEPT_TEMPORARILY;
+            break;
+    }
+    /* avoid compiler warnings */
     return ACCEPT_TEMPORARILY;
 }
 
 bool KioListener::contextSslClientCertPrompt (QString & certFile)
 {
-    return false;
+    QByteArray reply;
+    QByteArray params;
+    QCString replyType;
+    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface",
+        "get_sslclientcertfile()",
+        params,replyType,reply)) {
+        kdWarning()<<"Communication with dcop failed"<<endl;
+        return false;
+    }
+    if (replyType!="QString") {
+        kdWarning()<<"Wrong reply type"<<endl;
+        return false;
+    }
+    QDataStream stream2(reply,IO_ReadOnly);
+    stream2>>certFile;
+    if (certFile.isEmpty()) {
+        return false;
+    }
+    return true;
 }
 
 bool KioListener::contextSslClientCertPwPrompt (QString & password,
@@ -98,9 +153,9 @@ bool KioListener::contextSslClientCertPwPrompt (QString & password,
 }
 
 bool KioListener::contextGetLogin (const QString & realm,
-                     QString & /*username*/,
-                     QString & /*password*/,
-                     bool & /*maySave*/)
+                     QString & username,
+                     QString & password,
+                     bool & maySave)
 {
     QByteArray reply;
     QByteArray params;
@@ -115,9 +170,17 @@ bool KioListener::contextGetLogin (const QString & realm,
     }
     if (replyType!="QStringList") {
         kdWarning()<<"Wrong reply type"<<endl;
+        return false;
     }
     QDataStream stream2(reply,IO_ReadOnly);
-    stream2>>reply;
-
+    QStringList lt;
+    stream2>>lt;
+    if (lt.count()!=3) {
+        kdDebug()<<"Wrong or missing auth list (may cancel pressed)." << endl;
+        return false;
+    }
+    username = lt[0];
+    password = lt[1];
+    maySave = lt[2]=="true";
+    return true;
 }
-

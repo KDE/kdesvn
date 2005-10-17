@@ -741,17 +741,12 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
 {
     if (!m_Data->m_CurrentContext) return;
     QString ex;
-    svn_revnum_t ret;
+    svn::Revisions ret;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
-        for (unsigned int i = 0; i<what.count();++i) {
-            ret = m_Data->m_Svnclient.update(svn::Path(what[i]),
-                rev, recurse);
-            kapp->processEvents();
-            if (sdlg.cancelld()) {
-                break;
-            }
-        }
+        svn::Targets pathes(what);
+        // always update externals, too. (last parameter)
+        ret = m_Data->m_Svnclient.update(pathes,rev, recurse,false);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);

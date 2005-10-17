@@ -413,13 +413,14 @@ namespace svn
      * @param revisionEnd
      * @param discoverChangedPaths
      * @param strictNodeHistory
+     * @param limit (ignored when subversion 1.1 API)
      * @return a vector with log entries
      */
     const LogEntries *
     log (const QString& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,
-         bool strictNodeHistory=true) throw (ClientException);
+         bool strictNodeHistory=true,int limit = 0) throw (ClientException);
 
     /**
      * Produce diff output which describes the delta between

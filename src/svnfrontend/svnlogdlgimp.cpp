@@ -280,7 +280,7 @@ void SvnLogDlgImp::slotListEntries()
         buttonListFiles->setEnabled(false);
         return;
     }
-    const svn::LogEntries*_log = m_Actions->getLog(it->rev(),it->rev(),_name,true);
+    const svn::LogEntries*_log = m_Actions->getLog(it->rev(),it->rev(),_name,true,0);
     if (!_log) {
         return;
     }

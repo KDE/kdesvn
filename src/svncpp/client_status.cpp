@@ -389,12 +389,27 @@ namespace svn
   const LogEntries *
   Client::log (const QString& path, const Revision & revisionStart,
                const Revision & revisionEnd, bool discoverChangedPaths,
-               bool strictNodeHistory ) throw (ClientException)
+               bool strictNodeHistory,int limit) throw (ClientException)
   {
     Targets target(path);
     Pool pool;
     LogEntries * entries = new LogEntries ();
     svn_error_t *error;
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    error = svn_client_log2 (
+      target.array (pool),
+      revisionStart.revision (),
+      revisionEnd.revision (),
+      limit,
+      discoverChangedPaths ? 1 : 0,
+      strictNodeHistory ? 1 : 0,
+      logReceiver,
+      entries,
+      *m_context, // client ctx
+      pool);
+
+#else
     error = svn_client_log (
       target.array (pool),
       revisionStart.revision (),
@@ -405,6 +420,7 @@ namespace svn
       entries,
       *m_context, // client ctx
       pool);
+#endif
 
     if (error != NULL)
     {

@@ -79,9 +79,9 @@ public:
     void deleteFromModifiedCache(const QString&what);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
-    void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false);
-    void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false);
-    const QValueList<svn::LogEntry> * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files);
+    void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false,int limit = 0);
+    void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false, int limit=0);
+    const QValueList<svn::LogEntry> * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);
 
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, const QString&);

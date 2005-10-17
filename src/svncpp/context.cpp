@@ -28,10 +28,8 @@
  *
  *  SVN_CLIENT_COMMIT_ITEM_LOCK_TOKEN
  *  svn_client_checkout2
- *  svn_client_update2
  *  snv_client_commit2
  *  svn_client_status2
- *  svn_client_log2
  *  svn_client_blame2
  *  svn_client_diff2
  *  svn_client_diff_peg2

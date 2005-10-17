@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>271</width>
-            <height>151</height>
+            <width>293</width>
+            <height>202</height>
         </rect>
     </property>
     <property name="caption">
@@ -64,7 +64,24 @@ If it works slow (low connection and so on) you should turn of this feature.</st
                 <string>Logs always reads list of changed files</string>
             </property>
         </widget>
+        <widget class="KIntNumInput">
+            <property name="name">
+                <cstring>kcfg_maximum_displayed_logs</cstring>
+            </property>
+            <property name="label">
+                <string>Maximum displayed logs when full log (0 for no limit)</string>
+            </property>
+            <property name="minValue">
+                <number>0</number>
+            </property>
+        </widget>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>knuminput.h</includehint>
+    <includehint>knuminput.h</includehint>
+</includehints>
 </UI>

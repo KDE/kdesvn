@@ -43,6 +43,10 @@
       <label>Display ignored files</label>
       <default>true</default>
     </entry>
+    <entry name="maximum_displayed_logs" type="Int">
+        <label>Maximum displayed logs when full log (0 for no limit)</label>
+        <default>0</default>
+    </entry>
     <entry name="log_follows_nodes" type="Bool">
       <label>Log follows node changes</label>
       <default>true</default>

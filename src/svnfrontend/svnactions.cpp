@@ -167,7 +167,8 @@ void SvnActions::slotMakeRangeLog()
     int i = dlg->exec();
     if (i==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        makeLog(r.first,r.second,k,list);
+        //int l = Settings::self()->maximum_displayed_logs();
+        makeLog(r.first,r.second,k,list,0);
     }
     dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
 }
@@ -181,22 +182,25 @@ void SvnActions::slotMakeLog()
     if (!m_Data->m_ParentList) return;
     SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
-    svn::Revision start(svn::Revision::START);
-    svn::Revision end(svn::Revision::HEAD);
+    // yes! so if we have a limit, the limit counts from HEAD
+    // not from START
+    svn::Revision start(svn::Revision::HEAD);
+    svn::Revision end(svn::Revision::START);
     bool list = Settings::self()->log_always_list_changed_files();
-    makeLog(start,end,k,list);
+    int l = Settings::self()->maximum_displayed_logs();
+    makeLog(start,end,k,list,l);
 }
 
 /*!
     \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
  */
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files)
+void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files,int limit)
 {
     if (!k)return;
-    makeLog(start,end,k->fullName(),list_files);
+    makeLog(start,end,k->fullName(),list_files,limit);
 }
 
-const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files)
+const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files,int limit)
 {
     const svn::LogEntries * logs = 0;
     QString ex;
@@ -206,7 +210,7 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
-        logs = m_Data->m_Svnclient.log(which,start,end,list_files,!follow);
+        logs = m_Data->m_Svnclient.log(which,start,end,list_files,!follow,limit);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -220,9 +224,9 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
     return logs;
 }
 
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files)
+void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files,int limit)
 {
-    const svn::LogEntries * logs = getLog(start,end,which,list_files);
+    const svn::LogEntries * logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;
     SvnLogDlgImp disp(this);
     disp.dispLog(logs,which);

@@ -35,6 +35,8 @@
 #include "svncpp/path.hpp"
 #include "svncpp/pool.hpp"
 
+#include <qstringlist.h>
+
 #include <kdebug.h>
 
 
@@ -43,6 +45,18 @@ namespace svn
   Targets::Targets (const QValueList<Path> & targets)
   {
     m_targets = targets;
+  }
+
+  Targets::Targets(const QStringList&targets)
+  {
+    m_targets.clear();
+    for (unsigned int i = 0; i < targets.size();++i) {
+        if (targets[i].isEmpty()) {
+            m_targets.push_back("");
+        } else {
+            m_targets.push_back(targets[i]);
+        }
+    }
   }
 
   Targets::Targets (const apr_array_header_t * apr_targets)
@@ -125,11 +139,11 @@ namespace svn
   }
 
   const Path
-  Targets::target () const
+  Targets::target (unsigned int which) const
   {
-    if (m_targets.size () > 0)
+    if (m_targets.size () > which)
     {
-      return m_targets[0];
+      return m_targets[which];
     }
     else
     {

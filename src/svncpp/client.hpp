@@ -67,6 +67,7 @@ namespace svn
   typedef QValueList<Status> StatusEntries;
   typedef QValueList<DirEntry> DirEntries;
   typedef QValueList<AnnotateLine> AnnotatedFile;
+  typedef QValueList<Revision> Revisions;
 
   // map of property names to values
   typedef QMap<QString,QString> PropertiesMap;
@@ -196,16 +197,17 @@ namespace svn
 
     /**
      * Updates the file or directory.
-     * @param path target file.
+     * @param path targets.
      * @param revision the revision number to checkout.
      *                 Revision::HEAD will checkout the
      *                 latest revision.
      * @param recurse recursively update.
+     * @param ignore_external ignore externals (only when Subversion 1.2 or above)
      * @exception ClientException
      */
-    svn_revnum_t
-    update (const Path & path, const Revision & revision,
-            bool recurse) throw (ClientException);
+    Revisions
+    update (const Targets & path, const Revision & revision,
+            bool recurse,bool ignore_externals) throw (ClientException);
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -623,6 +625,16 @@ namespace svn
      */
     Client (const Client &);
 
+    //! old style update
+    /*!
+     * used internal for subversion lib below 1.2
+     * \param path the path to update
+     * \param revision update to revision
+     * \param recurse make update recursive
+     * \return to which revision the item is updated
+     * @exception ClientException
+     */
+    svn_revnum_t update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException);
   };
 
 }

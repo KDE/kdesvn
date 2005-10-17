@@ -129,10 +129,45 @@ namespace svn
       throw ClientException (error);
   }
 
-  svn_revnum_t
-  Client::update (const Path & path,
+  Revisions
+  Client::update (const Targets & path,
                   const Revision & revision,
-                  bool recurse) throw (ClientException)
+                  bool recurse,
+                  bool ignore_externals) throw (ClientException)
+  {
+    Pool pool;
+    Revisions resulting;
+    svn_error_t * error;
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    apr_pool_t *apr_pool = pool.pool();
+    apr_array_header_t *apr_revisions = apr_array_make (apr_pool,
+                      path.size(),
+                      sizeof (svn_revnum_t));
+    error = svn_client_update2(&apr_revisions,path.array(pool),revision.revision(),recurse,ignore_externals,*m_context,pool);
+    if (error!=NULL) {
+        throw ClientException(error);
+    }
+    for (int i = 0; i < apr_revisions->nelts; ++i)
+    {
+      svn_revnum_t * _rev =
+        &APR_ARRAY_IDX (apr_revisions, i, svn_revnum_t);
+
+      resulting.push_back((*_rev));
+    }
+#else
+    svn_revnum_t revnum;
+    for (unsigned int i=0; i < path.size();++i) {
+        error = 0L;
+        revnum = 0;
+        revnum = update_old(path.target(i),revision,recurse);
+        resulting.push_back(revnum);
+    }
+#endif
+    return resulting;
+  }
+
+  svn_revnum_t Client::update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException)
   {
     Pool pool;
     svn_revnum_t revnum = 0;

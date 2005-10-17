@@ -31,6 +31,7 @@
 // apr api
 #include "apr_tables.h"
 
+class QStringList;
 
 namespace svn
 {
@@ -73,6 +74,11 @@ namespace svn
      * @param target
      */
     Targets (const char * target);
+    /**
+     * Constructor. Convert stringlist into target list.
+     * @param targets
+     */
+    Targets::Targets(const QStringList&targets);
 
     /**
      * Copy Constructor
@@ -119,15 +125,15 @@ namespace svn
     }
 
     /**
-     * returns one single target. in fact,
-     * the first in the vector, it there are more
-     * than one. if there is no target returns
+     * returns one single target.
+     * the first in the vector, if no parameter given if there are more
+     * than one. if there is no target or parameter > then stored pathes returns
      * an empty path
-     *
+     * \param which which item we want
      * @return single path
      */
     const Path
-    target () const;
+    target(unsigned int which = 0) const;
 
 
   private:

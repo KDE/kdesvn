@@ -198,10 +198,10 @@ void kdesvnfilelist::setupActions()
     /* 3. actions only on dirs */
     m_MkdirAction = new KAction("New folder","folder_new",
         KShortcut(),this,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
-    m_switchRepository = new KAction("Switch repository","svn_switch",KShortcut(),
+    m_switchRepository = new KAction("Switch repository","svnswitch",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
     m_switchRepository->setToolTip(i18n("Switch repository of working copy (\"svn switch\")"));
-    tmp_action = new KAction(i18n("Relocate working copy url"),"svn_switch",KShortcut(),
+    tmp_action = new KAction(i18n("Relocate working copy url"),"svnrelocate",KShortcut(),
         this,SLOT(slotRelocate()),m_filesAction,"make_svn_relocate");
     tmp_action->setToolTip(i18n("Relocate url of current working copy to a new one"));
 

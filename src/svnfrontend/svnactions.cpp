@@ -1433,6 +1433,9 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
         data = mp["svn:ignore"];
     }
     bool result = false;
+#if 0
+    /* doesnt work sometimes - seems a problem with qregexp */
+    kdDebug()<<QRegExp::escape(name)<<endl;
     QRegExp reg("\\b"+QRegExp::escape(name)+"\\n");
     if (reg.search(data)!=-1) {
         if (unignore) {
@@ -1448,8 +1451,24 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
             result = true;
         }
     }
+#else
+    /* cause above doesn't work we will do that slow */
+    QStringList lst = QStringList::split("\n",data);
+    QStringList::iterator it = lst.find(name);
+    if (it != lst.end()) {
+        if (unignore) {
+            lst.erase(it);
+            result = true;
+        }
+    } else {
+        if (!unignore) {
+            lst.append(name);
+            result = true;
+        }
+    }
+#endif
     if (result) {
-
+        data = lst.join("\n");
         try {
             m_Data->m_Svnclient.propset("svn:ignore",data,p,r);
         } catch (svn::ClientException e) {

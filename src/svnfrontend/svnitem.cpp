@@ -200,7 +200,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             }
         }
         if (mod) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("exclam",KIcon::Desktop,size);
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("modified",KIcon::Desktop,size);
         }
         if (!p2.isNull()) {
             QImage i1; i1 = p;

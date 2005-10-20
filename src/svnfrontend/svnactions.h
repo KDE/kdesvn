@@ -109,6 +109,7 @@ protected:
 
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);
+    void makeAdd(bool rec);
 
 public slots:
     virtual void slotMakeRangeLog();
@@ -119,6 +120,7 @@ public slots:
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();
     virtual void slotAdd();
+    virtual void slotAddRec();
     virtual void slotCheckoutCurrent();
     virtual void slotExportCurrent();
     virtual void slotCheckout();

@@ -46,6 +46,7 @@
     <Action name="make_svn_property" />
     <Separator/>
     <Action name="make_svn_add" />
+    <Action name="make_svn_addrec" />
     <Action name="make_svn_revert" />
     <Action name="make_resolved" />
     <Action name="make_svn_merge_revisions" />
@@ -126,6 +127,7 @@
   <Action name="make_svn_blame" />
   <Separator name="separator_2" />
   <Action name="make_svn_add" />
+  <Action name="make_svn_addrec" />
   <Action name="make_svn_remove" />
   <Action name="make_svn_merge_revisions" />
   <Separator name="separator_1" />

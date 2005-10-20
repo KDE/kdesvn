@@ -826,6 +826,16 @@ void SvnActions::slotUpdateTo()
  */
 void SvnActions::slotAdd()
 {
+    makeAdd(false);
+}
+
+void SvnActions::slotAddRec()
+{
+    makeAdd(true);
+}
+
+void SvnActions::makeAdd(bool rec)
+{
     if (!m_Data->m_CurrentContext) return;
     if (!m_Data->m_ParentList) return;
     QPtrList<SvnItem> lst;
@@ -846,7 +856,7 @@ void SvnActions::slotAdd()
         }
         items.push_back(svn::Path(cur->fullName()));
     }
-    addItems(items);
+    addItems(items,rec);
     liter.toFirst();
 #if 0
     while ((cur=liter.current())!=0){

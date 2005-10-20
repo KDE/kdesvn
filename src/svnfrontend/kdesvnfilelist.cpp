@@ -220,6 +220,10 @@ void kdesvnfilelist::setupActions()
     m_AddCurrent = new KAction("Add selected files/dirs",
         "svnadd",KShortcut(Key_Insert),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
     m_AddCurrent->setToolTip(i18n("Adding selected files and/or directories to repository"));
+    tmp_action = new KAction("Add selected files/dirs recursive",
+        "svnaddrecursive",KShortcut(CTRL+Key_Insert),m_SvnWrapper,SLOT(slotAddRec()),m_filesAction,"make_svn_addrec");
+    tmp_action->setToolTip(i18n("Adding selected files and/or directories to repository and all subitems of folders"));
+
     m_DelCurrent = new KAction("Delete selected files/dirs","svndelete",
         KShortcut(Key_Delete),this,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
@@ -615,6 +619,10 @@ void kdesvnfilelist::enableActions()
     m_ResolvedAction->setEnabled( (multi||single) && isWorkingCopy());
     m_InfoAction->setEnabled( (single||multi));
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
+    temp = filesActions()->action("make_svn_addrec");
+    if (temp) {
+        temp->setEnabled( (multi||single) && isWorkingCopy());
+    }
 
     m_UpdateHead->setEnabled(isWorkingCopy()&&isopen);
     m_UpdateRev->setEnabled(isWorkingCopy()&&isopen);

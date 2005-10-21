@@ -209,7 +209,7 @@ void kdesvnfilelist::setupActions()
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
     m_changeToRepository->setToolTip(i18n("Opens the repository the current working copy was checked out from"));
 
-    m_CleanupAction = new KAction("Cleanup",KShortcut(),
+    m_CleanupAction = new KAction("Cleanup","cleanup",KShortcut(),
         this,SLOT(slotCleanupAction()),m_filesAction,"make_cleanup");
     m_ImportDirsIntoCurrent  = new KAction(i18n("Import folders into current"),"fileimport",KShortcut(),
         this,SLOT(slotImportDirsIntoCurrent()),m_filesAction,"make_import_dirs_into_current");

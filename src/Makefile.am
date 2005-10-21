@@ -38,7 +38,7 @@ xdg_apps_DATA = kdesvn.desktop
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
-SUBDIRS = svnfrontend svncpp helpers pics kiosvn kdesvnd
+SUBDIRS = svnfrontend svncpp helpers icons pics kiosvn kdesvnd
 kdesvnaskpass_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 kdesvnaskpass_SOURCES = kdesvn-askpass.cpp
 kdesvnaskpass_LDADD = $(LIB_KDEUI)

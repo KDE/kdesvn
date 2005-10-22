@@ -17,41 +17,31 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef RANGEINPUT_IMPL_H
-#define RANGEINPUT_IMPL_H
+#ifndef LOGMSG_IMPL_H
+#define LOGMSG_IMPL_H
 
-#include "src/svnfrontend/rangeinput.h"
-#include "svncpp/revision.hpp"
-#include <qpair.h>
+#include "src/svnfrontend/fronthelpers/logmessage.h"
+#include <qvaluelist.h>
 
-class Rangeinput_impl: public RangeInputDlg {
+class Logmsg_impl: public LogmessageData {
 Q_OBJECT
 public:
-    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~Rangeinput_impl();
+    Logmsg_impl(QWidget *parent = 0, const char *name = 0);
+    QString getMessage()const;
+    bool isRecursive()const;
+    void initHistory();
+    void saveHistory();
 
-    typedef QPair<svn::Revision,svn::Revision> revision_range;
-
-    revision_range getRange();
-
-    void setStartOnly(bool theValue);
-
-
-    bool StartOnly() const;
-    void setHeadDefault();
+    static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
+    void setRecCheckboxtext(const QString&what);
 
 protected slots:
-    virtual void onHelp();
-    virtual void stopHeadToggled(bool);
-    virtual void stopBaseToggled(bool);
-    virtual void stopNumberToggled(bool);
-    virtual void startHeadToggled(bool);
-    virtual void startBaseToggled(bool);
-    virtual void startNumberToggled(bool);
-    virtual void stopDateToggled(bool);
-    virtual void startDateToggled(bool);
+    virtual void slotHistoryActivated(const QString&);
+
 protected:
-    bool m_StartOnly;
+    static QValueList<QString> sLogHistory;
+    static const char* groupName;
+    static int smax_message_history;
 };
 
 #endif

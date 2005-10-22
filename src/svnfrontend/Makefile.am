@@ -1,19 +1,14 @@
-INCLUDES = $(all_includes)
+INCLUDES = -I$(top_srcdir)/src/svnfrontend/fronthelpers $(all_includes)
 METASOURCES = AUTO
-BUILT_SOURCES = settings.h
-kde_kcfg_DATA = kdesvn_part.kcfg
+SUBDIRS = fronthelpers
 
-noinst_LTLIBRARIES = libsvnfrontend_helpers.la libsvnfrontend.la
+noinst_LTLIBRARIES = libsvnfrontend.la
 
 noinst_HEADERS = kdesvnfilelist.h filelistviewitem.h svnlogdlgimp.h \
-				svnactions.h rangeinput_impl.h ccontextlistener.h authdialogimpl.h propertiesdlg.h \
-				editproperty_impl.h logmsg_impl.h checkoutinfo_impl.h stopdlg.h importdir_logmsg.h \
-				mergedlg_impl.h copymoveview_impl.h ssltrustprompt_impl.h itemdisplay.h svnfiletip.h \
+				svnactions.h ccontextlistener.h propertiesdlg.h \
+				editproperty_impl.h checkoutinfo_impl.h stopdlg.h importdir_logmsg.h \
+				mergedlg_impl.h copymoveview_impl.h itemdisplay.h svnfiletip.h \
 				dummydisplay.h commandexec.h displaysettings_impl.h subversionsettings_impl.h
-
-libsvnfrontend_helpers_la_SOURCES = rangeinput.ui rangeinput_impl.cpp  authdlg.ui \
-		authdialogimpl.cpp ssltrustprompt.ui ssltrustprompt_impl.cpp \
-		logmessage.ui logmsg_impl.cpp  settings.kcfgc
 
 libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 			svnactions.cpp ccontextlistener.cpp \
@@ -24,5 +19,5 @@ libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 			svnfiletip.cpp dummydisplay.cpp commandexec.cpp subversion_settings.ui \
 			display_settings.ui displaysettings_impl.cpp subversionsettings_impl.cpp
 
-libsvnfrontend_la_LIBADD =\
-	$(top_builddir)/src/svnfrontend/libsvnfrontend_helpers.la
+libsvnfrontend_la_LIBADD = \
+	$(top_builddir)/src/svnfrontend/fronthelpers/libsvnfrontend_helpers.la

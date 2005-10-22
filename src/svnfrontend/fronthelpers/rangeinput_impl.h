@@ -17,16 +17,41 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SSLTRUSTPROMPT_IMPL_H
-#define SSLTRUSTPROMPT_IMPL_H
+#ifndef RANGEINPUT_IMPL_H
+#define RANGEINPUT_IMPL_H
 
-#include "src/svnfrontend/ssltrustprompt.h"
+#include "src/svnfrontend/fronthelpers/rangeinput.h"
+#include "svncpp/revision.hpp"
+#include <qpair.h>
 
-class SslTrustPrompt_impl: public SslTrustPrompt {
+class Rangeinput_impl: public RangeInputDlg {
 Q_OBJECT
 public:
-    SslTrustPrompt_impl(const QString&,QWidget *parent = 0, const char *name = 0);
-    static bool sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,bool*ok,bool*saveit);
+    Rangeinput_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~Rangeinput_impl();
+
+    typedef QPair<svn::Revision,svn::Revision> revision_range;
+
+    revision_range getRange();
+
+    void setStartOnly(bool theValue);
+
+
+    bool StartOnly() const;
+    void setHeadDefault();
+
+protected slots:
+    virtual void onHelp();
+    virtual void stopHeadToggled(bool);
+    virtual void stopBaseToggled(bool);
+    virtual void stopNumberToggled(bool);
+    virtual void startHeadToggled(bool);
+    virtual void startBaseToggled(bool);
+    virtual void startNumberToggled(bool);
+    virtual void stopDateToggled(bool);
+    virtual void startDateToggled(bool);
+protected:
+    bool m_StartOnly;
 };
 
 #endif

@@ -25,7 +25,7 @@
 #include "svnactions.h"
 #include "svnfiletip.h"
 #include "checkoutinfo_impl.h"
-#include "settings.h"
+#include "fronthelpers/settings.h"
 #include "svncpp/revision.hpp"
 #include "svncpp/dirent.hpp"
 #include "svncpp/client.hpp"

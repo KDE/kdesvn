@@ -18,14 +18,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandexec.h"
-#include "settings.h"
+#include "fronthelpers/settings.h"
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
 #include "svncpp/targets.hpp"
 #include "svncpp/url.hpp"
 #include "svncpp/dirent.hpp"
 #include "helpers/sub2qt.h"
-#include "svnfrontend/rangeinput_impl.h"
+#include "svnfrontend/fronthelpers/rangeinput_impl.h"
 
 #include <kglobal.h>
 #include <kdebug.h>

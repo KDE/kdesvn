@@ -27,7 +27,7 @@
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "logmsg_impl.h"
-#include "settings.h"
+#include "fronthelpers/settings.h"
 #include "svncpp/client.hpp"
 #include "svncpp/annotate_line.hpp"
 #include "svncpp/context_listener.hpp"

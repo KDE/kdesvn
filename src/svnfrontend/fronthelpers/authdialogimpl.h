@@ -17,31 +17,24 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef LOGMSG_IMPL_H
-#define LOGMSG_IMPL_H
+#ifndef AUTHDIALOGIMPL_H
+#define AUTHDIALOGIMPL_H
 
-#include "src/svnfrontend/logmessage.h"
-#include <qvaluelist.h>
+#include "src/svnfrontend/fronthelpers/authdlg.h"
+#include <qstring.h>
 
-class Logmsg_impl: public LogmessageData {
+class AuthDialogImpl: public AuthDialogData {
 Q_OBJECT
 public:
-    Logmsg_impl(QWidget *parent = 0, const char *name = 0);
-    QString getMessage()const;
-    bool isRecursive()const;
-    void initHistory();
-    void saveHistory();
+    AuthDialogImpl(const QString & realm = "", QWidget *parent = 0, const char *name = 0);
 
-    static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
-    void setRecCheckboxtext(const QString&what);
-
+    const QString Username()const;
+    const QString Password();
+    bool maySave()const;
 protected slots:
-    virtual void slotHistoryActivated(const QString&);
-
+    virtual void slotHelp();
 protected:
-    static QValueList<QString> sLogHistory;
-    static const char* groupName;
-    static int smax_message_history;
+    QString curPass;
 };
 
 #endif

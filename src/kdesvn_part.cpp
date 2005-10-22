@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "kdesvn_part.h"
-#include "svnfrontend/settings.h"
+#include "svnfrontend/fronthelpers/settings.h"
 #include "svnfrontend/displaysettings_impl.h"
 #include "subversionsettings_impl.h"
 #include "kdesvnview.h"

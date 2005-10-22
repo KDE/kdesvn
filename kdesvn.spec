@@ -4,7 +4,7 @@
 Summary:   A subversion client for the KDE
 Name:      kdesvn
 Version:   0.7.0
-Release:   1
+Release:   1%{?dist}
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
 Url:       http://www.alwins-world.de
@@ -12,15 +12,23 @@ Icon:      kdesvn_logo_klein.xpm
 Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.gz
-BuildRoot: /tmp/kdebuild
+BuildRoot: %{_tmppath}/%{name}-root
 BuildPreReq: apr-devel
 BuildPreReq: apr-util-devel
 BuildPreReq: neon-devel
 BuildPreReq: subversion-devel >= 1.1.0
-Requires: subversion
+Requires: subversion >= 1.1.0
 
 %description
-Kdsvn is a subversion client for KDE
+Kdesvn is a subversion client for KDE.
+
+%package kioksvn
+Requires: kdesvn = %{version}
+Group:    Development/Tools
+Summary:  A kde-kio integration for subversion based on kdesvn
+
+%description kioksvn
+KIO integration (KIO::ksvn) based on kdesvn
 
 %prep
 %setup
@@ -41,14 +49,25 @@ make -j$numprocs
 make install-strip DESTDIR=$RPM_BUILD_ROOT
 
 cd $RPM_BUILD_ROOT
-find . -type d | sed '1,2d;s,^\.,\%attr(-\,root\,root) \%dir ,' > $RPM_BUILD_DIR/file.list.kdesvn
-find . -type f | sed 's,^\.,\%attr(-\,root\,root) ,' >> $RPM_BUILD_DIR/file.list.kdesvn
-find . -type l | sed 's,^\.,\%attr(-\,root\,root) ,' >> $RPM_BUILD_DIR/file.list.kdesvn
 
 %clean
 rm -rf $RPM_BUILD_ROOT/*
 rm -rf $RPM_BUILD_DIR/kdesvn
-rm -rf ../file.list.kdesvn
 
 
-%files -f ../file.list.kdesvn
+%files
+%{_bindir}/kdesvn
+%{_bindir}/kdesvnaskpass
+%{_libdir}/*/*part*
+%{_datadir}/applications/*
+%{_datadir}/apps/*
+%{_datadir}/config.kcfg/*
+%{_datadir}/doc/*
+%{_datadir}/icons/*
+%{_datadir}/locale/*
+
+%files kioksvn
+%{_bindir}/kdesvnd
+%{_libdir}/*/kio_ksvn*
+%{_datadir}/services/*.protocol
+%{_datadir}/services/kdesvnd.desktop

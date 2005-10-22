@@ -17,24 +17,16 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef AUTHDIALOGIMPL_H
-#define AUTHDIALOGIMPL_H
+#ifndef SSLTRUSTPROMPT_IMPL_H
+#define SSLTRUSTPROMPT_IMPL_H
 
-#include "src/svnfrontend/authdlg.h"
-#include <qstring.h>
+#include "src/svnfrontend/fronthelpers/ssltrustprompt.h"
 
-class AuthDialogImpl: public AuthDialogData {
+class SslTrustPrompt_impl: public SslTrustPrompt {
 Q_OBJECT
 public:
-    AuthDialogImpl(const QString & realm = "", QWidget *parent = 0, const char *name = 0);
-
-    const QString Username()const;
-    const QString Password();
-    bool maySave()const;
-protected slots:
-    virtual void slotHelp();
-protected:
-    QString curPass;
+    SslTrustPrompt_impl(const QString&,QWidget *parent = 0, const char *name = 0);
+    static bool sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,bool*ok,bool*saveit);
 };
 
 #endif

@@ -933,7 +933,7 @@ void SvnActions::slotExport()
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
 {
-    if (!m_Data->m_ParentList|| !_exp&&m_Data->m_ParentList->isWorkingCopy()) return;
+    if (!m_Data->m_ParentList || !_exp&&m_Data->m_ParentList->isWorkingCopy()) return;
     SvnItem*k = m_Data->m_ParentList->Selected();
     if (k && !k->isDir()) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(),_exp?i18n("Exporting a file?"):i18n("Checking out a file?"));

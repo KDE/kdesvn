@@ -33,6 +33,7 @@
     <Separator/>
     <Action name="make_svn_checkout" />
     <Action name="make_svn_export" />
+    <Action name="make_svn_export_current" />
     <Separator/>
     <Action name="make_svn_lock"/>
     <Action name="make_svn_unlock"/>
@@ -62,7 +63,6 @@
    <Menu name="subversion_repo" >
     <text>Repository</text>
     <Action name="make_svn_checkout_current" />
-    <Action name="make_svn_export_current" />
     <Separator/>
     <Action name="switch_browse_revision" />
    </Menu>

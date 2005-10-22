@@ -611,6 +611,7 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(isWorkingCopy()&& (single||none));
     }
+    m_ExportCurrentAction->setEnabled(((single&&dir)||none));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
@@ -634,7 +635,6 @@ void kdesvnfilelist::enableActions()
 
     /* remote actions only */
     m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy());
-    m_ExportCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy());
     /* independ actions */
     m_CheckoutAction->setEnabled(true);
     m_ExportAction->setEnabled(true);

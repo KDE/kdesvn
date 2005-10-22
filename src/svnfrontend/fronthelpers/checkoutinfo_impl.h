@@ -20,7 +20,7 @@
 #ifndef CHECKOUTINFO_IMPL_H
 #define CHECKOUTINFO_IMPL_H
 
-#include "checkoutinfo.h"
+#include "src/svnfrontend/fronthelpers/checkoutinfo.h"
 #include "svncpp/revision.hpp"
 #include "kurl.h"
 

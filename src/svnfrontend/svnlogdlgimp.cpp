@@ -76,7 +76,7 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     fullDate=helpers::sub2qt::apr_time2qt(_entry.date);
     setText(COL_REV,QString("%1").arg(_revision));
     setText(COL_AUTHOR,_entry.author);
-    setText(COL_DATE,fullDate.toString(Qt::LocalDate));
+    setText(COL_DATE,helpers::sub2qt::apr_time2qtString(_entry.date));
     _message = _entry.message;
     QStringList sp = QStringList::split("\n",_message);
     if (sp.count()==0) {

@@ -38,6 +38,7 @@ public:
 
     static QDateTime apr_time2qt(apr_time_t _time);
     static apr_time_t qt_time2apr(const QDateTime&);
+    static QString apr_time2qtString(apr_time_t _time);
 };
 
 }

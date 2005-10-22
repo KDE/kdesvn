@@ -486,11 +486,11 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
             text+=rb+i18n("UUID")+cs+((*it).uuid())+re;
         }
         text+=rb+i18n("Last author")+cs+((*it).cmtAuthor())+re;
-        text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qt((*it).cmtDate()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qtString((*it).cmtDate())+re;
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
-        text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qt((*it).textTime()).toString(Qt::LocalDate)+re;
+        text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).textTime())+re;
         if (all) {
-            text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qt((*it).propTime()).toString(Qt::LocalDate)+re;
+            text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).propTime())+re;
             if ((*it).conflictNew().length()) {
                 text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
             }
@@ -513,7 +513,7 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
                 text+=rb+i18n("Lock token")+cs+((*it).lockEntry().Token())+re;
                 text+=rb+i18n("Owner")+cs+((*it).lockEntry().Owner())+re;
                 text+=rb+i18n("Locked on")+cs+
-                    helpers::sub2qt::apr_time2qt((*it).lockEntry().Date()).toString(Qt::LocalDate)+
+                    helpers::sub2qt::apr_time2qtString((*it).lockEntry().Date())+
                     re;
                 text+=rb+i18n("Lock comment")+cs+
                     (*it).lockEntry().Comment()+re;

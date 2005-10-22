@@ -20,6 +20,8 @@
 #include "sub2qt.h"
 
 #include "svncpp/revision.hpp"
+#include "kglobal.h"
+#include "klocale.h"
 #include <qmap.h>
 
 namespace helpers {
@@ -49,6 +51,11 @@ apr_time_t sub2qt::qt_time2apr(const QDateTime&_time)
     apr_time_t r;
     apr_time_ansi_put(&r,_time.toTime_t());
     return r;
+}
+
+QString sub2qt::apr_time2qtString(apr_time_t _time)
+{
+    return KGlobal::locale()->formatDateTime(apr_time2qt(_time));
 }
 
 };

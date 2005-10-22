@@ -142,7 +142,7 @@ void FileListViewItem::update()
     }
     setText(COL_STATUS,infoText());
     setText(COL_LAST_AUTHOR,cmtAuthor());
-    setText(COL_LAST_DATE,fullDate().toString());
+    setText(COL_LAST_DATE,KGlobal::locale()->formatDateTime(fullDate()));
     setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
     if (isLocked()) {
         setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));

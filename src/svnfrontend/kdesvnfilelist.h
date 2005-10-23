@@ -101,6 +101,7 @@ protected:
 
     virtual void refreshRecursive(FileListViewItem*,bool down=true);
     virtual void updateParents(FileListViewItem*);
+    virtual void checkUnversionedDirs( FileListViewItem * _parent );
 
     /**
      * Overridden virtuals for Qt drag 'n drop (XDND)

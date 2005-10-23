@@ -417,9 +417,9 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     while (what.endsWith("/")) {
         what.truncate(what.length()-1);
     }
-
+    kdDebug()<<"checkDirs()" << endl;
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
-    if ((!_parent) || ((_parent) && (_parent->isVersioned()))) {
+    if (!isWorkingCopy()|| (!_parent) || ((_parent) && (_parent->isVersioned()))) {
         if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
             kdDebug() << "unable makeStatus" <<endl;
             return false;
@@ -558,10 +558,13 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
 {
     if (!aItem) return;
     FileListViewItem* k = static_cast<FileListViewItem*>( aItem );
-    QDir d(k->fullName()); //FIXME: remove this as soon as we've been able to set entry->kind in Checkdirs
-    kdDebug() << "kdesvnfilelist::slotItemClicked on " << k->fullName() << endl;
-    //if (k->isDir()&&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
-    if (d.exists()&&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
+    bool _ex = true;
+    if (isWorkingCopy()) {
+        QDir d(k->fullName()); //FIXME: remove this as soon as we've been able to set entry->kind in Checkdirs
+        _ex = d.exists();
+    }
+
+    if (_ex &&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
         if (checkDirs(k->fullName(),k)) {
             m_Dirsread[k->fullName()]=true;
         }

@@ -58,6 +58,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qtooltip.h>
+#include <qregexp.h>
 
 class KdesvnFileListPrivate{
 public:
@@ -417,18 +418,38 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         what.truncate(what.length()-1);
     }
 
-    if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
-        return false;
+    // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
+    if ((!_parent) || ((_parent) && (_parent->isVersioned()))) {
+        if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
+            kdDebug() << "unable makeStatus" <<endl;
+            return false;
+        }
+    } else {
+        checkUnversionedDirs(_parent);
+        return true;
     }
+
+    kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
 
     viewport()->setUpdatesEnabled(false);
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
+        kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
+
+        // current item is not versioned
+        if (!(*it).isVersioned()) {
+            kdDebug()<< "Found non versioned item" << endl;
+            // if empty, we may want to create a default svn::Status for each folder inside this _parent
+            // iterate over QDir and create new filelistviewitem
+            checkUnversionedDirs(_parent);
+        }
+
         if ((*it).path()==what||QString::compare((*it).entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
+                kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it).path() << endl;
                 m_Dirsread[pitem->fullName()]=true;
                 pitem->setDropEnabled(true);
             }
@@ -453,8 +474,10 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         FileListViewItem * item;
         if (!_parent) {
             item = new FileListViewItem(this,*it);
+            kdDebug()<< "creating new FileListViewitem " + item->fullName() << endl;
         } else {
             item = new FileListViewItem(this,_parent,*it);
+            kdDebug()<< "creating new FileListViewitem (with parent) " + item->fullName() << endl;
         }
         if (item->isDir()) {
             m_Dirsread[item->fullName()]=false;
@@ -462,8 +485,10 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             if (isWorkingCopy()) {
                 m_pList->m_DirWatch->addDir(item->fullName());
             }
+            kdDebug()<< "Watching folder: " + item->fullName() << endl;
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
+            kdDebug()<< "Watching file: " + item->fullName() << endl;
         }
     }
 }
@@ -533,7 +558,10 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
 {
     if (!aItem) return;
     FileListViewItem* k = static_cast<FileListViewItem*>( aItem );
-    if (k->isDir()&&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
+    QDir d(k->fullName()); //FIXME: remove this as soon as we've been able to set entry->kind in Checkdirs
+    kdDebug() << "kdesvnfilelist::slotItemClicked on " << k->fullName() << endl;
+    //if (k->isDir()&&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
+    if (d.exists()&&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
         if (checkDirs(k->fullName(),k)) {
             m_Dirsread[k->fullName()]=true;
         }
@@ -1802,4 +1830,72 @@ void kdesvnfilelist::slotRelocate()
         if (!done) return;
     }
     refreshItem(k->fItem());
+}
+
+void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
+{
+    QDir d;
+    if (_parent)
+        d.setPath(_parent->fullName()); //FIXME: this one is not reliable, what if _parent == 0??
+    //             else
+    //                 d.setPath(this->firstChild()->fullName());
+
+    d.setFilter( QDir::Files | QDir::Dirs );
+
+    const QFileInfoList *list = d.entryInfoList();
+    QFileInfoListIterator nonversioned_it( *list );
+    QFileInfo *fi;
+
+    svn::StatusEntries nonversioned_list;
+
+    // FIXME: create a dlist and feed to insertDirs, mean while .. we are copying insertDirs since we weren't able to set svn_node_kind into appropriate value
+    while ( (fi = nonversioned_it.current()) != 0 ) {
+        if ((fi->fileName()!=".") && (fi->fileName()!="..")) {
+            // trying to set entry->kind
+//             svn_wc_status2_t wc_stat;
+//             svn_wc_entry_t entry;
+//             char *temp;
+//             strcpy(temp, fi->fileName());
+//             entry.name = temp;
+//
+//             wc_stat.entry = &entry;
+//             if (fi->isDir())
+//                 entry.kind = svn_node_dir;
+//             else
+//                 entry.kind = svn_node_file;
+//
+//             svn::Status stat(fi->fileName(), &wc_stat);
+
+            svn::Status stat(fi->absFilePath());
+
+            // start copying insertDirs
+            FileListViewItem * item;
+            if (!_parent) {
+                item = new FileListViewItem(this, stat);
+                kdDebug()<< "creating new FileListViewitem " + item->fullName() << endl;
+            } else {
+                item = new FileListViewItem(this,_parent, stat);
+                kdDebug()<< "creating new FileListViewitem (with parent) " + item->fullName() << endl;
+            }
+            if (fi->isDir()) {
+                m_Dirsread[item->fullName()]=false;
+                item->setDropEnabled(true);
+                if (isWorkingCopy()) {
+                    m_pList->m_DirWatch->addDir(item->fullName());
+                }
+                kdDebug()<< "Watching folder: " + item->fullName() << endl;
+            } else if (isWorkingCopy()) {
+                m_pList->m_DirWatch->addFile(item->fullName());
+                kdDebug()<< "Watching file: " + item->fullName() << endl;
+            }
+            // end of copying insertDirs
+
+            nonversioned_list.append(stat);
+            kdDebug() << "creating new FileListViewItem from QDir entry: " << fi->fileName() << endl;
+        }
+        ++nonversioned_it;
+    }
+
+    // uncomment this if you've ben able to set svn_node_kind (see above)
+    //this->insertDirs(_parent, nonversioned_list);
 }

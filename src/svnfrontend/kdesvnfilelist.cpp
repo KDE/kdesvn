@@ -250,14 +250,14 @@ void kdesvnfilelist::setupActions()
     /* remote actions only */
     m_CheckoutCurrentAction = new KAction("Checkout current repository path",KShortcut(),
         m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
-    m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"fileexport",KShortcut(),
+    m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"svnexport",KShortcut(),
         m_SvnWrapper,SLOT(slotExportCurrent()),m_filesAction,"make_svn_export_current");
     new KAction(i18n("Select browse revision"),KShortcut(),this,SLOT(slotSelectBrowsingRevision()),m_filesAction,"switch_browse_revision");
 
     /* independe actions */
     m_CheckoutAction = new KAction(i18n("Checkout a repository"),"bottom",
         KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
-    m_ExportAction = new KAction(i18n("Export a repository"),"fileexport",
+    m_ExportAction = new KAction(i18n("Export a repository"),"svnexport",
         KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
     m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(Key_F5),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 

@@ -248,14 +248,14 @@ void kdesvnfilelist::setupActions()
     m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of these entry into itself"));
 
     /* remote actions only */
-    m_CheckoutCurrentAction = new KAction("Checkout current repository path",KShortcut(),
+    m_CheckoutCurrentAction = new KAction("Checkout current repository path","svncheckout",KShortcut(),
         m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
     m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"svnexport",KShortcut(),
         m_SvnWrapper,SLOT(slotExportCurrent()),m_filesAction,"make_svn_export_current");
     new KAction(i18n("Select browse revision"),KShortcut(),this,SLOT(slotSelectBrowsingRevision()),m_filesAction,"switch_browse_revision");
 
     /* independe actions */
-    m_CheckoutAction = new KAction(i18n("Checkout a repository"),"bottom",
+    m_CheckoutAction = new KAction(i18n("Checkout a repository"),"svncheckout",
         KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
     m_ExportAction = new KAction(i18n("Export a repository"),"svnexport",
         KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");

@@ -348,7 +348,11 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
     KURL _url = url;
     _url.cleanPath(true);
     _url.setProtocol(proto);
-    res = _url.url(-1);
+    if (proto=="file") {
+        res = proto+"://"+url.path();
+    } else {
+        res = _url.url(-1);
+    }
     QStringList s = QStringList::split("?",res);
     if (s.size()>1) {
         res = s[0];

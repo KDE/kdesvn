@@ -131,6 +131,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     m_LogView->setSorting(LogListViewItem::COL_REV);
     m_LogView->header()->setLabel( 0, "");
     resize(dialogSize());
+    m_ControlKeyDown = false;
     m_first = 0;
     m_second = 0;
     if (Settings::self()->log_always_list_changed_files()) {
@@ -240,7 +241,7 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
     if (!item) return;
     LogListViewItem*which = static_cast<LogListViewItem*>(item);
     /* left mouse */
-    if (button == 1) {
+    if (button == 1&&!m_ControlKeyDown) {
         if (m_first) m_first->setText(0,"");
         if (m_first == which) {
             m_first = 0;
@@ -251,7 +252,7 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
         if (m_first==m_second) {
             m_second = 0;
         }
-    /* other mouse */
+    /* other mouse or ctrl hold*/
     } else {
         if (m_second) m_second->setText(0,"");
         if (m_second == which) {
@@ -293,5 +294,22 @@ void SvnLogDlgImp::slotListEntries()
     delete _log;
 }
 
+void SvnLogDlgImp::keyPressEvent (QKeyEvent * e)
+{
+    if (!e) return;
+    if (e->text().isEmpty()&&e->key()==Key_Control) {
+        m_ControlKeyDown = true;
+    }
+    SvnLogDialogData::keyPressEvent(e);
+}
+
+void SvnLogDlgImp::keyReleaseEvent (QKeyEvent * e)
+{
+    if (!e) return;
+    if (e->text().isEmpty()&&e->key()==Qt::Key_Control) {
+        m_ControlKeyDown = false;
+    }
+    SvnLogDialogData::keyReleaseEvent(e);
+}
 
 #include "svnlogdlgimp.moc"

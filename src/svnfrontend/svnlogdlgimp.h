@@ -51,6 +51,10 @@ protected:
     static const char* groupName;
     LogListViewItem *m_first,*m_second;
     SvnActions*m_Actions;
+    bool m_ControlKeyDown;
+    virtual void keyPressEvent (QKeyEvent * e);
+    virtual void keyReleaseEvent (QKeyEvent * e);
+
 protected slots:
     virtual void slotListEntries();
 };

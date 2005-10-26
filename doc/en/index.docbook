@@ -76,8 +76,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2001-10-18</date>
-<releaseinfo>0.1</releaseinfo>
+<date>$Date$</date>
+<releaseinfo>0.2</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -384,7 +384,7 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <row>
 <entry>log</entry>
 <entry>Print log of item</entry>
-<entry>-r startrevision:endrevision</entry>
+<entry>-r startrevision:endrevision -l limit_display</entry>
 </row>
 <row>
 <entry>cat</entry>
@@ -408,7 +408,7 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 </row>
 <row>
 <entry>diff</entry>
-<entry>Diff two revisions of item (if not set START:HEAD)</entry>
+<entry>Diff two revisions of item (if not set START:HEAD) or to items at specific revision</entry>
 <entry>-r startrev:endrev</entry>
 </row>
 <row>
@@ -416,7 +416,11 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry>Detailled info about item</entry>
 <entry>-r revision</entry>
 </row>
-
+<row>
+<entry>help</entry>
+<entry>displays this page</entry>
+<entry></entry>
+</row>
 </tbody>
 </tgroup>
 
@@ -448,11 +452,62 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry><prompt>&lt;filename&gt;</prompt></entry>
 <entry>get</entry>
 </row>
+<row>
+<entry><prompt>-l</prompt></entry>
+<entry><prompt>&lt;number&gt;</prompt></entry>
+<entry>log</entry>
+</row>
 </tbody>
 </tgroup>
 </table>
 
 </para>
+<sect2>
+<title>The &quot;log&quot; command</title>
+<para>
+Log command displays a dialog containing the log of the given url. With subversion 1.2 or above it accepts a limit eg. how many entries it has to display.
+</para>
+<para>
+Inside that dialog you may select log entries and getting differences between them.
+<example>
+<title>Display the last 20 commit logs</title>
+<programlisting>
+kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
+</programlisting>
+<para>Beware of order of revision: You want go from HEAD to START for the LAST one. So you must give as starting revision HEAD. Otherwise you would get
+the first 20 entries.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+<title>The &quot;diff&quot; command</title>
+<para>
+You get differences between revisions of an item or between to items inside same working copy or repository. When diffing revisions of an item that revisions
+may gived as <prompt>-r STARTREV:ENDREV</prompt>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
+<example>
+<title>Print difference against repository, eg. local changes</title>
+<programlisting>
+kdesvn exec diff myfile.c
+</programlisting>
+</example>
+<example>
+<title>print difference between revisions</title>
+<programlisting>
+kdesvn exec diff -r 21:20 myfile.c
+</programlisting>
+</example>
+</para>
+<para>
+When diffing two items revisions may appended to url of items. eg: 
+<programlisting>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title>Diffing two tagged versions</title>
+<programlisting>
+kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
 </sect1>
 </chapter>
 

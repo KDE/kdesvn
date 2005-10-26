@@ -449,6 +449,33 @@ namespace svn
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
           const bool noDiffDeleted) throw (ClientException);
+    /**
+     * Produce diff output which describes the delta between
+     * @a path1/@a revision1 and @a path2/@a revision2. @a path2
+     * can be either a working-copy path or a URL.
+     *
+     * A ClientException will be thrown if either @a revision1 or
+     * @a revision2 has an `unspecified' or unrecognized `kind'.
+     *
+     * @param tmpPath prefix for a temporary directory needed by diff.
+     * Filenames will have ".tmp" and similar added to this prefix in
+     * order to ensure uniqueness.
+     * @param path path of the file.
+     * @param revision1 one of the revisions to check.
+     * @param revision2 the other revision.
+     * @param recurse whether the operation should be done recursively.
+     * @param ignoreAncestry whether the files will be checked for
+     * relatedness.
+     * @param noDiffDeleted if true, no diff output will be generated
+     * on deleted files.
+     * @return delta between the files
+     * @exception ClientException
+     */
+    QString
+    diff (const Path & tmpPath, const Path & path1,const Path & path2,
+          const Revision & revision1, const Revision & revision2,
+          const bool recurse, const bool ignoreAncestry,
+          const bool noDiffDeleted) throw (ClientException);
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or

@@ -83,6 +83,16 @@ namespace svn
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted) throw (ClientException)
   {
+    return diff(tmpPath,path,path,revision1,revision2,recurse,ignoreAncestry,noDiffDeleted);
+  }
+
+  QString
+  Client::diff (const Path & tmpPath, const Path & path1,const Path&path2,
+                const Revision & revision1, const Revision & revision2,
+                const bool recurse, const bool ignoreAncestry,
+                const bool noDiffDeleted) throw (ClientException)
+  {
+
     Pool pool;
     svn_error_t * error;
     apr_status_t status;
@@ -120,8 +130,8 @@ namespace svn
 
     // run diff
     error = svn_client_diff (options,
-                             path.cstr (), revision1.revision (),
-                             path.cstr (), revision2.revision (),
+                             path1.cstr (), revision1.revision (),
+                             path2.cstr (), revision2.revision (),
                              recurse, ignoreAncestry, noDiffDeleted,
                              outfile, errfile,
                              *m_context,

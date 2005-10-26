@@ -683,6 +683,32 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
         return;
     }
     EMIT_FINISHED;
+    dispDiff(ex);
+}
+
+void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
+{
+    if (!m_Data->m_CurrentContext) return;
+    QString ex = "";
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
+        ex = m_Data->m_Svnclient.diff(svn::Path(tdir.name()),
+            svn::Path(p1),svn::Path(p2),
+            r1, r2,
+            true,false,false);
+    } catch (svn::ClientException e) {
+        ex = QString::fromUtf8(e.message());
+        emit clientException(ex);
+        return;
+    }
+    EMIT_FINISHED;
+    dispDiff(ex);
+}
+
+void SvnActions::dispDiff(const QString&ex)
+{
     int disp = Settings::use_kompare_for_diff();
     if (disp==1) {
         KProcess *proc = new KProcess();

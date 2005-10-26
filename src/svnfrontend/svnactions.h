@@ -110,6 +110,7 @@ protected:
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
+    void dispDiff(const QString&);
 
 public slots:
     virtual void slotMakeRangeLog();
@@ -131,6 +132,7 @@ public slots:
     virtual void slotCleanup(const QString&);
     virtual void slotResolved(const QString&);
     virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
+    virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotCopyMove(bool,const QString&,const QString&,bool);

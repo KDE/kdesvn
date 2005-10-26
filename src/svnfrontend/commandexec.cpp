@@ -51,6 +51,7 @@ public:
     bool rev_set;
     bool outfile_set;
     bool single_revision;
+    int log_limit;
     SvnActions*m_SvnWrapper;
     KCmdLineArgs *args;
     svn::Revision start,end;
@@ -64,7 +65,7 @@ public:
 };
 
 pCPart::pCPart()
-    :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false),single_revision(false)
+    :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false),single_revision(false),log_limit(0)
 {
     m_SvnWrapper = 0;
     start = svn::Revision::START;
@@ -222,6 +223,13 @@ int CommandExec::exec()
         m_pCPart->outfile_set=true;
         m_pCPart->outfile = m_pCPart->args->getOption("o");
     }
+    if (m_pCPart->args->isSet("l")) {
+        QString s = m_pCPart->args->getOption("l");
+        m_pCPart->log_limit = s.toInt();
+        if (m_pCPart->log_limit<0) {
+            m_pCPart->log_limit = 0;
+        }
+    }
 
     emit executeMe();
     return 0;
@@ -245,7 +253,7 @@ void CommandExec::clientException(const QString&what)
 void CommandExec::slotCmd_log()
 {
     bool list = Settings::self()->log_always_list_changed_files();
-    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list);
+    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list,m_pCPart->log_limit);
 }
 
 void CommandExec::slotCmd_blame()
@@ -291,11 +299,27 @@ void CommandExec::slotCmd_update()
 
 void CommandExec::slotCmd_diff()
 {
-    if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
-        kdDebug()<<"Local diff" << endl;
-        m_pCPart->start = svn::Revision::WORKING;
+    if (m_pCPart->url.count()==1) {
+        if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
+            kdDebug()<<"Local diff" << endl;
+            m_pCPart->start = svn::Revision::WORKING;
+        }
+        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->end);
+    } else {
+        svn::Revision r1 = svn::Revision::HEAD;
+        svn::Revision r2 = svn::Revision::HEAD;
+        if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
+            r1 = m_pCPart->extraRevisions[0];
+        } else if (!svn::Url::isValid(m_pCPart->url[0])) {
+            r1 = svn::Revision::WORKING;
+        }
+        if (m_pCPart->extraRevisions.find(1)!=m_pCPart->extraRevisions.end()) {
+            r2 = m_pCPart->extraRevisions[1];
+        } else if (!svn::Url::isValid(m_pCPart->url[1])) {
+            r2 = svn::Revision::WORKING;
+        }
+        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],r1,m_pCPart->url[1],r2);
     }
-    m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->end);
 }
 
 void CommandExec::slotCmd_info()

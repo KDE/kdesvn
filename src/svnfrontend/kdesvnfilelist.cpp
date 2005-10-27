@@ -193,8 +193,8 @@ void kdesvnfilelist::setupActions()
     tmp_action = new KAction(i18n("Cat revision..."),"contents",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
 
-    m_LockAction = new KAction(i18n("Lock current items"),"lock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
-    m_UnlockAction = new KAction(i18n("Unlock current items"),"unlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
+    m_LockAction = new KAction(i18n("Lock current items"),"svnlock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
+    m_UnlockAction = new KAction(i18n("Unlock current items"),"svnunlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
 
     /* 3. actions only on dirs */
     m_MkdirAction = new KAction("New folder","folder_new",

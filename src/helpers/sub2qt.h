@@ -21,7 +21,6 @@
 #define HELPERSSUB2QT_H
 
 #include "svncpp/revision.hpp"
-#include <kurl.h>
 #include <qdatetime.h>
 #include <qstring.h>
 #include <svn_time.h>

@@ -574,7 +574,9 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
     bool _ex = true;
     if (isWorkingCopy()) {
         QDir d(k->fullName()); //FIXME: remove this as soon as we've been able to set entry->kind in Checkdirs
-        _ex = d.exists();
+        _ex = k->isDir()||d.exists();
+    } else {
+        _ex = k->isDir();
     }
 
     if (_ex &&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {

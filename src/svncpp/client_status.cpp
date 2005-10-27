@@ -29,6 +29,7 @@
 // Subversion api
 #include "svn_client.h"
 #include "svn_sorts.h"
+#include "svn_path.h"
 //#include "svn_utf.h"
 
 // svncpp
@@ -466,10 +467,18 @@ namespace svn
     status_hash = apr_hash_make (pool);
     baton.hash = status_hash;
     baton.pool = pool;
+    svn_opt_revision_t pegr;
+    const char *truepath;
+    error = svn_opt_parse_path (&pegr, &truepath,path.utf8(), pool);
+    if (error != NULL)
+      throw ClientException (error);
+
+    if ((svn_path_is_url (path.utf8())) && (pegr.kind == svn_opt_revision_unspecified))
+        pegr.kind = svn_opt_revision_head;
 
     error =
-      svn_client_info(path.utf8(),
-                      peg_revision.revision (),
+      svn_client_info(truepath,
+                      &pegr,
                       rev.revision (),
                       &InfoEntryFunc,
                       &baton,

@@ -9,6 +9,7 @@ kio_ksvn_la_LIBADD = \
 noinst_HEADERS = kiosvn.h kiolistener.h
 kio_ksvn_la_SOURCES = kiosvn.cpp kiolistener.cpp
 
-protocol_DATA = ksvn+http.protocol ksvn+https.protocol ksvn+file.protocol ksvn+ssh.protocol ksvn.protocol
+protocol_DATA = ksvn+http.protocol ksvn+https.protocol ksvn+file.protocol ksvn+ssh.protocol ksvn.protocol \
+	svn+http.protocol svn+https.protocol svn+file.protocol svn+ssh.protocol svn.protocol
 protocoldir = $(kde_servicesdir)
 

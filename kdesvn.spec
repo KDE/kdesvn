@@ -30,6 +30,14 @@ Summary:  A kde-kio integration for subversion based on kdesvn
 %description kioksvn
 KIO integration (KIO::ksvn) based on kdesvn
 
+%package kiosvn
+Requires: kdesvn-kioksvn = %{version}
+Group:    Development/Tools
+Summary:  A kde-kio integration for subversion based on kdesvn
+
+%description kiosvn
+KIO integration (KIO::svn) based on kdesvn alternative protocol name.
+
 %prep
 %setup
 CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" ./configure \
@@ -69,5 +77,8 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %files kioksvn
 %{_bindir}/kdesvnd
 %{_libdir}/*/kio_ksvn*
-%{_datadir}/services/*.protocol
+%{_datadir}/services/ksvn*.protocol
 %{_datadir}/services/kdesvnd.desktop
+
+%files kiosvn
+%{_datadir}/services/svn*.protocol

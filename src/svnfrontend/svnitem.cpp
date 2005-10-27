@@ -171,7 +171,9 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         SvnActions*wrap = getWrapper();
         bool mod = false;
         QPixmap p2 = QPixmap();
-        if (wrap->isUpdated(p_Item->m_Stat.path())) {
+        if (isLocked()) {
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svnlocked",KIcon::Desktop,size);
+        } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);

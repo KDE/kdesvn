@@ -144,11 +144,13 @@ void FileListViewItem::update()
     setText(COL_LAST_AUTHOR,cmtAuthor());
     setText(COL_LAST_DATE,KGlobal::locale()->formatDateTime(fullDate()));
     setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
+#if 0
     if (isLocked()) {
-        setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("lock",KIcon::Desktop,16));
+        setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("svnlock",KIcon::Desktop,16));
     } else {
         setPixmap(COL_IS_LOCKED,QPixmap());
     }
+#endif
     setText(COL_IS_LOCKED,lockOwner());
 }
 

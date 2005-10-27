@@ -21,7 +21,6 @@
 #include "authdialogimpl.h"
 #include "logmsg_impl.h"
 #include "ssltrustprompt_impl.h"
-#include "helpers/stl2qt.h"
 
 #include <klocale.h>
 #include <kapp.h>

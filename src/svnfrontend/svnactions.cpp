@@ -34,7 +34,6 @@
 #include "svncpp/dirent.hpp"
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
-#include "helpers/stl2qt.h"
 
 #include <kdialog.h>
 #include <ktextbrowser.h>

@@ -31,7 +31,6 @@
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
 #include "helpers/sshagent.h"
-#include "helpers/stl2qt.h"
 #include "helpers/runtempfile.h"
 
 #include <kapplication.h>

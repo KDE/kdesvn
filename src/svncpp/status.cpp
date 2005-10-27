@@ -25,7 +25,6 @@
 
 // svncpp
 #include "svncpp/status.hpp"
-#include <kdebug.h>
 
 //#include <assert.h>
 

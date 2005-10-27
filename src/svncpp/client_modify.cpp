@@ -35,8 +35,6 @@
 #include "svncpp/pool.hpp"
 #include "svncpp/targets.hpp"
 
-#include <kdebug.h>
-
 namespace svn
 {
   svn_revnum_t

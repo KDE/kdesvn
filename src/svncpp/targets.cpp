@@ -37,9 +37,6 @@
 
 #include <qstringlist.h>
 
-#include <kdebug.h>
-
-
 namespace svn
 {
   Targets::Targets (const QValueList<Path> & targets)

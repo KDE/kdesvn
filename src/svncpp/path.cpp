@@ -35,8 +35,6 @@
 #include "svncpp/url.hpp"
 
 
-#include <kdebug.h>
-
 namespace svn
 {
   Path::Path (const char * path)

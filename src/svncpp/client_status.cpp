@@ -41,8 +41,6 @@
 #include "svncpp/info_entry.hpp"
 #include "svncpp/url.hpp"
 
-#include <kdebug.h>
-
 namespace svn
 {
   static svn_error_t *

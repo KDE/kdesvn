@@ -274,6 +274,21 @@ Entries may marked with overlayed icons when not in &quot;normal&quot; state.
 <varlistentry>
 <term><inlinemediaobject>
 <imageobject>
+<imagedata fileref="hi128-filesys-svnlocked.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>Locked</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry is locked. In last column the owner of lock is listed. This works only in working copy this moment due restrictions of subversion api!
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
 <imagedata fileref="hi128-filesys-svnupdates.png" format="PNG" />
 </imageobject>
 <textobject>
@@ -355,8 +370,11 @@ Some subversion operation may used via commandline, eg., like a standard command
 </para>
 <para>
 If a single revision on a single url is wantet it may set as parameter of the url 
-<prompt>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</prompt>. This will overwrite the option <prompt>-r &lt;rev&gt;</prompt>. A revision may given as
-number or one of <prompt>HEAD</prompt>, <prompt>START</prompt> or <prompt>BASE</prompt>.
+<programlisting>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting> This will overwrite the option <prompt>-r &lt;rev&gt;</prompt>.
+</para>
+<para>
+A revision may given as
+number or one of <prompt>HEAD</prompt> or <prompt>BASE</prompt> or as date format like {YYYY-MM-DD}.
 </para>
 </sect1>
 <sect1>

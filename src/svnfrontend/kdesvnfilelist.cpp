@@ -176,7 +176,7 @@ void kdesvnfilelist::setupActions()
         KShortcut(Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_RenameAction = new KAction(i18n("Move"),"move",
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
-    m_CopyAction = new KAction(i18n("Copy"),"editcopy",
+    m_CopyAction = new KAction(i18n("Copy"),"svncopy",
         KShortcut(Key_C),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
     tmp_action = new KAction(i18n("Check for updates"),"svncheckupdates",KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
@@ -187,9 +187,9 @@ void kdesvnfilelist::setupActions()
     m_BlameRangeAction = new KAction("Blame range","svnblame",KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_CatAction = new KAction(i18n("Cat head"),
-        "contents",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+        "svncat",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
-    tmp_action = new KAction(i18n("Cat revision..."),"contents",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
+    tmp_action = new KAction(i18n("Cat revision..."),"svncat",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
 
     m_LockAction = new KAction(i18n("Lock current items"),"svnlock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");

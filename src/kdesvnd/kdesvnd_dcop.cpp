@@ -33,7 +33,6 @@
 kdesvnd_dcop::kdesvnd_dcop() : DCOPObject("kdesvndInterface")
 {
     kdDebug() << "Starting new service... " << endl;
-    m_List = QStringList();
 }
 
 kdesvnd_dcop::~kdesvnd_dcop()

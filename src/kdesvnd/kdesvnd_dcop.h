@@ -31,7 +31,6 @@ class kdesvnd_dcop :  public DCOPObject
     K_DCOP
 
 private:
-    QStringList m_List;
 
 public:
     kdesvnd_dcop();

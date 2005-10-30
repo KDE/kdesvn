@@ -46,15 +46,19 @@ kdesvnd_dcop::~kdesvnd_dcop()
     kdDebug() << "Going away... " << endl;
 }
 
-QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List &list)
+QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List list)
 {
     QStringList result;
     return result;
 }
 
-QStringList kdesvnd_dcop::getActionMenu ( const KURL::List &list )
+QStringList kdesvnd_dcop::getActionMenu ( const KURL::List list )
 {
     QStringList result;
+    result << "Add";
+    result << "Log";
+    result << "Info";
+    result << "Diff";
     return result;
 }
 

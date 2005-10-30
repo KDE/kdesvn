@@ -661,10 +661,7 @@ void SvnActions::procClosed(KProcess*proc)
 }
 
 
-/*!
-    \fn SvnActions::makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end)
- */
-void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
+void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,const svn::Revision&end)
 {
     if (!m_Data->m_CurrentContext) return;
     QString ex = "";
@@ -672,10 +669,12 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     tdir.setAutoDelete(true);
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Diffing","Diffing - hit cancel for abort");
-        ex = m_Data->m_Svnclient.diff(svn::Path(tdir.name()),
-            svn::Path(what),
-            start, end,
-            true,false,false);
+        for (int i = 0; i < which.count();++i) {
+            ex += m_Data->m_Svnclient.diff(svn::Path(tdir.name()),
+                svn::Path(which[i]),
+                start, end,
+                true,false,false);
+        }
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -683,6 +682,15 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
     }
     EMIT_FINISHED;
     dispDiff(ex);
+}
+
+/*!
+    \fn SvnActions::makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end)
+ */
+void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
+{
+    QStringList w; w << what;
+    makeDiff(w,start,end);
 }
 
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)

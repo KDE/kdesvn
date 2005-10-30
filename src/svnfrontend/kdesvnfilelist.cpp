@@ -1484,13 +1484,20 @@ void kdesvnfilelist::slotRangeBlame()
  */
 void kdesvnfilelist::slotSimpleDiff()
 {
-    SvnItem*k = singleSelected();
-    QString what;
-    if (!k) {
-        what=baseUri();
+    FileListViewItemList*klist = allSelected();
+    QStringList what;
+
+    if (!klist||klist->count()==0) {
+        what<<baseUri();
     }else{
-        what=k->fullName();
+        FileListViewItemListIterator liter(*klist);
+        FileListViewItem*cur;
+        while ((cur=liter.current())!=0){
+            ++liter;
+            what<<cur->fullName();
+        }
     }
+
     m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD);
 }
 

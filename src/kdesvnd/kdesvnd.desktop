@@ -1,8 +1,11 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Service
-Name=kdesvnd
-Exec=kdesvnd
-X-DCOP-ServiceType=Unique
-X-KDE-StartupNotify=false
-Comment=Kdesvn DCOP server
-Comment[de]=Kdesvn DCOP server
+Name=kdesvnd subversion module
+ServiceTypes=KDEDModule
+X-KDE-ModuleType=Library
+X-KDE-Library=kdesvnd
+X-KDE-FactoryName=kdesvnd
+X-KDE-Kded-autoload=true
+X-KDE-Kded-load-on-demand=true
+

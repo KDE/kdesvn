@@ -57,7 +57,7 @@ bool KioListener::contextGetLogMessage (QString & msg)
     QByteArray params;
     QCString replyType;
 
-    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface","get_logmsg()",params,replyType,reply)) {
+    if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
         msg = "Communication with dcop failed";
         kdWarning()<<msg<<endl;
         return false;
@@ -119,7 +119,7 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
         << data.issuerDName
         << data.realm;
 
-    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface",
+    if (!par->dcopClient()->call("kded","kdesvnd",
         "get_sslaccept(QString,QString,QString,QString,QString,QString)",
         params,replyType,reply)) {
         kdWarning()<<"Communication with dcop failed"<<endl;
@@ -153,7 +153,7 @@ bool KioListener::contextSslClientCertPrompt (QString & certFile)
     QByteArray reply;
     QByteArray params;
     QCString replyType;
-    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface",
+    if (!par->dcopClient()->call("kded","kdesvnd",
         "get_sslclientcertfile()",
         params,replyType,reply)) {
         kdWarning()<<"Communication with dcop failed"<<endl;
@@ -189,7 +189,7 @@ bool KioListener::contextGetLogin (const QString & realm,
     QDataStream stream(params,IO_WriteOnly);
     stream << realm;
 
-    if (!par->dcopClient()->call("kdesvnd","kdesvndInterface","get_login(QString)",params,replyType,reply)) {
+    if (!par->dcopClient()->call("kded","kdesvnd","get_login(QString)",params,replyType,reply)) {
         kdWarning()<<"Communication with dcop failed"<<endl;
         return false;
     }

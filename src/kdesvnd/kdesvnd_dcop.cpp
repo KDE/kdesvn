@@ -30,7 +30,13 @@
 #include <klocale.h>
 #include <kfiledialog.h>
 
-kdesvnd_dcop::kdesvnd_dcop() : DCOPObject("kdesvndInterface")
+extern "C" {
+    KDE_EXPORT KDEDModule *create_kdesvnd(const QCString &name) {
+       return new kdesvnd_dcop(name);
+    }
+}
+
+kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)
 {
     kdDebug() << "Starting new service... " << endl;
 }
@@ -40,10 +46,16 @@ kdesvnd_dcop::~kdesvnd_dcop()
     kdDebug() << "Going away... " << endl;
 }
 
-bool kdesvnd_dcop::exit()
+QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List &list)
 {
-    kapp->quit();
-    return true;
+    QStringList result;
+    return result;
+}
+
+QStringList kdesvnd_dcop::getActionMenu ( const KURL::List &list )
+{
+    QStringList result;
+    return result;
 }
 
 QStringList kdesvnd_dcop::get_login(QString realm)

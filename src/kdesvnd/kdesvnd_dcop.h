@@ -24,20 +24,22 @@
 
 #include <qstringlist.h>
 #include <qstring.h>
+#include <kurl.h>
 #include <dcopobject.h>
+#include <kdedmodule.h>
 
-class kdesvnd_dcop :  public DCOPObject
+class kdesvnd_dcop :  public KDEDModule
 {
+    Q_OBJECT
     K_DCOP
 
 private:
 
 public:
-    kdesvnd_dcop();
+    kdesvnd_dcop(const QCString&);
     virtual ~kdesvnd_dcop();
 
 k_dcop:
-    bool exit();
     //! get a subversion login
     /*!
     * \param realm the realm
@@ -53,5 +55,7 @@ k_dcop:
     QString get_sslclientcertfile();
     // return a logmessage at pos 0, null-size list if cancel hit
     QStringList get_logmsg();
+    QStringList getTopLevelActionMenu (const KURL::List &list);
+    QStringList getActionMenu ( const KURL::List &list );
 };
 #endif

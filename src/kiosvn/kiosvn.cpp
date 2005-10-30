@@ -143,9 +143,6 @@ int kdemain(int argc, char **argv)
     QString error;
     QCString appId;
 
-    kdDebug(7101) << "*** Starting kdesvnd " << endl;
-    KApplication::startServiceByDesktopName("kdesvnd", QStringList(), &error, &appId);
-
     kdDebug(7101) << "*** Starting kio_ksvn " << endl;
 
     if (argc != 4) {

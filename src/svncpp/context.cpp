@@ -39,10 +39,6 @@
  *  svn_client_proplist2
  *  svn_client_export3
  *  svn_client_ls2
- *  svn_client_cat2
- *  svn_client_lock
- *  svn_client_unlock
- *  svn_client_info
  */
 
 

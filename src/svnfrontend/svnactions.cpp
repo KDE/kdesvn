@@ -311,7 +311,7 @@ QByteArray SvnActions::makeGet(svn::Revision start, const QString&what)
     svn::Path p(what);
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
-        content = m_Data->m_Svnclient.cat(p,start);
+        content = m_Data->m_Svnclient.cat2(p,start);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);

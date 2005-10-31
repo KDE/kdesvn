@@ -198,7 +198,7 @@ namespace svn
   {
     Pool pool;
     svn_error_t * error =
-      error = svn_client_propset (propName.utf8(),
+              svn_client_propset (propName.utf8(),
                                   0, // value = NULL
                                   path.cstr (),
                                   recurse,
@@ -361,7 +361,7 @@ namespace svn
 
     svn_revnum_t revnum;
     svn_error_t * error =
-      error = svn_client_revprop_set (propName.utf8(),
+              svn_client_revprop_set (propName.utf8(),
                                       0, // value = NULL
                                       path.cstr (),
                                       revision.revision (),

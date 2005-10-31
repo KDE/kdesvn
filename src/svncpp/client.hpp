@@ -224,6 +224,21 @@ namespace svn
 
     /**
      * Retrieves the contents for a specific @a revision of
+     * a @a path at @a peg_revision
+     *
+     * @param path path of file or directory
+     * @param peg_revision revision to base the URL
+     * @param revision revision to retrieve
+     * @return contents of the file
+     */
+    QByteArray
+    cat2 (const Path & path,
+          const Revision & revision,
+          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
+
+
+    /**
+     * Retrieves the contents for a specific @a revision of
      * a @a path and saves it to the destination file @a dstPath.
      *
      * If @a dstPath is empty (""), then this path will be

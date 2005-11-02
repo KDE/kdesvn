@@ -31,6 +31,16 @@
 #include <kfiledialog.h>
 
 extern "C" {
+/* we will get trouble on old fedora 2 systems with the origin compiler - don't know whats up
+ * with there gcc
+ */
+ #define GCC_VERSION (__GNUC__ * 10000 \
+                               + __GNUC_MINOR__ * 100 \
+                               + __GNUC_PATCHLEVEL__)
+#if GCC_VERSION == 30303
+#undef KDE_EXPORT
+#define KDE_EXPORT
+#endif
     KDE_EXPORT KDEDModule *create_kdesvnd(const QCString &name) {
        return new kdesvnd_dcop(name);
     }

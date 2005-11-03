@@ -75,7 +75,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/locale/*
 
 %files kioksvn
-%{_libdir}/*/kded_kdesvnd.so
+%{_libdir}/*/kded_kdesvnd.*
 %{_libdir}/*/kio_ksvn*
 %{_datadir}/services/ksvn*.protocol
 %{_datadir}/services/kded/kdesvnd.desktop

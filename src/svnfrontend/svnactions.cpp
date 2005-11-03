@@ -936,14 +936,12 @@ void SvnActions::makeDelete(const QValueList<svn::Path>&items)
     EMIT_FINISHED;
 }
 
-/*!
-    \fn kdesvnfilelist::slotCheckout()
- */
 void SvnActions::CheckoutExport(bool _exp)
 {
     CheckoutInfo_impl*ptr;
     KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
     if (dlg) {
+        ptr->forceAsRecursive(!_exp);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             bool openit = ptr->openAfterJob();
@@ -982,6 +980,7 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
     if (dlg) {
         ptr->setStartUrl(what);
+        ptr->forceAsRecursive(!_exp);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             bool openIt = ptr->openAfterJob();

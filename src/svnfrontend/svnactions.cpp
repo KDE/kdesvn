@@ -61,6 +61,8 @@
 #include <qstylesheet.h>
 #include <qregexp.h>
 #include <qimage.h>
+#include <qthread.h>
+#include <qtimer.h>
 
 class SvnActionsData:public ref_count
 {
@@ -91,7 +93,66 @@ public:
     svn::StatusEntries m_UpdateCache;
 
     QMap<KProcess*,QString> m_tempfilelist;
+
+    QTimer m_ThreadCheckTimer;
 };
+
+class ThreadEndEvent:public QEvent
+{
+public:
+    ThreadEndEvent();
+};
+
+ThreadEndEvent::ThreadEndEvent()
+    : QEvent(QEvent::User)
+{
+}
+
+class CheckModifiedThread:public QThread
+{
+public:
+    CheckModifiedThread(SvnActions*,const QString&what);
+    virtual ~CheckModifiedThread();
+    virtual void run();
+
+    svn::StatusEntries m_Cache;
+protected:
+    QMutex mutex;
+    svn::Client m_Svnclient;
+    svn::Context* m_CurrentContext;
+    smart_pointer<CContextListener> m_SvnContext;
+    SvnActions*m_Parent;
+    QString m_what;
+};
+
+CheckModifiedThread::CheckModifiedThread(SvnActions*_parent,const QString&what)
+    : QThread(),mutex()
+{
+    m_Parent = _parent;
+    m_CurrentContext = new svn::Context();
+    m_SvnContext = new CContextListener(0);
+    m_CurrentContext->setListener(m_SvnContext);
+    m_what = what;
+    m_Svnclient.setContext(m_CurrentContext);
+}
+
+CheckModifiedThread::~CheckModifiedThread()
+{
+    delete m_CurrentContext;
+}
+
+void CheckModifiedThread::run()
+{
+    // what must be cleaned!
+    svn::Revision where = svn::Revision::HEAD;
+    QString ex;
+    try {
+        m_Cache = m_Svnclient.status(m_what,true,false,false,false,where);
+    } catch (svn::ClientException e) {
+        kdDebug()<<"Exception in thread"<<endl;
+    }
+    kdDebug()<<"Thread finished"<<endl;
+}
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
 #define EMIT_REFRESH emit sigRefreshAll()
@@ -100,10 +161,12 @@ public:
 SvnActions::SvnActions(ItemDisplay *parent, const char *name)
  : QObject(parent?parent->realWidget():0, name)
 {
+    m_CThread = 0;
     m_Data = new SvnActionsData();
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContext = new CContextListener(this);
     connect(m_Data->m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
+    connect(&(m_Data->m_ThreadCheckTimer),SIGNAL(timeout()),this,SLOT(checkModthread()));
 }
 
 svn::Client* SvnActions::svnclient()
@@ -1339,13 +1402,34 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 
 bool SvnActions::createModifiedCache(const QString&what)
 {
+    if (m_CThread) return false;
+
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
+#if 0
     svn::Revision r = svn::Revision::HEAD;
     if (Settings::display_overlays()) {
         return makeStatus(what,m_Data->m_Cache,r,true,false,false);
     }
     return false;
+#endif
+    m_CThread = new CheckModifiedThread(this,what);
+    m_CThread->start();
+    m_Data->m_ThreadCheckTimer.start(100,true);
+    return true;
+}
+
+void SvnActions::checkModthread()
+{
+    if (!m_CThread)return;
+    if (m_CThread->running()) {
+        m_Data->m_ThreadCheckTimer.start(100,true);
+        return;
+    }
+    kdDebug()<<"Thread seems stopped"<<endl;
+    m_Data->m_Cache = m_CThread->m_Cache;
+    delete m_CThread;
+    m_CThread = 0;
 }
 
 void SvnActions::addModifiedCache(const svn::Status&what)

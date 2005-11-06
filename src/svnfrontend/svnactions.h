@@ -38,6 +38,7 @@ class QDialog;
 class CContextListener;
 class KProcess;
 class SvnActionsData;
+class CheckModifiedThread;
 
 namespace svn {
     class Context;
@@ -111,6 +112,7 @@ protected:
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
     void dispDiff(const QString&);
+    CheckModifiedThread*m_CThread;
 
 public slots:
     virtual void slotMakeRangeLog();
@@ -148,6 +150,7 @@ signals:
 protected slots:
     virtual void wroteStdin(KProcess*);
     virtual void procClosed(KProcess*);
+    virtual void checkModthread();
 };
 
 #endif

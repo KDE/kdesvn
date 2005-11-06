@@ -26,6 +26,8 @@
 #include <qobject.h>
 #include <qstring.h>
 
+class CContextListenerData;
+
 /**
 @author Rajko Albrecht
 */
@@ -66,7 +68,8 @@ public:
     static QString NotifyAction(svn_wc_notify_action_t action);
     static QString NotifyState(svn_wc_notify_state_t);
 
-    void setCancelled(bool how){m_cancelMe = how;}
+    void setCanceled(bool how);
+
 signals:
     void sendNotify(const QString&);
     void tickProgress();
@@ -76,7 +79,7 @@ protected:
     static const int smax_actionstring;
     static const QString action_strings[];
     static const QString notify_state_strings[];
-    bool m_cancelMe;
+    CContextListenerData*m_Data;
 };
 
 #endif

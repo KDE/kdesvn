@@ -24,6 +24,7 @@
 #include "rangeinput_impl.h"
 #include "propertiesdlg.h"
 #include "ccontextlistener.h"
+#include "modifiedthread.h"
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "logmsg_impl.h"
@@ -96,63 +97,6 @@ public:
 
     QTimer m_ThreadCheckTimer;
 };
-
-class ThreadEndEvent:public QEvent
-{
-public:
-    ThreadEndEvent();
-};
-
-ThreadEndEvent::ThreadEndEvent()
-    : QEvent(QEvent::User)
-{
-}
-
-class CheckModifiedThread:public QThread
-{
-public:
-    CheckModifiedThread(SvnActions*,const QString&what);
-    virtual ~CheckModifiedThread();
-    virtual void run();
-
-    svn::StatusEntries m_Cache;
-protected:
-    QMutex mutex;
-    svn::Client m_Svnclient;
-    svn::Context* m_CurrentContext;
-    smart_pointer<CContextListener> m_SvnContext;
-    SvnActions*m_Parent;
-    QString m_what;
-};
-
-CheckModifiedThread::CheckModifiedThread(SvnActions*_parent,const QString&what)
-    : QThread(),mutex()
-{
-    m_Parent = _parent;
-    m_CurrentContext = new svn::Context();
-    m_SvnContext = new CContextListener(0);
-    m_CurrentContext->setListener(m_SvnContext);
-    m_what = what;
-    m_Svnclient.setContext(m_CurrentContext);
-}
-
-CheckModifiedThread::~CheckModifiedThread()
-{
-    delete m_CurrentContext;
-}
-
-void CheckModifiedThread::run()
-{
-    // what must be cleaned!
-    svn::Revision where = svn::Revision::HEAD;
-    QString ex;
-    try {
-        m_Cache = m_Svnclient.status(m_what,true,false,false,false,where);
-    } catch (svn::ClientException e) {
-        kdDebug()<<"Exception in thread"<<endl;
-    }
-    kdDebug()<<"Thread finished"<<endl;
-}
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
 #define EMIT_REFRESH emit sigRefreshAll()
@@ -1402,7 +1346,12 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 
 bool SvnActions::createModifiedCache(const QString&what)
 {
-    if (m_CThread) return false;
+    if (m_CThread) {
+        m_CThread->cancelMe();
+        m_CThread->wait();
+        delete m_CThread;
+        m_CThread=0;
+    }
 
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;

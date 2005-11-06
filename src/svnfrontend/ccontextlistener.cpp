@@ -30,6 +30,28 @@
 #include <kfiledialog.h>
 
 #include <qtextstream.h>
+#include <qthread.h>
+
+class CContextListenerData
+{
+public:
+    CContextListenerData();
+    virtual ~CContextListenerData();
+
+    // data
+    bool m_cancelMe;
+    QMutex m_CancelMutex;
+};
+
+
+CContextListenerData::CContextListenerData()
+    : m_cancelMe(false),m_CancelMutex()
+{
+}
+
+CContextListenerData::~CContextListenerData()
+{
+}
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 const int CContextListener::smax_actionstring=svn_wc_notify_failed_unlock+1;
@@ -94,14 +116,16 @@ QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)
- : QObject(parent, name), svn::ContextListener(),ref_count(),m_cancelMe(false)
+ : QObject(parent, name), svn::ContextListener(),ref_count()
 {
+    m_Data = new CContextListenerData();
 }
 
 
 CContextListener::~CContextListener()
 {
     disconnect();
+    delete m_Data;
 }
 
 bool CContextListener::contextGetLogin (
@@ -166,10 +190,14 @@ void CContextListener::contextNotify (const svn_wc_notify_t *action)
 
 bool CContextListener::contextCancel()
 {
-    if (m_cancelMe) {
-        m_cancelMe=false;
-        return true;
+    {
+        QMutexLocker lock(&(m_Data->m_CancelMutex));
+        if (m_Data->m_cancelMe) {
+            m_Data->m_cancelMe=false;
+            return true;
+        }
     }
+    // otherwise deadlock!
     emit tickProgress();
     return false;
 }
@@ -241,6 +269,12 @@ bool CContextListener::contextSslClientCertPwPrompt (QString & password,
     maysave = keep!=0;
     password = npass;
     return true;
+}
+
+void CContextListener::setCanceled(bool how)
+{
+    QMutexLocker lock(&(m_Data->m_CancelMutex));
+    m_Data->m_cancelMe = how;
 }
 
 #include "ccontextlistener.moc"

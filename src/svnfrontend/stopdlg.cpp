@@ -88,7 +88,7 @@ void StopDlg::slotAutoShow()
 void StopDlg::slotCancel()
 {
     mCancelled = true;
-    m_Context->setCancelled(true);
+    m_Context->setCanceled(true);
 }
 
 bool StopDlg::cancelld()

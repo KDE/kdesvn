@@ -116,6 +116,7 @@ protected:
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
     virtual void contentsWheelEvent( QWheelEvent * e );
     virtual void leaveEvent(QEvent*e);
+    virtual void rescanIconsRec(FileListViewItem*_parent=0);
 
 private:
     KdesvnFileListPrivate*m_pList;
@@ -183,6 +184,7 @@ protected slots:
     virtual void slotDirItemDeleted(const QString&);
 protected slots:
     virtual void slotRelocate();
+    virtual void slotRescanIcons();
 };
 
 #endif

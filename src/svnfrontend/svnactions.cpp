@@ -1344,7 +1344,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
     return true;
 }
 
-bool SvnActions::createModifiedCache(const QString&what)
+void SvnActions::stopCheckModThread()
 {
     if (m_CThread) {
         m_CThread->cancelMe();
@@ -1352,7 +1352,11 @@ bool SvnActions::createModifiedCache(const QString&what)
         delete m_CThread;
         m_CThread=0;
     }
+}
 
+bool SvnActions::createModifiedCache(const QString&what)
+{
+    stopCheckModThread();
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
 #if 0
@@ -1379,6 +1383,7 @@ void SvnActions::checkModthread()
     m_Data->m_Cache = m_CThread->m_Cache;
     delete m_CThread;
     m_CThread = 0;
+    emit sigRefreshIcons();
 }
 
 void SvnActions::addModifiedCache(const svn::Status&what)

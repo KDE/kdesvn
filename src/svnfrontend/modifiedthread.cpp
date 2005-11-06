@@ -1,8 +1,10 @@
 #include "modifiedthread.h"
 
+#include <qobject.h>
 #include <kdebug.h>
+#include <kapplication.h>
 
-CheckModifiedThread::CheckModifiedThread(SvnActions*_parent,const QString&what)
+CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what)
     : QThread(),mutex()
 {
     m_Parent = _parent;
@@ -35,9 +37,23 @@ void CheckModifiedThread::run()
         kdDebug()<<"Exception in thread"<<endl;
     }
     kdDebug()<<"Thread finished"<<endl;
+    KApplication*k = KApplication::kApplication();
+    if (k) {
+        k->postEvent(m_Parent,new ThreadEndEvent(this));
+    }
 }
 
-ThreadEndEvent::ThreadEndEvent()
-    : QEvent(QEvent::User)
+ThreadEndEvent::ThreadEndEvent(QThread*_thread)
+    : QEvent(EVENT_THREAD_FINISHED)
 {
+    m_threadObject = _thread;
+}
+
+ThreadEndEvent::~ThreadEndEvent()
+{
+}
+
+QThread* ThreadEndEvent::threadObject()
+{
+    return m_threadObject;
 }

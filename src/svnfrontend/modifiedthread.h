@@ -5,16 +5,17 @@
 #include "svncpp/revision.hpp"
 #include "svncpp/status.hpp"
 #include "ccontextlistener.h"
+#include "eventnumbers.h"
 
 #include <qthread.h>
 #include <qevent.h>
 
-class SvnActions;
+class QObject;
 
 class CheckModifiedThread:public QThread
 {
 public:
-    CheckModifiedThread(SvnActions*,const QString&what);
+    CheckModifiedThread(QObject*,const QString&what);
     virtual ~CheckModifiedThread();
     virtual void run();
     virtual void cancelMe();
@@ -25,14 +26,20 @@ protected:
     svn::Client m_Svnclient;
     svn::Context* m_CurrentContext;
     smart_pointer<CContextListener> m_SvnContext;
-    SvnActions*m_Parent;
+    QObject*m_Parent;
     QString m_what;
 };
 
 class ThreadEndEvent:public QEvent
 {
 public:
-    ThreadEndEvent();
+    ThreadEndEvent(QThread*);
+    virtual ~ThreadEndEvent();
+
+    QThread* threadObject();
+
+protected:
+    QThread* m_threadObject;
 };
 
 #endif

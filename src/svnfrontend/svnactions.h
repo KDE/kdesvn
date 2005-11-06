@@ -104,6 +104,7 @@ public:
     bool isUpdated(const QString&path)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
+    void stopCheckModThread();
 
 protected:
     smart_pointer<SvnActionsData> m_Data;
@@ -146,6 +147,7 @@ signals:
     void reinitItem(SvnItem*);
     void sigRefreshAll();
     void sigRefreshCurrent(SvnItem*);
+    void sigRefreshIcons();
 
 protected slots:
     virtual void wroteStdin(KProcess*);

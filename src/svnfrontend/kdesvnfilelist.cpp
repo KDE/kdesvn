@@ -147,6 +147,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(reinitItem(SvnItem*)),this,SLOT(slotReinitItem(SvnItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(SvnItem*)),this,SLOT(refreshCurrent(SvnItem*)));
+    connect(m_SvnWrapper,SIGNAL(sigRefreshIcons()),this,SLOT(slotRescanIcons()));
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
 
@@ -321,6 +322,7 @@ SvnItem*kdesvnfilelist::Selected()
 
 bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 {
+    m_SvnWrapper->stopCheckModThread();
     clear();
     m_Dirsread.clear();
     if (m_SelectedItems) {
@@ -405,6 +407,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 
 void kdesvnfilelist::closeMe()
 {
+    m_SvnWrapper->stopCheckModThread();
     selectAll(false);
     clear();
     setWorkingCopy("");
@@ -461,7 +464,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         if ((*it).path()==what||QString::compare((*it).entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
-                kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it).path() << endl;
+//                kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it).path() << endl;
                 m_Dirsread[pitem->fullName()]=true;
                 pitem->setDropEnabled(true);
             }
@@ -486,10 +489,10 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         FileListViewItem * item;
         if (!_parent) {
             item = new FileListViewItem(this,*it);
-            kdDebug()<< "creating new FileListViewitem " + item->fullName() << endl;
+//            kdDebug()<< "creating new FileListViewitem " + item->fullName() << endl;
         } else {
             item = new FileListViewItem(this,_parent,*it);
-            kdDebug()<< "creating new FileListViewitem (with parent) " + item->fullName() << endl;
+//            kdDebug()<< "creating new FileListViewitem (with parent) " + item->fullName() << endl;
         }
         if (item->isDir()) {
             m_Dirsread[item->fullName()]=false;
@@ -497,10 +500,10 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             if (isWorkingCopy()) {
                 m_pList->m_DirWatch->addDir(item->fullName());
             }
-            kdDebug()<< "Watching folder: " + item->fullName() << endl;
+//            kdDebug()<< "Watching folder: " + item->fullName() << endl;
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
-            kdDebug()<< "Watching file: " + item->fullName() << endl;
+//            kdDebug()<< "Watching file: " + item->fullName() << endl;
         }
     }
 }
@@ -1926,4 +1929,27 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
 
     // uncomment this if you've ben able to set svn_node_kind (see above)
     //this->insertDirs(_parent, nonversioned_list);
+}
+
+void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt)
+{
+    FileListViewItem*_s,*_temp;
+    if (!startAt) {
+        _s = static_cast<FileListViewItem*>(firstChild());
+    } else {
+        _s = static_cast<FileListViewItem*>(startAt->firstChild());
+    }
+    if (!_s) {
+        return;
+    }
+    while (_s) {
+        _s->makePixmap();
+        rescanIconsRec(_s);
+        _s = static_cast<FileListViewItem*>(_s->nextSibling());
+    }
+}
+
+void kdesvnfilelist::slotRescanIcons()
+{
+    rescanIconsRec(0L);
 }

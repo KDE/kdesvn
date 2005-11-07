@@ -322,7 +322,7 @@ SvnItem*kdesvnfilelist::Selected()
 
 bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 {
-    m_SvnWrapper->stopCheckModThread();
+    m_SvnWrapper->killallThreads();
     clear();
     m_Dirsread.clear();
     if (m_SelectedItems) {
@@ -400,6 +400,9 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_pList->m_fileTip->setOptions(!isNetworked()&&Settings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
 
+    if (isWorkingCopy()) {
+        slotCheckUpdates();
+    }
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     return result;
@@ -407,7 +410,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 
 void kdesvnfilelist::closeMe()
 {
-    m_SvnWrapper->stopCheckModThread();
+    m_SvnWrapper->killallThreads();
     selectAll(false);
     clear();
     setWorkingCopy("");
@@ -1622,7 +1625,8 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
 void kdesvnfilelist::slotCheckUpdates()
 {
     m_SvnWrapper->createUpdateCache(baseUri());
-    reinitItems(0);
+    //reinitItems(0);
+    //rescanIconsRec(0L);
 }
 
 

@@ -15,12 +15,12 @@ class QObject;
 class CheckModifiedThread:public QThread
 {
 public:
-    CheckModifiedThread(QObject*,const QString&what);
+    CheckModifiedThread(QObject*,const QString&what,bool _updates=false);
     virtual ~CheckModifiedThread();
     virtual void run();
     virtual void cancelMe();
+    virtual const svn::StatusEntries&getList()const;
 
-    svn::StatusEntries m_Cache;
 protected:
     QMutex mutex;
     svn::Client m_Svnclient;
@@ -28,6 +28,8 @@ protected:
     smart_pointer<CContextListener> m_SvnContext;
     QObject*m_Parent;
     QString m_what;
+    bool m_updates;
+    svn::StatusEntries m_Cache;
 };
 
 class ThreadEndEvent:public QEvent

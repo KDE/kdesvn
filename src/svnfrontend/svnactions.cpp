@@ -96,6 +96,7 @@ public:
     QMap<KProcess*,QString> m_tempfilelist;
 
     QTimer m_ThreadCheckTimer;
+    QTimer m_UpdateCheckTimer;
 };
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
@@ -106,11 +107,13 @@ SvnActions::SvnActions(ItemDisplay *parent, const char *name)
  : QObject(parent?parent->realWidget():0, name)
 {
     m_CThread = 0;
+    m_UThread = 0;
     m_Data = new SvnActionsData();
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContext = new CContextListener(this);
     connect(m_Data->m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
     connect(&(m_Data->m_ThreadCheckTimer),SIGNAL(timeout()),this,SLOT(checkModthread()));
+    connect(&(m_Data->m_UpdateCheckTimer),SIGNAL(timeout()),this,SLOT(checkUpdateThread()));
 }
 
 svn::Client* SvnActions::svnclient()
@@ -1354,6 +1357,22 @@ void SvnActions::stopCheckModThread()
     }
 }
 
+void SvnActions::stopCheckUpdateThread()
+{
+    if (m_UThread) {
+        m_UThread->cancelMe();
+        m_UThread->wait();
+        delete m_UThread;
+        m_UThread=0;
+    }
+}
+
+void SvnActions::killallThreads()
+{
+    stopCheckModThread();
+    stopCheckUpdateThread();
+}
+
 bool SvnActions::createModifiedCache(const QString&what)
 {
     stopCheckModThread();
@@ -1380,10 +1399,36 @@ void SvnActions::checkModthread()
         return;
     }
     kdDebug()<<"Thread seems stopped"<<endl;
-    m_Data->m_Cache = m_CThread->m_Cache;
+    m_Data->m_Cache = m_CThread->getList();
     delete m_CThread;
     m_CThread = 0;
     emit sigRefreshIcons();
+}
+
+void SvnActions::checkUpdateThread()
+{
+    if (!m_UThread)return;
+    if (m_UThread->running()) {
+        m_Data->m_UpdateCheckTimer.start(100,true);
+        return;
+    }
+    kdDebug()<<"Updates Thread seems stopped"<<endl;
+
+    for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
+        if (m_UThread->getList()[i].reposTextStatus()!=svn_wc_status_none||m_UThread->getList()[i].reposPropStatus()!=svn_wc_status_none) {
+            m_Data->m_UpdateCache.push_back(m_UThread->getList()[i]);
+        }
+    }
+
+    emit sigRefreshIcons();
+    emit sendNotify(i18n("Checking for updates finished"));
+    delete m_UThread;
+    m_UThread = 0;
+}
+
+bool SvnActions::checkUpdatesRunning()
+{
+    return m_UThread && m_UThread->running();
 }
 
 void SvnActions::addModifiedCache(const svn::Status&what)
@@ -1428,6 +1473,8 @@ void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 bool SvnActions::createUpdateCache(const QString&what)
 {
     clearUpdateCache();
+    stopCheckUpdateThread();
+#if 0
     svn::Revision r = svn::Revision::HEAD;
     svn::StatusEntries dlist;
     if (!makeStatus(what,dlist,r,true,false,false,true)) {
@@ -1439,6 +1486,12 @@ bool SvnActions::createUpdateCache(const QString&what)
         }
     }
     emit sendNotify(i18n("Checking for updates finished"));
+#else
+    m_UThread = new CheckModifiedThread(this,what,true);
+    m_UThread->start();
+    m_Data->m_UpdateCheckTimer.start(100,true);
+    emit sendNotify(i18n("Checking for updates started in background"));
+#endif
     return true;
 }
 

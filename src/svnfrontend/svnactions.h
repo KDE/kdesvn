@@ -39,6 +39,7 @@ class CContextListener;
 class KProcess;
 class SvnActionsData;
 class CheckModifiedThread;
+class CheckUpdatesThread;
 
 namespace svn {
     class Context;
@@ -105,6 +106,11 @@ public:
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
+    void stopCheckUpdateThread();
+    void killallThreads();
+
+    bool checkUpdatesRunning();
+
 
 protected:
     smart_pointer<SvnActionsData> m_Data;
@@ -113,7 +119,7 @@ protected:
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
     void dispDiff(const QString&);
-    CheckModifiedThread*m_CThread;
+    CheckModifiedThread*m_CThread,*m_UThread;
 
 public slots:
     virtual void slotMakeRangeLog();
@@ -153,6 +159,7 @@ protected slots:
     virtual void wroteStdin(KProcess*);
     virtual void procClosed(KProcess*);
     virtual void checkModthread();
+    virtual void checkUpdateThread();
 };
 
 #endif

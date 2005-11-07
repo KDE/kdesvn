@@ -1,3 +1,16 @@
+Note for release 0.7.x
+======================
+
+Kdesvn has now its own KIO. That may conflict with that one from kdesdk.
+Thats why it has the protocols in dual version:
+
+ksvn+http   - svn+http
+ksvn+https  - svn+https
+
+and so on.
+RPM packages may split them into various parts (see kdesvn.spec for details).
+the same must done for debian packages or other managers.
+
 Note for release 0.5.0
 ======================
 

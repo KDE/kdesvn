@@ -153,7 +153,7 @@ namespace svn
       QString realm;
       bool maySave;
 
-      SslServerTrustData (const apr_uint32_t failures_ = 0)
+      SslServerTrustData (const apr_uint32_t failures_)
         : failures (failures_), hostname (""), fingerprint (""),
           validFrom (""), validUntil (""), issuerDName (""),
           realm (""), maySave (true)

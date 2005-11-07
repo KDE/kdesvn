@@ -437,10 +437,12 @@ namespace svn
           (svn_auth_cred_ssl_server_trust_t*)
           apr_palloc (pool, sizeof (svn_auth_cred_ssl_server_trust_t));
 
-        cred_->accepted_failures = acceptedFailures;
+        cred_->accepted_failures = failures;
         if (answer == ContextListener::ACCEPT_PERMANENTLY)
         {
           cred_->may_save = true;
+        } else {
+            cred_->may_save = false;
         }
         *cred = cred_;
       }

@@ -217,8 +217,10 @@ namespace svn
       svn_config_get_config (&ctx.config, c_configDir, pool);
 
       // tell the auth functions where the config is
-      svn_auth_set_parameter(ab, SVN_AUTH_PARAM_CONFIG_DIR,
-                             c_configDir);
+      if (c_configDir) {
+        svn_auth_set_parameter(ab, SVN_AUTH_PARAM_CONFIG_DIR,
+            c_configDir);
+      }
 
       ctx.auth_baton = ab;
       ctx.log_msg_func = onLogMsg;
@@ -422,23 +424,23 @@ namespace svn
       trustData.issuerDName = info->issuer_dname;
       trustData.maySave = may_save != 0;
 
-      apr_uint32_t acceptedFailures;
+      apr_uint32_t acceptedFailures = failures;
       ContextListener::SslServerTrustAnswer answer =
         data->listener->contextSslServerTrustPrompt (
           trustData, acceptedFailures );
 
-      if(answer == ContextListener::DONT_ACCEPT)
+      if(answer == ContextListener::DONT_ACCEPT) {
         *cred = NULL;
-      else
+      } else
       {
         svn_auth_cred_ssl_server_trust_t *cred_ =
           (svn_auth_cred_ssl_server_trust_t*)
           apr_palloc (pool, sizeof (svn_auth_cred_ssl_server_trust_t));
 
+        cred_->accepted_failures = acceptedFailures;
         if (answer == ContextListener::ACCEPT_PERMANENTLY)
         {
-          cred_->may_save = 1;
-          cred_->accepted_failures = acceptedFailures;
+          cred_->may_save = true;
         }
         *cred = cred_;
       }

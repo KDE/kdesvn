@@ -98,6 +98,7 @@ int kdesvnd_dcop::get_sslaccept(QString hostname,QString fingerprint,QString val
         validUntil,
         issuerDName,
         realm,
+        QStringList(),
         &ok,&saveit)) {
         return -1;
     }

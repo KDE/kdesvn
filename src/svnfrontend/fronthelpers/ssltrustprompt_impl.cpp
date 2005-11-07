@@ -35,17 +35,14 @@ SslTrustPrompt_impl::SslTrustPrompt_impl(const QString&host,QWidget *parent, con
 {
     m_MainLabel->setText("<p align=\"center\"><b>"+
         i18n("Error validating server certificate for '%1'").arg(host)+
-        "</b></p>\n<p align=\"center\">"+
-        i18n("The certificate is not issued by a trusted authority.")+
-        "<br>"+
-        i18n("Use the fingerprint to validate the certificate manually!")+"</p>");
+        QString("</b></p>"));
 }
 
 
 /*!
     \fn SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,bool*ok,bool*saveit)
  */
-bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,bool*ok,bool*saveit)
+bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,const QStringList&reasons,bool*ok,bool*saveit)
 {
     SslTrustPrompt_impl*ptr=0;
     KDialogBase dlg(i18n("Trust ssl certificate"));
@@ -57,6 +54,13 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     static QString rs = "</td><td>";
     static QString re = "</td></tr>";
     QString text = "<html><body><p align=\"center\"><table>";
+    if (reasons.count()>0) {
+        text+=rb+i18n("Failures")+rs+"<table>";
+        for (unsigned int i = 0; i < reasons.count();++i) {
+            text+=rb+reasons[i]+re;
+        }
+        text+="</table>"+re;
+    }
     text+=rb+i18n("Realm")+rs+realm+re;
     text+=rb+i18n("Host")+rs+host+re;
     text+=rb+i18n("Valid from")+rs+validFrom+re;

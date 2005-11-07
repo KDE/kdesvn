@@ -215,7 +215,7 @@ bool CContextListener::contextGetLogMessage (QString & msg)
 }
 
 svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTrustPrompt (
-    const svn::ContextListener::SslServerTrustData & data , apr_uint32_t & /* acceptedFailures */)
+    const svn::ContextListener::SslServerTrustData & data , apr_uint32_t & acceptedFailures )
 {
     bool ok,saveit;
     emit waitShow(true);
@@ -226,6 +226,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
         data.validUntil,
         data.issuerDName,
         data.realm,
+        failure2Strings(acceptedFailures),
         &ok,&saveit)) {
         return DONT_ACCEPT;
     }
@@ -275,6 +276,27 @@ void CContextListener::setCanceled(bool how)
 {
     QMutexLocker lock(&(m_Data->m_CancelMutex));
     m_Data->m_cancelMe = how;
+}
+
+QStringList CContextListener::failure2Strings(apr_uint32_t acceptedFailures)
+{
+    QStringList res;
+    if (acceptedFailures&SVN_AUTH_SSL_UNKNOWNCA) {
+        res << i18n("The certificate is not issued by a trusted authority. Use the fingerprint to validate the certificate manually!");
+    }
+    if (acceptedFailures&SVN_AUTH_SSL_CNMISMATCH) {
+        res<< i18n("The certificate hostname does not match.");
+    }
+    if (acceptedFailures&SVN_AUTH_SSL_NOTYETVALID) {
+        res << i18n("The certificate is not yet valid.");
+    }
+    if (acceptedFailures& SVN_AUTH_SSL_EXPIRED) {
+        res << i18n("The certificate has expired.");
+    }
+    if (acceptedFailures&SVN_AUTH_SSL_OTHER) {
+        res << i18n("The certificate has an unknown error.");
+    }
+    return res;
 }
 
 #include "ccontextlistener.moc"

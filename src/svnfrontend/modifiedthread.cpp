@@ -1,23 +1,16 @@
 #include "modifiedthread.h"
+#include "tcontextlistener.h"
 
 #include <qobject.h>
 #include <kdebug.h>
 #include <kapplication.h>
-
-class TContextListener:public CContextListener
-{
-public:
-    TContextListener(QObject *parent = 0, const char *name = 0):CContextListener(parent,name){}
-    virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
-                                 apr_uint32_t & acceptedFailures){return ACCEPT_TEMPORARILY;}
-};
 
 CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool _updates)
     : QThread(),mutex()
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
-    m_SvnContext = new TContextListener(0);
+    m_SvnContext = new ThreadContextListener(0,0);
     m_CurrentContext->setListener(m_SvnContext);
     m_what = what;
     m_Svnclient.setContext(m_CurrentContext);

@@ -23,5 +23,6 @@
 #include <qevent.h>
 
 #define EVENT_THREAD_FINISHED QEvent::User
+#define EVENT_THREAD_SSL_TRUST_PROMPT QEvent::User+1
 
 #endif

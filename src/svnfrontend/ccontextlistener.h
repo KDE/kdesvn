@@ -70,6 +70,8 @@ public:
 
     void setCanceled(bool how);
 
+    static QStringList failure2Strings(apr_uint32_t acceptedFailures);
+
 signals:
     void sendNotify(const QString&);
     void tickProgress();

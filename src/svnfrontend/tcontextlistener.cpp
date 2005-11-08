@@ -65,9 +65,12 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
     void * t = (void*)&data;
     ev->setData(t);
     kdDebug()<<"Post event "<<EVENT_THREAD_SSL_TRUST_PROMPT<<" from thread " << endl;
+#if 0
     m_Data->m_trustpromptMutex.lock();
+#endif
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait(&m_Data->m_trustpromptMutex);
+    //m_Data->m_trustpromptWait.wait(&m_Data->m_trustpromptMutex);
+    m_Data->m_trustpromptWait.wait();
     return m_Data->m_SslTrustAnswer;
 }
 
@@ -113,9 +116,11 @@ void ThreadContextListener::event_contextSslServerTrustPrompt(SslServerTrustData
         m_Data->m_SslTrustAnswer = ACCEPT_PERMANENTLY;
     }
     /* MUST reached otherwise deadlock */
+#if 0
     m_Data->m_trustpromptMutex.lock();
-    m_Data->m_trustpromptWait.wakeAll();
     m_Data->m_trustpromptMutex.unlock();
+#endif
+    m_Data->m_trustpromptWait.wakeAll();
 }
 
 void ThreadContextListener::customEvent(QCustomEvent*ev)

@@ -46,11 +46,14 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_LogEdit->setFocus();
 }
 
-void Logmsg_impl::slotHistoryActivated(const QString&aMessage)
+void Logmsg_impl::slotHistoryActivated(int number)
 {
-    m_LogEdit->setText(aMessage);
+    if (number < 1||number>sLogHistory.size()) {
+        m_LogEdit->setText("");
+    } else {
+        m_LogEdit->setText(sLogHistory[number-1]);
+    }
 }
-
 
 /*!
     \fn Logmsg_impl::getMessage()const
@@ -96,7 +99,11 @@ void Logmsg_impl::initHistory()
     kdDebug()<<"Max history: " << smax_message_history << endl;
     QValueList<QString>::const_iterator it;
     for (it=sLogHistory.begin();it!=sLogHistory.end();++it) {
-        m_LogHistory->insertItem((*it));
+        if ((*it).length()<=40) {
+            m_LogHistory->insertItem((*it));
+        } else {
+            m_LogHistory->insertItem((*it).left(37)+"...");
+        }
     }
 }
 

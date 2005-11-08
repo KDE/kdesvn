@@ -71,6 +71,9 @@
                             <property name="duplicatesEnabled">
                                 <bool>false</bool>
                             </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Last used log messages</string>
+                            </property>
                         </widget>
                     </grid>
                 </widget>
@@ -97,13 +100,14 @@
 <connections>
     <connection>
         <sender>m_LogHistory</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(int)</signal>
         <receiver>LogmessageData</receiver>
-        <slot>slotHistoryActivated(const QString&amp;)</slot>
+        <slot>slotHistoryActivated(int)</slot>
     </connection>
 </connections>
 <slots>
     <slot access="protected">slotHistoryActivated(const QString&amp;)</slot>
+    <slot access="protected">slotHistoryActivated(int)</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

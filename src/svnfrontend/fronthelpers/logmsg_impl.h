@@ -36,7 +36,7 @@ public:
     void setRecCheckboxtext(const QString&what);
 
 protected slots:
-    virtual void slotHistoryActivated(const QString&);
+    virtual void slotHistoryActivated(int);
 
 protected:
     static QValueList<QString> sLogHistory;

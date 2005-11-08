@@ -55,5 +55,9 @@
       <label>Logs always reads list of changed files</label>
       <default>true</default>
     </entry>
+    <entry name="start_updates_check_on_open" type="Bool">
+      <label>Start check for updates when open working copy</label>
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

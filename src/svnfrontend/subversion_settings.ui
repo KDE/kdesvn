@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>293</width>
-            <height>202</height>
+            <width>339</width>
+            <height>229</height>
         </rect>
     </property>
     <property name="caption">
@@ -30,6 +30,17 @@
                 <string>Check (if needed recursive) if items are changed (added/delete/changed) and mark these items with an overlayed icon.
 
 If it works slow (low connection and so on) you should turn of this feature.</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_start_updates_check_on_open</cstring>
+            </property>
+            <property name="text">
+                <string>Start check for updates when open a working copy</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Select if kdesvn should check for updates when open a working copy</string>
             </property>
         </widget>
         <widget class="QCheckBox">

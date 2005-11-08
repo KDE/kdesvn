@@ -377,7 +377,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     }
     m_SvnWrapper->clearUpdateCache();
     if (isWorkingCopy()) {
-        m_SvnWrapper->createModifiedCache(baseUri());
         m_pList->m_DirWatch=new KDirWatch(this);
         kdDebug()<<"Create dirwatch"<<endl;
         connect(m_pList->m_DirWatch,SIGNAL(dirty(const QString&)),this,SLOT(slotDirItemDirty(const QString&)));
@@ -401,7 +400,10 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         QToolTip::isGloballyEnabled(),true,6);
 
     if (isWorkingCopy()) {
-        slotCheckUpdates();
+        m_SvnWrapper->createModifiedCache(baseUri());
+        if (Settings::start_updates_check_on_open()) {
+             slotCheckUpdates();
+        }
     }
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);

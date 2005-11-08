@@ -17,46 +17,13 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef TCONTEXTLISTENER_H
-#define TCONTEXTLISTENER_H
+#include "threadcontextlistenerdata.h"
 
-#include "eventnumbers.h"
-
-#include "ccontextlistener.h"
-
-#include <qevent.h>
-#include <qmutex.h>
-#include <qwaitcondition.h>
-
-class ThreadContextListenerData;
-/**
-@author Rajko Albrecht
-*/
-class ThreadContextListener : public CContextListener
+ThreadContextListenerData::ThreadContextListenerData()
 {
-    Q_OBJECT
-public:
-    ThreadContextListener(QObject* parent, const char* name);
-
-    ~ThreadContextListener();
-
-    virtual bool contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave);
-    virtual bool contextGetLogMessage(QString& msg);
-    virtual bool contextSslClientCertPrompt(QString& certFile);
-    virtual bool contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave);
-    virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t& acceptedFailures);
-
-    virtual void event_contextGetLogin(const QString& realm, QString& username, QString& password);
-    virtual void event_contextGetLogMessage(QString& msg);
-    virtual void event_contextSslClientCertPrompt(QString& certFile);
-    virtual void event_contextSslClientCertPwPrompt(QString& password, const QString& realm);
-    virtual void event_contextSslServerTrustPrompt(SslServerTrustData* data);
-
-protected:
-    virtual void customEvent(QCustomEvent*);
-    /* stores all internals */
-    ThreadContextListenerData*m_Data;
-};
+}
 
 
-#endif
+ThreadContextListenerData::~ThreadContextListenerData()
+{
+}

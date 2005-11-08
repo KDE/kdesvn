@@ -53,14 +53,17 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     static QString rb = "<tr><td>";
     static QString rs = "</td><td>";
     static QString re = "</td></tr>";
-    QString text = "<html><body><p align=\"center\"><table>";
+    QString text = "<html><body>";
     if (reasons.count()>0) {
-        text+=rb+i18n("Failures")+rs+"<table>";
+        text+="<p align=\"center\">";
+        text+="<h2>"+i18n("Failure reasons")+"</h2><hline>";
         for (unsigned int i = 0; i < reasons.count();++i) {
-            text+=rb+reasons[i]+re;
+            text+=reasons[i]+"<br><hline>";
         }
-        text+="</table>"+re;
+        text+="</p>";
     }
+
+    text+="<p align=\"center\"><table>";
     text+=rb+i18n("Realm")+rs+realm+re;
     text+=rb+i18n("Host")+rs+host+re;
     text+=rb+i18n("Valid from")+rs+validFrom+re;

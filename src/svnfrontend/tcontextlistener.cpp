@@ -23,6 +23,7 @@
 #include "authdialogimpl.h"
 #include "logmsg_impl.h"
 #include "ssltrustprompt_impl.h"
+#include "threadcontextlistenerdata.h"
 
 #include <kapplication.h>
 #include <kdebug.h>
@@ -30,12 +31,13 @@
 ThreadContextListener::ThreadContextListener(QObject* parent, const char* name)
     : CContextListener(parent, name)
 {
+    m_Data = new ThreadContextListenerData;
 }
 
 ThreadContextListener::~ThreadContextListener()
 {
+    delete m_Data;
 }
-
 
 bool ThreadContextListener::contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave)
 {
@@ -63,9 +65,10 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
     void * t = (void*)&data;
     ev->setData(t);
     kdDebug()<<"Post event "<<EVENT_THREAD_SSL_TRUST_PROMPT<<" from thread " << endl;
+    m_Data->m_trustpromptMutex.lock();
     kapp->postEvent(this,ev);
-    m_trustpromptWait.wait();
-    return m_SslTrustAnswer;
+    m_Data->m_trustpromptWait.wait(&m_Data->m_trustpromptMutex);
+    return m_Data->m_SslTrustAnswer;
 }
 
 void ThreadContextListener::event_contextGetLogin(const QString& realm, QString& username, QString& password)
@@ -90,7 +93,6 @@ void ThreadContextListener::event_contextSslClientCertPwPrompt(QString& password
 
 void ThreadContextListener::event_contextSslServerTrustPrompt(SslServerTrustData* data)
 {
-    //return CContextListener::contextSslServerTrustPrompt(data, acceptedFailures);
     /*
      * m_SslTrustAnswer is made threadsafe due the m_trustpromptWait - the calling thread waits until wakeAll is called! */
     bool ok,saveit;
@@ -104,14 +106,16 @@ void ThreadContextListener::event_contextSslServerTrustPrompt(SslServerTrustData
         data->realm,
         failure2Strings(data->failures),
         &ok,&saveit)) {
-        m_SslTrustAnswer = DONT_ACCEPT;
+        m_Data->m_SslTrustAnswer = DONT_ACCEPT;
+    } else if (!saveit) {
+        m_Data->m_SslTrustAnswer = ACCEPT_TEMPORARILY;
+    } else {
+        m_Data->m_SslTrustAnswer = ACCEPT_PERMANENTLY;
     }
-    if (!saveit) {
-        m_SslTrustAnswer = ACCEPT_TEMPORARILY;
-    }
-    m_SslTrustAnswer = ACCEPT_PERMANENTLY;
     /* MUST reached otherwise deadlock */
-    m_trustpromptWait.wakeAll();
+    m_Data->m_trustpromptMutex.lock();
+    m_Data->m_trustpromptWait.wakeAll();
+    m_Data->m_trustpromptMutex.unlock();
 }
 
 void ThreadContextListener::customEvent(QCustomEvent*ev)

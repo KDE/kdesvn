@@ -97,6 +97,7 @@ public:
 
     QTimer m_ThreadCheckTimer;
     QTimer m_UpdateCheckTimer;
+    QTime m_UpdateCheckTick;
 };
 
 #define EMIT_FINISHED emit sendNotify(i18n("Finished"))
@@ -1378,13 +1379,6 @@ bool SvnActions::createModifiedCache(const QString&what)
     stopCheckModThread();
     m_Data->m_Cache.clear();
     kdDebug()<<"Create cache for " << what << endl;
-#if 0
-    svn::Revision r = svn::Revision::HEAD;
-    if (Settings::display_overlays()) {
-        return makeStatus(what,m_Data->m_Cache,r,true,false,false);
-    }
-    return false;
-#endif
     m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
     m_Data->m_ThreadCheckTimer.start(100,true);
@@ -1409,6 +1403,10 @@ void SvnActions::checkUpdateThread()
 {
     if (!m_UThread)return;
     if (m_UThread->running()) {
+        if (m_Data->m_UpdateCheckTick.elapsed()>2500) {
+            m_Data->m_UpdateCheckTick.restart();
+            emit sendNotify(i18n("Still checking for updates"));
+        }
         m_Data->m_UpdateCheckTimer.start(100,true);
         return;
     }
@@ -1491,6 +1489,7 @@ bool SvnActions::createUpdateCache(const QString&what)
     m_UThread->start();
     m_Data->m_UpdateCheckTimer.start(100,true);
     emit sendNotify(i18n("Checking for updates started in background"));
+    m_Data->m_UpdateCheckTick.start();
 #endif
     return true;
 }

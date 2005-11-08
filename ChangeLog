@@ -4,6 +4,9 @@ version 0.7.0
     * commandline / DCop client
     * fix: Bug 37 - displays dateformat as user setup in kde-environment
     * fix: Bug 35 - recursive add possible
+    * Checking for updates runs in background thread, check may start on open a working copy
+    * On open a working copy checking for modified items runs in background thread
+    * loghistory will show shorten messages so dialog will not get to large.
 
 version 0.6.3
     * fix: application crashed when closing repository and item was selected

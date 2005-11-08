@@ -430,7 +430,7 @@ namespace svn
           trustData, acceptedFailures );
 
       if(answer == ContextListener::DONT_ACCEPT) {
-        *cred = NULL;
+        *cred = 0L;
       } else
       {
         svn_auth_cred_ssl_server_trust_t *cred_ =

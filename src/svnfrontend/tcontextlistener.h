@@ -29,6 +29,7 @@
 #include <qwaitcondition.h>
 
 class ThreadContextListenerData;
+
 /**
 @author Rajko Albrecht
 */
@@ -45,15 +46,18 @@ public:
     virtual bool contextSslClientCertPrompt(QString& certFile);
     virtual bool contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave);
     virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t& acceptedFailures);
-
-    virtual void event_contextGetLogin(const QString& realm, QString& username, QString& password);
-    virtual void event_contextGetLogMessage(QString& msg);
-    virtual void event_contextSslClientCertPrompt(QString& certFile);
-    virtual void event_contextSslClientCertPwPrompt(QString& password, const QString& realm);
-    virtual void event_contextSslServerTrustPrompt(SslServerTrustData* data);
+    virtual void contextNotify(const QString&aMsg);
+    virtual void sendTick();
 
 protected:
+    virtual void event_contextGetLogin(void*_data);
+    virtual void event_contextGetLogMessage(void*data);
+    virtual void event_contextSslClientCertPrompt(void*data);
+    virtual void event_contextSslClientCertPwPrompt(void*data);
+    virtual void event_contextSslServerTrustPrompt(void* data);
+    virtual void event_contextNotify(void*data);
     virtual void customEvent(QCustomEvent*);
+
     /* stores all internals */
     ThreadContextListenerData*m_Data;
 };

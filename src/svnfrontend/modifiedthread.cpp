@@ -10,7 +10,11 @@ CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
-    m_SvnContext = new ThreadContextListener(0,0);
+    m_SvnContext = new ThreadContextListener(m_Parent,0);
+    if (m_Parent) {
+        QObject::connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
+    }
+
     m_CurrentContext->setListener(m_SvnContext);
     m_what = what;
     m_Svnclient.setContext(m_CurrentContext);
@@ -43,11 +47,12 @@ void CheckModifiedThread::run()
         m_Cache = m_Svnclient.status(m_what,true,false,m_updates,false,where);
     } catch (svn::ClientException e) {
         kdDebug()<<"Exception in thread"<<endl;
+        m_SvnContext->contextNotify(QString::fromUtf8(e.message()));
     }
     kdDebug()<<"Thread finished"<<endl;
     KApplication*k = KApplication::kApplication();
     if (k) {
-//        k->postEvent(m_Parent,new ThreadEndEvent(this));
+        k->postEvent(m_Parent,new ThreadEndEvent(this));
     }
 }
 

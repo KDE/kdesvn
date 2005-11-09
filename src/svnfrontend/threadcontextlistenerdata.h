@@ -34,11 +34,48 @@ public:
 
     virtual ~ThreadContextListenerData();
 
-    QMutex m_trustpromptMutex;
+    /* only one callback at time */
+    QMutex m_CallbackMutex;
     QWaitCondition m_trustpromptWait;
-    /* safed due condition above */
-    svn::ContextListener::SslServerTrustAnswer m_SslTrustAnswer;
 
+    /* safed due condition above */
+    /* this variables are for the event handling across threads */
+    /* Trust ssl realm* */
+    struct strust_answer {
+        svn::ContextListener::SslServerTrustAnswer m_SslTrustAnswer;
+        const svn::ContextListener::SslServerTrustData*m_Trustdata;
+    };
+
+
+    /* login into server */
+    struct slogin_data
+    {
+        QString user,password,realm;
+        bool maysave,ok;
+    };
+
+    struct slog_message
+    {
+        QString msg;
+        bool ok;
+    };
+
+    struct scert_pw
+    {
+        QString password,realm;
+        bool ok,maysave;
+    };
+
+    struct scert_file
+    {
+        QString certfile;
+        bool ok;
+    };
+
+    struct snotify
+    {
+        QString msg;
+    };
 };
 
 #endif

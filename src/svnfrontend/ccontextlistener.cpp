@@ -148,6 +148,15 @@ bool CContextListener::contextGetLogin (
     return false;
 }
 
+void CContextListener::contextNotify(const QString&aMsg)
+{
+    if (aMsg.isEmpty()) {
+        emit tickProgress();
+    } else {
+        emit sendNotify(aMsg);
+    }
+}
+
 void CContextListener::contextNotify (const char *path,
                     svn_wc_notify_action_t action,
                     svn_node_kind_t /* kind */,
@@ -156,23 +165,21 @@ void CContextListener::contextNotify (const char *path,
                     svn_wc_notify_state_t prop_state,
                     svn_revnum_t revision)
 {
-    QString aString = NotifyAction(action);
-    if (aString.isEmpty()) {
-        emit tickProgress();
-        return;
-    }
     QString msg;
-    QTextStream ts(&msg,IO_WriteOnly);
+    QString aString = NotifyAction(action);
 
-    ts << NotifyAction(action) << " " << QString::fromUtf8(path);
-    if (revision>-1) {
-        ts << " (Rev "<<revision<<")";
-    }
-    aString = NotifyState(content_state);
     if (!aString.isEmpty()) {
-        ts << "\n" << aString;
+        QTextStream ts(&msg,IO_WriteOnly);
+        ts << NotifyAction(action) << " " << QString::fromUtf8(path);
+        if (revision>-1) {
+            ts << " (Rev "<<revision<<")";
+        }
+        aString = NotifyState(content_state);
+        if (!aString.isEmpty()) {
+            ts << "\n" << aString;
+        }
     }
-    emit sendNotify(msg);
+    contextNotify(msg);
 }
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
@@ -188,6 +195,11 @@ void CContextListener::contextNotify (const svn_wc_notify_t *action)
 }
 #endif
 
+void CContextListener::sendTick()
+{
+    emit tickProgress();
+}
+
 bool CContextListener::contextCancel()
 {
     {
@@ -198,7 +210,7 @@ bool CContextListener::contextCancel()
         }
     }
     // otherwise deadlock!
-    emit tickProgress();
+    sendTick();
     return false;
 }
 

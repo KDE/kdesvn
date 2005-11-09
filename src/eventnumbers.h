@@ -24,5 +24,10 @@
 
 #define EVENT_THREAD_FINISHED QEvent::User
 #define EVENT_THREAD_SSL_TRUST_PROMPT QEvent::User+1
+#define EVENT_THREAD_LOGIN_PROMPT QEvent::User+2
+#define EVENT_THREAD_LOGMSG_PROMPT QEvent::User+3
+#define EVENT_THREAD_CERT_PW_PROMPT QEvent::User+4
+#define EVENT_THREAD_CERT_SELECT_PROMPT QEvent::User+5
+#define EVENT_THREAD_NOTIFY QEvent::User+6
 
 #endif

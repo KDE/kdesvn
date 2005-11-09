@@ -1,3 +1,14 @@
+Note for failed linking
+=======================
+Seems that on some systems linking fails due missing references. You may
+solve it with
+
+. /etc/profile.d/qt.sh
+export QTLIB=${QTDIR}/lib QTINC=${QTDIR}/include
+
+before running configure.
+
+
 Note for release 0.7.x
 ======================
 

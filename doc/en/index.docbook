@@ -297,7 +297,7 @@ This entry is locked. In last column the owner of lock is listed. This works onl
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry or - if folder - an entry below has newer version in repository.
+This entry or - if folder - an entry below has newer version in repository. Works only with subversion &#061;&gt;1.2 on local and remote.
 </para></listitem>
 </varlistentry>
 
@@ -930,6 +930,18 @@ to the repository. And on each tunnel it is a new ssh connection. And for every 
 authenticate. This may you fix when you store your local public identity to the host containing the
 repository. If your public identity has a password, it will asked once when ssh-agent is installed
 und ssh-agent store it in its cache. Voila.
+</para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>When checking for updates kdesvn doesn't display something but I know there are newer items!</para>
+</question>
+<answer>
+<para>
+Updates may only displayed when the remote server is subversion 1.2, too. Eg., seems that repository runs with
+subversion &lt;1.2. It is not planned that kdesvn do that check recursive itself - this makes no sense. Ask for upgrading
+repository to newer subversion.
 </para>
 </answer>
 </qandaentry>

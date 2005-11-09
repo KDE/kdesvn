@@ -46,27 +46,12 @@ void CheckModifiedThread::run()
         //                                  rec  all   up        noign
         m_Cache = m_Svnclient.status(m_what,true,false,m_updates,false,where);
     } catch (svn::ClientException e) {
-        kdDebug()<<"Exception in thread"<<endl;
         m_SvnContext->contextNotify(QString::fromUtf8(e.message()));
     }
-    kdDebug()<<"Thread finished"<<endl;
     KApplication*k = KApplication::kApplication();
     if (k) {
-        k->postEvent(m_Parent,new ThreadEndEvent(this));
+        QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_FINISHED);
+        ev->setData((void*)this);
+        k->postEvent(m_Parent,ev);
     }
-}
-
-ThreadEndEvent::ThreadEndEvent(QThread*_thread)
-    : QEvent(EVENT_THREAD_FINISHED)
-{
-    m_threadObject = _thread;
-}
-
-ThreadEndEvent::~ThreadEndEvent()
-{
-}
-
-QThread* ThreadEndEvent::threadObject()
-{
-    return m_threadObject;
 }

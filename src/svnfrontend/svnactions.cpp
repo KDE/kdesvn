@@ -790,6 +790,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
     if (!m_Data->m_CurrentContext) return;
     QString ex;
     svn::Revisions ret;
+    stopCheckUpdateThread();
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Making update","Making update - hit cancel for abort");
         svn::Targets pathes(what);

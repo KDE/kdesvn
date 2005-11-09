@@ -33,17 +33,5 @@ protected:
     svn::StatusEntries m_Cache;
 };
 
-class ThreadEndEvent:public QEvent
-{
-public:
-    ThreadEndEvent(QThread*);
-    virtual ~ThreadEndEvent();
-
-    QThread* threadObject();
-
-protected:
-    QThread* m_threadObject;
-};
-
 #endif
 

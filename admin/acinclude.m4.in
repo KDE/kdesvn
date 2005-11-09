@@ -5453,8 +5453,9 @@ dnl Subversion
 dnl
 AC_DEFUN([AC_CHECK_SUBVERSION],
 [
+AC_REQUIRE([KDE_CHECK_LIB64])
 AC_MSG_CHECKING([for Subversion headers])
-SVN_INCLUDES="/usr/local/include /usr/include"
+SVN_INCLUDES="/usr/include /usr/local/include"
 AC_ARG_WITH(svn-include,
     AC_HELP_STRING([--with-svn-include=DIR],[Use given path to subversion headers.]),
     [
@@ -5478,7 +5479,7 @@ fi
 CPPFLAGS="$CPPFLAGS -I$SVN_INCLUDE/subversion-1"
 AC_SUBST(SVN_INCLUDE)
 
-SVN_LIBS="/usr/local/lib /usr/lib"
+SVN_LIBS="/usr/lib${kdelibsuff} /usr/local/lib${kdelibsuff}"
 AC_ARG_WITH(svn-lib,
 [[  --with-svn-lib=DIR  Use the given path to the subversion libraries.]],
 [

@@ -108,6 +108,9 @@ int CommandExec::exec()
     }
     m_pCPart->m_SvnWrapper->reInitClient();
     bool dont_check_second = false;
+    bool dont_check_all = false;
+    bool path_only = false;
+
     if (m_pCPart->args->count()>=2) {
         m_pCPart->cmd=m_pCPart->args->arg(1);
         m_pCPart->cmd=m_pCPart->cmd.lower();
@@ -157,6 +160,15 @@ int CommandExec::exec()
     } else if (!QString::compare(m_pCPart->cmd,"export")) {
         slotCmd=SLOT(slotCmd_export());
         dont_check_second = true;
+    } else if (!QString::compare(m_pCPart->cmd,"delete")||
+               !QString::compare(m_pCPart->cmd,"del")||
+               !QString::compare(m_pCPart->cmd,"rm")||
+               !QString::compare(m_pCPart->cmd,"remove")) {
+        slotCmd=SLOT(slotCmd_delete());
+    } else if (!QString::compare(m_pCPart->cmd,"add")) {
+        slotCmd=SLOT(slotCmd_add());
+        dont_check_all = true;
+        path_only=true;
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -182,7 +194,7 @@ int CommandExec::exec()
         }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
-        if (tmpurl.isLocalFile() && (j==2 || !dont_check_second)) {
+        if (tmpurl.isLocalFile() && (j==2 || !dont_check_second) && !dont_check_all) {
             if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path())) {
                 tmp = tmpurl.path();
                 if (j==2) mainProto = "";
@@ -190,11 +202,13 @@ int CommandExec::exec()
                 tmp = "file://"+tmpurl.path();
                 if (j==2) mainProto = "file://";
             }
+        } else if (path_only){
+            tmp = tmpurl.path();
         } else {
             tmp = tmpurl.url();
             if (j==2) mainProto=tmpurl.protocol();
         }
-        if (j>2 && dont_check_second) {
+        if ( (j>2 && dont_check_second) || dont_check_all) {
             if (mainProto.isEmpty()) {
                 tmp = tmpurl.path();
             }
@@ -203,7 +217,7 @@ int CommandExec::exec()
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
-        if (j>2 && dont_check_second) {
+        if ( (j>2 && dont_check_second) || dont_check_all) {
             continue;
         }
         svn::Revision re,ra;
@@ -389,6 +403,16 @@ void CommandExec::slotCmd_move()
         return;
     }
     m_pCPart->m_SvnWrapper->slotCopyMove(true,m_pCPart->url[0],m_pCPart->url[1],false);
+}
+
+void CommandExec::slotCmd_delete()
+{
+    m_pCPart->m_SvnWrapper->makeDelete(m_pCPart->url);
+}
+
+void CommandExec::slotCmd_add()
+{
+    m_pCPart->m_SvnWrapper->addItems(m_pCPart->url,true);
 }
 
 /*!

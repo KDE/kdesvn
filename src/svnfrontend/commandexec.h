@@ -58,6 +58,8 @@ protected slots:
     virtual void slotCmd_move();
     virtual void slotCmd_checkout();
     virtual void slotCmd_export();
+    virtual void slotCmd_delete();
+    virtual void slotCmd_add();
 
 signals:
     void executeMe();

@@ -934,6 +934,15 @@ void SvnActions::makeAdd(bool rec)
 #endif
 }
 
+void SvnActions::addItems(const QStringList&w,bool rec)
+{
+    QValueList<svn::Path> items;
+    for (unsigned int i = 0; i<w.count();++i) {
+        items.push_back(w[i]);
+    }
+    addItems(items,rec);
+}
+
 void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
 {
     QString ex;
@@ -947,6 +956,19 @@ void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
         emit clientException(ex);
         return;
     }
+}
+
+void SvnActions::makeDelete(const QStringList&w)
+{
+    int answer = KMessageBox::questionYesNoList(0,i18n("Really delete these entries?"),w,i18n("Delete from repository"));
+    if (answer!=KMessageBox::Yes) {
+        return;
+    }
+    QValueList<svn::Path> items;
+    for (unsigned int i = 0; i<w.count();++i) {
+        items.push_back(w[i]);
+    }
+    makeDelete(items);
 }
 
 /*!

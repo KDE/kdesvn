@@ -121,6 +121,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
         QFrame* mainWidget = plainPage();
         m_LogWindow = new KTextBrowser(mainWidget);
         layout->addWidget(m_LogWindow);
+        m_LogWindow->show();
         resize( QSize(500, 400).expandedTo(minimumSizeHint()) );
         slotAutoShow();
     }

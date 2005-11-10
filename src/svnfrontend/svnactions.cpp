@@ -124,6 +124,7 @@ svn::Client* SvnActions::svnclient()
 
 SvnActions::~SvnActions()
 {
+    killallThreads();
 }
 
 void SvnActions::slotNotifyMessage(const QString&aMsg)
@@ -1406,6 +1407,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 
 void SvnActions::stopCheckModThread()
 {
+    m_Data->m_ThreadCheckTimer.stop();
     if (m_CThread) {
         m_CThread->cancelMe();
         m_CThread->wait();
@@ -1416,6 +1418,7 @@ void SvnActions::stopCheckModThread()
 
 void SvnActions::stopCheckUpdateThread()
 {
+    m_Data->m_UpdateCheckTimer.stop();
     if (m_UThread) {
         m_UThread->cancelMe();
         m_UThread->wait();

@@ -65,6 +65,9 @@
 #include <qthread.h>
 #include <qtimer.h>
 
+// wait not longer than 10 seconds for a thread
+#define MAX_THREAD_WAITTIME 10000
+
 class SvnActionsData:public ref_count
 {
 public:
@@ -1410,7 +1413,10 @@ void SvnActions::stopCheckModThread()
     m_Data->m_ThreadCheckTimer.stop();
     if (m_CThread) {
         m_CThread->cancelMe();
-        m_CThread->wait();
+        if (!m_CThread->wait(MAX_THREAD_WAITTIME)) {
+            m_CThread->terminate();
+            m_CThread->wait(MAX_THREAD_WAITTIME);
+        }
         delete m_CThread;
         m_CThread=0;
     }
@@ -1421,7 +1427,10 @@ void SvnActions::stopCheckUpdateThread()
     m_Data->m_UpdateCheckTimer.stop();
     if (m_UThread) {
         m_UThread->cancelMe();
-        m_UThread->wait();
+        if (!m_UThread->wait(MAX_THREAD_WAITTIME)) {
+            m_UThread->terminate();
+            m_UThread->wait(MAX_THREAD_WAITTIME);
+        }
         delete m_UThread;
         m_UThread=0;
     }

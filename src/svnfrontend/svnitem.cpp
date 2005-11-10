@@ -171,13 +171,13 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         bool mod = false;
         QPixmap p2 = QPixmap();
         if (isLocked()) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svnlocked",KIcon::Desktop,size);
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
         } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svndeleted",KIcon::Desktop,size);
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvndeleted",KIcon::Desktop,size);
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svnadded",KIcon::Desktop,size);
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnadded",KIcon::Desktop,size);
         } else if (isModified()) {
             mod = true;
         } else if (isDir()&&wrap) {
@@ -185,7 +185,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             svn::StatusEntries::const_iterator it;
             wrap->checkUpdateCache(fullName(),dlist);
             if (dlist.size()>0) {
-                p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("svnupdates",KIcon::Desktop,size);
+                p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
             } else {
                 wrap->checkModifiedCache(fullName(),dlist);
                 for (it=dlist.begin();it!=dlist.end();++it) {
@@ -201,7 +201,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             }
         }
         if (mod) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("modified",KIcon::Desktop,size);
+            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnmodified",KIcon::Desktop,size);
         }
         if (!p2.isNull()) {
             QImage i1; i1 = p;

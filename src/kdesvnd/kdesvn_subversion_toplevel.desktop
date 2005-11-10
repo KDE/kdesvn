@@ -1,0 +1,31 @@
+[Desktop Entry]
+Encoding=UTF-8
+ServiceTypes=inode/directory,all/all
+X-KDE-Priority=TopLevel
+
+X-KDE-GetActionMenu=kded kdesvnd getTopLevelActionMenu(KURL::List)
+Actions=Update;Commit
+
+[Desktop Action Update]
+Name=KDESvn Update
+Name[bg]=Обновяване SVN
+Name[da]=SVN Opdatér
+Name[et]=SVN uuendamine
+Name[sr]=SVN ажурирање
+Name[sr@Latn]=SVN ažuriranje
+Name[sv]=SVN-uppdatera
+Name[tr]=SVN Güncelleme
+Icon=kdesvnupdate
+Exec=kdesvn exec update %U
+
+[Desktop Action Commit]
+Name=KDESvn Commit
+Name[bg]=Предаване SVN
+Name[et]=SVN sissekanne
+Name[sr]=SVN предаја
+Name[sr@Latn]=SVN predaja
+Name[sv]=SVN-arkivera
+Name[tr]=SVN Teslim Etme
+Icon=kdesvncommit
+Exec=kdesvn exec commit %U
+

@@ -169,40 +169,40 @@ void kdesvnfilelist::setupActions()
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction = new KAction(i18n("&Log..."),"svnlog",KShortcut(SHIFT+CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
-    m_LogFullAction = new KAction(i18n("&Full Log"),"svnlog",KShortcut(CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    m_LogRangeAction = new KAction(i18n("&Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    m_LogFullAction = new KAction(i18n("&Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
     m_propertyAction = new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
-    m_InfoAction = new KAction(i18n("Details"),"svninfo",
+    m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
         KShortcut(Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_RenameAction = new KAction(i18n("Move"),"move",
         KShortcut(Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
-    m_CopyAction = new KAction(i18n("Copy"),"svncopy",
+    m_CopyAction = new KAction(i18n("Copy"),"kdesvncopy",
         KShortcut(Key_C),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
-    tmp_action = new KAction(i18n("Check for updates"),"svncheckupdates",KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
+    tmp_action = new KAction(i18n("Check for updates"),"kdesvncheckupdates",KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
     /* 2. actions only on files */
-    m_BlameAction = new KAction("&Blame","svnblame",KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
+    m_BlameAction = new KAction("&Blame","kdesvnblame",KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_BlameRangeAction = new KAction("Blame range","svnblame",KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
+    m_BlameRangeAction = new KAction("Blame range","kdesvnblame",KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_CatAction = new KAction(i18n("Cat head"),
-        "svncat",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+        "kdesvncat",KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
-    tmp_action = new KAction(i18n("Cat revision..."),"svncat",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
+    tmp_action = new KAction(i18n("Cat revision..."),"kdesvncat",KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
 
-    m_LockAction = new KAction(i18n("Lock current items"),"svnlock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
-    m_UnlockAction = new KAction(i18n("Unlock current items"),"svnunlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
+    m_LockAction = new KAction(i18n("Lock current items"),"kdesvnlock",KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
+    m_UnlockAction = new KAction(i18n("Unlock current items"),"kdesvnunlock",KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
 
     /* 3. actions only on dirs */
     m_MkdirAction = new KAction("New folder","folder_new",
         KShortcut(),this,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
-    m_switchRepository = new KAction("Switch repository","svnswitch",KShortcut(),
+    m_switchRepository = new KAction("Switch repository","kdesvnswitch",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
     m_switchRepository->setToolTip(i18n("Switch repository of working copy (\"svn switch\")"));
-    tmp_action = new KAction(i18n("Relocate working copy url"),"svnrelocate",KShortcut(),
+    tmp_action = new KAction(i18n("Relocate working copy url"),"kdesvnrelocate",KShortcut(),
         this,SLOT(slotRelocate()),m_filesAction,"make_svn_relocate");
     tmp_action->setToolTip(i18n("Relocate url of current working copy to a new one"));
 
@@ -210,7 +210,7 @@ void kdesvnfilelist::setupActions()
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
     m_changeToRepository->setToolTip(i18n("Opens the repository the current working copy was checked out from"));
 
-    m_CleanupAction = new KAction("Cleanup","cleanup",KShortcut(),
+    m_CleanupAction = new KAction("Cleanup","kdesvncleanup",KShortcut(),
         this,SLOT(slotCleanupAction()),m_filesAction,"make_cleanup");
     m_ImportDirsIntoCurrent  = new KAction(i18n("Import folders into current"),"fileimport",KShortcut(),
         this,SLOT(slotImportDirsIntoCurrent()),m_filesAction,"make_import_dirs_into_current");
@@ -219,13 +219,13 @@ void kdesvnfilelist::setupActions()
     /* local only actions */
     /* 1. actions on files AND dirs*/
     m_AddCurrent = new KAction("Add selected files/dirs",
-        "svnadd",KShortcut(Key_Insert),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
+        "kdesvnadd",KShortcut(Key_Insert),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
     m_AddCurrent->setToolTip(i18n("Adding selected files and/or directories to repository"));
     tmp_action = new KAction("Add selected files/dirs recursive",
-        "svnaddrecursive",KShortcut(CTRL+Key_Insert),m_SvnWrapper,SLOT(slotAddRec()),m_filesAction,"make_svn_addrec");
+        "kdesvnaddrecursive",KShortcut(CTRL+Key_Insert),m_SvnWrapper,SLOT(slotAddRec()),m_filesAction,"make_svn_addrec");
     tmp_action->setToolTip(i18n("Adding selected files and/or directories to repository and all subitems of folders"));
 
-    m_DelCurrent = new KAction("Delete selected files/dirs","svndelete",
+    m_DelCurrent = new KAction("Delete selected files/dirs","kdesvndelete",
         KShortcut(Key_Delete),this,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
     m_RevertAction  = new KAction("Revert current changes","revert",
@@ -235,33 +235,33 @@ void kdesvnfilelist::setupActions()
     m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
     m_IgnoreAction = new KAction(i18n("Ignore/Unignore current item"),KShortcut(),this,SLOT(slotIgnore()),m_filesAction,"make_svn_ignore");
 
-    m_UpdateHead = new KAction("Update to head","svnupdate",
+    m_UpdateHead = new KAction("Update to head","kdesvnupdate",
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateHeadRec()),m_filesAction,"make_svn_headupdate");
-    m_UpdateRev = new KAction("Update to revision...","svnupdate",
+    m_UpdateRev = new KAction("Update to revision...","kdesvnupdate",
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
-    m_commitAction = new KAction("Commit","svncommit",
+    m_commitAction = new KAction("Commit","kdesvncommit",
         KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
-    m_simpleDiffHead = new KAction(i18n("Diff against head"),"svndiff",
+    m_simpleDiffHead = new KAction(i18n("Diff against head"),"kdesvndiff",
         KShortcut(CTRL+Key_H),this,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
-    m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"merge",
+    m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"kdesvnmerge",
         KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
     m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of these entry into itself"));
 
     /* remote actions only */
-    m_CheckoutCurrentAction = new KAction("Checkout current repository path","svncheckout",KShortcut(),
+    m_CheckoutCurrentAction = new KAction("Checkout current repository path","kdesvncheckout",KShortcut(),
         m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
-    m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"svnexport",KShortcut(),
+    m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"kdesvnexport",KShortcut(),
         m_SvnWrapper,SLOT(slotExportCurrent()),m_filesAction,"make_svn_export_current");
     new KAction(i18n("Select browse revision"),KShortcut(),this,SLOT(slotSelectBrowsingRevision()),m_filesAction,"switch_browse_revision");
 
     /* independe actions */
-    m_CheckoutAction = new KAction(i18n("Checkout a repository"),"svncheckout",
+    m_CheckoutAction = new KAction(i18n("Checkout a repository"),"kdesvncheckout",
         KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
-    m_ExportAction = new KAction(i18n("Export a repository"),"svnexport",
+    m_ExportAction = new KAction(i18n("Export a repository"),"kdesvnexport",
         KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
     m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(Key_F5),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
 
-    new KAction(i18n("Diff revisions"),"svndiff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
+    new KAction(i18n("Diff revisions"),"kdesvndiff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
 
     enableActions();
     m_filesAction->setHighlightingEnabled(true);

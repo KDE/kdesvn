@@ -11,3 +11,6 @@ noinst_HEADERS = kdesvnd_dcop.h
 
 kded_DATA = kdesvnd.desktop
 kdeddir = $(kde_servicesdir)/kded
+
+servicemenudir = $(kde_datadir)/konqueror/servicemenus
+servicemenu_DATA = kdesvn_subversion.desktop kdesvn_subversion_toplevel.desktop

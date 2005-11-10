@@ -187,35 +187,35 @@ Standard encrypted webbrowser protocol
 </varlistentry>
 
 <varlistentry>
-<term>svn+http</term>
+<term>(k)svn+http</term>
 <listitem><para>
 Standard webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term>svn+https</term>
+<term>(k)svn+https</term>
 <listitem><para>
 Standard encrypted webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term>svn+file</term>
+<term>(k)svn+file</term>
 <listitem><para>
 Local repository protocol. May used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term>svn</term>
+<term>(k)svn</term>
 <listitem><para>
 Subversions own server protocol.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term>svn+ssh</term>
+<term>(k)svn+ssh</term>
 <listitem><para>
 Subversion over ssh. See <link linkend="faq">FAQ</link> for details
 </para></listitem>
@@ -361,6 +361,47 @@ This entry is localy deleted from subversion but this isn't yet committed.
 -->
 </chapter>
 
+<chapter id="kdesvn-kio">
+<title>Konqueror, KIO, &kappname;</title>
+<sect1>
+<title>Description</title>
+<para>
+As of version 0.7.0 of &kappname; it comes with some modules integrating some command direct into konqueror.
+<variablelist>
+<varlistentry>
+<term>KIO protocols</term>
+<listitem><para>It implements handlers for following protocols:
+<itemizedlist>
+<listitem><para>ksvn+http</para></listitem>
+<listitem><para>ksvn+https</para></listitem>
+<listitem><para>ksvn+file</para></listitem>
+<listitem><para>ksvn+ssh</para></listitem>
+<listitem><para>ksvn</para></listitem>
+</itemizedlist>
+The same may vor &quot;svn+...&quot; but as from kde 3.4 kdesdk has it own small svn-kio called &quot;svn+http&quot; and so on. So packages are organized that way - or should - that &quot;svn+...&quot; comes as extra package so it may installed if kdesdk isn't installed. 
+</para>
+<para>
+These protocols are designed only for repositories, not for working copies. Eg. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository in difference to the application itself or KPart. 
+Working copies may browsed with konqueror.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>Context menus</term>
+<listitem><para>
+&kappname; installs context menues for konqueror. Them may seen with right click into browser window (of course, only in standard view, not any KPart) so it is possible doing most used stuff direct from within konqueror (or other filemanagers reading konquerors context menues like krusader). This is done via a call
+to the <link linkend="kdesvn-commandline">commandline variant of &kappname;</link>.
+</para>
+<para>
+This menu is static up to kde 3.5 (which isn't released as writing this document and releasing &kappname; 0.7.x) so you should care about what you're selecting. Otherwise &kappname; prints a error box.
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
 <chapter id="kdesvn-commandline">
 <title>Using kdesvn via commandline</title>
 <sect1>
@@ -433,6 +474,31 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry>info</entry>
 <entry>Detailled info about item</entry>
 <entry>-r revision</entry>
+</row>
+<row>
+<entry>checkout (or co)</entry>
+<entry>Checkout repository-path into a new working copy path. Target path and source revision will asked.</entry>
+<entry></entry>
+</row>
+<row>
+<entry>export</entry>
+<entry>Export repository- or working copy-path into directory. Target path and source revision will asked.</entry>
+<entry></entry>
+</row>
+<row>
+<entry>delete (del, remove, rm)</entry>
+<entry>delete url(s) from repository or working copy.</entry>
+<entry></entry>
+</row>
+<row>
+<entry>add</entry>
+<entry>add url to working copy. url must below a working copy (its not an import!)</entry>
+<entry></entry>
+</row>
+<row>
+<entry>revert (or undo)</entry>
+<entry>undone current changes to working copy. May only used on working copy urls!</entry>
+<entry></entry>
 </row>
 <row>
 <entry>help</entry>

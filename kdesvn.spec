@@ -79,6 +79,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_libdir}/*/kio_ksvn*
 %{_datadir}/services/ksvn*.protocol
 %{_datadir}/services/kded/kdesvnd.desktop
+%{_datadir}/apps/konqueror/servicemenus/kdesvn*
 
 %files kiosvn
 %{_datadir}/services/svn*.protocol

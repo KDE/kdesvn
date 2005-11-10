@@ -106,6 +106,7 @@ int CommandExec::exec()
     if (!m_pCPart->args) {
         return -1;
     }
+    m_pCPart->m_SvnWrapper->reInitClient();
     bool dont_check_second = false;
     if (m_pCPart->args->count()>=2) {
         m_pCPart->cmd=m_pCPart->args->arg(1);
@@ -148,6 +149,13 @@ int CommandExec::exec()
                !QString::compare(m_pCPart->cmd,"rename")||
                !QString::compare(m_pCPart->cmd,"mv")) {
         slotCmd=SLOT(slotCmd_move());
+        dont_check_second = true;
+    } else if (!QString::compare(m_pCPart->cmd,"checkout")||
+               !QString::compare(m_pCPart->cmd,"co")) {
+        slotCmd=SLOT(slotCmd_checkout());
+        dont_check_second = true;
+    } else if (!QString::compare(m_pCPart->cmd,"export")) {
+        slotCmd=SLOT(slotCmd_export());
         dont_check_second = true;
     }
 
@@ -254,6 +262,16 @@ void CommandExec::slotCmd_log()
 {
     bool list = Settings::self()->log_always_list_changed_files();
     m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list,m_pCPart->log_limit);
+}
+
+void CommandExec::slotCmd_checkout()
+{
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0],false);
+}
+
+void CommandExec::slotCmd_export()
+{
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0],true);
 }
 
 void CommandExec::slotCmd_blame()
@@ -391,7 +409,8 @@ bool CommandExec::scanRevision()
 
 void CommandExec::slotNotifyMessage(const QString&msg)
 {
-    m_pCPart->Stdout << msg << endl;
+    //m_pCPart->Stdout << msg << endl;
+    m_pCPart->m_SvnWrapper->slotExtraLogMsg(msg);
 }
 
 bool CommandExec::askRevision()

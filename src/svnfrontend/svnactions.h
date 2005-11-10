@@ -94,6 +94,7 @@ public:
     void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);
+    void CheckoutExport(const QString&what,bool _exp);
 
     QString getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
     QString getInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
@@ -146,6 +147,7 @@ public slots:
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotCopyMove(bool,const QString&,const QString&,bool);
+    virtual void slotExtraLogMsg(const QString&);
 
 signals:
     void clientException(const QString&);
@@ -154,6 +156,7 @@ signals:
     void sigRefreshAll();
     void sigRefreshCurrent(SvnItem*);
     void sigRefreshIcons();
+    void sigExtraLogMsg(const QString&);
 
 protected slots:
     virtual void wroteStdin(KProcess*);

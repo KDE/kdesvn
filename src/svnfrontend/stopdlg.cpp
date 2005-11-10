@@ -28,6 +28,7 @@
 #include <qlabel.h>
 #include <kprogress.h>
 #include <kdebug.h>
+#include <ktextbrowser.h>
 
 StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
@@ -40,7 +41,7 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
     mCancelText = actionButton(KDialogBase::Cancel)->text();
 
     QFrame* mainWidget = plainPage();
-    QVBoxLayout* layout = new QVBoxLayout(mainWidget, 10);
+    layout = new QVBoxLayout(mainWidget, 10);
     mLabel = new QLabel(text, mainWidget);
     layout->addWidget(mLabel);
     m_ProgressBar=new KProgress(15,mainWidget);
@@ -49,6 +50,7 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
 
     layout->addWidget(m_ProgressBar);
     mWait = false;
+    m_LogWindow = 0;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
     connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
@@ -110,6 +112,19 @@ void StopDlg::slotTick()
         }
         m_StopTick.restart();
     }
+    kapp->processEvents();
+}
+
+void StopDlg::slotExtraMessage(const QString&msg)
+{
+    if (!m_LogWindow) {
+        QFrame* mainWidget = plainPage();
+        m_LogWindow = new KTextBrowser(mainWidget);
+        layout->addWidget(m_LogWindow);
+        resize( QSize(500, 400).expandedTo(minimumSizeHint()) );
+        slotAutoShow();
+    }
+    m_LogWindow->append(msg);
     kapp->processEvents();
 }
 

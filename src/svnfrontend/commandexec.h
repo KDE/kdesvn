@@ -56,6 +56,8 @@ protected slots:
     virtual void slotCmd_list();
     virtual void slotCmd_copy();
     virtual void slotCmd_move();
+    virtual void slotCmd_checkout();
+    virtual void slotCmd_export();
 
 signals:
     void executeMe();

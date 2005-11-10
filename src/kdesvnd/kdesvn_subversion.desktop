@@ -5,13 +5,20 @@ X-KDE-Submenu=Kdesvn Subversion
 #X-KDE-ShowIfDcopCall=kded ksvnd anyValidWorkingCopy(KURL::List)
 
 #Return type of below is a QStringList with a list of Actions which is appended to the Actions above
+#this only works with kde 3.5?
 X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
-Actions=Add;Delete;Blame;Log;Diff
+Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info
 
 [Desktop Action Log]
-Name=Log
+Name=Subversion log
 Icon=kdesvnlog
 Exec=kdesvn exec log %U
+Comment=Displays the whole subversion log up to maximum entries set in kdesvn
+
+[Desktop Action Info]
+Name=Detailed subversion info
+Icon=kdesvninfo
+Exec=kdesvn exec info %U
 
 [Desktop Action Add]
 Name=Add to Repository
@@ -108,8 +115,8 @@ Name[sr]=Довуци из складишта...
 Name[sr@Latn]=Dovuci iz skladišta...
 Name[sv]=Checka ut från ett arkiv...
 Name[tr]=Depodan Kontrol Et...
-Icon=svn_checkout
-Exec=kio_svn_helper -C %U
+Icon=kdesvncheckout
+Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
 Comment[bg]=Изтегляне на файлове от хранилището в текущата директория.
 Comment[da]=Tjek filer ud fra et eksisterende lager til denne mappe.
@@ -200,8 +207,8 @@ Name[sr]=Извези...
 Name[sr@Latn]=Izvezi...
 Name[sv]=Exportera...
 Name[tr]=Dışa Aktar...
-Icon=svn_export
-Exec=kio_svn_helper -e %U
+Icon=kdesvnexport
+Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
 Comment[bg]=Изтегляне на копие на дървото от хранилището.
 Comment[da]=Tjek en kopi uden version ud af et træ fra et lager

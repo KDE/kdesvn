@@ -29,6 +29,8 @@ class QTimer;
 class CContextListener;
 class QLabel;
 class KProgress;
+class KTextBrowser;
+class QVBoxLayout;
 
 /**
 @author Rajko Albrecht
@@ -53,10 +55,13 @@ protected:
     KProgress*m_ProgressBar;
     bool m_BarShown;
     QTime m_StopTick;
+    KTextBrowser*m_LogWindow;
+    QVBoxLayout*layout;
 
 public slots:
     virtual void slotTick();
     virtual void slotWait(bool);
+    virtual void slotExtraMessage(const QString&);
 
 protected slots:
     virtual void slotAutoShow();

@@ -7,7 +7,7 @@ X-KDE-Submenu=Kdesvn Subversion
 #Return type of below is a QStringList with a list of Actions which is appended to the Actions above
 #this only works with kde 3.5?
 X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
-Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info
+Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Revert
 
 [Desktop Action Log]
 Name=Subversion log
@@ -54,7 +54,7 @@ Name[sr@Latn]=Odbaci lokalne izmene
 Name[sv]=Återställ lokal ändring
 Name[tr]=Yerel Değişiklikleri Ters Çevir
 Icon=undo
-Exec=kio_svn_helper -r %U
+Exec=kdesvn exec revert %U
 Comment=Remove any changes made locally. Warning - this cannot be undone.
 Comment[bg]=Премахване на локалните промени, които са направени. Забележете, че данните ще се загубят безвъзвратно.
 Comment[da]=Fjern alle ændringer der er lavet lokalt. Advarsel - dette kan ikke fortrydes.

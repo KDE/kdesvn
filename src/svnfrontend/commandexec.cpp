@@ -169,6 +169,9 @@ int CommandExec::exec()
         slotCmd=SLOT(slotCmd_add());
         dont_check_all = true;
         path_only=true;
+    } else if (!QString::compare(m_pCPart->cmd,"undo")||
+               !QString::compare(m_pCPart->cmd,"revert")) {
+        slotCmd=SLOT(slotCmd_revert());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -413,6 +416,11 @@ void CommandExec::slotCmd_delete()
 void CommandExec::slotCmd_add()
 {
     m_pCPart->m_SvnWrapper->addItems(m_pCPart->url,true);
+}
+
+void CommandExec::slotCmd_revert()
+{
+    m_pCPart->m_SvnWrapper->slotRevertItems(m_pCPart->url);
 }
 
 /*!

@@ -68,7 +68,7 @@ public:
     QByteArray makeGet(svn::Revision start, const QString&what);
     void addItems(const QValueList<svn::Path> &items,bool rec=false);
     void addItems(const QStringList&w,bool rec=false);
-    void checkAddItems(const QString&path);
+    void checkAddItems(const QString&path,bool print_error_box=true);
 
     void makeDelete(const QValueList<svn::Path>&);
     void makeDelete(const QStringList&);

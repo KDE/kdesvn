@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="5">
+<kpartgui name="kdesvn_part" version="6">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <Action name="kdesvnpart_pref" />
@@ -48,6 +48,7 @@
     <Separator/>
     <Action name="make_svn_add" />
     <Action name="make_svn_addrec" />
+    <Action name="make_check_unversioned" />
     <Action name="make_svn_revert" />
     <Action name="make_resolved" />
     <Action name="make_svn_merge_revisions" />

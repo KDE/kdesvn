@@ -205,6 +205,9 @@ void kdesvnfilelist::setupActions()
     tmp_action = new KAction(i18n("Relocate working copy url"),"kdesvnrelocate",KShortcut(),
         this,SLOT(slotRelocate()),m_filesAction,"make_svn_relocate");
     tmp_action->setToolTip(i18n("Relocate url of current working copy to a new one"));
+    tmp_action = new KAction(i18n("Check for unversioned items"),"kdesvnaddrecursive",KShortcut(),
+        this,SLOT(slotCheckNewItems()),m_filesAction,"make_check_unversioned");
+    tmp_action->setToolTip(i18n("Browse folder for unversioned items and add them if wanted."));
 
     m_changeToRepository = new KAction(i18n("Open repository of working copy"),"gohome",KShortcut(),
         this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
@@ -672,6 +675,10 @@ void kdesvnfilelist::enableActions()
 
     /* 2. on dirs only */
     m_CleanupAction->setEnabled(isWorkingCopy()&&dir);
+    temp = filesActions()->action("make_check_unversioned");
+    if (temp) {
+        temp->setEnabled(isWorkingCopy()&& (dir&&single) || none);
+    }
 
     /* remote actions only */
     m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy());
@@ -713,9 +720,6 @@ void kdesvnfilelist::slotSelectionChanged()
     }
     enableActions();
 }
-
-#include "kdesvnfilelist.moc"
-
 
 /*!
     \fn kdesvnfilelist::slotClientException(const QString&)
@@ -1959,3 +1963,27 @@ void kdesvnfilelist::slotRescanIcons()
 {
     rescanIconsRec(0L);
 }
+
+
+/*!
+    \fn kdesvnfilelist::slotCheckNewItems()
+ */
+void kdesvnfilelist::slotCheckNewItems()
+{
+    if (!isWorkingCopy()) {
+        KMessageBox::sorry(0,i18n("Only in working copy possible."),i18n("Error"));
+        return;
+    }
+    if (allSelected()->count()>1) {
+        KMessageBox::sorry(0,i18n("Only on single folder possible"),i18n("Error"));
+        return;
+    }
+    SvnItem*w = SelectedOrMain();
+    if (!w) {
+        KMessageBox::sorry(0,i18n("Sorry - internal error!"),i18n("Error"));
+        return;
+    }
+    m_SvnWrapper->checkAddItems(w->fullName(),true);
+}
+
+#include "kdesvnfilelist.moc"

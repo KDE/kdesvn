@@ -1410,7 +1410,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
     return true;
 }
 
-void SvnActions::checkAddItems(const QString&path)
+void SvnActions::checkAddItems(const QString&path,bool print_error_box)
 {
     svn::StatusEntries dlist;
     svn::StatusEntries rlist;
@@ -1426,7 +1426,7 @@ void SvnActions::checkAddItems(const QString&path)
         }
     }
     if (rlist.size()==0) {
-        KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("No unversioned items found."));
+        if (print_error_box) KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("No unversioned items found."));
     } else {
         KListView*ptr;
         KDialogBase * dlg = createDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");

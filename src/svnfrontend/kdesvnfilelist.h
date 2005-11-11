@@ -185,6 +185,8 @@ protected slots:
 protected slots:
     virtual void slotRelocate();
     virtual void slotRescanIcons();
+protected slots:
+    virtual void slotCheckNewItems();
 };
 
 #endif

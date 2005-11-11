@@ -142,8 +142,7 @@ namespace svn
       void *val;
 
       apr_hash_this (hi, &key, NULL, &val);
-      prop_map[ QString::fromUtf8( propName ) ] = QString::fromUtf8( ((const svn_string_t *)val)->data );
-
+      prop_map[propName] = QString::fromUtf8( ((const svn_string_t *)val)->data );
       path_prop_map_list.push_back( PathPropertiesMapEntry(QString::fromUtf8((const char *)key), prop_map ) );
     }
 

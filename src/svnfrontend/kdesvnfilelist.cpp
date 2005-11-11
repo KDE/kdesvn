@@ -1506,7 +1506,7 @@ void kdesvnfilelist::slotSimpleDiff()
         }
     }
 
-    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD);
+    m_SvnWrapper->makeDiff(what,svn::Revision::UNDEFINED,svn::Revision::UNDEFINED);
 }
 
 

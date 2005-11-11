@@ -68,8 +68,8 @@ pCPart::pCPart()
     :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false),single_revision(false),log_limit(0)
 {
     m_SvnWrapper = 0;
-    start = svn::Revision::START;
-    end = svn::Revision::HEAD;
+    start = svn::Revision::UNDEFINED;
+    end = svn::Revision::UNDEFINED;
     toStdout.open(IO_WriteOnly, stdout);
     toStderr.open(IO_WriteOnly, stderr);
     Stdout.setDevice(&toStdout);
@@ -337,7 +337,8 @@ void CommandExec::slotCmd_diff()
     if (m_pCPart->url.count()==1) {
         if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
             kdDebug()<<"Local diff" << endl;
-            m_pCPart->start = svn::Revision::WORKING;
+            m_pCPart->start = svn::Revision::UNDEFINED;
+            m_pCPart->end = svn::Revision::UNDEFINED;
         }
         m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->end);
     } else {

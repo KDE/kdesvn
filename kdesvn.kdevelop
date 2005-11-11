@@ -99,6 +99,8 @@
       <group pattern="*.png" name="Icons" />
       <group pattern="*.po;*.ts" name="Translations" />
       <group pattern="*" name="Others" />
+      <hidenonprojectfiles>false</hidenonprojectfiles>
+      <hidenonlocation>false</hidenonlocation>
     </groups>
     <tree>
       <hidenonprojectfiles>false</hidenonprojectfiles>
@@ -252,17 +254,17 @@
   <dist>
     <custom>false</custom>
     <bzip>false</bzip>
-    <archname/>
+    <archname></archname>
     <appname>kdesvn</appname>
-    <version>0.7.0</version>
-    <release/>
-    <vendor/>
+    <version>0.7.0rc1</version>
+    <release></release>
+    <vendor></vendor>
     <licence>LGPL</licence>
     <summary>Subversion client for KDE</summary>
     <group>Development/Tools</group>
     <packager>Rajko Albrecht</packager>
-    <description/>
-    <changelog/>
+    <description></description>
+    <changelog></changelog>
     <devpackage>false</devpackage>
     <docspackage>false</docspackage>
     <appicon>false</appicon>
@@ -271,7 +273,7 @@
     <useRPM>false</useRPM>
     <ftpkde>false</ftpkde>
     <appskde>false</appskde>
-    <url/>
+    <url></url>
   </dist>
   <ctagspart>
     <customArguments></customArguments>

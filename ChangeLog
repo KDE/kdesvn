@@ -1,12 +1,17 @@
 version 0.7.0
     * complete own icon design
     * own KIO (ksvn and svn)
-    * commandline / DCop client
+    * commandline / DCop client (both not full finished)
     * fix: Bug 37 - displays dateformat as user setup in kde-environment
     * fix: Bug 35 - recursive add possible
     * Checking for updates runs in background thread, check may start on open a working copy
     * On open a working copy checking for modified items runs in background thread
     * loghistory will show shorten messages so dialog will not get to large.
+    * check recursive for unversioned items.
+    * "Diff head" is always made without network access
+    * fix: information about accepted ssl-certificates where not stored
+    * fix: detailed information why a ssl-certificate isn't accepted
+    * display logs may shorten to a maximum
 
 version 0.6.3
     * fix: application crashed when closing repository and item was selected

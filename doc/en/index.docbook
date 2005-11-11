@@ -363,7 +363,7 @@ This entry is localy deleted from subversion but this isn't yet committed.
 
 <chapter id="kdesvn-kio">
 <title>Konqueror, KIO, &kappname;</title>
-<sect1>
+<sect1 id="kdesvn-kio-desc">
 <title>Description</title>
 <para>
 As of version 0.7.0 of &kappname; it comes with some modules integrating some command direct into konqueror.
@@ -404,7 +404,7 @@ This menu is static up to kde 3.5 (which isn't released as writing this document
 
 <chapter id="kdesvn-commandline">
 <title>Using kdesvn via commandline</title>
-<sect1>
+<sect1 id="kdesvn-commandline-overview">
 <title>Overview</title>
 <para>
 Some subversion operation may used via commandline, eg., like a standard commandline client but user intaraction are made via KDE-UI. The standard syntax is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>.
@@ -418,7 +418,7 @@ A revision may given as
 number or one of <prompt>HEAD</prompt> or <prompt>BASE</prompt> or as date format like {YYYY-MM-DD}.
 </para>
 </sect1>
-<sect1>
+<sect1 id="kdesvn-command-list">
 <title>Commandlist</title>
 <para>
 If in following overview as possible parameter <prompt>-r revision</prompt> is given, this revision may set as <prompt>&lt;url&gt;?rev=the-revision</prompt>.

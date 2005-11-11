@@ -51,6 +51,7 @@
 #include <kio/job.h>
 #include <kdebug.h>
 #include <kconfig.h>
+#include <klistview.h>
 
 #include <qstring.h>
 #include <qmap.h>
@@ -64,6 +65,7 @@
 #include <qimage.h>
 #include <qthread.h>
 #include <qtimer.h>
+#include <qlistview.h>
 
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
@@ -1406,6 +1408,50 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
         return false;
     }
     return true;
+}
+
+void SvnActions::checkAddItems(const QString&path)
+{
+    svn::StatusEntries dlist;
+    svn::StatusEntries rlist;
+    QStringList displist;
+    svn::Revision where = svn::Revision::HEAD;
+    if (!makeStatus(path,dlist,where,true,true,false,false)) {
+        return;
+    }
+    for (unsigned int i = 0; i<dlist.size();++i) {
+        if (!dlist[i].isVersioned()) {
+            rlist.append(dlist[i]);
+            displist.append(dlist[i].path());
+        }
+    }
+    if (rlist.size()==0) {
+        KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("No unversioned items found."));
+    } else {
+        KListView*ptr;
+        KDialogBase * dlg = createDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");
+        ptr->addColumn("Item");
+        for (unsigned j = 0; j<displist.size();++j) {
+            QCheckListItem * n = new QCheckListItem(ptr,displist[j],QCheckListItem::CheckBox);
+            n->setOn(true);
+        }
+        if (dlg->exec()==QDialog::Accepted) {
+            QListViewItemIterator it(ptr);
+            displist.clear();
+            while(it.current()) {
+                QCheckListItem*t = (QCheckListItem*)it.current();
+                if (t->isOn()) {
+                    displist.append(t->text());
+                }
+                ++it;
+            }
+            if (displist.count()>0) {
+                addItems(displist,false);
+            }
+        }
+        dlg->saveDialogSize(*(Settings::self()->config()),"add_items_dlg",false);
+        delete dlg;
+    }
 }
 
 void SvnActions::stopCheckModThread()

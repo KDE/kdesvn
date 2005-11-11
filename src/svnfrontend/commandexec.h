@@ -61,6 +61,7 @@ protected slots:
     virtual void slotCmd_delete();
     virtual void slotCmd_add();
     virtual void slotCmd_revert();
+    virtual void slotCmd_addnew();
 
 signals:
     void executeMe();

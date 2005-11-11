@@ -172,6 +172,9 @@ int CommandExec::exec()
     } else if (!QString::compare(m_pCPart->cmd,"undo")||
                !QString::compare(m_pCPart->cmd,"revert")) {
         slotCmd=SLOT(slotCmd_revert());
+    } else if (!QString::compare(m_pCPart->cmd,"checknew")||
+               !QString::compare(m_pCPart->cmd,"addnew")) {
+        slotCmd=SLOT(slotCmd_addnew());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -422,6 +425,11 @@ void CommandExec::slotCmd_add()
 void CommandExec::slotCmd_revert()
 {
     m_pCPart->m_SvnWrapper->slotRevertItems(m_pCPart->url);
+}
+
+void CommandExec::slotCmd_addnew()
+{
+    m_pCPart->m_SvnWrapper->checkAddItems(m_pCPart->url[0]);
 }
 
 /*!

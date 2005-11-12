@@ -62,6 +62,7 @@ public:
     QTextStream Stdout,Stderr;
     DummyDisplay * disp;
     QMap<int,svn::Revision> extraRevisions;
+    QMap<int,QString> baseUrls;
 };
 
 pCPart::pCPart()
@@ -175,6 +176,8 @@ int CommandExec::exec()
     } else if (!QString::compare(m_pCPart->cmd,"checknew")||
                !QString::compare(m_pCPart->cmd,"addnew")) {
         slotCmd=SLOT(slotCmd_addnew());
+    } else if (!QString::compare(m_pCPart->cmd,"switch")) {
+        slotCmd=SLOT(slotCmd_switch());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -189,6 +192,7 @@ int CommandExec::exec()
 
     KURL tmpurl;
     QString mainProto;
+    QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
         tmpurl = m_pCPart->args->url(j);
         query = tmpurl.query();
@@ -200,9 +204,11 @@ int CommandExec::exec()
         }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
+
         if (tmpurl.isLocalFile() && (j==2 || !dont_check_second) && !dont_check_all) {
-            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path())) {
+            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path(),_baseurl)) {
                 tmp = tmpurl.path();
+                m_pCPart->baseUrls[j-2]=_baseurl;
                 if (j==2) mainProto = "";
             } else {
                 tmp = "file://"+tmpurl.path();
@@ -476,6 +482,25 @@ bool CommandExec::askRevision()
         return true;
     }
     return false;
+}
+
+
+/*!
+    \fn CommandExec::slotCmd_switch()
+ */
+void CommandExec::slotCmd_switch()
+{
+    QString base;
+    if (m_pCPart->url.count()>1) {
+        clientException(i18n("May only switch one url at time!"));
+        return;
+    }
+    if (m_pCPart->baseUrls.find(0)==m_pCPart->baseUrls.end()) {
+        clientException(i18n("Switch only on working copies!"));
+        return;
+    }
+    base = m_pCPart->baseUrls[0];
+    m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->url[0],base);
 }
 
 #include "commandexec.moc"

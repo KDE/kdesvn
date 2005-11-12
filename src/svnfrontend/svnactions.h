@@ -93,6 +93,7 @@ public:
     void makeBlame(svn::Revision start, svn::Revision end, const QString&);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
+    bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
     void makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool);
     void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
@@ -104,7 +105,7 @@ public:
     QString getInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
 
     QString makeMkdir(const QString&);
-    bool isLocalWorkingCopy(const KURL&url);
+    bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
     void checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const;
     bool isUpdated(const QString&path)const;

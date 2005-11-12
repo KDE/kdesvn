@@ -344,13 +344,14 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_pList->m_remoteRevision=svn::Revision::HEAD;
 
     QString query = url.query();
+    QString _dummy;
 
     if (!QString::compare("svn+file",url.protocol())) {
         setBaseUri("file://"+url.path());
     } else {
         if (url.isLocalFile()) {
             setBaseUri(url.path());
-            if (m_SvnWrapper->isLocalWorkingCopy(url)) {
+            if (m_SvnWrapper->isLocalWorkingCopy(url,_dummy)) {
                 setWorkingCopy(true);
             } else {
                 // yes! KURL sometimes makes a correct localfile url (file:///)

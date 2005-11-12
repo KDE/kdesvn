@@ -1245,24 +1245,29 @@ void SvnActions::slotSwitch()
     QString path,what;
     path = k->fullName();
     what = k->Url();
+    if (makeSwitch(path,what)) {
+        emit reinitItem(k);
+    }
+}
 
+bool SvnActions::makeSwitch(const QString&path,const QString&what)
+{
     CheckoutInfo_impl*ptr;
     KDialogBase * dlg = createDialog(&ptr,i18n("Switch url"),true,"switch_url_dlg");
+    bool done = false;
     if (dlg) {
         ptr->setStartUrl(what);
         ptr->forceAsRecursive(true);
         ptr->disableTargetDir(true);
         ptr->disableOpen(true);
-        bool done = false;
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             done = makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
         }
         dlg->saveDialogSize(*(Settings::self()->config()),"switch_url_dlg",false);
         delete dlg;
-        if (!done) return;
     }
-    emit reinitItem(k);
+    return done;
 }
 
 void SvnActions::slotCleanup(const QString&path)
@@ -1745,23 +1750,25 @@ bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&
 /*!
     \fn SvnActions::isLocalWorkingCopy(const KURL&url)
  */
-bool SvnActions::isLocalWorkingCopy(const KURL&url)
+bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
 {
     if (url.isEmpty()||!url.isLocalFile()) return false;
     QString cleanpath = url.path();
     while (cleanpath.endsWith("/")) {
         cleanpath.truncate(cleanpath.length()-1);
     }
-
+    _baseUri="";
     kdDebug()<<"Url: " << url << " - path: " << cleanpath << endl;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
+    svn::InfoEntries e;
     try {
-        m_Data->m_Svnclient.info2(cleanpath,false,rev,peg);
+        e = m_Data->m_Svnclient.info2(cleanpath,false,rev,peg);
     } catch (svn::ClientException e) {
         kdDebug()<< e.message()<<endl;
         return false;
     }
+    _baseUri=e[0].url();
     return true;
 }
 

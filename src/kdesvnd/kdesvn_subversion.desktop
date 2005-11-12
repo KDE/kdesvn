@@ -7,7 +7,7 @@ X-KDE-Submenu=Kdesvn Subversion
 #Return type of below is a QStringList with a list of Actions which is appended to the Actions above
 #this only works with kde 3.5?
 X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
-Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Revert;Addnew
+Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert
 
 [Desktop Action Log]
 Name=Subversion log (last 100)
@@ -139,7 +139,7 @@ Name[sr]=Пребаци...
 Name[sr@Latn]=Prebaci...
 Name[sv]=Byt...
 Name[tr]=Değiştir...
-Icon=svn_switch
+Icon=kdesvnswitch
 Comment=Switch given working copy to another branch
 Comment[bg]=Превключване на работното копие към друго разклонение.
 Comment[da]=Skift given arbejdskopi til en anden gren.
@@ -148,7 +148,7 @@ Comment[sr]=Пребаци дату радну копију на другу гр
 Comment[sr@Latn]=Prebaci datu radnu kopiju na drugu granu
 Comment[sv]=Byt angiven arbetskopia till en annan gren
 Comment[tr]=Çalışan belirli bir kopyayı başka bölüme değiştir
-Exec=kio_svn_helper -s %U
+Exec=kdesvn exec switch %U
 
 [Desktop Action Merge]
 Name=Merge...

@@ -72,6 +72,8 @@ protected:
 private:
     pCPart*m_pCPart;
 
+protected slots:
+    void slotCmd_switch();
 };
 
 #endif

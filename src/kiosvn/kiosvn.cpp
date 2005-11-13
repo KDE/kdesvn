@@ -360,7 +360,7 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
     return res;
 }
 
-bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)
+bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)
 {
 #if 0
         kdDebug() << "MTime : " << ( long )mtime << endl;

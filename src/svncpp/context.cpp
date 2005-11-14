@@ -256,9 +256,9 @@ namespace svn
 
       svn_auth_baton_t * ab = ctx.auth_baton;
       svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_USERNAME,
-                              username.ascii());
+                              username.utf8());
       svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD,
-                              password.ascii());
+                              password.utf8());
 
     }
 
@@ -389,8 +389,8 @@ namespace svn
       SVN_ERR (svn_utf_cstring_to_utf8 (
                  &lcred->username,
                  data->getUsername (), pool)); */
-      lcred->password = data->getPassword().ascii();
-      lcred->username = data->getUsername().ascii();
+      lcred->password = data->getPassword().utf8();
+      lcred->username = data->getUsername().utf8();
 
       // tell svn if the credentials need to be saved
       lcred->may_save = may_save;

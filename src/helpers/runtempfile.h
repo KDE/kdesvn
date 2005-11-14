@@ -21,6 +21,7 @@ protected:
     bool _stat;
     QTimer m_timer;
     bool initdone;
+    pid_t _pid;
 
 protected slots:
     void finished();

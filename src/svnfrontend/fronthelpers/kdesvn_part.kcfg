@@ -25,6 +25,10 @@
       <label>Use external program for diff viewing</label>
       <default>kompare</default>
     </entry>
+    <entry name="external_display" type="String">
+      <label>Use external program for viewing</label>
+      <default>default</default>
+    </entry>
     <entry name="max_log_messages" type="Int">
       <label>Maximum number of log messages</label>
       <default>20</default>

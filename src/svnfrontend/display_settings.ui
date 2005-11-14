@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>299</height>
+            <height>328</height>
         </rect>
     </property>
     <property name="caption">
@@ -163,6 +163,43 @@ and Kdesvn will pipe data direct.
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
+                <cstring>layout2_2</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_display_label</cstring>
+                    </property>
+                    <property name="text">
+                        <string>External display:</string>
+                    </property>
+                </widget>
+                <widget class="KLineEdit" row="0" column="1">
+                    <property name="name">
+                        <cstring>kcfg_external_display</cstring>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;p align="left"&gt;
+Enter an external program in form
+&lt;br&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; &amp;lt;%f&amp;gt;&lt;/tt&gt;
+&lt;br&gt;
+%f will replaced with a temporary filename. If external may read data from
+stdin, you may just type
+&lt;br&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt&gt;
+&lt;br&gt;
+and Kdesvn will pipe data direct.
+&lt;/p&gt;</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
                 <cstring>layout3</cstring>
             </property>
             <grid>
@@ -224,6 +261,12 @@ and Kdesvn will pipe data direct.
         <signal>toggled(bool)</signal>
         <receiver>DisplaySettings</receiver>
         <slot>dispFileInfotoggled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>kcfg_external_display</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>DisplaySettings</receiver>
+        <slot>diffDispChanged()</slot>
     </connection>
 </connections>
 <slots>

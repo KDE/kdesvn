@@ -767,8 +767,19 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         return;
     }
     if (isWorkingCopy()) {
-        KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
-        fitem.run();
+        QString feditor = Settings::external_display();
+        if ( feditor.compare("default") == 0 )
+        {
+            KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
+            fitem.run();
+        }
+        else
+        {
+            if ( KRun::runCommand(feditor + " " +  fki->fullName()) <= 0)
+            {
+                KMessageBox::error(this,i18n("Failed: " + feditor + " " +  fki->fullName()));
+            }
+        }
     } else {
         QByteArray content = m_SvnWrapper->makeGet(m_pList->m_remoteRevision,fki->fullName());
         if (content.size()==0) return;

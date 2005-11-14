@@ -1,10 +1,13 @@
 #include "runtempfile.h"
+#include "src/svnfrontend/fronthelpers/settings.h"
 
 #include <kdebug.h>
+#include <sys/wait.h>
 
 RunTempfile::RunTempfile(const QByteArray&content)
     : QObject(),_job(0),_file(0),_stat(true),m_timer(this,"RunTempfile::timer"),initdone(false)
 {
+    _pid = 0;
     _file = new KTempFile();
     _file->setAutoDelete(true);
     _stat = true;
@@ -18,6 +21,13 @@ RunTempfile::RunTempfile(const QByteArray&content)
     }
     ds->writeRawBytes(content,content.size());
     _file->close();
+
+    QString feditor = Settings::external_display();
+    if ( feditor.compare("default") != 0 )
+    {
+        _pid = KRun::runCommand(feditor + " " +  _file->name());
+    }
+
     m_timer.start(10,true);
 }
 
@@ -36,9 +46,23 @@ void RunTempfile::finished()
 void RunTempfile::timeout()
 {
     if (!initdone) {
-        _job = new KRun(_file->name(),0,true,true);
-        connect(_job,SIGNAL(finished()),this,SLOT(finished()));
-        initdone=true;
+        if (_pid == 0)
+        {
+            _job = new KRun(_file->name(),0,true,true);
+            connect(_job,SIGNAL(finished()),this,SLOT(finished()));
+            initdone=true;
+        }
+        else
+        {
+            if ( waitpid(_pid, NULL, WNOHANG) > 0)
+            {
+                initdone = true;
+            }
+            else
+            {
+                m_timer.start(10000,true);
+            }
+        }
     } else {
         delete this;
     }

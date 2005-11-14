@@ -183,16 +183,12 @@ and Kdesvn will pipe data direct.
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>&lt;p align="left"&gt;
-Enter an external program in form
+Enter an external program for opening file on doubleclick in form
 &lt;br&gt;
-&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; &amp;lt;%f&amp;gt;&lt;/tt&gt;
-&lt;br&gt;
-%f will replaced with a temporary filename. If external may read data from
-stdin, you may just type
-&lt;br&gt;
-&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt&gt;
-&lt;br&gt;
-and Kdesvn will pipe data direct.
+&lt;tt&gt;&amp;lt;program&amp;gt;&lt;/tt&gt;
+&lt;/p&gt;
+&lt;p&gt;
+When kde-default is wanted for opening on double click, enter &amp;quot;default&amp;quot; and kde selects action.
 &lt;/p&gt;</string>
                     </property>
                 </widget>
@@ -276,6 +272,7 @@ and Kdesvn will pipe data direct.
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>
+    <includehint>klineedit.h</includehint>
     <includehint>klineedit.h</includehint>
     <includehint>knuminput.h</includehint>
 </includehints>

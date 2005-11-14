@@ -32,14 +32,19 @@ CopyMoveView_impl::CopyMoveView_impl(const QString&baseName,const QString&source
 : CopyMoveView(parent,name,fl)
 {
     m_BaseName = baseName;
-    if (!m_BaseName.endsWith("/")) {
+    if (m_BaseName.length()>0 && !m_BaseName.endsWith("/")) {
         m_BaseName+="/";
     }
     m_PrefixLabel->setText(m_BaseName);
     m_OldNameLabel->setText("<b>"+sourceName+"</b>");
     m_OldName = sourceName;
-    QString t = m_OldName.right(m_OldName.length()-m_BaseName.length());
-    m_NewNameInput->setText(t);
+    if (m_BaseName.length()>0) {
+        QString t = m_OldName.right(m_OldName.length()-m_BaseName.length());
+        m_NewNameInput->setText(t);
+    } else {
+        m_PrefixLabel->hide();
+        m_NewNameInput->setText(sourceName);
+    }
     if (move) {
         m_HeadOneLabel->setText(i18n("Rename/move"));
     } else {

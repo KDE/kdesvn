@@ -451,6 +451,16 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry>-r revision </entry>
 </row>
 <row>
+<entry>copy (or cp)</entry>
+<entry>Copy item inside working copy or repository. If target isn't given, &kappname; asks.</entry>
+<entry></entry>
+</row>
+<row>
+<entry>move (or mv, rename)</entry>
+<entry>Move/Rename item inside working copy or repository. If target isn't given, &kappname; asks.</entry>
+<entry></entry>
+</row>
+<row>
 <entry>get</entry>
 <entry>Get content of item and save it</entry>
 <entry>-r revision -o &lt;outputfile&gt; (output is required!)</entry>

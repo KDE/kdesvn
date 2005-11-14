@@ -1,19 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 ServiceTypes=inode/directory,all/all
-X-KDE-Submenu=Kdesvn Subversion
+X-KDE-Submenu=Subversion (kdesvn)
 #X-KDE-ShowIfDcopCall=kded ksvnd anyValidWorkingCopy(KURL::List)
 
 #Return type of below is a QStringList with a list of Actions which is appended to the Actions above
 #this only works with kde 3.5?
 X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
-Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert
+Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename
 
 [Desktop Action Log]
 Name=Subversion log (last 100)
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
-Comment=Displays the whole subversion log up to maximum entries set in kdesvn
+Comment=Displays the subversion log
 
 [Desktop Action Info]
 Name=Detailed subversion info
@@ -82,7 +82,7 @@ Name[sr@Latn]=Preimenuj...
 Name[sv]=Byt namn...
 Name[tr]=Yeniden Adlandır...
 Icon=pencil
-Exec=kio_svn_helper -r %U
+Exec=kdesvn exec mv %U
 Comment=Rename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.
 Comment[bg]=Преименуване на файл локално и в хранилището. За предпочитане е да използвате този метод, вместо изтриване и добавяне.
 Comment[da]=Omdøb en fil lokalt og i lageret. Brug dette i stedet for at tilføje og slette fro at omdøbe en fil.

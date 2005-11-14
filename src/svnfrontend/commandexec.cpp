@@ -26,6 +26,7 @@
 #include "svncpp/dirent.hpp"
 #include "helpers/sub2qt.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
+#include "svnfrontend/copymoveview_impl.h"
 
 #include <kglobal.h>
 #include <kdebug.h>
@@ -400,10 +401,21 @@ void CommandExec::slotCmd_list()
     }
 }
 
+void CommandExec::copy_move(const QString&source,bool _move)
+{
+    bool ok,force;
+    QString target = CopyMoveView_impl::getMoveCopyTo(&ok,&force,_move,
+        source,"",0,"move_name");
+    if (!ok) {
+        return;
+    }
+    m_pCPart->m_SvnWrapper->slotCopyMove(_move,source,target,force);
+}
+
 void CommandExec::slotCmd_copy()
 {
     if (m_pCPart->url.count()<2) {
-        clientException(i18n("copy <source> <target>"));
+        copy_move(m_pCPart->url[0],false);
         return;
     }
     m_pCPart->m_SvnWrapper->slotCopyMove(false,m_pCPart->url[0],m_pCPart->url[1],false);
@@ -412,7 +424,7 @@ void CommandExec::slotCmd_copy()
 void CommandExec::slotCmd_move()
 {
     if (m_pCPart->url.count()<2) {
-        clientException(i18n("move <source> <target>"));
+        copy_move(m_pCPart->url[0],true);
         return;
     }
     m_pCPart->m_SvnWrapper->slotCopyMove(true,m_pCPart->url[0],m_pCPart->url[1],false);

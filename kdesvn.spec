@@ -1,7 +1,7 @@
 # This spec file was generated using Kpp
 # If you find any problems with this spec file please report
 # the error to ian geiser <geiseri@msoe.edu>
-Summary:   A subversion client for the KDE
+Summary:   A subversion client for the KDE with KIO integration.
 Name:      kdesvn
 Version:   0.7.0rc2
 Release:   1%{?dist}
@@ -20,18 +20,10 @@ BuildPreReq: subversion-devel >= 1.1.0
 Requires: subversion >= 1.1.0
 
 %description
-Kdesvn is a subversion client for KDE.
-
-%package kioksvn
-Requires: kdesvn = %{version}
-Group:    Development/Tools
-Summary:  A kde-kio integration for subversion based on kdesvn
-
-%description kioksvn
-KIO integration (KIO::ksvn) based on kdesvn
+Kdesvn is a subversion client for KDE, containing a KIO protocol for konqueror filemanager.
 
 %package kiosvn
-Requires: kdesvn-kioksvn = %{version}
+Requires: kdesvn = %{version}
 Group:    Development/Tools
 Summary:  A kde-kio integration for subversion based on kdesvn
 
@@ -76,8 +68,6 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_libdir}/*/kded_kdesvnd.*
 %{_datadir}/services/kded/kdesvnd.desktop
 %{_datadir}/apps/konqueror/servicemenus/kdesvn*
-
-%files kioksvn
 %{_libdir}/*/kio_ksvn*
 %{_datadir}/services/ksvn*.protocol
 

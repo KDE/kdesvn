@@ -244,8 +244,16 @@ void kdesvnfilelist::setupActions()
         KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
     m_commitAction = new KAction("Commit","kdesvncommit",
         KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
-    m_simpleDiffHead = new KAction(i18n("Diff against head"),"kdesvndiff",
-        KShortcut(CTRL+Key_H),this,SLOT(slotSimpleDiff()),m_filesAction,"make_svn_headdiff");
+
+    m_simpleDiffHead = new KAction(i18n("Diff against BASE"),"kdesvndiff",
+        KShortcut(CTRL+Key_B),this,SLOT(slotSimpleBaseDiff()),m_filesAction,"make_svn_basediff");
+    m_simpleDiffHead->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
+
+    m_simpleDiffHead = new KAction(i18n("Diff against HEAD"),"kdesvndiff",
+        KShortcut(CTRL+Key_H),this,SLOT(slotSimpleHeadDiff()),m_filesAction,"make_svn_headdiff");
+    m_simpleDiffHead->setToolTip(i18n("Diff working copy against HEAD (last checked in version)- requires access to repository"));
+
+
     m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"kdesvnmerge",
         KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
     m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of these entry into itself"));
@@ -673,6 +681,10 @@ void kdesvnfilelist::enableActions()
     m_UpdateRev->setEnabled(isWorkingCopy()&&isopen);
     m_commitAction->setEnabled(isWorkingCopy()&&isopen);
     m_simpleDiffHead->setEnabled(isWorkingCopy()&&isopen);
+    temp = filesActions()->action("make_svn_basediff");
+    if (temp) {
+        temp->setEnabled(isWorkingCopy()&&isopen);
+    }
 
     /* 2. on dirs only */
     m_CleanupAction->setEnabled(isWorkingCopy()&&dir);
@@ -1503,10 +1515,7 @@ void kdesvnfilelist::slotRangeBlame()
 }
 
 
-/*!
-    \fn kdesvnfilelist::slotSimpleDiff()
- */
-void kdesvnfilelist::slotSimpleDiff()
+void kdesvnfilelist::slotSimpleBaseDiff()
 {
     FileListViewItemList*klist = allSelected();
     QStringList what;
@@ -1523,6 +1532,24 @@ void kdesvnfilelist::slotSimpleDiff()
     }
 
     m_SvnWrapper->makeDiff(what,svn::Revision::UNDEFINED,svn::Revision::UNDEFINED);
+}
+
+void kdesvnfilelist::slotSimpleHeadDiff()
+{
+    FileListViewItemList*klist = allSelected();
+    QStringList what;
+
+    if (!klist||klist->count()==0) {
+        what<<baseUri();
+    }else{
+        FileListViewItemListIterator liter(*klist);
+        FileListViewItem*cur;
+        while ((cur=liter.current())!=0){
+            ++liter;
+            what<<cur->fullName();
+        }
+    }
+    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD);
 }
 
 

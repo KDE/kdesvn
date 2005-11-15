@@ -174,7 +174,9 @@ protected slots:
     virtual void slotIgnore();
     virtual void slotBlame();
     virtual void slotRangeBlame();
-    virtual void slotSimpleDiff();
+    virtual void slotSimpleHeadDiff();
+    virtual void slotSimpleBaseDiff();
+
     virtual void slotDiffRevisions();
     virtual void slotRevisionCat();
     virtual void slotCheckUpdates();

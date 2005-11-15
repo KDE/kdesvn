@@ -23,12 +23,17 @@
 #include "authdialogimpl.h"
 #include "ssltrustprompt_impl.h"
 #include "logmsg_impl.h"
+#include "svncpp/client.hpp"
+#include "svncpp/revision.hpp"
+#include "svncpp/status.hpp"
 
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kfiledialog.h>
+
+#include <qdir.h>
 
 extern "C" {
 /* we will get trouble on old fedora 2 systems with the origin compiler - don't know whats up
@@ -59,16 +64,24 @@ kdesvnd_dcop::~kdesvnd_dcop()
 QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List list)
 {
     QStringList result;
+    if (list.count()==0) {
+        return result;
+    }
     return result;
 }
 
-QStringList kdesvnd_dcop::getActionMenu ( const KURL::List list )
+QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
 {
     QStringList result;
+    if (list.count()==0) {
+        return result;
+    }
+
     result << "Add";
     result << "Log";
     result << "Info";
     result << "Diff";
+
     return result;
 }
 
@@ -127,4 +140,98 @@ QStringList kdesvnd_dcop::get_logmsg()
     }
     res.append(logMessage);
     return res;
+}
+
+bool kdesvnd_dcop::isWorkingCopy(const KURL&url,QString&base)
+{
+    base = "";
+    if (url.isEmpty()||!url.isLocalFile()) return false;
+
+    return true;
+}
+
+bool kdesvnd_dcop::contextGetLogin (const QString & realm,
+                                  QString & username,
+                                  QString & password,
+                                  bool & maySave)
+{
+    QStringList res = get_login(realm);
+    if (res.count()!=3) {
+        return false;
+    }
+    username = res[0];
+    password = res[1];
+    maySave = (res[2]=="true");
+    return true;
+}
+
+void kdesvnd_dcop::contextNotify(const char * /*path*/,
+                                 svn_wc_notify_action_t /*action*/,
+                                 svn_node_kind_t /*kind*/,
+                                 const char */*mime_type*/,
+                                 svn_wc_notify_state_t /*content_state*/,
+                                 svn_wc_notify_state_t /*prop_state*/,
+                                 svn_revnum_t /*revision*/)
+{
+}
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+void kdesvnd_dcop::contextNotify(const svn_wc_notify_t * /*action*/)
+{
+}
+#endif
+
+bool kdesvnd_dcop::contextCancel()
+{
+    return false;
+}
+
+bool kdesvnd_dcop::contextGetLogMessage (QString & msg)
+{
+    QStringList res = get_logmsg();
+    if (res.count()==0) {
+        return false;
+    }
+    msg = res[1];
+    return true;
+}
+
+SslServerTrustAnswer kdesvnd_dcop::contextSslServerTrustPrompt (const SslServerTrustData & data,
+        apr_uint32_t & /*acceptedFailures*/)
+{
+    int res = get_sslaccept(data.hostname,
+            data.fingerprint,
+            data.validFrom,
+            data.validUntil,
+            data.issuerDName,
+            data.realm);
+    switch (res) {
+        case -1:
+            return DONT_ACCEPT;
+            break;
+        case 1:
+            return ACCEPT_PERMANENTLY;
+            break;
+        default:
+        case 0:
+            return ACCEPT_TEMPORARILY;
+            break;
+    }
+    /* avoid compiler warnings */
+    return ACCEPT_TEMPORARILY;
+}
+
+bool kdesvnd_dcop::contextSslClientCertPrompt (QString & certFile)
+{
+    certFile = get_sslclientcertfile();
+    if (certFile.isEmpty()) {
+        return false;
+    }
+    return true;
+}
+
+bool kdesvnd_dcop::contextSslClientCertPwPrompt (QString & password,
+                                   const QString & realm, bool & maySave)
+{
+    return false;
 }

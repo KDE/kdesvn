@@ -245,7 +245,7 @@ void kdesvnfilelist::setupActions()
     m_commitAction = new KAction("Commit","kdesvncommit",
         KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
 
-    m_simpleDiffHead = new KAction(i18n("Diff against BASE"),"kdesvndiff",
+    m_simpleDiffHead = new KAction(i18n("Diff local changes"),"kdesvndiff",
         KShortcut(CTRL+Key_B),this,SLOT(slotSimpleBaseDiff()),m_filesAction,"make_svn_basediff");
     m_simpleDiffHead->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
 

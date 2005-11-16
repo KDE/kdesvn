@@ -303,6 +303,12 @@ void CommandExec::slotCmd_export()
 
 void CommandExec::slotCmd_blame()
 {
+    if (m_pCPart->end == svn::Revision::UNDEFINED) {
+        m_pCPart->end = svn::Revision::HEAD;
+    }
+    if (m_pCPart->start == svn::Revision::UNDEFINED) {
+        m_pCPart->start = 1;
+    }
     m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start,m_pCPart->end,m_pCPart->url[0]);
 }
 
@@ -311,6 +317,9 @@ void CommandExec::slotCmd_cat()
     if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
         m_pCPart->rev_set=true;
         m_pCPart->start=m_pCPart->extraRevisions[0];
+    } else {
+        m_pCPart->end = svn::Revision::HEAD;
+        kdDebug()<<"Setting head standard for cat";
     }
     m_pCPart->m_SvnWrapper->makeCat((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0],m_pCPart->url[0]);
 }
@@ -320,6 +329,9 @@ void CommandExec::slotCmd_get()
     if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
         m_pCPart->rev_set=true;
         m_pCPart->start=m_pCPart->extraRevisions[0];
+    } else {
+        m_pCPart->end = svn::Revision::HEAD;
+        kdDebug()<<"Setting head standard for get";
     }
     if (!m_pCPart->outfile_set || m_pCPart->outfile.isEmpty()) {
         clientException(i18n("\"GET\" requires output file!"));
@@ -339,7 +351,7 @@ void CommandExec::slotCmd_get()
 void CommandExec::slotCmd_update()
 {
     m_pCPart->m_SvnWrapper->makeUpdate(m_pCPart->url,
-        (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),true);
+        (m_pCPart->rev_set?m_pCPart->start:svn::Revision::HEAD),true);
 }
 
 void CommandExec::slotCmd_diff()

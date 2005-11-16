@@ -26,6 +26,7 @@
 #include "svncpp/client.hpp"
 #include "svncpp/revision.hpp"
 #include "svncpp/status.hpp"
+#include "svncpp/context_listener.hpp"
 
 #include <kdebug.h>
 #include <kapplication.h>
@@ -51,14 +52,50 @@ extern "C" {
     }
 }
 
+class IListener:public svn::ContextListener
+{
+    kdesvnd_dcop*m_back;
+public:
+    IListener(kdesvnd_dcop*p):svn::ContextListener(){m_back=p;}
+    virtual ~IListener(){}
+    /* context-listener methods */
+    virtual bool contextGetLogin (const QString & realm,
+                                  QString & username,
+                                  QString & password,
+                                  bool & maySave);
+    virtual void contextNotify (const char *path,
+                                svn_wc_notify_action_t action,
+                                svn_node_kind_t kind,
+                                const char *mime_type,
+                                svn_wc_notify_state_t content_state,
+                                svn_wc_notify_state_t prop_state,
+                                svn_revnum_t revision);
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
+    virtual void contextNotify (const svn_wc_notify_t *action);
+#endif
+
+    virtual bool contextCancel();
+    virtual bool contextGetLogMessage (QString & msg);
+    virtual svn::ContextListener::SslServerTrustAnswer
+            contextSslServerTrustPrompt (const SslServerTrustData & data,
+            apr_uint32_t & acceptedFailures);
+    virtual bool contextSslClientCertPrompt (QString & certFile);
+    virtual bool contextSslClientCertPwPrompt (QString & password,
+                                               const QString & realm, bool & maySave);
+    /* context listener virtuals end */
+
+};
+
 kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)
 {
     kdDebug() << "Starting new service... " << endl;
+    m_Listener=0;
 }
 
 kdesvnd_dcop::~kdesvnd_dcop()
 {
     kdDebug() << "Going away... " << endl;
+    delete m_Listener;
 }
 
 QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List list)
@@ -150,12 +187,12 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&url,QString&base)
     return true;
 }
 
-bool kdesvnd_dcop::contextGetLogin (const QString & realm,
+bool IListener::contextGetLogin (const QString & realm,
                                   QString & username,
                                   QString & password,
                                   bool & maySave)
 {
-    QStringList res = get_login(realm);
+    QStringList res = m_back->get_login(realm);
     if (res.count()!=3) {
         return false;
     }
@@ -165,7 +202,7 @@ bool kdesvnd_dcop::contextGetLogin (const QString & realm,
     return true;
 }
 
-void kdesvnd_dcop::contextNotify(const char * /*path*/,
+void IListener::contextNotify(const char * /*path*/,
                                  svn_wc_notify_action_t /*action*/,
                                  svn_node_kind_t /*kind*/,
                                  const char */*mime_type*/,
@@ -176,19 +213,19 @@ void kdesvnd_dcop::contextNotify(const char * /*path*/,
 }
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
-void kdesvnd_dcop::contextNotify(const svn_wc_notify_t * /*action*/)
+void IListener::contextNotify(const svn_wc_notify_t * /*action*/)
 {
 }
 #endif
 
-bool kdesvnd_dcop::contextCancel()
+bool IListener::contextCancel()
 {
     return false;
 }
 
-bool kdesvnd_dcop::contextGetLogMessage (QString & msg)
+bool IListener::contextGetLogMessage (QString & msg)
 {
-    QStringList res = get_logmsg();
+    QStringList res = m_back->get_logmsg();
     if (res.count()==0) {
         return false;
     }
@@ -196,10 +233,10 @@ bool kdesvnd_dcop::contextGetLogMessage (QString & msg)
     return true;
 }
 
-SslServerTrustAnswer kdesvnd_dcop::contextSslServerTrustPrompt (const SslServerTrustData & data,
+svn::ContextListener::SslServerTrustAnswer IListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
         apr_uint32_t & /*acceptedFailures*/)
 {
-    int res = get_sslaccept(data.hostname,
+    int res = m_back->get_sslaccept(data.hostname,
             data.fingerprint,
             data.validFrom,
             data.validUntil,
@@ -221,16 +258,16 @@ SslServerTrustAnswer kdesvnd_dcop::contextSslServerTrustPrompt (const SslServerT
     return ACCEPT_TEMPORARILY;
 }
 
-bool kdesvnd_dcop::contextSslClientCertPrompt (QString & certFile)
+bool IListener::contextSslClientCertPrompt (QString & certFile)
 {
-    certFile = get_sslclientcertfile();
+    certFile = m_back->get_sslclientcertfile();
     if (certFile.isEmpty()) {
         return false;
     }
     return true;
 }
 
-bool kdesvnd_dcop::contextSslClientCertPwPrompt (QString & password,
+bool IListener::contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave)
 {
     return false;

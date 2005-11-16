@@ -22,13 +22,13 @@
 #ifndef _kdesvnd_dcop_H
 #define _kdesvnd_dcop_H
 
-#include "svncpp/context_listener.hpp"
-
 #include <qstringlist.h>
 #include <qstring.h>
 #include <kurl.h>
 #include <dcopobject.h>
 #include <kdedmodule.h>
+
+class IListener;
 
 class kdesvnd_dcop :  public KDEDModule
 {
@@ -41,33 +41,9 @@ public:
     kdesvnd_dcop(const QCString&);
     virtual ~kdesvnd_dcop();
 
-    /* context-listener methods */
-    virtual bool contextGetLogin (const QString & realm,
-                                  QString & username,
-                                  QString & password,
-                                  bool & maySave);
-    virtual void contextNotify (const char *path,
-                                svn_wc_notify_action_t action,
-                                svn_node_kind_t kind,
-                                const char *mime_type,
-                                svn_wc_notify_state_t content_state,
-                                svn_wc_notify_state_t prop_state,
-                                svn_revnum_t revision);
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
-    virtual void contextNotify (const svn_wc_notify_t *action);
-#endif
-
-    virtual bool contextCancel();
-    virtual bool contextGetLogMessage (QString & msg);
-    virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
-            apr_uint32_t & acceptedFailures);
-    virtual bool contextSslClientCertPrompt (QString & certFile);
-    virtual bool contextSslClientCertPwPrompt (QString & password,
-                                               const QString & realm, bool & maySave);
-    /* context listener virtuals end */
-
 protected:
     bool isWorkingCopy(const KURL&url,QString&base);
+    IListener*m_Listener;
 
 k_dcop:
     //! get a subversion login

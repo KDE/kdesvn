@@ -94,7 +94,7 @@ void KioSvnData::reInitClient()
 
 KioSvnData::~KioSvnData()
 {
-
+    delete m_CurrentContext;
 }
 
 svn::Revision KioSvnData::urlToRev(const KURL&url)

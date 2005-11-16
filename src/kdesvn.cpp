@@ -66,6 +66,7 @@ kdesvn::kdesvn()
 #else
     setXMLFile("kdesvnui.rc");
 #endif
+    setStandardToolBarMenuEnabled(true);
     // then, setup our actions
     setupActions();
     // and a status bar
@@ -158,7 +159,6 @@ void kdesvn::setupActions()
     KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
     KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 
-    m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
     m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
 
     KToggleAction *toggletemp;
@@ -168,16 +168,6 @@ void kdesvn::setupActions()
     KConfigGroup cs(KGlobal::config(),"startup");
     toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLoadLast(bool)));
-}
-
-void kdesvn::optionsShowToolbar()
-{
-    // this is all very cut and paste code for showing/hiding the
-    // toolbar
-    if (m_toolbarAction->isChecked())
-        toolBar()->show();
-    else
-        toolBar()->hide();
 }
 
 void kdesvn::optionsShowStatusbar()

@@ -90,7 +90,6 @@ private slots:
     void fileOpen();
     void fileNew();
     void fileClose();
-    void optionsShowToolbar();
     void optionsShowStatusbar();
 
     void changeStatusbar(const QString&);
@@ -109,7 +108,6 @@ private:
     KActionCollection*m_Bookmarkactions;
     KBookmarkMenu * m_pBookmarkMenu;
     KParts::ReadOnlyPart *m_part;
-    KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
 protected slots:
     virtual void optionsConfigureToolbars();

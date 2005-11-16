@@ -27,6 +27,7 @@
 #include "svncpp/revision.hpp"
 #include "svncpp/status.hpp"
 #include "svncpp/context_listener.hpp"
+#include "svncpp/url.hpp"
 
 #include <kdebug.h>
 #include <kapplication.h>
@@ -40,12 +41,14 @@ extern "C" {
 /* we will get trouble on old fedora 2 systems with the origin compiler - don't know whats up
  * with there gcc
  */
+#if 0
  #define GCC_VERSION (__GNUC__ * 10000 \
                                + __GNUC_MINOR__ * 100 \
                                + __GNUC_PATCHLEVEL__)
 #if GCC_VERSION == 30303
 #undef KDE_EXPORT
 #define KDE_EXPORT
+#endif
 #endif
     KDE_EXPORT KDEDModule *create_kdesvnd(const QCString &name) {
        return new kdesvnd_dcop(name);
@@ -54,10 +57,12 @@ extern "C" {
 
 class IListener:public svn::ContextListener
 {
+    friend class kdesvnd_dcop;
+
     kdesvnd_dcop*m_back;
 public:
-    IListener(kdesvnd_dcop*p):svn::ContextListener(){m_back=p;}
-    virtual ~IListener(){}
+    IListener(kdesvnd_dcop*p);
+    virtual ~IListener();
     /* context-listener methods */
     virtual bool contextGetLogin (const QString & realm,
                                   QString & username,
@@ -84,12 +89,29 @@ public:
                                                const QString & realm, bool & maySave);
     /* context listener virtuals end */
 
+protected:
+    svn::Client m_Svnclient;
+    svn::Context* m_CurrentContext;
 };
+
+IListener::IListener(kdesvnd_dcop*p)
+    :svn::ContextListener()
+{
+    m_back=p;
+    m_CurrentContext = new svn::Context();
+    m_CurrentContext->setListener(this);
+    m_Svnclient.setContext(m_CurrentContext);
+}
+
+IListener::~IListener()
+{
+    delete m_CurrentContext;
+}
 
 kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)
 {
     kdDebug() << "Starting new service... " << endl;
-    m_Listener=0;
+    m_Listener=new IListener(this);
 }
 
 kdesvnd_dcop::~kdesvnd_dcop()
@@ -104,6 +126,16 @@ QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List list)
     if (list.count()==0) {
         return result;
     }
+    QString base;
+    if (!isWorkingCopy(list[0],base)) {
+        if (isRepository(list[0])) {
+            result << "Export"
+                   << "Checkout";
+        }
+    } else {
+        result << "Update"
+            << "Commit";
+    }
     return result;
 }
 
@@ -113,13 +145,52 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
     if (list.count()==0) {
         return result;
     }
+    QString base;
 
-    result << "Add";
-    result << "Log";
-    result << "Info";
-    result << "Diff";
+    bool parentIsWc = false;
+    bool itemIsWc = isWorkingCopy(list[0],base);
+
+    QString _par = list[0].directory(true,true);
+    parentIsWc = isWorkingCopy(_par,base);
+
+    if (!parentIsWc && !itemIsWc) {
+        if (isRepository(list[0])) {
+            result << "Log"
+                << "Info"
+                << "Blame"
+                << "Rename";
+        }
+        return result;
+    }
+
+    if (!itemIsWc) {
+        result << "Add";
+        return result;
+    }
+
+    result << "Log"
+        << "Info"
+        << "Diff"
+        << "Rename"
+        << "Revert";
+
+    QFileInfo f(list[0].path());
+    if (f.isFile()) {
+        result << "Blame";
+    }
+
+    if (f.isDir()) {
+        result << "Addnew";
+        result << "Switch";
+    }
 
     return result;
+}
+
+QStringList kdesvnd_dcop::getSingleActionMenu(QCString what)
+{
+    KURL::List l; l.append(KURL(what));
+    return getActionMenu(l);
 }
 
 QStringList kdesvnd_dcop::get_login(QString realm)
@@ -179,11 +250,31 @@ QStringList kdesvnd_dcop::get_logmsg()
     return res;
 }
 
+/* just simple name check of course - no network acess! */
+bool kdesvnd_dcop::isRepository(const KURL&url)
+{
+    QString proto = svn::Url::transformProtokoll(url.protocol());
+    return svn::Url::isValid(proto);
+}
+
 bool kdesvnd_dcop::isWorkingCopy(const KURL&url,QString&base)
 {
     base = "";
     if (url.isEmpty()||!url.isLocalFile()) return false;
-
+    QString cleanpath = url.path();
+    while (cleanpath.endsWith("/")) {
+        cleanpath.truncate(cleanpath.length()-1);
+    }
+    svn::Revision peg(svn_opt_revision_unspecified);
+    svn::Revision rev(svn_opt_revision_unspecified);
+    svn::InfoEntries e;
+    try {
+        e = m_Listener->m_Svnclient.info2(cleanpath,false,rev,peg);
+    } catch (svn::ClientException e) {
+        kdDebug()<< e.message()<<endl;
+        return false;
+    }
+    base=e[0].url();
     return true;
 }
 

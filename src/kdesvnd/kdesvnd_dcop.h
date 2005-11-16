@@ -43,6 +43,7 @@ public:
 
 protected:
     bool isWorkingCopy(const KURL&url,QString&base);
+    bool isRepository(const KURL&url);
     IListener*m_Listener;
 
 k_dcop:
@@ -63,5 +64,6 @@ k_dcop:
     QStringList get_logmsg();
     QStringList getTopLevelActionMenu(KURL::List);
     QStringList getActionMenu(KURL::List);
+    QStringList getSingleActionMenu(QCString);
 };
 #endif

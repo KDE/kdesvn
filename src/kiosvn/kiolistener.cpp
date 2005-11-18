@@ -82,6 +82,7 @@ bool KioListener::contextGetLogMessage (QString & msg)
 }
 
 /*! the content of that method is taken from the notify in kio::svn in KDE SDK */
+/* this moment we don't use it full 'cause not all is made via KIO */
 void KioListener::contextNotify (const char * path,
                     svn_wc_notify_action_t action,
                     svn_node_kind_t kind ,
@@ -176,6 +177,20 @@ void KioListener::contextNotify (const char * path,
             }
         case svn_wc_notify_update_completed: //update_completed
             {
+                if (!m_External) {
+                    if (SVN_IS_VALID_REVNUM(revision)) {
+                        userstring = i18n("Finished at revision %1").arg(revision);
+                    } else {
+                        userstring = i18n("Finished.");
+                    }
+                } else {
+                    if (SVN_IS_VALID_REVNUM(revision)) {
+                        userstring = i18n("Finished external at revision %1").arg(revision);
+                    } else {
+                        userstring = i18n("Finished external.");
+                    }
+                }
+
 #if 0
                 if (! nb->suppress_final_line) {
                     if (SVN_IS_VALID_REVNUM (revision)) {

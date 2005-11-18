@@ -8,7 +8,6 @@ Release:   1%{?dist}
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
 Url:       http://www.alwins-world.de
-Icon:      kdesvn_logo_klein.xpm
 Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.gz

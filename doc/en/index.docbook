@@ -148,7 +148,11 @@ data in it. For Subversion repositories &kdesvn; is such a client.
 <listitem><para>
 A flat copy of a repository on local filesystem. In here you can browse via every normal filemanager, edit files and so on.
 RCS-information you may read with clients like &kdesvn;.
-</para></listitem>
+</para>
+<para>
+Remember that subversion doesn't know something about KIO, so a working copy must reside in an area where it may reached without specify any protocol, eg &quot;fish://&quot; or such isn't possible.
+</para>
+</listitem>
 </varlistentry>
 <varlistentry>
 <term>WebDav</term>
@@ -477,7 +481,7 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 </row>
 <row>
 <entry>diff</entry>
-<entry>Diff two revisions of item (if not set START:HEAD) or to items at specific revision</entry>
+<entry>Diff two revisions of item or to items at specific revision</entry>
 <entry>-r startrev:endrev</entry>
 </row>
 <row>

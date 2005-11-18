@@ -48,6 +48,7 @@
 #include <dcopclient.h>
 #include <qcstring.h>
 #include <kmimetype.h>
+#include <krun.h>
 
 #include <stdlib.h>
 #include <math.h>
@@ -389,4 +390,64 @@ bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& us
         entry.append( atom );
 
         return true;
+}
+
+void kio_svnProtocol::special(const QByteArray& data)
+{
+    kdDebug()<<"kio_svnProtocol::special"<<endl;
+    QDataStream stream(data,IO_ReadOnly);
+    int tmp;
+    stream >> tmp;
+    kdDebug() << "kio_svnProtocol::special " << tmp << endl;
+    switch (tmp) {
+        case SVN_COMMIT:
+        {
+            KURL::List wclist;
+            while ( !stream.atEnd() ) {
+                KURL tmp;
+                stream >> tmp;
+                wclist << tmp;
+            }
+            kdDebug() << "kio_svnProtocol COMMIT" << endl;
+            commit( wclist );
+            break;
+        }
+        default:
+            {kdDebug()<<"Unknown special" << endl;}
+    }
+    finished();
+}
+
+void kio_svnProtocol::commit(const KURL::List&url)
+{
+    /// @todo replace with direct call to kdesvn?
+    QByteArray reply;
+    QByteArray params;
+    QCString replyType;
+    QString msg;
+
+    if (!dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
+        msg = "Communication with dcop failed";
+        kdWarning()<<msg<<endl;
+        return;
+    }
+    if (replyType!="QStringList") {
+        msg = "Wrong reply type";
+        kdWarning()<<msg<<endl;
+        return;
+    }
+    QDataStream stream2(reply,IO_ReadOnly);
+    QStringList lt;
+    stream2>>lt;
+    if (lt.count()!=1) {
+        msg = "Wrong or missing log (may cancel pressed).";
+        kdDebug()<< msg << endl;
+        return;
+    }
+    msg = lt[0];
+    QValueList<svn::Path> targets;
+    for (unsigned j=0; j<url.count();++j) {
+        targets.push_back(svn::Path(url[j].path()));
+    }
+    m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
 }

@@ -21,11 +21,11 @@
 #include "kiosvn.h"
 
 #include <kdebug.h>
-
+#include <klocale.h>
 #include <dcopclient.h>
 
 KioListener::KioListener(kio_svnProtocol*_par)
- : svn::ContextListener()
+ : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false)
 {
     par = _par;
 }
@@ -81,14 +81,202 @@ bool KioListener::contextGetLogMessage (QString & msg)
     return true;
 }
 
-void KioListener::contextNotify (const char * /* path */,
-                    svn_wc_notify_action_t /* action */,
-                    svn_node_kind_t /* kind */,
-                    const char * /* mime_type */,
-                    svn_wc_notify_state_t /* content_state */,
-                    svn_wc_notify_state_t /* prop_state */,
-                    svn_revnum_t /* revision */)
+/*! the content of that method is taken from the notify in kio::svn in KDE SDK */
+void KioListener::contextNotify (const char * path,
+                    svn_wc_notify_action_t action,
+                    svn_node_kind_t kind ,
+                    const char * mime_type ,
+                    svn_wc_notify_state_t content_state,
+                    svn_wc_notify_state_t prop_state,
+                    svn_revnum_t revision)
 {
+    if (par->wasKilled()) {
+        return;
+    }
+    QString userstring;
+
+    switch(action) {
+        case svn_wc_notify_add:
+        {
+            if (mime_type && (svn_mime_type_is_binary (mime_type)))
+                userstring = i18n( "A (bin) %1" ).arg( path );
+            else
+                userstring = i18n( "A %1" ).arg( path );
+            break;
+        }
+        break;
+        case svn_wc_notify_copy: //copy
+            break;
+        case svn_wc_notify_delete: //delete
+            m_HasChanges = TRUE;
+            userstring = i18n( "D %1" ).arg( path );
+            break;
+        case svn_wc_notify_restore : //restore
+            userstring=i18n( "Restored %1." ).arg( path );
+            break;
+        case svn_wc_notify_revert : //revert
+            userstring=i18n( "Reverted %1." ).arg( path );
+            break;
+        case svn_wc_notify_failed_revert: //failed revert
+            userstring=i18n( "Failed to revert %1.\nTry updating instead." ).arg( path );
+            break;
+        case svn_wc_notify_resolved: //resolved
+            userstring=i18n( "Resolved conflicted state of %1." ).arg( path );
+            break;
+        case svn_wc_notify_skip: //skip
+            if ( content_state == svn_wc_notify_state_missing )
+                userstring=i18n("Skipped missing target %1.").arg( path );
+            else 
+                userstring=i18n("Skipped  %1.").arg( path );
+            break;
+        case svn_wc_notify_update_delete: //update_delete
+            m_HasChanges = TRUE;
+            userstring=i18n( "D %1" ).arg( path );
+            break;
+        case svn_wc_notify_update_add: //update_add
+            m_HasChanges = TRUE;
+            userstring=i18n( "A %1" ).arg( path );
+            break;
+        case svn_wc_notify_update_update: //update_update
+            {
+                /* If this is an inoperative dir change, do no notification.
+                   An inoperative dir change is when a directory gets closed
+                   without any props having been changed. */
+                if (! ((kind == svn_node_dir)
+                            && ((prop_state == svn_wc_notify_state_inapplicable)
+                                || (prop_state == svn_wc_notify_state_unknown)
+                                || (prop_state == svn_wc_notify_state_unchanged)))) {
+                    m_HasChanges = TRUE;
+
+                    if (kind == svn_node_file) {
+                        if (content_state == svn_wc_notify_state_conflicted)
+                            userstring = "C";
+                        else if (content_state == svn_wc_notify_state_merged)
+                            userstring = "G";
+                        else if (content_state == svn_wc_notify_state_changed)
+                            userstring = "U";
+                    }
+
+                    if (prop_state == svn_wc_notify_state_conflicted)
+                        userstring += "C";
+                    else if (prop_state == svn_wc_notify_state_merged)
+                        userstring += "G";
+                    else if (prop_state == svn_wc_notify_state_changed)
+                        userstring += "U";
+                    else
+                        userstring += " ";
+
+                    if (! ((content_state == svn_wc_notify_state_unchanged
+                                    || content_state == svn_wc_notify_state_unknown)
+                                && (prop_state == svn_wc_notify_state_unchanged
+                                    || prop_state == svn_wc_notify_state_unknown)))
+                        userstring += QString( " " ) + path;
+                }
+                break;
+            }
+        case svn_wc_notify_update_completed: //update_completed
+            {
+#if 0
+                if (! nb->suppress_final_line) {
+                    if (SVN_IS_VALID_REVNUM (revision)) {
+                        if (nb->is_export) {
+                            if ( m_External )
+                                userstring = i18n("Exported external at revision %1.").arg( revision );
+                            else 
+                                userstring = i18n("Exported revision %1.").arg( revision );
+                        } else if (nb->is_checkout) {
+                            if ( m_External )
+                                userstring = i18n("Checked out external at revision %1.").arg( revision );
+                            else
+                                userstring = i18n("Checked out revision %1.").arg( revision);
+                        } else {
+                            if (m_HasChanges) {
+                                if ( m_External )
+                                    userstring=i18n("Updated external to revision %1.").arg( revision );
+                                else 
+                                    userstring = i18n("Updated to revision %1.").arg( revision);
+                            } else {
+                                if ( m_External )
+                                    userstring = i18n("External at revision %1.").arg( revision );
+                                else
+                                    userstring = i18n("At revision %1.").arg( revision);
+                            }
+                        }
+                    } else  /* no revision */ {
+                        if (nb->is_export) {
+                            if ( m_External )
+                                userstring = i18n("External export complete.");
+                            else
+                                userstring = i18n("Export complete.");
+                        } else if (nb->is_checkout) {
+                            if ( m_External )
+                                userstring = i18n("External checkout complete.");
+                            else
+                                userstring = i18n("Checkout complete.");
+                        } else {
+                            if ( m_External )
+                                userstring = i18n("External update complete.");
+                            else
+                                userstring = i18n("Update complete.");
+                        }
+                    }
+                }
+#endif
+            }
+            if (m_External)
+                m_External = FALSE;
+            break;
+        case svn_wc_notify_update_external: //update_external
+            m_External = TRUE;
+            userstring = i18n("Fetching external item into %1." ).arg( path );
+            break;
+        case svn_wc_notify_status_completed: //status_completed
+            if (SVN_IS_VALID_REVNUM (revision))
+                userstring = i18n( "Status against revision: %1.").arg( revision );
+            break;
+        case svn_wc_notify_status_external: //status_external
+             userstring = i18n("Performing status on external item at %1.").arg( path ); 
+            break;
+        case svn_wc_notify_commit_modified: //commit_modified
+            userstring = i18n( "Sending %1").arg( path );
+            break;
+        case svn_wc_notify_commit_added: //commit_added
+            if (mime_type && svn_mime_type_is_binary (mime_type)) {
+                userstring = i18n( "Adding (bin) %1.").arg( path );
+            } else {
+                userstring = i18n( "Adding %1.").arg( path );
+            }
+            break;
+        case svn_wc_notify_commit_deleted: //commit_deleted
+            userstring = i18n( "Deleting %1.").arg( path );
+            break; 
+        case svn_wc_notify_commit_replaced: //commit_replaced
+            userstring = i18n( "Replacing %1.").arg( path );
+            break;
+        case svn_wc_notify_commit_postfix_txdelta: //commit_postfix_txdelta
+            if (!m_FirstTxDelta) {
+                m_FirstTxDelta = TRUE;
+                userstring=i18n("Transmitting file data ");
+            } else {
+                userstring=".";
+            }
+            break;
+
+            break;
+        case svn_wc_notify_blame_revision: //blame_revision
+            break;
+        default:
+            break;
+    }
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "path" , QString::fromUtf8( path ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "action", QString::number( action ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "kind", QString::number( kind ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "mime_t", QString::fromUtf8( mime_type ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "content", QString::number( content_state ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "prop", QString::number( prop_state ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "rev", QString::number( revision ));
+    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "string", userstring );
+    ++m_notifyCounter;
 }
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)

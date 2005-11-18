@@ -63,6 +63,11 @@ public:
     /* context listener virtuals end */
 private:
     kio_svnProtocol *par;
+protected:
+    unsigned int  m_notifyCounter;
+    bool m_External;
+    bool m_HasChanges;
+    bool m_FirstTxDelta;
 };
 
 #endif

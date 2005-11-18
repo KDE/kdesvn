@@ -48,6 +48,26 @@ public:
     virtual void rename(const KURL&src,const KURL&target,bool force);
     virtual void del(const KURL&url,bool isfile);
     virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
+    virtual void special(const QByteArray& data);
+    /* looked on kio::svn from kdesdk */
+    enum KSVN_METHOD {
+        SVN_CHECKOUT = 1,
+        SVN_UPDATE = 2,
+        SVN_COMMIT = 3,
+        SVN_LOG=4,
+        SVN_IMPORT=5,
+        SVN_ADD=6,
+        SVN_DEL=7,
+        SVN_REVERT=8,
+        SVN_STATUS=9,
+        SVN_MKDIR=10,
+        SVN_RESOLVE=11,
+        SVN_SWITCH=12,
+        SVN_DIFF=13
+    };
+
+protected:
+    virtual void commit(const KURL::List&);
 
 private:
     KioSvnData*m_pData;

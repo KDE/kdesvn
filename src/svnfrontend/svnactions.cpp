@@ -662,7 +662,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient.commit(svn::Targets(targets),msg,rec);
+        nnum = m_Data->m_Svnclient.commit(targets,msg,rec);
     } catch (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         emit clientException(ex);

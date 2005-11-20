@@ -43,6 +43,8 @@ public:
     void disableOpen(bool how);
     bool openAfterJob();
     virtual void disableRange(bool how);
+protected slots:
+    virtual void urlChanged(const QString&);
 };
 
 #endif

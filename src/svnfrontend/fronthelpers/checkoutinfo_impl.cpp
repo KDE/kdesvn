@@ -48,7 +48,18 @@ QString CheckoutInfo_impl::reposURL()
 
 QString CheckoutInfo_impl::targetDir()
 {
-    return  m_TargetSelector->url();
+    if (!m_CreateDirButton->isChecked()) {
+        return  m_TargetSelector->url();
+    }
+    QString _uri = reposURL();
+    while (_uri.endsWith("/")) {
+        _uri.truncate(_uri.length()-1);
+    }
+    QStringList l = QStringList::split('/',_uri);
+    if (l.count()==0) {
+        return m_TargetSelector->url();
+    }
+    return  m_TargetSelector->url()+"/"+l[l.count()-1];
 }
 
 bool CheckoutInfo_impl::forceIt()
@@ -128,6 +139,10 @@ void CheckoutInfo_impl::disableRange(bool how)
         m_RangeInput->setEnabled(true);
         m_RangeInput->show();
     }
+}
+
+void CheckoutInfo_impl::urlChanged(const QString&)
+{
 }
 
 #include "checkoutinfo_impl.moc"

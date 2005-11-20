@@ -169,7 +169,9 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
         << "Rename"
         << "Revert";
 
-    QFileInfo f(list[0].path());
+    KURL url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
+    
+    QFileInfo f(url.path());
     if (f.isFile()) {
         result << "Blame";
     }

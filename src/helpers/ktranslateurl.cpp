@@ -59,7 +59,7 @@ KURL KTranslateUrl::translateSystemUrl(const KURL&_url)
         return _url;
     }
     res.addPath(path);
-    kdDebug()<<"Result: "<<res<<endl;
+    res.setQuery(_url.query());
     return res;
 }
 

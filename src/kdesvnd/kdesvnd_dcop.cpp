@@ -18,7 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
+#include "config.h"
 #include "kdesvnd_dcop.h"
 #include "authdialogimpl.h"
 #include "ssltrustprompt_impl.h"
@@ -28,6 +28,7 @@
 #include "svncpp/status.hpp"
 #include "svncpp/context_listener.hpp"
 #include "svncpp/url.hpp"
+#include "helpers/ktranslateurl.h"
 
 #include <kdebug.h>
 #include <kapplication.h>
@@ -38,19 +39,13 @@
 #include <qdir.h>
 
 extern "C" {
-/* we will get trouble on old fedora 2 systems with the origin compiler - don't know whats up
- * with there gcc
- */
-#if 0
- #define GCC_VERSION (__GNUC__ * 10000 \
-                               + __GNUC_MINOR__ * 100 \
-                               + __GNUC_PATCHLEVEL__)
-#if GCC_VERSION == 30303
-#undef KDE_EXPORT
-#define KDE_EXPORT
+// avoid problems with elder kde installations
+#ifdef __KDE_HAVE_GCC_VISIBILITY
+    KDE_EXPORT KDEDModule *create_kdesvnd(const QCString &name)
+#else
+    KDEDModule *create_kdesvnd(const QCString &name)
 #endif
-#endif
-    KDE_EXPORT KDEDModule *create_kdesvnd(const QCString &name) {
+    {
        return new kdesvnd_dcop(name);
     }
 }
@@ -257,9 +252,12 @@ bool kdesvnd_dcop::isRepository(const KURL&url)
     return svn::Url::isValid(proto);
 }
 
-bool kdesvnd_dcop::isWorkingCopy(const KURL&url,QString&base)
+bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
 {
     base = "";
+    KURL url = _url;
+    url = helpers::KTranslateUrl::translateSystemUrl(url);
+
     if (url.isEmpty()||!url.isLocalFile()) return false;
     QString cleanpath = url.path();
     while (cleanpath.endsWith("/")) {

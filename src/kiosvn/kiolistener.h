@@ -61,6 +61,8 @@ public:
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave);
     /* context listener virtuals end */
+    unsigned int counter()const{return m_notifyCounter;}
+    void incCounter(){++m_notifyCounter;}
 private:
     kio_svnProtocol *par;
 protected:

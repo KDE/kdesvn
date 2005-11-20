@@ -52,13 +52,17 @@ public:
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
         SVN_CHECKOUT = 1,
+        /* KURL wc, int revnumber, QString revkind */
+        /* refkind may empty or HEAD or START, will get parsed if revnumber is -1 */
         SVN_UPDATE = 2,
+        /* KURL::List */
         SVN_COMMIT = 3,
         SVN_LOG=4,
         SVN_IMPORT=5,
         SVN_ADD=6,
         SVN_DEL=7,
         SVN_REVERT=8,
+        /* KURL wc,bool checkRepos, bool recurse */
         SVN_STATUS=9,
         SVN_MKDIR=10,
         SVN_RESOLVE=11,
@@ -68,6 +72,8 @@ public:
 
 protected:
     virtual void commit(const KURL::List&);
+    virtual void status(const KURL&,bool,bool);
+    virtual void update(const KURL&,int,const QString&);
 
 private:
     KioSvnData*m_pData;

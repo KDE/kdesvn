@@ -27,6 +27,7 @@
 #include "../config.h"
 #include "svncpp/version_check.hpp"
 #include "svncpp/url.hpp"
+#include "helpers/ktranslateurl.h"
 
 #include <kinstance.h>
 #include <kaction.h>
@@ -100,7 +101,8 @@ bool kdesvnPart::openFile()
 
 bool kdesvnPart::openURL(const KURL&url)
 {
-    KURL _url = url;
+    
+    KURL _url = helpers::KTranslateUrl::translateSystemUrl(url);
 
     _url.setProtocol(svn::Url::transformProtokoll(_url.protocol()));
 

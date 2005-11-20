@@ -52,7 +52,7 @@ bool KioListener::contextCancel()
  */
 bool KioListener::contextGetLogMessage (QString & msg)
 {
-#if 0
+#if 1
     QByteArray reply;
     QByteArray params;
     QCString replyType;
@@ -76,8 +76,9 @@ bool KioListener::contextGetLogMessage (QString & msg)
         return false;
     }
     msg = lt[0];
-#endif
+#else
     msg = "Made with a kio::svn client";
+#endif
     return true;
 }
 
@@ -283,15 +284,15 @@ void KioListener::contextNotify (const char * path,
         default:
             break;
     }
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "path" , QString::fromUtf8( path ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "action", QString::number( action ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "kind", QString::number( kind ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "mime_t", QString::fromUtf8( mime_type ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "content", QString::number( content_state ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "prop", QString::number( prop_state ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "rev", QString::number( revision ));
-    par->setMetaData(QString::number( m_notifyCounter ).rightJustify( 10,'0' )+ "string", userstring );
-    ++m_notifyCounter;
+    par->setMetaData(QString::number(counter()).rightJustify( 10,'0' )+ "path" , QString::fromUtf8( path ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "action", QString::number( action ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "kind", QString::number( kind ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "mime_t", QString::fromUtf8( mime_type ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "content", QString::number( content_state ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "prop", QString::number( prop_state ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "rev", QString::number( revision ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "string", userstring );
+    incCounter();
 }
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)

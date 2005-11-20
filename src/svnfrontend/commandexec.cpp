@@ -25,6 +25,7 @@
 #include "svncpp/url.hpp"
 #include "svncpp/dirent.hpp"
 #include "helpers/sub2qt.h"
+#include "helpers/ktranslateurl.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "svnfrontend/copymoveview_impl.h"
 
@@ -195,7 +196,7 @@ int CommandExec::exec()
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
-        tmpurl = m_pCPart->args->url(j);
+        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j));
         query = tmpurl.query();
         q = m_pCPart->args->url(j).queryItems();
         if (q.find("rev")!=q.end()) {

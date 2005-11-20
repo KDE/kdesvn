@@ -654,6 +654,9 @@ namespace svn
     void
     url2Revision(const QString&revstring,
         Revision&start,Revision&end);
+    void
+    url2Revision(const QString&revstring,
+            Revision&start);
 
   private:
     Context * m_context;

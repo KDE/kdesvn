@@ -64,7 +64,19 @@ namespace svn
         end = Revision::UNDEFINED;
     }
   }
+
+    void Client::url2Revision(const QString&revstring,Revision&start) {
+        if (revstring=="WORKING") {
+            start = Revision::WORKING;
+        } else if (revstring=="BASE"){
+            start = Revision::BASE;
+        } else {
+            Revision end;
+            url2Revision(revstring,start,end);
+        }
+  }
 }
+
 /* -----------------------------------------------------------------
  * local variables:
  * eval: (load-file "../../rapidsvn-dev.el")

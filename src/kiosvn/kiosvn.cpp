@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#include "config.h"
 #include "kiosvn.h"
 #include "kiolistener.h"
 
@@ -123,17 +124,12 @@ kio_svnProtocol::~kio_svnProtocol()
 
 extern "C"
 {
-/* we will get trouble on old fedora 2 systems with the origin compiler - don't know whats up
- * with there gcc
- */
- #define GCC_VERSION (__GNUC__ * 10000 \
-                               + __GNUC_MINOR__ * 100 \
-                               + __GNUC_PATCHLEVEL__)
-#if GCC_VERSION == 30303
-#undef KDE_EXPORT
-#define KDE_EXPORT
-#endif
+// avoid problems with elder kde installations
+#ifdef __KDE_HAVE_GCC_VISIBILITY
     KDE_EXPORT int kdemain(int argc, char **argv);
+#else
+    int kdemain(int argc, char **argv);
+#endif
 }
 
 int kdemain(int argc, char **argv)
@@ -243,7 +239,7 @@ void kio_svnProtocol::get(const KURL& url)
         return;
     }
     KMimeType::Ptr mt = KMimeType::findByContent(content);
-    kdDebug(7128) << "KMimeType returned : " << mt->name() << endl;
+    kdDebug(0) << "KMimeType returned : " << mt->name() << endl;
     mimeType( mt->name() );
     totalSize(content.size());
     //send data
@@ -400,6 +396,18 @@ void kio_svnProtocol::special(const QByteArray& data)
     stream >> tmp;
     kdDebug() << "kio_svnProtocol::special " << tmp << endl;
     switch (tmp) {
+        case SVN_UPDATE:
+        {
+            KURL wc;
+            int revnumber;
+            QString revkind;
+            stream >> wc;
+            stream >> revnumber;
+            stream >> revkind;
+            kdDebug(0) << "kio_svnProtocol UPDATE " << wc.url() << " at " << revnumber << " or " << revkind << endl;
+            update(wc, revnumber, revkind );
+            break;
+        }
         case SVN_COMMIT:
         {
             KURL::List wclist;
@@ -412,10 +420,57 @@ void kio_svnProtocol::special(const QByteArray& data)
             commit( wclist );
             break;
         }
+        case SVN_STATUS:
+        {
+            KURL wc;
+            bool checkRepos=false;
+            bool fullRecurse=false;
+            stream >> wc;
+            stream >> checkRepos;
+            stream >> fullRecurse;
+            kdDebug(0) << "kio_svnProtocol STATUS" << endl;
+            status(wc,checkRepos,fullRecurse);
+            break;
+        }
+
         default:
             {kdDebug()<<"Unknown special" << endl;}
     }
     finished();
+}
+
+void kio_svnProtocol::update(const KURL&,int,const QString&)
+{
+}
+
+void kio_svnProtocol::status(const KURL&wc,bool cR,bool rec)
+{
+    svn::Revision where = svn::Revision::UNDEFINED;
+    svn::StatusEntries dlist;
+    try {
+        //                                            rec all  up     noign
+        dlist = m_pData->m_Svnclient.status(wc.path(),rec,false,cR,false,where);
+    } catch (svn::ClientException e) {
+        //Message box!
+        QString ex = QString::fromUtf8(e.message());
+        error(KIO::ERR_SLAVE_DEFINED,ex);
+        return;
+    }
+    kdDebug()<<"Status got " << dlist.count() << " entries." << endl;
+    for (unsigned j=0;j<dlist.count();++j) {
+        //QDataStream stream(params, IO_WriteOnly);
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"path",dlist[j].path());
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"text",QString::number(dlist[j].textStatus()));
+        setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "prop",
+                    QString::number(dlist[j].propStatus()));
+        setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "reptxt",
+                    QString::number(dlist[j].reposTextStatus()));
+        setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "repprop",
+                    QString::number(dlist[j].reposPropStatus()));
+        setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "rev",
+                    QString::number(dlist[j].entry().cmtRev()));
+        m_pData->m_Listener.incCounter();
+    }
 }
 
 void kio_svnProtocol::commit(const KURL::List&url)
@@ -449,5 +504,11 @@ void kio_svnProtocol::commit(const KURL::List&url)
     for (unsigned j=0; j<url.count();++j) {
         targets.push_back(svn::Path(url[j].path()));
     }
-    m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
+    try {
+        m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
+    } catch (svn::ClientException e) {
+        //Message box!
+        QString ex = QString::fromUtf8(e.message());
+        error(KIO::ERR_SLAVE_DEFINED,ex);
+    }
 }

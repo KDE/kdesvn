@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-10 13:30+0100\n"
+"POT-Creation-Date: 2005-11-21 15:45+0100\n"
 "PO-Revision-Date: 2005-10-21 19:54+0200\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
@@ -28,7 +28,43 @@ msgid ""
 "Your emails"
 msgstr "peter.talken@telia.com"
 
-#: kdesvnd/kdesvnd_dcop.cpp:116 svnfrontend/ccontextlistener.cpp:260
+#: main.cpp:33
+msgid "A Subversion Client for KDE (standalone application)"
+msgstr "En Subversion -klient för KDE (fristående tillämpning)"
+
+#: main.cpp:39
+msgid "Execute single subversion command on specific revision(-range)"
+msgstr ""
+
+#: main.cpp:40
+msgid "Ask for revision when executing single command"
+msgstr ""
+
+#: main.cpp:41
+msgid "Save output of subversion command (eg \"cat\") into file <file>"
+msgstr ""
+
+#: main.cpp:42
+msgid "Limit log output to <number>"
+msgstr ""
+
+#: main.cpp:43
+msgid "Execute subversion command (\"exec help\" for more information)"
+msgstr ""
+
+#: main.cpp:44
+msgid "Document to open"
+msgstr "Dokument att öppna"
+
+#: main.cpp:50
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#: urldlg.cpp:54
+msgid "Open repository or working copy"
+msgstr "Öppna magasin eller arbetskopia"
+
+#: kdesvnd/kdesvnd_dcop.cpp:236 svnfrontend/ccontextlistener.cpp:260
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Öppna en fil med ett #PKCS12-certifikat"
 
@@ -44,334 +80,410 @@ msgstr ""
 msgid "Developer"
 msgstr ""
 
-#: rc.cpp:2
-#, no-c-format
-msgid "Edit property"
-msgstr "Redigera egenskaper"
+#: kdesvnd/kdesvnd_dcop.moc.cpp:34 kdesvnd/kdesvnd_dcop.moc.cpp:42
+#, fuzzy
+msgid "kdesvnd_dcop"
+msgstr "kdesvn"
 
-#: rc.cpp:4
-#, no-c-format
-msgid "O&K"
-msgstr "O&K"
+#: kiosvn/kiolistener.cpp:104
+msgid "A (bin) %1"
+msgstr ""
 
-#: rc.cpp:8
-#, no-c-format
-msgid "Property name:"
-msgstr "Egenskapsnamn:"
+#: kiosvn/kiolistener.cpp:106 kiosvn/kiolistener.cpp:140
+msgid "A %1"
+msgstr ""
 
-#: rc.cpp:10
-#, no-c-format
-msgid "Property value:"
-msgstr "Egenskapsvärde:"
+#: kiosvn/kiolistener.cpp:114 kiosvn/kiolistener.cpp:136
+msgid "D %1"
+msgstr ""
 
-#: rc.cpp:14
-#, no-c-format
-msgid "Click for short info about pre-defined property name"
-msgstr "Klicka för information om fördefinierat egenskapsnamn"
+#: kiosvn/kiolistener.cpp:117
+#, fuzzy
+msgid "Restored %1."
+msgstr "Löst"
 
-#: rc.cpp:16
-#, no-c-format
-msgid "MergeSettings"
-msgstr "Sammanslagningsinställningar"
+#: kiosvn/kiolistener.cpp:120
+#, fuzzy
+msgid "Reverted %1."
+msgstr "Omvändning"
 
-#: rc.cpp:18
-#, no-c-format
-msgid "Source 1:"
-msgstr "Källa 1:"
-
-#: rc.cpp:20
-#, no-c-format
-msgid "Source 2:"
-msgstr "Källa 2:"
-
-#: rc.cpp:22
-#, no-c-format
-msgid "Output to:"
-msgstr "Utdata till:"
-
-#: rc.cpp:24 rc.cpp:129 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:78
-#: svnfrontend/svnactions.cpp:1113
-#, no-c-format
-msgid "Recursive"
-msgstr "Rekursivt"
-
-#: rc.cpp:27
-#, no-c-format
-msgid "Handle unrelated as related items"
-msgstr "Hantera orelaterat som relaterat"
-
-#: rc.cpp:29
-#, no-c-format
-msgid "Force delete on modified/unversioned"
-msgstr "Tvinga bortagning vid modifierad/utan version"
-
-#: rc.cpp:32
-#, no-c-format
-msgid "Just dry run without modifications"
-msgstr "Bara torrsim utan modifieringar"
-
-#: rc.cpp:35 kdesvn_part.cpp:322
-#, no-c-format
-msgid "Subversion Settings"
-msgstr "Subversions inställningar"
-
-#: rc.cpp:37
-#, no-c-format
-msgid "Mark changed items"
-msgstr "Märk ändrat"
-
-#: rc.cpp:39
-#, no-c-format
+#: kiosvn/kiolistener.cpp:123
 msgid ""
-"Check (if needed recursive) if items are changed (added/delete/changed) and "
-"mark these items with an overlayed icon.\n"
-"\n"
-"If it works slow (low connection and so on) you should turn of this feature."
-msgstr ""
-"Check (vid behov rekursivt) om saker ändrats (tillagda/borttagna/ändrade) "
-"och märk dessa med en \"överlagd\" ikon.\n"
-"\n"
-"Om det blir segt (långsam förbindelse m. m.) bör du stänga av denna funktion."
-
-#: rc.cpp:43
-#, no-c-format
-msgid "Start check for updates when open a working copy"
+"Failed to revert %1.\n"
+"Try updating instead."
 msgstr ""
 
-#: rc.cpp:45
-#, no-c-format
-msgid "Select if kdesvn should check for updates when open a working copy"
+#: kiosvn/kiolistener.cpp:126
+msgid "Resolved conflicted state of %1."
 msgstr ""
 
-#: rc.cpp:47
-#, no-c-format
-msgid "Gain item info recursive"
-msgstr "Hämta information rekursivt"
+#: kiosvn/kiolistener.cpp:130
+msgid "Skipped missing target %1."
+msgstr ""
 
-#: rc.cpp:49 kdesvn_part.cpp:169
+#: kiosvn/kiolistener.cpp:132
+msgid "Skipped  %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:183
+#, fuzzy
+msgid "Finished at revision %1"
+msgstr "%1 vid revision %2"
+
+#: kiosvn/kiolistener.cpp:185
+#, fuzzy
+msgid "Finished."
+msgstr "Avslutat"
+
+#: kiosvn/kiolistener.cpp:189
+msgid "Finished external at revision %1"
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:191
+#, fuzzy
+msgid "Finished external."
+msgstr "Avslutat"
+
+#: kiosvn/kiolistener.cpp:200
+msgid "Exported external at revision %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:202
+#, fuzzy
+msgid "Exported revision %1."
+msgstr "Exportera magasin"
+
+#: kiosvn/kiolistener.cpp:205
+msgid "Checked out external at revision %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:207
+#, fuzzy
+msgid "Checked out revision %1."
+msgstr "%1 vid revision %2"
+
+#: kiosvn/kiolistener.cpp:211
+#, fuzzy
+msgid "Updated external to revision %1."
+msgstr "Uppdatera yttre modul"
+
+#: kiosvn/kiolistener.cpp:213
+#, fuzzy
+msgid "Updated to revision %1."
+msgstr "Lägg till till revisionskontroll"
+
+#: kiosvn/kiolistener.cpp:216
+#, fuzzy
+msgid "External at revision %1."
+msgstr "%1 vid revision %2"
+
+#: kiosvn/kiolistener.cpp:218
+#, fuzzy
+msgid "At revision %1."
+msgstr "%1 vid revision %2"
+
+#: kiosvn/kiolistener.cpp:224
+msgid "External export complete."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:226
+#, fuzzy
+msgid "Export complete."
+msgstr "Uppdatering komplett"
+
+#: kiosvn/kiolistener.cpp:229
+msgid "External checkout complete."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:231
+#, fuzzy
+msgid "Checkout complete."
+msgstr "Checkout info"
+
+#: kiosvn/kiolistener.cpp:234
+#, fuzzy
+msgid "External update complete."
+msgstr "Uppdatering komplett"
+
+#: kiosvn/kiolistener.cpp:236
+#, fuzzy
+msgid "Update complete."
+msgstr "Uppdatering komplett"
+
+#: kiosvn/kiolistener.cpp:247
+msgid "Fetching external item into %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:251
+#, fuzzy
+msgid "Status against revision: %1."
+msgstr "Börja med revison"
+
+#: kiosvn/kiolistener.cpp:254
+msgid "Performing status on external item at %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:257
+msgid "Sending %1"
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:261
+msgid "Adding (bin) %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:263
+msgid "Adding %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:267
+#, fuzzy
+msgid "Deleting %1."
+msgstr "Borttagande"
+
+#: kiosvn/kiolistener.cpp:270
+msgid "Replacing %1."
+msgstr ""
+
+#: kiosvn/kiolistener.cpp:275
+msgid "Transmitting file data "
+msgstr ""
+
+#: kdesvnview.cpp:116
+msgid "Repository opened"
+msgstr "Magasinet öppnat"
+
+#: kdesvnview.cpp:122
+msgid "Could not open repository"
+msgstr "Kunder inte öppna magasin"
+
+#: kdesvnview.cpp:148
+msgid "No repository open"
+msgstr "Inget magasin öppet"
+
+#: kdesvn_part.cpp:54
+msgid "A Subversion Client for KDE (dynamic Part component)"
+msgstr "En Subversion-klient för KDE (dynamisk Part-komponent)"
+
+#: kdesvn_part.cpp:139
+msgid "Built with Subversion library: %1\n"
+msgstr "Byggd med Subversion-bibliotek: %1\n"
+
+#: kdesvn_part.cpp:140
+msgid "Running Subversion library: %1"
+msgstr "Kör med Subversion-bibliotek: %1"
+
+#: kdesvn_part.cpp:142
+msgid "kdesvn Part"
+msgstr "kdesvn Part"
+
+#: kdesvn_part.cpp:149
+msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
+msgstr "kdesvn: NAMN PÅ ÖVERSÄTTARE\\nPeter Landgren"
+
+#: kdesvn_part.cpp:150
+msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
+msgstr "kdesvn: E-POST TILL ÖVERSÄTTARE\\npeter.talken@telia.com"
+
+#: kdesvn_part.cpp:161
+msgid "Use \"Kompare\" for displaying diffs"
+msgstr "Använd \"Kompare\" för att visa diffs"
+
+#: kdesvn_part.cpp:166
+msgid "Logs follow node changes"
+msgstr "Loggar följer nodändringar"
+
+#: kdesvn_part.cpp:171 rc.cpp:215 svnfrontend/subversion_settings.cpp:80
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Visa överhoppade filer"
 
-#: rc.cpp:51
+#: kdesvn_part.cpp:177
+msgid "Display unknown files"
+msgstr "Visa okända filer"
+
+#: kdesvn_part.cpp:186
+msgid "&Configure %1..."
+msgstr "&Konfigurera %1..."
+
+#: kdesvn_part.cpp:187
+msgid "&About kdesvn part"
+msgstr "&Om kdesvn part"
+
+#: kdesvn_part.cpp:189
+msgid "Kdesvn &Handbook"
+msgstr "Kdesvn &Handbok"
+
+#: kdesvn_part.cpp:191
+msgid "Send Bugreport for kdesvn"
+msgstr "Skicka felrapport om kdesvn"
+
+#: kdesvn_part.cpp:322 rc.cpp:344
 #, no-c-format
-msgid "Log follows node changes"
-msgstr "Logg följer nodändringar"
+msgid "General"
+msgstr "Allmänt"
 
-#: rc.cpp:53
+#: kdesvn_part.cpp:324 rc.cpp:6 rc.cpp:341
 #, no-c-format
-msgid "Logs always reads list of changed files"
-msgstr "Loggar läser alltid lista på ändrade filer"
+msgid "Subversion"
+msgstr "Subversion"
 
-#: rc.cpp:55
+#: kdesvn_part.cpp:324 rc.cpp:195 svnfrontend/subversion_settings.cpp:72
 #, no-c-format
-msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
+msgid "Subversion Settings"
+msgstr "Subversions inställningar"
 
-#: rc.cpp:57
+#: kdesvn-askpass.cpp:30
+msgid "prompt"
+msgstr "prompt"
+
+#: kdesvn-askpass.cpp:36
+msgid "kdesvnaskpass"
+msgstr "kdesvnaskpass"
+
+#: kdesvn-askpass.cpp:37
+msgid "ssh-askpass for kdesvn"
+msgstr "ssh-askpass för kdesvn"
+
+#: kdesvn-askpass.cpp:39
+msgid "Copyright (c) 2005 Rajko Albrecht"
+msgstr "Copyright (c) 2005 Rajko Albrecht"
+
+#: kdesvn-askpass.cpp:51
+msgid "Please enter your password below."
+msgstr "Ange ditt lösenord nedan."
+
+#: rc.cpp:12 rc.cpp:359
 #, no-c-format
-msgid "Authentication"
-msgstr "Autentisering"
+msgid "Subversion toolbar"
+msgstr "Subversion verktygsrad"
 
-#: rc.cpp:59
-#, no-c-format
-msgid "Enter authentification info for"
-msgstr "Skriv in autentiseringsinformation för"
-
-#: rc.cpp:61
-#, no-c-format
-msgid "Username:"
-msgstr "Användarnamn:"
-
-#: rc.cpp:63
-#, no-c-format
-msgid "Password:"
-msgstr "Lösenord:"
-
-#: rc.cpp:65
-#, no-c-format
-msgid "Store password"
-msgstr "Spara lösenord"
-
-#: rc.cpp:77
-#, no-c-format
-msgid "Checkout info"
-msgstr "Checkout info"
-
-#: rc.cpp:79
-#, no-c-format
-msgid "Select target directory:"
-msgstr "Välj målmapp:"
-
-#: rc.cpp:81
-#, no-c-format
-msgid "Enter URL:"
-msgstr "Skriv in URL:"
-
-#: rc.cpp:83 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:81
-#, no-c-format
-msgid "Force"
-msgstr "Tvinga"
-
-#: rc.cpp:86
-#, no-c-format
-msgid "Open after job"
-msgstr "Öppna efter jobb"
-
-#: rc.cpp:88 svnfrontend/kdesvnfilelist.cpp:1477
-#: svnfrontend/kdesvnfilelist.cpp:1549 svnfrontend/kdesvnfilelist.cpp:1566
-#: svnfrontend/kdesvnfilelist.cpp:1592 svnfrontend/svnactions.cpp:172
-#: svnfrontend/svnactions.cpp:860
-#, no-c-format
-msgid "Revisions"
-msgstr "Revisioner"
-
-#: rc.cpp:90 svnfrontend/fronthelpers/rangeinput_impl.cpp:167
-#, no-c-format
-msgid "Start with revision"
-msgstr "Börja med revison"
-
-#: rc.cpp:92
-#, no-c-format
-msgid "N&umber"
-msgstr "T&al"
-
-#: rc.cpp:94 rc.cpp:109 rc.cpp:151
-#, no-c-format
-msgid "Date"
-msgstr "Datum"
-
-#: rc.cpp:97
-#, no-c-format
-msgid "S&TART"
-msgstr "S&TART"
-
-#: rc.cpp:99 rc.cpp:114
-#, no-c-format
-msgid "HEAD"
-msgstr "HUVUD"
-
-#: rc.cpp:101 rc.cpp:116
-#, no-c-format
-msgid "WORKING"
-msgstr ""
-
-#: rc.cpp:103 rc.cpp:118
-#, fuzzy, no-c-format
-msgid "Select current working copy changes"
-msgstr "Omlokalisera URL hos aktuell arbetskopia till en ny. "
-
-#: rc.cpp:105
-#, no-c-format
-msgid "Stop with revision"
-msgstr "Sluta med revison"
-
-#: rc.cpp:107
-#, no-c-format
-msgid "Number"
-msgstr "Tal"
-
-#: rc.cpp:112
-#, no-c-format
-msgid "START"
-msgstr "START"
-
-#: rc.cpp:120
-#, no-c-format
-msgid "Logmessage"
-msgstr "Loggmeddelande"
-
-#: rc.cpp:122
-#, no-c-format
-msgid "Enter a log message"
-msgstr "Skriv in ett loggmeddelande"
-
-#: rc.cpp:124
-#, no-c-format
-msgid "Or insert one of the last:"
-msgstr "Eller skjut in något av de senaste:"
-
-#: rc.cpp:127
-#, fuzzy, no-c-format
-msgid "Last used log messages"
-msgstr "Skriv in ett loggmeddelande"
-
-#: rc.cpp:132
+#: rc.cpp:18 svnfrontend/svnlogdlg.cpp:113
 #, no-c-format
 msgid "SVN Log"
 msgstr "SVN Logg"
 
-#: rc.cpp:134
+#: rc.cpp:21 svnfrontend/svnlogdlg.cpp:114
 #, no-c-format
 msgid "Diff previous"
 msgstr "Diff föregående"
 
-#: rc.cpp:137 svnfrontend/kdesvnfilelist.cpp:264
+#: rc.cpp:25 svnfrontend/svnlogdlg.cpp:116 svnfrontend/kdesvnfilelist.cpp:275
 #, no-c-format
 msgid "Diff revisions"
 msgstr "Diff revisioner"
 
-#: rc.cpp:140
+#: rc.cpp:29 svnfrontend/svnlogdlg.cpp:118
 #, no-c-format
 msgid "Select second revision with right mouse button"
 msgstr "Välj en andra revision med höger musknapp"
 
-#: rc.cpp:142
+#: rc.cpp:32 svnfrontend/svnlogdlg.cpp:119
 #, no-c-format
 msgid "&List entries"
 msgstr "&Lista poster"
 
-#: rc.cpp:147 svnfrontend/svnactions.cpp:288
+#: rc.cpp:39 svnfrontend/svnlogdlg.cpp:66 svnfrontend/svnlogdlg.cpp:122
+#: svnfrontend/svnactions.cpp:294
 #, no-c-format
 msgid "Author"
 msgstr "Författare"
 
-#: rc.cpp:149
+#: rc.cpp:42 svnfrontend/svnlogdlg.cpp:67 svnfrontend/svnlogdlg.cpp:123
 #, no-c-format
 msgid "Revison"
 msgstr "Revison"
 
-#: rc.cpp:153
+#: rc.cpp:45 rc.cpp:273 rc.cpp:295 svnfrontend/svnlogdlg.cpp:68
+#: svnfrontend/svnlogdlg.cpp:124 svnfrontend/fronthelpers/rangeinput.cpp:153
+#: svnfrontend/fronthelpers/rangeinput.cpp:161
+#, no-c-format
+msgid "Date"
+msgstr "Datum"
+
+#: rc.cpp:48 svnfrontend/svnlogdlg.cpp:69 svnfrontend/svnlogdlg.cpp:125
 #, no-c-format
 msgid "Message"
 msgstr "Meddelande"
 
-#: rc.cpp:155
+#: rc.cpp:51 svnfrontend/svnlogdlg.cpp:126
 #, no-c-format
 msgid "Select in first column revisions for diff"
 msgstr "Välj i första spalt revisioner för diff"
 
-#: rc.cpp:157
+#: rc.cpp:54 svnfrontend/svnlogdlg.cpp:79 svnfrontend/svnlogdlg.cpp:127
 #, no-c-format
 msgid "Action"
 msgstr "Åtgärd"
 
-#: rc.cpp:159
+#: rc.cpp:57 svnfrontend/svnlogdlg.cpp:80 svnfrontend/svnlogdlg.cpp:128
 #, no-c-format
 msgid "Item"
 msgstr "Post"
 
-#: rc.cpp:161
+#: rc.cpp:60 svnfrontend/svnlogdlg.cpp:81 svnfrontend/svnlogdlg.cpp:129
 #, no-c-format
 msgid "Copy from"
 msgstr "Kopiera från"
 
-#: rc.cpp:163
+#: rc.cpp:63 svnfrontend/merge_dlg.cpp:98
+#, no-c-format
+msgid "MergeSettings"
+msgstr "Sammanslagningsinställningar"
+
+#: rc.cpp:66 svnfrontend/merge_dlg.cpp:99
+#, no-c-format
+msgid "Source 1:"
+msgstr "Källa 1:"
+
+#: rc.cpp:69 svnfrontend/merge_dlg.cpp:100
+#, no-c-format
+msgid "Source 2:"
+msgstr "Källa 2:"
+
+#: rc.cpp:72 svnfrontend/merge_dlg.cpp:101
+#, no-c-format
+msgid "Output to:"
+msgstr "Utdata till:"
+
+#: rc.cpp:75 rc.cpp:240 svnfrontend/merge_dlg.cpp:102
+#: svnfrontend/svnactions.cpp:1141
+#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:89
+#: svnfrontend/fronthelpers/logmessage.cpp:88
+#, no-c-format
+msgid "Recursive"
+msgstr "Rekursivt"
+
+#: rc.cpp:79 svnfrontend/merge_dlg.cpp:104
+#, no-c-format
+msgid "Handle unrelated as related items"
+msgstr "Hantera orelaterat som relaterat"
+
+#: rc.cpp:82 svnfrontend/merge_dlg.cpp:105
+#, no-c-format
+msgid "Force delete on modified/unversioned"
+msgstr "Tvinga bortagning vid modifierad/utan version"
+
+#: rc.cpp:86 svnfrontend/merge_dlg.cpp:107
+#, no-c-format
+msgid "Just dry run without modifications"
+msgstr "Bara torrsim utan modifieringar"
+
+#: rc.cpp:90 svnfrontend/display_settings.cpp:140
 #, no-c-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: rc.cpp:165
+#: rc.cpp:93 svnfrontend/display_settings.cpp:141
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr "Storlek på listgranskningsikoner"
 
-#: rc.cpp:167
+#: rc.cpp:96 svnfrontend/display_settings.cpp:142
 #, no-c-format
 msgid "Show file info"
 msgstr "Visa filinformation"
 
-#: rc.cpp:169
+#: rc.cpp:99 svnfrontend/display_settings.cpp:143
 #, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
@@ -380,12 +492,12 @@ msgstr ""
 "Här kan du styra om, när du rör musen över en fil, du vill se a liten "
 "popuppruta med ytterligare information om denna fil"
 
-#: rc.cpp:171
+#: rc.cpp:102 svnfrontend/display_settings.cpp:144
 #, no-c-format
 msgid "Display previews in file tips"
 msgstr "Visa förhandsgranskningar i filtips"
 
-#: rc.cpp:173
+#: rc.cpp:105 svnfrontend/display_settings.cpp:145
 #, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
@@ -394,37 +506,38 @@ msgstr ""
 "Här kan du styra om du önskar att popupprutan skall innehålla en större "
 "förhandsgranskning av filen, när du rör musen över den"
 
-#: rc.cpp:175 svnfrontend/svnactions.cpp:793
+#: rc.cpp:108 svnfrontend/display_settings.cpp:146
+#: svnfrontend/svnactions.cpp:799
 #, no-c-format
 msgid "Diff display"
 msgstr "Diff-visning"
 
-#: rc.cpp:177
+#: rc.cpp:111 svnfrontend/display_settings.cpp:147
 #, no-c-format
 msgid "Internal"
 msgstr "Intern"
 
-#: rc.cpp:179
+#: rc.cpp:114 svnfrontend/display_settings.cpp:148
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Använd Kompare för diff"
 
-#: rc.cpp:181
+#: rc.cpp:117 svnfrontend/display_settings.cpp:149
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Använd annan diff-visning"
 
-#: rc.cpp:183
+#: rc.cpp:120 svnfrontend/display_settings.cpp:150
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr "se \"Vad är detta\" för detaljer"
 
-#: rc.cpp:185
+#: rc.cpp:123 svnfrontend/display_settings.cpp:151
 #, no-c-format
 msgid "External diff display:"
 msgstr "Yttre diff-visning:"
 
-#: rc.cpp:187
+#: rc.cpp:126 svnfrontend/display_settings.cpp:152
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -454,129 +567,287 @@ msgstr ""
 "och Kdesvn kommer att koppla data direkt.\n"
 "</p>"
 
-#: rc.cpp:200
+#: rc.cpp:140 svnfrontend/display_settings.cpp:164
+#, fuzzy, no-c-format
+msgid "External display:"
+msgstr "Yttre diff-visning:"
+
+#: rc.cpp:143 svnfrontend/display_settings.cpp:165
+#, no-c-format
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program for opening file on doubleclick in form\n"
+"<br>\n"
+"<tt>&lt;program&gt;</tt>\n"
+"</p>\n"
+"<p>\n"
+"When kde-default is wanted for opening on double click, enter &quot;"
+"default&quot; and kde selects action.\n"
+"</p>"
+msgstr ""
+
+#: rc.cpp:153 svnfrontend/display_settings.cpp:173
 #, no-c-format
 msgid "Maximum logmessages in history:"
 msgstr "Maximalt antal logmeddelanden i historik:"
 
-#: rc.cpp:202 svnfrontend/svnactions.cpp:1303
+#: rc.cpp:156 svnfrontend/editpropsdlg.cpp:258
+#, no-c-format
+msgid "Edit property"
+msgstr "Redigera egenskaper"
+
+#: rc.cpp:159 svnfrontend/editpropsdlg.cpp:259
+#, no-c-format
+msgid "O&K"
+msgstr "O&K"
+
+#: rc.cpp:165 svnfrontend/editpropsdlg.cpp:261
+#, no-c-format
+msgid "Property name:"
+msgstr "Egenskapsnamn:"
+
+#: rc.cpp:168 svnfrontend/editpropsdlg.cpp:262
+#, no-c-format
+msgid "Property value:"
+msgstr "Egenskapsvärde:"
+
+#: rc.cpp:173 svnfrontend/editpropsdlg.cpp:265
+#, no-c-format
+msgid "Click for short info about pre-defined property name"
+msgstr "Klicka för information om fördefinierat egenskapsnamn"
+
+#: rc.cpp:176 svnfrontend/copymoveview.cpp:79 svnfrontend/svnactions.cpp:1336
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Kopiera / flytta"
 
-#: rc.cpp:204
+#: rc.cpp:179 svnfrontend/copymoveview.cpp:80
 #, no-c-format
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">Döp om</p>"
 
-#: rc.cpp:206
+#: rc.cpp:182 svnfrontend/copymoveview.cpp:81
 #, no-c-format
 msgid "this long text"
 msgstr "denna långa text"
 
-#: rc.cpp:208
+#: rc.cpp:185 svnfrontend/copymoveview.cpp:82
 #, no-c-format
 msgid "to"
 msgstr "till"
 
-#: rc.cpp:210
+#: rc.cpp:188 svnfrontend/copymoveview.cpp:83
 #, no-c-format
 msgid "/there/"
 msgstr "/där/"
 
-#: rc.cpp:212
+#: rc.cpp:191 svnfrontend/copymoveview.cpp:84
 #, no-c-format
 msgid "Force operation"
 msgstr "Tvingad åtgärd"
 
-#: rc.cpp:217 rc.cpp:227 kdesvn_part.cpp:322
+#: rc.cpp:198 svnfrontend/subversion_settings.cpp:73
 #, no-c-format
-msgid "Subversion"
-msgstr "Subversion"
+msgid "Mark changed items"
+msgstr "Märk ändrat"
 
-#: rc.cpp:221 rc.cpp:239
+#: rc.cpp:201 svnfrontend/subversion_settings.cpp:74
 #, no-c-format
-msgid "Subversion toolbar"
-msgstr "Subversion verktygsrad"
+msgid ""
+"Check (if needed recursive) if items are changed (added/delete/changed) and "
+"mark these items with an overlayed icon.\n"
+"\n"
+"If it works slow (low connection and so on) you should turn of this feature."
+msgstr ""
+"Check (vid behov rekursivt) om saker ändrats (tillagda/borttagna/ändrade) "
+"och märk dessa med en \"överlagd\" ikon.\n"
+"\n"
+"Om det blir segt (långsam förbindelse m. m.) bör du stänga av denna funktion."
 
-#: rc.cpp:225
+#: rc.cpp:206 svnfrontend/subversion_settings.cpp:77
+#, no-c-format
+msgid "Start check for updates when open a working copy"
+msgstr ""
+
+#: rc.cpp:209 svnfrontend/subversion_settings.cpp:78
+#, no-c-format
+msgid "Select if kdesvn should check for updates when open a working copy"
+msgstr ""
+
+#: rc.cpp:212 svnfrontend/subversion_settings.cpp:79
+#, no-c-format
+msgid "Gain item info recursive"
+msgstr "Hämta information rekursivt"
+
+#: rc.cpp:218 svnfrontend/subversion_settings.cpp:81
+#, no-c-format
+msgid "Log follows node changes"
+msgstr "Logg följer nodändringar"
+
+#: rc.cpp:221 svnfrontend/subversion_settings.cpp:82
+#, no-c-format
+msgid "Logs always reads list of changed files"
+msgstr "Loggar läser alltid lista på ändrade filer"
+
+#: rc.cpp:224 svnfrontend/subversion_settings.cpp:83
+#, no-c-format
+msgid "Maximum displayed logs when full log (0 for no limit)"
+msgstr ""
+
+#: rc.cpp:227 svnfrontend/fronthelpers/logmessage.cpp:82
+#, no-c-format
+msgid "Logmessage"
+msgstr "Loggmeddelande"
+
+#: rc.cpp:230 svnfrontend/fronthelpers/logmessage.cpp:83
+#, no-c-format
+msgid "Enter a log message"
+msgstr "Skriv in ett loggmeddelande"
+
+#: rc.cpp:233 svnfrontend/fronthelpers/logmessage.cpp:84
+#, no-c-format
+msgid "Or insert one of the last:"
+msgstr "Eller skjut in något av de senaste:"
+
+#: rc.cpp:237 svnfrontend/fronthelpers/logmessage.cpp:87
+#, fuzzy, no-c-format
+msgid "Last used log messages"
+msgstr "Skriv in ett loggmeddelande"
+
+#: rc.cpp:245 svnfrontend/fronthelpers/checkoutinfo.cpp:94
+#, no-c-format
+msgid "Checkout info"
+msgstr "Checkout info"
+
+#: rc.cpp:248 svnfrontend/fronthelpers/checkoutinfo.cpp:95
+#, no-c-format
+msgid "Select target directory:"
+msgstr "Välj målmapp:"
+
+#: rc.cpp:251 svnfrontend/fronthelpers/checkoutinfo.cpp:96
+#, no-c-format
+msgid "Enter URL:"
+msgstr "Skriv in URL:"
+
+#: rc.cpp:254 svnfrontend/fronthelpers/checkoutinfo.cpp:97
+#, no-c-format
+msgid "Append source url name to subfolder"
+msgstr ""
+
+#: rc.cpp:257 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:92
+#: svnfrontend/fronthelpers/checkoutinfo.cpp:98
+#, no-c-format
+msgid "Force"
+msgstr "Tvinga"
+
+#: rc.cpp:261 svnfrontend/fronthelpers/checkoutinfo.cpp:100
+#, no-c-format
+msgid "Open after job"
+msgstr "Öppna efter jobb"
+
+#: rc.cpp:264 svnfrontend/svnactions.cpp:178 svnfrontend/svnactions.cpp:866
+#: svnfrontend/kdesvnfilelist.cpp:1505 svnfrontend/kdesvnfilelist.cpp:1592
+#: svnfrontend/kdesvnfilelist.cpp:1609 svnfrontend/kdesvnfilelist.cpp:1635
+#: svnfrontend/fronthelpers/rangeinput.cpp:150
+#, no-c-format
+msgid "Revisions"
+msgstr "Revisioner"
+
+#: rc.cpp:267 svnfrontend/fronthelpers/rangeinput_impl.cpp:167
+#: svnfrontend/fronthelpers/rangeinput.cpp:151
+#, no-c-format
+msgid "Start with revision"
+msgstr "Börja med revison"
+
+#: rc.cpp:270 svnfrontend/fronthelpers/rangeinput.cpp:152
+#, no-c-format
+msgid "N&umber"
+msgstr "T&al"
+
+#: rc.cpp:277 svnfrontend/fronthelpers/rangeinput.cpp:155
+#, no-c-format
+msgid "S&TART"
+msgstr "S&TART"
+
+#: rc.cpp:280 rc.cpp:302 svnfrontend/fronthelpers/rangeinput.cpp:156
+#: svnfrontend/fronthelpers/rangeinput.cpp:164
+#, no-c-format
+msgid "HEAD"
+msgstr "HUVUD"
+
+#: rc.cpp:283 rc.cpp:305 svnfrontend/fronthelpers/rangeinput.cpp:157
+#: svnfrontend/fronthelpers/rangeinput.cpp:165
+#, no-c-format
+msgid "WORKING"
+msgstr ""
+
+#: rc.cpp:286 rc.cpp:308 svnfrontend/fronthelpers/rangeinput.cpp:158
+#: svnfrontend/fronthelpers/rangeinput.cpp:166
+#, fuzzy, no-c-format
+msgid "Select current working copy changes"
+msgstr "Omlokalisera URL hos aktuell arbetskopia till en ny. "
+
+#: rc.cpp:289 svnfrontend/fronthelpers/rangeinput.cpp:159
+#, no-c-format
+msgid "Stop with revision"
+msgstr "Sluta med revison"
+
+#: rc.cpp:292 svnfrontend/fronthelpers/rangeinput.cpp:160
+#, no-c-format
+msgid "Number"
+msgstr "Tal"
+
+#: rc.cpp:299 svnfrontend/fronthelpers/rangeinput.cpp:163
+#, no-c-format
+msgid "START"
+msgstr "START"
+
+#: rc.cpp:311 svnfrontend/fronthelpers/authdlg.cpp:113
+#, no-c-format
+msgid "Authentication"
+msgstr "Autentisering"
+
+#: rc.cpp:314 svnfrontend/fronthelpers/authdlg.cpp:114
+#, no-c-format
+msgid "Enter authentification info for"
+msgstr "Skriv in autentiseringsinformation för"
+
+#: rc.cpp:317 svnfrontend/fronthelpers/authdlg.cpp:115
+#, no-c-format
+msgid "Username:"
+msgstr "Användarnamn:"
+
+#: rc.cpp:320 svnfrontend/fronthelpers/authdlg.cpp:116
+#, no-c-format
+msgid "Password:"
+msgstr "Lösenord:"
+
+#: rc.cpp:323 svnfrontend/fronthelpers/authdlg.cpp:117
+#, no-c-format
+msgid "Store password"
+msgstr "Spara lösenord"
+
+#: rc.cpp:338
 #, no-c-format
 msgid "Quick settings"
 msgstr "Snabbinställningar"
 
-#: rc.cpp:229 kdesvn_part.cpp:320
-#, no-c-format
-msgid "General"
-msgstr "Allmänt"
-
-#: rc.cpp:231
+#: rc.cpp:347
 #, no-c-format
 msgid "Working copy"
 msgstr "Arbetskopia"
 
-#: rc.cpp:233
+#: rc.cpp:350
 #, no-c-format
 msgid "Repository"
 msgstr "Magasin"
 
-#: rc.cpp:237
+#: rc.cpp:356
 #, no-c-format
 msgid "Actions"
 msgstr "Åtgärder"
 
-#: kdesvn_part.cpp:53
-msgid "A Subversion Client for KDE (dynamic Part component)"
-msgstr "En Subversion-klient för KDE (dynamisk Part-komponent)"
-
-#: kdesvn_part.cpp:137
-msgid "Built with Subversion library: %1\n"
-msgstr "Byggd med Subversion-bibliotek: %1\n"
-
-#: kdesvn_part.cpp:138
-msgid "Running Subversion library: %1"
-msgstr "Kör med Subversion-bibliotek: %1"
-
-#: kdesvn_part.cpp:140
-msgid "kdesvn Part"
-msgstr "kdesvn Part"
-
-#: kdesvn_part.cpp:147
-msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
-msgstr "kdesvn: NAMN PÅ ÖVERSÄTTARE\\nPeter Landgren"
-
-#: kdesvn_part.cpp:148
-msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
-msgstr "kdesvn: E-POST TILL ÖVERSÄTTARE\\npeter.talken@telia.com"
-
-#: kdesvn_part.cpp:159
-msgid "Use \"Kompare\" for displaying diffs"
-msgstr "Använd \"Kompare\" för att visa diffs"
-
-#: kdesvn_part.cpp:164
-msgid "Logs follow node changes"
-msgstr "Loggar följer nodändringar"
-
-#: kdesvn_part.cpp:175
-msgid "Display unknown files"
-msgstr "Visa okända filer"
-
-#: kdesvn_part.cpp:184
-msgid "&Configure %1..."
-msgstr "&Konfigurera %1..."
-
-#: kdesvn_part.cpp:185
-msgid "&About kdesvn part"
-msgstr "&Om kdesvn part"
-
-#: kdesvn_part.cpp:187
-msgid "Kdesvn &Handbook"
-msgstr "Kdesvn &Handbok"
-
-#: kdesvn_part.cpp:189
-msgid "Send Bugreport for kdesvn"
-msgstr "Skicka felrapport om kdesvn"
-
-#: kdesvn.cpp:117
+#: kdesvn.cpp:118
 msgid "Could not find our part."
 msgstr "Kunde inte hitta vår del."
 
@@ -588,7 +859,7 @@ msgstr "Ladda senaste öppnade URL vid start"
 msgid "Reload last opend url if no one is given on commandline"
 msgstr "Ladda om senaste öppnade URL om ingen ges på kommandoraden"
 
-#: kdesvn.cpp:252
+#: kdesvn.cpp:242
 msgid "Ready"
 msgstr "Klar"
 
@@ -652,6 +923,107 @@ msgstr ""
 msgid "Double property"
 msgstr "Dubbelegenskap"
 
+#: svnfrontend/importdir_logmsg.cpp:46
+msgid "Create subdir %1 on import"
+msgstr "Skapa undermapp %1 vid import"
+
+#: svnfrontend/commandexec.cpp:187
+msgid "Command \"%1\" not implemented or known"
+msgstr ""
+
+#: svnfrontend/commandexec.cpp:188 svnfrontend/commandexec.cpp:282
+#: svnfrontend/kdesvnfilelist.cpp:743
+msgid "SVN Error"
+msgstr "SVN-fel"
+
+#: svnfrontend/commandexec.cpp:344
+msgid "\"GET\" requires output file!"
+msgstr ""
+
+#: svnfrontend/commandexec.cpp:349
+#, fuzzy
+msgid "Could not open %1 for writing"
+msgstr "Kunder inte öppna magasin"
+
+#: svnfrontend/commandexec.cpp:354
+#, fuzzy
+msgid "Error getting content and/or writing it to %1"
+msgstr "Fel vid hämtning av innehåll"
+
+#: svnfrontend/commandexec.cpp:526
+#, fuzzy
+msgid "May only switch one url at time!"
+msgstr "Kan bara växla en rad i taget"
+
+#: svnfrontend/commandexec.cpp:530
+#, fuzzy
+msgid "Switch only on working copies!"
+msgstr "Växla arbetskopians magasin (\"svn switch\")"
+
+#: svnfrontend/svnlogdlgimp.cpp:118
+msgid "%1 at revision %2"
+msgstr "%1 vid revision %2"
+
+#: svnfrontend/svnitem.cpp:244
+msgid "Needs update"
+msgstr "Uppdatering behövs"
+
+#: svnfrontend/svnitem.cpp:248
+msgid "Locally modified"
+msgstr "Lokalt ändrat"
+
+#: svnfrontend/svnitem.cpp:251
+msgid "Locally added"
+msgstr "Lokalt tillagt"
+
+#: svnfrontend/svnitem.cpp:254
+msgid "Missing"
+msgstr "Saknas"
+
+#: svnfrontend/svnitem.cpp:257 svnfrontend/ccontextlistener.cpp:71
+msgid "Deleted"
+msgstr "Borttagen"
+
+#: svnfrontend/svnitem.cpp:260
+msgid "Replaced"
+msgstr "Utbytt"
+
+#: svnfrontend/svnitem.cpp:263
+msgid "Ignored"
+msgstr "Ignorerad"
+
+#: svnfrontend/svnitem.cpp:266
+msgid "External"
+msgstr "Yttre"
+
+#: svnfrontend/svnitem.cpp:269
+msgid "Conflict"
+msgstr "Konflikt"
+
+#: svnfrontend/svnitem.cpp:272
+msgid "Merged"
+msgstr "Ihopslagen"
+
+#: svnfrontend/svnitem.cpp:275
+msgid "Incomplete"
+msgstr "Ofullständig"
+
+#: svnfrontend/svnitem.cpp:283
+msgid "Property modified"
+msgstr "Egenskap ändrad"
+
+#: svnfrontend/copymoveview_impl.cpp:49
+msgid "Rename/move"
+msgstr "Omdöpning/flyttning"
+
+#: svnfrontend/copymoveview_impl.cpp:84
+msgid "Move/Rename file/dir"
+msgstr "Flytta/Döp om fil/mapp"
+
+#: svnfrontend/copymoveview_impl.cpp:84
+msgid "Copy file/dir"
+msgstr "Kopiera fil/mapp"
+
 #: svnfrontend/ccontextlistener.cpp:63
 msgid "Add to revision control"
 msgstr "Lägg till till revisionskontroll"
@@ -660,7 +1032,7 @@ msgstr "Lägg till till revisionskontroll"
 msgid "Restore missing"
 msgstr "Rekonstruktion saknas"
 
-#: svnfrontend/ccontextlistener.cpp:67 svnfrontend/svnactions.cpp:1127
+#: svnfrontend/ccontextlistener.cpp:67 svnfrontend/svnactions.cpp:1155
 msgid "Revert"
 msgstr "Omvändning"
 
@@ -675,10 +1047,6 @@ msgstr "Löst"
 #: svnfrontend/ccontextlistener.cpp:70
 msgid "Skip"
 msgstr "Hoppa över"
-
-#: svnfrontend/ccontextlistener.cpp:71 svnfrontend/svnitem.cpp:257
-msgid "Deleted"
-msgstr "Borttagen"
 
 #: svnfrontend/ccontextlistener.cpp:72
 msgid "Added"
@@ -788,69 +1156,553 @@ msgstr ""
 msgid "The certificate has an unknown error."
 msgstr ""
 
-#: svnfrontend/fronthelpers/rangeinput_impl.cpp:164
-msgid "Select revision"
-msgstr "Välj revision"
+#: svnfrontend/svnactions.cpp:108
+msgid "Finished"
+msgstr "Avslutat"
 
-#: svnfrontend/fronthelpers/logmsg_impl.cpp:139
-msgid "Commit log"
-msgstr "Överlämnandelogg"
+#: svnfrontend/svnactions.cpp:237
+msgid "Got no logs"
+msgstr "Fick inga loggar"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:37
-msgid "Error validating server certificate for '%1'"
-msgstr "Fel vid validering av servercertifikat för '%1'"
+#: svnfrontend/svnactions.cpp:279
+msgid "Error getting blame"
+msgstr "Fel vid erhållande av klander"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:48
-msgid "Trust ssl certificate"
-msgstr "Lita på ssl-certifikat"
+#: svnfrontend/svnactions.cpp:284
+msgid "Got no annotate"
+msgstr "Fick ingen förklaring"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:49
-msgid "Accept permanently"
-msgstr "Acceptera permanent"
+#: svnfrontend/svnactions.cpp:294
+msgid "Line"
+msgstr "Rad"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:50
-msgid "Accept temporarily"
-msgstr "Acceptera tillfälligt"
+#: svnfrontend/svnactions.cpp:308 svnfrontend/svnactions.cpp:492
+#: svnfrontend/svnactions.cpp:512
+msgid "Unknown"
+msgstr "Okänt"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:51
-msgid "Reject"
-msgstr "Avvisa"
+#: svnfrontend/svnactions.cpp:315
+msgid "Blame %1"
+msgstr "Klandra %1"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:59
-msgid "Failure reasons"
+#: svnfrontend/svnactions.cpp:339
+msgid "Error getting content"
+msgstr "Fel vid hämtning av innehåll"
+
+#: svnfrontend/svnactions.cpp:349
+msgid "Got no content"
+msgstr "Fick inget innehåll"
+
+#: svnfrontend/svnactions.cpp:357 svnfrontend/svnactions.cpp:368
+msgid "Content of %1"
+msgstr "Innehåll av %1"
+
+#: svnfrontend/svnactions.cpp:390
+msgid "New folder"
+msgstr "Ny mapp"
+
+#: svnfrontend/svnactions.cpp:390
+msgid "Enter folder name:"
+msgstr "Skriv in mappnamn:"
+
+#: svnfrontend/svnactions.cpp:468 svnfrontend/kdesvnfilelist.cpp:131
+msgid "Name"
+msgstr "Namn"
+
+#: svnfrontend/svnactions.cpp:471
+msgid "URL"
+msgstr "URL"
+
+#: svnfrontend/svnactions.cpp:473
+msgid "Canonical repository url"
+msgstr "Kanonisk magasins-URL"
+
+#: svnfrontend/svnactions.cpp:476
+msgid "Checksum"
+msgstr "Kontrollsumma"
+
+#: svnfrontend/svnactions.cpp:479
+msgid "Type"
+msgstr "Typ"
+
+#: svnfrontend/svnactions.cpp:482
+msgid "Absent"
+msgstr "Frånvarande"
+
+#: svnfrontend/svnactions.cpp:488
+msgid "Folder"
+msgstr "Mapp"
+
+#: svnfrontend/svnactions.cpp:497
+msgid "Schedule"
+msgstr "Schema"
+
+#: svnfrontend/svnactions.cpp:500
+msgid "Normal"
+msgstr "Normal"
+
+#: svnfrontend/svnactions.cpp:503
+msgid "Addition"
+msgstr "Addition"
+
+#: svnfrontend/svnactions.cpp:506
+msgid "Deletion"
+msgstr "Borttagande"
+
+#: svnfrontend/svnactions.cpp:516
+msgid "UUID"
+msgstr "UUID"
+
+#: svnfrontend/svnactions.cpp:518 svnfrontend/kdesvnfilelist.cpp:134
+msgid "Last author"
+msgstr "Senaste författare"
+
+#: svnfrontend/svnactions.cpp:519
+msgid "Last committed"
+msgstr "Senaste överlämning"
+
+#: svnfrontend/svnactions.cpp:520
+msgid "Last revision"
+msgstr "Senaste revision"
+
+#: svnfrontend/svnactions.cpp:521
+msgid "Content last changed"
+msgstr "Innehåll senast ändrat"
+
+#: svnfrontend/svnactions.cpp:523
+msgid "Property last changed"
+msgstr "Egenskap senast ändrad"
+
+#: svnfrontend/svnactions.cpp:525
+msgid "New version of conflicted file"
+msgstr "Ny version av konflikt-fil"
+
+#: svnfrontend/svnactions.cpp:528
+msgid "Old version of conflicted file"
+msgstr "Gammal version av konflikt-fil"
+
+#: svnfrontend/svnactions.cpp:531
+msgid "Working version of conflicted file"
+msgstr "Arbetskopia av konflikt-fil"
+
+#: svnfrontend/svnactions.cpp:535
+msgid "Property reject file"
+msgstr "Egenskapsavvisningsfil"
+
+#: svnfrontend/svnactions.cpp:540
+msgid "Copy from URL"
+msgstr "Kopiera från URL"
+
+#: svnfrontend/svnactions.cpp:543
+msgid "Lock token"
+msgstr "Låsmärke"
+
+#: svnfrontend/svnactions.cpp:544
+msgid "Owner"
+msgstr "Ägare"
+
+#: svnfrontend/svnactions.cpp:545
+msgid "Locked on"
+msgstr "Lås på"
+
+#: svnfrontend/svnactions.cpp:548
+msgid "Lock comment"
+msgstr "Lås kommentar"
+
+#: svnfrontend/svnactions.cpp:573
+msgid "Infolist"
+msgstr "Informationslista"
+
+#: svnfrontend/svnactions.cpp:914
+msgid "Which files or directories should I add?"
+msgstr "Vilka filer eller mappar skall jag addera?"
+
+#: svnfrontend/svnactions.cpp:923
+msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
+msgstr "<center>Posten<br>%1<br> har versions - brytning.</center>"
+
+#: svnfrontend/svnactions.cpp:969 svnfrontend/kdesvnfilelist.cpp:1356
+msgid "Really delete these entries?"
+msgstr "Vill du ta bort detta?"
+
+#: svnfrontend/svnactions.cpp:969 svnfrontend/kdesvnfilelist.cpp:1356
+msgid "Delete from repository"
+msgstr "Tag bort från magasin"
+
+#: svnfrontend/svnactions.cpp:1001
+msgid "Export repository"
+msgstr "Exportera magasin"
+
+#: svnfrontend/svnactions.cpp:1001 svnfrontend/svnactions.cpp:1044
+#: svnfrontend/kdesvnfilelist.cpp:269
+msgid "Checkout a repository"
+msgstr "Hämta ut ett magasin"
+
+#: svnfrontend/svnactions.cpp:1029
+msgid "Exporting a file?"
+msgstr "Exportera en fil?"
+
+#: svnfrontend/svnactions.cpp:1029
+msgid "Checking out a file?"
+msgstr "Hämta ut en fil?"
+
+#: svnfrontend/svnactions.cpp:1044 svnfrontend/kdesvnfilelist.cpp:271
+msgid "Export a repository"
+msgstr "Exportera ett magasin"
+
+#: svnfrontend/svnactions.cpp:1077
+msgid "Checkout"
+msgstr "Hämta ut"
+
+#: svnfrontend/svnactions.cpp:1077
+msgid "Exporting"
+msgstr "Exporterar"
+
+#: svnfrontend/svnactions.cpp:1077
+msgid "Checking out"
+msgstr "Hämtar ut"
+
+#: svnfrontend/svnactions.cpp:1107
+msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
+msgstr "<center>Posten<br>%1<br>har ingen versions - brytning.</center>"
+
+#: svnfrontend/svnactions.cpp:1133
+msgid "Revert entries"
+msgstr "Kasta om inmatningar"
+
+#: svnfrontend/svnactions.cpp:1141
+msgid "Really revert these entries to pristine state?"
+msgstr "Vill du verkligen kasta om inmatningar till ursprungligt tillstånd?"
+
+#: svnfrontend/svnactions.cpp:1155
+msgid "Reverting items"
+msgstr "Omkastar poster"
+
+#: svnfrontend/svnactions.cpp:1187 svnfrontend/svnactions.cpp:1256
+msgid "Switch url"
+msgstr "Växla URL"
+
+#: svnfrontend/svnactions.cpp:1187
+msgid "Switching url"
+msgstr "Växlar URL"
+
+#: svnfrontend/svnactions.cpp:1213
+msgid "Relocate url"
+msgstr "Omlokalisera URL"
+
+#: svnfrontend/svnactions.cpp:1213
+msgid "Relocate repository to new URL"
+msgstr "Omlokalisera magasin till ny URL"
+
+#: svnfrontend/svnactions.cpp:1235
+msgid "Can only switch one item at time"
+msgstr "Kan bara växla en rad i taget"
+
+#: svnfrontend/svnactions.cpp:1242
+msgid "Error getting entry to switch"
+msgstr "Fel vid hämtning av post att växla"
+
+#: svnfrontend/svnactions.cpp:1277
+msgid "Cleanup"
+msgstr "Städa"
+
+#: svnfrontend/svnactions.cpp:1277
+msgid "Cleaning up folder"
+msgstr "Städar mapp"
+
+#: svnfrontend/svnactions.cpp:1290
+msgid "Resolve"
+msgstr "Lös upp"
+
+#: svnfrontend/svnactions.cpp:1290
+msgid "Marking resolved"
+msgstr "Märkning upplöst"
+
+#: svnfrontend/svnactions.cpp:1303
+msgid "Importing items"
+msgstr "Importerar poster"
+
+#: svnfrontend/svnactions.cpp:1336
+msgid "Copy or Moving entries"
+msgstr "Kopiera eller flytta poster"
+
+#: svnfrontend/svnactions.cpp:1405
+msgid "Status / List"
+msgstr "Status / Lista"
+
+#: svnfrontend/svnactions.cpp:1405
+msgid "Creating list / check status"
+msgstr "Skapar lista / kontrollera status"
+
+#: svnfrontend/svnactions.cpp:1434
+#, fuzzy
+msgid "No unversioned items found."
+msgstr "post utan version förhindrade arbete"
+
+#: svnfrontend/svnactions.cpp:1437
+#, fuzzy
+msgid "Add unversioned items"
+msgstr "post utan version förhindrade arbete"
+
+#: svnfrontend/svnactions.cpp:1527
+#, fuzzy
+msgid "Still checking for updates"
+msgstr "Kontrollera efter uppdateringar"
+
+#: svnfrontend/svnactions.cpp:1541 svnfrontend/svnactions.cpp:1605
+msgid "Checking for updates finished"
+msgstr "Kontroll för uppdatering avslutad"
+
+#: svnfrontend/svnactions.cpp:1610
+#, fuzzy
+msgid "Checking for updates started in background"
+msgstr "Kontroll för uppdatering avslutad"
+
+#: svnfrontend/kdesvnfilelist.cpp:132
+msgid "Status"
+msgstr "Status"
+
+#: svnfrontend/kdesvnfilelist.cpp:133
+msgid "Last changed Revision"
+msgstr "Senaste ändrade revision"
+
+#: svnfrontend/kdesvnfilelist.cpp:135
+msgid "Last change date"
+msgstr "Senaste ändringsdatum"
+
+#: svnfrontend/kdesvnfilelist.cpp:136
+msgid "Locked by"
+msgstr "Låst av"
+
+#: svnfrontend/kdesvnfilelist.cpp:172
+msgid "&Log..."
+msgstr "&Log..."
+
+#: svnfrontend/kdesvnfilelist.cpp:173
+msgid "&Full Log"
+msgstr "&Komplett logg"
+
+#: svnfrontend/kdesvnfilelist.cpp:176
+msgid "Details"
+msgstr "Detaljer"
+
+#: svnfrontend/kdesvnfilelist.cpp:182
+msgid "Check for updates"
+msgstr "Kontrollera efter uppdateringar"
+
+#: svnfrontend/kdesvnfilelist.cpp:183
+msgid ""
+"Check if current working copy has items with newer version in repository"
+msgstr ""
+"Kontrollera om den aktuella arbetskopian har poster med nyare versioner i "
+"magasin."
+
+#: svnfrontend/kdesvnfilelist.cpp:187 svnfrontend/kdesvnfilelist.cpp:189
+msgid ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+msgstr ""
+"Skriv ut innehållet i specificerade filer eller URL:er med revisions- och "
+"författarinformation på en rad."
+
+#: svnfrontend/kdesvnfilelist.cpp:190
+msgid "Cat head"
+msgstr "Katalog (cat) framför"
+
+#: svnfrontend/kdesvnfilelist.cpp:192
+msgid "Output the content of specified files or URLs."
+msgstr "Skriv ut innehållet i specificerade filer eller URL:er."
+
+#: svnfrontend/kdesvnfilelist.cpp:193
+msgid "Cat revision..."
+msgstr "Katalogrevision..."
+
+#: svnfrontend/kdesvnfilelist.cpp:194
+msgid "Output the content of specified files or URLs at specific revision."
+msgstr ""
+"Skriv ut innehållet i specificerade filer eller URL:er vid en specifik "
+"revision."
+
+#: svnfrontend/kdesvnfilelist.cpp:196
+msgid "Lock current items"
+msgstr "Lås aktuella poster."
+
+#: svnfrontend/kdesvnfilelist.cpp:197
+msgid "Unlock current items"
+msgstr "Lås upp aktuella poster"
+
+#: svnfrontend/kdesvnfilelist.cpp:204
+msgid "Switch repository of working copy (\"svn switch\")"
+msgstr "Växla arbetskopians magasin (\"svn switch\")"
+
+#: svnfrontend/kdesvnfilelist.cpp:205
+msgid "Relocate working copy url"
+msgstr "Omlokalisera arbetskopians URL"
+
+#: svnfrontend/kdesvnfilelist.cpp:207
+msgid "Relocate url of current working copy to a new one"
+msgstr "Omlokalisera URL hos aktuell arbetskopia till en ny. "
+
+#: svnfrontend/kdesvnfilelist.cpp:208
+#, fuzzy
+msgid "Check for unversioned items"
+msgstr "Kontrollera efter uppdateringar"
+
+#: svnfrontend/kdesvnfilelist.cpp:210
+msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:67
-msgid "Realm"
-msgstr "Rike"
+#: svnfrontend/kdesvnfilelist.cpp:212
+msgid "Open repository of working copy"
+msgstr "Öppna arbetskopians magasin"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:68
-msgid "Host"
-msgstr "Värd"
+#: svnfrontend/kdesvnfilelist.cpp:214
+msgid "Opens the repository the current working copy was checked out from"
+msgstr "Öppnar det magasin, som den aktuella arbetskopian hämtades ut från."
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:69
-msgid "Valid from"
-msgstr "Giltigt från"
+#: svnfrontend/kdesvnfilelist.cpp:218
+msgid "Import folders into current"
+msgstr "Importera mappar till aktuell"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:70
-msgid "Valid until"
-msgstr "Giltigt till"
+#: svnfrontend/kdesvnfilelist.cpp:220
+msgid "Import folder content into current url"
+msgstr "Importera mappinnehåll till aktuell URL"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:71
-msgid "Issuer name"
-msgstr "Utgivarnamn"
+#: svnfrontend/kdesvnfilelist.cpp:226
+msgid "Adding selected files and/or directories to repository"
+msgstr "Lägg till valda filer och/eller mappar till magasin"
 
-#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:72
-msgid "Fingerprint"
-msgstr "Fingeravtryck"
+#: svnfrontend/kdesvnfilelist.cpp:229
+#, fuzzy
+msgid ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+msgstr "Lägg till valda filer och/eller mappar till magasin"
 
-#: svnfrontend/filelistviewitem.cpp:140
-msgid "Not versioned"
-msgstr "Utan version"
+#: svnfrontend/kdesvnfilelist.cpp:233
+msgid "Deleting selected files and/or directories from repository"
+msgstr "Tar bort valda filer och/eller mappar från magasin"
 
-#: svnfrontend/mergedlg_impl.cpp:103
-msgid "Enter merge range"
-msgstr "Skriv in hopslagningsområde"
+#: svnfrontend/kdesvnfilelist.cpp:238
+msgid "Marking files or dirs resolved"
+msgstr "Märkta filer och mappar upplösta"
+
+#: svnfrontend/kdesvnfilelist.cpp:239
+msgid "Ignore/Unignore current item"
+msgstr "Ignorera/Ignorera inte aktuell post"
+
+#: svnfrontend/kdesvnfilelist.cpp:248
+msgid "Diff local changes"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:250
+msgid ""
+"Diff working copy against BASE (last checked out version) - doesn't require "
+"access to repository"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:252
+#, fuzzy
+msgid "Diff against HEAD"
+msgstr "Diff mot huvud"
+
+#: svnfrontend/kdesvnfilelist.cpp:254
+msgid ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:257
+msgid "Merge two revisions"
+msgstr "Slå ihop två revisoner"
+
+#: svnfrontend/kdesvnfilelist.cpp:259
+msgid "Merge two revisions of these entry into itself"
+msgstr "Slå ihop två revisioner av dessa till sig själv"
+
+#: svnfrontend/kdesvnfilelist.cpp:264
+msgid "Export current repository path"
+msgstr "Exportera sökväg för aktuellt magasin"
+
+#: svnfrontend/kdesvnfilelist.cpp:266
+msgid "Select browse revision"
+msgstr "Välj bläddrarevision"
+
+#: svnfrontend/kdesvnfilelist.cpp:273
+msgid "Refresh view"
+msgstr "Uppdatera vy"
+
+#: svnfrontend/kdesvnfilelist.cpp:792
+msgid "Failed: %1 %2"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:849
+msgid "Cannot import into multiple targets!"
+msgstr "Kan ej importera till flera mål!"
+
+#: svnfrontend/kdesvnfilelist.cpp:865
+msgid "Cannot import into remote targets!"
+msgstr "Kan ej importera till fjärrmål!"
+
+#: svnfrontend/kdesvnfilelist.cpp:884 svnfrontend/kdesvnfilelist.cpp:888
+msgid "Import log"
+msgstr "Importlogg"
+
+#: svnfrontend/kdesvnfilelist.cpp:1338
+msgid "Nothing selected for delete"
+msgstr "Inget valt att ta bort"
+
+#: svnfrontend/kdesvnfilelist.cpp:1393
+msgid "Please wait until job is finished"
+msgstr "Vänta tills jobbet är klart"
+
+#: svnfrontend/kdesvnfilelist.cpp:1413
+msgid "Nothing selected for lock"
+msgstr "Inget valt att låsas"
+
+#: svnfrontend/kdesvnfilelist.cpp:1418
+msgid "Lock message"
+msgstr "Låsmeddelande"
+
+#: svnfrontend/kdesvnfilelist.cpp:1421
+msgid "Steal lock?"
+msgstr "Stjäla lås?"
+
+#: svnfrontend/kdesvnfilelist.cpp:1452
+msgid "Nothing selected for unlock"
+msgstr "Inget valt att låsas upp"
+
+#: svnfrontend/kdesvnfilelist.cpp:1455
+msgid "Break lock or ignore missing locks?"
+msgstr "Bryt lås eller ignorera saknade lås?"
+
+#: svnfrontend/kdesvnfilelist.cpp:1455
+msgid "Unlocking items"
+msgstr "Låser upp poster"
+
+#: svnfrontend/kdesvnfilelist.cpp:1565
+msgid "May not make subdirs of a file"
+msgstr "Får ej göra undermappar av en fil"
+
+#: svnfrontend/kdesvnfilelist.cpp:1890
+msgid "Error getting entry to relocate"
+msgstr "Fel vid hämtning av notis att omlokalisera"
+
+#: svnfrontend/kdesvnfilelist.cpp:1897
+msgid "Relocate working copy"
+msgstr "Omlokalisera arbetskopia"
+
+#: svnfrontend/kdesvnfilelist.cpp:2013
+msgid "Only in working copy possible."
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:2017
+msgid "Only on single folder possible"
+msgstr ""
+
+#: svnfrontend/kdesvnfilelist.cpp:2022
+msgid "Sorry - internal error!"
+msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:80
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
@@ -1002,665 +1854,66 @@ msgstr ""
 "andra uttrycket används för att plocka ut den nakna felidentiteten från "
 "strängen."
 
-#: svnfrontend/svnlogdlgimp.cpp:118
-msgid "%1 at revision %2"
-msgstr "%1 vid revision %2"
+#: svnfrontend/mergedlg_impl.cpp:103
+msgid "Enter merge range"
+msgstr "Skriv in hopslagningsområde"
 
-#: svnfrontend/kdesvnfilelist.cpp:131 svnfrontend/svnactions.cpp:462
-msgid "Name"
-msgstr "Namn"
+#: svnfrontend/fronthelpers/logmsg_impl.cpp:139
+msgid "Commit log"
+msgstr "Överlämnandelogg"
 
-#: svnfrontend/kdesvnfilelist.cpp:132
-msgid "Status"
-msgstr "Status"
+#: svnfrontend/fronthelpers/rangeinput_impl.cpp:164
+msgid "Select revision"
+msgstr "Välj revision"
 
-#: svnfrontend/kdesvnfilelist.cpp:133
-msgid "Last changed Revision"
-msgstr "Senaste ändrade revision"
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:37
+msgid "Error validating server certificate for '%1'"
+msgstr "Fel vid validering av servercertifikat för '%1'"
 
-#: svnfrontend/kdesvnfilelist.cpp:134 svnfrontend/svnactions.cpp:512
-msgid "Last author"
-msgstr "Senaste författare"
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:48
+msgid "Trust ssl certificate"
+msgstr "Lita på ssl-certifikat"
 
-#: svnfrontend/kdesvnfilelist.cpp:135
-msgid "Last change date"
-msgstr "Senaste ändringsdatum"
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:49
+msgid "Accept permanently"
+msgstr "Acceptera permanent"
 
-#: svnfrontend/kdesvnfilelist.cpp:136
-msgid "Locked by"
-msgstr "Låst av"
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:50
+msgid "Accept temporarily"
+msgstr "Acceptera tillfälligt"
 
-#: svnfrontend/kdesvnfilelist.cpp:172
-msgid "&Log..."
-msgstr "&Log..."
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:51
+msgid "Reject"
+msgstr "Avvisa"
 
-#: svnfrontend/kdesvnfilelist.cpp:173
-msgid "&Full Log"
-msgstr "&Komplett logg"
-
-#: svnfrontend/kdesvnfilelist.cpp:176
-msgid "Details"
-msgstr "Detaljer"
-
-#: svnfrontend/kdesvnfilelist.cpp:182
-msgid "Check for updates"
-msgstr "Kontrollera efter uppdateringar"
-
-#: svnfrontend/kdesvnfilelist.cpp:183
-msgid ""
-"Check if current working copy has items with newer version in repository"
-msgstr ""
-"Kontrollera om den aktuella arbetskopian har poster med nyare versioner i "
-"magasin."
-
-#: svnfrontend/kdesvnfilelist.cpp:187 svnfrontend/kdesvnfilelist.cpp:189
-msgid ""
-"Output the content of specified files or URLs with revision and author "
-"information in-line."
-msgstr ""
-"Skriv ut innehållet i specificerade filer eller URL:er med revisions- och "
-"författarinformation på en rad."
-
-#: svnfrontend/kdesvnfilelist.cpp:190
-msgid "Cat head"
-msgstr "Katalog (cat) framför"
-
-#: svnfrontend/kdesvnfilelist.cpp:192
-msgid "Output the content of specified files or URLs."
-msgstr "Skriv ut innehållet i specificerade filer eller URL:er."
-
-#: svnfrontend/kdesvnfilelist.cpp:193
-msgid "Cat revision..."
-msgstr "Katalogrevision..."
-
-#: svnfrontend/kdesvnfilelist.cpp:194
-msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Skriv ut innehållet i specificerade filer eller URL:er vid en specifik "
-"revision."
-
-#: svnfrontend/kdesvnfilelist.cpp:196
-msgid "Lock current items"
-msgstr "Lås aktuella poster."
-
-#: svnfrontend/kdesvnfilelist.cpp:197
-msgid "Unlock current items"
-msgstr "Lås upp aktuella poster"
-
-#: svnfrontend/kdesvnfilelist.cpp:204
-msgid "Switch repository of working copy (\"svn switch\")"
-msgstr "Växla arbetskopians magasin (\"svn switch\")"
-
-#: svnfrontend/kdesvnfilelist.cpp:205
-msgid "Relocate working copy url"
-msgstr "Omlokalisera arbetskopians URL"
-
-#: svnfrontend/kdesvnfilelist.cpp:207
-msgid "Relocate url of current working copy to a new one"
-msgstr "Omlokalisera URL hos aktuell arbetskopia till en ny. "
-
-#: svnfrontend/kdesvnfilelist.cpp:209
-msgid "Open repository of working copy"
-msgstr "Öppna arbetskopians magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:211
-msgid "Opens the repository the current working copy was checked out from"
-msgstr "Öppnar det magasin, som den aktuella arbetskopian hämtades ut från."
-
-#: svnfrontend/kdesvnfilelist.cpp:215
-msgid "Import folders into current"
-msgstr "Importera mappar till aktuell"
-
-#: svnfrontend/kdesvnfilelist.cpp:217
-msgid "Import folder content into current url"
-msgstr "Importera mappinnehåll till aktuell URL"
-
-#: svnfrontend/kdesvnfilelist.cpp:223
-msgid "Adding selected files and/or directories to repository"
-msgstr "Lägg till valda filer och/eller mappar till magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:226
-#, fuzzy
-msgid ""
-"Adding selected files and/or directories to repository and all subitems of "
-"folders"
-msgstr "Lägg till valda filer och/eller mappar till magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:230
-msgid "Deleting selected files and/or directories from repository"
-msgstr "Tar bort valda filer och/eller mappar från magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:235
-msgid "Marking files or dirs resolved"
-msgstr "Märkta filer och mappar upplösta"
-
-#: svnfrontend/kdesvnfilelist.cpp:236
-msgid "Ignore/Unignore current item"
-msgstr "Ignorera/Ignorera inte aktuell post"
-
-#: svnfrontend/kdesvnfilelist.cpp:244
-msgid "Diff against head"
-msgstr "Diff mot huvud"
-
-#: svnfrontend/kdesvnfilelist.cpp:246
-msgid "Merge two revisions"
-msgstr "Slå ihop två revisoner"
-
-#: svnfrontend/kdesvnfilelist.cpp:248
-msgid "Merge two revisions of these entry into itself"
-msgstr "Slå ihop två revisioner av dessa till sig själv"
-
-#: svnfrontend/kdesvnfilelist.cpp:253
-msgid "Export current repository path"
-msgstr "Exportera sökväg för aktuellt magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:255
-msgid "Select browse revision"
-msgstr "Välj bläddrarevision"
-
-#: svnfrontend/kdesvnfilelist.cpp:258 svnfrontend/svnactions.cpp:973
-#: svnfrontend/svnactions.cpp:1016
-msgid "Checkout a repository"
-msgstr "Hämta ut ett magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:260 svnfrontend/svnactions.cpp:1016
-msgid "Export a repository"
-msgstr "Exportera ett magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:262
-msgid "Refresh view"
-msgstr "Uppdatera vy"
-
-#: svnfrontend/kdesvnfilelist.cpp:726 svnfrontend/commandexec.cpp:165
-#: svnfrontend/commandexec.cpp:254
-msgid "SVN Error"
-msgstr "SVN-fel"
-
-#: svnfrontend/kdesvnfilelist.cpp:821
-msgid "Cannot import into multiple targets!"
-msgstr "Kan ej importera till flera mål!"
-
-#: svnfrontend/kdesvnfilelist.cpp:837
-msgid "Cannot import into remote targets!"
-msgstr "Kan ej importera till fjärrmål!"
-
-#: svnfrontend/kdesvnfilelist.cpp:856 svnfrontend/kdesvnfilelist.cpp:860
-msgid "Import log"
-msgstr "Importlogg"
-
-#: svnfrontend/kdesvnfilelist.cpp:1310
-msgid "Nothing selected for delete"
-msgstr "Inget valt att ta bort"
-
-#: svnfrontend/kdesvnfilelist.cpp:1328
-msgid "Really delete these entries?"
-msgstr "Vill du ta bort detta?"
-
-#: svnfrontend/kdesvnfilelist.cpp:1328
-msgid "Delete from repository"
-msgstr "Tag bort från magasin"
-
-#: svnfrontend/kdesvnfilelist.cpp:1365
-msgid "Please wait until job is finished"
-msgstr "Vänta tills jobbet är klart"
-
-#: svnfrontend/kdesvnfilelist.cpp:1385
-msgid "Nothing selected for lock"
-msgstr "Inget valt att låsas"
-
-#: svnfrontend/kdesvnfilelist.cpp:1390
-msgid "Lock message"
-msgstr "Låsmeddelande"
-
-#: svnfrontend/kdesvnfilelist.cpp:1393
-msgid "Steal lock?"
-msgstr "Stjäla lås?"
-
-#: svnfrontend/kdesvnfilelist.cpp:1424
-msgid "Nothing selected for unlock"
-msgstr "Inget valt att låsas upp"
-
-#: svnfrontend/kdesvnfilelist.cpp:1427
-msgid "Break lock or ignore missing locks?"
-msgstr "Bryt lås eller ignorera saknade lås?"
-
-#: svnfrontend/kdesvnfilelist.cpp:1427
-msgid "Unlocking items"
-msgstr "Låser upp poster"
-
-#: svnfrontend/kdesvnfilelist.cpp:1522
-msgid "May not make subdirs of a file"
-msgstr "Får ej göra undermappar av en fil"
-
-#: svnfrontend/kdesvnfilelist.cpp:1847
-msgid "Error getting entry to relocate"
-msgstr "Fel vid hämtning av notis att omlokalisera"
-
-#: svnfrontend/kdesvnfilelist.cpp:1854
-msgid "Relocate working copy"
-msgstr "Omlokalisera arbetskopia"
-
-#: svnfrontend/commandexec.cpp:164
-msgid "Command \"%1\" not implemented or known"
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:59
+msgid "Failure reasons"
 msgstr ""
 
-#: svnfrontend/commandexec.cpp:298
-msgid "\"GET\" requires output file!"
-msgstr ""
-
-#: svnfrontend/commandexec.cpp:303
-#, fuzzy
-msgid "Could not open %1 for writing"
-msgstr "Kunder inte öppna magasin"
-
-#: svnfrontend/commandexec.cpp:308
-#, fuzzy
-msgid "Error getting content and/or writing it to %1"
-msgstr "Fel vid hämtning av innehåll"
-
-#: svnfrontend/commandexec.cpp:379
-msgid "copy <source> <target>"
-msgstr ""
-
-#: svnfrontend/commandexec.cpp:388
-msgid "move <source> <target>"
-msgstr ""
-
-#: svnfrontend/svnitem.cpp:244
-msgid "Needs update"
-msgstr "Uppdatering behövs"
-
-#: svnfrontend/svnitem.cpp:248
-msgid "Locally modified"
-msgstr "Lokalt ändrat"
-
-#: svnfrontend/svnitem.cpp:251
-msgid "Locally added"
-msgstr "Lokalt tillagt"
-
-#: svnfrontend/svnitem.cpp:254
-msgid "Missing"
-msgstr "Saknas"
-
-#: svnfrontend/svnitem.cpp:260
-msgid "Replaced"
-msgstr "Utbytt"
-
-#: svnfrontend/svnitem.cpp:263
-msgid "Ignored"
-msgstr "Ignorerad"
-
-#: svnfrontend/svnitem.cpp:266
-msgid "External"
-msgstr "Yttre"
-
-#: svnfrontend/svnitem.cpp:269
-msgid "Conflict"
-msgstr "Konflikt"
-
-#: svnfrontend/svnitem.cpp:272
-msgid "Merged"
-msgstr "Ihopslagen"
-
-#: svnfrontend/svnitem.cpp:275
-msgid "Incomplete"
-msgstr "Ofullständig"
-
-#: svnfrontend/svnitem.cpp:283
-msgid "Property modified"
-msgstr "Egenskap ändrad"
-
-#: svnfrontend/svnactions.cpp:103
-msgid "Finished"
-msgstr "Avslutat"
-
-#: svnfrontend/svnactions.cpp:231
-msgid "Got no logs"
-msgstr "Fick inga loggar"
-
-#: svnfrontend/svnactions.cpp:273
-msgid "Error getting blame"
-msgstr "Fel vid erhållande av klander"
-
-#: svnfrontend/svnactions.cpp:278
-msgid "Got no annotate"
-msgstr "Fick ingen förklaring"
-
-#: svnfrontend/svnactions.cpp:288
-msgid "Line"
-msgstr "Rad"
-
-#: svnfrontend/svnactions.cpp:302 svnfrontend/svnactions.cpp:486
-#: svnfrontend/svnactions.cpp:506
-msgid "Unknown"
-msgstr "Okänt"
-
-#: svnfrontend/svnactions.cpp:309
-msgid "Blame %1"
-msgstr "Klandra %1"
-
-#: svnfrontend/svnactions.cpp:333
-msgid "Error getting content"
-msgstr "Fel vid hämtning av innehåll"
-
-#: svnfrontend/svnactions.cpp:343
-msgid "Got no content"
-msgstr "Fick inget innehåll"
-
-#: svnfrontend/svnactions.cpp:351 svnfrontend/svnactions.cpp:362
-msgid "Content of %1"
-msgstr "Innehåll av %1"
-
-#: svnfrontend/svnactions.cpp:384
-msgid "New folder"
-msgstr "Ny mapp"
-
-#: svnfrontend/svnactions.cpp:384
-msgid "Enter folder name:"
-msgstr "Skriv in mappnamn:"
-
-#: svnfrontend/svnactions.cpp:465
-msgid "URL"
-msgstr "URL"
-
-#: svnfrontend/svnactions.cpp:467
-msgid "Canonical repository url"
-msgstr "Kanonisk magasins-URL"
-
-#: svnfrontend/svnactions.cpp:470
-msgid "Checksum"
-msgstr "Kontrollsumma"
-
-#: svnfrontend/svnactions.cpp:473
-msgid "Type"
-msgstr "Typ"
-
-#: svnfrontend/svnactions.cpp:476
-msgid "Absent"
-msgstr "Frånvarande"
-
-#: svnfrontend/svnactions.cpp:482
-msgid "Folder"
-msgstr "Mapp"
-
-#: svnfrontend/svnactions.cpp:491
-msgid "Schedule"
-msgstr "Schema"
-
-#: svnfrontend/svnactions.cpp:494
-msgid "Normal"
-msgstr "Normal"
-
-#: svnfrontend/svnactions.cpp:497
-msgid "Addition"
-msgstr "Addition"
-
-#: svnfrontend/svnactions.cpp:500
-msgid "Deletion"
-msgstr "Borttagande"
-
-#: svnfrontend/svnactions.cpp:510
-msgid "UUID"
-msgstr "UUID"
-
-#: svnfrontend/svnactions.cpp:513
-msgid "Last committed"
-msgstr "Senaste överlämning"
-
-#: svnfrontend/svnactions.cpp:514
-msgid "Last revision"
-msgstr "Senaste revision"
-
-#: svnfrontend/svnactions.cpp:515
-msgid "Content last changed"
-msgstr "Innehåll senast ändrat"
-
-#: svnfrontend/svnactions.cpp:517
-msgid "Property last changed"
-msgstr "Egenskap senast ändrad"
-
-#: svnfrontend/svnactions.cpp:519
-msgid "New version of conflicted file"
-msgstr "Ny version av konflikt-fil"
-
-#: svnfrontend/svnactions.cpp:522
-msgid "Old version of conflicted file"
-msgstr "Gammal version av konflikt-fil"
-
-#: svnfrontend/svnactions.cpp:525
-msgid "Working version of conflicted file"
-msgstr "Arbetskopia av konflikt-fil"
-
-#: svnfrontend/svnactions.cpp:529
-msgid "Property reject file"
-msgstr "Egenskapsavvisningsfil"
-
-#: svnfrontend/svnactions.cpp:534
-msgid "Copy from URL"
-msgstr "Kopiera från URL"
-
-#: svnfrontend/svnactions.cpp:537
-msgid "Lock token"
-msgstr "Låsmärke"
-
-#: svnfrontend/svnactions.cpp:538
-msgid "Owner"
-msgstr "Ägare"
-
-#: svnfrontend/svnactions.cpp:539
-msgid "Locked on"
-msgstr "Lås på"
-
-#: svnfrontend/svnactions.cpp:542
-msgid "Lock comment"
-msgstr "Lås kommentar"
-
-#: svnfrontend/svnactions.cpp:567
-msgid "Infolist"
-msgstr "Informationslista"
-
-#: svnfrontend/svnactions.cpp:908
-msgid "Which files or directories should I add?"
-msgstr "Vilka filer eller mappar skall jag addera?"
-
-#: svnfrontend/svnactions.cpp:917
-msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
-msgstr "<center>Posten<br>%1<br> har versions - brytning.</center>"
-
-#: svnfrontend/svnactions.cpp:973
-msgid "Export repository"
-msgstr "Exportera magasin"
-
-#: svnfrontend/svnactions.cpp:1001
-msgid "Exporting a file?"
-msgstr "Exportera en fil?"
-
-#: svnfrontend/svnactions.cpp:1001
-msgid "Checking out a file?"
-msgstr "Hämta ut en fil?"
-
-#: svnfrontend/svnactions.cpp:1049
-msgid "Checkout"
-msgstr "Hämta ut"
-
-#: svnfrontend/svnactions.cpp:1049
-msgid "Exporting"
-msgstr "Exporterar"
-
-#: svnfrontend/svnactions.cpp:1049
-msgid "Checking out"
-msgstr "Hämtar ut"
-
-#: svnfrontend/svnactions.cpp:1079
-msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr "<center>Posten<br>%1<br>har ingen versions - brytning.</center>"
-
-#: svnfrontend/svnactions.cpp:1105
-msgid "Revert entries"
-msgstr "Kasta om inmatningar"
-
-#: svnfrontend/svnactions.cpp:1113
-msgid "Really revert these entries to pristine state?"
-msgstr "Vill du verkligen kasta om inmatningar till ursprungligt tillstånd?"
-
-#: svnfrontend/svnactions.cpp:1127
-msgid "Reverting items"
-msgstr "Omkastar poster"
-
-#: svnfrontend/svnactions.cpp:1159 svnfrontend/svnactions.cpp:1222
-msgid "Switch url"
-msgstr "Växla URL"
-
-#: svnfrontend/svnactions.cpp:1159
-msgid "Switching url"
-msgstr "Växlar URL"
-
-#: svnfrontend/svnactions.cpp:1185
-msgid "Relocate url"
-msgstr "Omlokalisera URL"
-
-#: svnfrontend/svnactions.cpp:1185
-msgid "Relocate repository to new URL"
-msgstr "Omlokalisera magasin till ny URL"
-
-#: svnfrontend/svnactions.cpp:1207
-msgid "Can only switch one item at time"
-msgstr "Kan bara växla en rad i taget"
-
-#: svnfrontend/svnactions.cpp:1214
-msgid "Error getting entry to switch"
-msgstr "Fel vid hämtning av post att växla"
-
-#: svnfrontend/svnactions.cpp:1244
-msgid "Cleanup"
-msgstr "Städa"
-
-#: svnfrontend/svnactions.cpp:1244
-msgid "Cleaning up folder"
-msgstr "Städar mapp"
-
-#: svnfrontend/svnactions.cpp:1257
-msgid "Resolve"
-msgstr "Lös upp"
-
-#: svnfrontend/svnactions.cpp:1257
-msgid "Marking resolved"
-msgstr "Märkning upplöst"
-
-#: svnfrontend/svnactions.cpp:1270
-msgid "Importing items"
-msgstr "Importerar poster"
-
-#: svnfrontend/svnactions.cpp:1303
-msgid "Copy or Moving entries"
-msgstr "Kopiera eller flytta poster"
-
-#: svnfrontend/svnactions.cpp:1372
-msgid "Status / List"
-msgstr "Status / Lista"
-
-#: svnfrontend/svnactions.cpp:1372
-msgid "Creating list / check status"
-msgstr "Skapar lista / kontrollera status"
-
-#: svnfrontend/svnactions.cpp:1442
-#, fuzzy
-msgid "Still checking for updates"
-msgstr "Kontrollera efter uppdateringar"
-
-#: svnfrontend/svnactions.cpp:1456 svnfrontend/svnactions.cpp:1520
-msgid "Checking for updates finished"
-msgstr "Kontroll för uppdatering avslutad"
-
-#: svnfrontend/svnactions.cpp:1525
-#, fuzzy
-msgid "Checking for updates started in background"
-msgstr "Kontroll för uppdatering avslutad"
-
-#: svnfrontend/copymoveview_impl.cpp:44
-msgid "Rename/move"
-msgstr "Omdöpning/flyttning"
-
-#: svnfrontend/copymoveview_impl.cpp:79
-msgid "Move/Rename file/dir"
-msgstr "Flytta/Döp om fil/mapp"
-
-#: svnfrontend/copymoveview_impl.cpp:79
-msgid "Copy file/dir"
-msgstr "Kopiera fil/mapp"
-
-#: svnfrontend/importdir_logmsg.cpp:46
-msgid "Create subdir %1 on import"
-msgstr "Skapa undermapp %1 vid import"
-
-#: kdesvnview.cpp:116
-msgid "Repository opened"
-msgstr "Magasinet öppnat"
-
-#: kdesvnview.cpp:122
-msgid "Could not open repository"
-msgstr "Kunder inte öppna magasin"
-
-#: kdesvnview.cpp:148
-msgid "No repository open"
-msgstr "Inget magasin öppet"
-
-#: urldlg.cpp:54
-msgid "Open repository or working copy"
-msgstr "Öppna magasin eller arbetskopia"
-
-#: kdesvn-askpass.cpp:30
-msgid "prompt"
-msgstr "prompt"
-
-#: kdesvn-askpass.cpp:36
-msgid "kdesvnaskpass"
-msgstr "kdesvnaskpass"
-
-#: kdesvn-askpass.cpp:37
-msgid "ssh-askpass for kdesvn"
-msgstr "ssh-askpass för kdesvn"
-
-#: kdesvn-askpass.cpp:39
-msgid "Copyright (c) 2005 Rajko Albrecht"
-msgstr "Copyright (c) 2005 Rajko Albrecht"
-
-#: kdesvn-askpass.cpp:51
-msgid "Please enter your password below."
-msgstr "Ange ditt lösenord nedan."
-
-#: main.cpp:33
-msgid "A Subversion Client for KDE (standalone application)"
-msgstr "En Subversion -klient för KDE (fristående tillämpning)"
-
-#: main.cpp:39
-msgid "Execute single subversion command on specific revision(-range)"
-msgstr ""
-
-#: main.cpp:40
-msgid "Ask for revision when executing single command"
-msgstr ""
-
-#: main.cpp:41
-msgid "Save output of subversion command (eg \"cat\") into file <file>"
-msgstr ""
-
-#: main.cpp:42
-msgid "Limit log output to <number>"
-msgstr ""
-
-#: main.cpp:43
-msgid "Execute subversion command (\"exec help\" for more information)"
-msgstr ""
-
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Dokument att öppna"
-
-#: main.cpp:50
-msgid "kdesvn"
-msgstr "kdesvn"
-
-#, fuzzy
-#~ msgid "kdesvnd_dcop"
-#~ msgstr "kdesvn"
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:67
+msgid "Realm"
+msgstr "Rike"
+
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:68
+msgid "Host"
+msgstr "Värd"
+
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:69
+msgid "Valid from"
+msgstr "Giltigt från"
+
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:70
+msgid "Valid until"
+msgstr "Giltigt till"
+
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:71
+msgid "Issuer name"
+msgstr "Utgivarnamn"
+
+#: svnfrontend/fronthelpers/ssltrustprompt_impl.cpp:72
+msgid "Fingerprint"
+msgstr "Fingeravtryck"
+
+#: svnfrontend/filelistviewitem.cpp:140
+msgid "Not versioned"
+msgstr "Utan version"

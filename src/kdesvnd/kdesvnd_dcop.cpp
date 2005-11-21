@@ -151,9 +151,11 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
     if (!parentIsWc && !itemIsWc) {
         if (isRepository(list[0])) {
             result << "Log"
-                << "Info"
-                << "Blame"
-                << "Rename";
+                    << "Info";
+            if (isRepository(list[0].upURL())) {
+                result << "Blame"
+                        << "Rename";
+            }
         }
         return result;
     }
@@ -259,7 +261,9 @@ QString kdesvnd_dcop::cleanUrl(const KURL&url)
 /* just simple name check of course - no network acess! */
 bool kdesvnd_dcop::isRepository(const KURL&url)
 {
+    kdDebug()<<"kdesvnd_dcop::isRepository Url zum repo check: "<<url<<endl;
     QString proto = svn::Url::transformProtokoll(url.protocol());
+    kdDebug()<<"kdesvnd_dcop::isRepository Protokoll: " << proto << endl;
     if (proto=="file") {
         // local access - may a repository
         svn::Revision where = svn::Revision::HEAD;
@@ -282,7 +286,7 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     KURL url = _url;
     url = helpers::KTranslateUrl::translateSystemUrl(url);
 
-    if (url.isEmpty()||!url.isLocalFile()) return false;
+    if (url.isEmpty()||!url.isLocalFile()||url.protocol()!="file") return false;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;

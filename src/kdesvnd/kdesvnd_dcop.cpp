@@ -247,11 +247,33 @@ QStringList kdesvnd_dcop::get_logmsg()
     return res;
 }
 
+QString kdesvnd_dcop::cleanUrl(const KURL&url)
+{
+    QString cleanpath = url.path();
+    while (cleanpath.endsWith("/")) {
+        cleanpath.truncate(cleanpath.length()-1);
+    }
+    return cleanpath;
+}
+
 /* just simple name check of course - no network acess! */
 bool kdesvnd_dcop::isRepository(const KURL&url)
 {
     QString proto = svn::Url::transformProtokoll(url.protocol());
-    return svn::Url::isValid(proto);
+    if (proto=="file") {
+        // local access - may a repository
+        svn::Revision where = svn::Revision::HEAD;
+        svn::StatusEntries dlist;
+        try {
+            m_Listener->m_Svnclient.status("file://"+cleanUrl(url),false,false,false,false,where);
+        } catch (svn::ClientException e) {
+            kdDebug()<< e.message()<<endl;
+            return false;
+        }
+        return true;
+    } else {
+        return svn::Url::isValid(proto);
+    }
 }
 
 bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
@@ -261,15 +283,11 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     url = helpers::KTranslateUrl::translateSystemUrl(url);
 
     if (url.isEmpty()||!url.isLocalFile()) return false;
-    QString cleanpath = url.path();
-    while (cleanpath.endsWith("/")) {
-        cleanpath.truncate(cleanpath.length()-1);
-    }
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Listener->m_Svnclient.info2(cleanpath,false,rev,peg);
+        e = m_Listener->m_Svnclient.info2(cleanUrl(url),false,rev,peg);
     } catch (svn::ClientException e) {
         kdDebug()<< e.message()<<endl;
         return false;

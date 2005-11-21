@@ -44,6 +44,7 @@ public:
 protected:
     bool isWorkingCopy(const KURL&url,QString&base);
     bool isRepository(const KURL&url);
+    static QString cleanUrl(const KURL&url);
     IListener*m_Listener;
 
 k_dcop:

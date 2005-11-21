@@ -789,7 +789,7 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         {
             if ( KRun::runCommand(feditor + " " +  fki->fullName()) <= 0)
             {
-                KMessageBox::error(this,i18n("Failed: " + feditor + " " +  fki->fullName()));
+                KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
             }
         }
     } else {

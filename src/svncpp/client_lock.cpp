@@ -37,7 +37,6 @@ namespace svn
     const QString& message,
     bool steal_lock)  throw (ClientException)
   {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     Pool pool;
     svn_error_t * error =
       svn_client_lock(const_cast<apr_array_header_t*> (targets.array (pool)),
@@ -47,15 +46,12 @@ namespace svn
                       pool);
     if(error != NULL)
        throw ClientException (error);
-#endif
-
   }
 
   void
   Client::unlock (const Targets&targets,
             bool break_lock)  throw (ClientException)
   {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     Pool pool;
     svn_error_t * error =
       svn_client_unlock(const_cast<apr_array_header_t*> (targets.array (pool)),
@@ -64,7 +60,5 @@ namespace svn
                         pool);
     if(error != NULL)
        throw ClientException (error);
-#endif
-    /// @fixme what to do with 1.1 api?
   }
 }

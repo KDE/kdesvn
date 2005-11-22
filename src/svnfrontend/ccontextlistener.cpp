@@ -53,11 +53,7 @@ CContextListenerData::~CContextListenerData()
 {
 }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 const int CContextListener::smax_actionstring=svn_wc_notify_failed_unlock+1;
-#else
-const int CContextListener::smax_actionstring=svn_wc_notify_blame_revision+1;
-#endif
 
 const QString CContextListener::action_strings[]={
     I18N_NOOP("Add to revision control"),
@@ -80,14 +76,11 @@ const QString CContextListener::action_strings[]={
     I18N_NOOP("Commit Deleted"),
     I18N_NOOP("Commit Replaced"),
     QString::null, //tx delta -> making ticks instead
-    I18N_NOOP("Blame") //svn_wc_notify_blame_revision
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
-    ,
+    I18N_NOOP("Blame"), //svn_wc_notify_blame_revision
     I18N_NOOP("Locking"),
     I18N_NOOP("Unlocked"),
     I18N_NOOP("Lock failed"),
     I18N_NOOP("Unlock failed")
-#endif
 };
 
 const QString CContextListener::notify_state_strings[]={
@@ -182,7 +175,6 @@ void CContextListener::contextNotify (const char *path,
     contextNotify(msg);
 }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 void CContextListener::contextNotify (const svn_wc_notify_t *action)
 {
     if (!action) return;
@@ -193,7 +185,6 @@ void CContextListener::contextNotify (const svn_wc_notify_t *action)
 //    }
 //    QString aString = NotifyAction(action->action);
 }
-#endif
 
 void CContextListener::sendTick()
 {

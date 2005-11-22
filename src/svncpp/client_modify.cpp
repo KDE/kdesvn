@@ -137,7 +137,6 @@ namespace svn
     Revisions resulting;
     svn_error_t * error;
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     apr_pool_t *apr_pool = pool.pool();
     apr_array_header_t *apr_revisions = apr_array_make (apr_pool,
                       path.size(),
@@ -153,15 +152,6 @@ namespace svn
 
       resulting.push_back((*_rev));
     }
-#else
-    svn_revnum_t revnum;
-    for (unsigned int i=0; i < path.size();++i) {
-        error = 0L;
-        revnum = 0;
-        revnum = update_old(path.target(i),revision,recurse);
-        resulting.push_back(revnum);
-    }
-#endif
     return resulting;
   }
 

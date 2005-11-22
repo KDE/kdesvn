@@ -87,7 +87,6 @@ namespace svn
     apr_hash_t* hash;
   };
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
   static svn_error_t * InfoEntryFunc(void*baton,
                             const char*path,
                             const svn_info_t*info,
@@ -99,31 +98,16 @@ namespace svn
     apr_hash_set (seb->hash, path, APR_HASH_KEY_STRING, e);
     return NULL;
   }
-#endif
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
   static void StatusEntriesFunc (void *baton,
                                  const char *path,
                                  svn_wc_status2_t *status)
-#else
-  static void StatusEntriesFunc (void *baton,
-                                 const char *path,
-                                 svn_wc_status_t *status)
-#endif
   {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     svn_wc_status2_t* stat;
-#else
-    svn_wc_status_t* stat;
-#endif
       StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
 
       path = apr_pstrdup (seb->pool, path);
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
       stat = svn_wc_dup_status2 (status, seb->pool);
-#else
-      stat = svn_wc_dup_status (status, seb->pool);
-#endif
       apr_hash_set (seb->hash, path, APR_HASH_KEY_STRING, stat);
   }
 
@@ -146,7 +130,6 @@ namespace svn
     status_hash = apr_hash_make (pool);
     baton.hash = status_hash;
     baton.pool = pool;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     error = svn_client_status2 (
       &revnum,      // revnum
       path.utf8(),         // path
@@ -160,20 +143,6 @@ namespace svn
       false,       /// @todo first shot - should get a parameter
       *context,    //client ctx
       pool);
-#else
-    error = svn_client_status (
-      &revnum,      // revnum
-      path.utf8(),         // path
-      rev,
-      StatusEntriesFunc, // status func
-      &baton,        // status baton
-      descend,
-      get_all,
-      update,
-      no_ignore,
-      *context,    //client ctx
-      pool);
-#endif
 
     if (error!=NULL)
     {
@@ -190,18 +159,10 @@ namespace svn
     {
       const svn_sort__item_t *item;
       const char *filePath;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
       svn_wc_status2_t *status = NULL;
-#else
-      svn_wc_status_t *status = NULL;
-#endif
 
       item = &APR_ARRAY_IDX (statusarray, i, const svn_sort__item_t);
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
       status = (svn_wc_status2_t *) item->value;
-#else
-      status = (svn_wc_status_t *) item->value;
-#endif
 
       filePath = (const char *) item->key;
       entries.push_back (Status(filePath, status));
@@ -232,15 +193,9 @@ namespace svn
     e->cmt_date = dirEntry.time ();
     e->cmt_author = dirEntry.lastAuthor ();
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     svn_wc_status2_t * s =
       static_cast<svn_wc_status2_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
-#else
-    svn_wc_status_t * s =
-      static_cast<svn_wc_status_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_status_t)));
-#endif
     s->entry = e;
     s->text_status = svn_wc_status_normal;
     s->prop_status = svn_wc_status_normal;
@@ -248,9 +203,7 @@ namespace svn
     s->switched = 0;
     s->repos_text_status = svn_wc_status_normal;
     s->repos_prop_status = svn_wc_status_normal;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     s->repos_lock = 0;
-#endif
     return Status (url, s);
   }
 
@@ -309,7 +262,6 @@ namespace svn
     baton.hash = status_hash;
     baton.pool = pool;
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     error = svn_client_status2 (
       &revnum,      // revnum
       path.utf8(),         // path
@@ -323,20 +275,6 @@ namespace svn
       false,
       *context,    //client ctx
       pool);
-#else
-    error = svn_client_status (
-      &revnum,      // revnum
-      path.utf8(),         // path
-      rev,
-      StatusEntriesFunc, // status func
-      &baton,        // status baton
-      false,
-      true,
-      update,
-      false,
-      *context,    //client ctx
-      pool);
-#endif
 
     if (error != NULL)
     {
@@ -348,18 +286,10 @@ namespace svn
                             pool);
     const svn_sort__item_t *item;
     const char *filePath;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     svn_wc_status2_t *status = NULL;
-#else
-    svn_wc_status_t *status = NULL;
-#endif
 
     item = &APR_ARRAY_IDX (statusarray, 0, const svn_sort__item_t);
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     status = (svn_wc_status2_t *) item->value;
-#else
-    status = (svn_wc_status_t *) item->value;
-#endif
     filePath = (const char *) item->key;
 
     return Status (filePath, status);
@@ -395,7 +325,6 @@ namespace svn
     LogEntries * entries = new LogEntries ();
     svn_error_t *error;
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     error = svn_client_log2 (
       target.array (pool),
       revisionStart.revision (),
@@ -408,19 +337,6 @@ namespace svn
       *m_context, // client ctx
       pool);
 
-#else
-    error = svn_client_log (
-      target.array (pool),
-      revisionStart.revision (),
-      revisionEnd.revision (),
-      discoverChangedPaths ? 1 : 0,
-      strictNodeHistory ? 1 : 0,
-      logReceiver,
-      entries,
-      *m_context, // client ctx
-      pool);
-#endif
-
     if (error != NULL)
     {
       delete entries;
@@ -430,35 +346,13 @@ namespace svn
     return entries;
   }
 
-  Entry
-  Client::info (const QString& path )
-  {
-    Pool pool;
-    svn_wc_adm_access_t *adm_access;
-
-    svn_error_t *error
-      = svn_wc_adm_probe_open (&adm_access, NULL, path.utf8(), FALSE,
-                                    FALSE, pool);
-    if (error != NULL)
-      throw ClientException (error);
-
-    const svn_wc_entry_t *entry;
-    error = svn_wc_entry (&entry, path.utf8(), adm_access, FALSE, pool);
-    if (error != NULL)
-      throw ClientException (error);
-
-    // entry may be NULL
-    return Entry( entry );
-  }
-
   InfoEntries
-  Client::info2(const QString& path,
+  Client::info(const QString& path,
                 bool rec,
                 const Revision & rev,
                 const Revision & peg_revision) throw (ClientException)
   {
     InfoEntries ientries;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     Pool pool;
     svn_error_t *error = NULL;
     StatusEntriesBaton baton;
@@ -503,7 +397,6 @@ namespace svn
     }
     if (error != NULL)
       throw ClientException (error);
-#endif
     return ientries;
   }
 

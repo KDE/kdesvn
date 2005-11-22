@@ -39,7 +39,6 @@ namespace svn
     }
   }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
   Status::Status (const QString&path, svn_wc_status2_t * status)
     : m_status (0), m_Path("")
   {
@@ -52,25 +51,10 @@ namespace svn
     init(QString::fromUtf8(path),status);
   }
 
-#else
-  Status::Status (const QString&path, svn_wc_status_t * status)
-    : m_status (0), m_Path ("")
-  {
-    init (path, status);
-  }
-
-  Status::Status (const char*path, svn_wc_status_t * status)
-    : m_status (0), m_Path("")
-  {
-    init(QString::fromUtf8(path),status);
-  }
-#endif
-
   Status::~Status ()
   {
   }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
   void Status::init (const QString&path, const svn_wc_status2_t * status)
   {
     m_Path = path;
@@ -108,18 +92,12 @@ namespace svn
       }
     }
   }
-#endif
 
   void Status::init (const QString&path, const svn_wc_status_t * status)
   {
     m_Path = path;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     m_status = (svn_wc_status2_t *)
       apr_pcalloc (m_pool, sizeof (svn_wc_status2_t));
-#else
-    m_status = (svn_wc_status_t *)
-      apr_pcalloc (m_pool, sizeof (svn_wc_status_t));
-#endif
     if (!status)
     {
       m_isVersioned = false;
@@ -141,9 +119,7 @@ namespace svn
       m_status->switched = status->switched;
       m_status->repos_text_status = status->repos_text_status;
       m_status->repos_prop_status = status->repos_prop_status;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
       m_status->repos_lock = svn_lock_create(m_pool);
-#endif
     }
   }
 

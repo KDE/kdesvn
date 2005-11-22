@@ -98,10 +98,8 @@ namespace svn
      * @param svn_wc_notify_t
      * @since subversion 1.2
      */
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     virtual void
     contextNotify (const svn_wc_notify_t *action) = 0;
-#endif
     /*
      * this method will be called periodically to allow
      * the app to cancel long running operations

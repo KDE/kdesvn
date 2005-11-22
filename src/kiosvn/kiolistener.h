@@ -49,9 +49,7 @@ public:
                    svn_wc_notify_state_t content_state,
                    svn_wc_notify_state_t prop_state,
                    svn_revnum_t revision);
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     virtual void contextNotify (const svn_wc_notify_t *action);
-#endif
 
     virtual bool contextCancel();
     virtual bool contextGetLogMessage (QString & msg);

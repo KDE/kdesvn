@@ -211,19 +211,6 @@ namespace svn
 
     /**
      * Retrieves the contents for a specific @a revision of
-     * a @a path
-     *
-     * @param path path of file or directory
-     * @param revision revision to retrieve
-     * @return contents of the file
-     */
-    QByteArray
-    cat (const Path & path,
-         const Revision & revision) throw (ClientException);
-
-
-    /**
-     * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
      *
      * @param path path of file or directory
@@ -232,7 +219,7 @@ namespace svn
      * @return contents of the file
      */
     QByteArray
-    cat2 (const Path & path,
+    cat (const Path & path,
           const Revision & revision,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
 
@@ -391,15 +378,6 @@ namespace svn
 
     /**
      * Retrieve information for the given path
-     * from the wc
-     *
-     * @param path
-     * @return Entry
-     */
-    Entry
-    info (const QString& path );
-    /**
-     * Retrieve information for the given path
      * remote or local. Only gives with subversion 1.2
      * usefull results
      *
@@ -411,7 +389,7 @@ namespace svn
      * @since subversion 1.2
      */
     InfoEntries
-    info2(const QString &path,
+    info(const QString &path,
           bool rec,
           const Revision & rev,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);

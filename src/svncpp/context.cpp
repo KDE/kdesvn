@@ -229,12 +229,8 @@ namespace svn
       ctx.notify_baton = this;
       ctx.cancel_func = onCancel;
       ctx.cancel_baton = this;
-
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
       ctx.notify_func2 = onNotify2;
       ctx.notify_baton2 = this;
-#endif
-
     }
 
     void setAuthCache(bool value)
@@ -323,8 +319,6 @@ namespace svn
                     prop_state, revision);
     }
 
-
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     /**
      * this is the callback function for the subversion 1.2
      * api functions to signal the progress of an action
@@ -342,7 +336,6 @@ namespace svn
 
       data->notify (action);
     }
-#endif
 
 
     /**
@@ -613,7 +606,6 @@ namespace svn
       }
     }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     void
     notify (const svn_wc_notify_t *action)
     {
@@ -622,7 +614,6 @@ namespace svn
         listener->contextNotify(action);
       }
     }
-#endif
 
     /**
      * if the @a listener is set call the method

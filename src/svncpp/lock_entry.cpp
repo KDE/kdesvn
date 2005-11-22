@@ -71,7 +71,6 @@ namespace svn
   }
   void LockEntry::init(const svn_wc_entry_t * src)
   {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     if (src) {
       date = src->lock_creation_date;
       locked = src->lock_token?true:false;
@@ -79,20 +78,15 @@ namespace svn
       comment = (src->lock_comment?src->lock_comment:"");
       owner = (src->lock_owner?src->lock_owner:"");
     } else {
-#else
       date = 0;
       owner = "";
       comment = "";
       token = "";
       locked = false;
-#endif
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     }
-#endif
     exp = 0;
   }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
   void LockEntry::init(svn_lock_t* src)
   {
     if (src) {
@@ -111,7 +105,6 @@ namespace svn
     }
 
   }
-#endif
 
   void LockEntry::init(
     const apr_time_t lock_time,

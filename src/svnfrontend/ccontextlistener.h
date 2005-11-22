@@ -52,10 +52,7 @@ public:
                    svn_revnum_t revision);
     virtual void contextNotify(const QString&aMsg);
     virtual void sendTick();
-
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     virtual void contextNotify (const svn_wc_notify_t *action);
-#endif
 
     virtual bool contextCancel();
     /*!

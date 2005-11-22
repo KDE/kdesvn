@@ -40,34 +40,10 @@
 namespace svn
 {
   QByteArray
-  Client::cat (const Path & path,
-               const Revision & revision) throw (ClientException)
-  {
-    Pool pool;
-
-    svn_stringbuf_t * stringbuf = svn_stringbuf_create ("", pool);
-    svn_stream_t * stream = svn_stream_from_stringbuf (stringbuf, pool);
-
-    svn_error_t * error;
-    error = svn_client_cat (stream, path.path().utf8(),
-                            revision.revision (),
-                            *m_context,
-                            pool);
-
-    if (error != 0)
-      throw ClientException (error);
-    QByteArray res;
-    /// @todo check if realy dup or just assign!
-    res.duplicate(stringbuf->data,stringbuf->len);
-    return res;
-  }
-
-  QByteArray
-  Client::cat2 (const Path & path,
+  Client::cat(const Path & path,
                 const Revision & revision,
                 const Revision & peg_revision) throw (ClientException)
   {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     Pool pool;
 
     svn_stringbuf_t * stringbuf = svn_stringbuf_create ("", pool);
@@ -86,9 +62,6 @@ namespace svn
     /// @todo check if realy dup or just assign!
     res.duplicate(stringbuf->data,stringbuf->len);
     return res;
-#else
-    return cat(path, revision);
-#endif
   }
 
   /**

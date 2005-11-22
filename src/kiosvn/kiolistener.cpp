@@ -128,7 +128,7 @@ void KioListener::contextNotify (const char * path,
         case svn_wc_notify_skip: //skip
             if ( content_state == svn_wc_notify_state_missing )
                 userstring=i18n("Skipped missing target %1.").arg( path );
-            else 
+            else
                 userstring=i18n("Skipped  %1.").arg( path );
             break;
         case svn_wc_notify_update_delete: //update_delete
@@ -198,7 +198,7 @@ void KioListener::contextNotify (const char * path,
                         if (nb->is_export) {
                             if ( m_External )
                                 userstring = i18n("Exported external at revision %1.").arg( revision );
-                            else 
+                            else
                                 userstring = i18n("Exported revision %1.").arg( revision );
                         } else if (nb->is_checkout) {
                             if ( m_External )
@@ -209,7 +209,7 @@ void KioListener::contextNotify (const char * path,
                             if (m_HasChanges) {
                                 if ( m_External )
                                     userstring=i18n("Updated external to revision %1.").arg( revision );
-                                else 
+                                else
                                     userstring = i18n("Updated to revision %1.").arg( revision);
                             } else {
                                 if ( m_External )
@@ -251,7 +251,7 @@ void KioListener::contextNotify (const char * path,
                 userstring = i18n( "Status against revision: %1.").arg( revision );
             break;
         case svn_wc_notify_status_external: //status_external
-             userstring = i18n("Performing status on external item at %1.").arg( path ); 
+             userstring = i18n("Performing status on external item at %1.").arg( path );
             break;
         case svn_wc_notify_commit_modified: //commit_modified
             userstring = i18n( "Sending %1").arg( path );
@@ -265,7 +265,7 @@ void KioListener::contextNotify (const char * path,
             break;
         case svn_wc_notify_commit_deleted: //commit_deleted
             userstring = i18n( "Deleting %1.").arg( path );
-            break; 
+            break;
         case svn_wc_notify_commit_replaced: //commit_replaced
             userstring = i18n( "Replacing %1.").arg( path );
             break;
@@ -295,7 +295,6 @@ void KioListener::contextNotify (const char * path,
     incCounter();
 }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 void KioListener::contextNotify (const svn_wc_notify_t *action)
 {
     if (!action) return;
@@ -306,7 +305,6 @@ void KioListener::contextNotify (const svn_wc_notify_t *action)
 //    }
 //    QString aString = NotifyAction(action->action);
 }
-#endif
 
 svn::ContextListener::SslServerTrustAnswer
 KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,

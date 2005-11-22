@@ -67,7 +67,6 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
     init();
     return;
   }
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
   m_name = path;
   m_last_changed_date=item->last_changed_date;
   m_text_time = item->text_time;
@@ -93,5 +92,4 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
   m_revision = item->rev;
   m_hasWc = item->has_wc_info;
   m_schedule = item->schedule;
-#endif
 }

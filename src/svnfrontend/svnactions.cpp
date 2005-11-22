@@ -331,7 +331,7 @@ QByteArray SvnActions::makeGet(svn::Revision start, const QString&what)
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        content = m_Data->m_Svnclient.cat2(p,start);
+        content = m_Data->m_Svnclient.cat(p,start);
     } catch (svn::ClientException e) {
         ex = QString::fromUtf8(e.message());
         emit clientException(ex);
@@ -437,7 +437,7 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
         svn::InfoEntries e;
         for (unsigned item=0;item<lst.count();++item) {
             kdDebug()<<"Info for " << lst[item]<<endl;
-            e = (m_Data->m_Svnclient.info2(lst[item],recursive,rev,peg));
+            e = (m_Data->m_Svnclient.info(lst[item],recursive,rev,peg));
             // stl like - hold it for qt4?
             //entries.insert(entries.end(),e.begin(),e.end());
             entries+=e;
@@ -1763,7 +1763,7 @@ bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Data->m_Svnclient.info2(cleanpath,false,rev,peg);
+        e = m_Data->m_Svnclient.info(cleanpath,false,rev,peg);
     } catch (svn::ClientException e) {
         kdDebug()<< e.message()<<endl;
         return false;

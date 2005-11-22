@@ -70,9 +70,7 @@ public:
                                 svn_wc_notify_state_t content_state,
                                 svn_wc_notify_state_t prop_state,
                                 svn_revnum_t revision);
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     virtual void contextNotify (const svn_wc_notify_t *action);
-#endif
 
     virtual bool contextCancel();
     virtual bool contextGetLogMessage (QString & msg);
@@ -172,7 +170,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
         << "Revert";
 
     KURL url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
-    
+
     QFileInfo f(url.path());
     if (f.isFile()) {
         result << "Blame";
@@ -291,7 +289,7 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Listener->m_Svnclient.info2(cleanUrl(url),false,rev,peg);
+        e = m_Listener->m_Svnclient.info(cleanUrl(url),false,rev,peg);
     } catch (svn::ClientException e) {
         kdDebug()<< e.message()<<endl;
         return false;
@@ -325,11 +323,9 @@ void IListener::contextNotify(const char * /*path*/,
 {
 }
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
 void IListener::contextNotify(const svn_wc_notify_t * /*action*/)
 {
 }
-#endif
 
 bool IListener::contextCancel()
 {

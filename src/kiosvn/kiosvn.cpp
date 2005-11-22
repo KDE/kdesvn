@@ -207,7 +207,7 @@ void kio_svnProtocol::stat(const KURL& url)
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
-        e = m_pData->m_Svnclient.info2(s,false,rev,peg);
+        e = m_pData->m_Svnclient.info(s,false,rev,peg);
     } catch  (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         kdDebug()<<ex<<endl;

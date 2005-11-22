@@ -15,8 +15,8 @@ BuildRoot: %{_tmppath}/%{name}-root
 BuildPreReq: apr-devel
 BuildPreReq: apr-util-devel
 BuildPreReq: neon-devel
-BuildPreReq: subversion-devel >= 1.1.0
-Requires: subversion >= 1.1.0
+BuildPreReq: subversion-devel >= 1.2.0
+Requires: subversion >= 1.2.0
 
 %description
 Kdesvn is a subversion client for KDE, containing a KIO protocol for konqueror filemanager.

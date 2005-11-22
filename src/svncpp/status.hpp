@@ -50,7 +50,6 @@ namespace svn
      */
     Status (const Status & src);
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     /**
      * default constructor
      *
@@ -65,24 +64,6 @@ namespace svn
      * @param status status entry
      */
     Status (const char*path, svn_wc_status2_t * status = NULL);
-#else
-    /**
-     * default constructor
-     *
-     * @param path path for this status entry
-     * @param status status entry
-     * @deprecated
-     */
-    Status (const QString&path = QString::null, svn_wc_status_t * status = NULL);
-    /**
-     * default constructor
-     *
-     * @param path path for this status entry
-     * @param status status entry
-     * @deprecated
-     */
-    Status (const char *path, svn_wc_status_t * status = NULL);
-#endif
     /**
      * destructor
      */
@@ -196,32 +177,17 @@ namespace svn
      * @return svn_wc_status2_t value
      * @since subversion 1.2
      */
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     operator svn_wc_status2_t * () const
     {
       return m_status;
     }
-#else
-    /**
-     * @return svn_wc_status_t value
-     * @deprecated Only if build against subversion prior 1.2
-     */
-    operator svn_wc_status_t * () const
-    {
-      return m_status;
-    }
-#endif
     /**
      * assignment operator
      */
     Status &
     operator = (const Status &);
   private:
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     svn_wc_status2_t * m_status;
-#else
-    svn_wc_status_t * m_status;
-#endif
     QString m_Path;
     Pool m_pool;
     bool m_isVersioned;
@@ -238,7 +204,6 @@ namespace svn
     void
     init (const QString&path, const svn_wc_status_t * status);
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 2)
     /**
      * Initialize structures
      *
@@ -247,7 +212,6 @@ namespace svn
      */
     void
     init (const QString&path, const svn_wc_status2_t * status);
-#endif
   };
 }
 

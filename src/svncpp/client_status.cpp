@@ -207,6 +207,55 @@ namespace svn
     return Status (url, s);
   }
 
+  static Status
+  infoEntryToStatus(const QString&path,const InfoEntry&infoEntry)
+  {
+    Pool pool;
+    svn_wc_entry_t * e =
+      static_cast<svn_wc_entry_t *> (
+        apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
+
+    QString url = path;
+    url += "/";
+    url += infoEntry.Name();
+
+    e->name = apr_pstrdup(pool,infoEntry.Name().utf8());
+    e->revision = infoEntry.revision();
+    e->url = apr_pstrdup(pool,url.utf8());
+    e->kind = infoEntry.kind ();
+    e->schedule = svn_wc_schedule_normal;
+    e->text_time = infoEntry.textTime ();
+    e->prop_time = infoEntry.propTime ();
+    e->cmt_rev = infoEntry.cmtRev ();
+    e->cmt_date = infoEntry.cmtDate();
+    e->cmt_author = infoEntry.cmtAuthor();
+    svn_wc_status2_t * s =
+      static_cast<svn_wc_status2_t *> (
+        apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
+    s->entry = e;
+    s->text_status = svn_wc_status_normal;
+    s->prop_status = svn_wc_status_normal;
+    s->locked = infoEntry.lockEntry().Locked();
+    if (s->locked) {
+        svn_lock_t*l =
+            static_cast<svn_lock_t *> (
+            apr_pcalloc (pool, sizeof (svn_lock_t)));
+        l->token = apr_pstrdup(pool,infoEntry.lockEntry().Token().utf8());
+        l->path = apr_pstrdup(pool,path.utf8());
+        l->owner = apr_pstrdup(pool,infoEntry.lockEntry().Owner().utf8());
+        l->comment = apr_pstrdup(pool,infoEntry.lockEntry().Comment().utf8());
+        l->creation_date = infoEntry.lockEntry().Date();
+        l->expiration_date = infoEntry.lockEntry().Expiration();
+    } else {
+        s->repos_lock = 0;
+    }
+    s->switched = 0;
+    s->repos_text_status = svn_wc_status_normal;
+    s->repos_prop_status = svn_wc_status_normal;
+
+    return Status (url, s);
+  }
+
   static StatusEntries
   remoteStatus (Client * client,
                 const QString& path,
@@ -298,12 +347,11 @@ namespace svn
   static Status
   remoteSingleStatus (Client * client, const QString& path,Revision revision, Context * context)
   {
-    DirEntries dirEntries = client->list (path, revision, false);
-
-    if (dirEntries.size () == 0)
+    InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
+    if (infoEntries.size () == 0)
       return Status ();
     else
-      return dirEntryToStatus (path, dirEntries [0]);
+      return infoEntryToStatus (path, infoEntries [0]);
   }
 
   Status

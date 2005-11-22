@@ -60,6 +60,7 @@ namespace svn
     const QString&Owner()const;
     const QString&Token()const;
     const apr_time_t Date()const;
+    const apr_time_t Expiration()const;
     const bool Locked()const;
 
   protected:

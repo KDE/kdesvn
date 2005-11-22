@@ -65,6 +65,10 @@ namespace svn
   {
     return date;
   }
+  const apr_time_t LockEntry::Expiration()const
+  {
+    return exp;
+  }
   const bool LockEntry::Locked()const
   {
     return locked;

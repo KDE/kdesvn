@@ -27,6 +27,7 @@
 #include "svncpp/url.hpp"
 #include "svncpp/status.hpp"
 #include "svncpp/targets.hpp"
+#include "svncpp/info_entry.hpp"
 #include "helpers/sub2qt.h"
 
 #include <stdlib.h>
@@ -167,21 +168,25 @@ void kio_svnProtocol::listDir(const KURL&url)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
+
     try {
         dlist = m_pData->m_Svnclient.list(makeSvnUrl(url),rev,false);
     } catch (svn::ClientException e) {
-            QString ex = QString::fromUtf8(e.message());
-            kdDebug()<<ex<<endl;
-            error(KIO::ERR_SLAVE_DEFINED,ex);
-            return;
+        QString ex = QString::fromUtf8(e.message());
+        kdDebug()<<ex<<endl;
+        error(KIO::ERR_CANNOT_ENTER_DIRECTORY,"");
+        return;
     }
-
     KIO::UDSEntry entry;
     totalSize(dlist.size());
     for (unsigned int i=0; i < dlist.size();++i) {
         QDateTime dt = helpers::sub2qt::apr_time2qt(dlist[i].time());
-        if (createUDSEntry(dlist[i].name(),dlist[i].lastAuthor(),dlist[i].size(),
-            dlist[i].kind()==svn_node_dir?true:false,dt.toTime_t(),entry) ) {
+        if (createUDSEntry(dlist[i].name(),
+            dlist[i].lastAuthor(),
+            dlist[i].size(),
+            dlist[i].kind()==svn_node_dir?true:false,
+            dt.toTime_t(),
+            entry) ) {
             listEntry(entry,false);
         }
         entry.clear();
@@ -198,20 +203,26 @@ void kio_svnProtocol::stat(const KURL& url)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    svn::Status _stat;
+    svn::Revision peg = svn::Revision::UNDEFINED;
+    QString s = makeSvnUrl(url);
+    svn::InfoEntries e;
     try {
-        m_pData->m_Svnclient.singleStatus(makeSvnUrl(url),false,rev);
+        e = m_pData->m_Svnclient.info2(s,false,rev,peg);
     } catch  (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,ex);
         return;
     }
+    if (e.count()==0) {
+        finished();
+        return;
+    }
 
     KIO::UDSEntry entry;
     QDateTime dt;
-    dt = helpers::sub2qt::apr_time2qt(_stat.entry().cmtDate());
-    if (_stat.entry().kind()==svn_node_file) {
+    dt = helpers::sub2qt::apr_time2qt(e[0].cmtDate());
+    if (e[0].kind()==svn_node_file) {
         createUDSEntry(url.filename(),"",0,false,dt.toTime_t(),entry);
     } else {
         createUDSEntry(url.filename(),"",0,true,dt.toTime_t(),entry);
@@ -234,7 +245,7 @@ void kio_svnProtocol::get(const KURL& url)
     } catch (svn::ClientException e) {
         QString ex = QString::fromUtf8(e.message());
         kdDebug()<<ex<<endl;
-        error( KIO::ERR_SLAVE_DEFINED,ex);
+        error( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
         finished();
         return;
     }
@@ -363,6 +374,7 @@ bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& us
         kdDebug() << "MTime : " << ( long )mtime << endl;
         kdDebug() << "UDS filename : " << filename << endl;
         kdDebug()<< "UDS Size: " << size << endl;
+        kdDebug()<< "UDS Dir: " << isdir << endl;
 #endif
         KIO::UDSAtom atom;
         atom.m_uds = KIO::UDS_NAME;
@@ -372,6 +384,11 @@ bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& us
         atom.m_uds = KIO::UDS_FILE_TYPE;
         atom.m_long = isdir ? S_IFDIR : S_IFREG;
         entry.append( atom );
+
+        atom.m_uds = KIO::UDS_ACCESS;
+        atom.m_long = isdir?0777:0666;
+        entry.append(atom);
+
 
         atom.m_uds = KIO::UDS_SIZE;
         atom.m_long = size;

@@ -382,8 +382,11 @@ namespace svn
       SVN_ERR (svn_utf_cstring_to_utf8 (
                  &lcred->username,
                  data->getUsername (), pool)); */
-      lcred->password = data->getPassword().utf8();
-      lcred->username = data->getUsername().utf8();
+      QCString l;
+      l = data->getPassword().utf8();
+      lcred->password = apr_pstrndup (pool,l,l.length());
+      l = data->getUsername().utf8();
+      lcred->username = apr_pstrndup (pool,l,l.length());
 
       // tell svn if the credentials need to be saved
       lcred->may_save = may_save;

@@ -45,9 +45,12 @@ const QString AuthDialogImpl::Username()const
 
 const QString AuthDialogImpl::Password()
 {
+#if 0
     /* as described in interface description wie must make a copy of string */
-    curPass.setAscii(m_PasswordEdit->password());
+    curPass = QString::fromUtf8(m_PasswordEdit->password());
     return curPass;
+#endif
+    return m_PasswordEdit->text();
 }
 
 bool AuthDialogImpl::maySave()const

@@ -201,10 +201,10 @@ void kdesvnfilelist::setupActions()
         KShortcut(),this,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
     m_switchRepository = new KAction("Switch repository","kdesvnswitch",KShortcut(),
         m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
-    m_switchRepository->setToolTip(i18n("Switch repository of working copy (\"svn switch\")"));
-    tmp_action = new KAction(i18n("Relocate working copy url"),"kdesvnrelocate",KShortcut(),
+    m_switchRepository->setToolTip(i18n("Switch repository path of current working copy path (\"svn switch\")"));
+    tmp_action = new KAction(i18n("Relocate current working copy url"),"kdesvnrelocate",KShortcut(),
         this,SLOT(slotRelocate()),m_filesAction,"make_svn_relocate");
-    tmp_action->setToolTip(i18n("Relocate url of current working copy to a new one"));
+    tmp_action->setToolTip(i18n("Relocate url of current working copy path to other url"));
     tmp_action = new KAction(i18n("Check for unversioned items"),"kdesvnaddrecursive",KShortcut(),
         this,SLOT(slotCheckNewItems()),m_filesAction,"make_check_unversioned");
     tmp_action->setToolTip(i18n("Browse folder for unversioned items and add them if wanted."));
@@ -1894,9 +1894,10 @@ void kdesvnfilelist::slotRelocate()
     path = k->fullName();
     fromUrl = k->Url();
     CheckoutInfo_impl*ptr;
-    KDialogBase * dlg = createDialog(&ptr,i18n("Relocate working copy"),true,"relocate_dlg");
+    KDialogBase * dlg = createDialog(&ptr,i18n("Relocate path %1").arg(path),true,"relocate_dlg");
     if (dlg) {
         ptr->setStartUrl(fromUrl);
+        ptr->disableAppend(true);
         ptr->forceAsRecursive(true);
         ptr->disableTargetDir(true);
         ptr->disableRange(true);

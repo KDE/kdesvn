@@ -40,6 +40,7 @@ public:
     void disableForce(bool how);
     void disableTargetDir(bool how);
     void forceAsRecursive(bool how);
+    void disableAppend(bool how);
     void disableOpen(bool how);
     bool openAfterJob();
     virtual void disableRange(bool how);

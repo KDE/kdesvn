@@ -145,4 +145,14 @@ void CheckoutInfo_impl::urlChanged(const QString&)
 {
 }
 
+void CheckoutInfo_impl::disableAppend(bool how)
+{
+    m_CreateDirButton->setChecked(!how);
+    if (how) {
+        m_CreateDirButton->hide();
+    } else {
+        m_CreateDirButton->show();
+    }
+}
+
 #include "checkoutinfo_impl.moc"

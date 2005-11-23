@@ -1258,6 +1258,7 @@ bool SvnActions::makeSwitch(const QString&path,const QString&what)
     if (dlg) {
         ptr->setStartUrl(what);
         ptr->forceAsRecursive(true);
+        ptr->disableAppend(true);
         ptr->disableTargetDir(true);
         ptr->disableOpen(true);
         if (dlg->exec()==QDialog::Accepted) {

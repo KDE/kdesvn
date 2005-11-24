@@ -34,6 +34,7 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <klocale.h>
+#include <kglobal.h>
 #include <kfiledialog.h>
 
 #include <qdir.h>
@@ -104,6 +105,7 @@ IListener::~IListener()
 kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)
 {
     kdDebug() << "Starting new service... " << endl;
+    KGlobal::locale()->insertCatalogue("kdesvn");
     m_Listener=new IListener(this);
 }
 

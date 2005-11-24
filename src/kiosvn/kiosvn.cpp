@@ -116,6 +116,7 @@ kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &ap
     : SlaveBase("kio_ksvn", pool_socket, app_socket)
 {
     m_pData=new KioSvnData(this);
+    KGlobal::locale()->insertCatalogue("kdesvn");
 }
 
 kio_svnProtocol::~kio_svnProtocol()
@@ -411,6 +412,19 @@ void kio_svnProtocol::special(const QByteArray& data)
     stream >> tmp;
     kdDebug() << "kio_svnProtocol::special " << tmp << endl;
     switch (tmp) {
+        case SVN_CHECKOUT: 
+        {
+            KURL repository, wc;
+            int revnumber;
+            QString revkind;
+            stream >> repository;
+            stream >> wc;
+            stream >> revnumber;
+            stream >> revkind;
+            kdDebug(0) << "kio_svnProtocol CHECKOUT from " << repository.url() << " to " << wc.url() << " at " << revnumber << " or " << revkind << endl;
+            checkout( repository, wc, revnumber, revkind );
+            break;
+        }
         case SVN_UPDATE:
         {
             KURL wc;
@@ -550,5 +564,17 @@ void kio_svnProtocol::commit(const KURL::List&url)
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "rev" , QString::number(nnum) );
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "string", userstring );
         m_pData->m_Listener.incCounter();
+    }
+}
+
+void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, const QString&revstring)
+{
+    svn::Revision where(rev,revstring);
+    KURL _src = makeSvnUrl(src);
+    svn::Path _target(makeSvnUrl(target.path()));
+    try {
+        m_pData->m_Svnclient.checkout(_src.url(),_target,where,false);
+    } catch (svn::ClientException e) {
+        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
     }
 }

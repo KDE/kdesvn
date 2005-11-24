@@ -48,9 +48,11 @@ public:
     virtual void rename(const KURL&src,const KURL&target,bool force);
     virtual void del(const KURL&url,bool isfile);
     virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
+    virtual void checkout(const KURL&src,const KURL&target,const int rev, const QString&revstring);
     virtual void special(const QByteArray& data);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
+        /* KURL repository, KURL target, int revnumber, QString revkind */
         SVN_CHECKOUT = 1,
         /* KURL wc, int revnumber, QString revkind */
         /* refkind may empty or HEAD or START, will get parsed if revnumber is -1 */

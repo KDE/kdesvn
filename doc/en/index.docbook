@@ -432,8 +432,17 @@ so for instance kdevelop may use it if kdesdk isn't installed but kdesvn::KIO::s
 <row>
 <entry>Checkout</entry>
 <entry>1</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>
+<para>
+KURL repository, KURL target, int revnumber, QString revkind
+</para>
+<para>
+The target will NOT modified, eg., the content will real checked out there without creating a subfolder! eg, source may
+http://server/repos/project/trunk, target /home/user/proj/ then content of trunk will copied into /home/user/proj/ not
+/home/user/proj/trunk/!
+</para>
+</entry>
+<entry>Yes</entry>
 </row>
 
 <row>

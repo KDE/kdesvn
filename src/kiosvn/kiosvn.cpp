@@ -362,10 +362,8 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
     if (s.size()>1) {
         res = s[0];
     }
-    while (res.endsWith("/")) {
-        res.truncate(res.length()-1);
-    }
-    return res;
+    svn::Path t(res);
+    return t.path();
 }
 
 bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)
@@ -456,8 +454,19 @@ void kio_svnProtocol::special(const QByteArray& data)
     finished();
 }
 
-void kio_svnProtocol::update(const KURL&,int,const QString&)
+void kio_svnProtocol::update(const KURL&url,int revnumber,const QString&revkind)
 {
+    svn::Revision where(revnumber,revkind);
+    /* update is always local - so make a path instead URI */
+    svn::Path p(url.path());
+    try {
+        svn::Targets pathes(p.path());
+        // recursive second last parameter
+        // always update externals, too. (last parameter)
+        m_pData->m_Svnclient.update(pathes, where,true,false);
+    } catch (svn::ClientException e) {
+        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+    }
 }
 
 void kio_svnProtocol::status(const KURL&wc,bool cR,bool rec)

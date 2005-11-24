@@ -412,7 +412,7 @@ void kio_svnProtocol::special(const QByteArray& data)
     stream >> tmp;
     kdDebug() << "kio_svnProtocol::special " << tmp << endl;
     switch (tmp) {
-        case SVN_CHECKOUT: 
+        case SVN_CHECKOUT:
         {
             KURL repository, wc;
             int revnumber;
@@ -571,7 +571,7 @@ void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, c
 {
     svn::Revision where(rev,revstring);
     KURL _src = makeSvnUrl(src);
-    svn::Path _target(makeSvnUrl(target.path()));
+    svn::Path _target(target.path());
     try {
         m_pData->m_Svnclient.checkout(_src.url(),_target,where,false);
     } catch (svn::ClientException e) {

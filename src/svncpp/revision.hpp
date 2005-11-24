@@ -26,6 +26,8 @@
 #ifndef _SVNCPP_REVISION_HPP_
 #define _SVNCPP_REVISION_HPP_
 
+#include <qstring.h>
+
 // subversion api
 #include "svn_types.h"
 #include "svn_opt.h"
@@ -68,6 +70,16 @@ namespace svn
      * @param revnum revision number
      */
     Revision (const svn_revnum_t revnum);
+
+    /**
+     * Constructor
+     * @param revnum a revision number
+     * @param revstring a revision string
+     *
+     * The revision string MUST uppercase, it may some of "HEAD", "BASE", "WORKING", "COMMITED", "PREV",
+     * or a date in form {YYYY-MM-DD}.
+     */
+    Revision (const int revnum, const QString&revstring);
 
     /**
      * Constructor

@@ -25,6 +25,7 @@
 
 // svncpp
 #include "svncpp/revision.hpp"
+#include "pool.hpp"
 
 
 namespace svn
@@ -50,6 +51,25 @@ namespace svn
   {
     m_revision.kind = kind;
     m_revision.value.number = 0;
+  }
+
+  Revision::Revision (const int revnum, const QString&revstring)
+  {
+    svn_opt_revision_t endrev;
+    Pool pool;
+
+    if (revnum > -1) {
+        m_revision.kind = svn_opt_revision_number;
+        m_revision.value.number = revnum;
+    } else if (revstring=="WORKING") {
+        m_revision.kind = WORKING;
+    } else if (revstring=="BASE") {
+        m_revision.kind = BASE;
+    } else if (!revstring.isNull()) {
+        svn_opt_parse_revision(&m_revision,&endrev,revstring.utf8(),pool);
+    } else {
+        m_revision.kind = UNDEFINED;
+    }
   }
 
   Revision::Revision (const DateTime dateTime)

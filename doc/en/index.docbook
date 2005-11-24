@@ -404,6 +404,203 @@ This menu is static up to kde 3.5 (which isn't released as writing this document
 </variablelist>
 </para>
 </sect1>
+<sect1 id="kio-svn-special">
+<title>Programmers info about KIO::ksvn</title>
+<para>
+<note><para>You may skip that if not interested in KIO programming.</para></note>
+KIO::ksvn::special knows following operations, them are made most equal in call to the current existing in KIO from kdesdk
+so for instance kdevelop may use it if kdesdk isn't installed but kdesvn::KIO::svn.
+</para>
+<sect2>
+<title>Commandlist</title>
+<para>
+<table id="kio-svn-special-commands">
+<title>Command overview for KIO::ksvn::special</title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry>Name&#047;command</entry>
+<entry>Numeric id</entry>
+<entry>Parameter list</entry>
+<entry>Implemented in 0.7.0?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry>Checkout</entry>
+<entry>1</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Update</entry>
+<entry>2</entry>
+<entry><para>KURL url,int revnum, QString revstring</para>
+<para>
+If revnum &lt; 0 the revstring is parsed. Revstring may one of &quot;HEAD&quot;,&quot;START&quot; or date in
+form &quot;&#123;YYYY-MM-DD&#125;&quot;. The string is case-sensitive! url must point to a local(!) item under subversion control.
+</para>
+</entry>
+<entry>Yes</entry>
+</row>
+
+<row>
+<entry>Commit</entry>
+<entry>3</entry>
+<entry><para>KURL::List urls</para>
+<para>urls a list of local urls to commit.</para>
+</entry>
+<entry>Yes</entry>
+</row>
+
+<row>
+<entry>Log</entry>
+<entry>4</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Import</entry>
+<entry>5</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Add</entry>
+<entry>6</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Del</entry>
+<entry>7</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Revert</entry>
+<entry>8</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Status</entry>
+<entry>9</entry>
+<entry><para>KURL item,bool checkRepos, bool recurse</para>
+<para>item - the item check info about, checkRepos - check if there are newer versions in repository, recurse - check recursive or not.</para>
+</entry>
+<entry>Yes</entry>
+</row>
+
+<row>
+<entry>Mkdir</entry>
+<entry>10</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Resolve</entry>
+<entry>11</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Switch</entry>
+<entry>12</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+
+<row>
+<entry>Diff</entry>
+<entry>13</entry>
+<entry></entry>
+<entry>No</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title>Return values</title>
+<para>
+Return values may given via metadata, see apidoc for details.
+</para>
+<para>
+<table id="kio-ksvn-metadata">
+<title>Content of metadata</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry>Key</entry>
+<entry>Possible value</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry>path</entry>
+<entry>Path of item action was made on, eg. given url</entry>
+</row>
+
+<row>
+<entry>action</entry>
+<entry>Numeric action type</entry>
+</row>
+
+<row>
+<entry>kind</entry>
+<entry>kind of item (mostly dir or file)</entry>
+</row>
+
+<row>
+<entry>mime_t</entry>
+<entry>Subversion mimetype of item</entry>
+</row>
+
+<row>
+<entry>content</entry>
+<entry>State of content (subversion value)</entry>
+</row>
+
+<row>
+<entry>prop</entry>
+<entry>State of properties (subversion value)</entry>
+</row>
+
+<row>
+<entry>rev</entry>
+<entry>Resulting revision or revision worked on</entry>
+</row>
+
+<row>
+<entry>string</entry>
+<entry>Internal defined human readable message.</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
 </chapter>
 
 <chapter id="kdesvn-commandline">

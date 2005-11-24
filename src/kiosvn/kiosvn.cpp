@@ -530,11 +530,25 @@ void kio_svnProtocol::commit(const KURL::List&url)
     for (unsigned j=0; j<url.count();++j) {
         targets.push_back(svn::Path(url[j].path()));
     }
+    svn_revnum_t nnum;
     try {
-        m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
+        nnum = m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
     } catch (svn::ClientException e) {
-        //Message box!
-        QString ex = QString::fromUtf8(e.message());
-        error(KIO::ERR_SLAVE_DEFINED,ex);
+        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+    }
+    for (unsigned j=0;j<url.count();++j) {
+        QString userstring = i18n ( "Nothing to commit." );
+        if (SVN_IS_VALID_REVNUM(nnum)) {
+            userstring = i18n( "Committed revision %1." ).arg(nnum);
+        }
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "path", url[j].path() );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "action", "0" );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "kind", "0" );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "mime_t", "" );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "content", "0" );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "prop", "0" );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "rev" , QString::number(nnum) );
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "string", userstring );
+        m_pData->m_Listener.incCounter();
     }
 }

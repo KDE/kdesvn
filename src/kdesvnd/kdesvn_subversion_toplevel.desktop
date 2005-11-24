@@ -3,8 +3,8 @@ Encoding=UTF-8
 ServiceTypes=inode/directory,all/all
 X-KDE-Priority=TopLevel
 
-X-KDE-GetActionMenu=kded kdesvnd getTopLevelActionMenu(KURL::List)
-#Actions=Update;Commit
+#X-KDE-GetActionMenu=kded kdesvnd getTopLevelActionMenu(KURL::List)
+Actions=Update;Commit
 
 [Desktop Action Update]
 Name=KDESvn Update

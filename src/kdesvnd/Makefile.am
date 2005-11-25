@@ -15,10 +15,14 @@ kdeddir = $(kde_servicesdir)/kded
 servicemenudir = $(kde_datadir)/konqueror/servicemenus
 servicemenu_DATA = kdesvn_subversion.desktop kdesvn_subversion_toplevel.desktop
 
-kdesvn_subversion.desktop: kdesvn_subversion.desktop.template
-	sh ./test.kde.sh kdesvn_subversion.desktop.template
+kdesvn_subversion.desktop: $(top_srcdir)/src/kdesvnd/kdesvn_subversion.desktop.template
+	sh $(top_srcdir)/src/kdesvnd/test.kde.sh $< $@
 
-kdesvn_subversion_toplevel.desktop: kdesvn_subversion_toplevel.desktop.template
-	sh ./test.kde.sh kdesvn_subversion_toplevel.desktop.template
+kdesvn_subversion_toplevel.desktop: $(top_srcdir)/src/kdesvnd/kdesvn_subversion_toplevel.desktop.template
+	sh $(top_srcdir)/src/kdesvnd/test.kde.sh $< $@
 
 EXTRA_DIST = kdesvn_subversion_toplevel.desktop.template kdesvn_subversion.desktop.template test.kde.sh
+
+clean-generic:
+	rm -f kdesvn_subversion_toplevel.desktop
+	rm -f kdesvn_subversion.desktop

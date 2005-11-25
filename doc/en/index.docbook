@@ -388,6 +388,9 @@ The same may vor &quot;svn+...&quot; but as from kde 3.4 kdesdk has it own small
 These protocols are designed only for repositories, not for working copies. Eg. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository in difference to the application itself or KPart. 
 Working copies may browsed with konqueror.
 </para>
+<para>
+For browsing at a specific revision you may append the query <link linkend="revision-syntax">&quot;?rev=&lt;revision&gt;&quot;</link> to the url.
+</para>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -413,8 +416,8 @@ giving it a deep knowledge about.
 <example>
 <title>Retrieving differences between revions using KDiff3 and KIO::ksvn</title>
 <programlisting>
-kdiff3 
-  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127
+kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
   ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
 </programlisting>
 <para>
@@ -470,8 +473,8 @@ http://server/repos/project/trunk, target /home/user/proj/ then content of trunk
 <entry>2</entry>
 <entry><para>KURL url,int revnum, QString revstring</para>
 <para>
-If revnum &lt; 0 the revstring is parsed. Revstring may one of &quot;HEAD&quot;,&quot;START&quot; or date in
-form &quot;&#123;YYYY-MM-DD&#125;&quot;. The string is case-sensitive! url must point to a local(!) item under subversion control.
+If revnum &lt; 0 the revstring is parsed.
+Format of revstring is described in <link linkend="revision-syntax">Appendix</link>.
 </para>
 </entry>
 <entry>Yes</entry>
@@ -1304,6 +1307,75 @@ Documentation copyright 2005 Rajko Albrecht <email>ral@alwins-world.de</email>
 
 </chapter>
 
+<appendix id="revision-syntax">
+<title>Syntax for revisions</title>
+<para>
+Revisions may given in same form like to the standard svn - client. That means: number, keyword or date.
+</para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term>Number</term>
+<listitem><para>
+A number greater or equal -1. -1 means "unspecified revision", 0 is the beginning. Normaly these numbers shouldn't used (most operations will fail with that).
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Keyword</term>
+<listitem><para>
+One of
+<itemizedlist>
+
+<listitem><para>
+HEAD
+</para></listitem>
+
+<listitem><para>
+BASE
+</para></listitem>
+
+<listitem><para>
+COMMITED
+</para></listitem>
+
+<listitem><para>
+PREV
+</para></listitem>
+
+<listitem><para>
+START
+</para></listitem>
+
+<listitem><para>
+WORKING
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+<para>
+The keywords are case sensitive! eg, head is not the same like HEAD.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Date</term>
+<listitem><para>
+Date in form {YYYY-MM-DD}. It must real MM or DD - eg. 2005-1-1 must written as {2005-01-01}.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para>
+Appending a specific revision to an url will always made via &quot;?rev=&lt;revision&gt;.
+</para>
+</appendix>
+
 <appendix id="installation">
 <title>Installation</title>
 
@@ -1341,8 +1413,8 @@ information here.
 -->
 
 <para>
-You need installed subversion 1.1, better is 1.2 or above. It requires &kde; 3.3.x
-or above. Subversion prior 1.1 is NOT supported!
+You need installed subversion 1.2 or above. It requires &kde; 3.3.x
+or above. Subversion prior 1.2 is NOT supported anymore!
 </para>
 <para>
 Subversion may found on <ulink url="http://subversion.tigris.org">its homepage</ulink> but your

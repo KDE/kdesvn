@@ -449,6 +449,24 @@ void kio_svnProtocol::special(const QByteArray& data)
             commit( wclist );
             break;
         }
+        case SVN_LOG:
+        {
+            kdDebug(0) << "kio_svnProtocol LOG" << endl;
+            int revstart, revend;
+            QString revkindstart, revkindend;
+            KURL::List targets;
+            stream >> revstart;
+            stream >> revkindstart;
+            stream >> revend;
+            stream >> revkindend;
+            while ( !stream.atEnd() ) {
+                KURL tmp;
+                stream >> tmp;
+                targets << tmp;
+            }
+            svnlog( revstart, revkindstart, revend, revkindend, targets );
+            break;
+        }
         case SVN_STATUS:
         {
             KURL wc;
@@ -576,5 +594,54 @@ void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, c
         m_pData->m_Svnclient.checkout(_src.url(),_target,where,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+    }
+}
+
+void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int revend, const QString&revstringend, const KURL::List&urls)
+{
+    svn::Revision start(revstart,revstringstart);
+    svn::Revision end(revend,revstringend);
+    const svn::LogEntries * logs = 0;
+
+    for (unsigned j = 0; j<urls.count();++j) {
+        logs = 0;
+        try {
+            logs = m_pData->m_Svnclient.log(makeSvnUrl(urls[j]),start,end,true,true,0);
+        } catch (svn::ClientException e) {
+            error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+            break;
+        }
+        if (!logs) {
+            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify(10,'0')+"path",urls[j].path());
+            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify(10,'0')+"string",
+                i18n("Empty logs"));
+            m_pData->m_Listener.incCounter();
+            continue;
+        }
+        for (unsigned int i = 0; i < logs->count();++i) {
+            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "path",urls[j].path());
+            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "rev",
+                QString::number( (*logs)[i].revision));
+            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"author",
+                (*logs)[i].author);
+            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"logmessage",
+                (*logs)[i].message);
+            m_pData->m_Listener.incCounter();
+            for (unsigned z = 0; z<(*logs)[i].changedPaths.count();++z) {
+                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "rev",
+                    QString::number( (*logs)[i].revision));
+                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "path",urls[j].path());
+                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "loggedpath",
+                    (*logs)[i].changedPaths[z].path);
+                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "loggedaction",
+                    QChar((*logs)[i].changedPaths[z].action));
+                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "loggedcopyfrompath",
+                    (*logs)[i].changedPaths[z].copyFromPath);
+                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "loggedcopyfromrevision",
+                    QString::number((*logs)[i].changedPaths[z].copyFromRevision));
+                m_pData->m_Listener.incCounter();
+            }
+        }
+        delete logs;
     }
 }

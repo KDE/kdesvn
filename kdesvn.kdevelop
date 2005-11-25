@@ -3,7 +3,7 @@
   <general>
     <author>Rajko Albrecht</author>
     <email>ral@alwins-world.de</email>
-    <version>0.7.0rc3</version>
+    <version>0.7.1</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -34,7 +34,7 @@
         <kdesvnd/>
       </runarguments>
       <customdirectory>/</customdirectory>
-      <programargs/>
+      <programargs></programargs>
       <autocompile>true</autocompile>
       <envvars/>
     </run>
@@ -46,7 +46,7 @@
       <abortonerror>false</abortonerror>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin/>
+      <makebin></makebin>
       <prio>0</prio>
     </make>
     <configurations>
@@ -58,14 +58,14 @@
         <cxxflags>-O3 -g0</cxxflags>
         <envvars/>
         <configargs>--prefix=`kde-config --prefix`</configargs>
-        <topsourcedir></topsourcedir>
+        <topsourcedir/>
         <cppflags>-DTESTING_RC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvnui.rc\\\&quot;\&quot;</cppflags>
-        <ldflags></ldflags>
-        <ccompilerbinary></ccompilerbinary>
-        <cxxcompilerbinary></cxxcompilerbinary>
-        <f77compilerbinary></f77compilerbinary>
-        <cflags></cflags>
-        <f77flags></f77flags>
+        <ldflags/>
+        <ccompilerbinary/>
+        <cxxcompilerbinary/>
+        <f77compilerbinary/>
+        <cflags/>
+        <f77flags/>
       </optimized>
       <debug>
         <configargs>--enable-debug=full --prefix=`kde-config --prefix`</configargs>
@@ -75,14 +75,14 @@
         <f77compiler>kdevg77options</f77compiler>
         <cxxflags>-O0 -g3</cxxflags>
         <envvars/>
-        <topsourcedir></topsourcedir>
+        <topsourcedir/>
         <cppflags>-DTESTING_RC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvnui.rc\\\&quot;\&quot; -DTESTING_PARTRC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvn_part.rc\\\&quot;\&quot;</cppflags>
-        <ldflags></ldflags>
-        <ccompilerbinary></ccompilerbinary>
-        <cxxcompilerbinary></cxxcompilerbinary>
-        <f77compilerbinary></f77compilerbinary>
-        <cflags></cflags>
-        <f77flags></f77flags>
+        <ldflags/>
+        <ccompilerbinary/>
+        <cxxcompilerbinary/>
+        <f77compilerbinary/>
+        <cflags/>
+        <f77flags/>
       </debug>
     </configurations>
     <subclassing>
@@ -200,7 +200,7 @@
     <projectdoc>
       <docsystem>Doxygen-Dokumentation</docsystem>
       <docurl>kdesvn.tag</docurl>
-      <usermanualurl/>
+      <usermanualurl></usermanualurl>
     </projectdoc>
   </kdevdocumentation>
   <substmap>
@@ -259,17 +259,17 @@
   <dist>
     <custom>false</custom>
     <bzip>false</bzip>
-    <archname/>
+    <archname></archname>
     <appname>kdesvn</appname>
-    <version>0.7.0rc3</version>
-    <release/>
-    <vendor/>
+    <version>0.7.1</version>
+    <release></release>
+    <vendor></vendor>
     <licence>LGPL</licence>
     <summary>Subversion client for KDE</summary>
     <group>Development/Tools</group>
     <packager>Rajko Albrecht</packager>
-    <description/>
-    <changelog/>
+    <description></description>
+    <changelog></changelog>
     <devpackage>false</devpackage>
     <docspackage>false</docspackage>
     <appicon>false</appicon>
@@ -278,7 +278,7 @@
     <useRPM>false</useRPM>
     <ftpkde>false</ftpkde>
     <appskde>false</appskde>
-    <url/>
+    <url></url>
   </dist>
   <ctagspart>
     <customArguments/>

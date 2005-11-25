@@ -49,6 +49,7 @@ public:
     virtual void del(const KURL&url,bool isfile);
     virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
     virtual void checkout(const KURL&src,const KURL&target,const int rev, const QString&revstring);
+    virtual void svnlog(int,const QString&,int, const QString&, const KURL::List&);
     virtual void special(const QByteArray& data);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {

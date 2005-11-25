@@ -492,8 +492,15 @@ Format of revstring is described in <link linkend="revision-syntax">Appendix</li
 <row>
 <entry>Log</entry>
 <entry>4</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>
+<para>
+int startrevnumber,QString startrevstring,int endrevnumber,QString endrevstring,KURL::List
+</para>
+<para>
+Use this with care - this may get a lot of data.
+</para>
+</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
@@ -625,6 +632,24 @@ Return values may given via metadata, see apidoc for details.
 <entry>string</entry>
 <entry>Internal defined human readable message.</entry>
 </row>
+
+<row>
+<entry>loggedaction</entry>
+<entry>Subversion defined action string on item (A,M,D)</entry>
+</row>
+<row>
+<entry>loggedcopyfrompath</entry>
+<entry>If copied from which path? (may empty)</entry>
+</row>
+<row>
+<entry>loggedcopyfromrevision</entry>
+<entry>If copied at which revision? (may &lt; 0)</entry>
+</row>
+<row>
+<entry>loggedpath</entry>
+<entry>On which single path the entries loggedaction and so on are set. (path is set to the calling url)</entry>
+</row>
+
 </tbody>
 
 </tgroup>

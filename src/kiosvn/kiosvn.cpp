@@ -163,7 +163,7 @@ int kdemain(int argc, char **argv)
 void kio_svnProtocol::listDir(const KURL&url)
 {
     kdDebug() << "kio_svn::listDir(const KURL& url) : " << url.url() << endl ;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::DirEntries dlist;
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
@@ -199,7 +199,7 @@ void kio_svnProtocol::listDir(const KURL&url)
 void kio_svnProtocol::stat(const KURL& url)
 {
     kdDebug()<<"kio_svn::stat "<< url << endl;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -235,7 +235,7 @@ void kio_svnProtocol::stat(const KURL& url)
 void kio_svnProtocol::get(const KURL& url)
 {
     kdDebug()<<"kio_svn::get "<< url << endl;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -263,7 +263,7 @@ void kio_svnProtocol::get(const KURL& url)
 void kio_svnProtocol::mkdir(const KURL &url, int)
 {
     kdDebug()<<"kio_svn::get "<< url << endl;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -287,7 +287,7 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
 void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 {
     kdDebug()<<"kio_svn::rename "<< src << " to " << target <<  endl;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -306,7 +306,7 @@ void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool overwrite)
 {
     kdDebug()<<"kio_svn::copy "<< src << " to " << dest <<  endl;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -325,7 +325,7 @@ void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool o
 void kio_svnProtocol::del(const KURL&src,bool isfile)
 {
     kdDebug()<<"kio_svn::del "<< src << endl;
-    m_pData->reInitClient();
+    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;

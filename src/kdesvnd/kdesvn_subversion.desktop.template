@@ -7,7 +7,7 @@ X-KDE-Submenu=Subversion (kdesvn)
 Actions=Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename
 #Return type of below is a QStringList with a list of Actions which is appended to the Actions above
 #this only works with kde 3.5?
-#X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
+X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
 
 [Desktop Action Log]
 Name=Subversion log (last 100)

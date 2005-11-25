@@ -403,6 +403,26 @@ This menu is static up to kde 3.5 (which isn't released as writing this document
 </varlistentry>
 </variablelist>
 </para>
+<sect2>
+<title>Usage of KIO outside konqueror - an example</title>
+<para>
+Every &kde; based application may use these protocols. So it would be possible to retrieve all differences between two revisions with kdiff3 without 
+giving it a deep knowledge about.
+</para>
+<para>
+<example>
+<title>Retrieving differences between revions using KDiff3 and KIO::ksvn</title>
+<programlisting>
+kdiff3 
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para>
+Let kdiff3 print all differences between two revision. And yes. Making that within kdesvn (diffing two revisions) is MUCH faster 'cause in that case internal mechanisms of subversion are used.
+</para>
+</example>
+</para>
+</sect2>
 </sect1>
 <sect1 id="kio-svn-special">
 <title>Programmers info about KIO::ksvn</title>

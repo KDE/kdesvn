@@ -1,3 +1,12 @@
+version 0.7.1
+    * a lot of bugfixes
+    * more help written
+    * context menus may setup depending on kde version kdesvn is compiled against
+    * KIO now full working
+    * KIO::special started for integration into other software
+    * will only compile against subversion 1.2 or newer - subversion 1.1 makes no sense anymore
+    * fix: check for compiler with -fvisibility flag
+
 version 0.7.0
     * complete own icon design
     * own KIO (ksvn and svn)

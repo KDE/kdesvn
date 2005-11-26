@@ -30,6 +30,7 @@
 #include "svncpp/dirent.hpp"
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
+#include "svncpp/url.hpp"
 #include "helpers/sshagent.h"
 #include "helpers/runtempfile.h"
 
@@ -345,13 +346,26 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 
     if (!noReinit) m_SvnWrapper->reInitClient();
 
-    setBaseUri(url.url());
+    QString query = url.query();
+
+    KURL _url = url;
+    QString proto = svn::Url::transformProtokoll(url.protocol());
+    _url.cleanPath(true);
+    _url.setProtocol(proto);
+    proto = _url.url(-1);
+
+    QStringList s = QStringList::split("?",proto);
+    if (s.size()>1) {
+        setBaseUri(s[0]);
+    } else {
+        setBaseUri(proto);
+    }
     setWorkingCopy(false);
     setNetworked(false);
 
     m_pList->m_remoteRevision=svn::Revision::HEAD;
 
-    QString query = url.query();
+
     QString _dummy;
 
     if (!QString::compare("svn+file",url.protocol())) {

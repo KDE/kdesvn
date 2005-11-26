@@ -26,6 +26,7 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlabel.h>
+#include <qwidgetlist.h>
 #include <kprogress.h>
 #include <kdebug.h>
 #include <ktextbrowser.h>
@@ -73,11 +74,21 @@ StopDlg::~StopDlg()
 
 void StopDlg::slotAutoShow()
 {
-    if (mShown||mWait) {
+    bool hasDialogs = false;
+    QWidget * w = kapp->activeModalWidget();
+    if (w && w!=this) {
+        hasDialogs = true;
+    }
+    if (hasDialogs) {
+        kdDebug()<<"Hide me!" << endl;
+        hide();
+    }
+    if (mShown||mWait||hasDialogs) {
         if (mWait) {
             kdDebug() << "Waiting for show"<<endl;
             mShowTimer->start(m_MinDuration, true);
         }
+        mShowTimer->start(m_MinDuration, true);
         return;
     }
     m_ProgressBar->hide();
@@ -85,6 +96,7 @@ void StopDlg::slotAutoShow()
     show();
     kapp->processEvents();
     mShown = true;
+    mShowTimer->start(m_MinDuration, true);
 }
 
 void StopDlg::slotCancel()

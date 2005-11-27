@@ -684,7 +684,7 @@ void kdesvnfilelist::enableActions()
     m_AddCurrent->setEnabled( (multi||single) && isWorkingCopy());
     m_RevertAction->setEnabled( (multi||single) && isWorkingCopy());
     m_ResolvedAction->setEnabled( (multi||single) && isWorkingCopy());
-    m_InfoAction->setEnabled( (single||multi));
+    m_InfoAction->setEnabled(isopen);
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
     temp = filesActions()->action("make_svn_addrec");
     if (temp) {
@@ -1722,12 +1722,19 @@ void kdesvnfilelist::slotInfo()
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     if (!isWorkingCopy()) {
-        rev = svn::Revision::HEAD;
+        rev = m_pList->m_remoteRevision;
     }
     if (lst.count()==0) {
-        lst.append(SelectedOrMain());
+        if (!isWorkingCopy()) {
+            QStringList l; l.append(baseUri());
+            m_SvnWrapper->makeInfo(l,rev,peg,Settings::info_recursive());
+        } else {
+            lst.append(SelectedOrMain());
+        }
     }
-    m_SvnWrapper->makeInfo(lst,rev,peg,Settings::info_recursive());
+    if (lst.count()>0) {
+        m_SvnWrapper->makeInfo(lst,rev,peg,Settings::info_recursive());
+    }
 }
 
 

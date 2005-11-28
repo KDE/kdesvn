@@ -1,67 +1,64 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
-      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <kcfgfile name="kdesvnpartrc"/>
-  <group name="general_items">
-    <entry name="listview_icon_size" type="Int">
-      <label>Size of the icons</label>
-      <default>22</default>
-    </entry>
-    <entry name="display_file_tips" type="Bool">
-      <label>Show file informations in tooltip</label>
-      <default>true</default>
-    </entry>
-    <entry name="display_previews_in_file_tips" type="Bool">
-      <label>Show preview of the file in tooltip</label>
-      <default>false</default>
-    </entry>
-    <entry name="use_kompare_for_diff" type="Int">
-      <label>Use the program kompare for diff viewing</label>
-      <default>1</default>
-    </entry>
-    <entry name="external_diff_display" type="String">
-      <label>Use external program for diff viewing</label>
-      <default>kompare</default>
-    </entry>
-    <entry name="external_display" type="String">
-      <label>Use external program for viewing</label>
-      <default>default</default>
-    </entry>
-    <entry name="max_log_messages" type="Int">
-      <label>Maximum number of log messages</label>
-      <default>20</default>
-    </entry>
-  </group>
-  <group name="subversion">
-    <entry name="display_overlays" type="Bool">
-      <label>Display icon overlays</label>
-      <default>true</default>
-    </entry>
-    <entry name="info_recursive" type="Bool">
-      <label>Get item informations recursively</label>
-      <default>false</default>
-    </entry>
-    <entry name="display_ignored_files" type="Bool">
-      <label>Display ignored files</label>
-      <default>true</default>
-    </entry>
-    <entry name="maximum_displayed_logs" type="Int">
-        <label>Maximum displayed logs when full log (0 for no limit)</label>
-        <default>0</default>
-    </entry>
-    <entry name="log_follows_nodes" type="Bool">
-      <label>Log follows node changes</label>
-      <default>true</default>
-    </entry>
-    <entry name="log_always_list_changed_files" type="Bool">
-      <label>Logs always reads list of changed files</label>
-      <default>true</default>
-    </entry>
-    <entry name="start_updates_check_on_open" type="Bool">
-      <label>Start check for updates when open working copy</label>
-      <default>true</default>
-    </entry>
-  </group>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+ <kcfgfile name="kdesvnpartrc" />
+ <group name="general_items" >
+  <entry key="listview_icon_size" type="Int" >
+   <label>Size of the icons</label>
+   <default>22</default>
+  </entry>
+  <entry key="display_file_tips" type="Bool" >
+   <label>Show file informations in tooltip</label>
+   <default>true</default>
+  </entry>
+  <entry key="display_previews_in_file_tips" type="Bool" >
+   <label>Show preview of the file in tooltip</label>
+   <default>false</default>
+  </entry>
+  <entry key="use_kompare_for_diff" type="Int" >
+   <label>Use the program kompare for diff viewing</label>
+   <default>1</default>
+  </entry>
+  <entry key="external_diff_display" type="String" >
+   <label>Use external program for diff viewing</label>
+   <default>kompare</default>
+  </entry>
+  <entry key="external_display" type="String" >
+   <label>Use external program for viewing</label>
+   <default>default</default>
+  </entry>
+  <entry key="max_log_messages" type="Int" >
+   <label>Maximum number of log messages</label>
+   <default>20</default>
+  </entry>
+ </group>
+ <group name="subversion" >
+  <entry key="display_overlays" type="Bool" >
+   <label>Display icon overlays</label>
+   <default>true</default>
+  </entry>
+  <entry key="info_recursive" type="Bool" >
+   <label>Get item informations recursively</label>
+   <default>false</default>
+  </entry>
+  <entry key="display_ignored_files" type="Bool" >
+   <label>Display ignored files</label>
+   <default>true</default>
+  </entry>
+  <entry key="log_follows_nodes" type="Bool" >
+   <label>Log follows node changes</label>
+   <default>true</default>
+  </entry>
+  <entry key="log_always_list_changed_files" type="Bool" >
+   <label>Logs always reads list of changed files</label>
+   <default>true</default>
+  </entry>
+  <entry key="start_updates_check_on_open" type="Bool" >
+   <label>Start check for updates when open working copy</label>
+   <default>true</default>
+  </entry>
+  <entry key="maximum_displayed_logs" type="UInt" >
+   <label>Maximum displayed logs when full log (0 for no limit)</label>
+   <default>0</default>
+  </entry>
+ </group>
 </kcfg>

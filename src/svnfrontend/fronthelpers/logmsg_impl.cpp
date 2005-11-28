@@ -38,7 +38,7 @@
 QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
 const char* Logmsg_impl::groupName = "logmsg_dialog_size";
 
-int Logmsg_impl::smax_message_history = -1;
+unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
 
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
@@ -48,7 +48,7 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
 
 void Logmsg_impl::slotHistoryActivated(int number)
 {
-    if (number < 1||number>sLogHistory.size()) {
+    if (number < 1||(unsigned)number>sLogHistory.size()) {
         m_LogEdit->setText("");
     } else {
         m_LogEdit->setText(sLogHistory[number-1]);
@@ -78,11 +78,11 @@ bool Logmsg_impl::isRecursive()const
  */
 void Logmsg_impl::initHistory()
 {
-    if (smax_message_history==-1) {
+    if (smax_message_history==0xFFFF) {
         smax_message_history = Settings::max_log_messages();
         KConfigGroup cs(Settings::self()->config(),"log_messages");
         QString s = QString::null;
-        int current = 0;
+        unsigned int current = 0;
         QString key = QString("log_%0").arg(current);
         s = cs.readEntry(key,QString::null);
         while (s!=QString::null) {
@@ -149,6 +149,8 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     dlg.resize(dlg.configDialogSize(groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
+        /* avoid compiler warnings */
+        _rec = false;
     } else {
         _ok = true;
         _rec = ptr->isRecursive();

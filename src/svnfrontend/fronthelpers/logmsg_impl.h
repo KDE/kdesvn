@@ -41,7 +41,7 @@ protected slots:
 protected:
     static QValueList<QString> sLogHistory;
     static const char* groupName;
-    static int smax_message_history;
+    static unsigned int smax_message_history;
 };
 
 #endif

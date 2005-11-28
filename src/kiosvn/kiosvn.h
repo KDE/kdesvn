@@ -50,6 +50,7 @@ public:
     virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
     virtual void checkout(const KURL&src,const KURL&target,const int rev, const QString&revstring);
     virtual void svnlog(int,const QString&,int, const QString&, const KURL::List&);
+    virtual void revert(const KURL::List&);
     virtual void special(const QByteArray& data);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
@@ -64,6 +65,7 @@ public:
         SVN_IMPORT=5,
         SVN_ADD=6,
         SVN_DEL=7,
+        /* KURL::List */
         SVN_REVERT=8,
         /* KURL wc,bool checkRepos, bool recurse */
         SVN_STATUS=9,

@@ -484,7 +484,7 @@ Format of revstring is described in <link linkend="revision-syntax">Appendix</li
 <entry>Commit</entry>
 <entry>3</entry>
 <entry><para>KURL::List urls</para>
-<para>urls a list of local urls to commit.</para>
+<para>urls a list of local urls to commit. Will ask for log.</para>
 </entry>
 <entry>Yes</entry>
 </row>
@@ -527,8 +527,10 @@ Use this with care - this may get a lot of data.
 <row>
 <entry>Revert</entry>
 <entry>8</entry>
-<entry></entry>
-<entry>No</entry>
+<entry><para>KURL::List</para>
+<para>Revert in KIO is always non-recursive, no questions (calling app must do it itself)</para>
+</entry>
+<entry>Yes</entry>
 </row>
 
 <row>

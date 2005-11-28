@@ -467,6 +467,18 @@ void kio_svnProtocol::special(const QByteArray& data)
             svnlog( revstart, revkindstart, revend, revkindend, targets );
             break;
         }
+        case SVN_REVERT: 
+        {
+            KURL::List wclist;
+            while ( !stream.atEnd() ) {
+                KURL tmp;
+                stream >> tmp;
+                wclist << tmp;
+            }
+            kdDebug(7128) << "kio_svnProtocol REVERT" << endl;
+            revert(wclist);
+            break;
+        }
         case SVN_STATUS:
         {
             KURL wc;
@@ -562,7 +574,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
     for (unsigned j=0; j<url.count();++j) {
         targets.push_back(svn::Path(url[j].path()));
     }
-    svn_revnum_t nnum;
+    svn_revnum_t nnum=svn::Revision::UNDEFINED;
     try {
         nnum = m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
     } catch (svn::ClientException e) {
@@ -643,5 +655,19 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
             }
         }
         delete logs;
+    }
+}
+
+void kio_svnProtocol::revert(const KURL::List&l)
+{
+    QValueList<svn::Path> list;
+    for (unsigned j=0; j<l.count();++j) {
+        list.append(svn::Path(l[j].path()));
+    }
+    svn::Targets target(list);
+    try {
+        m_pData->m_Svnclient.revert(target,false);
+    } catch (svn::ClientException e) {
+        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
     }
 }

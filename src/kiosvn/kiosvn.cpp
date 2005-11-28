@@ -491,7 +491,21 @@ void kio_svnProtocol::special(const QByteArray& data)
             status(wc,checkRepos,fullRecurse);
             break;
         }
-
+        case SVN_SWITCH:
+        {
+            KURL wc,url;
+            bool recurse;
+            int revnumber;
+            QString revkind;
+            stream >> wc;
+            stream >> url;
+            stream >> recurse;
+            stream >> revnumber;
+            stream >> revkind;
+            kdDebug(7128) << "kio_svnProtocol SWITCH" << endl;
+            wc_switch(wc,url,recurse,revnumber,revkind);
+            break;
+        }
         default:
             {kdDebug()<<"Unknown special" << endl;}
     }
@@ -667,6 +681,17 @@ void kio_svnProtocol::revert(const KURL::List&l)
     svn::Targets target(list);
     try {
         m_pData->m_Svnclient.revert(target,false);
+    } catch (svn::ClientException e) {
+        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+    }
+}
+
+void kio_svnProtocol::wc_switch(const KURL&wc,const KURL&target,bool rec,int rev,const QString&revstring)
+{
+    svn::Revision where(rev,revstring);
+    svn::Path wc_path(wc.path());
+    try {
+        m_pData->m_Svnclient.doSwitch(wc_path,makeSvnUrl(target.url()),where,rec);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
     }

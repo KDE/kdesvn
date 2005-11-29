@@ -189,6 +189,9 @@ protected slots:
     virtual void slotRescanIcons();
 protected slots:
     virtual void slotCheckNewItems();
+protected slots:
+    virtual void slotMakeRangeLog();
+    virtual void slotMakeLog();
 };
 
 #endif

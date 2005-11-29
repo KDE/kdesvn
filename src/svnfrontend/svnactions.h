@@ -128,8 +128,6 @@ protected:
     CheckModifiedThread*m_CThread,*m_UThread;
 
 public slots:
-    virtual void slotMakeRangeLog();
-    virtual void slotMakeLog();
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();

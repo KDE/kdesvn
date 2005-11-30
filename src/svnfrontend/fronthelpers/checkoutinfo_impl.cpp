@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "checkoutinfo_impl.h"
 #include "rangeinput_impl.h"
+#include "svncpp/url.hpp"
 #include <kurlrequester.h>
 #include <qlabel.h>
 #include <klineedit.h>
@@ -43,7 +44,10 @@ svn::Revision CheckoutInfo_impl::toRevision()
 
 QString CheckoutInfo_impl::reposURL()
 {
-    return m_UrlEdit->text();
+    KURL uri(m_UrlEdit->url());
+    QString proto = svn::Url::transformProtokoll(uri.protocol());
+    uri.setProtocol(proto);
+    return uri.url();
 }
 
 QString CheckoutInfo_impl::targetDir()
@@ -69,7 +73,19 @@ bool CheckoutInfo_impl::forceIt()
 
 void CheckoutInfo_impl::setStartUrl(const QString&what)
 {
-    m_UrlEdit->setText(what);
+    KURL uri(what);
+    if (uri.protocol()=="file") {
+        uri.setProtocol("ksvn+file");
+    } else if (uri.protocol()=="http") {
+        uri.setProtocol("ksvn+http");
+    } else if (uri.protocol()=="https") {
+        uri.setProtocol("ksvn+https");
+    } else if (uri.protocol()=="svn") {
+        uri.setProtocol("ksvn");
+    } else if (uri.protocol()=="svn+ssh") {
+        uri.setProtocol("ksvn+ssh");
+    }
+    m_UrlEdit->setURL(uri.url());
 }
 
 void CheckoutInfo_impl::disableForce(bool how)

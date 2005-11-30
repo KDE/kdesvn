@@ -30,6 +30,7 @@
 #include "svncpp/dirent.hpp"
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
+#include "svncpp/url.hpp"
 #include "helpers/sshagent.h"
 #include "helpers/runtempfile.h"
 
@@ -169,8 +170,8 @@ void kdesvnfilelist::setupActions()
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction = new KAction(i18n("&Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
-    m_LogFullAction = new KAction(i18n("&Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),m_SvnWrapper,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    m_LogRangeAction = new KAction(i18n("&Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    m_LogFullAction = new KAction(i18n("&Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
     m_propertyAction = new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
@@ -345,13 +346,26 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 
     if (!noReinit) m_SvnWrapper->reInitClient();
 
-    setBaseUri(url.url());
+    QString query = url.query();
+
+    KURL _url = url;
+    QString proto = svn::Url::transformProtokoll(url.protocol());
+    _url.cleanPath(true);
+    _url.setProtocol(proto);
+    proto = _url.url(-1);
+
+    QStringList s = QStringList::split("?",proto);
+    if (s.size()>1) {
+        setBaseUri(s[0]);
+    } else {
+        setBaseUri(proto);
+    }
     setWorkingCopy(false);
     setNetworked(false);
 
     m_pList->m_remoteRevision=svn::Revision::HEAD;
 
-    QString query = url.query();
+
     QString _dummy;
 
     if (!QString::compare("svn+file",url.protocol())) {
@@ -639,8 +653,8 @@ void kdesvnfilelist::enableActions()
     KAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction->setEnabled(single||(isWorkingCopy()&&!single&&!multi&&isopen));
-    m_LogFullAction->setEnabled(single||(isWorkingCopy()&&!single&&!multi&&isopen));
+    m_LogRangeAction->setEnabled(single||none);
+    m_LogFullAction->setEnabled(single||none);
     m_propertyAction->setEnabled(single);
     m_DelCurrent->setEnabled( (multi||single));
     m_LockAction->setEnabled( (multi||single));
@@ -670,7 +684,7 @@ void kdesvnfilelist::enableActions()
     m_AddCurrent->setEnabled( (multi||single) && isWorkingCopy());
     m_RevertAction->setEnabled( (multi||single) && isWorkingCopy());
     m_ResolvedAction->setEnabled( (multi||single) && isWorkingCopy());
-    m_InfoAction->setEnabled( (single||multi));
+    m_InfoAction->setEnabled(isopen);
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
     temp = filesActions()->action("make_svn_addrec");
     if (temp) {
@@ -1708,12 +1722,19 @@ void kdesvnfilelist::slotInfo()
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     if (!isWorkingCopy()) {
-        rev = svn::Revision::HEAD;
+        rev = m_pList->m_remoteRevision;
     }
     if (lst.count()==0) {
-        lst.append(SelectedOrMain());
+        if (!isWorkingCopy()) {
+            QStringList l; l.append(baseUri());
+            m_SvnWrapper->makeInfo(l,rev,peg,Settings::info_recursive());
+        } else {
+            lst.append(SelectedOrMain());
+        }
     }
-    m_SvnWrapper->makeInfo(lst,rev,peg,Settings::info_recursive());
+    if (lst.count()>0) {
+        m_SvnWrapper->makeInfo(lst,rev,peg,Settings::info_recursive());
+    }
 }
 
 
@@ -2024,6 +2045,58 @@ void kdesvnfilelist::slotCheckNewItems()
         return;
     }
     m_SvnWrapper->checkAddItems(w->fullName(),true);
+}
+
+/*!
+    \fn kdesvnfilelist::slotMakeRangeLog()
+ */
+void kdesvnfilelist::slotMakeRangeLog()
+{
+    QString what;
+    SvnItem*k = SelectedOrMain();
+    if (k) {
+        what = k->fullName();
+    } else if (!isWorkingCopy() && allSelected()->count()==0){
+        what = baseUri();
+    } else {
+        return;
+    }
+    Rangeinput_impl*rdlg;
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    if (!dlg) {
+        return;
+    }
+    bool list = Settings::self()->log_always_list_changed_files();
+    int i = dlg->exec();
+    if (i==QDialog::Accepted) {
+        Rangeinput_impl::revision_range r = rdlg->getRange();
+        m_SvnWrapper->makeLog(r.first,r.second,what,list,0);
+    }
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotMakeLog()
+ */
+void kdesvnfilelist::slotMakeLog()
+{
+    QString what;
+    SvnItem*k = SelectedOrMain();
+    if (k) {
+        what = k->fullName();
+    } else if (!isWorkingCopy() && allSelected()->count()==0){
+        what = baseUri();
+    } else {
+        return;
+    }
+    // yes! so if we have a limit, the limit counts from HEAD
+    // not from START
+    svn::Revision start(svn::Revision::HEAD);
+    svn::Revision end(svn::Revision::START);
+    bool list = Settings::self()->log_always_list_changed_files();
+    int l = Settings::self()->maximum_displayed_logs();
+    m_SvnWrapper->makeLog(start,end,what,list,l);
 }
 
 #include "kdesvnfilelist.moc"

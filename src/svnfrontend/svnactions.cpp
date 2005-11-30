@@ -164,49 +164,6 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     return dlg;
 }
 
-
-/*!
-    \fn SvnActions::slotMakeRangeLog()
- */
-void SvnActions::slotMakeRangeLog()
-{
-    /// @todo remove reference to parentlist
-    if (!m_Data->m_ParentList) return;
-    SvnItem*k = m_Data->m_ParentList->Selected();
-    if (!k) return;
-    Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
-    if (!dlg) {
-        return;
-    }
-    bool list = Settings::self()->log_always_list_changed_files();
-    int i = dlg->exec();
-    if (i==QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg->getRange();
-        //int l = Settings::self()->maximum_displayed_logs();
-        makeLog(r.first,r.second,k,list,0);
-    }
-    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
-}
-
-/*!
-    \fn SvnActions::slotMakeLog()
- */
-void SvnActions::slotMakeLog()
-{
-    /// @todo remove reference to parentlist
-    if (!m_Data->m_ParentList) return;
-    SvnItem*k = m_Data->m_ParentList->Selected();
-    if (!k) return;
-    // yes! so if we have a limit, the limit counts from HEAD
-    // not from START
-    svn::Revision start(svn::Revision::HEAD);
-    svn::Revision end(svn::Revision::START);
-    bool list = Settings::self()->log_always_list_changed_files();
-    int l = Settings::self()->maximum_displayed_logs();
-    makeLog(start,end,k,list,l);
-}
-
 /*!
     \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
  */

@@ -87,7 +87,7 @@ public:
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false,int limit = 0);
     void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false, int limit=0);
-    const QValueList<svn::LogEntry> * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);
+    const svn::LogEntries * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);
 
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
     void makeBlame(svn::Revision start, svn::Revision end, const QString&);
@@ -128,8 +128,6 @@ protected:
     CheckModifiedThread*m_CThread,*m_UThread;
 
 public slots:
-    virtual void slotMakeRangeLog();
-    virtual void slotMakeLog();
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();

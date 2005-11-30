@@ -46,11 +46,13 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kurl.h>
+#include <ktempdir.h>
 #include <ksock.h>
 #include <dcopclient.h>
 #include <qcstring.h>
 #include <kmimetype.h>
 #include <krun.h>
+#include <qtextstream.h>
 
 #include <stdlib.h>
 #include <math.h>
@@ -506,6 +508,23 @@ void kio_svnProtocol::special(const QByteArray& data)
             wc_switch(wc,url,recurse,revnumber,revkind);
             break;
         }
+        case SVN_DIFF:
+        {
+            KURL url1,url2;
+            int rev1, rev2;
+            bool recurse;
+            QString revkind1, revkind2;
+            stream >> url1;
+            stream >> url2;
+            stream >> rev1;
+            stream >> revkind1;
+            stream >> rev2;
+            stream >> revkind2;
+            stream >> recurse;
+            kdDebug(7128) << "kio_svnProtocol DIFF" << endl;
+            diff(url1,url2,rev1,revkind1,rev2,revkind2,recurse);
+            break;
+        }
         default:
             {kdDebug()<<"Unknown special" << endl;}
     }
@@ -694,5 +713,29 @@ void kio_svnProtocol::wc_switch(const KURL&wc,const KURL&target,bool rec,int rev
         m_pData->m_Svnclient.doSwitch(wc_path,makeSvnUrl(target.url()),where,rec);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+    }
+}
+
+void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QString&rstring1,int rnum2, const QString&rstring2,
+    bool rec)
+{
+    svn::Revision r1(rnum1,rstring1);
+    svn::Revision r2(rnum2,rstring2);
+    QString u1 = makeSvnUrl(uri1);
+    QString u2 = makeSvnUrl(uri2);
+    QString ex = "";
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
+    try {
+        ex = m_pData->m_Svnclient.diff(svn::Path(tdir.name()),
+        u1,u2,r1, r2,rec,false,false);
+    } catch (svn::ClientException e) {
+        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        return;
+    }
+    QTextIStream stream(&ex);
+    while (!stream.atEnd()) {
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "diffresult",stream.readLine());
+        m_pData->m_Listener.incCounter();
     }
 }

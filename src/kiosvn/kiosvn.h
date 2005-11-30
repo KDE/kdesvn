@@ -52,6 +52,7 @@ public:
     virtual void svnlog(int,const QString&,int, const QString&, const KURL::List&);
     virtual void revert(const KURL::List&);
     virtual void wc_switch(const KURL&,const KURL&,bool,int,const QString&);
+    virtual void diff(const KURL&,const KURL&,int,const QString&,int, const QString&,bool);
     virtual void special(const QByteArray& data);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
@@ -75,6 +76,7 @@ public:
         SVN_RESOLVE=11,
         /* KURL working copy, KURL new_repository_url, bool recurse, int rev, QString revstring */
         SVN_SWITCH=12,
+        /* KURL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive */
         SVN_DIFF=13
     };
 

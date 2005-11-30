@@ -566,8 +566,11 @@ Use this with care - this may get a lot of data.
 <row>
 <entry>Diff</entry>
 <entry>13</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>
+<para>URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive</para>
+<para>For difference between repository file:/// and working copy setup working copy urls without a protocol!</para>
+</entry>
+<entry>Yes</entry>
 </row>
 </tbody>
 
@@ -651,7 +654,10 @@ Return values may given via metadata, see apidoc for details.
 <entry>loggedpath</entry>
 <entry>On which single path the entries loggedaction and so on are set. (path is set to the calling url)</entry>
 </row>
-
+<row>
+<entry>diffresult</entry>
+<entry>a line of difference output</entry>
+</row>
 </tbody>
 
 </tgroup>

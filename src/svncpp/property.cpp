@@ -28,11 +28,12 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "svncpp/exception.hpp"
-#include "svncpp/path.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/property.hpp"
-#include "svncpp/revision.hpp"
+#include "exception.hpp"
+#include "path.hpp"
+#include "pool.hpp"
+#include "property.hpp"
+#include "revision.hpp"
+#include "svncpp_defines.hpp"
 
 
 namespace svn
@@ -108,7 +109,7 @@ namespace svn
 
     apr_hash_t *props;
     svn_client_propget (&props,
-                        name.utf8(),
+                        name.TOUTF8(),
                         m_path.cstr(),
                         revision,
                         false, // recurse
@@ -138,10 +139,12 @@ namespace svn
     Pool pool;
 
     const svn_string_t * propval
-      = svn_string_create (value.utf8(), pool);
+        = svn_string_create (value.TOUTF8(), pool);
 
     svn_error_t * error =
-      svn_client_propset (name.utf8(), propval, m_path.cstr (),
+      svn_client_propset (
+                          name.TOUTF8(),
+                          propval, m_path.cstr (),
                           false, pool);
     if(error != NULL)
       throw ClientException (error);
@@ -156,7 +159,8 @@ namespace svn
   //  svn_utf_cstring_to_utf8 (&pname_utf8, name, pool);
 
     svn_error_t * error;
-    error = svn_client_propset (name.utf8(),
+    error = svn_client_propset (
+                                  name.TOUTF8(),
                                   0, // value = NULL
                                   m_path.cstr (),
                                   false, //dont recurse

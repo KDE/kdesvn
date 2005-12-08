@@ -1,4 +1,4 @@
-#include "svncpp/info_entry.hpp"
+#include "info_entry.hpp"
 #include <svn_client.h>
 
 namespace svn

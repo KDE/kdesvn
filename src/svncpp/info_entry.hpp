@@ -1,7 +1,7 @@
 #ifndef __INFO_ENTRY_H
 #define __INFO_ENTRY_H
 
-#include "svncpp/lock_entry.hpp"
+#include "lock_entry.hpp"
 
 #include <qstring.h>
 

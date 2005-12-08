@@ -27,8 +27,9 @@
 #endif
 
 // svncpp
-#include "svncpp/client.hpp"
+#include "client.hpp"
 #include "svn_opt.h"
+#include "svncpp_defines.hpp"
 
 namespace svn
 {
@@ -58,7 +59,8 @@ namespace svn
         Revision&start,Revision&end)
   {
     Pool pool;
-    int n = svn_opt_parse_revision(start,end,revstring.utf8(),pool);
+    int n = svn_opt_parse_revision(start,end,revstring.TOUTF8(),pool);
+
     if (n<0) {
         start = Revision::UNDEFINED;
         end = Revision::UNDEFINED;

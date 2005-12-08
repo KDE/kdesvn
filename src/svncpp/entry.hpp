@@ -29,8 +29,8 @@
 #include "svn_wc.h"
 
 // svncpp
-#include "svncpp/pool.hpp"
-#include "svncpp/lock_entry.hpp"
+#include "pool.hpp"
+#include "lock_entry.hpp"
 
 #include <qstring.h>
 

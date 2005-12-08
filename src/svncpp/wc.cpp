@@ -27,10 +27,11 @@
 #include "svn_wc.h"
 
 // svncpp
-#include "svncpp/exception.hpp"
-#include "svncpp/path.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/wc.hpp"
+#include "exception.hpp"
+#include "path.hpp"
+#include "pool.hpp"
+#include "wc.hpp"
+#include "svncpp_defines.hpp"
 
 
 namespace svn
@@ -44,8 +45,9 @@ namespace svn
     Path path (dir);
     int wc;
 
-    svn_error_t * error =
-      svn_wc_check_wc (path.path().utf8(), &wc, pool);
+    svn_error_t * error = svn_wc_check_wc (
+        path.path().TOUTF8(),
+        &wc, pool);
 
     if ((error != NULL) || (wc == 0))
     {
@@ -64,12 +66,12 @@ namespace svn
     Path urlPath (url);
 
     svn_error_t * error =
-      svn_wc_ensure_adm (dirPath.path().utf8(),    // path
+      svn_wc_ensure_adm (
+                         dirPath.path().TOUTF8(),    // path
                          uuid,                // UUID
-                         urlPath.path().utf8(),    // url
+                         urlPath.path().TOUTF8(),    // url
                          revision.revnum (),  // revision
                          pool);
-
     if(error != NULL)
       throw ClientException (error);
   }

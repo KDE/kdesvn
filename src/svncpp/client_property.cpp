@@ -31,11 +31,12 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/path.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/revision.hpp"
+#include "client.hpp"
+#include "path.hpp"
+#include "exception.hpp"
+#include "pool.hpp"
+#include "revision.hpp"
+#include "svncpp_defines.hpp"
 
 
 namespace svn
@@ -118,7 +119,7 @@ namespace svn
     apr_hash_t *props;
     svn_error_t * error =
       svn_client_propget (&props,
-                           propName.utf8(),
+                           propName.TOUTF8(),
                            path.cstr (),
                            revision.revision (),
                            recurse,
@@ -169,10 +170,14 @@ namespace svn
     {
       Pool pool;
       const svn_string_t * propval
-        = svn_string_create (propValue.utf8(), pool);
+        = svn_string_create (
+                             propValue.TOUTF8(),
+                             pool);
 
       svn_error_t * error =
-        svn_client_propset (propName.utf8(), propval, path.cstr (),
+        svn_client_propset (
+                            propName.TOUTF8(),
+                            propval, path.cstr (),
                             recurse, pool);
       if(error != NULL)
         throw ClientException (error);
@@ -197,7 +202,8 @@ namespace svn
   {
     Pool pool;
     svn_error_t * error =
-              svn_client_propset (propName.utf8(),
+              svn_client_propset (
+                                  propName.TOUTF8(),
                                   0, // value = NULL
                                   path.cstr (),
                                   recurse,
@@ -276,7 +282,8 @@ namespace svn
     svn_string_t *propval;
     svn_revnum_t revnum;
     svn_error_t * error =
-      svn_client_revprop_get (propName,
+      svn_client_revprop_get (
+                              propName.TOUTF8(),
                               &propval,
                               path.cstr (),
                               revision.revision (),
@@ -291,9 +298,6 @@ namespace svn
     // if the property does not exist NULL is returned
     if( propval == NULL )
       return QPair<svn_revnum_t,QString>( 0, QString() );
-
-/*    const svn_string_t *propval_str;
-    svn_utf_string_from_utf8 (&propval_str, propval, pool); */
 
     return QPair<svn_revnum_t,QString>( revnum, QString::fromUtf8(propval->data) );
   }
@@ -320,11 +324,14 @@ namespace svn
     Pool pool;
 
     const svn_string_t * propval
-      = svn_string_create (propValue.utf8(), pool);
+      = svn_string_create (
+                            propValue.TOUTF8(),
+                            pool);
 
     svn_revnum_t revnum;
     svn_error_t * error =
-      svn_client_revprop_set (propName.utf8(),
+      svn_client_revprop_set (
+                              propName.TOUTF8(),
                               propval,
                               path.cstr (),
                               revision.revision (),
@@ -360,7 +367,8 @@ namespace svn
 
     svn_revnum_t revnum;
     svn_error_t * error =
-              svn_client_revprop_set (propName.utf8(),
+              svn_client_revprop_set (
+                                      propName.TOUTF8(),
                                       0, // value = NULL
                                       path.cstr (),
                                       revision.revision (),

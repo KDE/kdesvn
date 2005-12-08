@@ -26,14 +26,19 @@
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
 
+#include <qglobal.h>
+#if QT_VERSION < 0x040000
 #include <qvaluelist.h>
+#else
+#include <QtCore>
+#endif
 
 // subversion api
 #include "svn_ra.h"
 
 // svncpp
-#include "svncpp/pool.hpp"
-#include "svncpp/url.hpp"
+#include "pool.hpp"
+#include "url.hpp"
 
 
 namespace svn
@@ -48,7 +53,11 @@ namespace svn
   };
 
   static bool mSchemasInitialized = false;
+#if QT_VERSION < 0x040000
   QValueList<QString> mSchemas;
+#else
+  QList<QString> mSchemas;
+#endif
 
   Url::Url () {}
 
@@ -77,7 +86,11 @@ namespace svn
   QString
   Url::transformProtokoll(const QString&prot)
   {
+#if QT_VERSION < 0x040000
     QString _prot = prot.lower();
+#else
+    QString _prot = prot.toLower();
+#endif
     if (QString::compare(_prot,"svn+http")==0||
         QString::compare(_prot,"ksvn+http")==0) {
         return QString("http");
@@ -101,7 +114,11 @@ namespace svn
    * url schemas out of the ra layer it rather dirty now since
    * we are lacking a higher level of abstraction
    */
+#if QT_VERSION < 0x040000
   QValueList<QString>
+#else
+  QList<QString>
+#endif
   Url::supportedSchemas ()
   {
     if (mSchemasInitialized)
@@ -132,13 +149,21 @@ namespace svn
     {
       const QString tokenStart ("handles '");
       const QString tokenEnd ("' schem");
+#if QT_VERSION < 0x040000
       pos = descriptions.find (tokenStart, pos);
+#else
+      pos = descriptions.indexOf( tokenStart, pos );
+#endif
       if (pos == not_found)
         break;
 
       pos += tokenStart.length ();
 
+#if QT_VERSION < 0x040000
       int posEnd = descriptions.find (tokenEnd, pos);
+#else
+      int posEnd = descriptions.indexOf( tokenEnd, pos );
+#endif
       if (posEnd == not_found)
         break;
 

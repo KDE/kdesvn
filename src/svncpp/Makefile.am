@@ -7,6 +7,6 @@ libsvnwrapper_la_SOURCES = apr.cpp client_annotate.cpp client_cat.cpp client.cpp
 				pool.cpp property.cpp revision.cpp status.cpp targets.cpp url.cpp wc.cpp \
 			version_check.cpp lock_entry.cpp client_lock.cpp info_entry.cpp
 noinst_HEADERS = annotate_line.hpp apr.hpp check.hpp client.hpp \
-		context.hpp	datetime.hpp dirent.hpp entry.hpp log_entry.hpp path.hpp pool.hpp	property.hpp \
-		revision.hpp status.hpp targets.hpp url.hpp wc.hpp version_check.hpp lock_entry.hpp \
-	info_entry.hpp
+			context.hpp	datetime.hpp dirent.hpp entry.hpp log_entry.hpp path.hpp pool.hpp	property.hpp \
+			revision.hpp status.hpp targets.hpp url.hpp wc.hpp version_check.hpp lock_entry.hpp \
+		info_entry.hpp svncpp_defines.hpp

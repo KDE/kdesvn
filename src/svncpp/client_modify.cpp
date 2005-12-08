@@ -30,10 +30,11 @@
 #include "svn_client.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/targets.hpp"
+#include "client.hpp"
+#include "exception.hpp"
+#include "pool.hpp"
+#include "targets.hpp"
+#include "svncpp_defines.hpp"
 
 namespace svn
 {
@@ -49,7 +50,8 @@ namespace svn
     svn_revnum_t revnum = 0;
     svn_error_t * error =
       svn_client_checkout (&revnum,
-                           url.utf8(), destPath.cstr(),
+                           url.TOUTF8(),
+                           destPath.cstr(),
                            revision.revision (),
                            recurse,
                            *m_context,
@@ -335,7 +337,7 @@ namespace svn
     svn_error_t * error =
       svn_client_switch (&revnum,
                          path.cstr(),
-                         url.utf8(),
+                         url.TOUTF8(),
                          revision.revision (),
                          recurse,
                          *m_context,
@@ -360,7 +362,7 @@ namespace svn
     svn_error_t * error =
       svn_client_import (&commit_info,
                          path.cstr (),
-                         url.utf8(),
+                         url.TOUTF8(),
                          !recurse,
                          *m_context,
                          pool);
@@ -404,8 +406,8 @@ namespace svn
     Pool pool;
     svn_error_t * error =
       svn_client_relocate (path.cstr (),
-                         from_url.utf8(),
-                         to_url.utf8(),
+                         from_url.TOUTF8(),
+                         to_url.TOUTF8(),
                          recurse,
                          *m_context,
                          pool);

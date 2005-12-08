@@ -26,7 +26,7 @@
 #include <qstring.h>
 
 // svncpp
-#include "svncpp/exception.hpp"
+#include "exception.hpp"
 
 
 namespace svn
@@ -74,7 +74,11 @@ namespace svn
   const char *
   Exception::message () const
   {
+#if QT_VERSION < 0x040000
     return m->message.ascii();
+#else
+    return m->message.toAscii();
+#endif
   }
 
 

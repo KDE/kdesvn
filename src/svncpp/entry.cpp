@@ -24,7 +24,7 @@
  */
 
 // svncpp
-#include "svncpp/entry.hpp"
+#include "entry.hpp"
 
 
 namespace svn

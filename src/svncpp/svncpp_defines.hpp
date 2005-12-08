@@ -17,49 +17,17 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-// stl
-#include <string>
 
-// subversion api
-#include "svn_client.h"
+#ifndef _SVNCPP_DEFINES_H
+#define _SVNCPP_DEFINES_H
 
-// svncpp
-#include "client.hpp"
-#include "exception.hpp"
-#include "pool.hpp"
-#include "targets.hpp"
-#include "svncpp_defines.hpp"
+// qt
+#include <qglobal.h>
 
-namespace svn
-{
+#if QT_VERSION < 0x040000
+#define TOUTF8 utf8
+#else
+#define TOUTF8 toUtf8
+#endif
 
-  void
-  Client::lock (const Targets & targets,
-    const QString& message,
-    bool steal_lock)  throw (ClientException)
-  {
-    Pool pool;
-    svn_error_t * error =
-      svn_client_lock(const_cast<apr_array_header_t*> (targets.array (pool)),
-                      message.TOUTF8(),
-                      steal_lock,
-                      *m_context,
-                      pool);
-    if(error != NULL)
-       throw ClientException (error);
-  }
-
-  void
-  Client::unlock (const Targets&targets,
-            bool break_lock)  throw (ClientException)
-  {
-    Pool pool;
-    svn_error_t * error =
-      svn_client_unlock(const_cast<apr_array_header_t*> (targets.array (pool)),
-                        break_lock,
-                        *m_context,
-                        pool);
-    if(error != NULL)
-       throw ClientException (error);
-  }
-}
+#endif

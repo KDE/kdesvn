@@ -33,10 +33,10 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/dirent.hpp"
-#include "svncpp/exception.hpp"
-
+#include "client.hpp"
+#include "dirent.hpp"
+#include "exception.hpp"
+#include "svncpp_defines.hpp"
 
 static int
 compare_items_as_paths (const svn_sort__item_t *a, const svn_sort__item_t *b)
@@ -57,7 +57,7 @@ namespace svn
     apr_hash_t * hash;
     svn_error_t * error =
       svn_client_ls (&hash,
-                     pathOrUrl.utf8(),
+                     pathOrUrl.TOUTF8(),
                      revision,
                      recurse,
                      *m_context,

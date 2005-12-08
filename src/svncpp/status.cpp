@@ -24,7 +24,7 @@
  */
 
 // svncpp
-#include "svncpp/status.hpp"
+#include "status.hpp"
 
 //#include <assert.h>
 

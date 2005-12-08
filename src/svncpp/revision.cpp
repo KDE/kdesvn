@@ -24,9 +24,9 @@
  */
 
 // svncpp
-#include "svncpp/revision.hpp"
+#include "revision.hpp"
 #include "pool.hpp"
-
+#include "svncpp_defines.hpp"
 
 namespace svn
 {
@@ -66,7 +66,7 @@ namespace svn
     } else if (revstring=="BASE") {
         m_revision.kind = BASE;
     } else if (!revstring.isNull()) {
-        svn_opt_parse_revision(&m_revision,&endrev,revstring.utf8(),pool);
+        svn_opt_parse_revision(&m_revision,&endrev,revstring.TOUTF8(),pool);
     } else {
         m_revision.kind = UNDEFINED;
     }

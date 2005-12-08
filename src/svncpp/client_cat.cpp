@@ -31,11 +31,11 @@
 //#include "svn_io.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/status.hpp"
-
+#include "client.hpp"
+#include "exception.hpp"
+#include "pool.hpp"
+#include "status.hpp"
+#include "svncpp_defines.hpp"
 
 namespace svn
 {
@@ -50,7 +50,8 @@ namespace svn
     svn_stream_t * stream = svn_stream_from_stringbuf (stringbuf, pool);
 
     svn_error_t * error;
-    error = svn_client_cat2 (stream, path.path().utf8(),
+    error = svn_client_cat2 (stream,
+                             path.path().TOUTF8(),
                              peg_revision.revision (),
                              revision.revision (),
                              *m_context,
@@ -58,9 +59,13 @@ namespace svn
 
     if (error != 0)
       throw ClientException (error);
+#if QT_VERSION < 0x040000
     QByteArray res;
     /// @todo check if realy dup or just assign!
     res.duplicate(stringbuf->data,stringbuf->len);
+#else
+    QByteArray res( stringbuf->data, stringbuf->len );
+#endif
     return res;
   }
 
@@ -89,7 +94,8 @@ namespace svn
     if (dstPath.length () > 0)
     {
       apr_status_t status =
-        apr_file_open (&file, dstPath.path().utf8(),
+        apr_file_open (&file,
+                       dstPath.path().TOUTF8(),
                        APR_WRITE | APR_CREATE |
                        APR_TRUNCATE | APR_BINARY,
                        APR_OS_DEFAULT,
@@ -120,8 +126,8 @@ namespace svn
       svn_error_t * error =
         svn_io_open_unique_file (
           &file, &unique_name,
-          tempPath.path().utf8(), // path
-          ext.utf8 (), // suffix
+          tempPath.path().TOUTF8(), // path
+          ext.TOUTF8(), // suffix
           0, // dont delete on close
           pool);
 
@@ -153,7 +159,9 @@ namespace svn
     if (stream != 0)
     {
       svn_error_t * error = svn_client_cat (
-        stream, path.path().utf8(), revision.revision (),
+        stream,
+        path.path().TOUTF8(),
+        revision.revision (),
         *m_context, pool);
       if (error != 0)
         throw ClientException (error);

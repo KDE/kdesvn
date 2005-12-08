@@ -85,8 +85,11 @@ namespace svn
     /**
      * @return Path string as c string
      */
-    const QCString
-    cstr() const;
+#if QT_VERSION < 0x040000
+    const QCString cstr() const;
+#else
+    const QByteArray cstr() const;
+#endif
 
     /**
      * check whether a path is set. Right now

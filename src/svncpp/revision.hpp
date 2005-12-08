@@ -26,7 +26,13 @@
 #ifndef _SVNCPP_REVISION_HPP_
 #define _SVNCPP_REVISION_HPP_
 
-#include <qstring.h>
+// qt
+#include <qglobal.h>
+#if QT_VERSION < 0x040000
+    #include <qstring.h>
+#else
+    #include <QtCore>
+#endif
 
 // subversion api
 #include "svn_types.h"

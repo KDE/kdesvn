@@ -33,14 +33,15 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/dirent.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/status.hpp"
-#include "svncpp/targets.hpp"
-#include "svncpp/info_entry.hpp"
-#include "svncpp/url.hpp"
+#include "client.hpp"
+#include "dirent.hpp"
+#include "exception.hpp"
+#include "pool.hpp"
+#include "status.hpp"
+#include "targets.hpp"
+#include "info_entry.hpp"
+#include "url.hpp"
+#include "svncpp_defines.hpp"
 
 namespace svn
 {
@@ -132,7 +133,7 @@ namespace svn
     baton.pool = pool;
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.utf8(),         // path
+      path.TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -182,16 +183,21 @@ namespace svn
     url += "/";
     url += dirEntry.name();
 
-    e->name = apr_pstrdup(pool,dirEntry.name().utf8());
+
+    e->name = apr_pstrdup(pool,dirEntry.name().TOUTF8());
+    e->url = apr_pstrdup(pool,url.TOUTF8());
     e->revision = dirEntry.createdRev ();
-    e->url = apr_pstrdup(pool,url.utf8());
     e->kind = dirEntry.kind ();
     e->schedule = svn_wc_schedule_normal;
     e->text_time = dirEntry.time ();
     e->prop_time = dirEntry.time ();
     e->cmt_rev = dirEntry.createdRev ();
     e->cmt_date = dirEntry.time ();
+#if QT_VERSION < 0x040000
     e->cmt_author = dirEntry.lastAuthor ();
+#else
+    e->cmt_author = dirEntry.lastAuthor().toLocal8Bit();
+#endif
 
     svn_wc_status2_t * s =
       static_cast<svn_wc_status2_t *> (
@@ -219,16 +225,21 @@ namespace svn
     url += "/";
     url += infoEntry.Name();
 
-    e->name = apr_pstrdup(pool,infoEntry.Name().utf8());
+    e->name = apr_pstrdup(pool,infoEntry.Name().TOUTF8());
+    e->url = apr_pstrdup(pool,url.TOUTF8());
     e->revision = infoEntry.revision();
-    e->url = apr_pstrdup(pool,url.utf8());
     e->kind = infoEntry.kind ();
     e->schedule = svn_wc_schedule_normal;
     e->text_time = infoEntry.textTime ();
     e->prop_time = infoEntry.propTime ();
     e->cmt_rev = infoEntry.cmtRev ();
     e->cmt_date = infoEntry.cmtDate();
+
+#if QT_VERSION < 0x040000
     e->cmt_author = infoEntry.cmtAuthor();
+#else
+    e->cmt_author = infoEntry.cmtAuthor().toLocal8Bit();
+#endif
     svn_wc_status2_t * s =
       static_cast<svn_wc_status2_t *> (
         apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
@@ -240,10 +251,10 @@ namespace svn
         svn_lock_t*l =
             static_cast<svn_lock_t *> (
             apr_pcalloc (pool, sizeof (svn_lock_t)));
-        l->token = apr_pstrdup(pool,infoEntry.lockEntry().Token().utf8());
-        l->path = apr_pstrdup(pool,path.utf8());
-        l->owner = apr_pstrdup(pool,infoEntry.lockEntry().Owner().utf8());
-        l->comment = apr_pstrdup(pool,infoEntry.lockEntry().Comment().utf8());
+        l->token = apr_pstrdup(pool,infoEntry.lockEntry().Token().TOUTF8());
+        l->path = apr_pstrdup(pool,path.TOUTF8());
+        l->owner = apr_pstrdup(pool,infoEntry.lockEntry().Owner().TOUTF8());
+        l->comment = apr_pstrdup(pool,infoEntry.lockEntry().Comment().TOUTF8());
         l->creation_date = infoEntry.lockEntry().Date();
         l->expiration_date = infoEntry.lockEntry().Expiration();
     } else {
@@ -313,7 +324,7 @@ namespace svn
 
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.utf8(),         // path
+      path.TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -411,11 +422,13 @@ namespace svn
     baton.pool = pool;
     svn_opt_revision_t pegr;
     const char *truepath;
-    error = svn_opt_parse_path (&pegr, &truepath,path.utf8(), pool);
+    error = svn_opt_parse_path (&pegr, &truepath,
+                                 path.TOUTF8(),
+                                 pool);
     if (error != NULL)
       throw ClientException (error);
 
-    if ((svn_path_is_url (path.utf8())) && (pegr.kind == svn_opt_revision_unspecified))
+    if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified))
         pegr.kind = svn_opt_revision_head;
 
     error =

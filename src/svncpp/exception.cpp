@@ -39,7 +39,7 @@ namespace svn
     apr_status_t apr_err;
 
     Data (const char * msg)
-      : message (msg)
+      : message(QString::fromUtf8(msg))
     {
     }
 
@@ -81,6 +81,11 @@ namespace svn
 #endif
   }
 
+
+  ClientException::ClientException (const char*msg) throw ()
+    : Exception (msg)
+  {
+  }
 
   ClientException::ClientException (svn_error_t * error) throw ()
     : Exception ("")

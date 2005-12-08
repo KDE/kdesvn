@@ -42,8 +42,7 @@
 #include "info_entry.hpp"
 #include "url.hpp"
 #include "svncpp_defines.hpp"
-
-#include <kdebug.h>
+#include "context_listener.hpp"
 
 namespace svn
 {
@@ -215,18 +214,19 @@ namespace svn
     {
       const DirEntry & dirEntry = *it;
 
-      if (_det) {
+      if (_det && dirEntry.kind()==svn_node_file) {
         try {
             InfoEntries infoEntries = client->info(url+dirEntry.name(),false,revision,Revision(Revision::UNDEFINED));
-            kdDebug()<<"Push back " << url<<dirEntry.name()<<endl;
             entries.push_back(infoEntryToStatus (path, infoEntries[0]));
         } catch (ClientException) {
-            kdDebug()<<"Exception while info"<<endl;
             _det = false;
             entries.push_back(dirEntryToStatus (path, dirEntry));
         }
       } else {
         entries.push_back(dirEntryToStatus (path, dirEntry));
+      }
+      if (_det && context->getListener()->contextCancel()) {
+        throw ClientException("Canceld");
       }
     }
 

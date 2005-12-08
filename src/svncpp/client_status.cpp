@@ -43,6 +43,8 @@
 #include "url.hpp"
 #include "svncpp_defines.hpp"
 
+#include <kdebug.h>
+
 namespace svn
 {
   static svn_error_t *
@@ -174,97 +176,19 @@ namespace svn
   static Status
   dirEntryToStatus (const QString& path, const DirEntry & dirEntry)
   {
-    Pool pool;
-    svn_wc_entry_t * e =
-      static_cast<svn_wc_entry_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
-
     QString url = path;
     url += "/";
     url += dirEntry.name();
-
-
-    e->name = apr_pstrdup(pool,dirEntry.name().TOUTF8());
-    e->url = apr_pstrdup(pool,url.TOUTF8());
-    e->revision = dirEntry.createdRev ();
-    e->kind = dirEntry.kind ();
-    e->schedule = svn_wc_schedule_normal;
-    e->text_time = dirEntry.time ();
-    e->prop_time = dirEntry.time ();
-    e->cmt_rev = dirEntry.createdRev ();
-    e->cmt_date = dirEntry.time ();
-#if QT_VERSION < 0x040000
-    e->cmt_author = dirEntry.lastAuthor ();
-#else
-    e->cmt_author = dirEntry.lastAuthor().toLocal8Bit();
-#endif
-
-    svn_wc_status2_t * s =
-      static_cast<svn_wc_status2_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
-    s->entry = e;
-    s->text_status = svn_wc_status_normal;
-    s->prop_status = svn_wc_status_normal;
-    s->locked = 0;
-    s->switched = 0;
-    s->repos_text_status = svn_wc_status_normal;
-    s->repos_prop_status = svn_wc_status_normal;
-    s->repos_lock = 0;
-    return Status (url, s);
+    return Status (url, dirEntry);
   }
 
   static Status
   infoEntryToStatus(const QString&path,const InfoEntry&infoEntry)
   {
-    Pool pool;
-    svn_wc_entry_t * e =
-      static_cast<svn_wc_entry_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
-
     QString url = path;
     url += "/";
     url += infoEntry.Name();
-
-    e->name = apr_pstrdup(pool,infoEntry.Name().TOUTF8());
-    e->url = apr_pstrdup(pool,url.TOUTF8());
-    e->revision = infoEntry.revision();
-    e->kind = infoEntry.kind ();
-    e->schedule = svn_wc_schedule_normal;
-    e->text_time = infoEntry.textTime ();
-    e->prop_time = infoEntry.propTime ();
-    e->cmt_rev = infoEntry.cmtRev ();
-    e->cmt_date = infoEntry.cmtDate();
-
-#if QT_VERSION < 0x040000
-    e->cmt_author = infoEntry.cmtAuthor();
-#else
-    e->cmt_author = infoEntry.cmtAuthor().toLocal8Bit();
-#endif
-    svn_wc_status2_t * s =
-      static_cast<svn_wc_status2_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
-    s->entry = e;
-    s->text_status = svn_wc_status_normal;
-    s->prop_status = svn_wc_status_normal;
-    s->locked = infoEntry.lockEntry().Locked();
-    if (s->locked) {
-        svn_lock_t*l =
-            static_cast<svn_lock_t *> (
-            apr_pcalloc (pool, sizeof (svn_lock_t)));
-        l->token = apr_pstrdup(pool,infoEntry.lockEntry().Token().TOUTF8());
-        l->path = apr_pstrdup(pool,path.TOUTF8());
-        l->owner = apr_pstrdup(pool,infoEntry.lockEntry().Owner().TOUTF8());
-        l->comment = apr_pstrdup(pool,infoEntry.lockEntry().Comment().TOUTF8());
-        l->creation_date = infoEntry.lockEntry().Date();
-        l->expiration_date = infoEntry.lockEntry().Expiration();
-    } else {
-        s->repos_lock = 0;
-    }
-    s->switched = 0;
-    s->repos_text_status = svn_wc_status_normal;
-    s->repos_prop_status = svn_wc_status_normal;
-
-    return Status (url, s);
+    return Status (url,infoEntry);
   }
 
   static StatusEntries
@@ -275,18 +199,35 @@ namespace svn
                 const bool update,
                 const bool no_ignore,
                 Revision revision,
-                Context * context)
+                Context * context,
+                bool detailed_remote)
   {
     DirEntries dirEntries = client->list(path, revision, descend);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
+    QString url = path;
+    url+="/";
+    bool _det = detailed_remote;
+
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
     {
       const DirEntry & dirEntry = *it;
 
-      entries.push_back (dirEntryToStatus (path, dirEntry));
+      if (_det) {
+        try {
+            InfoEntries infoEntries = client->info(url+dirEntry.name(),false,revision,Revision(Revision::UNDEFINED));
+            kdDebug()<<"Push back " << url<<dirEntry.name()<<endl;
+            entries.push_back(infoEntryToStatus (path, infoEntries[0]));
+        } catch (ClientException) {
+            kdDebug()<<"Exception while info"<<endl;
+            _det = false;
+            entries.push_back(dirEntryToStatus (path, dirEntry));
+        }
+      } else {
+        entries.push_back(dirEntryToStatus (path, dirEntry));
+      }
     }
 
     return entries;
@@ -298,11 +239,12 @@ namespace svn
                   const bool get_all,
                   const bool update,
                   const bool no_ignore,
-                  Revision revision) throw (ClientException)
+                  Revision revision,
+                  bool detailed_remote) throw (ClientException)
   {
     if (Url::isValid (path))
       return remoteStatus (this, path, descend, get_all, update,
-                           no_ignore,revision,m_context);
+                           no_ignore,revision,m_context,detailed_remote);
     else
       return localStatus (path, descend, get_all, update,
                           no_ignore, m_context);

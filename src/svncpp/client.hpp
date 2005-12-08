@@ -136,6 +136,8 @@ namespace svn
      * @param update Query the repository for updates.
      * @param no_ignore Disregard default and svn:ignore property ignores.
      * @param revision list specific revision when browsing remote, on working copies parameter will ignored
+     * @param detailed_remote if on remote listing detailed item info should get if possible
+     *                        that may slow so should configureable in frontends!
      * @return vector with Status entries.
      */
     StatusEntries
@@ -144,7 +146,8 @@ namespace svn
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
-            Revision revision = svn::Revision::HEAD) throw (ClientException);
+            Revision revision = svn::Revision::HEAD,
+            bool detailed_remote = false) throw (ClientException);
 
     /**
      * Returns the status of a single file in the path.

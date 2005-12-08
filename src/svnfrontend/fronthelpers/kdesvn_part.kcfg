@@ -60,5 +60,9 @@
    <label>Maximum displayed logs when full log (0 for no limit)</label>
    <default>0</default>
   </entry>
+  <entry key="details_on_remote_listing" type="Bool">
+   <label>Get detailed infos when making a remote listing</label>
+   <default>false</default>
+  </entry>
  </group>
 </kcfg>

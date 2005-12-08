@@ -1358,12 +1358,13 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all,bool display_ignores,bool updates)
 {
+    bool disp_remote_details = Settings::details_on_remote_listing();
     QString ex;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Status / List"),i18n("Creating list / check status"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         //                                      rec all  up     noign
-        dlist = m_Data->m_Svnclient.status(what,rec,all,updates,display_ignores,where);
+        dlist = m_Data->m_Svnclient.status(what,rec,all,updates,display_ignores,where,disp_remote_details);
     } catch (svn::ClientException e) {
         //Message box!
         ex = QString::fromUtf8(e.message());

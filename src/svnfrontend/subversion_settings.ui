@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>339</width>
-            <height>229</height>
+            <width>345</width>
+            <height>247</height>
         </rect>
     </property>
     <property name="caption">
@@ -41,6 +41,22 @@ If it works slow (low connection and so on) you should turn of this feature.</st
             </property>
             <property name="toolTip" stdset="0">
                 <string>Select if kdesvn should check for updates when open a working copy</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_details_on_remote_listing</cstring>
+            </property>
+            <property name="text">
+                <string>Get file details while remote listing</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Whether getting details about items when making listing on repositories or not</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>&lt;p align="left"&gt;When checked, kdesvn get more detailed info about file items when making a listing to remote repositories. So you may see remot locks in overview.
+&lt;/p&gt;
+&lt;p align="left"&gt;&lt;i&gt;Be care: This may let listings REAL slow!&lt;/i&gt;&lt;/p&gt;</string>
             </property>
         </widget>
         <widget class="QCheckBox">

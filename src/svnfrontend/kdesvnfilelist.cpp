@@ -17,13 +17,16 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+
 #include "kdesvnfilelist.h"
+#include "kdesvn_part.h"
 #include "filelistviewitem.h"
 #include "importdir_logmsg.h"
 #include "copymoveview_impl.h"
 #include "mergedlg_impl.h"
 #include "svnactions.h"
 #include "svnfiletip.h"
+#include "keystatus.h"
 #include "checkoutinfo_impl.h"
 #include "fronthelpers/settings.h"
 #include "svncpp/revision.hpp"
@@ -35,6 +38,7 @@
 #include "helpers/runtempfile.h"
 
 #include <kapplication.h>
+#include <kiconloader.h>
 #include <kdirwatch.h>
 #include <klocale.h>
 #include <kactioncollection.h>
@@ -50,6 +54,7 @@
 #include <ktempfile.h>
 #include <kio/job.h>
 #include <krun.h>
+#include <kurldrag.h>
 
 #include <qvbox.h>
 #include <qpainter.h>
@@ -59,6 +64,8 @@
 #include <qlabel.h>
 #include <qtooltip.h>
 #include <qregexp.h>
+#include <qpopupmenu.h>
+#include <qcursor.h>
 
 class KdesvnFileListPrivate{
 public:
@@ -83,6 +90,14 @@ public:
     bool mdisp_overlay;
     /* returns true if the display must refreshed */
     bool reReadSettings();
+
+    bool intern_dropRunning;
+    KURL::List intern_drops;
+    QString intern_drop_target;
+    QDropEvent::Action intern_drop_action;
+    QPoint intern_drop_pos;
+    QTimer drop_timer;
+
 private:
     void readSettings();
 };
@@ -92,6 +107,7 @@ KdesvnFileListPrivate::KdesvnFileListPrivate()
 {
     m_remoteRevision = svn::Revision::HEAD;
     m_DirWatch = 0;
+    intern_dropRunning=false;
     readSettings();
 }
 
@@ -312,6 +328,20 @@ SvnItem*kdesvnfilelist::SelectedOrMain()
         return static_cast<FileListViewItem*>(firstChild());
     }
     return 0;
+}
+
+KURL::List kdesvnfilelist::selectedUrls()
+{
+    KURL::List lst;
+    FileListViewItemList*ls = allSelected();
+    FileListViewItemListIterator it(*ls);
+    FileListViewItem*cur;
+    while ( (cur=it.current())!=0) {
+        ++it;
+        lst.append(cur->fullName());
+        kdDebug()<<"Appending " <<cur->fullName()<<endl;
+    }
+    return lst;
 }
 
 QWidget*kdesvnfilelist::realWidget()
@@ -940,6 +970,7 @@ void kdesvnfilelist::refreshCurrentTree()
 {
     FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
     if (!item) return;
+    m_pList->m_DirWatch->stopScan();
     kapp->processEvents();
     setUpdatesEnabled(false);
     if (isWorkingCopy()) {
@@ -958,6 +989,7 @@ void kdesvnfilelist::refreshCurrentTree()
     }
     setUpdatesEnabled(true);
     viewport()->repaint();
+    m_pList->m_DirWatch->startScan();
 }
 
 void kdesvnfilelist::refreshCurrent(SvnItem*cur)
@@ -1116,6 +1148,51 @@ void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
     }
 }
 
+void kdesvnfilelist::startDrag()
+{
+    m_pList->m_fileTip->setItem(0);
+    QListViewItem * m_pressedItem = currentItem();
+    QPixmap pixmap2;
+    KURL::List urls = selectedUrls();
+    bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
+    if (( urls.count() > 1 ) || (pixmap0Invalid)) {
+      int iconSize = Settings::listview_icon_size();;
+      iconSize = iconSize ? iconSize : kdesvnPartFactory::instance()->iconLoader()->currentSize( KIcon::Small ); // Default = small
+      pixmap2 = DesktopIcon( "kmultiple", iconSize );
+      if ( pixmap2.isNull() ) {
+          kdWarning() << "Could not find multiple pixmap" << endl;
+      }
+    }
+    /* for putting it to outside we must convert it to KIO urls */
+    KURL::List::iterator it = urls.begin();
+    KURL uri = baseUri();
+    kdDebug()<<"Base protocol: " << uri.protocol()<<endl;
+    QString nProto;
+    if (uri.protocol()=="file" && !isWorkingCopy()) {
+        nProto="ksvn+file";
+    } else if (uri.protocol()=="http") {
+        nProto="ksvn+http";
+    } else if (uri.protocol()=="https") {
+        nProto="ksvn+https";
+    } else if (uri.protocol()=="svn") {
+        nProto="ksvn";
+    } else if (uri.protocol()=="svn+ssh") {
+        nProto="ksvn+ssh";
+    }
+    if (!nProto.isEmpty()) {
+        for (;it!=urls.end();++it) {
+            (*it).setProtocol(nProto);
+        }
+    }
+    KURLDrag *drag= new KURLDrag(urls,this);
+    if ( !pixmap2.isNull() )
+        drag->setPixmap( pixmap2 );
+    else if ( !pixmap0Invalid )
+        drag->setPixmap( *m_pressedItem->pixmap( 0 ) );
+
+    drag->drag();
+}
+
 void kdesvnfilelist::contentsDragLeaveEvent( QDragLeaveEvent * )
 {
     cleanHighLighter();
@@ -1142,7 +1219,7 @@ bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
                 QPoint vp = contentsToViewport( event->pos() );
                 item = isExecuteArea( vp ) ? itemAt( vp ) : 0L;
                 FileListViewItem*which=static_cast<FileListViewItem*>(item);
-                if (!isWorkingCopy()){
+                if (!isWorkingCopy() && event->source()!=this){
                     ok = (!item || (which->isDir()))&&urlList[0].isLocalFile()&&count==1;
                 } else {
                     ok = (which && (which->isDir()))/*&&urlList[0].isLocalFile()*/;
@@ -1232,29 +1309,33 @@ void kdesvnfilelist::slotMergeRevisions()
 void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
 {
     KURL::List urlList;
-    if (!KURLDrag::decode( event, urlList )||urlList.count()<1) {
+    QMap<QString,QString> metaData;
+    QDropEvent::Action action = event->action();
+
+    if (m_pList->intern_dropRunning||!KURLDrag::decode( event, urlList, metaData)||urlList.count()<1) {
         return;
+    }
+    QString tdir;
+    if (item) {
+        FileListViewItem*which = static_cast<FileListViewItem*>(item);
+        clearSelection();
+        which->setSelected(true);
+        kapp->processEvents();
+        tdir = which->fullName();
+    } else {
+        tdir = baseUri();
     }
 
     if (event->source()!=this) {
         kdDebug()<<"Dropped from outside" << endl;
         if (baseUri().length()==0) {
             openURL(urlList[0]);
+            event->acceptAction();
             return;
         }
         if (baseUri().length()>0 /*&& urlList[0].isLocalFile()*/) {
             QString path = urlList[0].path();
             QFileInfo fi(path);
-            QString tdir;
-            if (item) {
-                FileListViewItem*which = static_cast<FileListViewItem*>(item);
-                clearSelection();
-                which->setSelected(true);
-                kapp->processEvents();
-                tdir = which->fullName();
-            } else {
-                tdir = baseUri();
-            }
             if  (!isWorkingCopy()) {
                 slotImportIntoDir(urlList[0],tdir,fi.isDir());
             } else {
@@ -1265,10 +1346,65 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
                 job = KIO::copy(urlList,tdir);
                 connect( job, SIGNAL( result( KIO::Job * ) ),SLOT( slotCopyFinished( KIO::Job * ) ) );
                 dispDummy();
+                event->acceptAction();
                 return;
             }
         }
+    } else {
+        kdDebug()<<"Dropped from inside" << action << endl;
+        int root_x, root_y, win_x, win_y;
+        uint keybstate;
+        QDropEvent::Action action = QDropEvent::UserAction;
+        KeyState::keystate(&root_x,&root_y,&win_x,&win_y,&keybstate);
+        if (keybstate&Qt::ControlButton) {
+            kdDebug()<<"Control pressed" << endl;
+            action = QDropEvent::Copy;
+        } else if (keybstate&Qt::ShiftButton) {
+            kdDebug()<<"Shift pressed" << endl;
+            action = QDropEvent::Copy;
+        }
+        /* converting urls to interal style */
+        QString nProto;
+        if (isWorkingCopy()) {
+            nProto="";
+        } else {
+            nProto = svn::Url::transformProtokoll(urlList[0].protocol());
+        }
+        KURL::List::Iterator it = urlList.begin();
+        for (;it!=urlList.end();++it) {
+            (*it).setProtocol(nProto);
+        }
+        event->acceptAction();
+        m_pList->intern_dropRunning=true;
+        m_pList->intern_drops = urlList;
+        m_pList->intern_drop_target=tdir;
+        m_pList->intern_drop_action=action;
+        m_pList->intern_drop_pos=QCursor::pos();
+        QTimer::singleShot(0,this,SLOT(slotInternalDrop()));
+
+//        internalDrop(action,urlList,tdir);
     }
+}
+
+void kdesvnfilelist::slotInternalDrop()
+{
+    QDropEvent::Action action = m_pList->intern_drop_action;
+    if (action==QDropEvent::UserAction) {
+         QPopupMenu popup;
+         popup.insertItem(SmallIconSet("goto"), i18n( "Move Here" ) + "\t" + KKey::modFlagLabel( KKey::SHIFT ), 2 );
+         popup.insertItem(SmallIconSet("editcopy"), i18n( "Copy Here" ) + "\t" + KKey::modFlagLabel( KKey::CTRL ), 1 );
+         popup.insertSeparator();
+         popup.insertItem(SmallIconSet("cancel"), i18n( "Cancel" ) + "\t" + KKey( Qt::Key_Escape ).toString(), 5);
+         int result = popup.exec(m_pList->intern_drop_pos);
+         switch (result) {
+            case 1 : action = QDropEvent::Copy; break;
+            case 2 : action = QDropEvent::Move; break;
+            default: return;
+         }
+    }
+    bool move = action==QDropEvent::Move;
+    m_SvnWrapper->slotCopyMove(move,m_pList->intern_drops,m_pList->intern_drop_target,false);
+    m_pList->intern_dropRunning=false;
 }
 
 /*!
@@ -1354,6 +1490,8 @@ void kdesvnfilelist::slotDelete()
     }
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
+    m_pList->m_DirWatch->stopScan();
+    m_pList->m_fileTip->setItem(0);
 
     QValueList<svn::Path> items;
     QStringList displist;
@@ -1380,6 +1518,7 @@ void kdesvnfilelist::slotDelete()
         m_SvnWrapper->makeDelete(items);
     }
     refreshCurrentTree();
+    m_pList->m_DirWatch->startScan();
 }
 
 /*!

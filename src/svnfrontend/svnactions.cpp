@@ -1307,6 +1307,27 @@ void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool
     EMIT_REFRESH;
 }
 
+void SvnActions::slotCopyMove(bool move,const KURL::List&Old,const QString&New,bool force)
+{
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        KURL::List::ConstIterator it = Old.begin();
+        for (;it!=Old.end();++it) {
+            if (move) {
+                m_Data->m_Svnclient.move(svn::Path((*it).url()),svn::Revision::HEAD,
+                    svn::Path(New),force);
+            } else {
+                m_Data->m_Svnclient.copy(svn::Path((*it).url()),svn::Revision::HEAD,
+                     svn::Path(New));
+            }
+        }
+    } catch (svn::ClientException e) {
+        emit clientException(QString::fromUtf8(e.message()));
+        return;
+    }
+    EMIT_REFRESH;
+}
 
 /*!
     \fn SvnActions::makeLock(const QStringList&)

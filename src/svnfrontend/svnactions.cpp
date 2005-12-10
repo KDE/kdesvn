@@ -1326,7 +1326,6 @@ void SvnActions::slotCopyMove(bool move,const KURL::List&Old,const QString&New,b
         emit clientException(QString::fromUtf8(e.message()));
         return;
     }
-    EMIT_REFRESH;
 }
 
 /*!

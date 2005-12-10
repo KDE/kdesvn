@@ -98,6 +98,19 @@ public:
     QPoint intern_drop_pos;
     QTimer drop_timer;
 
+    void stopScan()
+    {
+        if (m_DirWatch) {
+            m_DirWatch->stopScan();
+        }
+    }
+    void startScan()
+    {
+        if (m_DirWatch) {
+            m_DirWatch->startScan();
+        }
+    }
+
 private:
     void readSettings();
 };
@@ -439,8 +452,10 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         connect(m_pList->m_DirWatch,SIGNAL(created(const QString&)),this,SLOT(slotDirItemCreated(const QString&)));
         connect(m_pList->m_DirWatch,SIGNAL(deleted(const QString&)),this,SLOT(slotDirItemDeleted(const QString&)));
         /* seems that recursive does not work */
-        m_pList->m_DirWatch->addDir(baseUri()+"/",false,false);
-        m_pList->m_DirWatch->startScan(true);
+        if (m_pList->m_DirWatch) {
+            m_pList->m_DirWatch->addDir(baseUri()+"/",false,false);
+            m_pList->m_DirWatch->startScan(true);
+        }
     }
     bool result = checkDirs(baseUri(),0);
     if (result && isWorkingCopy()) {
@@ -579,7 +594,11 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
         if (k) {
             k->removeChilds();
             m_Dirsread[k->fullName()]=false;
-            slotItemClicked(k);
+            if (checkDirs(k->fullName(),k)) {
+                m_Dirsread[k->fullName()]=true;
+            } else {
+                kdDebug()<<"Checkdirs failed"<<endl;
+            }
             return;
         }
         QListViewItem*temp;
@@ -595,6 +614,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
         stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
     } catch (svn::ClientException e) {
         m_LastException = QString::fromUtf8(e.message());
+        kdDebug()<<"Catched on singlestatus"<< endl;
         emit sigLogMessage(m_LastException);
         return;
     }
@@ -970,7 +990,8 @@ void kdesvnfilelist::refreshCurrentTree()
 {
     FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
     if (!item) return;
-    m_pList->m_DirWatch->stopScan();
+    m_pList->stopScan();
+    m_pList->m_fileTip->setItem(0);
     kapp->processEvents();
     setUpdatesEnabled(false);
     if (isWorkingCopy()) {
@@ -989,7 +1010,7 @@ void kdesvnfilelist::refreshCurrentTree()
     }
     setUpdatesEnabled(true);
     viewport()->repaint();
-    m_pList->m_DirWatch->startScan();
+    m_pList->startScan();
 }
 
 void kdesvnfilelist::refreshCurrent(SvnItem*cur)
@@ -1339,9 +1360,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             if  (!isWorkingCopy()) {
                 slotImportIntoDir(urlList[0],tdir,fi.isDir());
             } else {
-                if (m_pList->m_DirWatch) {
-                    m_pList->m_DirWatch->stopScan();
-                }
+                m_pList->stopScan();
                 KIO::Job * job = 0L;
                 job = KIO::copy(urlList,tdir);
                 connect( job, SIGNAL( result( KIO::Job * ) ),SLOT( slotCopyFinished( KIO::Job * ) ) );
@@ -1405,6 +1424,7 @@ void kdesvnfilelist::slotInternalDrop()
     bool move = action==QDropEvent::Move;
     m_SvnWrapper->slotCopyMove(move,m_pList->intern_drops,m_pList->intern_drop_target,false);
     m_pList->intern_dropRunning=false;
+    refreshCurrentTree();
 }
 
 /*!
@@ -1490,7 +1510,7 @@ void kdesvnfilelist::slotDelete()
     }
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
-    m_pList->m_DirWatch->stopScan();
+    m_pList->stopScan();
     m_pList->m_fileTip->setItem(0);
 
     QValueList<svn::Path> items;
@@ -1518,7 +1538,7 @@ void kdesvnfilelist::slotDelete()
         m_SvnWrapper->makeDelete(items);
     }
     refreshCurrentTree();
-    m_pList->m_DirWatch->startScan();
+    m_pList->startScan();
 }
 
 /*!
@@ -1882,7 +1902,7 @@ void kdesvnfilelist::slotInfo()
  */
 void kdesvnfilelist::slotDirItemCreated(const QString&what)
 {
-    m_pList->m_DirWatch->stopScan();
+    m_pList->stopScan();
     m_pList->m_fileTip->setItem(0);
     FileListViewItem*item = findEntryItem(what);
     if (item) {
@@ -1891,7 +1911,7 @@ void kdesvnfilelist::slotDirItemCreated(const QString&what)
         m_pList->m_DirWatch->removeDir(what);
         m_pList->m_DirWatch->removeFile(what);
     }
-    m_pList->m_DirWatch->startScan();
+    m_pList->startScan();
 }
 
 
@@ -1908,7 +1928,7 @@ void kdesvnfilelist::updateParents(FileListViewItem*item)
  */
 void kdesvnfilelist::slotDirItemDirty(const QString&what)
 {
-    m_pList->m_DirWatch->stopScan();
+    m_pList->stopScan();
     m_pList->m_fileTip->setItem(0);
     FileListViewItem*item = findEntryItem(what);
     if (item) {
@@ -1927,7 +1947,7 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
         m_pList->m_DirWatch->removeFile(what);
         m_SvnWrapper->deleteFromModifiedCache(what);
     }
-    m_pList->m_DirWatch->startScan();
+    m_pList->startScan();
 }
 
 /*!
@@ -1935,7 +1955,7 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
  */
 void kdesvnfilelist::slotDirItemDeleted(const QString&what)
 {
-    m_pList->m_DirWatch->stopScan();
+    m_pList->stopScan();
     m_pList->m_fileTip->setItem(0);
     FileListViewItem*item = findEntryItem(what);
     if (item) {
@@ -1951,7 +1971,7 @@ void kdesvnfilelist::slotDirItemDeleted(const QString&what)
         m_pList->m_DirWatch->removeFile(what);
         m_SvnWrapper->deleteFromModifiedCache(what);
     }
-    m_pList->m_DirWatch->startScan();
+    m_pList->startScan();
 }
 
 FileListViewItem* kdesvnfilelist::findEntryItem(const QString&what,FileListViewItem*startAt)

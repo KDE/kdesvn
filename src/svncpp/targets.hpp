@@ -90,7 +90,7 @@ namespace svn
      * Constructor. Convert stringlist into target list.
      * @param targets
      */
-    Targets::Targets(const QStringList&targets);
+    Targets(const QStringList&targets);
 
     /**
      * Copy Constructor

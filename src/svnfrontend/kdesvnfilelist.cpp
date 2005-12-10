@@ -1257,7 +1257,6 @@ void kdesvnfilelist::contentsDropEvent(QDropEvent * event)
     bool ok = validDropEvent(event,item);
     cleanHighLighter();
     if (ok) {
-        event->accept();
         dropped(event,item);
     } else {
         event->ignore();
@@ -1418,7 +1417,11 @@ void kdesvnfilelist::slotInternalDrop()
          switch (result) {
             case 1 : action = QDropEvent::Copy; break;
             case 2 : action = QDropEvent::Move; break;
-            default: return;
+            default:
+            {
+                m_pList->intern_dropRunning=false;
+                return;
+            }
          }
     }
     bool move = action==QDropEvent::Move;

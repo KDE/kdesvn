@@ -184,10 +184,7 @@ namespace svn
   static Status
   infoEntryToStatus(const QString&path,const InfoEntry&infoEntry)
   {
-    QString url = path;
-    url += "/";
-    url += infoEntry.Name();
-    return Status (url,infoEntry);
+    return Status(infoEntry.url(),infoEntry);
   }
 
   static StatusEntries

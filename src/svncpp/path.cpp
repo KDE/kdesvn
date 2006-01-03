@@ -73,19 +73,11 @@ namespace svn
     return m_path;
   }
 
-#if QT_VERSION < 0x040000
-  const QCString
+  const QByteArray
   Path::cstr() const
   {
     return m_path.TOUTF8();
   }
-#else
-  const QByteArray
-  Path::cstr() const
-{
-    return m_path.toUtf8();
-}
-#endif
 
   Path&
   Path::operator=(const Path & path)
@@ -119,11 +111,7 @@ namespace svn
           svn_stringbuf_create (m_path.TOUTF8(), pool);
 
       svn_path_add_component (pathStringbuf,
-#if QT_VERSION < 0x040000
-                              component);
-#else
-                              component.toLocal8Bit());
-#endif
+                              component.TOUTF8());
 
       m_path = QString::fromUtf8(pathStringbuf->data);
     }

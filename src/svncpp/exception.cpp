@@ -26,7 +26,7 @@
 #include <qstring.h>
 
 // svncpp
-#include "svncpp/exception.hpp"
+#include "exception.hpp"
 
 
 namespace svn
@@ -39,7 +39,12 @@ namespace svn
     apr_status_t apr_err;
 
     Data (const char * msg)
-      : message (msg)
+      : message(QString::fromUtf8(msg))
+    {
+    }
+
+    Data (const QString& msg)
+      : message(msg)
     {
     }
 
@@ -51,6 +56,11 @@ namespace svn
   };
 
   Exception::Exception (const char * message) throw ()
+  {
+    m = new Data (message);
+  }
+
+  Exception::Exception (const QString& message) throw ()
   {
     m = new Data (message);
   }
@@ -71,12 +81,17 @@ namespace svn
     return m->apr_err;
   }
 
-  const char *
-  Exception::message () const
+  const QString&
+  Exception::msg () const
   {
-    return m->message.ascii();
+    return m->message;
   }
 
+
+  ClientException::ClientException (const char*msg) throw ()
+    : Exception (msg)
+  {
+  }
 
   ClientException::ClientException (svn_error_t * error) throw ()
     : Exception ("")
@@ -122,7 +137,7 @@ namespace svn
   }
 
   ClientException::ClientException (const ClientException & src) throw ()
-    : Exception (src.message ())
+    : Exception (src.msg())
   {
   }
 }

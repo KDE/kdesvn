@@ -29,9 +29,11 @@
 #include "svn_wc.h"
 
 // svncpp
-#include "svncpp/entry.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/lock_entry.hpp"
+#include "entry.hpp"
+#include "pool.hpp"
+#include "lock_entry.hpp"
+#include "dirent.hpp"
+#include "info_entry.hpp"
 
 namespace svn
 {
@@ -42,6 +44,8 @@ namespace svn
    * @see svn_wc.hpp
    * @see svn_wc_status_t
    */
+  class Status_private;
+
   class Status
   {
   public:
@@ -65,6 +69,15 @@ namespace svn
      */
     Status (const char*path, svn_wc_status2_t * status = NULL);
     /**
+     * converting constructor
+     */
+    Status(const QString&path,const DirEntry&src);
+    /**
+     * converting constructor
+     */
+    Status(const QString&path,const InfoEntry&src);
+
+    /**
      * destructor
      */
     virtual ~Status ();
@@ -73,145 +86,76 @@ namespace svn
      * @return path of status entry
      */
     const QString&
-    path () const
-    {
-      return m_Path;
-    }
+    path () const;
 
     /**
      * @return entry for this path
      * @retval entry.isValid () = false item is not versioned
      */
-    const Entry
-    entry () const
-    {
-      return Entry (m_status->entry);
-    }
-
+    const Entry&
+    entry () const;
     /**
      * @return file status property enum of the "textual" component.
      */
     const svn_wc_status_kind
-    textStatus () const
-    {
-      return m_status->text_status;
-    }
+    textStatus () const;
 
     /**
      * @return file status property enum of the "property" component.
      */
     const svn_wc_status_kind
-    propStatus () const
-    {
-      return m_status->prop_status;
-    }
+    propStatus () const;
 
     /**
      * @retval TRUE if under version control
      */
     const bool
-    isVersioned () const
-    {
-      return m_isVersioned;
-    }
+    isVersioned () const;
 
     /**
      * @retval TRUE if under version control and not ignored
      */
     const bool
-    isRealVersioned()const
-    {
-      return m_hasReal;
-    }
+    isRealVersioned()const;
+
     /**
      * @retval TRUE if locked
      */
     const bool
-    isLocked () const
-    {
-      return m_status->locked != 0;
-    }
+    isLocked () const;
 
     /**
      * @retval TRUE if copied
      */
     const bool
-    isCopied () const
-    {
-      return m_status->copied != 0;
-    }
+    isCopied () const;
 
     /**
      * @retval TRUE if switched
      */
     const bool
-    isSwitched () const
-    {
-      return m_status->switched != 0;
-    }
-
+    isSwitched () const;
     /**
      * @return the entry's text status in the repository
      */
     const svn_wc_status_kind
-    reposTextStatus () const
-    {
-      return m_status->repos_text_status;
-    }
-
+    reposTextStatus () const;
     /**
      * @return the entry's prop status in the repository
      */
     const svn_wc_status_kind
-    reposPropStatus () const
-    {
-      return m_status->repos_prop_status;
-    }
+    reposPropStatus () const;
 
     const LockEntry&
-    lockEntry () const
-    {
-        return m_Lock;
-    }
-    /**
-     * @return svn_wc_status2_t value
-     * @since subversion 1.2
-     */
-    operator svn_wc_status2_t * () const
-    {
-      return m_status;
-    }
+    lockEntry () const;
+
     /**
      * assignment operator
      */
     Status &
     operator = (const Status &);
   private:
-    svn_wc_status2_t * m_status;
-    QString m_Path;
-    Pool m_pool;
-    bool m_isVersioned;
-    bool m_hasReal;
-    LockEntry m_Lock;
-
-    /**
-     * Initialize structures
-     *
-     * @param path
-     * @param status if NULL isVersioned will be false
-     * @deprecated
-     */
-    void
-    init (const QString&path, const svn_wc_status_t * status);
-
-    /**
-     * Initialize structures
-     *
-     * @param path
-     * @param status if NULL isVersioned will be false
-     */
-    void
-    init (const QString&path, const svn_wc_status2_t * status);
+    Status_private*m_Data;
   };
 }
 

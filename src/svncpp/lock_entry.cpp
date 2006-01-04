@@ -24,8 +24,8 @@
  */
 
 // svncpp
-#include "svncpp/lock_entry.hpp"
-#include "svncpp/pool.hpp"
+#include "lock_entry.hpp"
+#include "pool.hpp"
 
 // subversion api
 #include "svn_time.h"

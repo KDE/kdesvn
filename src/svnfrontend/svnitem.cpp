@@ -162,6 +162,13 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         } else {
             p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
         }
+        if (isLocked()) {
+            QPixmap p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
+            QImage i1; i1 = p;
+            QImage i2; i2 = p2;
+            KIconEffect::overlay(i1,i2);
+            p = i1;
+        }
     } else {
         _local = true;
         p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);

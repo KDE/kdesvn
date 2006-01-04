@@ -38,20 +38,26 @@
 
 
 // qt
-#include <qstring.h>
-#include <qpair.h>
-#include <qvaluelist.h>
-#include <qmap.h>
+#include <qglobal.h>
+
+#if QT_VERSION < 0x040000
+    #include <qstring.h>
+    #include <qpair.h>
+    #include <qvaluelist.h>
+    #include <qmap.h>
+#else
+    #include <QtCore>
+#endif
 
 // svncpp
-#include "svncpp/context.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/path.hpp"
-#include "svncpp/entry.hpp"
-#include "svncpp/revision.hpp"
-#include "svncpp/log_entry.hpp"
-#include "svncpp/info_entry.hpp"
-#include "svncpp/annotate_line.hpp"
+#include "context.hpp"
+#include "exception.hpp"
+#include "path.hpp"
+#include "entry.hpp"
+#include "revision.hpp"
+#include "log_entry.hpp"
+#include "info_entry.hpp"
+#include "annotate_line.hpp"
 
 
 namespace svn
@@ -62,19 +68,32 @@ namespace svn
   class Targets;
   class DirEntry;
 
+#if QT_VERSION < 0x040000
   typedef QValueList<LogEntry> LogEntries;
   typedef QValueList<InfoEntry> InfoEntries;
   typedef QValueList<Status> StatusEntries;
   typedef QValueList<DirEntry> DirEntries;
   typedef QValueList<AnnotateLine> AnnotatedFile;
   typedef QValueList<Revision> Revisions;
+#else
+  typedef QList<LogEntry> LogEntries;
+  typedef QList<InfoEntry> InfoEntries;
+  typedef QList<Status> StatusEntries;
+  typedef QList<DirEntry> DirEntries;
+  typedef QList<AnnotateLine> AnnotatedFile;
+  typedef QList<Revision> Revisions;
+#endif
 
   // map of property names to values
   typedef QMap<QString,QString> PropertiesMap;
   // pair of path, PropertiesMap
   typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
   // vector of path, Properties pairs
+#if QT_VERSION < 0x040000
   typedef QValueList<PathPropertiesMapEntry> PathPropertiesMapList;
+#else
+  typedef QList<PathPropertiesMapEntry> PathPropertiesMapList;
+#endif
 
   /**
    * Subversion client API.
@@ -117,6 +136,8 @@ namespace svn
      * @param update Query the repository for updates.
      * @param no_ignore Disregard default and svn:ignore property ignores.
      * @param revision list specific revision when browsing remote, on working copies parameter will ignored
+     * @param detailed_remote if on remote listing detailed item info should get if possible
+     *                        that may slow so should configureable in frontends!
      * @return vector with Status entries.
      */
     StatusEntries
@@ -125,7 +146,8 @@ namespace svn
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
-            Revision revision = svn::Revision::HEAD) throw (ClientException);
+            Revision revision = svn::Revision::HEAD,
+            bool detailed_remote = false) throw (ClientException);
 
     /**
      * Returns the status of a single file in the path.

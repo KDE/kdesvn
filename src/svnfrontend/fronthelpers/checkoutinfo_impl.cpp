@@ -25,6 +25,7 @@
 #include <klineedit.h>
 #include <qcheckbox.h>
 #include <klocale.h>
+#include <kdebug.h>
 
 CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent, const char *name)
     :CheckoutInfo(parent, name)
@@ -46,7 +47,11 @@ QString CheckoutInfo_impl::reposURL()
 {
     KURL uri(m_UrlEdit->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
-    uri.setProtocol(proto);
+    if (proto=="file"&&!m_UrlEdit->url().startsWith("ksvn+file:")) {
+        uri.setProtocol("");
+    } else {
+        uri.setProtocol(proto);
+    }
     return uri.url();
 }
 
@@ -74,8 +79,13 @@ bool CheckoutInfo_impl::forceIt()
 void CheckoutInfo_impl::setStartUrl(const QString&what)
 {
     KURL uri(what);
+    kdDebug()<<"What: "<<what << " URL: "<<uri<<endl;
     if (uri.protocol()=="file") {
-        uri.setProtocol("ksvn+file");
+        if (what.startsWith("file:")) {
+            uri.setProtocol("ksvn+file");
+        } else {
+            uri.setProtocol("");
+        }
     } else if (uri.protocol()=="http") {
         uri.setProtocol("ksvn+http");
     } else if (uri.protocol()=="https") {

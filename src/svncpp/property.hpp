@@ -38,12 +38,20 @@
 #endif
 
 // qt
+#if QT_VERSION < 0x040000
+
 #include <qstring.h>
 #include <qvaluelist.h>
 
+#else
+
+#include <QtCore>
+
+#endif
+
 // svncpp
-#include "svncpp/context.hpp"
-#include "svncpp/path.hpp"
+#include "context.hpp"
+#include "path.hpp"
 
 
 namespace svn
@@ -75,7 +83,11 @@ namespace svn
      * get the list of properties for the path.
      * throws an exception if the path isnt versioned.
      */
+#if QT_VERSION < 0x040000
     const QValueList<PropertyEntry> &
+#else
+    const QList<PropertyEntry> &
+#endif
     entries () const
     {
       return m_entries;
@@ -98,7 +110,11 @@ namespace svn
   private:
     Context * m_context;
     Path m_path;
+#if QT_VERSION < 0x040000
     QValueList<PropertyEntry> m_entries;
+#else
+    QList<PropertyEntry> m_entries;
+#endif
 
     QString getValue (const QString& name);
     void list ();

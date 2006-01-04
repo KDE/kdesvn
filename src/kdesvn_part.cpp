@@ -101,7 +101,7 @@ bool kdesvnPart::openFile()
 
 bool kdesvnPart::openURL(const KURL&url)
 {
-    
+
     KURL _url = helpers::KTranslateUrl::translateSystemUrl(url);
 
     _url.setProtocol(svn::Url::transformProtokoll(_url.protocol()));
@@ -184,11 +184,11 @@ void kdesvnPart::setupActions()
 
     KAction * t = KStdAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
     t->setText(i18n("&Configure %1...").arg("Kdesvn"));
-    (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
     if (QString(kapp->instanceName())!=QString("kdesvn")) {
+        (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
         (void)new KAction(i18n("Kdesvn &Handbook"), "help", 0, this, SLOT(appHelpActivated()), actionCollection(), "help_kdesvn");
+        (void)new KAction(i18n("Send Bugreport for kdesvn"), 0, 0, this, SLOT(reportBug()), actionCollection(), "report_bug");
     }
-    (void)new KAction(i18n("Send Bugreport for kdesvn"), 0, 0, this, SLOT(reportBug()), actionCollection(), "report_bug");
     actionCollection()->setHighlightingEnabled(true);
 }
 

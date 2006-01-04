@@ -26,8 +26,19 @@
 #ifndef _SVNCPP_LOG_ENTRY_H_
 #define _SVNCPP_LOG_ENTRY_H_
 
+//Qt
+#include <qglobal.h>
+
+#if QT_VERSION < 0x040000
+
 #include <qstring.h>
 #include <qvaluelist.h>
+
+#else
+
+#include <QtCore>
+
+#endif
 
 // apr
 #include "apr_time.h"
@@ -70,7 +81,11 @@ namespace svn
     svn_revnum_t revision;
     QString author;
     QString message;
+#if QT_VERSION < 0x040000
     QValueList<LogChangePathEntry> changedPaths;
+#else
+    QList<LogChangePathEntry> changedPaths;
+#endif
     apr_time_t date;
   };
 }

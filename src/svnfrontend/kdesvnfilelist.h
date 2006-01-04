@@ -29,6 +29,7 @@
 #include <kurl.h>
 #include <qmap.h>
 #include <qptrlist.h>
+#include <qevent.h>
 
 class KAction;
 class KActionMenu;
@@ -111,8 +112,12 @@ protected:
     virtual void contentsDragMoveEvent( QDragMoveEvent* );
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
+    virtual void startDrag();
+
     void dispDummy();
     void reinitItems(FileListViewItem*_item = 0);
+    KURL::List selectedUrls();
+
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
     virtual void contentsWheelEvent( QWheelEvent * e );
     virtual void leaveEvent(QEvent*e);
@@ -192,6 +197,7 @@ protected slots:
 protected slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
+    virtual void slotInternalDrop();
 };
 
 #endif

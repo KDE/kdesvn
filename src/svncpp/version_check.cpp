@@ -1,4 +1,4 @@
-#include "svncpp/version_check.hpp"
+#include "version_check.hpp"
 
 #include <svn_version.h>
 #include <svn_client.h>
@@ -31,7 +31,11 @@ namespace svn {
                 QString("%1.%2.%3.%4").arg(svn_client_version()->major).arg(svn_client_version()->minor)
                     .arg(svn_client_version()->patch).arg(svn_client_version()->tag);
         }
+#if QT_VERSION < 0x040000
         return curr_version_string.ascii();
+#else
+        return curr_version_string.toAscii();
+#endif
     }
     int Version::version_major()
     {

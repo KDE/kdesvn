@@ -26,7 +26,12 @@
 #ifndef _SVNCPP_TARGETS_HPP_
 #define _SVNCPP_TARGETS_HPP_
 
+#include <qglobal.h>
+#if QT_VERSION < 0x040000
 #include <qvaluelist.h>
+#else
+#include <QtCore>
+#endif
 
 // apr api
 #include "apr_tables.h"
@@ -39,6 +44,12 @@ namespace svn
   class Path;
   class Pool;
 
+#if QT_VERSION < 0x040000
+  typedef QValueList<Path> Pathes;
+#else
+  typedef QList<Path> Pathes;
+#endif
+
   /**
    * Encapsulation for Subversion target arrays handling
    */
@@ -50,7 +61,8 @@ namespace svn
      *
      * @param targets vector of paths
      */
-    Targets (const QValueList<Path> & targets);
+
+    Targets (const Pathes & targets);
 
     /**
      * Constructor from an APR array containing
@@ -78,7 +90,7 @@ namespace svn
      * Constructor. Convert stringlist into target list.
      * @param targets
      */
-    Targets::Targets(const QStringList&targets);
+    Targets(const QStringList&targets);
 
     /**
      * Copy Constructor
@@ -106,7 +118,7 @@ namespace svn
      *
      * @return vector of paths
      */
-    const QValueList<Path> &
+    const Pathes &
     targets() const;
 
     /**
@@ -119,7 +131,7 @@ namespace svn
      *
      * @return vector with targets
      */
-    operator const QValueList<Path> & () const
+    operator const Pathes & () const
     {
       return m_targets;
     }
@@ -137,7 +149,7 @@ namespace svn
 
 
   private:
-    QValueList<Path> m_targets;
+    Pathes m_targets;
   };
 }
 

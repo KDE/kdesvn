@@ -29,13 +29,16 @@
 #include "svn_wc.h"
 
 // svncpp
-#include "svncpp/pool.hpp"
-#include "svncpp/lock_entry.hpp"
+#include "pool.hpp"
+#include "lock_entry.hpp"
+#include "dirent.hpp"
+#include "info_entry.hpp"
 
 #include <qstring.h>
 
 namespace svn
 {
+    class Entry_private;
   /**
    * C++ API for Subversion.
    * This class wraps around @a svn_wc_entry_t.
@@ -61,6 +64,15 @@ namespace svn
     Entry (const Entry & src);
 
     /**
+     * converting constructr
+     */
+    Entry (const QString&url,const DirEntry&src);
+    /**
+     * converting constructr
+     */
+    Entry (const QString&url,const InfoEntry&src);
+
+    /**
      * destructor
      */
     virtual ~Entry ();
@@ -73,221 +85,133 @@ namespace svn
      * @retval true valid entry
      * @retval false invalid or unversioned entry
      */
-    bool isValid () const
-    {
-      return m_valid;
-    }
-
+    bool isValid () const;
     /**
      * @return entry's name
      */
-    const QString
-    name () const
-    {
-      return QString::fromUtf8(m_entry->name);
-    }
-
+    const QString&
+    name () const;
     /**
      * @return base revision
      */
     const svn_revnum_t
-    revision () const
-    {
-      return m_entry->revision;
-    }
-
+    revision () const;
     /**
      * @return url in repository
      */
-    const QString
-    url () const
-    {
-      return QString::fromUtf8(m_entry->url);
-    }
+    const QString&
+    url () const;
 
     /**
      * @return canonical repository url
      */
-    const QString
-    repos () const
-    {
-      return QString::fromUtf8(m_entry->repos);
-    }
-
+    const QString&
+    repos () const;
     /**
      * @return repository uuid
      */
-    const QString
-    uuid () const
-    {
-      return QString::fromUtf8(m_entry->uuid);
-    }
-
+    const QString&
+    uuid () const;
     /**
      * @return node kind (file, dir, ...)
      */
     const svn_node_kind_t
-    kind () const
-    {
-      return m_entry->kind;
-    }
-
+    kind () const;
     /**
      * @return scheduling (add, delete, replace)
      */
     const svn_wc_schedule_t
-    schedule () const
-    {
-      return m_entry->schedule;
-    }
-
+    schedule () const;
     /**
      * @return TRUE if copied
      */
     const bool
-    isCopied () const
-    {
-      return m_entry->copied != 0;
-    }
-
+    isCopied () const;
     /**
      * @return true if deleted
      */
     const bool
-    isDeleted () const
-    {
-      return m_entry->deleted != 0;
-    }
-
+    isDeleted () const;
     /**
      * @return true if deleted
      */
     const bool
-    isAbsent () const
-    {
-      return m_entry->absent != 0;
-    }
-
+    isAbsent () const;
     /**
      * @return copyfrom location
      */
-    const QString
-    copyfromUrl () const
-    {
-      return QString::fromUtf8(m_entry->copyfrom_url);
-    }
-
+    const QString&
+    copyfromUrl () const;
     /**
      * @return copyfrom revision
      */
     const svn_revnum_t
-    copyfromRev () const
-    {
-      return m_entry->copyfrom_rev;
-    }
-
+    copyfromRev () const;
     /**
      * @return old version of conflicted file
      */
-    const QString
-    conflictOld () const
-    {
-      return QString::fromUtf8(m_entry->conflict_old);
-    }
-
+    const QString&
+    conflictOld () const;
     /**
      * @return new version of conflicted file
      */
-    const QString
-    conflictNew () const
-    {
-      return QString::fromUtf8(m_entry->conflict_new);
-    }
-
+    const QString&
+    conflictNew () const;
     /**
      * @return working version of conflicted file
      */
-    const QString
-    conflictWrk () const
-    {
-      return QString::fromUtf8(m_entry->conflict_wrk);
-    }
-
+    const QString&
+    conflictWrk () const;
     /**
      * @return property reject file
      */
-    const QString
-    prejfile () const
-    {
-      return QString::fromUtf8(m_entry->prejfile);
-    }
-
+    const QString&
+    prejfile () const;
     /**
      * @return last up-to-date time for text contents
      * @retval 0 no information available
      */
     const apr_time_t
-    textTime () const
-    {
-      return m_entry->text_time;
-    }
-
+    textTime () const;
     /**
      * @return last up-to-date time for properties
      * @retval 0 no information available
      */
     const apr_time_t
-    propTime () const
-    {
-      return m_entry->prop_time;
-    }
+    propTime()const;
 
     /**
      * @return base64 encoded checksum
      * @retval NULL for backwards compatibility
      */
-    const QString
-    checksum () const
-    {
-      return QString::fromUtf8(m_entry->checksum);
-    }
+    const QString&
+    checksum () const;
 
     /**
      * @return last revision this was changed
      */
     const svn_revnum_t
-    cmtRev () const
-    {
-      return m_entry->cmt_rev;
-    }
+    cmtRev () const;
 
     /**
      * @return last date this was changed
      */
     const apr_time_t
-    cmtDate () const
-    {
-      return m_entry->cmt_date;
-    }
+    cmtDate () const;
 
     /**
      * @return last commit author of this file
      */
-    const QString
-    cmtAuthor () const
-    {
-      return QString::fromUtf8(m_entry->cmt_author);
-    }
+    const QString&
+    cmtAuthor () const;
 
     /**
      * @return lock for that entry
      * @since subversion 1.2
      */
     const LockEntry&
-    lockEntry()const
-    {
-        return m_Lock;
-    }
+    lockEntry()const;
+
     /**
      * assignment operator
      */
@@ -295,16 +219,7 @@ namespace svn
     operator = (const Entry &);
 
   private:
-    svn_wc_entry_t * m_entry;
-    Pool m_pool;
-    bool m_valid;
-    LockEntry m_Lock;
-
-    /**
-     * initializes the members
-     */
-    void
-    init (const svn_wc_entry_t * src);
+    Entry_private*m_Data;
  };
 
 }

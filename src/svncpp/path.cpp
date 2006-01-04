@@ -30,9 +30,10 @@
 #include "apr_file_io.h"
 
 // svncpp
-#include "svncpp/path.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/url.hpp"
+#include "path.hpp"
+#include "pool.hpp"
+#include "url.hpp"
+#include "svncpp_defines.hpp"
 
 
 namespace svn
@@ -57,13 +58,10 @@ namespace svn
   {
     Pool pool;
 
-    if (path == 0)
+    if (path.isEmpty()) {
       m_path = "";
-    else
-    {
-      const char * int_path =
-        svn_path_internal_style (path.utf8(), pool.pool () );
-
+    } else {
+      const char * int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
       m_path = QString::fromUtf8(int_path);
     }
   }
@@ -74,10 +72,10 @@ namespace svn
     return m_path;
   }
 
-  const QCString
+  const QByteArray
   Path::cstr() const
   {
-    return m_path.utf8();
+    return m_path.TOUTF8();
   }
 
   Path&
@@ -103,18 +101,16 @@ namespace svn
     if (Url::isValid (m_path))
     {
       const char * newPath =
-        svn_path_url_add_component (m_path.utf8(),
-                                    component.utf8(),
-                                    pool);
+          svn_path_url_add_component (m_path.TOUTF8(), component.TOUTF8(), pool);
       m_path = QString::fromUtf8(newPath);
     }
     else
     {
       svn_stringbuf_t * pathStringbuf =
-        svn_stringbuf_create (m_path.utf8(), pool);
+          svn_stringbuf_create (m_path.TOUTF8(), pool);
 
       svn_path_add_component (pathStringbuf,
-                              component);
+                              component.TOUTF8());
 
       m_path = QString::fromUtf8(pathStringbuf->data);
     }
@@ -136,8 +132,7 @@ namespace svn
     const char * cdirpath;
     const char * cbasename;
 
-    svn_path_split (m_path.utf8(), &cdirpath, &cbasename, pool);
-
+    svn_path_split (m_path.TOUTF8(), &cdirpath, &cbasename, pool);
     dirpath = QString::fromUtf8(cdirpath);
     basename = QString::fromUtf8(cbasename);
   }
@@ -152,7 +147,11 @@ namespace svn
     split (dir, basename);
 
     // next search for last .
+#if QT_VERSION < 0x040000
     int pos = basename.findRev(".");
+#else
+    int pos = basename.lastIndexOf( "." );
+#endif
 
     if (pos == -1)
     {
@@ -292,7 +291,7 @@ end:
   {
     Pool pool;
 
-    return QString::fromUtf8(svn_path_local_style (m_path.utf8(), pool));
+    return QString::fromUtf8(svn_path_local_style (m_path.TOUTF8(), pool));
   }
 
 }

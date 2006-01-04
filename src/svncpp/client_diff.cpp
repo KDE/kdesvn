@@ -31,11 +31,11 @@
 #include "svn_path.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/status.hpp"
-
+#include "client.hpp"
+#include "exception.hpp"
+#include "pool.hpp"
+#include "status.hpp"
+#include "svncpp_defines.hpp"
 
 namespace svn
 {
@@ -131,7 +131,8 @@ namespace svn
 
     // svn_client_diff needs a temporary file to write diff output to
     error = svn_io_open_unique_file (&outfile, &outfileName,
-                                     tmpPath.path().utf8(), ".tmp",
+                                     tmpPath.path().TOUTF8(),
+                                     ".tmp",
                                      FALSE, pool);
 
     if (error != NULL)
@@ -142,7 +143,7 @@ namespace svn
 
     // and another one to write errors to
     error = svn_io_open_unique_file (&errfile, &errfileName,
-                                     tmpPath.cstr(), ".tmp",
+                                     tmpPath.path().TOUTF8(), ".error.tmp",
                                      FALSE, pool);
 
     if (error != NULL)
@@ -191,8 +192,12 @@ namespace svn
     }
 
     diffCleanup (outfile, outfileName, errfile, errfileName, pool);
+#if QT_VERSION < 0x040000
     QCString res;
     res.duplicate(stringbuf->data,stringbuf->len);
+#else
+    QByteArray res( stringbuf->data, stringbuf->len );
+#endif
     res.resize(stringbuf->len+1);
     QString nstring = QString::fromUtf8(res);
     return nstring;

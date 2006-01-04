@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -28,7 +28,7 @@
 
 // subversion api
 #include "svn_client.h"
-
+#include <qstring.h>
 
 namespace svn
 {
@@ -43,13 +43,14 @@ namespace svn
      * Constructor.  Assigns the exception reason.
      */
     Exception (const char * message) throw ();
+    Exception (const QString&message) throw();
 
     ~Exception () throw ();
 
     /**
      * @return the exception message.
      */
-    const char * message () const;
+    const QString& msg() const;
 
     /**
      * @return the outermost error code.
@@ -65,7 +66,7 @@ namespace svn
     Exception (const Exception &) throw ();
 
     Exception () throw ();
-    
+
     Exception & operator = (const Exception &);
   };
 
@@ -86,7 +87,12 @@ namespace svn
      */
     ClientException (apr_status_t status) throw ();
 
-    /** 
+   /**
+    * Constructor
+    */
+    ClientException (const char*msg) throw ();
+
+    /**
      * Copy constructor
      */
     ClientException (const ClientException & src) throw ();

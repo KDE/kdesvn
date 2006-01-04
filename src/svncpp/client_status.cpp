@@ -33,14 +33,16 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "svncpp/client.hpp"
-#include "svncpp/dirent.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/pool.hpp"
-#include "svncpp/status.hpp"
-#include "svncpp/targets.hpp"
-#include "svncpp/info_entry.hpp"
-#include "svncpp/url.hpp"
+#include "client.hpp"
+#include "dirent.hpp"
+#include "exception.hpp"
+#include "pool.hpp"
+#include "status.hpp"
+#include "targets.hpp"
+#include "info_entry.hpp"
+#include "url.hpp"
+#include "svncpp_defines.hpp"
+#include "context_listener.hpp"
 
 namespace svn
 {
@@ -132,7 +134,7 @@ namespace svn
     baton.pool = pool;
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.utf8(),         // path
+      path.TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -173,87 +175,16 @@ namespace svn
   static Status
   dirEntryToStatus (const QString& path, const DirEntry & dirEntry)
   {
-    Pool pool;
-    svn_wc_entry_t * e =
-      static_cast<svn_wc_entry_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
-
     QString url = path;
     url += "/";
     url += dirEntry.name();
-
-    e->name = apr_pstrdup(pool,dirEntry.name().utf8());
-    e->revision = dirEntry.createdRev ();
-    e->url = apr_pstrdup(pool,url.utf8());
-    e->kind = dirEntry.kind ();
-    e->schedule = svn_wc_schedule_normal;
-    e->text_time = dirEntry.time ();
-    e->prop_time = dirEntry.time ();
-    e->cmt_rev = dirEntry.createdRev ();
-    e->cmt_date = dirEntry.time ();
-    e->cmt_author = dirEntry.lastAuthor ();
-
-    svn_wc_status2_t * s =
-      static_cast<svn_wc_status2_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
-    s->entry = e;
-    s->text_status = svn_wc_status_normal;
-    s->prop_status = svn_wc_status_normal;
-    s->locked = 0;
-    s->switched = 0;
-    s->repos_text_status = svn_wc_status_normal;
-    s->repos_prop_status = svn_wc_status_normal;
-    s->repos_lock = 0;
-    return Status (url, s);
+    return Status (url, dirEntry);
   }
 
   static Status
   infoEntryToStatus(const QString&path,const InfoEntry&infoEntry)
   {
-    Pool pool;
-    svn_wc_entry_t * e =
-      static_cast<svn_wc_entry_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_entry_t)));
-
-    QString url = path;
-    url += "/";
-    url += infoEntry.Name();
-
-    e->name = apr_pstrdup(pool,infoEntry.Name().utf8());
-    e->revision = infoEntry.revision();
-    e->url = apr_pstrdup(pool,url.utf8());
-    e->kind = infoEntry.kind ();
-    e->schedule = svn_wc_schedule_normal;
-    e->text_time = infoEntry.textTime ();
-    e->prop_time = infoEntry.propTime ();
-    e->cmt_rev = infoEntry.cmtRev ();
-    e->cmt_date = infoEntry.cmtDate();
-    e->cmt_author = infoEntry.cmtAuthor();
-    svn_wc_status2_t * s =
-      static_cast<svn_wc_status2_t *> (
-        apr_pcalloc (pool, sizeof (svn_wc_status2_t)));
-    s->entry = e;
-    s->text_status = svn_wc_status_normal;
-    s->prop_status = svn_wc_status_normal;
-    s->locked = infoEntry.lockEntry().Locked();
-    if (s->locked) {
-        svn_lock_t*l =
-            static_cast<svn_lock_t *> (
-            apr_pcalloc (pool, sizeof (svn_lock_t)));
-        l->token = apr_pstrdup(pool,infoEntry.lockEntry().Token().utf8());
-        l->path = apr_pstrdup(pool,path.utf8());
-        l->owner = apr_pstrdup(pool,infoEntry.lockEntry().Owner().utf8());
-        l->comment = apr_pstrdup(pool,infoEntry.lockEntry().Comment().utf8());
-        l->creation_date = infoEntry.lockEntry().Date();
-        l->expiration_date = infoEntry.lockEntry().Expiration();
-    } else {
-        s->repos_lock = 0;
-    }
-    s->switched = 0;
-    s->repos_text_status = svn_wc_status_normal;
-    s->repos_prop_status = svn_wc_status_normal;
-
-    return Status (url, s);
+    return Status(infoEntry.url(),infoEntry);
   }
 
   static StatusEntries
@@ -264,18 +195,36 @@ namespace svn
                 const bool update,
                 const bool no_ignore,
                 Revision revision,
-                Context * context)
+                Context * context,
+                bool detailed_remote)
   {
     DirEntries dirEntries = client->list(path, revision, descend);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
+    QString url = path;
+    url+="/";
+    bool _det = detailed_remote;
+
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
     {
       const DirEntry & dirEntry = *it;
 
-      entries.push_back (dirEntryToStatus (path, dirEntry));
+      if (_det && dirEntry.kind()==svn_node_file) {
+        try {
+            InfoEntries infoEntries = client->info(url+dirEntry.name(),false,revision,Revision(Revision::UNDEFINED));
+            entries.push_back(infoEntryToStatus (path, infoEntries[0]));
+        } catch (ClientException) {
+            _det = false;
+            entries.push_back(dirEntryToStatus (path, dirEntry));
+        }
+      } else {
+        entries.push_back(dirEntryToStatus (path, dirEntry));
+      }
+      if (_det && context->getListener()->contextCancel()) {
+        throw ClientException("Canceld");
+      }
     }
 
     return entries;
@@ -287,11 +236,12 @@ namespace svn
                   const bool get_all,
                   const bool update,
                   const bool no_ignore,
-                  Revision revision) throw (ClientException)
+                  Revision revision,
+                  bool detailed_remote) throw (ClientException)
   {
     if (Url::isValid (path))
       return remoteStatus (this, path, descend, get_all, update,
-                           no_ignore,revision,m_context);
+                           no_ignore,revision,m_context,detailed_remote);
     else
       return localStatus (path, descend, get_all, update,
                           no_ignore, m_context);
@@ -313,7 +263,7 @@ namespace svn
 
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.utf8(),         // path
+      path.TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -411,11 +361,13 @@ namespace svn
     baton.pool = pool;
     svn_opt_revision_t pegr;
     const char *truepath;
-    error = svn_opt_parse_path (&pegr, &truepath,path.utf8(), pool);
+    error = svn_opt_parse_path (&pegr, &truepath,
+                                 path.TOUTF8(),
+                                 pool);
     if (error != NULL)
       throw ClientException (error);
 
-    if ((svn_path_is_url (path.utf8())) && (pegr.kind == svn_opt_revision_unspecified))
+    if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified))
         pegr.kind = svn_opt_revision_head;
 
     error =

@@ -271,7 +271,7 @@ bool kdesvnd_dcop::isRepository(const KURL&url)
         try {
             m_Listener->m_Svnclient.status("file://"+cleanUrl(url),false,false,false,false,where);
         } catch (svn::ClientException e) {
-            kdDebug()<< e.message()<<endl;
+            kdDebug()<< e.msg()<<endl;
             return false;
         }
         return true;
@@ -293,7 +293,7 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     try {
         e = m_Listener->m_Svnclient.info(cleanUrl(url),false,rev,peg);
     } catch (svn::ClientException e) {
-        kdDebug()<< e.message()<<endl;
+        kdDebug()<< e.msg()<<endl;
         return false;
     }
     base=e[0].url();

@@ -58,10 +58,9 @@ namespace svn
   {
     Pool pool;
 
-    if (path == 0)
+    if (path.isEmpty()) {
       m_path = "";
-    else
-    {
+    } else {
       const char * int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
       m_path = QString::fromUtf8(int_path);
     }

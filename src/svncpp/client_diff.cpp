@@ -143,7 +143,7 @@ namespace svn
 
     // and another one to write errors to
     error = svn_io_open_unique_file (&errfile, &errfileName,
-                                     tmpPath.cstr(), ".tmp",
+                                     tmpPath.path().TOUTF8(), ".error.tmp",
                                      FALSE, pool);
 
     if (error != NULL)

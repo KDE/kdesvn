@@ -229,8 +229,7 @@ void PropertiesDlg::initItem()
     try {
         propList = m_Client->proplist(what,m_Rev);
     } catch (svn::ClientException e) {
-        ex = QString::fromUtf8(e.message());
-        emit clientException(ex);
+        emit clientException(e.msg());
         return;
     }
     svn::PathPropertiesMapList::const_iterator lit;

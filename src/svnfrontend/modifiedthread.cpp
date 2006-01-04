@@ -46,7 +46,7 @@ void CheckModifiedThread::run()
         //                                  rec  all   up        noign
         m_Cache = m_Svnclient.status(m_what,true,false,m_updates,false,where);
     } catch (svn::ClientException e) {
-        m_SvnContext->contextNotify(QString::fromUtf8(e.message()));
+        m_SvnContext->contextNotify(e.msg());
     }
     KApplication*k = KApplication::kApplication();
     if (k) {

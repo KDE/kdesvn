@@ -43,6 +43,11 @@ namespace svn
     {
     }
 
+    Data (const QString& msg)
+      : message(msg)
+    {
+    }
+
 
     Data (const Data& other)
       : message(other.message), apr_err(other.apr_err)
@@ -51,6 +56,11 @@ namespace svn
   };
 
   Exception::Exception (const char * message) throw ()
+  {
+    m = new Data (message);
+  }
+
+  Exception::Exception (const QString& message) throw ()
   {
     m = new Data (message);
   }
@@ -71,14 +81,10 @@ namespace svn
     return m->apr_err;
   }
 
-  const char *
-  Exception::message () const
+  const QString&
+  Exception::msg () const
   {
-#if QT_VERSION < 0x040000
-    return m->message.ascii();
-#else
-    return m->message.toAscii();
-#endif
+    return m->message;
   }
 
 
@@ -131,7 +137,7 @@ namespace svn
   }
 
   ClientException::ClientException (const ClientException & src) throw ()
-    : Exception (src.message ())
+    : Exception (src.msg())
   {
   }
 }

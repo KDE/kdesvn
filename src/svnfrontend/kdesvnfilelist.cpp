@@ -613,7 +613,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
     try {
         stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
     } catch (svn::ClientException e) {
-        m_LastException = QString::fromUtf8(e.message());
+        m_LastException = e.msg();
         kdDebug()<<"Catched on singlestatus"<< endl;
         emit sigLogMessage(m_LastException);
         return;

@@ -175,7 +175,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     try {
         dlist = m_pData->m_Svnclient.list(makeSvnUrl(url),rev,false);
     } catch (svn::ClientException e) {
-        QString ex = QString::fromUtf8(e.message());
+        QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error(KIO::ERR_CANNOT_ENTER_DIRECTORY,"");
         return;
@@ -212,7 +212,7 @@ void kio_svnProtocol::stat(const KURL& url)
     try {
         e = m_pData->m_Svnclient.info(s,false,rev,peg);
     } catch  (svn::ClientException e) {
-        QString ex = QString::fromUtf8(e.message());
+        QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,ex);
         return;
@@ -246,7 +246,7 @@ void kio_svnProtocol::get(const KURL& url)
     try {
         content = m_pData->m_Svnclient.cat(makeSvnUrl(url),rev);
     } catch (svn::ClientException e) {
-        QString ex = QString::fromUtf8(e.message());
+        QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
         finished();
@@ -278,8 +278,7 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
         try {
             m_pData->m_Svnclient.mkdir(p,msg);
         }catch (svn::ClientException e) {
-            msg = QString::fromUtf8(e.message());
-            error( KIO::ERR_SLAVE_DEFINED,msg);
+            error( KIO::ERR_SLAVE_DEFINED,e.msg());
         }
     }
     kdDebug()<<"kio_svn::get finished " << url << endl;
@@ -298,8 +297,7 @@ void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
     try {
         m_pData->m_Svnclient.move(makeSvnUrl(src),rev,makeSvnUrl(target),force);
     }catch (svn::ClientException e) {
-        msg = QString::fromUtf8(e.message());
-        error( KIO::ERR_SLAVE_DEFINED,msg);
+        error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     kdDebug()<<"kio_svn::rename finished" <<  endl;
     finished();
@@ -317,8 +315,7 @@ void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool o
     try {
         m_pData->m_Svnclient.copy(makeSvnUrl(src),rev,makeSvnUrl(dest));
     }catch (svn::ClientException e) {
-        msg = QString::fromUtf8(e.message());
-        error( KIO::ERR_SLAVE_DEFINED,msg);
+        error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     kdDebug()<<"kio_svn::copy finished" <<  endl;
     finished();
@@ -336,7 +333,7 @@ void kio_svnProtocol::del(const KURL&src,bool isfile)
     try {
         m_pData->m_Svnclient.remove(target,false);
     } catch (svn::ClientException e) {
-        QString ex = QString::fromUtf8(e.message());
+        QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,ex);
     }
@@ -469,7 +466,7 @@ void kio_svnProtocol::special(const QByteArray& data)
             svnlog( revstart, revkindstart, revend, revkindend, targets );
             break;
         }
-        case SVN_REVERT: 
+        case SVN_REVERT:
         {
             KURL::List wclist;
             while ( !stream.atEnd() ) {
@@ -542,7 +539,7 @@ void kio_svnProtocol::update(const KURL&url,int revnumber,const QString&revkind)
         // always update externals, too. (last parameter)
         m_pData->m_Svnclient.update(pathes, where,true,false);
     } catch (svn::ClientException e) {
-        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -554,9 +551,7 @@ void kio_svnProtocol::status(const KURL&wc,bool cR,bool rec)
         //                                            rec all  up     noign
         dlist = m_pData->m_Svnclient.status(wc.path(),rec,false,cR,false,where);
     } catch (svn::ClientException e) {
-        //Message box!
-        QString ex = QString::fromUtf8(e.message());
-        error(KIO::ERR_SLAVE_DEFINED,ex);
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     kdDebug()<<"Status got " << dlist.count() << " entries." << endl;
@@ -611,7 +606,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
     try {
         nnum = m_pData->m_Svnclient.commit(svn::Targets(targets),msg,true);
     } catch (svn::ClientException e) {
-        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     for (unsigned j=0;j<url.count();++j) {
         QString userstring = i18n ( "Nothing to commit." );
@@ -638,7 +633,7 @@ void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, c
     try {
         m_pData->m_Svnclient.checkout(_src.url(),_target,where,false);
     } catch (svn::ClientException e) {
-        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -653,7 +648,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
         try {
             logs = m_pData->m_Svnclient.log(makeSvnUrl(urls[j]),start,end,true,true,0);
         } catch (svn::ClientException e) {
-            error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+            error(KIO::ERR_SLAVE_DEFINED,e.msg());
             break;
         }
         if (!logs) {
@@ -701,7 +696,7 @@ void kio_svnProtocol::revert(const KURL::List&l)
     try {
         m_pData->m_Svnclient.revert(target,false);
     } catch (svn::ClientException e) {
-        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -712,7 +707,7 @@ void kio_svnProtocol::wc_switch(const KURL&wc,const KURL&target,bool rec,int rev
     try {
         m_pData->m_Svnclient.doSwitch(wc_path,makeSvnUrl(target.url()),where,rec);
     } catch (svn::ClientException e) {
-        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -730,7 +725,7 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
         ex = m_pData->m_Svnclient.diff(svn::Path(tdir.name()),
         u1,u2,r1, r2,rec,false,false);
     } catch (svn::ClientException e) {
-        error(KIO::ERR_SLAVE_DEFINED,QString::fromUtf8(e.message()));
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     QTextIStream stream(&ex);

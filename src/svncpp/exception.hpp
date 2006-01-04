@@ -28,7 +28,7 @@
 
 // subversion api
 #include "svn_client.h"
-
+#include <qstring.h>
 
 namespace svn
 {
@@ -43,13 +43,14 @@ namespace svn
      * Constructor.  Assigns the exception reason.
      */
     Exception (const char * message) throw ();
+    Exception (const QString&message) throw();
 
     ~Exception () throw ();
 
     /**
      * @return the exception message.
      */
-    const char * message () const;
+    const QString& msg() const;
 
     /**
      * @return the outermost error code.

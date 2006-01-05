@@ -33,6 +33,7 @@
 #include <kconfig.h>
 
 #include <qfileinfo.h>
+#include <qpainter.h>
 
 const int FileListViewItem::COL_ICON = 0;
 const int FileListViewItem::COL_NAME = 0;
@@ -118,7 +119,8 @@ void FileListViewItem::makePixmap()
 {
     int size = Settings::listview_icon_size();
     bool overlay = Settings::display_overlays();
-    setPixmap(COL_ICON,getPixmap(size,overlay));
+    QPixmap pm = getPixmap(size,overlay);
+    setPixmap(COL_ICON,pm);
 }
 
 bool FileListViewItem::isParent(QListViewItem*which)
@@ -191,4 +193,46 @@ void FileListViewItem::updateStatus(const svn::Status&s)
     FileListViewItem*temp = static_cast<FileListViewItem*>(parent());
     if (!temp) return QString::null;
     return temp->fullName();
+}
+
+void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
+{
+    bool colors = Settings::colored_state();
+    if (!colors || !m_overlaycolor||m_bgColor==NONE) {
+        KListViewItem::paintCell(p,cg,column,width,alignment);
+        return;
+    }
+    QColorGroup _cg = cg;
+    QColor _bgColor;
+    switch(m_bgColor) {
+        case UPDATES:
+            _bgColor = Settings::color_need_update();
+            break;
+        case  LOCKED:
+            _bgColor = Settings::color_locked_item();
+            break;
+        case  ADDED:
+            _bgColor = Settings::color_item_added();
+            break;
+        case  DELETED:
+            _bgColor = Settings::color_item_deleted();
+            break;
+        default:
+        case  MODIFIED:
+            _bgColor = Settings::color_changed_item();
+            break;
+    }
+    const QPixmap *pm = listView()->viewport()->backgroundPixmap();
+    if (pm && !pm->isNull()) {
+        _cg.setBrush(QColorGroup::Base, QBrush(_bgColor, *pm));
+        QPoint o = p->brushOrigin();
+        p->setBrushOrigin( o.x()-listView()->contentsX(), o.y()-listView()->contentsY() );
+    } else {
+        if (listView()->viewport()->backgroundMode()==Qt::FixedColor) {
+            _cg.setColor(QColorGroup::Background,_bgColor);
+        } else {
+            _cg.setColor(QColorGroup::Base,_bgColor);
+        }
+    }
+    QListViewItem::paintCell(p, _cg, column, width, alignment);
 }

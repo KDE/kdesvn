@@ -60,9 +60,30 @@
    <label>Maximum displayed logs when full log (0 for no limit)</label>
    <default>0</default>
   </entry>
-  <entry key="details_on_remote_listing" type="Bool">
+  <entry key="details_on_remote_listing" type="Bool" >
    <label>Get detailed infos when making a remote listing</label>
    <default>false</default>
+  </entry>
+ </group>
+ <group name="display" >
+  <entry key="colored_state" type="Bool" >
+   <label>Display different then normal states colored</label>
+   <default>false</default>
+  </entry>
+  <entry key="color_need_update" type="Color" >
+   <default>#00FF00</default>
+  </entry>
+  <entry key="color_changed_item" type="String" >
+   <default>#FFFF00</default>
+  </entry>
+  <entry key="color_locked_item" type="String" >
+   <default>#FF0000</default>
+  </entry>
+  <entry key="color_item_added" type="String" >
+   <default>#0088FF</default>
+  </entry>
+  <entry key="color_item_deleted" type="String" >
+   <default>#FF8000</default>
   </entry>
  </group>
 </kcfg>

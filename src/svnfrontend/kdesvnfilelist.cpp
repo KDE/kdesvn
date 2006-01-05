@@ -2058,6 +2058,8 @@ void kdesvnfilelist::slotSettingsChanged()
         QToolTip::isGloballyEnabled(),true,6);
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();
+    } else {
+        viewport()->repaint();
     }
 }
 

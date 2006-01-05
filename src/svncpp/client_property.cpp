@@ -25,13 +25,13 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+// svncpp
+#include "client_impl.hpp"
 
 // subversion api
 #include "svn_client.h"
 //#include "svn_utf.h"
 
-// svncpp
-#include "client.hpp"
 #include "path.hpp"
 #include "exception.hpp"
 #include "pool.hpp"
@@ -53,7 +53,7 @@ namespace svn
    * @return PropertiesList
    */
   PathPropertiesMapList
-  Client::proplist(const Path &path,
+  Client_impl::proplist(const Path &path,
                    const Revision &revision,
                    bool recurse)
   {
@@ -109,7 +109,7 @@ namespace svn
    */
 
   PathPropertiesMapList
-  Client::propget(const QString& propName,
+  Client_impl::propget(const QString& propName,
                   const Path &path,
                   const Revision &revision,
                   bool recurse)
@@ -162,7 +162,7 @@ namespace svn
    * @return PropertiesList
    */
   void
-  Client::propset(const QString& propName,
+  Client_impl::propset(const QString& propName,
                   const QString& propValue,
                   const Path &path,
                   const Revision &revision,
@@ -195,7 +195,7 @@ namespace svn
    * @return PropertiesList
    */
   void
-  Client::propdel(const QString& propName,
+  Client_impl::propdel(const QString& propName,
                   const Path &path,
                   const Revision &revision,
                   bool recurse)
@@ -227,7 +227,7 @@ namespace svn
    * @return PropertiesList
    */
   QPair<svn_revnum_t,PropertiesMap>
-  Client::revproplist(const Path &path,
+  Client_impl::revproplist(const Path &path,
                       const Revision &revision)
   {
     Pool pool;
@@ -273,7 +273,7 @@ namespace svn
    */
 
   QPair<svn_revnum_t,QString>
-  Client::revpropget(const QString& propName,
+  Client_impl::revpropget(const QString& propName,
                      const Path &path,
                      const Revision &revision)
   {
@@ -315,7 +315,7 @@ namespace svn
    * @return PropertiesList
    */
   svn_revnum_t
-  Client::revpropset(const QString& propName,
+  Client_impl::revpropset(const QString& propName,
                      const QString& propValue,
                      const Path &path,
                      const Revision &revision,
@@ -358,7 +358,7 @@ namespace svn
    * @return PropertiesList
    */
   svn_revnum_t
-  Client::revpropdel(const QString& propName,
+  Client_impl::revpropdel(const QString& propName,
                   const Path &path,
                   const Revision &revision,
                   bool force)

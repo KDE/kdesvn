@@ -25,12 +25,12 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+// svncpp
+#include "client_impl.hpp"
 
 // subversion api
 #include "svn_client.h"
 
-// svncpp
-#include "client.hpp"
 #include "exception.hpp"
 #include "pool.hpp"
 #include "targets.hpp"
@@ -39,7 +39,7 @@
 namespace svn
 {
   svn_revnum_t
-  Client::checkout (const QString& url,
+  Client_impl::checkout (const QString& url,
                     const Path & destPath,
                     const Revision & revision,
                     bool recurse) throw (ClientException)
@@ -63,7 +63,7 @@ namespace svn
   }
 
   void
-  Client::remove (const Path & path,
+  Client_impl::remove (const Path & path,
                   bool force) throw (ClientException)
   {
     Pool pool;
@@ -81,7 +81,7 @@ namespace svn
   }
 
   void
-  Client::remove (const Targets & targets,
+  Client_impl::remove (const Targets & targets,
                   bool force) throw (ClientException)
   {
     Pool pool;
@@ -98,7 +98,7 @@ namespace svn
   }
 
   void
-  Client::revert (const Targets & targets,
+  Client_impl::revert (const Targets & targets,
                   bool recurse) throw (ClientException)
   {
     Pool pool;
@@ -114,7 +114,7 @@ namespace svn
   }
 
   void
-  Client::add (const Path & path,
+  Client_impl::add (const Path & path,
                bool recurse) throw (ClientException)
   {
     Pool pool;
@@ -130,7 +130,7 @@ namespace svn
   }
 
   Revisions
-  Client::update (const Targets & path,
+  Client_impl::update (const Targets & path,
                   const Revision & revision,
                   bool recurse,
                   bool ignore_externals) throw (ClientException)
@@ -157,7 +157,7 @@ namespace svn
     return resulting;
   }
 
-  svn_revnum_t Client::update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException)
+  svn_revnum_t Client_impl::update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException)
   {
     Pool pool;
     svn_revnum_t revnum = 0;
@@ -174,7 +174,7 @@ namespace svn
   }
 
   svn_revnum_t
-  Client::commit (const Targets & targets, const QString& message,
+  Client_impl::commit (const Targets & targets, const QString& message,
                   bool recurse) throw (ClientException)
   {
     Pool pool;
@@ -198,7 +198,7 @@ namespace svn
   }
 
   void
-  Client::copy (const Path & srcPath,
+  Client_impl::copy (const Path & srcPath,
                 const Revision & srcRevision,
                 const Path & destPath) throw (ClientException)
   {
@@ -217,7 +217,7 @@ namespace svn
   }
 
   void
-  Client::move (const Path & srcPath,
+  Client_impl::move (const Path & srcPath,
                 const Revision & srcRevision,
                 const Path & destPath,
                 bool force) throw (ClientException)
@@ -238,7 +238,7 @@ namespace svn
   }
 
   void
-  Client::mkdir (const Path & path,
+  Client_impl::mkdir (const Path & path,
                  const QString& message) throw (ClientException)
   {
     Pool pool;
@@ -258,7 +258,7 @@ namespace svn
   }
 
   void
-  Client::mkdir (const Targets & targets,
+  Client_impl::mkdir (const Targets & targets,
                  const QString& message) throw (ClientException)
   {
     Pool pool;
@@ -276,7 +276,7 @@ namespace svn
   }
 
   void
-  Client::cleanup (const Path & path) throw (ClientException)
+  Client_impl::cleanup (const Path & path) throw (ClientException)
   {
     Pool subPool;
     apr_pool_t * apr_pool = subPool.pool ();
@@ -289,7 +289,7 @@ namespace svn
   }
 
   void
-  Client::resolved (const Path & path,
+  Client_impl::resolved (const Path & path,
                     bool recurse) throw (ClientException)
   {
     Pool pool;
@@ -304,7 +304,7 @@ namespace svn
   }
 
   svn_revnum_t
-  Client::doExport (const Path & srcPath,
+  Client_impl::doExport (const Path & srcPath,
                     const Path & destPath,
                     const Revision & revision,
                     bool force) throw (ClientException)
@@ -327,7 +327,7 @@ namespace svn
   }
 
   svn_revnum_t
-  Client::doSwitch (const Path & path,
+  Client_impl::doSwitch (const Path & path,
                     const QString& url,
                     const Revision & revision,
                     bool recurse) throw (ClientException)
@@ -349,7 +349,7 @@ namespace svn
   }
 
   void
-  Client::import (const Path & path,
+  Client_impl::import (const Path & path,
                   const QString& url,
                   const QString& message,
                   bool recurse) throw (ClientException)
@@ -372,7 +372,7 @@ namespace svn
   }
 
   void
-  Client::merge (const Path & path1, const Revision & revision1,
+  Client_impl::merge (const Path & path1, const Revision & revision1,
                  const Path & path2, const Revision & revision2,
                  const Path & localPath, bool force,
                  bool recurse,
@@ -398,7 +398,7 @@ namespace svn
   }
 
   void
-  Client::relocate (const Path & path,
+  Client_impl::relocate (const Path & path,
                     const QString& from_url,
                     const QString& to_url,
                     bool recurse) throw (ClientException)

@@ -17,14 +17,12 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-// stl
-#include <string>
+// svncpp
+#include "client_impl.hpp"
 
 // subversion api
 #include "svn_client.h"
 
-// svncpp
-#include "client.hpp"
 #include "exception.hpp"
 #include "pool.hpp"
 #include "targets.hpp"
@@ -34,7 +32,7 @@ namespace svn
 {
 
   void
-  Client::lock (const Targets & targets,
+  Client_impl::lock (const Targets & targets,
     const QString& message,
     bool steal_lock)  throw (ClientException)
   {
@@ -50,7 +48,7 @@ namespace svn
   }
 
   void
-  Client::unlock (const Targets&targets,
+  Client_impl::unlock (const Targets&targets,
             bool break_lock)  throw (ClientException)
   {
     Pool pool;

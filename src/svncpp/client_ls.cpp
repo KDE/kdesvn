@@ -25,6 +25,8 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+// svncpp
+#include "client_impl.hpp"
 
 // subversion api
 #include "svn_client.h"
@@ -32,8 +34,6 @@
 #include "svn_sorts.h"
 //#include "svn_utf.h"
 
-// svncpp
-#include "client.hpp"
 #include "dirent.hpp"
 #include "exception.hpp"
 #include "svncpp_defines.hpp"
@@ -48,7 +48,7 @@ namespace svn
 {
 
   DirEntries
-  Client::list (const QString& pathOrUrl,
+  Client_impl::list (const QString& pathOrUrl,
                 Revision& revision,
                 bool recurse) throw (ClientException)
   {

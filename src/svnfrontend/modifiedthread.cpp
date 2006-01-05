@@ -17,13 +17,14 @@ CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool
 
     m_CurrentContext->setListener(m_SvnContext);
     m_what = what;
-    m_Svnclient.setContext(m_CurrentContext);
+    m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
     m_updates = _updates;
 }
 
 CheckModifiedThread::~CheckModifiedThread()
 {
     delete m_CurrentContext;
+    delete m_Svnclient;
 }
 
 void CheckModifiedThread::cancelMe()
@@ -44,7 +45,7 @@ void CheckModifiedThread::run()
     QString ex;
     try {
         //                                  rec  all   up        noign
-        m_Cache = m_Svnclient.status(m_what,true,false,m_updates,false,where);
+        m_Cache = m_Svnclient->status(m_what,true,false,m_updates,false,where);
     } catch (svn::ClientException e) {
         m_SvnContext->contextNotify(e.msg());
     }

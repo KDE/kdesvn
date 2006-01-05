@@ -25,12 +25,12 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+// svncpp
+#include "client_impl.hpp"
 
 // Subversion api
 #include "svn_client.h"
 
-// svncpp
-#include "client.hpp"
 #include "svncpp_defines.hpp"
 
 
@@ -56,7 +56,7 @@ namespace svn
   }
 
   AnnotatedFile *
-  Client::annotate (const Path & path,
+  Client_impl::annotate (const Path & path,
             const Revision & revisionStart,
             const Revision & revisionEnd) throw (ClientException)
   {

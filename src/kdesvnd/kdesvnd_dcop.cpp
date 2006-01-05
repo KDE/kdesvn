@@ -84,17 +84,18 @@ public:
     /* context listener virtuals end */
 
 protected:
-    svn::Client m_Svnclient;
+    svn::Client* m_Svnclient;
     svn::Context* m_CurrentContext;
 };
 
 IListener::IListener(kdesvnd_dcop*p)
     :svn::ContextListener()
 {
+    m_Svnclient = svn::Client::getobject(0,0);
     m_back=p;
     m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(this);
-    m_Svnclient.setContext(m_CurrentContext);
+    m_Svnclient->setContext(m_CurrentContext);
 }
 
 IListener::~IListener()
@@ -269,7 +270,7 @@ bool kdesvnd_dcop::isRepository(const KURL&url)
         svn::Revision where = svn::Revision::HEAD;
         svn::StatusEntries dlist;
         try {
-            m_Listener->m_Svnclient.status("file://"+cleanUrl(url),false,false,false,false,where);
+            m_Listener->m_Svnclient->status("file://"+cleanUrl(url),false,false,false,false,where);
         } catch (svn::ClientException e) {
             kdDebug()<< e.msg()<<endl;
             return false;
@@ -291,7 +292,7 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Listener->m_Svnclient.info(cleanUrl(url),false,rev,peg);
+        e = m_Listener->m_Svnclient->info(cleanUrl(url),false,rev,peg);
     } catch (svn::ClientException e) {
         kdDebug()<< e.msg()<<endl;
         return false;

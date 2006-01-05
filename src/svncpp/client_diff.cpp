@@ -25,13 +25,13 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+// svncpp
+#include "client_impl.hpp"
 
 // Subversion api
 #include "svn_client.h"
 #include "svn_path.h"
 
-// svncpp
-#include "client.hpp"
 #include "exception.hpp"
 #include "pool.hpp"
 #include "status.hpp"
@@ -79,7 +79,7 @@ namespace svn
   }
 
   QString
-  Client::diff (const Path & tmpPath, const Path & path,
+  Client_impl::diff (const Path & tmpPath, const Path & path,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted) throw (ClientException)
@@ -88,7 +88,7 @@ namespace svn
   }
 
   QString
-  Client::diff (const Path & tmpPath, const Path & path1,const Path&path2,
+  Client_impl::diff (const Path & tmpPath, const Path & path1,const Path&path2,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted) throw (ClientException)

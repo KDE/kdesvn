@@ -25,13 +25,13 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+// svncpp
+#include "client_impl.hpp"
 
 // Subversion api
 #include "svn_client.h"
 //#include "svn_io.h"
 
-// svncpp
-#include "client.hpp"
 #include "exception.hpp"
 #include "pool.hpp"
 #include "status.hpp"
@@ -40,7 +40,7 @@
 namespace svn
 {
   QByteArray
-  Client::cat(const Path & path,
+  Client_impl::cat(const Path & path,
                 const Revision & revision,
                 const Revision & peg_revision) throw (ClientException)
   {
@@ -142,7 +142,7 @@ namespace svn
 
 
   void
-  Client::get (Path & dstPath,
+  Client_impl::get (Path & dstPath,
                const Path & path,
                const Revision & revision) throw (ClientException)
   {

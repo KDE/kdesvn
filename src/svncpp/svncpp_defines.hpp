@@ -21,6 +21,17 @@
 #ifndef _SVNCPP_DEFINES_H
 #define _SVNCPP_DEFINES_H
 
+// config
+#include "config.h"
+#ifdef __KDE_HAVE_GCC_VISIBILITY_DISABLED_MACRO
+#define SVNQT_EXPORT __attribute__ ((visibility("visible")))
+#define SVNQT_NOEXPORT __attribute__ ((visibility("hidden")))
+#else
+#define SVNQT_EXPORT
+#define SVNQT_NOEXPORT
+#endif
+#endif
+
 // qt
 #include <qglobal.h>
 
@@ -28,6 +39,4 @@
 #define TOUTF8 utf8
 #else
 #define TOUTF8 toUtf8
-#endif
-
 #endif

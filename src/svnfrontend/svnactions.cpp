@@ -148,7 +148,7 @@ void SvnActions::reInitClient()
 template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(
-        0,
+        KApplication::activeModalWidget(),
         name,
         true,
         _head,

@@ -804,7 +804,7 @@ void kdesvnfilelist::slotSelectionChanged()
 void kdesvnfilelist::slotClientException(const QString&what)
 {
     emit sigLogMessage(what);
-    KMessageBox::sorry(0,what,i18n("SVN Error"));
+    KMessageBox::sorry(KApplication::activeModalWidget(),what,i18n("SVN Error"));
 }
 
 
@@ -886,7 +886,7 @@ void kdesvnfilelist::slotResolved()
 template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(
-        0,
+        KApplication::activeModalWidget(),
         name,
         true,
         _head,

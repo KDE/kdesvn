@@ -35,6 +35,7 @@
 #include "svncpp/dirent.hpp"
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
+#include "svnfrontend/fronthelpers/oimagescrollview.h"
 
 #include <kdialog.h>
 #include <ktextbrowser.h>
@@ -57,7 +58,6 @@
 #include <qmap.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qcanvas.h>
 #include <qvaluelist.h>
 #include <qvbox.h>
 #include <qstylesheet.h>
@@ -318,21 +318,14 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
             delete dlg;
         }
     } else {
-        QCanvasView*ptr;
+        Opie::MM::OImageScrollView*ptr;
         KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
-        QCanvas*can = new QCanvas;
-        can->resize(img.size().width()+10,img.size().height()+10);
-        QCanvasPixmap* qpix = new QCanvasPixmap(img);
-        QCanvasPixmapArray*parr=new QCanvasPixmapArray();
-        parr->setImage(0,qpix);
-        QCanvasSprite* qspr = new QCanvasSprite(parr,can);
-        qspr->move(5,5,0);
-        ptr->setCanvas(can);
-        qspr->show();
+        ptr->setAutoScaleRotate(false,false);
+        ptr->setShowZoomer( true );
+        ptr->setImage( img );
         dlg->exec();
         dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);
         delete dlg;
-        delete can;
     }
 }
 

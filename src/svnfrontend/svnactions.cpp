@@ -986,12 +986,16 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     CheckoutExport(what,_exp);
 }
 
-void SvnActions::CheckoutExport(const QString&what,bool _exp)
+void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
 {
     CheckoutInfo_impl*ptr;
     KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
     if (dlg) {
-        ptr->setStartUrl(what);
+        if (!urlisTarget) {
+            ptr->setStartUrl(what);
+        } else {
+            ptr->setTargetUrl(what);
+        }
         ptr->forceAsRecursive(!_exp);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();

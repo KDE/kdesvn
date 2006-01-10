@@ -126,6 +126,9 @@ QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List list)
         if (isRepository(list[0])) {
             result << "Export"
                    << "Checkout";
+        } else {
+            result << "Exportto"
+                   << "Checkoutto";
         }
     } else {
         result << "Update"

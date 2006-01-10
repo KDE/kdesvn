@@ -102,22 +102,21 @@ namespace svn
     m->apr_err = error->apr_err;
     svn_error_t * next = error->child;
     /// @todo send rapidsvn an hint that error->message may sometimes NULL!
-    QString & message = m->message;
     if (error->message)
-      message = error->message;
+      m->message = QString::fromUtf8(error->message);
     else
     {
-      message = "Unknown error!\n";
+      m->message = "Unknown error!\n";
       if (error->file)
       {
-        message += "In file ";
-        message += error->file;
-        message += QString(" Line %1").arg(error->line);
+        m->message += "In file ";
+        m->message += QString::fromUtf8(error->file);
+        m->message += QString(" Line %1").arg(error->line);
       }
     }
     while (next != NULL && next->message != NULL)
     {
-      message = message + "\n" + next->message;
+      m->message = m->message + "\n" + QString::fromUtf8(next->message);
 
       next = next->child;
     }

@@ -45,7 +45,7 @@ OImageScrollView::OImageScrollView (const QImage&img, QWidget * parent, const ch
     m_states[IMAGE_IS_JPEG]=false;
     m_states[IMAGE_SCALED_LOADED]=false;
     m_states[SHOW_ZOOMER]=true;
-    _original_data.convertDepth(QPixmap::defaultDepth());
+    //_original_data.convertDepth(QPixmap::defaultDepth());
     _original_data.setAlphaBuffer(false);
     _newImage = true;
     init();
@@ -71,7 +71,7 @@ void OImageScrollView::setImage(const QImage&img)
 {
     _image_data = QImage();
     _original_data=img;
-    _original_data.convertDepth(QPixmap::defaultDepth());
+    //_original_data.convertDepth(QPixmap::defaultDepth());
     _original_data.setAlphaBuffer(false);
     m_lastName = "";
     setImageIsJpeg(false);

@@ -320,8 +320,8 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
     } else {
         Opie::MM::OImageScrollView*ptr;
         KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
-        ptr->setAutoScaleRotate(false,false);
-        ptr->setShowZoomer( true );
+        ptr->setAutoRotate(false);
+        //ptr->setShowZoomer( true );
         ptr->setImage( img );
         dlg->exec();
         dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);

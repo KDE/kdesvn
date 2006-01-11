@@ -5362,7 +5362,7 @@ dnl apr
 dnl
 AC_DEFUN([AC_CHECK_APR],
 [
-APR_CONFIGS="apr-config /usr/local/apr/bin/apr-config"
+APR_CONFIGS="apr-config apr-1-config /usr/local/apr/bin/apr-config /usr/local/apr/bin/apr-1-config"
 AC_ARG_WITH(apr-config,
 [[  --with-apr-config=FILE    Use the given path to apr-config when determining
                             APR configuration; defaults to "apr-config"]],
@@ -5389,7 +5389,7 @@ fi
 CPPFLAGS="$CPPFLAGS  `$APR_CONFIG --cppflags` `$APR_CONFIG --includes`"
 APR_LIBS="`$APR_CONFIG --link-ld --libs`"
 
-APU_CONFIGS="apu-config /usr/local/apr/bin/apu-config"
+APU_CONFIGS="apu-config apu-1-config /usr/local/apr/bin/apu-config /usr/local/apr/bin/apu-1-config"
 AC_ARG_WITH(apu-config,
 [[  --with-apu-config=FILE    Use the given path to apu-config when determining
                             APR util configuration; defaults to "apu-config"]],

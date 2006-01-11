@@ -1538,8 +1538,9 @@ void SvnActions::deleteFromModifiedCache(const QString&what)
 
 void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
+    QString _path = path+(path.endsWith("/")?"":"/");
     for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
-        if (m_Data->m_Cache[i].path().startsWith(path)) {
+        if (m_Data->m_Cache[i].path().startsWith(_path)||m_Data->m_Cache[i].path()==path) {
             dlist.push_back(m_Data->m_Cache[i]);
         }
     }

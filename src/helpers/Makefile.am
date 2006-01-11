@@ -6,6 +6,5 @@ noinst_LTLIBRARIES = libhelper.la
 
 
 
-libhelper_la_SOURCES = sub2qt.cpp sshagent.cpp runtempfile.cpp \
-	ktranslateurl.cpp
-noinst_HEADERS = sub2qt.h smart_pointer.h runtempfile.h ktranslateurl.h
+libhelper_la_SOURCES = sub2qt.cpp sshagent.cpp ktranslateurl.cpp
+noinst_HEADERS = sub2qt.h smart_pointer.h ktranslateurl.h

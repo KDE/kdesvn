@@ -35,7 +35,6 @@
 #include "svncpp/status.hpp"
 #include "svncpp/url.hpp"
 #include "helpers/sshagent.h"
-#include "helpers/runtempfile.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -842,24 +841,22 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         }
         return;
     }
-    if (isWorkingCopy()) {
-        QString feditor = Settings::external_display();
-        if ( feditor.compare("default") == 0 )
+    QString what = fki->fullName();
+    if (!isWorkingCopy()) {
+        what="ksvn+"+what;
+    }
+    QString feditor = Settings::external_display();
+    if ( feditor.compare("default") == 0 )
+    {
+        KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,what);
+        fitem.run();
+    }
+    else
+    {
+        if ( KRun::runCommand(feditor + " " +  what) <= 0)
         {
-            KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
-            fitem.run();
+            KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
         }
-        else
-        {
-            if ( KRun::runCommand(feditor + " " +  fki->fullName()) <= 0)
-            {
-                KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
-            }
-        }
-    } else {
-        QByteArray content = m_SvnWrapper->makeGet(m_pList->m_remoteRevision,fki->fullName());
-        if (content.size()==0) return;
-        new RunTempfile(content);
     }
 }
 

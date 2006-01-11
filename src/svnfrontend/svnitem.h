@@ -68,6 +68,16 @@ public:
     KFileItem*fileItem();
 
 protected:
+    bool m_overlaycolor;
+    enum color_type {
+        NONE = 0,
+        UPDATES = 1,
+        MODIFIED = 2,
+        LOCKED = 3,
+        ADDED = 4,
+        DELETED = 5
+    };
+    color_type m_bgColor;
     smart_pointer<SvnItem_p> p_Item;
     virtual SvnActions*getWrapper()const = 0;
 

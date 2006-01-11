@@ -17,36 +17,28 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef CHECKOUTINFO_IMPL_H
-#define CHECKOUTINFO_IMPL_H
+#include "dispcolorsettings_impl.h"
+#include <kcolorbutton.h>
+#include <qcheckbox.h>
 
-#include "src/svnfrontend/fronthelpers/checkoutinfo.h"
-#include "svncpp/revision.hpp"
-#include "kurl.h"
+DispColorSettings_impl::DispColorSettings_impl(QWidget *parent, const char *name)
+    :DispColorSettings(parent, name)
+{
+    coloredStateToggled(kcfg_colored_state->isChecked());
+}
 
-class CheckoutInfo_impl: public CheckoutInfo {
-Q_OBJECT
-public:
-    CheckoutInfo_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~CheckoutInfo_impl();
+DispColorSettings_impl::~DispColorSettings_impl()
+{
+}
 
-    svn::Revision toRevision();
-    QString reposURL();
-    QString targetDir();
+void DispColorSettings_impl::coloredStateToggled(bool how)
+{
+    kcfg_color_locked_item->setEnabled(how);
+    kcfg_color_changed_item->setEnabled(how);
+    kcfg_color_item_deleted->setEnabled(how);
+    kcfg_color_item_added->setEnabled(how);
+    kcfg_color_need_update->setEnabled(how);
+}
 
-    bool forceIt();
-    void setStartUrl(const QString&);
 
-    void disableForce(bool how);
-    void disableTargetDir(bool how);
-    void forceAsRecursive(bool how);
-    void disableAppend(bool how);
-    void disableOpen(bool how);
-    bool openAfterJob();
-    virtual void disableRange(bool how);
-    void setTargetUrl(const QString&);
-protected slots:
-    virtual void urlChanged(const QString&);
-};
-
-#endif
+#include "dispcolorsettings_impl.moc"

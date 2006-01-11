@@ -59,8 +59,10 @@ public:
     virtual QString getParentDir()const;
     virtual FileListViewItem*fItem(){return this;}
     virtual void setStat(const svn::Status&);
+    virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
 
 protected:
+    QColor m_highColor;
     short int sortChar;
     kdesvnfilelist*m_Ksvnfilelist;
 

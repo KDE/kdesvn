@@ -17,36 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef CHECKOUTINFO_IMPL_H
-#define CHECKOUTINFO_IMPL_H
+#ifndef DISPCOLORSETTINGS_IMPL_H
+#define DISPCOLORSETTINGS_IMPL_H
 
-#include "src/svnfrontend/fronthelpers/checkoutinfo.h"
-#include "svncpp/revision.hpp"
-#include "kurl.h"
+#include "src/svnfrontend/dispcolor_settings.h"
 
-class CheckoutInfo_impl: public CheckoutInfo {
+class DispColorSettings_impl: public DispColorSettings {
 Q_OBJECT
 public:
-    CheckoutInfo_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~CheckoutInfo_impl();
-
-    svn::Revision toRevision();
-    QString reposURL();
-    QString targetDir();
-
-    bool forceIt();
-    void setStartUrl(const QString&);
-
-    void disableForce(bool how);
-    void disableTargetDir(bool how);
-    void forceAsRecursive(bool how);
-    void disableAppend(bool how);
-    void disableOpen(bool how);
-    bool openAfterJob();
-    virtual void disableRange(bool how);
-    void setTargetUrl(const QString&);
+    DispColorSettings_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~DispColorSettings_impl();
 protected slots:
-    virtual void urlChanged(const QString&);
+    virtual void coloredStateToggled(bool);
 };
 
 #endif

@@ -76,6 +76,14 @@ bool CheckoutInfo_impl::forceIt()
     return m_forceButton->isChecked();
 }
 
+/*!
+    \fn CheckoutInfo_impl::setTargetUrl(const QString&)
+ */
+void CheckoutInfo_impl::setTargetUrl(const QString&what)
+{
+    m_TargetSelector->setURL(what);
+}
+
 void CheckoutInfo_impl::setStartUrl(const QString&what)
 {
     KURL uri(what);

@@ -35,6 +35,7 @@
 #include "svncpp/dirent.hpp"
 #include "svncpp/targets.hpp"
 #include "helpers/sub2qt.h"
+#include "svnfrontend/fronthelpers/oimagescrollview.h"
 
 #include <kdialog.h>
 #include <ktextbrowser.h>
@@ -57,7 +58,6 @@
 #include <qmap.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qcanvas.h>
 #include <qvaluelist.h>
 #include <qvbox.h>
 #include <qstylesheet.h>
@@ -151,7 +151,7 @@ void SvnActions::reInitClient()
 template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(
-        0,
+        KApplication::activeModalWidget(),
         name,
         true,
         _head,
@@ -321,21 +321,14 @@ void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&
             delete dlg;
         }
     } else {
-        QCanvasView*ptr;
+        Opie::MM::OImageScrollView*ptr;
         KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
-        QCanvas*can = new QCanvas;
-        can->resize(img.size().width()+10,img.size().height()+10);
-        QCanvasPixmap* qpix = new QCanvasPixmap(img);
-        QCanvasPixmapArray*parr=new QCanvasPixmapArray();
-        parr->setImage(0,qpix);
-        QCanvasSprite* qspr = new QCanvasSprite(parr,can);
-        qspr->move(5,5,0);
-        ptr->setCanvas(can);
-        qspr->show();
+        ptr->setAutoRotate(false);
+        //ptr->setShowZoomer( true );
+        ptr->setImage( img );
         dlg->exec();
         dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);
         delete dlg;
-        delete can;
     }
 }
 
@@ -989,12 +982,16 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     CheckoutExport(what,_exp);
 }
 
-void SvnActions::CheckoutExport(const QString&what,bool _exp)
+void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
 {
     CheckoutInfo_impl*ptr;
     KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
     if (dlg) {
-        ptr->setStartUrl(what);
+        if (!urlisTarget) {
+            ptr->setStartUrl(what);
+        } else {
+            ptr->setTargetUrl(what);
+        }
         ptr->forceAsRecursive(!_exp);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
@@ -1544,8 +1541,9 @@ void SvnActions::deleteFromModifiedCache(const QString&what)
 
 void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
+    QString _path = path+(path.endsWith("/")?"":"/");
     for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
-        if (m_Data->m_Cache[i].path().startsWith(path)) {
+        if (m_Data->m_Cache[i].path().startsWith(_path)||m_Data->m_Cache[i].path()==path) {
             dlist.push_back(m_Data->m_Cache[i]);
         }
     }

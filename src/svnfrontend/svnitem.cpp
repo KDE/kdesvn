@@ -101,11 +101,13 @@ void SvnItem_p::init()
 SvnItem::SvnItem()
     : p_Item(new SvnItem_p())
 {
+    m_overlaycolor = false;
 }
 
 SvnItem::SvnItem(const svn::Status&aStat)
     : p_Item(new SvnItem_p(aStat))
 {
+    m_overlaycolor = false;
 }
 
 SvnItem::~SvnItem()
@@ -114,6 +116,7 @@ SvnItem::~SvnItem()
 
 void SvnItem::setStat(const svn::Status&aStat)
 {
+    m_overlaycolor = false;
     p_Item = new SvnItem_p(aStat);
 }
 
@@ -151,6 +154,8 @@ const QDateTime&SvnItem::fullDate()const
 QPixmap SvnItem::getPixmap(int size,bool overlay)
 {
     QPixmap p;
+    m_overlaycolor = false;
+    m_bgColor = NONE;
     bool _local = false;
     /* yes - different way to "isDir" above 'cause here we try to use the
        mime-features of KDE on ALL not just unversioned entries.
@@ -179,12 +184,16 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         QPixmap p2 = QPixmap();
         if (isLocked()) {
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
+            m_bgColor = LOCKED;
         } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
+            m_bgColor = UPDATES;
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvndeleted",KIcon::Desktop,size);
+            m_bgColor = DELETED;
         } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnadded",KIcon::Desktop,size);
+            m_bgColor = ADDED;
         } else if (isModified()) {
             mod = true;
         } else if (isDir()&&wrap) {
@@ -193,6 +202,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             wrap->checkUpdateCache(fullName(),dlist);
             if (dlist.size()>0) {
                 p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
+                m_bgColor = UPDATES;
             } else {
                 wrap->checkModifiedCache(fullName(),dlist);
                 for (it=dlist.begin();it!=dlist.end();++it) {
@@ -208,9 +218,11 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             }
         }
         if (mod) {
+            m_bgColor = MODIFIED;
             p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnmodified",KIcon::Desktop,size);
         }
         if (!p2.isNull()) {
+            m_overlaycolor = true;
             QImage i1; i1 = p;
             QImage i2; i2 = p2;
             KIconEffect::overlay(i1,i2);

@@ -757,8 +757,18 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry></entry>
 </row>
 <row>
+<entry>checkoutto (or coto)</entry>
+<entry>Checkout repository-path into a new working copy path. In difference to above the source path and source revision will asked.</entry>
+<entry></entry>
+</row>
+<row>
 <entry>export</entry>
 <entry>Export repository- or working copy-path into directory. Target path and source revision will asked.</entry>
+<entry></entry>
+</row>
+<row>
+<entry>exportto</entry>
+<entry>Export repository- or working copy-path into directory. Source path and source revision will asked.</entry>
 <entry></entry>
 </row>
 <row>

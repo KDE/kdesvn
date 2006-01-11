@@ -35,7 +35,6 @@
 #include "svncpp/status.hpp"
 #include "svncpp/url.hpp"
 #include "helpers/sshagent.h"
-#include "helpers/runtempfile.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -804,7 +803,7 @@ void kdesvnfilelist::slotSelectionChanged()
 void kdesvnfilelist::slotClientException(const QString&what)
 {
     emit sigLogMessage(what);
-    KMessageBox::sorry(0,what,i18n("SVN Error"));
+    KMessageBox::sorry(KApplication::activeModalWidget(),what,i18n("SVN Error"));
 }
 
 
@@ -842,24 +841,22 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         }
         return;
     }
-    if (isWorkingCopy()) {
-        QString feditor = Settings::external_display();
-        if ( feditor.compare("default") == 0 )
+    QString what = fki->fullName();
+    if (!isWorkingCopy()) {
+        what="ksvn+"+what;
+    }
+    QString feditor = Settings::external_display();
+    if ( feditor.compare("default") == 0 )
+    {
+        KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,what);
+        fitem.run();
+    }
+    else
+    {
+        if ( KRun::runCommand(feditor + " " +  what) <= 0)
         {
-            KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,fki->fullName());
-            fitem.run();
+            KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
         }
-        else
-        {
-            if ( KRun::runCommand(feditor + " " +  fki->fullName()) <= 0)
-            {
-                KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
-            }
-        }
-    } else {
-        QByteArray content = m_SvnWrapper->makeGet(m_pList->m_remoteRevision,fki->fullName());
-        if (content.size()==0) return;
-        new RunTempfile(content);
     }
 }
 
@@ -886,7 +883,7 @@ void kdesvnfilelist::slotResolved()
 template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
 {
     KDialogBase * dlg = new KDialogBase(
-        0,
+        KApplication::activeModalWidget(),
         name,
         true,
         _head,
@@ -2058,6 +2055,8 @@ void kdesvnfilelist::slotSettingsChanged()
         QToolTip::isGloballyEnabled(),true,6);
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();
+    } else {
+        viewport()->repaint();
     }
 }
 

@@ -160,8 +160,15 @@ int CommandExec::exec()
                !QString::compare(m_pCPart->cmd,"co")) {
         slotCmd=SLOT(slotCmd_checkout());
         dont_check_second = true;
+    } else if (!QString::compare(m_pCPart->cmd,"checkoutto")||
+               !QString::compare(m_pCPart->cmd,"coto")) {
+        slotCmd=SLOT(slotCmd_checkoutto());
+        dont_check_second = true;
     } else if (!QString::compare(m_pCPart->cmd,"export")) {
         slotCmd=SLOT(slotCmd_export());
+        dont_check_second = true;
+    } else if (!QString::compare(m_pCPart->cmd,"exportto")) {
+        slotCmd=SLOT(slotCmd_exportto());
         dont_check_second = true;
     } else if (!QString::compare(m_pCPart->cmd,"delete")||
                !QString::compare(m_pCPart->cmd,"del")||
@@ -303,9 +310,19 @@ void CommandExec::slotCmd_checkout()
     m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0],false);
 }
 
+void CommandExec::slotCmd_checkoutto()
+{
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0],false,true);
+}
+
 void CommandExec::slotCmd_export()
 {
     m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0],true);
+}
+
+void CommandExec::slotCmd_exportto()
+{
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0],true,true);
 }
 
 void CommandExec::slotCmd_blame()

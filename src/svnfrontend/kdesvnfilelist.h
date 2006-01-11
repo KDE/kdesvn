@@ -22,8 +22,8 @@
 
 #include "itemdisplay.h"
 #include "filelistviewitem.h"
-#include "svncpp/status.hpp"
-#include "svncpp/client.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/client.hpp"
 
 #include <klistview.h>
 #include <kurl.h>

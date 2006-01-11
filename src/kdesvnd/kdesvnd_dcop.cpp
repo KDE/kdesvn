@@ -23,11 +23,11 @@
 #include "authdialogimpl.h"
 #include "ssltrustprompt_impl.h"
 #include "logmsg_impl.h"
-#include "svncpp/client.hpp"
-#include "svncpp/revision.hpp"
-#include "svncpp/status.hpp"
-#include "svncpp/context_listener.hpp"
-#include "svncpp/url.hpp"
+#include "svnqt/client.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/context_listener.hpp"
+#include "svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
 
 #include <kdebug.h>

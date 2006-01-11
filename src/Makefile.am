@@ -38,7 +38,7 @@ xdg_apps_DATA = kdesvn.desktop
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
-SUBDIRS = svnfrontend svncpp helpers icons pics kiosvn kdesvnd
+SUBDIRS = svnfrontend svnqt helpers icons pics kiosvn kdesvnd
 kdesvnaskpass_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 kdesvnaskpass_SOURCES = kdesvn-askpass.cpp
 kdesvnaskpass_LDADD = $(LIB_KDEUI)
@@ -52,7 +52,7 @@ kde_module_LTLIBRARIES = libkdesvnpart.la
 libkdesvnpart_la_SOURCES = kdesvn_part.cpp kdesvnview.cpp commandline_part.cpp
 libkdesvnpart_la_LDFLAGS = -avoid-version -module $(KDE_PLUGIN) \
 	$(all_libraries)
-libkdesvnpart_la_LIBADD = $(top_builddir)/src/svncpp/libsvnqt.la \
+libkdesvnpart_la_LIBADD = $(top_builddir)/src/svnqt/libsvnqt.la \
 	$(top_builddir)/src/svnfrontend/libsvnfrontend.la $(top_builddir)/src/helpers/libhelper.la $(SVN_LIBS) $(NEON_LIBS) \
 	$(APR_LIBS) $(LIB_KPARTS) $(LIB_KFILE)
 

@@ -21,7 +21,7 @@
 
 #include "kdesvnview.h"
 #include "svnfrontend/kdesvnfilelist.h"
-#include "svncpp/url.hpp"
+#include "svnqt/url.hpp"
 
 #include <qpainter.h>
 #include <qlayout.h>

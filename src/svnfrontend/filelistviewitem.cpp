@@ -21,10 +21,10 @@
 #include "kdesvnfilelist.h"
 #include "fronthelpers/settings.h"
 #include "helpers/sub2qt.h"
-#include "svncpp/status.hpp"
-#include "svncpp/revision.hpp"
-#include "svncpp/exception.hpp"
-#include "svncpp/url.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/url.hpp"
 
 #include <klocale.h>
 #include <kiconloader.h>

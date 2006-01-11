@@ -29,11 +29,11 @@
 #include "keystatus.h"
 #include "checkoutinfo_impl.h"
 #include "fronthelpers/settings.h"
-#include "svncpp/revision.hpp"
-#include "svncpp/dirent.hpp"
-#include "svncpp/client.hpp"
-#include "svncpp/status.hpp"
-#include "svncpp/url.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/dirent.hpp"
+#include "svnqt/client.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/url.hpp"
 #include "helpers/sshagent.h"
 
 #include <kapplication.h>

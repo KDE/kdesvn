@@ -23,11 +23,11 @@
 
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
-#include "svncpp/dirent.hpp"
-#include "svncpp/url.hpp"
-#include "svncpp/status.hpp"
-#include "svncpp/targets.hpp"
-#include "svncpp/info_entry.hpp"
+#include "svnqt/dirent.hpp"
+#include "svnqt/url.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/targets.hpp"
+#include "svnqt/info_entry.hpp"
 #include "helpers/sub2qt.h"
 
 #include <stdlib.h>

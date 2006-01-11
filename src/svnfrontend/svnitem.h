@@ -22,7 +22,7 @@
 #define __SVN_ITEM_H
 
 #include "helpers/smart_pointer.h"
-#include "svncpp/status.hpp"
+#include "svnqt/status.hpp"
 #include <qstring.h>
 #include <qdatetime.h>
 #include <qpixmap.h>

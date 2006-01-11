@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "sub2qt.h"
 
-#include "svncpp/revision.hpp"
+#include "svnqt/revision.hpp"
 #include "kglobal.h"
 #include "klocale.h"
 #include <qmap.h>

@@ -24,7 +24,7 @@
 #include <klistview.h>
 #include <qdatetime.h>
 #include <qptrlist.h>
-#include "svncpp/status.hpp"
+#include "svnqt/status.hpp"
 
 class QPainter;
 class KFileItem;

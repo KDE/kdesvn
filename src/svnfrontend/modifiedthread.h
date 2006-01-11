@@ -1,9 +1,9 @@
 #ifndef _MODIFIED_THREAD_H
 #define _MODIFIED_THREAD_H
 
-#include "svncpp/client.hpp"
-#include "svncpp/revision.hpp"
-#include "svncpp/status.hpp"
+#include "svnqt/client.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/status.hpp"
 #include "ccontextlistener.h"
 #include "eventnumbers.h"
 

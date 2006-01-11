@@ -21,7 +21,7 @@
 #define RANGEINPUT_IMPL_H
 
 #include "src/svnfrontend/fronthelpers/rangeinput.h"
-#include "svncpp/revision.hpp"
+#include "svnqt/revision.hpp"
 #include <qpair.h>
 
 class Rangeinput_impl: public RangeInputDlg {

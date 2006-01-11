@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "svnlogdlgimp.h"
 #include "fronthelpers/settings.h"
-#include "svncpp/log_entry.hpp"
+#include "svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include "svnactions.h"
 

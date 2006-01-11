@@ -10,7 +10,7 @@
 #include "propertiesdlg.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
-#include "svncpp/client.hpp"
+#include "svnqt/client.hpp"
 
 #include <qvariant.h>
 #include <qlabel.h>

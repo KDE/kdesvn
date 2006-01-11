@@ -21,7 +21,7 @@
 #define CHECKOUTINFO_IMPL_H
 
 #include "src/svnfrontend/fronthelpers/checkoutinfo.h"
-#include "svncpp/revision.hpp"
+#include "svnqt/revision.hpp"
 #include "kurl.h"
 
 class CheckoutInfo_impl: public CheckoutInfo {

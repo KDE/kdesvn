@@ -107,7 +107,7 @@ public:
     QString makeMkdir(const QString&);
     bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
-    void checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const;
+    bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);

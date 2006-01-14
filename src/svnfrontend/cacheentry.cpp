@@ -300,6 +300,9 @@ void itemCache::insertKey(const svn::Status&st)
 
 bool itemCache::find(const QString&what)const
 {
+    if (m_contentMap.size()==0) {
+        return false;
+    }
     QStringList _keys = QStringList::split("/",what);
     if (_keys.count()==0) {
         return false;
@@ -317,6 +320,9 @@ bool itemCache::find(const QString&what)const
 
 bool itemCache::find(const QString&_what,svn::StatusEntries&dlist)const
 {
+    if (m_contentMap.size()==0) {
+        return false;
+    }
     QStringList what = QStringList::split("/",_what);
     if (what.count()==0) {
         return false;
@@ -332,6 +338,9 @@ bool itemCache::find(const QString&_what,svn::StatusEntries&dlist)const
 
 void itemCache::deleteKey(const QString&_what,bool exact)
 {
+    if (m_contentMap.size()==0) {
+        return;
+    }
     QStringList what = QStringList::split("/",_what);
     kdDebug()<<"Removing " << _what << endl;
     if (what.count()==0) {
@@ -373,6 +382,9 @@ void itemCache::dump_tree()
 
 bool itemCache::findSingleValid(const QString&_what,svn::Status&st)const
 {
+    if (m_contentMap.size()==0) {
+        return false;
+    }
     QStringList what = QStringList::split("/",_what);
     if (what.count()==0) {
         return false;

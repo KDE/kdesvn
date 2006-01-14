@@ -74,8 +74,6 @@
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
 
-//#define OLD_CACHE 1
-
 class SvnActionsData:public ref_count
 {
 public:
@@ -101,13 +99,8 @@ public:
     svn::Context* m_CurrentContext;
     svn::Client m_Svnclient;
 
-#ifndef OLD_CACHE
     helpers::itemCache m_UpdateCache;
     helpers::itemCache m_Cache;
-#else
-    svn::StatusEntries m_UpdateCache;
-    svn::StatusEntries m_Cache;
-#endif
 
     QMap<KProcess*,QString> m_tempfilelist;
 
@@ -1118,21 +1111,9 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         return;
     }
     // remove them from cache
-#ifdef OLD_CACHE
-    svn::StatusEntries::iterator it;
-#endif
     for (unsigned int j = 0; j<items.count();++j) {
-#ifdef OLD_CACHE
-        for (it = m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
-            if ( (*it).path()==items[j].path() ) {
-                m_Data->m_Cache.erase(it);
-                break;
-            }
-        }
-#else
         m_Data->m_Cache.deleteKey(items[j].path(),!checkboxres);
         m_Data->m_Cache.dump_tree();
-#endif
     }
     EMIT_FINISHED;
 }
@@ -1492,15 +1473,15 @@ void SvnActions::checkModthread()
         m_Data->m_ThreadCheckTimer.start(100,true);
         return;
     }
-    kdDebug()<<"Thread seems stopped"<<endl;
-#ifdef OLD_CACHE
-    m_Data->m_Cache = m_CThread->getList();
-#else
+    kdDebug()<<"ModifiedThread seems stopped"<<endl;
     for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
-        m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
+        if (m_CThread->getList()[i].isRealVersioned()) {
+            m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
+        }
     }
+    kdDebug()<<"Modified Cache"<<endl;
     m_Data->m_Cache.dump_tree();
-#endif
+    kdDebug()<<"Modified Cache end"<<endl;
     delete m_CThread;
     m_CThread = 0;
     emit sigRefreshIcons();
@@ -1521,16 +1502,10 @@ void SvnActions::checkUpdateThread()
 
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
         if (m_UThread->getList()[i].reposTextStatus()!=svn_wc_status_none||m_UThread->getList()[i].reposPropStatus()!=svn_wc_status_none) {
-#ifdef OLD_CACHE
-            m_Data->m_UpdateCache.push_back(m_UThread->getList()[i]);
-#else
             m_Data->m_UpdateCache.insertKey(m_UThread->getList()[i]);
-#endif
         }
     }
-#ifndef OLD_CACHE
     m_Data->m_UpdateCache.dump_tree();
-#endif
     emit sigRefreshIcons();
     emit sendNotify(i18n("Checking for updates finished"));
     delete m_UThread;
@@ -1547,52 +1522,19 @@ void SvnActions::addModifiedCache(const svn::Status&what)
     if (!Settings::display_overlays()||what.path().isEmpty()) {
         return;
     }
-#ifdef OLD_CACHE
-    for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
-        if (m_Data->m_Cache[i].path()==what.path()) {
-            return;
-        }
-    }
-#else
     m_Data->m_Cache.insertKey(what);
     m_Data->m_Cache.dump_tree();
-#endif
-    kdDebug()<<"Adding to cache " << what.path()<<endl;
-#ifdef OLD_CACHE
-    m_Data->m_Cache.push_back(what);
-#endif
 }
 
 void SvnActions::deleteFromModifiedCache(const QString&what)
 {
-#ifdef OLD_CACHE
-    svn::StatusEntries::iterator it;
-    for (it=m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
-        if ((*it).path()==what) {
-            kdDebug()<<"Removing cache " << what<<endl;
-            m_Data->m_Cache.erase(it);
-            return;
-        }
-    }
-    kdDebug()<<"Removing cache " << what<< " not found" << endl;
-#else
     m_Data->m_Cache.deleteKey(what,false);
     m_Data->m_Cache.dump_tree();
-#endif
 }
 
 void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
-#ifdef OLD_CACHE
-    QString _path = path+(path.endsWith("/")?"":"/");
-    for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
-        if (m_Data->m_Cache[i].path().startsWith(_path)||m_Data->m_Cache[i].path()==path) {
-            dlist.push_back(m_Data->m_Cache[i]);
-        }
-    }
-#else
     m_Data->m_Cache.find(path,dlist);
-#endif
 }
 
 /*!
@@ -1631,17 +1573,7 @@ bool SvnActions::checkUpdateCache(const QString&path)const
     gettimeofday(&starttime,0);
 
     kdDebug()<<"checkUpdateCache start"<<endl;
-#ifndef OLD_CACHE
     b = m_Data->m_UpdateCache.find(path);
-#else
-    QString _path = path+(path.endsWith("/")?"":"/");
-    for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
-        if (m_Data->m_UpdateCache[i].path().startsWith(_path)||m_Data->m_Cache[i].path()==path) {
-            b=true;
-            break;
-        }
-    }
-#endif
     gettimeofday(&endtime,0);
     long int sec,usec;
     sec = endtime.tv_sec - starttime.tv_sec;
@@ -1654,27 +1586,8 @@ bool SvnActions::checkUpdateCache(const QString&path)const
 
 void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
 {
-#ifdef OLD_CACHE
-    svn::StatusEntries::iterator it;
-#endif
     for (unsigned int i = 0; i < what.count(); ++i) {
-#ifdef OLD_CACHE
-        for (it = m_Data->m_UpdateCache.begin();it!=m_Data->m_UpdateCache.end();++it) {
-            if (exact_only) {
-                if ( (*it).path()==what[i]) {
-                    it = m_Data->m_UpdateCache.erase(it);
-                }
-                break;
-            } else {
-                if ( (*it).path().startsWith(what[i]) ) {
-                    it = m_Data->m_UpdateCache.erase(it);
-                    --it;
-                }
-            }
-        }
-#else
         m_Data->m_UpdateCache.deleteKey(what[i],exact_only);
-#endif
     }
 }
 
@@ -1685,17 +1598,7 @@ bool SvnActions::isUpdated(const QString&path)const
     gettimeofday(&starttime,0);
 
     bool b;
-#ifndef OLD_CACHE
     b = m_Data->m_UpdateCache.findSingleValid(path,d);
-#else
-    b = false;
-    for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
-        if (m_Data->m_UpdateCache[i].path()==path) {
-            b= true;
-            break;
-        }
-    }
-#endif
 
     gettimeofday(&endtime,0);
     long int sec,usec;

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>345</width>
-            <height>247</height>
+            <width>368</width>
+            <height>293</height>
         </rect>
     </property>
     <property name="caption">
@@ -73,6 +73,14 @@ If it works slow (low connection and so on) you should turn of this feature.</st
             </property>
             <property name="text">
                 <string>Display ignored files</string>
+            </property>
+        </widget>
+	<widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_store_passwords</cstring>
+            </property>
+            <property name="text">
+                <string>Store passwords for remote connections</string>
             </property>
         </widget>
         <widget class="QCheckBox">

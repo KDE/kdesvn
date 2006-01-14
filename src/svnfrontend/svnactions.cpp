@@ -36,6 +36,7 @@
 #include "svnqt/targets.hpp"
 #include "helpers/sub2qt.h"
 #include "svnfrontend/fronthelpers/oimagescrollview.h"
+#include "cacheentry.h"
 
 #include <kdialog.h>
 #include <ktextbrowser.h>
@@ -66,6 +67,9 @@
 #include <qthread.h>
 #include <qtimer.h>
 #include <qlistview.h>
+#include <sys/time.h>
+#include <unistd.h>
+
 
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
@@ -77,7 +81,7 @@ public:
     {
         m_Svnclient = svn::Client::getobject(0,0);
         m_CurrentContext = 0;
-        m_Cache.clear();
+//        m_Cache.clear();
     }
 
     virtual ~SvnActionsData()
@@ -98,8 +102,8 @@ public:
     svn::Context* m_CurrentContext;
     svn::Client*m_Svnclient;
 
-    svn::StatusEntries m_Cache;
-    svn::StatusEntries m_UpdateCache;
+    helpers::itemCache m_UpdateCache;
+    helpers::itemCache m_Cache;
 
     QMap<KProcess*,QString> m_tempfilelist;
 
@@ -117,7 +121,9 @@ SvnActions::SvnActions(ItemDisplay *parent, const char *name)
 {
     m_CThread = 0;
     m_UThread = 0;
+    kdDebug()<<"New SvnActionsData()"<<endl;
     m_Data = new SvnActionsData();
+    kdDebug()<<"New SvnActionsData() finished"<<endl;
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContext = new CContextListener(this);
     connect(m_Data->m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
@@ -1108,14 +1114,9 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         return;
     }
     // remove them from cache
-    svn::StatusEntries::iterator it;
     for (unsigned int j = 0; j<items.count();++j) {
-        for (it = m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
-            if ( (*it).path()==items[j].path() ) {
-                m_Data->m_Cache.erase(it);
-                break;
-            }
-        }
+        m_Data->m_Cache.deleteKey(items[j].path(),!checkboxres);
+        m_Data->m_Cache.dump_tree();
     }
     EMIT_FINISHED;
 }
@@ -1475,8 +1476,21 @@ void SvnActions::checkModthread()
         m_Data->m_ThreadCheckTimer.start(100,true);
         return;
     }
-    kdDebug()<<"Thread seems stopped"<<endl;
-    m_Data->m_Cache = m_CThread->getList();
+    kdDebug()<<"ModifiedThread seems stopped"<<endl;
+    for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
+        if (m_CThread->getList()[i].isRealVersioned()&& (
+            m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_added||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_deleted||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted ||
+            m_CThread->getList()[i].propStatus()==svn_wc_status_modified
+         ) ) {
+            m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
+        }
+    }
+    kdDebug()<<"Modified Cache"<<endl;
+    m_Data->m_Cache.dump_tree();
+    kdDebug()<<"Modified Cache end"<<endl;
     delete m_CThread;
     m_CThread = 0;
     emit sigRefreshIcons();
@@ -1497,10 +1511,10 @@ void SvnActions::checkUpdateThread()
 
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
         if (m_UThread->getList()[i].reposTextStatus()!=svn_wc_status_none||m_UThread->getList()[i].reposPropStatus()!=svn_wc_status_none) {
-            m_Data->m_UpdateCache.push_back(m_UThread->getList()[i]);
+            m_Data->m_UpdateCache.insertKey(m_UThread->getList()[i]);
         }
     }
-
+    m_Data->m_UpdateCache.dump_tree();
     emit sigRefreshIcons();
     emit sendNotify(i18n("Checking for updates finished"));
     delete m_UThread;
@@ -1517,36 +1531,25 @@ void SvnActions::addModifiedCache(const svn::Status&what)
     if (!Settings::display_overlays()||what.path().isEmpty()) {
         return;
     }
-    for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
-        if (m_Data->m_Cache[i].path()==what.path()) {
-            return;
-        }
-    }
-    kdDebug()<<"Adding to cache " << what.path()<<endl;
-    m_Data->m_Cache.push_back(what);
+    m_Data->m_Cache.insertKey(what);
+    m_Data->m_Cache.dump_tree();
 }
 
 void SvnActions::deleteFromModifiedCache(const QString&what)
 {
-    svn::StatusEntries::iterator it;
-    for (it=m_Data->m_Cache.begin();it!=m_Data->m_Cache.end();++it) {
-        if ((*it).path()==what) {
-            kdDebug()<<"Removing cache " << what<<endl;
-            m_Data->m_Cache.erase(it);
-            return;
-        }
-    }
-    kdDebug()<<"Removing cache " << what<< " not found" << endl;
+    kdDebug()<<"deleteFromModifiedCache"<<endl;
+    m_Data->m_Cache.deleteKey(what,true);
+    m_Data->m_Cache.dump_tree();
 }
 
-void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
+void SvnActions::getModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
-    QString _path = path+(path.endsWith("/")?"":"/");
-    for (unsigned int i = 0; i<m_Data->m_Cache.count();++i) {
-        if (m_Data->m_Cache[i].path().startsWith(_path)||m_Data->m_Cache[i].path()==path) {
-            dlist.push_back(m_Data->m_Cache[i]);
-        }
-    }
+    m_Data->m_Cache.find(path,dlist);
+}
+
+bool SvnActions::checkModifiedCache(const QString&path)
+{
+    return m_Data->m_Cache.find(path);
 }
 
 /*!
@@ -1578,43 +1581,22 @@ bool SvnActions::createUpdateCache(const QString&what)
     return true;
 }
 
-void SvnActions::checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const
+bool SvnActions::checkUpdateCache(const QString&path)const
 {
-    for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
-        if (m_Data->m_UpdateCache[i].path().startsWith(path)) {
-            dlist.push_back(m_Data->m_UpdateCache[i]);
-        }
-    }
+    return m_Data->m_UpdateCache.find(path);
 }
 
 void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
 {
-    svn::StatusEntries::iterator it;
     for (unsigned int i = 0; i < what.count(); ++i) {
-        for (it = m_Data->m_UpdateCache.begin();it!=m_Data->m_UpdateCache.end();++it) {
-            if (exact_only) {
-                if ( (*it).path()==what[i]) {
-                    it = m_Data->m_UpdateCache.erase(it);
-                }
-                break;
-            } else {
-                if ( (*it).path().startsWith(what[i]) ) {
-                    it = m_Data->m_UpdateCache.erase(it);
-                    --it;
-                }
-            }
-        }
+        m_Data->m_UpdateCache.deleteKey(what[i],exact_only);
     }
 }
 
 bool SvnActions::isUpdated(const QString&path)const
 {
-    for (unsigned int i = 0; i<m_Data->m_UpdateCache.count();++i) {
-        if (m_Data->m_UpdateCache[i].path()==path) {
-            return true;
-        }
-    }
-    return false;
+    svn::Status d;
+    return m_Data->m_UpdateCache.findSingleValid(path,d);
 }
 
 void SvnActions::clearUpdateCache()
@@ -1647,26 +1629,6 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
         data = mp["svn:ignore"];
     }
     bool result = false;
-#if 0
-    /* doesnt work sometimes - seems a problem with qregexp */
-    kdDebug()<<QRegExp::escape(name)<<endl;
-    QRegExp reg("\\b"+QRegExp::escape(name)+"\\n");
-    if (reg.search(data)!=-1) {
-        if (unignore) {
-            data.replace(reg,"");
-            result = true;
-        }
-    } else {
-        data = data.stripWhiteSpace();
-        if (!unignore) {
-            if (!data.isEmpty())
-                data+="\n";
-            data+=name;
-            result = true;
-        }
-    }
-#else
-    /* cause above doesn't work we will do that slow */
     QStringList lst = QStringList::split("\n",data);
     QStringList::iterator it = lst.find(name);
     if (it != lst.end()) {
@@ -1680,7 +1642,6 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
             result = true;
         }
     }
-#endif
     if (result) {
         data = lst.join("\n");
         try {

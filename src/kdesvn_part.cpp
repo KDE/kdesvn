@@ -320,11 +320,11 @@ void kdesvnPart::slotShowSettings()
          Settings::self(),
          KDialogBase::IconList);
     dialog->addPage(new DisplaySettings_impl(0,"general_items"),
-        i18n("General"),"kdesvn",i18n("General"),true);
+        i18n("General"),"configure",i18n("General"),true);
     dialog->addPage(new SubversionSettings_impl(0,"subversion_items"),
         i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
     dialog->addPage(new DispColorSettings_impl(0,"color_items"),
-        i18n("Colors"),"kdesvn",i18n("Color Settings"),true);
+        i18n("Colors"),"colorize",i18n("Color Settings"),true);
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
     connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
     dialog->show();

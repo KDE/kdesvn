@@ -80,7 +80,8 @@ public:
     bool makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec=false);
 
     bool createModifiedCache(const QString&base);
-    void checkModifiedCache(const QString&path,svn::StatusEntries&dlist);
+    void getModifiedCache(const QString&path,svn::StatusEntries&dlist);
+    bool checkModifiedCache(const QString&path);
     void addModifiedCache(const svn::Status&what);
     void deleteFromModifiedCache(const QString&what);
 
@@ -107,7 +108,7 @@ public:
     QString makeMkdir(const QString&);
     bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
-    void checkUpdateCache(const QString&path,svn::StatusEntries&dlist)const;
+    bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);

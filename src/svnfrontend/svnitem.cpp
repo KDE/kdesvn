@@ -199,22 +199,11 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         } else if (isDir()&&wrap) {
             svn::StatusEntries dlist;
             svn::StatusEntries::const_iterator it;
-            wrap->checkUpdateCache(fullName(),dlist);
-            if (dlist.size()>0) {
+            if (wrap->checkUpdateCache(fullName())) {
                 p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
                 m_bgColor = UPDATES;
             } else {
-                wrap->checkModifiedCache(fullName(),dlist);
-                for (it=dlist.begin();it!=dlist.end();++it) {
-                    if ( (*it).textStatus()==svn_wc_status_modified||
-                        (*it).textStatus()==svn_wc_status_added||
-                        (*it).textStatus()==svn_wc_status_deleted||
-                        (*it).textStatus()==svn_wc_status_conflicted ||
-                        (*it).propStatus()==svn_wc_status_modified) {
-                        mod = true;
-                        break;
-                    }
-                }
+                mod = wrap->checkModifiedCache(fullName());
             }
         }
         if (mod) {

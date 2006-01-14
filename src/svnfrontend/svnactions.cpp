@@ -1475,7 +1475,13 @@ void SvnActions::checkModthread()
     }
     kdDebug()<<"ModifiedThread seems stopped"<<endl;
     for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
-        if (m_CThread->getList()[i].isRealVersioned()) {
+        if (m_CThread->getList()[i].isRealVersioned()&& (
+            m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_added||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_deleted||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted ||
+            m_CThread->getList()[i].propStatus()==svn_wc_status_modified
+         ) ) {
             m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
         }
     }
@@ -1528,13 +1534,19 @@ void SvnActions::addModifiedCache(const svn::Status&what)
 
 void SvnActions::deleteFromModifiedCache(const QString&what)
 {
-    m_Data->m_Cache.deleteKey(what,false);
+    kdDebug()<<"deleteFromModifiedCache"<<endl;
+    m_Data->m_Cache.deleteKey(what,true);
     m_Data->m_Cache.dump_tree();
 }
 
-void SvnActions::checkModifiedCache(const QString&path,svn::StatusEntries&dlist)
+void SvnActions::getModifiedCache(const QString&path,svn::StatusEntries&dlist)
 {
     m_Data->m_Cache.find(path,dlist);
+}
+
+bool SvnActions::checkModifiedCache(const QString&path)
+{
+    return m_Data->m_Cache.find(path);
 }
 
 /*!
@@ -1568,20 +1580,7 @@ bool SvnActions::createUpdateCache(const QString&what)
 
 bool SvnActions::checkUpdateCache(const QString&path)const
 {
-    bool b = false;
-    timeval starttime,endtime;
-    gettimeofday(&starttime,0);
-
-    kdDebug()<<"checkUpdateCache start"<<endl;
-    b = m_Data->m_UpdateCache.find(path);
-    gettimeofday(&endtime,0);
-    long int sec,usec;
-    sec = endtime.tv_sec - starttime.tv_sec;
-    usec = endtime.tv_usec - starttime.tv_usec;
-    usec += 1000*1000*sec;
-    QString f; f.sprintf("Fetchtime: %li,%06li sec ",usec/(1000*1000),usec%(1000*1000));
-    kdDebug()<<"checkUpdateCache: "<<f<<endl;
-    return b;
+    return m_Data->m_UpdateCache.find(path);
 }
 
 void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
@@ -1594,21 +1593,7 @@ void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
 bool SvnActions::isUpdated(const QString&path)const
 {
     svn::Status d;
-    timeval starttime,endtime;
-    gettimeofday(&starttime,0);
-
-    bool b;
-    b = m_Data->m_UpdateCache.findSingleValid(path,d);
-
-    gettimeofday(&endtime,0);
-    long int sec,usec;
-    sec = endtime.tv_sec - starttime.tv_sec;
-    usec = endtime.tv_usec - starttime.tv_usec;
-    usec += 1000*1000*sec;
-    QString f; f.sprintf("Fetchtime: %li,%06li sec ",usec/(1000*1000),usec%(1000*1000));
-    kdDebug()<<"isUpdated: "<<f<<endl;
-
-    return b;
+    return m_Data->m_UpdateCache.findSingleValid(path,d);
 }
 
 void SvnActions::clearUpdateCache()

@@ -122,6 +122,25 @@ bool cacheEntry::findSingleValid(QStringList&what,svn::Status&t)const
     return it->second.findSingleValid(what,t);
 }
 
+bool cacheEntry::findSingleValid(QStringList&what,bool check_valid_subs)const
+{
+    if (what.count()==0) {
+        return false;
+    }
+   // kdDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
+    std::map<QString,cacheEntry>::const_iterator it;
+    it = m_subMap.find(what[0]);
+    if (it==m_subMap.end()) {
+        return false;
+    }
+    if (what.count()==1) {
+        return it->second.isValid()||(check_valid_subs&&it->second.hasValidSubs());
+    }
+    what.erase(what.begin());
+    return it->second.findSingleValid(what,check_valid_subs);
+}
+
+
 bool cacheEntry::isValid()const
 {
     return m_isValid;
@@ -151,38 +170,39 @@ const QString&cacheEntry::key()const
     return m_key;
 }
 
-void cacheEntry::deleteKey(QStringList&what,bool exact)
+bool cacheEntry::deleteKey(QStringList&what,bool exact)
 {
     if (what.count()==0) {
-        return;
+        return true;
     }
     std::map<QString,cacheEntry>::iterator it=m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
-        return;
+        return true;
     }
+    bool caller_must_check = false;
     /* first stage - we are the one holding the right key */
     if (what.count()==1){
         if (!exact || !it->second.hasValidSubs()) {
-            /* if it has no valid subs delete it */
             m_subMap.erase(it);
+            caller_must_check = true;
         } else {
-            /* otherwise mark as invalid */
             it->second.markInvalid();
         }
-        return;
     } else {
         /* otherwise go trough tree */
         what.erase(what.begin());
-        it->second.deleteKey(what,exact);
-        if (!it->second.hasValidSubs()) {
+        bool b = it->second.deleteKey(what,exact);
+        if (b && !it->second.hasValidSubs()) {
             m_subMap.erase(it);
+            caller_must_check = true;
         }
     }
+    return caller_must_check;
 }
 
-bool cacheEntry::hasValidSubs()
+bool cacheEntry::hasValidSubs()const
 {
-    std::map<QString,cacheEntry>::iterator it;
+    std::map<QString,cacheEntry>::const_iterator it;
     for (it=m_subMap.begin();it!=m_subMap.end();++it) {
         if (it->second.isValid()||it->second.hasValidSubs()) {
             return true;
@@ -363,9 +383,8 @@ void itemCache::deleteKey(const QString&_what,bool exact)
     } else {
         /* otherwise go trough tree */
         what.erase(what.begin());
-        it->second.deleteKey(what,exact);
-        if (!it->second.hasValidSubs()) {
-            kdDebug()<<_what << " has no valid subs anymore " << endl;
+        bool b = it->second.deleteKey(what,exact);
+        if (b && !it->second.hasValidSubs()) {
             m_contentMap.erase(it);
         }
     }
@@ -402,6 +421,26 @@ bool itemCache::findSingleValid(const QString&_what,svn::Status&st)const
     }
     what.erase(what.begin());
     return it->second.findSingleValid(what,st);
+}
+
+bool itemCache::findSingleValid(const QString&_what,bool check_valid_subs)const
+{
+    if (m_contentMap.size()==0) {
+        return false;
+    }
+    QStringList what = QStringList::split("/",_what);
+    if (what.count()==0) {
+        return false;
+    }
+    std::map<QString,cacheEntry>::const_iterator it=m_contentMap.find(what[0]);
+    if (it==m_contentMap.end()) {
+        return false;
+    }
+    if (what.count()==1) {
+        return it->second.isValid()||(check_valid_subs&&it->second.hasValidSubs());
+    }
+    what.erase(what.begin());
+    return it->second.findSingleValid(what,check_valid_subs);
 }
 
 }

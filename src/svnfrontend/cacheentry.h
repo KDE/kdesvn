@@ -23,7 +23,7 @@
 #include "svncpp/client.hpp"
 #include "svncpp/status.hpp"
 
-#include <qmap.h>
+// std::map 'cause QMap isn't usable
 #include <map>
 #include <qstring.h>
 #include <qstringlist.h>
@@ -58,15 +58,32 @@ public:
      * \return true if found (may or may not valid!) otherwise false
      */
     virtual bool find(QStringList&what)const;
-    virtual bool findSingleValid(QStringList&what,svn::Status&)const;
-    virtual void appendValidSub(svn::StatusEntries&)const; 
+    //! Checks if cache contains a specific valid item
+    /*!
+     * if yes, the content will stored in st
+     * \param what the keylist to search for
+     * \param st target status to store content if found
+     * \return true if found
+     */
+    virtual bool findSingleValid(QStringList&what,svn::Status&st)const;
+    //! Checks if cache contains a specific valid item
+    /*!
+     * in difference to virtual bool find(QStringList&,svn::StatusEntries&)const no copy operations
+     * are made inside so it works much faster for simple find.
+     * \param what the keylist to search for
+     * \param check_valid_subs if true, return true if a subitem is valid even the item isn't valid
+     * \return true if found
+     */
+    virtual bool findSingleValid(QStringList&what,bool check_valid_subs)const;
+
+    virtual void appendValidSub(svn::StatusEntries&)const;
     virtual bool isValid()const;
     virtual const svn::Status&content()const;
 
-    virtual void deleteKey(QStringList&,bool exact);
+    virtual bool deleteKey(QStringList&,bool exact);
     virtual void insertKey(QStringList&,const svn::Status&);
     virtual void setValidStatus(const QString&key,const svn::Status&);
-    virtual bool hasValidSubs();
+    virtual bool hasValidSubs()const;
     virtual void markInvalid();
     const QString&key()const;
 
@@ -97,6 +114,7 @@ public:
     virtual void deleteKey(const QString&what,bool exact);
     virtual void insertKey(const svn::Status&);
     virtual bool findSingleValid(const QString&what,svn::Status&)const;
+    virtual bool findSingleValid(const QString&what,bool check_valid_subs)const;
 
     void dump_tree();
 };

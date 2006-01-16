@@ -150,6 +150,8 @@ public slots:
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
+    virtual void slotMerge(const QString&,const QString&, const QString&,
+        const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotCopyMove(bool,const QString&,const QString&,bool);
     virtual void slotCopyMove(bool,const KURL::List&,const QString&,bool);
     virtual void slotExtraLogMsg(const QString&);

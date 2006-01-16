@@ -38,6 +38,11 @@ public:
     QString Src2()const;
     QString Dest()const;
     Rangeinput_impl::revision_range getRange()const;
+
+    void setSrc1(const QString&);
+    void setSrc2(const QString&);
+    void setDest(const QString&);
+
     static bool getMergeRange(Rangeinput_impl::revision_range&range,
         bool*force,bool*recursive,bool*ignorerelated,bool*dry,QWidget*parent=0,const char*name=0);
 

@@ -287,6 +287,10 @@ void kdesvnfilelist::setupActions()
         KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
     m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of these entry into itself"));
 
+    tmp_action=new KAction("Merge...","kdesvnmerge",
+        KShortcut(),this,SLOT(slotMerge()),m_filesAction,"make_svn_merge");
+    tmp_action->setToolTip("Merge repository path into current worky copy path or current repository path into a target");
+
     /* remote actions only */
     m_CheckoutCurrentAction = new KAction("Checkout current repository path","kdesvncheckout",KShortcut(),
         m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
@@ -735,6 +739,10 @@ void kdesvnfilelist::enableActions()
     m_ResolvedAction->setEnabled( (multi||single) && isWorkingCopy());
     m_InfoAction->setEnabled(isopen);
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
+    temp = filesActions()->action("make_svn_merge");
+    if (temp) {
+        temp->setEnabled(single);
+    }
     temp = filesActions()->action("make_svn_addrec");
     if (temp) {
         temp->setEnabled( (multi||single) && isWorkingCopy());
@@ -1321,6 +1329,50 @@ void kdesvnfilelist::slotMergeRevisions()
     m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,irelated,force,dry);
     refreshItem(which);
     refreshRecursive(which);
+}
+
+void kdesvnfilelist::slotMerge()
+{
+    FileListViewItem*which= singleSelected();
+    QString src1,src2,target;
+    if (which) {
+        if (isWorkingCopy()) {
+            target = which->fullName();
+        } else {
+            src1 = which->fullName();
+        }
+    }
+    bool force,dry,rec,irelated;
+    Rangeinput_impl::revision_range range;
+    MergeDlg_impl*ptr;
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog");
+    if (!dlg) {
+        return;
+    }
+
+    ptr->setDest(target);
+    ptr->setSrc1(src1);
+    ptr->setSrc2(src1);
+    if (dlg->exec()==QDialog::Accepted) {
+        src1=ptr->Src1();
+        src2=ptr->Src2();
+        if (src2.isEmpty()) {
+            src2 = src1;
+        }
+        target = ptr->Dest();
+        force = ptr->force();
+        dry = ptr->dryrun();
+        rec = ptr->recursive();
+        irelated = ptr->ignorerelated();
+        range = ptr->getRange();
+        m_SvnWrapper->slotMerge(src1,src2,target,range.first,range.second,rec,irelated,force,dry);
+        refreshItem(which);
+        refreshRecursive(which);
+    }
+
+    dlg->saveDialogSize(*(Settings::self()->config()),"merge_dialog",false);
+
+    delete dlg;
 }
 
 void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)

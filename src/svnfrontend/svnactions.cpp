@@ -1255,13 +1255,25 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
                     const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
 {
+    slotMerge(_entry,_entry,_entry,rev1,rev2,rec,ancestry,forceIt,dry);
+}
+
+void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&target,
+        const svn::Revision&rev1,const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
+{
     if (!m_Data->m_CurrentContext) return;
+    QString s2;
+    if (src2.isEmpty()) {
+        s2 = src1;
+    } else {
+        s2 = src2;
+    }
     try {
-        m_Data->m_Svnclient.merge(svn::Path(_entry),
+        m_Data->m_Svnclient.merge(svn::Path(src1),
             rev1,
-            svn::Path(_entry),
+            svn::Path(s2),
             rev2,
-            svn::Path(_entry),
+            svn::Path(target),
             forceIt,rec,ancestry,dry);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>368</width>
-            <height>254</height>
+            <width>277</width>
+            <height>255</height>
         </rect>
     </property>
     <property name="caption">
@@ -32,53 +32,18 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout10</cstring>
+                <cstring>layout2</cstring>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="KColorButton" row="4" column="1">
+                <widget class="QLabel" row="0" column="0">
                     <property name="name">
-                        <cstring>kcfg_color_locked_item</cstring>
+                        <cstring>textLabel2</cstring>
                     </property>
                     <property name="text">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="KColorButton" row="0" column="1">
-                    <property name="name">
-                        <cstring>kcfg_color_changed_item</cstring>
-                    </property>
-                    <property name="text">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="2" column="0">
-                    <property name="name">
-                        <cstring>textLabel1</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Added items:</string>
-                    </property>
-                    <property name="alignment">
-                        <set>AlignVCenter|AlignRight</set>
-                    </property>
-                </widget>
-                <widget class="KColorButton" row="3" column="1">
-                    <property name="name">
-                        <cstring>kcfg_color_item_deleted</cstring>
-                    </property>
-                    <property name="text">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="3" column="0">
-                    <property name="name">
-                        <cstring>textLabel4</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Deleted items:</string>
+                        <string>Local changed items:</string>
                     </property>
                     <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
@@ -95,12 +60,55 @@
                         <string>Alt+U</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="KColorButton" row="0" column="1">
                     <property name="name">
-                        <cstring>textLabel2</cstring>
+                        <cstring>kcfg_color_changed_item</cstring>
                     </property>
                     <property name="text">
-                        <string>Local changed items:</string>
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="KColorButton" row="6" column="1">
+                    <property name="name">
+                        <cstring>kcfg_color_notversioned_item</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="KColorButton" row="3" column="1">
+                    <property name="name">
+                        <cstring>kcfg_color_item_deleted</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="6" column="0">
+                    <property name="name">
+                        <cstring>textLabel2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Not versioned items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KColorButton" row="5" column="1">
+                    <property name="name">
+                        <cstring>kcfg_color_missed_item</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="0">
+                    <property name="name">
+                        <cstring>textLabel4</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Deleted items:</string>
                     </property>
                     <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
@@ -117,9 +125,28 @@
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
+                <widget class="QLabel" row="5" column="0">
+                    <property name="name">
+                        <cstring>Missed_items_label</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Missed items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
                 <widget class="KColorButton" row="1" column="1">
                     <property name="name">
                         <cstring>kcfg_color_need_update</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="KColorButton" row="4" column="1">
+                    <property name="name">
+                        <cstring>kcfg_color_locked_item</cstring>
                     </property>
                     <property name="text">
                         <string></string>
@@ -131,6 +158,17 @@
                     </property>
                     <property name="text">
                         <string>Remote changed items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>textLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Added items:</string>
                     </property>
                     <property name="alignment">
                         <set>AlignVCenter|AlignRight</set>
@@ -155,6 +193,8 @@
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
+    <includehint>kcolorbutton.h</includehint>
+    <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>

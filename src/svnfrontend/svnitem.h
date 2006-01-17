@@ -75,7 +75,9 @@ protected:
         MODIFIED = 2,
         LOCKED = 3,
         ADDED = 4,
-        DELETED = 5
+        DELETED = 5,
+        MISSING = 6,
+        NOTVERSIONED = 7
     };
     color_type m_bgColor;
     smart_pointer<SvnItem_p> p_Item;

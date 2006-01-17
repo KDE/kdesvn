@@ -178,44 +178,50 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         _local = true;
         p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
     }
-    if (overlay && _local && isRealVersioned()) {
-        SvnActions*wrap = getWrapper();
-        bool mod = false;
-        QPixmap p2 = QPixmap();
-        if (isLocked()) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
-            m_bgColor = LOCKED;
-        } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
-            m_bgColor = UPDATES;
-        } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvndeleted",KIcon::Desktop,size);
-            m_bgColor = DELETED;
-        } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnadded",KIcon::Desktop,size);
-            m_bgColor = ADDED;
-        } else if (isModified()) {
-            mod = true;
-        } else if (isDir()&&wrap) {
-            svn::StatusEntries dlist;
-            svn::StatusEntries::const_iterator it;
-            if (wrap->checkUpdateCache(fullName())) {
-                p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
+    if (_local) {
+        if (!isVersioned()) {
+            m_bgColor = NOTVERSIONED;
+        } else if (isRealVersioned()) {
+            SvnActions*wrap = getWrapper();
+            bool mod = false;
+            QPixmap p2 = QPixmap();
+            if (p_Item->m_Stat.textStatus ()==svn_wc_status_missing) {
+                m_bgColor = MISSING;
+            } else if (isLocked()) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
+                m_bgColor = LOCKED;
+            } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
                 m_bgColor = UPDATES;
-            } else {
-                mod = wrap->checkModifiedCache(fullName());
+            } else if (p_Item->m_Stat.textStatus()==svn_wc_status_deleted) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvndeleted",KIcon::Desktop,size);
+                m_bgColor = DELETED;
+            } else if (p_Item->m_Stat.textStatus()==svn_wc_status_added ) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnadded",KIcon::Desktop,size);
+                m_bgColor = ADDED;
+            } else if (isModified()) {
+                mod = true;
+            } else if (isDir()&&wrap) {
+                svn::StatusEntries dlist;
+                svn::StatusEntries::const_iterator it;
+                if (wrap->checkUpdateCache(fullName())) {
+                    if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
+                    m_bgColor = UPDATES;
+                } else {
+                    mod = wrap->checkModifiedCache(fullName());
+                }
             }
-        }
-        if (mod) {
-            m_bgColor = MODIFIED;
-            p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnmodified",KIcon::Desktop,size);
-        }
-        if (!p2.isNull()) {
-            m_overlaycolor = true;
-            QImage i1; i1 = p;
-            QImage i2; i2 = p2;
-            KIconEffect::overlay(i1,i2);
-            p = i1;
+            if (mod) {
+                m_bgColor = MODIFIED;
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnmodified",KIcon::Desktop,size);
+            }
+            if (!p2.isNull()) {
+                m_overlaycolor = true;
+                QImage i1; i1 = p;
+                QImage i2; i2 = p2;
+                KIconEffect::overlay(i1,i2);
+                p = i1;
+            }
         }
     }
     return p;

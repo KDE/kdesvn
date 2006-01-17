@@ -198,7 +198,7 @@ void FileListViewItem::updateStatus(const svn::Status&s)
 void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
     bool colors = Settings::colored_state();
-    if (!colors || !m_overlaycolor||m_bgColor==NONE) {
+    if (!colors||m_bgColor==NONE) {
         KListViewItem::paintCell(p,cg,column,width,alignment);
         return;
     }
@@ -217,9 +217,18 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
         case  DELETED:
             _bgColor = Settings::color_item_deleted();
             break;
-        default:
         case  MODIFIED:
             _bgColor = Settings::color_changed_item();
+            break;
+        case MISSING:
+            _bgColor = Settings::color_missed_item();
+            break;
+        case NOTVERSIONED:
+            _bgColor = Settings::color_notversioned_item();
+            break;
+        default:
+            KListViewItem::paintCell(p,cg,column,width,alignment);
+            return;
             break;
     }
     const QPixmap *pm = listView()->viewport()->backgroundPixmap();

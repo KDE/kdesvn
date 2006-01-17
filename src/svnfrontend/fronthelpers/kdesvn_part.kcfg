@@ -64,7 +64,7 @@
    <label>Get detailed infos when making a remote listing</label>
    <default>false</default>
   </entry>
-  <entry key="store_passwords" type="Bool">
+  <entry key="store_passwords" type="Bool" >
    <label>Store passwords for remote connections</label>
    <default>false</default>
   </entry>
@@ -72,22 +72,28 @@
  <group name="display" >
   <entry key="colored_state" type="Bool" >
    <label>Display different then normal states colored</label>
-   <default>false</default>
+   <default>true</default>
   </entry>
   <entry key="color_need_update" type="Color" >
-   <default>#00FF00</default>
+   <default>101,224,76</default>
   </entry>
-  <entry key="color_changed_item" type="String" >
-   <default>#FFFF00</default>
+  <entry key="color_missed_item" type="Color" >
+   <default>#CC0000</default>
   </entry>
-  <entry key="color_locked_item" type="String" >
-   <default>#FF0000</default>
+  <entry key="color_notversioned_item" type="Color" >
+   <default>#BBBBBB</default>
   </entry>
-  <entry key="color_item_added" type="String" >
-   <default>#0088FF</default>
+  <entry key="color_locked_item" type="Color" >
+   <default>#c50003</default>
   </entry>
-  <entry key="color_item_deleted" type="String" >
-   <default>#FF8000</default>
+  <entry key="color_item_deleted" type="Color" >
+   <default>#a3a3a3</default>
+  </entry>
+  <entry key="color_item_added" type="Color" >
+   <default>#85bae0</default>
+  </entry>
+  <entry key="color_changed_item" type="Color" >
+   <default>#de5e5e</default>
   </entry>
  </group>
 </kcfg>

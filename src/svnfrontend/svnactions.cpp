@@ -1537,9 +1537,11 @@ bool SvnActions::checkUpdatesRunning()
 
 void SvnActions::addModifiedCache(const svn::Status&what)
 {
+#if 0
     if (!Settings::display_overlays()||what.path().isEmpty()) {
         return;
     }
+#endif
     m_Data->m_Cache.insertKey(what);
     m_Data->m_Cache.dump_tree();
 }

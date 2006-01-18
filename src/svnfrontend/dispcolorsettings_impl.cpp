@@ -40,6 +40,7 @@ void DispColorSettings_impl::coloredStateToggled(bool how)
     kcfg_color_need_update->setEnabled(how);
     kcfg_color_missed_item->setEnabled(how);
     kcfg_color_notversioned_item->setEnabled(how);
+    kcfg_color_conflicted_item->setEnabled(how);
 }
 
 

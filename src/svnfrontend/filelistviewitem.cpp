@@ -226,6 +226,9 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
         case NOTVERSIONED:
             _bgColor = Settings::color_notversioned_item();
             break;
+        case CONFLICT:
+            _bgColor = Settings::color_conflicted_item();
+            break;
         default:
             KListViewItem::paintCell(p,cg,column,width,alignment);
             return;

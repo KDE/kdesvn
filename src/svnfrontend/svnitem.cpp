@@ -185,7 +185,11 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             SvnActions*wrap = getWrapper();
             bool mod = false;
             QPixmap p2 = QPixmap();
-            if (p_Item->m_Stat.textStatus ()==svn_wc_status_missing) {
+            if (p_Item->m_Stat.textStatus ()==svn_wc_status_conflicted) {
+                m_bgColor = CONFLICT;
+                if (overlay)
+                    p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnconflicted",KIcon::Desktop,size);
+            } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_missing) {
                 m_bgColor = MISSING;
             } else if (isLocked()) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);

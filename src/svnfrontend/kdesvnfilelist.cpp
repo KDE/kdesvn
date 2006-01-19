@@ -1366,8 +1366,11 @@ void kdesvnfilelist::slotMerge()
         irelated = ptr->ignorerelated();
         range = ptr->getRange();
         m_SvnWrapper->slotMerge(src1,src2,target,range.first,range.second,rec,irelated,force,dry);
-        refreshItem(which);
-        refreshRecursive(which);
+        if (isWorkingCopy()) {
+//            refreshItem(which);
+//            refreshRecursive(which);
+            refreshCurrentTree();
+        }
     }
 
     dlg->saveDialogSize(*(Settings::self()->config()),"merge_dialog",false);

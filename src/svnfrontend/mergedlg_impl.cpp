@@ -32,16 +32,19 @@
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool src2,bool out)
     :MergeDlg(parent, name)
 {
+    m_SrcOneInput->setMode(KFile::Directory);
     if (!src1) {
         m_SrcOneInput->setEnabled(false);
         m_SrcOneInput->hide();
         m_SrcOneLabel->hide();
     }
+    m_SrcTwoInput->setMode(KFile::Directory);
     if (!src2) {
         m_SrcTwoInput->setEnabled(false);
         m_SrcTwoInput->hide();
         m_SrcTwoLabel->hide();
     }
+    m_OutInput->setMode(KFile::LocalOnly|KFile::Directory);
     if (!out) {
         m_OutInput->setEnabled(false);
         m_OutInput->hide();

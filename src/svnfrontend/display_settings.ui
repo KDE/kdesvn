@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>328</height>
+            <height>357</height>
         </rect>
     </property>
     <property name="caption">
@@ -71,6 +71,23 @@
             </property>
             <property name="whatsThis" stdset="0">
                 <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_display_overlays</cstring>
+            </property>
+            <property name="text">
+                <string>Mark item status with icon overlay</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Mark subversion states with an overlayed icon</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>&lt;p align="left"&gt;
+Mark an items with non-normal state with an overlayed icon. When you wish to
+see which items has newer items in repository you may have to set "Check for updates on open" in Subversion-Dialog.
+&lt;/p&gt;</string>
             </property>
         </widget>
         <widget class="QButtonGroup">

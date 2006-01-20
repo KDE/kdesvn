@@ -60,6 +60,7 @@ public:
     virtual FileListViewItem*fItem(){return this;}
     virtual void setStat(const svn::Status&);
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
+    virtual void setOpen(bool o);
 
 protected:
     QColor m_highColor;

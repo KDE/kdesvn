@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "mergedlg_impl.h"
 #include "rangeinput_impl.h"
+#include "svncpp/url.hpp"
 
 #include <kurlrequester.h>
 #include <kdialogbase.h>
@@ -31,16 +32,19 @@
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool src2,bool out)
     :MergeDlg(parent, name)
 {
+    m_SrcOneInput->setMode(KFile::Directory);
     if (!src1) {
         m_SrcOneInput->setEnabled(false);
         m_SrcOneInput->hide();
         m_SrcOneLabel->hide();
     }
+    m_SrcTwoInput->setMode(KFile::Directory);
     if (!src2) {
         m_SrcTwoInput->setEnabled(false);
         m_SrcTwoInput->hide();
         m_SrcTwoLabel->hide();
     }
+    m_OutInput->setMode(KFile::LocalOnly|KFile::Directory);
     if (!out) {
         m_OutInput->setEnabled(false);
         m_OutInput->hide();
@@ -50,6 +54,68 @@ MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool sr
 
 MergeDlg_impl::~MergeDlg_impl()
 {
+}
+
+void MergeDlg_impl::setSrc1(const QString&what)
+{
+    if (what.isEmpty()) {
+        m_SrcOneInput->setURL("");
+        return;
+    }
+    KURL uri(what);
+    kdDebug()<<"What: "<<what << " URL: "<<uri<<endl;
+    if (uri.protocol()=="file") {
+        if (what.startsWith("file:")) {
+            uri.setProtocol("ksvn+file");
+        } else {
+            uri.setProtocol("");
+        }
+    } else if (uri.protocol()=="http") {
+        uri.setProtocol("ksvn+http");
+    } else if (uri.protocol()=="https") {
+        uri.setProtocol("ksvn+https");
+    } else if (uri.protocol()=="svn") {
+        uri.setProtocol("ksvn");
+    } else if (uri.protocol()=="svn+ssh") {
+        uri.setProtocol("ksvn+ssh");
+    }
+    m_SrcOneInput->setURL(uri.url());
+}
+
+void MergeDlg_impl::setSrc2(const QString&what)
+{
+    if (what.isEmpty()) {
+        m_SrcTwoInput->setURL("");
+        return;
+    }
+    KURL uri(what);
+    if (uri.protocol()=="file") {
+        if (what.startsWith("file:")) {
+            uri.setProtocol("ksvn+file");
+        } else {
+            uri.setProtocol("");
+        }
+    } else if (uri.protocol()=="http") {
+        uri.setProtocol("ksvn+http");
+    } else if (uri.protocol()=="https") {
+        uri.setProtocol("ksvn+https");
+    } else if (uri.protocol()=="svn") {
+        uri.setProtocol("ksvn");
+    } else if (uri.protocol()=="svn+ssh") {
+        uri.setProtocol("ksvn+ssh");
+    }
+    m_SrcTwoInput->setURL(uri.url());
+}
+
+void MergeDlg_impl::setDest(const QString&what)
+{
+    if (what.isEmpty()) {
+        m_OutInput->setURL("");
+        return;
+    }
+    KURL uri(what);
+    uri.setProtocol("");
+    m_OutInput->setURL(uri.url());
 }
 
 bool MergeDlg_impl::recursive()const
@@ -74,17 +140,36 @@ bool MergeDlg_impl::dryrun()const
 
 QString MergeDlg_impl::Src1()const
 {
-    return m_SrcOneInput->url();
+    KURL uri(m_SrcOneInput->url());
+    QString proto = svn::Url::transformProtokoll(uri.protocol());
+    if (proto=="file"&&!m_SrcOneInput->url().startsWith("ksvn+file:")) {
+        uri.setProtocol("");
+    } else {
+        uri.setProtocol(proto);
+    }
+    return uri.url();
 }
 
 QString MergeDlg_impl::Src2()const
 {
-    return m_SrcTwoInput->url();
+    if (m_SrcTwoInput->url().isEmpty()) {
+        return "";
+    }
+    KURL uri(m_SrcTwoInput->url());
+    QString proto = svn::Url::transformProtokoll(uri.protocol());
+    if (proto=="file"&&!m_SrcTwoInput->url().startsWith("ksvn+file:")) {
+        uri.setProtocol("");
+    } else {
+        uri.setProtocol(proto);
+    }
+    return uri.url();
 }
 
 QString MergeDlg_impl::Dest()const
 {
-    return m_OutInput->url();
+    KURL uri(m_OutInput->url());
+    uri.setProtocol("");
+    return uri.url();
 }
 
 Rangeinput_impl::revision_range MergeDlg_impl::getRange()const

@@ -104,6 +104,7 @@ public:
 
     helpers::itemCache m_UpdateCache;
     helpers::itemCache m_Cache;
+    helpers::itemCache m_conflictCache;
 
     QMap<KProcess*,QString> m_tempfilelist;
 
@@ -1068,12 +1069,16 @@ void SvnActions::slotRevert()
         displist.push_back(m_Data->m_ParentList->baseUri());
     }
     slotRevertItems(displist);
+#if 0
     liter.toFirst();
     while ((cur=liter.current())!=0){
         ++liter;
         cur->refreshStatus(true,&lst,false);
         cur->refreshStatus(false,&lst,true);
     }
+#else
+    EMIT_REFRESH;
+#endif
 }
 
 void SvnActions::slotRevertItems(const QStringList&displist)
@@ -1240,6 +1245,7 @@ void SvnActions::slotResolved(const QString&path)
         emit clientException(e.msg());
         return;
     }
+    m_Data->m_conflictCache.deleteKey(path,false);
 }
 
 void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
@@ -1258,13 +1264,25 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
                     const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
 {
+    slotMerge(_entry,_entry,_entry,rev1,rev2,rec,ancestry,forceIt,dry);
+}
+
+void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&target,
+        const svn::Revision&rev1,const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
+{
     if (!m_Data->m_CurrentContext) return;
+    QString s2;
+    if (src2.isEmpty()) {
+        s2 = src1;
+    } else {
+        s2 = src2;
+    }
     try {
-        m_Data->m_Svnclient->merge(svn::Path(_entry),
+        m_Data->m_Svnclient.merge(svn::Path(src1),
             rev1,
-            svn::Path(_entry),
+            svn::Path(s2),
             rev2,
-            svn::Path(_entry),
+            svn::Path(target),
             forceIt,rec,ancestry,dry);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
@@ -1462,6 +1480,7 @@ bool SvnActions::createModifiedCache(const QString&what)
 {
     stopCheckModThread();
     m_Data->m_Cache.clear();
+    m_Data->m_conflictCache.clear();
     kdDebug()<<"Create cache for " << what << endl;
     m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
@@ -1482,10 +1501,11 @@ void SvnActions::checkModthread()
             m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
             m_CThread->getList()[i].textStatus()==svn_wc_status_added||
             m_CThread->getList()[i].textStatus()==svn_wc_status_deleted||
-            m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted ||
             m_CThread->getList()[i].propStatus()==svn_wc_status_modified
          ) ) {
             m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
+        } else if (m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted) {
+            m_Data->m_conflictCache.insertKey(m_CThread->getList()[i]);
         }
     }
     kdDebug()<<"Modified Cache"<<endl;
@@ -1528,17 +1548,19 @@ bool SvnActions::checkUpdatesRunning()
 
 void SvnActions::addModifiedCache(const svn::Status&what)
 {
-    if (!Settings::display_overlays()||what.path().isEmpty()) {
-        return;
+    if (what.textStatus()==svn_wc_status_conflicted) {
+        m_Data->m_conflictCache.insertKey(what);
+    } else {
+        m_Data->m_Cache.insertKey(what);
+        m_Data->m_Cache.dump_tree();
     }
-    m_Data->m_Cache.insertKey(what);
-    m_Data->m_Cache.dump_tree();
 }
 
 void SvnActions::deleteFromModifiedCache(const QString&what)
 {
     kdDebug()<<"deleteFromModifiedCache"<<endl;
     m_Data->m_Cache.deleteKey(what,true);
+    m_Data->m_conflictCache.deleteKey(what,true);
     m_Data->m_Cache.dump_tree();
 }
 
@@ -1550,6 +1572,11 @@ void SvnActions::getModifiedCache(const QString&path,svn::StatusEntries&dlist)
 bool SvnActions::checkModifiedCache(const QString&path)
 {
     return m_Data->m_Cache.find(path);
+}
+
+bool SvnActions::checkConflictedCache(const QString&path)
+{
+    return m_Data->m_conflictCache.find(path);
 }
 
 /*!

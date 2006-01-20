@@ -82,6 +82,7 @@ public:
     bool createModifiedCache(const QString&base);
     void getModifiedCache(const QString&path,svn::StatusEntries&dlist);
     bool checkModifiedCache(const QString&path);
+    bool checkConflictedCache(const QString&path);
     void addModifiedCache(const svn::Status&what);
     void deleteFromModifiedCache(const QString&what);
 
@@ -150,6 +151,8 @@ public slots:
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
+    virtual void slotMerge(const QString&,const QString&, const QString&,
+        const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotCopyMove(bool,const QString&,const QString&,bool);
     virtual void slotCopyMove(bool,const KURL::List&,const QString&,bool);
     virtual void slotExtraLogMsg(const QString&);

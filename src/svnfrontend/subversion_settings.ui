@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>368</width>
-            <height>293</height>
+            <width>339</width>
+            <height>256</height>
         </rect>
     </property>
     <property name="caption">
@@ -19,19 +19,6 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_display_overlays</cstring>
-            </property>
-            <property name="text">
-                <string>Mark changed items</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>Check (if needed recursive) if items are changed (added/delete/changed) and mark these items with an overlayed icon.
-
-If it works slow (low connection and so on) you should turn of this feature.</string>
-            </property>
-        </widget>
         <widget class="QCheckBox">
             <property name="name">
                 <cstring>kcfg_start_updates_check_on_open</cstring>
@@ -75,7 +62,7 @@ If it works slow (low connection and so on) you should turn of this feature.</st
                 <string>Display ignored files</string>
             </property>
         </widget>
-	<widget class="QCheckBox">
+        <widget class="QCheckBox">
             <property name="name">
                 <cstring>kcfg_store_passwords</cstring>
             </property>

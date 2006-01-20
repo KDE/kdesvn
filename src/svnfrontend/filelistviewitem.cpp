@@ -72,8 +72,17 @@ void FileListViewItem::init()
 {
     setText(COL_NAME,shortName());
     sortChar = isDir()?1:3;
+    setExpandable(isDir());
     if (shortName()[0]=='.') --sortChar;
     update();
+}
+
+void FileListViewItem::setOpen(bool o)
+{
+    if (o && childCount()==0) {
+        m_Ksvnfilelist->checkDirs(fullName(),this);
+    }
+    KListViewItem::setOpen(o);
 }
 
 FileListViewItem::~FileListViewItem()

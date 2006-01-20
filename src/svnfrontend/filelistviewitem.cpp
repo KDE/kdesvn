@@ -80,7 +80,7 @@ void FileListViewItem::init()
 void FileListViewItem::setOpen(bool o)
 {
     if (o && childCount()==0) {
-        m_Ksvnfilelist->checkDirs(fullName(),this);
+        m_Ksvnfilelist->slotItemClicked(this);
     }
     KListViewItem::setOpen(o);
 }

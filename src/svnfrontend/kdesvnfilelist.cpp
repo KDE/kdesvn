@@ -886,6 +886,7 @@ void kdesvnfilelist::slotResolved()
     if (!which) return;
     m_SvnWrapper->slotResolved(which->fullName());
     which->refreshStatus(true);
+    slotRescanIcons();
 }
 
 template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)

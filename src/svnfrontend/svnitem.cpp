@@ -211,6 +211,10 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
                 if (wrap->checkUpdateCache(fullName())) {
                     if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
                     m_bgColor = UPDATES;
+                } else if (wrap->checkConflictedCache(fullName())) {
+                    m_bgColor = CONFLICT;
+                    if (overlay)
+                        p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnconflicted",KIcon::Desktop,size);
                 } else {
                     mod = wrap->checkModifiedCache(fullName());
                 }

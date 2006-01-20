@@ -101,6 +101,7 @@ public:
 
     helpers::itemCache m_UpdateCache;
     helpers::itemCache m_Cache;
+    helpers::itemCache m_conflictCache;
 
     QMap<KProcess*,QString> m_tempfilelist;
 
@@ -1241,6 +1242,7 @@ void SvnActions::slotResolved(const QString&path)
         emit clientException(e.msg());
         return;
     }
+    m_Data->m_conflictCache.deleteKey(path,false);
 }
 
 void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
@@ -1475,6 +1477,7 @@ bool SvnActions::createModifiedCache(const QString&what)
 {
     stopCheckModThread();
     m_Data->m_Cache.clear();
+    m_Data->m_conflictCache.clear();
     kdDebug()<<"Create cache for " << what << endl;
     m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
@@ -1495,10 +1498,11 @@ void SvnActions::checkModthread()
             m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
             m_CThread->getList()[i].textStatus()==svn_wc_status_added||
             m_CThread->getList()[i].textStatus()==svn_wc_status_deleted||
-            m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted ||
             m_CThread->getList()[i].propStatus()==svn_wc_status_modified
          ) ) {
             m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
+        } else if (m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted) {
+            m_Data->m_conflictCache.insertKey(m_CThread->getList()[i]);
         }
     }
     kdDebug()<<"Modified Cache"<<endl;
@@ -1541,19 +1545,19 @@ bool SvnActions::checkUpdatesRunning()
 
 void SvnActions::addModifiedCache(const svn::Status&what)
 {
-#if 0
-    if (!Settings::display_overlays()||what.path().isEmpty()) {
-        return;
+    if (what.textStatus()==svn_wc_status_conflicted) {
+        m_Data->m_conflictCache.insertKey(what);
+    } else {
+        m_Data->m_Cache.insertKey(what);
+        m_Data->m_Cache.dump_tree();
     }
-#endif
-    m_Data->m_Cache.insertKey(what);
-    m_Data->m_Cache.dump_tree();
 }
 
 void SvnActions::deleteFromModifiedCache(const QString&what)
 {
     kdDebug()<<"deleteFromModifiedCache"<<endl;
     m_Data->m_Cache.deleteKey(what,true);
+    m_Data->m_conflictCache.deleteKey(what,true);
     m_Data->m_Cache.dump_tree();
 }
 
@@ -1565,6 +1569,11 @@ void SvnActions::getModifiedCache(const QString&path,svn::StatusEntries&dlist)
 bool SvnActions::checkModifiedCache(const QString&path)
 {
     return m_Data->m_Cache.find(path);
+}
+
+bool SvnActions::checkConflictedCache(const QString&path)
+{
+    return m_Data->m_conflictCache.find(path);
 }
 
 /*!

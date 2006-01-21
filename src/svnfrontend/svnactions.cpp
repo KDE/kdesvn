@@ -1038,7 +1038,7 @@ void SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         return;
     }
     if (openIt) {
-        if (!_exp) m_Data->m_ParentList->openURL(tPath,true);
+        if (!_exp) emit sigGotourl(tPath);
         else kapp->invokeBrowser(tPath);
     }
     EMIT_FINISHED;

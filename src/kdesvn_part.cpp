@@ -83,12 +83,18 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
     connect(m_view,SIGNAL(sigSwitchUrl(const KURL&)),this,SLOT(openURL(const KURL&)));
     connect(this,SIGNAL(refreshTree()),m_view,SLOT(refreshCurrentTree()));
     connect(m_view,SIGNAL(setWindowCaption(const QString&)),this,SIGNAL(setWindowCaption(const QString&)));
+    connect(m_view,SIGNAL(sigUrlChanged( const QString&)),this,SLOT(slotUrlChanged(const QString&)));
     m_browserExt->setPropertiesActionEnabled(false);
 }
 
 kdesvnPart::~kdesvnPart()
 {
     kdesvnPartFactory::instance()->config()->sync();
+}
+
+void kdesvnPart::slotUrlChanged(const QString&url)
+{
+    m_url = url;
 }
 
 bool kdesvnPart::openFile()

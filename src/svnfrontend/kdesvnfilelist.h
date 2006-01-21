@@ -159,6 +159,7 @@ protected slots:
     /* callback slots */
     virtual void slotCopyFinished( KIO::Job *);
     virtual void slotDeleteFinished(KIO::Job*);
+    virtual void _openURL(const QString&);
 
 signals:
     void sigLogMessage(const QString&);
@@ -166,6 +167,7 @@ signals:
     void sigShowPopup(const QString&);
     void sigUrlOpend(bool);
     void sigSwitchUrl(const KURL&);
+    void sigUrlChanged(const QString&);
 
 public slots:
     virtual void refreshCurrentTree();

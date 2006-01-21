@@ -179,6 +179,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(sigRefreshIcons()),this,SLOT(slotRescanIcons()));
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
+    connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
 
     setDropHighlighter(true);
     setDragEnabled(true);
@@ -376,6 +377,12 @@ FileListViewItem* kdesvnfilelist::singleSelected()
 SvnItem*kdesvnfilelist::Selected()
 {
     return singleSelected();
+}
+
+void kdesvnfilelist::_openURL(const QString&url)
+{
+    openURL(url,true);
+    emit sigUrlChanged(baseUri());
 }
 
 bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )

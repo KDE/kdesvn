@@ -150,35 +150,11 @@ const QDateTime&SvnItem::fullDate()const
     return (p_Item->m_fullDate);
 }
 
-
-QPixmap SvnItem::getPixmap(int size,bool overlay)
+QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
 {
-    QPixmap p;
-    m_overlaycolor = false;
-    m_bgColor = NONE;
-    bool _local = false;
-    /* yes - different way to "isDir" above 'cause here we try to use the
-       mime-features of KDE on ALL not just unversioned entries.
-     */
-    if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
-        /* remote access */
-        if (isDir()) {
-            p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
-        } else {
-            p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
-        }
-        if (isLocked()) {
-            QPixmap p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
-            QImage i1; i1 = p;
-            QImage i2; i2 = p2;
-            KIconEffect::overlay(i1,i2);
-            p = i1;
-        }
-    } else {
-        _local = true;
-        p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
-    }
-    if (_local) {
+    QPixmap p = _p;
+
+//    if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())!=0) {
         if (!isVersioned()) {
             m_bgColor = NOTVERSIONED;
         } else if (isRealVersioned()) {
@@ -226,11 +202,43 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             if (!p2.isNull()) {
                 m_overlaycolor = true;
                 QImage i1; i1 = p;
-                QImage i2; i2 = p2;
+                QImage i2;i2 = p2;
+
                 KIconEffect::overlay(i1,i2);
                 p = i1;
             }
         }
+//    }
+    return p;
+}
+
+QPixmap SvnItem::getPixmap(int size,bool overlay)
+{
+    QPixmap p;
+    m_overlaycolor = false;
+    m_bgColor = NONE;
+    bool _local = false;
+    /* yes - different way to "isDir" above 'cause here we try to use the
+       mime-features of KDE on ALL not just unversioned entries.
+     */
+    if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
+        /* remote access */
+        if (isDir()) {
+            p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
+        } else {
+            p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
+        }
+        if (isLocked()) {
+            QPixmap p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
+            QImage i1; i1 = p;
+            QImage i2; i2 = p2;
+            KIconEffect::overlay(i1,i2);
+            p = i1;
+        }
+    } else {
+        _local = true;
+        p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
+        p = getPixmap(p,size,overlay);
     }
     return p;
 }

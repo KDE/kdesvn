@@ -58,6 +58,7 @@ public:
     virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
 
     QPixmap getPixmap(int size,bool overlay=true);
+    QPixmap getPixmap(const QPixmap&,int size,bool overlay=true);
 
     virtual FileListViewItem*fItem(){return 0;}
     virtual void setStat(const svn::Status&);

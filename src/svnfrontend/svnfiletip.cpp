@@ -162,7 +162,7 @@ void SvnFileTip::reposition()
 void SvnFileTip::gotPreview( const KFileItem* item, const QPixmap& pixmap )
 {
     m_previewJob = 0;
-    if (item != m_svnitem->fileItem()) return;
+    if (!m_svnitem || item != m_svnitem->fileItem()) return;
 
     m_iconLabel -> setPixmap(pixmap);
 }

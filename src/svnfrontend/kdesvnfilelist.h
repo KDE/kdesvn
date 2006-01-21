@@ -192,15 +192,16 @@ protected slots:
     virtual void slotDirItemCreated(const QString&);
     virtual void slotDirItemDirty(const QString&);
     virtual void slotDirItemDeleted(const QString&);
-protected slots:
     virtual void slotRelocate();
     virtual void slotRescanIcons();
-protected slots:
     virtual void slotCheckNewItems();
-protected slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
     virtual void slotInternalDrop();
+
+private slots:
+    void gotPreview( const KFileItem*, const QPixmap& );
+    void gotPreviewResult();
 };
 
 #endif

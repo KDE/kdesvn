@@ -179,6 +179,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(sigRefreshIcons()),this,SLOT(slotRescanIcons()));
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
+    connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
 
     setDropHighlighter(true);
     setDragEnabled(true);
@@ -378,6 +379,12 @@ SvnItem*kdesvnfilelist::Selected()
     return singleSelected();
 }
 
+void kdesvnfilelist::_openURL(const QString&url)
+{
+    openURL(url,true);
+    emit sigUrlChanged(baseUri());
+}
+
 bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 {
     m_SvnWrapper->killallThreads();
@@ -564,6 +571,10 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
 void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dlist)
 {
     svn::StatusEntries::iterator it;
+#if 0
+    KFileItemList oneItem;
+#endif
+
     for (it = dlist.begin();it!=dlist.end();++it) {
         FileListViewItem * item;
         if (!_parent) {
@@ -582,9 +593,24 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
 //            kdDebug()<< "Watching folder: " + item->fullName() << endl;
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
+#if 0
+            if (item->fileItem()) {
+                oneItem.append(item->fileItem());
+            }
+#endif
 //            kdDebug()<< "Watching file: " + item->fullName() << endl;
         }
     }
+#if 0
+    if (oneItem.count()>0) {
+        int size = Settings::listview_icon_size();
+        KIO::PreviewJob* m_previewJob= KIO::filePreview(oneItem, size, size, size, 70, true, true, 0);
+        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem *, const QPixmap & ) ),
+                 this, SLOT( gotPreview( const KFileItem *, const QPixmap & ) ) );
+        connect( m_previewJob, SIGNAL( result( KIO::Job * ) ),
+                 this, SLOT( gotPreviewResult() ) );
+    }
+#endif
 }
 
 /* newdir is the NEW directory! just required if local */
@@ -2028,6 +2054,24 @@ void kdesvnfilelist::slotDirItemDeleted(const QString&what)
         m_SvnWrapper->deleteFromModifiedCache(what);
     }
     m_pList->startScan();
+}
+
+
+void kdesvnfilelist::gotPreview( const KFileItem* item, const QPixmap& pixmap )
+{
+    FileListViewItem*which = findEntryItem(item->localPath());
+    if (which) {
+        which->setPreviewPix(pixmap);
+    }
+//    m_previewJob = 0;
+//    if (m_svnitem || item != m_svnitem->fileItem()) return;
+
+//    m_iconLabel -> setPixmap(pixmap);
+}
+
+void kdesvnfilelist::gotPreviewResult()
+{
+//    m_previewJob = 0;
 }
 
 FileListViewItem* kdesvnfilelist::findEntryItem(const QString&what,FileListViewItem*startAt)

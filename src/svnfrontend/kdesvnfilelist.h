@@ -159,6 +159,7 @@ protected slots:
     /* callback slots */
     virtual void slotCopyFinished( KIO::Job *);
     virtual void slotDeleteFinished(KIO::Job*);
+    virtual void _openURL(const QString&);
 
 signals:
     void sigLogMessage(const QString&);
@@ -166,6 +167,7 @@ signals:
     void sigShowPopup(const QString&);
     void sigUrlOpend(bool);
     void sigSwitchUrl(const KURL&);
+    void sigUrlChanged(const QString&);
 
 public slots:
     virtual void refreshCurrentTree();
@@ -190,15 +192,16 @@ protected slots:
     virtual void slotDirItemCreated(const QString&);
     virtual void slotDirItemDirty(const QString&);
     virtual void slotDirItemDeleted(const QString&);
-protected slots:
     virtual void slotRelocate();
     virtual void slotRescanIcons();
-protected slots:
     virtual void slotCheckNewItems();
-protected slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
     virtual void slotInternalDrop();
+
+private slots:
+    void gotPreview( const KFileItem*, const QPixmap& );
+    void gotPreviewResult();
 };
 
 #endif

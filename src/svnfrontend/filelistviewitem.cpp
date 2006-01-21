@@ -128,7 +128,22 @@ void FileListViewItem::makePixmap()
 {
     int size = Settings::listview_icon_size();
     bool overlay = Settings::display_overlays();
-    QPixmap pm = getPixmap(size,overlay);
+    QPixmap pm;
+    if (m_Pixmap.isNull()) {
+        pm = getPixmap(size,overlay);
+    } else {
+        pm = getPixmap(m_Pixmap,size,overlay);
+    }
+    setPixmap(COL_ICON,pm);
+}
+
+void FileListViewItem::setPreviewPix(const QPixmap& pixmap)
+{
+    if (pixmap.isNull()) return;
+    m_Pixmap = pixmap;
+    int size = Settings::listview_icon_size();
+    bool overlay = Settings::display_overlays();
+    QPixmap pm = getPixmap(pixmap,size,overlay);
     setPixmap(COL_ICON,pm);
 }
 
@@ -155,13 +170,6 @@ void FileListViewItem::update()
     setText(COL_LAST_AUTHOR,cmtAuthor());
     setText(COL_LAST_DATE,KGlobal::locale()->formatDateTime(fullDate()));
     setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
-#if 0
-    if (isLocked()) {
-        setPixmap(COL_IS_LOCKED,KGlobal::iconLoader()->loadIcon("svnlock",KIcon::Desktop,16));
-    } else {
-        setPixmap(COL_IS_LOCKED,QPixmap());
-    }
-#endif
     setText(COL_IS_LOCKED,lockOwner());
 }
 

@@ -58,6 +58,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     connect(m_flist,SIGNAL(sigShowPopup(const QString&)),this,SLOT(slotDispPopup(const QString&)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
     connect(m_flist,SIGNAL(sigSwitchUrl(const KURL&)),this,SIGNAL(sigSwitchUrl(const KURL&)));
+    connect(m_flist,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
 }
 
 void kdesvnView::slotAppendLog(const QString& text)
@@ -74,6 +75,14 @@ void kdesvnView::print(QPainter *, int , int)
 {
     // do the actual printing, here
     // p->drawText(etc..)
+}
+
+void kdesvnView::slotUrlChanged(const QString&url)
+{
+    m_currentURL=url;
+    slotSetTitle(url);
+    emit sigUrlChanged(url);
+    slotOnURL(i18n("Repository opened"));
 }
 
 QString kdesvnView::currentURL()

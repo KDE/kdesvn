@@ -95,6 +95,7 @@ signals:
     void sigShowPopup(const QString&);
     void sigSwitchUrl(const KURL&);
     void setWindowCaption(const QString&);
+    void sigUrlChanged(const QString&);
 
 public slots:
     virtual void closeMe();
@@ -106,6 +107,7 @@ protected slots:
     virtual void slotOnURL(const QString& url);
     virtual void slotSetTitle(const QString& title);
     virtual void slotAppendLog(const QString& text);
+    virtual void slotUrlChanged(const QString&);
 
 protected:
     kdesvnfilelist*m_flist;

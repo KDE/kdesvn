@@ -81,8 +81,7 @@ WARN_LOGFILE           =
 # configuration options related to the input files
 #---------------------------------------------------------------------------
 INPUT                  = src \
-                         /usr/include/subversion-1 \
-                         /usr/include/apr-0
+                         /usr/include/subversion-1 
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \

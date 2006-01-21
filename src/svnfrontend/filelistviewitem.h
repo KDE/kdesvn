@@ -61,6 +61,7 @@ public:
     virtual void setStat(const svn::Status&);
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
     virtual void setOpen(bool o);
+    virtual void setPreviewPix(const QPixmap& pixmap);
 
 protected:
     QColor m_highColor;
@@ -73,6 +74,7 @@ protected:
     void init();
     virtual SvnActions*getWrapper()const;
     SvnActions*m_SvnWrapper;
+    QPixmap m_Pixmap;
 };
 
 typedef QPtrList<FileListViewItem> FileListViewItemList;

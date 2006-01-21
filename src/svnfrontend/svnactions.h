@@ -165,6 +165,7 @@ signals:
     void sigRefreshCurrent(SvnItem*);
     void sigRefreshIcons();
     void sigExtraLogMsg(const QString&);
+    void sigGotourl(const QString&);
 
 protected slots:
     virtual void wroteStdin(KProcess*);

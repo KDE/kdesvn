@@ -1278,7 +1278,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
         s2 = src2;
     }
     try {
-        m_Data->m_Svnclient.merge(svn::Path(src1),
+        m_Data->m_Svnclient->merge(svn::Path(src1),
             rev1,
             svn::Path(s2),
             rev2,

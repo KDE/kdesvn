@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "mergedlg_impl.h"
 #include "rangeinput_impl.h"
-#include "svncpp/url.hpp"
+#include "svnqt/url.hpp"
 
 #include <kurlrequester.h>
 #include <kdialogbase.h>

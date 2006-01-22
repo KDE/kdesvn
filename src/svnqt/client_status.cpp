@@ -363,18 +363,23 @@ namespace svn
     baton.pool = pool;
     svn_opt_revision_t pegr;
     const char *truepath;
+    bool internal_peg = false;
     error = svn_opt_parse_path (&pegr, &truepath,
                                  path.TOUTF8(),
                                  pool);
     if (error != NULL)
       throw ClientException (error);
 
-    if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified))
-        pegr.kind = svn_opt_revision_head;
+    if (peg_revision.kind() == svn_opt_revision_unspecified) {
+        if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified)) {
+            pegr.kind = svn_opt_revision_head;
+            internal_peg=true;
+        }
+    }
 
     error =
       svn_client_info(truepath,
-                      &pegr,
+                      internal_peg?&pegr:peg_revision.revision(),
                       rev.revision (),
                       &InfoEntryFunc,
                       &baton,

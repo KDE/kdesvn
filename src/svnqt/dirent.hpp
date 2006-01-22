@@ -52,6 +52,7 @@ namespace svn
      */
     DirEntry (const QString& name, svn_dirent_t * dirEntry,svn_lock_t*lockEntry);
 
+    DirEntry (const QString& name, svn_dirent_t * dirEntry,const LockEntry&lockEntry);
     /**
      * copy constructor
      */
@@ -103,7 +104,7 @@ namespace svn
      * inside svn::Client::ls.
      * \param aLock the subversion lock description to convert.
      */
-    void 
+    void
     setLock(svn_lock_t*aLock);
 
 

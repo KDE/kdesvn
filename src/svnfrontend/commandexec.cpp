@@ -234,10 +234,15 @@ int CommandExec::exec()
                 tmp = tmpurl.path();
             }
         }
+        QStringList l = QStringList::split('?',tmp);
+        if (l.count()>0) {
+            tmp=l[0];
+        }
         while (tmp.endsWith("/")) {
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
+        kdDebug()<<"Resulting url: "<<tmp<<endl;
         if ( (j>2 && dont_check_second) || dont_check_all) {
             continue;
         }
@@ -345,7 +350,10 @@ void CommandExec::slotCmd_cat()
         m_pCPart->end = svn::Revision::HEAD;
         kdDebug()<<"Setting head standard for cat"<<endl;
     }
-    m_pCPart->m_SvnWrapper->makeCat((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0],m_pCPart->url[0]);
+    kdDebug()<<"Rev set "<<m_pCPart->rev_set<<endl;
+    m_pCPart->m_SvnWrapper->makeCat(
+        (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0],m_pCPart->url[0]
+        ,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
 }
 
 void CommandExec::slotCmd_get()
@@ -366,7 +374,8 @@ void CommandExec::slotCmd_get()
         clientException(i18n("Could not open %1 for writing").arg(m_pCPart->outfile));
         return;
     }
-    QByteArray content = m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0]);
+    QByteArray content = m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0]
+        ,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
     if (!content.size()||of.writeBlock(content,content.size())==-1) {
         clientException(i18n("Error getting content and/or writing it to %1").arg(m_pCPart->outfile));
     }

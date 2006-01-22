@@ -92,6 +92,12 @@ namespace svn
     setLock(lockEntry);
   }
 
+  DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry,const LockEntry&lockEntry)
+    : m (new Data (name, dirEntry))
+  {
+    m->m_Lock = lockEntry;
+  }
+
   DirEntry::DirEntry (const DirEntry & src)
     : m (new Data (src))
   {
@@ -150,7 +156,7 @@ namespace svn
       return m->m_Lock;
   }
 
-  void 
+  void
   DirEntry::setLock(svn_lock_t*_l)
   {
      m->m_Lock.init(_l);

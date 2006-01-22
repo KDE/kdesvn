@@ -64,8 +64,8 @@ public:
     svn::Client* svnclient();
     void prepareUpdate(bool ask);
     template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog");
-    void makeCat(svn::Revision start, const QString&what,const QString&disp);
-    QByteArray makeGet(svn::Revision start, const QString&what);
+    void makeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg=svn::Revision::UNDEFINED);
+    QByteArray makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg=svn::Revision::UNDEFINED);
     void addItems(const QValueList<svn::Path> &items,bool rec=false);
     void addItems(const QStringList&w,bool rec=false);
     void checkAddItems(const QString&path,bool print_error_box=true);

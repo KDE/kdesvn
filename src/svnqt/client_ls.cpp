@@ -98,9 +98,11 @@ namespace svn
   {
     Pool pool;
 
-    apr_hash_t * hash;
-    apr_hash_t * lock_hash;
     Revision peg=Revision::UNDEFINED;
+    apr_hash_t * hash;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+    apr_hash_t * lock_hash;
+
     svn_error_t * error =
       svn_client_ls3 (&hash,
                       &lock_hash,
@@ -110,6 +112,20 @@ namespace svn
                      recurse,
                      *m_context,
                      pool);
+#else
+    QString url = pathOrUrl;
+    url+="/";
+    bool _det = true;
+
+    svn_error_t * error =
+      svn_client_ls2 (&hash,
+                     pathOrUrl.TOUTF8(),
+                     peg,
+                     revision,
+                     recurse,
+                     *m_context,
+                     pool);
+#endif
 
     if (error != 0)
       throw ClientException (error);
@@ -124,8 +140,9 @@ namespace svn
     {
       const char *entryname;
       svn_dirent_t *dirent;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_lock_t * lockent;
-
+#endif
       svn_sort__item_t *item;
 
       item = &APR_ARRAY_IDX (array, i, svn_sort__item_t);
@@ -134,9 +151,23 @@ namespace svn
 
       dirent = static_cast<svn_dirent_t *>
         (apr_hash_get (hash, entryname, item->klen));
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       lockent = static_cast<svn_lock_t *>
         (apr_hash_get(lock_hash,entryname,item->klen));
       entries.push_back (DirEntry(QString::fromUtf8(entryname), dirent,lockent));
+#else
+      if (!_det) {
+        entries.push_back (DirEntry(QString::fromUtf8(entryname),dirent));
+      } else {
+        try {
+            InfoEntries infoEntries = info(url+entryname,false,revision,Revision(Revision::UNDEFINED));
+            entries.push_back(DirEntry(QString::fromUtf8(entryname),dirent,infoEntries[0].lockEntry()));
+        } catch (ClientException) {
+            _det = false;
+            entries.push_back(DirEntry(QString::fromUtf8(entryname),dirent));
+        }
+      }
+#endif
     }
 
     return entries;

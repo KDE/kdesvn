@@ -505,16 +505,19 @@ namespace svn
      * lists entries in @a pathOrUrl no matter whether local or
      * repository
      *
+     * If checking for locks is activated, it lists the locks inside repository, not locks inside 
+     * working copy!
      * @param pathOrUrl
      * @param revision
      * @param recurse
+     * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with
      *         a relative path (only filename)
      */
     virtual DirEntries
     list (const QString& pathOrUrl,
           Revision& revision,
-          bool recurse) throw (ClientException)=0;
+          bool recurse,bool retrieve_locks) throw (ClientException)=0;
 
     /**
      * lists properties in @a path no matter whether local or

@@ -132,7 +132,7 @@ namespace svn
     m_Path=url;
     _text_status = svn_wc_status_normal;
     _prop_status = svn_wc_status_normal;
-    m_Lock=LockEntry();
+    m_Lock=src.lockEntry();
     _switched = false;
     _repos_text_status = svn_wc_status_normal;
     _repos_prop_status = svn_wc_status_normal;

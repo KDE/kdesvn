@@ -29,6 +29,8 @@
 // subversion api
 #include "svn_client.h"
 
+#include "lock_entry.hpp"
+
 #include <qstring.h>
 
 namespace svn
@@ -45,6 +47,10 @@ namespace svn
      * constructor for existing @a svn_dirent_t entries
      */
     DirEntry (const QString& name, svn_dirent_t * dirEntry);
+    /**
+     * constructor for existing @a svn_dirent_t entries
+     */
+    DirEntry (const QString& name, svn_dirent_t * dirEntry,svn_lock_t*lockEntry);
 
     /**
      * copy constructor
@@ -82,6 +88,23 @@ namespace svn
 
     const QString&
     lastAuthor () const;
+
+    //! The assigned lock entry
+    /*!
+     * returns the assigned lock entry if set
+     * \return a valid or an empty lock
+     */
+    const LockEntry&
+    lockEntry() const;
+
+    //! initialize and convert the internal lock entry
+    /*!
+     * This method should not needed to call outside the lib, it may just used
+     * inside svn::Client::ls.
+     * \param aLock the subversion lock description to convert.
+     */
+    void 
+    setLock(svn_lock_t*aLock);
 
 
   private:

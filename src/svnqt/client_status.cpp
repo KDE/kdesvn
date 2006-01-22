@@ -198,7 +198,7 @@ namespace svn
                 Context * context,
                 bool detailed_remote)
   {
-    DirEntries dirEntries = client->list(path, revision, descend);
+    DirEntries dirEntries = client->list(path, revision, descend,detailed_remote);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
@@ -210,7 +210,8 @@ namespace svn
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
     {
       const DirEntry & dirEntry = *it;
-
+      entries.push_back(dirEntryToStatus (path, dirEntry));
+#if 0
       if (_det && dirEntry.kind()==svn_node_file) {
         try {
             InfoEntries infoEntries = client->info(url+dirEntry.name(),false,revision,Revision(Revision::UNDEFINED));
@@ -225,6 +226,7 @@ namespace svn
       if (_det && context->getListener()->contextCancel()) {
         throw ClientException("Canceld");
       }
+#endif
     }
 
     return entries;

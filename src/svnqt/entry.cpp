@@ -159,6 +159,7 @@ namespace svn
         _cmt_rev = dirEntry.createdRev ();
         _cmt_date = dirEntry.time ();
         _cmt_author = dirEntry.lastAuthor ();
+        m_Lock=dirEntry.lockEntry();
         m_valid = true;
     }
 

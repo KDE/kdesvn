@@ -229,11 +229,15 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
         }
         if (isLocked()) {
-            QPixmap p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
-            QImage i1; i1 = p;
-            QImage i2; i2 = p2;
-            KIconEffect::overlay(i1,i2);
-            p = i1;
+            m_bgColor = LOCKED;
+            QPixmap p2;
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
+            if (!p2.isNull()) {
+            	QImage i1; i1 = p;
+            	QImage i2; i2 = p2;
+            	KIconEffect::overlay(i1,i2);
+            	p = i1;
+            }
         }
     } else {
         _local = true;

@@ -27,7 +27,7 @@
 
 // svncpp
 #include "dirent.hpp"
-
+#include "lock_entry.hpp"
 
 namespace svn
 {
@@ -41,17 +41,18 @@ namespace svn
     svn_revnum_t createdRev;
     apr_time_t time;
     QString lastAuthor;
+    LockEntry m_Lock;
 
     Data ()
       : kind (svn_node_unknown), size (0), hasProps(false),
-        createdRev (0), time (0)
+        createdRev (0), time (0), m_Lock()
     {
     }
 
     Data (const QString& _name, svn_dirent_t * dirEntry)
       : name (_name), kind (dirEntry->kind), size (dirEntry->size),
         hasProps (dirEntry->has_props != 0),
-        createdRev (dirEntry->created_rev), time (dirEntry->time)
+        createdRev (dirEntry->created_rev), time (dirEntry->time), m_Lock()
     {
       lastAuthor = dirEntry->last_author == 0 ? "" : QString::fromUtf8(dirEntry->last_author);
     }
@@ -71,6 +72,7 @@ namespace svn
       createdRev = src.createdRev ();
       time = src.time ();
       lastAuthor = src.lastAuthor ();
+      m_Lock = src.lockEntry();
     }
   };
 
@@ -79,9 +81,15 @@ namespace svn
   {
   }
 
-  DirEntry::DirEntry (const QString& name, svn_dirent_t * DirEntry)
-    : m (new Data (name, DirEntry))
+  DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry)
+    : m (new Data (name, dirEntry))
   {
+  }
+
+  DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry,svn_lock_t*lockEntry)
+    : m (new Data (name, dirEntry))
+  {
+    setLock(lockEntry);
   }
 
   DirEntry::DirEntry (const DirEntry & src)
@@ -134,6 +142,18 @@ namespace svn
   DirEntry::name () const
   {
     return m->name;
+  }
+
+  const LockEntry&
+  DirEntry::lockEntry() const
+  {
+      return m->m_Lock;
+  }
+
+  void 
+  DirEntry::setLock(svn_lock_t*_l)
+  {
+     m->m_Lock.init(_l);
   }
 
   DirEntry &

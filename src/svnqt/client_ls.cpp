@@ -48,9 +48,9 @@ namespace svn
 {
 
   DirEntries
-  Client_impl::list (const QString& pathOrUrl,
-                Revision& revision,
-                bool recurse) throw (ClientException)
+  Client_impl::list_simple(const QString& pathOrUrl,
+          Revision& revision,
+          bool recurse) throw (ClientException)
   {
     Pool pool;
 
@@ -89,6 +89,69 @@ namespace svn
     }
 
     return entries;
+  }
+
+  DirEntries
+  Client_impl::list_locks(const QString& pathOrUrl,
+        Revision& revision,
+        bool recurse) throw (ClientException)
+  {
+    Pool pool;
+
+    apr_hash_t * hash;
+    apr_hash_t * lock_hash;
+    Revision peg=Revision::UNDEFINED;
+    svn_error_t * error =
+      svn_client_ls3 (&hash,
+                      &lock_hash,
+                     pathOrUrl.TOUTF8(),
+                     peg,
+                     revision,
+                     recurse,
+                     *m_context,
+                     pool);
+
+    if (error != 0)
+      throw ClientException (error);
+
+    apr_array_header_t *
+      array = svn_sort__hash (
+        hash, compare_items_as_paths, pool);
+
+    DirEntries entries;
+
+    for (int i = 0; i < array->nelts; ++i)
+    {
+      const char *entryname;
+      svn_dirent_t *dirent;
+      svn_lock_t * lockent;
+
+      svn_sort__item_t *item;
+
+      item = &APR_ARRAY_IDX (array, i, svn_sort__item_t);
+
+      entryname = static_cast<const char *>(item->key);
+
+      dirent = static_cast<svn_dirent_t *>
+        (apr_hash_get (hash, entryname, item->klen));
+      lockent = static_cast<svn_lock_t *>
+        (apr_hash_get(lock_hash,entryname,item->klen));
+      entries.push_back (DirEntry(QString::fromUtf8(entryname), dirent,lockent));
+    }
+
+    return entries;
+  }
+
+  DirEntries
+  Client_impl::list(const QString& pathOrUrl,
+                Revision& revision,
+                bool recurse,bool retrieve_locks) throw (ClientException)
+  {
+      if (!retrieve_locks) {
+          return list_simple(pathOrUrl,revision,recurse);
+      } else {
+          return list_locks(pathOrUrl,revision,recurse);
+      }
   }
 }
 

@@ -1686,7 +1686,7 @@ bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&
     if (!m_Data->m_CurrentContext) return false;
     QString ex;
     try {
-        dlist = m_Data->m_Svnclient->list(url,where,rec);
+        dlist = m_Data->m_Svnclient->list(url,where,rec,false);
     } catch (svn::ClientException e) {
             emit clientException(e.msg());
             return false;

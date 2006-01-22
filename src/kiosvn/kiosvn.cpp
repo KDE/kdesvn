@@ -175,7 +175,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     }
 
     try {
-        dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,false);
+        dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,false,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;

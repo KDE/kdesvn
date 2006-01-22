@@ -444,13 +444,14 @@ namespace svn
      * @param pathOrUrl
      * @param revision
      * @param recurse
+     * @param retrieve_locks check for REPOSITORY locks while listing
      * @return a vector of directory entries, each with
      *         a relative path (only filename)
      */
     virtual DirEntries
     list (const QString& pathOrUrl,
           Revision& revision,
-          bool recurse) throw (ClientException);
+          bool recurse,bool retrieve_locks) throw (ClientException);
 
     /**
      * lists properties in @a path no matter whether local or
@@ -626,6 +627,14 @@ namespace svn
      * @exception ClientException
      */
     svn_revnum_t update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException);
+    DirEntries
+    list_simple(const QString& pathOrUrl,
+          Revision& revision,
+          bool recurse) throw (ClientException);
+    DirEntries
+    list_locks(const QString& pathOrUrl,
+          Revision& revision,
+          bool recurse) throw (ClientException);
   };
 
 }

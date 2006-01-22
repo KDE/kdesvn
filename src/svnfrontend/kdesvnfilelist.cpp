@@ -1541,7 +1541,8 @@ void kdesvnfilelist::slotCat()
 {
     FileListViewItem*k = singleSelected();
     if (!k) return;
-    m_SvnWrapper->makeCat(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision, k->fullName(),k->text(0));
+    m_SvnWrapper->makeCat(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision, k->fullName(),k->text(0),
+        isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
 }
 
 
@@ -1960,8 +1961,8 @@ void kdesvnfilelist::slotInfo()
 {
     QPtrList<SvnItem> lst;
     SelectionList(&lst);
-    svn::Revision peg(svn_opt_revision_unspecified);
-    svn::Revision rev(svn_opt_revision_unspecified);
+    svn::Revision peg(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
+    svn::Revision rev(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
     if (!isWorkingCopy()) {
         rev = m_pList->m_remoteRevision;
     }

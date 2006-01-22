@@ -284,7 +284,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, const QString
     delete blame;
 }
 
-QByteArray SvnActions::makeGet(svn::Revision start, const QString&what)
+QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg)
 {
     QByteArray content;
     if (!m_Data->m_CurrentContext) return content;
@@ -293,7 +293,7 @@ QByteArray SvnActions::makeGet(svn::Revision start, const QString&what)
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Content cat","Getting content - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        content = m_Data->m_Svnclient.cat(p,start);
+        content = m_Data->m_Svnclient.cat(p,start,peg);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
     } catch (...) {
@@ -303,9 +303,9 @@ QByteArray SvnActions::makeGet(svn::Revision start, const QString&what)
     return content;
 }
 
-void SvnActions::makeCat(svn::Revision start, const QString&what, const QString&disp)
+void SvnActions::makeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg)
 {
-    QByteArray content = makeGet(start,what);
+    QByteArray content = makeGet(start,what,peg);
     if (content.size()==0) {
         emit clientException(i18n("Got no content"));
         return;

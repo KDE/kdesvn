@@ -206,7 +206,7 @@ void kio_svnProtocol::stat(const KURL& url)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    svn::Revision peg = svn::Revision::UNDEFINED;
+    svn::Revision peg = rev;
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
@@ -244,7 +244,7 @@ void kio_svnProtocol::get(const KURL& url)
     }
     QByteArray content;
     try {
-        content = m_pData->m_Svnclient.cat(makeSvnUrl(url),rev);
+        content = m_pData->m_Svnclient.cat(makeSvnUrl(url),rev,rev);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;

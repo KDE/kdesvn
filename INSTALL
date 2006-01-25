@@ -27,8 +27,18 @@ Note for release 0.5.0
 
 If you had installed kdesvn versions before, please UNINSTALL it first.
 
-Basic Installation
-==================
+Prepare install from repository (no configure script)
+=============================================
+
+You must first create the configure script with 
+
+"make -f Makefile.cvs"
+
+This requires autoconf/automake tools installed on system. After them you may proceed to next
+step.
+
+Basic Installation (configure script exists)
+============================================
 
    These are generic installation instructions.
 

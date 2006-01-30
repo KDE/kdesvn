@@ -22,7 +22,10 @@
 #define _SVNCPP_DEFINES_H
 
 // config
+#ifdef Q_WS_X11
 #include "config.h"
+#endif
+
 #ifdef __KDE_HAVE_GCC_VISIBILITY_DISABLED_MACRO
 #define SVNQT_EXPORT __attribute__ ((visibility("visible")))
 #define SVNQT_NOEXPORT __attribute__ ((visibility("hidden")))

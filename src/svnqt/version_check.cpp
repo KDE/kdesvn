@@ -20,23 +20,21 @@ namespace svn {
         return svn_ver_compatible(svn_client_version(),&Linkedtag);
     }
 
-    const char*Version::linked_version()
+    const QString Version::linked_version()
     {
-        return SVN_VERSION;
+        return QString( SVN_VERSION );
     }
-    const char*Version::running_version()
+
+    const QString Version::running_version()
     {
         if (curr_version_string.length()==0) {
             curr_version_string =
                 QString("%1.%2.%3.%4").arg(svn_client_version()->major).arg(svn_client_version()->minor)
                     .arg(svn_client_version()->patch).arg(svn_client_version()->tag);
         }
-#if QT_VERSION < 0x040000
-        return curr_version_string.ascii();
-#else
-        return curr_version_string.toAscii();
-#endif
+        return curr_version_string;
     }
+
     int Version::version_major()
     {
       return svn_client_version()->major;

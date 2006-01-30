@@ -22,7 +22,7 @@
 #define _SVNCPP_DEFINES_H
 
 // config
-#ifdef Q_WS_X11
+#ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 

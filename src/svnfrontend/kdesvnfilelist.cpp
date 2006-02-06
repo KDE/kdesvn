@@ -877,7 +877,11 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
     }
     QString what = fki->fullName();
     if (!isWorkingCopy()) {
-        what="ksvn+"+what;
+        if (what.startsWith("svn://")) {
+            what="k"+what;
+        } else {
+            what="ksvn+"+what;
+        }
     }
     QString feditor = Settings::external_display();
     if ( feditor.compare("default") == 0 )

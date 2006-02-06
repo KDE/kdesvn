@@ -2058,8 +2058,9 @@ void kdesvnfilelist::slotDirItemDeleted(const QString&what)
 }
 
 
-void kdesvnfilelist::gotPreview( const KFileItem* item, const QPixmap& pixmap )
+void kdesvnfilelist::gotPreview( const KFileItem*, const QPixmap&)
 {
+#if 0
     FileListViewItem*which = findEntryItem(item->localPath());
     if (which) {
         which->setPreviewPix(pixmap);
@@ -2068,6 +2069,7 @@ void kdesvnfilelist::gotPreview( const KFileItem* item, const QPixmap& pixmap )
 //    if (m_svnitem || item != m_svnitem->fileItem()) return;
 
 //    m_iconLabel -> setPixmap(pixmap);
+#endif
 }
 
 void kdesvnfilelist::gotPreviewResult()

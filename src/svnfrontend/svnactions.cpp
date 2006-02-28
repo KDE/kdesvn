@@ -67,6 +67,7 @@
 #include <qthread.h>
 #include <qtimer.h>
 #include <qlistview.h>
+#include <qfileinfo.h>
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -399,7 +400,7 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
         emit clientException(e.msg());
         return QString::null;
     }
-    EMIT_FINISHED;
+    if (!all) EMIT_FINISHED;
     QString text = "";
     svn::InfoEntries::const_iterator it;
     static QString rb = "<tr><td><nobr><font color=\"black\">";
@@ -587,7 +588,7 @@ void SvnActions::slotCommit()
     SvnItem*cur;
     QPtrListIterator<SvnItem> liter(which);
 
-    QValueList<svn::Path> targets;
+    svn::Pathes targets;
     if (which.count()==0) {
         targets.push_back(svn::Path(m_Data->m_ParentList->baseUri()));
     } else {
@@ -600,15 +601,48 @@ void SvnActions::slotCommit()
     makeCommit(targets);
 }
 
+#define _USE_RESOLVED_COMMIT 1
+
 bool SvnActions::makeCommit(const svn::Targets&targets)
 {
     bool ok,rec;
+#ifndef _USE_RESOLVED_COMMIT
     QString msg = Logmsg_impl::getLogmessage(&ok,&rec,
         m_Data->m_ParentList->realWidget(),"logmsg_impl");
     if (!ok) {
         return false;
     }
-
+#else
+    Logmsg_impl::logActionEntries _check,_uncheck;
+    svn::StatusEntries _Cache;
+    rec = false;
+    /// @todo filter out double entries
+    for (unsigned j = 0; j < targets.size(); ++j) {
+        QFileInfo fi(targets.target(j).path());
+        svn::Revision where = svn::Revision::HEAD;
+        try {
+            _Cache = m_Data->m_Svnclient.status(targets.target(j).path(),true,false,false,false,where);
+        } catch (svn::ClientException e) {
+            emit clientException(e.msg());
+            return false;
+        }
+        for (unsigned int i = 0; i < _Cache.count();++i) {
+            if (_Cache[i].isRealVersioned()&& (
+                _Cache[i].textStatus()==svn_wc_status_modified||
+                _Cache[i].textStatus()==svn_wc_status_added||
+                _Cache[i].textStatus()==svn_wc_status_deleted||
+                _Cache[i].propStatus()==svn_wc_status_modified
+            ) ) {
+                _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),"Commit"));
+            }
+        }
+    }
+    QString msg = Logmsg_impl::getLogmessage(_check,_uncheck,&ok,
+        m_Data->m_ParentList->realWidget(),"logmsg_impl");
+    if (!ok) {
+        return false;
+    }
+#endif
     svn_revnum_t nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");

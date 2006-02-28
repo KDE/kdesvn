@@ -32,6 +32,8 @@
 
 #include <qvbox.h>
 #include <qcheckbox.h>
+#include <qlabel.h>
+#include <qlistview.h>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -44,6 +46,23 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
 {
     m_LogEdit->setFocus();
+    m_Reviewlabel->hide();
+    m_ReviewList->hide();
+}
+
+Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
+        const logActionEntries&_notActivatedList,
+        QWidget *parent, const char *name)
+    :LogmessageData(parent, name)
+{
+    m_LogEdit->setFocus();
+    /// @todo own listcheckitem class with more information
+    for (unsigned j = 0; j<_activatedList.count();++j) {
+        QCheckListItem * item = new QCheckListItem(m_ReviewList,_activatedList[j].first,QCheckListItem::CheckBox);
+        item->setText(1,_activatedList[j].second);
+        item->setTristate(FALSE);
+        item->setState(QCheckListItem::On);
+    }
 }
 
 void Logmsg_impl::slotHistoryActivated(int number)
@@ -163,6 +182,34 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     return msg;
 }
 
+QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
+            const logActionEntries&_off,
+            bool*ok,QWidget*parent,const char*name)
+{
+    bool _ok;
+    QString msg("");
+
+    Logmsg_impl*ptr=0;
+    KDialogBase dlg(parent,name,true,i18n("Commit log"),
+            KDialogBase::Ok|KDialogBase::Cancel,
+            KDialogBase::Ok,true);
+    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
+    ptr->m_RecursiveButton->hide();
+    ptr->initHistory();
+    dlg.resize(dlg.configDialogSize(groupName));
+    if (dlg.exec()!=QDialog::Accepted) {
+        _ok = false;
+        /* avoid compiler warnings */
+    } else {
+        _ok = true;
+        msg=ptr->getMessage();
+        ptr->saveHistory();
+    }
+    dlg.saveDialogSize(groupName,false);
+    if (ok) *ok = _ok;
+    return msg;
+}
 
 /*!
     \fn Logmsg_impl::setRecCheckboxtext(const QString&what)

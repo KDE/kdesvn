@@ -40,6 +40,10 @@
    <label>Get item informations recursively</label>
    <default>false</default>
   </entry>
+  <entry key="review_commit" type="Bool">
+    <label>Review items before commit</label>
+    <default>true</default>
+  </entry>
   <entry key="display_ignored_files" type="Bool" >
    <label>Display ignored files</label>
    <default>true</default>

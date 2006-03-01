@@ -32,6 +32,8 @@
 
 #include <qvbox.h>
 #include <qcheckbox.h>
+#include <qlabel.h>
+#include <qlistview.h>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -40,10 +42,37 @@ const char* Logmsg_impl::groupName = "logmsg_dialog_size";
 
 unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
 
+class SvnCheckListItem:public QCheckListItem
+{
+protected:
+    Logmsg_impl::logActionEntry m_Content;
+public:
+    SvnCheckListItem(QListView*,const Logmsg_impl::logActionEntry&);
+    const Logmsg_impl::logActionEntry&data(){return m_Content;}
+};
+
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
 {
     m_LogEdit->setFocus();
+    m_Reviewlabel->hide();
+    m_ReviewList->hide();
+}
+
+Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
+        const logActionEntries&_notActivatedList,
+        QWidget *parent, const char *name)
+    :LogmessageData(parent, name)
+{
+    m_LogEdit->setFocus();
+    for (unsigned j = 0; j<_activatedList.count();++j) {
+        SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_activatedList[j]);
+        item->setState(QCheckListItem::On);
+    }
+    for (unsigned j = 0; j<_notActivatedList.count();++j) {
+        SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
+        item->setState(QCheckListItem::Off);
+    }
 }
 
 void Logmsg_impl::slotHistoryActivated(int number)
@@ -163,6 +192,36 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     return msg;
 }
 
+QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
+            const logActionEntries&_off,
+            logActionEntries&_result,
+            bool*ok,QWidget*parent,const char*name)
+{
+    bool _ok;
+    QString msg("");
+
+    Logmsg_impl*ptr=0;
+    KDialogBase dlg(parent,name,true,i18n("Commit log"),
+            KDialogBase::Ok|KDialogBase::Cancel,
+            KDialogBase::Ok,true);
+    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
+    ptr->m_RecursiveButton->hide();
+    ptr->initHistory();
+    dlg.resize(dlg.configDialogSize(groupName));
+    if (dlg.exec()!=QDialog::Accepted) {
+        _ok = false;
+        /* avoid compiler warnings */
+    } else {
+        _ok = true;
+        msg=ptr->getMessage();
+        ptr->saveHistory();
+    }
+    dlg.saveDialogSize(groupName,false);
+    if (ok) *ok = _ok;
+    _result = ptr->selectedEntries();
+    return msg;
+}
 
 /*!
     \fn Logmsg_impl::setRecCheckboxtext(const QString&what)
@@ -170,6 +229,37 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
 void Logmsg_impl::setRecCheckboxtext(const QString&what)
 {
     m_RecursiveButton->setText(what);
+}
+
+Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
+{
+    logActionEntries _result;
+    QListViewItemIterator it( m_ReviewList );
+    while ( it.current() ) {
+        SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+        if (item->isOn()) {
+            _result.append(item->data());
+        }
+        ++it;
+    }
+    return _result;
+}
+
+Logmsg_impl::logActionEntry::logActionEntry(const QString&name,const QString&action,int kind)
+    : _name(name),_actionDesc(action),_kind(kind)
+{
+}
+
+Logmsg_impl::logActionEntry::logActionEntry()
+    : _name(""),_actionDesc(""),_kind(0)
+{
+}
+
+SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logActionEntry&content)
+    :QCheckListItem(parent,content._name,QCheckListItem::CheckBox),m_Content(content)
+{
+    setTristate(FALSE);
+    setText(1,m_Content._actionDesc);
 }
 
 #include "logmsg_impl.moc"

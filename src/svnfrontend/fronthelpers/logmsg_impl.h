@@ -22,18 +22,40 @@
 
 #include "src/svnfrontend/fronthelpers/logmessage.h"
 #include <qvaluelist.h>
+#include <qpair.h>
 
 class Logmsg_impl: public LogmessageData {
 Q_OBJECT
 public:
+    struct logActionEntry {
+        QString _name;
+        QString _actionDesc;
+        int _kind;
+        logActionEntry(const QString&,const QString&,int kind = 0);
+        logActionEntry();
+    };
+
+    typedef QValueList<logActionEntry> logActionEntries;
+
     Logmsg_impl(QWidget *parent = 0, const char *name = 0);
+    Logmsg_impl(const logActionEntries&,
+        const logActionEntries&,
+        QWidget *parent = 0, const char *name = 0);
+
     QString getMessage()const;
     bool isRecursive()const;
     void initHistory();
     void saveHistory();
 
     static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(const logActionEntries&,
+            const logActionEntries&,
+            logActionEntries&,
+            bool*ok=0,QWidget*parent=0,const char*name=0);
+
     void setRecCheckboxtext(const QString&what);
+
+    logActionEntries selectedEntries();
 
 protected slots:
     virtual void slotHistoryActivated(int);

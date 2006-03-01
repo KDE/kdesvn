@@ -67,6 +67,7 @@
 #include <qthread.h>
 #include <qtimer.h>
 #include <qlistview.h>
+#include <qfileinfo.h>
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -402,7 +403,7 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
         emit clientException(e.msg());
         return QString::null;
     }
-    EMIT_FINISHED;
+    if (!all) EMIT_FINISHED;
     QString text = "";
     svn::InfoEntries::const_iterator it;
     static QString rb = "<tr><td><nobr><font color=\"black\">";
@@ -590,7 +591,7 @@ void SvnActions::slotCommit()
     SvnItem*cur;
     QPtrListIterator<SvnItem> liter(which);
 
-    QValueList<svn::Path> targets;
+    svn::Pathes targets;
     if (which.count()==0) {
         targets.push_back(svn::Path(m_Data->m_ParentList->baseUri()));
     } else {
@@ -606,17 +607,80 @@ void SvnActions::slotCommit()
 bool SvnActions::makeCommit(const svn::Targets&targets)
 {
     bool ok,rec;
-    QString msg = Logmsg_impl::getLogmessage(&ok,&rec,
-        m_Data->m_ParentList->realWidget(),"logmsg_impl");
-    if (!ok) {
-        return false;
+    svn_revnum_t nnum;
+    svn::Targets _targets;
+    svn::Pathes _deldir;
+    bool review = Settings::review_commit();
+    QString msg;
+
+    if (!review) {
+        msg = Logmsg_impl::getLogmessage(&ok,&rec,
+            m_Data->m_ParentList->realWidget(),"logmsg_impl");
+        if (!ok) {
+            return false;
+        }
+        _targets = targets;
+    } else {
+        Logmsg_impl::logActionEntries _check,_uncheck,_result;
+        svn::StatusEntries _Cache;
+        rec = false;
+        /// @todo filter out double entries
+        for (unsigned j = 0; j < targets.size(); ++j) {
+            svn::Revision where = svn::Revision::HEAD;
+            try {
+                StopDlg sdlg(m_Data->m_SvnContext,0,0,i18n("Status / List"),i18n("Creating list / check status"));
+                _Cache = m_Data->m_Svnclient->status(targets.target(j).path(),true,false,false,false,where);
+            } catch (svn::ClientException e) {
+                emit clientException(e.msg());
+                return false;
+            }
+            for (unsigned int i = 0; i < _Cache.count();++i) {
+                if (_Cache[i].isRealVersioned()&& (
+                    _Cache[i].textStatus()==svn_wc_status_modified||
+                    _Cache[i].textStatus()==svn_wc_status_added||
+                    _Cache[i].textStatus()==svn_wc_status_deleted||
+                    _Cache[i].propStatus()==svn_wc_status_modified
+                ) ) {
+                    if (_Cache[i].textStatus()==svn_wc_status_deleted) {
+                        _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Commit"),2));
+                    } else {
+                        _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Commit")));
+                    }
+                } else if (!_Cache[i].isVersioned()) {
+                    _uncheck.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Add and Commit"),1));
+                }
+            }
+        }
+        msg = Logmsg_impl::getLogmessage(_check,_uncheck,_result,&ok,
+            m_Data->m_ParentList->realWidget(),"logmsg_impl");
+        if (!ok||_result.count()==0) {
+            return false;
+        }
+        svn::Pathes _add,_commit;
+        for (unsigned int i=0; i < _result.count();++i) {
+            if (_result[i]._kind==2) {
+                QFileInfo fi(_result[i]._name);
+                if (fi.isDir()) {
+                    rec = true;
+                }
+            }
+            _commit.append(_result[i]._name);
+            if (_result[i]._kind==1) {
+                _add.append(_result[i]._name);
+            }
+        }
+        if (_add.count()>0) {
+            if (!addItems(_add,false)) {
+                return false;
+            }
+        }
+        _targets = svn::Targets(_commit);
     }
 
-    svn_revnum_t nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Commiting","Commiting - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->commit(targets,msg,rec);
+        nnum = m_Data->m_Svnclient->commit(_targets,msg,rec);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return false;
@@ -893,16 +957,16 @@ void SvnActions::makeAdd(bool rec)
 #endif
 }
 
-void SvnActions::addItems(const QStringList&w,bool rec)
+bool SvnActions::addItems(const QStringList&w,bool rec)
 {
     QValueList<svn::Path> items;
     for (unsigned int i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
-    addItems(items,rec);
+    return addItems(items,rec);
 }
 
-void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
+bool SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
 {
     QString ex;
     try {
@@ -912,8 +976,9 @@ void SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
+        return false;
     }
+    return true;
 }
 
 void SvnActions::makeDelete(const QStringList&w)

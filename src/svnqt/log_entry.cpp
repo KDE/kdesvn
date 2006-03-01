@@ -22,10 +22,6 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-
-// stl
-#include <string>
-
 // svncpp
 #include "log_entry.hpp"
 #include "pool.hpp"

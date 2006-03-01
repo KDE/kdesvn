@@ -243,8 +243,16 @@ This list may used for urls given for <link linkend="kdesvn-commandline">command
 <para>
 This section is mostly for beginners not familiar with subversion which tries to understand how subversions and/or RCS works.
 </para>
+
 <sect2>
 <title>Creating a working copy</title>
+<caution>
+<para>
+Working copies MUST accessible via local pathes. Subversion doesn't know something about pseudo filesystems like
+<prompt>smb://</prompt> or <prompt>fish://</prompt>. &kdesvn; translates some of them if possible (like <prompt>system:/home</prompt>) but isn't possible for networked
+stuff.
+</para>
+</caution>
 <para>
 First of all a you must create a working copy of your repository. For that select
 

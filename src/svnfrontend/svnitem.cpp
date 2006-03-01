@@ -38,6 +38,8 @@
 #include <qfileinfo.h>
 #include <qimage.h>
 #include <qptrlist.h>
+#include <qpainter.h>
+#include <qbitmap.h>
 
 class SvnItem_p:public ref_count
 {
@@ -150,9 +152,38 @@ const QDateTime&SvnItem::fullDate()const
     return (p_Item->m_fullDate);
 }
 
+QPixmap SvnItem::internalTransform(const QPixmap&first,int size)
+{
+    QPixmap result(size,size);
+    if (result.isNull()) {
+        return result;
+    }
+    const QBitmap * b = first.mask();
+    result.fill(Qt::white);
+    if (b) {
+        result.setMask(*b);
+    } else {
+        QBitmap m(size,size,true);
+        m.fill(Qt::white);
+        result.setMask(m);
+    }
+    QPainter pa;
+    pa.begin(&result);
+    int w = first.width()>size?size:first.width();
+    int h = first.height()>size?size:first.height();
+    pa.drawPixmap(0,0,first,0,0,w,h);
+    pa.end();
+    return result;
+}
+
 QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
 {
-    QPixmap p = _p;
+    QPixmap p;
+    if (_p.width()!=size || _p.height()!=size) {
+         p = internalTransform(_p,size);
+    } else {
+        p = _p;
+    }
 
 //    if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())!=0) {
         if (!isVersioned()) {

@@ -42,6 +42,15 @@ const char* Logmsg_impl::groupName = "logmsg_dialog_size";
 
 unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
 
+class SvnCheckListItem:public QCheckListItem
+{
+protected:
+    Logmsg_impl::logActionEntry m_Content;
+public:
+    SvnCheckListItem(QListView*,const Logmsg_impl::logActionEntry&);
+    const Logmsg_impl::logActionEntry&data(){return m_Content;}
+};
+
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     :LogmessageData(parent, name)
 {
@@ -56,12 +65,13 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
     :LogmessageData(parent, name)
 {
     m_LogEdit->setFocus();
-    /// @todo own listcheckitem class with more information
     for (unsigned j = 0; j<_activatedList.count();++j) {
-        QCheckListItem * item = new QCheckListItem(m_ReviewList,_activatedList[j].first,QCheckListItem::CheckBox);
-        item->setText(1,_activatedList[j].second);
-        item->setTristate(FALSE);
+        SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_activatedList[j]);
         item->setState(QCheckListItem::On);
+    }
+    for (unsigned j = 0; j<_notActivatedList.count();++j) {
+        SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
+        item->setState(QCheckListItem::Off);
     }
 }
 
@@ -184,6 +194,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
 
 QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             const logActionEntries&_off,
+            logActionEntries&_result,
             bool*ok,QWidget*parent,const char*name)
 {
     bool _ok;
@@ -208,6 +219,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     }
     dlg.saveDialogSize(groupName,false);
     if (ok) *ok = _ok;
+    _result = ptr->selectedEntries();
     return msg;
 }
 
@@ -217,6 +229,37 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
 void Logmsg_impl::setRecCheckboxtext(const QString&what)
 {
     m_RecursiveButton->setText(what);
+}
+
+Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
+{
+    logActionEntries _result;
+    QListViewItemIterator it( m_ReviewList );
+    while ( it.current() ) {
+        SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+        if (item->isOn()) {
+            _result.append(item->data());
+        }
+        ++it;
+    }
+    return _result;
+}
+
+Logmsg_impl::logActionEntry::logActionEntry(const QString&name,const QString&action,int kind)
+    : _name(name),_actionDesc(action),_kind(kind)
+{
+}
+
+Logmsg_impl::logActionEntry::logActionEntry()
+    : _name(""),_actionDesc(""),_kind(0)
+{
+}
+
+SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logActionEntry&content)
+    :QCheckListItem(parent,content._name,QCheckListItem::CheckBox),m_Content(content)
+{
+    setTristate(FALSE);
+    setText(1,m_Content._actionDesc);
 }
 
 #include "logmsg_impl.moc"

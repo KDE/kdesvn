@@ -27,7 +27,14 @@
 class Logmsg_impl: public LogmessageData {
 Q_OBJECT
 public:
-    typedef QPair<QString,QString> logActionEntry;
+    struct logActionEntry {
+        QString _name;
+        QString _actionDesc;
+        int _kind;
+        logActionEntry(const QString&,const QString&,int kind = 0);
+        logActionEntry();
+    };
+
     typedef QValueList<logActionEntry> logActionEntries;
 
     Logmsg_impl(QWidget *parent = 0, const char *name = 0);
@@ -43,9 +50,12 @@ public:
     static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
     static QString getLogmessage(const logActionEntries&,
             const logActionEntries&,
+            logActionEntries&,
             bool*ok=0,QWidget*parent=0,const char*name=0);
 
     void setRecCheckboxtext(const QString&what);
+
+    logActionEntries selectedEntries();
 
 protected slots:
     virtual void slotHistoryActivated(int);

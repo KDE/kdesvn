@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>339</width>
-            <height>256</height>
+            <height>283</height>
         </rect>
     </property>
     <property name="caption">
@@ -84,6 +84,17 @@
             </property>
             <property name="text">
                 <string>Logs always reads list of changed files</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_review_commit</cstring>
+            </property>
+            <property name="text">
+                <string>Review items before commit</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>List items next commit will send or not</string>
             </property>
         </widget>
         <widget class="KIntNumInput">

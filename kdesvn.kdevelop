@@ -217,7 +217,10 @@
     <dest>/home/ral/progs/Projekte/kdesvn</dest>
   </substmap>
   <kdevcppsupport>
-    <references/>
+    <references>
+      <pcs>KDElibs</pcs>
+      <pcs>Qt</pcs>
+    </references>
     <codecompletion>
       <includeGlobalFunctions>true</includeGlobalFunctions>
       <includeTypes>true</includeTypes>
@@ -254,17 +257,17 @@
   <dist>
     <custom>false</custom>
     <bzip>false</bzip>
-    <archname/>
+    <archname></archname>
     <appname>kdesvn</appname>
-    <version>0.7.3</version>
-    <release/>
-    <vendor/>
+    <version>0.7.4</version>
+    <release></release>
+    <vendor></vendor>
     <licence>LGPL</licence>
     <summary>Subversion client for KDE</summary>
     <group>Development/Tools</group>
     <packager>Rajko Albrecht</packager>
-    <description/>
-    <changelog/>
+    <description></description>
+    <changelog></changelog>
     <devpackage>false</devpackage>
     <docspackage>false</docspackage>
     <appicon>false</appicon>
@@ -273,7 +276,7 @@
     <useRPM>false</useRPM>
     <ftpkde>false</ftpkde>
     <appskde>false</appskde>
-    <url/>
+    <url></url>
   </dist>
   <ctagspart>
     <customArguments></customArguments>

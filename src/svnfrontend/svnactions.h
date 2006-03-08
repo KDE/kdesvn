@@ -87,6 +87,13 @@ public:
     void deleteFromModifiedCache(const QString&what);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
+    //! generate and displays a revision tree
+    /*!
+     * the parameter @a what must prepared, eg, if it comes from working copy
+     * it must not contain a "file://" inside.
+     * \param what item to display
+     */
+    void makeTree(const QString&what);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false,int limit = 0);
     void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false, int limit=0);
     const svn::LogEntries * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);

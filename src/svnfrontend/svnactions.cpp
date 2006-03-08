@@ -34,6 +34,8 @@
 #include "svnqt/context_listener.hpp"
 #include "svnqt/dirent.hpp"
 #include "svnqt/targets.hpp"
+#include "svnqt/url.hpp"
+#include "svnqt/wc.hpp"
 #include "helpers/sub2qt.h"
 #include "svnfrontend/fronthelpers/oimagescrollview.h"
 #include "cacheentry.h"
@@ -206,6 +208,60 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
         return 0;
     }
     return logs;
+}
+
+void SvnActions::makeTree(const QString&what)
+{
+    QString url;
+    QString ex;
+    if (!m_Data->m_CurrentContext) return;
+
+    if (!svn::Url::isValid(what)) {
+        // working copy
+        url = svn::Wc::getUrl(what);
+    } else {
+        KURL _uri = what;
+        QString prot = svn::Url::transformProtokoll(_uri.protocol());
+        _uri.setProtocol(prot);
+        url = _uri.prettyURL();
+    }
+    svn::InfoEntries e;
+    svn::Revision rev = svn::Revision::HEAD;
+    svn::Revision peg = svn::Revision::UNDEFINED;
+    try {
+        e = (m_Data->m_Svnclient->info(url,false,rev,peg));
+    } catch (svn::ClientException ce) {
+        emit clientException(ce.msg());
+        return;
+    }
+    if (e.count()<1) {
+        emit clientException(i18n("Got no info."));
+        return;
+    }
+    QString reposRoot = e[0].reposRoot();
+    const svn::LogEntries * logs = 0;
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        logs = m_Data->m_Svnclient->log(reposRoot,rev,svn::Revision((long)0),true,false,0);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return;
+    }
+    if (!logs) {
+        ex = i18n("Got no logs");
+        emit clientException(ex);
+        return;
+    }
+#if 0
+    SvnLogDlgImp disp(this);
+    disp.dispLog(logs,reposRoot);
+    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
+            this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
+    disp.exec();
+    disp.saveSize();
+#endif
+    delete logs;
 }
 
 void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files,int limit)

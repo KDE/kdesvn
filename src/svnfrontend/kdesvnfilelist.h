@@ -197,6 +197,7 @@ protected slots:
     virtual void slotCheckNewItems();
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
+    virtual void slotMakeTree();
     virtual void slotInternalDrop();
 
 private slots:

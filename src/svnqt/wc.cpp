@@ -39,7 +39,7 @@ namespace svn
   const char * Wc::ADM_DIR_NAME = SVN_WC_ADM_DIR_NAME;
 
   bool
-  Wc::checkWc (const char * dir)
+  Wc::checkWc (const QString& dir)
   {
     Pool pool;
     Path path (dir);
@@ -58,8 +58,8 @@ namespace svn
   }
 
   void
-  Wc::ensureAdm (const char * dir, const char *uuid,
-                 const char * url, const Revision & revision)
+  Wc::ensureAdm (const QString& dir, const QString& uuid,
+                 const QString& url, const Revision & revision) throw (ClientException)
   {
     Pool pool;
     Path dirPath (dir);
@@ -68,12 +68,37 @@ namespace svn
     svn_error_t * error =
       svn_wc_ensure_adm (
                          dirPath.path().TOUTF8(),    // path
-                         uuid,                // UUID
+                         uuid.TOUTF8(),                // UUID
                          urlPath.path().TOUTF8(),    // url
                          revision.revnum (),  // revision
                          pool);
     if(error != NULL)
       throw ClientException (error);
+  }
+
+  QString Wc::getUrl(const QString&path) throw (ClientException)
+  {
+    QString result = "";
+    Pool pool;
+    Path itemPath(path);
+    svn_error_t * error = 0;
+    svn_wc_adm_access_t *adm_access;
+    const svn_wc_entry_t *entry;
+    error = svn_wc_adm_probe_open2(&adm_access,0,itemPath.path().TOUTF8(),FALSE,0,pool);
+    if (error!=0) {
+        throw ClientException(error);
+    }
+    error = svn_wc_entry(&entry,itemPath.path().TOUTF8(),adm_access,FALSE,pool);
+    if (error!=0) {
+        throw ClientException(error);
+    }
+    error = svn_wc_adm_close(adm_access);
+    if (error!=0) {
+        throw ClientException(error);
+    }
+    result = entry?QString::fromUtf8(entry->url):"";
+
+    return result;
   }
 }
 

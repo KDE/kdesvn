@@ -199,8 +199,10 @@ void kdesvnfilelist::setupActions()
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction = new KAction(i18n("&Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
-    m_LogFullAction = new KAction(i18n("&Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    m_LogRangeAction = new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    m_LogFullAction = new KAction(i18n("Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    tmp_action = new KAction(i18n("Full revision tree"),"kdesvnlog",KShortcut(CTRL+Key_T),this,SLOT(slotMakeTree()),m_filesAction,"make_svn_tree");
+
     m_propertyAction = new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
@@ -734,6 +736,11 @@ void kdesvnfilelist::enableActions()
     /* 1. actions on dirs AND files */
     m_LogRangeAction->setEnabled(single||none);
     m_LogFullAction->setEnabled(single||none);
+    temp = filesActions()->action("make_svn_tree");
+    if (temp) {
+        temp->setEnabled(single||none);
+    }
+
     m_propertyAction->setEnabled(single);
     m_DelCurrent->setEnabled( (multi||single));
     m_LockAction->setEnabled( (multi||single));
@@ -773,7 +780,6 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled( (multi||single) && isWorkingCopy());
     }
-
     m_UpdateHead->setEnabled(isWorkingCopy()&&isopen);
     m_UpdateRev->setEnabled(isWorkingCopy()&&isopen);
     m_commitAction->setEnabled(isWorkingCopy()&&isopen);
@@ -2343,6 +2349,20 @@ void kdesvnfilelist::slotMakeRangeLog()
     dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
 }
 
+
+void kdesvnfilelist::slotMakeTree()
+{
+    QString what;
+    SvnItem*k = SelectedOrMain();
+    if (k) {
+        what = k->fullName();
+    } else if (!isWorkingCopy() && allSelected()->count()==0){
+        what = baseUri();
+    } else {
+        return;
+    }
+    m_SvnWrapper->makeTree(what);
+}
 
 /*!
     \fn kdesvnfilelist::slotMakeLog()

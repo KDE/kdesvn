@@ -70,6 +70,6 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum
     _entry.copyToPath=target;
     _entry.path = current;
     _entry.copyToRevision = target_rev;
-    _entry.action='A';
+    _entry.action=0;
     echangedPaths.push_back(_entry);
 }

@@ -43,7 +43,7 @@ RtreeData::~RtreeData()
 }
 
 RevisionTree::RevisionTree(const svn::LogEntries*_logs,const QString&origin,const svn::Revision& baserevision)
-    :m_Path(origin)
+    :m_Path(origin),m_InitialRevsion(0)
 {
     m_Data = new RtreeData;
     long possible_rev=-1;
@@ -83,10 +83,30 @@ void RevisionTree::topDownScan()
 {
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         for (unsigned i = 0; i<m_Data->m_History[j].echangedPaths.count();++i) {
+            /* find min revision of item */
+            if (m_Data->m_History[j].echangedPaths[i].action=='A'&&
+                isParent(m_Data->m_History[j].echangedPaths[i].path,m_Path))
+            {
+                if (!m_Data->m_History[j].echangedPaths[i].copyFromPath.isEmpty()) {
+                    if (m_InitialRevsion<m_Data->m_History[j].revision) {
+                        QString r = m_Path.mid(m_Data->m_History[j].echangedPaths[i].path.length());
+                        m_Path=m_Data->m_History[j].echangedPaths[i].copyFromPath;
+                        m_Path+=r;
+                        kdDebug()<<"Switched target to "<<m_Path<<endl;
+                    }
+                } else if (m_Data->m_History[j].echangedPaths[i].path==m_Path){
+                    // here it is added
+                    m_InitialRevsion = m_Data->m_History[j].revision;
+                    kdDebug()<<"Found add item at revision "<<m_InitialRevsion<<endl;
+                }
+            }
+
+            /* build forward ref */
             if (!m_Data->m_History[j].echangedPaths[i].copyFromPath.isEmpty()) {
                 /*kdDebug()<<"Insert copy to " << m_Data->m_History[j].echangedPaths[i].path
                     << " from revision " << m_Data->m_History[j].echangedPaths[i].copyFromRevision << endl;*/
                 m_Data->m_History[m_Data->m_History[j].echangedPaths[i].copyFromRevision].addCopyTo(m_Data->m_History[j].echangedPaths[i].copyFromPath,m_Data->m_History[j].echangedPaths[i].path,m_Data->m_History[j].echangedPaths[i].copyFromRevision);
+#if 0
                 if (m_Data->m_History[j].echangedPaths[i].path==m_Path) {
                     kdDebug()<<"Switch over target to "<<m_Data->m_History[j].echangedPaths[i].copyFromPath<<endl;
                     m_Path=m_Data->m_History[j].echangedPaths[i].copyFromPath;
@@ -95,10 +115,11 @@ void RevisionTree::topDownScan()
                     QString r = m_Path.mid(m_Data->m_History[j].echangedPaths[i].path.length());
                     m_Path=m_Data->m_History[j].echangedPaths[i].copyFromPath;
                     m_Path+=r;
-                    kdDebug()<<"Parent copy - change to "<<m_Path << endl;
+                    kdDebug()<<"Parent copy - change to "<<m_Path << " ("<<m_Data->m_History[j].echangedPaths[i].path<<")"<<endl;
                     m_Baserevision=m_Data->m_History[j].echangedPaths[i].copyFromRevision;
 //                    j=m_Data->m_History[j].echangedPaths[i].copyFromRevision+1;
                 }
+#endif
             }
         }
     }
@@ -106,6 +127,7 @@ void RevisionTree::topDownScan()
 
 bool RevisionTree::isParent(const QString&_par,const QString&tar)
 {
+    if (_par==tar) return true;
     QString par = _par+(_par.endsWith("/")?"":"/");
     return tar.startsWith(par);
 }

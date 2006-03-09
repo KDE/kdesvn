@@ -37,6 +37,7 @@ public:
 
 protected:
     long m_Baserevision;
+    long m_InitialRevsion;
     QString m_Path;
 
     RtreeData*m_Data;

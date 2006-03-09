@@ -55,8 +55,16 @@ namespace svn
                    const char *msg,
                    apr_pool_t * pool)
   {
+    Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
     LogEntries * entries =
-      (LogEntries *) baton;
+      (LogEntries *) l_baton->m_data;
+
+    /* check every loop for cancel of operation */
+    Context*l_context = l_baton->m_context;
+    svn_client_ctx_t*ctx = l_context->ctx();
+    if (ctx&&ctx->cancel_func) {
+        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+    }
     entries->insert (entries->begin (), LogEntry (rev, author, date, msg));
     if (changedPaths != NULL)
     {
@@ -87,6 +95,12 @@ namespace svn
   struct StatusEntriesBaton {
     apr_pool_t* pool;
     apr_hash_t* hash;
+    Context*m_Context;
+    StatusEntriesBaton() {
+        pool = 0;
+        hash = 0;
+        m_Context = 0;
+    }
   };
 
   static svn_error_t * InfoEntryFunc(void*baton,
@@ -95,6 +109,14 @@ namespace svn
                             apr_pool_t *pool)
   {
     StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
+    if (seb->m_Context) {
+        /* check every loop for cancel of operation */
+        Context*l_context = seb->m_Context;
+        svn_client_ctx_t*ctx = l_context->ctx();
+        if (ctx&&ctx->cancel_func) {
+            SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+        }
+    }
     path = apr_pstrdup (seb->pool, path);
     InfoEntry*e = new InfoEntry(info,path);
     apr_hash_set (seb->hash, path, APR_HASH_KEY_STRING, e);
@@ -211,22 +233,6 @@ namespace svn
     {
       const DirEntry & dirEntry = *it;
       entries.push_back(dirEntryToStatus (path, dirEntry));
-#if 0
-      if (_det && dirEntry.kind()==svn_node_file) {
-        try {
-            InfoEntries infoEntries = client->info(url+dirEntry.name(),false,revision,Revision(Revision::UNDEFINED));
-            entries.push_back(infoEntryToStatus (path, infoEntries[0]));
-        } catch (ClientException) {
-            _det = false;
-            entries.push_back(dirEntryToStatus (path, dirEntry));
-        }
-      } else {
-        entries.push_back(dirEntryToStatus (path, dirEntry));
-      }
-      if (_det && context->getListener()->contextCancel()) {
-        throw ClientException("Canceld");
-      }
-#endif
     }
 
     return entries;
@@ -323,6 +329,10 @@ namespace svn
     Targets target(path);
     Pool pool;
     LogEntries * entries = new LogEntries ();
+    sBaton l_baton;
+    l_baton.m_context=m_context;
+    l_baton.m_data = entries;
+
     svn_error_t *error;
 
     error = svn_client_log2 (
@@ -333,7 +343,7 @@ namespace svn
       discoverChangedPaths ? 1 : 0,
       strictNodeHistory ? 1 : 0,
       logReceiver,
-      entries,
+      &l_baton,
       *m_context, // client ctx
       pool);
 
@@ -361,6 +371,7 @@ namespace svn
     status_hash = apr_hash_make (pool);
     baton.hash = status_hash;
     baton.pool = pool;
+    baton.m_Context=m_context;
     svn_opt_revision_t pegr;
     const char *truepath;
     bool internal_peg = false;

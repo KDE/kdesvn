@@ -603,6 +603,11 @@ namespace svn
     virtual void
     url2Revision(const QString&revstring,
             Revision&start);
+    
+    struct sBaton {
+        Context*m_context;
+        void*m_data;
+    };
 
   private:
     Context * m_context;

@@ -27,6 +27,7 @@
 #define _SVNCPP_WC_HPP_ 
 
 // svncpp
+#include "exception.hpp"
 #include "revision.hpp"
 
 #include <qstring.h>

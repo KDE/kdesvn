@@ -28,6 +28,7 @@
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "logmsg_impl.h"
+#include "revisiontree.h"
 #include "fronthelpers/settings.h"
 #include "svnqt/client.hpp"
 #include "svnqt/annotate_line.hpp"
@@ -210,42 +211,52 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
     return logs;
 }
 
-void SvnActions::makeTree(const QString&what)
+void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
 {
     QString url;
     QString ex;
+    svn::Revision rev = _rev;
+    svn::Revision peg;
     if (!m_Data->m_CurrentContext) return;
 
     if (!svn::Url::isValid(what)) {
         // working copy
-        url = svn::Wc::getUrl(what);
+        // url = svn::Wc::getUrl(what);
+        url = what;
+        peg = svn::Revision::UNDEFINED;
     } else {
         KURL _uri = what;
         QString prot = svn::Url::transformProtokoll(_uri.protocol());
         _uri.setProtocol(prot);
         url = _uri.prettyURL();
+        peg = _rev;
     }
+    kdDebug()<<"Getting info " << url << endl;
     svn::InfoEntries e;
-    svn::Revision rev = svn::Revision::HEAD;
-    svn::Revision peg = svn::Revision::UNDEFINED;
+
     try {
-        e = (m_Data->m_Svnclient->info(url,false,rev,peg));
+        e = (m_Data->m_Svnclient->info(url,false,_rev,peg));
     } catch (svn::ClientException ce) {
+        kdDebug()<<ce.msg() << endl;
         emit clientException(ce.msg());
         return;
     }
     if (e.count()<1) {
+        kdDebug()<<"No info found" << endl;
         emit clientException(i18n("Got no info."));
         return;
     }
     QString reposRoot = e[0].reposRoot();
+
+    kdDebug()<<"Logs for "<<reposRoot<<endl;
     const svn::LogEntries * logs = 0;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,0,0,"Logs","Getting logs - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        logs = m_Data->m_Svnclient->log(reposRoot,rev,svn::Revision((long)0),true,false,0);
-    } catch (svn::ClientException e) {
-        emit clientException(e.msg());
+        logs = m_Data->m_Svnclient->log(reposRoot,svn::Revision::HEAD,svn::Revision((long)0),true,false,0);
+    } catch (svn::ClientException ce) {
+        kdDebug()<<ce.msg() << endl;
+        emit clientException(ce.msg());
         return;
     }
     if (!logs) {
@@ -253,6 +264,7 @@ void SvnActions::makeTree(const QString&what)
         emit clientException(ex);
         return;
     }
+    RevisionTree rt(logs,e[0].url().mid(reposRoot.length()),rev);
 #if 0
     SvnLogDlgImp disp(this);
     disp.dispLog(logs,reposRoot);

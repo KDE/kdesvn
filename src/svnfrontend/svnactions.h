@@ -92,8 +92,9 @@ public:
      * the parameter @a what must prepared, eg, if it comes from working copy
      * it must not contain a "file://" inside.
      * \param what item to display
+     * \param rev Revision the item-path is available, intersting only when @a what is a repository item
      */
-    void makeTree(const QString&what);
+    void makeTree(const QString&what,const svn::Revision&rev);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false,int limit = 0);
     void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false, int limit=0);
     const svn::LogEntries * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);

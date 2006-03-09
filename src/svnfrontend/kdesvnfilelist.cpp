@@ -1972,7 +1972,7 @@ void kdesvnfilelist::slotInfo()
     QPtrList<SvnItem> lst;
     SelectionList(&lst);
     svn::Revision peg(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
-    svn::Revision rev(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
+    svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
     if (!isWorkingCopy()) {
         rev = m_pList->m_remoteRevision;
     }
@@ -2361,7 +2361,9 @@ void kdesvnfilelist::slotMakeTree()
     } else {
         return;
     }
-    m_SvnWrapper->makeTree(what);
+    svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
+
+    m_SvnWrapper->makeTree(what,rev);
 }
 
 /*!

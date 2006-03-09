@@ -27,23 +27,36 @@
 #include "svnqt/client.hpp"
 
 class RtreeData;
+class QWidget;
+class KListViewItem;
+class KListView;
+class RListItem;
+
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
 class RevisionTree{
 public:
-    RevisionTree(const svn::LogEntries*,const QString&,const svn::Revision& baserevision);
+    RevisionTree(const svn::LogEntries*,const QString&,const svn::Revision& baserevision,QWidget*treeParent,
+        QWidget*parent=0);
     virtual ~RevisionTree();
+
+    bool isValid()const;
+    KListView*getView();
 
 protected:
     long m_Baserevision;
     long m_InitialRevsion;
     QString m_Path;
+    bool m_Valid;
 
     RtreeData*m_Data;
 
-    void topDownScan();
+    bool topDownScan();
+    bool bottomUpScan(long startrev,unsigned recurse,const QString&path,RListItem*parent=0);
+
     static bool isParent(const QString&_par,const QString&tar);
+    RListItem*getItem(KListViewItem*,long rev);
 };
 
 #endif

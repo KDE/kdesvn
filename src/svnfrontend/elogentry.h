@@ -29,6 +29,16 @@ struct eLogChangePathEntry : public svn::LogChangePathEntry
 
     QString copyToPath;
     svn_revnum_t copyToRevision;
+
+    enum forwardAction {
+        nothing,
+        addedWithHistory,
+        added,
+        deleted,
+        replaced,
+        modified
+    };
+    forwardAction toAction;
 };
 
 /**
@@ -40,10 +50,25 @@ struct eLog_Entry : public svn::LogEntry
     eLog_Entry(const svn::LogEntry&);
     ~eLog_Entry();
 
-    QValueList<eLogChangePathEntry> echangedPaths;
+    QValueList<eLogChangePathEntry> forwardPaths;
 
-    void convertList(const QValueList<svn::LogChangePathEntry>&);
-    void addCopyTo(const QString&,const QString&,svn_revnum_t);
+    void addCopyTo(const QString&,const QString&,svn_revnum_t,char _action);
+};
+
+class treeEntry
+{
+public:
+    treeEntry();
+    virtual ~treeEntry();
+
+protected:
+    long rev;
+    QString msg;
+    QString author;
+    QString path;
+    eLogChangePathEntry::forwardAction action;
+    eLogChangePathEntry::forwardAction nextAction;
+    int level;
 };
 
 #endif

@@ -19,11 +19,14 @@
  ***************************************************************************/
 #include "elogentry.h"
 
+#include <kdebug.h>
+
 eLogChangePathEntry::eLogChangePathEntry()
     : svn::LogChangePathEntry()
 {
     copyToRevision = -1;
     copyToPath = "";
+    toAction=eLogChangePathEntry::nothing;
 }
 
 eLogChangePathEntry::eLogChangePathEntry(const svn::LogChangePathEntry&old)
@@ -35,6 +38,7 @@ eLogChangePathEntry::eLogChangePathEntry(const svn::LogChangePathEntry&old)
     path = old.path;
     copyToRevision = -1;
     copyToPath = "";
+    toAction=eLogChangePathEntry::nothing;
 }
 
 eLog_Entry::eLog_Entry()
@@ -50,26 +54,56 @@ eLog_Entry::eLog_Entry(const svn::LogEntry&old)
     date = old.date;
     message = old.message;
     revision = old.revision;
-    convertList(changedPaths);
 }
 
 eLog_Entry::~eLog_Entry()
 {
 }
 
-void eLog_Entry::convertList(const QValueList<svn::LogChangePathEntry>&oldpathes)
-{
-    for (unsigned i = 0; i<oldpathes.count();++i) {
-        echangedPaths.push_back(eLogChangePathEntry(oldpathes[i]));
-    }
-}
-
-void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum_t target_rev)
+void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum_t target_rev,char _action)
 {
     eLogChangePathEntry _entry;
     _entry.copyToPath=target;
     _entry.path = current;
     _entry.copyToRevision = target_rev;
     _entry.action=0;
-    echangedPaths.push_back(_entry);
+    switch (_action) {
+        case 'A':
+            if (!current.isEmpty()) {
+                kdDebug()<<"Adding an history "<< current << " -> " << target << endl;
+                _entry.toAction=eLogChangePathEntry::addedWithHistory;
+            }else{
+                _entry.toAction=eLogChangePathEntry::added;
+            }
+            break;
+        case 'D':
+            _entry.toAction=eLogChangePathEntry::deleted;
+            break;
+        case 'R':
+            _entry.toAction=eLogChangePathEntry::replaced;
+            break;
+        case 'M':
+            kdDebug()<<"Inserting logentry modify"<<endl;
+            _entry.toAction=eLogChangePathEntry::modified;
+            break;
+        default:
+            _entry.toAction=eLogChangePathEntry::nothing;
+            break;
+    }
+    forwardPaths.push_back(_entry);
+}
+
+treeEntry::treeEntry()
+{
+    rev = 0;
+    msg=QString::null;
+    author=QString::null;
+    path=QString::null;
+    action = eLogChangePathEntry::nothing;
+    nextAction = eLogChangePathEntry::nothing;
+    level = 0;
+}
+
+treeEntry::~treeEntry()
+{
 }

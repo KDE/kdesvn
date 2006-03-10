@@ -42,7 +42,7 @@ public:
     virtual ~RevisionTree();
 
     bool isValid()const;
-    KListView*getView();
+    QWidget*getView();
 
 protected:
     long m_Baserevision;
@@ -54,9 +54,10 @@ protected:
 
     bool topDownScan();
     bool bottomUpScan(long startrev,unsigned recurse,const QString&path,RListItem*parent=0);
+    bool isDeleted(long revision,const QString&);
 
     static bool isParent(const QString&_par,const QString&tar);
-    RListItem*getItem(KListViewItem*,long rev);
+    RListItem*getItem(RListItem*,long rev);
 };
 
 #endif

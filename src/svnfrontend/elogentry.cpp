@@ -68,17 +68,18 @@ void eLog_Entry::convertList(const QValueList<svn::LogChangePathEntry>&oldpathes
     }
 }
 
-void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum_t target_rev,char _action)
+void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum_t target_rev,char _action,svn_revnum_t from_rev)
 {
     eLogChangePathEntry _entry;
     _entry.copyToPath=target;
     _entry.path = current;
     _entry.copyToRevision = target_rev;
     _entry.action=_action;
+    _entry.copyFromRevision = from_rev;
     switch (_action) {
         case 'A':
-            if (!current.isEmpty()) {
-                kdDebug()<<"Adding an history "<< current << " -> " << target << endl;
+            if (!target.isEmpty()) {
+                //kdDebug()<<"Adding a history "<< current << " -> " << target << endl;
                 _entry.toAction=eLogChangePathEntry::addedWithHistory;
                 _entry.action = 'H';
             }else{
@@ -87,9 +88,14 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum
             }
             break;
         case 'D':
+            kdDebug()<<"Adding a delete of " << current << endl;
             _entry.toAction=eLogChangePathEntry::deleted;
             break;
         case 'R':
+            if (!target.isEmpty()) {
+                kdDebug()<<"Adding a rename "<< current << " -> " << target << endl;
+                _entry.toAction=eLogChangePathEntry::addedWithHistory;
+            }
             _entry.toAction=eLogChangePathEntry::replaced;
             break;
         case 'M':

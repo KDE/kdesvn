@@ -264,7 +264,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
         emit clientException(ex);
         return;
     }
-    KListView*disp;
+    QWidget*disp;
     KDialogBase dlg(m_Data->m_ParentList->realWidget(),"Liste",true,i18n("Liste"),
         KDialogBase::Ok,
         KDialogBase::Ok,true);

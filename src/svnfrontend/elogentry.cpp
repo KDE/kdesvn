@@ -54,10 +54,18 @@ eLog_Entry::eLog_Entry(const svn::LogEntry&old)
     date = old.date;
     message = old.message;
     revision = old.revision;
+    convertList(changedPaths);
 }
 
 eLog_Entry::~eLog_Entry()
 {
+}
+
+void eLog_Entry::convertList(const QValueList<svn::LogChangePathEntry>&oldpathes)
+{
+    for (unsigned i = 0; i<oldpathes.count();++i) {
+        forwardPaths.push_back(eLogChangePathEntry(oldpathes[i]));
+    }
 }
 
 void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum_t target_rev,char _action)
@@ -66,13 +74,15 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum
     _entry.copyToPath=target;
     _entry.path = current;
     _entry.copyToRevision = target_rev;
-    _entry.action=0;
+    _entry.action=_action;
     switch (_action) {
         case 'A':
             if (!current.isEmpty()) {
                 kdDebug()<<"Adding an history "<< current << " -> " << target << endl;
                 _entry.toAction=eLogChangePathEntry::addedWithHistory;
+                _entry.action = 'H';
             }else{
+                kdDebug()<<"Adding new "<< current << endl;
                 _entry.toAction=eLogChangePathEntry::added;
             }
             break;

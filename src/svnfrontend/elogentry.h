@@ -53,6 +53,8 @@ struct eLog_Entry : public svn::LogEntry
     QValueList<eLogChangePathEntry> forwardPaths;
 
     void addCopyTo(const QString&,const QString&,svn_revnum_t,char _action);
+    void addAction(const QString&,char _action);
+    void convertList(const QValueList<svn::LogChangePathEntry>&oldpathes);
 };
 
 class treeEntry

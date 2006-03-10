@@ -171,16 +171,16 @@ bool RevisionTree::topDownScan()
             break;
         }
         for (unsigned i = 0; i<m_Data->m_History[j].changedPaths.count();++i) {
-            if (m_Data->m_History[j].changedPaths[i].copyFromPath.isEmpty()) {
-                continue;
+            if (!m_Data->m_History[j].changedPaths[i].copyFromPath.isEmpty()) {
+                long r = m_Data->m_History[j].changedPaths[i].copyFromRevision;
+                QString sourcepath = m_Data->m_History[j].changedPaths[i].copyFromPath;
+                m_Data->m_History[r].addCopyTo(
+                    sourcepath,
+                    m_Data->m_History[j].changedPaths[i].path,
+                    j,
+                    m_Data->m_History[j].changedPaths[i].action);
+            } else {
             }
-            long r = m_Data->m_History[j].changedPaths[i].copyFromRevision;
-            QString sourcepath = m_Data->m_History[j].changedPaths[i].copyFromPath;
-            m_Data->m_History[r].addCopyTo(
-                sourcepath,
-                m_Data->m_History[j].changedPaths[i].path,
-                j,
-                m_Data->m_History[j].changedPaths[i].action);
         }
     }
     if (cancel==true) {
@@ -205,14 +205,6 @@ bool RevisionTree::topDownScan()
                         m_Path=m_Data->m_History[j].changedPaths[i].copyFromPath;
                         m_Path+=r;
                         kdDebug()<<"Switched target to "<<m_Path<<endl;
-#if 0
-                        m_Data->m_History[m_Data->m_History[j].changedPaths[i].copyFromRevision].addCopyTo(
-                            m_Path,
-                            tmpPath,
-                            m_Data->m_History[j].changedPaths[i].copyFromRevision,
-                            'A'
-                        );
-#endif
                     }
                 } else if (m_Data->m_History[j].changedPaths[i].path==m_Path){
                     // here it is added
@@ -220,14 +212,6 @@ bool RevisionTree::topDownScan()
                     kdDebug()<<"Found add item at revision "<<m_InitialRevsion<<endl;
                 }
             } else {
-#if 0
-                /* build forward ref */
-                m_Data->m_History[m_Data->m_History[j].changedPaths[i].copyFromRevision].addCopyTo(
-                    m_Data->m_History[j].changedPaths[i].copyFromPath,
-                    m_Data->m_History[j].changedPaths[i].path,
-                    m_Data->m_History[j].changedPaths[i].copyFromRevision,
-                    m_Data->m_History[j].changedPaths[i].action);
-#endif
             }
         }
     }
@@ -250,7 +234,6 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&pat
 {
 #define REVENTRY m_Data->m_History[j]
 #define FORWARDENTRY m_Data->m_History[j].forwardPaths[i]
-#define CHANGEDENTRY m_Data->m_History[j].changedPaths[i]
     kdDebug()<<"Searching for "<<path<< " at revision " << startrev
         << " recursion " << recurse << endl;
     bool cancel = false;
@@ -266,6 +249,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&pat
             cancel=true;
             break;
         }
+#if 0
         for (unsigned i=0;i<REVENTRY.forwardPaths.count();++i) {
             if (!isParent(FORWARDENTRY.path,path)) {
                 continue;
@@ -308,42 +292,52 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&pat
                 }
             }
         }
-#if 1
-        for (unsigned i=0;i<REVENTRY.changedPaths.count();++i) {
-            if (!isParent(CHANGEDENTRY.path,path)) {
+#endif
+        for (unsigned i=0;i<REVENTRY.forwardPaths.count();++i) {
+            if (!isParent(FORWARDENTRY.path,path)) {
                 continue;
             }
             QString text;
-            if (isParent(CHANGEDENTRY.path,path)&&CHANGEDENTRY.action=='A') {
-                if (!CHANGEDENTRY.copyFromPath.isEmpty()) {
-                    kdDebug()<<"Add copy from"<<CHANGEDENTRY.copyFromPath<<endl;
-                    previous=getItem(parentItem,j);
-                    text=QString("Copy from %1 to %2").arg(CHANGEDENTRY.copyFromPath).arg(path);
-                    previous->setText(0,text);
-                } else {
-                    kdDebug()<<"Base add of "<<path<<endl;
-                    addItem = getItem(parentItem,j);
-                    text = QString("Add at %1 path %2").arg(j).arg(path);
-                    addItem->setText(0,text);
+            if (isParent(FORWARDENTRY.path,path)) {
+                if (FORWARDENTRY.action=='H') {
+                    QString tmpPath = path;
+                    QString recPath;
+                    QString r = path.mid(FORWARDENTRY.path.length());
+                    recPath= FORWARDENTRY.copyToPath;
+                    recPath+=r;
+                    kdDebug()<<"Copy to "<< recPath << endl;
+                    previous = getItem(parentItem?parentItem:addItem,j);
+                    previous->setText(0,QString("Copy %1 to %2 (%3 to %4)")
+                        .arg(tmpPath).arg(recPath)
+                        .arg(j).arg(FORWARDENTRY.copyToRevision));
+                    //previous->setText(0,"Copy source: "+path);
+                    if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,previous)) {
+                        return false;
+                    }
                 }
-            } else if (CHANGEDENTRY.path==path) {
-                switch (CHANGEDENTRY.action) {
+                if (FORWARDENTRY.path==path) {
+                    switch (FORWARDENTRY.action) {
                     case 'A':
-                        break;
+                        kdDebug()<<"Inserting adding base item"<<endl;
+                        addItem = getItem(parentItem,j);
+                        text=QString("Add %1 at revision %2").arg(FORWARDENTRY.path).arg(j);
+                        addItem->setText(0,text);
+                    break;
                     case 'M':
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
                         text=QString("Modify %1 at %2").arg(path).arg(j);
                         previous = getItem(parentItem?parentItem:addItem,j);
                         previous->setText(0,text);
-                        break;
+                    break;
                     case 'D':
                         kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        break;
+                    break;
+                    default:
+                    break;
+                    }
                 }
             }
-
         }
-#endif
     }
     return !cancel;
 }

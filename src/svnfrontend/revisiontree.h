@@ -20,26 +20,34 @@
 #ifndef REVISIONTREE_H
 #define REVISIONTREE_H
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qpixmap.h>
-
 #include "svnqt/log_entry.hpp"
 #include "svnqt/revision.hpp"
 #include "svnqt/client.hpp"
+
+#include <qstring.h>
+#include <qmap.h>
+#include <qpixmap.h>
 
 class RtreeData;
 class QWidget;
 class KListViewItem;
 class KListView;
 class RListItem;
+class CContextListener;
+
+namespace svn
+{
+    class Client;
+}
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
 class RevisionTree{
 public:
-    RevisionTree(const svn::LogEntries*,const QString&,const svn::Revision& baserevision,QWidget*treeParent,
+    RevisionTree(svn::Client*,
+        CContextListener*aListener,
+        const QString& reposRoot,const QString&,const svn::Revision& baserevision,QWidget*treeParent,
         QWidget*parent=0);
     virtual ~RevisionTree();
 

@@ -22,25 +22,6 @@
 
 #include <svnqt/log_entry.hpp>
 
-struct eLogChangePathEntry : public svn::LogChangePathEntry
-{
-    eLogChangePathEntry();
-    eLogChangePathEntry(const svn::LogChangePathEntry&);
-
-    QString copyToPath;
-    svn_revnum_t copyToRevision;
-
-    enum forwardAction {
-        nothing,
-        addedWithHistory,
-        added,
-        deleted,
-        replaced,
-        modified
-    };
-    forwardAction toAction;
-};
-
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
@@ -50,27 +31,7 @@ struct eLog_Entry : public svn::LogEntry
     eLog_Entry(const svn::LogEntry&);
     ~eLog_Entry();
 
-    QValueList<eLogChangePathEntry> forwardPaths;
-
     void addCopyTo(const QString&,const QString&,svn_revnum_t,char _action,svn_revnum_t fromRev=-1);
     void addAction(const QString&,char _action);
-    void convertList(const QValueList<svn::LogChangePathEntry>&oldpathes);
 };
-
-class treeEntry
-{
-public:
-    treeEntry();
-    virtual ~treeEntry();
-
-protected:
-    long rev;
-    QString msg;
-    QString author;
-    QString path;
-    eLogChangePathEntry::forwardAction action;
-    eLogChangePathEntry::forwardAction nextAction;
-    int level;
-};
-
 #endif

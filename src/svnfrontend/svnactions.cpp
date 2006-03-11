@@ -249,6 +249,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
     QString reposRoot = e[0].reposRoot();
 
     kdDebug()<<"Logs for "<<reposRoot<<endl;
+/*
     const svn::LogEntries * logs = 0;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Logs","Getting logs - hit cancel for abort");
@@ -264,13 +265,15 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
         emit clientException(ex);
         return;
     }
+*/
     QWidget*disp;
     KDialogBase dlg(m_Data->m_ParentList->realWidget(),"Liste",true,i18n("Liste"),
         KDialogBase::Ok,
         KDialogBase::Ok,true);
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
 
-    RevisionTree rt(logs,e[0].url().mid(reposRoot.length()),rev,Dialog1Layout,m_Data->m_ParentList->realWidget());
+    RevisionTree rt(m_Data->m_Svnclient,m_Data->m_SvnContext,reposRoot,
+            e[0].url().mid(reposRoot.length()),rev,Dialog1Layout,m_Data->m_ParentList->realWidget());
     if (rt.isValid()) {
         disp = rt.getView();
         if (disp) {
@@ -279,7 +282,9 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
             dlg.saveDialogSize(*(Settings::self()->config()),"revisiontree_dlg",false);
         }
     }
+#if 0
     delete logs;
+#endif
 }
 
 void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files,int limit)

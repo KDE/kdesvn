@@ -18,7 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisiontree.h"
+#include "stopdlg.h"
 #include "svnqt/log_entry.hpp"
+#include "helpers/sub2qt.h"
 #include "elogentry.h"
 
 #include <kdebug.h>
@@ -38,14 +40,19 @@ public:
     virtual ~RtreeData();
 
     QMap<long,eLog_Entry> m_History;
-    QMap<long,eLog_Entry> m_OldHistory;
+    svn::LogEntriesMap m_OldHistory;
 
     long max_rev,min_rev;
     KProgressDialog*progress;
     QTime m_stopTick;
     int current_row;
 
+    QWidget*dlgParent;
     KListView*m_Display;
+    svn::Client*m_Client;
+    CContextListener* m_Listener;
+
+    bool getLogs(const QString&);
 };
 
 RtreeData::RtreeData()
@@ -54,11 +61,30 @@ RtreeData::RtreeData()
     progress=0;
     m_Display = 0;
     current_row=-1;
+    m_Client = 0;
+    dlgParent = 0;
+    m_Listener = 0;
 }
 
 RtreeData::~RtreeData()
 {
     delete progress;
+}
+
+bool RtreeData::getLogs(const QString&reposRoot)
+{
+    if (!m_Listener||!m_Client) {
+        return false;
+    }
+    try {
+        StopDlg sdlg(m_Listener,dlgParent,
+            0,"Logs","Getting logs - hit cancel for abort");
+        m_Client->log(reposRoot,svn::Revision::HEAD,svn::Revision((long)0),m_OldHistory,true,false,0);
+    } catch (svn::ClientException ce) {
+        kdDebug()<<ce.msg() << endl;
+        return false;
+    }
+    return true;
 }
 
 class RListItem:public KListViewItem
@@ -99,39 +125,54 @@ RListItem::~RListItem()
 {
 }
 
-RevisionTree::RevisionTree(const svn::LogEntries*_logs,const QString&origin,const svn::Revision& baserevision,QWidget*treeParent,QWidget*parent)
+RevisionTree::RevisionTree(svn::Client*aClient,
+    CContextListener*aListener,
+    const QString& reposRoot,
+    const QString&origin,
+    const svn::Revision& baserevision,
+    QWidget*treeParent,QWidget*parent)
     :m_InitialRevsion(0),m_Path(origin),m_Valid(false)
 {
     m_Data = new RtreeData;
+    m_Data->m_Client=aClient;
+    m_Data->m_Listener=aListener;
+    m_Data->dlgParent=parent;
+
+    if (!m_Data->getLogs(reposRoot)) {
+        return;
+    }
+
     long possible_rev=-1;
     kdDebug()<<"Origin: "<<origin << endl;
 
     m_Data->progress=new KProgressDialog(
-        parent,"progressdlg",i18n("Scanning logs"),i18n("Scanning the logs for requested item"),true);
+        parent,"progressdlg",i18n("Scanning logs"),i18n("Scanning the logs for %1").arg(origin),true);
     m_Data->progress->setMinimumDuration(100);
     m_Data->progress->setAllowCancel(true);
-    m_Data->progress->progressBar()->setTotalSteps(_logs->count());
+    m_Data->progress->progressBar()->setTotalSteps(m_Data->m_OldHistory.size());
     m_Data->progress->setAutoClose(false);
     bool cancel=false;
-    for (unsigned j=0; j<_logs->count();++j) {
-        m_Data->progress->progressBar()->setProgress(j);
+    svn::LogEntriesMap::Iterator it;
+    unsigned count = 0;
+    for (it=m_Data->m_OldHistory.begin();it!=m_Data->m_OldHistory.end();++it) {
+        m_Data->progress->progressBar()->setProgress(count);
         kapp->processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
         }
-        if ((*_logs)[j].revision>m_Data->max_rev) {
-            m_Data->max_rev=(*_logs)[j].revision;
+        if (it.key()>m_Data->max_rev) {
+            m_Data->max_rev=it.key();
         }
-        if ((*_logs)[j].revision<m_Data->min_rev||m_Data->min_rev==-1) {
-            m_Data->min_rev=(*_logs)[j].revision;
+        if (it.key()<m_Data->min_rev||m_Data->min_rev==-1) {
+            m_Data->min_rev=it.key();
         }
         if (baserevision.kind()==svn_opt_revision_date) {
-            if (baserevision.date()<=(*_logs)[j].date && possible_rev==-1||possible_rev>(*_logs)[j].revision) {
-                possible_rev=(*_logs)[j].revision;
+            if (baserevision.date()<=it.data().date && possible_rev==-1||possible_rev>it.key()) {
+                possible_rev=it.key();
             }
         }
-        m_Data->m_OldHistory[(*_logs)[j].revision]=(*_logs)[j];
+        ++count;
     }
     if (baserevision.kind()==svn_opt_revision_head||baserevision.kind()==svn_opt_revision_working) {
         m_Baserevision=m_Data->max_rev;
@@ -149,7 +190,7 @@ RevisionTree::RevisionTree(const svn::LogEntries*_logs,const QString&origin,cons
             m_Data->progress->progressBar()->setPercentageVisible(false);
             m_Data->m_stopTick.restart();
             m_Data->m_Display=new KListView(treeParent);
-            m_Data->m_Display->addColumn("Item");
+            m_Data->m_Display->addColumn(i18n("History of %1").arg(origin));
             m_Data->m_Display->setRootIsDecorated(true);
 
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
@@ -227,18 +268,22 @@ bool RevisionTree::topDownScan()
         for (unsigned i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
             if (!m_Data->m_OldHistory[j].changedPaths[i].copyFromPath.isEmpty()) {
                 long r = m_Data->m_OldHistory[j].changedPaths[i].copyFromRevision;
-                char a='H';
+                QString sourcepath = m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
+                char a = m_Data->m_OldHistory[j].changedPaths[i].action;
+                char b = m_Data->m_OldHistory[j].changedPaths[i].action;
+                if (a=='A') {
+                    a='H';
+                }
                 for (unsigned z = 0;z<m_Data->m_OldHistory[j].changedPaths.count();++z) {
-                    if (isParent(m_Data->m_OldHistory[j].changedPaths[z].path,m_Data->m_OldHistory[j].changedPaths[z].path)
+                    if (isParent(m_Data->m_OldHistory[j].changedPaths[z].path,sourcepath)
                          && m_Data->m_OldHistory[j].changedPaths[z].action=='D') {
                         a='R';
-                        if (m_Data->m_OldHistory[j].changedPaths[z].path==m_Data->m_OldHistory[j].changedPaths[i].path) {
+//                        if (m_Data->m_OldHistory[j].changedPaths[z].path==m_Data->m_OldHistory[j].changedPaths[i].path) {
                             m_Data->m_OldHistory[j].changedPaths[z].action=0;
-                        }
+//                        }
                         break;
                     }
                 }
-                QString sourcepath = m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
                 m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
                 m_Data->m_OldHistory[j].changedPaths[i].action=0;
             }
@@ -261,6 +306,9 @@ bool RevisionTree::topDownScan()
             m_Data->m_History[j].addCopyTo(m_Data->m_OldHistory[j].changedPaths[i].path,QString::null,-1,m_Data->m_OldHistory[j].changedPaths[i].action);
         }
         m_Data->m_History[j].author=m_Data->m_OldHistory[j].author;
+        m_Data->m_History[j].date=m_Data->m_OldHistory[j].date;
+        m_Data->m_History[j].revision=m_Data->m_OldHistory[j].revision;
+        m_Data->m_History[j].message=m_Data->m_OldHistory[j].message;
     }
     return !cancel;
 }
@@ -280,7 +328,7 @@ bool RevisionTree::isValid()const
 bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_path,RListItem*parentItem)
 {
 #define REVENTRY m_Data->m_History[j]
-#define FORWARDENTRY m_Data->m_History[j].forwardPaths[i]
+#define FORWARDENTRY m_Data->m_History[j].changedPaths[i]
 
     QString path = _path;
     kdDebug()<<"Searching for "<<path<< " at revision " << startrev
@@ -296,8 +344,11 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
             cancel=true;
             break;
         }
-        QString revText=QString("<i>Revision %1</i><br><i>Author: %2</i><br>").arg(j).arg(REVENTRY.author);
-        for (unsigned i=0;i<REVENTRY.forwardPaths.count();++i) {
+        QString revText=QString("<i>%3</i><br><i>Revision %1</i><br><i>Author: %2</i><br>")
+            .arg(j)
+            .arg(REVENTRY.author)
+            .arg(helpers::sub2qt::apr_time2qtString(REVENTRY.date));
+        for (unsigned i=0;i<REVENTRY.changedPaths.count();++i) {
             if (!isParent(FORWARDENTRY.path,path)) {
                 continue;
             }
@@ -354,7 +405,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     break;
                     case 'D':
                         kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        text=revText+QString("<b>Delete</b><br>%1 at %2").arg(path).arg(j);
+                        text=revText+QString("<b>Delete</b>");
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
                         get_out= true;
@@ -366,7 +417,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     switch (FORWARDENTRY.action) {
                     case 'D':
                         kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        text=revText+QString("<b>Delete</b><br>%1 at %2").arg(path).arg(j);
+                        text=revText+QString("<b>Delete</b>");
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
                         get_out = true;

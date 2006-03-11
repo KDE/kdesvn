@@ -21,56 +21,24 @@
 
 #include <kdebug.h>
 
-eLogChangePathEntry::eLogChangePathEntry()
-    : svn::LogChangePathEntry()
+eLog_Entry::eLog_Entry(const svn::LogEntry&old)
+    : svn::LogEntry(old)
 {
-    copyToRevision = -1;
-    copyToPath = "";
-    toAction=eLogChangePathEntry::nothing;
-}
-
-eLogChangePathEntry::eLogChangePathEntry(const svn::LogChangePathEntry&old)
-    : svn::LogChangePathEntry()
-{
-    action = old.action;
-    copyFromPath = old.copyFromPath;
-    copyFromRevision = old.copyFromRevision;
-    path = old.path;
-    copyToRevision = -1;
-    copyToPath = "";
-    toAction=eLogChangePathEntry::nothing;
 }
 
 eLog_Entry::eLog_Entry()
- : svn::LogEntry()
-{
-}
-
-eLog_Entry::eLog_Entry(const svn::LogEntry&old)
     : svn::LogEntry()
 {
-    changedPaths=old.changedPaths;
-    author = old.author;
-    date = old.date;
-    message = old.message;
-    revision = old.revision;
-    convertList(changedPaths);
 }
 
 eLog_Entry::~eLog_Entry()
 {
 }
 
-void eLog_Entry::convertList(const QValueList<svn::LogChangePathEntry>&oldpathes)
+void eLog_Entry::addCopyTo(const QString&current,const QString&target,
+                            svn_revnum_t target_rev,char _action,svn_revnum_t from_rev)
 {
-    for (unsigned i = 0; i<oldpathes.count();++i) {
-        forwardPaths.push_back(eLogChangePathEntry(oldpathes[i]));
-    }
-}
-
-void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum_t target_rev,char _action,svn_revnum_t from_rev)
-{
-    eLogChangePathEntry _entry;
+    svn::LogChangePathEntry _entry;
     _entry.copyToPath=target;
     _entry.path = current;
     _entry.copyToRevision = target_rev;
@@ -80,46 +48,23 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,svn_revnum
         case 'A':
             if (!target.isEmpty()) {
                 //kdDebug()<<"Adding a history "<< current << " -> " << target << endl;
-                _entry.toAction=eLogChangePathEntry::addedWithHistory;
                 _entry.action = 'H';
             }else{
-                kdDebug()<<"Adding new "<< current << endl;
-                _entry.toAction=eLogChangePathEntry::added;
             }
             break;
         case 'D':
             kdDebug()<<"Adding a delete of " << current << endl;
-            _entry.toAction=eLogChangePathEntry::deleted;
             break;
         case 'R':
             if (!target.isEmpty()) {
                 kdDebug()<<"Adding a rename "<< current << " -> " << target << endl;
-                _entry.toAction=eLogChangePathEntry::addedWithHistory;
             }
-            _entry.toAction=eLogChangePathEntry::replaced;
             break;
         case 'M':
             kdDebug()<<"Inserting logentry modify"<<endl;
-            _entry.toAction=eLogChangePathEntry::modified;
             break;
         default:
-            _entry.toAction=eLogChangePathEntry::nothing;
             break;
     }
-    forwardPaths.push_back(_entry);
-}
-
-treeEntry::treeEntry()
-{
-    rev = 0;
-    msg=QString::null;
-    author=QString::null;
-    path=QString::null;
-    action = eLogChangePathEntry::nothing;
-    nextAction = eLogChangePathEntry::nothing;
-    level = 0;
-}
-
-treeEntry::~treeEntry()
-{
+    changedPaths.push_back(_entry);
 }

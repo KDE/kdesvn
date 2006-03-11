@@ -381,6 +381,29 @@ namespace svn
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException);
+    /**
+     * Retrieve log information for the given path
+     * Loads the log messages result set. Result will stored
+     * in a map where the key is the revision number
+     *
+     * You can use the constants Revision::START and
+     * Revision::HEAD
+     *
+     * @param path
+     * @param revisionStart
+     * @param revisionEnd
+     * @param target the logmap where to store the entries
+     * @param discoverChangedPaths
+     * @param strictNodeHistory
+     * @param limit (ignored when subversion 1.1 API)
+     * @return true if success
+     */
+    virtual bool
+    log (const QString& path, const Revision & revisionStart,
+         const Revision & revisionEnd,
+         LogEntriesMap&target,
+         bool discoverChangedPaths=false,
+         bool strictNodeHistory=true,int limit = 0) throw (ClientException);
 
     /**
      * Produce diff output which describes the delta between
@@ -603,7 +626,7 @@ namespace svn
     virtual void
     url2Revision(const QString&revstring,
             Revision&start);
-    
+
     struct sBaton {
         Context*m_context;
         void*m_data;

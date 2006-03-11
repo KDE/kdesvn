@@ -92,6 +92,52 @@ namespace svn
     return NULL;
   }
 
+  static svn_error_t *
+  logMapReceiver (void *baton,
+                   apr_hash_t * changedPaths,
+                   svn_revnum_t rev,
+                   const char *author,
+                   const char *date,
+                   const char *msg,
+                   apr_pool_t * pool)
+  {
+    Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
+    LogEntriesMap * entries =
+      (LogEntriesMap *) l_baton->m_data;
+
+    /* check every loop for cancel of operation */
+    Context*l_context = l_baton->m_context;
+    svn_client_ctx_t*ctx = l_context->ctx();
+    if (ctx&&ctx->cancel_func) {
+        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+    }
+    (*entries)[rev]=LogEntry(rev, author, date, msg);
+    if (changedPaths != NULL)
+    {
+      LogEntry &entry = (*entries)[rev];
+
+      for (apr_hash_index_t *hi = apr_hash_first (pool, changedPaths);
+           hi != NULL;
+           hi = apr_hash_next (hi))
+      {
+        char *path;
+        void *val;
+        apr_hash_this (hi, (const void **) &path, NULL, &val);
+
+        svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
+
+        entry.changedPaths.push_back (
+              LogChangePathEntry (path,
+                                  log_item->action,
+                                  log_item->copyfrom_path,
+                                  log_item->copyfrom_rev) );
+
+      }
+    }
+
+    return NULL;
+  }
+
   struct StatusEntriesBaton {
     apr_pool_t* pool;
     apr_hash_t* hash;
@@ -319,6 +365,39 @@ namespace svn
       return remoteSingleStatus (this, path,revision, m_context);
     else
       return localSingleStatus (path, m_context,update);
+  }
+
+  bool
+  Client_impl::log (const QString& path, const Revision & revisionStart,
+       const Revision & revisionEnd,
+       LogEntriesMap&log_target,
+       bool discoverChangedPaths,
+       bool strictNodeHistory,int limit) throw (ClientException)
+  {
+    Targets target(path);
+    Pool pool;
+    sBaton l_baton;
+    l_baton.m_context=m_context;
+    l_baton.m_data = &log_target;
+
+    svn_error_t *error;
+    error = svn_client_log2 (
+      target.array (pool),
+      revisionStart.revision (),
+      revisionEnd.revision (),
+      limit,
+      discoverChangedPaths ? 1 : 0,
+      strictNodeHistory ? 1 : 0,
+      logMapReceiver,
+      &l_baton,
+      *m_context, // client ctx
+      pool);
+
+    if (error != NULL)
+    {
+      throw ClientException (error);
+    }
+    return true;
   }
 
   const LogEntries *

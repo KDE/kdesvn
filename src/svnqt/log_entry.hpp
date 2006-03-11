@@ -49,8 +49,9 @@
 namespace svn
 {
 
-  struct LogChangePathEntry
+  class LogChangePathEntry
   {
+  public:
     LogChangePathEntry (const char *path_,
                         char action_,
                         const char *copyFromPath_,
@@ -60,15 +61,28 @@ namespace svn
                         char action_,
                         const QString &copyFromPath_,
                         const svn_revnum_t copyFromRevision_);
+
+    LogChangePathEntry (const QString &path_,
+                        char action_,
+                        const QString &copyFromPath_,
+                        const svn_revnum_t copyFromRevision_,
+                        const QString &copyToPath_,
+                        const svn_revnum_t copyToRevision_);
+
     LogChangePathEntry();
+
     QString path;
     char action;
     QString copyFromPath;
     svn_revnum_t copyFromRevision;
+    //! future use or useful in backends
+    QString copyToPath;
+    //! future use or useful in backends
+    svn_revnum_t copyToRevision;
   };
 
 
-  struct LogEntry
+  class LogEntry
   {
   public:
     LogEntry ();

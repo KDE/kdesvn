@@ -85,6 +85,8 @@ namespace svn
   typedef QList<Revision> Revisions;
 #endif
 
+  // map of logentries - key is revision
+  typedef QMap<long,LogEntry> LogEntriesMap;
   // map of property names to values
   typedef QMap<QString,QString> PropertiesMap;
   // pair of path, PropertiesMap
@@ -447,6 +449,30 @@ namespace svn
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
 
     /**
+     * Retrieve log information for the given path
+     * Loads the log messages result set. Result will stored
+     * in a map where the key is the revision number
+     *
+     * You can use the constants Revision::START and
+     * Revision::HEAD
+     *
+     * @param path
+     * @param revisionStart
+     * @param revisionEnd
+     * @param target the logmap where to store the entries
+     * @param discoverChangedPaths
+     * @param strictNodeHistory
+     * @param limit (ignored when subversion 1.1 API)
+     * @return true if success
+     */
+    virtual bool
+    log (const QString& path, const Revision & revisionStart,
+         const Revision & revisionEnd,
+         LogEntriesMap&target,
+         bool discoverChangedPaths=false,
+         bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
+
+    /**
      * Produce diff output which describes the delta between
      * @a path/@a revision1 and @a path/@a revision2. @a path
      * can be either a working-copy path or a URL.
@@ -505,7 +531,7 @@ namespace svn
      * lists entries in @a pathOrUrl no matter whether local or
      * repository
      *
-     * If checking for locks is activated, it lists the locks inside repository, not locks inside 
+     * If checking for locks is activated, it lists the locks inside repository, not locks inside
      * working copy!
      * @param pathOrUrl
      * @param revision

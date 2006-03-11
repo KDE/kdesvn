@@ -22,6 +22,8 @@
 
 #include <qstring.h>
 #include <qmap.h>
+#include <qpixmap.h>
+
 #include "svnqt/log_entry.hpp"
 #include "svnqt/revision.hpp"
 #include "svnqt/client.hpp"
@@ -58,6 +60,7 @@ protected:
 
     static bool isParent(const QString&_par,const QString&tar);
     RListItem*getItem(RListItem*,long rev);
+    QPixmap getPixmap(const QString&);
 };
 
 #endif

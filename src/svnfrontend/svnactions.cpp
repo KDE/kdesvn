@@ -274,17 +274,11 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
     if (rt.isValid()) {
         disp = rt.getView();
         if (disp) {
+            dlg.resize(dlg.configDialogSize(*(Settings::self()->config()),"revisiontree_dlg"));
             dlg.exec();
+            dlg.saveDialogSize(*(Settings::self()->config()),"revisiontree_dlg",false);
         }
     }
-#if 0
-    SvnLogDlgImp disp(this);
-    disp.dispLog(logs,reposRoot);
-    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
-            this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
-    disp.exec();
-    disp.saveSize();
-#endif
     delete logs;
 }
 

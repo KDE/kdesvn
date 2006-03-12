@@ -33,6 +33,9 @@
 #include <qdatetime.h>
 #include <qlabel.h>
 
+#define INTERNALCOPY 1
+#define INTERNALRENAME 2
+
 class RtreeData
 {
 public:
@@ -270,22 +273,29 @@ bool RevisionTree::topDownScan()
                 long r = m_Data->m_OldHistory[j].changedPaths[i].copyFromRevision;
                 QString sourcepath = m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
                 char a = m_Data->m_OldHistory[j].changedPaths[i].action;
-                char b = m_Data->m_OldHistory[j].changedPaths[i].action;
-                if (a=='A') {
-                    a='H';
+                if (m_Data->m_OldHistory[j].changedPaths[i].path.isEmpty()) {
+                    kdDebug()<<"Empty entry! rev " << j << " source " << sourcepath << endl;
+                    continue;
                 }
-                for (unsigned z = 0;z<m_Data->m_OldHistory[j].changedPaths.count();++z) {
-                    if (isParent(m_Data->m_OldHistory[j].changedPaths[z].path,sourcepath)
-                         && m_Data->m_OldHistory[j].changedPaths[z].action=='D') {
-                        a='R';
-//                        if (m_Data->m_OldHistory[j].changedPaths[z].path==m_Data->m_OldHistory[j].changedPaths[i].path) {
+                if (a=='R') {
+                    kdDebug()<<"Found native rename"<<endl;
+                    m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
+                    m_Data->m_OldHistory[j].changedPaths[i].action=0;
+                } else if (a=='A'){
+                    a=INTERNALCOPY;
+                    for (unsigned z = 0;z<m_Data->m_OldHistory[j].changedPaths.count();++z) {
+                        if (m_Data->m_OldHistory[j].changedPaths[z].action=='D'
+                            &&m_Data->m_OldHistory[j].changedPaths[z].path==sourcepath) {
+                            a=INTERNALRENAME;
                             m_Data->m_OldHistory[j].changedPaths[z].action=0;
-//                        }
-                        break;
+                            break;
+                        }
                     }
+                    m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
+                    m_Data->m_OldHistory[j].changedPaths[i].action=0;
+                } else {
+                    kdDebug()<<"Action with source path but wrong action \""<<a<<"\" found!"<<endl;
                 }
-                m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
-                m_Data->m_OldHistory[j].changedPaths[i].action=0;
             }
         }
     }
@@ -344,7 +354,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
             cancel=true;
             break;
         }
-        QString revText=QString("<i>%3</i><br><i>Revision %1</i><br><i>Author: %2</i><br>")
+        QString revText=QString("<br><i>%3</i><br><i>Revision %1</i><br><i>Author: %2</i>")
             .arg(j)
             .arg(REVENTRY.author)
             .arg(helpers::sub2qt::apr_time2qtString(REVENTRY.date));
@@ -356,8 +366,16 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
             if (isParent(FORWARDENTRY.path,path)) {
                 RListItem*previous = 0;
                 bool get_out = false;
-                if (FORWARDENTRY.action=='H' || FORWARDENTRY.action=='R') {
-                    bool ren = FORWARDENTRY.action=='R';
+                if (FORWARDENTRY.path!=path) {
+                    kdDebug()<<"Parent rename? "<< FORWARDENTRY.path << " -> " << FORWARDENTRY.copyToPath << " -> " << FORWARDENTRY.copyFromPath << endl;
+                }
+                if (FORWARDENTRY.action==INTERNALCOPY ||
+                    FORWARDENTRY.action=='R' ||
+                    FORWARDENTRY.action==INTERNALRENAME ) {
+                    if (FORWARDENTRY.action=='R' && FORWARDENTRY.path!=path ) {
+                        continue;
+                    }
+                    bool ren = FORWARDENTRY.action=='R'||FORWARDENTRY.action==INTERNALRENAME;
                     QString tmpPath = path;
                     QString recPath;
                     if (FORWARDENTRY.copyToPath.length()==0) {
@@ -367,20 +385,19 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     recPath= FORWARDENTRY.copyToPath;
                     recPath+=r;
                     QPixmap p;
-                    QString text=revText;
+                    QString text;
                     previous = getItem(parentItem,j);
                     if (ren) {
                         kdDebug()<<"Renamed to "<< recPath << " at revison " << j << endl;
                         path=recPath;
-                        text+=QString("<i>%1</i><br>").arg(tmpPath);
-                        text+=QString("<b>Rename</b><br>%1 (rev %2 to rev %3)").arg(recPath)
-                            .arg(FORWARDENTRY.copyFromRevision)
-                            .arg(FORWARDENTRY.copyToRevision);
+                        text=QString("<i>%1</i><br>").arg(tmpPath);
+                        text+=QString("<b>Rename to</b><br>%1 (from rev %2)").arg(recPath)
+                            .arg(FORWARDENTRY.copyFromRevision)+revText;
                     } else {
                         kdDebug()<<"Copy to "<< recPath << endl;
-                        text=revText+QString("<i>%1</i><br><b>Copy</b><br>%2")
+                        text=QString("<i>%1</i><br><b>Copy to</b><br>%2")
                             .arg(tmpPath)
-                            .arg(recPath);
+                            .arg(recPath)+revText;
                     }
                     p = getPixmap(text);
                     previous->setPixmap(0,p);
@@ -394,18 +411,18 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     case 'A':
                         kdDebug()<<"Inserting adding base item"<<endl;
                         previous = getItem(parentItem,j);
-                        text=revText+QString("<b>Add</b><br>%1").arg(FORWARDENTRY.path);
+                        text=QString("<b>Add</b><br>%1").arg(FORWARDENTRY.path)+revText;
                         previous->setPixmap(0,getPixmap(text));
                     break;
                     case 'M':
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
-                        text=revText+QString("<b>Modify</b>");
+                        text=QString("<b>Modify</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
                     break;
                     case 'D':
                         kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        text=revText+QString("<b>Delete</b>");
+                        text=QString("<b>Delete</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
                         get_out= true;
@@ -417,7 +434,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     switch (FORWARDENTRY.action) {
                     case 'D':
                         kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        text=revText+QString("<b>Delete</b>");
+                        text=QString("<b>Delete</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
                         get_out = true;

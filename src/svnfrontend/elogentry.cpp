@@ -53,7 +53,6 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,
             }
             break;
         case 'D':
-            kdDebug()<<"Adding a delete of " << current << endl;
             break;
         case 'R':
             if (!target.isEmpty()) {
@@ -61,7 +60,6 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,
             }
             break;
         case 'M':
-            kdDebug()<<"Inserting logentry modify"<<endl;
             break;
         default:
             break;

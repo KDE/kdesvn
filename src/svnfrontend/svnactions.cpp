@@ -267,7 +267,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
     }
 */
     QWidget*disp;
-    KDialogBase dlg(m_Data->m_ParentList->realWidget(),"Liste",true,i18n("Liste"),
+    KDialogBase dlg(m_Data->m_ParentList->realWidget(),"historylist",true,i18n("History of %1").arg(e[0].url().mid(reposRoot.length())),
         KDialogBase::Ok,
         KDialogBase::Ok,true);
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();

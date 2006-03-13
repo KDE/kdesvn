@@ -167,7 +167,6 @@ int kdemain(int argc, char **argv)
 void kio_svnProtocol::listDir(const KURL&url)
 {
     kdDebug() << "kio_svn::listDir(const KURL& url) : " << url.url() << endl ;
-    //m_pData->reInitClient();
     svn::DirEntries dlist;
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
@@ -203,7 +202,6 @@ void kio_svnProtocol::listDir(const KURL&url)
 void kio_svnProtocol::stat(const KURL& url)
 {
     kdDebug()<<"kio_svn::stat "<< url << endl;
-    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -239,7 +237,6 @@ void kio_svnProtocol::stat(const KURL& url)
 void kio_svnProtocol::get(const KURL& url)
 {
     kdDebug()<<"kio_svn::get "<< url << endl;
-    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -290,14 +287,9 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
 void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 {
     kdDebug()<<"kio_svn::rename "<< src << " to " << target <<  endl;
-    //m_pData->reInitClient();
-    svn::Revision rev = m_pData->urlToRev(src);
-    if (rev == svn::Revision::UNDEFINED) {
-        rev = svn::Revision::HEAD;
-    }
     QString msg;
     try {
-        m_pData->m_Svnclient->move(makeSvnUrl(src),rev,makeSvnUrl(target),force);
+        m_pData->m_Svnclient->move(makeSvnUrl(src),makeSvnUrl(target),force);
     }catch (svn::ClientException e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -308,7 +300,6 @@ void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool overwrite)
 {
     kdDebug()<<"kio_svn::copy "<< src << " to " << dest <<  endl;
-    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -724,9 +715,10 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
     QString ex = "";
     KTempDir tdir;
     tdir.setAutoDelete(true);
+    /// @todo read settings for diff (ignore contentype)
     try {
         ex = m_pData->m_Svnclient->diff(svn::Path(tdir.name()),
-        u1,u2,r1, r2,rec,false,false);
+        u1,u2,r1, r2,rec,false,false,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

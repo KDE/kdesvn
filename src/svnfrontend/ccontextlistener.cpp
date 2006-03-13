@@ -76,7 +76,7 @@ const QString CContextListener::action_strings[]={
     I18N_NOOP("Commit Deleted"),
     I18N_NOOP("Commit Replaced"),
     QString::null, //tx delta -> making ticks instead
-    I18N_NOOP("Blame"), //svn_wc_notify_blame_revision
+    QString::null, //svn_wc_notify_blame_revision - using ticks
     I18N_NOOP("Locking"),
     I18N_NOOP("Unlocked"),
     I18N_NOOP("Lock failed"),

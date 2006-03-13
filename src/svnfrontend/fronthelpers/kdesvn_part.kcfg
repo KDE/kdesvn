@@ -26,6 +26,10 @@
    <label>Use external program for viewing</label>
    <default>default</default>
   </entry>
+  <entry key="diff_ignore_content" type="Bool">
+   <label>Diff ignores content type</label>
+   <default>false</default>
+  </entry>
   <entry key="max_log_messages" type="Int" >
    <label>Maximum number of log messages</label>
    <default>20</default>

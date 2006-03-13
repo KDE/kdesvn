@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>357</height>
+            <height>384</height>
         </rect>
     </property>
     <property name="caption">
@@ -129,6 +129,14 @@ see which items has newer items in repository you may have to set "Check for upd
                     </property>
                 </widget>
             </vbox>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_diff_ignore_content</cstring>
+            </property>
+            <property name="text">
+                <string>Diff ignores content type</string>
+            </property>
         </widget>
         <widget class="QLabel">
             <property name="name">

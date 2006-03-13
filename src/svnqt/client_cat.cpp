@@ -110,11 +110,11 @@ namespace svn
       path.split (dir, filename, ext);
 
       // add the revision number to the filename
-      char revstring[20];
+      QString revstring;
       if (revision.kind () == revision.HEAD)
-        strcpy (revstring, "HEAD");
+        revstring="HEAD";
       else
-        sprintf (revstring, "%" SVN_REVNUM_T_FMT, revision.revnum ());
+        revstring.sprintf("%"SVN_REVNUM_T_FMT,revision.revnum ());
       filename += "-";
       filename += revstring;
 

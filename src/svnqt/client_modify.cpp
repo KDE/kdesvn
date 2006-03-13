@@ -39,23 +39,24 @@
 namespace svn
 {
   svn_revnum_t
-  Client_impl::checkout (const QString& url,
-                    const Path & destPath,
-                    const Revision & revision,
-                    bool recurse) throw (ClientException)
+  Client_impl::checkout (const QString& url, const Path & destPath,
+              const Revision & revision,
+              const Revision & peg,
+              bool recurse,
+              bool ignore_externals) throw (ClientException)
   {
     Pool subPool;
-    apr_pool_t * apr_pool = subPool.pool ();
-
     svn_revnum_t revnum = 0;
     svn_error_t * error =
-      svn_client_checkout (&revnum,
+      svn_client_checkout2(&revnum,
                            url.TOUTF8(),
                            destPath.cstr(),
+                           peg.revision(),
                            revision.revision (),
                            recurse,
+                           ignore_externals,
                            *m_context,
-                           apr_pool);
+                           subPool);
 
     if(error != NULL)
       throw ClientException (error);

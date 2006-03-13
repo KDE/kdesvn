@@ -630,10 +630,11 @@ void kio_svnProtocol::commit(const KURL::List&url)
 void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, const QString&revstring)
 {
     svn::Revision where(rev,revstring);
+    svn::Revision peg = svn::Revision::UNDEFINED;
     KURL _src = makeSvnUrl(src);
     svn::Path _target(target.path());
     try {
-        m_pData->m_Svnclient->checkout(_src.url(),_target,where,false);
+        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,true,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

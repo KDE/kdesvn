@@ -115,13 +115,17 @@ namespace svn
      * @param destPath destination directory for checkout.
      * @param revision the revision number to checkout. If the number is -1
      *                 then it will checkout the latest revision.
+     * @param peg Revision to look up
      * @param recurse whether you want it to checkout files recursively.
+     * @param ignore_externals if true don't process externals definitions.
      * @exception ClientException
      */
     virtual svn_revnum_t
     checkout (const QString& moduleName, const Path & destPath,
               const Revision & revision,
-              bool recurse) throw (ClientException);
+              const Revision & peg = Revision::UNDEFINED,
+              bool recurse = true,
+              bool ignore_externals=false) throw (ClientException);
 
     /**
      * relocate wc @a from to @a to

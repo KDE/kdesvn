@@ -513,7 +513,7 @@ namespace svn
     diff (const Path & tmpPath, const Path & path,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted) throw (ClientException)=0;
+          const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
     /**
      * Produce diff output which describes the delta between
      * @a path1/@a revision1 and @a path2/@a revision2. @a path2
@@ -540,7 +540,7 @@ namespace svn
     diff (const Path & tmpPath, const Path & path1,const Path & path2,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted) throw (ClientException)=0;
+          const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or

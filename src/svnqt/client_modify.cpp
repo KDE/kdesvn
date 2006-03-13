@@ -219,16 +219,14 @@ namespace svn
 
   void
   Client_impl::move (const Path & srcPath,
-                const Revision & srcRevision,
                 const Path & destPath,
                 bool force) throw (ClientException)
   {
     Pool pool;
     svn_client_commit_info_t *commit_info = NULL;
     svn_error_t * error =
-      svn_client_move (&commit_info,
+      svn_client_move2 (&commit_info,
                        srcPath.cstr (),
-                       srcRevision.revision (),
                        destPath.cstr (),
                        force,
                        *m_context,

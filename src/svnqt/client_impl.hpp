@@ -261,7 +261,6 @@ namespace svn
      */
     virtual void
     move (const Path & srcPath,
-          const Revision & srcRevision,
           const Path & destPath,
           bool force) throw (ClientException);
 

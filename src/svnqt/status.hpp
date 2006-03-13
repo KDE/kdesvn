@@ -149,6 +149,13 @@ namespace svn
     const LockEntry&
     lockEntry () const;
 
+    bool
+    validReposStatus()const;
+
+    bool
+    validLocalStatus()const;
+
+
     /**
      * assignment operator
      */

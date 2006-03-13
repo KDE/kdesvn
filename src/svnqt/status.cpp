@@ -275,4 +275,16 @@ namespace svn
     {
       return m_Data->m_Path;
     }
+
+    bool
+    Status::validReposStatus()const
+    {
+        return reposTextStatus()!=svn_wc_status_none||reposPropStatus()!=svn_wc_status_none;
+    }
+
+    bool
+    Status::validLocalStatus()const
+    {
+        return textStatus()!=svn_wc_status_none||propStatus()!=svn_wc_status_none;
+    }
 }

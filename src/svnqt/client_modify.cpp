@@ -305,22 +305,39 @@ namespace svn
 
   svn_revnum_t
   Client_impl::doExport (const Path & srcPath,
-                    const Path & destPath,
-                    const Revision & revision,
-                    bool force) throw (ClientException)
+              const Path & destPath,
+              const Revision & revision,
+              const Revision & peg,
+              bool overwrite,
+              const QString&native_eol,
+              bool ignore_externals,
+              bool recurse) throw (ClientException)
   {
     Pool pool;
     svn_revnum_t revnum = 0;
     svn_error_t * error =
-      svn_client_export(&revnum,
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+      svn_client_export3(&revnum,
                         srcPath.cstr(),
                         destPath.cstr(),
-                         const_cast<svn_opt_revision_t*>
-                         (revision.revision ()),
-                         force,
+                        peg.revision(),
+                        revision.revision(),
+                        overwrite,
+                        ignore_externals,
+                        recurse,
+                        (native_eol==QString::null?0:native_eol.TOUTF8()),
                          *m_context,
                          pool);
-
+#else
+      svn_client_export2(&revnum,
+                        srcPath.cstr(),
+                        destPath.cstr(),
+                        const_cast<svn_opt_revision_t*>(revision.revision()),
+                        overwrite,
+                        (native_eol==QString::null?0:native_eol.TOUTF8()),
+                         *m_context,
+                         pool);
+#endif
     if(error != NULL)
       throw ClientException (error);
     return revnum;

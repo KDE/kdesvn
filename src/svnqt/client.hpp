@@ -367,13 +367,23 @@ namespace svn
      * @param srcPath source path
      * @param destPath a destination path that must not already exist.
      * @param revision revision to use for the export
-     * @param force force export
+     * @param peg the revision where the path is first looked up when exporting from a repository.
+     * @param overwrite overwrite existing files
+     * @param native_eol Either "LF", "CR" or "CRLF" or NULL.
+     * @param ignore_externals don't process externals definitions as part of this operation.
+     * @param recurse if true, export recursively.<br>
+      Otherwise, export just the directory represented by from and its immediate non-directory children.
      */
     virtual svn_revnum_t
     doExport (const Path & srcPath,
               const Path & destPath,
               const Revision & revision,
-              bool force=false) throw (ClientException)=0;
+              const Revision & peg = Revision::UNDEFINED,
+              bool overwrite=false,
+              const QString&native_eol=QString::null,
+              bool ignore_externals = false,
+              bool recurse = true
+              ) throw (ClientException)=0;
 
     /**
      * Update local copy to mirror a new url. This excapsulates the

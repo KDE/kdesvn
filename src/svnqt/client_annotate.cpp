@@ -43,7 +43,7 @@ namespace svn
                     const char *author,
                     const char *date,
                     const char *line,
-                    apr_pool_t *pool)
+                    apr_pool_t *)
   {
     AnnotatedFile * entries = (AnnotatedFile *) baton;
     entries->push_back (
@@ -55,29 +55,27 @@ namespace svn
     return NULL;
   }
 
-  AnnotatedFile *
-  Client_impl::annotate (const Path & path,
+  void
+  Client_impl::annotate (AnnotatedFile&target,const Path & path,
             const Revision & revisionStart,
-            const Revision & revisionEnd) throw (ClientException)
+            const Revision & revisionEnd,
+            const Revision & peg) throw (ClientException)
   {
     Pool pool;
-    AnnotatedFile * entries = new AnnotatedFile;
     svn_error_t *error;
-    error = svn_client_blame (
+    error = svn_client_blame2(
       path.path().TOUTF8(),
+      peg.revision(),
       revisionStart.revision (),
       revisionEnd.revision (),
       annotateReceiver,
-      entries,
+      &target,
       *m_context, // client ctx
       pool);
 
     if (error != NULL)
     {
-      delete entries;
       throw ClientException (error);
     }
-
-    return entries;
   }
 }

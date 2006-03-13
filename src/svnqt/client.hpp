@@ -285,17 +285,20 @@ namespace svn
 
     /**
      * Retrieves the contents for a specific @a revision of
-     * a @a path
+     * a @a path and stores the result in @a target
      *
+     * @param target the container where to store the result
      * @param path path of file or directory
      * @param revisionStart revision to retrieve
      * @param revisionEnd revision to retrieve
-     * @return contents of the file
+     * @param peg indicates in which revision path is valid
      */
-    virtual AnnotatedFile *
-    annotate (const Path & path,
+    virtual void
+    annotate (AnnotatedFile&target,
+              const Path & path,
               const Revision & revisionStart,
-              const Revision & revisionEnd) throw (ClientException)=0;
+              const Revision & revisionEnd,
+              const Revision & peg = Revision::UNDEFINED) throw (ClientException)=0;
 
     /**
      * Commits changes to the repository. This usually requires

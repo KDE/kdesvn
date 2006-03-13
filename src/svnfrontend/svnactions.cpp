@@ -1654,11 +1654,22 @@ void SvnActions::checkUpdateThread()
     kdDebug()<<"Updates Thread seems stopped"<<endl;
 
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
-        if (m_UThread->getList()[i].reposTextStatus()!=svn_wc_status_none||m_UThread->getList()[i].reposPropStatus()!=svn_wc_status_none) {
+        if (m_UThread->getList()[i].validReposStatus()) {
             m_Data->m_UpdateCache.insertKey(m_UThread->getList()[i]);
+            if (m_UThread->getList()[i].validLocalStatus()) {
+                kdDebug()<<m_UThread->getList()[i].path()<< " exists"<<endl;
+            } else {
+                kdDebug()<<m_UThread->getList()[i].path()<< " is new item"<<endl;
+            }
         }
     }
     m_Data->m_UpdateCache.dump_tree();
+#if 0
+    helpers::ValidRemoteOnly vro;
+    m_Data->m_UpdateCache.listsubs_if("/home/ralbrecht/Sonst/PrivProjekte/webseite/programs/download/kdesvn",
+        vro);
+    kdDebug()<<"Got "<<vro.liste().count()<<" items in teststage"<<endl;
+#endif
     emit sigRefreshIcons();
     emit sendNotify(i18n("Checking for updates finished"));
     delete m_UThread;
@@ -1710,25 +1721,11 @@ bool SvnActions::createUpdateCache(const QString&what)
 {
     clearUpdateCache();
     stopCheckUpdateThread();
-#if 0
-    svn::Revision r = svn::Revision::HEAD;
-    svn::StatusEntries dlist;
-    if (!makeStatus(what,dlist,r,true,false,false,true)) {
-        return false;
-    }
-    for (unsigned int i = 0; i < dlist.count();++i) {
-        if (dlist[i].reposTextStatus()!=svn_wc_status_none||dlist[i].reposPropStatus()!=svn_wc_status_none) {
-            m_Data->m_UpdateCache.push_back(dlist[i]);
-        }
-    }
-    emit sendNotify(i18n("Checking for updates finished"));
-#else
     m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();
     m_Data->m_UpdateCheckTimer.start(100,true);
     emit sendNotify(i18n("Checking for updates started in background"));
     m_Data->m_UpdateCheckTick.start();
-#endif
     return true;
 }
 

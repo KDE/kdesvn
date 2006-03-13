@@ -75,6 +75,7 @@ public:
      * \return true if found
      */
     virtual bool findSingleValid(QStringList&what,bool check_valid_subs)const;
+    template<class T> void listsubs_if(QStringList&_what,T&oper)const;
 
     virtual void appendValidSub(svn::StatusEntries&)const;
     virtual bool isValid()const;
@@ -90,6 +91,23 @@ public:
     cacheEntry& operator=(const cacheEntry&other);
     void dump_tree(int level=0)const;
 };
+
+template<class T> inline void cacheEntry::listsubs_if(QStringList&what,T&oper)const
+{
+    if (what.count()==0) {
+        /* we are the one to get the list for*/
+        oper = for_each(m_subMap.begin(),m_subMap.end(),oper);
+        return;
+    }
+    /* otherwise find next */
+    std::map<QString,cacheEntry>::const_iterator it=m_subMap.find(what[0]);
+    if (it==m_subMap.end()) {
+        /* not found */
+        return;
+    }
+    what.erase(what.begin());
+    it->second.listsubs_if(what,oper);
+}
 
 class itemCache
 {
@@ -116,7 +134,43 @@ public:
     virtual bool findSingleValid(const QString&what,svn::Status&)const;
     virtual bool findSingleValid(const QString&what,bool check_valid_subs)const;
 
+    template<class T>void listsubs_if(const QString&what,T&oper)const;
+
     void dump_tree();
+};
+
+template<class T> inline void itemCache::listsubs_if(const QString&_what,T&oper)const
+{
+    if (m_contentMap.size()==0) {
+        return;
+    }
+    QStringList what = QStringList::split("/",_what);
+    if (what.count()==0) {
+        return;
+    }
+    std::map<QString,cacheEntry>::const_iterator it=m_contentMap.find(what[0]);
+    if (it==m_contentMap.end()) {
+        return;
+    }
+    if (what.count()==1) {
+        oper = for_each(m_contentMap.begin(),m_contentMap.end(),oper);
+        return;
+    }
+    what.erase(what.begin());
+    it->second.listsubs_if(what,oper);
+}
+
+class ValidRemoteOnly
+{
+    svn::StatusEntries m_List;
+public:
+    ValidRemoteOnly():m_List(){}
+    void operator()(const std::pair<const QString,helpers::cacheEntry>&_data) {
+        if(_data.second.content().validReposStatus()&&!_data.second.content().validLocalStatus()) {
+            m_List.push_back(_data.second.content());
+        }
+    }
+    const svn::StatusEntries&liste()const{return m_List;}
 };
 
 }

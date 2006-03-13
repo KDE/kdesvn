@@ -44,7 +44,7 @@ void CheckModifiedThread::run()
     svn::Revision where = svn::Revision::HEAD;
     QString ex;
     try {
-        //                                  rec  all   up        noign
+        //                                  rec  all    up        noign
         m_Cache = m_Svnclient->status(m_what,true,false,m_updates,false,where);
     } catch (svn::ClientException e) {
         m_SvnContext->contextNotify(e.msg());

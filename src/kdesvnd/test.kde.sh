@@ -22,8 +22,8 @@ fi
 echo "Moving to ${n}"
 
 if [ "${mi}" = "5" ]; then
-  cat ${1} | sed s/^Actions/\#Actions/g > $n
+  cat ${1} | sed 's/^Actions/\#Actions/g' > $n
 else
-  cat ${1} | sed s/^X-KDE-GetActionMenu/\#X-KDE-GetActionMenu/g > $n
+  cat ${1} | sed 's/^X-KDE-GetActionMenu/\#X-KDE-GetActionMenu/g' > $n
 fi
 

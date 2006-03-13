@@ -146,6 +146,7 @@ namespace svn
      * @param get_all Return all entries, not just the interesting ones.
      * @param update Query the repository for updates.
      * @param no_ignore Disregard default and svn:ignore property ignores.
+     * @param hide_externals don't recurse into external definitions
      * @param revision list specific revision when browsing remote, on working copies parameter will ignored
      * @param detailed_remote if on remote listing detailed item info should get if possible
      *                        that may slow so should configureable in frontends!
@@ -158,7 +159,8 @@ namespace svn
             const bool update = false,
             const bool no_ignore = false,
             Revision revision = svn::Revision::HEAD,
-            bool detailed_remote = false) throw (ClientException) = 0;
+            bool detailed_remote = false,
+            const bool hide_externals = false) throw (ClientException) = 0;
 
     /**
      * Returns the status of a single file in the path.

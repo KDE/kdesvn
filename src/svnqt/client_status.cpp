@@ -187,6 +187,7 @@ namespace svn
                const bool get_all,
                const bool update,
                const bool no_ignore,
+               const bool hide_externals,
                Context * context)
   {
     svn_error_t *error;
@@ -210,7 +211,7 @@ namespace svn
       get_all,       // get all not only interesting
       update,        // check for updates
       no_ignore,     // hide ignored files or not
-      false,       /// @todo first shot - should get a parameter
+      hide_externals, // hide external
       *context,    //client ctx
       pool);
 
@@ -291,14 +292,15 @@ namespace svn
                   const bool update,
                   const bool no_ignore,
                   Revision revision,
-                  bool detailed_remote) throw (ClientException)
+                  bool detailed_remote,
+                  const bool hide_externals) throw (ClientException)
   {
     if (Url::isValid (path))
       return remoteStatus (this, path, descend, get_all, update,
                            no_ignore,revision,m_context,detailed_remote);
     else
       return localStatus (path, descend, get_all, update,
-                          no_ignore, m_context);
+                          no_ignore, hide_externals, m_context);
   }
 
   static Status

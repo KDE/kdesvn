@@ -82,7 +82,7 @@ namespace svn
     }
     else
     {
-      m_isVersioned = status->text_status > svn_wc_status_unversioned;
+      m_isVersioned = status->text_status > svn_wc_status_unversioned||status->repos_text_status>svn_wc_status_unversioned;
       m_hasReal = m_isVersioned &&
                           status->text_status!=svn_wc_status_ignored;
       // now duplicate the contents

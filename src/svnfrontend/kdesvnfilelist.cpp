@@ -531,7 +531,9 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         checkUnversionedDirs(_parent);
         return true;
     }
-
+    svn::StatusEntries neweritems;
+    m_SvnWrapper->getaddedItems(what,neweritems);
+    dlist+=neweritems;
     kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
 
     viewport()->setUpdatesEnabled(false);
@@ -2287,9 +2289,23 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt)
     if (!_s) {
         return;
     }
+    svn::Status d;
     while (_s) {
-        _s->makePixmap();
+        //_s->makePixmap();
+        if (m_SvnWrapper->getUpdated(_s->stat().path(),d)) {
+            _s->updateStatus(d);
+        } else {
+            _s->update();
+        }
         rescanIconsRec(_s);
+        kdDebug()<<"Rescan icons for " << _s->stat().path() << " " << _s->isDir() << " "
+            << _s->isOpen() << " " << m_SvnWrapper->isUpdated(_s->stat().path()) << endl;
+        if (_s->isDir() && _s->isOpen() /* && m_SvnWrapper->isUpdated(_s->stat().path())*/) {
+            svn::StatusEntries target;
+            kdDebug( ) << "Checking added items for " << _s->stat().path()<<endl;
+            m_SvnWrapper->getaddedItems(_s->stat().path(),target);
+            insertDirs(_s,target);
+        }
         _s = static_cast<FileListViewItem*>(_s->nextSibling());
     }
 }

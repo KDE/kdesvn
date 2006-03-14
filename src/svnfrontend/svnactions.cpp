@@ -433,14 +433,16 @@ QString SvnActions::makeMkdir(const QString&parentDir)
 QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
 {
     QStringList l;
+    QString res = "";
     SvnItem*item;
     for (item=lst.first();item;item=lst.next()) {
-        l.append(item->fullName());
+        if (all) res+="<h4 align=\"center\">"+item->fullName()+"</h4>";
+        res += getInfo(item->fullName(),rev,item->stat().entry().revision(),recursive,all);
     }
-    return getInfo(l,rev,peg,recursive,all);
+    return res;
 }
 
-QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
+QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
 {
     if (!m_Data->m_CurrentContext) return QString::null;
     QString ex;
@@ -449,13 +451,7 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Details","Retrieving infos - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::InfoEntries e;
-        for (unsigned item=0;item<lst.count();++item) {
-            kdDebug()<<"Info for " << lst[item]<<endl;
-            e = (m_Data->m_Svnclient->info(lst[item],recursive,rev,peg));
-            // stl like - hold it for qt4?
-            //entries.insert(entries.end(),e.begin(),e.end());
-            entries+=e;
-        }
+        entries = (m_Data->m_Svnclient->info(_what,recursive,rev,peg));
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return QString::null;
@@ -471,10 +467,12 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
         if (val>0) {
             text+="<hline>";
         }
+#if 0
         if (all && lst.count()>=val) {
             text+="<h4 align=\"center\">"+lst[val]+"</h4>";
             ++val;
         }
+#endif
         text+="<p align=\"center\">";
         text+="<table cellspacing=0 cellpadding=0>";
         if ((*it).Name().length()) {
@@ -570,15 +568,29 @@ QString SvnActions::getInfo(const QStringList& lst,const svn::Revision&rev,const
 void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
     QStringList l;
+    QString res = "<html><head></head><body>";
     SvnItem*item;
     for (item=lst.first();item;item=lst.next()) {
-        l.append(item->fullName());
+        QString text = getInfo(item->fullName(),rev,item->stat().entry().revision(),recursive,true);
+        if (!text.isEmpty()) {
+            res+="<h4 align=\"center\">"+item->fullName()+"</h4>";
+            res+=text;
+        }
     }
-    makeInfo(l,rev,peg,recursive);
+    res+="</body></html>";
+    KTextBrowser*ptr;
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
+    if (dlg) {
+        ptr->setText(res);
+        dlg->exec();
+        dlg->saveDialogSize(*(Settings::self()->config()),"info_dialog",false);
+        delete dlg;
+    }
 }
 
 void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
+#if 0
     QString text = getInfo(lst,rev,peg,recursive);
     if (text.isNull()) return;
     text = "<html><head></head><body>"+text+"</body></html>";
@@ -590,6 +602,7 @@ void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const sv
         dlg->saveDialogSize(*(Settings::self()->config()),"info_dialog",false);
         delete dlg;
     }
+#endif
 }
 
 
@@ -1653,27 +1666,30 @@ void SvnActions::checkUpdateThread()
     }
     kdDebug()<<"Updates Thread seems stopped"<<endl;
 
+    bool newer=false;
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
         if (m_UThread->getList()[i].validReposStatus()) {
             m_Data->m_UpdateCache.insertKey(m_UThread->getList()[i]);
-            if (m_UThread->getList()[i].validLocalStatus()) {
-                kdDebug()<<m_UThread->getList()[i].path()<< " exists"<<endl;
-            } else {
-                kdDebug()<<m_UThread->getList()[i].path()<< " is new item"<<endl;
+            if (!m_UThread->getList()[i].validLocalStatus()) {
+                newer = true;
             }
         }
     }
     m_Data->m_UpdateCache.dump_tree();
-#if 0
-    helpers::ValidRemoteOnly vro;
-    m_Data->m_UpdateCache.listsubs_if("/home/ralbrecht/Sonst/PrivProjekte/webseite/programs/download/kdesvn",
-        vro);
-    kdDebug()<<"Got "<<vro.liste().count()<<" items in teststage"<<endl;
-#endif
     emit sigRefreshIcons();
     emit sendNotify(i18n("Checking for updates finished"));
+    if (newer) {
+        emit sigNewerItemsArrived();
+    }
     delete m_UThread;
     m_UThread = 0;
+}
+
+void SvnActions::getaddedItems(const QString&path,svn::StatusEntries&target)
+{
+    helpers::ValidRemoteOnly vro;
+    m_Data->m_UpdateCache.listsubs_if(path,vro);
+    target=vro.liste();
 }
 
 bool SvnActions::checkUpdatesRunning()
@@ -1744,6 +1760,11 @@ void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
 bool SvnActions::isUpdated(const QString&path)const
 {
     svn::Status d;
+    return m_Data->m_UpdateCache.findSingleValid(path,d);
+}
+
+bool SvnActions::getUpdated(const QString&path,svn::Status&d)const
+{
     return m_Data->m_UpdateCache.findSingleValid(path,d);
 }
 

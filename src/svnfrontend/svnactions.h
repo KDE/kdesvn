@@ -112,13 +112,14 @@ public:
     void CheckoutExport(const QString&what,bool _exp,bool urlisTarget=false);
 
     QString getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
-    QString getInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
+    QString getInfo(const QString&_what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
 
     QString makeMkdir(const QString&);
     bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
     bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
+    bool getUpdated(const QString&path,svn::Status&d)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
@@ -126,6 +127,7 @@ public:
     void killallThreads();
 
     bool checkUpdatesRunning();
+    void getaddedItems(const QString&path,svn::StatusEntries&target);
 
 
 protected:
@@ -172,6 +174,7 @@ signals:
     void sigRefreshAll();
     void sigRefreshCurrent(SvnItem*);
     void sigRefreshIcons();
+    void sigNewerItemsArrived();
     void sigExtraLogMsg(const QString&);
     void sigGotourl(const QString&);
 

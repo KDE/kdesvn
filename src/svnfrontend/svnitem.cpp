@@ -306,7 +306,11 @@ QString SvnItem::infoText()const
 {
     QString info_text = "";
     if (getWrapper()->isUpdated(p_Item->m_Stat.path())) {
-        info_text = i18n("Needs update");
+        if (p_Item->m_Stat.validReposStatus()&&!p_Item->m_Stat.validLocalStatus()) {
+            info_text = i18n("Added in repository");
+        } else {
+            info_text = i18n("Needs update");
+        }
     } else {
     switch(p_Item->m_Stat.textStatus ()) {
     case svn_wc_status_modified:
@@ -405,7 +409,7 @@ bool SvnItem::isNormal()const
 const QString& SvnItem::getToolTipText()
 {
     if (p_Item->m_infoText.isNull()) {
-        if (isRealVersioned()) {
+        if (isRealVersioned() && !p_Item->m_Stat.entry().url().isEmpty()) {
             SvnActions*wrap = getWrapper();
             svn::Revision peg(svn_opt_revision_unspecified);
             svn::Revision rev(svn_opt_revision_unspecified);

@@ -456,7 +456,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         emit clientException(e.msg());
         return QString::null;
     }
-    if (!all) EMIT_FINISHED;
+    //if (!all) EMIT_FINISHED;
     QString text = "";
     svn::InfoEntries::const_iterator it;
     static QString rb = "<tr><td><nobr><font color=\"black\">";
@@ -1680,6 +1680,7 @@ void SvnActions::checkUpdateThread()
     emit sendNotify(i18n("Checking for updates finished"));
     if (newer) {
         emit sigNewerItemsArrived();
+        emit sendNotify(i18n("There are new items in repository"));
     }
     delete m_UThread;
     m_UThread = 0;

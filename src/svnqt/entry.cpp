@@ -31,6 +31,8 @@ namespace svn
 {
     class Entry_private
     {
+    protected:
+        void init_clean();
     public:
         Entry_private();
         Entry_private(const Entry_private&src);
@@ -59,14 +61,27 @@ namespace svn
         init(const QString&url,const InfoEntry&src);
     };
 
+    void Entry_private::init_clean()
+    {
+        _name = _url = _repos = _uuid = _copyfrom_url = _conflict_old = _conflict_new = _conflict_wrk
+            = _prejfile = _checksum = _cmt_author = QString::null;
+        _revision = _copyfrom_rev = _cmt_rev = -1;
+        _kind = svn_node_unknown;
+        _schedule = svn_wc_schedule_normal;
+        _text_time = _prop_time = _cmt_date = 0;
+        _copied = _deleted = _absent = _incomplete = false;
+    }
+
     Entry_private::Entry_private()
         : m_valid (false),m_Lock()
     {
+        init_clean();
     }
 
     Entry_private::Entry_private(const Entry_private&src)
         : m_valid (false),m_Lock()
     {
+        init_clean();
         init(src);
     }
 

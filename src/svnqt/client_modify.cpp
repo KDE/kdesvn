@@ -279,20 +279,8 @@ namespace svn
   Client_impl::mkdir (const Path & path,
                  const QString& message) throw (ClientException)
   {
-    Pool pool;
-    m_context->setLogMessage (message);
-
     Targets targets(path.path());
-
-    svn_client_commit_info_t *commit_info = NULL;
-    svn_error_t * error =
-      svn_client_mkdir (&commit_info,
-                        const_cast<apr_array_header_t*>
-                        (targets.array (pool)),
-                        *m_context, pool);
-
-    if(error != NULL)
-      throw ClientException (error);
+    mkdir(targets,message);
   }
 
   void
@@ -300,14 +288,22 @@ namespace svn
                  const QString& message) throw (ClientException)
   {
     Pool pool;
-    m_context->setLogMessage (message);
-
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+    svn_commit_info_t *commit_info = NULL;
+#else
     svn_client_commit_info_t *commit_info = NULL;
+#endif
+
     svn_error_t * error =
-      svn_client_mkdir (&commit_info,
-                        const_cast<apr_array_header_t*>
-                        (targets.array (pool)),
-                        *m_context, pool);
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+    svn_client_mkdir2
+#else
+    svn_client_mkdir
+#endif
+            (&commit_info,
+                const_cast<apr_array_header_t*>
+                (targets.array (pool)),
+                    *m_context, pool);
 
     if(error != NULL)
       throw ClientException (error);

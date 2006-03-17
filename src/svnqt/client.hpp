@@ -553,12 +553,14 @@ namespace svn
      *
      * @param path
      * @param revision
+     * @param peg most case should set to @a revision
      * @param recurse
      * @return PropertiesList
      */
     virtual PathPropertiesMapList
     proplist(const Path &path,
              const Revision &revision,
+             const Revision &peg,
              bool recurse=false)=0;
 
     /**
@@ -568,6 +570,7 @@ namespace svn
      * @param propName
      * @param path
      * @param revision
+     * @param peg most case should set to @a revision
      * @param recurse
      * @return PathPropertiesMapList
      */
@@ -575,6 +578,7 @@ namespace svn
     propget(const QString& propName,
             const Path &path,
             const Revision &revision,
+            const Revision &peg,
             bool recurse=false) = 0;
 
     /**
@@ -585,6 +589,7 @@ namespace svn
      * @param revision
      * @param propName
      * @param propValue
+     * @param skip_check if true skip validity checks
      * @param recurse
      * @return PropertiesList
      */
@@ -593,7 +598,8 @@ namespace svn
             const QString& propValue,
             const Path &path,
             const Revision &revision,
-            bool recurse=false) = 0;
+            bool recurse=false,
+            bool skip_checks=false) = 0;
 
     /**
      * delete property in @a path no matter whether local or

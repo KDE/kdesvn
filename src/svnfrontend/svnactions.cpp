@@ -1787,7 +1787,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     svn::Revision r(svn_opt_revision_unspecified);
     svn::PathPropertiesMapList pm;
     try {
-        pm = m_Data->m_Svnclient->propget("svn:ignore",p,r);
+        pm = m_Data->m_Svnclient->propget("svn:ignore",p,r,r);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return false;

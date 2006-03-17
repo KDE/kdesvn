@@ -227,7 +227,7 @@ void PropertiesDlg::initItem()
     svn::Path what(m_Item->fullName());
     svn::PathPropertiesMapList propList;
     try {
-        propList = m_Client->proplist(what,m_Rev);
+        propList = m_Client->proplist(what,m_Rev,m_Rev);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;

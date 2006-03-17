@@ -42,27 +42,19 @@
 namespace svn
 {
 
-
-  /**
-   * lists properties in @a path no matter whether local or
-   * repository
-   *
-   * @param path
-   * @param revision
-   * @param recurse
-   * @return PropertiesList
-   */
   PathPropertiesMapList
   Client_impl::proplist(const Path &path,
                    const Revision &revision,
+                   const Revision &peg,
                    bool recurse)
   {
     Pool pool;
 
     apr_array_header_t * props;
     svn_error_t * error =
-      svn_client_proplist (&props,
+      svn_client_proplist2(&props,
                            path.cstr (),
+                           peg.revision(),
                            revision.revision (),
                            recurse,
                            *m_context,
@@ -98,29 +90,21 @@ namespace svn
     return path_prop_map_list;
   }
 
-  /**
-   * lists properties in @a path no matter whether local or
-   * repository
-   *
-   * @param path
-   * @param revision
-   * @param recurse
-   * @return PropertiesList
-   */
-
   PathPropertiesMapList
   Client_impl::propget(const QString& propName,
                   const Path &path,
                   const Revision &revision,
+                  const Revision &peg,
                   bool recurse)
   {
     Pool pool;
 
     apr_hash_t *props;
     svn_error_t * error =
-      svn_client_propget (&props,
+      svn_client_propget2(&props,
                            propName.TOUTF8(),
                            path.cstr (),
+                           peg.revision(),
                            revision.revision (),
                            recurse,
                            *m_context,
@@ -150,23 +134,13 @@ namespace svn
     return path_prop_map_list;
   }
 
-  /**
-   * set property in @a path no matter whether local or
-   * repository
-   *
-   * @param path
-   * @param revision
-   * @param propName
-   * @param propValue
-   * @param recurse
-   * @return PropertiesList
-   */
   void
   Client_impl::propset(const QString& propName,
                   const QString& propValue,
                   const Path &path,
                   const Revision &revision,
-                  bool recurse)
+                  bool recurse,
+                  bool skip_checks)
     {
       Pool pool;
       const svn_string_t * propval
@@ -175,25 +149,14 @@ namespace svn
                              pool);
 
       svn_error_t * error =
-        svn_client_propset (
+        svn_client_propset2(
                             propName.TOUTF8(),
-                            propval, path.cstr (),
-                            recurse, pool);
+                            propval, path.cstr(),
+                            recurse,skip_checks, *m_context, pool);
       if(error != NULL)
         throw ClientException (error);
     }
 
-  /**
-   * delete property in @a path no matter whether local or
-   * repository
-   *
-   * @param path
-   * @param revision
-   * @param propName
-   * @param propValue
-   * @param recurse
-   * @return PropertiesList
-   */
   void
   Client_impl::propdel(const QString& propName,
                   const Path &path,
@@ -202,11 +165,13 @@ namespace svn
   {
     Pool pool;
     svn_error_t * error =
-              svn_client_propset (
+              svn_client_propset2(
                                   propName.TOUTF8(),
                                   0, // value = NULL
                                   path.cstr (),
                                   recurse,
+                                  false,
+                                  *m_context,
                                   pool);
     if(error != NULL)
       throw ClientException (error);

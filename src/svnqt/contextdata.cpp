@@ -128,7 +128,7 @@ ContextData::ContextData(const QString & configDir_)
       m_ctx.log_msg_baton = this;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       // as long as commit_items is unused it may used twice!
-      m_ctx.log_msg_func2 = onLogMsg;
+      m_ctx.log_msg_func2 = onLogMsg2;
       m_ctx.log_msg_baton2 = this;
 #endif
 }
@@ -271,6 +271,29 @@ void ContextData::setLogMessage (const QString& msg)
 svn_error_t *ContextData::onLogMsg (const char **log_msg,
               const char **tmp_file,
               apr_array_header_t *, //UNUSED commit_items
+              void *baton,
+              apr_pool_t * pool)
+{
+    ContextData * data;
+    SVN_ERR (getContextData (baton, &data));
+
+    QString msg;
+    if (data->logIsSet) {
+        msg = data->getLogMessage ();
+    } else {
+        if (!data->retrieveLogMessage (msg)) {
+            return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
+        }
+    }
+
+    *log_msg = apr_pstrdup (pool,msg.TOUTF8());
+    *tmp_file = NULL;
+    return SVN_NO_ERROR;
+}
+
+svn_error_t *ContextData::onLogMsg2 (const char **log_msg,
+              const char **tmp_file,
+              const apr_array_header_t *, //UNUSED commit_items
               void *baton,
               apr_pool_t * pool)
 {

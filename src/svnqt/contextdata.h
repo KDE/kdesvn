@@ -129,6 +129,19 @@ protected:
               apr_array_header_t *, //UNUSED commit_items
               void *baton,
               apr_pool_t * pool);
+
+    /**
+     * this function gets called by the subversion api function
+     * when a log message is needed. This is the case on a commit
+     * for example
+     */
+    static svn_error_t *
+    onLogMsg2 (const char **log_msg,
+              const char **tmp_file,
+              const apr_array_header_t *, //UNUSED commit_items
+              void *baton,
+              apr_pool_t * pool);
+
     /**
      * this is the callback function for the subversion
      * api functions to signal the progress of an action

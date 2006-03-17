@@ -173,8 +173,7 @@ signals:
     void reinitItem(SvnItem*);
     void sigRefreshAll();
     void sigRefreshCurrent(SvnItem*);
-    void sigRefreshIcons();
-    void sigNewerItemsArrived();
+    void sigRefreshIcons(bool);
     void sigExtraLogMsg(const QString&);
     void sigGotourl(const QString&);
 

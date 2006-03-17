@@ -1650,7 +1650,7 @@ void SvnActions::checkModthread()
     kdDebug()<<"Modified Cache end"<<endl;
     delete m_CThread;
     m_CThread = 0;
-    emit sigRefreshIcons();
+    emit sigRefreshIcons(false);
 }
 
 void SvnActions::checkUpdateThread()
@@ -1676,10 +1676,9 @@ void SvnActions::checkUpdateThread()
         }
     }
     m_Data->m_UpdateCache.dump_tree();
-    emit sigRefreshIcons();
+    emit sigRefreshIcons(newer);
     emit sendNotify(i18n("Checking for updates finished"));
     if (newer) {
-        emit sigNewerItemsArrived();
         emit sendNotify(i18n("There are new items in repository"));
     }
     delete m_UThread;

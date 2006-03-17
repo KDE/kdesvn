@@ -229,10 +229,14 @@ namespace svn
 
     /**
      * Adds a file to the repository.
+     * @param path the path to add
+     * @param recurse if @a path is a folder add items recursive
+     * @param force if true, do not error on already-versioned items.
+     * @param no_ignore if false don't add files or directories that match ignore patterns. When build against svn 1.2 always false
      * @exception ClientException
      */
     virtual void
-    add (const Path & path, bool recurse) throw (ClientException)=0;
+    add (const Path & path, bool recurse,bool force=false, bool no_ignore=false) throw (ClientException)=0;
 
     /**
      * Updates the file or directory.
@@ -287,12 +291,13 @@ namespace svn
      * @param targets files to commit.
      * @param message log message.
      * @param recurse whether the operation should be done recursively.
+     * @param keep_locks if false unlock items in paths
      * @exception ClientException
      */
     virtual svn_revnum_t
     commit (const Targets & targets,
             const QString& message,
-            bool recurse) throw (ClientException)=0;
+            bool recurse,bool keep_locks=true) throw (ClientException)=0;
 
     /**
      * Copies a versioned file with the history preserved.

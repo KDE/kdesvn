@@ -40,6 +40,7 @@ namespace svn
 {
   // forward declarations
   class ContextListener;
+  class ContextData;
 
   /**
    * This class will hold the client context
@@ -148,8 +149,7 @@ namespace svn
     getListener () const;
 
   private:
-    struct Data;
-    Data * m;
+    ContextData * m;
 
     /**
      * disable assignment operator

@@ -76,10 +76,21 @@ namespace svn
                   bool force) throw (ClientException)
   {
     Pool pool;
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
+#else
+    svn_client_commit_info_t *commit_info = NULL;
+#endif
 
     svn_error_t * error =
-      svn_client_delete2 (&commit_info,
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+      svn_client_delete2
+#else
+      svn_client_delete
+#endif
+                    (&commit_info,
                          const_cast<apr_array_header_t*> (targets.array (pool)),
                          force,
                          *m_context,
@@ -214,9 +225,18 @@ namespace svn
                 const Path & destPath) throw (ClientException)
   {
     Pool pool;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
+#else
+    svn_client_commit_info_t *commit_info = NULL;
+#endif
     svn_error_t * error =
-      svn_client_copy2 (&commit_info,
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+        svn_client_copy2
+#else
+        svn_client_copy
+#endif
+                    (&commit_info,
                        srcPath.cstr (),
                        srcRevision.revision (),
                        destPath.cstr (),

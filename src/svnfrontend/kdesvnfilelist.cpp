@@ -176,7 +176,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(reinitItem(SvnItem*)),this,SLOT(slotReinitItem(SvnItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(SvnItem*)),this,SLOT(refreshCurrent(SvnItem*)));
-    connect(m_SvnWrapper,SIGNAL(sigRefreshIcons()),this,SLOT(slotRescanIcons()));
+    connect(m_SvnWrapper,SIGNAL(sigRefreshIcons(bool)),this,SLOT(slotRescanIcons(bool)));
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
@@ -924,7 +924,7 @@ void kdesvnfilelist::slotResolved()
     if (!which) return;
     m_SvnWrapper->slotResolved(which->fullName());
     which->refreshStatus(true);
-    slotRescanIcons();
+    slotRescanIcons(false);
 }
 
 template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
@@ -2278,7 +2278,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
     //this->insertDirs(_parent, nonversioned_list);
 }
 
-void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt)
+void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer)
 {
     FileListViewItem*_s,*_temp;
     if (!startAt) {
@@ -2297,10 +2297,8 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt)
         } else {
             _s->update();
         }
-        rescanIconsRec(_s);
-        kdDebug()<<"Rescan icons for " << _s->stat().path() << " " << _s->isDir() << " "
-            << _s->isOpen() << " " << m_SvnWrapper->isUpdated(_s->stat().path()) << endl;
-        if (_s->isDir() && _s->isOpen() /* && m_SvnWrapper->isUpdated(_s->stat().path())*/) {
+        rescanIconsRec(_s,checkNewer);
+        if (checkNewer && _s->isDir() && _s->isOpen() /* && m_SvnWrapper->isUpdated(_s->stat().path())*/) {
             svn::StatusEntries target;
             kdDebug( ) << "Checking added items for " << _s->stat().path()<<endl;
             m_SvnWrapper->getaddedItems(_s->stat().path(),target);
@@ -2310,9 +2308,9 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt)
     }
 }
 
-void kdesvnfilelist::slotRescanIcons()
+void kdesvnfilelist::slotRescanIcons(bool checkNewer)
 {
-    rescanIconsRec(0L);
+    rescanIconsRec(0L,checkNewer);
 }
 
 

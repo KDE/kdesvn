@@ -58,6 +58,14 @@ public:
     CommitItem(const svn_client_commit_item2_t*);
     ~CommitItem();
 
+    const QString& path()const;
+    const QString& url()const;
+    const QString& copyfromurl()const;
+    const PropertiesMap& properties()const;
+    svn_revnum_t revision()const;
+    svn_revnum_t copyfromrevision()const;
+    svn_node_kind_t kind()const;
+    apr_byte_t state()const;
 };
 
 #if QT_VERSION < 0x040000

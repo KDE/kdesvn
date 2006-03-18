@@ -51,6 +51,7 @@ namespace svn
     this->value = value;
   }
 
+#if 0
   Property::Property (Context * context, const Path & path)
     : m_context (context), m_path (path)
   {
@@ -182,7 +183,7 @@ namespace svn
     return is_svn_prop;
   }
   */
-
+#endif
 }
 /* -----------------------------------------------------------------
  * local variables:

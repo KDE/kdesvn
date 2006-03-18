@@ -58,7 +58,7 @@ public:
     /*!
      * Get logmessage for checkin and so on...
      */
-    virtual bool contextGetLogMessage (QString & msg);
+    virtual bool contextGetLogMessage (QString & msg,const svn::CommitItemList&);
     virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
                                  apr_uint32_t & acceptedFailures);
     virtual bool contextSslClientCertPrompt (QString & certFile);

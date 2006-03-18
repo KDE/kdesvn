@@ -58,6 +58,8 @@ public:
     {
         QString msg;
         bool ok;
+        const svn::CommitItemList*_items;
+        slog_message(){_items = 0;}
     };
 
     struct scert_pw

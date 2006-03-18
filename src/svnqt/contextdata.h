@@ -22,6 +22,7 @@
 
 #include "pool.hpp"
 #include "apr.hpp"
+#include "commititem.hpp"
 
 #include <svn_client.h>
 #include <qstring.h>
@@ -63,7 +64,7 @@ public:
      * @param msg log message
      * @retval false cancel
      */
-    bool retrieveLogMessage (QString & msg);
+    bool retrieveLogMessage (QString & msg,const CommitItemList&);
 
     /**
      * if the @a listener is set call the method

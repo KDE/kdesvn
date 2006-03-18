@@ -17,50 +17,54 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef TCONTEXTLISTENER_H
-#define TCONTEXTLISTENER_H
+#ifndef SVNCOMMITITEM_H
+#define SVNCOMMITITEM_H
 
-#include "eventnumbers.h"
+#include "client.hpp"
 
-#include "ccontextlistener.h"
+#include <svn_types.h>
+#include <apr.h>
 
-#include <qevent.h>
-#include <qmutex.h>
-#include <qwaitcondition.h>
+// forward declarations
+struct svn_client_commit_item_t;
+// only used if build against svn 1.3 api
+struct svn_client_commit_item2_t;
 
-class ThreadContextListenerData;
+namespace svn {
 
 /**
-@author Rajko Albrecht
+	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class ThreadContextListener : public CContextListener
-{
-    Q_OBJECT
-public:
-    ThreadContextListener(QObject* parent, const char* name);
+class CommitItem{
 
-    ~ThreadContextListener();
-
-    virtual bool contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave);
-    virtual bool contextGetLogMessage(QString& msg,const svn::CommitItemList&);
-    virtual bool contextSslClientCertPrompt(QString& certFile);
-    virtual bool contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave);
-    virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t& acceptedFailures);
-    virtual void contextNotify(const QString&aMsg);
-    virtual void sendTick();
+private:
+    void init();
+    void convertprop(apr_array_header_t *);
 
 protected:
-    virtual void event_contextGetLogin(void*_data);
-    virtual void event_contextGetLogMessage(void*data);
-    virtual void event_contextSslClientCertPrompt(void*data);
-    virtual void event_contextSslClientCertPwPrompt(void*data);
-    virtual void event_contextSslServerTrustPrompt(void* data);
-    virtual void event_contextNotify(void*data);
-    virtual void customEvent(QCustomEvent*);
+    PropertiesMap m_CommitProperties;
+    QString m_Path,m_Url,m_CopyFromUrl;
+    svn_node_kind_t m_Kind;
+    svn_revnum_t m_Revision,m_CopyFromRevision;
+    apr_byte_t m_State;
 
-    /* stores all internals */
-    ThreadContextListenerData*m_Data;
+public:
+    //! constructor
+    CommitItem(const svn_client_commit_item_t*aSource=0);
+    //! constructor
+    /*!
+     * This one will only do something if build against subversion 1.3
+     */
+    CommitItem(const svn_client_commit_item2_t*);
+    ~CommitItem();
+
 };
 
+#if QT_VERSION < 0x040000
+    typedef QValueList<CommitItem> CommitItemList;
+#else
+    typedef QList<CommitItem> CommitItemList;
+#endif
+}
 
 #endif

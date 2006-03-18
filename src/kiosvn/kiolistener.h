@@ -52,7 +52,7 @@ public:
     virtual void contextNotify (const svn_wc_notify_t *action);
 
     virtual bool contextCancel();
-    virtual bool contextGetLogMessage (QString & msg);
+    virtual bool contextGetLogMessage (QString & msg,const svn::CommitItemList&);
     virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
                                  apr_uint32_t & acceptedFailures);
     virtual bool contextSslClientCertPrompt (QString & certFile);

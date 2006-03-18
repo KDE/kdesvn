@@ -336,7 +336,8 @@ void kio_svnProtocol::del(const KURL&src,bool isfile)
 
 bool kio_svnProtocol::getLogMsg(QString&t)
 {
-    return m_pData->m_Listener.contextGetLogMessage(t);
+    svn::CommitItemList _items;
+    return m_pData->m_Listener.contextGetLogMessage(t,_items);
 }
 
 QString kio_svnProtocol::makeSvnUrl(const KURL&url)

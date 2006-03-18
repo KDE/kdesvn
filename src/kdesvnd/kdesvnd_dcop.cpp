@@ -74,7 +74,7 @@ public:
     virtual void contextNotify (const svn_wc_notify_t *action);
 
     virtual bool contextCancel();
-    virtual bool contextGetLogMessage (QString & msg);
+    virtual bool contextGetLogMessage (QString & msg,const svn::CommitItemList&);
     virtual svn::ContextListener::SslServerTrustAnswer
             contextSslServerTrustPrompt (const SslServerTrustData & data,
             apr_uint32_t & acceptedFailures);
@@ -338,7 +338,7 @@ bool IListener::contextCancel()
     return false;
 }
 
-bool IListener::contextGetLogMessage (QString & msg)
+bool IListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&)
 {
     QStringList res = m_back->get_logmsg();
     if (res.count()==0) {

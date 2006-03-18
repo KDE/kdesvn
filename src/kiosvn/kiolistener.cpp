@@ -50,7 +50,7 @@ bool KioListener::contextCancel()
 /*!
     \fn KioListener::contextGetLogMessage (QString & msg)
  */
-bool KioListener::contextGetLogMessage (QString & msg)
+bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&)
 {
 #if 1
     QByteArray reply;

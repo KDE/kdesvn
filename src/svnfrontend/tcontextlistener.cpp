@@ -61,12 +61,13 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     return _data.ok;
 }
 
-bool ThreadContextListener::contextGetLogMessage(QString& msg)
+bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitItemList&_items)
 {
     QMutexLocker lock(&(m_Data->m_CallbackMutex));
     ThreadContextListenerData::slog_message log;
     log.ok = false;
     log.msg = "";
+    log._items = &_items;
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGMSG_PROMPT);
     void*t = (void*)&log;
     ev->setData(t);
@@ -166,7 +167,8 @@ void ThreadContextListener::event_contextGetLogMessage(void * data)
         return;
     }
     ThreadContextListenerData::slog_message * _log = (ThreadContextListenerData::slog_message*)data;
-    _log->ok = CContextListener::contextGetLogMessage(_log->msg);
+
+    _log->ok = CContextListener::contextGetLogMessage(_log->msg,(_log->_items?*(_log->_items):svn::CommitItemList()));
     m_Data->m_trustpromptWait.wakeAll();
 }
 

@@ -26,14 +26,13 @@
 #ifndef _SVNCPP_CONTEXT_LISTENER_HPP_
 #define _SVNCPP_CONTEXT_LISTENER_HPP_
 
-// qt
-#include <qstring.h>
-
-// Subversion api
-#include "svn_client.h"
-
 // svncpp
 #include "pool.hpp"
+#include "commititem.hpp"
+// qt
+#include <qstring.h>
+// Subversion api
+#include <svn_client.h>
 
 
 namespace svn
@@ -122,7 +121,7 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetLogMessage (QString & msg) = 0;
+    contextGetLogMessage (QString & msg,const CommitItemList&) = 0;
 
     typedef enum
     {

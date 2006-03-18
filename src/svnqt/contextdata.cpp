@@ -144,11 +144,11 @@ const QString&ContextData::getLogMessage () const
     return logMessage;
 }
 
-bool ContextData::retrieveLogMessage (QString & msg)
+bool ContextData::retrieveLogMessage (QString & msg,const CommitItemList&_itemlist)
 {
     bool ok = false;
     if (listener) {
-        ok = listener->contextGetLogMessage (logMessage);
+        ok = listener->contextGetLogMessage (logMessage,_itemlist);
         if (ok)
             msg = logMessage;
         else
@@ -270,7 +270,7 @@ void ContextData::setLogMessage (const QString& msg)
 
 svn_error_t *ContextData::onLogMsg (const char **log_msg,
               const char **tmp_file,
-              apr_array_header_t *, //UNUSED commit_items
+              apr_array_header_t * commit_items,
               void *baton,
               apr_pool_t * pool)
 {
@@ -281,7 +281,12 @@ svn_error_t *ContextData::onLogMsg (const char **log_msg,
     if (data->logIsSet) {
         msg = data->getLogMessage ();
     } else {
-        if (!data->retrieveLogMessage (msg)) {
+        CommitItemList _items;
+        for (int j = 0; j < commit_items->nelts; ++j) {
+            svn_client_commit_item_t*item = ((svn_client_commit_item_t **)commit_items->elts)[j];
+            _items.push_back(CommitItem(item));
+        }
+        if (!data->retrieveLogMessage (msg,_items)) {
             return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
         }
     }
@@ -293,7 +298,7 @@ svn_error_t *ContextData::onLogMsg (const char **log_msg,
 
 svn_error_t *ContextData::onLogMsg2 (const char **log_msg,
               const char **tmp_file,
-              const apr_array_header_t *, //UNUSED commit_items
+              const apr_array_header_t * commit_items,
               void *baton,
               apr_pool_t * pool)
 {
@@ -304,7 +309,13 @@ svn_error_t *ContextData::onLogMsg2 (const char **log_msg,
     if (data->logIsSet) {
         msg = data->getLogMessage ();
     } else {
-        if (!data->retrieveLogMessage (msg)) {
+        CommitItemList _items;
+        for (int j = 0; j < commit_items->nelts; ++j) {
+            svn_client_commit_item2_t*item = ((svn_client_commit_item2_t **)commit_items->elts)[j];
+            _items.push_back(CommitItem(item));
+        }
+
+        if (!data->retrieveLogMessage (msg,_items)) {
             return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
         }
     }

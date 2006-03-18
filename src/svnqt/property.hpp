@@ -53,6 +53,7 @@
 #include "context.hpp"
 #include "path.hpp"
 
+#include <svn_props.h>
 
 namespace svn
 {
@@ -68,6 +69,7 @@ namespace svn
   // forward declarations
   class Path;
 
+#if 0
   /**
    * Class for manipulating Subversion properties.
    */
@@ -120,7 +122,7 @@ namespace svn
     void list ();
 
   };
-
+#endif
 }
 
 #endif

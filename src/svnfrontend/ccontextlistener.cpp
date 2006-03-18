@@ -205,11 +205,11 @@ bool CContextListener::contextCancel()
     return false;
 }
 
-bool CContextListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&)
+bool CContextListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&items)
 {
     bool isOk = false;
     emit waitShow(true);
-    QString logMessage = Logmsg_impl::getLogmessage(&isOk,0,0,0);
+    QString logMessage = Logmsg_impl::getLogmessage(items,&isOk,0,0,0);
     if (isOk) {
         msg = logMessage;
     }

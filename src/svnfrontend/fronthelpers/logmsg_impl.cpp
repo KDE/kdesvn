@@ -49,6 +49,7 @@ protected:
 public:
     SvnCheckListItem(QListView*,const Logmsg_impl::logActionEntry&);
     const Logmsg_impl::logActionEntry&data(){return m_Content;}
+    virtual int rtti()const{return 1000;}
 };
 
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
@@ -57,6 +58,27 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_LogEdit->setFocus();
     m_Reviewlabel->hide();
     m_ReviewList->hide();
+}
+
+Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const char *name)
+    :LogmessageData(parent, name)
+{
+    m_LogEdit->setFocus();
+    if (_items.count()>0) {
+        m_ReviewList->removeColumn(1);
+        m_ReviewList->setColumnText(0,i18n("Items to commit"));
+        for (unsigned i = 0;i<_items.count();++i) {
+            QListViewItem*item = new QListViewItem(m_ReviewList);
+            if (_items[i].path().isEmpty()) {
+                item->setText(0,_items[i].url());
+            } else {
+                item->setText(0,_items[i].path());
+            }
+        }
+    } else {
+        m_Reviewlabel->hide();
+        m_ReviewList->hide();
+    }
 }
 
 Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
@@ -192,6 +214,39 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     return msg;
 }
 
+QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*rec,QWidget*parent,const char*name)
+{
+    bool _ok,_rec;
+    QString msg("");
+
+    Logmsg_impl*ptr=0;
+    KDialogBase dlg(parent,name,true,i18n("Commit log"),
+            KDialogBase::Ok|KDialogBase::Cancel,
+            KDialogBase::Ok,true);
+    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+
+    ptr = new Logmsg_impl(items,Dialog1Layout);
+    if (!rec) {
+        ptr->m_RecursiveButton->hide();
+    }
+    ptr->initHistory();
+    dlg.resize(dlg.configDialogSize(groupName));
+    if (dlg.exec()!=QDialog::Accepted) {
+        _ok = false;
+        /* avoid compiler warnings */
+        _rec = false;
+    } else {
+        _ok = true;
+        _rec = ptr->isRecursive();
+        msg=ptr->getMessage();
+        ptr->saveHistory();
+    }
+    dlg.saveDialogSize(groupName,false);
+    if (ok) *ok = _ok;
+    if (rec) *rec = _rec;
+    return msg;
+}
+
 QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             const logActionEntries&_off,
             logActionEntries&_result,
@@ -236,9 +291,11 @@ Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
     logActionEntries _result;
     QListViewItemIterator it( m_ReviewList );
     while ( it.current() ) {
-        SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
-        if (item->isOn()) {
-            _result.append(item->data());
+        if (it.current()->rtti()==1000) {
+            SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+            if (item->isOn()) {
+                _result.append(item->data());
+            }
         }
         ++it;
     }

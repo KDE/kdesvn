@@ -195,6 +195,7 @@ RevisionTree::RevisionTree(svn::Client*aClient,
             m_Data->m_Display=new KListView(treeParent);
             m_Data->m_Display->addColumn(i18n("History of %1").arg(origin));
             m_Data->m_Display->setRootIsDecorated(true);
+            m_Data->m_Display->setTreeStepSize(50);
 
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
                 m_Valid=true;

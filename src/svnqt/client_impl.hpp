@@ -92,7 +92,7 @@ namespace svn
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
-            Revision revision = svn::Revision::HEAD,
+            const Revision revision = svn::Revision::HEAD,
             bool detailed_remote = false,
             const bool hide_externals = false) throw (ClientException);
 
@@ -107,7 +107,7 @@ namespace svn
      * @return a Status with Statis.isVersioned = FALSE
      */
     virtual Status
-    singleStatus (const QString& path,bool update=false,Revision revision = svn::Revision::HEAD) throw (ClientException);
+    singleStatus (const QString& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException);
 
   /**
      * Executes a revision checkout.
@@ -466,6 +466,7 @@ namespace svn
      *
      * @param pathOrUrl
      * @param revision
+     * @param peg at wich revision path exists
      * @param recurse
      * @param retrieve_locks check for REPOSITORY locks while listing
      * @return a vector of directory entries, each with
@@ -473,7 +474,8 @@ namespace svn
      */
     virtual DirEntries
     list (const QString& pathOrUrl,
-          Revision& revision,
+          const Revision& revision,
+          const Revision& peg,
           bool recurse,bool retrieve_locks) throw (ClientException);
 
     /**
@@ -651,23 +653,15 @@ namespace svn
      */
     Client_impl (const Client &);
 
-    //! old style update
-    /*!
-     * used internal for subversion lib below 1.2
-     * \param path the path to update
-     * \param revision update to revision
-     * \param recurse make update recursive
-     * \return to which revision the item is updated
-     * @exception ClientException
-     */
-    svn_revnum_t update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException);
     DirEntries
     list_simple(const QString& pathOrUrl,
-          Revision& revision,
+          const Revision& revision,
+          const Revision& peg,
           bool recurse) throw (ClientException);
     DirEntries
     list_locks(const QString& pathOrUrl,
-          Revision& revision,
+          const Revision& revision,
+          const Revision& peg,
           bool recurse) throw (ClientException);
   };
 

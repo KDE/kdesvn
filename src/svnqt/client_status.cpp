@@ -263,11 +263,11 @@ namespace svn
                 const bool get_all,
                 const bool update,
                 const bool no_ignore,
-                Revision revision,
+                const Revision revision,
                 Context * context,
                 bool detailed_remote)
   {
-    DirEntries dirEntries = client->list(path, revision, descend,detailed_remote);
+    DirEntries dirEntries = client->list(path, revision, revision, descend,detailed_remote);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
@@ -291,7 +291,7 @@ namespace svn
                   const bool get_all,
                   const bool update,
                   const bool no_ignore,
-                  Revision revision,
+                  const Revision revision,
                   bool detailed_remote,
                   const bool hide_externals) throw (ClientException)
   {
@@ -351,7 +351,7 @@ namespace svn
   };
 
   static Status
-  remoteSingleStatus (Client * client, const QString& path,Revision revision, Context * context)
+  remoteSingleStatus (Client * client, const QString& path,const Revision revision, Context * context)
   {
     InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
     if (infoEntries.size () == 0)
@@ -361,7 +361,7 @@ namespace svn
   }
 
   Status
-  Client_impl::singleStatus (const QString& path,bool update,Revision revision) throw (ClientException)
+  Client_impl::singleStatus (const QString& path,bool update,const Revision revision) throw (ClientException)
   {
     if (Url::isValid (path))
       return remoteSingleStatus (this, path,revision, m_context);

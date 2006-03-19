@@ -158,7 +158,7 @@ namespace svn
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
-            Revision revision = svn::Revision::HEAD,
+            const Revision revision = svn::Revision::HEAD,
             bool detailed_remote = false,
             const bool hide_externals = false) throw (ClientException) = 0;
 
@@ -173,7 +173,7 @@ namespace svn
      * @return a Status with Statis.isVersioned = FALSE
      */
     virtual Status
-    singleStatus (const QString& path,bool update=false,Revision revision = svn::Revision::HEAD) throw (ClientException)=0;
+    singleStatus (const QString& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException)=0;
 
   /**
      * Executes a revision checkout.
@@ -537,6 +537,7 @@ namespace svn
      * working copy!
      * @param pathOrUrl
      * @param revision
+     * @param peg at wich revision path exists
      * @param recurse
      * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with
@@ -544,7 +545,8 @@ namespace svn
      */
     virtual DirEntries
     list (const QString& pathOrUrl,
-          Revision& revision,
+          const Revision& revision,
+          const Revision& peg,
           bool recurse,bool retrieve_locks) throw (ClientException)=0;
 
     /**

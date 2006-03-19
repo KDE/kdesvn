@@ -12,11 +12,7 @@ Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
-BuildPreReq: apr-devel
-BuildPreReq: apr-util-devel
-BuildPreReq: neon-devel
-BuildPreReq: subversion-devel >= 1.2.0
-Requires: subversion >= 1.2.0
+Requires: kdesvn-svnqt = %{version}
 Obsoletes: kdesvn-kioksvn
 
 %description
@@ -31,6 +27,27 @@ Summary:  A kde-kio integration for subversion based on kdesvn
 
 %description kiosvn
 KIO integration (KIO::svn) based on kdesvn alternative protocol name.
+
+%package svnqt
+Group:    Systemenvironment/Libraries
+Summary:  Wrapper lib for subversion QT integration.
+Requires: subversion >= 1.2.0
+BuildPreReq: apr-devel
+BuildPreReq: apr-util-devel
+BuildPreReq: neon-devel
+BuildPreReq: subversion-devel >= 1.2.0
+
+%description svnqt
+Shared lib which contains a QT C++ classes for subversion.
+
+%package svnqt-devel
+Group:    Systemenvironment/Libraries
+Summary:  Wrapper lib for subversion QT integration.
+Requires: subversion-devel >= 1.2.0
+Requires: kdesvn-svnqt = %{version}
+
+%description svnqt-devel
+Development files for kdesvn-svnqt
 
 %prep
 %setup
@@ -62,7 +79,8 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_bindir}/kdesvnaskpass
 %{_libdir}/*/*part*
 %{_datadir}/applications/*
-%{_datadir}/apps/*
+%{_datadir}/apps/kdesvn/*
+%{_datadir}/apps/kdesvnpart/*
 %{_datadir}/config.kcfg/*
 %{_datadir}/doc/*
 %{_datadir}/icons/*
@@ -75,3 +93,11 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 
 %files kiosvn
 %{_datadir}/services/svn*.protocol
+
+%files svnqt
+%{_libdir}/libsvnqt*.so*
+
+%files svnqt-devel
+%{_libdir}/libsvnqt.la
+%{_includedir}/svnqt/*
+

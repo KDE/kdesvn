@@ -153,7 +153,7 @@ namespace svn
     apr_array_header_t *apr_revisions = apr_array_make (apr_pool,
                       path.size(),
                       sizeof (svn_revnum_t));
-    error = svn_client_update2(&apr_revisions,path.array(pool),revision.revision(),recurse,ignore_externals,*m_context,pool);
+    error = svn_client_update2(&apr_revisions,path.array(pool),revision,recurse,ignore_externals,*m_context,pool);
     if (error!=NULL) {
         throw ClientException(error);
     }
@@ -165,22 +165,6 @@ namespace svn
       resulting.push_back((*_rev));
     }
     return resulting;
-  }
-
-  svn_revnum_t Client_impl::update_old(const Path&path,const Revision&revision,bool recurse)throw (ClientException)
-  {
-    Pool pool;
-    svn_revnum_t revnum = 0;
-    svn_error_t * error =
-      svn_client_update (&revnum,
-                         path.cstr (),
-                         revision.revision (),
-                         recurse,
-                         *m_context,
-                         pool);
-    if(error != NULL)
-      throw ClientException (error);
-    return revnum;
   }
 
   svn_revnum_t

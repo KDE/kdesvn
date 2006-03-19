@@ -49,16 +49,21 @@ namespace svn
 
   DirEntries
   Client_impl::list_simple(const QString& pathOrUrl,
-          Revision& revision,
+          const Revision& revision,
+          const Revision& peg,
           bool recurse) throw (ClientException)
   {
     Pool pool;
 
     apr_hash_t * hash;
+    /* don't want the lock hashs, so we simply use ls2 on svn 1.3, too.
+     * there is that method a cast to ls3 with lock_hash == 0
+     */
     svn_error_t * error =
-      svn_client_ls (&hash,
+      svn_client_ls2 (&hash,
                      pathOrUrl.TOUTF8(),
-                     revision,
+                     peg.revision(),
+                     revision.revision(),
                      recurse,
                      *m_context,
                      pool);
@@ -93,12 +98,12 @@ namespace svn
 
   DirEntries
   Client_impl::list_locks(const QString& pathOrUrl,
-        Revision& revision,
+        const Revision& revision,
+        const Revision& peg,
         bool recurse) throw (ClientException)
   {
     Pool pool;
 
-    Revision peg=Revision::UNDEFINED;
     apr_hash_t * hash;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     apr_hash_t * lock_hash;
@@ -175,13 +180,14 @@ namespace svn
 
   DirEntries
   Client_impl::list(const QString& pathOrUrl,
-                Revision& revision,
+                const Revision& revision,
+                const Revision& peg,
                 bool recurse,bool retrieve_locks) throw (ClientException)
   {
       if (!retrieve_locks) {
-          return list_simple(pathOrUrl,revision,recurse);
+          return list_simple(pathOrUrl,revision,peg,recurse);
       } else {
-          return list_locks(pathOrUrl,revision,recurse);
+          return list_locks(pathOrUrl,revision,peg,recurse);
       }
   }
 }

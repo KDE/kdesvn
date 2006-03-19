@@ -124,6 +124,15 @@ namespace svn
     }
 
     /**
+     * @see revision (). Same function
+     * but with operator overloading
+     */
+     operator const svn_opt_revision_t*()const
+    {
+      return &m_revision;
+    }
+
+    /**
      * @return revision numver
      */
     const svn_revnum_t

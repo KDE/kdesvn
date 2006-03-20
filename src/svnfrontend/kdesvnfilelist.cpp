@@ -215,7 +215,7 @@ void kdesvnfilelist::setupActions()
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
     /* 2. actions only on files */
-    m_BlameAction = new KAction(i18n("&Blame"),"kdesvnblame",
+    m_BlameAction = new KAction(i18n("Blame"),"kdesvnblame",
         KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     m_BlameRangeAction = new KAction(i18n("Blame range"),"kdesvnblame",

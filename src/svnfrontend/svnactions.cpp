@@ -590,9 +590,14 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
 
 void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
-#if 0
-    QString text = getInfo(lst,rev,peg,recursive);
-    if (text.isNull()) return;
+    QString text = "";
+    for (unsigned int i=0; i < lst.count();++i) {
+        QString res = getInfo(lst[i],rev,peg,recursive,true);
+        if (!res.isEmpty()) {
+            text+="<h4 align=\"center\">"+lst[i]+"</h4>";
+            text+=res;
+        }
+    }
     text = "<html><head></head><body>"+text+"</body></html>";
     KTextBrowser*ptr;
     KDialogBase*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
@@ -602,7 +607,6 @@ void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const sv
         dlg->saveDialogSize(*(Settings::self()->config()),"info_dialog",false);
         delete dlg;
     }
-#endif
 }
 
 

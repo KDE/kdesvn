@@ -209,6 +209,8 @@ protected:
             svn_boolean_t maySave,
             apr_pool_t *pool);
 
+    svn_error_t *
+        generate_cancel_error();
 protected:
     Apr apr;
 

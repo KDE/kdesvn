@@ -287,7 +287,7 @@ svn_error_t *ContextData::onLogMsg (const char **log_msg,
             _items.push_back(CommitItem(item));
         }
         if (!data->retrieveLogMessage (msg,_items)) {
-            return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
+            return data->generate_cancel_error();
         }
     }
 
@@ -316,7 +316,7 @@ svn_error_t *ContextData::onLogMsg2 (const char **log_msg,
         }
 
         if (!data->retrieveLogMessage (msg,_items)) {
-            return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
+            return data->generate_cancel_error();
         }
     }
 
@@ -353,7 +353,7 @@ svn_error_t * ContextData::onCancel (void * baton)
     if (baton == 0) return SVN_NO_ERROR;
     ContextData * data = static_cast <ContextData *> (baton);
     if( data->cancel () )
-        return svn_error_create (SVN_ERR_CANCELLED, NULL, "cancelled by user");
+        return data->generate_cancel_error();
     else
         return SVN_NO_ERROR;
 }
@@ -369,7 +369,7 @@ svn_error_t *ContextData::onSimplePrompt (svn_auth_cred_simple_t **cred,
       SVN_ERR (getContextData (baton, &data));
       bool may_save = _may_save != 0;
       if (!data->retrieveLogin (username, realm, may_save ))
-        return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
+        return data->generate_cancel_error();
 
       svn_auth_cred_simple_t* lcred = (svn_auth_cred_simple_t*)
         apr_palloc (pool, sizeof (svn_auth_cred_simple_t));
@@ -442,7 +442,7 @@ svn_error_t * ContextData::onSslClientCertPrompt (svn_auth_cred_ssl_client_cert_
 
     QString certFile;
     if (!data->listener->contextSslClientCertPrompt (certFile))
-        return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
+        return data->generate_cancel_error();
 
     svn_auth_cred_ssl_client_cert_t *cred_ =
         (svn_auth_cred_ssl_client_cert_t*)
@@ -467,7 +467,7 @@ svn_error_t * ContextData::onSslClientCertPwPrompt(
     QString password;
     bool may_save = maySave != 0;
     if (!data->listener->contextSslClientCertPwPrompt (password, realm, may_save))
-        return svn_error_create (SVN_ERR_CANCELLED, NULL, "");
+        return data->generate_cancel_error();
 
     svn_auth_cred_ssl_client_cert_pw_t *cred_ =
         (svn_auth_cred_ssl_client_cert_pw_t *)
@@ -494,6 +494,11 @@ void ContextData::reset()
 {
     m_promptCounter = 0;
     logIsSet = false;
+}
+
+svn_error_t * ContextData::generate_cancel_error()
+{
+    return svn_error_create (SVN_ERR_CANCELLED, 0, listener->translate("Cancelled by user."));
 }
 
 }

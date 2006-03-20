@@ -78,6 +78,8 @@ namespace svn
   public:
     /**
      * Constructor.  Sets the error template and an optional message.
+     * @param error the error to display. This will get cleared inside with svn_error_clear
+     * so it isn't usable after that!
      */
     ClientException (svn_error_t * error) throw ();
 

@@ -302,4 +302,9 @@ QStringList CContextListener::failure2Strings(apr_uint32_t acceptedFailures)
     return res;
 }
 
+QString CContextListener::translate(const QString&what)
+{
+    return i18n(what);
+}
+
 #include "ccontextlistener.moc"

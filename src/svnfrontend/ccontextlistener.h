@@ -64,6 +64,8 @@ public:
     virtual bool contextSslClientCertPrompt (QString & certFile);
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave);
+    virtual QString translate(const QString&what);
+
     static QString NotifyAction(svn_wc_notify_action_t action);
     static QString NotifyState(svn_wc_notify_state_t);
 

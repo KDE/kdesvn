@@ -101,7 +101,6 @@ namespace svn
 
     m->apr_err = error->apr_err;
     svn_error_t * next = error->child;
-    /// @todo send rapidsvn an hint that error->message may sometimes NULL!
     if (error->message)
       m->message = QString::fromUtf8(error->message);
     else

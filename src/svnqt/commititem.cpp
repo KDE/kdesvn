@@ -125,4 +125,22 @@ apr_byte_t CommitItem::state()const
     return m_State;
 }
 
+char CommitItem::actionType()const
+{
+    char r=0;
+    if (m_State & SVN_CLIENT_COMMIT_ITEM_IS_COPY) {
+        r = 'C';
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_ADD){
+        r = 'A';
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_DELETE){
+        r = 'D';
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_PROP_MODS ||
+        m_State & SVN_CLIENT_COMMIT_ITEM_TEXT_MODS){
+        r = 'M';
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_LOCK_TOKEN){
+        r = 'L';
+    }
+    return r;
+}
+
 }

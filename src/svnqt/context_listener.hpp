@@ -190,6 +190,15 @@ namespace svn
     contextSslClientCertPwPrompt (QString & password,
                                   const QString & realm,
                                   bool & maySave) = 0;
+
+    /**
+     * try to translate a text. In current implementation does
+     * nothing than returning the origin but may used to get an
+     * application specific translation.
+     * @param what text to translate
+     * @return translated text or origin.
+     */
+    virtual QString translate(const QString&what){return what;}
   };
 }
 

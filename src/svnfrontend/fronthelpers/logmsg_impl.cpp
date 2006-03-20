@@ -64,16 +64,18 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const
     :LogmessageData(parent, name)
 {
     m_LogEdit->setFocus();
+    m_ReviewList->setColumnText(1,i18n("Items to commit"));
+    m_ReviewList->setColumnText(0,i18n("Action"));
+    m_ReviewList->setSortColumn(1);
     if (_items.count()>0) {
-        m_ReviewList->removeColumn(1);
-        m_ReviewList->setColumnText(0,i18n("Items to commit"));
         for (unsigned i = 0;i<_items.count();++i) {
             QListViewItem*item = new QListViewItem(m_ReviewList);
             if (_items[i].path().isEmpty()) {
-                item->setText(0,_items[i].url());
+                item->setText(1,_items[i].url());
             } else {
-                item->setText(0,_items[i].path());
+                item->setText(1,_items[i].path());
             }
+            item->setText(0,QChar(_items[i].actionType()));
         }
     } else {
         m_Reviewlabel->hide();

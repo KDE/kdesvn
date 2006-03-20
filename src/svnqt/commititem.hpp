@@ -56,6 +56,10 @@ public:
      * This one will only do something if build against subversion 1.3
      */
     CommitItem(const svn_client_commit_item2_t*);
+    //! Destructor
+    /*!
+     * Not virtual 'cause no child class is needed
+     */
     ~CommitItem();
 
     const QString& path()const;
@@ -66,6 +70,18 @@ public:
     svn_revnum_t copyfromrevision()const;
     svn_node_kind_t kind()const;
     apr_byte_t state()const;
+    //! Kind of action
+    /*!
+     * \return Char for type of action or 0 if unknown. Currently known is
+     * <UL>
+     * <LI>A - add</LI>
+     * <LI>C - copy</LI>
+     * <LI>D - deletion</LI>
+     * <LI>M - Modify (content or property)</LI>
+     * <LI>L - (un-)lock</LI>
+     * </UL>
+     */
+    char actionType()const;
 };
 
 #if QT_VERSION < 0x040000

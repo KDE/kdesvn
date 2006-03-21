@@ -2,7 +2,7 @@ INCLUDES = $(all_includes)
 METASOURCES = AUTO
 lib_LTLIBRARIES = libsvnqt.la
 
-libsvnqt_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 1:0:1
+libsvnqt_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 1:1:0
 
 svnqtinclude_HEADERS = annotate_line.hpp apr.hpp check.hpp client.hpp \
 	context.hpp datetime.hpp dirent.hpp entry.hpp log_entry.hpp path.hpp pool.hpp \

@@ -498,7 +498,7 @@ void ContextData::reset()
 
 svn_error_t * ContextData::generate_cancel_error()
 {
-    return svn_error_create (SVN_ERR_CANCELLED, 0, listener->translate("Cancelled by user."));
+    return svn_error_create (SVN_ERR_CANCELLED, 0, listener->translate("Cancelled by user.").TOUTF8());
 }
 
 }

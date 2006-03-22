@@ -29,7 +29,7 @@ Summary:  A kde-kio integration for subversion based on kdesvn
 KIO integration (KIO::svn) based on kdesvn alternative protocol name.
 
 %package svnqt
-Group:    Systemenvironment/Libraries
+Group:    System Environment/Libraries
 Summary:  Wrapper lib for subversion QT integration.
 Requires: subversion >= 1.2.0
 BuildPreReq: apr-devel
@@ -38,10 +38,12 @@ BuildPreReq: neon-devel
 BuildPreReq: subversion-devel >= 1.2.0
 
 %description svnqt
-Shared lib which contains a QT C++ classes for subversion.
+Shared lib which contains a QT C++ wrapper for subversion. It is core part
+of kdesvn but is designed to not require KDE so plain QT programs may use
+it.
 
 %package svnqt-devel
-Group:    Systemenvironment/Libraries
+Group:    Development/Libraries
 Summary:  Wrapper lib for subversion QT integration.
 Requires: subversion-devel >= 1.2.0
 Requires: kdesvn-svnqt = %{version}

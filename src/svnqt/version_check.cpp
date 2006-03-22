@@ -1,5 +1,9 @@
 #include "version_check.hpp"
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <svn_version.h>
 #include <svn_client.h>
 
@@ -44,4 +48,37 @@ namespace svn {
     {
       return svn_client_version()->minor;
     }
+}
+
+namespace svnqt {
+    SvnqtVersion::SvnqtVersion()
+    {
+#ifdef HAVE_CONFIG_H
+        if (QString(VERSION)!=QString(SVNQT_VERSIONSTRING)) {
+            qWarning("package version in svnqt missmatched release version!\n");
+        }
+#endif
+    }
+
+    int SvnqtVersion::version_major()
+    {
+        return SVNQT_MAJOR;
+    }
+
+    int SvnqtVersion::version_minor()
+    {
+        return SVNQT_MINOR;
+    }
+
+    int SvnqtVersion::version_patch()
+    {
+        return SVNQT_PATCH;
+    }
+
+    bool SvnqtVersion::compatible(const SvnqtVersionTag&running)
+    {
+        return running._major==version_major() && running._major>=version_minor();
+    }
+
+    static SvnqtVersion svnqtVersion;
 }

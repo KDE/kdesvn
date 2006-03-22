@@ -81,6 +81,11 @@ namespace svn
     svn_revnum_t copyToRevision;
   };
 
+#if QT_VERSION < 0x040000
+  typedef QValueList<LogChangePathEntry> LogChangePathEntries;
+#else
+  typedef QList<LogChangePathEntry> LogChangePathEntries;
+#endif
 
   class LogEntry
   {
@@ -95,11 +100,7 @@ namespace svn
     svn_revnum_t revision;
     QString author;
     QString message;
-#if QT_VERSION < 0x040000
-    QValueList<LogChangePathEntry> changedPaths;
-#else
-    QList<LogChangePathEntry> changedPaths;
-#endif
+    LogChangePathEntries changedPaths;
     apr_time_t date;
   };
 }

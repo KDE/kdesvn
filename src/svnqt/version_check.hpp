@@ -27,11 +27,19 @@ namespace svn {
 
 namespace svnqt {
     class SvnqtVersion {
+
     public:
+        struct SvnqtVersionTag{
+            int _major;
+            int _minor;
+            int _patch;
+        };
+
         SvnqtVersion();
         static int version_major();
         static int version_minor();
         static int version_patch();
+        static bool compatible(const SvnqtVersionTag&running);
     };
 }
 

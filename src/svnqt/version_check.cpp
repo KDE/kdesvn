@@ -75,5 +75,10 @@ namespace svnqt {
         return SVNQT_PATCH;
     }
 
+    bool SvnqtVersion::compatible(const SvnqtVersionTag&running)
+    {
+        return running._major==version_major() && running._major>=version_minor();
+    }
+
     static SvnqtVersion svnqtVersion;
 }

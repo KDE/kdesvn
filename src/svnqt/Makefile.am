@@ -18,4 +18,4 @@ libsvnqt_la_SOURCES = apr.cpp client_annotate.cpp client_cat.cpp client.cpp \
 	pool.cpp revision.cpp status.cpp targets.cpp url.cpp wc.cpp version_check.cpp \
 	lock_entry.cpp client_lock.cpp info_entry.cpp client_impl.cpp contextdata.cpp \
 	commititem.cpp
-libsvnqt_la_LIBADD = $(APR_LIBS) $(NEON_LIBS) $(SVN_LIBS) $(LIB_QT)
+libsvnqt_la_LIBADD = $(APR_LIBS) $(SVN_LIBS) $(LIB_QT)

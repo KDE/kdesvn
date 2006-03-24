@@ -21,6 +21,7 @@
 #include "stopdlg.h"
 #include "svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
+#include "graphtree/revgraphview.h"
 #include "elogentry.h"
 
 #include <kdebug.h>
@@ -52,6 +53,8 @@ public:
 
     QWidget*dlgParent;
     KListView*m_Display;
+    RevGraphView*m_TreeDisplay;
+
     svn::Client*m_Client;
     CContextListener* m_Listener;
 
@@ -63,7 +66,7 @@ RtreeData::RtreeData()
 {
     progress=0;
     m_Display = 0;
-    current_row=-1;
+    current_row=0;
     m_Client = 0;
     dlgParent = 0;
     m_Listener = 0;
@@ -196,6 +199,8 @@ RevisionTree::RevisionTree(svn::Client*aClient,
             m_Data->m_Display->addColumn(i18n("History of %1").arg(origin));
             m_Data->m_Display->setRootIsDecorated(true);
             m_Data->m_Display->setTreeStepSize(50);
+//            m_Data->m_TreeDisplay=new RevGraphView(treeParent);
+//             m_Data->m_TreeDisplay->showText(i18n("History of %1").arg(origin));
 
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
                 m_Valid=true;
@@ -388,6 +393,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     QPixmap p;
                     QString text;
                     previous = getItem(parentItem,j);
+//                     m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recPath,"Copy/Rename",REVENTRY);
                     if (ren) {
                         kdDebug()<<"Renamed to "<< recPath << " at revison " << j << endl;
                         path=recPath;
@@ -414,18 +420,21 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         previous = getItem(parentItem,j);
                         text=QString("<b>Add</b><br>%1").arg(FORWARDENTRY.path)+revText;
                         previous->setPixmap(0,getPixmap(text));
+//                         m_Data->m_TreeDisplay->addLabel(m_Data->current_row,FORWARDENTRY.path,"Add",REVENTRY);
                     break;
                     case 'M':
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
                         text=QString("<b>Modify</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
+//                         m_Data->m_TreeDisplay->addLabel(m_Data->current_row,FORWARDENTRY.path,"Modify",REVENTRY);
                     break;
                     case 'D':
                         kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
                         text=QString("<b>Delete</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
+//                         m_Data->m_TreeDisplay->addLabel(m_Data->current_row,FORWARDENTRY.path,"Delete",REVENTRY);
                         get_out= true;
                     break;
                     default:
@@ -438,6 +447,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         text=QString("<b>Delete</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
+//                         m_Data->m_TreeDisplay->addLabel(m_Data->current_row,FORWARDENTRY.path,"Delete",REVENTRY);
                         get_out = true;
                     break;
                     default:
@@ -445,7 +455,6 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     }
                 }
                 if (previous) {
-                    ++m_Data->current_row;
                     QString tip = m_Data->m_OldHistory[j].author;
 //                    previous->setTooltip(tip);
                 }
@@ -465,6 +474,7 @@ QWidget*RevisionTree::getView()
 
 RListItem*RevisionTree::getItem(RListItem*parent,long rev)
 {
+    ++m_Data->current_row;
     RListItem * res;
     if (parent) {
         kdDebug()<<"Item with parent"<<endl;
@@ -479,6 +489,7 @@ RListItem*RevisionTree::getItem(RListItem*parent,long rev)
 
 QPixmap RevisionTree::getPixmap(const QString&aText)
 {
+    ++m_Data->current_row;
     QLabel l(0,0,0);
     l.setText(aText);
     l.setLineWidth(3);

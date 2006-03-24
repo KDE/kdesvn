@@ -1,6 +1,6 @@
 INCLUDES = -I$(top_srcdir)/src/svnfrontend/fronthelpers $(all_includes)
 METASOURCES = AUTO
-SUBDIRS = fronthelpers
+SUBDIRS = fronthelpers graphtree
 
 noinst_LTLIBRARIES = libsvnfrontend.la
 
@@ -22,4 +22,4 @@ libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 	elogentry.cpp
 
 libsvnfrontend_la_LIBADD = \
-	$(top_builddir)/src/svnfrontend/fronthelpers/libsvnfrontend_helpers.la
+	$(top_builddir)/src/svnfrontend/fronthelpers/libsvnfrontend_helpers.la $(top_builddir)/src/svnfrontend/graphtree/libgraphtree.la

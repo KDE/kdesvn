@@ -21,7 +21,7 @@
   </general>
   <kdevautoproject>
     <general>
-      <activetarget>src/svnqt/libsvnqt.la</activetarget>
+      <activetarget>src/libkdesvnpart.la</activetarget>
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
@@ -84,6 +84,23 @@
         <cflags/>
         <f77flags/>
       </debug>
+      <profile>
+        <envvars/>
+        <configargs>--enable-debug=full --prefix=`kde-config --prefix`</configargs>
+        <builddir>profile</builddir>
+        <topsourcedir/>
+        <cppflags>-DTESTING_RC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvnui.rc\\\&quot;\&quot; -DTESTING_PARTRC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvn_part.rc\\\&quot;\&quot;</cppflags>
+        <ldflags/>
+        <ccompiler>kdevgccoptions</ccompiler>
+        <cxxcompiler>kdevgppoptions</cxxcompiler>
+        <f77compiler>kdevg77options</f77compiler>
+        <ccompilerbinary/>
+        <cxxcompilerbinary/>
+        <f77compilerbinary/>
+        <cflags/>
+        <cxxflags>-O0 -pg -g3</cxxflags>
+        <f77flags/>
+      </profile>
     </configurations>
     <subclassing>
       <subclass uifile="/src/svnfrontend/copymoveview.ui" sourcefile="/src/svnfrontend/copymoveview_impl.cpp" />

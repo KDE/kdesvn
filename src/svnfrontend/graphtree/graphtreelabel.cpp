@@ -29,6 +29,13 @@ GraphTreeLabel::GraphTreeLabel(const QString&name,const QString&action,const svn
     setPosition(0, DrawParams::BottomCenter);
 }
 
+GraphTreeLabel::GraphTreeLabel(const QString&text, const QRect&r,QCanvas*c)
+    : QCanvasRectangle(r,c),StoredDrawParams(),RevGraphItem()
+{
+    setText(0,text);
+    setPosition(0, DrawParams::BottomCenter);
+}
+
 GraphTreeLabel::~GraphTreeLabel()
 {
 }
@@ -37,12 +44,19 @@ int GraphTreeLabel::rtti()const
 {
     return GRAPHTREE_LABEL;
 }
+
+void GraphTreeLabel::setBgColor(const QColor&c)
+{
+    _backColor=c;
+}
+
 void GraphTreeLabel::drawShape(QPainter& p)
 {
-  QRect r = rect();
-  p.setPen(blue);
-  p.drawRect(r);
-  RectDrawing d(r);
-  d.drawField(&p, 0, this);
-  d.drawField(&p, 1, this);
+    QRect r = rect();
+    p.setPen(blue);
+    p.drawRect(r);
+    RectDrawing d(r);
+    d.drawBack(&p,this);
+    d.drawField(&p, 0, this);
+    d.drawField(&p, 1, this);
 }

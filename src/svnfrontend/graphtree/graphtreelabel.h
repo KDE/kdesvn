@@ -31,11 +31,15 @@ class GraphTreeLabel : public QCanvasRectangle,StoredDrawParams, public RevGraph
 {
 public:
     GraphTreeLabel(const QString&,const QString&,const svn::LogEntry&,const QRect&r,QCanvas*c);
+    GraphTreeLabel(const QString&,const QRect&r,QCanvas*c);
     virtual ~GraphTreeLabel();
 
     virtual int rtti()const;
     virtual void drawShape(QPainter& p);
 
+    void setBgColor(const QColor&);
+
+protected:
 };
 
 #endif

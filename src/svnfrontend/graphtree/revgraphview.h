@@ -30,6 +30,7 @@ class KTempFile;
 class KProcess;
 class RevisionTree;
 class GraphTreeLabel;
+class GraphViewTip;
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
@@ -45,7 +46,9 @@ public:
 
     void showText(const QString&s);
     void clear();
+#if 0
     void addLabel(int row,int column, const QString&,const QString&,const svn::LogEntry&);
+#endif
 
     void beginInsert();
     void endInsert();
@@ -63,13 +66,15 @@ public:
     typedef QValueList<targetData> tlist;
 
     struct keyData {
-        QString name;
+        QString name,Author,Date,Message;
         long rev;
         char Action;
         tlist targets;
     };
 
     typedef QMap<QString,keyData> trevTree;
+
+    QString toolTip(const QString&nodename)const;
 
 protected slots:
     virtual void readDotOutput(KProcess *   proc,char *   buffer,int   buflen);
@@ -88,6 +93,7 @@ protected:
     QMap<QString,GraphTreeLabel*> m_NodeList;
 
     int _xMargin,_yMargin;
+    GraphViewTip*m_Tip;
 };
 
 #endif

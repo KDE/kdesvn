@@ -21,6 +21,7 @@
 #include "graphtree_defines.h"
 #include <qpainter.h>
 
+#if 0
 GraphTreeLabel::GraphTreeLabel(const QString&name,const QString&action,const svn::LogEntry&entry
     ,const QRect&r,QCanvas*c)
  : QCanvasRectangle(r,c),StoredDrawParams(), RevGraphItem(name,action,entry)
@@ -28,16 +29,24 @@ GraphTreeLabel::GraphTreeLabel(const QString&name,const QString&action,const svn
     setText(0,name);
     setPosition(0, DrawParams::BottomCenter);
 }
+#endif
 
-GraphTreeLabel::GraphTreeLabel(const QString&text, const QRect&r,QCanvas*c)
+GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRect&r,QCanvas*c)
     : QCanvasRectangle(r,c),StoredDrawParams(),RevGraphItem()
 {
+    m_Nodename = _nodename;
     setText(0,text);
     setPosition(0, DrawParams::TopCenter);
+    drawFrame(true);
 }
 
 GraphTreeLabel::~GraphTreeLabel()
 {
+}
+
+const QString&GraphTreeLabel::nodename()const
+{
+    return m_Nodename;
 }
 
 int GraphTreeLabel::rtti()const
@@ -53,12 +62,14 @@ void GraphTreeLabel::setBgColor(const QColor&c)
 void GraphTreeLabel::drawShape(QPainter& p)
 {
     QRect r = rect();
+/*
     p.setPen(blue);
     p.drawRect(r);
+*/
     RectDrawing d(r);
     d.drawBack(&p,this);
     d.drawField(&p, 0, this);
-//    d.drawField(&p, 1, this);
+    d.drawField(&p, 1, this);
 }
 
 GraphEdge::GraphEdge(QCanvas*c)

@@ -19,14 +19,47 @@
  ***************************************************************************/
 #include "revgraphview.h"
 #include "graphtreelabel.h"
+#include "graphtree_defines.h"
 #include <kapp.h>
 #include <kdebug.h>
 #include <ktempfile.h>
 #include <kprocess.h>
+#include <qtooltip.h>
 #include <math.h>
 
 #define LABEL_WIDTH 160
 #define LABEL_HEIGHT 90
+
+
+class GraphViewTip:public QToolTip
+{
+public:
+  GraphViewTip( QWidget* p ):QToolTip(p) {}
+  virtual ~GraphViewTip(){}
+
+protected:
+    void maybeTip( const QPoint & );
+};
+
+void GraphViewTip::maybeTip( const QPoint & pos)
+{
+    if (!parentWidget()->inherits( "RevGraphView" )) return;
+    RevGraphView* cgv = (RevGraphView*)parentWidget();
+    QPoint cPos = cgv->viewportToContents(pos);
+    QCanvasItemList l = cgv->canvas()->collisions(cPos);
+    if (l.count() == 0) return;
+    QCanvasItem* i = l.first();
+    if (i->rtti() == GRAPHTREE_LABEL) {
+        GraphTreeLabel*tl = (GraphTreeLabel*)i;
+        QString nm = tl->nodename();
+        QString tipStr = cgv->toolTip(nm);
+        if (tipStr.length()>0) {
+            QPoint vPosTL = cgv->contentsToViewport(i->boundingRect().topLeft());
+            QPoint vPosBR = cgv->contentsToViewport(i->boundingRect().bottomRight());
+            tip(QRect(vPosTL, vPosBR), tipStr);
+        }
+    }
+}
 
 RevGraphView::RevGraphView(QWidget * parent, const char * name, WFlags f)
  : QCanvasView(parent,name,f)
@@ -34,6 +67,7 @@ RevGraphView::RevGraphView(QWidget * parent, const char * name, WFlags f)
     m_Canvas = 0L;
     dotTmpFile = 0;
     renderProcess = 0;
+    m_Tip = new GraphViewTip(this);
 }
 
 RevGraphView::~RevGraphView()
@@ -43,6 +77,7 @@ RevGraphView::~RevGraphView()
     delete dotTmpFile;
 }
 
+#if 0
 void RevGraphView::addLabel(int row,int column, const QString&path,const QString&action,const svn::LogEntry&e)
 {
     if (!m_Canvas) return;
@@ -58,6 +93,7 @@ void RevGraphView::addLabel(int row,int column, const QString&path,const QString
     t->show();
     kdDebug()<<"addLabel "<<path << endl;
 }
+#endif
 
 void RevGraphView::showText(const QString&s)
 {
@@ -106,7 +142,6 @@ void RevGraphView::dotExit(KProcess*p)
     dotStream = new QTextStream(dotOutput, IO_ReadOnly);
     QString line,cmd;
     int lineno=0;
-    int splinenr = 0;
     clear();
     beginInsert();
     /* mostly taken from kcachegrind */
@@ -165,7 +200,7 @@ void RevGraphView::dotExit(KProcess*p)
             int w = (int)(scaleX * width);
             int h = (int)(scaleY * height);
             QRect r(xx-w/2, yy-h/2, w, h);
-            GraphTreeLabel*t=new GraphTreeLabel(label,r,m_Canvas);
+            GraphTreeLabel*t=new GraphTreeLabel(label,nodeName,r,m_Canvas);
             if (isStart(nodeName)) {
                 ensureVisible(r.x(),r.y());
             }
@@ -367,6 +402,34 @@ void RevGraphView::dumpRevtree()
         kdDebug()<<"Starting process " << renderProcess->args()<<endl;
         delete renderProcess;
     }
+}
+
+QString RevGraphView::toolTip(const QString&_nodename)const
+{
+    QString res = QString::null;
+    trevTree::ConstIterator it;
+    it = m_Tree.find(_nodename);
+    if (it==m_Tree.end()) {
+        return res;
+    }
+    res = QString("<html><b>%1</b<br>Revision: %2<br>Author: %3<br>Date: %4</html>")
+        .arg(it.data().name)
+        .arg(it.data().rev)
+        .arg(it.data().Author)
+        .arg(it.data().Date);
+    QStringList sp = QStringList::split("\n",it.data().Message);
+    QString sm;
+    if (sp.count()==0) {
+        sm = it.data().Message;
+    } else {
+        sm = sp[0]+"...";
+    }
+    if (sm.length()>30) {
+        sm.truncate(27);
+        sm+="...";
+    }
+    res+=QString("<br>Log: %1").arg(sm);
+    return res;
 }
 
 #include "revgraphview.moc"

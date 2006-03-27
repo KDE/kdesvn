@@ -452,6 +452,9 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     m_Data->m_TreeDisplay->m_Tree[n2].Action=FORWARDENTRY.action;
                     m_Data->m_TreeDisplay->m_Tree[n2].name=recPath;
                     m_Data->m_TreeDisplay->m_Tree[n2].rev = j;
+                    m_Data->m_TreeDisplay->m_Tree[n2].Author=REVENTRY.author;
+                    m_Data->m_TreeDisplay->m_Tree[n2].Message=REVENTRY.message;
+                    m_Data->m_TreeDisplay->m_Tree[n2].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
                     if (ren) {
                         lastrev = j;
                     }
@@ -492,6 +495,9 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
                         lastrev=j;
 #else
                         previous = getItem(parentItem,j);
@@ -509,6 +515,9 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
                         lastrev = j;
 #else
                         text=QString("<b>Modify</b>")+revText;
@@ -532,6 +541,9 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
                         lastrev = j;
 #else
                         text=QString("<b>Delete</b>")+revText;
@@ -561,6 +573,9 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
+                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
                         lastrev = j;
 #else
                         text=QString("<b>Delete</b>")+revText;

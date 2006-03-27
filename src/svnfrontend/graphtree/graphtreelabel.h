@@ -30,8 +30,10 @@
 class GraphTreeLabel : public QCanvasRectangle,StoredDrawParams, public RevGraphItem
 {
 public:
+#if 0
     GraphTreeLabel(const QString&,const QString&,const svn::LogEntry&,const QRect&r,QCanvas*c);
-    GraphTreeLabel(const QString&,const QRect&r,QCanvas*c);
+#endif
+    GraphTreeLabel(const QString&,const QString&,const QRect&r,QCanvas*c);
     virtual ~GraphTreeLabel();
 
     virtual int rtti()const;
@@ -39,7 +41,10 @@ public:
 
     void setBgColor(const QColor&);
 
+    const QString&nodename()const;
+
 protected:
+    QString m_Nodename;
 };
 
 

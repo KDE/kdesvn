@@ -40,6 +40,8 @@ namespace svn
     class Client;
 }
 
+#define USE_GRAPH 1
+
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
@@ -63,7 +65,11 @@ protected:
     RtreeData*m_Data;
 
     bool topDownScan();
+#ifdef USE_GRAPH
+    bool bottomUpScan(long startrev,unsigned recurse,const QString&path,long sRev = -1);
+#else
     bool bottomUpScan(long startrev,unsigned recurse,const QString&path,RListItem*parent=0);
+#endif
     bool isDeleted(long revision,const QString&);
 
     static bool isParent(const QString&_par,const QString&tar);

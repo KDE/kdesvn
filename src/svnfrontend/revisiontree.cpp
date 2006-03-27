@@ -40,8 +40,6 @@
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
 
-#define USE_GRAPH 1
-
 class RtreeData
 {
 public:
@@ -58,8 +56,11 @@ public:
     int current_row;
 
     QWidget*dlgParent;
-    KListView*m_Display;
+#ifdef USE_GRAPH
     RevGraphView*m_TreeDisplay;
+#else
+    KListView*m_Display;
+#endif
 
     svn::Client*m_Client;
     CContextListener* m_Listener;
@@ -72,7 +73,11 @@ RtreeData::RtreeData()
     : max_rev(-1),min_rev(-1)
 {
     progress=0;
+#ifdef USE_GRAPH
+    m_TreeDisplay = 0;
+#else
     m_Display = 0;
+#endif
     current_row=-1;
     m_Client = 0;
     dlgParent = 0;
@@ -204,27 +209,28 @@ RevisionTree::RevisionTree(svn::Client*aClient,
             m_Data->progress->progressBar()->setTotalSteps(100);
             m_Data->progress->progressBar()->setPercentageVisible(false);
             m_Data->m_stopTick.restart();
+#ifdef USE_GRAPH
+            m_Data->m_TreeDisplay=new RevGraphView(treeParent);
+            m_Data->m_current_node=0;
+#else
             m_Data->m_Display=new KListView(treeParent);
             m_Data->m_Display->addColumn(i18n("History of %1").arg(origin));
             m_Data->m_Display->setRootIsDecorated(true);
             m_Data->m_Display->setTreeStepSize(50);
-#ifdef USE_GRAPH
-            m_Data->m_TreeDisplay=new RevGraphView(treeParent);
-#if 0
-            m_Data->m_TreeDisplay->showText(i18n("History of %1").arg(origin));
-            m_Data->m_TreeDisplay->beginInsert();
-#endif
-            m_Data->m_current_node=0;
 #endif
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
                 m_Valid=true;
 #ifdef USE_GRAPH
                 m_Data->m_TreeDisplay->dumpRevtree();
-                m_Data->m_TreeDisplay->endInsert();
 #endif
             } else {
+#ifdef USE_GRAPH
+                delete m_Data->m_TreeDisplay;
+                m_Data->m_TreeDisplay = 0;
+#else
                 delete m_Data->m_Display;
                 m_Data->m_Display=0;
+#endif
             }
         }
     } else {
@@ -374,16 +380,24 @@ static QString uniqueNodeName(long rev,const QString&path)
     return res;
 }
 
+#ifdef USE_GRAPH
+bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_path,long _last)
+#else
 bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_path,RListItem*parentItem)
+#endif
 {
 #define REVENTRY m_Data->m_History[j]
 #define FORWARDENTRY m_Data->m_History[j].changedPaths[i]
 
     QString path = _path;
+#ifdef USE_GRAPH
+    long lastrev = _last;
+#else
     long lastrev = -1;
     if (parentItem) {
         lastrev = parentItem->revision();
     }
+#endif
     kdDebug()<<"Searching for "<<path<< " at revision " << startrev
         << " recursion " << recurse << endl;
     bool cancel = false;
@@ -430,19 +444,19 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     recPath+=r;
                     QPixmap p;
                     QString text;
-                    previous = getItem(parentItem,j);
 #ifdef USE_GRAPH
-
+                    ++m_Data->current_row;
                     n1 = uniqueNodeName(lastrev,tmpPath);
                     n2 = uniqueNodeName(j,recPath);
                     m_Data->m_TreeDisplay->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
                     m_Data->m_TreeDisplay->m_Tree[n2].Action=FORWARDENTRY.action;
                     m_Data->m_TreeDisplay->m_Tree[n2].name=recPath;
                     m_Data->m_TreeDisplay->m_Tree[n2].rev = j;
-#if 0
-                    m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recurse,path,"Copy/Rename",REVENTRY);
-                    m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recurse+1,recPath,"Copy/Rename",REVENTRY);
-#endif
+                    if (ren) {
+                        lastrev = j;
+                    }
+#else
+                    previous = getItem(parentItem,j);
 #endif
                     if (ren) {
                         kdDebug()<<"Renamed to "<< recPath << " at revison " << j << endl;
@@ -450,17 +464,22 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         text=QString("<i>%1</i><br>").arg(tmpPath);
                         text+=QString("<b>Rename to</b><br>%1 (from rev %2)").arg(recPath)
                             .arg(FORWARDENTRY.copyFromRevision)+revText;
-                        lastrev = j;
                     } else {
                         kdDebug()<<"Copy to "<< recPath << endl;
                         text=QString("<i>%1</i><br><b>Copy to</b><br>%2")
                             .arg(tmpPath)
                             .arg(recPath)+revText;
                     }
+#ifndef USE_GRAPH
                     p = getPixmap(text);
                     previous->setPixmap(0,p);
+#endif
                     if (!ren) {
+#ifdef USE_GRAPH
+                        if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,j)) {
+#else
                         if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,previous)) {
+#endif
                             return false;
                         }
                     }
@@ -468,26 +487,22 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     switch (FORWARDENTRY.action) {
                     case 'A':
                         kdDebug()<<"Inserting adding base item"<<endl;
-                        previous = getItem(parentItem,j);
-                        text=QString("<b>Add</b><br>%1").arg(FORWARDENTRY.path)+revText;
-                        previous->setPixmap(0,getPixmap(text));
 #ifdef USE_GRAPH
                         n1 = uniqueNodeName(j,FORWARDENTRY.path);
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
                         lastrev=j;
-#if 0
-                        m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recurse,FORWARDENTRY.path,"Add",REVENTRY);
-#endif
+#else
+                        previous = getItem(parentItem,j);
+                        text=QString("<b>Add</b><br>%1").arg(FORWARDENTRY.path)+revText;
+                        previous->setPixmap(0,getPixmap(text));
 #endif
                     break;
                     case 'M':
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
-                        text=QString("<b>Modify</b>")+revText;
-                        previous = getItem(parentItem,j);
-                        previous->setPixmap(0,getPixmap(text));
 #ifdef USE_GRAPH
+                        ++m_Data->current_row;
                         n1 = uniqueNodeName(j,FORWARDENTRY.path);
                         n2 = uniqueNodeName(lastrev,FORWARDENTRY.path);
                         m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
@@ -495,27 +510,33 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
                         lastrev = j;
-#if 0
-                        m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recurse,FORWARDENTRY.path,"Modify",REVENTRY);
-#endif
+#else
+                        text=QString("<b>Modify</b>")+revText;
+                        previous = getItem(parentItem,j);
+                        previous->setPixmap(0,getPixmap(text));
 #endif
                     break;
                     case 'D':
-                        kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        text=QString("<b>Delete</b>")+revText;
-                        previous = getItem(parentItem,j);
-                        previous->setPixmap(0,getPixmap(text));
+                        kdDebug()<<"(Sloppy match) Item deleted at revision "<< j << " recurse " << recurse << endl;
 #ifdef USE_GRAPH
+                        ++m_Data->current_row;
                         n1 = uniqueNodeName(j,path);
                         n2 = uniqueNodeName(lastrev,path);
+                        if (n1==n2) {
+                            /* cvs import - copy and deletion at same revision.
+                             * CVS sucks.
+                             */
+                            n1 = uniqueNodeName(j,"D_"+path);
+                        }
                         m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
                         lastrev = j;
-#if 0
-                        m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recurse,FORWARDENTRY.path,"Delete",REVENTRY);
-#endif
+#else
+                        text=QString("<b>Delete</b>")+revText;
+                        previous = getItem(parentItem,j);
+                        previous->setPixmap(0,getPixmap(text));
 #endif
                         get_out= true;
                     break;
@@ -525,31 +546,32 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                 } else {
                     switch (FORWARDENTRY.action) {
                     case 'D':
-                        kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
-                        text=QString("<b>Delete</b>")+revText;
-                        previous = getItem(parentItem,j);
-                        previous->setPixmap(0,getPixmap(text));
+                        kdDebug()<<"(Exact match) Item deleted at revision "<< j << " recurse " << recurse << endl;
 #ifdef USE_GRAPH
+                        ++m_Data->current_row;
                         n1 = uniqueNodeName(j,path);
                         n2 = uniqueNodeName(lastrev,path);
+                        if (n1==n2) {
+                            /* cvs import - copy and deletion at same revision.
+                             * CVS sucks.
+                             */
+                            n1 = uniqueNodeName(j,"D_"+path);
+                        }
                         m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
                         m_Data->m_TreeDisplay->m_Tree[n1].name=path;
                         m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
                         lastrev = j;
-#if 0
-                        m_Data->m_TreeDisplay->addLabel(m_Data->current_row,recurse,FORWARDENTRY.path,"Delete",REVENTRY);
-#endif
+#else
+                        text=QString("<b>Delete</b>")+revText;
+                        previous = getItem(parentItem,j);
+                        previous->setPixmap(0,getPixmap(text));
 #endif
                         get_out = true;
                     break;
                     default:
                     break;
                     }
-                }
-                if (previous) {
-                    QString tip = m_Data->m_OldHistory[j].author;
-//                    previous->setTooltip(tip);
                 }
                 if (get_out) {
                     return true;
@@ -562,13 +584,18 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 
 QWidget*RevisionTree::getView()
 {
+#ifdef USE_GRAPH
+    return m_Data->m_TreeDisplay;
+#else
     return m_Data->m_Display;
+#endif
 }
 
 RListItem*RevisionTree::getItem(RListItem*parent,long rev)
 {
+    RListItem * res = 0;
+#ifndef USE_GRAPH
     ++m_Data->current_row;
-    RListItem * res;
     if (parent) {
         kdDebug()<<"Item with parent"<<endl;
         res = new RListItem(parent,rev);
@@ -577,6 +604,7 @@ RListItem*RevisionTree::getItem(RListItem*parent,long rev)
     }
     res->setOpen(true);
     res->setMultiLinesEnabled(true);
+#endif
     return res;
 }
 

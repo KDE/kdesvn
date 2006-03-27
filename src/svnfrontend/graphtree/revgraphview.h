@@ -29,6 +29,7 @@ namespace svn {
 class KTempFile;
 class KProcess;
 class RevisionTree;
+class GraphTreeLabel;
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
@@ -83,6 +84,8 @@ protected:
     void dumpRevtree();
     QColor getBgColor(const QString&nodeName);
     bool isStart(const QString&nodeName);
+
+    QMap<QString,GraphTreeLabel*> m_NodeList;
 
     int _xMargin,_yMargin;
 };

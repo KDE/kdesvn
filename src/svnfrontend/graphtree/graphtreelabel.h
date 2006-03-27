@@ -42,4 +42,31 @@ public:
 protected:
 };
 
+
+class GraphEdge;
+
+class GraphEdgeArrow:public QCanvasPolygon
+{
+public:
+    GraphEdgeArrow(GraphEdge*,QCanvas*);
+    GraphEdge*edge();
+    virtual void drawShape(QPainter&);
+    int rtti()const;
+
+private:
+    GraphEdge*_edge;
+};
+
+/* line */
+class GraphEdge:public QCanvasSpline
+{
+public:
+    GraphEdge(QCanvas*);
+    virtual ~GraphEdge();
+
+    virtual void drawShape(QPainter&);
+    QPointArray areaPoints() const;
+    virtual int rtti()const;
+};
+
 #endif

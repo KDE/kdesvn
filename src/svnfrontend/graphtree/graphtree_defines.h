@@ -23,7 +23,8 @@
 
 enum {
     GRAPHTREE_LABEL = 1100,
-    GRAPHTREE_LINE
+    GRAPHTREE_LINE,
+    GRAPHTREE_ARROW
 };
 
 #endif

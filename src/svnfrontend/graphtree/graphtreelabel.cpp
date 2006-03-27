@@ -33,7 +33,7 @@ GraphTreeLabel::GraphTreeLabel(const QString&text, const QRect&r,QCanvas*c)
     : QCanvasRectangle(r,c),StoredDrawParams(),RevGraphItem()
 {
     setText(0,text);
-    setPosition(0, DrawParams::BottomCenter);
+    setPosition(0, DrawParams::TopCenter);
 }
 
 GraphTreeLabel::~GraphTreeLabel()
@@ -58,5 +58,82 @@ void GraphTreeLabel::drawShape(QPainter& p)
     RectDrawing d(r);
     d.drawBack(&p,this);
     d.drawField(&p, 0, this);
-    d.drawField(&p, 1, this);
+//    d.drawField(&p, 1, this);
+}
+
+GraphEdge::GraphEdge(QCanvas*c)
+    : QCanvasSpline(c)
+{
+}
+
+GraphEdge::~GraphEdge()
+{
+}
+
+void GraphEdge::drawShape(QPainter& p)
+{
+    p.drawPolyline(poly);
+}
+
+QPointArray GraphEdge::areaPoints() const
+{
+  int minX = poly[0].x(), minY = poly[0].y();
+  int maxX = minX, maxY = minY;
+  int i;
+
+  if (0) qDebug("GraphEdge::areaPoints\n  P 0: %d/%d", minX, minY);
+  int len = poly.count();
+  for (i=1;i<len;i++) {
+    if (poly[i].x() < minX) minX = poly[i].x();
+    if (poly[i].y() < minY) minY = poly[i].y();
+    if (poly[i].x() > maxX) maxX = poly[i].x();
+    if (poly[i].y() > maxY) maxY = poly[i].y();
+    if (0) qDebug("  P %d: %d/%d", i, poly[i].x(), poly[i].y());
+  }
+  QPointArray a = poly.copy(),  b = poly.copy();
+  if (minX == maxX) {
+    a.translate(-2, 0);
+    b.translate(2, 0);
+  }
+  else {
+    a.translate(0, -2);
+    b.translate(0, 2);
+  }
+  a.resize(2*len);
+  for (i=0;i<len;i++)
+    a[2 * len - 1 -i] = b[i];
+
+  if (0) {
+      qDebug(" Result:");
+      for (i=0;i<2*len;i++)
+      qDebug("  P %d: %d/%d", i, a[i].x(), a[i].y());
+  }
+
+  return a;
+
+}
+
+int GraphEdge::rtti()const
+{
+    return GRAPHTREE_LINE;
+}
+
+GraphEdgeArrow::GraphEdgeArrow(GraphEdge*_parent,QCanvas*c)
+    : QCanvasPolygon(c),_edge(_parent)
+{
+}
+
+void GraphEdgeArrow::drawShape(QPainter&p)
+{
+    QCanvasPolygon::drawShape(p);
+}
+
+int GraphEdgeArrow::rtti()const
+{
+    return GRAPHTREE_ARROW;
+}
+
+GraphEdge*GraphEdgeArrow::edge()
+{
+    return _edge;
 }

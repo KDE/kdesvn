@@ -23,6 +23,7 @@
 #include <kdebug.h>
 #include <ktempfile.h>
 #include <kprocess.h>
+#include <math.h>
 
 #define LABEL_WIDTH 160
 #define LABEL_HEIGHT 90
@@ -105,6 +106,7 @@ void RevGraphView::dotExit(KProcess*p)
     dotStream = new QTextStream(dotOutput, IO_ReadOnly);
     QString line,cmd;
     int lineno=0;
+    int splinenr = 0;
     clear();
     beginInsert();
     /* mostly taken from kcachegrind */
@@ -168,7 +170,89 @@ void RevGraphView::dotExit(KProcess*p)
                 ensureVisible(r.x(),r.y());
             }
             t->setBgColor(getBgColor(nodeName));
+            t->setZ(1.0);
             t->show();
+            m_NodeList[nodeName]=t;
+        } else {
+            QString node1Name, node2Name, label;
+            double x, y;
+            QPointArray pa;
+            int points, i;
+            lineStream >> node1Name >> node2Name;
+            lineStream >> points;
+            pa.resize(points);
+            for (i=0;i<points;i++) {
+                if (lineStream.atEnd()) break;
+                lineStream >> x >> y;
+                int xx = (int)(scaleX * x + _xMargin);
+                int yy = (int)(scaleY * (dotHeight - y) + _yMargin);
+
+                if (0) qDebug("   P %d: ( %f / %f ) => ( %d / %d)",
+                    i, x, y, xx, yy);
+                pa.setPoint(i, xx, yy);
+            }
+            if (i < points) {
+                qDebug("CallGraphView: Can't read %d spline points (%d)",
+                    points,  lineno);
+                continue;
+            }
+
+            GraphEdge * n = new GraphEdge(m_Canvas);
+            QColor arrowColor = Qt::black;
+            n->setPen(QPen(arrowColor,1));
+            n->setControlPoints(pa,false);
+            n->setZ(0.5);
+            n->show();
+
+            /* arrow */
+            QPoint arrowDir;
+            int indexHead = -1;
+
+            QMap<QString,GraphTreeLabel*>::Iterator it;
+            it = m_NodeList.find(node1Name);
+            if (it!=m_NodeList.end()) {
+                GraphTreeLabel*tlab = it.data();
+                if (tlab) {
+                    QPoint toCenter = tlab->rect().center();
+                    int dx0 = pa.point(0).x() - toCenter.x();
+                    int dy0 = pa.point(0).y() - toCenter.y();
+                    int dx1 = pa.point(points-1).x() - toCenter.x();
+                    int dy1 = pa.point(points-1).y() - toCenter.y();
+                    if (dx0*dx0+dy0*dy0 > dx1*dx1+dy1*dy1) {
+                    // start of spline is nearer to call target node
+                        indexHead=-1;
+                        while(arrowDir.isNull() && (indexHead<points-2)) {
+                            indexHead++;
+                            arrowDir = pa.point(indexHead) - pa.point(indexHead+1);
+                        }
+                    }
+                }
+            }
+
+            if (arrowDir.isNull()) {
+                indexHead = points;
+                // sometimes the last spline points from dot are the same...
+                while(arrowDir.isNull() && (indexHead>1)) {
+                    indexHead--;
+                    arrowDir = pa.point(indexHead) - pa.point(indexHead-1);
+                }
+            }
+            if (!arrowDir.isNull()) {
+                arrowDir *= 10.0/sqrt(double(arrowDir.x()*arrowDir.x() +
+                    arrowDir.y()*arrowDir.y()));
+                QPointArray a(3);
+                a.setPoint(0, pa.point(indexHead) + arrowDir);
+                a.setPoint(1, pa.point(indexHead) + QPoint(arrowDir.y()/2,
+                    -arrowDir.x()/2));
+                a.setPoint(2, pa.point(indexHead) + QPoint(-arrowDir.y()/2,
+                    arrowDir.x()/2));
+                GraphEdgeArrow* aItem = new GraphEdgeArrow(n,m_Canvas);
+                aItem->setPoints(a);
+                aItem->setBrush(arrowColor);
+                aItem->setZ(1.5);
+                aItem->show();
+//                sItem->setArrow(aItem);
+            }
         }
     }
     endInsert();
@@ -210,6 +294,11 @@ QColor RevGraphView::getBgColor(const QString&nodeName)
         case 'A':
             res = Qt::green;
             break;
+        case 'C':
+        case 'R':
+        case 1:
+        case 2:
+            res = Qt::lightGray;
         default:
             break;
     }
@@ -236,24 +325,35 @@ void RevGraphView::dumpRevtree()
 
     RevGraphView::trevTree::ConstIterator it1;
     for (it1=m_Tree.begin();it1!=m_Tree.end();++it1) {
-        *stream << "  " << it1.key().latin1()<< " " <<
-            "[label=\""<< it1.data().name.latin1() << "\", ";
-        *stream << "fontname=\"serif\", ";
-        *stream << "URL=\"" << it1.data().name.latin1() << "\", ";
+        *stream << "  " << it1.key().latin1()
+            << "[ ";
+            //"[label=\""<< it1.data().name.latin1() << "\", ";
+//        *stream << "fontname=\"serif\", ";
+        *stream << "shape=box, ";
         if (it1.data().Action=='D') {
-            *stream << "color=red, style=filled, ";
-            *stream << "shape=record];\n";
+            *stream << "label=\"Deleted at Revision "<<it1.data().rev
+                << "\",";
         } else if (it1.data().Action=='A') {
-            *stream << "color=green, style=filled, ";
-            *stream << "shape=record];\n";
+            *stream << "label=\"Added at Revision "<<it1.data().rev
+                    << " " << it1.data().name.latin1() << " "
+                    <<"\",";
+        } else if (it1.data().Action=='C'||it1.data().Action==(char)1){
+            *stream << "label=\"Copy to "<< it1.data().name.latin1()
+                    << " at Rev " << it1.data().rev
+                    <<"\",";
+        } else if (it1.data().Action=='R'||it1.data().Action==(char)2){
+            *stream << "label=\"Renamed to "<< it1.data().name.latin1()
+                    << " at Rev " << it1.data().rev
+                    <<"\",";
         } else {
-            *stream << "shape=box];\n";
+            *stream << "label=\"Modified at Revision "<<it1.data().rev<<"\",";
         }
+        *stream << "];\n";
         for (unsigned j=0;j
         <it1.data().targets.count();++j) {
             *stream<<"  "<<it1.key().latin1()<< " "
                 << "->"<<" "<<it1.data().targets[j].key
-                << " [color=\"midnightblue\",fontsize=10,style=\"solid\", arrowtail=none];\n";
+                << " [fontsize=10,style=\"solid\"];\n";
         }
     }
     *stream << "}\n"<<flush;

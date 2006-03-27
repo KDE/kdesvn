@@ -64,5 +64,11 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,
         default:
             break;
     }
-    changedPaths.push_back(_entry);
+    /* make sure that ALL writing operations are BEFORE deletion of item,
+     * otherwise search will fail */
+    if (_action=='D') {
+        changedPaths.push_back(_entry);
+    } else {
+        changedPaths.push_front(_entry);
+    }
 }

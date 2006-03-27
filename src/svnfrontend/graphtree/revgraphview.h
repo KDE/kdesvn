@@ -82,6 +82,7 @@ protected:
     trevTree m_Tree;
     void dumpRevtree();
     QColor getBgColor(const QString&nodeName);
+    bool isStart(const QString&nodeName);
 
     int _xMargin,_yMargin;
 };

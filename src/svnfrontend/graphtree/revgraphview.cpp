@@ -96,8 +96,9 @@ void RevGraphView::readDotOutput(KProcess*,char *   buffer,int   buflen)
     dotOutput+=QString::fromLatin1(buffer, buflen);
 }
 
-void RevGraphView::dotExit(KProcess*)
+void RevGraphView::dotExit(KProcess*p)
 {
+    if (p!=renderProcess)return;
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;
     QTextStream* dotStream;
@@ -114,7 +115,7 @@ void RevGraphView::dotExit(KProcess*)
         if (line.isEmpty()) continue;
         QTextStream lineStream(line, IO_ReadOnly);
         lineStream >> cmd;
-        kdDebug()<<"Command = "<<cmd << " at line "<<lineno<<endl;
+//        kdDebug()<<"Command = "<<cmd << " at line "<<lineno<<endl;
         if (cmd == "stop") break;
 
         if (cmd == "graph") {
@@ -130,6 +131,7 @@ void RevGraphView::dotExit(KProcess*)
             if (h < QApplication::desktop()->height())
                 _yMargin += (QApplication::desktop()->height()-h)/2;
             m_Canvas = new QCanvas(int(w+2*_xMargin), int(h+2*_yMargin));
+            setCanvas(m_Canvas);
             continue;
         }
         if ((cmd != "node") && (cmd != "edge")) {
@@ -161,14 +163,33 @@ void RevGraphView::dotExit(KProcess*)
             int w = (int)(scaleX * width);
             int h = (int)(scaleY * height);
             QRect r(xx-w/2, yy-h/2, w, h);
-            kdDebug()<<"Rect: "<<r<<endl;
             GraphTreeLabel*t=new GraphTreeLabel(label,r,m_Canvas);
+            if (isStart(nodeName)) {
+                ensureVisible(r.x(),r.y());
+            }
             t->setBgColor(getBgColor(nodeName));
             t->show();
         }
     }
-    setCanvas(m_Canvas);
     endInsert();
+    delete p;
+    renderProcess=0;
+}
+
+bool RevGraphView::isStart(const QString&nodeName)
+{
+    bool res = false;
+    trevTree::ConstIterator it;
+    it = m_Tree.find(nodeName);
+    if (it==m_Tree.end()) {
+        return res;
+    }
+    switch (it.data().Action) {
+        case 'A':
+            res = true;
+            break;
+    }
+    return res;
 }
 
 QColor RevGraphView::getBgColor(const QString&nodeName)

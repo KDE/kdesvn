@@ -365,13 +365,8 @@ static QString uniqueNodeName(long rev,const QString&path)
     QString res = path;
     res.replace("\"","_quot_");
     res.replace(" ","_space_");
-    res = QString("\"%1_%2\"").arg(res).arg(rev);
-#if 0
-     path;
-    static QRegExp r("\\W");
-    res.replace(r,"_");
-    res+=QString("_%1").arg(rev);
-#endif
+    QString n; n.sprintf("%05ld",rev);
+    res = "\""+n+QString("_%1\"").arg(res);
     return res;
 }
 

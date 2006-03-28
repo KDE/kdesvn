@@ -111,8 +111,11 @@ protected:
     bool _isMoving;
     QPoint _lastPos;
 
+    bool _noUpdateZoomerPos;
+
 private:
     void updateSizes(QSize s = QSize(0,0));
+    void updateZoomerPos();
 };
 
 #endif

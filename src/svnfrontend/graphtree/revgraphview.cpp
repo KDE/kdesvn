@@ -84,6 +84,7 @@ RevGraphView::RevGraphView(QWidget * parent, const char * name, WFlags f)
             this, SLOT(zoomRectMoveFinished()));
     m_LastAutoPosition = TopLeft;
     _isMoving = false;
+    _noUpdateZoomerPos = false;
 }
 
 RevGraphView::~RevGraphView()
@@ -413,12 +414,14 @@ void RevGraphView::dumpRevtree()
     connect(renderProcess,SIGNAL(receivedStdout(KProcess*,char*,int)),
         this,SLOT(readDotOutput(KProcess*,char*,int)) );
     if (!renderProcess->start(KProcess::NotifyOnExit,KProcess::Stdout)) {
-        QString error = i18n("Could not start process dot");
+        QString error = i18n("Could not start process \"");
         for (unsigned c=0;c<renderProcess->args().count();++c) {
             error+=QString(" %1").arg(renderProcess->args()[c]);
         }
+        error+=" \".";
         showText(error);
-        delete renderProcess;
+        renderProcess=0;
+        //delete renderProcess;
     }
 }
 
@@ -460,7 +463,7 @@ void RevGraphView::updateSizes(QSize s)
     int cHeight = m_Canvas->height() - 2*_yMargin + 100;
 
     // hide birds eye view if no overview needed
-    if (((cWidth < s.width()) && cHeight < s.height())) {
+    if (((cWidth < s.width()) && cHeight < s.height())||m_NodeList.count()==0) {
       m_CompleteView->hide();
       return;
     }
@@ -501,7 +504,11 @@ void RevGraphView::updateSizes(QSize s)
 
     m_CompleteView->setContentsPos(int(zoom*(_xMargin-50)),
                   int(zoom*(_yMargin-50)));
+    updateZoomerPos();
+}
 
+void RevGraphView::updateZoomerPos()
+{
     int cvW = m_CompleteView->width();
     int cvH = m_CompleteView->height();
     int x = width()- cvW - verticalScrollBar()->width()    -2;
@@ -569,21 +576,26 @@ void RevGraphView::contentsMovingSlot(int x,int y)
     if (0) qDebug("moving: (%d,%d) => (%d/%d - %dx%d)",
                 x, y, z.x(), z.y(), z.width(), z.height());
     m_CompleteView->setZoomRect(z);
+    if (!_noUpdateZoomerPos) {
+        updateZoomerPos();
+    }
 }
 
 void RevGraphView::zoomRectMoved(int dx,int dy)
 {
   if (leftMargin()>0) dx = 0;
   if (topMargin()>0) dy = 0;
+  _noUpdateZoomerPos = true;
   scrollBy(int(dx/_cvZoom),int(dy/_cvZoom));
+  _noUpdateZoomerPos = false;
 }
 
 void RevGraphView::zoomRectMoveFinished()
 {
 #if 0
-    if (_zoomPosition == Auto) 
+    if (_zoomPosition == Auto)
 #endif
-    updateSizes();
+    updateZoomerPos();
 }
 
 void RevGraphView::resizeEvent(QResizeEvent*e)
@@ -602,7 +614,7 @@ void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
 void RevGraphView::contentsMouseReleaseEvent ( QMouseEvent * e )
 {
     _isMoving = false;
-    updateSizes();
+    updateZoomerPos();
 }
 
 void RevGraphView::contentsMouseMoveEvent ( QMouseEvent * e )
@@ -610,7 +622,9 @@ void RevGraphView::contentsMouseMoveEvent ( QMouseEvent * e )
     if (_isMoving) {
         int dx = e->globalPos().x() - _lastPos.x();
         int dy = e->globalPos().y() - _lastPos.y();
+        _noUpdateZoomerPos = true;
         scrollBy(-dx, -dy);
+        _noUpdateZoomerPos = false;
         _lastPos = e->globalPos();
     }
 }

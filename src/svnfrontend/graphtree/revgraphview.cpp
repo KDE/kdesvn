@@ -83,6 +83,7 @@ RevGraphView::RevGraphView(QWidget * parent, const char * name, WFlags f)
     connect(m_CompleteView, SIGNAL(zoomRectMoveFinished()),
             this, SLOT(zoomRectMoveFinished()));
     m_LastAutoPosition = TopLeft;
+    _isMoving = false;
 }
 
 RevGraphView::~RevGraphView()
@@ -92,6 +93,7 @@ RevGraphView::~RevGraphView()
     delete dotTmpFile;
     delete m_CompleteView;
     delete m_Tip;
+    delete renderProcess;
 }
 
 void RevGraphView::showText(const QString&s)
@@ -106,6 +108,7 @@ void RevGraphView::showText(const QString&s)
     center(0,0);
     setCanvas(m_Canvas);
     m_Canvas->update();
+    m_CompleteView->hide();
 }
 
 void RevGraphView::clear()
@@ -114,6 +117,7 @@ void RevGraphView::clear()
     delete m_Canvas;
     m_Canvas = 0;
     setCanvas(0);
+    m_CompleteView->setCanvas(0);
 }
 
 void RevGraphView::beginInsert()
@@ -155,7 +159,6 @@ void RevGraphView::dotExit(KProcess*p)
         if (line.isEmpty()) continue;
         QTextStream lineStream(line, IO_ReadOnly);
         lineStream >> cmd;
-//        kdDebug()<<"Command = "<<cmd << " at line "<<lineno<<endl;
         if (cmd == "stop") break;
 
         if (cmd == "graph") {
@@ -292,8 +295,14 @@ void RevGraphView::dotExit(KProcess*p)
             }
         }
     }
-    setCanvas(m_Canvas);
-    m_CompleteView->setCanvas(m_Canvas);
+    if (!m_Canvas) {
+        QString s = i18n("Error running the graph layouting tool.\n");
+        s += i18n("Please check that 'dot' is installed (package GraphViz).");
+        showText(s);
+    } else {
+        setCanvas(m_Canvas);
+        m_CompleteView->setCanvas(m_Canvas);
+    }
     endInsert();
     delete p;
     renderProcess=0;
@@ -347,19 +356,20 @@ QColor RevGraphView::getBgColor(const QString&nodeName)
 void RevGraphView::dumpRevtree()
 {
     delete dotTmpFile;
+    clear();
     dotOutput = "";
     dotTmpFile = new KTempFile(QString::null,".dot");
     dotTmpFile->setAutoDelete(true);
 
     QTextStream* stream = dotTmpFile->textStream();
     if (!stream) {
-        kdDebug()<<"Could not open tempfile for writing"<<endl;
+        showText(i18n("Could not open tempfile %1 for writing.").arg(dotTmpFile->name()));
         return;
     }
 
     *stream << "digraph \"callgraph\" {\n";
     *stream << "  bgcolor=\"transparent\";\n";
-    *stream << QString("  rankdir=BT;\n");
+    *stream << QString("  rankdir=LR;\n");
     //*stream << QString("  overlap=false;\n  splines=true;\n");
 
     RevGraphView::trevTree::ConstIterator it1;
@@ -403,7 +413,11 @@ void RevGraphView::dumpRevtree()
     connect(renderProcess,SIGNAL(receivedStdout(KProcess*,char*,int)),
         this,SLOT(readDotOutput(KProcess*,char*,int)) );
     if (!renderProcess->start(KProcess::NotifyOnExit,KProcess::Stdout)) {
-        kdDebug()<<"Starting process " << renderProcess->args()<<endl;
+        QString error = i18n("Could not start process dot");
+        for (unsigned c=0;c<renderProcess->args().count();++c) {
+            error+=QString(" %1").arg(renderProcess->args()[c]);
+        }
+        showText(error);
         delete renderProcess;
     }
 }
@@ -445,14 +459,12 @@ void RevGraphView::updateSizes(QSize s)
     int cWidth  = m_Canvas->width()  - 2*_xMargin + 100;
     int cHeight = m_Canvas->height() - 2*_yMargin + 100;
 
-#if 0
     // hide birds eye view if no overview needed
-    if (!_data || !_activeItem ||
-    ((cWidth < s.width()) && cHeight < s.height())) {
+    if (((cWidth < s.width()) && cHeight < s.height())) {
       m_CompleteView->hide();
       return;
     }
-#endif
+
     m_CompleteView->show();
 
     // first, assume use of 1/3 of width/height (possible larger)
@@ -578,6 +590,29 @@ void RevGraphView::resizeEvent(QResizeEvent*e)
 {
     QCanvasView::resizeEvent(e);
     if (m_Canvas) updateSizes(e->size());
+}
+
+void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
+{
+    setFocus();
+    _isMoving = true;
+    _lastPos = e->globalPos();
+}
+
+void RevGraphView::contentsMouseReleaseEvent ( QMouseEvent * e )
+{
+    _isMoving = false;
+    updateSizes();
+}
+
+void RevGraphView::contentsMouseMoveEvent ( QMouseEvent * e )
+{
+    if (_isMoving) {
+        int dx = e->globalPos().x() - _lastPos.x();
+        int dy = e->globalPos().y() - _lastPos.y();
+        scrollBy(-dx, -dy);
+        _lastPos = e->globalPos();
+    }
 }
 
 #include "revgraphview.moc"

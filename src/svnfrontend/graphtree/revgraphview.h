@@ -75,7 +75,7 @@ public:
     typedef QMap<QString,keyData> trevTree;
 
     QString toolTip(const QString&nodename)const;
-  
+
 public slots:
     virtual void contentsMovingSlot(int,int);
     virtual void zoomRectMoved(int,int);
@@ -104,6 +104,12 @@ protected:
     ZoomPosition m_LastAutoPosition;
 
     virtual void resizeEvent(QResizeEvent*);
+    virtual void contentsMousePressEvent ( QMouseEvent * e );
+    virtual void contentsMouseReleaseEvent ( QMouseEvent * e );
+    virtual void contentsMouseMoveEvent ( QMouseEvent * e );
+
+    bool _isMoving;
+    QPoint _lastPos;
 
 private:
     void updateSizes(QSize s = QSize(0,0));

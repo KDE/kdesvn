@@ -55,9 +55,11 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,
         case 'D':
             break;
         case 'R':
+#if 0
             if (!target.isEmpty()) {
                 kdDebug()<<"Adding a rename "<< current << " -> " << target << endl;
             }
+#endif
             break;
         case 'M':
             break;

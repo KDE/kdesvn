@@ -518,7 +518,9 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 #endif
                     break;
                     case 'M':
+#ifdef DEBUG_PARSE
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
+#endif
 #ifdef USE_GRAPH
                         n1 = uniqueNodeName(j,FORWARDENTRY.path);
                         n2 = uniqueNodeName(lastrev,FORWARDENTRY.path);

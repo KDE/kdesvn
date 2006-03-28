@@ -21,13 +21,12 @@
 #define GRAPHTREELABEL_H
 
 #include <treemap.h>
-#include <revgraphitem.h>
 #include <qcanvas.h>
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class GraphTreeLabel : public QCanvasRectangle,StoredDrawParams, public RevGraphItem
+class GraphTreeLabel : public QCanvasRectangle,StoredDrawParams
 {
 public:
     GraphTreeLabel(const QString&,const QString&,const QRect&r,QCanvas*c);

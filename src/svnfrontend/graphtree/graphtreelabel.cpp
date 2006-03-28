@@ -22,7 +22,7 @@
 #include <qpainter.h>
 
 GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRect&r,QCanvas*c)
-    : QCanvasRectangle(r,c),StoredDrawParams(),RevGraphItem()
+    : QCanvasRectangle(r,c),StoredDrawParams()
 {
     m_Nodename = _nodename;
     setText(0,text);

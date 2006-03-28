@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "revgraphview.h"
 #include "graphtreelabel.h"
+#include "pannerview.h"
 #include "graphtree_defines.h"
 #include <kapp.h>
 #include <kdebug.h>
@@ -26,6 +27,7 @@
 #include <kprocess.h>
 #include <klocale.h>
 #include <qtooltip.h>
+#include <qwmatrix.h>
 #include <math.h>
 
 #define LABEL_WIDTH 160
@@ -69,6 +71,18 @@ RevGraphView::RevGraphView(QWidget * parent, const char * name, WFlags f)
     dotTmpFile = 0;
     renderProcess = 0;
     m_Tip = new GraphViewTip(this);
+    m_CompleteView = new PannerView(this);
+    m_CompleteView->setVScrollBarMode(QScrollView::AlwaysOff);
+    m_CompleteView->setHScrollBarMode(QScrollView::AlwaysOff);
+    m_CompleteView->raise();
+    m_CompleteView->hide();
+    connect(this, SIGNAL(contentsMoving(int,int)),
+            this, SLOT(contentsMovingSlot(int,int)));
+    connect(m_CompleteView, SIGNAL(zoomRectMoved(int,int)),
+            this, SLOT(zoomRectMoved(int,int)));
+    connect(m_CompleteView, SIGNAL(zoomRectMoveFinished()),
+            this, SLOT(zoomRectMoveFinished()));
+    m_LastAutoPosition = TopLeft;
 }
 
 RevGraphView::~RevGraphView()
@@ -76,6 +90,8 @@ RevGraphView::~RevGraphView()
     setCanvas(0);
     delete m_Canvas;
     delete dotTmpFile;
+    delete m_CompleteView;
+    delete m_Tip;
 }
 
 void RevGraphView::showText(const QString&s)
@@ -107,7 +123,11 @@ void RevGraphView::beginInsert()
 
 void RevGraphView::endInsert()
 {
-    if (m_Canvas) m_Canvas->update();
+    if (m_Canvas) {
+        _cvZoom = 0;
+        updateSizes();
+        m_Canvas->update();
+    }
     viewport()->setUpdatesEnabled(true);
 }
 
@@ -151,7 +171,6 @@ void RevGraphView::dotExit(KProcess*p)
             if (h < QApplication::desktop()->height())
                 _yMargin += (QApplication::desktop()->height()-h)/2;
             m_Canvas = new QCanvas(int(w+2*_xMargin), int(h+2*_yMargin));
-            setCanvas(m_Canvas);
             continue;
         }
         if ((cmd != "node") && (cmd != "edge")) {
@@ -273,6 +292,8 @@ void RevGraphView::dotExit(KProcess*p)
             }
         }
     }
+    setCanvas(m_Canvas);
+    m_CompleteView->setCanvas(m_Canvas);
     endInsert();
     delete p;
     renderProcess=0;
@@ -413,6 +434,150 @@ QString RevGraphView::toolTip(const QString&_nodename)const
     }
     res+=QString("<br>Log: %1").arg(sm);
     return res;
+}
+
+void RevGraphView::updateSizes(QSize s)
+{
+    if (!m_Canvas) return;
+    if (s == QSize(0,0)) s = size();
+
+    // the part of the canvas that should be visible
+    int cWidth  = m_Canvas->width()  - 2*_xMargin + 100;
+    int cHeight = m_Canvas->height() - 2*_yMargin + 100;
+
+#if 0
+    // hide birds eye view if no overview needed
+    if (!_data || !_activeItem ||
+    ((cWidth < s.width()) && cHeight < s.height())) {
+      m_CompleteView->hide();
+      return;
+    }
+#endif
+    m_CompleteView->show();
+
+    // first, assume use of 1/3 of width/height (possible larger)
+    double zoom = .33 * s.width() / cWidth;
+    if (zoom * cHeight < .33 * s.height()) zoom = .33 * s.height() / cHeight;
+
+    // fit to widget size
+    if (cWidth  * zoom  > s.width())   zoom = s.width() / (double)cWidth;
+    if (cHeight * zoom  > s.height())  zoom = s.height() / (double)cHeight;
+
+    // scale to never use full height/width
+    zoom = zoom * 3/4;
+
+    // at most a zoom of 1/3
+    if (zoom > .33) zoom = .33;
+
+    if (zoom != _cvZoom) {
+      _cvZoom = zoom;
+      if (0) qDebug("Canvas Size: %dx%d, Visible: %dx%d, Zoom: %f",
+            m_Canvas->width(), m_Canvas->height(),
+            cWidth, cHeight, zoom);
+
+      QWMatrix wm;
+      wm.scale( zoom, zoom );
+      m_CompleteView->setWorldMatrix(wm);
+
+      // make it a little bigger to compensate for widget frame
+      m_CompleteView->resize(int(cWidth * zoom) + 4,
+                            int(cHeight * zoom) + 4);
+
+      // update ZoomRect in completeView
+      contentsMovingSlot(contentsX(), contentsY());
+    }
+
+    m_CompleteView->setContentsPos(int(zoom*(_xMargin-50)),
+                  int(zoom*(_yMargin-50)));
+
+    int cvW = m_CompleteView->width();
+    int cvH = m_CompleteView->height();
+    int x = width()- cvW - verticalScrollBar()->width()    -2;
+    int y = height()-cvH - horizontalScrollBar()->height() -2;
+
+    QPoint oldZoomPos = m_CompleteView->pos();
+    QPoint newZoomPos = QPoint(0,0);
+
+#if 0
+    ZoomPosition zp = _zoomPosition;
+    if (zp == Auto) {
+#else
+    ZoomPosition zp = m_LastAutoPosition;
+#endif
+    QPoint tl1Pos = viewportToContents(QPoint(0,0));
+    QPoint tl2Pos = viewportToContents(QPoint(cvW,cvH));
+    QPoint tr1Pos = viewportToContents(QPoint(x,0));
+    QPoint tr2Pos = viewportToContents(QPoint(x+cvW,cvH));
+    QPoint bl1Pos = viewportToContents(QPoint(0,y));
+    QPoint bl2Pos = viewportToContents(QPoint(cvW,y+cvH));
+    QPoint br1Pos = viewportToContents(QPoint(x,y));
+    QPoint br2Pos = viewportToContents(QPoint(x+cvW,y+cvH));
+    int tlCols = m_Canvas->collisions(QRect(tl1Pos,tl2Pos)).count();
+    int trCols = m_Canvas->collisions(QRect(tr1Pos,tr2Pos)).count();
+    int blCols = m_Canvas->collisions(QRect(bl1Pos,bl2Pos)).count();
+    int brCols = m_Canvas->collisions(QRect(br1Pos,br2Pos)).count();
+    int minCols = tlCols;
+    zp = m_LastAutoPosition;
+    switch(zp) {
+        case TopRight:    minCols = trCols; break;
+        case BottomLeft:  minCols = blCols; break;
+        case BottomRight: minCols = brCols; break;
+        default:
+        case TopLeft:     minCols = tlCols; break;
+    }
+    if (minCols > tlCols) { minCols = tlCols; zp = TopLeft; }
+    if (minCols > trCols) { minCols = trCols; zp = TopRight; }
+    if (minCols > blCols) { minCols = blCols; zp = BottomLeft; }
+    if (minCols > brCols) { minCols = brCols; zp = BottomRight; }
+
+    m_LastAutoPosition = zp;
+#if 0
+    }
+#endif
+    switch(zp) {
+    case TopRight:
+        newZoomPos = QPoint(x,0);
+        break;
+    case BottomLeft:
+        newZoomPos = QPoint(0,y);
+        break;
+    case BottomRight:
+        newZoomPos = QPoint(x,y);
+        break;
+    default:
+    break;
+    }
+    if (newZoomPos != oldZoomPos) m_CompleteView->move(newZoomPos);
+}
+
+void RevGraphView::contentsMovingSlot(int x,int y)
+{
+    QRect z(int(x * _cvZoom), int(y * _cvZoom),
+        int(visibleWidth() * _cvZoom)-1, int(visibleHeight() * _cvZoom)-1);
+    if (0) qDebug("moving: (%d,%d) => (%d/%d - %dx%d)",
+                x, y, z.x(), z.y(), z.width(), z.height());
+    m_CompleteView->setZoomRect(z);
+}
+
+void RevGraphView::zoomRectMoved(int dx,int dy)
+{
+  if (leftMargin()>0) dx = 0;
+  if (topMargin()>0) dy = 0;
+  scrollBy(int(dx/_cvZoom),int(dy/_cvZoom));
+}
+
+void RevGraphView::zoomRectMoveFinished()
+{
+#if 0
+    if (_zoomPosition == Auto) 
+#endif
+    updateSizes();
+}
+
+void RevGraphView::resizeEvent(QResizeEvent*e)
+{
+    QCanvasView::resizeEvent(e);
+    if (m_Canvas) updateSizes(e->size());
 }
 
 #include "revgraphview.moc"

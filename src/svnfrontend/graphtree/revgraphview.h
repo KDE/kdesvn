@@ -31,6 +31,7 @@ class KProcess;
 class RevisionTree;
 class GraphTreeLabel;
 class GraphViewTip;
+class PannerView;
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
@@ -39,6 +40,7 @@ class RevGraphView : public QCanvasView
 {
     Q_OBJECT
 public:
+    enum ZoomPosition { TopLeft, TopRight, BottomLeft, BottomRight, Auto };
     /* avoid large copy operations */
     friend class RevisionTree;
 
@@ -73,6 +75,11 @@ public:
     typedef QMap<QString,keyData> trevTree;
 
     QString toolTip(const QString&nodename)const;
+  
+public slots:
+    virtual void contentsMovingSlot(int,int);
+    virtual void zoomRectMoved(int,int);
+    virtual void zoomRectMoveFinished();
 
 protected slots:
     virtual void readDotOutput(KProcess *   proc,char *   buffer,int   buflen);
@@ -92,6 +99,14 @@ protected:
 
     int _xMargin,_yMargin;
     GraphViewTip*m_Tip;
+    PannerView*m_CompleteView;
+    double _cvZoom;
+    ZoomPosition m_LastAutoPosition;
+
+    virtual void resizeEvent(QResizeEvent*);
+
+private:
+    void updateSizes(QSize s = QSize(0,0));
 };
 
 #endif

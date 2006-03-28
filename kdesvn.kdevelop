@@ -235,8 +235,8 @@
   </substmap>
   <kdevcppsupport>
     <references>
-      <pcs>KDElibs</pcs>
       <pcs>Qt</pcs>
+      <pcs>KDElibs</pcs>
     </references>
     <codecompletion>
       <includeGlobalFunctions>true</includeGlobalFunctions>
@@ -263,7 +263,7 @@
       </qtdesigner>
     </designerintegration>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
@@ -271,7 +271,7 @@
       <inlineSet>false</inlineSet>
     </creategettersetter>
     <qt>
-      <used>false</used>
+      <used>true</used>
       <version>3</version>
       <root>/usr/lib/qt-3.3</root>
     </qt>

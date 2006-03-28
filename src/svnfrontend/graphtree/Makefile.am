@@ -7,6 +7,6 @@ noinst_LTLIBRARIES = libgraphtree.la
 
 
 noinst_HEADERS = revgraphview.h revgraphitem.h treemap.h graphtree_defines.h \
-	graphtreelabel.h
+		graphtreelabel.h elogentry.h revisiontree.h
 libgraphtree_la_SOURCES = revgraphview.cpp revgraphitem.cpp treemap.cpp \
-	graphtreelabel.cpp
+		graphtreelabel.cpp elogentry.cpp revisiontree.cpp

@@ -39,6 +39,7 @@ class RevGraphView : public QCanvasView
 {
     Q_OBJECT
 public:
+    /* avoid large copy operations */
     friend class RevisionTree;
 
     RevGraphView(QWidget * parent = 0, const char * name = 0, WFlags f = 0);
@@ -46,9 +47,6 @@ public:
 
     void showText(const QString&s);
     void clear();
-#if 0
-    void addLabel(int row,int column, const QString&,const QString&,const svn::LogEntry&);
-#endif
 
     void beginInsert();
     void endInsert();

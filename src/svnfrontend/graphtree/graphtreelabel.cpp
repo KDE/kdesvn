@@ -21,16 +21,6 @@
 #include "graphtree_defines.h"
 #include <qpainter.h>
 
-#if 0
-GraphTreeLabel::GraphTreeLabel(const QString&name,const QString&action,const svn::LogEntry&entry
-    ,const QRect&r,QCanvas*c)
- : QCanvasRectangle(r,c),StoredDrawParams(), RevGraphItem(name,action,entry)
-{
-    setText(0,name);
-    setPosition(0, DrawParams::BottomCenter);
-}
-#endif
-
 GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRect&r,QCanvas*c)
     : QCanvasRectangle(r,c),StoredDrawParams(),RevGraphItem()
 {

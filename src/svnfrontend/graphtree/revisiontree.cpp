@@ -18,10 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisiontree.h"
-#include "stopdlg.h"
+#include "../stopdlg.h"
 #include "svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
-#include "graphtree/revgraphview.h"
+#include "revgraphview.h"
 #include "elogentry.h"
 
 #include <kdebug.h>

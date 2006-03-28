@@ -24,6 +24,7 @@
 #include <kdebug.h>
 #include <ktempfile.h>
 #include <kprocess.h>
+#include <klocale.h>
 #include <qtooltip.h>
 #include <math.h>
 
@@ -76,24 +77,6 @@ RevGraphView::~RevGraphView()
     delete m_Canvas;
     delete dotTmpFile;
 }
-
-#if 0
-void RevGraphView::addLabel(int row,int column, const QString&path,const QString&action,const svn::LogEntry&e)
-{
-    if (!m_Canvas) return;
-    /* dummy for test*/
-    int offset = (LABEL_HEIGHT+10)*row+30;
-    int x_pos = 10+column*(LABEL_WIDTH+20);
-    if (offset+LABEL_HEIGHT>m_Canvas->height()) {
-        m_Canvas->resize(m_Canvas->width(),offset+LABEL_HEIGHT);
-    }
-    QRect r(x_pos,offset,LABEL_WIDTH,LABEL_HEIGHT);
-
-    GraphTreeLabel*t=new GraphTreeLabel(path,action,e,r,m_Canvas);
-    t->show();
-    kdDebug()<<"addLabel "<<path << endl;
-}
-#endif
 
 void RevGraphView::showText(const QString&s)
 {
@@ -412,7 +395,7 @@ QString RevGraphView::toolTip(const QString&_nodename)const
     if (it==m_Tree.end()) {
         return res;
     }
-    res = QString("<html><b>%1</b<br>Revision: %2<br>Author: %3<br>Date: %4</html>")
+    res = i18n("<html><b>%1</b<br>Revision: %2<br>Author: %3<br>Date: %4</html>")
         .arg(it.data().name)
         .arg(it.data().rev)
         .arg(it.data().Author)
@@ -424,8 +407,8 @@ QString RevGraphView::toolTip(const QString&_nodename)const
     } else {
         sm = sp[0]+"...";
     }
-    if (sm.length()>30) {
-        sm.truncate(27);
+    if (sm.length()>50) {
+        sm.truncate(47);
         sm+="...";
     }
     res+=QString("<br>Log: %1").arg(sm);

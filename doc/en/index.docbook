@@ -120,11 +120,10 @@ revision history. (see installation appendix comment) -->
 <para>
 &kdesvn; is a <ulink url="http://subversion.tigris.org/">subversion client</ulink> for &kde;.
 </para>
-<para>You should have knowledge about subversion itself, but hopefully most items are describing
-itself.
+<para>You should have some knowledge about subversion itself, but hopefully most items are self explanatory.
 </para>
 <para>
-You may send bugreports and featurewishes on <ulink url="http://www.alwins-world.de/programs/mantis">
+You may send bugreports and feature wishes via <ulink url="http://www.alwins-world.de/programs/mantis">
 http://www.alwins-world.de/programs/mantis.
 </ulink>
 </para>
@@ -146,11 +145,11 @@ data in it. For Subversion repositories &kdesvn; is such a client.
 <varlistentry>
 <term>Working copy</term>
 <listitem><para>
-A flat copy of a repository on local filesystem. In here you can browse via every normal filemanager, edit files and so on.
-RCS-information you may read with clients like &kdesvn;.
+A flat copy of a repository on local filesystem. This is used like any normal filemanager, editing files and so forth.
+RCS-information you can read with clients like &kdesvn;.
 </para>
 <para>
-Remember that subversion doesn't know something about KIO, so a working copy must reside in an area where it may reached without specify any protocol, eg &quot;fish://&quot; or such isn't possible.
+Remember that subversion doesn't know something about KIO, so a working copy must reside in an area where it may reached without any specific protocol, eg &quot;fish://&quot; or such isn't possible.
 </para>
 </listitem>
 </varlistentry>
@@ -158,9 +157,9 @@ Remember that subversion doesn't know something about KIO, so a working copy mus
 <term>WebDav</term>
 <listitem><para>
 WebDav is a protocol which let you modify files on a remote webserver. Subversion is a special kind of WebDAV when repositories are accessed
-via webserver. In normal this is read-only. With special configures you may get a read-write enabled WebDAV which you may access via
+via webserver. In normal use this is read-only. With special configurations you may get a read-write enabled WebDAV which you may access via
 specialized browser. &kdesvn; is NOT a webdav-client, but Konqueror is via the &quot;webdav://&quot; protocol. But with &kdesvn; you
-may browse trough the versions of that repositories (via &quot;http://&quot;)
+may browse through the version tree of a repository (via &quot;http://&quot;)
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -179,28 +178,28 @@ may browse trough the versions of that repositories (via &quot;http://&quot;)
 <varlistentry>
 <term>http</term>
 <listitem><para>
-Standard webbrowser protocol.
+Standard web browser protocol.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>https</term>
 <listitem><para>
-Standard encrypted webbrowser protocol
+Standard encrypted web browser protocol
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>(k)svn+http</term>
 <listitem><para>
-Standard webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
+Standard web browser protocol. May be used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>(k)svn+https</term>
 <listitem><para>
-Standard encrypted webbrowser protocol. May used to let konqueror automatic call &kdesvn;.
+Standard encrypted web browser protocol. May be used to let konqueror automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
@@ -241,38 +240,37 @@ This list may used for urls given for <link linkend="kdesvn-commandline">command
 <sect1 id="first_steps">
 <title>Beginning with subversion and kdesvn</title>
 <para>
-This section is mostly for beginners not familiar with subversion which tries to understand how subversions and/or RCS works.
+This section is mostly for beginners not familiar with subversion and explains how subversions and/or RCS works.
 </para>
 
 <sect2>
 <title>Creating a working copy</title>
 <caution>
 <para>
-Working copies MUST accessible via local pathes. Subversion doesn't know something about pseudo filesystems like
-<prompt>smb://</prompt> or <prompt>fish://</prompt>. &kdesvn; translates some of them if possible (like <prompt>system:/home</prompt>) but isn't possible for networked
-stuff.
+Working copies MUST be accessible via local paths. Subversion doesn't know something about pseudo filesystems like
+<prompt>smb://</prompt> or <prompt>fish://</prompt>. &kdesvn; translates some of them if possible (like <prompt>system:/home</prompt>) but it isn't possible over a network.
 </para>
 </caution>
 <para>
-First of all a you must create a working copy of your repository. For that select
+First of all you must create a working copy of your repository. For that select
 
 <menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Checkout a repository</guimenuitem>
-</menuchoice>. Inside the following dialog you must select the URL of the repository you want to use. Eg, something like
-<prompt>http://localhost/repos/myproject</prompt>. Subfolders of repository are possible, too, eg,
+</menuchoice>. Inside the following dialog you must select the URL of the repository you want to use, e.g., something like
+<prompt>http://localhost/repos/myproject</prompt>. Subfolders of a repository are possible, too, e.g.,
 <prompt>http://localhost/repos/myproject/trunk</prompt> or similiar.
 </para>
 <para>
-Select and/or create a local folder, where this working copy should reside.
+Select and/or create a local folder, where the working copy should reside.
 </para>
 <para>
-Last but not least, the revision to checkout. Mostly that should be &quot;HEAD&quot;. That means that always the last stored version
+Last but not least, the revision to checkout. Mostly that should be &quot;HEAD&quot;. This ensures that the last stored version
 is the referenced version.
 </para>
 <para>
-After clicking on &quot;ok&quot; &kdesvn; create your new working copy and (if box was checked) opens it.
+After clicking on &quot;[OK]&quot; &kdesvn; will create your new working copy and (if the box was checked) opens it.
 </para>
 </sect2>
 
@@ -280,7 +278,7 @@ After clicking on &quot;ok&quot; &kdesvn; create your new working copy and (if b
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>
 <para>
-Entries may marked with overlayed icons when not in &quot;normal&quot; state.
+Entries may be marked with overlayed icons when not in &quot;normal&quot; state.
 <variablelist>
 
 <varlistentry>
@@ -294,7 +292,7 @@ Entries may marked with overlayed icons when not in &quot;normal&quot; state.
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry is locked. In last column the owner of lock is listed. This works only in working copy this moment due restrictions of subversion api!
+This entry is locked. In last column the owner of lock is listed. This works only in working copy at this moment due restrictions of the subversion API!
 </para></listitem>
 </varlistentry>
 
@@ -309,7 +307,7 @@ This entry is locked. In last column the owner of lock is listed. This works onl
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry or - if folder - an entry below has newer version in repository. Works only with subversion &#061;&gt;1.2 on local and remote.
+This entry or - if a folder - an entry below has newer version in repository. Works only with subversion &#061;&gt;1.2 on local and remote.
 </para></listitem>
 </varlistentry>
 
@@ -325,7 +323,7 @@ This entry or - if folder - an entry below has newer version in repository. Work
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry or - if folder - an entry below was changed on local disc.
+This entry or - if a folder - an entry below was changed on local disc.
 </para></listitem>
 </varlistentry>
 
@@ -340,7 +338,7 @@ This entry or - if folder - an entry below was changed on local disc.
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry is localy added to subversion but not yet committed.
+This entry is locally added to subversion but not yet committed.
 </para></listitem>
 </varlistentry>
 
@@ -355,7 +353,7 @@ This entry is localy added to subversion but not yet committed.
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry is localy deleted from subversion but this isn't yet committed.
+This entry is locally deleted from subversion but hasn't yet been committed.
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -378,11 +376,11 @@ This entry is localy deleted from subversion but this isn't yet committed.
 <sect1 id="kdesvn-kio-desc">
 <title>Description</title>
 <para>
-As of version 0.7.0 of &kappname; it comes with some modules integrating some command direct into konqueror.
+As of version 0.7.0 of &kappname; it comes with some modules integrating some commands directly into konqueror menus.
 <variablelist>
 <varlistentry>
 <term>KIO protocols</term>
-<listitem><para>It implements handlers for following protocols:
+<listitem><para>Implements handlers for following protocols:
 <itemizedlist>
 <listitem><para>ksvn+http</para></listitem>
 <listitem><para>ksvn+https</para></listitem>
@@ -390,10 +388,10 @@ As of version 0.7.0 of &kappname; it comes with some modules integrating some co
 <listitem><para>ksvn+ssh</para></listitem>
 <listitem><para>ksvn</para></listitem>
 </itemizedlist>
-The same may vor &quot;svn+...&quot; but as from kde 3.4 kdesdk has it own small svn-kio called &quot;svn+http&quot; and so on. So packages are organized that way - or should - that &quot;svn+...&quot; comes as extra package so it may installed if kdesdk isn't installed. 
+The same maybe for &quot;svn+...&quot; but as from kde 3.4, kdesdk has it own small svn-kio called &quot;svn+http&quot;etc. So packages are organized that way - or should that &quot;svn+...&quot; comes as an extra package so it may installed if kdesdk hasn't installed it. 
 </para>
 <para>
-These protocols are designed only for repositories, not for working copies. Eg. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository in difference to the application itself or KPart. 
+These protocols are designed only for repositories, not for working copies. E.g. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository different to the application itself or KPart. 
 Working copies may browsed with konqueror.
 </para>
 <para>
@@ -404,11 +402,11 @@ For browsing at a specific revision you may append the query <link linkend="revi
 <varlistentry>
 <term>Context menus</term>
 <listitem><para>
-&kappname; installs context menues for konqueror. Them may seen with right click into browser window (of course, only in standard view, not any KPart) so it is possible doing most used stuff direct from within konqueror (or other filemanagers reading konquerors context menues like krusader). This is done via a call
+&kappname; installs context menues for konqueror. Them may be seen with right mouse click in the browser window (only in standard view, not any KPart) so it is possible to do most used actions direct from within konqueror (or any other filemanagers that read konquerors context menues like krusader). This is done via a call
 to the <link linkend="kdesvn-commandline">commandline variant of &kappname;</link>.
 </para>
 <para>
-This menu is static up to kde 3.5 so you should care about what you're selecting. Otherwise &kappname; prints a error box.
+This menu is static up to kde 3.5, so you should care about what you're selecting. Otherwise &kappname; prints an error box.
 </para>
 </listitem>
 </varlistentry>
@@ -417,8 +415,7 @@ This menu is static up to kde 3.5 so you should care about what you're selecting
 <sect2>
 <title>Usage of KIO outside konqueror - an example</title>
 <para>
-Every &kde; based application may use these protocols. So it would be possible to retrieve all differences between two revisions with kdiff3 without 
-giving it a deep knowledge about.
+Every &kde; based application may use these protocols. So it would be possible to retrieve all differences between two revisions with kdiff3 without any deep knowledge.
 </para>
 <para>
 <example>
@@ -429,18 +426,18 @@ kdiff3 \
   ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
 </programlisting>
 <para>
-Let kdiff3 print all differences between two revision. And yes. Making that within kdesvn (diffing two revisions) is MUCH faster 'cause in that case internal mechanisms of subversion are used.
+Let kdiff3 print all differences between two revisions. Note! Using this within kdesvn (diff'ing two revisions) is MUCH faster because the internal mechanisms of subversion are used.
 </para>
 </example>
 </para>
 </sect2>
 </sect1>
 <sect1 id="kio-svn-special">
-<title>Programmers info about KIO::ksvn</title>
+<title>Programmers information about KIO::ksvn</title>
 <para>
-<note><para>You may skip that if not interested in KIO programming.</para></note>
-KIO::ksvn::special knows following operations, them are made most equal in call to the current existing in KIO from kdesdk
-so for instance kdevelop may use it if kdesdk isn't installed but kdesvn::KIO::svn.
+<note><para>You may skip this if not interested in KIO programming.</para></note>
+KIO::ksvn::special knows the following operations, these are made almost equal in call to the current existing in KIO from kdesdk
+so, for instance, kdevelop may use it if kdesdk isn't installed but uses kdesvn::KIO::svn.
 </para>
 <sect2>
 <title>Commandlist</title>
@@ -468,8 +465,8 @@ so for instance kdevelop may use it if kdesdk isn't installed but kdesvn::KIO::s
 KURL repository, KURL target, int revnumber, QString revkind
 </para>
 <para>
-The target will NOT modified, eg., the content will real checked out there without creating a subfolder! eg, source may
-http://server/repos/project/trunk, target /home/user/proj/ then content of trunk will copied into /home/user/proj/ not
+The target will NOT be modified, e.g., but the content will be checked out without creating a subfolder! e.g., the source may be
+http://server/repos/project/trunk, target /home/user/proj/ then the contents of trunk will copied into /home/user/proj/ not
 /home/user/proj/trunk/!
 </para>
 </entry>
@@ -505,7 +502,7 @@ Format of revstring is described in <link linkend="revision-syntax">Appendix</li
 int startrevnumber,QString startrevstring,int endrevnumber,QString endrevstring,KURL::List
 </para>
 <para>
-Use this with care - this may get a lot of data.
+Use this with care - this may produce a lot of data.
 </para>
 </entry>
 <entry>Yes</entry>
@@ -608,7 +605,7 @@ Return values may given via metadata, see apidoc for details.
 
 <row>
 <entry>path</entry>
-<entry>Path of item action was made on, eg. given url</entry>
+<entry>Path of the item action was made on, eg. given url</entry>
 </row>
 
 <row>
@@ -660,7 +657,7 @@ Return values may given via metadata, see apidoc for details.
 </row>
 <row>
 <entry>loggedpath</entry>
-<entry>On which single path the entries loggedaction and so on are set. (path is set to the calling url)</entry>
+<entry>On which single path the entries logged action and so on are set. (path is set to the calling url)</entry>
 </row>
 <row>
 <entry>diffresult</entry>
@@ -681,15 +678,15 @@ Return values may given via metadata, see apidoc for details.
 <sect1 id="kdesvn-commandline-overview">
 <title>Overview</title>
 <para>
-Some subversion operation may used via commandline, eg., like a standard commandline client but user intaraction are made via KDE-UI. The standard syntax is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>.
+Some subversion operations may used via the commandline, eg., like a standard commandline client but user interaction is made via KDE-UI. The standard syntax is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>.
 </para>
 <para>
-If a single revision on a single url is wantet it may set as parameter of the url 
+If a single revision on a single url is wanted it may be set as a parameter of the url 
 <programlisting>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting> This will overwrite the option <prompt>-r &lt;rev&gt;</prompt>.
 </para>
 <para>
 A revision may given as
-number or one of <prompt>HEAD</prompt> or <prompt>BASE</prompt> or as date format like {YYYY-MM-DD}.
+a number or one of <prompt>HEAD</prompt> or <prompt>BASE</prompt> or as date format like {YYYY-MM-DD}.
 </para>
 </sect1>
 <sect1 id="kdesvn-command-list">
@@ -726,12 +723,12 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 </row>
 <row>
 <entry>copy (or cp)</entry>
-<entry>Copy item inside working copy or repository. If target isn't given, &kappname; asks.</entry>
+<entry>Copy item inside working copy or repository. If target isn't given, &kappname; will prompt.</entry>
 <entry></entry>
 </row>
 <row>
 <entry>move (or mv, rename)</entry>
-<entry>Move/Rename item inside working copy or repository. If target isn't given, &kappname; asks.</entry>
+<entry>Move/Rename item inside working copy or repository. If target isn't given, &kappname; will prompt.</entry>
 <entry></entry>
 </row>
 <row>
@@ -751,32 +748,32 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 </row>
 <row>
 <entry>diff</entry>
-<entry>Diff two revisions of item or to items at specific revision</entry>
+<entry>Diff two revisions of item or diff two items at specific revision</entry>
 <entry>-r startrev:endrev</entry>
 </row>
 <row>
 <entry>info</entry>
-<entry>Detailled info about item</entry>
+<entry>Detailed information about the item</entry>
 <entry>-r revision</entry>
 </row>
 <row>
 <entry>checkout (or co)</entry>
-<entry>Checkout repository-path into a new working copy path. Target path and source revision will asked.</entry>
+<entry>Checkout repository-path into a new working copy path. Target path and source revision will be asked for.</entry>
 <entry></entry>
 </row>
 <row>
 <entry>checkoutto (or coto)</entry>
-<entry>Checkout repository-path into a new working copy path. In difference to above the source path and source revision will asked.</entry>
+<entry>Checkout repository-path into a new working copy path. The difference of the source path and source revision will be asked for.</entry>
 <entry></entry>
 </row>
 <row>
 <entry>export</entry>
-<entry>Export repository- or working copy-path into directory. Target path and source revision will asked.</entry>
+<entry>Export repository- or working copy-path into directory. Target path and source revision will be asked for.</entry>
 <entry></entry>
 </row>
 <row>
 <entry>exportto</entry>
-<entry>Export repository- or working copy-path into directory. Source path and source revision will asked.</entry>
+<entry>Export repository- or working copy-path into directory. Source path and source revision will be asked for.</entry>
 <entry></entry>
 </row>
 <row>
@@ -786,7 +783,7 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 </row>
 <row>
 <entry>add</entry>
-<entry>add url to working copy. url must below a working copy (its not an import!)</entry>
+<entry>add url to working copy. url must belong to a working copy (its not an import!)</entry>
 <entry></entry>
 </row>
 <row>
@@ -848,16 +845,16 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <sect2>
 <title>The &quot;log&quot; command</title>
 <para>
-Log command displays a dialog containing the log of the given url. With subversion 1.2 or above it accepts a limit eg. how many entries it has to display.
+Log command displays a dialog containing the log of the given url. With subversion 1.2 or above it accepts a limit e.g. how many entries it has to display.
 </para>
 <para>
-Inside that dialog you may select log entries and getting differences between them.
+Inside that dialog you may select log entries and get the differences between them.
 <example>
 <title>Display the last 20 commit logs</title>
 <programlisting>
 kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
 </programlisting>
-<para>Beware of order of revision: You want go from HEAD to START for the LAST one. So you must give as starting revision HEAD. Otherwise you would get
+<para>Beware of order of revision: You want go from HEAD to START for the LAST one. So you must giverevision HEAD as starting point, otherwise you would get
 the first 20 entries.</para>
 </example>
 </para>
@@ -865,7 +862,7 @@ the first 20 entries.</para>
 <sect2>
 <title>The &quot;diff&quot; command</title>
 <para>
-You get differences between revisions of an item or between to items inside same working copy or repository. When diffing revisions of an item that revisions
+You get differences between revisions of an item or between to items inside same working copy or repository. When diff'ing revisions of an item that revisions
 may gived as <prompt>-r STARTREV:ENDREV</prompt>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
 <example>
 <title>Print difference against repository, eg. local changes</title>
@@ -881,7 +878,7 @@ kdesvn exec diff -r 21:20 myfile.c
 </example>
 </para>
 <para>
-When diffing two items revisions may appended to url of items. eg: 
+When diffing two items revisions may be appended to url of items. e.g.: 
 <programlisting>http://server/path/item?rev=HEAD</programlisting>
 <example>
 <title>Diffing two tagged versions</title>
@@ -918,7 +915,7 @@ or menu bars. -->
 <guimenu>File</guimenu>
 <guimenuitem>Open</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Opens a local working copy previous checked out or a repository</action></para></listitem>
+<listitem><para><action>Open a local working copy or a repository previously checked out</action></para></listitem>
 </varlistentry>
 <varlistentry>
 <term>
@@ -930,7 +927,7 @@ or menu bars. -->
 <guimenuitem>Close</guimenuitem>
 </menuchoice>
 </term>
-<listitem><para><action>Close</action> current opend repository or working copy</para></listitem>
+<listitem><para><action>Close</action> current opened repository or working copy</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -960,8 +957,7 @@ see konqueror help
 <guimenu>Subversion</guimenu>
 <guimenuitem>Refresh view</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Refresh</action> the current status of all displayed items. Means ask for each item displayed for 
-current status.
+<listitem><para><action>Refresh</action> the current status of all displayed items. This will list each item asked for to be displayed at current status.
 </para></listitem>
 
 </varlistentry>
@@ -978,8 +974,8 @@ current status.
 <guimenuitem>Full log</guimenuitem>
 </menuchoice></term>
 <listitem>
-<para><action>Display</action> lifetime log of the current selected item.
-Be carefull, that may real long!</para>
+<para><action>Display</action> lifetime log of the the currently selected item.
+Be careful, this list may be really big!</para>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -1006,7 +1002,7 @@ Be carefull, that may real long!</para>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Blame</guimenuitem>
 </menuchoice></term>
-<listitem><para>Makes annotate list over all checkins. That may consume time!</para></listitem>
+<listitem><para>Makes an annotated list over all checkins. That may consume time!</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1022,7 +1018,7 @@ Be carefull, that may real long!</para>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Cat head</guimenuitem>
 </menuchoice></term>
-<listitem><para>Shows the content of the last commited version of that entry. (May different to working copy version if working on a WC!)</para></listitem>
+<listitem><para>Shows the content of the last commited version of that entry. (May be different to working copy version if working on a WC!)</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1049,7 +1045,7 @@ Be carefull, that may real long!</para>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Delete selected files/dirs</guimenuitem>
 </menuchoice></term>
-<listitem><para>Delete selected entries. If working in a working copy you must commit your deletions after that.</para></listitem>
+<listitem><para>Delete selected entries. If working in a working copy you must commit your deletions afterwards.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1065,7 +1061,7 @@ Be carefull, that may real long!</para>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Import directories into current</guimenuitem>
 </menuchoice></term>
-<listitem><para>Let you select directories you want to import into current selected directory</para></listitem>
+<listitem><para>Select directories you want to import into the current selected directory</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1091,7 +1087,7 @@ subversion information.
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Lock current items</guimenuitem>
 </menuchoice></term>
-<listitem><para>Mark current items as locked. Read the subversion handbook before using that!
+<listitem><para>Mark current items as locked. Read the subversion handbook before using this!
 </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -1100,7 +1096,7 @@ subversion information.
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Unlock current items</guimenuitem>
 </menuchoice></term>
-<listitem><para>Remove locks on current items. Read the subversion handbook before using that!
+<listitem><para>Remove locks on current items. Read the subversion handbook before using this!
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -1140,7 +1136,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Diff against head</guimenuitem>
 </menuchoice></term>
-<listitem><para>Diffs current working copy against head of repository.</para></listitem>
+<listitem><para>Diff's current working copy against head of repository.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1149,7 +1145,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Properties</guimenuitem>
 </menuchoice></term>
-<listitem><para>View/Edit properties assigend with current entry.</para></listitem>
+<listitem><para>View/Edit properties assigned with current entry.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1182,7 +1178,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Merge two revisions</guimenuitem>
 </menuchoice></term>
-<listitem><para>Merge two revisions of that entry into working copy.</para></listitem>
+<listitem><para>Merge two revisions of entries into working copy.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1190,7 +1186,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Ignore/Unignore current item</guimenuitem>
 </menuchoice></term>
-<listitem><para>Edit property of parent directory of current item so that selected item will marked as ignored if not set otherwise remove it from ignorelist.</para></listitem>
+<listitem><para>Edit property of parent directory of current item so that selected item will marked as ignored if not set, otherwise remove it from ignorelist.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1198,7 +1194,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Cleanup</guimenuitem>
 </menuchoice></term>
-<listitem><para>Cleanup the working copy and removes (commit-)locks if any</para></listitem>
+<listitem><para>Clean up the working copy and removes (commit-)locks if any</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1206,7 +1202,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Switch repository</guimenuitem>
 </menuchoice></term>
-<listitem><para>Switch the root of the current working copy. &quot;relocate&quot; is not supported this moment.</para></listitem>
+<listitem><para>Switch the root of the current working copy. &quot;relocate&quot; This is not supported at this moment.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1214,7 +1210,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Switch to repository</guimenuitem>
 </menuchoice></term>
-<listitem><para>Opens the repository browsing this working copy comes from.</para></listitem>
+<listitem><para>Opens the repository tree of another working copy.</para></listitem>
 </varlistentry>
 </variablelist>
 </sect3>

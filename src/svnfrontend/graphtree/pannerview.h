@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2006 by Rajko Albrecht                                  *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,58 +17,36 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef REVISIONTREE_H
-#define REVISIONTREE_H
+#ifndef PANNERVIEW_H
+#define PANNERVIEW_H
 
-#include "svnqt/log_entry.hpp"
-#include "svnqt/revision.hpp"
-#include "svnqt/client.hpp"
-
-#include <qstring.h>
-#include <qmap.h>
-#include <qpixmap.h>
-
-class RtreeData;
-class QWidget;
-class KListViewItem;
-class KListView;
-class RListItem;
-class CContextListener;
-
-namespace svn
-{
-    class Client;
-}
+#include <qcanvas.h>
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevisionTree{
+class PannerView : public QCanvasView
+{
+Q_OBJECT
 public:
-    RevisionTree(svn::Client*,
-        CContextListener*aListener,
-        const QString& reposRoot,const QString&,const svn::Revision& baserevision,QWidget*treeParent,
-        QWidget*parent=0);
-    virtual ~RevisionTree();
+    PannerView(QWidget* parent=0, const char* name=0);
+    virtual ~PannerView();
 
-    bool isValid()const;
-    QWidget*getView();
+    void setZoomRect(const QRect& theValue);
+
+signals:
+  void zoomRectMoved(int dx, int dy);
+  void zoomRectMoveFinished();
 
 protected:
-    long m_Baserevision;
-    long m_InitialRevsion;
-    QString m_Path;
-    bool m_Valid;
-
-    RtreeData*m_Data;
-
-    bool topDownScan();
-    bool bottomUpScan(long startrev,unsigned recurse,const QString&path,RListItem*parent=0);
-    bool isDeleted(long revision,const QString&);
-
-    static bool isParent(const QString&_par,const QString&tar);
-    RListItem*getItem(RListItem*,long rev);
-    QPixmap getPixmap(const QString&);
+    virtual void drawContents(QPainter* p,  int clipx, int clipy, int clipw, int cliph);
+    virtual void contentsMouseMoveEvent(QMouseEvent* e);
+    virtual void contentsMousePressEvent(QMouseEvent* e);
+    virtual void contentsMouseReleaseEvent(QMouseEvent*);
+protected:
+    QRect m_ZoomRect;
+    bool m_Moving;
+    QPoint m_LastPos;
 };
 
 #endif

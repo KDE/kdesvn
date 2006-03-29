@@ -22,6 +22,7 @@
 #include "svnfrontend/fronthelpers/settings.h"
 #include "svnfrontend/displaysettings_impl.h"
 #include "svnfrontend/dispcolorsettings_impl.h"
+#include "svnfrontend/revisiontreesettingsdlg_impl.h"
 #include "subversionsettings_impl.h"
 #include "kdesvnview.h"
 #include "commandline_part.h"
@@ -331,6 +332,9 @@ void kdesvnPart::slotShowSettings()
         i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
     dialog->addPage(new DispColorSettings_impl(0,"color_items"),
         i18n("Colors"),"colorize",i18n("Color Settings"),true);
+    dialog->addPage(new RevisiontreeSettingsDlg_impl(0,"revisiontree_items"),
+        i18n("Revision tree"),"configure",i18n("Revision tree Settings"),true);
+
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
     connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
     dialog->show();

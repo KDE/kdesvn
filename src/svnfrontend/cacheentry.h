@@ -25,6 +25,7 @@
 
 // std::map 'cause QMap isn't usable
 #include <map>
+#include <algorithm>
 #include <qstring.h>
 #include <qstringlist.h>
 

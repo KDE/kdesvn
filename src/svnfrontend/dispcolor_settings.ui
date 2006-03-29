@@ -2,7 +2,7 @@
 <class>DispColorSettings</class>
 <widget class="QWidget">
     <property name="name">
-        <cstring>Form1</cstring>
+        <cstring>ColorSettings</cstring>
     </property>
     <property name="geometry">
         <rect>
@@ -197,13 +197,11 @@
         </widget>
     </vbox>
 </widget>
-<customwidgets>
-</customwidgets>
 <connections>
     <connection>
         <sender>kcfg_colored_state</sender>
         <signal>toggled(bool)</signal>
-        <receiver>Form1</receiver>
+        <receiver>ColorSettings</receiver>
         <slot>coloredStateToggled(bool)</slot>
     </connection>
 </connections>

@@ -3,7 +3,7 @@
   <general>
     <author>Rajko Albrecht</author>
     <email>ral@alwins-world.de</email>
-    <version>0.8.0</version>
+    <version>0.8.1</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -21,7 +21,7 @@
   </general>
   <kdevautoproject>
     <general>
-      <activetarget>src/svnqt/libsvnqt.la</activetarget>
+      <activetarget>src/libkdesvnpart.la</activetarget>
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
@@ -84,6 +84,23 @@
         <cflags/>
         <f77flags/>
       </debug>
+      <profile>
+        <envvars/>
+        <configargs>--enable-debug=full --prefix=`kde-config --prefix`</configargs>
+        <builddir>profile</builddir>
+        <topsourcedir/>
+        <cppflags>-DTESTING_RC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvnui.rc\\\&quot;\&quot; -DTESTING_PARTRC=\&quot;\\\&quot;\$(top_srcdir)/src/kdesvn_part.rc\\\&quot;\&quot;</cppflags>
+        <ldflags/>
+        <ccompiler>kdevgccoptions</ccompiler>
+        <cxxcompiler>kdevgppoptions</cxxcompiler>
+        <f77compiler>kdevg77options</f77compiler>
+        <ccompilerbinary/>
+        <cxxcompilerbinary/>
+        <f77compilerbinary/>
+        <cflags/>
+        <cxxflags>-O0 -pg -g3</cxxflags>
+        <f77flags/>
+      </profile>
     </configurations>
     <subclassing>
       <subclass uifile="/src/svnfrontend/copymoveview.ui" sourcefile="/src/svnfrontend/copymoveview_impl.cpp" />
@@ -218,8 +235,8 @@
   </substmap>
   <kdevcppsupport>
     <references>
-      <pcs>KDElibs</pcs>
       <pcs>Qt</pcs>
+      <pcs>KDElibs</pcs>
     </references>
     <codecompletion>
       <includeGlobalFunctions>true</includeGlobalFunctions>
@@ -235,13 +252,8 @@
     </codecompletion>
     <designerintegration>
       <qtdesigner>
-        <implementation class="DisplaySettings_impl" path="src/display_settings.ui" implementationpath="src/displaysettings_impl.h" />
-        <implementation class="SubversionSettings_impl" path="src/subversion_settings.ui" implementationpath="src/subversionsettings_impl.h" />
-        <implementation class="CheckoutInfo_impl" path="src/svnfrontend/checkoutinfo.ui" implementationpath="src/svnfrontend/checkoutinfo_impl.h" />
-        <implementation class="Logmsg_impl" path="src/svnfrontend/logmessage.ui" implementationpath="src/svnfrontend/logmsg_impl.h" />
         <implementation class="MergeDlg_impl" path="src/svnfrontend/merge_dlg.ui" implementationpath="src/svnfrontend/mergedlg_impl.h" />
-        <implementation class="Rangeinput_impl" path="src/svnfrontend/rangeinput.ui" implementationpath="src/svnfrontend/rangeinput_impl.h" />
-        <implementation class="SslTrustPrompt_impl" path="src/svnfrontend/ssltrustprompt.ui" implementationpath="src/svnfrontend/ssltrustprompt_impl.h" />
+        <implementation class="RevisiontreeSettingsDlg_impl" path="src/svnfrontend/revisiontree_settings.ui" implementationpath="src/svnfrontend/revisiontreesettingsdlg_impl.h" />
         <implementation class="SvnLogDlgImp" path="src/svnfrontend/svnlogdlg.ui" implementationpath="src/svnfrontend/svnlogdlgimp.h" />
       </qtdesigner>
     </designerintegration>
@@ -254,7 +266,7 @@
       <inlineSet>false</inlineSet>
     </creategettersetter>
     <qt>
-      <used>false</used>
+      <used>true</used>
       <version>3</version>
       <root>/usr/lib/qt-3.3</root>
     </qt>
@@ -264,7 +276,7 @@
     <bzip>false</bzip>
     <archname/>
     <appname>kdesvn</appname>
-    <version>0.8.0</version>
+    <version>0.8.1</version>
     <release/>
     <vendor/>
     <licence>LGPL</licence>

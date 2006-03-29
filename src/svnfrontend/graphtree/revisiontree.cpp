@@ -18,9 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisiontree.h"
-#include "stopdlg.h"
+#include "../stopdlg.h"
 #include "svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
+#include "revgraphview.h"
 #include "elogentry.h"
 
 #include <kdebug.h>
@@ -32,6 +33,9 @@
 #include <qwidget.h>
 #include <qdatetime.h>
 #include <qlabel.h>
+#include <qfile.h>
+#include <qtextstream.h>
+#include <qregexp.h>
 
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
@@ -43,30 +47,40 @@ public:
     virtual ~RtreeData();
 
     QMap<long,eLog_Entry> m_History;
+
     svn::LogEntriesMap m_OldHistory;
 
     long max_rev,min_rev;
     KProgressDialog*progress;
     QTime m_stopTick;
-    int current_row;
 
     QWidget*dlgParent;
+#ifdef USE_GRAPH
+    RevGraphView*m_TreeDisplay;
+#else
     KListView*m_Display;
+#endif
+
     svn::Client*m_Client;
     CContextListener* m_Listener;
 
     bool getLogs(const QString&);
+    unsigned long m_current_node;
 };
 
 RtreeData::RtreeData()
     : max_rev(-1),min_rev(-1)
 {
     progress=0;
+#ifdef USE_GRAPH
+    m_TreeDisplay = 0;
+#else
     m_Display = 0;
-    current_row=-1;
+#endif
     m_Client = 0;
     dlgParent = 0;
     m_Listener = 0;
+    m_current_node = 0;
 }
 
 RtreeData::~RtreeData()
@@ -99,6 +113,7 @@ public:
     RListItem(KListViewItem*,long rev);
     virtual ~RListItem();
     virtual int compare(QListViewItem*i,int,bool)const;
+    long revision()const{return m_rev;}
 };
 
 RListItem::RListItem(KListView*p,long rev)
@@ -192,16 +207,28 @@ RevisionTree::RevisionTree(svn::Client*aClient,
             m_Data->progress->progressBar()->setTotalSteps(100);
             m_Data->progress->progressBar()->setPercentageVisible(false);
             m_Data->m_stopTick.restart();
+#ifdef USE_GRAPH
+            m_Data->m_TreeDisplay=new RevGraphView(treeParent);
+            m_Data->m_current_node=0;
+#else
             m_Data->m_Display=new KListView(treeParent);
             m_Data->m_Display->addColumn(i18n("History of %1").arg(origin));
             m_Data->m_Display->setRootIsDecorated(true);
             m_Data->m_Display->setTreeStepSize(50);
-
+#endif
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
                 m_Valid=true;
+#ifdef USE_GRAPH
+                m_Data->m_TreeDisplay->dumpRevtree();
+#endif
             } else {
+#ifdef USE_GRAPH
+                delete m_Data->m_TreeDisplay;
+                m_Data->m_TreeDisplay = 0;
+#else
                 delete m_Data->m_Display;
                 m_Data->m_Display=0;
+#endif
             }
         }
     } else {
@@ -247,12 +274,10 @@ bool RevisionTree::topDownScan()
                         QString r = m_Path.mid(m_Data->m_OldHistory[j].changedPaths[i].path.length());
                         m_Path=m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
                         m_Path+=r;
-                        kdDebug()<<"Switched target to "<<m_Path<<endl;
                     }
                 } else if (m_Data->m_OldHistory[j].changedPaths[i].path==m_Path){
                     // here it is added
                     m_InitialRevsion = m_Data->m_OldHistory[j].revision;
-                    kdDebug()<<"Found add item at revision "<<m_InitialRevsion<<endl;
                 }
             } else {
             }
@@ -279,7 +304,6 @@ bool RevisionTree::topDownScan()
                     continue;
                 }
                 if (a=='R') {
-                    kdDebug()<<"Found native rename"<<endl;
                     m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
                     m_Data->m_OldHistory[j].changedPaths[i].action=0;
                 } else if (a=='A'){
@@ -336,14 +360,38 @@ bool RevisionTree::isValid()const
     return m_Valid;
 }
 
+static QString uniqueNodeName(long rev,const QString&path)
+{
+    QString res = path;
+    res.replace("\"","_quot_");
+    res.replace(" ","_space_");
+    QString n; n.sprintf("%05ld",rev);
+    res = "\""+n+QString("_%1\"").arg(res);
+    return res;
+}
+
+#ifdef USE_GRAPH
+bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_path,long _last)
+#else
 bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_path,RListItem*parentItem)
+#endif
 {
 #define REVENTRY m_Data->m_History[j]
 #define FORWARDENTRY m_Data->m_History[j].changedPaths[i]
 
     QString path = _path;
+#ifdef USE_GRAPH
+    long lastrev = _last;
+#else
+    long lastrev = -1;
+    if (parentItem) {
+        lastrev = parentItem->revision();
+    }
+#endif
+#ifdef DEBUG_PARSE
     kdDebug()<<"Searching for "<<path<< " at revision " << startrev
         << " recursion " << recurse << endl;
+#endif
     bool cancel = false;
     for (long j=startrev;j<=m_Data->max_rev;++j) {
         if (m_Data->m_stopTick.elapsed()>500) {
@@ -355,20 +403,28 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
             cancel=true;
             break;
         }
+#ifndef USE_GRAPH
         QString revText=QString("<br><i>%3</i><br><i>Revision %1</i><br><i>Author: %2</i>")
             .arg(j)
             .arg(REVENTRY.author)
             .arg(helpers::sub2qt::apr_time2qtString(REVENTRY.date));
+#endif
         for (unsigned i=0;i<REVENTRY.changedPaths.count();++i) {
             if (!isParent(FORWARDENTRY.path,path)) {
                 continue;
             }
+#ifndef USE_GRAPH
             QString text;
+#else
+            QString n1,n2;
+#endif
             if (isParent(FORWARDENTRY.path,path)) {
                 RListItem*previous = 0;
                 bool get_out = false;
                 if (FORWARDENTRY.path!=path) {
+#ifdef DEBUG_PARSE
                     kdDebug()<<"Parent rename? "<< FORWARDENTRY.path << " -> " << FORWARDENTRY.copyToPath << " -> " << FORWARDENTRY.copyFromPath << endl;
+#endif
                 }
                 if (FORWARDENTRY.action==INTERNALCOPY ||
                     FORWARDENTRY.action=='R' ||
@@ -385,47 +441,105 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     QString r = path.mid(FORWARDENTRY.path.length());
                     recPath= FORWARDENTRY.copyToPath;
                     recPath+=r;
-                    QPixmap p;
-                    QString text;
-                    previous = getItem(parentItem,j);
+#ifdef USE_GRAPH
+                    n1 = uniqueNodeName(lastrev,tmpPath);
+                    n2 = uniqueNodeName(j,recPath);
+                    m_Data->m_TreeDisplay->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
+                    fillItem(j,i,n2,recPath);
                     if (ren) {
+                        lastrev = j;
+                    }
+#else
+                    QPixmap p;
+                    previous = getItem(parentItem,j);
+#endif
+                    if (ren) {
+#ifdef DEBUG_PARSE
                         kdDebug()<<"Renamed to "<< recPath << " at revison " << j << endl;
+#endif
                         path=recPath;
+#ifndef USE_GRAPH
                         text=QString("<i>%1</i><br>").arg(tmpPath);
                         text+=QString("<b>Rename to</b><br>%1 (from rev %2)").arg(recPath)
                             .arg(FORWARDENTRY.copyFromRevision)+revText;
+#endif
                     } else {
+#ifdef DEBUG_PARSE
                         kdDebug()<<"Copy to "<< recPath << endl;
+#endif
+#ifndef USE_GRAPH
                         text=QString("<i>%1</i><br><b>Copy to</b><br>%2")
                             .arg(tmpPath)
                             .arg(recPath)+revText;
+#endif
                     }
+#ifndef USE_GRAPH
                     p = getPixmap(text);
                     previous->setPixmap(0,p);
+#endif
                     if (!ren) {
+#ifdef USE_GRAPH
+                        if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,j)) {
+#else
                         if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,previous)) {
+#endif
                             return false;
                         }
                     }
                 } else if (FORWARDENTRY.path==path) {
                     switch (FORWARDENTRY.action) {
                     case 'A':
+#ifdef DEBUG_PARSE
                         kdDebug()<<"Inserting adding base item"<<endl;
+#endif
+#ifdef USE_GRAPH
+                        n1 = uniqueNodeName(j,FORWARDENTRY.path);
+                        m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
+                        fillItem(j,i,n1,path);
+                        lastrev=j;
+#else
                         previous = getItem(parentItem,j);
                         text=QString("<b>Add</b><br>%1").arg(FORWARDENTRY.path)+revText;
                         previous->setPixmap(0,getPixmap(text));
+#endif
                     break;
                     case 'M':
+#ifdef DEBUG_PARSE
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
+#endif
+#ifdef USE_GRAPH
+                        n1 = uniqueNodeName(j,FORWARDENTRY.path);
+                        n2 = uniqueNodeName(lastrev,FORWARDENTRY.path);
+                        m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
+                        fillItem(j,i,n1,path);
+                        lastrev = j;
+#else
                         text=QString("<b>Modify</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
+#endif
                     break;
                     case 'D':
-                        kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
+#ifdef DEBUG_PARSE
+                        kdDebug()<<"(Sloppy match) Item deleted at revision "<< j << " recurse " << recurse << endl;
+#endif
+#ifdef USE_GRAPH
+                        n1 = uniqueNodeName(j,path);
+                        n2 = uniqueNodeName(lastrev,path);
+                        if (n1==n2) {
+                            /* cvs import - copy and deletion at same revision.
+                             * CVS sucks.
+                             */
+                            n1 = uniqueNodeName(j,"D_"+path);
+                        }
+                        m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
+                        fillItem(j,i,n1,path);
+                        lastrev = j;
+#else
                         text=QString("<b>Delete</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
+#endif
                         get_out= true;
                     break;
                     default:
@@ -434,20 +548,31 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                 } else {
                     switch (FORWARDENTRY.action) {
                     case 'D':
-                        kdDebug()<<"Item deleted at revision "<< j << " recurse " << recurse << endl;
+#ifdef DEBUG_PARSE
+                        kdDebug()<<"(Exact match) Item deleted at revision "<< j << " recurse " << recurse << endl;
+#endif
+#ifdef USE_GRAPH
+                        n1 = uniqueNodeName(j,path);
+                        n2 = uniqueNodeName(lastrev,path);
+                        if (n1==n2) {
+                            /* cvs import - copy and deletion at same revision.
+                             * CVS sucks.
+                             */
+                            n1 = uniqueNodeName(j,"D_"+path);
+                        }
+                        m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
+                        fillItem(j,i,n1,path);
+                        lastrev = j;
+#else
                         text=QString("<b>Delete</b>")+revText;
                         previous = getItem(parentItem,j);
                         previous->setPixmap(0,getPixmap(text));
+#endif
                         get_out = true;
                     break;
                     default:
                     break;
                     }
-                }
-                if (previous) {
-                    ++m_Data->current_row;
-                    QString tip = m_Data->m_OldHistory[j].author;
-//                    previous->setTooltip(tip);
                 }
                 if (get_out) {
                     return true;
@@ -460,12 +585,18 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 
 QWidget*RevisionTree::getView()
 {
+#ifdef USE_GRAPH
+    return m_Data->m_TreeDisplay;
+#else
     return m_Data->m_Display;
+#endif
 }
 
 RListItem*RevisionTree::getItem(RListItem*parent,long rev)
 {
-    RListItem * res;
+    RListItem * res = 0;
+#ifndef USE_GRAPH
+    ++m_Data->current_row;
     if (parent) {
         kdDebug()<<"Item with parent"<<endl;
         res = new RListItem(parent,rev);
@@ -474,6 +605,7 @@ RListItem*RevisionTree::getItem(RListItem*parent,long rev)
     }
     res->setOpen(true);
     res->setMultiLinesEnabled(true);
+#endif
     return res;
 }
 
@@ -485,4 +617,14 @@ QPixmap RevisionTree::getPixmap(const QString&aText)
     l.setFrameStyle(QFrame::Box|QFrame::Plain);
     l.adjustSize();
     return QPixmap::grabWidget(&l);
+}
+
+void RevisionTree::fillItem(long rev,int pathIndex,const QString&nodeName,const QString&path)
+{
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Action=m_Data->m_History[rev].changedPaths[pathIndex].action;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].name=path;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].rev = rev;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Author=m_Data->m_History[rev].author;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Message=m_Data->m_History[rev].message;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(m_Data->m_History[rev].date);
 }

@@ -28,7 +28,7 @@
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "logmsg_impl.h"
-#include "revisiontree.h"
+#include "graphtree/revisiontree.h"
 #include "fronthelpers/settings.h"
 #include "svnqt/client.hpp"
 #include "svnqt/annotate_line.hpp"

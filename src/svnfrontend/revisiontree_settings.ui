@@ -1,0 +1,238 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>RevisiontreeSettingsDlg</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>RevisionTreeSettings</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>320</width>
+            <height>319</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Revisiontree Settings</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QButtonGroup">
+            <property name="name">
+                <cstring>kcfg_tree_direction</cstring>
+            </property>
+            <property name="title">
+                <string>Direction of revision tree</string>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>layout1</cstring>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QRadioButton">
+                            <property name="name">
+                                <cstring>m_LeftRight</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Left to right</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton">
+                            <property name="name">
+                                <cstring>m_BottomTop</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Bottom to top</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton">
+                            <property name="name">
+                                <cstring>m_Topbottom</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Top to bottom</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton">
+                            <property name="name">
+                                <cstring>m_RightLeft</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Right to left</string>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout4</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>m_AddColorLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Color for added items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KColorButton">
+                    <property name="name">
+                        <cstring>kcfg_tree_add_color</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Color for deleted items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KColorButton">
+                    <property name="name">
+                        <cstring>kcfg_tree_delete_color</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Color for copied items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KColorButton">
+                    <property name="name">
+                        <cstring>kcfg_tree_copy_color</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout5</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel4</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Color for renamed items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KColorButton">
+                    <property name="name">
+                        <cstring>kcfg_tree_rename_color</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout6</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel5</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Color for modified items:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KColorButton">
+                    <property name="name">
+                        <cstring>kcfg_tree_modify_color</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<tabstops>
+    <tabstop>m_LeftRight</tabstop>
+    <tabstop>m_RightLeft</tabstop>
+    <tabstop>m_Topbottom</tabstop>
+    <tabstop>m_BottomTop</tabstop>
+</tabstops>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kcolorbutton.h</includehint>
+    <includehint>kcolorbutton.h</includehint>
+    <includehint>kcolorbutton.h</includehint>
+    <includehint>kcolorbutton.h</includehint>
+    <includehint>kcolorbutton.h</includehint>
+</includehints>
+</UI>

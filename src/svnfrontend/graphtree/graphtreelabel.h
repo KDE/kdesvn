@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2006 by Rajko Albrecht                                  *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,52 +17,57 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "elogentry.h"
+#ifndef GRAPHTREELABEL_H
+#define GRAPHTREELABEL_H
 
-#include <kdebug.h>
+#include <treemap.h>
+#include <qcanvas.h>
 
-eLog_Entry::eLog_Entry(const svn::LogEntry&old)
-    : svn::LogEntry(old)
+/**
+	@author Rajko Albrecht <ral@alwins-world.de>
+*/
+class GraphTreeLabel : public QCanvasRectangle,StoredDrawParams
 {
-}
+public:
+    GraphTreeLabel(const QString&,const QString&,const QRect&r,QCanvas*c);
+    virtual ~GraphTreeLabel();
 
-eLog_Entry::eLog_Entry()
-    : svn::LogEntry()
-{
-}
+    virtual int rtti()const;
+    virtual void drawShape(QPainter& p);
 
-eLog_Entry::~eLog_Entry()
-{
-}
+    void setBgColor(const QColor&);
 
-void eLog_Entry::addCopyTo(const QString&current,const QString&target,
-                            svn_revnum_t target_rev,char _action,svn_revnum_t from_rev)
+    const QString&nodename()const;
+
+protected:
+    QString m_Nodename;
+};
+
+
+class GraphEdge;
+
+class GraphEdgeArrow:public QCanvasPolygon
 {
-    svn::LogChangePathEntry _entry;
-    _entry.copyToPath=target;
-    _entry.path = current;
-    _entry.copyToRevision = target_rev;
-    _entry.action=_action;
-    _entry.copyFromRevision = from_rev;
-    switch (_action) {
-        case 'A':
-            if (!target.isEmpty()) {
-                //kdDebug()<<"Adding a history "<< current << " -> " << target << endl;
-                _entry.action = 'H';
-            }else{
-            }
-            break;
-        case 'D':
-            break;
-        case 'R':
-            if (!target.isEmpty()) {
-                kdDebug()<<"Adding a rename "<< current << " -> " << target << endl;
-            }
-            break;
-        case 'M':
-            break;
-        default:
-            break;
-    }
-    changedPaths.push_back(_entry);
-}
+public:
+    GraphEdgeArrow(GraphEdge*,QCanvas*);
+    GraphEdge*edge();
+    virtual void drawShape(QPainter&);
+    int rtti()const;
+
+private:
+    GraphEdge*_edge;
+};
+
+/* line */
+class GraphEdge:public QCanvasSpline
+{
+public:
+    GraphEdge(QCanvas*);
+    virtual ~GraphEdge();
+
+    virtual void drawShape(QPainter&);
+    QPointArray areaPoints() const;
+    virtual int rtti()const;
+};
+
+#endif

@@ -107,4 +107,30 @@
    <default>255,0,0</default>
   </entry>
  </group>
+ <group name="revision_tree">
+  <entry key="tree_direction" type="Int">
+   <default>0</default>
+   <label>Direction of revision tree</label>
+  </entry>
+  <entry key="tree_add_color" type="Color">
+   <default>#00FF00</default>
+   <label>Color for added items</label>
+  </entry>
+  <entry key="tree_delete_color" type="Color">
+   <default>#FF0000</default>
+   <label>Color for deleted items</label>
+  </entry>
+  <entry key="tree_copy_color" type="Color">
+   <default>#C0C0C0</default>
+   <label>Color for copied items</label>
+  </entry>
+  <entry key="tree_rename_color" type="Color">
+   <default>#C0C0C0</default>
+   <label>Color for renamed items</label>
+  </entry>
+  <entry key="tree_modify_color" type="Color">
+   <default>#a0a0a4</default>
+   <label>Color for modified items</label>
+  </entry>
+ </group>
 </kcfg>

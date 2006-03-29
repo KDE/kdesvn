@@ -75,6 +75,8 @@ protected:
     static bool isParent(const QString&_par,const QString&tar);
     RListItem*getItem(RListItem*,long rev);
     QPixmap getPixmap(const QString&);
+
+    void fillItem(long revIndex,int pathIndex,const QString&nodeName,const QString&path);
 };
 
 #endif

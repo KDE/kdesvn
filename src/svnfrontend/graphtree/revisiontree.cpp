@@ -445,12 +445,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     n1 = uniqueNodeName(lastrev,tmpPath);
                     n2 = uniqueNodeName(j,recPath);
                     m_Data->m_TreeDisplay->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
-                    m_Data->m_TreeDisplay->m_Tree[n2].Action=FORWARDENTRY.action;
-                    m_Data->m_TreeDisplay->m_Tree[n2].name=recPath;
-                    m_Data->m_TreeDisplay->m_Tree[n2].rev = j;
-                    m_Data->m_TreeDisplay->m_Tree[n2].Author=REVENTRY.author;
-                    m_Data->m_TreeDisplay->m_Tree[n2].Message=REVENTRY.message;
-                    m_Data->m_TreeDisplay->m_Tree[n2].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
+                    fillItem(j,i,n2,recPath);
                     if (ren) {
                         lastrev = j;
                     }
@@ -500,11 +495,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 #ifdef USE_GRAPH
                         n1 = uniqueNodeName(j,FORWARDENTRY.path);
                         m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
-                        m_Data->m_TreeDisplay->m_Tree[n1].name=path;
-                        m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
+                        fillItem(j,i,n1,path);
                         lastrev=j;
 #else
                         previous = getItem(parentItem,j);
@@ -520,12 +511,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         n1 = uniqueNodeName(j,FORWARDENTRY.path);
                         n2 = uniqueNodeName(lastrev,FORWARDENTRY.path);
                         m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
-                        m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
-                        m_Data->m_TreeDisplay->m_Tree[n1].name=path;
-                        m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
+                        fillItem(j,i,n1,path);
                         lastrev = j;
 #else
                         text=QString("<b>Modify</b>")+revText;
@@ -547,12 +533,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                             n1 = uniqueNodeName(j,"D_"+path);
                         }
                         m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
-                        m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
-                        m_Data->m_TreeDisplay->m_Tree[n1].name=path;
-                        m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
+                        fillItem(j,i,n1,path);
                         lastrev = j;
 #else
                         text=QString("<b>Delete</b>")+revText;
@@ -580,12 +561,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                             n1 = uniqueNodeName(j,"D_"+path);
                         }
                         m_Data->m_TreeDisplay->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
-                        m_Data->m_TreeDisplay->m_Tree[n1].Action=FORWARDENTRY.action;
-                        m_Data->m_TreeDisplay->m_Tree[n1].name=path;
-                        m_Data->m_TreeDisplay->m_Tree[n1].rev = j;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Author=REVENTRY.author;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Message=REVENTRY.message;
-                        m_Data->m_TreeDisplay->m_Tree[n1].Date=helpers::sub2qt::apr_time2qtString(REVENTRY.date);
+                        fillItem(j,i,n1,path);
                         lastrev = j;
 #else
                         text=QString("<b>Delete</b>")+revText;
@@ -641,4 +617,14 @@ QPixmap RevisionTree::getPixmap(const QString&aText)
     l.setFrameStyle(QFrame::Box|QFrame::Plain);
     l.adjustSize();
     return QPixmap::grabWidget(&l);
+}
+
+void RevisionTree::fillItem(long rev,int pathIndex,const QString&nodeName,const QString&path)
+{
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Action=m_Data->m_History[rev].changedPaths[pathIndex].action;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].name=path;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].rev = rev;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Author=m_Data->m_History[rev].author;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Message=m_Data->m_History[rev].message;
+    m_Data->m_TreeDisplay->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(m_Data->m_History[rev].date);
 }

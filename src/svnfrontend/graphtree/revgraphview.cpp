@@ -21,6 +21,7 @@
 #include "graphtreelabel.h"
 #include "pannerview.h"
 #include "graphtree_defines.h"
+#include "../fronthelpers/settings.h"
 #include <kapp.h>
 #include <kdebug.h>
 #include <ktempfile.h>
@@ -335,20 +336,23 @@ QColor RevGraphView::getBgColor(const QString&nodeName)
     }
     switch (it.data().Action) {
         case 'D':
-            res = Qt::red;
+            res = Settings::tree_delete_color();
             break;
         case 'M':
-            res = Qt::gray;
+            res = Settings::tree_modify_color();
             break;
         case 'A':
-            res = Qt::green;
+            res = Settings::tree_add_color();
             break;
         case 'C':
-        case 'R':
         case 1:
+            res = Settings::tree_copy_color();
+            break;
+        case 'R':
         case 2:
-            res = Qt::lightGray;
+            res = Settings::tree_rename_color();
         default:
+            res = Settings::tree_modify_color();
             break;
     }
     return res;
@@ -370,7 +374,25 @@ void RevGraphView::dumpRevtree()
 
     *stream << "digraph \"callgraph\" {\n";
     *stream << "  bgcolor=\"transparent\";\n";
-    *stream << QString("  rankdir=LR;\n");
+    int dir = Settings::tree_direction();
+    *stream << QString("  rankdir=\"");
+    switch (dir) {
+        case 3:
+            *stream << "RL";
+        break;
+        case 2:
+            *stream << "TB";
+        break;
+        case 1:
+            *stream << "BT";
+        break;
+        case 0:
+        default:
+            *stream << "LR";
+        break;
+    }
+    *stream << "\";\n";
+
     //*stream << QString("  overlap=false;\n  splines=true;\n");
 
     RevGraphView::trevTree::ConstIterator it1;

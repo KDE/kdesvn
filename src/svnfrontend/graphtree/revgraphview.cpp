@@ -351,6 +351,7 @@ QColor RevGraphView::getBgColor(const QString&nodeName)
         case 'R':
         case 2:
             res = Settings::tree_rename_color();
+            break;
         default:
             res = Settings::tree_modify_color();
             break;

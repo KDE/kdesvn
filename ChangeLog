@@ -1,3 +1,8 @@
+version 0.8.1
+    * revision tree is generated using dot.
+    * colors and direction of tree may set by user
+    * fix compile error
+
 version 0.8.0
     * subversion wrapper made as shared lib so binaries are smaller
     * all possible subversion calls switched to subversion 1.2 API

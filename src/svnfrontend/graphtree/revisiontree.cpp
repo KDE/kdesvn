@@ -304,7 +304,9 @@ bool RevisionTree::topDownScan()
                     continue;
                 }
                 if (a=='R') {
+#if 0
                     m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
+#endif
                     m_Data->m_OldHistory[j].changedPaths[i].action=0;
                 } else if (a=='A'){
                     a=INTERNALCOPY;
@@ -427,12 +429,14 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 #endif
                 }
                 if (FORWARDENTRY.action==INTERNALCOPY ||
-                    FORWARDENTRY.action=='R' ||
+                    /* FORWARDENTRY.action=='R' || */
                     FORWARDENTRY.action==INTERNALRENAME ) {
+#if 0
                     if (FORWARDENTRY.action=='R' && FORWARDENTRY.path!=path ) {
                         continue;
                     }
-                    bool ren = FORWARDENTRY.action=='R'||FORWARDENTRY.action==INTERNALRENAME;
+#endif
+                    bool ren = /* FORWARDENTRY.action=='R'|| */ FORWARDENTRY.action==INTERNALRENAME;
                     QString tmpPath = path;
                     QString recPath;
                     if (FORWARDENTRY.copyToPath.length()==0) {

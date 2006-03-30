@@ -19,8 +19,7 @@ libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
 		display_settings.ui displaysettings_impl.cpp subversionsettings_impl.cpp modifiedthread.cpp \
 		tcontextlistener.cpp threadcontextlistenerdata.cpp keystatus.cpp dispcolor_settings.ui \
 		dispcolorsettings_impl.cpp cacheentry.cpp revisiontree_settings.ui \
-	revisiontreesettingsdlg_impl.cpp
->>>>>>> .merge-rechts.r725
+		revisiontreesettingsdlg_impl.cpp
 
 libsvnfrontend_la_LIBADD = \
 	$(top_builddir)/src/svnfrontend/fronthelpers/libsvnfrontend_helpers.la $(top_builddir)/src/svnfrontend/graphtree/libgraphtree.la

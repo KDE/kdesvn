@@ -260,6 +260,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
     if (rt.isValid()) {
         disp = rt.getView();
         if (disp) {
+            connect(disp,SIGNAL(dispDiff(const QString&)),this,SLOT(dispDiff(const QString&)));
             dlg.resize(dlg.configDialogSize(*(Settings::self()->config()),"revisiontree_dlg"));
             dlg.exec();
             dlg.saveDialogSize(*(Settings::self()->config()),"revisiontree_dlg",false);
@@ -835,6 +836,30 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
             svn::Path(p1),svn::Path(p2),
             r1, r2,
             true,false,false,ignore_content);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return;
+    }
+    EMIT_FINISHED;
+    dispDiff(ex);
+}
+
+void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
+{
+    if (!m_Data->m_CurrentContext) return;
+    QString ex = "";
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
+    kdDebug()<<"Non recourse diff"<<endl;
+    QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
+    bool ignore_content = Settings::diff_ignore_content();
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        ex = m_Data->m_Svnclient->diff(svn::Path(tn),
+            svn::Path(p1),svn::Path(p2),
+            r1, r2,
+            false,false,false,ignore_content);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;

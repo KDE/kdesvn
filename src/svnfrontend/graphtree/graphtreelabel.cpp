@@ -25,6 +25,7 @@ GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const
     : QCanvasRectangle(r,c),StoredDrawParams()
 {
     m_Nodename = _nodename;
+    m_SourceNode = QString::null;
     setText(0,text);
     setPosition(0, DrawParams::TopCenter);
     drawFrame(true);
@@ -60,6 +61,23 @@ void GraphTreeLabel::drawShape(QPainter& p)
     d.drawBack(&p,this);
     d.drawField(&p, 0, this);
     d.drawField(&p, 1, this);
+}
+
+void GraphTreeLabel::setSelected(bool s)
+{
+    QCanvasRectangle::setSelected(s);
+    StoredDrawParams::setSelected(s);
+    update();
+}
+
+const QString&GraphTreeLabel::source()const
+{
+    return m_SourceNode;
+}
+
+void GraphTreeLabel::setSource(const QString&_s)
+{
+    m_SourceNode=_s;
 }
 
 GraphEdge::GraphEdge(QCanvas*c)
@@ -137,4 +155,66 @@ int GraphEdgeArrow::rtti()const
 GraphEdge*GraphEdgeArrow::edge()
 {
     return _edge;
+}
+
+/* taken from KCacheGrind project */
+QPixmap*GraphMark::_p=0;
+
+GraphMark::GraphMark(GraphTreeLabel*n,QCanvas*c)
+    : QCanvasRectangle(c)
+{
+    if (!_p) {
+
+        int d = 5;
+        float v1 = 130.0, v2 = 10.0, v = v1, f = 1.03;
+
+        // calculate pix size
+        QRect r(0, 0, 30, 30);
+        while (v>v2) {
+            r.setRect(r.x()-d, r.y()-d, r.width()+2*d, r.height()+2*d);
+            v /= f;
+        }
+
+        _p = new QPixmap(r.size());
+        _p->fill(Qt::white);
+        QPainter p(_p);
+        p.setPen(Qt::NoPen);
+
+        r.moveBy(-r.x(), -r.y());
+
+        while (v<v1) {
+            v *= f;
+            p.setBrush(QColor(265-(int)v, 265-(int)v, 265-(int)v));
+
+            p.drawRect(QRect(r.x(), r.y(), r.width(), d));
+            p.drawRect(QRect(r.x(), r.bottom()-d, r.width(), d));
+            p.drawRect(QRect(r.x(), r.y()+d, d, r.height()-2*d));
+            p.drawRect(QRect(r.right()-d, r.y()+d, d, r.height()-2*d));
+
+            r.setRect(r.x()+d, r.y()+d, r.width()-2*d, r.height()-2*d);
+        }
+    }
+
+    setSize(_p->width(), _p->height());
+    move(n->rect().center().x()-_p->width()/2,
+    n->rect().center().y()-_p->height()/2);
+}
+
+GraphMark::~ GraphMark()
+{
+}
+
+bool GraphMark::hit(const QPoint&)const
+{
+    return false;
+}
+
+int GraphMark::rtti()const
+{
+    return GRAPHTREE_MARK;
+}
+
+void GraphMark::drawShape(QPainter&p)
+{
+    p.drawPixmap( int(x()), int(y()), *_p );
 }

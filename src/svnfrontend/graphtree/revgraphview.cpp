@@ -22,13 +22,22 @@
 #include "pannerview.h"
 #include "graphtree_defines.h"
 #include "../fronthelpers/settings.h"
+#include "../stopdlg.h"
+#include "svnqt/client.hpp"
+
 #include <kapp.h>
 #include <kdebug.h>
 #include <ktempfile.h>
+#include <ktempdir.h>
 #include <kprocess.h>
 #include <klocale.h>
+#include <kfiledialog.h>
+
 #include <qtooltip.h>
 #include <qwmatrix.h>
+#include <qpopupmenu.h>
+#include <qpainter.h>
+
 #include <math.h>
 
 #define LABEL_WIDTH 160
@@ -65,12 +74,16 @@ void GraphViewTip::maybeTip( const QPoint & pos)
     }
 }
 
-RevGraphView::RevGraphView(QWidget * parent, const char * name, WFlags f)
+RevGraphView::RevGraphView(CContextListener*aListener,svn::Client*_client,QWidget * parent, const char * name, WFlags f)
  : QCanvasView(parent,name,f)
 {
     m_Canvas = 0L;
+    m_Client = _client;
+    m_Listener = aListener;
     dotTmpFile = 0;
+    m_Selected = 0;
     renderProcess = 0;
+    m_Marker = 0;
     m_Tip = new GraphViewTip(this);
     m_CompleteView = new PannerView(this);
     m_CompleteView->setVScrollBarMode(QScrollView::AlwaysOff);
@@ -115,6 +128,15 @@ void RevGraphView::showText(const QString&s)
 
 void RevGraphView::clear()
 {
+    if (m_Selected) {
+        m_Selected->setSelected(false);
+        m_Selected=0;
+    }
+    if (m_Marker) {
+        m_Marker->hide();
+        delete m_Marker;
+        m_Marker=0;
+    }
     if (!m_Canvas) return;
     delete m_Canvas;
     m_Canvas = 0;
@@ -251,6 +273,10 @@ void RevGraphView::dotExit(KProcess*p)
             int indexHead = -1;
 
             QMap<QString,GraphTreeLabel*>::Iterator it;
+            it = m_NodeList.find(node2Name);
+            if (it!=m_NodeList.end()) {
+                it.data()->setSource(node1Name);
+            }
             it = m_NodeList.find(node1Name);
             if (it!=m_NodeList.end()) {
                 GraphTreeLabel*tlab = it.data();
@@ -310,7 +336,7 @@ void RevGraphView::dotExit(KProcess*p)
     renderProcess=0;
 }
 
-bool RevGraphView::isStart(const QString&nodeName)
+bool RevGraphView::isStart(const QString&nodeName)const
 {
     bool res = false;
     trevTree::ConstIterator it;
@@ -326,7 +352,17 @@ bool RevGraphView::isStart(const QString&nodeName)
     return res;
 }
 
-QColor RevGraphView::getBgColor(const QString&nodeName)
+char RevGraphView::getAction(const QString&nodeName)const
+{
+    trevTree::ConstIterator it;
+    it = m_Tree.find(nodeName);
+    if (it==m_Tree.end()) {
+        return (char)0;
+    }
+    return it.data().Action;
+}
+
+QColor RevGraphView::getBgColor(const QString&nodeName)const
 {
     trevTree::ConstIterator it;
     it = m_Tree.find(nodeName);
@@ -379,10 +415,10 @@ void RevGraphView::dumpRevtree()
     *stream << QString("  rankdir=\"");
     switch (dir) {
         case 3:
-            *stream << "RL";
+            *stream << "TB";
         break;
         case 2:
-            *stream << "TB";
+            *stream << "RL";
         break;
         case 1:
             *stream << "BT";
@@ -444,7 +480,7 @@ void RevGraphView::dumpRevtree()
         error+=" \".";
         showText(error);
         renderProcess=0;
-        //delete renderProcess;
+        //delete renderProcess;<
     }
 }
 
@@ -630,6 +666,31 @@ void RevGraphView::resizeEvent(QResizeEvent*e)
 void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
 {
     setFocus();
+
+    if (e->button() == Qt::LeftButton) {
+        QCanvasItemList l = canvas()->collisions(e->pos());
+        if (l.count()>0) {
+            QCanvasItem* i = l.first();
+            if (i->rtti()==GRAPHTREE_LABEL) {
+                if (m_Selected) {
+                    m_Selected->setSelected(false);
+                }
+                if (m_Marker) {
+                    m_Marker->hide();
+                    delete m_Marker;
+                    m_Marker=0;
+                }
+                GraphTreeLabel* gtl = (GraphTreeLabel*)i;
+                m_Marker = new GraphMark(gtl,m_Canvas);
+                m_Marker->setZ(-1);
+                m_Marker->show();
+                m_Selected = gtl;
+                m_Selected->setSelected(true);
+                m_Canvas->update();
+                m_CompleteView->updateCurrentRect();
+            }
+        }
+    }
     _isMoving = true;
     _lastPos = e->globalPos();
 }
@@ -650,6 +711,139 @@ void RevGraphView::contentsMouseMoveEvent ( QMouseEvent * e )
         _noUpdateZoomerPos = false;
         _lastPos = e->globalPos();
     }
+}
+
+void RevGraphView::setNewDirection(int dir)
+{
+    if (dir<0)dir=3;
+    else if (dir>3)dir=0;
+    Settings::setTree_direction(dir);
+    dumpRevtree();
+}
+
+void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
+{
+    if (!m_Canvas) return;
+    QCanvasItemList l = canvas()->collisions(e->pos());
+    QCanvasItem* i = (l.count() == 0) ? 0 : l.first();
+
+    QPopupMenu popup;
+    if (i && i->rtti()==GRAPHTREE_LABEL) {
+        bool f = false;
+
+        if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())=='M') {
+            popup.insertItem(i18n("Diff to previous"),301);
+            f=true;
+        }
+        if (m_Selected && getAction(m_Selected->nodename())!='D' && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
+            popup.insertItem(i18n("Diff to selected item"),302);
+            f=true;
+        }
+        if (f) popup.insertSeparator();
+    }
+    popup.insertItem(i18n("Rotate counter-clockwise"),101);
+    popup.insertItem(i18n("Rotate clockwise"),102);
+    popup.insertSeparator();
+    popup.insertItem(i18n("Save tree as png"),201);
+
+    int r = popup.exec(e->globalPos());
+
+    switch (r) {
+        case 101:
+        {
+            int dir = Settings::tree_direction();
+            setNewDirection(++dir);
+        }
+        break;
+        case 102:
+        {
+            int dir = Settings::tree_direction();
+            setNewDirection(--dir);
+        }
+        break;
+        case 201:
+        {
+            QString fn = KFileDialog::getSaveFileName(":","*.png");
+            if (!fn.isEmpty()) {
+                if (m_Marker) {
+                    m_Marker->hide();
+                }
+                if (m_Selected) {
+                    m_Selected->setSelected(false);
+                }
+                QPixmap pix(m_Canvas->size());
+                QPainter p(&pix);
+                m_Canvas->drawArea( m_Canvas->rect(), &p );
+                pix.save(fn,"PNG");
+                if (m_Marker) {
+                    m_Marker->show();
+                }
+                if (m_Selected) {
+                    m_Selected->setSelected(true);
+                    m_Canvas->update();
+                    m_CompleteView->updateCurrentRect();
+                }
+            }
+        }
+        break;
+        case 301:
+            if (i && i->rtti()==GRAPHTREE_LABEL && !((GraphTreeLabel*)i)->source().isEmpty()) {
+                makeDiffPrev((GraphTreeLabel*)i);
+            }
+        break;
+        case 302:
+            if (i && i->rtti()==GRAPHTREE_LABEL && m_Selected) {
+                makeDiff(((GraphTreeLabel*)i)->nodename(),m_Selected->nodename());
+            }
+        break;
+        default:
+        break;
+    }
+}
+
+void RevGraphView::makeDiffPrev(GraphTreeLabel*_l)
+{
+    if (!_l) return;
+    QString n1,n2;
+    n1 = _l->nodename();
+    n2 = _l->source();
+    makeDiff(n1,n2);
+}
+
+void RevGraphView::makeDiff(const QString&n1,const QString&n2)
+{
+    if (n1.isEmpty()||n2.isEmpty()) return;
+    trevTree::ConstIterator it;
+    it = m_Tree.find(n2);
+    if (it==m_Tree.end()) {
+        return;
+    }
+    svn::Revision sr(it.data().rev);
+    QString sp = _basePath+it.data().name;
+
+    it = m_Tree.find(n1);
+    if (it==m_Tree.end()) {
+        return;
+    }
+    svn::Revision tr(it.data().rev);
+    QString tp = _basePath+it.data().name;
+    QString ex = "";
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
+    kdDebug()<<"Non recourse diff"<<endl;
+    QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
+    bool ignore_content = Settings::diff_ignore_content();
+    try {
+        StopDlg sdlg(m_Listener,kapp->activeModalWidget(),0,"Diffing","Diffing - hit cancel for abort");
+        ex = m_Client->diff(svn::Path(tn),
+            svn::Path(sp),svn::Path(tp),
+            sr, tr,
+            false,false,false,ignore_content);
+    } catch (svn::ClientException e) {
+//        emit clientException(e.msg());
+        return;
+    }
+    emit dispDiff(ex);
 }
 
 #include "revgraphview.moc"

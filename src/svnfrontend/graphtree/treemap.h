@@ -731,7 +731,7 @@ private:
   TreeMapItem::SplitMode _splitMode;
   int _visibleWidth, _stopArea, _minimalArea, _borderWidth;
   bool _reuseSpace, _skipIncorrectBorder, _drawSeparators, _shading;
-  bool _allowRotation;  
+  bool _allowRotation;
   bool _transparent[4], _drawFrame[4];
   TreeMapItem * _needsRefresh;
   TreeMapItemList _selection;

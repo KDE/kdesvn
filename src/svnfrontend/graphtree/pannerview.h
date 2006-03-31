@@ -33,6 +33,7 @@ public:
     virtual ~PannerView();
 
     void setZoomRect(const QRect& theValue);
+    void updateCurrentRect();
 
 signals:
   void zoomRectMoved(int dx, int dy);

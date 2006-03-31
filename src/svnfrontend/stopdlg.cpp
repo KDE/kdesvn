@@ -76,11 +76,11 @@ void StopDlg::slotAutoShow()
 {
     bool hasDialogs = false;
     QWidget * w = kapp->activeModalWidget();
-    if (w && w!=this) {
+    if (w && w!=this && w!=parentWidget() ) {
         hasDialogs = true;
     }
     if (hasDialogs) {
-        kdDebug()<<"Hide me!" << endl;
+        kdDebug()<<"Hide me! (" << caption() << ")" << endl;
         hide();
     }
     if (mShown||mWait||hasDialogs) {

@@ -136,10 +136,10 @@ protected:
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
-    void dispDiff(const QString&);
     CheckModifiedThread*m_CThread,*m_UThread;
 
 public slots:
+    virtual void dispDiff(const QString&);
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();
@@ -159,6 +159,7 @@ public slots:
     virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
     virtual void makeDiff(const QStringList&,const svn::Revision&,const svn::Revision&);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
+    virtual void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotMerge(const QString&,const QString&, const QString&,

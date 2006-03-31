@@ -121,6 +121,7 @@ protected:
     virtual void contentsMouseReleaseEvent ( QMouseEvent * e );
     virtual void contentsMouseMoveEvent ( QMouseEvent*e);
     virtual void contentsContextMenuEvent(QContextMenuEvent*e);
+    virtual void contentsMouseDoubleClickEvent ( QMouseEvent * e );
 
     bool _isMoving;
     QPoint _lastPos;
@@ -135,6 +136,7 @@ private:
     void setNewDirection(int dir);
     void makeDiffPrev(GraphTreeLabel*);
     void makeDiff(const QString&,const QString&);
+    void makeSelected(GraphTreeLabel*);
 };
 
 #endif

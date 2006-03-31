@@ -663,34 +663,44 @@ void RevGraphView::resizeEvent(QResizeEvent*e)
     if (m_Canvas) updateSizes(e->size());
 }
 
-void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
+void RevGraphView::makeSelected(GraphTreeLabel*gtl)
+{
+    if (m_Selected) {
+        m_Selected->setSelected(false);
+    }
+    m_Selected=gtl;
+    if (m_Marker) {
+        m_Marker->hide();
+        delete m_Marker;
+        m_Marker=0;
+    }
+    if (gtl) {
+        m_Marker = new GraphMark(gtl,m_Canvas);
+        m_Marker->setZ(-1);
+        m_Marker->show();
+        m_Selected->setSelected(true);
+    }
+    m_Canvas->update();
+    m_CompleteView->updateCurrentRect();
+}
+
+void RevGraphView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 {
     setFocus();
-
     if (e->button() == Qt::LeftButton) {
         QCanvasItemList l = canvas()->collisions(e->pos());
         if (l.count()>0) {
             QCanvasItem* i = l.first();
             if (i->rtti()==GRAPHTREE_LABEL) {
-                if (m_Selected) {
-                    m_Selected->setSelected(false);
-                }
-                if (m_Marker) {
-                    m_Marker->hide();
-                    delete m_Marker;
-                    m_Marker=0;
-                }
-                GraphTreeLabel* gtl = (GraphTreeLabel*)i;
-                m_Marker = new GraphMark(gtl,m_Canvas);
-                m_Marker->setZ(-1);
-                m_Marker->show();
-                m_Selected = gtl;
-                m_Selected->setSelected(true);
-                m_Canvas->update();
-                m_CompleteView->updateCurrentRect();
+                makeSelected( (GraphTreeLabel*)i);
             }
         }
     }
+}
+
+void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
+{
+    setFocus();
     _isMoving = true;
     _lastPos = e->globalPos();
 }
@@ -729,17 +739,18 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
 
     QPopupMenu popup;
     if (i && i->rtti()==GRAPHTREE_LABEL) {
-        bool f = false;
-
         if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())=='M') {
             popup.insertItem(i18n("Diff to previous"),301);
-            f=true;
         }
         if (m_Selected && getAction(m_Selected->nodename())!='D' && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
             popup.insertItem(i18n("Diff to selected item"),302);
-            f=true;
         }
-        if (f) popup.insertSeparator();
+        if (m_Selected == i) {
+            popup.insertItem(i18n("Unselect item"),401);
+        } else {
+            popup.insertItem(i18n("Select item"),402);
+        }
+        popup.insertSeparator();
     }
     popup.insertItem(i18n("Rotate counter-clockwise"),101);
     popup.insertItem(i18n("Rotate clockwise"),102);
@@ -795,6 +806,12 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
             if (i && i->rtti()==GRAPHTREE_LABEL && m_Selected) {
                 makeDiff(((GraphTreeLabel*)i)->nodename(),m_Selected->nodename());
             }
+        break;
+        case 401:
+            makeSelected(0);
+        break;
+        case 402:
+            makeSelected((GraphTreeLabel*)i);
         break;
         default:
         break;

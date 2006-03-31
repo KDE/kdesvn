@@ -739,7 +739,7 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
 
     QPopupMenu popup;
     if (i && i->rtti()==GRAPHTREE_LABEL) {
-        if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())=='M') {
+        if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
             popup.insertItem(i18n("Diff to previous"),301);
         }
         if (m_Selected && getAction(m_Selected->nodename())!='D' && getAction(((GraphTreeLabel*)i)->nodename())!='D') {

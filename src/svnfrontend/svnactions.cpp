@@ -412,6 +412,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     ex = "";
 
     QString logMessage="";
+/*
     if (!m_Data->m_ParentList->isWorkingCopy()) {
         bool ok;
         logMessage = Logmsg_impl::getLogmessage(&ok,0,m_Data->m_ParentList->realWidget(),"logmsg_impl");
@@ -419,7 +420,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
             return QString::null;
         }
     }
-
+*/
     try {
         m_Data->m_Svnclient->mkdir(target,logMessage);
     }catch (svn::ClientException e) {

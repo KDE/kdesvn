@@ -132,7 +132,7 @@ private:
 protected slots:
     virtual void slotSelectBrowsingRevision();
     virtual void slotItemClicked(QListViewItem*);
-    virtual void slotRightButton(QListViewItem *, const QPoint &, int);
+    virtual void slotContextMenuRequested(QListViewItem *, const QPoint &, int);
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);

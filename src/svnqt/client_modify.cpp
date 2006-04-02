@@ -269,7 +269,7 @@ namespace svn
 
   void
   Client_impl::mkdir (const Targets & targets,
-                 const QString& message) throw (ClientException)
+                 const QString&) throw (ClientException)
   {
     Pool pool;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
@@ -396,6 +396,10 @@ namespace svn
                          !recurse,
                          *m_context,
                          pool);
+
+    /* important! otherwise next op on repository uses that logmessage again! */
+    /// @todo replace that later with an extra method to reset logmessage only!
+    m_context->reset();
 
     if(error != NULL)
       throw ClientException (error);

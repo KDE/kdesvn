@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>320</width>
-            <height>319</height>
+            <width>326</width>
+            <height>312</height>
         </rect>
     </property>
     <property name="caption">
@@ -30,47 +30,37 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
+                <widget class="QRadioButton">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>m_LeftRight</cstring>
                     </property>
-                    <vbox>
-                        <property name="name">
-                            <cstring>unnamed</cstring>
-                        </property>
-                        <widget class="QRadioButton">
-                            <property name="name">
-                                <cstring>m_LeftRight</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Left to right</string>
-                            </property>
-                        </widget>
-                        <widget class="QRadioButton">
-                            <property name="name">
-                                <cstring>m_BottomTop</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Bottom to top</string>
-                            </property>
-                        </widget>
-                        <widget class="QRadioButton">
-                            <property name="name">
-                                <cstring>m_Topbottom</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Top to bottom</string>
-                            </property>
-                        </widget>
-                        <widget class="QRadioButton">
-                            <property name="name">
-                                <cstring>m_RightLeft</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Right to left</string>
-                            </property>
-                        </widget>
-                    </vbox>
+                    <property name="text">
+                        <string>Left to right</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_BottomTop</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Bottom to top</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_RightLeft</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Right to left</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_Topbottom</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Top to bottom</string>
+                    </property>
                 </widget>
             </vbox>
         </widget>
@@ -221,6 +211,8 @@
         </widget>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <tabstops>
     <tabstop>m_LeftRight</tabstop>
     <tabstop>m_RightLeft</tabstop>

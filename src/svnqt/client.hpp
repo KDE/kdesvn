@@ -320,15 +320,26 @@ namespace svn
     /**
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
-     * is a URL then authentication is usually required, see Auth.
+     * is a URL then authentication is usually required, see Auth and
+     * the callback asks for a logmessage.
      *
      * @param path
-     * @param message log message.
+     * @param message log message. This parameter will be ignored!
      * @exception ClientException
      */
     virtual void
     mkdir (const Path & path,
            const QString& message) throw (ClientException)=0;
+    /**
+     * Creates a directory directly in a repository or creates a
+     * directory on disk and schedules it for addition. If <i>path</i>
+     * is a URL then authentication is usually required, see Auth and
+     * the callback asks for a logmessage.
+     *
+     * @param targets encoded pathes to create
+     * @param message log message. This parameter will be ignored!
+     * @exception ClientException
+     */
     virtual void
     mkdir (const Targets & targets,
            const QString& message) throw (ClientException)=0;

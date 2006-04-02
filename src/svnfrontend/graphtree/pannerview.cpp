@@ -89,4 +89,13 @@ void PannerView::contentsMouseReleaseEvent(QMouseEvent*)
     emit zoomRectMoveFinished();
 }
 
+/*!
+    \fn PannerView::updateCurrentRect()
+ */
+void PannerView::updateCurrentRect()
+{
+    if (m_ZoomRect.isValid()) updateContents(m_ZoomRect);
+}
+
 #include "pannerview.moc"
+

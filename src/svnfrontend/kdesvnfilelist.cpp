@@ -167,8 +167,8 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     setupActions();
 
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
-    connect(this,SIGNAL(rightButtonPressed(QListViewItem *, const QPoint &, int)),this,
-        SLOT(slotRightButton(QListViewItem *, const QPoint &, int)));
+    connect(this,SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)),this,
+        SLOT(slotContextMenuRequested(QListViewItem *, const QPoint &, int)));
     connect(this,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
@@ -1181,7 +1181,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     }
 }
 
-void kdesvnfilelist::slotRightButton(QListViewItem *_item, const QPoint &, int)
+void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint &, int)
 {
     FileListViewItem*item = static_cast<FileListViewItem*>(_item);
     bool isopen = baseUri().length()>0;

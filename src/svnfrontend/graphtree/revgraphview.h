@@ -20,10 +20,13 @@
 #ifndef REVGRAPHVIEW_H
 #define REVGRAPHVIEW_H
 
+#include <svnqt/revision.hpp>
+
 #include <qcanvas.h>
 
 namespace svn {
     class LogEntry;
+    class Client;
 }
 
 class KTempFile;
@@ -31,7 +34,9 @@ class KProcess;
 class RevisionTree;
 class GraphTreeLabel;
 class GraphViewTip;
+class GraphMark;
 class PannerView;
+class CContextListener;
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
@@ -44,7 +49,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(QWidget * parent = 0, const char * name = 0, WFlags f = 0);
+    RevGraphView(CContextListener*,svn::Client*,QWidget * parent = 0, const char * name = 0, WFlags f = 0);
     virtual ~RevGraphView();
 
     void showText(const QString&s);
@@ -76,6 +81,9 @@ public:
 
     QString toolTip(const QString&nodename)const;
 
+signals:
+    void dispDiff(const QString&);
+
 public slots:
     virtual void contentsMovingSlot(int,int);
     virtual void zoomRectMoved(int,int);
@@ -87,13 +95,18 @@ protected slots:
 
 protected:
     QCanvas*m_Canvas;
+    GraphMark*m_Marker;
+    svn::Client*m_Client;
+    GraphTreeLabel*m_Selected;
+    CContextListener*m_Listener;
     KTempFile*dotTmpFile;
     QString dotOutput;
     KProcess*renderProcess;
     trevTree m_Tree;
     void dumpRevtree();
-    QColor getBgColor(const QString&nodeName);
-    bool isStart(const QString&nodeName);
+    QColor getBgColor(const QString&nodeName)const;
+    bool isStart(const QString&nodeName)const;
+    char getAction(const QString&)const;
 
     QMap<QString,GraphTreeLabel*> m_NodeList;
 
@@ -106,16 +119,24 @@ protected:
     virtual void resizeEvent(QResizeEvent*);
     virtual void contentsMousePressEvent ( QMouseEvent * e );
     virtual void contentsMouseReleaseEvent ( QMouseEvent * e );
-    virtual void contentsMouseMoveEvent ( QMouseEvent * e );
+    virtual void contentsMouseMoveEvent ( QMouseEvent*e);
+    virtual void contentsContextMenuEvent(QContextMenuEvent*e);
+    virtual void contentsMouseDoubleClickEvent ( QMouseEvent * e );
 
     bool _isMoving;
     QPoint _lastPos;
 
     bool _noUpdateZoomerPos;
 
+    QString _basePath;
+
 private:
     void updateSizes(QSize s = QSize(0,0));
     void updateZoomerPos();
+    void setNewDirection(int dir);
+    void makeDiffPrev(GraphTreeLabel*);
+    void makeDiff(const QString&,const QString&);
+    void makeSelected(GraphTreeLabel*);
 };
 
 #endif

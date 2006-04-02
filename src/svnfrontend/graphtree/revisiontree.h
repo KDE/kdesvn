@@ -32,15 +32,12 @@ class RtreeData;
 class QWidget;
 class KListViewItem;
 class KListView;
-class RListItem;
 class CContextListener;
 
 namespace svn
 {
     class Client;
 }
-
-#define USE_GRAPH 1
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
@@ -65,16 +62,10 @@ protected:
     RtreeData*m_Data;
 
     bool topDownScan();
-#ifdef USE_GRAPH
     bool bottomUpScan(long startrev,unsigned recurse,const QString&path,long sRev = -1);
-#else
-    bool bottomUpScan(long startrev,unsigned recurse,const QString&path,RListItem*parent=0);
-#endif
     bool isDeleted(long revision,const QString&);
 
     static bool isParent(const QString&_par,const QString&tar);
-    RListItem*getItem(RListItem*,long rev);
-    QPixmap getPixmap(const QString&);
 
     void fillItem(long revIndex,int pathIndex,const QString&nodeName,const QString&path);
 };

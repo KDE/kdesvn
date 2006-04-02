@@ -270,15 +270,11 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
         rev = svn::Revision::HEAD;
     }
     QString msg;
-    if (!getLogMsg(msg)) {
-        error(KIO::ERR_COULD_NOT_MKDIR,url.prettyURL());
-    } else {
-        svn::Path p(makeSvnUrl(url));
-        try {
-            m_pData->m_Svnclient->mkdir(p,msg);
-        }catch (svn::ClientException e) {
-            error( KIO::ERR_SLAVE_DEFINED,e.msg());
-        }
+    svn::Path p(makeSvnUrl(url));
+    try {
+        m_pData->m_Svnclient->mkdir(p,msg);
+    }catch (svn::ClientException e) {
+        error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     kdDebug()<<"kio_svn::get finished " << url << endl;
     finished();

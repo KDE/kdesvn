@@ -53,11 +53,6 @@ namespace svn {
 namespace svnqt {
     SvnqtVersion::SvnqtVersion()
     {
-#ifdef HAVE_CONFIG_H
-        if (QString(VERSION)!=QString(SVNQT_VERSIONSTRING)) {
-            qWarning("package version in svnqt missmatched release version!\n");
-        }
-#endif
     }
 
     int SvnqtVersion::version_major()

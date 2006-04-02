@@ -20,7 +20,7 @@
 #ifndef GRAPHTREELABEL_H
 #define GRAPHTREELABEL_H
 
-#include <treemap.h>
+#include <drawparams.h>
 #include <qcanvas.h>
 
 /**
@@ -38,11 +38,14 @@ public:
     void setBgColor(const QColor&);
 
     const QString&nodename()const;
+    const QString&source()const;
+    void setSource(const QString&);
+    virtual void setSelected(bool);
 
 protected:
     QString m_Nodename;
+    QString m_SourceNode;
 };
-
 
 class GraphEdge;
 
@@ -52,7 +55,7 @@ public:
     GraphEdgeArrow(GraphEdge*,QCanvas*);
     GraphEdge*edge();
     virtual void drawShape(QPainter&);
-    int rtti()const;
+    virtual int rtti()const;
 
 private:
     GraphEdge*_edge;
@@ -68,6 +71,19 @@ public:
     virtual void drawShape(QPainter&);
     QPointArray areaPoints() const;
     virtual int rtti()const;
+};
+
+class GraphMark:public QCanvasRectangle
+{
+public:
+    GraphMark(GraphTreeLabel*,QCanvas*);
+    virtual ~GraphMark();
+    virtual int rtti()const;
+    virtual bool hit(const QPoint&)const;
+
+    virtual void drawShape(QPainter&);
+private:
+    static QPixmap*_p;
 };
 
 #endif

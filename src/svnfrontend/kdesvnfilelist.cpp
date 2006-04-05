@@ -1978,21 +1978,19 @@ void kdesvnfilelist::slotInfo()
 {
     QPtrList<SvnItem> lst;
     SelectionList(&lst);
-    svn::Revision peg(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
-    svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
+    svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
     if (!isWorkingCopy()) {
         rev = m_pList->m_remoteRevision;
     }
     if (lst.count()==0) {
         if (!isWorkingCopy()) {
-            QStringList l; l.append(baseUri());
-            m_SvnWrapper->makeInfo(l,rev,peg,Settings::info_recursive());
+            m_SvnWrapper->makeInfo(baseUri(),rev,svn::Revision::UNDEFINED,Settings::info_recursive());
         } else {
             lst.append(SelectedOrMain());
         }
     }
     if (lst.count()>0) {
-        m_SvnWrapper->makeInfo(lst,rev,peg,Settings::info_recursive());
+        m_SvnWrapper->makeInfo(lst,rev,svn::Revision::UNDEFINED,Settings::info_recursive());
     }
 }
 

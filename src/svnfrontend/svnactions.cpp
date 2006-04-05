@@ -579,7 +579,7 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
     QString res = "<html><head></head><body>";
     SvnItem*item;
     for (item=lst.first();item;item=lst.next()) {
-        QString text = getInfo(item->fullName(),rev,item->stat().entry().revision(),recursive,true);
+        QString text = getInfo(item->fullName(),rev,peg,recursive,true);
         if (!text.isEmpty()) {
             res+="<h4 align=\"center\">"+item->fullName()+"</h4>";
             res+=text;

@@ -529,11 +529,17 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             text+=rb+i18n("UUID")+cs+((*it).uuid())+re;
         }
         text+=rb+i18n("Last author")+cs+((*it).cmtAuthor())+re;
-        text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qtString((*it).cmtDate())+re;
+        if ((*it).cmtDate()>0) {
+            text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qtString((*it).cmtDate())+re;
+        }
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
-        text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).textTime())+re;
+        if ((*it).textTime()>0) {
+            text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).textTime())+re;
+        }
         if (all) {
-            text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).propTime())+re;
+            if ((*it).propTime()>0) {
+                text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).propTime())+re;
+            }
             if ((*it).conflictNew().length()) {
                 text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
             }

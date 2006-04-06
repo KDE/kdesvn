@@ -143,10 +143,12 @@ namespace svn
     if (r.kind()!=kind()) {
         return false;
     }
-    if (m_revision.kind != svn_opt_revision_date) {
+    if (m_revision.kind == svn_opt_revision_number) {
         return revnum()==r.revnum();
+    } else if (m_revision.kind == svn_opt_revision_date) {
+        return date()==r.date();
     }
-    return date()==r.date();
+    return true;
   }
 
   bool Revision::operator!=(const svn_opt_revision_kind t)

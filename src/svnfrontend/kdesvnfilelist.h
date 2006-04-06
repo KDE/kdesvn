@@ -42,6 +42,10 @@ class SvnActions;
 namespace KIO {
     class Job;
 }
+
+namespace svn {
+    class Revision;
+}
 /**
 @author Rajko Albrecht
 */
@@ -66,6 +70,7 @@ public:
 
 protected:
     svn::Status m_mainEntry;
+    const svn::Revision& remoteRevision()const;
     bool m_deletePerfect;
     QMap<QString,bool> m_Dirsread;
 

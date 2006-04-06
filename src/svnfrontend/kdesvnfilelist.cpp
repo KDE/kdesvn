@@ -546,7 +546,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
-        kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
+        //kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
 
         // current item is not versioned
         if (!(*it).isVersioned()) {
@@ -2136,7 +2136,7 @@ void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
             vp.setY( itemRect( item ).y() );
             QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
             m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
-            m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())&&isWorkingCopy()
+            m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())/*&&isWorkingCopy()*/
                 &&Settings::display_previews_in_file_tips());
             setShowToolTips(false);
         } else {
@@ -2283,7 +2283,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
 
 void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer)
 {
-    FileListViewItem*_s,*_temp;
+    FileListViewItem*_s;
     if (!startAt) {
         _s = static_cast<FileListViewItem*>(firstChild());
     } else {
@@ -2400,10 +2400,18 @@ void kdesvnfilelist::slotMakeLog()
     // yes! so if we have a limit, the limit counts from HEAD
     // not from START
     svn::Revision start(svn::Revision::HEAD);
+    if (!isWorkingCopy()) {
+        start=m_pList->m_remoteRevision;
+    }
     svn::Revision end(svn::Revision::START);
     bool list = Settings::self()->log_always_list_changed_files();
     int l = Settings::self()->maximum_displayed_logs();
     m_SvnWrapper->makeLog(start,end,what,list,l);
+}
+
+const svn::Revision& kdesvnfilelist::remoteRevision()const
+{
+    return m_pList->m_remoteRevision;
 }
 
 #include "kdesvnfilelist.moc"

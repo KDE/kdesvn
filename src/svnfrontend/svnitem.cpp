@@ -48,6 +48,8 @@ public:
     SvnItem_p();
     SvnItem_p(const svn::Status&);
     virtual ~SvnItem_p();
+    KFileItem*createItem(const svn::Revision&peg);
+
 protected:
     svn::Status m_Stat;
     void init();
@@ -56,6 +58,7 @@ protected:
     QString m_infoText;
     KFileItem*m_fitem;
     bool isWc;
+    svn::Revision lRev;
 };
 
 SvnItem_p::SvnItem_p()
@@ -78,6 +81,7 @@ SvnItem_p::~SvnItem_p()
 void SvnItem_p::init()
 {
     m_full = m_Stat.path();
+    lRev=svn::Revision::UNDEFINED;
     while (m_full.endsWith("/")) {
         /* dir name possible */
         m_full.truncate(m_full.length()-1);
@@ -92,12 +96,54 @@ void SvnItem_p::init()
     m_url = m_Stat.entry().url();
     m_fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
     m_infoText = QString::null;
+    m_fitem = 0;
+}
+
+static bool revequal(const svn::Revision&r1,const svn::Revision&r2)
+{
+    if (r1.kind()!=r2.kind()) {
+        return false;
+    }
+    if (r1.kind()==svn_opt_revision_number) {
+        return r1.revnum()==r2.revnum();
+    } else if (r1.kind() == svn_opt_revision_date) {
+        return r1.date()==r2.date();
+    }
+    return true;
+}
+
+KFileItem*SvnItem_p::createItem(const svn::Revision&peg)
+{
     isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
+
     if (!isWc) {
-        m_fitem=0;
-    } else {
+        if (!m_fitem||!revequal(peg,lRev)) {
+            delete m_fitem;
+            m_fitem=0;
+            lRev=peg;
+            QString kfi_str=m_Stat.entry().url();
+            if (kfi_str.startsWith("svn://")) {
+                kfi_str="k"+kfi_str;
+            } else {
+                kfi_str="ksvn+"+kfi_str;
+            }
+            QString revstr="";
+            if (peg.kind()==svn::Revision::HEAD) {
+                revstr="?rev=HEAD";
+            } else if (peg.kind()==svn_opt_revision_number) {
+                revstr=QString("?rev=%1").arg(peg.revnum());
+            } else if (peg.kind()==svn_opt_revision_date) {
+                QDateTime t = helpers::sub2qt::apr_time2qt(peg.date());
+                revstr=QString("?rev={%1}").arg(t.toString("yyyy-MM-dd"));
+            }
+            kfi_str+=revstr;
+            kdDebug()<<kfi_str<<endl;
+            m_fitem=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,kfi_str);
+        }
+    } else if (!m_fitem){
         m_fitem = new KFileItem(KFileItem::Unknown,KFileItem::Unknown,m_Stat.path());
     }
+    return m_fitem;
 }
 
 SvnItem::SvnItem()
@@ -415,7 +461,8 @@ const QString& SvnItem::getToolTipText()
             svn::Revision rev(svn_opt_revision_unspecified);
             if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
                 /* remote */
-                rev = svn::Revision::HEAD;
+                rev = p_Item->m_Stat.entry().revision();
+                peg = correctPeg();
             } else {
                 /* local */
             }
@@ -433,5 +480,5 @@ const QString& SvnItem::getToolTipText()
 
 KFileItem*SvnItem::fileItem()
 {
-    return p_Item->m_fitem;
+    return p_Item->createItem(correctPeg());
 }

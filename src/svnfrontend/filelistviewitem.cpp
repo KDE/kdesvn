@@ -265,3 +265,8 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
     }
     QListViewItem::paintCell(p, _cg, column, width, alignment);
 }
+
+const svn::Revision&FileListViewItem::correctPeg()const
+{
+    return m_Ksvnfilelist->remoteRevision();
+}

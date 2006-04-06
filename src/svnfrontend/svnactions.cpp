@@ -439,7 +439,7 @@ QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const 
     SvnItem*item;
     for (item=lst.first();item;item=lst.next()) {
         if (all) res+="<h4 align=\"center\">"+item->fullName()+"</h4>";
-        res += getInfo(item->fullName(),rev,item->stat().entry().revision(),recursive,all);
+        res += getInfo(item->fullName(),rev,peg,recursive,all);
     }
     return res;
 }

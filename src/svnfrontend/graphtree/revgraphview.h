@@ -79,10 +79,14 @@ public:
 
     typedef QMap<QString,keyData> trevTree;
 
-    QString toolTip(const QString&nodename)const;
+    QString toolTip(const QString&nodename,bool full=false)const;
+
+    void setBasePath(const QString&);
+    void dumpRevtree();
 
 signals:
     void dispDiff(const QString&);
+    void dispDetails(const QString&);
 
 public slots:
     virtual void contentsMovingSlot(int,int);
@@ -103,7 +107,6 @@ protected:
     QString dotOutput;
     KProcess*renderProcess;
     trevTree m_Tree;
-    void dumpRevtree();
     QColor getBgColor(const QString&nodeName)const;
     bool isStart(const QString&nodeName)const;
     char getAction(const QString&)const;

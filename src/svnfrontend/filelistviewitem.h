@@ -62,6 +62,7 @@ public:
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
     virtual void setOpen(bool o);
     virtual void setPreviewPix(const QPixmap& pixmap);
+    virtual const svn::Revision&correctPeg()const;
 
 protected:
     QColor m_highColor;

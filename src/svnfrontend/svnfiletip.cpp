@@ -24,6 +24,7 @@
 #include <kglobalsettings.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
+#include <kdebug.h>
 
 #include <qlabel.h>
 #include <qtooltip.h>

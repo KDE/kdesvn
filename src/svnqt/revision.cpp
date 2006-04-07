@@ -23,6 +23,7 @@
  * ====================================================================
  */
 
+
 // svncpp
 #include "revision.hpp"
 #include "pool.hpp"
@@ -138,22 +139,24 @@ namespace svn
     return m_revision.kind;
   }
 
-  bool Revision::operator==(const Revision&r)
+  bool Revision::operator==(const Revision&r)const
   {
     if (r.kind()!=kind()) {
         return false;
     }
-    if (m_revision.kind != svn_opt_revision_date) {
+    if (m_revision.kind == svn_opt_revision_number) {
         return revnum()==r.revnum();
+    } else if (m_revision.kind == svn_opt_revision_date) {
+        return date()==r.date();
     }
-    return date()==r.date();
+    return true;
   }
 
-  bool Revision::operator!=(const svn_opt_revision_kind t)
+  bool Revision::operator!=(const svn_opt_revision_kind t)const
   {
     return kind()!=t;
   }
-  bool Revision::operator==(const svn_opt_revision_kind t)
+  bool Revision::operator==(const svn_opt_revision_kind t)const
   {
     return kind()==t;
   }

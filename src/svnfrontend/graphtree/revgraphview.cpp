@@ -484,7 +484,7 @@ void RevGraphView::dumpRevtree()
     }
 }
 
-QString RevGraphView::toolTip(const QString&_nodename)const
+QString RevGraphView::toolTip(const QString&_nodename,bool full)const
 {
     QString res = QString::null;
     trevTree::ConstIterator it;
@@ -492,23 +492,45 @@ QString RevGraphView::toolTip(const QString&_nodename)const
     if (it==m_Tree.end()) {
         return res;
     }
-    res = i18n("<html><b>%1</b<br>Revision: %2<br>Author: %3<br>Date: %4</html>")
-        .arg(it.data().name)
-        .arg(it.data().rev)
-        .arg(it.data().Author)
-        .arg(it.data().Date);
     QStringList sp = QStringList::split("\n",it.data().Message);
     QString sm;
     if (sp.count()==0) {
         sm = it.data().Message;
     } else {
-        sm = sp[0]+"...";
+        if (!full) {
+            sm = sp[0]+"...";
+        } else {
+            for (unsigned j = 0; j<sp.count(); ++j) {
+                if (j>0) sm+="<br>";
+                sm+=sp[j];
+            }
+        }
     }
-    if (sm.length()>50) {
+    if (!full && sm.length()>50) {
         sm.truncate(47);
         sm+="...";
     }
-    res+=QString("<br>Log: %1").arg(sm);
+    static QString csep = "</td><td>";
+    static QString rend = "</td></tr>";
+    static QString rstart = "<tr><td>";
+    res = QString("<html><body>");
+
+    if (!full) {
+        res+=QString("<b>%1</b>").arg(it.data().name);
+        res += i18n("<br>Revision: %2<br>Author: %3<br>Date: %4<br>Log:%5</html>")
+            .arg(it.data().rev)
+            .arg(it.data().Author)
+            .arg(it.data().Date)
+            .arg(sm);
+    } else {
+        res+="<table><tr><th colspan=\"2\"><b>"+it.data().name+"</b></th></tr>";
+        res+=rstart;
+        res+=i18n("<b>Revision</b>%1%2%3").arg(csep).arg(it.data().rev).arg(rend);
+        res+=rstart+i18n("<b>Author</b>%1%2%3").arg(csep).arg(it.data().Author).arg(rend);
+        res+=rstart+i18n("<b>Date</b>%1%2%3").arg(csep).arg(it.data().Date).arg(rend);
+        res+=rstart+i18n("<b>Log</b>%1%2%3").arg(csep).arg(sm).arg(rend);
+        res+="</table></body></html>";
+    }
     return res;
 }
 
@@ -693,6 +715,7 @@ void RevGraphView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
             QCanvasItem* i = l.first();
             if (i->rtti()==GRAPHTREE_LABEL) {
                 makeSelected( (GraphTreeLabel*)i);
+                emit dispDetails(toolTip(((GraphTreeLabel*)i)->nodename(),true));
             }
         }
     }
@@ -742,7 +765,8 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
             popup.insertItem(i18n("Diff to previous"),301);
         }
-        if (m_Selected && getAction(m_Selected->nodename())!='D' && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
+        if (m_Selected && m_Selected != i && getAction(m_Selected->nodename())!='D'
+            && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
             popup.insertItem(i18n("Diff to selected item"),302);
         }
         if (m_Selected == i) {
@@ -750,6 +774,8 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         } else {
             popup.insertItem(i18n("Select item"),402);
         }
+        popup.insertSeparator();
+        popup.insertItem(i18n("Display details"),403);
         popup.insertSeparator();
     }
     popup.insertItem(i18n("Rotate counter-clockwise"),101);
@@ -813,6 +839,9 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         case 402:
             makeSelected((GraphTreeLabel*)i);
         break;
+        case 403:
+            emit dispDetails(toolTip(((GraphTreeLabel*)i)->nodename(),true));
+        break;
         default:
         break;
     }
@@ -861,6 +890,11 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
         return;
     }
     emit dispDiff(ex);
+}
+
+void RevGraphView::setBasePath(const QString&_path)
+{
+    _basePath = _path;
 }
 
 #include "revgraphview.moc"

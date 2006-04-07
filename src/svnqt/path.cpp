@@ -23,6 +23,7 @@
  * ====================================================================
  */
 
+
 // subversion api
 #include "svn_path.h"
 
@@ -148,15 +149,15 @@ namespace svn
 
     // next search for last .
 #if QT_VERSION < 0x040000
-    int pos = basename.findRev(".");
+    int pos = basename.findRev(QChar('.'));
 #else
-    int pos = basename.lastIndexOf( "." );
+    int pos = basename.lastIndexOf(QChar('.'));
 #endif
 
     if (pos == -1)
     {
       filename = basename;
-      ext = "";
+      ext = QString::fromLatin1("");
     }
     else
     {

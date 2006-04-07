@@ -54,7 +54,7 @@ namespace svn
      *
      * @param path Path string
      */
-    Path (const QString & path = "");
+    Path (const QString & path = QString::null);
 
     /**
      * Constructor

@@ -33,6 +33,11 @@ class SvnItem_p;
 class SvnActions;
 class KFileItem;
 
+namespace svn
+{
+    class Revision;
+}
+
 class SvnItem
 {
 public:
@@ -43,6 +48,7 @@ public:
     virtual const QString&fullName()const;
     virtual const QString&shortName()const;
     virtual const QString&Url()const;
+    virtual const QString&kdeName(const svn::Revision&);
     virtual const QDateTime&fullDate()const;
     virtual bool isDir()const;
     virtual bool isVersioned()const;
@@ -55,6 +61,7 @@ public:
     virtual bool isLocked()const;
     virtual QString lockOwner()const;
     virtual QString getParentDir()const=0;
+    virtual const svn::Revision&correctPeg()const=0;
     virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
 
     QPixmap getPixmap(int size,bool overlay=true);

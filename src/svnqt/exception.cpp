@@ -23,6 +23,7 @@
  * ====================================================================
  */
 
+
 #include <qstring.h>
 
 // svncpp
@@ -108,7 +109,7 @@ namespace svn
       m->message = "Unknown error!\n";
       if (error->file)
       {
-        m->message += "In file ";
+        m->message += QString::fromUtf8("In file ");
         m->message += QString::fromUtf8(error->file);
         m->message += QString(" Line %1").arg(error->line);
       }

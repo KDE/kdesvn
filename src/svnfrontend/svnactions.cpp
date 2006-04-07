@@ -439,7 +439,7 @@ QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const 
     SvnItem*item;
     for (item=lst.first();item;item=lst.next()) {
         if (all) res+="<h4 align=\"center\">"+item->fullName()+"</h4>";
-        res += getInfo(item->fullName(),rev,item->stat().entry().revision(),recursive,all);
+        res += getInfo(item->fullName(),rev,peg,recursive,all);
     }
     return res;
 }
@@ -529,11 +529,17 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             text+=rb+i18n("UUID")+cs+((*it).uuid())+re;
         }
         text+=rb+i18n("Last author")+cs+((*it).cmtAuthor())+re;
-        text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qtString((*it).cmtDate())+re;
+        if ((*it).cmtDate()>0) {
+            text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qtString((*it).cmtDate())+re;
+        }
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
-        text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).textTime())+re;
+        if ((*it).textTime()>0) {
+            text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).textTime())+re;
+        }
         if (all) {
-            text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).propTime())+re;
+            if ((*it).propTime()>0) {
+                text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).propTime())+re;
+            }
             if ((*it).conflictNew().length()) {
                 text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
             }
@@ -573,7 +579,7 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
     QString res = "<html><head></head><body>";
     SvnItem*item;
     for (item=lst.first();item;item=lst.next()) {
-        QString text = getInfo(item->fullName(),rev,item->stat().entry().revision(),recursive,true);
+        QString text = getInfo(item->fullName(),rev,peg,recursive,true);
         if (!text.isEmpty()) {
             res+="<h4 align=\"center\">"+item->fullName()+"</h4>";
             res+=text;

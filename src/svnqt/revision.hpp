@@ -150,9 +150,9 @@ namespace svn
     const apr_time_t
     date () const;
 
-    bool operator==(const Revision&);
-    bool operator!=(const svn_opt_revision_kind);
-    bool operator==(const svn_opt_revision_kind);
+    bool operator==(const Revision&)const;
+    bool operator!=(const svn_opt_revision_kind)const;
+    bool operator==(const svn_opt_revision_kind)const;
   };
 }
 

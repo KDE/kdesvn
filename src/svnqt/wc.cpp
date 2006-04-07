@@ -76,9 +76,8 @@ namespace svn
       throw ClientException (error);
   }
 
-  QString Wc::getUrl(const QString&path) throw (ClientException)
+  const svn_wc_entry_t *Wc::getEntry( const QString &path ) throw ( ClientException )
   {
-    QString result = "";
     Pool pool;
     Path itemPath(path);
     svn_error_t * error = 0;
@@ -96,8 +95,26 @@ namespace svn
     if (error!=0) {
         throw ClientException(error);
     }
-    result = entry?QString::fromUtf8(entry->url):"";
+    return entry;
+  }
 
+  QString Wc::getUrl(const QString&path) throw (ClientException)
+  {
+    QString result = "";
+    const svn_wc_entry_t *entry;
+    entry = getEntry( path );
+    result = entry?QString::fromUtf8(entry->url):"";
+    
+    return result;
+  }
+  
+  QString Wc::getRepos(const QString&path) throw (ClientException)
+  {
+    QString result = "";
+    const svn_wc_entry_t *entry;
+    entry = getEntry( path );
+    result = entry?QString::fromUtf8(entry->repos):"";
+    
     return result;
   }
 }

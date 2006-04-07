@@ -800,7 +800,7 @@ void kdesvnfilelist::enableActions()
     m_CleanupAction->setEnabled(isWorkingCopy()&&dir);
     temp = filesActions()->action("make_check_unversioned");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&& (dir&&single) || none);
+        temp->setEnabled(isWorkingCopy()&& ((dir&&single) || none));
     }
 
     /* remote actions only */
@@ -888,14 +888,8 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         }
         return;
     }
-    QString what = fki->fullName();
-    if (!isWorkingCopy()) {
-        if (what.startsWith("svn://")) {
-            what="k"+what;
-        } else {
-            what="ksvn+"+what;
-        }
-    }
+    svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
+    QString what = fki->kdeName(rev);
     QString feditor = Settings::external_display();
     if ( feditor.compare("default") == 0 )
     {

@@ -25,6 +25,8 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+
+
 // svncpp
 #include "client_impl.hpp"
 
@@ -119,7 +121,7 @@ namespace svn
                      pool);
 #else
     QString url = pathOrUrl;
-    url+="/";
+    url+=QString::fromUtf8("/");
     bool _det = true;
 
     svn_error_t * error =

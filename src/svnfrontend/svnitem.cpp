@@ -49,11 +49,12 @@ public:
     SvnItem_p(const svn::Status&);
     virtual ~SvnItem_p();
     KFileItem*createItem(const svn::Revision&peg);
+    const QString& kdeName(const svn::Revision&);
 
 protected:
     svn::Status m_Stat;
     void init();
-    QString m_url,m_full,m_short;
+    QString m_url,m_full,m_short,m_kdename;
     QDateTime m_fullDate;
     QString m_infoText;
     KFileItem*m_fitem;
@@ -81,6 +82,7 @@ SvnItem_p::~SvnItem_p()
 void SvnItem_p::init()
 {
     m_full = m_Stat.path();
+    m_kdename="";
     lRev=svn::Revision::UNDEFINED;
     while (m_full.endsWith("/")) {
         /* dir name possible */
@@ -99,49 +101,41 @@ void SvnItem_p::init()
     m_fitem = 0;
 }
 
-static bool revequal(const svn::Revision&r1,const svn::Revision&r2)
+const QString& SvnItem_p::kdeName(const svn::Revision&r)
 {
-    if (r1.kind()!=r2.kind()) {
-        return false;
+    isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
+    if (!(r==lRev)||m_kdename.isEmpty()) {
+        lRev=r;
+        if (!isWc) {
+            m_kdename=m_Stat.entry().url();
+            if (m_kdename.startsWith("svn://")) {
+                m_kdename="k"+m_kdename;
+            } else {
+                m_kdename="ksvn+"+m_kdename;
+            }
+            QString revstr="";
+            if (lRev.kind()==svn::Revision::HEAD) {
+                revstr="?rev=HEAD";
+            } else if (lRev.kind()==svn_opt_revision_number) {
+                revstr=QString("?rev=%1").arg(lRev.revnum());
+            } else if (lRev.kind()==svn_opt_revision_date) {
+                QDateTime t = helpers::sub2qt::apr_time2qt(lRev.date());
+                revstr=QString("?rev={%1}").arg(t.toString("yyyy-MM-dd"));
+            }
+            m_kdename+=revstr;
+        } else {
+            m_kdename=m_Stat.path();
+        }
     }
-    if (r1.kind()==svn_opt_revision_number) {
-        return r1.revnum()==r2.revnum();
-    } else if (r1.kind() == svn_opt_revision_date) {
-        return r1.date()==r2.date();
-    }
-    return true;
+    return m_kdename;
 }
 
 KFileItem*SvnItem_p::createItem(const svn::Revision&peg)
 {
-    isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
-
-    if (!isWc) {
-        if (!m_fitem||!revequal(peg,lRev)) {
-            delete m_fitem;
-            m_fitem=0;
-            lRev=peg;
-            QString kfi_str=m_Stat.entry().url();
-            if (kfi_str.startsWith("svn://")) {
-                kfi_str="k"+kfi_str;
-            } else {
-                kfi_str="ksvn+"+kfi_str;
-            }
-            QString revstr="";
-            if (peg.kind()==svn::Revision::HEAD) {
-                revstr="?rev=HEAD";
-            } else if (peg.kind()==svn_opt_revision_number) {
-                revstr=QString("?rev=%1").arg(peg.revnum());
-            } else if (peg.kind()==svn_opt_revision_date) {
-                QDateTime t = helpers::sub2qt::apr_time2qt(peg.date());
-                revstr=QString("?rev={%1}").arg(t.toString("yyyy-MM-dd"));
-            }
-            kfi_str+=revstr;
-            kdDebug()<<kfi_str<<endl;
-            m_fitem=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,kfi_str);
-        }
-    } else if (!m_fitem){
-        m_fitem = new KFileItem(KFileItem::Unknown,KFileItem::Unknown,m_Stat.path());
+    if (!m_fitem||!(peg==lRev) ) {
+        delete m_fitem;
+        m_fitem=0;
+        m_fitem=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,kdeName(peg));
     }
     return m_fitem;
 }
@@ -481,4 +475,9 @@ const QString& SvnItem::getToolTipText()
 KFileItem*SvnItem::fileItem()
 {
     return p_Item->createItem(correctPeg());
+}
+
+const QString&SvnItem::kdeName(const svn::Revision&r)
+{
+    return p_Item->kdeName(r);
 }

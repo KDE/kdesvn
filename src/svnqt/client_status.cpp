@@ -25,6 +25,8 @@
 #if defined( _MSC_VER) && _MSC_VER <= 1200
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
+
+
 // svncpp
 #include "client_impl.hpp"
 
@@ -245,7 +247,7 @@ namespace svn
   dirEntryToStatus (const QString& path, const DirEntry & dirEntry)
   {
     QString url = path;
-    url += "/";
+    url += QString::fromUtf8("/");
     url += dirEntry.name();
     return Status (url, dirEntry);
   }
@@ -272,7 +274,7 @@ namespace svn
 
     StatusEntries entries;
     QString url = path;
-    url+="/";
+    url+=QString::fromUtf8("/");
     bool _det = detailed_remote;
 
 

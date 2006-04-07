@@ -23,6 +23,7 @@
  * ====================================================================
  */
 
+
 // svncpp
 #include "revision.hpp"
 #include "pool.hpp"
@@ -138,7 +139,7 @@ namespace svn
     return m_revision.kind;
   }
 
-  bool Revision::operator==(const Revision&r)
+  bool Revision::operator==(const Revision&r)const
   {
     if (r.kind()!=kind()) {
         return false;
@@ -151,11 +152,11 @@ namespace svn
     return true;
   }
 
-  bool Revision::operator!=(const svn_opt_revision_kind t)
+  bool Revision::operator!=(const svn_opt_revision_kind t)const
   {
     return kind()!=t;
   }
-  bool Revision::operator==(const svn_opt_revision_kind t)
+  bool Revision::operator==(const svn_opt_revision_kind t)const
   {
     return kind()==t;
   }

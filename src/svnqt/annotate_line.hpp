@@ -55,7 +55,7 @@ namespace svn
     }
     AnnotateLine()
     : m_line_no(0),m_revision(-1),
-      m_author(""),m_date(""),m_line(0)
+      m_author(),m_date(),m_line()
     {
     }
 

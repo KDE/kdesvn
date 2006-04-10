@@ -1,4 +1,4 @@
-INCLUDES = -I$(top_srcdir)/src/svnfrontend/fronthelpers $(all_includes)
+INCLUDES = -I$(top_srcdir)/src -I$(top_srcdir)/src/svnfrontend/fronthelpers $(all_includes)
 METASOURCES = AUTO
 SUBDIRS = fronthelpers graphtree
 

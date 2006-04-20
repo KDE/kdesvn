@@ -1,4 +1,4 @@
-INCLUDES = $(all_includes)
+INCLUDES = -I$(top_srcdir)/src $(all_includes)
 METASOURCES = AUTO
 BUILT_SOURCES = settings.h
 kde_kcfg_DATA = kdesvn_part.kcfg

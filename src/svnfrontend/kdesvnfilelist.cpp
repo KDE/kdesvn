@@ -169,7 +169,12 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
     connect(this,SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)),this,
         SLOT(slotContextMenuRequested(QListViewItem *, const QPoint &, int)));
+
+    /* not via executed 'cause click may used for selection - single click execution
+       just confuses in an application */
     connect(this,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
+    connect(this,SIGNAL(returnPressed(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
+
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
     connect(m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));

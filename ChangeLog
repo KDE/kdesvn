@@ -1,3 +1,7 @@
+version 0.8.3
+    * fix: when drag&drop starts from kdesvn urls from repositories didn't have a revision number
+    * fix: kdesvn wasn't able copy items from a specific revision (eg, restoring deleted items wasn't possible)
+
 version 0.8.2
     * fix: when creating dir in repository kdesvn/kio-ksvn asked twice for a logmessage
     * revision tree has context menues for diffs and detailed information

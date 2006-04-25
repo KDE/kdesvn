@@ -49,6 +49,7 @@ CopyMoveView_impl::CopyMoveView_impl(const QString&baseName,const QString&source
         m_HeadOneLabel->setText(i18n("Rename/move"));
     } else {
         m_HeadOneLabel->setText(i18n("Copy"));
+        m_ForceBox->hide();
     }
 }
 

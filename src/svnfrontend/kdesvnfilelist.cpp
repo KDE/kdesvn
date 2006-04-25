@@ -35,6 +35,7 @@
 #include "svnqt/status.hpp"
 #include "svnqt/url.hpp"
 #include "helpers/sshagent.h"
+#include "helpers/sub2qt.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -367,8 +368,8 @@ KURL::List kdesvnfilelist::selectedUrls()
     FileListViewItem*cur;
     while ( (cur=it.current())!=0) {
         ++it;
-        lst.append(cur->fullName());
-        kdDebug()<<"Appending " <<cur->fullName()<<endl;
+        /* for putting it to outside we must convert it to KIO urls */
+        lst.append(cur->kdeName(m_pList->m_remoteRevision));
     }
     return lst;
 }
@@ -1232,27 +1233,7 @@ void kdesvnfilelist::startDrag()
           kdWarning() << "Could not find multiple pixmap" << endl;
       }
     }
-    /* for putting it to outside we must convert it to KIO urls */
-    KURL::List::iterator it = urls.begin();
-    KURL uri = baseUri();
-    kdDebug()<<"Base protocol: " << uri.protocol()<<endl;
-    QString nProto;
-    if (uri.protocol()=="file" && !isWorkingCopy()) {
-        nProto="ksvn+file";
-    } else if (uri.protocol()=="http") {
-        nProto="ksvn+http";
-    } else if (uri.protocol()=="https") {
-        nProto="ksvn+https";
-    } else if (uri.protocol()=="svn") {
-        nProto="ksvn";
-    } else if (uri.protocol()=="svn+ssh") {
-        nProto="ksvn+ssh";
-    }
-    if (!nProto.isEmpty()) {
-        for (;it!=urls.end();++it) {
-            (*it).setProtocol(nProto);
-        }
-    }
+
     KURLDrag *drag= new KURLDrag(urls,this);
     if ( !pixmap2.isNull() )
         drag->setPixmap( pixmap2 );
@@ -1275,6 +1256,12 @@ bool kdesvnfilelist::acceptDrag(QDropEvent *event)const
 bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
 {
     if (!event) return false;
+    if (!isWorkingCopy()) {
+        if (m_pList->m_remoteRevision!=svn::Revision::HEAD) {
+            item = 0;
+            return false;
+        }
+    }
     bool ok = false;
     item = 0;
     if (KURLDrag::canDecode(event)) {
@@ -1316,7 +1303,7 @@ void kdesvnfilelist::contentsDragMoveEvent( QDragMoveEvent* event)
     QListViewItem * item;
     bool ok = validDropEvent(event,item);
 
-    if (item!=m_pList->dragOverItem) {
+    if (item && item!=m_pList->dragOverItem) {
         QPoint vp = contentsToViewport( event->pos() );
         m_pList->dragOverItem=item;
         m_pList->dragOverPoint = vp;

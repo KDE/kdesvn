@@ -1519,8 +1519,11 @@ void kdesvnfilelist::slotInternalDrop()
             }
          }
     }
-    bool move = action==QDropEvent::Move;
-    m_SvnWrapper->slotCopyMove(move,m_pList->intern_drops,m_pList->intern_drop_target,false);
+    if (action==QDropEvent::Move) {
+        m_SvnWrapper->makeMove(m_pList->intern_drops,m_pList->intern_drop_target,false);
+    } else {
+        m_SvnWrapper->makeCopy(m_pList->intern_drops,m_pList->intern_drop_target,svn::Revision::HEAD);
+    }
     m_pList->intern_dropRunning=false;
     refreshCurrentTree();
 }
@@ -1550,7 +1553,11 @@ void kdesvnfilelist::copy_move(bool move)
     if (!ok) {
         return;
     }
-    m_SvnWrapper->slotCopyMove(move,which->fullName(),nName,force);
+    if (move) {
+        m_SvnWrapper->makeMove(which->fullName(),nName,force);
+    } else {
+        m_SvnWrapper->makeCopy(which->fullName(),nName, isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
+    }
 }
 
 void kdesvnfilelist::slotCat()

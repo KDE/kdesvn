@@ -70,7 +70,6 @@ signals:
 protected:
     virtual bool scanRevision();
     virtual bool askRevision();
-    virtual void copy_move(const QString&source,bool _move);
 
 private:
     pCPart*m_pCPart;

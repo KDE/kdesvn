@@ -129,6 +129,12 @@ public:
     bool checkUpdatesRunning();
     void getaddedItems(const QString&path,svn::StatusEntries&target);
 
+    bool makeCopy(const QString&,const QString&,const svn::Revision&rev);
+    bool makeCopy(const KURL::List&,const QString&,const svn::Revision&rev);
+
+    bool makeMove(const QString&,const QString&,bool);
+    bool makeMove(const KURL::List&,const QString&,bool);
+
 
 protected:
     smart_pointer<SvnActionsData> m_Data;
@@ -164,8 +170,6 @@ public slots:
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotMerge(const QString&,const QString&, const QString&,
         const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
-    virtual void slotCopyMove(bool,const QString&,const QString&,bool);
-    virtual void slotCopyMove(bool,const KURL::List&,const QString&,bool);
     virtual void slotExtraLogMsg(const QString&);
 
 signals:

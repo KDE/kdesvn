@@ -272,9 +272,39 @@ is the referenced version.
 <para>
 After clicking on &quot;[OK]&quot; &kdesvn; will create your new working copy and (if the box was checked) opens it.
 </para>
+<para>
+When you have opened a repository for browsing you may mark a folder and than select 
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Repository</guisubmenu>
+<guimenuitem>Checkout current repository path</guimenuitem>
+</menuchoice>.
+and fill out the dialogs as described above. Then only the marked path will checked out.
+</para>
 </sect2>
-
+<sect2>
+<title>Commiting local changes</title>
+<para>
+Mark the entry or entries you want to send and select 
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Commit</guimenuitem>
+</menuchoice>
+or type &quot;<keycap>#</keycap>&quot;
+</para>
+<para>
+If you try to commit if no item is selected, &kdesvn; uses the top-most element of opened working copy, eg, the working copy path itself.
+</para>
+<para>
+This operation is always recursive, means, if selecting a folder &kdesvn; always send all changed items below it. When you setup that you want to review all items before commit inside the following dialog all items kdesvn would send are listed. There you may unmark items you don't want to send. In that case &kdesvn; sends all items alone, eg, not recursive. Or you may select items not versioned for add and commit (if them are not marked to be ignored). So you may see if there are newer items you forgot.
+</para>
+<para>
+Enter a log message what you're sending and hit &quot;OK&quote; and the transfer starts.
+</para>
+</sect2>
 </sect1>
+
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>
 <para>
@@ -1291,6 +1321,10 @@ to the repository. And on each tunnel it is a new ssh connection. And for every 
 authenticate. This may you fix when you store your local public identity to the host containing the
 repository. If your public identity has a password, it will asked once when ssh-agent is installed
 und ssh-agent store it in its cache. Voila.
+</para>
+<para>
+<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin has a nice description</ulink> how to use kdesvn 
+with ssh and keychain.
 </para>
 </answer>
 </qandaentry>

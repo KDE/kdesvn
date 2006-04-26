@@ -108,7 +108,7 @@ const QString& SvnItem_p::kdeName(const svn::Revision&r)
         lRev=r;
         if (!isWc) {
             m_kdename=m_Stat.entry().url();
-            if (m_kdename.startsWith("svn://")) {
+            if (m_kdename.startsWith("svn://")||m_kdename.startsWith("svn+ssh://")) {
                 m_kdename="k"+m_kdename;
             } else {
                 m_kdename="ksvn+"+m_kdename;

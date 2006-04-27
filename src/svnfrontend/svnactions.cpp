@@ -1490,7 +1490,7 @@ bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
         for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->move(svn::Path((*it).url()),svn::Path(New),force);
+            m_Data->m_Svnclient->move(svn::Path((*it).prettyURL()),svn::Path(New),force);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
@@ -1521,7 +1521,7 @@ bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revi
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
         for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->copy(svn::Path((*it).url()),rev,svn::Path(New));
+            m_Data->m_Svnclient->copy(svn::Path((*it).prettyURL()),rev,svn::Path(New));
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());

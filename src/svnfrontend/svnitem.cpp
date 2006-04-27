@@ -49,12 +49,13 @@ public:
     SvnItem_p(const svn::Status&);
     virtual ~SvnItem_p();
     KFileItem*createItem(const svn::Revision&peg);
-    const QString& kdeName(const svn::Revision&);
+    const KURL& kdeName(const svn::Revision&);
 
 protected:
     svn::Status m_Stat;
     void init();
-    QString m_url,m_full,m_short,m_kdename;
+    QString m_url,m_full,m_short;
+    KURL m_kdename;
     QDateTime m_fullDate;
     QString m_infoText;
     KFileItem*m_fitem;
@@ -101,32 +102,54 @@ void SvnItem_p::init()
     m_fitem = 0;
 }
 
-const QString& SvnItem_p::kdeName(const svn::Revision&r)
+const KURL& SvnItem_p::kdeName(const svn::Revision&r)
 {
     isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
+    kdDebug()<<"IsWC "<<isWc<<endl;
+    QString name;
     if (!(r==lRev)||m_kdename.isEmpty()) {
         lRev=r;
         if (!isWc) {
-            m_kdename=m_Stat.entry().url();
-            if (m_kdename.startsWith("svn://")||m_kdename.startsWith("svn+ssh://")) {
-                m_kdename="k"+m_kdename;
+            QString ouri =m_Stat.entry().url();
+            QString proto;
+            QStringList l=QStringList::split(":",ouri);
+            if (ouri.startsWith("svn://")){
+                proto = "ksvn";
+            } else if (ouri.startsWith("svn+ssh://")){
+                proto = "ksvn+ssh";
+            } else if (ouri.startsWith("svn://")){
+                proto = "ksvn";
             } else {
-                m_kdename="ksvn+"+m_kdename;
+                proto = "ksvn+"+l[0];
             }
+            m_kdename.setProtocol(proto);
+            l = QStringList::split("://",ouri);
+            if (proto=="ksvn+file") {
+                if (l.size()>1) {
+                    m_kdename.setPath(l[1]);
+                }
+            } else if (l.size()>1){
+                l=QStringList::split("/",l[1]);
+                m_kdename.setHost(l[0]);
+                l.remove(l.begin());
+                m_kdename.setPath("/"+l.join("/"));
+            }
+
             QString revstr="";
             if (lRev.kind()==svn::Revision::HEAD) {
-                revstr="?rev=HEAD";
+                revstr="HEAD";
             } else if (lRev.kind()==svn_opt_revision_number) {
-                revstr=QString("?rev=%1").arg(lRev.revnum());
+                revstr=QString("%1").arg(lRev.revnum());
             } else if (lRev.kind()==svn_opt_revision_date) {
                 QDateTime t = helpers::sub2qt::apr_time2qt(lRev.date());
-                revstr=QString("?rev={%1}").arg(t.toString("yyyy-MM-dd"));
+                revstr=QString("{%1}").arg(t.toString("yyyy-MM-dd"));
             }
-            m_kdename+=revstr;
+            m_kdename.setQuery("?rev="+revstr);
         } else {
-            m_kdename=m_Stat.path();
+            m_kdename.setPath(m_Stat.path());
         }
     }
+    kdDebug()<<"Resulting path: "<<m_kdename.prettyURL()<<endl;
     return m_kdename;
 }
 
@@ -477,7 +500,7 @@ KFileItem*SvnItem::fileItem()
     return p_Item->createItem(correctPeg());
 }
 
-const QString&SvnItem::kdeName(const svn::Revision&r)
+const KURL&SvnItem::kdeName(const svn::Revision&r)
 {
     return p_Item->kdeName(r);
 }

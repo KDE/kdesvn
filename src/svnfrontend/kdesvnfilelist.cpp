@@ -895,7 +895,7 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         return;
     }
     svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
-    QString what = fki->kdeName(rev);
+    QString what = fki->kdeName(rev).prettyURL();
     QString feditor = Settings::external_display();
     if ( feditor.compare("default") == 0 )
     {
@@ -1224,6 +1224,7 @@ void kdesvnfilelist::startDrag()
     QListViewItem * m_pressedItem = currentItem();
     QPixmap pixmap2;
     KURL::List urls = selectedUrls();
+    kdDebug() << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {
       int iconSize = Settings::listview_icon_size();;
@@ -1235,6 +1236,7 @@ void kdesvnfilelist::startDrag()
     }
 
     KURLDrag *drag= new KURLDrag(urls,this);
+    drag->setExportAsText(true);
     if ( !pixmap2.isNull() )
         drag->setPixmap( pixmap2 );
     else if ( !pixmap0Invalid )
@@ -1474,7 +1476,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
         QStringList l;
         for (;it!=urlList.end();++it) {
             (*it).setProtocol(nProto);
-            l = QStringList::split("?",(*it).url());
+            l = QStringList::split("?",(*it).prettyURL());
             if (l.size()>1) {
                 (*it) = l[0];
             }
@@ -1617,7 +1619,8 @@ void kdesvnfilelist::slotDelete()
     while ((cur=liter.current())!=0){
         ++liter;
         if (!cur->isRealVersioned()) {
-            kioList.append(cur->fullName());
+            KURL _uri; _uri.setPath(cur->fullName());
+            kioList.append(_uri);
         } else {
             items.push_back(cur->fullName());
         }

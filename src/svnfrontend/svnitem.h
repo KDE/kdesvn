@@ -32,6 +32,7 @@ class FileListViewItem;
 class SvnItem_p;
 class SvnActions;
 class KFileItem;
+class KURL;
 
 namespace svn
 {
@@ -48,7 +49,7 @@ public:
     virtual const QString&fullName()const;
     virtual const QString&shortName()const;
     virtual const QString&Url()const;
-    virtual const QString&kdeName(const svn::Revision&);
+    virtual const KURL&kdeName(const svn::Revision&);
     virtual const QDateTime&fullDate()const;
     virtual bool isDir()const;
     virtual bool isVersioned()const;

@@ -1471,8 +1471,13 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             nProto = svn::Url::transformProtokoll(urlList[0].protocol());
         }
         KURL::List::Iterator it = urlList.begin();
+        QStringList l;
         for (;it!=urlList.end();++it) {
             (*it).setProtocol(nProto);
+            l = QStringList::split("?",(*it).url());
+            if (l.size()>1) {
+                (*it) = l[0];
+            }
         }
         event->acceptAction();
         m_pList->intern_dropRunning=true;

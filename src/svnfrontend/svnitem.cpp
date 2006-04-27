@@ -117,8 +117,6 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
                 proto = "ksvn";
             } else if (ouri.startsWith("svn+ssh://")){
                 proto = "ksvn+ssh";
-            } else if (ouri.startsWith("svn://")){
-                proto = "ksvn";
             } else {
                 proto = "ksvn+"+l[0];
             }
@@ -335,7 +333,9 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         }
     } else {
         _local = true;
-        p = KMimeType::pixmapForURL(fullName(),0,KIcon::Desktop,size);
+        KURL uri;
+        uri.setPath(fullName());
+        p = KMimeType::pixmapForURL(uri,0,KIcon::Desktop,size);
         p = getPixmap(p,size,overlay);
     }
     return p;

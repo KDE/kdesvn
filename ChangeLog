@@ -1,4 +1,5 @@
 version 0.8.3
+    * fix: removed a big memory leak
     * fix: when drag&drop starts from kdesvn urls from repositories didn't have a revision number
     * fix: kdesvn wasn't able copy items from a specific revision (eg, restoring deleted items wasn't possible)
 

@@ -225,6 +225,7 @@ namespace svn
 
   Entry::~Entry ()
   {
+    delete m_Data;
   }
 
   Entry &

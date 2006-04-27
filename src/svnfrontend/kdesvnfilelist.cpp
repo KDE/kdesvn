@@ -1235,7 +1235,20 @@ void kdesvnfilelist::startDrag()
       }
     }
 
-    KURLDrag *drag= new KURLDrag(urls,this);
+    KURLDrag *drag;
+    drag = new KURLDrag(urls,this);
+
+    /* workaround for KURL::Drag - it always forget the revision part on drop :( */
+    if (!isWorkingCopy()) {
+        QStrList l;
+        QString t;
+        KURL::List::ConstIterator it = urls.begin();
+        for (;it!=urls.end();++it) {
+            l.append((*it).prettyURL());
+        }
+        drag->setUris(l);
+    }
+
     drag->setExportAsText(true);
     if ( !pixmap2.isNull() )
         drag->setPixmap( pixmap2 );

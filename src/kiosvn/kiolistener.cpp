@@ -50,18 +50,37 @@ bool KioListener::contextCancel()
 /*!
     \fn KioListener::contextGetLogMessage (QString & msg)
  */
-bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&)
+bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&_items)
 {
 #if 1
     QByteArray reply;
     QByteArray params;
     QCString replyType;
+    QDataStream stream(params,IO_WriteOnly);
 
-    if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
-        msg = "Communication with dcop failed";
-        kdWarning()<<msg<<endl;
-        return false;
+    if (_items.count()>0) {
+        QMap<QString,QString> list;
+        for (unsigned i = 0;i<_items.count();++i) {
+            if (_items[i].path().isEmpty()) {
+                list[_items[i].url()]=QChar(_items[i].actionType());
+            } else {
+                list[_items[i].path()]=QChar(_items[i].actionType());
+            }
+        }
+        stream << list;
+        if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg(QMap<QString,QString>)",params,replyType,reply)) {
+            msg = "Communication with dcop failed";
+            kdWarning()<<msg<<endl;
+            return false;
+        }
+    } else {
+        if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
+            msg = "Communication with dcop failed";
+            kdWarning()<<msg<<endl;
+            return false;
+        }
     }
+
     if (replyType!="QStringList") {
         msg = "Wrong reply type";
         kdWarning()<<msg<<endl;

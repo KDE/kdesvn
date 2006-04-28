@@ -40,6 +40,7 @@ public:
 
     Logmsg_impl(QWidget *parent = 0, const char *name = 0);
     Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent=0, const char *name=0);
+    Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent=0, const char *name=0);
     Logmsg_impl(const logActionEntries&,
         const logActionEntries&,
         QWidget *parent = 0, const char *name = 0);
@@ -51,6 +52,7 @@ public:
 
     static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
     static QString getLogmessage(const svn::CommitItemList&,bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(const QMap<QString,QString>&,bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
 
     static QString getLogmessage(const logActionEntries&,
             const logActionEntries&,

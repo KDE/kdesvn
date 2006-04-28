@@ -83,6 +83,26 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const
     }
 }
 
+Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, const char *name)
+    :LogmessageData(parent, name)
+{
+    m_LogEdit->setFocus();
+    m_ReviewList->setColumnText(1,i18n("Items to commit"));
+    m_ReviewList->setColumnText(0,i18n("Action"));
+    m_ReviewList->setSortColumn(1);
+    if (_items.count()>0) {
+        QMap<QString,QString>::ConstIterator it = _items.begin();
+        for (;it!=_items.end();++it) {
+            QListViewItem*item = new QListViewItem(m_ReviewList);
+            item->setText(1,it.key());
+            item->setText(0,it.data());
+        }
+    } else {
+        m_Reviewlabel->hide();
+        m_ReviewList->hide();
+    }
+}
+
 Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
         const logActionEntries&_notActivatedList,
         QWidget *parent, const char *name)
@@ -217,6 +237,40 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
 }
 
 QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*rec,QWidget*parent,const char*name)
+{
+    bool _ok,_rec;
+    QString msg("");
+
+    Logmsg_impl*ptr=0;
+    KDialogBase dlg(parent,name,true,i18n("Commit log"),
+            KDialogBase::Ok|KDialogBase::Cancel,
+            KDialogBase::Ok,true);
+    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+
+    ptr = new Logmsg_impl(items,Dialog1Layout);
+    if (!rec) {
+        ptr->m_RecursiveButton->hide();
+    }
+    ptr->initHistory();
+    dlg.resize(dlg.configDialogSize(groupName));
+    if (dlg.exec()!=QDialog::Accepted) {
+        _ok = false;
+        /* avoid compiler warnings */
+        _rec = false;
+    } else {
+        _ok = true;
+        _rec = ptr->isRecursive();
+        msg=ptr->getMessage();
+        ptr->saveHistory();
+    }
+    dlg.saveDialogSize(groupName,false);
+    if (ok) *ok = _ok;
+    if (rec) *rec = _rec;
+    return msg;
+}
+
+QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
+    bool*ok,bool*rec,QWidget*parent,const char*name)
 {
     bool _ok,_rec;
     QString msg("");

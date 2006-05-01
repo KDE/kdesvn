@@ -253,6 +253,18 @@ QStringList kdesvnd_dcop::get_logmsg()
     return res;
 }
 
+QStringList kdesvnd_dcop::get_logmsg(QMap<QString,QString> list)
+{
+    QStringList res;
+    bool ok;
+    QString logMessage = Logmsg_impl::getLogmessage(list,&ok,0,0,"logmsg_impl");
+    if (!ok) {
+        return res;
+    }
+    res.append(logMessage);
+    return res;
+}
+
 QString kdesvnd_dcop::cleanUrl(const KURL&url)
 {
     QString cleanpath = url.path();

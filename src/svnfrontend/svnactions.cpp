@@ -1468,43 +1468,66 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 /*!
     \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)
  */
-void SvnActions::slotCopyMove(bool move,const QString&Old,const QString&New,bool force)
+bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
 {
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return false;
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item "));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        if (move) {
-            m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
-        } else {
-            m_Data->m_Svnclient->copy(svn::Path(Old),svn::Revision::HEAD,
-                svn::Path(New));
+        m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return false;
+    }
+    EMIT_REFRESH;
+    return true;
+}
+
+bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
+{
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving entries"));
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        KURL::List::ConstIterator it = Old.begin();
+        for (;it!=Old.end();++it) {
+            m_Data->m_Svnclient->move(svn::Path((*it).prettyURL()),svn::Path(New),force);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
+        return false;
     }
-    EMIT_REFRESH;
+    return true;
 }
 
-void SvnActions::slotCopyMove(bool move,const KURL::List&Old,const QString&New,bool force)
+bool SvnActions::makeCopy(const QString&Old,const QString&New,const svn::Revision&rev)
+{
+    if (!m_Data->m_CurrentContext) return false;
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        m_Data->m_Svnclient->copy(svn::Path(Old),rev,svn::Path(New));
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return false;
+    }
+    EMIT_REFRESH;
+    return true;
+}
+
+bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revision&rev)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
         for (;it!=Old.end();++it) {
-            if (move) {
-                m_Data->m_Svnclient->move(svn::Path((*it).url()),svn::Path(New),force);
-            } else {
-                m_Data->m_Svnclient->copy(svn::Path((*it).url()),svn::Revision::HEAD,
-                     svn::Path(New));
-            }
+            m_Data->m_Svnclient->copy(svn::Path((*it).prettyURL()),rev,svn::Path(New));
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
+        return false;
     }
+    return true;
 }
 
 /*!
@@ -1681,9 +1704,6 @@ void SvnActions::checkModthread()
             m_Data->m_conflictCache.insertKey(m_CThread->getList()[i]);
         }
     }
-    kdDebug()<<"Modified Cache"<<endl;
-    m_Data->m_Cache.dump_tree();
-    kdDebug()<<"Modified Cache end"<<endl;
     delete m_CThread;
     m_CThread = 0;
     emit sigRefreshIcons(false);

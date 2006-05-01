@@ -60,8 +60,8 @@ as Authors, publish date, the abstract, and Keywords -->
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 
 <copyright>
-<year>1999</year>
 <year>2005</year>
+<year>2006</year>
 <holder>Rajko Albrecht</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -77,7 +77,7 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date>$Date$</date>
-<releaseinfo>0.2</releaseinfo>
+<releaseinfo>0.3</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -272,9 +272,128 @@ is the referenced version.
 <para>
 After clicking on &quot;[OK]&quot; &kdesvn; will create your new working copy and (if the box was checked) opens it.
 </para>
+<para>
+When you have opened a repository for browsing you may mark a folder and than select 
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Repository</guisubmenu>
+<guimenuitem>Checkout current repository path</guimenuitem>
+</menuchoice>.
+and fill out the dialogs as described above. Then only the marked path will checked out.
+</para>
 </sect2>
+<sect2>
+<title>Commiting local changes</title>
+<para>
+Mark the entry or entries you want to send and select 
+<menuchoice>
+<shortcut>
+<keycombo action="simul"><keycap>#</keycap></keycombo>
+</shortcut>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Commit</guimenuitem>
+</menuchoice>
+</para>
+<para>
+If you try to commit if no item is selected, &kdesvn; uses the top-most element of opened working copy, eg, the working copy path itself.
+</para>
+<para>
+This operation is always recursive, means, if selecting a folder &kdesvn; always send all changed items below it. When you setup that you want to review all items before commit inside the following dialog all items kdesvn would send are listed. There you may unmark items you don't want to send. In that case &kdesvn; sends all items alone, eg, not recursive. Or you may select items not versioned for add and commit (if them are not marked to be ignored). So you may see if there are newer items you forgot.
+</para>
+<para>
+Enter a log message what you're sending and hit &quot;OK&quot; and the transfer starts.
+</para>
+</sect2>
+<sect2>
+<title>Update working copy</title>
+<para>
+This brings you local working copy in sync with the repository. You may setup that &kdesvn; checks on opening a working copy for newer/modified items in repository. This runs in background and you may work meanwhile with &kdesvn;. Or start check with
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Check for updates</guimenuitem>
+</menuchoice>.
+</para>
+<para>
+When this is finished, items with newer versions or folders with items where newer items are below are marked.
+</para>
+<para>
+To retrieve the changes, select 
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Update to head</guimenuitem>
+</menuchoice>. This will update to the most latest version. If you want to get a specific revision select
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Update to revision</guimenuitem>
+</menuchoice> and select the revision you want in the following box.
+</para>
+<para>
+If no item is selected, the update will done on whole opened working copy, otherwise only recursive on the selected items.
+</para>
+</sect2>
+<sect2>
+<title>Adding and Deleting from working copy</title>
+<para>
+Both operations requires two steps: First add or delete and then commiting that changes to repository. Before you commit you may undone add or delete.
+</para>
+<sect3>
+<title>Add items</title>
+<para>
+Adding items into a working copy may be done due three ways:
+<variablelist>
+<varlistentry>
+<term>Select not versioned items and add them</term>
+<listitem><para>
+Copy with konqueror or any other tool into working copy area. Go trough list, mark them and select 
+<menuchoice>
+<shortcut><keycombo action="simul"><keycap>Insert</keycap></keycombo></shortcut>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Add selected files/dirs</guimenuitem>
+</menuchoice>.
+ When you want adding new folders with all subitems select
+<menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>Insert</keycap></keycombo></shortcut>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Add selected files/dirs recursive</guimenuitem>
+</menuchoice>.
+</para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term>Check and add recursive</term>
+<listitem><para>
+You may check if there are somewhere in working copy unversioned items. After selecting 
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Check for unversioned items</guimenuitem>
+</menuchoice> a dialog appears where all not versioned items are listed. Hitting ok adds all marked items to working copy, items you don't want versioned you should unmark before.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Drag and drop</term>
+<listitem><para>
+Mark in konqueror or any other compatible filebrowser items you want to add and drag them to &kdesvn;. You may drop them on folders inside the opened working copy and than &kdesvn; copy the dropped items to it and add the items.
+</para></listitem>
+</varlistentry>
+</variablelist>
+</para></sect3>
+<sect3>
+<title>Deleting items from working copy and unversion</title>
+<para>
+Deleting items is always recursive. Eg., when you delete a folder all subitems will deleted, too. Mark what you want and select &quot;Delete selected items&quot; from general menu. Items will unversioned and removed from disk.
+</para>
+</sect3>
+</sect2>
 </sect1>
+
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>
 <para>
@@ -292,7 +411,7 @@ Entries may be marked with overlayed icons when not in &quot;normal&quot; state.
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry is locked. In last column the owner of lock is listed. This works only in working copy at this moment due restrictions of the subversion API!
+This entry is locked. In last column the owner of lock is listed. You may setup if kdesvn should check for locked items in repository, too. But be carefull: depending of the kind of the server this may take a long time!
 </para></listitem>
 </varlistentry>
 
@@ -1106,6 +1225,7 @@ subversion information.
 <variablelist>
 <varlistentry>
 <term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>u</keycap></keycombo></shortcut>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Update to head</guimenuitem>
@@ -1128,6 +1248,16 @@ subversion information.
 <guimenuitem>Commit</guimenuitem>
 </menuchoice></term>
 <listitem><para>Commit changes inside working copy for selected items to repository.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo></shortcut>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guimenuitem>Diff local changes</guimenuitem>
+</menuchoice></term>
+<listitem><para>Display local changes as diff-output (without network access). This is the difference only to 
+last state the working copy was updated to, not against the version in repository.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1291,6 +1421,10 @@ to the repository. And on each tunnel it is a new ssh connection. And for every 
 authenticate. This may you fix when you store your local public identity to the host containing the
 repository. If your public identity has a password, it will asked once when ssh-agent is installed
 und ssh-agent store it in its cache. Voila.
+</para>
+<para>
+<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin has a nice description</ulink> how to use kdesvn 
+with ssh and keychain.
 </para>
 </answer>
 </qandaentry>

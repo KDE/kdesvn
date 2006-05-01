@@ -58,12 +58,13 @@ namespace svn
     Pool pool;
 
     apr_hash_t * hash;
+    Path _p(pathOrUrl);
     /* don't want the lock hashs, so we simply use ls2 on svn 1.3, too.
      * there is that method a cast to ls3 with lock_hash == 0
      */
     svn_error_t * error =
       svn_client_ls2 (&hash,
-                     pathOrUrl.TOUTF8(),
+                     _p.cstr(),
                      peg.revision(),
                      revision.revision(),
                      recurse,
@@ -105,6 +106,7 @@ namespace svn
         bool recurse) throw (ClientException)
   {
     Pool pool;
+    Path _p(pathOrUrl);
 
     apr_hash_t * hash;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
@@ -113,7 +115,7 @@ namespace svn
     svn_error_t * error =
       svn_client_ls3 (&hash,
                       &lock_hash,
-                     pathOrUrl.TOUTF8(),
+                     _p.cstr(),
                      peg,
                      revision,
                      recurse,
@@ -126,7 +128,7 @@ namespace svn
 
     svn_error_t * error =
       svn_client_ls2 (&hash,
-                     pathOrUrl.TOUTF8(),
+                     _p.cstr(),
                      peg,
                      revision,
                      recurse,

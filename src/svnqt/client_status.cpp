@@ -456,14 +456,16 @@ namespace svn
     baton.pool = pool;
     baton.m_Context=m_context;
     svn_opt_revision_t pegr;
+    Path _p(path);
     const char *truepath;
     bool internal_peg = false;
     error = svn_opt_parse_path (&pegr, &truepath,
-                                 path.TOUTF8(),
+                                 _p.cstr(),
                                  pool);
     if (error != NULL)
       throw ClientException (error);
 
+    
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
         if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified)) {
             pegr.kind = svn_opt_revision_head;

@@ -63,6 +63,11 @@ namespace svn
       m_path = "";
     } else {
       const char * int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
+      if (Url::isValid(path) ) {
+        if (!svn_path_is_uri_safe(int_path)) {
+            int_path = svn_path_uri_encode(int_path,pool);
+        }
+      }
       m_path = QString::fromUtf8(int_path);
     }
   }

@@ -118,9 +118,11 @@ RevisionTree::RevisionTree(svn::Client*aClient,
     m_Data->progress=new KProgressDialog(
         parent,"progressdlg",i18n("Scanning logs"),i18n("Scanning the logs for %1").arg(origin),true);
     m_Data->progress->setMinimumDuration(100);
+    m_Data->progress->show();
     m_Data->progress->setAllowCancel(true);
     m_Data->progress->progressBar()->setTotalSteps(m_Data->m_OldHistory.size());
     m_Data->progress->setAutoClose(false);
+    m_Data->progress->show();
     bool cancel=false;
     svn::LogEntriesMap::Iterator it;
     unsigned count = 0;
@@ -155,12 +157,14 @@ RevisionTree::RevisionTree(svn::Client*aClient,
         kdDebug( )<<" max revision " << m_Data->max_rev
             << " min revision " << m_Data->min_rev << endl;
         if (topDownScan()) {
+            kdDebug()<<"topdown end"<<endl;
             m_Data->progress->setAutoReset(true);
             m_Data->progress->progressBar()->setTotalSteps(100);
             m_Data->progress->progressBar()->setPercentageVisible(false);
             m_Data->m_stopTick.restart();
             m_Data->m_TreeDisplay=new RevTreeWidget(m_Data->m_Listener,m_Data->m_Client,treeParent);
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
+                kdDebug()<<"Bottom up end"<<endl;
                 m_Valid=true;
                 m_Data->m_TreeDisplay->setBasePath(reposRoot);
                 m_Data->m_TreeDisplay->dumpRevtree();
@@ -194,6 +198,8 @@ bool RevisionTree::topDownScan()
 {
     m_Data->progress->progressBar()->setTotalSteps(m_Data->max_rev-m_Data->min_rev);
     bool cancel=false;
+    QString label;
+    QString olabel = m_Data->progress->labelText();
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         m_Data->progress->progressBar()->setProgress(m_Data->max_rev-j);
         kapp->processEvents();
@@ -202,6 +208,15 @@ bool RevisionTree::topDownScan()
             break;
         }
         for (unsigned i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
+            if (i>0 && i%100==0) {
+                if (m_Data->progress->wasCancelled()) {
+                    cancel=true;
+                    break;
+                }
+                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                m_Data->progress->setLabel(label);
+                kapp->processEvents();
+            }
             /* find min revision of item */
             if (m_Data->m_OldHistory[j].changedPaths[i].action=='A'&&
                 isParent(m_Data->m_OldHistory[j].changedPaths[i].path,m_Path))
@@ -217,13 +232,14 @@ bool RevisionTree::topDownScan()
                     // here it is added
                     m_InitialRevsion = m_Data->m_OldHistory[j].revision;
                 }
-            } else {
             }
         }
     }
+    kdDebug()<<"Stage one done"<<endl;
     if (cancel==true) {
         return false;
     }
+    m_Data->progress->setLabel(olabel);
     /* find forward references and filter them out */
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         m_Data->progress->progressBar()->setProgress(m_Data->max_rev-j);
@@ -233,6 +249,15 @@ bool RevisionTree::topDownScan()
             break;
         }
         for (unsigned i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
+            if (i>0 && i%100==0) {
+                if (m_Data->progress->wasCancelled()) {
+                    cancel=true;
+                    break;
+                }
+                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                m_Data->progress->setLabel(label);
+                kapp->processEvents();
+            }
             if (!m_Data->m_OldHistory[j].changedPaths[i].copyFromPath.isEmpty()) {
                 long r = m_Data->m_OldHistory[j].changedPaths[i].copyFromRevision;
                 QString sourcepath = m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
@@ -242,9 +267,6 @@ bool RevisionTree::topDownScan()
                     continue;
                 }
                 if (a=='R') {
-#if 0
-                    m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
-#endif
                     m_Data->m_OldHistory[j].changedPaths[i].action=0;
                 } else if (a=='A'){
                     a=INTERNALCOPY;
@@ -264,9 +286,11 @@ bool RevisionTree::topDownScan()
             }
         }
     }
+    kdDebug()<<"Stage two done"<<endl;
     if (cancel==true) {
         return false;
     }
+    m_Data->progress->setLabel(olabel);
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         m_Data->progress->progressBar()->setProgress(m_Data->max_rev-j);
         kapp->processEvents();
@@ -278,6 +302,15 @@ bool RevisionTree::topDownScan()
             if (m_Data->m_OldHistory[j].changedPaths[i].action==0) {
                 continue;
             }
+            if (i>0 && i%100==0) {
+                if (m_Data->progress->wasCancelled()) {
+                    cancel=true;
+                    break;
+                }
+                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                m_Data->progress->setLabel(label);
+                kapp->processEvents();
+            }
             m_Data->m_History[j].addCopyTo(m_Data->m_OldHistory[j].changedPaths[i].path,QString::null,-1,m_Data->m_OldHistory[j].changedPaths[i].action);
         }
         m_Data->m_History[j].author=m_Data->m_OldHistory[j].author;
@@ -285,6 +318,7 @@ bool RevisionTree::topDownScan()
         m_Data->m_History[j].revision=m_Data->m_OldHistory[j].revision;
         m_Data->m_History[j].message=m_Data->m_OldHistory[j].message;
     }
+    kdDebug()<<"Stage three done"<<endl;
     return !cancel;
 }
 
@@ -421,7 +455,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
-                        get_out= true;
+                        //get_out= true;
                     break;
                     default:
                     break;
@@ -443,7 +477,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
-                        get_out = true;
+                        //get_out = true;
                     break;
                     default:
                     break;

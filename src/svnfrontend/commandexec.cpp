@@ -446,33 +446,44 @@ void CommandExec::slotCmd_list()
     }
 }
 
-void CommandExec::copy_move(const QString&source,bool _move)
-{
-    bool ok,force;
-    QString target = CopyMoveView_impl::getMoveCopyTo(&ok,&force,_move,
-        source,"",0,"move_name");
-    if (!ok) {
-        return;
-    }
-    m_pCPart->m_SvnWrapper->slotCopyMove(_move,source,target,force);
-}
-
 void CommandExec::slotCmd_copy()
 {
+    QString target;
     if (m_pCPart->url.count()<2) {
-        copy_move(m_pCPart->url[0],false);
-        return;
+        bool force_move,ok;
+        target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,false,
+            m_pCPart->url[0],"",0,"move_name");
+        if (!ok) {
+            return;
+        }
+    } else {
+        target = m_pCPart->url[1];
     }
-    m_pCPart->m_SvnWrapper->slotCopyMove(false,m_pCPart->url[0],m_pCPart->url[1],false);
+    if (m_pCPart->extraRevisions.find(0)!=m_pCPart->extraRevisions.end()) {
+        m_pCPart->rev_set=true;
+        m_pCPart->start=m_pCPart->extraRevisions[0];
+    } else {
+        m_pCPart->end = svn::Revision::HEAD;
+        kdDebug()<<"Setting head standard for copy"<<endl;
+    }
+    m_pCPart->m_SvnWrapper->makeCopy(m_pCPart->url[0],target,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
 }
 
 void CommandExec::slotCmd_move()
 {
+    bool force_move,ok;
+    force_move = false;
+    QString target;
     if (m_pCPart->url.count()<2) {
-        copy_move(m_pCPart->url[0],true);
-        return;
+        target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,true,
+            m_pCPart->url[0],"",0,"move_name");
+        if (!ok) {
+            return;
+        }
+    } else {
+        target = m_pCPart->url[1];
     }
-    m_pCPart->m_SvnWrapper->slotCopyMove(true,m_pCPart->url[0],m_pCPart->url[1],false);
+    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->url[0],target,force_move);
 }
 
 void CommandExec::slotCmd_delete()

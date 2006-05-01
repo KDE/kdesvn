@@ -340,20 +340,16 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url)
 {
     QString res;
     QString proto = svn::Url::transformProtokoll(url.protocol());
-    KURL _url = url;
-    _url.cleanPath(true);
-    _url.setProtocol(proto);
-    if (proto=="file") {
-        res = proto+"://"+url.path();
+
+    QStringList s = QStringList::split("://",res);
+    QString base = url.path();
+    QString host = url.host();
+    if (host.isEmpty()) {
+        res=proto+"://"+base;
     } else {
-        res = _url.url(-1);
+        res = proto+"://"+host+base;
     }
-    QStringList s = QStringList::split("?",res);
-    if (s.size()>1) {
-        res = s[0];
-    }
-    svn::Path t(res);
-    return t.path();
+    return res;
 }
 
 bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)

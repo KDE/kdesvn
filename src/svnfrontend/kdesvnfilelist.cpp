@@ -35,6 +35,7 @@
 #include "svnqt/status.hpp"
 #include "svnqt/url.hpp"
 #include "helpers/sshagent.h"
+#include "helpers/sub2qt.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -367,8 +368,8 @@ KURL::List kdesvnfilelist::selectedUrls()
     FileListViewItem*cur;
     while ( (cur=it.current())!=0) {
         ++it;
-        lst.append(cur->fullName());
-        kdDebug()<<"Appending " <<cur->fullName()<<endl;
+        /* for putting it to outside we must convert it to KIO urls */
+        lst.append(cur->kdeName(m_pList->m_remoteRevision));
     }
     return lst;
 }
@@ -894,7 +895,7 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         return;
     }
     svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
-    QString what = fki->kdeName(rev);
+    QString what = fki->kdeName(rev).prettyURL();
     QString feditor = Settings::external_display();
     if ( feditor.compare("default") == 0 )
     {
@@ -1223,6 +1224,7 @@ void kdesvnfilelist::startDrag()
     QListViewItem * m_pressedItem = currentItem();
     QPixmap pixmap2;
     KURL::List urls = selectedUrls();
+    kdDebug() << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {
       int iconSize = Settings::listview_icon_size();;
@@ -1232,28 +1234,22 @@ void kdesvnfilelist::startDrag()
           kdWarning() << "Could not find multiple pixmap" << endl;
       }
     }
-    /* for putting it to outside we must convert it to KIO urls */
-    KURL::List::iterator it = urls.begin();
-    KURL uri = baseUri();
-    kdDebug()<<"Base protocol: " << uri.protocol()<<endl;
-    QString nProto;
-    if (uri.protocol()=="file" && !isWorkingCopy()) {
-        nProto="ksvn+file";
-    } else if (uri.protocol()=="http") {
-        nProto="ksvn+http";
-    } else if (uri.protocol()=="https") {
-        nProto="ksvn+https";
-    } else if (uri.protocol()=="svn") {
-        nProto="ksvn";
-    } else if (uri.protocol()=="svn+ssh") {
-        nProto="ksvn+ssh";
-    }
-    if (!nProto.isEmpty()) {
+
+    KURLDrag *drag;
+    drag = new KURLDrag(urls,this);
+
+    /* workaround for KURL::Drag - it always forget the revision part on drop :( */
+    if (!isWorkingCopy()) {
+        QStrList l;
+        QString t;
+        KURL::List::ConstIterator it = urls.begin();
         for (;it!=urls.end();++it) {
-            (*it).setProtocol(nProto);
+            l.append((*it).prettyURL());
         }
+        drag->setUris(l);
     }
-    KURLDrag *drag= new KURLDrag(urls,this);
+
+    drag->setExportAsText(true);
     if ( !pixmap2.isNull() )
         drag->setPixmap( pixmap2 );
     else if ( !pixmap0Invalid )
@@ -1275,6 +1271,12 @@ bool kdesvnfilelist::acceptDrag(QDropEvent *event)const
 bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
 {
     if (!event) return false;
+    if (!isWorkingCopy()) {
+        if (m_pList->m_remoteRevision!=svn::Revision::HEAD) {
+            item = 0;
+            return false;
+        }
+    }
     bool ok = false;
     item = 0;
     if (KURLDrag::canDecode(event)) {
@@ -1316,7 +1318,7 @@ void kdesvnfilelist::contentsDragMoveEvent( QDragMoveEvent* event)
     QListViewItem * item;
     bool ok = validDropEvent(event,item);
 
-    if (item!=m_pList->dragOverItem) {
+    if (item && item!=m_pList->dragOverItem) {
         QPoint vp = contentsToViewport( event->pos() );
         m_pList->dragOverItem=item;
         m_pList->dragOverPoint = vp;
@@ -1484,8 +1486,13 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             nProto = svn::Url::transformProtokoll(urlList[0].protocol());
         }
         KURL::List::Iterator it = urlList.begin();
+        QStringList l;
         for (;it!=urlList.end();++it) {
             (*it).setProtocol(nProto);
+            l = QStringList::split("?",(*it).prettyURL());
+            if (l.size()>1) {
+                (*it) = l[0];
+            }
         }
         event->acceptAction();
         m_pList->intern_dropRunning=true;
@@ -1519,8 +1526,11 @@ void kdesvnfilelist::slotInternalDrop()
             }
          }
     }
-    bool move = action==QDropEvent::Move;
-    m_SvnWrapper->slotCopyMove(move,m_pList->intern_drops,m_pList->intern_drop_target,false);
+    if (action==QDropEvent::Move) {
+        m_SvnWrapper->makeMove(m_pList->intern_drops,m_pList->intern_drop_target,false);
+    } else {
+        m_SvnWrapper->makeCopy(m_pList->intern_drops,m_pList->intern_drop_target,svn::Revision::HEAD);
+    }
     m_pList->intern_dropRunning=false;
     refreshCurrentTree();
 }
@@ -1550,7 +1560,11 @@ void kdesvnfilelist::copy_move(bool move)
     if (!ok) {
         return;
     }
-    m_SvnWrapper->slotCopyMove(move,which->fullName(),nName,force);
+    if (move) {
+        m_SvnWrapper->makeMove(which->fullName(),nName,force);
+    } else {
+        m_SvnWrapper->makeCopy(which->fullName(),nName, isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
+    }
 }
 
 void kdesvnfilelist::slotCat()
@@ -1618,7 +1632,8 @@ void kdesvnfilelist::slotDelete()
     while ((cur=liter.current())!=0){
         ++liter;
         if (!cur->isRealVersioned()) {
-            kioList.append(cur->fullName());
+            KURL _uri; _uri.setPath(cur->fullName());
+            kioList.append(_uri);
         } else {
             items.push_back(cur->fullName());
         }

@@ -1704,9 +1704,6 @@ void SvnActions::checkModthread()
             m_Data->m_conflictCache.insertKey(m_CThread->getList()[i]);
         }
     }
-    kdDebug()<<"Modified Cache"<<endl;
-    m_Data->m_Cache.dump_tree();
-    kdDebug()<<"Modified Cache end"<<endl;
     delete m_CThread;
     m_CThread = 0;
     emit sigRefreshIcons(false);

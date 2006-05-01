@@ -105,7 +105,6 @@ void SvnItem_p::init()
 const KURL& SvnItem_p::kdeName(const svn::Revision&r)
 {
     isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
-    kdDebug()<<"IsWC "<<isWc<<endl;
     QString name;
     if (!(r==lRev)||m_kdename.isEmpty()) {
         lRev=r;
@@ -147,7 +146,6 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
             m_kdename.setPath(m_Stat.path());
         }
     }
-    kdDebug()<<"Resulting path: "<<m_kdename.prettyURL()<<endl;
     return m_kdename;
 }
 

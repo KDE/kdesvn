@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-05-01 02:32+0200\n"
-"PO-Revision-Date: 2006-05-01 02:30+0200\n"
+"PO-Revision-Date: 2006-05-05 14:15+0200\n"
 "Last-Translator: Rajko Albrecht <ral@alwins-world.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -44,8 +44,7 @@ msgstr "Frage nach Revision wenn ein Einzelkommando ausgeführt wird."
 
 #: main.cpp:41
 msgid "Save output of subversion command (eg \"cat\") into file <file>"
-msgstr ""
-"Speicher Ausgabe des Subversionkommandos (z.B. \"cat\") in Datei <file>"
+msgstr "Speicher Ausgabe des Subversionkommandos (z.B. \"cat\") in Datei <file>"
 
 #: main.cpp:42
 msgid "Limit log output to <number>"
@@ -790,8 +789,7 @@ msgstr "Starte Update-Überprüfung beim Öffnen einer Arbeitskopie."
 #: rc.cpp:294
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
-msgstr ""
-"Wähle ob kdesvn auf Updates prüfen soll wenn eine Arbeitskopie geöffnet wird."
+msgstr "Wähle ob kdesvn auf Updates prüfen soll wenn eine Arbeitskopie geöffnet wird."
 
 #: rc.cpp:297
 #, no-c-format
@@ -1635,8 +1633,7 @@ msgstr "Checke aus"
 
 #: svnfrontend/svnactions.cpp:1236
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>Der Eintrag<br>%1</br>ist nicht versionier. Breche ab.</center>"
+msgstr "<center>Der Eintrag<br>%1</br>ist nicht versionier. Breche ab.</center>"
 
 #: svnfrontend/svnactions.cpp:1266
 msgid "Revert entries"
@@ -1708,7 +1705,7 @@ msgstr "Kopiere oder Bewege Elemente"
 
 #: svnfrontend/svnactions.cpp:1613
 msgid "No unversioned items found."
-msgstr "Nicht versioniertes Elemente gefunden."
+msgstr "Keine nichtversionierten Elemente gefunden."
 
 #: svnfrontend/svnactions.cpp:1616
 msgid "Add unversioned items"
@@ -1767,8 +1764,7 @@ msgid "Check for updates"
 msgstr "Kontrolliere auf Updates"
 
 #: svnfrontend/kdesvnfilelist.cpp:221
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Überprüfe ob aktuelle Arbeitskopie Einträge mit neueren Versionen in der "
 "Repository hat."
@@ -1847,8 +1843,7 @@ msgstr "Öffne Repository der Arbeitskopie"
 
 #: svnfrontend/kdesvnfilelist.cpp:257
 msgid "Opens the repository the current working copy was checked out from"
-msgstr ""
-"Öffnet die Repository von der die aktuelle Arbeitskopie ausgecheckt wurde."
+msgstr "Öffnet die Repository von der die aktuelle Arbeitskopie ausgecheckt wurde."
 
 #: svnfrontend/kdesvnfilelist.cpp:261
 msgid "Import folders into current"
@@ -2120,8 +2115,7 @@ msgstr ""
 "sind."
 
 #: svnfrontend/editproperty_impl.cpp:99
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:100
@@ -2238,5 +2232,3 @@ msgstr "Fingerabdruck"
 msgid "Not versioned"
 msgstr "Nicht versioniert"
 
-#~ msgid "Cancelled by user."
-#~ msgstr "Abbruch durch Benutzer."

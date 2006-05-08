@@ -12,30 +12,6 @@
   <!-- Do not define any other entities; instead, use the entities
        from kde-genent.entities and $LANG/user.entities. -->
 ]>
-<!-- kdoctemplate v0.8 October 1 1999 
-     Minor update to "Credits and Licenses" section on August 24, 2000
-     Removed "Revision history" section on 22 January 2001
-     Changed to Installation/Help menu entities 18 October 2001
-     Other minor cleanup and changes 18 October 2001 -->
-
-
-<!--
-This template was designed by: David Rugge davidrugge@mindspring.com
-with lots of help from: Eric Bischoff ebisch@cybercable.tm.fr
-and Frederik Fouvry fouvry@sfs.nphil.uni-tuebingen.de
-of the KDE DocBook team.
-
-You may freely use this template for writing any sort of KDE documentation.
-If you have any changes or improvements, please let us know.
-
-Remember:
-- in XML, the case of the <tags> and attributes is relevant ;
-- also, quote all attributes.
-
-Please don't forget to remove all these comments in your final documentation,
-thanks ;-).
--->
-
 <!-- ................................................................ -->
 
 <!-- The language must NOT be changed here. -->
@@ -401,12 +377,10 @@ Deleting items is always recursive. Eg., when you delete a folder all subitems w
 <para>
 Simple repository browsing may done within &konqi; &krus; or similar filebrowsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with &quot;k&quot;) and them will display the content. So simple operations like copy, move and delete may work. When appending a query &quot;?rev=&lt;xxx&gt;&quot; the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
 </para>
-<sect2>
-<title>Repositories in &kdesvn;</title>
 <para>
 All work except &quot;Copy&quot; may only done when browsing at revision HEAD.
 </para>
-<sect3>
+<sect2>
 <title>Restoring deleted items</title>
 <para>
 In subversion restoring deleted items is a copy operation of item at specific revision. So when you plan restoring view repository at revision before item was deleted. Select
@@ -425,19 +399,28 @@ and enter the wanted revision. Now kdesvn displays the content at this term. Mar
 <guimenuitem>Copy</guimenuitem>
 </menuchoice>. Inside the following dialog the target is always at HEAD revision, the source is at revision you selected for browsing. Fill out the path click &quot;OK&quot; and copy starts. After successfull copy switch browsing back to HEAD revision and the restored item should appear.
 </para>
-</sect3>
-<sect3>
+</sect2>
+<sect2>
 <title>Importing folders</title>
 <para>
 Due restrictions of subversion itself only folders, not single files, may imported.
 </para>
-<sect4>
+<sect3>
 <title>With drag and drop</title>
 <para>
 Mark in any compatible filemanager the folder you want to import and drag it to the folder entry in &kdesvn; where you want to import it.
 </para>
-</sect4>
-
+</sect3>
+<sect3>
+<title>Select folder to import with directory-browser</title>
+<para>
+Mark the folder where you want to import a new folder. Then select
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>General</guisubmenu>
+<guimenuitem>Import folders into current</guimenuitem>
+</menuchoice> and select your wanted folder.
+</para>
 </sect3>
 </sect2>
 </sect1>
@@ -1642,7 +1625,7 @@ information here.
 -->
 
 <para>
-You need installed subversion 1.2 or above. It requires &kde; 3.3.x
+You need installed subversion 1.2 or above. It requires &kde; 3.4.x
 or above. Subversion prior 1.2 is NOT supported anymore!
 </para>
 <para>

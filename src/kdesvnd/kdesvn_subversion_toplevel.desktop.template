@@ -15,6 +15,7 @@ Name[sr]=SVN ажурирање
 Name[sr@Latn]=SVN ažuriranje
 Name[sv]=SVN-uppdatera
 Name[tr]=SVN Güncelleme
+Name[es]=(SVN) Actualizar
 Icon=kdesvnupdate
 Exec=kdesvn exec update %U
 
@@ -26,6 +27,7 @@ Name[sr]=SVN предаја
 Name[sr@Latn]=SVN predaja
 Name[sv]=SVN-arkivera
 Name[tr]=SVN Teslim Etme
+Name[es]=(SVN) Confirmar
 Icon=kdesvncommit
 Exec=kdesvn exec commit %U
 
@@ -38,6 +40,7 @@ Name[sr]=Довуци из складишта...
 Name[sr@Latn]=Dovuci iz skladišta...
 Name[sv]=Checka ut från ett arkiv...
 Name[tr]=Depodan Kontrol Et...
+Name[es]=(SVN) Obtener del Repositorio...
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
@@ -48,6 +51,7 @@ Comment[sr]=Довуци фајлове из постојећег складиш
 Comment[sr@Latn]=Dovuci fajlove iz postojećeg skladišta u ovu fasciklu.
 Comment[sv]=Checka ut filer från ett befintligt arkiv till katalogen.
 Comment[tr]=Bu dizinde var olan bir depodan hatalı dosyaları kontrol et.
+Comment[es]=Extraer ficheros de un repositorio existente hacia esta carpeta.
 
 [Desktop Action Export]
 Name=Export ...
@@ -61,6 +65,7 @@ Name[sr]=Извези...
 Name[sr@Latn]=Izvezi...
 Name[sv]=Exportera...
 Name[tr]=Dışa Aktar...
+Name[es]=(SVN) Exportar...
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
@@ -71,19 +76,24 @@ Comment[sr]=Довуци неверзирану копију стабла из �
 Comment[sr@Latn]=Dovuci neverziranu kopiju stabla iz skladišta
 Comment[sv]=Checka ut en kopia utan versionskontroll från ett arkiv
 Comment[tr]=Depodaki bir ağaçtan kusurlu bir versionsuz kopyayı kontrol et
+Comment[es]=Obtener una copia no versionada del árbol de un repositorio
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
 Name[de]=Checkout einer Repository
+Name[es]=Obtener de Subversion...
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
 Comment[de]=Erzeuge eine Arbeitskopie von einer Repository
+Comment[es]=Extraer ficheros de un repositorio existente hacia esta carpeta.
 
 [Desktop Action Exportto]
 Name=Export from a subversion repository...
 Name[de]=Exportiere von einer Subversion Repository...
+Name[es]=Exportar de Subversion...
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
 Comment[de]=Hole eine unversionierte Kopie eines Baums von einer Repository
+Comment[es]=Obtener una copia no versionada del árbol de un repositorio

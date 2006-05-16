@@ -337,9 +337,10 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
 /*!
     \fn Logmsg_impl::setRecCheckboxtext(const QString&what)
  */
-void Logmsg_impl::setRecCheckboxtext(const QString&what)
+void Logmsg_impl::setRecCheckboxtext(const QString&what,bool checked)
 {
     m_RecursiveButton->setText(what);
+    m_RecursiveButton->setChecked(checked);
 }
 
 Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()

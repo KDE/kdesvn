@@ -272,7 +272,7 @@ bool RevisionTree::topDownScan()
                     a=INTERNALCOPY;
                     for (unsigned z = 0;z<m_Data->m_OldHistory[j].changedPaths.count();++z) {
                         if (m_Data->m_OldHistory[j].changedPaths[z].action=='D'
-                            &&m_Data->m_OldHistory[j].changedPaths[z].path==sourcepath) {
+                            && isParent(m_Data->m_OldHistory[j].changedPaths[z].path,sourcepath) ) {
                             a=INTERNALRENAME;
                             m_Data->m_OldHistory[j].changedPaths[z].action=0;
                             break;

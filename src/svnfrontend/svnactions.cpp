@@ -109,6 +109,7 @@ public:
     helpers::itemCache m_UpdateCache;
     helpers::itemCache m_Cache;
     helpers::itemCache m_conflictCache;
+    helpers::itemCache m_repoLockCache;
 
     QMap<KProcess*,QString> m_tempfilelist;
 
@@ -1566,6 +1567,10 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
         emit clientException(e.msg());
         return;
     }
+    for (unsigned int i = 0; i<what.count();++i) {
+        m_Data->m_repoLockCache.deleteKey(*(what.at(i)),true);
+    }
+    m_Data->m_repoLockCache.dump_tree();
 }
 
 
@@ -1730,8 +1735,12 @@ void SvnActions::checkUpdateThread()
                 newer = true;
             }
         }
+        if (m_UThread->getList()[i].isLocked()) {
+            m_Data->m_repoLockCache.insertKey(m_UThread->getList()[i]);
+        }
     }
     m_Data->m_UpdateCache.dump_tree();
+    m_Data->m_repoLockCache.dump_tree();
     emit sigRefreshIcons(newer);
     emit sendNotify(i18n("Checking for updates finished"));
     if (newer) {
@@ -1781,6 +1790,17 @@ bool SvnActions::checkModifiedCache(const QString&path)
     return m_Data->m_Cache.find(path);
 }
 
+bool SvnActions::checkReposLockCache(const QString&path)
+{
+    return m_Data->m_repoLockCache.findSingleValid(path,false);
+}
+
+bool SvnActions::checkReposLockCache(const QString&path,svn::Status&t)
+{
+    /// @todo create a method where svn::Status* will be a parameter so no copy is needed but just reading content
+    return m_Data->m_repoLockCache.findSingleValid(path,t);
+}
+
 bool SvnActions::checkConflictedCache(const QString&path)
 {
     return m_Data->m_conflictCache.find(path);
@@ -1792,6 +1812,7 @@ bool SvnActions::checkConflictedCache(const QString&path)
 bool SvnActions::createUpdateCache(const QString&what)
 {
     clearUpdateCache();
+    m_Data->m_repoLockCache.clear();
     stopCheckUpdateThread();
     m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();

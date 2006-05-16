@@ -1,3 +1,7 @@
+version 0.8.4
+    * fix: revision tree sometimes failed while detecting renamed items
+    * when checking for updates kdesvn displays now if a item is locked somewhere
+
 version 0.8.3
     * fix: removed a big memory leak
     * fix: when drag&drop starts from kdesvn urls from repositories didn't have a revision number

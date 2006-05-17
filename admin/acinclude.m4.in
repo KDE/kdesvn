@@ -2905,6 +2905,7 @@ AC_DEFUN([AC_CHECK_COMPILERS],
         fi
       fi
       KDE_CHECK_COMPILER_FLAG(fno-builtin,[CXXFLAGS="-fno-builtin $CXXFLAGS"])
+      KDE_CHECK_COMPILER_FLAG(fstack-protector,[CXXFLAGS="-fstack-protector $CXXFLAGS"])
 
       dnl convenience compiler flags
       KDE_CHECK_COMPILER_FLAG(Woverloaded-virtual, [WOVERLOADED_VIRTUAL="-Woverloaded-virtual"], [WOVERLOADED_VRITUAL=""])

@@ -87,7 +87,8 @@ protected:
         DELETED = 5,
         MISSING = 6,
         NOTVERSIONED = 7,
-        CONFLICT = 8
+        CONFLICT = 8,
+        NEEDLOCK = 9
     };
     color_type m_bgColor;
     smart_pointer<SvnItem_p> p_Item;

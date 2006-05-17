@@ -1910,6 +1910,27 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     return result;
 }
 
+bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
+{
+    if (!which) return false;
+    QString ex;
+    svn::Path p(which->fullName());
+    svn::PathPropertiesMapList pm;
+    try {
+        pm = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return false;
+    }
+    if (pm.size()>0) {
+        svn::PropertiesMap mp = pm[0].second;
+        if (mp.find("svn:needs-lock")!=mp.end()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec)
 {
     if (!m_Data->m_CurrentContext) return false;

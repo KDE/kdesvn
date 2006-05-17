@@ -260,6 +260,9 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
             } else if (isLocked()||wrap->checkReposLockCache(fullName())) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
                 m_bgColor = LOCKED;
+            } else if (wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnneedlock",KIcon::Desktop,size);
+                m_bgColor = NEEDLOCK;
             } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
                 m_bgColor = UPDATES;

@@ -567,6 +567,17 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                     re;
                 text+=rb+i18n("Lock comment")+cs+
                     (*it).lockEntry().Comment()+re;
+            } else {
+                svn::Status d;
+                if (checkReposLockCache(_what,d)&&d.lockEntry().Locked()) {
+                    text+=rb+i18n("Lock token")+cs+(d.lockEntry().Token())+re;
+                    text+=rb+i18n("Owner")+cs+(d.lockEntry().Owner())+re;
+                    text+=rb+i18n("Locked on")+cs+
+                        helpers::sub2qt::apr_time2qtString(d.lockEntry().Date())+
+                        re;
+                    text+=rb+i18n("Lock comment")+cs+
+                        d.lockEntry().Comment()+re;
+                }
             }
         }
         text+="</table></p>\n";
@@ -1735,12 +1746,11 @@ void SvnActions::checkUpdateThread()
                 newer = true;
             }
         }
-        if (m_UThread->getList()[i].isLocked()) {
+        if (m_UThread->getList()[i].isLocked() &&
+            !m_UThread->getList()[i].entry().lockEntry().Locked()) {
             m_Data->m_repoLockCache.insertKey(m_UThread->getList()[i]);
         }
     }
-    m_Data->m_UpdateCache.dump_tree();
-    m_Data->m_repoLockCache.dump_tree();
     emit sigRefreshIcons(newer);
     emit sendNotify(i18n("Checking for updates finished"));
     if (newer) {

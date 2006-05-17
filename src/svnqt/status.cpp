@@ -103,7 +103,7 @@ namespace svn
                     status->repos_lock->expiration_date,
                     status->repos_lock->owner,
                     status->repos_lock->comment,
-                    status->repos_lock->comment);
+                    status->repos_lock->token);
       } else {
         m_Lock=LockEntry();
       }

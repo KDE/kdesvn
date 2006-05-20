@@ -67,7 +67,6 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
     dirProperties += ("svn:executable");
     dirProperties += ("svn:externals");
     dirProperties += ("svn:ignore");
-    dirProperties += ("svn:needs-lock");
     dirProperties += ("svn:mime-type");
     dirProperties += ("bugtraq:label");
     dirProperties += ("bugtraq:url");
@@ -88,10 +87,6 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
         <nobr><b>foo http://example.com/repos/projectA</b></nobr><br>\
         <nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></nobr>");
     dirComments += i18n("A newline separated list of file patterns to ignore.");
-    dirComments += i18n("Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br>\
-        The file will be set read-only when checked out or updated,\
-        indicating that a user must acquire a lock on the file before\
-        they can edit and commit changes.");
     dirComments += i18n("The mimetype of the file. Used to determine\
         whether to merge the file and how to serve it from\
         Apache. A mimetype beginning with <b>'text/'</b> (or an absent\

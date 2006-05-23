@@ -109,6 +109,7 @@ public:
     helpers::itemCache m_UpdateCache;
     helpers::itemCache m_Cache;
     helpers::itemCache m_conflictCache;
+    helpers::itemCache m_repoLockCache;
 
     QMap<KProcess*,QString> m_tempfilelist;
 
@@ -566,6 +567,17 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                     re;
                 text+=rb+i18n("Lock comment")+cs+
                     (*it).lockEntry().Comment()+re;
+            } else {
+                svn::Status d;
+                if (checkReposLockCache(_what,d)&&d.lockEntry().Locked()) {
+                    text+=rb+i18n("Lock token")+cs+(d.lockEntry().Token())+re;
+                    text+=rb+i18n("Owner")+cs+(d.lockEntry().Owner())+re;
+                    text+=rb+i18n("Locked on")+cs+
+                        helpers::sub2qt::apr_time2qtString(d.lockEntry().Date())+
+                        re;
+                    text+=rb+i18n("Lock comment")+cs+
+                        d.lockEntry().Comment()+re;
+                }
             }
         }
         text+="</table></p>\n";
@@ -1566,6 +1578,10 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
         emit clientException(e.msg());
         return;
     }
+    for (unsigned int i = 0; i<what.count();++i) {
+        m_Data->m_repoLockCache.deleteKey(*(what.at(i)),true);
+    }
+    m_Data->m_repoLockCache.dump_tree();
 }
 
 
@@ -1730,8 +1746,11 @@ void SvnActions::checkUpdateThread()
                 newer = true;
             }
         }
+        if (m_UThread->getList()[i].isLocked() &&
+            !m_UThread->getList()[i].entry().lockEntry().Locked()) {
+            m_Data->m_repoLockCache.insertKey(m_UThread->getList()[i]);
+        }
     }
-    m_Data->m_UpdateCache.dump_tree();
     emit sigRefreshIcons(newer);
     emit sendNotify(i18n("Checking for updates finished"));
     if (newer) {
@@ -1781,6 +1800,17 @@ bool SvnActions::checkModifiedCache(const QString&path)
     return m_Data->m_Cache.find(path);
 }
 
+bool SvnActions::checkReposLockCache(const QString&path)
+{
+    return m_Data->m_repoLockCache.findSingleValid(path,false);
+}
+
+bool SvnActions::checkReposLockCache(const QString&path,svn::Status&t)
+{
+    /// @todo create a method where svn::Status* will be a parameter so no copy is needed but just reading content
+    return m_Data->m_repoLockCache.findSingleValid(path,t);
+}
+
 bool SvnActions::checkConflictedCache(const QString&path)
 {
     return m_Data->m_conflictCache.find(path);
@@ -1792,6 +1822,7 @@ bool SvnActions::checkConflictedCache(const QString&path)
 bool SvnActions::createUpdateCache(const QString&what)
 {
     clearUpdateCache();
+    m_Data->m_repoLockCache.clear();
     stopCheckUpdateThread();
     m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();
@@ -1877,6 +1908,27 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
         }
     }
     return result;
+}
+
+bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
+{
+    if (!which) return false;
+    QString ex;
+    svn::Path p(which->fullName());
+    svn::PathPropertiesMapList pm;
+    try {
+        pm = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return false;
+    }
+    if (pm.size()>0) {
+        svn::PropertiesMap mp = pm[0].second;
+        if (mp.find("svn:needs-lock")!=mp.end()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec)

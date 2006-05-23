@@ -1705,7 +1705,7 @@ void kdesvnfilelist::slotLock()
     dlg = createDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
     if (!dlg) return;
     ptr->initHistory();
-    ptr->setRecCheckboxtext(i18n("Steal lock?"));
+    ptr->setRecCheckboxtext(i18n("Steal lock?"),false);
 
     if (dlg->exec()!=QDialog::Accepted) {
         delete dlg;

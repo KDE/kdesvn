@@ -45,7 +45,10 @@ namespace svn
     const char * lock_owner,
     const char * lock_comment,
     const char * lock_token)
-    : date(lock_time),exp(expiration_time),owner(lock_owner?lock_owner:""),comment(lock_comment?lock_comment:""),token(lock_token?lock_token:""),
+    : date(lock_time),exp(expiration_time),
+    owner(lock_owner?QString::fromUtf8(lock_owner):""),
+    comment(lock_comment?QString::fromUtf8(lock_comment):""),
+    token(lock_token?QString::fromUtf8(lock_token):""),
       locked(lock_token?true:false)
   {
   }
@@ -78,9 +81,9 @@ namespace svn
     if (src) {
       date = src->lock_creation_date;
       locked = src->lock_token?true:false;
-      token = (src->lock_token?src->lock_token:"");
-      comment = (src->lock_comment?src->lock_comment:"");
-      owner = (src->lock_owner?src->lock_owner:"");
+      token = (src->lock_token?QString::fromUtf8(src->lock_token):"");
+      comment = (src->lock_comment?QString::fromUtf8(src->lock_comment):"");
+      owner = (src->lock_owner?QString::fromUtf8(src->lock_owner):"");
     } else {
       date = 0;
       owner = "";
@@ -96,9 +99,9 @@ namespace svn
     if (src) {
       date = src->creation_date;
       locked = src->token?true:false;
-      token = (src->token?src->token:"");
-      comment = (src->comment?src->comment:"");
-      owner = (src->owner?src->owner:"");
+      token = (src->token?QString::fromUtf8(src->token):"");
+      comment = (src->comment?QString::fromUtf8(src->comment):"");
+      owner = (src->owner?QString::fromUtf8(src->owner):"");
     } else {
       date = 0;
       exp = 0;
@@ -120,9 +123,9 @@ namespace svn
     date = lock_time;
     exp = expiration_time;
     locked = lock_token?true:false;
-    token = lock_token?lock_token:"";
-    owner = lock_owner?lock_owner:"";
-    comment = lock_comment?lock_comment:"";
+    token = lock_token?QString::fromUtf8(lock_token):"";
+    owner = lock_owner?QString::fromUtf8(lock_owner):"";
+    comment = lock_comment?QString::fromUtf8(lock_comment):"";
   }
 }
 

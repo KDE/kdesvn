@@ -257,9 +257,12 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
                     p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnconflicted",KIcon::Desktop,size);
             } else if (p_Item->m_Stat.textStatus ()==svn_wc_status_missing) {
                 m_bgColor = MISSING;
-            } else if (isLocked()) {
+            } else if (isLocked()||wrap->checkReposLockCache(fullName())) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
                 m_bgColor = LOCKED;
+            } else if (wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnneedlock",KIcon::Desktop,size);
+                m_bgColor = NEEDLOCK;
             } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
                 m_bgColor = UPDATES;
@@ -437,7 +440,14 @@ bool SvnItem::isLocked()const
 
 QString SvnItem::lockOwner()const
 {
-    return p_Item->m_Stat.entry().lockEntry().Owner();
+    if (p_Item->m_Stat.entry().lockEntry().Locked()) {
+        return p_Item->m_Stat.entry().lockEntry().Owner();
+    }
+    svn::Status tmp;
+    if (getWrapper()->checkReposLockCache(fullName(),tmp)) {
+        return tmp.lockEntry().Owner();
+    }
+    return "";
 }
 
 

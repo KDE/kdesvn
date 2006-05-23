@@ -449,6 +449,21 @@ This entry is locked. In last column the owner of lock is listed. You may setup 
 <varlistentry>
 <term><inlinemediaobject>
 <imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>Needs locked</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry must be locked before edit and commit. Until you'll not set a lock subversion keeps it read-only.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
 <imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG" />
 </imageobject>
 <textobject>

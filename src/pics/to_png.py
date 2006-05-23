@@ -3,8 +3,8 @@
 import os
 
 def convert(file, px):
-    new_file=file.replace('.svgz','.png').replace('.svg','.png').replace('hisc-','').replace('action-','actions/').replace('filesys-','filesystems/')
-    os.system('/usr/bin/inkscape -e hicolor/%sx%s/%s -w %s -h %s  %s' % (px,px, new_file,  px, px,  file))
+    new_file=file.replace('.svgz','.png').replace('.svg','.png').replace('hisc-','')
+    os.system('/usr/bin/inkscape -e hicolor/hi%s-%s -w %s -h %s  %s' % (px, new_file,  px, px,  file))
     
 all_files=[
 'hisc-action-kdesvnaddrecursive.svgz',
@@ -33,6 +33,7 @@ all_files=[
 'hisc-filesys-kdesvnlocked.svgz',
 'hisc-filesys-kdesvnmodified.svgz',
 'hisc-filesys-kdesvnupdates.svgz',
+'hisc-filesys-kdesvnneedlock.svgz',
 ]
 
 i_sizes=[

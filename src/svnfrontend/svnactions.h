@@ -83,10 +83,14 @@ public:
     void getModifiedCache(const QString&path,svn::StatusEntries&dlist);
     bool checkModifiedCache(const QString&path);
     bool checkConflictedCache(const QString&path);
+    bool checkReposLockCache(const QString&path);
+    bool checkReposLockCache(const QString&path,svn::Status&t);
     void addModifiedCache(const svn::Status&what);
     void deleteFromModifiedCache(const QString&what);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
+    bool isLockNeeded(SvnItem*which,const svn::Revision&where);
+
     //! generate and displays a revision tree
     /*!
      * the parameter @a what must prepared, eg, if it comes from working copy

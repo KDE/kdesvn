@@ -61,7 +61,7 @@ public:
     svn::Client*m_Client;
     CContextListener* m_Listener;
 
-    bool getLogs(const QString&);
+    bool getLogs(const QString&,const svn::Revision&startr,const svn::Revision&endr);
 };
 
 RtreeData::RtreeData()
@@ -79,7 +79,7 @@ RtreeData::~RtreeData()
     delete progress;
 }
 
-bool RtreeData::getLogs(const QString&reposRoot)
+bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const svn::Revision&endr)
 {
     if (!m_Listener||!m_Client) {
         return false;
@@ -87,7 +87,7 @@ bool RtreeData::getLogs(const QString&reposRoot)
     try {
         StopDlg sdlg(m_Listener,dlgParent,
             0,"Logs","Getting logs - hit cancel for abort");
-        m_Client->log(reposRoot,svn::Revision::HEAD,svn::Revision((long)0),m_OldHistory,true,false,0);
+        m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);
     } catch (svn::ClientException ce) {
         kdDebug()<<ce.msg() << endl;
         return false;
@@ -98,6 +98,7 @@ bool RtreeData::getLogs(const QString&reposRoot)
 RevisionTree::RevisionTree(svn::Client*aClient,
     CContextListener*aListener,
     const QString& reposRoot,
+    const svn::Revision&startr,const svn::Revision&endr,
     const QString&origin,
     const svn::Revision& baserevision,
     QWidget*treeParent,QWidget*parent)
@@ -108,7 +109,7 @@ RevisionTree::RevisionTree(svn::Client*aClient,
     m_Data->m_Listener=aListener;
     m_Data->dlgParent=parent;
 
-    if (!m_Data->getLogs(reposRoot)) {
+    if (!m_Data->getLogs(reposRoot,startr,endr)) {
         return;
     }
 
@@ -379,14 +380,8 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 #endif
                 }
                 if (FORWARDENTRY.action==INTERNALCOPY ||
-                    /* FORWARDENTRY.action=='R' || */
                     FORWARDENTRY.action==INTERNALRENAME ) {
-#if 0
-                    if (FORWARDENTRY.action=='R' && FORWARDENTRY.path!=path ) {
-                        continue;
-                    }
-#endif
-                    bool ren = /* FORWARDENTRY.action=='R'|| */ FORWARDENTRY.action==INTERNALRENAME;
+                    bool ren = FORWARDENTRY.action==INTERNALRENAME;
                     QString tmpPath = path;
                     QString recPath;
                     if (FORWARDENTRY.copyToPath.length()==0) {
@@ -397,7 +392,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     recPath+=r;
                     n1 = uniqueNodeName(lastrev,tmpPath);
                     n2 = uniqueNodeName(j,recPath);
-                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
+                    if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
                     fillItem(j,i,n2,recPath);
                     if (ren) {
                         lastrev = j;
@@ -436,7 +431,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 #endif
                         n1 = uniqueNodeName(j,FORWARDENTRY.path);
                         n2 = uniqueNodeName(lastrev,FORWARDENTRY.path);
-                        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
+                        if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
                     break;
@@ -452,7 +447,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                              */
                             n1 = uniqueNodeName(j,"D_"+path);
                         }
-                        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
+                        if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
                         //get_out= true;
@@ -474,7 +469,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                              */
                             n1 = uniqueNodeName(j,"D_"+path);
                         }
-                        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
+                        if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
                         //get_out = true;

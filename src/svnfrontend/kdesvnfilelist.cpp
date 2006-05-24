@@ -208,6 +208,8 @@ void kdesvnfilelist::setupActions()
     m_LogRangeAction = new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
     m_LogFullAction = new KAction(i18n("Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
     tmp_action = new KAction(i18n("Full revision tree"),"kdesvnlog",KShortcut(CTRL+Key_T),this,SLOT(slotMakeTree()),m_filesAction,"make_svn_tree");
+    tmp_action = new KAction(i18n("Partial revision tree"),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_T),
+        this,SLOT(slotMakePartTree()),m_filesAction,"make_svn_partialtree");
 
     m_propertyAction = new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
@@ -2395,6 +2397,35 @@ void kdesvnfilelist::slotMakeTree()
     svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
 
     m_SvnWrapper->makeTree(what,rev);
+}
+
+void kdesvnfilelist::slotMakePartTree()
+{
+    QString what;
+    SvnItem*k = SelectedOrMain();
+    if (k) {
+        what = k->fullName();
+    } else if (!isWorkingCopy() && allSelected()->count()==0){
+        what = baseUri();
+    } else {
+        return;
+    }
+    Rangeinput_impl*rdlg;
+    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    if (!dlg) {
+        return;
+    }
+    int i = dlg->exec();
+    Rangeinput_impl::revision_range r;
+    if (i==QDialog::Accepted) {
+        r = rdlg->getRange();
+    }
+    dlg->saveDialogSize(*(Settings::self()->config()),"revisions_dlg",false);
+
+    if (i==QDialog::Accepted) {
+        svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
+        m_SvnWrapper->makeTree(what,rev,r.first,r.second);
+    }
 }
 
 /*!

@@ -458,8 +458,7 @@ void RevGraphView::dumpRevtree()
             *stream << "label=\"Modified at Revision "<<it1.data().rev<<"\",";
         }
         *stream << "];\n";
-        for (unsigned j=0;j
-        <it1.data().targets.count();++j) {
+        for (unsigned j=0;j<it1.data().targets.count();++j) {
             *stream<<"  "<<it1.key().latin1()<< " "
                 << "->"<<" "<<it1.data().targets[j].key
                 << " [fontsize=10,style=\"solid\"];\n";

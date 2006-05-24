@@ -97,10 +97,14 @@ public:
      * it must not contain a "file://" inside.
      * \param what item to display
      * \param rev Revision the item-path is available, intersting only when @a what is a repository item
+     * \param startr startrevision for log
+     * \param endr endrevision for log
      */
-    void makeTree(const QString&what,const svn::Revision&rev);
+    void makeTree(const QString&what,const svn::Revision&rev,
+        const svn::Revision&startr=svn::Revision(1),
+        const svn::Revision&endr=svn::Revision::HEAD);
     void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false,int limit = 0);
-    void makeLog(svn::Revision start,svn::Revision end,const QString&,bool list_files=false, int limit=0);
+    void makeLog(const svn::Revision&start,const svn::Revision&end,const QString&,bool list_files=false, int limit=0);
     const svn::LogEntries * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);
 
     void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);

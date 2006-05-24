@@ -203,6 +203,7 @@ protected slots:
     virtual void slotMakeRangeLog();
     virtual void slotMakeLog();
     virtual void slotMakeTree();
+    virtual void slotMakePartTree();
     virtual void slotInternalDrop();
 
 private slots:

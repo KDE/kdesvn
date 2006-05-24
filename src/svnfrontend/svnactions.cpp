@@ -212,7 +212,7 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
     return logs;
 }
 
-void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
+void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn::Revision&startr,const svn::Revision&endr)
 {
     QString url;
     QString ex;
@@ -257,6 +257,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
 
     RevisionTree rt(m_Data->m_Svnclient,m_Data->m_SvnContext,reposRoot,
+            startr,endr,
             e[0].url().mid(reposRoot.length()),rev,Dialog1Layout,m_Data->m_ParentList->realWidget());
     if (rt.isValid()) {
         disp = rt.getView();
@@ -269,7 +270,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev)
     }
 }
 
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files,int limit)
+void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
 {
     const svn::LogEntries * logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;

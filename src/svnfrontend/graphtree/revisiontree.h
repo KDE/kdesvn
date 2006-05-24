@@ -46,7 +46,9 @@ class RevisionTree{
 public:
     RevisionTree(svn::Client*,
         CContextListener*aListener,
-        const QString& reposRoot,const QString&,const svn::Revision& baserevision,QWidget*treeParent,
+        const QString& reposRoot,
+        const svn::Revision&startr,const svn::Revision&endr,
+        const QString&,const svn::Revision& baserevision,QWidget*treeParent,
         QWidget*parent=0);
     virtual ~RevisionTree();
 

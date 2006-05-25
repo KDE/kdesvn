@@ -148,12 +148,30 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
 
     bool parentIsWc = false;
     bool itemIsWc = isWorkingCopy(list[0],base);
+    bool itemIsRepository = false;
 
     QString _par = list[0].directory(true,true);
     parentIsWc = isWorkingCopy(_par,base);
 
     if (!parentIsWc && !itemIsWc) {
-        if (isRepository(list[0])) {
+        itemIsRepository = isRepository(list[0]);
+    }
+
+    if (!itemIsWc) {
+        if (itemIsRepository) {
+            result << "Export"
+                   << "Checkout";
+        } else {
+            result << "Exportto"
+                   << "Checkoutto";
+        }
+    } else {
+        result << "Update"
+               << "Commit";
+    }
+
+    if (!parentIsWc && !itemIsWc) {
+        if (itemIsRepository) {
             result << "Log"
                     << "Info";
             if (isRepository(list[0].upURL())) {

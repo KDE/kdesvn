@@ -51,9 +51,10 @@ k_dcop:
     //! get a subversion login
     /*!
     * \param realm the realm
+    * \param user default username
     * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
     */
-    QStringList get_login(QString);
+    QStringList get_login(QString,QString);
 
     // return: -1 dont accept 0 accept temporary 1 accept always
     //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,

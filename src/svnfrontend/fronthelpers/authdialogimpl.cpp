@@ -25,10 +25,10 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 
-AuthDialogImpl::AuthDialogImpl(const QString & realm,QWidget *parent, const char *name)
+AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
     :AuthDialogData(parent, name),curPass("")
 {
-    m_UsernameEdit->setText("");
+    m_UsernameEdit->setText(user);
     m_PasswordEdit->setText("");
     m_StorePasswordButton->setChecked(Settings::store_passwords());
     if (!realm.isEmpty()) {

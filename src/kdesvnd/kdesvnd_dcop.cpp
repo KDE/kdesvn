@@ -214,9 +214,9 @@ QStringList kdesvnd_dcop::getSingleActionMenu(QCString what)
     return getActionMenu(l);
 }
 
-QStringList kdesvnd_dcop::get_login(QString realm)
+QStringList kdesvnd_dcop::get_login(QString realm,QString user)
 {
-    AuthDialogImpl auth(realm);
+    AuthDialogImpl auth(realm,user);
     QStringList res;
     if (auth.exec()==QDialog::Accepted) {
         res.append(auth.Username());
@@ -339,7 +339,7 @@ bool IListener::contextGetLogin (const QString & realm,
                                   QString & password,
                                   bool & maySave)
 {
-    QStringList res = m_back->get_login(realm);
+    QStringList res = m_back->get_login(realm,username);
     if (res.count()!=3) {
         return false;
     }

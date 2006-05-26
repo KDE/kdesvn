@@ -129,7 +129,7 @@ bool CContextListener::contextGetLogin (
 {
     emit waitShow(true);
     emit sendNotify(realm);
-    AuthDialogImpl auth(realm);
+    AuthDialogImpl auth(realm,username);
     if (auth.exec()==QDialog::Accepted) {
         username=auth.Username();
         password=auth.Password();

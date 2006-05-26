@@ -409,8 +409,9 @@ bool KioListener::contextGetLogin (const QString & realm,
 
     QDataStream stream(params,IO_WriteOnly);
     stream << realm;
+    stream << username;
 
-    if (!par->dcopClient()->call("kded","kdesvnd","get_login(QString)",params,replyType,reply)) {
+    if (!par->dcopClient()->call("kded","kdesvnd","get_login(QString,QString)",params,replyType,reply)) {
         kdWarning()<<"Communication with dcop failed"<<endl;
         return false;
     }

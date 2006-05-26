@@ -26,7 +26,7 @@
 class AuthDialogImpl: public AuthDialogData {
 Q_OBJECT
 public:
-    AuthDialogImpl(const QString & realm = "", QWidget *parent = 0, const char *name = 0);
+    AuthDialogImpl(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);
 
     const QString Username()const;
     const QString Password();

@@ -80,7 +80,9 @@ void FileListViewItem::init()
 void FileListViewItem::setOpen(bool o)
 {
     if (o && childCount()==0) {
-        m_Ksvnfilelist->slotItemClicked(this);
+        m_Ksvnfilelist->setEnabled( false );
+        m_Ksvnfilelist->slotItemRead(this);
+        m_Ksvnfilelist->setEnabled( true );
     }
     KListViewItem::setOpen(o);
 }

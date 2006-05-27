@@ -696,7 +696,7 @@ kdesvnfilelist::~kdesvnfilelist()
     ssh.killSshAgent();
 }
 
-void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
+void kdesvnfilelist::slotItemRead(QListViewItem*aItem)
 {
     if (!aItem) return;
     FileListViewItem* k = static_cast<FileListViewItem*>( aItem );
@@ -713,6 +713,28 @@ void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
             m_Dirsread[k->fullName()]=true;
         }
     }
+}
+
+void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
+{
+    if (!aItem) return;
+    return;
+#if 0
+    FileListViewItem* k = static_cast<FileListViewItem*>( aItem );
+    bool _ex = true;
+    if (isWorkingCopy()) {
+        QDir d(k->fullName()); //FIXME: remove this as soon as we've been able to set entry->kind in Checkdirs
+        _ex = k->isDir()||d.exists();
+    } else {
+        _ex = k->isDir();
+    }
+
+    if (_ex &&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
+        if (checkDirs(k->fullName(),k)) {
+            m_Dirsread[k->fullName()]=true;
+        }
+    }
+#endif
 }
 
 void kdesvnfilelist::slotReinitItem(SvnItem*item)
@@ -1031,7 +1053,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
         if (allSelected()->count()==0) {
             refreshCurrentTree();
         } else {
-            slotReinitItem(allSelected()->at(0));
+            refreshCurrent(allSelected()->at(0));
         }
     }
     delete dlg;

@@ -38,7 +38,7 @@ xdg_apps_DATA = kdesvn.desktop
 rcdir = $(kde_datadir)/kdesvn
 rc_DATA = kdesvnui.rc
 
-SUBDIRS = settings svnqt helpers svnfrontend icons pics kiosvn kdesvnd
+SUBDIRS = settings ksvnwidgets svnqt helpers svnfrontend icons pics kiosvn kdesvnd
 kdesvnaskpass_LDFLAGS = $(KDE_RPATH) $(all_libraries)
 kdesvnaskpass_SOURCES = kdesvn-askpass.cpp
 kdesvnaskpass_LDADD = $(LIB_KDEUI)
@@ -54,8 +54,8 @@ libkdesvnpart_la_LDFLAGS = -avoid-version -module $(KDE_PLUGIN) \
 	$(all_libraries)
 libkdesvnpart_la_LIBADD = $(top_builddir)/src/settings/libkdesvnsettings.la \
 	$(top_builddir)/src/svnqt/libsvnqt.la $(top_builddir)/src/svnfrontend/libsvnfrontend.la \
-	$(top_builddir)/src/helpers/libhelper.la $(SVN_LIBS) $(APR_LIBS) $(LIB_KPARTS) $(LIB_KFILE) $(LIB_QT) \
-	$(LIB_KDECORE) $(LIB_KDEUI)
+	$(top_builddir)/src/helpers/libhelper.la $(top_builddir)/src/ksvnwidgets/libksvnwidgets.la $(SVN_LIBS) \
+	$(APR_LIBS) $(LIB_KPARTS) $(LIB_KFILE) $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 
 # this is where the desktop file will go
 partdesktopdir = $(kde_servicesdir)

@@ -20,7 +20,7 @@
 #ifndef LOGMSG_IMPL_H
 #define LOGMSG_IMPL_H
 
-#include "src/svnfrontend/fronthelpers/logmessage.h"
+#include "src/ksvnwidgets/logmessage.h"
 #include "svnqt/commititem.hpp"
 #include <qvaluelist.h>
 #include <qpair.h>

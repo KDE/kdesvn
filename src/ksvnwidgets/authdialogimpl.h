@@ -20,7 +20,7 @@
 #ifndef AUTHDIALOGIMPL_H
 #define AUTHDIALOGIMPL_H
 
-#include "src/svnfrontend/fronthelpers/authdlg.h"
+#include "src/ksvnwidgets/authdlg.h"
 #include <qstring.h>
 
 class AuthDialogImpl: public AuthDialogData {

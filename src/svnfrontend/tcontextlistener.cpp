@@ -20,9 +20,9 @@
 #include "tcontextlistener.h"
 
 #include "ccontextlistener.h"
-#include "authdialogimpl.h"
-#include "logmsg_impl.h"
-#include "ssltrustprompt_impl.h"
+#include "src/ksvnwidgets/authdialogimpl.h"
+#include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "threadcontextlistenerdata.h"
 
 #include <kapplication.h>

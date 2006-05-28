@@ -20,9 +20,9 @@
 
 #include "config.h"
 #include "kdesvnd_dcop.h"
-#include "authdialogimpl.h"
-#include "ssltrustprompt_impl.h"
-#include "logmsg_impl.h"
+#include "src/ksvnwidgets/authdialogimpl.h"
+#include "src/ksvnwidgets/ssltrustprompt_impl.h"
+#include "src/ksvnwidgets/logmsg_impl.h"
 #include "svnqt/client.hpp"
 #include "svnqt/revision.hpp"
 #include "svnqt/status.hpp"

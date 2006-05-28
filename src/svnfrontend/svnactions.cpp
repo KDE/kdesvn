@@ -27,7 +27,7 @@
 #include "modifiedthread.h"
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
-#include "logmsg_impl.h"
+#include "src/ksvnwidgets/logmsg_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
 #include "svnqt/client.hpp"

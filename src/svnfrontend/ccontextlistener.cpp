@@ -18,9 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "ccontextlistener.h"
-#include "authdialogimpl.h"
-#include "logmsg_impl.h"
-#include "ssltrustprompt_impl.h"
+#include "src/ksvnwidgets/authdialogimpl.h"
+#include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/ksvnwidgets/ssltrustprompt_impl.h"
 
 #include <klocale.h>
 #include <kapp.h>

@@ -20,7 +20,7 @@
 #ifndef IMPORTDIR_LOGMSG_H
 #define IMPORTDIR_LOGMSG_H
 
-#include "logmsg_impl.h"
+#include "src/ksvnwidgets/logmsg_impl.h"
 
 class QCheckBox;
 /**

@@ -21,8 +21,6 @@
 #include "kiosvn.h"
 #include "kiolistener.h"
 
-#include "svnfrontend/svnactions.h"
-#include "svnfrontend/dummydisplay.h"
 #include "svnqt/dirent.hpp"
 #include "svnqt/url.hpp"
 #include "svnqt/status.hpp"

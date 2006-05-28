@@ -3,12 +3,9 @@ METASOURCES = AUTO
 kde_module_LTLIBRARIES = kio_ksvn.la
 
 kio_ksvn_la_LDFLAGS = -avoid-version -module $(all_libraries) $(KDE_PLUGIN)
-kio_ksvn_la_LIBADD = \
-	$(top_builddir)/src/svnqt/libsvnqt.la \
-	$(top_builddir)/src/svnfrontend/fronthelpers/libsvnfrontend_helpers.la \
-	$(top_builddir)/src/helpers/libhelper.la \
-	$(APR_LIBS) $(SVN_LIBS) \
-	$(LIB_KFILE) $(LIB_KPARTS) $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) $(LIB_KIO) -lDCOP
+kio_ksvn_la_LIBADD = $(top_builddir)/src/svnqt/libsvnqt.la \
+	$(top_builddir)/src/helpers/libhelper.la $(APR_LIBS) $(SVN_LIBS) $(LIB_KFILE) $(LIB_KPARTS) $(LIB_QT) \
+	$(LIB_KDECORE) $(LIB_KDEUI) $(LIB_KIO) -lDCOP
 
 kio_ksvn_la_SOURCES = kiosvn.cpp kiolistener.cpp
 

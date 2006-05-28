@@ -83,6 +83,7 @@ void FileListViewItem::setOpen(bool o)
         m_Ksvnfilelist->setEnabled( false );
         m_Ksvnfilelist->slotItemRead(this);
         m_Ksvnfilelist->setEnabled( true );
+        m_Ksvnfilelist->setFocus();
     }
     KListViewItem::setOpen(o);
 }

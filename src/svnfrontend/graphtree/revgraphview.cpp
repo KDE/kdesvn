@@ -454,8 +454,10 @@ void RevGraphView::dumpRevtree()
             *stream << "label=\"Renamed to "<< it1.data().name.latin1()
                     << " at Rev " << it1.data().rev
                     <<"\",";
-        } else {
+        } else if (it1.data().Action=='M') {
             *stream << "label=\"Modified at Revision "<<it1.data().rev<<"\",";
+        } else {
+            *stream << "label=\"Revision "<<it1.data().rev<<"\",";
         }
         *stream << "];\n";
         for (unsigned j=0;j<it1.data().targets.count();++j) {

@@ -352,6 +352,8 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 
     QString path = _path;
     long lastrev = _last;
+    /* this is required if an item will modified AND copied at same revision.*/
+    long trev = -1;
 #ifdef DEBUG_PARSE
     kdDebug()<<"Searching for "<<path<< " at revision " << startrev
         << " recursion " << recurse << endl;
@@ -390,9 +392,17 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     QString r = path.mid(FORWARDENTRY.path.length());
                     recPath= FORWARDENTRY.copyToPath;
                     recPath+=r;
-                    n1 = uniqueNodeName(lastrev,tmpPath);
+                    if (lastrev==j) {
+                        /* modification of item was detected before and so trev is set to rev before modify (which will
+                        be the startpoint of copy in subversion not modification at same time) */
+                        n1 = uniqueNodeName(trev,tmpPath);
+                    } else {
+                        n1 = uniqueNodeName(lastrev,tmpPath);
+                    }
                     n2 = uniqueNodeName(j,recPath);
-                    if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
+                    if (lastrev>0) {
+                        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
+                    }
                     fillItem(j,i,n2,recPath);
                     if (ren) {
                         lastrev = j;
@@ -433,6 +443,11 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         n2 = uniqueNodeName(lastrev,FORWARDENTRY.path);
                         if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
+                        /* modify of same item (in same recurse) should be only once at a revision
+                         * so check if lastrev==j must not be done but will cost cpu ticks so I always
+                         * set trev and lastrev.
+                         */
+                        trev = lastrev;
                         lastrev = j;
                     break;
                     case 'D':
@@ -494,10 +509,17 @@ QWidget*RevisionTree::getView()
 
 void RevisionTree::fillItem(long rev,int pathIndex,const QString&nodeName,const QString&path)
 {
-    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Action=m_Data->m_History[rev].changedPaths[pathIndex].action;
     m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].name=path;
     m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].rev = rev;
-    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author=m_Data->m_History[rev].author;
-    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message=m_Data->m_History[rev].message;
-    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(m_Data->m_History[rev].date);
+    if (pathIndex>=0) {
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Action=m_Data->m_History[rev].changedPaths[pathIndex].action;
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author=m_Data->m_History[rev].author;
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message=m_Data->m_History[rev].message;
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(m_Data->m_History[rev].date);
+    } else {
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Action=0;
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author="";
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message="";
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(0);
+    }
 }

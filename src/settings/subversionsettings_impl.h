@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005 by Rajko Albrecht                                  *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,17 +17,31 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef REVISIONTREESETTINGSDLG_IMPL_H
-#define REVISIONTREESETTINGSDLG_IMPL_H
 
-#include "src/svnfrontend/revisiontree_settings.h"
+#ifndef SUBVERSIONSETTINGS_IMPL_H
+#define SUBVERSIONSETTINGS_IMPL_H
 
-class RevisiontreeSettingsDlg_impl: public RevisiontreeSettingsDlg
+#include "src/settings/subversion_settings.h"
+
+class SubversionSettings_impl : public SubversionSettings
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    RevisiontreeSettingsDlg_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~RevisiontreeSettingsDlg_impl();
+  SubversionSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  ~SubversionSettings_impl();
+  /*$PUBLIC_FUNCTIONS$*/
+
+public slots:
+  /*$PUBLIC_SLOTS$*/
+
+protected:
+  /*$PROTECTED_FUNCTIONS$*/
+
+protected slots:
+  /*$PROTECTED_SLOTS$*/
+
 };
 
 #endif
+

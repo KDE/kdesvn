@@ -19,11 +19,11 @@
  ***************************************************************************/
 
 #include "kdesvn_part.h"
-#include "svnfrontend/fronthelpers/settings.h"
-#include "svnfrontend/displaysettings_impl.h"
-#include "svnfrontend/dispcolorsettings_impl.h"
-#include "svnfrontend/revisiontreesettingsdlg_impl.h"
-#include "subversionsettings_impl.h"
+#include "src/settings/kdesvnsettings.h"
+#include "settings/displaysettings_impl.h"
+#include "settings/dispcolorsettings_impl.h"
+#include "settings/revisiontreesettingsdlg_impl.h"
+#include "settings/subversionsettings_impl.h"
 #include "kdesvnview.h"
 #include "commandline_part.h"
 #include "../config.h"
@@ -168,17 +168,17 @@ void kdesvnPart::setupActions()
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
             actionCollection(),"toggle_use_kompare");
-    toggletemp->setChecked(Settings::use_kompare_for_diff());
+    toggletemp->setChecked(Kdesvnsettings::use_kompare_for_diff());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
     toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
             actionCollection(),"toggle_log_follows");
-    toggletemp->setChecked(Settings::log_follows_nodes());
+    toggletemp->setChecked(Kdesvnsettings::log_follows_nodes());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
 
     toggletemp = new KToggleAction(i18n("Display ignored files"),KShortcut(),
             actionCollection(),"toggle_ignored_files");
-    toggletemp->setChecked(Settings::display_ignored_files());
+    toggletemp->setChecked(Kdesvnsettings::display_ignored_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
 #if 0
     /// not needed this moment
@@ -206,8 +206,8 @@ void kdesvnPart::setupActions()
  */
 void kdesvnPart::slotLogFollowNodes(bool how)
 {
-    Settings::setLog_follows_nodes(how);
-    Settings::writeConfig();
+    Kdesvnsettings::setLog_follows_nodes(how);
+    Kdesvnsettings::writeConfig();
 }
 
 
@@ -216,8 +216,8 @@ void kdesvnPart::slotLogFollowNodes(bool how)
  */
 void kdesvnPart::slotDisplayIgnored(bool how)
 {
-    Settings::setDisplay_ignored_files(how);
-    Settings::writeConfig();
+    Kdesvnsettings::setDisplay_ignored_files(how);
+    Kdesvnsettings::writeConfig();
     emit refreshTree();
 }
 
@@ -240,8 +240,8 @@ void kdesvnPart::slotDisplayUnkown(bool )
 void kdesvnPart::slotUseKompare(bool how)
 {
     int selected = how ? 1 : 0;
-    Settings::setUse_kompare_for_diff(selected);
-    Settings::writeConfig();
+    Kdesvnsettings::setUse_kompare_for_diff(selected);
+    Kdesvnsettings::writeConfig();
 }
 
 
@@ -324,7 +324,7 @@ void kdesvnPart::slotShowSettings()
     }
     KConfigDialog *dialog = new KConfigDialog(widget(),
          "kdesvnpart_settings",
-         Settings::self(),
+         Kdesvnsettings::self(),
          KDialogBase::IconList);
     dialog->addPage(new DisplaySettings_impl(0,"general_items"),
         i18n("General"),"configure",i18n("General"),true);
@@ -349,15 +349,15 @@ void kdesvnPart::slotSettingsChanged()
     KAction * temp;
     temp = actionCollection()->action("toggle_use_kompare");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(Settings::use_kompare_for_diff()==1);
+        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::use_kompare_for_diff()==1);
     }
     temp = actionCollection()->action("toggle_log_follows");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(Settings::log_follows_nodes());
+        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::log_follows_nodes());
     }
     temp = actionCollection()->action("toggle_ignored_files");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(Settings::display_ignored_files());
+        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::display_ignored_files());
     }
 #if 0
     /// not needed this momenta

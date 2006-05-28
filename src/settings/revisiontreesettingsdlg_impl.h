@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2006 by Rajko Albrecht                                  *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,19 +17,17 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef DISPLAYSETTINGS_IMPL_H
-#define DISPLAYSETTINGS_IMPL_H
+#ifndef REVISIONTREESETTINGSDLG_IMPL_H
+#define REVISIONTREESETTINGSDLG_IMPL_H
 
-#include "src/svnfrontend/display_settings.h"
+#include "src/settings/revisiontree_settings.h"
 
-class DisplaySettings_impl: public DisplaySettings {
-Q_OBJECT
+class RevisiontreeSettingsDlg_impl: public RevisiontreeSettingsDlg
+{
+    Q_OBJECT
 public:
-    DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~DisplaySettings_impl();
-protected slots:
-    virtual void diffDispChanged();
-    virtual void dispFileInfotoggled(bool);
+    RevisiontreeSettingsDlg_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~RevisiontreeSettingsDlg_impl();
 };
 
 #endif

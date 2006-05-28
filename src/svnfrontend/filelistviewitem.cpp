@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "filelistviewitem.h"
 #include "kdesvnfilelist.h"
-#include "fronthelpers/settings.h"
+#include "src/settings/kdesvnsettings.h"
 #include "helpers/sub2qt.h"
 #include "svnqt/status.hpp"
 #include "svnqt/revision.hpp"
@@ -128,8 +128,8 @@ void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool 
 
 void FileListViewItem::makePixmap()
 {
-    int size = Settings::listview_icon_size();
-    bool overlay = Settings::display_overlays();
+    int size = Kdesvnsettings::listview_icon_size();
+    bool overlay = Kdesvnsettings::display_overlays();
     QPixmap pm;
     if (m_Pixmap.isNull()) {
         pm = getPixmap(size,overlay);
@@ -143,8 +143,8 @@ void FileListViewItem::setPreviewPix(const QPixmap& pixmap)
 {
     if (pixmap.isNull()) return;
     m_Pixmap = pixmap;
-    int size = Settings::listview_icon_size();
-    bool overlay = Settings::display_overlays();
+    int size = Kdesvnsettings::listview_icon_size();
+    bool overlay = Kdesvnsettings::display_overlays();
     QPixmap pm = getPixmap(pixmap,size,overlay);
     setPixmap(COL_ICON,pm);
 }
@@ -216,7 +216,7 @@ void FileListViewItem::updateStatus(const svn::Status&s)
 
 void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
-    bool colors = Settings::colored_state();
+    bool colors = Kdesvnsettings::colored_state();
     if (!colors||m_bgColor==NONE) {
         KListViewItem::paintCell(p,cg,column,width,alignment);
         return;
@@ -225,31 +225,31 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
     QColor _bgColor;
     switch(m_bgColor) {
         case UPDATES:
-            _bgColor = Settings::color_need_update();
+            _bgColor = Kdesvnsettings::color_need_update();
             break;
         case  LOCKED:
-            _bgColor = Settings::color_locked_item();
+            _bgColor = Kdesvnsettings::color_locked_item();
             break;
         case  ADDED:
-            _bgColor = Settings::color_item_added();
+            _bgColor = Kdesvnsettings::color_item_added();
             break;
         case  DELETED:
-            _bgColor = Settings::color_item_deleted();
+            _bgColor = Kdesvnsettings::color_item_deleted();
             break;
         case  MODIFIED:
-            _bgColor = Settings::color_changed_item();
+            _bgColor = Kdesvnsettings::color_changed_item();
             break;
         case MISSING:
-            _bgColor = Settings::color_missed_item();
+            _bgColor = Kdesvnsettings::color_missed_item();
             break;
         case NOTVERSIONED:
-            _bgColor = Settings::color_notversioned_item();
+            _bgColor = Kdesvnsettings::color_notversioned_item();
             break;
         case CONFLICT:
-            _bgColor = Settings::color_conflicted_item();
+            _bgColor = Kdesvnsettings::color_conflicted_item();
             break;
         case NEEDLOCK:
-            _bgColor = Settings::color_need_lock();
+            _bgColor = Kdesvnsettings::color_need_lock();
             break;
         default:
             KListViewItem::paintCell(p,cg,column,width,alignment);

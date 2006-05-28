@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "svnlogdlgimp.h"
-#include "fronthelpers/settings.h"
+#include "src/settings/kdesvnsettings.h"
 #include "svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include "svnactions.h"
@@ -134,7 +134,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     m_ControlKeyDown = false;
     m_first = 0;
     m_second = 0;
-    if (Settings::self()->log_always_list_changed_files()) {
+    if (Kdesvnsettings::self()->log_always_list_changed_files()) {
         buttonListFiles->hide();
     } else {
         m_ChangedList->hide();
@@ -215,11 +215,11 @@ void SvnLogDlgImp::saveSize()
 {
     int scnum = QApplication::desktop()->screenNumber(parentWidget());
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
-    KConfigGroupSaver cs(Settings::self()->config(), groupName);
+    KConfigGroupSaver cs(Kdesvnsettings::self()->config(), groupName);
     QSize sizeToSave = size();
-    Settings::self()->config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
+    Kdesvnsettings::self()->config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
         QString::number( sizeToSave.width()), true, false);
-    Settings::self()->config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
+    Kdesvnsettings::self()->config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
         QString::number( sizeToSave.height()), true, false);
 }
 
@@ -230,9 +230,9 @@ QSize SvnLogDlgImp::dialogSize()
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
     w = sizeHint().width();
     h = sizeHint().height();
-    KConfigGroupSaver cs(Settings::self()->config(), groupName);
-    w = Settings::self()->config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
-    h = Settings::self()->config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
+    KConfigGroupSaver cs(Kdesvnsettings::self()->config(), groupName);
+    w = Kdesvnsettings::self()->config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
+    h = Kdesvnsettings::self()->config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
     return( QSize( w, h ) );
 }
 

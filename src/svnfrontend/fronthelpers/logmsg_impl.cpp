@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "logmsg_impl.h"
-#include "settings.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <ktextedit.h>
 #include <kcombobox.h>
@@ -152,8 +152,8 @@ bool Logmsg_impl::isRecursive()const
 void Logmsg_impl::initHistory()
 {
     if (smax_message_history==0xFFFF) {
-        smax_message_history = Settings::max_log_messages();
-        KConfigGroup cs(Settings::self()->config(),"log_messages");
+        smax_message_history = Kdesvnsettings::max_log_messages();
+        KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
         QString s = QString::null;
         unsigned int current = 0;
         QString key = QString("log_%0").arg(current);
@@ -196,7 +196,7 @@ void Logmsg_impl::saveHistory()
     if (sLogHistory.size()>smax_message_history) {
         sLogHistory.erase(sLogHistory.fromLast());
     }
-    KConfigGroup cs(Settings::self()->config(),"log_messages");
+    KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
     for (unsigned int i = 0; i < sLogHistory.size();++i) {
         cs.writeEntry(QString("log_%0").arg(i),sLogHistory[i]);
     }

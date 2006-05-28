@@ -21,7 +21,7 @@
 #include "graphtreelabel.h"
 #include "pannerview.h"
 #include "graphtree_defines.h"
-#include "../fronthelpers/settings.h"
+#include "src/settings/kdesvnsettings.h"
 #include "../stopdlg.h"
 #include "svnqt/client.hpp"
 
@@ -372,24 +372,24 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
     }
     switch (it.data().Action) {
         case 'D':
-            res = Settings::tree_delete_color();
+            res = Kdesvnsettings::tree_delete_color();
             break;
         case 'M':
-            res = Settings::tree_modify_color();
+            res = Kdesvnsettings::tree_modify_color();
             break;
         case 'A':
-            res = Settings::tree_add_color();
+            res = Kdesvnsettings::tree_add_color();
             break;
         case 'C':
         case 1:
-            res = Settings::tree_copy_color();
+            res = Kdesvnsettings::tree_copy_color();
             break;
         case 'R':
         case 2:
-            res = Settings::tree_rename_color();
+            res = Kdesvnsettings::tree_rename_color();
             break;
         default:
-            res = Settings::tree_modify_color();
+            res = Kdesvnsettings::tree_modify_color();
             break;
     }
     return res;
@@ -411,7 +411,7 @@ void RevGraphView::dumpRevtree()
 
     *stream << "digraph \"callgraph\" {\n";
     *stream << "  bgcolor=\"transparent\";\n";
-    int dir = Settings::tree_direction();
+    int dir = Kdesvnsettings::tree_direction();
     *stream << QString("  rankdir=\"");
     switch (dir) {
         case 3:
@@ -749,7 +749,7 @@ void RevGraphView::setNewDirection(int dir)
 {
     if (dir<0)dir=3;
     else if (dir>3)dir=0;
-    Settings::setTree_direction(dir);
+    Kdesvnsettings::setTree_direction(dir);
     dumpRevtree();
 }
 
@@ -787,13 +787,13 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
     switch (r) {
         case 101:
         {
-            int dir = Settings::tree_direction();
+            int dir = Kdesvnsettings::tree_direction();
             setNewDirection(++dir);
         }
         break;
         case 102:
         {
-            int dir = Settings::tree_direction();
+            int dir = Kdesvnsettings::tree_direction();
             setNewDirection(--dir);
         }
         break;
@@ -877,7 +877,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
     tdir.setAutoDelete(true);
     kdDebug()<<"Non recourse diff"<<endl;
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
-    bool ignore_content = Settings::diff_ignore_content();
+    bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
         StopDlg sdlg(m_Listener,kapp->activeModalWidget(),0,"Diffing","Diffing - hit cancel for abort");
         ex = m_Client->diff(svn::Path(tn),

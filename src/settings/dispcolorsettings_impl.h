@@ -17,31 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#ifndef DISPCOLORSETTINGS_IMPL_H
+#define DISPCOLORSETTINGS_IMPL_H
 
-#ifndef SUBVERSIONSETTINGS_IMPL_H
-#define SUBVERSIONSETTINGS_IMPL_H
+#include "src/settings/dispcolor_settings.h"
 
-#include "src/svnfrontend/subversion_settings.h"
-
-class SubversionSettings_impl : public SubversionSettings
-{
-  Q_OBJECT
-
+class DispColorSettings_impl: public DispColorSettings {
+Q_OBJECT
 public:
-  SubversionSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-  ~SubversionSettings_impl();
-  /*$PUBLIC_FUNCTIONS$*/
-
-public slots:
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
+    DispColorSettings_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~DispColorSettings_impl();
 protected slots:
-  /*$PROTECTED_SLOTS$*/
-
+    virtual void coloredStateToggled(bool);
 };
 
 #endif
-

@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "authdialogimpl.h"
-#include "settings.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <kpassdlg.h>
 #include <klineedit.h>
@@ -30,7 +30,7 @@ AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget 
 {
     m_UsernameEdit->setText(user);
     m_PasswordEdit->setText("");
-    m_StorePasswordButton->setChecked(Settings::store_passwords());
+    m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());
     if (!realm.isEmpty()) {
         m_RealmLabel->setText(m_RealmLabel->text()+" "+realm);
         resize( QSize(334, 158).expandedTo(minimumSizeHint()) );

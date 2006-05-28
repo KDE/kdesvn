@@ -29,7 +29,7 @@
 #include "stopdlg.h"
 #include "logmsg_impl.h"
 #include "graphtree/revisiontree.h"
-#include "fronthelpers/settings.h"
+#include "src/settings/kdesvnsettings.h"
 #include "svnqt/client.hpp"
 #include "svnqt/annotate_line.hpp"
 #include "svnqt/context_listener.hpp"
@@ -175,7 +175,7 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Settings::self()->config()),name?name:DIALOGS_SIZES));
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),name?name:DIALOGS_SIZES));
     return dlg;
 }
 
@@ -194,7 +194,7 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
     QString ex;
     if (!m_Data->m_CurrentContext) return 0;
 
-    bool follow = Settings::log_follows_nodes();
+    bool follow = Kdesvnsettings::log_follows_nodes();
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Logs","Getting logs - hit cancel for abort");
@@ -263,9 +263,9 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
         disp = rt.getView();
         if (disp) {
             connect(disp,SIGNAL(dispDiff(const QString&)),this,SLOT(dispDiff(const QString&)));
-            dlg.resize(dlg.configDialogSize(*(Settings::self()->config()),"revisiontree_dlg"));
+            dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg"));
             dlg.exec();
-            dlg.saveDialogSize(*(Settings::self()->config()),"revisiontree_dlg",false);
+            dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg",false);
         }
     }
 }
@@ -342,7 +342,7 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, const QString
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize(*(Settings::self()->config()),"blame_dlg",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
         delete dlg;
     }
 }
@@ -385,7 +385,7 @@ void SvnActions::makeCat(const svn::Revision&start, const QString&what, const QS
             ptr->setWordWrap(QTextEdit::NoWrap);
             ptr->setText("<code>"+QStyleSheet::convertFromPlainText(content)+"</code>");
             dlg->exec();
-            dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);
+            dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
             delete dlg;
         }
     } else {
@@ -395,7 +395,7 @@ void SvnActions::makeCat(const svn::Revision&start, const QString&what, const QS
         //ptr->setShowZoomer( true );
         ptr->setImage( img );
         dlg->exec();
-        dlg->saveDialogSize(*(Settings::self()->config()),"cat_display_dlg",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
         delete dlg;
     }
 }
@@ -604,7 +604,7 @@ void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const sv
     if (dlg) {
         ptr->setText(res);
         dlg->exec();
-        dlg->saveDialogSize(*(Settings::self()->config()),"info_dialog",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"info_dialog",false);
         delete dlg;
     }
 }
@@ -625,7 +625,7 @@ void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const sv
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize(*(Settings::self()->config()),"info_dialog",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"info_dialog",false);
         delete dlg;
     }
 }
@@ -644,11 +644,11 @@ void SvnActions::slotProperties()
     PropertiesDlg dlg(k,svnclient(),
         m_Data->m_ParentList->isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
-    dlg.resize(dlg.configDialogSize(*(Settings::self()->config()), "properties_dlg"));
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()), "properties_dlg"));
     if (dlg.exec()!=QDialog::Accepted) {
         return;
     }
-    dlg.saveDialogSize(*(Settings::self()->config()),"properties_dlg",false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"properties_dlg",false);
     QString ex;
     PropertiesDlg::tPropEntries setList;
     QValueList<QString> delList;
@@ -705,7 +705,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     svn_revnum_t nnum;
     svn::Targets _targets;
     svn::Pathes _deldir;
-    bool review = Settings::review_commit();
+    bool review = Kdesvnsettings::review_commit();
     QString msg;
 
     if (!review) {
@@ -814,7 +814,7 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
     tdir.setAutoDelete(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     svn::Path tmpPath(tn);
-    bool ignore_content = Settings::diff_ignore_content();
+    bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
@@ -848,7 +848,7 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
     KTempDir tdir;
     tdir.setAutoDelete(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
-    bool ignore_content = Settings::diff_ignore_content();
+    bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
@@ -872,7 +872,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     tdir.setAutoDelete(true);
     kdDebug()<<"Non recourse diff"<<endl;
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
-    bool ignore_content = Settings::diff_ignore_content();
+    bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
@@ -890,7 +890,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
 
 void SvnActions::dispDiff(const QString&ex)
 {
-    int disp = Settings::use_kompare_for_diff();
+    int disp = Kdesvnsettings::use_kompare_for_diff();
     if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
@@ -903,7 +903,7 @@ void SvnActions::dispDiff(const QString&ex)
         }
         delete proc;
     } else if (disp>1) {
-        QString what = Settings::external_diff_display();
+        QString what = Kdesvnsettings::external_diff_display();
         QStringList wlist = QStringList::split(" ",what);
         KProcess*proc = new KProcess();
         bool fname_used = false;
@@ -939,7 +939,7 @@ void SvnActions::dispDiff(const QString&ex)
     if (dlg) {
         ptr->setText("<code>"+QStyleSheet::convertFromPlainText(ex)+"</code>");
         dlg->exec();
-        dlg->saveDialogSize(*(Settings::self()->config()),"diff_display",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
         delete dlg;
     }
 }
@@ -1143,7 +1143,7 @@ void SvnActions::CheckoutExport(bool _exp)
             bool openit = ptr->openAfterJob();
             makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
         }
-        dlg->saveDialogSize(*(Settings::self()->config()),"checkout_export_dialog",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
         delete dlg;
     }
 }
@@ -1403,7 +1403,7 @@ bool SvnActions::makeSwitch(const QString&path,const QString&what)
             svn::Revision r = ptr->toRevision();
             done = makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
         }
-        dlg->saveDialogSize(*(Settings::self()->config()),"switch_url_dlg",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"switch_url_dlg",false);
         delete dlg;
     }
     return done;
@@ -1591,13 +1591,13 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
  */
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all)
 {
-    bool display_ignores = Settings::display_ignored_files();
+    bool display_ignores = Kdesvnsettings::display_ignored_files();
     return makeStatus(what,dlist,where,rec,all,display_ignores);
 }
 
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where,bool rec,bool all,bool display_ignores,bool updates)
 {
-    bool disp_remote_details = Settings::details_on_remote_listing();
+    bool disp_remote_details = Kdesvnsettings::details_on_remote_listing();
     QString ex;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
@@ -1650,7 +1650,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
                 addItems(displist,false);
             }
         }
-        dlg->saveDialogSize(*(Settings::self()->config()),"add_items_dlg",false);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"add_items_dlg",false);
         delete dlg;
     }
 }

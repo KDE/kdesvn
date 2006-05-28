@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandexec.h"
-#include "fronthelpers/settings.h"
+#include "src/settings/kdesvnsettings.h"
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
 #include "svnqt/targets.hpp"
@@ -306,7 +306,7 @@ void CommandExec::slotCmd_log()
     if (m_pCPart->start == svn::Revision::UNDEFINED) {
         m_pCPart->start = 1;
     }
-    bool list = Settings::self()->log_always_list_changed_files();
+    bool list = Kdesvnsettings::self()->log_always_list_changed_files();
     m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list,m_pCPart->log_limit);
 }
 

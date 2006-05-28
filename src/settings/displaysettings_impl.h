@@ -17,18 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef DISPCOLORSETTINGS_IMPL_H
-#define DISPCOLORSETTINGS_IMPL_H
+#ifndef DISPLAYSETTINGS_IMPL_H
+#define DISPLAYSETTINGS_IMPL_H
 
-#include "src/svnfrontend/dispcolor_settings.h"
+#include "src/settings/display_settings.h"
 
-class DispColorSettings_impl: public DispColorSettings {
+class DisplaySettings_impl: public DisplaySettings {
 Q_OBJECT
 public:
-    DispColorSettings_impl(QWidget *parent = 0, const char *name = 0);
-    virtual ~DispColorSettings_impl();
+    DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~DisplaySettings_impl();
 protected slots:
-    virtual void coloredStateToggled(bool);
+    virtual void diffDispChanged();
+    virtual void dispFileInfotoggled(bool);
 };
 
 #endif

@@ -21,7 +21,7 @@
 #include "svnitem.h"
 #include "svnactions.h"
 #include "kdesvn_part.h"
-#include "fronthelpers/settings.h"
+#include "src/settings/kdesvnsettings.h"
 #include "svnqt/status.hpp"
 #include "helpers/smart_pointer.h"
 #include "helpers/sub2qt.h"

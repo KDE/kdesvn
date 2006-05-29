@@ -1,4 +1,5 @@
 #include "revtreewidget.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <qvariant.h>
 #include <qsplitter.h>
@@ -18,7 +19,7 @@ RevTreeWidget::RevTreeWidget(CContextListener*lt,svn::Client*cl, QWidget* parent
 {
     if ( !name )
         setName( "RevTreeWidget" );
-    RevTreeWidgetLayout = new QVBoxLayout( this, 11, 6, "RevTreeWidgetLayout"); 
+    RevTreeWidgetLayout = new QVBoxLayout( this, 11, 6, "RevTreeWidgetLayout");
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
@@ -35,6 +36,10 @@ RevTreeWidget::RevTreeWidget(CContextListener*lt,svn::Client*cl, QWidget* parent
     languageChange();
     resize( QSize(600, 480).expandedTo(minimumSizeHint()) );
     clearWState( WState_Polished );
+    QValueList<int> list = Kdesvnsettings::tree_detail_height();
+    if (list.count()==2 && (list[0]>0||list[1]>0)) {
+        m_Splitter->setSizes(list);
+    }
 }
 
 /*
@@ -43,6 +48,12 @@ RevTreeWidget::RevTreeWidget(CContextListener*lt,svn::Client*cl, QWidget* parent
 RevTreeWidget::~RevTreeWidget()
 {
     // no need to delete child widgets, Qt does it all for us
+    int h = height();
+    QValueList<int> list = m_Splitter->sizes();
+    if (list.count()==2) {
+        Kdesvnsettings::setTree_detail_height(list);
+        Kdesvnsettings::writeConfig();
+    }
 }
 
 /*

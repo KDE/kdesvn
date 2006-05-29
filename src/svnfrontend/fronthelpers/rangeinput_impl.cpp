@@ -38,6 +38,7 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
     m_stopDateInput->setDateTime(QDateTime::currentDateTime ());
     m_stopDateInput->setEnabled(false);
     m_startDateInput->setEnabled(false);
+    m_stopHeadButton->setChecked(true);
 }
 
 Rangeinput_impl::~Rangeinput_impl()

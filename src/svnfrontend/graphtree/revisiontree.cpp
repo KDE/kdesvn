@@ -279,7 +279,7 @@ bool RevisionTree::topDownScan()
                             break;
                         }
                     }
-                    m_Data->m_History[j].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
+                    m_Data->m_History[r].addCopyTo(sourcepath,m_Data->m_OldHistory[j].changedPaths[i].path,j,a,r);
                     m_Data->m_OldHistory[j].changedPaths[i].action=0;
                 } else {
                     kdDebug()<<"Action with source path but wrong action \""<<a<<"\" found!"<<endl;
@@ -392,35 +392,30 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                     QString r = path.mid(FORWARDENTRY.path.length());
                     recPath= FORWARDENTRY.copyToPath;
                     recPath+=r;
-                    if (lastrev==j) {
-                        /* modification of item was detected before and so trev is set to rev before modify (which will
-                        be the startpoint of copy in subversion not modification at same time) */
-                        n1 = uniqueNodeName(trev,tmpPath);
-                    } else {
-                        n1 = uniqueNodeName(lastrev,tmpPath);
-                    }
-                    n2 = uniqueNodeName(j,recPath);
+                    n1 = uniqueNodeName(lastrev,tmpPath);
+                    n2 = uniqueNodeName(FORWARDENTRY.copyToRevision,recPath);
                     if (lastrev>0) {
                         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n1].targets.append(RevGraphView::targetData(n2,FORWARDENTRY.action));
                     }
-                    fillItem(j,i,n2,recPath);
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].name=recPath;
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].rev = FORWARDENTRY.copyToRevision;
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Action=FORWARDENTRY.action;
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Author=m_Data->m_History[FORWARDENTRY.copyToRevision].author;
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Message=m_Data->m_History[FORWARDENTRY.copyToRevision].message;
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Date=helpers::sub2qt::apr_time2qtString(m_Data->m_History[FORWARDENTRY.copyToRevision].date);
                     if (ren) {
-                        lastrev = j;
-                    }
-                    if (ren) {
+                        lastrev = FORWARDENTRY.copyToRevision;
+                        /* skip items between */
+                        j=lastrev;
 #ifdef DEBUG_PARSE
-                        kdDebug()<<"Renamed to "<< recPath << " at revison " << j << endl;
+                        kdDebug()<<"Renamed to "<< recPath << " at revison " << FORWARDENTRY.copyToRevision << endl;
 #endif
                         path=recPath;
-                    }
+                    } else {
 #ifdef DEBUG_PARSE
-                     else {
-
                         kdDebug()<<"Copy to "<< recPath << endl;
-                    }
 #endif
-                    if (!ren) {
-                        if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,j)) {
+                        if (!bottomUpScan(FORWARDENTRY.copyToRevision,recurse+1,recPath,FORWARDENTRY.copyToRevision)) {
                             return false;
                         }
                     }
@@ -465,7 +460,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
-                        //get_out= true;
+                        get_out= true;
                     break;
                     default:
                     break;
@@ -487,7 +482,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         if (lastrev>0) m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1,FORWARDENTRY.action));
                         fillItem(j,i,n1,path);
                         lastrev = j;
-                        //get_out = true;
+                        get_out = true;
                     break;
                     default:
                     break;

@@ -1595,8 +1595,8 @@ void kdesvnfilelist::slotCat()
 {
     FileListViewItem*k = singleSelected();
     if (!k) return;
-    m_SvnWrapper->makeCat(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision, k->fullName(),k->text(0),
-        isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision);
+    m_SvnWrapper->slotMakeCat(isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision, k->fullName(),k->text(0),
+        isWorkingCopy()?svn::Revision::HEAD:m_pList->m_remoteRevision,0);
 }
 
 
@@ -1950,7 +1950,7 @@ void kdesvnfilelist::slotRevisionCat()
     rdlg->setStartOnly(true);
     if (dlg->exec()==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_SvnWrapper->makeCat(r.first, k->fullName(),k->shortName());
+        m_SvnWrapper->slotMakeCat(r.first, k->fullName(),k->shortName(),r.first,0);
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
     delete dlg;

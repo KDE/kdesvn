@@ -30,6 +30,7 @@
 #include <klocale.h>
 #include <kapp.h>
 #include <klistview.h>
+#include <kmdcodec.h>
 
 #include <qwidget.h>
 #include <qdatetime.h>
@@ -337,7 +338,7 @@ bool RevisionTree::isValid()const
 
 static QString uniqueNodeName(long rev,const QString&path)
 {
-    QString res = path;
+    QString res = KCodecs::base64Encode(path.utf8(),false);
     res.replace("\"","_quot_");
     res.replace(" ","_space_");
     QString n; n.sprintf("%05ld",rev);

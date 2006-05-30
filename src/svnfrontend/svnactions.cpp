@@ -263,6 +263,8 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
         disp = rt.getView();
         if (disp) {
             connect(disp,SIGNAL(dispDiff(const QString&)),this,SLOT(dispDiff(const QString&)));
+            connect(disp,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
+                this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
             dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg"));
             dlg.exec();
             dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg",false);
@@ -347,14 +349,15 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, const QString
     }
 }
 
-QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg)
+QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg,QWidget*_dlgparent)
 {
     QByteArray content;
     if (!m_Data->m_CurrentContext) return content;
+    QWidget*dlgp=_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget();
     QString ex;
     svn::Path p(what);
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),
+        StopDlg sdlg(m_Data->m_SvnContext,dlgp,
             0,"Content cat","Getting content - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         content = m_Data->m_Svnclient->cat(p,start,peg);
@@ -367,9 +370,9 @@ QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,con
     return content;
 }
 
-void SvnActions::makeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg)
+void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg,QWidget*_dlgparent)
 {
-    QByteArray content = makeGet(start,what,peg);
+    QByteArray content = makeGet(start,what,peg,_dlgparent);
     if (content.size()==0) {
         emit clientException(i18n("Got no content"));
         return;

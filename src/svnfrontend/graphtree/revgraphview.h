@@ -87,6 +87,7 @@ public:
 signals:
     void dispDiff(const QString&);
     void dispDetails(const QString&);
+    void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
 
 public slots:
     virtual void contentsMovingSlot(int,int);
@@ -140,6 +141,7 @@ private:
     void makeDiffPrev(GraphTreeLabel*);
     void makeDiff(const QString&,const QString&);
     void makeSelected(GraphTreeLabel*);
+    void makeCat(GraphTreeLabel*_l);
 };
 
 #endif

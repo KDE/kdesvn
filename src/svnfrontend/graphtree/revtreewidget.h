@@ -10,6 +10,8 @@
 #ifndef REVTREEWIDGET_H
 #define REVTREEWIDGET_H
 
+#include <svnqt/revision.hpp>
+
 #include <qvariant.h>
 #include <qpixmap.h>
 #include <qwidget.h>
@@ -48,6 +50,7 @@ protected:
 
 signals:
     void dispDiff(const QString&);
+    void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
 
 protected slots:
     virtual void languageChange();

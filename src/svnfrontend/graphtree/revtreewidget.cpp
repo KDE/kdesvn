@@ -28,6 +28,8 @@ RevTreeWidget::RevTreeWidget(CContextListener*lt,svn::Client*cl, QWidget* parent
     m_RevGraphView->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)5, 0, 2, m_RevGraphView->sizePolicy().hasHeightForWidth() ) );
     connect(m_RevGraphView,SIGNAL(dispDetails(const QString&)),this,SLOT(setDetailText(const QString&)));
     connect(m_RevGraphView,SIGNAL(dispDiff(const QString&)),this,SIGNAL(dispDiff(const QString&)));
+    connect(m_RevGraphView,SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*))
+        ,this,SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
 
     m_Detailstext = new KTextBrowser( m_Splitter, "m_Detailstext" );
     m_Detailstext->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 0, m_Detailstext->sizePolicy().hasHeightForWidth() ) );
@@ -48,7 +50,6 @@ RevTreeWidget::RevTreeWidget(CContextListener*lt,svn::Client*cl, QWidget* parent
 RevTreeWidget::~RevTreeWidget()
 {
     // no need to delete child widgets, Qt does it all for us
-    int h = height();
     QValueList<int> list = m_Splitter->sizes();
     if (list.count()==2) {
         Kdesvnsettings::setTree_detail_height(list);

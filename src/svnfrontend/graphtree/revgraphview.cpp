@@ -434,7 +434,7 @@ void RevGraphView::dumpRevtree()
 
     RevGraphView::trevTree::ConstIterator it1;
     for (it1=m_Tree.begin();it1!=m_Tree.end();++it1) {
-        *stream << "  " << it1.key().latin1()
+        *stream << "  " << it1.key()
             << "[ ";
             //"[label=\""<< it1.data().name.latin1() << "\", ";
 //        *stream << "fontname=\"serif\", ";
@@ -770,6 +770,9 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
             && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
             popup.insertItem(i18n("Diff to selected item"),302);
         }
+        if (getAction(((GraphTreeLabel*)i)->nodename())!='D') {
+            popup.insertItem(i18n("Cat this version"),303);
+        }
         if (m_Selected == i) {
             popup.insertItem(i18n("Unselect item"),401);
         } else {
@@ -834,6 +837,11 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
                 makeDiff(((GraphTreeLabel*)i)->nodename(),m_Selected->nodename());
             }
         break;
+        case 303:
+            if (i && i->rtti()==GRAPHTREE_LABEL) {
+                makeCat((GraphTreeLabel*)i);
+            }
+        break;
         case 401:
             makeSelected(0);
         break;
@@ -846,6 +854,21 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         default:
         break;
     }
+}
+
+void RevGraphView::makeCat(GraphTreeLabel*_l)
+{
+    if (!_l) {
+        return;
+    }
+    QString n1 = _l->nodename();
+    trevTree::ConstIterator it = m_Tree.find(n1);
+    if (it==m_Tree.end()) {
+        return;
+    }
+    svn::Revision tr(it.data().rev);
+    QString tp = _basePath+it.data().name;
+    emit makeCat(tr,tp,it.data().name,tr,kapp->activeModalWidget());
 }
 
 void RevGraphView::makeDiffPrev(GraphTreeLabel*_l)

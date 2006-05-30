@@ -351,9 +351,9 @@ void CommandExec::slotCmd_cat()
         kdDebug()<<"Setting head standard for cat"<<endl;
     }
     kdDebug()<<"Rev set "<<m_pCPart->rev_set<<endl;
-    m_pCPart->m_SvnWrapper->makeCat(
+    m_pCPart->m_SvnWrapper->slotMakeCat(
         (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0],m_pCPart->url[0]
-        ,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
+        ,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),0);
 }
 
 void CommandExec::slotCmd_get()

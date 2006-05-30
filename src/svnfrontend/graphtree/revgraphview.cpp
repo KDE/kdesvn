@@ -37,6 +37,7 @@
 #include <qwmatrix.h>
 #include <qpopupmenu.h>
 #include <qpainter.h>
+#include <qregexp.h>
 
 #include <math.h>
 
@@ -168,6 +169,9 @@ void RevGraphView::readDotOutput(KProcess*,char *   buffer,int   buflen)
 void RevGraphView::dotExit(KProcess*p)
 {
     if (p!=renderProcess)return;
+    // remove line breaks when lines to long
+    QRegExp endslash("\\\\\n");
+    dotOutput.replace(endslash,"");
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;
     QTextStream* dotStream;
@@ -234,7 +238,7 @@ void RevGraphView::dotExit(KProcess*p)
             lineStream >> node1Name >> node2Name;
             lineStream >> points;
             pa.resize(points);
-            for (i=0;i<points;i++) {
+            for (i=0;i<points;++i) {
                 if (lineStream.atEnd()) break;
                 lineStream >> x >> y;
                 int xx = (int)(scaleX * x + _xMargin);
@@ -735,7 +739,7 @@ void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
     _lastPos = e->globalPos();
 }
 
-void RevGraphView::contentsMouseReleaseEvent ( QMouseEvent * e )
+void RevGraphView::contentsMouseReleaseEvent ( QMouseEvent * )
 {
     _isMoving = false;
     updateZoomerPos();

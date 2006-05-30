@@ -170,7 +170,7 @@ void RevGraphView::dotExit(KProcess*p)
 {
     if (p!=renderProcess)return;
     // remove line breaks when lines to long
-    QRegExp endslash("\\\\\n");
+    QRegExp endslash("\\\\\\n");
     dotOutput.replace(endslash,"");
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;

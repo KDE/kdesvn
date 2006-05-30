@@ -777,6 +777,10 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(single||none);
     }
+    temp = filesActions()->action("make_svn_partialtree");
+    if (temp) {
+        temp->setEnabled(single||none);
+    }
 
     m_propertyAction->setEnabled(single);
     m_DelCurrent->setEnabled( (multi||single));

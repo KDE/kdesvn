@@ -99,6 +99,7 @@ RevGraphView::RevGraphView(CContextListener*aListener,svn::Client*_client,QWidge
     m_LastAutoPosition = TopLeft;
     _isMoving = false;
     _noUpdateZoomerPos = false;
+    m_LabelMap[""]="";
 }
 
 RevGraphView::~RevGraphView()
@@ -209,21 +210,9 @@ void RevGraphView::dotExit(KProcess*p)
             QString nodeName, label;
             double x, y, width, height;
             lineStream >> nodeName >> x >> y >> width >> height;
-            QChar c;
-            lineStream >> c;
-            while (c.isSpace()) lineStream >> c;
-            if (c != '\"') {
-              lineStream >> label;
-              label = c + label;
-            } else {
-                lineStream >> c;
-                while(!c.isNull() && (c != '\"')) {
-                //if (c == '\\') lineStream >> c;
-                    label += c;
-                    lineStream >> c;
-                }
-            }
-
+            // better here 'cause dot may scramble utf8 labels so we regenerate it better
+            // and do not read it in.
+            label = getLabelstring(nodeName);
             int xx = (int)(scaleX * x + _xMargin);
             int yy = (int)(scaleY * (dotHeight - y) + _yMargin);
             int w = (int)(scaleX * width);
@@ -395,6 +384,44 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
     return res;
 }
 
+const QString&RevGraphView::getLabelstring(const QString&nodeName)
+{
+    QMap<QString,QString>::ConstIterator nIt;
+    nIt = m_LabelMap.find(nodeName);
+    if (nIt!=m_LabelMap.end()) {
+        return nIt.data();
+    }
+    trevTree::ConstIterator it1;
+    it1 = m_Tree.find(nodeName);
+    if (it1==m_Tree.end()) {
+        return m_LabelMap[""];
+    }
+    QString res;
+    switch (it1.data().Action) {
+    case 'D':
+        res = i18n("Deleted at revision %1").arg(it1.data().rev);
+    break;
+    case 'A':
+        res = i18n("Added at revision %1").arg(it1.data().rev);
+    break;
+    case 'C':
+    case 1:
+        res = i18n("Copied to %1 at revision %2").arg(it1.data().name).arg(it1.data().rev);
+    break;
+    case 2:
+        res = i18n("Renamed to %1 at revision %2").arg(it1.data().name).arg(it1.data().rev);
+    break;
+    case 'M':
+        res = i18n("Modified at revision %1").arg(it1.data().rev);
+    break;
+    default:
+        res=i18n("Revision %1").arg(it1.data().rev);
+    break;
+    }
+    m_LabelMap[nodeName]=res;
+    return m_LabelMap[nodeName];
+}
+
 void RevGraphView::dumpRevtree()
 {
     delete dotTmpFile;
@@ -435,31 +462,10 @@ void RevGraphView::dumpRevtree()
     RevGraphView::trevTree::ConstIterator it1;
     for (it1=m_Tree.begin();it1!=m_Tree.end();++it1) {
         *stream << "  " << it1.key()
-            << "[ ";
-            //"[label=\""<< it1.data().name.latin1() << "\", ";
-//        *stream << "fontname=\"serif\", ";
-        *stream << "shape=box, ";
-        if (it1.data().Action=='D') {
-            *stream << "label=\"Deleted at Revision "<<it1.data().rev
-                << "\",";
-        } else if (it1.data().Action=='A') {
-            *stream << "label=\"Added at Revision "<<it1.data().rev
-                    << " " << it1.data().name.latin1() << " "
-                    <<"\",";
-        } else if (it1.data().Action=='C'||it1.data().Action==(char)1){
-            *stream << "label=\"Copy to "<< it1.data().name.latin1()
-                    << " at Rev " << it1.data().rev
-                    <<"\",";
-        } else if (it1.data().Action=='R'||it1.data().Action==(char)2){
-            *stream << "label=\"Renamed to "<< it1.data().name.latin1()
-                    << " at Rev " << it1.data().rev
-                    <<"\",";
-        } else if (it1.data().Action=='M') {
-            *stream << "label=\"Modified at Revision "<<it1.data().rev<<"\",";
-        } else {
-            *stream << "label=\"Revision "<<it1.data().rev<<"\",";
-        }
-        *stream << "];\n";
+            << "[ "
+            << "shape=box, "
+            << "label=\""<<getLabelstring(it1.key())<<"\","
+            << "];\n";
         for (unsigned j=0;j<it1.data().targets.count();++j) {
             *stream<<"  "<<it1.key().latin1()<< " "
                 << "->"<<" "<<it1.data().targets[j].key

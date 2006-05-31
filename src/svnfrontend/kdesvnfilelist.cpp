@@ -1213,23 +1213,34 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint
 {
     FileListViewItem*item = static_cast<FileListViewItem*>(_item);
     bool isopen = baseUri().length()>0;
-    if (item) {
-        if (isWorkingCopy()) {
-            emit sigShowPopup("local_context");
-        } else {
-            emit sigShowPopup("remote_context");
-        }
+    SvnItemList l;
+    SelectionList(&l);
+
+    QString menuname;
+
+    if (!isopen) {
+        menuname="empty";
+    } else if (isWorkingCopy()) {
+        menuname="local";
     } else {
-        if (!isopen) {
-            emit sigShowPopup("general_empty");
-        } else {
-            if (isWorkingCopy()) {
-                emit sigShowPopup("general_local");
+        menuname="remote";
+    }
+    if (l.count()==0) {
+        menuname+="_general";
+    } else if (l.count()>1){
+        menuname+="_context_multi";
+    } else {
+        menuname+="_context_single";
+        if (isWorkingCopy()) {
+            if (l.at(0)->isRealVersioned()) {
+                menuname+="_versioned";
             } else {
-                emit sigShowPopup("general_remote");
+                menuname+="_unversioned";
             }
         }
     }
+
+    emit sigShowPopup(menuname);
 }
 
 /**

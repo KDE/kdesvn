@@ -56,6 +56,7 @@ public:
     virtual bool isValid()const;
     virtual bool isRealVersioned()const;
     virtual bool isIgnored()const;
+    virtual bool isRemoteAdded()const;
     virtual QString infoText()const;
     virtual QString cmtAuthor()const;
     virtual long int cmtRev()const;

@@ -171,6 +171,7 @@ void FileListViewItem::update()
     setText(COL_LAST_DATE,KGlobal::locale()->formatDateTime(fullDate()));
     setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
     setText(COL_IS_LOCKED,lockOwner());
+    kdDebug()<<"FileListViewItem::update() done"<<endl;
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const
@@ -272,4 +273,16 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
 const svn::Revision&FileListViewItem::correctPeg()const
 {
     return m_Ksvnfilelist->remoteRevision();
+}
+
+FileListViewItem*FileListViewItem::findChild(const QString&aName)
+{
+    FileListViewItem*_item = (FileListViewItem*)firstChild();
+    while (_item) {
+        if (_item->fullName()==aName) {
+            return _item;
+        }
+        _item = (FileListViewItem*)_item->nextSibling();
+    }
+    return 0L;
 }

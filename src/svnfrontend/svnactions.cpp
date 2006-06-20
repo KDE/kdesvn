@@ -1919,7 +1919,8 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
     try {
         pm = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
     } catch (svn::ClientException e) {
-        emit clientException(e.msg());
+        /* no messagebox needed */
+        //emit clientException(e.msg());
         return false;
     }
     if (pm.size()>0) {

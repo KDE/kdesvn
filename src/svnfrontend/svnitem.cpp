@@ -198,7 +198,7 @@ const QString&SvnItem::Url()const
 
 bool SvnItem::isDir()const
 {
-    if (p_Item->m_Stat.entry().isValid()) {
+    if (isRemoteAdded() || p_Item->m_Stat.entry().isValid()) {
         return p_Item->m_Stat.entry().kind()==svn_node_dir;
     }
     /* must be a local file */
@@ -260,7 +260,7 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
             } else if (isLocked()||wrap->checkReposLockCache(fullName())) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
                 m_bgColor = LOCKED;
-            } else if (wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
+            } else if (!isRemoteAdded() && wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
                 if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnneedlock",KIcon::Desktop,size);
                 m_bgColor = NEEDLOCK;
             } else if (wrap->isUpdated(p_Item->m_Stat.path())) {
@@ -277,7 +277,7 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
             } else if (isDir()&&wrap) {
                 svn::StatusEntries dlist;
                 svn::StatusEntries::const_iterator it;
-                if (wrap->checkUpdateCache(fullName())) {
+                if (isRemoteAdded() || wrap->checkUpdateCache(fullName())) {
                     if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
                     m_bgColor = UPDATES;
                 } else if (wrap->checkConflictedCache(fullName())) {
@@ -334,10 +334,20 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         }
     } else {
         _local = true;
-        KURL uri;
-        uri.setPath(fullName());
-        p = KMimeType::pixmapForURL(uri,0,KIcon::Desktop,size);
-        p = getPixmap(p,size,overlay);
+        if (isRemoteAdded()) {
+            kdDebug()<<"Remoteadded"<<endl;
+            if (isDir()) {
+                kdDebug()<<"Remotedir"<<endl;
+                p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
+            } else {
+                p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
+            }
+        } else {
+            KURL uri;
+            uri.setPath(fullName());
+            p = KMimeType::pixmapForURL(uri,0,KIcon::Desktop,size);
+            p = getPixmap(p,size,overlay);
+        }
     }
     return p;
 }
@@ -364,6 +374,12 @@ bool SvnItem::isRealVersioned()const
 bool SvnItem::isIgnored()const
 {
     return p_Item->m_Stat.textStatus()==svn_wc_status_ignored;
+}
+
+bool SvnItem::isRemoteAdded()const
+{
+    return getWrapper()->isUpdated(p_Item->m_Stat.path()) &&
+            p_Item->m_Stat.validReposStatus()&&!p_Item->m_Stat.validLocalStatus();
 }
 
 QString SvnItem::infoText()const

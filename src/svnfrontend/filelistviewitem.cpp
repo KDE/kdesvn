@@ -171,7 +171,6 @@ void FileListViewItem::update()
     setText(COL_LAST_DATE,KGlobal::locale()->formatDateTime(fullDate()));
     setText(COL_LAST_REV,QString("%1").arg(cmtRev()));
     setText(COL_IS_LOCKED,lockOwner());
-    kdDebug()<<"FileListViewItem::update() done"<<endl;
 }
 
 int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const

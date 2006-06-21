@@ -1085,7 +1085,7 @@ void kdesvnfilelist::refreshCurrentTree()
     }
     if (isWorkingCopy()) {
         m_SvnWrapper->createModifiedCache(baseUri());
-        if (Settings::start_updates_check_on_open()) {
+        if (Kdesvnsettings::start_updates_check_on_open()) {
              slotRescanIcons(true);
         }
     }

@@ -596,10 +596,11 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         FileListViewItem * item;
         if (!_parent) {
             item = new FileListViewItem(this,*it);
-//            kdDebug()<< "creating new FileListViewitem " + item->fullName() << endl;
         } else {
+            if ( (item = _parent->findChild( (*it).path() ))  ) {
+                delete item;
+            }
             item = new FileListViewItem(this,_parent,*it);
-//            kdDebug()<< "creating new FileListViewitem (with parent) " + item->fullName() << endl;
         }
         if (item->isDir()) {
             m_Dirsread[item->fullName()]=false;
@@ -607,7 +608,7 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             if (isWorkingCopy()) {
                 m_pList->m_DirWatch->addDir(item->fullName());
             }
-//            kdDebug()<< "Watching folder: " + item->fullName() << endl;
+            kdDebug()<< "Watching folder: " + item->fullName() << endl;
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
 #if 0
@@ -1071,9 +1072,6 @@ void kdesvnfilelist::refreshCurrentTree()
     m_pList->m_fileTip->setItem(0);
     kapp->processEvents();
     setUpdatesEnabled(false);
-    if (isWorkingCopy()) {
-        m_SvnWrapper->createModifiedCache(baseUri());
-    }
     if (item->fullName()==baseUri()) {
         if (!refreshItem(item)) {
             setUpdatesEnabled(true);
@@ -1085,6 +1083,13 @@ void kdesvnfilelist::refreshCurrentTree()
     } else {
         refreshRecursive(0);
     }
+    if (isWorkingCopy()) {
+        m_SvnWrapper->createModifiedCache(baseUri());
+        if (Settings::start_updates_check_on_open()) {
+             slotRescanIcons(true);
+        }
+    }
+
     setUpdatesEnabled(true);
     viewport()->repaint();
     m_pList->startScan();
@@ -1127,6 +1132,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     svn::StatusEntries dlist;
 
     if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
+        kdDebug()<<"Fehler bei makestatus fuer "<<what <<endl;
         return;
     }
 
@@ -1996,10 +2002,7 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
 void kdesvnfilelist::slotCheckUpdates()
 {
     m_SvnWrapper->createUpdateCache(baseUri());
-    //reinitItems(0);
-    //rescanIconsRec(0L);
 }
-
 
 /*!
     \fn kdesvnfilelist::reinitItems(FileListViewItem*_item = 0)
@@ -2354,9 +2357,9 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer)
             _s->update();
         }
         rescanIconsRec(_s,checkNewer);
-        if (checkNewer && _s->isDir() && _s->isOpen() /* && m_SvnWrapper->isUpdated(_s->stat().path())*/) {
+        if (checkNewer && _s->isDir() && _s->isOpen()) {
             svn::StatusEntries target;
-            kdDebug( ) << "Checking added items for " << _s->stat().path()<<endl;
+            kdDebug( ) << "Checking added items for " << _s->stat().path()<< " Revision: " << _s->stat().entry().revision() << endl;
             m_SvnWrapper->getaddedItems(_s->stat().path(),target);
             insertDirs(_s,target);
         }

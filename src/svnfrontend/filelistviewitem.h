@@ -63,6 +63,7 @@ public:
     virtual void setOpen(bool o);
     virtual void setPreviewPix(const QPixmap& pixmap);
     virtual const svn::Revision&correctPeg()const;
+    virtual FileListViewItem*findChild(const QString&);
 
 protected:
     QColor m_highColor;

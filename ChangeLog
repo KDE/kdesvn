@@ -2,6 +2,9 @@ version 0.9.0
     * Partial revision tree implemented
     * only one context menu for konqueror due problems with KDE dcop call for getting the dynamic menue entries
 
+version 0.8.5
+    * fix: display new items in repository (in difference to local working copy) failed sometimes (bug #91)
+
 version 0.8.4
     * fix: revision tree sometimes failed while detecting renamed items
     * featurerequest: when checking for updates kdesvn displays now if a item is locked somewhere

@@ -1242,6 +1242,9 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint
         if (isWorkingCopy()) {
             if (l.at(0)->isRealVersioned()) {
                 menuname+="_versioned";
+                if (l.at(0)->isDir()) {
+                    menuname+="_dir";
+                }
             } else {
                 menuname+="_unversioned";
             }

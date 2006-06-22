@@ -1412,17 +1412,18 @@ bool SvnActions::makeSwitch(const QString&path,const QString&what)
     return done;
 }
 
-void SvnActions::slotCleanup(const QString&path)
+bool SvnActions::makeCleanup(const QString&path)
 {
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return false;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Cleanup"),i18n("Cleaning up folder"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         m_Data->m_Svnclient->cleanup(svn::Path(path));
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
+        return false;
     }
+    return true;
 }
 
 void SvnActions::slotResolved(const QString&path)

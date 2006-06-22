@@ -260,6 +260,7 @@ void kdesvnfilelist::setupActions()
 
     m_CleanupAction = new KAction(i18n("Cleanup"),"kdesvncleanup",
 	KShortcut(),this,SLOT(slotCleanupAction()),m_filesAction,"make_cleanup");
+    m_CleanupAction->setToolTip(i18n("Recursively clean up the working copy, removing locks, resuming unfinished operations, etc."));
     m_ImportDirsIntoCurrent  = new KAction(i18n("Import folders into current"),"fileimport",KShortcut(),
         this,SLOT(slotImportDirsIntoCurrent()),m_filesAction,"make_import_dirs_into_current");
     m_ImportDirsIntoCurrent->setToolTip(i18n("Import folder content into current url"));
@@ -832,7 +833,7 @@ void kdesvnfilelist::enableActions()
     }
 
     /* 2. on dirs only */
-    m_CleanupAction->setEnabled(isWorkingCopy()&&dir);
+    m_CleanupAction->setEnabled(isWorkingCopy()&& (dir||none));
     temp = filesActions()->action("make_check_unversioned");
     if (temp) {
         temp->setEnabled(isWorkingCopy()&& ((dir&&single) || none));
@@ -946,8 +947,9 @@ void kdesvnfilelist::slotCleanupAction()
     FileListViewItem*which= singleSelected();
     if (!which) which = static_cast<FileListViewItem*>(firstChild());
     if (!which||!which->isDir()) return;
-    m_SvnWrapper->slotCleanup(which->fullName());
-    which->refreshStatus(true);
+    if (m_SvnWrapper->makeCleanup(which->fullName())) {
+        which->refreshStatus(true);
+    }
 }
 
 void kdesvnfilelist::slotResolved()

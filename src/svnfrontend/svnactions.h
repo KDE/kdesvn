@@ -142,6 +142,7 @@ public:
     bool makeMove(const QString&,const QString&,bool);
     bool makeMove(const KURL::List&,const QString&,bool);
 
+    virtual bool makeCleanup(const QString&);
 
 protected:
     smart_pointer<SvnActionsData> m_Data;
@@ -167,7 +168,6 @@ public slots:
     virtual void slotRevert();
     virtual void slotRevertItems(const QStringList&);
     virtual void slotSwitch();
-    virtual void slotCleanup(const QString&);
     virtual void slotResolved(const QString&);
     virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
     virtual void makeDiff(const QStringList&,const svn::Revision&,const svn::Revision&);

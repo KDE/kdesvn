@@ -178,6 +178,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
                 result << "Blame"
                         << "Rename";
             }
+            result << "Tree";
         }
         return result;
     }
@@ -188,6 +189,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
     }
 
     result << "Log"
+        << "Tree"
         << "Info"
         << "Diff"
         << "Rename"

@@ -3,7 +3,7 @@ Encoding=UTF-8
 ServiceTypes=inode/directory,all/allfiles
 X-KDE-Submenu=Subversion (kdesvn)
 
-Actions=Update;Commit;Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename
+Actions=Update;Commit;Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename;Tree
 #Return type of below is a QStringList with a list of Actions which is appended to the Actions above
 X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)
 
@@ -358,3 +358,11 @@ Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
 Comment[de]=Hole eine unversionierte Kopie eines Baums von einer Repository
 Comment[es]=Obtener una copia no versionada del árbol de un repositorio
+
+[Desktop Action Tree]
+Name=Display revision tree
+Name[de]=Zeige Revisionsbaum
+Icon=kdesvnlog
+Exec=kdesvn exec tree %U
+Comment[de]=Zeige den kompletten Revisionsbaum
+Comment=Show complete revision tree

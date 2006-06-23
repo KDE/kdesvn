@@ -187,6 +187,8 @@ int CommandExec::exec()
         slotCmd=SLOT(slotCmd_addnew());
     } else if (!QString::compare(m_pCPart->cmd,"switch")) {
         slotCmd=SLOT(slotCmd_switch());
+    } else if (!QString::compare(m_pCPart->cmd,"tree")) {
+        slotCmd=SLOT(slotCmd_tree());
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -213,11 +215,13 @@ int CommandExec::exec()
         }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
+        m_pCPart->extraRevisions[j-2]=svn::Revision::HEAD;
 
         if (tmpurl.isLocalFile() && (j==2 || !dont_check_second) && !dont_check_all) {
             if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path(),_baseurl)) {
                 tmp = tmpurl.path();
                 m_pCPart->baseUrls[j-2]=_baseurl;
+                m_pCPart->extraRevisions[j-2]=svn::Revision::WORKING;
                 if (j==2) mainProto = "";
             } else {
                 tmp = "file://"+tmpurl.path();
@@ -308,6 +312,20 @@ void CommandExec::slotCmd_log()
     }
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
     m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list,m_pCPart->log_limit);
+}
+
+/*!
+    \fn CommandExec::slotCmdLog
+ */
+void CommandExec::slotCmd_tree()
+{
+    if (m_pCPart->end == svn::Revision::UNDEFINED) {
+        m_pCPart->end = svn::Revision::HEAD;
+    }
+    if (m_pCPart->start == svn::Revision::UNDEFINED) {
+        m_pCPart->start = 1;
+    }
+    m_pCPart->m_SvnWrapper->makeTree(m_pCPart->url[0],m_pCPart->extraRevisions[0],m_pCPart->start,m_pCPart->end);
 }
 
 void CommandExec::slotCmd_checkout()

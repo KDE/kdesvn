@@ -242,7 +242,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
         emit clientException(ce.msg());
         return;
     }
-    if (e.count()<1) {
+    if (e.count()<1||e[0].reposRoot().isEmpty()) {
         kdDebug()<<"No info found" << endl;
         emit clientException(i18n("Got no info."));
         return;

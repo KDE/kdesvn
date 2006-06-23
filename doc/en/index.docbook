@@ -962,6 +962,11 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry></entry>
 </row>
 <row>
+<entry>tree</entry>
+<entry>displays revision tree of item (only first argument), if url with &quot;?rev=xxx&quot; given, this revision is the peg-revision.</entry>
+<entry>-r startrev:endrev</entry>
+</row>
+<row>
 <entry>help</entry>
 <entry>displays this page</entry>
 <entry></entry>

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-05-30 12:13+0200\n"
-"PO-Revision-Date: 2006-05-07 00:34+0200\n"
+"PO-Revision-Date: 2006-06-23 16:40+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team:  <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -587,7 +587,7 @@ msgstr "Elementos locales modificados:"
 #: rc.cpp:58
 #, no-c-format
 msgid "Item needs lock:"
-msgstr ""
+msgstr "Elementos que necesitan bloqueo:"
 
 #: rc.cpp:143
 #, fuzzy, no-c-format
@@ -647,8 +647,7 @@ msgstr "Color para elementos modificados:"
 #: rc.cpp:184
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:187
 #, no-c-format
@@ -718,8 +717,7 @@ msgstr "Elementos listados en la última confirmación se enviarán o no"
 #: rc.cpp:222
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:225
 #, no-c-format
@@ -771,8 +769,7 @@ msgstr "Mensaje"
 #: rc.cpp:258
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:261 rc.cpp:438 ksvnwidgets/logmsg_impl.cpp:68
 #: ksvnwidgets/logmsg_impl.cpp:91 ksvnwidgets/logmessage.cpp:45
@@ -789,7 +786,7 @@ msgstr "Elemento"
 #: rc.cpp:267
 #, no-c-format
 msgid "Copy from"
-msgstr "Copiar desde"
+msgstr "Copiado de"
 
 #: rc.cpp:270
 #, no-c-format
@@ -1370,34 +1367,28 @@ msgid "Please check that 'dot' is installed (package GraphViz)."
 msgstr "Por favor, compruebe que 'dot' está instalado (paquete GraphViz)."
 
 #: svnfrontend/graphtree/revgraphview.cpp:402
-#, fuzzy
 msgid "Deleted at revision %1"
-msgstr "Actualizado a la revisión %1."
+msgstr "Eliminado en revisión %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:405
-#, fuzzy
 msgid "Added at revision %1"
-msgstr "En revisión %1."
+msgstr "Añadido en revisión %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:409
-#, fuzzy
 msgid "Copied to %1 at revision %2"
-msgstr "%1 en la revisión %2"
+msgstr "Copiado a %1 en la revisión %2"
 
 #: svnfrontend/graphtree/revgraphview.cpp:412
-#, fuzzy
 msgid "Renamed to %1 at revision %2"
-msgstr "%1 en la revisión %2"
+msgstr "Renombrado a %1 en la revisión %2"
 
 #: svnfrontend/graphtree/revgraphview.cpp:415
-#, fuzzy
 msgid "Modified at revision %1"
-msgstr "Finalizado en revisión %1"
+msgstr "Modificado en revisión %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:418
-#, fuzzy
 msgid "Revision %1"
-msgstr "Revisiones"
+msgstr "Revisión %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:435
 msgid "Could not open tempfile %1 for writing."
@@ -1436,9 +1427,8 @@ msgid "Diff to selected item"
 msgstr "Diferencias con elemento seleccionado"
 
 #: svnfrontend/graphtree/revgraphview.cpp:780
-#, fuzzy
 msgid "Cat this version"
-msgstr "Comenzar con la revisión"
+msgstr "Listar esta versión"
 
 #: svnfrontend/graphtree/revgraphview.cpp:783
 msgid "Unselect item"
@@ -1612,7 +1602,7 @@ msgstr "Versión de trabajo del fichero con conflictos"
 #: svnfrontend/svnactions.cpp:559
 #, fuzzy
 msgid "Property reject file"
-msgstr "La propiedad rechaza al fichero"
+msgstr "Fichero rechazado por propiedad"
 
 #: svnfrontend/svnactions.cpp:564
 msgid "Copy from URL"
@@ -1706,8 +1696,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1252
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1282
 msgid "Revert entries"
@@ -1830,9 +1819,8 @@ msgid "Full revision tree"
 msgstr "Árbol de revisiones completo"
 
 #: svnfrontend/kdesvnfilelist.cpp:211
-#, fuzzy
 msgid "Partial revision tree"
-msgstr "Árbol de revisiones completo"
+msgstr "Árbol de revisiones parcial"
 
 #: svnfrontend/kdesvnfilelist.cpp:216
 msgid "Details"
@@ -1843,8 +1831,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:223
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -1879,8 +1866,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:237
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:239
 msgid "Lock current items"
@@ -1912,8 +1898,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:255
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:257
 msgid "Open repository of working copy"
@@ -2117,8 +2102,7 @@ msgstr "¡Lo siento - error interno!"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2200,8 +2184,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:94
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -2336,3 +2319,4 @@ msgstr "Nombre del emisor"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:72
 msgid "Fingerprint"
 msgstr "Huella"
+

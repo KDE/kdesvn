@@ -307,6 +307,7 @@ void kdesvnfilelist::setupActions()
     tmp_action=new KAction(i18n("Merge..."),"kdesvnmerge",
         KShortcut(),this,SLOT(slotMerge()),m_filesAction,"make_svn_merge");
     tmp_action->setToolTip("Merge repository path into current worky copy path or current repository path into a target");
+    tmp_action=new KAction( i18n( "&Open With..." ), 0, this, SLOT( slotOpenWith() ), m_filesAction, "openwith" );
 
     /* remote actions only */
     m_CheckoutCurrentAction = new KAction(i18n("Checkout current repository path"),"kdesvncheckout",KShortcut(),
@@ -861,6 +862,10 @@ void kdesvnfilelist::enableActions()
     temp = filesActions()->action("make_check_updates");
     if (temp) {
         temp->setEnabled(isWorkingCopy()&&isopen);
+    }
+    temp = filesActions()->action("openwith");
+    if (temp) {
+        temp->setEnabled(kapp->authorizeKAction("openwith")&&single&&!dir);
     }
 }
 
@@ -2502,6 +2507,22 @@ void kdesvnfilelist::slotMakeLog()
 const svn::Revision& kdesvnfilelist::remoteRevision()const
 {
     return m_pList->m_remoteRevision;
+}
+
+
+/*!
+    \fn kdesvnfilelist::slotOpenWith()
+ */
+void kdesvnfilelist::slotOpenWith()
+{
+    FileListViewItem* which = singleSelected();
+    if (!which||which->isDir()) {
+        return;
+    }
+    svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
+    KURL::List lst;
+    lst.append(which->kdeName(rev));
+    KRun::displayOpenWithDialog(lst);
 }
 
 #include "kdesvnfilelist.moc"

@@ -206,6 +206,7 @@ protected slots:
     virtual void slotMakeTree();
     virtual void slotMakePartTree();
     virtual void slotInternalDrop();
+    virtual void slotOpenWith();
 
 private slots:
     void gotPreview( const KFileItem*, const QPixmap& );

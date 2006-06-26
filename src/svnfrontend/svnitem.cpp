@@ -50,6 +50,7 @@ public:
     virtual ~SvnItem_p();
     KFileItem*createItem(const svn::Revision&peg);
     const KURL& kdeName(const svn::Revision&);
+    KMimeType::Ptr mimeType();
 
 protected:
     svn::Status m_Stat;
@@ -61,6 +62,7 @@ protected:
     KFileItem*m_fitem;
     bool isWc;
     svn::Revision lRev;
+    KMimeType::Ptr mptr;
 };
 
 SvnItem_p::SvnItem_p()
@@ -84,6 +86,7 @@ void SvnItem_p::init()
 {
     m_full = m_Stat.path();
     m_kdename="";
+    mptr = 0;
     lRev=svn::Revision::UNDEFINED;
     while (m_full.endsWith("/")) {
         /* dir name possible */
@@ -100,6 +103,17 @@ void SvnItem_p::init()
     m_fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
     m_infoText = QString::null;
     m_fitem = 0;
+}
+
+KMimeType::Ptr SvnItem_p::mimeType()
+{
+    if (!mptr||m_kdename.isEmpty()) {
+        if (m_kdename.isEmpty()) {
+            kdeName(svn::Revision::UNDEFINED);
+        }
+        mptr = KMimeType::findByURL(m_kdename,0,isWc,true);
+    }
+    return mptr;
 }
 
 const KURL& SvnItem_p::kdeName(const svn::Revision&r)
@@ -319,7 +333,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
         if (isDir()) {
             p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
         } else {
-            p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
+            p = p_Item->mimeType()->pixmap(KIcon::Desktop,size,KIcon::DefaultState);
         }
         if (isLocked()) {
             m_bgColor = LOCKED;
@@ -335,9 +349,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
     } else {
         _local = true;
         if (isRemoteAdded()) {
-            kdDebug()<<"Remoteadded"<<endl;
             if (isDir()) {
-                kdDebug()<<"Remotedir"<<endl;
                 p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
             } else {
                 p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);

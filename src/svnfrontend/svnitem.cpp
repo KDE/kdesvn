@@ -29,7 +29,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kmimetype.h>
 #include <kdebug.h>
 #include <kiconeffect.h>
 #include <kfileitem.h>
@@ -50,7 +49,7 @@ public:
     virtual ~SvnItem_p();
     KFileItem*createItem(const svn::Revision&peg);
     const KURL& kdeName(const svn::Revision&);
-    KMimeType::Ptr mimeType();
+    KMimeType::Ptr mimeType(bool dir=false);
 
 protected:
     svn::Status m_Stat;
@@ -105,13 +104,17 @@ void SvnItem_p::init()
     m_fitem = 0;
 }
 
-KMimeType::Ptr SvnItem_p::mimeType()
+KMimeType::Ptr SvnItem_p::mimeType(bool dir)
 {
     if (!mptr||m_kdename.isEmpty()) {
         if (m_kdename.isEmpty()) {
             kdeName(svn::Revision::UNDEFINED);
         }
-        mptr = KMimeType::findByURL(m_kdename,0,isWc,true);
+        if (dir) {
+            mptr = KMimeType::mimeType("inode/directory");
+        } else {
+            mptr = KMimeType::findByURL(m_kdename,0,isWc,!isWc);
+        }
     }
     return mptr;
 }
@@ -324,17 +327,12 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
     QPixmap p;
     m_overlaycolor = false;
     m_bgColor = NONE;
-    bool _local = false;
     /* yes - different way to "isDir" above 'cause here we try to use the
        mime-features of KDE on ALL not just unversioned entries.
      */
     if (QString::compare(p_Item->m_Stat.entry().url(),p_Item->m_Stat.path())==0) {
         /* remote access */
-        if (isDir()) {
-            p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
-        } else {
-            p = p_Item->mimeType()->pixmap(KIcon::Desktop,size,KIcon::DefaultState);
-        }
+        p = p_Item->mimeType(isDir())->pixmap(KIcon::Desktop,size,KIcon::DefaultState);
         if (isLocked()) {
             m_bgColor = LOCKED;
             QPixmap p2;
@@ -347,7 +345,6 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             }
         }
     } else {
-        _local = true;
         if (isRemoteAdded()) {
             if (isDir()) {
                 p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("folder",KIcon::Desktop,size);
@@ -539,4 +536,9 @@ KFileItem*SvnItem::fileItem()
 const KURL&SvnItem::kdeName(const svn::Revision&r)
 {
     return p_Item->kdeName(r);
+}
+
+KMimeType::Ptr SvnItem::mimeType()
+{
+    return p_Item->mimeType(isDir());
 }

@@ -27,6 +27,7 @@
 
 #include <klistview.h>
 #include <kurl.h>
+#include <ktrader.h>
 #include <qmap.h>
 #include <qptrlist.h>
 #include <qevent.h>
@@ -128,6 +129,8 @@ protected:
     virtual void leaveEvent(QEvent*e);
     virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false);
 
+    KTrader::OfferList offersList(SvnItem*item);
+
 private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
@@ -136,7 +139,6 @@ private:
 
 protected slots:
     virtual void slotSelectBrowsingRevision();
-    virtual void slotItemClicked(QListViewItem*);
     virtual void slotItemRead(QListViewItem*);
     virtual void slotContextMenuRequested(QListViewItem *, const QPoint &, int);
     virtual void slotSelectionChanged();

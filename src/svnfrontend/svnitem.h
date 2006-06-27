@@ -23,6 +23,7 @@
 
 #include "helpers/smart_pointer.h"
 #include "svnqt/status.hpp"
+#include <kmimetype.h>
 #include <qstring.h>
 #include <qdatetime.h>
 #include <qpixmap.h>
@@ -50,6 +51,7 @@ public:
     virtual const QString&shortName()const;
     virtual const QString&Url()const;
     virtual const KURL&kdeName(const svn::Revision&);
+    virtual KMimeType::Ptr mimeType();
     virtual const QDateTime&fullDate()const;
     virtual bool isDir()const;
     virtual bool isVersioned()const;

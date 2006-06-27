@@ -55,6 +55,7 @@
 #include <kio/job.h>
 #include <krun.h>
 #include <kurldrag.h>
+#include <ktrader.h>
 
 #include <qvbox.h>
 #include <qpainter.h>
@@ -167,7 +168,6 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 
-    connect(this,SIGNAL(clicked(QListViewItem*)),this,SLOT(slotItemClicked(QListViewItem*)));
     connect(this,SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)),this,
         SLOT(slotContextMenuRequested(QListViewItem *, const QPoint &, int)));
 
@@ -609,8 +609,8 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             item->setDropEnabled(true);
             if (isWorkingCopy()) {
                 m_pList->m_DirWatch->addDir(item->fullName());
+                kdDebug()<< "Watching folder: " + item->fullName() << endl;
             }
-            kdDebug()<< "Watching folder: " + item->fullName() << endl;
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
 #if 0
@@ -718,28 +718,6 @@ void kdesvnfilelist::slotItemRead(QListViewItem*aItem)
     }
 }
 
-void kdesvnfilelist::slotItemClicked(QListViewItem*aItem)
-{
-    if (!aItem) return;
-    return;
-#if 0
-    FileListViewItem* k = static_cast<FileListViewItem*>( aItem );
-    bool _ex = true;
-    if (isWorkingCopy()) {
-        QDir d(k->fullName()); //FIXME: remove this as soon as we've been able to set entry->kind in Checkdirs
-        _ex = k->isDir()||d.exists();
-    } else {
-        _ex = k->isDir();
-    }
-
-    if (_ex &&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
-        if (checkDirs(k->fullName(),k)) {
-            m_Dirsread[k->fullName()]=true;
-        }
-    }
-#endif
-}
-
 void kdesvnfilelist::slotReinitItem(SvnItem*item)
 {
     if (!item) {
@@ -758,7 +736,6 @@ void kdesvnfilelist::slotReinitItem(SvnItem*item)
         k->removeChilds();
         m_Dirsread[k->fullName()]=false;;
     }
-    slotItemClicked(k);
 }
 
 void kdesvnfilelist::enableActions()
@@ -930,17 +907,19 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
         return;
     }
     svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
-    QString what = fki->kdeName(rev).prettyURL();
     QString feditor = Kdesvnsettings::external_display();
-    if ( feditor.compare("default") == 0 )
-    {
-        KFileItem fitem(KFileItem::Unknown,KFileItem::Unknown,what);
-        fitem.run();
-    }
-    else
-    {
-        if ( KRun::runCommand(feditor + " " +  what) <= 0)
-        {
+    if ( feditor.compare("default") == 0 ) {
+        KTrader::OfferList li = offersList(fki);
+        KURL::List lst;
+        lst.append(fki->kdeName(rev));
+        if (li.count()>0) {
+            KService::Ptr ptr = li.first();
+            KRun::run( *ptr, lst);
+        } else {
+            KRun::displayOpenWithDialog(lst);
+        }
+    } else {
+        if ( KRun::runCommand(feditor + " " +  fki->kdeName(rev).prettyURL()) <= 0) {
             KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
         }
     }
@@ -1222,6 +1201,18 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     }
 }
 
+KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item)
+{
+    KTrader::OfferList offers;
+    if (!item) {
+        return offers;
+    }
+    QString constraint = QString("Type == 'Application' and DesktopEntryName != 'kfmclient' and DesktopEntryName != 'kfmclient_dir' and DesktopEntryName != 'kfmclient_html'");
+    offers = KTrader::self()->query(item->mimeType()->name(), constraint);
+
+    return offers;
+}
+
 void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint &, int)
 {
     FileListViewItem*item = static_cast<FileListViewItem*>(_item);
@@ -1249,6 +1240,16 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint
                 menuname+="_versioned";
                 if (l.at(0)->isDir()) {
                     menuname+="_dir";
+                } else if (kapp->authorizeKAction("openwith")) {
+                    KTrader::OfferList offers = offersList(l.at(0));
+                    KTrader::OfferList::ConstIterator it = offers.begin();
+                    kdDebug()<<l.at(0)->mimeType()->name()<<endl;
+                    for( ; it != offers.end(); it++ ) {
+                        if ((*it)->noDisplay())
+                            continue;
+                        QString actionName( (*it)->name().replace("&", "&&") );
+                        kdDebug()<<"Trader::offer "<<actionName << endl;
+                    }
                 }
             } else {
                 menuname+="_unversioned";

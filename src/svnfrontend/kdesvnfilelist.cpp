@@ -27,6 +27,7 @@
 #include "svnactions.h"
 #include "svnfiletip.h"
 #include "keystatus.h"
+#include "opencontextmenu.h"
 #include "checkoutinfo_impl.h"
 #include "src/settings/kdesvnsettings.h"
 #include "svnqt/revision.hpp"
@@ -307,7 +308,7 @@ void kdesvnfilelist::setupActions()
     tmp_action=new KAction(i18n("Merge..."),"kdesvnmerge",
         KShortcut(),this,SLOT(slotMerge()),m_filesAction,"make_svn_merge");
     tmp_action->setToolTip("Merge repository path into current worky copy path or current repository path into a target");
-    tmp_action=new KAction( i18n( "&Open With..." ), 0, this, SLOT( slotOpenWith() ), m_filesAction, "openwith" );
+    tmp_action=new KAction( i18n( "Open With..." ), 0, this, SLOT( slotOpenWith() ), m_filesAction, "openwith" );
 
     /* remote actions only */
     m_CheckoutCurrentAction = new KAction(i18n("Checkout current repository path"),"kdesvncheckout",KShortcut(),
@@ -1213,9 +1214,9 @@ KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item)
     return offers;
 }
 
-void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint &, int)
+void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const QPoint &, int)
 {
-    FileListViewItem*item = static_cast<FileListViewItem*>(_item);
+//    FileListViewItem*item = static_cast<FileListViewItem*>(_item);
     bool isopen = baseUri().length()>0;
     SvnItemList l;
     SelectionList(&l);
@@ -1240,16 +1241,6 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint
                 menuname+="_versioned";
                 if (l.at(0)->isDir()) {
                     menuname+="_dir";
-                } else if (kapp->authorizeKAction("openwith")) {
-                    KTrader::OfferList offers = offersList(l.at(0));
-                    KTrader::OfferList::ConstIterator it = offers.begin();
-                    kdDebug()<<l.at(0)->mimeType()->name()<<endl;
-                    for( ; it != offers.end(); it++ ) {
-                        if ((*it)->noDisplay())
-                            continue;
-                        QString actionName( (*it)->name().replace("&", "&&") );
-                        kdDebug()<<"Trader::offer "<<actionName << endl;
-                    }
                 }
             } else {
                 menuname+="_unversioned";
@@ -1257,7 +1248,52 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem *_item, const QPoint
         }
     }
 
-    emit sigShowPopup(menuname);
+    QWidget * target;
+    emit sigShowPopup(menuname,&target);
+    QPopupMenu *popup = static_cast<QPopupMenu *>(target);
+    if (!popup) {
+        kdDebug()<<"Error getting popupMenu"<<endl;
+        return;
+    }
+
+    KTrader::OfferList offers;
+    OpenContextmenu*me=0;
+    KAction*temp = 0;
+
+    int id = -1;
+
+    if (l.count()==1) offers = offersList(l.at(0));
+
+    if (l.count()==1&&!l.at(0)->isDir()) {
+        if (offers.count()>0) {
+#if 0
+            KTrader::OfferList::ConstIterator it = offers.begin();
+            kdDebug()<<l.at(0)->mimeType()->name()<<endl;
+            for( ; it != offers.end(); it++ ) {
+                if ((*it)->noDisplay())
+                    continue;
+                QString actionName( (*it)->name().replace("&", "&&") );
+                kdDebug()<<"Trader::offer "<<actionName << endl;
+            }
+#endif
+            svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
+            me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0,0);
+            id = popup->insertItem(i18n("Open With..."),me);
+        } else {
+            temp = filesActions()->action("openwith");
+            if (temp) {
+                temp->plug(popup);
+            }
+        }
+    }
+    popup->exec(QCursor::pos());
+    if (id>-1) {
+        popup->removeItem(id);
+    }
+    delete me;
+    if (temp) {
+        temp->unplug(popup);
+    }
 }
 
 /**

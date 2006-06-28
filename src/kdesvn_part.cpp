@@ -80,7 +80,7 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
 #else
     setXMLFile("kdesvn_part.rc");
 #endif
-    connect(m_view,SIGNAL(sigShowPopup(const QString&)),this,SLOT(slotDispPopup(const QString&)));
+    connect(m_view,SIGNAL(sigShowPopup(const QString&,QWidget**)),this,SLOT(slotDispPopup(const QString&,QWidget**)));
     connect(m_view,SIGNAL(sigSwitchUrl(const KURL&)),this,SLOT(openURL(const KURL&)));
     connect(this,SIGNAL(refreshTree()),m_view,SLOT(refreshCurrentTree()));
     connect(m_view,SIGNAL(setWindowCaption(const QString&)),this,SIGNAL(setWindowCaption(const QString&)));
@@ -131,15 +131,9 @@ void kdesvnPart::slotFileProperties()
 {
 }
 
-void kdesvnPart::slotDispPopup(const QString&name)
+void kdesvnPart::slotDispPopup(const QString&name,QWidget**target)
 {
-    QWidget *w = hostContainer(name);
-    QPopupMenu *popup = static_cast<QPopupMenu *>(w);
-    if (!popup) {
-        kdDebug()<<"Error getting popupMenu"<<endl;
-        return;
-    }
-    popup->exec(QCursor::pos());
+    *target = hostContainer(name);
 }
 
 KAboutData* kdesvnPart::createAboutData()

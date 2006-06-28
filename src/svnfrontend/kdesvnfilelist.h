@@ -172,7 +172,7 @@ protected slots:
 signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);
-    void sigShowPopup(const QString&);
+    void sigShowPopup(const QString&,QWidget**);
     void sigUrlOpend(bool);
     void sigSwitchUrl(const KURL&);
     void sigUrlChanged(const QString&);

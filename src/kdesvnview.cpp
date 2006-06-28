@@ -55,7 +55,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     top_layout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
-    connect(m_flist,SIGNAL(sigShowPopup(const QString&)),this,SLOT(slotDispPopup(const QString&)));
+    connect(m_flist,SIGNAL(sigShowPopup(const QString&,QWidget**)),this,SLOT(slotDispPopup(const QString&,QWidget**)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
     connect(m_flist,SIGNAL(sigSwitchUrl(const KURL&)),this,SIGNAL(sigSwitchUrl(const KURL&)));
     connect(m_flist,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
@@ -157,9 +157,9 @@ void kdesvnView::closeMe()
     slotOnURL(i18n("No repository open"));
 }
 
-void kdesvnView::slotDispPopup(const QString&item)
+void kdesvnView::slotDispPopup(const QString&item,QWidget**target)
 {
-    emit sigShowPopup(item);
+    emit sigShowPopup(item,target);
 }
 
 

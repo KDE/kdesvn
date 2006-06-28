@@ -92,14 +92,14 @@ signals:
      */
     void signalChangeCaption(const QString&);
 
-    void sigShowPopup(const QString&);
+    void sigShowPopup(const QString&,QWidget**);
     void sigSwitchUrl(const KURL&);
     void setWindowCaption(const QString&);
     void sigUrlChanged(const QString&);
 
 public slots:
     virtual void closeMe();
-    virtual void slotDispPopup(const QString&);
+    virtual void slotDispPopup(const QString&,QWidget**);
     virtual void refreshCurrentTree();
     virtual void slotSettingsChanged();
 

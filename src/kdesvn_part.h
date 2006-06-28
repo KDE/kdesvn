@@ -63,7 +63,7 @@ signals:
     void settingsChanged();
 
 public slots:
-    virtual void slotDispPopup(const QString&);
+    virtual void slotDispPopup(const QString&,QWidget**target);
     virtual void slotFileProperties();
     virtual bool openURL(const KURL&);
 

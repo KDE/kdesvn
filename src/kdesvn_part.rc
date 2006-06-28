@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="10">
+<kpartgui name="kdesvn_part" version="11">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <Action name="kdesvnpart_pref" />
@@ -92,8 +92,6 @@
   <Action name="make_svn_lock" />
   <Action name="make_svn_unlock" />
   <Separator/>
-  <Action name="openwith"/>
-  <Separator/>
   <Action name="make_svn_remove" />
   <Action name="make_view_refresh" />
  </Menu>
@@ -116,8 +114,6 @@
      <Action name="make_svn_remove" />
      <Separator/>
      <Action name="make_view_refresh" />
-     <Separator/>
-     <Action name="openwith"/>
  </Menu>
  <Menu name="local_context_multi" >
      <text>Actions</text>
@@ -139,8 +135,6 @@
   <Action name="make_svn_unlock" />
   <Separator/>
   <Action name="make_svn_remove" />
-  <Separator/>
-  <Action name="openwith"/>
   <Separator/>
   <Action name="make_view_refresh" />
  </Menu>

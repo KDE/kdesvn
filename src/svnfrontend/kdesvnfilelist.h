@@ -127,7 +127,7 @@ protected:
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
     virtual void contentsWheelEvent( QWheelEvent * e );
     virtual void leaveEvent(QEvent*e);
-    virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false);
+    virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false,bool no_update=false);
 
     KTrader::OfferList offersList(SvnItem*item);
 

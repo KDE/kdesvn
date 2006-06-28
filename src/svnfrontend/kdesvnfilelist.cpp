@@ -1053,6 +1053,8 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
 
 void kdesvnfilelist::refreshCurrentTree()
 {
+    QTime t;
+    t.start();
     FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
     if (!item) return;
     m_pList->stopScan();
@@ -1072,11 +1074,8 @@ void kdesvnfilelist::refreshCurrentTree()
     }
     if (isWorkingCopy()) {
         m_SvnWrapper->createModifiedCache(baseUri());
-        if (Kdesvnsettings::start_updates_check_on_open()) {
-             slotRescanIcons(true);
-        }
     }
-
+    kdDebug()<<"Refresh time: "<<t.elapsed()<<" ms"<<endl;
     setUpdatesEnabled(true);
     viewport()->repaint();
     m_pList->startScan();
@@ -1122,6 +1121,9 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
         kdDebug()<<"Fehler bei makestatus fuer "<<what <<endl;
         return;
     }
+    svn::StatusEntries neweritems;
+    m_SvnWrapper->getaddedItems(what,neweritems);
+    dlist+=neweritems;
 
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem*k;
@@ -1245,6 +1247,8 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const 
             } else {
                 menuname+="_unversioned";
             }
+        } else if (l.at(0)->isDir()) {
+            menuname+="_dir";
         }
     }
 
@@ -1265,17 +1269,8 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const 
     if (l.count()==1) offers = offersList(l.at(0));
 
     if (l.count()==1&&!l.at(0)->isDir()) {
+        temp = filesActions()->action("openwith");
         if (offers.count()>0) {
-#if 0
-            KTrader::OfferList::ConstIterator it = offers.begin();
-            kdDebug()<<l.at(0)->mimeType()->name()<<endl;
-            for( ; it != offers.end(); it++ ) {
-                if ((*it)->noDisplay())
-                    continue;
-                QString actionName( (*it)->name().replace("&", "&&") );
-                kdDebug()<<"Trader::offer "<<actionName << endl;
-            }
-#endif
             svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
             me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0,0);
             id = popup->insertItem(i18n("Open With..."),me);
@@ -2384,7 +2379,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
     //this->insertDirs(_parent, nonversioned_list);
 }
 
-void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer)
+void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer,bool no_update)
 {
     FileListViewItem*_s;
     if (!startAt) {
@@ -2398,15 +2393,16 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer)
     svn::Status d;
     while (_s) {
         //_s->makePixmap();
-        if (m_SvnWrapper->getUpdated(_s->stat().path(),d)) {
-            _s->updateStatus(d);
-        } else {
-            _s->update();
+        if (!no_update) {
+            if (m_SvnWrapper->getUpdated(_s->stat().path(),d)) {
+                _s->updateStatus(d);
+            } else {
+                _s->update();
+            }
         }
-        rescanIconsRec(_s,checkNewer);
+        rescanIconsRec(_s,checkNewer,no_update);
         if (checkNewer && _s->isDir() && _s->isOpen()) {
             svn::StatusEntries target;
-            kdDebug( ) << "Checking added items for " << _s->stat().path()<< " Revision: " << _s->stat().entry().revision() << endl;
             m_SvnWrapper->getaddedItems(_s->stat().path(),target);
             insertDirs(_s,target);
         }

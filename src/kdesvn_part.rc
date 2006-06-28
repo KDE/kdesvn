@@ -93,7 +93,7 @@
   <Action name="make_svn_unlock" />
   <Separator/>
   <Action name="make_svn_remove" />
-  <Action name="make_view_refresh" />
+  <Separator/>
  </Menu>
  <Menu name="local_context_single_versioned_dir">
      <Action name="make_svn_headupdate"/>
@@ -113,7 +113,6 @@
      <Action name="make_svn_ignore"/>
      <Action name="make_svn_remove" />
      <Separator/>
-     <Action name="make_view_refresh" />
  </Menu>
  <Menu name="local_context_multi" >
      <text>Actions</text>
@@ -126,8 +125,6 @@
  </Menu>
  <Menu name="remote_context_single" >
   <Action name="make_svn_log_full" />
-  <Action name="make_svn_checkout_current" />
-  <Action name="make_svn_export_current" />
   <Action name="make_svn_blame" />
   <Action name="make_svn_cat" />
   <Separator/>
@@ -136,7 +133,15 @@
   <Separator/>
   <Action name="make_svn_remove" />
   <Separator/>
-  <Action name="make_view_refresh" />
+ </Menu>
+ <Menu name="remote_context_single_dir" >
+     <Action name="make_svn_log_full" />
+     <Action name="make_svn_checkout_current" />
+     <Action name="make_svn_export_current" />
+     <Separator/>
+     <Action name="make_svn_remove" />
+     <Separator/>
+     <Action name="make_view_refresh" />
  </Menu>
  <Menu name="remote_context_multi" >
   <Action name="make_svn_log_full" />

@@ -17,47 +17,17 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SVNREPOSITORYDATA_H
-#define SVNREPOSITORYDATA_H
-
-#include "pool.hpp"
-#include "apr.hpp"
-
-#include <qstring.h>
-
-#include <svn_repos.h>
-#include <svn_error.h>
+#include "repositorylistener.hpp"
 
 namespace svn {
 
-class Repository;
-class RepositoryListener;
-/**
-	@author Rajko Albrecht <ral@alwins-world.de>
-*/
-class RepositoryData{
-    friend class Repository;
-
-public:
-    RepositoryData(RepositoryListener*);
-
-    virtual ~RepositoryData();
-    void Close();
-    svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool nosvn1diff=false);
-
-    void reposFsWarning(const QString&msg);
-
-protected:
-    Pool m_Pool;
-    svn_repos_t*m_Repository;
-    RepositoryListener*m_Listener;
-
-private:
-    static void warning_func(void *baton, svn_error_t *err);
-};
-
+RepositoryListener::RepositoryListener()
+{
 }
 
-#endif
+
+RepositoryListener::~RepositoryListener()
+{
+}
+
+}

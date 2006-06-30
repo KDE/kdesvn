@@ -22,9 +22,9 @@
 
 namespace svn {
 
-Repository::Repository()
+Repository::Repository(RepositoryListener*aListener)
 {
-    m_Data=new RepositoryData();
+    m_Data=new RepositoryData(aListener);
 }
 
 
@@ -43,6 +43,14 @@ Repository::~Repository()
 void svn::Repository::Open(const QString&name) throw (ClientException)
 {
     svn_error_t * error = m_Data->Open(name);
+    if (error!=0) {
+        throw ClientException (error);
+    }
+}
+
+void svn::Repository::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff) throw (ClientException)
+{
+    svn_error_t * error = m_Data->CreateOpen(path,fstype,_bdbnosync,_bdbautologremove,_nosvn1diff);
     if (error!=0) {
         throw ClientException (error);
     }

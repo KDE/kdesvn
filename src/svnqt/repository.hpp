@@ -27,16 +27,19 @@
 namespace svn {
 
 class RepositoryData;
+class RepositoryListener;
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
 class Repository{
 public:
-    Repository();
+    Repository(svn::RepositoryListener*);
 
     virtual ~Repository();
     void Open(const QString&) throw (ClientException);
+    void CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
+        bool _bdbautologremove = true, bool nosvn1diff=false) throw (ClientException);
 
 private:
     RepositoryData*m_Data;

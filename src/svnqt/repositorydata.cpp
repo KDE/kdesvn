@@ -20,6 +20,7 @@
 #include "repositorydata.hpp"
 #include "svncpp_defines.hpp"
 #include "exception.hpp"
+#include "repositorylistener.hpp"
 
 #include <svn_fs.h>
 #include <svn_path.h>
@@ -27,9 +28,10 @@
 
 namespace svn {
 
-RepositoryData::RepositoryData()
+RepositoryData::RepositoryData(RepositoryListener*aListener)
 {
     m_Repository = 0;
+    m_Listener = aListener;
 }
 
 
@@ -48,8 +50,11 @@ void RepositoryData::warning_func(void *baton, svn_error_t *err)
     }
 }
 
-void RepositoryData::reposFsWarning(const QString&/*msg*/)
+void RepositoryData::reposFsWarning(const QString&msg)
 {
+    if (m_Listener) {
+        m_Listener->sendWarning(msg);
+    }
 }
 
 }

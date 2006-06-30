@@ -129,7 +129,7 @@ protected:
     virtual void leaveEvent(QEvent*e);
     virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false,bool no_update=false);
 
-    KTrader::OfferList offersList(SvnItem*item);
+    KTrader::OfferList offersList(SvnItem*item,bool execOnly=false);
 
 private:
     KdesvnFileListPrivate*m_pList;

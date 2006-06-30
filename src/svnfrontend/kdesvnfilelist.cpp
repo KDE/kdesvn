@@ -910,10 +910,13 @@ void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
     svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
     QString feditor = Kdesvnsettings::external_display();
     if ( feditor.compare("default") == 0 ) {
-        KTrader::OfferList li = offersList(fki);
         KURL::List lst;
         lst.append(fki->kdeName(rev));
-        if (li.count()>0) {
+        KTrader::OfferList li = offersList(fki,true);
+        if (li.count()==0||li.first()->exec().isEmpty()) {
+            li = offersList(fki);
+        }
+        if (li.count()>0&&!li.first()->exec().isEmpty()) {
             KService::Ptr ptr = li.first();
             KRun::run( *ptr, lst);
         } else {
@@ -1206,13 +1209,18 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     }
 }
 
-KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item)
+KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item,bool execOnly)
 {
     KTrader::OfferList offers;
     if (!item) {
         return offers;
     }
-    QString constraint = QString("Type == 'Application' and DesktopEntryName != 'kfmclient' and DesktopEntryName != 'kfmclient_dir' and DesktopEntryName != 'kfmclient_html'");
+    QString constraint;
+    if (execOnly) {
+        constraint = "Type == 'Application' or (exist Exec)";
+    } else {
+        constraint = "Type == 'Application'";
+    }
     offers = KTrader::self()->query(item->mimeType()->name(), constraint);
 
     return offers;

@@ -438,7 +438,7 @@ namespace svn
      * @return delta between the files
      * @exception ClientException
      */
-    virtual QString
+    virtual QByteArray
     diff (const Path & tmpPath, const Path & path,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
@@ -465,7 +465,7 @@ namespace svn
      * @return delta between the files
      * @exception ClientException
      */
-    virtual QString
+    virtual QByteArray
     diff (const Path & tmpPath, const Path & path1,const Path & path2,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,

@@ -907,7 +907,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
     }
     svn::Revision tr(it.data().rev);
     QString tp = _basePath+it.data().name;
-    QString ex = "";
+    QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
     kdDebug()<<"Non recourse diff"<<endl;
@@ -923,7 +923,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
 //        emit clientException(e.msg());
         return;
     }
-    emit dispDiff(ex);
+    emit dispDiff(QString::fromUtf8(ex));
 }
 
 void RevGraphView::setBasePath(const QString&_path)

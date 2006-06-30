@@ -703,7 +703,7 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
     svn::Revision r2(rnum2,rstring2);
     QString u1 = makeSvnUrl(uri1);
     QString u2 = makeSvnUrl(uri2);
-    QString ex = "";
+    QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
     /// @todo read settings for diff (ignore contentype)
@@ -714,7 +714,8 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
-    QTextIStream stream(&ex);
+    QString out = QString::fromUtf8(ex);
+    QTextIStream stream(&out);
     while (!stream.atEnd()) {
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "diffresult",stream.readLine());
         m_pData->m_Listener.incCounter();

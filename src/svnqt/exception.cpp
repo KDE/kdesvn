@@ -88,6 +88,35 @@ namespace svn
     return m->message;
   }
 
+  QString Exception::error2msg(svn_error_t*error)
+  {
+    QString message = "";
+    if (error==0) {
+        return message;
+    }
+    svn_error_t * next = error->child;
+    if (error->message)
+      message = QString::fromUtf8(error->message);
+    else
+    {
+      message = "Unknown error!\n";
+      if (error->file)
+      {
+        message += QString::fromUtf8("In file ");
+        message += QString::fromUtf8(error->file);
+        message += QString(" Line %1").arg(error->line);
+      }
+    }
+    while (next != NULL && next->message != NULL)
+    {
+      message = message + "\n" + QString::fromUtf8(next->message);
+
+      next = next->child;
+    }
+
+    return message;
+
+  }
 
   ClientException::ClientException (const char*msg) throw ()
     : Exception (msg)
@@ -101,25 +130,7 @@ namespace svn
       return;
 
     m->apr_err = error->apr_err;
-    svn_error_t * next = error->child;
-    if (error->message)
-      m->message = QString::fromUtf8(error->message);
-    else
-    {
-      m->message = "Unknown error!\n";
-      if (error->file)
-      {
-        m->message += QString::fromUtf8("In file ");
-        m->message += QString::fromUtf8(error->file);
-        m->message += QString(" Line %1").arg(error->line);
-      }
-    }
-    while (next != NULL && next->message != NULL)
-    {
-      m->message = m->message + "\n" + QString::fromUtf8(next->message);
-
-      next = next->child;
-    }
+    m->message = error2msg(error);
     svn_error_clear (error);
   }
 

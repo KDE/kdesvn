@@ -78,7 +78,7 @@ namespace svn
       svn_error_clear (svn_io_remove_file (errfileName, pool));
   }
 
-  QString
+  QByteArray
   Client_impl::diff (const Path & tmpPath, const Path & path,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
@@ -87,7 +87,7 @@ namespace svn
     return diff(tmpPath,path,path,revision1,revision2,recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype);
   }
 
-  QString
+  QByteArray
   Client_impl::diff (const Path & tmpPath, const Path & path1,const Path&path2,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
@@ -193,16 +193,14 @@ namespace svn
 
     diffCleanup (outfile, outfileName, errfile, errfileName, pool);
 #if QT_VERSION < 0x040000
-    QCString res;
+    QByteArray res;
+    /// @todo check if realy dup or just assign!
     res.duplicate(stringbuf->data,stringbuf->len);
 #else
     QByteArray res( stringbuf->data, stringbuf->len );
 #endif
-    res.resize(stringbuf->len+1);
-    QString nstring = QString::fromUtf8(res);
-    return nstring;
+    return res;
   }
-
 }
 
 /* -----------------------------------------------------------------

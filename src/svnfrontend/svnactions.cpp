@@ -832,7 +832,11 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
         return;
     }
     EMIT_FINISHED;
-    dispDiff(ex);
+    if (ex.isEmpty()) {
+        emit clientException(i18n("No difference to display"));
+        return;
+    }
+    dispDiff(QString::fromUtf8(ex));
 }
 
 /*!
@@ -847,7 +851,7 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
 {
     if (!m_Data->m_CurrentContext) return;
-    QString ex = "";
+    QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
@@ -864,13 +868,18 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
         return;
     }
     EMIT_FINISHED;
-    dispDiff(ex);
+    if (ex.isEmpty()) {
+        emit clientException(i18n("No difference to display"));
+        return;
+    }
+
+    dispDiff(QString::fromUtf8(ex));
 }
 
 void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
 {
     if (!m_Data->m_CurrentContext) return;
-    QString ex = "";
+    QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
     kdDebug()<<"Non recourse diff"<<endl;
@@ -888,7 +897,12 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         return;
     }
     EMIT_FINISHED;
-    dispDiff(ex);
+    if (ex.isEmpty()) {
+        emit clientException(i18n("No difference to display"));
+        return;
+    }
+
+    dispDiff(QString::fromUtf8(ex));
 }
 
 void SvnActions::dispDiff(const QString&ex)

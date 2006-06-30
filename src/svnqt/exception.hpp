@@ -57,6 +57,8 @@ namespace svn
      */
     const apr_status_t apr_err () const;
 
+    static QString error2msg(svn_error_t*error);
+
   protected:
     struct Data;
     Data * m;

@@ -1121,9 +1121,11 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
         kdDebug()<<"Fehler bei makestatus fuer "<<what <<endl;
         return;
     }
-    svn::StatusEntries neweritems;
-    m_SvnWrapper->getaddedItems(what,neweritems);
-    dlist+=neweritems;
+    if (isWorkingCopy()) {
+        svn::StatusEntries neweritems;
+        m_SvnWrapper->getaddedItems(what,neweritems);
+        dlist+=neweritems;
+    }
 
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem*k;

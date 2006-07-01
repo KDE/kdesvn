@@ -406,7 +406,9 @@ const QString&RevGraphView::getLabelstring(const QString&nodeName)
         res = i18n("Deleted at revision %1").arg(it1.data().rev);
     break;
     case 'A':
-        res = i18n("Added at revision %1").arg(it1.data().rev);
+        res = i18n("Added at revision %1 as %2")
+            .arg(it1.data().rev)
+            .arg(it1.data().name);
     break;
     case 'C':
     case 1:

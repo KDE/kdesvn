@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-06-24 03:20+0200\n"
-"PO-Revision-Date: 2006-06-27 17:05+0530\n"
+"PO-Revision-Date: 2006-07-01 12:32+0530\n"
 "Last-Translator: A S Alam <apbrar@gmail.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgstr "%1  ਛੱਡੀ ਗਈ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:202
 msgid "Finished at revision %1"
-msgstr ""
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਮੁਕੰਮਲ ਕੀਤਾ"
 
 #: kiosvn/kiolistener.cpp:204
 msgid "Finished."
@@ -151,7 +151,7 @@ msgstr ""
 
 #: kiosvn/kiolistener.cpp:226
 msgid "Checked out revision %1."
-msgstr ""
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਚੈੱਕਆਉਟ ਕੀਤਾ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:230
 msgid "Updated external to revision %1."
@@ -159,19 +159,19 @@ msgstr ""
 
 #: kiosvn/kiolistener.cpp:232
 msgid "Updated to revision %1."
-msgstr ""
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਅੱਪਡੇਟ ਕੀਤਾ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:235
 msgid "External at revision %1."
-msgstr ""
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਉੱਤੇ ਬਾਹਰੀ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:237
 msgid "At revision %1."
-msgstr ""
+msgstr "%1 ਰੀਵਿਜ਼ਨ ਲਈ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:243
 msgid "External export complete."
-msgstr ""
+msgstr "ਬਾਹਰੀ ਨਿਰਯਾਤ ਪੂਰਾ ਹੋਇਆ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:245
 msgid "Export complete."
@@ -179,7 +179,7 @@ msgstr "ਪੂਰੀ ਤਰ੍ਹਾਂ ਨਿਰਯਾਤ ਕੀਤਾ।"
 
 #: kiosvn/kiolistener.cpp:248
 msgid "External checkout complete."
-msgstr ""
+msgstr "ਬਾਹਰੀ ਚੈੱਕਆਉਟ ਪੂਰਾ ਹੋਇਆ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:250
 msgid "Checkout complete."
@@ -374,7 +374,7 @@ msgstr "Form1"
 #: rc.cpp:21
 #, no-c-format
 msgid "Mark changed and locked items colored"
-msgstr ""
+msgstr "ਤਬਦੀਲ ਅਤੇ ਲਾਕ ਇਕਾਈਆਂ ਲਈ ਰੰਗ"
 
 #: rc.cpp:29
 #, no-c-format
@@ -384,7 +384,7 @@ msgstr "ਤਾਲਾਬੰਦ ਇਕਾਈਆਂ:"
 #: rc.cpp:33
 #, no-c-format
 msgid "Not versioned items:"
-msgstr ""
+msgstr "ਬਿਨ-ਵਰਜਨ ਇਕਾਈਆਂ:"
 
 #: rc.cpp:36
 #, no-c-format
@@ -504,7 +504,7 @@ msgstr ""
 #: rc.cpp:107
 #, no-c-format
 msgid "see \"Whats this\" for details"
-msgstr ""
+msgstr "ਵੇਰਵੇ ਲਈ \"ਏਹ ਕੀ ਹੈ\" ਨੂੰ ਵੇਖੋ"
 
 #: rc.cpp:110
 #, no-c-format
@@ -550,7 +550,7 @@ msgstr ""
 #: rc.cpp:140
 #, no-c-format
 msgid "Maximum logmessages in history:"
-msgstr ""
+msgstr "ਅਤੀਤ 'ਚ ਵੱਧ ਤੋਂ ਵੱਧ ਲਾਗ ਸੁਨੇਹੇ (logmessages):"
 
 #: rc.cpp:143
 #, no-c-format
@@ -774,7 +774,7 @@ msgstr ""
 #: rc.cpp:289
 #, no-c-format
 msgid "Force delete on modified/unversioned"
-msgstr ""
+msgstr "ਸੋਧ/ਬਿਨ-ਵਰਜਨ ਉੱਤੇ ਧੱਕੇ ਨਾਲ ਹਟਾਓ"
 
 #: rc.cpp:293
 #, no-c-format
@@ -1044,7 +1044,7 @@ msgstr "ਨਾ-ਹਟਾਈ ਵਿਸ਼ੇਸ਼ਤਾ"
 
 #: svnfrontend/propertiesdlg.cpp:223
 msgid "Missing SVN link"
-msgstr ""
+msgstr "SVN ਸਬੰਧ ਗੁੰਮ ਹੈ"
 
 #: svnfrontend/propertiesdlg.cpp:299 svnfrontend/propertiesdlg.cpp:349
 msgid ""
@@ -1061,6 +1061,8 @@ msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
 msgstr ""
+"ਉਸ ਨਾਂ ਨਾਲ ਇੱਕ ਵਿਸ਼ੇਸ਼ਤਾ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।\n"
+"ਰੱਦ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #: svnfrontend/propertiesdlg.cpp:303 svnfrontend/propertiesdlg.cpp:353
 msgid "Double property"
@@ -1072,7 +1074,7 @@ msgstr "ਆਯਾਤ ਉੱਤੇ ਸਬ-ਡਾਇ %1 ਬਣਾਓ"
 
 #: svnfrontend/commandexec.cpp:196
 msgid "Command \"%1\" not implemented or known"
-msgstr ""
+msgstr "ਕਮਾਂਡ \"%1\" ਹਾਲੇ ਸਥਾਪਤ ਨਹੀਂ ਕੀਤੀ ਗਈ ਹੈ ਜਾਂ ਬਣੀ ਨਹੀਂ ਹੈ"
 
 #: svnfrontend/commandexec.cpp:197 svnfrontend/commandexec.cpp:298
 #: svnfrontend/kdesvnfilelist.cpp:889
@@ -1261,11 +1263,11 @@ msgstr ""
 
 #: svnfrontend/ccontextlistener.cpp:93
 msgid "Modified state had mods merged in."
-msgstr ""
+msgstr "ਸੋਧੀ ਹਾਲਤ ਮਿਲਾ ਲਈ ਗਈ ਹੈ।"
 
 #: svnfrontend/ccontextlistener.cpp:94
 msgid "Modified state got conflicting mods."
-msgstr ""
+msgstr "ਸੋਧੀ ਹਾਲਤ ਲਈ ਅਪਵਾਦ ਹਾਲਤ ਬਣ ਗਈ ਹੈ।"
 
 #: svnfrontend/ccontextlistener.cpp:267
 msgid "Enter password for realm %1"
@@ -1279,11 +1281,11 @@ msgstr ""
 
 #: svnfrontend/ccontextlistener.cpp:291
 msgid "The certificate hostname does not match."
-msgstr ""
+msgstr "ਸਰਟੀਫਿਕੇਟ ਮੇਜ਼ਬਾਨ ਨਾਂ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ ਹੈ।"
 
 #: svnfrontend/ccontextlistener.cpp:294
 msgid "The certificate is not yet valid."
-msgstr ""
+msgstr "ਸਰਟੀਫਿਕੇਟ ਠੀਕ ਨਹੀਂ ਹੈ।"
 
 #: svnfrontend/ccontextlistener.cpp:297
 msgid "The certificate has expired."
@@ -1295,7 +1297,7 @@ msgstr "ਸਰਟੀਫਿਕੇਟ ਲਈ ਇੱਕ ਅਣਜਾਣ ਗਲਤ�
 
 #: svnfrontend/graphtree/revgraphview.cpp:320
 msgid "Error running the graph layouting tool.\n"
-msgstr ""
+msgstr "ਗਰਾਫ਼ ਖਾਕਾ ਸੰਦ ਚਲਾਉਣ ਦੌਰਾਨ ਗਲਤੀ ਹੈ।\n"
 
 #: svnfrontend/graphtree/revgraphview.cpp:321
 msgid "Please check that 'dot' is installed (package GraphViz)."
@@ -1310,28 +1312,24 @@ msgid "Added at revision %1"
 msgstr "ਰੀਵਿਜ਼ਨ %1 'ਚ ਜੋੜਿਆ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:413
-#, fuzzy
 msgid "Copied to %1 at revision %2"
-msgstr "%1 ਉੱਤੇ %2 ਰੀਵਿਜ਼ਨ"
+msgstr "%2 ਰੀਵਿਜ਼ਨ ਲਈ %1 ਉੱਤੇ ਨਕਲ ਕੀਤਾ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:416
-#, fuzzy
 msgid "Renamed to %1 at revision %2"
-msgstr "%1 ਉੱਤੇ %2 ਰੀਵਿਜ਼ਨ"
+msgstr "%2 ਰੀਵਿਜ਼ਨ ਲਈ %1 ਲਈ ਨਾਂ-ਤਬਦੀਲ ਕੀਤਾ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:419
-#, fuzzy
 msgid "Modified at revision %1"
-msgstr "%1 ਰੀਵਿਜ਼ਨ ਕਮਿਟ ਕੀਤਾ ਹੈ।"
+msgstr "%1 ਰੀਵਿਜ਼ਨ ਲਈ ਸੋਧਿਆ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:422
-#, fuzzy
 msgid "Revision %1"
-msgstr "ਰੀਵਿਜ਼ਨ"
+msgstr "ਰੀਵਿਜ਼ਨ %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:439
 msgid "Could not open tempfile %1 for writing."
-msgstr ""
+msgstr "ਆਰਜ਼ੀ ਫਾਇਲ (tempfile) %1 ਨੂੰ ਲਿਖਣ ਲਈ ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
 
 #: svnfrontend/graphtree/revgraphview.cpp:487
 msgid "Could not start process \""
@@ -1366,9 +1364,8 @@ msgid "Diff to selected item"
 msgstr "ਚੁਣੀ ਇਕਾਈ ਨਾਲ ਅੰਤਰ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:784
-#, fuzzy
 msgid "Cat this version"
-msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ ਸ਼ੁਰੂ"
+msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ cat"
 
 #: svnfrontend/graphtree/revgraphview.cpp:787
 msgid "Unselect item"
@@ -1437,7 +1434,7 @@ msgstr "ਅਣਜਾਣ"
 
 #: svnfrontend/svnactions.cpp:343
 msgid "Blame %1"
-msgstr ""
+msgstr "%1 ਬਲੇਮ"
 
 #: svnfrontend/svnactions.cpp:367
 msgid "Error getting content"
@@ -1469,7 +1466,7 @@ msgstr "URL"
 
 #: svnfrontend/svnactions.cpp:491
 msgid "Canonical repository url"
-msgstr ""
+msgstr "Canonical ਰਿਪੋਜ਼ਟਰੀ URL"
 
 #: svnfrontend/svnactions.cpp:494
 msgid "Checksum"
@@ -1541,7 +1538,7 @@ msgstr "ਅਪਵਾਦ ਫਾਇਲ ਦਾ ਵਰਕਿੰਗ ਵਰਜਨ"
 
 #: svnfrontend/svnactions.cpp:559
 msgid "Property reject file"
-msgstr ""
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਰੱਦ ਕੀਤੀ ਫਾਇਲ"
 
 #: svnfrontend/svnactions.cpp:564
 msgid "Copy from URL"
@@ -1557,7 +1554,7 @@ msgstr "ਮਾਲਕ"
 
 #: svnfrontend/svnactions.cpp:569 svnfrontend/svnactions.cpp:579
 msgid "Locked on"
-msgstr ""
+msgstr "ਲਾੱਕ ਚਾਲੂ ਹੈ"
 
 #: svnfrontend/svnactions.cpp:572 svnfrontend/svnactions.cpp:582
 msgid "Lock comment"
@@ -1639,7 +1636,7 @@ msgstr ""
 
 #: svnfrontend/svnactions.cpp:1282
 msgid "Revert entries"
-msgstr ""
+msgstr "ਇੰਦਰਾਜ਼ ਮੁੜ-ਪ੍ਰਾਪਤ"
 
 #: svnfrontend/svnactions.cpp:1290
 msgid "Really revert these entries to pristine state?"
@@ -1663,7 +1660,7 @@ msgstr "url ਬਦਲੋ"
 
 #: svnfrontend/svnactions.cpp:1355
 msgid "Relocate repository to new URL"
-msgstr ""
+msgstr "ਨਵੇਂ URL ਲਈ ਰਿਪੋਜਟਰੀ ਲਈ ਤਬਦੀਲ"
 
 #: svnfrontend/svnactions.cpp:1376
 msgid "Can only switch one item at time"
@@ -1707,7 +1704,7 @@ msgstr "ਇੰਦਰਾਜ਼ ਨਕਲ ਜਾਂ ਭੇਜੇ ਜਾ ਰਹੇ 
 
 #: svnfrontend/svnactions.cpp:1634
 msgid "No unversioned items found."
-msgstr ""
+msgstr "ਕੋਈ ਬਿਨਾਂ-ਵਰਜਨ ਇਕਾਈ ਨਹੀਂ ਲੱਭੀ ਹੈ।"
 
 #: svnfrontend/svnactions.cpp:1637
 msgid "Add unversioned items"
@@ -1758,9 +1755,8 @@ msgid "Full revision tree"
 msgstr "ਪੂਰੀ ਰੀਵਿਜ਼ਨ ਲੜੀ"
 
 #: svnfrontend/kdesvnfilelist.cpp:211
-#, fuzzy
 msgid "Partial revision tree"
-msgstr "ਪੂਰੀ ਰੀਵਿਜ਼ਨ ਲੜੀ"
+msgstr "ਅਧੂਰਾ ਰੀਵਿਜ਼ਨ ਲੜੀ"
 
 #: svnfrontend/kdesvnfilelist.cpp:216
 msgid "Details"
@@ -1818,7 +1814,7 @@ msgstr "ਰਿਪੋਜ਼ਟਰੀ ਤਬਦੀਲ"
 
 #: svnfrontend/kdesvnfilelist.cpp:249
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr ""
+msgstr "ਮੌਜੂਦਾ ਕਾਰਜਕਾਰੀ ਨਕਲ ਮਾਰਗ ਦਾ ਰਿਪੋਜ਼ਟਰੀ ਮਾਰਗ ਤਬਦੀਲ (\"svn switch\")"
 
 #: svnfrontend/kdesvnfilelist.cpp:250
 msgid "Relocate current working copy url"
@@ -1834,7 +1830,7 @@ msgstr "ਨਾ-ਵਰਜਨ ਅਧੀਨ ਇਕਾਈਆਂ ਲਈ ਜਾਂਚ"
 
 #: svnfrontend/kdesvnfilelist.cpp:255
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
+msgstr "ਨਾ-ਵਰਜਨ ਅਧੀਨ ਇਕਾਈਆਂ ਲਈ ਫੋਲਡਰ ਝਲਕ ਵੇਖੋ ਅਤੇ ਲੋੜ ਹੋਵੇ ਤਾਂ ਉਹਨਾਂ ਨੂੰ ਜੋੜੋ।"
 
 #: svnfrontend/kdesvnfilelist.cpp:257
 msgid "Open repository of working copy"
@@ -1856,7 +1852,7 @@ msgstr "ਫੋਲਡਰ ਨੂੰ ਮੌਜੂਦਾ 'ਚ ਆਯਾਤ ਕਰੋ
 
 #: svnfrontend/kdesvnfilelist.cpp:266
 msgid "Import folder content into current url"
-msgstr ""
+msgstr "ਮੌਜੂਦਾ URLਵਿੱਚ ਫੋਲਡਰ ਭਾਗ ਆਯਾਤ ਕਰੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:270
 msgid "Add selected files/dirs"
@@ -1871,6 +1867,8 @@ msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
 msgstr ""
+"ਚੁਣੀਆਂ ਫਾਇਲਾਂ ਅਤੇ/ਜਾਂ ਡਾਇਰੈਕਟਰੀਆਂ ਅਤੇ ਫੋਲਡਰਾਂ 'ਚ ਸਭ ਅਧੀਨ-ਇਕਾਈਆਂ ਨੂੰ "
+"ਰਿਪੋਟਰੀ 'ਚ ਜੋੜਿਆ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:277
 msgid "Delete selected files/dirs"
@@ -1886,7 +1884,7 @@ msgstr "ਮੌਜੂਦਾ ਤਬਦੀਲੀਆਂ ਵਾਪਿਸ"
 
 #: svnfrontend/kdesvnfilelist.cpp:282
 msgid "Resolve recursive"
-msgstr ""
+msgstr "ਲਗਾਤਾਰ ਹੱਲ"
 
 #: svnfrontend/kdesvnfilelist.cpp:284
 msgid "Marking files or dirs resolved"
@@ -1994,19 +1992,19 @@ msgstr "ਤਾਲੇ ਲਈ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1755
 msgid "Lock message"
-msgstr "ਤਾਲਾ ਸੁਨੇਹਾ"
+msgstr "ਲਾੱਕ ਸੁਨੇਹਾ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1758
 msgid "Steal lock?"
-msgstr ""
+msgstr "ਲਾੱਕ ਚੋਰੀ ਕਰਨਾ ਹੈ?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1789
 msgid "Nothing selected for unlock"
-msgstr ""
+msgstr "ਅਣ-ਲਾੱਕ ਲਈ ਕੁਝ ਚੁਣਿਆ ਨਹੀਂ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1792
 msgid "Break lock or ignore missing locks?"
-msgstr ""
+msgstr "ਲਾੱਕ ਤੋੜਨਾ ਹੈ ਜਾਂ ਗੁੰਮ ਲਾੱਕ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨਾ ਹੈ?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1792
 msgid "Unlocking items"
@@ -2022,7 +2020,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:2258
 msgid "Relocate path %1"
-msgstr ""
+msgstr "ਬਦਲਿਆ ਮਾਰਗ %1"
 
 #: svnfrontend/kdesvnfilelist.cpp:2387
 msgid "Only in working copy possible."
@@ -2088,7 +2086,7 @@ msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:89
 msgid "A newline separated list of file patterns to ignore."
-msgstr ""
+msgstr "ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਫਾਇਲ ਪੈਟਰਨ ਦੀ ਨਵੀਂ ਸਤਰ ਨਾਲ ਵੱਖ ਕੀਤੀ ਸੂਚੀ ਹੈ।"
 
 #: svnfrontend/editproperty_impl.cpp:94
 msgid "Label text to show for the edit box where the user enters the issue number."
@@ -2159,11 +2157,11 @@ msgstr "ਕਮਿਟ ਲਾਗ"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:37
 msgid "Error validating server certificate for '%1'"
-msgstr ""
+msgstr "'%1' ਲਈ ਸਰਵਰ ਸਰਟੀਫਿਕੇਟ ਪਰਮਾਣਕਿਤਾ 'ਚ ਗਲਤੀ"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:48
 msgid "Trust ssl certificate"
-msgstr ""
+msgstr "ssl ਸਰਟੀਫਿਕੇਟ ਭਰੋਸਾ"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:49
 msgid "Accept permanently"

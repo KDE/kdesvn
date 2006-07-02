@@ -91,7 +91,7 @@ svn_error_t * svn::RepositoryData::Open(const QString&path)
 svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff)
 {
     Close();
-    QString _type;
+    const char* _type;
     if (fstype.lower()=="bdb") {
         _type="bdb";
     } else {
@@ -108,7 +108,7 @@ svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&
                 (_bdbautologremove ? "1" : "0"));
     apr_hash_set(fs_config, SVN_FS_CONFIG_FS_TYPE,
                  APR_HASH_KEY_STRING,
-                 _type.TOUTF8());
+                 _type);
 
     /// @todo comes with 1.4!
     if (_nosvn1diff) {
@@ -120,14 +120,14 @@ svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&
     /// @todo config as extra paramter? Meanwhile default config only
     /// (see svn::ContextData)
     SVN_ERR(svn_config_get_config(&config, 0, m_Pool));
-    const char*repository_path = path.TOUTF8();
+    const char*repository_path = apr_pstrdup (m_Pool,path.TOUTF8());
+
     repository_path = svn_path_internal_style(repository_path, m_Pool);
 
     if (svn_path_is_url(repository_path)) {
         return svn_error_createf(SVN_ERR_CL_ARG_PARSING_ERROR, NULL,
             "'%s' is an URL when it should be a path",repository_path);
     }
-
     SVN_ERR(svn_repos_create(&m_Repository, repository_path,
             NULL, NULL,config, fs_config,m_Pool));
 

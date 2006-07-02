@@ -21,7 +21,10 @@
 
 #include "kdesvnview.h"
 #include "svnfrontend/kdesvnfilelist.h"
+#include "svnfrontend/createrepo_impl.h"
+#include "src/settings/kdesvnsettings.h"
 #include "svnqt/url.hpp"
+#include "svnqt/repository.hpp"
 
 #include <qpainter.h>
 #include <qlayout.h>
@@ -30,10 +33,12 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 #include <qsplitter.h>
+#include <qlayout.h>
+#include <qvbox.h>
 
 #include <kurl.h>
-
 #include <ktrader.h>
+#include <kapplication.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
 #include <krun.h>
@@ -42,6 +47,8 @@
 #include <kdebug.h>
 #include <kactioncollection.h>
 #include <kshortcut.h>
+#include <kdialog.h>
+#include <kdialogbase.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name)
     : QWidget(parent,name),m_Collection(aCollection),
@@ -62,6 +69,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
     connect(m_flist,SIGNAL(sigSwitchUrl(const KURL&)),this,SIGNAL(sigSwitchUrl(const KURL&)));
     connect(m_flist,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
+    connect(this,SIGNAL(sigMakeBaseDirs()),m_flist,SLOT(slotMkBaseDirs()));
 }
 
 void kdesvnView::slotAppendLog(const QString& text)
@@ -189,7 +197,48 @@ void kdesvnView::slotSettingsChanged()
 void kdesvnView::slotCreateRepo()
 {
     /// @todo implement me
-    kdDebug()<<"slotCreateRepo"<<endl;
+    KDialogBase * dlg = new KDialogBase(
+        KApplication::activeModalWidget(),
+        "create_repository",
+        true,
+        i18n("Create new repository"),
+        KDialogBase::Ok|KDialogBase::Cancel);
+    if (!dlg) return;
+    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    Createrepo_impl*ptr = new Createrepo_impl(Dialog1Layout);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size"));
+    int i = dlg->exec();
+    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size",false);
+
+    if (i!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    svn::Repository*_rep = new svn::Repository(this);
+    bool ok = true;
+    bool createdirs;
+    QString path = ptr->targetDir();
+    closeMe();
+    kdDebug()<<"Creating "<<path << endl;
+    try {
+        _rep->CreateOpen(path,ptr->fsType(),ptr->disableFsync(),
+            !ptr->keepLogs(),false);
+    } catch(svn::ClientException e) {
+        slotAppendLog(e.msg());
+        kdDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;
+        ok = false;
+    }
+    kdDebug()<<"Creating "<<path << " done " << endl;
+    createdirs = ptr->createMain();
+    delete dlg;
+    delete _rep;
+    if (!ok) {
+        return;
+    }
+    openURL(path);
+    if (createdirs) {
+        emit sigMakeBaseDirs();
+    }
 }
 
 /*!
@@ -197,6 +246,16 @@ void kdesvnView::slotCreateRepo()
  */
 void kdesvnView::setupActions()
 {
+}
+
+void kdesvnView::sendWarning(const QString&aMsg)
+{
+    slotAppendLog(aMsg);
+}
+
+void kdesvnView::sendError(const QString&aMsg)
+{
+    slotAppendLog(aMsg);
 }
 
 #include "kdesvnview.moc"

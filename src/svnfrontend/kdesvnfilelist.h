@@ -182,6 +182,7 @@ public slots:
     virtual void refreshCurrent(SvnItem*);
     virtual void closeMe();
     virtual void slotMkdir();
+    virtual void slotMkBaseDirs();
     virtual void slotSettingsChanged();
 
 protected slots:

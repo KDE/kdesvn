@@ -20,12 +20,18 @@
 #ifndef CREATEREPO_IMPL_H
 #define CREATEREPO_IMPL_H
 
-#include "createrepo_dlg.h"
+#include "src/svnfrontend/createrepo_dlg.h"
 
 class Createrepo_impl: public CreateRepo_Dlg {
-Q_OBJECT
+    Q_OBJECT
 public:
     Createrepo_impl(QWidget *parent = 0, const char *name = 0);
+    QString targetDir();
+    QString fsType();
+    bool disableFsync();
+    bool keepLogs();
+    bool createMain();
+
 protected slots:
     virtual void fsTypeChanged(int);
 };

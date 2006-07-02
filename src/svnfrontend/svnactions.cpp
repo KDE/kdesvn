@@ -403,6 +403,19 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     }
 }
 
+bool SvnActions::makeMkdir(const QStringList&which,const QString&logMessage)
+{
+    if (!m_Data->m_CurrentContext||which.count()<1) return false;
+    svn::Targets targets(which);
+    try {
+        m_Data->m_Svnclient->mkdir(targets,logMessage);
+    }catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return false;
+    }
+    return true;
+}
+
 QString SvnActions::makeMkdir(const QString&parentDir)
 {
     if (!m_Data->m_CurrentContext) return QString::null;
@@ -417,15 +430,6 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     ex = "";
 
     QString logMessage=QString::null;
-/*
-    if (!m_Data->m_ParentList->isWorkingCopy()) {
-        bool ok;
-        logMessage = Logmsg_impl::getLogmessage(&ok,0,m_Data->m_ParentList->realWidget(),"logmsg_impl");
-        if (!ok) {
-            return QString::null;
-        }
-    }
-*/
     try {
         m_Data->m_Svnclient->mkdir(target,logMessage);
     }catch (svn::ClientException e) {

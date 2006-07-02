@@ -126,6 +126,14 @@
 </widget>
 <customwidgets>
 </customwidgets>
+<connections>
+    <connection>
+        <sender>m_FilesystemSelector</sender>
+        <signal>activated(int)</signal>
+        <receiver>CreateRepo_Dlg</receiver>
+        <slot>fsTypeChanged(int)</slot>
+    </connection>
+</connections>
 <slots>
     <slot access="protected">fsTypeChanged(int)</slot>
 </slots>

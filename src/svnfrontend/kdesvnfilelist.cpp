@@ -1959,6 +1959,25 @@ void kdesvnfilelist::slotMkdir()
     }
 }
 
+void kdesvnfilelist::slotMkBaseDirs()
+{
+    bool isopen = baseUri().length()>0;
+    if (!isopen) {
+        return;
+    }
+    QString parentDir=baseUri();
+    QStringList targets;
+    targets.append(parentDir+"/trunk");
+    targets.append(parentDir+"/branches");
+    targets.append(parentDir+"/tags");
+    QString msg = i18n("Automatic generated base layout by kdesvn");
+    isopen = m_SvnWrapper->makeMkdir(targets,msg);
+    if (isopen) {
+        slotDirAdded(targets[0],0);
+//        slotDirAdded(targets[1],0);
+//        slotDirAdded(targets[2],0);
+    }
+}
 
 /*!
     \fn kdesvnfilelist::slotDiffRevisions()

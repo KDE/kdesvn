@@ -122,6 +122,7 @@ public:
     QString getInfo(const QString&_what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
 
     QString makeMkdir(const QString&);
+    bool makeMkdir(const QStringList&,const QString&);
     bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
     bool checkUpdateCache(const QString&path)const;

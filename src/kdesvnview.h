@@ -22,6 +22,7 @@
 #ifndef _KDESVNVIEW_H_
 #define _KDESVNVIEW_H_
 
+#include "src/svnqt/repositorylistener.hpp"
 #include <qwidget.h>
 #include <kparts/part.h>
 
@@ -47,7 +48,7 @@ class KTextBrowser;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
-class kdesvnView : public QWidget
+class kdesvnView : public QWidget,public svn::RepositoryListener
 {
     Q_OBJECT
 public:
@@ -80,6 +81,8 @@ public:
      * Print this view to any medium -- paper or not
      */
     void print(QPainter *, int height, int width);
+    virtual void sendWarning(const QString&);
+    virtual void sendError(const QString&);
 
 signals:
     /**
@@ -96,6 +99,8 @@ signals:
     void sigSwitchUrl(const KURL&);
     void setWindowCaption(const QString&);
     void sigUrlChanged(const QString&);
+    void sigMakeBaseDirs();
+
 
 public slots:
     virtual void closeMe();

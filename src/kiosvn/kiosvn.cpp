@@ -261,20 +261,20 @@ void kio_svnProtocol::get(const KURL& url)
 
 void kio_svnProtocol::mkdir(const KURL &url, int)
 {
-    kdDebug()<<"kio_svn::get "<< url << endl;
+    kdDebug()<<"kio_svn::mkdir "<< url << endl;
     //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    QString msg;
+    QString msg = QString::null;
     svn::Path p(makeSvnUrl(url));
     try {
         m_pData->m_Svnclient->mkdir(p,msg);
     }catch (svn::ClientException e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
-    kdDebug()<<"kio_svn::get finished " << url << endl;
+    kdDebug()<<"kio_svn::mkdir finished " << url << endl;
     finished();
 }
 

@@ -21,7 +21,7 @@
   </general>
   <kdevautoproject>
     <general>
-      <activetarget>src/libkdesvnpart.la</activetarget>
+      <activetarget>src/svnfrontend/libsvnfrontend.la</activetarget>
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
@@ -252,8 +252,8 @@
     </codecompletion>
     <designerintegration>
       <qtdesigner>
+        <implementation class="Createrepo_impl" path="src/svnfrontend/createrepo_dlg.ui" implementationpath="src/svnfrontend/createrepo_impl.h" />
         <implementation class="MergeDlg_impl" path="src/svnfrontend/merge_dlg.ui" implementationpath="src/svnfrontend/mergedlg_impl.h" />
-        <implementation class="RevisiontreeSettingsDlg_impl" path="src/svnfrontend/revisiontree_settings.ui" implementationpath="src/svnfrontend/revisiontreesettingsdlg_impl.h" />
         <implementation class="SvnLogDlgImp" path="src/svnfrontend/svnlogdlg.ui" implementationpath="src/svnfrontend/svnlogdlgimp.h" />
       </qtdesigner>
     </designerintegration>

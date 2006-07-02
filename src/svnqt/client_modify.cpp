@@ -269,9 +269,11 @@ namespace svn
 
   void
   Client_impl::mkdir (const Targets & targets,
-                 const QString&) throw (ClientException)
+                 const QString&msg) throw (ClientException)
   {
     Pool pool;
+    m_context->setLogMessage(msg);
+
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
 #else
@@ -288,6 +290,9 @@ namespace svn
                 const_cast<apr_array_header_t*>
                 (targets.array (pool)),
                     *m_context, pool);
+
+    /* important! otherwise next op on repository uses that logmessage again! */
+    m_context->setLogMessage(QString::null);
 
     if(error != NULL)
       throw ClientException (error);
@@ -398,8 +403,7 @@ namespace svn
                          pool);
 
     /* important! otherwise next op on repository uses that logmessage again! */
-    /// @todo replace that later with an extra method to reset logmessage only!
-    m_context->reset();
+    m_context->setLogMessage(QString::null);
 
     if(error != NULL)
       throw ClientException (error);

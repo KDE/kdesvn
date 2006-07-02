@@ -324,7 +324,7 @@ namespace svn
      * the callback asks for a logmessage.
      *
      * @param path
-     * @param message log message. This parameter will be ignored!
+     * @param message log message. if it is QString::null asks when working on repository
      * @exception ClientException
      */
     virtual void
@@ -337,7 +337,7 @@ namespace svn
      * the callback asks for a logmessage.
      *
      * @param targets encoded pathes to create
-     * @param message log message. This parameter will be ignored!
+     * @param message log message. if it is QString::null asks when working on repository
      * @exception ClientException
      */
     virtual void

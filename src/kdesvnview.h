@@ -102,6 +102,7 @@ public slots:
     virtual void slotDispPopup(const QString&,QWidget**);
     virtual void refreshCurrentTree();
     virtual void slotSettingsChanged();
+    virtual void slotCreateRepo();
 
 protected slots:
     virtual void slotOnURL(const QString& url);
@@ -116,6 +117,8 @@ protected:
     QSplitter* m_Splitter;
     QString m_currentURL;
     KTextBrowser*m_LogWindow;
+protected:
+    virtual void setupActions();
 };
 
 #endif // _KDESVNVIEW_H_

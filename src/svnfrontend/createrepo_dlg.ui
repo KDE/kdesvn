@@ -1,0 +1,139 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>CreateRepo_Dlg</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>CreateRepo_Dlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>315</width>
+            <height>154</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Create new repository</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout1</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>textLabel2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Type of repository:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KComboBox" row="1" column="1">
+                    <item>
+                        <property name="text">
+                            <string>FSFS</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>BDB</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>m_FilesystemSelector</cstring>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Select type of storage</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Select the storage type of repository (FSFS or Berkely DB)</string>
+                    </property>
+                </widget>
+                <widget class="KURLRequester" row="0" column="1">
+                    <property name="name">
+                        <cstring>m_ReposPathinput</cstring>
+                    </property>
+                    <property name="mode">
+                        <number>18</number>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Path to repository:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_DisableFsync</cstring>
+            </property>
+            <property name="text">
+                <string>Disable fsync at commit (BDB only)</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_LogKeep</cstring>
+            </property>
+            <property name="text">
+                <string>Disable automatic log file removal (BDB only)</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_CreateMainDirs</cstring>
+            </property>
+            <property name="text">
+                <string>Create main folders</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+            <property name="checked">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Create trunk, tags and branches folder</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>If this is set then the base layout (&lt;tt&gt;/trunk&lt;/tt&gt;,&lt;tt&gt;/branches&lt;/tt&gt; and &lt;tt&gt;/tags&lt;/tt&gt;) will created after opening the fresh repository.</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<customwidgets>
+</customwidgets>
+<slots>
+    <slot access="protected">fsTypeChanged(int)</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kcombobox.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+</includehints>
+</UI>

@@ -416,7 +416,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     target.addComponent(ex);
     ex = "";
 
-    QString logMessage="";
+    QString logMessage=QString::null;
 /*
     if (!m_Data->m_ParentList->isWorkingCopy()) {
         bool ok;

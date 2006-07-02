@@ -40,11 +40,14 @@
 #include <klocale.h>
 #include <ktextbrowser.h>
 #include <kdebug.h>
+#include <kactioncollection.h>
+#include <kshortcut.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name)
     : QWidget(parent,name),m_Collection(aCollection),
       m_currentURL("")
 {
+    setupActions();
     QVBoxLayout *top_layout = new QVBoxLayout(this);
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
@@ -180,4 +183,22 @@ void kdesvnView::slotSettingsChanged()
     m_flist->slotSettingsChanged();
 }
 
+/*!
+    \fn kdesvnView::slotCreateRepo()
+ */
+void kdesvnView::slotCreateRepo()
+{
+    /// @todo implement me
+    kdDebug()<<"slotCreateRepo"<<endl;
+}
+
+/*!
+    \fn kdesvnView::setupActions()
+ */
+void kdesvnView::setupActions()
+{
+}
+
 #include "kdesvnview.moc"
+
+

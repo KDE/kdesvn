@@ -106,6 +106,10 @@ kdesvn::kdesvn()
             // tell the KParts::MainWindow that this is indeed the main widget
             setCentralWidget(m_part->widget());
 
+            KAction*tmpAction;
+            tmpAction = new KAction(i18n("Create and open new repository"),"filenew",
+                KShortcut(),m_part->widget(),SLOT(slotCreateRepo()),actionCollection(),"subversion_create_repo");
+            tmpAction->setToolTip(i18n("Create and opens a new local subversion repository"));
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
         }

@@ -263,7 +263,11 @@ void ContextData::setLogin(const QString& usr, const QString& pwd)
 void ContextData::setLogMessage (const QString& msg)
 {
     logMessage = msg;
-    logIsSet = true;
+    if (msg.isNull()) {
+        logIsSet = false;
+    } else {
+        logIsSet = true;
+    }
 }
 
 svn_error_t *ContextData::onLogMsg (const char **log_msg,

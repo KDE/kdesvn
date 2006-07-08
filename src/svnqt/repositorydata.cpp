@@ -29,13 +29,13 @@
 
 namespace svn {
 
-class RepoOutStream:public svn::stream::SvnByteStream
+class RepoOutStream:public svn::stream::SvnStream
 {
 public:
     RepoOutStream(RepositoryData*);
     virtual ~RepoOutStream(){}
 
-    virtual bool isOk(){return true;}
+    virtual bool isOk()const{return true;}
     virtual long write(const char*data,const unsigned long max);
 
 protected:
@@ -43,7 +43,7 @@ protected:
 };
 
 RepoOutStream::RepoOutStream(RepositoryData*aBack)
-    : SvnByteStream()
+    : SvnStream()
 {
     m_Back = aBack;
 }

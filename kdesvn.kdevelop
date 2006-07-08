@@ -253,6 +253,7 @@
     <designerintegration>
       <qtdesigner>
         <implementation class="Createrepo_impl" path="src/svnfrontend/createrepo_dlg.ui" implementationpath="src/svnfrontend/createrepo_impl.h" />
+        <implementation class="DumpRepo_impl" path="src/svnfrontend/dumprepo_dlg.ui" implementationpath="src/svnfrontend/dumprepo_impl.h" />
         <implementation class="MergeDlg_impl" path="src/svnfrontend/merge_dlg.ui" implementationpath="src/svnfrontend/mergedlg_impl.h" />
         <implementation class="SvnLogDlgImp" path="src/svnfrontend/svnlogdlg.ui" implementationpath="src/svnfrontend/svnlogdlgimp.h" />
       </qtdesigner>

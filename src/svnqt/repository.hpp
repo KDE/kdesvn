@@ -21,6 +21,7 @@
 #define SVNREPOSITORY_H
 
 #include "exception.hpp"
+#include "revision.hpp"
 
 #include <qstring.h>
 
@@ -40,6 +41,8 @@ public:
     void Open(const QString&) throw (ClientException);
     void CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
         bool _bdbautologremove = true, bool nosvn1diff=false) throw (ClientException);
+    void dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException);
+    void hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException);
 
 private:
     RepositoryData*m_Data;

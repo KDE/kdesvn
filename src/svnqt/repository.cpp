@@ -55,3 +55,21 @@ void svn::Repository::CreateOpen(const QString&path, const QString&fstype, bool 
         throw ClientException (error);
     }
 }
+
+
+/*!
+    \fn svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+ */
+void svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+{
+    /// @todo implement me
+}
+
+
+/*!
+    \fn svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)
+ */
+void svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException)
+{
+    /// @todo implement me
+}

@@ -9,6 +9,7 @@ namespace svn {
 
 namespace stream {
 class SvnStream_private;
+
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
@@ -24,12 +25,39 @@ public:
 
     virtual const QString& lastError()const;
 
+    virtual bool isOk()const = 0;
+
+protected:
+    virtual void setError(const QString&)const;
+    /** set the internal error
+     * @param ioError error code from QIODevide::status
+     */
+    virtual void setError(int ioError)const;
+
 private:
     SvnStream_private*m_Data;
 };
 
-}
+class SvnByteStream_private;
 
-}
+class SvnByteStream:public SvnStream
+{
+public:
+    SvnByteStream();
+    virtual ~SvnByteStream();
+
+    virtual long write(const char*,const unsigned long);
+
+    QByteArray content()const;
+
+    virtual bool isOk()const;
+
+private:
+    SvnByteStream_private*m_ByteData;
+};
+
+} // namespace stream
+
+} // namespace svn
 
 #endif

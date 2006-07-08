@@ -69,9 +69,10 @@ public:
     static QString NotifyAction(svn_wc_notify_action_t action);
     static QString NotifyState(svn_wc_notify_state_t);
 
-    void setCanceled(bool how);
-
     static QStringList failure2Strings(apr_uint32_t acceptedFailures);
+
+public slots:
+    virtual void setCanceled(bool);
 
 signals:
     void sendNotify(const QString&);

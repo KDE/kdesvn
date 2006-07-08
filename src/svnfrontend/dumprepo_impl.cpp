@@ -17,62 +17,96 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "repository.hpp"
-#include "repositorydata.hpp"
+#include "dumprepo_impl.h"
 
-namespace svn {
+#include <kdebug.h>
+#include <kurl.h>
+#include <kurlrequester.h>
+#include <kcombobox.h>
+#include <knuminput.h>
 
-Repository::Repository(RepositoryListener*aListener)
+#include <qcheckbox.h>
+
+DumpRepo_impl::DumpRepo_impl(QWidget *parent, const char *name)
+    :DumpRepoDlg(parent, name)
 {
-    m_Data=new RepositoryData(aListener);
 }
 
-
-Repository::~Repository()
+void DumpRepo_impl::slotDumpRange(bool how)
 {
-    delete m_Data;
-}
-
-
+    m_StartNumber->setEnabled(how);
+    m_EndNumber->setEnabled(how);
 }
 
 
 /*!
-    \fn svn::Repository::Open(const QString&)
+    \fn DumpRepo_impl::reposPath()
  */
-void svn::Repository::Open(const QString&name) throw (ClientException)
+QString DumpRepo_impl::reposPath()
 {
-    svn_error_t * error = m_Data->Open(name);
-    if (error!=0) {
-        throw ClientException (error);
+    KURL u = m_ReposPath->url();
+    QString res = u.path();
+    while (res.endsWith("/")) {
+        res.truncate(res.length()-1);
     }
-}
-
-void svn::Repository::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff) throw (ClientException)
-{
-    svn_error_t * error = m_Data->CreateOpen(path,fstype,_bdbnosync,_bdbautologremove,_nosvn1diff);
-    if (error!=0) {
-        throw ClientException (error);
-    }
+    return res;
 }
 
 
 /*!
-    \fn svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+    \fn DumpRepo_impl::targetFile()
  */
-void svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+QString DumpRepo_impl::targetFile()
 {
-    svn_error_t * error = m_Data->dump(output,start,end,incremental,use_deltas);
-    if (error!=0) {
-        throw ClientException (error);
+    KURL u = m_OutputFile->url();
+    QString res = u.path();
+    while (res.endsWith("/")) {
+        res.truncate(res.length()-1);
     }
+    return res;
 }
 
 
 /*!
-    \fn svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)
+    \fn DumpRepo_impl::incremental()
  */
-void svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException)
+bool DumpRepo_impl::incremental()
 {
-    /// @todo implement me
+    return m_incrementalDump->isChecked();
 }
+
+
+/*!
+    \fn DumpRepo_impl::use_dumps()
+ */
+bool DumpRepo_impl::use_deltas()
+{
+    return m_UseDeltas->isChecked();
+}
+
+
+/*!
+    \fn DumpRepo_impl::useNumbers()
+ */
+bool DumpRepo_impl::useNumbers()
+{
+    return m_Rangeonly->isChecked();
+}
+
+/*!
+    \fn DumpRepo_impl::startNumber()
+ */
+int DumpRepo_impl::startNumber()
+{
+    return useNumbers()?m_StartNumber->value():-1;
+}
+
+/*!
+    \fn DumpRepo_impl::endNumber()
+ */
+int DumpRepo_impl::endNumber()
+{
+    return useNumbers()?m_EndNumber->value():-1;
+}
+
+#include "dumprepo_impl.moc"

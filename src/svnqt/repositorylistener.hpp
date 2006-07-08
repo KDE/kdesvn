@@ -17,6 +17,7 @@ public:
 
     virtual void sendWarning(const QString&)=0;
     virtual void sendError(const QString&)=0;
+    virtual bool isCanceld() =0;
 
 };
 

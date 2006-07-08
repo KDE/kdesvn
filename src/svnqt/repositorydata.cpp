@@ -21,12 +21,41 @@
 #include "svncpp_defines.hpp"
 #include "exception.hpp"
 #include "repositorylistener.hpp"
+#include "svnfilestream.hpp"
 
 #include <svn_fs.h>
 #include <svn_path.h>
 #include <svn_config.h>
 
 namespace svn {
+
+class RepoOutStream:public svn::stream::SvnByteStream
+{
+public:
+    RepoOutStream(RepositoryData*);
+    virtual ~RepoOutStream(){}
+
+    virtual bool isOk(){return true;}
+    virtual long write(const char*data,const unsigned long max);
+
+protected:
+    RepositoryData*m_Back;
+};
+
+RepoOutStream::RepoOutStream(RepositoryData*aBack)
+    : SvnByteStream()
+{
+    m_Back = aBack;
+}
+
+long RepoOutStream::write(const char*data,const unsigned long max)
+{
+    if (m_Back) {
+        QString msg = QString::fromUtf8(data,max);
+        m_Back->reposFsWarning(msg);
+    }
+    return max;
+}
 
 RepositoryData::RepositoryData(RepositoryListener*aListener)
 {
@@ -55,6 +84,15 @@ void RepositoryData::reposFsWarning(const QString&msg)
     if (m_Listener) {
         m_Listener->sendWarning(msg);
     }
+}
+
+svn_error_t*RepositoryData::cancel_func(void*baton)
+{
+    RepositoryListener*m_L = (RepositoryListener*)baton;
+    if (m_L && m_L->isCanceld()) {
+        return svn_error_create (SVN_ERR_CANCELLED, 0, QString::fromUtf8("Cancelled by user.").TOUTF8());
+    }
+    return SVN_NO_ERROR;
 }
 
 }
@@ -132,6 +170,26 @@ svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&
             NULL, NULL,config, fs_config,m_Pool));
 
     svn_fs_set_warning_func(svn_repos_fs(m_Repository), svn::RepositoryData::warning_func, this);
+
+    return SVN_NO_ERROR;
+}
+
+
+/*!
+    \fn svn::RepositoryData::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
+ */
+svn_error_t* svn::RepositoryData::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
+{
+    if (!m_Repository) {
+        return svn_error_create(SVN_ERR_CANCELLED,0,"No repository selected.");
+    }
+    svn::stream::SvnFileStream out(output);
+    RepoOutStream backstream(this);
+    svn_revnum_t _s,_e;
+    _s = start.revnum();
+    _e = end.revnum();
+    SVN_ERR(svn_repos_dump_fs2(m_Repository,out,backstream,_s,_e,incremental,use_deltas,
+        svn::RepositoryData::cancel_func,m_Listener,m_Pool));
 
     return SVN_NO_ERROR;
 }

@@ -81,8 +81,11 @@ public:
      * Print this view to any medium -- paper or not
      */
     void print(QPainter *, int height, int width);
+
+    /* repositorylistener methods */
     virtual void sendWarning(const QString&);
     virtual void sendError(const QString&);
+    virtual bool isCanceld();
 
 signals:
     /**
@@ -101,6 +104,9 @@ signals:
     void sigUrlChanged(const QString&);
     void sigMakeBaseDirs();
 
+    /* repositorylistener methods */
+    void tickProgress();
+    void waitShow(bool);
 
 public slots:
     virtual void closeMe();
@@ -108,6 +114,10 @@ public slots:
     virtual void refreshCurrentTree();
     virtual void slotSettingsChanged();
     virtual void slotCreateRepo();
+    virtual void slotDumpRepo();
+
+    /* repositorylistener methods */
+    virtual void setCanceled(bool);
 
 protected slots:
     virtual void slotOnURL(const QString& url);
@@ -124,6 +134,8 @@ protected:
     KTextBrowser*m_LogWindow;
 protected:
     virtual void setupActions();
+
+    bool m_ReposCancel;
 };
 
 #endif // _KDESVNVIEW_H_

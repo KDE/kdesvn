@@ -14,7 +14,7 @@
  *  Constructs a RevTreeWidget as a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'.
  */
-RevTreeWidget::RevTreeWidget(CContextListener*lt,svn::Client*cl, QWidget* parent, const char* name, WFlags fl )
+RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     if ( !name )

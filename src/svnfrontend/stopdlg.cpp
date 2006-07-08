@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <ktextbrowser.h>
 
-StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
+StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
     ,m_Context(listener),m_MinDuration(2000),mCancelled(false),mShown(false),m_BarShown(false)
 {
@@ -56,6 +56,7 @@ StopDlg::StopDlg(CContextListener*listener,QWidget *parent, const char *name,con
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
     connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
     connect(m_Context,SIGNAL(waitShow(bool)),this,SLOT(slotWait(bool)));
+    connect(this,SIGNAL(sigCancel(bool)),m_Context,SLOT(setCanceled(bool)));
     mShowTimer->start(m_MinDuration, true);
 }
 
@@ -102,7 +103,7 @@ void StopDlg::slotAutoShow()
 void StopDlg::slotCancel()
 {
     mCancelled = true;
-    m_Context->setCanceled(true);
+    emit sigCancel(true);
 }
 
 bool StopDlg::cancelld()

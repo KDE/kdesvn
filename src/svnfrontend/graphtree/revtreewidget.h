@@ -35,7 +35,7 @@ class RevTreeWidget : public QWidget
     Q_OBJECT
 
 public:
-    RevTreeWidget(CContextListener*,svn::Client*,QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    RevTreeWidget(QObject*,svn::Client*,QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~RevTreeWidget();
 
     QSplitter* m_Splitter;

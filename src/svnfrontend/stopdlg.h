@@ -23,6 +23,7 @@
 #include <kdialogbase.h>
 
 #include <qdatetime.h>
+#include <qobject.h>
 
 class QTimer;
 
@@ -39,13 +40,13 @@ class StopDlg : public KDialogBase
 {
 Q_OBJECT
 public:
-    StopDlg(CContextListener*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
+    StopDlg(QObject*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
     ~StopDlg();
 
     bool cancelld();
 
 protected:
-    CContextListener*m_Context;
+    QObject*m_Context;
     int m_MinDuration;
     bool mCancelled;
     QTimer * mShowTimer;
@@ -66,6 +67,8 @@ public slots:
 protected slots:
     virtual void slotAutoShow();
     virtual void slotCancel();
+signals:
+    void sigCancel(bool how);
 };
 
 #endif

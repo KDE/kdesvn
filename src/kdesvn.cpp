@@ -110,6 +110,9 @@ kdesvn::kdesvn()
             tmpAction = new KAction(i18n("Create and open new repository"),"filenew",
                 KShortcut(),m_part->widget(),SLOT(slotCreateRepo()),actionCollection(),"subversion_create_repo");
             tmpAction->setToolTip(i18n("Create and opens a new local subversion repository"));
+            tmpAction = new KAction(i18n("Dump repository to file"),"filenew",
+                KShortcut(),m_part->widget(),SLOT(slotDumpRepo()),actionCollection(),"subversion_dump_repo");
+            tmpAction->setToolTip(i18n("Dump a subversion repository to a file"));
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
         }

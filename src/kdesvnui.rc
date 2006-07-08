@@ -13,6 +13,7 @@
   <Menu name="subversion_admin" noMerge="1">
       <text>Subversion Admin</text>
       <Action name="subversion_create_repo"/>
+      <Action name="subversion_dump_repo"/>
       <Merge/>
   </Menu>
   <Menu noMerge="1" name="subversion_main" >

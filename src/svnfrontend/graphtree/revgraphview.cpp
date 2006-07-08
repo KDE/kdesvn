@@ -75,7 +75,7 @@ void GraphViewTip::maybeTip( const QPoint & pos)
     }
 }
 
-RevGraphView::RevGraphView(CContextListener*aListener,svn::Client*_client,QWidget * parent, const char * name, WFlags f)
+RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name, WFlags f)
  : QCanvasView(parent,name,f)
 {
     m_Canvas = 0L;

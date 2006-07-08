@@ -36,6 +36,7 @@
 #include "pool.hpp"
 #include "status.hpp"
 #include "svncpp_defines.hpp"
+#include "svnstream.hpp"
 
 namespace svn
 {
@@ -45,28 +46,18 @@ namespace svn
                 const Revision & peg_revision) throw (ClientException)
   {
     Pool pool;
-
-    svn_stringbuf_t * stringbuf = svn_stringbuf_create ("", pool);
-    svn_stream_t * stream = svn_stream_from_stringbuf (stringbuf, pool);
-
     svn_error_t * error;
-    error = svn_client_cat2 (stream,
+    svn::stream::SvnByteStream buffer;
+    error = svn_client_cat2 (buffer,
                              path.path().TOUTF8(),
                              peg_revision.revision (),
                              revision.revision (),
                              *m_context,
                              pool);
-
     if (error != 0)
       throw ClientException (error);
-#if QT_VERSION < 0x040000
-    QByteArray res;
-    /// @todo check if realy dup or just assign!
-    res.duplicate(stringbuf->data,stringbuf->len);
-#else
-    QByteArray res( stringbuf->data, stringbuf->len );
-#endif
-    return res;
+
+    return buffer.content();
   }
 }
 

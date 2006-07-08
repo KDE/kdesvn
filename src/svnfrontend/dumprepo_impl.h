@@ -17,50 +17,24 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SVNREPOSITORYDATA_H
-#define SVNREPOSITORYDATA_H
+#ifndef DUMPREPO_IMPL_H
+#define DUMPREPO_IMPL_H
 
-#include "pool.hpp"
-#include "revision.hpp"
-#include "apr.hpp"
+#include "src/svnfrontend/dumprepo_dlg.h"
 
-#include <qstring.h>
-
-#include <svn_repos.h>
-#include <svn_error.h>
-
-namespace svn {
-
-class Repository;
-class RepositoryListener;
-/**
-	@author Rajko Albrecht <ral@alwins-world.de>
-*/
-class RepositoryData{
-    friend class Repository;
-
+class DumpRepo_impl: public DumpRepoDlg {
+Q_OBJECT
 public:
-    RepositoryData(RepositoryListener*);
-
-    virtual ~RepositoryData();
-    void Close();
-    svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool nosvn1diff=false);
-
-    void reposFsWarning(const QString&msg);
-    svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);
-
-protected:
-    Pool m_Pool;
-    svn_repos_t*m_Repository;
-    RepositoryListener*m_Listener;
-
-private:
-    static void warning_func(void *baton, svn_error_t *err);
-    static svn_error_t*cancel_func(void*baton);
+    DumpRepo_impl(QWidget *parent = 0, const char *name = 0);
+    QString reposPath();
+    QString targetFile();
+    bool incremental();
+    bool use_deltas();
+    bool useNumbers();
+    int startNumber();
+    int endNumber();
+protected slots:
+    virtual void slotDumpRange(bool);
 };
-
-}
 
 #endif

@@ -18,8 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "svnstream.hpp"
+#include "svncpp_defines.hpp"
 #include "pool.hpp"
 #include "apr.hpp"
+
+#include <qbuffer.h>
 
 namespace svn {
 
@@ -41,14 +44,25 @@ public:
 svn_error_t * SvnStream_private::stream_read(void*baton,char*data,apr_size_t*len)
 {
     SvnStream*b = (SvnStream*)baton;
-    *len = b->read(data,*len);
+    long res = b->isOk()?b->read(data,*len):-1;
+
+    if (res<0) {
+        *len = 0;
+        return svn_error_create(SVN_ERR_MALFORMED_FILE,0L,b->lastError().TOUTF8());
+    }
+    *len = res;
     return SVN_NO_ERROR;
 }
 
 svn_error_t * SvnStream_private::stream_write(void*baton,const char*data,apr_size_t*len)
 {
     SvnStream*b = (SvnStream*)baton;
-    *len = b->write(data,*len);
+    long res = b->isOk()?b->write(data,*len):-1;
+    if (res<0) {
+        *len = 0;
+        return svn_error_create(SVN_ERR_MALFORMED_FILE,0L,b->lastError().utf8());
+    }
+    *len = res;
     return SVN_NO_ERROR;
 }
 
@@ -74,13 +88,13 @@ SvnStream::operator svn_stream_t* ()const
 long SvnStream::write(const char*,const unsigned long)
 {
     m_Data->m_LastError = "Write not supported with that stream";
-    return 0;
+    return -1;
 }
 
 long SvnStream::read(char*,const unsigned long )
 {
     m_Data->m_LastError = "Read not supported with that stream";
-    return 0;
+    return -1;
 }
 
 const QString&SvnStream::lastError()const
@@ -88,6 +102,95 @@ const QString&SvnStream::lastError()const
     return m_Data->m_LastError;
 }
 
+void SvnStream::setError(const QString&aError)const
+{
+    m_Data->m_LastError = aError;
 }
 
+void SvnStream::setError(int ioError)const
+{
+    switch (ioError) {
+    case IO_Ok:
+        setError("Operation was successfull.");
+        break;
+    case IO_ReadError:
+        setError("Could not read from device");
+        break;
+    case IO_WriteError:
+        setError("Could not write to device");
+        break;
+    case IO_FatalError:
+        setError("A fatal unrecoverable error occurred.");
+        break;
+    case IO_OpenError:
+        setError("Could not open device or stream.");
+        break;
+    case IO_AbortError:
+        setError("The operation was unexpectedly aborted.");
+        break;
+    case IO_TimeOutError:
+        setError("The operation timed out.");
+        break;
+    case IO_UnspecifiedError:
+        setError("An unspecified error happened on close.");
+        break;
+    default:
+        setError("Unknown error happend.");
+        break;
+    }
 }
+
+class SvnByteStream_private {
+public:
+    SvnByteStream_private();
+    virtual ~SvnByteStream_private(){}
+
+    QByteArray m_Content;
+    QBuffer mBuf;
+};
+
+SvnByteStream_private::SvnByteStream_private()
+    :mBuf(m_Content)
+{
+    mBuf.open(IO_WriteOnly);
+}
+
+/* ByteStream implementation start */
+SvnByteStream::SvnByteStream()
+    : SvnStream()
+{
+    m_ByteData = new SvnByteStream_private;
+    if (!m_ByteData->mBuf.isOpen()) {
+        setError(m_ByteData->mBuf.status());
+    }
+}
+
+SvnByteStream::~SvnByteStream()
+{
+    delete m_ByteData;
+}
+
+long SvnByteStream::write(const char*aData,const unsigned long max)
+{
+    long i = m_ByteData->mBuf.writeBlock(aData,max);
+    if (i<0) {
+        setError(m_ByteData->mBuf.status());
+    }
+    return i;
+}
+
+QByteArray SvnByteStream::content()const
+{
+    return m_ByteData->mBuf.buffer();
+}
+
+bool SvnByteStream::isOk()const
+{
+    return m_ByteData->mBuf.isOpen();
+}
+
+/* ByteStream implementation end */
+
+} // namespace stream
+
+} // namespace svn

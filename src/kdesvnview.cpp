@@ -22,6 +22,8 @@
 #include "kdesvnview.h"
 #include "svnfrontend/kdesvnfilelist.h"
 #include "svnfrontend/createrepo_impl.h"
+#include "svnfrontend/dumprepo_impl.h"
+#include "svnfrontend/stopdlg.h"
 #include "src/settings/kdesvnsettings.h"
 #include "svnqt/url.hpp"
 #include "svnqt/repository.hpp"
@@ -196,7 +198,6 @@ void kdesvnView::slotSettingsChanged()
  */
 void kdesvnView::slotCreateRepo()
 {
-    /// @todo implement me
     KDialogBase * dlg = new KDialogBase(
         KApplication::activeModalWidget(),
         "create_repository",
@@ -241,6 +242,58 @@ void kdesvnView::slotCreateRepo()
     }
 }
 
+void kdesvnView::slotDumpRepo()
+{
+    KDialogBase * dlg = new KDialogBase(
+        KApplication::activeModalWidget(),
+        "dump_repository",
+        true,
+        i18n("Dump a repository"),
+        KDialogBase::Ok|KDialogBase::Cancel);
+    if (!dlg) return;
+    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    DumpRepo_impl*ptr = new DumpRepo_impl(Dialog1Layout);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"dump_repo_size"));
+    int i = dlg->exec();
+    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"dump_repo_size",false);
+
+    if (i!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    svn::Repository*_rep = new svn::Repository(this);
+    QString re,out;
+    bool incr,diffs;
+    re = ptr->reposPath();
+    out = ptr->targetFile();
+    incr = ptr->incremental();
+    diffs = ptr->use_deltas();
+    int s = ptr->startNumber();
+    int e = ptr->endNumber();
+
+    delete dlg;
+
+    m_ReposCancel = false;
+
+    try {
+        _rep->Open(re);
+    } catch(svn::ClientException e) {
+        slotAppendLog(e.msg());
+        kdDebug()<<"Open "<<re << " failed "<<e.msg() << endl;
+        delete _rep;
+        return ;
+    }
+
+    try {
+        StopDlg sdlg(this,this,0,"Dump",i18n("Dumping a repository"));
+        _rep->dump(out,s,e,incr,diffs);
+    } catch(svn::ClientException e) {
+        slotAppendLog(e.msg());
+        kdDebug()<<"Dump "<<out << " failed "<<e.msg() << endl;
+    }
+    delete _rep;
+}
+
 /*!
     \fn kdesvnView::setupActions()
  */
@@ -256,6 +309,20 @@ void kdesvnView::sendWarning(const QString&aMsg)
 void kdesvnView::sendError(const QString&aMsg)
 {
     slotAppendLog(aMsg);
+}
+
+bool kdesvnView::isCanceld()
+{
+    if (!m_ReposCancel) {
+        emit tickProgress();
+        return false;
+    }
+    return true;
+}
+
+void kdesvnView::setCanceled(bool how)
+{
+    m_ReposCancel = how;
 }
 
 #include "kdesvnview.moc"

@@ -17,50 +17,67 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SVNREPOSITORYDATA_H
-#define SVNREPOSITORYDATA_H
+#include "svnfilestream.hpp"
 
-#include "pool.hpp"
-#include "revision.hpp"
-#include "apr.hpp"
-
-#include <qstring.h>
-
-#include <svn_repos.h>
-#include <svn_error.h>
+#include <qfile.h>
 
 namespace svn {
 
-class Repository;
-class RepositoryListener;
-/**
-	@author Rajko Albrecht <ral@alwins-world.de>
-*/
-class RepositoryData{
-    friend class Repository;
+namespace stream {
 
+class SvnFileStream_private
+{
 public:
-    RepositoryData(RepositoryListener*);
+    SvnFileStream_private(const QString&fn);
+    virtual ~SvnFileStream_private();
 
-    virtual ~RepositoryData();
-    void Close();
-    svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool nosvn1diff=false);
-
-    void reposFsWarning(const QString&msg);
-    svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);
-
-protected:
-    Pool m_Pool;
-    svn_repos_t*m_Repository;
-    RepositoryListener*m_Listener;
-
-private:
-    static void warning_func(void *baton, svn_error_t *err);
-    static svn_error_t*cancel_func(void*baton);
+    QString m_FileName;
+    QFile m_File;
 };
+
+SvnFileStream_private::SvnFileStream_private(const QString&fn)
+    : m_FileName(fn),m_File(fn)
+{
+    m_File.open(IO_WriteOnly);
+}
+
+SvnFileStream_private::~SvnFileStream_private()
+{
+}
+
+SvnFileStream::SvnFileStream(const QString&fn)
+    :SvnStream()
+{
+    m_FileData = new SvnFileStream_private(fn);
+    if (!m_FileData->m_File.isOpen()) {
+        setError(m_FileData->m_File.errorString());
+    }
+}
+
+
+SvnFileStream::~SvnFileStream()
+{
+    delete m_FileData;
+}
+
+
+bool SvnFileStream::isOk() const
+{
+    return m_FileData->m_File.isOpen();
+}
+
+long SvnFileStream::write(const char* data, const unsigned long max)
+{
+    if (!m_FileData->m_File.isOpen()) {
+        return -1;
+    }
+    long res = m_FileData->m_File.writeBlock(data,max);
+    if (res<0) {
+        setError(m_FileData->m_File.errorString());
+    }
+    return res;
+}
 
 }
 
-#endif
+}

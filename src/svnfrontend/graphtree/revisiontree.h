@@ -45,7 +45,7 @@ namespace svn
 class RevisionTree{
 public:
     RevisionTree(svn::Client*,
-        CContextListener*aListener,
+        QObject*aListener,
         const QString& reposRoot,
         const svn::Revision&startr,const svn::Revision&endr,
         const QString&,const svn::Revision& baserevision,QWidget*treeParent,

@@ -28,50 +28,83 @@ namespace stream {
 class SvnFileStream_private
 {
 public:
-    SvnFileStream_private(const QString&fn);
+    SvnFileStream_private(const QString&fn,int mode);
     virtual ~SvnFileStream_private();
 
     QString m_FileName;
     QFile m_File;
 };
 
-SvnFileStream_private::SvnFileStream_private(const QString&fn)
+SvnFileStream_private::SvnFileStream_private(const QString&fn,int mode)
     : m_FileName(fn),m_File(fn)
 {
-    m_File.open(IO_WriteOnly);
+    m_File.open(mode);
 }
 
 SvnFileStream_private::~SvnFileStream_private()
 {
 }
 
-SvnFileStream::SvnFileStream(const QString&fn)
-    :SvnStream()
+SvnFileOStream::SvnFileOStream(const QString&fn)
+    :SvnStream(false,true)
 {
-    m_FileData = new SvnFileStream_private(fn);
+    m_FileData = new SvnFileStream_private(fn,IO_WriteOnly);
     if (!m_FileData->m_File.isOpen()) {
         setError(m_FileData->m_File.errorString());
     }
 }
 
 
-SvnFileStream::~SvnFileStream()
+SvnFileOStream::~SvnFileOStream()
 {
     delete m_FileData;
 }
 
 
-bool SvnFileStream::isOk() const
+bool SvnFileOStream::isOk() const
 {
     return m_FileData->m_File.isOpen();
 }
 
-long SvnFileStream::write(const char* data, const unsigned long max)
+long SvnFileOStream::write(const char* data, const unsigned long max)
 {
     if (!m_FileData->m_File.isOpen()) {
         return -1;
     }
     long res = m_FileData->m_File.writeBlock(data,max);
+    if (res<0) {
+        setError(m_FileData->m_File.errorString());
+    }
+    return res;
+}
+
+SvnFileIStream::SvnFileIStream(const QString&fn)
+    :SvnStream(true,false)
+{
+    m_FileData = new SvnFileStream_private(fn,IO_ReadOnly);
+    if (!m_FileData->m_File.isOpen()) {
+        setError(m_FileData->m_File.errorString());
+    }
+}
+
+
+SvnFileIStream::~SvnFileIStream()
+{
+    delete m_FileData;
+}
+
+
+bool SvnFileIStream::isOk() const
+{
+    return m_FileData->m_File.isOpen();
+}
+
+long SvnFileIStream::read(char* data, const unsigned long max)
+{
+    if (!m_FileData->m_File.isOpen()) {
+        return -1;
+    }
+    long res = m_FileData->m_File.readBlock(data,max);
     if (res<0) {
         setError(m_FileData->m_File.errorString());
     }

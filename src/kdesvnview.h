@@ -48,7 +48,7 @@ class KTextBrowser;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
-class kdesvnView : public QWidget,public svn::RepositoryListener
+class kdesvnView : public QWidget,public svn::repository::RepositoryListener
 {
     Q_OBJECT
 public:
@@ -115,6 +115,8 @@ public slots:
     virtual void slotSettingsChanged();
     virtual void slotCreateRepo();
     virtual void slotDumpRepo();
+    virtual void slotHotcopy();
+    virtual void slotLoaddump();
 
     /* repositorylistener methods */
     virtual void setCanceled(bool);

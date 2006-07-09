@@ -66,14 +66,21 @@ svn_error_t * SvnStream_private::stream_write(void*baton,const char*data,apr_siz
     return SVN_NO_ERROR;
 }
 
-SvnStream::SvnStream()
+SvnStream::SvnStream(bool read, bool write)
 {
     m_Data = new SvnStream_private;
     m_Data->m_Stream = svn_stream_create(this,m_Data->m_Pool);
-    svn_stream_set_read(m_Data->m_Stream,SvnStream_private::stream_read);
-    svn_stream_set_write(m_Data->m_Stream,SvnStream_private::stream_write);
+    if (read) {
+        svn_stream_set_read(m_Data->m_Stream,SvnStream_private::stream_read);
+    }
+    if (write) {
+        svn_stream_set_write(m_Data->m_Stream,SvnStream_private::stream_write);
+    }
 }
 
+SvnStream::SvnStream()
+{
+}
 
 SvnStream::~SvnStream()
 {
@@ -157,7 +164,7 @@ SvnByteStream_private::SvnByteStream_private()
 
 /* ByteStream implementation start */
 SvnByteStream::SvnByteStream()
-    : SvnStream()
+    : SvnStream(false,true)
 {
     m_ByteData = new SvnByteStream_private;
     if (!m_ByteData->mBuf.isOpen()) {

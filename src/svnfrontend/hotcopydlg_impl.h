@@ -17,55 +17,26 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SVNREPOSITORYDATA_H
-#define SVNREPOSITORYDATA_H
+#ifndef HOTCOPYDLG_IMPL_H
+#define HOTCOPYDLG_IMPL_H
 
-#include "pool.hpp"
-#include "revision.hpp"
-#include "apr.hpp"
+#include "src/svnfrontend/hotcopydlg.h"
 
-#include <qstring.h>
-
-#include <svn_repos.h>
-#include <svn_error.h>
-
-namespace svn {
-
-namespace repository {
-
-class Repository;
-class RepositoryListener;
-/**
-	@author Rajko Albrecht <ral@alwins-world.de>
-*/
-class RepositoryData{
-    friend class Repository;
-
+class HotcopyDlg_impl: public HotcopyDlg {
+Q_OBJECT
 public:
-    RepositoryData(RepositoryListener*);
+    HotcopyDlg_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~HotcopyDlg_impl();
 
-    virtual ~RepositoryData();
-    void Close();
-    svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool nosvn1diff=false);
-
-    void reposFsWarning(const QString&msg);
-    svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);
-    static svn_error_t* hotcopy(const QString&src,const QString&dest,bool cleanlogs);
-
-protected:
-    Pool m_Pool;
-    svn_repos_t*m_Repository;
-    RepositoryListener*m_Listener;
+    QString srcPath()const;
+    QString destPath()const;
+    bool cleanLogs()const;
 
 private:
-    static void warning_func(void *baton, svn_error_t *err);
-    static svn_error_t*cancel_func(void*baton);
+    QString checkPath(const QString&)const;
+
+public slots:
+
 };
-
-}
-
-}
 
 #endif

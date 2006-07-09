@@ -29,7 +29,9 @@
 
 namespace svn {
 
-class RepoOutStream:public svn::stream::SvnStream
+namespace repository {
+
+class RepoOutStream:public stream::SvnStream
 {
 public:
     RepoOutStream(RepositoryData*);
@@ -43,7 +45,7 @@ protected:
 };
 
 RepoOutStream::RepoOutStream(RepositoryData*aBack)
-    : SvnStream()
+    : SvnStream(false,true)
 {
     m_Back = aBack;
 }
@@ -95,12 +97,10 @@ svn_error_t*RepositoryData::cancel_func(void*baton)
     return SVN_NO_ERROR;
 }
 
-}
-
 /*!
     \fn svn::RepositoryData::close()
  */
-void svn::RepositoryData::Close()
+void RepositoryData::Close()
 {
     m_Pool.renew();
     m_Repository = 0;
@@ -110,7 +110,7 @@ void svn::RepositoryData::Close()
 /*!
     \fn svn::RepositoryData::Open(const QString&)
  */
-svn_error_t * svn::RepositoryData::Open(const QString&path)
+svn_error_t * RepositoryData::Open(const QString&path)
 {
     Close();
     svn_error_t * error = svn_repos_open(&m_Repository,path.TOUTF8(),m_Pool);
@@ -118,7 +118,7 @@ svn_error_t * svn::RepositoryData::Open(const QString&path)
         m_Repository=0;
         return error;
     }
-    svn_fs_set_warning_func(svn_repos_fs(m_Repository), svn::RepositoryData::warning_func, this);
+    svn_fs_set_warning_func(svn_repos_fs(m_Repository), RepositoryData::warning_func, this);
     return SVN_NO_ERROR;
 }
 
@@ -126,7 +126,7 @@ svn_error_t * svn::RepositoryData::Open(const QString&path)
 /*!
     \fn svn::RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false, bool _bdbautologremove = true, bool nosvn1diff=false)
  */
-svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff)
+svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff)
 {
     Close();
     const char* _type;
@@ -169,7 +169,7 @@ svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&
     SVN_ERR(svn_repos_create(&m_Repository, repository_path,
             NULL, NULL,config, fs_config,m_Pool));
 
-    svn_fs_set_warning_func(svn_repos_fs(m_Repository), svn::RepositoryData::warning_func, this);
+    svn_fs_set_warning_func(svn_repos_fs(m_Repository), RepositoryData::warning_func, this);
 
     return SVN_NO_ERROR;
 }
@@ -178,18 +178,33 @@ svn_error_t * svn::RepositoryData::CreateOpen(const QString&path, const QString&
 /*!
     \fn svn::RepositoryData::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
  */
-svn_error_t* svn::RepositoryData::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
+svn_error_t* RepositoryData::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
 {
     if (!m_Repository) {
         return svn_error_create(SVN_ERR_CANCELLED,0,"No repository selected.");
     }
-    svn::stream::SvnFileStream out(output);
+    svn::stream::SvnFileOStream out(output);
     RepoOutStream backstream(this);
     svn_revnum_t _s,_e;
     _s = start.revnum();
     _e = end.revnum();
     SVN_ERR(svn_repos_dump_fs2(m_Repository,out,backstream,_s,_e,incremental,use_deltas,
-        svn::RepositoryData::cancel_func,m_Listener,m_Pool));
+        RepositoryData::cancel_func,m_Listener,m_Pool));
 
     return SVN_NO_ERROR;
+}
+
+svn_error_t* RepositoryData::hotcopy(const QString&src,const QString&dest,bool cleanlogs)
+{
+    Pool pool;
+    const char*src_path = apr_pstrdup (pool,src.TOUTF8());
+    const char*dest_path = apr_pstrdup (pool,dest.TOUTF8());
+    src_path = svn_path_internal_style(src_path, pool);
+    dest_path = svn_path_internal_style(dest_path, pool);
+    SVN_ERR(svn_repos_hotcopy(src_path,dest_path,cleanlogs?1:0,pool));
+    return SVN_NO_ERROR;
+}
+
+}
+
 }

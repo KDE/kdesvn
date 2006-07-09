@@ -22,7 +22,9 @@
 
 namespace svn {
 
-Repository::Repository(RepositoryListener*aListener)
+namespace repository {
+
+Repository::Repository(svn::repository::RepositoryListener*aListener)
 {
     m_Data=new RepositoryData(aListener);
 }
@@ -34,13 +36,10 @@ Repository::~Repository()
 }
 
 
-}
-
-
 /*!
     \fn svn::Repository::Open(const QString&)
  */
-void svn::Repository::Open(const QString&name) throw (ClientException)
+void Repository::Open(const QString&name) throw (ClientException)
 {
     svn_error_t * error = m_Data->Open(name);
     if (error!=0) {
@@ -48,7 +47,7 @@ void svn::Repository::Open(const QString&name) throw (ClientException)
     }
 }
 
-void svn::Repository::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff) throw (ClientException)
+void Repository::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff) throw (ClientException)
 {
     svn_error_t * error = m_Data->CreateOpen(path,fstype,_bdbnosync,_bdbautologremove,_nosvn1diff);
     if (error!=0) {
@@ -60,7 +59,7 @@ void svn::Repository::CreateOpen(const QString&path, const QString&fstype, bool 
 /*!
     \fn svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
  */
-void svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+void Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
 {
     svn_error_t * error = m_Data->dump(output,start,end,incremental,use_deltas);
     if (error!=0) {
@@ -72,7 +71,14 @@ void svn::Repository::dump(const QString&output,const svn::Revision&start,const 
 /*!
     \fn svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)
  */
-void svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException)
+void Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException)
 {
-    /// @todo implement me
+    svn_error_t * error = RepositoryData::hotcopy(src,dest,cleanlogs);
+    if (error!=0) {
+        throw ClientException (error);
+    }
 }
+
+} // namespace repository
+
+} // namespace svn

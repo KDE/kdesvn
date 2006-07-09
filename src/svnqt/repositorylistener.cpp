@@ -21,6 +21,8 @@
 
 namespace svn {
 
+namespace repository {
+
 RepositoryListener::RepositoryListener()
 {
 }
@@ -28,6 +30,8 @@ RepositoryListener::RepositoryListener()
 
 RepositoryListener::~RepositoryListener()
 {
+}
+
 }
 
 }

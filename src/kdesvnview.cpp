@@ -23,6 +23,7 @@
 #include "svnfrontend/kdesvnfilelist.h"
 #include "svnfrontend/createrepo_impl.h"
 #include "svnfrontend/dumprepo_impl.h"
+#include "svnfrontend/hotcopydlg_impl.h"
 #include "svnfrontend/stopdlg.h"
 #include "src/settings/kdesvnsettings.h"
 #include "svnqt/url.hpp"
@@ -53,7 +54,7 @@
 #include <kdialogbase.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name)
-    : QWidget(parent,name),m_Collection(aCollection),
+    : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
       m_currentURL("")
 {
     setupActions();
@@ -215,7 +216,7 @@ void kdesvnView::slotCreateRepo()
         delete dlg;
         return;
     }
-    svn::Repository*_rep = new svn::Repository(this);
+    svn::repository::Repository*_rep = new svn::repository::Repository(this);
     bool ok = true;
     bool createdirs;
     QString path = ptr->targetDir();
@@ -242,6 +243,45 @@ void kdesvnView::slotCreateRepo()
     }
 }
 
+void kdesvnView::slotHotcopy()
+{
+    KDialogBase * dlg = new KDialogBase(
+        KApplication::activeModalWidget(),
+        "hotcopy_repository",
+        true,
+        i18n("Hotcopy a repository"),
+        KDialogBase::Ok|KDialogBase::Cancel);
+    if (!dlg) return;
+    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    HotcopyDlg_impl * ptr = new HotcopyDlg_impl(Dialog1Layout);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"hotcopy_repo_size"));
+    int i = dlg->exec();
+    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"hotcopy_repo_size",false);
+
+    if (i!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    bool cleanlogs = ptr->cleanLogs();
+    QString src = ptr->srcPath();
+    QString dest = ptr->destPath();
+    delete dlg;
+    if (src.isEmpty()||dest.isEmpty()) {
+        return;
+    }
+    try {
+        svn::repository::Repository::hotcopy( src,dest,cleanlogs);
+        slotAppendLog(i18n("Hotcopy finished."));
+    } catch(svn::ClientException e) {
+        slotAppendLog(e.msg());
+        kdDebug()<<"Hotcopy of "<< src << " failed "<<e.msg() << endl;
+    }
+}
+
+void kdesvnView::slotLoaddump()
+{
+}
+
 void kdesvnView::slotDumpRepo()
 {
     KDialogBase * dlg = new KDialogBase(
@@ -261,7 +301,7 @@ void kdesvnView::slotDumpRepo()
         delete dlg;
         return;
     }
-    svn::Repository*_rep = new svn::Repository(this);
+    svn::repository::Repository*_rep = new svn::repository::Repository(this);
     QString re,out;
     bool incr,diffs;
     re = ptr->reposPath();
@@ -287,6 +327,7 @@ void kdesvnView::slotDumpRepo()
     try {
         StopDlg sdlg(this,this,0,"Dump",i18n("Dumping a repository"));
         _rep->dump(out,s,e,incr,diffs);
+        slotAppendLog(i18n("Dump finished."));
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
         kdDebug()<<"Dump "<<out << " failed "<<e.msg() << endl;

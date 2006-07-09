@@ -113,6 +113,13 @@ kdesvn::kdesvn()
             tmpAction = new KAction(i18n("Dump repository to file"),"filenew",
                 KShortcut(),m_part->widget(),SLOT(slotDumpRepo()),actionCollection(),"subversion_dump_repo");
             tmpAction->setToolTip(i18n("Dump a subversion repository to a file"));
+            tmpAction = new KAction(i18n("Hotcopy a repository"),"filenew",
+                KShortcut(),m_part->widget(),SLOT(slotHotcopy()),actionCollection(),"subversion_hotcopy_repo");
+            tmpAction->setToolTip(i18n("Hotcopy a subversion repository to a new folder"));
+            tmpAction = new KAction(i18n("Load dump into repository"),"filenew",
+                KShortcut(),m_part->widget(),SLOT(slotLoaddump()),actionCollection(),"subversion_load_repo");
+            tmpAction->setToolTip(i18n("Load a dump file into a repository."));
+
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
         }

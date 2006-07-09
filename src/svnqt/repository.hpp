@@ -27,26 +27,70 @@
 
 namespace svn {
 
+namespace repository {
+
 class RepositoryData;
 class RepositoryListener;
 
-/**
-	@author Rajko Albrecht <ral@alwins-world.de>
+//! wrapper class for subversions administrative repository functions
+/*!
+    \author Rajko Albrecht <ral@alwins-world.de>
 */
 class Repository{
 public:
-    Repository(svn::RepositoryListener*);
-
+    //! constructor
+    /*!
+     * \param aListener callback object, the object will NOT take the ownership.
+     */
+    Repository(svn::repository::RepositoryListener*aListener);
+    //! destructor
     virtual ~Repository();
-    void Open(const QString&) throw (ClientException);
+
+    //! open a local repository path for maintainance
+    /*!
+        Assigns a repository with that object. If a path was opened before it will closed.
+        \param path Path to a local repository, must not be an url
+        \exception ClientException will be thrown in case of an error
+     */
+    void Open(const QString&path) throw (ClientException);
+    //! Creates and open a new repository
+    /*!
+     * Creates a new repository in path with type fstype. If create succeeded open and assigns with the object.
+     * If a repository was opened before it will closed.
+     * \param path the path where to create the new repository. Must not be an url.
+     * \param fstype type of repository ("fsfs" or "bdb"). If wrong is set fsfs is the default.
+     * \param _bdbnosync disable fsync at transaction commit [Berkeley DB]
+     * \param _bdbautologremove enable automatic log file removal [Berkeley DB]
+     * \param nosvn1diff Don't allow svndiff1 to be used in the on-disk storage (for subverion 1.4 or newer only used)
+     */
     void CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
         bool _bdbautologremove = true, bool nosvn1diff=false) throw (ClientException);
+    //! dump content of repository to a file
+    /*!
+        The repository must opend before. Progress message go trough the assigned svn::repository::RepositoryListener object.
+        The revison parameter must be numbers, no constant values like svn::Revision::HEAD.
+        \param output where to output the content
+        \param start Begin on revision. If revision == -1 than start with first entry.
+        \param end End with revision.  If revision == -1 than end with current head.
+        \param incremental dump incrementally
+        \param use_deltas use deltas in dump output
+        \exception ClientException will be thrown in case of an error
+     */
     void dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException);
-    void hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException);
+    //! copy a repository to a new location
+    /*!
+        \param src the repository path to copy
+        \param dest where to copy
+        \param cleanlogs remove redundand log files from source
+        \exception ClientException will be thrown in case of an error
+     */
+    static void hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException);
 
 private:
     RepositoryData*m_Data;
 };
+
+}
 
 }
 

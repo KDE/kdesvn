@@ -23,7 +23,7 @@ public:
      * \param readit set readable
      * \param writeit set writable
      */
-    SvnStream(bool read, bool write);
+    SvnStream(bool readit, bool writeit);
     //! frees all structures and releases memory pool.
     virtual ~SvnStream();
 

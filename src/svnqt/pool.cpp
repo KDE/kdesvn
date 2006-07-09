@@ -6,15 +6,15 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library (in the file LGPL.txt); if not, 
- * write to the Free Software Foundation, Inc., 51 Franklin St, 
+ * License along with this library (in the file LGPL.txt); if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA  02110-1301  USA
  *
  * This software consists of voluntary contributions made by many
@@ -27,20 +27,17 @@
 #include "pool.hpp"
 
 
-/**
- * SvnCpp namespace
- */
 namespace svn
 {
-  static bool m_initialized = false;
+   bool Pool::s_initialized = false;
 
-  inline static apr_pool_t * 
-  pool_create (apr_pool_t * parent)
+  apr_pool_t *
+  Pool::pool_create (apr_pool_t * parent)
   {
     // CAUTION: this is not thread-safe!!!
-    if (!m_initialized)
+    if (!s_initialized)
     {
-      m_initialized = true;
+      s_initialized = true;
       apr_pool_initialize ();
     }
 
@@ -80,7 +77,7 @@ namespace svn
 //   apr_pool_t *
 //   Pool::operator=(const Pool & pool)
 //   {
-//     return 
+//     return
 //     if (this == &path)
 //       return *this;
 //     m_path = path.c_str();

@@ -245,7 +245,7 @@ namespace svn
      *                 Revision::HEAD will checkout the
      *                 latest revision.
      * @param recurse recursively update.
-     * @param ignore_external ignore externals (only when Subversion 1.2 or above)
+     * @param ignore_externals ignore externals (only when Subversion 1.2 or above)
      * @exception ClientException
      */
     virtual Revisions
@@ -502,8 +502,8 @@ namespace svn
      * @param recurse whether the operation should be done recursively.
      * @param ignoreAncestry whether the files will be checked for
      * relatedness.
-     * @param noDiffDeleted if true, no diff output will be generated
-     * on deleted files.
+     * @param noDiffDeleted if true, no diff output will be generated on deleted files.
+     * @param ignore_contenttype if true generate diff even the items are marked as binaries
      * @return delta between the files
      * @exception ClientException
      */
@@ -523,14 +523,15 @@ namespace svn
      * @param tmpPath prefix for a temporary directory needed by diff.
      * Filenames will have ".tmp" and similar added to this prefix in
      * order to ensure uniqueness.
-     * @param path path of the file.
-     * @param revision1 one of the revisions to check.
-     * @param revision2 the other revision.
+     * @param path1 first file or folder to diff.
+     * @param path2 second file or folder to diff.
+     * @param revision1 one of the revisions to check (path1).
+     * @param revision2 the other revision (path2).
      * @param recurse whether the operation should be done recursively.
      * @param ignoreAncestry whether the files will be checked for
      * relatedness.
-     * @param noDiffDeleted if true, no diff output will be generated
-     * on deleted files.
+     * @param noDiffDeleted if true, no diff output will be generated on deleted files.
+     * @param ignore_contenttype if true generate diff even the items are marked as binaries
      * @return delta between the files
      * @exception ClientException
      */
@@ -602,8 +603,8 @@ namespace svn
      * @param revision
      * @param propName
      * @param propValue
-     * @param skip_check if true skip validity checks
      * @param recurse
+     * @param skip_checks if true skip validity checks
      * @return PropertiesList
      */
     virtual void

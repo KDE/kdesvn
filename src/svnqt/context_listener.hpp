@@ -94,7 +94,7 @@ namespace svn
      * this method will be called to notify about
      * the progress of an ongoing action
      *
-     * @param svn_wc_notify_t
+     * @param action the action got notified about
      * @since subversion 1.2
      */
     virtual void

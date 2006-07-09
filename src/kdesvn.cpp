@@ -119,11 +119,10 @@ kdesvn::kdesvn()
             tmpAction = new KAction(i18n("Load dump into repository"),"filenew",
                 KShortcut(),m_part->widget(),SLOT(slotLoaddump()),actionCollection(),"subversion_load_repo");
             tmpAction->setToolTip(i18n("Load a dump file into a repository."));
-
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
+            connectActionCollection(m_part->actionCollection());
         }
-        connectActionCollection(m_part->actionCollection());
     }
     else
     {
@@ -137,6 +136,11 @@ kdesvn::kdesvn()
     }
 
     setAutoSaveSettings();
+    actionCollection()->setHighlightingEnabled(true);
+    connect(actionCollection(), SIGNAL( actionStatusText( const QString & ) ),
+        statusBar(), SLOT( message( const QString & ) ) );
+    connect(actionCollection(), SIGNAL( clearStatusText() ),
+        statusBar(), SLOT( clear() ) );
 }
 
 void kdesvn::connectActionCollection( KActionCollection *coll )

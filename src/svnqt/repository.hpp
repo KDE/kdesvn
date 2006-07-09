@@ -38,6 +38,11 @@ class RepositoryListener;
 */
 class Repository{
 public:
+    enum LOAD_UUID {
+        UUID_DEFAULT_ACTION = 0,
+        UUID_IGNORE_ACTION = 1,
+        UUID_FORCE_ACTION = 2
+    };
     //! constructor
     /*!
      * \param aListener callback object, the object will NOT take the ownership.
@@ -77,6 +82,17 @@ public:
         \exception ClientException will be thrown in case of an error
      */
     void dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException);
+    //! load a dump into repository
+    /*!
+        The repository must opened before. Progress message go trough the assigned svn::repository::RepositoryListener object.
+        \param dump Dumpfile to load
+        \param uuida what to do with UUIDs
+        \param parentFolder put content of dumpstream within folder in repository, if empty put into root-folder.
+        \param usePre use pre-commit-hook
+        \param usePost use post-commit-hook
+        \exception ClientException will be thrown in case of an error
+     */
+    void loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost)throw (ClientException);
     //! copy a repository to a new location
     /*!
         \param src the repository path to copy

@@ -24,6 +24,7 @@
 #include "svnfrontend/createrepo_impl.h"
 #include "svnfrontend/dumprepo_impl.h"
 #include "svnfrontend/hotcopydlg_impl.h"
+#include "svnfrontend/loaddmpdlg_impl.h"
 #include "svnfrontend/stopdlg.h"
 #include "src/settings/kdesvnsettings.h"
 #include "svnqt/url.hpp"
@@ -280,6 +281,53 @@ void kdesvnView::slotHotcopy()
 
 void kdesvnView::slotLoaddump()
 {
+    KDialogBase dlg(
+        KApplication::activeModalWidget(),
+        "hotcopy_repository",
+        true,
+        i18n("Hotcopy a repository"),
+        KDialogBase::Ok|KDialogBase::Cancel);
+    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    LoadDmpDlg_impl * ptr = new LoadDmpDlg_impl(Dialog1Layout);
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"loaddump_repo_size"));
+    int i = dlg.exec();
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"loaddump_repo_size",false);
+    if (i!=QDialog::Accepted) {
+        return;
+    }
+    bool ok = false;
+    svn::repository::Repository _rep(this);
+    m_ReposCancel = false;
+
+    try {
+        _rep.Open(ptr->repository());
+    } catch(svn::ClientException e) {
+        slotAppendLog(e.msg());
+        kdDebug()<<"Open "<<ptr->repository() << " failed "<<e.msg() << endl;
+        return ;
+    }
+
+    svn::repository::Repository::LOAD_UUID _act;
+    switch (ptr->uuidAction()) {
+    case 1:
+        _act = svn::repository::Repository::UUID_IGNORE_ACTION;
+        break;
+    case 2:
+        _act = svn::repository::Repository::UUID_FORCE_ACTION;
+        break;
+    case 0:
+    default:
+        _act = svn::repository::Repository::UUID_DEFAULT_ACTION;
+        break;
+    }
+    try {
+        StopDlg sdlg(this,this,0,"Load Dump",i18n("Loading a dump into a repository."));
+        _rep.loaddump(ptr->dumpFile(),_act,ptr->parentPath(),ptr->usePre(),ptr->usePost());
+        slotAppendLog(i18n("Loading dump finished."));
+    } catch(svn::ClientException e) {
+        slotAppendLog(e.msg());
+        kdDebug()<<"Load dump into "<<ptr->repository() << " failed "<<e.msg() << endl;
+    }
 }
 
 void kdesvnView::slotDumpRepo()

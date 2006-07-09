@@ -183,14 +183,36 @@ svn_error_t* RepositoryData::dump(const QString&output,const svn::Revision&start
     if (!m_Repository) {
         return svn_error_create(SVN_ERR_CANCELLED,0,"No repository selected.");
     }
+    Pool pool;
     svn::stream::SvnFileOStream out(output);
     RepoOutStream backstream(this);
     svn_revnum_t _s,_e;
     _s = start.revnum();
     _e = end.revnum();
     SVN_ERR(svn_repos_dump_fs2(m_Repository,out,backstream,_s,_e,incremental,use_deltas,
-        RepositoryData::cancel_func,m_Listener,m_Pool));
+        RepositoryData::cancel_func,m_Listener,pool));
 
+    return SVN_NO_ERROR;
+}
+
+svn_error_t* RepositoryData::loaddump(const QString&dump,svn_repos_load_uuid uuida, const QString&parentFolder, bool usePre, bool usePost)
+{
+    if (!m_Repository) {
+        return svn_error_create(SVN_ERR_CANCELLED,0,"No repository selected.");
+    }
+    svn::stream::SvnFileIStream infile(dump);
+    RepoOutStream backstream(this);
+    Pool pool;
+    const char*src_path = apr_pstrdup (pool,dump.TOUTF8());
+    const char*dest_path;
+    if (parentFolder.isEmpty()) {
+        dest_path=0;
+    } else {
+        dest_path=apr_pstrdup (pool,parentFolder.TOUTF8());
+    }
+
+    src_path = svn_path_internal_style(src_path, pool);
+    SVN_ERR(svn_repos_load_fs2(m_Repository,infile,backstream,uuida,dest_path,usePre?1:0,usePost?1:0,RepositoryData::cancel_func,m_Listener,pool));
     return SVN_NO_ERROR;
 }
 

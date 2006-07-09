@@ -67,6 +67,26 @@ void Repository::dump(const QString&output,const svn::Revision&start,const svn::
     }
 }
 
+void Repository::loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost)throw (ClientException)
+{
+    svn_repos_load_uuid uuid_action;
+    switch (uuida) {
+    case UUID_IGNORE_ACTION:
+        uuid_action=svn_repos_load_uuid_ignore;
+        break;
+    case UUID_FORCE_ACTION:
+        uuid_action=svn_repos_load_uuid_force ;
+        break;
+    case UUID_DEFAULT_ACTION:
+    default:
+        uuid_action=svn_repos_load_uuid_default;
+        break;
+    }
+    svn_error_t * error = m_Data->loaddump(dump,uuid_action,parentFolder,usePre,usePost);
+    if (error!=0) {
+        throw ClientException (error);
+    }
+}
 
 /*!
     \fn svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)

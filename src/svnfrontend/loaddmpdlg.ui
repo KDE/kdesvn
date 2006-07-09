@@ -1,0 +1,186 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>LoadDmpDlg</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>LoadDmpDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>343</width>
+            <height>272</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Form1</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout9</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>textLabel5</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Load into folder:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Path to load the dump into (see contexthelp)</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>If not empty, load the dump into a specific folder instead into root of repository. This folder must exist before loading the dump.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabel3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Dump file:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KURLRequester" row="0" column="1">
+                    <property name="name">
+                        <cstring>m_Dumpfile</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>textLabel4</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Load into repository:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+                <widget class="KLineEdit" row="2" column="1">
+                    <property name="name">
+                        <cstring>m_Rootfolder</cstring>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Path to load the dump into (see contexthelp)</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>If not empty, load the dump into a specific folder instead into root of repository. This folder must exist before loading the dump.</string>
+                    </property>
+                </widget>
+                <widget class="KURLRequester" row="1" column="1">
+                    <property name="name">
+                        <cstring>m_Repository</cstring>
+                    </property>
+                    <property name="mode">
+                        <number>18</number>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QButtonGroup">
+            <property name="name">
+                <cstring>m_UuidGroup</cstring>
+            </property>
+            <property name="title">
+                <string>Uuid action</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>How to handle UUIDs</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>The repository's UUID will be updated iff the dumpstream contains a UUID and action isn't set to ignore and either the repository contains no revisions or action is set to force. If the dump contains no UUID than this action is ignored.</string>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_UUidDefault</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Default</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_UUidIgnore</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Ig&amp;nore</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+N</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_UUidForce</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Force</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_UsePre</cstring>
+            </property>
+            <property name="text">
+                <string>Use pre-commit hook</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_UsePost</cstring>
+            </property>
+            <property name="text">
+                <string>Use post-commit hook</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<customwidgets>
+</customwidgets>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+</includehints>
+</UI>

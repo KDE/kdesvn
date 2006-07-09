@@ -17,56 +17,90 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SVNREPOSITORYDATA_H
-#define SVNREPOSITORYDATA_H
+#include "loaddmpdlg_impl.h"
 
-#include "pool.hpp"
-#include "revision.hpp"
-#include "apr.hpp"
+#include <qpushbutton.h>
+#include <qlabel.h>
+#include <kurlrequester.h>
+#include <klineedit.h>
+#include <qbuttongroup.h>
+#include <qradiobutton.h>
+#include <qcheckbox.h>
 
-#include <qstring.h>
-
-#include <svn_repos.h>
-#include <svn_error.h>
-
-namespace svn {
-
-namespace repository {
-
-class Repository;
-class RepositoryListener;
-/**
-	@author Rajko Albrecht <ral@alwins-world.de>
-*/
-class RepositoryData{
-    friend class Repository;
-
-public:
-    RepositoryData(RepositoryListener*);
-
-    virtual ~RepositoryData();
-    void Close();
-    svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool nosvn1diff=false);
-
-    void reposFsWarning(const QString&msg);
-    svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);
-    svn_error_t* loaddump(const QString&dump,svn_repos_load_uuid uuida, const QString&parentFolder, bool usePre, bool usePost);
-    static svn_error_t* hotcopy(const QString&src,const QString&dest,bool cleanlogs);
-
-protected:
-    Pool m_Pool;
-    svn_repos_t*m_Repository;
-    RepositoryListener*m_Listener;
-
-private:
-    static void warning_func(void *baton, svn_error_t *err);
-    static svn_error_t*cancel_func(void*baton);
-};
-
+LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent, const char *name)
+    :LoadDmpDlg(parent, name)
+{
 }
 
+LoadDmpDlg_impl::~LoadDmpDlg_impl()
+{
 }
 
-#endif
+/*!
+    \fn LoadDmpDlg_impl::usePost()const
+ */
+bool LoadDmpDlg_impl::usePost()const
+{
+    return m_UsePost->isChecked();
+}
+
+
+/*!
+    \fn LoadDmpDlg_impl::usePre()const
+ */
+bool LoadDmpDlg_impl::usePre()const
+{
+    return m_UsePre->isChecked();
+}
+
+
+/*!
+    \fn LoadDmpDlg_impl::uuidAction()const
+ */
+int LoadDmpDlg_impl::uuidAction()const
+{
+    return m_UuidGroup->selectedId();
+}
+
+
+/*!
+    \fn LoadDmpDlg_impl::dumpFile()const
+ */
+QString LoadDmpDlg_impl::dumpFile()const
+{
+    KURL u = m_Dumpfile->url();
+    QString res = u.path();
+    while (res.endsWith("/")) {
+        res.truncate(res.length()-1);
+    }
+    return res;
+}
+
+
+/*!
+    \fn LoadDmpDlg_impl::repository()const
+ */
+QString LoadDmpDlg_impl::repository()const
+{
+    KURL u = m_Repository->url();
+    QString res = u.path();
+    while (res.endsWith("/")) {
+        res.truncate(res.length()-1);
+    }
+    return res;
+}
+
+
+/*!
+    \fn LoadDmpDlg_impl::parentPath()const
+ */
+QString LoadDmpDlg_impl::parentPath()const
+{
+    QString res = m_Rootfolder->text();
+    while (res.endsWith("/")) {
+        res.truncate(res.length()-1);
+    }
+    return res;
+}
+
+#include "loaddmpdlg_impl.moc"

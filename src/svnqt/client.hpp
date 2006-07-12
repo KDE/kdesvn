@@ -265,6 +265,21 @@ namespace svn
     cat (const Path & path,
           const Revision & revision,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+    /**
+     * Retrieves the contents for a specific @a revision of
+     * a @a path at @a peg_revision
+     *
+     * @param path path of file or directory
+     * @param target new (local) name
+     * @param peg_revision revision to base the URL
+     * @param revision revision to retrieve
+     * @param peg_revision Revision to look at
+     */
+    virtual void
+    get (const Path & path,
+          const QString  & target,
+          const Revision & revision,
+          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
 
     /**
      * Retrieves the contents for a specific @a revision of

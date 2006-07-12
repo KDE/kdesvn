@@ -40,6 +40,10 @@
 #endif
 namespace svn
 {
+  namespace stream {
+    class SvnStream;
+  }
+
   /**
    * Subversion client API.
    */
@@ -193,10 +197,27 @@ namespace svn
      * @param path path of file or directory
      * @param peg_revision revision to base the URL
      * @param revision revision to retrieve
+     * @param peg_revision Revision to look at
      * @return contents of the file
      */
     virtual QByteArray
     cat (const Path & path,
+          const Revision & revision,
+          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
+
+    /**
+     * Retrieves the contents for a specific @a revision of
+     * a @a path at @a peg_revision
+     *
+     * @param path path of file or directory
+     * @param target new (local) name
+     * @param peg_revision revision to base the URL
+     * @param revision revision to retrieve
+     * @param peg_revision Revision to look at
+     */
+    virtual void
+    get (const Path & path,
+          const QString  & target,
           const Revision & revision,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
 
@@ -676,6 +697,11 @@ namespace svn
           const Revision& revision,
           const Revision& peg,
           bool recurse) throw (ClientException);
+
+    svn_error_t * internal_cat(const Path & path,
+                const Revision & revision,
+                const Revision & peg_revision,
+                svn::stream::SvnStream&);
   };
 
 }

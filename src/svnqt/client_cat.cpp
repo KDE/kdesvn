@@ -37,6 +37,7 @@
 #include "status.hpp"
 #include "svncpp_defines.hpp"
 #include "svnstream.hpp"
+#include "svnfilestream.hpp"
 
 namespace svn
 {
@@ -46,19 +47,42 @@ namespace svn
                 const Revision & peg_revision) throw (ClientException)
   {
     Pool pool;
-    svn_error_t * error;
     svn::stream::SvnByteStream buffer;
-    error = svn_client_cat2 (buffer,
-                             path.path().TOUTF8(),
-                             peg_revision.revision (),
-                             revision.revision (),
-                             *m_context,
-                             pool);
+    svn_error_t * error = internal_cat(path,revision,peg_revision,buffer);
     if (error != 0)
       throw ClientException (error);
 
     return buffer.content();
   }
+
+  void
+  Client_impl::get (const Path & path,
+        const QString  & target,
+        const Revision & revision,
+        const Revision & peg_revision) throw (ClientException)
+  {
+    Pool pool;
+    svn::stream::SvnFileOStream buffer(target);
+    svn_error_t * error = internal_cat(path,revision,peg_revision,buffer);
+    if (error != 0)
+      throw ClientException (error);
+  }
+
+  svn_error_t * Client_impl::internal_cat(const Path & path,
+            const Revision & revision,
+            const Revision & peg_revision,
+            svn::stream::SvnStream&buffer)
+  {
+    Pool pool;
+    svn_error_t * error = svn_client_cat2 (buffer,
+                             path.path().TOUTF8(),
+                             peg_revision.revision (),
+                             revision.revision (),
+                             *m_context,
+                             pool);
+    return error;
+  }
+
 }
 
 /* -----------------------------------------------------------------

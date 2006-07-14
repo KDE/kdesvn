@@ -349,6 +349,26 @@ void SvnActions::makeBlame(svn::Revision start, svn::Revision end, const QString
     }
 }
 
+void SvnActions::makeGet(const svn::Revision&start, const QString&what, const QString&target,
+    const svn::Revision&peg,QWidget*_dlgparent)
+{
+    if (!m_Data->m_CurrentContext) return;
+    QWidget*dlgp=_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget();
+    QString ex;
+    svn::Path p(what);
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,dlgp,
+            0,"Content cat",i18n("Getting content - hit cancel for abort"));
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        m_Data->m_Svnclient->get(p,target,start,peg);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+    } catch (...) {
+        ex = i18n("Error getting content");
+        emit clientException(ex);
+    }
+}
+
 QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg,QWidget*_dlgparent)
 {
     QByteArray content;
@@ -358,7 +378,7 @@ QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,con
     svn::Path p(what);
     try {
         StopDlg sdlg(m_Data->m_SvnContext,dlgp,
-            0,"Content cat","Getting content - hit cancel for abort");
+            0,"Content cat",i18n("Getting content - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         content = m_Data->m_Svnclient->cat(p,start,peg);
     } catch (svn::ClientException e) {

@@ -387,16 +387,9 @@ void CommandExec::slotCmd_get()
         clientException(i18n("\"GET\" requires output file!"));
         return;
     }
-    QFile of(m_pCPart->outfile);
-    if (!of.open(IO_WriteOnly)) {
-        clientException(i18n("Could not open %1 for writing").arg(m_pCPart->outfile));
-        return;
-    }
-    QByteArray content = m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0]
-        ,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
-    if (!content.size()||of.writeBlock(content,content.size())==-1) {
-        clientException(i18n("Error getting content and/or writing it to %1").arg(m_pCPart->outfile));
-    }
+    kdDebug()<<"write to "<<m_pCPart->outfile<<endl;
+    m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0], m_pCPart->outfile,
+        (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
 }
 
 void CommandExec::slotCmd_update()

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-14 01:13+0200\n"
-"PO-Revision-Date: 2006-07-01 12:32+0530\n"
+"PO-Revision-Date: 2006-07-15 04:27+0530\n"
 "Last-Translator: A S Alam <apbrar@gmail.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -254,43 +254,37 @@ msgid "No repository open"
 msgstr "ਕੋਈ ਖੁੱਲੀ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਹੈ"
 
 #: kdesvnview.cpp:207 rc.cpp:510
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Create new repository"
-msgstr "ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਚੈਕਆਉਟ"
+msgstr "ਨਵੀਂ ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਓ"
 
 #: kdesvnview.cpp:253 kdesvnview.cpp:288 kdesvn.cpp:116
-#, fuzzy
 msgid "Hotcopy a repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਿਰਯਾਤ"
+msgstr "ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਹਾਟ-ਕਾਪੀ"
 
 #: kdesvnview.cpp:275
-#, fuzzy
 msgid "Hotcopy finished."
-msgstr "ਮੁਕੰਮਲ ਹੋਇਆ।"
+msgstr "ਹਾਟ-ਕਾਪੀ ਮੁਕੰਮਲ ਹੋਈ ਹੈ।"
 
 #: kdesvnview.cpp:324
-#, fuzzy
 msgid "Loading a dump into a repository."
-msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚ ਜੋੜੋ"
+msgstr "ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਇੱਕ ਡੰਪ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #: kdesvnview.cpp:326
 msgid "Loading dump finished."
-msgstr ""
+msgstr "ਡੰਪ ਨੂੰ ਲੋਡ ਕਰਨਾ ਮੁਕੰਮਲ ਹੋ ਗਿਆ ਹੈ।"
 
 #: kdesvnview.cpp:339
-#, fuzzy
 msgid "Dump a repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਿਰਯਾਤ"
+msgstr "ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਨੂੰ ਡੰਪ ਕਰੋ"
 
 #: kdesvnview.cpp:376
-#, fuzzy
 msgid "Dumping a repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਿਰਯਾਤ"
+msgstr "ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਡੰਪ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
 
 #: kdesvnview.cpp:378
-#, fuzzy
 msgid "Dump finished."
-msgstr "ਮੁਕੰਮਲ ਹੋਇਆ।"
+msgstr "ਡੰਪ ਮੁਕੰਮਲ ਹੋਇਆ।"
 
 #: kdesvn_part.cpp:56
 msgid "A Subversion Client for KDE (dynamic Part component)"
@@ -401,9 +395,9 @@ msgid "Please enter your password below."
 msgstr "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਗੁਪਤ-ਕੋਡ ਹੇਠਾਂ ਦਿਓ।"
 
 #: rc.cpp:6
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Subversion Admin"
-msgstr "ਸਬਵਰਜਨ"
+msgstr "ਸਬਵਰਜਨ ਪਰਸ਼ਾਸ਼ਕ"
 
 #: rc.cpp:15 rc.cpp:576
 #, no-c-format
@@ -785,9 +779,9 @@ msgid "Copy from"
 msgstr "ਏਥੋਂ ਨਕਲ"
 
 #: rc.cpp:276
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Load into folder:"
-msgstr "ਫੋਲਡਰ ਸਾਫ਼ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+msgstr "ਫੋਲਡਰ ਵਿੱਚ ਲੋਡ:"
 
 #: rc.cpp:279 rc.cpp:291
 #, no-c-format
@@ -804,22 +798,22 @@ msgstr ""
 #: rc.cpp:285
 #, no-c-format
 msgid "Dump file:"
-msgstr ""
+msgstr "ਡੰਪ ਫਾਇਲ:"
 
 #: rc.cpp:288
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Load into repository:"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਤਬਦੀਲ"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਲੋਡ:"
 
 #: rc.cpp:297
 #, no-c-format
 msgid "Uuid action"
-msgstr ""
+msgstr "Uuid ਕਾਰਵਾਈ"
 
 #: rc.cpp:300
 #, no-c-format
 msgid "How to handle UUIDs"
-msgstr ""
+msgstr "UUID ਨੂੰ ਕਿਵੇਂ ਕੰਟਰੋਲ ਕਰਨਾ ਹੈ"
 
 #: rc.cpp:303
 #, no-c-format
@@ -831,14 +825,14 @@ msgid ""
 msgstr ""
 
 #: rc.cpp:310
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Ig&nore"
-msgstr "ਅਣਡਿੱਠੀ ਕੀਤੀ ਗਈ"
+msgstr "ਅਣਡਿੱਠਾ(&n)"
 
 #: rc.cpp:313 rc.cpp:353
 #, no-c-format
 msgid "Alt+N"
-msgstr ""
+msgstr "Alt+N"
 
 #: rc.cpp:316 rc.cpp:456 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:126
 #, no-c-format
@@ -848,82 +842,82 @@ msgstr "ਧੱਕੇ ਨਾਲ"
 #: rc.cpp:320
 #, no-c-format
 msgid "Use pre-commit hook"
-msgstr ""
+msgstr "ਪ੍ਰੀ-ਕਮਿਟ ਹੁੱਕ ਵਰਤੋਂ"
 
 #: rc.cpp:324
 #, no-c-format
 msgid "Use post-commit hook"
-msgstr ""
+msgstr "ਪੋਸਟ-ਕਮਿਟ ਹੁੱਕ ਵਰਤੋਂ"
 
 #: rc.cpp:331
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination folder:"
-msgstr "ਫੋਲਡਰ ਸਾਫ਼ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+msgstr "ਟਿਕਾਣਾ ਫੋਲਡਰ:"
 
 #: rc.cpp:334
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Repository to copy:"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਖੁੱਲ੍ਹੀ ਹੈ"
+msgstr "ਨਕਲ ਲਈ ਰਿਪੋਜ਼ਟਰੀ:"
 
 #: rc.cpp:337
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Clean logs"
-msgstr "ਲਾਗ ਦੀ ਜਾਂਚ ਜਾਰੀ ਹੈ"
+msgstr "ਲਾਗ ਸਾਫ਼ ਕਰੋ"
 
 #: rc.cpp:341
 #, no-c-format
 msgid "Dump repo"
-msgstr ""
+msgstr "ਰਿਪੋ ਡੰਪ"
 
 #: rc.cpp:344
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Repository to dump:"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਖੁੱਲ੍ਹੀ ਹੈ"
+msgstr "ਡੰਪ ਲਈ ਰਿਪੋਜ਼ਟਰੀ:"
 
 #: rc.cpp:347
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Dump into:"
-msgstr "ਆਉਟਪੁੱਟ:"
+msgstr "ਇੱਥੇ ਡੰਪ:"
 
 #: rc.cpp:350
 #, no-c-format
 msgid "i&ncremental Dump"
-msgstr ""
+msgstr "ਆਵਰਤੀ ਡੰਪ(&n)"
 
 #: rc.cpp:356
 #, no-c-format
 msgid "Use deltas"
-msgstr ""
+msgstr "ਡੈਲਟਾ ਵਰਤੋਂ"
 
 #: rc.cpp:360
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Dump &revision range"
-msgstr "ਪੂਰੀ ਰੀਵਿਜ਼ਨ ਲੜੀ"
+msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਡੰਪ(&R)"
 
 #: rc.cpp:363
 #, no-c-format
 msgid "Alt+R"
-msgstr ""
+msgstr "Alt+R"
 
 #: rc.cpp:366
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "End revision:"
-msgstr "ਆਖਰੀ ਰੀਵਿਜ਼ਨ"
+msgstr "ਆਖਰੀ ਰੀਵਿਜ਼ਨ:"
 
 #: rc.cpp:369
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start revison:"
-msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ ਸ਼ੁਰੂ"
+msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ ਸ਼ੁਰੂ:"
 
 #: rc.cpp:372
 #, no-c-format
 msgid "-1 for Head"
-msgstr ""
+msgstr "ਹੈੱਡ ਲਈ -1"
 
 #: rc.cpp:375
 #, no-c-format
 msgid "-1 for Start"
-msgstr ""
+msgstr "ਸ਼ੁਰੂ ਲਈ -1"
 
 #: rc.cpp:378
 #, no-c-format
@@ -964,7 +958,7 @@ msgstr "ਸੋਧ/ਬਿਨ-ਵਰਜਨ ਉੱਤੇ ਧੱਕੇ ਨਾਲ ਹ
 #: rc.cpp:401
 #, no-c-format
 msgid "Just dry run without modifications"
-msgstr ""
+msgstr "ਸੋਧ ਤੋਂ ਬਿਨਾਂ ਹੀ ਸਿਰਫ਼ ਚਲਾਓ"
 
 #: rc.cpp:405
 #, no-c-format
@@ -1100,24 +1094,24 @@ msgid "START"
 msgstr "ਸ਼ੁਰੂ"
 
 #: rc.cpp:513
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Type of repository:"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਿਰਯਾਤ"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਕਿਸਮ:"
 
 #: rc.cpp:516
 #, no-c-format
 msgid "FSFS"
-msgstr ""
+msgstr "FSFS"
 
 #: rc.cpp:519
 #, no-c-format
 msgid "BDB"
-msgstr ""
+msgstr "BDB"
 
 #: rc.cpp:522
 #, no-c-format
 msgid "Select type of storage"
-msgstr ""
+msgstr "ਸੰਭਾਲਣ ਕਿਸਮ ਦੀ ਚੋਣ ਕਰੋ"
 
 #: rc.cpp:525
 #, no-c-format
@@ -1125,9 +1119,9 @@ msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr ""
 
 #: rc.cpp:528
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Path to repository:"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਤਬਦੀਲ"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਲਈ ਮਾਰਗ:"
 
 #: rc.cpp:531
 #, no-c-format
@@ -1140,14 +1134,14 @@ msgid "Disable automatic log file removal (BDB only)"
 msgstr ""
 
 #: rc.cpp:539
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Create main folders"
-msgstr "ਫੋਲਡਰ ਸਾਫ਼ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+msgstr "ਮੁੱਖ ਫੋਲਡਰ ਬਣਾਓ"
 
 #: rc.cpp:543
 #, no-c-format
 msgid "Create trunk, tags and branches folder"
-msgstr ""
+msgstr "ਟਰੰਕ, ਟੈਗ ਅਤੇ ਬਰਾਂਚ ਫੋਲਡਰ ਬਣਾਓ"
 
 #: rc.cpp:546
 #, no-c-format
@@ -1232,37 +1226,32 @@ msgid "Store password"
 msgstr "ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲੋ"
 
 #: kdesvn.cpp:110
-#, fuzzy
 msgid "Create and open new repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕਦੀ ਹੈ"
+msgstr "ਨਵੀਂ ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਓ ਅਤੇ ਖੋਲ੍ਹੋ"
 
 #: kdesvn.cpp:112
-#, fuzzy
 msgid "Create and opens a new local subversion repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚ ਨਵੀਆਂ ਇਕਾਈਆਂ ਹਨ"
+msgstr "ਇੱਕ ਨਵੀਂ ਲੋਕਲ ਸਬ-ਵਰਜਨ ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਉਦੀ ਅਤੇ ਖੋਲ੍ਹਦੀ ਹੈ"
 
 #: kdesvn.cpp:113
-#, fuzzy
 msgid "Dump repository to file"
-msgstr "ਕੋਈ ਖੁੱਲੀ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਹੈ"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨੂੰ ਫਾਇਲ ਵਿੱਚ ਡੰਪ"
 
 #: kdesvn.cpp:115
 msgid "Dump a subversion repository to a file"
-msgstr ""
+msgstr "ਇੱਕ ਸਬ-ਵਰਜਨ ਰਿਪੋਜ਼ਟਰੀ ਨੂੰ ਇੱਕ ਫਾਇਲ ਵਿੱਚ ਡੰਪ ਕਰੋ"
 
 #: kdesvn.cpp:118
 msgid "Hotcopy a subversion repository to a new folder"
 msgstr ""
 
 #: kdesvn.cpp:119
-#, fuzzy
 msgid "Load dump into repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚ ਜੋੜੋ"
+msgstr "ਡੰਪ ਨੂੰ ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਲੋਡ ਕਰੋ"
 
 #: kdesvn.cpp:121
-#, fuzzy
 msgid "Load a dump file into a repository."
-msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚ ਜੋੜੋ"
+msgstr "ਇੱਕ ਡੰਪ ਫਾਇਲ ਨੂੰ ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਲੋਡ ਕਰਦੀ ਹੈ।"
 
 #: kdesvn.cpp:131
 msgid "Could not find our part."
@@ -1428,9 +1417,8 @@ msgid "Property modified"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੋਧੀ ਗਈ"
 
 #: svnfrontend/opencontextmenu.cpp:57
-#, fuzzy
 msgid "Other..."
-msgstr "ਮਿਲਾਨ..."
+msgstr "ਹੋਰ..."
 
 #: svnfrontend/copymoveview_impl.cpp:49
 msgid "Rename/move"
@@ -1583,9 +1571,8 @@ msgid "Deleted at revision %1"
 msgstr "ਰੀਵਿਜ਼ਨ %1 ਹਟਾਇਆ ਗਿਆ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:409
-#, fuzzy
 msgid "Added at revision %1 as %2"
-msgstr "ਰੀਵਿਜ਼ਨ %1 'ਚ ਜੋੜਿਆ"
+msgstr "ਰੀਵਿਜ਼ਨ %1 %2 ਵਾਂਗ ਜੋੜਿਆ ਗਿਆ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:415
 msgid "Copied to %1 at revision %2"
@@ -1859,9 +1846,8 @@ msgstr "ਜੋੜੋ ਅਤੇ ਕਮਿਟ"
 
 #: svnfrontend/svnactions.cpp:840 svnfrontend/svnactions.cpp:876
 #: svnfrontend/svnactions.cpp:905
-#, fuzzy
 msgid "No difference to display"
-msgstr "ਅੰਤਰ ਵੇਖਾਓ"
+msgstr "ਵੇਖਾਉਣ ਲਈ ਕੋਈ ਅੰਤਰ ਨਹੀਂ ਹੈ"
 
 #: svnfrontend/svnactions.cpp:1073
 msgid "Which files or directories should I add?"
@@ -2049,8 +2035,7 @@ msgid "Check for updates"
 msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ"
 
 #: svnfrontend/kdesvnfilelist.cpp:224
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:227
@@ -2171,7 +2156,7 @@ msgstr "ਲਗਾਤਾਰ ਹੱਲ"
 
 #: svnfrontend/kdesvnfilelist.cpp:285
 msgid "Marking files or dirs resolved"
-msgstr ""
+msgstr "ਨਿਸ਼ਾਨਬੱਧ ਫਾਇਲਾਂ ਜਾਂ ਡਾਇਰੈਕਟਰੀਆਂ ਹੱਲ ਹੋਈਆਂ"
 
 #: svnfrontend/kdesvnfilelist.cpp:286
 msgid "Ignore/Unignore current item"
@@ -2219,7 +2204,7 @@ msgstr "ਮਿਲਾਨ..."
 
 #: svnfrontend/kdesvnfilelist.cpp:311 svnfrontend/kdesvnfilelist.cpp:1286
 msgid "Open With..."
-msgstr ""
+msgstr "ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ..."
 
 #: svnfrontend/kdesvnfilelist.cpp:314
 msgid "Checkout current repository path"
@@ -2243,7 +2228,7 @@ msgstr "ਫੇਲ੍ਹ ਹੋਇਆ: %1 %2"
 
 #: svnfrontend/kdesvnfilelist.cpp:981
 msgid "Cannot import into multiple targets!"
-msgstr ""
+msgstr "ਬਹੁਤੇ ਨਿਸ਼ਾਨਿਆਂ ਲਈ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ!"
 
 #: svnfrontend/kdesvnfilelist.cpp:997
 msgid "Cannot import into remote targets!"
@@ -2303,7 +2288,7 @@ msgstr "ਇੱਕ ਫਾਇਲ ਲਈ ਸਬ-ਡਾਇਰ ਨਹੀਂ ਬਣਾ
 
 #: svnfrontend/kdesvnfilelist.cpp:1973
 msgid "Automatic generated base layout by kdesvn"
-msgstr ""
+msgstr "kdesvn ਵਲੋਂ ਆਟੋਮੈਟਿਕ ਤਿਆਰ ਆਧਾਰ ਖਾਕਾ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:2317
 msgid "Error getting entry to relocate"
@@ -2380,8 +2365,7 @@ msgid "A newline separated list of file patterns to ignore."
 msgstr "ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਫਾਇਲ ਪੈਟਰਨ ਦੀ ਨਵੀਂ ਸਤਰ ਨਾਲ ਵੱਖ ਕੀਤੀ ਸੂਚੀ ਹੈ।"
 
 #: svnfrontend/editproperty_impl.cpp:94
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:95
@@ -2494,3 +2478,4 @@ msgstr "ਜਾਰੀ ਕਰਤਾ ਨਾਂ"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:72
 msgid "Fingerprint"
 msgstr "ਫਿੰਗਰ ਪਰਿੰਟ"
+

@@ -43,5 +43,5 @@
 #define FROMUTF8 fromLocal8Bit
 #else
 #define TOUTF8 toUtf8
-#define FROMUTF8 FROMUTF8
+#define FROMUTF8 fromUtf8
 #endif

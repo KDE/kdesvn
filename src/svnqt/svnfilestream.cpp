@@ -45,8 +45,8 @@ SvnFileStream_private::~SvnFileStream_private()
 {
 }
 
-SvnFileOStream::SvnFileOStream(const QString&fn)
-    :SvnStream(false,true)
+SvnFileOStream::SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx)
+    :SvnStream(false,true,ctx)
 {
     m_FileData = new SvnFileStream_private(fn,IO_WriteOnly);
     if (!m_FileData->m_File.isOpen()) {
@@ -78,8 +78,8 @@ long SvnFileOStream::write(const char* data, const unsigned long max)
     return res;
 }
 
-SvnFileIStream::SvnFileIStream(const QString&fn)
-    :SvnStream(true,false)
+SvnFileIStream::SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx)
+    :SvnStream(true,false,ctx)
 {
     m_FileData = new SvnFileStream_private(fn,IO_ReadOnly);
     if (!m_FileData->m_File.isOpen()) {

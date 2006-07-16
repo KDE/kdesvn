@@ -22,7 +22,13 @@
 #include "pool.hpp"
 #include "apr.hpp"
 
+// Subversion api
+#include "svn_client.h"
+
 #include <qbuffer.h>
+#include <qdatetime.h>
+
+#define MAX_TIME 300
 
 namespace svn {
 
@@ -30,8 +36,8 @@ namespace stream {
 class SvnStream_private
 {
 public:
-    SvnStream_private(){m_Stream=0;m_LastError="";}
-    ~SvnStream_private(){}
+    SvnStream_private(){m_Stream=0;m_LastError="";_context=0;cancel_timeout.start();}
+    ~SvnStream_private(){qDebug("Time elapsed: %i ",cancel_timeout.elapsed());}
 
     static svn_error_t * stream_write(void*baton,const char*data,apr_size_t*len);
     static svn_error_t * stream_read(void*baton,char*data,apr_size_t*len);
@@ -39,11 +45,21 @@ public:
     Pool m_Pool;
     svn_stream_t * m_Stream;
     QString m_LastError;
+
+    svn_client_ctx_t* _context;
+
+    QTime cancel_timeout;
 };
 
 svn_error_t * SvnStream_private::stream_read(void*baton,char*data,apr_size_t*len)
 {
     SvnStream*b = (SvnStream*)baton;
+    svn_client_ctx_t*ctx = b->context();
+
+    if (ctx&&ctx->cancel_func) {
+        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+    }
+
     long res = b->isOk()?b->read(data,*len):-1;
 
     if (res<0) {
@@ -57,6 +73,13 @@ svn_error_t * SvnStream_private::stream_read(void*baton,char*data,apr_size_t*len
 svn_error_t * SvnStream_private::stream_write(void*baton,const char*data,apr_size_t*len)
 {
     SvnStream*b = (SvnStream*)baton;
+    svn_client_ctx_t*ctx = b->context();
+
+    if (ctx&&ctx->cancel_func) {
+        qDebug("Check cancel");
+        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+    }
+
     long res = b->isOk()?b->write(data,*len):-1;
     if (res<0) {
         *len = 0;
@@ -66,10 +89,11 @@ svn_error_t * SvnStream_private::stream_write(void*baton,const char*data,apr_siz
     return SVN_NO_ERROR;
 }
 
-SvnStream::SvnStream(bool read, bool write)
+SvnStream::SvnStream(bool read, bool write,svn_client_ctx_t * ctx)
 {
     m_Data = new SvnStream_private;
     m_Data->m_Stream = svn_stream_create(this,m_Data->m_Pool);
+    m_Data->_context = ctx;
     if (read) {
         svn_stream_set_read(m_Data->m_Stream,SvnStream_private::stream_read);
     }
@@ -90,6 +114,11 @@ SvnStream::~SvnStream()
 SvnStream::operator svn_stream_t* ()const
 {
     return m_Data->m_Stream;
+}
+
+svn_client_ctx_t * SvnStream::context()
+{
+    return m_Data->_context;
 }
 
 long SvnStream::write(const char*,const unsigned long)
@@ -163,8 +192,8 @@ SvnByteStream_private::SvnByteStream_private()
 }
 
 /* ByteStream implementation start */
-SvnByteStream::SvnByteStream()
-    : SvnStream(false,true)
+SvnByteStream::SvnByteStream(svn_client_ctx_t * ctx)
+    : SvnStream(false,true,ctx)
 {
     m_ByteData = new SvnByteStream_private;
     if (!m_ByteData->mBuf.isOpen()) {

@@ -4,6 +4,7 @@
 #include <qstring.h>
 
 #include <svn_io.h>
+struct svn_client_ctx_t;
 
 namespace svn {
 
@@ -22,8 +23,10 @@ public:
      * when deleting this object.
      * \param readit set readable
      * \param writeit set writable
+     * \param ctx a client context for calls to cancel_func inside. you should this only set with functions not using it itself
+     * like svn_client_cat2:
      */
-    SvnStream(bool readit, bool writeit);
+    SvnStream(bool readit, bool writeit, svn_client_ctx_t * ctx = 0);
     //! frees all structures and releases memory pool.
     virtual ~SvnStream();
 
@@ -66,6 +69,8 @@ public:
      */
     virtual bool isOk()const = 0;
 
+    svn_client_ctx_t * context();
+
 protected:
     //! set a human readable errormessage
     /*!
@@ -94,8 +99,10 @@ public:
     //! constructor
     /*!
         creates internal buffer
+     * \param ctx a client context for calls to cancel_func inside. you should this only set with functions not using it itself
+     * like svn_client_cat2:
      */
-    SvnByteStream();
+    SvnByteStream(svn_client_ctx_t * ctx = 0);
     //! release internal buffer
     virtual ~SvnByteStream();
     //! fill internal buffer with data

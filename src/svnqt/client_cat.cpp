@@ -46,8 +46,7 @@ namespace svn
                 const Revision & revision,
                 const Revision & peg_revision) throw (ClientException)
   {
-    Pool pool;
-    svn::stream::SvnByteStream buffer;
+    svn::stream::SvnByteStream buffer(*m_context);
     svn_error_t * error = internal_cat(path,revision,peg_revision,buffer);
     if (error != 0)
       throw ClientException (error);
@@ -61,8 +60,7 @@ namespace svn
         const Revision & revision,
         const Revision & peg_revision) throw (ClientException)
   {
-    Pool pool;
-    svn::stream::SvnFileOStream buffer(target);
+    svn::stream::SvnFileOStream buffer(target,*m_context);
     svn_error_t * error = internal_cat(path,revision,peg_revision,buffer);
     if (error != 0)
       throw ClientException (error);

@@ -53,7 +53,7 @@ RepoOutStream::RepoOutStream(RepositoryData*aBack)
 long RepoOutStream::write(const char*data,const unsigned long max)
 {
     if (m_Back) {
-        QString msg = QString::fromUtf8(data,max);
+        QString msg = QString::FROMUTF8(data,max);
         m_Back->reposFsWarning(msg);
     }
     return max;
@@ -92,7 +92,7 @@ svn_error_t*RepositoryData::cancel_func(void*baton)
 {
     RepositoryListener*m_L = (RepositoryListener*)baton;
     if (m_L && m_L->isCanceld()) {
-        return svn_error_create (SVN_ERR_CANCELLED, 0, QString::fromUtf8("Cancelled by user.").TOUTF8());
+        return svn_error_create (SVN_ERR_CANCELLED, 0, QString::FROMUTF8("Cancelled by user.").TOUTF8());
     }
     return SVN_NO_ERROR;
 }

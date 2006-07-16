@@ -358,7 +358,7 @@ void SvnActions::makeGet(const svn::Revision&start, const QString&what, const QS
     svn::Path p(what);
     try {
         StopDlg sdlg(m_Data->m_SvnContext,dlgp,
-            0,"Content cat",i18n("Getting content - hit cancel for abort"));
+            0,"Content get",i18n("Getting content - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         m_Data->m_Svnclient->get(p,target,start,peg);
     } catch (svn::ClientException e) {
@@ -380,7 +380,10 @@ QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,con
         StopDlg sdlg(m_Data->m_SvnContext,dlgp,
             0,"Content cat",i18n("Getting content - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        kdDebug()<<"Start cat"<<endl;
+        QTime el; el.start();
         content = m_Data->m_Svnclient->cat(p,start,peg);
+        kdDebug()<<"End cat "<< el.elapsed() << endl;
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
     } catch (...) {
@@ -860,7 +863,7 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
         emit clientException(i18n("No difference to display"));
         return;
     }
-    dispDiff(QString::fromUtf8(ex));
+    dispDiff(QString::fromLocal8Bit(ex));
 }
 
 /*!
@@ -897,7 +900,7 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
         return;
     }
 
-    dispDiff(QString::fromUtf8(ex));
+    dispDiff(QString::fromLocal8Bit(ex));
 }
 
 void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
@@ -926,7 +929,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         return;
     }
 
-    dispDiff(QString::fromUtf8(ex));
+    dispDiff(QString::fromLocal8Bit(ex));
 }
 
 void SvnActions::dispDiff(const QString&ex)
@@ -954,7 +957,7 @@ void SvnActions::dispDiff(const QString&ex)
         for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
             if (*it=="%f") {
                 fname_used = true;
-                QByteArray ut = ex.utf8();
+                QByteArray ut = ex.local8Bit();
                 QDataStream*ds = tfile.dataStream();
                 ds->writeRawBytes(ut,ut.size());
                 tfile.close();

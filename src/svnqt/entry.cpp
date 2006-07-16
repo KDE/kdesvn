@@ -25,6 +25,7 @@
 
 // svncpp
 #include "entry.hpp"
+#include "svncpp_defines.hpp"
 
 
 namespace svn
@@ -94,29 +95,29 @@ namespace svn
     {
         if (src) {
             // copy & convert the contents of src
-            _name = QString::fromUtf8(src->name);
+            _name = QString::FROMUTF8(src->name);
             _revision = src->revision;
-            _url = QString::fromUtf8(src->url);
-            _repos = QString::fromUtf8(src->repos);
-            _uuid = QString::fromUtf8(src->uuid);
+            _url = QString::FROMUTF8(src->url);
+            _repos = QString::FROMUTF8(src->repos);
+            _uuid = QString::FROMUTF8(src->uuid);
             _kind = src->kind;
             _schedule = src->schedule;
             _copied = src->copied!=0;
             _deleted = src->deleted!=0;
             _absent = src->absent!=0;
             _incomplete = src->incomplete!=0;
-            _copyfrom_url=QString::fromUtf8(src->copyfrom_url);
+            _copyfrom_url=QString::FROMUTF8(src->copyfrom_url);
             _copyfrom_rev = src->copyfrom_rev;
-            _conflict_old = QString::fromUtf8(src->conflict_old);
-            _conflict_new = QString::fromUtf8(src->conflict_new);
-            _conflict_wrk = QString::fromUtf8(src->conflict_wrk);
-            _prejfile = QString::fromUtf8(src->prejfile);
+            _conflict_old = QString::FROMUTF8(src->conflict_old);
+            _conflict_new = QString::FROMUTF8(src->conflict_new);
+            _conflict_wrk = QString::FROMUTF8(src->conflict_wrk);
+            _prejfile = QString::FROMUTF8(src->prejfile);
             _text_time = src->text_time;
             _prop_time = src->prop_time;
-            _checksum = QString::fromUtf8(src->checksum);
+            _checksum = QString::FROMUTF8(src->checksum);
             _cmt_rev = src->cmt_rev;
             _cmt_date = src->cmt_date;
-            _cmt_author = QString::fromUtf8(src->cmt_author);
+            _cmt_author = QString::FROMUTF8(src->cmt_author);
             m_Lock.init(src);
             m_valid = true;
         } else {

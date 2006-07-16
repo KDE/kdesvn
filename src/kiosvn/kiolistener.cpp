@@ -303,10 +303,10 @@ void KioListener::contextNotify (const char * path,
         default:
             break;
     }
-    par->setMetaData(QString::number(counter()).rightJustify( 10,'0' )+ "path" , QString::fromUtf8( path ));
+    par->setMetaData(QString::number(counter()).rightJustify( 10,'0' )+ "path" , QString::fromLocal8Bit( path ));
     par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "action", QString::number( action ));
     par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "kind", QString::number( kind ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "mime_t", QString::fromUtf8( mime_type ));
+    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "mime_t", QString::fromLocal8Bit( mime_type ));
     par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "content", QString::number( content_state ));
     par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "prop", QString::number( prop_state ));
     par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "rev", QString::number( revision ));

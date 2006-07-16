@@ -24,11 +24,11 @@
  */
 
 
-#include <qstring.h>
-
 // svncpp
 #include "exception.hpp"
+#include "svncpp_defines.hpp"
 
+#include <qstring.h>
 
 namespace svn
 {
@@ -40,7 +40,7 @@ namespace svn
     apr_status_t apr_err;
 
     Data (const char * msg)
-      : message(QString::fromUtf8(msg))
+      : message(QString::FROMUTF8(msg))
     {
     }
 
@@ -96,20 +96,20 @@ namespace svn
     }
     svn_error_t * next = error->child;
     if (error->message)
-      message = QString::fromUtf8(error->message);
+      message = QString::FROMUTF8(error->message);
     else
     {
       message = "Unknown error!\n";
       if (error->file)
       {
-        message += QString::fromUtf8("In file ");
-        message += QString::fromUtf8(error->file);
+        message += QString::FROMUTF8("In file ");
+        message += QString::FROMUTF8(error->file);
         message += QString(" Line %1").arg(error->line);
       }
     }
     while (next != NULL && next->message != NULL)
     {
-      message = message + "\n" + QString::fromUtf8(next->message);
+      message = message + "\n" + QString::FROMUTF8(next->message);
 
       next = next->child;
     }

@@ -714,7 +714,7 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
-    QString out = QString::fromUtf8(ex);
+    QString out = QString::fromLocal8Bit(ex);
     QTextIStream stream(&out);
     while (!stream.atEnd()) {
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "diffresult",stream.readLine());

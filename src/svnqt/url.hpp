@@ -27,6 +27,7 @@
 #define _SVNCPP_URL_H_
 
 // qt
+#include <qglobal.h>
 #if QT_VERSION < 0x040000
 
 #include <qstring.h>

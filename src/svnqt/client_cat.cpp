@@ -72,13 +72,12 @@ namespace svn
             svn::stream::SvnStream&buffer)
   {
     Pool pool;
-    svn_error_t * error = svn_client_cat2 (buffer,
+    return svn_client_cat2 (buffer,
                              path.path().TOUTF8(),
                              peg_revision.revision (),
                              revision.revision (),
                              *m_context,
                              pool);
-    return error;
   }
 
 }

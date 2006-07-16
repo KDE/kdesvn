@@ -25,6 +25,7 @@
 
 // svncpp
 #include "status.hpp"
+#include "svncpp_defines.hpp"
 
 //#include <assert.h>
 
@@ -175,7 +176,7 @@ namespace svn
   Status::Status (const char*path, svn_wc_status2_t * status)
     : m_Data(new Status_private())
   {
-    m_Data->init(QString::fromUtf8(path),status);
+    m_Data->init(QString::FROMUTF8(path),status);
   }
 
   Status::Status(const QString&url,const DirEntry&src)

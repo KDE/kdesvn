@@ -80,11 +80,11 @@ namespace svn
         void *val;
 
         apr_hash_this (hi, &key, NULL, &val);
-        prop_map[ QString::fromUtf8( (const char *)key ) ] =
-             QString::fromUtf8( ((const svn_string_t *)val)->data );
+        prop_map[ QString::FROMUTF8( (const char *)key ) ] =
+             QString::FROMUTF8( ((const svn_string_t *)val)->data );
       }
 
-      path_prop_map_list.push_back( PathPropertiesMapEntry( QString::fromUtf8(item->node_name->data), prop_map ) );
+      path_prop_map_list.push_back( PathPropertiesMapEntry( QString::FROMUTF8(item->node_name->data), prop_map ) );
     }
 
     return path_prop_map_list;
@@ -127,8 +127,8 @@ namespace svn
       void *val;
 
       apr_hash_this (hi, &key, NULL, &val);
-      prop_map[propName] = QString::fromUtf8( ((const svn_string_t *)val)->data );
-      path_prop_map_list.push_back( PathPropertiesMapEntry(QString::fromUtf8((const char *)key), prop_map ) );
+      prop_map[propName] = QString::FROMUTF8( ((const svn_string_t *)val)->data );
+      path_prop_map_list.push_back( PathPropertiesMapEntry(QString::FROMUTF8((const char *)key), prop_map ) );
     }
 
     return path_prop_map_list;
@@ -221,7 +221,7 @@ namespace svn
       void *val;
 
       apr_hash_this (hi, &key, NULL, &val);
-      prop_map[ QString::fromUtf8( (const char *)key ) ] = QString::fromUtf8( ((const svn_string_t *)val)->data );
+      prop_map[ QString::FROMUTF8( (const char *)key ) ] = QString::FROMUTF8( ((const svn_string_t *)val)->data );
     }
 
     return QPair<svn_revnum_t,PropertiesMap>( revnum, prop_map );
@@ -264,7 +264,7 @@ namespace svn
     if( propval == NULL )
       return QPair<svn_revnum_t,QString>( 0, QString() );
 
-    return QPair<svn_revnum_t,QString>( revnum, QString::fromUtf8(propval->data) );
+    return QPair<svn_revnum_t,QString>( revnum, QString::FROMUTF8(propval->data) );
   }
 
   /**

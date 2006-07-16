@@ -27,15 +27,15 @@ CommitItem::CommitItem(const svn_client_commit_item_t*_item)
 {
     init();
     if (_item) {
-        m_Path = QString::fromUtf8(_item->path);
+        m_Path = QString::FROMUTF8(_item->path);
         m_Kind = _item->kind;
-        m_Url = QString::fromUtf8(_item->url);
+        m_Url = QString::FROMUTF8(_item->url);
         if (_item->state_flags & SVN_CLIENT_COMMIT_ITEM_IS_COPY) {
             m_CopyFromRevision = _item->revision;
         } else {
             m_Revision = _item->revision;
         }
-        m_CopyFromUrl = QString::fromUtf8(_item->copyfrom_url);
+        m_CopyFromUrl = QString::FROMUTF8(_item->copyfrom_url);
         m_State = _item->state_flags;
         convertprop(_item->wcprop_changes);
     }
@@ -47,12 +47,12 @@ CommitItem::CommitItem(const svn_client_commit_item2_t*_item)
 
     if (_item) {
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
-        m_Path = QString::fromUtf8(_item->path);
+        m_Path = QString::FROMUTF8(_item->path);
         m_Kind = _item->kind;
-        m_Url = QString::fromUtf8(_item->url);
+        m_Url = QString::FROMUTF8(_item->url);
         m_Revision = _item->revision;
         m_CopyFromRevision = _item->copyfrom_rev;
-        m_CopyFromUrl = QString::fromUtf8(_item->copyfrom_url);
+        m_CopyFromUrl = QString::FROMUTF8(_item->copyfrom_url);
         m_State = _item->state_flags;
         convertprop(_item->wcprop_changes);
 #endif
@@ -68,7 +68,7 @@ void CommitItem::convertprop(apr_array_header_t * list)
     for (int j = 0; j < list->nelts; ++j) {
         svn_prop_t * item = ((svn_prop_t **)list->elts)[j];
         if (!item) continue;
-        m_CommitProperties[QString::fromUtf8(item->name)]=QString::fromUtf8(item->value->data,item->value->len);
+        m_CommitProperties[QString::FROMUTF8(item->name)]=QString::FROMUTF8(item->value->data,item->value->len);
     }
 }
 

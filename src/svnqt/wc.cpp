@@ -103,7 +103,7 @@ namespace svn
     QString result = "";
     const svn_wc_entry_t *entry;
     entry = getEntry( path );
-    result = entry?QString::fromUtf8(entry->url):"";
+    result = entry?QString::FROMUTF8(entry->url):"";
     
     return result;
   }
@@ -113,7 +113,7 @@ namespace svn
     QString result = "";
     const svn_wc_entry_t *entry;
     entry = getEntry( path );
-    result = entry?QString::fromUtf8(entry->repos):"";
+    result = entry?QString::FROMUTF8(entry->repos):"";
     
     return result;
   }

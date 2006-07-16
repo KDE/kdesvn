@@ -163,7 +163,7 @@ void CContextListener::contextNotify (const char *path,
 
     if (!aString.isEmpty()) {
         QTextStream ts(&msg,IO_WriteOnly);
-        ts << NotifyAction(action) << " " << QString::fromUtf8(path);
+        ts << NotifyAction(action) << " " << QString::fromLocal8Bit(path);
         if (revision>-1) {
             ts << " (Rev "<<revision<<")";
         }

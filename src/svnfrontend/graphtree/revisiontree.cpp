@@ -338,7 +338,7 @@ bool RevisionTree::isValid()const
 
 static QString uniqueNodeName(long rev,const QString&path)
 {
-    QString res = KCodecs::base64Encode(path.utf8(),false);
+    QString res = KCodecs::base64Encode(path.local8Bit(),false);
     res.replace("\"","_quot_");
     res.replace(" ","_space_");
     QString n; n.sprintf("%05ld",rev);

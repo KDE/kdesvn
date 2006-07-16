@@ -247,7 +247,7 @@ namespace svn
   dirEntryToStatus (const QString& path, const DirEntry & dirEntry)
   {
     QString url = path;
-    url += QString::fromUtf8("/");
+    url += QString::FROMUTF8("/");
     url += dirEntry.name();
     return Status (url, dirEntry);
   }
@@ -274,7 +274,7 @@ namespace svn
 
     StatusEntries entries;
     QString url = path;
-    url+=QString::fromUtf8("/");
+    url+=QString::FROMUTF8("/");
     bool _det = detailed_remote;
 
 
@@ -465,7 +465,7 @@ namespace svn
     if (error != NULL)
       throw ClientException (error);
 
-    
+
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
         if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified)) {
             pegr.kind = svn_opt_revision_head;

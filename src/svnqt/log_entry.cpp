@@ -25,6 +25,7 @@
 // svncpp
 #include "log_entry.hpp"
 #include "pool.hpp"
+#include "svncpp_defines.hpp"
 
 // subversion api
 #include "svn_time.h"
@@ -37,8 +38,8 @@ namespace svn
     char action_,
     const char *copyFromPath_,
     const svn_revnum_t copyFromRevision_)
-   : path(QString::fromUtf8(path_)), action(action_),
-     copyFromPath (QString::fromUtf8(copyFromPath_)),
+   : path(QString::FROMUTF8(path_)), action(action_),
+     copyFromPath (QString::FROMUTF8(copyFromPath_)),
      copyFromRevision (copyFromRevision_)
   {
   }
@@ -93,8 +94,8 @@ namespace svn
     }
 
     revision = revision_;
-    author = author_ == 0 ? "" : QString::fromUtf8(author_);
-    message = message_ == 0 ? "" : QString::fromUtf8(message_);
+    author = author_ == 0 ? "" : QString::FROMUTF8(author_);
+    message = message_ == 0 ? "" : QString::FROMUTF8(message_);
   }
 }
 

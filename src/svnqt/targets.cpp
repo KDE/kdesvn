@@ -88,7 +88,7 @@ namespace svn
   Targets::Targets (const char* target)
   {
     if (target) {
-      m_targets.push_back(QString::fromUtf8(target));
+      m_targets.push_back(QString::FROMUTF8(target));
     }
   }
 

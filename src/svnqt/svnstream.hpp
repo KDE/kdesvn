@@ -16,6 +16,7 @@ class SvnStream_private;
     @short wrapper class around the svn_stream_t structure
 */
 class SvnStream{
+    friend class SvnStream_private;
 public:
     //! Constructor
     /*!
@@ -83,6 +84,10 @@ protected:
     /*! \param ioError error code from QIODevide::status
      */
     virtual void setError(int ioError)const;
+
+protected:
+    int cancelElapsed()const;
+    void cancelTimeReset();
 
 private:
     SvnStream_private*m_Data;

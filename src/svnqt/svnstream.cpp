@@ -47,7 +47,6 @@ public:
     QString m_LastError;
 
     svn_client_ctx_t* _context;
-
     QTime cancel_timeout;
 };
 
@@ -75,15 +74,16 @@ svn_error_t * SvnStream_private::stream_write(void*baton,const char*data,apr_siz
     SvnStream*b = (SvnStream*)baton;
     svn_client_ctx_t*ctx = b->context();
 
-    if (ctx&&ctx->cancel_func) {
+    if (ctx&&ctx->cancel_func&&b->cancelElapsed()>50) {
         qDebug("Check cancel");
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+        b->cancelTimeReset();
     }
 
     long res = b->isOk()?b->write(data,*len):-1;
     if (res<0) {
         *len = 0;
-        return svn_error_create(SVN_ERR_MALFORMED_FILE,0L,b->lastError().utf8());
+        return svn_error_create(SVN_ERR_MALFORMED_FILE,0L,b->lastError().TOUTF8());
     }
     *len = res;
     return SVN_NO_ERROR;
@@ -109,6 +109,16 @@ SvnStream::SvnStream()
 SvnStream::~SvnStream()
 {
     delete m_Data;
+}
+
+int SvnStream::cancelElapsed()const
+{
+    return m_Data->cancel_timeout.elapsed();
+}
+
+void SvnStream::cancelTimeReset()
+{
+    m_Data->cancel_timeout.restart();
 }
 
 SvnStream::operator svn_stream_t* ()const

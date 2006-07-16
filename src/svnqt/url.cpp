@@ -27,6 +27,11 @@
 #endif
 
 
+// svncpp
+#include "pool.hpp"
+#include "url.hpp"
+#include "svncpp_defines.hpp"
+
 #include <qglobal.h>
 #if QT_VERSION < 0x040000
 #include <qvaluelist.h>
@@ -36,11 +41,6 @@
 
 // subversion api
 #include "svn_ra.h"
-
-// svncpp
-#include "pool.hpp"
-#include "url.hpp"
-
 
 namespace svn
 {
@@ -71,7 +71,7 @@ namespace svn
     unsigned int index = 0;
     while (VALID_SCHEMAS[index]!=0)
     {
-      QString schema = QString::fromUtf8(VALID_SCHEMAS[index]);
+      QString schema = QString::FROMUTF8(VALID_SCHEMAS[index]);
       QString urlComp = urlTest.mid(0, schema.length());
 
       if (schema == urlComp)

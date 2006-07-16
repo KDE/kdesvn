@@ -208,8 +208,8 @@ bool ContextData::retrieveLogin (const char * username_,
     if (listener == 0)
         return false;
 
-    username = QString::fromUtf8(username_);
-    ok = listener->contextGetLogin(QString::fromUtf8(realm),username, password, may_save);
+    username = QString::FROMUTF8(username_);
+    ok = listener->contextGetLogin(QString::FROMUTF8(realm),username, password, may_save);
 
     return ok;
 }
@@ -468,7 +468,7 @@ svn_error_t * ContextData::onSslClientCertPwPrompt(
 
     QString password;
     bool may_save = maySave != 0;
-    if (!data->listener->contextSslClientCertPwPrompt (password, QString::fromUtf8(realm), may_save))
+    if (!data->listener->contextSslClientCertPwPrompt (password, QString::FROMUTF8(realm), may_save))
         return data->generate_cancel_error();
 
     svn_auth_cred_ssl_client_cert_pw_t *cred_ =
@@ -500,7 +500,7 @@ void ContextData::reset()
 
 svn_error_t * ContextData::generate_cancel_error()
 {
-    return svn_error_create (SVN_ERR_CANCELLED, 0, listener->translate(QString::fromUtf8("Cancelled by user.")).TOUTF8());
+    return svn_error_create (SVN_ERR_CANCELLED, 0, listener->translate(QString::FROMUTF8("Cancelled by user.")).TOUTF8());
 }
 
 }

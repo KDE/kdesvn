@@ -41,7 +41,7 @@ namespace svn
 {
   Path::Path (const char * path)
   {
-    init(QString::fromUtf8(path));
+    init(QString::FROMUTF8(path));
   }
 
   Path::Path (const QString & path)
@@ -68,7 +68,7 @@ namespace svn
             int_path = svn_path_uri_encode(int_path,pool);
         }
       }
-      m_path = QString::fromUtf8(int_path);
+      m_path = QString::FROMUTF8(int_path);
     }
   }
 
@@ -108,7 +108,7 @@ namespace svn
     {
       const char * newPath =
           svn_path_url_add_component (m_path.TOUTF8(), component.TOUTF8(), pool);
-      m_path = QString::fromUtf8(newPath);
+      m_path = QString::FROMUTF8(newPath);
     }
     else
     {
@@ -118,7 +118,7 @@ namespace svn
       svn_path_add_component (pathStringbuf,
                               component.TOUTF8());
 
-      m_path = QString::fromUtf8(pathStringbuf->data);
+      m_path = QString::FROMUTF8(pathStringbuf->data);
     }
   }
 
@@ -126,7 +126,7 @@ namespace svn
   void
   Path::addComponent (const char* component)
   {
-    addComponent (QString::fromUtf8(component));
+    addComponent (QString::FROMUTF8(component));
   }
 
 
@@ -139,8 +139,8 @@ namespace svn
     const char * cbasename;
 
     svn_path_split (m_path.TOUTF8(), &cdirpath, &cbasename, pool);
-    dirpath = QString::fromUtf8(cdirpath);
-    basename = QString::fromUtf8(cbasename);
+    dirpath = QString::FROMUTF8(cdirpath);
+    basename = QString::FROMUTF8(cbasename);
   }
 
 
@@ -297,7 +297,7 @@ end:
   {
     Pool pool;
 
-    return QString::fromUtf8(svn_path_local_style (m_path.TOUTF8(), pool));
+    return QString::FROMUTF8(svn_path_local_style (m_path.TOUTF8(), pool));
   }
 
 }

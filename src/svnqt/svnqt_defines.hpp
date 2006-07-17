@@ -33,7 +33,6 @@
 #define SVNQT_EXPORT
 #define SVNQT_NOEXPORT
 #endif
-#endif
 
 // qt
 #include <qglobal.h>
@@ -42,6 +41,8 @@
 #define TOUTF8 local8Bit
 #define FROMUTF8 fromLocal8Bit
 #else
-#define TOUTF8 toUtf8
-#define FROMUTF8 fromUtf8
+#define TOUTF8 toLocal8Bit
+#define FROMUTF8 fromLocal8Bit
+#endif
+
 #endif

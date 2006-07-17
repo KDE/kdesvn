@@ -25,17 +25,27 @@ namespace svn {
 
 namespace stream {
 
+#if QT_VERSION < 0x040000
+typedef int openmode;
+#define READONLY IO_ReadOnly
+#define WRITEONLY IO_WriteOnly
+#else
+typedef QIODevice::OpenMode openmode;
+#define READONLY QIODevice::ReadOnly
+#define WRITEONLY QIODevice::WriteOnly
+#endif
+
 class SvnFileStream_private
 {
 public:
-    SvnFileStream_private(const QString&fn,int mode);
+    SvnFileStream_private(const QString&fn,openmode mode);
     virtual ~SvnFileStream_private();
 
     QString m_FileName;
     QFile m_File;
 };
 
-SvnFileStream_private::SvnFileStream_private(const QString&fn,int mode)
+SvnFileStream_private::SvnFileStream_private(const QString&fn,openmode mode)
     : m_FileName(fn),m_File(fn)
 {
     m_File.open(mode);
@@ -48,7 +58,7 @@ SvnFileStream_private::~SvnFileStream_private()
 SvnFileOStream::SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx)
     :SvnStream(false,true,ctx)
 {
-    m_FileData = new SvnFileStream_private(fn,IO_WriteOnly);
+    m_FileData = new SvnFileStream_private(fn,WRITEONLY);
     if (!m_FileData->m_File.isOpen()) {
         setError(m_FileData->m_File.errorString());
     }
@@ -81,7 +91,7 @@ long SvnFileOStream::write(const char* data, const unsigned long max)
 SvnFileIStream::SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx)
     :SvnStream(true,false,ctx)
 {
-    m_FileData = new SvnFileStream_private(fn,IO_ReadOnly);
+    m_FileData = new SvnFileStream_private(fn,READONLY);
     if (!m_FileData->m_File.isOpen()) {
         setError(m_FileData->m_File.errorString());
     }

@@ -26,7 +26,7 @@
 
 // svncpp
 #include "exception.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 

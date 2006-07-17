@@ -38,7 +38,7 @@
 
 #include "dirent.hpp"
 #include "exception.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 static int
 compare_items_as_paths (const svn_sort__item_t *a, const svn_sort__item_t *b)

@@ -34,7 +34,7 @@
 #include "path.hpp"
 #include "pool.hpp"
 #include "url.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 
 namespace svn

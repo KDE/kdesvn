@@ -43,7 +43,7 @@
 #include "targets.hpp"
 #include "info_entry.hpp"
 #include "url.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 #include "context_listener.hpp"
 
 namespace svn

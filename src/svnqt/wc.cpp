@@ -31,7 +31,7 @@
 #include "path.hpp"
 #include "pool.hpp"
 #include "wc.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 
 namespace svn
@@ -104,17 +104,17 @@ namespace svn
     const svn_wc_entry_t *entry;
     entry = getEntry( path );
     result = entry?QString::FROMUTF8(entry->url):"";
-    
+
     return result;
   }
-  
+
   QString Wc::getRepos(const QString&path) throw (ClientException)
   {
     QString result = "";
     const svn_wc_entry_t *entry;
     entry = getEntry( path );
     result = entry?QString::FROMUTF8(entry->repos):"";
-    
+
     return result;
   }
 }

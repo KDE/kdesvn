@@ -30,7 +30,7 @@
 // svncpp
 #include "pool.hpp"
 #include "url.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qglobal.h>
 #if QT_VERSION < 0x040000

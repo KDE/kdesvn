@@ -21,7 +21,7 @@
 
 #include "contextdata.h"
 #include "context_listener.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 #include <svn_config.h>
 

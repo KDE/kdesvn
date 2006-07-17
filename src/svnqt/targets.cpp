@@ -34,7 +34,7 @@
 #include "targets.hpp"
 #include "path.hpp"
 #include "pool.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstringlist.h>
 

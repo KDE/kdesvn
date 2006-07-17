@@ -27,7 +27,7 @@
 #define _SVNCPP_CLIENT_IMPL_H_
 
 #include "client.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 // Ignore MSVC 6 compiler warning: debug symbol truncated
 #if defined (_MSC_VER) && _MSC_VER <= 1200

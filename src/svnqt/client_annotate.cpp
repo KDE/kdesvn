@@ -31,7 +31,7 @@
 // Subversion api
 #include "svn_client.h"
 
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 
 namespace svn

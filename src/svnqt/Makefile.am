@@ -7,12 +7,12 @@ libsvnqt_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 4:0:2
 svnqtinclude_HEADERS = annotate_line.hpp apr.hpp check.hpp client.hpp \
 			context.hpp datetime.hpp dirent.hpp entry.hpp log_entry.hpp path.hpp pool.hpp \
 			revision.hpp status.hpp targets.hpp url.hpp wc.hpp version_check.hpp lock_entry.hpp \
-			info_entry.hpp svncpp_defines.hpp context_listener.hpp exception.hpp commititem.hpp \
-			repository.hpp repositorylistener.hpp svnstream.hpp
+			info_entry.hpp svnqt_defines.hpp context_listener.hpp exception.hpp commititem.hpp \
+			repository.hpp repositorylistener.hpp svnstream.hpp svnfilestream.hpp
 svnqtincludedir = $(includedir)/svnqt
 
-noinst_HEADERS = client_impl.hpp contextdata.h repositorydata.hpp \
-	svnfilestream.hpp
+noinst_HEADERS = client_impl.hpp contextdata.h repositorydata.hpp
+	
 
 libsvnqt_la_SOURCES = apr.cpp client_annotate.cpp client_cat.cpp client.cpp \
 		client_diff.cpp client_ls.cpp client_modify.cpp client_property.cpp client_status.cpp \

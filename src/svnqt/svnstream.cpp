@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "svnstream.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 #include "pool.hpp"
 #include "apr.hpp"
 

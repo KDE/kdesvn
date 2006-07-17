@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef _SVNCPP_DEFINES_H
-#define _SVNCPP_DEFINES_H
+#ifndef _SVNQT_DEFINES_H
+#define _SVNQT_DEFINES_H
 
 // config
 #ifdef HAVE_CONFIG_H

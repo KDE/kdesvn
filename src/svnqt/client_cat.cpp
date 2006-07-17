@@ -35,7 +35,7 @@
 #include "exception.hpp"
 #include "pool.hpp"
 #include "status.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 #include "svnstream.hpp"
 #include "svnfilestream.hpp"
 

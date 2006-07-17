@@ -26,7 +26,7 @@
 // svncpp
 #include "dirent.hpp"
 #include "lock_entry.hpp"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 

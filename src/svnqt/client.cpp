@@ -30,7 +30,7 @@
 #include "client.hpp"
 #include "client_impl.hpp"
 #include "svn_opt.h"
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 namespace svn
 {

@@ -36,7 +36,7 @@
 #pragma warning (disable: 4290)
 #endif
 
-#include "svncpp_defines.hpp"
+#include "svnqt_defines.hpp"
 
 // qt
 #include <qglobal.h>

@@ -31,8 +31,27 @@
 #include "svn_opt.h"
 #include "svnqt_defines.hpp"
 
+#include <svn_cmdline.h>
+
 namespace svn
 {
+
+  namespace internal {
+    class SvnInit
+    {
+    public:
+        SvnInit();
+        ~SvnInit(){};
+    };
+
+    SvnInit::SvnInit() {
+        svn_cmdline_init("svnqt",0);
+    }
+
+    static SvnInit sInit;
+  }
+
+
   Client_impl::Client_impl (Context * context)
 	: Client()
   {

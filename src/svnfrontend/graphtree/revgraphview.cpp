@@ -163,7 +163,7 @@ void RevGraphView::endInsert()
 
 void RevGraphView::readDotOutput(KProcess*,char *   buffer,int   buflen)
 {
-    dotOutput+=QString::fromLatin1(buffer, buflen);
+    dotOutput+=QString::fromLocal8Bit(buffer, buflen);
 }
 
 void RevGraphView::dotExit(KProcess*p)
@@ -188,7 +188,7 @@ void RevGraphView::dotExit(KProcess*p)
         if (line.isEmpty()) continue;
         QTextStream lineStream(line, IO_ReadOnly);
         lineStream >> cmd;
-        if (cmd == "stop") break;
+        if (cmd == "stop") {break; }
 
         if (cmd == "graph") {
             lineStream >> scale >> dotWidth >> dotHeight;
@@ -480,6 +480,7 @@ void RevGraphView::dumpRevtree()
     }
     *stream << "}\n"<<flush;
     renderProcess = new KProcess();
+    renderProcess->setEnvironment("LANG","C");
     *renderProcess << "dot";
     *renderProcess << dotTmpFile->name() << "-Tplain";
     connect(renderProcess,SIGNAL(processExited(KProcess*)),this,SLOT(dotExit(KProcess*)));

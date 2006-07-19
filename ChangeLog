@@ -1,3 +1,7 @@
+version 0.9.1
+    * fix: subversion were never initialized - it was the reason that with some locale "diff" failed
+    * fix: (buildsystem) missing libs added
+
 version 0.9.0
     * Partial revision tree implemented
     * only one context menu for konqueror due problems with KDE dcop call for getting the dynamic menue entries

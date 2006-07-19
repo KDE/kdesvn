@@ -3,7 +3,7 @@
 # the error to ian geiser <geiseri@msoe.edu>
 Summary:   A subversion client for the KDE with KIO integration.
 Name:      kdesvn
-Version:   0.9.0
+Version:   0.9.1
 Release:   1%{?dist}
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>

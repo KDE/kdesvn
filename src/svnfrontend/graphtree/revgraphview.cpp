@@ -212,8 +212,13 @@ void RevGraphView::dotExit(KProcess*p)
         }
         if (cmd=="node") {
             QString nodeName, label;
+            QString _x,_y,_w,_h;
             double x, y, width, height;
-            lineStream >> nodeName >> x >> y >> width >> height;
+            lineStream >> nodeName >> _x >> _y >> _w >> _h;
+            x=_x.toDouble();
+            y=_y.toDouble();
+            width=_w.toDouble();
+            height=_h.toDouble();
             // better here 'cause dot may scramble utf8 labels so we regenerate it better
             // and do not read it in.
             label = getLabelstring(nodeName);
@@ -232,6 +237,7 @@ void RevGraphView::dotExit(KProcess*p)
             m_NodeList[nodeName]=t;
         } else {
             QString node1Name, node2Name, label;
+            QString _x,_y;
             double x, y;
             QPointArray pa;
             int points, i;
@@ -240,7 +246,9 @@ void RevGraphView::dotExit(KProcess*p)
             pa.resize(points);
             for (i=0;i<points;++i) {
                 if (lineStream.atEnd()) break;
-                lineStream >> x >> y;
+                lineStream >> _x >> _y;
+                x=_x.toDouble();
+                y=_y.toDouble();
                 int xx = (int)(scaleX * x + _xMargin);
                 int yy = (int)(scaleY * (dotHeight - y) + _yMargin);
 

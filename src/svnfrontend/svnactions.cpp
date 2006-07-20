@@ -274,12 +274,43 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
 
 void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
 {
+    svn::Revision peg= svn::Revision::UNDEFINED;
+    QString url;
+    if (!svn::Url::isValid(which)) {
+        // working copy
+        // url = svn::Wc::getUrl(what);
+        url = which;
+        peg = svn::Revision::UNDEFINED;
+    } else {
+        KURL _uri = which;
+        QString prot = svn::Url::transformProtokoll(_uri.protocol());
+        _uri.setProtocol(prot);
+        url = _uri.prettyURL();
+        peg = start;
+    }
+    kdDebug()<<"Getting info " << url << endl;
+    svn::InfoEntries e;
+
+    try {
+        e = (m_Data->m_Svnclient->info(url,false,start,peg));
+    } catch (svn::ClientException ce) {
+        kdDebug()<<ce.msg() << endl;
+        emit clientException(ce.msg());
+        return;
+    }
+    if (e.count()<1||e[0].reposRoot().isEmpty()) {
+        kdDebug()<<"No info found" << endl;
+        emit clientException(i18n("Got no info."));
+        return;
+    }
+    QString reposRoot = e[0].reposRoot();
+
     const svn::LogEntries * logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;
     SvnLogDlgImp disp(this);
-    disp.dispLog(logs,which);
-    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)),
-            this,SLOT(makeDiff(const QString&,const svn::Revision&,const svn::Revision&)));
+    disp.dispLog(logs,e[0].url().mid(reposRoot.length()),reposRoot);
+    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&)),
+            this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&)));
     disp.exec();
     disp.saveSize();
     delete logs;
@@ -839,7 +870,7 @@ void SvnActions::procClosed(KProcess*proc)
 void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,const svn::Revision&end)
 {
     if (!m_Data->m_CurrentContext) return;
-    QString ex = "";
+    QString ex="";
     KTempDir tdir;
     tdir.setAutoDelete(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
@@ -849,10 +880,13 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         for (unsigned int i = 0; i < which.count();++i) {
-            ex += m_Data->m_Svnclient->diff(tmpPath,
+            QByteArray eb = m_Data->m_Svnclient->diff(tmpPath,
                 svn::Path(which[i]),
                 start, end,
                 true,false,false,ignore_content);
+            if (eb.size()>0) {
+                ex+=QString::fromLocal8Bit(eb,eb.size());
+            }
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
@@ -863,7 +897,7 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
         emit clientException(i18n("No difference to display"));
         return;
     }
-    dispDiff(QString::fromLocal8Bit(ex));
+    dispDiff(ex);
 }
 
 /*!
@@ -900,7 +934,7 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
         return;
     }
 
-    dispDiff(QString::fromLocal8Bit(ex));
+    dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
@@ -929,7 +963,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         return;
     }
 
-    dispDiff(QString::fromLocal8Bit(ex));
+    dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void SvnActions::dispDiff(const QString&ex)

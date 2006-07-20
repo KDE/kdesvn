@@ -55,11 +55,16 @@ public:
     void showChangedEntries(KListView*);
     unsigned int numChangedEntries(){return changedPaths.count();}
     void setChangedEntries(const svn::LogEntry&);
+    void setRealName(const QString&_n){_realName=_n;}
+    const QString&realName()const{return _realName;}
+
+    bool copiedFrom(QString&_n,long&rev)const;
+    static bool isParent(const QString&_par,const QString&tar);
 
 protected:
     svn_revnum_t _revision;
     QDateTime fullDate;
-    QString _message;
+    QString _message,_realName;
     QValueList<svn::LogChangePathEntry> changedPaths;
 };
 
@@ -69,7 +74,7 @@ const int LogListViewItem::COL_DATE = 3;
 const int LogListViewItem::COL_MSG = 4;
 
 LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
-    : INHERITED(_parent)
+    : INHERITED(_parent),_realName(QString::null)
 {
     setMultiLinesEnabled(false);
     _revision=_entry.revision;
@@ -87,6 +92,7 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
     changedPaths = _entry.changedPaths;
     //setText(COL_MSG,_entry.message.c_str());
 }
+
 const QString&LogListViewItem::message()const
 {
     return _message;
@@ -125,6 +131,33 @@ void LogListViewItem::setChangedEntries(const svn::LogEntry&_entry)
     changedPaths = _entry.changedPaths;
 }
 
+bool LogListViewItem::copiedFrom(QString&_n,long&_rev)const
+{
+    for (unsigned i = 0; i < changedPaths.count();++i) {
+        if (changedPaths[i].action=='A' &&
+            !changedPaths[i].copyFromPath.isEmpty() &&
+            isParent(changedPaths[i].path,_realName)) {
+            kdDebug()<<_realName<< " - " << changedPaths[i].path << endl;
+            QString tmpPath = _realName;
+            QString r = _realName.mid(changedPaths[i].path.length());
+            _n=changedPaths[i].copyFromPath;
+            _n+=r;
+            _rev = changedPaths[i].copyFromRevision;
+            kdDebug()<<"Found switch from  "<< changedPaths[i].copyFromPath << " rev "<<changedPaths[i].copyFromRevision<<endl;
+            kdDebug()<<"Found switch from  "<< _n << " rev "<<_rev<<endl;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool LogListViewItem::isParent(const QString&_par,const QString&tar)
+{
+    if (_par==tar) return true;
+    QString par = _par+(_par.endsWith("/")?"":"/");
+    return tar.startsWith(par);
+}
+
 SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     :SvnLogDialogData(parent, name),_name("")
 {
@@ -142,13 +175,34 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     m_Actions = ac;
 }
 
-void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what)
+void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what,const QString&root)
 {
     if (!_log) return;
+    _base = root;
+    kdDebug()<<"What: "<<what << endl;
     svn::LogEntries::const_iterator lit;
     LogListViewItem * item;
+    QMap<long int,QString> namesMap;
+    QMap<long int,LogListViewItem*> itemMap;
+    long min,max;
+    min = max = -1;
     for (lit=_log->begin();lit!=_log->end();++lit) {
         item = new LogListViewItem(m_LogView,*lit);
+        if ((*lit).revision>max) max = (*lit).revision;
+        if ((*lit).revision<min || min == -1) min = (*lit).revision;
+        itemMap[(*lit).revision]=item;
+    }
+    itemMap[max]->setRealName(what);
+    QString bef = what;
+    long rev;
+    for (long c=max;c>-1;--c) {
+        if (!itemMap.contains(c)) {
+            continue;
+        }
+        if (itemMap[c]->realName().isEmpty()) {
+            itemMap[c]->setRealName(bef);
+        }
+        itemMap[c]->copiedFrom(bef,rev);
     }
     _name = what;
 }
@@ -204,7 +258,10 @@ void SvnLogDlgImp::slotDispPrevious()
         m_DispPrevButton->setEnabled(false);
         return;
     }
-    emit makeDiff(_name,p->rev(),k->rev());
+    QString s,e;
+    s = _base+k->realName();
+    e = _base+p->realName();
+    emit makeDiff(e,p->rev(),s,k->rev());
 }
 
 
@@ -271,7 +328,7 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
 void SvnLogDlgImp::slotDispSelected()
 {
     if (!m_first || !m_second) return;
-    emit makeDiff(_name,m_first->rev(),m_second->rev());
+    emit makeDiff(_base+m_first->realName(),m_first->rev(),_base+m_second->realName(),m_second->rev());
 }
 
 void SvnLogDlgImp::slotListEntries()

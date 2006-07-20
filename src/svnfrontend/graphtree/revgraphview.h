@@ -93,6 +93,7 @@ public slots:
     virtual void contentsMovingSlot(int,int);
     virtual void zoomRectMoved(int,int);
     virtual void zoomRectMoveFinished();
+    virtual void slotClientException(const QString&what);
 
 protected slots:
     virtual void readDotOutput(KProcess *   proc,char *   buffer,int   buflen);

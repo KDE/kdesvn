@@ -32,6 +32,7 @@
 #include <kprocess.h>
 #include <klocale.h>
 #include <kfiledialog.h>
+#include <kmessagebox.h>
 
 #include <qtooltip.h>
 #include <qwmatrix.h>
@@ -931,7 +932,11 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
             sr, tr,
             false,false,false,ignore_content);
     } catch (svn::ClientException e) {
-//        emit clientException(e.msg());
+        slotClientException(e.msg());
+        return;
+    }
+    if (ex.isEmpty()) {
+        slotClientException(i18n("No difference to display"));
         return;
     }
     emit dispDiff(QString::fromLocal8Bit(ex,ex.size()));
@@ -940,6 +945,11 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
 void RevGraphView::setBasePath(const QString&_path)
 {
     _basePath = _path;
+}
+
+void RevGraphView::slotClientException(const QString&what)
+{
+    KMessageBox::sorry(KApplication::activeModalWidget(),what,i18n("SVN Error"));
 }
 
 #include "revgraphview.moc"

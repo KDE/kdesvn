@@ -33,12 +33,12 @@ class SvnLogDlgImp: public SvnLogDialogData {
 Q_OBJECT
 public:
     SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
-    void dispLog(const svn::LogEntries*,const QString&);
+    void dispLog(const svn::LogEntries*,const QString&,const QString&);
     void saveSize();
     QSize dialogSize();
 
 signals:
-    void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
+    void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
 
 protected slots:
     virtual void slotSelectionChanged(QListViewItem*);
@@ -48,6 +48,7 @@ protected slots:
     virtual void slotItemClicked(int,QListViewItem*,const QPoint &,int);
 protected:
     QString _name;
+    QString _base;
     static const char* groupName;
     LogListViewItem *m_first,*m_second;
     SvnActions*m_Actions;

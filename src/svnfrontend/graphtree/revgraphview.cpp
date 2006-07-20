@@ -934,7 +934,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
 //        emit clientException(e.msg());
         return;
     }
-    emit dispDiff(QString::fromUtf8(ex));
+    emit dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void RevGraphView::setBasePath(const QString&_path)

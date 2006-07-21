@@ -192,9 +192,13 @@ void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what,const
         if ((*lit).revision<min || min == -1) min = (*lit).revision;
         itemMap[(*lit).revision]=item;
     }
-    itemMap[max]->setRealName(what);
+    if (itemMap.count()==0) {
+        return;
+    }
     QString bef = what;
     long rev;
+    // YES! I'd checked it: this is much faster than getting list of keys
+    // and iterating over that list!
     for (long c=max;c>-1;--c) {
         if (!itemMap.contains(c)) {
             continue;

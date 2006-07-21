@@ -1,6 +1,7 @@
 version 0.9.1
     * fix: subversion were never initialized - it was the reason that with some locale "diff" failed
     * fix: (buildsystem) missing libs added
+    * diffs from within logviewer works across pathchanges
 
 version 0.9.0
     * Partial revision tree implemented

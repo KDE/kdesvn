@@ -52,7 +52,7 @@ QString CheckoutInfo_impl::reposURL()
     } else {
         uri.setProtocol(proto);
     }
-    return uri.url();
+    return uri.prettyURL();
 }
 
 QString CheckoutInfo_impl::targetDir()
@@ -87,7 +87,6 @@ void CheckoutInfo_impl::setTargetUrl(const QString&what)
 void CheckoutInfo_impl::setStartUrl(const QString&what)
 {
     KURL uri(what);
-    kdDebug()<<"What: "<<what << " URL: "<<uri<<endl;
     if (uri.protocol()=="file") {
         if (what.startsWith("file:")) {
             uri.setProtocol("ksvn+file");
@@ -103,7 +102,7 @@ void CheckoutInfo_impl::setStartUrl(const QString&what)
     } else if (uri.protocol()=="svn+ssh") {
         uri.setProtocol("ksvn+ssh");
     }
-    m_UrlEdit->setURL(uri.url());
+    m_UrlEdit->setURL(uri.prettyURL());
 }
 
 void CheckoutInfo_impl::disableForce(bool how)

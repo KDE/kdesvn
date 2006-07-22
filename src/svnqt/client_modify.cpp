@@ -47,9 +47,10 @@ namespace svn
   {
     Pool subPool;
     svn_revnum_t revnum = 0;
+    Path up(url);
     svn_error_t * error =
       svn_client_checkout2(&revnum,
-                           url.TOUTF8(),
+                           up.cstr(),
                            destPath.cstr(),
                            peg.revision(),
                            revision.revision (),

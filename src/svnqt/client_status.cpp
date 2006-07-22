@@ -297,12 +297,13 @@ namespace svn
                   bool detailed_remote,
                   const bool hide_externals) throw (ClientException)
   {
-    if (Url::isValid (path))
-      return remoteStatus (this, path, descend, get_all, update,
+    if (Url::isValid (path)) {
+        return remoteStatus (this, path, descend, get_all, update,
                            no_ignore,revision,m_context,detailed_remote);
-    else
+    } else {
       return localStatus (path, descend, get_all, update,
                           no_ignore, hide_externals, m_context);
+    }
   }
 
   static Status

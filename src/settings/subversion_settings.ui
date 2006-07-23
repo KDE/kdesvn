@@ -8,7 +8,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>339</width>
+            <width>345</width>
             <height>283</height>
         </rect>
     </property>
@@ -26,6 +26,9 @@
             <property name="text">
                 <string>Start check for updates when open a working copy</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Select if kdesvn should check for updates when open a working copy</string>
             </property>
@@ -36,6 +39,9 @@
             </property>
             <property name="text">
                 <string>Get file details while remote listing</string>
+            </property>
+            <property name="accel">
+                <string></string>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Whether getting details about items when making listing on repositories or not</string>
@@ -61,6 +67,9 @@
             <property name="text">
                 <string>Display ignored files</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
         </widget>
         <widget class="QCheckBox">
             <property name="name">
@@ -68,6 +77,12 @@
             </property>
             <property name="text">
                 <string>Store passwords for remote connections</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Should subversion store passwords in default</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Storing passwords is often a security problem. Kdesvn itself doesn't store any passwords, but the subversion itself inside the configuration area of subversion. If this area is readable from others you should not set it, but you may select for single non critical accounts inside the authentication dialog.</string>
             </property>
         </widget>
         <widget class="QCheckBox">
@@ -77,6 +92,9 @@
             <property name="text">
                 <string>Log follows node changes</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
         </widget>
         <widget class="QCheckBox">
             <property name="name">
@@ -85,6 +103,12 @@
             <property name="text">
                 <string>Logs always reads list of changed files</string>
             </property>
+            <property name="toolTip" stdset="0">
+                <string>Read detailed change lists</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Reading lists of changed files may sometimes a little bit slow down things. But if this feature is switched off, kdesvn may fail generating differences between nodechanges from within the logviewer.</string>
+            </property>
         </widget>
         <widget class="QCheckBox">
             <property name="name">
@@ -92,6 +116,9 @@
             </property>
             <property name="text">
                 <string>Review items before commit</string>
+            </property>
+            <property name="accel">
+                <string></string>
             </property>
             <property name="toolTip" stdset="0">
                 <string>List items next commit will send or not</string>

@@ -81,7 +81,11 @@ long SvnFileOStream::write(const char* data, const unsigned long max)
     if (!m_FileData->m_File.isOpen()) {
         return -1;
     }
+#if QT_VERSION < 0x040000
     long res = m_FileData->m_File.writeBlock(data,max);
+#else
+    long res = m_FileData->m_File.write(data,max);
+#endif
     if (res<0) {
         setError(m_FileData->m_File.errorString());
     }
@@ -114,7 +118,11 @@ long SvnFileIStream::read(char* data, const unsigned long max)
     if (!m_FileData->m_File.isOpen()) {
         return -1;
     }
+#if QT_VERSION < 0x040000
     long res = m_FileData->m_File.readBlock(data,max);
+#else
+    long res = m_FileData->m_File.read(data,max);
+#endif
     if (res<0) {
         setError(m_FileData->m_File.errorString());
     }

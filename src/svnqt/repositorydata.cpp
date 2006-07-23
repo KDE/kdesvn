@@ -130,7 +130,11 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
 {
     Close();
     const char* _type;
+#if QT_VERSION < 0x040000
     if (fstype.lower()=="bdb") {
+#else
+    if (fstype.toLower()=="bdb") {
+#endif
         _type="bdb";
     } else {
         _type="fsfs";

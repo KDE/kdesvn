@@ -179,10 +179,10 @@ namespace svn
 #if QT_VERSION < 0x040000
     if (!fi.open(IO_ReadOnly|IO_Raw)) {
 #else
-    if (!fi.open(QIODevice::IO_ReadOnly)) {
+    if (!fi.open(QIODevice::ReadOnly)) {
 #endif
         diffCleanup (outfile, outfileName, errfile, errfileName, pool);
-        fail(pool,0,fi.errorString()+"'%s'",outfileName);
+        fail(pool,0,fi.errorString().TOUTF8() + "'%s'",outfileName);
     }
 
     QByteArray res = fi.readAll();

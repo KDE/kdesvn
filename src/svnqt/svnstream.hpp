@@ -83,7 +83,9 @@ protected:
     //! set the internal error
     /*! \param ioError error code from QIODevide::status
      */
+#if QT_VERSION < 0x040000
     virtual void setError(int ioError)const;
+#endif
 
 protected:
     int cancelElapsed()const;

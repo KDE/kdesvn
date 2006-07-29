@@ -2,7 +2,7 @@ PROJECT(svnqt)
 SET(QT_QMAKE_EXECUTABLE qmake-qt4)
 SET(QT_MOC_EXECUTABLE moc-qt4)
 SET(QT_UIC_EXECUTABLE uic-qt4)
-SET(CMAKE_INSTALL_PREFIX /home/ral/svnqttest)
+SET(CMAKE_INSTALL_PREFIX /usr)
 
 include(${CMAKE_ROOT}/Modules/FindQt4.cmake)
 include(${CMAKE_SOURCE_DIR}/../cmakemodules/FindSubversion.cmake)

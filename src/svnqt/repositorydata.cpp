@@ -22,6 +22,7 @@
 #include "exception.hpp"
 #include "repositorylistener.hpp"
 #include "svnfilestream.hpp"
+#include "svninit.hpp"
 
 #include <svn_fs.h>
 #include <svn_path.h>
@@ -61,6 +62,7 @@ long RepoOutStream::write(const char*data,const unsigned long max)
 
 RepositoryData::RepositoryData(RepositoryListener*aListener)
 {
+    svn::internal::SvnInit::initsvn();
     m_Repository = 0;
     m_Listener = aListener;
 }

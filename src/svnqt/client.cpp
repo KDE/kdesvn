@@ -32,8 +32,26 @@
 #include "svn_opt.h"
 #include "svnqt_defines.hpp"
 
+#include "svninit.hpp"
+
+#include <svn_cmdline.h>
+
 namespace svn
 {
+
+namespace internal {
+    SvnInit::SvnInit()
+    {
+        svn_cmdline_init("svnqt",0);
+    }
+
+    void SvnInit::initsvn()
+    {
+        //with that trick wie make sure that initialize is called only once!
+        static SvnInit sInit;
+    }
+}
+
   Client::Client()
   {
   }
@@ -44,6 +62,7 @@ namespace svn
 
   Client*Client::getobject(Context * context,int subtype)
   {
+    svn::internal::SvnInit::initsvn();
     switch(subtype) {
       case 0:
        return new Client_impl(context);

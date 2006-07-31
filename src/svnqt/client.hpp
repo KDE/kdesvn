@@ -129,7 +129,10 @@ namespace svn
     setContext (Context * context = NULL) = 0;
 
     /**
-     * get a real instance. Result must cleaned with delete.
+     * get a real instance. Result must cleaned with delete. Make sure you call it at least once within a software, this method
+     * will initalize the subversion-lib, too.<br>
+     * When you just tried to initialize the lib, you may give -1 as subtype parameter, than it will return 0L but call the
+     * initialize of lib.
      * \param context The context to use
      * \param subtype the wanted implementation - this moment only 0 allowed.
      * \return an instance of client or 0L if error.

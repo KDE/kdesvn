@@ -31,8 +31,32 @@
 #include "svn_opt.h"
 #include "svnqt_defines.hpp"
 
+#include <svn_cmdline.h>
+
 namespace svn
 {
+  //! this namespace contains only internal stuff not for public use
+  namespace internal {
+    //! small helper class
+    /*!
+        There will be an static instance created for calling the constructor at program load.
+     */
+    class SvnInit
+    {
+    public:
+        //! constructor calling initialize functions
+        SvnInit();
+        ~SvnInit(){};
+    };
+
+    SvnInit::SvnInit() {
+        svn_cmdline_init("svnqt",0);
+    }
+
+    static SvnInit sInit;
+  }
+
+
   Client_impl::Client_impl (Context * context)
 	: Client()
   {

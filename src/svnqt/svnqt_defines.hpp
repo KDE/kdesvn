@@ -38,11 +38,11 @@
 #include <qglobal.h>
 
 #if QT_VERSION < 0x040000
-#define TOUTF8 local8Bit
-#define FROMUTF8 fromLocal8Bit
+#define TOUTF8 utf8
+#define FROMUTF8 fromUtf8
 #else
-#define TOUTF8 toLocal8Bit
-#define FROMUTF8 fromLocal8Bit
+#define TOUTF8 toUtf8
+#define FROMUTF8 fromUtf8
 #endif
 
 #endif

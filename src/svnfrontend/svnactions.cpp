@@ -886,7 +886,7 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
                 start, end,
                 true,false,false,ignore_content);
             if (eb.size()>0) {
-                ex+=QString::FROMUTF8(eb,eb.size());
+                ex+=QString::fromLocal8Bit(eb,eb.size());
             }
         }
     } catch (svn::ClientException e) {
@@ -934,7 +934,7 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
         emit clientException(i18n("No difference to display"));
         return;
     }
-    dispDiff(QString::FROMUTF8(ex,ex.size()));
+    dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
@@ -963,7 +963,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         return;
     }
 
-    dispDiff(QString::FROMUTF8(ex,ex.size()));
+    dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void SvnActions::dispDiff(const QString&ex)

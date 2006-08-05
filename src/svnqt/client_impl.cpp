@@ -50,7 +50,20 @@ namespace svn
     };
 
     SvnInit::SvnInit() {
+        qDebug("SvnInit::SvnInit()");
         svn_cmdline_init("svnqt",0);
+        char * lc = ::getenv("LC_ALL");
+        if (lc) {
+            qDebug("LC = %s",lc);
+        }
+        lc = ::getenv("LC_TYPE");
+        if (lc) {
+            qDebug("LC_TYPE = %s",lc);
+        }
+        lc = ::getenv("LANG");
+        if (lc) {
+            qDebug("LANG = %s",lc);
+        }
     }
 
     static SvnInit sInit;

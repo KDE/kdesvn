@@ -20,7 +20,7 @@
 #ifndef CREATEREPO_IMPL_H
 #define CREATEREPO_IMPL_H
 
-#include "src/svnfrontend/createrepo_dlg.h"
+#include "createrepo_dlg.h"
 
 class Createrepo_impl: public CreateRepo_Dlg {
     Q_OBJECT

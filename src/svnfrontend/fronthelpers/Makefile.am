@@ -1,4 +1,4 @@
-INCLUDES = -I$(top_srcdir)/src $(all_includes)
+INCLUDES = -I$(top_srcdir)/src -I$(top_builddir)/src/svnfrontend/fronthelpers $(all_includes)
 METASOURCES = AUTO
 
 noinst_LTLIBRARIES = libsvnfrontend_helpers.la

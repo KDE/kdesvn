@@ -20,7 +20,7 @@
 #ifndef HOTCOPYDLG_IMPL_H
 #define HOTCOPYDLG_IMPL_H
 
-#include "src/svnfrontend/hotcopydlg.h"
+#include "hotcopydlg.h"
 
 class HotcopyDlg_impl: public HotcopyDlg {
 Q_OBJECT

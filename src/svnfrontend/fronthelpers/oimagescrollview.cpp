@@ -610,3 +610,6 @@ void OImageScrollView::setImageScaledLoaded(bool how)
 
 } // namespace MM
 } // namespace Opie
+
+#include "oimagescrollview.moc"
+

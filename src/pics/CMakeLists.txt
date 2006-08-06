@@ -1,0 +1,2 @@
+KDESVN_INSTALL_ICONS(hicolor)
+

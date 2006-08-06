@@ -229,3 +229,5 @@ void OImageZoomer::mouseMoveEvent( QMouseEvent* ev ) {
 
 }
 }
+
+#include "oimagezoomer.moc"

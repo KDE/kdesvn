@@ -20,7 +20,7 @@
 #ifndef DUMPREPO_IMPL_H
 #define DUMPREPO_IMPL_H
 
-#include "src/svnfrontend/dumprepo_dlg.h"
+#include "dumprepo_dlg.h"
 
 class DumpRepo_impl: public DumpRepoDlg {
 Q_OBJECT

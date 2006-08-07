@@ -45,6 +45,9 @@ FIND_LIBRARY(KDE3_DCOP_LIBRARY NAMES DCOP
 SET(KDE3_DATADIR share/apps CACHE STRING "KDE3-datadir (relative to install-prefix when not starting with \"/\")" )
 SET(KDE3_BINDIR bin CACHE STRING "KDE3-binarydir (relative to install-prefix when not starting with \"/\")" )
 
+# linker flags - must get checked
+SET(LINK_NO_UNDEFINED "-Wl,--no-undefined -Wl,--allow-shlib-undefined")
+
 # own macros
 MACRO(KDESVN_INSTALL_ICONS _theme)
 

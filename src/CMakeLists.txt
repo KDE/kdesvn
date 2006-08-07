@@ -27,7 +27,7 @@ TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsd
 	${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY})
 SET_TARGET_PROPERTIES(kdesvnpart
 	PROPERTIES
-	LINK_FLAGS "${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} -Wl,--no-undefined -Wl,--allow-shlib-undefined")
+	LINK_FLAGS "${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} ${LINK_NO_UNDEFINED}")
 
 
 

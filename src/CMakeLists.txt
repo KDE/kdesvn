@@ -1,9 +1,9 @@
 ADD_EXECUTABLE(kdesvnaskpass kdesvn-askpass.cpp)
 
 SET(kdesvnsrc main.cpp
-	kdesvn.cpp
-	urldlg.cpp
-	commandline.cpp)
+    kdesvn.cpp
+    urldlg.cpp
+    commandline.cpp)
 
 SET(partsrc
  kdesvn_part.cpp kdesvnview.cpp commandline_part.cpp)
@@ -24,10 +24,10 @@ ADD_EXECUTABLE(kdesvn ${kdesvnsrc})
 
 KDE3_ADD_KPART(kdesvnpart WITH_PREFIX ${partsrc})
 TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnqt
-	${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY})
+    ${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY})
 SET_TARGET_PROPERTIES(kdesvnpart
-	PROPERTIES
-	LINK_FLAGS "${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} ${LINK_NO_UNDEFINED}")
+    PROPERTIES
+    LINK_FLAGS "${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} ${LINK_NO_UNDEFINED}")
 
 
 
@@ -36,8 +36,11 @@ TARGET_LINK_LIBRARIES(kdesvn ${QT_AND_KDECORE_LIBS} ${KDE3_UI_LIBRARY} ${KDE3_PA
 
 INSTALL(TARGETS kdesvn kdesvnaskpass kdesvnpart
     RUNTIME DESTINATION ${KDE3_BINDIR}
-    LIBRARY DESTINATION lib/kde3)
+    LIBRARY DESTINATION lib/kde3
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE 
+                GROUP_READ GROUP_EXECUTE
+                WORLD_READ WORLD_EXECUTE)
 
 # the resources
-INSTALL(FILES kdesvnui.rc DESTINATION ${KDE3_DATADIR}/kdesvn)
-INSTALL(FILES kdesvn_part.rc DESTINATION ${KDE3_DATADIR}/kdesvnpart)
+INSTALL(FILES kdesvnui.rc DESTINATION ${KDE3_APPSDIR}/kdesvn)
+INSTALL(FILES kdesvn_part.rc DESTINATION ${KDE3_APPSDIR}/kdesvnpart)

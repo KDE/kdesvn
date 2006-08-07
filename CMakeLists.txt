@@ -33,5 +33,5 @@ SET(KDESVN_VERSION \"${VERSION}\")
 CONFIGURE_FILE(kdesvn-config.h.in config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
 
-SUBDIRS(src)
-
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(po)

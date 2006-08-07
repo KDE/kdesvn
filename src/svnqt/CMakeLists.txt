@@ -27,5 +27,9 @@ ADD_EXECUTABLE(testlink testmain.cpp)
 target_link_libraries(testlink svnqt)
 
 # install rules
-install_targets(/lib svnqt svnqt)
+INSTALL(TARGETS svnqt
+    LIBRARY DESTINATION lib
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE 
+                GROUP_READ GROUP_EXECUTE
+                WORLD_READ WORLD_EXECUTE)
 install_files(/include/svnqt FILES ${HEADERS})

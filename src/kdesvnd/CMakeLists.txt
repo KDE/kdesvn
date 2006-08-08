@@ -23,3 +23,15 @@ INSTALL(TARGETS kded_kdesvnd
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE 
                 GROUP_READ GROUP_EXECUTE
                 WORLD_READ WORLD_EXECUTE)
+
+SET(deskfile "kdesvn_subversion.desktop")
+
+ADD_CUSTOM_COMMAND(TARGET kded_kdesvnd
+    POST_BUILD
+	COMMAND "${kdesvn_SOURCE_DIR}/src/kdesvnd/test.kde.sh"
+	ARGS "${deskfile}.template"
+	DEPENDS "${deskfile}.template"
+	)
+
+INSTALL(FILES ${deskfile}
+    DESTINATION ${KDE3_APPSDIR}/konqueror/servicemenus)

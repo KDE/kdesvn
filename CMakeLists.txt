@@ -1,4 +1,5 @@
 PROJECT(kdesvn)
+SET(CMAKE_COLOR_MAKEFILE ON CACHE STRING "Enable/Disable color output during build.")
 include(${CMAKE_ROOT}/Modules/TestCXXAcceptsFlag.cmake)
 CHECK_CXX_ACCEPTS_FLAG("-fexceptions" CXX_EXCEPTION)
 CHECK_CXX_ACCEPTS_FLAG("-fstack-protector" CXX_PROTECTOR)

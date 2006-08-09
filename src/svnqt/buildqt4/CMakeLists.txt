@@ -1,3 +1,16 @@
+
+SET(QT_QMAKE_EXECUTABLE qmake-qt4)
+SET(QT_MOC_EXECUTABLE moc-qt4)
+SET(QT_UIC_EXECUTABLE uic-qt4)
+SET(CMAKE_INSTALL_PREFIX /usr)
+
+include(${CMAKE_ROOT}/Modules/FindQt4.cmake)
+include(${CMAKE_ROOT}/Modules/UseQt4.cmake)
+include(../cmakemodules/FindSubversion.cmake)
+
+MESSAGE("Qt: ${QT_LIBRARY_DIR}")
+MESSAGE("Qt: ${QT_QTCORE_LIBRARY}")
+
 SET(SOURCES
     ../apr.cpp
     ../client_annotate.cpp
@@ -14,6 +27,8 @@ SET(SOURCES
     ../repositorylistener.cpp ../svnstream.cpp ../svnfilestream.cpp)
 
 FILE(GLOB HEADERS ../*.hpp)
+
+INCLUDE_DIRECTORIES( ../ ${QT_INCLUDES} ${APU_INCLUDE_DIR} ${APR_INCLUDE_DIR} ${SUBVERSION_INCLUDE_DIR} )
 
 ADD_LIBRARY(svnqt-qt4 SHARED ${SOURCES} )
 SET_TARGET_PROPERTIES(svnqt-qt4 PROPERTIES SOVERSION 2 VERSION 2.2.2)

@@ -1,11 +1,7 @@
-PROJECT(svnqt)
-SET(QT_QMAKE_EXECUTABLE qmake-qt4)
-SET(QT_MOC_EXECUTABLE moc-qt4)
-SET(QT_UIC_EXECUTABLE uic-qt4)
 SET(CMAKE_INSTALL_PREFIX /usr)
 
 include(${CMAKE_ROOT}/Modules/FindQt4.cmake)
-include(${CMAKE_SOURCE_DIR}/../cmakemodules/FindSubversion.cmake)
+include(../cmakemodules/FindSubversion.cmake)
 
 MESSAGE("Qt: ${QT_LIBRARY_DIR}")
 MESSAGE("Qt: ${QT_QTCORE_LIBRARY}")
@@ -20,7 +16,10 @@ SET_TARGET_PROPERTIES(svnqt-qt4 PROPERTIES SOVERSION 2 VERSION 2.2.1)
 SET(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
 SET(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
 SET_TARGET_PROPERTIES(svnqt-qt4 PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS}")
-target_link_libraries(svnqt-qt4 ${QT_QTCORE_LIBRARY} ${SUBVERSION_CLIENTLIB} ${SUBVERSION_REPOSITORYLIB})
+target_link_libraries(svnqt-qt4 ${QT_QTCORE_LIBRARY} ${SUBVESION_ALL_LIBS})
+IF (WIN32)
+  target_link_libraries( svnqt-qt4 wsock32.lib )
+ENDIF (WIN32)
 
 # Just a small linking test
 ADD_EXECUTABLE(testlink testmain.cpp)

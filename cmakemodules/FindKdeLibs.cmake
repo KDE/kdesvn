@@ -1,5 +1,6 @@
 include(${CMAKE_ROOT}/Modules/FindQt3.cmake)
 include(${CMAKE_ROOT}/Modules/FindKDE3.cmake)
+include(${kdesvn_SOURCE_DIR}/cmakemodules/kdesvnMacros.cmake)
 
 FIND_LIBRARY(KDE3_UI_LIBRARY NAMES kdeui
   PATHS
@@ -86,53 +87,17 @@ ENDIF (NOT KDE3_ICONDIR)
 
 # linker flags - must get checked
 SET(LINK_NO_UNDEFINED "")
-  SET(lundef "-Wl,--no-undefined")
-IF(NOT DEFINED _NO_UNDEFINED)
-  TRY_COMPILE(_NO_UNDEFINED
-   ${CMAKE_BINARY_DIR}
-   ${CMAKE_ROOT}/Modules/DummyCXXFile.cxx
-   CMAKE_FLAGS -DCMAKE_EXE_LINKER_FLAGS="${lundef}"
-   OUTPUT_VARIABLE LOUTPUT)
-   IF (_NO_UNDEFINED)
-      MESSAGE(STATUS "Checking to see if CXX compiler accepts flag ${lundef} - yes")
-      FILE(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeOutput.log
-        "Determining if the CXX compiler accepts the flag ${lundef} passed with "
-        "the following output:\n${LOUTPUT}\n\n")
-   ELSE (_NO_UNDEFINED)
-      MESSAGE(STATUS "Checking to see if CXX compiler accepts flag ${lundef} - no")
-      FILE(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log
-        "Determining if the CXX compiler accepts the flag ${lundef} failed with "
-        "the following output:\n${LOUTPUT}\n\n")
-	  SET(LINK_NO_UNDEFINED "")
-   ENDIF (_NO_UNDEFINED)
-ENDIF(NOT DEFINED _NO_UNDEFINED)
-   IF (_NO_UNDEFINED)
-	  SET(LINK_NO_UNDEFINED "${lundef}")
-   ENDIF (_NO_UNDEFINED)
+SET(lundef "-Wl,--no-undefined")
+KDESVN_CHECK_LINK_FLAG(${lundef} _NO_UNDEFINED)
+IF (_NO_UNDEFINED)
+    SET(LINK_NO_UNDEFINED "${lundef}")
+ENDIF (_NO_UNDEFINED)
 
-  SET(lundef "-Wl,--allow-shlib-undefined")
-IF(NOT DEFINED _ALLOW_SHLIB)
-  TRY_COMPILE(_ALLOW_SHLIB
-   ${CMAKE_BINARY_DIR}
-   ${CMAKE_ROOT}/Modules/DummyCXXFile.cxx
-   CMAKE_FLAGS -DCMAKE_EXE_LINKER_FLAGS="${lundef}"
-   OUTPUT_VARIABLE LOUTPUT)
-   IF (_ALLOW_SHLIB)
-      MESSAGE(STATUS "Checking to see if CXX compiler accepts flag ${lundef} - yes")
-      FILE(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeOutput.log
-        "Determining if the CXX compiler accepts the flag ${lundef} passed with "
-        "the following output:\n${LOUTPUT}\n\n")
-   ELSE (_ALLOW_SHLIB)
-      MESSAGE(STATUS "Checking to see if CXX compiler accepts flag ${lundef} - no")
-      FILE(APPEND ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log
-        "Determining if the CXX compiler accepts the flag ${lundef} failed with "
-        "the following output:\n${LOUTPUT}\n\n")
-	  SET(LINK_NO_UNDEFINED "")
-   ENDIF (_ALLOW_SHLIB)
-ENDIF(NOT DEFINED _ALLOW_SHLIB)
-   IF (_ALLOW_SHLIB)
-	  SET(LINK_NO_UNDEFINED "${LINK_NO_UNDEFINED} ${lundef}")
-   ENDIF (_ALLOW_SHLIB)
+SET(lundef "-Wl,--allow-shlib-undefined")
+KDESVN_CHECK_LINK_FLAG(${lundef} _ALLOW_SHLIB)
+IF (_ALLOW_SHLIB)
+    SET(LINK_NO_UNDEFINED "${LINK_NO_UNDEFINED} ${lundef}")
+ENDIF (_ALLOW_SHLIB)
     
 
 # own macros

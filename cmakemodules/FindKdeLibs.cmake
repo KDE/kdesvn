@@ -139,20 +139,26 @@ MACRO(KDESVN_INSTALL_ICONS _theme)
    ENDFOREACH (_current_ICON)
 ENDMACRO(KDESVN_INSTALL_ICONS)
 
-MACRO(ADD_POFILES packagename _molistvar)
+MACRO(ADD_POFILES packagename)
+    SET(_gmofiles)
     FILE(GLOB _pofiles *.po)
+
     FOREACH(_current_po ${_pofiles})
         GET_FILENAME_COMPONENT(_name ${_current_po} NAME_WE)
         STRING(REGEX REPLACE "^.*/([a-zA-Z]+)(\\.po)" "\\1" _lang "${_current_po}")
-        SET(_gmofile "${_name}.gmo")
+        SET(_gmofile "${CMAKE_CURRENT_BINARY_DIR}/${_name}.gmo")
         ADD_CUSTOM_COMMAND(OUTPUT ${_gmofile}
             COMMAND ${MSGFMT}
             ARGS "-o" "${_gmofile}" "${_current_po}"
             DEPENDS ${_current_po}
             )
-        SET(${_molistvar} ${${_molistvar}} ${_gmofile})
+        SET(_gmofiles ${_gmofiles} ${_gmofile})
         INSTALL(FILES ${_gmofile}
             DESTINATION ${KDE3_LOCALEDIR}/${_lang}/LC_MESSAGES
             RENAME ${packagename}.mo)
     ENDFOREACH(_current_po ${_pofiles})
+
+    ADD_CUSTOM_TARGET(translations ALL
+        DEPENDS ${_gmofiles})
+
 ENDMACRO(ADD_POFILES)

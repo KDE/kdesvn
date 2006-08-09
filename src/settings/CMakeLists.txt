@@ -17,6 +17,8 @@ SET(settings_sources
     revisiontreesettingsdlg_impl.cpp 
     subversionsettings_impl.cpp)
 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+
 KDE3_AUTOMOC(${settings_sources})
 ADD_LIBRARY(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources})
 ADD_DEPENDENCIES(settingsdlgs kdesvncfgreader)

@@ -5,7 +5,7 @@ KDE3_ADD_DCOP_SKELS(kded_kdesvnd_src
  kdesvnd_dcop.h)
 
 KDE3_ADD_KPART(kded_kdesvnd ${kded_kdesvnd_src})
-TARGET_LINK_LIBRARIES(kded_kdesvnd 
+TARGET_LINK_LIBRARIES(kded_kdesvnd
  svnqt
  ksvnwidgets
  kdesvnhelpers
@@ -20,18 +20,20 @@ SET_TARGET_PROPERTIES(kded_kdesvnd
 INSTALL(TARGETS kded_kdesvnd
     RUNTIME DESTINATION ${KDE3_BINDIR}
     LIBRARY DESTINATION lib/kde3
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE 
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
                 GROUP_READ GROUP_EXECUTE
                 WORLD_READ WORLD_EXECUTE)
 
 SET(deskfile "kdesvn_subversion.desktop")
+SET(templatedesk "${CMAKE_CURRENT_SOURCE_DIR}/${deskfile}.template")
 
 ADD_CUSTOM_COMMAND(TARGET kded_kdesvnd
     POST_BUILD
 	COMMAND "${kdesvn_SOURCE_DIR}/src/kdesvnd/test.kde.sh"
-	ARGS "${deskfile}.template"
-	DEPENDS "${deskfile}.template"
+	ARGS "${templatedesk}" "${CMAKE_CURRENT_BINARY_DIR}/${deskfile}"
+	DEPENDS "${templatedesk}"
 	)
+KDESVN_GENERATE_LIBTOOL_FILE(kded_kdesvnd)
 
-INSTALL(FILES ${deskfile}
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${deskfile}
     DESTINATION ${KDE3_APPSDIR}/konqueror/servicemenus)

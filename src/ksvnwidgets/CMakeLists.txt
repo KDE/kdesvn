@@ -8,6 +8,7 @@ KDE3_ADD_UI_FILES(
 SET(ksvnwidgetsrc
  authdialogimpl.cpp logmsg_impl.cpp ssltrustprompt_impl.cpp)
 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 KDE3_AUTOMOC(${ksvnwidgetsrc})
 
 ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui})

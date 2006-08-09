@@ -45,6 +45,27 @@ FIND_LIBRARY(KDE3_DCOP_LIBRARY NAMES DCOP
 FIND_PROGRAM(MSGFMT
     NAMES gmsgfmt msgfmt)
 
+FIND_PROGRAM(STRIP
+    NAMES strip)
+
+FIND_PROGRAM(KDE3_MEINPROC_EXECUTABLE NAME meinproc PATHS
+     ${KDE3_BIN_INSTALL_DIR}
+     $ENV{KDEDIR}/bin
+     /opt/kde/bin
+     /opt/kde3/bin
+      NO_DEFAULT_PATH
+   )
+
+if (NOT KDE3_MEINPROC_EXECUTABLE)
+    find_program(KDE3_MEINPROC_EXECUTABLE NAME meinproc )
+endif (NOT KDE3_MEINPROC_EXECUTABLE)
+
+IF(KDE3_MEINPROC_EXECUTABLE)
+    MESSAGE(STATUS "Found meinproc: ${KDE3_MEINPROC_EXECUTABLE}")
+ELSE(KDE3_MEINPROC_EXECUTABLE)
+    MESSAGE(STATUS "Didn't found meinproc!")
+ENDIF(KDE3_MEINPROC_EXECUTABLE)
+
 IF(MSGFMT)
     EXECUTE_PROCESS(COMMAND ${MSGFMT} "--version" "2>&1"
     OUTPUT_VARIABLE _msgout)
@@ -84,6 +105,10 @@ IF (NOT KDE3_ICONDIR)
     SET(KDE3_ICONDIR ${KDE3_DATADIR}/icons CACHE STRING
         "KDE3-icons dir (relative to install-prefix when not starting with \"/\")" )
 ENDIF (NOT KDE3_ICONDIR)
+IF (NOT KDE3_APPLICATIONSDIR)
+    SET(KDE3_APPLICATIONSDIR ${KDE3_DATADIR}/applications CACHE STRING
+        "KDE3-applications dir (relative to install-prefix when not starting with \"/\")" )
+ENDIF (NOT KDE3_APPLICATIONSDIR)
 
 # linker flags - must get checked
 SET(LINK_NO_UNDEFINED "")
@@ -98,7 +123,7 @@ KDESVN_CHECK_LINK_FLAG(${lundef} _ALLOW_SHLIB)
 IF (_ALLOW_SHLIB)
     SET(LINK_NO_UNDEFINED "${LINK_NO_UNDEFINED} ${lundef}")
 ENDIF (_ALLOW_SHLIB)
-    
+
 
 # own macros
 MACRO(KDESVN_INSTALL_ICONS _theme)

@@ -40,6 +40,9 @@ SET(KDESVN_VERSION \"${VERSION}\")
 
 CONFIGURE_FILE(kdesvn-config.h.in config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
+CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
+CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(po)
+ADD_SUBDIRECTORY(doc)

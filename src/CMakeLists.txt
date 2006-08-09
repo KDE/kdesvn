@@ -46,3 +46,4 @@ INSTALL(TARGETS kdesvn kdesvnaskpass kdesvnpart
 # the resources
 INSTALL(FILES kdesvnui.rc DESTINATION ${KDE3_APPSDIR}/kdesvn)
 INSTALL(FILES kdesvn_part.rc DESTINATION ${KDE3_APPSDIR}/kdesvnpart)
+INSTALL(FILES kdesvn.desktop DESTINATION ${KDE3_APPLICATIONSDIR})

@@ -42,6 +42,12 @@ FIND_LIBRARY(KDE3_DCOP_LIBRARY NAMES DCOP
   /usr/local/lib
 )
 
+FIND_PROGRAM(KDE3_KDECONFIG_EXECUTABLE NAME kde-config PATHS
+    $ENV{KDEDIR}/bin
+    /opt/kde/bin
+    /opt/kde3/bin
+)
+
 FIND_PROGRAM(MSGFMT
     NAMES gmsgfmt msgfmt)
 
@@ -53,17 +59,12 @@ FIND_PROGRAM(KDE3_MEINPROC_EXECUTABLE NAME meinproc PATHS
      $ENV{KDEDIR}/bin
      /opt/kde/bin
      /opt/kde3/bin
-      NO_DEFAULT_PATH
-   )
-
-if (NOT KDE3_MEINPROC_EXECUTABLE)
-    find_program(KDE3_MEINPROC_EXECUTABLE NAME meinproc )
-endif (NOT KDE3_MEINPROC_EXECUTABLE)
+)
 
 IF(KDE3_MEINPROC_EXECUTABLE)
     MESSAGE(STATUS "Found meinproc: ${KDE3_MEINPROC_EXECUTABLE}")
 ELSE(KDE3_MEINPROC_EXECUTABLE)
-    MESSAGE(STATUS "Didn't found meinproc!")
+    MESSAGE(STATUS "Didn't find meinproc!")
 ENDIF(KDE3_MEINPROC_EXECUTABLE)
 
 IF(MSGFMT)

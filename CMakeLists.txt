@@ -8,8 +8,9 @@ SET(CMAKE_CXX_FLAGS_DEBUG
 CHECK_CXX_ACCEPTS_FLAG("-fexceptions" CXX_EXCEPTION)
 CHECK_CXX_ACCEPTS_FLAG("-fstack-protector" CXX_PROTECTOR)
 
-include(${kdesvn_SOURCE_DIR}/cmakemodules/FindKdeLibs.cmake)
-include(${kdesvn_SOURCE_DIR}/src/svnqt/cmakemodules/FindSubversion.cmake)
+INCLUDE(${kdesvn_SOURCE_DIR}/cmakemodules/FindKdeLibs.cmake)
+INCLUDE(${kdesvn_SOURCE_DIR}/cmakemodules/MacroEnsureVersion.cmake)
+INCLUDE(${kdesvn_SOURCE_DIR}/src/svnqt/cmakemodules/FindSubversion.cmake)
 
 INCLUDE_DIRECTORIES(${KDE3_INCLUDE_DIR}
     ${QT_INCLUDE_DIR}

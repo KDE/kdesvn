@@ -1,3 +1,5 @@
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers)
+
 SET(svnfrontendsrc
     cacheentry.cpp
     ccontextlistener.cpp
@@ -37,7 +39,7 @@ SET(svnfrontendsrc
     tcontextlistener.cpp
     threadcontextlistenerdata.cpp)
 
-SET (svnfrontendui
+SET(svnfrontendui
     copymoveview.ui
     createrepo_dlg.ui
     dumprepo_dlg.ui
@@ -49,8 +51,6 @@ SET (svnfrontendui
     merge_dlg.ui
     svnlogdlg.ui)
 
-INCLUDE_DIRECTORIES(${kdesvn_SOURCE_DIR}/src/svnfrontend
-${kdesvn_SOURCE_DIR}/src/svnfrontend/fronthelpers)
 KDE3_AUTOMOC(${svnfrontendsrc})
 KDE3_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 

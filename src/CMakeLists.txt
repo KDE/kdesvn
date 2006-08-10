@@ -1,12 +1,15 @@
 ADD_EXECUTABLE(kdesvnaskpass kdesvn-askpass.cpp)
 
-SET(kdesvnsrc main.cpp
+SET(kdesvnsrc
+    main.cpp
     kdesvn.cpp
     urldlg.cpp
     commandline.cpp)
 
 SET(partsrc
- kdesvn_part.cpp kdesvnview.cpp commandline_part.cpp)
+    kdesvn_part.cpp
+    kdesvnview.cpp
+    commandline_part.cpp)
 
 KDE3_AUTOMOC(${kdesvnsrc})
 KDE3_AUTOMOC(${partsrc})
@@ -38,10 +41,7 @@ TARGET_LINK_LIBRARIES(kdesvn ${QT_AND_KDECORE_LIBS} ${KDE3_UI_LIBRARY} ${KDE3_PA
 
 INSTALL(TARGETS kdesvn kdesvnaskpass kdesvnpart
     RUNTIME DESTINATION ${KDE3_BINDIR}
-    LIBRARY DESTINATION lib/kde3
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
-                GROUP_READ GROUP_EXECUTE
-                WORLD_READ WORLD_EXECUTE)
+    LIBRARY DESTINATION lib/kde3)
 
 # the resources
 INSTALL(FILES kdesvnui.rc DESTINATION ${KDE3_APPSDIR}/kdesvn)

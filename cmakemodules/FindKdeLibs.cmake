@@ -1,6 +1,6 @@
 include(${CMAKE_ROOT}/Modules/FindQt3.cmake)
 include(${CMAKE_ROOT}/Modules/FindKDE3.cmake)
-include(${kdesvn_SOURCE_DIR}/cmakemodules/kdesvnMacros.cmake)
+include(${CMAKE_SOURCE_DIR}/cmakemodules/kdesvnMacros.cmake)
 
 FIND_LIBRARY(KDE3_UI_LIBRARY NAMES kdeui
   PATHS

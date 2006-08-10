@@ -42,6 +42,14 @@ CONFIGURE_FILE(kdesvn-config.h.in config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
+CONFIGURE_FILE(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+ADD_CUSTOM_TARGET(uninstall
+    "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+
 
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(po)

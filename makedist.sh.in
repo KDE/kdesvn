@@ -1,0 +1,30 @@
+VERSION=@VERSION@
+SRCROOT=@CMAKE_SOURCE_DIR@
+BUILDDIR=@CMAKE_BINARY_DIR@
+PROJECT=@PROJECT_NAME@
+
+EXCLUDE="Helperstuff"
+EXPORT_DIR="${PROJECT}-${VERSION}"
+
+if [ ! -d ${SRCROOT}/.svn ]; then
+    echo "This script must run for a svn dir!"
+    exit 1
+fi
+
+echo "Exporting source tree"
+svn export "${SRCROOT}" ${EXPORT_DIR}
+
+echo "Copy required files to export"
+cp ${BUILDDIR}/${PROJECT}.spec ${EXPORT_DIR}
+
+echo "Removing not needed stuff"
+for i in $EXCLUDE ; do
+    echo "  $i"
+    rm -rf $EXPORT_DIR/$i
+done
+
+echo "Generating archive"
+tar cjf ${BUILDDIR}/${PROJECT}-${VERSION}.tar.bz2 ${EXPORT_DIR}
+
+echo "Cleaning up"
+rm -rf ${EXPORT_DIR}

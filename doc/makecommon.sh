@@ -10,4 +10,4 @@ if [ "x$2" = "x" ]; then
 fi
 
 echo "linking $2 -> $1"
-ln -s "$2" "$1"
+ln -fs "$2" "$1"

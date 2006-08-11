@@ -81,6 +81,10 @@ IF (WIN32)
     "$ENV{ProgramFiles}/Subversion/include/apr"
   )
 
+  FIND_PATH(APU_INCLUDE_DIR apu.h
+    "$ENV{ProgramFiles}/Subversion/include/apr-util"
+  )
+
   # search for libraries
   FIND_LIBRARY(APR_LIB libapr
     "$ENV{ProgramFiles}/Subversion/lib/apr"
@@ -168,16 +172,6 @@ IF (WIN32)
 
   SET(APR_EXTRA_LIBFLAGS )
   SET(APU_EXTRA_LIBFLAGS )
-
-
-  FIND_PATH (SUBVERSION_INCLUDE_DIR 
-    svn_client.h
-    "$ENV{ProgramFiles}/Subversion/include"
-  )
-
-  FIND_PATH(APR_INCLUDE_DIR apr.h
-    "$ENV{ProgramFiles}/Subversion/include/apr"
-  )
 
 
   # check found libraries

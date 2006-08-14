@@ -107,6 +107,6 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_libdir}/libsvnqt*.so*
 
 %files svnqt-devel
-#%{_libdir}/libsvnqt.la
+%{_libdir}/libsvnqt.la
 %{_includedir}/svnqt/*
 

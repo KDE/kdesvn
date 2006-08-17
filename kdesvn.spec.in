@@ -10,7 +10,7 @@ Vendor:    Rajko Albrecht <ral@alwins-world.de>
 Url:       http://www.alwins-world.de
 Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
-Source:    kdesvn-%version.tar.gz
+Source:    kdesvn-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
 Requires: kdesvn-svnqt = %{version}
 Obsoletes: kdesvn-kioksvn

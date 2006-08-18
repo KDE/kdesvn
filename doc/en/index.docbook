@@ -521,6 +521,22 @@ This entry is locally added to subversion but not yet committed.
 This entry is locally deleted from subversion but hasn't yet been committed.
 </para></listitem>
 </varlistentry>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>overlay deleted</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry (or entry below if folder) got conflicts to resolve with last update.
+</para></listitem>
+</varlistentry>
+
 </variablelist>
 
 </para>

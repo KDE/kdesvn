@@ -1,6 +1,8 @@
 SET(kded_kdesvnd_src
     kdesvnd_dcop.cpp)
 
+KDE3_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
+
 KDE3_ADD_DCOP_SKELS(kded_kdesvnd_src
     kdesvnd_dcop.h)
 

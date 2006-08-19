@@ -43,15 +43,17 @@ CONFIGURE_FILE(kdesvn-config.h.in config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
+
+SET(DIST_EXCLUDE "Helperstuff")
 CONFIGURE_FILE(
-    "${CMAKE_CURRENT_SOURCE_DIR}/makedist.sh.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/makedist.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/makedist.sh"
     IMMEDIATE
     @ONLY)
 
 
 CONFIGURE_FILE(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
 

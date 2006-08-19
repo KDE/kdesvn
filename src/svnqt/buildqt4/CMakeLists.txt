@@ -74,5 +74,7 @@ ADD_EXECUTABLE(testlink ../testmain.cpp)
 TARGET_LINK_LIBRARIES(testlink svnqt-qt4)
 
 # install rules
-INSTALL(TARGETS svnqt-qt4 DESTINATION lib)
-INSTALL(FILES ${HEADERS} DESTINATION include/svnqt-qt4)
+IF ( UNIX )
+    INSTALL(TARGETS svnqt-qt4 DESTINATION lib)
+    INSTALL(FILES ${HEADERS} DESTINATION include/svnqt-qt4)
+ENDIF ( UNIX )

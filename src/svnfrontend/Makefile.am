@@ -1,24 +1,69 @@
-INCLUDES = -I$(top_srcdir)/src -I$(top_srcdir)/src/svnfrontend/fronthelpers -I$(top_builddir)/src/svnfrontend/fronthelpers $(all_includes)
+## Makefile.am for kdesvn
+
+# this is the program that gets installed.  it's name is used for all
+# of the other Makefile.am variables
+bin_PROGRAMS = kdesvn kdesvnaskpass
+
+# set the include path for X, qt and KDE
+INCLUDES = -I$(top_builddir)/src/svnfrontend -I$(top_srcdir)/src -I$(top_srcdir)/src/svnfrontend $(all_includes)
+
+# the library search path. 
+kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)
+
+# the libraries to link against.
+
+
+# which sources should be compiled for kdesvn
+kdesvn_SOURCES = main.cpp kdesvn.cpp urldlg.cpp commandline.cpp
+
+# these are the headers for your project
+noinst_HEADERS = kdesvn.h kdesvnview.h urldlg.h 	commandline.h \
+	commandline_part.h eventnumbers.h
+
+# client stuff
+
+# let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
-SUBDIRS = fronthelpers graphtree
 
-noinst_LTLIBRARIES = libsvnfrontend.la
+messages: rc.cpp
+	$(EXTRACTRC) `find . -name \*.ui -o -name \*.rc` > rc.cpp
+	find . -name '*.cpp' | xargs $(XGETTEXT) -o $(podir)/kdesvn.pot
 
-noinst_HEADERS = kdesvnfilelist.h filelistviewitem.h svnlogdlgimp.h \
-					svnactions.h ccontextlistener.h propertiesdlg.h editproperty_impl.h stopdlg.h \
-					importdir_logmsg.h mergedlg_impl.h copymoveview_impl.h itemdisplay.h svnfiletip.h \
-					dummydisplay.h commandexec.h modifiedthread.h tcontextlistener.h \
-					threadcontextlistenerdata.h keystatus.h cacheentry.h opencontextmenu.h createrepo_impl.h \
-		dumprepo_impl.h hotcopydlg_impl.h loaddmpdlg_impl.h
+KDE_ICON = AUTO
 
-libsvnfrontend_la_SOURCES = filelistviewitem.cpp svnlogdlgimp.cpp svnlogdlg.ui \
-					svnactions.cpp ccontextlistener.cpp propertiesdlg.cpp editpropsdlg.ui \
-					editproperty_impl.cpp stopdlg.cpp importdir_logmsg.cpp merge_dlg.ui mergedlg_impl.cpp \
-					copymoveview.ui copymoveview_impl.cpp svnitem.cpp kdesvnfilelist.cpp itemdisplay.cpp \
-					svnfiletip.cpp dummydisplay.cpp commandexec.cpp modifiedthread.cpp \
-					tcontextlistener.cpp threadcontextlistenerdata.cpp keystatus.cpp cacheentry.cpp \
-				opencontextmenu.cpp createrepo_dlg.ui createrepo_impl.cpp dumprepo_dlg.ui dumprepo_impl.cpp \
-	hotcopydlg.ui hotcopydlg_impl.cpp loaddmpdlg.ui loaddmpdlg_impl.cpp
+# this is where the kdelnk file will go 
+xdg_apps_DATA = kdesvn.desktop
 
-libsvnfrontend_la_LIBADD = \
-	$(top_builddir)/src/svnfrontend/fronthelpers/libsvnfrontend_helpers.la $(top_builddir)/src/svnfrontend/graphtree/libgraphtree.la
+# this is where the XML-GUI resource file goes
+rcdir = $(kde_datadir)/kdesvn
+rc_DATA = kdesvnui.rc
+
+SUBDIRS = settings ksvnwidgets svnqt helpers svnfrontend icons pics kiosvn kdesvnd
+kdesvnaskpass_LDFLAGS = $(KDE_RPATH) $(all_libraries)
+kdesvnaskpass_SOURCES = kdesvn-askpass.cpp
+kdesvnaskpass_LDADD = $(LIB_KDEUI)
+
+#########################################################################
+# KPART SECTION
+#########################################################################
+kde_module_LTLIBRARIES = libkdesvnpart.la
+
+# the Part's source, library search path, and link libraries
+libkdesvnpart_la_SOURCES = kdesvn_part.cpp kdesvnview.cpp commandline_part.cpp
+libkdesvnpart_la_LDFLAGS = -avoid-version -module $(KDE_PLUGIN) \
+	$(all_libraries)
+libkdesvnpart_la_LIBADD = $(top_builddir)/src/settings/libkdesvnsettings.la \
+	$(top_builddir)/src/svnqt/libsvnqt.la $(top_builddir)/src/svnfrontend/libsvnfrontend.la \
+	$(top_builddir)/src/helpers/libhelper.la $(top_builddir)/src/ksvnwidgets/libksvnwidgets.la $(SVN_LIBS) \
+	$(APR_LIBS) $(LIB_KPARTS) $(LIB_KFILE) $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
+
+# this is where the desktop file will go
+partdesktopdir = $(kde_servicesdir)
+# is set via the application file
+# partdesktop_DATA = kdesvn_part.desktop
+
+# this is where the part's XML-GUI resource file goes
+partrcdir = $(kde_datadir)/kdesvnpart
+partrc_DATA = kdesvn_part.rc
+
+kdesvn_LDADD = $(LIB_KPARTS)

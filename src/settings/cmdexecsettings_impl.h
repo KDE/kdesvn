@@ -17,69 +17,32 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef COMMANDEXEC_H
-#define COMMANDEXEC_H
 
-#include <qobject.h>
-#include <qstring.h>
+#ifndef CMDEXECSETTINGS_IMPL_H
+#define CMDEXECSETTINGS_IMPL_H
 
-class KCmdLineArgs;
-class KURL;
-class pCPart;
+#include "src/settings/cmdexecsettings.h"
 
-namespace svn {
-    class Revision;
-}
-
-/**
-@author Rajko Albrecht
-*/
-class CommandExec : public QObject
+class CmdExecSettings_impl : public CmdExecSettings
 {
-Q_OBJECT
+  Q_OBJECT
+
 public:
-    CommandExec(QObject*parent,const char *name,KCmdLineArgs *args);
-    virtual ~CommandExec();
-    virtual int exec();
+  CmdExecSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  ~CmdExecSettings_impl();
+  /*$PUBLIC_FUNCTIONS$*/
 
-protected slots:
-    virtual void clientException(const QString&);
-    virtual void slotNotifyMessage(const QString&);
-    virtual void slotCmd_log();
-    virtual void slotCmd_update();
-    virtual void slotCmd_diff();
-    virtual void slotCmd_blame();
-    virtual void slotCmd_info();
-    virtual void slotCmd_commit();
-    virtual void slotCmd_cat();
-    virtual void slotCmd_get();
-    virtual void slotCmd_list();
-    virtual void slotCmd_copy();
-    virtual void slotCmd_move();
-    virtual void slotCmd_checkout();
-    virtual void slotCmd_checkoutto();
-    virtual void slotCmd_export();
-    virtual void slotCmd_exportto();
-    virtual void slotCmd_delete();
-    virtual void slotCmd_add();
-    virtual void slotCmd_revert();
-    virtual void slotCmd_addnew();
-    virtual void slotCmd_tree();
+public slots:
+  /*$PUBLIC_SLOTS$*/
 
-signals:
-    void executeMe();
 protected:
-    virtual bool scanRevision();
-    virtual bool askRevision();
-
-    QString m_lastMessages;
-    unsigned int m_lastMessagesLines;
-
-private:
-    pCPart*m_pCPart;
+  /*$PROTECTED_FUNCTIONS$*/
+    void showLogToggled(bool);
 
 protected slots:
-    void slotCmd_switch();
+  /*$PROTECTED_SLOTS$*/
+
 };
 
 #endif
+

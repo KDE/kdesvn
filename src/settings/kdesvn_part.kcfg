@@ -140,4 +140,14 @@
     <label>Height of detail view in tree widget</label>
   </entry>
  </group>
+ <group name="cmdline">
+    <entry key="cmdline_show_logwindow" type="Bool">
+        <default>true</default>
+        <label>Show a small logwindow after executing a command.</label>
+    </entry>
+    <entry key="cmdline_log_minline" type="UInt">
+        <default>0</default>
+        <label>Log must contain at least lines to show</label>
+    </entry>
+ </group>
 </kcfg>

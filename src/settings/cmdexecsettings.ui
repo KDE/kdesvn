@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>311</width>
-            <height>89</height>
+            <width>340</width>
+            <height>81</height>
         </rect>
     </property>
     <property name="caption">
@@ -32,7 +32,7 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout1</cstring>
+                <cstring>layout2</cstring>
             </property>
             <grid>
                 <property name="name">
@@ -43,7 +43,7 @@
                         <cstring>textLabel1</cstring>
                     </property>
                     <property name="text">
-                        <string>Show only if log has at least</string>
+                        <string>Minimum log lines to show:</string>
                     </property>
                 </widget>
                 <widget class="KIntNumInput" row="0" column="1">
@@ -59,6 +59,9 @@
                     <property name="specialValueText">
                         <string>0</string>
                         <comment>no limit</comment>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>The minimum a log output must contain before kdesvn shows a single logwindow</string>
                     </property>
                 </widget>
             </grid>

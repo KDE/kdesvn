@@ -49,7 +49,10 @@
                         <cstring>buttonOk</cstring>
                     </property>
                     <property name="text">
-                        <string>O&amp;K</string>
+                        <string>OK</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
                     </property>
                     <property name="autoDefault">
                         <bool>true</bool>
@@ -63,7 +66,10 @@
                         <cstring>buttonCancel</cstring>
                     </property>
                     <property name="text">
-                        <string>&amp;Cancel</string>
+                        <string>Cancel</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
                     </property>
                     <property name="autoDefault">
                         <bool>true</bool>

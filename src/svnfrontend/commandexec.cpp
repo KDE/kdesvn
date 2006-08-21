@@ -555,12 +555,11 @@ bool CommandExec::scanRevision()
 
 void CommandExec::slotNotifyMessage(const QString&msg)
 {
+    m_pCPart->m_SvnWrapper->slotExtraLogMsg(msg);
     if (Kdesvnsettings::self()->cmdline_show_logwindow()) {
         ++m_lastMessagesLines;
         if (!m_lastMessages.isEmpty()) m_lastMessages.append("\n");
         m_lastMessages.append(msg);
-    } else {
-        m_pCPart->m_SvnWrapper->slotExtraLogMsg(msg);
     }
 }
 

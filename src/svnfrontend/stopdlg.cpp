@@ -19,6 +19,8 @@
  ***************************************************************************/
 #include "stopdlg.h"
 #include "ccontextlistener.h"
+#include "settings/kdesvnsettings.h"
+
 #include <kapplication.h>
 #include <klocale.h>
 #include <kwin.h>
@@ -36,6 +38,9 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false)
 {
     KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
+    m_lastLogLines = 0;
+    m_lastLog = "";
+
     mShowTimer = new QTimer(this);
     m_StopTick.start();
     showButton(KDialogBase::Close, false);
@@ -86,7 +91,7 @@ void StopDlg::slotAutoShow()
     }
     if (mShown||mWait||hasDialogs) {
         if (mWait) {
-            kdDebug() << "Waiting for show"<<endl;
+            //kdDebug() << "Waiting for show"<<endl;
             mShowTimer->start(m_MinDuration, true);
         }
         mShowTimer->start(m_MinDuration, true);
@@ -130,12 +135,16 @@ void StopDlg::slotTick()
 
 void StopDlg::slotExtraMessage(const QString&msg)
 {
+    ++m_lastLogLines;
     if (!m_LogWindow) {
         QFrame* mainWidget = plainPage();
         m_LogWindow = new KTextBrowser(mainWidget);
         layout->addWidget(m_LogWindow);
         m_LogWindow->show();
         resize( QSize(500, 400).expandedTo(minimumSizeHint()) );
+    }
+    if (m_lastLogLines >= Kdesvnsettings::self()->cmdline_log_minline() &&
+        isHidden() ) {
         slotAutoShow();
     }
     m_LogWindow->append(msg);

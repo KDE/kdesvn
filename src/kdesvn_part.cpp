@@ -330,7 +330,7 @@ void kdesvnPart::slotShowSettings()
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0,"revisiontree_items"),
         i18n("Revision tree"),"configure",i18n("Revision tree Settings"),true);
     dialog->addPage(new CmdExecSettings_impl(0,"cmdexec_items"),
-        i18n("Cmdline"),"terminal",i18n("Settings for cmdline execution"),true);
+        "KIO/"+i18n("Commandline"),"terminal",i18n("Settings for commandline and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
     connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));

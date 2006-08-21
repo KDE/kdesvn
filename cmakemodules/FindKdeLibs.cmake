@@ -145,7 +145,7 @@ MACRO(KDESVN_INSTALL_ICONS _theme)
 	  if (${_ctype} STREQUAL ".svgz")
         STRING(REGEX REPLACE "^.*/[a-zA-Z]+\\-([a-z]+)\\-(.+\\.svgz)$" "\\1" _group "${_current_ICON}")
         STRING(REGEX REPLACE "^.*/[a-zA-Z]+\\-([a-z]+)\\-(.+\\.svgz)$" "\\2" _name "${_current_ICON}")
-		set(_sizestring "scaleable")
+		set(_sizestring "scalable")
 	  endif (${_ctype} STREQUAL ".svgz")
 
       SET(_icon_GROUP "actions")

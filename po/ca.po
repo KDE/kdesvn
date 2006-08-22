@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-22 23:28+0200\n"
+"POT-Creation-Date: 2006-08-23 00:39+0200\n"
 "PO-Revision-Date: 2006-04-22 01:08+0200\n"
 "Last-Translator: Antoni Bella Pérez <bella5@teleline.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -567,7 +567,7 @@ msgid "Last used log messages"
 msgstr "Últims missatges de registre usats"
 
 #: rc.cpp:59 rc.cpp:444 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:122
-#: svnfrontend/svnactions.cpp:1365
+#: svnfrontend/svnactions.cpp:1369
 #, no-c-format
 msgid "Recursive"
 msgstr "Recursiu"
@@ -771,7 +771,7 @@ msgstr ""
 "\"Comprova actualitzacions en obrir\" en el Diàleg de Subversion.\n"
 "</p>"
 
-#: rc.cpp:201 svnfrontend/svnactions.cpp:1016
+#: rc.cpp:201 svnfrontend/svnactions.cpp:1019
 #, no-c-format
 msgid "Diff display"
 msgstr "Vista del diff"
@@ -1004,7 +1004,7 @@ msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 "Màxim de registres a mostrar en veure la bitàcola (0 per a sense limit)"
 
-#: rc.cpp:334 svnfrontend/svnactions.cpp:1598 svnfrontend/svnactions.cpp:1612
+#: rc.cpp:334 svnfrontend/svnactions.cpp:1602 svnfrontend/svnactions.cpp:1616
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Copia / Mou"
@@ -1067,7 +1067,7 @@ msgstr "Obre en finalitzar"
 #: rc.cpp:372 svnfrontend/kdesvnfilelist.cpp:1889
 #: svnfrontend/kdesvnfilelist.cpp:1995 svnfrontend/kdesvnfilelist.cpp:2012
 #: svnfrontend/kdesvnfilelist.cpp:2038 svnfrontend/kdesvnfilelist.cpp:2484
-#: svnfrontend/kdesvnfilelist.cpp:2526 svnfrontend/svnactions.cpp:1082
+#: svnfrontend/kdesvnfilelist.cpp:2526 svnfrontend/svnactions.cpp:1086
 #, no-c-format
 msgid "Revisions"
 msgstr "Revisions"
@@ -1304,7 +1304,7 @@ msgstr "Trieu la segona revisió amb el botó dret del ratolí"
 msgid "List entries"
 msgstr "&Llista d'entrades"
 
-#: rc.cpp:553 svnfrontend/svnactions.cpp:357
+#: rc.cpp:553 svnfrontend/svnactions.cpp:356
 #, no-c-format
 msgid "Author"
 msgstr "Autor"
@@ -1858,8 +1858,8 @@ msgstr ""
 msgid "Save tree as png"
 msgstr ""
 
-#: svnfrontend/graphtree/revgraphview.cpp:939 svnfrontend/svnactions.cpp:898
-#: svnfrontend/svnactions.cpp:934 svnfrontend/svnactions.cpp:962
+#: svnfrontend/graphtree/revgraphview.cpp:939 svnfrontend/svnactions.cpp:900
+#: svnfrontend/svnactions.cpp:937 svnfrontend/svnactions.cpp:965
 #, fuzzy
 msgid "No difference to display"
 msgstr "Vista del diff"
@@ -1880,7 +1880,7 @@ msgstr "Afegeix a revisió de control"
 msgid "Restore missing"
 msgstr "Restaura el que falta"
 
-#: svnfrontend/ccontextlistener.cpp:63 svnfrontend/svnactions.cpp:1379
+#: svnfrontend/ccontextlistener.cpp:63 svnfrontend/svnactions.cpp:1383
 msgid "Revert"
 msgstr "Reverteix"
 
@@ -2101,7 +2101,7 @@ msgstr "Bloca els ítems actuals"
 msgid "Unlock current items"
 msgstr "Desbloca els ítems actuals"
 
-#: svnfrontend/kdesvnfilelist.cpp:246 svnfrontend/svnactions.cpp:479
+#: svnfrontend/kdesvnfilelist.cpp:246 svnfrontend/svnactions.cpp:478
 msgid "New folder"
 msgstr "Carpeta nova"
 
@@ -2139,7 +2139,7 @@ msgstr "Obre el repositori de la còpia de treball"
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "Obre el repositori des del que s'ha extret la còpia de treball actual"
 
-#: svnfrontend/kdesvnfilelist.cpp:262 svnfrontend/svnactions.cpp:1494
+#: svnfrontend/kdesvnfilelist.cpp:262 svnfrontend/svnactions.cpp:1498
 msgid "Cleanup"
 msgstr "Neteja"
 
@@ -2262,12 +2262,12 @@ msgstr "Exporta la ruta del repositori actual"
 msgid "Select browse revision"
 msgstr "Tria la revisió del navegador"
 
-#: svnfrontend/kdesvnfilelist.cpp:321 svnfrontend/svnactions.cpp:1216
-#: svnfrontend/svnactions.cpp:1259
+#: svnfrontend/kdesvnfilelist.cpp:321 svnfrontend/svnactions.cpp:1220
+#: svnfrontend/svnactions.cpp:1263
 msgid "Checkout a repository"
 msgstr "Descarrega un repositori"
 
-#: svnfrontend/kdesvnfilelist.cpp:323 svnfrontend/svnactions.cpp:1259
+#: svnfrontend/kdesvnfilelist.cpp:323 svnfrontend/svnactions.cpp:1263
 msgid "Export a repository"
 msgstr "Exporta un repositori"
 
@@ -2307,11 +2307,11 @@ msgstr "Copia aquí"
 msgid "Nothing selected for delete"
 msgstr "No hi ha res seleccionat per esborrar"
 
-#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1185
+#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1189
 msgid "Really delete these entries?"
 msgstr "Realment voleu esborrar aquestes entrades?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1185
+#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1189
 msgid "Delete from repository"
 msgstr "Esborra del repositori"
 
@@ -2387,58 +2387,66 @@ msgstr "Copia fitxer/directori"
 msgid "Finished"
 msgstr "Finalitzat"
 
-#: svnfrontend/svnactions.cpp:209
+#: svnfrontend/svnactions.cpp:200
+msgid "Getting logs - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:208
 msgid "Got no logs"
 msgstr "No s'han obtingut els missatges de registre"
 
-#: svnfrontend/svnactions.cpp:248 svnfrontend/svnactions.cpp:304
+#: svnfrontend/svnactions.cpp:247 svnfrontend/svnactions.cpp:303
 msgid "Got no info."
 msgstr "No s'ha obtingut informació"
 
-#: svnfrontend/svnactions.cpp:255
+#: svnfrontend/svnactions.cpp:254
 msgid "History of %1"
 msgstr "Historial de %1"
 
-#: svnfrontend/svnactions.cpp:342
+#: svnfrontend/svnactions.cpp:341
 msgid "Error getting blame"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:347
+#: svnfrontend/svnactions.cpp:346
 msgid "Got no annotate"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:357
+#: svnfrontend/svnactions.cpp:356
 msgid "Line"
 msgstr "Línia"
 
-#: svnfrontend/svnactions.cpp:368 svnfrontend/svnactions.cpp:569
+#: svnfrontend/svnactions.cpp:367 svnfrontend/svnactions.cpp:569
 #: svnfrontend/svnactions.cpp:589
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: svnfrontend/svnactions.cpp:375
+#: svnfrontend/svnactions.cpp:374
 msgid "Blame %1"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:393 svnfrontend/svnactions.cpp:413
+#: svnfrontend/svnactions.cpp:392 svnfrontend/svnactions.cpp:412
 msgid "Getting content - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:399 svnfrontend/svnactions.cpp:422
+#: svnfrontend/svnactions.cpp:398 svnfrontend/svnactions.cpp:421
 msgid "Error getting content"
 msgstr "Error mentre s'obtenia el contingut"
 
-#: svnfrontend/svnactions.cpp:432
+#: svnfrontend/svnactions.cpp:431
 msgid "Got no content"
 msgstr "No s'ha obtingut el contingut"
 
-#: svnfrontend/svnactions.cpp:440 svnfrontend/svnactions.cpp:451
+#: svnfrontend/svnactions.cpp:439 svnfrontend/svnactions.cpp:450
 msgid "Content of %1"
 msgstr "Contingut de %1"
 
-#: svnfrontend/svnactions.cpp:479
+#: svnfrontend/svnactions.cpp:478
 msgid "Enter folder name:"
 msgstr "Introduïu el nom de carpeta:"
+
+#: svnfrontend/svnactions.cpp:517
+msgid "Retrieving infos - hit cancel for abort"
+msgstr ""
 
 #: svnfrontend/svnactions.cpp:548
 msgid "URL"
@@ -2540,11 +2548,11 @@ msgstr "Comentari de blocat"
 msgid "Infolist"
 msgstr "Llista informativa"
 
-#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1682
+#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1686
 msgid "Status / List"
 msgstr "Estatus / llista"
 
-#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1682
+#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1686
 msgid "Creating list / check status"
 msgstr "S'està creant la llista / comprovant l'estatus"
 
@@ -2552,129 +2560,146 @@ msgstr "S'està creant la llista / comprovant l'estatus"
 msgid "Add and Commit"
 msgstr "Afegeix i entrega"
 
-#: svnfrontend/svnactions.cpp:1130
+#: svnfrontend/svnactions.cpp:838
+#, fuzzy
+msgid "Commiting"
+msgstr "Entrega"
+
+#: svnfrontend/svnactions.cpp:839
+msgid "Commiting - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:883 svnfrontend/svnactions.cpp:925
+msgid "Diffing - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1040
+msgid "Making update - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1134
 msgid "Which files or directories should I add?"
 msgstr "Quins fitxers o directoris s'han d'afegir?"
 
-#: svnfrontend/svnactions.cpp:1139
+#: svnfrontend/svnactions.cpp:1143
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr "<center>L'entrada<br>%1<br>te versió - s'interromp.</center>"
 
-#: svnfrontend/svnactions.cpp:1216
+#: svnfrontend/svnactions.cpp:1220
 msgid "Export repository"
 msgstr "Exporta el repositori"
 
-#: svnfrontend/svnactions.cpp:1244
+#: svnfrontend/svnactions.cpp:1248
 msgid "Exporting a file?"
 msgstr "Exportar un fitxer?"
 
-#: svnfrontend/svnactions.cpp:1244
+#: svnfrontend/svnactions.cpp:1248
 msgid "Checking out a file?"
 msgstr "Descarregar un fitxer?"
 
-#: svnfrontend/svnactions.cpp:1297
+#: svnfrontend/svnactions.cpp:1301
 msgid "Checkout"
 msgstr "Surt"
 
-#: svnfrontend/svnactions.cpp:1297
+#: svnfrontend/svnactions.cpp:1301
 msgid "Exporting"
 msgstr "S'està exportant"
 
-#: svnfrontend/svnactions.cpp:1297
+#: svnfrontend/svnactions.cpp:1301
 msgid "Checking out"
 msgstr "S'està descarregant"
 
-#: svnfrontend/svnactions.cpp:1327
+#: svnfrontend/svnactions.cpp:1331
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr "<center>L'entrada<br>%1<br>no té versió - s'interromp.</center>"
 
-#: svnfrontend/svnactions.cpp:1357
+#: svnfrontend/svnactions.cpp:1361
 msgid "Revert entries"
 msgstr "Entrades revertides"
 
-#: svnfrontend/svnactions.cpp:1365
+#: svnfrontend/svnactions.cpp:1369
 msgid "Really revert these entries to pristine state?"
 msgstr "Realment s'han de revertir aquestes entrades al seu estat original?"
 
-#: svnfrontend/svnactions.cpp:1379
+#: svnfrontend/svnactions.cpp:1383
 msgid "Reverting items"
 msgstr "Ítems revertits"
 
-#: svnfrontend/svnactions.cpp:1405 svnfrontend/svnactions.cpp:1472
+#: svnfrontend/svnactions.cpp:1409 svnfrontend/svnactions.cpp:1476
 msgid "Switch url"
 msgstr "Canvi de la URL"
 
-#: svnfrontend/svnactions.cpp:1405
+#: svnfrontend/svnactions.cpp:1409
 msgid "Switching url"
 msgstr "S'està canviant la URL"
 
-#: svnfrontend/svnactions.cpp:1430
+#: svnfrontend/svnactions.cpp:1434
 msgid "Relocate url"
 msgstr "Torna a localitzar la URL"
 
-#: svnfrontend/svnactions.cpp:1430
+#: svnfrontend/svnactions.cpp:1434
 msgid "Relocate repository to new URL"
 msgstr "Localitza el repositori a la nova URL"
 
-#: svnfrontend/svnactions.cpp:1451
+#: svnfrontend/svnactions.cpp:1455
 msgid "Can only switch one item at time"
 msgstr "Tan sols es pot canviar sobre un ítem alhora"
 
-#: svnfrontend/svnactions.cpp:1458
+#: svnfrontend/svnactions.cpp:1462
 msgid "Error getting entry to switch"
 msgstr "Error mentre s'obtenia l'entrada per al canvi"
 
-#: svnfrontend/svnactions.cpp:1494
+#: svnfrontend/svnactions.cpp:1498
 msgid "Cleaning up folder"
 msgstr "S'està netejant la carpeta"
 
-#: svnfrontend/svnactions.cpp:1508
+#: svnfrontend/svnactions.cpp:1512
 msgid "Resolve"
 msgstr "Resol"
 
-#: svnfrontend/svnactions.cpp:1508
+#: svnfrontend/svnactions.cpp:1512
 msgid "Marking resolved"
 msgstr "S'estan marcant els resolts"
 
-#: svnfrontend/svnactions.cpp:1522
+#: svnfrontend/svnactions.cpp:1526
 msgid "Importing items"
 msgstr "S'estan important els ítems"
 
-#: svnfrontend/svnactions.cpp:1567
+#: svnfrontend/svnactions.cpp:1571
 #, fuzzy
 msgid "Moving/Rename item "
 msgstr "Mou/renomena fitxer/directori"
 
-#: svnfrontend/svnactions.cpp:1581
+#: svnfrontend/svnactions.cpp:1585
 #, fuzzy
 msgid "Moving entries"
 msgstr "Copia o mou entrades"
 
-#: svnfrontend/svnactions.cpp:1598 svnfrontend/svnactions.cpp:1612
+#: svnfrontend/svnactions.cpp:1602 svnfrontend/svnactions.cpp:1616
 msgid "Copy or Moving entries"
 msgstr "Copia o mou entrades"
 
-#: svnfrontend/svnactions.cpp:1709
+#: svnfrontend/svnactions.cpp:1713
 msgid "No unversioned items found."
 msgstr "No s'han trobat ítems sense versió."
 
-#: svnfrontend/svnactions.cpp:1712
+#: svnfrontend/svnactions.cpp:1716
 msgid "Add unversioned items"
 msgstr "Afegeix ítems sense versió"
 
-#: svnfrontend/svnactions.cpp:1814
+#: svnfrontend/svnactions.cpp:1818
 msgid "Still checking for updates"
 msgstr "Encara s'estan comprovant les actualitzacions"
 
-#: svnfrontend/svnactions.cpp:1835
+#: svnfrontend/svnactions.cpp:1839
 msgid "Checking for updates finished"
 msgstr "La comprovació d'actualitzacions ha finalitzat"
 
-#: svnfrontend/svnactions.cpp:1837
+#: svnfrontend/svnactions.cpp:1841
 msgid "There are new items in repository"
 msgstr "Hi ha nous ítems en el repositori"
 
-#: svnfrontend/svnactions.cpp:1910
+#: svnfrontend/svnactions.cpp:1914
 msgid "Checking for updates started in background"
 msgstr "La comprovació d'actualitzacions s'ha iniciat en segon pla"
 

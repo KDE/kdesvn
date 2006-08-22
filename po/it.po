@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-22 23:28+0200\n"
+"POT-Creation-Date: 2006-08-23 00:39+0200\n"
 "PO-Revision-Date: 2006-08-22 10:27+0200\n"
 "Last-Translator: Luciano Montanaro <mikelima@cirulla.net>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -565,7 +565,7 @@ msgid "Last used log messages"
 msgstr "Ultimi messaggi di log usati"
 
 #: rc.cpp:59 rc.cpp:444 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:122
-#: svnfrontend/svnactions.cpp:1365
+#: svnfrontend/svnactions.cpp:1369
 #, no-c-format
 msgid "Recursive"
 msgstr "Ricorsivo"
@@ -764,7 +764,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:201 svnfrontend/svnactions.cpp:1016
+#: rc.cpp:201 svnfrontend/svnactions.cpp:1019
 #, no-c-format
 msgid "Diff display"
 msgstr "Visore di diff"
@@ -974,7 +974,7 @@ msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 "Massimo numero di log mostrati per il log completo (0 per nessun limite)"
 
-#: rc.cpp:334 svnfrontend/svnactions.cpp:1598 svnfrontend/svnactions.cpp:1612
+#: rc.cpp:334 svnfrontend/svnactions.cpp:1602 svnfrontend/svnactions.cpp:1616
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Copia / Sposta"
@@ -1037,7 +1037,7 @@ msgstr ""
 #: rc.cpp:372 svnfrontend/kdesvnfilelist.cpp:1889
 #: svnfrontend/kdesvnfilelist.cpp:1995 svnfrontend/kdesvnfilelist.cpp:2012
 #: svnfrontend/kdesvnfilelist.cpp:2038 svnfrontend/kdesvnfilelist.cpp:2484
-#: svnfrontend/kdesvnfilelist.cpp:2526 svnfrontend/svnactions.cpp:1082
+#: svnfrontend/kdesvnfilelist.cpp:2526 svnfrontend/svnactions.cpp:1086
 #, no-c-format
 msgid "Revisions"
 msgstr "Revisioni"
@@ -1274,7 +1274,7 @@ msgstr "Seleziona la seconda revisione con il tasto destro del mouse"
 msgid "List entries"
 msgstr "Elenca elementi"
 
-#: rc.cpp:553 svnfrontend/svnactions.cpp:357
+#: rc.cpp:553 svnfrontend/svnactions.cpp:356
 #, no-c-format
 msgid "Author"
 msgstr "Autore"
@@ -1764,8 +1764,8 @@ msgstr "Ruota in senso orario"
 msgid "Save tree as png"
 msgstr "Salva l'albero come immagine PNG"
 
-#: svnfrontend/graphtree/revgraphview.cpp:939 svnfrontend/svnactions.cpp:898
-#: svnfrontend/svnactions.cpp:934 svnfrontend/svnactions.cpp:962
+#: svnfrontend/graphtree/revgraphview.cpp:939 svnfrontend/svnactions.cpp:900
+#: svnfrontend/svnactions.cpp:937 svnfrontend/svnactions.cpp:965
 msgid "No difference to display"
 msgstr "Nessuna differenza da mostrare"
 
@@ -1785,7 +1785,7 @@ msgstr "Aggiungi al controllo delle revisioni"
 msgid "Restore missing"
 msgstr "Ripristina elementi mancanti"
 
-#: svnfrontend/ccontextlistener.cpp:63 svnfrontend/svnactions.cpp:1379
+#: svnfrontend/ccontextlistener.cpp:63 svnfrontend/svnactions.cpp:1383
 msgid "Revert"
 msgstr ""
 
@@ -2007,7 +2007,7 @@ msgstr "Blocca gli elementi attuali"
 msgid "Unlock current items"
 msgstr "Sblocca gli elementi attuali"
 
-#: svnfrontend/kdesvnfilelist.cpp:246 svnfrontend/svnactions.cpp:479
+#: svnfrontend/kdesvnfilelist.cpp:246 svnfrontend/svnactions.cpp:478
 msgid "New folder"
 msgstr "Nuova cartella"
 
@@ -2047,7 +2047,7 @@ msgstr "Apri il deposito della copia di lavoro"
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "Apre il deposito da cui è stata prelevata la copia di lavoro corrente"
 
-#: svnfrontend/kdesvnfilelist.cpp:262 svnfrontend/svnactions.cpp:1494
+#: svnfrontend/kdesvnfilelist.cpp:262 svnfrontend/svnactions.cpp:1498
 msgid "Cleanup"
 msgstr "Pulisci"
 
@@ -2171,12 +2171,12 @@ msgstr "Esporta il percorso del deposito corrente"
 msgid "Select browse revision"
 msgstr "Seleziona revisione"
 
-#: svnfrontend/kdesvnfilelist.cpp:321 svnfrontend/svnactions.cpp:1216
-#: svnfrontend/svnactions.cpp:1259
+#: svnfrontend/kdesvnfilelist.cpp:321 svnfrontend/svnactions.cpp:1220
+#: svnfrontend/svnactions.cpp:1263
 msgid "Checkout a repository"
 msgstr "Preleva da un deposito"
 
-#: svnfrontend/kdesvnfilelist.cpp:323 svnfrontend/svnactions.cpp:1259
+#: svnfrontend/kdesvnfilelist.cpp:323 svnfrontend/svnactions.cpp:1263
 msgid "Export a repository"
 msgstr "Esporta un deposito"
 
@@ -2216,11 +2216,11 @@ msgstr "Copia qui"
 msgid "Nothing selected for delete"
 msgstr "Nessuna selezione da eliminare"
 
-#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1185
+#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1189
 msgid "Really delete these entries?"
 msgstr "Vuoi veramente eliminare queste voci?"
 
-#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1185
+#: svnfrontend/kdesvnfilelist.cpp:1739 svnfrontend/svnactions.cpp:1189
 msgid "Delete from repository"
 msgstr "Elimina dal deposito"
 
@@ -2296,59 +2296,67 @@ msgstr "Copia file/dir"
 msgid "Finished"
 msgstr "Finito"
 
-#: svnfrontend/svnactions.cpp:209
+#: svnfrontend/svnactions.cpp:200
+msgid "Getting logs - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:208
 msgid "Got no logs"
 msgstr "Non ci sono log"
 
-#: svnfrontend/svnactions.cpp:248 svnfrontend/svnactions.cpp:304
+#: svnfrontend/svnactions.cpp:247 svnfrontend/svnactions.cpp:303
 msgid "Got no info."
 msgstr "Non ci sono informazioni."
 
-#: svnfrontend/svnactions.cpp:255
+#: svnfrontend/svnactions.cpp:254
 msgid "History of %1"
 msgstr "Cronologia di %1"
 
-#: svnfrontend/svnactions.cpp:342
+#: svnfrontend/svnactions.cpp:341
 msgid "Error getting blame"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:347
+#: svnfrontend/svnactions.cpp:346
 msgid "Got no annotate"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:357
+#: svnfrontend/svnactions.cpp:356
 msgid "Line"
 msgstr "Riga"
 
-#: svnfrontend/svnactions.cpp:368 svnfrontend/svnactions.cpp:569
+#: svnfrontend/svnactions.cpp:367 svnfrontend/svnactions.cpp:569
 #: svnfrontend/svnactions.cpp:589
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: svnfrontend/svnactions.cpp:375
+#: svnfrontend/svnactions.cpp:374
 msgid "Blame %1"
 msgstr "Incolpa %1"
 
-#: svnfrontend/svnactions.cpp:393 svnfrontend/svnactions.cpp:413
+#: svnfrontend/svnactions.cpp:392 svnfrontend/svnactions.cpp:412
 msgid "Getting content - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:399 svnfrontend/svnactions.cpp:422
+#: svnfrontend/svnactions.cpp:398 svnfrontend/svnactions.cpp:421
 #, fuzzy
 msgid "Error getting content"
 msgstr "Errore "
 
-#: svnfrontend/svnactions.cpp:432
+#: svnfrontend/svnactions.cpp:431
 msgid "Got no content"
 msgstr "Manca il contenuto"
 
-#: svnfrontend/svnactions.cpp:440 svnfrontend/svnactions.cpp:451
+#: svnfrontend/svnactions.cpp:439 svnfrontend/svnactions.cpp:450
 msgid "Content of %1"
 msgstr "Contenuto di %1"
 
-#: svnfrontend/svnactions.cpp:479
+#: svnfrontend/svnactions.cpp:478
 msgid "Enter folder name:"
 msgstr "Inserisci il nome della cartella:"
+
+#: svnfrontend/svnactions.cpp:517
+msgid "Retrieving infos - hit cancel for abort"
+msgstr ""
 
 #: svnfrontend/svnactions.cpp:548
 msgid "URL"
@@ -2450,11 +2458,11 @@ msgstr "Commento del blocco"
 msgid "Infolist"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1682
+#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1686
 msgid "Status / List"
 msgstr "Stato / elenco"
 
-#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1682
+#: svnfrontend/svnactions.cpp:788 svnfrontend/svnactions.cpp:1686
 msgid "Creating list / check status"
 msgstr ""
 
@@ -2462,128 +2470,145 @@ msgstr ""
 msgid "Add and Commit"
 msgstr "Aggiungi e deposita"
 
-#: svnfrontend/svnactions.cpp:1130
+#: svnfrontend/svnactions.cpp:838
+#, fuzzy
+msgid "Commiting"
+msgstr "Deposita"
+
+#: svnfrontend/svnactions.cpp:839
+msgid "Commiting - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:883 svnfrontend/svnactions.cpp:925
+msgid "Diffing - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1040
+msgid "Making update - hit cancel for abort"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1134
 msgid "Which files or directories should I add?"
 msgstr "Quali file o directory devono essere aggiunte?"
 
-#: svnfrontend/svnactions.cpp:1139
+#: svnfrontend/svnactions.cpp:1143
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1216
+#: svnfrontend/svnactions.cpp:1220
 msgid "Export repository"
 msgstr "Esporta deposito"
 
-#: svnfrontend/svnactions.cpp:1244
+#: svnfrontend/svnactions.cpp:1248
 msgid "Exporting a file?"
 msgstr "Esportazione di un file?"
 
-#: svnfrontend/svnactions.cpp:1244
+#: svnfrontend/svnactions.cpp:1248
 msgid "Checking out a file?"
 msgstr "Prelievo di un file?"
 
-#: svnfrontend/svnactions.cpp:1297
+#: svnfrontend/svnactions.cpp:1301
 msgid "Checkout"
 msgstr "Prelievo"
 
-#: svnfrontend/svnactions.cpp:1297
+#: svnfrontend/svnactions.cpp:1301
 msgid "Exporting"
 msgstr "Esportazione"
 
-#: svnfrontend/svnactions.cpp:1297
+#: svnfrontend/svnactions.cpp:1301
 msgid "Checking out"
 msgstr "Prelievo"
 
-#: svnfrontend/svnactions.cpp:1327
+#: svnfrontend/svnactions.cpp:1331
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1357
+#: svnfrontend/svnactions.cpp:1361
 msgid "Revert entries"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1365
+#: svnfrontend/svnactions.cpp:1369
 msgid "Really revert these entries to pristine state?"
 msgstr "Vuoi veramente ripristinare queste voci allo stato originale?"
 
-#: svnfrontend/svnactions.cpp:1379
+#: svnfrontend/svnactions.cpp:1383
 msgid "Reverting items"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1405 svnfrontend/svnactions.cpp:1472
+#: svnfrontend/svnactions.cpp:1409 svnfrontend/svnactions.cpp:1476
 msgid "Switch url"
 msgstr "Scambia URL"
 
-#: svnfrontend/svnactions.cpp:1405
+#: svnfrontend/svnactions.cpp:1409
 msgid "Switching url"
 msgstr "Scambio dell'URL"
 
-#: svnfrontend/svnactions.cpp:1430
+#: svnfrontend/svnactions.cpp:1434
 msgid "Relocate url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1430
+#: svnfrontend/svnactions.cpp:1434
 #, fuzzy
 msgid "Relocate repository to new URL"
 msgstr "Nessun deposito da aprire"
 
-#: svnfrontend/svnactions.cpp:1451
+#: svnfrontend/svnactions.cpp:1455
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1458
+#: svnfrontend/svnactions.cpp:1462
 msgid "Error getting entry to switch"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1494
+#: svnfrontend/svnactions.cpp:1498
 msgid "Cleaning up folder"
 msgstr "Pulizia della cartella"
 
-#: svnfrontend/svnactions.cpp:1508
+#: svnfrontend/svnactions.cpp:1512
 msgid "Resolve"
 msgstr "Risolvi"
 
-#: svnfrontend/svnactions.cpp:1508
+#: svnfrontend/svnactions.cpp:1512
 msgid "Marking resolved"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1522
+#: svnfrontend/svnactions.cpp:1526
 msgid "Importing items"
 msgstr "Importazione elementi"
 
-#: svnfrontend/svnactions.cpp:1567
+#: svnfrontend/svnactions.cpp:1571
 msgid "Moving/Rename item "
 msgstr "Sposta/rinomina elemento "
 
-#: svnfrontend/svnactions.cpp:1581
+#: svnfrontend/svnactions.cpp:1585
 msgid "Moving entries"
 msgstr "Spostamento elementi"
 
-#: svnfrontend/svnactions.cpp:1598 svnfrontend/svnactions.cpp:1612
+#: svnfrontend/svnactions.cpp:1602 svnfrontend/svnactions.cpp:1616
 msgid "Copy or Moving entries"
 msgstr "Copia o Sposta elementi"
 
-#: svnfrontend/svnactions.cpp:1709
+#: svnfrontend/svnactions.cpp:1713
 msgid "No unversioned items found."
 msgstr "Non sono stati trovati elementi senza revisione."
 
-#: svnfrontend/svnactions.cpp:1712
+#: svnfrontend/svnactions.cpp:1716
 msgid "Add unversioned items"
 msgstr "Aggiungi elementi senza revisione"
 
-#: svnfrontend/svnactions.cpp:1814
+#: svnfrontend/svnactions.cpp:1818
 msgid "Still checking for updates"
 msgstr "Controllo degli aggiornamenti ancora in corso"
 
-#: svnfrontend/svnactions.cpp:1835
+#: svnfrontend/svnactions.cpp:1839
 msgid "Checking for updates finished"
 msgstr "Controllo per aggiornamenti finito"
 
-#: svnfrontend/svnactions.cpp:1837
+#: svnfrontend/svnactions.cpp:1841
 msgid "There are new items in repository"
 msgstr "Ci sono nuovi elementi nel deposito"
 
-#: svnfrontend/svnactions.cpp:1910
+#: svnfrontend/svnactions.cpp:1914
 msgid "Checking for updates started in background"
 msgstr "Controllo per gli aggiornamenti avviato in corso"
 

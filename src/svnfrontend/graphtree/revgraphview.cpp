@@ -939,7 +939,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
         slotClientException(i18n("No difference to display"));
         return;
     }
-    emit dispDiff(QString::FROMUTF8(ex,ex.size()));
+    emit dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void RevGraphView::setBasePath(const QString&_path)

@@ -39,6 +39,8 @@
 
 #include <qfile.h>
 
+#include <apr_xlate.h>
+
 namespace svn
 {
   /**
@@ -154,13 +156,24 @@ namespace svn
     }
 
     // run diff
-    error = svn_client_diff2 (options,
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+    error = svn_client_diff3 (options,
                              path1.cstr (), r1.revision (),
                              path2.cstr (), r2.revision (),
-                             recurse, ignoreAncestry, noDiffDeleted, ignore_contenttype,
+                             recurse?1:0, ignoreAncestry, noDiffDeleted, ignore_contenttype,
+                             APR_LOCALE_CHARSET,
                              outfile, errfile,
                              *m_context,
                              pool);
+#else
+    error = svn_client_diff2 (options,
+                             path1.cstr (), r1.revision (),
+                             path2.cstr (), r2.revision (),
+                             recurse?1:0, ignoreAncestry, noDiffDeleted, ignore_contenttype,
+                             outfile, errfile,
+                             *m_context,
+                             pool);
+#endif
 
     if (error != NULL)
     {

@@ -189,7 +189,15 @@ int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) co
     if (col==COL_LAST_REV) {
         return k->cmtRev()-cmtRev();
     }
-    return text(col).localeAwareCompare(k->text(col));
+
+    if (Kdesvnsettings::case_sensitive_sort()) {
+        if (Kdesvnsettings::locale_is_casesensitive()) {
+            return text(col).localeAwareCompare(k->text(col));
+        }
+        return text(col).compare(k->text(col));
+    } else {
+        return text(col).lower().localeAwareCompare(k->text(col).lower());
+    }
 }
 
 void FileListViewItem::removeChilds()

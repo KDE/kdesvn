@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>280</width>
-            <height>384</height>
+            <width>449</width>
+            <height>347</height>
         </rect>
     </property>
     <property name="caption">
@@ -51,44 +51,62 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>kcfg_display_file_tips</cstring>
+                <cstring>layout6</cstring>
             </property>
-            <property name="text">
-                <string>Show file info</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
-            </property>
-        </widget>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_display_previews_in_file_tips</cstring>
-            </property>
-            <property name="text">
-                <string>Display previews in file tips</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
-            </property>
-        </widget>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_display_overlays</cstring>
-            </property>
-            <property name="text">
-                <string>Mark item status with icon overlay</string>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Mark subversion states with an overlayed icon</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>&lt;p align="left"&gt;
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox" row="1" column="1">
+                    <property name="name">
+                        <cstring>kcfg_case_sensitive_sort</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Items sortorder is case sensitive</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="0" column="0">
+                    <property name="name">
+                        <cstring>kcfg_display_file_tips</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Show file info</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="0" column="1">
+                    <property name="name">
+                        <cstring>kcfg_display_overlays</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Mark item status with icon overlay</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Mark subversion states with an overlayed icon</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;p align="left"&gt;
 Mark an items with non-normal state with an overlayed icon. When you wish to
 see which items has newer items in repository you may have to set "Check for updates on open" in Subversion-Dialog.
 &lt;/p&gt;</string>
-            </property>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="1" column="0">
+                    <property name="name">
+                        <cstring>kcfg_display_previews_in_file_tips</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Display previews in file tips</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
+                    </property>
+                </widget>
+            </grid>
         </widget>
         <widget class="QButtonGroup">
             <property name="name">

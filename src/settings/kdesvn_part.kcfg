@@ -1,153 +1,166 @@
 <!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
 <kcfg>
- <kcfgfile name="kdesvnpartrc" />
- <group name="general_items" >
-  <entry key="listview_icon_size" type="Int" >
-   <label>Size of the icons</label>
-   <default>22</default>
-  </entry>
-  <entry key="display_file_tips" type="Bool" >
-   <label>Show file informations in tooltip</label>
-   <default>true</default>
-  </entry>
-  <entry key="display_previews_in_file_tips" type="Bool" >
-   <label>Show preview of the file in tooltip</label>
-   <default>false</default>
-  </entry>
-  <entry key="use_kompare_for_diff" type="Int" >
-   <label>Use the program kompare for diff viewing</label>
-   <default>1</default>
-  </entry>
-  <entry key="external_diff_display" type="String" >
-   <label>Use external program for diff viewing</label>
-   <default>kompare</default>
-  </entry>
-  <entry key="external_display" type="String" >
-   <label>Use external program for viewing</label>
-   <default>default</default>
-  </entry>
-  <entry key="diff_ignore_content" type="Bool">
-   <label>Diff ignores content type</label>
-   <default>false</default>
-  </entry>
-  <entry key="max_log_messages" type="Int" >
-   <label>Maximum number of log messages</label>
-   <default>20</default>
-  </entry>
- </group>
- <group name="subversion" >
-  <entry key="display_overlays" type="Bool" >
-   <label>Display icon overlays</label>
-   <default>true</default>
-  </entry>
-  <entry key="info_recursive" type="Bool" >
-   <label>Get item informations recursively</label>
-   <default>false</default>
-  </entry>
-  <entry key="review_commit" type="Bool">
-    <label>Review items before commit</label>
-    <default>true</default>
-  </entry>
-  <entry key="display_ignored_files" type="Bool" >
-   <label>Display ignored files</label>
-   <default>true</default>
-  </entry>
-  <entry key="log_follows_nodes" type="Bool" >
-   <label>Log follows node changes</label>
-   <default>true</default>
-  </entry>
-  <entry key="log_always_list_changed_files" type="Bool" >
-   <label>Logs always reads list of changed files</label>
-   <default>true</default>
-  </entry>
-  <entry key="start_updates_check_on_open" type="Bool" >
-   <label>Start check for updates when open working copy</label>
-   <default>true</default>
-  </entry>
-  <entry key="maximum_displayed_logs" type="UInt" >
-   <label>Maximum displayed logs when full log (0 for no limit)</label>
-   <default>0</default>
-  </entry>
-  <entry key="details_on_remote_listing" type="Bool" >
-   <label>Get detailed infos when making a remote listing</label>
-   <default>false</default>
-  </entry>
-  <entry key="store_passwords" type="Bool" >
-   <label>Store passwords for remote connections</label>
-   <default>false</default>
-  </entry>
- </group>
- <group name="display" >
-  <entry key="colored_state" type="Bool" >
-   <label>Display different then normal states colored</label>
-   <default>true</default>
-  </entry>
-  <entry key="color_need_update" type="Color" >
-   <default>101,224,76</default>
-  </entry>
-  <entry key="color_missed_item" type="Color" >
-   <default>#CC0000</default>
-  </entry>
-  <entry key="color_notversioned_item" type="Color" >
-   <default>#BBBBBB</default>
-  </entry>
-  <entry key="color_locked_item" type="Color" >
-   <default>#c50003</default>
-  </entry>
-  <entry key="color_need_lock" type="Color" >
-   <default>#ff8888</default>
-  </entry>
-  <entry key="color_item_deleted" type="Color" >
-   <default>#a3a3a3</default>
-  </entry>
-  <entry key="color_item_added" type="Color" >
-   <default>#85bae0</default>
-  </entry>
-  <entry key="color_changed_item" type="Color" >
-   <default>#de5e5e</default>
-  </entry>
-  <entry key="color_conflicted_item" type="Color" >
-   <default>255,0,0</default>
-  </entry>
- </group>
- <group name="revision_tree">
-  <entry key="tree_direction" type="Int">
-   <default>0</default>
-   <label>Direction of revision tree</label>
-  </entry>
-  <entry key="tree_add_color" type="Color">
-   <default>#00FF00</default>
-   <label>Color for added items</label>
-  </entry>
-  <entry key="tree_delete_color" type="Color">
-   <default>#FF0000</default>
-   <label>Color for deleted items</label>
-  </entry>
-  <entry key="tree_copy_color" type="Color">
-   <default>#C0C0C0</default>
-   <label>Color for copied items</label>
-  </entry>
-  <entry key="tree_rename_color" type="Color">
-   <default>#C0C0C0</default>
-   <label>Color for renamed items</label>
-  </entry>
-  <entry key="tree_modify_color" type="Color">
-   <default>#a0a0a4</default>
-   <label>Color for modified items</label>
-  </entry>
-  <entry key="tree_detail_height" type="IntList">
-    <default>0,0</default>
-    <label>Height of detail view in tree widget</label>
-  </entry>
- </group>
- <group name="cmdline">
-    <entry key="cmdline_show_logwindow" type="Bool">
-        <default>true</default>
-        <label>Show a small logwindow after executing a command.</label>
+  <kcfgfile name="kdesvnpartrc" />
+  <include>qstring.h</include>
+  <group name="general_items" >
+    <entry key="case_sensitive_sort" type="Bool" >
+      <label>Set if items sortorder should be case sensitive or not</label>
+      <default>true</default>
     </entry>
-    <entry key="cmdline_log_minline" type="UInt">
-        <default>0</default>
-        <label>Log must contain at least lines to show</label>
+    <entry key="listview_icon_size" type="Int" >
+      <label>Size of the icons</label>
+      <default>22</default>
     </entry>
- </group>
+    <entry key="display_file_tips" type="Bool" >
+      <label>Show file informations in tooltip</label>
+      <default>true</default>
+    </entry>
+    <entry key="display_previews_in_file_tips" type="Bool" >
+      <label>Show preview of the file in tooltip</label>
+      <default>false</default>
+    </entry>
+    <entry key="use_kompare_for_diff" type="Int" >
+      <label>Use the program kompare for diff viewing</label>
+      <default>1</default>
+    </entry>
+    <entry key="external_diff_display" type="String" >
+      <label>Use external program for diff viewing</label>
+      <default>kompare</default>
+    </entry>
+    <entry key="external_display" type="String" >
+      <label>Use external program for viewing</label>
+      <default>default</default>
+    </entry>
+    <entry key="diff_ignore_content" type="Bool" >
+      <label>Diff ignores content type</label>
+      <default>false</default>
+    </entry>
+    <entry key="max_log_messages" type="Int" >
+      <label>Maximum number of log messages</label>
+      <default>20</default>
+    </entry>
+  </group>
+  <group name="subversion" >
+    <entry key="display_overlays" type="Bool" >
+      <label>Display icon overlays</label>
+      <default>true</default>
+    </entry>
+    <entry key="info_recursive" type="Bool" >
+      <label>Get item informations recursively</label>
+      <default>false</default>
+    </entry>
+    <entry key="review_commit" type="Bool" >
+      <label>Review items before commit</label>
+      <default>true</default>
+    </entry>
+    <entry key="display_ignored_files" type="Bool" >
+      <label>Display ignored files</label>
+      <default>true</default>
+    </entry>
+    <entry key="log_follows_nodes" type="Bool" >
+      <label>Log follows node changes</label>
+      <default>true</default>
+    </entry>
+    <entry key="log_always_list_changed_files" type="Bool" >
+      <label>Logs always reads list of changed files</label>
+      <default>true</default>
+    </entry>
+    <entry key="start_updates_check_on_open" type="Bool" >
+      <label>Start check for updates when open working copy</label>
+      <default>true</default>
+    </entry>
+    <entry key="maximum_displayed_logs" type="UInt" >
+      <label>Maximum displayed logs when full log (0 for no limit)</label>
+      <default>0</default>
+    </entry>
+    <entry key="details_on_remote_listing" type="Bool" >
+      <label>Get detailed infos when making a remote listing</label>
+      <default>false</default>
+    </entry>
+    <entry key="store_passwords" type="Bool" >
+      <label>Store passwords for remote connections</label>
+      <default>false</default>
+    </entry>
+  </group>
+  <group name="display" >
+    <entry key="colored_state" type="Bool" >
+      <label>Display different then normal states colored</label>
+      <default>true</default>
+    </entry>
+    <entry key="color_need_update" type="Color" >
+      <default>101,224,76</default>
+    </entry>
+    <entry key="color_missed_item" type="Color" >
+      <default>#CC0000</default>
+    </entry>
+    <entry key="color_notversioned_item" type="Color" >
+      <default>#BBBBBB</default>
+    </entry>
+    <entry key="color_locked_item" type="Color" >
+      <default>#c50003</default>
+    </entry>
+    <entry key="color_need_lock" type="Color" >
+      <default>#ff8888</default>
+    </entry>
+    <entry key="color_item_deleted" type="Color" >
+      <default>#a3a3a3</default>
+    </entry>
+    <entry key="color_item_added" type="Color" >
+      <default>#85bae0</default>
+    </entry>
+    <entry key="color_changed_item" type="Color" >
+      <default>#de5e5e</default>
+    </entry>
+    <entry key="color_conflicted_item" type="Color" >
+      <default>255,0,0</default>
+    </entry>
+  </group>
+  <group name="revision_tree" >
+    <entry key="tree_direction" type="Int" >
+      <default>0</default>
+      <label>Direction of revision tree</label>
+    </entry>
+    <entry key="tree_add_color" type="Color" >
+      <default>#00FF00</default>
+      <label>Color for added items</label>
+    </entry>
+    <entry key="tree_delete_color" type="Color" >
+      <default>#FF0000</default>
+      <label>Color for deleted items</label>
+    </entry>
+    <entry key="tree_copy_color" type="Color" >
+      <default>#C0C0C0</default>
+      <label>Color for copied items</label>
+    </entry>
+    <entry key="tree_rename_color" type="Color" >
+      <default>#C0C0C0</default>
+      <label>Color for renamed items</label>
+    </entry>
+    <entry key="tree_modify_color" type="Color" >
+      <default>#a0a0a4</default>
+      <label>Color for modified items</label>
+    </entry>
+    <entry key="tree_detail_height" type="IntList" >
+      <default>0,0</default>
+      <label>Height of detail view in tree widget</label>
+    </entry>
+  </group>
+  <group name="cmdline" >
+    <entry key="cmdline_show_logwindow" type="Bool" >
+      <default>true</default>
+      <label>Show a small logwindow after executing a command.</label>
+    </entry>
+    <entry key="cmdline_log_minline" type="UInt" >
+      <default>0</default>
+      <label>Log must contain at least lines to show</label>
+    </entry>
+  </group>
+  <group name="internals" >
+    <entry key="locale_is_casesensitive" type="Bool" >
+      <whatsthis>This value computes how casesensitive string ordering will made.
+Never overwrite the default computed value unless you know what you're doing.</whatsthis>
+      <default code="true" >QString(&quot;a&quot;).localeAwareCompare(&quot;B&quot;)>0</default>
+      <label>Check if current locale is case sensitive or not</label>
+    </entry>
+  </group>
 </kcfg>

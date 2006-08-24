@@ -9,5 +9,8 @@ if [ "x$2" = "x" ]; then
    exit 0
 fi
 
-echo "linking $2 -> $1"
-ln -fs "$2" "$1"
+if [ ! -h $1 ]; then
+ echo "linking $2 -> $1"
+ ln -fs "$2" "$1"
+fi
+

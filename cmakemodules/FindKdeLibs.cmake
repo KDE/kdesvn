@@ -106,8 +106,10 @@ IF (NOT KDE3_ICONDIR)
     SET(KDE3_ICONDIR ${KDE3_DATADIR}/icons CACHE STRING
         "KDE3-icons dir (relative to install-prefix when not starting with \"/\")" )
 ENDIF (NOT KDE3_ICONDIR)
+
+# applicationsdir for kde has an own subdir! (where the desktop-files goes)
 IF (NOT KDE3_APPLICATIONSDIR)
-    SET(KDE3_APPLICATIONSDIR ${KDE3_DATADIR}/applications CACHE STRING
+    SET(KDE3_APPLICATIONSDIR ${KDE3_DATADIR}/applications/kde CACHE STRING
         "KDE3-applications dir (relative to install-prefix when not starting with \"/\")" )
 ENDIF (NOT KDE3_APPLICATIONSDIR)
 

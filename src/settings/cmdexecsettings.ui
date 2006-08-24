@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>340</width>
-            <height>81</height>
+            <height>107</height>
         </rect>
     </property>
     <property name="caption">
@@ -66,6 +66,17 @@
                 </widget>
             </grid>
         </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_no_konqueror_contextmenu</cstring>
+            </property>
+            <property name="text">
+                <string>Don't display contextmenu in Konqueror</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>If set, kdesvn will not show a menu inside "Action" menu of konqueror</string>
+            </property>
+        </widget>
         <spacer>
             <property name="name">
                 <cstring>spacer1</cstring>
@@ -79,12 +90,14 @@
             <property name="sizeHint">
                 <size>
                     <width>20</width>
-                    <height>40</height>
+                    <height>16</height>
                 </size>
             </property>
         </spacer>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <connections>
     <connection>
         <sender>kcfg_cmdline_show_logwindow</sender>

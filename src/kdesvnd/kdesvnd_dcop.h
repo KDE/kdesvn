@@ -66,7 +66,6 @@ k_dcop:
     QStringList get_logmsg();
     // return a logmessage at pos 0, null-size list if cancel hit, parameter is path -> action for display
     QStringList get_logmsg(QMap<QString,QString>);
-    QStringList getTopLevelActionMenu(KURL::List);
     QStringList getActionMenu(KURL::List);
     QStringList getSingleActionMenu(QCString);
 };

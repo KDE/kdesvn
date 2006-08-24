@@ -146,6 +146,10 @@
     </entry>
   </group>
   <group name="cmdline" >
+    <entry key="no_konqueror_contextmenu" type="Bool" >
+      <default>false</default>
+      <label>Should konqueror not display context menus for kdesvn?</label>
+    </entry>
     <entry key="cmdline_show_logwindow" type="Bool" >
       <default>true</default>
       <label>Show a small logwindow after executing a command.</label>

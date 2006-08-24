@@ -4,5 +4,5 @@ SET(MANFILES
 
 INSTALL(FILES 
     ${MANFILES}
-    DESTINATION man/man1)
+    DESTINATION share/man/man1)
 

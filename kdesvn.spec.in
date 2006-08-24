@@ -75,9 +75,6 @@ make -j$numprocs
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 
-cd $RPM_BUILD_ROOT
-ln -s %{_datadir}/doc/HTML/en/common $RPM_BUILD_ROOT%{_datadir}/doc/HTML/en/kdesvn/common
-
 %clean
 rm -rf $RPM_BUILD_ROOT/*
 rm -rf $RPM_BUILD_DIR/kdesvn
@@ -99,6 +96,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/apps/konqueror/servicemenus/kdesvn*
 %{_libdir}/*/kio_ksvn*
 %{_datadir}/services/ksvn*.protocol
+%{_mandir}/man1/*
 
 %files kiosvn
 %{_datadir}/services/svn*.protocol

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-23 13:39+0200\n"
+"POT-Creation-Date: 2006-08-25 09:33+0200\n"
 "PO-Revision-Date: 2006-04-22 01:08+0200\n"
 "Last-Translator: Antoni Bella Pérez <bella5@teleline.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -28,7 +28,7 @@ msgid ""
 "Your emails"
 msgstr "bella5@teleline.es"
 
-#: kdesvnd/kdesvnd_dcop.cpp:260 svnfrontend/ccontextlistener.cpp:251
+#: kdesvnd/kdesvnd_dcop.cpp:239 svnfrontend/ccontextlistener.cpp:251
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Obre un fitxer amb un certificat #PKCS12"
 
@@ -601,7 +601,7 @@ msgstr ""
 msgid "No difference to display"
 msgstr "Vista del diff"
 
-#: svnfrontend/svnactions.cpp:1019 rc.cpp:622
+#: svnfrontend/svnactions.cpp:1019 rc.cpp:628
 #, no-c-format
 msgid "Diff display"
 msgstr "Vista del diff"
@@ -1944,7 +1944,7 @@ msgstr ""
 "Fer clic per a obtenir una petita informació quant al nom predefinit de la "
 "propietat"
 
-#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:545
+#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:551
 #, no-c-format
 msgid "Form1"
 msgstr "Form. 1"
@@ -2233,29 +2233,39 @@ msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: rc.cpp:484 kdesvn_part.cpp:327
+#: rc.cpp:484
+#, no-c-format
+msgid "Don't display contextmenu in Konqueror"
+msgstr ""
+
+#: rc.cpp:487
+#, no-c-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
+msgstr ""
+
+#: rc.cpp:490 kdesvn_part.cpp:327
 #, no-c-format
 msgid "Subversion Settings"
 msgstr "Paràmetres de Subversion"
 
-#: rc.cpp:487
+#: rc.cpp:493
 #, no-c-format
 msgid "Start check for updates when open a working copy"
 msgstr "Inicia la comprovació d'actualitzacions en obrir una còpia de treball"
 
-#: rc.cpp:491
+#: rc.cpp:497
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 "Dirimeix si Kdesvn haurà de comprovar per actualitzacions quan obre una "
 "còpia de treball"
 
-#: rc.cpp:494
+#: rc.cpp:500
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr "Obté detalls de fitxer en el llistat remot"
 
-#: rc.cpp:498
+#: rc.cpp:504
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
@@ -2264,7 +2274,7 @@ msgstr ""
 "Quan obtenir detalls sobre els ítems quan es realitza un llistat sobre els "
 "repositoris"
 
-#: rc.cpp:501
+#: rc.cpp:507
 #, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -2278,27 +2288,27 @@ msgstr ""
 "poden veure els blocats remots en el resum.</p>\n"
 "<p align=\"left\"><i>Precaució: Això pot tornar el llistat MOLT lent!</i></p>"
 
-#: rc.cpp:506
+#: rc.cpp:512
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr "Obté la informació de l'ítem recursivament"
 
-#: rc.cpp:509 kdesvn_part.cpp:174
+#: rc.cpp:515 kdesvn_part.cpp:174
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Mostra els fitxers ignorats"
 
-#: rc.cpp:513
+#: rc.cpp:519
 #, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "Desa les contrasenyes per a connexions remotes"
 
-#: rc.cpp:516
+#: rc.cpp:522
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:519
+#: rc.cpp:525
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -2308,22 +2318,22 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:522
+#: rc.cpp:528
 #, no-c-format
 msgid "Log follows node changes"
 msgstr "El registre segueix els canvis de node"
 
-#: rc.cpp:526
+#: rc.cpp:532
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr "Els registres sempre llegeixen la llista de fitxers canviats"
 
-#: rc.cpp:529
+#: rc.cpp:535
 #, fuzzy, no-c-format
 msgid "Read detailed change lists"
 msgstr "Ítems canviats al remot:"
 
-#: rc.cpp:532
+#: rc.cpp:538
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -2331,93 +2341,93 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:535
+#: rc.cpp:541
 #, no-c-format
 msgid "Review items before commit"
 msgstr "Revisa els ítems abans d'entregar-los"
 
-#: rc.cpp:539
+#: rc.cpp:545
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr ""
 
-#: rc.cpp:542
+#: rc.cpp:548
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 "Màxim de registres a mostrar en veure la bitàcola (0 per a sense limit)"
 
-#: rc.cpp:548
+#: rc.cpp:554
 #, no-c-format
 msgid "Mark changed and locked items colored"
 msgstr "Marca amb colors els ítems modificats i blocats"
 
-#: rc.cpp:556
+#: rc.cpp:562
 #, no-c-format
 msgid "Locked items:"
 msgstr "Ítems blocats:"
 
-#: rc.cpp:560
+#: rc.cpp:566
 #, no-c-format
 msgid "Not versioned items:"
 msgstr "Ítems sense versió:"
 
-#: rc.cpp:563
+#: rc.cpp:569
 #, no-c-format
 msgid "Remote changed items:"
 msgstr "Ítems canviats al remot:"
 
-#: rc.cpp:566
+#: rc.cpp:572
 #, no-c-format
 msgid "Added items:"
 msgstr "Ítems afegits:"
 
-#: rc.cpp:569
+#: rc.cpp:575
 #, no-c-format
 msgid "Deleted items:"
 msgstr "Ítems esborrats:"
 
-#: rc.cpp:576
+#: rc.cpp:582
 #, no-c-format
 msgid "Conflicted items:"
 msgstr "Ítems en conflicte:"
 
-#: rc.cpp:579
+#: rc.cpp:585
 #, no-c-format
 msgid "Missed items:"
 msgstr "Ítems perduts:"
 
-#: rc.cpp:582
+#: rc.cpp:588
 #, no-c-format
 msgid "Local changed items:"
 msgstr "Ítems canviats en local:"
 
-#: rc.cpp:585
+#: rc.cpp:591
 #, no-c-format
 msgid "Item needs lock:"
 msgstr ""
 
-#: rc.cpp:589
+#: rc.cpp:595
 #, no-c-format
 msgid "Settings"
 msgstr "Arranjament"
 
-#: rc.cpp:592
+#: rc.cpp:598
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr "Mida de les icones de vista en llista"
 
-#: rc.cpp:595
+#: rc.cpp:601
 #, no-c-format
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:604
 #, no-c-format
 msgid "Show file info"
 msgstr "Mostra informació del fitxer"
 
-#: rc.cpp:601
+#: rc.cpp:607
 #, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
@@ -2426,17 +2436,17 @@ msgstr ""
 "Aquí podeu controlar si, en moure el ratolí damunt d'un fitxer, voleu veure "
 "una petita finestra emergent amb informació addicional del fitxer"
 
-#: rc.cpp:604
+#: rc.cpp:610
 #, no-c-format
 msgid "Mark item status with icon overlay"
 msgstr "Marca l'estat de l'ítem superposant una icona"
 
-#: rc.cpp:607
+#: rc.cpp:613
 #, no-c-format
 msgid "Mark subversion states with an overlayed icon"
 msgstr "Marca els estats de subversion superposant una icona"
 
-#: rc.cpp:610
+#: rc.cpp:616
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2452,12 +2462,12 @@ msgstr ""
 "\"Comprova actualitzacions en obrir\" en el Diàleg de Subversion.\n"
 "</p>"
 
-#: rc.cpp:616
+#: rc.cpp:622
 #, no-c-format
 msgid "Display previews in file tips"
 msgstr "Mostra vistes prèvies en els tipus de fitxer"
 
-#: rc.cpp:619
+#: rc.cpp:625
 #, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
@@ -2466,37 +2476,37 @@ msgstr ""
 "Aquí podeu controlar si voleu que la finestra emergent contingui una vista "
 "prèvia més gran del fitxer, en passar el ratolí per sobre"
 
-#: rc.cpp:625
+#: rc.cpp:631
 #, no-c-format
 msgid "Internal"
 msgstr "Interna"
 
-#: rc.cpp:628
+#: rc.cpp:634
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Usa Kompare per a diff"
 
-#: rc.cpp:631
+#: rc.cpp:637
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Usa un altre visor per a diff"
 
-#: rc.cpp:634
+#: rc.cpp:640
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr "Les diferències ignoren el tipus de contingut"
 
-#: rc.cpp:637
+#: rc.cpp:643
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr "Per a més detalls veure \"Què és això?\""
 
-#: rc.cpp:640
+#: rc.cpp:646
 #, no-c-format
 msgid "External diff display:"
 msgstr "Visor extern de diff:"
 
-#: rc.cpp:643
+#: rc.cpp:649
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2525,12 +2535,12 @@ msgstr ""
 "i Kdesvn enviarà directament les dades cap a la canonada.\n"
 "</p>"
 
-#: rc.cpp:657
+#: rc.cpp:663
 #, no-c-format
 msgid "External display:"
 msgstr "Visor extern:"
 
-#: rc.cpp:660
+#: rc.cpp:666
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2554,7 +2564,7 @@ msgstr ""
 "amb doble clic, entreu &quot;default&quot; i KDE seleccionarà l'acció.\n"
 "</p>"
 
-#: rc.cpp:670
+#: rc.cpp:676
 #, no-c-format
 msgid "Maximum logmessages in history:"
 msgstr "Màxim de missatges de registre en l'historial:"

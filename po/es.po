@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-23 13:39+0200\n"
+"POT-Creation-Date: 2006-08-25 09:33+0200\n"
 "PO-Revision-Date: 2006-06-23 16:40+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team:  <mariopal@gmail.com>\n"
@@ -29,7 +29,7 @@ msgid ""
 "Your emails"
 msgstr "mariopal@gmail.com"
 
-#: kdesvnd/kdesvnd_dcop.cpp:260 svnfrontend/ccontextlistener.cpp:251
+#: kdesvnd/kdesvnd_dcop.cpp:239 svnfrontend/ccontextlistener.cpp:251
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Abrir un fichero con un certificado #PKCS12"
 
@@ -599,7 +599,7 @@ msgstr ""
 msgid "No difference to display"
 msgstr "Visor de diferencias"
 
-#: svnfrontend/svnactions.cpp:1019 rc.cpp:622
+#: svnfrontend/svnactions.cpp:1019 rc.cpp:628
 #, no-c-format
 msgid "Diff display"
 msgstr "Visor de diferencias"
@@ -1930,7 +1930,7 @@ msgstr ""
 "Pulse para obtener una pequeña información acerca del nombre predefinido de "
 "la propiedad."
 
-#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:545
+#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:551
 #, no-c-format
 msgid "Form1"
 msgstr "Formulario1"
@@ -2219,30 +2219,40 @@ msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: rc.cpp:484 kdesvn_part.cpp:327
+#: rc.cpp:484
+#, no-c-format
+msgid "Don't display contextmenu in Konqueror"
+msgstr ""
+
+#: rc.cpp:487
+#, no-c-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
+msgstr ""
+
+#: rc.cpp:490 kdesvn_part.cpp:327
 #, no-c-format
 msgid "Subversion Settings"
 msgstr "Configuración Subversion"
 
-#: rc.cpp:487
+#: rc.cpp:493
 #, no-c-format
 msgid "Start check for updates when open a working copy"
 msgstr ""
 "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
-#: rc.cpp:491
+#: rc.cpp:497
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 "Seleccionar si hay que comprobar actualizaciones cuando se abre una copia de "
 "trabajo"
 
-#: rc.cpp:494
+#: rc.cpp:500
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr "Obtener detalles de ficheros en listado remoto"
 
-#: rc.cpp:498
+#: rc.cpp:504
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
@@ -2251,7 +2261,7 @@ msgstr ""
 "Si obtener o no detalles sobre los elementos cuando se realiza un listado "
 "sobre los repositorios"
 
-#: rc.cpp:501
+#: rc.cpp:507
 #, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -2265,27 +2275,27 @@ msgstr ""
 "remotos. Así se pueden ver bloqueos remotos en la previsualización.n</p>\n"
 "<p align=\"left\"><i>¡CUIDADO: Esto puede hacer el listado MUY lento!</i></p>"
 
-#: rc.cpp:506
+#: rc.cpp:512
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr "Obtener información recursiva del elemento"
 
-#: rc.cpp:509 kdesvn_part.cpp:174
+#: rc.cpp:515 kdesvn_part.cpp:174
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Mostrar ficheros ignorados"
 
-#: rc.cpp:513
+#: rc.cpp:519
 #, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "Almacenar contraseñas para conexiones remotas"
 
-#: rc.cpp:516
+#: rc.cpp:522
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:519
+#: rc.cpp:525
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -2295,22 +2305,22 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:522
+#: rc.cpp:528
 #, no-c-format
 msgid "Log follows node changes"
 msgstr "El registro muestra los cambios en los nodos"
 
-#: rc.cpp:526
+#: rc.cpp:532
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr "Los registros siempre leen la lista de ficheros cambiados"
 
-#: rc.cpp:529
+#: rc.cpp:535
 #, fuzzy, no-c-format
 msgid "Read detailed change lists"
 msgstr "Elementos remotos modificados:"
 
-#: rc.cpp:532
+#: rc.cpp:538
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -2318,93 +2328,93 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:535
+#: rc.cpp:541
 #, no-c-format
 msgid "Review items before commit"
 msgstr "Revisar elementos antes de confirmar"
 
-#: rc.cpp:539
+#: rc.cpp:545
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr "Elementos listados en la última confirmación se enviarán o no"
 
-#: rc.cpp:542
+#: rc.cpp:548
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
-#: rc.cpp:548
+#: rc.cpp:554
 #, no-c-format
 msgid "Mark changed and locked items colored"
 msgstr "Marcar elementos modificados y bloqueados con colores"
 
-#: rc.cpp:556
+#: rc.cpp:562
 #, no-c-format
 msgid "Locked items:"
 msgstr "Elementos bloqueados:"
 
-#: rc.cpp:560
+#: rc.cpp:566
 #, no-c-format
 msgid "Not versioned items:"
 msgstr "Elementos no versionados:"
 
-#: rc.cpp:563
+#: rc.cpp:569
 #, no-c-format
 msgid "Remote changed items:"
 msgstr "Elementos remotos modificados:"
 
-#: rc.cpp:566
+#: rc.cpp:572
 #, no-c-format
 msgid "Added items:"
 msgstr "Elementos añadidos:"
 
-#: rc.cpp:569
+#: rc.cpp:575
 #, no-c-format
 msgid "Deleted items:"
 msgstr "Elementos eliminados:"
 
-#: rc.cpp:576
+#: rc.cpp:582
 #, no-c-format
 msgid "Conflicted items:"
 msgstr "Elementos en conflicto:"
 
-#: rc.cpp:579
+#: rc.cpp:585
 #, no-c-format
 msgid "Missed items:"
 msgstr "Elementos perdidos:"
 
-#: rc.cpp:582
+#: rc.cpp:588
 #, no-c-format
 msgid "Local changed items:"
 msgstr "Elementos locales modificados:"
 
-#: rc.cpp:585
+#: rc.cpp:591
 #, no-c-format
 msgid "Item needs lock:"
 msgstr "Elementos que necesitan bloqueo:"
 
-#: rc.cpp:589
+#: rc.cpp:595
 #, no-c-format
 msgid "Settings"
 msgstr "Configuraciones"
 
-#: rc.cpp:592
+#: rc.cpp:598
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr "Tamaño de los iconos de la lista"
 
-#: rc.cpp:595
+#: rc.cpp:601
 #, no-c-format
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:604
 #, no-c-format
 msgid "Show file info"
 msgstr "Mostrar información del fichero"
 
-#: rc.cpp:601
+#: rc.cpp:607
 #, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
@@ -2414,17 +2424,17 @@ msgstr ""
 "quiere ver una pequeña ventana emergente con información adicional acerca de "
 "ese fichero"
 
-#: rc.cpp:604
+#: rc.cpp:610
 #, no-c-format
 msgid "Mark item status with icon overlay"
 msgstr "Marcar estado del elemento superponiendo un dibujo en el icono"
 
-#: rc.cpp:607
+#: rc.cpp:613
 #, no-c-format
 msgid "Mark subversion states with an overlayed icon"
 msgstr "Marcar estados de subversion superponiendo dibujos en iconos"
 
-#: rc.cpp:610
+#: rc.cpp:616
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2442,12 +2452,12 @@ msgstr ""
 "Subversión.\n"
 "</p>"
 
-#: rc.cpp:616
+#: rc.cpp:622
 #, no-c-format
 msgid "Display previews in file tips"
 msgstr "Mostrar previsualizaciones en ventanas emergentes sobre el fichero"
 
-#: rc.cpp:619
+#: rc.cpp:625
 #, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
@@ -2456,37 +2466,37 @@ msgstr ""
 "Aquí se puede controlar si se quiere que la ventana emergente contenga una "
 "previsualización más grande del fichero, cuando se mueve el ratón sobre él"
 
-#: rc.cpp:625
+#: rc.cpp:631
 #, no-c-format
 msgid "Internal"
 msgstr "Interno"
 
-#: rc.cpp:628
+#: rc.cpp:634
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Usar Kompare para las diferencias"
 
-#: rc.cpp:631
+#: rc.cpp:637
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Usar otro visor de diferencias"
 
-#: rc.cpp:634
+#: rc.cpp:640
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr "Las diferencias ignoran el tipo de contenido"
 
-#: rc.cpp:637
+#: rc.cpp:643
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr "Ver \"¿Qué es ésto?\" para más detalles:"
 
-#: rc.cpp:640
+#: rc.cpp:646
 #, no-c-format
 msgid "External diff display:"
 msgstr "Visor de diferencias externo:"
 
-#: rc.cpp:643
+#: rc.cpp:649
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2516,12 +2526,12 @@ msgstr ""
 "y KDEsvn le enviará los datos directamente.\n"
 "</p>"
 
-#: rc.cpp:657
+#: rc.cpp:663
 #, no-c-format
 msgid "External display:"
 msgstr "Visor externo:"
 
-#: rc.cpp:660
+#: rc.cpp:666
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2545,7 +2555,7 @@ msgstr ""
 "doble click, introduzca &quot;default&quot; y KDE seleccionará la acción.\n"
 "</p>"
 
-#: rc.cpp:670
+#: rc.cpp:676
 #, no-c-format
 msgid "Maximum logmessages in history:"
 msgstr "Máximo número de mensajes de registro en el historial:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-23 13:39+0200\n"
+"POT-Creation-Date: 2006-08-25 09:33+0200\n"
 "PO-Revision-Date: 2006-07-31 13:22+0200\n"
 "Last-Translator: Klara Cihlarova <koty@seznam.cz>\n"
 "Language-Team: cs_CZ <cs@li.org>\n"
@@ -29,7 +29,7 @@ msgid ""
 "Your emails"
 msgstr "koty@seznam.cz"
 
-#: kdesvnd/kdesvnd_dcop.cpp:260 svnfrontend/ccontextlistener.cpp:251
+#: kdesvnd/kdesvnd_dcop.cpp:239 svnfrontend/ccontextlistener.cpp:251
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Otevřít soubor s #PKCS12 certifikátem"
 
@@ -590,7 +590,7 @@ msgstr ""
 msgid "No difference to display"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1019 rc.cpp:622
+#: svnfrontend/svnactions.cpp:1019 rc.cpp:628
 #, no-c-format
 msgid "Diff display"
 msgstr "Zobrazit diff"
@@ -1847,7 +1847,7 @@ msgstr "Hodnota vlastnosti:"
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 
-#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:545
+#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:551
 #, no-c-format
 msgid "Form1"
 msgstr "Form1"
@@ -2136,34 +2136,44 @@ msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: rc.cpp:484 kdesvn_part.cpp:327
+#: rc.cpp:484
+#, no-c-format
+msgid "Don't display contextmenu in Konqueror"
+msgstr ""
+
+#: rc.cpp:487
+#, no-c-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
+msgstr ""
+
+#: rc.cpp:490 kdesvn_part.cpp:327
 #, no-c-format
 msgid "Subversion Settings"
 msgstr "Nastavit: Subversion"
 
-#: rc.cpp:487
+#: rc.cpp:493
 #, no-c-format
 msgid "Start check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:491
+#: rc.cpp:497
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:494
+#: rc.cpp:500
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr ""
 
-#: rc.cpp:498
+#: rc.cpp:504
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
 msgstr ""
 
-#: rc.cpp:501
+#: rc.cpp:507
 #, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -2173,27 +2183,27 @@ msgid ""
 "<p align=\"left\"><i>Be care: This may let listings REAL slow!</i></p>"
 msgstr ""
 
-#: rc.cpp:506
+#: rc.cpp:512
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr ""
 
-#: rc.cpp:509 kdesvn_part.cpp:174
+#: rc.cpp:515 kdesvn_part.cpp:174
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Zobrazit ignorované soubory"
 
-#: rc.cpp:513
+#: rc.cpp:519
 #, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "Uložit heslo pro vzdálené připojení"
 
-#: rc.cpp:516
+#: rc.cpp:522
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:519
+#: rc.cpp:525
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -2203,22 +2213,22 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:522
+#: rc.cpp:528
 #, no-c-format
 msgid "Log follows node changes"
 msgstr ""
 
-#: rc.cpp:526
+#: rc.cpp:532
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr ""
 
-#: rc.cpp:529
+#: rc.cpp:535
 #, fuzzy, no-c-format
 msgid "Read detailed change lists"
 msgstr "Vzdálené změněné položky:"
 
-#: rc.cpp:532
+#: rc.cpp:538
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -2226,92 +2236,92 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:535
+#: rc.cpp:541
 #, no-c-format
 msgid "Review items before commit"
 msgstr ""
 
-#: rc.cpp:539
+#: rc.cpp:545
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr ""
 
-#: rc.cpp:542
+#: rc.cpp:548
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 
-#: rc.cpp:548
+#: rc.cpp:554
 #, no-c-format
 msgid "Mark changed and locked items colored"
 msgstr "Obarvit změněné a uzamčené položky"
 
-#: rc.cpp:556
+#: rc.cpp:562
 #, no-c-format
 msgid "Locked items:"
 msgstr "Uzamčené položky:"
 
-#: rc.cpp:560
+#: rc.cpp:566
 #, no-c-format
 msgid "Not versioned items:"
 msgstr "Neverzované položky:"
 
-#: rc.cpp:563
+#: rc.cpp:569
 #, no-c-format
 msgid "Remote changed items:"
 msgstr "Vzdálené změněné položky:"
 
-#: rc.cpp:566
+#: rc.cpp:572
 #, no-c-format
 msgid "Added items:"
 msgstr "Vložené položky:"
 
-#: rc.cpp:569
+#: rc.cpp:575
 #, no-c-format
 msgid "Deleted items:"
 msgstr "Smazané položky:"
 
-#: rc.cpp:576
+#: rc.cpp:582
 #, no-c-format
 msgid "Conflicted items:"
 msgstr "Položky v konfliktu:"
 
-#: rc.cpp:579
+#: rc.cpp:585
 #, no-c-format
 msgid "Missed items:"
 msgstr "Chybějící položky:"
 
-#: rc.cpp:582
+#: rc.cpp:588
 #, no-c-format
 msgid "Local changed items:"
 msgstr "Lokálně změněné položky:"
 
-#: rc.cpp:585
+#: rc.cpp:591
 #, no-c-format
 msgid "Item needs lock:"
 msgstr "Vyložky vyžadující uzamčení:"
 
-#: rc.cpp:589
+#: rc.cpp:595
 #, no-c-format
 msgid "Settings"
 msgstr "Nastavení"
 
-#: rc.cpp:592
+#: rc.cpp:598
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr "Velikost ikon v seznamu"
 
-#: rc.cpp:595
+#: rc.cpp:601
 #, no-c-format
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:604
 #, no-c-format
 msgid "Show file info"
 msgstr "Zobrazit informace o souboru"
 
-#: rc.cpp:601
+#: rc.cpp:607
 #, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
@@ -2320,17 +2330,17 @@ msgstr ""
 "Zde můžete ovlivnit, zda si přejete zobrazení malých oken s informacemi o "
 "souboru nebo adresáři, pokud nad ním ponecháte kurzor myši."
 
-#: rc.cpp:604
+#: rc.cpp:610
 #, no-c-format
 msgid "Mark item status with icon overlay"
 msgstr ""
 
-#: rc.cpp:607
+#: rc.cpp:613
 #, no-c-format
 msgid "Mark subversion states with an overlayed icon"
 msgstr ""
 
-#: rc.cpp:610
+#: rc.cpp:616
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2341,12 +2351,12 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:616
+#: rc.cpp:622
 #, no-c-format
 msgid "Display previews in file tips"
 msgstr "Zobrazit náhledy v tipech"
 
-#: rc.cpp:619
+#: rc.cpp:625
 #, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
@@ -2355,37 +2365,37 @@ msgstr ""
 "Zde můžete nastavit, zda chcete aby vyskakovací okno obsahovalo větší náhled "
 "souboru, nad kterým přejedete myší."
 
-#: rc.cpp:625
+#: rc.cpp:631
 #, no-c-format
 msgid "Internal"
 msgstr "Interní"
 
-#: rc.cpp:628
+#: rc.cpp:634
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Použít pro diff Kompare"
 
-#: rc.cpp:631
+#: rc.cpp:637
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Použít jiný program"
 
-#: rc.cpp:634
+#: rc.cpp:640
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr ""
 
-#: rc.cpp:637
+#: rc.cpp:643
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr ""
 
-#: rc.cpp:640
+#: rc.cpp:646
 #, no-c-format
 msgid "External diff display:"
 msgstr "Externí zobrazení rozdílů:"
 
-#: rc.cpp:643
+#: rc.cpp:649
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2402,12 +2412,12 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:657
+#: rc.cpp:663
 #, no-c-format
 msgid "External display:"
 msgstr "Externí zobrazení:"
 
-#: rc.cpp:660
+#: rc.cpp:666
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2421,7 +2431,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:670
+#: rc.cpp:676
 #, no-c-format
 msgid "Maximum logmessages in history:"
 msgstr ""

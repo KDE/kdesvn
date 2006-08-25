@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-23 13:39+0200\n"
+"POT-Creation-Date: 2006-08-25 09:33+0200\n"
 "PO-Revision-Date: 2005-10-21 19:54+0200\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
@@ -28,7 +28,7 @@ msgid ""
 "Your emails"
 msgstr "peter.talken@telia.com"
 
-#: kdesvnd/kdesvnd_dcop.cpp:260 svnfrontend/ccontextlistener.cpp:251
+#: kdesvnd/kdesvnd_dcop.cpp:239 svnfrontend/ccontextlistener.cpp:251
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Öppna en fil med ett #PKCS12-certifikat"
 
@@ -617,7 +617,7 @@ msgstr ""
 msgid "No difference to display"
 msgstr "Diff-visning"
 
-#: svnfrontend/svnactions.cpp:1019 rc.cpp:622
+#: svnfrontend/svnactions.cpp:1019 rc.cpp:628
 #, no-c-format
 msgid "Diff display"
 msgstr "Diff-visning"
@@ -1977,7 +1977,7 @@ msgstr "Egenskapsvärde:"
 msgid "Click for short info about pre-defined property name"
 msgstr "Klicka för information om fördefinierat egenskapsnamn"
 
-#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:545
+#: rc.cpp:256 rc.cpp:328 rc.cpp:463 rc.cpp:551
 #, fuzzy, no-c-format
 msgid "Form1"
 msgstr "Tvinga"
@@ -2266,34 +2266,44 @@ msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: rc.cpp:484 kdesvn_part.cpp:327
+#: rc.cpp:484
+#, no-c-format
+msgid "Don't display contextmenu in Konqueror"
+msgstr ""
+
+#: rc.cpp:487
+#, no-c-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
+msgstr ""
+
+#: rc.cpp:490 kdesvn_part.cpp:327
 #, no-c-format
 msgid "Subversion Settings"
 msgstr "Subversions inställningar"
 
-#: rc.cpp:487
+#: rc.cpp:493
 #, no-c-format
 msgid "Start check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:491
+#: rc.cpp:497
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:494
+#: rc.cpp:500
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr ""
 
-#: rc.cpp:498
+#: rc.cpp:504
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
 msgstr ""
 
-#: rc.cpp:501
+#: rc.cpp:507
 #, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -2303,27 +2313,27 @@ msgid ""
 "<p align=\"left\"><i>Be care: This may let listings REAL slow!</i></p>"
 msgstr ""
 
-#: rc.cpp:506
+#: rc.cpp:512
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr "Hämta information rekursivt"
 
-#: rc.cpp:509 kdesvn_part.cpp:174
+#: rc.cpp:515 kdesvn_part.cpp:174
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Visa överhoppade filer"
 
-#: rc.cpp:513
+#: rc.cpp:519
 #, fuzzy, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "Skriv in lösenord för rike %1"
 
-#: rc.cpp:516
+#: rc.cpp:522
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:519
+#: rc.cpp:525
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -2333,22 +2343,22 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:522
+#: rc.cpp:528
 #, no-c-format
 msgid "Log follows node changes"
 msgstr "Logg följer nodändringar"
 
-#: rc.cpp:526
+#: rc.cpp:532
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr "Loggar läser alltid lista på ändrade filer"
 
-#: rc.cpp:529
+#: rc.cpp:535
 #, fuzzy, no-c-format
 msgid "Read detailed change lists"
 msgstr "Märk ändrat"
 
-#: rc.cpp:532
+#: rc.cpp:538
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -2356,92 +2366,92 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:535
+#: rc.cpp:541
 #, no-c-format
 msgid "Review items before commit"
 msgstr ""
 
-#: rc.cpp:539
+#: rc.cpp:545
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr ""
 
-#: rc.cpp:542
+#: rc.cpp:548
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 
-#: rc.cpp:548
+#: rc.cpp:554
 #, fuzzy, no-c-format
 msgid "Mark changed and locked items colored"
 msgstr "Märk ändrat"
 
-#: rc.cpp:556
+#: rc.cpp:562
 #, fuzzy, no-c-format
 msgid "Locked items:"
 msgstr "Lås aktuella poster."
 
-#: rc.cpp:560
+#: rc.cpp:566
 #, fuzzy, no-c-format
 msgid "Not versioned items:"
 msgstr "Utan version"
 
-#: rc.cpp:563
+#: rc.cpp:569
 #, fuzzy, no-c-format
 msgid "Remote changed items:"
 msgstr "Märk ändrat"
 
-#: rc.cpp:566
+#: rc.cpp:572
 #, fuzzy, no-c-format
 msgid "Added items:"
 msgstr "post utan version förhindrade arbete"
 
-#: rc.cpp:569
+#: rc.cpp:575
 #, fuzzy, no-c-format
 msgid "Deleted items:"
 msgstr "Borttagen"
 
-#: rc.cpp:576
+#: rc.cpp:582
 #, fuzzy, no-c-format
 msgid "Conflicted items:"
 msgstr "Lås aktuella poster."
 
-#: rc.cpp:579
+#: rc.cpp:585
 #, fuzzy, no-c-format
 msgid "Missed items:"
 msgstr "post utan version förhindrade arbete"
 
-#: rc.cpp:582
+#: rc.cpp:588
 #, fuzzy, no-c-format
 msgid "Local changed items:"
 msgstr "Märk ändrat"
 
-#: rc.cpp:585
+#: rc.cpp:591
 #, no-c-format
 msgid "Item needs lock:"
 msgstr ""
 
-#: rc.cpp:589
+#: rc.cpp:595
 #, no-c-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: rc.cpp:592
+#: rc.cpp:598
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr "Storlek på listgranskningsikoner"
 
-#: rc.cpp:595
+#: rc.cpp:601
 #, no-c-format
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:604
 #, no-c-format
 msgid "Show file info"
 msgstr "Visa filinformation"
 
-#: rc.cpp:601
+#: rc.cpp:607
 #, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
@@ -2450,17 +2460,17 @@ msgstr ""
 "Här kan du styra om, när du rör musen över en fil, du vill se a liten "
 "popuppruta med ytterligare information om denna fil"
 
-#: rc.cpp:604
+#: rc.cpp:610
 #, no-c-format
 msgid "Mark item status with icon overlay"
 msgstr ""
 
-#: rc.cpp:607
+#: rc.cpp:613
 #, no-c-format
 msgid "Mark subversion states with an overlayed icon"
 msgstr ""
 
-#: rc.cpp:610
+#: rc.cpp:616
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2471,12 +2481,12 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:616
+#: rc.cpp:622
 #, no-c-format
 msgid "Display previews in file tips"
 msgstr "Visa förhandsgranskningar i filtips"
 
-#: rc.cpp:619
+#: rc.cpp:625
 #, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
@@ -2485,37 +2495,37 @@ msgstr ""
 "Här kan du styra om du önskar att popupprutan skall innehålla en större "
 "förhandsgranskning av filen, när du rör musen över den"
 
-#: rc.cpp:625
+#: rc.cpp:631
 #, no-c-format
 msgid "Internal"
 msgstr "Intern"
 
-#: rc.cpp:628
+#: rc.cpp:634
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Använd Kompare för diff"
 
-#: rc.cpp:631
+#: rc.cpp:637
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Använd annan diff-visning"
 
-#: rc.cpp:634
+#: rc.cpp:640
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr ""
 
-#: rc.cpp:637
+#: rc.cpp:643
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr "se \"Vad är detta\" för detaljer"
 
-#: rc.cpp:640
+#: rc.cpp:646
 #, no-c-format
 msgid "External diff display:"
 msgstr "Yttre diff-visning:"
 
-#: rc.cpp:643
+#: rc.cpp:649
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2545,12 +2555,12 @@ msgstr ""
 "och Kdesvn kommer att koppla data direkt.\n"
 "</p>"
 
-#: rc.cpp:657
+#: rc.cpp:663
 #, fuzzy, no-c-format
 msgid "External display:"
 msgstr "Yttre diff-visning:"
 
-#: rc.cpp:660
+#: rc.cpp:666
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -2564,7 +2574,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:670
+#: rc.cpp:676
 #, no-c-format
 msgid "Maximum logmessages in history:"
 msgstr "Maximalt antal logmeddelanden i historik:"

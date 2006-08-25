@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-25 09:33+0200\n"
-"PO-Revision-Date: 2006-07-15 04:27+0530\n"
+"PO-Revision-Date: 2006-08-25 16:52+0530\n"
 "Last-Translator: A S Alam <apbrar@gmail.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -118,7 +118,7 @@ msgstr "ਰਿਪੋਜ਼ਟਰੀ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸ�
 
 #: kdesvnview.cpp:172
 msgid "No repository open"
-msgstr "ਕੋਈ ਖੁੱਲੀ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਹੈ"
+msgstr "ਕੋਈ ਖੁੱਲ੍ਹੀ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਹੈ"
 
 #: kdesvnview.cpp:207 rc.cpp:341
 #, no-c-format
@@ -379,7 +379,7 @@ msgstr "ਮੁਕੰਮਲ"
 
 #: svnfrontend/svnactions.cpp:200
 msgid "Getting logs - hit cancel for abort"
-msgstr ""
+msgstr "ਲਾਗ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:208
 msgid "Got no logs"
@@ -421,7 +421,7 @@ msgstr "%1 ਬਲੇਮ"
 
 #: svnfrontend/svnactions.cpp:392 svnfrontend/svnactions.cpp:412
 msgid "Getting content - hit cancel for abort"
-msgstr ""
+msgstr "ਭਾਗ ਪ੍ਰਾਪਤ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:398 svnfrontend/svnactions.cpp:421
 msgid "Error getting content"
@@ -445,7 +445,7 @@ msgstr "ਫੋਲਡਰ ਨਾਂ ਦਿਓ:"
 
 #: svnfrontend/svnactions.cpp:517
 msgid "Retrieving infos - hit cancel for abort"
-msgstr ""
+msgstr "ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:545 svnfrontend/kdesvnfilelist.cpp:163
 msgid "Name"
@@ -573,17 +573,16 @@ msgid "Add and Commit"
 msgstr "ਜੋੜੋ ਅਤੇ ਕਮਿਟ"
 
 #: svnfrontend/svnactions.cpp:838
-#, fuzzy
 msgid "Commiting"
-msgstr "ਕਮਿਟ"
+msgstr "ਕਮਿਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: svnfrontend/svnactions.cpp:839
 msgid "Commiting - hit cancel for abort"
-msgstr ""
+msgstr "ਕਮਿਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:883 svnfrontend/svnactions.cpp:925
 msgid "Diffing - hit cancel for abort"
-msgstr ""
+msgstr "ਅੰਤਰ ਕੱਢਿਆ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:900 svnfrontend/svnactions.cpp:937
 #: svnfrontend/svnactions.cpp:965 svnfrontend/graphtree/revgraphview.cpp:939
@@ -597,7 +596,7 @@ msgstr "ਅੰਤਰ ਵੇਖਾਓ"
 
 #: svnfrontend/svnactions.cpp:1040
 msgid "Making update - hit cancel for abort"
-msgstr ""
+msgstr "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:1086 svnfrontend/kdesvnfilelist.cpp:1889
 #: svnfrontend/kdesvnfilelist.cpp:1995 svnfrontend/kdesvnfilelist.cpp:2012
@@ -613,7 +612,7 @@ msgstr "ਕੇਹੜੀਆਂ ਫਾਇਲਾਂ ਜਾਂ ਡਾਇਰੈਕਟ
 
 #: svnfrontend/svnactions.cpp:1143
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
-msgstr ""
+msgstr "<center>ਇੰਦਰਾਜ਼<br>%1<br> ਵਰਜਨ ਵਿੱਚ ਹੈ - ਬਰੇਕ।</center>"
 
 #: svnfrontend/svnactions.cpp:1189 svnfrontend/kdesvnfilelist.cpp:1739
 msgid "Really delete these entries?"
@@ -658,7 +657,7 @@ msgstr "ਚੈਕ ਆਉਟ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
 
 #: svnfrontend/svnactions.cpp:1331
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
+msgstr "<center>ਇੰਦਰਾਜ਼ <br>%1<br> ਵਰਜਨ ਅਧੀਨ ਨਹੀਂ ਹੈ - ਬਰੇਕ।</center>"
 
 #: svnfrontend/svnactions.cpp:1361
 msgid "Revert entries"
@@ -714,7 +713,7 @@ msgstr "ਹੱਲ਼"
 
 #: svnfrontend/svnactions.cpp:1512
 msgid "Marking resolved"
-msgstr ""
+msgstr "ਹੱਲ਼ ਹੋਇਆ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: svnfrontend/svnactions.cpp:1526
 msgid "Importing items"
@@ -802,6 +801,8 @@ msgid ""
 "This property may not set by users.\n"
 "Rejecting it."
 msgstr ""
+"ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਉਪਭੋਗੀਆਂ ਵਲੋਂ ਸੈੱਟ ਕਰਨ ਲਈ ਨਹੀਂ ਹੈ।\n"
+"ਇਸ ਨੂੰ ਅਣਡਿੱਠਾ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #: svnfrontend/propertiesdlg.cpp:299 svnfrontend/propertiesdlg.cpp:349
 msgid "Protected property"
@@ -878,8 +879,7 @@ msgid "A newline separated list of file patterns to ignore."
 msgstr "ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਫਾਇਲ ਪੈਟਰਨ ਦੀ ਨਵੀਂ ਸਤਰ ਨਾਲ ਵੱਖ ਕੀਤੀ ਸੂਚੀ ਹੈ।"
 
 #: svnfrontend/editproperty_impl.cpp:94
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:95
@@ -1021,8 +1021,7 @@ msgid "Check for updates"
 msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ"
 
 #: svnfrontend/kdesvnfilelist.cpp:224
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:227
@@ -1434,7 +1433,7 @@ msgstr "ਕਮਾਂਡ \"%1\" ਹਾਲੇ ਸਥਾਪਤ ਨਹੀਂ ਕੀ�
 
 #: svnfrontend/commandexec.cpp:297
 msgid "Execution log"
-msgstr ""
+msgstr "ਚੱਲਣ ਲਾਗ"
 
 #: svnfrontend/commandexec.cpp:407
 msgid "\"GET\" requires output file!"
@@ -1750,9 +1749,9 @@ msgid "Select second revision with right mouse button"
 msgstr "ਸੱਜੇ ਮਾਊਂਸ ਬਟਨ ਨਾਲ ਦੂਜਾ ਰੀਵਿਜ਼ਨ ਚੁਣੋ"
 
 #: rc.cpp:169
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "List entries"
-msgstr "ਸੂਚੀ ਇੰਦਰਾਜ਼(&L)"
+msgstr "ਇੰਦਰਾਜ਼ ਸੂਚੀਬੱਧ"
 
 #: rc.cpp:180
 #, no-c-format
@@ -1795,9 +1794,9 @@ msgid "Dump into:"
 msgstr "ਇੱਥੇ ਡੰਪ:"
 
 #: rc.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "incremental Dump"
-msgstr "ਆਵਰਤੀ ਡੰਪ(&n)"
+msgstr "ਆਵਰਤੀ ਡੰਪ"
 
 #: rc.cpp:214
 #, no-c-format
@@ -1805,9 +1804,9 @@ msgid "Use deltas"
 msgstr "ਡੈਲਟਾ ਵਰਤੋਂ"
 
 #: rc.cpp:218
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Dump revision range"
-msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਡੰਪ(&R)"
+msgstr "ਡੰਪ ਰੀਵਿਜ਼ਨ ਰੇਜ਼"
 
 #: rc.cpp:222
 #, no-c-format
@@ -1901,9 +1900,9 @@ msgid ""
 msgstr ""
 
 #: rc.cpp:293
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Ignore"
-msgstr "ਅਣਡਿੱਠਾ(&n)"
+msgstr "ਅਣਡਿੱਠਾ"
 
 #: rc.cpp:301
 #, no-c-format
@@ -2108,45 +2107,44 @@ msgid "Color for modified items:"
 msgstr "ਸੋਧੀਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
 #: rc.cpp:466
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show log after executing a command"
-msgstr "ਇੱਕਲੀ ਕਮਾਂਡ ਚਲਾਉਣ ਸਮੇਂ ਰੀਵਿਜ਼ਨ ਲਈ ਪੁਛੋ"
+msgstr "ਇੱਕ ਕਮਾਂਡ ਚਲਾਉਣ ਬਾਅਦ ਲਾਗ ਵੇਖਾਓ"
 
 #: rc.cpp:469
 #, no-c-format
 msgid "Show a small window containing the log after command executed"
-msgstr ""
+msgstr "ਕਮਾਂਡ ਚਲਾਉਣ ਬਾਅਦ ਲਾਗ ਰੱਖਣ ਵਾਲਾ ਛੋਟਾ ਝਰੋਖਾ ਵੇਖਾਓ"
 
 #: rc.cpp:472
 #, no-c-format
 msgid "Minimum log lines to show:"
-msgstr ""
+msgstr "ਵੇਖਾਉਣ ਲਈ ਘੱਟੋ-ਘੱਟ ਲਾਗ ਸਤਰਾਂ:"
 
 #: rc.cpp:475
 #, no-c-format
 msgid " line(s)"
-msgstr ""
+msgstr " ਸਤਰਾਂ"
 
 #: rc.cpp:478
 #, no-c-format
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: rc.cpp:481
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
 #: rc.cpp:484
 #, no-c-format
 msgid "Don't display contextmenu in Konqueror"
-msgstr ""
+msgstr "ਕੋਨਕਿਊਰੋਰ ਪਰਸੰਗ-ਮੇਨੂ ਵਿੱਚ ਨਾ ਵੇਖਾਓ"
 
 #: rc.cpp:487
 #, no-c-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
-msgstr ""
+msgstr "ਜੇਕਰ ਚੋਣ ਕੀਤੀ ਗਈ ਤਾਂ kdesvn ਕੋਨਕਿਊਰੋਰ ਦੇ ਕਾਰਵਾਈ \"ਕਾਰਵਾਈ\" ਮੇਨੂ ਵਿੱਚ ਵੇਖਾਈ ਨਹੀਂ ਦੇਵੇਗਾ"
 
 #: rc.cpp:490 kdesvn_part.cpp:327
 #, no-c-format
@@ -2203,7 +2201,7 @@ msgstr "ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨਾਂ ਲਈ ਗੁਪਤ-ਕ�
 #: rc.cpp:522
 #, no-c-format
 msgid "Should subversion store passwords in default"
-msgstr ""
+msgstr "ਕੀ ਸਬ-ਵਰਜਨ ਮੂਲ ਰੂਪ ਵਿੱਚ ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲੇ"
 
 #: rc.cpp:525
 #, no-c-format
@@ -2226,9 +2224,9 @@ msgid "Logs always reads list of changed files"
 msgstr "ਲਾਗ ਹਮੇਸ਼ਾਂ ਤਬਦੀਲ ਫਾਇਲਾਂ ਦੀ ਸੂਚੀ ਪੜ੍ਹੇ"
 
 #: rc.cpp:535
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Read detailed change lists"
-msgstr "ਰਿਮੋਟ ਤਬਦੀਲ ਹੋਈਆਂ ਇਕਾਈਆਂ:"
+msgstr "ਵੇਰਵੇ ਸਮੇਤ ਤਬਦੀਲੀ ਸੂਚੀ ਪੜ੍ਹੋ"
 
 #: rc.cpp:538
 #, no-c-format
@@ -2316,7 +2314,7 @@ msgstr "ਸੂਚੀ-ਝਲਕ-ਆਈਕਾਨਾਂ ਦਾ ਅਕਾਰ"
 #: rc.cpp:601
 #, no-c-format
 msgid "Items sortorder is case sensitive"
-msgstr ""
+msgstr "ਇਕਾਈ ਕ੍ਰਮਬੱਧ ਢੰਗ ਵਿੱਚ ਅੱਖਰ ਆਕਾਰ ਅਸਰਦਾਰ ਹੈ"
 
 #: rc.cpp:604
 #, no-c-format
@@ -2381,7 +2379,7 @@ msgstr "ਹੋਰ ਅੰਤਰ ਵੇਖਾਓ"
 #: rc.cpp:640
 #, no-c-format
 msgid "Diff ignores content type"
-msgstr ""
+msgstr "ਅੰਤਰ ਅਣਡਿੱਠ ਭਾਗ ਕਿਸਮ"
 
 #: rc.cpp:643
 #, no-c-format
@@ -2436,7 +2434,7 @@ msgstr "ਅਤੀਤ 'ਚ ਵੱਧ ਤੋਂ ਵੱਧ ਲਾਗ ਸੁਨੇ�
 
 #: settings/cmdexecsettings_impl.cpp:30
 msgid "No minimum"
-msgstr ""
+msgstr "ਕੋਈ ਘੱਟੋ-ਘੱਟ ਨਹੀਂ"
 
 #: kdesvn.cpp:110
 msgid "Create and open new repository"
@@ -2456,7 +2454,7 @@ msgstr "ਇੱਕ ਸਬ-ਵਰਜਨ ਰਿਪੋਜ਼ਟਰੀ ਨੂੰ ਇ�
 
 #: kdesvn.cpp:118
 msgid "Hotcopy a subversion repository to a new folder"
-msgstr ""
+msgstr "ਇੱਕ ਸਬ-ਵਰਜਨ ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਹਾਟ-ਕਾਪੀ ਇੱਕ ਫੋਲਡਰ ਵਿੱਚ ਕਰੋ"
 
 #: kdesvn.cpp:119
 msgid "Load dump into repository"
@@ -2472,7 +2470,7 @@ msgstr "ਸਾਡਾ ਪਾਰਟ ਮਿਲ ਨਹੀਂ ਸਕਿਆ ਹੈ।"
 
 #: kdesvn.cpp:183
 msgid "Load last opened URL on start"
-msgstr ""
+msgstr "ਸ਼ੁਰੂ ਹੋਣ ਸਮੇਂ ਆਖਰੀ ਖੋਲ੍ਹਿਆ URL ਲੋਡ ਕਰੋ"
 
 #: kdesvn.cpp:185
 msgid "Reload last opend url if no one is given on commandline"
@@ -2528,11 +2526,11 @@ msgstr "kdesvn: EMAIL OF TRANSLATORS\\naalam@redhat.com"
 
 #: kdesvn_part.cpp:164
 msgid "Use \"Kompare\" for displaying diffs"
-msgstr ""
+msgstr "ਅੰਤਰ ਵੇਖਾਉਣ ਲਈ \"Kompare\" ਵਰਤੋਂ"
 
 #: kdesvn_part.cpp:169
 msgid "Logs follow node changes"
-msgstr ""
+msgstr "ਅੱਗੇ ਦਿੱਤੀ ਨੋਡ ਤਬਦੀਲੀਆਂ ਲਈ ਲੋਡ"
 
 #: kdesvn_part.cpp:180
 msgid "Display unknown files"
@@ -2572,20 +2570,9 @@ msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਸਥਾਪਨ"
 
 #: kdesvn_part.cpp:333
 msgid "Commandline"
-msgstr ""
+msgstr "ਕਮਾਂਡ-ਲਾਇਨ"
 
 #: kdesvn_part.cpp:333
 msgid "Settings for commandline and KIO execution"
-msgstr ""
+msgstr "ਕਮਾਂਡ-ਲਾਇਨ ਅਤੇ KIO ਚੱਲਣ ਲਈ ਸਥਾਪਨ"
 
-#~ msgid "Alt+N"
-#~ msgstr "Alt+N"
-
-#~ msgid "Alt+R"
-#~ msgstr "Alt+R"
-
-#~ msgid "O&K"
-#~ msgstr "ਠੀਕ ਹੈ(&K)"
-
-#~ msgid "Could not open %1 for writing"
-#~ msgstr "%1 ਨੂੰ ਲਿਖਣ ਲਈ ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"

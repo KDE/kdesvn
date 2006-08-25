@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-25 09:33+0200\n"
-"PO-Revision-Date: 2006-08-25 16:52+0530\n"
+"PO-Revision-Date: 2006-08-25 17:14+0530\n"
 "Last-Translator: A S Alam <apbrar@gmail.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "KDE"
 
 #: kdesvnd/main.cpp:47
 msgid "Developer"
-msgstr "ਖੋਜੀ"
+msgstr "ਡੀਵੈਲਪਰ"
 
 #: ksvnwidgets/logmsg_impl.cpp:67 ksvnwidgets/logmsg_impl.cpp:90
 msgid "Items to commit"
@@ -167,7 +167,7 @@ msgstr ""
 
 #: main.cpp:40
 msgid "Ask for revision when executing single command"
-msgstr "ਇੱਕਲੀ ਕਮਾਂਡ ਚਲਾਉਣ ਸਮੇਂ ਰੀਵਿਜ਼ਨ ਲਈ ਪੁਛੋ"
+msgstr "ਇੱਕਲੀ ਕਮਾਂਡ ਚਲਾਉਣ ਸਮੇਂ ਰੀਵਿਜ਼ਨ ਲਈ ਪੁੱਛੋ"
 
 #: main.cpp:41
 msgid "Save output of subversion command (eg \"cat\") into file <file>"
@@ -549,7 +549,7 @@ msgstr "ਲਾੱਕ ਚਾਲੂ ਹੈ"
 
 #: svnfrontend/svnactions.cpp:631 svnfrontend/svnactions.cpp:641
 msgid "Lock comment"
-msgstr "ਤਾਲਾ ਕਮਿਟ"
+msgstr "ਲਾੱਕ ਕਮਿਟ"
 
 #: svnfrontend/svnactions.cpp:665 svnfrontend/svnactions.cpp:686
 msgid "Infolist"
@@ -930,7 +930,7 @@ msgstr "ਆਯਾਤ ਉੱਤੇ ਸਬ-ਡਾਇ %1 ਬਣਾਓ"
 
 #: svnfrontend/svnitem.cpp:399
 msgid "Added in repository"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚ ਜੋੜੋ"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚ ਜੋੜੀ ਗਈ"
 
 #: svnfrontend/svnitem.cpp:401
 msgid "Needs update"
@@ -938,7 +938,7 @@ msgstr "ਅੱਪਡੇਟ ਦੀ ਲੋੜ"
 
 #: svnfrontend/svnitem.cpp:406
 msgid "Locally modified"
-msgstr "ਲੋਕਲ ਸੋਧ"
+msgstr "ਲੋਕਲ ਸੋਧ ਕੀਤੀ"
 
 #: svnfrontend/svnitem.cpp:409
 msgid "Locally added"
@@ -994,7 +994,7 @@ msgstr "ਆਖਰੀ ਤਬਦੀਲ ਮਿਤੀ"
 
 #: svnfrontend/kdesvnfilelist.cpp:168
 msgid "Locked by"
-msgstr "ਤਾਲਾਬੰਦ"
+msgstr "ਤਾਲਾਬੰਦ ਕੀਤਾ"
 
 #: svnfrontend/kdesvnfilelist.cpp:209
 msgid "Log..."
@@ -1018,11 +1018,11 @@ msgstr "ਵੇਰਵਾ"
 
 #: svnfrontend/kdesvnfilelist.cpp:223
 msgid "Check for updates"
-msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ"
+msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਕਰੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:224
 msgid "Check if current working copy has items with newer version in repository"
-msgstr ""
+msgstr "ਜਾਂਚ ਕਰੋ ਕਿ ਕੀ ਮੌਜੂਦਾ ਕਾਰਜਕਾਰੀ ਨਕਲ ਵਿੱਚ ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਇਕਾਈਆਂ ਲਈ ਨਵਾਂ ਵਰਜਨ ਮੌਜੂਦ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:227
 msgid "Blame"
@@ -1040,7 +1040,7 @@ msgstr "ਬਲੇਮ ਰੇਜ਼"
 
 #: svnfrontend/kdesvnfilelist.cpp:233
 msgid "Cat head"
-msgstr "Cat head"
+msgstr "ਹੈੱਡ ਪੜ੍ਹੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:235
 msgid "Output the content of specified files or URLs."
@@ -1110,7 +1110,7 @@ msgstr "ਮੌਜੂਦਾ URLਵਿੱਚ ਫੋਲਡਰ ਭਾਗ ਆਯਾ�
 
 #: svnfrontend/kdesvnfilelist.cpp:271
 msgid "Add selected files/dirs"
-msgstr "ਚੁਣੀਆਂ ਫਾਇਲਾਂ/ਡਾਇ ਜੋੜੋ"
+msgstr "ਚੁਣੀਆਂ ਫਾਇਲਾਂ/ਡਾਇ ਜੋੜ੍ਹੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:273
 msgid "Adding selected files and/or directories to repository"
@@ -1134,7 +1134,7 @@ msgstr "ਰਿਪੋਸ਼ਟਰੀ ਵਿੱਚ ਚੁਣੀਆਂ ਫਾਇਲ
 
 #: svnfrontend/kdesvnfilelist.cpp:281
 msgid "Revert current changes"
-msgstr "ਮੌਜੂਦਾ ਤਬਦੀਲੀਆਂ ਵਾਪਿਸ"
+msgstr "ਮੌਜੂਦਾ ਤਬਦੀਲੀਆਂ ਵਾਪਿਸ ਕਰੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:283
 msgid "Resolve recursive"
@@ -1165,16 +1165,20 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
 msgstr ""
+"ਕਾਰਜਕਾਰੀ ਨਕਲ ਦਾ ਅਧਾਰ (ਬੇਸ) (ਆਖਰੀ ਚੈਕਆਉਟ ਕੀਤਾ ਵਰਜਨ) ਵਿੱਚ ਆਪਸੀ ਅੰਤਰ - ਰਿਪੋਜ਼ਟਰੀ "
+"ਪਹੁੰਚ ਦੀ ਲੋੜ ਨਹੀਂ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:299
 msgid "Diff against HEAD"
-msgstr "ਹੈੱਡ ਨਾਲ ਅੱਪਡੇਟ"
+msgstr "ਹੈੱਡ ਨਾਲ ਅੰਤਰ ਕੱਢੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:301
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
+"ਕਾਰਜਕਾਰੀ ਨਕਲ ਦਾ ਹੈੱਡ (head) (ਵਰਜਨ ਵਿੱਚ ਆਖਰੀ ਚੈਕ ਕੀਤਾ) ਨਾਲ ਅੰਤਰ - ਰਿਪੋਜ਼ਟਰੀ ਲਈ ਪਹੁੰਚ "
+"ਚਾਹੀਦੀ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:304
 msgid "Merge two revisions"
@@ -1211,7 +1215,7 @@ msgstr "ਝਲਕ ਤਾਜ਼ਾ"
 #: svnfrontend/kdesvnfilelist.cpp:327 rc.cpp:162
 #, no-c-format
 msgid "Diff revisions"
-msgstr "ਅੰਤਰ ਰੀਵਿਜ਼ਨ"
+msgstr "ਰੀਵਿਜ਼ਨ ਅੰਤਰ"
 
 #: svnfrontend/kdesvnfilelist.cpp:872
 #: svnfrontend/graphtree/revgraphview.cpp:952 svnfrontend/commandexec.cpp:201
@@ -1241,11 +1245,11 @@ msgstr "ਮਿਲਾਨ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1611
 msgid "Move Here"
-msgstr "ਏਥੇ ਭੇਜੋ"
+msgstr "ਇੱਥੇ ਭੇਜੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1612
 msgid "Copy Here"
-msgstr "ਏਥੇ ਨਕਲ"
+msgstr "ਇੱਥੇ ਨਕਲ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1718
 msgid "Nothing selected for delete"
@@ -1261,11 +1265,11 @@ msgstr "ਤਾਲੇ ਲਈ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1802
 msgid "Lock message"
-msgstr "ਲਾੱਕ ਸੁਨੇਹਾ"
+msgstr "ਲਾਕ ਸੁਨੇਹਾ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1805
 msgid "Steal lock?"
-msgstr "ਲਾੱਕ ਚੋਰੀ ਕਰਨਾ ਹੈ?"
+msgstr "ਕੀ ਲਾਕ ਚੋਰੀ ਕਰਨਾ ਹੈ?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1836
 msgid "Nothing selected for unlock"
@@ -1273,7 +1277,7 @@ msgstr "ਅਣ-ਲਾੱਕ ਲਈ ਕੁਝ ਚੁਣਿਆ ਨਹੀਂ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1839
 msgid "Break lock or ignore missing locks?"
-msgstr "ਲਾੱਕ ਤੋੜਨਾ ਹੈ ਜਾਂ ਗੁੰਮ ਲਾੱਕ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨਾ ਹੈ?"
+msgstr "ਲਾਕ ਤੋੜਨਾ ਹੈ ਜਾਂ ਗੁੰਮ ਲਾਕ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨਾ ਹੈ?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1839
 msgid "Unlocking items"
@@ -1281,7 +1285,7 @@ msgstr "ਇਕਾਈਆਂ ਲਈ ਤਾਲਾ ਖੋਲ੍ਹਿਆ ਜਾ ਰ�
 
 #: svnfrontend/kdesvnfilelist.cpp:1949
 msgid "May not make subdirs of a file"
-msgstr "ਇੱਕ ਫਾਇਲ ਲਈ ਸਬ-ਡਾਇਰ ਨਹੀਂ ਬਣਾਈ ਜਾ ਸਕਦੀ ਹੈ"
+msgstr "ਇੱਕ ਫਾਇਲ ਲਈ ਸਬ-ਡਾਇ ਨਹੀਂ ਬਣਾਈ ਜਾ ਸਕਦੀ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:1973
 msgid "Automatic generated base layout by kdesvn"
@@ -1453,7 +1457,7 @@ msgstr "%1 ਉੱਤੇ %2 ਰੀਵਿਜ਼ਨ"
 
 #: svnfrontend/ccontextlistener.cpp:59
 msgid "Add to revision control"
-msgstr "ਰੀਵਿਜ਼ਨ ਕੰਟਰੋਲ ਵਿੱਚ ਜੋੜੋ"
+msgstr "ਰੀਵਿਜ਼ਨ ਕੰਟਰੋਲ ਵਿੱਚ ਜੋੜ੍ਹੋ"
 
 #: svnfrontend/ccontextlistener.cpp:62
 msgid "Restore missing"
@@ -1481,7 +1485,7 @@ msgstr "ਅੱਪਡੇਟ"
 
 #: svnfrontend/ccontextlistener.cpp:70
 msgid "Update complete"
-msgstr "ਅੱਪਡੇਟ ਮੁਕੰਮਲ"
+msgstr "ਅੱਪਡੇਟ ਮੁਕੰਮਲ ਹੋਇਆ"
 
 #: svnfrontend/ccontextlistener.cpp:71
 msgid "Update external module"
@@ -1533,7 +1537,7 @@ msgstr "ਇਕਾਈ ਮੌਜੂਦ ਨਹੀਂ ਸੀ"
 
 #: svnfrontend/ccontextlistener.cpp:91
 msgid "unversioned item obstructed work"
-msgstr ""
+msgstr "ਬਿਨ-ਵਰਜਨ ਇਕਾਈ ਨੇ ਕੰਮ ਵਿੱਚ ਰੁਕਾਵਟ ਪਾਈ ਹੈ"
 
 #: svnfrontend/ccontextlistener.cpp:92
 msgid "Pristine state was modified."
@@ -1726,7 +1730,7 @@ msgstr "URL ਦਿਓ:"
 #: rc.cpp:145
 #, no-c-format
 msgid "Append source url name to subfolder"
-msgstr "ਅਧੀਨ-ਫੋਲਡਰ ਲਈ ਸਰੋਤ URL ਨਾਂ ਜੋੜੋ"
+msgstr "ਅਧੀਨ-ਫੋਲਡਰ ਲਈ ਸਰੋਤ URL ਨਾਂ ਜੋੜ੍ਹੋ"
 
 #: rc.cpp:152
 #, no-c-format
@@ -1776,7 +1780,7 @@ msgstr "ਇਕਾਈ"
 #: rc.cpp:198
 #, no-c-format
 msgid "Copy from"
-msgstr "ਏਥੋਂ ਨਕਲ"
+msgstr "ਇੱਥੋਂ ਨਕਲ"
 
 #: rc.cpp:201
 #, no-c-format
@@ -2221,7 +2225,7 @@ msgstr "ਨੋਡ ਤਬਦੀਲੀਆਂ ਲਈ ਲਾਗ"
 #: rc.cpp:532
 #, no-c-format
 msgid "Logs always reads list of changed files"
-msgstr "ਲਾਗ ਹਮੇਸ਼ਾਂ ਤਬਦੀਲ ਫਾਇਲਾਂ ਦੀ ਸੂਚੀ ਪੜ੍ਹੇ"
+msgstr "ਲਾਗ ਹਮੇਸ਼ਾਂ ਤਬਦੀਲ ਫਾਇਲਾਂ ਦੀ ਸੂਚੀ ਪੜ੍ਹੋ"
 
 #: rc.cpp:535
 #, no-c-format
@@ -2384,7 +2388,7 @@ msgstr "ਅੰਤਰ ਅਣਡਿੱਠ ਭਾਗ ਕਿਸਮ"
 #: rc.cpp:643
 #, no-c-format
 msgid "see \"Whats this\" for details"
-msgstr "ਵੇਰਵੇ ਲਈ \"ਏਹ ਕੀ ਹੈ\" ਨੂੰ ਵੇਖੋ"
+msgstr "ਵੇਰਵੇ ਲਈ \"ਇਹ ਕੀ ਹੈ\" ਨੂੰ ਵੇਖੋ"
 
 #: rc.cpp:646
 #, no-c-format
@@ -2522,7 +2526,7 @@ msgstr "kdesvn: NAME OF TRANSLATORS\\nAS Alam"
 
 #: kdesvn_part.cpp:153
 msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
-msgstr "kdesvn: EMAIL OF TRANSLATORS\\naalam@redhat.com"
+msgstr "kdesvn: EMAIL OF TRANSLATORS\\napbrar@gmail.com"
 
 #: kdesvn_part.cpp:164
 msgid "Use \"Kompare\" for displaying diffs"

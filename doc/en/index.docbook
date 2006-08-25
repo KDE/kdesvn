@@ -1473,8 +1473,10 @@ This is also a great place to provide pointers to other FAQ's if your users
 must do some complicated configuration on other programs in order for your
 application work. -->
 
+<!--
 &reporting.bugs;
 &updating.documentation;
+-->
 
 <qandaset id="faqlist">
 <qandaentry>
@@ -1508,51 +1510,6 @@ repository to newer subversion.
 </answer>
 </qandaentry>
 </qandaset>
-</chapter>
-
-<chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
-
-<title>Credits and License</title>
-
-<para>
-&kdesvn;
-</para>
-<para>
-Program copyright 2005 Rajko Albrecht <email>ral@alwins-world.de</email>
-</para>
-<para>
-Contributors:
-<itemizedlist>
-<listitem><para>Konqui the KDE Dragon <email>konqui@kde.org</email></para>
-</listitem>
-<listitem><para>Tux the Linux Penguin <email>tux@linux.org</email></para>
-</listitem>
-</itemizedlist>
-</para>
-
-<para>
-Documentation copyright 2005 Rajko Albrecht <email>ral@alwins-world.de</email>
-</para>
-
-<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-&underFDL;               <!-- FDL: do not remove -->
-<!-- Determine which license your application is licensed under, 
-     and delete all the remaining licenses below:
-
-     (NOTE:  All documentation are licensed under the FDL, 
-     regardless of what license the application uses) -->
-
-&underGPL;        	 <!-- GPL License -->
-<!-- &underBSDLicense;        --><!-- BSD License -->
-<!-- &underArtisticLicense;   --><!-- BSD Artistic License -->
-<!-- &underX11License;        --><!-- X11 License  -->
-
 </chapter>
 
 <appendix id="revision-syntax">
@@ -1622,6 +1579,59 @@ Date in form {YYYY-MM-DD}. It must real MM or DD - eg. 2005-1-1 must written as 
 <para>
 Appending a specific revision to an url will always made via &quot;?rev=&lt;revision&gt;.
 </para>
+</appendix>
+
+<appendix id="further">
+<title>Further information</title>
+<sect1>
+<title>Reporting bugs / Feedback</title>
+<para>
+Bugreports and wishes may send to <email>kdesvn-bugs@alwins-world.de</email>, questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>. 
+</para>
+<para>
+An overview for the mailinglists for &kappname; you may get in the <ulink url="http://www.alwins-world.de/mailman/listinfo">mailinglist overview</ulink>.
+</para>
+</sect1>
+<sect1>
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+<title>Credits and License and Thanks</title>
+<para>
+Program copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</email>
+</para>
+<para>
+Many tnx to contributors:
+<itemizedlist>
+<listitem><para>Andreas Richter <email>ar@oszine.de</email> - for qt4 port of svnqt</para>
+</listitem>
+<listitem><para>Michael Biebl <email>biebl@teco.edu</email> - for a lot of help, ideas, implementation and hints.</para>
+</listitem>
+<listitem><para>Bram Schoenmakers <email>bramschoenmakers@kde.nl</email> - for kde-specific hints, dutch translation, cleaning up my code.</para>
+</listitem>
+</itemizedlist>
+And tnx to all other translators (I never thought that I get that fast such a lot of translations!) and for all of your positive and negative feedback. It helped a lot. 
+</para>
+
+<para>
+Documentation copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</email>
+</para>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+<!-- Determine which license your application is licensed under, 
+     and delete all the remaining licenses below:
+
+     (NOTE:  All documentation are licensed under the FDL, 
+     regardless of what license the application uses) -->
+
+&underGPL;        	 <!-- GPL License -->
+<!-- &underBSDLicense;        --><!-- BSD License -->
+<!-- &underArtisticLicense;   --><!-- BSD Artistic License -->
+<!-- &underX11License;        --><!-- X11 License  -->
+</sect1>
+
 </appendix>
 
 <appendix id="installation">

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-25 09:33+0200\n"
-"PO-Revision-Date: 2006-08-25 11:15+0200\n"
+"PO-Revision-Date: 2006-08-26 00:44+0200\n"
 "Last-Translator: Bram Schoenmakers <bramschoenmakers@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -1075,7 +1075,6 @@ msgid "Check if current working copy has items with newer version in repository"
 msgstr "Controleren kopie met versie in"
 
 #: svnfrontend/kdesvnfilelist.cpp:227
-#, fuzzy
 msgid "Blame"
 msgstr "Blame"
 
@@ -1088,9 +1087,8 @@ msgstr ""
 "en auteursinformatie."
 
 #: svnfrontend/kdesvnfilelist.cpp:230
-#, fuzzy
 msgid "Blame range"
-msgstr "Blame %1"
+msgstr "Blame-bereik"
 
 #: svnfrontend/kdesvnfilelist.cpp:233
 msgid "Cat head"
@@ -1118,9 +1116,8 @@ msgid "Unlock current items"
 msgstr "Huidige items ontgrendelen"
 
 #: svnfrontend/kdesvnfilelist.cpp:248
-#, fuzzy
 msgid "Switch repository"
-msgstr "Repository exporteren"
+msgstr "Repository switchen (switch)"
 
 #: svnfrontend/kdesvnfilelist.cpp:250
 #, fuzzy
@@ -1138,18 +1135,16 @@ msgid "Relocate url of current working copy path to other url"
 msgstr "Werkkopie"
 
 #: svnfrontend/kdesvnfilelist.cpp:254
-#, fuzzy
 msgid "Check for unversioned items"
-msgstr "Controleren voor update"
+msgstr "Controleren voor onbeheerde items"
 
 #: svnfrontend/kdesvnfilelist.cpp:256
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
+msgstr "Map doorzoeken voor onbeheerde items en toevoegen indien gewenst."
 
 #: svnfrontend/kdesvnfilelist.cpp:258
-#, fuzzy
 msgid "Open repository of working copy"
-msgstr "Switchen naar repository van huidige werkkopie"
+msgstr "Repository van werkkopie openen"
 
 #: svnfrontend/kdesvnfilelist.cpp:260
 #, fuzzy
@@ -1160,7 +1155,7 @@ msgstr "Switchen naar repository van huidige werkkopie"
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
-msgstr ""
+msgstr "Werkkopie recursief schoonmaken, waarbij vergrendelingen worden verwijderd en afgebroken handelingen worden hervat, etc."
 
 #: svnfrontend/kdesvnfilelist.cpp:265
 msgid "Import folders into current"
@@ -1172,7 +1167,7 @@ msgstr "Mapinhoud importeren naar huidig URL-adres"
 
 #: svnfrontend/kdesvnfilelist.cpp:271
 msgid "Add selected files/dirs"
-msgstr ""
+msgstr "Geselecteerde bestanden/mappen toevoegen"
 
 #: svnfrontend/kdesvnfilelist.cpp:273
 msgid "Adding selected files and/or directories to repository"
@@ -1187,21 +1182,19 @@ msgstr "Geselecteerde mappen en/of bestanden worden toegevoegd aan de repository
 
 #: svnfrontend/kdesvnfilelist.cpp:278
 msgid "Delete selected files/dirs"
-msgstr ""
+msgstr "Geselecteerde bestanden/mappen verwijderen"
 
 #: svnfrontend/kdesvnfilelist.cpp:280
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Geselecteerde mappen en/of bestanden worden verwijderd uit de repository"
 
 #: svnfrontend/kdesvnfilelist.cpp:281
-#, fuzzy
 msgid "Revert current changes"
-msgstr "Items terugdraaien"
+msgstr "Huidige veranderingen terugdraaien"
 
 #: svnfrontend/kdesvnfilelist.cpp:283
-#, fuzzy
 msgid "Resolve recursive"
-msgstr "Recursief"
+msgstr "Recursief oplossen"
 
 #: svnfrontend/kdesvnfilelist.cpp:285
 msgid "Marking files or dirs resolved"
@@ -1212,18 +1205,16 @@ msgid "Ignore/Unignore current item"
 msgstr "Huidige item negeren/negeren opheffen"
 
 #: svnfrontend/kdesvnfilelist.cpp:288
-#, fuzzy
 msgid "Update to head"
-msgstr "Cat HEAD"
+msgstr "Updaten naar HEAD"
 
 #: svnfrontend/kdesvnfilelist.cpp:290
-#, fuzzy
 msgid "Update to revision..."
-msgstr "Toevoegen aan repository: "
+msgstr "Updaten naar revisie..."
 
 #: svnfrontend/kdesvnfilelist.cpp:295
 msgid "Diff local changes"
-msgstr ""
+msgstr "Verschil bepalen lokale wijzigingen"
 
 #: svnfrontend/kdesvnfilelist.cpp:297
 msgid ""
@@ -1232,9 +1223,8 @@ msgid ""
 msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:299
-#, fuzzy
 msgid "Diff against HEAD"
-msgstr "Verschil met HEAD"
+msgstr "Verschil bepalen met HEAD"
 
 #: svnfrontend/kdesvnfilelist.cpp:301
 msgid ""
@@ -1252,18 +1242,16 @@ msgid "Merge two revisions of these entry into itself"
 msgstr "Twee revisies van dit item in zichzelf samenvoegen"
 
 #: svnfrontend/kdesvnfilelist.cpp:308
-#, fuzzy
 msgid "Merge..."
-msgstr "Samengevoegd"
+msgstr "Samenvoegen..."
 
 #: svnfrontend/kdesvnfilelist.cpp:311 svnfrontend/kdesvnfilelist.cpp:1286
 msgid "Open With..."
-msgstr ""
+msgstr "Openen met..."
 
 #: svnfrontend/kdesvnfilelist.cpp:314
-#, fuzzy
 msgid "Checkout current repository path"
-msgstr "Huidige repositorypad exporteren"
+msgstr "Huidige repositorypad uitchecken"
 
 #: svnfrontend/kdesvnfilelist.cpp:316
 msgid "Export current repository path"
@@ -1291,7 +1279,7 @@ msgstr "SVN-fout"
 
 #: svnfrontend/kdesvnfilelist.cpp:927
 msgid "Failed: %1 %2"
-msgstr ""
+msgstr "Mislukt: %1 %2"
 
 #: svnfrontend/kdesvnfilelist.cpp:981
 msgid "Cannot import into multiple targets!"
@@ -1306,18 +1294,16 @@ msgid "Import log"
 msgstr "Import-log"
 
 #: svnfrontend/kdesvnfilelist.cpp:1490
-#, fuzzy
 msgid "Merge"
-msgstr "Samengevoegd"
+msgstr "Samenvoegen"
 
 #: svnfrontend/kdesvnfilelist.cpp:1611
 msgid "Move Here"
-msgstr ""
+msgstr "Hierheen verplaatsen"
 
 #: svnfrontend/kdesvnfilelist.cpp:1612
-#, fuzzy
 msgid "Copy Here"
-msgstr "Kopiëren van"
+msgstr "Hierheen kopiëren"
 
 #: svnfrontend/kdesvnfilelist.cpp:1718
 msgid "Nothing selected for delete"
@@ -1357,7 +1343,7 @@ msgstr "Kan mogelijk geen submappen aanmaken van een bestand"
 
 #: svnfrontend/kdesvnfilelist.cpp:1973
 msgid "Automatic generated base layout by kdesvn"
-msgstr ""
+msgstr "Automatisch gegenereerde basislayout door kdesvn"
 
 #: svnfrontend/kdesvnfilelist.cpp:2318
 #, fuzzy
@@ -1370,15 +1356,15 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:2455
 msgid "Only in working copy possible."
-msgstr ""
+msgstr "Alleen mogelijk in werkkopie."
 
 #: svnfrontend/kdesvnfilelist.cpp:2459
 msgid "Only on single folder possible"
-msgstr ""
+msgstr "Alleen mogelijk met een enkele map"
 
 #: svnfrontend/kdesvnfilelist.cpp:2464
 msgid "Sorry - internal error!"
-msgstr ""
+msgstr "Helaas deed zich een interne fout voor."
 
 #: svnfrontend/graphtree/revgraphview.cpp:329
 msgid "Error running the graph layouting tool.\n"
@@ -1414,18 +1400,16 @@ msgid "Modified at revision %1"
 msgstr "%1 bij revisie %2"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
-#, fuzzy
 msgid "Revision %1"
-msgstr "Revisies"
+msgstr "Revisie %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:450
-#, fuzzy
 msgid "Could not open tempfile %1 for writing."
-msgstr "Kon de repository niet openen"
+msgstr "Kon niet schrijven naar het tijdelijk bestand %1."
 
 #: svnfrontend/graphtree/revgraphview.cpp:499
 msgid "Could not start process \""
-msgstr ""
+msgstr "Kan proces niet starten: \""
 
 #: svnfrontend/graphtree/revgraphview.cpp:543
 msgid "<br>Revision: %2<br>Author: %3<br>Date: %4<br>Log:%5</html>"
@@ -1433,69 +1417,63 @@ msgstr ""
 
 #: svnfrontend/graphtree/revgraphview.cpp:551
 msgid "<b>Revision</b>%1%2%3"
-msgstr ""
+msgstr "<b>Revisie</b>%1%2%3"
 
 #: svnfrontend/graphtree/revgraphview.cpp:552
 msgid "<b>Author</b>%1%2%3"
-msgstr ""
+msgstr "<b>Auteur</b>%1%2%3"
 
 #: svnfrontend/graphtree/revgraphview.cpp:553
 msgid "<b>Date</b>%1%2%3"
-msgstr ""
+msgstr "<b>Datum</b>%1%2%3"
 
 #: svnfrontend/graphtree/revgraphview.cpp:554
 msgid "<b>Log</b>%1%2%3"
-msgstr ""
+msgstr "<b>Log</b>%1%2%3"
 
 #: svnfrontend/graphtree/revgraphview.cpp:789
-#, fuzzy
 msgid "Diff to previous"
 msgstr "Verschil met vorige"
 
 #: svnfrontend/graphtree/revgraphview.cpp:793
-#, fuzzy
 msgid "Diff to selected item"
-msgstr "Verwijderd"
+msgstr "Verschil met geselecteerde item"
 
 #: svnfrontend/graphtree/revgraphview.cpp:796
-#, fuzzy
 msgid "Cat this version"
-msgstr "Begin met revisie"
+msgstr "Inhoud van deze versie tonen"
 
 #: svnfrontend/graphtree/revgraphview.cpp:799
-#, fuzzy
 msgid "Unselect item"
-msgstr "Verwijderd"
+msgstr "Item deselecteren"
 
 #: svnfrontend/graphtree/revgraphview.cpp:801
-#, fuzzy
 msgid "Select item"
-msgstr "Verwijderd"
+msgstr "Item selecteren"
 
 #: svnfrontend/graphtree/revgraphview.cpp:804
-#, fuzzy
 msgid "Display details"
-msgstr "Genegeerde bestanden tonen"
+msgstr "Details tonen"
 
 #: svnfrontend/graphtree/revgraphview.cpp:807
 msgid "Rotate counter-clockwise"
-msgstr ""
+msgstr "Tegen de klok in roteren"
 
 #: svnfrontend/graphtree/revgraphview.cpp:808
 msgid "Rotate clockwise"
-msgstr ""
+msgstr "Met de klok mee roteren"
 
 #: svnfrontend/graphtree/revgraphview.cpp:810
 msgid "Save tree as png"
-msgstr ""
+msgstr "Boom als PNG opslaan"
 
 #: svnfrontend/graphtree/revisiontree.cpp:121
 msgid "Scanning logs"
-msgstr ""
+msgstr "Logbestanden worden gescand"
 
 #: svnfrontend/graphtree/revisiontree.cpp:121
 msgid "Scanning the logs for %1"
-msgstr ""
+msgstr "Logs voor %1 worden gescand"
 
 #: svnfrontend/copymoveview_impl.cpp:49
 msgid "Rename/move"
@@ -1515,7 +1493,7 @@ msgstr "Niet in versiebeheer"
 
 #: svnfrontend/commandexec.cpp:200
 msgid "Command \"%1\" not implemented or known"
-msgstr ""
+msgstr "Commando \"%1\" is niet geïmplementeerd of onbekend"
 
 #: svnfrontend/commandexec.cpp:297
 msgid "Execution log"

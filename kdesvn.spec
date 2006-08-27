@@ -34,8 +34,8 @@ Summary:  Wrapper lib for subversion QT integration.
 Requires: subversion >= 1.2.0
 BuildPreReq: apr-devel
 BuildPreReq: apr-util-devel
-BuildPreReq: neon-devel
 BuildPreReq: subversion-devel >= 1.2.0
+BuildPreReq: cmake >= 2.4
 
 %description svnqt
 Shared lib which contains a QT C++ wrapper for subversion. It is core part
@@ -53,11 +53,16 @@ Development files for kdesvn-svnqt
 
 %prep
 %setup
-CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" ./configure \
-                --prefix=`kde-config --prefix` \
-                --disable-no-exceptions \
-                --disable-debug
+#CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" ./configure \
+#                --prefix=`kde-config --prefix` \
+#                --disable-no-exceptions \
+#                --disable-debug
+mkdir build
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release
+
 %build
+cd build
 # Setup for parallel builds
 numprocs=`egrep -c ^cpu[0-9]+ /proc/stat || :`
 if [ "$numprocs" = "0" ]; then
@@ -67,9 +72,11 @@ fi
 make -j$numprocs
 
 %install
-make install-strip DESTDIR=$RPM_BUILD_ROOT
+cd build
+make install DESTDIR=$RPM_BUILD_ROOT
 
 cd $RPM_BUILD_ROOT
+ln -s %{_datadir}/doc/HTML/en/common $RPM_BUILD_ROOT%{_datadir}/doc/HTML/en/kdesvn/common
 
 %clean
 rm -rf $RPM_BUILD_ROOT/*
@@ -100,6 +107,6 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_libdir}/libsvnqt*.so*
 
 %files svnqt-devel
-%{_libdir}/libsvnqt.la
+#%{_libdir}/libsvnqt.la
 %{_includedir}/svnqt/*
 

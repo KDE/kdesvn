@@ -24,6 +24,7 @@
 #include "settings/dispcolorsettings_impl.h"
 #include "settings/revisiontreesettingsdlg_impl.h"
 #include "settings/subversionsettings_impl.h"
+#include "settings/cmdexecsettings_impl.h"
 #include "kdesvnview.h"
 #include "commandline_part.h"
 #include "../config.h"
@@ -328,6 +329,8 @@ void kdesvnPart::slotShowSettings()
         i18n("Colors"),"colorize",i18n("Color Settings"),true);
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0,"revisiontree_items"),
         i18n("Revision tree"),"configure",i18n("Revision tree Settings"),true);
+    dialog->addPage(new CmdExecSettings_impl(0,"cmdexec_items"),
+        "KIO/"+i18n("Commandline"),"terminal",i18n("Settings for commandline and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
     connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));

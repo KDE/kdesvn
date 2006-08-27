@@ -496,11 +496,11 @@ void RevGraphView::dumpRevtree()
     connect(renderProcess,SIGNAL(receivedStdout(KProcess*,char*,int)),
         this,SLOT(readDotOutput(KProcess*,char*,int)) );
     if (!renderProcess->start(KProcess::NotifyOnExit,KProcess::Stdout)) {
-        QString error = i18n("Could not start process \"");
+        QString arguments;
         for (unsigned c=0;c<renderProcess->args().count();++c) {
-            error+=QString(" %1").arg(renderProcess->args()[c]);
+            arguments+=QString(" %1").arg(renderProcess->args()[c]);
         }
-        error+=" \".";
+        QString error = i18n("Could not start process \"%1\".").arg(arguments);
         showText(error);
         renderProcess=0;
         //delete renderProcess;<
@@ -540,7 +540,7 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
 
     if (!full) {
         res+=QString("<b>%1</b>").arg(it.data().name);
-        res += i18n("<br>Revision: %2<br>Author: %3<br>Date: %4<br>Log:%5</html>")
+        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log:%4</html>")
             .arg(it.data().rev)
             .arg(it.data().Author)
             .arg(it.data().Date)
@@ -939,7 +939,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
         slotClientException(i18n("No difference to display"));
         return;
     }
-    emit dispDiff(QString::FROMUTF8(ex,ex.size()));
+    emit dispDiff(QString::fromLocal8Bit(ex,ex.size()));
 }
 
 void RevGraphView::setBasePath(const QString&_path)

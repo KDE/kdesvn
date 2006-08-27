@@ -17,69 +17,29 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef COMMANDEXEC_H
-#define COMMANDEXEC_H
 
-#include <qobject.h>
-#include <qstring.h>
 
-class KCmdLineArgs;
-class KURL;
-class pCPart;
+#include "cmdexecsettings_impl.h"
 
-namespace svn {
-    class Revision;
+#include <klocale.h>
+#include <knuminput.h>
+
+CmdExecSettings_impl::CmdExecSettings_impl(QWidget* parent, const char* name, WFlags fl)
+: CmdExecSettings(parent,name,fl)
+{
+    kcfg_cmdline_log_minline->setSpecialValueText(i18n("No minimum"));
 }
 
-/**
-@author Rajko Albrecht
-*/
-class CommandExec : public QObject
+CmdExecSettings_impl::~CmdExecSettings_impl()
 {
-Q_OBJECT
-public:
-    CommandExec(QObject*parent,const char *name,KCmdLineArgs *args);
-    virtual ~CommandExec();
-    virtual int exec();
+}
 
-protected slots:
-    virtual void clientException(const QString&);
-    virtual void slotNotifyMessage(const QString&);
-    virtual void slotCmd_log();
-    virtual void slotCmd_update();
-    virtual void slotCmd_diff();
-    virtual void slotCmd_blame();
-    virtual void slotCmd_info();
-    virtual void slotCmd_commit();
-    virtual void slotCmd_cat();
-    virtual void slotCmd_get();
-    virtual void slotCmd_list();
-    virtual void slotCmd_copy();
-    virtual void slotCmd_move();
-    virtual void slotCmd_checkout();
-    virtual void slotCmd_checkoutto();
-    virtual void slotCmd_export();
-    virtual void slotCmd_exportto();
-    virtual void slotCmd_delete();
-    virtual void slotCmd_add();
-    virtual void slotCmd_revert();
-    virtual void slotCmd_addnew();
-    virtual void slotCmd_tree();
+/*$SPECIALIZATION$*/
 
-signals:
-    void executeMe();
-protected:
-    virtual bool scanRevision();
-    virtual bool askRevision();
+void CmdExecSettings_impl::showLogToggled(bool how)
+{
+    kcfg_cmdline_log_minline->setEnabled(how);
+}
 
-    QString m_lastMessages;
-    unsigned int m_lastMessagesLines;
+#include "cmdexecsettings_impl.moc"
 
-private:
-    pCPart*m_pCPart;
-
-protected slots:
-    void slotCmd_switch();
-};
-
-#endif

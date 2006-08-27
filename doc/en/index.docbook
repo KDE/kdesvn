@@ -521,6 +521,22 @@ This entry is locally added to subversion but not yet committed.
 This entry is locally deleted from subversion but hasn't yet been committed.
 </para></listitem>
 </varlistentry>
+
+<varlistentry>
+<term><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>overlay deleted</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem><para>
+This entry (or entry below if folder) got conflicts to resolve with last update.
+</para></listitem>
+</varlistentry>
+
 </variablelist>
 
 </para>
@@ -1457,8 +1473,10 @@ This is also a great place to provide pointers to other FAQ's if your users
 must do some complicated configuration on other programs in order for your
 application work. -->
 
+<!--
 &reporting.bugs;
 &updating.documentation;
+-->
 
 <qandaset id="faqlist">
 <qandaentry>
@@ -1492,51 +1510,6 @@ repository to newer subversion.
 </answer>
 </qandaentry>
 </qandaset>
-</chapter>
-
-<chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
-
-<title>Credits and License</title>
-
-<para>
-&kdesvn;
-</para>
-<para>
-Program copyright 2005 Rajko Albrecht <email>ral@alwins-world.de</email>
-</para>
-<para>
-Contributors:
-<itemizedlist>
-<listitem><para>Konqui the KDE Dragon <email>konqui@kde.org</email></para>
-</listitem>
-<listitem><para>Tux the Linux Penguin <email>tux@linux.org</email></para>
-</listitem>
-</itemizedlist>
-</para>
-
-<para>
-Documentation copyright 2005 Rajko Albrecht <email>ral@alwins-world.de</email>
-</para>
-
-<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-&underFDL;               <!-- FDL: do not remove -->
-<!-- Determine which license your application is licensed under, 
-     and delete all the remaining licenses below:
-
-     (NOTE:  All documentation are licensed under the FDL, 
-     regardless of what license the application uses) -->
-
-&underGPL;        	 <!-- GPL License -->
-<!-- &underBSDLicense;        --><!-- BSD License -->
-<!-- &underArtisticLicense;   --><!-- BSD Artistic License -->
-<!-- &underX11License;        --><!-- X11 License  -->
-
 </chapter>
 
 <appendix id="revision-syntax">
@@ -1608,6 +1581,61 @@ Appending a specific revision to an url will always made via &quot;?rev=&lt;revi
 </para>
 </appendix>
 
+<appendix id="further">
+<title>Further information</title>
+<sect1>
+<title>Reporting bugs / Feedback</title>
+<para>
+Bugreports and wishes may send to <email>kdesvn-bugs@alwins-world.de</email>, questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>. 
+</para>
+<para>
+An overview for the mailinglists for &kappname; you may get in the <ulink url="http://www.alwins-world.de/mailman/listinfo">mailinglist overview</ulink>.
+</para>
+</sect1>
+<sect1>
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+<title>Credits and License and Thanks</title>
+<para>
+Program copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</email>
+</para>
+<para>
+Many tnx to contributors:
+<itemizedlist>
+<listitem><para>Andreas Richter <email>ar@oszine.de</email> - for qt4 port of svnqt</para>
+</listitem>
+<listitem><para>Michael Biebl <email>biebl@teco.edu</email> - for a lot of help, ideas, implementation and hints.</para>
+</listitem>
+<listitem><para>Bram Schoenmakers <email>bramschoenmakers@kde.nl</email> - for kde-specific hints, dutch translation, cleaning up my code.</para>
+</listitem>
+</itemizedlist>
+And tnx to all other translators (I never thought that I get that fast such a lot of translations!) and for all of your positive and negative feedback. It helped a lot. 
+</para>
+<para>
+If you want your own translation for &kappname; and may want help please read on the homepage of &kappname; or ask on <ulink url="mailto:kdesvn-i10n@alwins-world.de"><email>kdesvn-i10n@alwins-world.de</email> mailinglist</ulink>.
+</para>
+<para>
+Documentation copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</email>
+</para>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+<!-- Determine which license your application is licensed under, 
+     and delete all the remaining licenses below:
+
+     (NOTE:  All documentation are licensed under the FDL, 
+     regardless of what license the application uses) -->
+
+&underGPL;        	 <!-- GPL License -->
+<!-- &underBSDLicense;        --><!-- BSD License -->
+<!-- &underArtisticLicense;   --><!-- BSD Artistic License -->
+<!-- &underX11License;        --><!-- X11 License  -->
+</sect1>
+
+</appendix>
+
 <appendix id="installation">
 <title>Installation</title>
 
@@ -1662,13 +1690,32 @@ url="http://www.alwins-world.de/programs/kdesvn">http://www.alwins-world.de/prog
 
 <sect1 id="compilation">
 <title>Compilation and Installation</title>
+<sect2>
+<title>Using cmake</title>
+<para>
+&kappname; requires at least cmake 2.4 for building. The following steps works with both distribution tarball or tarball from repository. Unpack the archive 
+or checkout / export a copy from repository and change to the resulting sourcedirectory.
+</para>
+<para>
+<screen>
+<prompt>%</prompt> <userinput><command>mkdir</command> build</userinput>
+<prompt>%</prompt> <userinput><command>cd</command> build</userinput>
+<prompt>%</prompt> <userinput><command>cmake</command> ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release</userinput>
+<prompt>%</prompt> <userinput><command>make</command></userinput>
+<prompt>%</prompt> <userinput><command>make</command> install</userinput>
+</screen>
+</para>
+</sect2>
 
-<!-- This entity contains the boilerplate text for standard -->
-<!-- compilation instructions.  If your application requires any -->
-<!-- special handling, remove it, and replace with your own text. -->
+<sect2>
+<title>Using automake and configure</title>
+<para><warning><para>This buildsystem will get removed near future!i</para></warning></para>
 <para>In order to compile and install &kappname; on your system, type the
 following in the base directory of the &kappname; distribution:</para>
-<screen><prompt>%</prompt> <userinput><command>./configure</command> --prefix=`kde-config --prefix`</userinput>
+<screen>
+<prompt>%</prompt> <userinput><command>mkdir</command> build</userinput>
+<prompt>%</prompt> <userinput><command>cd</command> build</userinput>
+<prompt>%</prompt> <userinput><command>../configure</command> --prefix=`kde-config --prefix`</userinput>
 <prompt>%</prompt> <userinput><command>make</command></userinput>
 <prompt>%</prompt> <userinput><command>make</command> install</userinput>
 </screen>
@@ -1678,12 +1725,14 @@ and do
 </para>
 <screen>
 <prompt>%</prompt> <userinput><command>make</command> -f Makefile.cvs</userinput>
-<prompt>%</prompt> <userinput><command>./configure</command> --prefix=`kde-config --prefix`</userinput>
+<prompt>%</prompt> <userinput><command>mkdir</command> build</userinput>
+<prompt>%</prompt> <userinput><command>cd</command> build</userinput>
+<prompt>%</prompt> <userinput><command>../configure</command> --prefix=`kde-config --prefix`</userinput>
 <prompt>%</prompt> <userinput><command>make</command></userinput>
 <prompt>%</prompt> <userinput><command>make</command> install</userinput>
 </screen>
+</sect2>
 </sect1>
-
 <sect1 id="configuration">
 <title>Configuration</title>
 

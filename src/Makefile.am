@@ -5,7 +5,7 @@
 bin_PROGRAMS = kdesvn kdesvnaskpass
 
 # set the include path for X, qt and KDE
-INCLUDES = -I$(top_srcdir)/src -I$(top_srcdir)/src/svnfrontend $(all_includes)
+INCLUDES = -I$(top_builddir)/src/svnfrontend -I$(top_srcdir)/src -I$(top_srcdir)/src/svnfrontend $(all_includes)
 
 # the library search path. 
 kdesvn_LDFLAGS = $(KDE_RPATH) $(all_libraries)

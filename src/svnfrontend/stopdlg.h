@@ -59,6 +59,9 @@ protected:
     KTextBrowser*m_LogWindow;
     QVBoxLayout*layout;
 
+    QString m_lastLog;
+    unsigned int m_lastLogLines;
+
 public slots:
     virtual void slotTick();
     virtual void slotWait(bool);

@@ -8,12 +8,12 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>285</width>
-            <height>314</height>
+            <width>264</width>
+            <height>325</height>
         </rect>
     </property>
     <property name="caption">
-        <string>Form1</string>
+        <string>ColorSettings</string>
     </property>
     <vbox>
         <property name="name">
@@ -214,10 +214,25 @@
                 </widget>
             </grid>
         </widget>
+        <spacer>
+            <property name="name">
+                <cstring>spacer1</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>40</height>
+                </size>
+            </property>
+        </spacer>
     </vbox>
 </widget>
-<customwidgets>
-</customwidgets>
 <connections>
     <connection>
         <sender>kcfg_colored_state</sender>

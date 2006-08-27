@@ -23,6 +23,7 @@
 #include "src/ksvnwidgets/authdialogimpl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/settings/kdesvnsettings.h"
 #include "svnqt/client.hpp"
 #include "svnqt/revision.hpp"
 #include "svnqt/status.hpp"
@@ -105,46 +106,24 @@ IListener::~IListener()
 
 kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)
 {
-    kdDebug() << "Starting new service... " << endl;
     KGlobal::locale()->insertCatalogue("kdesvn");
     m_Listener=new IListener(this);
 }
 
 kdesvnd_dcop::~kdesvnd_dcop()
 {
-    kdDebug() << "Going away... " << endl;
     delete m_Listener;
-}
-
-QStringList kdesvnd_dcop::getTopLevelActionMenu (const KURL::List list)
-{
-    QStringList result;
-    if (list.count()==0) {
-        return result;
-    }
-    QString base;
-    if (!isWorkingCopy(list[0],base)) {
-        if (isRepository(list[0])) {
-            result << "Export"
-                   << "Checkout";
-        } else {
-            result << "Exportto"
-                   << "Checkoutto";
-        }
-    } else {
-        result << "Update"
-            << "Commit";
-    }
-    return result;
 }
 
 QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
 {
     QStringList result;
-    if (list.count()==0) {
+    Kdesvnsettings::self()->readConfig();
+    if (Kdesvnsettings::no_konqueror_contextmenu()||list.count()==0) {
         return result;
     }
     QString base;
+
 
     bool parentIsWc = false;
     bool itemIsWc = isWorkingCopy(list[0],base);

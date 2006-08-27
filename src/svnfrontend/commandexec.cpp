@@ -29,12 +29,14 @@
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "svnfrontend/copymoveview_impl.h"
 
+#include <kapp.h>
 #include <kglobal.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kdialogbase.h>
+#include <ktextbrowser.h>
 
 #include <qfile.h>
 #include <qtextstream.h>
@@ -109,6 +111,8 @@ int CommandExec::exec()
     if (!m_pCPart->args) {
         return -1;
     }
+    m_lastMessages = "";
+    m_lastMessagesLines = 0;
     m_pCPart->m_SvnWrapper->reInitClient();
     bool dont_check_second = false;
     bool dont_check_all = false;
@@ -284,6 +288,22 @@ int CommandExec::exec()
     }
 
     emit executeMe();
+    if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
+        m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
+        KDialogBase dlg (
+            KApplication::activeModalWidget(),
+            "execution_log",
+            true,
+            i18n("Execution log"),
+            KDialogBase::Ok);
+
+        QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+        KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
+        ptr->setText(m_lastMessages);
+        dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log"));
+        dlg.exec();
+        dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log",false);
+    }
     return 0;
 }
 
@@ -535,8 +555,12 @@ bool CommandExec::scanRevision()
 
 void CommandExec::slotNotifyMessage(const QString&msg)
 {
-    //m_pCPart->Stdout << msg << endl;
     m_pCPart->m_SvnWrapper->slotExtraLogMsg(msg);
+    if (Kdesvnsettings::self()->cmdline_show_logwindow()) {
+        ++m_lastMessagesLines;
+        if (!m_lastMessages.isEmpty()) m_lastMessages.append("\n");
+        m_lastMessages.append(msg);
+    }
 }
 
 bool CommandExec::askRevision()

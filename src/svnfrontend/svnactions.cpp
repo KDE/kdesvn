@@ -128,9 +128,7 @@ SvnActions::SvnActions(ItemDisplay *parent, const char *name)
 {
     m_CThread = 0;
     m_UThread = 0;
-    kdDebug()<<"New SvnActionsData()"<<endl;
     m_Data = new SvnActionsData();
-    kdDebug()<<"New SvnActionsData() finished"<<endl;
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContext = new CContextListener(this);
     connect(m_Data->m_SvnContext,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
@@ -198,7 +196,8 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
     bool follow = Kdesvnsettings::log_follows_nodes();
 
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Logs","Getting logs - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Logs",
+            i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         logs = m_Data->m_Svnclient->log(which,start,end,list_files,!follow,limit);
     } catch (svn::ClientException e) {
@@ -514,7 +513,8 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
     QString ex;
     svn::InfoEntries entries;
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Details","Retrieving infos - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Details",
+            i18n("Retrieving infos - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::InfoEntries e;
         entries = (m_Data->m_Svnclient->info(_what,recursive,rev,peg));
@@ -835,7 +835,8 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     }
 
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Commiting","Commiting - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Commiting"),
+            i18n("Commiting - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         nnum = m_Data->m_Svnclient->commit(_targets,msg,rec);
     } catch (svn::ClientException e) {
@@ -878,7 +879,8 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
     svn::Path tmpPath(tn);
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing",
+        i18n("Diffing - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         for (unsigned int i = 0; i < which.count();++i) {
             QByteArray eb = m_Data->m_Svnclient->diff(tmpPath,
@@ -919,7 +921,8 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing",
+            i18n("Diffing - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),
             svn::Path(p1),svn::Path(p2),
@@ -1033,7 +1036,8 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
     svn::Revisions ret;
     stopCheckUpdateThread();
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Making update","Making update - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Making update",
+            i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets pathes(what);
         // always update externals, too. (last parameter)

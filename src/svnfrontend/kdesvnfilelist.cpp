@@ -2303,6 +2303,7 @@ void kdesvnfilelist::slotSettingsChanged()
     } else {
         viewport()->repaint();
     }
+    sort();
 }
 
 

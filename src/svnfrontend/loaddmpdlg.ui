@@ -12,9 +12,6 @@
             <height>272</height>
         </rect>
     </property>
-    <property name="caption">
-        <string>Form1</string>
-    </property>
     <vbox>
         <property name="name">
             <cstring>unnamed</cstring>
@@ -128,10 +125,10 @@
                         <cstring>m_UUidIgnore</cstring>
                     </property>
                     <property name="text">
-                        <string>Ig&amp;nore</string>
+                        <string>Ignore</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+N</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget class="QRadioButton">

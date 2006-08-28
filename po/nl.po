@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-26 09:42+0200\n"
-"PO-Revision-Date: 2006-08-26 15:04+0200\n"
+"PO-Revision-Date: 2006-08-28 20:32+0200\n"
 "Last-Translator: Bram Schoenmakers <bramschoenmakers@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,6 @@ msgid "Use \"Kompare\" for displaying diffs"
 msgstr "\"Kompare\" gebruiken voor het tonen van diff-bestanden"
 
 #: kdesvn_part.cpp:169
-#, fuzzy
 msgid "Logs follow node changes"
 msgstr "Logbestanden houden node-veranderingen bij"
 
@@ -368,9 +367,8 @@ msgid "Exported external at revision %1."
 msgstr "Extern geëxporteerd op revisie %1."
 
 #: kiosvn/kiolistener.cpp:221
-#, fuzzy
 msgid "Exported revision %1."
-msgstr "Repository exporteren"
+msgstr "Revisie %1 geëxporteerd."
 
 #: kiosvn/kiolistener.cpp:224
 #, fuzzy
@@ -378,9 +376,8 @@ msgid "Checked out external at revision %1."
 msgstr "External op revisie %1 uitgechecked."
 
 #: kiosvn/kiolistener.cpp:226
-#, fuzzy
 msgid "Checked out revision %1."
-msgstr "%1 bij revisie %2"
+msgstr "Revisie %1 uitgechecked."
 
 #: kiosvn/kiolistener.cpp:230
 #, fuzzy
@@ -489,19 +486,16 @@ msgid "Dump a subversion repository to a file"
 msgstr "Dump a tot a bestand"
 
 #: kdesvn.cpp:118
-#, fuzzy
 msgid "Hotcopy a subversion repository to a new folder"
-msgstr "a tot a nieuw map"
+msgstr ""
 
 #: kdesvn.cpp:119
-#, fuzzy
 msgid "Load dump into repository"
-msgstr "Repository uitchecken"
+msgstr "Dump in repository laden"
 
 #: kdesvn.cpp:121
-#, fuzzy
 msgid "Load a dump file into a repository."
-msgstr "Repository uitchecken"
+msgstr "Dump in repository laden."
 
 #: kdesvn.cpp:131
 msgid "Could not find our part."
@@ -1323,7 +1317,7 @@ msgstr "Verschil met vorige"
 #: rc.cpp:538 svnfrontend/kdesvnfilelist.cpp:327
 #, no-c-format
 msgid "Diff revisions"
-msgstr "Verschil met vorige"
+msgstr "Verschil met revisies"
 
 #: rc.cpp:542
 #, no-c-format
@@ -1656,26 +1650,22 @@ msgstr ""
 "object gewijzigd<br><b> Id</b> A samenvatting van."
 
 #: svnfrontend/editproperty_impl.cpp:57
-#, fuzzy
 msgid ""
 "Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file."
 "<br>        The file will be set read-only when checked out or "
 "updated,        indicating that a user must acquire a lock on the file "
 "before        they can edit and commit changes."
 msgstr ""
-"Instellen tot any e g<b></b> tot voor bestand<br> bestand set of a a aan "
-"bestand voor edit en."
+"Vul hier een willekeurige waarde in (bijv. <b>'*'</b>) om het vergrendelen af te dwingen. "
+"<br>Het bestand zal vervolgens alleen-lezen zijn wanneer het wordt uitgechecked of wordt bijgewerkt. Daarmee moet een gebruiker eerst de vergrendeling opheffen alvorens deze het bestand kan bewerken of kan vastleggen."
 
 #: svnfrontend/editproperty_impl.cpp:61 svnfrontend/editproperty_impl.cpp:90
-#, fuzzy
 msgid ""
 "The mimetype of the file. Used to determine        whether to merge the file "
 "and how to serve it from        Apache. A mimetype beginning with "
 "<b>'text/'</b> (or an absent        mimetype) is treated as text. Anything "
 "else is treated as binary."
-msgstr ""
-"van bestand Gebruikt tot tot Versmelting bestand en tot A met<b> tekst</b> "
-"of is tekst is."
+msgstr "Het MIME-type van het bestand. Het wordt gebruikt om te bepalen of het bestand samengevoegd kan worden en hoe dit af te handelen vanuit Apache. Een MIME-type dat begint met <b>'text/'</b> (of een bestand zonder MIME-type) wordt beschouwd als een tekstbestand. Alle andere MIME-types worden als binair beschouwd."
 
 #: svnfrontend/editproperty_impl.cpp:84
 #, fuzzy
@@ -1764,7 +1754,6 @@ msgid "Other..."
 msgstr "Overige..."
 
 #: svnfrontend/graphtree/revgraphview.cpp:329
-#, fuzzy
 msgid "Error running the graph layouting tool.\n"
 msgstr "Fout bij het uitvoeren van het grafische hulpprogramma.\n"
 
@@ -1773,29 +1762,24 @@ msgid "Please check that 'dot' is installed (package GraphViz)."
 msgstr "Controleer of 'dot' is geïnstalleerd (pakket GraphViz)."
 
 #: svnfrontend/graphtree/revgraphview.cpp:415
-#, fuzzy
 msgid "Deleted at revision %1"
-msgstr "Toevoegen aan repository: "
+msgstr "Verwijderd op revisie %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:418
-#, fuzzy
 msgid "Added at revision %1 as %2"
-msgstr "%1 bij revisie %2"
+msgstr "Toegevoegd op revisie %1 als %2"
 
 #: svnfrontend/graphtree/revgraphview.cpp:424
-#, fuzzy
 msgid "Copied to %1 at revision %2"
-msgstr "%1 bij revisie %2"
+msgstr "Gekopieerd naar %1 op revisie %2"
 
 #: svnfrontend/graphtree/revgraphview.cpp:427
-#, fuzzy
 msgid "Renamed to %1 at revision %2"
-msgstr "%1 bij revisie %2"
+msgstr "Hernoemd naar %1 op revisie %2"
 
 #: svnfrontend/graphtree/revgraphview.cpp:430
-#, fuzzy
 msgid "Modified at revision %1"
-msgstr "%1 bij revisie %2"
+msgstr "Aangepast op revisie %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
 msgid "Revision %1"

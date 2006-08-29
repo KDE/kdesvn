@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-26 09:42+0200\n"
-"PO-Revision-Date: 2006-08-28 20:32+0200\n"
+"PO-Revision-Date: 2006-08-29 22:17+0200\n"
 "Last-Translator: Bram Schoenmakers <bramschoenmakers@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -362,84 +362,72 @@ msgid "Finished external."
 msgstr "Voltooid (extern)."
 
 #: kiosvn/kiolistener.cpp:219
-#, fuzzy
 msgid "Exported external at revision %1."
-msgstr "Extern geëxporteerd op revisie %1."
+msgstr "Extern item geëxporteerd op revisie %1."
 
 #: kiosvn/kiolistener.cpp:221
 msgid "Exported revision %1."
 msgstr "Revisie %1 geëxporteerd."
 
 #: kiosvn/kiolistener.cpp:224
-#, fuzzy
 msgid "Checked out external at revision %1."
-msgstr "External op revisie %1 uitgechecked."
+msgstr "Extern item op revisie %1 uitgechecked."
 
 #: kiosvn/kiolistener.cpp:226
 msgid "Checked out revision %1."
 msgstr "Revisie %1 uitgechecked."
 
 #: kiosvn/kiolistener.cpp:230
-#, fuzzy
 msgid "Updated external to revision %1."
-msgstr "Externe module bijwerken"
+msgstr "Extern item op revisie %1 bijgewerkt."
 
 #: kiosvn/kiolistener.cpp:232
 msgid "Updated to revision %1."
 msgstr "Bijgewerkt tot en met revisie %1."
 
 #: kiosvn/kiolistener.cpp:235
-#, fuzzy
 msgid "External at revision %1."
-msgstr "%1 bij revisie %2"
+msgstr "Extern item op revisie %1."
 
 #: kiosvn/kiolistener.cpp:237
-#, fuzzy
 msgid "At revision %1."
 msgstr "Op revisie %1."
 
 #: kiosvn/kiolistener.cpp:243
-#, fuzzy
 msgid "External export complete."
-msgstr "External export voltooid."
+msgstr "Export extern item voltooid."
 
 #: kiosvn/kiolistener.cpp:245
-#, fuzzy
 msgid "Export complete."
-msgstr "Bijwerken voltooid"
+msgstr "Export voltooid."
 
 #: kiosvn/kiolistener.cpp:248
-#, fuzzy
 msgid "External checkout complete."
-msgstr "External checkout voltooid."
+msgstr "Checkout extern item voltooid."
 
 #: kiosvn/kiolistener.cpp:250
 msgid "Checkout complete."
 msgstr "Checkout voltooid."
 
 #: kiosvn/kiolistener.cpp:253
-#, fuzzy
 msgid "External update complete."
-msgstr "Bijwerken voltooid"
+msgstr "Extern item bijgewerkt."
 
 #: kiosvn/kiolistener.cpp:255
 msgid "Update complete."
 msgstr "Bijwerken voltooid."
 
 #: kiosvn/kiolistener.cpp:266
-#, fuzzy
 msgid "Fetching external item into %1."
-msgstr "External item ophalen in %1."
+msgstr "Extern item ophalen in %1."
 
 #: kiosvn/kiolistener.cpp:270
-#, fuzzy
 msgid "Status against revision: %1."
-msgstr "Begin met revisie"
+msgstr "Status ten opzichte van revisie %1."
 
 #: kiosvn/kiolistener.cpp:273
-#, fuzzy
 msgid "Performing status on external item at %1."
-msgstr "Status wordt uitgevoerd tegen external item op %1."
+msgstr "Status van extern item ten op %1."
 
 #: kiosvn/kiolistener.cpp:276
 msgid "Sending %1"
@@ -466,24 +454,20 @@ msgid "Transmitting file data "
 msgstr "Bestandsgegevens worden verzonden"
 
 #: kdesvn.cpp:110
-#, fuzzy
 msgid "Create and open new repository"
-msgstr "Kon de repository niet openen"
+msgstr "Nieuwe repository aanmaken en openen"
 
 #: kdesvn.cpp:112
-#, fuzzy
 msgid "Create and opens a new local subversion repository"
-msgstr "Aanmaken en a nieuw lokaal"
+msgstr "Maakt en opent een nieuwe lokale Subversion-repository"
 
 #: kdesvn.cpp:113
-#, fuzzy
 msgid "Dump repository to file"
-msgstr "Geen repository geopend"
+msgstr "Repository naar bestand dumpen"
 
 #: kdesvn.cpp:115
-#, fuzzy
 msgid "Dump a subversion repository to a file"
-msgstr "Dump a tot a bestand"
+msgstr "Een Subversion-repository naar een bestand dumpen"
 
 #: kdesvn.cpp:118
 msgid "Hotcopy a subversion repository to a new folder"
@@ -506,9 +490,8 @@ msgid "Load last opened URL on start"
 msgstr "Laatst geopende URL-adres openen bij het opstarten"
 
 #: kdesvn.cpp:185
-#, fuzzy
 msgid "Reload last opend url if no one is given on commandline"
-msgstr "Herladen URL-adres nee een is aan"
+msgstr "Laatst geopende URL-adres herladen indien er niets via de commandoregel is opgegeven"
 
 #: kdesvn.cpp:260
 msgid "Ready"
@@ -545,13 +528,12 @@ msgid "Logmessage"
 msgstr "Logbericht"
 
 #: rc.cpp:40
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Review affected items"
-msgstr "Verwijderd"
+msgstr "Bestanden in kwestie nakijken"
 
 #: rc.cpp:43
 #, no-c-format
-#, fuzzy
 msgid "Entry"
 msgstr "Ingang"
 
@@ -566,9 +548,9 @@ msgid "Or insert one of the last:"
 msgstr "Of voer één van de vorige berichten in:"
 
 #: rc.cpp:56
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Last used log messages"
-msgstr "Voer een logbericht in"
+msgstr "Laatst gebruikte logbericht"
 
 #: rc.cpp:59 rc.cpp:444 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:122
 #: svnfrontend/svnactions.cpp:1369
@@ -602,113 +584,109 @@ msgid "Store password"
 msgstr "Wachtwoord opslaan"
 
 #: rc.cpp:89
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Revisiontree Settings"
-msgstr "Subversion-instellingen"
+msgstr "Instellingen revisieboom"
 
 #: rc.cpp:92
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Direction of revision tree"
-msgstr "Revisie selecteren"
+msgstr "Richting revisieboom"
 
 #: rc.cpp:95
 #, no-c-format
-#, fuzzy
 msgid "Left to right"
-msgstr "Links tot rechts"
+msgstr "Links naar rechts"
 
 #: rc.cpp:98
 #, no-c-format
-#, fuzzy
 msgid "Bottom to top"
 msgstr "Onder tot boven"
 
 #: rc.cpp:101
 #, no-c-format
-#, fuzzy
 msgid "Right to left"
-msgstr "Rechts tot links"
+msgstr "Rechts naar links"
 
 #: rc.cpp:104
 #, no-c-format
-#, fuzzy
 msgid "Top to bottom"
-msgstr "Boven tot onder"
+msgstr "Boven naar beneden"
 
 #: rc.cpp:107
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color for added items:"
-msgstr "Item buiten versiebeheer hield werk tegen"
+msgstr "Kleur voor toegevoegde items:"
 
 #: rc.cpp:111
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color for deleted items:"
-msgstr "Verwijderd"
+msgstr "Kleur voor verwijderde items:"
 
 #: rc.cpp:115
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color for copied items:"
-msgstr "Huidige items vergrendelen"
+msgstr "Kleur voor gekopieerde items:"
 
 #: rc.cpp:119
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color for renamed items:"
-msgstr "Controleren voor update"
+msgstr "Kleur voor hernoemde items:"
 
 #: rc.cpp:123
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color for modified items:"
-msgstr "Huidige items vergrendelen"
+msgstr "Kleur voor aangepaste items:"
 
 #: rc.cpp:127
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark changed and locked items colored"
-msgstr "Gewijzigde items markeren"
+msgstr "Gewijzigde en vergrendelde bestanden met kleur markeren"
 
 #: rc.cpp:135
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Locked items:"
-msgstr "Huidige items vergrendelen"
+msgstr "Vergrendelde items:"
 
 #: rc.cpp:139
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Not versioned items:"
-msgstr "Niet in versiebeheer"
+msgstr "Items niet in versiebeheer:"
 
 #: rc.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Remote changed items:"
-msgstr "Gewijzigde items markeren"
+msgstr "Items gewijzigd in repository:"
 
 #: rc.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Added items:"
-msgstr "Item buiten versiebeheer hield werk tegen"
+msgstr "Toegevoegde items:"
 
 #: rc.cpp:148
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Deleted items:"
-msgstr "Verwijderd"
+msgstr "Verwijderde items:"
 
 #: rc.cpp:155
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Conflicted items:"
-msgstr "Huidige items vergrendelen"
+msgstr "Conflicterende items:"
 
 #: rc.cpp:158
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Missed items:"
-msgstr "Item buiten versiebeheer hield werk tegen"
+msgstr "Gemiste items:"
 
 #: rc.cpp:161
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Local changed items:"
-msgstr "Gewijzigde items markeren"
+msgstr "Items met lokale wijzigingen:"
 
 #: rc.cpp:164
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Item needs lock:"
-msgstr "svn:needs-lock"
+msgstr "Item vereist vergrendeling:"
 
 #: rc.cpp:168
 #, no-c-format
@@ -722,9 +700,8 @@ msgstr "Grootte van pictogrammen in lijst"
 
 #: rc.cpp:174
 #, no-c-format
-#, fuzzy
 msgid "Items sortorder is case sensitive"
-msgstr "Items is"
+msgstr "Sorteervolgorde items is hoofdlettergevoelig"
 
 #: rc.cpp:177
 #, no-c-format
@@ -732,7 +709,7 @@ msgid "Show file info"
 msgstr "Bestandsinformatie tonen"
 
 #: rc.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
@@ -743,19 +720,16 @@ msgstr ""
 
 #: rc.cpp:183
 #, no-c-format
-#, fuzzy
 msgid "Mark item status with icon overlay"
-msgstr "Markeren status met pictogram"
+msgstr "Itemstatus markeren met bedekkend pictogram"
 
 #: rc.cpp:186
 #, no-c-format
-#, fuzzy
 msgid "Mark subversion states with an overlayed icon"
-msgstr "Markeren met pictogram"
+msgstr "Subversionstatus markeren met bedekkend pictogram"
 
 #: rc.cpp:189
 #, no-c-format
-#, fuzzy
 msgid ""
 "<p align=\"left\">\n"
 "Mark an items with non-normal state with an overlayed icon. When you wish "
@@ -764,7 +738,8 @@ msgid ""
 "for updates on open\" in Subversion-Dialog.\n"
 "</p>"
 msgstr ""
-"<p align=\"left\"> met normaal met pictogram tot in tot set Controleren voor aan in Subversie Dialoog\n"
+"<p align=\"left\">\n"
+"Items met een niet-normale status bedekken met een bedekkend pictogram. Wanneer u wilt zien welke items nieuwere versies in de repository hebben kunt u de optie \"Controleren voor updates wanneer een werkkopie geopend wordt\" aanzetten in het Subversion-venster.\n"
 "</p>"
 
 #: rc.cpp:195
@@ -773,11 +748,11 @@ msgid "Display previews in file tips"
 msgstr "Voorbeelden tonen in bestandsinformatie"
 
 #: rc.cpp:198
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
 "preview for the file, when moving the mouse over it"
-msgstr "tot bevat a voorbeeld voor bestand"
+msgstr "Hier kunt u bepalen of u een contextvenster in beeld wilt zien met een groter voorbeeld van het bestand wanneer u met de muis boven het bestand beweegt"
 
 #: rc.cpp:201 svnfrontend/svnactions.cpp:1019
 #, no-c-format
@@ -801,9 +776,8 @@ msgstr "Andere diff-weergave gebruiken"
 
 #: rc.cpp:213
 #, no-c-format
-#, fuzzy
 msgid "Diff ignores content type"
-msgstr "Diff type"
+msgstr "Verschil negeert inhoudstype"
 
 #: rc.cpp:216
 #, no-c-format
@@ -841,9 +815,9 @@ msgstr ""
 "</p>"
 
 #: rc.cpp:236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "External display:"
-msgstr "Externe verschilweergave:"
+msgstr "Externe weergave:"
 
 #: rc.cpp:239
 #, no-c-format
@@ -873,31 +847,26 @@ msgstr "Maximaal aantal logberichten in geschiedenis:"
 
 #: rc.cpp:252
 #, no-c-format
-#, fuzzy
 msgid "Show log after executing a command"
-msgstr "Tonen na a"
+msgstr "Log tonen na het uitvoeren van een commando"
 
 #: rc.cpp:255
 #, no-c-format
-#, fuzzy
 msgid "Show a small window containing the log after command executed"
-msgstr "Tonen a klein na"
+msgstr "Nadat een commando is uitgevoerd een kleiner venster tonen met daarin de log"
 
 #: rc.cpp:258
 #, no-c-format
-#, fuzzy
 msgid "Minimum log lines to show:"
-msgstr "Minimum tot:"
+msgstr "Minimum aantal logregels tonen:"
 
 #: rc.cpp:261
 #, no-c-format
-#, fuzzy
 msgid " line(s)"
-msgstr "regel s"
+msgstr " regel(s)"
 
 #: rc.cpp:264
 #, no-c-format
-#, fuzzy
 msgid "0"
 msgstr "0"
 
@@ -909,21 +878,18 @@ msgstr "a uitvoer bevat voor a single"
 
 #: rc.cpp:270
 #, no-c-format
-#, fuzzy
 msgid "Don't display contextmenu in Konqueror"
-msgstr "t in Konqueror"
+msgstr "Contextmenu niet weergeven in Konqueror"
 
 #: rc.cpp:273
 #, no-c-format
-#, fuzzy
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
-msgstr "set niet a Actie van"
+msgstr "Wanneer dit is ingesteld zal er geen menu in het menu \"Acties\" van Konqueror aanwezig zijn"
 
 #: rc.cpp:279
 #, no-c-format
-#, fuzzy
 msgid "Start check for updates when open a working copy"
-msgstr "Starten voor a kopie"
+msgstr "Controleren voor updates wanneer een werkkopie geopend wordt"
 
 #: rc.cpp:283
 #, no-c-format
@@ -933,17 +899,15 @@ msgstr "Selecteren voor a kopie"
 
 #: rc.cpp:286
 #, no-c-format
-#, fuzzy
 msgid "Get file details while remote listing"
-msgstr "Ophalen bestand op afstand"
+msgstr "Bestandsdetails laden wanneer bestanden op afstand getoond worden"
 
 #: rc.cpp:290
 #, no-c-format
-#, fuzzy
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
-msgstr "aan of niet"
+msgstr ""
 
 #: rc.cpp:293
 #, no-c-format
@@ -965,9 +929,9 @@ msgid "Gain item info recursive"
 msgstr "Iteminformatie recursief opvragen"
 
 #: rc.cpp:305
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Store passwords for remote connections"
-msgstr "Voer een wachtwoord in voor domein %1"
+msgstr "Wachtwoorden opslaan voor verbindingen op afstand"
 
 #: rc.cpp:308
 #, no-c-format
@@ -1074,9 +1038,8 @@ msgstr "Voer een URL in:"
 
 #: rc.cpp:365
 #, no-c-format
-#, fuzzy
 msgid "Append source url name to subfolder"
-msgstr "bron URL-adres naam tot"
+msgstr "Bron-URL toevoegen aan naam submap"
 
 #: rc.cpp:368 rc.cpp:615 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125
 #, no-c-format
@@ -1518,7 +1481,7 @@ msgstr "Samengevoegd"
 
 #: svnfrontend/svnitem.cpp:433
 msgid "Incomplete"
-msgstr "Incompleet"
+msgstr "Onvolledig"
 
 #: svnfrontend/svnitem.cpp:441
 msgid "Property modified"
@@ -1607,9 +1570,8 @@ msgid "May only switch one url at time!"
 msgstr "Er kan maar één URL-adres tegelijkertijd geswitcht worden!"
 
 #: svnfrontend/commandexec.cpp:602
-#, fuzzy
 msgid "Switch only on working copies!"
-msgstr "Switcht van repository van de werkkopoie (\"svn switch\")"
+msgstr "Alleen switchen op werkkopieën."
 
 #: svnfrontend/svnlogdlgimp.cpp:124
 msgid "%1 at revision %2"
@@ -2227,7 +2189,6 @@ msgid "Merge two revisions"
 msgstr "Twee revisies samenvoegen"
 
 #: svnfrontend/kdesvnfilelist.cpp:306
-#, fuzzy
 msgid "Merge two revisions of these entry into itself"
 msgstr "Twee revisies van dit item in zichzelf samenvoegen"
 
@@ -2248,9 +2209,8 @@ msgid "Export current repository path"
 msgstr "Huidige repositorypad exporteren"
 
 #: svnfrontend/kdesvnfilelist.cpp:318
-#, fuzzy
 msgid "Select browse revision"
-msgstr "Revisie selecteren"
+msgstr "Selecteer revisie om te bladeren"
 
 #: svnfrontend/kdesvnfilelist.cpp:321 svnfrontend/svnactions.cpp:1220
 #: svnfrontend/svnactions.cpp:1263
@@ -2342,14 +2302,12 @@ msgid "Automatic generated base layout by kdesvn"
 msgstr "Automatisch gegenereerde basislayout door kdesvn"
 
 #: svnfrontend/kdesvnfilelist.cpp:2318
-#, fuzzy
 msgid "Error getting entry to relocate"
-msgstr "Er deed zich een fout voor bij het switchen van een item"
+msgstr "Er deed zich een fout voor bij het wijzigen van het URL-adres"
 
 #: svnfrontend/kdesvnfilelist.cpp:2325
-#, fuzzy
 msgid "Relocate path %1"
-msgstr "pad 1"
+msgstr "URl-adres wijzigen van pad %1"
 
 #: svnfrontend/kdesvnfilelist.cpp:2455
 msgid "Only in working copy possible."

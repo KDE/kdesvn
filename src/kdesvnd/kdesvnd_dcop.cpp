@@ -24,11 +24,11 @@
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/settings/kdesvnsettings.h"
-#include "svnqt/client.hpp"
-#include "svnqt/revision.hpp"
-#include "svnqt/status.hpp"
-#include "svnqt/context_listener.hpp"
-#include "svnqt/url.hpp"
+#include "src/svnqt/client.hpp"
+#include "src/svnqt/revision.hpp"
+#include "src/svnqt/status.hpp"
+#include "src/svnqt/context_listener.hpp"
+#include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
 
 #include <kdebug.h>

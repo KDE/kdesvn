@@ -21,13 +21,13 @@
 #include "src/settings/kdesvnsettings.h"
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
-#include "svnqt/targets.hpp"
-#include "svnqt/url.hpp"
-#include "svnqt/dirent.hpp"
-#include "helpers/sub2qt.h"
-#include "helpers/ktranslateurl.h"
-#include "svnfrontend/fronthelpers/rangeinput_impl.h"
-#include "svnfrontend/copymoveview_impl.h"
+#include "src/svnqt/targets.hpp"
+#include "src/svnqt/url.hpp"
+#include "src/svnqt/dirent.hpp"
+#include "src/helpers/sub2qt.h"
+#include "src/helpers/ktranslateurl.h"
+#include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
+#include "src/svnfrontend/copymoveview_impl.h"
 
 #include <kapp.h>
 #include <kglobal.h>

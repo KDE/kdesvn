@@ -21,11 +21,11 @@
 #include "kiosvn.h"
 #include "kiolistener.h"
 
-#include "svnqt/dirent.hpp"
-#include "svnqt/url.hpp"
-#include "svnqt/status.hpp"
-#include "svnqt/targets.hpp"
-#include "svnqt/info_entry.hpp"
+#include "src/svnqt/dirent.hpp"
+#include "src/svnqt/url.hpp"
+#include "src/svnqt/status.hpp"
+#include "src/svnqt/targets.hpp"
+#include "src/svnqt/info_entry.hpp"
 #include "helpers/sub2qt.h"
 
 #include <stdlib.h>

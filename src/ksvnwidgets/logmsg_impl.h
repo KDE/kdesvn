@@ -21,7 +21,7 @@
 #define LOGMSG_IMPL_H
 
 #include "src/ksvnwidgets/logmessage.h"
-#include "svnqt/commititem.hpp"
+#include "src/svnqt/commititem.hpp"
 #include <qvaluelist.h>
 #include <qpair.h>
 

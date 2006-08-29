@@ -23,7 +23,7 @@
 #include "graphtree_defines.h"
 #include "src/settings/kdesvnsettings.h"
 #include "../stopdlg.h"
-#include "svnqt/client.hpp"
+#include "src/svnqt/client.hpp"
 
 #include <kapp.h>
 #include <kdebug.h>

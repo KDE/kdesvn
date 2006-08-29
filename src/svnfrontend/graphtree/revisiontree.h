@@ -20,9 +20,9 @@
 #ifndef REVISIONTREE_H
 #define REVISIONTREE_H
 
-#include "svnqt/log_entry.hpp"
-#include "svnqt/revision.hpp"
-#include "svnqt/client.hpp"
+#include "src/svnqt/log_entry.hpp"
+#include "src/svnqt/revision.hpp"
+#include "src/svnqt/client.hpp"
 
 #include <qstring.h>
 #include <qmap.h>

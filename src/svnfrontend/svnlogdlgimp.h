@@ -21,8 +21,8 @@
 #define SVNLOGDLGIMP_H
 
 #include "svnlogdlg.h"
-#include "svnqt/log_entry.hpp"
-#include "svnqt/client.hpp"
+#include "src/svnqt/log_entry.hpp"
+#include "src/svnqt/client.hpp"
 
 #include <qsize.h>
 

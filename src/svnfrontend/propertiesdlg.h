@@ -16,7 +16,7 @@
 #include <qmap.h>
 #include <qstring.h>
 
-#include "svnqt/revision.hpp"
+#include "src/svnqt/revision.hpp"
 
 class QVBoxLayout;
 class QHBoxLayout;

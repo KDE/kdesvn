@@ -19,7 +19,6 @@ INCLUDE_DIRECTORIES(${KDE3_INCLUDE_DIR}
     ${SUBVERSION_INCLUDE_DIR}
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/svnfrontend
-    ${CMAKE_SOURCE_DIR}/src/svnqt
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_BINARY_DIR}/src/svnfrontend

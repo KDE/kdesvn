@@ -22,7 +22,7 @@
 #include "svnactions.h"
 #include "kdesvn_part.h"
 #include "src/settings/kdesvnsettings.h"
-#include "svnqt/status.hpp"
+#include "src/svnqt/status.hpp"
 #include "helpers/smart_pointer.h"
 #include "helpers/sub2qt.h"
 

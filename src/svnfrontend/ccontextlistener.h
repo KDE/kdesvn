@@ -20,7 +20,7 @@
 #ifndef CCONTEXTLISTENER_H
 #define CCONTEXTLISTENER_H
 
-#include "svnqt/context_listener.hpp"
+#include "src/svnqt/context_listener.hpp"
 #include "helpers/smart_pointer.h"
 
 #include <qobject.h>

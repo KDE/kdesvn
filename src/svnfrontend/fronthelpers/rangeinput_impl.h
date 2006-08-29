@@ -20,7 +20,7 @@
 #ifndef RANGEINPUT_IMPL_H
 #define RANGEINPUT_IMPL_H
 
-#include "src/svnfrontend/fronthelpers/rangeinput.h"
+#include "rangeinput.h"
 #include "svnqt/revision.hpp"
 #include <qpair.h>
 

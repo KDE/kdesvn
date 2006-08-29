@@ -20,7 +20,7 @@
 #ifndef GRAPHTREELABEL_H
 #define GRAPHTREELABEL_H
 
-#include <drawparams.h>
+#include "graphtree/drawparams.h"
 #include <qcanvas.h>
 
 /**

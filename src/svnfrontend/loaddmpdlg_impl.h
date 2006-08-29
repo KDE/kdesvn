@@ -20,7 +20,7 @@
 #ifndef LOADDMPDLG_IMPL_H
 #define LOADDMPDLG_IMPL_H
 
-#include "src/svnfrontend/loaddmpdlg.h"
+#include "loaddmpdlg.h"
 
 class LoadDmpDlg_impl: public LoadDmpDlg {
 Q_OBJECT

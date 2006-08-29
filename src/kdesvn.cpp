@@ -182,7 +182,7 @@ void kdesvn::setupActions()
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"),KShortcut(),
             actionCollection(),"toggle_load_last_url");
-    toggletemp->setToolTip(i18n("Reload last opend url if no one is given on commandline"));
+    toggletemp->setToolTip(i18n("Reload last opened url if no one is given on commandline"));
     KConfigGroup cs(KGlobal::config(),"startup");
     toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLoadLast(bool)));

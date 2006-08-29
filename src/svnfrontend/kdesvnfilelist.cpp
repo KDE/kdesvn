@@ -303,7 +303,7 @@ void kdesvnfilelist::setupActions()
 
     m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"kdesvnmerge",
         KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
-    m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of these entry into itself"));
+    m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of this entry into itself"));
 
     tmp_action=new KAction(i18n("Merge..."),"kdesvnmerge",
         KShortcut(),this,SLOT(slotMerge()),m_filesAction,"make_svn_merge");

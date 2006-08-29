@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "revisiontree.h"
 #include "../stopdlg.h"
-#include "svnqt/log_entry.hpp"
+#include "src/svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include "revtreewidget.h"
 #include "revgraphview.h"

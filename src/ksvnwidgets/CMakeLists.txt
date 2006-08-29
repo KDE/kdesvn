@@ -15,4 +15,8 @@ SET(ksvnwidgetsrc
 KDE3_AUTOMOC(${ksvnwidgetsrc})
 
 ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui})
+SET_TARGET_PROPERTIES(ksvnwidgets
+    PROPERTIES
+    COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
+
 ADD_DEPENDENCIES(ksvnwidgets kdesvncfgreader)

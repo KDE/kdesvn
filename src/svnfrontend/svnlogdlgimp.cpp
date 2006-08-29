@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "svnlogdlgimp.h"
 #include "src/settings/kdesvnsettings.h"
-#include "svnqt/log_entry.hpp"
+#include "src/svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include "svnactions.h"
 

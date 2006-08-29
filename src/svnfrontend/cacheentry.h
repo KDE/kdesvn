@@ -20,8 +20,8 @@
 #ifndef HELPERSCACHEENTRY_H
 #define HELPERSCACHEENTRY_H
 
-#include "svnqt/client.hpp"
-#include "svnqt/status.hpp"
+#include "src/svnqt/client.hpp"
+#include "src/svnqt/status.hpp"
 
 // std::map 'cause QMap isn't usable
 #include <map>

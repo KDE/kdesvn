@@ -23,4 +23,9 @@ SET(settings_sources
 KDE3_AUTOMOC(${settings_sources})
 ADD_LIBRARY(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources})
 ADD_DEPENDENCIES(settingsdlgs kdesvncfgreader)
+
+SET_TARGET_PROPERTIES(kdesvncfgreader settingsdlgs
+    PROPERTIES
+    COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
+
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KDE3_DATADIR}/config.kcfg)

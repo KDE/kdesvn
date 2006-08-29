@@ -20,7 +20,7 @@
 #ifndef KIOLISTENER_H
 #define KIOLISTENER_H
 
-#include "svnqt/context_listener.hpp"
+#include "src/svnqt/context_listener.hpp"
 
 namespace KIO {
     class SlaveBase;

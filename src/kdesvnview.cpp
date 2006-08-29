@@ -27,8 +27,8 @@
 #include "svnfrontend/loaddmpdlg_impl.h"
 #include "svnfrontend/stopdlg.h"
 #include "src/settings/kdesvnsettings.h"
-#include "svnqt/url.hpp"
-#include "svnqt/repository.hpp"
+#include "src/svnqt/url.hpp"
+#include "src/svnqt/repository.hpp"
 
 #include <qpainter.h>
 #include <qlayout.h>

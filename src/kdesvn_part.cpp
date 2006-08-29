@@ -28,8 +28,8 @@
 #include "kdesvnview.h"
 #include "commandline_part.h"
 #include "../config.h"
-#include "svnqt/version_check.hpp"
-#include "svnqt/url.hpp"
+#include "src/svnqt/version_check.hpp"
+#include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
 
 #include <kinstance.h>

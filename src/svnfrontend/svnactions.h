@@ -20,8 +20,8 @@
 #ifndef SVNACTIONS_H
 #define SVNACTIONS_H
 
-#include "svnqt/client.hpp"
-#include "svnqt/revision.hpp"
+#include "src/svnqt/client.hpp"
+#include "src/svnqt/revision.hpp"
 #include "helpers/smart_pointer.h"
 
 #include <kurl.h>

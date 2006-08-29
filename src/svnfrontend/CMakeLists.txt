@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers ${CMAKE_BINARY_DIR}/src/svnqt)
 
 SET(svnfrontendsrc
     cacheentry.cpp

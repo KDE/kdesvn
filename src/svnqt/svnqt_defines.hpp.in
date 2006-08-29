@@ -21,28 +21,14 @@
 #ifndef _SVNQT_DEFINES_H
 #define _SVNQT_DEFINES_H
 
-// config
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#ifdef __KDE_HAVE_GCC_VISIBILITY_DISABLED_MACRO
-#define SVNQT_EXPORT __attribute__ ((visibility("visible")))
-#define SVNQT_NOEXPORT __attribute__ ((visibility("hidden")))
-#else
 #define SVNQT_EXPORT
 #define SVNQT_NOEXPORT
-#endif
 
-// qt
-#include <qglobal.h>
-
-#if QT_VERSION < 0x040000
-#define TOUTF8 utf8
-#define FROMUTF8 fromUtf8
-#else
-#define TOUTF8 toUtf8
-#define FROMUTF8 fromUtf8
-#endif
+/* cmake trick: so we make sure that the define in installs
+   is always set as in library used at build time
+ */
+#define TOUTF8 @TOUTF8@
+#define FROMUTF8 @FROMUTF8@
+#define QLIST @QLIST@
 
 #endif

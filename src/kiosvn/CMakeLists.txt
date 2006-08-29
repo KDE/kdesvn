@@ -1,8 +1,9 @@
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
 SET(kiosvn_src kiosvn.cpp kiolistener.cpp)
 
 KDE3_ADD_KPART(kio_ksvn ${kiosvn_src})
 
-TARGET_LINK_LIBRARIES(kio_ksvn 
+TARGET_LINK_LIBRARIES(kio_ksvn
     svnqt
     kdesvnhelpers
     ${QT_AND_KDECORE_LIBS}

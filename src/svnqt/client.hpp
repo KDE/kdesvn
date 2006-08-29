@@ -69,21 +69,12 @@ namespace svn
   class Targets;
   class DirEntry;
 
-#if QT_VERSION < 0x040000
-  typedef QValueList<LogEntry> LogEntries;
-  typedef QValueList<InfoEntry> InfoEntries;
-  typedef QValueList<Status> StatusEntries;
-  typedef QValueList<DirEntry> DirEntries;
-  typedef QValueList<AnnotateLine> AnnotatedFile;
-  typedef QValueList<Revision> Revisions;
-#else
-  typedef QList<LogEntry> LogEntries;
-  typedef QList<InfoEntry> InfoEntries;
-  typedef QList<Status> StatusEntries;
-  typedef QList<DirEntry> DirEntries;
-  typedef QList<AnnotateLine> AnnotatedFile;
-  typedef QList<Revision> Revisions;
-#endif
+  typedef QLIST<LogEntry> LogEntries;
+  typedef QLIST<InfoEntry> InfoEntries;
+  typedef QLIST<Status> StatusEntries;
+  typedef QLIST<DirEntry> DirEntries;
+  typedef QLIST<AnnotateLine> AnnotatedFile;
+  typedef QLIST<Revision> Revisions;
 
   // map of logentries - key is revision
   typedef QMap<long,LogEntry> LogEntriesMap;
@@ -92,14 +83,10 @@ namespace svn
   // pair of path, PropertiesMap
   typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
   // vector of path, Properties pairs
-#if QT_VERSION < 0x040000
-  typedef QValueList<PathPropertiesMapEntry> PathPropertiesMapList;
-#else
-  typedef QList<PathPropertiesMapEntry> PathPropertiesMapList;
-#endif
+  typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
 
   /** Subversion client API.
-   * 
+   *
    * Never use an object of this as global static! This will make problems with subversion
    * initialize.
    */

@@ -55,4 +55,8 @@ KDE3_AUTOMOC(${svnfrontendsrc})
 KDE3_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 
 ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources})
+SET_TARGET_PROPERTIES(svnfrontend
+    PROPERTIES
+    COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
+
 ADD_DEPENDENCIES(svnfrontend ksvnwidgets)

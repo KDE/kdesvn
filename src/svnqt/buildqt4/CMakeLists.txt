@@ -6,9 +6,9 @@ IF (UNIX)
   SET(CMAKE_INSTALL_PREFIX /usr)
 ENDIF (UNIX)
 
-INCLUDE(${CMAKE_ROOT}/Modules/FindQt4.cmake)
-INCLUDE(${CMAKE_ROOT}/Modules/UseQt4.cmake)
-INCLUDE(../cmakemodules/FindSubversion.cmake)
+INCLUDE(FindQt4)
+INCLUDE(UseQt4)
+INCLUDE(../../../cmakemodules/FindSubversion.cmake)
 
 IF(QT4_FOUND)
     MESSAGE(STATUS "Qt: ${QT_LIBRARY_DIR}")

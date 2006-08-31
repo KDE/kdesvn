@@ -2,7 +2,7 @@ SET(kiosvn_src kiosvn.cpp kiolistener.cpp)
 
 KDE3_ADD_KPART(kio_ksvn ${kiosvn_src})
 
-TARGET_LINK_LIBRARIES(kio_ksvn 
+TARGET_LINK_LIBRARIES(kio_ksvn
     svnqt
     kdesvnhelpers
     ${QT_AND_KDECORE_LIBS}
@@ -13,9 +13,9 @@ SET_TARGET_PROPERTIES(kio_ksvn
     LINK_FLAG "${LINK_NO_UNDEFINED}")
 
 INSTALL(TARGETS kio_ksvn
-    LIBRARY DESTINATION lib/kde3)
+    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
 FILE(GLOB PROTFILES *.protocol)
 
 INSTALL(FILES ${PROTFILES}
-    DESTINATION ${KDE3_SERVICESDIR})
+    DESTINATION ${SERVICES_INSTALL_DIR})

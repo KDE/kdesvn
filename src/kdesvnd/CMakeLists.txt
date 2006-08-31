@@ -8,7 +8,7 @@ KDE3_ADD_DCOP_SKELS(kded_kdesvnd_src
 
 KDE3_ADD_KPART(kded_kdesvnd ${kded_kdesvnd_src})
 
-TARGET_LINK_LIBRARIES(kded_kdesvnd 
+TARGET_LINK_LIBRARIES(kded_kdesvnd
     svnqt
     ksvnwidgets
     kdesvnhelpers
@@ -20,8 +20,8 @@ SET_TARGET_PROPERTIES(kded_kdesvnd
     LINK_FLAGS "${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} -avoid-version -module")
 
 INSTALL(TARGETS kded_kdesvnd
-    RUNTIME DESTINATION ${KDE3_BINDIR}
-    LIBRARY DESTINATION lib/kde3)
+    RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
 KDESVN_GENERATE_LIBTOOL_FILE(kded_kdesvnd)
 
@@ -39,11 +39,11 @@ ELSE(VERSION_OK)
     SET(ACTION_MENU "Actions=Update;Commit;Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename;Tree")
 ENDIF(VERSION_OK)
 
-CONFIGURE_FILE(kdesvn_subversion.desktop.in 
+CONFIGURE_FILE(kdesvn_subversion.desktop.in
     ${CMAKE_CURRENT_BINARY_DIR}/kdesvn_subversion.desktop @ONLY)
 
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdesvn_subversion.desktop
-    DESTINATION ${KDE3_APPSDIR}/konqueror/servicemenus)
+    DESTINATION ${DATA_INSTALL_DIR}/konqueror/servicemenus)
 
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop
-    DESTINATION ${KDE3_SERVICESDIR}/kded)
+    DESTINATION ${SERVICES_INSTALL_DIR}/kded)

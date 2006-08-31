@@ -81,37 +81,40 @@ ELSE(MSGFMT)
     SET(MSGFMT ":" CACHE STRING "Msgfmt program")
 ENDIF(MSGFMT)
 
-# we require some defines
-IF (NOT KDE3_DATADIR)
-    SET(KDE3_DATADIR share CACHE STRING
-        "KDE3-datadir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_DATADIR)
-IF (NOT KDE3_BINDIR)
-    SET(KDE3_BINDIR bin CACHE STRING
-        "KDE3-binarydir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_BINDIR)
-IF (NOT KDE3_APPSDIR)
-    SET(KDE3_APPSDIR ${KDE3_DATADIR}/apps CACHE STRING
-        "KDE3-application dir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_APPSDIR)
-IF (NOT KDE3_SERVICESDIR)
-    SET(KDE3_SERVICESDIR ${KDE3_DATADIR}/services CACHE STRING
-        "KDE3-services dir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_SERVICESDIR)
-IF (NOT KDE3_LOCALEDIR)
-    SET(KDE3_LOCALEDIR ${KDE3_DATADIR}/locale CACHE STRING
-        "KDE3-locale dir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_LOCALEDIR)
-IF (NOT KDE3_ICONDIR)
-    SET(KDE3_ICONDIR ${KDE3_DATADIR}/icons CACHE STRING
-        "KDE3-icons dir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_ICONDIR)
-
-# applicationsdir for kde has an own subdir! (where the desktop-files goes)
-IF (NOT KDE3_APPLICATIONSDIR)
-    SET(KDE3_APPLICATIONSDIR ${KDE3_DATADIR}/applications/kde CACHE STRING
-        "KDE3-applications dir (relative to install-prefix when not starting with \"/\")" )
-ENDIF (NOT KDE3_APPLICATIONSDIR)
+# 'cause my own defines were not good I take them from kde4 trunk
+#add some KDE specific stuff
+set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" FORCE)
+ set(SHARE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/share CACHE PATH "Base directory for files which go to share/" FORCE)
+ set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX}       CACHE PATH  "Base directory for executables and libraries" FORCE)
+#
+## the following are directories where stuff will be installed to
+set(BIN_INSTALL_DIR          "${EXEC_INSTALL_PREFIX}/bin"                  CACHE PATH "The kde bin install dir (default prefix/bin)" FORCE)
+set(SBIN_INSTALL_DIR         "${EXEC_INSTALL_PREFIX}/sbin"                 CACHE PATH "The kde sbin install dir (default prefix/sbin)" FORCE)
+set(LIB_INSTALL_DIR          "${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX}"     CACHE PATH "The subdirectory relative to the install prefix where libraries will be installed (default is /lib${LIB_SUFFIX})" FORCE)
+set(LIBEXEC_INSTALL_DIR      "${LIB_INSTALL_DIR}/kde3/libexec"             CACHE PATH "The subdirectory relative to the install prefix where libraries will be installed (default is /lib/kde3/libexec)" FORCE)
+set(PLUGIN_INSTALL_DIR       "${LIB_INSTALL_DIR}/kde3"                     CACHE PATH "The subdirectory relative to the install prefix where plugins will be installed (default is ${LIB_INSTALL_DIR}/kde3)" FORCE)
+set(INCLUDE_INSTALL_DIR      "${CMAKE_INSTALL_PREFIX}/include"             CACHE PATH "The subdirectory to the header prefix" FORCE)
+set(CONFIG_INSTALL_DIR       "${SHARE_INSTALL_PREFIX}/config"              CACHE PATH "The config file install dir" FORCE)
+set(DATA_INSTALL_DIR         "${SHARE_INSTALL_PREFIX}/apps"                CACHE PATH "The parent directory where applications can install their data" FORCE)
+set(HTML_INSTALL_DIR         "${SHARE_INSTALL_PREFIX}/doc/HTML"            CACHE PATH "The HTML install dir for documentation"  FORCE)
+set(ICON_INSTALL_DIR         "${SHARE_INSTALL_PREFIX}/icons"               CACHE PATH "The icon install dir (default prefix/share/icons/)" FORCE)
+set(KCFG_INSTALL_DIR         "${SHARE_INSTALL_PREFIX}/config.kcfg"         CACHE PATH "The install dir for kconfig files" FORCE)
+set(LOCALE_INSTALL_DIR       "${SHARE_INSTALL_PREFIX}/locale"              CACHE PATH "The install dir for translations" FORCE)
+set(MIME_INSTALL_DIR         "${SHARE_INSTALL_PREFIX}/mimelnk"             CACHE PATH "The install dir for the mimetype desktop files" FORCE)
+set(SERVICES_INSTALL_DIR     "${SHARE_INSTALL_PREFIX}/services"            CACHE PATH "The install dir for service (desktop, protocol, ...) files" FORCE)
+set(SERVICETYPES_INSTALL_DIR "${SHARE_INSTALL_PREFIX}/servicetypes"        CACHE PATH "The install dir for servicestypes desktop files" FORCE)
+set(SOUND_INSTALL_DIR        "${SHARE_INSTALL_PREFIX}/sounds"              CACHE PATH "The install dir for sound files" FORCE)
+set(TEMPLATES_INSTALL_DIR    "${SHARE_INSTALL_PREFIX}/templates"           CACHE PATH "The install dir for templates (Create new file...)" FORCE)
+set(WALLPAPER_INSTALL_DIR    "${SHARE_INSTALL_PREFIX}/wallpapers"          CACHE PATH "The install dir for wallpapers" FORCE)
+set(KCONF_UPDATE_INSTALL_DIR "${DATA_INSTALL_DIR}/kconf_update"            CACHE PATH "The kconf_update install dir" FORCE)
+# this one shouldn't be used anymore
+set(APPLNK_INSTALL_DIR       "${SHARE_INSTALL_PREFIX}/applnk"              CACHE PATH "Is this still used ?" FORCE)
+set(AUTOSTART_INSTALL_DIR    "${SHARE_INSTALL_PREFIX}/autostart"           CACHE PATH "The install dir for autostart files" FORCE)
+set(XDG_APPS_DIR             "${SHARE_INSTALL_PREFIX}/applications/kde"    CACHE PATH "The XDG apps dir" FORCE)
+set(XDG_DIRECTORY_DIR        "${SHARE_INSTALL_PREFIX}/desktop-directories" CACHE PATH "The XDG directory" FORCE)
+set(SYSCONF_INSTALL_DIR      "${CMAKE_INSTALL_PREFIX}/etc"                 CACHE PATH "The kde sysconfig install dir (default/etc)" FORCE)
+set(MAN_INSTALL_DIR          "${SHARE_INSTALL_PREFIX}/man"                 CACHE PATH "The kde man install dir (default prefix/man/)" FORCE)
+set(INFO_INSTALL_DIR         "${CMAKE_INSTALL_PREFIX}/info"                CACHE PATH "The kde info install dir (default prefix/info)" FORCE)
 
 # linker flags - must get checked
 SET(LINK_NO_UNDEFINED "")
@@ -173,7 +176,7 @@ MACRO(KDESVN_INSTALL_ICONS _theme)
       ENDIF(${_group} STREQUAL "action")
 
       #message(STATUS "icon: ${_current_ICON} size: ${_sizestring} group: ${_group} name: ${_name}" )
-      SET(_ICON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/icons/${_theme}/${_sizestring}/${_icon_GROUP})
+      SET(_ICON_INSTALL_DIR ${ICON_INSTALL_DIR}/${_theme}/${_sizestring}/${_icon_GROUP})
 
       INSTALL(FILES ${_current_ICON} DESTINATION ${_ICON_INSTALL_DIR} RENAME ${_name})
 
@@ -195,7 +198,7 @@ MACRO(ADD_POFILES packagename)
             )
         SET(_gmofiles ${_gmofiles} ${_gmofile})
         INSTALL(FILES ${_gmofile}
-            DESTINATION ${KDE3_LOCALEDIR}/${_lang}/LC_MESSAGES
+            DESTINATION ${LOCALE_INSTALL_DIR}/${_lang}/LC_MESSAGES
             RENAME ${packagename}.mo)
     ENDFOREACH(_current_po ${_pofiles})
 

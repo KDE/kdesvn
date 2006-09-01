@@ -1,45 +1,45 @@
-include(${CMAKE_ROOT}/Modules/FindQt3.cmake)
-include(${CMAKE_ROOT}/Modules/FindKDE3.cmake)
-include(${CMAKE_SOURCE_DIR}/cmakemodules/kdesvnMacros.cmake)
+include(FindQt3)
+include(FindKDE3)
+include(kdesvnMacros)
 
-FIND_LIBRARY(KDE3_UI_LIBRARY NAMES kdeui
-  PATHS
-  ${KDE3_LIB_DIR}
+set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" FORCE)
+
+SET(LIB_SEARCH_PATHES   ${KDE3_LIB_DIR}
   $ENV{KDEDIR}/lib
   /opt/kde/lib
   /opt/kde3/lib
   /usr/lib
   /usr/local/lib
+)
+
+IF (LIB_SUFFIX)
+    SET(LIB_SEARCH_PATHES
+        $ENV{KDEDIR}/lib${LIB_SUFFIX}
+        /opt/kde/lib${LIB_SUFFIX}
+        /opt/kde3/lib${LIB_SUFFIX}
+        /usr/lib${LIB_SUFFIX}
+        /usr/local/lib${LIB_SUFFIX}
+        ${LIB_SEARCH_PATHES})
+ENDIF (LIB_SUFFIX)
+
+FIND_LIBRARY(KDE3_UI_LIBRARY NAMES kdeui
+  PATHS
+  ${LIB_SEARCH_PATHES}
 )
 
 FIND_LIBRARY(KDE3_PART_LIBRARY NAMES kparts
   PATHS
-  ${KDE3_LIB_DIR}
-  $ENV{KDEDIR}/lib
-  /opt/kde/lib
-  /opt/kde3/lib
-  /usr/lib
-  /usr/local/lib
+  ${LIB_SEARCH_PATHES}
 )
 
 FIND_LIBRARY(KDE3_KIO_LIBRARY NAMES kio
   PATHS
-  ${KDE3_LIB_DIR}
-  $ENV{KDEDIR}/lib
-  /opt/kde/lib
-  /opt/kde3/lib
-  /usr/lib
-  /usr/local/lib
+  ${LIB_SEARCH_PATHES}
 )
 
 FIND_LIBRARY(KDE3_DCOP_LIBRARY NAMES DCOP
   PATHS
-  ${KDE3_LIB_DIR}
-  $ENV{KDEDIR}/lib
-  /opt/kde/lib
-  /opt/kde3/lib
-  /usr/lib
-  /usr/local/lib
+  ${LIB_SEARCH_PATHES}
 )
 
 FIND_PROGRAM(KDE3_KDECONFIG_EXECUTABLE NAME kde-config PATHS
@@ -83,9 +83,8 @@ ENDIF(MSGFMT)
 
 # 'cause my own defines were not good I take them from kde4 trunk
 #add some KDE specific stuff
-set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" FORCE)
- set(SHARE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/share CACHE PATH "Base directory for files which go to share/" FORCE)
- set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX}       CACHE PATH  "Base directory for executables and libraries" FORCE)
+set(SHARE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/share CACHE PATH "Base directory for files which go to share/" FORCE)
+set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX}       CACHE PATH  "Base directory for executables and libraries" FORCE)
 #
 ## the following are directories where stuff will be installed to
 set(BIN_INSTALL_DIR          "${EXEC_INSTALL_PREFIX}/bin"                  CACHE PATH "The kde bin install dir (default prefix/bin)" FORCE)
@@ -113,7 +112,7 @@ set(AUTOSTART_INSTALL_DIR    "${SHARE_INSTALL_PREFIX}/autostart"           CACHE
 set(XDG_APPS_DIR             "${SHARE_INSTALL_PREFIX}/applications/kde"    CACHE PATH "The XDG apps dir" FORCE)
 set(XDG_DIRECTORY_DIR        "${SHARE_INSTALL_PREFIX}/desktop-directories" CACHE PATH "The XDG directory" FORCE)
 set(SYSCONF_INSTALL_DIR      "${CMAKE_INSTALL_PREFIX}/etc"                 CACHE PATH "The kde sysconfig install dir (default/etc)" FORCE)
-set(MAN_INSTALL_DIR          "${SHARE_INSTALL_PREFIX}/man"                 CACHE PATH "The kde man install dir (default prefix/man/)" FORCE)
+set(MAN_INSTALL_DIR          "${SHARE_INSTALL_PREFIX}/man"                 CACHE PATH "The kde man install dir (default prefix/share/man/)" FORCE)
 set(INFO_INSTALL_DIR         "${CMAKE_INSTALL_PREFIX}/info"                CACHE PATH "The kde info install dir (default prefix/info)" FORCE)
 
 # linker flags - must get checked

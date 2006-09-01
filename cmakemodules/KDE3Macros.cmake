@@ -318,9 +318,8 @@ MACRO(KDE3_INSTALL_LIBTOOL_FILE _target)
    FILE(APPEND ${_laname} "# Should we warn about portability when linking against -modules?\nshouldnotlink=yes\n")
    FILE(APPEND ${_laname} "# Files to dlopen/dlpreopen\ndlopen=''\ndlpreopen=''\n")
    FILE(APPEND ${_laname} "# Directory that this library needs to be installed in:\n")
-   FILE(APPEND ${_laname} "libdir='${CMAKE_INSTALL_PREFIX}/lib/kde3'\n")
-
-   INSTALL_FILES(/lib/kde3 FILES ${_laname})
+   FILE(APPEND ${_laname} "libdir='${PLUGIN_INSTALL_DIR}'\n")
+   INSTALL(FILES ${_laname} DESTINATION ${PLUGIN_INSTALL_DIR})
 ENDMACRO(KDE3_INSTALL_LIBTOOL_FILE)
 
 

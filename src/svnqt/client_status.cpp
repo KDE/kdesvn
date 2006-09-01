@@ -76,11 +76,12 @@ namespace svn
            hi != NULL;
            hi = apr_hash_next (hi))
       {
-        char *path;
+        const void *pv;
         void *val;
-        apr_hash_this (hi, (const void **) &path, NULL, &val);
+        apr_hash_this (hi, &pv, NULL, &val);
 
         svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
+        const char* path = reinterpret_cast<const char*>(pv);
 
         entry.changedPaths.push_back (
               LogChangePathEntry (path,
@@ -122,11 +123,12 @@ namespace svn
            hi != NULL;
            hi = apr_hash_next (hi))
       {
-        char *path;
+        const void *pv;
         void *val;
-        apr_hash_this (hi, (const void **) &path, NULL, &val);
+        apr_hash_this (hi, &pv, NULL, &val);
 
         svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
+        const char* path = reinterpret_cast<const char*>(pv);
 
         entry.changedPaths.push_back (
               LogChangePathEntry (path,

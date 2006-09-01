@@ -258,7 +258,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
 
     RevisionTree rt(m_Data->m_Svnclient,m_Data->m_SvnContext,reposRoot,
             startr,endr,
-            e[0].url().mid(reposRoot.length()),rev,Dialog1Layout,m_Data->m_ParentList->realWidget());
+            e[0].prettyUrl().mid(reposRoot.length()),rev,Dialog1Layout,m_Data->m_ParentList->realWidget());
     if (rt.isValid()) {
         disp = rt.getView();
         if (disp) {

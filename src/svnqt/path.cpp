@@ -78,6 +78,16 @@ namespace svn
     return m_path;
   }
 
+  QString Path::prettyPath()const
+  {
+    if (!Url::isValid(m_path)) {
+        return m_path;
+    }
+    Pool pool;
+    const char * int_path = svn_path_uri_decode(m_path.TOUTF8(), pool.pool () );
+    return QString::FROMUTF8(int_path);
+  }
+
   const QByteArray
   Path::cstr() const
   {

@@ -1,6 +1,8 @@
 #include "info_entry.hpp"
 #include "svnqt_defines.hpp"
+#include "pool.hpp"
 #include <svn_client.h>
+#include <svn_path.h>
 
 namespace svn
 {
@@ -46,6 +48,7 @@ void svn::InfoEntry::init()
   m_prejfile = "";
   m_repos_root = "";
   m_url = "";
+  m_pUrl = "";
   m_UUID = "";
   m_kind = svn_node_none;
   m_copy_from_rev = SVN_INVALID_REVNUM;
@@ -86,6 +89,7 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
   m_prejfile = QString::FROMUTF8(item->prejfile);
   m_repos_root = QString::FROMUTF8(item->repos_root_URL);
   m_url = QString::FROMUTF8(item->URL);
+  m_pUrl = prettyUrl(item->URL);
   m_UUID = QString::FROMUTF8(item->repos_UUID);
   m_kind = item->kind;
   m_copy_from_rev = item->copyfrom_rev;
@@ -93,4 +97,11 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
   m_revision = item->rev;
   m_hasWc = item->has_wc_info;
   m_schedule = item->schedule;
+}
+
+QString svn::InfoEntry::prettyUrl(const char*_url)const
+{
+    Pool pool;
+    _url = svn_path_uri_decode(_url,pool);
+    return QString::FROMUTF8(_url);
 }

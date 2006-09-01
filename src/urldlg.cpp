@@ -34,8 +34,8 @@ UrlDlg::UrlDlg(QWidget *parent, const char *name)
  : KDialogBase(Plain, QString::null, Ok|Cancel|User1, Ok, parent, name,
                 true,true, KStdGuiItem::clear())
 {
-    init_dlg();
     resize( QSize(420,106));
+    init_dlg();
     clearWState(Qt::WState_Polished);
 }
 

@@ -116,6 +116,13 @@ public:
         return m_schedule;
     }
 
+    const QString&prettyUrl()const
+    {
+        return m_pUrl;
+    }
+    
+    QString prettyUrl(const char*)const;
+
 protected:
     apr_time_t m_last_changed_date;
     apr_time_t m_text_time;
@@ -132,6 +139,7 @@ protected:
     QString m_prejfile;
     QString m_repos_root;
     QString m_url;
+    QString m_pUrl;
     QString m_UUID;
     svn_node_kind_t m_kind;
     svn_revnum_t m_copy_from_rev;

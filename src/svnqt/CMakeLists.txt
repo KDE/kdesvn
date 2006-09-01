@@ -107,7 +107,7 @@ TARGET_LINK_LIBRARIES(testlink svnqt)
 # install rules
 # in win32 we don't install it
 IF(NOT WIN32)
-    INSTALL(TARGETS svnqt DESTINATION lib)
+    INSTALL(TARGETS svnqt DESTINATION ${LIB_INSTALL_DIR})
     INSTALL(FILES ${HEADERS} DESTINATION include/svnqt)
 
     # and a libtool file
@@ -133,5 +133,5 @@ IF(NOT WIN32)
     FILE(APPEND ${_laname} "# Files to dlopen/dlpreopen\ndlopen=''\ndlpreopen=''\n")
     FILE(APPEND ${_laname} "# Directory that this library needs to be installed in:\n")
     FILE(APPEND ${_laname} "libdir='${CMAKE_INSTALL_PREFIX}/lib'\n")
-    INSTALL_FILES(/lib FILES ${_laname})
+    INSTALL(FILES ${_laname} DESTINATION ${LIB_INSTALL_DIR})
 ENDIF(NOT WIN32)

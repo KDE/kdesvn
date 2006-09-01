@@ -16,7 +16,7 @@ KDE3_ADD_UI_FILES(
 SET(settings_sources
     dispcolorsettings_impl.cpp
     displaysettings_impl.cpp
-    revisiontreesettingsdlg_impl.cpp 
+    revisiontreesettingsdlg_impl.cpp
     subversionsettings_impl.cpp
     cmdexecsettings_impl.cpp)
 
@@ -28,4 +28,4 @@ SET_TARGET_PROPERTIES(kdesvncfgreader settingsdlgs
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KDE3_DATADIR}/config.kcfg)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KCFG_INSTALL_DIR})

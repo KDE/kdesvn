@@ -21,14 +21,14 @@ IF (KDE3_MEINPROC_EXECUTABLE)
 #    )
     INSTALL(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/en_index.cache.bz2
-        DESTINATION ${KDE3_DATADIR}/doc/HTML/en/kdesvn
+        DESTINATION ${HTML_INSTALL_DIR}/en/kdesvn
         RENAME
         index.cache.bz2
     )
     INSTALL(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/en/index.docbook
         ${docimages}
-        DESTINATION ${KDE3_DATADIR}/doc/HTML/en/kdesvn
+        DESTINATION ${HTML_INSTALL_DIR}/en/kdesvn
     )
     # creates the link to the common-section during install
     INSTALL(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/makelink.cmake)

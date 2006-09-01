@@ -8,7 +8,7 @@ SET(CMAKE_CXX_FLAGS_DEBUG
 CHECK_CXX_ACCEPTS_FLAG("-fexceptions" CXX_EXCEPTION)
 CHECK_CXX_ACCEPTS_FLAG("-fstack-protector" CXX_PROTECTOR)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules)
+SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
 INCLUDE(FindKdeLibs)
 INCLUDE(MacroEnsureVersion)
 INCLUDE(FindSubversion)

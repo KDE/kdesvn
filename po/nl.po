@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-26 09:42+0200\n"
-"PO-Revision-Date: 2006-08-31 21:52+0200\n"
+"PO-Revision-Date: 2006-09-02 14:30+0200\n"
 "Last-Translator: Bram Schoenmakers <bramschoenmakers@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -790,7 +790,7 @@ msgid "External diff display:"
 msgstr "Externe verschilweergave:"
 
 #: rc.cpp:222
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "<p align=\"left\">\n"
 "Enter an external program in form\n"
@@ -805,13 +805,17 @@ msgid ""
 "and Kdesvn will pipe data direct.\n"
 "</p>"
 msgstr ""
-"<p align=\"left\"> program in\n"
+"<p align=\"left\">\n"
+"Voer een extern programma in in het formulier\n"
+"<br> "
+"<tt>&lt;programma&gt; &lt;parameters&gt; &lt;%f&gt;</tt>\n"
+"<br> "
+"%f wordt vervangen door een tijdelijke bestandsnaam. Wanneer het programma van de standaard invoer kan lezen, kunt u ook gewoon "
 "<br>\n"
-"<tt>&lt; program&gt;&lt;&gt;&lt; f&gt;</tt>\n"
-"<br> n f met a bestandsnaam type\n"
-"<br>\n"
-"<tt>&lt; program&gt;&lt;&gt;</tt>\n"
-"<br>\n"
+"<tt>&lt;programma&gt; &lt;parameters&gt;\n"
+"<br>typen.<br>\n"
+"</tt><br> "
+"en Kdesvn zal de gegevens direct doorsturen.\n"
 "</p>"
 
 #: rc.cpp:236
@@ -872,9 +876,8 @@ msgstr "0"
 
 #: rc.cpp:267
 #, no-c-format
-#, fuzzy
 msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
-msgstr "a uitvoer bevat voor a single"
+msgstr "De minimale hoeveelheid loguitvoer voordat kdesvn een logvenster toont"
 
 #: rc.cpp:270
 #, no-c-format
@@ -893,9 +896,8 @@ msgstr "Controleren voor updates wanneer een werkkopie geopend wordt"
 
 #: rc.cpp:283
 #, no-c-format
-#, fuzzy
 msgid "Select if kdesvn should check for updates when open a working copy"
-msgstr "Selecteren voor a kopie"
+msgstr "Selecteer dit wanneer u kdesvn wilt controleren voor updates wanneer u een werkkopie opent"
 
 #: rc.cpp:286
 #, no-c-format
@@ -911,7 +913,6 @@ msgstr "Of u details wilt zien over de items wanneer u een lijst maakt van de in
 
 #: rc.cpp:293
 #, no-c-format
-#, fuzzy
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
 "items when making a listing to remote repositories. So you may see remot "
@@ -919,9 +920,9 @@ msgid ""
 "</p>\n"
 "<p align=\"left\"><i>Be care: This may let listings REAL slow!</i></p>"
 msgstr ""
-"<p align=\"left\"> meer bestand a tot op afstand in\n"
+"<p align=\"left\">Wanneer dit is aangevinkt zal kdesvn gedetailleerdere informatie tonen over de bestanden wanneer u de inhoud opvraagt van repositories op afstand. Zo kunt u vergrendelingen zien die op afstand zijn aangebracht.\n"
 "</p>\n"
-"<p align=\"left\"><i></i></p>"
+"<p align=\"left\"><i>Voorzichtig: dit kan het opvragen aanzienlijk vertragen.</i></p>"
 
 #: rc.cpp:298
 #, no-c-format
@@ -935,20 +936,18 @@ msgstr "Wachtwoorden opslaan voor verbindingen op afstand"
 
 #: rc.cpp:308
 #, no-c-format
-#, fuzzy
 msgid "Should subversion store passwords in default"
-msgstr "in standaard"
+msgstr "Subversion standaard wachtwoorden laten opslaan"
 
 #: rc.cpp:311
 #, no-c-format
-#, fuzzy
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
 "any passwords, but the subversion itself inside the configuration area of "
 "subversion. If this area is readable from others you should not set it, but "
 "you may select for single non critical accounts inside the authentication "
 "dialog."
-msgstr "is vaak a t any van is van niet set selecteer voor single."
+msgstr "Het opslaan van wachtwoorden is vaak problematisch. Kdesvn zelf slaat geen wachtwoorden op, maar dat doet Subversion in het configuratiegedeelte. Wanneer dat gedeelte leesbaar is voor derden kunt u dit beter niet aanzetten, tenzij u alleen een niet-kritisch account gebruikt voor de authenticatie."
 
 #: rc.cpp:314
 #, no-c-format
@@ -981,15 +980,13 @@ msgstr "Items nakijken voor vastlegging"
 
 #: rc.cpp:331
 #, no-c-format
-#, fuzzy
 msgid "List items next commit will send or not"
-msgstr "Lijst of niet"
+msgstr "Items weergeven die in de volgende vastlegging verzonden zullen worden"
 
 #: rc.cpp:334
 #, no-c-format
-#, fuzzy
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr "Maximum voor nee"
+msgstr "Maximale hoeveelheid loggegevens wanneer de log vol is (0 is onbeperkt)"
 
 #: rc.cpp:337 svnfrontend/svnactions.cpp:1602 svnfrontend/svnactions.cpp:1616
 #, no-c-format
@@ -1936,9 +1933,8 @@ msgid ""
 msgstr "Gebruik de fingerprint om het certificaat handmatig te controleren."
 
 #: svnfrontend/ccontextlistener.cpp:291
-#, fuzzy
 msgid "The certificate hostname does not match."
-msgstr "niet overeenkomt met regex."
+msgstr "De hostnaam van het certificaat kwam niet overeen."
 
 #: svnfrontend/ccontextlistener.cpp:294
 msgid "The certificate is not yet valid."
@@ -2005,9 +2001,8 @@ msgid "Check for updates"
 msgstr "Controleren op updates"
 
 #: svnfrontend/kdesvnfilelist.cpp:224
-#, fuzzy
 msgid "Check if current working copy has items with newer version in repository"
-msgstr "Controleren kopie met versie in"
+msgstr "Controleren of items in de werkkopie een nieuwere versie heeft in de repository"
 
 #: svnfrontend/kdesvnfilelist.cpp:227
 msgid "Blame"
@@ -2119,11 +2114,10 @@ msgid "Adding selected files and/or directories to repository"
 msgstr "Geselecteerde mappen en/of bestanden worden toegevoegd aan de repository."
 
 #: svnfrontend/kdesvnfilelist.cpp:276
-#, fuzzy
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
-msgstr "Geselecteerde mappen en/of bestanden worden toegevoegd aan de repository."
+msgstr "Geselecteerde mappen en/of bestanden (inclusief onderliggende items) worden toegevoegd aan de repository."
 
 #: svnfrontend/kdesvnfilelist.cpp:278
 msgid "Delete selected files/dirs"
@@ -2167,22 +2161,20 @@ msgid "Diff local changes"
 msgstr "Verschil bepalen lokale wijzigingen"
 
 #: svnfrontend/kdesvnfilelist.cpp:297
-#, fuzzy
 msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
-msgstr "Diff kopie versie t tot"
+msgstr "Verschil van werkkopie ten opzichte van BASE (versie van laatste update) - vereist geen toegang tot de repository"
 
 #: svnfrontend/kdesvnfilelist.cpp:299
 msgid "Diff against HEAD"
-msgstr "Verschil bepalen met HEAD"
+msgstr "Verschil bepalen ten opzichte van HEAD"
 
 #: svnfrontend/kdesvnfilelist.cpp:301
-#, fuzzy
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
-msgstr "Diff kopie HEAD in versie tot"
+msgstr "Verschil werkkopie ten opzichte van HEAD (laatst ingecheckte versie) - vereist toegang tot de repository"
 
 #: svnfrontend/kdesvnfilelist.cpp:304
 msgid "Merge two revisions"

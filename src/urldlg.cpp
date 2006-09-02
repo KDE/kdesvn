@@ -34,9 +34,7 @@ UrlDlg::UrlDlg(QWidget *parent, const char *name)
  : KDialogBase(Plain, QString::null, Ok|Cancel|User1, Ok, parent, name,
                 true,true, KStdGuiItem::clear())
 {
-    resize( QSize(420,106));
     init_dlg();
-    clearWState(Qt::WState_Polished);
 }
 
 
@@ -53,26 +51,32 @@ void UrlDlg::init_dlg()
     QVBoxLayout * topLayout = new QVBoxLayout( plainPage(), 0, spacingHint());
     QLabel * label = new QLabel(i18n("Open repository or working copy") , plainPage());
     topLayout->addWidget(label);
+
     KHistoryCombo * combo = new KHistoryCombo(0,"history_combo");
     combo->setDuplicatesEnabled(false);
-
-    urlRequester_ = new KURLRequester(combo, plainPage(), "urlRequester");
-    urlRequester_->setMinimumWidth( urlRequester_->sizeHint().width() * 3 );
-    topLayout->addWidget( urlRequester_ );
-    urlRequester_->setFocus();
-    KFile::Mode mode = static_cast<KFile::Mode>(KFile::ExistingOnly|KFile::Directory);
-    urlRequester_->setMode(mode);
-    connect(urlRequester_->comboBox(),SIGNAL(textChanged(const QString&)),SLOT(slotTextChanged(const QString&)));
-//    bool state = !urlName.isEmpty();
-    enableButtonOK( false );
-    enableButton( KDialogBase::User1, false );
-    connect( this, SIGNAL(user1Clicked()), SLOT(slotClear()));
     KConfig *kc = KGlobal::config();
     KConfigGroupSaver ks( kc, QString::fromLatin1("Open-repository settings") );
     int max = kc->readNumEntry( QString::fromLatin1("Maximum history"), 15 );
     combo->setMaxCount( max );
     QStringList list = kc->readListEntry( QString::fromLatin1("History") );
     combo->setHistoryItems(list);
+    combo->setMinimumWidth(100);
+    combo->adjustSize();
+    if (combo->width()>300) {
+        combo->resize(300,combo->height());
+    }
+
+    urlRequester_ = new KURLRequester(combo, plainPage(), "urlRequester");
+    topLayout->addWidget( urlRequester_ );
+    urlRequester_->setFocus();
+    KFile::Mode mode = static_cast<KFile::Mode>(KFile::ExistingOnly|KFile::Directory);
+    urlRequester_->setMode(mode);
+    connect(urlRequester_->comboBox(),SIGNAL(textChanged(const QString&)),SLOT(slotTextChanged(const QString&)));
+    enableButtonOK( false );
+    enableButton( KDialogBase::User1, false );
+    connect( this, SIGNAL(user1Clicked()), SLOT(slotClear()));
+    urlRequester_->adjustSize();
+    resize(QSize(400,sizeHint().height()));
 }
 
 /*!

@@ -176,7 +176,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
-        error(KIO::ERR_CANNOT_ENTER_DIRECTORY,"");
+        error(KIO::ERR_CANNOT_ENTER_DIRECTORY,ex);
         return;
     }
     KIO::UDSEntry entry;
@@ -205,6 +205,7 @@ void kio_svnProtocol::stat(const KURL& url)
         rev = svn::Revision::HEAD;
     }
     svn::Revision peg = rev;
+    bool dummy = false;
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
@@ -215,18 +216,24 @@ void kio_svnProtocol::stat(const KURL& url)
         error( KIO::ERR_SLAVE_DEFINED,ex);
         return;
     }
+
     if (e.count()==0) {
-        finished();
-        return;
+        dummy = true;
+/*        finished();
+        return;*/
     }
 
     KIO::UDSEntry entry;
     QDateTime dt;
-    dt = helpers::sub2qt::apr_time2qt(e[0].cmtDate());
-    if (e[0].kind()==svn_node_file) {
-        createUDSEntry(url.filename(),"",0,false,dt.toTime_t(),entry);
-    } else {
+    if (dummy) {
         createUDSEntry(url.filename(),"",0,true,dt.toTime_t(),entry);
+    } else {
+        dt = helpers::sub2qt::apr_time2qt(e[0].cmtDate());
+        if (e[0].kind()==svn_node_file) {
+            createUDSEntry(url.filename(),"",0,false,dt.toTime_t(),entry);
+        } else {
+            createUDSEntry(url.filename(),"",0,true,dt.toTime_t(),entry);
+        }
     }
     statEntry(entry);
     finished();

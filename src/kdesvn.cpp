@@ -55,6 +55,7 @@
 #include <klibloader.h>
 #include <kedittoolbar.h>
 #include <kkeydialog.h>
+#include <kdirselectdialog.h>
 
 kdesvn::kdesvn()
     : KParts::MainWindow( 0, "kdesvn" ),
@@ -163,15 +164,23 @@ kdesvn::~kdesvn()
 
 void kdesvn::load(const KURL& url)
 {
-    if (m_part) m_part->openURL(url);
+    if (m_part) {
+        bool ret = m_part->openURL(url);
+        if (!ret) {
+            changeStatusbar(i18n("Could not open url %1").arg(url.prettyURL()));
+        } else {
+            resetStatusBar();
+        }
+    }
 }
 
 void kdesvn::setupActions()
 {
     KAction*ac;
     KStdAction::open(this, SLOT(fileOpen()), actionCollection());
+    KStdAction::openNew(this,SLOT(fileNew()),actionCollection());
     ac = KStdAction::close(this,SLOT(fileClose()),actionCollection());
-    ac->setEnabled(false);
+    ac->setEnabled(getMemberList()->count()>1);
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
     KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
@@ -201,6 +210,11 @@ void kdesvn::optionsShowStatusbar()
 void kdesvn::fileClose()
 {
     if (m_part) m_part->closeURL();
+    if (getMemberList()->count()>1) {
+        close();
+    } else {
+        enableClose(false);
+    }
 }
 
 void kdesvn::saveProperties(KConfig *config)
@@ -239,14 +253,14 @@ void kdesvn::fileNew()
 
     // create a new window
     (new kdesvn)->show();
+    enableClose(true);
 }
 
 void kdesvn::fileOpen()
 {
     KURL url = UrlDlg::getURL(this);
-    kdDebug()<<"kdesvn::fileOpen(): Url to open " << url.url()<<endl;
     if (!url.isEmpty())
-        m_part->openURL(url);
+        load(url);
 }
 
 void kdesvn::changeStatusbar(const QString& text)
@@ -263,7 +277,7 @@ void kdesvn::resetStatusBar()
 void kdesvn::openBookmarkURL (const QString &_url)
 {
     if (!_url.isEmpty() && m_part)
-        m_part->openURL(_url);
+        load(_url);
 }
 
 QString kdesvn::currentURL () const
@@ -272,16 +286,20 @@ QString kdesvn::currentURL () const
     return m_part->url().prettyURL();
 }
 
+void kdesvn::enableClose(bool how)
+{
+    KAction * ac;
+    if ( (ac=actionCollection()->action("file_close"))) {
+        ac->setEnabled(how);
+    }
+}
 
 /*!
     \fn kdesvn::slotUrlOpened(bool)
  */
 void kdesvn::slotUrlOpened(bool how)
 {
-    KAction * ac;
-    if ( (ac=actionCollection()->action("file_close"))) {
-        ac->setEnabled(how);
-    }
+    enableClose(true);
 }
 
 
@@ -365,7 +383,7 @@ void kdesvn::checkReload()
     QString url = cs.readPathEntry("lastURL");
 
     if (!url.isEmpty() && m_part)
-        m_part->openURL(KURL(url));
+        load(KURL(url));
 }
 
 

@@ -82,6 +82,7 @@ protected:
      */
     void readProperties(KConfig *);
     virtual bool queryExit();
+    void enableClose(bool how);
 
 
 public slots:

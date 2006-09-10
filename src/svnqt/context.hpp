@@ -26,6 +26,8 @@
 #ifndef _SVNCPP_CONTEXT_HPP_
 #define _SVNCPP_CONTEXT_HPP_
 
+#include "svnqt_defines.hpp"
+
 // qt
 #include <qstring.h>
 
@@ -47,7 +49,7 @@ namespace svn
    * and replace the old notification and baton
    * stuff
    */
-  class Context
+  class SVNQT_EXPORT Context
   {
   public:
     /**

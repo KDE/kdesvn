@@ -50,6 +50,10 @@ ELSE(QT4_FOUND)
     ENDIF(QT_FOUND)
 ENDIF(QT4_FOUND)
 
+IF (HAVE_GCC_VISIBILITY)
+    SET(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
+    SET(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
+ENDIF (HAVE_GCC_VISIBILITY)
 
 CONFIGURE_FILE(
     "${CMAKE_CURRENT_SOURCE_DIR}/svnqt_defines.hpp.in"
@@ -90,6 +94,11 @@ ENDIF(SUNOS)
 #may some of that guy may give a hint.
 
 IF(NOT WIN32)
+    if (HAVE_GCC_VISIBILITY)
+        SET_TARGET_PROPERTIES(svnqt PROPERTIES
+            COMPILE_FLAGS "-fvisibility=hidden")
+    endif (HAVE_GCC_VISIBILITY)
+
 SET_TARGET_PROPERTIES(svnqt PROPERTIES
     SOVERSION ${LIB_MAJOR}
     VERSION ${_soversion})

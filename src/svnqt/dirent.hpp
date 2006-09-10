@@ -28,14 +28,16 @@
 
 // subversion api
 #include "svn_client.h"
-
 #include "lock_entry.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 
 namespace svn
 {
-  class DirEntry
+  class DirEntry_Data;
+
+  class SVNQT_EXPORT DirEntry
   {
   public:
     /**
@@ -109,8 +111,7 @@ namespace svn
 
 
   private:
-    struct Data;
-    Data * m;
+    DirEntry_Data * m;
 
   };
 }

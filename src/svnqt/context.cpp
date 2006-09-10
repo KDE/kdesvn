@@ -37,8 +37,6 @@
 #include "context.hpp"
 #include "context_listener.hpp"
 #include "contextdata.h"
-#include "svnqt_defines.hpp"
-
 
 namespace svn
 {

@@ -29,6 +29,7 @@
 // svncpp
 #include "exception.hpp"
 #include "revision.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 
@@ -37,7 +38,7 @@ namespace svn
   /**
    * Class that deals with a working copy
    */
-  class Wc
+  class SVNQT_EXPORT Wc
   {
   public:
     /**

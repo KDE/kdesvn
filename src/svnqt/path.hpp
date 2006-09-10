@@ -27,14 +27,14 @@
 #define _SVNCPP_PATH_HPP_
 
 #include <qstring.h>
-
+#include "svnqt_defines.hpp"
 
 namespace svn
 {
   /**
    * Encapsulation for Subversion Path handling
    */
-  class Path
+  class SVNQT_EXPORT Path
   {
   private:
     QString m_path;

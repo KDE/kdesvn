@@ -25,7 +25,6 @@
 // svncpp
 #include "log_entry.hpp"
 #include "pool.hpp"
-#include "svnqt_defines.hpp"
 
 // subversion api
 #include "svn_time.h"

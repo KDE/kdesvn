@@ -21,7 +21,6 @@
 
 #include "contextdata.h"
 #include "context_listener.hpp"
-#include "svnqt_defines.hpp"
 
 #include <svn_config.h>
 
@@ -276,7 +275,7 @@ svn_error_t *ContextData::onLogMsg (const char **log_msg,
               void *baton,
               apr_pool_t * pool)
 {
-    ContextData * data;
+    ContextData * data = 0;
     SVN_ERR (getContextData (baton, &data));
 
     QString msg;
@@ -304,7 +303,7 @@ svn_error_t *ContextData::onLogMsg2 (const char **log_msg,
               void *baton,
               apr_pool_t * pool)
 {
-    ContextData * data;
+    ContextData * data = 0;
     SVN_ERR (getContextData (baton, &data));
 
     QString msg;
@@ -367,7 +366,7 @@ svn_error_t *ContextData::onSimplePrompt (svn_auth_cred_simple_t **cred,
                     svn_boolean_t _may_save,
                     apr_pool_t *pool)
 {
-      ContextData * data;
+      ContextData * data = 0;
       SVN_ERR (getContextData (baton, &data));
       bool may_save = _may_save != 0;
       if (!data->retrieveLogin (username, realm, may_save ))
@@ -396,7 +395,7 @@ svn_error_t * ContextData::onSslServerTrustPrompt (svn_auth_cred_ssl_server_trus
                             svn_boolean_t may_save,
                             apr_pool_t *pool)
 {
-      ContextData * data;
+      ContextData * data = 0;
       SVN_ERR (getContextData (baton, &data));
 
       ContextListener::SslServerTrustData trustData (failures);
@@ -439,7 +438,7 @@ svn_error_t * ContextData::onSslClientCertPrompt (svn_auth_cred_ssl_client_cert_
                            void *baton,
                            apr_pool_t *pool)
 {
-    ContextData * data;
+    ContextData * data = 0;
     SVN_ERR (getContextData (baton, &data));
 
     QString certFile;
@@ -463,7 +462,7 @@ svn_error_t * ContextData::onSslClientCertPwPrompt(
         svn_boolean_t maySave,
         apr_pool_t *pool)
 {
-    ContextData * data;
+    ContextData * data = 0;
     SVN_ERR (getContextData (baton, &data));
 
     QString password;

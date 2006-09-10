@@ -8,7 +8,7 @@
 struct svn_info_t;
 
 namespace svn {
-  class InfoEntry
+  class SVNQT_EXPORT InfoEntry
   {
 public:
     InfoEntry();
@@ -120,7 +120,7 @@ public:
     {
         return m_pUrl;
     }
-    
+
     QString prettyUrl(const char*)const;
 
 protected:

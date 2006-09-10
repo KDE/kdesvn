@@ -35,7 +35,7 @@ namespace svn {
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class CommitItem{
+class SVNQT_EXPORT CommitItem{
 
 private:
     void init();

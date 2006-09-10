@@ -21,8 +21,9 @@
 #ifndef _SVNQT_DEFINES_H
 #define _SVNQT_DEFINES_H
 
-#define SVNQT_EXPORT
-#define SVNQT_NOEXPORT
+/* defines if we setup against a compiler with working "-fvisibility=hidden" */
+#define SVNQT_EXPORT @_SVNQT_EXPORT@
+#define SVNQT_NOEXPORT @_SVNQT_NOEXPORT@
 
 /* cmake trick: so we make sure that the define in installs
    is always set as in library used at build time

@@ -34,7 +34,7 @@
 namespace svn {
 
 namespace stream {
-class SvnStream_private
+class SVNQT_NOEXPORT SvnStream_private
 {
 public:
     SvnStream_private(){m_Stream=0;m_LastError="";_context=0;cancel_timeout.start();}

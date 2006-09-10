@@ -25,12 +25,10 @@
 
 // svncpp
 #include "entry.hpp"
-#include "svnqt_defines.hpp"
-
 
 namespace svn
 {
-    class Entry_private
+    class SVNQT_NOEXPORT Entry_private
     {
     protected:
         void init_clean();

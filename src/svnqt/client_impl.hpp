@@ -47,7 +47,7 @@ namespace svn
   /**
    * Subversion client API.
    */
-  SVNQT_NOEXPORT class Client_impl:public Client
+  class SVNQT_NOEXPORT Client_impl:public Client
   {
   public:
     /**

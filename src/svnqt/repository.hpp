@@ -22,6 +22,7 @@
 
 #include "exception.hpp"
 #include "revision.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 
@@ -36,7 +37,7 @@ class RepositoryListener;
 /*!
     \author Rajko Albrecht <ral@alwins-world.de>
 */
-class Repository{
+class SVNQT_EXPORT Repository{
 public:
     enum LOAD_UUID {
         UUID_DEFAULT_ACTION = 0,

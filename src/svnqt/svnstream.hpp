@@ -1,6 +1,8 @@
 #ifndef SVNSVNSTREAM_HPP
 #define SVNSVNSTREAM_HPP
 
+#include "svnqt_defines.hpp"
+
 #include <qstring.h>
 
 #include <svn_io.h>
@@ -15,7 +17,7 @@ class SvnStream_private;
 	@author Rajko Albrecht <ral@alwins-world.de>
     @short wrapper class around the svn_stream_t structure
 */
-class SvnStream{
+class SVNQT_EXPORT SvnStream{
     friend class SvnStream_private;
 public:
     //! Constructor
@@ -100,7 +102,7 @@ private:
 class SvnByteStream_private;
 
 //! a class let subversion print into a QByteArray
-class SvnByteStream:public SvnStream
+class SVNQT_EXPORT SvnByteStream:public SvnStream
 {
 public:
     //! constructor

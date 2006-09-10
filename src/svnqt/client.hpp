@@ -90,7 +90,7 @@ namespace svn
    * Never use an object of this as global static! This will make problems with subversion
    * initialize.
    */
-  SVNQT_EXPORT class Client
+  class SVNQT_EXPORT Client
   {
   public:
     /**

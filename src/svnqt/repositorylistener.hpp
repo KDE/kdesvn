@@ -5,6 +5,7 @@
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
 
+#include "svnqt_defines.hpp"
 #include <qstring.h>
 
 namespace svn {
@@ -12,7 +13,7 @@ namespace svn {
 namespace repository {
 
 //! class for callbacks on repository operations
-class RepositoryListener{
+class SVNQT_EXPORT RepositoryListener{
 
 public:
     //! constructor

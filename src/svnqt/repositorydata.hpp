@@ -23,6 +23,7 @@
 #include "pool.hpp"
 #include "revision.hpp"
 #include "apr.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 
@@ -38,7 +39,7 @@ class RepositoryListener;
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class RepositoryData{
+class SVNQT_NOEXPORT RepositoryData{
     friend class Repository;
 
 public:

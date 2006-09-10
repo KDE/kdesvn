@@ -32,7 +32,7 @@
 
 namespace svn
 {
-  struct DirEntry::Data
+  class SVNQT_NOEXPORT DirEntry_Data
   {
   public:
     QString name;
@@ -44,13 +44,13 @@ namespace svn
     QString lastAuthor;
     LockEntry m_Lock;
 
-    Data ()
+    DirEntry_Data ()
       : kind (svn_node_unknown), size (0), hasProps(false),
         createdRev (0), time (0), m_Lock()
     {
     }
 
-    Data (const QString& _name, svn_dirent_t * dirEntry)
+    DirEntry_Data (const QString& _name, svn_dirent_t * dirEntry)
       : name (_name), kind (dirEntry->kind), size (dirEntry->size),
         hasProps (dirEntry->has_props != 0),
         createdRev (dirEntry->created_rev), time (dirEntry->time), m_Lock()
@@ -58,7 +58,7 @@ namespace svn
       lastAuthor = dirEntry->last_author == 0 ? "" : QString::FROMUTF8(dirEntry->last_author);
     }
 
-    Data (const DirEntry & src)
+    DirEntry_Data (const DirEntry & src)
     {
       init (src);
     }
@@ -78,29 +78,29 @@ namespace svn
   };
 
   DirEntry::DirEntry ()
-    : m (new Data ())
+    : m (new DirEntry_Data ())
   {
   }
 
   DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry)
-    : m (new Data (name, dirEntry))
+    : m (new DirEntry_Data (name, dirEntry))
   {
   }
 
   DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry,svn_lock_t*lockEntry)
-    : m (new Data (name, dirEntry))
+    : m (new DirEntry_Data (name, dirEntry))
   {
     setLock(lockEntry);
   }
 
   DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry,const LockEntry&lockEntry)
-    : m (new Data (name, dirEntry))
+    : m (new DirEntry_Data (name, dirEntry))
   {
     m->m_Lock = lockEntry;
   }
 
   DirEntry::DirEntry (const DirEntry & src)
-    : m (new Data (src))
+    : m (new DirEntry_Data (src))
   {
   }
 

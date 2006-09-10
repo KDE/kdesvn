@@ -23,6 +23,7 @@
 #include "pool.hpp"
 #include "apr.hpp"
 #include "commititem.hpp"
+#include "svnqt_defines.hpp"
 
 #include <svn_client.h>
 #include <qstring.h>
@@ -33,7 +34,7 @@ namespace svn {
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class ContextData{
+class SVNQT_NOEXPORT ContextData{
 public:
     ContextData(const QString & configDir_);
     ~ContextData();

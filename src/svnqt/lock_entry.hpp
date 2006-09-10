@@ -26,6 +26,8 @@
 #ifndef _SVNCPP_LOCK_ENTRY_H_
 #define _SVNCPP_LOCK_ENTRY_H_
 
+#include "svnqt_defines.hpp"
+
 #include <qstring.h>
 
 // apr
@@ -37,7 +39,7 @@
 
 namespace svn
 {
-  class LockEntry
+  class SVNQT_EXPORT LockEntry
   {
   public:
     LockEntry ();

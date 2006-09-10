@@ -35,7 +35,7 @@ typedef QIODevice::OpenMode openmode;
 #define WRITEONLY QIODevice::WriteOnly
 #endif
 
-class SvnFileStream_private
+class SVNQT_NOEXPORT SvnFileStream_private
 {
 public:
     SvnFileStream_private(const QString&fn,openmode mode);

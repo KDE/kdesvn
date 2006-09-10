@@ -34,6 +34,7 @@
 #include "lock_entry.hpp"
 #include "dirent.hpp"
 #include "info_entry.hpp"
+#include "svnqt_defines.hpp"
 
 namespace svn
 {
@@ -46,7 +47,7 @@ namespace svn
    */
   class Status_private;
 
-  class Status
+  class SVNQT_EXPORT Status
   {
   public:
     /**

@@ -26,6 +26,10 @@
 #ifndef _SVNCPP_REVISION_HPP_
 #define _SVNCPP_REVISION_HPP_
 
+// svncpp
+#include <svnqt/datetime.hpp>
+#include <svnqt/svnqt_defines.hpp>
+
 // qt
 #include <qglobal.h>
 #if QT_VERSION < 0x040000
@@ -38,9 +42,6 @@
 #include "svn_types.h"
 #include "svn_opt.h"
 
-// svncpp
-#include "datetime.hpp"
-
 namespace svn
 {
   /**
@@ -48,7 +49,7 @@ namespace svn
    *
    * @see svn_opt_revnum_t
    */
-  class Revision
+  class SVNQT_EXPORT Revision
   {
   private:
     svn_opt_revision_t m_revision;

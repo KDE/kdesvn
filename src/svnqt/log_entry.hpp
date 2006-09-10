@@ -26,6 +26,8 @@
 #ifndef _SVNCPP_LOG_ENTRY_H_
 #define _SVNCPP_LOG_ENTRY_H_
 
+#include "svnqt_defines.hpp"
+
 //Qt
 #include <qglobal.h>
 
@@ -49,7 +51,7 @@
 namespace svn
 {
 
-  class LogChangePathEntry
+  class SVNQT_EXPORT LogChangePathEntry
   {
   public:
     LogChangePathEntry (const char *path_,
@@ -87,7 +89,7 @@ namespace svn
   typedef QList<LogChangePathEntry> LogChangePathEntries;
 #endif
 
-  class LogEntry
+  class SVNQT_EXPORT LogEntry
   {
   public:
     LogEntry ();

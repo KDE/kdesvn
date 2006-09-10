@@ -26,6 +26,8 @@
 #ifndef _SVNCPP_URL_H_
 #define _SVNCPP_URL_H_
 
+#include "svnqt_defines.hpp"
+
 // qt
 #include <qglobal.h>
 #if QT_VERSION < 0x040000
@@ -42,7 +44,7 @@
 
 namespace svn
 {
-  class Url
+  class SVNQT_EXPORT Url
   {
   public:
     /** Constructor */

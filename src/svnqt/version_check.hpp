@@ -1,6 +1,8 @@
 #ifndef __VERSION_CHECK_HPP
 #define __VERSION_CHECK_HPP
 
+#include "svnqt/svnqt_defines.hpp"
+
 class QString;
 
 #define SVNQT_MAJOR 0
@@ -10,7 +12,7 @@ class QString;
 #define SVNQT_VERSIONSTRING "0.8.0"
 
 namespace svn {
-    class Version {
+    class SVNQT_EXPORT Version {
 
     public:
         Version(){}

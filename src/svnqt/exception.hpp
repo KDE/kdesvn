@@ -26,6 +26,7 @@
 #ifndef _SVNCPP_EXCEPTION_H_
 #define _SVNCPP_EXCEPTION_H_
 
+#include "svnqt_defines.hpp"
 // subversion api
 #include "svn_client.h"
 #include <qstring.h>
@@ -36,7 +37,7 @@ namespace svn
   /**
    * Generic exception class.
    */
-  class Exception
+  class SVNQT_EXPORT Exception
   {
   public:
     /**
@@ -75,7 +76,7 @@ namespace svn
   /**
    * Subversion client exception class.
    */
-  class ClientException : public Exception
+  class SVNQT_EXPORT ClientException : public Exception
   {
   public:
     /**

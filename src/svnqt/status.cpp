@@ -31,7 +31,7 @@
 
 namespace svn
 {
-  class Status_private
+  class SVNQT_NOEXPORT Status_private
   {
   public:
     Status_private();

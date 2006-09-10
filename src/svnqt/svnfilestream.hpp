@@ -13,7 +13,7 @@ class SvnFileStream_private;
 	@author Rajko Albrecht <ral@alwins-world.de>
     @short Writeonly filestream
 */
-class SvnFileOStream : public SvnStream
+class SVNQT_EXPORT SvnFileOStream : public SvnStream
 {
 public:
     SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx=0);
@@ -30,7 +30,7 @@ private:
     @author Rajko Albrecht <ral@alwins-world.de>
     @short Readonly filestream
 */
-class SvnFileIStream : public SvnStream
+class SVNQT_EXPORT SvnFileIStream : public SvnStream
 {
 public:
     SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx=0);

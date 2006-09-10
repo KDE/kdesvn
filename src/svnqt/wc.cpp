@@ -31,8 +31,6 @@
 #include "path.hpp"
 #include "pool.hpp"
 #include "wc.hpp"
-#include "svnqt_defines.hpp"
-
 
 namespace svn
 {

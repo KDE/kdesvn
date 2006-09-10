@@ -33,6 +33,7 @@
 #include "lock_entry.hpp"
 #include "dirent.hpp"
 #include "info_entry.hpp"
+#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 
@@ -43,7 +44,7 @@ namespace svn
    * C++ API for Subversion.
    * This class wraps around @a svn_wc_entry_t.
    */
-  class Entry
+  class SVNQT_EXPORT Entry
   {
   public:
     /**

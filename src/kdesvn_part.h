@@ -41,7 +41,7 @@ class KAboutApplication;
  * @author Rajko Albrecht <rajko.albrecht@tecways.com>
  * @version 0.1
  */
-class kdesvnPart : public KParts::ReadOnlyPart
+class KPARTS_EXPORT kdesvnPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 public:
@@ -98,7 +98,7 @@ class commandline_part;
 class KCmdLineArgs;
 
 /* we make it ourself 'cause we will enhance a little bit! */
-class cFactory : public KParts::Factory
+class KPARTS_EXPORT cFactory : public KParts::Factory
 {
     Q_OBJECT
 public:
@@ -119,7 +119,7 @@ private:
 
 typedef cFactory kdesvnPartFactory;
 
-class KdesvnBrowserExtension : public KParts::BrowserExtension
+class KPARTS_EXPORT KdesvnBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 public:

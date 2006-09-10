@@ -27,7 +27,6 @@
 // svncpp
 #include "revision.hpp"
 #include "pool.hpp"
-#include "svnqt_defines.hpp"
 
 namespace svn
 {

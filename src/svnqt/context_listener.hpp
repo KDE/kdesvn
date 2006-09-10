@@ -27,8 +27,9 @@
 #define _SVNCPP_CONTEXT_LISTENER_HPP_
 
 // svncpp
-#include "pool.hpp"
-#include "commititem.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/commititem.hpp"
+#include "svnqt/svnqt_defines.hpp"
 // qt
 #include <qstring.h>
 // Subversion api
@@ -43,7 +44,7 @@ namespace svn
    * To use this you will have to inherit from this
    * interface and overwrite the virtual methods.
    */
-  class ContextListener
+  class SVNQT_EXPORT ContextListener
   {
   public:
     /**
@@ -99,7 +100,7 @@ namespace svn
      */
     virtual void
     contextNotify (const svn_wc_notify_t *action) = 0;
-    /*
+    /**
      * this method will be called periodically to allow
      * the app to cancel long running operations
      *

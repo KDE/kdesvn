@@ -21,6 +21,8 @@
 #ifndef _KDESVNPART_H_
 #define _KDESVNPART_H_
 
+#include "kdesvn-config.h"
+
 #include <kparts/part.h>
 #include <kparts/genericfactory.h>
 #include <kparts/factory.h>
@@ -41,7 +43,7 @@ class KAboutApplication;
  * @author Rajko Albrecht <rajko.albrecht@tecways.com>
  * @version 0.1
  */
-class KPARTS_EXPORT kdesvnPart : public KParts::ReadOnlyPart
+class KDESVN_EXPORT kdesvnPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 public:
@@ -98,7 +100,7 @@ class commandline_part;
 class KCmdLineArgs;
 
 /* we make it ourself 'cause we will enhance a little bit! */
-class KPARTS_EXPORT cFactory : public KParts::Factory
+class KDESVN_EXPORT cFactory : public KParts::Factory
 {
     Q_OBJECT
 public:

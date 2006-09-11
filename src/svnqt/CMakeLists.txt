@@ -94,11 +94,6 @@ ENDIF(SUNOS)
 #may some of that guy may give a hint.
 
 IF(NOT WIN32)
-    if (HAVE_GCC_VISIBILITY)
-        SET_TARGET_PROPERTIES(svnqt PROPERTIES
-            COMPILE_FLAGS "-fvisibility=hidden")
-    endif (HAVE_GCC_VISIBILITY)
-
 SET_TARGET_PROPERTIES(svnqt PROPERTIES
     SOVERSION ${LIB_MAJOR}
     VERSION ${_soversion})

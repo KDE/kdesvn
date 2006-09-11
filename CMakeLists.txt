@@ -12,6 +12,12 @@ INCLUDE(MacroEnsureVersion)
 INCLUDE(FindSubversion)
 INCLUDE(SetupCompiler)
 
+IF (HAVE_GCC_VISIBILITY)
+    SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+    SET(_KDESVN_EXPORT "__attribute__ ((visibility(\"default\")))")
+    SET(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
+ENDIF (HAVE_GCC_VISIBILITY)
+
 INCLUDE_DIRECTORIES(${KDE3_INCLUDE_DIR}
     ${QT_INCLUDE_DIR}
     ${APR_INCLUDE_DIR}
@@ -32,7 +38,7 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 SET(VERSION 0.10.0)
 SET(KDESVN_VERSION \"${VERSION}\")
 
-CONFIGURE_FILE(kdesvn-config.h.in config.h @ONLY)
+CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)

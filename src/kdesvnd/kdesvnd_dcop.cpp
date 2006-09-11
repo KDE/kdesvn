@@ -18,7 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "config.h"
+#include "kdesvn-config.h"
 #include "kdesvnd_dcop.h"
 #include "src/ksvnwidgets/authdialogimpl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
@@ -41,12 +41,7 @@
 #include <qdir.h>
 
 extern "C" {
-// avoid problems with elder kde installations
-#ifdef __KDE_HAVE_GCC_VISIBILITY
-    KDE_EXPORT KDEDModule *create_kdesvnd(const QCString &name)
-#else
-    KDEDModule *create_kdesvnd(const QCString &name)
-#endif
+    KDESVN_EXPORT KDEDModule *create_kdesvnd(const QCString &name)
     {
        return new kdesvnd_dcop(name);
     }

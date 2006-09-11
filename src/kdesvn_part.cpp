@@ -27,7 +27,6 @@
 #include "settings/cmdexecsettings_impl.h"
 #include "kdesvnview.h"
 #include "commandline_part.h"
-#include "../config.h"
 #include "src/svnqt/version_check.hpp"
 #include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
@@ -48,7 +47,9 @@
 #include <qcursor.h>
 #include <qpopupmenu.h>
 
-K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
+//K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
+
+extern "C" { KDESVN_EXPORT void *init_libkdesvnpart() { return new kdesvnPartFactory; } }
 
 static const char version[] = VERSION;
 QString kdesvnPart::m_Extratext = "";

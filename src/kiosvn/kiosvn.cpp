@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "config.h"
+#include "kdesvn-config.h"
 #include "kiosvn.h"
 #include "kiolistener.h"
 
@@ -128,12 +128,7 @@ kio_svnProtocol::~kio_svnProtocol()
 
 extern "C"
 {
-// avoid problems with elder kde installations
-#ifdef __KDE_HAVE_GCC_VISIBILITY
-    KDE_EXPORT int kdemain(int argc, char **argv);
-#else
-    int kdemain(int argc, char **argv);
-#endif
+    KDESVN_EXPORT int kdemain(int argc, char **argv);
 }
 
 int kdemain(int argc, char **argv)

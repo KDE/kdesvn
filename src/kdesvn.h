@@ -22,9 +22,7 @@
 #ifndef _KDESVN_H_
 #define _KDESVN_H_
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include "kdesvn-config.h"
 
 #include <kapplication.h>
 #include <kparts/mainwindow.h>

@@ -21,7 +21,7 @@
 
 #include "kdesvn.h"
 #include "commandline.h"
-#include <config.h>
+#include "kdesvn-config.h"
 #include <kapplication.h>
 #include <dcopclient.h>
 #include <kaboutdata.h>

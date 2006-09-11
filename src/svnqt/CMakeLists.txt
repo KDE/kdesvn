@@ -34,7 +34,33 @@ SET(SOURCES
     svnstream.cpp
     svnfilestream.cpp)
 
-FILE(GLOB HEADERS *.hpp)
+SET(INST_HEADERS
+    annotate_line.hpp
+    apr.hpp
+    check.hpp
+    client.hpp
+    commititem.hpp
+    context.hpp
+    context_listener.hpp
+    datetime.hpp
+    dirent.hpp
+    entry.hpp
+    exception.hpp
+    info_entry.hpp
+    lock_entry.hpp
+    log_entry.hpp
+    path.hpp
+    pool.hpp
+    repository.hpp
+    repositorylistener.hpp
+    revision.hpp
+    status.hpp
+    svnfilestream.hpp
+    svnstream.hpp
+    targets.hpp
+    url.hpp
+    version_check.hpp
+    wc.hpp)
 
 IF(QT4_FOUND)
     MESSAGE(STATUS "Qt: ${QT_LIBRARY_DIR}")
@@ -61,7 +87,7 @@ CONFIGURE_FILE(
     IMMEDIATE
     @ONLY)
 
-SET(HEADERS ${HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp)
+SET(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 IF(NOT WIN32)
@@ -112,7 +138,7 @@ TARGET_LINK_LIBRARIES(testlink svnqt)
 # in win32 we don't install it
 IF(NOT WIN32)
     INSTALL(TARGETS svnqt DESTINATION ${LIB_INSTALL_DIR})
-    INSTALL(FILES ${HEADERS} DESTINATION include/svnqt)
+    INSTALL(FILES ${INST_HEADERS} DESTINATION include/svnqt)
 
     # and a libtool file
     GET_TARGET_PROPERTY(_target_location svnqt LOCATION)

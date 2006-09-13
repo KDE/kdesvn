@@ -26,6 +26,7 @@
 #include "src/svnqt/dirent.hpp"
 #include "src/helpers/sub2qt.h"
 #include "src/helpers/ktranslateurl.h"
+#include "src/helpers/sshagent.h"
 #include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "src/svnfrontend/copymoveview_impl.h"
 
@@ -94,6 +95,8 @@ CommandExec::CommandExec(QObject*parent, const char *name,KCmdLineArgs *args)
 {
     m_pCPart = new pCPart;
     m_pCPart->args = args;
+    SshAgent ag;
+    ag.querySshAgent();
 
     connect(m_pCPart->m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(clientException(const QString&)));
     connect(m_pCPart->m_SvnWrapper,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
@@ -218,6 +221,11 @@ int CommandExec::exec()
             v = "";
         }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
+        if (tmpurl.protocol().find("ssh")!=-1) {
+            SshAgent ag;
+            // this class itself checks if done before
+            ag.addSshIdentities();
+        }
         kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
         m_pCPart->extraRevisions[j-2]=svn::Revision::HEAD;
 

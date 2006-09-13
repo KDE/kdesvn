@@ -56,6 +56,7 @@ private:
 
     static bool    m_isRunning;
     static bool    m_isOurAgent;
+    static bool    m_addIdentitiesDone;
     static QString m_authSock;
     static QString m_pid;
 };

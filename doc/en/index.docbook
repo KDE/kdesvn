@@ -7,8 +7,8 @@
   <!ENTITY konqi "<application>konqueror</application>">
   <!ENTITY krus "<application>krusader</application>">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
-  
-  
+
+
   <!-- Do not define any other entities; instead, use the entities
        from kde-genent.entities and $LANG/user.entities. -->
 ]>
@@ -198,14 +198,14 @@ Subversions own server protocol.
 <varlistentry>
 <term>(k)svn+ssh</term>
 <listitem><para>
-Subversion over ssh. See <link linkend="faq">FAQ</link> for details
+Subversion over ssh. See <link linkend="faq">FAQ</link> for details about some specials with that protocol.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>file</term>
 <listitem><para>
-Direct repository accesss. &kdesvn; checks if a given path is a repository or a working copy and opens it in the right mode. For subversion 
+Direct repository accesss. &kdesvn; checks if a given path is a repository or a working copy and opens it in the right mode. For subversion
 <prompt>file:///dir</prompt> and <prompt>/dir</prompt> is not the same!
 </para></listitem>
 </varlistentry>
@@ -251,7 +251,7 @@ is the referenced version.
 After clicking on &quot;[OK]&quot; &kdesvn; will create your new working copy and (if the box was checked) opens it.
 </para>
 <para>
-When you have opened a repository for browsing you may mark a folder and than select 
+When you have opened a repository for browsing you may mark a folder and than select
 <menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Repository</guisubmenu>
@@ -263,7 +263,7 @@ and fill out the dialogs as described above. Then only the marked path will chec
 <sect2>
 <title>Commiting local changes</title>
 <para>
-Mark the entry or entries you want to send and select 
+Mark the entry or entries you want to send and select
 <menuchoice>
 <shortcut>
 <keycombo action="simul"><keycap>#</keycap></keycombo>
@@ -297,7 +297,7 @@ This brings you local working copy in sync with the repository. You may setup th
 When this is finished, items with newer versions or folders with items where newer items are below are marked.
 </para>
 <para>
-To retrieve the changes, select 
+To retrieve the changes, select
 <menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
@@ -326,7 +326,7 @@ Adding items into a working copy may be done due three ways:
 <varlistentry>
 <term>Select not versioned items and add them</term>
 <listitem><para>
-Copy with konqueror or any other tool into working copy area. Go trough list, mark them and select 
+Copy with konqueror or any other tool into working copy area. Go trough list, mark them and select
 <menuchoice>
 <shortcut><keycombo action="simul"><keycap>Insert</keycap></keycombo></shortcut>
 <guimenu>Subversion</guimenu>
@@ -346,7 +346,7 @@ Copy with konqueror or any other tool into working copy area. Go trough list, ma
 <varlistentry>
 <term>Check and add recursive</term>
 <listitem><para>
-You may check if there are somewhere in working copy unversioned items. After selecting 
+You may check if there are somewhere in working copy unversioned items. After selecting
 <menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
@@ -569,10 +569,10 @@ As of version 0.7.0 of &kappname; it comes with some modules integrating some co
 <listitem><para>ksvn+ssh</para></listitem>
 <listitem><para>ksvn</para></listitem>
 </itemizedlist>
-The same maybe for &quot;svn+...&quot; but as from kde 3.4, kdesdk has it own small svn-kio called &quot;svn+http&quot;etc. So packages are organized that way - or should that &quot;svn+...&quot; comes as an extra package so it may installed if kdesdk hasn't installed it. 
+The same maybe for &quot;svn+...&quot; but as from kde 3.4, kdesdk has it own small svn-kio called &quot;svn+http&quot;etc. So packages are organized that way - or should that &quot;svn+...&quot; comes as an extra package so it may installed if kdesdk hasn't installed it.
 </para>
 <para>
-These protocols are designed only for repositories, not for working copies. E.g. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository different to the application itself or KPart. 
+These protocols are designed only for repositories, not for working copies. E.g. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository different to the application itself or KPart.
 Working copies may browsed with konqueror.
 </para>
 <para>
@@ -862,7 +862,7 @@ Return values may given via metadata, see apidoc for details.
 Some subversion operations may used via the commandline, eg., like a standard commandline client but user interaction is made via KDE-UI. The standard syntax is <prompt>kdesvn exec &lt;command&gt; &#091;parameter&#093; &lt;url&gt;</prompt>.
 </para>
 <para>
-If a single revision on a single url is wanted it may be set as a parameter of the url 
+If a single revision on a single url is wanted it may be set as a parameter of the url
 <programlisting>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting> This will overwrite the option <prompt>-r &lt;rev&gt;</prompt>.
 </para>
 <para>
@@ -1064,7 +1064,7 @@ kdesvn exec diff -r 21:20 myfile.c
 </example>
 </para>
 <para>
-When diffing two items revisions may be appended to url of items. e.g.: 
+When diffing two items revisions may be appended to url of items. e.g.:
 <programlisting>http://server/path/item?rev=HEAD</programlisting>
 <example>
 <title>Diffing two tagged versions</title>
@@ -1323,7 +1323,7 @@ subversion information.
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Diff local changes</guimenuitem>
 </menuchoice></term>
-<listitem><para>Display local changes as diff-output (without network access). This is the difference only to 
+<listitem><para>Display local changes as diff-output (without network access). This is the difference only to
 last state the working copy was updated to, not against the version in repository.</para></listitem>
 </varlistentry>
 <varlistentry>
@@ -1481,19 +1481,33 @@ application work. -->
 <qandaset id="faqlist">
 <qandaentry>
 <question>
-<para>When using the svn+ssh protocol it asks all the time for password again. Why?</para>
+<para>When using the (k)svn+ssh protocol it asks all the time for password again. Why?</para>
 </question>
 <answer>
 <para>
 The &quot;problem&quot; is ssh itself. Subversion creates for each command sending a tunnel
 to the repository. And on each tunnel it is a new ssh connection. And for every connection ssh must
 authenticate. This may you fix when you store your local public identity to the host containing the
-repository. If your public identity has a password, it will asked once when ssh-agent is installed
-und ssh-agent store it in its cache. Voila.
+repository. If your public identity has a password, ssh-agent will asked (when ssh-agent is installed).
 </para>
 <para>
-<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin has a nice description</ulink> how to use kdesvn 
+When you're running a ssh-agent before starting &kdesvn;, you should add your identity to its cache, &kdesvn; will not
+modifiy it due security reasons, so it would ask for your password again and again. (see <ulink url="man:ssh-add">Manpage of ssh-add</ulink>)
+</para>
+<para>
+<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin has a nice description</ulink> how to use kdesvn
 with ssh and keychain.
+</para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>The password prompt for (k)svn+ssh comes on terminal when kdesvn started from there, how do I switch off this?</para>
+</question>
+<answer>
+<para>
+It may not switched off. This is a feature of ssh-agent itself, when it see it has a terminal it asks for password in terminal not
+in a X-Dialog like kdesvnaskpass. (see <ulink url="man:ssh-add">Manpage of ssh-add</ulink>).
 </para>
 </answer>
 </qandaentry>
@@ -1504,7 +1518,7 @@ with ssh and keychain.
 <answer>
 <para>
 Updates may only displayed when the remote server is subversion 1.2, too. Eg., seems that repository runs with
-subversion &lt;1.2. It is not planned that kdesvn do that check recursive itself - this makes no sense. Ask for upgrading
+subversion &lt;1.2. It is not planned that &kdesvn; do that check recursive itself - this makes no sense. Ask for upgrading
 repository to newer subversion.
 </para>
 </answer>
@@ -1586,7 +1600,7 @@ Appending a specific revision to an url will always made via &quot;?rev=&lt;revi
 <sect1>
 <title>Reporting bugs / Feedback</title>
 <para>
-Bugreports and wishes may send to <email>kdesvn-bugs@alwins-world.de</email>, questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>. 
+Bugreports and wishes may send to <email>kdesvn-bugs@alwins-world.de</email>, questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>.
 </para>
 <para>
 An overview for the mailinglists for &kappname; you may get in the <ulink url="http://www.alwins-world.de/mailman/listinfo">mailinglist overview</ulink>.
@@ -1611,7 +1625,7 @@ Many tnx to contributors:
 <listitem><para>Bram Schoenmakers <email>bramschoenmakers@kde.nl</email> - for kde-specific hints, dutch translation, cleaning up my code.</para>
 </listitem>
 </itemizedlist>
-And tnx to all other translators (I never thought that I get that fast such a lot of translations!) and for all of your positive and negative feedback. It helped a lot. 
+And tnx to all other translators (I never thought that I get that fast such a lot of translations!) and for all of your positive and negative feedback. It helped a lot.
 </para>
 <para>
 If you want your own translation for &kappname; and may want help please read on the homepage of &kappname; or ask on <ulink url="mailto:kdesvn-i10n@alwins-world.de"><email>kdesvn-i10n@alwins-world.de</email> mailinglist</ulink>.
@@ -1622,10 +1636,10 @@ Documentation copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
 &underFDL;               <!-- FDL: do not remove -->
-<!-- Determine which license your application is licensed under, 
+<!-- Determine which license your application is licensed under,
      and delete all the remaining licenses below:
 
-     (NOTE:  All documentation are licensed under the FDL, 
+     (NOTE:  All documentation are licensed under the FDL,
      regardless of what license the application uses) -->
 
 &underGPL;        	 <!-- GPL License -->
@@ -1644,7 +1658,7 @@ Documentation copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</
 
 <!-- This first entity contains boiler plate for applications that are
 part of KDE CVS.  You should remove it if you are releasing your
-application --> 
+application -->
 <para>
 &kdesvn; itself can be found
 at <ulink url="http://www.alwins-world.de/programs/download/kdesvn/">
@@ -1693,7 +1707,7 @@ url="http://www.alwins-world.de/programs/kdesvn">http://www.alwins-world.de/prog
 <sect2>
 <title>Using cmake</title>
 <para>
-&kappname; requires at least cmake 2.4 for building. The following steps works with both distribution tarball or tarball from repository. Unpack the archive 
+&kappname; requires at least cmake 2.4 for building. The following steps works with both distribution tarball or tarball from repository. Unpack the archive
 or checkout / export a copy from repository and change to the resulting sourcedirectory.
 </para>
 <para>
@@ -1754,6 +1768,6 @@ sgml-indent-step:0
 sgml-indent-data:nil
 End:
 
-vim:tabstop=2:shiftwidth=2:expandtab 
+vim:tabstop=2:shiftwidth=2:expandtab
 -->
 

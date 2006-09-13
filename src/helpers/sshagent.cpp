@@ -32,6 +32,7 @@
 // initialize static member variables
 bool    SshAgent::m_isRunning  = false;
 bool    SshAgent::m_isOurAgent = false;
+bool    SshAgent::m_addIdentitiesDone = false;
 QString SshAgent::m_authSock   = QString::null;
 QString SshAgent::m_pid        = QString::null;
 
@@ -66,6 +67,9 @@ bool SshAgent::querySshAgent()
         char* sock = ::getenv("SSH_AUTH_SOCK");
         if( sock )
             m_authSock = QString::fromLocal8Bit(sock);
+        /* make sure that we have a askpass program.
+         * on some systems something like that isn't installed.*/
+        ::setenv("SSH_ASKPASS", "kdesvnaskpass",1);
 
         m_isOurAgent = false;
         m_isRunning  = true;
@@ -86,12 +90,18 @@ bool SshAgent::querySshAgent()
 bool SshAgent::addSshIdentities()
 {
     kdDebug() << "SshAgent::addSshIdentities(): ENTER" << endl;
+    if (m_addIdentitiesDone) {
+        kdDebug() << "SshAgent::addSshIdentities(): Done in past." << endl;
+        return true;
+    }
+
 
     if( !m_isRunning || !m_isOurAgent ) {
-        kdDebug() << "SshAgent::addSshIdentities(): Not ours" << endl;
+        kdDebug() << "SshAgent::addSshIdentities(): Not running or not our." << endl;
         return false;
     }
 
+    kdDebug()<<"Starting ssh-add"<<endl;
     // add identities to ssh-agent
     KProcess proc;
 
@@ -113,8 +123,8 @@ bool SshAgent::addSshIdentities()
     proc.wait();
 
     kdDebug() << "SshAgent::slotProcessExited(): added identities" << endl;
-
-    return (proc.normalExit() && proc.exitStatus() == 0);
+    m_addIdentitiesDone = proc.normalExit() && proc.exitStatus() == 0;
+    return m_addIdentitiesDone;
 }
 
 

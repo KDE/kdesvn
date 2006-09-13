@@ -27,6 +27,7 @@
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/info_entry.hpp"
 #include "helpers/sub2qt.h"
+#include "helpers/sshagent.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -89,6 +90,9 @@ void KioSvnData::reInitClient()
     if (first_done) {
         return;
     }
+    SshAgent ag;
+    ag.querySshAgent();
+
     first_done = true;
     delete m_CurrentContext;
     m_CurrentContext = new svn::Context();
@@ -105,6 +109,15 @@ KioSvnData::~KioSvnData()
 svn::Revision KioSvnData::urlToRev(const KURL&url)
 {
     QMap<QString,QString> q = url.queryItems();
+
+    /* we try to check if it is ssh and try to get a password for it */
+    QString proto = url.protocol();
+
+    if (proto.find("ssh")!=-1) {
+        SshAgent ag;
+        ag.addSshIdentities();
+    }
+
     svn::Revision rev,tmp;
     rev = svn::Revision::UNDEFINED;
     if (q.find("rev")!=q.end()) {

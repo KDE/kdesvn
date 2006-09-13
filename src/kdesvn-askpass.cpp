@@ -52,10 +52,12 @@ int main(int argc, char** argv)
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
     }
-    KPasswordDialog dlg(KPasswordDialog::Password, false, 0);
-    dlg.setPrompt(prompt);
-    if (dlg.exec()==KPasswordDialog::Accepted) {
-        std::cout<<dlg.password() << std::endl;
+    QCString pw;
+    KPasswordDialog::disableCoreDumps();
+    if (KPasswordDialog::getPassword(pw,prompt,0)==KPasswordDialog::Accepted) {
+        std::cout << pw << std::endl;
+        /* cleanup memory */
+        pw.replace(0,pw.length(),"0");
         return 0;
     }
     return 1;

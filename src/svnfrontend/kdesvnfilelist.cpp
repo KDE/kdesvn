@@ -468,7 +468,8 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         }
     }
 
-    if (url.protocol()=="svn+ssh") {
+    if (url.protocol()=="svn+ssh"||
+        url.protocol()=="ksvn+ssh") {
         SshAgent ssh;
         ssh.addSshIdentities();
     }

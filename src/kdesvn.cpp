@@ -120,6 +120,10 @@ kdesvn::kdesvn()
             tmpAction = new KAction(i18n("Load dump into repository"),"filenew",
                 KShortcut(),m_part->widget(),SLOT(slotLoaddump()),actionCollection(),"subversion_load_repo");
             tmpAction->setToolTip(i18n("Load a dump file into a repository."));
+            tmpAction = new KAction(i18n("Add ssh identies to ssh-agent"),"password",
+                KShortcut(),m_part,SLOT(slotSshAdd()),actionCollection(),"kdesvn_ssh_add");
+            tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
+
             // and integrate the part's GUI with the shell's
             createGUI(m_part);
             connectActionCollection(m_part->actionCollection());

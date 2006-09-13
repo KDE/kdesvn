@@ -69,7 +69,10 @@ bool SshAgent::querySshAgent()
             m_authSock = QString::fromLocal8Bit(sock);
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
-        ::setenv("SSH_ASKPASS", "kdesvnaskpass",1);
+        char*agent = ::getenv("SSH_ASKPASS");
+        if (!agent) {
+            ::setenv("SSH_ASKPASS", "kdesvnaskpass",1);
+        }
 
         m_isOurAgent = false;
         m_isRunning  = true;
@@ -87,16 +90,16 @@ bool SshAgent::querySshAgent()
 }
 
 
-bool SshAgent::addSshIdentities()
+bool SshAgent::addSshIdentities(bool force)
 {
     kdDebug() << "SshAgent::addSshIdentities(): ENTER" << endl;
-    if (m_addIdentitiesDone) {
+    if (m_addIdentitiesDone && !force) {
         kdDebug() << "SshAgent::addSshIdentities(): Done in past." << endl;
         return true;
     }
 
 
-    if( !m_isRunning || !m_isOurAgent ) {
+    if( !m_isRunning || (!m_isOurAgent&&!force)) {
         kdDebug() << "SshAgent::addSshIdentities(): Not running or not our." << endl;
         return false;
     }
@@ -107,7 +110,14 @@ bool SshAgent::addSshIdentities()
 
     proc.setEnvironment("SSH_AGENT_PID", m_pid);
     proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
-    proc.setEnvironment("SSH_ASKPASS", "kdesvnaskpass");
+
+    char*agent = 0;
+    if (force) {
+        agent = ::getenv("SSH_ASKPASS");
+    }
+    if (!agent) {
+        proc.setEnvironment("SSH_ASKPASS", "kdesvnaskpass");
+    }
 
     proc << "ssh-add";
 

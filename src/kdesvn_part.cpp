@@ -30,6 +30,7 @@
 #include "src/svnqt/version_check.hpp"
 #include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
+#include "helpers/sshagent.h"
 
 #include <kinstance.h>
 #include <kaction.h>
@@ -176,6 +177,7 @@ void kdesvnPart::setupActions()
             actionCollection(),"toggle_ignored_files");
     toggletemp->setChecked(Kdesvnsettings::display_ignored_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
+
 #if 0
     /// not needed this moment
     toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
@@ -196,6 +198,11 @@ void kdesvnPart::setupActions()
     actionCollection()->setHighlightingEnabled(true);
 }
 
+void kdesvnPart::slotSshAdd()
+{
+    SshAgent ag;
+    ag.addSshIdentities(true);
+}
 
 /*!
     \fn kdesvnPart::slotLogFollowNodes(bool)

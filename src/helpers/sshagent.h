@@ -37,7 +37,7 @@ public:
     ~SshAgent();
 
     bool querySshAgent();
-    bool addSshIdentities();
+    bool addSshIdentities(bool force=false);
     void killSshAgent();
 
     bool isRunning() const { return m_isRunning; }

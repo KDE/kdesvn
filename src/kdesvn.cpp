@@ -61,6 +61,7 @@ kdesvn::kdesvn()
     : KParts::MainWindow( 0, "kdesvn" ),
       KBookmarkOwner()
 {
+    m_part = 0;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
     kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
@@ -124,7 +125,10 @@ kdesvn::kdesvn()
                 KShortcut(),m_part,SLOT(slotSshAdd()),actionCollection(),"kdesvn_ssh_add");
             tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
 
-            // and integrate the part's GUI with the shell's
+            /* enable tooltips in statusbar for menu */
+            actionCollection()->setHighlightingEnabled(true);
+            connectActionCollection(actionCollection());
+            // and integrate the part's GUI with the shells
             createGUI(m_part);
             connectActionCollection(m_part->actionCollection());
         }
@@ -139,13 +143,7 @@ kdesvn::kdesvn()
         // next time we enter the event loop...
         return;
     }
-
     setAutoSaveSettings();
-    actionCollection()->setHighlightingEnabled(true);
-    connect(actionCollection(), SIGNAL( actionStatusText( const QString & ) ),
-        statusBar(), SLOT( message( const QString & ) ) );
-    connect(actionCollection(), SIGNAL( clearStatusText() ),
-        statusBar(), SLOT( clear() ) );
 }
 
 void kdesvn::connectActionCollection( KActionCollection *coll )

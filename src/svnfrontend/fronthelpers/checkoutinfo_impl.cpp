@@ -20,6 +20,7 @@
 #include "checkoutinfo_impl.h"
 #include "rangeinput_impl.h"
 #include "src/svnqt/url.hpp"
+#include "helpers/ktranslateurl.h"
 #include <kurlrequester.h>
 #include <qlabel.h>
 #include <klineedit.h>
@@ -93,14 +94,8 @@ void CheckoutInfo_impl::setStartUrl(const QString&what)
         } else {
             uri.setProtocol("");
         }
-    } else if (uri.protocol()=="http") {
-        uri.setProtocol("ksvn+http");
-    } else if (uri.protocol()=="https") {
-        uri.setProtocol("ksvn+https");
-    } else if (uri.protocol()=="svn") {
-        uri.setProtocol("ksvn");
-    } else if (uri.protocol()=="svn+ssh") {
-        uri.setProtocol("ksvn+ssh");
+    } else {
+        uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
     }
     m_UrlEdit->setURL(uri.prettyURL());
 }

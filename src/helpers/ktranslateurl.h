@@ -35,6 +35,7 @@ public:
     static KURL translateSystemUrl(const KURL&);
     static bool parseURL(const KURL&,QString&name,QString&path);
     static KURL findSystemBase(const QString&name);
+    static QString makeKdeUrl(const QString&inUrl);
 };
 
 }

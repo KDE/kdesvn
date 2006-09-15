@@ -25,6 +25,7 @@
 #include "src/svnqt/status.hpp"
 #include "helpers/smart_pointer.h"
 #include "helpers/sub2qt.h"
+#include "helpers/ktranslateurl.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -129,15 +130,8 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
             QString ouri =m_Stat.entry().url();
             QString proto;
             QStringList l=QStringList::split(":",ouri);
-            if (ouri.startsWith("svn://")){
-                proto = "ksvn";
-            } else if (ouri.startsWith("svn+ssh://")){
-                proto = "ksvn+ssh";
-            } else {
-                proto = "ksvn+"+l[0];
-            }
+            proto = helpers::KTranslateUrl::makeKdeUrl(l[0]);
             m_kdename.setProtocol(proto);
-            l = QStringList::split("://",ouri);
             if (proto=="ksvn+file") {
                 if (l.size()>1) {
                     m_kdename.setPath(l[1]);

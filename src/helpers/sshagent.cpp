@@ -132,7 +132,6 @@ bool SshAgent::addSshIdentities(bool force)
     // TODO CL use timeout?
     proc.wait();
 
-    kdDebug() << "SshAgent::slotProcessExited(): added identities" << endl;
     m_addIdentitiesDone = proc.normalExit() && proc.exitStatus() == 0;
     return m_addIdentitiesDone;
 }
@@ -164,6 +163,7 @@ void SshAgent::slotProcessExited(KProcess*)
 
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
+    QStringList m_outputLines = QStringList::split("\n",m_Output);
 
     QStringList::Iterator it  = m_outputLines.begin();
     QStringList::Iterator end = m_outputLines.end();
@@ -214,7 +214,7 @@ void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
     Q_UNUSED(proc);
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_outputLines += QStringList::split("\n", output);
+    m_Output+=output;
 
     kdDebug() << "SshAgent::slotReceivedStdout(): output = " << output << endl;
 }
@@ -225,7 +225,7 @@ void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
     Q_UNUSED(proc);
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_outputLines += QStringList::split("\n", output);
+    m_Output+=output;
 
     kdDebug() << "SshAgent::slotReceivedStderr(): output = " << output << endl;
 }

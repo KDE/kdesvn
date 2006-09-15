@@ -52,7 +52,7 @@ private slots:
 private:
     bool startSshAgent();
 
-    QStringList    m_outputLines;
+    QString        m_Output;
 
     static bool    m_isRunning;
     static bool    m_isOurAgent;

@@ -26,7 +26,7 @@
 #ifndef _SVNCPP_EXCEPTION_H_
 #define _SVNCPP_EXCEPTION_H_
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 // subversion api
 #include "svn_client.h"
 #include <qstring.h>

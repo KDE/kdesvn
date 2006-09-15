@@ -17,11 +17,11 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "repositorydata.hpp"
-#include "svnqt_defines.hpp"
-#include "exception.hpp"
-#include "repositorylistener.hpp"
-#include "svnfilestream.hpp"
+#include "svnqt/repositorydata.hpp"
+#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/repositorylistener.hpp"
+#include "svnqt/svnfilestream.hpp"
 
 #include <svn_fs.h>
 #include <svn_path.h>

@@ -26,7 +26,7 @@
 #ifndef _SVNCPP_LOG_ENTRY_H_
 #define _SVNCPP_LOG_ENTRY_H_
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 //Qt
 #include <qglobal.h>

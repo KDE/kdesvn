@@ -58,21 +58,42 @@ SET(SOURCES
 
 FILE(GLOB HEADERS ../*.hpp)
 
-INCLUDE_DIRECTORIES( ../
+INCLUDE_DIRECTORIES( ../../
     ${QT_INCLUDES}
     ${APU_INCLUDE_DIR}
     ${APR_INCLUDE_DIR}
     ${SUBVERSION_INCLUDE_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR} )
+    ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
+SET(HEADERS ${HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt/svnqt_defines.hpp)
+INCLUDE_DIRECTORIES()
+
+MESSAGE(STATUS "Current source: ${CMAKE_CURRENT_SOURCE_DIR}")
+IF(QT4_FOUND)
+    MESSAGE(STATUS "Qt: ${QT_LIBRARY_DIR}")
+    MESSAGE(STATUS "Qt: ${QT_QTCORE_LIBRARY}")
+    SET(TOUTF8 "toUtf8")
+    SET(FROMUTF8 "fromUtf8")
+    SET(QLIST "QList")
+ELSE(QT4_FOUND)
+    IF(QT_FOUND)
+        SET(TOUTF8 "utf8")
+        SET(FROMUTF8 "fromUtf8")
+        SET(QLIST "QValueList")
+    ENDIF(QT_FOUND)
+ENDIF(QT4_FOUND)
+
+IF (HAVE_GCC_VISIBILITY)
+    SET(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
+    SET(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
+ENDIF (HAVE_GCC_VISIBILITY)
 
 CONFIGURE_FILE(
     "${CMAKE_CURRENT_SOURCE_DIR}/../svnqt_defines.hpp.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/svnqt/svnqt_defines.hpp"
     IMMEDIATE
     @ONLY)
-
-SET(HEADERS ${HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp)
-INCLUDE_DIRECTORIES()
 
 IF (WIN32)
     ADD_LIBRARY(svnqt-qt4 STATIC ${SOURCES} )

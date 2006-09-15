@@ -26,10 +26,11 @@
 #ifndef _SVNCPP_DIRENT_HPP_
 #define _SVNCPP_DIRENT_HPP_
 
+#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/lock_entry.hpp"
+
 // subversion api
 #include "svn_client.h"
-#include "lock_entry.hpp"
-#include "svnqt_defines.hpp"
 
 #include <qstring.h>
 

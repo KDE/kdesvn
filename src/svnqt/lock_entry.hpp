@@ -26,7 +26,7 @@
 #ifndef _SVNCPP_LOCK_ENTRY_H_
 #define _SVNCPP_LOCK_ENTRY_H_
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 #include <qstring.h>
 

@@ -26,7 +26,7 @@
 #ifndef _SVNCPP_TARGETS_HPP_
 #define _SVNCPP_TARGETS_HPP_
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 #include <qglobal.h>
 #if QT_VERSION < 0x040000

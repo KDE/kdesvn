@@ -27,7 +27,7 @@
 #define _SVNCPP_PATH_HPP_
 
 #include <qstring.h>
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 namespace svn
 {

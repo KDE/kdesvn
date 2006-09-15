@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 
-#include "contextdata.h"
+#include "contextdata.hpp"
 #include "context_listener.hpp"
 
 #include <svn_config.h>

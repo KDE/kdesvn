@@ -29,12 +29,12 @@
 #include "svn_wc.h"
 
 // svncpp
-#include "entry.hpp"
-#include "pool.hpp"
-#include "lock_entry.hpp"
-#include "dirent.hpp"
-#include "info_entry.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/entry.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/lock_entry.hpp"
+#include "svnqt/dirent.hpp"
+#include "svnqt/info_entry.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 namespace svn
 {

@@ -5,7 +5,7 @@
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 #include <qstring.h>
 
 namespace svn {

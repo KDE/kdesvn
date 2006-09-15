@@ -1,7 +1,7 @@
 #ifndef SVNSVNSTREAM_HPP
 #define SVNSVNSTREAM_HPP
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 #include <qstring.h>
 

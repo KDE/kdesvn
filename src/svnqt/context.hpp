@@ -26,7 +26,7 @@
 #ifndef _SVNCPP_CONTEXT_HPP_
 #define _SVNCPP_CONTEXT_HPP_
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 // qt
 #include <qstring.h>

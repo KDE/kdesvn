@@ -25,7 +25,7 @@
 
 // svncpp
 #include "status.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 //#include <assert.h>
 

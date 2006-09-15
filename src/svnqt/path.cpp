@@ -31,10 +31,10 @@
 #include "apr_file_io.h"
 
 // svncpp
-#include "path.hpp"
-#include "pool.hpp"
-#include "url.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/path.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/url.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 
 namespace svn

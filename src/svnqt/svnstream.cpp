@@ -17,10 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "svnstream.hpp"
-#include "svnqt_defines.hpp"
-#include "pool.hpp"
-#include "apr.hpp"
+#include "svnqt/svnstream.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/apr.hpp"
 
 // Subversion api
 #include "svn_client.h"

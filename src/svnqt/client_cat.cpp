@@ -32,12 +32,12 @@
 #include "svn_client.h"
 //#include "svn_io.h"
 
-#include "exception.hpp"
-#include "pool.hpp"
-#include "status.hpp"
-#include "svnqt_defines.hpp"
-#include "svnstream.hpp"
-#include "svnfilestream.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnstream.hpp"
+#include "svnqt/svnfilestream.hpp"
 
 namespace svn
 {

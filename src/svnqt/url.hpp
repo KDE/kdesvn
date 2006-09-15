@@ -26,7 +26,7 @@
 #ifndef _SVNCPP_URL_H_
 #define _SVNCPP_URL_H_
 
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 // qt
 #include <qglobal.h>

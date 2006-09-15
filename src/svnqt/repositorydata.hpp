@@ -20,10 +20,10 @@
 #ifndef SVNREPOSITORYDATA_H
 #define SVNREPOSITORYDATA_H
 
-#include "pool.hpp"
-#include "revision.hpp"
-#include "apr.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/apr.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 #include <qstring.h>
 

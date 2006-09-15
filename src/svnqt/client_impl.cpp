@@ -27,9 +27,9 @@
 #endif
 
 // svncpp
-#include "client_impl.hpp"
+#include "svnqt/client_impl.hpp"
 #include "svn_opt.h"
-#include "svnqt_defines.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 #include <svn_cmdline.h>
 

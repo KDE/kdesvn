@@ -1,6 +1,6 @@
-#include "info_entry.hpp"
-#include "svnqt_defines.hpp"
-#include "pool.hpp"
+#include "svnqt/info_entry.hpp"
+#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/pool.hpp"
 #include <svn_client.h>
 #include <svn_path.h>
 

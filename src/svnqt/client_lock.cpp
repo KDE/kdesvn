@@ -23,10 +23,10 @@
 // subversion api
 #include "svn_client.h"
 
-#include "exception.hpp"
-#include "pool.hpp"
-#include "targets.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/targets.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 namespace svn
 {

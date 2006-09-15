@@ -28,7 +28,7 @@
 
 
 // svncpp
-#include "client_impl.hpp"
+#include "svnqt/client_impl.hpp"
 
 // subversion api
 #include "svn_client.h"
@@ -36,9 +36,9 @@
 #include "svn_sorts.h"
 //#include "svn_utf.h"
 
-#include "dirent.hpp"
-#include "exception.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/dirent.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 static int
 compare_items_as_paths (const svn_sort__item_t *a, const svn_sort__item_t *b)

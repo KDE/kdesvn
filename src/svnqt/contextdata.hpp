@@ -17,13 +17,13 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SVNCONTEXTDATA_H
-#define SVNCONTEXTDATA_H
+#ifndef SVNCONTEXTDATA_HPP
+#define SVNCONTEXTDATA_HPP
 
-#include "pool.hpp"
-#include "apr.hpp"
-#include "commititem.hpp"
-#include "svnqt_defines.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/apr.hpp"
+#include "svnqt/commititem.hpp"
+#include "svnqt/svnqt_defines.hpp"
 
 #include <svn_client.h>
 #include <qstring.h>

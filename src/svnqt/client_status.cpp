@@ -28,7 +28,7 @@
 
 
 // svncpp
-#include "client_impl.hpp"
+#include "svnqt/client_impl.hpp"
 
 // Subversion api
 #include "svn_client.h"
@@ -36,15 +36,15 @@
 #include "svn_path.h"
 //#include "svn_utf.h"
 
-#include "dirent.hpp"
-#include "exception.hpp"
-#include "pool.hpp"
-#include "status.hpp"
-#include "targets.hpp"
-#include "info_entry.hpp"
-#include "url.hpp"
-#include "svnqt_defines.hpp"
-#include "context_listener.hpp"
+#include "svnqt/dirent.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/status.hpp"
+#include "svnqt/targets.hpp"
+#include "svnqt/info_entry.hpp"
+#include "svnqt/url.hpp"
+#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/context_listener.hpp"
 
 namespace svn
 {

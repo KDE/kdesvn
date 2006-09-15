@@ -36,7 +36,7 @@
 #include "apr.hpp"
 #include "context.hpp"
 #include "context_listener.hpp"
-#include "contextdata.h"
+#include "contextdata.hpp"
 
 namespace svn
 {

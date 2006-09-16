@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>315</width>
-            <height>154</height>
+            <height>180</height>
         </rect>
     </property>
     <property name="caption">
@@ -120,6 +120,26 @@
             </property>
             <property name="whatsThis" stdset="0">
                 <string>If this is set then the base layout (&lt;tt&gt;/trunk&lt;/tt&gt;,&lt;tt&gt;/branches&lt;/tt&gt; and &lt;tt&gt;/tags&lt;/tt&gt;) will created after opening the fresh repository.</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_svn13compat</cstring>
+            </property>
+            <property name="enabled">
+                <bool>false</bool>
+            </property>
+            <property name="text">
+                <string>Compatible to subversion prior 1.4</string>
+            </property>
+            <property name="checked">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Is created repository compatible to subverseion prior 1.4</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>If set, the repository created will compatible to subversion prior 1.4. This is only usefull when svnqt is running with subversion 1.4 or above.</string>
             </property>
         </widget>
     </vbox>

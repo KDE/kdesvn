@@ -26,11 +26,17 @@
 
 #include <qcheckbox.h>
 
-Createrepo_impl::Createrepo_impl(QWidget *parent, const char *name)
+Createrepo_impl::Createrepo_impl(bool enable_compat, QWidget *parent, const char *name)
     :CreateRepo_Dlg(parent, name)
 {
     m_DisableFsync->setEnabled(false);
     m_LogKeep->setEnabled(false);
+    if (!enable_compat){
+        m_svn13compat->setEnabled(false);
+        m_svn13compat->hide();
+    } else {
+        m_svn13compat->setEnabled(true);
+    }
 }
 
 void Createrepo_impl::fsTypeChanged(int which)
@@ -67,6 +73,11 @@ bool Createrepo_impl::keepLogs()
 bool Createrepo_impl::createMain()
 {
     return m_CreateMainDirs->isChecked();
+}
+
+bool Createrepo_impl::compat13()const
+{
+    return (m_svn13compat->isChecked()||!m_svn13compat->isEnabled());
 }
 
 #include "createrepo_impl.moc"

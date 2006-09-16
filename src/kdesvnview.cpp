@@ -29,6 +29,7 @@
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/repository.hpp"
+#include "src/svnqt/version_check.hpp"
 
 #include <qpainter.h>
 #include <qlayout.h>
@@ -208,7 +209,8 @@ void kdesvnView::slotCreateRepo()
         KDialogBase::Ok|KDialogBase::Cancel);
     if (!dlg) return;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
-    Createrepo_impl*ptr = new Createrepo_impl(Dialog1Layout);
+    bool compatneeded = svn::Version::version_major()>1||svn::Version::version_minor()>3;
+    Createrepo_impl*ptr = new Createrepo_impl(compatneeded,Dialog1Layout);
     dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size"));
     int i = dlg->exec();
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size",false);
@@ -225,7 +227,7 @@ void kdesvnView::slotCreateRepo()
     kdDebug()<<"Creating "<<path << endl;
     try {
         _rep->CreateOpen(path,ptr->fsType(),ptr->disableFsync(),
-            !ptr->keepLogs(),false);
+            !ptr->keepLogs(),ptr->compat13());
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
         kdDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;

@@ -34,8 +34,8 @@ make a subdir called "kdesvn-build" and change to it.
 
 Basic installation
 ==================
-Change to your builddirectory and call cmake with the path to kdesvn. E.g., 
-when your build-folder is "kdesvn-build" within source-tree, so change to it 
+Change to your builddirectory and call cmake with the path to kdesvn. E.g.,
+when your build-folder is "kdesvn-build" within source-tree, so change to it
 and type "cmake ../".
 
 Now your system get checked if it is able compiling kdesvn and cmake generates
@@ -49,6 +49,9 @@ or "MINSIZEREL"
 -DCMAKE_INSTALL_PREFIX=<prefix>
 Default to "/usr/local"
 
+-DSUBVERSION_INSTALL_PATH=<subversionlib-install-prefix>
+Where is subversion-lib installed. Default check in /usr and /usr/local
+
 After calling cmake just type
     make
 and build begins. When more output is wanted call
@@ -59,5 +62,5 @@ After make type "make install" and install begins.
 You may install to a temporary-root with
     make install DESTDIR=<temproot>
 
-If you want to uninstall kdesvn again type "make uninstall" from within the 
+If you want to uninstall kdesvn again type "make uninstall" from within the
 build directory.

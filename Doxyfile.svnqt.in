@@ -80,7 +80,8 @@ WARN_LOGFILE           = dox-svnqt.warn.log
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @CMAKE_SOURCE_DIR@/src/svnqt
+INPUT                  = @CMAKE_SOURCE_DIR@/src/svnqt \
+                         @SUBVERSION_INCLUDE_DIR@
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \

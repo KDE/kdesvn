@@ -104,7 +104,7 @@ namespace svn
     /**
      * @return returns the Client context
      */
-    virtual const Context *
+    virtual const ContextP
     getContext () const = 0;
 
     /**
@@ -115,7 +115,7 @@ namespace svn
      * @param context new context to use
      */
     virtual void
-    setContext (Context * context = NULL) = 0;
+    setContext (ContextP context) = 0;
 
     /**
      * get a real instance. Result must cleaned with delete.
@@ -123,7 +123,7 @@ namespace svn
      * \param subtype the wanted implementation - this moment only 0 allowed.
      * \return an instance of client or 0L if error.
      */
-     static Client*getobject(Context * context = 0,int subtype=0);
+     static Client*getobject(ContextP context,int subtype=0);
 
     /**
      * Enumerates all files/dirs at a given path.

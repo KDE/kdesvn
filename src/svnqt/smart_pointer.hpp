@@ -1,10 +1,12 @@
 // -*- Mode: C++; -*-
-#ifndef _smart_pointer_h
-#define _smart_pointer_h
+#ifndef _smart_pointer_hpp
+#define _smart_pointer_hpp
 
 #if defined  QT_THREAD_SUPPORT
 #include "qmutex.h"
 #endif
+
+#include "svnqt/svnqt_defines.hpp"
 
 /*!
  * \file smart_pointer.h
@@ -12,6 +14,9 @@
  * \author Rajko Albrecht
  *
  */
+
+namespace svn
+{
 
 //! simple reference counter class
 class ref_count {
@@ -119,4 +124,5 @@ public:
     bool operator! () { return (ptr == 0); }
 };
 
+} // namespace svn
 #endif

@@ -21,7 +21,7 @@
 #ifndef __SVN_ITEM_H
 #define __SVN_ITEM_H
 
-#include "helpers/smart_pointer.h"
+#include "src/svnqt/smart_pointer.hpp"
 #include "src/svnqt/status.hpp"
 #include <kmimetype.h>
 #include <qstring.h>
@@ -94,7 +94,7 @@ protected:
         NEEDLOCK = 9
     };
     color_type m_bgColor;
-    smart_pointer<SvnItem_p> p_Item;
+    svn::smart_pointer<SvnItem_p> p_Item;
     virtual SvnActions*getWrapper()const = 0;
 
     static QPixmap internalTransform(const QPixmap&,int size);

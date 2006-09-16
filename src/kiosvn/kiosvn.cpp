@@ -70,7 +70,7 @@ public:
 
     KioListener m_Listener;
     bool first_done;
-    svn::Context* m_CurrentContext;
+    svn::ContextP m_CurrentContext;
     svn::Client* m_Svnclient;
 
     svn::Revision urlToRev(const KURL&);
@@ -94,7 +94,6 @@ void KioSvnData::reInitClient()
     ag.querySshAgent();
 
     first_done = true;
-    delete m_CurrentContext;
     m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(&m_Listener);
     m_Svnclient->setContext(m_CurrentContext);
@@ -103,7 +102,6 @@ void KioSvnData::reInitClient()
 KioSvnData::~KioSvnData()
 {
     delete m_Svnclient;
-    delete m_CurrentContext;
 }
 
 svn::Revision KioSvnData::urlToRev(const KURL&url)

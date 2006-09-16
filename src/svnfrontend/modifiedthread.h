@@ -25,8 +25,8 @@ public:
 protected:
     QMutex mutex;
     svn::Client* m_Svnclient;
-    svn::Context* m_CurrentContext;
-    smart_pointer<ThreadContextListener> m_SvnContext;
+    svn::ContextP m_CurrentContext;
+    svn::smart_pointer<ThreadContextListener> m_SvnContext;
     QObject*m_Parent;
     QString m_what;
     bool m_updates;

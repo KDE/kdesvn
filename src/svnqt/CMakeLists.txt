@@ -54,6 +54,7 @@ SET(INST_HEADERS
     repository.hpp
     repositorylistener.hpp
     revision.hpp
+    smart_pointer.hpp
     status.hpp
     svnfilestream.hpp
     svnstream.hpp
@@ -100,9 +101,9 @@ ELSE(NOT WIN32)
 ENDIF(NOT WIN32)
 
 #for a libtool like .la file
-SET(LIBLA_CURRENT 5)
-SET(LIBLA_AGE 3)
+SET(LIBLA_CURRENT 3)
 SET(LIBLA_REVISION 0)
+SET(LIBLA_AGE 0)
 
 MATH(EXPR LIB_MAJOR '${LIBLA_CURRENT}-${LIBLA_AGE}')
 SET(LIB_MINOR ${LIBLA_AGE})

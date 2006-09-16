@@ -156,7 +156,7 @@ namespace svn
   static svn_error_t * InfoEntryFunc(void*baton,
                             const char*path,
                             const svn_info_t*info,
-                            apr_pool_t *pool)
+                            apr_pool_t *)
   {
     StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
     if (seb->m_Context) {
@@ -255,7 +255,7 @@ namespace svn
   }
 
   static Status
-  infoEntryToStatus(const QString&path,const InfoEntry&infoEntry)
+  infoEntryToStatus(const QString&,const InfoEntry&infoEntry)
   {
     return Status(infoEntry.url(),infoEntry);
   }
@@ -264,11 +264,11 @@ namespace svn
   remoteStatus (Client * client,
                 const QString& path,
                 const bool descend,
-                const bool get_all,
-                const bool update,
-                const bool no_ignore,
+                const bool ,
+                const bool ,
+                const bool ,
                 const Revision revision,
-                Context * context,
+                Context * ,
                 bool detailed_remote)
   {
     DirEntries dirEntries = client->list(path, revision, revision, descend,detailed_remote);
@@ -277,8 +277,6 @@ namespace svn
     StatusEntries entries;
     QString url = path;
     url+=QString::FROMUTF8("/");
-    bool _det = detailed_remote;
-
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
     {
@@ -356,7 +354,7 @@ namespace svn
   };
 
   static Status
-  remoteSingleStatus (Client * client, const QString& path,const Revision revision, Context * context)
+  remoteSingleStatus (Client * client, const QString& path,const Revision revision, Context * )
   {
     InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
     if (infoEntries.size () == 0)

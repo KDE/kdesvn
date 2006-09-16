@@ -23,7 +23,6 @@ CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool
 
 CheckModifiedThread::~CheckModifiedThread()
 {
-    delete m_CurrentContext;
     delete m_Svnclient;
 }
 

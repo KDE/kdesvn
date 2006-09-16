@@ -81,7 +81,7 @@ public:
 
 protected:
     svn::Client* m_Svnclient;
-    svn::Context* m_CurrentContext;
+    svn::ContextP m_CurrentContext;
 };
 
 IListener::IListener(kdesvnd_dcop*p)
@@ -96,7 +96,6 @@ IListener::IListener(kdesvnd_dcop*p)
 
 IListener::~IListener()
 {
-    delete m_CurrentContext;
 }
 
 kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)

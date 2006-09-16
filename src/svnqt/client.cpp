@@ -43,7 +43,7 @@ namespace svn
   {
   }
 
-  Client*Client::getobject(Context * context,int subtype)
+  Client*Client::getobject(ContextP context,int subtype)
   {
     switch(subtype) {
       case 0:

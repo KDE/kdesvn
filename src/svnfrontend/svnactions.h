@@ -22,7 +22,7 @@
 
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
-#include "helpers/smart_pointer.h"
+#include "src/svnqt/smart_pointer.hpp"
 
 #include <kurl.h>
 
@@ -150,7 +150,7 @@ public:
     virtual bool makeCleanup(const QString&);
 
 protected:
-    smart_pointer<SvnActionsData> m_Data;
+    svn::smart_pointer<SvnActionsData> m_Data;
 
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);

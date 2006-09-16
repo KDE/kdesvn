@@ -35,7 +35,8 @@
 #include "svn_client.h"
 
 // svncpp
-#include "pool.hpp"
+#include "svnqt/pool.hpp"
+#include "svnqt/smart_pointer.hpp"
 
 
 namespace svn
@@ -49,7 +50,7 @@ namespace svn
    * and replace the old notification and baton
    * stuff
    */
-  class SVNQT_EXPORT Context
+  class SVNQT_EXPORT Context:public ref_count
   {
   public:
     /**
@@ -158,6 +159,8 @@ namespace svn
      */
     Context & operator = (const Context &);
   };
+
+  typedef svn::smart_pointer<svn::Context> ContextP;
 }
 
 #endif

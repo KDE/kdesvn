@@ -79,7 +79,7 @@
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
 
-class SvnActionsData:public ref_count
+class SvnActionsData:public svn::ref_count
 {
 public:
     SvnActionsData():ref_count()
@@ -91,8 +91,6 @@ public:
 
     virtual ~SvnActionsData()
     {
-        delete m_CurrentContext;
-        m_CurrentContext = 0;
         QMap<KProcess*,QString>::iterator it;
         for (it=m_tempfilelist.begin();it!=m_tempfilelist.end();++it) {
             ::unlink((*it).ascii());
@@ -103,8 +101,8 @@ public:
 
     ItemDisplay* m_ParentList;
 
-    smart_pointer<CContextListener> m_SvnContext;
-    svn::Context* m_CurrentContext;
+    svn::smart_pointer<CContextListener> m_SvnContext;
+    svn::ContextP m_CurrentContext;
     svn::Client*m_Svnclient;
 
     helpers::itemCache m_UpdateCache;
@@ -153,7 +151,6 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 
 void SvnActions::reInitClient()
 {
-    delete m_Data->m_CurrentContext;
     m_Data->m_CurrentContext = new svn::Context();
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContext);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);

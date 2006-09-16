@@ -22,8 +22,8 @@
 #include "svnactions.h"
 #include "kdesvn_part.h"
 #include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/status.hpp"
-#include "helpers/smart_pointer.h"
+#include "svnqt/status.hpp"
+#include "svnqt/smart_pointer.hpp"
 #include "helpers/sub2qt.h"
 #include "helpers/ktranslateurl.h"
 
@@ -41,7 +41,7 @@
 #include <qpainter.h>
 #include <qbitmap.h>
 
-class SvnItem_p:public ref_count
+class SvnItem_p:public svn::ref_count
 {
     friend class SvnItem;
 public:

@@ -53,14 +53,14 @@ namespace svn
     /**
      * Initializes the primary memory pool.
      */
-    Client_impl(Context * context = 0);
+    Client_impl(ContextP context);
 
     virtual ~Client_impl();
 
     /**
      * @return returns the Client context
      */
-    virtual const Context *
+    virtual const ContextP
     getContext () const;
 
     /**
@@ -71,7 +71,7 @@ namespace svn
      * @param context new context to use
      */
     virtual void
-    setContext (Context * context = NULL);
+    setContext (ContextP context);
 
 
     /**
@@ -675,7 +675,7 @@ namespace svn
     };
 
   private:
-    Context * m_context;
+    ContextP m_context;
 
     /**
      * disallow assignment operator

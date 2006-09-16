@@ -4,40 +4,38 @@ SET(SUBVERSION_ALL_LIBS)
 #search libraries for UNIX
 IF (UNIX)
 
+  MACRO(FIND_SUB_LIB targetvar libname)
+    IF (SUBVERSION_INSTALL_DIR)
+        FIND_LIBRARY(${targetvar} ${libname}
+            PATHS
+            ${SUBVERSION_INSTALL_DIR}/lib
+            NO_DEFAULT_PATH
+        )
+    ENDIF(SUBVERSION_INSTALL_DIR)
+    FIND_LIBRARY(${targetvar} ${libname}
+        PATHS
+        /usr/lib
+        /usr/local/lib
+        )
+  ENDMACRO(FIND_SUB_LIB)
+
+  IF (SUBVERSION_INSTALL_DIR)
+    FIND_PATH(SUBVERSION_INCLUDE_DIR svn_client.h
+        PATHS
+        ${SUBVERSION_INSTALL_DIR}/include/subversion-1
+        NO_DEFAULT_PATH
+    )
+  ENDIF (SUBVERSION_INSTALL_DIR)
   FIND_PATH(SUBVERSION_INCLUDE_DIR svn_client.h
-    /usr/include/subversion-1
-    /usr/local/include/subversion-1
-  )
+        /usr/include/subversion-1
+        /usr/local/include/subversion-1)
 
-  FIND_LIBRARY(SUBVERSION_CLIENTLIB svn_client-1
-    /usr/lib
-    /usr/local/lib
-  )
-
-  FIND_LIBRARY(SUBVERSION_REPOSITORYLIB svn_repos-1
-    /usr/lib
-    /usr/local/lib
-  )
-
-  FIND_LIBRARY(SUBVERSION_WCLIB svn_wc-1
-    /usr/lib
-    /usr/local/lib
-  )
-
-  FIND_LIBRARY(SUBVERSION_FSLIB svn_fs-1
-    /usr/lib
-    /usr/local/lib
-  )
-
-  FIND_LIBRARY(SUBVERSION_SUBRLIB svn_subr-1
-    /usr/lib
-    /usr/local/lib
-  )
-
-  FIND_LIBRARY(SUBVERSION_RALIB svn_ra-1
-   /usr/lib
-   /usr/local/lib
-  )
+  FIND_SUB_LIB(SUBVERSION_CLIENTLIB svn_client-1)
+  FIND_SUB_LIB(SUBVERSION_REPOSITORYLIB svn_repos-1)
+  FIND_SUB_LIB(SUBVERSION_WCLIB svn_wc-1)
+  FIND_SUB_LIB(SUBVERSION_FSLIB svn_fs-1)
+  FIND_SUB_LIB(SUBVERSION_SUBRLIB svn_subr-1)
+  FIND_SUB_LIB(SUBVERSION_RALIB svn_ra-1)
 
   FIND_PROGRAM(APR_CONFIG NAMES apr-config apr-1-config
     PATHS
@@ -72,7 +70,7 @@ ENDIF (UNIX)
 IF (WIN32)
 
   # search for pathes
-  FIND_PATH (SUBVERSION_INCLUDE_DIR 
+  FIND_PATH (SUBVERSION_INCLUDE_DIR
     svn_client.h
     "$ENV{ProgramFiles}/Subversion/include"
   )
@@ -113,11 +111,11 @@ IF (WIN32)
   FIND_LIBRARY(DB43_LIB libdb43
     "$ENV{ProgramFiles}/Subversion/lib"
   )
-  
+
   FIND_LIBRARY(SUBVERSION_CLIENTLIB libsvn_client-1
     "$ENV{ProgramFiles}/Subversion/lib"
   )
-  
+
   FIND_LIBRARY(SUBVERSION_DELTALIB libsvn_delta-1
     "$ENV{ProgramFiles}/Subversion/lib"
   )
@@ -157,7 +155,7 @@ IF (WIN32)
   FIND_LIBRARY(SUBVERSION_REPOSITORYLIB libsvn_repos-1
     "$ENV{ProgramFiles}/Subversion/lib"
   )
-   
+
   FIND_LIBRARY(SUBVERSION_SUBRLIB libsvn_subr-1
     "$ENV{ProgramFiles}/Subversion/lib"
   )
@@ -279,7 +277,7 @@ IF (WIN32)
     MESSAGE(STATUS "Found subversion intl3 lib: ${SUBVERSION_INTL3LIB}")
     SET(SUBVERSION_ALL_LIBS ${SUBVERSION_ALL_LIBS} ${SUBVERSION_INTL3LIB})
   endif(NOT SUBVERSION_INTL3LIB)
-  
+
 ENDIF (WIN32)
 
 

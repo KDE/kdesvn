@@ -47,9 +47,9 @@ void Repository::Open(const QString&name) throw (ClientException)
     }
 }
 
-void Repository::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff) throw (ClientException)
+void Repository::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _pre_1_4_compat) throw (ClientException)
 {
-    svn_error_t * error = m_Data->CreateOpen(path,fstype,_bdbnosync,_bdbautologremove,_nosvn1diff);
+    svn_error_t * error = m_Data->CreateOpen(path,fstype,_bdbnosync,_bdbautologremove,_pre_1_4_compat);
     if (error!=0) {
         throw ClientException (error);
     }

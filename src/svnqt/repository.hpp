@@ -67,10 +67,10 @@ public:
      * \param fstype type of repository ("fsfs" or "bdb"). If wrong is set fsfs is the default.
      * \param _bdbnosync disable fsync at transaction commit [Berkeley DB]
      * \param _bdbautologremove enable automatic log file removal [Berkeley DB]
-     * \param nosvn1diff Don't allow svndiff1 to be used in the on-disk storage (for subverion 1.4 or newer only used)
+     * \param _pre_1_4_compat Create repository compatibel to version earlier than 1.4 (only used with subversion 1.4)
      */
     void CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool nosvn1diff=false) throw (ClientException);
+        bool _bdbautologremove = true, bool _pre_1_4_compat=false) throw (ClientException);
     //! dump content of repository to a file
     /*!
         The repository must opend before. Progress message go trough the assigned svn::repository::RepositoryListener object.

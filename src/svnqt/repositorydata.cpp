@@ -126,7 +126,8 @@ svn_error_t * RepositoryData::Open(const QString&path)
 /*!
     \fn svn::RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false, bool _bdbautologremove = true, bool nosvn1diff=false)
  */
-svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove, bool _nosvn1diff)
+svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove,
+    bool _pre_1_4_compat)
 {
     Close();
     const char* _type;
@@ -153,9 +154,9 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
                  _type);
 
     /// @todo comes with 1.4!
-    if (_nosvn1diff) {
+    if (_pre_1_4_compat) {
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
-        apr_hash_set(fs_config, SVN_FS_CONFIG_NO_SVNDIFF1,
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_4_COMPATIBLE,
             APR_HASH_KEY_STRING,"1");
 #endif
     }

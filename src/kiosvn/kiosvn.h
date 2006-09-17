@@ -20,6 +20,8 @@
 #ifndef KIOSVN_H
 #define KIOSVN_H
 
+#include "kiobytestream.h"
+
 #include <qstring.h>
 #include <qcstring.h>
 #include <kurl.h>
@@ -36,7 +38,7 @@ class KioSvnData;
 /**
 @author Rajko Albrecht
 */
-class kio_svnProtocol : public KIO::SlaveBase
+class kio_svnProtocol : public KIO::SlaveBase,public StreamWrittenCb
 {
 public:
     kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket);
@@ -79,6 +81,12 @@ public:
         /* KURL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive */
         SVN_DIFF=13
     };
+
+    void contextProgress(long long int current, long long int max);
+    virtual void streamWritten(const KIO::filesize_t current);
+    virtual void streamPushData(QByteArray);
+    virtual void streamSendMime(KMimeMagicResult*mt);
+    virtual void streamTotalSizeNull();
 
 protected:
     virtual void commit(const KURL::List&);

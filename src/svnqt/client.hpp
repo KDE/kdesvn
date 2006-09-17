@@ -37,6 +37,7 @@
 #endif
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnstream.hpp"
 
 // qt
 #include <qglobal.h>
@@ -254,6 +255,21 @@ namespace svn
     cat (const Path & path,
           const Revision & revision,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+    /**
+     * Retrieves the contents for a specific @a revision of
+     * a @a path at @a peg_revision
+     *
+     * @param buffer Stream to store content direct
+     * @param path path of file or directory
+     * @param peg_revision revision to base the URL
+     * @param revision revision to retrieve
+     * @exception ClientException
+     */
+    virtual void
+    cat(svn::stream::SvnStream&buffer,
+            const Path & path,
+            const Revision & revision,
+            const Revision & peg_revision) throw (ClientException)=0;
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision

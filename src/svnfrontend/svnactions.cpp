@@ -2044,8 +2044,12 @@ bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
     try {
         e = m_Data->m_Svnclient->info(cleanpath,false,rev,peg);
     } catch (svn::ClientException e) {
-        kdDebug()<< e.msg()<<endl;
-        return false;
+        kdDebug()<< e.msg()<< " " << endl;
+        if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
+        {
+            return false;
+        }
+        return true;
     }
     _baseUri=e[0].url();
     return true;

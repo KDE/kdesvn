@@ -40,12 +40,12 @@ namespace svn
     apr_status_t apr_err;
 
     Data (const char * msg)
-      : message(QString::FROMUTF8(msg))
+      : message(QString::FROMUTF8(msg)),apr_err(0)
     {
     }
 
     Data (const QString& msg)
-      : message(msg)
+      : message(msg),apr_err(0)
     {
     }
 
@@ -149,6 +149,7 @@ namespace svn
   ClientException::ClientException (const ClientException & src) throw ()
     : Exception (src.msg())
   {
+    m->apr_err = src.apr_err();
   }
 }
 /* -----------------------------------------------------------------

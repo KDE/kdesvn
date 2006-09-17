@@ -55,6 +55,17 @@ namespace svn
   }
 
   void
+  Client_impl::cat(svn::stream::SvnStream&buffer,
+                const Path & path,
+                const Revision & revision,
+                const Revision & peg_revision) throw (ClientException)
+  {
+    svn_error_t * error = internal_cat(path,revision,peg_revision,buffer);
+    if (error != 0)
+      throw ClientException (error);
+  }
+
+  void
   Client_impl::get (const Path & path,
         const QString  & target,
         const Revision & revision,

@@ -151,9 +151,9 @@ void ThreadContextListener::contextProgress(long long int current, long long int
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     QString msg;
     if (max>-1) {
-        msg = i18n("Transfered %1 of %2 byte(s)").arg(current).arg(max);
+        msg = i18n("Transferred %1 of %2 byte(s)").arg(current).arg(max);
     } else {
-        msg = i18n("Transfered %1 byte(s)").arg(current);
+        msg = i18n("Transferred %1 byte(s)").arg(current);
     }
     _notify->msg = msg;
     ev->setData((void*)_notify);

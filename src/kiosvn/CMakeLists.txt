@@ -1,5 +1,5 @@
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
-SET(kiosvn_src kiosvn.cpp kiolistener.cpp)
+SET(kiosvn_src kiosvn.cpp kiolistener.cpp kiobytestream.cpp)
 
 KDE3_ADD_KPART(kio_ksvn ${kiosvn_src})
 

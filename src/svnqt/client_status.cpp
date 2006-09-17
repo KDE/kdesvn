@@ -483,6 +483,8 @@ namespace svn
                       rec,
                       *m_context,    //client ctx
                       pool);
+    if (error != NULL)
+      throw ClientException (error);
 
     apr_array_header_t *statusarray =
       svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,

@@ -436,6 +436,9 @@ bool KioListener::contextGetLogin (const QString & realm,
 /*!
     \fn KioListener::contextProgress(long long int current, long long int max)
  */
-void KioListener::contextProgress(long long int , long long int )
+void KioListener::contextProgress(long long int cur, long long int max)
 {
+    if (par) {
+        par->contextProgress(cur,max);
+    }
 }

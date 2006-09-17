@@ -499,7 +499,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
 
-    if (isWorkingCopy()) {
+    if (result && isWorkingCopy()) {
         m_SvnWrapper->createModifiedCache(baseUri());
         if (Kdesvnsettings::start_updates_check_on_open()) {
              slotCheckUpdates();

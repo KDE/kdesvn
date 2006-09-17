@@ -169,7 +169,7 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
             m_NetBar->setTotalSteps(max);
         }
         if (max == -1) {
-            m_NetBar->setFormat(i18n("%v bytes transfered."));
+            m_NetBar->setFormat(i18n("%v bytes transferred."));
             m_NetBar->setTotalSteps(current+1);
         }
         m_NetBar->setValue(current);

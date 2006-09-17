@@ -70,6 +70,7 @@ public:
 
     KioListener m_Listener;
     bool first_done;
+    bool dispProgress;
     svn::ContextP m_CurrentContext;
     svn::Client* m_Svnclient;
 
@@ -82,6 +83,7 @@ KioSvnData::KioSvnData(kio_svnProtocol*par)
 {
     m_Svnclient=svn::Client::getobject(0,0);
     m_CurrentContext = 0;
+    dispProgress = false;
     reInitClient();
 }
 
@@ -126,7 +128,7 @@ svn::Revision KioSvnData::urlToRev(const KURL&url)
 }
 
 kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket)
-    : SlaveBase("kio_ksvn", pool_socket, app_socket)
+    : SlaveBase("kio_ksvn", pool_socket, app_socket),StreamWrittenCb()
 {
     m_pData=new KioSvnData(this);
     KGlobal::locale()->insertCatalogue("kdesvn");
@@ -252,9 +254,9 @@ void kio_svnProtocol::get(const KURL& url)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    QByteArray content;
+    KioByteStream dstream(this,url.filename());
     try {
-        content = m_pData->m_Svnclient->cat(makeSvnUrl(url),rev,rev);
+        m_pData->m_Svnclient->cat(dstream,makeSvnUrl(url),rev,rev);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
@@ -262,12 +264,7 @@ void kio_svnProtocol::get(const KURL& url)
         finished();
         return;
     }
-    KMimeType::Ptr mt = KMimeType::findByContent(content);
-    kdDebug(0) << "KMimeType returned : " << mt->name() << endl;
-    mimeType( mt->name() );
-    totalSize(content.size());
-    //send data
-    data(content);
+    totalSize(dstream.written());
     data(QByteArray()); // empty array means we're done sending the data
     finished();
 }
@@ -275,7 +272,6 @@ void kio_svnProtocol::get(const KURL& url)
 void kio_svnProtocol::mkdir(const KURL &url, int)
 {
     kdDebug()<<"kio_svn::mkdir "<< url << endl;
-    //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -306,23 +302,28 @@ void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 
 void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool overwrite)
 {
+    Q_UNUSED(permissions);
+    Q_UNUSED(overwrite);
     kdDebug()<<"kio_svn::copy "<< src << " to " << dest <<  endl;
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
     QString msg;
+    m_pData->dispProgress=true;
     try {
         m_pData->m_Svnclient->copy(makeSvnUrl(src),rev,makeSvnUrl(dest));
     }catch (svn::ClientException e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
+    m_pData->dispProgress=false;
     kdDebug()<<"kio_svn::copy finished" <<  endl;
     finished();
 }
 
 void kio_svnProtocol::del(const KURL&src,bool isfile)
 {
+    Q_UNUSED(isfile);
     kdDebug()<<"kio_svn::del "<< src << endl;
     //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(src);
@@ -733,4 +734,32 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "diffresult",stream.readLine());
         m_pData->m_Listener.incCounter();
     }
+}
+void kio_svnProtocol::streamWritten(const KIO::filesize_t current)
+{
+    processedSize(current);
+}
+
+void kio_svnProtocol::streamSendMime(KMimeMagicResult* mt)
+{
+    if (mt) {
+        mimeType(mt->mimeType());
+    }
+}
+
+void kio_svnProtocol::streamPushData(QByteArray array)
+{
+    data(array);
+}
+
+void kio_svnProtocol::contextProgress(long long int current, long long int)
+{
+    if (m_pData->dispProgress) {
+        processedSize(current);
+    }
+}
+
+void kio_svnProtocol::streamTotalSizeNull()
+{
+    totalSize(0);
 }

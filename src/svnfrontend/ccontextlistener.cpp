@@ -307,4 +307,12 @@ QString CContextListener::translate(const QString&what)
     return i18n(what);
 }
 
+/*!
+    \fn CContextListener::contextProgress(long long int current, long long int max)
+ */
+void CContextListener::contextProgress(long long int current, long long int max)
+{
+    emit netProgress(current,max);
+}
+
 #include "ccontextlistener.moc"

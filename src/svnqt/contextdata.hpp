@@ -26,6 +26,9 @@
 #include "svnqt/svnqt_defines.hpp"
 
 #include <svn_client.h>
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#include <svn_auth.h>
+#endif
 #include <qstring.h>
 
 namespace svn {
@@ -209,6 +212,11 @@ protected:
             const char *realm,
             svn_boolean_t maySave,
             apr_pool_t *pool);
+
+    /**
+     * @see svn_client_ctx_t::progress_func
+     */
+    static void onProgress(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *pool);
 
     svn_error_t *
         generate_cancel_error();

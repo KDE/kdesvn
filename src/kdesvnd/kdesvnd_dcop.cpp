@@ -77,6 +77,7 @@ public:
     virtual bool contextSslClientCertPrompt (QString & certFile);
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                                const QString & realm, bool & maySave);
+    virtual void contextProgress(long long int current, long long int max);
     /* context listener virtuals end */
 
 protected:
@@ -391,4 +392,8 @@ bool IListener::contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave)
 {
     return false;
+}
+
+void IListener::contextProgress(long long int, long long int)
+{
 }

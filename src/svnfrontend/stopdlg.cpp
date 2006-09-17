@@ -53,8 +53,10 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     m_ProgressBar=new KProgress(15,mainWidget);
     m_ProgressBar->setCenterIndicator (false);
     m_ProgressBar->setTextEnabled(false);
-
     layout->addWidget(m_ProgressBar);
+    m_NetBar = new KProgress(15,mainWidget);
+    layout->addWidget(m_NetBar);
+
     mWait = false;
     m_LogWindow = 0;
 
@@ -98,7 +100,9 @@ void StopDlg::slotAutoShow()
         return;
     }
     m_ProgressBar->hide();
+    m_NetBar->hide();
     m_BarShown=false;
+    m_netBarShown=false;
     show();
     kapp->processEvents();
     mShown = true;
@@ -149,6 +153,27 @@ void StopDlg::slotExtraMessage(const QString&msg)
     }
     m_LogWindow->append(msg);
     kapp->processEvents();
+}
+
+void StopDlg::slotNetProgres(long long int current, long long int max)
+{
+    if (m_StopTick.elapsed()>500||m_BarShown) {
+        if (!m_netBarShown) {
+            m_NetBar->show();
+            m_netBarShown=true;
+        }
+        if (max > -1 && max != m_NetBar->totalSteps()) {
+            m_NetBar->setFormat(i18n("%v bytes of %m byte"));
+            m_NetBar->setTotalSteps(max);
+        }
+        if (max == -1) {
+            m_NetBar->setFormat(i18n("%v bytes received."));
+            m_NetBar->setTotalSteps(current+1);
+        }
+        m_NetBar->setValue(current);
+        m_StopTick.restart();
+        kapp->processEvents();
+    }
 }
 
 #include "stopdlg.moc"

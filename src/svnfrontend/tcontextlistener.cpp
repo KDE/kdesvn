@@ -27,6 +27,7 @@
 
 #include <kapplication.h>
 #include <kdebug.h>
+#include <klocale.h>
 
 ThreadContextListener::ThreadContextListener(QObject* parent, const char* name)
     : CContextListener(parent, name)
@@ -132,6 +133,26 @@ void ThreadContextListener::contextNotify(const QString&aMsg)
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     _notify->msg = aMsg;
+    ev->setData((void*)_notify);
+    kapp->postEvent(this,ev);
+}
+
+/*!
+    \fn ThreadContextListener::contextProgress(long long int current, long long int max)
+ */
+void ThreadContextListener::contextProgress(long long int current, long long int max)
+{
+    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
+    // receiver must delete data!
+    ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
+    QString msg;
+    if (max>-1) {
+        msg = i18n("Received %1 of %2 byte").arg(current).arg(max);
+    } else {
+        msg = i18n("Received %1 byte").arg(current);
+    }
+    _notify->msg = msg;
     ev->setData((void*)_notify);
     kapp->postEvent(this,ev);
 }

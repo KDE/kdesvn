@@ -431,3 +431,11 @@ bool KioListener::contextGetLogin (const QString & realm,
     maySave = lt[2]=="true";
     return true;
 }
+
+
+/*!
+    \fn KioListener::contextProgress(long long int current, long long int max)
+ */
+void KioListener::contextProgress(long long int , long long int )
+{
+}

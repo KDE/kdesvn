@@ -70,6 +70,7 @@ public:
     static QString NotifyState(svn_wc_notify_state_t);
 
     static QStringList failure2Strings(apr_uint32_t acceptedFailures);
+    virtual void contextProgress(long long int current, long long int max);
 
 public slots:
     virtual void setCanceled(bool);
@@ -78,6 +79,7 @@ signals:
     void sendNotify(const QString&);
     void tickProgress();
     void waitShow(bool);
+    void netProgress(long long int, long long int);
 
 protected:
     static const int smax_actionstring;

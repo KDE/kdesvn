@@ -61,6 +61,7 @@ public:
     /* context listener virtuals end */
     unsigned int counter()const{return m_notifyCounter;}
     void incCounter(){++m_notifyCounter;}
+    virtual void contextProgress(long long int current, long long int max);
 private:
     kio_svnProtocol *par;
 protected:

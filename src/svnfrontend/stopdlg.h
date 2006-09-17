@@ -54,7 +54,9 @@ protected:
     bool mShown,mWait;
     QLabel*mLabel;
     KProgress*m_ProgressBar;
+    KProgress*m_NetBar;
     bool m_BarShown;
+    bool m_netBarShown;
     QTime m_StopTick;
     KTextBrowser*m_LogWindow;
     QVBoxLayout*layout;
@@ -70,6 +72,7 @@ public slots:
 protected slots:
     virtual void slotAutoShow();
     virtual void slotCancel();
+    virtual void slotNetProgres(long long int, long long int);
 signals:
     void sigCancel(bool how);
 };

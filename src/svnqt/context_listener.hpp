@@ -192,6 +192,9 @@ namespace svn
                                   const QString & realm,
                                   bool & maySave) = 0;
 
+    virtual void
+    contextProgress(long long int current, long long int max) = 0;
+
     /**
      * try to translate a text. In current implementation does
      * nothing than returning the origin but may used to get an

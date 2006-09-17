@@ -48,6 +48,7 @@ public:
     virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t& acceptedFailures);
     virtual void contextNotify(const QString&aMsg);
     virtual void sendTick();
+    virtual void contextProgress(long long int current, long long int max);
 
 protected:
     virtual void event_contextGetLogin(void*_data);

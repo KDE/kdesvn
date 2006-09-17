@@ -30,13 +30,14 @@ ContextData::ContextData(const QString & configDir_)
     : listener (0), logIsSet (false),
         m_promptCounter (0), m_ConfigDir(configDir_)
 {
-      const char * c_configDir = 0;
-      if( m_ConfigDir.length () > 0 )
-          c_configDir = m_ConfigDir.TOUTF8();
+    const char * c_configDir = 0;
+    if( m_ConfigDir.length () > 0 )
+    {
+        c_configDir = m_ConfigDir.TOUTF8();
+    }
 
-      // make sure the configuration directory exists
-      svn_config_ensure (c_configDir, pool);
-
+    // make sure the configuration directory exists
+    svn_config_ensure (c_configDir, pool);
 
       // intialize authentication providers
       // * simple
@@ -50,57 +51,78 @@ ContextData::ContextData(const QString & configDir_)
       // ===================
       // 8 providers
 
-      apr_array_header_t *providers =
-        apr_array_make (pool, 8,
-                        sizeof (svn_auth_provider_object_t *));
-      svn_auth_provider_object_t *provider;
+    apr_array_header_t *providers =
+        apr_array_make (pool, 8, sizeof (svn_auth_provider_object_t *));
+    svn_auth_provider_object_t *provider;
 
-      svn_client_get_simple_provider (
-        &provider,
-        pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_simple_provider
+#else
+    svn_client_get_simple_provider
+#endif
+    (&provider, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      svn_client_get_username_provider (
-        &provider,
-        pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_username_provider
+#else
+    svn_client_get_username_provider
+#endif
+    (&provider,pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      svn_client_get_simple_prompt_provider (
-        &provider,
-        onSimplePrompt,
-        this,
-        100000000, // not very nice. should be infinite...
-        pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+      svn_auth_get_simple_prompt_provider
+#else
+      svn_client_get_simple_prompt_provider
+#endif
+    /* not very nice. should be infinite... */
+    (&provider,onSimplePrompt,this,100000000,pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      // add ssl providers
+    // add ssl providers
 
-      // file first then prompt providers
-      svn_client_get_ssl_server_trust_file_provider (&provider, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+    // file first then prompt providers
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_ssl_server_trust_file_provider
+#else
+    svn_client_get_ssl_server_trust_file_provider
+#endif
+    (&provider, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      svn_client_get_ssl_client_cert_file_provider (&provider, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_ssl_client_cert_file_provider
+#else
+    svn_client_get_ssl_client_cert_file_provider
+#endif
+    (&provider, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      svn_client_get_ssl_client_cert_pw_file_provider (&provider, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_ssl_client_cert_pw_file_provider
+#else
+    svn_client_get_ssl_client_cert_pw_file_provider
+#endif
+    (&provider, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      svn_client_get_ssl_server_trust_prompt_provider (
-        &provider, onSslServerTrustPrompt, this, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_ssl_server_trust_prompt_provider
+#else
+    svn_client_get_ssl_server_trust_prompt_provider
+#endif
+    (&provider, onSslServerTrustPrompt, this, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-      // plugged in 3 as the retry limit - what is a good limit?
-      svn_client_get_ssl_client_cert_pw_prompt_provider (
-        &provider, onSslClientCertPwPrompt, this, 3, pool);
-      *(svn_auth_provider_object_t **)apr_array_push (providers) =
-        provider;
+    // plugged in 3 as the retry limit - what is a good limit?
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_ssl_client_cert_pw_prompt_provider
+#else
+    svn_client_get_ssl_client_cert_pw_prompt_provider
+#endif
+    (&provider, onSslClientCertPwPrompt, this, 3, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
       svn_auth_baton_t *ab;
       svn_auth_open (&ab, providers, pool);
@@ -131,6 +153,9 @@ ContextData::ContextData(const QString & configDir_)
       // as long as commit_items is unused it may used twice!
       m_ctx.log_msg_func2 = onLogMsg2;
       m_ctx.log_msg_baton2 = this;
+
+      m_ctx.progress_func = onProgress;
+      m_ctx.progress_baton = this;
 #endif
 }
 
@@ -500,6 +525,16 @@ void ContextData::reset()
 svn_error_t * ContextData::generate_cancel_error()
 {
     return svn_error_create (SVN_ERR_CANCELLED, 0, listener->translate(QString::FROMUTF8("Cancelled by user.")).TOUTF8());
+}
+
+void ContextData::onProgress(apr_off_t progress, apr_off_t total, void*baton, apr_pool_t*)
+{
+    ContextData * data = 0;
+    if (getContextData (baton, &data)!=SVN_NO_ERROR)
+    {
+        return;
+    }
+    data->getListener()->contextProgress(progress,total);
 }
 
 }

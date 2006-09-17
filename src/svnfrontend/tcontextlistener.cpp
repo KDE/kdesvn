@@ -142,15 +142,18 @@ void ThreadContextListener::contextNotify(const QString&aMsg)
  */
 void ThreadContextListener::contextProgress(long long int current, long long int max)
 {
+    if (current==0) {
+        return;
+    }
     QMutexLocker lock(&(m_Data->m_CallbackMutex));
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     QString msg;
     if (max>-1) {
-        msg = i18n("Received %1 of %2 byte").arg(current).arg(max);
+        msg = i18n("Transfered %1 of %2 byte(s)").arg(current).arg(max);
     } else {
-        msg = i18n("Received %1 byte").arg(current);
+        msg = i18n("Transfered %1 byte(s)").arg(current);
     }
     _notify->msg = msg;
     ev->setData((void*)_notify);

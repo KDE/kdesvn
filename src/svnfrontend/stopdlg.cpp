@@ -63,6 +63,8 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
     connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
     connect(m_Context,SIGNAL(waitShow(bool)),this,SLOT(slotWait(bool)));
+    connect(m_Context,SIGNAL(netProgress(long long int, long long int)),
+        this,SLOT(slotNetProgres(long long int, long long int)));
     connect(this,SIGNAL(sigCancel(bool)),m_Context,SLOT(setCanceled(bool)));
     mShowTimer->start(m_MinDuration, true);
 }
@@ -157,7 +159,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
 
 void StopDlg::slotNetProgres(long long int current, long long int max)
 {
-    if (m_StopTick.elapsed()>500||m_BarShown) {
+    if (m_StopTick.elapsed()>500||(m_BarShown&&!m_netBarShown)) {
         if (!m_netBarShown) {
             m_NetBar->show();
             m_netBarShown=true;
@@ -167,7 +169,7 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
             m_NetBar->setTotalSteps(max);
         }
         if (max == -1) {
-            m_NetBar->setFormat(i18n("%v bytes received."));
+            m_NetBar->setFormat(i18n("%v bytes transfered."));
             m_NetBar->setTotalSteps(current+1);
         }
         m_NetBar->setValue(current);

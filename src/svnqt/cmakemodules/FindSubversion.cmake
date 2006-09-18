@@ -108,7 +108,7 @@ IF (WIN32)
     "$ENV{ProgramFiles}/Subversion/lib/neon"
   )
 
-  FIND_LIBRARY(DB43_LIB libdb43
+  FIND_LIBRARY(DB43_LIB libdb44
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 

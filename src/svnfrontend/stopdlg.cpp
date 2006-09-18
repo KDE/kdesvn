@@ -159,7 +159,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
 
 void StopDlg::slotNetProgres(long long int current, long long int max)
 {
-    if (m_StopTick.elapsed()>500||(m_BarShown&&!m_netBarShown)) {
+    if (m_StopTick.elapsed()>300||(m_BarShown&&!m_netBarShown)) {
         if (!m_netBarShown) {
             m_NetBar->show();
             m_netBarShown=true;

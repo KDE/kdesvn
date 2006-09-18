@@ -22,10 +22,11 @@
 
 #include "src/svnqt/svnstream.hpp"
 
-#include <qbuffer.h>
 #include <kio/global.h>
 #include <kmimetype.h>
 #include <kmimemagic.h>
+#include <qbuffer.h>
+#include <qdatetime.h>
 
 class StreamWrittenCb
 {
@@ -59,6 +60,7 @@ protected:
     bool m_mimeSend;
     QString m_Filename;
     QByteArray array;
+    QTime m_MessageTick;
 };
 
 #endif

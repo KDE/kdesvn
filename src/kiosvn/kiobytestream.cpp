@@ -24,6 +24,7 @@ KioByteStream::KioByteStream(StreamWrittenCb*aCb,const QString&filename)
     m_Cb(aCb),m_Written(0),
     m_mimeSend(false),m_Filename(filename)
 {
+    m_MessageTick.start();
 }
 
 KioByteStream::~KioByteStream()
@@ -37,6 +38,7 @@ bool KioByteStream::isOk() const
 
 long KioByteStream::write(const char* data, const unsigned long max)
 {
+    bool forceInfo = !m_mimeSend;
     if (m_Cb) {
         if (!m_mimeSend) {
             m_mimeSend = true;
@@ -51,7 +53,10 @@ long KioByteStream::write(const char* data, const unsigned long max)
         array.resetRawData(data, max);
 
         m_Written+=max;
-        m_Cb->streamWritten(m_Written);
+        if (m_MessageTick.elapsed() >=100 || forceInfo) {
+            m_Cb->streamWritten(m_Written);
+            m_MessageTick.restart();
+        }
         return max;
     }
     return -1;

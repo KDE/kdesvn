@@ -5,13 +5,13 @@ SET(SUBVERSION_ALL_LIBS)
 IF (UNIX)
 
   MACRO(FIND_SUB_LIB targetvar libname)
-    IF (SUBVERSION_INSTALL_DIR)
+    IF (SUBVERSION_INSTALL_PATH)
         FIND_LIBRARY(${targetvar} ${libname}
             PATHS
-            ${SUBVERSION_INSTALL_DIR}/lib
+            ${SUBVERSION_INSTALL_PATH}/lib
             NO_DEFAULT_PATH
         )
-    ENDIF(SUBVERSION_INSTALL_DIR)
+    ENDIF(SUBVERSION_INSTALL_PATH)
     FIND_LIBRARY(${targetvar} ${libname}
         PATHS
         /usr/lib
@@ -19,13 +19,13 @@ IF (UNIX)
         )
   ENDMACRO(FIND_SUB_LIB)
 
-  IF (SUBVERSION_INSTALL_DIR)
+  IF (SUBVERSION_INSTALL_PATH)
     FIND_PATH(SUBVERSION_INCLUDE_DIR svn_client.h
         PATHS
-        ${SUBVERSION_INSTALL_DIR}/include/subversion-1
+        ${SUBVERSION_INSTALL_PATH}/include/subversion-1
         NO_DEFAULT_PATH
     )
-  ENDIF (SUBVERSION_INSTALL_DIR)
+  ENDIF (SUBVERSION_INSTALL_PATH)
   FIND_PATH(SUBVERSION_INCLUDE_DIR svn_client.h
         /usr/include/subversion-1
         /usr/local/include/subversion-1)

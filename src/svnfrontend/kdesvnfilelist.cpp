@@ -1320,8 +1320,14 @@ void kdesvnfilelist::startDrag()
 {
     m_pList->m_fileTip->setItem(0);
     QListViewItem * m_pressedItem = currentItem();
+    if (!m_pressedItem) {
+        return;
+    }
     QPixmap pixmap2;
     KURL::List urls = selectedUrls();
+    if (urls.count()==0) {
+        return;
+    }
     kdDebug() << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {

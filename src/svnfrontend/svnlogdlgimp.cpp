@@ -265,7 +265,7 @@ void SvnLogDlgImp::slotDispPrevious()
     QString s,e;
     s = _base+k->realName();
     e = _base+p->realName();
-    emit makeDiff(e,p->rev(),s,k->rev());
+    emit makeDiff(e,p->rev(),s,k->rev(),this);
 }
 
 
@@ -332,7 +332,7 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
 void SvnLogDlgImp::slotDispSelected()
 {
     if (!m_first || !m_second) return;
-    emit makeDiff(_base+m_first->realName(),m_first->rev(),_base+m_second->realName(),m_second->rev());
+    emit makeDiff(_base+m_first->realName(),m_first->rev(),_base+m_second->realName(),m_second->rev(),this);
 }
 
 void SvnLogDlgImp::slotListEntries()

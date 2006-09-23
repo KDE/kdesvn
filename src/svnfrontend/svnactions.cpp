@@ -306,8 +306,8 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     if (!logs) return;
     SvnLogDlgImp disp(this);
     disp.dispLog(logs,e[0].url().mid(reposRoot.length()),reposRoot);
-    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&)),
-            this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&)));
+    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+            this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
     disp.exec();
     disp.saveSize();
     delete logs;
@@ -911,14 +911,20 @@ void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn
 
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2)
 {
+    makeDiff(p1,r1,p2,r2,m_Data->m_ParentList->realWidget());
+}
+
+void SvnActions::makeDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2,QWidget*p)
+{
     if (!m_Data->m_CurrentContext) return;
     QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
+    QWidget*parent = p?p:m_Data->m_ParentList->realWidget();
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing",
+        StopDlg sdlg(m_Data->m_SvnContext,parent,0,"Diffing",
             i18n("Diffing - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),

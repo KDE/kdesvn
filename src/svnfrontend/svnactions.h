@@ -177,6 +177,7 @@ public slots:
     virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
     virtual void makeDiff(const QStringList&,const svn::Revision&,const svn::Revision&);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
+    virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);

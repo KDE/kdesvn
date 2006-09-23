@@ -23,6 +23,7 @@
 #include "src/ksvnwidgets/authdialogimpl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
+#include "src/helpers/stringhelper.h"
 #include "threadcontextlistenerdata.h"
 
 #include <kapplication.h>
@@ -150,10 +151,12 @@ void ThreadContextListener::contextProgress(long long int current, long long int
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     QString msg;
+    QString s1 = helpers::ByteToString()(current);
     if (max>-1) {
-        msg = i18n("Transferred %1 of %2 byte(s)").arg(current).arg(max);
+        QString s2 = helpers::ByteToString()(max);
+        msg = i18n("%1 of %2 transferred.").arg(s1).arg(s2);
     } else {
-        msg = i18n("Transferred %1 byte(s)").arg(current);
+        msg = i18n("%1 transferred.").arg(s1);
     }
     _notify->msg = msg;
     ev->setData((void*)_notify);

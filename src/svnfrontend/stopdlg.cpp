@@ -20,6 +20,7 @@
 #include "stopdlg.h"
 #include "ccontextlistener.h"
 #include "settings/kdesvnsettings.h"
+#include "helpers/stringhelper.h"
 
 #include <kapplication.h>
 #include <klocale.h>
@@ -164,12 +165,14 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
             m_NetBar->show();
             m_netBarShown=true;
         }
+        QString s1 = helpers::ByteToString()(current);
         if (max > -1 && max != m_NetBar->totalSteps()) {
-            m_NetBar->setFormat(i18n("%v bytes of %m byte"));
+            QString s2 = helpers::ByteToString()(max);
+            m_NetBar->setFormat(i18n("%1 of %2").arg(s1).arg(s2));
             m_NetBar->setTotalSteps(max);
         }
         if (max == -1) {
-            m_NetBar->setFormat(i18n("%v bytes transferred."));
+            m_NetBar->setFormat(i18n("%1 transferred.").arg(s1));
             m_NetBar->setTotalSteps(current+1);
         }
         m_NetBar->setValue(current);

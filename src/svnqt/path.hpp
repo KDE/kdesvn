@@ -83,6 +83,11 @@ namespace svn
     path () const;
 
     /**
+     * @return Path string
+     */
+    operator const QString&()const;
+
+    /**
      * @return Path as pretty url
      */
     QString prettyPath()const;

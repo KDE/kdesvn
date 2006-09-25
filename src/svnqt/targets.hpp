@@ -63,8 +63,13 @@ namespace svn
      *
      * @param targets vector of paths
      */
-
     Targets (const Pathes & targets);
+
+    /**
+     * Constructor
+     * @param path a single paths
+     */
+    Targets (const Path & targets);
 
     /**
      * Constructor from an APR array containing

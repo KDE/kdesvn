@@ -186,7 +186,7 @@ namespace svn
   }
 
   static StatusEntries
-  localStatus (const QString& path,
+  localStatus (const Path& path,
                const bool descend,
                const bool get_all,
                const bool update,
@@ -207,7 +207,7 @@ namespace svn
     baton.pool = pool;
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.TOUTF8(),         // path
+      path.path().TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -246,23 +246,23 @@ namespace svn
   }
 
   static Status
-  dirEntryToStatus (const QString& path, const DirEntry & dirEntry)
+  dirEntryToStatus (const Path& path, const DirEntry & dirEntry)
   {
-    QString url = path;
+    QString url = path.path();
     url += QString::FROMUTF8("/");
     url += dirEntry.name();
     return Status (url, dirEntry);
   }
 
   static Status
-  infoEntryToStatus(const QString&,const InfoEntry&infoEntry)
+  infoEntryToStatus(const Path&,const InfoEntry&infoEntry)
   {
     return Status(infoEntry.url(),infoEntry);
   }
 
   static StatusEntries
   remoteStatus (Client * client,
-                const QString& path,
+                const Path& path,
                 const bool descend,
                 const bool ,
                 const bool ,
@@ -275,7 +275,7 @@ namespace svn
     DirEntries::const_iterator it;
 
     StatusEntries entries;
-    QString url = path;
+    QString url = path.path();
     url+=QString::FROMUTF8("/");
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
@@ -288,7 +288,7 @@ namespace svn
   }
 
   StatusEntries
-  Client_impl::status (const QString& path,
+  Client_impl::status (const Path& path,
                   const bool descend,
                   const bool get_all,
                   const bool update,
@@ -297,7 +297,7 @@ namespace svn
                   bool detailed_remote,
                   const bool hide_externals) throw (ClientException)
   {
-    if (Url::isValid (path)) {
+    if (Url::isValid (path.path())) {
         return remoteStatus (this, path, descend, get_all, update,
                            no_ignore,revision,m_context,detailed_remote);
     } else {
@@ -307,7 +307,7 @@ namespace svn
   }
 
   static Status
-  localSingleStatus (const QString& path, Context * context,bool update=false)
+  localSingleStatus (const Path& path, Context * context,bool update=false)
   {
     svn_error_t *error;
     apr_hash_t *status_hash;
@@ -322,7 +322,7 @@ namespace svn
 
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.TOUTF8(),         // path
+      path.path().TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
@@ -354,7 +354,7 @@ namespace svn
   };
 
   static Status
-  remoteSingleStatus (Client * client, const QString& path,const Revision revision, Context * )
+  remoteSingleStatus (Client * client, const Path& path,const Revision revision, Context * )
   {
     InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
     if (infoEntries.size () == 0)
@@ -364,16 +364,16 @@ namespace svn
   }
 
   Status
-  Client_impl::singleStatus (const QString& path,bool update,const Revision revision) throw (ClientException)
+  Client_impl::singleStatus (const Path& path,bool update,const Revision revision) throw (ClientException)
   {
-    if (Url::isValid (path))
+    if (Url::isValid (path.path()))
       return remoteSingleStatus (this, path,revision, m_context);
     else
       return localSingleStatus (path, m_context,update);
   }
 
   bool
-  Client_impl::log (const QString& path, const Revision & revisionStart,
+  Client_impl::log (const Path& path, const Revision & revisionStart,
        const Revision & revisionEnd,
        LogEntriesMap&log_target,
        bool discoverChangedPaths,
@@ -406,7 +406,7 @@ namespace svn
   }
 
   const LogEntries *
-  Client_impl::log (const QString& path, const Revision & revisionStart,
+  Client_impl::log (const Path& path, const Revision & revisionStart,
                const Revision & revisionEnd, bool discoverChangedPaths,
                bool strictNodeHistory,int limit) throw (ClientException)
   {
@@ -441,7 +441,7 @@ namespace svn
   }
 
   InfoEntries
-  Client_impl::info(const QString& path,
+  Client_impl::info(const Path& _p,
                 bool rec,
                 const Revision & rev,
                 const Revision & peg_revision) throw (ClientException)
@@ -457,7 +457,6 @@ namespace svn
     baton.pool = pool;
     baton.m_Context=m_context;
     svn_opt_revision_t pegr;
-    Path _p(path);
     const char *truepath;
     bool internal_peg = false;
     error = svn_opt_parse_path (&pegr, &truepath,
@@ -468,7 +467,7 @@ namespace svn
 
 
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
-        if ((svn_path_is_url (path.TOUTF8())) && (pegr.kind == svn_opt_revision_unspecified)) {
+        if ((svn_path_is_url (_p.cstr())) && (pegr.kind == svn_opt_revision_unspecified)) {
             pegr.kind = svn_opt_revision_head;
             internal_peg=true;
         }

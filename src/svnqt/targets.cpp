@@ -85,6 +85,13 @@ namespace svn
     }
   }
 
+  Targets::Targets (const Path& target)
+  {
+    if (!target.cstr().isEmpty()) {
+        m_targets.push_back(target);
+    }
+  }
+
   Targets::Targets (const char* target)
   {
     if (target) {

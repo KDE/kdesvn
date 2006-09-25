@@ -39,7 +39,7 @@
 namespace svn
 {
   svn_revnum_t
-  Client_impl::checkout (const QString& url, const Path & destPath,
+  Client_impl::checkout (const Path& url, const Path & destPath,
               const Revision & revision,
               const Revision & peg,
               bool recurse,

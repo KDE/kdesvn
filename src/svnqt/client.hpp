@@ -143,7 +143,7 @@ namespace svn
      * @return vector with Status entries.
      */
     virtual StatusEntries
-    status (const QString& path,
+    status (const Path& path,
             const bool descend = false,
             const bool get_all = true,
             const bool update = false,
@@ -163,7 +163,7 @@ namespace svn
      * @return a Status with Statis.isVersioned = FALSE
      */
     virtual Status
-    singleStatus (const QString& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException)=0;
+    singleStatus (const Path& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException)=0;
 
   /**
      * Executes a revision checkout.
@@ -177,7 +177,7 @@ namespace svn
      * @exception ClientException
      */
     virtual svn_revnum_t
-    checkout (const QString& moduleName, const Path & destPath,
+    checkout (const Path& moduleName, const Path & destPath,
               const Revision & revision,
               const Revision & peg = Revision::UNDEFINED,
               bool recurse = true,
@@ -455,7 +455,7 @@ namespace svn
      * @since subversion 1.2
      */
     virtual InfoEntries
-    info(const QString &path,
+    info(const Path &path,
           bool rec,
           const Revision & rev,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
@@ -476,7 +476,7 @@ namespace svn
      * @return a vector with log entries
      */
     virtual const LogEntries *
-    log (const QString& path, const Revision & revisionStart,
+    log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
@@ -489,7 +489,7 @@ namespace svn
      * You can use the constants Revision::START and
      * Revision::HEAD
      *
-     * @param path
+     * @param path Path to make a log for
      * @param revisionStart
      * @param revisionEnd
      * @param target the logmap where to store the entries
@@ -499,7 +499,7 @@ namespace svn
      * @return true if success
      */
     virtual bool
-    log (const QString& path, const Revision & revisionStart,
+    log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          LogEntriesMap&target,
          bool discoverChangedPaths=false,
@@ -576,7 +576,7 @@ namespace svn
      *         a relative path (only filename)
      */
     virtual DirEntries
-    list (const QString& pathOrUrl,
+    list (const Path& pathOrUrl,
           const Revision& revision,
           const Revision& peg,
           bool recurse,bool retrieve_locks) throw (ClientException)=0;

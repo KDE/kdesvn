@@ -78,6 +78,11 @@ namespace svn
     return m_path;
   }
 
+  Path::operator const QString&()const
+  {
+    return m_path;
+  }
+
   QString Path::prettyPath()const
   {
     if (!Url::isValid(m_path)) {

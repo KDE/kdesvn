@@ -1908,39 +1908,30 @@ void kdesvnfilelist::slotRangeBlame()
 
 void kdesvnfilelist::slotSimpleBaseDiff()
 {
-    FileListViewItemList*klist = allSelected();
-    QStringList what;
+    FileListViewItem*kitem = singleSelected();
 
-    if (!klist||klist->count()==0) {
-        what<<baseUri();
-    }else{
-        FileListViewItemListIterator liter(*klist);
-        FileListViewItem*cur;
-        while ((cur=liter.current())!=0){
-            ++liter;
-            what<<cur->fullName();
-        }
+    QString what;
+    if (!kitem) {
+        what==baseUri();
+    } else {
+        what = kitem->fullName();
     }
-
-    m_SvnWrapper->makeDiff(what,svn::Revision::UNDEFINED,svn::Revision::UNDEFINED);
+    // only possible on working copies - so we may say this values
+    m_SvnWrapper->makeDiff(what,svn::Revision::BASE,svn::Revision::WORKING,kitem?kitem->isDir():true);
 }
 
 void kdesvnfilelist::slotSimpleHeadDiff()
 {
-    FileListViewItemList*klist = allSelected();
-    QStringList what;
+    FileListViewItem*kitem = singleSelected();
+    QString what;
 
-    if (!klist||klist->count()==0) {
-        what<<baseUri();
+    if (!kitem) {
+        what=baseUri();
     }else{
-        FileListViewItemListIterator liter(*klist);
-        FileListViewItem*cur;
-        while ((cur=liter.current())!=0){
-            ++liter;
-            what<<cur->fullName();
-        }
+        what = kitem->fullName();
     }
-    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD);
+    // only possible on working copies - so we may say this values
+    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,kitem?kitem->isDir():true);
 }
 
 
@@ -2005,7 +1996,7 @@ void kdesvnfilelist::slotDiffRevisions()
     }
     if (dlg->exec()==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_SvnWrapper->makeDiff(what,r.first,r.second);
+        m_SvnWrapper->makeDiff(what,r.first,r.second,k?k->isDir():true);
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
     delete dlg;

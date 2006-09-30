@@ -149,6 +149,8 @@ public:
 
     virtual bool makeCleanup(const QString&);
 
+    bool get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg);
+
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;
 
@@ -174,7 +176,7 @@ public slots:
     virtual void slotRevertItems(const QStringList&);
     virtual void slotSwitch();
     virtual void slotResolved(const QString&);
-    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&);
+    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&,bool isDir);
     virtual void makeDiff(const QStringList&,const svn::Revision&,const svn::Revision&);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);

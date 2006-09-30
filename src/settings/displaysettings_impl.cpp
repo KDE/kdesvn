@@ -18,16 +18,19 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "displaysettings_impl.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
+#include <qradiobutton.h>
 #include <klineedit.h>
+#include <kdebug.h>
 
 DisplaySettings_impl::DisplaySettings_impl(QWidget *parent, const char *name)
     :DisplaySettings(parent, name)
 {
-    diffDispChanged();
     kcfg_display_previews_in_file_tips->setEnabled(kcfg_display_file_tips->isChecked());
+    kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_kompare_for_diff()==2);
 }
 
 DisplaySettings_impl::~DisplaySettings_impl()

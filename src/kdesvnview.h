@@ -77,11 +77,6 @@ public:
      */
     virtual bool openURL(const KURL& url);
 
-    /**
-     * Print this view to any medium -- paper or not
-     */
-    void print(QPainter *, int height, int width);
-
     /* repositorylistener methods */
     virtual void sendWarning(const QString&);
     virtual void sendError(const QString&);
@@ -131,12 +126,11 @@ protected:
     kdesvnfilelist*m_flist;
     KActionCollection*m_Collection;
 
-    QSplitter* m_Splitter;
+    QSplitter *m_Splitter,*m_treeSplitter;
     QString m_currentURL;
     KTextBrowser*m_LogWindow;
 protected:
     virtual void setupActions();
-
     bool m_ReposCancel;
 };
 

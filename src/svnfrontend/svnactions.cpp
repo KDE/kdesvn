@@ -91,9 +91,12 @@ public:
 
     virtual ~SvnActionsData()
     {
-        QMap<KProcess*,QString>::iterator it;
+        QMap<KProcess*,QStringList>::iterator it;
         for (it=m_tempfilelist.begin();it!=m_tempfilelist.end();++it) {
-            ::unlink((*it).ascii());
+            for (QStringList::iterator it2 = (*it).begin();
+                it2 != (*it).end();++it2) {
+                ::unlink((*it2).ascii());
+            }
         }
         delete m_Svnclient;
         m_Svnclient = 0L;
@@ -110,7 +113,7 @@ public:
     helpers::itemCache m_conflictCache;
     helpers::itemCache m_repoLockCache;
 
-    QMap<KProcess*,QString> m_tempfilelist;
+    QMap<KProcess*,QStringList> m_tempfilelist;
 
     QTimer m_ThreadCheckTimer;
     QTimer m_UpdateCheckTimer;
@@ -857,9 +860,12 @@ void SvnActions::wroteStdin(KProcess*proc)
 void SvnActions::procClosed(KProcess*proc)
 {
     if (!proc) return;
-    QMap<KProcess*,QString>::iterator it;
+    QMap<KProcess*,QStringList>::iterator it;
     if ( (it=m_Data->m_tempfilelist.find(proc))!=m_Data->m_tempfilelist.end()) {
-        ::unlink((*it).ascii());
+        for (QStringList::iterator it2 = (*it).begin();
+            it2 != (*it).end();++it2) {
+                ::unlink((*it2).ascii());
+        }
         m_Data->m_tempfilelist.erase(it);
     }
     delete proc;
@@ -900,11 +906,74 @@ void SvnActions::makeDiff(const QStringList&which,const svn::Revision&start,cons
     dispDiff(ex);
 }
 
+bool SvnActions::get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg)
+{
+    try {
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Diffing",
+        i18n("Download - hit cancel for abort"));
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+        m_Data->m_Svnclient->get(svn::Path(what),
+            to,rev,peg);
+    } catch (svn::ClientException e) {
+        emit clientException(e.msg());
+        return false;
+    }
+    return true;
+}
+
 /*!
     \fn SvnActions::makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end)
  */
-void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end)
+void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end,bool isDir)
 {
+    int disp = Kdesvnsettings::use_kompare_for_diff();
+
+    if (disp>1&&!isDir) {
+        QString edisp = Kdesvnsettings::external_diff_display();
+        QStringList wlist = QStringList::split(" ",edisp);
+        if (wlist.count()>=3 && edisp.find("%1")!=-1 && edisp.find("%2")!=-1) {
+            KTempFile tfile,tfile2;
+            tfile.setAutoDelete(true);
+            tfile2.setAutoDelete(true);
+            QString first,second;
+            if (start!=svn::Revision::BASE) {
+                first = tfile.name();
+                    if (!get(what,tfile.name(),start,svn::Revision::UNDEFINED)) {
+                        return;
+                    }
+            } else {
+                first = what;
+            }
+            if (end!=svn::Revision::BASE) {
+                second = tfile2.name();
+                if (!get(what,tfile2.name(),end,svn::Revision::UNDEFINED)) {
+                    return;
+                }
+            } else {
+                second = what;
+            }
+            KProcess*proc = new KProcess();
+            for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
+                if (*it=="%1") {
+                    *proc<<first;
+                } else if (*it=="%2") {
+                    *proc<<second;
+                } else {
+                    *proc << *it;
+                }
+            }
+            connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+            if (proc->start(KProcess::NotifyOnExit,KProcess::NoCommunication)) {
+                m_Data->m_tempfilelist[proc].append(tfile.name());
+                m_Data->m_tempfilelist[proc].append(tfile2.name());
+                tfile2.setAutoDelete(false);
+                tfile.setAutoDelete(false);
+                return;
+            }
+            delete proc;
+            return;
+        }
+    }
     QStringList w; w << what;
     makeDiff(w,start,end);
 }
@@ -975,6 +1044,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
 void SvnActions::dispDiff(const QString&ex)
 {
     int disp = Kdesvnsettings::use_kompare_for_diff();
+    QString what = Kdesvnsettings::external_diff_display();
     if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
@@ -986,8 +1056,7 @@ void SvnActions::dispDiff(const QString&ex)
             return;
         }
         delete proc;
-    } else if (disp>1) {
-        QString what = Kdesvnsettings::external_diff_display();
+    } else if (disp>1 && what.find("%f")!=-1) {
         QStringList wlist = QStringList::split(" ",what);
         KProcess*proc = new KProcess();
         bool fname_used = false;
@@ -1013,7 +1082,7 @@ void SvnActions::dispDiff(const QString&ex)
 
         if (proc->start(KProcess::NotifyOnExit,fname_used?KProcess::NoCommunication:KProcess::Stdin)) {
             if (!fname_used) proc->writeStdin(ex.ascii(),ex.length());
-            else m_Data->m_tempfilelist[proc]=tfile.name();
+            else m_Data->m_tempfilelist[proc].append(tfile.name());
             return;
         }
         delete proc;

@@ -17,28 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "displaysettings_impl.h"
-#include "src/settings/kdesvnsettings.h"
+#ifndef DIFFMERGESETTINGS_IMPL_H
+#define DIFFMERGESETTINGS_IMPL_H
 
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <klineedit.h>
-#include <kdebug.h>
+#include "src/settings/diffmergesettings.h"
 
-DisplaySettings_impl::DisplaySettings_impl(QWidget *parent, const char *name)
-    :DisplaySettings(parent, name)
-{
-    kcfg_display_previews_in_file_tips->setEnabled(kcfg_display_file_tips->isChecked());
-}
+class DiffMergeSettings_impl: public DiffMergeSettings {
+Q_OBJECT
+public:
+    DiffMergeSettings_impl(QWidget *parent = 0, const char *name = 0);
+    virtual ~DiffMergeSettings_impl();
+protected slots:
+    virtual void diffDispChanged();
+};
 
-DisplaySettings_impl::~DisplaySettings_impl()
-{
-}
-
-void DisplaySettings_impl::dispFileInfotoggled(bool how)
-{
-    kcfg_display_previews_in_file_tips->setEnabled(how);
-}
-
-#include "displaysettings_impl.moc"
+#endif

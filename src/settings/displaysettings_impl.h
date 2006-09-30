@@ -28,7 +28,6 @@ public:
     DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
     virtual ~DisplaySettings_impl();
 protected slots:
-    virtual void diffDispChanged();
     virtual void dispFileInfotoggled(bool);
 };
 

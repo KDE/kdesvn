@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "displaysettings_impl.h"
+#include "diffmergesettings_impl.h"
 #include "src/settings/kdesvnsettings.h"
 
 #include <qbuttongroup.h>
@@ -26,19 +26,20 @@
 #include <klineedit.h>
 #include <kdebug.h>
 
-DisplaySettings_impl::DisplaySettings_impl(QWidget *parent, const char *name)
-    :DisplaySettings(parent, name)
+DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent, const char *name)
+    :DiffMergeSettings(parent, name)
 {
-    kcfg_display_previews_in_file_tips->setEnabled(kcfg_display_file_tips->isChecked());
+    kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_kompare_for_diff()==2);
 }
 
-DisplaySettings_impl::~DisplaySettings_impl()
+DiffMergeSettings_impl::~DiffMergeSettings_impl()
 {
 }
 
-void DisplaySettings_impl::dispFileInfotoggled(bool how)
+void DiffMergeSettings_impl::diffDispChanged()
 {
-    kcfg_display_previews_in_file_tips->setEnabled(how);
+    kcfg_external_diff_display->setEnabled(kcfg_use_kompare_for_diff->selectedId()==2);
 }
 
-#include "displaysettings_impl.moc"
+#include "diffmergesettings_impl.moc"
+

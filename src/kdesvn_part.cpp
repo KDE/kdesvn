@@ -23,6 +23,7 @@
 #include "settings/displaysettings_impl.h"
 #include "settings/dispcolorsettings_impl.h"
 #include "settings/revisiontreesettingsdlg_impl.h"
+#include "settings/diffmergesettings_impl.h"
 #include "settings/subversionsettings_impl.h"
 #include "settings/cmdexecsettings_impl.h"
 #include "kdesvnview.h"
@@ -333,6 +334,8 @@ void kdesvnPart::slotShowSettings()
         i18n("General"),"configure",i18n("General"),true);
     dialog->addPage(new SubversionSettings_impl(0,"subversion_items"),
         i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
+    dialog->addPage(new DiffMergeSettings_impl(0,"diffmerge_items"),
+        i18n("Diff & Merge"),"kdesvnmerge",i18n("Settings for diff and merge"),true);
     dialog->addPage(new DispColorSettings_impl(0,"color_items"),
         i18n("Colors"),"colorize",i18n("Color Settings"),true);
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0,"revisiontree_items"),

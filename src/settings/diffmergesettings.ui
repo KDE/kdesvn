@@ -1,0 +1,173 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>DiffMergeSettings</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>DiffMergeSettings</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>275</width>
+            <height>210</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Form1</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_diff_ignore_content</cstring>
+            </property>
+            <property name="text">
+                <string>Diff ignores content type</string>
+            </property>
+        </widget>
+        <widget class="QButtonGroup">
+            <property name="name">
+                <cstring>kcfg_use_kompare_for_diff</cstring>
+            </property>
+            <property name="title">
+                <string>Diff display</string>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_internal</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Internal</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_kompare</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Use Kompare for diff</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton">
+                    <property name="name">
+                        <cstring>m_other</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Use other diff display</string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>m_extern_hint</cstring>
+            </property>
+            <property name="text">
+                <string>see "Whats this" for details</string>
+            </property>
+            <property name="alignment">
+                <set>WordBreak|AlignVCenter</set>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>mdiff_display_label</cstring>
+                    </property>
+                    <property name="text">
+                        <string>External diff display:</string>
+                    </property>
+                </widget>
+                <widget class="KLineEdit" row="0" column="1">
+                    <property name="name">
+                        <cstring>kcfg_external_diff_display</cstring>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;p align="left"&gt;
+Enter an external program in form
+&lt;p align="center"&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %f&lt;/tt&gt;
+&lt;/p&gt;
+or
+&lt;p align="center"&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt&gt;
+&lt;/p&gt;
+or
+&lt;p align="center"&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %1 %2&lt;/tt&gt;
+&lt;/p&gt;
+&lt;br&gt;
+If using first or second form, svn itself will generate the diff. %f will replaced with a temporary filename. If %f is not given,
+the diff-display should able reading data from stdin.
+&lt;br&gt;
+When %1 and %2 is given, kdesvn let this display make the diff. For that it it makes a temporary export or get (if needed) and fill out the parameters with the right value. %1 will filled with the content of start-revision, %2 with the endrevision. On large recoursive diffs this may get real slow!
+&lt;/p&gt;</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <spacer>
+            <property name="name">
+                <cstring>spacer3</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>40</height>
+                </size>
+            </property>
+        </spacer>
+    </vbox>
+</widget>
+<customwidgets>
+</customwidgets>
+<connections>
+    <connection>
+        <sender>m_internal</sender>
+        <signal>clicked()</signal>
+        <receiver>DiffMergeSettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+    <connection>
+        <sender>m_kompare</sender>
+        <signal>clicked()</signal>
+        <receiver>DiffMergeSettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+    <connection>
+        <sender>m_other</sender>
+        <signal>clicked()</signal>
+        <receiver>DiffMergeSettings</receiver>
+        <slot>diffDispChanged()</slot>
+    </connection>
+</connections>
+<slots>
+    <slot access="protected">diffDispChanged()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>klineedit.h</includehint>
+</includehints>
+</UI>

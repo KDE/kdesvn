@@ -93,7 +93,8 @@ namespace svn
     }
   }
 
-    void Client_impl::url2Revision(const QString&revstring,Revision&start) {
+    void Client_impl::url2Revision(const QString&revstring,Revision&start)
+    {
         if (revstring=="WORKING") {
             start = Revision::WORKING;
         } else if (revstring=="BASE"){

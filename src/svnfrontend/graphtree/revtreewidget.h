@@ -51,6 +51,7 @@ protected:
 signals:
     void dispDiff(const QString&);
     void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
+    void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 
 protected slots:
     virtual void languageChange();

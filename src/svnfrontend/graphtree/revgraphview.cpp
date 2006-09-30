@@ -919,6 +919,8 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
     }
     svn::Revision tr(it.data().rev);
     QString tp = _basePath+it.data().name;
+    emit makeNorecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
+#if 0
     QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
@@ -940,6 +942,7 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
         return;
     }
     emit dispDiff(QString::fromLocal8Bit(ex,ex.size()));
+#endif
 }
 
 void RevGraphView::setBasePath(const QString&_path)

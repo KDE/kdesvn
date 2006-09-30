@@ -3,6 +3,7 @@ version 0.10.0
     * more than one mainwindow may opened
     * reworked parts of KIO, progress bar while downloading works now
     * when build against subversion 1.3 or above transfer/progress information on any operation may displayed
+    * integrated pure external diff, eg., diff will not made with subversion but with external programs like meld or kdiff3
 
 version 0.9.3
     * fix: svnqt now build against subversion 1.4

@@ -190,15 +190,22 @@ see which items has newer items in repository you may have to set "Check for upd
                     <property name="whatsThis" stdset="0">
                         <string>&lt;p align="left"&gt;
 Enter an external program in form
-&lt;br&gt;
-&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; &amp;lt;%f&amp;gt;&lt;/tt&gt;
-&lt;br&gt;
-%f will replaced with a temporary filename. If external may read data from
-stdin, you may just type
-&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %f&lt;/tt&gt;
+&lt;/p&gt;
+or
+&lt;p align="center"&gt;
 &lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt&gt;
+&lt;/p&gt;
+or
+&lt;p align="center"&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %1 %2&lt;/tt&gt;
+&lt;/p&gt;
 &lt;br&gt;
-and Kdesvn will pipe data direct.
+If using first or second form, svn itself will generate the diff. %f will replaced with a temporary filename. If %f is not given,
+the diff-display should able reading data from stdin.
+&lt;br&gt;
+When %1 and %2 is given, kdesvn let this display make the diff. For that it it makes a temporary export or get (if needed) and fill out the parameters with the right value. %1 will filled with the content of start-revision, %2 with the endrevision. On large recoursive diffs this may get real slow!
 &lt;/p&gt;</string>
                     </property>
                 </widget>

@@ -28,6 +28,12 @@ RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const c
     m_RevGraphView->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)5, 0, 2, m_RevGraphView->sizePolicy().hasHeightForWidth() ) );
     connect(m_RevGraphView,SIGNAL(dispDetails(const QString&)),this,SLOT(setDetailText(const QString&)));
     connect(m_RevGraphView,SIGNAL(dispDiff(const QString&)),this,SIGNAL(dispDiff(const QString&)));
+    connect(
+        m_RevGraphView,
+        SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+        this
+        ,SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
+        );
     connect(m_RevGraphView,SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*))
         ,this,SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
 

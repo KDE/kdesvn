@@ -1077,6 +1077,57 @@ kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://w
 </sect1>
 </chapter>
 
+<chapter id="setup">
+<title>Settings</title>
+<para>
+Setting may changed from the setup dialog. Them are seperated into some subdialogs.
+</para>
+<sect1 id="general-settings">
+<title>General settings</title>
+<sect2>
+<title>Diff display</title>
+<para>
+Selects which kind of display for diff-content should use. Default is &quot;kompare&quot; If set to &quot;External display&quot; 
+you must enter a valid program in &quot;External diff display&quot;. Only if internal display is used you may see differences in properties.
+</para>
+</sect2>
+<sect2>
+<title>External diff display</title>
+<para>
+Defines what &kdesvn; is using for external display and how it will called. There are three ways:
+</para>
+<para>
+<variablelist>
+<varlistentry>
+<term>&lt;program&gt; &lt;parameter&gt;</term>
+<listitem><para>
+The difference will generated with subversion and put direct into standard input of the external program (eg., no temporary files needed)
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>&lt;program&gt; &lt;parameter&gt; %f</term>
+<listitem><para>
+The difference will generated with subversion, saved into a temporary file and the parameter &quot;%f&quot; will replaced with that filename. 
+This may used with for instance with a simple call to less or textviewer.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
+<listitem><para>
+&kappname; let the external program make the difference. %1 and %2 will replaced with required values (filenames or foldernames). &kappname;
+stores content to compare in a temporary environment (when folders do a &quot;export&quot;, when single file, does a &quot;cat&quot;) when needed and 
+cleans up after closing external program or closing itself.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
 <chapter id="commands">
 <title>Command Reference</title>
 

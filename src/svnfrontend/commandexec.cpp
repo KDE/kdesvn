@@ -81,7 +81,7 @@ pCPart::pCPart()
     Stdout.setDevice(&toStdout);
     Stderr.setDevice(&toStderr);
     disp = new DummyDisplay();
-    m_SvnWrapper = new SvnActions(disp);
+    m_SvnWrapper = new SvnActions(disp,0,true);
 }
 
 pCPart::~pCPart()
@@ -431,10 +431,10 @@ void CommandExec::slotCmd_diff()
     if (m_pCPart->url.count()==1) {
         if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
             kdDebug()<<"Local diff" << endl;
-            m_pCPart->start = svn::Revision::UNDEFINED;
-            m_pCPart->end = svn::Revision::UNDEFINED;
+            m_pCPart->start = svn::Revision::WORKING;
+            m_pCPart->end = svn::Revision::BASE;
         }
-        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->end);
+        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->url[0],m_pCPart->end);
     } else {
         svn::Revision r1 = svn::Revision::HEAD;
         svn::Revision r2 = svn::Revision::HEAD;
@@ -556,7 +556,10 @@ bool CommandExec::scanRevision()
     if (revl.count()==0) {
         return false;
     }
-    m_pCPart->m_SvnWrapper->svnclient()->url2Revision(revstring,m_pCPart->start,m_pCPart->end);
+    m_pCPart->m_SvnWrapper->svnclient()->url2Revision(revl[0],m_pCPart->start);
+    if (revl.count()>1) {
+        m_pCPart->m_SvnWrapper->svnclient()->url2Revision(revl[1],m_pCPart->end);
+    }
     m_pCPart->rev_set=true;
     return true;
 }

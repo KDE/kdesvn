@@ -121,6 +121,10 @@ public:
         return m_pUrl;
     }
 
+    bool isDir()const
+    {
+        return kind()==svn_node_dir;
+    }
     QString prettyUrl(const char*)const;
 
 protected:

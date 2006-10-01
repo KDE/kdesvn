@@ -21,6 +21,7 @@
 #include "rangeinput_impl.h"
 #include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <kurlrequester.h>
 #include <kdialogbase.h>
@@ -33,19 +34,19 @@
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool src2,bool out)
     :MergeDlg(parent, name)
 {
-    m_SrcOneInput->setMode(KFile::Directory);
+    m_SrcOneInput->setMode(KFile::Directory|KFile::File);
     if (!src1) {
         m_SrcOneInput->setEnabled(false);
         m_SrcOneInput->hide();
         m_SrcOneLabel->hide();
     }
-    m_SrcTwoInput->setMode(KFile::Directory);
+    m_SrcTwoInput->setMode(KFile::Directory|KFile::File);
     if (!src2) {
         m_SrcTwoInput->setEnabled(false);
         m_SrcTwoInput->hide();
         m_SrcTwoLabel->hide();
     }
-    m_OutInput->setMode(KFile::LocalOnly|KFile::Directory);
+    m_OutInput->setMode(KFile::LocalOnly|KFile::Directory|KFile::File);
     if (!out) {
         m_OutInput->setEnabled(false);
         m_OutInput->hide();
@@ -53,6 +54,7 @@ MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool sr
     }
     adjustSize();
     setMinimumSize(minimumSizeHint());
+    m_useExternMerge->setChecked(Kdesvnsettings::extern_merge_default());
 }
 
 MergeDlg_impl::~MergeDlg_impl()

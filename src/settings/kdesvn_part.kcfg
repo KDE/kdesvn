@@ -85,7 +85,11 @@
   <group name="diffmerge_items">
     <entry key="external_merge_program" type="String" >
       <label>Which program to use for external merges</label>
-      <default>kdiff3 -o %o %1 %2</default>
+      <default>kdiff3 %s1 %s2 %t</default>
+    </entry>
+    <entry name="extern_merge_default" type="Bool">
+        <label>Prefer external merge program</label>
+        <default>false</default>
     </entry>
   </group>
   <group name="display" >

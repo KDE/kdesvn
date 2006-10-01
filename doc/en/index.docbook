@@ -1082,8 +1082,8 @@ kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://w
 <para>
 Setting may changed from the setup dialog. Them are seperated into some subdialogs.
 </para>
-<sect1 id="general-settings">
-<title>General settings</title>
+<sect1 id="diffmerge-settings">
+<title>Diff &#038; merge</title>
 <sect2>
 <title>Diff display</title>
 <para>
@@ -1124,6 +1124,45 @@ cleans up after closing external program or closing itself.
 
 </variablelist>
 </para>
+</sect2>
+<sect2>
+<title>External merge program</title>
+<para>
+Setup the program and options for using when subversions builtin merge isn't wanted.
+</para>
+<para> 
+<example><title>Default for external merge program</title><programlisting>kdiff3 %s1 %s2 %t</programlisting></example>
+</para>
+<sect3>
+<title>Variable substitutions for external merge program</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term>%s1</term>
+<listitem><para>
+Substituted with source number one.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>%s2</term>
+<listitem><para>
+Substituted with source number two, if this is empty, substituted with source number one, too.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>%t</term>
+<listitem><para>
+Substituted with target.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
 </sect2>
 </sect1>
 </chapter>
@@ -1657,7 +1696,7 @@ Bugreports and wishes may send to <email>kdesvn-bugs@alwins-world.de</email>, qu
 An overview for the mailinglists for &kappname; you may get in the <ulink url="http://www.alwins-world.de/mailman/listinfo">mailinglist overview</ulink>.
 </para>
 </sect1>
-<sect1>
+<sect1 id="credits-and-license">
 <!-- Include credits for the programmers, documentation writers, and
 contributors here. The license for your software should then be included below
 the credits with a reference to the appropriate license file included in the KDE
@@ -1774,28 +1813,7 @@ or checkout / export a copy from repository and change to the resulting sourcedi
 
 <sect2>
 <title>Using automake and configure</title>
-<para><warning><para>This buildsystem will get removed near future!i</para></warning></para>
-<para>In order to compile and install &kappname; on your system, type the
-following in the base directory of the &kappname; distribution:</para>
-<screen>
-<prompt>%</prompt> <userinput><command>mkdir</command> build</userinput>
-<prompt>%</prompt> <userinput><command>cd</command> build</userinput>
-<prompt>%</prompt> <userinput><command>../configure</command> --prefix=`kde-config --prefix`</userinput>
-<prompt>%</prompt> <userinput><command>make</command></userinput>
-<prompt>%</prompt> <userinput><command>make</command> install</userinput>
-</screen>
-<para>
-If you try to setup a tar-ball from repository you must have install the autoconf and automake package
-and do
-</para>
-<screen>
-<prompt>%</prompt> <userinput><command>make</command> -f Makefile.cvs</userinput>
-<prompt>%</prompt> <userinput><command>mkdir</command> build</userinput>
-<prompt>%</prompt> <userinput><command>cd</command> build</userinput>
-<prompt>%</prompt> <userinput><command>../configure</command> --prefix=`kde-config --prefix`</userinput>
-<prompt>%</prompt> <userinput><command>make</command></userinput>
-<prompt>%</prompt> <userinput><command>make</command> install</userinput>
-</screen>
+<para><warning><para>This buildsystem doesn't exist anymore. Use cmake.</para></warning></para>
 </sect2>
 </sect1>
 <sect1 id="configuration">

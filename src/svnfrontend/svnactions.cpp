@@ -1651,32 +1651,91 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
     }
 }
 
-void SvnActions::slotMergeExternal(const QString&src1,const QString&src2, const QString&target,
+void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, const QString&_target,
     const svn::Revision&rev1,const svn::Revision&rev2,bool rec)
 {
     KTempDir tdir;
     tdir.setAutoDelete(true);
-    QFileInfo f1(src1);
-    QFileInfo f2(src2);
-    QString s1 = f1.fileName()+"-"+rev1.toString();
-    QString s2 = f2.fileName()+"-"+rev2.toString();
-    QString first,second,out;
+    QString src1 = _src1;
+    QString src2 = _src2;
+    QString target = _target;
+
+    if (src2.isEmpty()) {
+        src2 = src1;
+    }
     if (rev1 == rev2 && src1==src2) {
         emit clientException(i18n("Can not merge identical content."));
         return;
     }
+    if (src1.isEmpty()) {
+        emit clientException(i18n("Nothing to merge."));
+        return;
+    }
+    if (target.isEmpty()) {
+        emit clientException(i18n("No destination to merge."));
+        return;
+    }
+
+    KURL url(target);
+    if (!url.isLocalFile()) {
+        emit clientException(i18n("Target for merge must be local!"));
+        return;
+    }
+
+    QFileInfo f1(src1);
+    QFileInfo f2(src2);
+    bool isDir = true;
+
+    svn::InfoEntry i1,i2;
+
+    if (!singleInfo(src1,rev1,i1)) {
+        return;
+    }
+    isDir = i1.isDir();
+    if (src1 != src2) {
+        if (!singleInfo(src2,rev2,i2)) {
+            return;
+        }
+        if (i2.isDir()!=isDir) {
+            emit clientException(i18n("Both sources must be same type!"));
+            return;
+        }
+    }
+
+    QFileInfo ti(target);
+
+    if (ti.isDir()!=isDir) {
+        emit clientException(i18n("Target for merge must same type like sources!"));
+        return;
+    }
+
+    QString s1 = f1.fileName()+"-"+rev1.toString();
+    QString s2 = f2.fileName()+"-"+rev2.toString();
+    QString first,second,out;
     if (rev1 != svn::Revision::WORKING) {
         first = tdir.name()+"/"+s1;
-        if (!makeCheckout(src1,first,rev1,true,true,false,rec)) {
-            return;
+        if (isDir) {
+            if (!makeCheckout(src1,first,rev1,true,true,false,rec)) {
+                return;
+            }
+        } else {
+            if (!get(src1,first,rev1,svn::Revision::UNDEFINED,m_Data->m_ParentList->realWidget())) {
+                return;
+            }
         }
     } else {
         first = src1;
     }
     if (rev2!=svn::Revision::WORKING) {
         second = tdir.name()+"/"+s2;
-        if (!makeCheckout(src2,second,rev1,true,true,false,rec)) {
-            return;
+        if (isDir) {
+            if (!makeCheckout(src2,second,rev2,true,true,false,rec)) {
+                return;
+            }
+        } else {
+            if (!get(src2,second,rev2,svn::Revision::UNDEFINED,m_Data->m_ParentList->realWidget())) {
+                return;
+            }
         }
     } else {
         second = src2;
@@ -1685,11 +1744,11 @@ void SvnActions::slotMergeExternal(const QString&src1,const QString&src2, const 
     QStringList wlist = QStringList::split(" ",edisp);
     KProcess*proc = new KProcess();
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
-        if (*it=="%1") {
+        if (*it=="%s1") {
             *proc<<first;
-        } else if (*it=="%2") {
+        } else if (*it=="%s2") {
             if (!second.isEmpty()) *proc<<second;
-        } else if (*it=="%o"){
+        } else if (*it=="%t") {
             *proc<<target;
         } else {
             *proc << *it;
@@ -1723,6 +1782,8 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
         s2 = src2;
     }
     try {
+        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Merge"),i18n("Merging items"));
+        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         m_Data->m_Svnclient->merge(svn::Path(src1),
             rev1,
             svn::Path(s2),

@@ -1128,10 +1128,8 @@ cleans up after closing external program or closing itself.
 <sect2>
 <title>External merge program</title>
 <para>
-Setup the program and options for using when subversions builtin merge isn't wanted.
-</para>
-<para> 
-<example><title>Default for external merge program</title><programlisting>kdiff3 %s1 %s2 %t</programlisting></example>
+Setup the program and options for using when subversions builtin merge isn't wanted. The default is <prompt>kdiff3 %s1 %s2 %t</prompt>. The order of substitution variables isn't important, and them may there more than once, eg. like <prompt>kdiff3 -o %t %s1 %s2 %t</prompt>. This stuff is only tested with &quot;meld&quot;
+ and &quot;kdiff3&quot;. Think about that external programs mostly doesn't know any about subversion ignore-parameter so them may show lot more than expected.
 </para>
 <sect3>
 <title>Variable substitutions for external merge program</title>

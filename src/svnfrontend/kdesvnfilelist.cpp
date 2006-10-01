@@ -809,7 +809,11 @@ void kdesvnfilelist::enableActions()
     m_simpleDiffHead->setEnabled(isWorkingCopy()&&isopen);
     temp = filesActions()->action("make_svn_basediff");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&isopen);
+        temp->setEnabled(isWorkingCopy()&&isopen&&single);
+    }
+    temp = filesActions()->action("make_svn_headdiff");
+    if (temp) {
+        temp->setEnabled(isWorkingCopy()&&isopen&&single);
     }
 
     /* 2. on dirs only */
@@ -828,7 +832,7 @@ void kdesvnfilelist::enableActions()
 
     temp = filesActions()->action("make_revisions_diff");
     if (temp) {
-        temp->setEnabled(isopen);
+        temp->setEnabled(isopen&&single);
     }
     temp = filesActions()->action("make_revisions_cat");
     if (temp) {
@@ -1470,12 +1474,16 @@ void kdesvnfilelist::slotMergeRevisions()
     if (!which) {
         return;
     }
-    bool force,dry,rec,irelated;
+    bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
-    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,this,"merge_range")) {
+    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,&useExternal,this,"merge_range")) {
         return;
     }
-    m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,irelated,force,dry);
+    if (!useExternal) {
+        m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,irelated,force,dry);
+    } else {
+        m_SvnWrapper->slotMergeExternal(which->fullName(),which->fullName(),which->fullName(),range.first,range.second,rec);
+    }
     refreshItem(which);
     refreshRecursive(which);
 }

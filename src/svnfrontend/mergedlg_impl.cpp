@@ -180,6 +180,7 @@ Rangeinput_impl::revision_range MergeDlg_impl::getRange()const
     \fn MergeDlg_impl::getMergeRange(bool*force,bool*recursive,bool*related,bool*dry)
  */
 bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*force,bool*recursive,bool*ignorerelated,bool*dry,
+    bool*useExternal,
     QWidget*parent,const char*name)
 {
     MergeDlg_impl*ptr = 0;
@@ -197,6 +198,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     *recursive=ptr->recursive();
     *ignorerelated=ptr->ignorerelated();
     *dry = ptr->dryrun();
+    *useExternal = ptr->useExtern();
     return true;
 }
 

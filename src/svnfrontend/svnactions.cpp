@@ -948,13 +948,14 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     KTempFile tfile(QString::null,f1.fileName()+"-"+start.toString()),tfile2(QString::null,f2.fileName()+"-"+end.toString());
     QString s1 = f1.fileName()+"-"+start.toString();
     QString s2 = f2.fileName()+"-"+end.toString();
-    KTempDir tdir;
-    tdir.setAutoDelete(true);
+    KTempDir tdir1,tdir2;
+    tdir1.setAutoDelete(true);
+    tdir2.setAutoDelete(true);
     tfile.setAutoDelete(true);
     tfile2.setAutoDelete(true);
     QString first,second;
     if (start != svn::Revision::WORKING) {
-        first = isDir?tdir.name()+"/"+s1:tfile.name();
+        first = isDir?tdir1.name()+"/"+s1:tfile.name();
         if (!isDir) {
             if (!get(p1,tfile.name(),start,svn::Revision::UNDEFINED,p)) {
                 return;
@@ -968,7 +969,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
         first = p1;
     }
     if (end!=svn::Revision::WORKING) {
-        second = isDir?tdir.name()+"/"+s2:tfile2.name();
+        second = isDir?tdir2.name()+"/"+s2:tfile2.name();
         if (!isDir) {
             if (!get(p2,tfile2.name(),end,svn::Revision::UNDEFINED,p)) {
                 return;
@@ -1000,8 +1001,10 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 m_Data->m_tempfilelist[proc].append(tfile.name());
                 m_Data->m_tempfilelist[proc].append(tfile2.name());
             } else {
-                tdir.setAutoDelete(false);
-                m_Data->m_tempdirlist[proc].append(tdir.name());
+                tdir1.setAutoDelete(false);
+                m_Data->m_tempdirlist[proc].append(tdir1.name());
+                tdir2.setAutoDelete(false);
+                m_Data->m_tempdirlist[proc].append(tdir2.name());
             }
         }
         return;
@@ -1654,8 +1657,9 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, const QString&_target,
     const svn::Revision&rev1,const svn::Revision&rev2,bool rec)
 {
-    KTempDir tdir;
-    tdir.setAutoDelete(true);
+    KTempDir tdir1,tdir2;
+    tdir1.setAutoDelete(true);
+    tdir2.setAutoDelete(true);
     QString src1 = _src1;
     QString src2 = _src2;
     QString target = _target;
@@ -1713,7 +1717,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     QString s2 = f2.fileName()+"-"+rev2.toString();
     QString first,second,out;
     if (rev1 != svn::Revision::WORKING) {
-        first = tdir.name()+"/"+s1;
+        first = tdir1.name()+"/"+s1;
         if (isDir) {
             if (!makeCheckout(src1,first,rev1,true,true,false,rec)) {
                 return;
@@ -1727,7 +1731,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         first = src1;
     }
     if (rev2!=svn::Revision::WORKING) {
-        second = tdir.name()+"/"+s2;
+        second = tdir2.name()+"/"+s2;
         if (isDir) {
             if (!makeCheckout(src2,second,rev2,true,true,false,rec)) {
                 return;
@@ -1757,8 +1761,10 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
     if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::NoCommunication)) {
         if (!m_Data->runblocked) {
-            tdir.setAutoDelete(false);
-            m_Data->m_tempdirlist[proc].append(tdir.name());
+            tdir1.setAutoDelete(false);
+            tdir2.setAutoDelete(false);
+            m_Data->m_tempdirlist[proc].append(tdir1.name());
+            m_Data->m_tempdirlist[proc].append(tdir2.name());
         }
         return;
     }

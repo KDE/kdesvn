@@ -212,7 +212,8 @@ int CommandExec::exec()
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
-        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j));
+        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyURL());
+        kdDebug()<<tmpurl<<endl;
         query = tmpurl.query();
         q = m_pCPart->args->url(j).queryItems();
         if (q.find("rev")!=q.end()) {
@@ -226,7 +227,6 @@ int CommandExec::exec()
             // this class itself checks if done before
             ag.addSshIdentities();
         }
-        kdDebug()<<"Urlpath: " << tmpurl.path()<<endl;
         m_pCPart->extraRevisions[j-2]=svn::Revision::HEAD;
 
         if (tmpurl.isLocalFile() && (j==2 || !dont_check_second) && !dont_check_all) {
@@ -263,10 +263,13 @@ int CommandExec::exec()
             continue;
         }
         svn::Revision re,ra;
-        m_pCPart->m_SvnWrapper->svnclient()->url2Revision(v,re,ra);
+        m_pCPart->m_SvnWrapper->svnclient()->url2Revision(v,re);
 
         if (re != svn::Revision::UNDEFINED) {
-            kdDebug()<<"Revision " << re << " gefunden. " << endl;
+            QString v1;
+            QTextOStream s(&v1);
+            s << re;
+            kdDebug()<<"Revision " << v1 << " gefunden. " << endl;
             m_pCPart->extraRevisions[j-2]=re;
         }
         kdDebug()<<"Uri zum testen: " << tmpurl<<endl;

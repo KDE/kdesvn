@@ -59,6 +59,7 @@
 #include <kconfig.h>
 #include <klistview.h>
 #include <kio/netaccess.h>
+#include <kstandarddirs.h>
 
 #include <qstring.h>
 #include <qmap.h>
@@ -942,21 +943,24 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
 {
     QString edisp = Kdesvnsettings::external_diff_display();
     QStringList wlist = QStringList::split(" ",edisp);
-    KTempFile tfile,tfile2;
-    KTempDir tdir1, tdir2;
-    tdir1.setAutoDelete(true);
-    tdir2.setAutoDelete(true);
+    QFileInfo f1(p1);
+    QFileInfo f2(p2);
+    KTempFile tfile(QString::null,f1.fileName()+"-"+start.toString()),tfile2(QString::null,f2.fileName()+"-"+end.toString());
+    QString s1 = f1.fileName()+"-"+start.toString();
+    QString s2 = f2.fileName()+"-"+end.toString();
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
     tfile.setAutoDelete(true);
     tfile2.setAutoDelete(true);
     QString first,second;
     if (start != svn::Revision::WORKING) {
-        first = isDir?tdir1.name():tfile.name();
+        first = isDir?tdir.name()+"/"+s1:tfile.name();
         if (!isDir) {
             if (!get(p1,tfile.name(),start,svn::Revision::UNDEFINED,p)) {
                 return;
             }
         } else {
-            if (!makeCheckout(p1,tdir1.name(),start,true,true,false,rec,p)) {
+            if (!makeCheckout(p1,first,start,true,true,false,rec,p)) {
                 return;
             }
         }
@@ -964,13 +968,13 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
         first = p1;
     }
     if (end!=svn::Revision::WORKING) {
-        second = isDir?tdir2.name():tfile2.name();
+        second = isDir?tdir.name()+"/"+s2:tfile2.name();
         if (!isDir) {
             if (!get(p2,tfile2.name(),end,svn::Revision::UNDEFINED,p)) {
                 return;
             }
         } else {
-            if (!makeCheckout(p2,tdir2.name(),end,true,true,false,rec,p)) {
+            if (!makeCheckout(p2,second,end,true,true,false,rec,p)) {
                 return;
             }
         }
@@ -996,10 +1000,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 m_Data->m_tempfilelist[proc].append(tfile.name());
                 m_Data->m_tempfilelist[proc].append(tfile2.name());
             } else {
-                tdir1.setAutoDelete(false);
-                tdir2.setAutoDelete(false);
-                m_Data->m_tempdirlist[proc].append(tdir1.name());
-                m_Data->m_tempdirlist[proc].append(tdir2.name());
+                tdir.setAutoDelete(false);
+                m_Data->m_tempdirlist[proc].append(tdir.name());
             }
         }
         return;
@@ -1409,6 +1411,9 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
     }
     svn::Path p(tPath);
     svn::Revision peg = svn::Revision::UNDEFINED;
+    if (r!=svn::Revision::BASE && r!=svn::Revision::WORKING) {
+        peg = r;
+    }
     if (!_exp||!m_Data->m_CurrentContext) reInitClient();
     try {
         StopDlg sdlg(m_Data->m_SvnContext,_p?_p:m_Data->m_ParentList->realWidget(),0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
@@ -1644,6 +1649,61 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
         emit clientException(e.msg());
         return;
     }
+}
+
+void SvnActions::slotMergeExternal(const QString&src1,const QString&src2, const QString&target,
+    const svn::Revision&rev1,const svn::Revision&rev2,bool rec)
+{
+    KTempDir tdir;
+    tdir.setAutoDelete(true);
+    QFileInfo f1(src1);
+    QFileInfo f2(src2);
+    QString s1 = f1.fileName()+"-"+rev1.toString();
+    QString s2 = f2.fileName()+"-"+rev2.toString();
+    QString first,second,out;
+    if (rev1 == rev2 && src1==src2) {
+        emit clientException(i18n("Can not merge identical content."));
+        return;
+    }
+    if (rev1 != svn::Revision::WORKING) {
+        first = tdir.name()+"/"+s1;
+        if (!makeCheckout(src1,first,rev1,true,true,false,rec)) {
+            return;
+        }
+    } else {
+        first = src1;
+    }
+    if (rev2!=svn::Revision::WORKING) {
+        second = tdir.name()+"/"+s2;
+        if (!makeCheckout(src2,second,rev1,true,true,false,rec)) {
+            return;
+        }
+    } else {
+        second = src2;
+    }
+    QString edisp = Kdesvnsettings::external_merge_program();
+    QStringList wlist = QStringList::split(" ",edisp);
+    KProcess*proc = new KProcess();
+    for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
+        if (*it=="%1") {
+            *proc<<first;
+        } else if (*it=="%2") {
+            if (!second.isEmpty()) *proc<<second;
+        } else if (*it=="%o"){
+            *proc<<target;
+        } else {
+            *proc << *it;
+        }
+    }
+    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::NoCommunication)) {
+        if (!m_Data->runblocked) {
+            tdir.setAutoDelete(false);
+            m_Data->m_tempdirlist[proc].append(tdir.name());
+        }
+        return;
+    }
+    delete proc;
 }
 
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,

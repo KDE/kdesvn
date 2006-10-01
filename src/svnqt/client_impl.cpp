@@ -99,6 +99,8 @@ namespace svn
             start = Revision::WORKING;
         } else if (revstring=="BASE"){
             start = Revision::BASE;
+        } else if (revstring=="START"){
+            start = Revision::START;
         } else {
             Revision end;
             url2Revision(revstring,start,end);

@@ -1491,7 +1491,7 @@ void kdesvnfilelist::slotMerge()
             src1 = which->fullName();
         }
     }
-    bool force,dry,rec,irelated;
+    bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr;
     KDialogBase*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog");
@@ -1513,8 +1513,13 @@ void kdesvnfilelist::slotMerge()
         dry = ptr->dryrun();
         rec = ptr->recursive();
         irelated = ptr->ignorerelated();
+        useExternal = ptr->useExtern();
         range = ptr->getRange();
-        m_SvnWrapper->slotMerge(src1,src2,target,range.first,range.second,rec,irelated,force,dry);
+        if (!useExternal) {
+            m_SvnWrapper->slotMerge(src1,src2,target,range.first,range.second,rec,irelated,force,dry);
+        } else {
+            m_SvnWrapper->slotMergeExternal(src1,src2,target,range.first,range.second,rec);
+        }
         if (isWorkingCopy()) {
 //            refreshItem(which);
 //            refreshRecursive(which);

@@ -28,6 +28,9 @@
 #include "revision.hpp"
 #include "pool.hpp"
 
+// qt
+#include "qdatetime.h"
+
 namespace svn
 {
   const svn_opt_revision_kind Revision::START = svn_opt_revision_number;
@@ -112,6 +115,41 @@ namespace svn
         m_revision.value.number = 0;
       }
     }
+  }
+
+  Revision::operator QString ()const
+  {
+    return toString();
+  }
+
+  QString Revision::toString()const
+  {
+    QString value;
+    QDateTime result;
+    switch (m_revision.kind) {
+    case svn_opt_revision_number:
+        value.sprintf("%li",m_revision.value.number);
+        break;
+    case svn_opt_revision_date:
+        if (m_revision.value.date<0)result.setTime_t(0,Qt::LocalTime);
+        else result.setTime_t(m_revision.value.date/(1000*1000),Qt::LocalTime);
+        value = result.toString("{yyyy-MM-dd}");
+        break;
+    case svn_opt_revision_base:
+        value = "BASE";
+        break;
+    case svn_opt_revision_head:
+        value = "HEAD";
+        break;
+    case svn_opt_revision_working:
+        value = "WORKING";
+        break;
+    case svn_opt_revision_unspecified:
+    default:
+        value="-1";
+        break;
+    }
+    return value;
   }
 
   const svn_opt_revision_t *

@@ -34,6 +34,7 @@
 #include <qglobal.h>
 #if QT_VERSION < 0x040000
     #include <qstring.h>
+    #include <qtextstream.h>
 #else
     #include <QtCore>
 #endif
@@ -145,6 +146,9 @@ namespace svn
     const svn_opt_revision_kind
     kind () const;
 
+    operator QString ()const;
+    QString toString()const;
+
     /**
      * @return date
      */
@@ -154,7 +158,14 @@ namespace svn
     bool operator==(const Revision&)const;
     bool operator!=(const svn_opt_revision_kind)const;
     bool operator==(const svn_opt_revision_kind)const;
+
   };
+}
+
+inline QTextStream& operator<<(QTextStream&s,svn::Revision&r)
+{
+    s << r.toString();
+    return s;
 }
 
 #endif

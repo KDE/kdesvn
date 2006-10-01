@@ -51,6 +51,8 @@ MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool sr
         m_OutInput->hide();
         m_OutLabel->hide();
     }
+    adjustSize();
+    setMinimumSize(minimumSizeHint());
 }
 
 MergeDlg_impl::~MergeDlg_impl()
@@ -127,6 +129,11 @@ bool MergeDlg_impl::dryrun()const
     return m_DryCheck->isChecked();
 }
 
+bool MergeDlg_impl::useExtern()const
+{
+    return m_useExternMerge->isChecked();
+}
+
 QString MergeDlg_impl::Src1()const
 {
     KURL uri(m_SrcOneInput->url());
@@ -189,6 +196,13 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     *ignorerelated=ptr->ignorerelated();
     *dry = ptr->dryrun();
     return true;
+}
+
+void MergeDlg_impl::externDisplayToggled(bool how)
+{
+    m_DryCheck->setEnabled(!how);
+    m_RelatedCheck->setEnabled(!how);
+    m_ForceCheck->setEnabled(!how);
 }
 
 #include "mergedlg_impl.moc"

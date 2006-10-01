@@ -33,6 +33,7 @@ public:
     bool force()const;
     bool ignorerelated()const;
     bool dryrun()const;
+    bool useExtern()const;
 
     QString Src1()const;
     QString Src2()const;
@@ -45,6 +46,8 @@ public:
 
     static bool getMergeRange(Rangeinput_impl::revision_range&range,
         bool*force,bool*recursive,bool*ignorerelated,bool*dry,QWidget*parent=0,const char*name=0);
+protected slots:
+    virtual void externDisplayToggled(bool);
 
 };
 

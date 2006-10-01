@@ -39,6 +39,7 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
     m_stopDateInput->setEnabled(false);
     m_startDateInput->setEnabled(false);
     m_stopHeadButton->setChecked(true);
+    setMinimumSize(minimumSizeHint());
 }
 
 Rangeinput_impl::~Rangeinput_impl()
@@ -167,6 +168,7 @@ void Rangeinput_impl::setStartOnly(bool theValue)
         m_stopRevBox->show();
         m_startRevBox->setTitle(i18n( "Start with revision" ));
     }
+    setMinimumSize(minimumSizeHint());
 }
 
 #include "rangeinput_impl.moc"

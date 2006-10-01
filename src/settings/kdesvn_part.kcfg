@@ -82,6 +82,12 @@
       <default>false</default>
     </entry>
   </group>
+  <group name="diffmerge_items">
+    <entry key="external_merge_program" type="String" >
+      <label>Which program to use for external merges</label>
+      <default>kdiff3 -o %o %1 %2</default>
+    </entry>
+  </group>
   <group name="display" >
     <entry key="colored_state" type="Bool" >
       <label>Display different then normal states colored</label>

@@ -189,6 +189,7 @@ public slots:
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotMerge(const QString&,const QString&, const QString&,
         const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
+    void slotMergeExternal(const QString&src1,const QString&src2, const QString&target,const svn::Revision&rev1,const svn::Revision&rev2,bool);
     virtual void slotExtraLogMsg(const QString&);
     void slotMakeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg,QWidget*dlgparent);
 

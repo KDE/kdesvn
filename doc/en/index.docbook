@@ -1087,7 +1087,7 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 <sect2>
 <title>Diff display</title>
 <para>
-Selects which kind of display for diff-content should use. Default is &quot;kompare&quot; If set to &quot;External display&quot; 
+Selects which kind of display for diff-content should use. Default is &quot;kompare&quot; If set to &quot;External display&quot;
 you must enter a valid program in &quot;External diff display&quot;. Only if internal display is used you may see differences in properties.
 </para>
 </sect2>
@@ -1108,7 +1108,7 @@ The difference will generated with subversion and put direct into standard input
 <varlistentry>
 <term>&lt;program&gt; &lt;parameter&gt; %f</term>
 <listitem><para>
-The difference will generated with subversion, saved into a temporary file and the parameter &quot;%f&quot; will replaced with that filename. 
+The difference will generated with subversion, saved into a temporary file and the parameter &quot;%f&quot; will replaced with that filename.
 This may used with for instance with a simple call to less or textviewer.
 </para></listitem>
 </varlistentry>
@@ -1117,7 +1117,7 @@ This may used with for instance with a simple call to less or textviewer.
 <term>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
 <listitem><para>
 &kappname; let the external program make the difference. %1 and %2 will replaced with required values (filenames or foldernames). &kappname;
-stores content to compare in a temporary environment (when folders do a &quot;export&quot;, when single file, does a &quot;cat&quot;) when needed and 
+stores content to compare in a temporary environment (when folders do a &quot;export&quot;, when single file, does a &quot;cat&quot;) when needed and
 cleans up after closing external program or closing itself.
 </para></listitem>
 </varlistentry>
@@ -1146,7 +1146,8 @@ Substituted with source number one.
 <varlistentry>
 <term>%s2</term>
 <listitem><para>
-Substituted with source number two, if this is empty, substituted with source number one, too.
+Substituted with source number two. If this is empty or this is equal to source one and start and end revision is same, this variable
+will skipped. So be carefull setting up commandlines like <prompt>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</prompt>.
 </para></listitem>
 </varlistentry>
 

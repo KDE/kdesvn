@@ -872,6 +872,15 @@ void SvnActions::wroteStdin(KProcess*proc)
     proc->closeStdin();
 }
 
+void SvnActions::receivedStderr(KProcess*proc,char*buff,int len)
+{
+    if (!proc || !buff || len == 0) {
+        return;
+    }
+    QString msg(QCString(buff,len));
+    emit sendNotify(msg);
+}
+
 void SvnActions::procClosed(KProcess*proc)
 {
     if (!proc) return;
@@ -993,7 +1002,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
         }
     }
     connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::NoCommunication)) {
+    connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::Stderr)) {
         if (!m_Data->runblocked) {
             if (!isDir) {
                 tfile2.setAutoDelete(false);
@@ -1097,12 +1107,13 @@ void SvnActions::dispDiff(const QString&ex)
         *proc << "-";
         connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-        if (proc->start(KProcess::NotifyOnExit,KProcess::Stdin)) {
+        connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+        if (proc->start(KProcess::NotifyOnExit,KProcess::Stderr)) {
             proc->writeStdin(ex.ascii(),ex.length());
             return;
         }
         delete proc;
-    } else if (disp>1 && what.find("%f")!=-1) {
+    } else if (disp>1  && (what.find("%1")==-1 || what.find("%2")==-1)) {
         QStringList wlist = QStringList::split(" ",what);
         KProcess*proc = new KProcess();
         bool fname_used = false;
@@ -1121,12 +1132,13 @@ void SvnActions::dispDiff(const QString&ex)
                 *proc << *it;
             }
         }
+
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+        connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
         if (!fname_used) {
             connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         }
-
-        if (proc->start(KProcess::NotifyOnExit,fname_used?KProcess::NoCommunication:KProcess::Stdin)) {
+        if (proc->start(KProcess::NotifyOnExit,KProcess::Stderr)) {
             if (!fname_used) proc->writeStdin(ex.ascii(),ex.length());
             else m_Data->m_tempfilelist[proc].append(tfile.name());
             return;
@@ -1663,13 +1675,13 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     QString src1 = _src1;
     QString src2 = _src2;
     QString target = _target;
+    bool singleMerge = false;
 
     if (src2.isEmpty()) {
         src2 = src1;
     }
-    if (rev1 == rev2 && src1==src2) {
-        emit clientException(i18n("Can not merge identical content."));
-        return;
+    if (rev1 == rev2 && (src1==src2 || src2.isEmpty()) ) {
+        singleMerge = true;
     }
     if (src1.isEmpty()) {
         emit clientException(i18n("Nothing to merge."));
@@ -1730,19 +1742,25 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     } else {
         first = src1;
     }
-    if (rev2!=svn::Revision::WORKING) {
-        second = tdir2.name()+"/"+s2;
-        if (isDir) {
-            if (!makeCheckout(src2,second,rev2,true,true,false,rec)) {
-                return;
+
+    if (!singleMerge) {
+        if (rev2!=svn::Revision::WORKING) {
+            second = tdir2.name()+"/"+s2;
+            if (isDir) {
+                if (!makeCheckout(src2,second,rev2,true,true,false,rec)) {
+                    return;
+                }
+            } else {
+                if (!get(src2,second,rev2,svn::Revision::UNDEFINED,m_Data->m_ParentList->realWidget())) {
+                    return;
+                }
             }
         } else {
-            if (!get(src2,second,rev2,svn::Revision::UNDEFINED,m_Data->m_ParentList->realWidget())) {
-                return;
-            }
+            second = src2;
         }
     } else {
-        second = src2;
+        // only two-way  merge
+        second = QString::null;
     }
     QString edisp = Kdesvnsettings::external_merge_program();
     QStringList wlist = QStringList::split(" ",edisp);
@@ -1759,7 +1777,8 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         }
     }
     connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::NoCommunication)) {
+    connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::Stderr)) {
         if (!m_Data->runblocked) {
             tdir1.setAutoDelete(false);
             tdir2.setAutoDelete(false);

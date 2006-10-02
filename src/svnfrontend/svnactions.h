@@ -208,6 +208,7 @@ protected slots:
     virtual void procClosed(KProcess*);
     virtual void checkModthread();
     virtual void checkUpdateThread();
+    virtual void receivedStderr(KProcess*,char*,int);
 };
 
 #endif

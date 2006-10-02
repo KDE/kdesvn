@@ -131,8 +131,14 @@ namespace svn
         value.sprintf("%li",m_revision.value.number);
         break;
     case svn_opt_revision_date:
+#if QT_VERSION < 0x040000
         if (m_revision.value.date<0)result.setTime_t(0,Qt::LocalTime);
         else result.setTime_t(m_revision.value.date/(1000*1000),Qt::LocalTime);
+#else
+        result.setTimeSpec(Qt::LocalTime);
+        if (m_revision.value.date<0)result.setTime_t(0);
+        else result.setTime_t(m_revision.value.date/(1000*1000));
+#endif
         value = result.toString("{yyyy-MM-dd}");
         break;
     case svn_opt_revision_base:

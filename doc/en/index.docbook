@@ -424,6 +424,91 @@ Mark the folder where you want to import a new folder. Then select
 </sect3>
 </sect2>
 </sect1>
+<sect1 id="operations">
+<title>Other Operations</title>
+<sect2>
+<title>Merge</title>
+<para>
+Open repository or working copy, mark item you want to merge and select
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>General</guisubmenu>
+<guisubmenu>Merge</guisubmenu>
+</menuchoice>.
+Enter in the following dialog the values wanted. If opend from repository, source 1 and source 2 are filled, when open from within working copy, target is filled with current selected item. The handling of this parameter is a little bit different between using the internal diff of subversion or an external merge-programm like kdiff3. The target must ALWAYS a local folder or file. You may switch between external or internal merge with the checkbox &quot;Use external merge&quot;.
+</para>
+<sect3>
+<title>Internal merge</title>
+<para>
+The meaning is exactly like from within subversions own commandline tool. When source1 and source2 are equal, start and endrevision must different. If sources aren't equal, start-revision is assigned to source1 and end-revision to source2. The target MUST be a working copy otherwise subversion will send an error message.
+</para>
+<para>
+The checkboxes have following meanings:
+<variablelist>
+
+<varlistentry>
+<term>Recoursive</term>
+<listitem><para>
+Do all operations recoursive when working with folders.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Handle unrelated as related items</term>
+<listitem><para>
+If set, unrelated items will be diffed as if they were related. Otherwise subversion will remove one side and add it on other side again.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Force delete on modified/unversioned</term>
+<listitem><para>
+If not set and merge would require deletion of an modified or unversioned item the subversion merge fails. Otherwise this items will deleted.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Just dry run without modifications.</term>
+<listitem><para>
+If set, subversions sends only notifications what it would do but doesn't modify the working copy.
+</para></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title>Using external program for merge</title>
+<para>
+See <xref linkend="diffmerge-settings"/> for details how to setup the external merge tool. &kappname; generates the commandline as described there. Before it does following:
+</para>
+<para>
+<orderedlist>
+
+<listitem><para>
+Assign start-revision as revision to source 1 and end-revision to source 2. Then checks if them are different (path and/or revision). If yes, its a three-way merge otherwise a simple merge from source to target. If source 2 is left empty it is a simple merge, too.
+</para></listitem>
+
+<listitem><para>
+Make an export into temporary folder. If a simple merge only source1 at start-revision, otherwise both sources with there revisions. If item is a file and not a folder than get the content at a specific revision.
+</para></listitem>
+
+<listitem>
+<para>
+Generate the call to your external merge program as you setup in Settings. The error output will displayed in log window so you may see whats going wrong (if something is gone wrong).
+</para>
+</listitem>
+</orderedlist>
+
+In difference to internal merge target may a flat folder/file not under sourcecontrol 'cause external tools doesn't care about it.
+</para>
+<para>
+If recoursive isn't set, the export is done as a flat export. Be care: when doing this with working copies externals will NOT exported.
+</para>
+</sect3>
+
+</sect2>
+</sect1>
 
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>

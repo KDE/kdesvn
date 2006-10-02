@@ -1677,10 +1677,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     QString target = _target;
     bool singleMerge = false;
 
-    if (src2.isEmpty()) {
-        src2 = src1;
-    }
-    if (rev1 == rev2 && (src1==src2 || src2.isEmpty()) ) {
+    if (rev1 == rev2 && (src2.isEmpty() || src1==src2) ) {
         singleMerge = true;
     }
     if (src1.isEmpty()) {
@@ -1708,7 +1705,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         return;
     }
     isDir = i1.isDir();
-    if (src1 != src2) {
+    if (!singleMerge && src1 != src2) {
         if (!singleInfo(src2,rev2,i2)) {
             return;
         }

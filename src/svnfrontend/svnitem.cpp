@@ -131,15 +131,7 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
             QString proto;
             proto = helpers::KTranslateUrl::makeKdeUrl(m_kdename.protocol());
             m_kdename.setProtocol(proto);
-            QString revstr="";
-            if (lRev.kind()==svn::Revision::HEAD) {
-                revstr="HEAD";
-            } else if (lRev.kind()==svn_opt_revision_number) {
-                revstr=QString("%1").arg(lRev.revnum());
-            } else if (lRev.kind()==svn_opt_revision_date) {
-                QDateTime t = helpers::sub2qt::apr_time2qt(lRev.date());
-                revstr=QString("{%1}").arg(t.toString("yyyy-MM-dd"));
-            }
+            QString revstr= lRev.toString();
             if (revstr.length()>0) {
                 m_kdename.setQuery("?rev="+revstr);
             }

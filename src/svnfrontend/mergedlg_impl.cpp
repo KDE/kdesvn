@@ -185,8 +185,9 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
 {
     MergeDlg_impl*ptr = 0;
     KDialogBase dlg(parent,name,true,i18n("Enter merge range"),
-            KDialogBase::Ok|KDialogBase::Cancel,
+            KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help,
             KDialogBase::Ok,true);
+    dlg.setHelp("merging-items","kdesvn");
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     ptr = new MergeDlg_impl(Dialog1Layout,"merge_range_dlg",false,false,false);
     dlg.resize( QSize(480,360).expandedTo(dlg.minimumSizeHint()) );

@@ -956,14 +956,21 @@ void kdesvnfilelist::slotResolved()
     slotRescanIcons(false);
 }
 
-template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
+template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp)
 {
+    int buttons = KDialogBase::Ok;
+    if (OkCancel) {
+        buttons = buttons|KDialogBase::Cancel;
+    }
+    if (showHelp) {
+        buttons = buttons|KDialogBase::Help;
+    }
     KDialogBase * dlg = new KDialogBase(
         KApplication::activeModalWidget(),
         name,
         true,
         _head,
-        (OkCancel?KDialogBase::Ok|KDialogBase::Cancel:KDialogBase::Ok));
+        buttons);
 
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
@@ -1502,11 +1509,11 @@ void kdesvnfilelist::slotMerge()
     bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog");
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog",true);
     if (!dlg) {
         return;
     }
-
+    dlg->setHelp("merging-items","kdesvn");
     ptr->setDest(target);
     ptr->setSrc1(src1);
     ptr->setSrc2(src1);

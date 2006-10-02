@@ -100,7 +100,8 @@ protected:
     template<class T> KDialogBase* createDialog(T**ptr,
         const QString&_head,
         bool OkCancel=false,
-        const char*name="dialog"
+        const char*name="dialog",
+        bool showHelp=false
         );
 
     FileListViewItemList* m_SelectedItems;

@@ -330,6 +330,7 @@ void kdesvnPart::slotShowSettings()
          "kdesvnpart_settings",
          Kdesvnsettings::self(),
          KDialogBase::IconList);
+    dialog->setHelp("setup","kdesvn");
     dialog->addPage(new DisplaySettings_impl(0,"general_items"),
         i18n("General"),"configure",i18n("General"),true);
     dialog->addPage(new SubversionSettings_impl(0,"subversion_items"),

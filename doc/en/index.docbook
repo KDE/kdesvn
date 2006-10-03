@@ -1270,6 +1270,27 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 
 <sect1 id="diffmerge-settings">
 <title>Diff &#038; merge</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term>Diff ignore contenttype</term>
+<listitem><para>
+Only interesting when diff are made with subversion itself. When set, than subversions diff ignores the content type of entries. Otherwise it will not output 
+diffs from binaries.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Diff in revisiontree is recursive</term>
+<listitem><para>
+When set, diffs made from within revisiontree view are made recursive like in all other cases, too. Otherwise only changes belonging to that folderitems are shown. How that is made depends on how you let diffs generate (from subversion itself or from external viewers).
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
 <sect2>
 <title>Diff display</title>
 <para>

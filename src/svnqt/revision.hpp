@@ -94,6 +94,15 @@ namespace svn
 
     /**
      * Constructor
+     * @param revstring a revision string
+     *
+     * The revision string MUST uppercase, it may some of "HEAD", "BASE", "WORKING", "COMMITED", "PREV",
+     * or a date in form {YYYY-MM-DD}.
+     */
+    Revision (const QString&revstring);
+
+    /**
+     * Constructor
      *
      * @param kind
      */
@@ -161,6 +170,11 @@ namespace svn
     bool operator==(const Revision&)const;
     bool operator!=(const svn_opt_revision_kind)const;
     bool operator==(const svn_opt_revision_kind)const;
+
+    bool operator!()const;
+    bool operator!();
+    operator bool()const;
+    operator bool();
 
     /**
      * assignment operator

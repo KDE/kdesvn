@@ -262,17 +262,10 @@ int CommandExec::exec()
         if ( (j>2 && dont_check_second) || dont_check_all) {
             continue;
         }
-        svn::Revision re,ra;
-        m_pCPart->m_SvnWrapper->svnclient()->url2Revision(v,re);
-
-        if (re != svn::Revision::UNDEFINED) {
-            QString v1;
-            QTextOStream s(&v1);
-            s << re;
-            kdDebug()<<"Revision " << v1 << " gefunden. " << endl;
+        svn::Revision re = v;
+        if (re) {
             m_pCPart->extraRevisions[j-2]=re;
         }
-        kdDebug()<<"Uri zum testen: " << tmpurl<<endl;
     }
     if (m_pCPart->url.count()==0) {
         m_pCPart->url.append(".");
@@ -381,10 +374,10 @@ void CommandExec::slotCmd_exportto()
 
 void CommandExec::slotCmd_blame()
 {
-    if (m_pCPart->end == svn::Revision::UNDEFINED) {
+    if (!m_pCPart->end) {
         m_pCPart->end = svn::Revision::HEAD;
     }
-    if (m_pCPart->start == svn::Revision::UNDEFINED) {
+    if (!m_pCPart->start) {
         m_pCPart->start = 1;
     }
     m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start,m_pCPart->end,m_pCPart->url[0]);
@@ -476,7 +469,13 @@ void CommandExec::slotCmd_commit()
 void CommandExec::slotCmd_list()
 {
     svn::DirEntries res;
-    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),false)) {
+    svn::Revision rev = m_pCPart->end;
+    if (m_pCPart->rev_set){
+        rev = m_pCPart->start;
+    } else if (m_pCPart->extraRevisions[0]) {
+        rev = m_pCPart->extraRevisions[0];
+    }
+    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,rev,false)) {
         return;
     }
     for (unsigned int i = 0; i < res.count();++i) {
@@ -553,15 +552,14 @@ void CommandExec::slotCmd_addnew()
  */
 bool CommandExec::scanRevision()
 {
-    /// @todo scan for date-ranges, too.
     QString revstring = m_pCPart->args->getOption("r");
     QStringList revl = QStringList::split(":",revstring);
     if (revl.count()==0) {
         return false;
     }
-    m_pCPart->m_SvnWrapper->svnclient()->url2Revision(revl[0],m_pCPart->start);
+    m_pCPart->start = revl[0];
     if (revl.count()>1) {
-        m_pCPart->m_SvnWrapper->svnclient()->url2Revision(revl[1],m_pCPart->end);
+        m_pCPart->end = revl[1];
     }
     m_pCPart->rev_set=true;
     return true;

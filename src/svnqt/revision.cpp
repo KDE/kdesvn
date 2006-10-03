@@ -68,10 +68,18 @@ namespace svn
     }
   }
 
+  Revision::Revision (const QString&revstring)
+  {
+      assign_string(revstring);
+  }
+
   bool
   Revision::assign_string(const QString&revstring)
   {
     m_revision.kind = svn_opt_revision_unspecified;
+    if (revstring.isEmpty()) {
+        return false;
+    }
     if (revstring=="WORKING") {
         m_revision.kind = WORKING;
     } else if (revstring=="BASE") {
@@ -221,6 +229,27 @@ namespace svn
   {
     return kind()==t;
   }
+
+  bool Revision::operator!()const
+  {
+    return kind()==UNDEFINED;
+  }
+
+  bool Revision::operator!()
+  {
+    return kind()==UNDEFINED;
+  }
+
+  Revision::operator bool()const
+  {
+    return kind()!=UNDEFINED;
+  }
+
+  Revision::operator bool()
+  {
+    return kind()!=UNDEFINED;
+  }
+
 }
 
 /* -----------------------------------------------------------------

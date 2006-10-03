@@ -58,21 +58,39 @@ namespace svn
 
   Revision::Revision (const int revnum, const QString&revstring)
   {
-    svn_opt_revision_t endrev;
-    Pool pool;
+    m_revision.kind = svn_opt_revision_unspecified;
 
     if (revnum > -1) {
         m_revision.kind = svn_opt_revision_number;
         m_revision.value.number = revnum;
-    } else if (revstring=="WORKING") {
+    } else {
+        assign_string(revstring);
+    }
+  }
+
+  bool
+  Revision::assign_string(const QString&revstring)
+  {
+    m_revision.kind = svn_opt_revision_unspecified;
+    if (revstring=="WORKING") {
         m_revision.kind = WORKING;
     } else if (revstring=="BASE") {
         m_revision.kind = BASE;
+    } else if (revstring=="START"){
+        m_revision.kind = Revision::START;
+        m_revision.value.number = 0;
     } else if (!revstring.isNull()) {
+        Pool pool;
+        svn_opt_revision_t endrev;
         svn_opt_parse_revision(&m_revision,&endrev,revstring.TOUTF8(),pool);
-    } else {
-        m_revision.kind = UNDEFINED;
     }
+    return true;
+  }
+
+  Revision& Revision::operator=(const QString&what)
+  {
+    assign_string(what);
+    return *this;
   }
 
   Revision::Revision (const DateTime dateTime)

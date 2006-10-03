@@ -58,6 +58,9 @@ namespace svn
     void
     init (const svn_opt_revision_t * revision);
 
+    bool
+    assign_string(const QString&);
+
   public:
     static const svn_opt_revision_kind START;
     static const svn_opt_revision_kind BASE;
@@ -158,6 +161,13 @@ namespace svn
     bool operator==(const Revision&)const;
     bool operator!=(const svn_opt_revision_kind)const;
     bool operator==(const svn_opt_revision_kind)const;
+
+    /**
+     * assignment operator
+     * @param what a simple revision string (not s:e but s)
+     * @return object itself
+     */
+    Revision& operator=(const QString&what);
 
   };
 }

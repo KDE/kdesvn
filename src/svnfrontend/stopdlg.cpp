@@ -68,6 +68,8 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
         this,SLOT(slotNetProgres(long long int, long long int)));
     connect(this,SIGNAL(sigCancel(bool)),m_Context,SLOT(setCanceled(bool)));
     mShowTimer->start(m_MinDuration, true);
+    setMinimumSize(280,160);
+    adjustSize();
 }
 
 void StopDlg::slotWait(bool how)

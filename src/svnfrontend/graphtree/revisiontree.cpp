@@ -31,6 +31,7 @@
 #include <kapp.h>
 #include <klistview.h>
 #include <kmdcodec.h>
+#include <kmessagebox.h>
 
 #include <qwidget.h>
 #include <qdatetime.h>
@@ -91,6 +92,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);
     } catch (svn::ClientException ce) {
         kdDebug()<<ce.msg() << endl;
+        KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1").arg(ce.msg()));
         return false;
     }
     return true;

@@ -1003,7 +1003,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     }
     connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
     connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::Stderr)) {
+    connect(proc,SIGNAL(receivedStdout(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::All)) {
         if (!m_Data->runblocked) {
             if (!isDir) {
                 tfile2.setAutoDelete(false);
@@ -1018,6 +1019,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
             }
         }
         return;
+    } else {
+        emit sendNotify(i18n("Diff-process could not started, check command."));
     }
     delete proc;
     return;
@@ -1111,6 +1114,8 @@ void SvnActions::dispDiff(const QString&ex)
         if (proc->start(KProcess::NotifyOnExit,KProcess::Stderr)) {
             proc->writeStdin(ex.ascii(),ex.length());
             return;
+        } else {
+            emit sendNotify(i18n("\"Kompare\" could not started."));
         }
         delete proc;
     } else if (disp>1  && (what.find("%1")==-1 || what.find("%2")==-1)) {
@@ -1142,6 +1147,8 @@ void SvnActions::dispDiff(const QString&ex)
             if (!fname_used) proc->writeStdin(ex.ascii(),ex.length());
             else m_Data->m_tempfilelist[proc].append(tfile.name());
             return;
+        } else {
+            emit sendNotify(i18n("Display-process could not started, check command."));
         }
         delete proc;
     }
@@ -1783,6 +1790,8 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
             m_Data->m_tempdirlist[proc].append(tdir2.name());
         }
         return;
+    } else {
+        emit sendNotify(i18n("Merge-process could not started, check command."));
     }
     delete proc;
 }

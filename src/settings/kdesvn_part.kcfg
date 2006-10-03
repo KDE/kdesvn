@@ -154,6 +154,10 @@
       <default>0,0</default>
       <label>Height of detail view in tree widget</label>
     </entry>
+    <entry key="tree_diff_rec" type="Bool">
+        <default>false</default>
+        <label>Diffs from Revisiontree are recursive</label>
+    </entry>
   </group>
   <group name="cmdline" >
     <entry key="no_konqueror_contextmenu" type="Bool" >

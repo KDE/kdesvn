@@ -88,7 +88,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
     }
     try {
         StopDlg sdlg(m_Listener,dlgParent,
-            0,"Logs","Getting logs - hit cancel for abort");
+                     0,"Logs",i18n("Getting logs - hit cancel for abort"));
         m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);
     } catch (svn::ClientException ce) {
         kdDebug()<<ce.msg() << endl;
@@ -191,7 +191,8 @@ RevisionTree::~RevisionTree()
 bool RevisionTree::isDeleted(long revision,const QString&path)
 {
     for (unsigned i = 0;i<m_Data->m_History[revision].changedPaths.count();++i) {
-        if (isParent(m_Data->m_History[revision].changedPaths[i].path,path) && m_Data->m_History[revision].changedPaths[i].action=='D') {
+        if (isParent(m_Data->m_History[revision].changedPaths[i].path,path) &&
+            m_Data->m_History[revision].changedPaths[i].action=='D') {
             return true;
         }
     }
@@ -217,7 +218,8 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                label = QString("%1<br>Check change entry %2 of %3")
+                        .arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
             }

@@ -27,21 +27,26 @@ RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const c
     m_RevGraphView = new RevGraphView(lt,cl, m_Splitter, "m_RevGraphView" );
     m_RevGraphView->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)5, 0, 2, m_RevGraphView->sizePolicy().hasHeightForWidth() ) );
     connect(m_RevGraphView,SIGNAL(dispDetails(const QString&)),this,SLOT(setDetailText(const QString&)));
-    connect(m_RevGraphView,SIGNAL(dispDiff(const QString&)),this,SIGNAL(dispDiff(const QString&)));
-    connect(
-        m_RevGraphView,
-        SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
-        this
-        ,SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
-        );
-    connect(m_RevGraphView,SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*))
-        ,this,SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
+    connect(m_RevGraphView,
+                    SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+                    this,
+                    SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
+           );
+    connect(m_RevGraphView,
+            SIGNAL(makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+            this,
+            SIGNAL(makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
+           );
+    connect(m_RevGraphView,
+            SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)),
+            this,
+            SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*))
+           );
 
     m_Detailstext = new KTextBrowser( m_Splitter, "m_Detailstext" );
     m_Detailstext->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 0, m_Detailstext->sizePolicy().hasHeightForWidth() ) );
     m_Detailstext->setResizePolicy( KTextBrowser::Manual );
     RevTreeWidgetLayout->addWidget( m_Splitter );
-    languageChange();
     resize( QSize(600, 480).expandedTo(minimumSizeHint()) );
     clearWState( WState_Polished );
     QValueList<int> list = Kdesvnsettings::tree_detail_height();
@@ -61,15 +66,6 @@ RevTreeWidget::~RevTreeWidget()
         Kdesvnsettings::setTree_detail_height(list);
         Kdesvnsettings::writeConfig();
     }
-}
-
-/*
- *  Sets the strings of the subwidgets using the current
- *  language.
- */
-void RevTreeWidget::languageChange()
-{
-    setCaption( tr( "RevTreeWidget" ) );
 }
 
 void RevTreeWidget::setBasePath(const QString&_p)

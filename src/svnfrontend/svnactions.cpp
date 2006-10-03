@@ -297,11 +297,14 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
     if (rt.isValid()) {
         disp = rt.getView();
         if (disp) {
-            //connect(disp,SIGNAL(dispDiff(const QString&)),this,SLOT(dispDiff(const QString&)));
             connect(
                 disp,SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
                 this,SLOT(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
             );
+            connect(
+                disp,SIGNAL(makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+                this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
+                   );
             connect(disp,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
                 this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
             dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg"));

@@ -807,6 +807,9 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
     popup.insertItem(i18n("Rotate counter-clockwise"),101);
     popup.insertItem(i18n("Rotate clockwise"),102);
     popup.insertSeparator();
+    int it = popup.insertItem(i18n("Diff in revisiontree is recursive"),202);
+    popup.setCheckable(true);
+    popup.setItemChecked(it,Kdesvnsettings::tree_diff_rec());
     popup.insertItem(i18n("Save tree as png"),201);
 
     int r = popup.exec(e->globalPos());
@@ -847,6 +850,11 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
                     m_CompleteView->updateCurrentRect();
                 }
             }
+        }
+        case 202:
+        {
+            Kdesvnsettings::setTree_diff_rec(!Kdesvnsettings::tree_diff_rec());
+            break;
         }
         break;
         case 301:
@@ -919,30 +927,11 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
     }
     svn::Revision tr(it.data().rev);
     QString tp = _basePath+it.data().name;
-    emit makeNorecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
-#if 0
-    QByteArray ex;
-    KTempDir tdir;
-    tdir.setAutoDelete(true);
-    kdDebug()<<"Non recourse diff"<<endl;
-    QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
-    bool ignore_content = Kdesvnsettings::diff_ignore_content();
-    try {
-        StopDlg sdlg(m_Listener,kapp->activeModalWidget(),0,"Diffing","Diffing - hit cancel for abort");
-        ex = m_Client->diff(svn::Path(tn),
-            svn::Path(sp),svn::Path(tp),
-            sr, tr,
-            false,false,false,ignore_content);
-    } catch (svn::ClientException e) {
-        slotClientException(e.msg());
-        return;
+    if (Kdesvnsettings::tree_diff_rec()) {
+        emit makeRecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
+    } else {
+        emit makeNorecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
     }
-    if (ex.isEmpty()) {
-        slotClientException(i18n("No difference to display"));
-        return;
-    }
-    emit dispDiff(QString::fromLocal8Bit(ex,ex.size()));
-#endif
 }
 
 void RevGraphView::setBasePath(const QString&_path)

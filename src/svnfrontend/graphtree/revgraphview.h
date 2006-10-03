@@ -85,10 +85,10 @@ public:
     void dumpRevtree();
 
 signals:
-    void dispDiff(const QString&);
     void dispDetails(const QString&);
     void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
     void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
+    void makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 
 public slots:
     virtual void contentsMovingSlot(int,int);

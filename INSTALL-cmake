@@ -6,7 +6,13 @@ solve it with
 . /etc/profile.d/qt.sh
 export QTLIB=${QTDIR}/lib QTINC=${QTDIR}/include
 
-before running configure.
+before running cmake.
+On some systems cmake doesn't detect that it is a threaded qt-version. So you should 
+do 
+
+export CXXFLAGS="-DQT_THREAD_SUPPORT"
+
+before running cmake. (Or give it as parameter to cmake with -DCMAKE_CXX_FLAGS="-DQT_THREAD_SUPPORT")
 
 
 Note for release 0.7.x
@@ -51,6 +57,9 @@ Default to "/usr/local"
 
 -DSUBVERSION_INSTALL_PATH=<subversionlib-install-prefix>
 Where is subversion-lib installed. Default check in /usr and /usr/local
+
+-DCMAKE_CXX_FLAGS=<some extra flags>
+Extra flags for the c++ compiler for your system required.
 
 After calling cmake just type
     make

@@ -872,6 +872,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
 void SvnActions::wroteStdin(KProcess*proc)
 {
     if (!proc) return;
+    kdDebug()<<"void SvnActions::wroteStdin(KProcess*proc)"<<endl;
     proc->closeStdin();
 }
 
@@ -1107,14 +1108,16 @@ void SvnActions::dispDiff(const QString&ex)
 {
     int disp = Kdesvnsettings::use_kompare_for_diff();
     QString what = Kdesvnsettings::external_diff_display();
+    int r = KProcess::Stdin|KProcess::Stderr;
     if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
+        *proc << "-o";
         *proc << "-";
         connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
         connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-        if (proc->start(KProcess::NotifyOnExit,KProcess::Stderr)) {
+        if (proc->start(KProcess::NotifyOnExit,(KProcess::Communication)r)) {
             proc->writeStdin(ex.ascii(),ex.length());
             return;
         } else {
@@ -1146,7 +1149,7 @@ void SvnActions::dispDiff(const QString&ex)
         if (!fname_used) {
             connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         }
-        if (proc->start(KProcess::NotifyOnExit,KProcess::Stderr)) {
+        if (proc->start(KProcess::NotifyOnExit,fname_used?KProcess::Stderr:(KProcess::Communication)r)) {
             if (!fname_used) proc->writeStdin(ex.ascii(),ex.length());
             else m_Data->m_tempfilelist[proc].append(tfile.name());
             return;

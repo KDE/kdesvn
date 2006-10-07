@@ -479,7 +479,7 @@ void CommandExec::slotCmd_list()
         return;
     }
     for (unsigned int i = 0; i < res.count();++i) {
-        QString d = helpers::sub2qt::apr_time2qt(res[i].time()).toString(QString("yy-MM-dd hh:mm::ss"));
+        QString d = svn::DateTime(res[i].time()).toString(QString("yyyy-MM-dd hh:mm::ss"));
         m_pCPart->Stdout
             << (res[i].kind()==svn_node_dir?"D":"F")<<" "
             << d << " "

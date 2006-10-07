@@ -190,7 +190,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     KIO::UDSEntry entry;
     totalSize(dlist.size());
     for (unsigned int i=0; i < dlist.size();++i) {
-        QDateTime dt = helpers::sub2qt::apr_time2qt(dlist[i].time());
+        QDateTime dt = svn::DateTime(dlist[i].time());
         if (createUDSEntry(dlist[i].name(),
             dlist[i].lastAuthor(),
             dlist[i].size(),
@@ -236,7 +236,7 @@ void kio_svnProtocol::stat(const KURL& url)
     if (dummy) {
         createUDSEntry(url.filename(),"",0,true,dt.toTime_t(),entry);
     } else {
-        dt = helpers::sub2qt::apr_time2qt(e[0].cmtDate());
+        dt = svn::DateTime(e[0].cmtDate());
         if (e[0].kind()==svn_node_file) {
             createUDSEntry(url.filename(),"",0,false,dt.toTime_t(),entry);
         } else {

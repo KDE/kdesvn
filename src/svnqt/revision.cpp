@@ -64,21 +64,21 @@ namespace svn
         m_revision.kind = svn_opt_revision_number;
         m_revision.value.number = revnum;
     } else {
-        assign_string(revstring);
+        assign(revstring);
     }
   }
 
   Revision::Revision (const QString&revstring)
   {
-      assign_string(revstring);
+      assign(revstring);
   }
 
-  bool
-  Revision::assign_string(const QString&revstring)
+  void
+  Revision::assign(const QString&revstring)
   {
     m_revision.kind = svn_opt_revision_unspecified;
     if (revstring.isEmpty()) {
-        return false;
+        return;
     }
     if (revstring=="WORKING") {
         m_revision.kind = WORKING;
@@ -92,12 +92,19 @@ namespace svn
         svn_opt_revision_t endrev;
         svn_opt_parse_revision(&m_revision,&endrev,revstring.TOUTF8(),pool);
     }
-    return true;
+  }
+
+  void
+  Revision::assign(const QDateTime&dateTime)
+  {
+    m_revision.kind = svn_opt_revision_date;
+    DateTime dt(dateTime);
+    m_revision.value.date = dt.GetAPRTimeT();
   }
 
   Revision& Revision::operator=(const QString&what)
   {
-    assign_string(what);
+    assign(what);
     return *this;
   }
 
@@ -105,6 +112,11 @@ namespace svn
   {
     m_revision.kind = svn_opt_revision_date;
     m_revision.value.date = dateTime.GetAPRTimeT();
+  }
+
+  Revision::Revision (const QDateTime&dateTime)
+  {
+    assign(dateTime);
   }
 
   Revision::Revision (const Revision & revision)
@@ -157,15 +169,7 @@ namespace svn
         value.sprintf("%li",m_revision.value.number);
         break;
     case svn_opt_revision_date:
-#if QT_VERSION < 0x040000
-        if (m_revision.value.date<0)result.setTime_t(0,Qt::LocalTime);
-        else result.setTime_t(m_revision.value.date/(1000*1000),Qt::LocalTime);
-#else
-        result.setTimeSpec(Qt::LocalTime);
-        if (m_revision.value.date<0)result.setTime_t(0);
-        else result.setTime_t(m_revision.value.date/(1000*1000));
-#endif
-        value = result.toString("{yyyy-MM-dd}");
+        value = DateTime(m_revision.value.date).toString("{yyyy-MM-dd}");
         break;
     case svn_opt_revision_base:
         value = "BASE";

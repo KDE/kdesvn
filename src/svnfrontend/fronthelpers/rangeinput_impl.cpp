@@ -111,7 +111,7 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
     } else if (m_startNumberButton->isChecked()) {
         ret.first = m_startRevInput->value();
     } else if (m_startDateButton->isChecked()) {
-        ret.first=svn::DateTime(helpers::sub2qt::qt_time2apr(m_startDateInput->dateTime()));
+        ret.first=m_startDateInput->dateTime();
     } else if (m_startWorkingButton->isChecked()) {
         ret.first = svn::Revision::WORKING;
     }
@@ -122,7 +122,7 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
     } else if (m_stopNumberButton->isChecked()) {
         ret.second = m_endRevInput->value();
     } else if (m_stopDateButton->isChecked()) {
-        ret.second=svn::DateTime(helpers::sub2qt::qt_time2apr(m_stopDateInput->dateTime()));
+        ret.second=m_stopDateInput->dateTime();
     } else if (m_stopWorkingButton->isChecked()) {
         ret.second = svn::Revision::WORKING;
     }

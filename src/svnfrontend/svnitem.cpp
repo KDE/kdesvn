@@ -100,7 +100,7 @@ void SvnItem_p::init()
         m_short = m_full;
     }
     m_url = m_Stat.entry().url();
-    m_fullDate = helpers::sub2qt::apr_time2qt(m_Stat.entry().cmtDate());
+    m_fullDate = svn::DateTime(m_Stat.entry().cmtDate());
     m_infoText = QString::null;
     m_fitem = 0;
 }

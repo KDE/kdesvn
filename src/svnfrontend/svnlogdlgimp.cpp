@@ -78,7 +78,7 @@ LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
 {
     setMultiLinesEnabled(false);
     _revision=_entry.revision;
-    fullDate=helpers::sub2qt::apr_time2qt(_entry.date);
+    fullDate=svn::DateTime(_entry.date);
     setText(COL_REV,QString("%1").arg(_revision));
     setText(COL_AUTHOR,_entry.author);
     setText(COL_DATE,helpers::sub2qt::apr_time2qtString(_entry.date));

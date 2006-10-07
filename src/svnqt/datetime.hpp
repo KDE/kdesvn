@@ -28,6 +28,8 @@
 
 #include "svnqt/svnqt_defines.hpp"
 
+#include <qdatetime.h>
+
 // subversion api
 #include "svn_types.h"
 
@@ -59,6 +61,13 @@ namespace svn
     DateTime (const apr_time_t time);
 
     /**
+     * Constructor
+     *
+     * @param dt QDateTime class
+     */
+    DateTime(const QDateTime&dt);
+
+    /**
      * Copy constructor
      *
      * @param dateTime Source
@@ -76,12 +85,21 @@ namespace svn
      */
     const bool
     operator ==(const DateTime & dateTime);
-
     /**
      * @param dateTime Comparator
      */
     const bool
     operator !=(const DateTime & dateTime);
+
+    const bool
+    operator<(const DateTime&dateTime)const;
+    const bool
+    operator>(const DateTime&dateTime)const;
+    const bool
+    operator!=(const DateTime&dateTime)const;
+    const bool
+    operator==(const DateTime&dateTime)const;
+
 
     /**
      * @return Is a valid (non-zero) date
@@ -94,6 +112,18 @@ namespace svn
      */
     const apr_time_t
     GetAPRTimeT () const;
+
+    /**
+     * @return QDateTime object
+     */
+    operator QDateTime()const;
+
+    /**
+     * @param format format string
+     * @return formatted string
+     * @see QDateTime::toString
+     */
+    QString toString(const QString&format)const;
 
     /**
      * Set from date string of the form below, using apr_date_parse_rfc

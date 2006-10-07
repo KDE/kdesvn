@@ -20,7 +20,7 @@
 #ifndef HELPERSSUB2QT_H
 #define HELPERSSUB2QT_H
 
-#include "src/svnqt/revision.hpp"
+#include "src/svnqt/datetime.hpp"
 #include <qdatetime.h>
 #include <qstring.h>
 #include <svn_time.h>
@@ -35,8 +35,6 @@ public:
     sub2qt();
     ~sub2qt();
 
-    static QDateTime apr_time2qt(apr_time_t _time);
-    static apr_time_t qt_time2apr(const QDateTime&);
     static QString apr_time2qtString(apr_time_t _time);
 };
 

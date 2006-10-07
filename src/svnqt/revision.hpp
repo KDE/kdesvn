@@ -58,8 +58,11 @@ namespace svn
     void
     init (const svn_opt_revision_t * revision);
 
-    bool
-    assign_string(const QString&);
+    void
+    assign(const QString&);
+
+    void
+    assign(const QDateTime&);
 
   public:
     static const svn_opt_revision_kind START;
@@ -112,8 +115,15 @@ namespace svn
      * Constructor
      *
      * @param dateTime DateTime wrapper for apr_time_t
+     * @todo change it to referenced parameter (requires interface upgrade of lib)
      */
     Revision (const DateTime dateTime);
+    /**
+     * Constructor
+     *
+     * @param dateTime QDateTime type
+     */
+    Revision (const QDateTime&dateTime);
 
     /**
      * Copy constructor

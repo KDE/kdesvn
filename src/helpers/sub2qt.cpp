@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "sub2qt.h"
 
-#include "src/svnqt/revision.hpp"
+#include "src/svnqt/datetime.hpp"
 #include "kglobal.h"
 #include "klocale.h"
 #include <qmap.h>
@@ -35,27 +35,9 @@ sub2qt::~sub2qt()
 {
 }
 
-QDateTime sub2qt::apr_time2qt(apr_time_t _time)
-{
-    QDateTime result;
-    if (_time<=0) result.setTime_t(0,Qt::LocalTime);
-    else result.setTime_t(_time/(1000*1000),Qt::LocalTime);
-    return result;
-}
-
-/*!
-    \fn helpers::sub2qt::qt_time2apr(const QDateTime&)
- */
-apr_time_t sub2qt::qt_time2apr(const QDateTime&_time)
-{
-    apr_time_t r;
-    apr_time_ansi_put(&r,_time.toTime_t());
-    return r;
-}
-
 QString sub2qt::apr_time2qtString(apr_time_t _time)
 {
-    return KGlobal::locale()->formatDateTime(apr_time2qt(_time));
+    return KGlobal::locale()->formatDateTime(svn::DateTime(_time));
 }
 
 };

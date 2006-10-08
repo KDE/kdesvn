@@ -107,6 +107,12 @@ namespace svn
   };
 }
 
+SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogEntry&r);
+SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogChangePathEntry&r);
+
+SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogEntry&r);
+SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogChangePathEntry&r);
+
 #endif
 /* -----------------------------------------------------------------
  * local variables:

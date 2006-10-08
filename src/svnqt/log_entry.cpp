@@ -98,6 +98,51 @@ namespace svn
   }
 }
 
+SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogEntry&r)
+{
+    s << r.revision
+            << r.author
+            << r.message
+            << r.changedPaths
+            << r.date;
+    return s;
+}
+
+SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogChangePathEntry&r)
+{
+    short ac = r.action;
+    s << r.path
+            << ac
+            << r.copyFromPath
+            << r.copyFromRevision
+            << r.copyToPath
+            << r.copyToRevision;
+    return s;
+}
+
+SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogEntry&r)
+{
+    s >> r.revision
+            >> r.author
+            >> r.message
+            >> r.changedPaths
+            >> r.date;
+    return s;
+}
+
+SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogChangePathEntry&r)
+{
+    short ac;
+    s >> r.path
+            >> ac
+            >> r.copyFromPath
+            >> r.copyFromRevision
+            >> r.copyToPath
+            >> r.copyToRevision;
+    r.action = ac;
+    return s;
+}
+
 /* -----------------------------------------------------------------
  * local variables:
  * eval: (load-file "../../rapidsvn-dev.el")

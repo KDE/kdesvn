@@ -22,7 +22,6 @@
 
 #include <qregexp.h>
 #include <kapplication.h>
-#include <kdebug.h>
 #include <kdeversion.h>
 #include <kprocess.h>
 
@@ -50,8 +49,6 @@ SshAgent::~SshAgent()
 
 bool SshAgent::querySshAgent()
 {
-    kdDebug() << "SshAgent::querySshAgent(): ENTER" << endl;
-
     if( m_isRunning )
         return true;
 
@@ -59,9 +56,6 @@ bool SshAgent::querySshAgent()
     char* pid;
     if( (pid = ::getenv("SSH_AGENT_PID")) != 0 )
     {
-        kdDebug() << "SshAgent::querySshAgent(): ssh-agent already exists"
-                      << endl;
-
         m_pid = QString::fromLocal8Bit(pid);
 
         char* sock = ::getenv("SSH_AUTH_SOCK");
@@ -80,8 +74,6 @@ bool SshAgent::querySshAgent()
     // We have to start a new ssh-agent process
     else
     {
-        kdDebug() << "SshAgent::querySshAgent(): start ssh-agent" << endl;
-
         m_isOurAgent = true;
         m_isRunning  = startSshAgent();
     }
@@ -92,19 +84,15 @@ bool SshAgent::querySshAgent()
 
 bool SshAgent::addSshIdentities(bool force)
 {
-    kdDebug() << "SshAgent::addSshIdentities(): ENTER" << endl;
     if (m_addIdentitiesDone && !force) {
-        kdDebug() << "SshAgent::addSshIdentities(): Done in past." << endl;
         return true;
     }
 
 
     if( !m_isRunning || (!m_isOurAgent&&!force)) {
-        kdDebug() << "SshAgent::addSshIdentities(): Not running or not our." << endl;
         return false;
     }
 
-    kdDebug()<<"Starting ssh-add"<<endl;
     // add identities to ssh-agent
     KProcess proc;
 
@@ -139,8 +127,6 @@ bool SshAgent::addSshIdentities(bool force)
 
 void SshAgent::killSshAgent()
 {
-    kdDebug() << "SshAgent::killSshAgent(): ENTER" << endl;
-
     if( !m_isRunning || !m_isOurAgent )
         return;
 
@@ -149,15 +135,11 @@ void SshAgent::killSshAgent()
     proc << "kill" << m_pid;
 
     proc.start(KProcess::DontCare, KProcess::NoCommunication);
-
-    kdDebug() << "SshAgent::killSshAgent(): killed pid = " << m_pid << endl;
 }
 
 
 void SshAgent::slotProcessExited(KProcess*)
 {
-    kdDebug() << "SshAgent::slotProcessExited(): ENTER" << endl;
-
     QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
     QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
 
@@ -204,8 +186,6 @@ void SshAgent::slotProcessExited(KProcess*)
         }
     }
 
-    kdDebug() << "SshAgent::slotProcessExited(): pid = " << m_pid
-                  << ", socket = " << m_authSock << endl;
 }
 
 
@@ -215,8 +195,6 @@ void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
     m_Output+=output;
-
-    kdDebug() << "SshAgent::slotReceivedStdout(): output = " << output << endl;
 }
 
 
@@ -226,15 +204,11 @@ void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
     m_Output+=output;
-
-    kdDebug() << "SshAgent::slotReceivedStderr(): output = " << output << endl;
 }
 
 
 bool SshAgent::startSshAgent()
 {
-    kdDebug() << "SshAgent::startSshAgent(): ENTER" << endl;
-
     KProcess proc;
 
     proc << "ssh-agent";

@@ -213,7 +213,6 @@ int CommandExec::exec()
     QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
         tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyURL());
-        kdDebug()<<tmpurl<<endl;
         query = tmpurl.query();
         q = m_pCPart->args->url(j).queryItems();
         if (q.find("rev")!=q.end()) {
@@ -258,7 +257,6 @@ int CommandExec::exec()
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
-        kdDebug()<<"Resulting url: "<<tmp<<endl;
         if ( (j>2 && dont_check_second) || dont_check_all) {
             continue;
         }
@@ -390,9 +388,7 @@ void CommandExec::slotCmd_cat()
         m_pCPart->start=m_pCPart->extraRevisions[0];
     } else {
         m_pCPart->end = svn::Revision::HEAD;
-        kdDebug()<<"Setting head standard for cat"<<endl;
     }
-    kdDebug()<<"Rev set "<<m_pCPart->rev_set<<endl;
     m_pCPart->m_SvnWrapper->slotMakeCat(
         (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0],m_pCPart->url[0]
         ,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),0);
@@ -405,13 +401,11 @@ void CommandExec::slotCmd_get()
         m_pCPart->start=m_pCPart->extraRevisions[0];
     } else {
         m_pCPart->end = svn::Revision::HEAD;
-        kdDebug()<<"Setting head standard for get";
     }
     if (!m_pCPart->outfile_set || m_pCPart->outfile.isEmpty()) {
         clientException(i18n("\"GET\" requires output file!"));
         return;
     }
-    kdDebug()<<"write to "<<m_pCPart->outfile<<endl;
     m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0], m_pCPart->outfile,
         (m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
 }
@@ -426,7 +420,6 @@ void CommandExec::slotCmd_diff()
 {
     if (m_pCPart->url.count()==1) {
         if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
-            kdDebug()<<"Local diff" << endl;
             m_pCPart->start = svn::Revision::WORKING;
             m_pCPart->end = svn::Revision::BASE;
         }
@@ -505,7 +498,6 @@ void CommandExec::slotCmd_copy()
         m_pCPart->start=m_pCPart->extraRevisions[0];
     } else {
         m_pCPart->end = svn::Revision::HEAD;
-        kdDebug()<<"Setting head standard for copy"<<endl;
     }
     m_pCPart->m_SvnWrapper->makeCopy(m_pCPart->url[0],target,(m_pCPart->rev_set?m_pCPart->start:m_pCPart->end));
 }

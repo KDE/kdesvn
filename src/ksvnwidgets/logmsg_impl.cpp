@@ -219,7 +219,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
         ptr->m_RecursiveButton->hide();
     }
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(groupName));
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -230,7 +230,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
-    dlg.saveDialogSize(groupName,false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
     return msg;
@@ -252,7 +252,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
         ptr->m_RecursiveButton->hide();
     }
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(groupName));
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -263,7 +263,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
-    dlg.saveDialogSize(groupName,false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
     return msg;
@@ -286,7 +286,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
         ptr->m_RecursiveButton->hide();
     }
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(groupName));
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -297,7 +297,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
-    dlg.saveDialogSize(groupName,false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
     return msg;
@@ -319,7 +319,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
     ptr->m_RecursiveButton->hide();
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(groupName));
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -328,7 +328,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
-    dlg.saveDialogSize(groupName,false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),false);
     if (ok) *ok = _ok;
     _result = ptr->selectedEntries();
     return msg;

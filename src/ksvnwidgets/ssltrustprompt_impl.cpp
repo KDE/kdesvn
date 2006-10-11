@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "ssltrustprompt_impl.h"
+#include "src/settings/kdesvnsettings.h"
+
 #include <klocale.h>
 #include <qlabel.h>
 #include <qtable.h>
@@ -73,11 +75,11 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     text+="</table></p></body></html>";
 
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
-    dlg.resize(dlg.configDialogSize("trustssldlg"));
+    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"trustssldlg"));
     ptr = new SslTrustPrompt_impl(host,Dialog1Layout);
     ptr->m_ContentText->setText(text);
     int i = dlg.exec();
-    dlg.saveDialogSize("trustssldlg",false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"trustssldlg",false);
     *saveit = false;
     *ok = true;
     if (i == KDialogBase::Yes) {

@@ -797,7 +797,7 @@ void kdesvnfilelist::enableActions()
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
     temp = filesActions()->action("make_svn_merge");
     if (temp) {
-        temp->setEnabled(single);
+        temp->setEnabled(single||none);
     }
     temp = filesActions()->action("make_svn_addrec");
     if (temp) {
@@ -1499,12 +1499,10 @@ void kdesvnfilelist::slotMerge()
 {
     FileListViewItem*which= singleSelected();
     QString src1,src2,target;
-    if (which) {
-        if (isWorkingCopy()) {
-            target = which->fullName();
-        } else {
-            src1 = which->fullName();
-        }
+    if (isWorkingCopy()) {
+        target = which?which->fullName():baseUri();
+    } else {
+        src1 = which?which->fullName():baseUri();
     }
     bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;

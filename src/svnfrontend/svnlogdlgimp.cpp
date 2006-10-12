@@ -220,6 +220,7 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
     if (!_it) {
         m_DispPrevButton->setEnabled(false);
         buttonListFiles->setEnabled(false);
+        buttonBlame->setEnabled(false);
         return;
     }
     LogListViewItem* k = static_cast<LogListViewItem*>( _it );
@@ -237,6 +238,7 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
     m_LogDisplay->setText(k->message());
     m_ChangedList->clear();
     k->showChangedEntries(m_ChangedList);
+    buttonBlame->setEnabled(true);
 
     k = static_cast<LogListViewItem*>(_it->nextSibling());
     if (!k) {
@@ -371,6 +373,17 @@ void SvnLogDlgImp::keyReleaseEvent (QKeyEvent * e)
         m_ControlKeyDown = false;
     }
     SvnLogDialogData::keyReleaseEvent(e);
+}
+
+void SvnLogDlgImp::slotBlameItem()
+{
+    LogListViewItem* k = static_cast<LogListViewItem*>(m_LogView->selectedItem());
+    if (!k) {
+        buttonBlame->setEnabled(false);
+        return;
+    }
+    svn::Revision start(svn::Revision::START);
+    m_Actions->makeBlame(start,k->rev(),_base+k->realName(),kapp->activeModalWidget(),k->rev());
 }
 
 #include "svnlogdlgimp.moc"

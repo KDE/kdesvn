@@ -335,29 +335,27 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     EMIT_FINISHED;
 }
 
-void SvnActions::makeBlame(svn::Revision start, svn::Revision end, SvnItem*k)
+void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k)
 {
-    if (k) makeBlame(start,end,k->fullName());
+    if (k) makeBlame(start,end,k->fullName(),m_Data->m_ParentList->realWidget());
 }
 
-void SvnActions::makeBlame(svn::Revision start, svn::Revision end, const QString&k)
+void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,const QString&k,QWidget*_p,const svn::Revision&_peg)
 {
     if (!m_Data->m_CurrentContext) return;
     svn::AnnotatedFile blame;
     QString ex;
     svn::Path p(k);
+    QWidget*_parent = _p?_p:m_Data->m_ParentList->realWidget();
+    svn::Revision peg = _peg==svn::Revision::UNDEFINED?end:_peg;
 
     /// @todo make parameter for peg revision
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Annotate","Blaming - hit cancel for abort");
+        StopDlg sdlg(m_Data->m_SvnContext,_parent,0,"Annotate",i18n("Annotate lines - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->annotate(blame,p,start,end);
+        m_Data->m_Svnclient->annotate(blame,p,start,end,peg);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
-    } catch (...) {
-        ex = i18n("Error getting blame");
-        emit clientException(ex);
         return;
     }
     if (blame.count()==0) {

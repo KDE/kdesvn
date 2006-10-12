@@ -1,3 +1,8 @@
+version 0.11.0
+    * lot of bugfixes in cmake-build system
+    * annotate lines may called from within log window at specific revision (feature request #113)
+    * some dialogs stored sizes into wrong configfiles when using as part of other programs like konqueror - fixed
+
 version 0.10.0
     * russion translation added
     * more than one mainwindow may opened

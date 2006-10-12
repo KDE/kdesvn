@@ -55,6 +55,7 @@ protected:
     bool m_ControlKeyDown;
     virtual void keyPressEvent (QKeyEvent * e);
     virtual void keyReleaseEvent (QKeyEvent * e);
+    virtual void slotBlameItem();
 
 protected slots:
     virtual void slotListEntries();

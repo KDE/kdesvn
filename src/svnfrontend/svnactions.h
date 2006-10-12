@@ -111,8 +111,8 @@ public:
     void makeLog(const svn::Revision&start,const svn::Revision&end,const QString&,bool list_files=false, int limit=0);
     const svn::LogEntries * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);
 
-    void makeBlame(svn::Revision start, svn::Revision end, SvnItem*k);
-    void makeBlame(svn::Revision start, svn::Revision end, const QString&);
+    void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
+    void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     bool makeSwitch(const QString&path,const QString&what);

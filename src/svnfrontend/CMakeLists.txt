@@ -37,6 +37,7 @@ SET(svnfrontendsrc
     svnitem.cpp
     svnlogdlgimp.cpp
     tcontextlistener.cpp
+    blamedisplay_impl.cpp
     threadcontextlistenerdata.cpp)
 
 SET(svnfrontendui
@@ -49,6 +50,7 @@ SET(svnfrontendui
     hotcopydlg.ui
     loaddmpdlg.ui
     merge_dlg.ui
+    blamedisplay.ui
     svnlogdlg.ui)
 
 KDE3_AUTOMOC(${svnfrontendsrc})

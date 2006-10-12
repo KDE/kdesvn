@@ -27,6 +27,7 @@
 #include "modifiedthread.h"
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
+#include "blamedisplay_impl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
@@ -364,32 +365,10 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
         return;
     }
     EMIT_FINISHED;
-    svn::AnnotatedFile::const_iterator bit;
-    static QString rowb = "<tr><td>";
-    static QString rowc = "<tr bgcolor=\"#EEEEEE\"><td>";
-    static QString rows = "</td><td>";
-    static QString rowe = "</td></tr>\n";
-    QString text = "<html><table>"+rowb+"Rev"+rows+i18n("Author")+rows+i18n("Line")+rows+"&nbsp;"+rowe;
-    bool second = false;
-    QString codetext = "";
-    for (bit=blame.begin();bit!=blame.end();++bit) {
-        codetext = (*bit).line();
-        codetext.replace(" ","&nbsp;");
-        codetext.replace("\"","&quot;");
-        codetext.replace("<","&lt;");
-        codetext.replace(">","&gt;");
-        codetext.replace("\t","&nbsp;&nbsp;&nbsp;&nbsp;");
-        text+=(second?rowb:rowc)+QString("%1").arg((*bit).revision())+
-            rows+((*bit).author().length()?(*bit).author():i18n("Unknown"))+
-            rows+QString("%1").arg((*bit).lineNumber())+rows+
-            QString("<code>%1</code>").arg(codetext)+rowe;
-            second = !second;
-    }
-    text += "</table></html>";
-    KTextBrowser*ptr;
+    BlameDisplay_impl*ptr;
     KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k),false,"blame_dlg");
     if (dlg) {
-        ptr->setText(text);
+        ptr->setContent(blame);
         dlg->exec();
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
         delete dlg;

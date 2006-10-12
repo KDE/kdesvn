@@ -10,7 +10,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/s
 INCLUDE(FindKdeLibs)
 INCLUDE(MacroEnsureVersion)
 INCLUDE(FindSubversion)
-INCLUDE(FindSqlite)
+# INCLUDE(FindSqlite)
 INCLUDE(SetupCompiler)
 
 IF (HAVE_GCC_VISIBILITY)

@@ -26,6 +26,7 @@
 #define _SVNCPP_ANNOTATE_LINE_HPP_
 
 #include <qstring.h>
+#include <qdatetime.h>
 
 namespace svn
 {
@@ -42,7 +43,7 @@ namespace svn
                   const char *line)
     : m_line_no (line_no), m_revision (revision),
       m_author(QString::FROMUTF8(author)),
-      m_date(QString::FROMUTF8(date)),
+      m_date(QDateTime::fromString(date?QString::FROMUTF8(date):QString(""),Qt::ISODate)),
       m_line(QString::FROMUTF8(line))
     {
     }
@@ -85,7 +86,7 @@ namespace svn
     }
 
 
-    const QString &
+    const QDateTime &
     date () const
     {
         return m_date;
@@ -102,7 +103,7 @@ namespace svn
     apr_int64_t m_line_no;
     svn_revnum_t m_revision;
     QString m_author;
-    QString m_date;
+    QDateTime m_date;
     QString m_line;
   };
 }

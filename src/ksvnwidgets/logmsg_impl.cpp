@@ -38,7 +38,7 @@
 #define MAX_MESSAGE_HISTORY 10
 
 QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
-const char* Logmsg_impl::groupName = "logmsg_dialog_size";
+const QString Logmsg_impl::groupName("logmsg_dlg_size");
 
 unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
 
@@ -169,7 +169,6 @@ void Logmsg_impl::initHistory()
             s = cs.readEntry(key,QString::null);
         }
     }
-    kdDebug()<<"Max history: " << smax_message_history << endl;
     QValueList<QString>::const_iterator it;
     for (it=sLogHistory.begin();it!=sLogHistory.end();++it) {
         if ((*it).length()<=40) {
@@ -328,7 +327,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),false);
+    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     _result = ptr->selectedEntries();
     return msg;

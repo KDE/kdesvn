@@ -44,6 +44,7 @@ public:
     Logmsg_impl(const logActionEntries&,
         const logActionEntries&,
         QWidget *parent = 0, const char *name = 0);
+    virtual ~Logmsg_impl(){};
 
     QString getMessage()const;
     bool isRecursive()const;
@@ -68,7 +69,7 @@ protected slots:
 
 protected:
     static QValueList<QString> sLogHistory;
-    static const char* groupName;
+    static const QString groupName;
     static unsigned int smax_message_history;
 };
 

@@ -12,7 +12,9 @@ int main(int,char**)
     svn::ContextP myContext = new svn::Context();
 
     QByteArray tout;
+#if QT_VERSION < 0x040000
     QDataStream out(tout,IO_WriteOnly);
+#endif
     svn::Client*m_Svnclient = svn::Client::getobject(0,0);
     svn::ContextP m_CurrentContext = new svn::Context();
     m_Svnclient->setContext(m_CurrentContext);
@@ -24,6 +26,7 @@ int main(int,char**)
     } catch (svn::ClientException ce) {
         gotit = false;
     }
+#if QT_VERSION < 0x040000
     if (gotit) {
         out << m_OldHistory;
         svn::LogEntriesMap m_NewHistory;
@@ -35,6 +38,6 @@ int main(int,char**)
             qDebug("%lu %s %s",it.key(),it.data().author.ascii(),it.data().message.ascii());
         }
     }
-
+#endif
   return 1;
 }

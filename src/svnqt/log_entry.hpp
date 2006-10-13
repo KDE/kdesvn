@@ -76,11 +76,17 @@ namespace svn
     QString path;
     char action;
     QString copyFromPath;
-    svn_revnum_t copyFromRevision;
     //! future use or useful in backends
     QString copyToPath;
+
+#if QT_VERSION < 0x040000
+    svn_revnum_t copyFromRevision;
     //! future use or useful in backends
     svn_revnum_t copyToRevision;
+#else
+    qlonglong copyFromRevision;
+    qlonglong copyToRevision;
+#endif
   };
 
 #if QT_VERSION < 0x040000
@@ -98,8 +104,11 @@ namespace svn
               const char * author,
               const char * date,
               const char * message);
-
+#if QT_VERSION < 0x040000
     svn_revnum_t revision;
+#else
+    qlonglong revision;
+#endif
     QString author;
     QString message;
     LogChangePathEntries changedPaths;

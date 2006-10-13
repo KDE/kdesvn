@@ -8,6 +8,7 @@
 
 #include <qpixmap.h>
 #include <qpainter.h>
+#include <qheader.h>
 
 #define COL_LINENR 0
 #define COL_REV 1
@@ -63,7 +64,8 @@ void BlameDisplayItem::display()
     if (m_author) setText(COL_AUT,m_Content.author());
     if (m_date) setText(COL_DATE,KGlobal::locale()->formatDateTime(m_Content.date()));
     setText(COL_LINENR,QString("%1").arg(m_Content.lineNumber()+1));
-    setText(COL_LINE,QString("%1").arg(m_Content.line()));
+    QString _line = m_Content.line();
+    setText(COL_LINE,QString("%1").arg(_line.replace("\t","    ")));
 }
 
 int BlameDisplayItem::compare(QListViewItem *item, int col, bool ascending)const
@@ -92,7 +94,7 @@ void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
     }
     QColorGroup _cg = cg;
     QColor _bgColor;
-    if (column==COL_LINENR) {
+    if (column==COL_LINENR || isSelected()) {
         _bgColor = KGlobalSettings::highlightColor();
         p->setPen(KGlobalSettings::highlightedTextColor());
     } else if (column==COL_DATE ){
@@ -152,6 +154,7 @@ void BlameDisplay_impl::setContent(const svn::AnnotatedFile&blame)
 {
     m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
     m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
+    m_BlameList->header()->setLabel(COL_LINE,QString(""));
 
     m_BlameList->clear();
     svn::AnnotatedFile::const_iterator bit;

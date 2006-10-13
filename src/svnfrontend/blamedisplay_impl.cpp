@@ -65,7 +65,8 @@ void BlameDisplayItem::display()
     if (m_date) setText(COL_DATE,KGlobal::locale()->formatDateTime(m_Content.date()));
     setText(COL_LINENR,QString("%1").arg(m_Content.lineNumber()+1));
     QString _line = m_Content.line();
-    setText(COL_LINE,QString("%1").arg(_line.replace("\t","    ")));
+    _line.replace("\t","    ");
+    setText(COL_LINE,QString("%1").arg(_line));
 }
 
 int BlameDisplayItem::compare(QListViewItem *item, int col, bool ascending)const
@@ -86,10 +87,16 @@ int BlameDisplayItem::compare(QListViewItem *item, int col, bool ascending)const
 
 void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
+    if (alignment & (AlignTop || AlignBottom) == 0)
+        alignment |= AlignVCenter;
 
     if (column == COL_LINE) {
         p->setFont(KGlobalSettings::fixedFont());
-        KListViewItem::paintCell(p,cg,column,width,alignment);
+        if (isSelected()) {
+            p->setPen(KGlobalSettings::highlightedTextColor());
+        }
+        p->fillRect(0, 0, width, height(), isSelected()?KGlobalSettings::highlightColor():cg.background());
+        p->drawText(BORDER, 0, width - 2*BORDER, height(), alignment, m_Content.line());
         return;
     }
     QColorGroup _cg = cg;
@@ -123,8 +130,6 @@ void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
     QString str = text(column);
     if (str.isEmpty())
         return;
-    if (alignment & (AlignTop || AlignBottom) == 0)
-        alignment |= AlignVCenter;
     p->drawText(BORDER, 0, width - 2*BORDER, height(), alignment, str);
     //QListViewItem::paintCell(p, _cg, column, width, alignment);
 }

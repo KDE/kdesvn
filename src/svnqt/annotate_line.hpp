@@ -44,7 +44,7 @@ namespace svn
     : m_line_no (line_no), m_revision (revision),
       m_author(QString::FROMUTF8(author)),
       m_date(QDateTime::fromString(date?QString::FROMUTF8(date):QString(""),Qt::ISODate)),
-      m_line(QString::FROMUTF8(line))
+      m_line(line)
     {
     }
 

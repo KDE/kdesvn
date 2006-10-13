@@ -22,7 +22,7 @@
         <widget class="KListView">
             <column>
                 <property name="text">
-                    <string>Date</string>
+                    <string>Line</string>
                 </property>
                 <property name="clickable">
                     <bool>false</bool>
@@ -44,7 +44,7 @@
             </column>
             <column>
                 <property name="text">
-                    <string>Author</string>
+                    <string>Date</string>
                 </property>
                 <property name="clickable">
                     <bool>false</bool>
@@ -55,7 +55,7 @@
             </column>
             <column>
                 <property name="text">
-                    <string>Line</string>
+                    <string>Author</string>
                 </property>
                 <property name="clickable">
                     <bool>false</bool>

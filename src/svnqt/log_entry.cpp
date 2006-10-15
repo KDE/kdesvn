@@ -47,15 +47,18 @@ namespace svn
                       char action_,
                       const QString &copyFromPath_,
                       const svn_revnum_t copyFromRevision_)
-    : path(path_),action(action_),copyFromPath(copyFromPath_),
-        copyFromRevision(copyFromRevision_)
-        ,copyToPath(QString::null),copyToRevision(-1)
+    : path(path_),
+        action(action_),
+        copyFromPath(copyFromPath_),
+        copyToPath(QString::null),
+        copyFromRevision(copyFromRevision_),
+        copyToRevision(-1)
   {
   }
 
   LogChangePathEntry::LogChangePathEntry()
-    : path(QString::null),action(0),copyFromPath(QString::null),copyFromRevision(-1)
-        ,copyToPath(QString::null),copyToRevision(-1)
+    : path(QString::null),action(0),copyFromPath(QString::null),copyToPath(QString::null),
+        copyFromRevision(-1),copyToRevision(-1)
   {
   }
 
@@ -65,9 +68,8 @@ namespace svn
                         const svn_revnum_t copyFromRevision_,
                         const QString &copyToPath_,
                         const svn_revnum_t copyToRevision_)
-    : path(path_),action(action_),copyFromPath(copyFromPath_),
-        copyFromRevision(copyFromRevision_)
-        ,copyToPath(copyToPath_),copyToRevision(copyToRevision_)
+    : path(path_),action(action_),copyFromPath(copyFromPath_),copyToPath(copyToPath_),
+        copyFromRevision(copyFromRevision_),copyToRevision(copyToRevision_)
   {
   }
 

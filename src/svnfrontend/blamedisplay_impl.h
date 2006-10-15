@@ -16,7 +16,7 @@ public:
 
     virtual void setContent(const svn::AnnotatedFile&);
 
-    QColor rev2color(svn_revnum_t);
+    const QColor rev2color(svn_revnum_t)const;
 
 public slots:
 

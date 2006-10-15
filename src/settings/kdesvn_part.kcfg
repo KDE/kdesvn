@@ -39,6 +39,10 @@
       <label>Maximum number of log messages</label>
       <default>20</default>
     </entry>
+    <entry key="colored_blame" type="Bool" >
+        <label>Display colored blame lines</label>
+        <default>true</default>
+    </entry>
   </group>
   <group name="subversion" >
     <entry key="display_overlays" type="Bool" >

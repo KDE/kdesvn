@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>436</width>
-            <height>195</height>
+            <height>193</height>
         </rect>
     </property>
     <property name="caption">
@@ -169,6 +169,14 @@ When kde-default is wanted for opening on double click, enter &amp;quot;default&
                     </property>
                 </widget>
             </grid>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_colored_blame</cstring>
+            </property>
+            <property name="text">
+                <string>Display colored annotate</string>
+            </property>
         </widget>
         <spacer>
             <property name="name">

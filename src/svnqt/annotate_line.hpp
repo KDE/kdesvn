@@ -43,7 +43,7 @@ namespace svn
                   const char *line)
     : m_line_no (line_no), m_revision (revision),
       m_author(QString::FROMUTF8(author)),
-      m_date(QDateTime::fromString(date?QString::FROMUTF8(date):QString(""),Qt::ISODate)),
+      m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
       m_line(line)
     {
     }

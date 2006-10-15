@@ -19,6 +19,7 @@ public:
     const QColor rev2color(svn_revnum_t)const;
 
 public slots:
+    virtual void slotGoLine();
 
 private:
     BlameDisplayData*m_Data;

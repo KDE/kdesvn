@@ -186,17 +186,26 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
 }
 
-template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name)
+template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,const QString&u1)
 {
+    int buttons = KDialogBase::Ok;
+    if (OkCancel) {
+        buttons = buttons|KDialogBase::Cancel;
+    }
+    if (showHelp) {
+        buttons = buttons|KDialogBase::Help;
+    }
+    if (!u1.isEmpty()) {
+        buttons = buttons|KDialogBase::User1;
+    }
+
     KDialogBase * dlg = new KDialogBase(
         KApplication::activeModalWidget(),
         name,
         true,
         _head,
-        (OkCancel?KDialogBase::Ok|KDialogBase::Cancel:KDialogBase::Ok)/*,
-        (OkCancel?KDialogBase::Cancel:KDialogBase::Close),
-        KDialogBase::Cancel,
-        true*//*,(OkCancel?KStdGuiItem::ok():KStdGuiItem::close())*/);
+        buttons,KDialogBase::Ok,false,
+        (u1.isEmpty()?KGuiItem():KGuiItem(u1)));
 
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
@@ -366,9 +375,10 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
     }
     EMIT_FINISHED;
     BlameDisplay_impl*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k),false,"blame_dlg");
+    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k),false,"blame_dlg",false,i18n("Go to line"));
     if (dlg) {
         ptr->setContent(blame);
+        connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
         dlg->exec();
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
         delete dlg;

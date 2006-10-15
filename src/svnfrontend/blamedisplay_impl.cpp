@@ -5,6 +5,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kinputdialog.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -28,6 +29,8 @@ public:
     virtual int rtti()const{return 1000;}
 
     virtual int width( const QFontMetrics & fm, const QListView * lv, int c ) const;
+
+    apr_int64_t lineNumber(){return m_Content.lineNumber();}
 
 protected:
     svn::AnnotateLine m_Content;
@@ -232,6 +235,29 @@ const QColor BlameDisplay_impl::rev2color(svn_revnum_t r )const
 BlameDisplay_impl::~BlameDisplay_impl()
 {
     delete m_Data;
+}
+
+void BlameDisplay_impl::slotGoLine()
+{
+    bool ok = true;
+    int line = KInputDialog::getInteger(i18n("Show line"),i18n("Show line number"),
+                                        1,1,m_BlameList->childCount(),1,&ok,this);
+    if (!ok) {
+        return;
+    }
+    QListViewItem*item = m_BlameList->firstChild();
+    --line;
+    while (item) {
+        if (item->rtti()==1000) {
+            BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+            if (bit->lineNumber()==line) {
+                m_BlameList->ensureItemVisible(bit);
+                m_BlameList->setSelected(bit,true);
+                return;
+            }
+        }
+        item = item->nextSibling();
+    }
 }
 
 #include "blamedisplay_impl.moc"

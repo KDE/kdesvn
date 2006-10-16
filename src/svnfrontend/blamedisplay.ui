@@ -86,6 +86,17 @@
 </widget>
 <customwidgets>
 </customwidgets>
+<connections>
+    <connection>
+        <sender>m_BlameList</sender>
+        <signal>contextMenu(KListView*,QListViewItem*,const QPoint&amp;)</signal>
+        <receiver>BlameDisplay</receiver>
+        <slot>slotContextMenuRequested(KListView*,QListViewItem*,const QPoint&amp;)</slot>
+    </connection>
+</connections>
+<slots>
+    <slot access="protected">slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&amp;)</slot>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>

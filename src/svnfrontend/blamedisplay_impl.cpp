@@ -1,16 +1,21 @@
 #include "blamedisplay_impl.h"
+#include "simple_logcb.h"
 #include "src/settings/kdesvnsettings.h"
+#include "src/svnqt/log_entry.hpp"
+
 #include <klistview.h>
 #include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kinputdialog.h>
+#include <kmessagebox.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
 #include <qheader.h>
 #include <qmap.h>
+#include <qpopupmenu.h>
 
 #define COL_LINENR 0
 #define COL_REV 1
@@ -31,6 +36,7 @@ public:
     virtual int width( const QFontMetrics & fm, const QListView * lv, int c ) const;
 
     apr_int64_t lineNumber(){return m_Content.lineNumber();}
+    svn_revnum_t rev(){return m_Content.revision();}
 
 protected:
     svn::AnnotateLine m_Content;
@@ -132,13 +138,17 @@ void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
 class BlameDisplayData
 {
     public:
-        BlameDisplayData(){max=-1;min=INT_MAX-1;rev_count=0;up=false;}
+        BlameDisplayData(){max=-1;min=INT_MAX-1;rev_count=0;up=false;m_cb=0;m_File="";}
         ~BlameDisplayData(){}
         svn_revnum_t max,min;
         QMap<svn_revnum_t,QColor> m_shadingMap;
+        QMap<svn_revnum_t,svn::LogEntry> m_logCache;
+
         QColor m_lastCalcColor;
         unsigned int rev_count;
         bool up;
+        SimpleLogCb*m_cb;
+        QString m_File;
 };
 
 BlameDisplay_impl::BlameDisplay_impl(QWidget*parent,const char*name)
@@ -147,15 +157,21 @@ BlameDisplay_impl::BlameDisplay_impl(QWidget*parent,const char*name)
     m_Data = new BlameDisplayData();
 }
 
-BlameDisplay_impl::BlameDisplay_impl(const svn::AnnotatedFile&blame,QWidget*parent,const char*name)
+BlameDisplay_impl::BlameDisplay_impl(const QString&what,const svn::AnnotatedFile&blame,QWidget*parent,const char*name)
     : BlameDisplay(parent,name)
 {
     m_Data = new BlameDisplayData();
-    setContent(blame);
+    setContent(what,blame);
 }
 
-void BlameDisplay_impl::setContent(const svn::AnnotatedFile&blame)
+void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
 {
+    m_Data->m_cb = _cb;
+}
+
+void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&blame)
+{
+    m_Data->m_File = what;
     m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
     m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
     m_BlameList->header()->setLabel(COL_LINE,QString(""));
@@ -258,6 +274,42 @@ void BlameDisplay_impl::slotGoLine()
         }
         item = item->nextSibling();
     }
+}
+
+void BlameDisplay_impl::slotContextMenuRequested(KListView*,QListViewItem*item, const QPoint&pos)
+{
+    if (item==0||item->rtti()!=1000) return;
+    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+    QPopupMenu popup;
+    popup.insertItem(i18n("Show commit message for this release"),101);
+    int r = popup.exec(pos);
+
+    switch (r)
+    {
+        case 101:
+            showCommit(bit);
+            break;
+        default:
+            break;
+    }
+}
+
+void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
+{
+    if (!bit) return;
+    QString text;
+    if (m_Data->m_logCache.find(bit->rev())!=m_Data->m_logCache.end()) {
+        text = m_Data->m_logCache[bit->rev()].message;
+    } else {
+        svn::LogEntry t;
+        if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t,bit->rev(),m_Data->m_File,m_Data->max)) {
+            m_Data->m_logCache[bit->rev()] = t;
+            text = m_Data->m_logCache[bit->rev()].message;
+        }
+    }
+//    if (!text.isEmpty()) {
+        KMessageBox::information(this,text);
+//    }
 }
 
 #include "blamedisplay_impl.moc"

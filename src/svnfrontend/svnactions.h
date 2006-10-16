@@ -24,6 +24,8 @@
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/smart_pointer.hpp"
 
+#include "simple_logcb.h"
+
 #include <kurl.h>
 
 #include <qobject.h>
@@ -54,7 +56,7 @@ namespace KIO {
 /**
 @author Rajko Albrecht
 */
-class SvnActions : public QObject
+class SvnActions : public QObject,public SimpleLogCb
 {
     Q_OBJECT
 public:
@@ -107,9 +109,10 @@ public:
     void makeTree(const QString&what,const svn::Revision&rev,
         const svn::Revision&startr=svn::Revision(1),
         const svn::Revision&endr=svn::Revision::HEAD);
-    void makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files=false,int limit = 0);
+    void makeLog(const svn::Revision&start,const svn::Revision&end,SvnItem*k,bool list_files=false,int limit = 0);
     void makeLog(const svn::Revision&start,const svn::Revision&end,const QString&,bool list_files=false, int limit=0);
-    const svn::LogEntries * getLog(svn::Revision start,svn::Revision end,const QString&,bool list_files, int limit);
+    const svn::LogEntries * getLog(const svn::Revision&start,const svn::Revision& end,const QString&,bool list_files, int limit);
+    virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&);
 
     void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
     void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED);

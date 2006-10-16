@@ -151,7 +151,7 @@ public:
 #define DIALOGS_SIZES "display_dialogs_sizes"
 
 SvnActions::SvnActions(ItemDisplay *parent, const char *name,bool processes_blocked)
- : QObject(parent?parent->realWidget():0, name)
+    : QObject(parent?parent->realWidget():0, name),SimpleLogCb()
 {
     m_CThread = 0;
     m_UThread = 0;
@@ -217,13 +217,13 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
 /*!
     \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
  */
-void SvnActions::makeLog(svn::Revision start,svn::Revision end,SvnItem*k,bool list_files,int limit)
+void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,SvnItem*k,bool list_files,int limit)
 {
     if (!k)return;
     makeLog(start,end,k->fullName(),list_files,limit);
 }
 
-const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end,const QString&which,bool list_files,int limit)
+const svn::LogEntries * SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
 {
     const svn::LogEntries * logs = 0;
     QString ex;
@@ -246,6 +246,24 @@ const svn::LogEntries * SvnActions::getLog(svn::Revision start,svn::Revision end
         return 0;
     }
     return logs;
+}
+
+bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg)
+{
+    bool res = false;
+    svn::InfoEntry inf;
+    if (what.isEmpty()||!singleInfo(what,peg,inf)) {
+        return res;
+    }
+    const svn::LogEntries*log = getLog(r,r,inf.reposRoot(),true,1);
+    if (log) {
+        if (log->count()) {
+            t = (*log)[0];
+            res = true;
+        }
+        delete log;
+    }
+    return res;
 }
 
 bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::InfoEntry&target)
@@ -359,7 +377,6 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
     QWidget*_parent = _p?_p:m_Data->m_ParentList->realWidget();
     svn::Revision peg = _peg==svn::Revision::UNDEFINED?end:_peg;
 
-    /// @todo make parameter for peg revision
     try {
         StopDlg sdlg(m_Data->m_SvnContext,_parent,0,"Annotate",i18n("Annotate lines - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
@@ -377,7 +394,8 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
     BlameDisplay_impl*ptr;
     KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k),false,"blame_dlg",false,i18n("Go to line"));
     if (dlg) {
-        ptr->setContent(blame);
+        ptr->setContent(k,blame);
+        ptr->setCb(this);
         connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
         dlg->exec();
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);

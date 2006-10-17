@@ -391,16 +391,7 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
         return;
     }
     EMIT_FINISHED;
-    BlameDisplay_impl*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Blame %1")).arg(k),false,"blame_dlg",false,i18n("Go to line"));
-    if (dlg) {
-        ptr->setContent(k,blame);
-        ptr->setCb(this);
-        connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
-        dlg->exec();
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
-        delete dlg;
-    }
+    BlameDisplay_impl::displayBlame(this,k,blame,_p,"blame_dlg");
 }
 
 void SvnActions::makeGet(const svn::Revision&start, const QString&what, const QString&target,

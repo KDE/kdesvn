@@ -21,11 +21,15 @@ public:
 
     const QColor rev2color(svn_revnum_t)const;
 
+    static void displayBlame(SimpleLogCb*,const QString&,const svn::AnnotatedFile&,QWidget*parent=0,const char*name=0);
+
 public slots:
     virtual void slotGoLine();
+    virtual void slotShowCurrentCommit();
 
 protected slots:
     virtual void slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&);
+    virtual void slotSelectionChanged();
 
 protected:
     virtual void showCommit(BlameDisplayItem*);

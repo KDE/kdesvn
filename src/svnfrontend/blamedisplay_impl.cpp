@@ -10,12 +10,15 @@
 #include <kdebug.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
+#include <kdialogbase.h>
+#include <kapp.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
 #include <qheader.h>
 #include <qmap.h>
 #include <qpopupmenu.h>
+#include <qvbox.h>
 
 #define COL_LINENR 0
 #define COL_REV 1
@@ -138,7 +141,15 @@ void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
 class BlameDisplayData
 {
     public:
-        BlameDisplayData(){max=-1;min=INT_MAX-1;rev_count=0;up=false;m_cb=0;m_File="";}
+        BlameDisplayData()
+        {
+            max=-1;
+            min=INT_MAX-1;
+            rev_count=0;
+            up=false;
+            m_cb=0;m_File="";
+            m_dlg = 0;
+        }
         ~BlameDisplayData(){}
         svn_revnum_t max,min;
         QMap<svn_revnum_t,QColor> m_shadingMap;
@@ -149,18 +160,21 @@ class BlameDisplayData
         bool up;
         SimpleLogCb*m_cb;
         QString m_File;
+        KDialogBase*m_dlg;
 };
 
 BlameDisplay_impl::BlameDisplay_impl(QWidget*parent,const char*name)
     : BlameDisplay(parent,name)
 {
     m_Data = new BlameDisplayData();
+    connect(m_BlameList,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
 }
 
 BlameDisplay_impl::BlameDisplay_impl(const QString&what,const svn::AnnotatedFile&blame,QWidget*parent,const char*name)
     : BlameDisplay(parent,name)
 {
     m_Data = new BlameDisplayData();
+    connect(m_BlameList,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     setContent(what,blame);
 }
 
@@ -177,6 +191,9 @@ void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&b
     m_BlameList->header()->setLabel(COL_LINE,QString(""));
 
     m_BlameList->clear();
+    if (m_Data->m_dlg) {
+        m_Data->m_dlg->enableButton(KDialogBase::User2,false);
+    }
     svn::AnnotatedFile::const_iterator bit;
     m_BlameList->setSorting(COL_LINENR,false);
     m_Data->max = -1;
@@ -194,13 +211,12 @@ void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&b
             m_Data->m_shadingMap[(*bit).revision()]=QColor();
         }
     }
-    kdDebug()<<"Max revision: "<<m_Data->max << endl;
-    kdDebug()<<"Min revision: "<<m_Data->min << endl;
     if (Kdesvnsettings::self()->colored_blame()) {
         QColor a(160,160,160);
         int offset = 10;
         int r=0; int g=0;int b=0;
-        int colortoggle=0;
+        uint colinc=0;
+
         for (svn_revnum_t i = m_Data->min; i<= m_Data->max;++i) {
             if (m_Data->m_shadingMap.find(i)==m_Data->m_shadingMap.end()) {
                 continue;
@@ -208,29 +224,24 @@ void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&b
             a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
             m_Data->m_shadingMap[i]=a;
             if ( a.red()>245||a.green()>245||a.blue()>245 ) {
-                if (colortoggle==0) {
-                    if (r<=40) {
-                        r+=10;
+                if (colinc==0) {
+                    ++colinc;
+                } else if (r>=50||g>=50||b>=50) {
+                    if (++colinc>6) {
+                        colinc = 0;
+                        r=g=b=0;
                     } else {
-                        r = 0;
-                        ++colortoggle;
+                        r=g=b=-10;
                     }
                 }
-                if (colortoggle==1) {
-                    if (g<=40) {
-                        g+=10;
-                    } else {
-                        g = 0;
-                        ++colortoggle;
-                    }
+                if (colinc & 0x1) {
+                    r+=10;
                 }
-                if (colortoggle==2) {
-                    if (b<=40) {
-                        b+=10;
-                    } else {
-                        b = 0;
-                        colortoggle=0;
-                    }
+                if (colinc & 0x2) {
+                    g+=10;
+                }
+                if (colinc & 0x4) {
+                    b+=10;
                 }
                 a.setRgb(160+r,160+g,160+b);
             }
@@ -310,6 +321,47 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
 //    if (!text.isEmpty()) {
         KMessageBox::information(this,text);
 //    }
+}
+
+void BlameDisplay_impl::slotShowCurrentCommit()
+{
+    QListViewItem*item = m_BlameList->selectedItem();
+    if (item==0||item->rtti()!=1000) return;
+    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+    showCommit(bit);
+}
+
+void BlameDisplay_impl::slotSelectionChanged()
+{
+    if (!m_Data->m_dlg) return;
+    QListViewItem*item = m_BlameList->selectedItem();
+    if (item==0||item->rtti()!=1000) {
+        m_Data->m_dlg->enableButton(KDialogBase::User2,false);
+    } else {
+        m_Data->m_dlg->enableButton(KDialogBase::User2,true);
+    }
+}
+
+void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const svn::AnnotatedFile&blame,QWidget*,const char*name)
+{
+    int buttons = KDialogBase::Close|KDialogBase::User1|KDialogBase::User2;
+    KDialogBase * dlg = new KDialogBase(
+            KApplication::activeModalWidget(),
+            name,true,QString(i18n("Blame %1")).arg(item),buttons,KDialogBase::Ok,false,
+            KGuiItem(i18n("Goto line")),KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
+
+    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    BlameDisplay_impl*ptr = new BlameDisplay_impl(Dialog1Layout);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg"));
+    ptr->setContent(item,blame);
+    ptr->setCb(_cb);
+    ptr->m_Data->m_dlg = dlg;
+    dlg->enableButton(KDialogBase::User2,false);
+    connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
+    connect(dlg,SIGNAL(user2Clicked()),ptr,SLOT(slotShowCurrentCommit()));
+    dlg->exec();
+
+    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
 }
 
 #include "blamedisplay_impl.moc"

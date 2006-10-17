@@ -57,3 +57,16 @@ endif (GCC_IS_NEWER_THAN_4_1)
 
 message(STATUS "have_visibility: ${HAVE_GCC_VISIBILITY} version>=4.1: ${GCC_IS_NEWER_THAN_4_1} bad alloctor: ${_GCC_COMPILED_WITH_BAD_ALLOCATOR}")
 ENDIF (CMAKE_COMPILER_IS_GNUCXX)
+
+# check if we can use setenv
+TRY_COMPILE(HAS_SETENV
+        ${CMAKE_BINARY_DIR}
+        ${CMAKE_SOURCE_DIR}/cmakemodules/TestSetenv.cxx
+        OUTPUT_VARIABLE OUTPUT
+)
+
+IF (HAS_SETENV)
+    MESSAGE(STATUS "Checking for setenv - yes")
+ELSE (HAS_SETENV)
+    MESSAGE(STATUS "Checking for setenv - no")
+ENDIF (HAS_SETENV)

@@ -19,6 +19,7 @@
  */
 
 #include "sshagent.h"
+#include "kdesvn-config.h"
 
 #include <qregexp.h>
 #include <kapplication.h>
@@ -65,7 +66,11 @@ bool SshAgent::querySshAgent()
          * on some systems something like that isn't installed.*/
         char*agent = ::getenv("SSH_ASKPASS");
         if (!agent) {
+#ifdef HAS_SETENV
             ::setenv("SSH_ASKPASS", "kdesvnaskpass",1);
+#else
+            ::putenv("SSH_ASKPASS=kdesvnaskpass");
+#endif
         }
 
         m_isOurAgent = false;

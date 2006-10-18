@@ -33,6 +33,7 @@ class SvnLogDlgImp: public SvnLogDialogData {
 Q_OBJECT
 public:
     SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
+    virtual ~SvnLogDlgImp();
     void dispLog(const svn::LogEntries*,const QString&,const QString&);
     void saveSize();
     QSize dialogSize();
@@ -59,6 +60,7 @@ protected:
 
 protected slots:
     virtual void slotListEntries();
+    virtual void slotEntriesSelectionChanged();
 };
 
 #endif

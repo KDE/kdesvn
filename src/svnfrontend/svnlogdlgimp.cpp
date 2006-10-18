@@ -36,6 +36,8 @@
 
 #include <qdatetime.h>
 #include <qheader.h>
+#include <qsplitter.h>
+#include <qtextstream.h>
 
 #include <list>
 
@@ -167,12 +169,31 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     m_ControlKeyDown = false;
     m_first = 0;
     m_second = 0;
+
     if (Kdesvnsettings::self()->log_always_list_changed_files()) {
         buttonListFiles->hide();
     } else {
         m_ChangedList->hide();
     }
     m_Actions = ac;
+    KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
+    QString t1 = cs.readEntry("logsplitter",QString::null);
+    if (!t1.isEmpty()) {
+        if (cs.readBoolEntry("laststate",false)==m_ChangedList->isHidden()) {
+            QTextStream st2(&t1,IO_ReadOnly);
+            st2 >> *m_centralSplitter;
+        }
+    }
+}
+
+SvnLogDlgImp::~SvnLogDlgImp()
+{
+    QString t1,t2;
+    QTextStream st1(&t1,IO_WriteOnly);
+    st1 << *m_centralSplitter;
+    KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
+    cs.writeEntry("logsplitter",t1);
+    cs.writeEntry("laststate",m_ChangedList->isHidden());
 }
 
 void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what,const QString&root)
@@ -385,5 +406,10 @@ void SvnLogDlgImp::slotBlameItem()
     svn::Revision start(svn::Revision::START);
     m_Actions->makeBlame(start,k->rev(),_base+k->realName(),kapp->activeModalWidget(),k->rev());
 }
+
+void SvnLogDlgImp::slotEntriesSelectionChanged()
+{
+}
+
 
 #include "svnlogdlgimp.moc"

@@ -292,7 +292,7 @@ void BlameDisplay_impl::slotContextMenuRequested(KListView*,QListViewItem*item, 
     if (item==0||item->rtti()!=1000) return;
     BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
     QPopupMenu popup;
-    popup.insertItem(i18n("Show commit message for this release"),101);
+    popup.insertItem(i18n("Log message for revision"),101);
     int r = popup.exec(pos);
 
     switch (r)

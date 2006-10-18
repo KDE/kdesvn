@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>521</width>
-            <height>358</height>
+            <width>528</width>
+            <height>315</height>
         </rect>
     </property>
     <property name="caption">
@@ -21,7 +21,7 @@
         </property>
         <widget class="QSplitter">
             <property name="name">
-                <cstring>splitter6</cstring>
+                <cstring>m_centralSplitter</cstring>
             </property>
             <property name="orientation">
                 <enum>Vertical</enum>
@@ -295,6 +295,12 @@
         <receiver>LogDialog</receiver>
         <slot>slotBlameItem()</slot>
     </connection>
+    <connection>
+        <sender>m_ChangedList</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotEntriesSelectionChanged()</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotSelectionChanged(QListViewItem*)</slot>
@@ -304,6 +310,7 @@
     <slot access="protected">slotDispSelected()</slot>
     <slot access="protected">slotListEntries()</slot>
     <slot access="protected">slotBlameItem()</slot>
+    <slot access="protected">slotEntriesSelectionChanged()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

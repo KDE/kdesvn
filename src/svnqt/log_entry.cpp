@@ -84,15 +84,17 @@ namespace svn
     const char * date_,
     const char * message_)
   {
+    apr_time_t date__;
     date = 0;
 
     if (date_ != 0)
     {
       Pool pool;
 
-      if (svn_time_from_cstring (&date, date_, pool) != 0)
-        date = 0;
+      if (svn_time_from_cstring (&date__, date_, pool) != 0)
+        date__ = 0;
     }
+    date = date__;
 
     revision = revision_;
     author = author_ == 0 ? "" : QString::FROMUTF8(author_);

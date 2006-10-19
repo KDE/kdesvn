@@ -106,13 +106,14 @@ namespace svn
               const char * message);
 #if QT_VERSION < 0x040000
     svn_revnum_t revision;
+    apr_time_t date;
 #else
     qlonglong revision;
+    qlonglong date;
 #endif
     QString author;
     QString message;
     LogChangePathEntries changedPaths;
-    apr_time_t date;
   };
 }
 

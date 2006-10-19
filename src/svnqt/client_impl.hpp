@@ -423,7 +423,7 @@ namespace svn
      * @param limit (ignored when subversion 1.1 API)
      * @return a vector with log entries
      */
-    virtual const LogEntries *
+    virtual LogEntries *
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,

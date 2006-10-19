@@ -23,6 +23,7 @@
 #include "svnlogdlg.h"
 #include "src/svnqt/log_entry.hpp"
 #include "src/svnqt/client.hpp"
+#include "src/svnqt/shared_pointer.hpp"
 
 #include <qsize.h>
 
@@ -34,7 +35,7 @@ Q_OBJECT
 public:
     SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
     virtual ~SvnLogDlgImp();
-    void dispLog(const svn::LogEntries*,const QString&,const QString&);
+    void dispLog(const svn::SharedPointer<svn::LogEntries>&,const QString&,const QString&);
     void saveSize();
     QSize dialogSize();
 
@@ -57,6 +58,7 @@ protected:
     virtual void keyPressEvent (QKeyEvent * e);
     virtual void keyReleaseEvent (QKeyEvent * e);
     virtual void slotBlameItem();
+    svn::SharedPointer<svn::LogEntries> m_Entries;
 
 protected slots:
     virtual void slotListEntries();

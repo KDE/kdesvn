@@ -7,14 +7,15 @@ namespace svn
     class Revision;
 }
 
+class QString;
+
 class SimpleLogCb
 {
 public:
     SimpleLogCb(){}
     virtual ~SimpleLogCb(){}
 
-    virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&) = 0;
+    virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&,QString&root) = 0;
 };
 
 #endif
-

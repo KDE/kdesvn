@@ -23,6 +23,7 @@
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/smart_pointer.hpp"
+#include "src/svnqt/shared_pointer.hpp"
 
 #include "simple_logcb.h"
 
@@ -111,8 +112,8 @@ public:
         const svn::Revision&endr=svn::Revision::HEAD);
     void makeLog(const svn::Revision&start,const svn::Revision&end,SvnItem*k,bool list_files=false,int limit = 0);
     void makeLog(const svn::Revision&start,const svn::Revision&end,const QString&,bool list_files=false, int limit=0);
-    const svn::LogEntries * getLog(const svn::Revision&start,const svn::Revision& end,const QString&,bool list_files, int limit);
-    virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&);
+    svn::SharedPointer<svn::LogEntries> getLog(const svn::Revision&start,const svn::Revision& end,const QString&,bool list_files, int limit);
+    virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&,QString&root);
 
     void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
     void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED);

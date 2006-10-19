@@ -161,6 +161,8 @@ class BlameDisplayData
         SimpleLogCb*m_cb;
         QString m_File;
         KDialogBase*m_dlg;
+
+        QString reposRoot;
 };
 
 BlameDisplay_impl::BlameDisplay_impl(QWidget*parent,const char*name)
@@ -313,7 +315,7 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
         text = m_Data->m_logCache[bit->rev()].message;
     } else {
         svn::LogEntry t;
-        if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t,bit->rev(),m_Data->m_File,m_Data->max)) {
+        if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t,bit->rev(),m_Data->m_File,m_Data->max,m_Data->reposRoot)) {
             m_Data->m_logCache[bit->rev()] = t;
             text = m_Data->m_logCache[bit->rev()].message;
         }

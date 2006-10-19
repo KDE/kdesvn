@@ -196,10 +196,11 @@ SvnLogDlgImp::~SvnLogDlgImp()
     cs.writeEntry("laststate",m_ChangedList->isHidden());
 }
 
-void SvnLogDlgImp::dispLog(const svn::LogEntries*_log,const QString & what,const QString&root)
+void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntries>&_log,const QString & what,const QString&root)
 {
     if (!_log) return;
     _base = root;
+    m_Entries = _log;
     kdDebug()<<"What: "<<what << endl;
     svn::LogEntries::const_iterator lit;
     LogListViewItem * item;

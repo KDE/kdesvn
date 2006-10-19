@@ -223,9 +223,9 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,SvnIt
     makeLog(start,end,k->fullName(),list_files,limit);
 }
 
-const svn::LogEntries * SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
+svn::SharedPointer<svn::LogEntries> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
 {
-    const svn::LogEntries * logs = 0;
+    svn::LogEntries * logs = 0;
     QString ex;
     if (!m_Data->m_CurrentContext) return 0;
 
@@ -245,23 +245,31 @@ const svn::LogEntries * SvnActions::getLog(const svn::Revision&start,const svn::
         emit clientException(ex);
         return 0;
     }
+    //svn::SharedPointer<svn::LogEntries> res(logs);
     return logs;
 }
 
-bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg)
+bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg,QString&root)
 {
     bool res = false;
-    svn::InfoEntry inf;
-    if (what.isEmpty()||!singleInfo(what,peg,inf)) {
+
+    if (what.isEmpty()) {
         return res;
     }
-    const svn::LogEntries*log = getLog(r,r,inf.reposRoot(),true,1);
+    if (root.isEmpty()) {
+        svn::InfoEntry inf;
+        if (!singleInfo(what,peg,inf))
+        {
+            return res;
+        }
+        root = inf.reposRoot();
+    }
+    svn::SharedPointer<svn::LogEntries> log = getLog(r,r,root,true,1);
     if (log) {
         if (log->count()) {
             t = (*log)[0];
             res = true;
         }
-        delete log;
     }
     return res;
 }
@@ -351,7 +359,7 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     }
     QString reposRoot = info.reposRoot();
 
-    const svn::LogEntries * logs = getLog(start,end,which,list_files,limit);
+    svn::SharedPointer<svn::LogEntries> logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;
     SvnLogDlgImp disp(this);
     disp.dispLog(logs,info.url().mid(reposRoot.length()),reposRoot);
@@ -359,7 +367,6 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
     disp.exec();
     disp.saveSize();
-    delete logs;
     EMIT_FINISHED;
 }
 

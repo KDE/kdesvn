@@ -405,7 +405,7 @@ namespace svn
     return true;
   }
 
-  const LogEntries *
+  LogEntries *
   Client_impl::log (const Path& path, const Revision & revisionStart,
                const Revision & revisionEnd, bool discoverChangedPaths,
                bool strictNodeHistory,int limit) throw (ClientException)

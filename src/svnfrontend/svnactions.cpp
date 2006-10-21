@@ -223,9 +223,9 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,SvnIt
     makeLog(start,end,k->fullName(),list_files,limit);
 }
 
-svn::SharedPointer<svn::LogEntries> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
+svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
 {
-    svn::LogEntries * logs = 0;
+    svn::SharedPointer<svn::LogEntriesMap> logs = new svn::LogEntriesMap;
     QString ex;
     if (!m_Data->m_CurrentContext) return 0;
 
@@ -235,7 +235,7 @@ svn::SharedPointer<svn::LogEntries> SvnActions::getLog(const svn::Revision&start
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        logs = m_Data->m_Svnclient->log(which,start,end,list_files,!follow,limit);
+        m_Data->m_Svnclient->log(which,start,end,*logs,list_files,!follow,limit);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return 0;
@@ -245,7 +245,6 @@ svn::SharedPointer<svn::LogEntries> SvnActions::getLog(const svn::Revision&start
         emit clientException(ex);
         return 0;
     }
-    //svn::SharedPointer<svn::LogEntries> res(logs);
     return logs;
 }
 
@@ -264,10 +263,10 @@ bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStrin
         }
         root = inf.reposRoot();
     }
-    svn::SharedPointer<svn::LogEntries> log = getLog(r,r,root,true,1);
+    svn::SharedPointer<svn::LogEntriesMap> log = getLog(r,r,root,true,1);
     if (log) {
-        if (log->count()) {
-            t = (*log)[0];
+        if (log->find(r.revnum())!=log->end()) {
+            t = (*log)[r.revnum()];
             res = true;
         }
     }
@@ -359,7 +358,7 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     }
     QString reposRoot = info.reposRoot();
 
-    svn::SharedPointer<svn::LogEntries> logs = getLog(start,end,which,list_files,limit);
+    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;
     SvnLogDlgImp disp(this);
     disp.dispLog(logs,info.url().mid(reposRoot.length()),reposRoot);
@@ -375,7 +374,7 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end, S
     if (k) makeBlame(start,end,k->fullName(),m_Data->m_ParentList->realWidget());
 }
 
-void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,const QString&k,QWidget*_p,const svn::Revision&_peg)
+void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,const QString&k,QWidget*_p,const svn::Revision&_peg,SimpleLogCb*_acb)
 {
     if (!m_Data->m_CurrentContext) return;
     svn::AnnotatedFile blame;
@@ -398,7 +397,7 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
         return;
     }
     EMIT_FINISHED;
-    BlameDisplay_impl::displayBlame(this,k,blame,_p,"blame_dlg");
+    BlameDisplay_impl::displayBlame(_acb?_acb:this,k,blame,_p,"blame_dlg");
 }
 
 void SvnActions::makeGet(const svn::Revision&start, const QString&what, const QString&target,

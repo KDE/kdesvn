@@ -21,6 +21,7 @@
 #define SVNLOGDLGIMP_H
 
 #include "svnlogdlg.h"
+#include "simple_logcb.h"
 #include "src/svnqt/log_entry.hpp"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/shared_pointer.hpp"
@@ -30,14 +31,17 @@
 class LogListViewItem;
 class SvnActions;
 
-class SvnLogDlgImp: public SvnLogDialogData {
+class SvnLogDlgImp: public SvnLogDialogData,public SimpleLogCb
+{
 Q_OBJECT
 public:
     SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
     virtual ~SvnLogDlgImp();
-    void dispLog(const svn::SharedPointer<svn::LogEntries>&,const QString&,const QString&);
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&);
     void saveSize();
     QSize dialogSize();
+
+    virtual bool getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg,QString&root);
 
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
@@ -58,7 +62,7 @@ protected:
     virtual void keyPressEvent (QKeyEvent * e);
     virtual void keyReleaseEvent (QKeyEvent * e);
     virtual void slotBlameItem();
-    svn::SharedPointer<svn::LogEntries> m_Entries;
+    svn::SharedPointer<svn::LogEntriesMap> m_Entries;
 
 protected slots:
     virtual void slotListEntries();

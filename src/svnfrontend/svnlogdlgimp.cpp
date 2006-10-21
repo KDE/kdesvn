@@ -196,20 +196,20 @@ SvnLogDlgImp::~SvnLogDlgImp()
     cs.writeEntry("laststate",m_ChangedList->isHidden());
 }
 
-void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntries>&_log,const QString & what,const QString&root)
+void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString & what,const QString&root)
 {
     if (!_log) return;
     _base = root;
     m_Entries = _log;
     kdDebug()<<"What: "<<what << endl;
-    svn::LogEntries::const_iterator lit;
+    svn::LogEntriesMap::const_iterator lit;
     LogListViewItem * item;
     QMap<long int,QString> namesMap;
     QMap<long int,LogListViewItem*> itemMap;
     long min,max;
     min = max = -1;
     for (lit=_log->begin();lit!=_log->end();++lit) {
-        item = new LogListViewItem(m_LogView,*lit);
+        item = new LogListViewItem(m_LogView,(*lit));
         if ((*lit).revision>max) max = (*lit).revision;
         if ((*lit).revision<min || min == -1) min = (*lit).revision;
         itemMap[(*lit).revision]=item;
@@ -359,6 +359,17 @@ void SvnLogDlgImp::slotDispSelected()
     emit makeDiff(_base+m_first->realName(),m_first->rev(),_base+m_second->realName(),m_second->rev(),this);
 }
 
+bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg,QString&root)
+{
+    root = _base;
+    if (m_Entries->find(r.revnum()) == m_Entries->end())
+    {
+        return m_Actions->getSingleLog(t,r,what,peg,root);
+    }
+    t=(*m_Entries)[r.revnum()];
+    return true;
+}
+
 void SvnLogDlgImp::slotListEntries()
 {
     LogListViewItem * it = static_cast<LogListViewItem*>(m_LogView->selectedItem());
@@ -366,17 +377,16 @@ void SvnLogDlgImp::slotListEntries()
         buttonListFiles->setEnabled(false);
         return;
     }
-    const svn::LogEntries*_log = m_Actions->getLog(it->rev(),it->rev(),_name,true,0);
+    svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(it->rev(),it->rev(),_name,true,0);
     if (!_log) {
         return;
     }
     if (_log->count()>0) {
-        it->setChangedEntries((*_log)[0]);
+        it->setChangedEntries((*_log)[it->rev()]);
         it->showChangedEntries(m_ChangedList);
         if (!m_ChangedList->isVisible()) m_ChangedList->show();
     }
     buttonListFiles->setEnabled(false);
-    delete _log;
 }
 
 void SvnLogDlgImp::keyPressEvent (QKeyEvent * e)
@@ -405,7 +415,7 @@ void SvnLogDlgImp::slotBlameItem()
         return;
     }
     svn::Revision start(svn::Revision::START);
-    m_Actions->makeBlame(start,k->rev(),_base+k->realName(),kapp->activeModalWidget(),k->rev());
+    m_Actions->makeBlame(start,k->rev(),_base+k->realName(),kapp->activeModalWidget(),k->rev(),this);
 }
 
 void SvnLogDlgImp::slotEntriesSelectionChanged()

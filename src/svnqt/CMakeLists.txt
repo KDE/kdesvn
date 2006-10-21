@@ -55,6 +55,7 @@ SET(INST_HEADERS
     repositorylistener.hpp
     revision.hpp
     smart_pointer.hpp
+    shared_pointer.hpp
     status.hpp
     svnfilestream.hpp
     svnstream.hpp

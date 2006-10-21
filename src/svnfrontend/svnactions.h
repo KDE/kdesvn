@@ -112,11 +112,11 @@ public:
         const svn::Revision&endr=svn::Revision::HEAD);
     void makeLog(const svn::Revision&start,const svn::Revision&end,SvnItem*k,bool list_files=false,int limit = 0);
     void makeLog(const svn::Revision&start,const svn::Revision&end,const QString&,bool list_files=false, int limit=0);
-    svn::SharedPointer<svn::LogEntries> getLog(const svn::Revision&start,const svn::Revision& end,const QString&,bool list_files, int limit);
+    svn::SharedPointer<svn::LogEntriesMap> getLog(const svn::Revision&start,const svn::Revision& end,const QString&,bool list_files, int limit);
     virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&,QString&root);
 
     void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
-    void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED);
+    void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED,SimpleLogCb*_acb=0);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     bool makeSwitch(const QString&path,const QString&what);

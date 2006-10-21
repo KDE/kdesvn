@@ -22,8 +22,10 @@ SET(settings_sources
     cmdexecsettings_impl.cpp
     diffmergesettings_impl.cpp)
 
+FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+
 KDE3_AUTOMOC(${settings_sources})
-ADD_LIBRARY(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources})
+ADD_LIBRARY(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
 ADD_DEPENDENCIES(settingsdlgs kdesvncfgreader)
 
 SET_TARGET_PROPERTIES(kdesvncfgreader settingsdlgs

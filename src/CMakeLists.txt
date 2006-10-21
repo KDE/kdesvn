@@ -1,4 +1,4 @@
-ADD_EXECUTABLE(kdesvnaskpass kdesvn-askpass.cpp)
+ADD_EXECUTABLE(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
 SET(kdesvnsrc
     main.cpp

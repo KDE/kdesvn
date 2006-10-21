@@ -11,16 +11,27 @@ SET(svnfrontendsrc
     editproperty_impl.cpp
     filelistviewitem.cpp
     fronthelpers/checkoutinfo_impl.cpp
+    fronthelpers/checkoutinfo_impl.h
     fronthelpers/oimagescrollview.cpp
+    fronthelpers/oimagescrollview.h
     fronthelpers/oimagezoomer.cpp
+    fronthelpers/oimagezoomer.h
     fronthelpers/rangeinput_impl.cpp
+    fronthelpers/rangeinput_impl.h
     graphtree/drawparams.cpp
+    graphtree/drawparams.h
     graphtree/elogentry.cpp
+    graphtree/elogentry.h
     graphtree/graphtreelabel.cpp
+    graphtree/graphtreelabel.h
     graphtree/pannerview.cpp
+    graphtree/pannerview.h
     graphtree/revgraphview.cpp
+    graphtree/revgraphview.h
     graphtree/revisiontree.cpp
+    graphtree/revisiontree.h
     graphtree/revtreewidget.cpp
+    graphtree/revtreewidget.h
     hotcopydlg_impl.cpp
     importdir_logmsg.cpp
     itemdisplay.cpp
@@ -53,10 +64,12 @@ SET(svnfrontendui
     blamedisplay.ui
     svnlogdlg.ui)
 
+FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+
 KDE3_AUTOMOC(${svnfrontendsrc})
 KDE3_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 
-ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources})
+ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 SET_TARGET_PROPERTIES(svnfrontend
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

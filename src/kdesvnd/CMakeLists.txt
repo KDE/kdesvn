@@ -1,7 +1,9 @@
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
-
+FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 SET(kded_kdesvnd_src
-    kdesvnd_dcop.cpp)
+    kdesvnd_dcop.cpp
+    ${hdr}
+   )
 
 KDE3_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
 

@@ -1,7 +1,8 @@
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
 SET(kiosvn_src kiosvn.cpp kiolistener.cpp kiobytestream.cpp)
+FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE3_ADD_KPART(kio_ksvn ${kiosvn_src})
+KDE3_ADD_KPART(kio_ksvn ${kiosvn_src} ${hdr})
 
 TARGET_LINK_LIBRARIES(kio_ksvn
     svnqt

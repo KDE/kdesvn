@@ -12,9 +12,15 @@ SET(ksvnwidgetsrc
     logmsg_impl.cpp
     ssltrustprompt_impl.cpp)
 
+SET(ksvnwidgethdr
+    authdialogimpl.h
+    logmsg_impl.h
+    ssltrustprompt_impl.h
+)
+
 KDE3_AUTOMOC(${ksvnwidgetsrc})
 
-ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui})
+ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui} ${ksvnwidgethdr})
 SET_TARGET_PROPERTIES(ksvnwidgets
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

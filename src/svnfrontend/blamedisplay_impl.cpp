@@ -12,6 +12,7 @@
 #include <kmessagebox.h>
 #include <kdialogbase.h>
 #include <kapp.h>
+#include <ktextbrowser.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -320,9 +321,18 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
             text = m_Data->m_logCache[bit->rev()].message;
         }
     }
-//    if (!text.isEmpty()) {
-        KMessageBox::information(this,text);
-//    }
+    KDialogBase* dlg = new KDialogBase(
+            KApplication::activeModalWidget(),
+    "simplelog",true,QString(i18n("Logmessage for revision %1").arg(bit->rev())),
+    KDialogBase::Close);
+    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
+    ptr->setFont(KGlobalSettings::fixedFont());
+    ptr->setWordWrap(QTextEdit::NoWrap);
+    ptr->setText(text);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display"));
+    dlg->exec();
+    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display",false);
 }
 
 void BlameDisplay_impl::slotShowCurrentCommit()
@@ -349,7 +359,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const sv
     int buttons = KDialogBase::Close|KDialogBase::User1|KDialogBase::User2;
     KDialogBase * dlg = new KDialogBase(
             KApplication::activeModalWidget(),
-            name,true,QString(i18n("Blame %1")).arg(item),buttons,KDialogBase::Ok,false,
+            name,true,QString(i18n("Blame %1")).arg(item),buttons,KDialogBase::Close,false,
             KGuiItem(i18n("Goto line")),KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
 
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();

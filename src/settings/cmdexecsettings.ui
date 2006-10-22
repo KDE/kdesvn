@@ -8,9 +8,12 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>340</width>
-            <height>107</height>
+            <width>323</width>
+            <height>163</height>
         </rect>
+    </property>
+    <property name="caption">
+        <string>CmdExecSettings</string>
     </property>
     <vbox>
         <property name="name">
@@ -74,6 +77,40 @@
                 <string>If set, kdesvn will not show a menu inside "Action" menu of konqueror</string>
             </property>
         </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_kio_use_standard_logmsg</cstring>
+            </property>
+            <property name="text">
+                <string>KIO operations use standard logmessage</string>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="KLineEdit" row="0" column="1">
+                    <property name="name">
+                        <cstring>kcfg_kio_standard_logmsg</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>stdLogmsgLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Standard message:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
         <spacer>
             <property name="name">
                 <cstring>spacer1</cstring>
@@ -97,10 +134,16 @@
 </customwidgets>
 <connections>
     <connection>
+        <sender>kcfg_kio_use_standard_logmsg</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>kcfg_kio_standard_logmsg</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
         <sender>kcfg_cmdline_show_logwindow</sender>
         <signal>toggled(bool)</signal>
-        <receiver>CmdExecSettings</receiver>
-        <slot>showLogToggled(bool)</slot>
+        <receiver>kcfg_cmdline_log_minline</receiver>
+        <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
 <slots>
@@ -110,5 +153,6 @@
 <includehints>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>
+    <includehint>klineedit.h</includehint>
 </includehints>
 </UI>

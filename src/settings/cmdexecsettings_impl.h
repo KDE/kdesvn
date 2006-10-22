@@ -36,8 +36,6 @@ public slots:
   /*$PUBLIC_SLOTS$*/
 
 protected:
-  /*$PROTECTED_FUNCTIONS$*/
-    void showLogToggled(bool);
 
 protected slots:
   /*$PROTECTED_SLOTS$*/

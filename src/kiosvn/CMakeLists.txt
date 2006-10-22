@@ -7,6 +7,7 @@ KDE3_ADD_KPART(kio_ksvn ${kiosvn_src} ${hdr})
 TARGET_LINK_LIBRARIES(kio_ksvn
     svnqt
     kdesvnhelpers
+    kdesvncfgreader
     ${QT_AND_KDECORE_LIBS}
     ${KDE3_UI_LIBRARY} ${KDE3_DCOP_LIBRARY} ${KDE3_KIO_LIBRARY})
 

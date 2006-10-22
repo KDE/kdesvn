@@ -23,23 +23,19 @@
 
 #include <klocale.h>
 #include <knuminput.h>
+#include <qcheckbox.h>
+#include <klineedit.h>
 
 CmdExecSettings_impl::CmdExecSettings_impl(QWidget* parent, const char* name, WFlags fl)
 : CmdExecSettings(parent,name,fl)
 {
     kcfg_cmdline_log_minline->setSpecialValueText(i18n("No minimum"));
+    kcfg_cmdline_log_minline->setEnabled(kcfg_cmdline_show_logwindow->isChecked());
+    kcfg_kio_standard_logmsg->setEnabled(kcfg_kio_use_standard_logmsg->isChecked());
 }
 
 CmdExecSettings_impl::~CmdExecSettings_impl()
 {
 }
 
-/*$SPECIALIZATION$*/
-
-void CmdExecSettings_impl::showLogToggled(bool how)
-{
-    kcfg_cmdline_log_minline->setEnabled(how);
-}
-
 #include "cmdexecsettings_impl.moc"
-

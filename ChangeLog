@@ -4,6 +4,10 @@ version 0.11.0
     * annotate may displayed colored, speed of display increased, "Go to line" and "Display log for revision" inserted
     * some dialogs stored sizes into wrong configfiles when using as part of other programs like konqueror - fixed
     * buildproblems on sun fixed
+    * When doing operations like copy or mkdir on repositories via kdesvn's KIO-protocol user may set a default message
+      and won't questioned for a specific logmessage.
+    * 'cat' tries to let KDE select a specific display for a specific content. Only if no info about a specific mime-
+      type exists kdesvn displays the content.
 
 version 0.10.0
     * russion translation added

@@ -1371,6 +1371,53 @@ Substituted with target.
 </sect3>
 </sect2>
 </sect1>
+<sect1 id="kio-cmdline-settings">
+<title>KIO &#047; commandline</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term>Show log after executing a command</term>
+<listitem><para>
+Should a dialog open with the log of last made subversion command when it where done via commandline or konqueror action menu.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Minimum loglines to show</term>
+<listitem><para>
+If &quot;Show log...&quot; is set, what is the minimum of lines before such a dialog will shown. So you may set that such window will
+only shown when interesting output was generated (commitlog and so on)
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Don't display contextmenu in konqueror</term>
+<listitem><para>
+If set, no action menu entry for kdesvn is made in konqueror. Works only with KDE 3.5.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>KIO operations use standard logmessage.</term>
+<listitem><para>
+When making operations on a repository via the kdesvn KIO protocol from within konqueror (eg., &quot;ksvn+...&quot; protocols) on large operations like moving or copy folders kdesvn would ask for a logmessage for each item. This is a behavior of konqueror.
+When this option is set, the KIO implementation from kdesvn will not ask for a logmessage but set a standard logmessage. This flags not the operations from
+kdesvn action menu for konqueror but only copy/move/mkdir/delete made with konqueror or other filemanagers on a KIO-url.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Standard message</term>
+<listitem><para>
+The message kdesvn-kio should set on operations from within konqueror when the flag above is set. Default is &quot;Revision made with kdesvn KIO.&quot;
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
 </chapter>
 
 <chapter id="commands">

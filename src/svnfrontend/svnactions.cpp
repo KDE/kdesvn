@@ -462,9 +462,16 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     if (offers.count()==0 || offers.first()->exec().isEmpty()) {
         offers = KTrader::self()->query(mptr->name(), "Type == 'Application'");
     }
-    if (offers.count()>0&&!offers.first()->exec().isEmpty()) {
+    KTrader::OfferList::ConstIterator it = offers.begin();
+    for( ; it != offers.end(); ++it ) {
+        if ((*it)->noDisplay())
+            continue;
+        break;
+    }
+
+    if (it!=offers.end()) {
         content.setAutoDelete(false);
-        KRun::runURL(content.name(),mptr->name(),true,false);
+        KRun::run(**it,KURL(content.name()),true);
         return;
     }
     KTextBrowser*ptr;

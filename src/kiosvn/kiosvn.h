@@ -98,5 +98,7 @@ private:
     bool createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);
     static QString makeSvnUrl(const KURL&url);
     bool getLogMsg(QString&);
+protected:
+    QString getDefaultLog();
 };
 #endif

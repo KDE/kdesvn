@@ -176,6 +176,14 @@
       <default>0</default>
       <label>Log must contain at least lines to show</label>
     </entry>
+    <entry key="kio_use_standard_logmsg" type="Bool" >
+        <default>false</default>
+        <label>KIO::svn operations uses a standard logmessage</label>
+    </entry>
+    <entry key="kio_standard_logmsg" type="String">
+        <default>Revision made with kdesvn KIO.</default>
+        <label>The standard logmessage to use with KIO if not asking for it.</label>
+    </entry>
   </group>
   <group name="internals" >
     <entry key="locale_is_casesensitive" type="Bool" >

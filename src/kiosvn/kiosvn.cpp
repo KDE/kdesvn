@@ -26,8 +26,9 @@
 #include "src/svnqt/status.hpp"
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/info_entry.hpp"
-#include "helpers/sub2qt.h"
-#include "helpers/sshagent.h"
+#include "src/settings/kdesvnsettings.h"
+#include "src/helpers/sub2qt.h"
+#include "src/helpers/sshagent.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -276,10 +277,9 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    QString msg = QString::null;
     svn::Path p(makeSvnUrl(url));
     try {
-        m_pData->m_Svnclient->mkdir(p,msg);
+        m_pData->m_Svnclient->mkdir(p,getDefaultLog());
     }catch (svn::ClientException e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -291,6 +291,7 @@ void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 {
     kdDebug()<<"kio_svn::rename "<< src << " to " << target <<  endl;
     QString msg;
+    m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->move(makeSvnUrl(src),makeSvnUrl(target),force);
     }catch (svn::ClientException e) {
@@ -309,8 +310,8 @@ void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool o
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
-    QString msg;
     m_pData->dispProgress=true;
+    m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->copy(makeSvnUrl(src),rev,makeSvnUrl(dest));
     }catch (svn::ClientException e) {
@@ -331,6 +332,7 @@ void kio_svnProtocol::del(const KURL&src,bool isfile)
         rev = svn::Revision::HEAD;
     }
     svn::Targets target(makeSvnUrl(src));
+    m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->remove(target,false);
     } catch (svn::ClientException e) {
@@ -762,4 +764,18 @@ void kio_svnProtocol::contextProgress(long long int current, long long int)
 void kio_svnProtocol::streamTotalSizeNull()
 {
     totalSize(0);
+}
+
+
+/*!
+    \fn kio_svnProtocol::getDefaultLog()
+ */
+QString kio_svnProtocol::getDefaultLog()
+{
+    QString res = QString::null;
+    Kdesvnsettings::self()->readConfig();
+    if (Kdesvnsettings::kio_use_standard_logmsg()) {
+        res = Kdesvnsettings::kio_standard_logmsg();
+    }
+    return res;
 }

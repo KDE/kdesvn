@@ -12,10 +12,6 @@ SET(svnfrontendsrc
     filelistviewitem.cpp
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
-    fronthelpers/oimagescrollview.cpp
-    fronthelpers/oimagescrollview.h
-    fronthelpers/oimagezoomer.cpp
-    fronthelpers/oimagezoomer.h
     fronthelpers/rangeinput_impl.cpp
     fronthelpers/rangeinput_impl.h
     graphtree/drawparams.cpp

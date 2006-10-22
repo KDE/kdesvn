@@ -136,8 +136,10 @@ SET_TARGET_PROPERTIES(svnqt PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UN
 TARGET_LINK_LIBRARIES(svnqt ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS})
 
 # Just a small linking test
-ADD_EXECUTABLE(testlink testmain.cpp)
-TARGET_LINK_LIBRARIES(testlink svnqt)
+IF (BUILD_TESTS)
+    ADD_EXECUTABLE(testlink testmain.cpp)
+    TARGET_LINK_LIBRARIES(testlink svnqt)
+ENDIF (BUILD_TESTS)
 
 # install rules
 # in win32 we don't install it

@@ -1,5 +1,5 @@
 PROJECT(kdesvn)
-SET(CMAKE_COLOR_MAKEFILE ON CACHE BOOL "Enable/Disable color output during build.")
+OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
 
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 IF (TESTINGBUILD)

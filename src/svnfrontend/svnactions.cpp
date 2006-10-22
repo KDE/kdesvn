@@ -40,7 +40,6 @@
 #include "src/svnqt/wc.hpp"
 #include "src/svnqt/svnqt_defines.hpp"
 #include "helpers/sub2qt.h"
-#include "svnfrontend/fronthelpers/oimagescrollview.h"
 #include "cacheentry.h"
 
 #include <kdialog.h>
@@ -61,6 +60,8 @@
 #include <klistview.h>
 #include <kio/netaccess.h>
 #include <kstandarddirs.h>
+#include <ktrader.h>
+#include <krun.h>
 
 #include <qstring.h>
 #include <qmap.h>
@@ -400,10 +401,10 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
     BlameDisplay_impl::displayBlame(_acb?_acb:this,k,blame,_p,"blame_dlg");
 }
 
-void SvnActions::makeGet(const svn::Revision&start, const QString&what, const QString&target,
+bool SvnActions::makeGet(const svn::Revision&start, const QString&what, const QString&target,
     const svn::Revision&peg,QWidget*_dlgparent)
 {
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return false;
     QWidget*dlgp=_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget();
     QString ex;
     svn::Path p(what);
@@ -414,10 +415,13 @@ void SvnActions::makeGet(const svn::Revision&start, const QString&what, const QS
         m_Data->m_Svnclient->get(p,target,start,peg);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
+        return false;
     } catch (...) {
         ex = i18n("Error getting content");
         emit clientException(ex);
+        return false;
     }
+    return true;
 }
 
 QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg,QWidget*_dlgparent)
@@ -446,34 +450,41 @@ QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,con
 
 void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg,QWidget*_dlgparent)
 {
-    QByteArray content = makeGet(start,what,peg,_dlgparent);
-    if (content.size()==0) {
-        emit clientException(i18n("Got no content"));
+    KTempFile content;
+    content.setAutoDelete(true);
+    if (!makeGet(start,what,content.name(),peg,_dlgparent)) {
         return;
     }
     EMIT_FINISHED;
-    // a bit fun must be ;)
-    QImage img(content);
-    if (img.isNull()) {
-        KTextBrowser*ptr;
+    KMimeType::Ptr mptr;
+    mptr = KMimeType::findByFileContent(content.name());
+    KTrader::OfferList offers = KTrader::self()->query(mptr->name(), "Type == 'Application' or (exist Exec)");
+    if (offers.count()==0 || offers.first()->exec().isEmpty()) {
+        offers = KTrader::self()->query(mptr->name(), "Type == 'Application'");
+    }
+    if (offers.count()>0&&!offers.first()->exec().isEmpty()) {
+        content.setAutoDelete(false);
+        KRun::runURL(content.name(),mptr->name(),true,false);
+        return;
+    }
+    KTextBrowser*ptr;
+    QFile file(content.name());
+    file.open( IO_ReadOnly );
+    QByteArray co = file.readAll();
+
+    if (co.size()) {
         KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
         if (dlg) {
             ptr->setFont(KGlobalSettings::fixedFont());
             ptr->setWordWrap(QTextEdit::NoWrap);
-            ptr->setText("<code>"+QStyleSheet::convertFromPlainText(content)+"</code>");
+            ptr->setText("<code>"+QStyleSheet::convertFromPlainText(co)+"</code>");
             dlg->exec();
             dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
             delete dlg;
         }
     } else {
-        Opie::MM::OImageScrollView*ptr;
-        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
-        ptr->setAutoRotate(false);
-        //ptr->setShowZoomer( true );
-        ptr->setImage( img );
-        dlg->exec();
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
-        delete dlg;
+        KMessageBox::information(_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget(),
+                                 i18n("Got no content."));
     }
 }
 

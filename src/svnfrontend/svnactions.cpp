@@ -484,7 +484,7 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
         if (dlg) {
             ptr->setFont(KGlobalSettings::fixedFont());
             ptr->setWordWrap(QTextEdit::NoWrap);
-            ptr->setText("<code>"+QStyleSheet::convertFromPlainText(co)+"</code>");
+            ptr->setText(QString::FROMUTF8(co,co.size()));
             dlg->exec();
             dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
             delete dlg;

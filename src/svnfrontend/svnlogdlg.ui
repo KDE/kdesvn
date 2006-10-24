@@ -170,10 +170,10 @@
                         <bool>false</bool>
                     </property>
                     <property name="text">
-                        <string>D&amp;iff previous</string>
+                        <string>Diff previous</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+I</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget class="KPushButton">
@@ -184,10 +184,10 @@
                         <bool>false</bool>
                     </property>
                     <property name="text">
-                        <string>Diff re&amp;visions</string>
+                        <string>Diff revisions</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+V</string>
+                        <string></string>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Select second revision with right mouse button</string>
@@ -201,10 +201,10 @@
                         <bool>false</bool>
                     </property>
                     <property name="text">
-                        <string>Li&amp;st entries</string>
+                        <string>List entries</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+S</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget class="KPushButton">
@@ -215,10 +215,10 @@
                         <bool>false</bool>
                     </property>
                     <property name="text">
-                        <string>A&amp;nnotate</string>
+                        <string>Annotate</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+N</string>
+                        <string></string>
                     </property>
                 </widget>
                 <spacer>
@@ -243,7 +243,10 @@
                         <cstring>buttonClose</cstring>
                     </property>
                     <property name="text">
-                        <string>&amp;Close</string>
+                        <string>Close</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
                     </property>
                 </widget>
             </hbox>

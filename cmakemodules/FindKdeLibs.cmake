@@ -116,18 +116,20 @@ set(MAN_INSTALL_DIR          "${SHARE_INSTALL_PREFIX}/man"                 CACHE
 set(INFO_INSTALL_DIR         "${CMAKE_INSTALL_PREFIX}/info"                CACHE PATH "The kde info install dir (default prefix/info)" FORCE)
 
 # linker flags - must get checked
-SET(LINK_NO_UNDEFINED "")
-SET(lundef "-Wl,--no-undefined")
-KDESVN_CHECK_LINK_FLAG(${lundef} _NO_UNDEFINED)
-IF (_NO_UNDEFINED)
-    SET(LINK_NO_UNDEFINED "${lundef}")
-ENDIF (_NO_UNDEFINED)
 
-SET(lundef "-Wl,--allow-shlib-undefined")
-KDESVN_CHECK_LINK_FLAG(${lundef} _ALLOW_SHLIB)
-IF (_ALLOW_SHLIB)
-    SET(LINK_NO_UNDEFINED "${LINK_NO_UNDEFINED} ${lundef}")
-ENDIF (_ALLOW_SHLIB)
+IF (CMAKE_SYSTEM MATCHES "Linux*")
+    SET(lundef "-Wl,--no-undefined")
+    KDESVN_CHECK_LINK_FLAG(${lundef} _NO_UNDEFINED)
+    IF (_NO_UNDEFINED)
+        SET(LINK_NO_UNDEFINED "${lundef}")
+    ENDIF (_NO_UNDEFINED)
+
+    SET(lundef "-Wl,--allow-shlib-undefined")
+    KDESVN_CHECK_LINK_FLAG(${lundef} _ALLOW_SHLIB)
+    IF (_ALLOW_SHLIB)
+        SET(LINK_NO_UNDEFINED "${LINK_NO_UNDEFINED} ${lundef}")
+    ENDIF (_ALLOW_SHLIB)
+ENDIF (CMAKE_SYSTEM MATCHES "Linux*")
 
 
 # own macros

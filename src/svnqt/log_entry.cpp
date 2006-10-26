@@ -74,7 +74,7 @@ namespace svn
   }
 
   LogEntry::LogEntry ()
-    : revision(-1),author(""),message(""),date(0)
+    : revision(-1),date(0),author(""),message("")
   {
   }
 

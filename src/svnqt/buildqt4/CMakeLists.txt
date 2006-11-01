@@ -116,8 +116,11 @@ IF (WIN32)
 ENDIF (WIN32)
 
 # Just a small linking test
-ADD_EXECUTABLE(testlink ../testmain.cpp)
-TARGET_LINK_LIBRARIES(testlink svnqt-qt4)
+
+IF (BUILD_TESTS)
+    ADD_EXECUTABLE(testlink ../testmain.cpp)
+    TARGET_LINK_LIBRARIES(testlink svnqt-qt4)
+ENDIF (BUILD_TESTS)
 
 # install rules
 IF ( UNIX )

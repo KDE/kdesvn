@@ -52,8 +52,13 @@ ContextData::ContextData(const QString & configDir_)
       // 8 providers
 
     apr_array_header_t *providers =
-        apr_array_make (pool, 8, sizeof (svn_auth_provider_object_t *));
+        apr_array_make (pool, 9, sizeof (svn_auth_provider_object_t *));
     svn_auth_provider_object_t *provider;
+
+#if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_windows_simple_provider (&provider, pool);
+	APR_ARRAY_PUSH (providers, svn_auth_provider_object_t *) = provider;
+#endif
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
     svn_auth_get_simple_provider

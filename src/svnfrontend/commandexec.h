@@ -65,6 +65,8 @@ protected slots:
     virtual void slotCmd_revert();
     virtual void slotCmd_addnew();
     virtual void slotCmd_tree();
+    virtual void slotCmd_lock();
+    virtual void slotCmd_unlock();
 
 signals:
     void executeMe();

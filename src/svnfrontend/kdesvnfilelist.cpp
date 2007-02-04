@@ -2106,10 +2106,17 @@ void kdesvnfilelist::reinitItems(FileListViewItem*_item)
         return;
     }
     item->init();
-    item = static_cast<FileListViewItem*>(item->firstChild());
-    while(item) {
-        reinitItems(item);
-        item = static_cast<FileListViewItem*>(item->nextSibling());
+    if (item->childCount()==0 && item->isOpen()) {
+        m_Dirsread[item->fullName()]=false;;
+        setEnabled(false);
+        slotItemRead(item);
+        setEnabled(true);
+    } else {
+        item = static_cast<FileListViewItem*>(item->firstChild());
+        while(item) {
+            reinitItems(item);
+            item = static_cast<FileListViewItem*>(item->nextSibling());
+        }
     }
 }
 

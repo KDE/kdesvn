@@ -56,6 +56,7 @@ public:
     bool rev_set;
     bool outfile_set;
     bool single_revision;
+    bool force;
     int log_limit;
     SvnActions*m_SvnWrapper;
     KCmdLineArgs *args;
@@ -120,6 +121,8 @@ int CommandExec::exec()
     bool dont_check_second = false;
     bool dont_check_all = false;
     bool path_only = false;
+    bool no_revision = false;
+    bool check_force=false;
 
     if (m_pCPart->args->count()>=2) {
         m_pCPart->cmd=m_pCPart->args->arg(1);
@@ -196,6 +199,14 @@ int CommandExec::exec()
         slotCmd=SLOT(slotCmd_switch());
     } else if (!QString::compare(m_pCPart->cmd,"tree")) {
         slotCmd=SLOT(slotCmd_tree());
+    } else if (!QString::compare(m_pCPart->cmd,"lock")) {
+        slotCmd=SLOT(slotCmd_lock());
+        no_revision = true;
+        check_force=true;
+    } else if (!QString::compare(m_pCPart->cmd,"unlock")) {
+        slotCmd=SLOT(slotCmd_unlock());
+        no_revision=true;
+        check_force=true;
     }
 
     bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
@@ -269,14 +280,24 @@ int CommandExec::exec()
         m_pCPart->url.append(".");
     }
 
-    if (m_pCPart->args->isSet("R")) {
-        m_pCPart->ask_revision = true;
-        if (!askRevision()) {
-            return 0;
+    if (!no_revision)
+    {
+        if (m_pCPart->args->isSet("R"))
+        {
+            m_pCPart->ask_revision = true;
+            if (!askRevision())
+            {
+                return 0;
+            }
         }
-    } else if (m_pCPart->args->isSet("r")){
-        scanRevision();
+        else if (m_pCPart->args->isSet("r"))
+        {
+            scanRevision();
+        }
     }
+
+    m_pCPart->force=check_force && m_pCPart->args->isSet("f");
+
     if (m_pCPart->args->isSet("o")) {
         m_pCPart->outfile_set=true;
         m_pCPart->outfile = m_pCPart->args->getOption("o");
@@ -608,6 +629,16 @@ void CommandExec::slotCmd_switch()
     }
     base = m_pCPart->baseUrls[0];
     m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->url[0],base);
+}
+
+void CommandExec::slotCmd_lock()
+{
+    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
+}
+
+void CommandExec::slotCmd_unlock()
+{
+    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
 }
 
 #include "commandexec.moc"

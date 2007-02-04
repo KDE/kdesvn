@@ -38,6 +38,7 @@ static KCmdLineOptions options[] =
 {
     { "r startrev[:endrev]",I18N_NOOP("Execute single subversion command on specific revision(-range)"),0},
     {"R",I18N_NOOP("Ask for revision when executing single command"),0},
+    {"f",I18N_NOOP("Force operation"),0},
     {"o <file>",I18N_NOOP("Save output of subversion command (eg \"cat\") into file <file>"),0},
     {"l <number>",I18N_NOOP("Limit log output to <number>"),0},
     { "+exec <command>",I18N_NOOP("Execute subversion command (\"exec help\" for more information)"),0},

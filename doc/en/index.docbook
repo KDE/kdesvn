@@ -1068,6 +1068,17 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry>-r startrev:endrev</entry>
 </row>
 <row>
+<entry>lock</entry>
+<entry>lock url(s), if &quot;-f&quot; is given then existing locks are brocken.</entry>
+<entry>-f</entry>
+</row>
+<row>
+<entry>unlock</entry>
+<entry>unlock url(s), if &quot;-f&quot; is given then not owned locks are brocken or non
+ existing locks are ignored.</entry>
+<entry>-f</entry>
+</row>
+<row>
 <entry>help</entry>
 <entry>displays this page</entry>
 <entry></entry>
@@ -1108,6 +1119,12 @@ If in following overview as possible parameter <prompt>-r revision</prompt> is g
 <entry><prompt>&lt;number&gt;</prompt></entry>
 <entry>log</entry>
 </row>
+<row>
+<entry><prompt>-f</prompt></entry>
+<entry><prompt></prompt></entry>
+<entry>(un-)lock</entry>
+</row>
+
 </tbody>
 </tgroup>
 </table>
@@ -1276,7 +1293,7 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 <varlistentry>
 <term>Diff ignore contenttype</term>
 <listitem><para>
-Only interesting when diff are made with subversion itself. When set, than subversions diff ignores the content type of entries. Otherwise it will not output 
+Only interesting when diff are made with subversion itself. When set, than subversions diff ignores the content type of entries. Otherwise it will not output
 diffs from binaries.
 </para></listitem>
 </varlistentry>
@@ -1866,6 +1883,28 @@ repository to newer subversion.
 </para>
 </answer>
 </qandaentry>
+<qandaentry>
+<question>
+<para>When starting kdesvn it sends a dialog &quot;Could not find our part&quot; and shows an empty window, why?</para>
+</question>
+<answer>
+<para>
+There are many reasons why the program couldn't load. This mostly happens when you building subversion-libs yourself. In that case you may
+check out <ulink url="http://www.alwins-world.de/programs/mantis/view.php?id=128">this mantis entry</ulink>.
+</para>
+<para>If this does not solve your problem, you may try out on a console:
+<programlisting>
+  export LD_PRELOAD=/usr/lib/kde3/libkdesvnpart.so
+  kdesvn
+  unset LD_PRELOAD
+</programlisting>
+(/usr/lib/kde3 depends of course on your system, please check where it is installed)
+</para>
+<para>
+You should see a lot of output why loading of libkdesvnpart.so isn't possible, that may help solving your problem.
+</para>
+</answer>
+</qandaentry>
 </qandaset>
 </chapter>
 
@@ -2011,7 +2050,7 @@ the &kdesvn; download area</ulink>.
 You may get <ulink url="http://www.alwins-world.de/programs/sourcec/websvn/dl.php?repname=KDESvn&amp;path=%2Ftrunk%2F&amp;rev=0&amp;isdir=1">latest repository version</ulink> when looking whats going on.
 </para>
 <para>
-The homepage of that project is <ulink url="http://www.alwins-world.de/programs/kdesvn/">http://www.alwins-world.de/programs/kdesvn/</ulink>
+The homepage of that project is <ulink url="http://www.alwins-world.de/wiki/programs/kdesvn/">http://www.alwins-world.de/programs/kdesvn/</ulink>
 </para>
 </sect1>
 

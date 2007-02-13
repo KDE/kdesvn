@@ -377,6 +377,22 @@ namespace svn
     import (const Path & path, const QString& url,
             const QString& message,
             bool recurse) throw (ClientException);
+    /**
+     * Import file or directory PATH into repository directory URL at
+     * head.  This usually requires authentication, see Auth.
+     * @param path path to import
+     * @param url
+     * @param message log message.
+     * @param recurse do it recursive?
+     * @param no_ignore if false, don't add items matching global ignore pattern
+     * @since subversion 1.3
+     * @exception ClientException
+     */
+    virtual void
+            import (const Path & path, const QString& url,
+                    const QString& message,
+                    bool recurse,
+                    bool no_ignore) throw (ClientException);
 
     /**
      * Merge changes from two paths into a new local path.

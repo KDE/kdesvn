@@ -389,20 +389,45 @@ namespace svn
                   const QString& url,
                   const QString& message,
                   bool recurse) throw (ClientException)
+    {
+        import(path,url,message,recurse,false);
+    }
+
+  void
+  Client_impl::import (const Path & path,
+                  const QString& url,
+                  const QString& message,
+                  bool recurse,
+                  bool no_ignore) throw (ClientException)
+
   {
+#if (SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 3)
+      Q_UNUSED(no_ignore);
+      svn_client_commit_info_t *commit_info = NULL;
+#else
+      svn_commit_info_t *commit_info = NULL;
+#endif
     Pool pool;
-    svn_client_commit_info_t *commit_info = NULL;
 
     m_context->setLogMessage (message);
 
     svn_error_t * error =
-      svn_client_import (&commit_info,
-                         path.cstr (),
-                         url.TOUTF8(),
-                         !recurse,
-                         *m_context,
-                         pool);
-
+#if (SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 3)
+        svn_client_import (&commit_info,
+                        path.cstr (),
+                        url.TOUTF8(),
+                        !recurse,
+                        *m_context,
+                        pool);
+#else
+        svn_client_import2(&commit_info,
+                        path.cstr (),
+                        url.TOUTF8(),
+                        !recurse,
+                        no_ignore,
+                        *m_context,
+                        pool);
+#endif
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString::null);
 

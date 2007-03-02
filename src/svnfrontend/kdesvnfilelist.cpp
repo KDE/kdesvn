@@ -1339,7 +1339,7 @@ void kdesvnfilelist::startDrag()
     if (urls.count()==0) {
         return;
     }
-    kdDebug() << urls << endl;
+    kdDebug() << "startDrag: " << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {
       int iconSize = Kdesvnsettings::listview_icon_size();;
@@ -1614,6 +1614,10 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             l = QStringList::split("?",(*it).prettyURL());
             if (l.size()>1) {
                 (*it) = l[0];
+            } else if (isWorkingCopy())
+            {
+                (*it) = KURL::fromPathOrURL( (*it).path());
+                kdDebug()<<"Dropped: "<<(*it)<<endl;
             }
         }
         event->acceptAction();
@@ -2140,7 +2144,7 @@ void kdesvnfilelist::slotInfo()
         }
     }
     if (lst.count()>0) {
-        m_SvnWrapper->makeInfo(lst,rev,svn::Revision::UNDEFINED,Kdesvnsettings::info_recursive());
+        m_SvnWrapper->makeInfo(lst,rev,svn::Revision::BASE,Kdesvnsettings::info_recursive());
     }
 }
 

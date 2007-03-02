@@ -285,6 +285,9 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         // working copy
         // url = svn::Wc::getUrl(what);
         url = what;
+        if (url.find("@")!=-1) {
+            url+="@BASE";
+        }
         peg = svn::Revision::UNDEFINED;
     } else {
         KURL _uri = what;
@@ -555,7 +558,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             i18n("Retrieving infos - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::InfoEntries e;
-        entries = (m_Data->m_Svnclient->info(_what,recursive,rev,peg));
+        entries = (m_Data->m_Svnclient->info(_what+(_what.find("@")>-1?"@BASE":""),recursive,rev,peg));
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return QString::null;
@@ -1878,7 +1881,8 @@ bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
         for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->move(svn::Path((*it).prettyURL()),svn::Path(New),force);
+            kdDebug()<<"Move: "<<(*it). pathOrURL()<< " - "<< (*it).url() <<endl;
+            m_Data->m_Svnclient->move(svn::Path((*it). pathOrURL()),svn::Path(New),force);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
@@ -1909,7 +1913,7 @@ bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revi
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
         for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->copy(svn::Path((*it).prettyURL()),rev,svn::Path(New));
+            m_Data->m_Svnclient->copy(svn::Path((*it). pathOrURL()),rev,svn::Path(New));
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());

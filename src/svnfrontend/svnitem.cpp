@@ -33,6 +33,7 @@
 #include <kdebug.h>
 #include <kiconeffect.h>
 #include <kfileitem.h>
+#include <kdebug.h>
 
 #include <qstring.h>
 #include <qfileinfo.h>
@@ -136,7 +137,9 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
                 m_kdename.setQuery("?rev="+revstr);
             }
         } else {
-            m_kdename.setPath(m_Stat.path());
+            kdDebug()<<"kdeName: "<<m_Stat.path()<<endl;
+            m_kdename = KURL::fromPathOrURL(m_Stat.path());
+            kdDebug()<<"kdeName: "<<m_kdename.pathOrURL()<<endl;
         }
     }
     return m_kdename;

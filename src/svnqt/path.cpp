@@ -69,6 +69,10 @@ namespace svn
         }
       }
       m_path = QString::FROMUTF8(int_path);
+      if (Url::isValid(path) ) {
+        /// @todo make sure that "@" is never used as revision paramter
+        m_path.replace("@","%40");
+      }
     }
   }
 
@@ -90,7 +94,9 @@ namespace svn
     }
     Pool pool;
     const char * int_path = svn_path_uri_decode(m_path.TOUTF8(), pool.pool () );
-    return QString::FROMUTF8(int_path);
+    QString _p = QString::FROMUTF8(int_path);
+    _p.replace("%40","@");
+    return _p;
   }
 
   const QByteArray

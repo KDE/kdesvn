@@ -36,6 +36,7 @@
 #include <qlistview.h>
 #include <qlayout.h>
 #include <qwidget.h>
+#include <qpushbutton.h>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -60,7 +61,9 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_LogEdit->setFocus();
     m_Reviewlabel->hide();
     m_ReviewList->hide();
-
+    m_hidden=true;
+    hideButtons(true);
+    checkSplitterSize();
 }
 
 Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const char *name)
@@ -70,6 +73,7 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const
     m_ReviewList->setColumnText(1,i18n("Items to commit"));
     m_ReviewList->setColumnText(0,i18n("Action"));
     m_ReviewList->setSortColumn(1);
+    hideButtons(true);
     if (_items.count()>0) {
         for (unsigned i = 0;i<_items.count();++i) {
             QListViewItem*item = new QListViewItem(m_ReviewList);
@@ -80,10 +84,13 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const
             }
             item->setText(0,QChar(_items[i].actionType()));
         }
+        m_hidden=false;
     } else {
         m_Reviewlabel->hide();
         m_ReviewList->hide();
+        m_hidden=true;
     }
+    checkSplitterSize();
 }
 
 Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, const char *name)
@@ -93,6 +100,7 @@ Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, con
     m_ReviewList->setColumnText(1,i18n("Items to commit"));
     m_ReviewList->setColumnText(0,i18n("Action"));
     m_ReviewList->setSortColumn(1);
+    hideButtons(true);
     if (_items.count()>0) {
         QMap<QString,QString>::ConstIterator it = _items.begin();
         for (;it!=_items.end();++it) {
@@ -100,10 +108,13 @@ Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, con
             item->setText(1,it.key());
             item->setText(0,it.data());
         }
+        m_hidden=false;
     } else {
         m_Reviewlabel->hide();
         m_ReviewList->hide();
+        m_hidden=true;
     }
+    checkSplitterSize();
 }
 
 Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
@@ -112,6 +123,7 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
     :LogmessageData(parent, name)
 {
     m_LogEdit->setFocus();
+    m_hidden=false;
     for (unsigned j = 0; j<_activatedList.count();++j) {
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_activatedList[j]);
         item->setState(QCheckListItem::On);
@@ -119,6 +131,27 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
     for (unsigned j = 0; j<_notActivatedList.count();++j) {
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
         item->setState(QCheckListItem::Off);
+    }
+    checkSplitterSize();
+}
+
+Logmsg_impl::~Logmsg_impl()
+{
+    QValueList<int> list = m_MainSplitter->sizes();
+    if (!m_hidden && list.count()==2) {
+        Kdesvnsettings::setCommit_splitter_height(list);
+        Kdesvnsettings::writeConfig();
+    }
+}
+
+void Logmsg_impl::checkSplitterSize()
+{
+    if (!m_hidden)
+    {
+        QValueList<int> list = Kdesvnsettings::commit_splitter_height();
+        if (list.count()==2 && (list[0]>0||list[1]>0)) {
+            m_MainSplitter->setSizes(list);
+        }
     }
 }
 
@@ -386,11 +419,12 @@ SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logAction
 
 void Logmsg_impl::slotUnmarkUnversioned()
 {
+    markUnversioned(false);
 }
-
 
 void Logmsg_impl::slotMarkUnversioned()
 {
+    markUnversioned(true);
 }
 
 void Logmsg_impl::slotDiffSelected()
@@ -408,6 +442,37 @@ void Logmsg_impl::slotDiffSelected()
     }
 }
 
+void Logmsg_impl::hideButtons(bool how)
+{
+    if (how)
+    {
+        m_MarkUnversioned->hide();
+        m_UnmarkUnversioned->hide();
+        m_DiffItem->hide();
+    }
+    else
+    {
+        m_MarkUnversioned->show();
+        m_UnmarkUnversioned->show();
+        m_DiffItem->show();
+    }
+}
 
+/*!
+    \fn Logmsg_impl::markUnversioned(bool mark)
+ */
+void Logmsg_impl::markUnversioned(bool mark)
+{
+    QListViewItemIterator it( m_ReviewList );
+    while ( it.current() ) {
+        if (it.current()->rtti()==1000) {
+            SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+            if (item->data()._kind==1) {
+                item->setOn(mark);
+            }
+        }
+        ++it;
+    }
+}
 
 #include "logmsg_impl.moc"

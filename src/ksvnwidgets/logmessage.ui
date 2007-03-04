@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>558</width>
-            <height>365</height>
+            <width>608</width>
+            <height>473</height>
         </rect>
     </property>
     <property name="caption">
@@ -49,6 +49,9 @@
                                 <property name="text">
                                     <string>Mark all unversioned items</string>
                                 </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Mark all not versioned items for add</string>
+                                </property>
                             </widget>
                             <widget class="QPushButton">
                                 <property name="name">
@@ -56,6 +59,9 @@
                                 </property>
                                 <property name="text">
                                     <string>Unmark all unversioned items</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Unmark all unversioned items from adding</string>
                                 </property>
                             </widget>
                             <widget class="QPushButton">

@@ -44,7 +44,7 @@ public:
     Logmsg_impl(const logActionEntries&,
         const logActionEntries&,
         QWidget *parent = 0, const char *name = 0);
-    virtual ~Logmsg_impl(){};
+    virtual ~Logmsg_impl();
 
     QString getMessage()const;
     bool isRecursive()const;
@@ -75,6 +75,11 @@ protected:
     static QValueList<QString> sLogHistory;
     static const QString groupName;
     static unsigned int smax_message_history;
+    bool m_hidden;
+
+    void hideButtons(bool);
+    void markUnversioned(bool mark);
+    void checkSplitterSize();
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 };

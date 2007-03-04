@@ -1,7 +1,9 @@
 version 0.11.1
     * Galician translation added
     * lock/unlock as commandline action
-    * workaround for a subversion-problem with "@" in file/folder names
+    * workaround for a subversion-problem with "@" in file/folder names (bugid 132)
+    * feature request: In commit dialog difference of items may displayed (bugid 123)
+    * feature request: in commit dialog all unversioned items may mark for adding with one click (bugid 125)
 
 version 0.11.0
     * lot of bugfixes in cmake-build system

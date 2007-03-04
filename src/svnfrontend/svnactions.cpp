@@ -840,7 +840,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                     _Cache[i].propStatus()==svn_wc_status_modified
                 ) ) {
                     if (_Cache[i].textStatus()==svn_wc_status_deleted) {
-                        _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Commit"),2));
+                        _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Delete"),2));
                     } else {
                         _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Commit")));
                     }
@@ -849,7 +849,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 }
             }
         }
-        msg = Logmsg_impl::getLogmessage(_check,_uncheck,_result,&ok,
+        msg = Logmsg_impl::getLogmessage(_check,_uncheck,this,_result,&ok,
             m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok||_result.count()==0) {
             return false;

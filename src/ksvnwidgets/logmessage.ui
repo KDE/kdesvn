@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>428</width>
-            <height>325</height>
+            <width>558</width>
+            <height>365</height>
         </rect>
     </property>
     <property name="caption">
@@ -19,71 +19,146 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLabel">
+        <widget class="QSplitter">
             <property name="name">
-                <cstring>m_Reviewlabel</cstring>
+                <cstring>m_MainSplitter</cstring>
             </property>
-            <property name="text">
-                <string>Review affected items</string>
+            <property name="orientation">
+                <enum>Vertical</enum>
             </property>
-            <property name="alignment">
-                <set>AlignCenter</set>
-            </property>
-        </widget>
-        <widget class="QListView">
-            <column>
-                <property name="text">
-                    <string>Entry</string>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>m_ReviewLayout</cstring>
                 </property>
-                <property name="clickable">
-                    <bool>true</bool>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QLayoutWidget" row="1" column="0">
+                        <property name="name">
+                            <cstring>m_EntryButtonsLayout</cstring>
+                        </property>
+                        <hbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>m_MarkUnversioned</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Mark all unversioned items</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>m_UnmarkUnversioned</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Unmark all unversioned items</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>m_DiffItem</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Diff selected item</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Generates and display difference against repository of selected item</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                    <widget class="QLayoutWidget" row="0" column="0">
+                        <property name="name">
+                            <cstring>layout5</cstring>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>m_Reviewlabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Review affected items</string>
+                                </property>
+                                <property name="alignment">
+                                    <set>AlignCenter</set>
+                                </property>
+                            </widget>
+                            <widget class="QListView" row="1" column="0">
+                                <column>
+                                    <property name="text">
+                                        <string>Entry</string>
+                                    </property>
+                                    <property name="clickable">
+                                        <bool>true</bool>
+                                    </property>
+                                    <property name="resizable">
+                                        <bool>true</bool>
+                                    </property>
+                                </column>
+                                <column>
+                                    <property name="text">
+                                        <string>Action</string>
+                                    </property>
+                                    <property name="clickable">
+                                        <bool>true</bool>
+                                    </property>
+                                    <property name="resizable">
+                                        <bool>true</bool>
+                                    </property>
+                                </column>
+                                <property name="name">
+                                    <cstring>m_ReviewList</cstring>
+                                </property>
+                                <property name="resizePolicy">
+                                    <enum>Manual</enum>
+                                </property>
+                                <property name="allColumnsShowFocus">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="showSortIndicator">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="resizeMode">
+                                    <enum>LastColumn</enum>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>layout3</cstring>
                 </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Action</string>
-                </property>
-                <property name="clickable">
-                    <bool>true</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <property name="name">
-                <cstring>m_ReviewList</cstring>
-            </property>
-            <property name="resizePolicy">
-                <enum>Manual</enum>
-            </property>
-            <property name="allColumnsShowFocus">
-                <bool>true</bool>
-            </property>
-            <property name="showSortIndicator">
-                <bool>true</bool>
-            </property>
-            <property name="resizeMode">
-                <enum>LastColumn</enum>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>m_HeadLabel</cstring>
-            </property>
-            <property name="text">
-                <string>Enter a log message</string>
-            </property>
-            <property name="alignment">
-                <set>AlignCenter</set>
-            </property>
-        </widget>
-        <widget class="KTextEdit">
-            <property name="name">
-                <cstring>m_LogEdit</cstring>
-            </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="KTextEdit" row="1" column="0">
+                        <property name="name">
+                            <cstring>m_LogEdit</cstring>
+                        </property>
+                    </widget>
+                    <widget class="QLabel" row="0" column="0">
+                        <property name="name">
+                            <cstring>m_HeadLabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Enter a log message</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignCenter</set>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
@@ -151,10 +226,31 @@
         <receiver>LogmessageData</receiver>
         <slot>slotHistoryActivated(int)</slot>
     </connection>
+    <connection>
+        <sender>m_MarkUnversioned</sender>
+        <signal>clicked()</signal>
+        <receiver>LogmessageData</receiver>
+        <slot>slotMarkUnversioned()</slot>
+    </connection>
+    <connection>
+        <sender>m_UnmarkUnversioned</sender>
+        <signal>clicked()</signal>
+        <receiver>LogmessageData</receiver>
+        <slot>slotUnmarkUnversioned()</slot>
+    </connection>
+    <connection>
+        <sender>m_DiffItem</sender>
+        <signal>clicked()</signal>
+        <receiver>LogmessageData</receiver>
+        <slot>slotDiffSelected()</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotHistoryActivated(const QString&amp;)</slot>
     <slot access="protected">slotHistoryActivated(int)</slot>
+    <slot access="protected">slotMarkUnversioned()</slot>
+    <slot access="protected">slotDiffSelected()</slot>
+    <slot access="protected">slotUnmarkUnversioned()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

@@ -57,6 +57,7 @@ public:
 
     static QString getLogmessage(const logActionEntries&,
             const logActionEntries&,
+            QObject*callback,
             logActionEntries&,
             bool*ok=0,QWidget*parent=0,const char*name=0);
 
@@ -66,11 +67,16 @@ public:
 
 protected slots:
     virtual void slotHistoryActivated(int);
+    virtual void slotUnmarkUnversioned();
+    virtual void slotDiffSelected();
+    virtual void slotMarkUnversioned();
 
 protected:
     static QValueList<QString> sLogHistory;
     static const QString groupName;
     static unsigned int smax_message_history;
+signals:
+    void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 };
 
 #endif

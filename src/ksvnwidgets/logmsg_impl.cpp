@@ -34,6 +34,8 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlistview.h>
+#include <qlayout.h>
+#include <qwidget.h>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -58,6 +60,7 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_LogEdit->setFocus();
     m_Reviewlabel->hide();
     m_ReviewList->hide();
+
 }
 
 Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const char *name)
@@ -304,6 +307,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
 
 QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             const logActionEntries&_off,
+            QObject*callback,
             logActionEntries&_result,
             bool*ok,QWidget*parent,const char*name)
 {
@@ -318,6 +322,11 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
     ptr->m_RecursiveButton->hide();
     ptr->initHistory();
+    if (callback)
+    {
+        connect(ptr,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+                callback,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
+    }
     dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
@@ -374,5 +383,31 @@ SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logAction
     setTristate(FALSE);
     setText(1,m_Content._actionDesc);
 }
+
+void Logmsg_impl::slotUnmarkUnversioned()
+{
+}
+
+
+void Logmsg_impl::slotMarkUnversioned()
+{
+}
+
+void Logmsg_impl::slotDiffSelected()
+{
+    QListViewItem * it=0;
+    if (! (it=m_ReviewList->selectedItem()))
+    {
+        return;
+    }
+    if (it->rtti()==1000)
+    {
+        SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it);
+        QString what = item->data()._name;
+        emit makeDiff(what,svn::Revision::BASE,what,svn::Revision::WORKING,parentWidget());
+    }
+}
+
+
 
 #include "logmsg_impl.moc"

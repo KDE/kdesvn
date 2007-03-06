@@ -1,6 +1,6 @@
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
 
-KDE3_ADD_UI_FILES(
+KDE_ADD_UI_FILES(
     kdesvn_shared_ui
     logmessage.ui
     ssltrustprompt.ui
@@ -18,7 +18,7 @@ SET(ksvnwidgethdr
     ssltrustprompt_impl.h
 )
 
-KDE3_AUTOMOC(${ksvnwidgetsrc})
+KDE_AUTOMOC(${ksvnwidgetsrc})
 
 ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui} ${ksvnwidgethdr})
 SET_TARGET_PROPERTIES(ksvnwidgets

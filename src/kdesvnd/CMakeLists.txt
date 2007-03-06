@@ -5,12 +5,12 @@ SET(kded_kdesvnd_src
     ${hdr}
    )
 
-KDE3_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
+KDE_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
 
-KDE3_ADD_DCOP_SKELS(kded_kdesvnd_src
+KDE_ADD_DCOP_SKELS(kded_kdesvnd_src
     kdesvnd_dcop.h)
 
-KDE3_ADD_KPART(kded_kdesvnd ${kded_kdesvnd_src})
+KDE_ADD_KPART(kded_kdesvnd ${kded_kdesvnd_src})
 
 TARGET_LINK_LIBRARIES(kded_kdesvnd
     svnqt

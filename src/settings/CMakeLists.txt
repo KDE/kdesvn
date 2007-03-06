@@ -1,10 +1,10 @@
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
-KDE3_ADD_KCFG_FILES(cfgsrc
+KDE_ADD_KCFG_FILES(cfgsrc
     kdesvnsettings.kcfgc)
 ADD_LIBRARY(kdesvncfgreader STATIC ${cfgsrc})
 
-KDE3_ADD_UI_FILES(
+KDE_ADD_UI_FILES(
     settings_ui_sources
     dispcolor_settings.ui
     display_settings.ui
@@ -24,7 +24,7 @@ SET(settings_sources
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE3_AUTOMOC(${settings_sources})
+KDE_AUTOMOC(${settings_sources})
 ADD_LIBRARY(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
 ADD_DEPENDENCIES(settingsdlgs kdesvncfgreader)
 

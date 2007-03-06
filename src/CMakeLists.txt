@@ -11,22 +11,25 @@ SET(partsrc
     kdesvnview.cpp
     commandline_part.cpp)
 
-KDE3_AUTOMOC(${kdesvnsrc})
-KDE3_AUTOMOC(${partsrc})
+KDE_AUTOMOC(${kdesvnsrc})
+KDE_AUTOMOC(${partsrc})
 
 ADD_SUBDIRECTORY(svnqt)
 ADD_SUBDIRECTORY(ksvnwidgets)
 ADD_SUBDIRECTORY(settings)
 ADD_SUBDIRECTORY(svnfrontend)
 ADD_SUBDIRECTORY(helpers)
+IF(NOT BUILD_KDE4)
 ADD_SUBDIRECTORY(kdesvnd)
+ENDIF(NOT BUILD_KDE4)
 ADD_SUBDIRECTORY(kiosvn)
 ADD_SUBDIRECTORY(pics)
 ADD_SUBDIRECTORY(icons)
 
 ADD_EXECUTABLE(kdesvn ${kdesvnsrc})
 
-KDE3_ADD_KPART(kdesvnpart WITH_PREFIX ${partsrc})
+KDE_ADD_KPART(kdesvnpart WITH_PREFIX ${partsrc})
+
 TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnqt
     ${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY})
 SET_TARGET_PROPERTIES(kdesvnpart
@@ -35,7 +38,7 @@ SET_TARGET_PROPERTIES(kdesvnpart
 
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
 
-KDESVN_GENERATE_LIBTOOL_FILE(kdesvnpart)
+#KDESVN_GENERATE_LIBTOOL_FILE(kdesvnpart)
 
 
 TARGET_LINK_LIBRARIES(kdesvnaskpass ${QT_AND_KDECORE_LIBS} ${KDE3_UI_LIBRARY})

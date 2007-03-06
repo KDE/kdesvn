@@ -62,8 +62,8 @@ SET(svnfrontendui
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE3_AUTOMOC(${svnfrontendsrc})
-KDE3_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
+KDE_AUTOMOC(${svnfrontendsrc})
+KDE_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 
 ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 SET_TARGET_PROPERTIES(svnfrontend

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 19:41+0100\n"
+"POT-Creation-Date: 2007-03-06 23:08+0100\n"
 "PO-Revision-Date: 2006-08-22 10:27+0200\n"
 "Last-Translator: Luciano Montanaro <mikelima@cirulla.net>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -1400,27 +1400,27 @@ msgstr "Messaggio di log"
 
 #: rc.cpp:704
 #, fuzzy, no-c-format
-msgid "Mark all unversioned items"
-msgstr "Aggiungi elementi senza revisione"
+msgid "Select new items"
+msgstr "Seleziona elemento"
 
 #: rc.cpp:707
 #, fuzzy, no-c-format
-msgid "Mark all not versioned items for add"
+msgid "Mark all new eg. not versioned items for add and commit."
 msgstr "Non sono stati trovati elementi senza revisione."
 
 #: rc.cpp:710
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items"
-msgstr "Aggiungi elementi senza revisione"
+msgid "Unselect new items"
+msgstr "Deseleziona elemento"
 
 #: rc.cpp:713
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items from adding"
+msgid "Unmark all unversioned items so them will ignored."
 msgstr "Non sono stati trovati elementi senza revisione."
 
 #: rc.cpp:716
 #, fuzzy, no-c-format
-msgid "Diff selected item"
+msgid "Diff highlighted item"
 msgstr "Diff rispetto all'elemento selezionato"
 
 #: rc.cpp:719
@@ -2884,6 +2884,14 @@ msgstr "Nome dell'emittente"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Mark all unversioned items"
+#~ msgstr "Aggiungi elementi senza revisione"
+
+#, fuzzy
+#~ msgid "Unmark all unversioned items"
+#~ msgstr "Aggiungi elementi senza revisione"
 
 #, fuzzy
 #~ msgid "Diff re&visions"

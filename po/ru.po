@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 19:41+0100\n"
+"POT-Creation-Date: 2007-03-06 23:08+0100\n"
 "PO-Revision-Date: 2006-09-09 14:35+0600\n"
 "Last-Translator: Andy <neithere@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1373,27 +1373,27 @@ msgstr ""
 
 #: rc.cpp:704
 #, fuzzy, no-c-format
-msgid "Mark all unversioned items"
-msgstr "Все ли объекты под контролем версий?"
+msgid "Select new items"
+msgstr "Выбрать объект"
 
 #: rc.cpp:707
 #, fuzzy, no-c-format
-msgid "Mark all not versioned items for add"
+msgid "Mark all new eg. not versioned items for add and commit."
 msgstr "Объекты вне контроля версий:"
 
 #: rc.cpp:710
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items"
-msgstr "Все ли объекты под контролем версий?"
+msgid "Unselect new items"
+msgstr "Отменить выбор объекта"
 
 #: rc.cpp:713
-#, no-c-format
-msgid "Unmark all unversioned items from adding"
-msgstr ""
+#, fuzzy, no-c-format
+msgid "Unmark all unversioned items so them will ignored."
+msgstr "Все ли объекты под контролем версий?"
 
 #: rc.cpp:716
 #, fuzzy, no-c-format
-msgid "Diff selected item"
+msgid "Diff highlighted item"
 msgstr "Удаленные объекты:"
 
 #: rc.cpp:719
@@ -2826,6 +2826,10 @@ msgstr ""
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Mark all unversioned items"
+#~ msgstr "Все ли объекты под контролем версий?"
 
 #, fuzzy
 #~ msgid "Diff re&visions"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 19:41+0100\n"
+"POT-Creation-Date: 2007-03-06 23:08+0100\n"
 "PO-Revision-Date: 2006-06-25 13:39+0200\n"
 "Last-Translator: Frederic Rodrigo <f.rodrigo free.fr>\n"
 "Language-Team: Francais <freeciv-l10n-fr@yahoogroupes.fr>\n"
@@ -1470,27 +1470,27 @@ msgstr "Message de log"
 
 #: rc.cpp:704
 #, fuzzy, no-c-format
-msgid "Mark all unversioned items"
-msgstr "Ajouter des items non versionés"
+msgid "Select new items"
+msgstr "Sélectionner l'item"
 
 #: rc.cpp:707
 #, fuzzy, no-c-format
-msgid "Mark all not versioned items for add"
+msgid "Mark all new eg. not versioned items for add and commit."
 msgstr "Pas d'item non versioné trouvé."
 
 #: rc.cpp:710
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items"
-msgstr "Ajouter des items non versionés"
+msgid "Unselect new items"
+msgstr "Desélectionner l'item"
 
 #: rc.cpp:713
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items from adding"
+msgid "Unmark all unversioned items so them will ignored."
 msgstr "Pas d'item non versioné trouvé."
 
 #: rc.cpp:716
 #, fuzzy, no-c-format
-msgid "Diff selected item"
+msgid "Diff highlighted item"
 msgstr "Diff avec l'item sélectionné"
 
 #: rc.cpp:719
@@ -2939,3 +2939,11 @@ msgstr ""
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr "Empreinte"
+
+#, fuzzy
+#~ msgid "Mark all unversioned items"
+#~ msgstr "Ajouter des items non versionés"
+
+#, fuzzy
+#~ msgid "Unmark all unversioned items"
+#~ msgstr "Ajouter des items non versionés"

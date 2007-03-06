@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 19:41+0100\n"
-"PO-Revision-Date: 2007-03-04 19:45+0100\n"
+"POT-Creation-Date: 2007-03-06 23:08+0100\n"
+"PO-Revision-Date: 2007-03-06 23:10+0100\n"
 "Last-Translator: Rajko Albrecht <ral@alwins-world.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1450,33 +1450,35 @@ msgstr "Logeintrag"
 
 #: rc.cpp:704
 #, no-c-format
-msgid "Mark all unversioned items"
-msgstr "Markiere alle nicht versionierten Einträge"
+msgid "Select new items"
+msgstr "Selektiere neue Einträge"
 
 #: rc.cpp:707
 #, no-c-format
-msgid "Mark all not versioned items for add"
-msgstr "Markiere alle nicht versionierten Einträge zum Hinzufügen."
+msgid "Mark all new eg. not versioned items for add and commit."
+msgstr "Markiere alle neuen sprich nicht versionierten Einträge zum Hinzufügen und Übertragen."
 
 #: rc.cpp:710
 #, no-c-format
-msgid "Unmark all unversioned items"
-msgstr "Entferne Markierung aller nichtversionierter Elemente."
+msgid "Unselect new items"
+msgstr "Unselektiere neue Einträge"
 
 #: rc.cpp:713
 #, no-c-format
-msgid "Unmark all unversioned items from adding"
-msgstr "Entferne Markierung für alle nicht versionierten Einträge."
+msgid "Unmark all unversioned items so them will ignored."
+msgstr "Entferne Markierung für alle nicht versionierten Einträge so dass sie ignoriert werden."
 
 #: rc.cpp:716
 #, no-c-format
-msgid "Diff selected item"
-msgstr "Vergleiche ausgewählten Eintrag"
+msgid "Diff highlighted item"
+msgstr "Vergleiche gewählten Eintrag"
 
 #: rc.cpp:719
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
-msgstr "Erzeugt eine Differenz gegen das Repository für den ausgewählten Eintrag und zeigt diesen an."
+msgstr ""
+"Erzeugt eine Differenz gegen das Repository für den ausgewählten Eintrag und "
+"zeigt diesen an."
 
 #: rc.cpp:722
 #, no-c-format
@@ -2940,6 +2942,12 @@ msgstr "Ausstellername"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr "Fingerabdruck"
+
+#~ msgid "Mark all unversioned items"
+#~ msgstr "Markiere alle nicht versionierten Einträge"
+
+#~ msgid "Unmark all unversioned items"
+#~ msgstr "Entferne Markierung aller nichtversionierter Elemente."
 
 #, fuzzy
 #~ msgid "Diff re&visions"

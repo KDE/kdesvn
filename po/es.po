@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 19:41+0100\n"
+"POT-Creation-Date: 2007-03-06 23:08+0100\n"
 "PO-Revision-Date: 2006-08-25 15:50+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: <mariopal@gmail.com>\n"
@@ -1438,27 +1438,27 @@ msgstr "Logmessage"
 
 #: rc.cpp:704
 #, fuzzy, no-c-format
-msgid "Mark all unversioned items"
-msgstr "Añadir elementos sin versionar"
+msgid "Select new items"
+msgstr "Elemento seleccionado"
 
 #: rc.cpp:707
 #, fuzzy, no-c-format
-msgid "Mark all not versioned items for add"
+msgid "Mark all new eg. not versioned items for add and commit."
 msgstr "Ningún elemento sin versionar encontrado."
 
 #: rc.cpp:710
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items"
-msgstr "Añadir elementos sin versionar"
+msgid "Unselect new items"
+msgstr "Elemento no seleccionado"
 
 #: rc.cpp:713
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items from adding"
+msgid "Unmark all unversioned items so them will ignored."
 msgstr "Ningún elemento sin versionar encontrado."
 
 #: rc.cpp:716
 #, fuzzy, no-c-format
-msgid "Diff selected item"
+msgid "Diff highlighted item"
 msgstr "Diferencias con elemento seleccionado"
 
 #: rc.cpp:719
@@ -2980,6 +2980,14 @@ msgstr "Nombre del emisor"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr "Huella"
+
+#, fuzzy
+#~ msgid "Mark all unversioned items"
+#~ msgstr "Añadir elementos sin versionar"
+
+#, fuzzy
+#~ msgid "Unmark all unversioned items"
+#~ msgstr "Añadir elementos sin versionar"
 
 #, fuzzy
 #~ msgid "Diff re&visions"

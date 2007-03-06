@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 19:41+0100\n"
+"POT-Creation-Date: 2007-03-06 23:08+0100\n"
 "PO-Revision-Date: 2006-08-26 21:47+0200\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
@@ -1422,27 +1422,27 @@ msgstr "Loggmeddelande"
 
 #: rc.cpp:704
 #, fuzzy, no-c-format
-msgid "Mark all unversioned items"
-msgstr "Lägg till poster utan version"
+msgid "Select new items"
+msgstr "Markera post"
 
 #: rc.cpp:707
 #, fuzzy, no-c-format
-msgid "Mark all not versioned items for add"
+msgid "Mark all new eg. not versioned items for add and commit."
 msgstr "Inga poster utan version hittade."
 
 #: rc.cpp:710
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items"
-msgstr "Lägg till poster utan version"
+msgid "Unselect new items"
+msgstr "Avmarkera post"
 
 #: rc.cpp:713
 #, fuzzy, no-c-format
-msgid "Unmark all unversioned items from adding"
+msgid "Unmark all unversioned items so them will ignored."
 msgstr "Inga poster utan version hittade."
 
 #: rc.cpp:716
 #, fuzzy, no-c-format
-msgid "Diff selected item"
+msgid "Diff highlighted item"
 msgstr "Diff till vald post"
 
 #: rc.cpp:719
@@ -2951,6 +2951,14 @@ msgstr "Utgivarnamn"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr "Fingeravtryck"
+
+#, fuzzy
+#~ msgid "Mark all unversioned items"
+#~ msgstr "Lägg till poster utan version"
+
+#, fuzzy
+#~ msgid "Unmark all unversioned items"
+#~ msgstr "Lägg till poster utan version"
 
 #, fuzzy
 #~ msgid "Diff re&visions"

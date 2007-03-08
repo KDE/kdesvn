@@ -466,6 +466,23 @@ void kio_svnProtocol::special(const QByteArray& data)
             svnlog( revstart, revkindstart, revend, revkindend, targets );
             break;
         }
+        case SVN_IMPORT:
+        {
+            KURL wc,repos;
+            stream >> repos;
+            stream >> wc;
+            kdDebug(7128) << "kio_svnProtocol IMPORT" << endl;
+            import(repos,wc);
+            break;
+        }
+        case SVN_ADD:
+        case SVN_DEL:
+        case SVN_MKDIR:
+        case SVN_RESOLVE:
+        {
+            kdDebug(7128) << "kio_svnProtocol not yet done" << endl;
+            break;
+        }
         case SVN_REVERT:
         {
             KURL::List wclist;
@@ -712,8 +729,7 @@ void kio_svnProtocol::wc_switch(const KURL&wc,const KURL&target,bool rec,int rev
     }
 }
 
-void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QString&rstring1,int rnum2, const QString&rstring2,
-    bool rec)
+void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QString&rstring1,int rnum2, const QString&rstring2,bool rec)
 {
     svn::Revision r1(rnum1,rstring1);
     svn::Revision r2(rnum2,rstring2);
@@ -721,6 +737,10 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
     QString u2 = makeSvnUrl(uri2);
     QByteArray ex;
     KTempDir tdir;
+    kdDebug() << "kio_ksvn::diff : " << u1 << " at revision " << r1.toString() << " with "
+        << u2 << " at revision " << r2.toString()
+        << endl ;
+
     tdir.setAutoDelete(true);
     /// @todo read settings for diff (ignore contentype)
     try {
@@ -737,6 +757,20 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
         m_pData->m_Listener.incCounter();
     }
 }
+
+void kio_svnProtocol::import(const KURL& repos, const KURL& wc)
+{
+    QString target = makeSvnUrl(repos);
+    QString path = wc.path();
+    try {
+        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,true);
+    } catch (const svn::ClientException&e) {
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        return;
+    }
+    finished();
+}
+
 void kio_svnProtocol::streamWritten(const KIO::filesize_t current)
 {
     processedSize(current);

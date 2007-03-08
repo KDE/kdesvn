@@ -441,8 +441,8 @@ void CommandExec::slotCmd_diff()
 {
     if (m_pCPart->url.count()==1) {
         if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
-            m_pCPart->start = svn::Revision::WORKING;
-            m_pCPart->end = svn::Revision::BASE;
+            m_pCPart->start = svn::Revision::BASE;
+            m_pCPart->end = svn::Revision::WORKING;
         }
         m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0],m_pCPart->start,m_pCPart->url[0],m_pCPart->end);
     } else {

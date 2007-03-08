@@ -55,6 +55,7 @@ public:
     virtual void revert(const KURL::List&);
     virtual void wc_switch(const KURL&,const KURL&,bool,int,const QString&);
     virtual void diff(const KURL&,const KURL&,int,const QString&,int, const QString&,bool);
+    virtual void import( const KURL& repos, const KURL& wc);
     virtual void special(const QByteArray& data);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {

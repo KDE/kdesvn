@@ -218,7 +218,7 @@ void kio_svnProtocol::stat(const KURL& url)
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
-        e = m_pData->m_Svnclient->info(s,false,rev,peg);
+//         e = m_pData->m_Svnclient->info(s,false,rev,peg);
     } catch  (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
@@ -365,10 +365,35 @@ bool kio_svnProtocol::getLogMsg(QString&t)
     return m_pData->m_Listener.contextGetLogMessage(t,_items);
 }
 
-QString kio_svnProtocol::makeSvnUrl(const KURL&url)
+bool kio_svnProtocol::checkWc(const KURL&url)
+{
+    if (url.isEmpty()||!url.isLocalFile()) return false;
+    svn::Revision peg(svn_opt_revision_unspecified);
+    svn::Revision rev(svn_opt_revision_unspecified);
+    svn::InfoEntries e;
+    try {
+        e = m_pData->m_Svnclient->info(url.prettyURL(),false,rev,peg);
+    } catch (svn::ClientException e) {
+        if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+QString kio_svnProtocol::makeSvnUrl(const KURL&url,bool check_Wc)
 {
     QString res;
     QString proto = svn::Url::transformProtokoll(url.protocol());
+    if (proto=="file" && check_Wc)
+    {
+        if (checkWc(url))
+        {
+            return url.path();
+        }
+    }
 
     QStringList s = QStringList::split("://",res);
     QString base = url.path();
@@ -579,7 +604,6 @@ void kio_svnProtocol::special(const QByteArray& data)
             stream >> rev2;
             stream >> revkind2;
             stream >> recurse;
-            kdDebug(7128) << "kio_svnProtocol DIFF" << endl;
             diff(url1,url2,rev1,revkind1,rev2,revkind2,recurse);
             break;
         }
@@ -777,8 +801,8 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
 {
     svn::Revision r1(rnum1,rstring1);
     svn::Revision r2(rnum2,rstring2);
-    QString u1 = makeSvnUrl(uri1);
-    QString u2 = makeSvnUrl(uri2);
+    QString u1 = makeSvnUrl(uri1,true);
+    QString u2 = makeSvnUrl(uri2,true);
     QByteArray ex;
     KTempDir tdir;
     kdDebug() << "kio_ksvn::diff : " << u1 << " at revision " << r1.toString() << " with "

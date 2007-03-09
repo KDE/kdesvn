@@ -47,6 +47,7 @@ public:
     virtual void stat(const KURL& url);
     virtual void get(const KURL& url);
     virtual void mkdir (const KURL &url, int permissions);
+    virtual void mkdir (const KURL::List &urls, int permissions);
     virtual void rename(const KURL&src,const KURL&target,bool force);
     virtual void del(const KURL&url,bool isfile);
     virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
@@ -56,7 +57,10 @@ public:
     virtual void wc_switch(const KURL&,const KURL&,bool,int,const QString&);
     virtual void diff(const KURL&,const KURL&,int,const QString&,int, const QString&,bool);
     virtual void import( const KURL& repos, const KURL& wc);
+    virtual void add(const KURL& wc);
+    virtual void wc_delete(const KURL::List&);
     virtual void special(const QByteArray& data);
+    virtual void wc_resolve(const KURL&,bool);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
         /* KURL repository, KURL target, int revnumber, QString revkind */
@@ -69,13 +73,17 @@ public:
         /* int revstart, QString revstartstring, int revend, QString revendstring, KURL::List */
         SVN_LOG=4,
         SVN_IMPORT=5,
+        /* KURL */
         SVN_ADD=6,
+        /*KURL::List */
         SVN_DEL=7,
         /* KURL::List */
         SVN_REVERT=8,
         /* KURL wc,bool checkRepos, bool recurse */
         SVN_STATUS=9,
+        /* KURL::List */
         SVN_MKDIR=10,
+        /* KURL, bool */
         SVN_RESOLVE=11,
         /* KURL working copy, KURL new_repository_url, bool recurse, int rev, QString revstring */
         SVN_SWITCH=12,

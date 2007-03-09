@@ -717,7 +717,7 @@ so, for instance, kdevelop may use it if kdesdk isn't installed but uses kdesvn:
 <entry>Name&#047;command</entry>
 <entry>Numeric id</entry>
 <entry>Parameter list</entry>
-<entry>Implemented in 0.7.x?</entry>
+<entry>Implemented in 0.11.x?</entry>
 </row>
 </thead>
 
@@ -777,22 +777,22 @@ Use this with care - this may produce a lot of data.
 <row>
 <entry>Import</entry>
 <entry>5</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL targetrepository, KURL sourcepath</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Add</entry>
 <entry>6</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Del</entry>
 <entry>7</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL::List</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
@@ -816,22 +816,22 @@ Use this with care - this may produce a lot of data.
 <row>
 <entry>Mkdir</entry>
 <entry>10</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL::List</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Resolve</entry>
 <entry>11</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL, bool recursive</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Switch</entry>
 <entry>12</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL working_copy_path,KURL new_repository_url,bool recursive,int revnumber, QString revkind</entry>
+<entry>Yes</entry>
 </row>
 
 <row>

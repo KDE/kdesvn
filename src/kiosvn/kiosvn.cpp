@@ -287,6 +287,21 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
     finished();
 }
 
+void kio_svnProtocol::mkdir(const KURL::List &urls, int)
+{
+    svn::Pathes p;
+    for ( QValueListConstIterator<KURL> it = urls.begin(); it != urls.end() ; ++it ) {
+        p.append((*it).path());
+    }
+    try {
+        m_pData->m_Svnclient->mkdir(svn::Targets(p),getDefaultLog());
+    } catch (const svn::ClientException&e) {
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        return;
+    }
+    finished();
+}
+
 void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
 {
     kdDebug()<<"kio_svn::rename "<< src << " to " << target <<  endl;
@@ -444,7 +459,7 @@ void kio_svnProtocol::special(const QByteArray& data)
                 stream >> tmp;
                 wclist << tmp;
             }
-            kdDebug() << "kio_svnProtocol COMMIT" << endl;
+            kdDebug(0) << "kio_svnProtocol COMMIT" << endl;
             commit( wclist );
             break;
         }
@@ -471,16 +486,27 @@ void kio_svnProtocol::special(const QByteArray& data)
             KURL wc,repos;
             stream >> repos;
             stream >> wc;
-            kdDebug(7128) << "kio_svnProtocol IMPORT" << endl;
+            kdDebug(0) << "kio_ksvnProtocol IMPORT" << endl;
             import(repos,wc);
             break;
         }
         case SVN_ADD:
-        case SVN_DEL:
-        case SVN_MKDIR:
-        case SVN_RESOLVE:
         {
-            kdDebug(7128) << "kio_svnProtocol not yet done" << endl;
+            KURL wc;
+            kdDebug(0) << "kio_ksvnProtocol ADD" << endl;
+            stream >> wc;
+            add(wc);
+            break;
+        }
+        case SVN_DEL:
+        {
+            KURL::List wclist;
+            while ( !stream.atEnd() ) {
+                KURL tmp;
+                stream >> tmp;
+                wclist << tmp;
+            }
+            wc_delete(wclist);
             break;
         }
         case SVN_REVERT:
@@ -505,6 +531,24 @@ void kio_svnProtocol::special(const QByteArray& data)
             stream >> fullRecurse;
             kdDebug(0) << "kio_svnProtocol STATUS" << endl;
             status(wc,checkRepos,fullRecurse);
+            break;
+        }
+        case SVN_MKDIR:
+        {
+            KURL::List list;
+            stream >> list;
+            kdDebug(0) << "kio_svnProtocol MKDIR" << endl;
+            mkdir(list,0);
+            break;
+        }
+        case SVN_RESOLVE:
+        {
+            KURL url;
+            bool recurse;
+            stream >> url;
+            stream >> recurse;
+            kdDebug(7128) << "kio_svnProtocol RESOLVE" << endl;
+            wc_resolve(url,recurse);
             break;
         }
         case SVN_SWITCH:
@@ -764,6 +808,45 @@ void kio_svnProtocol::import(const KURL& repos, const KURL& wc)
     QString path = wc.path();
     try {
         m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,true);
+    } catch (const svn::ClientException&e) {
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        return;
+    }
+    finished();
+}
+
+void kio_svnProtocol::add(const KURL& wc)
+{
+    QString path = wc.path();
+    try {
+                                               /* rec */
+        m_pData->m_Svnclient->add(svn::Path(path),true);
+    } catch (const svn::ClientException&e) {
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        return;
+    }
+    finished();
+}
+
+void kio_svnProtocol::wc_delete(const KURL::List&l)
+{
+    svn::Pathes p;
+    for ( QValueListConstIterator<KURL> it = l.begin(); it != l.end() ; ++it ) {
+        p.append((*it).path());
+    }
+    try {
+        m_pData->m_Svnclient->remove(svn::Targets(p),false);
+    } catch (const svn::ClientException&e) {
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        return;
+    }
+    finished();
+}
+
+void kio_svnProtocol::wc_resolve(const KURL&url,bool recurse)
+{
+    try {
+        m_pData->m_Svnclient->resolved(url.path(),recurse);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

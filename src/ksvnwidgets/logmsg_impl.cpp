@@ -63,7 +63,13 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_ReviewList->hide();
     m_hidden=true;
     hideButtons(true);
-    checkSplitterSize();
+    m_MainSplitter->moveToFirst(m_EditFrame);
+    delete m_ReviewFrame;
+    m_Reviewlabel=0;
+    m_ReviewList=0;
+    m_MarkUnversioned=0;
+    m_UnmarkUnversioned=0;
+    m_DiffItem=0;
 }
 
 Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const char *name)
@@ -146,12 +152,16 @@ Logmsg_impl::~Logmsg_impl()
 
 void Logmsg_impl::checkSplitterSize()
 {
-    if (!m_hidden)
-    {
-        QValueList<int> list = Kdesvnsettings::commit_splitter_height();
-        if (list.count()==2 && (list[0]>0||list[1]>0)) {
-            m_MainSplitter->setSizes(list);
-        }
+    QValueList<int> list = Kdesvnsettings::commit_splitter_height();
+    if (list.count()!=2) {
+        return;
+    }
+    if (m_hidden) {
+        list[1]=list[0]+list[1];
+        list[0]=0;
+    }
+    if (m_hidden || (list[0]>0||list[1]>0)) {
+        m_MainSplitter->setSizes(list);
     }
 }
 
@@ -387,15 +397,17 @@ void Logmsg_impl::setRecCheckboxtext(const QString&what,bool checked)
 Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
 {
     logActionEntries _result;
-    QListViewItemIterator it( m_ReviewList );
-    while ( it.current() ) {
-        if (it.current()->rtti()==1000) {
-            SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
-            if (item->isOn()) {
-                _result.append(item->data());
+    if (m_ReviewList) {
+        QListViewItemIterator it( m_ReviewList );
+        while ( it.current() ) {
+            if (it.current()->rtti()==1000) {
+                SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+                if (item->isOn()) {
+                    _result.append(item->data());
+                }
             }
+            ++it;
         }
-        ++it;
     }
     return _result;
 }
@@ -430,7 +442,7 @@ void Logmsg_impl::slotMarkUnversioned()
 void Logmsg_impl::slotDiffSelected()
 {
     QListViewItem * it=0;
-    if (! (it=m_ReviewList->selectedItem()))
+    if (!m_ReviewList || !(it=m_ReviewList->selectedItem()))
     {
         return;
     }
@@ -444,6 +456,7 @@ void Logmsg_impl::slotDiffSelected()
 
 void Logmsg_impl::hideButtons(bool how)
 {
+    if (!m_MarkUnversioned)return;
     if (how)
     {
         m_MarkUnversioned->hide();
@@ -463,6 +476,7 @@ void Logmsg_impl::hideButtons(bool how)
  */
 void Logmsg_impl::markUnversioned(bool mark)
 {
+    if (!m_ReviewList)return;
     QListViewItemIterator it( m_ReviewList );
     while ( it.current() ) {
         if (it.current()->rtti()==1000) {

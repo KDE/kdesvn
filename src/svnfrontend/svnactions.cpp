@@ -1533,7 +1533,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
                 KDialogBase::No, KDialogBase::No,
                 m_Data->m_ParentList->realWidget(),"warningRevert",true,true);
 
-    bool checkboxres = false;
+    bool checkboxres = true;
 
     int result = KMessageBox::createKMessageBox(dialog,QMessageBox::Warning,
         i18n("Really revert these entries to pristine state?"), displist, i18n("Recursive"),

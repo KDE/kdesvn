@@ -8,12 +8,12 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>446</width>
-            <height>317</height>
+            <width>324</width>
+            <height>217</height>
         </rect>
     </property>
     <property name="caption">
-        <string>Form1</string>
+        <string></string>
     </property>
     <vbox>
         <property name="name">
@@ -93,9 +93,16 @@
         <receiver>BlameDisplay</receiver>
         <slot>slotContextMenuRequested(KListView*,QListViewItem*,const QPoint&amp;)</slot>
     </connection>
+    <connection>
+        <sender>m_BlameList</sender>
+        <signal>doubleClicked(QListViewItem*)</signal>
+        <receiver>BlameDisplay</receiver>
+        <slot>slotItemDoubleClicked(QListViewItem*)</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&amp;)</slot>
+    <slot access="protected">slotItemDoubleClicked(QListViewItem*)</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>

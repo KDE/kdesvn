@@ -376,4 +376,12 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const sv
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
 }
 
+void BlameDisplay_impl::slotItemDoubleClicked(QListViewItem*item)
+{
+    if (item==0||item->rtti()!=1000) return;
+    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+    showCommit(bit);
+}
+
+
 #include "blamedisplay_impl.moc"

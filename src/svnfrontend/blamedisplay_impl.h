@@ -35,6 +35,8 @@ protected:
     virtual void showCommit(BlameDisplayItem*);
 private:
     BlameDisplayData*m_Data;
+protected slots:
+    virtual void slotItemDoubleClicked(QListViewItem*);
 };
 
 #endif

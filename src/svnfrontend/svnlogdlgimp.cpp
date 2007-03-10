@@ -38,14 +38,14 @@
 #include <qheader.h>
 #include <qsplitter.h>
 #include <qtextstream.h>
+#include <qpopupmenu.h>
 
 #include <list>
 
 
 const char* SvnLogDlgImp::groupName = "log_dialog_size";
 
-#define INHERITED KListViewItem
-class LogListViewItem:public INHERITED
+class LogListViewItem:public KListViewItem
 {
 public:
     LogListViewItem (KListView *parent,const svn::LogEntry&);
@@ -75,8 +75,25 @@ const int LogListViewItem::COL_AUTHOR = 1;
 const int LogListViewItem::COL_DATE = 3;
 const int LogListViewItem::COL_MSG = 4;
 
+class LogChangePathItem:public KListViewItem
+{
+public:
+    LogChangePathItem(KListView*parent,const svn::LogChangePathEntry&);
+    virtual ~LogChangePathItem(){}
+
+    QChar action() const{return _action;}
+    const QString& path() const{return _path;}
+    const QString& source() const{return _source;}
+    svn_revnum_t revision() const{ return _revision;}
+
+protected:
+    QString _path,_source;
+    QChar _action;
+    svn_revnum_t _revision;
+};
+
 LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
-    : INHERITED(_parent),_realName(QString::null)
+    : KListViewItem(_parent),_realName(QString::null)
 {
     setMultiLinesEnabled(false);
     _revision=_entry.revision;
@@ -115,16 +132,27 @@ int LogListViewItem::compare( QListViewItem* item, int col, bool ) const
 void LogListViewItem::showChangedEntries(KListView*where)
 {
     if (!where)return;
+    where->clear();
     if (changedPaths.count()==0) {
         return;
     }
     for (unsigned i = 0; i < changedPaths.count();++i) {
-        KListViewItem*it = new KListViewItem(where);
-        it->setText(0,QString(QChar(changedPaths[i].action)));
-        it->setText(1,changedPaths[i].path);
-        if (changedPaths[i].copyFromRevision>-1) {
-            it->setText(2,i18n("%1 at revision %2").arg(changedPaths[i].copyFromPath).arg(changedPaths[i].copyFromRevision));
-        }
+        new LogChangePathItem(where,changedPaths[i]);
+    }
+}
+
+LogChangePathItem::LogChangePathItem(KListView*parent,const svn::LogChangePathEntry&e)
+    :KListViewItem(parent)
+{
+    _action = QChar(e.action);
+    setText(0,_action);
+    _path = e.path;
+    setText(1,e.path);
+    _revision = e.copyFromRevision;
+    _source = e.copyFromPath;
+    if (e.copyFromRevision>-1)
+    {
+        setText(2,i18n("%1 at revision %2").arg(e.copyFromPath).arg(e.copyFromRevision));
     }
 }
 
@@ -202,6 +230,11 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     _base = root;
     m_Entries = _log;
     kdDebug()<<"What: "<<what << endl;
+    if (!what.isEmpty()){
+        setCaption(i18n("SVN Log of %1").arg(what));
+    } else {
+        setCaption(i18n("SVN Log"));
+    }
     svn::LogEntriesMap::const_iterator lit;
     LogListViewItem * item;
     QMap<long int,QString> namesMap;
@@ -217,6 +250,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     if (itemMap.count()==0) {
         return;
     }
+    m_LogView->setSelected(m_LogView->firstChild(),true);
     QString bef = what;
     long rev;
     // YES! I'd checked it: this is much faster than getting list of keys
@@ -243,6 +277,7 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
         m_DispPrevButton->setEnabled(false);
         buttonListFiles->setEnabled(false);
         buttonBlame->setEnabled(false);
+        m_ChangedList->clear();
         return;
     }
     LogListViewItem* k = static_cast<LogListViewItem*>( _it );
@@ -258,7 +293,6 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
         }
     }
     m_LogDisplay->setText(k->message());
-    m_ChangedList->clear();
     k->showChangedEntries(m_ChangedList);
     buttonBlame->setEnabled(true);
 
@@ -321,9 +355,12 @@ QSize SvnLogDlgImp::dialogSize()
     return( QSize( w, h ) );
 }
 
-void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,int col)
+void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,int)
 {
-    if (!item) return;
+    if (!item) {
+        m_ChangedList->clear();
+        return;
+    }
     LogListViewItem*which = static_cast<LogListViewItem*>(item);
     /* left mouse */
     if (button == 1&&!m_ControlKeyDown) {
@@ -421,6 +458,76 @@ void SvnLogDlgImp::slotBlameItem()
 void SvnLogDlgImp::slotEntriesSelectionChanged()
 {
 }
+
+void SvnLogDlgImp::slotSingleContext(QListViewItem*_item, const QPoint & e, int)
+{
+    if (!_item)
+    {
+        return;
+    }
+
+    LogChangePathItem* item = static_cast<LogChangePathItem*>(_item);
+    LogListViewItem* k = static_cast<LogListViewItem*>(m_LogView->selectedItem());
+    if (!k) {
+        kdDebug()<<"????"<<endl;
+        return;
+    }
+    QPopupMenu popup;
+    QString name = item->path();
+    QString action = item->action();
+    QString source =item->revision()>-1?item->source():item->path();
+    svn_revnum_t prev = item->revision()>0?item->revision():k->rev()-1;
+    if (action != "D") {
+        popup.insertItem(i18n("Annotate"),101);
+        if (action != "A" || item->revision()>-1) {
+            popup.insertItem(i18n("Diff previous"),102);
+        }
+    }
+    int r = popup.exec(e);
+    svn::Revision start(svn::Revision::START);
+    switch (r)
+    {
+        case 101:
+        {
+            m_Actions->makeBlame(start,k->rev(),_base+name,kapp->activeModalWidget(),k->rev(),this);
+            break;
+        }
+        case 102:
+        {
+            emit makeDiff(_base+source,prev,_base+name,k->rev(),this);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void SvnLogDlgImp::slotSingleDoubleClicked(QListViewItem*_item)
+{
+    if (!_item)
+    {
+        return;
+    }
+
+    LogChangePathItem* item = static_cast<LogChangePathItem*>(_item);
+    LogListViewItem* k = static_cast<LogListViewItem*>(m_LogView->selectedItem());
+    if (!k) {
+        kdDebug()<<"????"<<endl;
+        return;
+    }
+    QString name = item->path();
+    QString action = item->action();
+    QString source =item->revision()>-1?item->source():item->path();
+    //svn_revnum_t prev = item->revision()>0?item->revision():k->rev()-1;
+    svn::Revision start(svn::Revision::START);
+    if (action != "D") {
+        m_Actions->makeBlame(start,k->rev(),_base+name,kapp->activeModalWidget(),k->rev(),this);
+    }
+}
+
+
+
+
 
 
 #include "svnlogdlgimp.moc"

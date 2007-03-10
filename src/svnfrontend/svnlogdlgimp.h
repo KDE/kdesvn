@@ -67,6 +67,8 @@ protected:
 protected slots:
     virtual void slotListEntries();
     virtual void slotEntriesSelectionChanged();
+    virtual void slotSingleContext(QListViewItem*, const QPoint &, int);
+    virtual void slotSingleDoubleClicked(QListViewItem*);
 };
 
 #endif

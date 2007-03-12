@@ -37,6 +37,7 @@
 #include "src/svnqt/url.hpp"
 #include "helpers/sshagent.h"
 #include "helpers/sub2qt.h"
+#include "fronthelpers/cursorstack.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -405,6 +406,7 @@ void kdesvnfilelist::_openURL(const QString&url)
 
 bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
 {
+    CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
     m_Dirsread.clear();
@@ -704,6 +706,7 @@ kdesvnfilelist::~kdesvnfilelist()
 void kdesvnfilelist::slotItemRead(QListViewItem*aItem)
 {
     if (!aItem) return;
+    CursorStack a(Qt::BusyCursor);
     FileListViewItem* k = static_cast<FileListViewItem*>( aItem );
     bool _ex = true;
     if (isWorkingCopy()) {

@@ -20,6 +20,8 @@
 #ifndef STOPDLG_H
 #define STOPDLG_H
 
+#include "src/svnfrontend/fronthelpers/cursorstack.h"
+
 #include <kdialogbase.h>
 
 #include <qdatetime.h>
@@ -63,6 +65,10 @@ protected:
 
     QString m_lastLog;
     unsigned int m_lastLogLines;
+    CursorStack * cstack;
+
+    virtual void showEvent(QShowEvent*);
+    virtual void hideEvent(QHideEvent*);
 
 public slots:
     virtual void slotTick();

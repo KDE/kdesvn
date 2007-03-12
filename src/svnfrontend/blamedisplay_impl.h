@@ -7,6 +7,7 @@
 class BlameDisplayData;
 class SimpleLogCb;
 class BlameDisplayItem;
+class KListViewSearchLineWidget;
 
 class BlameDisplay_impl:public BlameDisplay
 {
@@ -33,6 +34,8 @@ protected slots:
 
 protected:
     virtual void showCommit(BlameDisplayItem*);
+    KListViewSearchLineWidget* m_SearchWidget;
+
 private:
     BlameDisplayData*m_Data;
 protected slots:

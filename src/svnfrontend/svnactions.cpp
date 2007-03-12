@@ -40,6 +40,7 @@
 #include "src/svnqt/wc.hpp"
 #include "src/svnqt/svnqt_defines.hpp"
 #include "helpers/sub2qt.h"
+#include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
 #include <kdialog.h>
@@ -388,6 +389,7 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
     svn::Revision peg = _peg==svn::Revision::UNDEFINED?end:_peg;
 
     try {
+        CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Data->m_SvnContext,_parent,0,"Annotate",i18n("Annotate lines - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         m_Data->m_Svnclient->annotate(blame,p,start,end,peg);
@@ -408,6 +410,7 @@ bool SvnActions::makeGet(const svn::Revision&start, const QString&what, const QS
     const svn::Revision&peg,QWidget*_dlgparent)
 {
     if (!m_Data->m_CurrentContext) return false;
+    CursorStack a(Qt::BusyCursor);
     QWidget*dlgp=_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget();
     QString ex;
     svn::Path p(what);
@@ -431,6 +434,7 @@ QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,con
 {
     QByteArray content;
     if (!m_Data->m_CurrentContext) return content;
+    CursorStack a(Qt::BusyCursor);
     QWidget*dlgp=_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget();
     QString ex;
     svn::Path p(what);

@@ -24,6 +24,7 @@
 #include "revtreewidget.h"
 #include "revgraphview.h"
 #include "elogentry.h"
+#include "src/svnfrontend/fronthelpers/cursorstack.h"
 
 #include <kdebug.h>
 #include <kprogress.h>
@@ -87,6 +88,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         return false;
     }
     try {
+        CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
         m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);

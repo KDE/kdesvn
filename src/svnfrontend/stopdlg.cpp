@@ -36,7 +36,8 @@
 
 StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
-    ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false)
+    ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false),
+    cstack(0)
 {
     KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
     m_lastLogLines = 0;
@@ -72,6 +73,16 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     adjustSize();
 }
 
+void StopDlg::showEvent( QShowEvent*)
+{
+    cstack = new CursorStack(Qt::ArrowCursor);
+}
+
+void StopDlg::hideEvent(QHideEvent*)
+{
+    delete cstack; cstack = 0;
+}
+
 void StopDlg::slotWait(bool how)
 {
     mWait = how;
@@ -83,6 +94,7 @@ void StopDlg::slotWait(bool how)
 
 StopDlg::~StopDlg()
 {
+    delete cstack;
 }
 
 void StopDlg::slotAutoShow()

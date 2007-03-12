@@ -2,6 +2,8 @@
 #include "simple_logcb.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/log_entry.hpp"
+#include "fronthelpers/cursorstack.h"
+#include "fronthelpers/widgetblockstack.h"
 
 #include <klistview.h>
 #include <kglobalsettings.h>
@@ -13,6 +15,7 @@
 #include <kdialogbase.h>
 #include <kapp.h>
 #include <ktextbrowser.h>
+#include <klistviewsearchline.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -20,6 +23,9 @@
 #include <qmap.h>
 #include <qpopupmenu.h>
 #include <qvbox.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
+#include <qlayout.h>
 
 #define COL_LINENR 0
 #define COL_REV 1
@@ -189,6 +195,12 @@ void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
 void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&blame)
 {
     m_Data->m_File = what;
+    m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this, "m_SearchWidget");
+
+    BlameDisplayLayout->remove(m_BlameList);
+    BlameDisplayLayout->addWidget(m_SearchWidget);
+    BlameDisplayLayout->addWidget(m_BlameList);
+
     m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
     m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
     m_BlameList->header()->setLabel(COL_LINE,QString(""));
@@ -311,10 +323,12 @@ void BlameDisplay_impl::slotContextMenuRequested(KListView*,QListViewItem*item, 
 void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
 {
     if (!bit) return;
+    WidgetBlockStack a(m_BlameList);
     QString text;
     if (m_Data->m_logCache.find(bit->rev())!=m_Data->m_logCache.end()) {
         text = m_Data->m_logCache[bit->rev()].message;
     } else {
+        CursorStack a(Qt::BusyCursor);
         svn::LogEntry t;
         if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t,bit->rev(),m_Data->m_File,m_Data->max,m_Data->reposRoot)) {
             m_Data->m_logCache[bit->rev()] = t;

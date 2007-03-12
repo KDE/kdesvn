@@ -25,6 +25,7 @@
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/exception.hpp"
 #include "src/svnqt/url.hpp"
+#include "fronthelpers/widgetblockstack.h"
 
 #include <klocale.h>
 #include <kiconloader.h>
@@ -80,9 +81,10 @@ void FileListViewItem::init()
 void FileListViewItem::setOpen(bool o)
 {
     if (o && childCount()==0) {
-        m_Ksvnfilelist->setEnabled( false );
-        m_Ksvnfilelist->slotItemRead(this);
-        m_Ksvnfilelist->setEnabled( true );
+        {
+            WidgetBlockStack a(m_Ksvnfilelist);
+            m_Ksvnfilelist->slotItemRead(this);
+        }
         m_Ksvnfilelist->setFocus();
     }
     KListViewItem::setOpen(o);

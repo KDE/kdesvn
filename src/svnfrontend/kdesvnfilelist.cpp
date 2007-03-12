@@ -2147,7 +2147,7 @@ void kdesvnfilelist::slotInfo()
         }
     }
     if (lst.count()>0) {
-        m_SvnWrapper->makeInfo(lst,rev,svn::Revision::BASE,Kdesvnsettings::info_recursive());
+        m_SvnWrapper->makeInfo(lst,rev,rev,Kdesvnsettings::info_recursive());
     }
 }
 

@@ -137,9 +137,7 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
                 m_kdename.setQuery("?rev="+revstr);
             }
         } else {
-            kdDebug()<<"kdeName: "<<m_Stat.path()<<endl;
             m_kdename = KURL::fromPathOrURL(m_Stat.path());
-            kdDebug()<<"kdeName: "<<m_kdename.pathOrURL()<<endl;
         }
     }
     return m_kdename;
@@ -477,6 +475,15 @@ bool SvnItem::isNormal()const
     return p_Item->m_Stat.textStatus()==svn_wc_status_normal;
 }
 
+bool SvnItem::isMissing()const
+{
+    return p_Item->m_Stat.textStatus()==svn_wc_status_missing;
+}
+
+bool SvnItem::isDeleted()const
+{
+    return p_Item->m_Stat.textStatus()==svn_wc_status_deleted;
+}
 
 /*!
     \fn SvnItem::getToolTipText()

@@ -169,6 +169,7 @@ protected slots:
     virtual void slotCopyFinished( KIO::Job *);
     virtual void slotDeleteFinished(KIO::Job*);
     virtual void _openURL(const QString&);
+    virtual void _dirwatchTimeout();
 
 signals:
     void sigLogMessage(const QString&);

@@ -1565,7 +1565,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     // remove them from cache
     for (unsigned int j = 0; j<items.count();++j) {
         m_Data->m_Cache.deleteKey(items[j].path(),!checkboxres);
-        m_Data->m_Cache.dump_tree();
+//        m_Data->m_Cache.dump_tree();
     }
     EMIT_FINISHED;
 }
@@ -1965,7 +1965,7 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
     for (unsigned int i = 0; i<what.count();++i) {
         m_Data->m_repoLockCache.deleteKey(*(what.at(i)),true);
     }
-    m_Data->m_repoLockCache.dump_tree();
+//    m_Data->m_repoLockCache.dump_tree();
 }
 
 
@@ -2162,7 +2162,7 @@ void SvnActions::addModifiedCache(const svn::Status&what)
         m_Data->m_conflictCache.insertKey(what);
     } else {
         m_Data->m_Cache.insertKey(what);
-        m_Data->m_Cache.dump_tree();
+//        m_Data->m_Cache.dump_tree();
     }
 }
 
@@ -2171,7 +2171,7 @@ void SvnActions::deleteFromModifiedCache(const QString&what)
     kdDebug()<<"deleteFromModifiedCache"<<endl;
     m_Data->m_Cache.deleteKey(what,true);
     m_Data->m_conflictCache.deleteKey(what,true);
-    m_Data->m_Cache.dump_tree();
+    //m_Data->m_Cache.dump_tree();
 }
 
 void SvnActions::getModifiedCache(const QString&path,svn::StatusEntries&dlist)

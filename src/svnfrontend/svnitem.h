@@ -76,6 +76,8 @@ public:
     virtual const svn::Status& stat()const;
     virtual bool isModified()const;
     bool isNormal()const;
+    bool isMissing()const;
+    bool isDeleted()const;
     const QString& getToolTipText();
     KFileItem*fileItem();
 

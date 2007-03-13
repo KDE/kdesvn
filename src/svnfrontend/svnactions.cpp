@@ -2168,7 +2168,6 @@ void SvnActions::addModifiedCache(const svn::Status&what)
 
 void SvnActions::deleteFromModifiedCache(const QString&what)
 {
-    kdDebug()<<"deleteFromModifiedCache"<<endl;
     m_Data->m_Cache.deleteKey(what,true);
     m_Data->m_conflictCache.deleteKey(what,true);
     //m_Data->m_Cache.dump_tree();

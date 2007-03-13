@@ -362,7 +362,6 @@ void itemCache::deleteKey(const QString&_what,bool exact)
         return;
     }
     QStringList what = QStringList::split("/",_what);
-    kdDebug()<<"Removing " << _what << endl;
     if (what.count()==0) {
         return;
     }

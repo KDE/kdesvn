@@ -2207,6 +2207,7 @@ void kdesvnfilelist::_dirwatchTimeout()
     kdDebug()<<"dirtimer"<<endl;
     QMap<QString,QChar>::Iterator it;
     m_pList->m_fileTip->setItem(0);
+    viewport()->setUpdatesEnabled(false);
     for (it=m_pList->dirItems.begin();it!=m_pList->dirItems.end();++it)
     {
         QString what = it.key();
@@ -2259,6 +2260,8 @@ void kdesvnfilelist::_dirwatchTimeout()
         }
     }
     m_pList->dirItems.clear();
+    viewport()->setUpdatesEnabled(true);
+    viewport()->repaint();
 }
 
 /*!

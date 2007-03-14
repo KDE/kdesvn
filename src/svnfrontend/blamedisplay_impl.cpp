@@ -203,7 +203,6 @@ void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&b
 
     m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
     m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
-    m_BlameList->header()->setLabel(COL_LINE,QString(""));
 
     m_BlameList->clear();
     if (m_Data->m_dlg) {

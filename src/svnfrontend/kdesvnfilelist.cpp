@@ -1132,7 +1132,7 @@ void kdesvnfilelist::refreshCurrent(SvnItem*cur)
     viewport()->repaint();
 }
 
-void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
+bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
 {
     FileListViewItem*item;
     if (_parent) {
@@ -1141,7 +1141,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
         item = static_cast<FileListViewItem*>(firstChild());
     }
 
-    if (!item) return;
+    if (!item) return false;
     kapp->processEvents();
 
     FileListViewItemList currentSync;
@@ -1157,7 +1157,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
 
     if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
         kdDebug()<<"Fehler bei makestatus fuer "<<what <<endl;
-        return;
+        return false;
     }
     if (isWorkingCopy()) {
         svn::StatusEntries neweritems;
@@ -1168,6 +1168,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem*k;
     bool gotit = false;
+    bool dispchanged = false;
     for (;it!=dlist.end();++it) {
         gotit = false;
         if ((*it).path()==what) {
@@ -1184,6 +1185,7 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
             }
         }
         if (!gotit) {
+            dispchanged = true;
             FileListViewItem * item;
             if (!_parent) {
                 item = new FileListViewItem(this,*it);
@@ -1228,20 +1230,22 @@ void kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
         item = static_cast<FileListViewItem*>(firstChild());
     }
     if (!down) {
-        return;
+        return dispchanged;
     }
     while (item) {
         if (item->isDir()) {
             if ((m_Dirsread.find(item->fullName())!=m_Dirsread.end()&&m_Dirsread[item->fullName()]==true)) {
                 if (item->childCount()==0) {
                     checkDirs(item->fullName(),item);
+                    dispchanged = true;
                 } else {
-                    refreshRecursive(item);
+                    dispchanged = refreshRecursive(item)?true:dispchanged;
                 }
             }
         }
         item = static_cast<FileListViewItem*>(item->nextSibling());
     }
+    return dispchanged;
 }
 
 KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item,bool execOnly)
@@ -2208,6 +2212,7 @@ void kdesvnfilelist::_dirwatchTimeout()
     QMap<QString,QChar>::Iterator it;
     m_pList->m_fileTip->setItem(0);
     viewport()->setUpdatesEnabled(false);
+    bool repaintit=false;
     for (it=m_pList->dirItems.begin();it!=m_pList->dirItems.end();++it)
     {
         QString what = it.key();
@@ -2226,7 +2231,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                 m_SvnWrapper->deleteFromModifiedCache(what);
             }
             if (item->isDir()) {
-                refreshRecursive(item,false);
+                repaintit = refreshRecursive(item,false);
             }
         } else if (c=='D') {
             if (item->isDir()) {
@@ -2241,6 +2246,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                 if (!fi.exists()) {
                     FileListViewItem*p = static_cast<FileListViewItem*>(item->parent());
                     removeItem(item);
+                    repaintit=true;
                     item = 0;
                     if (p) {
                         p->update();
@@ -2261,7 +2267,9 @@ void kdesvnfilelist::_dirwatchTimeout()
     }
     m_pList->dirItems.clear();
     viewport()->setUpdatesEnabled(true);
-    viewport()->repaint();
+    if (repaintit) {
+//        viewport()->repaint();
+    }
 }
 
 /*!

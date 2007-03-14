@@ -23,7 +23,6 @@
 #include "commandline.h"
 #include "kdesvn-config.h"
 #include <kapplication.h>
-#include <dcopclient.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
@@ -60,9 +59,6 @@ int main(int argc, char **argv)
 
 
     KApplication app;
-
-    // register ourselves as a dcop client
-    app.dcopClient()->registerAs(app.name(), false);
 
     // see if we are starting with session management
     if (app.isRestored())

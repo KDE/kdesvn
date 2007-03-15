@@ -1885,9 +1885,12 @@ bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
+        bool local = false;
+        if ((*it).protocol().isEmpty()) {
+            local = true;
+        }
         for (;it!=Old.end();++it) {
-            kdDebug()<<"Move: "<<(*it). pathOrURL()<< " - "<< (*it).url() <<endl;
-            m_Data->m_Svnclient->move(svn::Path((*it). pathOrURL()),svn::Path(New),force);
+            m_Data->m_Svnclient->move((local?(*it).path():(*it).url()),svn::Path(New),force);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());

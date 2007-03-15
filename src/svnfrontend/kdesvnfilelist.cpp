@@ -1637,15 +1637,15 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
         KURL::List::Iterator it = urlList.begin();
         QStringList l;
         for (;it!=urlList.end();++it) {
-            (*it).setProtocol(nProto);
             l = QStringList::split("?",(*it).prettyURL());
             if (l.size()>1) {
                 (*it) = l[0];
             } else if (isWorkingCopy())
             {
                 (*it) = KURL::fromPathOrURL( (*it).path());
-                kdDebug()<<"Dropped: "<<(*it)<<endl;
             }
+            (*it).setProtocol(nProto);
+            kdDebug()<<"Dropped: "<<(*it)<<endl;
         }
         event->acceptAction();
         m_pList->intern_dropRunning=true;

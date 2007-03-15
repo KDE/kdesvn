@@ -562,7 +562,8 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             i18n("Retrieving infos - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::InfoEntries e;
-        entries = (m_Data->m_Svnclient->info(_what+(_what.find("@")>-1?"@BASE":""),recursive,rev,peg));
+        entries = (m_Data->m_Svnclient->info(_what+
+                    (_what.find("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive,rev,peg));
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return QString::null;

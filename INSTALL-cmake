@@ -61,6 +61,9 @@ Where is subversion-lib installed. Default check in /usr and /usr/local
 -DCMAKE_CXX_FLAGS=<some extra flags>
 Extra flags for the c++ compiler for your system required.
 
+-DLIB_SUFFIX=<suffix>
+Mostly for 64bit systems, there suffix may be 64 so libs will installed in /usr/lib64 and not /usr/lib for instance.
+
 After calling cmake just type
     make
 and build begins. When more output is wanted call

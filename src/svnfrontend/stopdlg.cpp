@@ -75,7 +75,7 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
 
 void StopDlg::showEvent( QShowEvent*)
 {
-    cstack = new CursorStack(Qt::ArrowCursor);
+    cstack = new CursorStack(Qt::BusyCursor);
 }
 
 void StopDlg::hideEvent(QHideEvent*)

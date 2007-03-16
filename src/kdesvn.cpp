@@ -124,6 +124,9 @@ kdesvn::kdesvn()
             tmpAction = new KAction(i18n("Add ssh identities to ssh-agent"),"password",
                 KShortcut(),m_part,SLOT(slotSshAdd()),actionCollection(),"kdesvn_ssh_add");
             tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
+            tmpAction = new KAction(i18n("Info about kdesvn part"), "kdesvn",
+                        KShortcut(), m_part, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
+            tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin not the standalone app."));
 
             /* enable tooltips in statusbar for menu */
             actionCollection()->setHighlightingEnabled(true);

@@ -150,7 +150,7 @@ KAboutData* kdesvnPart::createAboutData()
                          0, "ral@alwins-world.de");
     about->addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
     about->setOtherText(m_Extratext);
-    about->setHomepage("http://www.alwins-world.de/programs/kdesvn/");
+    about->setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");
     about->setBugAddress("kdesvn-bugs@alwins-world.de");
     about->setTranslator(I18N_NOOP("kdesvn: NAME OF TRANSLATORS\\nYour names"),
         I18N_NOOP("kdesvn: EMAIL OF TRANSLATORS\\nYour emails"));

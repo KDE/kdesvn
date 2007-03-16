@@ -2441,6 +2441,9 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
     d.setFilter( QDir::Files | QDir::Dirs );
 
     const QFileInfoList *list = d.entryInfoList();
+    if (!list) {
+        return;
+    }
     QFileInfoListIterator nonversioned_it( *list );
     QFileInfo *fi;
 

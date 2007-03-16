@@ -7,6 +7,7 @@ version 0.11.2
     * feature request: search in blamewindows
     * spain translation updated
     * fix: DirWatcher should not have any display leaks any more and should not crash kdesvn on heavy changes.
+    * fix: kdesvn could crash when try to open folders where user had no execute/read rights for.
 
 version 0.11.1
     * Galician translation added

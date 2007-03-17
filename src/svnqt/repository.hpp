@@ -79,7 +79,7 @@ public:
     //! dump content of repository to a file
     /*!
         The repository must opend before. Progress message go trough the assigned svn::repository::RepositoryListener object.
-        The revison parameter must be numbers, no constant values like svn::Revision::HEAD.
+        The revision parameter must be numbers, no constant values like svn::Revision::HEAD.
         \param output where to output the content
         \param start Begin on revision. If revision == -1 than start with first entry.
         \param end End with revision.  If revision == -1 than end with current head.

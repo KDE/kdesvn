@@ -540,7 +540,7 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
 
     if (!full) {
         res+=QString("<b>%1</b>").arg(it.data().name);
-        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log:%4</html>")
+        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>")
             .arg(it.data().rev)
             .arg(it.data().Author)
             .arg(it.data().Date)

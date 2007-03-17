@@ -415,7 +415,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         /* skip items between */
                         j=lastrev;
 #ifdef DEBUG_PARSE
-                        kdDebug()<<"Renamed to "<< recPath << " at revison " << FORWARDENTRY.copyToRevision << endl;
+                        kdDebug()<<"Renamed to "<< recPath << " at revision " << FORWARDENTRY.copyToRevision << endl;
 #endif
                         path=recPath;
                     } else {

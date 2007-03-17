@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-06 23:08+0100\n"
+"POT-Creation-Date: 2007-03-17 20:41+0100\n"
 "PO-Revision-Date: 2006-07-31 13:22+0200\n"
 "Last-Translator: Klara Cihlarova <koty@seznam.cz>\n"
 "Language-Team: cs_CZ <cs@li.org>\n"
@@ -29,40 +29,40 @@ msgid ""
 "Your emails"
 msgstr "koty@seznam.cz"
 
-#: main.cpp:33
+#: main.cpp:32
 msgid "A Subversion Client for KDE (standalone application)"
 msgstr "Subversion klient pro KDE (samostatná aplikace)"
 
-#: main.cpp:39
+#: main.cpp:38
 msgid "Execute single subversion command on specific revision(-range)"
 msgstr ""
 
-#: main.cpp:40
+#: main.cpp:39
 msgid "Ask for revision when executing single command"
 msgstr ""
 
-#: main.cpp:41 rc.cpp:550
+#: main.cpp:40 rc.cpp:556
 #, no-c-format
 msgid "Force operation"
 msgstr "Vynucená operace"
 
-#: main.cpp:42
+#: main.cpp:41
 msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgstr ""
 
-#: main.cpp:43
+#: main.cpp:42
 msgid "Limit log output to <number>"
 msgstr "Omezit výstup záznamu na <číslo>"
 
-#: main.cpp:44
+#: main.cpp:43
 msgid "Execute subversion command (\"exec help\" for more information)"
 msgstr ""
 
-#: main.cpp:45
+#: main.cpp:44
 msgid "Document to open"
 msgstr "Dokument k otevření"
 
-#: main.cpp:51
+#: main.cpp:50
 msgid "kdesvn"
 msgstr "kdesvn"
 
@@ -127,11 +127,13 @@ msgid "Skipped missing target %1."
 msgstr "Vynechán chybějící cíl %1."
 
 #: kiosvn/kiolistener.cpp:151
-msgid "Skipped  %1."
+#, fuzzy
+msgid "Skipped %1."
 msgstr "Vynecháno %1."
 
 #: kiosvn/kiolistener.cpp:202
-msgid "Finished at revision %1"
+#, fuzzy
+msgid "Finished at revision %1."
 msgstr "Dokončeno na revizi %1"
 
 #: kiosvn/kiolistener.cpp:204
@@ -139,8 +141,9 @@ msgid "Finished."
 msgstr "Hotovo."
 
 #: kiosvn/kiolistener.cpp:208
-msgid "Finished external at revision %1"
-msgstr ""
+#, fuzzy
+msgid "Finished external at revision %1."
+msgstr "Dokončeno na revizi %1"
 
 #: kiosvn/kiolistener.cpp:210
 msgid "Finished external."
@@ -215,7 +218,8 @@ msgid "Performing status on external item at %1."
 msgstr "Zjišťuji stav externí položky na %1."
 
 #: kiosvn/kiolistener.cpp:276
-msgid "Sending %1"
+#, fuzzy
+msgid "Sending %1."
 msgstr "Posílám %1"
 
 #: kiosvn/kiolistener.cpp:280
@@ -234,19 +238,19 @@ msgstr "Mažu %1."
 msgid "Replacing %1."
 msgstr "Nahrazuji %1."
 
-#: kiosvn/kiolistener.cpp:294
+#: kiosvn/kiolistener.cpp:295
 msgid "Transmitting file data "
 msgstr "Odesílají se data souborů "
 
-#: kiosvn/kiosvn.cpp:612
+#: kiosvn/kiosvn.cpp:697
 msgid "Nothing to commit."
 msgstr "Nic k odeslání."
 
-#: kiosvn/kiosvn.cpp:614
+#: kiosvn/kiosvn.cpp:699
 msgid "Committed revision %1."
 msgstr "Odeslána revize %1."
 
-#: kiosvn/kiosvn.cpp:658
+#: kiosvn/kiosvn.cpp:743
 msgid "Empty logs"
 msgstr "Prázdné záznamy"
 
@@ -262,7 +266,7 @@ msgstr "Nelze otevřít repository"
 msgid "No repository open"
 msgstr ""
 
-#: kdesvnview.cpp:244 rc.cpp:620
+#: kdesvnview.cpp:244 rc.cpp:626
 #, no-c-format
 msgid "Create new repository"
 msgstr "Vytvořit novou repository"
@@ -347,7 +351,7 @@ msgstr "Pro zobrazení rozdílů použít \"Kompare\""
 msgid "Logs follow node changes"
 msgstr "Záznamy následují změny nodů"
 
-#: kdesvn_part.cpp:177 rc.cpp:213
+#: kdesvn_part.cpp:177 rc.cpp:216
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Zobrazit ignorované soubory"
@@ -372,17 +376,17 @@ msgstr "&Příručka aplikace Kdesvn"
 msgid "Send Bugreport for kdesvn"
 msgstr "Odeslat hlášení o chybě v kdesvn"
 
-#: kdesvn_part.cpp:335 rc.cpp:674
+#: kdesvn_part.cpp:335 rc.cpp:680
 #, no-c-format
 msgid "General"
 msgstr "Obecné"
 
-#: kdesvn_part.cpp:337 rc.cpp:9 rc.cpp:671
+#: kdesvn_part.cpp:337 rc.cpp:9 rc.cpp:677
 #, no-c-format
 msgid "Subversion"
 msgstr "Subversion"
 
-#: kdesvn_part.cpp:337 rc.cpp:188
+#: kdesvn_part.cpp:337 rc.cpp:191
 #, no-c-format
 msgid "Subversion Settings"
 msgstr "Nastavit: Subversion"
@@ -424,87 +428,87 @@ msgstr ""
 msgid "Subversion Admin"
 msgstr "Správce Subversion"
 
-#: rc.cpp:15 rc.cpp:695
+#: rc.cpp:18 rc.cpp:701
 #, no-c-format
 msgid "Subversion toolbar"
 msgstr "Nástrojová lišta Subversion"
 
-#: rc.cpp:21
+#: rc.cpp:24
 #, fuzzy, no-c-format
 msgid "ColorSettings"
 msgstr "Nastavení barev"
 
-#: rc.cpp:24
+#: rc.cpp:27
 #, no-c-format
 msgid "Mark changed and locked items colored"
 msgstr "Obarvit změněné a uzamčené položky"
 
-#: rc.cpp:32
+#: rc.cpp:35
 #, no-c-format
 msgid "Locked items:"
 msgstr "Uzamčené položky:"
 
-#: rc.cpp:36
+#: rc.cpp:39
 #, no-c-format
 msgid "Not versioned items:"
 msgstr "Neverzované položky:"
 
-#: rc.cpp:39
+#: rc.cpp:42
 #, no-c-format
 msgid "Remote changed items:"
 msgstr "Vzdálené změněné položky:"
 
-#: rc.cpp:42
+#: rc.cpp:45
 #, no-c-format
 msgid "Added items:"
 msgstr "Vložené položky:"
 
-#: rc.cpp:45
+#: rc.cpp:48
 #, no-c-format
 msgid "Deleted items:"
 msgstr "Smazané položky:"
 
-#: rc.cpp:52
+#: rc.cpp:55
 #, no-c-format
 msgid "Conflicted items:"
 msgstr "Položky v konfliktu:"
 
-#: rc.cpp:55
+#: rc.cpp:58
 #, no-c-format
 msgid "Missed items:"
 msgstr "Chybějící položky:"
 
-#: rc.cpp:58
+#: rc.cpp:61
 #, no-c-format
 msgid "Local changed items:"
 msgstr "Lokálně změněné položky:"
 
-#: rc.cpp:61
+#: rc.cpp:64
 #, no-c-format
 msgid "Item needs lock:"
 msgstr "Vyložky vyžadující uzamčení:"
 
-#: rc.cpp:65
+#: rc.cpp:68
 #, no-c-format
 msgid "Settings"
 msgstr "Nastavení"
 
-#: rc.cpp:68
+#: rc.cpp:71
 #, no-c-format
 msgid "Size of Listviewicons"
 msgstr "Velikost ikon v seznamu"
 
-#: rc.cpp:71
+#: rc.cpp:74
 #, no-c-format
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
-#: rc.cpp:74
+#: rc.cpp:77
 #, no-c-format
 msgid "Show file info"
 msgstr "Zobrazit informace o souboru"
 
-#: rc.cpp:77
+#: rc.cpp:80
 #, no-c-format
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
@@ -513,17 +517,17 @@ msgstr ""
 "Zde můžete ovlivnit, zda si přejete zobrazení malých oken s informacemi o "
 "souboru nebo adresáři, pokud nad ním ponecháte kurzor myši."
 
-#: rc.cpp:80
+#: rc.cpp:83
 #, no-c-format
 msgid "Mark item status with icon overlay"
 msgstr ""
 
-#: rc.cpp:83
+#: rc.cpp:86
 #, no-c-format
 msgid "Mark subversion states with an overlayed icon"
 msgstr ""
 
-#: rc.cpp:86
+#: rc.cpp:89
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -534,12 +538,12 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:92
+#: rc.cpp:95
 #, no-c-format
 msgid "Display previews in file tips"
 msgstr "Zobrazit náhledy v tipech"
 
-#: rc.cpp:95
+#: rc.cpp:98
 #, no-c-format
 msgid ""
 "Here you can control if you want the popup window to contain a larger "
@@ -548,12 +552,12 @@ msgstr ""
 "Zde můžete nastavit, zda chcete aby vyskakovací okno obsahovalo větší náhled "
 "souboru, nad kterým přejedete myší."
 
-#: rc.cpp:98
+#: rc.cpp:101
 #, no-c-format
 msgid "External display:"
 msgstr "Externí zobrazení:"
 
-#: rc.cpp:101
+#: rc.cpp:104
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -567,150 +571,150 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:111
+#: rc.cpp:114
 #, no-c-format
 msgid "Maximum logmessages in history:"
 msgstr ""
 
-#: rc.cpp:114
+#: rc.cpp:117
 #, fuzzy, no-c-format
 msgid "Display colored annotate"
 msgstr "Zobrazit ignorované soubory"
 
-#: rc.cpp:117
+#: rc.cpp:120
 #, no-c-format
 msgid "Revisiontree Settings"
 msgstr "Nastavení stromu revize"
 
-#: rc.cpp:120
+#: rc.cpp:123
 #, no-c-format
 msgid "Direction of revision tree"
 msgstr "Směr stromu"
 
-#: rc.cpp:123
+#: rc.cpp:126
 #, no-c-format
 msgid "Left to right"
 msgstr "Zleva do prava"
 
-#: rc.cpp:126
+#: rc.cpp:129
 #, no-c-format
 msgid "Bottom to top"
 msgstr ""
 
-#: rc.cpp:129
+#: rc.cpp:132
 #, no-c-format
 msgid "Right to left"
 msgstr "Zprava do leva"
 
-#: rc.cpp:132
+#: rc.cpp:135
 #, no-c-format
 msgid "Top to bottom"
 msgstr ""
 
-#: rc.cpp:135
+#: rc.cpp:138
 #, no-c-format
 msgid "Color for added items:"
 msgstr "Barva vložených položek:"
 
-#: rc.cpp:139
+#: rc.cpp:142
 #, no-c-format
 msgid "Color for deleted items:"
 msgstr "Barva smazaných položek:"
 
-#: rc.cpp:143
+#: rc.cpp:146
 #, no-c-format
 msgid "Color for copied items:"
 msgstr "Barva kopírovaných položek:"
 
-#: rc.cpp:147
+#: rc.cpp:150
 #, no-c-format
 msgid "Color for renamed items:"
 msgstr "Barva přejmenovaných položek:"
 
-#: rc.cpp:151
+#: rc.cpp:154
 #, no-c-format
 msgid "Color for modified items:"
 msgstr "Barva pozměněných položek:"
 
-#: rc.cpp:155
+#: rc.cpp:158
 #, fuzzy, no-c-format
 msgid "CmdExecSettings"
 msgstr "Nastavení"
 
-#: rc.cpp:158
+#: rc.cpp:161
 #, no-c-format
 msgid "Show log after executing a command"
 msgstr ""
 
-#: rc.cpp:161
+#: rc.cpp:164
 #, no-c-format
 msgid "Show a small window containing the log after command executed"
 msgstr ""
 
-#: rc.cpp:164
+#: rc.cpp:167
 #, no-c-format
 msgid "Minimum log lines to show:"
 msgstr ""
 
-#: rc.cpp:167
+#: rc.cpp:170
 #, no-c-format
 msgid " line(s)"
 msgstr ""
 
-#: rc.cpp:170
+#: rc.cpp:173
 #, no-c-format
 msgid "0"
 msgstr ""
 
-#: rc.cpp:173
+#: rc.cpp:176
 #, no-c-format
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: rc.cpp:176
+#: rc.cpp:179
 #, no-c-format
 msgid "Don't display contextmenu in Konqueror"
 msgstr ""
 
-#: rc.cpp:179
+#: rc.cpp:182
 #, no-c-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
 msgstr ""
 
-#: rc.cpp:182
+#: rc.cpp:185
 #, fuzzy, no-c-format
 msgid "KIO operations use standard logmessage"
 msgstr "Poslední použité záznamy"
 
-#: rc.cpp:185
+#: rc.cpp:188
 #, no-c-format
 msgid "Standard message:"
 msgstr ""
 
-#: rc.cpp:191
+#: rc.cpp:194
 #, no-c-format
 msgid "Start check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:195
+#: rc.cpp:198
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:198
+#: rc.cpp:201
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr ""
 
-#: rc.cpp:202
+#: rc.cpp:205
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
 msgstr ""
 
-#: rc.cpp:205
+#: rc.cpp:208
 #, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -720,22 +724,22 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
 msgstr ""
 
-#: rc.cpp:210
+#: rc.cpp:213
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr ""
 
-#: rc.cpp:217
+#: rc.cpp:220
 #, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "Uložit heslo pro vzdálené připojení"
 
-#: rc.cpp:220
+#: rc.cpp:223
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:223
+#: rc.cpp:226
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -745,22 +749,22 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:226
+#: rc.cpp:229
 #, no-c-format
 msgid "Log follows node changes"
 msgstr ""
 
-#: rc.cpp:230
+#: rc.cpp:233
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr ""
 
-#: rc.cpp:233
+#: rc.cpp:236
 #, fuzzy, no-c-format
 msgid "Read detailed change lists"
 msgstr "Vzdálené změněné položky:"
 
-#: rc.cpp:236
+#: rc.cpp:239
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -768,77 +772,77 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:239
+#: rc.cpp:242
 #, no-c-format
 msgid "Review items before commit"
 msgstr ""
 
-#: rc.cpp:243
+#: rc.cpp:246
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr ""
 
-#: rc.cpp:246
+#: rc.cpp:249
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 
-#: rc.cpp:249 rc.cpp:465
+#: rc.cpp:252
 #, no-c-format
 msgid "Form1"
 msgstr "Form1"
 
-#: rc.cpp:252
+#: rc.cpp:255
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr ""
 
-#: rc.cpp:255 svnfrontend/graphtree/revgraphview.cpp:810
+#: rc.cpp:258 svnfrontend/graphtree/revgraphview.cpp:810
 #, no-c-format
 msgid "Diff in revisiontree is recursive"
 msgstr ""
 
-#: rc.cpp:258 svnfrontend/svnactions.cpp:1185
+#: rc.cpp:261 svnfrontend/svnactions.cpp:1190
 #, no-c-format
 msgid "Diff display"
 msgstr "Zobrazit diff"
 
-#: rc.cpp:261
+#: rc.cpp:264
 #, no-c-format
 msgid "Internal"
 msgstr "Interní"
 
-#: rc.cpp:264
+#: rc.cpp:267
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Použít pro diff Kompare"
 
-#: rc.cpp:267
+#: rc.cpp:270
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Použít jiný program"
 
-#: rc.cpp:270
+#: rc.cpp:273
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr ""
 
-#: rc.cpp:273
+#: rc.cpp:276
 #, no-c-format
 msgid "External diff display:"
 msgstr "Externí zobrazení rozdílů:"
 
-#: rc.cpp:276
+#: rc.cpp:279
 #, fuzzy, no-c-format
 msgid "External merge program:"
 msgstr "Zadejte rozsah sloučení"
 
-#: rc.cpp:279
+#: rc.cpp:282
 #, no-c-format
 msgid "Setup an external program for merging"
 msgstr ""
 
-#: rc.cpp:282
+#: rc.cpp:285
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -854,7 +858,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:294
+#: rc.cpp:297
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -882,126 +886,131 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:315
+#: rc.cpp:318
 #, no-c-format
 msgid "Prefer external merge program"
 msgstr ""
 
-#: rc.cpp:318
+#: rc.cpp:321
 #, no-c-format
 msgid ""
 "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 
-#: rc.cpp:321
+#: rc.cpp:324 svnfrontend/svnlogdlgimp.cpp:236
 #, no-c-format
 msgid "SVN Log"
 msgstr "Záznam SVN"
 
-#: rc.cpp:325 rc.cpp:477
+#: rc.cpp:328 rc.cpp:483
 #, no-c-format
 msgid "Author"
 msgstr "Autor"
 
-#: rc.cpp:328
+#: rc.cpp:331
 #, no-c-format
 msgid "Revison"
 msgstr "Revize"
 
-#: rc.cpp:331 rc.cpp:474 rc.cpp:582 rc.cpp:604
+#: rc.cpp:334 rc.cpp:480 rc.cpp:588 rc.cpp:610
 #, no-c-format
 msgid "Date"
 msgstr "Datum"
 
-#: rc.cpp:334
+#: rc.cpp:337
 #, no-c-format
 msgid "Message"
 msgstr "Zpráva"
 
-#: rc.cpp:337
+#: rc.cpp:340
 #, no-c-format
 msgid "Select in first column revisions for diff"
 msgstr ""
 
-#: rc.cpp:340 rc.cpp:728 ksvnwidgets/logmsg_impl.cpp:74
-#: ksvnwidgets/logmsg_impl.cpp:101
+#: rc.cpp:343 rc.cpp:716 ksvnwidgets/logmsg_impl.cpp:80
+#: ksvnwidgets/logmsg_impl.cpp:107
 #, no-c-format
 msgid "Action"
 msgstr "Akce"
 
-#: rc.cpp:343
+#: rc.cpp:346
 #, no-c-format
 msgid "Item"
 msgstr "Položka"
 
-#: rc.cpp:346
+#: rc.cpp:349
 #, no-c-format
 msgid "Copy from"
 msgstr "kopírovat z"
 
-#: rc.cpp:349
+#: rc.cpp:352
+#, no-c-format
+msgid "Contextmenu on item for more operations"
+msgstr ""
+
+#: rc.cpp:355 svnfrontend/svnlogdlgimp.cpp:483
 #, fuzzy, no-c-format
 msgid "Diff previous"
 msgstr "Revize"
 
-#: rc.cpp:353 svnfrontend/kdesvnfilelist.cpp:327
+#: rc.cpp:359 svnfrontend/kdesvnfilelist.cpp:346
 #, no-c-format
 msgid "Diff revisions"
 msgstr ""
 
-#: rc.cpp:357
+#: rc.cpp:363
 #, no-c-format
 msgid "Select second revision with right mouse button"
 msgstr ""
 
-#: rc.cpp:360
+#: rc.cpp:366
 #, no-c-format
 msgid "List entries"
 msgstr ""
 
-#: rc.cpp:364
+#: rc.cpp:370 svnfrontend/svnlogdlgimp.cpp:481
 #, no-c-format
 msgid "Annotate"
 msgstr ""
 
-#: rc.cpp:372
+#: rc.cpp:378
 #, no-c-format
 msgid "Load into folder:"
 msgstr ""
 
-#: rc.cpp:375 rc.cpp:387
+#: rc.cpp:381 rc.cpp:393
 #, no-c-format
 msgid "Path to load the dump into (see contexthelp)"
 msgstr ""
 
-#: rc.cpp:378 rc.cpp:390
+#: rc.cpp:384 rc.cpp:396
 #, no-c-format
 msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
 
-#: rc.cpp:381
+#: rc.cpp:387
 #, no-c-format
 msgid "Dump file:"
 msgstr ""
 
-#: rc.cpp:384
+#: rc.cpp:390
 #, no-c-format
 msgid "Load into repository:"
 msgstr ""
 
-#: rc.cpp:393
+#: rc.cpp:399
 #, no-c-format
 msgid "Uuid action"
 msgstr ""
 
-#: rc.cpp:396
+#: rc.cpp:402
 #, no-c-format
 msgid "How to handle UUIDs"
 msgstr ""
 
-#: rc.cpp:399
+#: rc.cpp:405
 #, no-c-format
 msgid ""
 "The repository's UUID will be updated iff the dumpstream contains a UUID and "
@@ -1010,450 +1019,455 @@ msgid ""
 "ignored."
 msgstr ""
 
-#: rc.cpp:406
+#: rc.cpp:412
 #, fuzzy, no-c-format
 msgid "Ignore"
 msgstr "Ig&norovat"
 
-#: rc.cpp:410 rc.cpp:566 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:120
+#: rc.cpp:416 rc.cpp:572 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:120
 #, no-c-format
 msgid "Force"
 msgstr "Vynutit"
 
-#: rc.cpp:414
+#: rc.cpp:420
 #, no-c-format
 msgid "Use pre-commit hook"
 msgstr ""
 
-#: rc.cpp:418
+#: rc.cpp:424
 #, no-c-format
 msgid "Use post-commit hook"
 msgstr ""
 
-#: rc.cpp:422
+#: rc.cpp:428
 #, no-c-format
 msgid "Destination folder:"
 msgstr "Cílový adresář:"
 
-#: rc.cpp:425
+#: rc.cpp:431
 #, no-c-format
 msgid "Repository to copy:"
 msgstr ""
 
-#: rc.cpp:428
+#: rc.cpp:434
 #, no-c-format
 msgid "Clean logs"
 msgstr "vyčistit záznamy"
 
-#: rc.cpp:432
+#: rc.cpp:438
 #, no-c-format
 msgid "Dump repo"
 msgstr ""
 
-#: rc.cpp:435
+#: rc.cpp:441
 #, no-c-format
 msgid "Repository to dump:"
 msgstr ""
 
-#: rc.cpp:438
+#: rc.cpp:444
 #, no-c-format
 msgid "Dump into:"
 msgstr ""
 
-#: rc.cpp:441
+#: rc.cpp:447
 #, no-c-format
 msgid "incremental Dump"
 msgstr ""
 
-#: rc.cpp:445
+#: rc.cpp:451
 #, no-c-format
 msgid "Use deltas"
 msgstr "Použít delty"
 
-#: rc.cpp:449
+#: rc.cpp:455
 #, fuzzy, no-c-format
 msgid "Dump revision range"
 msgstr "Strom záznamu revize"
 
-#: rc.cpp:453
+#: rc.cpp:459
 #, no-c-format
 msgid "End revision:"
 msgstr "Konečná revize:"
 
-#: rc.cpp:456
-#, no-c-format
-msgid "Start revison:"
+#: rc.cpp:462
+#, fuzzy, no-c-format
+msgid "Start revision:"
 msgstr "Počáteční revize:"
 
-#: rc.cpp:459
+#: rc.cpp:465
 #, no-c-format
 msgid "-1 for Head"
 msgstr ""
 
-#: rc.cpp:462
+#: rc.cpp:468
 #, no-c-format
 msgid "-1 for Start"
 msgstr ""
 
-#: rc.cpp:468
+#: rc.cpp:471
+#, no-c-format
+msgid "BlameDisplay"
+msgstr ""
+
+#: rc.cpp:474
 #, no-c-format
 msgid "Line"
 msgstr "Čára"
 
-#: rc.cpp:471
+#: rc.cpp:477
 #, fuzzy, no-c-format
 msgid "Revision"
 msgstr "Revize"
 
-#: rc.cpp:480
+#: rc.cpp:486
 #, no-c-format
 msgid "Content"
 msgstr ""
 
-#: rc.cpp:483
+#: rc.cpp:489
 #, no-c-format
 msgid "MergeSettings"
 msgstr ""
 
-#: rc.cpp:486
+#: rc.cpp:492
 #, no-c-format
 msgid "Source 1:"
 msgstr "Zdroj 1:"
 
-#: rc.cpp:489
+#: rc.cpp:495
 #, no-c-format
 msgid "Source 2:"
 msgstr "droj 2:"
 
-#: rc.cpp:492
+#: rc.cpp:498
 #, no-c-format
 msgid "Output to:"
 msgstr "Výstup do:"
 
-#: rc.cpp:495
+#: rc.cpp:501
 #, no-c-format
 msgid "Force delete on modified/unversioned"
 msgstr ""
 
-#: rc.cpp:499
+#: rc.cpp:505
 #, no-c-format
 msgid "Handle unrelated as related items"
 msgstr ""
 
-#: rc.cpp:502
+#: rc.cpp:508
 #, no-c-format
 msgid "Just dry run without modifications"
 msgstr ""
 
-#: rc.cpp:506 rc.cpp:741 svnfrontend/svnactions.cpp:1539
+#: rc.cpp:512 rc.cpp:747 svnfrontend/svnactions.cpp:1544
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:117
 #, no-c-format
 msgid "Recursive"
 msgstr "Rekurzivně"
 
-#: rc.cpp:510
+#: rc.cpp:516
 #, no-c-format
 msgid "Use external merge not subversions merge"
 msgstr ""
 
-#: rc.cpp:513
+#: rc.cpp:519
 #, no-c-format
 msgid "Edit property"
 msgstr "Upravit vlastnosti"
 
-#: rc.cpp:524
+#: rc.cpp:530
 #, no-c-format
 msgid "Property name:"
 msgstr "Název vlastnosti:"
 
-#: rc.cpp:527
+#: rc.cpp:533
 #, no-c-format
 msgid "Property value:"
 msgstr "Hodnota vlastnosti:"
 
-#: rc.cpp:532
+#: rc.cpp:538
 #, no-c-format
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 
-#: rc.cpp:535 svnfrontend/svnactions.cpp:1898 svnfrontend/svnactions.cpp:1912
+#: rc.cpp:541 svnfrontend/svnactions.cpp:1906 svnfrontend/svnactions.cpp:1920
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Kopírovat/přesunout"
 
-#: rc.cpp:538
+#: rc.cpp:544
 #, no-c-format
 msgid "<p align=\"right\">Rename</p>"
 msgstr ""
 
-#: rc.cpp:541
+#: rc.cpp:547
 #, no-c-format
 msgid "this long text"
 msgstr ""
 
-#: rc.cpp:544
+#: rc.cpp:550
 #, no-c-format
 msgid "to"
 msgstr "do"
 
-#: rc.cpp:547
+#: rc.cpp:553
 #, no-c-format
 msgid "/there/"
 msgstr ""
 
-#: rc.cpp:554
+#: rc.cpp:560
 #, no-c-format
 msgid "Checkout info"
 msgstr "Informace o stažení"
 
-#: rc.cpp:557
+#: rc.cpp:563
 #, no-c-format
 msgid "Select target directory:"
 msgstr "Cílový adresář:"
 
-#: rc.cpp:560
+#: rc.cpp:566
 #, no-c-format
 msgid "Enter URL:"
 msgstr "URL:"
 
-#: rc.cpp:563
+#: rc.cpp:569
 #, no-c-format
 msgid "Append source url name to subfolder"
 msgstr ""
 
-#: rc.cpp:570
+#: rc.cpp:576
 #, no-c-format
 msgid "Open after job"
 msgstr ""
 
-#: rc.cpp:573 svnfrontend/svnactions.cpp:1252
-#: svnfrontend/kdesvnfilelist.cpp:1918 svnfrontend/kdesvnfilelist.cpp:2015
-#: svnfrontend/kdesvnfilelist.cpp:2032 svnfrontend/kdesvnfilelist.cpp:2058
-#: svnfrontend/kdesvnfilelist.cpp:2512 svnfrontend/kdesvnfilelist.cpp:2554
+#: rc.cpp:579 svnfrontend/svnactions.cpp:1257
+#: svnfrontend/kdesvnfilelist.cpp:1945 svnfrontend/kdesvnfilelist.cpp:2042
+#: svnfrontend/kdesvnfilelist.cpp:2059 svnfrontend/kdesvnfilelist.cpp:2085
+#: svnfrontend/kdesvnfilelist.cpp:2577 svnfrontend/kdesvnfilelist.cpp:2619
 #, no-c-format
 msgid "Revisions"
 msgstr "Revize"
 
-#: rc.cpp:576 svnfrontend/fronthelpers/rangeinput_impl.cpp:169
+#: rc.cpp:582 svnfrontend/fronthelpers/rangeinput_impl.cpp:169
 #, no-c-format
 msgid "Start with revision"
 msgstr "začít s revizií"
 
-#: rc.cpp:579
+#: rc.cpp:585
 #, no-c-format
 msgid "N&umber"
 msgstr "&Císlo"
 
-#: rc.cpp:586
+#: rc.cpp:592
 #, no-c-format
 msgid "S&TART"
 msgstr "S&TART"
 
-#: rc.cpp:589 rc.cpp:611
+#: rc.cpp:595 rc.cpp:617
 #, no-c-format
 msgid "HEAD"
 msgstr "HEAD"
 
-#: rc.cpp:592 rc.cpp:614
+#: rc.cpp:598 rc.cpp:620
 #, no-c-format
 msgid "WORKING"
 msgstr ""
 
-#: rc.cpp:595 rc.cpp:617
+#: rc.cpp:601 rc.cpp:623
 #, no-c-format
 msgid "Select current working copy changes"
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:604
 #, no-c-format
 msgid "Stop with revision"
 msgstr ""
 
-#: rc.cpp:601
+#: rc.cpp:607
 #, no-c-format
 msgid "Number"
 msgstr "Číslo"
 
-#: rc.cpp:608
+#: rc.cpp:614
 #, no-c-format
 msgid "START"
 msgstr ""
 
-#: rc.cpp:623
+#: rc.cpp:629
 #, no-c-format
 msgid "Type of repository:"
 msgstr "Typ repository:"
 
-#: rc.cpp:626
+#: rc.cpp:632
 #, no-c-format
 msgid "FSFS"
 msgstr ""
 
-#: rc.cpp:629
+#: rc.cpp:635
 #, no-c-format
 msgid "BDB"
 msgstr ""
 
-#: rc.cpp:632
+#: rc.cpp:638
 #, no-c-format
 msgid "Select type of storage"
 msgstr ""
 
-#: rc.cpp:635
+#: rc.cpp:641
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr ""
 
-#: rc.cpp:638
+#: rc.cpp:644
 #, no-c-format
 msgid "Path to repository:"
 msgstr "Cesta k repository:"
 
-#: rc.cpp:641
+#: rc.cpp:647
 #, no-c-format
 msgid "Disable fsync at commit (BDB only)"
 msgstr ""
 
-#: rc.cpp:645
+#: rc.cpp:651
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
 msgstr ""
 
-#: rc.cpp:649
+#: rc.cpp:655
 #, no-c-format
 msgid "Create main folders"
 msgstr "Vytvořit hlavní složky"
 
-#: rc.cpp:653
+#: rc.cpp:659
 #, no-c-format
 msgid "Create trunk, tags and branches folder"
 msgstr ""
 
-#: rc.cpp:656
+#: rc.cpp:662
 #, no-c-format
 msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
 
-#: rc.cpp:659
+#: rc.cpp:665
 #, no-c-format
 msgid "Compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:662
+#: rc.cpp:668
 #, no-c-format
 msgid "Is created repository compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:665
+#: rc.cpp:671
 #, no-c-format
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only usefull when svnqt is running with subversion 1.4 or above."
 msgstr ""
 
-#: rc.cpp:668
+#: rc.cpp:674
 #, no-c-format
 msgid "Quick settings"
 msgstr "Rychlá nastavení"
 
-#: rc.cpp:677
+#: rc.cpp:683
 #, no-c-format
 msgid "Working copy"
 msgstr "Pracovní kopie"
 
-#: rc.cpp:680
+#: rc.cpp:686
 #, no-c-format
 msgid "Repository"
 msgstr "Repository"
 
-#: rc.cpp:686 rc.cpp:689 rc.cpp:692
+#: rc.cpp:692 rc.cpp:695 rc.cpp:698
 #, no-c-format
 msgid "Actions"
 msgstr "Akce"
 
-#: rc.cpp:701
+#: rc.cpp:707
 #, no-c-format
 msgid "Logmessage"
 msgstr ""
 
-#: rc.cpp:704
-#, fuzzy, no-c-format
-msgid "Select new items"
-msgstr "Smazané položky:"
-
-#: rc.cpp:707
-#, fuzzy, no-c-format
-msgid "Mark all new eg. not versioned items for add and commit."
-msgstr "Nalezeny neverzované položky."
-
 #: rc.cpp:710
-#, fuzzy, no-c-format
-msgid "Unselect new items"
-msgstr "Smazané položky:"
-
-#: rc.cpp:713
-#, fuzzy, no-c-format
-msgid "Unmark all unversioned items so them will ignored."
-msgstr "Nalezeny neverzované položky."
-
-#: rc.cpp:716
-#, fuzzy, no-c-format
-msgid "Diff highlighted item"
-msgstr "Smazané položky:"
-
-#: rc.cpp:719
-#, no-c-format
-msgid "Generates and display difference against repository of selected item"
-msgstr ""
-
-#: rc.cpp:722
 #, no-c-format
 msgid "Review affected items"
 msgstr ""
 
-#: rc.cpp:725
+#: rc.cpp:713
 #, no-c-format
 msgid "Entry"
 msgstr "Položka"
 
+#: rc.cpp:719
+#, fuzzy, no-c-format
+msgid "Select new items"
+msgstr "Smazané položky:"
+
+#: rc.cpp:722
+#, fuzzy, no-c-format
+msgid "Mark all new e.g. not versioned items for add and commit."
+msgstr "Nalezeny neverzované položky."
+
+#: rc.cpp:725
+#, fuzzy, no-c-format
+msgid "Unselect new items"
+msgstr "Smazané položky:"
+
+#: rc.cpp:728
+#, fuzzy, no-c-format
+msgid "Unmark all unversioned items so they will be ignored."
+msgstr "Nalezeny neverzované položky."
+
 #: rc.cpp:731
+#, fuzzy, no-c-format
+msgid "Diff highlighted item"
+msgstr "Smazané položky:"
+
+#: rc.cpp:734
+#, no-c-format
+msgid "Generates and display difference against repository of selected item"
+msgstr ""
+
+#: rc.cpp:737
 #, no-c-format
 msgid "Enter a log message"
 msgstr ""
 
-#: rc.cpp:734
+#: rc.cpp:740
 #, no-c-format
 msgid "Or insert one of the last:"
 msgstr ""
 
-#: rc.cpp:738
+#: rc.cpp:744
 #, no-c-format
 msgid "Last used log messages"
 msgstr "Poslední použité záznamy"
 
-#: rc.cpp:745
+#: rc.cpp:751
 #, no-c-format
 msgid "Authentication"
 msgstr "Autentizace"
 
-#: rc.cpp:748
+#: rc.cpp:754
 #, no-c-format
 msgid "Enter authentification info for"
 msgstr ""
 
-#: rc.cpp:751
+#: rc.cpp:757
 #, no-c-format
 msgid "Password:"
 msgstr "Heslo:"
 
-#: rc.cpp:754
+#: rc.cpp:760
 #, no-c-format
 msgid "Username:"
 msgstr "Uživatelské jméno:"
 
-#: rc.cpp:757
+#: rc.cpp:763
 #, no-c-format
 msgid "Store password"
 msgstr ""
@@ -1494,24 +1508,33 @@ msgstr ""
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
 
-#: kdesvn.cpp:140
+#: kdesvn.cpp:127
+#, fuzzy
+msgid "Info about kdesvn part"
+msgstr "&O kdesvn part"
+
+#: kdesvn.cpp:129
+msgid "Shows info about the kdesvn plugin not the standalone app."
+msgstr ""
+
+#: kdesvn.cpp:143
 msgid "Could not find our part."
 msgstr "Nepodařilo se nalézt naši součást."
 
-#: kdesvn.cpp:172
+#: kdesvn.cpp:175
 #, fuzzy
 msgid "Could not open url %1"
 msgstr "Nelze otevřít repository"
 
-#: kdesvn.cpp:194
+#: kdesvn.cpp:197
 msgid "Load last opened URL on start"
 msgstr "Nahrát při startu naposledy otevřené URL"
 
-#: kdesvn.cpp:196
+#: kdesvn.cpp:199
 msgid "Reload last opened url if no one is given on commandline"
 msgstr ""
 
-#: kdesvn.cpp:276
+#: kdesvn.cpp:279
 msgid "Ready"
 msgstr "Připraven"
 
@@ -1581,7 +1604,7 @@ msgstr ""
 
 #: svnfrontend/commandexec.cpp:215 svnfrontend/commandexec.cpp:341
 #: svnfrontend/graphtree/revgraphview.cpp:944
-#: svnfrontend/kdesvnfilelist.cpp:877
+#: svnfrontend/kdesvnfilelist.cpp:900
 msgid "SVN Error"
 msgstr ""
 
@@ -1601,59 +1624,64 @@ msgstr ""
 msgid "Switch only on working copies!"
 msgstr ""
 
-#: svnfrontend/svnlogdlgimp.cpp:126
+#: svnfrontend/svnlogdlgimp.cpp:155
 msgid "%1 at revision %2"
 msgstr ""
 
-#: svnfrontend/svnitem.cpp:378
+#: svnfrontend/svnlogdlgimp.cpp:234
+#, fuzzy
+msgid "SVN Log of %1"
+msgstr "Záznam SVN"
+
+#: svnfrontend/svnitem.cpp:376
 msgid "Added in repository"
 msgstr ""
 
-#: svnfrontend/svnitem.cpp:380
+#: svnfrontend/svnitem.cpp:378
 msgid "Needs update"
 msgstr ""
 
-#: svnfrontend/svnitem.cpp:385
+#: svnfrontend/svnitem.cpp:383
 msgid "Locally modified"
 msgstr "Místně změněný"
 
-#: svnfrontend/svnitem.cpp:388
+#: svnfrontend/svnitem.cpp:386
 msgid "Locally added"
 msgstr "Místně přidaný"
 
-#: svnfrontend/svnitem.cpp:391
+#: svnfrontend/svnitem.cpp:389
 msgid "Missing"
 msgstr "Chybí"
 
-#: svnfrontend/svnitem.cpp:394 svnfrontend/ccontextlistener.cpp:67
+#: svnfrontend/svnitem.cpp:392 svnfrontend/ccontextlistener.cpp:67
 msgid "Deleted"
 msgstr "Smazáno"
 
-#: svnfrontend/svnitem.cpp:397
+#: svnfrontend/svnitem.cpp:395
 msgid "Replaced"
 msgstr ""
 
-#: svnfrontend/svnitem.cpp:400
+#: svnfrontend/svnitem.cpp:398
 msgid "Ignored"
 msgstr "Ignorováno"
 
-#: svnfrontend/svnitem.cpp:403
+#: svnfrontend/svnitem.cpp:401
 msgid "External"
 msgstr "Externí"
 
-#: svnfrontend/svnitem.cpp:406
+#: svnfrontend/svnitem.cpp:404
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: svnfrontend/svnitem.cpp:409
+#: svnfrontend/svnitem.cpp:407
 msgid "Merged"
 msgstr "SLoučené"
 
-#: svnfrontend/svnitem.cpp:412
+#: svnfrontend/svnitem.cpp:410
 msgid "Incomplete"
 msgstr "Nekompletní"
 
-#: svnfrontend/svnitem.cpp:420
+#: svnfrontend/svnitem.cpp:418
 msgid "Property modified"
 msgstr "Vlastnosti změněny"
 
@@ -1681,7 +1709,7 @@ msgstr ""
 msgid "Restore missing"
 msgstr "Obnovit chybějící"
 
-#: svnfrontend/ccontextlistener.cpp:63 svnfrontend/svnactions.cpp:1553
+#: svnfrontend/ccontextlistener.cpp:63 svnfrontend/svnactions.cpp:1558
 msgid "Revert"
 msgstr "Vrátit zpět"
 
@@ -1799,31 +1827,31 @@ msgstr "Certifikát vypršel."
 msgid "The certificate has an unknown error."
 msgstr ""
 
-#: svnfrontend/blamedisplay_impl.cpp:273
+#: svnfrontend/blamedisplay_impl.cpp:284
 #, fuzzy
 msgid "Show line"
 msgstr "Zobrazit informace o souboru"
 
-#: svnfrontend/blamedisplay_impl.cpp:273
+#: svnfrontend/blamedisplay_impl.cpp:284
 #, fuzzy
 msgid "Show line number"
 msgstr "Zobrazit informace o souboru"
 
-#: svnfrontend/blamedisplay_impl.cpp:298 svnfrontend/blamedisplay_impl.cpp:363
+#: svnfrontend/blamedisplay_impl.cpp:309 svnfrontend/blamedisplay_impl.cpp:376
 #, fuzzy
 msgid "Log message for revision"
 msgstr "Sloučit dvě revize"
 
-#: svnfrontend/blamedisplay_impl.cpp:326
+#: svnfrontend/blamedisplay_impl.cpp:339
 #, fuzzy
 msgid "Logmessage for revision %1"
 msgstr "Aktualizováno na revizi %1."
 
-#: svnfrontend/blamedisplay_impl.cpp:362
+#: svnfrontend/blamedisplay_impl.cpp:375
 msgid "Blame %1"
 msgstr ""
 
-#: svnfrontend/blamedisplay_impl.cpp:363
+#: svnfrontend/blamedisplay_impl.cpp:376
 msgid "Goto line"
 msgstr ""
 
@@ -1869,7 +1897,7 @@ msgid "Could not start process \"%1\"."
 msgstr "Nelze spustit proces \""
 
 #: svnfrontend/graphtree/revgraphview.cpp:543
-msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log:%4</html>"
+msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
 msgstr ""
 
 #: svnfrontend/graphtree/revgraphview.cpp:551
@@ -1924,732 +1952,732 @@ msgstr ""
 msgid "Save tree as png"
 msgstr ""
 
-#: svnfrontend/graphtree/revisiontree.cpp:91 svnfrontend/svnactions.cpp:237
+#: svnfrontend/graphtree/revisiontree.cpp:93 svnfrontend/svnactions.cpp:238
 msgid "Getting logs - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/graphtree/revisiontree.cpp:95
+#: svnfrontend/graphtree/revisiontree.cpp:97
 msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
 
-#: svnfrontend/graphtree/revisiontree.cpp:123
+#: svnfrontend/graphtree/revisiontree.cpp:125
 msgid "Scanning logs"
 msgstr ""
 
-#: svnfrontend/graphtree/revisiontree.cpp:123
+#: svnfrontend/graphtree/revisiontree.cpp:125
 msgid "Scanning the logs for %1"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:150
+#: svnfrontend/svnactions.cpp:151
 msgid "Finished"
 msgstr "Hotovo"
 
-#: svnfrontend/svnactions.cpp:245
+#: svnfrontend/svnactions.cpp:246
 msgid "Got no logs"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:311
+#: svnfrontend/svnactions.cpp:312
 msgid "Got no info."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:328
+#: svnfrontend/svnactions.cpp:329
 msgid "History of %1"
 msgstr "Historie %1"
 
-#: svnfrontend/svnactions.cpp:391
+#: svnfrontend/svnactions.cpp:393
 msgid "Annotate lines - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:399
+#: svnfrontend/svnactions.cpp:401
 msgid "Got no annotate"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:416 svnfrontend/svnactions.cpp:439
+#: svnfrontend/svnactions.cpp:419 svnfrontend/svnactions.cpp:443
 msgid "Getting content - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:423 svnfrontend/svnactions.cpp:448
+#: svnfrontend/svnactions.cpp:426 svnfrontend/svnactions.cpp:452
 msgid "Error getting content"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:486
+#: svnfrontend/svnactions.cpp:490
 msgid "Content of %1"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:497
+#: svnfrontend/svnactions.cpp:501
 msgid "Got no content."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:519 svnfrontend/kdesvnfilelist.cpp:246
+#: svnfrontend/svnactions.cpp:523 svnfrontend/kdesvnfilelist.cpp:265
 msgid "New folder"
 msgstr "Nová složka"
 
-#: svnfrontend/svnactions.cpp:519
+#: svnfrontend/svnactions.cpp:523
 msgid "Enter folder name:"
 msgstr "Zadejte název složky:"
 
-#: svnfrontend/svnactions.cpp:558
+#: svnfrontend/svnactions.cpp:562
 msgid "Retrieving infos - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:586 svnfrontend/kdesvnfilelist.cpp:163
+#: svnfrontend/svnactions.cpp:591 svnfrontend/kdesvnfilelist.cpp:181
 msgid "Name"
 msgstr "Název"
 
-#: svnfrontend/svnactions.cpp:589
+#: svnfrontend/svnactions.cpp:594
 msgid "URL"
 msgstr "URL"
 
-#: svnfrontend/svnactions.cpp:591
+#: svnfrontend/svnactions.cpp:596
 msgid "Canonical repository url"
 msgstr "Kanonické URL repository"
 
-#: svnfrontend/svnactions.cpp:594
+#: svnfrontend/svnactions.cpp:599
 msgid "Checksum"
 msgstr "Kontrolní součet"
 
-#: svnfrontend/svnactions.cpp:597
+#: svnfrontend/svnactions.cpp:602
 msgid "Type"
 msgstr "Typ"
 
-#: svnfrontend/svnactions.cpp:600
+#: svnfrontend/svnactions.cpp:605
 msgid "Absent"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:606
+#: svnfrontend/svnactions.cpp:611
 msgid "Folder"
 msgstr "Složka"
 
-#: svnfrontend/svnactions.cpp:610 svnfrontend/svnactions.cpp:630
+#: svnfrontend/svnactions.cpp:615 svnfrontend/svnactions.cpp:635
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: svnfrontend/svnactions.cpp:615
+#: svnfrontend/svnactions.cpp:620
 msgid "Schedule"
 msgstr "Rozvrh"
 
-#: svnfrontend/svnactions.cpp:618
+#: svnfrontend/svnactions.cpp:623
 msgid "Normal"
 msgstr "Normální"
 
-#: svnfrontend/svnactions.cpp:621
+#: svnfrontend/svnactions.cpp:626
 msgid "Addition"
 msgstr "Přidávání"
 
-#: svnfrontend/svnactions.cpp:624
+#: svnfrontend/svnactions.cpp:629
 msgid "Deletion"
 msgstr "Smazání"
 
-#: svnfrontend/svnactions.cpp:634
+#: svnfrontend/svnactions.cpp:639
 msgid "UUID"
 msgstr "UUID"
 
-#: svnfrontend/svnactions.cpp:636 svnfrontend/kdesvnfilelist.cpp:166
+#: svnfrontend/svnactions.cpp:641 svnfrontend/kdesvnfilelist.cpp:184
 msgid "Last author"
 msgstr "Poslední autor"
 
-#: svnfrontend/svnactions.cpp:638
+#: svnfrontend/svnactions.cpp:643
 msgid "Last committed"
 msgstr "Poslední odeslání"
 
-#: svnfrontend/svnactions.cpp:640
+#: svnfrontend/svnactions.cpp:645
 msgid "Last revision"
 msgstr "Poslední revize"
 
-#: svnfrontend/svnactions.cpp:642
+#: svnfrontend/svnactions.cpp:647
 msgid "Content last changed"
 msgstr "Poslední změna obsahu"
 
-#: svnfrontend/svnactions.cpp:646
+#: svnfrontend/svnactions.cpp:651
 msgid "Property last changed"
 msgstr "Poslední změna vlastností"
 
-#: svnfrontend/svnactions.cpp:649
+#: svnfrontend/svnactions.cpp:654
 msgid "New version of conflicted file"
 msgstr "Nová verze souboru v konfliktu"
 
-#: svnfrontend/svnactions.cpp:652
+#: svnfrontend/svnactions.cpp:657
 msgid "Old version of conflicted file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:655
+#: svnfrontend/svnactions.cpp:660
 msgid "Working version of conflicted file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:659
+#: svnfrontend/svnactions.cpp:664
 msgid "Property reject file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:664
+#: svnfrontend/svnactions.cpp:669
 msgid "Copy from URL"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:667 svnfrontend/svnactions.cpp:677
+#: svnfrontend/svnactions.cpp:672 svnfrontend/svnactions.cpp:682
 msgid "Lock token"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:668 svnfrontend/svnactions.cpp:678
+#: svnfrontend/svnactions.cpp:673 svnfrontend/svnactions.cpp:683
 msgid "Owner"
 msgstr "Vlastník"
 
-#: svnfrontend/svnactions.cpp:669 svnfrontend/svnactions.cpp:679
+#: svnfrontend/svnactions.cpp:674 svnfrontend/svnactions.cpp:684
 msgid "Locked on"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:672 svnfrontend/svnactions.cpp:682
+#: svnfrontend/svnactions.cpp:677 svnfrontend/svnactions.cpp:687
 msgid "Lock comment"
 msgstr "Komentář uzamčení"
 
-#: svnfrontend/svnactions.cpp:706 svnfrontend/svnactions.cpp:727
+#: svnfrontend/svnactions.cpp:711 svnfrontend/svnactions.cpp:732
 msgid "Infolist"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:829 svnfrontend/svnactions.cpp:1982
+#: svnfrontend/svnactions.cpp:834 svnfrontend/svnactions.cpp:1990
 msgid "Status / List"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:829 svnfrontend/svnactions.cpp:1982
+#: svnfrontend/svnactions.cpp:834 svnfrontend/svnactions.cpp:1990
 msgid "Creating list / check status"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:845 svnfrontend/kdesvnfilelist.cpp:292
+#: svnfrontend/svnactions.cpp:850 svnfrontend/kdesvnfilelist.cpp:311
 msgid "Commit"
 msgstr "Odeslat"
 
-#: svnfrontend/svnactions.cpp:848
+#: svnfrontend/svnactions.cpp:853
 msgid "Add and Commit"
 msgstr "Přidat a odeslat"
 
-#: svnfrontend/svnactions.cpp:879
+#: svnfrontend/svnactions.cpp:884
 #, fuzzy
 msgid "Commiting"
 msgstr "Odeslat"
 
-#: svnfrontend/svnactions.cpp:880
+#: svnfrontend/svnactions.cpp:885
 msgid "Commiting - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:942
+#: svnfrontend/svnactions.cpp:947
 msgid "Download - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1050
+#: svnfrontend/svnactions.cpp:1055
 msgid "Diff-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1076
+#: svnfrontend/svnactions.cpp:1081
 msgid "Diffing - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1088 svnfrontend/svnactions.cpp:1123
+#: svnfrontend/svnactions.cpp:1093 svnfrontend/svnactions.cpp:1128
 msgid "No difference to display"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1147
+#: svnfrontend/svnactions.cpp:1152
 msgid "\"Kompare\" could not started."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1180
+#: svnfrontend/svnactions.cpp:1185
 msgid "Display-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1206
+#: svnfrontend/svnactions.cpp:1211
 msgid "Making update - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1300
+#: svnfrontend/svnactions.cpp:1305
 msgid "Which files or directories should I add?"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1309
+#: svnfrontend/svnactions.cpp:1314
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1355 svnfrontend/kdesvnfilelist.cpp:1768
+#: svnfrontend/svnactions.cpp:1360 svnfrontend/kdesvnfilelist.cpp:1795
 msgid "Really delete these entries?"
 msgstr "Skutečně zmazat tyto položky?"
 
-#: svnfrontend/svnactions.cpp:1355 svnfrontend/kdesvnfilelist.cpp:1768
+#: svnfrontend/svnactions.cpp:1360 svnfrontend/kdesvnfilelist.cpp:1795
 msgid "Delete from repository"
 msgstr "Smazat z repository"
 
-#: svnfrontend/svnactions.cpp:1386
+#: svnfrontend/svnactions.cpp:1391
 msgid "Export repository"
 msgstr "Exportovat repository"
 
-#: svnfrontend/svnactions.cpp:1386 svnfrontend/svnactions.cpp:1429
-#: svnfrontend/kdesvnfilelist.cpp:321
+#: svnfrontend/svnactions.cpp:1391 svnfrontend/svnactions.cpp:1434
+#: svnfrontend/kdesvnfilelist.cpp:340
 msgid "Checkout a repository"
 msgstr "Stáhnout repository"
 
-#: svnfrontend/svnactions.cpp:1414
+#: svnfrontend/svnactions.cpp:1419
 msgid "Exporting a file?"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1414
+#: svnfrontend/svnactions.cpp:1419
 msgid "Checking out a file?"
 msgstr "Získat soubor?"
 
-#: svnfrontend/svnactions.cpp:1429 svnfrontend/kdesvnfilelist.cpp:323
+#: svnfrontend/svnactions.cpp:1434 svnfrontend/kdesvnfilelist.cpp:342
 msgid "Export a repository"
 msgstr "Exportovat repository"
 
-#: svnfrontend/svnactions.cpp:1470
+#: svnfrontend/svnactions.cpp:1475
 msgid "Checkout"
 msgstr "Stáhnout"
 
-#: svnfrontend/svnactions.cpp:1470
+#: svnfrontend/svnactions.cpp:1475
 msgid "Exporting"
 msgstr "Exportuji"
 
-#: svnfrontend/svnactions.cpp:1470
+#: svnfrontend/svnactions.cpp:1475
 msgid "Checking out"
 msgstr "Stahuji"
 
-#: svnfrontend/svnactions.cpp:1501
+#: svnfrontend/svnactions.cpp:1506
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1531
+#: svnfrontend/svnactions.cpp:1536
 msgid "Revert entries"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1539
+#: svnfrontend/svnactions.cpp:1544
 msgid "Really revert these entries to pristine state?"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1553
+#: svnfrontend/svnactions.cpp:1558
 msgid "Reverting items"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1579 svnfrontend/svnactions.cpp:1646
+#: svnfrontend/svnactions.cpp:1584 svnfrontend/svnactions.cpp:1651
 msgid "Switch url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1579
+#: svnfrontend/svnactions.cpp:1584
 msgid "Switching url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1604
+#: svnfrontend/svnactions.cpp:1609
 msgid "Relocate url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1604
+#: svnfrontend/svnactions.cpp:1609
 msgid "Relocate repository to new URL"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1625
+#: svnfrontend/svnactions.cpp:1630
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1632
+#: svnfrontend/svnactions.cpp:1637
 msgid "Error getting entry to switch"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1668 svnfrontend/kdesvnfilelist.cpp:262
+#: svnfrontend/svnactions.cpp:1673 svnfrontend/kdesvnfilelist.cpp:281
 msgid "Cleanup"
 msgstr "Vyčistit"
 
-#: svnfrontend/svnactions.cpp:1668
+#: svnfrontend/svnactions.cpp:1673
 msgid "Cleaning up folder"
 msgstr "Vyčistit složku"
 
-#: svnfrontend/svnactions.cpp:1682
+#: svnfrontend/svnactions.cpp:1687
 msgid "Resolve"
 msgstr "Vyřešit"
 
-#: svnfrontend/svnactions.cpp:1682
+#: svnfrontend/svnactions.cpp:1687
 msgid "Marking resolved"
 msgstr "Nastavuji jako vyřešené"
 
-#: svnfrontend/svnactions.cpp:1696
+#: svnfrontend/svnactions.cpp:1701
 msgid "Importing items"
 msgstr "Importuji položky"
 
-#: svnfrontend/svnactions.cpp:1720
+#: svnfrontend/svnactions.cpp:1725
 #, fuzzy
 msgid "Nothing to merge."
 msgstr "Nic k odeslání."
 
-#: svnfrontend/svnactions.cpp:1724
+#: svnfrontend/svnactions.cpp:1729
 #, fuzzy
 msgid "No destination to merge."
 msgstr "Cílový adresář:"
 
-#: svnfrontend/svnactions.cpp:1730
+#: svnfrontend/svnactions.cpp:1735
 msgid "Target for merge must be local!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1749
+#: svnfrontend/svnactions.cpp:1754
 msgid "Both sources must be same type!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1757
+#: svnfrontend/svnactions.cpp:1762
 msgid "Target for merge must same type like sources!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1823
+#: svnfrontend/svnactions.cpp:1828
 msgid "Merge-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1845 svnfrontend/kdesvnfilelist.cpp:1510
+#: svnfrontend/svnactions.cpp:1850 svnfrontend/kdesvnfilelist.cpp:1537
 msgid "Merge"
 msgstr "Sloučit"
 
-#: svnfrontend/svnactions.cpp:1845
+#: svnfrontend/svnactions.cpp:1850
 #, fuzzy
 msgid "Merging items"
 msgstr "Importuji položky"
 
-#: svnfrontend/svnactions.cpp:1866
+#: svnfrontend/svnactions.cpp:1871
 msgid "Moving/Rename item "
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1880
+#: svnfrontend/svnactions.cpp:1885
 msgid "Moving entries"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1898 svnfrontend/svnactions.cpp:1912
+#: svnfrontend/svnactions.cpp:1906 svnfrontend/svnactions.cpp:1920
 msgid "Copy or Moving entries"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2009
+#: svnfrontend/svnactions.cpp:2017
 msgid "No unversioned items found."
 msgstr "Nalezeny neverzované položky."
 
-#: svnfrontend/svnactions.cpp:2012
+#: svnfrontend/svnactions.cpp:2020
 msgid "Add unversioned items"
 msgstr "Vložit neverzované položky"
 
-#: svnfrontend/svnactions.cpp:2114
+#: svnfrontend/svnactions.cpp:2122
 msgid "Still checking for updates"
 msgstr "Stále se stahují aktualizace"
 
-#: svnfrontend/svnactions.cpp:2135
+#: svnfrontend/svnactions.cpp:2143
 msgid "Checking for updates finished"
 msgstr "Stahování aktualizací dokončeno"
 
-#: svnfrontend/svnactions.cpp:2137
+#: svnfrontend/svnactions.cpp:2145
 msgid "There are new items in repository"
 msgstr "V repository jsou nové položky"
 
-#: svnfrontend/svnactions.cpp:2210
+#: svnfrontend/svnactions.cpp:2217
 msgid "Checking for updates started in background"
 msgstr "Na pozadí bylo spuštěno stahování aktualizací"
 
-#: svnfrontend/kdesvnfilelist.cpp:164
+#: svnfrontend/kdesvnfilelist.cpp:182
 msgid "Status"
 msgstr "Stav"
 
-#: svnfrontend/kdesvnfilelist.cpp:165
+#: svnfrontend/kdesvnfilelist.cpp:183
 msgid "Last changed Revision"
 msgstr "Revize poslední změny"
 
-#: svnfrontend/kdesvnfilelist.cpp:167
+#: svnfrontend/kdesvnfilelist.cpp:185
 msgid "Last change date"
 msgstr "Datum poslední změny"
 
-#: svnfrontend/kdesvnfilelist.cpp:168
+#: svnfrontend/kdesvnfilelist.cpp:186
 msgid "Locked by"
 msgstr "Uzamknul"
 
-#: svnfrontend/kdesvnfilelist.cpp:209
+#: svnfrontend/kdesvnfilelist.cpp:228
 msgid "Log..."
 msgstr "Záznam..."
 
-#: svnfrontend/kdesvnfilelist.cpp:210
+#: svnfrontend/kdesvnfilelist.cpp:229
 msgid "Full Log"
 msgstr "Celý záznam"
 
-#: svnfrontend/kdesvnfilelist.cpp:211
+#: svnfrontend/kdesvnfilelist.cpp:230
 msgid "Full revision tree"
 msgstr "Strom záznamu revize"
 
-#: svnfrontend/kdesvnfilelist.cpp:212
+#: svnfrontend/kdesvnfilelist.cpp:231
 msgid "Partial revision tree"
 msgstr "Částečný strom revize"
 
-#: svnfrontend/kdesvnfilelist.cpp:217
+#: svnfrontend/kdesvnfilelist.cpp:236
 msgid "Details"
 msgstr "Detaily"
 
-#: svnfrontend/kdesvnfilelist.cpp:223
+#: svnfrontend/kdesvnfilelist.cpp:242
 msgid "Check for updates"
 msgstr "Stažení aktualizací"
 
-#: svnfrontend/kdesvnfilelist.cpp:224
+#: svnfrontend/kdesvnfilelist.cpp:243
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:227
+#: svnfrontend/kdesvnfilelist.cpp:246
 msgid "Blame"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:229 svnfrontend/kdesvnfilelist.cpp:232
+#: svnfrontend/kdesvnfilelist.cpp:248 svnfrontend/kdesvnfilelist.cpp:251
 msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
 "Výstup obsahu zadaných souborů nebo URL s informace o revizi a autorovi."
 
-#: svnfrontend/kdesvnfilelist.cpp:230
+#: svnfrontend/kdesvnfilelist.cpp:249
 msgid "Blame range"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:233
+#: svnfrontend/kdesvnfilelist.cpp:252
 msgid "Cat head"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:235
+#: svnfrontend/kdesvnfilelist.cpp:254
 msgid "Output the content of specified files or URLs."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:236
+#: svnfrontend/kdesvnfilelist.cpp:255
 msgid "Cat revision..."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:238
+#: svnfrontend/kdesvnfilelist.cpp:257
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:240
+#: svnfrontend/kdesvnfilelist.cpp:259
 msgid "Lock current items"
 msgstr "Uzamknout"
 
-#: svnfrontend/kdesvnfilelist.cpp:242
+#: svnfrontend/kdesvnfilelist.cpp:261
 msgid "Unlock current items"
 msgstr "Odemknout"
 
-#: svnfrontend/kdesvnfilelist.cpp:248
+#: svnfrontend/kdesvnfilelist.cpp:267
 msgid "Switch repository"
 msgstr "Přepnout repository"
 
-#: svnfrontend/kdesvnfilelist.cpp:250
+#: svnfrontend/kdesvnfilelist.cpp:269
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:251
+#: svnfrontend/kdesvnfilelist.cpp:270
 msgid "Relocate current working copy url"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:253
+#: svnfrontend/kdesvnfilelist.cpp:272
 msgid "Relocate url of current working copy path to other url"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:254
+#: svnfrontend/kdesvnfilelist.cpp:273
 msgid "Check for unversioned items"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:256
+#: svnfrontend/kdesvnfilelist.cpp:275
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:258
+#: svnfrontend/kdesvnfilelist.cpp:277
 msgid "Open repository of working copy"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:260
+#: svnfrontend/kdesvnfilelist.cpp:279
 msgid "Opens the repository the current working copy was checked out from"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:264
+#: svnfrontend/kdesvnfilelist.cpp:283
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:265
+#: svnfrontend/kdesvnfilelist.cpp:284
 msgid "Import folders into current"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:267
+#: svnfrontend/kdesvnfilelist.cpp:286
 msgid "Import folder content into current url"
 msgstr "Importovat obsah složky do aktuálního URL"
 
-#: svnfrontend/kdesvnfilelist.cpp:271
+#: svnfrontend/kdesvnfilelist.cpp:290
 msgid "Add selected files/dirs"
 msgstr "Přidání zvolených souborů nebo adresářů"
 
-#: svnfrontend/kdesvnfilelist.cpp:273
+#: svnfrontend/kdesvnfilelist.cpp:292
 msgid "Adding selected files and/or directories to repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:276
+#: svnfrontend/kdesvnfilelist.cpp:295
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
 msgstr ""
 "Přidání zvolených souborů anebo adresářů včetně podsložek do repository"
 
-#: svnfrontend/kdesvnfilelist.cpp:278
+#: svnfrontend/kdesvnfilelist.cpp:297
 msgid "Delete selected files/dirs"
 msgstr "Smazat zvolené soubory nebo adresáře"
 
-#: svnfrontend/kdesvnfilelist.cpp:280
+#: svnfrontend/kdesvnfilelist.cpp:299
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Smazání zvolených souborů anebo adresářů z repository"
 
-#: svnfrontend/kdesvnfilelist.cpp:281
+#: svnfrontend/kdesvnfilelist.cpp:300
 msgid "Revert current changes"
 msgstr "Odvolat aktuální změny"
 
-#: svnfrontend/kdesvnfilelist.cpp:283
+#: svnfrontend/kdesvnfilelist.cpp:302
 msgid "Resolve recursive"
 msgstr "Vyřešit rekurzivně"
 
-#: svnfrontend/kdesvnfilelist.cpp:285
+#: svnfrontend/kdesvnfilelist.cpp:304
 msgid "Marking files or dirs resolved"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:286
+#: svnfrontend/kdesvnfilelist.cpp:305
 msgid "Ignore/Unignore current item"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:288
+#: svnfrontend/kdesvnfilelist.cpp:307
 msgid "Update to head"
 msgstr "Aktualizovat na head"
 
-#: svnfrontend/kdesvnfilelist.cpp:290
+#: svnfrontend/kdesvnfilelist.cpp:309
 msgid "Update to revision..."
 msgstr "Aktualizovat na revizi..."
 
-#: svnfrontend/kdesvnfilelist.cpp:295
+#: svnfrontend/kdesvnfilelist.cpp:314
 msgid "Diff local changes"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:297
+#: svnfrontend/kdesvnfilelist.cpp:316
 msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:299
+#: svnfrontend/kdesvnfilelist.cpp:318
 msgid "Diff against HEAD"
 msgstr "Diff proti HEAD"
 
-#: svnfrontend/kdesvnfilelist.cpp:301
+#: svnfrontend/kdesvnfilelist.cpp:320
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:304
+#: svnfrontend/kdesvnfilelist.cpp:323
 msgid "Merge two revisions"
 msgstr "Sloučit dvě revize"
 
-#: svnfrontend/kdesvnfilelist.cpp:306
+#: svnfrontend/kdesvnfilelist.cpp:325
 #, fuzzy
 msgid "Merge two revisions of this entry into itself"
 msgstr "Sloučit dvě revize položky"
 
-#: svnfrontend/kdesvnfilelist.cpp:308
+#: svnfrontend/kdesvnfilelist.cpp:327
 msgid "Merge..."
 msgstr "Sloučit..."
 
-#: svnfrontend/kdesvnfilelist.cpp:311 svnfrontend/kdesvnfilelist.cpp:1298
+#: svnfrontend/kdesvnfilelist.cpp:330 svnfrontend/kdesvnfilelist.cpp:1325
 msgid "Open With..."
 msgstr "Otevřít pomocí..."
 
-#: svnfrontend/kdesvnfilelist.cpp:314
+#: svnfrontend/kdesvnfilelist.cpp:333
 msgid "Checkout current repository path"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:316
+#: svnfrontend/kdesvnfilelist.cpp:335
 msgid "Export current repository path"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:318
+#: svnfrontend/kdesvnfilelist.cpp:337
 msgid "Select browse revision"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:325
+#: svnfrontend/kdesvnfilelist.cpp:344
 msgid "Refresh view"
 msgstr "Obnovit pohled"
 
-#: svnfrontend/kdesvnfilelist.cpp:932
+#: svnfrontend/kdesvnfilelist.cpp:955
 msgid "Failed: %1 %2"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:993
+#: svnfrontend/kdesvnfilelist.cpp:1016
 msgid "Cannot import into multiple targets!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1009
+#: svnfrontend/kdesvnfilelist.cpp:1032
 msgid "Cannot import into remote targets!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1028 svnfrontend/kdesvnfilelist.cpp:1032
+#: svnfrontend/kdesvnfilelist.cpp:1051 svnfrontend/kdesvnfilelist.cpp:1055
 msgid "Import log"
 msgstr "Záznam importu"
 
-#: svnfrontend/kdesvnfilelist.cpp:1640
+#: svnfrontend/kdesvnfilelist.cpp:1667
 msgid "Move Here"
 msgstr "Přesunout sem"
 
-#: svnfrontend/kdesvnfilelist.cpp:1641
+#: svnfrontend/kdesvnfilelist.cpp:1668
 msgid "Copy Here"
 msgstr "Kopírovat sem"
 
-#: svnfrontend/kdesvnfilelist.cpp:1747
+#: svnfrontend/kdesvnfilelist.cpp:1774
 msgid "Nothing selected for delete"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1806
+#: svnfrontend/kdesvnfilelist.cpp:1833
 msgid "Please wait until job is finished"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1826
+#: svnfrontend/kdesvnfilelist.cpp:1853
 msgid "Nothing selected for lock"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1831
+#: svnfrontend/kdesvnfilelist.cpp:1858
 msgid "Lock message"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1834
+#: svnfrontend/kdesvnfilelist.cpp:1861
 msgid "Steal lock?"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1865
+#: svnfrontend/kdesvnfilelist.cpp:1892
 msgid "Nothing selected for unlock"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1868
+#: svnfrontend/kdesvnfilelist.cpp:1895
 msgid "Break lock or ignore missing locks?"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1868
+#: svnfrontend/kdesvnfilelist.cpp:1895
 msgid "Unlocking items"
 msgstr "Odemykám položky"
 
-#: svnfrontend/kdesvnfilelist.cpp:1969
+#: svnfrontend/kdesvnfilelist.cpp:1996
 msgid "May not make subdirs of a file"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1993
+#: svnfrontend/kdesvnfilelist.cpp:2020
 msgid "Automatic generated base layout by kdesvn"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2345
+#: svnfrontend/kdesvnfilelist.cpp:2407
 msgid "Error getting entry to relocate"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2352
+#: svnfrontend/kdesvnfilelist.cpp:2414
 msgid "Relocate path %1"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2482
+#: svnfrontend/kdesvnfilelist.cpp:2547
 msgid "Only in working copy possible."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2486
+#: svnfrontend/kdesvnfilelist.cpp:2551
 msgid "Only on single folder possible"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2491
+#: svnfrontend/kdesvnfilelist.cpp:2556
 msgid "Sorry - internal error!"
 msgstr "Došlo k interní chybě!"
 
@@ -2755,11 +2783,11 @@ msgstr ""
 msgid "Enter merge range"
 msgstr "Zadejte rozsah sloučení"
 
-#: svnfrontend/stopdlg.cpp:173
+#: svnfrontend/stopdlg.cpp:185
 msgid "%1 of %2"
 msgstr ""
 
-#: svnfrontend/stopdlg.cpp:177 svnfrontend/tcontextlistener.cpp:159
+#: svnfrontend/stopdlg.cpp:189 svnfrontend/tcontextlistener.cpp:159
 msgid "%1 transferred."
 msgstr ""
 
@@ -2771,16 +2799,16 @@ msgstr "Volba revize"
 msgid "%1 of %2 transferred."
 msgstr ""
 
-#: svnfrontend/filelistviewitem.cpp:169
+#: svnfrontend/filelistviewitem.cpp:171
 msgid "Not versioned"
 msgstr "Neverzováno"
 
-#: ksvnwidgets/logmsg_impl.cpp:73 ksvnwidgets/logmsg_impl.cpp:100
+#: ksvnwidgets/logmsg_impl.cpp:79 ksvnwidgets/logmsg_impl.cpp:106
 msgid "Items to commit"
 msgstr "Položky k odeslání"
 
-#: ksvnwidgets/logmsg_impl.cpp:247 ksvnwidgets/logmsg_impl.cpp:280
-#: ksvnwidgets/logmsg_impl.cpp:314 ksvnwidgets/logmsg_impl.cpp:351
+#: ksvnwidgets/logmsg_impl.cpp:257 ksvnwidgets/logmsg_impl.cpp:290
+#: ksvnwidgets/logmsg_impl.cpp:324 ksvnwidgets/logmsg_impl.cpp:361
 msgid "Commit log"
 msgstr "Záznam odeslání"
 

@@ -458,7 +458,8 @@ QString SvnItem::lockOwner()const
  */
 bool SvnItem::isModified()const
 {
-    return p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified;
+    return p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified
+            ||p_Item->m_Stat.textStatus ()==svn_wc_status_replaced;
 }
 
 const svn::Status& SvnItem::stat()const

@@ -841,6 +841,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 if (_Cache[i].isRealVersioned()&& (
                     _Cache[i].textStatus()==svn_wc_status_modified||
                     _Cache[i].textStatus()==svn_wc_status_added||
+                    _Cache[i].textStatus()==svn_wc_status_replaced||
                     _Cache[i].textStatus()==svn_wc_status_deleted||
                     _Cache[i].propStatus()==svn_wc_status_modified
                 ) ) {
@@ -2101,6 +2102,7 @@ void SvnActions::checkModthread()
             m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
             m_CThread->getList()[i].textStatus()==svn_wc_status_added||
             m_CThread->getList()[i].textStatus()==svn_wc_status_deleted||
+            m_CThread->getList()[i].textStatus()==svn_wc_status_replaced||
             m_CThread->getList()[i].propStatus()==svn_wc_status_modified
          ) ) {
             m_Data->m_Cache.insertKey(m_CThread->getList()[i]);

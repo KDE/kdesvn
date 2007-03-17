@@ -1398,6 +1398,7 @@ void kdesvnfilelist::startDrag()
         drag->setPixmap( *m_pressedItem->pixmap( 0 ) );
 
     drag->drag();
+    kdDebug() << "startDrag: Drag startetd"<<endl;
 }
 
 void kdesvnfilelist::contentsDragLeaveEvent( QDragLeaveEvent * )
@@ -1578,7 +1579,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
     QMap<QString,QString> metaData;
     QDropEvent::Action action = event->action();
 
-    if (m_pList->intern_dropRunning||!KURLDrag::decode( event, urlList, metaData)||urlList.count()<1) {
+    if (!event || m_pList->intern_dropRunning||!KURLDrag::decode( event, urlList, metaData)||urlList.count()<1) {
         return;
     }
     QString tdir;

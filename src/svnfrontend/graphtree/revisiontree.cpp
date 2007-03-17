@@ -438,6 +438,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         lastrev=j;
                     break;
                     case 'M':
+                    case 'R':
 #ifdef DEBUG_PARSE
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
 #endif

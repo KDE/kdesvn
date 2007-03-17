@@ -376,6 +376,7 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
         case 'D':
             res = Kdesvnsettings::tree_delete_color();
             break;
+        case 'R':
         case 'M':
             res = Kdesvnsettings::tree_modify_color();
             break;
@@ -386,7 +387,6 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
         case 1:
             res = Kdesvnsettings::tree_copy_color();
             break;
-        case 'R':
         case 2:
             res = Kdesvnsettings::tree_rename_color();
             break;
@@ -429,6 +429,9 @@ const QString&RevGraphView::getLabelstring(const QString&nodeName)
     case 'M':
         res = i18n("Modified at revision %1").arg(it1.data().rev);
     break;
+    case 'R':
+        res = i18n("Replaced at revision %1").arg(it1.data().rev);
+        break;
     default:
         res=i18n("Revision %1").arg(it1.data().rev);
     break;

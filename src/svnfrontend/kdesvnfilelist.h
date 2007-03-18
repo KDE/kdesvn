@@ -119,13 +119,16 @@ protected:
     virtual void contentsDragMoveEvent( QDragMoveEvent* );
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
-    virtual void startDrag();
+    //virtual void startDrag();
+    virtual QDragObject* dragObject();
 
     void dispDummy();
     void reinitItems(FileListViewItem*_item = 0);
     KURL::List selectedUrls();
 
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
+    virtual void contentsMousePressEvent(QMouseEvent*e);
+    virtual void contentsMouseReleaseEvent(QMouseEvent*e);
     virtual void contentsWheelEvent( QWheelEvent * e );
     virtual void leaveEvent(QEvent*e);
     virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false,bool no_update=false);

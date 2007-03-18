@@ -69,6 +69,7 @@
 #include <qregexp.h>
 #include <qpopupmenu.h>
 #include <qcursor.h>
+#include <qheader.h>
 
 class KdesvnFileListPrivate{
 public:
@@ -101,6 +102,9 @@ public:
     QPoint intern_drop_pos;
     QTimer drop_timer;
     QTimer dirwatch_timer;
+
+    bool mousePressed;
+    QPoint presspos;
 
     QMap<QString,QChar> dirItems;
 
@@ -141,6 +145,7 @@ KdesvnFileListPrivate::KdesvnFileListPrivate()
     m_remoteRevision = svn::Revision::HEAD;
     m_DirWatch = 0;
     intern_dropRunning=false;
+    mousePressed = false;
     readSettings();
 }
 
@@ -1354,17 +1359,18 @@ void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
     }
 }
 
-void kdesvnfilelist::startDrag()
+//void kdesvnfilelist::startDrag()
+QDragObject* kdesvnfilelist::dragObject()
 {
     m_pList->m_fileTip->setItem(0);
     QListViewItem * m_pressedItem = currentItem();
     if (!m_pressedItem) {
-        return;
+        return 0;
     }
     QPixmap pixmap2;
     KURL::List urls = selectedUrls();
     if (urls.count()==0) {
-        return;
+        return 0;
     }
     kdDebug() << "startDrag: " << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
@@ -1378,7 +1384,7 @@ void kdesvnfilelist::startDrag()
     }
 
     KURLDrag *drag;
-    drag = new KURLDrag(urls,this);
+    drag = new KURLDrag(urls,viewport());
 
     /* workaround for KURL::Drag - it always forget the revision part on drop :( */
     if (!isWorkingCopy()) {
@@ -1396,9 +1402,11 @@ void kdesvnfilelist::startDrag()
         drag->setPixmap( pixmap2 );
     else if ( !pixmap0Invalid )
         drag->setPixmap( *m_pressedItem->pixmap( 0 ) );
-
+#if 0
     drag->drag();
     kdDebug() << "startDrag: Drag startetd"<<endl;
+#endif
+    return drag;
 }
 
 void kdesvnfilelist::contentsDragLeaveEvent( QDragLeaveEvent * )
@@ -1578,10 +1586,10 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
     KURL::List urlList;
     QMap<QString,QString> metaData;
     QDropEvent::Action action = event->action();
-
     if (!event || m_pList->intern_dropRunning||!KURLDrag::decode( event, urlList, metaData)||urlList.count()<1) {
         return;
     }
+    kdDebug()<<"slotDropped"<<endl;
     QString tdir;
     if (item) {
         FileListViewItem*which = static_cast<FileListViewItem*>(item);
@@ -1593,7 +1601,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
         tdir = baseUri();
     }
 
-    if (event->source()!=this) {
+    if (event->source()!=this && event->source()!=viewport()) {
         kdDebug()<<"Dropped from outside" << endl;
         if (baseUri().length()==0) {
             openURL(urlList[0]);
@@ -2344,29 +2352,65 @@ FileListViewItem* kdesvnfilelist::findEntryItem(const QString&what,FileListViewI
  */
 void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
 {
-    if (Kdesvnsettings::display_file_tips()) {
+    if (!m_pList->mousePressed)
+    {
+        if (Kdesvnsettings::display_file_tips()) {
 
-        QPoint vp = contentsToViewport( e->pos() );
-        FileListViewItem*item = isExecuteArea( vp ) ? static_cast<FileListViewItem*>(itemAt( vp )) : 0L;
+            QPoint vp = contentsToViewport( e->pos() );
+            FileListViewItem*item = isExecuteArea( vp ) ? static_cast<FileListViewItem*>(itemAt( vp )) : 0L;
 
-        if (item) {
-            vp.setY( itemRect( item ).y() );
-            QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
-            m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
-            m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())/*&&isWorkingCopy()*/
-                &&Kdesvnsettings::display_previews_in_file_tips());
-            setShowToolTips(false);
+            if (item) {
+                vp.setY( itemRect( item ).y() );
+                QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
+                m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
+                m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())/*&&isWorkingCopy()*/
+                        &&Kdesvnsettings::display_previews_in_file_tips());
+                setShowToolTips(false);
+            } else {
+                m_pList->m_fileTip->setItem(0);
+                setShowToolTips(true);
+            }
         } else {
             m_pList->m_fileTip->setItem(0);
             setShowToolTips(true);
         }
-    } else {
-        m_pList->m_fileTip->setItem(0);
-        setShowToolTips(true);
+    }
+    else
+    {
+        if (( m_pList->presspos - e->pos() ).manhattanLength() > QApplication::startDragDistance())
+        {
+            m_pList->m_fileTip->setItem(0);
+            m_pList->mousePressed=false;
+            //beginDrag();
+        }
     }
     KListView::contentsMouseMoveEvent( e );
 }
 
+void kdesvnfilelist::contentsMousePressEvent(QMouseEvent*e)
+{
+    KListView::contentsMousePressEvent(e);
+    m_pList->m_fileTip->setItem(0);
+    QPoint p(contentsToViewport( e->pos()));
+    QListViewItem *i = itemAt( p );
+    // this is from qt the example - hopefully I got my problems with drag&drop fixed.
+    if ( i ) {
+        // if the user clicked into the root decoration of the item, don't try to start a drag!
+        if ( p.x() > header()->cellPos( header()->mapToActual( 0 ) ) +
+                          treeStepSize() * ( i->depth() + ( rootIsDecorated() ? 1 : 0) ) + itemMargin() ||
+             p.x() < header()->cellPos( header()->mapToActual( 0 ) ) )
+        {
+            m_pList->presspos = e->pos();
+            m_pList->mousePressed = true;
+        }
+    }
+}
+
+void kdesvnfilelist::contentsMouseReleaseEvent(QMouseEvent*e)
+{
+    KListView::contentsMouseReleaseEvent(e);
+    m_pList->mousePressed = false;
+}
 
 /*!
     \fn kdesvnfilelist::contentsWheelEvent( QWheelEvent * e )

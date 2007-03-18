@@ -57,6 +57,10 @@
 #include <kkeydialog.h>
 #include <kdirselectdialog.h>
 
+#ifdef TESTING_RC
+#include <kcrash.h>
+#endif
+
 kdesvn::kdesvn()
     : KParts::MainWindow( 0, "kdesvn" ),
       KBookmarkOwner()
@@ -65,6 +69,8 @@ kdesvn::kdesvn()
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
     kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
+    // I hate this crashhandler in development
+    KCrash::setCrashHandler(0);
 #else
     setXMLFile("kdesvnui.rc");
 #endif

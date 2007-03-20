@@ -1372,7 +1372,7 @@ QDragObject* kdesvnfilelist::dragObject()
     if (urls.count()==0) {
         return 0;
     }
-    kdDebug() << "startDrag: " << urls << endl;
+    kdDebug() << "dragObject: " << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {
       int iconSize = Kdesvnsettings::listview_icon_size();;
@@ -1402,10 +1402,7 @@ QDragObject* kdesvnfilelist::dragObject()
         drag->setPixmap( pixmap2 );
     else if ( !pixmap0Invalid )
         drag->setPixmap( *m_pressedItem->pixmap( 0 ) );
-#if 0
-    drag->drag();
-    kdDebug() << "startDrag: Drag startetd"<<endl;
-#endif
+
     return drag;
 }
 
@@ -1601,7 +1598,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
         tdir = baseUri();
     }
 
-    if (event->source()!=this && event->source()!=viewport()) {
+    if (event->source()!=viewport()) {
         kdDebug()<<"Dropped from outside" << endl;
         if (baseUri().length()==0) {
             openURL(urlList[0]);

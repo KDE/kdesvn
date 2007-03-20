@@ -1438,10 +1438,14 @@ bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
                 QPoint vp = contentsToViewport( event->pos() );
                 item = isExecuteArea( vp ) ? itemAt( vp ) : 0L;
                 FileListViewItem*which=static_cast<FileListViewItem*>(item);
-                if (!isWorkingCopy() && event->source()!=this){
-                    ok = (!item || (which->isDir()))&&urlList[0].isLocalFile()&&count==1;
+                if (!isWorkingCopy()) {
+                    if (event->source()!=viewport()){
+                        ok = (!item || (which->isDir()))&&urlList[0].isLocalFile()&&count==1;
+                    } else {
+                        ok = (!item || (which->isDir() ));
+                    }
                 } else {
-                    ok = (which && (which->isDir()))/*&&urlList[0].isLocalFile()*/;
+                    ok = (which && (which->isDir()));
                 }
             }
         }

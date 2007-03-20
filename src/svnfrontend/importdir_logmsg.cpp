@@ -27,6 +27,7 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
  : Logmsg_impl(parent, name)
 {
     m_createDirBox = new QCheckBox("",this,"create_dir_checkbox");
+    m_keepLocksButton->hide();
     createDirboxDir();
     m_ItemsLayout->addWidget(m_createDirBox);
     m_createDirBox->setChecked(true);

@@ -140,6 +140,10 @@ kdesvn::kdesvn()
             // and integrate the part's GUI with the shells
             createGUI(m_part);
             connectActionCollection(m_part->actionCollection());
+        } else {
+            KMessageBox::error(this, i18n("Could not load the part:\n")+KLibLoader::self()->lastErrorMessage());
+            kapp->quit();
+            return;
         }
     }
     else

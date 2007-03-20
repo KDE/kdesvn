@@ -689,7 +689,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
     }
     svn_revnum_t nnum=svn::Revision::UNDEFINED;
     try {
-        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,true);
+        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,true,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

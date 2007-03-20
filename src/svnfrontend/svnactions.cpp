@@ -809,7 +809,7 @@ void SvnActions::slotCommit()
 
 bool SvnActions::makeCommit(const svn::Targets&targets)
 {
-    bool ok,rec;
+    bool ok,rec,keeplocks;
     svn_revnum_t nnum;
     svn::Targets _targets;
     svn::Pathes _deldir;
@@ -817,7 +817,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     QString msg;
 
     if (!review) {
-        msg = Logmsg_impl::getLogmessage(&ok,&rec,
+        msg = Logmsg_impl::getLogmessage(&ok,&rec,&keeplocks,
             m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok) {
             return false;
@@ -855,7 +855,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 }
             }
         }
-        msg = Logmsg_impl::getLogmessage(_check,_uncheck,this,_result,&ok,
+        msg = Logmsg_impl::getLogmessage(_check,_uncheck,this,_result,&ok,&keeplocks,
             m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok||_result.count()==0) {
             return false;
@@ -885,7 +885,8 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Commiting"),
             i18n("Commiting - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->commit(_targets,msg,rec);
+        /// @todo keep-lock beackern
+        nnum = m_Data->m_Svnclient->commit(_targets,msg,rec,keeplocks);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return false;

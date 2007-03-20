@@ -14,6 +14,9 @@ SET(partsrc
 KDE3_AUTOMOC(${kdesvnsrc})
 KDE3_AUTOMOC(${partsrc})
 
+SET(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
+SET(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
+
 ADD_SUBDIRECTORY(svnqt)
 ADD_SUBDIRECTORY(ksvnwidgets)
 ADD_SUBDIRECTORY(settings)

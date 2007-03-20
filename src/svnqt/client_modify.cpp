@@ -183,7 +183,9 @@ namespace svn
 #endif
 
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 5)
+      svn_client_commit4
+#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_client_commit3
 #else
       svn_client_commit2

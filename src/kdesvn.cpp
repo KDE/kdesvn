@@ -150,7 +150,7 @@ kdesvn::kdesvn()
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not find our part:\n")+KLibLoader::self()->lastErrorMessage());
+        KMessageBox::error(this, i18n("Could not find our part")+QString(":\n")+KLibLoader::self()->lastErrorMessage());
         kapp->quit();
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...

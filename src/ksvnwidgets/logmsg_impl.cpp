@@ -359,11 +359,13 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
         _ok = false;
         /* avoid compiler warnings */
         _rec = false;
+        _keep_locks=false;
     } else {
         _ok = true;
         _rec = ptr->isRecursive();
         msg=ptr->getMessage();
         ptr->saveHistory();
+        _keep_locks = ptr->isKeeplocks();
     }
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
@@ -406,6 +408,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
         _ok = true;
         msg=ptr->getMessage();
         ptr->saveHistory();
+        _keep_locks = ptr->isKeeplocks();
     }
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;

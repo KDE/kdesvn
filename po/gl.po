@@ -5,10 +5,10 @@
 # Mvillarino <mvillarino@users.sourceforge.net>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: kdesvn\n"
+"Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-21 10:37+0100\n"
-"PO-Revision-Date: 2007-01-22 15:01+0100\n"
+"PO-Revision-Date: 2007-03-21 12:53+0100\n"
 "Last-Translator: Mvillarino <mvillarino@users.sourceforge.net>\n"
 "Language-Team: galician <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,7 @@ msgstr "Un cliente de Subversion para KDE (aplicación independente)"
 
 #: main.cpp:38
 msgid "Execute single subversion command on specific revision(-range)"
-msgstr ""
-"Executar un único comando de subversión nunha revisión específica (-range)"
+msgstr "Executar un único comando de subversión nunha revisión específica (-range)"
 
 #: main.cpp:39
 msgid "Ask for revision when executing single command"
@@ -58,8 +57,7 @@ msgstr "Limitar a saída de rexisto a <número>"
 
 #: main.cpp:43
 msgid "Execute subversion command (\"exec help\" for more information)"
-msgstr ""
-"Executar un comando de subversión (\"exec help\" para máis información)"
+msgstr "Executar un comando de subversión (\"exec help\" para máis información)"
 
 #: main.cpp:44
 msgid "Document to open"
@@ -130,23 +128,20 @@ msgid "Skipped missing target %1."
 msgstr "Saltouse o obxectivo perdido %1."
 
 #: kiosvn/kiolistener.cpp:151
-#, fuzzy
 msgid "Skipped %1."
 msgstr "Saltouse %1."
 
 #: kiosvn/kiolistener.cpp:202
-#, fuzzy
 msgid "Finished at revision %1."
-msgstr "Terminouse na revisión %1"
+msgstr "Terminouse na revisión %1."
 
 #: kiosvn/kiolistener.cpp:204
 msgid "Finished."
 msgstr "Terminado."
 
 #: kiosvn/kiolistener.cpp:208
-#, fuzzy
 msgid "Finished external at revision %1."
-msgstr "Terminouse externamente na revisión %1"
+msgstr "Terminouse externamente na revisión %1."
 
 #: kiosvn/kiolistener.cpp:210
 msgid "Finished external."
@@ -221,9 +216,8 @@ msgid "Performing status on external item at %1."
 msgstr "A obter o estado no ítem externo en %1."
 
 #: kiosvn/kiolistener.cpp:276
-#, fuzzy
 msgid "Sending %1."
-msgstr "A enviar %1"
+msgstr "A enviar %1."
 
 #: kiosvn/kiolistener.cpp:280
 msgid "Adding (bin) %1."
@@ -687,8 +681,7 @@ msgstr "0"
 
 #: rc.cpp:176
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "O mínimo que debe conter unha saída de rexisto antes de que kdesvn mostre "
 "unha xanela co rexisto"
@@ -825,8 +818,7 @@ msgstr "Lista os ítens da próxima entrega sexan enviados ou non"
 #: rc.cpp:249
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Número máximo de rexistos mostrados cando está cheo (0 para nengún límite)"
+msgstr "Número máximo de rexistos mostrados cando está cheo (0 para nengún límite)"
 
 #: rc.cpp:252
 #, no-c-format
@@ -969,8 +961,7 @@ msgstr "Preferir o programa externo de fusións"
 
 #: rc.cpp:321
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Indica se prefere unir cun programa externo e non co sistema de fusións de "
 "subversion"
@@ -1024,7 +1015,7 @@ msgstr "Copia de"
 #: rc.cpp:352
 #, no-c-format
 msgid "Contextmenu on item for more operations"
-msgstr ""
+msgstr "Use o menú de contexto do ítem para aceder a máis operacións"
 
 #: rc.cpp:355 svnfrontend/svnlogdlgimp.cpp:483
 #, no-c-format
@@ -1174,7 +1165,7 @@ msgid "End revision:"
 msgstr "Última revisión:"
 
 #: rc.cpp:462
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start revision:"
 msgstr "Primeira revisión:"
 
@@ -1191,7 +1182,7 @@ msgstr "-1 para START"
 #: rc.cpp:471
 #, no-c-format
 msgid "BlameDisplay"
-msgstr ""
+msgstr "Autorías"
 
 #: rc.cpp:474
 #, no-c-format
@@ -1272,8 +1263,7 @@ msgstr "Valor da propriedade:"
 #: rc.cpp:538
 #, no-c-format
 msgid "Click for short info about pre-defined property name"
-msgstr ""
-"Prema para obter información acerca do nome predefinido da propriedade."
+msgstr "Prema para obter información acerca do nome predefinido da propriedade."
 
 #: rc.cpp:541 svnfrontend/svnactions.cpp:1908 svnfrontend/svnactions.cpp:1922
 #, no-c-format
@@ -1401,8 +1391,7 @@ msgstr "Seleccione o tipo de armacenamento"
 #: rc.cpp:641
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione o tipo de armacenamento do repositorio (FSFS ou DB Berkeley)"
+msgstr "Seleccione o tipo de armacenamento do repositorio (FSFS ou DB Berkeley)"
 
 #: rc.cpp:644
 #, no-c-format
@@ -1417,8 +1406,7 @@ msgstr "Deshabilitar fsync ao entregar (só para BDB)"
 #: rc.cpp:651
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática do ficheiro de rexisto (só para BDB)"
+msgstr "Deshabilitar eliminación automática do ficheiro de rexisto (só para BDB)"
 
 #: rc.cpp:655
 #, no-c-format
@@ -1495,34 +1483,34 @@ msgid "Entry"
 msgstr "Entrada"
 
 #: rc.cpp:719
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select new items"
-msgstr "Seleccionar o ítem"
+msgstr "Seleccionar os itens novos"
 
 #: rc.cpp:722
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
-msgstr "Non se atopou nengún ítem sen versionar."
+msgstr "Marcar todos os ítens novos para engadir e entregar, p. ex., os non versionados."
 
 #: rc.cpp:725
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unselect new items"
-msgstr "Deseleccionar o ítem"
+msgstr "Deseleccionar os itens novos"
 
 #: rc.cpp:728
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr "Non se atopou nengún ítem sen versionar."
+msgstr "Quita o sinal de todos os itens sen versionar de tal xeito que sexan ignorados."
 
 #: rc.cpp:731
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff highlighted item"
-msgstr "Diferenzas con ítem seleccionado"
+msgstr "Diferenzas co ítem seleccionado"
 
 #: rc.cpp:734
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
-msgstr ""
+msgstr "Xera e mostra as diferenzas entre o ítem escollido e a versión no repositorio"
 
 #: rc.cpp:737
 #, no-c-format
@@ -1540,19 +1528,19 @@ msgid "Last used log messages"
 msgstr "Últimas mensaxes de rexisto usados"
 
 #: rc.cpp:750
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Make operation recursive."
-msgstr "Resolver recursivamente"
+msgstr "Fai a operación recursiva."
 
 #: rc.cpp:753
 #, no-c-format
 msgid "Keep locks"
-msgstr ""
+msgstr "Manter os bloqueos"
 
 #: rc.cpp:756
 #, no-c-format
 msgid "If checked commit will not release locks."
-msgstr ""
+msgstr "Se está sinalada non se liberarán os bloqueos cando faga unha entrega."
 
 #: rc.cpp:760
 #, no-c-format
@@ -1613,27 +1601,23 @@ msgstr "Engadir identidades ssh ao axente de ssh"
 
 #: kdesvn.cpp:132
 msgid "Force add ssh-identities to ssh-agent for future use."
-msgstr ""
-"Forza o engadir identidades ssh no axente de ssh para o seu uso futuro."
+msgstr "Forza o engadir identidades ssh no axente de ssh para o seu uso futuro."
 
 #: kdesvn.cpp:133
-#, fuzzy
 msgid "Info about kdesvn part"
-msgstr "&Acerca da componente KDEsvn"
+msgstr "Información da componente KDEsvn"
 
 #: kdesvn.cpp:135
 msgid "Shows info about the kdesvn plugin not the standalone app."
-msgstr ""
+msgstr "Mostra información acerca da extensión kdesvn, non da aplicación independente."
 
 #: kdesvn.cpp:144
-#, fuzzy
 msgid "Could not load the part:\n"
-msgstr "Non foi posíbel achar a nosa componente."
+msgstr "Non foi posíbel cargar a componente:\n"
 
 #: kdesvn.cpp:153
-#, fuzzy
 msgid "Could not find our part"
-msgstr "Non foi posíbel achar a nosa componente."
+msgstr "Non foi posíbel achar a nosa componente"
 
 #: kdesvn.cpp:185
 msgid "Could not open url %1"
@@ -1748,9 +1732,8 @@ msgid "%1 at revision %2"
 msgstr "%1 na revisión %2"
 
 #: svnfrontend/svnlogdlgimp.cpp:234
-#, fuzzy
 msgid "SVN Log of %1"
-msgstr "Mensaxe de rexisto de SVN"
+msgstr "Rexisto SVN de %1"
 
 #: svnfrontend/svnitem.cpp:376
 msgid "Added in repository"
@@ -1921,9 +1904,8 @@ msgid "Modified state got conflicting mods."
 msgstr "O estado modificado ten modificacións con conflitos."
 
 #: svnfrontend/ccontextlistener.cpp:267
-#, fuzzy
 msgid "Enter password for realm %1"
-msgstr "Introduza contrasinal para o reino %1"
+msgstr "Introduza o contrasinal para o reino %1"
 
 #: svnfrontend/ccontextlistener.cpp:288
 msgid ""
@@ -2002,9 +1984,8 @@ msgid "Modified at revision %1"
 msgstr "Modificado na revisión %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
-#, fuzzy
 msgid "Replaced at revision %1"
-msgstr "Eliminado na revisión %1"
+msgstr "Substituído na revisión %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:436
 msgid "Revision %1"
@@ -2019,9 +2000,8 @@ msgid "Could not start process \"%1\"."
 msgstr "Non foi posíbel iniciar o proceso \"%1\"."
 
 #: svnfrontend/graphtree/revgraphview.cpp:546
-#, fuzzy
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
-msgstr "<br>Revisión: %1<br>Autor: %2<br>Data: %3<br>Rexisto:%4</html>"
+msgstr "<br>Revisión: %1<br>Autor: %2<br>Data: %3<br>Rexisto: %4</html>"
 
 #: svnfrontend/graphtree/revgraphview.cpp:554
 msgid "<b>Revision</b>%1%2%3"
@@ -2362,8 +2342,7 @@ msgstr "A obter"
 
 #: svnfrontend/svnactions.cpp:1508
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>A entrada<br>%1<br>non está versionada - interrompido.</center>"
+msgstr "<center>A entrada<br>%1<br>non está versionada - interrompido.</center>"
 
 #: svnfrontend/svnactions.cpp:1538
 msgid "Revert entries"
@@ -2530,8 +2509,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizacións"
 
 #: svnfrontend/kdesvnfilelist.cpp:248
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comproba se a copia de traballo ten itens con versións máis novas no "
 "repositorio"
@@ -2566,8 +2544,7 @@ msgstr "Emborcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:262
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Mostra o contido dos ficheiros ou URLs especificados na versión indicada."
+msgstr "Mostra o contido dos ficheiros ou URLs especificados na versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:264
 msgid "Lock current items"
@@ -2815,8 +2792,7 @@ msgstr "Síntoo - erro interno!"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Un de <b>\"nativos\"</b>, <b>\"LF\"</b>, <b>\"CR\"</b>, <b>\"CRLF\"</b></b>."
+msgstr "Un de <b>\"nativos\"</b>, <b>\"LF\"</b>, <b>\"CR\"</b>, <b>\"CRLF\"</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2892,8 +2868,7 @@ msgstr ""
 "de liña."
 
 #: svnfrontend/editproperty_impl.cpp:94
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Texto para mostrar na campo de edición onde o usuario introduce o número da "
 "incidencia."
@@ -3017,7 +2992,6 @@ msgid "Failure reasons"
 msgstr "Razóns do fallo"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:69
-#, fuzzy
 msgid "Realm"
 msgstr "Reino"
 
@@ -3041,10 +3015,4 @@ msgstr "Nome do emisor"
 msgid "Fingerprint"
 msgstr "Fingerprint"
 
-#, fuzzy
-#~ msgid "Mark all unversioned items"
-#~ msgstr "Engadir os itens sen versionar"
 
-#, fuzzy
-#~ msgid "Unmark all unversioned items"
-#~ msgstr "Engadir os itens sen versionar"

@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # A S Alam <apbrar@gmail.com>, 2006.
+# A S Alam <aalam@users.sf.net>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-21 10:37+0100\n"
-"PO-Revision-Date: 2006-08-25 17:14+0530\n"
-"Last-Translator: A S Alam <apbrar@gmail.com>\n"
-"Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
+"PO-Revision-Date: 2007-03-22 17:44+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +28,7 @@ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ"
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "apbrar@gmail.com"
+msgstr "aalam@users.sf.net"
 
 #: main.cpp:32
 msgid "A Subversion Client for KDE (standalone application)"
@@ -127,23 +128,20 @@ msgid "Skipped missing target %1."
 msgstr ""
 
 #: kiosvn/kiolistener.cpp:151
-#, fuzzy
 msgid "Skipped %1."
-msgstr "%1  ਛੱਡੀ ਗਈ ਹੈ।"
+msgstr "%1 ਛੱਡੀ ਗਈ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:202
-#, fuzzy
 msgid "Finished at revision %1."
-msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਮੁਕੰਮਲ ਕੀਤਾ"
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਮੁਕੰਮਲ ਕੀਤਾ।"
 
 #: kiosvn/kiolistener.cpp:204
 msgid "Finished."
 msgstr "ਮੁਕੰਮਲ ਹੋਇਆ।"
 
 #: kiosvn/kiolistener.cpp:208
-#, fuzzy
 msgid "Finished external at revision %1."
-msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਮੁਕੰਮਲ ਕੀਤਾ"
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਬਾਹਰੀ ਮੁਕੰਮਲ ਕੀਤਾ।"
 
 #: kiosvn/kiolistener.cpp:210
 msgid "Finished external."
@@ -218,9 +216,8 @@ msgid "Performing status on external item at %1."
 msgstr ""
 
 #: kiosvn/kiolistener.cpp:276
-#, fuzzy
 msgid "Sending %1."
-msgstr "%1 ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
+msgstr "%1 ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ।"
 
 #: kiosvn/kiolistener.cpp:280
 msgid "Adding (bin) %1."
@@ -389,16 +386,15 @@ msgstr "ਸਬਵਰਜਨ"
 #: kdesvn_part.cpp:337 rc.cpp:191
 #, no-c-format
 msgid "Subversion Settings"
-msgstr "ਸਬਵਰਜਨ ਸਥਾਪਨ"
+msgstr "ਸਬਵਰਜਨ ਸੈਟਿੰਗ"
 
 #: kdesvn_part.cpp:339
 msgid "Diff & Merge"
 msgstr ""
 
 #: kdesvn_part.cpp:339
-#, fuzzy
 msgid "Settings for diff and merge"
-msgstr "ਕਮਾਂਡ-ਲਾਇਨ ਅਤੇ KIO ਚੱਲਣ ਲਈ ਸਥਾਪਨ"
+msgstr "ਅੰਤਰ ਅਤੇ ਮਿਲਾਨ ਲਈ ਸੈਟਿੰਗ"
 
 #: kdesvn_part.cpp:341
 msgid "Colors"
@@ -406,7 +402,7 @@ msgstr "ਰੰਗ"
 
 #: kdesvn_part.cpp:341
 msgid "Color Settings"
-msgstr "ਰੰਗ ਸਥਾਪਨ"
+msgstr "ਰੰਗ ਸੈਟਿੰਗ"
 
 #: kdesvn_part.cpp:343
 msgid "Revision tree"
@@ -414,7 +410,7 @@ msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ"
 
 #: kdesvn_part.cpp:343
 msgid "Revision tree Settings"
-msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਸਥਾਪਨ"
+msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਸੈਟਿੰਗ"
 
 #: kdesvn_part.cpp:345
 msgid "Commandline"
@@ -422,7 +418,7 @@ msgstr "ਕਮਾਂਡ-ਲਾਇਨ"
 
 #: kdesvn_part.cpp:345
 msgid "Settings for commandline and KIO execution"
-msgstr "ਕਮਾਂਡ-ਲਾਇਨ ਅਤੇ KIO ਚੱਲਣ ਲਈ ਸਥਾਪਨ"
+msgstr "ਕਮਾਂਡ-ਲਾਇਨ ਅਤੇ KIO ਚੱਲਣ ਲਈ ਸੈਟਿੰਗ"
 
 #: rc.cpp:6
 #, no-c-format
@@ -435,9 +431,9 @@ msgid "Subversion toolbar"
 msgstr "Subversion ਸੰਦ-ਪੱਟੀ"
 
 #: rc.cpp:24
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ColorSettings"
-msgstr "ਰੰਗ ਸਥਾਪਨ"
+msgstr "ਰੰਗ ਸੈਟਿੰਗ"
 
 #: rc.cpp:27
 #, no-c-format
@@ -492,7 +488,7 @@ msgstr "ਇਕਾਈਆਂ, ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਤਾਲਾਬ�
 #: rc.cpp:68
 #, no-c-format
 msgid "Settings"
-msgstr "ਸਥਾਪਨ"
+msgstr "ਸੈਟਿੰਗ"
 
 #: rc.cpp:71
 #, no-c-format
@@ -574,14 +570,14 @@ msgid "Maximum logmessages in history:"
 msgstr "ਅਤੀਤ 'ਚ ਵੱਧ ਤੋਂ ਵੱਧ ਲਾਗ ਸੁਨੇਹੇ (logmessages):"
 
 #: rc.cpp:117
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Display colored annotate"
-msgstr "ਅਣਡਿੱਠੀਆਂ ਫਾਇਲਾਂ ਵੇਖਾਓ"
+msgstr ""
 
 #: rc.cpp:120
 #, no-c-format
 msgid "Revisiontree Settings"
-msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਸਥਾਪਨ"
+msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਸੈਟਿੰਗ"
 
 #: rc.cpp:123
 #, no-c-format
@@ -634,9 +630,9 @@ msgid "Color for modified items:"
 msgstr "ਸੋਧੀਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
 #: rc.cpp:158
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "CmdExecSettings"
-msgstr "ਸਥਾਪਨ"
+msgstr "CmdExecSettings"
 
 #: rc.cpp:161
 #, no-c-format
@@ -665,8 +661,7 @@ msgstr "0"
 
 #: rc.cpp:176
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
 #: rc.cpp:179
@@ -677,18 +672,17 @@ msgstr "ਕੋਨਕਿਊਰੋਰ ਪਰਸੰਗ-ਮੇਨੂ ਵਿੱਚ �
 #: rc.cpp:182
 #, no-c-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
-msgstr ""
-"ਜੇਕਰ ਚੋਣ ਕੀਤੀ ਗਈ ਤਾਂ kdesvn ਕੋਨਕਿਊਰੋਰ ਦੇ ਕਾਰਵਾਈ \"ਕਾਰਵਾਈ\" ਮੇਨੂ ਵਿੱਚ ਵੇਖਾਈ ਨਹੀਂ ਦੇਵੇਗਾ"
+msgstr "ਜੇਕਰ ਚੋਣ ਕੀਤੀ ਗਈ ਤਾਂ kdesvn ਕੋਨਕਿਊਰੋਰ ਦੇ ਕਾਰਵਾਈ \"ਕਾਰਵਾਈ\" ਮੇਨੂ ਵਿੱਚ ਵੇਖਾਈ ਨਹੀਂ ਦੇਵੇਗਾ"
 
 #: rc.cpp:185
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "KIO operations use standard logmessage"
-msgstr "ਆਖਰੀ ਵਰਤਿਆ ਲਾਗ ਸੁਨੇਹਾ"
+msgstr "KIO ਓਪਰੇਸ਼ਨ ਸਟੈਂਡਰਡ ਲਾਗ-ਸੁਨੇਹਾ ਵਰਤਦੇ ਹਨ"
 
 #: rc.cpp:188
 #, no-c-format
 msgid "Standard message:"
-msgstr ""
+msgstr "ਸਟੈਂਡਰਡ ਸੁਨੇਹਾ:"
 
 #: rc.cpp:194
 #, no-c-format
@@ -796,9 +790,9 @@ msgid "Diff ignores content type"
 msgstr "ਅੰਤਰ ਅਣਡਿੱਠ ਭਾਗ ਕਿਸਮ"
 
 #: rc.cpp:258 svnfrontend/graphtree/revgraphview.cpp:813
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff in revisiontree is recursive"
-msgstr "ਇਕਾਈ ਜਾਣਕਾਰੀ ਲਗਾਤਾਰ ਲਵੋ"
+msgstr "ਰੀਵਿਜ਼ਨ-ਟਰੀ 'ਚ ਅੰਤਰ ਲਗਾਤਾਰ ਹੈ"
 
 #: rc.cpp:261 svnfrontend/svnactions.cpp:1192
 #, no-c-format
@@ -831,9 +825,9 @@ msgid "External diff display:"
 msgstr "ਬਾਹਰੀ ਅੰਤਰ ਵੇਖਾਓ:"
 
 #: rc.cpp:279
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "External merge program:"
-msgstr "ਮਿਲਾਨ ਸੀਮਾ ਦਿਓ"
+msgstr "ਬਾਹਰੀ ਮਿਲਾਨ ਪ੍ਰੋਗਰਾਮ:"
 
 #: rc.cpp:282
 #, no-c-format
@@ -891,8 +885,7 @@ msgstr ""
 
 #: rc.cpp:321
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 
 #: rc.cpp:324 svnfrontend/svnlogdlgimp.cpp:236
@@ -947,9 +940,9 @@ msgid "Contextmenu on item for more operations"
 msgstr ""
 
 #: rc.cpp:355 svnfrontend/svnlogdlgimp.cpp:483
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff previous"
-msgstr "ਅੰਤਰ ਪੁਰਾਣਾ (Diff)"
+msgstr "ਪੁਰਾਣਾ ਅੰਤਰ"
 
 #: rc.cpp:359 svnfrontend/kdesvnfilelist.cpp:351
 #, no-c-format
@@ -962,9 +955,9 @@ msgid "Select second revision with right mouse button"
 msgstr "ਸੱਜੇ ਮਾਊਂਸ ਬਟਨ ਨਾਲ ਦੂਜਾ ਰੀਵਿਜ਼ਨ ਚੁਣੋ"
 
 #: rc.cpp:366
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "List entries"
-msgstr "ਇੰਦਰਾਜ਼ ਸੂਚੀਬੱਧ"
+msgstr "ਇੰਦਰਾਜ਼ ਲਿਸਟ"
 
 #: rc.cpp:370 svnfrontend/svnlogdlgimp.cpp:481
 #, no-c-format
@@ -1088,9 +1081,9 @@ msgid "End revision:"
 msgstr "ਆਖਰੀ ਰੀਵਿਜ਼ਨ:"
 
 #: rc.cpp:462
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start revision:"
-msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ ਸ਼ੁਰੂ:"
+msgstr "ਸ਼ੁਰੂਆਤ ਰੀਵਿਜ਼ਨ:"
 
 #: rc.cpp:465
 #, no-c-format
@@ -1113,19 +1106,19 @@ msgid "Line"
 msgstr "ਰੇਖਾ"
 
 #: rc.cpp:477
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Revision"
-msgstr "ਰੀਵਿਜ਼ਨ"
+msgstr "ਰੀਵਿਜ਼"
 
 #: rc.cpp:486
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content"
-msgstr "%1 ਦਾ ਭਾਗ"
+msgstr "ਸਮੱਗਰੀ"
 
 #: rc.cpp:489
 #, no-c-format
 msgid "MergeSettings"
-msgstr "ਮਿਲਾਨ ਸਥਾਪਨ"
+msgstr "ਮਿਲਾਨ ਸੈਟਿੰਗ"
 
 #: rc.cpp:492
 #, no-c-format
@@ -1368,7 +1361,7 @@ msgstr ""
 #: rc.cpp:674
 #, no-c-format
 msgid "Quick settings"
-msgstr "ਤੇਜ਼ ਸਥਾਪਨ"
+msgstr "ਤੇਜ਼ ਸੈਟਿੰਗ"
 
 #: rc.cpp:683
 #, no-c-format
@@ -1401,29 +1394,29 @@ msgid "Entry"
 msgstr "ਇੰਦਰਾਜ਼"
 
 #: rc.cpp:719
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select new items"
-msgstr "ਚੁਣੀ ਇਕਾਈ"
+msgstr "ਨਵੀਆਂ ਇਕਾਈਆਂ ਚੁਣੋ"
 
 #: rc.cpp:722
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
-msgstr "ਕੋਈ ਬਿਨਾਂ-ਵਰਜਨ ਇਕਾਈ ਨਹੀਂ ਲੱਭੀ ਹੈ।"
+msgstr "ਸਭ ਨਵੀਆਂ ਬਣਾਓ ਮਤਲਬ ਕਿ ਜੋੜਨ ਅਤੇ ਕਮਿਟ ਕਰਨ ਲਈ ਬਿਨ-ਵਰਜਨ ਇਕਾਈਆਂ ਹਨ।"
 
 #: rc.cpp:725
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unselect new items"
-msgstr "ਨਾ-ਚੁਣੀ ਇਕਾਈ"
+msgstr "ਨਵੀਆਂ ਇਕਾਈਆਂ ਅਣ-ਚੁਣੀਆਂ"
 
 #: rc.cpp:728
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr "ਕੋਈ ਬਿਨਾਂ-ਵਰਜਨ ਇਕਾਈ ਨਹੀਂ ਲੱਭੀ ਹੈ।"
+msgstr ""
 
 #: rc.cpp:731
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff highlighted item"
-msgstr "ਚੁਣੀ ਇਕਾਈ ਨਾਲ ਅੰਤਰ"
+msgstr "ਉਭਾਰੀ ਇਕਾਈ ਅੰਤਰ"
 
 #: rc.cpp:734
 #, no-c-format
@@ -1446,9 +1439,9 @@ msgid "Last used log messages"
 msgstr "ਆਖਰੀ ਵਰਤਿਆ ਲਾਗ ਸੁਨੇਹਾ"
 
 #: rc.cpp:750
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Make operation recursive."
-msgstr "ਲਗਾਤਾਰ ਹੱਲ"
+msgstr "ਕਾਰਵਾਈ ਅੰਦਰੂਨੀ ਬਣਾਓ।"
 
 #: rc.cpp:753
 #, no-c-format
@@ -1522,28 +1515,24 @@ msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
 
 #: kdesvn.cpp:133
-#, fuzzy
 msgid "Info about kdesvn part"
-msgstr "kdesvn p&art ਬਾਰੇ"
+msgstr "kdesvn part ਬਾਰੇ ਜਾਣਕਾਰੀ"
 
 #: kdesvn.cpp:135
 msgid "Shows info about the kdesvn plugin not the standalone app."
 msgstr ""
 
 #: kdesvn.cpp:144
-#, fuzzy
 msgid "Could not load the part:\n"
-msgstr "ਸਾਡਾ ਪਾਰਟ ਮਿਲ ਨਹੀਂ ਸਕਿਆ ਹੈ।"
+msgstr "ਪਾਰਟ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ:\n"
 
 #: kdesvn.cpp:153
-#, fuzzy
 msgid "Could not find our part"
 msgstr "ਸਾਡਾ ਪਾਰਟ ਮਿਲ ਨਹੀਂ ਸਕਿਆ ਹੈ।"
 
 #: kdesvn.cpp:185
-#, fuzzy
 msgid "Could not open url %1"
-msgstr "ਰਿਪੋਜ਼ਟਰੀ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕਦੀ ਹੈ"
+msgstr "URL %1 ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
 
 #: kdesvn.cpp:207
 msgid "Load last opened URL on start"
@@ -1652,9 +1641,8 @@ msgid "%1 at revision %2"
 msgstr "%1 ਉੱਤੇ %2 ਰੀਵਿਜ਼ਨ"
 
 #: svnfrontend/svnlogdlgimp.cpp:234
-#, fuzzy
 msgid "SVN Log of %1"
-msgstr "SVN ਲਾਗ"
+msgstr "%1 ਦਾ SVN ਲਾਗ"
 
 #: svnfrontend/svnitem.cpp:376
 msgid "Added in repository"
@@ -1851,33 +1839,28 @@ msgid "The certificate has an unknown error."
 msgstr "ਸਰਟੀਫਿਕੇਟ ਲਈ ਇੱਕ ਅਣਜਾਣ ਗਲਤੀ ਹੈ।"
 
 #: svnfrontend/blamedisplay_impl.cpp:284
-#, fuzzy
 msgid "Show line"
-msgstr "ਫਾਇਲ ਜਾਣਕਾਰੀ ਵੇਖਾਓ"
+msgstr "ਲਾਈਨ ਵੇਖਾਓ"
 
 #: svnfrontend/blamedisplay_impl.cpp:284
-#, fuzzy
 msgid "Show line number"
-msgstr "ਫਾਇਲ ਜਾਣਕਾਰੀ ਵੇਖਾਓ"
+msgstr "ਲਾਈਨ ਨੰਬਰ ਵੇਖਾਓ"
 
 #: svnfrontend/blamedisplay_impl.cpp:309 svnfrontend/blamedisplay_impl.cpp:376
-#, fuzzy
 msgid "Log message for revision"
-msgstr "ਦੋ ਰੀਵਿਜ਼ਨਾਂ ਦਾ ਮਿਲਾਨ"
+msgstr "ਰੀਵਿਜ਼ਨ ਲਈ ਲਾਗ ਸੁਨੇਹਾ"
 
 #: svnfrontend/blamedisplay_impl.cpp:339
-#, fuzzy
 msgid "Logmessage for revision %1"
-msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਅੱਪਡੇਟ ਕੀਤਾ ਹੈ।"
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਲਈ ਲਾਗ ਸੁਨੇਹਾ"
 
 #: svnfrontend/blamedisplay_impl.cpp:375
 msgid "Blame %1"
 msgstr "%1 ਬਲੇਮ"
 
 #: svnfrontend/blamedisplay_impl.cpp:376
-#, fuzzy
 msgid "Goto line"
-msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਨਹੀਂ ਮਿਲੀ"
+msgstr "ਲਾਈਨ ਉੱਤੇ ਜਾਓ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:329
 msgid "Error running the graph layouting tool.\n"
@@ -1908,9 +1891,8 @@ msgid "Modified at revision %1"
 msgstr "%1 ਰੀਵਿਜ਼ਨ ਲਈ ਸੋਧਿਆ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
-#, fuzzy
 msgid "Replaced at revision %1"
-msgstr "ਰੀਵਿਜ਼ਨ %1 ਹਟਾਇਆ ਗਿਆ"
+msgstr "ਰੀਵਿਜ਼ਨ %1 ਉੱਤੇ ਬਦਲਿਆ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:436
 msgid "Revision %1"
@@ -1925,9 +1907,8 @@ msgid "Could not start process \"%1\"."
 msgstr ""
 
 #: svnfrontend/graphtree/revgraphview.cpp:546
-#, fuzzy
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
-msgstr "<br>ਰੀਵਿਜ਼ਨ: %2<br>ਲੇਖਕ: %3<br>ਮਿਤੀ: %4<br>ਲਾਗ: %5</html>"
+msgstr "<br>ਰੀਵਿਜ਼ਨ: %1<br>ਲੇਖਕ: %2<br>ਮਿਤੀ: %3<br>ਲਾਗ: %4</html>"
 
 #: svnfrontend/graphtree/revgraphview.cpp:554
 msgid "<b>Revision</b>%1%2%3"
@@ -2016,9 +1997,8 @@ msgid "History of %1"
 msgstr "%1 ਦਾ ਅਤੀਤ"
 
 #: svnfrontend/svnactions.cpp:393
-#, fuzzy
 msgid "Annotate lines - hit cancel for abort"
-msgstr "ਕਮਿਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
+msgstr ""
 
 #: svnfrontend/svnactions.cpp:401
 msgid "Got no annotate"
@@ -2037,9 +2017,8 @@ msgid "Content of %1"
 msgstr "%1 ਦਾ ਭਾਗ"
 
 #: svnfrontend/svnactions.cpp:501
-#, fuzzy
 msgid "Got no content."
-msgstr "ਕੋਈ ਭਾਗ ਨਹੀਂ ਹਨ"
+msgstr "ਕੋਈ ਸਮੱਗਰੀ ਨਹੀਂ ਮਿਲੀ।"
 
 #: svnfrontend/svnactions.cpp:523 svnfrontend/kdesvnfilelist.cpp:270
 msgid "New folder"
@@ -2190,9 +2169,8 @@ msgid "Commiting - hit cancel for abort"
 msgstr "ਕਮਿਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
 
 #: svnfrontend/svnactions.cpp:949
-#, fuzzy
 msgid "Download - hit cancel for abort"
-msgstr "ਅੰਤਰ ਕੱਢਿਆ ਜਾ ਰਿਹਾ ਹੈ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦਬਾਓ"
+msgstr "ਡਾਊਨਲੋਡ - ਅਧੂਰਾ ਛੱਡਣ ਲਈ ਦੱਬੋ"
 
 #: svnfrontend/svnactions.cpp:1057
 msgid "Diff-process could not started, check command."
@@ -2328,14 +2306,12 @@ msgid "Importing items"
 msgstr "ਇਕਾਈਆਂ ਆਯਾਤ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
 
 #: svnfrontend/svnactions.cpp:1727
-#, fuzzy
 msgid "Nothing to merge."
-msgstr "ਕਮਿਟ ਕਰਨ ਲਈ ਕੁਝ ਵੀ ਨਹੀਂ ਹੈ।"
+msgstr "ਮਿਲਾਨ ਕਰਨ ਲਈ ਕੁਝ ਨਹੀਂ ਹੈ।"
 
 #: svnfrontend/svnactions.cpp:1731
-#, fuzzy
 msgid "No destination to merge."
-msgstr "ਟਿਕਾਣਾ ਫੋਲਡਰ:"
+msgstr "ਮਿਲਾਨ ਲਈ ਕੋਈ ਟਿਕਾਣਾ ਨਹੀਂ।"
 
 #: svnfrontend/svnactions.cpp:1737
 msgid "Target for merge must be local!"
@@ -2358,9 +2334,8 @@ msgid "Merge"
 msgstr "ਮਿਲਾਨ"
 
 #: svnfrontend/svnactions.cpp:1852
-#, fuzzy
 msgid "Merging items"
-msgstr "ਇਕਾਈਆਂ ਮੁੜ-ਪ੍ਰਾਪਤ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
+msgstr "ਇਕਾਈਆਂ ਮਿਲਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
 
 #: svnfrontend/svnactions.cpp:1873
 msgid "Moving/Rename item "
@@ -2439,8 +2414,7 @@ msgid "Check for updates"
 msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਕਰੋ"
 
 #: svnfrontend/kdesvnfilelist.cpp:248
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr "ਜਾਂਚ ਕਰੋ ਕਿ ਕੀ ਮੌਜੂਦਾ ਕਾਰਜਕਾਰੀ ਨਕਲ ਵਿੱਚ ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਇਕਾਈਆਂ ਲਈ ਨਵਾਂ ਵਰਜਨ ਮੌਜੂਦ ਹੈ"
 
 #: svnfrontend/kdesvnfilelist.cpp:251
@@ -2767,8 +2741,7 @@ msgid "A newline separated list of file patterns to ignore."
 msgstr "ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਫਾਇਲ ਪੈਟਰਨ ਦੀ ਨਵੀਂ ਸਤਰ ਨਾਲ ਵੱਖ ਕੀਤੀ ਸੂਚੀ ਹੈ।"
 
 #: svnfrontend/editproperty_impl.cpp:94
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:95
@@ -2894,14 +2867,3 @@ msgstr "ਜਾਰੀ ਕਰਤਾ ਨਾਂ"
 msgid "Fingerprint"
 msgstr "ਫਿੰਗਰ ਪਰਿੰਟ"
 
-#, fuzzy
-#~ msgid "Mark all unversioned items"
-#~ msgstr "ਸਭ ਨਾ-ਵਰਜਨ ਕੀਤੀਆਂ ਇਕਾਈਆਂ ਜੋੜੋ"
-
-#, fuzzy
-#~ msgid "Unmark all unversioned items"
-#~ msgstr "ਸਭ ਨਾ-ਵਰਜਨ ਕੀਤੀਆਂ ਇਕਾਈਆਂ ਜੋੜੋ"
-
-#, fuzzy
-#~ msgid "Diff re&visions"
-#~ msgstr "ਰੀਵਿਜ਼ਨ ਅੰਤਰ"

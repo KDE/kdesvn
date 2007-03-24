@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-21 10:37+0100\n"
+"POT-Creation-Date: 2007-03-24 16:49+0100\n"
 "PO-Revision-Date: 2006-04-22 01:08+0200\n"
 "Last-Translator: Antoni Bella Pérez <bella5@teleline.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Ask for revision when executing single command"
 msgstr "Demana per la revisió quan s'executi un únic comandament"
 
-#: main.cpp:40 rc.cpp:556
+#: main.cpp:40 rc.cpp:547
 #, no-c-format
 msgid "Force operation"
 msgstr "Força l'operació"
@@ -269,7 +269,7 @@ msgstr "No s'ha pogut obrir el repositori"
 msgid "No repository open"
 msgstr "No hi ha cap repositori obert"
 
-#: kdesvnview.cpp:244 rc.cpp:626
+#: kdesvnview.cpp:244 rc.cpp:617
 #, fuzzy, no-c-format
 msgid "Create new repository"
 msgstr "Descarrega un repositori"
@@ -360,7 +360,7 @@ msgstr "Usa \"Kompare\" per a mostrar els diff"
 msgid "Logs follow node changes"
 msgstr "Els registres segueixen els canvis de node"
 
-#: kdesvn_part.cpp:177 rc.cpp:216
+#: kdesvn_part.cpp:177 rc.cpp:213
 #, no-c-format
 msgid "Display ignored files"
 msgstr "Mostra els fitxers ignorats"
@@ -385,17 +385,17 @@ msgstr "&Manual de kdesvn"
 msgid "Send Bugreport for kdesvn"
 msgstr "Envia informe d'error per a kdesvn"
 
-#: kdesvn_part.cpp:335 rc.cpp:680
+#: kdesvn_part.cpp:335 rc.cpp:671
 #, no-c-format
 msgid "General"
 msgstr "General"
 
-#: kdesvn_part.cpp:337 rc.cpp:9 rc.cpp:677
+#: kdesvn_part.cpp:337 rc.cpp:9 rc.cpp:668
 #, no-c-format
 msgid "Subversion"
 msgstr "Subversion"
 
-#: kdesvn_part.cpp:337 rc.cpp:191
+#: kdesvn_part.cpp:337 rc.cpp:188
 #, no-c-format
 msgid "Subversion Settings"
 msgstr "Paràmetres de Subversion"
@@ -439,7 +439,7 @@ msgstr ""
 msgid "Subversion Admin"
 msgstr "Subversion"
 
-#: rc.cpp:18 rc.cpp:701
+#: rc.cpp:18 rc.cpp:692
 #, no-c-format
 msgid "Subversion toolbar"
 msgstr "Barra d'eines Subversion"
@@ -664,78 +664,73 @@ msgstr "Ítems en conflicte:"
 
 #: rc.cpp:158
 #, fuzzy, no-c-format
-msgid "CmdExecSettings"
-msgstr "Arranjament"
-
-#: rc.cpp:161
-#, fuzzy, no-c-format
 msgid "Show log after executing a command"
 msgstr "Demana per la revisió quan s'executi un únic comandament"
 
-#: rc.cpp:164
+#: rc.cpp:161
 #, no-c-format
 msgid "Show a small window containing the log after command executed"
 msgstr ""
 
-#: rc.cpp:167
+#: rc.cpp:164
 #, no-c-format
 msgid "Minimum log lines to show:"
 msgstr ""
 
-#: rc.cpp:170
+#: rc.cpp:167
 #, no-c-format
 msgid " line(s)"
 msgstr ""
 
-#: rc.cpp:173
+#: rc.cpp:170
 #, no-c-format
 msgid "0"
 msgstr ""
 
-#: rc.cpp:176
+#: rc.cpp:173
 #, no-c-format
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: rc.cpp:179
+#: rc.cpp:176
 #, no-c-format
 msgid "Don't display contextmenu in Konqueror"
 msgstr ""
 
-#: rc.cpp:182
+#: rc.cpp:179
 #, no-c-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
 msgstr ""
 
-#: rc.cpp:185
+#: rc.cpp:182
 #, fuzzy, no-c-format
 msgid "KIO operations use standard logmessage"
 msgstr "Últims missatges de registre usats"
 
-#: rc.cpp:188
+#: rc.cpp:185
 #, no-c-format
 msgid "Standard message:"
 msgstr ""
 
-#: rc.cpp:194
+#: rc.cpp:191
 #, no-c-format
 msgid "Start check for updates when open a working copy"
 msgstr "Inicia la comprovació d'actualitzacions en obrir una còpia de treball"
 
-#: rc.cpp:198
+#: rc.cpp:195
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 "Dirimeix si Kdesvn haurà de comprovar per actualitzacions quan obre una "
 "còpia de treball"
 
-#: rc.cpp:201
+#: rc.cpp:198
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr "Obté detalls de fitxer en el llistat remot"
 
-#: rc.cpp:205
+#: rc.cpp:202
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
@@ -744,7 +739,7 @@ msgstr ""
 "Quan obtenir detalls sobre els ítems quan es realitza un llistat sobre els "
 "repositoris"
 
-#: rc.cpp:208
+#: rc.cpp:205
 #, fuzzy, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -758,22 +753,22 @@ msgstr ""
 "poden veure els blocats remots en el resum.</p>\n"
 "<p align=\"left\"><i>Precaució: Això pot tornar el llistat MOLT lent!</i></p>"
 
-#: rc.cpp:213
+#: rc.cpp:210
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr "Obté la informació de l'ítem recursivament"
 
-#: rc.cpp:220
+#: rc.cpp:217
 #, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "Desa les contrasenyes per a connexions remotes"
 
-#: rc.cpp:223
+#: rc.cpp:220
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:226
+#: rc.cpp:223
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -783,22 +778,22 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:229
+#: rc.cpp:226
 #, no-c-format
 msgid "Log follows node changes"
 msgstr "El registre segueix els canvis de node"
 
-#: rc.cpp:233
+#: rc.cpp:230
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr "Els registres sempre llegeixen la llista de fitxers canviats"
 
-#: rc.cpp:236
+#: rc.cpp:233
 #, fuzzy, no-c-format
 msgid "Read detailed change lists"
 msgstr "Ítems canviats al remot:"
 
-#: rc.cpp:239
+#: rc.cpp:236
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -806,78 +801,73 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:242
+#: rc.cpp:239
 #, no-c-format
 msgid "Review items before commit"
 msgstr "Revisa els ítems abans d'entregar-los"
 
-#: rc.cpp:246
+#: rc.cpp:243
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr ""
 
-#: rc.cpp:249
+#: rc.cpp:246
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 "Màxim de registres a mostrar en veure la bitàcola (0 per a sense limit)"
 
-#: rc.cpp:252
-#, no-c-format
-msgid "Form1"
-msgstr "Form. 1"
-
-#: rc.cpp:255
+#: rc.cpp:249
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr "Les diferències ignoren el tipus de contingut"
 
-#: rc.cpp:258 svnfrontend/graphtree/revgraphview.cpp:813
+#: rc.cpp:252 svnfrontend/graphtree/revgraphview.cpp:813
 #, fuzzy, no-c-format
 msgid "Diff in revisiontree is recursive"
 msgstr "Obté la informació de l'ítem recursivament"
 
-#: rc.cpp:261 svnfrontend/svnactions.cpp:1192
+#: rc.cpp:255 svnfrontend/svnactions.cpp:1192
 #, no-c-format
 msgid "Diff display"
 msgstr "Vista del diff"
 
-#: rc.cpp:264
+#: rc.cpp:258
 #, no-c-format
 msgid "Internal"
 msgstr "Interna"
 
-#: rc.cpp:267
+#: rc.cpp:261
 #, no-c-format
 msgid "Use Kompare for diff"
 msgstr "Usa Kompare per a diff"
 
-#: rc.cpp:270
+#: rc.cpp:264
 #, no-c-format
 msgid "Use other diff display"
 msgstr "Usa un altre visor per a diff"
 
-#: rc.cpp:273
+#: rc.cpp:267
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr "Per a més detalls veure \"Què és això?\""
 
-#: rc.cpp:276
+#: rc.cpp:270
 #, no-c-format
 msgid "External diff display:"
 msgstr "Visor extern de diff:"
 
-#: rc.cpp:279
+#: rc.cpp:273
 #, fuzzy, no-c-format
 msgid "External merge program:"
 msgstr "Entreu el rang de fusionat"
 
-#: rc.cpp:282
+#: rc.cpp:276
 #, no-c-format
 msgid "Setup an external program for merging"
 msgstr ""
 
-#: rc.cpp:285
+#: rc.cpp:279
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -893,7 +883,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:297
+#: rc.cpp:291
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -921,363 +911,358 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:318
+#: rc.cpp:312
 #, no-c-format
 msgid "Prefer external merge program"
 msgstr ""
 
-#: rc.cpp:321
+#: rc.cpp:315
 #, no-c-format
 msgid ""
 "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 
-#: rc.cpp:324 svnfrontend/svnlogdlgimp.cpp:236
+#: rc.cpp:318 svnfrontend/svnlogdlgimp.cpp:236
 #, no-c-format
 msgid "SVN Log"
 msgstr "Bitàcola SVN"
 
-#: rc.cpp:328 rc.cpp:483
+#: rc.cpp:322 rc.cpp:474
 #, no-c-format
 msgid "Author"
 msgstr "Autor"
 
-#: rc.cpp:331
+#: rc.cpp:325
 #, no-c-format
 msgid "Revison"
 msgstr "Revisió"
 
-#: rc.cpp:334 rc.cpp:480 rc.cpp:588 rc.cpp:610
+#: rc.cpp:328 rc.cpp:471 rc.cpp:579 rc.cpp:601
 #, no-c-format
 msgid "Date"
 msgstr "Data"
 
-#: rc.cpp:337
+#: rc.cpp:331
 #, no-c-format
 msgid "Message"
 msgstr "Missatge"
 
-#: rc.cpp:340
+#: rc.cpp:334
 #, no-c-format
 msgid "Select in first column revisions for diff"
 msgstr "Trieu en la primera columna les revisions per a diff"
 
-#: rc.cpp:343 rc.cpp:716 ksvnwidgets/logmsg_impl.cpp:80
+#: rc.cpp:337 rc.cpp:707 ksvnwidgets/logmsg_impl.cpp:80
 #: ksvnwidgets/logmsg_impl.cpp:107
 #, no-c-format
 msgid "Action"
 msgstr "Acció"
 
-#: rc.cpp:346
+#: rc.cpp:340
 #, no-c-format
 msgid "Item"
 msgstr "Ítem"
 
-#: rc.cpp:349
+#: rc.cpp:343
 #, no-c-format
 msgid "Copy from"
 msgstr "Copia des de"
 
-#: rc.cpp:352
+#: rc.cpp:346
 #, no-c-format
 msgid "Contextmenu on item for more operations"
 msgstr ""
 
-#: rc.cpp:355 svnfrontend/svnlogdlgimp.cpp:483
+#: rc.cpp:349 svnfrontend/svnlogdlgimp.cpp:483
 #, fuzzy, no-c-format
 msgid "Diff previous"
 msgstr "Diff anterior"
 
-#: rc.cpp:359 svnfrontend/kdesvnfilelist.cpp:351
+#: rc.cpp:353 svnfrontend/kdesvnfilelist.cpp:351
 #, no-c-format
 msgid "Diff revisions"
 msgstr "Revisions per a diff"
 
-#: rc.cpp:363
+#: rc.cpp:357
 #, no-c-format
 msgid "Select second revision with right mouse button"
 msgstr "Trieu la segona revisió amb el botó dret del ratolí"
 
-#: rc.cpp:366
+#: rc.cpp:360
 #, fuzzy, no-c-format
 msgid "List entries"
 msgstr "&Llista d'entrades"
 
-#: rc.cpp:370 svnfrontend/svnlogdlgimp.cpp:481
+#: rc.cpp:364 svnfrontend/svnlogdlgimp.cpp:481
 #, no-c-format
 msgid "Annotate"
 msgstr ""
 
-#: rc.cpp:378
+#: rc.cpp:372
 #, fuzzy, no-c-format
 msgid "Load into folder:"
 msgstr "S'està netejant la carpeta"
 
-#: rc.cpp:381 rc.cpp:393
+#: rc.cpp:375 rc.cpp:387
 #, no-c-format
 msgid "Path to load the dump into (see contexthelp)"
 msgstr ""
 
-#: rc.cpp:384 rc.cpp:396
+#: rc.cpp:378 rc.cpp:390
 #, no-c-format
 msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
 
-#: rc.cpp:387
+#: rc.cpp:381
 #, no-c-format
 msgid "Dump file:"
 msgstr ""
 
-#: rc.cpp:390
+#: rc.cpp:384
 #, fuzzy, no-c-format
 msgid "Load into repository:"
 msgstr "Canvia repositori"
 
-#: rc.cpp:399
+#: rc.cpp:393
 #, no-c-format
 msgid "Uuid action"
 msgstr ""
 
-#: rc.cpp:402
+#: rc.cpp:396
 #, no-c-format
 msgid "How to handle UUIDs"
 msgstr ""
 
-#: rc.cpp:405
+#: rc.cpp:399
 #, no-c-format
 msgid ""
-"The repository's UUID will be updated iff the dumpstream contains a UUID and "
+"The repository's UUID will be updated if the dumpstream contains a UUID and "
 "action isn't set to ignore and either the repository contains no revisions "
 "or action is set to force. If the dump contains no UUID than this action is "
 "ignored."
 msgstr ""
 
-#: rc.cpp:412
+#: rc.cpp:406
 #, fuzzy, no-c-format
 msgid "Ignore"
 msgstr "Ignorat"
 
-#: rc.cpp:416 rc.cpp:572 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:120
+#: rc.cpp:410 rc.cpp:563 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:120
 #, no-c-format
 msgid "Force"
 msgstr "Força"
 
-#: rc.cpp:420
+#: rc.cpp:414
 #, no-c-format
 msgid "Use pre-commit hook"
 msgstr ""
 
-#: rc.cpp:424
+#: rc.cpp:418
 #, no-c-format
 msgid "Use post-commit hook"
 msgstr ""
 
-#: rc.cpp:428
+#: rc.cpp:422
 #, fuzzy, no-c-format
 msgid "Destination folder:"
 msgstr "S'està netejant la carpeta"
 
-#: rc.cpp:431
+#: rc.cpp:425
 #, fuzzy, no-c-format
 msgid "Repository to copy:"
 msgstr "Repositori obert"
 
-#: rc.cpp:434
+#: rc.cpp:428
 #, fuzzy, no-c-format
 msgid "Clean logs"
 msgstr "S'estan escanejant els missatges de registre"
 
-#: rc.cpp:438
+#: rc.cpp:432
 #, no-c-format
 msgid "Dump repo"
 msgstr ""
 
-#: rc.cpp:441
+#: rc.cpp:435
 #, fuzzy, no-c-format
 msgid "Repository to dump:"
 msgstr "Repositori obert"
 
-#: rc.cpp:444
+#: rc.cpp:438
 #, fuzzy, no-c-format
 msgid "Dump into:"
 msgstr "Sortida a:"
 
-#: rc.cpp:447
+#: rc.cpp:441
 #, no-c-format
 msgid "incremental Dump"
 msgstr ""
 
-#: rc.cpp:451
+#: rc.cpp:445
 #, no-c-format
 msgid "Use deltas"
 msgstr ""
 
-#: rc.cpp:455
+#: rc.cpp:449
 #, fuzzy, no-c-format
 msgid "Dump revision range"
 msgstr "Arbre de revisions"
 
-#: rc.cpp:459
+#: rc.cpp:453
 #, fuzzy, no-c-format
 msgid "End revision:"
 msgstr "Última revisió"
 
-#: rc.cpp:462
+#: rc.cpp:456
 #, fuzzy, no-c-format
 msgid "Start revision:"
 msgstr "Comença amb la revisió"
 
-#: rc.cpp:465
+#: rc.cpp:459
 #, no-c-format
 msgid "-1 for Head"
 msgstr ""
 
-#: rc.cpp:468
+#: rc.cpp:462
 #, no-c-format
 msgid "-1 for Start"
 msgstr ""
 
-#: rc.cpp:471
-#, no-c-format
-msgid "BlameDisplay"
-msgstr ""
-
-#: rc.cpp:474
+#: rc.cpp:465
 #, no-c-format
 msgid "Line"
 msgstr "Línia"
 
-#: rc.cpp:477
+#: rc.cpp:468
 #, fuzzy, no-c-format
 msgid "Revision"
 msgstr "Revisions"
 
-#: rc.cpp:486
+#: rc.cpp:477
 #, fuzzy, no-c-format
 msgid "Content"
 msgstr "Contingut de %1"
 
-#: rc.cpp:489
+#: rc.cpp:480
 #, no-c-format
 msgid "MergeSettings"
 msgstr "Configuració del fusionat"
 
-#: rc.cpp:492
+#: rc.cpp:483
 #, no-c-format
 msgid "Source 1:"
 msgstr "Font 1:"
 
-#: rc.cpp:495
+#: rc.cpp:486
 #, no-c-format
 msgid "Source 2:"
 msgstr "Font 2:"
 
-#: rc.cpp:498
+#: rc.cpp:489
 #, no-c-format
 msgid "Output to:"
 msgstr "Sortida a:"
 
-#: rc.cpp:501
+#: rc.cpp:492
 #, no-c-format
 msgid "Force delete on modified/unversioned"
 msgstr "Força l'esborrat sobre modificat/sense_versió"
 
-#: rc.cpp:505
+#: rc.cpp:496
 #, no-c-format
 msgid "Handle unrelated as related items"
 msgstr "Gestiona els ítems sense relacionar com a relacionats"
 
-#: rc.cpp:508
+#: rc.cpp:499
 #, no-c-format
 msgid "Just dry run without modifications"
 msgstr "Simplement executa sense modificar"
 
-#: rc.cpp:512 rc.cpp:747 svnfrontend/svnactions.cpp:1546
+#: rc.cpp:503 rc.cpp:738 svnfrontend/svnactions.cpp:1546
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:117
 #, no-c-format
 msgid "Recursive"
 msgstr "Recursiu"
 
-#: rc.cpp:516
+#: rc.cpp:507
 #, no-c-format
 msgid "Use external merge not subversions merge"
 msgstr ""
 
-#: rc.cpp:519
+#: rc.cpp:510
 #, no-c-format
 msgid "Edit property"
 msgstr "Edita propietat"
 
-#: rc.cpp:530
+#: rc.cpp:521
 #, no-c-format
 msgid "Property name:"
 msgstr "Nom de la propietat:"
 
-#: rc.cpp:533
+#: rc.cpp:524
 #, no-c-format
 msgid "Property value:"
 msgstr "Valor de la propietat:"
 
-#: rc.cpp:538
+#: rc.cpp:529
 #, no-c-format
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 "Fer clic per a obtenir una petita informació quant al nom predefinit de la "
 "propietat"
 
-#: rc.cpp:541 svnfrontend/svnactions.cpp:1908 svnfrontend/svnactions.cpp:1922
+#: rc.cpp:532 svnfrontend/svnactions.cpp:1908 svnfrontend/svnactions.cpp:1922
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Copia / Mou"
 
-#: rc.cpp:544
+#: rc.cpp:535
 #, no-c-format
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">Renomena</p>"
 
-#: rc.cpp:547
+#: rc.cpp:538
 #, no-c-format
 msgid "this long text"
 msgstr "aquest text llarg"
 
-#: rc.cpp:550
+#: rc.cpp:541
 #, no-c-format
 msgid "to"
 msgstr "a"
 
-#: rc.cpp:553
+#: rc.cpp:544
 #, no-c-format
 msgid "/there/"
 msgstr "/allí/"
 
-#: rc.cpp:560
+#: rc.cpp:551
 #, no-c-format
 msgid "Checkout info"
 msgstr "Descarrega info"
 
-#: rc.cpp:563
+#: rc.cpp:554
 #, no-c-format
 msgid "Select target directory:"
 msgstr "Seleccioneu directori de destí:"
 
-#: rc.cpp:566
+#: rc.cpp:557
 #, no-c-format
 msgid "Enter URL:"
 msgstr "Entreu una URL:"
 
-#: rc.cpp:569
+#: rc.cpp:560
 #, no-c-format
 msgid "Append source url name to subfolder"
 msgstr "Crea a una subcarpeta amb el nom final de la URL"
 
-#: rc.cpp:576
+#: rc.cpp:567
 #, no-c-format
 msgid "Open after job"
 msgstr "Obre en finalitzar"
 
-#: rc.cpp:579 svnfrontend/svnactions.cpp:1259
+#: rc.cpp:570 svnfrontend/svnactions.cpp:1259
 #: svnfrontend/kdesvnfilelist.cpp:1955 svnfrontend/kdesvnfilelist.cpp:2052
 #: svnfrontend/kdesvnfilelist.cpp:2069 svnfrontend/kdesvnfilelist.cpp:2095
 #: svnfrontend/kdesvnfilelist.cpp:2623 svnfrontend/kdesvnfilelist.cpp:2665
@@ -1285,241 +1270,241 @@ msgstr "Obre en finalitzar"
 msgid "Revisions"
 msgstr "Revisions"
 
-#: rc.cpp:582 svnfrontend/fronthelpers/rangeinput_impl.cpp:169
+#: rc.cpp:573 svnfrontend/fronthelpers/rangeinput_impl.cpp:169
 #, no-c-format
 msgid "Start with revision"
 msgstr "Comença amb la revisió"
 
-#: rc.cpp:585
+#: rc.cpp:576
 #, no-c-format
 msgid "N&umber"
 msgstr "Nú&mero"
 
-#: rc.cpp:592
+#: rc.cpp:583
 #, no-c-format
 msgid "S&TART"
 msgstr "&COMENÇA"
 
-#: rc.cpp:595 rc.cpp:617
+#: rc.cpp:586 rc.cpp:608
 #, no-c-format
 msgid "HEAD"
 msgstr "HEAD"
 
-#: rc.cpp:598 rc.cpp:620
+#: rc.cpp:589 rc.cpp:611
 #, no-c-format
 msgid "WORKING"
 msgstr "TREBALL"
 
-#: rc.cpp:601 rc.cpp:623
+#: rc.cpp:592 rc.cpp:614
 #, no-c-format
 msgid "Select current working copy changes"
 msgstr "Selecciona els canvis a la còpia de treball actual"
 
-#: rc.cpp:604
+#: rc.cpp:595
 #, no-c-format
 msgid "Stop with revision"
 msgstr "Atura amb la revisió"
 
-#: rc.cpp:607
+#: rc.cpp:598
 #, no-c-format
 msgid "Number"
 msgstr "Número"
 
-#: rc.cpp:614
+#: rc.cpp:605
 #, no-c-format
 msgid "START"
 msgstr "COMENÇA"
 
-#: rc.cpp:629
+#: rc.cpp:620
 #, fuzzy, no-c-format
 msgid "Type of repository:"
 msgstr "Exporta el repositori"
 
-#: rc.cpp:632
+#: rc.cpp:623
 #, no-c-format
 msgid "FSFS"
 msgstr ""
 
-#: rc.cpp:635
+#: rc.cpp:626
 #, no-c-format
 msgid "BDB"
 msgstr ""
 
-#: rc.cpp:638
+#: rc.cpp:629
 #, no-c-format
 msgid "Select type of storage"
 msgstr ""
 
-#: rc.cpp:641
+#: rc.cpp:632
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr ""
 
-#: rc.cpp:644
+#: rc.cpp:635
 #, fuzzy, no-c-format
 msgid "Path to repository:"
 msgstr "Canvia repositori"
 
-#: rc.cpp:647
+#: rc.cpp:638
 #, no-c-format
 msgid "Disable fsync at commit (BDB only)"
 msgstr ""
 
-#: rc.cpp:651
+#: rc.cpp:642
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
 msgstr ""
 
-#: rc.cpp:655
+#: rc.cpp:646
 #, fuzzy, no-c-format
 msgid "Create main folders"
 msgstr "S'està netejant la carpeta"
 
-#: rc.cpp:659
+#: rc.cpp:650
 #, no-c-format
 msgid "Create trunk, tags and branches folder"
 msgstr ""
 
-#: rc.cpp:662
+#: rc.cpp:653
 #, no-c-format
 msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
 
-#: rc.cpp:665
+#: rc.cpp:656
 #, no-c-format
 msgid "Compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:668
+#: rc.cpp:659
 #, no-c-format
 msgid "Is created repository compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:671
+#: rc.cpp:662
 #, no-c-format
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only usefull when svnqt is running with subversion 1.4 or above."
 msgstr ""
 
-#: rc.cpp:674
+#: rc.cpp:665
 #, no-c-format
 msgid "Quick settings"
 msgstr "Opcions ràpides"
 
-#: rc.cpp:683
+#: rc.cpp:674
 #, no-c-format
 msgid "Working copy"
 msgstr "Còpia de treball"
 
-#: rc.cpp:686
+#: rc.cpp:677
 #, no-c-format
 msgid "Repository"
 msgstr "Repositori"
 
-#: rc.cpp:692 rc.cpp:695 rc.cpp:698
+#: rc.cpp:683 rc.cpp:686 rc.cpp:689
 #, no-c-format
 msgid "Actions"
 msgstr "Accions"
 
-#: rc.cpp:707
+#: rc.cpp:698
 #, no-c-format
 msgid "Logmessage"
 msgstr "Missatge del registre"
 
-#: rc.cpp:710
+#: rc.cpp:701
 #, no-c-format
 msgid "Review affected items"
 msgstr "Revisa els ítems afectats"
 
-#: rc.cpp:713
+#: rc.cpp:704
 #, no-c-format
 msgid "Entry"
 msgstr "Entrada"
 
-#: rc.cpp:719
+#: rc.cpp:710
 #, fuzzy, no-c-format
 msgid "Select new items"
 msgstr "Ítems esborrats:"
 
-#: rc.cpp:722
+#: rc.cpp:713
 #, fuzzy, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr "No s'han trobat ítems sense versió."
 
-#: rc.cpp:725
+#: rc.cpp:716
 #, fuzzy, no-c-format
 msgid "Unselect new items"
 msgstr "Ítems esborrats:"
 
-#: rc.cpp:728
+#: rc.cpp:719
 #, fuzzy, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr "No s'han trobat ítems sense versió."
 
-#: rc.cpp:731
+#: rc.cpp:722
 #, fuzzy, no-c-format
 msgid "Diff highlighted item"
 msgstr "Ítems esborrats:"
 
-#: rc.cpp:734
+#: rc.cpp:725
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
 
-#: rc.cpp:737
+#: rc.cpp:728
 #, no-c-format
 msgid "Enter a log message"
 msgstr "Entreu un missatge per al registre"
 
-#: rc.cpp:740
+#: rc.cpp:731
 #, no-c-format
 msgid "Or insert one of the last:"
 msgstr "O inseriu un de l'últim:"
 
-#: rc.cpp:744
+#: rc.cpp:735
 #, no-c-format
 msgid "Last used log messages"
 msgstr "Últims missatges de registre usats"
 
-#: rc.cpp:750
+#: rc.cpp:741
 #, fuzzy, no-c-format
 msgid "Make operation recursive."
 msgstr "Resol en mode recursiu"
 
-#: rc.cpp:753
+#: rc.cpp:744
 #, no-c-format
 msgid "Keep locks"
 msgstr ""
 
-#: rc.cpp:756
+#: rc.cpp:747
 #, no-c-format
 msgid "If checked commit will not release locks."
 msgstr ""
 
-#: rc.cpp:760
+#: rc.cpp:751
 #, no-c-format
 msgid "Authentication"
 msgstr "Autenticació"
 
-#: rc.cpp:763
+#: rc.cpp:754
 #, no-c-format
 msgid "Enter authentification info for"
 msgstr "Entreu la informació d'autenticació per a"
 
-#: rc.cpp:766
+#: rc.cpp:757
 #, no-c-format
 msgid "Password:"
 msgstr "Contrasenya:"
 
-#: rc.cpp:769
+#: rc.cpp:760
 #, no-c-format
 msgid "Username:"
 msgstr "Nom d'usuari:"
 
-#: rc.cpp:772
+#: rc.cpp:763
 #, no-c-format
 msgid "Store password"
 msgstr "Desa la contrasenya"
@@ -2977,7 +2962,7 @@ msgid "Items to commit"
 msgstr "Ítems a entregar"
 
 #: ksvnwidgets/logmsg_impl.cpp:265 ksvnwidgets/logmsg_impl.cpp:303
-#: ksvnwidgets/logmsg_impl.cpp:344 ksvnwidgets/logmsg_impl.cpp:385
+#: ksvnwidgets/logmsg_impl.cpp:344 ksvnwidgets/logmsg_impl.cpp:387
 msgid "Commit log"
 msgstr "Registre de publicació"
 
@@ -3028,6 +3013,13 @@ msgstr "Nom de l'emisor"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr "Empremta dactilar"
+
+#, fuzzy
+#~ msgid "CmdExecSettings"
+#~ msgstr "Arranjament"
+
+#~ msgid "Form1"
+#~ msgstr "Form. 1"
 
 #, fuzzy
 #~ msgid "Mark all unversioned items"

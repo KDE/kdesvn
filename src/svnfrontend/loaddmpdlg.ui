@@ -100,7 +100,7 @@
                 <string>How to handle UUIDs</string>
             </property>
             <property name="whatsThis" stdset="0">
-                <string>The repository's UUID will be updated iff the dumpstream contains a UUID and action isn't set to ignore and either the repository contains no revisions or action is set to force. If the dump contains no UUID than this action is ignored.</string>
+                <string>The repository's UUID will be updated if the dumpstream contains a UUID and action isn't set to ignore and either the repository contains no revisions or action is set to force. If the dump contains no UUID than this action is ignored.</string>
             </property>
             <vbox>
                 <property name="name">

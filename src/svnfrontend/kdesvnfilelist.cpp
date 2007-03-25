@@ -2255,7 +2255,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                 QFileInfo fi(what);
                 if (!fi.exists()) {
                     FileListViewItem*p = static_cast<FileListViewItem*>(item->parent());
-                    removeItem(item);
+                    delete item;
                     repaintit=true;
                     item = 0;
                     if (p) {

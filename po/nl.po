@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-24 16:49+0100\n"
-"PO-Revision-Date: 2007-03-24 22:15+0100\n"
+"PO-Revision-Date: 2007-03-25 16:04+0200\n"
 "Last-Translator: Bram Schoenmakers <bramschoenmakers@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,6 @@ msgid "Skipped missing target %1."
 msgstr "Ontbrekend doel %1 overgeslagen."
 
 #: kiosvn/kiolistener.cpp:151
-#, fuzzy
 msgid "Skipped %1."
 msgstr "%1 overgeslagen."
 
@@ -1065,7 +1064,7 @@ msgid ""
 "action isn't set to ignore and either the repository contains no revisions "
 "or action is set to force. If the dump contains no UUID than this action is "
 "ignored."
-msgstr ""
+msgstr "De UUID van de repository wordt bijgewerkt als de dump een UUID bevat als de handeling niet ingesteld is op Negeren. In het andere geval mag de repository geen revisies bevatten of dient de handeling ingesteld te zijn op 'Afdwingen'. Wanneer de dump geen UUID bevat dan wordt deze handeling genegeerd."
 
 #: rc.cpp:406
 #, no-c-format
@@ -1075,7 +1074,7 @@ msgstr "Negeren"
 #: rc.cpp:410 rc.cpp:563 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:120
 #, no-c-format
 msgid "Force"
-msgstr "Forceren"
+msgstr "Afdwingen"
 
 #: rc.cpp:414
 #, no-c-format
@@ -1229,9 +1228,9 @@ msgid "Property value:"
 msgstr "Eigenschapwaarde:"
 
 #: rc.cpp:529
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Click for short info about pre-defined property name"
-msgstr "Klik voor short naam"
+msgstr "Klik voor meer informatie over de standaard eigenschapnaam"
 
 #: rc.cpp:532 svnfrontend/svnactions.cpp:1908 svnfrontend/svnactions.cpp:1922
 #, no-c-format
@@ -1475,7 +1474,7 @@ msgstr "Verschil met geselecteerde item"
 #: rc.cpp:725
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
-msgstr ""
+msgstr "Maakt een vergelijking met de repository-versie van het geselecteerde item en laat deze zien"
 
 #: rc.cpp:728
 #, no-c-format
@@ -1947,9 +1946,8 @@ msgid "Modified at revision %1"
 msgstr "Aangepast op revisie %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
-#, fuzzy
 msgid "Replaced at revision %1"
-msgstr "Verwijderd op revisie %1"
+msgstr "Vervangen op revisie %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:436
 msgid "Revision %1"
@@ -2529,14 +2527,12 @@ msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr "Switcht van repository van de werkkopie (\"svn switch\")"
 
 #: svnfrontend/kdesvnfilelist.cpp:275
-#, fuzzy
 msgid "Relocate current working copy url"
-msgstr "Locatie wijzigen van huidige werkkopie"
+msgstr "Locatie wijzigen van huidige werkkopie-URL"
 
 #: svnfrontend/kdesvnfilelist.cpp:277
-#, fuzzy
 msgid "Relocate url of current working copy path to other url"
-msgstr "Werkkopie"
+msgstr "URL-adres van huidige werkkopie wijzigen naar een ander URL-adres"
 
 #: svnfrontend/kdesvnfilelist.cpp:278
 msgid "Check for unversioned items"
@@ -2551,9 +2547,8 @@ msgid "Open repository of working copy"
 msgstr "Repository van werkkopie openen"
 
 #: svnfrontend/kdesvnfilelist.cpp:284
-#, fuzzy
 msgid "Opens the repository the current working copy was checked out from"
-msgstr "Switchen naar repository van huidige werkkopie"
+msgstr "Opent de repository waarvan de huidige werkkopie vandaan is gekomen"
 
 #: svnfrontend/kdesvnfilelist.cpp:288
 msgid ""
@@ -2771,7 +2766,6 @@ msgid ""
 msgstr "Indien aanwezig het bestand uitvoerbaar maken.<br>Deze eigenschap kan niet op een map ingesteld worden. Een niet-recursieve poging zal mislukken. Een recursieve poging zal de eigenschappen alleen instellen voor de bestanden in de map."
 
 #: svnfrontend/editproperty_impl.cpp:48
-#, fuzzy
 msgid ""
 "Keywords to be expanded into the contents of a file.<br>They can be inserted "
 "into documents by placing a keyword anchor which is formatted as $KeywordName"
@@ -2781,14 +2775,9 @@ msgid ""
 "last modified.<br><b>Revision/Rev/LastChangedRevision</b> The last revision "
 "the object changed.<br><b>Id</b> A compressed summary of the previous 4 "
 "keywords."
-msgstr ""
-"Trefwoorden tot van a bestand<br> documenten a anker is<br> Geldig<br><b> "
-"URL-adres</b> URL-adres voor van<br><b> Auteur</b> persoon tot bewerk "
-"bestand<br><b> Datum</b> datum tijd object gewijzigd<br><b> Revisie</b> "
-"object gewijzigd<br><b> Id</b> A samenvatting van."
+msgstr "De trefwoorden die in de bestandsinhoud worden geplaatst.<br>Deze kunnen worden ingevoegd in documenten in de vorm $TrefwoordNaam $.<br>Geldige trefwoorden zijn:<br><b>URL/HeadURL</b> Het URL-adres voor de HEAD-revisie van het project.<br><b>Author/LastChangedBy</b> De laatste persoon die het bestand gewijzigd heeft.<br><b>Date/LastChangedDate</b> De datum/tijd waarop het document het laatst was gewijzigd.<br><b>Revision/Rev/LastChangedRevision</b> De laatste revisie waarop het bestand was gewijzigd.<br><b>ld</b> Een korte samenvatting van de voorgaande vier trefwoorden."
 
 #: svnfrontend/editproperty_impl.cpp:57
-#, fuzzy
 msgid ""
 "Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file."
 "<br>The file will be set read-only when checked out or updated, indicating "
@@ -2802,7 +2791,6 @@ msgstr ""
 "vastleggen."
 
 #: svnfrontend/editproperty_impl.cpp:61 svnfrontend/editproperty_impl.cpp:90
-#, fuzzy
 msgid ""
 "The mimetype of the file. Used to determine whether to merge the file and "
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
@@ -2815,17 +2803,13 @@ msgstr ""
 "binair beschouwd."
 
 #: svnfrontend/editproperty_impl.cpp:84
-#, fuzzy
 msgid ""
 "A newline separated list of module specifiers, each of which consists of a "
 "relative directory path, optional revision flags, and an URL. For example:"
 "<br><nobr><b>foo http://example.com/repos/projectA</b></"
 "nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
 "nobr>"
-msgstr ""
-"A list van module van van a relatief pad en URL-adres Voor "
-"example<br><nobr><b>http://example.com/repos/projectA</b></"
-"nobr><br><nobr><b>http://example.com/repos/projectB</b></nobr>"
+msgstr "Een lijst, gescheiden door einderegeltekens, met op iedere regel een modulebeschrijving. Dat bestaat uit een relatief pad naar een map, eventuele opgave van een revisienummer en een URL-adres . Bijvoorbeeld: <br><nobr><b>foo http://example.com/repos/projectA</b></nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 
 #: svnfrontend/editproperty_impl.cpp:89
 msgid "A newline separated list of file patterns to ignore."
@@ -2856,55 +2840,48 @@ msgid ""
 "Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
 "the commit dialog. Possible values:<br><b>'true'</b>/<b>'yes'</b> or "
 "<b>'false'</b>/<b>'no'</b>"
-msgstr ""
+msgstr "Wanneer u <b>'yes'</b> kiest zal er een waarschuwing getoond worden wanneer er geen bugvermelding is gemaakt in het dialoogvenster voor vastlegging. Mogelijke waarden:<br><b>'true'</b><b>'yes'</b> of <b>'false'</b><b>'nee'</b>"
 
 #: svnfrontend/editproperty_impl.cpp:104
-#, fuzzy
 msgid ""
 "Set to <b>'false'</b> if your bugtracking system has issues which are "
 "referenced not by numbers.<br>Possible values: <b>'true'</b> or <b>'false'</"
 "b>"
-msgstr "Instellen tot<b> Onwaar</b> niet<br><b> waar</b> of<b> Onwaar</b>"
+msgstr "Stel dit in op <b>'false'</b> wanneer uw bugtracker niet werkt met bugnummers.<br>Mogelijke waarden:<b>'true'</b> of <b>'false'</b>"
 
 #: svnfrontend/editproperty_impl.cpp:107
-#, fuzzy
 msgid ""
 "Set to <b>'false'</b> if you want the bugtracking IDto be inserted at the "
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
-msgstr ""
-"Instellen tot<b> Onwaar</b> ID tot bij boven van standaard is<b> waar</b> ID "
-"is tot."
+msgstr "Stel dit in op <b>'false'</b> wanneer u wilt dat het bugnummer van de bugtracker ingevoegd dient te worden bovenaan het logbericht. Standaard is dit <b>'true'</b>, wat betekent dat het bugnummer aan het einde van het logbericht wordt toegevoegd."
 
 #: svnfrontend/editproperty_impl.cpp:111
-#, fuzzy
 msgid ""
 "Two regular expressions separated by a newline.<br>The first expression is "
 "used to find a string referring to an issue, the second expression is used "
 "to extract the bare bug ID from that string."
-msgstr "Twee regelmatig a<br> eerste is tot a string tot tweede is tot ID string."
+msgstr "Twee reguliere expressies die worden gescheiden door een einderegelteken.<br>De eerste expressie wordt gebruikt om een tekenreeks te zoeken die bij een bepaald geval hoort, de tweede expressie wordt gebruikt om enkel het bugnummer te halen uit deze tekenreeks."
 
 #: svnfrontend/mergedlg_impl.cpp:187
 msgid "Enter merge range"
 msgstr "Voer het bereik van de samenvoeging in"
 
 #: svnfrontend/stopdlg.cpp:185
-#, fuzzy
 msgid "%1 of %2"
 msgstr "%1 van %2"
 
 #: svnfrontend/stopdlg.cpp:189 svnfrontend/tcontextlistener.cpp:159
 msgid "%1 transferred."
-msgstr ""
+msgstr "%1 verstuurd."
 
 #: svnfrontend/fronthelpers/rangeinput_impl.cpp:166
 msgid "Select revision"
 msgstr "Revisie selecteren"
 
 #: svnfrontend/tcontextlistener.cpp:157
-#, fuzzy
 msgid "%1 of %2 transferred."
-msgstr "van."
+msgstr "%1 van %2 verstuurd."
 
 #: svnfrontend/filelistviewitem.cpp:171
 msgid "Not versioned"
@@ -2968,3 +2945,4 @@ msgstr "Naam uitgever"
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
 msgstr "Fingerprint"
+

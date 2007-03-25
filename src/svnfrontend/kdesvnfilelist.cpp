@@ -2241,7 +2241,17 @@ void kdesvnfilelist::_dirwatchTimeout()
                 m_SvnWrapper->deleteFromModifiedCache(what);
             }
             if (item->isDir()) {
-                repaintit = refreshRecursive(item,false);
+                if (item->isRealVersioned()) {
+                    repaintit = refreshRecursive(item,false);
+                } else {
+                    QListViewItem *_s;
+                    while ( (_s=item->firstChild()))
+                    {
+                        delete _s;
+                    }
+                    m_Dirsread[item->fullName()]=false;
+                    slotItemRead(item);
+                }
             }
         } else if (c=='D') {
             if (item->isDir()) {
@@ -2258,7 +2268,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                     delete item;
                     repaintit=true;
                     item = 0;
-                    if (p) {
+                    if (p && p->isVersioned()) {
                         p->update();
                         updateParents(p);
                     }

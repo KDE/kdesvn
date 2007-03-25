@@ -2249,8 +2249,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                     {
                         delete _s;
                     }
-                    m_Dirsread[item->fullName()]=false;
-                    slotItemRead(item);
+                    checkUnversionedDirs(item);
                 }
             }
         } else if (c=='D') {

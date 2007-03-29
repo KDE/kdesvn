@@ -36,6 +36,7 @@
 #include "svnqt/url.hpp"
 #include "svnqt/svnqt_defines.hpp"
 
+#include <qurl.h>
 
 namespace svn
 {
@@ -71,7 +72,15 @@ namespace svn
       m_path = QString::FROMUTF8(int_path);
       if (Url::isValid(path) ) {
         /// @todo make sure that "@" is never used as revision paramter
+        QUrl uri = m_path;
+        m_path = uri.path();
         m_path.replace("@","%40");
+        m_path = uri.protocol()+"://"+(uri.hasUser()?uri.user()+(uri.hasPassword()?":"+uri.hasPassword():"")+"@":"")
+                +uri.host()+m_path;
+        if (m_path.endsWith("/")) {
+            int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
+            m_path = QString::FROMUTF8(int_path);
+        }
       }
     }
   }
@@ -123,7 +132,7 @@ namespace svn
   void
   Path::addComponent (const QString& component)
   {
-    Pool pool;
+      Pool pool;
 
     if (Url::isValid (m_path))
     {

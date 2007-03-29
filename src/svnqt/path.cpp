@@ -70,7 +70,7 @@ namespace svn
         }
       }
       m_path = QString::FROMUTF8(int_path);
-      if (Url::isValid(path) ) {
+      if (Url::isValid(path) && m_path.find("@")!=-1 ) {
         /// @todo make sure that "@" is never used as revision paramter
         QUrl uri = m_path;
         m_path = uri.path();

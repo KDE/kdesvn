@@ -126,7 +126,6 @@ CContextListener::~CContextListener()
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-    kdDebug()<<"Get saved login from wallet!"<<endl;
     m_Data->pws.getLogin(realm,username,password);
     return true;
 }

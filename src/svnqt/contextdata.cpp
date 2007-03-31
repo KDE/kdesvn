@@ -42,17 +42,19 @@ ContextData::ContextData(const QString & configDir_)
       // intialize authentication providers
       // * simple
       // * username
+      // * simple pw storage
       // * simple prompt
       // * ssl server trust file
       // * ssl server trust prompt
       // * ssl client cert pw file
+      // * ssl client cert pw load
       // * ssl client cert pw prompt
       // * ssl client cert file
       // ===================
-      // 8 providers
+      // 10 providers
 
     apr_array_header_t *providers =
-        apr_array_make (pool, 9, sizeof (svn_auth_provider_object_t *));
+        apr_array_make (pool, 11, sizeof (svn_auth_provider_object_t *));
     svn_auth_provider_object_t *provider;
 
 #if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)

@@ -18,9 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "ccontextlistener.h"
+#include "src/settings/kdesvnsettings.h"
 #include "src/ksvnwidgets/authdialogimpl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
+#include "src/ksvnwidgets/pwstorage.h"
 
 #include <klocale.h>
 #include <kapp.h>
@@ -41,6 +43,7 @@ public:
     // data
     bool m_cancelMe;
     QMutex m_CancelMutex;
+    PwStorage pws;
 };
 
 
@@ -121,19 +124,30 @@ CContextListener::~CContextListener()
     delete m_Data;
 }
 
+bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
+{
+    kdDebug()<<"Get saved login from wallet!"<<endl;
+    m_Data->pws.getLogin(realm,username,password);
+    return true;
+}
+
 bool CContextListener::contextGetLogin (
                     const QString & realm,
                     QString & username,
                     QString & password,
                     bool & maySave)
 {
+    maySave = false;
     emit waitShow(true);
     emit sendNotify(realm);
     AuthDialogImpl auth(realm,username);
     if (auth.exec()==QDialog::Accepted) {
         username=auth.Username();
         password=auth.Password();
-        maySave = auth.maySave();
+        maySave = (Kdesvnsettings::passwords_in_wallet()?false:auth.maySave());
+        if (Kdesvnsettings::store_passwords() && auth.maySave()) {
+            m_Data->pws.setLogin(realm,username,password);
+        }
         emit waitShow(false);
         return true;
     }
@@ -257,9 +271,15 @@ bool CContextListener::contextSslClientCertPrompt (QString & certFile)
     return true;
 }
 
+bool CContextListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
+{
+    return m_Data->pws.getCertPw(realm,password);
+}
+
 bool CContextListener::contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maysave)
 {
+    maysave = false;
     emit waitShow(true);
     QCString npass;
     int keep = 1;
@@ -270,7 +290,10 @@ bool CContextListener::contextSslClientCertPwPrompt (QString & password,
     if (res!=KPasswordDialog::Accepted) {
         return false;
     }
-    maysave = keep!=0;
+    maysave = (Kdesvnsettings::passwords_in_wallet()?false:keep!=0);
+    if (Kdesvnsettings::store_passwords() && keep) {
+        m_Data->pws.setCertPw(realm,password);
+    }
     password = npass;
     return true;
 }

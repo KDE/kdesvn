@@ -10,12 +10,15 @@ KDE3_ADD_UI_FILES(
 SET(ksvnwidgetsrc
     authdialogimpl.cpp
     logmsg_impl.cpp
-    ssltrustprompt_impl.cpp)
+    ssltrustprompt_impl.cpp
+    pwstorage.cpp
+    )
 
 SET(ksvnwidgethdr
     authdialogimpl.h
     logmsg_impl.h
     ssltrustprompt_impl.h
+    pwstorage.h
 )
 
 KDE3_AUTOMOC(${ksvnwidgetsrc})

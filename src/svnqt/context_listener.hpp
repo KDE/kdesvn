@@ -70,7 +70,21 @@ namespace svn
                      QString & username,
                      QString & password,
                      bool & maySave) = 0;
-
+    /**
+     * this method will be called to retrieve
+     * authentication information stored not by subversion. This
+     * will only called once!
+     *
+     * @param username
+     * @param realm in which username/password will be used
+     * @param password
+     * @return continue action?
+     * @retval true continue
+     */
+    virtual bool
+    contextGetSavedLogin(const QString & realm,
+                         QString & username,
+                         QString & password) = 0;
     /**
      * this method will be called to notify about
      * the progress of an ongoing action
@@ -191,6 +205,15 @@ namespace svn
     contextSslClientCertPwPrompt (QString & password,
                                   const QString & realm,
                                   bool & maySave) = 0;
+    /**
+     * this method is called to retrieve the password
+     * for the client certificate from a local storage or such. it will called only once.
+     *
+     * @param password
+     * @param realm
+     */
+    virtual bool
+    contextLoadSslClientCertPw(QString&password,const QString&realm)=0;
 
     virtual void
     contextProgress(long long int current, long long int max) = 0;

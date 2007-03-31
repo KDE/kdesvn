@@ -43,6 +43,8 @@ public:
                      QString & username,
                      QString & password,
                      bool & maySave);
+    virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+
     virtual void contextNotify (const char *path,
                    svn_wc_notify_action_t action,
                    svn_node_kind_t kind,
@@ -64,6 +66,7 @@ public:
     virtual bool contextSslClientCertPrompt (QString & certFile);
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave);
+    virtual bool contextLoadSslClientCertPw(QString&password,const QString&realm);
     virtual QString translate(const QString&what);
 
     static QString NotifyAction(svn_wc_notify_action_t action);

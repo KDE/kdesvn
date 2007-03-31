@@ -370,6 +370,11 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
     return ACCEPT_TEMPORARILY;
 }
 
+bool KioListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
+{
+    return pws.getCertPw(realm,password);
+}
+
 bool KioListener::contextSslClientCertPrompt (QString & certFile)
 {
     QByteArray reply;
@@ -398,6 +403,13 @@ bool KioListener::contextSslClientCertPwPrompt (QString & password,
 {
     return false;
 }
+
+bool KioListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
+{
+    pws.getLogin(realm,username,password);
+    return true;
+}
+
 
 bool KioListener::contextGetLogin (const QString & realm,
                      QString & username,

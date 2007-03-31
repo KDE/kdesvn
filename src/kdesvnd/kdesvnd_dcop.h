@@ -66,6 +66,8 @@ k_dcop:
     QStringList get_logmsg();
     // return a logmessage at pos 0, null-size list if cancel hit, parameter is path -> action for display
     QStringList get_logmsg(QMap<QString,QString>);
+    // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
+    QStringList get_sslclientcertpw(QString);
     QStringList getActionMenu(KURL::List);
     QStringList getSingleActionMenu(QCString);
 };

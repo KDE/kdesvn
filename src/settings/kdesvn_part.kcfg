@@ -89,6 +89,10 @@
       <label>Store passwords for remote connections</label>
       <default>false</default>
     </entry>
+    <entry key="passwords_in_wallet" type="Bool">
+        <label>Store passwords in KDE Wallet instead subversion storage</label>
+        <default>true</default>
+    </entry>
   </group>
   <group name="diffmerge_items">
     <entry key="external_merge_program" type="String" >

@@ -4,6 +4,7 @@ OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 IF (TESTINGBUILD)
    ADD_DEFINITIONS("-DTESTING_RC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\"")
+   ADD_DEFINITIONS("-DFORCE_ASKPASS=\"\\\"\${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\\\"\"")
 ENDIF (TESTINGBUILD)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)

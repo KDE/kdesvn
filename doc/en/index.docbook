@@ -1255,7 +1255,12 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 
 <row>
 <entry>Store passwords for remote connections</entry>
-<entry>Storing passwords is often a security problem. Kdesvn itself doesn't store any passwords, but the subversion itself inside the configuration area of subversion. If this area is readable from others you should not set it, but you may select for single non critical accounts inside the authentication dialog.</entry>
+<entry>Storing passwords is often a security problem. Subversion stores its passwords into a flat file, eg., passwords in cleartext! So be carefull setting this flag and see next entry, too. This item only says if saving passwords is the default, you may change it for specific realms inside login dialog.</entry>
+</row>
+
+<row>
+<entry>Store passwords into KDE wallet</entry>
+<entry>When saving passwords, the cleartext file from subversion is a security hole. &kappname; is able saving them into encrypted kde wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like svn-cmdline or rapidsvn, too. As long as subversion don't encrypt password storage you should think twice about it.</entry>
 </row>
 
 <row>

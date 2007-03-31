@@ -25,6 +25,7 @@
 #include <kapplication.h>
 #include <kdeversion.h>
 #include <kprocess.h>
+#include <kdebug.h>
 
 #include <stdlib.h>
 
@@ -64,6 +65,14 @@ bool SshAgent::querySshAgent()
             m_authSock = QString::fromLocal8Bit(sock);
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
+#ifdef FORCE_ASKPASS
+        kdDebug()<<"Using test askpass"<<endl;
+#ifdef HAS_SETENV
+            ::setenv("SSH_ASKPASS",FORCE_ASKPASS,1);
+#else
+            ::putenv("SSH_ASKPASS="FORCE_ASKPASS);
+#endif
+#else
         char*agent = ::getenv("SSH_ASKPASS");
         if (!agent) {
 #ifdef HAS_SETENV
@@ -72,7 +81,7 @@ bool SshAgent::querySshAgent()
             ::putenv("SSH_ASKPASS=kdesvnaskpass");
 #endif
         }
-
+#endif
         m_isOurAgent = false;
         m_isRunning  = true;
     }
@@ -104,6 +113,10 @@ bool SshAgent::addSshIdentities(bool force)
     proc.setEnvironment("SSH_AGENT_PID", m_pid);
     proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
 
+#ifdef FORCE_ASKPASS
+    kdDebug()<<"Using test askpass"<<endl;
+    proc.setEnvironment("SSH_ASKPASS",FORCE_ASKPASS);
+#else
     char*agent = 0;
     if (force) {
         agent = ::getenv("SSH_ASKPASS");
@@ -111,6 +124,7 @@ bool SshAgent::addSshIdentities(bool force)
     if (!agent) {
         proc.setEnvironment("SSH_ASKPASS", "kdesvnaskpass");
     }
+#endif
 
     proc << "ssh-add";
 

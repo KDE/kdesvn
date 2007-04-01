@@ -1,13 +1,12 @@
 # translation of de.po to Deutsch
-# translation of de.po to
 # Einige Standardübersetzungen müssen noch festgelegt werden:
 #
 # Rajko Albrecht <ral@alwins-world.de>, 2005, 2006, 2007.
-# Raiko Albrecht <ral@alwins-world.de>, 2007.
 # udate: update, erneuern
 # entry, item: Eintrag, item
-# blame: ???
+# blame: Anmerkungen
 # merge: zusammenführen
+
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
@@ -2879,12 +2878,18 @@ msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:84
 msgid ""
-"A newline separated list of module specifiers, each of which consists of a "
-"relative directory path, optional revision flags, and an URL. For example:"
+"A newline separated list of module specifiers, each consisting of a "
+"relative directory path, optional revision flags, and a URL. For example:"
 "<br><nobr><b>foo http://example.com/repos/projectA</b></"
 "nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
 "nobr>"
 msgstr ""
+"Eine durch Zeilenumbrüche getrennte Liste von Modulangaben, jede bestehend "
+"aus einem relativen Verzeichnispfad, optionalen Revisionsangaben und einer "
+"URL. Zum Beispiel:"
+"<br><nobr><b>foo http://example.org/repos/ProjektA</b></"
+"nobr><br><nobr><b>foo/bar -r 1234 http://example.org/repos/ProjektB</b></"
+"nobr>"
 
 #: svnfrontend/editproperty_impl.cpp:89
 msgid "A newline separated list of file patterns to ignore."
@@ -2894,7 +2899,8 @@ msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:94
 msgid "Label text to show for the edit box where the user enters the issue number."
-msgstr ""
+msgstr "Anzuzeigender Text für das Editierfeld, in das der Benutzer die Fehlernummer "
+"eingibt."
 
 #: svnfrontend/editproperty_impl.cpp:95
 msgid ""
@@ -2902,6 +2908,9 @@ msgid ""
 "replaced with the bug issue number. Example:<br><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
+"Auf die Fehlerdatenbank verweisende URL. Sie muss <b>%BUGID%</b> enthalten, "
+"was durch die Fehlernummer ersetzt wird. Beispiel:<br><nobr><b>http://example.org/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
 
 #: svnfrontend/editproperty_impl.cpp:98
 msgid ""
@@ -2909,27 +2918,40 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
+"Zeichenkette, die zu einer Log-Meldung hinzugefügt wird, wenn eine "
+"Fehlernummer angegeben wurde. Die Zeichenkette muss <b>%BUGID%</b> "
+"enthalten, was durch die Fehlernummer ersetzt wird."
 
 #: svnfrontend/editproperty_impl.cpp:101
+# CHECKME: issue ==> issue number (für Fehlerdatenbank?)
 msgid ""
 "Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
 "the commit dialog. Possible values:<br><b>'true'</b>/<b>'yes'</b> or "
-"<b>'false'</b>/<b>'no'</b>"
+"<b>'false'</b>/<b>'no'</b>."
 msgstr ""
+"Setzen Sie dies auf <b>yes</b>, falls eine Warnung angezeigt werden soll, "
+"falls kein Eintrag im Commit-Dialog angegeben wurde. Mögliche Werte:"
+"<br><b>true</b>/<b>yes</b> und <b>false</b>/<b>no</b>."
 
 #: svnfrontend/editproperty_impl.cpp:104
 msgid ""
 "Set to <b>'false'</b> if your bugtracking system has issues which are "
 "referenced not by numbers.<br>Possible values: <b>'true'</b> or <b>'false'</"
-"b>"
+"b>."
 msgstr ""
+"Setzen Sie dies auf <b>false</b>, falls Ihre Fehlerdatenbank Einträge hat, "
+"auf die nicht mit Nummern zugegriffen werden kann.<br>Mögliche Werte: "
+"<b>true</b> und <b>false</b>."
 
 #: svnfrontend/editproperty_impl.cpp:107
 msgid ""
-"Set to <b>'false'</b> if you want the bugtracking IDto be inserted at the "
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""
+"Setzen Sie dies auf <b>false</b>, falls die ID der Fehlerdatenbank am Anfang "
+"der Log-Meldung eingefügt werden soll. Der Standard ist <b>true</b>, was "
+"bedeutet, dass die ID des Fehlers an die Meldung angehangen wird."
 
 #: svnfrontend/editproperty_impl.cpp:111
 msgid ""
@@ -2937,6 +2959,10 @@ msgid ""
 "used to find a string referring to an issue, the second expression is used "
 "to extract the bare bug ID from that string."
 msgstr ""
+"Zwei durch einen Zeilenumbruch getrennte reguläre Ausdrücke.<br>Der erste "
+"Ausdruck wird verwendet, um eine Zeichenkette zu finden, die auf einen "
+"Fehlerbericht verweist. Der zweite Ausdruck wird verwendet, um die reine "
+"ID des Fehlers aus dieser Zeichenkette zu extrahieren."
 
 #: svnfrontend/mergedlg_impl.cpp:187
 msgid "Enter merge range"
@@ -3026,10 +3052,4 @@ msgstr "in die KDE Brieftasche"
 #: ksvnwidgets/authdialogimpl.cpp:38
 msgid "into subversions simple storage"
 msgstr "in Subversions einfache Ablage"
-
-#~ msgid "CmdExecSettings"
-#~ msgstr "CmdExecSettings"
-
-#~ msgid "Form1"
-#~ msgstr "Form1"
 

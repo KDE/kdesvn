@@ -2753,8 +2753,8 @@ msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:84
 msgid ""
-"A newline separated list of module specifiers, each of which consists of a "
-"relative directory path, optional revision flags, and an URL. For example:"
+"A newline separated list of module specifiers, each consisting of a "
+"relative directory path, optional revision flags, and a URL. For example:"
 "<br><nobr><b>foo http://example.com/repos/projectA</b></"
 "nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
 "nobr>"
@@ -2799,7 +2799,7 @@ msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:107
 msgid ""
-"Set to <b>'false'</b> if you want the bugtracking IDto be inserted at the "
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""

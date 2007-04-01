@@ -220,7 +220,7 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3")
+                label = i18n("%1<br>Check change entry %2 of %3")
                         .arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
@@ -262,7 +262,7 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                label = i18n("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
             }
@@ -315,7 +315,7 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                label = i18n("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
             }

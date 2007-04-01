@@ -53,14 +53,12 @@ namespace svn
     virtual ~ContextListener(){}
     /**
      * this method will be called to retrieve
-     * authentication information
+     * authentication information. This will called until valid information were
+     * inserted or it returns false.
      *
-     * WORKAROUND FOR apr_xlate PROBLEM:
-     * STRINGS ALREADY HAVE TO BE UTF8!!!
-     *
-     * @param username
+     * @param username username set as default by subversion
      * @param realm in which username/password will be used
-     * @param password
+     * @param password target storage for password
      * @param maySave in/out set false to not save
      * @return continue action?
      * @retval true continue
@@ -75,10 +73,10 @@ namespace svn
      * authentication information stored not by subversion. This
      * will only called once!
      *
-     * @param username
+     * @param username username set as default by subversion
      * @param realm in which username/password will be used
-     * @param password
-     * @return continue action?
+     * @param password  target storage for password
+     * @return continue action? should only in case of emergency return false.
      * @retval true continue
      */
     virtual bool

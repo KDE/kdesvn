@@ -264,9 +264,10 @@ bool ContextData::retrieveLogin (const char * username_,
 
 bool ContextData::retrieveSavedLogin (const char * username_,
                                  const char * realm,
-                                 bool &)
+                                 bool & may_save)
 {
     bool ok;
+    may_save = false;
 
     if (listener == 0)
         return false;

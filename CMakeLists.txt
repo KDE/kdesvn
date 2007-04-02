@@ -76,6 +76,7 @@ ADD_CUSTOM_TARGET(uninstall
 
 ADD_CUSTOM_TARGET(dist
     "${CMAKE_BINARY_DIR}/makedist.sh"
+    DEPENDS doc
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 

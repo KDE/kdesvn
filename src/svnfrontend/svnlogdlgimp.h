@@ -45,6 +45,7 @@ public:
 
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
+    void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
 
 protected slots:
     virtual void slotSelectionChanged(QListViewItem*);

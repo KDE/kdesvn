@@ -482,6 +482,7 @@ void SvnLogDlgImp::slotSingleContext(QListViewItem*_item, const QPoint & e, int)
         if (action != "A" || item->revision()>-1) {
             popup.insertItem(i18n("Diff previous"),102);
         }
+        popup.insertItem(i18n("Cat this version"),103);
     }
     int r = popup.exec(e);
     svn::Revision start(svn::Revision::START);
@@ -496,6 +497,10 @@ void SvnLogDlgImp::slotSingleContext(QListViewItem*_item, const QPoint & e, int)
         {
             emit makeDiff(_base+source,prev,_base+name,k->rev(),this);
             break;
+        }
+        case 103:
+        {
+            emit makeCat(k->rev(),_base+source,source,k->rev(),kapp->activeModalWidget());
         }
         default:
             break;

@@ -369,6 +369,8 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     disp.dispLog(logs,info.url().mid(reposRoot.length()),reposRoot);
     connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
+    connect(&disp,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
+            this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
     disp.exec();
     disp.saveSize();
     EMIT_FINISHED;

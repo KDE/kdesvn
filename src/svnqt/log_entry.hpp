@@ -104,7 +104,9 @@ namespace svn
               const char * author,
               const char * date,
               const char * message);
+    void setDate(const char*date);
 #if QT_VERSION < 0x040000
+    //! if -1 the entry is a fake entry and not real usable!
     svn_revnum_t revision;
     apr_time_t date;
 #else

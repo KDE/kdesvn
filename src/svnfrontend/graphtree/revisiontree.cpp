@@ -236,7 +236,7 @@ bool RevisionTree::topDownScan()
                         m_Path=m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
                         m_Path+=r;
                     }
-                } else if (m_Data->m_OldHistory[j].changedPaths[i].path==m_Path){
+                } else if (m_Data->m_OldHistory[j].changedPaths[i].path==m_Path && m_Data->m_OldHistory[j].changedPaths[i].copyToPath.isEmpty()){
                     // here it is added
                     m_InitialRevsion = m_Data->m_OldHistory[j].revision;
                 }

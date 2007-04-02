@@ -131,9 +131,8 @@ msgid "Skipped missing target %1."
 msgstr "Ignorado objetivo perdido %1."
 
 #: kiosvn/kiolistener.cpp:151
-#, fuzzy
 msgid "Skipped %1."
-msgstr "Ignorado  %1."
+msgstr "Ignorado %1."
 
 #: kiosvn/kiolistener.cpp:202
 msgid "Finished at revision %1."
@@ -684,8 +683,7 @@ msgstr "0"
 
 #: rc.cpp:173
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "El mínimo que una salida de registro debe contener antes de que kdesvn "
 "muestre una ventana con el registro"
@@ -715,8 +713,7 @@ msgstr "Mensaje estándar:"
 #: rc.cpp:191
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:195
 #, no-c-format
@@ -785,15 +782,14 @@ msgstr ""
 "del diálogo de configuración."
 
 #: rc.cpp:226
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Store passwords into KDE Wallet"
-msgstr "Almacenar contraseña"
+msgstr "Almacenar contraseñas en Cartera KDE"
 
 #: rc.cpp:229
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
-msgstr ""
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgstr "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes de Subversion?"
 
 #: rc.cpp:232
 #, no-c-format
@@ -809,6 +805,9 @@ msgid ""
 "subversion does but put it into an encrypted storage like kde wallet or "
 "don't save passwords.</p>"
 msgstr ""
+"<p>Establece que el conjunto de contraseñas deben guardarse en la cartera de kde en lugar de en sencillos ficheros de subversion en texto claro.</p>\n"
+"<p>Esto es un poco más seguro porque la cartera de KDE está cifrada con una clave. Por otro lado, esto implica que se debe introducir la contraseña con otros clientes de subversion que no accedan a la cartera de KDE (ej: svn en línea de comandos, rapidsvn y otros).</p>\n"
+"<p>Si se almacena el directorio de configuración de subversion externamente (ej: en red) no se deberían almacenar contraseñas en un fichero de texto en claro como hace subversion, sino en un almacen cifrado como hace la cartera de kde, o bien no guardar las contraseñas en ningún sitio.</p>"
 
 #: rc.cpp:237
 #, no-c-format
@@ -849,8 +848,7 @@ msgstr "Elementos listados en la última confirmación se enviarán o no"
 #: rc.cpp:257
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:260
 #, no-c-format
@@ -989,8 +987,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:326
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Establece si se prefiere un programa de fusionado externo y no el fusionado "
 "de subversion"
@@ -1023,8 +1020,7 @@ msgstr "Mensaje"
 #: rc.cpp:345
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:348 rc.cpp:718 ksvnwidgets/logmsg_impl.cpp:80
 #: ksvnwidgets/logmsg_impl.cpp:107
@@ -1113,7 +1109,7 @@ msgid "How to handle UUIDs"
 msgstr "Cómo manejar UUIDs"
 
 #: rc.cpp:410
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "The repository's UUID will be updated if the dumpstream contains a UUID and "
 "action isn't set to ignore and either the repository contains no revisions "
@@ -1419,8 +1415,7 @@ msgstr "Seleccione tipo de almacenamiento"
 #: rc.cpp:643
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
+msgstr "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
 #: rc.cpp:646
 #, no-c-format
@@ -1435,8 +1430,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 #: rc.cpp:653
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
+msgstr "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
 #: rc.cpp:657
 #, no-c-format
@@ -2375,8 +2369,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1508
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1538
 msgid "Revert entries"
@@ -2543,8 +2536,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:248
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -2579,8 +2571,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:262
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:264
 msgid "Lock current items"
@@ -2612,8 +2603,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:280
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:282
 msgid "Open repository of working copy"
@@ -2829,8 +2819,7 @@ msgstr "¡Lo siento - error interno!"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2906,8 +2895,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:94
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -3056,19 +3044,12 @@ msgid "Fingerprint"
 msgstr "Huella"
 
 #: ksvnwidgets/authdialogimpl.cpp:38
+#, fuzzy
 msgid "into KDE Wallet"
-msgstr ""
+msgstr "hacia la Cartera de KDE"
 
 #: ksvnwidgets/authdialogimpl.cpp:38
-msgid "into subversions simple storage"
-msgstr ""
-
-#~ msgid "CmdExecSettings"
-#~ msgstr "CmdExecSettings"
-
-#~ msgid "Form1"
-#~ msgstr "Formulario1"
-
 #, fuzzy
-#~ msgid "BlameDisplay"
-#~ msgstr "BlameDisplay"
+msgid "into subversions simple storage"
+msgstr "hacia almacén sencillo de subversion"
+

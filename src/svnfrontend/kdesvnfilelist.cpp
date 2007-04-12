@@ -2474,6 +2474,7 @@ void kdesvnfilelist::slotRelocate()
         ptr->disableTargetDir(true);
         ptr->disableRange(true);
         ptr->disableOpen(true);
+        ptr->disableExternals(true);
         bool done = false;
         if (dlg->exec()==QDialog::Accepted) {
             done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->forceIt());

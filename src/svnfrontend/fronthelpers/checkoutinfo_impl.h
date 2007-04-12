@@ -42,9 +42,11 @@ public:
     void forceAsRecursive(bool how);
     void disableAppend(bool how);
     void disableOpen(bool how);
+    void disableExternals(bool how);
     bool openAfterJob();
     virtual void disableRange(bool how);
     void setTargetUrl(const QString&);
+    bool ignoreExternals();
 protected slots:
     virtual void urlChanged(const QString&);
 };

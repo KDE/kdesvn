@@ -121,7 +121,7 @@ public:
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
-    bool makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool,bool exp_rec=true, QWidget*p=0);
+    bool makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool,bool,bool exp_rec=true, QWidget*p=0);
     void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);

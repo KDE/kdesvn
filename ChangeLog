@@ -1,6 +1,7 @@
 version 0.12.0
     * passwords may stored in more secure kde wallet instead of subversions plain file
     * fix: in urls the wrapper libs overwrites the "@" in proto://user@host/path with url-encoding.
+    * fix: let user select if them want to checkout/export external declarations, too.
 
 version 0.11.2
     * missing KIO::special functions implemented (update/add/del)

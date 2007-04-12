@@ -1006,7 +1006,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 return;
             }
         } else {
-            if (!makeCheckout(p1,first,start,true,true,false,rec,p)) {
+            if (!makeCheckout(p1,first,start,true,true,false,false,rec,p)) {
                 return;
             }
         }
@@ -1020,7 +1020,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 return;
             }
         } else {
-            if (!makeCheckout(p2,second,end,true,true,false,rec,p)) {
+            if (!makeCheckout(p2,second,end,true,true,false,false,rec,p)) {
                 return;
             }
         }
@@ -1398,7 +1398,8 @@ void SvnActions::CheckoutExport(bool _exp)
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             bool openit = ptr->openAfterJob();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit);
+            bool ignoreExternal=ptr->ignoreExternals();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit,ignoreExternal);
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
         delete dlg;
@@ -1446,7 +1447,8 @@ void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             bool openIt = ptr->openAfterJob();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openIt);
+            bool ignoreExternal = ptr->ignoreExternals();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openIt,ignoreExternal);
         }
         delete dlg;
     }
@@ -1462,7 +1464,7 @@ void SvnActions::slotExportCurrent()
     CheckoutExportCurrent(true);
 }
 
-bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force_recurse,bool _exp,bool openIt,bool exp_rec, QWidget*_p)
+bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force_recurse,bool _exp,bool openIt,bool ignoreExternal,bool exp_rec, QWidget*_p)
 {
     QString fUrl = rUrl;
     QString ex;
@@ -1480,9 +1482,9 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (_exp) {
             /// @todo setup parameter for export operation
-            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,force_recurse,QString::null,false,exp_rec);
+            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,force_recurse,QString::null,ignoreExternal,exp_rec);
         } else {
-            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,force_recurse,false);
+            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,force_recurse,ignoreExternal);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
@@ -1773,7 +1775,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     if (rev1 != svn::Revision::WORKING) {
         first = tdir1.name()+"/"+s1;
         if (isDir) {
-            if (!makeCheckout(src1,first,rev1,true,true,false,rec)) {
+            if (!makeCheckout(src1,first,rev1,true,true,false,false,rec)) {
                 return;
             }
         } else {
@@ -1789,7 +1791,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         if (rev2!=svn::Revision::WORKING) {
             second = tdir2.name()+"/"+s2;
             if (isDir) {
-                if (!makeCheckout(src2,second,rev2,true,true,false,rec)) {
+                if (!makeCheckout(src2,second,rev2,true,true,false,false,rec)) {
                     return;
                 }
             } else {

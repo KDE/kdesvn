@@ -183,4 +183,22 @@ void CheckoutInfo_impl::disableAppend(bool how)
     }
 }
 
+/*!
+    \fn CheckoutInfo_impl::ignoreExternals()
+ */
+bool CheckoutInfo_impl::ignoreExternals()
+{
+    return m_ignoreExternals->isChecked();
+}
+
+void CheckoutInfo_impl::disableExternals(bool how)
+{
+    m_ignoreExternals->setChecked(!how);
+    if (how) {
+        m_ignoreExternals->hide();
+    } else {
+        m_ignoreExternals->show();
+    }
+}
+
 #include "checkoutinfo_impl.moc"

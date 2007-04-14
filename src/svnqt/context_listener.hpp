@@ -1,3 +1,8 @@
+/* 
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
 /*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.

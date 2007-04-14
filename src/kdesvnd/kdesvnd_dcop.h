@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   rajko.albrecht@tecways.com                                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

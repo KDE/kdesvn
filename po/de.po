@@ -6,13 +6,12 @@
 # entry, item: Eintrag, item
 # blame: Anmerkungen
 # merge: zusammenführen
-
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-31 16:37+0200\n"
-"PO-Revision-Date: 2007-03-31 16:49+0200\n"
+"PO-Revision-Date: 2007-04-14 11:06+0200\n"
 "Last-Translator: Rajko Albrecht <ral@alwins-world.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -810,7 +809,7 @@ msgid ""
 msgstr ""
 "<p>Gibt an ob Ihre Passwörter die in kdesvn eingegeben wurden in der KDE-Brieftasche anstelle des einfachen Klartextspeichers von Subversion abgelegt werden sollen.</p> "
 "<p>Dies würde etwas sicherer sein weil die KDE-Brieftasche (meistens) mit einem Passwort verschlüsselt ist. Auf der anderen Seite müssen Sie ihre Passwörter erneut eingeben bei Subversion-Clients, welche keinen Zugriff auf die KDE-Brieftasche haben (z.b. svn-Kommandozeile selber, RapidSVN usw.)</p> "
-"<p>Falls Ihr HOME-Verzeichnis und somit Subversions Konfigurationverzeichnis auf einem Netzwerklaufwerk liegt sollten Sie sehr stark darüber nachdenken ihre Passwörter NICHT in einer Klartextdatei wie es subversion tut zu speicher aber sie in einer verschlüsselten Ablage wie die KDE Brieftasche abzulegen oder gar nicht erst Passwörter zu speichern."
+"<p>Falls Ihr HOME-Verzeichnis und somit Subversions Konfigurationverzeichnis auf einem Netzwerklaufwerk liegt sollten Sie sehr stark darüber nachdenken ihre Passwörter NICHT in einer Klartextdatei wie es subversion tut zu speichern aber sie in einer verschlüsselten Ablage wie die KDE Brieftasche abzulegen oder gar nicht erst Passwörter zu speichern."
 
 #: rc.cpp:237
 #, no-c-format
@@ -2899,7 +2898,8 @@ msgstr ""
 
 #: svnfrontend/editproperty_impl.cpp:94
 msgid "Label text to show for the edit box where the user enters the issue number."
-msgstr "Anzuzeigender Text für das Editierfeld, in das der Benutzer die Fehlernummer "
+msgstr ""
+"Anzuzeigender Text für das Editierfeld, in das der Benutzer die Fehlernummer "
 "eingibt."
 
 #: svnfrontend/editproperty_impl.cpp:95

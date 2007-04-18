@@ -19,6 +19,8 @@
  ***************************************************************************/
 
 #include "itemdisplay.h"
+#include "svnitem.h"
+#include "src/settings/kdesvnsettings.h"
 
 
 ItemDisplay::ItemDisplay()
@@ -66,4 +68,26 @@ void ItemDisplay::setBaseUri(const QString&uri)
 const QString&ItemDisplay::lastError()const
 {
     return m_LastException;
+}
+
+
+/*!
+    \fn ItemDisplay::filterOut(const SvnItem*)
+ */
+bool ItemDisplay::filterOut(const SvnItem*item)
+{
+    return filterOut(item->stat());
+}
+
+
+/*!
+    \fn ItemDisplay::filterOut(const svn::Status&)
+ */
+bool ItemDisplay::filterOut(const svn::Status&item)
+{
+    bool res = false;
+    if (!Kdesvnsettings::display_unknown_files() && !item.isVersioned()) {
+        res = true;
+    }
+    return res;
 }

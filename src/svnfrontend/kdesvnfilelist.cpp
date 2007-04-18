@@ -594,7 +594,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         //kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
 
         // current item is not versioned
-        if (!(*it).isVersioned() && Kdesvnsettings::display_unknown_files()) {
+        if (!(*it).isVersioned() && !filterOut((*it))) {
             kdDebug()<< "Found non versioned item" << endl;
             // if empty, we may want to create a default svn::Status for each folder inside this _parent
             // iterate over QDir and create new filelistviewitem
@@ -630,7 +630,7 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
 #endif
 
     for (it = dlist.begin();it!=dlist.end();++it) {
-        if (!Kdesvnsettings::display_unknown_files() && !(*it).isVersioned())
+        if (filterOut((*it)))
         {
             continue;
         }
@@ -1195,7 +1195,7 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
             if (k->fullName()==(*it).path()) {
                 currentSync.removeRef(k);
                 k->updateStatus(*it);
-                if (!Kdesvnsettings::display_unknown_files() && !(*it).isVersioned()) {
+                if (filterOut(k)) {
                     dispchanged=true;
                     delete k;
                 }
@@ -1203,8 +1203,7 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
                 break;
             }
         }
-        if (!gotit &&
-             (Kdesvnsettings::display_unknown_files()||(*it).isVersioned() ) ) {
+        if (!gotit &&!filterOut((*it)) ) {
             dispchanged = true;
             FileListViewItem * item;
             if (!_parent) {

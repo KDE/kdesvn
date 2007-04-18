@@ -1372,6 +1372,10 @@ QDragObject* kdesvnfilelist::dragObject()
     if (urls.count()==0) {
         return 0;
     }
+    if (!viewport()->hasFocus()) {
+        kdDebug()<<"Set focus"<<endl;
+        viewport()->setFocus();
+    }
     kdDebug() << "dragObject: " << urls << endl;
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {

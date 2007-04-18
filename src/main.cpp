@@ -48,7 +48,7 @@ static KCmdLineOptions options[] =
 int main(int argc, char **argv)
 {
     KAboutData about("kdesvn", I18N_NOOP("kdesvn"), version, description,
-                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",0,
+                     KAboutData::License_GPL, "(C) 2005-2007 Rajko Albrecht",0,
                          0, "ral@alwins-world.de");
     about.addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
     about.setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");

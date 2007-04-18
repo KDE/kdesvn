@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -244,6 +244,13 @@ namespace svn
     Status::isLocked () const
     {
       return m_Data->m_Lock.Locked();
+    }
+
+    const bool
+    Status::isModified()const
+    {
+        return textStatus()==svn_wc_status_modified||propStatus()==svn_wc_status_modified
+                ||textStatus ()==svn_wc_status_replaced;
     }
 
     const bool

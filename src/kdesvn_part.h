@@ -95,6 +95,8 @@ private:
     static QString m_Extratext;
 protected slots:
     void slotSettingsChanged();
+protected slots:
+    virtual void slotHideUnchanged(bool);
 };
 
 class commandline_part;

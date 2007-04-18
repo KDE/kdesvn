@@ -573,7 +573,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     kdDebug()<<"checkDirs()" << endl;
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
     if (!isWorkingCopy()|| (!_parent) || ((_parent) && (_parent->isVersioned()))) {
-        if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision)) {
+        if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision) ) {
             kdDebug() << "unable makeStatus" <<endl;
             return false;
         }

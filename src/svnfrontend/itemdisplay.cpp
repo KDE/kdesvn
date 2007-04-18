@@ -86,8 +86,12 @@ bool ItemDisplay::filterOut(const SvnItem*item)
 bool ItemDisplay::filterOut(const svn::Status&item)
 {
     bool res = false;
-    if (!Kdesvnsettings::display_unknown_files() && !item.isVersioned()) {
-        res = true;
+
+    if (!item.validReposStatus()) {
+        if ((!Kdesvnsettings::display_unknown_files() && !item.isVersioned()) ||
+            (Kdesvnsettings::hide_unchanged_files() && item.isRealVersioned() && !item.isModified() && item.entry().kind()!=svn_node_dir)) {
+            res = true;
+              }
     }
     return res;
 }

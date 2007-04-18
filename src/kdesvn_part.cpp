@@ -185,6 +185,10 @@ void kdesvnPart::setupActions()
     toggletemp->setChecked(Kdesvnsettings::display_unknown_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
 
+    toggletemp = new KToggleAction(i18n("Hide unchanged files"),KShortcut(),
+                                   actionCollection(),"toggle_hide_unchanged_files");
+    toggletemp->setChecked(Kdesvnsettings::hide_unchanged_files());
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotHideUnchanged(bool)));
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
@@ -233,12 +237,17 @@ void kdesvnPart::slotDisplayUnkown(bool how)
     Kdesvnsettings::setDisplay_unknown_files(how);
     Kdesvnsettings::writeConfig();
     emit refreshTree();
-#if 0
-    kdesvnPart_Prefs::self()->mdisp_unknown_files=how;
-    kdesvnPart_Prefs::self()->writeConfig();
-#endif
 }
 
+/*!
+    \fn kdesvnPart::slotHideUnchanged(bool)
+ */
+void kdesvnPart::slotHideUnchanged(bool how)
+{
+    Kdesvnsettings::setHide_unchanged_files(how);
+    Kdesvnsettings::writeConfig();
+    emit refreshTree();
+}
 
 /*!
     \fn kdesvnPart::slotUseKompare(bool)

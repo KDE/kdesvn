@@ -69,6 +69,10 @@
       <label>Display unknown files</label>
       <default>true</default>
     </entry>
+    <entry key="hide_unchanged_files" type="Bool">
+      <label>Hide versioned unchanged files</label>
+      <default>false</default>
+    </entry>
     <entry key="log_follows_nodes" type="Bool" >
       <label>Log follows node changes</label>
       <default>true</default>

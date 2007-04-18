@@ -144,7 +144,7 @@ bool CContextListener::contextGetLogin (
         username=auth.Username();
         password=auth.Password();
         maySave = (Kdesvnsettings::passwords_in_wallet()?false:auth.maySave());
-        if (Kdesvnsettings::store_passwords() && auth.maySave()) {
+        if (Kdesvnsettings::passwords_in_wallet() && auth.maySave()) {
             m_Data->pws.setLogin(realm,username,password);
         }
         emit waitShow(false);

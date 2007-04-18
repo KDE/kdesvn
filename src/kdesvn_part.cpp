@@ -179,13 +179,12 @@ void kdesvnPart::setupActions()
     toggletemp->setChecked(Kdesvnsettings::display_ignored_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
 
-#if 0
-    /// not needed this moment
+
     toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
             actionCollection(),"toggle_unknown_files");
-    toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_unknown_files);
+    toggletemp->setChecked(Kdesvnsettings::display_unknown_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
-#endif
+
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
@@ -229,8 +228,11 @@ void kdesvnPart::slotDisplayIgnored(bool how)
 /*!
     \fn kdesvnPart::slotDisplayUnknown(bool)
  */
-void kdesvnPart::slotDisplayUnkown(bool )
+void kdesvnPart::slotDisplayUnkown(bool how)
 {
+    Kdesvnsettings::setDisplay_unknown_files(how);
+    Kdesvnsettings::writeConfig();
+    emit refreshTree();
 #if 0
     kdesvnPart_Prefs::self()->mdisp_unknown_files=how;
     kdesvnPart_Prefs::self()->writeConfig();

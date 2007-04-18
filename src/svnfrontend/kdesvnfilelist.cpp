@@ -91,6 +91,7 @@ public:
     SvnFileTip*m_fileTip;
     int mlist_icon_size;
     bool mdisp_ignored_files;
+    bool mdisp_unknown_files;
     bool mdisp_overlay;
     /* returns true if the display must refreshed */
     bool reReadSettings();
@@ -153,6 +154,7 @@ void KdesvnFileListPrivate::readSettings()
 {
     mlist_icon_size = Kdesvnsettings::listview_icon_size();
     mdisp_ignored_files = Kdesvnsettings::display_ignored_files();
+    mdisp_unknown_files = Kdesvnsettings::display_unknown_files();
     mdisp_overlay = Kdesvnsettings::display_overlays();
 }
 
@@ -161,8 +163,12 @@ bool KdesvnFileListPrivate::reReadSettings()
     int _size = mlist_icon_size;
     bool _ignored = mdisp_ignored_files;
     bool _overlay = mdisp_overlay;
+    bool _unknown = mdisp_unknown_files;
     readSettings();
-    return (_size != mlist_icon_size||_ignored!=mdisp_ignored_files||_overlay!=mdisp_overlay);
+    return (_size != mlist_icon_size||
+            _ignored!=mdisp_ignored_files||
+            _overlay!=mdisp_overlay||
+            _unknown != mdisp_unknown_files);
 }
 
 kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const char *name)
@@ -588,7 +594,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         //kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
 
         // current item is not versioned
-        if (!(*it).isVersioned()) {
+        if (!(*it).isVersioned() && Kdesvnsettings::display_unknown_files()) {
             kdDebug()<< "Found non versioned item" << endl;
             // if empty, we may want to create a default svn::Status for each folder inside this _parent
             // iterate over QDir and create new filelistviewitem
@@ -624,6 +630,10 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
 #endif
 
     for (it = dlist.begin();it!=dlist.end();++it) {
+        if (!Kdesvnsettings::display_unknown_files() && !(*it).isVersioned())
+        {
+            continue;
+        }
         FileListViewItem * item;
         if (!_parent) {
             item = new FileListViewItem(this,*it);
@@ -1185,11 +1195,16 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
             if (k->fullName()==(*it).path()) {
                 currentSync.removeRef(k);
                 k->updateStatus(*it);
+                if (!Kdesvnsettings::display_unknown_files() && !(*it).isVersioned()) {
+                    dispchanged=true;
+                    delete k;
+                }
                 gotit = true;
                 break;
             }
         }
-        if (!gotit) {
+        if (!gotit &&
+             (Kdesvnsettings::display_unknown_files()||(*it).isVersioned() ) ) {
             dispchanged = true;
             FileListViewItem * item;
             if (!_parent) {

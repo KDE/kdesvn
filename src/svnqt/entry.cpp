@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -374,8 +374,19 @@ namespace svn
     }
 }
 
-/* -----------------------------------------------------------------
- * local variables:
- * eval: (load-file "../../rapidsvn-dev.el")
- * end:
+/*!
+    \fn svn::Entry::isDir()
  */
+bool svn::Entry::isDir() const
+{
+    return kind()==svn_node_dir;
+}
+
+
+/*!
+    \fn svn::Entry::isFile()
+ */
+bool svn::Entry::isFile() const
+{
+    return kind()==svn_node_file;
+}

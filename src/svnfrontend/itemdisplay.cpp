@@ -106,8 +106,10 @@ QString ItemDisplay::relativePath(const SvnItem*item)
         return item->fullName();
     }
     QString name = item->fullName();
-    kdDebug()<<baseUri()<<endl;
-    name = name.right(name.length()-baseUri().length()-1);
-    kdDebug()<<name<< endl;
+    if (name==baseUri()) {
+        name = ".";
+    } else {
+        name = name.right(name.length()-baseUri().length()-1);
+    }
     return name;
 }

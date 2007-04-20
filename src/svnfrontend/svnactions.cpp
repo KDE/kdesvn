@@ -41,6 +41,7 @@
 #include "src/svnqt/svnqt_defines.hpp"
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
+#include "fronthelpers/diffbrowser.h"
 #include "cacheentry.h"
 
 #include <kdialog.h>
@@ -1190,10 +1191,10 @@ void SvnActions::dispDiff(const QString&ex)
         }
         delete proc;
     }
-    KTextBrowser*ptr;
+    DiffBrowser*ptr;
     KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,"diff_display");
     if (dlg) {
-        ptr->setText("<code>"+QStyleSheet::convertFromPlainText(ex)+"</code>");
+        ptr->setText(ex);
         dlg->exec();
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
         delete dlg;

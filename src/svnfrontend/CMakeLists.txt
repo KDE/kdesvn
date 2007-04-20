@@ -17,6 +17,10 @@ SET(svnfrontendsrc
     fronthelpers/cursorstack.h
     fronthelpers/widgetblockstack.cpp
     fronthelpers/widgetblockstack.h
+    fronthelpers/diffbrowser.cpp
+    fronthelpers/diffbrowser.h
+    fronthelpers/diffsyntax.cpp
+    fronthelpers/diffsyntax.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp

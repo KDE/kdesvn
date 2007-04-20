@@ -23,6 +23,7 @@
 #include <qtextbrowser.h>
 
 class DiffSyntax;
+class KEdFind;
 
 class DiffBrowser : public QTextBrowser
 {
@@ -34,9 +35,18 @@ public:
 
 public slots:
     virtual void setText(const QString&aText);
+    virtual void setText(const QByteArray&ex);
+    virtual void saveDiff();
+
+protected:
+    virtual void keyPressEvent(QKeyEvent*);
+
+    void startSearch();
 
 protected:
     DiffSyntax*m_Syntax;
+    QByteArray m_content;
+    KEdFind   *srchdialog;
 };
 
 #endif

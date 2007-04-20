@@ -23,6 +23,11 @@
 
 #include <kglobalsettings.h>
 #include <kglobal.h>
+#include <kdebug.h>
+#include <kfiledialog.h>
+#include <kmessagebox.h>
+#include <kapplication.h>
+#include <klocale.h>
 
 #include <qfont.h>
 /*!
@@ -36,6 +41,8 @@ DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
     //setTabStopWidth(4);
     setWordWrap(QTextEdit::NoWrap);
     m_Syntax = new DiffSyntax(this);
+    srchdialog=0;
+    setFocus();
 }
 
 /*!
@@ -48,17 +55,61 @@ DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
 
 void DiffBrowser::setText(const QString&aText)
 {
-#if 0
-    if (aText.find("\t")!=-1) {
-        QString b=aText;
-        b.replace("\t","    ");
-        QTextBrowser::setText(b);
-    } else {
-#endif
-        QTextBrowser::setText(aText);
-#if 0
+    m_content.setRawData(aText.local8Bit(),aText.local8Bit().size());
+    QTextBrowser::setText(aText);
+    setCursorPosition(0,0);
+}
+
+void DiffBrowser::setText(const QByteArray&aText)
+{
+    m_content=aText;
+    QTextBrowser::setText(QString::fromLocal8Bit(aText,aText.size()));
+    setCursorPosition(0,0);
+}
+
+/*!
+    \fn DiffBrowser::saveDiff()
+ */
+void DiffBrowser::saveDiff()
+{
+    QString saveTo = KFileDialog::getSaveFileName(QString::null,"text/x-diff");
+    if (saveTo.isEmpty()) {
+        return;
     }
-#endif
+    QFile tfile(saveTo);
+    if (tfile.exists()) {
+        if (KMessageBox::warningYesNo(KApplication::activeModalWidget(),
+                                     i18n("File %1 exists - overwrite?").arg(saveTo))
+            !=KMessageBox::Yes) {
+            return;
+        }
+    }
+    tfile.open(IO_Truncate|IO_WriteOnly|IO_Raw);
+    QDataStream stream( &tfile );
+    stream.writeRawBytes(m_content.data(),m_content.size());
+}
+
+void DiffBrowser::keyPressEvent(QKeyEvent*ev)
+{
+    if ( ev->key() == Key_Return && ev->state() == ControlButton ) {
+        ev->ignore();
+        return;
+    }
+    if (ev->key() == Key_F3) {
+        kdDebug()<<"Weitersuchen..."<<endl;
+    } else if (ev->key()==Key_F && ev->state() == ControlButton) {
+        kdDebug()<<"Suchen..."<<endl;
+        startSearch();
+    } else {
+        QTextBrowser::keyPressEvent(ev);
+    }
+}
+
+void DiffBrowser::startSearch()
+{
+    int line, col;
+    getCursorPosition(&line,&col);
+    //kdDebug()<<"Line: "<<line << " Col: "<<col << endl;
 }
 
 #include "diffbrowser.h.moc"

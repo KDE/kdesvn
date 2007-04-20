@@ -95,3 +95,19 @@ bool ItemDisplay::filterOut(const svn::Status&item)
     }
     return res;
 }
+
+
+/*!
+    \fn ItemDisplay::relativePath(const SvnItem*item)
+ */
+QString ItemDisplay::relativePath(const SvnItem*item)
+{
+    if (!isWorkingCopy()) {
+        return item->fullName();
+    }
+    QString name = item->fullName();
+    kdDebug()<<baseUri()<<endl;
+    name = name.right(name.length()-baseUri().length()-1);
+    kdDebug()<<name<< endl;
+    return name;
+}

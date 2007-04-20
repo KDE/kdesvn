@@ -64,6 +64,7 @@
 #include <kstandarddirs.h>
 #include <ktrader.h>
 #include <krun.h>
+#include <kstdguiitem.h>
 
 #include <qstring.h>
 #include <qmap.h>
@@ -80,6 +81,7 @@
 #include <qfileinfo.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <qguardedptr.h>
 
 
 // wait not longer than 10 seconds for a thread
@@ -97,6 +99,10 @@ public:
 
     virtual ~SvnActionsData()
     {
+        if (m_DiffDialog) {
+            m_DiffDialog->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
+            delete m_DiffDialog;
+        }
         QMap<KProcess*,QStringList>::iterator it;
         for (it=m_tempfilelist.begin();it!=m_tempfilelist.end();++it) {
             for (QStringList::iterator it2 = (*it).begin();
@@ -145,6 +151,8 @@ public:
     QTimer m_ThreadCheckTimer;
     QTimer m_UpdateCheckTimer;
     QTime m_UpdateCheckTick;
+    QGuardedPtr<DiffBrowser> m_DiffBrowserPtr;
+    QGuardedPtr<KDialogBase> m_DiffDialog;
 
     bool runblocked;
 };
@@ -189,7 +197,7 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
 }
 
-template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,const QString&u1)
+template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,bool modal,const QString&u1)
 {
     int buttons = KDialogBase::Ok;
     if (OkCancel) {
@@ -202,13 +210,17 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
         buttons = buttons|KDialogBase::User1;
     }
 
+    kdDebug()<<"Modal: "<<modal<<endl;
     KDialogBase * dlg = new KDialogBase(
-        KApplication::activeModalWidget(),
-        name,
-        true,
-        _head,
-        buttons,KDialogBase::Ok,false,
-        (u1.isEmpty()?KGuiItem():KGuiItem(u1)));
+        modal?KApplication::activeModalWidget():0, // parent
+        name, // name
+        modal, // modal
+        _head, // caption
+        buttons, // buttonmask
+        KDialogBase::Ok, // defaultButton
+        false, // separator
+        (u1.isEmpty()?KGuiItem():KGuiItem(u1)) //user1
+                                       );
 
     if (!dlg) return dlg;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
@@ -1098,7 +1110,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         emit clientException(i18n("No difference to display"));
         return;
     }
-    dispDiff(QString::fromLocal8Bit(ex,ex.size()));
+    dispDiff(ex);
 }
 
 void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2,QWidget*_p)
@@ -1134,10 +1146,10 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         return;
     }
 
-    dispDiff(QString::fromLocal8Bit(ex,ex.size()));
+    dispDiff(ex);
 }
 
-void SvnActions::dispDiff(const QString&ex)
+void SvnActions::dispDiff(const QByteArray&ex)
 {
     int disp = Kdesvnsettings::use_kompare_for_diff();
     QString what = Kdesvnsettings::external_diff_display();
@@ -1151,7 +1163,7 @@ void SvnActions::dispDiff(const QString&ex)
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
         connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
         if (proc->start(KProcess::NotifyOnExit,(KProcess::Communication)r)) {
-            proc->writeStdin(ex.ascii(),ex.length());
+            proc->writeStdin(ex,ex.size());
             return;
         } else {
             emit sendNotify(i18n("\"Kompare\" could not started."));
@@ -1167,9 +1179,9 @@ void SvnActions::dispDiff(const QString&ex)
         for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
             if (*it=="%f") {
                 fname_used = true;
-                QByteArray ut = ex.local8Bit();
+//                QByteArray ut = ex.local8Bit();
                 QDataStream*ds = tfile.dataStream();
-                ds->writeRawBytes(ut,ut.size());
+                ds->writeRawBytes(ex,ex.size());
                 tfile.close();
                 *proc<<tfile.name();
             } else {
@@ -1183,7 +1195,7 @@ void SvnActions::dispDiff(const QString&ex)
             connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         }
         if (proc->start(KProcess::NotifyOnExit,fname_used?KProcess::Stderr:(KProcess::Communication)r)) {
-            if (!fname_used) proc->writeStdin(ex.ascii(),ex.length());
+            if (!fname_used) proc->writeStdin(ex,ex.size());
             else m_Data->m_tempfilelist[proc].append(tfile.name());
             return;
         } else {
@@ -1191,13 +1203,35 @@ void SvnActions::dispDiff(const QString&ex)
         }
         delete proc;
     }
-    DiffBrowser*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,"diff_display");
-    if (dlg) {
-        ptr->setText(ex);
-        dlg->exec();
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
-        delete dlg;
+    bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
+    if (need_modal||!m_Data->m_DiffBrowserPtr||!m_Data->m_DiffDialog) {
+        DiffBrowser*ptr;
+
+        if (!need_modal && m_Data->m_DiffBrowserPtr) {
+            delete m_Data->m_DiffBrowserPtr;
+        }
+        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,"diff_display",false,need_modal,i18n("Save"));
+        if (dlg) {
+            QObject::connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(saveDiff()));
+            ptr->setText(ex);
+            if (need_modal) {
+                ptr->setFocus();
+                dlg->exec();
+                dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
+                delete dlg;
+                return;
+            } else {
+                m_Data->m_DiffBrowserPtr=ptr;
+                m_Data->m_DiffDialog=dlg;
+            }
+        }
+    } else {
+        m_Data->m_DiffBrowserPtr->setText(ex);
+        m_Data->m_DiffBrowserPtr->setFocus();
+    }
+    if (m_Data->m_DiffDialog) {
+        m_Data->m_DiffDialog->show();
+        m_Data->m_DiffDialog->raise();
     }
 }
 

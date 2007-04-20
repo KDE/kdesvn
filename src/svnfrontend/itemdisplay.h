@@ -55,6 +55,7 @@ protected:
     void setWorkingCopy(bool);
     void setNetworked(bool);
     void setBaseUri(const QString&);
+    QString relativePath(const SvnItem*item);
     QString m_LastException;
 
 private:

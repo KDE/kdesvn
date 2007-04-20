@@ -521,6 +521,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     }
     bool result = checkDirs(baseUri(),0);
     if (result && isWorkingCopy()) {
+        chdir(baseUri().local8Bit());
         if (firstChild()) firstChild()->setOpen(true);
     }
     if (!result) {
@@ -847,11 +848,11 @@ void kdesvnfilelist::enableActions()
     m_simpleDiffHead->setEnabled(isWorkingCopy()&&isopen);
     temp = filesActions()->action("make_svn_basediff");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&isopen&&single);
+        temp->setEnabled(isWorkingCopy()&&(single||none));
     }
     temp = filesActions()->action("make_svn_headdiff");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&isopen&&single);
+        temp->setEnabled(isWorkingCopy()&&(single||none));
     }
 
     /* 2. on dirs only */
@@ -1989,9 +1990,9 @@ void kdesvnfilelist::slotSimpleBaseDiff()
 
     QString what;
     if (!kitem) {
-        what==baseUri();
+        what==".";
     } else {
-        what = kitem->fullName();
+        what = relativePath(kitem);
     }
     // only possible on working copies - so we may say this values
     m_SvnWrapper->makeDiff(what,svn::Revision::BASE,svn::Revision::WORKING,kitem?kitem->isDir():true);
@@ -2003,9 +2004,9 @@ void kdesvnfilelist::slotSimpleHeadDiff()
     QString what;
 
     if (!kitem) {
-        what=baseUri();
+        what=".";
     }else{
-        what = kitem->fullName();
+        what = relativePath(kitem);
     }
     // only possible on working copies - so we may say this values
     m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,kitem?kitem->isDir():true);
@@ -2062,9 +2063,9 @@ void kdesvnfilelist::slotDiffRevisions()
     SvnItem*k = singleSelected();
     QString what;
     if (!k) {
-        what=baseUri();
+        what=(isWorkingCopy()?".":baseUri());
     }else{
-        what=k->fullName();
+        what = relativePath(k);
     }
     Rangeinput_impl*rdlg;
     KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");

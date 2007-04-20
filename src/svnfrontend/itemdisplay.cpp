@@ -102,7 +102,7 @@ bool ItemDisplay::filterOut(const svn::Status&item)
  */
 QString ItemDisplay::relativePath(const SvnItem*item)
 {
-    if (!isWorkingCopy()) {
+    if (!isWorkingCopy()||!item->fullName().startsWith(baseUri())) {
         return item->fullName();
     }
     QString name = item->fullName();

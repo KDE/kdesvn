@@ -50,12 +50,12 @@ public:
     virtual const QString&lastError()const;
     virtual bool filterOut(const SvnItem*);
     virtual bool filterOut(const svn::Status&);
+    QString relativePath(const SvnItem*item);
 
 protected:
     void setWorkingCopy(bool);
     void setNetworked(bool);
     void setBaseUri(const QString&);
-    QString relativePath(const SvnItem*item);
     QString m_LastException;
 
 private:

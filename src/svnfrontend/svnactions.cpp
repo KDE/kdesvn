@@ -811,12 +811,14 @@ void SvnActions::slotCommit()
 
     svn::Pathes targets;
     if (which.count()==0) {
-        targets.push_back(svn::Path(m_Data->m_ParentList->baseUri()));
+        targets.push_back(svn::Path("."));
     } else {
         while ( (cur=liter.current())!=0) {
             ++liter;
             kdDebug()<<"Commiting " << cur->fullName()<<endl;
-            targets.push_back(svn::Path(cur->fullName()));
+            targets.push_back(svn::Path(
+                    m_Data->m_ParentList->relativePath(cur)
+                                       ));
         }
     }
     makeCommit(targets);

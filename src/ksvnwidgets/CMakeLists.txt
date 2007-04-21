@@ -12,6 +12,9 @@ SET(ksvnwidgetsrc
     logmsg_impl.cpp
     ssltrustprompt_impl.cpp
     pwstorage.cpp
+    diffbrowser.cpp
+    diffbrowserdata.cpp
+    diffsyntax.cpp
     )
 
 SET(ksvnwidgethdr
@@ -19,6 +22,9 @@ SET(ksvnwidgethdr
     logmsg_impl.h
     ssltrustprompt_impl.h
     pwstorage.h
+    diffbrowser.h
+    diffbrowserdata.h
+    diffsyntax.h
 )
 
 KDE3_AUTOMOC(${ksvnwidgetsrc})

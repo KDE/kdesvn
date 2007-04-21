@@ -29,6 +29,7 @@
 #include "stopdlg.h"
 #include "blamedisplay_impl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/ksvnwidgets/diffbrowser.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/client.hpp"
@@ -41,7 +42,6 @@
 #include "src/svnqt/svnqt_defines.hpp"
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
-#include "fronthelpers/diffbrowser.h"
 #include "cacheentry.h"
 
 #include <kdialog.h>

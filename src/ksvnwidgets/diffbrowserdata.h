@@ -17,37 +17,25 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _DIFF_BROWSER_H
-#define _DIFF_BROWSER_H
 
-#include <qtextbrowser.h>
+#include "diffsyntax.h"
 
-class DiffSyntax;
-class KEdFind;
+#include <keditcl.h>
 
-class DiffBrowser : public QTextBrowser
+#include <qstring.h>
+
+class DiffBrowserData
 {
-    Q_OBJECT
-
 public:
-    DiffBrowser(QWidget*parent=0,const char*name=0);
-    virtual ~DiffBrowser();
+    DiffBrowserData();
+    virtual ~DiffBrowserData();
 
-public slots:
-    virtual void setText(const QString&aText);
-    virtual void setText(const QByteArray&ex);
-    virtual void saveDiff();
+    enum {NONE, FORWARD, BACKWARD};
 
-protected:
-    virtual void keyPressEvent(QKeyEvent*);
-
-    void startSearch();
-
-protected:
     DiffSyntax*m_Syntax;
     QByteArray m_content;
     KEdFind   *srchdialog;
+
+    int last_search,last_finished_search;
+    QString pattern;
 };
-
-#endif
-

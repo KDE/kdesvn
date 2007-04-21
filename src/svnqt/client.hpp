@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -346,7 +346,8 @@ namespace svn
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
      * is a URL then authentication is usually required, see Auth and
-     * the callback asks for a logmessage.
+     * the callback asks for a logmessage. With subversion 1.4 the target
+     * must not exist (\sa svn_client_move4)
      *
      * @param path
      * @param message log message. if it is QString::null asks when working on repository

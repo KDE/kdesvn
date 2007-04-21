@@ -1644,7 +1644,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             }
         }
     } else {
-        kdDebug()<<"Dropped from inside" << action << endl;
+        kdDebug()<<"Dropped from inside " << action << endl;
         int root_x, root_y, win_x, win_y;
         uint keybstate;
         QDropEvent::Action action = QDropEvent::UserAction;
@@ -1654,7 +1654,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
             action = QDropEvent::Copy;
         } else if (keybstate&Qt::ShiftButton) {
             kdDebug()<<"Shift pressed" << endl;
-            action = QDropEvent::Copy;
+            action = QDropEvent::Move;
         }
         /* converting urls to interal style */
         QString nProto;

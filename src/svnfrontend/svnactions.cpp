@@ -1932,7 +1932,9 @@ bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
             local = true;
         }
         for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->move((local?(*it).path():(*it).url()),svn::Path(New),force);
+            svn::Path NPath(New);
+            NPath.addComponent((*it).fileName());
+            m_Data->m_Svnclient->move((local?(*it).path():(*it).url()),NPath,force);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());

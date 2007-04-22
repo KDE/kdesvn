@@ -197,7 +197,7 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
 }
 
-template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,bool modal,const QString&u1)
+template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,bool modal,const KGuiItem&u1)
 {
     int buttons = KDialogBase::Ok;
     if (OkCancel) {
@@ -206,10 +206,9 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     if (showHelp) {
         buttons = buttons|KDialogBase::Help;
     }
-    if (!u1.isEmpty()) {
+    if (!u1.text().isEmpty()) {
         buttons = buttons|KDialogBase::User1;
     }
-
     kdDebug()<<"Modal: "<<modal<<endl;
     KDialogBase * dlg = new KDialogBase(
         modal?KApplication::activeModalWidget():0, // parent
@@ -218,8 +217,8 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
         _head, // caption
         buttons, // buttonmask
         KDialogBase::Ok, // defaultButton
-        false, // separator
-        (u1.isEmpty()?KGuiItem():KGuiItem(u1)) //user1
+        false , // separator
+        (u1.text().isEmpty()?KGuiItem():u1) //user1
                                        );
 
     if (!dlg) return dlg;
@@ -1211,7 +1210,9 @@ void SvnActions::dispDiff(const QByteArray&ex)
         if (!need_modal && m_Data->m_DiffBrowserPtr) {
             delete m_Data->m_DiffBrowserPtr;
         }
-        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,"diff_display",false,need_modal,i18n("Save"));
+        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,
+                                        "diff_display",false,need_modal,
+                                      KStdGuiItem::saveAs());
         if (dlg) {
             QObject::connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(saveDiff()));
             ptr->setText(ex);

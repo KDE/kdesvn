@@ -38,4 +38,5 @@ public:
 
     int last_search,last_finished_search;
     QString pattern;
+    bool cs;
 };

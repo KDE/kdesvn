@@ -43,7 +43,9 @@ public slots:
 protected:
     virtual void keyPressEvent(QKeyEvent*);
 
-    void startSearch();
+    virtual void startSearch();
+    virtual void doSearch(const QString&to_find_string,bool case_sensitive,bool back);
+    virtual void doSearchAgain(bool back);
 
 protected:
     DiffBrowserData*m_Data;
@@ -51,6 +53,7 @@ protected slots:
     virtual void search_slot();
     virtual void searchdone_slot();
     virtual void searchagain_slot();
+    virtual void searchagainback_slot();
 };
 
 #endif

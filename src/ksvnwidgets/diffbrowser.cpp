@@ -30,6 +30,9 @@
 #include <klocale.h>
 
 #include <qfont.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
+
 /*!
     \fn DiffBrowser::DiffBrowser(QWidget*parent=0,const char*name=0)
  */
@@ -42,6 +45,8 @@ DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
 
     setWordWrap(QTextEdit::NoWrap);
     m_Data->m_Syntax = new DiffSyntax(this);
+    QToolTip::add(this,i18n("Ctrl-F for search, F3 or Shift-F3 for search again."));
+    QWhatsThis::add(this,i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
     setFocus();
 }
 
@@ -91,14 +96,20 @@ void DiffBrowser::saveDiff()
 
 void DiffBrowser::keyPressEvent(QKeyEvent*ev)
 {
-    if ( ev->key() == Key_Return && ev->state() == ControlButton ) {
+    if ( ev->key() == Key_Return) {
         ev->ignore();
         return;
     }
     if (ev->key() == Key_F3) {
-        searchagain_slot();
+        if (ev->state() == ShiftButton) {
+            searchagainback_slot();
+        } else {
+            searchagain_slot();
+        }
     } else if (ev->key()==Key_F && ev->state() == ControlButton) {
         startSearch();
+    } else if (ev->key()==Key_S && ev->state() == ControlButton) {
+        saveDiff();
     } else {
         KTextBrowser::keyPressEvent(ev);
     }
@@ -125,22 +136,26 @@ void DiffBrowser::search_slot()
     if( !m_Data->srchdialog ) {
         return;
     }
+    QString to_find_string = m_Data->srchdialog->getText();
+    doSearch(to_find_string,m_Data->srchdialog->case_sensitive(),m_Data->srchdialog->get_direction());
+}
+
+void DiffBrowser::doSearch(const QString&to_find_string,bool case_sensitive,bool back)
+{
+    if( !m_Data->srchdialog ) {
+        return;
+    }
     int line, col;
     getCursorPosition(&line,&col);
-    QString to_find_string = m_Data->srchdialog->getText();
-    getCursorPosition(&line,&col);
-    if (m_Data->last_search != DiffBrowserData::NONE) {
-        if (!m_Data->srchdialog->get_direction()){
-            col = col+1;
-        }
+    if (m_Data->last_search != DiffBrowserData::NONE && !back) {
+        col = col+1;
     }
-
     while (1) {
-        bool result = find(to_find_string,m_Data->srchdialog->case_sensitive(),false,
-                        (!m_Data->srchdialog->get_direction()),&line,&col);
+        bool result = find(to_find_string,case_sensitive,false,
+                        (!back),&line,&col);
 
         if (result) {
-            m_Data->last_search = m_Data->srchdialog->get_direction()?DiffBrowserData::BACKWARD:DiffBrowserData::FORWARD;
+            m_Data->last_search = back?DiffBrowserData::BACKWARD:DiffBrowserData::FORWARD;
             m_Data->pattern=to_find_string;
             break;
         }
@@ -192,14 +207,29 @@ void DiffBrowser::searchdone_slot()
     setFocus();
     m_Data->last_finished_search = m_Data->last_search;
     m_Data->last_search = DiffBrowserData::NONE;
+    m_Data->cs = m_Data->srchdialog->case_sensitive();
 }
 
 void DiffBrowser::searchagain_slot()
 {
-    if (!m_Data->srchdialog)
-        return;
-    m_Data->last_search = m_Data->last_finished_search;
-    search_slot();
+    doSearchAgain(false);
+}
+
+void DiffBrowser::searchagainback_slot()
+{
+    doSearchAgain(true);
+}
+
+void DiffBrowser::doSearchAgain(bool back)
+{
+    if (!m_Data->srchdialog || m_Data->pattern.isEmpty()) {
+        startSearch();
+    } else {
+        m_Data->last_search = m_Data->last_finished_search;
+        doSearch(m_Data->pattern,m_Data->cs,back);
+        m_Data->last_finished_search = m_Data->last_search;
+        m_Data->last_search = DiffBrowserData::NONE;
+    }
 }
 
 #include "diffbrowser.h.moc"

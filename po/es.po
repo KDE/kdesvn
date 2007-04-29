@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-04-20 20:52+0200\n"
-"PO-Revision-Date: 2007-04-18 00:51+0200\n"
+"PO-Revision-Date: 2007-04-18 21:08+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: es_ES <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -144,15 +144,15 @@ msgstr "Finalizado."
 
 #: kiosvn/kiolistener.cpp:208
 msgid "Finished external at revision %1."
-msgstr "Finalizado externamente en revisión %1."
+msgstr "Finalizada definición externa en revisión %1."
 
 #: kiosvn/kiolistener.cpp:210
 msgid "Finished external."
-msgstr "Finalizado externamente."
+msgstr "Finalizada definición externa."
 
 #: kiosvn/kiolistener.cpp:219
 msgid "Exported external at revision %1."
-msgstr "Exportado externamente en revisión %1."
+msgstr "Exportada definición externa en revisión %1."
 
 #: kiosvn/kiolistener.cpp:221
 msgid "Exported revision %1."
@@ -160,7 +160,7 @@ msgstr "Exportada revisión %1."
 
 #: kiosvn/kiolistener.cpp:224
 msgid "Checked out external at revision %1."
-msgstr "Obtenido externamente con la revisión %1."
+msgstr "Obtenida definición externa en revisión %1."
 
 #: kiosvn/kiolistener.cpp:226
 msgid "Checked out revision %1."
@@ -168,7 +168,7 @@ msgstr "Obtenida revisión %1."
 
 #: kiosvn/kiolistener.cpp:230
 msgid "Updated external to revision %1."
-msgstr "Actualizado externamente a la revisión %1."
+msgstr "Actualizada definición externa a la revisión %1."
 
 #: kiosvn/kiolistener.cpp:232
 msgid "Updated to revision %1."
@@ -176,7 +176,7 @@ msgstr "Actualizado a la revisión %1."
 
 #: kiosvn/kiolistener.cpp:235
 msgid "External at revision %1."
-msgstr "Externo en revisión %1."
+msgstr "Definición externa en revisión %1."
 
 #: kiosvn/kiolistener.cpp:237
 msgid "At revision %1."
@@ -570,7 +570,7 @@ msgstr ""
 #: rc.cpp:101
 #, no-c-format
 msgid "External display:"
-msgstr "Visor externo:"
+msgstr "Visor de definiciones externas:"
 
 #: rc.cpp:104
 #, no-c-format
@@ -973,7 +973,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p align=\"left\">\n"
-"Intruduzca un programa externo de la forma\n"
+"Introduzca un programa externo de la forma\n"
 "<p align=\"center\">\n"
 "<tt>&lt;programa&gt; &lt;parámetros&gt; %f</tt>\n"
 "</p>\n"
@@ -1007,9 +1007,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 #, no-c-format
 msgid ""
 "Set if merge with external program is prefered and not subversions merge"
-msgstr ""
-"Establece si se prefiere un programa de fusionado externo y no el fusionado "
-"de subversion"
+msgstr "Establece si se prefiere un programa de fusionado externo y no el fusionado de subversion"
 
 #: rc.cpp:329 svnfrontend/svnlogdlgimp.cpp:236
 #, no-c-format
@@ -1274,7 +1272,7 @@ msgstr "Gestionar no-relacionados como elementos relacionados"
 #: rc.cpp:510
 #, no-c-format
 msgid "Just dry run without modifications"
-msgstr "Ejecutar directamente sin modificaciones"
+msgstr "Ejecutar simulacro sin modificar nada"
 
 #: rc.cpp:514 rc.cpp:755 svnfrontend/svnactions.cpp:1586
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:117
@@ -1357,12 +1355,12 @@ msgstr "Crear en un subdirectorio con el nombre final de la URL"
 #: rc.cpp:578
 #, no-c-format
 msgid "Ignore externals"
-msgstr "Ignorar externos"
+msgstr "Ignorar definiciones externas"
 
 #: rc.cpp:581
 #, no-c-format
 msgid "Ignore externals while operation"
-msgstr "Ignorar externos durante la operación"
+msgstr "Ignorar definiciones externas durante la operación"
 
 #: rc.cpp:584
 #, no-c-format
@@ -1834,7 +1832,7 @@ msgstr "Ignorado"
 
 #: svnfrontend/svnitem.cpp:401
 msgid "External"
-msgstr "Externo"
+msgstr "Definición externa"
 
 #: svnfrontend/svnitem.cpp:404
 msgid "Conflict"
@@ -1909,9 +1907,8 @@ msgid "Update external module"
 msgstr "Actualizar módulo externo"
 
 #: svnfrontend/ccontextlistener.cpp:76
-#, fuzzy
 msgid "Status on external"
-msgstr "Estado respecto al externo"
+msgstr "Estado de la definición externa"
 
 #: svnfrontend/ccontextlistener.cpp:77
 msgid "Commit Modified"

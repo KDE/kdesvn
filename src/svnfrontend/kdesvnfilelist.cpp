@@ -71,6 +71,8 @@
 #include <qcursor.h>
 #include <qheader.h>
 
+#include <unistd.h>
+
 class KdesvnFileListPrivate{
 public:
     KdesvnFileListPrivate();

@@ -1,7 +1,17 @@
 # Copyright (C) 2005
 # This file is distributed under the same license as the kdesvn package.
 #
-# Frederic Rodrigo <f.rodrigo free.fr>, 2006.
+# Frederic Rodrigo <f.rodrigo free.fr>, 2006-2007.
+#
+# Glossaire
+# Revert : retour à
+# Directory : répertoire
+# Revision : révision
+# Replaced : replacé
+# Overview : vue globale
+# Lock : verrouillage
+# Relocate : restituer
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
@@ -23,11 +33,10 @@ msgid ""
 msgstr "Frédéric Rodrigo"
 
 #: _translatorinfo.cpp:3
-#, fuzzy
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "<f.rodrigo free.fr>,f.rodrigo free.fr"
+msgstr "<f.rodrigo free.fr>"
 
 #: main.cpp:32
 msgid "A Subversion Client for KDE (standalone application)"
@@ -136,14 +145,12 @@ msgid "Skipped missing target %1."
 msgstr "Cible manquante %1 sauté."
 
 #: kiosvn/kiolistener.cpp:151
-#, fuzzy
 msgid "Skipped %1."
 msgstr "%1 sauté."
 
 #: kiosvn/kiolistener.cpp:202
-#, fuzzy
 msgid "Finished at revision %1."
-msgstr "Terminé à la révision %1"
+msgstr "Terminé à la révision %1."
 
 #: kiosvn/kiolistener.cpp:204
 msgid "Finished."
@@ -152,7 +159,7 @@ msgstr "Terminé."
 #: kiosvn/kiolistener.cpp:208
 #, fuzzy
 msgid "Finished external at revision %1."
-msgstr "Externe terminé à la révision %1"
+msgstr "Externe terminé à la révision %1."
 
 #: kiosvn/kiolistener.cpp:210
 #, fuzzy
@@ -238,9 +245,8 @@ msgid "Performing status on external item at %1."
 msgstr ""
 
 #: kiosvn/kiolistener.cpp:276
-#, fuzzy
 msgid "Sending %1."
-msgstr "Envoie %1"
+msgstr "Envoie %1."
 
 #: kiosvn/kiolistener.cpp:280
 msgid "Adding (bin) %1."
@@ -369,7 +375,7 @@ msgstr "Utiliser \"Kompare\" pour afficher les diffs"
 
 #: kdesvn_part.cpp:172
 msgid "Logs follow node changes"
-msgstr ""
+msgstr "Les logs suivent les changements de nœud"
 
 #: kdesvn_part.cpp:177 rc.cpp:213
 #, no-c-format
@@ -381,9 +387,8 @@ msgid "Display unknown files"
 msgstr "Afficher fichiers inconnus"
 
 #: kdesvn_part.cpp:188
-#, fuzzy
 msgid "Hide unchanged files"
-msgstr "Items distants modifiés :"
+msgstr "Cacher les fichiers non modifiés"
 
 #: kdesvn_part.cpp:196
 msgid "&Configure %1..."
@@ -479,7 +484,7 @@ msgid "Not versioned items:"
 msgstr "Items non versionés :"
 
 #: rc.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Remote changed items:"
 msgstr "Items distants modifiés :"
 
@@ -554,7 +559,7 @@ msgid "Mark subversion states with an overlayed icon"
 msgstr "Marquer le statut subversion par la surcharge de l'icône"
 
 #: rc.cpp:89
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "<p align=\"left\">\n"
 "Mark an items with non-normal state with an overlayed icon. When you wish "
@@ -566,8 +571,9 @@ msgstr ""
 "<p align=\"left\">\n"
 "Marquer un item avec un statut non normal à l'aide d'un icône surchargé. "
 "Lors que vous voulez\n"
-"voir quels items sont de nouveaux items du dépôt, vous pouvez activer \"\" "
-"dans ???.\n"
+"voir quels items sont de nouveaux items du dépôt, vous pouvez activer "
+"\"Vérification des mises à jour à l'ouverture\" dans le dialogue de "
+"Subversion.\n"
 "</p>"
 
 #: rc.cpp:95
@@ -705,12 +711,12 @@ msgid "0"
 msgstr "0"
 
 #: rc.cpp:173
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
-"Le minimum de lignes que doit contenir un log pour que kdesvn affiche une "
-"fenêtre de log apparentiers"
+"Le minimum de lignes que doit contenir un log avant que kdesvn affiche une "
+"fenêtre de log"
 
 #: rc.cpp:176
 #, no-c-format
@@ -731,7 +737,7 @@ msgstr "Les opérations KIO utilisent le log standard"
 #: rc.cpp:185
 #, no-c-format
 msgid "Standard message:"
-msgstr "Message standard"
+msgstr "Message standard :"
 
 #: rc.cpp:191
 #, no-c-format
@@ -762,7 +768,7 @@ msgstr ""
 "non ?"
 
 #: rc.cpp:205
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
 "items when making a listing to remote repositories. So you may see remote "
@@ -771,8 +777,8 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
 msgstr ""
 "<p align=\"left\">Lors de la vérification de mise à jour, kdesvn récupère "
-"des informations plus détaillés à propos des items. Vous pouvez ainsi voir "
-"des locks distant dans la vue globale.\n"
+"des informations plus détaillés à propos des items sur le dépôt distant. "
+"Vous pouvez ainsi voir les locks distant dans la vue globale.\n"
 "</p>\n"
 "<p align=\"left\"><i>Attention : cela peut rendre le listage TRÈS lent !</"
 "i></p>"
@@ -793,7 +799,7 @@ msgid "Should subversion store passwords in default"
 msgstr "Subversion doit-il conserver les mots de passe par défaut"
 
 #: rc.cpp:223
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
 "any passwords, but the subversion itself inside the configuration area of "
@@ -801,21 +807,25 @@ msgid ""
 "you may select for single non critical accounts inside the authentication "
 "dialog."
 msgstr ""
-"La conservation de mots de passe est souvant un probème de sécurité. Kdesvn "
-"lui même ne conserve aucun mot de passe, mais subversion le fait, lui, dans "
-"l'espace de configuration de subversion. Si cet espace est lisible par "
-"d'autres vous ne devais pas l'activer, mais vous pouvez opter pour ???????"
+"La conservation de mots de passe est souvent un problème de sécurité. Kdesvn "
+"lui même ne conserve aucun mot de passe, mais subversion le fait, dans son "
+"l'espace de configuration. Si cet espace est lisible par d'autres que vous, "
+"vous ne devais pas l'activer. Mais vous pouvez choisir pour les comptes non "
+"critiques dans le dialogue d'authentification."
 
 #: rc.cpp:226
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Store passwords into KDE Wallet"
-msgstr "Conserver le mot de passe"
+msgstr ""
+"Conserver les mots de passe dans le Gestionnaire de portefeuilles de KDE"
 
 #: rc.cpp:229
 #, no-c-format
 msgid ""
 "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
+"Lors de la sauvegarde des mots de passe, le faire dans le Gestionnaire de "
+"portefeuilles de KDE plutôt que dans l'espace de stockage de subversion ?"
 
 #: rc.cpp:232
 #, no-c-format
@@ -831,6 +841,19 @@ msgid ""
 "subversion does but put it into an encrypted storage like kde wallet or "
 "don't save passwords.</p>"
 msgstr ""
+"<p>Détermine si vos mots de passe donnés à kdesvn doivent être stockés dans "
+"le Gestionnaire de portefeuilles de KDE, à la place d'être simplement "
+"stockés en clair par subversion.</p>\n"
+"<p>Cella est un peu plus sûr car le Gestionnaire de portefeuilles de KDE est "
+"(en partie) encrypté à l'aide d'un mot de passe. D'un autre côte, vous devez "
+"réentrer vos mot de passe avec les autres clients subversion qui non pas "
+"accès au Gestionnaire de portefeuilles de KDE (ex la ligne de commande svn "
+"elle même, rapidsvn et plein d'autres).</p>\n"
+"<p>Si votre HOME, répertoire de configuration de subversion, est sur un "
+"disque réseau, vous devez fortement penser à ne pas y stocker vos mots de "
+"passe dans un fichier texte brut comme le fait subversion. Mais plutôt les "
+"mettre dans un espace de stockage encrypté comme le Gestionnaire de "
+"portefeuilles de KDE ou de ne pas les sauver du tout.</p>"
 
 #: rc.cpp:237
 #, no-c-format
@@ -840,12 +863,12 @@ msgstr "Logger les changement de noeud"
 #: rc.cpp:241
 #, no-c-format
 msgid "Logs always reads list of changed files"
-msgstr ""
+msgstr "Les logs lisent toujours la liste des fichiers modifies"
 
 #: rc.cpp:244
 #, no-c-format
 msgid "Read detailed change lists"
-msgstr ""
+msgstr "Lire la liste détaillé des modifications"
 
 #: rc.cpp:247
 #, no-c-format
@@ -854,11 +877,14 @@ msgid ""
 "But if this feature is switched off, kdesvn may fail generating differences "
 "between nodechanges from within the logviewer."
 msgstr ""
+"Lire la liste des fichiers modifiés peut parfois ralentir un petit peu. Mais "
+"si cette fonctionnalité est désactivé, kdesvn peut échouer lors de la "
+"génération des différences entre des nœuds modifiés dans les logs."
 
 #: rc.cpp:250
 #, no-c-format
 msgid "Review items before commit"
-msgstr ""
+msgstr "Passer en revue les items avant le commit"
 
 #: rc.cpp:254
 #, no-c-format
@@ -935,6 +961,18 @@ msgid ""
 "<b><tt>%t</tt></b> Local target for merge.\n"
 "</p>"
 msgstr ""
+"<p>\n"
+"Entrer comment kdesvn doit appeller le programme de fusion externe. Le "
+"format est\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;programme&gt; &lt;programmeOptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"Les substitutions sont :<br>\n"
+"<b><tt>%s1</tt></b> Première source de la fusion<br>\n"
+"<b><tt>%s2</tt></b> Deuxième source de la fusion, si elle n'est pas égalle à "
+"la première source, mais a une autre révision<br>\n"
+"<b><tt>%t</tt></b> Cible locale de la fusion.\n"
+"</p>"
 
 #: rc.cpp:302
 #, no-c-format
@@ -1032,9 +1070,9 @@ msgstr "Sélectionner dans la première colonne la révision pour le diff"
 
 #: rc.cpp:348 rc.cpp:724 ksvnwidgets/logmsg_impl.cpp:80
 #: ksvnwidgets/logmsg_impl.cpp:107
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Action"
-msgstr "Opération"
+msgstr "Action"
 
 #: rc.cpp:351
 #, no-c-format
@@ -1049,12 +1087,12 @@ msgstr "Copié depuis"
 #: rc.cpp:357
 #, no-c-format
 msgid "Contextmenu on item for more operations"
-msgstr ""
+msgstr "Menu contextuel sur les items pour plus d'opérations"
 
 #: rc.cpp:360 svnfrontend/svnlogdlgimp.cpp:483
 #, no-c-format
 msgid "Diff previous"
-msgstr "Diff avec le précédant"
+msgstr "Diff avec le précédent"
 
 #: rc.cpp:364 svnfrontend/kdesvnfilelist.cpp:357
 #, no-c-format
@@ -1082,7 +1120,7 @@ msgid "Load into folder:"
 msgstr "Charger dans le répertoire :"
 
 #: rc.cpp:386 rc.cpp:398
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Path to load the dump into (see contexthelp)"
 msgstr "Chemin pour charger le dump dedans (voir contexthelp)"
 
@@ -1116,14 +1154,14 @@ msgid "How to handle UUIDs"
 msgstr "Comment manipuler les UUIDs"
 
 #: rc.cpp:410
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "The repository's UUID will be updated if the dumpstream contains a UUID and "
 "action isn't set to ignore and either the repository contains no revisions "
 "or action is set to force. If the dump contains no UUID than this action is "
 "ignored."
 msgstr ""
-"L'UUID du dépôt sera mise à jour ssi le flux de dump contien un UUID et "
+"L'UUID du dépôt sera mise à jour si le flux de dump contien un UUID et "
 "l'action n'est pas ignorer et soit le dépôts ne contient pas de révision "
 "soit l'action est forcer. Si le dump ne contien pas d'UUID alors cette "
 "action est ignoré."
@@ -1199,7 +1237,7 @@ msgid "End revision:"
 msgstr "Révision finale :"
 
 #: rc.cpp:467
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start revision:"
 msgstr "Révision initiale :"
 
@@ -1209,7 +1247,7 @@ msgid "-1 for Head"
 msgstr "-1 pour Head"
 
 #: rc.cpp:473
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "-1 for Start"
 msgstr "-1 pour Start"
 
@@ -1231,7 +1269,7 @@ msgstr "Contenu"
 #: rc.cpp:491
 #, no-c-format
 msgid "MergeSettings"
-msgstr ""
+msgstr "Configurer la fusion"
 
 #: rc.cpp:494
 #, no-c-format
@@ -1307,7 +1345,7 @@ msgstr "<p align=\"right\">Renommer</p>"
 #: rc.cpp:549
 #, no-c-format
 msgid "this long text"
-msgstr ""
+msgstr "ce long texte"
 
 #: rc.cpp:552
 #, no-c-format
@@ -1317,7 +1355,7 @@ msgstr "vers"
 #: rc.cpp:555
 #, no-c-format
 msgid "/there/"
-msgstr ""
+msgstr "/ici/"
 
 #: rc.cpp:562
 #, no-c-format
@@ -1340,9 +1378,9 @@ msgid "Append source url name to subfolder"
 msgstr "Ajouter le nom de l'URL source au sous répertoire"
 
 #: rc.cpp:578
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Ignore externals"
-msgstr "Interne"
+msgstr "Ignore les externes"
 
 #: rc.cpp:581
 #, no-c-format
@@ -1478,7 +1516,7 @@ msgid "Is created repository compatible to subversion prior 1.4"
 msgstr "Dépôt créer avec la compatibilité à subversion prior 1.4"
 
 #: rc.cpp:679
-#, fuzzy, no-c-format
+#, fuzzy
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only usefull when svnqt is running with subversion 1.4 or above."
@@ -1514,7 +1552,7 @@ msgstr "Message de log"
 #: rc.cpp:718
 #, no-c-format
 msgid "Review affected items"
-msgstr ""
+msgstr "Passer en revue les items affectés"
 
 #: rc.cpp:721
 #, no-c-format
@@ -1522,34 +1560,37 @@ msgid "Entry"
 msgstr "Entrée"
 
 #: rc.cpp:727
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select new items"
-msgstr "Sélectionner l'item"
+msgstr "Sélectionner les nouveaux items"
 
 #: rc.cpp:730
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
-msgstr "Pas d'item non versioné trouvé."
+msgstr ""
+"Marquer tous les nouveaux, càd les items non versionnés pour ajout et commit."
 
 #: rc.cpp:733
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unselect new items"
-msgstr "Desélectionner l'item"
+msgstr "Desélectionner les nouveaux items"
 
 #: rc.cpp:736
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr "Pas d'item non versioné trouvé."
+msgstr ""
+"Ne plus marquer tous les items non versionnés, ils seront ainsi ignoré."
 
 #: rc.cpp:739
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff highlighted item"
-msgstr "Diff avec l'item sélectionné"
+msgstr "Diff de l'item sélectionné"
 
 #: rc.cpp:742
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
+"Générer et afficher les différences avec le dépôt pour l'item séléctionné"
 
 #: rc.cpp:745
 #, no-c-format
@@ -1567,19 +1608,19 @@ msgid "Last used log messages"
 msgstr "Message de log dernièrement utilisés"
 
 #: rc.cpp:758
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Make operation recursive."
-msgstr "Résoudre récursivement"
+msgstr "Éffectuer l'opération récursivement."
 
 #: rc.cpp:761
 #, no-c-format
 msgid "Keep locks"
-msgstr ""
+msgstr "Conserver les verrouillages"
 
 #: rc.cpp:764
 #, no-c-format
 msgid "If checked commit will not release locks."
-msgstr ""
+msgstr "La vérification de commit ne libérera pas les verrouillages."
 
 #: rc.cpp:768
 #, no-c-format
@@ -1641,26 +1682,25 @@ msgstr "Ajouter des identités ssh à l'agent ssh"
 #: kdesvn.cpp:132
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
-"Forcer l'ajout  d'identités ssh à l'agent ssh pour des utilisations futures"
+"Forcer l'ajout d'identités ssh à l'agent ssh pour des utilisations futures."
 
 #: kdesvn.cpp:133
-#, fuzzy
 msgid "Info about kdesvn part"
-msgstr "À propos de kdesvn p&art"
+msgstr "À propos de kdesvn part"
 
 #: kdesvn.cpp:135
 msgid "Shows info about the kdesvn plugin not the standalone app."
 msgstr ""
+"Afficher les informations à propos du plugin kdesvn, pas uniquement de "
+"l'application."
 
 #: kdesvn.cpp:144
-#, fuzzy
 msgid "Could not load the part:\n"
-msgstr "Impossible de trouver notre part."
+msgstr "Impossible de charger le part :\n"
 
 #: kdesvn.cpp:153
-#, fuzzy
 msgid "Could not find our part"
-msgstr "Impossible de trouver notre part."
+msgstr "Impossible de trouver notre part"
 
 #: kdesvn.cpp:185
 msgid "Could not open url %1"
@@ -1775,13 +1815,12 @@ msgid "%1 at revision %2"
 msgstr "%1 à la révision %2"
 
 #: svnfrontend/svnlogdlgimp.cpp:234
-#, fuzzy
 msgid "SVN Log of %1"
-msgstr "Log SVN"
+msgstr "Log SVN de %1"
 
 #: svnfrontend/svnlogdlgimp.cpp:485 svnfrontend/graphtree/revgraphview.cpp:799
 msgid "Cat this version"
-msgstr ""
+msgstr "Afficher cette version"
 
 #: svnfrontend/svnitem.cpp:376
 msgid "Added in repository"
@@ -1861,11 +1900,11 @@ msgstr "Restaurer les manquants"
 
 #: svnfrontend/ccontextlistener.cpp:66 svnfrontend/svnactions.cpp:1600
 msgid "Revert"
-msgstr ""
+msgstr "Retour à"
 
 #: svnfrontend/ccontextlistener.cpp:67
 msgid "Revert failed"
-msgstr ""
+msgstr "Échec du retour à"
 
 #: svnfrontend/ccontextlistener.cpp:68
 msgid "Resolved"
@@ -1909,7 +1948,7 @@ msgstr "Commit supprimé"
 
 #: svnfrontend/ccontextlistener.cpp:80
 msgid "Commit Replaced"
-msgstr "Commit remplacé"
+msgstr "Commit replacé"
 
 #: svnfrontend/ccontextlistener.cpp:83
 msgid "Locking"
@@ -2028,9 +2067,8 @@ msgid "Modified at revision %1"
 msgstr "Modifié à la révision %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
-#, fuzzy
 msgid "Replaced at revision %1"
-msgstr "Supprimé à la révision %1"
+msgstr "Réplacé à la révision %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:436
 msgid "Revision %1"
@@ -2045,7 +2083,6 @@ msgid "Could not start process \"%1\"."
 msgstr "Impossible de démarrer le processus \"%1\"."
 
 #: svnfrontend/graphtree/revgraphview.cpp:546
-#, fuzzy
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
 msgstr "<br>Révision : %1<br>Auteur : %2<br>Date : %3<br>Log : %4</html>"
 
@@ -2121,7 +2158,7 @@ msgstr "Analyse des logs pour %1"
 #: svnfrontend/graphtree/revisiontree.cpp:265
 #: svnfrontend/graphtree/revisiontree.cpp:318
 msgid "%1<br>Check change entry %2 of %3"
-msgstr ""
+msgstr "%1<br>Vérification de modifications sur l'entrée %2 sur %3"
 
 #: svnfrontend/svnactions.cpp:160
 msgid "Finished"
@@ -2133,7 +2170,7 @@ msgstr "Aucun log obtenu"
 
 #: svnfrontend/svnactions.cpp:325
 msgid "Got no info."
-msgstr "Aucune info obtenue"
+msgstr "Aucune info obtenue."
 
 #: svnfrontend/svnactions.cpp:342
 msgid "History of %1"
@@ -2152,7 +2189,6 @@ msgid "Getting content - hit cancel for abort"
 msgstr "Récupère le contenu - annuler pour abandonner"
 
 #: svnfrontend/svnactions.cpp:441 svnfrontend/svnactions.cpp:467
-#, fuzzy
 msgid "Error getting content"
 msgstr "Erreur lors de l'accès au contenu"
 
@@ -2162,7 +2198,7 @@ msgstr "Contenu de %1"
 
 #: svnfrontend/svnactions.cpp:516
 msgid "Got no content."
-msgstr "Aucun contenu obtenu"
+msgstr "Aucun contenu obtenu."
 
 #: svnfrontend/svnactions.cpp:538 svnfrontend/kdesvnfilelist.cpp:276
 msgid "New folder"
@@ -2270,7 +2306,7 @@ msgstr "Copie depuis l'URL"
 
 #: svnfrontend/svnactions.cpp:687 svnfrontend/svnactions.cpp:697
 msgid "Lock token"
-msgstr ""
+msgstr "Vérouiller l'item"
 
 #: svnfrontend/svnactions.cpp:688 svnfrontend/svnactions.cpp:698
 msgid "Owner"
@@ -2278,7 +2314,7 @@ msgstr "Propriétaire"
 
 #: svnfrontend/svnactions.cpp:689 svnfrontend/svnactions.cpp:699
 msgid "Locked on"
-msgstr ""
+msgstr "Verrouillé"
 
 #: svnfrontend/svnactions.cpp:692 svnfrontend/svnactions.cpp:702
 msgid "Lock comment"
@@ -2397,7 +2433,7 @@ msgstr "<center>L'entrée<br>%1<br>n'est pas versionée - arrêt.</center>"
 
 #: svnfrontend/svnactions.cpp:1578
 msgid "Revert entries"
-msgstr ""
+msgstr "Retourner à des entrées"
 
 #: svnfrontend/svnactions.cpp:1586
 msgid "Really revert these entries to pristine state?"
@@ -2581,8 +2617,9 @@ msgid "Blame range"
 msgstr "Intervalle de blâme"
 
 #: svnfrontend/kdesvnfilelist.cpp:263
+#, fuzzy
 msgid "Cat head"
-msgstr ""
+msgstr "Afficher HEAD"
 
 #: svnfrontend/kdesvnfilelist.cpp:265
 msgid "Output the content of specified files or URLs."
@@ -2590,7 +2627,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:266
 msgid "Cat revision..."
-msgstr ""
+msgstr "Afficher la révision ..."
 
 #: svnfrontend/kdesvnfilelist.cpp:268
 msgid "Output the content of specified files or URLs at specific revision."
@@ -2689,7 +2726,7 @@ msgstr "Résoudre récursivement"
 
 #: svnfrontend/kdesvnfilelist.cpp:315
 msgid "Marking files or dirs resolved"
-msgstr ""
+msgstr "Marquer les fichiers ou répertoires comme résolus"
 
 #: svnfrontend/kdesvnfilelist.cpp:316
 msgid "Ignore/Unignore current item"
@@ -2732,9 +2769,8 @@ msgid "Merge two revisions"
 msgstr "Fusionner deux révisions"
 
 #: svnfrontend/kdesvnfilelist.cpp:336
-#, fuzzy
 msgid "Merge two revisions of this entry into itself"
-msgstr "Fusionne deux révisions de cette entré dans elle même"
+msgstr "Fusionner deux révisions de cette entré dans elle même"
 
 #: svnfrontend/kdesvnfilelist.cpp:338
 msgid "Merge..."
@@ -2810,7 +2846,7 @@ msgstr "Rien de sélectionné pour le déverrouillage"
 
 #: svnfrontend/kdesvnfilelist.cpp:1924
 msgid "Break lock or ignore missing locks?"
-msgstr ""
+msgstr "Passer outre le verrouillage ou ignorer les verrous manquant ?"
 
 #: svnfrontend/kdesvnfilelist.cpp:1924
 msgid "Unlocking items"
@@ -2854,9 +2890,12 @@ msgid ""
 "directory. A non-recursive attempt will fail, and a recursive attempt will "
 "set the property only on the file children of the folder."
 msgstr ""
+"Si présent, rend un fichier exécutable.<br> Cette propriété ne peux pas être "
+"mise sur un répertoire. Une utilisation non récursive échouera, une "
+"utilisation récursive mettra la propriété uniquement sur les fichiers du "
+"répertoire."
 
 #: svnfrontend/editproperty_impl.cpp:48
-#, fuzzy
 msgid ""
 "Keywords to be expanded into the contents of a file.<br>They can be inserted "
 "into documents by placing a keyword anchor which is formatted as $KeywordName"
@@ -2867,8 +2906,6 @@ msgid ""
 "the object changed.<br><b>Id</b> A compressed summary of the previous 4 "
 "keywords."
 msgstr ""
-"<br><br><br><b></b><br><b></b><br><b></b> modifié<br><b> Révision</"
-"b><br><b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:57
 msgid ""
@@ -2884,6 +2921,10 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
+"Le type mine du fichier. Utilisé pour déterminer comment fusionner le "
+"fichier et comment Apache doit le distribuer. Un type mine commençant par "
+"<b>'text/'</b> (ou une absence de type mine) est traité comme du texte. "
+"N'importe quoi d'autre comme du binaire."
 
 #. TRANSLATORS: Do not translate "example" in the URL because this is according
 #. TRANSLATORS: to http://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.
@@ -2913,6 +2954,9 @@ msgid ""
 "replaced with the bug issue number. Example:<br><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
+"URL pointant vers le suivi de projet. Elle doit contenir <b>%BUGID%</b> qui "
+"sera remplacé par le numéro de bug. Example : <br><nobr><b>http://example."
+"com/mantisse/view.php?id=%BUGID%</b></nobr>"
 
 #: svnfrontend/editproperty_impl.cpp:102
 msgid ""
@@ -2920,6 +2964,9 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
+"Chaîne ajouté à un message de log lors qu'un numéro de suivi de projet est "
+"renseigne. La chaîne doit contenir <b>%BUGID%</b> qui sera remplacé par le "
+"numéro de bug."
 
 #: svnfrontend/editproperty_impl.cpp:105
 msgid ""
@@ -2963,7 +3010,7 @@ msgstr "%1 transferré."
 
 #: svnfrontend/fronthelpers/diffbrowser.cpp:82
 msgid "File %1 exists - overwrite?"
-msgstr ""
+msgstr "Le fichier %1 existe, l'écraser ?"
 
 #: svnfrontend/fronthelpers/rangeinput_impl.cpp:166
 msgid "Select revision"
@@ -3028,7 +3075,7 @@ msgstr "Valide jusqu'à"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:73
 msgid "Issuer name"
-msgstr ""
+msgstr "Nom du gestionnaire de projet"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:74
 msgid "Fingerprint"
@@ -3036,16 +3083,8 @@ msgstr "Empreinte"
 
 #: ksvnwidgets/authdialogimpl.cpp:38
 msgid "into KDE Wallet"
-msgstr ""
+msgstr "dans le Gestionnaire de portefeuilles de KDE"
 
 #: ksvnwidgets/authdialogimpl.cpp:38
 msgid "into subversions simple storage"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Mark all unversioned items"
-#~ msgstr "Ajouter des items non versionés"
-
-#, fuzzy
-#~ msgid "Unmark all unversioned items"
-#~ msgstr "Ajouter des items non versionés"
+msgstr "simplement dans l'espace de stockage de subversion"

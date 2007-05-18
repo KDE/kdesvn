@@ -53,13 +53,9 @@ Development files for kdesvn-svnqt
 
 %prep
 %setup
-#CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" ./configure \
-#                --prefix=`kde-config --prefix` \
-#                --disable-no-exceptions \
-#                --disable-debug
 mkdir build
 cd build
-cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release
+cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release -DLIB_SUFFIX=`kde-config --libsuffix`
 
 %build
 cd build
@@ -96,7 +92,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/apps/konqueror/servicemenus/kdesvn*
 %{_libdir}/*/kio_ksvn*
 %{_datadir}/services/ksvn*.protocol
-%{_mandir}/man1/*
+%{_datadir}/man/man1/*
 
 %files kiosvn
 %{_datadir}/services/svn*.protocol

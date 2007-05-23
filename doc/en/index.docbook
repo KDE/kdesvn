@@ -1897,6 +1897,9 @@ repository to newer subversion.
 There are many reasons why the program couldn't load. This mostly happens when you building subversion-libs yourself. In that case you may
 check out <ulink url="http://www.alwins-world.de/programs/mantis/view.php?id=128">this mantis entry</ulink>.
 </para>
+<para>
+The next big thing could that you forgot to give a libsuffix on 64-Bit systems at compile-time. So the part will installed in <prompt>$PREFIX/lib</prompt> instead of <prompt>$PREFIX/lib64</prompt>. So give <prompt>-DLIB_SUFFIX=64</prompt> as paramter to cmake.
+</para>
 <para>If this does not solve your problem, you may try out on a console:
 <programlisting>
   export LD_PRELOAD=/usr/lib/kde3/libkdesvnpart.so

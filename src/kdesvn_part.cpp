@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -146,11 +146,11 @@ KAboutData* kdesvnPart::createAboutData()
     m_Extratext+=QString(I18N_NOOP("Running Subversion library: %1")).arg(svn::Version::running_version());
 
     KAboutData*about = new KAboutData("kdesvnpart", I18N_NOOP("kdesvn Part"), version, description,
-                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",0,
+                     KAboutData::License_GPL, "(C) 2005-2007 Rajko Albrecht",0,
                          0, "ral@alwins-world.de");
     about->addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
     about->setOtherText(m_Extratext);
-    about->setHomepage("http://www.alwins-world.de/programs/kdesvn/");
+    about->setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");
     about->setBugAddress("kdesvn-bugs@alwins-world.de");
     about->setTranslator(I18N_NOOP("kdesvn: NAME OF TRANSLATORS\\nYour names"),
         I18N_NOOP("kdesvn: EMAIL OF TRANSLATORS\\nYour emails"));
@@ -179,13 +179,16 @@ void kdesvnPart::setupActions()
     toggletemp->setChecked(Kdesvnsettings::display_ignored_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
 
-#if 0
-    /// not needed this moment
+
     toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
             actionCollection(),"toggle_unknown_files");
-    toggletemp->setChecked(kdesvnPart_Prefs::self()->mdisp_unknown_files);
+    toggletemp->setChecked(Kdesvnsettings::display_unknown_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
-#endif
+
+    toggletemp = new KToggleAction(i18n("Hide unchanged files"),KShortcut(),
+                                   actionCollection(),"toggle_hide_unchanged_files");
+    toggletemp->setChecked(Kdesvnsettings::hide_unchanged_files());
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotHideUnchanged(bool)));
 
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
@@ -229,14 +232,22 @@ void kdesvnPart::slotDisplayIgnored(bool how)
 /*!
     \fn kdesvnPart::slotDisplayUnknown(bool)
  */
-void kdesvnPart::slotDisplayUnkown(bool )
+void kdesvnPart::slotDisplayUnkown(bool how)
 {
-#if 0
-    kdesvnPart_Prefs::self()->mdisp_unknown_files=how;
-    kdesvnPart_Prefs::self()->writeConfig();
-#endif
+    Kdesvnsettings::setDisplay_unknown_files(how);
+    Kdesvnsettings::writeConfig();
+    emit refreshTree();
 }
 
+/*!
+    \fn kdesvnPart::slotHideUnchanged(bool)
+ */
+void kdesvnPart::slotHideUnchanged(bool how)
+{
+    Kdesvnsettings::setHide_unchanged_files(how);
+    Kdesvnsettings::writeConfig();
+    emit refreshTree();
+}
 
 /*!
     \fn kdesvnPart::slotUseKompare(bool)

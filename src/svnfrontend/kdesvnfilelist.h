@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -107,7 +107,7 @@ protected:
     FileListViewItemList* m_SelectedItems;
     FileListViewItem* findEntryItem(const QString&,FileListViewItem*startAt=0);
 
-    virtual void refreshRecursive(FileListViewItem*,bool down=true);
+    virtual bool refreshRecursive(FileListViewItem*,bool down=true);
     virtual void updateParents(FileListViewItem*);
     virtual void checkUnversionedDirs( FileListViewItem * _parent );
 
@@ -119,13 +119,16 @@ protected:
     virtual void contentsDragMoveEvent( QDragMoveEvent* );
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
-    virtual void startDrag();
+    //virtual void startDrag();
+    virtual QDragObject* dragObject();
 
     void dispDummy();
     void reinitItems(FileListViewItem*_item = 0);
     KURL::List selectedUrls();
 
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
+    virtual void contentsMousePressEvent(QMouseEvent*e);
+    virtual void contentsMouseReleaseEvent(QMouseEvent*e);
     virtual void contentsWheelEvent( QWheelEvent * e );
     virtual void leaveEvent(QEvent*e);
     virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false,bool no_update=false);
@@ -169,6 +172,7 @@ protected slots:
     virtual void slotCopyFinished( KIO::Job *);
     virtual void slotDeleteFinished(KIO::Job*);
     virtual void _openURL(const QString&);
+    virtual void _dirwatchTimeout();
 
 signals:
     void sigLogMessage(const QString&);

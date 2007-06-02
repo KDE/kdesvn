@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -81,9 +81,11 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
         "This property can not be set on a directory. "
         "A non-recursive attempt will fail, and a recursive attempt "
         "will set the property only on the file children of the folder.");
-    dirComments += i18n("A newline separated list of module specifiers, each of "
-        "which consists of a relative directory path, optional revision "
-        "flags, and an URL. For example:<br>"
+    /* TRANSLATORS: Do not translate "example" in the URL because this is according
+       TRANSLATORS: to http://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.*/
+    dirComments += i18n("A newline separated list of module specifiers, each "
+        "consisting of a relative directory path, optional revision "
+        "flags, and a URL. For example:<br>"
         "<nobr><b>foo http://example.com/repos/projectA</b></nobr><br>"
         "<nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></nobr>");
     dirComments += i18n("A newline separated list of file patterns to ignore.");
@@ -92,6 +94,8 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
         "Apache. A mimetype beginning with <b>'text/'</b> (or an absent "
         "mimetype) is treated as text. Anything else is treated as binary.");
     dirComments += i18n("Label text to show for the edit box where the user enters the issue number.");
+    /* TRANSLATORS: Do not translate "example" in the URL because this is according
+       TRANSLATORS: to http://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.*/
     dirComments += i18n("URL pointing to the issue tracker. It must contain "
         "<b>%BUGID%</b> which gets replaced with the bug issue number. Example:<br>"
         "<nobr><b>http://example.com/mantis/view.php?id=%BUGID%</b></nobr>");
@@ -100,11 +104,11 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
         "which gets replaced with the bug issue number.");
     dirComments += i18n("Set to <b>'yes'</b> if a warning shall be shown when "
         "no issue is entered in the commit dialog. Possible values:<br>"
-        "<b>'true'</b>/<b>'yes'</b> or <b>'false'</b>/<b>'no'</b>");
+        "<b>'true'</b>/<b>'yes'</b> or <b>'false'</b>/<b>'no'</b>.");
     dirComments += i18n("Set to <b>'false'</b> if your bugtracking system has "
         "issues which are referenced not by numbers.<br>"
-        "Possible values: <b>'true'</b> or <b>'false'</b>");
-    dirComments += i18n("Set to <b>'false'</b> if you want the bugtracking ID"
+        "Possible values: <b>'true'</b> or <b>'false'</b>.");
+    dirComments += i18n("Set to <b>'false'</b> if you want the bugtracking ID "
         "to be inserted at the top of the log message. The "
         "default is <b>'true'</b> which means the bugtracking "
         "ID is appended to the log message.");

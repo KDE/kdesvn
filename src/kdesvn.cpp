@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -57,6 +57,10 @@
 #include <kkeydialog.h>
 #include <kdirselectdialog.h>
 
+#ifdef TESTING_RC
+#include <kcrash.h>
+#endif
+
 kdesvn::kdesvn()
     : KParts::MainWindow( 0, "kdesvn" ),
       KBookmarkOwner()
@@ -65,6 +69,8 @@ kdesvn::kdesvn()
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
     kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
+    // I hate this crashhandler in development
+    KCrash::setCrashHandler(0);
 #else
     setXMLFile("kdesvnui.rc");
 #endif
@@ -124,6 +130,9 @@ kdesvn::kdesvn()
             tmpAction = new KAction(i18n("Add ssh identities to ssh-agent"),"password",
                 KShortcut(),m_part,SLOT(slotSshAdd()),actionCollection(),"kdesvn_ssh_add");
             tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
+            tmpAction = new KAction(i18n("Info about kdesvn part"), "kdesvn",
+                        KShortcut(), m_part, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
+            tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin not the standalone app."));
 
             /* enable tooltips in statusbar for menu */
             actionCollection()->setHighlightingEnabled(true);
@@ -131,13 +140,17 @@ kdesvn::kdesvn()
             // and integrate the part's GUI with the shells
             createGUI(m_part);
             connectActionCollection(m_part->actionCollection());
+        } else {
+            KMessageBox::error(this, i18n("Could not load the part:\n")+KLibLoader::self()->lastErrorMessage());
+            kapp->quit();
+            return;
         }
     }
     else
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not find our part."));
+        KMessageBox::error(this, i18n("Could not find our part")+QString(":\n")+KLibLoader::self()->lastErrorMessage());
         kapp->quit();
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...
@@ -301,7 +314,7 @@ void kdesvn::enableClose(bool how)
  */
 void kdesvn::slotUrlOpened(bool how)
 {
-    enableClose(true);
+    enableClose(how);
 }
 
 

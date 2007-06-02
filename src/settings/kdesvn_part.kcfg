@@ -65,6 +65,14 @@
       <label>Display ignored files</label>
       <default>true</default>
     </entry>
+    <entry key="display_unknown_files" type="Bool">
+      <label>Display unknown files</label>
+      <default>true</default>
+    </entry>
+    <entry key="hide_unchanged_files" type="Bool">
+      <label>Hide versioned unchanged files</label>
+      <default>false</default>
+    </entry>
     <entry key="log_follows_nodes" type="Bool" >
       <label>Log follows node changes</label>
       <default>true</default>
@@ -88,6 +96,10 @@
     <entry key="store_passwords" type="Bool" >
       <label>Store passwords for remote connections</label>
       <default>false</default>
+    </entry>
+    <entry key="passwords_in_wallet" type="Bool">
+        <label>Store passwords in KDE Wallet instead subversion storage</label>
+        <default>true</default>
     </entry>
   </group>
   <group name="diffmerge_items">

@@ -1,5 +1,5 @@
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
-SET(kiosvn_src kiosvn.cpp kiolistener.cpp kiobytestream.cpp)
+SET(kiosvn_src kiosvn.cpp kiolistener.cpp kiobytestream.cpp ../ksvnwidgets/pwstorage.cpp)
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 KDE_ADD_KPART(kio_ksvn ${kiosvn_src} ${hdr})
@@ -9,7 +9,7 @@ TARGET_LINK_LIBRARIES(kio_ksvn
     kdesvnhelpers
     kdesvncfgreader
     ${QT_AND_KDECORE_LIBS}
-    ${KDE3_UI_LIBRARY} ${KDE3_DCOP_LIBRARY} ${KDE3_KIO_LIBRARY})
+    ${KDE3_UI_LIBRARY} ${KDE3_DCOP_LIBRARY} ${KDE3_KIO_LIBRARY} ${KDE3_WALLET_LIBRARY})
 
 SET_TARGET_PROPERTIES(kio_ksvn
     PROPERTIES

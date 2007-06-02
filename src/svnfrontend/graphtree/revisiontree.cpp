@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -24,6 +24,7 @@
 #include "revtreewidget.h"
 #include "revgraphview.h"
 #include "elogentry.h"
+#include "src/svnfrontend/fronthelpers/cursorstack.h"
 
 #include <kdebug.h>
 #include <kprogress.h>
@@ -87,6 +88,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         return false;
     }
     try {
+        CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
         m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);
@@ -218,7 +220,7 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3")
+                label = i18n("%1<br>Check change entry %2 of %3")
                         .arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
@@ -234,7 +236,7 @@ bool RevisionTree::topDownScan()
                         m_Path=m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
                         m_Path+=r;
                     }
-                } else if (m_Data->m_OldHistory[j].changedPaths[i].path==m_Path){
+                } else if (m_Data->m_OldHistory[j].changedPaths[i].path==m_Path && m_Data->m_OldHistory[j].changedPaths[i].copyToPath.isEmpty()){
                     // here it is added
                     m_InitialRevsion = m_Data->m_OldHistory[j].revision;
                 }
@@ -260,7 +262,7 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                label = i18n("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
             }
@@ -313,7 +315,7 @@ bool RevisionTree::topDownScan()
                     cancel=true;
                     break;
                 }
-                label = QString("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
+                label = i18n("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabel(label);
                 kapp->processEvents();
             }
@@ -413,7 +415,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         /* skip items between */
                         j=lastrev;
 #ifdef DEBUG_PARSE
-                        kdDebug()<<"Renamed to "<< recPath << " at revison " << FORWARDENTRY.copyToRevision << endl;
+                        kdDebug()<<"Renamed to "<< recPath << " at revision " << FORWARDENTRY.copyToRevision << endl;
 #endif
                         path=recPath;
                     } else {
@@ -436,6 +438,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                         lastrev=j;
                     break;
                     case 'M':
+                    case 'R':
 #ifdef DEBUG_PARSE
                         kdDebug()<<"Item modified at revision "<< j << " recurse " << recurse << endl;
 #endif

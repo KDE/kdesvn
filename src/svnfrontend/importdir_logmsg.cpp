@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -27,6 +27,7 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
  : Logmsg_impl(parent, name)
 {
     m_createDirBox = new QCheckBox("",this,"create_dir_checkbox");
+    m_keepLocksButton->hide();
     createDirboxDir();
     m_ItemsLayout->addWidget(m_createDirBox);
     m_createDirBox->setChecked(true);

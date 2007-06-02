@@ -1,4 +1,9 @@
 /*
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
+/*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.
  *
@@ -118,6 +123,12 @@ namespace svn
      */
     const bool
     isRealVersioned()const;
+
+    /**
+     * @retval TRUE if under version control and local modified
+     */
+    const bool
+    isModified()const;
 
     /**
      * @retval TRUE if locked

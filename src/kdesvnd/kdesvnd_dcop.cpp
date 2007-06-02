@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   rajko.albrecht@tecways.com                                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -24,6 +24,7 @@
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/settings/kdesvnsettings.h"
+#include "src/ksvnwidgets/pwstorage.h"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/status.hpp"
@@ -37,6 +38,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kfiledialog.h>
+#include <kpassdlg.h>
 
 #include <qdir.h>
 
@@ -52,6 +54,8 @@ class IListener:public svn::ContextListener
     friend class kdesvnd_dcop;
 
     kdesvnd_dcop*m_back;
+
+    PwStorage pws;
 public:
     IListener(kdesvnd_dcop*p);
     virtual ~IListener();
@@ -60,6 +64,8 @@ public:
                                   QString & username,
                                   QString & password,
                                   bool & maySave);
+    virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+
     virtual void contextNotify (const char *path,
                                 svn_wc_notify_action_t action,
                                 svn_node_kind_t kind,
@@ -75,9 +81,11 @@ public:
             contextSslServerTrustPrompt (const SslServerTrustData & data,
             apr_uint32_t & acceptedFailures);
     virtual bool contextSslClientCertPrompt (QString & certFile);
+    virtual bool contextLoadSslClientCertPw(QString&password,const QString&realm);
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                                const QString & realm, bool & maySave);
     virtual void contextProgress(long long int current, long long int max);
+
     /* context listener virtuals end */
 
 protected:
@@ -226,6 +234,24 @@ int kdesvnd_dcop::get_sslaccept(QString hostname,QString fingerprint,QString val
     return 1;
 }
 
+QStringList kdesvnd_dcop::get_sslclientcertpw(QString realm)
+{
+    QStringList resList;
+    QCString npass;
+    int keep = 1;
+    int res = KPasswordDialog::getPassword(npass,i18n("Enter password for realm %1").arg(realm),&keep);
+    if (res!=KPasswordDialog::Accepted) {
+        return resList;
+    }
+    resList.append(QString(npass));
+    if (keep) {
+        resList.append("true");
+    } else {
+        resList.append("false");
+    }
+    return resList;
+}
+
 QString kdesvnd_dcop::get_sslclientcertfile()
 {
     QString afile = KFileDialog::getOpenFileName(QString::null,
@@ -239,7 +265,7 @@ QStringList kdesvnd_dcop::get_logmsg()
 {
     QStringList res;
     bool ok;
-    QString logMessage = Logmsg_impl::getLogmessage(&ok,0,0,"logmsg_impl");
+    QString logMessage = Logmsg_impl::getLogmessage(&ok,0,0,0,"logmsg_impl");
     if (!ok) {
         return res;
     }
@@ -251,7 +277,7 @@ QStringList kdesvnd_dcop::get_logmsg(QMap<QString,QString> list)
 {
     QStringList res;
     bool ok;
-    QString logMessage = Logmsg_impl::getLogmessage(list,&ok,0,0,"logmsg_impl");
+    QString logMessage = Logmsg_impl::getLogmessage(list,&ok,0,0,0,"logmsg_impl");
     if (!ok) {
         return res;
     }
@@ -310,11 +336,18 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     return true;
 }
 
+bool IListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
+{
+    pws.getLogin(realm,username,password);
+    return true;
+}
+
 bool IListener::contextGetLogin (const QString & realm,
                                   QString & username,
                                   QString & password,
                                   bool & maySave)
 {
+    maySave=false;
     QStringList res = m_back->get_login(realm,username);
     if (res.count()!=3) {
         return false;
@@ -322,6 +355,10 @@ bool IListener::contextGetLogin (const QString & realm,
     username = res[0];
     password = res[1];
     maySave = (res[2]=="true");
+    if (maySave && Kdesvnsettings::passwords_in_wallet() ) {
+        pws.setLogin(realm,username,password);
+        maySave=false;
+    }
     return true;
 }
 
@@ -388,10 +425,31 @@ bool IListener::contextSslClientCertPrompt (QString & certFile)
     return true;
 }
 
+bool IListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
+{
+    return pws.getCertPw(realm,password);
+}
+
 bool IListener::contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave)
 {
-    return false;
+    maySave=false;
+    if (pws.getCertPw(realm,password)) {
+        return true;
+    }
+    QStringList res = m_back->get_sslclientcertpw(realm);
+    if (res.size()!=2) {
+        return false;
+    }
+    password=res[0];
+    maySave=res[1]==QString("true");
+
+    if (maySave && Kdesvnsettings::passwords_in_wallet() ) {
+        pws.setCertPw(realm,password);
+        maySave=false;
+    }
+
+    return true;
 }
 
 void IListener::contextProgress(long long int, long long int)

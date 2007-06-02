@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -23,7 +23,6 @@
 #include "commandline.h"
 #include "kdesvn-config.h"
 #include <kapplication.h>
-#include <dcopclient.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
@@ -49,10 +48,10 @@ static KCmdLineOptions options[] =
 int main(int argc, char **argv)
 {
     KAboutData about("kdesvn", I18N_NOOP("kdesvn"), version, description,
-                     KAboutData::License_GPL, "(C) 2005 Rajko Albrecht",0,
+                     KAboutData::License_GPL, "(C) 2005-2007 Rajko Albrecht",0,
                          0, "ral@alwins-world.de");
     about.addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
-    about.setHomepage("http://www.alwins-world.de/programs/kdesvn/");
+    about.setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");
     about.setBugAddress("kdesvn-bugs@alwins-world.de");
 
     KCmdLineArgs::init(argc, argv, &about);
@@ -60,9 +59,6 @@ int main(int argc, char **argv)
 
 
     KApplication app;
-
-    // register ourselves as a dcop client
-    app.dcopClient()->registerAs(app.name(), false);
 
     // see if we are starting with session management
     if (app.isRestored())

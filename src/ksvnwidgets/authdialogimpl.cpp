@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -22,6 +22,7 @@
 
 #include <kpassdlg.h>
 #include <klineedit.h>
+#include <klocale.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 
@@ -31,6 +32,10 @@ AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget 
     m_UsernameEdit->setText(user);
     m_PasswordEdit->setText("");
     m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());
+    QString text = m_StorePasswordButton->text();
+    m_StorePasswordButton->setText(
+            m_StorePasswordButton->text()+QString(" (%1)")
+            .arg((Kdesvnsettings::passwords_in_wallet()?i18n("into KDE Wallet"):i18n("into subversions simple storage"))));
     if (!realm.isEmpty()) {
         m_RealmLabel->setText(m_RealmLabel->text()+" "+realm);
         resize( QSize(334, 158).expandedTo(minimumSizeHint()) );

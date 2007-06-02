@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -29,6 +29,11 @@ class QWidget;
 
 class SvnItem;
 
+namespace svn
+{
+    class Status;
+}
+
 class ItemDisplay
 {
 public:
@@ -43,6 +48,9 @@ public:
     virtual SvnItem*SelectedOrMain()=0;
     virtual bool isNetworked()const;
     virtual const QString&lastError()const;
+    virtual bool filterOut(const SvnItem*);
+    virtual bool filterOut(const svn::Status&);
+    QString relativePath(const SvnItem*item);
 
 protected:
     void setWorkingCopy(bool);

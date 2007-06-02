@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -28,6 +28,7 @@
 #include "simple_logcb.h"
 
 #include <kurl.h>
+#include <kguiitem.h>
 
 #include <qobject.h>
 #include <qdatetime.h>
@@ -67,7 +68,10 @@ public:
     //svn::Client&svnClient(){return m_Svnclient;}
     svn::Client* svnclient();
     void prepareUpdate(bool ask);
-    template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,const char*name="standard_dialog",bool showHelp=false,const QString&u1=QString::null);
+    template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,
+            const char*name="standard_dialog",
+            bool showHelp=false,bool modal=true,
+            const KGuiItem&u1 = KGuiItem());
     QByteArray makeGet(const svn::Revision&start, const QString&what,
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
     bool makeGet(const svn::Revision&start, const QString&what,const QString&target,
@@ -121,7 +125,7 @@ public:
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
-    bool makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool,bool exp_rec=true, QWidget*p=0);
+    bool makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool,bool,bool exp_rec=true, QWidget*p=0);
     void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);
@@ -168,7 +172,7 @@ protected:
     void makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p,bool rec=true);
 
 public slots:
-    virtual void dispDiff(const QString&);
+    virtual void dispDiff(const QByteArray&);
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotCommit();

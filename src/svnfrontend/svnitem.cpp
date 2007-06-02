@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -137,9 +137,7 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
                 m_kdename.setQuery("?rev="+revstr);
             }
         } else {
-            kdDebug()<<"kdeName: "<<m_Stat.path()<<endl;
             m_kdename = KURL::fromPathOrURL(m_Stat.path());
-            kdDebug()<<"kdeName: "<<m_kdename.pathOrURL()<<endl;
         }
     }
     return m_kdename;
@@ -460,7 +458,8 @@ QString SvnItem::lockOwner()const
  */
 bool SvnItem::isModified()const
 {
-    return p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified;
+    return p_Item->m_Stat.textStatus ()==svn_wc_status_modified||p_Item->m_Stat.propStatus()==svn_wc_status_modified
+            ||p_Item->m_Stat.textStatus ()==svn_wc_status_replaced;
 }
 
 const svn::Status& SvnItem::stat()const
@@ -477,6 +476,15 @@ bool SvnItem::isNormal()const
     return p_Item->m_Stat.textStatus()==svn_wc_status_normal;
 }
 
+bool SvnItem::isMissing()const
+{
+    return p_Item->m_Stat.textStatus()==svn_wc_status_missing;
+}
+
+bool SvnItem::isDeleted()const
+{
+    return p_Item->m_Stat.textStatus()==svn_wc_status_deleted;
+}
 
 /*!
     \fn SvnItem::getToolTipText()

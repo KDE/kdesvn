@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -362,7 +362,6 @@ void itemCache::deleteKey(const QString&_what,bool exact)
         return;
     }
     QStringList what = QStringList::split("/",_what);
-    kdDebug()<<"Removing " << _what << endl;
     if (what.count()==0) {
         return;
     }

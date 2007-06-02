@@ -1,4 +1,9 @@
 /*
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
+/*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.
  *
@@ -215,10 +220,15 @@ namespace svn
     lockEntry()const;
 
     /**
+     * @return true if entry is marked as dir
+     */
+    bool isDir()const;
+    /**
      * assignment operator
      */
     Entry &
     operator = (const Entry &);
+    bool isFile()const;
 
   private:
     Entry_private*m_Data;

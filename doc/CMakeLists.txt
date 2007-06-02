@@ -2,25 +2,17 @@
 IF (KDE3_MEINPROC_EXECUTABLE)
     FILE(GLOB docimages en/*.png)
     ADD_CUSTOM_COMMAND(
-        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/en_index.cache.bz2
+        OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/en_index.cache.bz2
         COMMAND
         ${KDE3_MEINPROC_EXECUTABLE}
-        ARGS "--check" "--cache" "${CMAKE_CURRENT_BINARY_DIR}/en_index.cache.bz2"
+        ARGS "--check" "--cache" "${CMAKE_CURRENT_SOURCE_DIR}/en_index.cache.bz2"
         ${CMAKE_CURRENT_SOURCE_DIR}/en/index.docbook
         DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/en/index.docbook
         ${docimages}
     )
-# not sure if realy needed - commented out
-#    ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/common
-#        COMMAND
-#        ${CMAKE_CURRENT_SOURCE_DIR}/makecommon.sh
-#        ARGS
-#        "${CMAKE_CURRENT_BINARY_DIR}/common"
-#        "../common"
-#    )
     INSTALL(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/en_index.cache.bz2
+        ${CMAKE_CURRENT_SOURCE_DIR}/en_index.cache.bz2
         DESTINATION ${HTML_INSTALL_DIR}/en/kdesvn
         RENAME
         index.cache.bz2
@@ -33,7 +25,7 @@ IF (KDE3_MEINPROC_EXECUTABLE)
     # creates the link to the common-section during install
     INSTALL(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/makelink.cmake)
     ADD_CUSTOM_TARGET(doc ALL
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/en_index.cache.bz2)
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/en_index.cache.bz2)
 
 #${CMAKE_CURRENT_BINARY_DIR}/common)
 

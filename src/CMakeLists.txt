@@ -14,6 +14,9 @@ SET(partsrc
 KDE_AUTOMOC(${kdesvnsrc})
 KDE_AUTOMOC(${partsrc})
 
+SET(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
+SET(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
+
 ADD_SUBDIRECTORY(svnqt)
 ADD_SUBDIRECTORY(ksvnwidgets)
 ADD_SUBDIRECTORY(settings)
@@ -31,7 +34,7 @@ ADD_EXECUTABLE(kdesvn ${kdesvnsrc})
 KDE_ADD_KPART(kdesvnpart WITH_PREFIX ${partsrc})
 
 TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnqt
-    ${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY})
+    ${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY} ${KDE3_WALLET_LIBRARY} )
 SET_TARGET_PROPERTIES(kdesvnpart
     PROPERTIES
     LINK_FLAGS "${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} ${LINK_NO_UNDEFINED} ${_BASE_LDADD}")

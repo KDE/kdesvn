@@ -1,4 +1,9 @@
 /*
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
+/*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.
  *
@@ -183,7 +188,9 @@ namespace svn
 #endif
 
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 5)
+      svn_client_commit4
+#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_client_commit3
 #else
       svn_client_commit2
@@ -244,7 +251,9 @@ namespace svn
     svn_client_commit_info_t *commit_info = NULL;
 #endif
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_client_move4
+#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_client_move3
 #else
     svn_client_move2

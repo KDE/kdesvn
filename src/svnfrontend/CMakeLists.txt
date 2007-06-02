@@ -14,6 +14,9 @@ SET(svnfrontendsrc
     fronthelpers/checkoutinfo_impl.h
     fronthelpers/rangeinput_impl.cpp
     fronthelpers/rangeinput_impl.h
+    fronthelpers/cursorstack.h
+    fronthelpers/widgetblockstack.cpp
+    fronthelpers/widgetblockstack.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -48,18 +48,19 @@ public:
 
     QString getMessage()const;
     bool isRecursive()const;
+    bool isKeeplocks()const;
     void initHistory();
     void saveHistory();
 
-    static QString getLogmessage(bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
-    static QString getLogmessage(const svn::CommitItemList&,bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
-    static QString getLogmessage(const QMap<QString,QString>&,bool*ok=0,bool*rec=0,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(bool*ok,bool*rec,bool*keeps_locks,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(const svn::CommitItemList&,bool*ok,bool*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(const QMap<QString,QString>&,bool*ok,bool*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
 
     static QString getLogmessage(const logActionEntries&,
             const logActionEntries&,
             QObject*callback,
             logActionEntries&,
-            bool*ok=0,QWidget*parent=0,const char*name=0);
+            bool*ok,bool*keep_locks,QWidget*parent=0,const char*name=0);
 
     void setRecCheckboxtext(const QString&what,bool checked=true);
 

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -19,6 +19,8 @@
  ***************************************************************************/
 #ifndef STOPDLG_H
 #define STOPDLG_H
+
+#include "src/svnfrontend/fronthelpers/cursorstack.h"
 
 #include <kdialogbase.h>
 
@@ -63,6 +65,10 @@ protected:
 
     QString m_lastLog;
     unsigned int m_lastLogLines;
+    CursorStack * cstack;
+
+    virtual void showEvent(QShowEvent*);
+    virtual void hideEvent(QHideEvent*);
 
 public slots:
     virtual void slotTick();

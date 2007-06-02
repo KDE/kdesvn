@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>345</width>
-            <height>280</height>
+            <width>339</width>
+            <height>306</height>
         </rect>
     </property>
     <property name="caption">
@@ -87,6 +87,22 @@
         </widget>
         <widget class="QCheckBox">
             <property name="name">
+                <cstring>kcfg_passwords_in_wallet</cstring>
+            </property>
+            <property name="text">
+                <string>Store passwords into KDE Wallet</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>When saving passwords, do it into KDE wallet instead of subversions storage?</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>&lt;p&gt;Tells if your passwords set in kdesvn should stored into kde wallet instead of simple cleartext storage of subversion.&lt;/p&gt;
+&lt;p&gt;This would be a little bit more secure 'cause KDE wallet is (mostly) encrypted with a password. On other hand you must re-enter your passwords with other subversion clients not accessing KDE wallet (eg. svn commandline itself, rapidsvn and so on).&lt;/p&gt;
+&lt;p&gt;If you're HOME storage eg. subversions configfolder is on a network drive you should hard think about not storing passwords in a plain text file like subversion does but put it into an encrypted storage like kde wallet or don't save passwords.&lt;/p&gt;</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
                 <cstring>kcfg_log_follows_nodes</cstring>
             </property>
             <property name="text">
@@ -148,7 +164,7 @@
             <property name="sizeHint">
                 <size>
                     <width>20</width>
-                    <height>40</height>
+                    <height>16</height>
                 </size>
             </property>
         </spacer>

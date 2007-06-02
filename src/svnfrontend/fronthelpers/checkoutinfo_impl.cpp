@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -180,6 +180,24 @@ void CheckoutInfo_impl::disableAppend(bool how)
         m_CreateDirButton->hide();
     } else {
         m_CreateDirButton->show();
+    }
+}
+
+/*!
+    \fn CheckoutInfo_impl::ignoreExternals()
+ */
+bool CheckoutInfo_impl::ignoreExternals()
+{
+    return m_ignoreExternals->isChecked();
+}
+
+void CheckoutInfo_impl::disableExternals(bool how)
+{
+    m_ignoreExternals->setChecked(!how);
+    if (how) {
+        m_ignoreExternals->hide();
+    } else {
+        m_ignoreExternals->show();
     }
 }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -45,6 +45,7 @@ public:
 
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
+    void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
 
 protected slots:
     virtual void slotSelectionChanged(QListViewItem*);
@@ -67,6 +68,8 @@ protected:
 protected slots:
     virtual void slotListEntries();
     virtual void slotEntriesSelectionChanged();
+    virtual void slotSingleContext(QListViewItem*, const QPoint &, int);
+    virtual void slotSingleDoubleClicked(QListViewItem*);
 };
 
 #endif

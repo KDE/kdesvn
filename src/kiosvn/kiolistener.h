@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -21,6 +21,7 @@
 #define KIOLISTENER_H
 
 #include "src/svnqt/context_listener.hpp"
+#include "src/ksvnwidgets/pwstorage.h"
 
 namespace KIO {
     class SlaveBase;
@@ -42,6 +43,8 @@ public:
                      QString & username,
                      QString & password,
                      bool & maySave);
+    virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+
     virtual void contextNotify (const char *path,
                    svn_wc_notify_action_t action,
                    svn_node_kind_t kind,
@@ -58,6 +61,7 @@ public:
     virtual bool contextSslClientCertPrompt (QString & certFile);
     virtual bool contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave);
+    virtual bool contextLoadSslClientCertPw(QString&password,const QString&realm);
     /* context listener virtuals end */
     unsigned int counter()const{return m_notifyCounter;}
     void incCounter(){++m_notifyCounter;}
@@ -69,6 +73,7 @@ protected:
     bool m_External;
     bool m_HasChanges;
     bool m_FirstTxDelta;
+    PwStorage pws;
 };
 
 #endif

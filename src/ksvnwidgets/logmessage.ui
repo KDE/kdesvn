@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>608</width>
-            <height>473</height>
+            <width>478</width>
+            <height>399</height>
         </rect>
     </property>
     <property name="caption">
@@ -26,15 +26,71 @@
             <property name="orientation">
                 <enum>Vertical</enum>
             </property>
-            <widget class="QLayoutWidget">
+            <widget class="QFrame">
                 <property name="name">
-                    <cstring>m_ReviewLayout</cstring>
+                    <cstring>m_ReviewFrame</cstring>
                 </property>
-                <grid>
+                <property name="frameShape">
+                    <enum>NoFrame</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>Plain</enum>
+                </property>
+                <vbox>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLayoutWidget" row="1" column="0">
+                    <widget class="QLabel">
+                        <property name="name">
+                            <cstring>m_Reviewlabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Review affected items</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignCenter</set>
+                        </property>
+                    </widget>
+                    <widget class="QListView">
+                        <column>
+                            <property name="text">
+                                <string>Entry</string>
+                            </property>
+                            <property name="clickable">
+                                <bool>true</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <column>
+                            <property name="text">
+                                <string>Action</string>
+                            </property>
+                            <property name="clickable">
+                                <bool>true</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <property name="name">
+                            <cstring>m_ReviewList</cstring>
+                        </property>
+                        <property name="resizePolicy">
+                            <enum>Manual</enum>
+                        </property>
+                        <property name="allColumnsShowFocus">
+                            <bool>true</bool>
+                        </property>
+                        <property name="showSortIndicator">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizeMode">
+                            <enum>LastColumn</enum>
+                        </property>
+                    </widget>
+                    <widget class="QLayoutWidget">
                         <property name="name">
                             <cstring>m_EntryButtonsLayout</cstring>
                         </property>
@@ -47,10 +103,10 @@
                                     <cstring>m_MarkUnversioned</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Mark all unversioned items</string>
+                                    <string>Select new items</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Mark all not versioned items for add</string>
+                                    <string>Mark all new e.g. not versioned items for add and commit.</string>
                                 </property>
                             </widget>
                             <widget class="QPushButton">
@@ -58,10 +114,10 @@
                                     <cstring>m_UnmarkUnversioned</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Unmark all unversioned items</string>
+                                    <string>Unselect new items</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Unmark all unversioned items from adding</string>
+                                    <string>Unmark all unversioned items so they will be ignored.</string>
                                 </property>
                             </widget>
                             <widget class="QPushButton">
@@ -69,7 +125,7 @@
                                     <cstring>m_DiffItem</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Diff selected item</string>
+                                    <string>Diff highlighted item</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Generates and display difference against repository of selected item</string>
@@ -77,82 +133,23 @@
                             </widget>
                         </hbox>
                     </widget>
-                    <widget class="QLayoutWidget" row="0" column="0">
-                        <property name="name">
-                            <cstring>layout5</cstring>
-                        </property>
-                        <grid>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QLabel" row="0" column="0">
-                                <property name="name">
-                                    <cstring>m_Reviewlabel</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Review affected items</string>
-                                </property>
-                                <property name="alignment">
-                                    <set>AlignCenter</set>
-                                </property>
-                            </widget>
-                            <widget class="QListView" row="1" column="0">
-                                <column>
-                                    <property name="text">
-                                        <string>Entry</string>
-                                    </property>
-                                    <property name="clickable">
-                                        <bool>true</bool>
-                                    </property>
-                                    <property name="resizable">
-                                        <bool>true</bool>
-                                    </property>
-                                </column>
-                                <column>
-                                    <property name="text">
-                                        <string>Action</string>
-                                    </property>
-                                    <property name="clickable">
-                                        <bool>true</bool>
-                                    </property>
-                                    <property name="resizable">
-                                        <bool>true</bool>
-                                    </property>
-                                </column>
-                                <property name="name">
-                                    <cstring>m_ReviewList</cstring>
-                                </property>
-                                <property name="resizePolicy">
-                                    <enum>Manual</enum>
-                                </property>
-                                <property name="allColumnsShowFocus">
-                                    <bool>true</bool>
-                                </property>
-                                <property name="showSortIndicator">
-                                    <bool>true</bool>
-                                </property>
-                                <property name="resizeMode">
-                                    <enum>LastColumn</enum>
-                                </property>
-                            </widget>
-                        </grid>
-                    </widget>
-                </grid>
+                </vbox>
             </widget>
-            <widget class="QLayoutWidget">
+            <widget class="QFrame">
                 <property name="name">
-                    <cstring>layout3</cstring>
+                    <cstring>m_EditFrame</cstring>
                 </property>
-                <grid>
+                <property name="frameShape">
+                    <enum>NoFrame</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>Plain</enum>
+                </property>
+                <vbox>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="KTextEdit" row="1" column="0">
-                        <property name="name">
-                            <cstring>m_LogEdit</cstring>
-                        </property>
-                    </widget>
-                    <widget class="QLabel" row="0" column="0">
+                    <widget class="QLabel">
                         <property name="name">
                             <cstring>m_HeadLabel</cstring>
                         </property>
@@ -163,51 +160,56 @@
                             <set>AlignCenter</set>
                         </property>
                     </widget>
-                </grid>
+                    <widget class="KTextEdit">
+                        <property name="name">
+                            <cstring>m_LogEdit</cstring>
+                        </property>
+                    </widget>
+                </vbox>
             </widget>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layout4</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_LogLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Or insert one of the last:</string>
+                    </property>
+                </widget>
+                <widget class="KComboBox" row="1" column="0">
+                    <item>
+                        <property name="text">
+                            <string></string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>m_LogHistory</cstring>
+                    </property>
+                    <property name="duplicatesEnabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Last used log messages</string>
+                    </property>
+                </widget>
+            </grid>
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
                 <cstring>m_ItemsLayout</cstring>
             </property>
-            <vbox>
+            <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
-                    <property name="name">
-                        <cstring>layout4</cstring>
-                    </property>
-                    <grid>
-                        <property name="name">
-                            <cstring>unnamed</cstring>
-                        </property>
-                        <widget class="QLabel" row="0" column="0">
-                            <property name="name">
-                                <cstring>m_LogLabel</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Or insert one of the last:</string>
-                            </property>
-                        </widget>
-                        <widget class="KComboBox" row="1" column="0">
-                            <item>
-                                <property name="text">
-                                    <string></string>
-                                </property>
-                            </item>
-                            <property name="name">
-                                <cstring>m_LogHistory</cstring>
-                            </property>
-                            <property name="duplicatesEnabled">
-                                <bool>false</bool>
-                            </property>
-                            <property name="toolTip" stdset="0">
-                                <string>Last used log messages</string>
-                            </property>
-                        </widget>
-                    </grid>
-                </widget>
                 <widget class="QCheckBox">
                     <property name="name">
                         <cstring>m_RecursiveButton</cstring>
@@ -218,8 +220,22 @@
                     <property name="checked">
                         <bool>true</bool>
                     </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Make operation recursive.</string>
+                    </property>
                 </widget>
-            </vbox>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>m_keepLocksButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Keep locks</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>If checked commit will not release locks.</string>
+                    </property>
+                </widget>
+            </hbox>
         </widget>
     </vbox>
 </widget>

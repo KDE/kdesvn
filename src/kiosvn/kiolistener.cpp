@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -148,7 +148,7 @@ void KioListener::contextNotify (const char * path,
             if ( content_state == svn_wc_notify_state_missing )
                 userstring=i18n("Skipped missing target %1.").arg( path );
             else
-                userstring=i18n("Skipped  %1.").arg( path );
+                userstring=i18n("Skipped %1.").arg( path );
             break;
         case svn_wc_notify_update_delete: //update_delete
             m_HasChanges = TRUE;
@@ -199,13 +199,13 @@ void KioListener::contextNotify (const char * path,
             {
                 if (!m_External) {
                     if (SVN_IS_VALID_REVNUM(revision)) {
-                        userstring = i18n("Finished at revision %1").arg(revision);
+                        userstring = i18n("Finished at revision %1.").arg(revision);
                     } else {
                         userstring = i18n("Finished.");
                     }
                 } else {
                     if (SVN_IS_VALID_REVNUM(revision)) {
-                        userstring = i18n("Finished external at revision %1").arg(revision);
+                        userstring = i18n("Finished external at revision %1.").arg(revision);
                     } else {
                         userstring = i18n("Finished external.");
                     }
@@ -273,7 +273,7 @@ void KioListener::contextNotify (const char * path,
              userstring = i18n("Performing status on external item at %1.").arg( path );
             break;
         case svn_wc_notify_commit_modified: //commit_modified
-            userstring = i18n( "Sending %1").arg( path );
+            userstring = i18n( "Sending %1.").arg( path );
             break;
         case svn_wc_notify_commit_added: //commit_added
             if (mime_type && svn_mime_type_is_binary (mime_type)) {
@@ -291,6 +291,7 @@ void KioListener::contextNotify (const char * path,
         case svn_wc_notify_commit_postfix_txdelta: //commit_postfix_txdelta
             if (!m_FirstTxDelta) {
                 m_FirstTxDelta = TRUE;
+		// check fullstops!
                 userstring=i18n("Transmitting file data ");
             } else {
                 userstring=".";
@@ -369,6 +370,11 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
     return ACCEPT_TEMPORARILY;
 }
 
+bool KioListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
+{
+    return pws.getCertPw(realm,password);
+}
+
 bool KioListener::contextSslClientCertPrompt (QString & certFile)
 {
     QByteArray reply;
@@ -397,6 +403,13 @@ bool KioListener::contextSslClientCertPwPrompt (QString & password,
 {
     return false;
 }
+
+bool KioListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
+{
+    pws.getLogin(realm,username,password);
+    return true;
+}
+
 
 bool KioListener::contextGetLogin (const QString & realm,
                      QString & username,

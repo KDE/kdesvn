@@ -1,5 +1,6 @@
 /* This file is part of KCachegrind.
    Copyright (C) 2002, 2003 Josef Weidendorfer <Josef.Weidendorfer@gmx.de>
+   Adapted for the needs of kdesvn  by Rajko Albrecht <ral@alwins-world.de>
 
    KCachegrind is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -653,7 +654,7 @@ bool RectDrawing::drawField(QPainter* p, int f, DrawParams* dp)
     }
 
 
-    if (0) kdDebug(90100) << "  Drawing '" << name << "' at " 
+    if (0) kdDebug(90100) << "  Drawing '" << name << "' at "
 		     << x+pixW << "/" << y << endl;
 
     p->drawText( x+pixW, y,

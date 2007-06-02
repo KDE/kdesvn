@@ -1,7 +1,28 @@
+/***************************************************************************
+ *   Copyright (C) 2006-2007 by Rajko Albrecht                             *
+ *   ral@alwins-world.de                                                   *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
+ ***************************************************************************/
 #include "blamedisplay_impl.h"
 #include "simple_logcb.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/log_entry.hpp"
+#include "fronthelpers/cursorstack.h"
+#include "fronthelpers/widgetblockstack.h"
 
 #include <klistview.h>
 #include <kglobalsettings.h>
@@ -13,6 +34,7 @@
 #include <kdialogbase.h>
 #include <kapp.h>
 #include <ktextbrowser.h>
+#include <klistviewsearchline.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -20,6 +42,9 @@
 #include <qmap.h>
 #include <qpopupmenu.h>
 #include <qvbox.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
+#include <qlayout.h>
 
 #define COL_LINENR 0
 #define COL_REV 1
@@ -189,9 +214,14 @@ void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
 void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&blame)
 {
     m_Data->m_File = what;
+    m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this, "m_SearchWidget");
+
+    BlameDisplayLayout->remove(m_BlameList);
+    BlameDisplayLayout->addWidget(m_SearchWidget);
+    BlameDisplayLayout->addWidget(m_BlameList);
+
     m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
     m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
-    m_BlameList->header()->setLabel(COL_LINE,QString(""));
 
     m_BlameList->clear();
     if (m_Data->m_dlg) {
@@ -311,10 +341,12 @@ void BlameDisplay_impl::slotContextMenuRequested(KListView*,QListViewItem*item, 
 void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
 {
     if (!bit) return;
+    WidgetBlockStack a(m_BlameList);
     QString text;
     if (m_Data->m_logCache.find(bit->rev())!=m_Data->m_logCache.end()) {
         text = m_Data->m_logCache[bit->rev()].message;
     } else {
+        CursorStack a(Qt::BusyCursor);
         svn::LogEntry t;
         if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t,bit->rev(),m_Data->m_File,m_Data->max,m_Data->reposRoot)) {
             m_Data->m_logCache[bit->rev()] = t;
@@ -375,5 +407,13 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const sv
 
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
 }
+
+void BlameDisplay_impl::slotItemDoubleClicked(QListViewItem*item)
+{
+    if (item==0||item->rtti()!=1000) return;
+    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+    showCommit(bit);
+}
+
 
 #include "blamedisplay_impl.moc"

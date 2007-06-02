@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -95,6 +95,8 @@ private:
     static QString m_Extratext;
 protected slots:
     void slotSettingsChanged();
+protected slots:
+    virtual void slotHideUnchanged(bool);
 };
 
 class commandline_part;

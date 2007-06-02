@@ -1,0 +1,47 @@
+important stuff for svn 1.5
+
+
+svn_client.h
+============
+
+parameter allow_unver_obstructions for:
+
+svn_client_checkout3
+svn_client_update3
+svn_client_switch2
+
+svn_client_delete3 -> parameter keep_local
+
+svn_client_commit4 -> changelist_name and keep_changelist, what does that mean?!?!?
+see:
+svn_client_add_to_changelist
+svn_client_remove_from_changelist
+svn_client_get_changelist
+svn_client_get_changelist_streamy
+
+
+
+svn_client_copy4 -> parameter copy_as_child, multiple source items
+svn_client_move5 -> parameter copy_as_child, multiple source items
+(Yeah!)
+
+svn_client_propset3 -> parameter base_revision_for_url and commit_info_p
+
+svn_client_proplist3 -> baton receiver mechanism instead getting a list.(progress callbacks?)
+
+svn_client_get_commit_log3 (commit_items differs from abstract content)
+
+svn_client_ctx_t:
+
+svn_client_get_commit_log3_t
+log_msg_baton3
+mimetypes_map
+revprop_table
+
+
+
+structure svn_client_copy_source_t
+structure svn_info_t -> member changelist
+
+structure svn_client_commit_item3_t (-> svn_client_commit_item_create/dup/delete)
+

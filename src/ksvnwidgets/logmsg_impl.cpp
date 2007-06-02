@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -63,7 +63,13 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_ReviewList->hide();
     m_hidden=true;
     hideButtons(true);
-    checkSplitterSize();
+    m_MainSplitter->moveToFirst(m_EditFrame);
+    delete m_ReviewFrame;
+    m_Reviewlabel=0;
+    m_ReviewList=0;
+    m_MarkUnversioned=0;
+    m_UnmarkUnversioned=0;
+    m_DiffItem=0;
 }
 
 Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const char *name)
@@ -146,12 +152,16 @@ Logmsg_impl::~Logmsg_impl()
 
 void Logmsg_impl::checkSplitterSize()
 {
-    if (!m_hidden)
-    {
-        QValueList<int> list = Kdesvnsettings::commit_splitter_height();
-        if (list.count()==2 && (list[0]>0||list[1]>0)) {
-            m_MainSplitter->setSizes(list);
-        }
+    QValueList<int> list = Kdesvnsettings::commit_splitter_height();
+    if (list.count()!=2) {
+        return;
+    }
+    if (m_hidden) {
+        list[1]=list[0]+list[1];
+        list[0]=0;
+    }
+    if (m_hidden || (list[0]>0||list[1]>0)) {
+        m_MainSplitter->setSizes(list);
     }
 }
 
@@ -179,6 +189,14 @@ QString Logmsg_impl::getMessage()const
 bool Logmsg_impl::isRecursive()const
 {
     return m_RecursiveButton->isChecked();
+}
+
+/*!
+    \fn Logmsg_impl::isRecursive()const
+ */
+bool Logmsg_impl::isKeeplocks()const
+{
+    return m_keepLocksButton->isChecked();
 }
 
 
@@ -238,9 +256,9 @@ void Logmsg_impl::saveHistory()
     cs.sync();
 }
 
-QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*name)
+QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
 {
-    bool _ok,_rec;
+    bool _ok,_rec,_keep_locks;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -253,15 +271,20 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     if (!rec) {
         ptr->m_RecursiveButton->hide();
     }
+    if (!keep_locks) {
+        ptr->m_keepLocksButton->hide();
+    }
     ptr->initHistory();
     dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
         _rec = false;
+        _keep_locks = false;
     } else {
         _ok = true;
         _rec = ptr->isRecursive();
+        _keep_locks = ptr->isKeeplocks();
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
@@ -271,9 +294,9 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,QWidget*parent,const char*na
     return msg;
 }
 
-QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*rec,QWidget*parent,const char*name)
+QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
 {
-    bool _ok,_rec;
+    bool _ok,_rec,_keep_locks;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -286,28 +309,35 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
     if (!rec) {
         ptr->m_RecursiveButton->hide();
     }
+    if (!keep_locks) {
+        ptr->m_keepLocksButton->hide();
+    }
+
     ptr->initHistory();
     dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
         _rec = false;
+        _keep_locks = false;
     } else {
         _ok = true;
         _rec = ptr->isRecursive();
+        _keep_locks = ptr->isKeeplocks();
         msg=ptr->getMessage();
         ptr->saveHistory();
     }
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
+    if (keep_locks) *keep_locks = _keep_locks;
     return msg;
 }
 
 QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
-    bool*ok,bool*rec,QWidget*parent,const char*name)
+    bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
 {
-    bool _ok,_rec;
+    bool _ok,_rec,_keep_locks;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -320,21 +350,27 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
     if (!rec) {
         ptr->m_RecursiveButton->hide();
     }
+    if (!keep_locks) {
+        ptr->m_keepLocksButton->hide();
+    }
     ptr->initHistory();
     dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
         _rec = false;
+        _keep_locks=false;
     } else {
         _ok = true;
         _rec = ptr->isRecursive();
         msg=ptr->getMessage();
         ptr->saveHistory();
+        _keep_locks = ptr->isKeeplocks();
     }
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
+    if (keep_locks) *keep_locks = _keep_locks;
     return msg;
 }
 
@@ -342,9 +378,9 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             const logActionEntries&_off,
             QObject*callback,
             logActionEntries&_result,
-            bool*ok,QWidget*parent,const char*name)
+            bool*ok,bool*keep_locks,QWidget*parent,const char*name)
 {
-    bool _ok;
+    bool _ok,_keep_locks;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -354,6 +390,9 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
     ptr->m_RecursiveButton->hide();
+    if (!keep_locks) {
+        ptr->m_keepLocksButton->hide();
+    }
     ptr->initHistory();
     if (callback)
     {
@@ -364,14 +403,17 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
+        _keep_locks=false;
     } else {
         _ok = true;
         msg=ptr->getMessage();
         ptr->saveHistory();
+        _keep_locks = ptr->isKeeplocks();
     }
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     _result = ptr->selectedEntries();
+    if (keep_locks) *keep_locks = _keep_locks;
     return msg;
 }
 
@@ -387,15 +429,17 @@ void Logmsg_impl::setRecCheckboxtext(const QString&what,bool checked)
 Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
 {
     logActionEntries _result;
-    QListViewItemIterator it( m_ReviewList );
-    while ( it.current() ) {
-        if (it.current()->rtti()==1000) {
-            SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
-            if (item->isOn()) {
-                _result.append(item->data());
+    if (m_ReviewList) {
+        QListViewItemIterator it( m_ReviewList );
+        while ( it.current() ) {
+            if (it.current()->rtti()==1000) {
+                SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+                if (item->isOn()) {
+                    _result.append(item->data());
+                }
             }
+            ++it;
         }
-        ++it;
     }
     return _result;
 }
@@ -430,7 +474,7 @@ void Logmsg_impl::slotMarkUnversioned()
 void Logmsg_impl::slotDiffSelected()
 {
     QListViewItem * it=0;
-    if (! (it=m_ReviewList->selectedItem()))
+    if (!m_ReviewList || !(it=m_ReviewList->selectedItem()))
     {
         return;
     }
@@ -444,6 +488,7 @@ void Logmsg_impl::slotDiffSelected()
 
 void Logmsg_impl::hideButtons(bool how)
 {
+    if (!m_MarkUnversioned)return;
     if (how)
     {
         m_MarkUnversioned->hide();
@@ -463,6 +508,7 @@ void Logmsg_impl::hideButtons(bool how)
  */
 void Logmsg_impl::markUnversioned(bool mark)
 {
+    if (!m_ReviewList)return;
     QListViewItemIterator it( m_ReviewList );
     while ( it.current() ) {
         if (it.current()->rtti()==1000) {

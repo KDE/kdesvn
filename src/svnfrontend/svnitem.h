@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -76,6 +76,8 @@ public:
     virtual const svn::Status& stat()const;
     virtual bool isModified()const;
     bool isNormal()const;
+    bool isMissing()const;
+    bool isDeleted()const;
     const QString& getToolTipText();
     KFileItem*fileItem();
 

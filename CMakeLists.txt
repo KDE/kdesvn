@@ -5,6 +5,7 @@ OPTION(BUILD_KDE4 "Building for kde4 yes or no (default off)")
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 IF (TESTINGBUILD)
    ADD_DEFINITIONS("-DTESTING_RC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\"")
+   ADD_DEFINITIONS("-DFORCE_ASKPASS=\"\\\"\${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\\\"\"")
 ENDIF (TESTINGBUILD)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
@@ -114,7 +115,7 @@ SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 SET(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib")
 
 # current version
-SET(VERSION 0.11.1)
+SET(VERSION 0.12.0)
 SET(KDESVN_VERSION \"${VERSION}\")
 
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
@@ -140,6 +141,7 @@ ADD_CUSTOM_TARGET(uninstall
 
 ADD_CUSTOM_TARGET(dist
     "${CMAKE_BINARY_DIR}/makedist.sh"
+    DEPENDS doc
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 

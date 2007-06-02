@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -42,9 +42,11 @@ public:
     void forceAsRecursive(bool how);
     void disableAppend(bool how);
     void disableOpen(bool how);
+    void disableExternals(bool how);
     bool openAfterJob();
     virtual void disableRange(bool how);
     void setTargetUrl(const QString&);
+    bool ignoreExternals();
 protected slots:
     virtual void urlChanged(const QString&);
 };

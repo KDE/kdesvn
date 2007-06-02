@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -19,6 +19,8 @@
  ***************************************************************************/
 
 #include "itemdisplay.h"
+#include "svnitem.h"
+#include "src/settings/kdesvnsettings.h"
 
 
 ItemDisplay::ItemDisplay()
@@ -66,4 +68,48 @@ void ItemDisplay::setBaseUri(const QString&uri)
 const QString&ItemDisplay::lastError()const
 {
     return m_LastException;
+}
+
+
+/*!
+    \fn ItemDisplay::filterOut(const SvnItem*)
+ */
+bool ItemDisplay::filterOut(const SvnItem*item)
+{
+    return filterOut(item->stat());
+}
+
+
+/*!
+    \fn ItemDisplay::filterOut(const svn::Status&)
+ */
+bool ItemDisplay::filterOut(const svn::Status&item)
+{
+    bool res = false;
+
+    if (!item.validReposStatus()) {
+        if ((!Kdesvnsettings::display_unknown_files() && !item.isVersioned()) ||
+            (Kdesvnsettings::hide_unchanged_files() && item.isRealVersioned() && !item.isModified() && !item.entry().isDir())) {
+            res = true;
+              }
+    }
+    return res;
+}
+
+
+/*!
+    \fn ItemDisplay::relativePath(const SvnItem*item)
+ */
+QString ItemDisplay::relativePath(const SvnItem*item)
+{
+    if (!isWorkingCopy()||!item->fullName().startsWith(baseUri())) {
+        return item->fullName();
+    }
+    QString name = item->fullName();
+    if (name==baseUri()) {
+        name = ".";
+    } else {
+        name = name.right(name.length()-baseUri().length()-1);
+    }
+    return name;
 }

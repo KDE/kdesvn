@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>528</width>
-            <height>315</height>
+            <width>485</width>
+            <height>236</height>
         </rect>
     </property>
     <property name="caption">
@@ -146,6 +146,9 @@
                 </property>
                 <property name="allColumnsShowFocus">
                     <bool>true</bool>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>Contextmenu on item for more operations</string>
                 </property>
             </widget>
             <widget class="KTextBrowser">
@@ -304,6 +307,18 @@
         <receiver>LogDialog</receiver>
         <slot>slotEntriesSelectionChanged()</slot>
     </connection>
+    <connection>
+        <sender>m_ChangedList</sender>
+        <signal>contextMenuRequested(QListViewItem*,const QPoint&amp;,int)</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotSingleContext(QListViewItem*,const QPoint&amp;,int)</slot>
+    </connection>
+    <connection>
+        <sender>m_ChangedList</sender>
+        <signal>doubleClicked(QListViewItem*)</signal>
+        <receiver>LogDialog</receiver>
+        <slot>slotSingleDoubleClicked(QListViewItem*)</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotSelectionChanged(QListViewItem*)</slot>
@@ -314,6 +329,8 @@
     <slot access="protected">slotListEntries()</slot>
     <slot access="protected">slotBlameItem()</slot>
     <slot access="protected">slotEntriesSelectionChanged()</slot>
+    <slot access="protected">slotSingleContext(QListViewItem*, const QPoint &amp;, int)</slot>
+    <slot access="protected">slotSingleDoubleClicked(QListViewItem*)</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

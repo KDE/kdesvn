@@ -717,7 +717,7 @@ so, for instance, kdevelop may use it if kdesdk isn't installed but uses kdesvn:
 <entry>Name&#047;command</entry>
 <entry>Numeric id</entry>
 <entry>Parameter list</entry>
-<entry>Implemented in 0.7.x?</entry>
+<entry>Implemented in 0.11.x?</entry>
 </row>
 </thead>
 
@@ -777,22 +777,22 @@ Use this with care - this may produce a lot of data.
 <row>
 <entry>Import</entry>
 <entry>5</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL targetrepository, KURL sourcepath</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Add</entry>
 <entry>6</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Del</entry>
 <entry>7</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL::List</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
@@ -816,22 +816,22 @@ Use this with care - this may produce a lot of data.
 <row>
 <entry>Mkdir</entry>
 <entry>10</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL::List</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Resolve</entry>
 <entry>11</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL, bool recursive</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
 <entry>Switch</entry>
 <entry>12</entry>
-<entry></entry>
-<entry>No</entry>
+<entry>KURL working_copy_path,KURL new_repository_url,bool recursive,int revnumber, QString revkind</entry>
+<entry>Yes</entry>
 </row>
 
 <row>
@@ -1255,7 +1255,12 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 
 <row>
 <entry>Store passwords for remote connections</entry>
-<entry>Storing passwords is often a security problem. Kdesvn itself doesn't store any passwords, but the subversion itself inside the configuration area of subversion. If this area is readable from others you should not set it, but you may select for single non critical accounts inside the authentication dialog.</entry>
+<entry>Storing passwords is often a security problem. Subversion stores its passwords into a flat file, eg., passwords in cleartext! So be carefull setting this flag and see next entry, too. This item only says if saving passwords is the default, you may change it for specific realms inside login dialog.</entry>
+</row>
+
+<row>
+<entry>Store passwords into KDE wallet</entry>
+<entry>When saving passwords, the cleartext file from subversion is a security hole. &kappname; is able saving them into encrypted kde wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like svn-cmdline or rapidsvn, too. As long as subversion don't encrypt password storage you should think twice about it.</entry>
 </row>
 
 <row>
@@ -1891,6 +1896,9 @@ repository to newer subversion.
 <para>
 There are many reasons why the program couldn't load. This mostly happens when you building subversion-libs yourself. In that case you may
 check out <ulink url="http://www.alwins-world.de/programs/mantis/view.php?id=128">this mantis entry</ulink>.
+</para>
+<para>
+The next big thing could that you forgot to give a libsuffix on 64-Bit systems at compile-time. So the part will installed in <prompt>$PREFIX/lib</prompt> instead of <prompt>$PREFIX/lib64</prompt>. So give <prompt>-DLIB_SUFFIX=64</prompt> as paramter to cmake.
 </para>
 <para>If this does not solve your problem, you may try out on a console:
 <programlisting>

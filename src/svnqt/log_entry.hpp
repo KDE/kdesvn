@@ -1,3 +1,8 @@
+/* 
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
 /*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.
@@ -104,7 +109,9 @@ namespace svn
               const char * author,
               const char * date,
               const char * message);
+    void setDate(const char*date);
 #if QT_VERSION < 0x040000
+    //! if -1 the entry is a fake entry and not real usable!
     svn_revnum_t revision;
     apr_time_t date;
 #else

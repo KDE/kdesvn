@@ -1,3 +1,8 @@
+/* 
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
 /*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.
@@ -53,14 +58,12 @@ namespace svn
     virtual ~ContextListener(){}
     /**
      * this method will be called to retrieve
-     * authentication information
+     * authentication information. This will called until valid information were
+     * inserted or it returns false.
      *
-     * WORKAROUND FOR apr_xlate PROBLEM:
-     * STRINGS ALREADY HAVE TO BE UTF8!!!
-     *
-     * @param username
+     * @param username username set as default by subversion
      * @param realm in which username/password will be used
-     * @param password
+     * @param password target storage for password
      * @param maySave in/out set false to not save
      * @return continue action?
      * @retval true continue
@@ -70,7 +73,21 @@ namespace svn
                      QString & username,
                      QString & password,
                      bool & maySave) = 0;
-
+    /**
+     * this method will be called to retrieve
+     * authentication information stored not by subversion. This
+     * will only called once!
+     *
+     * @param username username set as default by subversion
+     * @param realm in which username/password will be used
+     * @param password  target storage for password
+     * @return continue action? should only in case of emergency return false.
+     * @retval true continue
+     */
+    virtual bool
+    contextGetSavedLogin(const QString & realm,
+                         QString & username,
+                         QString & password) = 0;
     /**
      * this method will be called to notify about
      * the progress of an ongoing action
@@ -191,6 +208,15 @@ namespace svn
     contextSslClientCertPwPrompt (QString & password,
                                   const QString & realm,
                                   bool & maySave) = 0;
+    /**
+     * this method is called to retrieve the password
+     * for the client certificate from a local storage or such. it will called only once.
+     *
+     * @param password
+     * @param realm
+     */
+    virtual bool
+    contextLoadSslClientCertPw(QString&password,const QString&realm)=0;
 
     virtual void
     contextProgress(long long int current, long long int max) = 0;

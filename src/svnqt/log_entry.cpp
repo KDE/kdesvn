@@ -1,3 +1,8 @@
+/* 
+ * Port for usage with qt-framework and development for kdesvn
+ * (C) 2005-2007 by Rajko Albrecht
+ * http://www.alwins-world.de/wiki/programs/kdesvn
+ */
 /*
  * ====================================================================
  * Copyright (c) 2002-2005 The RapidSvn Group.  All rights reserved.
@@ -84,23 +89,27 @@ namespace svn
     const char * date_,
     const char * message_)
   {
-    apr_time_t date__;
-    date = 0;
-
-    if (date_ != 0)
-    {
-      Pool pool;
-
-      if (svn_time_from_cstring (&date__, date_, pool) != 0)
-        date__ = 0;
-    }
-    date = date__;
+    setDate(date_);
 
     revision = revision_;
     author = author_ == 0 ? "" : QString::FROMUTF8(author_);
     message = message_ == 0 ? "" : QString::FROMUTF8(message_);
   }
+
+  void LogEntry::setDate(const char*date_)
+  {
+      apr_time_t date__ = 0;
+      if (date_ != 0)
+      {
+          Pool pool;
+
+          if (svn_time_from_cstring (&date__, date_, pool) != 0)
+              date__ = 0;
+      }
+      date = date__;
+  }
 }
+
 
 SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogEntry&r)
 {

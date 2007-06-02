@@ -1,3 +1,25 @@
+version 0.12.0
+    * passwords may stored in more secure kde wallet instead of subversions plain file
+    * user may select to hide or show unversioned files in working copies
+    * user may select to hide or show not modified files in working copies
+    * enhanced internal difference display (Colored, search, differences may saved)
+    * fix: in urls the wrapper libs overwrites the "@" in proto://user@host/path with url-encoding.
+    * fix: let user select if them want to checkout/export external declarations, too.
+
+version 0.11.2
+    * missing KIO::special functions implemented (update/add/del)
+    * fix: since subversion 1.4 kdesvn made an error when making simple diff on commandline ("kdesvn exec diff <path>")
+    * fix: kdevelop always gives a file:/// uri for locals, kio_ksvn has to check if this is a working copy uri
+           and transform it to uri without protocoll if yes.
+    * feature request: Logdialog may display details about items in a changeset (difference and annotate) #30
+    * feature request: search in blamewindows
+    * spain translation updated
+    * fix: DirWatcher should not have any display leaks any more and should not crash kdesvn on heavy changes.
+    * fix: kdesvn could crash when try to open folders where user had no execute/read rights for.
+    * fix: kdesvn didn't see replaced items as modified items.
+    * fix: kdesvn asks now if on commits locks should released.
+    * Lithuanian translation added
+
 version 0.11.1
     * Galician translation added
     * lock/unlock as commandline action

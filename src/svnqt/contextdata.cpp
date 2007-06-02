@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Rajko Albrecht                                  *
+ *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -42,17 +42,19 @@ ContextData::ContextData(const QString & configDir_)
       // intialize authentication providers
       // * simple
       // * username
+      // * simple pw storage
       // * simple prompt
       // * ssl server trust file
       // * ssl server trust prompt
       // * ssl client cert pw file
+      // * ssl client cert pw load
       // * ssl client cert pw prompt
       // * ssl client cert file
       // ===================
-      // 8 providers
+      // 10 providers
 
     apr_array_header_t *providers =
-        apr_array_make (pool, 9, sizeof (svn_auth_provider_object_t *));
+        apr_array_make (pool, 11, sizeof (svn_auth_provider_object_t *));
     svn_auth_provider_object_t *provider;
 
 #if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
@@ -74,6 +76,14 @@ ContextData::ContextData(const QString & configDir_)
     svn_client_get_username_provider
 #endif
     (&provider,pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_simple_prompt_provider
+#else
+    svn_client_get_simple_prompt_provider
+#endif
+    (&provider,onFirstPrompt,this,0,pool);
     *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
@@ -118,6 +128,15 @@ ContextData::ContextData(const QString & configDir_)
     svn_client_get_ssl_server_trust_prompt_provider
 #endif
     (&provider, onSslServerTrustPrompt, this, pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
+
+    // first try load from extra storage
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_ssl_client_cert_pw_prompt_provider
+#else
+    svn_client_get_ssl_client_cert_pw_prompt_provider
+#endif
+    (&provider, onFirstSslClientCertPw, this, 0, pool);
     *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
     // plugged in 3 as the retry limit - what is a good limit?
@@ -240,6 +259,21 @@ bool ContextData::retrieveLogin (const char * username_,
     username = QString::FROMUTF8(username_);
     ok = listener->contextGetLogin(QString::FROMUTF8(realm),username, password, may_save);
 
+    return ok;
+}
+
+bool ContextData::retrieveSavedLogin (const char * username_,
+                                 const char * realm,
+                                 bool & may_save)
+{
+    bool ok;
+    may_save = false;
+
+    if (listener == 0)
+        return false;
+
+    username = QString::FROMUTF8(username_);
+    ok = listener->contextGetSavedLogin(QString::FROMUTF8(realm),username, password);
     return ok;
 }
 
@@ -389,6 +423,33 @@ svn_error_t * ContextData::onCancel (void * baton)
         return SVN_NO_ERROR;
 }
 
+svn_error_t *ContextData::onFirstPrompt(svn_auth_cred_simple_t **cred,
+                                            void *baton,
+                                            const char *realm,
+                                            const char *username,
+                                            svn_boolean_t _may_save,
+                                            apr_pool_t *pool)
+{
+    ContextData * data = 0;
+    SVN_ERR (getContextData (baton, &data));
+    bool may_save = _may_save != 0;
+    if (!data->retrieveSavedLogin (username, realm, may_save ))
+        return SVN_NO_ERROR;
+    svn_auth_cred_simple_t* lcred = (svn_auth_cred_simple_t*)
+            apr_palloc (pool, sizeof (svn_auth_cred_simple_t));
+    QByteArray l;
+    l = data->getPassword().TOUTF8();
+    lcred->password = apr_pstrndup (pool,l,l.size());
+    l = data->getUsername().TOUTF8();
+    lcred->username = apr_pstrndup (pool,l,l.size());
+
+      // tell svn if the credentials need to be saved
+    lcred->may_save = may_save;
+    *cred = lcred;
+
+    return SVN_NO_ERROR;
+}
+
 svn_error_t *ContextData::onSimplePrompt (svn_auth_cred_simple_t **cred,
                     void *baton,
                     const char *realm,
@@ -482,6 +543,32 @@ svn_error_t * ContextData::onSslClientCertPrompt (svn_auth_cred_ssl_client_cert_
     cred_->cert_file = certFile.TOUTF8();
 
     *cred = cred_;
+    return SVN_NO_ERROR;
+}
+
+svn_error_t *ContextData::onFirstSslClientCertPw (
+        svn_auth_cred_ssl_client_cert_pw_t **cred,
+        void *baton,
+        const char *realm,
+        svn_boolean_t maySave,
+        apr_pool_t *pool)
+{
+    ContextData * data = 0;
+    SVN_ERR (getContextData (baton, &data));
+
+    QString password;
+    bool may_save = maySave != 0;
+    if (!data->listener->contextLoadSslClientCertPw(password, QString::FROMUTF8(realm)))
+        return SVN_NO_ERROR;
+
+    svn_auth_cred_ssl_client_cert_pw_t *cred_ =
+            (svn_auth_cred_ssl_client_cert_pw_t *)
+            apr_palloc (pool, sizeof (svn_auth_cred_ssl_client_cert_pw_t));
+
+    cred_->password = password.TOUTF8();
+    cred_->may_save = may_save;
+    *cred = cred_;
+
     return SVN_NO_ERROR;
 }
 

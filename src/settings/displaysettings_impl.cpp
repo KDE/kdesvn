@@ -26,9 +26,10 @@
 #include <klineedit.h>
 #include <kdebug.h>
 
-DisplaySettings_impl::DisplaySettings_impl(QWidget *parent, const char *name)
-    :DisplaySettings(parent, name)
+DisplaySettings_impl::DisplaySettings_impl(QWidget *parent)
+    :QWidget(parent)
 {
+    setupUi(this);
     kcfg_display_previews_in_file_tips->setEnabled(kcfg_display_file_tips->isChecked());
 }
 

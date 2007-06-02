@@ -19,9 +19,10 @@
  ***************************************************************************/
 #include "src/settings/revisiontreesettingsdlg_impl.h"
 
-RevisiontreeSettingsDlg_impl::RevisiontreeSettingsDlg_impl(QWidget *parent, const char *name)
-    :RevisiontreeSettingsDlg(parent, name)
+RevisiontreeSettingsDlg_impl::RevisiontreeSettingsDlg_impl(QWidget *parent)
+    :QWidget(parent)
 {
+    setupUi(this);
 }
 
 RevisiontreeSettingsDlg_impl::~RevisiontreeSettingsDlg_impl()

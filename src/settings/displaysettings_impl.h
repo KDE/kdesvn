@@ -20,12 +20,12 @@
 #ifndef DISPLAYSETTINGS_IMPL_H
 #define DISPLAYSETTINGS_IMPL_H
 
-#include "src/settings/display_settings.h"
+#include "src/settings/ui_display_settings.h"
 
-class DisplaySettings_impl: public DisplaySettings {
+class DisplaySettings_impl: public QWidget, public Ui::DisplaySettings {
 Q_OBJECT
 public:
-    DisplaySettings_impl(QWidget *parent = 0, const char *name = 0);
+    DisplaySettings_impl(QWidget *parent = 0);
     virtual ~DisplaySettings_impl();
 protected slots:
     virtual void dispFileInfotoggled(bool);

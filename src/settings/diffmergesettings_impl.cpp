@@ -26,9 +26,10 @@
 #include <klineedit.h>
 #include <kdebug.h>
 
-DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent, const char *name)
-    :DiffMergeSettings(parent, name)
+DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent)
+    :QWidget(parent)
 {
+    setupUi(this);
     kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_kompare_for_diff()==2);
 }
 

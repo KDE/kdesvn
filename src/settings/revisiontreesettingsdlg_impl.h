@@ -20,13 +20,13 @@
 #ifndef REVISIONTREESETTINGSDLG_IMPL_H
 #define REVISIONTREESETTINGSDLG_IMPL_H
 
-#include "src/settings/revisiontree_settings.h"
+#include "src/settings/ui_revisiontree_settings.h"
 
-class RevisiontreeSettingsDlg_impl: public RevisiontreeSettingsDlg
+class RevisiontreeSettingsDlg_impl: public QWidget, public Ui::RevisionTreeSettings
 {
     Q_OBJECT
 public:
-    RevisiontreeSettingsDlg_impl(QWidget *parent = 0, const char *name = 0);
+    RevisiontreeSettingsDlg_impl(QWidget *parent = 0);
     virtual ~RevisiontreeSettingsDlg_impl();
 };
 

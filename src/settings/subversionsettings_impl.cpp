@@ -21,9 +21,10 @@
 
 #include "subversionsettings_impl.h"
 
-SubversionSettings_impl::SubversionSettings_impl(QWidget* parent, const char* name, WFlags fl)
-: SubversionSettings(parent,name,fl)
+SubversionSettings_impl::SubversionSettings_impl(QWidget* parent)
+: QWidget(parent)
 {
+    setupUi(this);
 }
 
 SubversionSettings_impl::~SubversionSettings_impl()

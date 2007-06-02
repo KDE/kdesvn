@@ -21,14 +21,14 @@
 #ifndef CMDEXECSETTINGS_IMPL_H
 #define CMDEXECSETTINGS_IMPL_H
 
-#include "src/settings/cmdexecsettings.h"
+#include "src/settings/ui_cmdexecsettings.h"
 
-class CmdExecSettings_impl : public CmdExecSettings
+class CmdExecSettings_impl : public QWidget, public Ui::CmdExecSettings
 {
   Q_OBJECT
 
 public:
-  CmdExecSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  CmdExecSettings_impl(QWidget* parent = 0);
   ~CmdExecSettings_impl();
   /*$PUBLIC_FUNCTIONS$*/
 

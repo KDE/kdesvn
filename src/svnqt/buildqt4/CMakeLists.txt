@@ -1,11 +1,3 @@
-
-IF (UNIX)
-  SET(QT_QMAKE_EXECUTABLE qmake-qt4)
-  SET(QT_MOC_EXECUTABLE moc-qt4)
-  SET(QT_UIC_EXECUTABLE uic-qt4)
-  SET(CMAKE_INSTALL_PREFIX /usr)
-ENDIF (UNIX)
-
 INCLUDE(FindQt4)
 INCLUDE(UseQt4)
 INCLUDE(../cmakemodules/FindSubversion.cmake)

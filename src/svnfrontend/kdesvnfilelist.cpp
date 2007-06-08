@@ -1989,6 +1989,10 @@ void kdesvnfilelist::slotRangeBlame()
 void kdesvnfilelist::slotSimpleBaseDiff()
 {
     FileListViewItem*kitem = singleSelected();
+    if (isWorkingCopy())
+    {
+        chdir(baseUri().local8Bit());
+    }
 
     QString what;
     if (!kitem) {
@@ -2004,6 +2008,10 @@ void kdesvnfilelist::slotSimpleHeadDiff()
 {
     FileListViewItem*kitem = singleSelected();
     QString what;
+    if (isWorkingCopy())
+    {
+        chdir(baseUri().local8Bit());
+    }
 
     if (!kitem) {
         what=".";
@@ -2064,6 +2072,11 @@ void kdesvnfilelist::slotDiffRevisions()
 {
     SvnItem*k = singleSelected();
     QString what;
+    if (isWorkingCopy())
+    {
+        chdir(baseUri().local8Bit());
+    }
+
     if (!k) {
         what=(isWorkingCopy()?".":baseUri());
     }else{

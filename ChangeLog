@@ -4,6 +4,7 @@ version 0.12.1
       pathes.
     * fix: links with macos X linker
     * fix: in KIO module status didn't work - it always returned a fake status.
+    * fix: in KIO module in urls of from  "proto://user[:pass]@host/" the authentication strings were ignored.
 
 version 0.12.0
     * passwords may stored in more secure kde wallet instead of subversions plain file

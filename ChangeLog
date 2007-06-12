@@ -2,6 +2,8 @@ version 0.12.1
     * fixed a build problem on solaris
     * fix: when multiple windows opened diff may failed due wrong relative
       pathes.
+    * fix: links with macos X linker
+    * fix: in KIO module status didn't work - it always returned a fake status.
 
 version 0.12.0
     * passwords may stored in more secure kde wallet instead of subversions plain file

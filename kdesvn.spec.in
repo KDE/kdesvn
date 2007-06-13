@@ -35,6 +35,7 @@ Group:    Development/Libraries
 Summary:  Wrapper lib for subversion QT integration.
 Requires: subversion-devel >= 1.2.0
 Requires: kdesvn = %{version}
+Obsoletes: kdesvn-svnqt-devel
 
 %description devel
 Development files for kdesvn.

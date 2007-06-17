@@ -33,7 +33,7 @@ commandline_part::commandline_part(QObject *parent, const char *name,KCmdLineArg
         KStandardDirs::kde_default("data")+ QString::fromLatin1( inst->instanceName() ) + '/' );
 
 
-    m_pCPart = new CommandExec(this,name?QString(name)+QString("_exec"):"command_executer",args);
+    m_pCPart = new CommandExec(this,name?QString(name)+QString("_exec"):QString::fromLatin1("command_executer"),args);
 }
 
 commandline_part::~commandline_part()

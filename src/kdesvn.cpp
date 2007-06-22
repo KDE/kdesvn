@@ -181,10 +181,24 @@ void kdesvn::load(const KURL& url)
 {
     if (m_part) {
         bool ret = m_part->openURL(url);
+        KAction * ac=actionCollection()->action("file_open_recent");
+        KRecentFilesAction*rac = 0;
+        if (ac) {
+            rac = (KRecentFilesAction*)ac;
+        }
         if (!ret) {
             changeStatusbar(i18n("Could not open url %1").arg(url.prettyURL()));
+            if (rac) {
+                rac->removeURL(url);
+            }
         } else {
             resetStatusBar();
+            if (rac) {
+                rac->addURL(url);
+            }
+        }
+        if (rac) {
+            rac->saveEntries(KGlobal::config(),"recent_files");
         }
     }
 }
@@ -197,6 +211,13 @@ void kdesvn::setupActions()
     ac = KStdAction::close(this,SLOT(fileClose()),actionCollection());
     ac->setEnabled(getMemberList()->count()>1);
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
+
+    KRecentFilesAction*rac = KStdAction::openRecent(this,SLOT(load(const KURL&)),actionCollection());
+    if (rac)
+    {
+        rac->setMaxItems(8);
+        rac->loadEntries(KGlobal::config(),"recent_files");
+    }
 
     KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
     KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());

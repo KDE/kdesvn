@@ -57,11 +57,6 @@ public:
      */
     virtual ~kdesvn();
 
-    /**
-     * Use this method to load whatever file/URL you have
-     */
-    void load(const KURL& url);
-
     virtual void openBookmarkURL (const QString &_url);
     virtual QString currentURL () const;
     void checkReload();
@@ -84,7 +79,12 @@ protected:
 
 
 public slots:
-    void slotUrlOpened(bool);
+    virtual void slotUrlOpened(bool);
+    /**
+     * Use this method to load whatever file/URL you have
+     */
+    virtual void load(const KURL&);
+
 private slots:
     void fileOpen();
     void fileNew();

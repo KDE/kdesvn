@@ -217,6 +217,7 @@ void kdesvn::setupActions()
     {
         rac->setMaxItems(8);
         rac->loadEntries(KGlobal::config(),"recent_files");
+        rac->setText(i18n("Recent opened URLs"));
     }
 
     KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());

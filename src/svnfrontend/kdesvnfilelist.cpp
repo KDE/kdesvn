@@ -873,7 +873,7 @@ void kdesvnfilelist::enableActions()
 
     temp = filesActions()->action("make_revisions_diff");
     if (temp) {
-        temp->setEnabled(isopen&&single);
+        temp->setEnabled(isopen);
     }
     temp = filesActions()->action("make_revisions_cat");
     if (temp) {

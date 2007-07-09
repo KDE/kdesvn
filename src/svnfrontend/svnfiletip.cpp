@@ -115,6 +115,8 @@ void SvnFileTip::setItem(SvnItem*item, const QRect &rect, const QPixmap *pixmap 
         m_timer->disconnect( this );
         connect(m_timer, SIGNAL(timeout()), this, SLOT(startDelayed()));
         m_timer->start( 300, true );
+    } else {
+        m_timer->stop();
     }
 }
 
@@ -228,6 +230,10 @@ void SvnFileTip::setFilter( bool enable )
 
 void SvnFileTip::showTip()
 {
+    if (!m_svnitem) {
+        hide();
+        return;
+    }
     QString text = m_svnitem->getToolTipText();
 
     if ( text.isEmpty() ) return;
@@ -255,6 +261,9 @@ void SvnFileTip::hideTip()
 }
 void SvnFileTip::startDelayed()
 {
+    if (!m_svnitem) {
+        return;
+    }
     if ( m_preview && m_svnitem->fileItem() ) {
         KFileItemList oneItem;
         oneItem.append( m_svnitem->fileItem() );

@@ -50,7 +50,7 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib/kde3)
 SET(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib")
 
 # current version
-SET(VERSION 0.12.1)
+SET(VERSION 0.12.2)
 SET(KDESVN_VERSION \"${VERSION}\")
 
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)

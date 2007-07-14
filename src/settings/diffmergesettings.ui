@@ -8,9 +8,12 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>232</width>
-            <height>290</height>
+            <width>238</width>
+            <height>342</height>
         </rect>
+    </property>
+    <property name="caption">
+        <string>DiffMergeSettings</string>
     </property>
     <vbox>
         <property name="name">
@@ -30,6 +33,22 @@
             </property>
             <property name="text">
                 <string>Diff in revisiontree is recursive</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_diff_ignore_spaces</cstring>
+            </property>
+            <property name="text">
+                <string>Diff ignores white space changes</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_diff_ignore_all_white_spaces</cstring>
+            </property>
+            <property name="text">
+                <string>Diff ignores all white spaces</string>
             </property>
         </widget>
         <widget class="QButtonGroup">

@@ -35,6 +35,14 @@
       <label>Diff ignores content type</label>
       <default>false</default>
     </entry>
+    <entry key="diff_ignore_spaces" type="Bool" >
+      <label>Diff ignores white space changes</label>
+      <default>false</default>
+    </entry>
+    <entry key="diff_ignore_all_white_spaces" type="Bool" >
+      <label>Diff ignores all white space</label>
+      <default>false</default>
+    </entry>
     <entry key="max_log_messages" type="Int" >
       <label>Maximum number of log messages</label>
       <default>20</default>

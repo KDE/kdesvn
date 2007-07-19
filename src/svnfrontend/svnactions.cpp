@@ -1134,6 +1134,15 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         }
         return;
     }
+    QStringList extraOptions;
+    if (Kdesvnsettings::diff_ignore_spaces())
+    {
+        extraOptions.append("-b");
+    }
+    if (Kdesvnsettings::diff_ignore_all_white_spaces())
+    {
+        extraOptions.append("-w");
+    }
     QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
@@ -1146,7 +1155,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),
             svn::Path(p1),svn::Path(p2),
             r1, r2,
-            false,false,false,ignore_content);
+            false,false,false,ignore_content,extraOptions);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;

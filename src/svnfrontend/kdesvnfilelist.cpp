@@ -238,13 +238,13 @@ void kdesvnfilelist::setupActions()
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction = new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
-    m_LogFullAction = new KAction(i18n("Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
-    tmp_action = new KAction(i18n("Full revision tree"),"kdesvnlog",KShortcut(CTRL+Key_T),this,SLOT(slotMakeTree()),m_filesAction,"make_svn_tree");
-    tmp_action = new KAction(i18n("Partial revision tree"),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_T),
+    new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    new KAction(i18n("Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    new KAction(i18n("Full revision tree"),"kdesvnlog",KShortcut(CTRL+Key_T),this,SLOT(slotMakeTree()),m_filesAction,"make_svn_tree");
+    new KAction(i18n("Partial revision tree"),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_T),
         this,SLOT(slotMakePartTree()),m_filesAction,"make_svn_partialtree");
 
-    m_propertyAction = new KAction(i18n("Properties"),"edit",
+    new KAction(i18n("Properties"),"edit",
         KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
         KShortcut(Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
@@ -324,13 +324,17 @@ void kdesvnfilelist::setupActions()
     m_commitAction = new KAction(i18n("Commit"),"kdesvncommit",
         KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
 
-    m_simpleDiffHead = new KAction(i18n("Diff local changes"),"kdesvndiff",
+    tmp_action = new KAction(i18n("Diff local changes"),"kdesvndiff",
         KShortcut(CTRL+Key_D),this,SLOT(slotSimpleBaseDiff()),m_filesAction,"make_svn_basediff");
-    m_simpleDiffHead->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
+    tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
 
-    m_simpleDiffHead = new KAction(i18n("Diff against HEAD"),"kdesvndiff",
+    tmp_action = new KAction(i18n("Diff against HEAD"),"kdesvndiff",
         KShortcut(CTRL+Key_H),this,SLOT(slotSimpleHeadDiff()),m_filesAction,"make_svn_headdiff");
-    m_simpleDiffHead->setToolTip(i18n("Diff working copy against HEAD (last checked in version)- requires access to repository"));
+    tmp_action->setToolTip(i18n("Diff working copy against HEAD (last checked in version)- requires access to repository"));
+
+    tmp_action = new KAction(i18n("Diff items"),"kdesvndiff",
+                             KShortcut(),this,SLOT(slotDiffPathes()),m_filesAction,"make_svn_itemsdiff");
+    tmp_action->setToolTip(i18n("Diff two items"));
 
 
     m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"kdesvnmerge",
@@ -587,7 +591,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     svn::StatusEntries neweritems;
     m_SvnWrapper->getaddedItems(what,neweritems);
     dlist+=neweritems;
-    kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
+    //kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
 
     viewport()->setUpdatesEnabled(false);
     svn::StatusEntries::iterator it = dlist.begin();
@@ -784,18 +788,27 @@ void kdesvnfilelist::slotReinitItem(SvnItem*item)
 void kdesvnfilelist::enableActions()
 {
     bool isopen = baseUri().length()>0;
-    bool single = allSelected()->count()==1&&isopen;
-    bool multi = allSelected()->count()>1&&isopen;
-    bool none = allSelected()->count()==0&&isopen;
+    int c = allSelected()->count();
+    bool single = c==1&&isopen;
+    bool multi = c>1&&isopen;
+    bool none = c==0&&isopen;
     bool dir = false;
+    bool unique = uniqueTypeSelected();
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
     }
     KAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    m_LogRangeAction->setEnabled(single||none);
-    m_LogFullAction->setEnabled(single||none);
+    temp = filesActions()->action("make_svn_log");
+    if (temp) {
+        temp->setEnabled(single||none);
+    }
+
+    temp = filesActions()->action("make_svn_log_full");
+    if (temp) {
+        temp->setEnabled(single||none);
+    }
     temp = filesActions()->action("make_svn_tree");
     if (temp) {
         temp->setEnabled(single||none);
@@ -805,7 +818,10 @@ void kdesvnfilelist::enableActions()
         temp->setEnabled(single||none);
     }
 
-    m_propertyAction->setEnabled(single);
+    temp = filesActions()->action("make_svn_property");
+    if (temp) {
+        temp->setEnabled(single);
+    }
     m_DelCurrent->setEnabled( (multi||single));
     m_LockAction->setEnabled( (multi||single));
     m_UnlockAction->setEnabled( (multi||single));
@@ -847,7 +863,7 @@ void kdesvnfilelist::enableActions()
     m_UpdateHead->setEnabled(isWorkingCopy()&&isopen);
     m_UpdateRev->setEnabled(isWorkingCopy()&&isopen);
     m_commitAction->setEnabled(isWorkingCopy()&&isopen);
-    m_simpleDiffHead->setEnabled(isWorkingCopy()&&isopen);
+
     temp = filesActions()->action("make_svn_basediff");
     if (temp) {
         temp->setEnabled(isWorkingCopy()&&(single||none));
@@ -855,6 +871,12 @@ void kdesvnfilelist::enableActions()
     temp = filesActions()->action("make_svn_headdiff");
     if (temp) {
         temp->setEnabled(isWorkingCopy()&&(single||none));
+    }
+
+    /// @todo uberprüfen ob alle selektierten items den selben typ haben.
+    temp = filesActions()->action("make_svn_itemsdiff");
+    if (temp) {
+        temp->setEnabled(multi && c==2 && unique);
     }
 
     /* 2. on dirs only */
@@ -2022,6 +2044,33 @@ void kdesvnfilelist::slotSimpleHeadDiff()
     m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,kitem?kitem->isDir():true);
 }
 
+void kdesvnfilelist::slotDiffPathes()
+{
+    QPtrList<FileListViewItem>*lst = allSelected();
+
+    if (lst->count()!=2 || !uniqueTypeSelected()) {
+        return;
+    }
+    m_pList->m_fileTip->setItem(0);
+
+    FileListViewItem*k1,*k2;
+    k1 = lst->at(0);
+    k2 = lst->at(1);
+    QString w1,w2;
+    svn::Revision r1;
+
+    if (isWorkingCopy()) {
+        chdir(baseUri().local8Bit());
+        w1 = relativePath(k1);
+        w2 = relativePath(k2);
+        r1 = svn::Revision::WORKING;
+    } else {
+        w1 = k1->fullName();
+        w2 = k2->fullName();
+        r1 = m_pList->m_remoteRevision;
+    }
+    m_SvnWrapper->makeDiff(w1,r1,w2,r1);
+}
 
 /*!
     \fn kdesvnfilelist::slotMkdir()
@@ -2768,6 +2817,27 @@ void kdesvnfilelist::slotOpenWith()
     KURL::List lst;
     lst.append(which->kdeName(rev));
     KRun::displayOpenWithDialog(lst);
+}
+
+/*!
+    \fn kdesvnfilelist::uniqueSelected()
+ */
+bool kdesvnfilelist::uniqueTypeSelected()
+{
+    FileListViewItemList*ls = allSelected();
+    FileListViewItemListIterator it(*ls);
+    FileListViewItem*cur=it.current();
+    if (!cur) {
+        return false;
+    }
+    bool dir = cur->isDir();
+    while ( (cur=it.current())!=0) {
+        ++it;
+        if (cur->isDir()!=dir) {
+            return false;
+        }
+    }
+    return true;
 }
 
 #include "kdesvnfilelist.moc"

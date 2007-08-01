@@ -76,8 +76,8 @@ protected:
     QMap<QString,bool> m_Dirsread;
 
     KActionCollection* m_filesAction;
-    KAction*m_LogFullAction,*m_LogRangeAction,*m_BlameAction,*m_BlameRangeAction,*m_CatAction,*m_MkdirAction;
-    KAction*m_InfoAction,*m_propertyAction,*m_commitAction,*m_simpleDiffHead,*m_UpdateHead,*m_UpdateRev;
+    KAction*m_BlameAction,*m_BlameRangeAction,*m_CatAction,*m_MkdirAction;
+    KAction*m_InfoAction,*m_commitAction,*m_UpdateHead,*m_UpdateRev;
     KAction*m_AddCurrent,*m_DelCurrent,*m_CheckoutAction,*m_CheckoutCurrentAction,*m_RevertAction;
     KAction*m_changeToRepository,*m_switchRepository,*m_ExportAction,*m_ExportCurrentAction;
     KAction*m_CleanupAction,*m_ResolvedAction,*m_ImportDirsIntoCurrent,*m_RefreshViewAction,*m_MergeRevisionAction;
@@ -200,6 +200,7 @@ protected slots:
     virtual void slotSimpleBaseDiff();
 
     virtual void slotDiffRevisions();
+    virtual void slotDiffPathes();
     virtual void slotRevisionCat();
     virtual void slotCheckUpdates();
     virtual void slotInfo();
@@ -219,6 +220,8 @@ protected slots:
 private slots:
     void gotPreview( const KFileItem*, const QPixmap& );
     void gotPreviewResult();
+protected:
+    virtual bool uniqueTypeSelected();
 };
 
 #endif

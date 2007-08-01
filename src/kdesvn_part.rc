@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="13">
+<kpartgui name="kdesvn_part" version="14">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <Action name="kdesvnpart_pref" />
@@ -22,6 +22,7 @@
     <Action name="make_svn_partialtree" />
     <Action name="make_svn_info" />
     <Action name="make_revisions_diff" />
+    <Action name="make_svn_itemsdiff" />
     <Action name="make_svn_merge" />
     <Separator/>
     <Action name="make_svn_blame" />
@@ -121,6 +122,7 @@
      <Action name="make_svn_commit" />
      <Action name="make_svn_basediff" />
      <Action name="make_svn_headdiff" />
+     <Action name="make_svn_itemsdiff" />
      <Separator/>
      <Action name="make_view_refresh" />
  </Menu>
@@ -151,6 +153,8 @@
   <Action name="make_svn_blame" />
   <Action name="make_svn_cat" />
   <Separator/>
+  <Action name="make_svn_itemsdiff" />
+  <Separator/>
   <Action name="make_view_refresh" />
  </Menu>
  <Menu name="local_general">
@@ -162,6 +166,7 @@
  </Menu>
  <Menu name="remote_general">
   <Action name="make_svn_mkdir" />
+  <Action name="make_svn_itemsdiff" />
   <Separator/>
   <Action name="make_svn_checkout_current" />
   <Action name="make_svn_export_current" />

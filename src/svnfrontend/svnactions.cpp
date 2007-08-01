@@ -209,7 +209,6 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     if (!u1.text().isEmpty()) {
         buttons = buttons|KDialogBase::User1;
     }
-    kdDebug()<<"Modal: "<<modal<<endl;
     KDialogBase * dlg = new KDialogBase(
         modal?KApplication::activeModalWidget():0, // parent
         name, // name
@@ -1103,7 +1102,6 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         extraOptions.append("-w");
     }
 
-    kdDebug()<<"diff extras: "<<extraOptions<<endl;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,parent,0,"Diffing",
             i18n("Diffing - hit cancel for abort"));

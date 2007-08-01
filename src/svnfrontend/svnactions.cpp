@@ -1175,7 +1175,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
     if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
-        *proc << "-o";
+        *proc << "-on";
         *proc << "-";
         connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));

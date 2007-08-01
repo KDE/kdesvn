@@ -10,7 +10,6 @@ MAKE=make
 POFILES="@POFILES@"
 podir="${SOURCE_DIR}/po"
 
-
 cd ${SOURCE_DIR}
 rm -rf po.backup
 mkdir po.backup
@@ -36,7 +35,7 @@ for subdir in $dirs; do
   (cd $subdir
    echo -e 'i18n("_: NAME OF TRANSLATORS\\n"\n"Your names")\ni18n("_: EMAIL OF TRANSLATORS\\n"\n"Your emails")' > _translatorinfo.cpp
    $EXTRACTRC `find . -name \*.ui -o -name \*.rc` > rc.cpp
-   XGETTEXT="${XGETTEXT:-xgettext} -C -ki18n -ktr2i18n -kI18N_NOOP -ktranslate -kaliasLocale --add-comments="TRANSLATORS:" -x ${includedir:-${KDEDIR:-/usr/local/kde}/include/kde}/kde.pot"
+   XGETTEXT="${XGETTEXT:-xgettext} -C -ki18n -ktr2i18n -kI18N_NOOP -ktranslate -kaliasLocale --add-comments="TRANSLATORS:" -x ${includedir:-${KDEDIR:-@CMAKE_INSTALL_PREFIX@}/include/kde}/kde.pot"
    find . -name '*.cpp' | xargs ${XGETTEXT} _translatorinfo.cpp -o ${podir}/@PROJECT_NAME@.pot
    ) 2>&1 | grep -v '^make\[1\]' > $tmpname
    test -s $tmpname && { echo $subdir ; cat "$tmpname"; }

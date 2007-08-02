@@ -27,6 +27,8 @@
 #include <qevent.h>
 #include <qmutex.h>
 #include <qwaitcondition.h>
+//Added by qt3to4:
+#include <QCustomEvent>
 
 class ThreadContextListenerData;
 

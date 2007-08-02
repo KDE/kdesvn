@@ -28,8 +28,8 @@
 /*!
     \fn DiffSyntax::DiffSyntax(QTextEdit*)
  */
- DiffSyntax::DiffSyntax(QTextEdit*aTextEdit)
-    : QSyntaxHighlighter(aTextEdit)
+ DiffSyntax::DiffSyntax(Q3TextEdit*aTextEdit)
+    : Q3SyntaxHighlighter(aTextEdit)
 {
 }
 

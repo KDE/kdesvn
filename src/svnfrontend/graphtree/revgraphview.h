@@ -22,7 +22,12 @@
 
 #include <svnqt/revision.hpp>
 
-#include <qcanvas.h>
+#include <q3canvas.h>
+//Added by qt3to4:
+#include <QContextMenuEvent>
+#include <QResizeEvent>
+#include <Q3ValueList>
+#include <QMouseEvent>
 
 namespace svn {
     class LogEntry;
@@ -41,7 +46,7 @@ class CContextListener;
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevGraphView : public QCanvasView
+class RevGraphView : public Q3CanvasView
 {
     Q_OBJECT
 public:
@@ -68,7 +73,7 @@ public:
         }
         targetData(){Action=0;key="";}
     };
-    typedef QValueList<targetData> tlist;
+    typedef Q3ValueList<targetData> tlist;
 
     struct keyData {
         QString name,Author,Date,Message;
@@ -101,7 +106,7 @@ protected slots:
     virtual void dotExit(KProcess*);
 
 protected:
-    QCanvas*m_Canvas;
+    Q3Canvas*m_Canvas;
     GraphMark*m_Marker;
     svn::Client*m_Client;
     GraphTreeLabel*m_Selected;

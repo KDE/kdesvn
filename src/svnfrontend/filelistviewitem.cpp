@@ -35,6 +35,9 @@
 
 #include <qfileinfo.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PtrList>
 
 const int FileListViewItem::COL_ICON = 0;
 const int FileListViewItem::COL_NAME = 0;
@@ -100,7 +103,7 @@ void FileListViewItem::setStat(const svn::Status&stat)
     init();
 }
 
-void FileListViewItem::refreshStatus(bool childs,QPtrList<SvnItem>*exclude,bool depsonly)
+void FileListViewItem::refreshStatus(bool childs,Q3PtrList<SvnItem>*exclude,bool depsonly)
 {
     FileListViewItem*it;
 
@@ -152,10 +155,10 @@ void FileListViewItem::setPreviewPix(const QPixmap& pixmap)
     setPixmap(COL_ICON,pm);
 }
 
-bool FileListViewItem::isParent(QListViewItem*which)
+bool FileListViewItem::isParent(Q3ListViewItem*which)
 {
     if (!which) return false;
-    QListViewItem*item = this;
+    Q3ListViewItem*item = this;
     while ( (item=item->parent())) {
         if (item==which) {
             return true;
@@ -178,7 +181,7 @@ void FileListViewItem::update()
     setText(COL_IS_LOCKED,lockOwner());
 }
 
-int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) const
+int FileListViewItem::compare( Q3ListViewItem* item, int col, bool ascending ) const
 {
     FileListViewItem* k = static_cast<FileListViewItem*>( item );
     if ( sortChar != k->sortChar ) {
@@ -204,7 +207,7 @@ int FileListViewItem::compare( QListViewItem* item, int col, bool ascending ) co
 
 void FileListViewItem::removeChilds()
 {
-    QListViewItem*temp;
+    Q3ListViewItem*temp;
     while ((temp=firstChild())) {
         delete temp;
     }
@@ -279,7 +282,7 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
             _cg.setColor(QColorGroup::Base,_bgColor);
         }
     }
-    QListViewItem::paintCell(p, _cg, column, width, alignment);
+    Q3ListViewItem::paintCell(p, _cg, column, width, alignment);
 }
 
 const svn::Revision&FileListViewItem::correctPeg()const

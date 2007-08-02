@@ -26,7 +26,7 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <kdialogbase.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 
 CopyMoveView_impl::CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,QWidget* parent, const char* name, WFlags fl)
 : CopyMoveView(parent,name,fl)

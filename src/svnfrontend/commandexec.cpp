@@ -40,9 +40,9 @@
 #include <ktextbrowser.h>
 
 #include <qfile.h>
-#include <qtextstream.h>
-#include <qvaluelist.h>
-#include <qvbox.h>
+#include <q3textstream.h>
+#include <q3valuelist.h>
+#include <q3vbox.h>
 
 class pCPart
 {
@@ -65,7 +65,7 @@ public:
     // for output
     QFile toStdout,toStderr;
     QString outfile;
-    QTextStream Stdout,Stderr;
+    Q3TextStream Stdout,Stderr;
     DummyDisplay * disp;
     QMap<int,svn::Revision> extraRevisions;
     QMap<int,QString> baseUrls;
@@ -77,8 +77,8 @@ pCPart::pCPart()
     m_SvnWrapper = 0;
     start = svn::Revision::UNDEFINED;
     end = svn::Revision::UNDEFINED;
-    toStdout.open(IO_WriteOnly, stdout);
-    toStderr.open(IO_WriteOnly, stderr);
+    toStdout.open(QIODevice::WriteOnly, stdout);
+    toStderr.open(QIODevice::WriteOnly, stderr);
     Stdout.setDevice(&toStdout);
     Stderr.setDevice(&toStderr);
     disp = new DummyDisplay();
@@ -473,7 +473,7 @@ void CommandExec::slotCmd_info()
 
 void CommandExec::slotCmd_commit()
 {
-    QValueList<svn::Path> targets;
+    Q3ValueList<svn::Path> targets;
     for (unsigned j=0; j<m_pCPart->url.count();++j) {
         targets.push_back(svn::Path(m_pCPart->url[j]));
     }

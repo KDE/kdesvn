@@ -23,13 +23,13 @@
 #include <ktrader.h>
 #include <kaction.h>
 #include <kurl.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qmap.h>
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class OpenContextmenu : public QPopupMenu
+class OpenContextmenu : public Q3PopupMenu
 {
 Q_OBJECT
 public:

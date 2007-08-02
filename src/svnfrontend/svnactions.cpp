@@ -70,18 +70,21 @@
 #include <qmap.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qvaluelist.h>
-#include <qvbox.h>
-#include <qstylesheet.h>
+#include <q3valuelist.h>
+#include <q3vbox.h>
+#include <q3stylesheet.h>
 #include <qregexp.h>
 #include <qimage.h>
 #include <qthread.h>
 #include <qtimer.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qfileinfo.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3PtrList>
 #include <sys/time.h>
 #include <unistd.h>
-#include <qguardedptr.h>
+#include <qpointer.h>
 
 
 // wait not longer than 10 seconds for a thread
@@ -151,8 +154,8 @@ public:
     QTimer m_ThreadCheckTimer;
     QTimer m_UpdateCheckTimer;
     QTime m_UpdateCheckTick;
-    QGuardedPtr<DiffBrowser> m_DiffBrowserPtr;
-    QGuardedPtr<KDialogBase> m_DiffDialog;
+    QPointer<DiffBrowser> m_DiffBrowserPtr;
+    QPointer<KDialogBase> m_DiffDialog;
 
     bool runblocked;
 };
@@ -496,14 +499,14 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     }
     KTextBrowser*ptr;
     QFile file(content.name());
-    file.open( IO_ReadOnly );
+    file.open( QIODevice::ReadOnly );
     QByteArray co = file.readAll();
 
     if (co.size()) {
         KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
         if (dlg) {
             ptr->setFont(KGlobalSettings::fixedFont());
-            ptr->setWordWrap(QTextEdit::NoWrap);
+            ptr->setWordWrap(Q3TextEdit::NoWrap);
             ptr->setText(QString::FROMUTF8(co,co.size()));
             dlg->exec();
             dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
@@ -553,7 +556,7 @@ QString SvnActions::makeMkdir(const QString&parentDir)
     return ex;
 }
 
-QString SvnActions::getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
+QString SvnActions::getInfo(Q3PtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
 {
     QStringList l;
     QString res = "";
@@ -707,7 +710,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
     return text;
 }
 
-void SvnActions::makeInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
+void SvnActions::makeInfo(Q3PtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
     QStringList l;
     QString res = "<html><head></head><body>";
@@ -772,7 +775,7 @@ void SvnActions::slotProperties()
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"properties_dlg",false);
     QString ex;
     PropertiesDlg::tPropEntries setList;
-    QValueList<QString> delList;
+    Q3ValueList<QString> delList;
     dlg.changedItems(setList,delList);
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
@@ -802,10 +805,10 @@ void SvnActions::slotCommit()
     /// @todo remove reference to parentlist
     if (!m_Data->m_CurrentContext) return;
     if (!m_Data->m_ParentList->isWorkingCopy()) return;
-    QPtrList<SvnItem> which;
+    Q3PtrList<SvnItem> which;
     m_Data->m_ParentList->SelectionList(&which);
     SvnItem*cur;
-    QPtrListIterator<SvnItem> liter(which);
+    Q3PtrListIterator<SvnItem> liter(which);
 
     svn::Pathes targets;
     if (which.count()==0) {
@@ -925,7 +928,7 @@ void SvnActions::receivedStderr(KProcess*proc,char*buff,int len)
     if (!proc || !buff || len == 0) {
         return;
     }
-    QString msg(QCString(buff,len));
+    QString msg(Q3CString(buff,len));
     emit sendNotify(msg);
 }
 
@@ -1358,13 +1361,13 @@ void SvnActions::makeAdd(bool rec)
 {
     if (!m_Data->m_CurrentContext) return;
     if (!m_Data->m_ParentList) return;
-    QPtrList<SvnItem> lst;
+    Q3PtrList<SvnItem> lst;
     m_Data->m_ParentList->SelectionList(&lst);
     if (lst.count()==0) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("Which files or directories should I add?"));
         return;
     }
-    QValueList<svn::Path> items;
+    Q3ValueList<svn::Path> items;
     SvnItemListIterator liter(lst);
     SvnItem*cur;
     while ((cur=liter.current())!=0){
@@ -1392,18 +1395,18 @@ void SvnActions::makeAdd(bool rec)
 
 bool SvnActions::addItems(const QStringList&w,bool rec)
 {
-    QValueList<svn::Path> items;
+    Q3ValueList<svn::Path> items;
     for (unsigned int i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
     return addItems(items,rec);
 }
 
-bool SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
+bool SvnActions::addItems(const Q3ValueList<svn::Path> &items,bool rec)
 {
     QString ex;
     try {
-        QValueList<svn::Path>::const_iterator piter;
+        Q3ValueList<svn::Path>::const_iterator piter;
         for (piter=items.begin();piter!=items.end();++piter) {
             m_Data->m_Svnclient->add((*piter),rec);
         }
@@ -1420,7 +1423,7 @@ void SvnActions::makeDelete(const QStringList&w)
     if (answer!=KMessageBox::Yes) {
         return;
     }
-    QValueList<svn::Path> items;
+    Q3ValueList<svn::Path> items;
     for (unsigned int i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
@@ -1430,7 +1433,7 @@ void SvnActions::makeDelete(const QStringList&w)
 /*!
     \fn SvnActions::makeDelete()
  */
-void SvnActions::makeDelete(const QValueList<svn::Path>&items)
+void SvnActions::makeDelete(const Q3ValueList<svn::Path>&items)
 {
     if (!m_Data->m_CurrentContext) return;
     QString ex;
@@ -1556,7 +1559,7 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
 void SvnActions::slotRevert()
 {
     if (!m_Data->m_ParentList||!m_Data->m_ParentList->isWorkingCopy()) return;
-    QPtrList<SvnItem> lst;
+    Q3PtrList<SvnItem> lst;
     m_Data->m_ParentList->SelectionList(&lst);
     QStringList displist;
     SvnItemListIterator liter(lst);
@@ -1609,7 +1612,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         return;
     }
 
-    QValueList<svn::Path> items;
+    Q3ValueList<svn::Path> items;
     for (unsigned j = 0; j<displist.count();++j) {
         items.push_back(svn::Path((*(displist.at(j)))));
     }
@@ -1684,7 +1687,7 @@ void SvnActions::slotSwitch()
     if (!m_Data->m_CurrentContext) return;
     if (!m_Data->m_ParentList||!m_Data->m_ParentList->isWorkingCopy()) return;
 
-    QPtrList<SvnItem> lst;
+    Q3PtrList<SvnItem> lst;
     m_Data->m_ParentList->SelectionList(&lst);
 
     if (lst.count()>1) {
@@ -1998,7 +2001,7 @@ bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revi
  */
 void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit)
 {
-    QValueList<svn::Path> targets;
+    Q3ValueList<svn::Path> targets;
     for (unsigned int i = 0; i<what.count();++i) {
         targets.push_back(svn::Path((*(what.at(i)))));
     }
@@ -2017,7 +2020,7 @@ void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit
  */
 void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 {
-    QValueList<svn::Path> targets;
+    Q3ValueList<svn::Path> targets;
     if (!m_Data->m_CurrentContext) return;
     for (unsigned int i = 0; i<what.count();++i) {
         targets.push_back(svn::Path((*(what.at(i)))));
@@ -2083,14 +2086,14 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
         KDialogBase * dlg = createDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");
         ptr->addColumn("Item");
         for (unsigned j = 0; j<displist.size();++j) {
-            QCheckListItem * n = new QCheckListItem(ptr,displist[j],QCheckListItem::CheckBox);
+            Q3CheckListItem * n = new Q3CheckListItem(ptr,displist[j],Q3CheckListItem::CheckBox);
             n->setOn(true);
         }
         if (dlg->exec()==QDialog::Accepted) {
-            QListViewItemIterator it(ptr);
+            Q3ListViewItemIterator it(ptr);
             displist.clear();
             while(it.current()) {
-                QCheckListItem*t = (QCheckListItem*)it.current();
+                Q3CheckListItem*t = (Q3CheckListItem*)it.current();
                 if (t->isOn()) {
                     displist.append(t->text());
                 }

@@ -25,10 +25,14 @@
 #include <qvariant.h>
 #include <qpixmap.h>
 #include <qwidget.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
 
-class QVBoxLayout;
-class QHBoxLayout;
-class QGridLayout;
+class Q3VBoxLayout;
+class Q3HBoxLayout;
+class Q3GridLayout;
 class QSpacerItem;
 class RevGraphView;
 class QSplitter;
@@ -55,7 +59,7 @@ public:
     void dumpRevtree();
 
 protected:
-    QVBoxLayout* RevTreeWidgetLayout;
+    Q3VBoxLayout* RevTreeWidgetLayout;
     KTextBrowser* m_Detailstext;
 
 signals:

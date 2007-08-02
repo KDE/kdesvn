@@ -30,11 +30,17 @@
 #include <qtooltip.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <qscrollview.h>
+#include <q3scrollview.h>
 #include <qtimer.h>
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <Q3GridLayout>
+#include <Q3Frame>
+#include <QPixmap>
+#include <QEvent>
 
-SvnFileTip::SvnFileTip(QScrollView*parent)
-    :  QFrame( 0, 0, WStyle_Customize | WStyle_NoBorder | WStyle_Tool | WStyle_StaysOnTop | WX11BypassWM ),
+SvnFileTip::SvnFileTip(Q3ScrollView*parent)
+    :  Q3Frame( 0, 0, WStyle_Customize | WStyle_NoBorder | WStyle_Tool | WStyle_StaysOnTop | WX11BypassWM ),
     m_on( false ),
     m_preview( false ),
     m_filter( false ),
@@ -48,14 +54,14 @@ SvnFileTip::SvnFileTip(QScrollView*parent)
     m_textLabel = new QLabel(this);
     m_textLabel->setAlignment(Qt::AlignAuto | Qt::AlignTop);
 
-    QGridLayout* layout = new QGridLayout(this, 1, 2, 8, 0);
+    Q3GridLayout* layout = new Q3GridLayout(this, 1, 2, 8, 0);
     layout->addWidget(m_iconLabel, 0, 0);
     layout->addWidget(m_textLabel, 0, 1);
     layout->setResizeMode(QLayout::Fixed);
 
     setPalette( QToolTip::palette() );
     setMargin( 1 );
-    setFrameStyle( QFrame::Plain | QFrame::Box );
+    setFrameStyle( Q3Frame::Plain | Q3Frame::Box );
 
     m_timer = new QTimer(this);
 
@@ -185,7 +191,7 @@ void SvnFileTip::drawContents( QPainter *p )
     };
 
     if (m_corner >= 4) {  // 4 is empty, so don't draw anything
-        QFrame::drawContents( p );
+        Q3Frame::drawContents( p );
         return;
     }
 
@@ -210,7 +216,7 @@ void SvnFileTip::drawContents( QPainter *p )
             break;
     }
 
-    QFrame::drawContents( p );
+    Q3Frame::drawContents( p );
 }
 
 void SvnFileTip::setFilter( bool enable )
@@ -282,7 +288,7 @@ void SvnFileTip::startDelayed()
 
 void SvnFileTip::resizeEvent( QResizeEvent* event )
 {
-    QFrame::resizeEvent(event);
+    Q3Frame::resizeEvent(event);
     reposition();
 }
 

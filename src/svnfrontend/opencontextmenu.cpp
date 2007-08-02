@@ -21,9 +21,12 @@
 
 #include <krun.h>
 #include <klocale.h>
+//Added by qt3to4:
+#include <Q3PopupMenu>
+#include <Q3CString>
 
 OpenContextmenu::OpenContextmenu(const KURL&aPath,const KTrader::OfferList&aList,QWidget* parent, const char* name)
-    : QPopupMenu(parent, name),m_Path(aPath),m_List(aList)
+    : Q3PopupMenu(parent, name),m_Path(aPath),m_List(aList)
 {
     setup();
 }
@@ -42,7 +45,7 @@ void OpenContextmenu::setup()
         if ((*it)->noDisplay())
             continue;
 
-        QCString nam;
+        Q3CString nam;
         nam.setNum( id );
 
         QString actionName( (*it)->name().replace("&", "&&") );
@@ -61,7 +64,7 @@ void OpenContextmenu::setup()
 
 void OpenContextmenu::slotRunService()
 {
-  QCString senderName = sender()->name();
+  Q3CString senderName = sender()->name();
   int id = senderName.mid( senderName.find( '_' ) + 1 ).toInt();
 
   QMap<int,KService::Ptr>::Iterator it = m_mapPopup.find( id );

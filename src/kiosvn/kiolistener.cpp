@@ -23,6 +23,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <dcopclient.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 KioListener::KioListener(kio_svnProtocol*_par)
  : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false)
@@ -55,8 +57,8 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
 #if 1
     QByteArray reply;
     QByteArray params;
-    QCString replyType;
-    QDataStream stream(params,IO_WriteOnly);
+    Q3CString replyType;
+    QDataStream stream(params,QIODevice::WriteOnly);
 
     if (_items.count()>0) {
         QMap<QString,QString> list;
@@ -86,7 +88,7 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
         kdWarning()<<msg<<endl;
         return false;
     }
-    QDataStream stream2(reply,IO_ReadOnly);
+    QDataStream stream2(reply,QIODevice::ReadOnly);
     QStringList lt;
     stream2>>lt;
     if (lt.count()!=1) {
@@ -332,8 +334,8 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
 {
     QByteArray reply;
     QByteArray params;
-    QCString replyType;
-    QDataStream stream(params,IO_WriteOnly);
+    Q3CString replyType;
+    QDataStream stream(params,QIODevice::WriteOnly);
     stream << data.hostname
         << data.fingerprint
         << data.validFrom
@@ -351,7 +353,7 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
         kdWarning()<<"Wrong reply type"<<endl;
         return DONT_ACCEPT;
     }
-    QDataStream stream2(reply,IO_ReadOnly);
+    QDataStream stream2(reply,QIODevice::ReadOnly);
     int res;
     stream2>>res;
     switch (res) {
@@ -379,7 +381,7 @@ bool KioListener::contextSslClientCertPrompt (QString & certFile)
 {
     QByteArray reply;
     QByteArray params;
-    QCString replyType;
+    Q3CString replyType;
     if (!par->dcopClient()->call("kded","kdesvnd",
         "get_sslclientcertfile()",
         params,replyType,reply)) {
@@ -390,7 +392,7 @@ bool KioListener::contextSslClientCertPrompt (QString & certFile)
         kdWarning()<<"Wrong reply type"<<endl;
         return false;
     }
-    QDataStream stream2(reply,IO_ReadOnly);
+    QDataStream stream2(reply,QIODevice::ReadOnly);
     stream2>>certFile;
     if (certFile.isEmpty()) {
         return false;
@@ -418,9 +420,9 @@ bool KioListener::contextGetLogin (const QString & realm,
 {
     QByteArray reply;
     QByteArray params;
-    QCString replyType;
+    Q3CString replyType;
 
-    QDataStream stream(params,IO_WriteOnly);
+    QDataStream stream(params,QIODevice::WriteOnly);
     stream << realm;
     stream << username;
 
@@ -432,7 +434,7 @@ bool KioListener::contextGetLogin (const QString & realm,
         kdWarning()<<"Wrong reply type"<<endl;
         return false;
     }
-    QDataStream stream2(reply,IO_ReadOnly);
+    QDataStream stream2(reply,QIODevice::ReadOnly);
     QStringList lt;
     stream2>>lt;
     if (lt.count()!=3) {

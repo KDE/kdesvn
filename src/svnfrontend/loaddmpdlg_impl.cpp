@@ -23,7 +23,7 @@
 #include <qlabel.h>
 #include <kurlrequester.h>
 #include <klineedit.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 

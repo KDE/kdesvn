@@ -35,10 +35,13 @@
 #include <kdebug.h>
 
 #include <qdatetime.h>
-#include <qheader.h>
+#include <q3header.h>
 #include <qsplitter.h>
-#include <qtextstream.h>
-#include <qpopupmenu.h>
+#include <q3textstream.h>
+#include <q3popupmenu.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <QKeyEvent>
 
 #include <list>
 
@@ -49,7 +52,7 @@ class LogListViewItem:public KListViewItem
 {
 public:
     LogListViewItem (KListView *parent,const svn::LogEntry&);
-    virtual int compare( QListViewItem* i, int col, bool ascending ) const;
+    virtual int compare( Q3ListViewItem* i, int col, bool ascending ) const;
 
     static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
     const QString&message()const;
@@ -67,7 +70,7 @@ protected:
     svn_revnum_t _revision;
     QDateTime fullDate;
     QString _message,_realName;
-    QValueList<svn::LogChangePathEntry> changedPaths;
+    Q3ValueList<svn::LogChangePathEntry> changedPaths;
 };
 
 const int LogListViewItem::COL_REV = 2;
@@ -117,7 +120,7 @@ const QString&LogListViewItem::message()const
     return _message;
 }
 
-int LogListViewItem::compare( QListViewItem* item, int col, bool ) const
+int LogListViewItem::compare( Q3ListViewItem* item, int col, bool ) const
 {
     LogListViewItem* k = static_cast<LogListViewItem*>( item );
     if (col==COL_REV) {
@@ -208,7 +211,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
         if (cs.readBoolEntry("laststate",false)==m_ChangedList->isHidden()) {
-            QTextStream st2(&t1,IO_ReadOnly);
+            Q3TextStream st2(&t1,QIODevice::ReadOnly);
             st2 >> *m_centralSplitter;
         }
     }
@@ -217,7 +220,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
 SvnLogDlgImp::~SvnLogDlgImp()
 {
     QString t1,t2;
-    QTextStream st1(&t1,IO_WriteOnly);
+    Q3TextStream st1(&t1,QIODevice::WriteOnly);
     st1 << *m_centralSplitter;
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     cs.writeEntry("logsplitter",t1);
@@ -271,7 +274,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
 /*!
     \fn SvnLogDlgImp::slotItemClicked(QListViewItem*)
  */
-void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
+void SvnLogDlgImp::slotSelectionChanged(Q3ListViewItem*_it)
 {
     if (!_it) {
         m_DispPrevButton->setEnabled(false);
@@ -355,7 +358,7 @@ QSize SvnLogDlgImp::dialogSize()
     return( QSize( w, h ) );
 }
 
-void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,int)
+void SvnLogDlgImp::slotItemClicked(int button,Q3ListViewItem*item,const QPoint &,int)
 {
     if (!item) {
         m_ChangedList->clear();
@@ -459,7 +462,7 @@ void SvnLogDlgImp::slotEntriesSelectionChanged()
 {
 }
 
-void SvnLogDlgImp::slotSingleContext(QListViewItem*_item, const QPoint & e, int)
+void SvnLogDlgImp::slotSingleContext(Q3ListViewItem*_item, const QPoint & e, int)
 {
     if (!_item)
     {
@@ -472,7 +475,7 @@ void SvnLogDlgImp::slotSingleContext(QListViewItem*_item, const QPoint & e, int)
         kdDebug()<<"????"<<endl;
         return;
     }
-    QPopupMenu popup;
+    Q3PopupMenu popup;
     QString name = item->path();
     QString action = item->action();
     QString source =item->revision()>-1?item->source():item->path();
@@ -507,7 +510,7 @@ void SvnLogDlgImp::slotSingleContext(QListViewItem*_item, const QPoint & e, int)
     }
 }
 
-void SvnLogDlgImp::slotSingleDoubleClicked(QListViewItem*_item)
+void SvnLogDlgImp::slotSingleDoubleClicked(Q3ListViewItem*_item)
 {
     if (!_item)
     {

@@ -29,7 +29,12 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qwidgetlist.h>
+#include <qwidget.h>
+//Added by qt3to4:
+#include <QShowEvent>
+#include <QHideEvent>
+#include <Q3VBoxLayout>
+#include <Q3Frame>
 #include <kprogress.h>
 #include <kdebug.h>
 #include <ktextbrowser.h>
@@ -48,8 +53,8 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     showButton(KDialogBase::Close, false);
     mCancelText = actionButton(KDialogBase::Cancel)->text();
 
-    QFrame* mainWidget = plainPage();
-    layout = new QVBoxLayout(mainWidget, 10);
+    Q3Frame* mainWidget = plainPage();
+    layout = new Q3VBoxLayout(mainWidget, 10);
     mLabel = new QLabel(text, mainWidget);
     layout->addWidget(mLabel);
     m_ProgressBar=new KProgress(15,mainWidget);
@@ -158,7 +163,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
 {
     ++m_lastLogLines;
     if (!m_LogWindow) {
-        QFrame* mainWidget = plainPage();
+        Q3Frame* mainWidget = plainPage();
         m_LogWindow = new KTextBrowser(mainWidget);
         layout->addWidget(m_LogWindow);
         m_LogWindow->show();

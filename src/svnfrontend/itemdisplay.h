@@ -21,7 +21,7 @@
 #ifndef __ITEMDISPLAY_H
 #define __ITEMDISPLAY_H
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <qstring.h>
 #include <kurl.h>
 
@@ -42,7 +42,7 @@ public:
     virtual bool isWorkingCopy()const;
     virtual QWidget*realWidget() = 0;
     virtual SvnItem*Selected()=0;
-    virtual void SelectionList(QPtrList<SvnItem>*)=0;
+    virtual void SelectionList(Q3PtrList<SvnItem>*)=0;
     virtual const QString&baseUri()const;
     virtual bool openURL( const KURL &url,bool noReinit=false )=0;
     virtual SvnItem*SelectedOrMain()=0;

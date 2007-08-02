@@ -29,6 +29,8 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
+//Added by qt3to4:
+#include <QCustomEvent>
 
 ThreadContextListener::ThreadContextListener(QObject* parent, const char* name)
     : CContextListener(parent, name)

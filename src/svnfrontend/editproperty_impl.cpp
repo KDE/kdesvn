@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include <qstringlist.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 
 #include <ktextedit.h>
 #include <kcombobox.h>
@@ -202,7 +202,7 @@ void EditProperty_impl::showHelp()
     QPoint pos = m_ValueEdit->pos();
     pos.setX(pos.x() + m_ValueEdit->width()/2);
     pos.setY(pos.y() + m_ValueEdit->height()/4);
-    QWhatsThis::display(comment, mapToGlobal(pos));
+    Q3WhatsThis::display(comment, mapToGlobal(pos));
 }
 
 

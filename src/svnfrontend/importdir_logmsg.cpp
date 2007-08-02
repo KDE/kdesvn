@@ -21,7 +21,7 @@
 #include <klocale.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 
 Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
  : Logmsg_impl(parent, name)

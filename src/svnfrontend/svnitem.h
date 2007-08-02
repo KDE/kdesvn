@@ -27,7 +27,7 @@
 #include <qstring.h>
 #include <qdatetime.h>
 #include <qpixmap.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 
 class FileListViewItem;
 class SvnItem_p;
@@ -66,7 +66,7 @@ public:
     virtual QString lockOwner()const;
     virtual QString getParentDir()const=0;
     virtual const svn::Revision&correctPeg()const=0;
-    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
+    virtual void refreshStatus(bool childs=false,Q3PtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
 
     QPixmap getPixmap(int size,bool overlay=true);
     QPixmap getPixmap(const QPixmap&,int size,bool overlay=true);
@@ -103,7 +103,7 @@ protected:
 
 };
 
-typedef QPtrList<SvnItem> SvnItemList;
-typedef QPtrListIterator<SvnItem> SvnItemListIterator;
+typedef Q3PtrList<SvnItem> SvnItemList;
+typedef Q3PtrListIterator<SvnItem> SvnItemListIterator;
 
 #endif

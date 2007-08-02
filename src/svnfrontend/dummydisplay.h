@@ -21,6 +21,8 @@
 #define DUMMYDISPLAY_H
 
 #include "itemdisplay.h"
+//Added by qt3to4:
+#include <Q3PtrList>
 
 /**
 @author Rajko Albrecht
@@ -32,7 +34,7 @@ public:
     virtual ~DummyDisplay();
     virtual QWidget*realWidget();
     virtual SvnItem*Selected();
-    virtual void SelectionList(QPtrList<SvnItem>*);
+    virtual void SelectionList(Q3PtrList<SvnItem>*);
     virtual bool openURL( const KURL &url,bool noReinit=false );
     virtual SvnItem*SelectedOrMain();
 };

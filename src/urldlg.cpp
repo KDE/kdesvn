@@ -21,6 +21,8 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <qlayout.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kglobal.h>
@@ -48,7 +50,7 @@ UrlDlg::~UrlDlg()
  */
 void UrlDlg::init_dlg()
 {
-    QVBoxLayout * topLayout = new QVBoxLayout( plainPage(), 0, spacingHint());
+    Q3VBoxLayout * topLayout = new Q3VBoxLayout( plainPage(), 0, spacingHint());
     QLabel * label = new QLabel(i18n("Open repository or working copy") , plainPage());
     topLayout->addWidget(label);
 

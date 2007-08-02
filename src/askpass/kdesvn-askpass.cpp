@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
@@ -52,7 +54,7 @@ int main(int argc, char** argv)
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
     }
-    QCString pw;
+    Q3CString pw;
     KPasswordDialog::disableCoreDumps();
     if (KPasswordDialog::getPassword(pw,prompt,0)==KPasswordDialog::Accepted) {
         std::cout << pw << std::endl;

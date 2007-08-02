@@ -22,8 +22,8 @@
 
 #include <klocale.h>
 #include <qlabel.h>
-#include <qtable.h>
-#include <qvbox.h>
+#include <q3table.h>
+#include <q3vbox.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kapp.h>

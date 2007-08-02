@@ -30,27 +30,29 @@
 #include <kconfigbase.h>
 #include <kconfig.h>
 
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qlayout.h>
 #include <qwidget.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 #define MAX_MESSAGE_HISTORY 10
 
-QValueList<QString> Logmsg_impl::sLogHistory = QValueList<QString>();
+Q3ValueList<QString> Logmsg_impl::sLogHistory = Q3ValueList<QString>();
 const QString Logmsg_impl::groupName("logmsg_dlg_size");
 
 unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
 
-class SvnCheckListItem:public QCheckListItem
+class SvnCheckListItem:public Q3CheckListItem
 {
 protected:
     Logmsg_impl::logActionEntry m_Content;
 public:
-    SvnCheckListItem(QListView*,const Logmsg_impl::logActionEntry&);
+    SvnCheckListItem(Q3ListView*,const Logmsg_impl::logActionEntry&);
     const Logmsg_impl::logActionEntry&data(){return m_Content;}
     virtual int rtti()const{return 1000;}
 };
@@ -82,7 +84,7 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const
     hideButtons(true);
     if (_items.count()>0) {
         for (unsigned i = 0;i<_items.count();++i) {
-            QListViewItem*item = new QListViewItem(m_ReviewList);
+            Q3ListViewItem*item = new Q3ListViewItem(m_ReviewList);
             if (_items[i].path().isEmpty()) {
                 item->setText(1,_items[i].url());
             } else {
@@ -110,7 +112,7 @@ Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, con
     if (_items.count()>0) {
         QMap<QString,QString>::ConstIterator it = _items.begin();
         for (;it!=_items.end();++it) {
-            QListViewItem*item = new QListViewItem(m_ReviewList);
+            Q3ListViewItem*item = new Q3ListViewItem(m_ReviewList);
             item->setText(1,it.key());
             item->setText(0,it.data());
         }
@@ -132,18 +134,18 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
     m_hidden=false;
     for (unsigned j = 0; j<_activatedList.count();++j) {
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_activatedList[j]);
-        item->setState(QCheckListItem::On);
+        item->setState(Q3CheckListItem::On);
     }
     for (unsigned j = 0; j<_notActivatedList.count();++j) {
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
-        item->setState(QCheckListItem::Off);
+        item->setState(Q3CheckListItem::Off);
     }
     checkSplitterSize();
 }
 
 Logmsg_impl::~Logmsg_impl()
 {
-    QValueList<int> list = m_MainSplitter->sizes();
+    Q3ValueList<int> list = m_MainSplitter->sizes();
     if (!m_hidden && list.count()==2) {
         Kdesvnsettings::setCommit_splitter_height(list);
         Kdesvnsettings::writeConfig();
@@ -152,7 +154,7 @@ Logmsg_impl::~Logmsg_impl()
 
 void Logmsg_impl::checkSplitterSize()
 {
-    QValueList<int> list = Kdesvnsettings::commit_splitter_height();
+    Q3ValueList<int> list = Kdesvnsettings::commit_splitter_height();
     if (list.count()!=2) {
         return;
     }
@@ -223,7 +225,7 @@ void Logmsg_impl::initHistory()
             s = cs.readEntry(key,QString::null);
         }
     }
-    QValueList<QString>::const_iterator it;
+    Q3ValueList<QString>::const_iterator it;
     for (it=sLogHistory.begin();it!=sLogHistory.end();++it) {
         if ((*it).length()<=40) {
             m_LogHistory->insertItem((*it));
@@ -241,7 +243,7 @@ void Logmsg_impl::saveHistory()
 {
     if (m_LogEdit->text().length()==0) return;
     /// @todo make static threadsafe
-    QValueList<QString>::iterator it;
+    Q3ValueList<QString>::iterator it;
     if ( (it=sLogHistory.find(m_LogEdit->text()))!=sLogHistory.end()) {
         sLogHistory.erase(it);
     }
@@ -430,7 +432,7 @@ Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
 {
     logActionEntries _result;
     if (m_ReviewList) {
-        QListViewItemIterator it( m_ReviewList );
+        Q3ListViewItemIterator it( m_ReviewList );
         while ( it.current() ) {
             if (it.current()->rtti()==1000) {
                 SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
@@ -454,8 +456,8 @@ Logmsg_impl::logActionEntry::logActionEntry()
 {
 }
 
-SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logActionEntry&content)
-    :QCheckListItem(parent,content._name,QCheckListItem::CheckBox),m_Content(content)
+SvnCheckListItem::SvnCheckListItem(Q3ListView*parent,const Logmsg_impl::logActionEntry&content)
+    :Q3CheckListItem(parent,content._name,Q3CheckListItem::CheckBox),m_Content(content)
 {
     setTristate(FALSE);
     setText(1,m_Content._actionDesc);
@@ -473,7 +475,7 @@ void Logmsg_impl::slotMarkUnversioned()
 
 void Logmsg_impl::slotDiffSelected()
 {
-    QListViewItem * it=0;
+    Q3ListViewItem * it=0;
     if (!m_ReviewList || !(it=m_ReviewList->selectedItem()))
     {
         return;
@@ -509,7 +511,7 @@ void Logmsg_impl::hideButtons(bool how)
 void Logmsg_impl::markUnversioned(bool mark)
 {
     if (!m_ReviewList)return;
-    QListViewItemIterator it( m_ReviewList );
+    Q3ListViewItemIterator it( m_ReviewList );
     while ( it.current() ) {
         if (it.current()->rtti()==1000) {
             SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());

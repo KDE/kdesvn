@@ -20,7 +20,7 @@
 #include "displaysettings_impl.h"
 #include "src/settings/kdesvnsettings.h"
 
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcheckbox.h>
 #include <qradiobutton.h>
 #include <klineedit.h>

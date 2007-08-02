@@ -27,6 +27,8 @@
 #include "src/svnqt/shared_pointer.hpp"
 
 #include <qsize.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 class LogListViewItem;
 class SvnActions;
@@ -48,11 +50,11 @@ signals:
     void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
 
 protected slots:
-    virtual void slotSelectionChanged(QListViewItem*);
+    virtual void slotSelectionChanged(Q3ListViewItem*);
 protected slots:
     virtual void slotDispPrevious();
     virtual void slotDispSelected();
-    virtual void slotItemClicked(int,QListViewItem*,const QPoint &,int);
+    virtual void slotItemClicked(int,Q3ListViewItem*,const QPoint &,int);
 protected:
     QString _name;
     QString _base;
@@ -68,8 +70,8 @@ protected:
 protected slots:
     virtual void slotListEntries();
     virtual void slotEntriesSelectionChanged();
-    virtual void slotSingleContext(QListViewItem*, const QPoint &, int);
-    virtual void slotSingleDoubleClicked(QListViewItem*);
+    virtual void slotSingleContext(Q3ListViewItem*, const QPoint &, int);
+    virtual void slotSingleDoubleClicked(Q3ListViewItem*);
 };
 
 #endif

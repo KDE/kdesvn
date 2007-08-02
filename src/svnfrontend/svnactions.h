@@ -33,6 +33,9 @@
 #include <qobject.h>
 #include <qdatetime.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <Q3PtrList>
 
 class ItemDisplay;
 class SvnItem;
@@ -77,11 +80,11 @@ public:
     bool makeGet(const svn::Revision&start, const QString&what,const QString&target,
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
 
-    bool addItems(const QValueList<svn::Path> &items,bool rec=false);
+    bool addItems(const Q3ValueList<svn::Path> &items,bool rec=false);
     bool addItems(const QStringList&w,bool rec=false);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
-    void makeDelete(const QValueList<svn::Path>&);
+    void makeDelete(const Q3ValueList<svn::Path>&);
     void makeDelete(const QStringList&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
@@ -126,12 +129,12 @@ public:
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
     bool makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool,bool,bool exp_rec=true, QWidget*p=0);
-    void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
+    void makeInfo(Q3PtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);
     void CheckoutExport(const QString&what,bool _exp,bool urlisTarget=false);
 
-    QString getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
+    QString getInfo(Q3PtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
     QString getInfo(const QString&_what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
 
     QString makeMkdir(const QString&);

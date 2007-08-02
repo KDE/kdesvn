@@ -48,7 +48,7 @@ public slots:
     virtual void slotShowCurrentCommit();
 
 protected slots:
-    virtual void slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&);
+    virtual void slotContextMenuRequested(KListView*,Q3ListViewItem*, const QPoint&);
     virtual void slotSelectionChanged();
 
 protected:
@@ -58,7 +58,7 @@ protected:
 private:
     BlameDisplayData*m_Data;
 protected slots:
-    virtual void slotItemDoubleClicked(QListViewItem*);
+    virtual void slotItemDoubleClicked(Q3ListViewItem*);
 };
 
 #endif

@@ -21,7 +21,7 @@
 #define STRINGHELPER_H
 
 #include <qstring.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 namespace helpers
 {

@@ -21,20 +21,25 @@
 #define PROPERTIESDLG_H
 
 #include <qvariant.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
 #include <kdialogbase.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qmap.h>
 #include <qstring.h>
 
 #include "src/svnqt/revision.hpp"
 
-class QVBoxLayout;
-class QHBoxLayout;
-class QGridLayout;
+class Q3VBoxLayout;
+class Q3HBoxLayout;
+class Q3GridLayout;
 class QSpacerItem;
 class QLabel;
 class KListView;
-class QListViewItem;
+class Q3ListViewItem;
 class KPushButton;
 class FileListViewItem;
 class SvnItem;
@@ -56,7 +61,7 @@ public:
     ~PropertiesDlg();
 
     bool hasChanged()const;
-    void changedItems(tPropEntries&toSet,QValueList<QString>&toDelete);
+    void changedItems(tPropEntries&toSet,Q3ValueList<QString>&toDelete);
 
 protected:
     KListView* m_PropertiesListview;
@@ -64,8 +69,8 @@ protected:
     KPushButton* m_DeleteButton;
     KPushButton* m_ModifyButton;
 
-    QHBoxLayout* PropertiesDlgLayout;
-    QVBoxLayout* m_rightLayout;
+    Q3HBoxLayout* PropertiesDlgLayout;
+    Q3VBoxLayout* m_rightLayout;
     QSpacerItem* m_rightSpacer;
 
     SvnItem *m_Item;
@@ -74,15 +79,15 @@ protected:
     svn::Client*m_Client;
     svn::Revision m_Rev;
 
-    bool checkExisting(const QString&aName,QListViewItem*it=0);
+    bool checkExisting(const QString&aName,Q3ListViewItem*it=0);
 
 protected slots:
     virtual void languageChange();
 
     virtual void slotHelp();
-    virtual void slotSelectionChanged(QListViewItem*);
-    virtual void slotSelectionExecuted(QListViewItem*);
-    virtual void slotItemRenamed(QListViewItem*item,const QString & str,int col );
+    virtual void slotSelectionChanged(Q3ListViewItem*);
+    virtual void slotSelectionExecuted(Q3ListViewItem*);
+    virtual void slotItemRenamed(Q3ListViewItem*item,const QString & str,int col );
     virtual void slotAdd();
     virtual void slotDelete();
     virtual void slotModify();

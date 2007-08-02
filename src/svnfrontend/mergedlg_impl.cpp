@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <qlabel.h>
 #include <qcheckbox.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool src2,bool out)
     :MergeDlg(parent, name)

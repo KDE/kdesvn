@@ -41,9 +41,11 @@
 #include <kpassdlg.h>
 
 #include <qdir.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 extern "C" {
-    KDESVN_EXPORT KDEDModule *create_kdesvnd(const QCString &name)
+    KDESVN_EXPORT KDEDModule *create_kdesvnd(const Q3CString &name)
     {
        return new kdesvnd_dcop(name);
     }
@@ -107,7 +109,7 @@ IListener::~IListener()
 {
 }
 
-kdesvnd_dcop::kdesvnd_dcop(const QCString&name) : KDEDModule(name)
+kdesvnd_dcop::kdesvnd_dcop(const Q3CString&name) : KDEDModule(name)
 {
     KGlobal::locale()->insertCatalogue("kdesvn");
     m_Listener=new IListener(this);
@@ -192,7 +194,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
     return result;
 }
 
-QStringList kdesvnd_dcop::getSingleActionMenu(QCString what)
+QStringList kdesvnd_dcop::getSingleActionMenu(Q3CString what)
 {
     KURL::List l; l.append(KURL(what));
     return getActionMenu(l);
@@ -237,7 +239,7 @@ int kdesvnd_dcop::get_sslaccept(QString hostname,QString fingerprint,QString val
 QStringList kdesvnd_dcop::get_sslclientcertpw(QString realm)
 {
     QStringList resList;
-    QCString npass;
+    Q3CString npass;
     int keep = 1;
     int res = KPasswordDialog::getPassword(npass,i18n("Enter password for realm %1").arg(realm),&keep);
     if (res!=KPasswordDialog::Accepted) {

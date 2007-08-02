@@ -21,6 +21,8 @@
 #define _DIFF_BROWSER_H
 
 #include <ktextbrowser.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 class DiffSyntax;
 class KEdFind;

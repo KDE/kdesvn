@@ -23,7 +23,9 @@
 #include "svnitem.h"
 #include <klistview.h>
 #include <qdatetime.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QPixmap>
 #include "src/svnqt/status.hpp"
 
 class QPainter;
@@ -42,17 +44,17 @@ public:
     FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
 
     virtual ~FileListViewItem();
-    virtual int compare( QListViewItem* i, int col, bool ascending ) const;
+    virtual int compare( Q3ListViewItem* i, int col, bool ascending ) const;
 
     virtual void updateStatus(const svn::Status&s);
-    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false);
+    virtual void refreshStatus(bool childs=false,Q3PtrList<SvnItem> *exclude = 0,bool depsonly=false);
 
 #if 0
     virtual void refreshMe();
 #endif
 
     void removeChilds();
-    bool isParent(QListViewItem*which);
+    bool isParent(Q3ListViewItem*which);
 
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
 
@@ -79,7 +81,7 @@ protected:
     QPixmap m_Pixmap;
 };
 
-typedef QPtrList<FileListViewItem> FileListViewItemList;
-typedef QPtrListIterator<FileListViewItem> FileListViewItemListIterator;
+typedef Q3PtrList<FileListViewItem> FileListViewItemList;
+typedef Q3PtrListIterator<FileListViewItem> FileListViewItemListIterator;
 
 #endif

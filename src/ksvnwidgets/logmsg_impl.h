@@ -22,7 +22,7 @@
 
 #include "src/ksvnwidgets/logmessage.h"
 #include "src/svnqt/commititem.hpp"
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qpair.h>
 
 class Logmsg_impl: public LogmessageData {
@@ -36,7 +36,7 @@ public:
         logActionEntry();
     };
 
-    typedef QValueList<logActionEntry> logActionEntries;
+    typedef Q3ValueList<logActionEntry> logActionEntries;
 
     Logmsg_impl(QWidget *parent = 0, const char *name = 0);
     Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent=0, const char *name=0);
@@ -73,7 +73,7 @@ protected slots:
     virtual void slotMarkUnversioned();
 
 protected:
-    static QValueList<QString> sLogHistory;
+    static Q3ValueList<QString> sLogHistory;
     static const QString groupName;
     static unsigned int smax_message_history;
     bool m_hidden;

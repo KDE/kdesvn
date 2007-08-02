@@ -24,24 +24,28 @@
 
 #ifndef SVNFILETIP_H
 #define SVNFILETIP_H
-#include <qframe.h>
+#include <q3frame.h>
 #include <qpixmap.h>
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QEvent>
+#include <QLabel>
 #include <kio/previewjob.h>
 
 class KFileItem;
 class QLabel;
-class QScrollView;
+class Q3ScrollView;
 class QTimer;
 class SvnItem;
 
 /**
 @author Rajko Albrecht
 */
-class SvnFileTip : public QFrame
+class SvnFileTip : public Q3Frame
 {
 Q_OBJECT
 public:
-    SvnFileTip(QScrollView*parent);
+    SvnFileTip(Q3ScrollView*parent);
     virtual ~SvnFileTip();
     void setPreview(bool on);
 
@@ -87,7 +91,7 @@ public:
     QPixmap    m_corners[4];
     int        m_corner;
     int        m_num;
-    QScrollView* m_view;
+    Q3ScrollView* m_view;
     SvnItem* m_svnitem;
     KIO::PreviewJob* m_previewJob;
     QRect      m_rect;

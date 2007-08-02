@@ -38,12 +38,12 @@
 
 #include <qpixmap.h>
 #include <qpainter.h>
-#include <qheader.h>
+#include <q3header.h>
 #include <qmap.h>
-#include <qpopupmenu.h>
-#include <qvbox.h>
+#include <q3popupmenu.h>
+#include <q3vbox.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qlayout.h>
 
 #define COL_LINENR 0
@@ -58,11 +58,11 @@ public:
     BlameDisplayItem(KListView*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
     BlameDisplayItem(KListView*,BlameDisplayItem*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
     virtual ~BlameDisplayItem(){}
-    virtual int compare(QListViewItem *i, int col, bool ascending)const;
+    virtual int compare(Q3ListViewItem *i, int col, bool ascending)const;
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
     virtual int rtti()const{return 1000;}
 
-    virtual int width( const QFontMetrics & fm, const QListView * lv, int c ) const;
+    virtual int width( const QFontMetrics & fm, const Q3ListView * lv, int c ) const;
 
     apr_int64_t lineNumber(){return m_Content.lineNumber();}
     svn_revnum_t rev(){return m_Content.revision();}
@@ -90,7 +90,7 @@ BlameDisplayItem::BlameDisplayItem(KListView*lv,BlameDisplayItem*it,const svn::A
 
 #define BORDER 4
 
-int BlameDisplayItem::width (const QFontMetrics & fm, const QListView * lv, int c ) const
+int BlameDisplayItem::width (const QFontMetrics & fm, const Q3ListView * lv, int c ) const
 {
     if (c == COL_LINE) {
         return KListViewItem::width(QFontMetrics(KGlobalSettings::fixedFont()),lv,c)+2*BORDER;
@@ -114,7 +114,7 @@ void BlameDisplayItem::display()
     setText(COL_LINE,QString("%1").arg(_line));
 }
 
-int BlameDisplayItem::compare(QListViewItem *item, int col, bool ascending)const
+int BlameDisplayItem::compare(Q3ListViewItem *item, int col, bool ascending)const
 {
     Q_UNUSED(ascending);
     BlameDisplayItem* k = static_cast<BlameDisplayItem*>(item);
@@ -305,7 +305,7 @@ void BlameDisplay_impl::slotGoLine()
     if (!ok) {
         return;
     }
-    QListViewItem*item = m_BlameList->firstChild();
+    Q3ListViewItem*item = m_BlameList->firstChild();
     --line;
     while (item) {
         if (item->rtti()==1000) {
@@ -320,11 +320,11 @@ void BlameDisplay_impl::slotGoLine()
     }
 }
 
-void BlameDisplay_impl::slotContextMenuRequested(KListView*,QListViewItem*item, const QPoint&pos)
+void BlameDisplay_impl::slotContextMenuRequested(KListView*,Q3ListViewItem*item, const QPoint&pos)
 {
     if (item==0||item->rtti()!=1000) return;
     BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
-    QPopupMenu popup;
+    Q3PopupMenu popup;
     popup.insertItem(i18n("Log message for revision"),101);
     int r = popup.exec(pos);
 
@@ -360,7 +360,7 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
     ptr->setFont(KGlobalSettings::fixedFont());
-    ptr->setWordWrap(QTextEdit::NoWrap);
+    ptr->setWordWrap(Q3TextEdit::NoWrap);
     ptr->setText(text);
     dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display"));
     dlg->exec();
@@ -369,7 +369,7 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
 
 void BlameDisplay_impl::slotShowCurrentCommit()
 {
-    QListViewItem*item = m_BlameList->selectedItem();
+    Q3ListViewItem*item = m_BlameList->selectedItem();
     if (item==0||item->rtti()!=1000) return;
     BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
     showCommit(bit);
@@ -378,7 +378,7 @@ void BlameDisplay_impl::slotShowCurrentCommit()
 void BlameDisplay_impl::slotSelectionChanged()
 {
     if (!m_Data->m_dlg) return;
-    QListViewItem*item = m_BlameList->selectedItem();
+    Q3ListViewItem*item = m_BlameList->selectedItem();
     if (item==0||item->rtti()!=1000) {
         m_Data->m_dlg->enableButton(KDialogBase::User2,false);
     } else {
@@ -408,7 +408,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const sv
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
 }
 
-void BlameDisplay_impl::slotItemDoubleClicked(QListViewItem*item)
+void BlameDisplay_impl::slotItemDoubleClicked(Q3ListViewItem*item)
 {
     if (item==0||item->rtti()!=1000) return;
     BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);

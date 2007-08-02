@@ -24,7 +24,7 @@
 #include <qradiobutton.h>
 #include <knuminput.h>
 #include <kdatetimewidget.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <klocale.h>
 
 Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)

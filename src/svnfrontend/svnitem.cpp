@@ -38,9 +38,11 @@
 #include <qstring.h>
 #include <qfileinfo.h>
 #include <qimage.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <qpainter.h>
 #include <qbitmap.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 class SvnItem_p:public svn::ref_count
 {
@@ -504,7 +506,7 @@ const QString& SvnItem::getToolTipText()
                 /* local */
             }
             if (wrap) {
-                QPtrList<SvnItem> lst; lst.append(this);
+                Q3PtrList<SvnItem> lst; lst.append(this);
                 p_Item->m_infoText = wrap->getInfo(lst,rev,peg,false,false);
                 if (p_Item->m_fitem) p_Item->m_infoText+=p_Item->m_fitem->getToolTipText(0);
             }

@@ -47,7 +47,7 @@
 #include <klocale.h>
 
 #include <qcursor.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 
 //K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
 

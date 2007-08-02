@@ -21,6 +21,8 @@
 #include "tcontextlistener.h"
 
 #include <qobject.h>
+//Added by qt3to4:
+#include <QCustomEvent>
 #include <kdebug.h>
 #include <kapplication.h>
 

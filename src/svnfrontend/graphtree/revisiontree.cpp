@@ -38,7 +38,7 @@
 #include <qdatetime.h>
 #include <qlabel.h>
 #include <qfile.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 #include <qregexp.h>
 
 #define INTERNALCOPY 1

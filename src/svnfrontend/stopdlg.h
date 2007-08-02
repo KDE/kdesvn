@@ -26,6 +26,11 @@
 
 #include <qdatetime.h>
 #include <qobject.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <QShowEvent>
+#include <QHideEvent>
+#include <QLabel>
 
 class QTimer;
 
@@ -33,7 +38,7 @@ class CContextListener;
 class QLabel;
 class KProgress;
 class KTextBrowser;
-class QVBoxLayout;
+class Q3VBoxLayout;
 
 /**
 @author Rajko Albrecht
@@ -61,7 +66,7 @@ protected:
     bool m_netBarShown;
     QTime m_StopTick;
     KTextBrowser*m_LogWindow;
-    QVBoxLayout*layout;
+    Q3VBoxLayout*layout;
 
     QString m_lastLog;
     unsigned int m_lastLogLines;

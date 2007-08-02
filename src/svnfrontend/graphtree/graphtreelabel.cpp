@@ -20,9 +20,12 @@
 #include "graphtreelabel.h"
 #include "graphtree_defines.h"
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PointArray>
 
-GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRect&r,QCanvas*c)
-    : QCanvasRectangle(r,c),StoredDrawParams()
+GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRect&r,Q3Canvas*c)
+    : Q3CanvasRectangle(r,c),StoredDrawParams()
 {
     m_Nodename = _nodename;
     m_SourceNode = QString::null;
@@ -65,7 +68,7 @@ void GraphTreeLabel::drawShape(QPainter& p)
 
 void GraphTreeLabel::setSelected(bool s)
 {
-    QCanvasRectangle::setSelected(s);
+    Q3CanvasRectangle::setSelected(s);
     StoredDrawParams::setSelected(s);
     update();
 }
@@ -80,8 +83,8 @@ void GraphTreeLabel::setSource(const QString&_s)
     m_SourceNode=_s;
 }
 
-GraphEdge::GraphEdge(QCanvas*c)
-    : QCanvasSpline(c)
+GraphEdge::GraphEdge(Q3Canvas*c)
+    : Q3CanvasSpline(c)
 {
 }
 
@@ -94,7 +97,7 @@ void GraphEdge::drawShape(QPainter& p)
     p.drawPolyline(poly);
 }
 
-QPointArray GraphEdge::areaPoints() const
+Q3PointArray GraphEdge::areaPoints() const
 {
   int minX = poly[0].x(), minY = poly[0].y();
   int maxX = minX, maxY = minY;
@@ -109,7 +112,7 @@ QPointArray GraphEdge::areaPoints() const
     if (poly[i].y() > maxY) maxY = poly[i].y();
     if (0) qDebug("  P %d: %d/%d", i, poly[i].x(), poly[i].y());
   }
-  QPointArray a = poly.copy(),  b = poly.copy();
+  Q3PointArray a = poly.copy(),  b = poly.copy();
   if (minX == maxX) {
     a.translate(-2, 0);
     b.translate(2, 0);
@@ -137,14 +140,14 @@ int GraphEdge::rtti()const
     return GRAPHTREE_LINE;
 }
 
-GraphEdgeArrow::GraphEdgeArrow(GraphEdge*_parent,QCanvas*c)
-    : QCanvasPolygon(c),_edge(_parent)
+GraphEdgeArrow::GraphEdgeArrow(GraphEdge*_parent,Q3Canvas*c)
+    : Q3CanvasPolygon(c),_edge(_parent)
 {
 }
 
 void GraphEdgeArrow::drawShape(QPainter&p)
 {
-    QCanvasPolygon::drawShape(p);
+    Q3CanvasPolygon::drawShape(p);
 }
 
 int GraphEdgeArrow::rtti()const
@@ -160,8 +163,8 @@ GraphEdge*GraphEdgeArrow::edge()
 /* taken from KCacheGrind project */
 QPixmap*GraphMark::_p=0;
 
-GraphMark::GraphMark(GraphTreeLabel*n,QCanvas*c)
-    : QCanvasRectangle(c)
+GraphMark::GraphMark(GraphTreeLabel*n,Q3Canvas*c)
+    : Q3CanvasRectangle(c)
 {
     if (!_p) {
 

@@ -22,10 +22,10 @@
 #include "kdesvn.h"
 #include "urldlg.h"
 
-#include <qdragobject.h>
+#include <q3dragobject.h>
 #include <kprinter.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qcursor.h>
 
 #include <kglobal.h>

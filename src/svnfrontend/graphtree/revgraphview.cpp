@@ -35,10 +35,16 @@
 #include <kmessagebox.h>
 
 #include <qtooltip.h>
-#include <qwmatrix.h>
-#include <qpopupmenu.h>
+#include <qmatrix.h>
+#include <q3popupmenu.h>
 #include <qpainter.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <QContextMenuEvent>
+#include <Q3PointArray>
+#include <QPixmap>
+#include <QResizeEvent>
+#include <QMouseEvent>
 
 #include <math.h>
 
@@ -61,9 +67,9 @@ void GraphViewTip::maybeTip( const QPoint & pos)
     if (!parentWidget()->inherits( "RevGraphView" )) return;
     RevGraphView* cgv = (RevGraphView*)parentWidget();
     QPoint cPos = cgv->viewportToContents(pos);
-    QCanvasItemList l = cgv->canvas()->collisions(cPos);
+    Q3CanvasItemList l = cgv->canvas()->collisions(cPos);
     if (l.count() == 0) return;
-    QCanvasItem* i = l.first();
+    Q3CanvasItem* i = l.first();
     if (i->rtti() == GRAPHTREE_LABEL) {
         GraphTreeLabel*tl = (GraphTreeLabel*)i;
         QString nm = tl->nodename();
@@ -77,7 +83,7 @@ void GraphViewTip::maybeTip( const QPoint & pos)
 }
 
 RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name, WFlags f)
- : QCanvasView(parent,name,f)
+ : Q3CanvasView(parent,name,f)
 {
     m_Canvas = 0L;
     m_Client = _client;
@@ -88,8 +94,8 @@ RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * paren
     m_Marker = 0;
     m_Tip = new GraphViewTip(this);
     m_CompleteView = new PannerView(this);
-    m_CompleteView->setVScrollBarMode(QScrollView::AlwaysOff);
-    m_CompleteView->setHScrollBarMode(QScrollView::AlwaysOff);
+    m_CompleteView->setVScrollBarMode(Q3ScrollView::AlwaysOff);
+    m_CompleteView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
     m_CompleteView->raise();
     m_CompleteView->hide();
     connect(this, SIGNAL(contentsMoving(int,int)),
@@ -117,10 +123,10 @@ RevGraphView::~RevGraphView()
 void RevGraphView::showText(const QString&s)
 {
     clear();
-    m_Canvas = new QCanvas(QApplication::desktop()->width(),
+    m_Canvas = new Q3Canvas(QApplication::desktop()->width(),
                         QApplication::desktop()->height());
 
-    QCanvasText* t = new QCanvasText(s, m_Canvas);
+    Q3CanvasText* t = new Q3CanvasText(s, m_Canvas);
     t->move(5, 5);
     t->show();
     center(0,0);
@@ -175,8 +181,8 @@ void RevGraphView::dotExit(KProcess*p)
     dotOutput.replace(endslash,"");
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;
-    QTextStream* dotStream;
-    dotStream = new QTextStream(dotOutput, IO_ReadOnly);
+    Q3TextStream* dotStream;
+    dotStream = new Q3TextStream(dotOutput, QIODevice::ReadOnly);
     QString line,cmd;
     int lineno=0;
     clear();
@@ -187,7 +193,7 @@ void RevGraphView::dotExit(KProcess*p)
         if (line.isNull()) break;
         lineno++;
         if (line.isEmpty()) continue;
-        QTextStream lineStream(line, IO_ReadOnly);
+        Q3TextStream lineStream(line, QIODevice::ReadOnly);
         lineStream >> cmd;
         if (cmd == "stop") {break; }
 
@@ -203,7 +209,7 @@ void RevGraphView::dotExit(KProcess*p)
             _yMargin = 50;
             if (h < QApplication::desktop()->height())
                 _yMargin += (QApplication::desktop()->height()-h)/2;
-            m_Canvas = new QCanvas(int(w+2*_xMargin), int(h+2*_yMargin));
+            m_Canvas = new Q3Canvas(int(w+2*_xMargin), int(h+2*_yMargin));
             continue;
         }
         if ((cmd != "node") && (cmd != "edge")) {
@@ -240,7 +246,7 @@ void RevGraphView::dotExit(KProcess*p)
             QString node1Name, node2Name, label;
             QString _x,_y;
             double x, y;
-            QPointArray pa;
+            Q3PointArray pa;
             int points, i;
             lineStream >> node1Name >> node2Name;
             lineStream >> points;
@@ -310,7 +316,7 @@ void RevGraphView::dotExit(KProcess*p)
             if (!arrowDir.isNull()) {
                 arrowDir *= 10.0/sqrt(double(arrowDir.x()*arrowDir.x() +
                     arrowDir.y()*arrowDir.y()));
-                QPointArray a(3);
+                Q3PointArray a(3);
                 a.setPoint(0, pa.point(indexHead) + arrowDir);
                 a.setPoint(1, pa.point(indexHead) + QPoint(arrowDir.y()/2,
                     -arrowDir.x()/2));
@@ -448,7 +454,7 @@ void RevGraphView::dumpRevtree()
     dotTmpFile = new KTempFile(QString::null,".dot");
     dotTmpFile->setAutoDelete(true);
 
-    QTextStream* stream = dotTmpFile->textStream();
+    Q3TextStream* stream = dotTmpFile->textStream();
     if (!stream) {
         showText(i18n("Could not open tempfile %1 for writing.").arg(dotTmpFile->name()));
         return;
@@ -597,7 +603,7 @@ void RevGraphView::updateSizes(QSize s)
             m_Canvas->width(), m_Canvas->height(),
             cWidth, cHeight, zoom);
 
-      QWMatrix wm;
+      QMatrix wm;
       wm.scale( zoom, zoom );
       m_CompleteView->setWorldMatrix(wm);
 
@@ -707,7 +713,7 @@ void RevGraphView::zoomRectMoveFinished()
 
 void RevGraphView::resizeEvent(QResizeEvent*e)
 {
-    QCanvasView::resizeEvent(e);
+    Q3CanvasView::resizeEvent(e);
     if (m_Canvas) updateSizes(e->size());
 }
 
@@ -736,9 +742,9 @@ void RevGraphView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 {
     setFocus();
     if (e->button() == Qt::LeftButton) {
-        QCanvasItemList l = canvas()->collisions(e->pos());
+        Q3CanvasItemList l = canvas()->collisions(e->pos());
         if (l.count()>0) {
-            QCanvasItem* i = l.first();
+            Q3CanvasItem* i = l.first();
             if (i->rtti()==GRAPHTREE_LABEL) {
                 makeSelected( (GraphTreeLabel*)i);
                 emit dispDetails(toolTip(((GraphTreeLabel*)i)->nodename(),true));
@@ -783,10 +789,10 @@ void RevGraphView::setNewDirection(int dir)
 void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
 {
     if (!m_Canvas) return;
-    QCanvasItemList l = canvas()->collisions(e->pos());
-    QCanvasItem* i = (l.count() == 0) ? 0 : l.first();
+    Q3CanvasItemList l = canvas()->collisions(e->pos());
+    Q3CanvasItem* i = (l.count() == 0) ? 0 : l.first();
 
-    QPopupMenu popup;
+    Q3PopupMenu popup;
     if (i && i->rtti()==GRAPHTREE_LABEL) {
         if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
             popup.insertItem(i18n("Diff to previous"),301);

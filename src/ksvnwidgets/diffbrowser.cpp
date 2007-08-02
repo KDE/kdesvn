@@ -31,7 +31,9 @@
 
 #include <qfont.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 /*!
     \fn DiffBrowser::DiffBrowser(QWidget*parent=0,const char*name=0)
@@ -43,10 +45,10 @@ DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
     setFont(KGlobalSettings::fixedFont());
     m_Data = new DiffBrowserData;
 
-    setWordWrap(QTextEdit::NoWrap);
+    setWordWrap(Q3TextEdit::NoWrap);
     m_Data->m_Syntax = new DiffSyntax(this);
     QToolTip::add(this,i18n("Ctrl-F for search, F3 or Shift-F3 for search again."));
-    QWhatsThis::add(this,i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
+    Q3WhatsThis::add(this,i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
     setFocus();
 }
 
@@ -89,7 +91,7 @@ void DiffBrowser::saveDiff()
             return;
         }
     }
-    tfile.open(IO_Truncate|IO_WriteOnly|IO_Raw);
+    tfile.open(QIODevice::Truncate|QIODevice::WriteOnly|QIODevice::Unbuffered);
     QDataStream stream( &tfile );
     stream.writeRawBytes(m_Data->m_content.data(),m_Data->m_content.size());
 }

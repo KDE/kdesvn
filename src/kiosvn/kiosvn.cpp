@@ -49,10 +49,12 @@
 #include <ktempdir.h>
 #include <ksock.h>
 #include <dcopclient.h>
-#include <qcstring.h>
+#include <q3cstring.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 #include <kmimetype.h>
 #include <krun.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 #include <stdlib.h>
 #include <math.h>
@@ -128,7 +130,7 @@ svn::Revision KioSvnData::urlToRev(const KURL&url)
     return rev;
 }
 
-kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket)
+kio_svnProtocol::kio_svnProtocol(const Q3CString &pool_socket, const Q3CString &app_socket)
     : SlaveBase("kio_ksvn", pool_socket, app_socket),StreamWrittenCb()
 {
     m_pData=new KioSvnData(this);
@@ -151,7 +153,7 @@ int kdemain(int argc, char **argv)
     KInstance instance( "kio_ksvn" );
    // start the kdesvnd DCOP service
     QString error;
-    QCString appId;
+    Q3CString appId;
 
     kdDebug(7101) << "*** Starting kio_ksvn " << endl;
 
@@ -290,7 +292,7 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
 void kio_svnProtocol::mkdir(const KURL::List &urls, int)
 {
     svn::Pathes p;
-    for ( QValueListConstIterator<KURL> it = urls.begin(); it != urls.end() ; ++it ) {
+    for ( Q3ValueListConstIterator<KURL> it = urls.begin(); it != urls.end() ; ++it ) {
         p.append((*it).path());
     }
     try {
@@ -447,7 +449,7 @@ bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& us
 void kio_svnProtocol::special(const QByteArray& data)
 {
     kdDebug()<<"kio_svnProtocol::special"<<endl;
-    QDataStream stream(data,IO_ReadOnly);
+    QDataStream stream(data,QIODevice::ReadOnly);
     int tmp;
     stream >> tmp;
     kdDebug() << "kio_svnProtocol::special " << tmp << endl;
@@ -662,7 +664,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
     /// @todo replace with direct call to kdesvn?
     QByteArray reply;
     QByteArray params;
-    QCString replyType;
+    Q3CString replyType;
     QString msg;
 
     if (!dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
@@ -675,7 +677,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
         kdWarning()<<msg<<endl;
         return;
     }
-    QDataStream stream2(reply,IO_ReadOnly);
+    QDataStream stream2(reply,QIODevice::ReadOnly);
     QStringList lt;
     stream2>>lt;
     if (lt.count()!=1) {
@@ -684,7 +686,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
         return;
     }
     msg = lt[0];
-    QValueList<svn::Path> targets;
+    Q3ValueList<svn::Path> targets;
     for (unsigned j=0; j<url.count();++j) {
         targets.push_back(svn::Path(url[j].path()));
     }
@@ -775,7 +777,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
 
 void kio_svnProtocol::revert(const KURL::List&l)
 {
-    QValueList<svn::Path> list;
+    Q3ValueList<svn::Path> list;
     for (unsigned j=0; j<l.count();++j) {
         list.append(svn::Path(l[j].path()));
     }
@@ -856,7 +858,7 @@ void kio_svnProtocol::add(const KURL& wc)
 void kio_svnProtocol::wc_delete(const KURL::List&l)
 {
     svn::Pathes p;
-    for ( QValueListConstIterator<KURL> it = l.begin(); it != l.end() ; ++it ) {
+    for ( Q3ValueListConstIterator<KURL> it = l.begin(); it != l.end() ; ++it ) {
         p.append((*it).path());
     }
     try {

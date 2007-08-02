@@ -31,8 +31,10 @@
 #include <kdebug.h>
 #include <kfiledialog.h>
 
-#include <qtextstream.h>
+#include <q3textstream.h>
 #include <qthread.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 class CContextListenerData
 {
@@ -175,7 +177,7 @@ void CContextListener::contextNotify (const char *path,
     QString aString = NotifyAction(action);
 
     if (!aString.isEmpty()) {
-        QTextStream ts(&msg,IO_WriteOnly);
+        Q3TextStream ts(&msg,QIODevice::WriteOnly);
         ts << NotifyAction(action) << " " << QString::FROMUTF8(path);
         if (revision>-1) {
             ts << " (Rev "<<revision<<")";
@@ -280,7 +282,7 @@ bool CContextListener::contextSslClientCertPwPrompt (QString & password,
 {
     maysave = false;
     emit waitShow(true);
-    QCString npass;
+    Q3CString npass;
     int keep = 1;
     int res = KPasswordDialog::getPassword(npass,
         i18n("Enter password for realm %1").arg(realm),

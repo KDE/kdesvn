@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "dummydisplay.h"
+//Added by qt3to4:
+#include <Q3PtrList>
 
 DummyDisplay::DummyDisplay()
  : ItemDisplay()
@@ -39,7 +41,7 @@ SvnItem*DummyDisplay::Selected()
     return 0L;
 }
 
-void DummyDisplay::SelectionList(QPtrList<SvnItem>*)
+void DummyDisplay::SelectionList(Q3PtrList<SvnItem>*)
 {
 }
 

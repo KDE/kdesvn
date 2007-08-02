@@ -59,7 +59,7 @@
 #include <kurldrag.h>
 #include <ktrader.h>
 
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qpainter.h>
 #include <qstyle.h>
 #include <qapplication.h>
@@ -67,9 +67,22 @@
 #include <qlabel.h>
 #include <qtooltip.h>
 #include <qregexp.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qcursor.h>
-#include <qheader.h>
+#include <q3header.h>
+//Added by qt3to4:
+#include <Q3StrList>
+#include <QWheelEvent>
+#include <QPixmap>
+#include <QDragLeaveEvent>
+#include <QMouseEvent>
+#include <Q3ValueList>
+#include <QDragEnterEvent>
+#include <QEvent>
+#include <QDropEvent>
+#include <QDragMoveEvent>
+#include <QPaintEvent>
+#include <Q3PtrList>
 
 #include <unistd.h>
 
@@ -85,7 +98,7 @@ public:
         delete m_fileTip;
         kdDebug()<<"Destructor KdesvnFileListPrivate done"<<endl;
     };
-    QListViewItem *dragOverItem;
+    Q3ListViewItem *dragOverItem;
     QPoint dragOverPoint;
     QRect mOldDropHighlighter;
     svn::Revision m_remoteRevision;
@@ -200,13 +213,13 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     setSortColumn(FileListViewItem::COL_NAME);
     setupActions();
 
-    connect(this,SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)),this,
-        SLOT(slotContextMenuRequested(QListViewItem *, const QPoint &, int)));
+    connect(this,SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)),this,
+        SLOT(slotContextMenuRequested(Q3ListViewItem *, const QPoint &, int)));
 
     /* not via executed 'cause click may used for selection - single click execution
        just confuses in an application */
-    connect(this,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
-    connect(this,SIGNAL(returnPressed(QListViewItem*)),this,SLOT(slotItemDoubleClicked(QListViewItem*)));
+    connect(this,SIGNAL(doubleClicked(Q3ListViewItem*)),this,SLOT(slotItemDoubleClicked(Q3ListViewItem*)));
+    connect(this,SIGNAL(returnPressed(Q3ListViewItem*)),this,SLOT(slotItemDoubleClicked(Q3ListViewItem*)));
 
     connect(this,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
     connect(m_SvnWrapper,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
@@ -215,8 +228,8 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_SvnWrapper,SIGNAL(sigRefreshCurrent(SvnItem*)),this,SLOT(refreshCurrent(SvnItem*)));
     connect(m_SvnWrapper,SIGNAL(sigRefreshIcons(bool)),this,SLOT(slotRescanIcons(bool)));
-    connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
-            this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
+    connect(this,SIGNAL(dropped (QDropEvent*,Q3ListViewItem*)),
+            this,SLOT(slotDropped(QDropEvent*,Q3ListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
     m_pList->connectDirTimer(this);
 
@@ -696,7 +709,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
             }
             return;
         }
-        QListViewItem*temp;
+        Q3ListViewItem*temp;
         while ((temp=firstChild())) {
             delete temp;
         }
@@ -745,7 +758,7 @@ kdesvnfilelist::~kdesvnfilelist()
     ssh.killSshAgent();
 }
 
-void kdesvnfilelist::slotItemRead(QListViewItem*aItem)
+void kdesvnfilelist::slotItemRead(Q3ListViewItem*aItem)
 {
     if (!aItem) return;
     CursorStack a(Qt::BusyCursor);
@@ -923,7 +936,7 @@ void kdesvnfilelist::slotSelectionChanged()
     }
     m_SelectedItems->clear();
 
-    QListViewItemIterator it( this, QListViewItemIterator::Selected );
+    Q3ListViewItemIterator it( this, Q3ListViewItemIterator::Selected );
     while ( it.current() ) {
         m_SelectedItems->append( static_cast<FileListViewItem*>(it.current()) );
         ++it;
@@ -962,7 +975,7 @@ void kdesvnfilelist::slotChangeToRepository()
     sigSwitchUrl(nurl);
 }
 
-void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
+void kdesvnfilelist::slotItemDoubleClicked(Q3ListViewItem*item)
 {
     if (!item) return;
 
@@ -1260,7 +1273,7 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
         // @todo just for debugging!
 #ifndef NDEBUG
         m_SelectedItems->clear();
-        QListViewItemIterator qlvit( this, QListViewItemIterator::Selected );
+        Q3ListViewItemIterator qlvit( this, Q3ListViewItemIterator::Selected );
         while ( qlvit.current() ) {
             m_SelectedItems->append( static_cast<FileListViewItem*>(qlvit.current()) );
             ++qlvit;
@@ -1309,7 +1322,7 @@ KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item,bool execOnly)
     return offers;
 }
 
-void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const QPoint &, int)
+void kdesvnfilelist::slotContextMenuRequested(Q3ListViewItem */* _item */, const QPoint &, int)
 {
 //    FileListViewItem*item = static_cast<FileListViewItem*>(_item);
     bool isopen = baseUri().length()>0;
@@ -1347,7 +1360,7 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const 
 
     QWidget * target;
     emit sigShowPopup(menuname,&target);
-    QPopupMenu *popup = static_cast<QPopupMenu *>(target);
+    Q3PopupMenu *popup = static_cast<Q3PopupMenu *>(target);
     if (!popup) {
         kdDebug()<<"Error getting popupMenu"<<endl;
         return;
@@ -1389,7 +1402,7 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const 
 */
 void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
 {
-    QListViewItem*item;
+    Q3ListViewItem*item;
     bool ok = validDropEvent(event,item);
     if (ok) {
         event->accept();
@@ -1399,10 +1412,10 @@ void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
 }
 
 //void kdesvnfilelist::startDrag()
-QDragObject* kdesvnfilelist::dragObject()
+Q3DragObject* kdesvnfilelist::dragObject()
 {
     m_pList->m_fileTip->setItem(0);
-    QListViewItem * m_pressedItem = currentItem();
+    Q3ListViewItem * m_pressedItem = currentItem();
     if (!m_pressedItem) {
         return 0;
     }
@@ -1431,7 +1444,7 @@ QDragObject* kdesvnfilelist::dragObject()
 
     /* workaround for KURL::Drag - it always forget the revision part on drop :( */
     if (!isWorkingCopy()) {
-        QStrList l;
+        Q3StrList l;
         QString t;
         KURL::List::ConstIterator it = urls.begin();
         for (;it!=urls.end();++it) {
@@ -1459,7 +1472,7 @@ bool kdesvnfilelist::acceptDrag(QDropEvent *event)const
     return KURLDrag::canDecode(event);
 }
 
-bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
+bool kdesvnfilelist::validDropEvent(QDropEvent*event,Q3ListViewItem*&item)
 {
     if (!event) return false;
     if (!isWorkingCopy()) {
@@ -1498,7 +1511,7 @@ bool kdesvnfilelist::validDropEvent(QDropEvent*event,QListViewItem*&item)
 
 void kdesvnfilelist::contentsDropEvent(QDropEvent * event)
 {
-    QListViewItem *item = 0;
+    Q3ListViewItem *item = 0;
     bool ok = validDropEvent(event,item);
     cleanHighLighter();
     if (ok) {
@@ -1510,7 +1523,7 @@ void kdesvnfilelist::contentsDropEvent(QDropEvent * event)
 
 void kdesvnfilelist::contentsDragMoveEvent( QDragMoveEvent* event)
 {
-    QListViewItem * item;
+    Q3ListViewItem * item;
     bool ok = validDropEvent(event,item);
 
     if (item && item!=m_pList->dragOverItem) {
@@ -1625,7 +1638,7 @@ void kdesvnfilelist::slotMerge()
     delete dlg;
 }
 
-void kdesvnfilelist::slotDropped(QDropEvent* event,QListViewItem*item)
+void kdesvnfilelist::slotDropped(QDropEvent* event,Q3ListViewItem*item)
 {
     KURL::List urlList;
     QMap<QString,QString> metaData;
@@ -1716,7 +1729,7 @@ void kdesvnfilelist::slotInternalDrop()
 {
     QDropEvent::Action action = m_pList->intern_drop_action;
     if (action==QDropEvent::UserAction) {
-         QPopupMenu popup;
+         Q3PopupMenu popup;
          popup.insertItem(SmallIconSet("goto"), i18n( "Move Here" ) + "\t" + KKey::modFlagLabel( KKey::SHIFT ), 2 );
          popup.insertItem(SmallIconSet("editcopy"), i18n( "Copy Here" ) + "\t" + KKey::modFlagLabel( KKey::CTRL ), 1 );
          popup.insertSeparator();
@@ -1803,7 +1816,7 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
             KURL turl = static_cast<KIO::CopyJob*>(job)->destURL();
             QString base = turl.path(1);
             KURL::List::iterator iter;
-            QValueList<svn::Path> tmp;
+            Q3ValueList<svn::Path> tmp;
             for (iter=lst.begin();iter!=lst.end();++iter) {
                 tmp.push_back(svn::Path((base+(*iter).fileName(true))));
             }
@@ -1821,7 +1834,7 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
 void kdesvnfilelist::slotDelete()
 {
     m_deletePerfect = true;
-    QPtrList<FileListViewItem>*lst = allSelected();
+    Q3PtrList<FileListViewItem>*lst = allSelected();
 
     if (lst->count()==0) {
         KMessageBox::error(this,i18n("Nothing selected for delete"));
@@ -1832,7 +1845,7 @@ void kdesvnfilelist::slotDelete()
     //m_pList->stopScan();
     m_pList->m_fileTip->setItem(0);
 
-    QValueList<svn::Path> items;
+    Q3ValueList<svn::Path> items;
     QStringList displist;
     KURL::List kioList;
     while ((cur=liter.current())!=0){
@@ -1899,7 +1912,7 @@ void kdesvnfilelist::dispDummy()
  */
 void kdesvnfilelist::slotLock()
 {
-    QPtrList<FileListViewItem>*lst = allSelected();
+    Q3PtrList<FileListViewItem>*lst = allSelected();
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
     if (lst->count()==0) {
@@ -1938,7 +1951,7 @@ void kdesvnfilelist::slotLock()
  */
 void kdesvnfilelist::slotUnlock()
 {
-    QPtrList<FileListViewItem>*lst = allSelected();
+    Q3PtrList<FileListViewItem>*lst = allSelected();
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
     if (lst->count()==0) {
@@ -2046,7 +2059,7 @@ void kdesvnfilelist::slotSimpleHeadDiff()
 
 void kdesvnfilelist::slotDiffPathes()
 {
-    QPtrList<FileListViewItem>*lst = allSelected();
+    Q3PtrList<FileListViewItem>*lst = allSelected();
 
     if (lst->count()!=2 || !uniqueTypeSelected()) {
         return;
@@ -2250,7 +2263,7 @@ void kdesvnfilelist::reinitItems(FileListViewItem*_item)
  */
 void kdesvnfilelist::slotInfo()
 {
-    QPtrList<SvnItem> lst;
+    Q3PtrList<SvnItem> lst;
     SelectionList(&lst);
     svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
     if (!isWorkingCopy()) {
@@ -2327,7 +2340,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                 if (item->isRealVersioned()) {
                     repaintit = refreshRecursive(item,false);
                 } else {
-                    QListViewItem *_s;
+                    Q3ListViewItem *_s;
                     while ( (_s=item->firstChild()))
                     {
                         delete _s;
@@ -2485,7 +2498,7 @@ void kdesvnfilelist::contentsMousePressEvent(QMouseEvent*e)
     KListView::contentsMousePressEvent(e);
     m_pList->m_fileTip->setItem(0);
     QPoint p(contentsToViewport( e->pos()));
-    QListViewItem *i = itemAt( p );
+    Q3ListViewItem *i = itemAt( p );
     // this is from qt the example - hopefully I got my problems with drag&drop fixed.
     if ( i ) {
         // if the user clicked into the root decoration of the item, don't try to start a drag!

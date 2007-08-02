@@ -27,7 +27,9 @@
 #include <klocale.h>
 #include <qstring.h>
 #include <qlayout.h>
-#include <qvbox.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 class CommandLineData
 {
@@ -66,7 +68,7 @@ int CommandLine::exec()
     }
     KLibFactory *factory = KLibLoader::self()->factory("libkdesvnpart");
     if (factory) {
-        if (QCString(factory->className())!="cFactory") {
+        if (Q3CString(factory->className())!="cFactory") {
             kdDebug()<<"wrong factory"<<endl;
             return -1;
         }

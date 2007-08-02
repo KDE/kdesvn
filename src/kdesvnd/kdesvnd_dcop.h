@@ -24,6 +24,8 @@
 
 #include <qstringlist.h>
 #include <qstring.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <kurl.h>
 #include <dcopobject.h>
 #include <kdedmodule.h>
@@ -38,7 +40,7 @@ class kdesvnd_dcop :  public KDEDModule
 private:
 
 public:
-    kdesvnd_dcop(const QCString&);
+    kdesvnd_dcop(const Q3CString&);
     virtual ~kdesvnd_dcop();
 
 protected:
@@ -69,6 +71,6 @@ k_dcop:
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
     QStringList get_sslclientcertpw(QString);
     QStringList getActionMenu(KURL::List);
-    QStringList getSingleActionMenu(QCString);
+    QStringList getSingleActionMenu(Q3CString);
 };
 #endif

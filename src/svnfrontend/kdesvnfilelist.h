@@ -29,8 +29,17 @@
 #include <kurl.h>
 #include <ktrader.h>
 #include <qmap.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <qevent.h>
+//Added by qt3to4:
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QDragLeaveEvent>
+#include <QWheelEvent>
+#include <QPaintEvent>
+#include <QPixmap>
+#include <QMouseEvent>
+#include <QDragEnterEvent>
 
 class KAction;
 class KActionMenu;
@@ -120,7 +129,7 @@ protected:
     virtual void contentsDropEvent( QDropEvent* );
     virtual bool acceptDrag(QDropEvent *event)const;
     //virtual void startDrag();
-    virtual QDragObject* dragObject();
+    virtual Q3DragObject* dragObject();
 
     void dispDummy();
     void reinitItems(FileListViewItem*_item = 0);
@@ -138,19 +147,19 @@ protected:
 private:
     KdesvnFileListPrivate*m_pList;
     void cleanHighLighter();
-    bool validDropEvent(QDropEvent*event,QListViewItem*&item);
+    bool validDropEvent(QDropEvent*event,Q3ListViewItem*&item);
     void copy_move(bool move);
 
 protected slots:
     virtual void slotSelectBrowsingRevision();
-    virtual void slotItemRead(QListViewItem*);
-    virtual void slotContextMenuRequested(QListViewItem *, const QPoint &, int);
+    virtual void slotItemRead(Q3ListViewItem*);
+    virtual void slotContextMenuRequested(Q3ListViewItem *, const QPoint &, int);
     virtual void slotSelectionChanged();
     virtual void slotClientException(const QString&);
     virtual void slotNotifyMessage(const QString&);
     virtual void slotDirAdded(const QString&,FileListViewItem*);
     virtual void slotReinitItem(SvnItem*);
-    virtual void slotItemDoubleClicked(QListViewItem*);
+    virtual void slotItemDoubleClicked(Q3ListViewItem*);
     virtual void slotImportIntoCurrent(bool);
     virtual void slotImportDirsIntoCurrent();
     virtual void slotImportIntoDir(const KURL&,const QString&,bool);
@@ -161,7 +170,7 @@ protected slots:
     virtual void slotResolved();
     virtual void slotMergeRevisions();
     virtual void slotMerge();
-    virtual void slotDropped(QDropEvent *,QListViewItem*);
+    virtual void slotDropped(QDropEvent *,Q3ListViewItem*);
     virtual void viewportPaintEvent(QPaintEvent *);
     virtual void slotRename();
     virtual void slotCopy();

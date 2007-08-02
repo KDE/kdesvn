@@ -23,7 +23,7 @@
 #include "kiobytestream.h"
 
 #include <qstring.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <kurl.h>
 
 #include <kio/global.h>
@@ -31,7 +31,7 @@
 
 
 #include <sys/stat.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 
 class KioSvnData;
 
@@ -41,7 +41,7 @@ class KioSvnData;
 class kio_svnProtocol : public KIO::SlaveBase,public StreamWrittenCb
 {
 public:
-    kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket);
+    kio_svnProtocol(const Q3CString &pool_socket, const Q3CString &app_socket);
     virtual ~kio_svnProtocol();
     virtual void listDir (const KURL&url);
     virtual void stat(const KURL& url);

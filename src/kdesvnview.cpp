@@ -34,12 +34,14 @@
 #include <qpainter.h>
 #include <qlayout.h>
 #include <qfileinfo.h>
-#include <qheader.h>
+#include <q3header.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qsplitter.h>
 #include <qlayout.h>
-#include <qvbox.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
 #include <kurl.h>
 #include <ktrader.h>
@@ -60,7 +62,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
       m_currentURL("")
 {
     setupActions();
-    QVBoxLayout *top_layout = new QVBoxLayout(this);
+    Q3VBoxLayout *top_layout = new Q3VBoxLayout(this);
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
@@ -97,13 +99,13 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     QString t1;
     t1 = cs.readEntry("split1",QString::null);
     if (!t1.isEmpty()) {
-        QTextStream st1(&t1,IO_ReadOnly);
+        Q3TextStream st1(&t1,QIODevice::ReadOnly);
         st1 >> *m_Splitter;
     }
     if (m_treeSplitter) {
         t1 = cs.readEntry("split2",QString::null);
         if (!t1.isEmpty()) {
-            QTextStream st2(&t1,IO_ReadOnly);
+            Q3TextStream st2(&t1,QIODevice::ReadOnly);
             st2 >> *m_treeSplitter;
         }
     }
@@ -118,12 +120,12 @@ kdesvnView::~kdesvnView()
 {
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
     QString t1,t2;
-    QTextStream st1(&t1,IO_WriteOnly);
+    Q3TextStream st1(&t1,QIODevice::WriteOnly);
     st1 << *m_Splitter;
     cs.writeEntry("split1",t1);
 
     if (m_treeSplitter) {
-        QTextStream st2(&t2,IO_WriteOnly);
+        Q3TextStream st2(&t2,QIODevice::WriteOnly);
         st2 << *m_treeSplitter;
         cs.writeEntry("split2",t2);
     }

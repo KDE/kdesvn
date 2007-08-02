@@ -34,7 +34,7 @@
 
 UrlDlg::UrlDlg(QWidget *parent, const char *name)
  : KDialogBase(Plain, QString::null, Ok|Cancel|User1, Ok, parent, name,
-                true,true, KStdGuiItem::clear())
+                true,true, KStandardGuiItem::clear())
 {
     init_dlg();
 }
@@ -54,7 +54,7 @@ void UrlDlg::init_dlg()
     QLabel * label = new QLabel(i18n("Open repository or working copy") , plainPage());
     topLayout->addWidget(label);
 
-    KHistoryCombo * combo = new KHistoryCombo(0,"history_combo");
+    KHistoryComboBox * combo = new KHistoryComboBox(0,"history_combo");
     combo->setDuplicatesEnabled(false);
     KConfig *kc = KGlobal::config();
     KConfigGroupSaver ks( kc, QString::fromLatin1("Open-repository settings") );
@@ -68,13 +68,13 @@ void UrlDlg::init_dlg()
         combo->resize(300,combo->height());
     }
 
-    urlRequester_ = new KURLRequester(combo, plainPage(), "urlRequester");
+    urlRequester_ = new KUrlRequester(combo, plainPage(), "urlRequester");
     topLayout->addWidget( urlRequester_ );
     urlRequester_->setFocus();
     KFile::Mode mode = static_cast<KFile::Mode>(KFile::ExistingOnly|KFile::Directory);
     urlRequester_->setMode(mode);
     connect(urlRequester_->comboBox(),SIGNAL(textChanged(const QString&)),SLOT(slotTextChanged(const QString&)));
-    enableButtonOK( false );
+    enableButtonOk( false );
     enableButton( KDialogBase::User1, false );
     connect( this, SIGNAL(user1Clicked()), SLOT(slotClear()));
     urlRequester_->adjustSize();
@@ -86,7 +86,7 @@ void UrlDlg::init_dlg()
  */
 void UrlDlg::accept()
 {
-    KHistoryCombo *combo = static_cast<KHistoryCombo*>(urlRequester_->comboBox());
+    KHistoryComboBox *combo = static_cast<KHistoryComboBox*>(urlRequester_->comboBox());
     if (combo) {
         combo->addToHistory(urlRequester_->url());
         KConfig *kc = KGlobal::config();
@@ -103,8 +103,8 @@ void UrlDlg::accept()
  */
 void UrlDlg::slotTextChanged(const QString&text)
 {
-    bool state = !text.stripWhiteSpace().isEmpty();
-    enableButtonOK( state );
+    bool state = !text.trimmed().isEmpty();
+    enableButtonOk( state );
     enableButton( KDialogBase::User1, state );
 }
 
@@ -121,14 +121,14 @@ void UrlDlg::slotClear()
 /*!
     \fn UrlDlg::selectedURL()
  */
-KURL UrlDlg::selectedURL()
+KUrl UrlDlg::selectedURL()
 {
     if ( result() == QDialog::Accepted ) {
-        KURL uri = urlRequester_->url();
+        KUrl uri = urlRequester_->url();
         return uri;
-        //return KURL::fromPathOrURL( urlRequester_->url() );
+        //return KUrl::fromPathOrUrl( urlRequester_->url() );
     } else {
-        return KURL();
+        return KUrl();
     }
 }
 
@@ -136,12 +136,12 @@ KURL UrlDlg::selectedURL()
 /*!
     \fn UrlDlg::getURL(QWidget*parent)
  */
-KURL UrlDlg::getURL(QWidget*parent)
+KUrl UrlDlg::getURL(QWidget*parent)
 {
     UrlDlg dlg(parent);
     dlg.setCaption(i18n("Open"));
     dlg.exec();
-    const KURL& url = dlg.selectedURL();
+    const KUrl& url = dlg.selectedURL();
     return url;
 }
 

@@ -56,7 +56,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_PROMPT);
     void*t = (void*)&_data;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" from thread " << endl;
+    kDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     username = _data.user;
@@ -75,7 +75,7 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGMSG_PROMPT);
     void*t = (void*)&log;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGMSG_PROMPT<<" from thread " << endl;
+    kDebug()<<"Post event "<<EVENT_THREAD_LOGMSG_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     msg = log.msg;
@@ -90,7 +90,7 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
     scertf.certfile="";
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
     ev->setData((void*)&scertf);
-    kdDebug()<<"Post event "<<EVENT_THREAD_CERT_SELECT_PROMPT<<" from thread " << endl;
+    kDebug()<<"Post event "<<EVENT_THREAD_CERT_SELECT_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     certFile = scertf.certfile;
@@ -107,7 +107,7 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
     scert_data.realm=realm;
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_CERT_PW_PROMPT);
     ev->setData((void*)&scert_data);
-    kdDebug()<<"Post event "<<EVENT_THREAD_CERT_PW_PROMPT<<" from thread " << endl;
+    kDebug()<<"Post event "<<EVENT_THREAD_CERT_PW_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     password = scert_data.password;
@@ -123,7 +123,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
     trust_answer.m_SslTrustAnswer=DONT_ACCEPT;
     trust_answer.m_Trustdata = &data;
     ev->setData((void*)&trust_answer);
-    kdDebug()<<"Post event "<<EVENT_THREAD_SSL_TRUST_PROMPT<<" from thread " << endl;
+    kDebug()<<"Post event "<<EVENT_THREAD_SSL_TRUST_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     return trust_answer.m_SslTrustAnswer;

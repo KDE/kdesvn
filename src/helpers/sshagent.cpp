@@ -24,7 +24,7 @@
 #include <qregexp.h>
 #include <kapplication.h>
 #include <kdeversion.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <kdebug.h>
 
 #include <stdlib.h>
@@ -66,7 +66,7 @@ bool SshAgent::querySshAgent()
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
 #ifdef FORCE_ASKPASS
-        kdDebug()<<"Using test askpass"<<endl;
+        kDebug()<<"Using test askpass"<<endl;
 #ifdef HAS_SETENV
             ::setenv("SSH_ASKPASS",FORCE_ASKPASS,1);
 #else
@@ -108,13 +108,13 @@ bool SshAgent::addSshIdentities(bool force)
     }
 
     // add identities to ssh-agent
-    KProcess proc;
+    K3Process proc;
 
     proc.setEnvironment("SSH_AGENT_PID", m_pid);
     proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
 
 #ifdef FORCE_ASKPASS
-    kdDebug()<<"Using test askpass"<<endl;
+    kDebug()<<"Using test askpass"<<endl;
     proc.setEnvironment("SSH_ASKPASS",FORCE_ASKPASS);
 #else
     char*agent = 0;
@@ -128,12 +128,12 @@ bool SshAgent::addSshIdentities(bool force)
 
     proc << "ssh-add";
 
-    connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
-            SLOT(slotReceivedStdout(KProcess*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
-            SLOT(slotReceivedStderr(KProcess*, char*, int)));
+    connect(&proc, SIGNAL(receivedStdout(K3Process*, char*, int)),
+            SLOT(slotReceivedStdout(K3Process*, char*, int)));
+    connect(&proc, SIGNAL(receivedStderr(K3Process*, char*, int)),
+            SLOT(slotReceivedStderr(K3Process*, char*, int)));
 
-    proc.start(KProcess::DontCare, KProcess::AllOutput);
+    proc.start(K3Process::DontCare, K3Process::AllOutput);
 
     // wait for process to finish
     // TODO CL use timeout?
@@ -149,15 +149,15 @@ void SshAgent::killSshAgent()
     if( !m_isRunning || !m_isOurAgent )
         return;
 
-    KProcess proc;
+    K3Process proc;
 
     proc << "kill" << m_pid;
 
-    proc.start(KProcess::DontCare, KProcess::NoCommunication);
+    proc.start(K3Process::DontCare, K3Process::NoCommunication);
 }
 
 
-void SshAgent::slotProcessExited(KProcess*)
+void SshAgent::slotProcessExited(K3Process*)
 {
     QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
     QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
@@ -208,7 +208,7 @@ void SshAgent::slotProcessExited(KProcess*)
 }
 
 
-void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
+void SshAgent::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)
 {
     Q_UNUSED(proc);
 
@@ -217,7 +217,7 @@ void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
 }
 
 
-void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
+void SshAgent::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)
 {
     Q_UNUSED(proc);
 
@@ -228,18 +228,18 @@ void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
 
 bool SshAgent::startSshAgent()
 {
-    KProcess proc;
+    K3Process proc;
 
     proc << "ssh-agent";
 
-    connect(&proc, SIGNAL(processExited(KProcess*)),
-            SLOT(slotProcessExited(KProcess*)));
-    connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
-            SLOT(slotReceivedStdout(KProcess*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
-            SLOT(slotReceivedStderr(KProcess*, char*, int)) );
+    connect(&proc, SIGNAL(processExited(K3Process*)),
+            SLOT(slotProcessExited(K3Process*)));
+    connect(&proc, SIGNAL(receivedStdout(K3Process*, char*, int)),
+            SLOT(slotReceivedStdout(K3Process*, char*, int)));
+    connect(&proc, SIGNAL(receivedStderr(K3Process*, char*, int)),
+            SLOT(slotReceivedStderr(K3Process*, char*, int)) );
 
-    proc.start(KProcess::NotifyOnExit, KProcess::All);
+    proc.start(K3Process::NotifyOnExit, K3Process::All);
 
     // wait for process to finish
     // TODO CL use timeout?

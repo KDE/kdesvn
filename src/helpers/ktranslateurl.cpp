@@ -39,10 +39,10 @@ KTranslateUrl::~KTranslateUrl()
 {
 }
 
-KURL KTranslateUrl::translateSystemUrl(const KURL&_url)
+KUrl KTranslateUrl::translateSystemUrl(const KUrl&_url)
 {
     QString proto = _url.protocol();
-    KURL res;
+    KUrl res;
     QString name,path;
 
     if (proto!="system") {
@@ -63,7 +63,7 @@ KURL KTranslateUrl::translateSystemUrl(const KURL&_url)
     return res;
 }
 
-bool KTranslateUrl::parseURL(const KURL&url,QString&name,QString&path)
+bool KTranslateUrl::parseURL(const KUrl&url,QString&name,QString&path)
 {
     QString url_path = url.path();
     int i = url_path.find('/', 1);
@@ -81,7 +81,7 @@ bool KTranslateUrl::parseURL(const KURL&url,QString&name,QString&path)
     return name != QString::null;
 }
 
-KURL KTranslateUrl::findSystemBase(const QString&filename)
+KUrl KTranslateUrl::findSystemBase(const QString&filename)
 {
     QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
 
@@ -108,7 +108,7 @@ KURL KTranslateUrl::findSystemBase(const QString&filename)
                 KDesktopFile desktop(*dirpath+filename+".desktop", true);
                 if ( desktop.readURL().isEmpty() )
                 {
-                    KURL url;
+                    KUrl url;
                     url.setPath( desktop.readPath() );
                     return url;
                 }
@@ -118,7 +118,7 @@ KURL KTranslateUrl::findSystemBase(const QString&filename)
         }
     }
 
-    return KURL();
+    return KUrl();
 }
 
 }

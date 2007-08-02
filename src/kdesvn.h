@@ -29,7 +29,7 @@
 #include <qtimer.h>
 #include <kbookmarkmanager.h>
 
-class KURL;
+class KUrl;
 class KAction;
 class KActionMenu;
 class KToggleAction;
@@ -83,7 +83,7 @@ public slots:
     /**
      * Use this method to load whatever file/URL you have
      */
-    virtual void load(const KURL&);
+    virtual void load(const KUrl&);
 
 private slots:
     void fileOpen();

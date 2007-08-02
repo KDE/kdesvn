@@ -26,7 +26,7 @@
 #include <q3vbox.h>
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
 #include <kdialogbase.h>

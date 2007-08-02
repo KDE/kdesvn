@@ -25,7 +25,7 @@
 #include "src/svnqt/status.hpp"
 #include "src/svnqt/client.hpp"
 
-#include <klistview.h>
+#include <k3listview.h>
 #include <kurl.h>
 #include <ktrader.h>
 #include <qmap.h>
@@ -59,7 +59,7 @@ namespace svn {
 /**
 @author Rajko Albrecht
 */
-class kdesvnfilelist : public KListView,public ItemDisplay
+class kdesvnfilelist : public K3ListView,public ItemDisplay
 {
     Q_OBJECT
     friend class FileListViewItem;
@@ -67,7 +67,7 @@ public:
     kdesvnfilelist(KActionCollection*,QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
 
-    virtual bool openURL( const KURL &url,bool noReinit=false );
+    virtual bool openURL( const KUrl &url,bool noReinit=false );
     virtual SvnItem*SelectedOrMain();
     virtual SvnItem*Selected();
     virtual void SelectionList(SvnItemList*target);
@@ -133,7 +133,7 @@ protected:
 
     void dispDummy();
     void reinitItems(FileListViewItem*_item = 0);
-    KURL::List selectedUrls();
+    KUrl::List selectedUrls();
 
     virtual void contentsMouseMoveEvent( QMouseEvent *e );
     virtual void contentsMousePressEvent(QMouseEvent*e);
@@ -162,7 +162,7 @@ protected slots:
     virtual void slotItemDoubleClicked(Q3ListViewItem*);
     virtual void slotImportIntoCurrent(bool);
     virtual void slotImportDirsIntoCurrent();
-    virtual void slotImportIntoDir(const KURL&,const QString&,bool);
+    virtual void slotImportIntoDir(const KUrl&,const QString&,bool);
 
     /* subversion slots */
     virtual void slotChangeToRepository();
@@ -188,7 +188,7 @@ signals:
     void changeCaption(const QString&);
     void sigShowPopup(const QString&,QWidget**);
     void sigUrlOpend(bool);
-    void sigSwitchUrl(const KURL&);
+    void sigSwitchUrl(const KUrl&);
     void sigUrlChanged(const QString&);
 
 public slots:

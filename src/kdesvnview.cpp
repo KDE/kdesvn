@@ -73,7 +73,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     m_treeSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_treeSplitter->sizePolicy().hasHeightForWidth() ) );
 
     // just for testing - get filled with a real widget
-    KListView * _listview = new KListView(m_treeSplitter);
+    K3ListView * _listview = new K3ListView(m_treeSplitter);
     _listview->addColumn("Name");
     m_flist=new kdesvnfilelist(m_Collection,m_treeSplitter);
 #else
@@ -92,7 +92,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
     connect(m_flist,SIGNAL(sigShowPopup(const QString&,QWidget**)),this,SLOT(slotDispPopup(const QString&,QWidget**)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
-    connect(m_flist,SIGNAL(sigSwitchUrl(const KURL&)),this,SIGNAL(sigSwitchUrl(const KURL&)));
+    connect(m_flist,SIGNAL(sigSwitchUrl(const KUrl&)),this,SIGNAL(sigSwitchUrl(const KUrl&)));
     connect(m_flist,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
     connect(this,SIGNAL(sigMakeBaseDirs()),m_flist,SLOT(slotMkBaseDirs()));
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
@@ -146,14 +146,14 @@ QString kdesvnView::currentURL()
 
 bool kdesvnView::openURL(QString url)
 {
-    return openURL(KURL(url));
+    return openURL(KUrl(url));
 }
 
-bool kdesvnView::openURL(const KURL& url)
+bool kdesvnView::openURL(const KUrl& url)
 {
     /* transform of url must be done in part! otherwise we will run into different troubles! */
     m_currentURL = "";
-    KURL _url;
+    KUrl _url;
     bool open = false;
     _url = url;
     if (_url.isLocalFile()) {
@@ -174,7 +174,7 @@ bool kdesvnView::openURL(const KURL& url)
         }
     }
     m_LogWindow->setText("");
-    slotSetTitle(url.prettyURL());
+    slotSetTitle(url.prettyUrl());
     if (m_flist->openURL(url)) {
         slotOnURL(i18n("Repository opened"));
         m_currentURL=url.url();
@@ -262,16 +262,16 @@ void kdesvnView::slotCreateRepo()
     bool createdirs;
     QString path = ptr->targetDir();
     closeMe();
-    kdDebug()<<"Creating "<<path << endl;
+    kDebug()<<"Creating "<<path << endl;
     try {
         _rep->CreateOpen(path,ptr->fsType(),ptr->disableFsync(),
             !ptr->keepLogs(),ptr->compat13());
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
-        kdDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;
+        kDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;
         ok = false;
     }
-    kdDebug()<<"Creating "<<path << " done " << endl;
+    kDebug()<<"Creating "<<path << " done " << endl;
     createdirs = ptr->createMain();
     delete dlg;
     delete _rep;
@@ -315,7 +315,7 @@ void kdesvnView::slotHotcopy()
         slotAppendLog(i18n("Hotcopy finished."));
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
-        kdDebug()<<"Hotcopy of "<< src << " failed "<<e.msg() << endl;
+        kDebug()<<"Hotcopy of "<< src << " failed "<<e.msg() << endl;
     }
 }
 
@@ -342,7 +342,7 @@ void kdesvnView::slotLoaddump()
         _rep.Open(ptr->repository());
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
-        kdDebug()<<"Open "<<ptr->repository() << " failed "<<e.msg() << endl;
+        kDebug()<<"Open "<<ptr->repository() << " failed "<<e.msg() << endl;
         return ;
     }
 
@@ -365,7 +365,7 @@ void kdesvnView::slotLoaddump()
         slotAppendLog(i18n("Loading dump finished."));
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
-        kdDebug()<<"Load dump into "<<ptr->repository() << " failed "<<e.msg() << endl;
+        kDebug()<<"Load dump into "<<ptr->repository() << " failed "<<e.msg() << endl;
     }
 }
 
@@ -406,7 +406,7 @@ void kdesvnView::slotDumpRepo()
         _rep->Open(re);
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
-        kdDebug()<<"Open "<<re << " failed "<<e.msg() << endl;
+        kDebug()<<"Open "<<re << " failed "<<e.msg() << endl;
         delete _rep;
         return ;
     }
@@ -417,7 +417,7 @@ void kdesvnView::slotDumpRepo()
         slotAppendLog(i18n("Dump finished."));
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
-        kdDebug()<<"Dump "<<out << " failed "<<e.msg() << endl;
+        kDebug()<<"Dump "<<out << " failed "<<e.msg() << endl;
     }
     delete _rep;
 }

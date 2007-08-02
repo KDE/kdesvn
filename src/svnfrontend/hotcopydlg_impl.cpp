@@ -49,7 +49,7 @@ bool HotcopyDlg_impl::cleanLogs()const
 
 QString HotcopyDlg_impl::checkPath(const QString&_p)const
 {
-    KURL u = _p;
+    KUrl u = _p;
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

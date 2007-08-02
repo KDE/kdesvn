@@ -40,7 +40,7 @@ SET(KDE_MIN_VERSION "3.5.0")
 MACRO_ENSURE_VERSION(${KDE_MIN_VERSION} ${KDEVERSION} VERSION_OK)
 
 IF(VERSION_OK)
-    SET(ACTION_MENU "X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)")
+    SET(ACTION_MENU "X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KUrl::List)")
 ELSE(VERSION_OK)
     SET(ACTION_MENU "Actions=Update;Commit;Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename;Tree")
 ENDIF(VERSION_OK)

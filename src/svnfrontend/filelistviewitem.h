@@ -21,7 +21,7 @@
 #define FILELISTVIEWITEM_H
 
 #include "svnitem.h"
-#include <klistview.h>
+#include <k3listview.h>
 #include <qdatetime.h>
 #include <q3ptrlist.h>
 //Added by qt3to4:
@@ -36,7 +36,7 @@ class SvnActions;
 /**
 @author Rajko Albrecht
 */
-class FileListViewItem : public KListViewItem,public SvnItem
+class FileListViewItem : public K3ListViewItem,public SvnItem
 {
     friend class kdesvnfilelist;
 public:

@@ -43,7 +43,7 @@ class KDialog;
 class KDialogBase;
 class QDialog;
 class CContextListener;
-class KProcess;
+class K3Process;
 class SvnActionsData;
 class CheckModifiedThread;
 class CheckUpdatesThread;
@@ -139,7 +139,7 @@ public:
 
     QString makeMkdir(const QString&);
     bool makeMkdir(const QStringList&,const QString&);
-    bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
+    bool isLocalWorkingCopy(const KUrl&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
     bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
@@ -154,10 +154,10 @@ public:
     void getaddedItems(const QString&path,svn::StatusEntries&target);
 
     bool makeCopy(const QString&,const QString&,const svn::Revision&rev);
-    bool makeCopy(const KURL::List&,const QString&,const svn::Revision&rev);
+    bool makeCopy(const KUrl::List&,const QString&,const svn::Revision&rev);
 
     bool makeMove(const QString&,const QString&,bool);
-    bool makeMove(const KURL::List&,const QString&,bool);
+    bool makeMove(const KUrl::List&,const QString&,bool);
 
     virtual bool makeCleanup(const QString&);
 
@@ -215,11 +215,11 @@ signals:
     void sigGotourl(const QString&);
 
 protected slots:
-    virtual void wroteStdin(KProcess*);
-    virtual void procClosed(KProcess*);
+    virtual void wroteStdin(K3Process*);
+    virtual void procClosed(K3Process*);
     virtual void checkModthread();
     virtual void checkUpdateThread();
-    virtual void receivedStderr(KProcess*,char*,int);
+    virtual void receivedStderr(K3Process*,char*,int);
 };
 
 #endif

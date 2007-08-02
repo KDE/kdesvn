@@ -24,7 +24,7 @@
 #include "fronthelpers/cursorstack.h"
 #include "fronthelpers/widgetblockstack.h"
 
-#include <klistview.h>
+#include <k3listview.h>
 #include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
@@ -32,9 +32,9 @@
 #include <kinputdialog.h>
 #include <kmessagebox.h>
 #include <kdialogbase.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <ktextbrowser.h>
-#include <klistviewsearchline.h>
+#include <k3listviewsearchline.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -52,11 +52,11 @@
 #define COL_AUT 3
 #define COL_LINE 4
 
-class BlameDisplayItem:public KListViewItem
+class BlameDisplayItem:public K3ListViewItem
 {
 public:
-    BlameDisplayItem(KListView*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
-    BlameDisplayItem(KListView*,BlameDisplayItem*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
+    BlameDisplayItem(K3ListView*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
+    BlameDisplayItem(K3ListView*,BlameDisplayItem*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
     virtual ~BlameDisplayItem(){}
     virtual int compare(Q3ListViewItem *i, int col, bool ascending)const;
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
@@ -76,14 +76,14 @@ protected:
     BlameDisplay_impl*cb;
 };
 
-BlameDisplayItem::BlameDisplayItem(KListView*lv,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
-    : KListViewItem(lv),m_Content(al),m_disp(disp),cb(_c)
+BlameDisplayItem::BlameDisplayItem(K3ListView*lv,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
+    : K3ListViewItem(lv),m_Content(al),m_disp(disp),cb(_c)
 {
     display();
 }
 
-BlameDisplayItem::BlameDisplayItem(KListView*lv,BlameDisplayItem*it,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
-    : KListViewItem(lv,it),m_Content(al),m_disp(disp),cb(_c)
+BlameDisplayItem::BlameDisplayItem(K3ListView*lv,BlameDisplayItem*it,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
+    : K3ListViewItem(lv,it),m_Content(al),m_disp(disp),cb(_c)
 {
     display();
 }
@@ -93,9 +93,9 @@ BlameDisplayItem::BlameDisplayItem(KListView*lv,BlameDisplayItem*it,const svn::A
 int BlameDisplayItem::width (const QFontMetrics & fm, const Q3ListView * lv, int c ) const
 {
     if (c == COL_LINE) {
-        return KListViewItem::width(QFontMetrics(KGlobalSettings::fixedFont()),lv,c)+2*BORDER;
+        return K3ListViewItem::width(QFontMetrics(KGlobalSettings::fixedFont()),lv,c)+2*BORDER;
     }
-    return KListViewItem::width(fm,lv,c)+2*BORDER;
+    return K3ListViewItem::width(fm,lv,c)+2*BORDER;
 }
 
 void BlameDisplayItem::display()
@@ -132,8 +132,8 @@ int BlameDisplayItem::compare(Q3ListViewItem *item, int col, bool ascending)cons
 
 void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
-    if (alignment & (AlignTop || AlignBottom) == 0)
-        alignment |= AlignVCenter;
+    if (alignment & (Qt::AlignTop || Qt::AlignBottom) == 0)
+        alignment |= Qt::AlignVCenter;
 
     /* don't copy string */
     const QString & str = text(column);;
@@ -320,7 +320,7 @@ void BlameDisplay_impl::slotGoLine()
     }
 }
 
-void BlameDisplay_impl::slotContextMenuRequested(KListView*,Q3ListViewItem*item, const QPoint&pos)
+void BlameDisplay_impl::slotContextMenuRequested(K3ListView*,Q3ListViewItem*item, const QPoint&pos)
 {
     if (item==0||item->rtti()!=1000) return;
     BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);

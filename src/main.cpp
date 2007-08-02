@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     KApplication app;
 
     // see if we are starting with session management
-    if (app.isRestored())
+    if (app.isSessionRestored())
     {
         RESTORE(kdesvn);
     }
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
         else
         {
             if (QString(args->arg(0))==QString("exec")) {
-                kdDebug()<<"Execute a command" << endl;
+                kDebug()<<"Execute a command" << endl;
                 CommandLine cl(args);
                 return cl.exec();
             } else {

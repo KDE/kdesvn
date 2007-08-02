@@ -46,14 +46,14 @@ svn::Revision CheckoutInfo_impl::toRevision()
 
 QString CheckoutInfo_impl::reposURL()
 {
-    KURL uri(m_UrlEdit->url());
+    KUrl uri(m_UrlEdit->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
     if (proto=="file"&&!m_UrlEdit->url().startsWith("ksvn+file:")) {
         uri.setProtocol("");
     } else {
         uri.setProtocol(proto);
     }
-    return uri.prettyURL();
+    return uri.prettyUrl();
 }
 
 QString CheckoutInfo_impl::targetDir()
@@ -87,7 +87,7 @@ void CheckoutInfo_impl::setTargetUrl(const QString&what)
 
 void CheckoutInfo_impl::setStartUrl(const QString&what)
 {
-    KURL uri(what);
+    KUrl uri(what);
     if (uri.protocol()=="file") {
         if (what.startsWith("file:")) {
             uri.setProtocol("ksvn+file");
@@ -97,7 +97,7 @@ void CheckoutInfo_impl::setStartUrl(const QString&what)
     } else {
         uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
     }
-    m_UrlEdit->setURL(uri.prettyURL());
+    m_UrlEdit->setURL(uri.prettyUrl());
 }
 
 void CheckoutInfo_impl::disableForce(bool how)

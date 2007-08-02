@@ -42,12 +42,12 @@
 #include <kurlrequesterdlg.h>
 #include <khelpmenu.h>
 #include <kmenubar.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kactionclasses.h>
 #include <kmessagebox.h>
 #include <kstdaccel.h>
 #include <kaction.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kstandarddirs.h>
 #include <kbookmarkmanager.h>
 #include <kbookmarkmenu.h>
@@ -68,7 +68,7 @@ kdesvn::kdesvn()
     m_part = 0;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
-    kdDebug()<<"Using test rc file in " << TESTING_RC << endl;
+    kDebug()<<"Using test rc file in " << TESTING_RC << endl;
     // I hate this crashhandler in development
     KCrash::setCrashHandler(0);
 #else
@@ -103,7 +103,7 @@ kdesvn::kdesvn()
 
     if (factory)
     {
-        kdDebug()<<"Name: " << factory->className()<<endl;
+        kDebug()<<"Name: " << factory->className()<<endl;
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
         m_part = static_cast<KParts::ReadOnlyPart *>(factory->create(this,
@@ -177,7 +177,7 @@ kdesvn::~kdesvn()
 {
 }
 
-void kdesvn::load(const KURL& url)
+void kdesvn::load(const KUrl& url)
 {
     if (m_part) {
         bool ret = m_part->openURL(url);
@@ -187,14 +187,14 @@ void kdesvn::load(const KURL& url)
             rac = (KRecentFilesAction*)ac;
         }
         if (!ret) {
-            changeStatusbar(i18n("Could not open url %1").arg(url.prettyURL()));
+            changeStatusbar(i18n("Could not open url %1").arg(url.prettyUrl()));
             if (rac) {
                 rac->removeURL(url);
             }
         } else {
             resetStatusBar();
             if (rac) {
-                rac->addURL(url);
+                rac->addUrl(url);
             }
         }
         if (rac) {
@@ -206,13 +206,13 @@ void kdesvn::load(const KURL& url)
 void kdesvn::setupActions()
 {
     KAction*ac;
-    KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    KStdAction::openNew(this,SLOT(fileNew()),actionCollection());
-    ac = KStdAction::close(this,SLOT(fileClose()),actionCollection());
+    KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
+    KStandardAction::openNew(this,SLOT(fileNew()),actionCollection());
+    ac = KStandardAction::close(this,SLOT(fileClose()),actionCollection());
     ac->setEnabled(getMemberList()->count()>1);
-    KStdAction::quit(kapp, SLOT(quit()), actionCollection());
+    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 
-    KRecentFilesAction*rac = KStdAction::openRecent(this,SLOT(load(const KURL&)),actionCollection());
+    KRecentFilesAction*rac = KStandardAction::openRecent(this,SLOT(load(const KUrl&)),actionCollection());
     if (rac)
     {
         rac->setMaxItems(8);
@@ -220,10 +220,10 @@ void kdesvn::setupActions()
         rac->setText(i18n("Recent opened URLs"));
     }
 
-    KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
-    KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
+    KStandardAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
+    KStandardAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 
-    m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
+    m_statusbarAction = KStandardAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
 
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"),KShortcut(),
@@ -262,9 +262,9 @@ void kdesvn::saveProperties(KConfig *config)
     if (!m_part) return;
     if (!m_part->url().isEmpty()) {
 #if KDE_IS_VERSION(3,1,3)
-        config->writePathEntry("lastURL", m_part->url().prettyURL());
+        config->writePathEntry("lastURL", m_part->url().prettyUrl());
 #else
-        config->writeEntry("lastURL", m_part->url().prettyURL());
+        config->writeEntry("lastURL", m_part->url().prettyUrl());
 #endif
     }
 }
@@ -279,7 +279,7 @@ void kdesvn::readProperties(KConfig *config)
     QString url = config->readPathEntry("lastURL");
 
     if (!url.isEmpty() && m_part)
-        m_part->openURL(KURL(url));
+        m_part->openURL(KUrl(url));
 }
 
 void kdesvn::fileNew()
@@ -295,7 +295,7 @@ void kdesvn::fileNew()
 
 void kdesvn::fileOpen()
 {
-    KURL url = UrlDlg::getURL(this);
+    KUrl url = UrlDlg::getURL(this);
     if (!url.isEmpty())
         load(url);
 }
@@ -320,7 +320,7 @@ void kdesvn::openBookmarkURL (const QString &_url)
 QString kdesvn::currentURL () const
 {
     if (!m_part) return "";
-    return m_part->url().prettyURL();
+    return m_part->url().prettyUrl();
 }
 
 void kdesvn::enableClose(bool how)
@@ -356,7 +356,7 @@ void kdesvn::optionsConfigureToolbars()
 #endif
 
     // use the standard toolbar editor
-    KEditToolbar dlg(factory());
+    KEditToolBar dlg(factory());
     connect(&dlg, SIGNAL(newToolbarConfig()),
             this, SLOT(applyNewToolbarConfig()));
     dlg.exec();
@@ -399,9 +399,9 @@ bool kdesvn::queryExit()
     if (m_part) {
         KConfigGroup cs(KGlobal::config(),"startup");
 #if KDE_IS_VERSION(3,1,3)
-        cs.writePathEntry("lastURL", m_part->url().prettyURL());
+        cs.writePathEntry("lastURL", m_part->url().prettyUrl());
 #else
-        cs.writeEntry("lastURL", m_part->url().prettyURL());
+        cs.writeEntry("lastURL", m_part->url().prettyUrl());
 #endif
     }
     return KParts::MainWindow::queryExit();
@@ -420,7 +420,7 @@ void kdesvn::checkReload()
     QString url = cs.readPathEntry("lastURL");
 
     if (!url.isEmpty() && m_part)
-        load(KURL(url));
+        load(KUrl(url));
 }
 
 

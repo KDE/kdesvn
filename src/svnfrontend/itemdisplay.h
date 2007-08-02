@@ -44,7 +44,7 @@ public:
     virtual SvnItem*Selected()=0;
     virtual void SelectionList(Q3PtrList<SvnItem>*)=0;
     virtual const QString&baseUri()const;
-    virtual bool openURL( const KURL &url,bool noReinit=false )=0;
+    virtual bool openURL( const KUrl &url,bool noReinit=false )=0;
     virtual SvnItem*SelectedOrMain()=0;
     virtual bool isNetworked()const;
     virtual const QString&lastError()const;

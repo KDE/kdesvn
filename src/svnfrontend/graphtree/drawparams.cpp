@@ -352,7 +352,7 @@ bool RectDrawing::drawField(QPainter* p, int f, DrawParams* dp)
 
   QRect r = _rect;
 
-  if (0) kdDebug(90100) << "DrawField: Rect " << r.x() << "/" << r.y()
+  if (0) kDebug(90100) << "DrawField: Rect " << r.x() << "/" << r.y()
 		   << " - " << r.width() << "x" << r.height() << endl;
 
   int h = _fontHeight;
@@ -512,7 +512,7 @@ bool RectDrawing::drawField(QPainter* p, int f, DrawParams* dp)
   // width of text and pixmap to be drawn
   int w = pixW + _fm->width(name);
 
-  if (0) kdDebug(90100) << "  For '" << name << "': Unused " << unused
+  if (0) kDebug(90100) << "  For '" << name << "': Unused " << unused
 		   << ", StrW " << w << ", Width " << width << endl;
 
   // if we have limited space at 1st line:
@@ -656,7 +656,7 @@ bool RectDrawing::drawField(QPainter* p, int f, DrawParams* dp)
     }
 
 
-    if (0) kdDebug(90100) << "  Drawing '" << name << "' at "
+    if (0) kDebug(90100) << "  Drawing '" << name << "' at "
 		     << x+pixW << "/" << y << endl;
 
     p->drawText( x+pixW, y,

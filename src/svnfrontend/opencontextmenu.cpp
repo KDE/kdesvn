@@ -25,7 +25,7 @@
 #include <Q3PopupMenu>
 #include <Q3CString>
 
-OpenContextmenu::OpenContextmenu(const KURL&aPath,const KTrader::OfferList&aList,QWidget* parent, const char* name)
+OpenContextmenu::OpenContextmenu(const KUrl&aPath,const KTrader::OfferList&aList,QWidget* parent, const char* name)
     : Q3PopupMenu(parent, name),m_Path(aPath),m_List(aList)
 {
     setup();
@@ -78,7 +78,7 @@ void OpenContextmenu::slotRunService()
 
 void OpenContextmenu::slotOpenWith()
 {
-    KURL::List lst;
+    KUrl::List lst;
     lst.append(m_Path);
     KRun::displayOpenWithDialog(lst);
 }

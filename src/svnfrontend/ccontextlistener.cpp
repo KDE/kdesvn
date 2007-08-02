@@ -25,9 +25,9 @@
 #include "src/ksvnwidgets/pwstorage.h"
 
 #include <klocale.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kinputdialog.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
 
@@ -257,7 +257,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 
 bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 {
-    kdDebug()<<"CContextListener::contextSslClientCertPrompt "
+    kDebug()<<"CContextListener::contextSslClientCertPrompt "
         << certFile << endl;
     emit waitShow(true);
     QString afile = KFileDialog::getOpenFileName(QString::null,

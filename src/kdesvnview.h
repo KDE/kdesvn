@@ -31,7 +31,7 @@
 #include <kparts/part.h>
 
 class QPainter;
-class KURL;
+class KUrl;
 class kdesvnfilelist;
 class KdeSvnDirList;
 class Q3VBoxLayout;
@@ -79,7 +79,7 @@ public:
     /**
      * Random 'set' function
      */
-    virtual bool openURL(const KURL& url);
+    virtual bool openURL(const KUrl& url);
 
     /* repositorylistener methods */
     virtual void sendWarning(const QString&);
@@ -98,7 +98,7 @@ signals:
     void signalChangeCaption(const QString&);
 
     void sigShowPopup(const QString&,QWidget**);
-    void sigSwitchUrl(const KURL&);
+    void sigSwitchUrl(const KUrl&);
     void setWindowCaption(const QString&);
     void sigUrlChanged(const QString&);
     void sigMakeBaseDirs();

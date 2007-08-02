@@ -24,7 +24,7 @@
 
 #include <kapplication.h>
 #include <klocale.h>
-#include <kwin.h>
+#include <kwindowsystem.h>
 #include <qtimer.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
@@ -38,13 +38,14 @@
 #include <kprogress.h>
 #include <kdebug.h>
 #include <ktextbrowser.h>
+#include <kiconloader.h>
 
 StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
     ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false),
     cstack(0)
 {
-    KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
+    KWindowSystem::setIcons(winId(), qApp->windowIcon().pixmap(IconSize(K3Icon::Desktop),IconSize(K3Icon::Desktop)), qApp->windowIcon().pixmap(IconSize(K3Icon::Small),IconSize(K3Icon::Small)));
     m_lastLogLines = 0;
     m_lastLog = "";
 
@@ -53,7 +54,7 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     showButton(KDialogBase::Close, false);
     mCancelText = actionButton(KDialogBase::Cancel)->text();
 
-    Q3Frame* mainWidget = plainPage();
+    QFrame* mainWidget = plainPage();
     layout = new Q3VBoxLayout(mainWidget, 10);
     mLabel = new QLabel(text, mainWidget);
     layout->addWidget(mLabel);
@@ -110,12 +111,12 @@ void StopDlg::slotAutoShow()
         hasDialogs = true;
     }
     if (hasDialogs) {
-        kdDebug()<<"Hide me! (" << caption() << ")" << endl;
+        kDebug()<<"Hide me! (" << caption() << ")" << endl;
         hide();
     }
     if (mShown||mWait||hasDialogs) {
         if (mWait) {
-            //kdDebug() << "Waiting for show"<<endl;
+            //kDebug() << "Waiting for show"<<endl;
             mShowTimer->start(m_MinDuration, true);
         }
         mShowTimer->start(m_MinDuration, true);
@@ -163,7 +164,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
 {
     ++m_lastLogLines;
     if (!m_LogWindow) {
-        Q3Frame* mainWidget = plainPage();
+        QFrame* mainWidget = plainPage();
         m_LogWindow = new KTextBrowser(mainWidget);
         layout->addWidget(m_LogWindow);
         m_LogWindow->show();

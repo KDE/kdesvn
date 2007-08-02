@@ -35,7 +35,7 @@ namespace svn {
 }
 
 class KTempFile;
-class KProcess;
+class K3Process;
 class RevisionTree;
 class GraphTreeLabel;
 class GraphViewTip;
@@ -54,7 +54,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(QObject*,svn::Client*,QWidget * parent = 0, const char * name = 0, WFlags f = 0);
+    RevGraphView(QObject*,svn::Client*,QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0);
     virtual ~RevGraphView();
 
     void showText(const QString&s);
@@ -102,8 +102,8 @@ public slots:
     virtual void slotClientException(const QString&what);
 
 protected slots:
-    virtual void readDotOutput(KProcess *   proc,char *   buffer,int   buflen);
-    virtual void dotExit(KProcess*);
+    virtual void readDotOutput(K3Process *   proc,char *   buffer,int   buflen);
+    virtual void dotExit(K3Process*);
 
 protected:
     Q3Canvas*m_Canvas;
@@ -113,7 +113,7 @@ protected:
     QObject*m_Listener;
     KTempFile*dotTmpFile;
     QString dotOutput;
-    KProcess*renderProcess;
+    K3Process*renderProcess;
     trevTree m_Tree;
     QColor getBgColor(const QString&nodeName)const;
     bool isStart(const QString&nodeName)const;

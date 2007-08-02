@@ -23,7 +23,7 @@
 #include <kdialogbase.h>
 #include <kurl.h>
 
-class KURLRequester;
+class KUrlRequester;
 
 /**
 @author Rajko Albrecht
@@ -34,11 +34,11 @@ Q_OBJECT
 public:
     UrlDlg(QWidget *parent = 0, const char *name = 0);
     ~UrlDlg();
-    KURL selectedURL();
-    static KURL getURL(QWidget*parent=0);
+    KUrl selectedURL();
+    static KUrl getURL(QWidget*parent=0);
 protected:
     virtual void init_dlg();
-    KURLRequester*urlRequester_;
+    KUrlRequester*urlRequester_;
 protected slots:
     virtual void accept();
     virtual void slotTextChanged(const QString&);

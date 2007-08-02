@@ -25,11 +25,11 @@
 #include "../stopdlg.h"
 #include "src/svnqt/client.hpp"
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
 #include <ktempfile.h>
 #include <ktempdir.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <klocale.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
@@ -82,7 +82,7 @@ void GraphViewTip::maybeTip( const QPoint & pos)
     }
 }
 
-RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name, WFlags f)
+RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name, Qt::WFlags f)
  : Q3CanvasView(parent,name,f)
 {
     m_Canvas = 0L;
@@ -168,12 +168,12 @@ void RevGraphView::endInsert()
     viewport()->setUpdatesEnabled(true);
 }
 
-void RevGraphView::readDotOutput(KProcess*,char *   buffer,int   buflen)
+void RevGraphView::readDotOutput(K3Process*,char *   buffer,int   buflen)
 {
     dotOutput+=QString::fromLocal8Bit(buffer, buflen);
 }
 
-void RevGraphView::dotExit(KProcess*p)
+void RevGraphView::dotExit(K3Process*p)
 {
     if (p!=renderProcess)return;
     // remove line breaks when lines to long
@@ -213,7 +213,7 @@ void RevGraphView::dotExit(KProcess*p)
             continue;
         }
         if ((cmd != "node") && (cmd != "edge")) {
-            kdWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
+            kWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
                 << dotTmpFile->name() << ":" << lineno << ")" << endl;
             continue;
         }
@@ -497,14 +497,14 @@ void RevGraphView::dumpRevtree()
         }
     }
     *stream << "}\n"<<flush;
-    renderProcess = new KProcess();
+    renderProcess = new K3Process();
     renderProcess->setEnvironment("LANG","C");
     *renderProcess << "dot";
     *renderProcess << dotTmpFile->name() << "-Tplain";
-    connect(renderProcess,SIGNAL(processExited(KProcess*)),this,SLOT(dotExit(KProcess*)));
-    connect(renderProcess,SIGNAL(receivedStdout(KProcess*,char*,int)),
-        this,SLOT(readDotOutput(KProcess*,char*,int)) );
-    if (!renderProcess->start(KProcess::NotifyOnExit,KProcess::Stdout)) {
+    connect(renderProcess,SIGNAL(processExited(K3Process*)),this,SLOT(dotExit(K3Process*)));
+    connect(renderProcess,SIGNAL(receivedStdout(K3Process*,char*,int)),
+        this,SLOT(readDotOutput(K3Process*,char*,int)) );
+    if (!renderProcess->start(K3Process::NotifyOnExit,K3Process::Stdout)) {
         QString arguments;
         for (unsigned c=0;c<renderProcess->args().count();++c) {
             arguments+=QString(" %1").arg(renderProcess->args()[c]);

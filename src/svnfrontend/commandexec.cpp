@@ -30,7 +30,7 @@
 #include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "src/svnfrontend/copymoveview_impl.h"
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kglobal.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
@@ -219,11 +219,11 @@ int CommandExec::exec()
     QString tmp,query,proto,v;
     QMap<QString,QString> q;
 
-    KURL tmpurl;
+    KUrl tmpurl;
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
-        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyURL());
+        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyUrl());
         query = tmpurl.query();
         q = m_pCPart->args->url(j).queryItems();
         if (q.find("rev")!=q.end()) {

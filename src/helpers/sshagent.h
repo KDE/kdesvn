@@ -25,7 +25,7 @@
 #include <qstring.h>
 #include <qstringlist.h>
 
-class KProcess;
+class K3Process;
 
 
 class SshAgent : public QObject
@@ -45,9 +45,9 @@ public:
     QString authSock() const { return m_authSock; }
 
 private slots:
-    void slotProcessExited(KProcess*);
-    void slotReceivedStdout(KProcess* proc, char* buffer, int buflen);
-    void slotReceivedStderr(KProcess* proc, char* buffer, int buflen);
+    void slotProcessExited(K3Process*);
+    void slotReceivedStdout(K3Process* proc, char* buffer, int buflen);
+    void slotReceivedStderr(K3Process* proc, char* buffer, int buflen);
 
 private:
     bool startSshAgent();

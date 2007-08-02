@@ -68,7 +68,7 @@ int LoadDmpDlg_impl::uuidAction()const
  */
 QString LoadDmpDlg_impl::dumpFile()const
 {
-    KURL u = m_Dumpfile->url();
+    KUrl u = m_Dumpfile->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);
@@ -82,7 +82,7 @@ QString LoadDmpDlg_impl::dumpFile()const
  */
 QString LoadDmpDlg_impl::repository()const
 {
-    KURL u = m_Repository->url();
+    KUrl u = m_Repository->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

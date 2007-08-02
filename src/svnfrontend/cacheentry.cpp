@@ -62,27 +62,27 @@ bool cacheEntry::find(QStringList&what,svn::StatusEntries&t)const
     std::map<QString,cacheEntry>::const_iterator it;
     it = m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
-       // kdDebug()<<what[0]<< " not found in tree"<<endl;
+       // kDebug()<<what[0]<< " not found in tree"<<endl;
         return false;
     }
-   // kdDebug()<<what[0]<< " found in tree"<<endl;
+   // kDebug()<<what[0]<< " found in tree"<<endl;
     if (what.count()==1) {
-       // kdDebug()<<"Seems last item in stage "<< m_key << " - " << what[0] << endl;
+       // kDebug()<<"Seems last item in stage "<< m_key << " - " << what[0] << endl;
 //         if (it->second.m_key == what[0]) {
             /* the item itself */
             if (it->second.isValid()) {
                 t.append(it->second.content());
             }
             /* and now check valid subitems */
-           // kdDebug()<<"Appending valid subs"<<endl;
+           // kDebug()<<"Appending valid subs"<<endl;
             it->second.appendValidSub(t);
-           // kdDebug()<<"Appended valid subs"<<endl;
+           // kDebug()<<"Appended valid subs"<<endl;
             return true;
 //        }
         return false;
     }
     what.erase(what.begin());
-   // kdDebug()<<"Searching "<<what<<" in next stage"<<endl;
+   // kDebug()<<"Searching "<<what<<" in next stage"<<endl;
     return it->second.find(what,t);
 }
 
@@ -108,7 +108,7 @@ bool cacheEntry::findSingleValid(QStringList&what,svn::Status&t)const
     if (what.count()==0) {
         return false;
     }
-   // kdDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
+   // kDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
     std::map<QString,cacheEntry>::const_iterator it;
     it = m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
@@ -127,7 +127,7 @@ bool cacheEntry::findSingleValid(QStringList&what,bool check_valid_subs)const
     if (what.count()==0) {
         return false;
     }
-   // kdDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
+   // kDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
     std::map<QString,cacheEntry>::const_iterator it;
     it = m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
@@ -151,10 +151,10 @@ void cacheEntry::appendValidSub(svn::StatusEntries&t)const
     std::map<QString,cacheEntry>::const_iterator it;
     for (it=m_subMap.begin();it!=m_subMap.end();++it) {
         if (it->second.isValid()) {
-           // kdDebug()<<"Appending single sub"<<endl;
+           // kDebug()<<"Appending single sub"<<endl;
             t.append(it->second.content());
         } else {
-           // kdDebug()<<it->second.key()<<" isnt valid"<<endl;
+           // kDebug()<<it->second.key()<<" isnt valid"<<endl;
         }
         it->second.appendValidSub(t);
     }
@@ -222,24 +222,24 @@ void cacheEntry::insertKey(QStringList&what,const svn::Status&st)
     if (what.count()==0) {
         return;
     }
-   // kdDebug()<<"inserting "<<what<< "into " << m_key << endl;
+   // kDebug()<<"inserting "<<what<< "into " << m_key << endl;
     QString m = what[0];
 
     std::map<QString,cacheEntry>::iterator it=m_subMap.find(m);
     if (it==m_subMap.end()) {
         m_subMap[m].m_key=m;
         if (what.count()==1) {
-           // kdDebug()<<"Inserting valid key "<< m << endl;
+           // kDebug()<<"Inserting valid key "<< m << endl;
             m_subMap[m].setValidStatus(m,st);
-           // kdDebug()<<"Inserting valid key done"<< endl;
+           // kDebug()<<"Inserting valid key done"<< endl;
             return;
         }
-       // kdDebug()<<"inserting tree key " << m << endl;
-       // kdDebug()<<"inserting tree key done " << m_subMap[m].m_key << endl;
+       // kDebug()<<"inserting tree key " << m << endl;
+       // kDebug()<<"inserting tree key done " << m_subMap[m].m_key << endl;
     }
 
     what.erase(what.begin());
-   // kdDebug()<<"Go into loop"<<endl;
+   // kDebug()<<"Go into loop"<<endl;
     m_subMap[m].insertKey(what,st);
 }
 
@@ -265,12 +265,12 @@ void cacheEntry::dump_tree(int level)const
 itemCache::itemCache()
     :m_contentMap()
 {
-   // kdDebug()<<"itemCache::itemCache()"<<endl;
+   // kDebug()<<"itemCache::itemCache()"<<endl;
 }
 
 itemCache::~itemCache()
 {
-   // kdDebug()<<"itemCache::~itemCache()"<<endl;
+   // kDebug()<<"itemCache::~itemCache()"<<endl;
 }
 
 void itemCache::clear()
@@ -299,7 +299,7 @@ void itemCache::setContent(const svn::StatusEntries&dlist)
 
 void itemCache::insertKey(const svn::Status&st)
 {
-   // kdDebug()<<"Inserting "<<st.path()<<endl;
+   // kDebug()<<"Inserting "<<st.path()<<endl;
     QStringList _keys = QStringList::split("/",st.path());
     if (_keys.count()==0) {
         return;
@@ -352,7 +352,7 @@ bool itemCache::find(const QString&_what,svn::StatusEntries&dlist)const
         return false;
     }
     what.erase(what.begin());
-   // kdDebug()<<"itemCache::find(const QString&_what,svn::StatusEntries&dlist) "<<what<<endl;
+   // kDebug()<<"itemCache::find(const QString&_what,svn::StatusEntries&dlist) "<<what<<endl;
     return it->second.find(what,dlist);
 }
 

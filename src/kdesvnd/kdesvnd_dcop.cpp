@@ -38,7 +38,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kfiledialog.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 
 #include <qdir.h>
 //Added by qt3to4:
@@ -111,7 +111,7 @@ IListener::~IListener()
 
 kdesvnd_dcop::kdesvnd_dcop(const Q3CString&name) : KDEDModule(name)
 {
-    KGlobal::locale()->insertCatalogue("kdesvn");
+    KGlobal::locale()->insertCatalog("kdesvn");
     m_Listener=new IListener(this);
 }
 
@@ -120,7 +120,7 @@ kdesvnd_dcop::~kdesvnd_dcop()
     delete m_Listener;
 }
 
-QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
+QStringList kdesvnd_dcop::getActionMenu (const KUrl::List list)
 {
     QStringList result;
     Kdesvnsettings::self()->readConfig();
@@ -158,7 +158,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
         if (itemIsRepository) {
             result << "Log"
                     << "Info";
-            if (isRepository(list[0].upURL())) {
+            if (isRepository(list[0].upUrl())) {
                 result << "Blame"
                         << "Rename";
             }
@@ -179,7 +179,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
         << "Rename"
         << "Revert";
 
-    KURL url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
+    KUrl url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
 
     QFileInfo f(url.path());
     if (f.isFile()) {
@@ -196,7 +196,7 @@ QStringList kdesvnd_dcop::getActionMenu (const KURL::List list)
 
 QStringList kdesvnd_dcop::getSingleActionMenu(Q3CString what)
 {
-    KURL::List l; l.append(KURL(what));
+    KUrl::List l; l.append(KUrl(what));
     return getActionMenu(l);
 }
 
@@ -287,7 +287,7 @@ QStringList kdesvnd_dcop::get_logmsg(QMap<QString,QString> list)
     return res;
 }
 
-QString kdesvnd_dcop::cleanUrl(const KURL&url)
+QString kdesvnd_dcop::cleanUrl(const KUrl&url)
 {
     QString cleanpath = url.path();
     while (cleanpath.endsWith("/")) {
@@ -297,11 +297,11 @@ QString kdesvnd_dcop::cleanUrl(const KURL&url)
 }
 
 /* just simple name check of course - no network acess! */
-bool kdesvnd_dcop::isRepository(const KURL&url)
+bool kdesvnd_dcop::isRepository(const KUrl&url)
 {
-    kdDebug()<<"kdesvnd_dcop::isRepository Url zum repo check: "<<url<<endl;
+    kDebug()<<"kdesvnd_dcop::isRepository Url zum repo check: "<<url<<endl;
     QString proto = svn::Url::transformProtokoll(url.protocol());
-    kdDebug()<<"kdesvnd_dcop::isRepository Protokoll: " << proto << endl;
+    kDebug()<<"kdesvnd_dcop::isRepository Protokoll: " << proto << endl;
     if (proto=="file") {
         // local access - may a repository
         svn::Revision where = svn::Revision::HEAD;
@@ -309,7 +309,7 @@ bool kdesvnd_dcop::isRepository(const KURL&url)
         try {
             m_Listener->m_Svnclient->status("file://"+cleanUrl(url),false,false,false,false,where);
         } catch (svn::ClientException e) {
-            kdDebug()<< e.msg()<<endl;
+            kDebug()<< e.msg()<<endl;
             return false;
         }
         return true;
@@ -318,10 +318,10 @@ bool kdesvnd_dcop::isRepository(const KURL&url)
     }
 }
 
-bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
+bool kdesvnd_dcop::isWorkingCopy(const KUrl&_url,QString&base)
 {
     base = "";
-    KURL url = _url;
+    KUrl url = _url;
     url = helpers::KTranslateUrl::translateSystemUrl(url);
 
     if (url.isEmpty()||!url.isLocalFile()||url.protocol()!="file") return false;
@@ -331,7 +331,7 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     try {
         e = m_Listener->m_Svnclient->info(cleanUrl(url),false,rev,peg);
     } catch (svn::ClientException e) {
-        kdDebug()<< e.msg()<<endl;
+        kDebug()<< e.msg()<<endl;
         return false;
     }
     base=e[0].url();

@@ -35,7 +35,7 @@ public:
     virtual QWidget*realWidget();
     virtual SvnItem*Selected();
     virtual void SelectionList(Q3PtrList<SvnItem>*);
-    virtual bool openURL( const KURL &url,bool noReinit=false );
+    virtual bool openURL( const KUrl &url,bool noReinit=false );
     virtual SvnItem*SelectedOrMain();
 };
 

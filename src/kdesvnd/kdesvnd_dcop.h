@@ -44,9 +44,9 @@ public:
     virtual ~kdesvnd_dcop();
 
 protected:
-    bool isWorkingCopy(const KURL&url,QString&base);
-    bool isRepository(const KURL&url);
-    static QString cleanUrl(const KURL&url);
+    bool isWorkingCopy(const KUrl&url,QString&base);
+    bool isRepository(const KUrl&url);
+    static QString cleanUrl(const KUrl&url);
     IListener*m_Listener;
 
 k_dcop:
@@ -70,7 +70,7 @@ k_dcop:
     QStringList get_logmsg(QMap<QString,QString>);
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
     QStringList get_sslclientcertpw(QString);
-    QStringList getActionMenu(KURL::List);
+    QStringList getActionMenu(KUrl::List);
     QStringList getSingleActionMenu(Q3CString);
 };
 #endif

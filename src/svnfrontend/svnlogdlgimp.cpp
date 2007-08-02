@@ -23,12 +23,12 @@
 #include "helpers/sub2qt.h"
 #include "svnactions.h"
 
-#include <klistview.h>
+#include <k3listview.h>
 #include <ktextbrowser.h>
 #include <kpushbutton.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
 #include <ktabwidget.h>
@@ -48,16 +48,16 @@
 
 const char* SvnLogDlgImp::groupName = "log_dialog_size";
 
-class LogListViewItem:public KListViewItem
+class LogListViewItem:public K3ListViewItem
 {
 public:
-    LogListViewItem (KListView *parent,const svn::LogEntry&);
+    LogListViewItem (K3ListView *parent,const svn::LogEntry&);
     virtual int compare( Q3ListViewItem* i, int col, bool ascending ) const;
 
     static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
     const QString&message()const;
     svn_revnum_t rev()const{return _revision;}
-    void showChangedEntries(KListView*);
+    void showChangedEntries(K3ListView*);
     unsigned int numChangedEntries(){return changedPaths.count();}
     void setChangedEntries(const svn::LogEntry&);
     void setRealName(const QString&_n){_realName=_n;}
@@ -78,10 +78,10 @@ const int LogListViewItem::COL_AUTHOR = 1;
 const int LogListViewItem::COL_DATE = 3;
 const int LogListViewItem::COL_MSG = 4;
 
-class LogChangePathItem:public KListViewItem
+class LogChangePathItem:public K3ListViewItem
 {
 public:
-    LogChangePathItem(KListView*parent,const svn::LogChangePathEntry&);
+    LogChangePathItem(K3ListView*parent,const svn::LogChangePathEntry&);
     virtual ~LogChangePathItem(){}
 
     QChar action() const{return _action;}
@@ -95,8 +95,8 @@ protected:
     svn_revnum_t _revision;
 };
 
-LogListViewItem::LogListViewItem(KListView*_parent,const svn::LogEntry&_entry)
-    : KListViewItem(_parent),_realName(QString::null)
+LogListViewItem::LogListViewItem(K3ListView*_parent,const svn::LogEntry&_entry)
+    : K3ListViewItem(_parent),_realName(QString::null)
 {
     setMultiLinesEnabled(false);
     _revision=_entry.revision;
@@ -132,7 +132,7 @@ int LogListViewItem::compare( Q3ListViewItem* item, int col, bool ) const
     return text(col).localeAwareCompare(k->text(col));
 }
 
-void LogListViewItem::showChangedEntries(KListView*where)
+void LogListViewItem::showChangedEntries(K3ListView*where)
 {
     if (!where)return;
     where->clear();
@@ -144,8 +144,8 @@ void LogListViewItem::showChangedEntries(KListView*where)
     }
 }
 
-LogChangePathItem::LogChangePathItem(KListView*parent,const svn::LogChangePathEntry&e)
-    :KListViewItem(parent)
+LogChangePathItem::LogChangePathItem(K3ListView*parent,const svn::LogChangePathEntry&e)
+    :K3ListViewItem(parent)
 {
     _action = QChar(e.action);
     setText(0,_action);
@@ -170,14 +170,14 @@ bool LogListViewItem::copiedFrom(QString&_n,long&_rev)const
         if (changedPaths[i].action=='A' &&
             !changedPaths[i].copyFromPath.isEmpty() &&
             isParent(changedPaths[i].path,_realName)) {
-            kdDebug()<<_realName<< " - " << changedPaths[i].path << endl;
+            kDebug()<<_realName<< " - " << changedPaths[i].path << endl;
             QString tmpPath = _realName;
             QString r = _realName.mid(changedPaths[i].path.length());
             _n=changedPaths[i].copyFromPath;
             _n+=r;
             _rev = changedPaths[i].copyFromRevision;
-            kdDebug()<<"Found switch from  "<< changedPaths[i].copyFromPath << " rev "<<changedPaths[i].copyFromRevision<<endl;
-            kdDebug()<<"Found switch from  "<< _n << " rev "<<_rev<<endl;
+            kDebug()<<"Found switch from  "<< changedPaths[i].copyFromPath << " rev "<<changedPaths[i].copyFromRevision<<endl;
+            kDebug()<<"Found switch from  "<< _n << " rev "<<_rev<<endl;
             return true;
         }
     }
@@ -232,7 +232,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     if (!_log) return;
     _base = root;
     m_Entries = _log;
-    kdDebug()<<"What: "<<what << endl;
+    kDebug()<<"What: "<<what << endl;
     if (!what.isEmpty()){
         setCaption(i18n("SVN Log of %1").arg(what));
     } else {
@@ -432,7 +432,7 @@ void SvnLogDlgImp::slotListEntries()
 void SvnLogDlgImp::keyPressEvent (QKeyEvent * e)
 {
     if (!e) return;
-    if (e->text().isEmpty()&&e->key()==Key_Control) {
+    if (e->text().isEmpty()&&e->key()==Qt::Key_Control) {
         m_ControlKeyDown = true;
     }
     SvnLogDialogData::keyPressEvent(e);
@@ -472,7 +472,7 @@ void SvnLogDlgImp::slotSingleContext(Q3ListViewItem*_item, const QPoint & e, int
     LogChangePathItem* item = static_cast<LogChangePathItem*>(_item);
     LogListViewItem* k = static_cast<LogListViewItem*>(m_LogView->selectedItem());
     if (!k) {
-        kdDebug()<<"????"<<endl;
+        kDebug()<<"????"<<endl;
         return;
     }
     Q3PopupMenu popup;
@@ -520,7 +520,7 @@ void SvnLogDlgImp::slotSingleDoubleClicked(Q3ListViewItem*_item)
     LogChangePathItem* item = static_cast<LogChangePathItem*>(_item);
     LogListViewItem* k = static_cast<LogListViewItem*>(m_LogView->selectedItem());
     if (!k) {
-        kdDebug()<<"????"<<endl;
+        kDebug()<<"????"<<endl;
         return;
     }
     QString name = item->path();

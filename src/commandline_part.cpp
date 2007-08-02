@@ -26,9 +26,9 @@
 commandline_part::commandline_part(QObject *parent, const char *name,KCmdLineArgs *args)
  : QObject(parent, name)
 {
-    KGlobal::locale()->insertCatalogue("kdesvn");
+    KGlobal::locale()->insertCatalog("kdesvn");
     KInstance * inst = kdesvnPartFactory::instance();
-    KGlobal::locale()->insertCatalogue(inst->instanceName());
+    KGlobal::locale()->insertCatalog(inst->instanceName());
     KGlobal::dirs()->addResourceType( inst->instanceName() + "data",
         KStandardDirs::kde_default("data")+ QString::fromLatin1( inst->instanceName() ) + '/' );
 

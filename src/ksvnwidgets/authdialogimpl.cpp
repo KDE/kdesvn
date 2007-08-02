@@ -20,7 +20,7 @@
 #include "authdialogimpl.h"
 #include "src/settings/kdesvnsettings.h"
 
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <qcheckbox.h>

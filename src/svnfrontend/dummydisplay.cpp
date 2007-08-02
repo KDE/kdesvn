@@ -45,7 +45,7 @@ void DummyDisplay::SelectionList(Q3PtrList<SvnItem>*)
 {
 }
 
-bool DummyDisplay::openURL( const KURL &,bool)
+bool DummyDisplay::openURL( const KUrl &,bool)
 {
     return false;
 }

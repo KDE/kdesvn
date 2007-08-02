@@ -38,7 +38,7 @@ class Q3HBoxLayout;
 class Q3GridLayout;
 class QSpacerItem;
 class QLabel;
-class KListView;
+class K3ListView;
 class Q3ListViewItem;
 class KPushButton;
 class FileListViewItem;
@@ -64,7 +64,7 @@ public:
     void changedItems(tPropEntries&toSet,Q3ValueList<QString>&toDelete);
 
 protected:
-    KListView* m_PropertiesListview;
+    K3ListView* m_PropertiesListview;
     KPushButton* m_AddButton;
     KPushButton* m_DeleteButton;
     KPushButton* m_ModifyButton;

@@ -72,20 +72,20 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
         stream << list;
         if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg(QMap<QString,QString>)",params,replyType,reply)) {
             msg = "Communication with dcop failed";
-            kdWarning()<<msg<<endl;
+            kWarning()<<msg<<endl;
             return false;
         }
     } else {
         if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
             msg = "Communication with dcop failed";
-            kdWarning()<<msg<<endl;
+            kWarning()<<msg<<endl;
             return false;
         }
     }
 
     if (replyType!="QStringList") {
         msg = "Wrong reply type";
-        kdWarning()<<msg<<endl;
+        kWarning()<<msg<<endl;
         return false;
     }
     QDataStream stream2(reply,QIODevice::ReadOnly);
@@ -93,7 +93,7 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
     stream2>>lt;
     if (lt.count()!=1) {
         msg = "Wrong or missing log (may cancel pressed).";
-        kdDebug()<< msg << endl;
+        kDebug()<< msg << endl;
         return false;
     }
     msg = lt[0];
@@ -306,14 +306,14 @@ void KioListener::contextNotify (const char * path,
         default:
             break;
     }
-    par->setMetaData(QString::number(counter()).rightJustify( 10,'0' )+ "path" , QString::FROMUTF8( path ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "action", QString::number( action ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "kind", QString::number( kind ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "mime_t", QString::FROMUTF8( mime_type ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "content", QString::number( content_state ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "prop", QString::number( prop_state ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "rev", QString::number( revision ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "string", userstring );
+    par->setMetaData(QString::number(counter()).rightJustified( 10,'0' )+ "path" , QString::FROMUTF8( path ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "action", QString::number( action ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "kind", QString::number( kind ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "mime_t", QString::FROMUTF8( mime_type ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "content", QString::number( content_state ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "prop", QString::number( prop_state ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "rev", QString::number( revision ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "string", userstring );
     incCounter();
 }
 
@@ -346,11 +346,11 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
     if (!par->dcopClient()->call("kded","kdesvnd",
         "get_sslaccept(QString,QString,QString,QString,QString,QString)",
         params,replyType,reply)) {
-        kdWarning()<<"Communication with dcop failed"<<endl;
+        kWarning()<<"Communication with dcop failed"<<endl;
         return DONT_ACCEPT;
     }
     if (replyType!="int") {
-        kdWarning()<<"Wrong reply type"<<endl;
+        kWarning()<<"Wrong reply type"<<endl;
         return DONT_ACCEPT;
     }
     QDataStream stream2(reply,QIODevice::ReadOnly);
@@ -385,11 +385,11 @@ bool KioListener::contextSslClientCertPrompt (QString & certFile)
     if (!par->dcopClient()->call("kded","kdesvnd",
         "get_sslclientcertfile()",
         params,replyType,reply)) {
-        kdWarning()<<"Communication with dcop failed"<<endl;
+        kWarning()<<"Communication with dcop failed"<<endl;
         return false;
     }
     if (replyType!="QString") {
-        kdWarning()<<"Wrong reply type"<<endl;
+        kWarning()<<"Wrong reply type"<<endl;
         return false;
     }
     QDataStream stream2(reply,QIODevice::ReadOnly);
@@ -427,18 +427,18 @@ bool KioListener::contextGetLogin (const QString & realm,
     stream << username;
 
     if (!par->dcopClient()->call("kded","kdesvnd","get_login(QString,QString)",params,replyType,reply)) {
-        kdWarning()<<"Communication with dcop failed"<<endl;
+        kWarning()<<"Communication with dcop failed"<<endl;
         return false;
     }
     if (replyType!="QStringList") {
-        kdWarning()<<"Wrong reply type"<<endl;
+        kWarning()<<"Wrong reply type"<<endl;
         return false;
     }
     QDataStream stream2(reply,QIODevice::ReadOnly);
     QStringList lt;
     stream2>>lt;
     if (lt.count()!=3) {
-        kdDebug()<<"Wrong or missing auth list (may cancel pressed)." << endl;
+        kDebug()<<"Wrong or missing auth list (may cancel pressed)." << endl;
         return false;
     }
     username = lt[0];

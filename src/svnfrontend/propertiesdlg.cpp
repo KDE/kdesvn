@@ -30,7 +30,7 @@
 #include <Q3ValueList>
 #include <QPixmap>
 #include <Q3VBoxLayout>
-#include <klistview.h>
+#include <k3listview.h>
 #include <kpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
@@ -40,12 +40,12 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 
-class PropertyListViewItem:public KListViewItem
+class PropertyListViewItem:public K3ListViewItem
 {
     friend class PropertiesDlg;
 public:
-    PropertyListViewItem(KListView *parent,const QString&,const QString&);
-    PropertyListViewItem(KListView *parent);
+    PropertyListViewItem(K3ListView *parent,const QString&,const QString&);
+    PropertyListViewItem(K3ListView *parent);
     virtual ~PropertyListViewItem();
 
     const QString&startName()const{return m_startName;}
@@ -66,15 +66,15 @@ protected:
     bool m_deleted;
 };
 
-PropertyListViewItem::PropertyListViewItem(KListView *parent,const QString&aName,const QString&aValue)
-    : KListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(K3ListView *parent,const QString&aName,const QString&aValue)
+    : K3ListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
 {
     setText(0,startName());
     setText(1,startValue());
 }
 
-PropertyListViewItem::PropertyListViewItem(KListView *parent)
-    : KListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(K3ListView *parent)
+    : K3ListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
 {
     setText(0,startName());
     setText(1,startValue());
@@ -102,7 +102,7 @@ bool PropertyListViewItem::different()const
 void PropertyListViewItem::deleteIt()
 {
     m_deleted = true;
-    setPixmap(0,KGlobal::iconLoader()->loadIcon("cancel",KIcon::Desktop,16));
+    setPixmap(0,KIconLoader::global()->loadIcon("cancel",KIcon::Desktop,16));
 }
 
 void PropertyListViewItem::unDeleteIt()
@@ -121,7 +121,7 @@ void PropertyListViewItem::unDeleteIt()
 PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
     :
     KDialogBase(parent,name,modal,i18n("Modify properties"),Ok|Cancel/*|Help|User1|User2*/, Ok,
-      true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
+      true/*, KStandardGuiItem::add(),KStandardGuiItem::remove() */),
       m_Item(which),m_changed(false),
       m_Client(aClient),m_Rev(aRev)
 {
@@ -130,12 +130,12 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
     QWidget * m = makeMainWidget();
     PropertiesDlgLayout = new Q3HBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
 
-    m_PropertiesListview = new KListView(m, "m_PropertiesListview" );
+    m_PropertiesListview = new K3ListView(m, "m_PropertiesListview" );
     m_PropertiesListview->addColumn( i18n( "Properties" ) );
     m_PropertiesListview->addColumn( i18n( "Value" ) );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
     m_PropertiesListview->setShowSortIndicator( TRUE );
-    //m_PropertiesListview->setDefaultRenameAction( KListView::Accept );
+    //m_PropertiesListview->setDefaultRenameAction( K3ListView::Accept );
 #if 0
     m_PropertiesListview->setItemsRenameable(true);
     m_PropertiesListview->setRenameable(0,true);
@@ -269,7 +269,7 @@ void PropertiesDlg::initItem()
  */
 int PropertiesDlg::exec()
 {
-    kdDebug()<<"Exec"<<endl;
+    kDebug()<<"Exec"<<endl;
     return KDialogBase::exec();
 }
 

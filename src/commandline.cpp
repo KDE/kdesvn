@@ -30,6 +30,7 @@
 #include <q3vbox.h>
 //Added by qt3to4:
 #include <Q3CString>
+#include <ktoolinvocation.h>
 
 class CommandLineData
 {
@@ -69,7 +70,7 @@ int CommandLine::exec()
     KLibFactory *factory = KLibLoader::self()->factory("libkdesvnpart");
     if (factory) {
         if (Q3CString(factory->className())!="cFactory") {
-            kdDebug()<<"wrong factory"<<endl;
+            kDebug()<<"wrong factory"<<endl;
             return -1;
         }
         cFactory*cfa = static_cast<cFactory*>(factory);
@@ -82,5 +83,5 @@ int CommandLine::exec()
 
 void CommandLineData::displayHelp()
 {
-    kapp->invokeHelp("kdesvn-commandline","kdesvn");
+    KToolInvocation::invokeHelp("kdesvn-commandline","kdesvn");
 }

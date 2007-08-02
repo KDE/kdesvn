@@ -33,10 +33,10 @@ class OpenContextmenu : public Q3PopupMenu
 {
 Q_OBJECT
 public:
-    OpenContextmenu(const KURL&,const KTrader::OfferList&,QWidget* parent, const char* name);
+    OpenContextmenu(const KUrl&,const KTrader::OfferList&,QWidget* parent, const char* name);
     virtual ~OpenContextmenu();
 protected:
-    KURL m_Path;
+    KUrl m_Path;
     KTrader::OfferList m_List;
     QMap<int,KService::Ptr> m_mapPopup;
 

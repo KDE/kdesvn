@@ -40,7 +40,7 @@ static KCmdLineOptions options[] =
 
 int main (int argc, char *argv[])
 {
-    KLocale::setMainCatalogue("kdesvn");
+    KLocale::setMainCatalog("kdesvn");
     KAboutData aboutdata("kdesvnd", I18N_NOOP("KDE"),
                 version, description,
                 KAboutData::License_GPL, "(C) %{YEAR}, Rajko Albrecht");
@@ -52,16 +52,16 @@ int main (int argc, char *argv[])
 
     if (!KUniqueApplication::start())
     {
-        kdDebug() << "kdesvnd is already running!" << endl;
+        kDebug() << "kdesvnd is already running!" << endl;
         return (0);
     }
 
     KUniqueApplication app;
-    kdDebug() << "starting kdesvnd_dcop " << endl;
+    kDebug() << "starting kdesvnd_dcop " << endl;
     // This app is started automatically, no need for session management
     app.disableSessionManagement();
     kdesvnd_dcop *service = new kdesvnd_dcop;
-    kdDebug() << "starting kdesvnd_dcop " << endl;
+    kDebug() << "starting kdesvnd_dcop " << endl;
     return app.exec();
 
 }

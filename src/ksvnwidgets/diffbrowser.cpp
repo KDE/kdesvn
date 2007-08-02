@@ -98,19 +98,19 @@ void DiffBrowser::saveDiff()
 
 void DiffBrowser::keyPressEvent(QKeyEvent*ev)
 {
-    if ( ev->key() == Key_Return) {
+    if ( ev->key() == Qt::Key_Return) {
         ev->ignore();
         return;
     }
-    if (ev->key() == Key_F3) {
-        if (ev->state() == ShiftButton) {
+    if (ev->key() == Qt::Key_F3) {
+        if (ev->state() == Qt::ShiftModifier) {
             searchagainback_slot();
         } else {
             searchagain_slot();
         }
-    } else if (ev->key()==Key_F && ev->state() == ControlButton) {
+    } else if (ev->key()==Qt::Key_F && ev->state() == Qt::ControlModifier) {
         startSearch();
-    } else if (ev->key()==Key_S && ev->state() == ControlButton) {
+    } else if (ev->key()==Qt::Key_S && ev->state() == Qt::ControlModifier) {
         saveDiff();
     } else {
         KTextBrowser::keyPressEvent(ev);
@@ -168,7 +168,7 @@ void DiffBrowser::doSearch(const QString&to_find_string,bool case_sensitive,bool
                     _parent,
                     i18n("End of document reached.\n"\
                             "Continue from the beginning?"),
-                            i18n("Find"),KStdGuiItem::cont(),i18n("Stop"));
+                            i18n("Find"),KStandardGuiItem::cont(),i18n("Stop"));
             if (query == KMessageBox::Yes){
                 line = 0;
                 col = 0;
@@ -181,7 +181,7 @@ void DiffBrowser::doSearch(const QString&to_find_string,bool case_sensitive,bool
                     _parent,
                     i18n("Beginning of document reached.\n"\
                             "Continue from the end?"),
-                            i18n("Find"),KStdGuiItem::cont(),i18n("Stop"));
+                            i18n("Find"),KStandardGuiItem::cont(),i18n("Stop"));
             if (query == KMessageBox::Yes){
                 line = lines()-1;
                 QString string = text(line);

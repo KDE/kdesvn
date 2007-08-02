@@ -50,7 +50,7 @@
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <ktempdir.h>
 #include <ktempfile.h>
 #include <kdialogbase.h>
@@ -59,7 +59,7 @@
 #include <kio/job.h>
 #include <kdebug.h>
 #include <kconfig.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <kio/netaccess.h>
 #include <kstandarddirs.h>
 #include <ktrader.h>
@@ -85,6 +85,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <qpointer.h>
+#include <ktoolinvocation.h>
 
 
 // wait not longer than 10 seconds for a thread
@@ -106,7 +107,7 @@ public:
             m_DiffDialog->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
             delete m_DiffDialog;
         }
-        QMap<KProcess*,QStringList>::iterator it;
+        QMap<K3Process*,QStringList>::iterator it;
         for (it=m_tempfilelist.begin();it!=m_tempfilelist.end();++it) {
             for (QStringList::iterator it2 = (*it).begin();
                 it2 != (*it).end();++it2) {
@@ -148,8 +149,8 @@ public:
     helpers::itemCache m_conflictCache;
     helpers::itemCache m_repoLockCache;
 
-    QMap<KProcess*,QStringList> m_tempfilelist;
-    QMap<KProcess*,QStringList> m_tempdirlist;
+    QMap<K3Process*,QStringList> m_tempfilelist;
+    QMap<K3Process*,QStringList> m_tempdirlist;
 
     QTimer m_ThreadCheckTimer;
     QTimer m_UpdateCheckTimer;
@@ -305,24 +306,24 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         }
         peg = svn::Revision::UNDEFINED;
     } else {
-        KURL _uri = what;
+        KUrl _uri = what;
         QString prot = svn::Url::transformProtokoll(_uri.protocol());
         _uri.setProtocol(prot);
-        url = _uri.prettyURL();
+        url = _uri.prettyUrl();
         peg = _rev;
     }
-    kdDebug()<<"Getting single info " << url << endl;
+    kDebug()<<"Getting single info " << url << endl;
     svn::InfoEntries e;
 
     try {
         e = (m_Data->m_Svnclient->info(url,false,_rev,peg));
     } catch (svn::ClientException ce) {
-        kdDebug()<<ce.msg() << endl;
+        kDebug()<<ce.msg() << endl;
         emit clientException(ce.msg());
         return false;
     }
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
-        kdDebug()<<"No info found" << endl;
+        kDebug()<<"No info found" << endl;
         emit clientException(i18n("Got no info."));
         return false;
     }
@@ -338,7 +339,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
     }
     QString reposRoot = info.reposRoot();
 
-    kdDebug()<<"Logs for "<<reposRoot<<endl;
+    kDebug()<<"Logs for "<<reposRoot<<endl;
     QWidget*disp;
     KDialogBase dlg(m_Data->m_ParentList->realWidget(),"historylist",true,i18n("History of %1").arg(info.url().mid(reposRoot.length())),
         KDialogBase::Ok,
@@ -458,10 +459,10 @@ QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,con
         StopDlg sdlg(m_Data->m_SvnContext,dlgp,
             0,"Content cat",i18n("Getting content - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        kdDebug()<<"Start cat"<<endl;
+        kDebug()<<"Start cat"<<endl;
         QTime el; el.start();
         content = m_Data->m_Svnclient->cat(p,start,peg);
-        kdDebug()<<"End cat "<< el.elapsed() << endl;
+        kDebug()<<"End cat "<< el.elapsed() << endl;
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
     } catch (...) {
@@ -494,7 +495,7 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
 
     if (it!=offers.end()) {
         content.setAutoDelete(false);
-        KRun::run(**it,KURL(content.name()),true);
+        KRun::run(**it,KUrl(content.name()),true);
         return;
     }
     KTextBrowser*ptr;
@@ -914,16 +915,16 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
 }
 
 /*!
-    \fn SvnActions::wroteStdin(KProcess*)
+    \fn SvnActions::wroteStdin(K3Process*)
  */
-void SvnActions::wroteStdin(KProcess*proc)
+void SvnActions::wroteStdin(K3Process*proc)
 {
     if (!proc) return;
-    kdDebug()<<"void SvnActions::wroteStdin(KProcess*proc)"<<endl;
+    kDebug()<<"void SvnActions::wroteStdin(K3Process*proc)"<<endl;
     proc->closeStdin();
 }
 
-void SvnActions::receivedStderr(KProcess*proc,char*buff,int len)
+void SvnActions::receivedStderr(K3Process*proc,char*buff,int len)
 {
     if (!proc || !buff || len == 0) {
         return;
@@ -932,10 +933,10 @@ void SvnActions::receivedStderr(KProcess*proc,char*buff,int len)
     emit sendNotify(msg);
 }
 
-void SvnActions::procClosed(KProcess*proc)
+void SvnActions::procClosed(K3Process*proc)
 {
     if (!proc) return;
-    QMap<KProcess*,QStringList>::iterator it;
+    QMap<K3Process*,QStringList>::iterator it;
     if ( (it=m_Data->m_tempfilelist.find(proc))!=m_Data->m_tempfilelist.end()) {
         for (QStringList::iterator it2 = (*it).begin();
             it2 != (*it).end();++it2) {
@@ -955,7 +956,7 @@ void SvnActions::procClosed(KProcess*proc)
 
 bool SvnActions::get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p)
 {
-    kdDebug()<<"Downloading "<<what<<endl;
+    kDebug()<<"Downloading "<<what<<endl;
     svn::Revision _peg = peg;
     if (_peg == svn::Revision::UNDEFINED) {
         _peg = rev;
@@ -1042,7 +1043,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     } else {
         second = p2;
     }
-    KProcess*proc = new KProcess();
+    K3Process*proc = new K3Process();
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%1") {
             *proc<<first;
@@ -1052,10 +1053,10 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
             *proc << *it;
         }
     }
-    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-    connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-    connect(proc,SIGNAL(receivedStdout(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::All)) {
+    connect(proc,SIGNAL(processExited(K3Process*)),this,SLOT(procClosed(K3Process*)));
+    connect(proc,SIGNAL(receivedStderr(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
+    connect(proc,SIGNAL(receivedStdout(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
+    if (proc->start(m_Data->runblocked?K3Process::Block:K3Process::NotifyOnExit,K3Process::All)) {
         if (!m_Data->runblocked) {
             if (!isDir) {
                 tfile2.setAutoDelete(false);
@@ -1147,7 +1148,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
-    kdDebug()<<"Non recourse diff"<<endl;
+    kDebug()<<"Non recourse diff"<<endl;
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
@@ -1174,16 +1175,16 @@ void SvnActions::dispDiff(const QByteArray&ex)
 {
     int disp = Kdesvnsettings::use_kompare_for_diff();
     QString what = Kdesvnsettings::external_diff_display();
-    int r = KProcess::Stdin|KProcess::Stderr;
+    int r = K3Process::Stdin|K3Process::Stderr;
     if (disp==1) {
-        KProcess *proc = new KProcess();
+        K3Process *proc = new K3Process();
         *proc << "kompare";
         *proc << "-on";
         *proc << "-";
-        connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
-        connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-        connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-        if (proc->start(KProcess::NotifyOnExit,(KProcess::Communication)r)) {
+        connect(proc,SIGNAL(wroteStdin(K3Process*)),this,SLOT(wroteStdin(K3Process*)));
+        connect(proc,SIGNAL(processExited(K3Process*)),this,SLOT(procClosed(K3Process*)));
+        connect(proc,SIGNAL(receivedStderr(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
+        if (proc->start(K3Process::NotifyOnExit,(K3Process::Communication)r)) {
             proc->writeStdin(ex,ex.size());
             return;
         } else {
@@ -1192,7 +1193,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
         delete proc;
     } else if (disp>1  && (what.find("%1")==-1 || what.find("%2")==-1)) {
         QStringList wlist = QStringList::split(" ",what);
-        KProcess*proc = new KProcess();
+        K3Process*proc = new K3Process();
         bool fname_used = false;
         KTempFile tfile;
         tfile.setAutoDelete(false);
@@ -1210,12 +1211,12 @@ void SvnActions::dispDiff(const QByteArray&ex)
             }
         }
 
-        connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-        connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+        connect(proc,SIGNAL(processExited(K3Process*)),this,SLOT(procClosed(K3Process*)));
+        connect(proc,SIGNAL(receivedStderr(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
         if (!fname_used) {
-            connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
+            connect(proc,SIGNAL(wroteStdin(K3Process*)),this,SLOT(wroteStdin(K3Process*)));
         }
-        if (proc->start(KProcess::NotifyOnExit,fname_used?KProcess::Stderr:(KProcess::Communication)r)) {
+        if (proc->start(K3Process::NotifyOnExit,fname_used?K3Process::Stderr:(K3Process::Communication)r)) {
             if (!fname_used) proc->writeStdin(ex,ex.size());
             else m_Data->m_tempfilelist[proc].append(tfile.name());
             return;
@@ -1233,7 +1234,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
         }
         KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,
                                         "diff_display",false,need_modal,
-                                      KStdGuiItem::saveAs());
+                                      KStandardGuiItem::saveAs());
         if (dlg) {
             QObject::connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(saveDiff()));
             ptr->setText(ex);
@@ -1550,7 +1551,7 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
     }
     if (openIt) {
         if (!_exp) emit sigGotourl(tPath);
-        else kapp->invokeBrowser(tPath);
+        else KToolInvocation::invokeBrowser(tPath);
     }
     EMIT_FINISHED;
     return true;
@@ -1794,7 +1795,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         return;
     }
 
-    KURL url(target);
+    KUrl url(target);
     if (!url.isLocalFile()) {
         emit clientException(i18n("Target for merge must be local!"));
         return;
@@ -1866,7 +1867,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     }
     QString edisp = Kdesvnsettings::external_merge_program();
     QStringList wlist = QStringList::split(" ",edisp);
-    KProcess*proc = new KProcess();
+    K3Process*proc = new K3Process();
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%s1") {
             *proc<<first;
@@ -1878,9 +1879,9 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
             *proc << *it;
         }
     }
-    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-    connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::Stderr)) {
+    connect(proc,SIGNAL(processExited(K3Process*)),this,SLOT(procClosed(K3Process*)));
+    connect(proc,SIGNAL(receivedStderr(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
+    if (proc->start(m_Data->runblocked?K3Process::Block:K3Process::NotifyOnExit,K3Process::Stderr)) {
         if (!m_Data->runblocked) {
             tdir1.setAutoDelete(false);
             tdir2.setAutoDelete(false);
@@ -1943,12 +1944,12 @@ bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
     return true;
 }
 
-bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
+bool SvnActions::makeMove(const KUrl::List&Old,const QString&New,bool force)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        KURL::List::ConstIterator it = Old.begin();
+        KUrl::List::ConstIterator it = Old.begin();
         bool local = false;
         if ((*it).protocol().isEmpty()) {
             local = true;
@@ -1980,14 +1981,14 @@ bool SvnActions::makeCopy(const QString&Old,const QString&New,const svn::Revisio
     return true;
 }
 
-bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revision&rev)
+bool SvnActions::makeCopy(const KUrl::List&Old,const QString&New,const svn::Revision&rev)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        KURL::List::ConstIterator it = Old.begin();
+        KUrl::List::ConstIterator it = Old.begin();
         for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->copy(svn::Path((*it). pathOrURL()),rev,svn::Path(New));
+            m_Data->m_Svnclient->copy(svn::Path((*it). pathOrUrl()),rev,svn::Path(New));
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
@@ -2082,7 +2083,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
     if (rlist.size()==0) {
         if (print_error_box) KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("No unversioned items found."));
     } else {
-        KListView*ptr;
+        K3ListView*ptr;
         KDialogBase * dlg = createDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");
         ptr->addColumn("Item");
         for (unsigned j = 0; j<displist.size();++j) {
@@ -2147,7 +2148,7 @@ bool SvnActions::createModifiedCache(const QString&what)
     stopCheckModThread();
     m_Data->m_Cache.clear();
     m_Data->m_conflictCache.clear();
-    kdDebug()<<"Create cache for " << what << endl;
+    kDebug()<<"Create cache for " << what << endl;
     m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
     m_Data->m_ThreadCheckTimer.start(100,true);
@@ -2161,7 +2162,7 @@ void SvnActions::checkModthread()
         m_Data->m_ThreadCheckTimer.start(100,true);
         return;
     }
-    kdDebug()<<"ModifiedThread seems stopped"<<endl;
+    kDebug()<<"ModifiedThread seems stopped"<<endl;
     for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
         if (m_CThread->getList()[i].isRealVersioned()&& (
             m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
@@ -2191,7 +2192,7 @@ void SvnActions::checkUpdateThread()
         m_Data->m_UpdateCheckTimer.start(100,true);
         return;
     }
-    kdDebug()<<"Updates Thread seems stopped"<<endl;
+    kDebug()<<"Updates Thread seems stopped"<<endl;
 
     bool newer=false;
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
@@ -2400,9 +2401,9 @@ bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&
 }
 
 /*!
-    \fn SvnActions::isLocalWorkingCopy(const KURL&url)
+    \fn SvnActions::isLocalWorkingCopy(const KUrl&url)
  */
-bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
+bool SvnActions::isLocalWorkingCopy(const KUrl&url,QString&_baseUri)
 {
     if (url.isEmpty()||!url.isLocalFile()) return false;
     QString cleanpath = url.path();
@@ -2410,14 +2411,14 @@ bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
         cleanpath.truncate(cleanpath.length()-1);
     }
     _baseUri="";
-    kdDebug()<<"Url: " << url << " - path: " << cleanpath << endl;
+    kDebug()<<"Url: " << url << " - path: " << cleanpath << endl;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
         e = m_Data->m_Svnclient->info(cleanpath,false,rev,peg);
     } catch (svn::ClientException e) {
-        kdDebug()<< e.msg()<< " " << endl;
+        kDebug()<< e.msg()<< " " << endl;
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
         {
             return false;

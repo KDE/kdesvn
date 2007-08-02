@@ -48,7 +48,7 @@ public slots:
     virtual void slotShowCurrentCommit();
 
 protected slots:
-    virtual void slotContextMenuRequested(KListView*,Q3ListViewItem*, const QPoint&);
+    virtual void slotContextMenuRequested(K3ListView*,Q3ListViewItem*, const QPoint&);
     virtual void slotSelectionChanged();
 
 protected:

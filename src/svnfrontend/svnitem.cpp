@@ -52,14 +52,14 @@ public:
     SvnItem_p(const svn::Status&);
     virtual ~SvnItem_p();
     KFileItem*createItem(const svn::Revision&peg);
-    const KURL& kdeName(const svn::Revision&);
+    const KUrl& kdeName(const svn::Revision&);
     KMimeType::Ptr mimeType(bool dir=false);
 
 protected:
     svn::Status m_Stat;
     void init();
     QString m_url,m_full,m_short;
-    KURL m_kdename;
+    KUrl m_kdename;
     QDateTime m_fullDate;
     QString m_infoText;
     KFileItem*m_fitem;
@@ -123,7 +123,7 @@ KMimeType::Ptr SvnItem_p::mimeType(bool dir)
     return mptr;
 }
 
-const KURL& SvnItem_p::kdeName(const svn::Revision&r)
+const KUrl& SvnItem_p::kdeName(const svn::Revision&r)
 {
     isWc = QString::compare(m_Stat.entry().url(),m_Stat.path())!=0;
     QString name;
@@ -139,7 +139,7 @@ const KURL& SvnItem_p::kdeName(const svn::Revision&r)
                 m_kdename.setQuery("?rev="+revstr);
             }
         } else {
-            m_kdename = KURL::fromPathOrURL(m_Stat.path());
+            m_kdename = KUrl::fromPathOrUrl(m_Stat.path());
         }
     }
     return m_kdename;
@@ -331,7 +331,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
                 p = kdesvnPartFactory::instance()->iconLoader()->loadIcon("unknown",KIcon::Desktop,size);
             }
         } else {
-            KURL uri;
+            KUrl uri;
             uri.setPath(fullName());
             p = KMimeType::pixmapForURL(uri,0,KIcon::Desktop,size);
             p = getPixmap(p,size,overlay);
@@ -522,7 +522,7 @@ KFileItem*SvnItem::fileItem()
     return p_Item->createItem(correctPeg());
 }
 
-const KURL&SvnItem::kdeName(const svn::Revision&r)
+const KUrl&SvnItem::kdeName(const svn::Revision&r)
 {
     return p_Item->kdeName(r);
 }

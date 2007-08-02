@@ -40,7 +40,7 @@
 #include <QEvent>
 
 SvnFileTip::SvnFileTip(Q3ScrollView*parent)
-    :  Q3Frame( 0, 0, WStyle_Customize | WStyle_NoBorder | WStyle_Tool | WStyle_StaysOnTop | WX11BypassWM ),
+    :  Q3Frame( 0, 0, Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool | Qt::WStyle_StaysOnTop | WX11BypassWM ),
     m_on( false ),
     m_preview( false ),
     m_filter( false ),
@@ -275,8 +275,8 @@ void SvnFileTip::startDelayed()
         oneItem.append( m_svnitem->fileItem() );
 
         m_previewJob = KIO::filePreview( oneItem, 256, 256, 64, 70, true, true, 0);
-        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem *, const QPixmap & ) ),
-                 this, SLOT( gotPreview( const KFileItem *, const QPixmap & ) ) );
+        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem& , const QPixmap & ) ),
+                 this, SLOT( gotPreview( const KFileItem& , const QPixmap & ) ) );
         connect( m_previewJob, SIGNAL( result( KIO::Job * ) ),
                  this, SLOT( gotPreviewResult() ) );
     }

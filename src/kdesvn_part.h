@@ -31,9 +31,9 @@
 
 class kdesvnView;
 class QPainter;
-class KURL;
+class KUrl;
 class KdesvnBrowserExtension;
-class KAboutApplication;
+class K3AboutApplication;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -67,7 +67,7 @@ signals:
 public slots:
     virtual void slotDispPopup(const QString&,QWidget**target);
     virtual void slotFileProperties();
-    virtual bool openURL(const KURL&);
+    virtual bool openURL(const KUrl&);
     virtual void slotSshAdd();
 
 protected:
@@ -76,7 +76,7 @@ protected:
      */
     virtual bool openFile();
     virtual void setupActions();
-    KAboutApplication* m_aboutDlg;
+    K3AboutApplication* m_aboutDlg;
 
 protected slots:
     virtual void slotLogFollowNodes(bool);

@@ -50,7 +50,7 @@ const int FileListViewItem::COL_IS_LOCKED = 5;
 //const int FileListViewItem::COL_CURRENT_REV = 5;
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
- : KListViewItem(_parent),SvnItem(_stat),
+ : K3ListViewItem(_parent),SvnItem(_stat),
  sortChar(0),
  m_Ksvnfilelist(_parent)
 {
@@ -59,7 +59,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_sta
 }
 
 FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::Status&_stat)
-    : KListViewItem(_parentItem),SvnItem(_stat),
+    : K3ListViewItem(_parentItem),SvnItem(_stat),
     sortChar(0),
     m_Ksvnfilelist(_parent)
 {
@@ -90,7 +90,7 @@ void FileListViewItem::setOpen(bool o)
         }
         m_Ksvnfilelist->setFocus();
     }
-    KListViewItem::setOpen(o);
+    K3ListViewItem::setOpen(o);
 }
 
 FileListViewItem::~FileListViewItem()
@@ -232,7 +232,7 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
 {
     bool colors = Kdesvnsettings::colored_state();
     if (!colors||m_bgColor==NONE) {
-        KListViewItem::paintCell(p,cg,column,width,alignment);
+        K3ListViewItem::paintCell(p,cg,column,width,alignment);
         return;
     }
     QColorGroup _cg = cg;
@@ -266,7 +266,7 @@ void FileListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column,
             _bgColor = Kdesvnsettings::color_need_lock();
             break;
         default:
-            KListViewItem::paintCell(p,cg,column,width,alignment);
+            K3ListViewItem::paintCell(p,cg,column,width,alignment);
             return;
             break;
     }

@@ -35,19 +35,20 @@
 
 #include <kinstance.h>
 #include <kaction.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <kbugreport.h>
 #include <kxmlguifactory.h>
-#include <kaboutapplication.h>
-#include <kapp.h>
+#include <k3aboutapplication.h>
+#include <kapplication.h>
 #include <kconfigdialog.h>
 #include <kaboutdata.h>
 #include <klocale.h>
 
 #include <qcursor.h>
 #include <q3popupmenu.h>
+#include <ktoolinvocation.h>
 
 //K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
 
@@ -64,7 +65,7 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
     : KParts::ReadOnlyPart(parent, name)
 {
     m_aboutDlg = 0;
-    KGlobal::locale()->insertCatalogue("kdesvn");
+    KGlobal::locale()->insertCatalog("kdesvn");
     // we need an instance
     setInstance( kdesvnPartFactory::instance() );
     m_browserExt = new KdesvnBrowserExtension( this );
@@ -80,12 +81,12 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
     // set our XML-UI resource file
 #ifdef TESTING_PARTRC
     setXMLFile(TESTING_PARTRC);
-    kdDebug()<<"Using test rc file in " << TESTING_PARTRC << endl;
+    kDebug()<<"Using test rc file in " << TESTING_PARTRC << endl;
 #else
     setXMLFile("kdesvn_part.rc");
 #endif
     connect(m_view,SIGNAL(sigShowPopup(const QString&,QWidget**)),this,SLOT(slotDispPopup(const QString&,QWidget**)));
-    connect(m_view,SIGNAL(sigSwitchUrl(const KURL&)),this,SLOT(openURL(const KURL&)));
+    connect(m_view,SIGNAL(sigSwitchUrl(const KUrl&)),this,SLOT(openURL(const KUrl&)));
     connect(this,SIGNAL(refreshTree()),m_view,SLOT(refreshCurrentTree()));
     connect(m_view,SIGNAL(setWindowCaption(const QString&)),this,SIGNAL(setWindowCaption(const QString&)));
     connect(m_view,SIGNAL(sigUrlChanged( const QString&)),this,SLOT(slotUrlChanged(const QString&)));
@@ -106,15 +107,15 @@ bool kdesvnPart::openFile()
 {
     m_view->openURL(m_url);
     // just for fun, set the status bar
-    emit setStatusBarText( m_url.prettyURL() );
+    emit setStatusBarText( m_url.prettyUrl() );
 
     return true;
 }
 
-bool kdesvnPart::openURL(const KURL&url)
+bool kdesvnPart::openURL(const KUrl&url)
 {
 
-    KURL _url = helpers::KTranslateUrl::translateSystemUrl(url);
+    KUrl _url = helpers::KTranslateUrl::translateSystemUrl(url);
 
     _url.setProtocol(svn::Url::transformProtokoll(_url.protocol()));
 
@@ -126,7 +127,7 @@ bool kdesvnPart::openURL(const KURL&url)
     bool ret = m_view->openURL(m_url);
     if (ret) {
         emit completed();
-        emit setWindowCaption(url.prettyURL());
+        emit setWindowCaption(url.prettyUrl());
     }
     return ret;
 }
@@ -190,9 +191,9 @@ void kdesvnPart::setupActions()
     toggletemp->setChecked(Kdesvnsettings::hide_unchanged_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotHideUnchanged(bool)));
 
-    kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
+    kDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
-    KAction * t = KStdAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
+    KAction * t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
     t->setText(i18n("&Configure %1...").arg("Kdesvn"));
     if (QString(kapp->instanceName())!=QString("kdesvn")) {
         (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
@@ -265,7 +266,7 @@ void kdesvnPart::slotUseKompare(bool how)
  */
 bool kdesvnPart::closeURL()
 {
-    m_url=KURL();
+    m_url=KUrl();
     m_view->closeMe();
     emit setWindowCaption("");
     return true;
@@ -274,7 +275,7 @@ bool kdesvnPart::closeURL()
 KdesvnBrowserExtension::KdesvnBrowserExtension( kdesvnPart *p )
     : KParts::BrowserExtension( p, "KdesvnBrowserExtension" )
 {
-    KGlobal::locale()->insertCatalogue("kdesvn");
+    KGlobal::locale()->insertCatalog("kdesvn");
 }
 
 KdesvnBrowserExtension::~KdesvnBrowserExtension()
@@ -310,7 +311,7 @@ void kdesvnPart::reportBug()
  */
 void kdesvnPart::showAboutApplication()
 {
-    if (!m_aboutDlg) m_aboutDlg = new KAboutApplication(createAboutData(), (QWidget *)0, (const char *)0, false);
+    if (!m_aboutDlg) m_aboutDlg = new K3AboutApplication(createAboutData(), (QWidget *)0, (const char *)0, false);
     if(m_aboutDlg == 0)
         return;
     if(!m_aboutDlg->isVisible())
@@ -325,7 +326,7 @@ void kdesvnPart::showAboutApplication()
  */
 void kdesvnPart::appHelpActivated()
 {
-    kapp->invokeHelp(QString::null, "kdesvn");
+    KToolInvocation::invokeHelp(QString::null, "kdesvn");
 }
 
 

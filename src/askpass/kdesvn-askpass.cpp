@@ -24,7 +24,7 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 
 #include <iostream>
 static KCmdLineOptions options[] =

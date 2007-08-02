@@ -47,7 +47,7 @@ void Createrepo_impl::fsTypeChanged(int which)
 
 QString Createrepo_impl::targetDir()
 {
-    KURL u = m_ReposPathinput->url();
+    KUrl u = m_ReposPathinput->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

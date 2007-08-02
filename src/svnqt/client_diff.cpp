@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -43,6 +43,7 @@
 #include "svnqt/svnqt_defines.hpp"
 
 #include <qfile.h>
+#include <qstringlist.h>
 
 #include <apr_xlate.h>
 
@@ -87,20 +88,46 @@ namespace svn
       svn_error_clear (svn_io_remove_file (errfileName, pool));
   }
 
+
+  QByteArray
+          Client_impl::diff (const Path & tmpPath, const Path & path,
+                             const Revision & revision1, const Revision & revision2,
+                             const bool recurse, const bool ignoreAncestry,
+                             const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)
+    {
+        return diff(tmpPath,path,path,
+                    revision1,revision2,
+                    recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype,
+                    QStringList());
+    }
+
   QByteArray
   Client_impl::diff (const Path & tmpPath, const Path & path,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
-                const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)
+                const bool noDiffDeleted,const bool ignore_contenttype,
+                    const QStringList&extra) throw (ClientException)
   {
-    return diff(tmpPath,path,path,revision1,revision2,recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype);
+    return diff(tmpPath,path,path,revision1,revision2,recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype,extra);
   }
+
+  QByteArray
+  Client_impl::diff (const Path & tmpPath, const Path & path1,const Path&path2,
+                     const Revision & revision1, const Revision & revision2,
+                     const bool recurse, const bool ignoreAncestry,
+                     const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)
+    {
+        return diff(tmpPath,path1,path2,
+                    revision1,revision2,
+                    recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype,
+                    QStringList());
+    }
 
   QByteArray
   Client_impl::diff (const Path & tmpPath, const Path & path1,const Path&path2,
                 const Revision & revision1, const Revision & revision2,
                 const bool recurse, const bool ignoreAncestry,
-                const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)
+                const bool noDiffDeleted,const bool ignore_contenttype,const QStringList&extra) throw (ClientException)
   {
 
     Pool pool;
@@ -110,7 +137,7 @@ namespace svn
     const char * outfileName = 0L;
     apr_file_t * errfile = 0L;
     const char * errfileName = 0L;
-    apr_array_header_t * options;
+    const apr_array_header_t * options;
     bool working_copy_present = false;
     bool url_is_present = false;
     Revision r1,r2;
@@ -135,7 +162,7 @@ namespace svn
         r2 = working_copy_present?svn_opt_revision_working : svn_opt_revision_head;
     }
     // svn_client_diff needs an options array, even if it is empty
-    options = apr_array_make (pool, 0, 0);
+    options = list2array(extra,pool);
 
     // svn_client_diff needs a temporary file to write diff output to
     error = svn_io_open_unique_file (&outfile, &outfileName,

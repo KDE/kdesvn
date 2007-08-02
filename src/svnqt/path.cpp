@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -85,7 +85,7 @@ namespace svn
         m_path = uri.path();
         m_path.replace("@","%40");
 #if QT_VERSION < 0x040000
-        m_path = uri.protocol()+"://"+(uri.hasUser()?uri.user()+(uri.hasPassword()?":"+uri.hasPassword():"")+"@":"")
+        m_path = uri.protocol()+"://"+(uri.hasUser()?uri.user()+(uri.hasPassword()?":"+uri.password():"")+"@":"")
                 +uri.host()+m_path;
 #else
         m_path = uri.scheme()+"://"+uri.authority()+m_path;

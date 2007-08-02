@@ -1,6 +1,3 @@
-# This spec file was generated using Kpp
-# If you find any problems with this spec file please report
-# the error to ian geiser <geiseri@msoe.edu>
 Summary:   A subversion client for the KDE with KIO integration.
 Name:      kdesvn
 Version:   @VERSION@
@@ -12,8 +9,13 @@ Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
-Requires: kdesvn-svnqt = %{version}
-Obsoletes: kdesvn-kioksvn
+Obsoletes: kdesvn-kioksvn kdesvn-svnqt
+Requires: subversion >= 1.2.0
+BuildPreReq: apr-devel
+BuildPreReq: apr-util-devel
+BuildPreReq: subversion-devel >= 1.2.0
+BuildPreReq: cmake >= 2.4
+BuildPreReq: kdelibs-devel >= 3.4
 
 %description
 Kdesvn is a subversion client for KDE.
@@ -28,28 +30,15 @@ Summary:  A kde-kio integration for subversion based on kdesvn
 %description kiosvn
 KIO integration (KIO::svn) based on kdesvn alternative protocol name.
 
-%package svnqt
-Group:    System Environment/Libraries
-Summary:  Wrapper lib for subversion QT integration.
-Requires: subversion >= 1.2.0
-BuildPreReq: apr-devel
-BuildPreReq: apr-util-devel
-BuildPreReq: subversion-devel >= 1.2.0
-BuildPreReq: cmake >= 2.4
-
-%description svnqt
-Shared lib which contains a QT C++ wrapper for subversion. It is core part
-of kdesvn but is designed to not require KDE so plain QT programs may use
-it.
-
-%package svnqt-devel
+%package devel
 Group:    Development/Libraries
 Summary:  Wrapper lib for subversion QT integration.
 Requires: subversion-devel >= 1.2.0
-Requires: kdesvn-svnqt = %{version}
+Requires: kdesvn = %{version}
+Obsoletes: kdesvn-svnqt-devel
 
-%description svnqt-devel
-Development files for kdesvn-svnqt
+%description devel
+Development files for kdesvn.
 
 %prep
 %setup
@@ -93,14 +82,12 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_libdir}/*/kio_ksvn*
 %{_datadir}/services/ksvn*.protocol
 %{_datadir}/man/man1/*
+%{_libdir}/libsvnqt*.so*
 
 %files kiosvn
 %{_datadir}/services/svn*.protocol
 
-%files svnqt
-%{_libdir}/libsvnqt*.so*
-
-%files svnqt-devel
+%files devel
 %{_libdir}/libsvnqt.la
 %{_includedir}/svnqt/*
 

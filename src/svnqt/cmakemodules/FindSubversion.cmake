@@ -70,8 +70,11 @@ ENDIF (UNIX)
 IF (WIN32)
 
   # search for pathes
-  FIND_PATH (SUBVERSION_INCLUDE_DIR
-    svn_client.h
+  FIND_PATH (SUBVERSION_BIN_DIR svn.exe
+    "$ENV{ProgramFiles}/Subversion/bin"
+  )
+  
+  FIND_PATH (SUBVERSION_INCLUDE_DIR svn_client.h
     "$ENV{ProgramFiles}/Subversion/include"
   )
 

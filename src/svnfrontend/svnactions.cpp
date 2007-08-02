@@ -209,7 +209,6 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
     if (!u1.text().isEmpty()) {
         buttons = buttons|KDialogBase::User1;
     }
-    kdDebug()<<"Modal: "<<modal<<endl;
     KDialogBase * dlg = new KDialogBase(
         modal?KApplication::activeModalWidget():0, // parent
         name, // name
@@ -1093,6 +1092,16 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     QWidget*parent = p?p:m_Data->m_ParentList->realWidget();
+    QStringList extraOptions;
+    if (Kdesvnsettings::diff_ignore_spaces())
+    {
+        extraOptions.append("-b");
+    }
+    if (Kdesvnsettings::diff_ignore_all_white_spaces())
+    {
+        extraOptions.append("-w");
+    }
+
     try {
         StopDlg sdlg(m_Data->m_SvnContext,parent,0,"Diffing",
             i18n("Diffing - hit cancel for abort"));
@@ -1100,7 +1109,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),
             svn::Path(p1),svn::Path(p2),
             r1, r2,
-            true,false,false,ignore_content);
+            true,false,false,ignore_content,extraOptions);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;
@@ -1123,6 +1132,15 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         }
         return;
     }
+    QStringList extraOptions;
+    if (Kdesvnsettings::diff_ignore_spaces())
+    {
+        extraOptions.append("-b");
+    }
+    if (Kdesvnsettings::diff_ignore_all_white_spaces())
+    {
+        extraOptions.append("-w");
+    }
     QByteArray ex;
     KTempDir tdir;
     tdir.setAutoDelete(true);
@@ -1135,7 +1153,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),
             svn::Path(p1),svn::Path(p2),
             r1, r2,
-            false,false,false,ignore_content);
+            false,false,false,ignore_content,extraOptions);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;
@@ -1157,7 +1175,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
     if (disp==1) {
         KProcess *proc = new KProcess();
         *proc << "kompare";
-        *proc << "-o";
+        *proc << "-on";
         *proc << "-";
         connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
         connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));

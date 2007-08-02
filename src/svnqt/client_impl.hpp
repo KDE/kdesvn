@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -43,6 +43,9 @@
 #if defined (_MSC_VER) && _MSC_VER > 1200 && _MSC_VER <= 1310
 #pragma warning (disable: 4290)
 #endif
+
+class QStringList;
+
 namespace svn
 {
   namespace stream {
@@ -473,7 +476,7 @@ namespace svn
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException);
 
-    /**
+   /**
      * Produce diff output which describes the delta between
      * @a path/@a revision1 and @a path/@a revision2. @a path
      * can be either a working-copy path or a URL.
@@ -490,17 +493,30 @@ namespace svn
      * @param recurse whether the operation should be done recursively.
      * @param ignoreAncestry whether the files will be checked for
      * relatedness.
-     * @param noDiffDeleted if true, no diff output will be generated
-     * on deleted files.
+     * @param noDiffDeleted if true, no diff output will be generated on deleted files.
      * @param ignore_contenttype if true generate diff even the items are marked as binaries
+     * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
      * @return delta between the files
      * @exception ClientException
+    */
+    virtual QByteArray
+            diff (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2,
+                const bool recurse, const bool ignoreAncestry,
+                const bool noDiffDeleted,const bool ignore_contenttype,
+                const QStringList&extra)
+            throw (ClientException);
+
+    /**
+     * Same as other diff but extra options always set to empty list.
      */
     virtual QByteArray
-    diff (const Path & tmpPath, const Path & path,
-          const Revision & revision1, const Revision & revision2,
-          const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException);
+            diff (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2,
+                const bool recurse, const bool ignoreAncestry,
+                const bool noDiffDeleted,const bool ignore_contenttype)
+            throw (ClientException);
+
     /**
      * Produce diff output which describes the delta between
      * @a path1/@a revision1 and @a path2/@a revision2. @a path2
@@ -521,14 +537,27 @@ namespace svn
      * relatedness.
      * @param noDiffDeleted if true, no diff output will be generated on deleted files.
      * @param ignore_contenttype if true generate diff even the items are marked as binaries
+     * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
      * @return delta between the files
      * @exception ClientException
      */
     virtual QByteArray
-    diff (const Path & tmpPath, const Path & path1,const Path & path2,
-          const Revision & revision1, const Revision & revision2,
-          const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException);
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,
+                const Revision & revision1, const Revision & revision2,
+                const bool recurse, const bool ignoreAncestry,
+                const bool noDiffDeleted,const bool ignore_contenttype,
+                const QStringList&extra)
+            throw (ClientException);
+
+    /**
+     * Same as other diff but extra options always set to empty list.
+     */
+    virtual QByteArray
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,
+                const Revision & revision1, const Revision & revision2,
+                const bool recurse, const bool ignoreAncestry,
+                const bool noDiffDeleted,const bool ignore_contenttype)
+            throw (ClientException);
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or
@@ -738,6 +767,8 @@ namespace svn
                 const Revision & revision,
                 const Revision & peg_revision,
                 svn::stream::SvnStream&);
+
+    const apr_array_header_t * list2array(const QStringList&,const Pool &)const;
   };
 
 }

@@ -66,6 +66,7 @@
 #include "info_entry.hpp"
 #include "annotate_line.hpp"
 
+class QStringList;
 
 namespace svn
 {
@@ -546,6 +547,7 @@ namespace svn
      * relatedness.
      * @param noDiffDeleted if true, no diff output will be generated on deleted files.
      * @param ignore_contenttype if true generate diff even the items are marked as binaries
+     * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
      * @return delta between the files
      * @exception ClientException
      */
@@ -553,7 +555,17 @@ namespace svn
     diff (const Path & tmpPath, const Path & path,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
+          const bool noDiffDeleted,const bool ignore_contenttype,const QStringList&extra) throw (ClientException)=0;
+
+    /**
+     * Same as other diff but extra options always set to empty list.
+     */
+    virtual QByteArray
+            diff (const Path & tmpPath, const Path & path,
+                  const Revision & revision1, const Revision & revision2,
+                  const bool recurse, const bool ignoreAncestry,
+                  const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
+
     /**
      * Produce diff output which describes the delta between
      * @a path1/@a revision1 and @a path2/@a revision2. @a path2
@@ -574,6 +586,7 @@ namespace svn
      * relatedness.
      * @param noDiffDeleted if true, no diff output will be generated on deleted files.
      * @param ignore_contenttype if true generate diff even the items are marked as binaries
+     * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
      * @return delta between the files
      * @exception ClientException
      */
@@ -581,7 +594,16 @@ namespace svn
     diff (const Path & tmpPath, const Path & path1,const Path & path2,
           const Revision & revision1, const Revision & revision2,
           const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
+          const bool noDiffDeleted,const bool ignore_contenttype,const QStringList&extra) throw (ClientException)=0;
+
+    /**
+     * Same as other diff but extra options always set to empty list.
+     */
+    virtual QByteArray
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,
+                  const Revision & revision1, const Revision & revision2,
+                  const bool recurse, const bool ignoreAncestry,
+                  const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or

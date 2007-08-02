@@ -116,7 +116,7 @@ namespace svn
     QString result = "";
     const svn_wc_entry_t *entry;
     entry = getEntry( path );
-    result = entry?QString::FROMUTF8(entry->repos):"";
+    result = entry ? QString::FROMUTF8(entry->repos) : QString::fromLatin1("");
 
     return result;
   }

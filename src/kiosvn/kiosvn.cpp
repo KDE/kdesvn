@@ -218,7 +218,7 @@ void kio_svnProtocol::stat(const KURL& url)
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
-//         e = m_pData->m_Svnclient->info(s,false,rev,peg);
+         e = m_pData->m_Svnclient->info(s,false,rev,peg);
     } catch  (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
@@ -398,10 +398,11 @@ QString kio_svnProtocol::makeSvnUrl(const KURL&url,bool check_Wc)
     QStringList s = QStringList::split("://",res);
     QString base = url.path();
     QString host = url.host();
+    QString user = (url.hasUser()?url.user()+(url.hasPass()?":"+url.pass():""):"");
     if (host.isEmpty()) {
         res=proto+"://"+base;
     } else {
-        res = proto+"://"+host+base;
+        res = proto+"://"+(user.isEmpty()?"":user+"@")+host+base;
     }
     return res;
 }

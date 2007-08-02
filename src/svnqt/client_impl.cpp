@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://www.alwins-world.de/wiki/programs/kdesvn
@@ -37,6 +37,8 @@
 #include "svnqt/svnqt_defines.hpp"
 
 #include <svn_cmdline.h>
+
+#include <qstringlist.h>
 
 namespace svn
 {
@@ -110,6 +112,18 @@ namespace svn
             Revision end;
             url2Revision(revstring,start,end);
         }
+  }
+
+  const apr_array_header_t * Client_impl::list2array(const QStringList&what,const Pool & pool)const
+  {
+      apr_array_header_t *apr_targets = apr_array_make (pool,what.size(),sizeof (const char *));
+      QStringList::const_iterator it;
+      for (it = what.begin();it!=what.end();++it) {
+          QByteArray s = (*it).TOUTF8();
+          char * t2 = apr_pstrndup (pool,s,s.size());
+          (*((const char **) apr_array_push (apr_targets))) = t2;
+      }
+      return apr_targets;
   }
 }
 

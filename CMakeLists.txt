@@ -1,6 +1,6 @@
 PROJECT(kdesvn)
 OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
-OPTION(BUILD_KDE4 "Building for kde4 yes or no (default off)")
+OPTION(BUILD_KDE4 "Building for kde4 yes or no (default On)")
 
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 IF (TESTINGBUILD)
@@ -43,9 +43,9 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include (MacroLibrary)
 
-MACRO(KDE_AUTOMOC)
- KDE4_AUTOMOC(${ARGV})
-ENDMACRO(KDE_AUTOMOC)
+#MACRO(KDE_AUTOMOC)
+# KDE4_AUTOMOC(${ARGV})
+#ENDMACRO(KDE_AUTOMOC)
 
 MACRO(KDE_ADD_UI_FILES)
  KDE4_ADD_UI_FILES(${ARGV})

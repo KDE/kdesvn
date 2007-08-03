@@ -18,8 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include <qregexp.h>
+#ifdef BUILD_KDE4
 //Added by qt3to4:
 #include <Q3CString>
+#endif
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
@@ -27,22 +29,33 @@
 #include <kpassworddialog.h>
 
 #include <iostream>
+#ifndef BUILD_KDE4
 static KCmdLineOptions options[] =
 {
     { "+[prompt]", I18N_NOOP("prompt"), 0 },
     KCmdLineLastOption
 };
+#endif
 
 int main(int argc, char** argv)
 {
+#ifdef BUILD_KDE4
+    KAboutData about(QByteArray("kdesvnaskpass"),QByteArray("kdesvnaskpass"),ki18n("kdesvnaskpass"),QByteArray("0.1"),
+                    ki18n("ssh-askpass for kdesvn"),
+                    KAboutData::License_LGPL,
+                    ki18n("Copyright (c) 2005 Rajko Albrecht"));
+#else
     KAboutData about("kdesvnaskpass",I18N_NOOP("kdesvnaskpass"),"0.1",
                     I18N_NOOP("ssh-askpass for kdesvn"),
                     KAboutData::License_LGPL,
                     I18N_NOOP("Copyright (c) 2005 Rajko Albrecht"));
+#endif
     KCmdLineArgs::init(argc, argv, &about);
+#ifdef BUILD_KDE4
+    KCmdLineOptions options;
+    options.add("+[prompt]",ki18n("Prompt"));
+#endif
     KCmdLineArgs::addCmdLineOptions(options);
-    // no need to register with the dcop server
-    KApplication::disableAutoDcopRegistration();
 
     KApplication app;
     // no need for session management
@@ -54,13 +67,22 @@ int main(int argc, char** argv)
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
     }
-    Q3CString pw;
+#ifdef BUILD_KDE4
+    QString pw;
+    KPasswordDialog dlg;
+    if (dlg.exec()==KPasswordDialog::Accepted) {
+        pw = dlg.password();
+        std::cout << pw.toUtf8().data() << std::endl;
+#else
+    QCString pw;
     KPasswordDialog::disableCoreDumps();
     if (KPasswordDialog::getPassword(pw,prompt,0)==KPasswordDialog::Accepted) {
         std::cout << pw << std::endl;
+#endif
         /* cleanup memory */
         pw.replace(0,pw.length(),"0");
         return 0;
     }
     return 1;
 }
+

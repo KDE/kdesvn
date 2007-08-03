@@ -1,4 +1,4 @@
-ADD_EXECUTABLE(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+kde4_add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
 SET(kdesvnsrc
     main.cpp
@@ -44,7 +44,7 @@ INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
 #KDESVN_GENERATE_LIBTOOL_FILE(kdesvnpart)
 
 
-TARGET_LINK_LIBRARIES(kdesvnaskpass ${QT_AND_KDECORE_LIBS} ${KDE3_UI_LIBRARY})
+TARGET_LINK_LIBRARIES(kdesvnaskpass ${QT_QTCORE_LIBRARY} ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBRARY})
 TARGET_LINK_LIBRARIES(kdesvn ${QT_AND_KDECORE_LIBS} ${KDE3_UI_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_DCOP_LIBRARY} ${KDE3_KIO_LIBRARY})
 
 INSTALL(TARGETS kdesvn kdesvnaskpass kdesvnpart
@@ -54,4 +54,4 @@ INSTALL(TARGETS kdesvn kdesvnaskpass kdesvnpart
 # the resources
 INSTALL(FILES kdesvnui.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)
 INSTALL(FILES kdesvn_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvnpart)
-INSTALL(FILES kdesvn.desktop DESTINATION ${XDG_APPS_DIR})
+INSTALL(FILES kdesvn.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

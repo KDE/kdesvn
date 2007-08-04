@@ -1,4 +1,8 @@
+IF (NOT BUILD_KDE4)
+add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+ELSE (NOT BUILD_KDE4)
 kde4_add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+ENDIF (NOT BUILD_KDE4)
 
 SET(kdesvnsrc
     main.cpp
@@ -29,7 +33,11 @@ ADD_SUBDIRECTORY(kiosvn)
 ADD_SUBDIRECTORY(pics)
 ADD_SUBDIRECTORY(icons)
 
+IF (NOT BUILD_KDE4)
 ADD_EXECUTABLE(kdesvn ${kdesvnsrc})
+ELSE (NOT BUILD_KDE4)
+KDE4_ADD_EXECUTABLE(kdesvn ${kdesvnsrc})
+ENDIF (NOT BUILD_KDE4)
 
 KDE_ADD_KPART(kdesvnpart WITH_PREFIX ${partsrc})
 

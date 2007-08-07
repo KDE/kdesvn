@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>339</width>
-            <height>306</height>
+            <width>366</width>
+            <height>332</height>
         </rect>
     </property>
     <property name="caption">
@@ -59,6 +59,9 @@
             <property name="text">
                 <string>Gain item info recursive</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
         </widget>
         <widget class="QCheckBox">
             <property name="name">
@@ -78,6 +81,9 @@
             <property name="text">
                 <string>Store passwords for remote connections</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Should subversion store passwords in default</string>
             </property>
@@ -91,6 +97,9 @@
             </property>
             <property name="text">
                 <string>Store passwords into KDE Wallet</string>
+            </property>
+            <property name="accel">
+                <string></string>
             </property>
             <property name="toolTip" stdset="0">
                 <string>When saving passwords, do it into KDE wallet instead of subversions storage?</string>
@@ -119,6 +128,9 @@
             <property name="text">
                 <string>Logs always reads list of changed files</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Read detailed change lists</string>
             </property>
@@ -138,6 +150,20 @@
             </property>
             <property name="toolTip" stdset="0">
                 <string>List items next commit will send or not</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_commit_hide_new</cstring>
+            </property>
+            <property name="text">
+                <string>Hide new items in commit box</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Should unversioned items displayed in commit dialog or not.</string>
             </property>
         </widget>
         <widget class="KIntNumInput">
@@ -170,8 +196,6 @@
         </spacer>
     </vbox>
 </widget>
-<customwidgets>
-</customwidgets>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>

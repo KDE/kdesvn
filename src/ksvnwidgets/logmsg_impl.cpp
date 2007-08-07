@@ -138,6 +138,7 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
         item->setState(QCheckListItem::Off);
     }
+    m_HideNewItems->setOn(Kdesvnsettings::commit_hide_new());
     checkSplitterSize();
 }
 
@@ -151,6 +152,7 @@ Logmsg_impl::~Logmsg_impl()
     for (unsigned int j=0; j<m_Hidden.size();++j) {
         delete m_Hidden[j];
     }
+    Kdesvnsettings::setCommit_hide_new(m_HideNewItems->state()==QButton::On);
 }
 
 void Logmsg_impl::checkSplitterSize()
@@ -497,12 +499,14 @@ void Logmsg_impl::hideButtons(bool how)
         m_MarkUnversioned->hide();
         m_UnmarkUnversioned->hide();
         m_DiffItem->hide();
+        m_HideNewItems->hide();
     }
     else
     {
         m_MarkUnversioned->show();
         m_UnmarkUnversioned->show();
         m_DiffItem->show();
+        m_HideNewItems->show();
     }
 }
 

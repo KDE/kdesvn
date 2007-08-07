@@ -71,9 +71,11 @@ protected slots:
     virtual void slotUnmarkUnversioned();
     virtual void slotDiffSelected();
     virtual void slotMarkUnversioned();
+    virtual void hideNewItems(bool);
 
 protected:
     static QValueList<QString> sLogHistory;
+    QValueList<QListViewItem*> m_Hidden;
     static const QString groupName;
     static unsigned int smax_message_history;
     bool m_hidden;

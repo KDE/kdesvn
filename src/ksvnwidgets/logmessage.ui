@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>478</width>
-            <height>399</height>
+            <width>636</width>
+            <height>398</height>
         </rect>
     </property>
     <property name="caption">
@@ -92,12 +92,23 @@
                     </widget>
                     <widget class="QLayoutWidget">
                         <property name="name">
-                            <cstring>m_EntryButtonsLayout</cstring>
+                            <cstring>layout5</cstring>
                         </property>
                         <hbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>m_HideNewItems</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Hide new items</string>
+                                </property>
+                                <property name="toggleButton">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
                             <widget class="QPushButton">
                                 <property name="name">
                                     <cstring>m_MarkUnversioned</cstring>
@@ -239,8 +250,6 @@
         </widget>
     </vbox>
 </widget>
-<customwidgets>
-</customwidgets>
 <connections>
     <connection>
         <sender>m_LogHistory</sender>
@@ -266,6 +275,12 @@
         <receiver>LogmessageData</receiver>
         <slot>slotDiffSelected()</slot>
     </connection>
+    <connection>
+        <sender>m_HideNewItems</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>LogmessageData</receiver>
+        <slot>hideNewItems(bool)</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotHistoryActivated(const QString&amp;)</slot>
@@ -273,6 +288,7 @@
     <slot access="protected">slotMarkUnversioned()</slot>
     <slot access="protected">slotDiffSelected()</slot>
     <slot access="protected">slotUnmarkUnversioned()</slot>
+    <slot access="protected">hideNewItems(bool)</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

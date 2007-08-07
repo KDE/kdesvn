@@ -148,6 +148,9 @@ Logmsg_impl::~Logmsg_impl()
         Kdesvnsettings::setCommit_splitter_height(list);
         Kdesvnsettings::writeConfig();
     }
+    for (unsigned int j=0; j<m_Hidden.size();++j) {
+        delete m_Hidden[j];
+    }
 }
 
 void Logmsg_impl::checkSplitterSize()
@@ -518,6 +521,33 @@ void Logmsg_impl::markUnversioned(bool mark)
             }
         }
         ++it;
+    }
+}
+
+void Logmsg_impl::hideNewItems(bool how)
+{
+    if (!m_ReviewList)return;
+
+    if (how) {
+        QListViewItemIterator it( m_ReviewList );
+        while ( it.current() ) {
+            if (it.current()->rtti()==1000) {
+                SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+                if (item->data()._kind==1) {
+                    item->setOn(false);
+                    m_Hidden.push_back(item);
+                }
+            }
+            ++it;
+        }
+        for (unsigned j=0;j<m_Hidden.size();++j) {
+            m_ReviewList->takeItem(m_Hidden[j]);
+        }
+    } else {
+        for (unsigned j=0;j<m_Hidden.size();++j) {
+            m_ReviewList->insertItem(m_Hidden[j]);
+        }
+        m_Hidden.clear();
     }
 }
 

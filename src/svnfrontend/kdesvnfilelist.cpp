@@ -482,8 +482,19 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         setBaseUri("file://"+url.path());
     } else {
         if (url.isLocalFile()) {
-            setBaseUri(url.path());
-            if (m_SvnWrapper->isLocalWorkingCopy(url,_dummy)) {
+            QFileInfo fi(url.path());
+            if (fi.exists() && fi.isSymLink()) {
+                QString sl = fi.readLink();
+                if (sl.startsWith("/")) {
+                    setBaseUri(sl);
+                } else {
+                    fi.setFile(fi.dirPath()+"/"+sl);
+                    setBaseUri(fi.absFilePath());
+                }
+            } else {
+                setBaseUri(url.path());
+            }
+            if (m_SvnWrapper->isLocalWorkingCopy(baseUri(),_dummy)) {
                 setWorkingCopy(true);
             } else {
                 // yes! KURL sometimes makes a correct localfile url (file:///)

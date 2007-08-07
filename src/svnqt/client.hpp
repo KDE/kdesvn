@@ -312,15 +312,14 @@ namespace svn
     /**
      * Commits changes to the repository. This usually requires
      * authentication, see Auth.
-     * @return Returns a long representing the revision. It returns a
-     *         -1 if the revision number is invalid.
+     * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
      * @param targets files to commit.
      * @param message log message.
      * @param recurse whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
      * @exception ClientException
      */
-    virtual svn_revnum_t
+    virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
             bool recurse,bool keep_locks=true) throw (ClientException)=0;

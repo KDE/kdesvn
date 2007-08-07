@@ -173,7 +173,7 @@ namespace svn
     return resulting;
   }
 
-  svn_revnum_t
+  svn::Revision
   Client_impl::commit (const Targets & targets, const QString& message,
                   bool recurse,bool keep_locks) throw (ClientException)
   {
@@ -206,9 +206,9 @@ namespace svn
       throw ClientException (error);
 
     if (commit_info && SVN_IS_VALID_REVNUM (commit_info->revision))
-      return commit_info->revision;
+      return (commit_info->revision);
 
-    return -1;
+    return svn::Revision::UNDEFINED;
   }
 
   void

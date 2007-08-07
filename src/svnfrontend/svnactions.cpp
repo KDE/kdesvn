@@ -824,7 +824,7 @@ void SvnActions::slotCommit()
 bool SvnActions::makeCommit(const svn::Targets&targets)
 {
     bool ok,rec,keeplocks;
-    svn_revnum_t nnum;
+    svn::Revision nnum;
     svn::Targets _targets;
     svn::Pathes _deldir;
     bool review = Kdesvnsettings::review_commit();
@@ -899,14 +899,13 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Commiting"),
             i18n("Commiting - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        /// @todo keep-lock beackern
         nnum = m_Data->m_Svnclient->commit(_targets,msg,rec,keeplocks);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return false;
     }
     EMIT_REFRESH;
-    EMIT_FINISHED;
+    emit sendNotify(i18n("Committed revision %1.").arg(nnum.toString()));
     return true;
 }
 

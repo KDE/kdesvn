@@ -688,16 +688,18 @@ void kio_svnProtocol::commit(const KURL::List&url)
     for (unsigned j=0; j<url.count();++j) {
         targets.push_back(svn::Path(url[j].path()));
     }
-    svn_revnum_t nnum=svn::Revision::UNDEFINED;
+    svn::Revision nnum=svn::Revision::UNDEFINED;
     try {
         nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,true,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     for (unsigned j=0;j<url.count();++j) {
-        QString userstring = i18n ( "Nothing to commit." );
-        if (SVN_IS_VALID_REVNUM(nnum)) {
-            userstring = i18n( "Committed revision %1." ).arg(nnum);
+        QString userstring;
+        if (nnum!=svn::Revision::UNDEFINED) {
+            userstring = i18n( "Committed revision %1." ).arg(nnum.toString());
+        } else {
+            userstring = i18n ( "Nothing to commit." );
         }
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "path", url[j].path() );
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+ "action", "0" );

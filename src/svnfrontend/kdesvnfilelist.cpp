@@ -100,7 +100,7 @@ public:
 
     bool intern_dropRunning;
     KURL::List intern_drops;
-    QString intern_drop_target;
+    QString intern_drop_target,merge_Src1, merge_Src2,merge_Target;
     QDropEvent::Action intern_drop_action;
     QPoint intern_drop_pos;
     QTimer drop_timer;
@@ -526,7 +526,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     m_SvnWrapper->clearUpdateCache();
     if (isWorkingCopy()) {
         m_pList->m_DirWatch=new KDirWatch(this);
-        kdDebug()<<"Create dirwatch"<<endl;
         connect(m_pList->m_DirWatch,SIGNAL(dirty(const QString&)),this,SLOT(slotDirItemDirty(const QString&)));
         connect(m_pList->m_DirWatch,SIGNAL(created(const QString&)),this,SLOT(slotDirItemCreated(const QString&)));
         connect(m_pList->m_DirWatch,SIGNAL(deleted(const QString&)),this,SLOT(slotDirItemDeleted(const QString&)));
@@ -588,7 +587,6 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     while (what.endsWith("/")) {
         what.truncate(what.length()-1);
     }
-    kdDebug()<<"checkDirs()" << endl;
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
     if (!isWorkingCopy()|| (!_parent) || ((_parent) && (_parent->isVersioned()))) {
         if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision) ) {
@@ -613,7 +611,6 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
 
         // current item is not versioned
         if (!(*it).isVersioned() && !filterOut((*it))) {
-            kdDebug()<< "Found non versioned item" << endl;
             // if empty, we may want to create a default svn::Status for each folder inside this _parent
             // iterate over QDir and create new filelistviewitem
             checkUnversionedDirs(_parent);
@@ -666,7 +663,6 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             item->setDropEnabled(true);
             if (isWorkingCopy()) {
                 m_pList->m_DirWatch->addDir(item->fullName());
-                kdDebug()<< "Watching folder: " + item->fullName() << endl;
             }
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
@@ -1591,10 +1587,21 @@ void kdesvnfilelist::slotMerge()
     FileListViewItem*which= singleSelected();
     QString src1,src2,target;
     if (isWorkingCopy()) {
-        target = which?which->fullName():baseUri();
+        if (m_pList->merge_Target.isEmpty()) {
+            target = which?which->fullName():baseUri();
+        } else {
+            target = m_pList->merge_Target;
+        }
+        src1 = m_pList->merge_Src1;
     } else {
-        src1 = which?which->fullName():baseUri();
+        if (m_pList->merge_Src1.isEmpty()){
+            src1 = which?which->fullName():baseUri();
+        } else {
+            src1 = m_pList->merge_Src1;
+        }
+        target = m_pList->merge_Target;
     }
+    src2 = m_pList->merge_Src2;
     bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr;
@@ -1613,6 +1620,9 @@ void kdesvnfilelist::slotMerge()
             src2 = src1;
         }
         target = ptr->Dest();
+        m_pList->merge_Src2 = src2;
+        m_pList->merge_Src1 = src1;
+        m_pList->merge_Target = target;
         force = ptr->force();
         dry = ptr->dryrun();
         rec = ptr->recursive();

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-01 21:55+0200\n"
+"POT-Creation-Date: 2007-08-07 14:26+0200\n"
 "PO-Revision-Date: 2007-04-05 14:16+0200\n"
 "Last-Translator: Antoni Bella Pérez\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -245,15 +245,15 @@ msgstr "S'està substituint %1."
 msgid "Transmitting file data "
 msgstr "S'estan transmetent les dades del fitxer "
 
-#: kiosvn/kiosvn.cpp:698
-msgid "Nothing to commit."
-msgstr "Encara no hi ha res per entregar."
-
-#: kiosvn/kiosvn.cpp:700
+#: kiosvn/kiosvn.cpp:700 svnfrontend/svnactions.cpp:908
 msgid "Committed revision %1."
 msgstr "S'ha entregat la revisió %1."
 
-#: kiosvn/kiosvn.cpp:744
+#: kiosvn/kiosvn.cpp:702
+msgid "Nothing to commit."
+msgstr "Encara no hi ha res per entregar."
+
+#: kiosvn/kiosvn.cpp:746
 msgid "Empty logs"
 msgstr "Registre buit"
 
@@ -879,7 +879,7 @@ msgstr "Les diferències ignoren el tipus de contingut"
 msgid "Diff ignores all white spaces"
 msgstr "Les diferències ignoren el tipus de contingut"
 
-#: rc.cpp:275 svnfrontend/svnactions.cpp:1231
+#: rc.cpp:275 svnfrontend/svnactions.cpp:1237
 #, no-c-format
 msgid "Diff display"
 msgstr "Vista del diff"
@@ -1272,7 +1272,7 @@ msgstr "Gestiona els ítems sense relacionar com a relacionats"
 msgid "Just dry run without modifications"
 msgstr "Simplement executa sense modificar"
 
-#: rc.cpp:523 rc.cpp:764 svnfrontend/svnactions.cpp:1605
+#: rc.cpp:523 rc.cpp:767 svnfrontend/svnactions.cpp:1611
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:117
 #, no-c-format
 msgid "Recursive"
@@ -1305,7 +1305,7 @@ msgstr ""
 "Fer clic per a obtenir una petita informació quant al nom predefinit de la "
 "propietat"
 
-#: rc.cpp:552 svnfrontend/svnactions.cpp:1969 svnfrontend/svnactions.cpp:1983
+#: rc.cpp:552 svnfrontend/svnactions.cpp:1983 svnfrontend/svnactions.cpp:1997
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Copia / Mou"
@@ -1365,7 +1365,7 @@ msgstr ""
 msgid "Open after job"
 msgstr "Obre en finalitzar"
 
-#: rc.cpp:596 svnfrontend/svnactions.cpp:1316
+#: rc.cpp:596 svnfrontend/svnactions.cpp:1322
 #: svnfrontend/kdesvnfilelist.cpp:1998 svnfrontend/kdesvnfilelist.cpp:2135
 #: svnfrontend/kdesvnfilelist.cpp:2152 svnfrontend/kdesvnfilelist.cpp:2178
 #: svnfrontend/kdesvnfilelist.cpp:2716 svnfrontend/kdesvnfilelist.cpp:2758
@@ -1532,87 +1532,92 @@ msgid "Entry"
 msgstr "Entrada"
 
 #: rc.cpp:736
-#, no-c-format
-msgid "Select new items"
+#, fuzzy, no-c-format
+msgid "Hide new items"
 msgstr "Selecciona ítems nous"
 
 #: rc.cpp:739
 #, no-c-format
+msgid "Select new items"
+msgstr "Selecciona ítems nous"
+
+#: rc.cpp:742
+#, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr "Marca tots els ítems sense versió per afegir i entregar."
 
-#: rc.cpp:742
+#: rc.cpp:745
 #, no-c-format
 msgid "Unselect new items"
 msgstr "Desselecciona ítems nous"
 
-#: rc.cpp:745
+#: rc.cpp:748
 #, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr "Desmarca tots els ítems sense versió per a que siguin ignorats."
 
-#: rc.cpp:748
+#: rc.cpp:751
 #, no-c-format
 msgid "Diff highlighted item"
 msgstr "Diff contra l'ítem ressaltat"
 
-#: rc.cpp:751
+#: rc.cpp:754
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
 "Genera i mostra las diferències contra el repositori de l'ítem seleccionat"
 
-#: rc.cpp:754
+#: rc.cpp:757
 #, no-c-format
 msgid "Enter a log message"
 msgstr "Entreu un missatge per al registre"
 
-#: rc.cpp:757
+#: rc.cpp:760
 #, no-c-format
 msgid "Or insert one of the last:"
 msgstr "O inseriu un dels últims:"
 
-#: rc.cpp:761
+#: rc.cpp:764
 #, no-c-format
 msgid "Last used log messages"
 msgstr "Últims missatges de registre usats"
 
-#: rc.cpp:767
+#: rc.cpp:770
 #, no-c-format
 msgid "Make operation recursive."
 msgstr "Fes operació recursiva"
 
-#: rc.cpp:770
+#: rc.cpp:773
 #, no-c-format
 msgid "Keep locks"
 msgstr "Manté blocats"
 
-#: rc.cpp:773
+#: rc.cpp:776
 #, no-c-format
 msgid "If checked commit will not release locks."
 msgstr "Si es marca la entrega no manllevarà els blocats"
 
-#: rc.cpp:777
+#: rc.cpp:780
 #, no-c-format
 msgid "Authentication"
 msgstr "Autenticació"
 
-#: rc.cpp:780
+#: rc.cpp:783
 #, no-c-format
 msgid "Enter authentification info for"
 msgstr "Entreu la informació d'autenticació per a"
 
-#: rc.cpp:783
+#: rc.cpp:786
 #, no-c-format
 msgid "Password:"
 msgstr "Contrasenya:"
 
-#: rc.cpp:786
+#: rc.cpp:789
 #, no-c-format
 msgid "Username:"
 msgstr "Nom d'usuari:"
 
-#: rc.cpp:789
+#: rc.cpp:792
 #, no-c-format
 msgid "Store password"
 msgstr "Desa la contrasenya"
@@ -1875,7 +1880,7 @@ msgstr "Afegeix a revisió de control"
 msgid "Restore missing"
 msgstr "Restaura el que falta"
 
-#: svnfrontend/ccontextlistener.cpp:66 svnfrontend/svnactions.cpp:1619
+#: svnfrontend/ccontextlistener.cpp:66 svnfrontend/svnactions.cpp:1625
 msgid "Revert"
 msgstr "Reverteix"
 
@@ -2301,11 +2306,11 @@ msgstr "Comentari de blocat"
 msgid "Infolist"
 msgstr "Llista informativa"
 
-#: svnfrontend/svnactions.cpp:848 svnfrontend/svnactions.cpp:2053
+#: svnfrontend/svnactions.cpp:848 svnfrontend/svnactions.cpp:2067
 msgid "Status / List"
 msgstr "Estatus / llista"
 
-#: svnfrontend/svnactions.cpp:848 svnfrontend/svnactions.cpp:2053
+#: svnfrontend/svnactions.cpp:848 svnfrontend/svnactions.cpp:2067
 msgid "Creating list / check status"
 msgstr "S'està creant la llista / comprovant l'estatus"
 
@@ -2325,211 +2330,219 @@ msgstr "S'està entregant"
 msgid "Commiting - hit cancel for abort"
 msgstr "S'està entregant - premeu cancel·la per avortar"
 
-#: svnfrontend/svnactions.cpp:963
+#: svnfrontend/svnactions.cpp:962
 msgid "Download - hit cancel for abort"
 msgstr "S'està descarregant - premeu cancel·la per avortar"
 
-#: svnfrontend/svnactions.cpp:1071
+#: svnfrontend/svnactions.cpp:1024
+msgid "Both entries seems to be the same, can not diff."
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1077
 msgid "Diff-process could not started, check command."
 msgstr ""
 "No s'ha pogut iniciar el processat de les diferències, comprovar el "
 "comandament."
 
-#: svnfrontend/svnactions.cpp:1107
+#: svnfrontend/svnactions.cpp:1113
 msgid "Diffing - hit cancel for abort"
 msgstr "S'estan creant les diferències - premeu cancel·la per avortar"
 
-#: svnfrontend/svnactions.cpp:1119 svnfrontend/svnactions.cpp:1163
+#: svnfrontend/svnactions.cpp:1125 svnfrontend/svnactions.cpp:1169
 msgid "No difference to display"
 msgstr "No hi ha diferències a mostrar"
 
-#: svnfrontend/svnactions.cpp:1187
+#: svnfrontend/svnactions.cpp:1193
 msgid "\"Kompare\" could not started."
 msgstr "\"Kompare\" no s'ha pogut iniciar."
 
-#: svnfrontend/svnactions.cpp:1220
+#: svnfrontend/svnactions.cpp:1226
 msgid "Display-process could not started, check command."
 msgstr ""
 "No s'ha pogit iniciar el procés per a mostrar, comprovar el comandament."
 
-#: svnfrontend/svnactions.cpp:1270
+#: svnfrontend/svnactions.cpp:1276
 msgid "Making update - hit cancel for abort"
 msgstr "S'està actualitzant - premeu cancel·la per avortar"
 
-#: svnfrontend/svnactions.cpp:1364
+#: svnfrontend/svnactions.cpp:1370
 msgid "Which files or directories should I add?"
 msgstr "Quins fitxers o directoris s'han d'afegir?"
 
-#: svnfrontend/svnactions.cpp:1373
+#: svnfrontend/svnactions.cpp:1379
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr "<center>L'entrada<br>%1<br>te versió -s'interromp-.</center>"
 
-#: svnfrontend/svnactions.cpp:1419 svnfrontend/kdesvnfilelist.cpp:1848
+#: svnfrontend/svnactions.cpp:1425 svnfrontend/kdesvnfilelist.cpp:1848
 msgid "Really delete these entries?"
 msgstr "Realment voleu esborrar aquestes entrades?"
 
-#: svnfrontend/svnactions.cpp:1419 svnfrontend/kdesvnfilelist.cpp:1848
+#: svnfrontend/svnactions.cpp:1425 svnfrontend/kdesvnfilelist.cpp:1848
 msgid "Delete from repository"
 msgstr "Esborra del repositori"
 
-#: svnfrontend/svnactions.cpp:1450
+#: svnfrontend/svnactions.cpp:1456
 msgid "Export repository"
 msgstr "Exporta el repositori"
 
-#: svnfrontend/svnactions.cpp:1450 svnfrontend/svnactions.cpp:1494
+#: svnfrontend/svnactions.cpp:1456 svnfrontend/svnactions.cpp:1500
 #: svnfrontend/kdesvnfilelist.cpp:357
 msgid "Checkout a repository"
 msgstr "Descarrega un repositori"
 
-#: svnfrontend/svnactions.cpp:1479
+#: svnfrontend/svnactions.cpp:1485
 msgid "Exporting a file?"
 msgstr "Exportar un fitxer?"
 
-#: svnfrontend/svnactions.cpp:1479
+#: svnfrontend/svnactions.cpp:1485
 msgid "Checking out a file?"
 msgstr "Descarregar un fitxer?"
 
-#: svnfrontend/svnactions.cpp:1494 svnfrontend/kdesvnfilelist.cpp:359
+#: svnfrontend/svnactions.cpp:1500 svnfrontend/kdesvnfilelist.cpp:359
 msgid "Export a repository"
 msgstr "Exporta un repositori"
 
-#: svnfrontend/svnactions.cpp:1536
+#: svnfrontend/svnactions.cpp:1542
 msgid "Checkout"
 msgstr "Surt"
 
-#: svnfrontend/svnactions.cpp:1536
+#: svnfrontend/svnactions.cpp:1542
 msgid "Exporting"
 msgstr "S'està exportant"
 
-#: svnfrontend/svnactions.cpp:1536
+#: svnfrontend/svnactions.cpp:1542
 msgid "Checking out"
 msgstr "S'està descarregant"
 
-#: svnfrontend/svnactions.cpp:1567
+#: svnfrontend/svnactions.cpp:1573
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr "<center>L'entrada<br>%1<br>no té versió -s'interromp-.</center>"
 
-#: svnfrontend/svnactions.cpp:1597
+#: svnfrontend/svnactions.cpp:1603
 msgid "Revert entries"
 msgstr "Entrades revertides"
 
-#: svnfrontend/svnactions.cpp:1605
+#: svnfrontend/svnactions.cpp:1611
 msgid "Really revert these entries to pristine state?"
 msgstr "Realment s'han de revertir aquestes entrades al seu estat original?"
 
-#: svnfrontend/svnactions.cpp:1619
+#: svnfrontend/svnactions.cpp:1625
 msgid "Reverting items"
 msgstr "Ítems revertits"
 
-#: svnfrontend/svnactions.cpp:1645 svnfrontend/svnactions.cpp:1712
+#: svnfrontend/svnactions.cpp:1651 svnfrontend/svnactions.cpp:1718
 msgid "Switch url"
 msgstr "Canvi de la URL"
 
-#: svnfrontend/svnactions.cpp:1645
+#: svnfrontend/svnactions.cpp:1651
 msgid "Switching url"
 msgstr "S'està canviant la URL"
 
-#: svnfrontend/svnactions.cpp:1670
+#: svnfrontend/svnactions.cpp:1676
 msgid "Relocate url"
 msgstr "Torna a localitzar la URL"
 
-#: svnfrontend/svnactions.cpp:1670
+#: svnfrontend/svnactions.cpp:1676
 msgid "Relocate repository to new URL"
 msgstr "Localitza el repositori a la nova URL"
 
-#: svnfrontend/svnactions.cpp:1691
+#: svnfrontend/svnactions.cpp:1697
 msgid "Can only switch one item at time"
 msgstr "Tan sols es pot canviar sobre un ítem alhora"
 
-#: svnfrontend/svnactions.cpp:1698
+#: svnfrontend/svnactions.cpp:1704
 msgid "Error getting entry to switch"
 msgstr "Error mentre s'obtenia l'entrada per al canvi"
 
-#: svnfrontend/svnactions.cpp:1734 svnfrontend/kdesvnfilelist.cpp:294
+#: svnfrontend/svnactions.cpp:1740 svnfrontend/kdesvnfilelist.cpp:294
 msgid "Cleanup"
 msgstr "Neteja"
 
-#: svnfrontend/svnactions.cpp:1734
+#: svnfrontend/svnactions.cpp:1740
 msgid "Cleaning up folder"
 msgstr "S'està netejant la carpeta"
 
-#: svnfrontend/svnactions.cpp:1748
+#: svnfrontend/svnactions.cpp:1754
 msgid "Resolve"
 msgstr "Resol"
 
-#: svnfrontend/svnactions.cpp:1748
+#: svnfrontend/svnactions.cpp:1754
 msgid "Marking resolved"
 msgstr "S'estan marcant els resolts"
 
-#: svnfrontend/svnactions.cpp:1762
+#: svnfrontend/svnactions.cpp:1768
 msgid "Importing items"
 msgstr "S'estan important els ítems"
 
-#: svnfrontend/svnactions.cpp:1786
+#: svnfrontend/svnactions.cpp:1791
 msgid "Nothing to merge."
 msgstr "No hi ha res a fusionar."
 
-#: svnfrontend/svnactions.cpp:1790
+#: svnfrontend/svnactions.cpp:1795
 msgid "No destination to merge."
 msgstr "No hi ha destí per a fusionar."
 
-#: svnfrontend/svnactions.cpp:1796
+#: svnfrontend/svnactions.cpp:1801
 msgid "Target for merge must be local!"
 msgstr "L'objectiu per a fusionar ha de ser local!"
 
-#: svnfrontend/svnactions.cpp:1815
+#: svnfrontend/svnactions.cpp:1820
 msgid "Both sources must be same type!"
 msgstr "Ambdues fonts han de ser del mateix tipus!"
 
-#: svnfrontend/svnactions.cpp:1823
+#: svnfrontend/svnactions.cpp:1828
 msgid "Target for merge must same type like sources!"
 msgstr "L'objectiu per a fusionar ha de ser del mateix tipus que les fonts!"
 
-#: svnfrontend/svnactions.cpp:1889
+#: svnfrontend/svnactions.cpp:1851
+msgid "Both entries seems to be the same, won't do a merge."
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1903
 msgid "Merge-process could not started, check command."
 msgstr "El procés \"merge\" no s'ha pogut iniciar, comproveu el comandament."
 
-#: svnfrontend/svnactions.cpp:1911 svnfrontend/kdesvnfilelist.cpp:1590
+#: svnfrontend/svnactions.cpp:1925 svnfrontend/kdesvnfilelist.cpp:1590
 msgid "Merge"
 msgstr "Fusiona"
 
-#: svnfrontend/svnactions.cpp:1911
+#: svnfrontend/svnactions.cpp:1925
 msgid "Merging items"
 msgstr "Fusiona ítems"
 
-#: svnfrontend/svnactions.cpp:1932
+#: svnfrontend/svnactions.cpp:1946
 msgid "Moving/Rename item "
 msgstr "Mou/renomena ítem"
 
-#: svnfrontend/svnactions.cpp:1946
+#: svnfrontend/svnactions.cpp:1960
 msgid "Moving entries"
 msgstr "Mou entrades"
 
-#: svnfrontend/svnactions.cpp:1969 svnfrontend/svnactions.cpp:1983
+#: svnfrontend/svnactions.cpp:1983 svnfrontend/svnactions.cpp:1997
 msgid "Copy or Moving entries"
 msgstr "Copia o mou entrades"
 
-#: svnfrontend/svnactions.cpp:2080
+#: svnfrontend/svnactions.cpp:2094
 msgid "No unversioned items found."
 msgstr "No s'han trobat ítems sense versió."
 
-#: svnfrontend/svnactions.cpp:2083
+#: svnfrontend/svnactions.cpp:2097
 msgid "Add unversioned items"
 msgstr "Afegeix ítems sense versió"
 
-#: svnfrontend/svnactions.cpp:2186
+#: svnfrontend/svnactions.cpp:2200
 msgid "Still checking for updates"
 msgstr "Encara s'estan comprovant les actualitzacions"
 
-#: svnfrontend/svnactions.cpp:2207
+#: svnfrontend/svnactions.cpp:2221
 msgid "Checking for updates finished"
 msgstr "La comprovació d'actualitzacions ha finalitzat"
 
-#: svnfrontend/svnactions.cpp:2209
+#: svnfrontend/svnactions.cpp:2223
 msgid "There are new items in repository"
 msgstr "Hi ha nous ítems en el repositori"
 
-#: svnfrontend/svnactions.cpp:2281
+#: svnfrontend/svnactions.cpp:2295
 msgid "Checking for updates started in background"
 msgstr "La comprovació d'actualitzacions s'ha iniciat en segon pla"
 
@@ -3051,8 +3064,8 @@ msgstr "Sense versió"
 msgid "Items to commit"
 msgstr "Ítems a entregar"
 
-#: ksvnwidgets/logmsg_impl.cpp:265 ksvnwidgets/logmsg_impl.cpp:303
-#: ksvnwidgets/logmsg_impl.cpp:344 ksvnwidgets/logmsg_impl.cpp:387
+#: ksvnwidgets/logmsg_impl.cpp:268 ksvnwidgets/logmsg_impl.cpp:306
+#: ksvnwidgets/logmsg_impl.cpp:347 ksvnwidgets/logmsg_impl.cpp:390
 msgid "Commit log"
 msgstr "Registre de publicació"
 

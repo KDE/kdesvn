@@ -87,7 +87,7 @@ int main(int argc, char **argv)
                 {
                     kdesvn *widget = new kdesvn;
                     widget->show();
-                    widget->load(args->url(i));
+                    widget->load(args->url(i),true);
                 }
             }
         }

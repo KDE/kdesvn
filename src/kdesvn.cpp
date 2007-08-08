@@ -177,14 +177,21 @@ kdesvn::~kdesvn()
 {
 }
 
-void kdesvn::load(const KURL& url)
+void kdesvn::loadRescent(const KURL& url)
+{
+    load(url,true);
+}
+
+void kdesvn::load(const KURL& url,bool addRescent)
 {
     if (m_part) {
         bool ret = m_part->openURL(url);
-        KAction * ac=actionCollection()->action("file_open_recent");
         KRecentFilesAction*rac = 0;
-        if (ac) {
-            rac = (KRecentFilesAction*)ac;
+        if (addRescent) {
+            KAction * ac = actionCollection()->action("file_open_recent");
+            if (ac) {
+                rac = (KRecentFilesAction*)ac;
+            }
         }
         if (!ret) {
             changeStatusbar(i18n("Could not open url %1").arg(url.prettyURL()));
@@ -212,7 +219,7 @@ void kdesvn::setupActions()
     ac->setEnabled(getMemberList()->count()>1);
     KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
-    KRecentFilesAction*rac = KStdAction::openRecent(this,SLOT(load(const KURL&)),actionCollection());
+    KRecentFilesAction*rac = KStdAction::openRecent(this,SLOT(loadRescent(const KURL&)),actionCollection());
     if (rac)
     {
         rac->setMaxItems(8);
@@ -297,7 +304,7 @@ void kdesvn::fileOpen()
 {
     KURL url = UrlDlg::getURL(this);
     if (!url.isEmpty())
-        load(url);
+        load(url,true);
 }
 
 void kdesvn::changeStatusbar(const QString& text)
@@ -314,7 +321,7 @@ void kdesvn::resetStatusBar()
 void kdesvn::openBookmarkURL (const QString &_url)
 {
     if (!_url.isEmpty() && m_part)
-        load(_url);
+        load(_url,false);
 }
 
 QString kdesvn::currentURL () const
@@ -420,7 +427,7 @@ void kdesvn::checkReload()
     QString url = cs.readPathEntry("lastURL");
 
     if (!url.isEmpty() && m_part)
-        load(KURL(url));
+        load(KURL(url),false);
 }
 
 

@@ -828,7 +828,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     svn::Targets _targets;
     svn::Pathes _deldir;
     bool review = Kdesvnsettings::review_commit();
-    QString msg;
+    QString msg,_p;
 
     if (!review) {
         msg = Logmsg_impl::getLogmessage(&ok,&rec,&keeplocks,
@@ -852,6 +852,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 return false;
             }
             for (unsigned int i = 0; i < _Cache.count();++i) {
+                _p = _Cache[i].path();
                 if (_Cache[i].isRealVersioned()&& (
                     _Cache[i].textStatus()==svn_wc_status_modified||
                     _Cache[i].textStatus()==svn_wc_status_added||
@@ -860,12 +861,12 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                     _Cache[i].propStatus()==svn_wc_status_modified
                 ) ) {
                     if (_Cache[i].textStatus()==svn_wc_status_deleted) {
-                        _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Delete"),2));
+                        _check.append(Logmsg_impl::logActionEntry(_p,i18n("Delete"),2));
                     } else {
-                        _check.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Commit")));
+                        _check.append(Logmsg_impl::logActionEntry(_p,i18n("Commit")));
                     }
                 } else if (!_Cache[i].isVersioned()) {
-                    _uncheck.append(Logmsg_impl::logActionEntry(_Cache[i].path(),i18n("Add and Commit"),1));
+                    _uncheck.append(Logmsg_impl::logActionEntry(_p,i18n("Add and Commit"),1));
                 }
             }
         }

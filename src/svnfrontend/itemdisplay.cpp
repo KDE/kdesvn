@@ -111,5 +111,8 @@ QString ItemDisplay::relativePath(const SvnItem*item)
     } else {
         name = name.right(name.length()-baseUri().length()-1);
     }
+    if (name.isEmpty()) {
+        name = ".";
+    }
     return name;
 }

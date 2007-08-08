@@ -53,6 +53,7 @@ public:
     SvnCheckListItem(QListView*,const Logmsg_impl::logActionEntry&);
     const Logmsg_impl::logActionEntry&data(){return m_Content;}
     virtual int rtti()const{return 1000;}
+    virtual int compare( QListViewItem* item, int col, bool ascending ) const;
 };
 
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
@@ -464,6 +465,25 @@ SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logAction
 {
     setTristate(FALSE);
     setText(1,m_Content._actionDesc);
+    if (content._name.isEmpty()) {
+        setText(0,"Toplevel");
+    }
+}
+
+int SvnCheckListItem::compare( QListViewItem* item, int col, bool ascending ) const
+{
+    if (item->rtti()!=1000 || col>0) {
+        return QCheckListItem::compare(item,col,ascending);
+    }
+    SvnCheckListItem* k = static_cast<SvnCheckListItem*>( item );
+    if (Kdesvnsettings::case_sensitive_sort()) {
+        if (Kdesvnsettings::locale_is_casesensitive()) {
+            return m_Content._name.lower().localeAwareCompare(k->m_Content._name.lower());
+        }
+        return m_Content._name.compare(k->m_Content._name);
+    } else {
+        return m_Content._name.lower().localeAwareCompare(k->m_Content._name.lower());
+    }
 }
 
 void Logmsg_impl::slotUnmarkUnversioned()

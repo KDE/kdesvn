@@ -80,26 +80,23 @@ protected:
 
 public slots:
     virtual void slotUrlOpened(bool);
-    /**
-     * Use this method to load whatever file/URL you have
-     */
-    virtual void load(const KURL&);
+    virtual void loadRescent(const KURL&);
+    virtual void load(const KURL&,bool);
 
 private slots:
     void fileOpen();
     void fileNew();
     void fileClose();
     void optionsShowStatusbar();
-
     void changeStatusbar(const QString&);
     void resetStatusBar();
+
 private:
     void setupAccel();
     void setupActions();
     void connectActionCollection( KActionCollection *coll );
     void disconnectActionCollection( KActionCollection *coll );
 
-private:
     KActionMenu *m_FileMenu;
     QString m_bookmarkFile;
     KBookmarkManager * m_BookmarkManager;
@@ -108,6 +105,7 @@ private:
     KBookmarkMenu * m_pBookmarkMenu;
     KParts::ReadOnlyPart *m_part;
     KToggleAction *m_statusbarAction;
+
 protected slots:
     virtual void optionsConfigureToolbars();
     virtual void optionsConfigureKeys();

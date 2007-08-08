@@ -466,7 +466,7 @@ SvnCheckListItem::SvnCheckListItem(QListView*parent,const Logmsg_impl::logAction
     setTristate(FALSE);
     setText(1,m_Content._actionDesc);
     if (content._name.isEmpty()) {
-        setText(0,"Toplevel");
+        setText(0,"...");
     }
 }
 

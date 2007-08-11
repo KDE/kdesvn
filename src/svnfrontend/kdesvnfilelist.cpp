@@ -482,7 +482,11 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         setBaseUri("file://"+url.path());
     } else {
         if (url.isLocalFile()) {
-            QFileInfo fi(url.path());
+            QString s = url.path();
+            while(s.endsWith("/")) {
+                s.remove(s.length()-1,1);
+            }
+            QFileInfo fi(s);
             if (fi.exists() && fi.isSymLink()) {
                 QString sl = fi.readLink();
                 if (sl.startsWith("/")) {

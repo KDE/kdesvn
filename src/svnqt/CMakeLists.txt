@@ -72,18 +72,23 @@ IF(QT4_FOUND)
     SET(TOUTF8 "toUtf8")
     SET(FROMUTF8 "fromUtf8")
     SET(QLIST "QList")
+    SET(svnqt-name svnqt-qt4)
 ELSE(QT4_FOUND)
     IF(QT_FOUND)
         SET(TOUTF8 "utf8")
         SET(FROMUTF8 "fromUtf8")
         SET(QLIST "QValueList")
     ENDIF(QT_FOUND)
+    SET(svnqt-name svnqt)
 ENDIF(QT4_FOUND)
 
 IF (HAVE_GCC_VISIBILITY)
     SET(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
     SET(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
 ENDIF (HAVE_GCC_VISIBILITY)
+IF (WIN32)
+    SET(_SVNQT_EXPORT "__declspec(dllexport)")
+ENDIF (WIN32)
 
 CONFIGURE_FILE(
     "${CMAKE_CURRENT_SOURCE_DIR}/svnqt_defines.hpp.in"
@@ -92,17 +97,17 @@ CONFIGURE_FILE(
     @ONLY)
 
 SET(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+INCLUDE_DIRECTORIES(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
-IF(NOT WIN32)
+ADD_LIBRARY(${svnqt-name} SHARED ${SOURCES} ${svnhdr})
+IF(WIN32)
+    ADD_DEFINITIONS(-D_USE_32BIT_TIME_T)
+ELSE(WIN32)
     SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-    ADD_LIBRARY(svnqt SHARED ${SOURCES} ${svnhdr})
-    SET_TARGET_PROPERTIES(svnqt
+    SET_TARGET_PROPERTIES(${svnqt-name}
         PROPERTIES
         COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
-ELSE(NOT WIN32)
-    ADD_LIBRARY(svnqt STATIC ${SOURCES} )
-ENDIF(NOT WIN32)
+ENDIF(WIN32)
 
 #for a libtool like .la file
 SET(LIBLA_CURRENT 5)
@@ -124,31 +129,37 @@ ENDIF(SUNOS)
 #don't understand how to do that with darwin and freebsd and so on
 #may some of that guy may give a hint.
 
-IF(NOT WIN32)
-SET_TARGET_PROPERTIES(svnqt PROPERTIES
-    SOVERSION ${LIB_MAJOR}
-    VERSION ${_soversion})
-ENDIF(NOT WIN32)
+IF(WIN32)
+    SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES VERSION 3.1.3 SOVERSION 3)
+ELSE(WIN32)
+    SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES
+        SOVERSION ${LIB_MAJOR}
+        VERSION ${_soversion})
+ENDIF(WIN32)
 
 SET(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
 SET(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
-SET_TARGET_PROPERTIES(svnqt PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
-TARGET_LINK_LIBRARIES(svnqt ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS})
+SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS})
+
+IF (WIN32)
+    TARGET_LINK_LIBRARIES( ${svnqt-name} wsock32.lib  )
+ENDIF (WIN32)
 
 # Just a small linking test
 IF (BUILD_TESTS)
     ADD_EXECUTABLE(testlink testmain.cpp)
-    TARGET_LINK_LIBRARIES(testlink svnqt)
+    TARGET_LINK_LIBRARIES(testlink ${svnqt-name})
 ENDIF (BUILD_TESTS)
 
 # install rules
 # in win32 we don't install it
 IF(NOT WIN32)
-    INSTALL(TARGETS svnqt DESTINATION ${LIB_INSTALL_DIR})
-    INSTALL(FILES ${INST_HEADERS} DESTINATION include/svnqt)
+    INSTALL(TARGETS ${svnqt-name} DESTINATION ${LIB_INSTALL_DIR})
+    INSTALL(FILES ${INST_HEADERS} DESTINATION include/${svnqt-name})
 
     # and a libtool file
-    GET_TARGET_PROPERTY(_target_location svnqt LOCATION)
+    GET_TARGET_PROPERTY(_target_location ${svnqt-name} LOCATION)
 
     GET_FILENAME_COMPONENT(_laname ${_target_location} NAME_WE)
     GET_FILENAME_COMPONENT(_soname ${_target_location} NAME)

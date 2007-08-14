@@ -51,7 +51,7 @@ int main(int argc, char **argv)
                      KAboutData::License_GPL, "(C) 2005-2007 Rajko Albrecht",0,
                          0, "ral@alwins-world.de");
     about.addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
-    about.setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");
+    about.setHomepage("http://kdesvn.alwins-world.de/");
     about.setBugAddress("kdesvn-bugs@alwins-world.de");
 
     KCmdLineArgs::init(argc, argv, &about);

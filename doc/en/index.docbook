@@ -101,8 +101,8 @@ revision history. (see installation appendix comment) -->
 <para>You should have some knowledge about subversion itself, but hopefully most items are self explanatory.
 </para>
 <para>
-You may send bugreports and feature wishes via <ulink url="http://www.alwins-world.de/programs/mantis">
-http://www.alwins-world.de/programs/mantis.
+You may send bugreports and feature wishes via <ulink url="http://kdesvn.alwins-world.de/">
+http://kdesvn.alwins-world.de/.
 </ulink>
 </para>
 
@@ -1895,7 +1895,7 @@ repository to newer subversion.
 <answer>
 <para>
 There are many reasons why the program couldn't load. This mostly happens when you building subversion-libs yourself. In that case you may
-check out <ulink url="http://www.alwins-world.de/programs/mantis/view.php?id=128">this mantis entry</ulink>.
+check out <ulink url="http://kdesvn.alwins-world.de/ticket/128">issue entry</ulink>.
 </para>
 <para>
 The next big thing could that you forgot to give a libsuffix on 64-Bit systems at compile-time. So the part will installed in <prompt>$PREFIX/lib</prompt> instead of <prompt>$PREFIX/lib64</prompt>. So give <prompt>-DLIB_SUFFIX=64</prompt> as paramter to cmake.
@@ -1993,7 +1993,7 @@ Appending a specific revision to an url will always made via &quot;?rev=&lt;revi
 Bugreports and wishes may send to <email>kdesvn-bugs@alwins-world.de</email>, questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>.
 </para>
 <para>
-An overview for the mailinglists for &kappname; you may get in the <ulink url="http://www.alwins-world.de/mailman/listinfo">mailinglist overview</ulink>.
+An overview for the mailinglists for &kappname; you may get in the <ulink url="http://lists.alwins-world.de/mailman/listinfo">mailinglist overview</ulink>.
 </para>
 </sect1>
 <sect1 id="credits-and-license">
@@ -2051,14 +2051,14 @@ part of KDE CVS.  You should remove it if you are releasing your
 application -->
 <para>
 &kdesvn; itself can be found
-at <ulink url="http://www.alwins-world.de/programs/download/kdesvn/">
+at <ulink url="http://kdesvn.alwins-world.de/downloads/">
 the &kdesvn; download area</ulink>.
 </para>
 <para>
-You may get <ulink url="http://www.alwins-world.de/programs/sourcec/websvn/dl.php?repname=KDESvn&amp;path=%2Ftrunk%2F&amp;rev=0&amp;isdir=1">latest repository version</ulink> when looking whats going on.
+You may get <ulink url="http://kdesvn.alwins-world.de/browser/trunk">latest repository version</ulink> when looking whats going on.
 </para>
 <para>
-The homepage of that project is <ulink url="http://www.alwins-world.de/wiki/programs/kdesvn/">http://www.alwins-world.de/programs/kdesvn/</ulink>
+The homepage of that project is <ulink url="http://kdesvn.alwins-world.de/">http://www.alwins-world.de/programs/kdesvn/</ulink>
 </para>
 </sect1>
 
@@ -2088,7 +2088,7 @@ distributor should have packages for your system and/or distribution.
 or the ChangeLog file, or ... -->
 <para>
 You can find a list of changes at <ulink
-url="http://www.alwins-world.de/programs/kdesvn">http://www.alwins-world.de/programs/kdesvn</ulink>.
+url="http://kdesvn.alwins-world.de/browser/trunk/ChangeLog">http://kdesvn.alwins-world.de/browser/trunk/ChangeLog</ulink>.
 </para>
 </sect1>
 

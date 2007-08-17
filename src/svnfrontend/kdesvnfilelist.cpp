@@ -846,7 +846,7 @@ void kdesvnfilelist::enableActions()
     m_BlameRangeAction->setEnabled(single&&!dir);
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
-    m_MkdirAction->setEnabled(dir||!isWorkingCopy()&&isopen);
+    m_MkdirAction->setEnabled(dir||none && isopen);
     m_switchRepository->setEnabled(isWorkingCopy()&& (single||none));
     m_changeToRepository->setEnabled(isWorkingCopy());
     m_ImportDirsIntoCurrent->setEnabled(dir);

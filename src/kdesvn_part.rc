@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="14">
+<kpartgui name="kdesvn_part" version="15">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <Action name="kdesvnpart_pref" />
@@ -94,6 +94,7 @@
   <Action name="make_svn_lock" />
   <Action name="make_svn_unlock" />
   <Separator/>
+  <Action name="make_svn_rename" />
   <Action name="make_svn_remove" />
   <Separator/>
  </Menu>
@@ -107,6 +108,8 @@
      <Action name="make_cleanup" />
      <Separator/>
      <Action name="make_svn_remove" />
+     <Action name="make_svn_rename" />
+     <Action name="make_svn_mkdir" />
      <Action name="make_view_refresh" />
  </Menu>
  <Menu name="local_context_single_unversioned" >
@@ -134,6 +137,7 @@
   <Action name="make_svn_lock" />
   <Action name="make_svn_unlock" />
   <Separator/>
+  <Action name="make_svn_rename" />
   <Action name="make_svn_remove" />
   <Separator/>
  </Menu>
@@ -142,6 +146,8 @@
      <Action name="make_svn_checkout_current" />
      <Action name="make_svn_export_current" />
      <Separator/>
+     <Action name="make_svn_mkdir" />
+     <Action name="make_svn_rename" />
      <Action name="make_svn_remove" />
      <Separator/>
      <Action name="make_view_refresh" />
@@ -155,12 +161,14 @@
   <Separator/>
   <Action name="make_svn_itemsdiff" />
   <Separator/>
+  <Action name="make_svn_remove" />
   <Action name="make_view_refresh" />
  </Menu>
  <Menu name="local_general">
   <Action name="make_svn_headupdate" />
   <Action name="make_svn_commit" />
   <Separator/>
+  <Action name="make_svn_mkdir" />
   <Action name="make_view_refresh" />
   <Action name="make_cleanup" />
  </Menu>

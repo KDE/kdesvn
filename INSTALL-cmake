@@ -7,12 +7,13 @@ solve it with
 export QTLIB=${QTDIR}/lib QTINC=${QTDIR}/include
 
 before running cmake.
-On some systems cmake doesn't detect that it is a threaded qt-version. So you should 
-do 
+On some systems cmake doesn't detect that it is a threaded qt-version. So you should
+do
 
 export CXXFLAGS="-DQT_THREAD_SUPPORT"
 
-before running cmake. (Or give it as parameter to cmake with -DCMAKE_CXX_FLAGS="-DQT_THREAD_SUPPORT")
+before running cmake.
+(Or give it as parameter to cmake with -DCMAKE_CXX_FLAGS="-DQT_THREAD_SUPPORT")
 
 
 Note for release 0.7.x
@@ -27,11 +28,6 @@ ksvn+https  - svn+https
 and so on.
 RPM packages may split them into various parts (see kdesvn.spec for details).
 the same must done for debian packages or other managers.
-
-Note for release 0.5.0
-======================
-
-If you had installed kdesvn versions before, please UNINSTALL it first.
 
 Prepare install
 ===============
@@ -62,7 +58,8 @@ Where is subversion-lib installed. Default check in /usr and /usr/local
 Extra flags for the c++ compiler for your system required.
 
 -DLIB_SUFFIX=<suffix>
-Mostly for 64bit systems, there suffix may be 64 so libs will installed in /usr/lib64 and not /usr/lib for instance.
+Mostly for 64bit systems, there suffix may be 64 so libs will installed
+in /usr/lib64 and not /usr/lib for instance.
 
 After calling cmake just type
     make

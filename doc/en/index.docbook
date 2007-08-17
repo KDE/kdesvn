@@ -1309,7 +1309,20 @@ diffs from binaries.
 When set, diffs made from within revisiontree view are made recursive like in all other cases, too. Otherwise only changes belonging to that folderitems are shown. How that is made depends on how you let diffs generate (from subversion itself or from external viewers).
 </para></listitem>
 </varlistentry>
-
+<varlistentry>
+<term>Diff ignores white space changes</term>
+<listitem>
+<para>
+Ignore changes in the amount of white space (option &quot;-b&quot; to diff)
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>Diff ignores all white spaces</term>
+<listitem>
+<para>Ignore all white space (option &quot;-w&quot; to diff)</para>
+</listitem>
+</varlistentry>
 </variablelist>
 
 </para>
@@ -1350,7 +1363,10 @@ stores content to compare in a temporary environment (when folders do a &quot;ex
 cleans up after closing external program or closing itself.
 </para></listitem>
 </varlistentry>
-
+<varlistentry>
+<term>Prefer external merge program</term>
+<listitem><para>Select if in merge dialog "Use external program" should be checked or not as default.</para></listitem>
+</varlistentry>
 </variablelist>
 </para>
 </sect2>

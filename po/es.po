@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-07 14:26+0200\n"
-"PO-Revision-Date: 2007-04-18 21:08+0200\n"
+"PO-Revision-Date: 2007-08-19 13:24+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: es_ES <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -363,9 +363,8 @@ msgid "Display unknown files"
 msgstr "Mostrar ficheros desconocidos"
 
 #: kdesvn_part.cpp:188
-#, fuzzy
 msgid "Hide unchanged files"
-msgstr "Elementos remotos modificados:"
+msgstr "Ocultar ficheros sin cambios"
 
 #: kdesvn_part.cpp:196
 msgid "&Configure %1..."
@@ -688,8 +687,7 @@ msgstr "0"
 
 #: rc.cpp:173
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "El mínimo que una salida de registro debe contener antes de que kdesvn "
 "muestre una ventana con el registro"
@@ -719,8 +717,7 @@ msgstr "Mensaje estándar:"
 #: rc.cpp:191
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:195
 #, no-c-format
@@ -795,8 +792,7 @@ msgstr "Almacenar contraseñas en Cartera KDE"
 
 #: rc.cpp:229
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes "
 "de Subversion?"
@@ -865,13 +861,12 @@ msgstr "Elementos listados en la última confirmación se enviarán o no"
 #: rc.cpp:257
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:260
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "DiffMergeSettings"
-msgstr "Configuración del Fusionado"
+msgstr "DiffMergeSettings"
 
 #: rc.cpp:263
 #, no-c-format
@@ -884,14 +879,14 @@ msgid "Diff in revisiontree is recursive"
 msgstr "Diferencias recursivas en el árbol de revisiones"
 
 #: rc.cpp:269
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff ignores white space changes"
-msgstr "Las diferencias ignoran el tipo de contenido"
+msgstr "Las diferencias ignoran cambios de espacios en blanco"
 
 #: rc.cpp:272
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Diff ignores all white spaces"
-msgstr "Las diferencias ignoran el tipo de contenido"
+msgstr "Las diferencias ignoran todos los espacios en blanco"
 
 #: rc.cpp:275 svnfrontend/svnactions.cpp:1237
 #, no-c-format
@@ -1020,8 +1015,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:335
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Establece si se prefiere un programa de fusionado externo y no el fusionado "
 "de subversion"
@@ -1054,8 +1048,7 @@ msgstr "Mensaje"
 #: rc.cpp:354
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:357 rc.cpp:733 ksvnwidgets/logmsg_impl.cpp:80
 #: ksvnwidgets/logmsg_impl.cpp:107
@@ -1460,8 +1453,7 @@ msgstr "Seleccione tipo de almacenamiento"
 #: rc.cpp:658
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
+msgstr "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
 #: rc.cpp:661
 #, no-c-format
@@ -1476,8 +1468,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 #: rc.cpp:668
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
+msgstr "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
 #: rc.cpp:672
 #, no-c-format
@@ -1555,9 +1546,9 @@ msgid "Entry"
 msgstr "Entrada"
 
 #: rc.cpp:736
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Hide new items"
-msgstr "Seleccionar elementos nuevos"
+msgstr "Ocultar elementos nuevos"
 
 #: rc.cpp:739
 #, no-c-format
@@ -1693,12 +1684,12 @@ msgstr "Muestra información sobre el plugin y no la aplicación aislada."
 #: kdesvn.cpp:144
 #, fuzzy
 msgid "Could not load the part:\n"
-msgstr "No se ha podido cargar el part:\n"
+msgstr "No se ha podido cargar el componente:\n"
 
 #: kdesvn.cpp:153
 #, fuzzy
 msgid "Could not find our part"
-msgstr "No se ha podido encontrar nuestra parte"
+msgstr "No se ha podido encontrar nuestro componente"
 
 #: kdesvn.cpp:190
 msgid "Could not open url %1"
@@ -1706,7 +1697,7 @@ msgstr "No se puede abrir la url %1"
 
 #: kdesvn.cpp:220
 msgid "Recent opened URLs"
-msgstr ""
+msgstr "URLs abiertas recientemente"
 
 #: kdesvn.cpp:229
 msgid "Load last opened URL on start"
@@ -1787,9 +1778,8 @@ msgid "Create subdir %1 on import"
 msgstr "Crear subdirectorio %1 al importar"
 
 #: svnfrontend/importdir_logmsg.cpp:47
-#, fuzzy
 msgid "(Last part)"
-msgstr "Último autor"
+msgstr "(Última parte)"
 
 #: svnfrontend/commandexec.cpp:214
 msgid "Command \"%1\" not implemented or known"
@@ -2362,7 +2352,7 @@ msgstr "Descargando - pulse cancelar para abortar"
 
 #: svnfrontend/svnactions.cpp:1024
 msgid "Both entries seems to be the same, can not diff."
-msgstr ""
+msgstr "Ambas entradas parecen ser la misma, no hay diferencias."
 
 #: svnfrontend/svnactions.cpp:1077
 msgid "Diff-process could not started, check command."
@@ -2439,8 +2429,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1573
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1603
 msgid "Revert entries"
@@ -2520,7 +2509,7 @@ msgstr "¡El objetivo del fusionado debe ser del mismo tipo que las fuentes!"
 
 #: svnfrontend/svnactions.cpp:1851
 msgid "Both entries seems to be the same, won't do a merge."
-msgstr ""
+msgstr "Ambas entradas parecen ser la misma, no se fusionará."
 
 #: svnfrontend/svnactions.cpp:1903
 msgid "Merge-process could not started, check command."
@@ -2611,8 +2600,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:256
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -2647,8 +2635,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:270
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:272
 msgid "Lock current items"
@@ -2680,8 +2667,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:288
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:290
 msgid "Open repository of working copy"
@@ -2780,14 +2766,12 @@ msgstr ""
 "requiere acceso al repositorio"
 
 #: svnfrontend/kdesvnfilelist.cpp:335
-#, fuzzy
 msgid "Diff items"
-msgstr "Visor de diferencias"
+msgstr "Mostrar diferencias entre elementos"
 
 #: svnfrontend/kdesvnfilelist.cpp:337
-#, fuzzy
 msgid "Diff two items"
-msgstr "Diferencias con elemento seleccionado"
+msgstr "Mostrar diferencias entre dos elementos"
 
 #: svnfrontend/kdesvnfilelist.cpp:340
 msgid "Merge two revisions"
@@ -2907,8 +2891,7 @@ msgstr "¡Lo siento - error interno!"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2986,8 +2969,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:96
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -3091,7 +3073,7 @@ msgstr "Mensaje de registro"
 
 #: ksvnwidgets/diffbrowser.cpp:48
 msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
-msgstr ""
+msgstr "Ctrl-F para buscar, F3 o Mayusculas-F3 para buscar de nuevo."
 
 #: ksvnwidgets/diffbrowser.cpp:49
 msgid ""
@@ -3099,27 +3081,33 @@ msgid ""
 "Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
 "again.</p><p>You may save the (original) output with Ctrl-S.</p>"
 msgstr ""
+"<b>Muestra diferencias entre ficheros</b><p>Se puede buscar dentro del texto con "
+"Ctrl-F.</p><p>F3 para buscar de nuevo hacia adelante, Mayusculas-F3 para buscar de nuevo hacia atrás. "
+"</p><p>Se puede guardar la salida (original) con Ctrl-S.</p>"
 
 #: ksvnwidgets/diffbrowser.cpp:87
 msgid "File %1 exists - overwrite?"
-msgstr ""
+msgstr "El fichero %1 existe - sobreescribirlo?"
 
 #: ksvnwidgets/diffbrowser.cpp:167
 msgid ""
 "End of document reached.\n"
 "Continue from the beginning?"
 msgstr ""
+"Alcanzado final del documento.\n"
+"Continuar desde el principio?"
 
 #: ksvnwidgets/diffbrowser.cpp:169 ksvnwidgets/diffbrowser.cpp:182
-#, fuzzy
 msgid "Find"
-msgstr "Terminado."
+msgstr "Encontrar"
 
 #: ksvnwidgets/diffbrowser.cpp:180
 msgid ""
 "Beginning of document reached.\n"
 "Continue from the end?"
 msgstr ""
+"Alcanzado principio del documento.\n"
+"Continuar desde el final?"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:39
 msgid "Error validating server certificate for '%1'"
@@ -3176,3 +3164,4 @@ msgstr "hacia la Cartera de KDE"
 #: ksvnwidgets/authdialogimpl.cpp:38
 msgid "into subversions simple storage"
 msgstr "hacia almacén sencillo de subversion"
+

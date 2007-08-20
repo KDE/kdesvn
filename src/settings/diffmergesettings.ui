@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>238</width>
-            <height>342</height>
+            <width>267</width>
+            <height>258</height>
         </rect>
     </property>
     <property name="caption">
@@ -51,45 +51,16 @@
                 <string>Diff ignores all white spaces</string>
             </property>
         </widget>
-        <widget class="QButtonGroup">
+        <widget class="QCheckBox">
             <property name="name">
-                <cstring>kcfg_use_kompare_for_diff</cstring>
+                <cstring>kcfg_use_external_diff</cstring>
             </property>
-            <property name="title">
-                <string>Diff display</string>
+            <property name="text">
+                <string>Use external diff display</string>
             </property>
-            <vbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>m_internal</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Internal</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>m_kompare</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Use Kompare for diff</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>m_other</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Use other diff display</string>
-                    </property>
-                </widget>
-            </vbox>
+            <property name="toolTip" stdset="0">
+                <string>If kdesvn should use an external diff display and/or generator. If not checked use internal display.</string>
+            </property>
         </widget>
         <widget class="QLabel">
             <property name="name">
@@ -210,30 +181,16 @@ When %1 and %2 is given, kdesvn let this display make the diff. For that it it m
         </spacer>
     </vbox>
 </widget>
-<customwidgets>
-</customwidgets>
 <connections>
     <connection>
-        <sender>m_internal</sender>
-        <signal>clicked()</signal>
+        <sender>kcfg_use_external_diff</sender>
+        <signal>toggled(bool)</signal>
         <receiver>DiffMergeSettings</receiver>
-        <slot>diffDispChanged()</slot>
-    </connection>
-    <connection>
-        <sender>m_kompare</sender>
-        <signal>clicked()</signal>
-        <receiver>DiffMergeSettings</receiver>
-        <slot>diffDispChanged()</slot>
-    </connection>
-    <connection>
-        <sender>m_other</sender>
-        <signal>clicked()</signal>
-        <receiver>DiffMergeSettings</receiver>
-        <slot>diffDispChanged()</slot>
+        <slot>diffDispChanged(bool)</slot>
     </connection>
 </connections>
 <slots>
-    <slot access="protected">diffDispChanged()</slot>
+    <slot access="protected">diffDispChanged(bool)</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>

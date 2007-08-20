@@ -164,10 +164,6 @@ KAboutData* kdesvnPart::createAboutData()
 void kdesvnPart::setupActions()
 {
     KToggleAction *toggletemp;
-    toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
-            actionCollection(),"toggle_use_kompare");
-    toggletemp->setChecked(Kdesvnsettings::use_kompare_for_diff());
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
     toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
             actionCollection(),"toggle_log_follows");
@@ -248,17 +244,6 @@ void kdesvnPart::slotHideUnchanged(bool how)
     Kdesvnsettings::writeConfig();
     emit refreshTree();
 }
-
-/*!
-    \fn kdesvnPart::slotUseKompare(bool)
- */
-void kdesvnPart::slotUseKompare(bool how)
-{
-    int selected = how ? 1 : 0;
-    Kdesvnsettings::setUse_kompare_for_diff(selected);
-    Kdesvnsettings::writeConfig();
-}
-
 
 /*!
     \fn kdesvnPart::closeURL()
@@ -367,10 +352,6 @@ void kdesvnPart::slotShowSettings()
 void kdesvnPart::slotSettingsChanged()
 {
     KAction * temp;
-    temp = actionCollection()->action("toggle_use_kompare");
-    if (temp) {
-        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::use_kompare_for_diff()==1);
-    }
     temp = actionCollection()->action("toggle_log_follows");
     if (temp) {
         ((KToggleAction*)temp)->setChecked(Kdesvnsettings::log_follows_nodes());

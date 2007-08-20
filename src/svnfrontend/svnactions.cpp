@@ -122,9 +122,7 @@ public:
 
     bool isExternalDiff()
     {
-        int disp = Kdesvnsettings::use_kompare_for_diff();
-
-        if (disp>1) {
+        if (Kdesvnsettings::use_external_diff()) {
             QString edisp = Kdesvnsettings::external_diff_display();
             QStringList wlist = QStringList::split(" ",edisp);
             if (wlist.count()>=3 && edisp.find("%1")!=-1 && edisp.find("%2")!=-1) {
@@ -1176,25 +1174,10 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
 
 void SvnActions::dispDiff(const QByteArray&ex)
 {
-    int disp = Kdesvnsettings::use_kompare_for_diff();
     QString what = Kdesvnsettings::external_diff_display();
     int r = KProcess::Stdin|KProcess::Stderr;
-    if (disp==1) {
-        KProcess *proc = new KProcess();
-        *proc << "kompare";
-        *proc << "-on";
-        *proc << "-";
-        connect(proc,SIGNAL(wroteStdin(KProcess*)),this,SLOT(wroteStdin(KProcess*)));
-        connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-        connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-        if (proc->start(KProcess::NotifyOnExit,(KProcess::Communication)r)) {
-            proc->writeStdin(ex,ex.size());
-            return;
-        } else {
-            emit sendNotify(i18n("\"Kompare\" could not started."));
-        }
-        delete proc;
-    } else if (disp>1  && (what.find("%1")==-1 || what.find("%2")==-1)) {
+
+    if (Kdesvnsettings::external_diff_display() && (what.find("%1")==-1 || what.find("%2")==-1)) {
         QStringList wlist = QStringList::split(" ",what);
         KProcess*proc = new KProcess();
         bool fname_used = false;
@@ -1204,7 +1187,6 @@ void SvnActions::dispDiff(const QByteArray&ex)
         for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
             if (*it=="%f") {
                 fname_used = true;
-//                QByteArray ut = ex.local8Bit();
                 QDataStream*ds = tfile.dataStream();
                 ds->writeRawBytes(ex,ex.size());
                 tfile.close();

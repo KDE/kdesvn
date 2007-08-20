@@ -28,7 +28,7 @@ public:
     DiffMergeSettings_impl(QWidget *parent = 0, const char *name = 0);
     virtual ~DiffMergeSettings_impl();
 protected slots:
-    virtual void diffDispChanged();
+    virtual void diffDispChanged(bool);
 };
 
 #endif

@@ -19,13 +19,13 @@
       <label>Show preview of the file in tooltip</label>
       <default>false</default>
     </entry>
-    <entry key="use_kompare_for_diff" type="Int" >
-      <label>Use the program kompare for diff viewing</label>
-      <default>1</default>
+    <entry key="use_external_diff" type="Bool" >
+      <label>Use an external program for diff viewing/generating</label>
+      <default>false</default>
     </entry>
     <entry key="external_diff_display" type="String" >
       <label>Use external program for diff viewing</label>
-      <default>kompare</default>
+      <default>kompare -on -</default>
     </entry>
     <entry key="external_display" type="String" >
       <label>Use external program for viewing</label>

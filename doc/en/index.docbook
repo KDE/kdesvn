@@ -2093,8 +2093,8 @@ information here.
 -->
 
 <para>
-You need installed subversion 1.2 or above. It requires &kde; 3.4.x
-or above. Subversion prior 1.2 is NOT supported anymore!
+You need installed subversion 1.2 or above and &kde; 3.4.x
+or above. Subversion prior 1.2 is NOT supported!
 </para>
 <para>
 Subversion may found on <ulink url="http://subversion.tigris.org">its homepage</ulink> but your
@@ -2110,10 +2110,8 @@ url="http://kdesvn.alwins-world.de/browser/trunk/ChangeLog">http://kdesvn.alwins
 
 <sect1 id="compilation">
 <title>Compilation and Installation</title>
-<sect2>
-<title>Using cmake</title>
 <para>
-&kappname; requires at least cmake 2.4 for building. The following steps works with both distribution tarball or tarball from repository. Unpack the archive
+&kappname; requires at least cmake 2.4 for building, automake isn't supported. The following steps works with both distribution tarball or tarball from repository. Unpack the archive
 or checkout / export a copy from repository and change to the resulting sourcedirectory.
 </para>
 <para>
@@ -2125,18 +2123,6 @@ or checkout / export a copy from repository and change to the resulting sourcedi
 <prompt>%</prompt> <userinput><command>make</command> install</userinput>
 </screen>
 </para>
-</sect2>
-
-<sect2>
-<title>Using automake and configure</title>
-<para><warning><para>This buildsystem doesn't exist anymore. Use cmake.</para></warning></para>
-</sect2>
-</sect1>
-<sect1 id="configuration">
-<title>Configuration</title>
-
-<para></para>
-
 </sect1>
 
 </appendix>

@@ -16,10 +16,10 @@
 # Patrick ALLAERT <patrick.allaert@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: kdesvn\n"
+"Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-07 14:26+0200\n"
-"PO-Revision-Date: 2007-08-23 13:41+0200\n"
+"PO-Revision-Date: 2007-08-23 20:52+0200\n"
 "Last-Translator: Patrick ALLAERT <patrick.allaert@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -225,7 +225,7 @@ msgstr "Mise à jour externe complète."
 
 #: kiosvn/kiolistener.cpp:255
 msgid "Update complete."
-msgstr "Mise à jour terminé."
+msgstr "Mise à jour terminée."
 
 #: kiosvn/kiolistener.cpp:266
 msgid "Fetching external item into %1."
@@ -257,7 +257,7 @@ msgstr "Supprime %1."
 
 #: kiosvn/kiolistener.cpp:289
 msgid "Replacing %1."
-msgstr "Replace %1."
+msgstr "Remplace %1."
 
 #: kiosvn/kiolistener.cpp:295
 msgid "Transmitting file data "
@@ -298,7 +298,7 @@ msgstr "Copie à chaud d'un dépôt"
 
 #: kdesvnview.cpp:313
 msgid "Hotcopy finished."
-msgstr "Coipie à chaud terminé."
+msgstr "Copie à chaud terminée."
 
 #: kdesvnview.cpp:361
 msgid "Loading a dump into a repository."
@@ -565,7 +565,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p align=\"left\">\n"
-"Marquer un élément avec un statut non normal à l'aide d'un icône surchargé. "
+"Marquer un élément avec un statut non normal à l'aide d'une icône surchargée. "
 "Lors que vous voulez\n"
 "voir quels éléments sont de nouveaux éléments du dépôt, vous pouvez activer "
 "\"Vérification des mises à jour à l'ouverture\" dans le dialogue de "
@@ -605,8 +605,8 @@ msgid ""
 "</p>"
 msgstr ""
 "<p align=\"left\">\n"
-"Entrer un programme externe pour ouvrir les fichier lors qu'il sont double-"
-"cliqué\n"
+"Entrer un programme externe pour ouvrir les fichiers lors qu'ils sont double-"
+"cliqués\n"
 "<br>\n"
 "<tt>&lt;programme&gt;</tt>\n"
 "</p>\n"
@@ -743,7 +743,7 @@ msgstr ""
 #, no-c-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
-"Choisie si kdesvn doit vérifier la mises à jour lors de l'ouverture d'une "
+"Spécifie si kdesvn doit vérifier la mises à jour lors de l'ouverture d'une "
 "copie de travail"
 
 #: rc.cpp:198
@@ -770,7 +770,7 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
 msgstr ""
 "<p align=\"left\">Lors de la vérification de mise à jour, kdesvn récupère "
-"des informations plus détaillés à propos des éléments sur le dépôt distant. "
+"des informations plus détaillées à propos des éléments sur le dépôt distant. "
 "Vous pouvez ainsi voir les locks distant dans la vue globale.\n"
 "</p>\n"
 "<p align=\"left\"><i>Attention : cela peut rendre le listage TRÈS lent !</"
@@ -802,8 +802,8 @@ msgid ""
 msgstr ""
 "La conservation de mots de passe est souvent un problème de sécurité. Kdesvn "
 "lui même ne conserve aucun mot de passe, mais subversion le fait, dans son "
-"l'espace de configuration. Si cet espace est lisible par d'autres que vous, "
-"vous ne devais pas l'activer. Mais vous pouvez choisir pour les comptes non "
+"espace de configuration. Si cet espace est lisible par d'autres que vous, "
+"vous ne devez pas l'activer. Mais vous pouvez choisir pour les comptes non "
 "critiques dans le dialogue d'authentification."
 
 #: rc.cpp:226
@@ -859,7 +859,7 @@ msgstr "Les logs lisent toujours la liste des fichiers modifies"
 #: rc.cpp:244
 #, no-c-format
 msgid "Read detailed change lists"
-msgstr "Lire la liste détaillé des modifications"
+msgstr "Lire la liste détaillée des modifications"
 
 #: rc.cpp:247
 #, no-c-format
@@ -869,7 +869,7 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 "Lire la liste des fichiers modifiés peut parfois ralentir un petit peu. Mais "
-"si cette fonctionnalité est désactivé, kdesvn peut échouer lors de la "
+"si cette fonctionnalité est désactivée, kdesvn peut échouer lors de la "
 "génération des différences entre des nœuds modifiés dans les logs."
 
 #: rc.cpp:250
@@ -885,7 +885,7 @@ msgstr "Liste des éléments que le prochain commit va envoyer ou non"
 #: rc.cpp:257
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr "Maximum de log affiché lors qu'il y a trop de log (0 pour illimité)"
+msgstr "Maximum de logs affichés lors qu'il y a trop de logs (0 pour illimité)"
 
 #: rc.cpp:260
 #, fuzzy, no-c-format
@@ -1169,7 +1169,7 @@ msgstr ""
 "L'UUID du dépôt sera mise à jour si le flux de dump contien un UUID et "
 "l'action n'est pas ignorer et soit le dépôts ne contient pas de révision "
 "soit l'action est forcer. Si le dump ne contien pas d'UUID alors cette "
-"action est ignoré."
+"action est ignorée."
 
 #: rc.cpp:426
 #, no-c-format
@@ -1483,7 +1483,7 @@ msgstr "Chemin vers le dépôt :"
 #: rc.cpp:664
 #, no-c-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr "Désactivé fsync au commit (BDB uniquement)"
+msgstr "Désactiver fsync au commit (BDB uniquement)"
 
 #: rc.cpp:668
 #, no-c-format
@@ -1775,7 +1775,7 @@ msgstr ""
 
 #: svnfrontend/propertiesdlg.cpp:309 svnfrontend/propertiesdlg.cpp:359
 msgid "Protected property"
-msgstr "Propriété protégé"
+msgstr "Propriété protégée"
 
 #: svnfrontend/propertiesdlg.cpp:313 svnfrontend/propertiesdlg.cpp:363
 msgid ""
@@ -1818,7 +1818,7 @@ msgstr "\"GET\" nécessite un fichier de sortie !"
 
 #: svnfrontend/commandexec.cpp:623
 msgid "May only switch one url at time!"
-msgstr "Seulement une URL à la fois peut être changé !"
+msgstr "Seulement une URL à la fois peut être changée !"
 
 #: svnfrontend/commandexec.cpp:627
 msgid "Switch only on working copies!"
@@ -1862,7 +1862,7 @@ msgstr "Supprimé"
 
 #: svnfrontend/svnitem.cpp:395
 msgid "Replaced"
-msgstr "Replacé"
+msgstr "Remplacé"
 
 #: svnfrontend/svnitem.cpp:398
 msgid "Ignored"
@@ -1886,7 +1886,7 @@ msgstr "Incomplet"
 
 #: svnfrontend/svnitem.cpp:418
 msgid "Property modified"
-msgstr "Propriété modifié"
+msgstr "Propriété modifiée"
 
 #: svnfrontend/opencontextmenu.cpp:57
 msgid "Other..."
@@ -1894,7 +1894,7 @@ msgstr "Autre ..."
 
 #: svnfrontend/copymoveview_impl.cpp:49
 msgid "Rename/move"
-msgstr "Renommé/déplacé"
+msgstr "Renommer/déplacer"
 
 #: svnfrontend/copymoveview_impl.cpp:85
 msgid "Move/Rename file/dir"
@@ -1962,7 +1962,7 @@ msgstr "Commit supprimé"
 
 #: svnfrontend/ccontextlistener.cpp:80
 msgid "Commit Replaced"
-msgstr "Commit replacé"
+msgstr "Commit remplacé"
 
 #: svnfrontend/ccontextlistener.cpp:83
 msgid "Locking"
@@ -2009,7 +2009,7 @@ msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually!"
 msgstr ""
-"Le certificat net pas issue d'une autorité de confiance. Utiliser le "
+"Le certificat n'est pas issu d'une autorité de confiance. Utiliser "
 "l'empreinte pour valider ce certificat manuellement !"
 
 #: svnfrontend/ccontextlistener.cpp:313
@@ -2082,7 +2082,7 @@ msgstr "Modifié à la révision %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:433
 msgid "Replaced at revision %1"
-msgstr "Réplacé à la révision %1"
+msgstr "Remplacé à la révision %1"
 
 #: svnfrontend/graphtree/revgraphview.cpp:436
 msgid "Revision %1"
@@ -2150,7 +2150,7 @@ msgstr "Enregistrer l'arbre en png"
 
 #: svnfrontend/graphtree/revisiontree.cpp:93 svnfrontend/svnactions.cpp:249
 msgid "Getting logs - hit cancel for abort"
-msgstr "Récupère les log - annuler pour abandonner"
+msgstr "Récupère les logs - annuler pour abandonner"
 
 #: svnfrontend/graphtree/revisiontree.cpp:97
 msgid ""
@@ -2312,7 +2312,7 @@ msgstr "Version de travail du fichier en conflit"
 
 #: svnfrontend/svnactions.cpp:677
 msgid "Property reject file"
-msgstr "Propriété rejette"
+msgstr "Propriété rejettée"
 
 #: svnfrontend/svnactions.cpp:682
 msgid "Copy from URL"
@@ -2368,11 +2368,11 @@ msgstr "Télécharge - annuler pour abandonner"
 
 #: svnfrontend/svnactions.cpp:1024
 msgid "Both entries seems to be the same, can not diff."
-msgstr ""
+msgstr "Les entrées semblent identiques, ne peut faire de diff"
 
 #: svnfrontend/svnactions.cpp:1077
 msgid "Diff-process could not started, check command."
-msgstr "Le processus pour le diff ne peut pas être démarré, vérifier la commande."
+msgstr "Le processus pour le diff ne peut pas être démarré, vérifiez la commande."
 
 #: svnfrontend/svnactions.cpp:1113
 msgid "Diffing - hit cancel for abort"
@@ -2380,7 +2380,7 @@ msgstr "Diff - annuler pour abandonner"
 
 #: svnfrontend/svnactions.cpp:1125 svnfrontend/svnactions.cpp:1169
 msgid "No difference to display"
-msgstr "Aucune différence à affiché"
+msgstr "Aucune différence à afficher"
 
 #: svnfrontend/svnactions.cpp:1193
 msgid "\"Kompare\" could not started."
@@ -2388,7 +2388,7 @@ msgstr "\"Kompare\" ne peut pas être démarré."
 
 #: svnfrontend/svnactions.cpp:1226
 msgid "Display-process could not started, check command."
-msgstr "Le processus d'affichage ne peut pas être démarré, vérifié la commande."
+msgstr "Le processus d'affichage ne peut pas être démarré, vérifiez la commande."
 
 #: svnfrontend/svnactions.cpp:1276
 msgid "Making update - hit cancel for abort"
@@ -2396,7 +2396,7 @@ msgstr "Mise à jour - annuler pour abandonner"
 
 #: svnfrontend/svnactions.cpp:1370
 msgid "Which files or directories should I add?"
-msgstr "Quels fichiers ou répertoires dois-je ajouté ?"
+msgstr "Quels fichiers ou répertoires dois-je ajouter ?"
 
 #: svnfrontend/svnactions.cpp:1379
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
@@ -2529,7 +2529,7 @@ msgstr ""
 
 #: svnfrontend/svnactions.cpp:1903
 msgid "Merge-process could not started, check command."
-msgstr "Le processus de fusion ne peut pas être démarré, vérifier la commande."
+msgstr "Le processus de fusion ne peut pas être démarré, vérifiez la commande."
 
 #: svnfrontend/svnactions.cpp:1925 svnfrontend/kdesvnfilelist.cpp:1590
 msgid "Merge"
@@ -2573,7 +2573,7 @@ msgstr "Il y a de nouveaux éléments dans le dépôt"
 
 #: svnfrontend/svnactions.cpp:2295
 msgid "Checking for updates started in background"
-msgstr "Vérification de mises à jour démarrée en tâche de fond"
+msgstr "Vérification de mises à jour démarrées en tâche de fond"
 
 #: svnfrontend/kdesvnfilelist.cpp:195
 msgid "Status"
@@ -2856,7 +2856,7 @@ msgstr "Attendez que le travail soit terminé"
 
 #: svnfrontend/kdesvnfilelist.cpp:1906
 msgid "Nothing selected for lock"
-msgstr "Rien de sélectionné pour la verrouillage"
+msgstr "Rien de sélectionné pour le verrouillage"
 
 #: svnfrontend/kdesvnfilelist.cpp:1911
 msgid "Lock message"
@@ -2947,9 +2947,9 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
-"Le type mine du fichier. Utilisé pour déterminer comment fusionner le "
-"fichier et comment Apache doit le distribuer. Un type mine commençant par "
-"<b>'text/'</b> (ou une absence de type mine) est traité comme du texte. "
+"Le type mime du fichier. Utilisé pour déterminer comment fusionner le "
+"fichier et comment Apache doit le distribuer. Un type mime commençant par "
+"<b>'text/'</b> (ou une absence de type mime) est traité comme du texte. "
 "N'importe quoi d'autre comme du binaire."
 
 #. TRANSLATORS: Do not translate "example" in the URL because this is according
@@ -2981,7 +2981,7 @@ msgid ""
 msgstr ""
 "URL pointant vers le suivi de projet. Elle doit contenir <b>%BUGID%</b> qui "
 "sera remplacé par le numéro de bug. Example : <br><nobr><b>http://example."
-"com/mantisse/view.php?id=%BUGID%</b></nobr>"
+"com/mantis/view.php?id=%BUGID%</b></nobr>"
 
 #: svnfrontend/editproperty_impl.cpp:102
 msgid ""
@@ -2989,8 +2989,8 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
-"Chaine ajouté à un message de log lors qu'un numéro de suivi de projet est "
-"renseigne. La chaine doit contenir <b>%BUGID%</b> qui sera remplacé par le "
+"Chaine ajoutée à un message de log lors qu'un numéro de suivi de projet est "
+"renseigné. La chaine doit contenir <b>%BUGID%</b> qui sera remplacé par le "
 "numéro de bug."
 
 #: svnfrontend/editproperty_impl.cpp:105

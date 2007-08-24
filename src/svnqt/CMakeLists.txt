@@ -59,6 +59,7 @@ SET(INST_HEADERS
     status.hpp
     svnfilestream.hpp
     svnstream.hpp
+    svnqttypes.hpp
     targets.hpp
     url.hpp
     version_check.hpp

@@ -42,6 +42,7 @@
 #endif
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 #include "svnqt/svnstream.hpp"
 
 // qt
@@ -70,28 +71,6 @@ class QStringList;
 
 namespace svn
 {
-  // forward declarations
-  class Context;
-  class Status;
-  class Targets;
-  class DirEntry;
-
-  typedef QLIST<LogEntry> LogEntries;
-  typedef QLIST<InfoEntry> InfoEntries;
-  typedef QLIST<Status> StatusEntries;
-  typedef QLIST<DirEntry> DirEntries;
-  typedef QLIST<AnnotateLine> AnnotatedFile;
-  typedef QLIST<Revision> Revisions;
-
-  // map of logentries - key is revision
-  typedef QMap<long,LogEntry> LogEntriesMap;
-  // map of property names to values
-  typedef QMap<QString,QString> PropertiesMap;
-  // pair of path, PropertiesMap
-  typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
-  // vector of path, Properties pairs
-  typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
-
   /** Subversion client API.
    *
    * Never use an object of this as global static! This will make problems with subversion

@@ -17,6 +17,10 @@ SET(svnfrontendsrc
     fronthelpers/cursorstack.h
     fronthelpers/widgetblockstack.cpp
     fronthelpers/widgetblockstack.h
+    fronthelpers/propertylist.cpp
+    fronthelpers/propertylist.h
+    fronthelpers/propertyitem.cpp
+    fronthelpers/propertyitem.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp
@@ -61,7 +65,9 @@ SET(svnfrontendui
     loaddmpdlg.ui
     merge_dlg.ui
     blamedisplay.ui
-    svnlogdlg.ui)
+    svnlogdlg.ui
+    leftpane/leftpane.ui
+    )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 

@@ -173,6 +173,7 @@ protected slots:
     virtual void slotDeleteFinished(KIO::Job*);
     virtual void _openURL(const QString&);
     virtual void _dirwatchTimeout();
+    virtual void _propListTimeout();
 
 signals:
     void sigLogMessage(const QString&);
@@ -181,6 +182,7 @@ signals:
     void sigUrlOpend(bool);
     void sigSwitchUrl(const KURL&);
     void sigUrlChanged(const QString&);
+    void sigProplist(const svn::PathPropertiesMapList&);
 
 public slots:
     virtual void refreshCurrentTree();

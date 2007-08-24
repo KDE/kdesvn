@@ -17,6 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+
+#include "src/svnfrontend/fronthelpers/propertyitem.h"
 #include "propertiesdlg.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
@@ -34,77 +36,6 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kdebug.h>
-
-class PropertyListViewItem:public KListViewItem
-{
-    friend class PropertiesDlg;
-public:
-    PropertyListViewItem(KListView *parent,const QString&,const QString&);
-    PropertyListViewItem(KListView *parent);
-    virtual ~PropertyListViewItem();
-
-    const QString&startName()const{return m_startName;}
-    const QString&startValue()const{return m_startValue;}
-    const QString&currentName()const{return m_currentName;}
-    const QString&currentValue()const{return m_currentValue;}
-
-    void checkValue();
-    void checkName();
-    void deleteIt();
-    void unDeleteIt();
-    bool deleted()const{return m_deleted;}
-
-    bool different()const;
-
-protected:
-    QString m_currentName,m_startName,m_currentValue,m_startValue;
-    bool m_deleted;
-};
-
-PropertyListViewItem::PropertyListViewItem(KListView *parent,const QString&aName,const QString&aValue)
-    : KListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
-{
-    setText(0,startName());
-    setText(1,startValue());
-}
-
-PropertyListViewItem::PropertyListViewItem(KListView *parent)
-    : KListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
-{
-    setText(0,startName());
-    setText(1,startValue());
-}
-
-PropertyListViewItem::~PropertyListViewItem()
-{
-}
-
-void PropertyListViewItem::checkValue()
-{
-    m_currentValue=text(1);
-}
-
-void PropertyListViewItem::checkName()
-{
-    m_currentName=text(0);
-}
-
-bool PropertyListViewItem::different()const
-{
-    return m_currentName!=m_startName || m_currentValue!=m_startValue || deleted();
-}
-
-void PropertyListViewItem::deleteIt()
-{
-    m_deleted = true;
-    setPixmap(0,KGlobal::iconLoader()->loadIcon("cancel",KIcon::Desktop,16));
-}
-
-void PropertyListViewItem::unDeleteIt()
-{
-    m_deleted = false;
-    setPixmap(0,QPixmap());
-}
 
 /*
  *  Constructs a PropertiesDlg as a child of 'parent', with the
@@ -126,7 +57,7 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
     PropertiesDlgLayout = new QHBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
 
     m_PropertiesListview = new KListView(m, "m_PropertiesListview" );
-    m_PropertiesListview->addColumn( i18n( "Properties" ) );
+    m_PropertiesListview->addColumn( i18n( "Property" ) );
     m_PropertiesListview->addColumn( i18n( "Value" ) );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
     m_PropertiesListview->setShowSortIndicator( TRUE );

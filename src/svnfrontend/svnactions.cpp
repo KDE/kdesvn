@@ -985,6 +985,7 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QStri
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,QWidget*p)
 {
     if (m_Data->isExternalDiff()) {
+        kdDebug()<<"External diff..."<<endl;
         svn::InfoEntry info;
         if (singleInfo(p1,start,info)) {
             makeDiff(p1,start,p2,end,info.isDir(),p);
@@ -1082,6 +1083,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p)
 {
     if (m_Data->isExternalDiff()) {
+        kdDebug()<<"External diff 2..."<<endl;
         makeDiffExternal(p1,start,p2,end,isDir,p);
     } else {
         makeDiffinternal(p1,start,p2,end,p);
@@ -1177,7 +1179,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
     QString what = Kdesvnsettings::external_diff_display();
     int r = KProcess::Stdin|KProcess::Stderr;
 
-    if (Kdesvnsettings::external_diff_display() && (what.find("%1")==-1 || what.find("%2")==-1)) {
+    if (Kdesvnsettings::use_external_diff() && (what.find("%1")==-1 || what.find("%2")==-1)) {
         QStringList wlist = QStringList::split(" ",what);
         KProcess*proc = new KProcess();
         bool fname_used = false;
@@ -2358,6 +2360,22 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     return result;
 }
 
+svn::PathPropertiesMapList SvnActions::propList(SvnItem*which,const svn::Revision&where)
+{
+    svn::PathPropertiesMapList pm;
+    if (which) {
+        QString ex;
+        svn::Path p(which->fullName());
+        try {
+            pm = m_Data->m_Svnclient->proplist(p,where,where);
+        } catch (const svn::ClientException&e) {
+            /* no messagebox needed */
+            sendNotify(e.msg());
+        }
+    }
+    return pm;
+}
+
 bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
 {
     if (!which) return false;
@@ -2366,7 +2384,7 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
     svn::PathPropertiesMapList pm;
     try {
         pm = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         /* no messagebox needed */
         //emit clientException(e.msg());
         return false;

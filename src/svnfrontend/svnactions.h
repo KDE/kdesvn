@@ -101,6 +101,7 @@ public:
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     bool isLockNeeded(SvnItem*which,const svn::Revision&where);
+    svn::PathPropertiesMapList propList(SvnItem*which,const svn::Revision&where);
 
     //! generate and displays a revision tree
     /*!

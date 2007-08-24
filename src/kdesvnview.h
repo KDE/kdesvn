@@ -126,7 +126,7 @@ protected:
     kdesvnfilelist*m_flist;
     KActionCollection*m_Collection;
 
-    QSplitter *m_Splitter,*m_treeSplitter;
+    QSplitter *m_Splitter,*m_treeSplitter,*m_infoSplitter;
     QString m_currentURL;
     KTextBrowser*m_LogWindow;
 protected:

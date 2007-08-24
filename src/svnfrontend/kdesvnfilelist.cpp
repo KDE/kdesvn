@@ -105,6 +105,7 @@ public:
     QPoint intern_drop_pos;
     QTimer drop_timer;
     QTimer dirwatch_timer;
+    QTimer propTimer;
 
     bool mousePressed;
     QPoint presspos;
@@ -136,6 +137,18 @@ public:
         if (m_DirWatch) {
             m_DirWatch->startScan();
         }
+    }
+    void startProptimer()
+    {
+        propTimer.start(100,true);
+    }
+    void stopProptimer()
+    {
+        propTimer.stop();
+    }
+    void connectPropTimer(QObject*ob)
+    {
+        QObject::connect(&propTimer,SIGNAL(timeout()),ob,SLOT(_propListTimeout()));
     }
 
 private:
@@ -219,6 +232,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
     m_pList->connectDirTimer(this);
+    m_pList->connectPropTimer(this);
 
     setDropHighlighter(true);
     setDragEnabled(true);
@@ -444,6 +458,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
+    emit sigProplist(svn::PathPropertiesMapList());
     m_Dirsread.clear();
     if (m_SelectedItems) {
         m_SelectedItems->clear();
@@ -928,6 +943,7 @@ void kdesvnfilelist::enableActions()
 
 void kdesvnfilelist::slotSelectionChanged()
 {
+    m_pList->stopProptimer();
     if (m_SelectedItems==0) {
         m_SelectedItems = new FileListViewItemList;
         m_SelectedItems->setAutoDelete(false);
@@ -940,6 +956,7 @@ void kdesvnfilelist::slotSelectionChanged()
         ++it;
     }
     enableActions();
+    m_pList->startProptimer();
 }
 
 /*!
@@ -2322,6 +2339,23 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
     m_pList->stopDirTimer();
     m_pList->dirItems[what]='M';
     m_pList->startDirTimer();
+}
+
+void kdesvnfilelist::_propListTimeout()
+{
+    if (isNetworked()) {
+        emit sigProplist(svn::PathPropertiesMapList());
+        return;
+    }
+    svn::PathPropertiesMapList pm;
+    SvnItem*k = singleSelected();
+    if (!k || !k->isRealVersioned()) {
+        emit sigProplist(svn::PathPropertiesMapList());
+        return;
+    }
+    svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
+    pm =m_SvnWrapper->propList(k,rev);
+    emit sigProplist(pm);
 }
 
 void kdesvnfilelist::_dirwatchTimeout()

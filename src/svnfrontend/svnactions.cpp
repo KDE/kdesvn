@@ -89,12 +89,12 @@
 
 class SvnActionsData:public svn::ref_count
 {
+    typedef svn::SharedPointer<svn::PathPropertiesMapList> sPPlist;
 public:
     SvnActionsData():ref_count()
     {
         m_Svnclient = svn::Client::getobject(0,0);
         m_CurrentContext = 0;
-//        m_Cache.clear();
     }
 
     virtual ~SvnActionsData()
@@ -138,10 +138,10 @@ public:
     svn::ContextP m_CurrentContext;
     svn::Client*m_Svnclient;
 
-    helpers::itemCache m_UpdateCache;
-    helpers::itemCache m_Cache;
-    helpers::itemCache m_conflictCache;
-    helpers::itemCache m_repoLockCache;
+    helpers::statusCache m_UpdateCache;
+    helpers::statusCache m_Cache;
+    helpers::statusCache m_conflictCache;
+    helpers::statusCache m_repoLockCache;
 
     QMap<KProcess*,QStringList> m_tempfilelist;
     QMap<KProcess*,QStringList> m_tempdirlist;
@@ -688,15 +688,15 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                 text+=rb+i18n("Lock comment")+cs+
                     (*it).lockEntry().Comment()+re;
             } else {
-                svn::Status d;
-                if (checkReposLockCache(_what,d)&&d.lockEntry().Locked()) {
-                    text+=rb+i18n("Lock token")+cs+(d.lockEntry().Token())+re;
-                    text+=rb+i18n("Owner")+cs+(d.lockEntry().Owner())+re;
+                svn::SharedPointer<svn::Status> d;
+                if (checkReposLockCache(_what,d)&& d && d->lockEntry().Locked()) {
+                    text+=rb+i18n("Lock token")+cs+(d->lockEntry().Token())+re;
+                    text+=rb+i18n("Owner")+cs+(d->lockEntry().Owner())+re;
                     text+=rb+i18n("Locked on")+cs+
-                        helpers::sub2qt::apr_time2qtString(d.lockEntry().Date())+
+                            helpers::sub2qt::apr_time2qtString(d->lockEntry().Date())+
                         re;
                     text+=rb+i18n("Lock comment")+cs+
-                        d.lockEntry().Comment()+re;
+                            d->lockEntry().Comment()+re;
                 }
             }
         }
@@ -2159,6 +2159,7 @@ void SvnActions::checkModthread()
     }
     kdDebug()<<"ModifiedThread seems stopped"<<endl;
     for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
+        helpers::statusPtr ptr = helpers::statusPtr(new svn::Status(m_CThread->getList()[i]));
         if (m_CThread->getList()[i].isRealVersioned()&& (
             m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
             m_CThread->getList()[i].textStatus()==svn_wc_status_added||
@@ -2166,9 +2167,9 @@ void SvnActions::checkModthread()
             m_CThread->getList()[i].textStatus()==svn_wc_status_replaced||
             m_CThread->getList()[i].propStatus()==svn_wc_status_modified
          ) ) {
-            m_Data->m_Cache.insertKey(m_CThread->getList()[i]);
+            m_Data->m_Cache.insertKey(ptr,ptr->path());
         } else if (m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted) {
-            m_Data->m_conflictCache.insertKey(m_CThread->getList()[i]);
+            m_Data->m_conflictCache.insertKey(ptr,ptr->path());
         }
     }
     delete m_CThread;
@@ -2191,15 +2192,19 @@ void SvnActions::checkUpdateThread()
 
     bool newer=false;
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
-        if (m_UThread->getList()[i].validReposStatus()) {
-            m_Data->m_UpdateCache.insertKey(m_UThread->getList()[i]);
-            if (!m_UThread->getList()[i].validLocalStatus()) {
+        helpers::statusPtr ptr = helpers::statusPtr(new svn::Status(m_UThread->getList()[i]));
+        if (ptr->validReposStatus()) {
+
+            m_Data->m_UpdateCache.insertKey(ptr,ptr->path());
+            ptr->textStatus();
+            ptr->propStatus();
+            if (!(ptr->validLocalStatus())) {
                 newer = true;
             }
         }
-        if (m_UThread->getList()[i].isLocked() &&
-            !m_UThread->getList()[i].entry().lockEntry().Locked()) {
-            m_Data->m_repoLockCache.insertKey(m_UThread->getList()[i]);
+        if (ptr->isLocked() &&
+            !(ptr->entry().lockEntry().Locked())) {
+            m_Data->m_repoLockCache.insertKey(ptr,ptr->path());
         }
     }
     emit sigRefreshIcons(newer);
@@ -2225,10 +2230,11 @@ bool SvnActions::checkUpdatesRunning()
 
 void SvnActions::addModifiedCache(const svn::Status&what)
 {
+    helpers::statusPtr ptr = helpers::statusPtr(new svn::Status(what));
     if (what.textStatus()==svn_wc_status_conflicted) {
-        m_Data->m_conflictCache.insertKey(what);
+        m_Data->m_conflictCache.insertKey(ptr,ptr->path());
     } else {
-        m_Data->m_Cache.insertKey(what);
+        m_Data->m_Cache.insertKey(ptr,ptr->path());
 //        m_Data->m_Cache.dump_tree();
     }
 }
@@ -2238,11 +2244,6 @@ void SvnActions::deleteFromModifiedCache(const QString&what)
     m_Data->m_Cache.deleteKey(what,true);
     m_Data->m_conflictCache.deleteKey(what,true);
     //m_Data->m_Cache.dump_tree();
-}
-
-void SvnActions::getModifiedCache(const QString&path,svn::StatusEntries&dlist)
-{
-    m_Data->m_Cache.find(path,dlist);
 }
 
 bool SvnActions::checkModifiedCache(const QString&path)
@@ -2255,7 +2256,7 @@ bool SvnActions::checkReposLockCache(const QString&path)
     return m_Data->m_repoLockCache.findSingleValid(path,false);
 }
 
-bool SvnActions::checkReposLockCache(const QString&path,svn::Status&t)
+bool SvnActions::checkReposLockCache(const QString&path,svn::SharedPointer<svn::Status>&t)
 {
     /// @todo create a method where svn::Status* will be a parameter so no copy is needed but just reading content
     return m_Data->m_repoLockCache.findSingleValid(path,t);
@@ -2296,11 +2297,11 @@ void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
 
 bool SvnActions::isUpdated(const QString&path)const
 {
-    svn::Status d;
+    svn::SharedPointer<svn::Status> d;
     return m_Data->m_UpdateCache.findSingleValid(path,d);
 }
 
-bool SvnActions::getUpdated(const QString&path,svn::Status&d)const
+bool SvnActions::getUpdated(const QString&path,svn::SharedPointer<svn::Status>&d)const
 {
     return m_Data->m_UpdateCache.findSingleValid(path,d);
 }

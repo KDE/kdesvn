@@ -1,6 +1,8 @@
 version 0.14.0
     * setting if an external diff-display should used is now a simple yes/no box, so there is no need checking for
       kompare on programstart anymore. (#140)
+    * when browsing in working copies or local repositories (file:// protocol) properties of a single selected item will
+      displayed.
 
 version 0.13.0
     * fixed some buildproblems within freebsd or systems with more restrictive qt

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>366</width>
-            <height>332</height>
+            <width>368</width>
+            <height>358</height>
         </rect>
     </property>
     <property name="caption">
@@ -61,6 +61,24 @@
             </property>
             <property name="accel">
                 <string></string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_properties_on_remote_items</cstring>
+            </property>
+            <property name="text">
+                <string>Always get properties on networked repositories</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Should kdesvn retrieves properties on selected item in repositories</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>When browsing kdesvn may try displaying properties below itemlist from a selected item. 
+On networked repositories (eg., not opened via file:// protocol) this may get real slow. So if you have slow network connections or when browsing hangs often you should deactivate it.</string>
             </property>
         </widget>
         <widget class="QCheckBox">

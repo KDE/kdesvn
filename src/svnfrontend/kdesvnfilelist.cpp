@@ -2343,7 +2343,8 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
 
 void kdesvnfilelist::_propListTimeout()
 {
-    if (isNetworked()) {
+    CursorStack a(Qt::BusyCursor);
+    if (isNetworked() && !Kdesvnsettings::properties_on_remote_items()) {
         emit sigProplist(svn::PathPropertiesMapList());
         return;
     }
@@ -2710,12 +2711,13 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer,boo
     if (!_s) {
         return;
     }
-    svn::Status d;
+    svn::SharedPointer<svn::Status> d;
     while (_s) {
         //_s->makePixmap();
+
         if (!no_update) {
-            if (m_SvnWrapper->getUpdated(_s->stat().path(),d)) {
-                _s->updateStatus(d);
+            if (m_SvnWrapper->getUpdated(_s->stat().path(),d) && d) {
+                _s->updateStatus(*d);
             } else {
                 _s->update();
             }

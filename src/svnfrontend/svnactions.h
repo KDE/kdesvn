@@ -91,11 +91,10 @@ public:
     bool makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec=false);
 
     bool createModifiedCache(const QString&base);
-    void getModifiedCache(const QString&path,svn::StatusEntries&dlist);
     bool checkModifiedCache(const QString&path);
     bool checkConflictedCache(const QString&path);
     bool checkReposLockCache(const QString&path);
-    bool checkReposLockCache(const QString&path,svn::Status&t);
+    bool checkReposLockCache(const QString&path,svn::SharedPointer<svn::Status>&t);
     void addModifiedCache(const svn::Status&what);
     void deleteFromModifiedCache(const QString&what);
 
@@ -141,7 +140,7 @@ public:
     bool createUpdateCache(const QString&what);
     bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
-    bool getUpdated(const QString&path,svn::Status&d)const;
+    bool getUpdated(const QString&path,svn::SharedPointer<svn::Status>&d)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();

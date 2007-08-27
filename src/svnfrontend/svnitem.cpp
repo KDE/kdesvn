@@ -445,9 +445,9 @@ QString SvnItem::lockOwner()const
     if (p_Item->m_Stat.entry().lockEntry().Locked()) {
         return p_Item->m_Stat.entry().lockEntry().Owner();
     }
-    svn::Status tmp;
-    if (getWrapper()->checkReposLockCache(fullName(),tmp)) {
-        return tmp.lockEntry().Owner();
+    svn::SharedPointer<svn::Status> tmp;
+    if (getWrapper()->checkReposLockCache(fullName(),tmp) && tmp) {
+        return tmp->lockEntry().Owner();
     }
     return "";
 }

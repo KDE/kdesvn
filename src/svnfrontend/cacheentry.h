@@ -21,6 +21,7 @@
 #define HELPERSCACHEENTRY_H
 
 #include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/shared_pointer.hpp"
 #include "src/svnqt/status.hpp"
 
 // std::map 'cause QMap isn't usable
@@ -32,21 +33,22 @@
 namespace helpers {
 
 /**
-    Class for fast search of items.
+    Class for fast search of path based items.
 
     @author Rajko Albrecht <ral@alwins-world.de>
 */
 template<class C> class cacheEntry {
 public:
-    typedef std::map<QString,cacheEntry<C> > cache_map_type;
+    typedef cacheEntry<C> cache_type;
+    typedef typename std::map<QString,cache_type> cache_map_type;
+    typedef typename cache_map_type::const_iterator citer;
+    typedef typename cache_map_type::iterator iter;
 
 protected:
     QString m_key;
     bool m_isValid;
     C m_content;
     cache_map_type m_subMap;
-    typedef typename cache_map_type::const_iterator citer;
-    typedef typename cache_map_type::iterator iter;
 
 public:
     cacheEntry();
@@ -123,13 +125,15 @@ public:
 #endif
 };
 
+typedef cacheEntry<svn::Status> statusEntry;
+
 template<class C> inline cacheEntry<C>::cacheEntry()
-    : m_key(""),m_isValid(false)
+    : m_key(""),m_isValid(false),m_content()
 {
 }
 
 template<class C> inline cacheEntry<C>::cacheEntry(const QString&key)
-    : m_key(key),m_isValid(false)
+    : m_key(key),m_isValid(false),m_content()
 {
 }
 
@@ -330,19 +334,23 @@ template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStri
     it->second.listsubs_if(what,oper);
 }
 
-typedef cacheEntry<svn::Status> statusEntry;
-
-class itemCache
+template<class C> class itemCache
 {
+public:
+    typedef cacheEntry<C> cache_type;
+    typedef typename std::map<QString,cache_type> cache_map_type;
+    typedef typename cache_map_type::const_iterator citer;
+    typedef typename cache_map_type::iterator iter;
+
 protected:
-    std::map<QString,statusEntry> m_contentMap;
+    cache_map_type m_contentMap;
 
 public:
-    itemCache();
-    virtual ~itemCache();
+    itemCache():m_contentMap(){}
+    virtual ~itemCache(){};
 
-    void setContent(const svn::StatusEntries&dlist);
-    void clear();
+    void setContent(const QLIST<C>&dlist);
+    void clear(){m_contentMap.clear();}
     //! Checks if cache contains a specific item
     /*!
      * the keylist will manipulated - so copy-operations aren't needed.
@@ -350,11 +358,11 @@ public:
      * \return true if found (may or may not valid!) otherwise false
      */
     virtual bool find(const QString&what)const;
-    virtual bool find(const QString&,svn::StatusEntries&)const;
+    virtual bool find(const QString&,QLIST<C>&)const;
 
     virtual void deleteKey(const QString&what,bool exact);
-    virtual void insertKey(const svn::Status&);
-    virtual bool findSingleValid(const QString&what,svn::Status&)const;
+    virtual void insertKey(const C&,const QString&path);
+    virtual bool findSingleValid(const QString&what,C&)const;
     virtual bool findSingleValid(const QString&what,bool check_valid_subs)const;
 
     template<class T>void listsubs_if(const QString&what,T&oper)const;
@@ -362,7 +370,85 @@ public:
     void dump_tree();
 };
 
-template<class T> inline void itemCache::listsubs_if(const QString&_what,T&oper)const
+template<class C> inline void itemCache<C>::setContent(const QLIST<C>&dlist)
+{
+    m_contentMap.clear();
+    citer it;
+    for (it=dlist.begin();it!=dlist.end();++it) {
+        QStringList _keys = QStringList::split("/",(*it).path());
+        if (_keys.count()==0) {
+            continue;
+        }
+        m_contentMap[_keys[0]]=statusEntry(_keys[0]);
+        if (_keys.count()==1) {
+            m_contentMap[_keys[0]].setValidContent(_keys[0],(*it));
+        } else {
+            _keys.erase(_keys.begin());
+            m_contentMap[_keys[0]].insertKey(_keys,(*it));
+        }
+    }
+}
+
+template<class C> inline void itemCache<C>::insertKey(const C&st,const QString&path)
+{
+   // kdDebug()<<"Inserting "<<st.path()<<endl;
+    QStringList _keys = QStringList::split("/",path);
+    if (_keys.count()==0) {
+        return;
+    }
+    iter it=m_contentMap.find(_keys[0]);
+
+    if (it==m_contentMap.end()) {
+        m_contentMap[_keys[0]]=cache_type(_keys[0]);
+    }
+    if (_keys.count()==1) {
+        m_contentMap[_keys[0]].setValidContent(_keys[0],st);
+    } else {
+        QString m = _keys[0];
+        _keys.erase(_keys.begin());
+        m_contentMap[m].insertKey(_keys,st);
+    }
+}
+
+template<class C> inline bool itemCache<C>::find(const QString&what)const
+{
+    if (m_contentMap.size()==0) {
+        return false;
+    }
+    QStringList _keys = QStringList::split("/",what);
+    if (_keys.count()==0) {
+        return false;
+    }
+    citer it=m_contentMap.find(_keys[0]);
+    if (it==m_contentMap.end()) {
+        return false;
+    }
+    if (_keys.count()==1) {
+        return true;
+    }
+    _keys.erase(_keys.begin());
+    return it->second.find(_keys);
+}
+
+template<class C> inline bool itemCache<C>::find(const QString&_what,QLIST<C>&dlist)const
+{
+    if (m_contentMap.size()==0) {
+        return false;
+    }
+    QStringList what = QStringList::split("/",_what);
+    if (what.count()==0) {
+        return false;
+    }
+    citer it=m_contentMap.find(what[0]);
+    if (it==m_contentMap.end()) {
+        return false;
+    }
+    what.erase(what.begin());
+   // kdDebug()<<"itemCache::find(const QString&_what,svn::StatusEntries&dlist) "<<what<<endl;
+    return it->second.find(what,dlist);
+}
+
+template<class C> inline void itemCache<C>::deleteKey(const QString&_what,bool exact)
 {
     if (m_contentMap.size()==0) {
         return;
@@ -371,7 +457,94 @@ template<class T> inline void itemCache::listsubs_if(const QString&_what,T&oper)
     if (what.count()==0) {
         return;
     }
-    statusEntry::citer it=m_contentMap.find(what[0]);
+    iter it=m_contentMap.find(what[0]);
+    if (it==m_contentMap.end()) {
+        return;
+    }
+    /* first stage - we are the one holding the right key */
+    if (what.count()==1){
+        if (!exact || !it->second.hasValidSubs()) {
+            /* if it has no valid subs delete it */
+            m_contentMap.erase(it);
+        } else {
+            /* otherwise mark as invalid */
+            it->second.markInvalid();
+        }
+        return;
+    } else {
+        /* otherwise go trough tree */
+        what.erase(what.begin());
+        bool b = it->second.deleteKey(what,exact);
+        if (b && !it->second.hasValidSubs()) {
+            m_contentMap.erase(it);
+        }
+    }
+}
+
+template<class C> inline void itemCache<C>::dump_tree()
+{
+    citer it;
+    for (it=m_contentMap.begin();it!=m_contentMap.end();++it) {
+//        std::cout<<it->first.latin1() << " (" << it->second.key().latin1() << ")"<<std::endl;
+//        it->second.dump_tree(1);
+    }
+}
+
+template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,C&st)const
+{
+    if (m_contentMap.size()==0) {
+        return false;
+    }
+    QStringList what = QStringList::split("/",_what);
+    if (what.count()==0) {
+        return false;
+    }
+    citer it=m_contentMap.find(what[0]);
+    if (it==m_contentMap.end()) {
+        return false;
+    }
+    if (what.count()==1) {
+        if (it->second.isValid()) {
+            st=it->second.content();
+            return true;
+        }
+        return false;
+    }
+    what.erase(what.begin());
+    return it->second.findSingleValid(what,st);
+}
+
+template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,bool check_valid_subs)const
+{
+    if (m_contentMap.size()==0) {
+        return false;
+    }
+    QStringList what = QStringList::split("/",_what);
+    if (what.count()==0) {
+        return false;
+    }
+    citer it=m_contentMap.find(what[0]);
+    if (it==m_contentMap.end()) {
+        return false;
+    }
+    if (what.count()==1) {
+        return it->second.isValid()||(check_valid_subs&&it->second.hasValidSubs());
+    }
+    what.erase(what.begin());
+    return it->second.findSingleValid(what,check_valid_subs);
+}
+
+template<class C> template<class T> inline void itemCache<C>::listsubs_if(const QString&_what,T&oper)const
+{
+    if (m_contentMap.size()==0) {
+        return;
+    }
+    QStringList what = QStringList::split("/",_what);
+    if (what.count()==0) {
+        return;
+    }
+    citer it=m_contentMap.find(what[0]);
+
     if (it==m_contentMap.end()) {
         return;
     }
@@ -383,14 +556,20 @@ template<class T> inline void itemCache::listsubs_if(const QString&_what,T&oper)
     it->second.listsubs_if(what,oper);
 }
 
+typedef svn::SharedPointer<svn::Status> statusPtr;
+typedef cacheEntry<statusPtr> ptrEntry;
+typedef QLIST<statusPtr> statusPtrList;
+typedef itemCache<statusPtr> statusCache;
+
 class ValidRemoteOnly
 {
     svn::StatusEntries m_List;
 public:
     ValidRemoteOnly():m_List(){}
-    void operator()(const std::pair<const QString,helpers::statusEntry>&_data) {
-        if(_data.second.content().validReposStatus()&&!_data.second.content().validLocalStatus()) {
-            m_List.push_back(_data.second.content());
+    void operator()(const std::pair<QString,helpers::ptrEntry>&_data)
+    {
+        if(_data.second.isValid() && _data.second.content()->validReposStatus()&&!_data.second.content()->validLocalStatus()) {
+            m_List.push_back(*(_data.second.content()));
         }
     }
     const svn::StatusEntries&liste()const{return m_List;}

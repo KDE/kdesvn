@@ -24,7 +24,9 @@
 #include <klocale.h>
 #include <dcopclient.h>
 
-KioListener::KioListener(kio_svnProtocol*_par)
+namespace KIO {
+
+KioListener::KioListener(KIO::kio_svnProtocol*_par)
  : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false)
 {
     par = _par;
@@ -103,13 +105,7 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
 
 /*! the content of that method is taken from the notify in kio::svn in KDE SDK */
 /* this moment we don't use it full 'cause not all is made via KIO */
-void KioListener::contextNotify (const char * path,
-                    svn_wc_notify_action_t action,
-                    svn_node_kind_t kind ,
-                    const char * mime_type ,
-                    svn_wc_notify_state_t content_state,
-                    svn_wc_notify_state_t prop_state,
-                    svn_revnum_t revision)
+void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action,svn_node_kind_t kind ,const char * mime_type ,svn_wc_notify_state_t content_state, svn_wc_notify_state_t prop_state,svn_revnum_t revision)
 {
     if (par->wasKilled()) {
         return;
@@ -210,53 +206,6 @@ void KioListener::contextNotify (const char * path,
                         userstring = i18n("Finished external.");
                     }
                 }
-
-#if 0
-                if (! nb->suppress_final_line) {
-                    if (SVN_IS_VALID_REVNUM (revision)) {
-                        if (nb->is_export) {
-                            if ( m_External )
-                                userstring = i18n("Exported external at revision %1.").arg( revision );
-                            else
-                                userstring = i18n("Exported revision %1.").arg( revision );
-                        } else if (nb->is_checkout) {
-                            if ( m_External )
-                                userstring = i18n("Checked out external at revision %1.").arg( revision );
-                            else
-                                userstring = i18n("Checked out revision %1.").arg( revision);
-                        } else {
-                            if (m_HasChanges) {
-                                if ( m_External )
-                                    userstring=i18n("Updated external to revision %1.").arg( revision );
-                                else
-                                    userstring = i18n("Updated to revision %1.").arg( revision);
-                            } else {
-                                if ( m_External )
-                                    userstring = i18n("External at revision %1.").arg( revision );
-                                else
-                                    userstring = i18n("At revision %1.").arg( revision);
-                            }
-                        }
-                    } else  /* no revision */ {
-                        if (nb->is_export) {
-                            if ( m_External )
-                                userstring = i18n("External export complete.");
-                            else
-                                userstring = i18n("Export complete.");
-                        } else if (nb->is_checkout) {
-                            if ( m_External )
-                                userstring = i18n("External checkout complete.");
-                            else
-                                userstring = i18n("Checkout complete.");
-                        } else {
-                            if ( m_External )
-                                userstring = i18n("External update complete.");
-                            else
-                                userstring = i18n("Update complete.");
-                        }
-                    }
-                }
-#endif
             }
             if (m_External)
                 m_External = FALSE;
@@ -327,8 +276,7 @@ void KioListener::contextNotify (const svn_wc_notify_t *action)
 }
 
 svn::ContextListener::SslServerTrustAnswer
-KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
-                                 apr_uint32_t & acceptedFailures)
+KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data, apr_uint32_t & acceptedFailures)
 {
     QByteArray reply;
     QByteArray params;
@@ -411,10 +359,7 @@ bool KioListener::contextGetSavedLogin (const QString & realm,QString & username
 }
 
 
-bool KioListener::contextGetLogin (const QString & realm,
-                     QString & username,
-                     QString & password,
-                     bool & maySave)
+bool KioListener::contextGetLogin (const QString & realm, QString & username, QString & password, bool & maySave)
 {
     QByteArray reply;
     QByteArray params;
@@ -455,3 +400,5 @@ void KioListener::contextProgress(long long int cur, long long int max)
         par->contextProgress(cur,max);
     }
 }
+
+} // namespace KIO

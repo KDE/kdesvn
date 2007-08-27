@@ -61,6 +61,9 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
+namespace KIO
+{
+
 class KioSvnData
 {
 public:
@@ -128,6 +131,7 @@ svn::Revision KioSvnData::urlToRev(const KURL&url)
     return rev;
 }
 
+
 kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket)
     : SlaveBase("kio_ksvn", pool_socket, app_socket),StreamWrittenCb()
 {
@@ -138,6 +142,8 @@ kio_svnProtocol::kio_svnProtocol(const QCString &pool_socket, const QCString &ap
 kio_svnProtocol::~kio_svnProtocol()
 {
     delete m_pData;
+}
+
 }
 
 extern "C"
@@ -160,14 +166,15 @@ int kdemain(int argc, char **argv)
         exit(-1);
     }
 
-    kio_svnProtocol slave(argv[2], argv[3]);
+    KIO::kio_svnProtocol slave(argv[2], argv[3]);
     slave.dispatchLoop();
 
     kdDebug(7101) << "*** kio_ksvn Done" << endl;
     return 0;
 }
 
-
+namespace KIO
+{
 /*!
     \fn kio_svnProtocol::listDir (const KURL&url)
  */
@@ -923,3 +930,5 @@ QString kio_svnProtocol::getDefaultLog()
     }
     return res;
 }
+
+} // namespace KIO

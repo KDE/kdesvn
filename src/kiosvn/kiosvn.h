@@ -33,6 +33,9 @@
 #include <sys/stat.h>
 #include <qvaluelist.h>
 
+namespace KIO
+{
+
 class KioSvnData;
 
 /**
@@ -111,4 +114,7 @@ private:
 protected:
     QString getDefaultLog();
 };
+
+}
+
 #endif

@@ -25,9 +25,7 @@
 
 namespace KIO {
     class SlaveBase;
-}
-
-class kio_svnProtocol;
+    class kio_svnProtocol;
 
 /**
 @author Rajko Albrecht
@@ -35,7 +33,7 @@ class kio_svnProtocol;
 class KioListener : public svn::ContextListener
 {
 public:
-    KioListener(kio_svnProtocol*_par);
+    KioListener(KIO::kio_svnProtocol*_par);
     virtual ~KioListener();
 
     /* context-listener methods */
@@ -67,7 +65,8 @@ public:
     void incCounter(){++m_notifyCounter;}
     virtual void contextProgress(long long int current, long long int max);
 private:
-    kio_svnProtocol *par;
+    KIO::kio_svnProtocol *par;
+
 protected:
     unsigned int  m_notifyCounter;
     bool m_External;
@@ -75,5 +74,6 @@ protected:
     bool m_FirstTxDelta;
     PwStorage pws;
 };
+}
 
 #endif

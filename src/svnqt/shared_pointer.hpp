@@ -174,7 +174,7 @@ public:
     /*!
      * \return true if content set and not a null-pointer, otherwise false
      */
-    operator bool () { return ( data != 0 && data->data != NULL );}
+    operator bool () { return ( data != 0 && data->data != 0 );}
 
     //! Negation operator
     /*!

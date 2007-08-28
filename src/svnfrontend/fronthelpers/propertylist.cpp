@@ -42,22 +42,24 @@ Propertylist::~Propertylist()
 {
 }
 
-void Propertylist::displayList(const svn::PathPropertiesMapList&propList)
+void Propertylist::displayList(const svn::PathPropertiesMapListPtr&propList)
 {
     clear();
-    svn::PathPropertiesMapList::const_iterator lit;
-    svn::PropertiesMap pmap;
-    for (lit=propList.begin();lit!=propList.end();++lit) {
-        pmap = (*lit).second;
-        /* just want the first one */
-        break;
-    }
-    svn::PropertiesMap::const_iterator pit;
-    for (pit=pmap.begin();pit!=pmap.end();++pit) {
-        PropertyListViewItem * ki = new PropertyListViewItem(this,
-                pit.key(),
-                pit.data());
-        ki->setMultiLinesEnabled(true);
+    if (propList) {
+        svn::PathPropertiesMapList::const_iterator lit;
+        svn::PropertiesMap pmap;
+        for (lit=propList->begin();lit!=propList->end();++lit) {
+            pmap = (*lit).second;
+            /* just want the first one */
+            break;
+        }
+        svn::PropertiesMap::const_iterator pit;
+        for (pit=pmap.begin();pit!=pmap.end();++pit) {
+            PropertyListViewItem * ki = new PropertyListViewItem(this,
+                    pit.key(),
+                    pit.data());
+            ki->setMultiLinesEnabled(true);
+        }
     }
 }
 

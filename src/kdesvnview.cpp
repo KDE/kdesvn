@@ -88,8 +88,8 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     m_infoSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_infoSplitter->sizePolicy().hasHeightForWidth() ) );
     m_LogWindow=new KTextBrowser(m_infoSplitter);
     Propertylist*pl = new Propertylist(m_infoSplitter);
-    connect(m_flist,SIGNAL(sigProplist(const svn::PathPropertiesMapList&)),
-            pl,SLOT(displayList(const svn::PathPropertiesMapList&)));
+    connect(m_flist,SIGNAL(sigProplist(const svn::PathPropertiesMapListPtr&)),
+            pl,SLOT(displayList(const svn::PathPropertiesMapListPtr&)));
 #else
     m_treeSplitter=0;
     m_infoSplitter=0;

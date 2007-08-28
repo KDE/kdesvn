@@ -33,7 +33,7 @@ class QHBoxLayout;
 class QGridLayout;
 class QSpacerItem;
 class QLabel;
-class KListView;
+class Propertylist;
 class QListViewItem;
 class KPushButton;
 class FileListViewItem;
@@ -59,7 +59,7 @@ public:
     void changedItems(tPropEntries&toSet,QValueList<QString>&toDelete);
 
 protected:
-    KListView* m_PropertiesListview;
+    Propertylist* m_PropertiesListview;
     KPushButton* m_AddButton;
     KPushButton* m_DeleteButton;
     KPushButton* m_ModifyButton;

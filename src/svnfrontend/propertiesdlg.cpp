@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "src/svnfrontend/fronthelpers/propertyitem.h"
+#include "src/svnfrontend/fronthelpers/propertylist.h"
 #include "propertiesdlg.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
@@ -27,7 +28,6 @@
 #include <qvariant.h>
 #include <qlabel.h>
 #include <qheader.h>
-#include <klistview.h>
 #include <kpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
@@ -56,7 +56,7 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
     QWidget * m = makeMainWidget();
     PropertiesDlgLayout = new QHBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
 
-    m_PropertiesListview = new KListView(m, "m_PropertiesListview" );
+    m_PropertiesListview = new Propertylist(m, "m_PropertiesListview" );
     m_PropertiesListview->addColumn( i18n( "Property" ) );
     m_PropertiesListview->addColumn( i18n( "Value" ) );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
@@ -138,7 +138,7 @@ void PropertiesDlg::slotSelectionChanged(QListViewItem*item)
 {
     m_DeleteButton->setEnabled(item);
     m_ModifyButton->setEnabled(item);
-    if (!item) return;
+    if (!item || item->rtti()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (item);
     if (protected_Property(ki->currentName())) {
         m_DeleteButton->setEnabled(false);
@@ -166,27 +166,14 @@ void PropertiesDlg::initItem()
         return;
     }
     svn::Path what(m_Item->fullName());
-    svn::PathPropertiesMapList propList;
+    svn::PathPropertiesMapListPtr propList;
     try {
         propList = m_Client->proplist(what,m_Rev,m_Rev);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;
     }
-    svn::PathPropertiesMapList::const_iterator lit;
-    svn::PropertiesMap pmap;
-    for (lit=propList.begin();lit!=propList.end();++lit) {
-        pmap = (*lit).second;
-        /* just want the first one */
-        break;
-    }
-    svn::PropertiesMap::const_iterator pit;
-    for (pit=pmap.begin();pit!=pmap.end();++pit) {
-        PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview,
-            pit.key(),
-            pit.data());
-        ki->setMultiLinesEnabled(true);
-    }
+    m_PropertiesListview->displayList(propList);
     initDone = true;
 }
 
@@ -217,7 +204,7 @@ void PropertiesDlg::slotSelectionExecuted(QListViewItem*)
  */
 void PropertiesDlg::slotItemRenamed(QListViewItem*_item,const QString &,int col )
 {
-    if (!_item) return;
+    if (!_item || _item->rtti()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*item = static_cast<PropertyListViewItem*> (_item);
     if (col==0) {
         item->checkName();

@@ -586,7 +586,7 @@ namespace svn
      * @param recurse
      * @return PropertiesList
      */
-    virtual PathPropertiesMapList
+    virtual PathPropertiesMapListPtr
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,

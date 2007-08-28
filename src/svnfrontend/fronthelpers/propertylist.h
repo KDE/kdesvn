@@ -34,7 +34,7 @@ public:
     ~Propertylist();
 
 public slots:
-    virtual void displayList(const svn::PathPropertiesMapList&);
+    virtual void displayList(const svn::PathPropertiesMapListPtr&);
     virtual void clear();
 };
 

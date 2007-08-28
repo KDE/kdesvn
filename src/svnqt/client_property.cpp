@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -47,7 +47,7 @@
 namespace svn
 {
 
-  PathPropertiesMapList
+  PathPropertiesMapListPtr
   Client_impl::proplist(const Path &path,
                    const Revision &revision,
                    const Revision &peg,
@@ -69,7 +69,7 @@ namespace svn
       throw ClientException (error);
     }
 
-    PathPropertiesMapList path_prop_map_list;
+    PathPropertiesMapListPtr path_prop_map_list = PathPropertiesMapListPtr(new PathPropertiesMapList);
     for (int j = 0; j < props->nelts; ++j)
     {
       svn_client_proplist_item_t *item =
@@ -89,7 +89,7 @@ namespace svn
              QString::FROMUTF8( ((const svn_string_t *)val)->data );
       }
 
-      path_prop_map_list.push_back( PathPropertiesMapEntry( QString::FROMUTF8(item->node_name->data), prop_map ) );
+      path_prop_map_list->push_back( PathPropertiesMapEntry( QString::FROMUTF8(item->node_name->data), prop_map ) );
     }
 
     return path_prop_map_list;

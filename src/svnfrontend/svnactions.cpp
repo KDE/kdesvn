@@ -132,6 +132,11 @@ public:
         return false;
     }
 
+    void clearCaches()
+    {
+        m_PropertiesCache.clear();
+    }
+
     ItemDisplay* m_ParentList;
 
     svn::smart_pointer<CContextListener> m_SvnContext;
@@ -142,6 +147,7 @@ public:
     helpers::statusCache m_Cache;
     helpers::statusCache m_conflictCache;
     helpers::statusCache m_repoLockCache;
+    helpers::itemCache<svn::PathPropertiesMapListPtr> m_PropertiesCache;
 
     QMap<KProcess*,QStringList> m_tempfilelist;
     QMap<KProcess*,QStringList> m_tempdirlist;
@@ -190,6 +196,7 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 
 void SvnActions::reInitClient()
 {
+    m_Data->clearCaches();
     m_Data->m_CurrentContext = new svn::Context();
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContext);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
@@ -2361,17 +2368,30 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     return result;
 }
 
-svn::PathPropertiesMapList SvnActions::propList(SvnItem*which,const svn::Revision&where)
+svn::PathPropertiesMapListPtr SvnActions::propList(SvnItem*which,const svn::Revision&where)
 {
-    svn::PathPropertiesMapList pm;
+    svn::PathPropertiesMapListPtr pm;
     if (which) {
         QString ex;
         svn::Path p(which->fullName());
-        try {
-            pm = m_Data->m_Svnclient->proplist(p,where,where);
-        } catch (const svn::ClientException&e) {
-            /* no messagebox needed */
-            sendNotify(e.msg());
+        QString fk=where.toString()+"/"+which->fullName();
+        kdDebug()<<"Property at revision "<<where.toString()<<endl;
+
+        if (where != svn::Revision::WORKING)
+        {
+            m_Data->m_PropertiesCache.findSingleValid(fk,pm);
+        }
+        if (!pm)
+        {
+            try {
+                pm = m_Data->m_Svnclient->proplist(p,where,where);
+            } catch (const svn::ClientException&e) {
+                /* no messagebox needed */
+                sendNotify(e.msg());
+            }
+            if (where != svn::Revision::WORKING && pm) {
+                m_Data->m_PropertiesCache.insertKey(pm,fk);
+            }
         }
     }
     return pm;

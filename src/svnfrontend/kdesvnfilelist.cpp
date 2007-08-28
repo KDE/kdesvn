@@ -458,7 +458,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
-    emit sigProplist(svn::PathPropertiesMapList());
+    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()));
     m_Dirsread.clear();
     if (m_SelectedItems) {
         m_SelectedItems->clear();
@@ -2345,13 +2345,13 @@ void kdesvnfilelist::_propListTimeout()
 {
     CursorStack a(Qt::BusyCursor);
     if (isNetworked() && !Kdesvnsettings::properties_on_remote_items()) {
-        emit sigProplist(svn::PathPropertiesMapList());
+        emit sigProplist(svn::PathPropertiesMapListPtr());
         return;
     }
-    svn::PathPropertiesMapList pm;
+    svn::PathPropertiesMapListPtr pm;
     SvnItem*k = singleSelected();
     if (!k || !k->isRealVersioned()) {
-        emit sigProplist(svn::PathPropertiesMapList());
+        emit sigProplist(svn::PathPropertiesMapListPtr());
         return;
     }
     svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);

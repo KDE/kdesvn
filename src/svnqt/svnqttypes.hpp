@@ -22,6 +22,7 @@
 #define _SVNQT_TYPES_HPP
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/shared_pointer.hpp"
 
 // qt
 #include <qglobal.h>
@@ -63,6 +64,8 @@ namespace svn
     typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
     /// vector of path, Properties pairs
     typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
+    /// shared pointer for properties
+    typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 }
 
 #endif

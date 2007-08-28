@@ -12,6 +12,7 @@ class PropertyListViewItem:public KListViewItem
     friend class Propertylist;
 
     public:
+        static const int _RTTI_ = 1001;
         PropertyListViewItem(KListView *parent,const QString&,const QString&);
         PropertyListViewItem(KListView *parent);
         virtual ~PropertyListViewItem();
@@ -28,6 +29,8 @@ class PropertyListViewItem:public KListViewItem
         bool deleted()const{return m_deleted;}
 
         bool different()const;
+
+        virtual int rtti()const{return _RTTI_;}
 
     protected:
         QString m_currentName,m_startName,m_currentValue,m_startValue;

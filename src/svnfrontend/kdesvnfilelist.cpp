@@ -458,7 +458,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
-    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()));
+    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,QString(""));
     m_Dirsread.clear();
     if (m_SelectedItems) {
         m_SelectedItems->clear();
@@ -2345,18 +2345,18 @@ void kdesvnfilelist::_propListTimeout()
 {
     CursorStack a(Qt::BusyCursor);
     if (isNetworked() && !Kdesvnsettings::properties_on_remote_items()) {
-        emit sigProplist(svn::PathPropertiesMapListPtr());
+        emit sigProplist(svn::PathPropertiesMapListPtr(),false,QString(""));
         return;
     }
     svn::PathPropertiesMapListPtr pm;
     SvnItem*k = singleSelected();
     if (!k || !k->isRealVersioned()) {
-        emit sigProplist(svn::PathPropertiesMapListPtr());
+        emit sigProplist(svn::PathPropertiesMapListPtr(),false,QString(""));
         return;
     }
     svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
     pm =m_SvnWrapper->propList(k,rev);
-    emit sigProplist(pm);
+    emit sigProplist(pm,isWorkingCopy(),k->fullName());
 }
 
 void kdesvnfilelist::_dirwatchTimeout()
@@ -2899,6 +2899,18 @@ bool kdesvnfilelist::uniqueTypeSelected()
         }
     }
     return true;
+}
+
+void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QValueList<QString>&dellist,const QString&path)
+{
+    m_SvnWrapper->changeProperties(pm,dellist,path);
+    FileListViewItem* which = singleSelected();
+    kdDebug()<<(which?which->fullName():"nix") << " -> " << path<<endl;
+    if (which && which->fullName()==path) {
+        which->refreshStatus();
+        refreshCurrent(which);
+        _propListTimeout();
+    }
 }
 
 #include "kdesvnfilelist.moc"

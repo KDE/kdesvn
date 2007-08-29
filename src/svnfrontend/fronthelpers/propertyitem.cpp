@@ -46,3 +46,9 @@ void PropertyListViewItem::unDeleteIt()
     m_deleted = false;
     setPixmap(0,QPixmap());
 }
+
+bool PropertyListViewItem::protected_Property(const QString&what)
+{
+    if (what.compare("svn:special")!=0) return false;
+    return true;
+}

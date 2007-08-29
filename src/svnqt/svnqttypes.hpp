@@ -53,8 +53,14 @@ namespace svn
     typedef QLIST<InfoEntry> InfoEntries;
     /// simple list of log entries
     typedef QLIST<LogEntry> LogEntries;
+    /// shared_pointer for LogEntriesMap
+    typedef SharedPointer<LogEntries> LogEntriesPtr;
+
     /// map of logentries - key is revision
     typedef QMap<long,LogEntry> LogEntriesMap;
+    /// shared_pointer for LogEntriesMap
+    typedef SharedPointer<LogEntriesMap> LogEntriesMapPtr;
+
     typedef QLIST<Status> StatusEntries;
     typedef QLIST<Revision> Revisions;
 

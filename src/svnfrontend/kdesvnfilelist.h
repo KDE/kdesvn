@@ -182,7 +182,7 @@ signals:
     void sigUrlOpend(bool);
     void sigSwitchUrl(const KURL&);
     void sigUrlChanged(const QString&);
-    void sigProplist(const svn::PathPropertiesMapListPtr&);
+    void sigProplist(const svn::PathPropertiesMapListPtr&,bool,const QString&);
 
 public slots:
     virtual void refreshCurrentTree();
@@ -191,6 +191,8 @@ public slots:
     virtual void slotMkdir();
     virtual void slotMkBaseDirs();
     virtual void slotSettingsChanged();
+    virtual void slotChangeProperties(const svn::PropertiesMap&,const QValueList<QString>&,const QString&);
+
 
 protected slots:
     virtual void slotLock();

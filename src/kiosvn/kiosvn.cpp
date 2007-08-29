@@ -21,6 +21,7 @@
 #include "kiosvn.h"
 #include "kiolistener.h"
 
+#include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/dirent.hpp"
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/status.hpp"
@@ -737,7 +738,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
 {
     svn::Revision start(revstart,revstringstart);
     svn::Revision end(revend,revstringend);
-    const svn::LogEntries * logs = 0;
+    svn::LogEntriesPtr logs;
 
     for (unsigned j = 0; j<urls.count();++j) {
         logs = 0;
@@ -778,7 +779,6 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
                 m_pData->m_Listener.incCounter();
             }
         }
-        delete logs;
     }
 }
 

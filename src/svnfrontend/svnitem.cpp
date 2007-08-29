@@ -22,8 +22,8 @@
 #include "svnactions.h"
 #include "kdesvn_part.h"
 #include "src/settings/kdesvnsettings.h"
-#include "svnqt/status.hpp"
-#include "svnqt/smart_pointer.hpp"
+#include "src/svnqt/status.hpp"
+#include "src/svnqt/smart_pointer.hpp"
 #include "helpers/sub2qt.h"
 #include "helpers/ktranslateurl.h"
 

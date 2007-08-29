@@ -21,7 +21,7 @@
 #define PROPERTYLIST_H
 
 #include <klistview.h>
-#include "svnqt/svnqttypes.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 
 /**
 	@author
@@ -33,9 +33,23 @@ public:
     Propertylist(QWidget *parent = 0, const char *name = 0);
     ~Propertylist();
 
+    bool checkExisting(const QString&aName,QListViewItem*it=0);
+    bool commitchanges()const{return m_commitit;}
+    void setCommitchanges(bool how){m_commitit=how;}
+    void addCallback(QObject*);
+
 public slots:
-    virtual void displayList(const svn::PathPropertiesMapListPtr&);
+    virtual void displayList(const svn::PathPropertiesMapListPtr&,bool,const QString&);
     virtual void clear();
+
+protected slots:
+    virtual void slotItemRenamed(QListViewItem*item,const QString & str,int col );
+
+signals:
+    void sigSetProperty(const svn::PropertiesMap&,const QValueList<QString>&,const QString&);
+protected:
+    bool m_commitit;
+    QString m_current;
 };
 
 #endif

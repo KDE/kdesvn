@@ -776,28 +776,33 @@ void SvnActions::slotProperties()
     }
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"properties_dlg",false);
     QString ex;
-    PropertiesDlg::tPropEntries setList;
+    svn::PropertiesMap setList;
     QValueList<QString> delList;
     dlg.changedItems(setList,delList);
+    changeProperties(setList,delList,k->fullName());
+    k->refreshStatus();
+    EMIT_FINISHED;
+}
+
+bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&delList,const QString&path)
+{
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(k->fullName()),svn::Revision::HEAD);
+            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path),svn::Revision::WORKING);
         }
-        PropertiesDlg::tPropEntries::Iterator it;
+        svn::PropertiesMap::ConstIterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_Data->m_Svnclient->propset(it.key(),it.data(),svn::Path(k->fullName()),svn::Revision::HEAD);
+            m_Data->m_Svnclient->propset(it.key(),it.data(),svn::Path(path),svn::Revision::WORKING);
         }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
+        return false;
     }
-    k->refreshStatus();
-    EMIT_FINISHED;
+    return true;
 }
-
 
 /*!
     \fn SvnActions::slotCommit()
@@ -2375,7 +2380,6 @@ svn::PathPropertiesMapListPtr SvnActions::propList(SvnItem*which,const svn::Revi
         QString ex;
         svn::Path p(which->fullName());
         QString fk=where.toString()+"/"+which->fullName();
-        kdDebug()<<"Property at revision "<<where.toString()<<endl;
 
         if (where != svn::Revision::WORKING)
         {

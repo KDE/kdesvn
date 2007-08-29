@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -410,14 +410,14 @@ namespace svn
     return true;
   }
 
-  LogEntries *
+  LogEntriesPtr
   Client_impl::log (const Path& path, const Revision & revisionStart,
                const Revision & revisionEnd, bool discoverChangedPaths,
                bool strictNodeHistory,int limit) throw (ClientException)
   {
     Targets target(path);
     Pool pool;
-    LogEntries * entries = new LogEntries ();
+    LogEntriesPtr entries = LogEntriesPtr(new LogEntries ());
     sBaton l_baton;
     l_baton.m_context=m_context;
     l_baton.m_data = entries;

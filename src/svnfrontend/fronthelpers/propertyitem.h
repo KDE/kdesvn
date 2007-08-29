@@ -32,6 +32,15 @@ class PropertyListViewItem:public KListViewItem
 
         virtual int rtti()const{return _RTTI_;}
 
+       //! Check if a specific property may just internale
+       /*!
+        * That means, a property of that may not edit,added or deleted.
+        *
+        * This moment it just checks for "svn:special"
+        * \return true if protected property otherwise false
+        */
+       static bool protected_Property(const QString&);
+
     protected:
         QString m_currentName,m_startName,m_currentValue,m_startValue;
         bool m_deleted;

@@ -26,6 +26,7 @@
 #include <qmap.h>
 #include <qstring.h>
 
+#include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/revision.hpp"
 
 class QVBoxLayout;
@@ -48,15 +49,13 @@ class PropertiesDlg : public KDialogBase
     Q_OBJECT
 
 public:
-    typedef QMap<QString,QString> tPropEntries;
-
     PropertiesDlg(SvnItem*, svn::Client*,
         const svn::Revision&aRev=svn::Revision(svn_opt_revision_working),
         QWidget* parent = 0, const char* name = 0, bool modal = true);
     ~PropertiesDlg();
 
     bool hasChanged()const;
-    void changedItems(tPropEntries&toSet,QValueList<QString>&toDelete);
+    void changedItems(svn::PropertiesMap&toSet,QValueList<QString>&toDelete);
 
 protected:
     Propertylist* m_PropertiesListview;
@@ -74,15 +73,12 @@ protected:
     svn::Client*m_Client;
     svn::Revision m_Rev;
 
-    bool checkExisting(const QString&aName,QListViewItem*it=0);
-
 protected slots:
     virtual void languageChange();
 
     virtual void slotHelp();
     virtual void slotSelectionChanged(QListViewItem*);
     virtual void slotSelectionExecuted(QListViewItem*);
-    virtual void slotItemRenamed(QListViewItem*item,const QString & str,int col );
     virtual void slotAdd();
     virtual void slotDelete();
     virtual void slotModify();
@@ -90,14 +86,6 @@ protected slots:
 protected:
     virtual void initItem();
 
-    //! Check if a specific property may just internale
-    /*!
-     * That means, a property of that may not edit,added or deleted.
-     *
-     * This moment it just checks for "svn:special"
-     * \return true if protected property otherwise false
-     */
-    static bool protected_Property(const QString&);
 public slots:
     int exec();
     virtual void polish();

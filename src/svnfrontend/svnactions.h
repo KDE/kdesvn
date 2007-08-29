@@ -102,6 +102,8 @@ public:
     bool isLockNeeded(SvnItem*which,const svn::Revision&where);
     svn::PathPropertiesMapListPtr propList(SvnItem*which,const svn::Revision&where);
 
+    bool changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&,const QString&path);
+
     //! generate and displays a revision tree
     /*!
      * the parameter @a what must prepared, eg, if it comes from working copy

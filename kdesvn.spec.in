@@ -88,6 +88,5 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/services/svn*.protocol
 
 %files devel
-%{_libdir}/libsvnqt.la
 %{_includedir}/svnqt/*
 

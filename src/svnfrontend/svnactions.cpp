@@ -2373,7 +2373,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     return result;
 }
 
-svn::PathPropertiesMapListPtr SvnActions::propList(SvnItem*which,const svn::Revision&where)
+svn::PathPropertiesMapListPtr SvnActions::propList(SvnItem*which,const svn::Revision&where,bool cacheOnly)
 {
     svn::PathPropertiesMapListPtr pm;
     if (which) {
@@ -2385,7 +2385,7 @@ svn::PathPropertiesMapListPtr SvnActions::propList(SvnItem*which,const svn::Revi
         {
             m_Data->m_PropertiesCache.findSingleValid(fk,pm);
         }
-        if (!pm)
+        if (!pm && !cacheOnly)
         {
             try {
                 pm = m_Data->m_Svnclient->proplist(p,where,where);

@@ -220,12 +220,14 @@ protected slots:
     virtual void slotMakePartTree();
     virtual void slotInternalDrop();
     virtual void slotOpenWith();
+    virtual void slotDisplayProperties();
 
 private slots:
     void gotPreview( const KFileItem*, const QPixmap& );
     void gotPreviewResult();
 protected:
     virtual bool uniqueTypeSelected();
+    virtual void dispProperties(bool);
 };
 
 #endif

@@ -50,6 +50,8 @@ signals:
 protected:
     bool m_commitit;
     QString m_current;
+protected slots:
+    virtual void slotContextMenuRequested(QListViewItem *, const QPoint &, int);
 };
 
 #endif

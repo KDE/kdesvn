@@ -132,6 +132,7 @@
   <Action name="make_svn_log_full" />
   <Action name="make_svn_blame" />
   <Action name="make_svn_cat" />
+  <Action name="get_svn_property" />
   <Separator/>
   <Action name="make_svn_lock" />
   <Action name="make_svn_unlock" />
@@ -144,6 +145,7 @@
      <Action name="make_svn_log_full" />
      <Action name="make_svn_checkout_current" />
      <Action name="make_svn_export_current" />
+     <Action name="get_svn_property" />
      <Separator/>
      <Action name="make_svn_mkdir" />
      <Action name="make_svn_rename" />

@@ -60,11 +60,10 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
     m_PropertiesListview->setShowSortIndicator( TRUE );
     m_PropertiesListview->setCommitchanges(false);
-#if 1
     m_PropertiesListview->setItemsRenameable(true);
     m_PropertiesListview->setRenameable(0,true);
     m_PropertiesListview->setRenameable(1,true);
-#endif
+
     m_PropertiesListview->setFullWidth( TRUE );
     PropertiesDlgLayout->addWidget( m_PropertiesListview);
 

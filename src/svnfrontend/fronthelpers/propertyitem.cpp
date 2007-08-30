@@ -5,6 +5,7 @@
 PropertyListViewItem::PropertyListViewItem(KListView *parent,const QString&aName,const QString&aValue)
     : KListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
 {
+    setMultiLinesEnabled(true);
     setText(0,startName());
     setText(1,startValue());
 }
@@ -12,6 +13,7 @@ PropertyListViewItem::PropertyListViewItem(KListView *parent,const QString&aName
 PropertyListViewItem::PropertyListViewItem(KListView *parent)
     : KListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
 {
+    setMultiLinesEnabled(true);
     setText(0,startName());
     setText(1,startValue());
 }

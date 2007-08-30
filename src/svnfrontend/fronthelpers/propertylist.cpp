@@ -36,6 +36,9 @@ Propertylist::Propertylist(QWidget *parent, const char *name)
     setSortColumn(0);
     setAcceptDrops(false);
     connect(this,SIGNAL(itemRenamed(QListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(QListViewItem*,const QString&,int)));
+
+    connect(this,SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)),this,
+            SLOT(slotContextMenuRequested(QListViewItem *, const QPoint &, int)));
     //setFullWidth( TRUE );
 }
 
@@ -65,7 +68,6 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr&propList,bool
             PropertyListViewItem * ki = new PropertyListViewItem(this,
                     pit.key(),
                     pit.data());
-            ki->setMultiLinesEnabled(true);
         }
     }
     viewport()->setUpdatesEnabled(true);
@@ -151,6 +153,14 @@ void Propertylist::addCallback(QObject*ob)
         connect(this,SIGNAL(sigSetProperty(const svn::PropertiesMap&,const QValueList<QString>&,const QString&)),
                 ob,SLOT(slotChangeProperties(const svn::PropertiesMap&,const QValueList<QString>&,const QString&)));
     }
+}
+
+/*!
+    \fn Propertylist::slotContextMenuRequested(QListViewItem *, const QPoint &, int)
+ */
+void Propertylist::slotContextMenuRequested(QListViewItem *, const QPoint &, int)
+{
+    /// @todo implement me
 }
 
 #include "propertylist.moc"

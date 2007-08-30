@@ -259,7 +259,10 @@ void kdesvnfilelist::setupActions()
         this,SLOT(slotMakePartTree()),m_filesAction,"make_svn_partialtree");
 
     new KAction(i18n("Properties"),"edit",
-        KShortcut(Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+        KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+    new KAction(i18n("Display Properties"),"edit",
+        KShortcut(Key_P),this,SLOT(slotDisplayProperties()),m_filesAction,"get_svn_property");
+
     m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
         KShortcut(Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_RenameAction = new KAction(i18n("Move"),"move",
@@ -845,6 +848,10 @@ void kdesvnfilelist::enableActions()
     }
 
     temp = filesActions()->action("make_svn_property");
+    if (temp) {
+        temp->setEnabled(single);
+    }
+    temp = filesActions()->action("get_svn_property");
     if (temp) {
         temp->setEnabled(single);
     }
@@ -2343,19 +2350,27 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
 
 void kdesvnfilelist::_propListTimeout()
 {
+    dispProperties(false);
+}
+
+void kdesvnfilelist::slotDisplayProperties()
+{
+    dispProperties(true);
+}
+
+void kdesvnfilelist::dispProperties(bool force)
+{
     CursorStack a(Qt::BusyCursor);
-    if (isNetworked() && !Kdesvnsettings::properties_on_remote_items()) {
-        emit sigProplist(svn::PathPropertiesMapListPtr(),false,QString(""));
-        return;
-    }
+    bool cache_Only = (!force && isNetworked() && !Kdesvnsettings::properties_on_remote_items());
     svn::PathPropertiesMapListPtr pm;
     SvnItem*k = singleSelected();
     if (!k || !k->isRealVersioned()) {
         emit sigProplist(svn::PathPropertiesMapListPtr(),false,QString(""));
         return;
     }
+    kdDebug()<<"Cacheonly: "<<cache_Only<<endl;
     svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
-    pm =m_SvnWrapper->propList(k,rev);
+    pm =m_SvnWrapper->propList(k,rev,cache_Only);
     emit sigProplist(pm,isWorkingCopy(),k->fullName());
 }
 

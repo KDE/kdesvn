@@ -438,7 +438,6 @@ namespace svn
 
     if (error != NULL)
     {
-      delete entries;
       throw ClientException (error);
     }
 

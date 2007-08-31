@@ -862,20 +862,20 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 return false;
             }
             for (unsigned int i = 0; i < _Cache.count();++i) {
-                _p = _Cache[i].path();
-                if (_Cache[i].isRealVersioned()&& (
-                    _Cache[i].textStatus()==svn_wc_status_modified||
-                    _Cache[i].textStatus()==svn_wc_status_added||
-                    _Cache[i].textStatus()==svn_wc_status_replaced||
-                    _Cache[i].textStatus()==svn_wc_status_deleted||
-                    _Cache[i].propStatus()==svn_wc_status_modified
+                _p = _Cache[i]->path();
+                if (_Cache[i]->isRealVersioned()&& (
+                    _Cache[i]->textStatus()==svn_wc_status_modified||
+                    _Cache[i]->textStatus()==svn_wc_status_added||
+                    _Cache[i]->textStatus()==svn_wc_status_replaced||
+                    _Cache[i]->textStatus()==svn_wc_status_deleted||
+                    _Cache[i]->propStatus()==svn_wc_status_modified
                 ) ) {
-                    if (_Cache[i].textStatus()==svn_wc_status_deleted) {
+                    if (_Cache[i]->textStatus()==svn_wc_status_deleted) {
                         _check.append(Logmsg_impl::logActionEntry(_p,i18n("Delete"),2));
                     } else {
                         _check.append(Logmsg_impl::logActionEntry(_p,i18n("Commit")));
                     }
-                } else if (!_Cache[i].isVersioned()) {
+                } else if (!_Cache[i]->isVersioned()) {
                     _uncheck.append(Logmsg_impl::logActionEntry(_p,i18n("Add and Commit"),1));
                 }
             }
@@ -2082,9 +2082,9 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
         return;
     }
     for (unsigned int i = 0; i<dlist.size();++i) {
-        if (!dlist[i].isVersioned()) {
+        if (!dlist[i]->isVersioned()) {
             rlist.append(dlist[i]);
-            displist.append(dlist[i].path());
+            displist.append(dlist[i]->path());
         }
     }
     if (rlist.size()==0) {
@@ -2171,16 +2171,16 @@ void SvnActions::checkModthread()
     }
     kdDebug()<<"ModifiedThread seems stopped"<<endl;
     for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
-        helpers::statusPtr ptr = helpers::statusPtr(new svn::Status(m_CThread->getList()[i]));
-        if (m_CThread->getList()[i].isRealVersioned()&& (
-            m_CThread->getList()[i].textStatus()==svn_wc_status_modified||
-            m_CThread->getList()[i].textStatus()==svn_wc_status_added||
-            m_CThread->getList()[i].textStatus()==svn_wc_status_deleted||
-            m_CThread->getList()[i].textStatus()==svn_wc_status_replaced||
-            m_CThread->getList()[i].propStatus()==svn_wc_status_modified
+        svn::StatusPtr ptr = m_CThread->getList()[i];
+        if (m_CThread->getList()[i]->isRealVersioned()&& (
+            m_CThread->getList()[i]->textStatus()==svn_wc_status_modified||
+            m_CThread->getList()[i]->textStatus()==svn_wc_status_added||
+            m_CThread->getList()[i]->textStatus()==svn_wc_status_deleted||
+            m_CThread->getList()[i]->textStatus()==svn_wc_status_replaced||
+            m_CThread->getList()[i]->propStatus()==svn_wc_status_modified
          ) ) {
             m_Data->m_Cache.insertKey(ptr,ptr->path());
-        } else if (m_CThread->getList()[i].textStatus()==svn_wc_status_conflicted) {
+        } else if (m_CThread->getList()[i]->textStatus()==svn_wc_status_conflicted) {
             m_Data->m_conflictCache.insertKey(ptr,ptr->path());
         }
     }
@@ -2204,9 +2204,8 @@ void SvnActions::checkUpdateThread()
 
     bool newer=false;
     for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
-        helpers::statusPtr ptr = helpers::statusPtr(new svn::Status(m_UThread->getList()[i]));
+        svn::StatusPtr ptr = m_UThread->getList()[i];
         if (ptr->validReposStatus()) {
-
             m_Data->m_UpdateCache.insertKey(ptr,ptr->path());
             ptr->textStatus();
             ptr->propStatus();
@@ -2240,13 +2239,12 @@ bool SvnActions::checkUpdatesRunning()
     return m_UThread && m_UThread->running();
 }
 
-void SvnActions::addModifiedCache(const svn::Status&what)
+void SvnActions::addModifiedCache(const svn::StatusPtr&what)
 {
-    helpers::statusPtr ptr = helpers::statusPtr(new svn::Status(what));
-    if (what.textStatus()==svn_wc_status_conflicted) {
-        m_Data->m_conflictCache.insertKey(ptr,ptr->path());
+    if (what->textStatus()==svn_wc_status_conflicted) {
+        m_Data->m_conflictCache.insertKey(what,what->path());
     } else {
-        m_Data->m_Cache.insertKey(ptr,ptr->path());
+        m_Data->m_Cache.insertKey(what,what->path());
 //        m_Data->m_Cache.dump_tree();
     }
 }

@@ -125,7 +125,7 @@ public:
 #endif
 };
 
-typedef cacheEntry<svn::Status> statusEntry;
+typedef cacheEntry<svn::StatusPtr> statusEntry;
 
 template<class C> inline cacheEntry<C>::cacheEntry()
     : m_key(""),m_isValid(false),m_content()
@@ -556,10 +556,8 @@ template<class C> template<class T> inline void itemCache<C>::listsubs_if(const 
     it->second.listsubs_if(what,oper);
 }
 
-typedef svn::SharedPointer<svn::Status> statusPtr;
-typedef cacheEntry<statusPtr> ptrEntry;
-typedef QLIST<statusPtr> statusPtrList;
-typedef itemCache<statusPtr> statusCache;
+typedef cacheEntry<svn::StatusPtr> ptrEntry;
+typedef itemCache<svn::StatusPtr> statusCache;
 
 class ValidRemoteOnly
 {
@@ -569,7 +567,7 @@ public:
     void operator()(const std::pair<QString,helpers::ptrEntry>&_data)
     {
         if(_data.second.isValid() && _data.second.content()->validReposStatus()&&!_data.second.content()->validLocalStatus()) {
-            m_List.push_back(*(_data.second.content()));
+            m_List.push_back(_data.second.content());
         }
     }
     const svn::StatusEntries&liste()const{return m_List;}

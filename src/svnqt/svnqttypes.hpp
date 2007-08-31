@@ -49,7 +49,9 @@ namespace svn
     class Targets;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
-    typedef QLIST<DirEntry> DirEntries;
+
+    typedef SharedPointer<DirEntry> DirEntryPtr;
+    typedef QLIST<DirEntryPtr> DirEntries;
     typedef QLIST<InfoEntry> InfoEntries;
     /// simple list of log entries
     typedef QLIST<LogEntry> LogEntries;
@@ -61,7 +63,8 @@ namespace svn
     /// shared_pointer for LogEntriesMap
     typedef SharedPointer<LogEntriesMap> LogEntriesMapPtr;
 
-    typedef QLIST<Status> StatusEntries;
+    typedef SharedPointer<Status> StatusPtr;
+    typedef QLIST<StatusPtr> StatusEntries;
     typedef QLIST<Revision> Revisions;
 
     /// map of property names to values

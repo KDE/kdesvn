@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -97,7 +97,7 @@ namespace svn
       dirent = static_cast<svn_dirent_t *>
         (apr_hash_get (hash, entryname, item->klen));
 
-      entries.push_back (DirEntry(QString::FROMUTF8(entryname), dirent));
+      entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent));
     }
 
     return entries;
@@ -166,17 +166,17 @@ namespace svn
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       lockent = static_cast<svn_lock_t *>
         (apr_hash_get(lock_hash,entryname,item->klen));
-      entries.push_back (DirEntry(QString::FROMUTF8(entryname), dirent,lockent));
+      entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent,lockent));
 #else
       if (!_det) {
-        entries.push_back (DirEntry(QString::FROMUTF8(entryname),dirent));
+        entries.push_back (new DirEntry(QString::FROMUTF8(entryname),dirent));
       } else {
         try {
             InfoEntries infoEntries = info(url+entryname,false,revision,Revision(Revision::UNDEFINED));
             entries.push_back(DirEntry(QString::FROMUTF8(entryname),dirent,infoEntries[0].lockEntry()));
         } catch (ClientException) {
             _det = false;
-            entries.push_back(DirEntry(QString::FROMUTF8(entryname),dirent));
+            entries.push_back(new DirEntry(QString::FROMUTF8(entryname),dirent));
         }
       }
 #endif

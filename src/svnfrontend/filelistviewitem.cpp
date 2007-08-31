@@ -46,7 +46,7 @@ const int FileListViewItem::COL_IS_LOCKED = 5;
 
 //const int FileListViewItem::COL_CURRENT_REV = 5;
 
-FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
+FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::StatusPtr&_stat)
  : KListViewItem(_parent),SvnItem(_stat),
  sortChar(0),
  m_Ksvnfilelist(_parent)
@@ -55,7 +55,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_sta
     init();
 }
 
-FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::Status&_stat)
+FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::StatusPtr&_stat)
     : KListViewItem(_parentItem),SvnItem(_stat),
     sortChar(0),
     m_Ksvnfilelist(_parent)
@@ -94,7 +94,7 @@ FileListViewItem::~FileListViewItem()
 {
 }
 
-void FileListViewItem::setStat(const svn::Status&stat)
+void FileListViewItem::setStat(const svn::StatusPtr&stat)
 {
     SvnItem::setStat(stat);
     init();
@@ -210,7 +210,7 @@ void FileListViewItem::removeChilds()
     }
 }
 
-void FileListViewItem::updateStatus(const svn::Status&s)
+void FileListViewItem::updateStatus(const svn::StatusPtr&s)
 {
     setStat(s);
 }

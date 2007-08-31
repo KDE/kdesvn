@@ -22,7 +22,7 @@
 #define __SVN_ITEM_H
 
 #include "src/svnqt/smart_pointer.hpp"
-#include "src/svnqt/status.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 #include <kmimetype.h>
 #include <qstring.h>
 #include <qdatetime.h>
@@ -44,7 +44,7 @@ class SvnItem
 {
 public:
     SvnItem();
-    SvnItem(const svn::Status&);
+    SvnItem(const svn::StatusPtr&);
     virtual ~SvnItem();
 
     virtual const QString&fullName()const;
@@ -72,8 +72,8 @@ public:
     QPixmap getPixmap(const QPixmap&,int size,bool overlay=true);
 
     virtual FileListViewItem*fItem(){return 0;}
-    virtual void setStat(const svn::Status&);
-    virtual const svn::Status& stat()const;
+    virtual void setStat(const svn::StatusPtr&);
+    virtual const svn::StatusPtr& stat()const;
     virtual bool isModified()const;
     bool isNormal()const;
     bool isMissing()const;

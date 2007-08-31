@@ -60,7 +60,7 @@ namespace svn
         void
         init(const Entry_private&src);
         void
-        init(const QString&url,const DirEntry&src);
+        init(const QString&url,const DirEntryPtr&src);
         void
         init(const QString&url,const InfoEntry&src);
     };
@@ -165,21 +165,23 @@ namespace svn
         m_valid=src.m_valid;
     }
 
-    void Entry_private::init(const QString&url,const DirEntry&dirEntry)
+    void Entry_private::init(const QString&url,const DirEntryPtr&dirEntry)
     {
         init(0);
         _url = url;
-        _name=dirEntry.name();
-        _revision = dirEntry.createdRev();
-        _kind = dirEntry.kind();
-        _schedule = svn_wc_schedule_normal;
-        _text_time = dirEntry.time ();
-        _prop_time = dirEntry.time ();
-        _cmt_rev = dirEntry.createdRev ();
-        _cmt_date = dirEntry.time ();
-        _cmt_author = dirEntry.lastAuthor ();
-        m_Lock=dirEntry.lockEntry();
-        m_valid = true;
+        if (dirEntry) {
+            _name=dirEntry->name();
+            _revision = dirEntry->createdRev();
+            _kind = dirEntry->kind();
+            _schedule = svn_wc_schedule_normal;
+            _text_time = dirEntry->time ();
+            _prop_time = dirEntry->time ();
+            _cmt_rev = dirEntry->createdRev ();
+            _cmt_date = dirEntry->time ();
+            _cmt_author = dirEntry->lastAuthor ();
+            m_Lock=dirEntry->lockEntry();
+            m_valid = true;
+        }
     }
 
     void Entry_private::init(const QString&url,const InfoEntry&src)
@@ -215,7 +217,7 @@ namespace svn
     }
   }
 
-  Entry::Entry (const QString&url,const DirEntry&src)
+  Entry::Entry (const QString&url,const DirEntryPtr&src)
     : m_Data(new Entry_private())
   {
     m_Data->init(url,src);

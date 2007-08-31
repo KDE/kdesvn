@@ -199,11 +199,14 @@ void kio_svnProtocol::listDir(const KURL&url)
     KIO::UDSEntry entry;
     totalSize(dlist.size());
     for (unsigned int i=0; i < dlist.size();++i) {
-        QDateTime dt = svn::DateTime(dlist[i].time());
-        if (createUDSEntry(dlist[i].name(),
-            dlist[i].lastAuthor(),
-            dlist[i].size(),
-            dlist[i].kind()==svn_node_dir?true:false,
+        if (!dlist[i]) {
+            continue;
+        }
+        QDateTime dt = svn::DateTime(dlist[i]->time());
+        if (createUDSEntry(dlist[i]->name(),
+            dlist[i]->lastAuthor(),
+            dlist[i]->size(),
+            dlist[i]->kind()==svn_node_dir?true:false,
             dt.toTime_t(),
             entry) ) {
             listEntry(entry,false);
@@ -650,17 +653,20 @@ void kio_svnProtocol::status(const KURL&wc,bool cR,bool rec)
     }
     kdDebug()<<"Status got " << dlist.count() << " entries." << endl;
     for (unsigned j=0;j<dlist.count();++j) {
+        if (!dlist[j]) {
+            continue;
+        }
         //QDataStream stream(params, IO_WriteOnly);
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"path",dlist[j].path());
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"text",QString::number(dlist[j].textStatus()));
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"path",dlist[j]->path());
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustify( 10,'0' )+"text",QString::number(dlist[j]->textStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "prop",
-                    QString::number(dlist[j].propStatus()));
+                    QString::number(dlist[j]->propStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "reptxt",
-                    QString::number(dlist[j].reposTextStatus()));
+                    QString::number(dlist[j]->reposTextStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "repprop",
-                    QString::number(dlist[j].reposPropStatus()));
+                    QString::number(dlist[j]->reposPropStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustify( 10,'0' )+ "rev",
-                    QString::number(dlist[j].entry().cmtRev()));
+                    QString::number(dlist[j]->entry().cmtRev()));
         m_pData->m_Listener.incCounter();
     }
 }

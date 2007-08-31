@@ -95,7 +95,7 @@ public:
     bool checkConflictedCache(const QString&path);
     bool checkReposLockCache(const QString&path);
     bool checkReposLockCache(const QString&path,svn::SharedPointer<svn::Status>&t);
-    void addModifiedCache(const svn::Status&what);
+    void addModifiedCache(const svn::StatusPtr&what);
     void deleteFromModifiedCache(const QString&what);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);

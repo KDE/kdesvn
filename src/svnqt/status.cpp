@@ -52,7 +52,7 @@ namespace svn
     void
     init (const QString&path,const Status_private&src);
     void
-    init(const QString&url,const DirEntry&src);
+    init(const QString&url,const DirEntryPtr&src);
     void
     init(const QString&url,const InfoEntry&src);
 
@@ -132,18 +132,20 @@ namespace svn
     _switched=src._switched;
   }
 
-  void Status_private::init(const QString&url,const DirEntry&src)
+  void Status_private::init(const QString&url,const DirEntryPtr&src)
   {
     m_entry=Entry(url,src);
     m_Path=url;
     _text_status = svn_wc_status_normal;
     _prop_status = svn_wc_status_normal;
-    m_Lock=src.lockEntry();
+    if (src) {
+        m_Lock=src->lockEntry();
+        m_isVersioned=true;
+        m_hasReal=true;
+    }
     _switched = false;
     _repos_text_status = svn_wc_status_normal;
     _repos_prop_status = svn_wc_status_normal;
-    m_isVersioned=true;
-    m_hasReal=true;
   }
 
   void Status_private::init(const QString&url,const InfoEntry&src)
@@ -184,7 +186,7 @@ namespace svn
     m_Data->init(QString::FROMUTF8(path),status);
   }
 
-  Status::Status(const QString&url,const DirEntry&src)
+  Status::Status(const QString&url,const DirEntryPtr&src)
     : m_Data(new Status_private())
   {
     m_Data->init(url,src);

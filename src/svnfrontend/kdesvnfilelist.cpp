@@ -632,13 +632,13 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         //kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
 
         // current item is not versioned
-        if (!(*it).isVersioned() && !filterOut((*it))) {
+        if (!(*it)->isVersioned() && !filterOut((*it))) {
             // if empty, we may want to create a default svn::Status for each folder inside this _parent
             // iterate over QDir and create new filelistviewitem
             checkUnversionedDirs(_parent);
         }
 
-        if ((*it).path()==what||QString::compare((*it).entry().url(),what)==0){
+        if ((*it)->path()==what||QString::compare((*it)->entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
 //                kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it).path() << endl;
@@ -675,7 +675,7 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         if (!_parent) {
             item = new FileListViewItem(this,*it);
         } else {
-            if ( (item = _parent->findChild( (*it).path() ))  ) {
+            if ( (item = _parent->findChild( (*it)->path() ))  ) {
                 delete item;
             }
             item = new FileListViewItem(this,_parent,*it);
@@ -733,7 +733,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
         checkDirs(baseUri(),0);
         return;
     }
-    svn::Status stat;
+    svn::StatusPtr stat;
     try {
         stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
     } catch (svn::ClientException e) {
@@ -1246,13 +1246,13 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     bool dispchanged = false;
     for (;it!=dlist.end();++it) {
         gotit = false;
-        if ((*it).path()==what) {
+        if ((*it)->path()==what) {
             continue;
         }
         FileListViewItemListIterator clistIter(currentSync);
         while ( (k=clistIter.current()) ) {
             ++clistIter;
-            if (k->fullName()==(*it).path()) {
+            if (k->fullName()==(*it)->path()) {
                 currentSync.removeRef(k);
                 k->updateStatus(*it);
                 if (filterOut(k)) {
@@ -2249,7 +2249,7 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
     try {
         item->setStat(svnclient()->singleStatus(item->fullName(),false,m_pList->m_remoteRevision));
     } catch (svn::ClientException e) {
-        item->setStat(svn::Status());
+        item->setStat(new svn::Status());
         return false;
     }
     return true;
@@ -2681,7 +2681,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
 //
 //             svn::Status stat(fi->fileName(), &wc_stat);
 
-            svn::Status stat(fi->absFilePath());
+            svn::StatusPtr stat(new svn::Status(fi->absFilePath()));
 
             // start copying insertDirs
             FileListViewItem * item;
@@ -2731,8 +2731,8 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer,boo
         //_s->makePixmap();
 
         if (!no_update) {
-            if (m_SvnWrapper->getUpdated(_s->stat().path(),d) && d) {
-                _s->updateStatus(*d);
+            if (m_SvnWrapper->getUpdated(_s->stat()->path(),d) && d) {
+                _s->updateStatus(d);
             } else {
                 _s->update();
             }
@@ -2740,7 +2740,7 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer,boo
         rescanIconsRec(_s,checkNewer,no_update);
         if (checkNewer && _s->isDir() && _s->isOpen()) {
             svn::StatusEntries target;
-            m_SvnWrapper->getaddedItems(_s->stat().path(),target);
+            m_SvnWrapper->getaddedItems(_s->stat()->path(),target);
             insertDirs(_s,target);
         }
         _s = static_cast<FileListViewItem*>(_s->nextSibling());

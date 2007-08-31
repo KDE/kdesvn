@@ -24,7 +24,7 @@
 #include <klistview.h>
 #include <qdatetime.h>
 #include <qptrlist.h>
-#include "src/svnqt/status.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 
 class QPainter;
 class KFileItem;
@@ -38,13 +38,13 @@ class FileListViewItem : public KListViewItem,public SvnItem
 {
     friend class kdesvnfilelist;
 public:
-    FileListViewItem(kdesvnfilelist*,const svn::Status&);
-    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
+    FileListViewItem(kdesvnfilelist*,const svn::StatusPtr&);
+    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::StatusPtr&);
 
     virtual ~FileListViewItem();
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
-    virtual void updateStatus(const svn::Status&s);
+    virtual void updateStatus(const svn::StatusPtr&s);
     virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false);
 
 #if 0
@@ -58,7 +58,7 @@ public:
 
     virtual QString getParentDir()const;
     virtual FileListViewItem*fItem(){return this;}
-    virtual void setStat(const svn::Status&);
+    virtual void setStat(const svn::StatusPtr&);
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
     virtual void setOpen(bool o);
     virtual void setPreviewPix(const QPixmap& pixmap);

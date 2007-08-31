@@ -245,24 +245,24 @@ namespace svn
       status = (svn_wc_status2_t *) item->value;
 
       filePath = (const char *) item->key;
-      entries.push_back (Status(filePath, status));
+      entries.push_back (StatusPtr(new Status(filePath, status)));
     }
     return entries;
   }
 
-  static Status
-  dirEntryToStatus (const Path& path, const DirEntry & dirEntry)
+  static StatusPtr
+  dirEntryToStatus (const Path& path, DirEntryPtr dirEntry)
   {
     QString url = path.path();
     url += QString::FROMUTF8("/");
-    url += dirEntry.name();
-    return Status (url, dirEntry);
+    url += dirEntry->name();
+    return StatusPtr(new Status (url, dirEntry));
   }
 
-  static Status
+  static StatusPtr
   infoEntryToStatus(const Path&,const InfoEntry&infoEntry)
   {
-    return Status(infoEntry.url(),infoEntry);
+    return StatusPtr(new Status(infoEntry.url(),infoEntry));
   }
 
   static StatusEntries
@@ -285,7 +285,7 @@ namespace svn
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
     {
-      const DirEntry & dirEntry = *it;
+      DirEntryPtr dirEntry = *it;
       entries.push_back(dirEntryToStatus (path, dirEntry));
     }
 
@@ -304,14 +304,14 @@ namespace svn
   {
     if (Url::isValid (path.path())) {
         return remoteStatus (this, path, descend, get_all, update,
-                           no_ignore,revision,m_context,detailed_remote);
+                            no_ignore,revision,m_context,detailed_remote);
     } else {
-      return localStatus (path, descend, get_all, update,
-                          no_ignore, hide_externals, m_context);
+        return localStatus (path, descend, get_all, update,
+                            no_ignore, hide_externals, m_context);
     }
   }
 
-  static Status
+  static StatusPtr
   localSingleStatus (const Path& path, Context * context,bool update=false)
   {
     svn_error_t *error;
@@ -355,20 +355,20 @@ namespace svn
     status = (svn_wc_status2_t *) item->value;
     filePath = (const char *) item->key;
 
-    return Status (filePath, status);
+    return StatusPtr(new Status (filePath, status));
   };
 
-  static Status
+  static StatusPtr
   remoteSingleStatus (Client * client, const Path& path,const Revision revision, Context * )
   {
     InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
     if (infoEntries.size () == 0)
-      return Status ();
+      return StatusPtr(new Status());
     else
       return infoEntryToStatus (path, infoEntries [0]);
   }
 
-  Status
+  StatusPtr
   Client_impl::singleStatus (const Path& path,bool update,const Revision revision) throw (ClientException)
   {
     if (Url::isValid (path.path()))

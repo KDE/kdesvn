@@ -231,72 +231,70 @@ QPixmap SvnItem::internalTransform(const QPixmap&first,int size)
 
 QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
 {
-    QPixmap p;
-    if (_p.width()!=size || _p.height()!=size) {
-         p = internalTransform(_p,size);
-    } else {
-        p = _p;
-    }
-
-//    if (QString::compare(p_Item->m_Stat->entry().url(),p_Item->m_Stat->path())!=0) {
-        if (!isVersioned()) {
-            m_bgColor = NOTVERSIONED;
-        } else if (isRealVersioned()) {
-            SvnActions*wrap = getWrapper();
-            bool mod = false;
-            QPixmap p2 = QPixmap();
-            if (p_Item->m_Stat->textStatus ()==svn_wc_status_conflicted) {
+    if (!isVersioned()) {
+        m_bgColor = NOTVERSIONED;
+    } else if (isRealVersioned()) {
+        SvnActions*wrap = getWrapper();
+        bool mod = false;
+        QPixmap p2 = QPixmap();
+        if (p_Item->m_Stat->textStatus()==svn_wc_status_conflicted) {
+            m_bgColor = CONFLICT;
+            if (overlay)
+                p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnconflicted",KIcon::Desktop,size);
+        } else if (p_Item->m_Stat->textStatus ()==svn_wc_status_missing) {
+            m_bgColor = MISSING;
+        } else if (isLocked()||wrap->checkReposLockCache(fullName())) {
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
+            m_bgColor = LOCKED;
+        } else if (Kdesvnsettings::check_needlock() && !isRemoteAdded() && wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnneedlock",KIcon::Desktop,size);
+            m_bgColor = NEEDLOCK;
+        } else if (wrap->isUpdated(p_Item->m_Stat->path())) {
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
+            m_bgColor = UPDATES;
+        } else if (p_Item->m_Stat->textStatus()==svn_wc_status_deleted) {
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvndeleted",KIcon::Desktop,size);
+            m_bgColor = DELETED;
+        } else if (p_Item->m_Stat->textStatus()==svn_wc_status_added ) {
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnadded",KIcon::Desktop,size);
+            m_bgColor = ADDED;
+        } else if (isModified()) {
+            mod = true;
+        } else if (isDir()&&wrap) {
+            svn::StatusEntries dlist;
+            svn::StatusEntries::const_iterator it;
+            if (isRemoteAdded() || wrap->checkUpdateCache(fullName())) {
+                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
+                m_bgColor = UPDATES;
+            } else if (wrap->checkConflictedCache(fullName())) {
                 m_bgColor = CONFLICT;
                 if (overlay)
                     p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnconflicted",KIcon::Desktop,size);
-            } else if (p_Item->m_Stat->textStatus ()==svn_wc_status_missing) {
-                m_bgColor = MISSING;
-            } else if (isLocked()||wrap->checkReposLockCache(fullName())) {
-                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
-                m_bgColor = LOCKED;
-            } else if (!isRemoteAdded() && wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
-                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnneedlock",KIcon::Desktop,size);
-                m_bgColor = NEEDLOCK;
-            } else if (wrap->isUpdated(p_Item->m_Stat->path())) {
-                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
-                m_bgColor = UPDATES;
-            } else if (p_Item->m_Stat->textStatus()==svn_wc_status_deleted) {
-                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvndeleted",KIcon::Desktop,size);
-                m_bgColor = DELETED;
-            } else if (p_Item->m_Stat->textStatus()==svn_wc_status_added ) {
-                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnadded",KIcon::Desktop,size);
-                m_bgColor = ADDED;
-            } else if (isModified()) {
-                mod = true;
-            } else if (isDir()&&wrap) {
-                svn::StatusEntries dlist;
-                svn::StatusEntries::const_iterator it;
-                if (isRemoteAdded() || wrap->checkUpdateCache(fullName())) {
-                    if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnupdates",KIcon::Desktop,size);
-                    m_bgColor = UPDATES;
-                } else if (wrap->checkConflictedCache(fullName())) {
-                    m_bgColor = CONFLICT;
-                    if (overlay)
-                        p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnconflicted",KIcon::Desktop,size);
-                } else {
-                    mod = wrap->checkModifiedCache(fullName());
-                }
-            }
-            if (mod) {
-                m_bgColor = MODIFIED;
-                if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnmodified",KIcon::Desktop,size);
-            }
-            if (!p2.isNull()) {
-                m_overlaycolor = true;
-                QImage i1; i1 = p;
-                QImage i2;i2 = p2;
-
-                KIconEffect::overlay(i1,i2);
-                p = i1;
+            } else {
+                mod = wrap->checkModifiedCache(fullName());
             }
         }
-//    }
-    return p;
+        if (mod) {
+            m_bgColor = MODIFIED;
+            if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnmodified",KIcon::Desktop,size);
+        }
+        if (!p2.isNull()) {
+            QPixmap p;
+            if (_p.width()!=size || _p.height()!=size) {
+                p = internalTransform(_p,size);
+            } else {
+                p = _p;
+            }
+            m_overlaycolor = true;
+            QImage i1; i1 = p;
+            QImage i2;i2 = p2;
+
+            KIconEffect::overlay(i1,i2);
+            p = i1;
+            return p;
+        }
+    }
+    return _p;
 }
 
 QPixmap SvnItem::getPixmap(int size,bool overlay)
@@ -315,10 +313,10 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             QPixmap p2;
             if (overlay) p2 = kdesvnPartFactory::instance()->iconLoader()->loadIcon("kdesvnlocked",KIcon::Desktop,size);
             if (!p2.isNull()) {
-            	QImage i1; i1 = p;
-            	QImage i2; i2 = p2;
-            	KIconEffect::overlay(i1,i2);
-            	p = i1;
+                QImage i1; i1 = p;
+                QImage i2; i2 = p2;
+                KIconEffect::overlay(i1,i2);
+                p = i1;
             }
         }
     } else {

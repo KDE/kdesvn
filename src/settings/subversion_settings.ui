@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>368</width>
-            <height>358</height>
+            <width>339</width>
+            <height>384</height>
         </rect>
     </property>
     <property name="caption">
@@ -31,6 +31,20 @@
             </property>
             <property name="toolTip" stdset="0">
                 <string>Select if kdesvn should check for updates when open a working copy</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_check_needlock</cstring>
+            </property>
+            <property name="text">
+                <string>Check if items has svn:need-lock set</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>When listing on working copies kdesvn may check for this property</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>When listing on working copies kdesvn may check for &lt;tt&gt;svn:need-lock&lt;/tt&gt; property.&lt;br&gt;But due this listings/updating on folders containing lot of items may get slow. So you should only switch on if you have repositories containing lot of such entries.</string>
             </property>
         </widget>
         <widget class="QCheckBox">
@@ -214,6 +228,8 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
         </spacer>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>

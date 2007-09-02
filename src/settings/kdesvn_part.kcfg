@@ -108,6 +108,10 @@
       <label>Get properties on selected item on networked protocols</label>
       <default>false</default>
     </entry>
+    <entry key="check_needlock" type="Bool">
+        <label>Check for propertie svn:need-lock on listings</label>
+        <default>false</default>
+    </entry>
     <entry key="store_passwords" type="Bool" >
       <label>Store passwords for remote connections</label>
       <default>false</default>

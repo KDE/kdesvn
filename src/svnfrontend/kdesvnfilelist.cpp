@@ -629,7 +629,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
-        //kdDebug() << "iterate over it: " << (*it).entry().url() << endl;
+        //kdDebug() << "iterate over it: " << (*it)->entry().url() << endl;
 
         // current item is not versioned
         if (!(*it)->isVersioned() && !filterOut((*it))) {
@@ -641,7 +641,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         if ((*it)->path()==what||QString::compare((*it)->entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
-//                kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it).path() << endl;
+                //kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it)->path() << endl;
                 m_Dirsread[pitem->fullName()]=true;
                 pitem->setDropEnabled(true);
             }
@@ -666,7 +666,15 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
     KFileItemList oneItem;
 #endif
 
+    QTime _t;
+    _t.start();
     for (it = dlist.begin();it!=dlist.end();++it) {
+        if (_t.elapsed()>300) {
+            viewport()->setUpdatesEnabled(true);
+            viewport()->repaint();
+            viewport()->setUpdatesEnabled(false);
+            _t.restart();
+        }
         if (filterOut((*it)))
         {
             continue;

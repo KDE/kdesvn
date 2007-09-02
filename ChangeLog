@@ -3,6 +3,8 @@ version 0.14.0
       kompare on programstart anymore. (#140)
     * when browsing in working copies or local repositories (file:// protocol) properties of a single selected item will
       displayed.
+    * checking for svn:needs-lock property on each item when browsing in working copies may disabled which will make things
+      much faster.
 
 version 0.13.0
     * fixed some buildproblems within freebsd or systems with more restrictive qt

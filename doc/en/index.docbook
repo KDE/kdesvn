@@ -1237,7 +1237,10 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 <entry>Start check for updates when open a working copy</entry>
 <entry>When open a working copy start a check for updates in background</entry>
 </row>
-
+<row>
+<entry>Check if items has svn:needs-lock set</entry>
+<entry>Check on working copies if an item has this property set and if yes, displays a special overlayed icon. Setting this may let listings get real slow.</entry>
+</row>
 <row>
 <entry>Get file details while remote listing</entry>
 <entry>When checked, kdesvn get more detailed info about file items when making a listing to remote repositories. So you may see remote locks in overview. Be careful: This may let listings REAL slow!</entry>

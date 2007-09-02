@@ -35,16 +35,16 @@
         </widget>
         <widget class="QCheckBox">
             <property name="name">
-                <cstring>kcfg_check_needlock</cstring>
+                <cstring>kcfg_check_needslock</cstring>
             </property>
             <property name="text">
-                <string>Check if items has svn:need-lock set</string>
+                <string>Check if items has "svn:needs-lock" property set</string>
             </property>
             <property name="toolTip" stdset="0">
                 <string>When listing on working copies kdesvn may check for this property</string>
             </property>
             <property name="whatsThis" stdset="0">
-                <string>When listing on working copies kdesvn may check for &lt;tt&gt;svn:need-lock&lt;/tt&gt; property.&lt;br&gt;But due this listings/updating on folders containing lot of items may get slow. So you should only switch on if you have repositories containing lot of such entries.</string>
+                <string>When listing on working copies kdesvn may check for &lt;tt&gt;svn:needs-lock&lt;/tt&gt; property.&lt;br&gt;But due this listings/updating on folders containing lot of items may get slow. So you should only switch on if you have repositories containing lot of such entries.</string>
             </property>
         </widget>
         <widget class="QCheckBox">

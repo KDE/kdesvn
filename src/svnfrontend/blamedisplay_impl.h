@@ -27,7 +27,6 @@ class BlameDisplayData;
 class SimpleLogCb;
 class BlameDisplayItem;
 class KListViewSearchLineWidget;
-class LocaleSelector_impl;
 
 class BlameDisplay_impl:public BlameDisplay
 {

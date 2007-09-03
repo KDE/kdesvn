@@ -1,15 +1,15 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>LocaleSelector</class>
+<class>EncodingSelector</class>
 <author>Rajko Albrecht</author>
 <widget class="QWidget">
     <property name="name">
-        <cstring>LocaleSelector</cstring>
+        <cstring>EncodingSelector</cstring>
     </property>
     <property name="geometry">
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>197</width>
+            <width>202</width>
             <height>24</height>
         </rect>
     </property>
@@ -47,7 +47,7 @@
                 </sizepolicy>
             </property>
             <property name="text">
-                <string>Select locale:</string>
+                <string>Select encoding:</string>
             </property>
             <property name="alignment">
                 <set>AlignVCenter|AlignRight</set>
@@ -60,7 +60,7 @@
                 </property>
             </item>
             <property name="name">
-                <cstring>m_localeList</cstring>
+                <cstring>m_encodingList</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
@@ -78,9 +78,9 @@
 </widget>
 <connections>
     <connection>
-        <sender>m_localeList</sender>
+        <sender>m_encodingList</sender>
         <signal>activated(int)</signal>
-        <receiver>LocaleSelector</receiver>
+        <receiver>EncodingSelector</receiver>
         <slot>itemActivated(int)</slot>
     </connection>
 </connections>

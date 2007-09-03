@@ -47,26 +47,19 @@ namespace svn
                   const char *date,
                   const char *line)
     : m_line_no (line_no), m_revision (revision),
-      m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime())
+      m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
+      m_line(line?line:""),m_author(author?author:"")
     {
-#if QT_VERSION < 0x040000
-        if (line) m_line.duplicate(line,strlen(line));
-        if (author) m_author.duplicate(author,strlen(author));
-#else
-        if (line) m_line=QByteArray(line,strlen(line));
-        if (author) m_author=QByteArray(author,strlen(author));
-#endif 
     }
 
     AnnotateLine ( const AnnotateLine &other)
-    : m_line_no (other.m_line_no), m_revision (other.m_revision),
-      m_author (other.m_author), m_date (other.m_date),
-      m_line (other.m_line)
+          : m_line_no (other.m_line_no), m_revision (other.m_revision), m_date (other.m_date),
+            m_line (other.m_line), m_author (other.m_author)
     {
     }
     AnnotateLine()
-    : m_line_no(0),m_revision(-1),
-      m_author(),m_date(),m_line()
+          : m_line_no(0),m_revision(-1),m_date(),
+            m_line(), m_author()
     {
     }
 
@@ -112,9 +105,14 @@ namespace svn
   protected:
     apr_int64_t m_line_no;
     svn_revnum_t m_revision;
-    QByteArray m_author;
     QDateTime m_date;
+#if QT_VERSION < 0x040000
+    QCString m_line;
+    QCString m_author;
+#else
     QByteArray m_line;
+    QByteArray m_author;
+#endif
   };
 }
 

@@ -23,7 +23,7 @@
 #include "src/svnqt/log_entry.hpp"
 #include "fronthelpers/cursorstack.h"
 #include "fronthelpers/widgetblockstack.h"
-#include "src/ksvnwidgets/localeselector_impl.h"
+#include "src/ksvnwidgets/encodingselector_impl.h"
 
 #include <klistview.h>
 #include <kglobalsettings.h>
@@ -267,7 +267,7 @@ void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&b
 {
     m_Data->m_File = what;
     m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this);
-    LocaleSelector_impl*m_Ls = new LocaleSelector_impl(Kdesvnsettings::locale_for_blame(),this);
+    EncodingSelector_impl*m_Ls = new EncodingSelector_impl(Kdesvnsettings::locale_for_blame(),this);
     connect(m_Ls,SIGNAL(TextCodecChanged(const QString&)),
             this,SLOT(slotTextCodecChanged(const QString&)));
 

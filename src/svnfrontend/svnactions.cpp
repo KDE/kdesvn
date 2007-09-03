@@ -30,7 +30,7 @@
 #include "blamedisplay_impl.h"
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/ksvnwidgets/diffbrowser.h"
-#include "src/ksvnwidgets/localeselector_impl.h"
+#include "src/ksvnwidgets/encodingselector_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/client.hpp"
@@ -1238,7 +1238,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
         if (dlg) {
             QWidget*wd = dlg->mainWidget();
             if (wd) {
-                LocaleSelector_impl * ls = new LocaleSelector_impl("",wd);
+                EncodingSelector_impl * ls = new EncodingSelector_impl("",wd);
                 QObject::connect(ls,SIGNAL(TextCodecChanged(const QString&)),
                                  ptr,SLOT(slotTextCodecChanged(const QString&)));
             }

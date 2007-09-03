@@ -17,24 +17,34 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef LOCALESELECTOR_IMPL_H
-#define LOCALESELECTOR_IMPL_H
+#include "encodingselector_impl.h"
+#include <kdebug.h>
+#include <kcharsets.h>
+#include <kglobal.h>
 
-#include "src/ksvnwidgets/localeselector.h"
+#include <qcombobox.h>
 
-class QTextCodec;
+EncodingSelector_impl::EncodingSelector_impl(const QString&cur,QWidget *parent, const char *name)
+    :EncodingSelector(parent, name)
+{
+    m_encodingList->insertStringList( KGlobal::charsets()->availableEncodingNames());
 
-class LocaleSelector_impl: public LocaleSelector {
-Q_OBJECT
-public:
-    LocaleSelector_impl(const QString&cur, QWidget *parent = 0, const char *name = 0);
-    virtual ~LocaleSelector_impl(){}
+    for (int j = 1;j<m_encodingList->count();++j ) {
+        if(m_encodingList->text(j)==cur) {
+            m_encodingList->setCurrentItem(j);
+            break;
+        }
+    }
+}
 
-protected slots:
-    virtual void itemActivated(int);
+void EncodingSelector_impl::itemActivated(int which)
+{
+    if (which == 0) {
+        emit TextCodecChanged(QString(""));
+    } else {
+        emit TextCodecChanged(m_encodingList->currentText());
+    }
+}
 
-signals:
-    void TextCodecChanged(const QString&);
-};
+#include "encodingselector_impl.moc"
 
-#endif

@@ -23,6 +23,7 @@
 #include "src/svnqt/log_entry.hpp"
 #include "fronthelpers/cursorstack.h"
 #include "fronthelpers/widgetblockstack.h"
+#include "src/ksvnwidgets/localeselector_impl.h"
 
 #include <klistview.h>
 #include <kglobalsettings.h>
@@ -45,12 +46,52 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 #include <qlayout.h>
+#include <qtextcodec.h>
 
 #define COL_LINENR 0
 #define COL_REV 1
 #define COL_DATE 2
 #define COL_AUT 3
 #define COL_LINE 4
+
+class LocalizedAnnotatedLine:public svn::AnnotateLine
+{
+public:
+    LocalizedAnnotatedLine(const svn::AnnotateLine&al)
+        :svn::AnnotateLine(al)
+    {
+        localeChanged();
+    }
+
+    void localeChanged()
+    {
+        if (!codec_searched) {
+            cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_blame());
+            codec_searched = true;
+        }
+        if (cc) {
+            m_tLine=cc->toUnicode(line().data(),line().size());
+            m_tAuthor=cc->toUnicode(author().data(),author().size());
+        } else {
+            m_tLine=QString::FROMUTF8(line().data(),line().size());
+            m_tAuthor=QString::FROMUTF8(author().data(),author().size());
+        }
+    }
+
+    const QString& tAuthor()const{return m_tAuthor;}
+    const QString& tLine()const{return m_tLine;}
+
+    static void reset_codec(){codec_searched = false; cc=0;}
+
+protected:
+    QString m_tAuthor,m_tLine;
+
+    static bool codec_searched;
+    static QTextCodec * cc;
+};
+
+QTextCodec* LocalizedAnnotatedLine::cc = 0;
+bool LocalizedAnnotatedLine::codec_searched = false;
 
 class BlameDisplayItem:public KListViewItem
 {
@@ -67,8 +108,19 @@ public:
     apr_int64_t lineNumber(){return m_Content.lineNumber();}
     svn_revnum_t rev(){return m_Content.revision();}
 
+    void localeChanged()
+    {
+        m_Content.localeChanged();
+        if (m_disp){
+            setText(COL_AUT,m_Content.tAuthor());
+        }
+        QString _line = m_Content.tLine();
+        _line.replace("\t","    ");
+        setText(COL_LINE,QString("%1").arg(_line));
+    }
+
 protected:
-    svn::AnnotateLine m_Content;
+    LocalizedAnnotatedLine m_Content;
 
     bool m_disp;
 
@@ -102,14 +154,14 @@ void BlameDisplayItem::display()
 {
     if (m_disp){
         setText(COL_REV,QString("%1").arg(m_Content.revision()));
-        setText(COL_AUT,m_Content.author());
+        setText(COL_AUT,m_Content.tAuthor());
         if (m_Content.date().isValid()) {
             setText(COL_DATE,KGlobal::locale()->formatDateTime(m_Content.date()));
         }
     }
 
     setText(COL_LINENR,QString("%1").arg(m_Content.lineNumber()+1));
-    QString _line = m_Content.line();
+    QString _line = m_Content.tLine();
     _line.replace("\t","    ");
     setText(COL_LINE,QString("%1").arg(_line));
 }
@@ -123,9 +175,9 @@ int BlameDisplayItem::compare(QListViewItem *item, int col, bool ascending)const
     }
     if (col == COL_AUT) {
         if (Kdesvnsettings::locale_is_casesensitive()) {
-            return m_Content.author().localeAwareCompare(k->m_Content.author());
+            return m_Content.tAuthor().localeAwareCompare(k->m_Content.author());
         }
-        return m_Content.author().compare(k->m_Content.author());
+        return m_Content.tAuthor().compare(k->m_Content.author());
     }
     return k->m_Content.lineNumber()-m_Content.lineNumber();
 }
@@ -214,9 +266,13 @@ void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
 void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&blame)
 {
     m_Data->m_File = what;
-    m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this, "m_SearchWidget");
+    m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this);
+    LocaleSelector_impl*m_Ls = new LocaleSelector_impl(Kdesvnsettings::locale_for_blame(),this);
+    connect(m_Ls,SIGNAL(TextCodecChanged(const QString&)),
+            this,SLOT(slotTextCodecChanged(const QString&)));
 
     BlameDisplayLayout->remove(m_BlameList);
+    BlameDisplayLayout->addWidget(m_Ls);
     BlameDisplayLayout->addWidget(m_SearchWidget);
     BlameDisplayLayout->addWidget(m_BlameList);
 
@@ -403,6 +459,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const sv
     dlg->enableButton(KDialogBase::User2,false);
     connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
     connect(dlg,SIGNAL(user2Clicked()),ptr,SLOT(slotShowCurrentCommit()));
+    Dialog1Layout->adjustSize();
     dlg->exec();
 
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
@@ -415,5 +472,19 @@ void BlameDisplay_impl::slotItemDoubleClicked(QListViewItem*item)
     showCommit(bit);
 }
 
+void BlameDisplay_impl::slotTextCodecChanged(const QString&what)
+{
+    if (Kdesvnsettings::locale_for_blame()!=what) {
+        Kdesvnsettings::setLocale_for_blame(what);
+        Kdesvnsettings::self()->writeConfig();
+        LocalizedAnnotatedLine::reset_codec();
+        QListViewItemIterator it(m_BlameList);
+        while ( it.current() ) {
+            BlameDisplayItem*_it = static_cast<BlameDisplayItem*>(it.current());
+            _it->localeChanged();
+            ++it;
+        }
+    }
+}
 
 #include "blamedisplay_impl.moc"

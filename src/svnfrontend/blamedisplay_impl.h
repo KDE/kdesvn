@@ -27,6 +27,7 @@ class BlameDisplayData;
 class SimpleLogCb;
 class BlameDisplayItem;
 class KListViewSearchLineWidget;
+class LocaleSelector_impl;
 
 class BlameDisplay_impl:public BlameDisplay
 {
@@ -50,6 +51,7 @@ public slots:
 protected slots:
     virtual void slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&);
     virtual void slotSelectionChanged();
+    virtual void slotTextCodecChanged(const QString&);
 
 protected:
     virtual void showCommit(BlameDisplayItem*);

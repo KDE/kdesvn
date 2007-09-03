@@ -5,6 +5,7 @@ KDE3_ADD_UI_FILES(
     logmessage.ui
     ssltrustprompt.ui
     authdlg.ui
+    localeselector.ui
 )
 
 SET(ksvnwidgetsrc
@@ -15,6 +16,7 @@ SET(ksvnwidgetsrc
     diffbrowser.cpp
     diffbrowserdata.cpp
     diffsyntax.cpp
+    localeselector_impl.cpp
     )
 
 SET(ksvnwidgethdr
@@ -25,6 +27,7 @@ SET(ksvnwidgethdr
     diffbrowser.h
     diffbrowserdata.h
     diffsyntax.h
+    localeselector_impl.h
 )
 
 KDE3_AUTOMOC(${ksvnwidgetsrc})

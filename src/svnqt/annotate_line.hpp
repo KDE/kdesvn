@@ -49,8 +49,13 @@ namespace svn
     : m_line_no (line_no), m_revision (revision),
       m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime())
     {
-        m_line.duplicate(line,strlen(line));
-        m_author.duplicate(author,strlen(author));
+#if QT_VERSION < 0x040000
+        if (line) m_line.duplicate(line,strlen(line));
+        if (author) m_author.duplicate(author,strlen(author));
+#else
+        if (line) m_line=QByteArray(line,strlen(line));
+        if (author) m_author=QByteArray(author,strlen(author));
+#endif 
     }
 
     AnnotateLine ( const AnnotateLine &other)

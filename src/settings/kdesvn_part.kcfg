@@ -57,7 +57,6 @@
     <entry key="commit_hide_new" type="Bool" >
       <default>false</default>
     </entry>
-
   </group>
   <group name="subversion" >
     <entry key="display_overlays" type="Bool" >
@@ -167,6 +166,11 @@
   <group name="blame_dlg">
     <entry key="locale_for_blame" type="String" >
       <label>Locale for blame display</label>
+      <default></default>
+    </entry>
+  </group>
+  <group name="diff_display">
+    <entry key="locale_for_diff" type="String" >
       <default></default>
     </entry>
   </group>

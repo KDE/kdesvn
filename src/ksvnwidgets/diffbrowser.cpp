@@ -20,6 +20,7 @@
 
 #include "diffbrowser.h"
 #include "diffbrowserdata.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <kglobalsettings.h>
 #include <kglobal.h>
@@ -32,6 +33,7 @@
 #include <qfont.h>
 #include <qtooltip.h>
 #include <qwhatsthis.h>
+#include <qtextcodec.h>
 
 /*!
     \fn DiffBrowser::DiffBrowser(QWidget*parent=0,const char*name=0)
@@ -68,8 +70,18 @@ void DiffBrowser::setText(const QString&aText)
 void DiffBrowser::setText(const QByteArray&aText)
 {
     m_Data->m_content=aText;
-    KTextBrowser::setText(QString::fromLocal8Bit(aText,aText.size()));
+    printContent();
     setCursorPosition(0,0);
+}
+
+void DiffBrowser::printContent()
+{
+    QTextCodec * cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_diff());
+    if (!cc) {
+        KTextBrowser::setText(QString::fromLocal8Bit(m_Data->m_content,m_Data->m_content.size()));
+    } else {
+        KTextBrowser::setText(cc->toUnicode(m_Data->m_content,m_Data->m_content.size()));
+    }
 }
 
 /*!
@@ -229,6 +241,15 @@ void DiffBrowser::doSearchAgain(bool back)
         doSearch(m_Data->pattern,m_Data->cs,back);
         m_Data->last_finished_search = m_Data->last_search;
         m_Data->last_search = DiffBrowserData::NONE;
+    }
+}
+
+void DiffBrowser::slotTextCodecChanged(const QString&codec)
+{
+    if (Kdesvnsettings::locale_for_diff()!=codec) {
+        Kdesvnsettings::setLocale_for_diff(codec);
+        printContent();
+        Kdesvnsettings::self()->writeConfig();
     }
 }
 

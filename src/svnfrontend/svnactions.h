@@ -81,8 +81,8 @@ public:
     bool addItems(const QStringList&w,bool rec=false);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
-    void makeDelete(const QValueList<svn::Path>&);
-    void makeDelete(const QStringList&);
+    bool makeDelete(const svn::Pathes&);
+    bool makeDelete(const QStringList&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
 

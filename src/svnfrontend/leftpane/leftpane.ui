@@ -37,22 +37,6 @@
                     <bool>true</bool>
                 </property>
             </column>
-        <item>
-            <property name="text">
-                <string>What</string>
-            </property>
-            <property name="pixmap">
-                <pixmap></pixmap>
-            </property>
-            <item>
-                <property name="text">
-                    <string>Isdat</string>
-                </property>
-                <property name="pixmap">
-                    <pixmap></pixmap>
-                </property>
-            </item>
-        </item>
             <property name="name">
                 <cstring>treeView</cstring>
             </property>
@@ -68,6 +52,8 @@
         </widget>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>

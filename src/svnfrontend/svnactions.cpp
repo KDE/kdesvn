@@ -872,12 +872,14 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                     _Cache[i]->propStatus()==svn_wc_status_modified
                 ) ) {
                     if (_Cache[i]->textStatus()==svn_wc_status_deleted) {
-                        _check.append(Logmsg_impl::logActionEntry(_p,i18n("Delete"),2));
+                        _check.append(Logmsg_impl::logActionEntry(_p,i18n("Delete"),Logmsg_impl::logActionEntry::DELETE));
                     } else {
-                        _check.append(Logmsg_impl::logActionEntry(_p,i18n("Commit")));
+                        _check.append(Logmsg_impl::logActionEntry(_p,i18n("Commit"),Logmsg_impl::logActionEntry::COMMIT));
                     }
+                } else if (_Cache[i]->textStatus()==svn_wc_status_missing) {
+                    _uncheck.append(Logmsg_impl::logActionEntry(_p,i18n("Delete and Commit"),Logmsg_impl::logActionEntry::MISSING_DELETE));
                 } else if (!_Cache[i]->isVersioned()) {
-                    _uncheck.append(Logmsg_impl::logActionEntry(_p,i18n("Add and Commit"),1));
+                    _uncheck.append(Logmsg_impl::logActionEntry(_p,i18n("Add and Commit"),Logmsg_impl::logActionEntry::ADD_COMMIT));
                 }
             }
         }
@@ -886,23 +888,28 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         if (!ok||_result.count()==0) {
             return false;
         }
-        svn::Pathes _add,_commit;
+        svn::Pathes _add,_commit,_delete;
         for (unsigned int i=0; i < _result.count();++i) {
-            if (_result[i]._kind==2) {
+            if (_result[i]._kind==Logmsg_impl::logActionEntry::DELETE) {
                 QFileInfo fi(_result[i]._name);
                 if (fi.isDir()) {
                     rec = true;
                 }
             }
             _commit.append(_result[i]._name);
-            if (_result[i]._kind==1) {
+            if (_result[i]._kind==Logmsg_impl::logActionEntry::ADD_COMMIT) {
                 _add.append(_result[i]._name);
+            } else if (_result[i]._kind==Logmsg_impl::logActionEntry::MISSING_DELETE) {
+                _delete.append(_result[i]._name);
             }
         }
         if (_add.count()>0) {
             if (!addItems(_add,false)) {
                 return false;
             }
+        }
+        if (_delete.count()>0) {
+            makeDelete(_delete);
         }
         _targets = svn::Targets(_commit);
     }
@@ -1424,34 +1431,35 @@ bool SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
     return true;
 }
 
-void SvnActions::makeDelete(const QStringList&w)
+bool SvnActions::makeDelete(const QStringList&w)
 {
     int answer = KMessageBox::questionYesNoList(0,i18n("Really delete these entries?"),w,i18n("Delete from repository"));
     if (answer!=KMessageBox::Yes) {
-        return;
+        return false;
     }
-    QValueList<svn::Path> items;
+    svn::Pathes items;
     for (unsigned int i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
-    makeDelete(items);
+    return makeDelete(items);
 }
 
 /*!
     \fn SvnActions::makeDelete()
  */
-void SvnActions::makeDelete(const QValueList<svn::Path>&items)
+bool SvnActions::makeDelete(const svn::Pathes&items)
 {
-    if (!m_Data->m_CurrentContext) return;
+    if (!m_Data->m_CurrentContext) return false;
     QString ex;
     try {
         svn::Targets target(items);
         m_Data->m_Svnclient->remove(target,false);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
-        return;
+        return false;
     }
     EMIT_FINISHED;
+    return true;
 }
 
 void SvnActions::CheckoutExport(bool _exp)

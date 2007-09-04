@@ -47,6 +47,7 @@ namespace svn
     class Revision;
     class Status;
     class Targets;
+    class Path;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
 
@@ -75,6 +76,8 @@ namespace svn
     typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
     /// shared pointer for properties
     typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
+
+    typedef QLIST<Path> Pathes;
 }
 
 #endif

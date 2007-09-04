@@ -31,8 +31,15 @@ public:
     struct logActionEntry {
         QString _name;
         QString _actionDesc;
-        int _kind;
-        logActionEntry(const QString&,const QString&,int kind = 0);
+
+        enum ACTION_TYPE{
+            COMMIT=0,
+            ADD_COMMIT=1,
+            DELETE=2,
+            MISSING_DELETE=3
+        };
+        ACTION_TYPE _kind;
+        logActionEntry(const QString&,const QString&,ACTION_TYPE kind = COMMIT);
         logActionEntry();
     };
 

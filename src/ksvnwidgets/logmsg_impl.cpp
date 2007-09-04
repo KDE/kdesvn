@@ -450,13 +450,13 @@ Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
     return _result;
 }
 
-Logmsg_impl::logActionEntry::logActionEntry(const QString&name,const QString&action,int kind)
+Logmsg_impl::logActionEntry::logActionEntry(const QString&name,const QString&action,ACTION_TYPE kind)
     : _name(name),_actionDesc(action),_kind(kind)
 {
 }
 
 Logmsg_impl::logActionEntry::logActionEntry()
-    : _name(""),_actionDesc(""),_kind(0)
+    : _name(""),_actionDesc(""),_kind(COMMIT)
 {
 }
 
@@ -540,7 +540,7 @@ void Logmsg_impl::markUnversioned(bool mark)
     while ( it.current() ) {
         if (it.current()->rtti()==1000) {
             SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
-            if (item->data()._kind==1) {
+            if (item->data()._kind==logActionEntry::ADD_COMMIT) {
                 item->setOn(mark);
             }
         }
@@ -557,7 +557,7 @@ void Logmsg_impl::hideNewItems(bool how)
         while ( it.current() ) {
             if (it.current()->rtti()==1000) {
                 SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
-                if (item->data()._kind==1) {
+                if (item->data()._kind==logActionEntry::ADD_COMMIT) {
                     item->setOn(false);
                     m_Hidden.push_back(item);
                 }

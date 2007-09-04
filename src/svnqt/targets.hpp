@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -32,6 +32,7 @@
 #define _SVNCPP_TARGETS_HPP_
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 
 #include <qglobal.h>
 #if QT_VERSION < 0x040000
@@ -48,14 +49,7 @@ class QStringList;
 namespace svn
 {
   // forward declarations
-  class Path;
   class Pool;
-
-#if QT_VERSION < 0x040000
-  typedef QValueList<Path> Pathes;
-#else
-  typedef QList<Path> Pathes;
-#endif
 
   /**
    * Encapsulation for Subversion target arrays handling

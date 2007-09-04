@@ -379,6 +379,12 @@ void kdesvnfilelist::setupActions()
 
     new KAction(i18n("Diff revisions"),"kdesvndiff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
 
+    /* folding options */
+    tmp_action = new KAction( i18n("Unfold File Tree"), 0, this , SLOT(slotUnfoldTree()), m_filesAction, "view_unfold_tree" );
+    tmp_action->setToolTip(i18n("Opens all branches of the file tree"));
+    tmp_action = new KAction( i18n("Fold File Tree"), 0, this, SLOT(slotFoldTree()), m_filesAction, "view_fold_tree" );
+    tmp_action->setToolTip(i18n("Closes all branches of the file tree"));
+
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
@@ -2901,6 +2907,30 @@ void kdesvnfilelist::slotOpenWith()
     KURL::List lst;
     lst.append(which->kdeName(rev));
     KRun::displayOpenWithDialog(lst);
+}
+
+void kdesvnfilelist::slotUnfoldTree()
+{
+    QListViewItemIterator it(this);
+    while (QListViewItem* item = it.current())
+    {
+        if (item->isExpandable())
+            item->setOpen(true);
+        ++it;
+    }
+}
+
+void kdesvnfilelist::slotFoldTree()
+{
+    QListViewItemIterator it(this);
+    while (QListViewItem* item = it.current())
+    {
+        // don't close the top level directory
+        if (item->isExpandable() && item->parent())
+            item->setOpen(false);
+
+        ++it;
+    }
 }
 
 /*!

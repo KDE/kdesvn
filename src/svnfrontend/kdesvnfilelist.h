@@ -222,6 +222,9 @@ protected slots:
     virtual void slotOpenWith();
     virtual void slotDisplayProperties();
 
+	virtual void slotUnfoldTree();
+	virtual void slotFoldTree();
+
 private slots:
     void gotPreview( const KFileItem*, const QPixmap& );
     void gotPreviewResult();

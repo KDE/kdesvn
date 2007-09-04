@@ -72,7 +72,13 @@
     <Separator/>
     <Action name="switch_browse_revision" />
    </Menu>
-   <Action name="make_view_refresh" />
+   <Separator/>
+    <Menu name="generic_view">
+        <text>View</text>
+        <Action name="make_view_refresh" />
+        <Action name="view_unfold_tree" />
+        <Action name="view_fold_tree" />
+    </Menu>
   </Menu>
   <Menu name="help"><text>&amp;Help</text>
    <Separator/>

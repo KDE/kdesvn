@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -99,7 +99,7 @@ namespace svn
     exp = 0;
   }
 
-  void LockEntry::init(svn_lock_t* src)
+  void LockEntry::init(const svn_lock_t* src)
   {
     if (src) {
       date = src->creation_date;

@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -55,7 +55,7 @@ namespace svn
     {
     }
 
-    DirEntry_Data (const QString& _name, svn_dirent_t * dirEntry)
+    DirEntry_Data (const QString& _name, const svn_dirent_t * dirEntry)
       : name (_name), kind (dirEntry->kind), size (dirEntry->size),
         hasProps (dirEntry->has_props != 0),
         createdRev (dirEntry->created_rev), time (dirEntry->time), m_Lock()
@@ -87,18 +87,18 @@ namespace svn
   {
   }
 
-  DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry)
+  DirEntry::DirEntry (const QString& name, const svn_dirent_t * dirEntry)
     : m (new DirEntry_Data (name, dirEntry))
   {
   }
 
-  DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry,svn_lock_t*lockEntry)
+  DirEntry::DirEntry (const QString& name, const svn_dirent_t * dirEntry,const svn_lock_t*lockEntry)
     : m (new DirEntry_Data (name, dirEntry))
   {
     setLock(lockEntry);
   }
 
-  DirEntry::DirEntry (const QString& name, svn_dirent_t * dirEntry,const LockEntry&lockEntry)
+  DirEntry::DirEntry (const QString& name, const svn_dirent_t * dirEntry,const LockEntry&lockEntry)
     : m (new DirEntry_Data (name, dirEntry))
   {
     m->m_Lock = lockEntry;
@@ -163,7 +163,7 @@ namespace svn
   }
 
   void
-  DirEntry::setLock(svn_lock_t*_l)
+  DirEntry::setLock(const svn_lock_t*_l)
   {
      m->m_Lock.init(_l);
   }

@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -62,7 +62,7 @@ namespace svn
               const char * lock_owner,
               const char * lock_comment,
               const char * lock_token);
-    void init(svn_lock_t*);
+    void init(const svn_lock_t*);
     const QString&Comment()const;
     const QString&Owner()const;
     const QString&Token()const;

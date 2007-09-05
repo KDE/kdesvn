@@ -285,10 +285,11 @@ namespace svn
 
     for (it = dirEntries.begin (); it != dirEntries.end (); it++)
     {
-      DirEntryPtr dirEntry = *it;
-      entries.push_back(dirEntryToStatus (path, dirEntry));
+        DirEntryPtr dirEntry = *it;
+        if (dirEntry->name().isEmpty())
+            continue;
+        entries.push_back(dirEntryToStatus (path, dirEntry));
     }
-
     return entries;
   }
 

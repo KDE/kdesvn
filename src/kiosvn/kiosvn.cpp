@@ -199,7 +199,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     KIO::UDSEntry entry;
     totalSize(dlist.size());
     for (unsigned int i=0; i < dlist.size();++i) {
-        if (!dlist[i]) {
+        if (!dlist[i] || dlist[i]->name().isEmpty()) {
             continue;
         }
         QDateTime dt = svn::DateTime(dlist[i]->time());

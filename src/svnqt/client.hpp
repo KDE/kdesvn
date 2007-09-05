@@ -594,7 +594,8 @@ namespace svn
      * @param recurse
      * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with
-     *         a relative path (only filename)
+     *         a relative path (only filename). In subversion >= 1.4 an entry without a name is returned, too. This
+     *         is the searched directory (done in subversion itself)
      */
     virtual DirEntries
     list (const Path& pathOrUrl,

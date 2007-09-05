@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -54,13 +54,13 @@ namespace svn
     /**
      * constructor for existing @a svn_dirent_t entries
      */
-    DirEntry (const QString& name, svn_dirent_t * dirEntry);
+    DirEntry (const QString& name, const svn_dirent_t * dirEntry);
     /**
      * constructor for existing @a svn_dirent_t entries
      */
-    DirEntry (const QString& name, svn_dirent_t * dirEntry,svn_lock_t*lockEntry);
+    DirEntry (const QString& name, const svn_dirent_t * dirEntry,const svn_lock_t*lockEntry);
 
-    DirEntry (const QString& name, svn_dirent_t * dirEntry,const LockEntry&lockEntry);
+    DirEntry (const QString& name, const svn_dirent_t * dirEntry,const LockEntry&lockEntry);
     /**
      * copy constructor
      */
@@ -113,7 +113,7 @@ namespace svn
      * \param aLock the subversion lock description to convert.
      */
     void
-    setLock(svn_lock_t*aLock);
+    setLock(const svn_lock_t*aLock);
 
 
   private:

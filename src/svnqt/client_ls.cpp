@@ -185,17 +185,60 @@ namespace svn
     return entries;
   }
 
+#if (SVN_VER_MAJOR>=1) && (SVN_VER_MINOR>=4)
+  static svn_error_t * s_list_func
+          (void * baton,const char*path,const svn_dirent_t*dirent,const svn_lock_t*lock,const char* abs_path,apr_pool_t*)
+  {
+      if (!baton || !path || !dirent) {
+          return 0;
+      }
+      /* check every loop for cancel of operation */
+      Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
+      Context*l_context = l_baton->m_context;
+      DirEntries*entries = static_cast<DirEntries*>(l_baton->m_data);
+      svn_client_ctx_t*ctx = l_context->ctx();
+      if (ctx&&ctx->cancel_func) {
+          SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+      }
+      entries->push_back(new DirEntry(QString::FROMUTF8(path),dirent,lock));
+      return 0;
+  }
+#endif
+
   DirEntries
   Client_impl::list(const Path& pathOrUrl,
                 const Revision& revision,
                 const Revision& peg,
                 bool recurse,bool retrieve_locks) throw (ClientException)
   {
+#if (SVN_VER_MAJOR>=1) && (SVN_VER_MINOR>=4)
+      sBaton _baton;
+      Pool pool;
+      DirEntries entries;
+      _baton.m_data = &entries;
+      _baton.m_context=m_context;
+      svn_error_t * error = svn_client_list(pathOrUrl.cstr(),
+                                            peg,
+                                            revision,
+                                            recurse,
+                                            SVN_DIRENT_ALL,
+                                            retrieve_locks,
+                                            s_list_func,
+                                            &_baton,
+                                            *m_context,
+                                            pool
+                                           );
+      if (error != 0) {
+          throw ClientException (error);
+      }
+      return entries;
+#else
       if (!retrieve_locks) {
           return list_simple(pathOrUrl,revision,peg,recurse);
       } else {
           return list_locks(pathOrUrl,revision,peg,recurse);
       }
+#endif
   }
 }
 

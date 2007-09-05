@@ -43,7 +43,7 @@ class StopDlg : public KDialogBase
 Q_OBJECT
 public:
     StopDlg(QObject*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
-    ~StopDlg();
+    virtual ~StopDlg();
 
     bool cancelld();
 
@@ -81,6 +81,25 @@ protected slots:
     virtual void slotNetProgres(long long int, long long int);
 signals:
     void sigCancel(bool how);
+};
+
+class StopSimpleDlg:public StopDlg
+{
+    Q_OBJECT
+public:
+    StopSimpleDlg(QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
+    virtual ~StopSimpleDlg(){}
+
+    bool isCanceld()const{return cancelld;}
+
+public slots:
+    virtual void makeCancel();
+
+protected slots:
+    virtual void slotSimpleCancel(bool);
+
+protected:
+    bool cancelld;
 };
 
 #endif

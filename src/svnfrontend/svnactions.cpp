@@ -2483,4 +2483,10 @@ void SvnActions::slotExtraLogMsg(const QString&msg)
     emit sigExtraLogMsg(msg);
 }
 
+void SvnActions::slotCancel(bool how)
+{
+    if (!m_Data->m_CurrentContext) return;
+    m_Data->m_SvnContext->setCanceled(how);
+}
+
 #include "svnactions.moc"

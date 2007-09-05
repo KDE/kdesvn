@@ -203,6 +203,8 @@ public slots:
     virtual void slotExtraLogMsg(const QString&);
     void slotMakeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg,QWidget*dlgparent);
 
+    virtual void slotCancel(bool);
+
 signals:
     void clientException(const QString&);
     void sendNotify(const QString&);

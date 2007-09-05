@@ -90,6 +90,16 @@ void FileListViewItem::setOpen(bool o)
     KListViewItem::setOpen(o);
 }
 
+void FileListViewItem::setOpenNoBlock(bool o)
+{
+    if (o && childCount()==0) {
+        {
+            m_Ksvnfilelist->slotItemRead(this);
+        }
+    }
+    KListViewItem::setOpen(o);
+}
+
 FileListViewItem::~FileListViewItem()
 {
 }

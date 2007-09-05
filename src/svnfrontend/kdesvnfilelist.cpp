@@ -29,6 +29,7 @@
 #include "keystatus.h"
 #include "opencontextmenu.h"
 #include "checkoutinfo_impl.h"
+#include "stopdlg.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/dirent.hpp"
@@ -38,6 +39,7 @@
 #include "helpers/sshagent.h"
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
+#include "fronthelpers/widgetblockstack.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -628,9 +630,14 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     svn::StatusEntries neweritems;
     m_SvnWrapper->getaddedItems(what,neweritems);
     dlist+=neweritems;
+    bool ownupdates = true;
     //kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
 
-    viewport()->setUpdatesEnabled(false);
+    if (isUpdatesEnabled()) {
+        viewport()->setUpdatesEnabled(false);
+    } else {
+        ownupdates=false;
+    }
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem * pitem = 0;
     bool main_found = false;
@@ -660,8 +667,11 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         pitem = _parent;
     }
     insertDirs(pitem,dlist);
-    viewport()->setUpdatesEnabled(true);
-    viewport()->repaint();
+    if (ownupdates) {
+        kdDebug()<<"Enable update"<<endl;
+        viewport()->setUpdatesEnabled(true);
+        viewport()->repaint();
+    }
     return true;
 }
 
@@ -675,12 +685,12 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
     QTime _t;
     _t.start();
     for (it = dlist.begin();it!=dlist.end();++it) {
-        if (_t.elapsed()>300) {
-            viewport()->setUpdatesEnabled(true);
+/*        if (_t.elapsed()>300) {
+           viewport()->setUpdatesEnabled(true);
             viewport()->repaint();
             viewport()->setUpdatesEnabled(false);
             _t.restart();
-        }
+        }*/
         if (filterOut((*it)))
         {
             continue;
@@ -804,6 +814,8 @@ void kdesvnfilelist::slotItemRead(QListViewItem*aItem)
     if (_ex &&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
         if (checkDirs(k->fullName(),k)) {
             m_Dirsread[k->fullName()]=true;
+        } else {
+            emit sigListError();
         }
     }
 }
@@ -2911,13 +2923,39 @@ void kdesvnfilelist::slotOpenWith()
 
 void kdesvnfilelist::slotUnfoldTree()
 {
+    StopSimpleDlg sdlg(0,0,i18n("Unfold tree"),i18n("Unfold all folder"));
+
+    connect(this,SIGNAL(sigListError()),
+            &sdlg,SLOT(makeCancel()));
+
     QListViewItemIterator it(this);
-    while (QListViewItem* item = it.current())
+    QTime t;t.start();
+
+    setUpdatesEnabled(false);
     {
-        if (item->isExpandable())
-            item->setOpen(true);
-        ++it;
+        WidgetBlockStack a(this);
+        while (QListViewItem* item = it.current())
+        {
+            if (item->isExpandable()) {
+                if (sdlg.isCanceld()) {
+                    m_SvnWrapper->slotCancel(true);
+                    break;
+                }
+                if (t.elapsed()>=200) {
+                    sdlg.slotTick();
+                    kapp->processEvents(20);
+                    t.restart();
+                }
+                ((FileListViewItem*)item)->setOpenNoBlock(true);
+            }
+            ++it;
+        }
     }
+    setFocus();
+    setUpdatesEnabled(true);
+    viewport()->repaint();
+    repaint();
+    m_SvnWrapper->slotCancel(false);
 }
 
 void kdesvnfilelist::slotFoldTree()

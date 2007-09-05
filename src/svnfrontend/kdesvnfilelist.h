@@ -183,6 +183,7 @@ signals:
     void sigSwitchUrl(const KURL&);
     void sigUrlChanged(const QString&);
     void sigProplist(const svn::PathPropertiesMapListPtr&,bool,const QString&);
+    void sigListError();
 
 public slots:
     virtual void refreshCurrentTree();

@@ -61,6 +61,8 @@ public:
     virtual void setStat(const svn::StatusPtr&);
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
     virtual void setOpen(bool o);
+    virtual void setOpenNoBlock(bool o);
+
     virtual void setPreviewPix(const QPixmap& pixmap);
     virtual const svn::Revision&correctPeg()const;
     virtual FileListViewItem*findChild(const QString&);

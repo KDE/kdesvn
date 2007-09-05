@@ -63,11 +63,13 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     m_LogWindow = 0;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
-    connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
-    connect(m_Context,SIGNAL(waitShow(bool)),this,SLOT(slotWait(bool)));
-    connect(m_Context,SIGNAL(netProgress(long long int, long long int)),
-        this,SLOT(slotNetProgres(long long int, long long int)));
-    connect(this,SIGNAL(sigCancel(bool)),m_Context,SLOT(setCanceled(bool)));
+    if (m_Context) {
+        connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
+        connect(m_Context,SIGNAL(waitShow(bool)),this,SLOT(slotWait(bool)));
+        connect(m_Context,SIGNAL(netProgress(long long int, long long int)),
+                this,SLOT(slotNetProgres(long long int, long long int)));
+        connect(this,SIGNAL(sigCancel(bool)),m_Context,SLOT(setCanceled(bool)));
+    }
     mShowTimer->start(m_MinDuration, true);
     setMinimumSize(280,160);
     adjustSize();
@@ -193,6 +195,22 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
         m_StopTick.restart();
         kapp->processEvents();
     }
+}
+
+StopSimpleDlg::StopSimpleDlg(QWidget *parent, const char *name,const QString&caption,const QString&text)
+    : StopDlg(0,parent,name,caption,text),cancelld(false)
+{
+    connect(this,SIGNAL(sigCancel(bool)),this,SLOT(slotSimpleCancel(bool)));
+}
+
+void StopSimpleDlg::slotSimpleCancel(bool how)
+{
+    cancelld = how;
+}
+
+void StopSimpleDlg::makeCancel()
+{
+    slotSimpleCancel(true);
 }
 
 #include "stopdlg.moc"

@@ -11,6 +11,7 @@ Source:    kdesvn-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
 Obsoletes: kdesvn-kioksvn kdesvn-svnqt
 Requires: subversion >= 1.2.0
+Requires: /usr/bin/dot
 BuildPreReq: apr-devel
 BuildPreReq: apr-util-devel
 BuildPreReq: subversion-devel >= 1.2.0

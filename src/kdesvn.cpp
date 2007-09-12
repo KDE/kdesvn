@@ -21,6 +21,7 @@
 
 #include "kdesvn.h"
 #include "urldlg.h"
+#include "kdesvn_part.h"
 
 #include <qdragobject.h>
 #include <kprinter.h>
@@ -103,11 +104,17 @@ kdesvn::kdesvn()
 
     if (factory)
     {
-        kdDebug()<<"Name: " << factory->className()<<endl;
+        if (QCString(factory->className())!="cFactory") {
+            kdDebug()<<"wrong factory"<<endl;
+            KMessageBox::error(this, i18n("Could not find our part"));
+            kapp->quit();
+            return;
+        }
+        cFactory*cfa = static_cast<cFactory*>(factory);
+
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
-        m_part = static_cast<KParts::ReadOnlyPart *>(factory->create(this,
-                                "kdesvn_part", "KParts::ReadOnlyPart" ));
+        m_part = static_cast<KParts::ReadOnlyPart *>(cfa->createAppPart(this,"kdesvn_part", this, "kdesvn_part", "KParts::ReadOnlyPart",QStringList()));
 
         if (m_part)
         {

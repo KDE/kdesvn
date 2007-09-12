@@ -55,7 +55,7 @@ public:
     /**
      * Default constructor
      */
-    kdesvnView(KActionCollection*,QWidget *parent,const char*name=0);
+    kdesvnView(KActionCollection*,QWidget *parent,const char*name=0,bool full=false);
 
     /**
      * Destructor

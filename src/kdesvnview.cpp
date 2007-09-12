@@ -58,7 +58,7 @@
 #include <kdialog.h>
 #include <kdialogbase.h>
 
-kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name)
+kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name,bool full)
     : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
       m_currentURL("")
 {
@@ -67,21 +67,21 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
+    leftpane * _leftpane;
 
-#if 1
+    if (full) {
+        m_treeSplitter = new QSplitter(m_Splitter);
+        m_treeSplitter->setOrientation( QSplitter::Horizontal );
+        m_treeSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_treeSplitter->sizePolicy().hasHeightForWidth() ) );
 
-#if 0
-    m_treeSplitter = new QSplitter(m_Splitter);
-    m_treeSplitter->setOrientation( QSplitter::Horizontal );
-    m_treeSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_treeSplitter->sizePolicy().hasHeightForWidth() ) );
-
-    // just for testing - get filled with a real widget
-    leftpane * _leftpane = new leftpane(m_treeSplitter);
-    m_flist=new kdesvnfilelist(m_Collection,m_treeSplitter);
-#else
-    m_treeSplitter=0;
-    m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
-#endif
+        // just for testing - get filled with a real widget
+        _leftpane = new leftpane(m_treeSplitter);
+        m_flist=new kdesvnfilelist(m_Collection,m_treeSplitter);
+    } else {
+        m_treeSplitter=0;
+        m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
+        _leftpane = 0;
+    }
 
     m_infoSplitter = new QSplitter(m_Splitter);
     m_infoSplitter->setOrientation( QSplitter::Horizontal );
@@ -92,17 +92,12 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     pl->addCallback(m_flist);
     connect(m_flist,SIGNAL(sigProplist(const svn::PathPropertiesMapListPtr&,bool,const QString&)),
             pl,SLOT(displayList(const svn::PathPropertiesMapListPtr&,bool,const QString&)));
-#else
-    m_treeSplitter=0;
-    m_infoSplitter=0;
-    m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
-    m_LogWindow=new KTextBrowser(m_Splitter);
-#endif
+
     m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_flist->sizePolicy().hasHeightForWidth() ) );
-#if 0
-    m_treeSplitter->setCollapsible(m_flist,false);
-    m_Splitter->setCollapsible(m_treeSplitter,false);
-#endif
+    if (full ) {
+        m_treeSplitter->setCollapsible(m_flist,false);
+        m_Splitter->setCollapsible(m_treeSplitter,false);
+    }
 
     top_layout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));

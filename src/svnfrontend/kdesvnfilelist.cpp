@@ -261,9 +261,13 @@ void kdesvnfilelist::setupActions()
         this,SLOT(slotMakePartTree()),m_filesAction,"make_svn_partialtree");
 
     new KAction(i18n("Properties"),"edit",
-        KShortcut(),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+        KShortcut(CTRL+Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
     new KAction(i18n("Display Properties"),"edit",
         KShortcut(Key_P),this,SLOT(slotDisplayProperties()),m_filesAction,"get_svn_property");
+
+    tmp_action = new KAction(i18n("Display last change"),"kdesvndiff",
+                KShortcut(),this,SLOT(slotDisplayLastDiff()),m_filesAction,"make_last_change");
+    tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
 
     m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
         KShortcut(Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
@@ -2117,6 +2121,49 @@ void kdesvnfilelist::slotSimpleHeadDiff()
     }
     // only possible on working copies - so we may say this values
     m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,kitem?kitem->isDir():true);
+}
+
+void kdesvnfilelist::slotDisplayLastDiff()
+{
+    FileListViewItem*kitem = singleSelected();
+    QString what;
+    if (isWorkingCopy())
+    {
+        chdir(baseUri().local8Bit());
+    }
+    svn::Revision end = svn::Revision::PREV;
+    if (!kitem) {
+        if (isWorkingCopy()) {
+            QListViewItem*fi = firstChild();
+            kitem = static_cast<FileListViewItem*>(fi);
+            if (!kitem) {
+                return;
+            }
+            what = relativePath(kitem);
+        } else {
+            what=baseUri();
+        }
+    }else{
+        what = relativePath(kitem);
+    }
+    svn::Revision start;
+    svn::InfoEntry inf;
+    if (!kitem) {
+        // it has to have an item when in working copy, so we know we are in repository view.
+        if (!m_SvnWrapper->singleInfo(what,m_pList->m_remoteRevision,inf)) {
+            return;
+        }
+        start = inf.cmtRev();
+    } else {
+        start = kitem->cmtRev();
+    }
+    if (!isWorkingCopy()) {
+        if (!m_SvnWrapper->singleInfo(what,start.revnum()-1,inf)) {
+            return;
+        }
+        end = inf.cmtRev();
+    }
+    m_SvnWrapper->makeDiff(what,start,what,end,realWidget());
 }
 
 void kdesvnfilelist::slotDiffPathes()

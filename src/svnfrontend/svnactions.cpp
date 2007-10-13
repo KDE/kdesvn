@@ -1954,6 +1954,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
 {
     if (!m_Data->m_CurrentContext) return false;
+    kdDebug()<<"Force: "<<force << endl;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item "));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));

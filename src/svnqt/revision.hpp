@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -75,6 +75,7 @@ namespace svn
     static const svn_opt_revision_kind HEAD;
     static const svn_opt_revision_kind WORKING;
     static const svn_opt_revision_kind UNDEFINED;
+    static const svn_opt_revision_kind PREV;
 
     /**
      * Constructor

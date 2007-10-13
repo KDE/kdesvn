@@ -167,6 +167,7 @@ protected slots:
     virtual void slotCopy();
     virtual void slotCat();
     virtual void slotDelete();
+    virtual void slotDisplayLastDiff();
 
     /* callback slots */
     virtual void slotCopyFinished( KIO::Job *);

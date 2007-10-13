@@ -51,7 +51,10 @@ SET(svnfrontendsrc
     svnlogdlgimp.cpp
     tcontextlistener.cpp
     blamedisplay_impl.cpp
-    threadcontextlistenerdata.cpp)
+    threadcontextlistenerdata.cpp
+    leftpane/leftpane_impl.cpp
+    leftpane/leftpane_impl.h
+    )
 
 SET(svnfrontendui
     copymoveview.ui

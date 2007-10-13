@@ -28,13 +28,24 @@ namespace svn
 
 class QString;
 
+//! Helper for getting specific svn logentries
 class SimpleLogCb
 {
 public:
+    //! empty constructor
     SimpleLogCb(){}
+    //! destructor
     virtual ~SimpleLogCb(){}
-
-    virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&,QString&root) = 0;
+    //! retrieve a logentry
+    /*!
+     * @param logtarget target buffer where to store logentry
+     * @param rev Revision to get logentry
+     * @param what item to search for
+     * @param peg Peg revision, may equal to  \a rev
+     * @param root the root repository of item, if not given, it has to get detected in implementation from \a what and used.
+     * @return true if logentry and root found, otherwise false.
+     */
+    virtual bool getSingleLog(svn::LogEntry&logtarget,const svn::Revision&rev,const QString&what,const svn::Revision&peg,QString&root) = 0;
 };
 
 #endif

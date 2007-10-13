@@ -265,7 +265,7 @@ void kdesvnfilelist::setupActions()
     new KAction(i18n("Display Properties"),"edit",
         KShortcut(Key_P),this,SLOT(slotDisplayProperties()),m_filesAction,"get_svn_property");
 
-    tmp_action = new KAction(i18n("Display last change"),"kdesvndiff",
+    tmp_action = new KAction(i18n("Display last changes"),"kdesvndiff",
                 KShortcut(),this,SLOT(slotDisplayLastDiff()),m_filesAction,"make_last_change");
     tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
 
@@ -862,6 +862,10 @@ void kdesvnfilelist::enableActions()
     temp = filesActions()->action("make_svn_log");
     if (temp) {
         temp->setEnabled(single||none);
+    }
+    temp = filesActions()->action("make_last_change");
+    if (temp) {
+        temp->setEnabled(isopen);
     }
 
     temp = filesActions()->action("make_svn_log_full");
@@ -2163,7 +2167,7 @@ void kdesvnfilelist::slotDisplayLastDiff()
         }
         end = inf.cmtRev();
     }
-    m_SvnWrapper->makeDiff(what,start,what,end,realWidget());
+    m_SvnWrapper->makeDiff(what,end,what,start,realWidget());
 }
 
 void kdesvnfilelist::slotDiffPathes()

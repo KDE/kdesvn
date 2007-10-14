@@ -100,6 +100,7 @@ public:
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     bool isLockNeeded(SvnItem*which,const svn::Revision&where);
+    QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
     svn::PathPropertiesMapListPtr propList(SvnItem*which,const svn::Revision&where,bool cacheOnly);
 
     bool changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&,const QString&path);
@@ -162,6 +163,10 @@ public:
 
     bool get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p);
     bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target);
+
+    void setContextData(const QString&,const QString&);
+    void clearContextData();
+    QString getContextData(const QString&)const;
 
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;

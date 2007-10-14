@@ -27,6 +27,7 @@
 #include "src/svnqt/shared_pointer.hpp"
 
 #include <qsize.h>
+#include <qregexp.h>
 
 class LogListViewItem;
 class SvnActions;
@@ -64,6 +65,8 @@ protected:
     virtual void keyReleaseEvent (QKeyEvent * e);
     virtual void slotBlameItem();
     svn::SharedPointer<svn::LogEntriesMap> m_Entries;
+    QString _bugurl;
+    QRegExp _r1,_r2;
 
 protected slots:
     virtual void slotListEntries();

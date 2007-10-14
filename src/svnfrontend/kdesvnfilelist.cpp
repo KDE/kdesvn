@@ -591,6 +591,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     }
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
+    QTimer::singleShot(1,this,SLOT(readSupportData()));
     return result;
 }
 
@@ -1198,6 +1199,25 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     delete dlg;
 }
 
+void kdesvnfilelist::readSupportData()
+{
+    if (!isNetworked()) {
+        QString bugurl, bugre;
+        m_SvnWrapper->setContextData("bugtraq:url",QString::null);
+        m_SvnWrapper->setContextData("bugtraq:logregex",QString::null);
+        QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),true);
+        if (!p.isEmpty()) {
+            kdDebug()<<"Bugurl: "<<bugurl << endl;
+            m_SvnWrapper->setContextData("bugtraq:url",bugurl);
+            p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),true);
+            if (!p.isEmpty()) {
+                kdDebug()<<"Bugre: "<<bugre << endl;
+                m_SvnWrapper->setContextData("bugtraq:url",bugre);
+            }
+        }
+    }
+}
+
 void kdesvnfilelist::refreshCurrentTree()
 {
     QTime t;
@@ -1225,6 +1245,7 @@ void kdesvnfilelist::refreshCurrentTree()
     kdDebug()<<"Refresh time: "<<t.elapsed()<<" ms"<<endl;
     setUpdatesEnabled(true);
     viewport()->repaint();
+    QTimer::singleShot(1,this,SLOT(readSupportData()));
     //m_pList->startScan();
 }
 

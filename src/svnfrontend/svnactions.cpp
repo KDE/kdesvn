@@ -136,6 +136,7 @@ public:
     void clearCaches()
     {
         m_PropertiesCache.clear();
+        m_contextData.clear();
     }
 
     ItemDisplay* m_ParentList;
@@ -158,6 +159,8 @@ public:
     QTime m_UpdateCheckTick;
     QGuardedPtr<DiffBrowser> m_DiffBrowserPtr;
     QGuardedPtr<KDialogBase> m_DiffDialog;
+
+    QMap<QString,QString> m_contextData;
 
     bool runblocked;
 };
@@ -2358,7 +2361,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     }
     QString data = "";
     if (pm.size()>0) {
-        svn::PropertiesMap mp = pm[0].second;
+        svn::PropertiesMap&mp = pm[0].second;
         data = mp["svn:ignore"];
     }
     bool result = false;
@@ -2429,12 +2432,40 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
         return false;
     }
     if (pm.size()>0) {
-        svn::PropertiesMap mp = pm[0].second;
+        svn::PropertiesMap&mp = pm[0].second;
         if (mp.find("svn:needs-lock")!=mp.end()) {
             return true;
         }
     }
     return false;
+}
+
+QString SvnActions::searchProperty(QString&Store, const QString&property, const QString&start,const svn::Revision&where,bool up)
+{
+    svn::Path pa(start);
+    while(pa.length()>0) {
+        svn::PathPropertiesMapList pm;
+        try {
+            pm = m_Data->m_Svnclient->propget(property,pa,where,where);
+        } catch (const svn::ClientException&e) {
+            // not a subversion resource...
+            kdDebug()<<"Prop: "<<e.msg()<<endl;
+            return QString::null;
+        }
+        if (pm.size()>0) {
+            svn::PropertiesMap&mp = pm[0].second;
+            if (mp.find(property)!=mp.end()) {
+                Store=mp[property];
+                return pa;
+            }
+        }
+        if (up) {
+            pa.removeLast();
+        } else {
+            return QString::null;
+        }
+    }
+    return QString::null;
 }
 
 bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec)
@@ -2488,6 +2519,31 @@ void SvnActions::slotCancel(bool how)
 {
     if (!m_Data->m_CurrentContext) return;
     m_Data->m_SvnContext->setCanceled(how);
+}
+
+void SvnActions::setContextData(const QString&aKey,const QString&aValue)
+{
+    if (aValue.isNull()) {
+        QMap<QString,QString>::iterator it = m_Data->m_contextData.find(aKey);
+        if (it!=m_Data->m_contextData.end()) {
+            m_Data->m_contextData.remove(it);
+        }
+    } else {
+        m_Data->m_contextData[aKey]=aValue;
+    }
+}
+
+void SvnActions::clearContextData()
+{
+    m_Data->m_contextData.clear();
+}
+
+QString SvnActions::getContextData(const QString&aKey)const
+{
+    if (m_Data->m_contextData.find(aKey)!=m_Data->m_contextData.end()) {
+        return m_Data->m_contextData[aKey];
+    }
+    return QString::null;
 }
 
 #include "svnactions.moc"

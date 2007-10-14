@@ -225,12 +225,16 @@ void FileListViewItem::updateStatus(const svn::StatusPtr&s)
     setStat(s);
 }
 
+SvnItem* FileListViewItem::getParentItem()const
+{
+    return static_cast<FileListViewItem*>(parent());
+}
 /*!
     \fn FileListViewItem::getParentDir()const
  */
  QString FileListViewItem::getParentDir()const
 {
-    FileListViewItem*temp = static_cast<FileListViewItem*>(parent());
+    SvnItem*temp = getParentItem();
     if (!temp) return QString::null;
     return temp->fullName();
 }

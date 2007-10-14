@@ -204,6 +204,24 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
         m_ChangedList->hide();
     }
     m_Actions = ac;
+#if 0
+    if (ac) {
+        _bugurl = m_Actions->getContextData("bugtraq:url");
+        QString reg = m_Actions->getContextData("bugtraq:logregex");
+        if (!reg.isEmpty()) {
+            QStringList s1 = QStringList::split("\n",reg);
+            if (s1.size()>0) {
+                _r1.setPattern(s1[0]);
+                _r1.setWildcard(false);
+                _r1.setCaseSensitive(false);
+                _r1.setMinimal(true);
+                if (s1.size()>1) {
+                    _r2.setPattern(s1[1]);
+                }
+            }
+        }
+    }
+#endif
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
@@ -292,7 +310,25 @@ void SvnLogDlgImp::slotSelectionChanged(QListViewItem*_it)
             m_ChangedList->show();
         }
     }
-    m_LogDisplay->setText(k->message());
+#if 0
+    if (_r1.isValid() && !_bugurl.isEmpty()) {
+        kdDebug()<<"Try match _r1"<< endl;
+        int count=0;
+        int pos = 0;
+        pos = k->message().find(_r1);
+        //pos = _r1.search(k->message(),pos);
+        kdDebug()<<"Pos: "<<pos<<endl;
+        if (pos>0) {
+            kdDebug()<<"Found it!"<<endl;
+        }
+        m_LogDisplay->setText(k->message());
+    } else {
+#endif
+        m_LogDisplay->setText(k->message());
+#if 0
+    }
+#endif
+
     k->showChangedEntries(m_ChangedList);
     buttonBlame->setEnabled(true);
 

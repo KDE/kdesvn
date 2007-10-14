@@ -176,6 +176,9 @@ protected slots:
     virtual void _dirwatchTimeout();
     virtual void _propListTimeout();
 
+    /* internal slots */
+    virtual void readSupportData();
+
 signals:
     void sigLogMessage(const QString&);
     void changeCaption(const QString&);

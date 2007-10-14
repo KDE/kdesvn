@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -129,6 +129,14 @@ namespace svn
      */
     void
     addComponent (const QString & component);
+
+    /** Reduce path to its parent folder.
+     * If the path length is 1 (eg., only "/") it will cleared so
+     * path length will get zero.
+     * @sa svn_path_remove_component
+     */
+    void
+    removeLast();
 
 
     /**

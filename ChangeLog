@@ -7,6 +7,8 @@ version 0.14.0
       get much faster.
     * display-encoding in Annotate / Difference display may changed for content not written in KDE defaul locale.
     * feature request: added "Display last change" action (#192)
+    * feature request: request #156: check for properties bugtraq:url and bugtraq:logregex, replace issue numbers
+      in logoutput with url to bugtracker.
 
 version 0.13.0
     * fixed some buildproblems within freebsd or systems with more restrictive qt

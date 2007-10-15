@@ -1201,19 +1201,17 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
 
 void kdesvnfilelist::readSupportData()
 {
-    if (!isNetworked()) {
-        QString bugurl, bugre;
-        m_SvnWrapper->setContextData("bugtraq:url",QString::null);
-        m_SvnWrapper->setContextData("bugtraq:logregex",QString::null);
-        QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),true);
+    QString bugurl, bugre;
+    m_SvnWrapper->setContextData("bugtraq:url",QString::null);
+    m_SvnWrapper->setContextData("bugtraq:logregex",QString::null);
+    QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),isNetworked());
+    if (!p.isEmpty()) {
+        kdDebug()<<"Bugurl: "<<bugurl << endl;
+        m_SvnWrapper->setContextData("bugtraq:url",bugurl);
+        p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),isNetworked());
         if (!p.isEmpty()) {
-            kdDebug()<<"Bugurl: "<<bugurl << endl;
-            m_SvnWrapper->setContextData("bugtraq:url",bugurl);
-            p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),true);
-            if (!p.isEmpty()) {
-                kdDebug()<<"Bugre: "<<bugre << endl;
-                m_SvnWrapper->setContextData("bugtraq:url",bugre);
-            }
+            kdDebug()<<"Bugre: "<<bugre << endl;
+            m_SvnWrapper->setContextData("bugtraq:logregex",bugre);
         }
     }
 }

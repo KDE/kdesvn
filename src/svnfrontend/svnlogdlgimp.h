@@ -73,6 +73,10 @@ protected slots:
     virtual void slotEntriesSelectionChanged();
     virtual void slotSingleContext(QListViewItem*, const QPoint &, int);
     virtual void slotSingleDoubleClicked(QListViewItem*);
+
+protected:
+    void replaceBugids(QString&msg);
+    QString genReplace(const QString&);
 };
 
 #endif

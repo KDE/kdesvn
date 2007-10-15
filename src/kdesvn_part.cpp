@@ -403,7 +403,7 @@ KParts::Part* cFactory::createAppPart( QWidget *parentWidget, const char *widget
 {
     Q_UNUSED(classname);
     // Create an instance of our Part
-    kdesvnPart* obj = new kdesvnPart( parentWidget, widgetName, parent, name, true, args);
+    kdesvnPart* obj = new kdesvnPart( parentWidget, widgetName, parent, name, false, args);
     emit objectCreated( obj );
     return obj;
 }

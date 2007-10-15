@@ -288,7 +288,7 @@ QString SvnLogDlgImp::genReplace(const QString&r1match)
     QString res("");
     if (_r2.pattern().length()<1) {
         res = _bugurl;
-        res.replace("%BUGID%",r1match);
+        res.replace("%BUGID%",_r1.cap(1));
         res = anf+res+mid+r1match+end;
         return res;
     }

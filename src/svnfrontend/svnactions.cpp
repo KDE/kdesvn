@@ -2390,13 +2390,13 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     return result;
 }
 
-svn::PathPropertiesMapListPtr SvnActions::propList(SvnItem*which,const svn::Revision&where,bool cacheOnly)
+svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn::Revision&where,bool cacheOnly)
 {
     svn::PathPropertiesMapListPtr pm;
-    if (which) {
+    if (!which.isEmpty()) {
         QString ex;
-        svn::Path p(which->fullName());
-        QString fk=where.toString()+"/"+which->fullName();
+        svn::Path p(which);
+        QString fk=where.toString()+"/"+which;
 
         if (where != svn::Revision::WORKING)
         {
@@ -2444,16 +2444,12 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
 {
     svn::Path pa(start);
     while(pa.length()>0) {
-        svn::PathPropertiesMapList pm;
-        try {
-            pm = m_Data->m_Svnclient->propget(property,pa,where,where);
-        } catch (const svn::ClientException&e) {
-            // not a subversion resource...
-            kdDebug()<<"Prop: "<<e.msg()<<endl;
+        svn::PathPropertiesMapListPtr pm = propList(pa,where,false);
+        if (!pm) {
             return QString::null;
         }
-        if (pm.size()>0) {
-            svn::PropertiesMap&mp = pm[0].second;
+        if (pm->size()>0) {
+            svn::PropertiesMap&mp = (*pm)[0].second;
             if (mp.find(property)!=mp.end()) {
                 Store=mp[property];
                 return pa;

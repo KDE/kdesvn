@@ -1204,13 +1204,11 @@ void kdesvnfilelist::readSupportData()
     QString bugurl, bugre;
     m_SvnWrapper->setContextData("bugtraq:url",QString::null);
     m_SvnWrapper->setContextData("bugtraq:logregex",QString::null);
-    QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),isNetworked());
+    QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),!isNetworked());
     if (!p.isEmpty()) {
-        kdDebug()<<"Bugurl: "<<bugurl << endl;
         m_SvnWrapper->setContextData("bugtraq:url",bugurl);
-        p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),isNetworked());
+        p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),!isNetworked());
         if (!p.isEmpty()) {
-            kdDebug()<<"Bugre: "<<bugre << endl;
             m_SvnWrapper->setContextData("bugtraq:logregex",bugre);
         }
     }
@@ -2466,7 +2464,7 @@ void kdesvnfilelist::dispProperties(bool force)
     }
     kdDebug()<<"Cacheonly: "<<cache_Only<<endl;
     svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
-    pm =m_SvnWrapper->propList(k,rev,cache_Only);
+    pm =m_SvnWrapper->propList(k->fullName(),rev,cache_Only);
     emit sigProplist(pm,isWorkingCopy(),k->fullName());
 }
 

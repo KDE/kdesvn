@@ -101,7 +101,7 @@ public:
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     bool isLockNeeded(SvnItem*which,const svn::Revision&where);
     QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
-    svn::PathPropertiesMapListPtr propList(SvnItem*which,const svn::Revision&where,bool cacheOnly);
+    svn::PathPropertiesMapListPtr propList(const QString&which,const svn::Revision&where,bool cacheOnly);
 
     bool changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&,const QString&path);
 

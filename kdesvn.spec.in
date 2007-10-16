@@ -73,6 +73,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/applications/*
 %{_datadir}/apps/kdesvn/*
 %{_datadir}/apps/kdesvnpart/*
+%{_datadir}/apps/kconf_update/*
 %{_datadir}/config.kcfg/*
 %{_datadir}/doc/*
 %{_datadir}/icons/*

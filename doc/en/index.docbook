@@ -510,6 +510,69 @@ If recoursive isn't set, the export is done as a flat export. Be care: when doin
 </sect2>
 </sect1>
 
+<sect1 id="used-properties">
+<title>Properties used by &kappname; for configuration</title>
+<sect2>
+<title>Bugtracker integration</title>
+<para>The <ulink url="http://tortoisesvn.tigris.org/">TortoiseSVN project</ulink> designed a nice property system 
+<ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"> for integrating bugtracker</ulink> into
+subversion GUI. This moment &kappname; doesn't support extra fields in commit box (will follow later) and doesn't understand all but following properties:
+</para>
+<para>
+<table id="bugtracker-properties">
+<title>Bugtracker Integration Properties</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry>Property</entry>
+<entry>Description</entry>
+<entry>Example</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><prompt>bugtraq:url</prompt></entry>
+<entry>Holds the url to bugtracker. It has to contain the <prompt>%BUGID%</prompt> marker.</entry>
+<entry>http://kdesvn.alwins-world.de/ticket/%BUGID%</entry>
+</row>
+
+<row>
+<entry><prompt>bugtraq:logregex</prompt></entry>
+<entry>
+<para>Contains one or two regular expressions, separated by a newline.</para>
+<para>If only one expression is set, then the bare bug ID's must be matched in the groups of the regex string. If two expressions are set, then the first expression is used to find a string which relates to the bug ID but may contain more than just the bug ID (e.g. "Issue #123" or "resolves issue 123"). The second expression is then used to extract the bare bug ID from the string extracted with the first expression.</para>
+<para>Please keep care about not wanted spaces after the regular expression and don't forget the brackets around the number description.</para>
+</entry>
+<entry>
+<para>Single (useable with TRAC):
+<programlisting>
+#(\d+)
+</programlisting>
+Now all numbers like <prompt>#190</prompt> will parsed and translated to an url in logoutput.</para>
+<para>
+Two expressions:
+<programlisting>
+[Ii]ssue #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+Remember: Keep care of white spaces after the <prompt>(\d+)</prompt>! This is one of the most errors while this expressions doesn't match!
+</para>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para>
+On local opened repositories (eg., <prompt>file://</prompt>-Protocoll) and on working copies this properties will searched upward from opened folder until found or the subversion-toplevel is reached. On repositories opened via network (all except <prompt>file://</prompt> protocoll) it is only searched on opened folder itself.
+</para>
+<para>
+Support for multiple sets of this properties may follow later, (eg., in subfolder extra values for other tracker etc.) but in most cases evaluatin single tracker links should be enough.
+</para>
+</sect2>
+</sect1>
+
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>
 <para>

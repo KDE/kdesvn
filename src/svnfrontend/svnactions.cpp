@@ -2488,7 +2488,6 @@ bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
         cleanpath.truncate(cleanpath.length()-1);
     }
     _baseUri="";
-    kdDebug()<<"Url: " << url << " - path: " << cleanpath << endl;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;

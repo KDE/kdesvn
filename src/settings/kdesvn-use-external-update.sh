@@ -3,16 +3,15 @@
 display=
 lastvalue=
 
-while read; do
-    if [ "${REPLY#\[}" != "$REPLY" ]; then
-       GROUP="${REPLY:1:${#REPLY}-2}"
+while read line ; do
+    if [ "${line#\[}" != "$line" ]; then
        continue;
     fi
-    KEY="${REPLY%%=*}"
-    VALUE="${REPLY#*=}"
+    KEY="${line%%=*}"
+    VALUE="${line#*=}"
     if echo "$KEY" | grep 'use_kompare_for_diff' >/dev/null 2>/dev/null; then
         display=$VALUE
-	echo "# DELETE [general_items]use_kompare_for_diff"
+	echo '# DELETE [general_items]use_kompare_for_diff'
     elif echo "$KEY" | grep 'external_diff_display' > /dev/null 2>/dev/null; then
     	exdisplay=$VALUE
     elif [ "x$KEY" != "x" ]; then

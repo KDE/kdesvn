@@ -21,25 +21,21 @@
 #define PROPERTIESDLG_H
 
 #include <qvariant.h>
-//Added by qt3to4:
-#include <Q3GridLayout>
-#include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
-#include <QLabel>
 #include <kdialogbase.h>
-#include <q3valuelist.h>
+#include <qvaluelist.h>
 #include <qmap.h>
 #include <qstring.h>
 
+#include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/revision.hpp"
 
-class Q3VBoxLayout;
-class Q3HBoxLayout;
-class Q3GridLayout;
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QSpacerItem;
 class QLabel;
-class K3ListView;
-class Q3ListViewItem;
+class Propertylist;
+class QListViewItem;
 class KPushButton;
 class FileListViewItem;
 class SvnItem;
@@ -53,24 +49,22 @@ class PropertiesDlg : public KDialogBase
     Q_OBJECT
 
 public:
-    typedef QMap<QString,QString> tPropEntries;
-
     PropertiesDlg(SvnItem*, svn::Client*,
         const svn::Revision&aRev=svn::Revision(svn_opt_revision_working),
         QWidget* parent = 0, const char* name = 0, bool modal = true);
     ~PropertiesDlg();
 
     bool hasChanged()const;
-    void changedItems(tPropEntries&toSet,Q3ValueList<QString>&toDelete);
+    void changedItems(svn::PropertiesMap&toSet,QValueList<QString>&toDelete);
 
 protected:
-    K3ListView* m_PropertiesListview;
+    Propertylist* m_PropertiesListview;
     KPushButton* m_AddButton;
     KPushButton* m_DeleteButton;
     KPushButton* m_ModifyButton;
 
-    Q3HBoxLayout* PropertiesDlgLayout;
-    Q3VBoxLayout* m_rightLayout;
+    QHBoxLayout* PropertiesDlgLayout;
+    QVBoxLayout* m_rightLayout;
     QSpacerItem* m_rightSpacer;
 
     SvnItem *m_Item;
@@ -79,15 +73,12 @@ protected:
     svn::Client*m_Client;
     svn::Revision m_Rev;
 
-    bool checkExisting(const QString&aName,Q3ListViewItem*it=0);
-
 protected slots:
     virtual void languageChange();
 
     virtual void slotHelp();
-    virtual void slotSelectionChanged(Q3ListViewItem*);
-    virtual void slotSelectionExecuted(Q3ListViewItem*);
-    virtual void slotItemRenamed(Q3ListViewItem*item,const QString & str,int col );
+    virtual void slotSelectionChanged(QListViewItem*);
+    virtual void slotSelectionExecuted(QListViewItem*);
     virtual void slotAdd();
     virtual void slotDelete();
     virtual void slotModify();
@@ -95,14 +86,6 @@ protected slots:
 protected:
     virtual void initItem();
 
-    //! Check if a specific property may just internale
-    /*!
-     * That means, a property of that may not edit,added or deleted.
-     *
-     * This moment it just checks for "svn:special"
-     * \return true if protected property otherwise false
-     */
-    static bool protected_Property(const QString&);
 public slots:
     int exec();
     virtual void polish();

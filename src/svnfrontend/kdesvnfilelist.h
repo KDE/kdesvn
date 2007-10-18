@@ -176,12 +176,17 @@ protected slots:
     virtual void slotCopy();
     virtual void slotCat();
     virtual void slotDelete();
+    virtual void slotDisplayLastDiff();
 
     /* callback slots */
     virtual void slotCopyFinished( KIO::Job *);
     virtual void slotDeleteFinished(KIO::Job*);
     virtual void _openURL(const QString&);
     virtual void _dirwatchTimeout();
+    virtual void _propListTimeout();
+
+    /* internal slots */
+    virtual void readSupportData();
 
 signals:
     void sigLogMessage(const QString&);
@@ -190,6 +195,8 @@ signals:
     void sigUrlOpend(bool);
     void sigSwitchUrl(const KUrl&);
     void sigUrlChanged(const QString&);
+    void sigProplist(const svn::PathPropertiesMapListPtr&,bool,const QString&);
+    void sigListError();
 
 public slots:
     virtual void refreshCurrentTree();
@@ -198,6 +205,8 @@ public slots:
     virtual void slotMkdir();
     virtual void slotMkBaseDirs();
     virtual void slotSettingsChanged();
+    virtual void slotChangeProperties(const svn::PropertiesMap&,const QValueList<QString>&,const QString&);
+
 
 protected slots:
     virtual void slotLock();
@@ -225,12 +234,17 @@ protected slots:
     virtual void slotMakePartTree();
     virtual void slotInternalDrop();
     virtual void slotOpenWith();
+    virtual void slotDisplayProperties();
+
+	virtual void slotUnfoldTree();
+	virtual void slotFoldTree();
 
 private slots:
     void gotPreview( const KFileItem*, const QPixmap& );
     void gotPreviewResult();
 protected:
     virtual bool uniqueTypeSelected();
+    virtual void dispProperties(bool);
 };
 
 #endif

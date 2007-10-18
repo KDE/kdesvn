@@ -31,8 +31,15 @@ public:
     struct logActionEntry {
         QString _name;
         QString _actionDesc;
-        int _kind;
-        logActionEntry(const QString&,const QString&,int kind = 0);
+
+        enum ACTION_TYPE{
+            COMMIT=0,
+            ADD_COMMIT=1,
+            DELETE=2,
+            MISSING_DELETE=3
+        };
+        ACTION_TYPE _kind;
+        logActionEntry(const QString&,const QString&,ACTION_TYPE kind = COMMIT);
         logActionEntry();
     };
 
@@ -71,9 +78,11 @@ protected slots:
     virtual void slotUnmarkUnversioned();
     virtual void slotDiffSelected();
     virtual void slotMarkUnversioned();
+    virtual void hideNewItems(bool);
 
 protected:
     static Q3ValueList<QString> sLogHistory;
+    QValueList<QListViewItem*> m_Hidden;
     static const QString groupName;
     static unsigned int smax_message_history;
     bool m_hidden;

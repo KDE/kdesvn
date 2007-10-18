@@ -21,6 +21,7 @@
 #include "itemdisplay.h"
 #include "svnitem.h"
 #include "src/settings/kdesvnsettings.h"
+#include "src/svnqt/status.hpp"
 
 
 ItemDisplay::ItemDisplay()
@@ -83,13 +84,13 @@ bool ItemDisplay::filterOut(const SvnItem*item)
 /*!
     \fn ItemDisplay::filterOut(const svn::Status&)
  */
-bool ItemDisplay::filterOut(const svn::Status&item)
+bool ItemDisplay::filterOut(const svn::StatusPtr&item)
 {
     bool res = false;
 
-    if (!item.validReposStatus()) {
-        if ((!Kdesvnsettings::display_unknown_files() && !item.isVersioned()) ||
-            (Kdesvnsettings::hide_unchanged_files() && item.isRealVersioned() && !item.isModified() && !item.entry().isDir())) {
+    if (!item->validReposStatus()) {
+        if ((!Kdesvnsettings::display_unknown_files() && !item->isVersioned()) ||
+            (Kdesvnsettings::hide_unchanged_files() && item->isRealVersioned() && !item->isModified() && !item->entry().isDir())) {
             res = true;
               }
     }
@@ -110,6 +111,9 @@ QString ItemDisplay::relativePath(const SvnItem*item)
         name = ".";
     } else {
         name = name.right(name.length()-baseUri().length()-1);
+    }
+    if (name.isEmpty()) {
+        name = ".";
     }
     return name;
 }

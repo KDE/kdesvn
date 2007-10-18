@@ -1,7 +1,6 @@
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers ${CMAKE_BINARY_DIR}/src/svnqt)
 
 SET(svnfrontendsrc
-    cacheentry.cpp
     ccontextlistener.cpp
     commandexec.cpp
     copymoveview_impl.cpp
@@ -17,6 +16,10 @@ SET(svnfrontendsrc
     fronthelpers/cursorstack.h
     fronthelpers/widgetblockstack.cpp
     fronthelpers/widgetblockstack.h
+    fronthelpers/propertylist.cpp
+    fronthelpers/propertylist.h
+    fronthelpers/propertyitem.cpp
+    fronthelpers/propertyitem.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp
@@ -48,7 +51,10 @@ SET(svnfrontendsrc
     svnlogdlgimp.cpp
     tcontextlistener.cpp
     blamedisplay_impl.cpp
-    threadcontextlistenerdata.cpp)
+    threadcontextlistenerdata.cpp
+    leftpane/leftpane_impl.cpp
+    leftpane/leftpane_impl.h
+    )
 
 SET(svnfrontendui
     copymoveview.ui
@@ -61,7 +67,9 @@ SET(svnfrontendui
     loaddmpdlg.ui
     merge_dlg.ui
     blamedisplay.ui
-    svnlogdlg.ui)
+    svnlogdlg.ui
+    leftpane/leftpane.ui
+    )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 

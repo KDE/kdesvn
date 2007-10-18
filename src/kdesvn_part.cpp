@@ -64,6 +64,18 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name , const QStringList&)
     : KParts::ReadOnlyPart(parent, name)
 {
+    init(parentWidget,widgetName,false);
+}
+
+kdesvnPart::kdesvnPart(QWidget *parentWidget, const char *widgetName,
+               QObject *parent, const char *name,bool ownapp, const QStringList&)
+    : KParts::ReadOnlyPart(parent, name)
+{
+    init(parentWidget,widgetName,ownapp);
+}
+
+void kdesvnPart::init( QWidget *parentWidget, const char *widgetName,bool full)
+{
     m_aboutDlg = 0;
     KGlobal::locale()->insertCatalog("kdesvn");
     // we need an instance
@@ -71,7 +83,7 @@ kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
     m_browserExt = new KdesvnBrowserExtension( this );
 
     // this should be your custom internal widget
-    m_view = new kdesvnView(actionCollection(),parentWidget,widgetName);
+    m_view = new kdesvnView(actionCollection(),parentWidget,widgetName,full);
 
     // notify the part that this is our internal widget
     setWidget(m_view);
@@ -151,7 +163,7 @@ KAboutData* kdesvnPart::createAboutData()
                          0, "ral@alwins-world.de");
     about->addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
     about->setOtherText(m_Extratext);
-    about->setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");
+    about->setHomepage("http://kdesvn.alwins-world.de/");
     about->setBugAddress("kdesvn-bugs@alwins-world.de");
     about->setTranslator(I18N_NOOP("kdesvn: NAME OF TRANSLATORS\\nYour names"),
         I18N_NOOP("kdesvn: EMAIL OF TRANSLATORS\\nYour emails"));
@@ -165,10 +177,6 @@ KAboutData* kdesvnPart::createAboutData()
 void kdesvnPart::setupActions()
 {
     KToggleAction *toggletemp;
-    toggletemp = new KToggleAction(i18n("Use \"Kompare\" for displaying diffs"),KShortcut(),
-            actionCollection(),"toggle_use_kompare");
-    toggletemp->setChecked(Kdesvnsettings::use_kompare_for_diff());
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotUseKompare(bool)));
 
     toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
             actionCollection(),"toggle_log_follows");
@@ -249,17 +257,6 @@ void kdesvnPart::slotHideUnchanged(bool how)
     Kdesvnsettings::writeConfig();
     emit refreshTree();
 }
-
-/*!
-    \fn kdesvnPart::slotUseKompare(bool)
- */
-void kdesvnPart::slotUseKompare(bool how)
-{
-    int selected = how ? 1 : 0;
-    Kdesvnsettings::setUse_kompare_for_diff(selected);
-    Kdesvnsettings::writeConfig();
-}
-
 
 /*!
     \fn kdesvnPart::closeURL()
@@ -368,10 +365,6 @@ void kdesvnPart::slotShowSettings()
 void kdesvnPart::slotSettingsChanged()
 {
     KAction * temp;
-    temp = actionCollection()->action("toggle_use_kompare");
-    if (temp) {
-        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::use_kompare_for_diff()==1);
-    }
     temp = actionCollection()->action("toggle_log_follows");
     if (temp) {
         ((KToggleAction*)temp)->setChecked(Kdesvnsettings::log_follows_nodes());
@@ -402,7 +395,17 @@ KParts::Part* cFactory::createPartObject( QWidget *parentWidget, const char *wid
 {
     Q_UNUSED(classname);
     // Create an instance of our Part
-    kdesvnPart* obj = new kdesvnPart( parentWidget, widgetName, parent, name, args );
+    return new kdesvnPart( parentWidget, widgetName, parent, name, args );
+}
+
+KParts::Part* cFactory::createAppPart( QWidget *parentWidget, const char *widgetName,
+                                          QObject *parent, const char *name,
+                                          const char *classname, const QStringList &args )
+{
+    Q_UNUSED(classname);
+    // Create an instance of our Part
+    kdesvnPart* obj = new kdesvnPart( parentWidget, widgetName, parent, name, false, args);
+    emit objectCreated( obj );
     return obj;
 }
 
@@ -428,6 +431,7 @@ KInstance* cFactory::instance()
 commandline_part*cFactory::createCommandIf(QObject*parent,const char*name, KCmdLineArgs *args)
 {
     if (!s_cline) {
+        // no emit of creation - we will delete this object in destructor
         s_cline = new commandline_part(parent,name,args);
     }
     return s_cline;

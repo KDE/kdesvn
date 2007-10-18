@@ -21,7 +21,7 @@
 #define BLAMEDISPLAY_IMPL_H
 
 #include "blamedisplay.h"
-#include "svnqt/client.hpp"
+#include "src/svnqt/client.hpp"
 
 class BlameDisplayData;
 class SimpleLogCb;
@@ -50,6 +50,7 @@ public slots:
 protected slots:
     virtual void slotContextMenuRequested(K3ListView*,Q3ListViewItem*, const QPoint&);
     virtual void slotSelectionChanged();
+    virtual void slotTextCodecChanged(const QString&);
 
 protected:
     virtual void showCommit(BlameDisplayItem*);

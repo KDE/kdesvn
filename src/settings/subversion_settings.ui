@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>351</width>
-    <height>288</height>
+    <width>314</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -23,6 +23,19 @@
      </property>
      <property name="shortcut" >
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_check_needslock" >
+     <property name="toolTip" >
+      <string>When listing on working copies kdesvn may check for this property</string>
+     </property>
+     <property name="whatsThis" >
+      <string>When listing on working copies kdesvn may check for &lt;tt>svn:needs-lock&lt;/tt> property.&lt;br>But due this listings/updating on folders containing lot of items may get slow. So you should only switch on if you have repositories containing lot of such entries.</string>
+     </property>
+     <property name="text" >
+      <string>Check if items has "svn:needs-lock" property set</string>
      </property>
     </widget>
    </item>
@@ -49,6 +62,26 @@
      <property name="text" >
       <string>Gain item info recursive</string>
      </property>
+     <property name="shortcut" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_properties_on_remote_items" >
+     <property name="toolTip" >
+      <string>Should kdesvn retrieves properties on selected item in repositories</string>
+     </property>
+     <property name="whatsThis" >
+      <string>When browsing kdesvn may try displaying properties below itemlist from a selected item. 
+On networked repositories (eg., not opened via file:// protocol) this may get real slow. So if you have slow network connections or when browsing hangs often you should deactivate it.</string>
+     </property>
+     <property name="text" >
+      <string>Always get properties on networked repositories</string>
+     </property>
+     <property name="shortcut" >
+      <string/>
+     </property>
     </widget>
    </item>
    <item>
@@ -72,6 +105,9 @@
      <property name="text" >
       <string>Store passwords for remote connections</string>
      </property>
+     <property name="shortcut" >
+      <string/>
+     </property>
     </widget>
    </item>
    <item>
@@ -86,6 +122,9 @@
      </property>
      <property name="text" >
       <string>Store passwords into KDE Wallet</string>
+     </property>
+     <property name="shortcut" >
+      <string/>
      </property>
     </widget>
    </item>
@@ -110,6 +149,9 @@
      <property name="text" >
       <string>Logs always reads list of changed files</string>
      </property>
+     <property name="shortcut" >
+      <string/>
+     </property>
     </widget>
    </item>
    <item>
@@ -119,6 +161,19 @@
      </property>
      <property name="text" >
       <string>Review items before commit</string>
+     </property>
+     <property name="shortcut" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_commit_hide_new" >
+     <property name="toolTip" >
+      <string>Should unversioned items displayed in commit dialog or not.</string>
+     </property>
+     <property name="text" >
+      <string>Hide new items in commit box</string>
      </property>
      <property name="shortcut" >
       <string/>

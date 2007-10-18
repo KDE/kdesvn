@@ -4,13 +4,14 @@ Version:   @VERSION@
 Release:   1%{?dist}
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
-Url:       http://www.alwins-world.de
+Url:       http://kdesvn.alwins-world.de
 Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
 Obsoletes: kdesvn-kioksvn kdesvn-svnqt
 Requires: subversion >= 1.2.0
+Requires: /usr/bin/dot
 BuildPreReq: apr-devel
 BuildPreReq: apr-util-devel
 BuildPreReq: subversion-devel >= 1.2.0
@@ -72,6 +73,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/applications/*
 %{_datadir}/apps/kdesvn/*
 %{_datadir}/apps/kdesvnpart/*
+%{_datadir}/apps/kconf_update/*
 %{_datadir}/config.kcfg/*
 %{_datadir}/doc/*
 %{_datadir}/icons/*
@@ -88,6 +90,5 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/services/svn*.protocol
 
 %files devel
-%{_libdir}/libsvnqt.la
 %{_includedir}/svnqt/*
 

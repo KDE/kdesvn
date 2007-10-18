@@ -1,7 +1,7 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
- * http://www.alwins-world.de/wiki/programs/kdesvn
+ * http://kdesvn.alwins-world.de
  */
 /*
  * ====================================================================
@@ -47,21 +47,19 @@ namespace svn
                   const char *date,
                   const char *line)
     : m_line_no (line_no), m_revision (revision),
-      m_author(QString::FROMUTF8(author)),
       m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
-      m_line(line)
+      m_line(line?line:""),m_author(author?author:"")
     {
     }
 
     AnnotateLine ( const AnnotateLine &other)
-    : m_line_no (other.m_line_no), m_revision (other.m_revision),
-      m_author (other.m_author), m_date (other.m_date),
-      m_line (other.m_line)
+          : m_line_no (other.m_line_no), m_revision (other.m_revision), m_date (other.m_date),
+            m_line (other.m_line), m_author (other.m_author)
     {
     }
     AnnotateLine()
-    : m_line_no(0),m_revision(-1),
-      m_author(),m_date(),m_line()
+          : m_line_no(0),m_revision(-1),m_date(),
+            m_line(), m_author()
     {
     }
 
@@ -84,7 +82,7 @@ namespace svn
     }
 
 
-    const QString &
+    const QByteArray &
     author () const
     {
         return m_author;
@@ -98,18 +96,23 @@ namespace svn
     }
 
 
-    const QString &
+    const QByteArray &
     line () const
     {
         return m_line;
     }
 
-  private:
+  protected:
     apr_int64_t m_line_no;
     svn_revnum_t m_revision;
-    QString m_author;
     QDateTime m_date;
-    QString m_line;
+#if QT_VERSION < 0x040000
+    QCString m_line;
+    QCString m_author;
+#else
+    QByteArray m_line;
+    QByteArray m_author;
+#endif
   };
 }
 

@@ -1,0 +1,63 @@
+<ui version="4.0" >
+ <class>leftpane</class>
+ <widget class="QWidget" name="leftpane" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>210</width>
+    <height>312</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>leftpane</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>0</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="KListView" name="treeView" >
+     <property name="rootIsDecorated" >
+      <bool>true</bool>
+     </property>
+     <property name="fullWidth" stdset="0" >
+      <bool>true</bool>
+     </property>
+     <property name="autoOpen" stdset="0" >
+      <bool>false</bool>
+     </property>
+     <column>
+      <property name="text" >
+       <string>Name</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>KListView</class>
+  </customwidget>
+ </customwidgets>
+ <includes>
+  <include location="local" >klistview.h</include>
+ </includes>
+ <resources/>
+ <connections/>
+</ui>

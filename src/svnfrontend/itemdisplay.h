@@ -21,6 +21,7 @@
 #ifndef __ITEMDISPLAY_H
 #define __ITEMDISPLAY_H
 
+#include "src/svnqt/svnqttypes.hpp"
 #include <q3ptrlist.h>
 #include <qstring.h>
 #include <kurl.h>
@@ -49,7 +50,7 @@ public:
     virtual bool isNetworked()const;
     virtual const QString&lastError()const;
     virtual bool filterOut(const SvnItem*);
-    virtual bool filterOut(const svn::Status&);
+    virtual bool filterOut(const svn::StatusPtr&);
     QString relativePath(const SvnItem*item);
 
 protected:

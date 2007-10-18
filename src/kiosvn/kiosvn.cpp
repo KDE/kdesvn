@@ -21,6 +21,7 @@
 #include "kiosvn.h"
 #include "kiolistener.h"
 
+#include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/dirent.hpp"
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/status.hpp"
@@ -62,6 +63,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+
+namespace KIO
+{
 
 class KioSvnData
 {
@@ -142,6 +146,8 @@ kio_svnProtocol::~kio_svnProtocol()
     delete m_pData;
 }
 
+}
+
 extern "C"
 {
     KDESVN_EXPORT int kdemain(int argc, char **argv);
@@ -162,14 +168,15 @@ int kdemain(int argc, char **argv)
         exit(-1);
     }
 
-    kio_svnProtocol slave(argv[2], argv[3]);
+    KIO::kio_svnProtocol slave(argv[2], argv[3]);
     slave.dispatchLoop();
 
     kDebug(7101) << "*** kio_ksvn Done" << endl;
     return 0;
 }
 
-
+namespace KIO
+{
 /*!
     \fn kio_svnProtocol::listDir (const KUrl&url)
  */
@@ -193,11 +200,14 @@ void kio_svnProtocol::listDir(const KUrl&url)
     KIO::UDSEntry entry;
     totalSize(dlist.size());
     for (unsigned int i=0; i < dlist.size();++i) {
-        QDateTime dt = svn::DateTime(dlist[i].time());
-        if (createUDSEntry(dlist[i].name(),
-            dlist[i].lastAuthor(),
-            dlist[i].size(),
-            dlist[i].kind()==svn_node_dir?true:false,
+        if (!dlist[i] || dlist[i]->name().isEmpty()) {
+            continue;
+        }
+        QDateTime dt = svn::DateTime(dlist[i]->time());
+        if (createUDSEntry(dlist[i]->name(),
+            dlist[i]->lastAuthor(),
+            dlist[i]->size(),
+            dlist[i]->kind()==svn_node_dir?true:false,
             dt.toTime_t(),
             entry) ) {
             listEntry(entry,false);
@@ -644,17 +654,20 @@ void kio_svnProtocol::status(const KUrl&wc,bool cR,bool rec)
     }
     kDebug()<<"Status got " << dlist.count() << " entries." << endl;
     for (unsigned j=0;j<dlist.count();++j) {
+        if (!dlist[j]) {
+            continue;
+        }
         //QDataStream stream(params, QIODevice::WriteOnly);
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+"path",dlist[j].path());
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+"text",QString::number(dlist[j].textStatus()));
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+"path",dlist[j]->path());
+        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+"text",QString::number(dlist[j]->textStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustified( 10,'0' )+ "prop",
-                    QString::number(dlist[j].propStatus()));
+                    QString::number(dlist[j]->propStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustified( 10,'0' )+ "reptxt",
-                    QString::number(dlist[j].reposTextStatus()));
+                    QString::number(dlist[j]->reposTextStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustified( 10,'0' )+ "repprop",
-                    QString::number(dlist[j].reposPropStatus()));
+                    QString::number(dlist[j]->reposPropStatus()));
         setMetaData(QString::number(m_pData->m_Listener.counter() ).rightJustified( 10,'0' )+ "rev",
-                    QString::number(dlist[j].entry().cmtRev()));
+                    QString::number(dlist[j]->entry().cmtRev()));
         m_pData->m_Listener.incCounter();
     }
 }
@@ -690,16 +703,18 @@ void kio_svnProtocol::commit(const KUrl::List&url)
     for (unsigned j=0; j<url.count();++j) {
         targets.push_back(svn::Path(url[j].path()));
     }
-    svn_revnum_t nnum=svn::Revision::UNDEFINED;
+    svn::Revision nnum=svn::Revision::UNDEFINED;
     try {
         nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,true,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     for (unsigned j=0;j<url.count();++j) {
-        QString userstring = i18n ( "Nothing to commit." );
-        if (SVN_IS_VALID_REVNUM(nnum)) {
-            userstring = i18n( "Committed revision %1." ).arg(nnum);
+        QString userstring;
+        if (nnum!=svn::Revision::UNDEFINED) {
+            userstring = i18n( "Committed revision %1." ).arg(nnum.toString());
+        } else {
+            userstring = i18n ( "Nothing to commit." );
         }
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+ "path", url[j].path() );
         setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+ "action", "0" );
@@ -730,7 +745,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
 {
     svn::Revision start(revstart,revstringstart);
     svn::Revision end(revend,revstringend);
-    const svn::LogEntries * logs = 0;
+    svn::LogEntriesPtr logs;
 
     for (unsigned j = 0; j<urls.count();++j) {
         logs = 0;
@@ -771,7 +786,6 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
                 m_pData->m_Listener.incCounter();
             }
         }
-        delete logs;
     }
 }
 
@@ -923,3 +937,5 @@ QString kio_svnProtocol::getDefaultLog()
     }
     return res;
 }
+
+} // namespace KIO

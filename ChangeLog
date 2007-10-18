@@ -1,9 +1,22 @@
+version 0.14.0
+    * setting if an external diff-display should used is now a simple yes/no box, so there is no need checking for
+      kompare on programstart anymore. (#140)
+    * when browsing in working copies or local repositories (file:// protocol) properties of a single selected item will
+      displayed.
+    * checking for svn:needs-lock property on each item when browsing in working copies may disabled so list operations may
+      get much faster.
+    * display-encoding in Annotate / Difference display may changed for content not written in KDE defaul locale.
+    * feature request: added "Display last change" action (#192)
+    * feature request: request #156: check for properties bugtraq:url and bugtraq:logregex, replace issue numbers
+      in logoutput with url to bugtracker.
+
 version 0.13.0
     * fixed some buildproblems within freebsd or systems with more restrictive qt
     * feature wish: integrated "Recent files" into kdesvn application
     * feature wish: integrated diff options for ignoring white space changes when using subversion built-in diff.
     * feature wish: list of recent opened urls
     * diff two items/pathes from within gui via contextmenu
+    * some other small improvements and featurerequest
 
 version 0.12.1
     * fixed a build problem on solaris

@@ -41,6 +41,7 @@ public slots:
     virtual void setText(const QString&aText);
     virtual void setText(const QByteArray&ex);
     virtual void saveDiff();
+    virtual void slotTextCodecChanged(const QString&);
 
 protected:
     virtual void keyPressEvent(QKeyEvent*);
@@ -51,6 +52,9 @@ protected:
 
 protected:
     DiffBrowserData*m_Data;
+
+    void printContent();
+
 protected slots:
     virtual void search_slot();
     virtual void searchdone_slot();

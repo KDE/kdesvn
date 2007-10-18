@@ -30,16 +30,16 @@ DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent)
     :QWidget(parent)
 {
     setupUi(this);
-    kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_kompare_for_diff()==2);
+    kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_external_diff());
 }
 
 DiffMergeSettings_impl::~DiffMergeSettings_impl()
 {
 }
 
-void DiffMergeSettings_impl::diffDispChanged()
+void DiffMergeSettings_impl::diffDispChanged(bool how)
 {
-    kcfg_external_diff_display->setEnabled(kcfg_use_kompare_for_diff->selectedId()==2);
+    kcfg_external_diff_display->setEnabled(how);
 }
 
 #include "diffmergesettings_impl.moc"

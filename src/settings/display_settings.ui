@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>445</width>
-    <height>193</height>
+    <width>320</width>
+    <height>243</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -41,51 +41,47 @@
     </layout>
    </item>
    <item>
-    <layout class="QGridLayout" >
-     <item row="1" column="1" >
-      <widget class="QCheckBox" name="kcfg_case_sensitive_sort" >
-       <property name="text" >
-        <string>Items sortorder is case sensitive</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" >
-      <widget class="QCheckBox" name="kcfg_display_file_tips" >
-       <property name="whatsThis" >
-        <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
-       </property>
-       <property name="text" >
-        <string>Show file info</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" >
-      <widget class="QCheckBox" name="kcfg_display_overlays" >
-       <property name="toolTip" >
-        <string>Mark subversion states with an overlayed icon</string>
-       </property>
-       <property name="whatsThis" >
-        <string>&lt;p align="left">
+    <widget class="QCheckBox" name="kcfg_display_file_tips" >
+     <property name="whatsThis" >
+      <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
+     </property>
+     <property name="text" >
+      <string>Show file info</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_display_previews_in_file_tips" >
+     <property name="whatsThis" >
+      <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
+     </property>
+     <property name="text" >
+      <string>Display previews in file tips</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_display_overlays" >
+     <property name="toolTip" >
+      <string>Mark subversion states with an overlayed icon</string>
+     </property>
+     <property name="whatsThis" >
+      <string>&lt;p align="left">
 Mark an items with non-normal state with an overlayed icon. When you wish to
 see which items has newer items in repository you may have to set "Check for updates on open" in Subversion-Dialog.
 &lt;/p></string>
-       </property>
-       <property name="text" >
-        <string>Mark item status with icon overlay</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QCheckBox" name="kcfg_display_previews_in_file_tips" >
-       <property name="whatsThis" >
-        <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
-       </property>
-       <property name="text" >
-        <string>Display previews in file tips</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     </property>
+     <property name="text" >
+      <string>Mark item status with icon overlay</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_case_sensitive_sort" >
+     <property name="text" >
+      <string>Items sortorder is case sensitive</string>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QGridLayout" >
@@ -157,7 +153,7 @@ When kde-default is wanted for opening on double click, enter &amp;quot;default&
      <property name="sizeHint" >
       <size>
        <width>20</width>
-       <height>20</height>
+       <height>16</height>
       </size>
      </property>
     </spacer>

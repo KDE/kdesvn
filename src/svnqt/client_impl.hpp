@@ -1,7 +1,7 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
- * http://www.alwins-world.de/wiki/programs/kdesvn
+ * http://kdesvn.alwins-world.de
  */
 /*
  * ====================================================================
@@ -118,7 +118,7 @@ namespace svn
      * @param revision list specific revision when browsing remote, on working copies parameter will ignored
      * @return a Status with Statis.isVersioned = FALSE
      */
-    virtual Status
+    virtual StatusPtr
     singleStatus (const Path& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException);
 
   /**
@@ -264,15 +264,14 @@ namespace svn
     /**
      * Commits changes to the repository. This usually requires
      * authentication, see Auth.
-     * @return Returns a long representing the revision. It returns a
-     *         -1 if the revision number is invalid.
+     * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
      * @param targets files to commit.
      * @param message log message.
      * @param recurse whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
      * @exception ClientException
      */
-    virtual svn_revnum_t
+    virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
             bool recurse,bool keep_locks=true) throw (ClientException);
@@ -447,7 +446,7 @@ namespace svn
      * @param limit (ignored when subversion 1.1 API)
      * @return a vector with log entries
      */
-    virtual LogEntries *
+    virtual LogEntriesPtr
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,
@@ -587,7 +586,7 @@ namespace svn
      * @param recurse
      * @return PropertiesList
      */
-    virtual PathPropertiesMapList
+    virtual PathPropertiesMapListPtr
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,

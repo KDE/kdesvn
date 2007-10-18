@@ -17,19 +17,36 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+/*!
+ * \file cursorstack.h
+ * \brief Defines and implements CursorStack
+ */
 #ifndef __CURSOR_STACK_H
 #define __CURSOR_STACK_H
 
 #include <kapplication.h>
 #include <qcursor.h>
 
+//! Change cursor on stack.
+/*! May used in methods where more than returns exists. Cursor will restored on destruction
+ * of class instance.
+ */
 class CursorStack
 {
 public:
+    //! Constructor.
+    /*!
+     * Create instance and changes the application cursor to \a c
+     * \param c cursortype to set.
+     */
     CursorStack(Qt::CursorShape c = Qt::WaitCursor)
     {
         KApplication::setOverrideCursor(QCursor(c));
     }
+    //! Destructor.
+    /*!
+     * Restores the application cursor to value before construction.
+     */
     ~CursorStack()
     {
         KApplication::restoreOverrideCursor();

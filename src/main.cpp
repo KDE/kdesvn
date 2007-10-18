@@ -59,7 +59,7 @@ int main(int argc, char **argv)
                          0, "ral@alwins-world.de");
     about.addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
 #endif
-    about.setHomepage("http://www.alwins-world.de/wiki/programs/kdesvn/");
+    about.setHomepage("http://kdesvn.alwins-world.de/");
     about.setBugAddress("kdesvn-bugs@alwins-world.de");
 
     KCmdLineArgs::init(argc, argv, &about);
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
                 {
                     kdesvn *widget = new kdesvn;
                     widget->show();
-                    widget->load(args->url(i));
+                    widget->load(args->url(i),true);
                 }
             }
         }

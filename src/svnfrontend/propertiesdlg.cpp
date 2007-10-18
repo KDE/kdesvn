@@ -17,6 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+
+#include "src/svnfrontend/fronthelpers/propertyitem.h"
+#include "src/svnfrontend/fronthelpers/propertylist.h"
 #include "propertiesdlg.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
@@ -24,92 +27,15 @@
 
 #include <qvariant.h>
 #include <qlabel.h>
-#include <q3header.h>
-//Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3ValueList>
-#include <QPixmap>
-#include <Q3VBoxLayout>
-#include <k3listview.h>
+#include <qheader.h>
 #include <kpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <q3whatsthis.h>
+#include <qwhatsthis.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kdebug.h>
-
-class PropertyListViewItem:public K3ListViewItem
-{
-    friend class PropertiesDlg;
-public:
-    PropertyListViewItem(K3ListView *parent,const QString&,const QString&);
-    PropertyListViewItem(K3ListView *parent);
-    virtual ~PropertyListViewItem();
-
-    const QString&startName()const{return m_startName;}
-    const QString&startValue()const{return m_startValue;}
-    const QString&currentName()const{return m_currentName;}
-    const QString&currentValue()const{return m_currentValue;}
-
-    void checkValue();
-    void checkName();
-    void deleteIt();
-    void unDeleteIt();
-    bool deleted()const{return m_deleted;}
-
-    bool different()const;
-
-protected:
-    QString m_currentName,m_startName,m_currentValue,m_startValue;
-    bool m_deleted;
-};
-
-PropertyListViewItem::PropertyListViewItem(K3ListView *parent,const QString&aName,const QString&aValue)
-    : K3ListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
-{
-    setText(0,startName());
-    setText(1,startValue());
-}
-
-PropertyListViewItem::PropertyListViewItem(K3ListView *parent)
-    : K3ListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
-{
-    setText(0,startName());
-    setText(1,startValue());
-}
-
-PropertyListViewItem::~PropertyListViewItem()
-{
-}
-
-void PropertyListViewItem::checkValue()
-{
-    m_currentValue=text(1);
-}
-
-void PropertyListViewItem::checkName()
-{
-    m_currentName=text(0);
-}
-
-bool PropertyListViewItem::different()const
-{
-    return m_currentName!=m_startName || m_currentValue!=m_startValue || deleted();
-}
-
-void PropertyListViewItem::deleteIt()
-{
-    m_deleted = true;
-    setPixmap(0,KIconLoader::global()->loadIcon("cancel",KIcon::Desktop,16));
-}
-
-void PropertyListViewItem::unDeleteIt()
-{
-    m_deleted = false;
-    setPixmap(0,QPixmap());
-}
 
 /*
  *  Constructs a PropertiesDlg as a child of 'parent', with the
@@ -121,30 +47,27 @@ void PropertyListViewItem::unDeleteIt()
 PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
     :
     KDialogBase(parent,name,modal,i18n("Modify properties"),Ok|Cancel/*|Help|User1|User2*/, Ok,
-      true/*, KStandardGuiItem::add(),KStandardGuiItem::remove() */),
+      true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
       m_Item(which),m_changed(false),
       m_Client(aClient),m_Rev(aRev)
 {
     if ( !name )
     setName( "PropertiesDlg" );
     QWidget * m = makeMainWidget();
-    PropertiesDlgLayout = new Q3HBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
+    PropertiesDlgLayout = new QHBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
 
-    m_PropertiesListview = new K3ListView(m, "m_PropertiesListview" );
-    m_PropertiesListview->addColumn( i18n( "Properties" ) );
-    m_PropertiesListview->addColumn( i18n( "Value" ) );
+    m_PropertiesListview = new Propertylist(m, "m_PropertiesListview" );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
     m_PropertiesListview->setShowSortIndicator( TRUE );
-    //m_PropertiesListview->setDefaultRenameAction( K3ListView::Accept );
-#if 0
+    m_PropertiesListview->setCommitchanges(false);
     m_PropertiesListview->setItemsRenameable(true);
     m_PropertiesListview->setRenameable(0,true);
     m_PropertiesListview->setRenameable(1,true);
-#endif
+
     m_PropertiesListview->setFullWidth( TRUE );
     PropertiesDlgLayout->addWidget( m_PropertiesListview);
 
-    m_rightLayout = new Q3VBoxLayout(0, marginHint(), spacingHint(), "m_rightLayout");
+    m_rightLayout = new QVBoxLayout(0, marginHint(), spacingHint(), "m_rightLayout");
     m_AddButton = new KPushButton(m, "m_AddButton" );
     m_rightLayout->addWidget( m_AddButton );
     m_ModifyButton = new KPushButton(m, "m_ModifyButton" );
@@ -166,8 +89,7 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
     connect( m_ModifyButton, SIGNAL(clicked()), this, SLOT(slotModify()));
     connect( m_DeleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(this,SIGNAL(helpClicked()),SLOT(slotHelp()));
-    connect(m_PropertiesListview,SIGNAL(itemRenamed(Q3ListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(Q3ListViewItem*,const QString&,int)));
-    connect(m_PropertiesListview,SIGNAL(selectionChanged(Q3ListViewItem*)),this,SLOT(slotSelectionChanged(Q3ListViewItem*)));
+    connect(m_PropertiesListview,SIGNAL(selectionChanged(QListViewItem*)),this,SLOT(slotSelectionChanged(QListViewItem*)));
 //    connect(m_PropertiesListview,SIGNAL(executed(QListViewItem*)),this,SLOT(slotSelectionExecuted(QListViewItem*)));
 
     if (!m_Client) {
@@ -195,8 +117,6 @@ PropertiesDlg::~PropertiesDlg()
 void PropertiesDlg::languageChange()
 {
     setCaption( i18n("View and modify properties") );
-    m_PropertiesListview->header()->setLabel( 0, i18n( "Properties" ) );
-    m_PropertiesListview->header()->setLabel( 1, i18n( "Value" ) );
     QToolTip::add(m_PropertiesListview, i18n( "List of properties set" ));
     m_AddButton->setText(i18n("Add property"));
     m_ModifyButton->setText(i18n("Modify property"));
@@ -208,13 +128,13 @@ void PropertiesDlg::slotHelp()
     qWarning( "PropertiesDlg::slotHelp(): Not implemented yet" );
 }
 
-void PropertiesDlg::slotSelectionChanged(Q3ListViewItem*item)
+void PropertiesDlg::slotSelectionChanged(QListViewItem*item)
 {
     m_DeleteButton->setEnabled(item);
     m_ModifyButton->setEnabled(item);
-    if (!item) return;
+    if (!item || item->rtti()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (item);
-    if (protected_Property(ki->currentName())) {
+    if (PropertyListViewItem::protected_Property(ki->currentName())) {
         m_DeleteButton->setEnabled(false);
         m_ModifyButton->setEnabled(false);
         return;
@@ -240,27 +160,14 @@ void PropertiesDlg::initItem()
         return;
     }
     svn::Path what(m_Item->fullName());
-    svn::PathPropertiesMapList propList;
+    svn::PathPropertiesMapListPtr propList;
     try {
         propList = m_Client->proplist(what,m_Rev,m_Rev);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;
     }
-    svn::PathPropertiesMapList::const_iterator lit;
-    svn::PropertiesMap pmap;
-    for (lit=propList.begin();lit!=propList.end();++lit) {
-        pmap = (*lit).second;
-        /* just want the first one */
-        break;
-    }
-    svn::PropertiesMap::const_iterator pit;
-    for (pit=pmap.begin();pit!=pmap.end();++pit) {
-        PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview,
-            pit.key(),
-            pit.data());
-        ki->setMultiLinesEnabled(true);
-    }
+    m_PropertiesListview->displayList(propList,true,m_Item->fullName());
     initDone = true;
 }
 
@@ -269,7 +176,6 @@ void PropertiesDlg::initItem()
  */
 int PropertiesDlg::exec()
 {
-    kDebug()<<"Exec"<<endl;
     return KDialogBase::exec();
 }
 
@@ -282,24 +188,9 @@ void PropertiesDlg::polish()
 /*!
     \fn PropertiesDlg::slotSelectionExecuted(QListViewItem*)
  */
-void PropertiesDlg::slotSelectionExecuted(Q3ListViewItem*)
+void PropertiesDlg::slotSelectionExecuted(QListViewItem*)
 {
 }
-
-/*!
-    \fn PropertiesDlg::slotItemRenamed(QListViewItem*item,const QString & str,int col )
- */
-void PropertiesDlg::slotItemRenamed(Q3ListViewItem*_item,const QString &,int col )
-{
-    if (!_item) return;
-    PropertyListViewItem*item = static_cast<PropertyListViewItem*> (_item);
-    if (col==0) {
-        item->checkName();
-    } else {
-        item->checkValue();
-    }
-}
-
 
 /*!
     \fn PropertiesDlg::slotAdd()
@@ -310,11 +201,11 @@ void PropertiesDlg::slotAdd()
     EditProperty_impl dlg(this);
     dlg.setDir(m_Item->isDir());
     if (dlg.exec()==QDialog::Accepted) {
-        if (protected_Property(dlg.propName())) {
+        if (PropertyListViewItem::protected_Property(dlg.propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
             return;
         }
-        if (checkExisting(dlg.propName())) {
+        if (m_PropertiesListview->checkExisting(dlg.propName())) {
             KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
@@ -332,10 +223,10 @@ void PropertiesDlg::slotAdd()
  */
 void PropertiesDlg::slotDelete()
 {
-    Q3ListViewItem*qi = m_PropertiesListview->selectedItem();
+    QListViewItem*qi = m_PropertiesListview->selectedItem();
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
-    if (protected_Property(ki->currentName())) return;
+    if (PropertyListViewItem::protected_Property(ki->currentName())) return;
     if (ki->deleted()) {
         ki->unDeleteIt();
     } else {
@@ -350,21 +241,21 @@ void PropertiesDlg::slotDelete()
  */
 void PropertiesDlg::slotModify()
 {
-    Q3ListViewItem*qi = m_PropertiesListview->selectedItem();
+    QListViewItem*qi = m_PropertiesListview->selectedItem();
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
-    if (protected_Property(ki->currentName())) return;
+    if (PropertyListViewItem::protected_Property(ki->currentName())) return;
     /// @TODO Use a object variable to store a reference to dlg for further reuse
     EditProperty_impl dlg(this);
     dlg.setDir(m_Item->isDir());
     dlg.setPropName(ki->currentName());
     dlg.setPropValue(ki->currentValue());
     if (dlg.exec()==QDialog::Accepted) {
-        if (protected_Property(dlg.propName())) {
+        if (PropertyListViewItem::protected_Property(dlg.propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
             return;
         }
-        if (checkExisting(dlg.propName(),qi)) {
+        if (m_PropertiesListview->checkExisting(dlg.propName(),qi)) {
             KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
@@ -375,35 +266,17 @@ void PropertiesDlg::slotModify()
     }
 }
 
-bool PropertiesDlg::checkExisting(const QString&aName,Q3ListViewItem*it)
-{
-    if (!it) {
-        return m_PropertiesListview->findItem(aName,0)!=0;
-    }
-    Q3ListViewItemIterator iter( m_PropertiesListview );
-    while ( iter.current() ) {
-        if ( iter.current()==it) {
-            ++iter;
-            continue;
-        }
-        if (iter.current()->text(0)==aName) {
-            return true;
-        }
-        ++iter;
-    }
-    return false;
-}
-
-void PropertiesDlg::changedItems(tPropEntries&toSet,Q3ValueList<QString>&toDelete)
+void PropertiesDlg::changedItems(svn::PropertiesMap&toSet,QValueList<QString>&toDelete)
 {
     toSet.clear();
     toDelete.clear();
-    Q3ListViewItemIterator iter( m_PropertiesListview );
+    QListViewItemIterator iter( m_PropertiesListview );
     PropertyListViewItem*ki;
     while ( iter.current() ) {
         ki = static_cast<PropertyListViewItem*> (iter.current());
         ++iter;
-        if (protected_Property(ki->currentName())||protected_Property(ki->startName())) {
+        if (PropertyListViewItem::protected_Property(ki->currentName())||
+            PropertyListViewItem::protected_Property(ki->startName())) {
             continue;
         }
         if (ki->deleted()) {
@@ -417,11 +290,4 @@ void PropertiesDlg::changedItems(tPropEntries&toSet,Q3ValueList<QString>&toDelet
     }
 }
 
-bool PropertiesDlg::protected_Property(const QString&what)
-{
-    if (what.compare("svn:special")!=0) return false;
-    return true;
-}
-
 #include "propertiesdlg.moc"
-

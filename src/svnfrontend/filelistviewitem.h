@@ -26,7 +26,7 @@
 #include <q3ptrlist.h>
 //Added by qt3to4:
 #include <QPixmap>
-#include "src/svnqt/status.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 
 class QPainter;
 class KFileItem;
@@ -40,13 +40,13 @@ class FileListViewItem : public K3ListViewItem,public SvnItem
 {
     friend class kdesvnfilelist;
 public:
-    FileListViewItem(kdesvnfilelist*,const svn::Status&);
-    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::Status&);
+    FileListViewItem(kdesvnfilelist*,const svn::StatusPtr&);
+    FileListViewItem(kdesvnfilelist*,FileListViewItem*,const svn::StatusPtr&);
 
     virtual ~FileListViewItem();
     virtual int compare( Q3ListViewItem* i, int col, bool ascending ) const;
 
-    virtual void updateStatus(const svn::Status&s);
+    virtual void updateStatus(const svn::StatusPtr&s);
     virtual void refreshStatus(bool childs=false,Q3PtrList<SvnItem> *exclude = 0,bool depsonly=false);
 
 #if 0
@@ -59,10 +59,13 @@ public:
     static const int COL_ICON,COL_NAME,COL_LAST_REV,COL_LAST_AUTHOR,COL_LAST_DATE,COL_STATUS/*,COL_CURRENT_REV*/,COL_IS_LOCKED;
 
     virtual QString getParentDir()const;
+    virtual SvnItem* getParentItem()const;
     virtual FileListViewItem*fItem(){return this;}
-    virtual void setStat(const svn::Status&);
+    virtual void setStat(const svn::StatusPtr&);
     virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
     virtual void setOpen(bool o);
+    virtual void setOpenNoBlock(bool o);
+
     virtual void setPreviewPix(const QPixmap& pixmap);
     virtual const svn::Revision&correctPeg()const;
     virtual FileListViewItem*findChild(const QString&);

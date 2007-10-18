@@ -53,6 +53,9 @@ public:
     kdesvnPart(QWidget *parentWidget, const char *widgetName,
                     QObject *parent, const char *name, const QStringList&);
 
+    kdesvnPart(QWidget *parentWidget, const char *widgetName,
+               QObject *parent, const char *name,bool ownapp, const QStringList&);
+
     /**
      * Destructor
      */
@@ -78,11 +81,12 @@ protected:
     virtual void setupActions();
     K3AboutApplication* m_aboutDlg;
 
+    void init(QWidget *parentWidget, const char *widgetName,bool full);
+
 protected slots:
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
-    virtual void slotUseKompare(bool);
     virtual void slotUrlChanged(const QString&);
     void reportBug();
     void showAboutApplication();
@@ -112,8 +116,10 @@ public:
     virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
                                             QObject *parent, const char *name,
                                             const char *classname, const QStringList &args );
+    virtual KParts::Part* createAppPart( QWidget *parentWidget, const char *widgetName,
+                                            QObject *parent, const char *name,
+                                            const char *classname, const QStringList &args );
     virtual commandline_part*createCommandIf(QObject*parent,const char*name, KCmdLineArgs *args);
-
     static KInstance* instance();
 
 private:

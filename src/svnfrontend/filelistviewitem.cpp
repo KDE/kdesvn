@@ -49,7 +49,7 @@ const int FileListViewItem::COL_IS_LOCKED = 5;
 
 //const int FileListViewItem::COL_CURRENT_REV = 5;
 
-FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_stat)
+FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::StatusPtr&_stat)
  : K3ListViewItem(_parent),SvnItem(_stat),
  sortChar(0),
  m_Ksvnfilelist(_parent)
@@ -58,7 +58,7 @@ FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,const svn::Status&_sta
     init();
 }
 
-FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::Status&_stat)
+FileListViewItem::FileListViewItem(kdesvnfilelist*_parent,FileListViewItem*_parentItem,const svn::StatusPtr&_stat)
     : K3ListViewItem(_parentItem),SvnItem(_stat),
     sortChar(0),
     m_Ksvnfilelist(_parent)
@@ -93,11 +93,21 @@ void FileListViewItem::setOpen(bool o)
     K3ListViewItem::setOpen(o);
 }
 
+void FileListViewItem::setOpenNoBlock(bool o)
+{
+    if (o && childCount()==0) {
+        {
+            m_Ksvnfilelist->slotItemRead(this);
+        }
+    }
+    KListViewItem::setOpen(o);
+}
+
 FileListViewItem::~FileListViewItem()
 {
 }
 
-void FileListViewItem::setStat(const svn::Status&stat)
+void FileListViewItem::setStat(const svn::StatusPtr&stat)
 {
     SvnItem::setStat(stat);
     init();
@@ -213,17 +223,21 @@ void FileListViewItem::removeChilds()
     }
 }
 
-void FileListViewItem::updateStatus(const svn::Status&s)
+void FileListViewItem::updateStatus(const svn::StatusPtr&s)
 {
     setStat(s);
 }
 
+SvnItem* FileListViewItem::getParentItem()const
+{
+    return static_cast<FileListViewItem*>(parent());
+}
 /*!
     \fn FileListViewItem::getParentDir()const
  */
  QString FileListViewItem::getParentDir()const
 {
-    FileListViewItem*temp = static_cast<FileListViewItem*>(parent());
+    SvnItem*temp = getParentItem();
     if (!temp) return QString::null;
     return temp->fullName();
 }

@@ -21,6 +21,7 @@
 
 #include "kdesvn.h"
 #include "urldlg.h"
+#include "kdesvn_part.h"
 
 #include <q3dragobject.h>
 #include <kprinter.h>
@@ -103,11 +104,17 @@ kdesvn::kdesvn()
 
     if (factory)
     {
-        kDebug()<<"Name: " << factory->className()<<endl;
+        if (QCString(factory->className())!="cFactory") {
+            kdDebug()<<"wrong factory"<<endl;
+            KMessageBox::error(this, i18n("Could not find our part"));
+            kapp->quit();
+            return;
+        }
+        cFactory*cfa = static_cast<cFactory*>(factory);
+
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
-        m_part = static_cast<KParts::ReadOnlyPart *>(factory->create(this,
-                                "kdesvn_part", "KParts::ReadOnlyPart" ));
+        m_part = static_cast<KParts::ReadOnlyPart *>(cfa->createAppPart(this,"kdesvn_part", this, "kdesvn_part", "KParts::ReadOnlyPart",QStringList()));
 
         if (m_part)
         {
@@ -177,14 +184,21 @@ kdesvn::~kdesvn()
 {
 }
 
-void kdesvn::load(const KUrl& url)
+void kdesvn::loadRescent(const KURL& url)
+{
+    load(url,true);
+}
+
+void kdesvn::load(const KURL& url,bool addRescent)
 {
     if (m_part) {
         bool ret = m_part->openURL(url);
-        KAction * ac=actionCollection()->action("file_open_recent");
         KRecentFilesAction*rac = 0;
-        if (ac) {
-            rac = (KRecentFilesAction*)ac;
+        if (addRescent) {
+            KAction * ac = actionCollection()->action("file_open_recent");
+            if (ac) {
+                rac = (KRecentFilesAction*)ac;
+            }
         }
         if (!ret) {
             changeStatusbar(i18n("Could not open url %1").arg(url.prettyUrl()));
@@ -212,7 +226,7 @@ void kdesvn::setupActions()
     ac->setEnabled(getMemberList()->count()>1);
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 
-    KRecentFilesAction*rac = KStandardAction::openRecent(this,SLOT(load(const KUrl&)),actionCollection());
+    KRecentFilesAction*rac = KStandardAction::openRecent(this,SLOT(loadRescent(const KURL&)),actionCollection());
     if (rac)
     {
         rac->setMaxItems(8);
@@ -297,7 +311,7 @@ void kdesvn::fileOpen()
 {
     KUrl url = UrlDlg::getURL(this);
     if (!url.isEmpty())
-        load(url);
+        load(url,true);
 }
 
 void kdesvn::changeStatusbar(const QString& text)
@@ -314,7 +328,7 @@ void kdesvn::resetStatusBar()
 void kdesvn::openBookmarkURL (const QString &_url)
 {
     if (!_url.isEmpty() && m_part)
-        load(_url);
+        load(_url,false);
 }
 
 QString kdesvn::currentURL () const
@@ -420,7 +434,7 @@ void kdesvn::checkReload()
     QString url = cs.readPathEntry("lastURL");
 
     if (!url.isEmpty() && m_part)
-        load(KUrl(url));
+        load(KURL(url),false);
 }
 
 

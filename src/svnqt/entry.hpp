@@ -1,7 +1,7 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
- * http://www.alwins-world.de/wiki/programs/kdesvn
+ * http://kdesvn.alwins-world.de
  */
 /*
  * ====================================================================
@@ -36,6 +36,7 @@
 #include "svnqt/dirent.hpp"
 #include "svnqt/info_entry.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 
 // subversion api
 #include "svn_wc.h"
@@ -73,7 +74,7 @@ namespace svn
     /**
      * converting constructr
      */
-    Entry (const QString&url,const DirEntry&src);
+    Entry (const QString&url,const DirEntryPtr&src);
     /**
      * converting constructr
      */

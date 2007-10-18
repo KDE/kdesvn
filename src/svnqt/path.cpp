@@ -1,7 +1,7 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
- * http://www.alwins-world.de/wiki/programs/kdesvn
+ * http://kdesvn.alwins-world.de
  */
 /*
  * ====================================================================
@@ -172,6 +172,19 @@ namespace svn
     addComponent (QString::FROMUTF8(component));
   }
 
+
+  void
+  Path::removeLast()
+  {
+    Pool pool;
+    if (m_path.length()<=1) {
+        m_path=QString::FROMUTF8("");
+    }
+    svn_stringbuf_t*pathStringbuf=
+            svn_stringbuf_create (m_path.TOUTF8(), pool);
+    svn_path_remove_component(pathStringbuf);
+    m_path = QString::FROMUTF8(pathStringbuf->data);
+  }
 
   void
   Path::split (QString & dirpath, QString & basename) const

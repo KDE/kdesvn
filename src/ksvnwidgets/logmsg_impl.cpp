@@ -55,6 +55,7 @@ public:
     SvnCheckListItem(Q3ListView*,const Logmsg_impl::logActionEntry&);
     const Logmsg_impl::logActionEntry&data(){return m_Content;}
     virtual int rtti()const{return 1000;}
+    virtual int compare( QListViewItem* item, int col, bool ascending ) const;
 };
 
 Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
@@ -140,6 +141,7 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
         item->setState(Q3CheckListItem::Off);
     }
+    m_HideNewItems->setOn(Kdesvnsettings::commit_hide_new());
     checkSplitterSize();
 }
 
@@ -150,6 +152,10 @@ Logmsg_impl::~Logmsg_impl()
         Kdesvnsettings::setCommit_splitter_height(list);
         Kdesvnsettings::writeConfig();
     }
+    for (unsigned int j=0; j<m_Hidden.size();++j) {
+        delete m_Hidden[j];
+    }
+    Kdesvnsettings::setCommit_hide_new(m_HideNewItems->state()==QButton::On);
 }
 
 void Logmsg_impl::checkSplitterSize()
@@ -446,13 +452,13 @@ Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
     return _result;
 }
 
-Logmsg_impl::logActionEntry::logActionEntry(const QString&name,const QString&action,int kind)
+Logmsg_impl::logActionEntry::logActionEntry(const QString&name,const QString&action,ACTION_TYPE kind)
     : _name(name),_actionDesc(action),_kind(kind)
 {
 }
 
 Logmsg_impl::logActionEntry::logActionEntry()
-    : _name(""),_actionDesc(""),_kind(0)
+    : _name(""),_actionDesc(""),_kind(COMMIT)
 {
 }
 
@@ -461,6 +467,25 @@ SvnCheckListItem::SvnCheckListItem(Q3ListView*parent,const Logmsg_impl::logActio
 {
     setTristate(FALSE);
     setText(1,m_Content._actionDesc);
+    if (content._name.isEmpty()) {
+        setText(0,"...");
+    }
+}
+
+int SvnCheckListItem::compare( QListViewItem* item, int col, bool ascending ) const
+{
+    if (item->rtti()!=1000 || col>0) {
+        return QCheckListItem::compare(item,col,ascending);
+    }
+    SvnCheckListItem* k = static_cast<SvnCheckListItem*>( item );
+    if (Kdesvnsettings::case_sensitive_sort()) {
+        if (Kdesvnsettings::locale_is_casesensitive()) {
+            return m_Content._name.lower().localeAwareCompare(k->m_Content._name.lower());
+        }
+        return m_Content._name.compare(k->m_Content._name);
+    } else {
+        return m_Content._name.lower().localeAwareCompare(k->m_Content._name.lower());
+    }
 }
 
 void Logmsg_impl::slotUnmarkUnversioned()
@@ -496,12 +521,14 @@ void Logmsg_impl::hideButtons(bool how)
         m_MarkUnversioned->hide();
         m_UnmarkUnversioned->hide();
         m_DiffItem->hide();
+        m_HideNewItems->hide();
     }
     else
     {
         m_MarkUnversioned->show();
         m_UnmarkUnversioned->show();
         m_DiffItem->show();
+        m_HideNewItems->show();
     }
 }
 
@@ -515,11 +542,38 @@ void Logmsg_impl::markUnversioned(bool mark)
     while ( it.current() ) {
         if (it.current()->rtti()==1000) {
             SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
-            if (item->data()._kind==1) {
+            if (item->data()._kind==logActionEntry::ADD_COMMIT) {
                 item->setOn(mark);
             }
         }
         ++it;
+    }
+}
+
+void Logmsg_impl::hideNewItems(bool how)
+{
+    if (!m_ReviewList)return;
+
+    if (how) {
+        QListViewItemIterator it( m_ReviewList );
+        while ( it.current() ) {
+            if (it.current()->rtti()==1000) {
+                SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
+                if (item->data()._kind==logActionEntry::ADD_COMMIT) {
+                    item->setOn(false);
+                    m_Hidden.push_back(item);
+                }
+            }
+            ++it;
+        }
+        for (unsigned j=0;j<m_Hidden.size();++j) {
+            m_ReviewList->takeItem(m_Hidden[j]);
+        }
+    } else {
+        for (unsigned j=0;j<m_Hidden.size();++j) {
+            m_ReviewList->insertItem(m_Hidden[j]);
+        }
+        m_Hidden.clear();
     }
 }
 

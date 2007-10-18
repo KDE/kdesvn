@@ -29,6 +29,7 @@
 #include "keystatus.h"
 #include "opencontextmenu.h"
 #include "checkoutinfo_impl.h"
+#include "stopdlg.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/dirent.hpp"
@@ -38,6 +39,7 @@
 #include "helpers/sshagent.h"
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
+#include "fronthelpers/widgetblockstack.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -114,11 +116,12 @@ public:
 
     bool intern_dropRunning;
     KUrl::List intern_drops;
-    QString intern_drop_target;
+    QString intern_drop_target,merge_Src1, merge_Src2,merge_Target;
     QDropEvent::Action intern_drop_action;
     QPoint intern_drop_pos;
     QTimer drop_timer;
     QTimer dirwatch_timer;
+    QTimer propTimer;
 
     bool mousePressed;
     QPoint presspos;
@@ -150,6 +153,18 @@ public:
         if (m_DirWatch) {
             m_DirWatch->startScan();
         }
+    }
+    void startProptimer()
+    {
+        propTimer.start(100,true);
+    }
+    void stopProptimer()
+    {
+        propTimer.stop();
+    }
+    void connectPropTimer(QObject*ob)
+    {
+        QObject::connect(&propTimer,SIGNAL(timeout()),ob,SLOT(_propListTimeout()));
     }
 
 private:
@@ -233,6 +248,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
             this,SLOT(slotDropped(QDropEvent*,Q3ListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
     m_pList->connectDirTimer(this);
+    m_pList->connectPropTimer(this);
 
     setDropHighlighter(true);
     setDragEnabled(true);
@@ -259,7 +275,14 @@ void kdesvnfilelist::setupActions()
         this,SLOT(slotMakePartTree()),m_filesAction,"make_svn_partialtree");
 
     new KAction(i18n("Properties"),"edit",
-        KShortcut(Qt::Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+        KShortcut(CTRL+Qt::Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
+    new KAction(i18n("Display Properties"),"edit",
+        KShortcut(Qt::Key_P),this,SLOT(slotDisplayProperties()),m_filesAction,"get_svn_property");
+
+    tmp_action = new KAction(i18n("Display last changes"),"kdesvndiff",
+                KShortcut(),this,SLOT(slotDisplayLastDiff()),m_filesAction,"make_last_change");
+    tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
+
     m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
         KShortcut(Qt::Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
     m_RenameAction = new KAction(i18n("Move"),"move",
@@ -376,6 +399,12 @@ void kdesvnfilelist::setupActions()
 
     new KAction(i18n("Diff revisions"),"kdesvndiff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
 
+    /* folding options */
+    tmp_action = new KAction( i18n("Unfold File Tree"), 0, this , SLOT(slotUnfoldTree()), m_filesAction, "view_unfold_tree" );
+    tmp_action->setToolTip(i18n("Opens all branches of the file tree"));
+    tmp_action = new KAction( i18n("Fold File Tree"), 0, this, SLOT(slotFoldTree()), m_filesAction, "view_fold_tree" );
+    tmp_action->setToolTip(i18n("Closes all branches of the file tree"));
+
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
@@ -458,6 +487,7 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
+    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,QString(""));
     m_Dirsread.clear();
     if (m_SelectedItems) {
         m_SelectedItems->clear();
@@ -496,8 +526,23 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
         setBaseUri("file://"+url.path());
     } else {
         if (url.isLocalFile()) {
-            setBaseUri(url.path());
-            if (m_SvnWrapper->isLocalWorkingCopy(url,_dummy)) {
+            QString s = url.path();
+            while(s.endsWith("/")) {
+                s.remove(s.length()-1,1);
+            }
+            QFileInfo fi(s);
+            if (fi.exists() && fi.isSymLink()) {
+                QString sl = fi.readLink();
+                if (sl.startsWith("/")) {
+                    setBaseUri(sl);
+                } else {
+                    fi.setFile(fi.dirPath()+"/"+sl);
+                    setBaseUri(fi.absFilePath());
+                }
+            } else {
+                setBaseUri(url.path());
+            }
+            if (m_SvnWrapper->isLocalWorkingCopy(baseUri(),_dummy)) {
                 setWorkingCopy(true);
             } else {
                 // yes! KUrl sometimes makes a correct localfile url (file:///)
@@ -561,6 +606,7 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
     }
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
+    QTimer::singleShot(1,this,SLOT(readSupportData()));
     return result;
 }
 
@@ -591,7 +637,6 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     while (what.endsWith("/")) {
         what.truncate(what.length()-1);
     }
-    kDebug()<<"checkDirs()" << endl;
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
     if (!isWorkingCopy()|| (!_parent) || ((_parent) && (_parent->isVersioned()))) {
         if (!m_SvnWrapper->makeStatus(what,dlist,m_pList->m_remoteRevision) ) {
@@ -605,27 +650,31 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     svn::StatusEntries neweritems;
     m_SvnWrapper->getaddedItems(what,neweritems);
     dlist+=neweritems;
-    //kDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
+    bool ownupdates = true;
+    //kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
 
-    viewport()->setUpdatesEnabled(false);
+    if (isUpdatesEnabled()) {
+        viewport()->setUpdatesEnabled(false);
+    } else {
+        ownupdates=false;
+    }
     svn::StatusEntries::iterator it = dlist.begin();
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
-        //kDebug() << "iterate over it: " << (*it).entry().url() << endl;
+        //kdDebug() << "iterate over it: " << (*it)->entry().url() << endl;
 
         // current item is not versioned
-        if (!(*it).isVersioned() && !filterOut((*it))) {
-            kDebug()<< "Found non versioned item" << endl;
+        if (!(*it)->isVersioned() && !filterOut((*it))) {
             // if empty, we may want to create a default svn::Status for each folder inside this _parent
             // iterate over QDir and create new filelistviewitem
             checkUnversionedDirs(_parent);
         }
 
-        if ((*it).path()==what||QString::compare((*it).entry().url(),what)==0){
+        if ((*it)->path()==what||QString::compare((*it)->entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
-//                kDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it).path() << endl;
+                //kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it)->path() << endl;
                 m_Dirsread[pitem->fullName()]=true;
                 pitem->setDropEnabled(true);
             }
@@ -638,8 +687,11 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         pitem = _parent;
     }
     insertDirs(pitem,dlist);
-    viewport()->setUpdatesEnabled(true);
-    viewport()->repaint();
+    if (ownupdates) {
+        kdDebug()<<"Enable update"<<endl;
+        viewport()->setUpdatesEnabled(true);
+        viewport()->repaint();
+    }
     return true;
 }
 
@@ -650,7 +702,15 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
     KFileItemList oneItem;
 #endif
 
+    QTime _t;
+    _t.start();
     for (it = dlist.begin();it!=dlist.end();++it) {
+/*        if (_t.elapsed()>300) {
+           viewport()->setUpdatesEnabled(true);
+            viewport()->repaint();
+            viewport()->setUpdatesEnabled(false);
+            _t.restart();
+        }*/
         if (filterOut((*it)))
         {
             continue;
@@ -659,7 +719,7 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         if (!_parent) {
             item = new FileListViewItem(this,*it);
         } else {
-            if ( (item = _parent->findChild( (*it).path() ))  ) {
+            if ( (item = _parent->findChild( (*it)->path() ))  ) {
                 delete item;
             }
             item = new FileListViewItem(this,_parent,*it);
@@ -669,7 +729,6 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             item->setDropEnabled(true);
             if (isWorkingCopy()) {
                 m_pList->m_DirWatch->addDir(item->fullName());
-                kDebug()<< "Watching folder: " + item->fullName() << endl;
             }
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
@@ -718,7 +777,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
         checkDirs(baseUri(),0);
         return;
     }
-    svn::Status stat;
+    svn::StatusPtr stat;
     try {
         stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
     } catch (svn::ClientException e) {
@@ -775,6 +834,8 @@ void kdesvnfilelist::slotItemRead(Q3ListViewItem*aItem)
     if (_ex &&(m_Dirsread.find(k->fullName())==m_Dirsread.end()||m_Dirsread[k->fullName()]==false)) {
         if (checkDirs(k->fullName(),k)) {
             m_Dirsread[k->fullName()]=true;
+        } else {
+            emit sigListError();
         }
     }
 }
@@ -818,6 +879,10 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(single||none);
     }
+    temp = filesActions()->action("make_last_change");
+    if (temp) {
+        temp->setEnabled(isopen);
+    }
 
     temp = filesActions()->action("make_svn_log_full");
     if (temp) {
@@ -836,6 +901,10 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled(single);
     }
+    temp = filesActions()->action("get_svn_property");
+    if (temp) {
+        temp->setEnabled(single);
+    }
     m_DelCurrent->setEnabled( (multi||single));
     m_LockAction->setEnabled( (multi||single));
     m_UnlockAction->setEnabled( (multi||single));
@@ -849,7 +918,7 @@ void kdesvnfilelist::enableActions()
     m_BlameRangeAction->setEnabled(single&&!dir);
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
-    m_MkdirAction->setEnabled(dir||!isWorkingCopy()&&isopen);
+    m_MkdirAction->setEnabled(dir||none && isopen);
     m_switchRepository->setEnabled(isWorkingCopy()&& (single||none));
     m_changeToRepository->setEnabled(isWorkingCopy());
     m_ImportDirsIntoCurrent->setEnabled(dir);
@@ -931,6 +1000,7 @@ void kdesvnfilelist::enableActions()
 
 void kdesvnfilelist::slotSelectionChanged()
 {
+    m_pList->stopProptimer();
     if (m_SelectedItems==0) {
         m_SelectedItems = new FileListViewItemList;
         m_SelectedItems->setAutoDelete(false);
@@ -943,6 +1013,7 @@ void kdesvnfilelist::slotSelectionChanged()
         ++it;
     }
     enableActions();
+    m_pList->startProptimer();
 }
 
 /*!
@@ -1143,6 +1214,21 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     delete dlg;
 }
 
+void kdesvnfilelist::readSupportData()
+{
+    QString bugurl, bugre;
+    m_SvnWrapper->setContextData("bugtraq:url",QString::null);
+    m_SvnWrapper->setContextData("bugtraq:logregex",QString::null);
+    QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),!isNetworked());
+    if (!p.isEmpty()) {
+        m_SvnWrapper->setContextData("bugtraq:url",bugurl);
+        p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),!isNetworked());
+        if (!p.isEmpty()) {
+            m_SvnWrapper->setContextData("bugtraq:logregex",bugre);
+        }
+    }
+}
+
 void kdesvnfilelist::refreshCurrentTree()
 {
     QTime t;
@@ -1170,6 +1256,7 @@ void kdesvnfilelist::refreshCurrentTree()
     kDebug()<<"Refresh time: "<<t.elapsed()<<" ms"<<endl;
     setUpdatesEnabled(true);
     viewport()->repaint();
+    QTimer::singleShot(1,this,SLOT(readSupportData()));
     //m_pList->startScan();
 }
 
@@ -1225,13 +1312,13 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     bool dispchanged = false;
     for (;it!=dlist.end();++it) {
         gotit = false;
-        if ((*it).path()==what) {
+        if ((*it)->path()==what) {
             continue;
         }
         FileListViewItemListIterator clistIter(currentSync);
         while ( (k=clistIter.current()) ) {
             ++clistIter;
-            if (k->fullName()==(*it).path()) {
+            if (k->fullName()==(*it)->path()) {
                 currentSync.removeRef(k);
                 k->updateStatus(*it);
                 if (filterOut(k)) {
@@ -1594,10 +1681,21 @@ void kdesvnfilelist::slotMerge()
     FileListViewItem*which= singleSelected();
     QString src1,src2,target;
     if (isWorkingCopy()) {
-        target = which?which->fullName():baseUri();
+        if (m_pList->merge_Target.isEmpty()) {
+            target = which?which->fullName():baseUri();
+        } else {
+            target = m_pList->merge_Target;
+        }
+        src1 = m_pList->merge_Src1;
     } else {
-        src1 = which?which->fullName():baseUri();
+        if (m_pList->merge_Src1.isEmpty()){
+            src1 = which?which->fullName():baseUri();
+        } else {
+            src1 = m_pList->merge_Src1;
+        }
+        target = m_pList->merge_Target;
     }
+    src2 = m_pList->merge_Src2;
     bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr;
@@ -1616,6 +1714,9 @@ void kdesvnfilelist::slotMerge()
             src2 = src1;
         }
         target = ptr->Dest();
+        m_pList->merge_Src2 = src2;
+        m_pList->merge_Src1 = src1;
+        m_pList->merge_Target = target;
         force = ptr->force();
         dry = ptr->dryrun();
         rec = ptr->recursive();
@@ -2058,6 +2159,49 @@ void kdesvnfilelist::slotSimpleHeadDiff()
     m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,kitem?kitem->isDir():true);
 }
 
+void kdesvnfilelist::slotDisplayLastDiff()
+{
+    FileListViewItem*kitem = singleSelected();
+    QString what;
+    if (isWorkingCopy())
+    {
+        chdir(baseUri().local8Bit());
+    }
+    svn::Revision end = svn::Revision::PREV;
+    if (!kitem) {
+        if (isWorkingCopy()) {
+            QListViewItem*fi = firstChild();
+            kitem = static_cast<FileListViewItem*>(fi);
+            if (!kitem) {
+                return;
+            }
+            what = relativePath(kitem);
+        } else {
+            what=baseUri();
+        }
+    }else{
+        what = relativePath(kitem);
+    }
+    svn::Revision start;
+    svn::InfoEntry inf;
+    if (!kitem) {
+        // it has to have an item when in working copy, so we know we are in repository view.
+        if (!m_SvnWrapper->singleInfo(what,m_pList->m_remoteRevision,inf)) {
+            return;
+        }
+        start = inf.cmtRev();
+    } else {
+        start = kitem->cmtRev();
+    }
+    if (!isWorkingCopy()) {
+        if (!m_SvnWrapper->singleInfo(what,start.revnum()-1,inf)) {
+            return;
+        }
+        end = inf.cmtRev();
+    }
+    m_SvnWrapper->makeDiff(what,end,what,start,realWidget());
+}
+
 void kdesvnfilelist::slotDiffPathes()
 {
     Q3PtrList<FileListViewItem>*lst = allSelected();
@@ -2214,7 +2358,7 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
     try {
         item->setStat(svnclient()->singleStatus(item->fullName(),false,m_pList->m_remoteRevision));
     } catch (svn::ClientException e) {
-        item->setStat(svn::Status());
+        item->setStat(new svn::Status());
         return false;
     }
     return true;
@@ -2311,6 +2455,32 @@ void kdesvnfilelist::slotDirItemDirty(const QString&what)
     m_pList->stopDirTimer();
     m_pList->dirItems[what]='M';
     m_pList->startDirTimer();
+}
+
+void kdesvnfilelist::_propListTimeout()
+{
+    dispProperties(false);
+}
+
+void kdesvnfilelist::slotDisplayProperties()
+{
+    dispProperties(true);
+}
+
+void kdesvnfilelist::dispProperties(bool force)
+{
+    CursorStack a(Qt::BusyCursor);
+    bool cache_Only = (!force && isNetworked() && !Kdesvnsettings::properties_on_remote_items());
+    svn::PathPropertiesMapListPtr pm;
+    SvnItem*k = singleSelected();
+    if (!k || !k->isRealVersioned()) {
+        emit sigProplist(svn::PathPropertiesMapListPtr(),false,QString(""));
+        return;
+    }
+    kdDebug()<<"Cacheonly: "<<cache_Only<<endl;
+    svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
+    pm =m_SvnWrapper->propList(k->fullName(),rev,cache_Only);
+    emit sigProplist(pm,isWorkingCopy(),k->fullName());
 }
 
 void kdesvnfilelist::_dirwatchTimeout()
@@ -2620,7 +2790,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
 //
 //             svn::Status stat(fi->fileName(), &wc_stat);
 
-            svn::Status stat(fi->absoluteFilePath());
+            svn::StatusPtr stat(new svn::Status(fi->absoluteFilePath()));
 
             // start copying insertDirs
             FileListViewItem * item;
@@ -2665,11 +2835,12 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer,boo
     if (!_s) {
         return;
     }
-    svn::Status d;
+    svn::SharedPointer<svn::Status> d;
     while (_s) {
         //_s->makePixmap();
+
         if (!no_update) {
-            if (m_SvnWrapper->getUpdated(_s->stat().path(),d)) {
+            if (m_SvnWrapper->getUpdated(_s->stat()->path(),d) && d) {
                 _s->updateStatus(d);
             } else {
                 _s->update();
@@ -2678,7 +2849,7 @@ void kdesvnfilelist::rescanIconsRec(FileListViewItem*startAt,bool checkNewer,boo
         rescanIconsRec(_s,checkNewer,no_update);
         if (checkNewer && _s->isDir() && _s->isOpen()) {
             svn::StatusEntries target;
-            m_SvnWrapper->getaddedItems(_s->stat().path(),target);
+            m_SvnWrapper->getaddedItems(_s->stat()->path(),target);
             insertDirs(_s,target);
         }
         _s = static_cast<FileListViewItem*>(_s->nextSibling());
@@ -2833,6 +3004,56 @@ void kdesvnfilelist::slotOpenWith()
     KRun::displayOpenWithDialog(lst);
 }
 
+void kdesvnfilelist::slotUnfoldTree()
+{
+    StopSimpleDlg sdlg(0,0,i18n("Unfold tree"),i18n("Unfold all folder"));
+
+    connect(this,SIGNAL(sigListError()),
+            &sdlg,SLOT(makeCancel()));
+
+    QListViewItemIterator it(this);
+    QTime t;t.start();
+
+    setUpdatesEnabled(false);
+    {
+        WidgetBlockStack a(this);
+        while (QListViewItem* item = it.current())
+        {
+            if (item->isExpandable()) {
+                if (sdlg.isCanceld()) {
+                    m_SvnWrapper->slotCancel(true);
+                    break;
+                }
+                if (t.elapsed()>=200) {
+                    sdlg.slotTick();
+                    kapp->processEvents(20);
+                    t.restart();
+                }
+                ((FileListViewItem*)item)->setOpenNoBlock(true);
+            }
+            ++it;
+        }
+    }
+    setFocus();
+    setUpdatesEnabled(true);
+    viewport()->repaint();
+    repaint();
+    m_SvnWrapper->slotCancel(false);
+}
+
+void kdesvnfilelist::slotFoldTree()
+{
+    QListViewItemIterator it(this);
+    while (QListViewItem* item = it.current())
+    {
+        // don't close the top level directory
+        if (item->isExpandable() && item->parent())
+            item->setOpen(false);
+
+        ++it;
+    }
+}
+
 /*!
     \fn kdesvnfilelist::uniqueSelected()
  */
@@ -2852,6 +3073,18 @@ bool kdesvnfilelist::uniqueTypeSelected()
         }
     }
     return true;
+}
+
+void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QValueList<QString>&dellist,const QString&path)
+{
+    m_SvnWrapper->changeProperties(pm,dellist,path);
+    FileListViewItem* which = singleSelected();
+    kdDebug()<<(which?which->fullName():"nix") << " -> " << path<<endl;
+    if (which && which->fullName()==path) {
+        which->refreshStatus();
+        refreshCurrent(which);
+        _propListTimeout();
+    }
 }
 
 #include "kdesvnfilelist.moc"

@@ -73,7 +73,7 @@ bool PwStorage::connectWallet()
  */
 bool PwStorage::getCertPw(const QString&realm,QString&pw)
 {
-    if (!connectWallet()) {
+    if (!initWallet()) {
         return false;
     }
     return (mData->m_Wallet->readPassword(realm,pw)==0);
@@ -85,21 +85,17 @@ bool PwStorage::getCertPw(const QString&realm,QString&pw)
  */
 bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
 {
-    if (!connectWallet()) {
+    if (!initWallet()) {
         return false;
     }
-    if (mData->m_Wallet->hasFolder(WALLETNAME) ) {
-        mData->m_Wallet->setFolder(WALLETNAME);
-        QMap<QString,QString> content;
-        int j = mData->m_Wallet->readMap(realm,content);
-        if (j!=0||content.find("user")==content.end()) {
-            return false;
-        }
-        user = content["user"];
-        pw = content["password"];
-        return true;
+    QMap<QString,QString> content;
+    int j = mData->m_Wallet->readMap(realm,content);
+    if (j!=0||content.find("user")==content.end()) {
+        return false;
     }
-    return false;
+    user = content["user"];
+    pw = content["password"];
+    return true;
 }
 
 

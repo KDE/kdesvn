@@ -59,7 +59,7 @@ public:
     /**
      * Default constructor
      */
-    kdesvnView(KActionCollection*,QWidget *parent,const char*name=0);
+    kdesvnView(KActionCollection*,QWidget *parent,const char*name=0,bool full=false);
 
     /**
      * Destructor
@@ -130,7 +130,7 @@ protected:
     kdesvnfilelist*m_flist;
     KActionCollection*m_Collection;
 
-    QSplitter *m_Splitter,*m_treeSplitter;
+    QSplitter *m_Splitter,*m_treeSplitter,*m_infoSplitter;
     QString m_currentURL;
     KTextBrowser*m_LogWindow;
 protected:

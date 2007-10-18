@@ -5,6 +5,7 @@ KDE_ADD_UI_FILES(
     logmessage.ui
     ssltrustprompt.ui
     authdlg.ui
+    encodingselector.ui
 )
 
 SET(ksvnwidgetsrc
@@ -15,6 +16,7 @@ SET(ksvnwidgetsrc
     diffbrowser.cpp
     diffbrowserdata.cpp
     diffsyntax.cpp
+    encodingselector_impl.cpp
     )
 
 SET(ksvnwidgethdr
@@ -25,6 +27,7 @@ SET(ksvnwidgethdr
     diffbrowser.h
     diffbrowserdata.h
     diffsyntax.h
+    encodingselector_impl.h
 )
 
 KDE_AUTOMOC(${ksvnwidgetsrc})

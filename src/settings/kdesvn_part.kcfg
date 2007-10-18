@@ -19,13 +19,13 @@
       <label>Show preview of the file in tooltip</label>
       <default>false</default>
     </entry>
-    <entry key="use_kompare_for_diff" type="Int" >
-      <label>Use the program kompare for diff viewing</label>
-      <default>1</default>
+    <entry key="use_external_diff" type="Bool" >
+      <label>Use an external program for diff viewing/generating</label>
+      <default>false</default>
     </entry>
     <entry key="external_diff_display" type="String" >
       <label>Use external program for diff viewing</label>
-      <default>kompare</default>
+      <default>kompare -on -</default>
     </entry>
     <entry key="external_display" type="String" >
       <label>Use external program for viewing</label>
@@ -54,7 +54,9 @@
     <entry key="commit_splitter_height" type="IntList" >
       <default>0,0</default>
     </entry>
-
+    <entry key="commit_hide_new" type="Bool" >
+      <default>false</default>
+    </entry>
   </group>
   <group name="subversion" >
     <entry key="display_overlays" type="Bool" >
@@ -100,6 +102,14 @@
     <entry key="details_on_remote_listing" type="Bool" >
       <label>Get detailed infos when making a remote listing</label>
       <default>false</default>
+    </entry>
+    <entry key="properties_on_remote_items" type="Bool">
+      <label>Get properties on selected item on networked protocols</label>
+      <default>false</default>
+    </entry>
+    <entry key="check_needslock" type="Bool">
+        <label>Check for propertie svn:needs-lock on listings</label>
+        <default>false</default>
     </entry>
     <entry key="store_passwords" type="Bool" >
       <label>Store passwords for remote connections</label>
@@ -151,6 +161,17 @@
     </entry>
     <entry key="color_conflicted_item" type="Color" >
       <default>255,0,0</default>
+    </entry>
+  </group>
+  <group name="blame_dlg">
+    <entry key="locale_for_blame" type="String" >
+      <label>Locale for blame display</label>
+      <default></default>
+    </entry>
+  </group>
+  <group name="diff_display">
+    <entry key="locale_for_diff" type="String" >
+      <default></default>
     </entry>
   </group>
   <group name="revision_tree" >

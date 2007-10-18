@@ -207,6 +207,19 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
         m_ChangedList->hide();
     }
     m_Actions = ac;
+    if (ac) {
+        _bugurl = m_Actions->getContextData("bugtraq:url");
+        QString reg = m_Actions->getContextData("bugtraq:logregex");
+        if (!reg.isEmpty()) {
+            QStringList s1 = QStringList::split("\n",reg);
+            if (s1.size()>0) {
+                _r1.setPattern(s1[0]);
+                if (s1.size()>1) {
+                    _r2.setPattern(s1[1]);
+                }
+            }
+        }
+    }
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
@@ -270,6 +283,67 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     _name = what;
 }
 
+QString SvnLogDlgImp::genReplace(const QString&r1match)
+{
+    static QString anf("<a href=\"");
+    static QString mid("\">");
+    static QString end("</a>");
+    QString res("");
+    if (_r2.pattern().length()<1) {
+        res = _bugurl;
+        res.replace("%BUGID%",_r1.cap(1));
+        res = anf+res+mid+r1match+end;
+        return res;
+    }
+    int pos=0;
+    int count=0;
+    int oldpos;
+
+    kdDebug()<<"Search second pattern: "<<_r2.pattern()<<" in "<<r1match<<endl;
+
+    while (pos > -1) {
+        oldpos = pos+count;
+        pos = r1match.find(_r2,pos+count);
+        if (pos==-1) {
+            break;
+        }
+        count = _r2.matchedLength();
+        res+=r1match.mid(oldpos,pos-oldpos);
+        QString sub = r1match.mid(pos,count);
+        QString _url = _bugurl;
+        _url.replace("%BUGID%",sub);
+        res+=anf+_url+mid+sub+end;
+    }
+    res+=r1match.mid(oldpos);
+    return res;
+}
+
+void SvnLogDlgImp::replaceBugids(QString&msg)
+{
+    msg = QStyleSheet::convertFromPlainText(msg);
+    if (!_r1.isValid() || _r1.pattern().length()<1 || _bugurl.isEmpty()) {
+        return;
+    }
+    kdDebug()<<"Try match "<< _r1.pattern() << endl;
+    int pos = 0;
+    int count = 0;
+
+    pos = _r1.search(msg,pos+count);
+    count = _r1.matchedLength();
+
+    while (pos>-1) {
+        kdDebug()<<"Found at "<<pos << " length "<<count << " with " << _r1.pattern()<< endl;
+        QString s1 = msg.mid(pos,count);
+        kdDebug()<<"Sub: "<<s1 << endl;
+        kdDebug()<<_r1.cap(1) << endl;
+        QString rep = genReplace(s1);
+        kdDebug()<<"Replace with "<<rep << endl;
+        msg = msg.replace(pos,count,rep);
+
+        pos = _r1.search(msg,pos+rep.length());
+        count = _r1.matchedLength();
+    }
+}
 
 /*!
     \fn SvnLogDlgImp::slotItemClicked(QListViewItem*)
@@ -295,7 +369,10 @@ void SvnLogDlgImp::slotSelectionChanged(Q3ListViewItem*_it)
             m_ChangedList->show();
         }
     }
-    m_LogDisplay->setText(k->message());
+    QString msg = k->message();
+    replaceBugids(msg);
+    m_LogDisplay->setText(msg);
+
     k->showChangedEntries(m_ChangedList);
     buttonBlame->setEnabled(true);
 

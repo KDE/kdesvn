@@ -29,6 +29,7 @@
 #include <qsize.h>
 //Added by qt3to4:
 #include <QKeyEvent>
+#include <qregexp.h>
 
 class LogListViewItem;
 class SvnActions;
@@ -66,12 +67,18 @@ protected:
     virtual void keyReleaseEvent (QKeyEvent * e);
     virtual void slotBlameItem();
     svn::SharedPointer<svn::LogEntriesMap> m_Entries;
+    QString _bugurl;
+    QRegExp _r1,_r2;
 
 protected slots:
     virtual void slotListEntries();
     virtual void slotEntriesSelectionChanged();
     virtual void slotSingleContext(Q3ListViewItem*, const QPoint &, int);
     virtual void slotSingleDoubleClicked(Q3ListViewItem*);
+
+protected:
+    void replaceBugids(QString&msg);
+    QString genReplace(const QString&);
 };
 
 #endif

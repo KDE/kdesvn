@@ -1,7 +1,7 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
- * http://www.alwins-world.de/wiki/programs/kdesvn
+ * http://kdesvn.alwins-world.de
  */
 /*
  * ====================================================================
@@ -42,6 +42,7 @@
 #endif
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 #include "svnqt/svnstream.hpp"
 
 // qt
@@ -70,28 +71,6 @@ class QStringList;
 
 namespace svn
 {
-  // forward declarations
-  class Context;
-  class Status;
-  class Targets;
-  class DirEntry;
-
-  typedef QLIST<LogEntry> LogEntries;
-  typedef QLIST<InfoEntry> InfoEntries;
-  typedef QLIST<Status> StatusEntries;
-  typedef QLIST<DirEntry> DirEntries;
-  typedef QLIST<AnnotateLine> AnnotatedFile;
-  typedef QLIST<Revision> Revisions;
-
-  // map of logentries - key is revision
-  typedef QMap<long,LogEntry> LogEntriesMap;
-  // map of property names to values
-  typedef QMap<QString,QString> PropertiesMap;
-  // pair of path, PropertiesMap
-  typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
-  // vector of path, Properties pairs
-  typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
-
   /** Subversion client API.
    *
    * Never use an object of this as global static! This will make problems with subversion
@@ -168,7 +147,7 @@ namespace svn
      * @param revision list specific revision when browsing remote, on working copies parameter will ignored
      * @return a Status with Statis.isVersioned = FALSE
      */
-    virtual Status
+    virtual StatusPtr
     singleStatus (const Path& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException)=0;
 
   /**
@@ -312,15 +291,14 @@ namespace svn
     /**
      * Commits changes to the repository. This usually requires
      * authentication, see Auth.
-     * @return Returns a long representing the revision. It returns a
-     *         -1 if the revision number is invalid.
+     * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
      * @param targets files to commit.
      * @param message log message.
      * @param recurse whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
      * @exception ClientException
      */
-    virtual svn_revnum_t
+    virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
             bool recurse,bool keep_locks=true) throw (ClientException)=0;
@@ -498,12 +476,11 @@ namespace svn
      * @param limit (ignored when subversion 1.1 API)
      * @return a vector with log entries
      */
-    virtual LogEntries *
+    virtual LogEntriesPtr
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
-
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored
@@ -617,7 +594,8 @@ namespace svn
      * @param recurse
      * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with
-     *         a relative path (only filename)
+     *         a relative path (only filename). In subversion >= 1.4 an entry without a name is returned, too. This
+     *         is the searched directory (done in subversion itself)
      */
     virtual DirEntries
     list (const Path& pathOrUrl,
@@ -635,7 +613,7 @@ namespace svn
      * @param recurse
      * @return PropertiesList
      */
-    virtual PathPropertiesMapList
+    virtual PathPropertiesMapListPtr
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,

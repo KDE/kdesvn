@@ -84,8 +84,8 @@ public:
     bool addItems(const QStringList&w,bool rec=false);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
-    void makeDelete(const Q3ValueList<svn::Path>&);
-    void makeDelete(const QStringList&);
+    bool makeDelete(const svn::Pathes&);
+    bool makeDelete(const QStringList&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
 
@@ -94,16 +94,19 @@ public:
     bool makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec=false);
 
     bool createModifiedCache(const QString&base);
-    void getModifiedCache(const QString&path,svn::StatusEntries&dlist);
     bool checkModifiedCache(const QString&path);
     bool checkConflictedCache(const QString&path);
     bool checkReposLockCache(const QString&path);
-    bool checkReposLockCache(const QString&path,svn::Status&t);
-    void addModifiedCache(const svn::Status&what);
+    bool checkReposLockCache(const QString&path,svn::SharedPointer<svn::Status>&t);
+    void addModifiedCache(const svn::StatusPtr&what);
     void deleteFromModifiedCache(const QString&what);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
     bool isLockNeeded(SvnItem*which,const svn::Revision&where);
+    QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
+    svn::PathPropertiesMapListPtr propList(const QString&which,const svn::Revision&where,bool cacheOnly);
+
+    bool changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&,const QString&path);
 
     //! generate and displays a revision tree
     /*!
@@ -143,7 +146,7 @@ public:
     bool createUpdateCache(const QString&what);
     bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
-    bool getUpdated(const QString&path,svn::Status&d)const;
+    bool getUpdated(const QString&path,svn::SharedPointer<svn::Status>&d)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
@@ -163,6 +166,10 @@ public:
 
     bool get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p);
     bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target);
+
+    void setContextData(const QString&,const QString&);
+    void clearContextData();
+    QString getContextData(const QString&)const;
 
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;
@@ -203,6 +210,8 @@ public slots:
     void slotMergeExternal(const QString&src1,const QString&src2, const QString&target,const svn::Revision&rev1,const svn::Revision&rev2,bool);
     virtual void slotExtraLogMsg(const QString&);
     void slotMakeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg,QWidget*dlgparent);
+
+    virtual void slotCancel(bool);
 
 signals:
     void clientException(const QString&);

@@ -220,9 +220,14 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
+        QTextStream st2(&t1,IO_ReadOnly);
+        st2 >> *m_centralSplitter;
+    }
+    t1 = cs.readEntry("right_logsplitter",QString::null);
+    if (!t1.isEmpty()) {
         if (cs.readBoolEntry("laststate",false)==m_ChangedList->isHidden()) {
             QTextStream st2(&t1,IO_ReadOnly);
-            st2 >> *m_centralSplitter;
+            st2 >> *m_rightSplitter;
         }
     }
 }
@@ -231,9 +236,12 @@ SvnLogDlgImp::~SvnLogDlgImp()
 {
     QString t1,t2;
     QTextStream st1(&t1,IO_WriteOnly);
-    st1 << *m_centralSplitter;
+    st1 << *m_rightSplitter;
+    QTextStream st2(&t2,IO_WriteOnly);
+    st2 << *m_centralSplitter;
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
-    cs.writeEntry("logsplitter",t1);
+    cs.writeEntry("right_logsplitter",t1);
+    cs.writeEntry("logsplitter",t2);
     cs.writeEntry("laststate",m_ChangedList->isHidden());
 }
 

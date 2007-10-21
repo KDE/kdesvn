@@ -130,7 +130,7 @@ namespace svn
     else m_time.setTime_t(aTime/(1000*1000),Qt::LocalTime);
 #else
     m_time.setTimeSpec(Qt::LocalTime);
-    if (aTime<0)result.setTime_t(0);
+    if (aTime<0)m_time.setTime_t(0);
     else m_time.setTime_t(aTime/(1000*1000));
 #endif
   }

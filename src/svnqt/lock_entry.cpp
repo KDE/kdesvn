@@ -69,11 +69,11 @@ namespace svn
   {
     return token;
   }
-  const apr_time_t LockEntry::Date()const
+  const DateTime&LockEntry::Date()const
   {
     return date;
   }
-  const apr_time_t LockEntry::Expiration()const
+  const DateTime&LockEntry::Expiration()const
   {
     return exp;
   }

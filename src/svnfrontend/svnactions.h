@@ -72,10 +72,10 @@ public:
             const char*name="standard_dialog",
             bool showHelp=false,bool modal=true,
             const KGuiItem&u1 = KGuiItem());
-    QByteArray makeGet(const svn::Revision&start, const QString&what,
-        const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
+
     bool makeGet(const svn::Revision&start, const QString&what,const QString&target,
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
+
 
     bool addItems(const QValueList<svn::Path> &items,bool rec=false);
     bool addItems(const QStringList&w,bool rec=false);

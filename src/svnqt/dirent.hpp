@@ -33,6 +33,7 @@
 
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/lock_entry.hpp"
+#include "svnqt/datetime.hpp"
 
 // subversion api
 #include "svn_client.h"
@@ -92,7 +93,7 @@ namespace svn
     svn_revnum_t
     createdRev () const;
 
-    apr_time_t
+    const DateTime&
     time () const;
 
     const QString&

@@ -32,6 +32,7 @@
 #define _SVNCPP_LOCK_ENTRY_H_
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/datetime.hpp"
 
 #include <qstring.h>
 
@@ -66,13 +67,13 @@ namespace svn
     const QString&Comment()const;
     const QString&Owner()const;
     const QString&Token()const;
-    const apr_time_t Date()const;
-    const apr_time_t Expiration()const;
+    const DateTime&Date()const;
+    const DateTime&Expiration()const;
     const bool Locked()const;
 
   protected:
-    apr_time_t date;
-    apr_time_t exp;
+    DateTime date;
+    DateTime exp;
     QString owner;
     QString comment;
     QString token;

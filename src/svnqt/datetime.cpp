@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -38,19 +38,19 @@
 namespace svn
 {
   DateTime::DateTime ()
-  : m_time(APR_DATE_BAD)
+  : m_time()
   {
   }
 
   DateTime::DateTime (const apr_time_t time)
-  : m_time(time)
+  : m_time()
   {
+      setAprTime(time);
   }
 
   DateTime::DateTime(const QDateTime&dt)
-    : m_time(0)
+    : m_time(dt)
   {
-    apr_time_ansi_put(&m_time,dt.toTime_t());
   }
 
   DateTime::DateTime (const DateTime & dateTime)
@@ -99,39 +99,45 @@ namespace svn
   const bool
   DateTime::IsValid () const
   {
-    return m_time != APR_DATE_BAD;
+    return m_time.isValid();
   }
 
   const apr_time_t
   DateTime::GetAPRTimeT () const
   {
-    return m_time;
+    apr_time_t aTime;
+    apr_time_ansi_put(&aTime,m_time.toTime_t());
+    return aTime;
   }
 
   const bool
   DateTime::SetRFC822Date (const char* date)
   {
-    m_time = apr_date_parse_rfc(date);
+    apr_time_t aTime = apr_date_parse_rfc(date);
+    setAprTime(aTime);
     return IsValid();
   }
 
-  DateTime::operator QDateTime()const
+  DateTime::operator const QDateTime&()const
   {
-    QDateTime result;
-#if QT_VERSION < 0x040000
-    if (m_time<0)result.setTime_t(0,Qt::LocalTime);
-    else result.setTime_t(m_time/(1000*1000),Qt::LocalTime);
-#else
-    result.setTimeSpec(Qt::LocalTime);
-    if (m_time<0)result.setTime_t(0);
-    else result.setTime_t(m_time/(1000*1000));
-#endif
-    return result;
+    return m_time;
   }
+
+  void DateTime::setAprTime(apr_time_t aTime)
+  {
+#if QT_VERSION < 0x040000
+    if (aTime<0)m_time.setTime_t(0,Qt::LocalTime);
+    else m_time.setTime_t(aTime/(1000*1000),Qt::LocalTime);
+#else
+    m_time.setTimeSpec(Qt::LocalTime);
+    if (aTime<0)result.setTime_t(0);
+    else m_time.setTime_t(aTime/(1000*1000));
+#endif
+  }
+
   QString DateTime::toString(const QString&format)const
   {
-    QDateTime dummy = *this;
-    return dummy.toString(format);
+    return m_time.toString(format);
   }
 }
 

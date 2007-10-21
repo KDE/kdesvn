@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -49,7 +49,7 @@ namespace svn
   class SVNQT_EXPORT DateTime
   {
   private:
-    apr_time_t m_time;
+    QDateTime m_time;
 
   public:
 
@@ -121,7 +121,7 @@ namespace svn
     /**
      * @return QDateTime object
      */
-    operator QDateTime()const;
+    operator const QDateTime&()const;
 
     /**
      * @param format format string
@@ -142,6 +142,8 @@ namespace svn
      */
     const bool
     SetRFC822Date (const char* date);
+
+    void setAprTime(apr_time_t aTime);
   };
 }
 

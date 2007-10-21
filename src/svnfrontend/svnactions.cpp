@@ -137,6 +137,7 @@ public:
     {
         m_PropertiesCache.clear();
         m_contextData.clear();
+        m_InfoCache.clear();
     }
 
     ItemDisplay* m_ParentList;
@@ -150,6 +151,8 @@ public:
     helpers::statusCache m_conflictCache;
     helpers::statusCache m_repoLockCache;
     helpers::itemCache<svn::PathPropertiesMapListPtr> m_PropertiesCache;
+    /// \todo as persistent cache (sqlite?)
+    helpers::itemCache<svn::InfoEntry> m_InfoCache;
 
     QMap<KProcess*,QStringList> m_tempfilelist;
     QMap<KProcess*,QStringList> m_tempdirlist;
@@ -299,6 +302,8 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
 {
     QString url;
     QString ex;
+    QString cacheKey;
+    QTime d; d.start();
     svn::Revision rev = _rev;
     svn::Revision peg;
     if (!m_Data->m_CurrentContext) return false;
@@ -310,29 +315,36 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             url+="@BASE";
         }
         peg = svn::Revision::UNDEFINED;
+        cacheKey=url;
     } else {
         KURL _uri = what;
         QString prot = svn::Url::transformProtokoll(_uri.protocol());
         _uri.setProtocol(prot);
         url = _uri.prettyURL();
         peg = _rev;
+        cacheKey=_rev.toString()+"/"+url;
     }
-    kdDebug()<<"Getting single info " << url << endl;
     svn::InfoEntries e;
 
-    try {
-        e = (m_Data->m_Svnclient->info(url,false,_rev,peg));
-    } catch (svn::ClientException ce) {
-        kdDebug()<<ce.msg() << endl;
-        emit clientException(ce.msg());
-        return false;
+    if (cacheKey.isEmpty() || !m_Data->m_InfoCache.findSingleValid(cacheKey,target)) {
+        try {
+            e = (m_Data->m_Svnclient->info(url,false,_rev,peg));
+        } catch (svn::ClientException ce) {
+            kdDebug()<<ce.msg() << endl;
+            emit clientException(ce.msg());
+            return false;
+        }
+        if (e.count()<1||e[0].reposRoot().isEmpty()) {
+            kdDebug()<<"No info found" << endl;
+            emit clientException(i18n("Got no info."));
+            return false;
+        }
+        target = e[0];
+        if (!cacheKey.isEmpty()) {
+            m_Data->m_InfoCache.insertKey(e[0],cacheKey);
+        }
     }
-    if (e.count()<1||e[0].reposRoot().isEmpty()) {
-        kdDebug()<<"No info found" << endl;
-        emit clientException(i18n("Got no info."));
-        return false;
-    }
-    target = e[0];
+
     return true;
 }
 
@@ -450,31 +462,6 @@ bool SvnActions::makeGet(const svn::Revision&start, const QString&what, const QS
         return false;
     }
     return true;
-}
-
-QByteArray SvnActions::makeGet(const svn::Revision&start, const QString&what,const svn::Revision&peg,QWidget*_dlgparent)
-{
-    QByteArray content;
-    if (!m_Data->m_CurrentContext) return content;
-    CursorStack a(Qt::BusyCursor);
-    QWidget*dlgp=_dlgparent?_dlgparent:m_Data->m_ParentList->realWidget();
-    QString ex;
-    svn::Path p(what);
-    try {
-        StopDlg sdlg(m_Data->m_SvnContext,dlgp,
-            0,"Content cat",i18n("Getting content - hit cancel for abort"));
-        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        kdDebug()<<"Start cat"<<endl;
-        QTime el; el.start();
-        content = m_Data->m_Svnclient->cat(p,start,peg);
-        kdDebug()<<"End cat "<< el.elapsed() << endl;
-    } catch (svn::ClientException e) {
-        emit clientException(e.msg());
-    } catch (...) {
-        ex = i18n("Error getting content");
-        emit clientException(ex);
-    }
-    return content;
 }
 
 void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg,QWidget*_dlgparent)
@@ -662,15 +649,15 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         }
         text+=rb+i18n("Last author")+cs+((*it).cmtAuthor())+re;
         if ((*it).cmtDate()>0) {
-            text+=rb+i18n("Last committed")+cs+helpers::sub2qt::apr_time2qtString((*it).cmtDate())+re;
+            text+=rb+i18n("Last committed")+cs+helpers::sub2qt::DateTime2qtString((*it).cmtDate())+re;
         }
         text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
         if ((*it).textTime()>0) {
-            text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).textTime())+re;
+            text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::DateTime2qtString((*it).textTime())+re;
         }
         if (all) {
             if ((*it).propTime()>0) {
-                text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::apr_time2qtString((*it).propTime())+re;
+                text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::DateTime2qtString((*it).propTime())+re;
             }
             if ((*it).conflictNew().length()) {
                 text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
@@ -694,7 +681,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                 text+=rb+i18n("Lock token")+cs+((*it).lockEntry().Token())+re;
                 text+=rb+i18n("Owner")+cs+((*it).lockEntry().Owner())+re;
                 text+=rb+i18n("Locked on")+cs+
-                    helpers::sub2qt::apr_time2qtString((*it).lockEntry().Date())+
+                    helpers::sub2qt::DateTime2qtString((*it).lockEntry().Date())+
                     re;
                 text+=rb+i18n("Lock comment")+cs+
                     (*it).lockEntry().Comment()+re;
@@ -704,7 +691,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                     text+=rb+i18n("Lock token")+cs+(d->lockEntry().Token())+re;
                     text+=rb+i18n("Owner")+cs+(d->lockEntry().Owner())+re;
                     text+=rb+i18n("Locked on")+cs+
-                            helpers::sub2qt::apr_time2qtString(d->lockEntry().Date())+
+                            helpers::sub2qt::DateTime2qtString(d->lockEntry().Date())+
                         re;
                     text+=rb+i18n("Lock comment")+cs+
                             d->lockEntry().Comment()+re;

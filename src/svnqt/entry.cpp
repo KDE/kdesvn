@@ -50,7 +50,7 @@ namespace svn
         svn_revnum_t _revision,_copyfrom_rev,_cmt_rev;
         svn_node_kind_t _kind;
         svn_wc_schedule_t _schedule;
-        apr_time_t _text_time,_prop_time,_cmt_date;
+        DateTime _text_time,_prop_time,_cmt_date;
 
         /**
         * initializes the members
@@ -259,7 +259,7 @@ namespace svn
     return m_Data->_cmt_author;
   }
 
-  const apr_time_t
+  const DateTime&
   Entry::cmtDate () const
   {
     return m_Data->_cmt_date;
@@ -276,13 +276,13 @@ namespace svn
     return m_Data->_checksum;
   }
 
-  const apr_time_t
+  const DateTime&
   Entry::propTime () const
   {
     return m_Data->_prop_time;
   }
 
-    const apr_time_t
+    const DateTime&
     Entry::textTime () const
     {
       return m_Data->_text_time;

@@ -20,7 +20,8 @@
 #ifndef __INFO_ENTRY_H
 #define __INFO_ENTRY_H
 
-#include "lock_entry.hpp"
+#include <svnqt/lock_entry.hpp>
+#include <svnqt/datetime.hpp>
 
 #include <qstring.h>
 
@@ -38,15 +39,15 @@ public:
     void init(const svn_info_t*,const char*path);
     void init(const svn_info_t*,const QString&path);
 
-    apr_time_t cmtDate()const
+    DateTime cmtDate()const
     {
       return m_last_changed_date;
     }
-    apr_time_t textTime()const
+    DateTime textTime()const
     {
       return m_text_time;
     }
-    apr_time_t propTime()const
+    DateTime propTime()const
     {
       return m_prop_time;
     }
@@ -147,9 +148,9 @@ public:
     QString prettyUrl(const char*)const;
 
 protected:
-    apr_time_t m_last_changed_date;
-    apr_time_t m_text_time;
-    apr_time_t m_prop_time;
+    DateTime m_last_changed_date;
+    DateTime m_text_time;
+    DateTime m_prop_time;
     bool m_hasWc;
     LockEntry m_Lock;
     QString m_name;

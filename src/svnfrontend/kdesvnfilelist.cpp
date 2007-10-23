@@ -1201,17 +1201,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
 
 void kdesvnfilelist::readSupportData()
 {
-    QString bugurl, bugre;
-    m_SvnWrapper->setContextData("bugtraq:url",QString::null);
-    m_SvnWrapper->setContextData("bugtraq:logregex",QString::null);
-    QString p = m_SvnWrapper->searchProperty(bugurl,"bugtraq:url",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),!isNetworked());
-    if (!p.isEmpty()) {
-        m_SvnWrapper->setContextData("bugtraq:url",bugurl);
-        p = m_SvnWrapper->searchProperty(bugre,"bugtraq:logregex",baseUri(),(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),!isNetworked());
-        if (!p.isEmpty()) {
-            m_SvnWrapper->setContextData("bugtraq:logregex",bugre);
-        }
-    }
+    /// this moment empty cause no usagedata explicit used by kdesvnfilelist
 }
 
 void kdesvnfilelist::refreshCurrentTree()
@@ -2891,7 +2881,7 @@ void kdesvnfilelist::slotMakeRangeLog()
     int i = dlg->exec();
     if (i==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_SvnWrapper->makeLog(r.first,r.second,what,list,0);
+        m_SvnWrapper->makeLog(r.first,r.second,(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision), what,list,0);
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
 }
@@ -2965,7 +2955,7 @@ void kdesvnfilelist::slotMakeLog()
     svn::Revision end(svn::Revision::START);
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
     int l = Kdesvnsettings::self()->maximum_displayed_logs();
-    m_SvnWrapper->makeLog(start,end,what,list,l);
+    m_SvnWrapper->makeLog(start,end,(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),what,list,l);
 }
 
 const svn::Revision& kdesvnfilelist::remoteRevision()const

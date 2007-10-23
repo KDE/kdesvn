@@ -38,7 +38,7 @@ Q_OBJECT
 public:
     SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
     virtual ~SvnLogDlgImp();
-    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&);
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&,const svn::Revision&peg,const QString&pegUrl);
     void saveSize();
     QSize dialogSize();
 
@@ -77,6 +77,8 @@ protected slots:
 protected:
     void replaceBugids(QString&msg);
     QString genReplace(const QString&);
+    svn::Revision m_peg;
+    QString m_PegUrl;
 };
 
 #endif

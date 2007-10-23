@@ -242,10 +242,11 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
 /*!
     \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
  */
-void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,SvnItem*k,bool list_files,int limit)
+void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,SvnItem*k,bool list_files,int limit)
 {
     if (!k)return;
-    makeLog(start,end,k->fullName(),list_files,limit);
+    kdDebug()<<"Log für " << k->fullName()<<endl;
+    makeLog(start,end,peg,k->fullName(),list_files,limit);
 }
 
 svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
@@ -343,6 +344,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         if (!cacheKey.isEmpty()) {
             m_Data->m_InfoCache.insertKey(e[0],cacheKey);
         }
+    } else {
     }
 
     return true;
@@ -386,7 +388,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
     }
 }
 
-void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
+void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,int limit)
 {
 
     svn::InfoEntry info;
@@ -398,7 +400,12 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;
     SvnLogDlgImp disp(this);
-    disp.dispLog(logs,info.url().mid(reposRoot.length()),reposRoot);
+    disp.dispLog(logs,info.url().mid(reposRoot.length()),reposRoot,
+                 (
+                         peg==svn::Revision::UNDEFINED?
+                         (svn::Url::isValid(which)?svn::Revision::HEAD:svn::Revision::WORKING):
+                         peg
+                 ),which);
     connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
             this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
     connect(&disp,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
@@ -2381,13 +2388,15 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
 {
     svn::PathPropertiesMapListPtr pm;
     if (!which.isEmpty()) {
+        QString fk=where.toString()+"/"+which;
         QString ex;
         svn::Path p(which);
-        QString fk=where.toString()+"/"+which;
 
         if (where != svn::Revision::WORKING)
         {
             m_Data->m_PropertiesCache.findSingleValid(fk,pm);
+        }
+        if (pm) {
         }
         if (!pm && !cacheOnly)
         {
@@ -2398,6 +2407,7 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
                 sendNotify(e.msg());
             }
             if (where != svn::Revision::WORKING && pm) {
+                kdDebug()<<"Put into cache "<<endl;
                 m_Data->m_PropertiesCache.insertKey(pm,fk);
             }
         }
@@ -2430,6 +2440,12 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
 QString SvnActions::searchProperty(QString&Store, const QString&property, const QString&start,const svn::Revision&where,bool up)
 {
     svn::Path pa(start);
+    kdDebug()<<"Url? "<<pa.isUrl()<<endl;
+    svn::InfoEntry inf;
+
+    if (!singleInfo(start,where,inf)) {
+        return QString::null;
+    }
     while(pa.length()>0) {
         svn::PathPropertiesMapListPtr pm = propList(pa,where,false);
         if (!pm) {
@@ -2444,8 +2460,14 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
         }
         if (up) {
             pa.removeLast();
+            kdDebug()<<"Going up to " << pa.path() << endl;
+            if (pa.isUrl() && inf.reposRoot().length()>pa.path().length()) {
+                kdDebug()<<pa.path()<<" is not in repository" << endl;
+                break;
+            }
+
         } else {
-            return QString::null;
+            break;
         }
     }
     return QString::null;
@@ -2458,8 +2480,8 @@ bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&
     try {
         dlist = m_Data->m_Svnclient->list(url,where,where,rec,false);
     } catch (svn::ClientException e) {
-            emit clientException(e.msg());
-            return false;
+        emit clientException(e.msg());
+        return false;
     }
     return true;
 }

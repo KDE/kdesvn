@@ -354,7 +354,7 @@ void CommandExec::slotCmd_log()
         m_pCPart->start = 1;
     }
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
-    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->url[0],list,m_pCPart->log_limit);
+    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,svn::Revision::UNDEFINED,m_pCPart->url[0],list,m_pCPart->log_limit);
 }
 
 /*!

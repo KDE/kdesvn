@@ -107,6 +107,10 @@
       <label>Get properties on selected item on networked protocols</label>
       <default>false</default>
     </entry>
+    <entry key="remote_special_properties" type="Bool">
+      <label>Use properties like bugtraq:url on repository listings</label>
+      <default>true</default>
+    </entry>
     <entry key="check_needslock" type="Bool">
         <label>Check for propertie svn:needs-lock on listings</label>
         <default>false</default>

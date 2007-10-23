@@ -78,7 +78,7 @@ protected:
     void replaceBugids(QString&msg);
     QString genReplace(const QString&);
     svn::Revision m_peg;
-    QString m_PegUrl;
+    svn::Path m_PegUrl;
 };
 
 #endif

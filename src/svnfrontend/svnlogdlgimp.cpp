@@ -204,21 +204,6 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
         m_ChangedList->hide();
     }
     m_Actions = ac;
-    if (ac) {
-#if 0
-        _bugurl = m_Actions->getContextData("bugtraq:url");
-        QString reg = m_Actions->getContextData("bugtraq:logregex");
-        if (!reg.isEmpty()) {
-            QStringList s1 = QStringList::split("\n",reg);
-            if (s1.size()>0) {
-                _r1.setPattern(s1[0]);
-                if (s1.size()>1) {
-                    _r2.setPattern(s1[1]);
-                }
-            }
-        }
-#endif
-    }
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
@@ -252,16 +237,18 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     if (!_log) return;
     m_peg = peg;
     m_PegUrl = pegUrl;
-    QString s = m_Actions->searchProperty(_bugurl,"bugtraq:url",pegUrl,peg,true);
-    if (!s.isEmpty() ){
-        QString reg;
-        s = m_Actions->searchProperty(reg,"bugtraq:logregex",pegUrl,peg,true);
-        if (!s.isNull() && !reg.isEmpty()) {
-            QStringList s1 = QStringList::split("\n",reg);
-            if (s1.size()>0) {
-                _r1.setPattern(s1[0]);
-                if (s1.size()>1) {
-                    _r2.setPattern(s1[1]);
+    if (!m_PegUrl.isUrl() || Kdesvnsettings::remote_special_properties()) {
+        QString s = m_Actions->searchProperty(_bugurl,"bugtraq:url",pegUrl,peg,true);
+        if (!s.isEmpty() ){
+            QString reg;
+            s = m_Actions->searchProperty(reg,"bugtraq:logregex",pegUrl,peg,true);
+            if (!s.isNull() && !reg.isEmpty()) {
+                QStringList s1 = QStringList::split("\n",reg);
+                if (s1.size()>0) {
+                    _r1.setPattern(s1[0]);
+                    if (s1.size()>1) {
+                        _r2.setPattern(s1[1]);
+                    }
                 }
             }
         }

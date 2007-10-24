@@ -107,3 +107,6 @@ CONFIGURE_FILE(
 ADD_CUSTOM_TARGET(package-messages
     "${CMAKE_CURRENT_BINARY_DIR}/package_messages.sh")
 
+ADD_CUSTOM_TARGET(apidox
+    "doxygen" "${CMAKE_BINARY_DIR}/Doxyfile"
+    DEPENDS "${CMAKE_BINARY_DIR}/Doxyfile")

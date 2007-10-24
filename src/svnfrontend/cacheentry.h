@@ -303,25 +303,15 @@ template<class C> inline void cacheEntry<C>::insertKey(QStringList&what,const C&
     //kdDebug()<<"inserting "<<what<< "into " << m_key << endl;
     QString m = what[0];
 
-    iter it=m_subMap.find(m);
-    if (it==m_subMap.end()) {
+    if (m_subMap.find(m)==m_subMap.end()) {
         m_subMap[m].m_key=m;
-        if (what.count()==1) {
-           // kdDebug()<<"Inserting valid key "<< m << endl;
-            m_subMap[m].setValidContent(m,st);
-           // kdDebug()<<"Inserting valid key done"<< endl;
-            return;
-        }
-       // kdDebug()<<"inserting tree key " << m << endl;
-       //kdDebug()<<"inserting tree key done " << m_subMap[m].m_key << endl;
-    } else {
-        if (what.count()==1) {
-           // kdDebug()<<"Inserting valid key "<< m << endl;
-           m_subMap[m].setValidContent(m,st);
-           // kdDebug()<<"Inserting valid key done"<< endl;
-        }
     }
-
+    if (what.count()==1) {
+        // kdDebug()<<"Inserting valid key "<< m << endl;
+        m_subMap[m].setValidContent(m,st);
+        // kdDebug()<<"Inserting valid key done"<< endl;
+        return;
+    }
     what.erase(what.begin());
     //kdDebug()<<"Go into loop"<<endl;
     m_subMap[m].insertKey(what,st);

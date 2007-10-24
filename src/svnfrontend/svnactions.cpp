@@ -342,11 +342,17 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         }
         target = e[0];
         if (!cacheKey.isEmpty()) {
-            m_Data->m_InfoCache.insertKey(e[0],cacheKey);
+            if (peg != svn::Revision::UNDEFINED) {
+                m_Data->m_InfoCache.insertKey(e[0],cacheKey);
+                if (peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
+                    // for persistent storage, store head into persistent cache makes no sense.
+                    cacheKey=e[0].revision().toString()+"/"+url;
+                    kdDebug()<<"Extra: "<<cacheKey<<endl;
+                    m_Data->m_InfoCache.insertKey(e[0],cacheKey);
+                }
+            }
         }
-    } else {
     }
-
     return true;
 }
 
@@ -573,16 +579,24 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
     if (!m_Data->m_CurrentContext) return QString::null;
     QString ex;
     svn::InfoEntries entries;
-    try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Details",
-            i18n("Retrieving infos - hit cancel for abort"));
-        connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        svn::InfoEntries e;
-        entries = (m_Data->m_Svnclient->info(_what+
+    if (recursive) {
+        try {
+            StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Details",
+                         i18n("Retrieving infos - hit cancel for abort"));
+            connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
+            svn::InfoEntries e;
+            entries = (m_Data->m_Svnclient->info(_what+
                     (_what.find("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive,rev,peg));
-    } catch (svn::ClientException e) {
-        emit clientException(e.msg());
-        return QString::null;
+        } catch (svn::ClientException e) {
+            emit clientException(e.msg());
+            return QString::null;
+        }
+    } else {
+        svn::InfoEntry info;
+        if (!singleInfo(_what,rev,info)) {
+            return QString::null;
+        }
+        entries.append(info);
     }
     //if (!all) EMIT_FINISHED;
     QString text = "";
@@ -595,12 +609,6 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         if (val>0) {
             text+="<hline>";
         }
-#if 0
-        if (all && lst.count()>=val) {
-            text+="<h4 align=\"center\">"+lst[val]+"</h4>";
-            ++val;
-        }
-#endif
         text+="<p align=\"center\">";
         text+="<table cellspacing=0 cellpadding=0>";
         if ((*it).Name().length()) {
@@ -658,7 +666,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         if ((*it).cmtDate()>0) {
             text+=rb+i18n("Last committed")+cs+helpers::sub2qt::DateTime2qtString((*it).cmtDate())+re;
         }
-        text+=rb+i18n("Last revision")+cs+QString("%1").arg((*it).cmtRev())+re;
+        text+=rb+i18n("Last revision")+cs+(*it).cmtRev().toString()+re;
         if ((*it).textTime()>0) {
             text+=rb+i18n("Content last changed")+cs+helpers::sub2qt::DateTime2qtString((*it).textTime())+re;
         }

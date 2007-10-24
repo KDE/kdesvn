@@ -13,6 +13,8 @@ SET(svnfrontendsrc
     fronthelpers/checkoutinfo_impl.h
     fronthelpers/rangeinput_impl.cpp
     fronthelpers/rangeinput_impl.h
+    fronthelpers/revisionbuttonimpl.cpp
+    fronthelpers/revisionbuttonimpl.h
     fronthelpers/cursorstack.h
     fronthelpers/widgetblockstack.cpp
     fronthelpers/widgetblockstack.h
@@ -63,6 +65,7 @@ SET(svnfrontendui
     editpropsdlg.ui
     fronthelpers/checkoutinfo.ui
     fronthelpers/rangeinput.ui
+    fronthelpers/revisionbutton.ui
     hotcopydlg.ui
     loaddmpdlg.ui
     merge_dlg.ui

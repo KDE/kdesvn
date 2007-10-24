@@ -22,6 +22,7 @@
 
 #include <svnqt/lock_entry.hpp>
 #include <svnqt/datetime.hpp>
+#include <svnqt/revision.hpp>
 
 #include <qstring.h>
 
@@ -119,15 +120,15 @@ public:
     {
       return m_kind;
     }
-    svn_revnum_t cmtRev()const
+    const Revision& cmtRev()const
     {
       return m_last_changed_rev;
     }
-    svn_revnum_t copyfromRev()const
+    const Revision& copyfromRev()const
     {
       return m_copy_from_rev;
     }
-    svn_revnum_t revision()const
+    const Revision& revision()const
     {
       return m_revision;
     }
@@ -166,9 +167,9 @@ protected:
     QString m_pUrl;
     QString m_UUID;
     svn_node_kind_t m_kind;
-    svn_revnum_t m_copy_from_rev;
-    svn_revnum_t m_last_changed_rev;
-    svn_revnum_t m_revision;
+    Revision m_copy_from_rev;
+    Revision m_last_changed_rev;
+    Revision m_revision;
     svn_wc_schedule_t m_schedule;
 protected:
     void init();

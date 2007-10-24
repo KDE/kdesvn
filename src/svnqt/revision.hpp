@@ -77,6 +77,9 @@ namespace svn
     static const svn_opt_revision_kind UNDEFINED;
     static const svn_opt_revision_kind PREV;
 
+    static const svn_opt_revision_kind DATE;
+    static const svn_opt_revision_kind NUMBER;
+
     /**
      * Constructor
      *

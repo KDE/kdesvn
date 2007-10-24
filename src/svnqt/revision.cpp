@@ -45,6 +45,10 @@ namespace svn
   const svn_opt_revision_kind Revision::UNDEFINED = svn_opt_revision_unspecified;
   const svn_opt_revision_kind Revision::PREV = svn_opt_revision_previous;
 
+  const svn_opt_revision_kind Revision::DATE = svn_opt_revision_date;
+  const svn_opt_revision_kind Revision::NUMBER = Revision::START;
+
+
   Revision::Revision (const svn_opt_revision_t * revision)
   {
     init (revision);

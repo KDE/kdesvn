@@ -21,6 +21,7 @@
 #define REVISIONBUTTONIMPL_H
 
 #include "revisionbutton.h"
+#include "svnqt/revision.hpp"
 
 class RevisionButtonImpl: public RevisionButton {
     Q_OBJECT
@@ -29,6 +30,12 @@ public:
     RevisionButtonImpl(QWidget *parent = 0, const char *name = 0);
     virtual ~RevisionButtonImpl();
 
+    virtual void setRevision(const svn::Revision&aRev);
+
+public:
+    svn::Revision m_Rev;
+public slots:
+    virtual void askRevision();
 };
 
 #endif

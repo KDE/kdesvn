@@ -18,14 +18,53 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisionbuttonimpl.h"
+#include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
+#include "src/settings/kdesvnsettings.h"
+
+#include <kpushbutton.h>
+#include <kdialog.h>
+#include <kfiledialog.h>
+#include <kapplication.h>
+#include <klocale.h>
+
+#include <qvbox.h>
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent, const char *name)
-    :RevisionButton(parent, name)
+    :RevisionButton(parent, name),m_Rev(svn::Revision::UNDEFINED)
 {
 }
 
 RevisionButtonImpl::~RevisionButtonImpl()
 {
+}
+
+void RevisionButtonImpl::setRevision(const svn::Revision&aRev)
+{
+    m_Rev = aRev;
+    m_RevisionButton->setText(m_Rev.toString());
+}
+
+void RevisionButtonImpl::askRevision()
+{
+    Rangeinput_impl*rdlg;
+    int buttons = KDialogBase::Ok|KDialogBase::Cancel;
+
+    KDialogBase * dlg = new KDialogBase(KApplication::activeModalWidget(),"Revinput",true,"Input revision",buttons);
+
+    if (!dlg) {
+        return;
+    }
+
+    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    rdlg = new Rangeinput_impl(Dialog1Layout);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg"));
+
+    rdlg->setStartOnly(true);
+    if (dlg->exec()==QDialog::Accepted) {
+        setRevision(rdlg->getRange().first);
+    }
+    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg",false);
+    delete dlg;
 }
 
 #include "revisionbuttonimpl.moc"

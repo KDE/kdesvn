@@ -22,6 +22,7 @@
 #include "src/svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include "svnactions.h"
+#include "src/svnfrontend/fronthelpers/revisionbuttonimpl.h"
 
 #include <klistview.h>
 #include <ktextbrowser.h>
@@ -234,6 +235,7 @@ SvnLogDlgImp::~SvnLogDlgImp()
 
 void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString & what,const QString&root,const svn::Revision&peg,const QString&pegUrl)
 {
+    m_LogView->clear();
     if (!_log) return;
     m_peg = peg;
     m_PegUrl = pegUrl;
@@ -276,6 +278,8 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     if (itemMap.count()==0) {
         return;
     }
+    m_startRevButton->setRevision(max);
+    m_endRevButton->setRevision(min);
     m_LogView->setSelected(m_LogView->firstChild(),true);
     QString bef = what;
     long rev;
@@ -464,6 +468,9 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
         if (m_first==m_second) {
             m_second = 0;
         }
+        if (m_first) {
+            m_startRevButton->setRevision(m_first->rev());
+        }
     /* other mouse or ctrl hold*/
     } else {
         if (m_second) m_second->setText(0,"");
@@ -475,6 +482,9 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
         }
         if (m_first==m_second) {
             m_first = 0;
+        }
+        if (m_second) {
+            m_endRevButton->setRevision(m_second->rev());
         }
     }
     m_DispSpecDiff->setEnabled(m_first!=0 && m_second!=0);

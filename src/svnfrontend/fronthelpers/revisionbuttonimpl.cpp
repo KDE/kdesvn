@@ -30,7 +30,7 @@
 #include <qvbox.h>
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent, const char *name)
-    :RevisionButton(parent, name),m_Rev(svn::Revision::UNDEFINED)
+    :RevisionButton(parent, name),m_Rev(svn::Revision::UNDEFINED),m_noWorking(false)
 {
 }
 
@@ -42,6 +42,7 @@ void RevisionButtonImpl::setRevision(const svn::Revision&aRev)
 {
     m_Rev = aRev;
     m_RevisionButton->setText(m_Rev.toString());
+    emit revisionChanged();
 }
 
 void RevisionButtonImpl::askRevision()
@@ -49,22 +50,26 @@ void RevisionButtonImpl::askRevision()
     Rangeinput_impl*rdlg;
     int buttons = KDialogBase::Ok|KDialogBase::Cancel;
 
-    KDialogBase * dlg = new KDialogBase(KApplication::activeModalWidget(),"Revinput",true,"Input revision",buttons);
+    KDialogBase * dlg = new KDialogBase(KApplication::activeModalWidget(),"Revinput",true,i18n("Select revision"),buttons);
 
     if (!dlg) {
         return;
     }
-
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     rdlg = new Rangeinput_impl(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg"));
-
     rdlg->setStartOnly(true);
+    rdlg->setNoWorking(m_noWorking);
+    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg"));
     if (dlg->exec()==QDialog::Accepted) {
         setRevision(rdlg->getRange().first);
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg",false);
     delete dlg;
+}
+
+void RevisionButtonImpl::setNoWorking(bool how)
+{
+    m_noWorking = how;
 }
 
 #include "revisionbuttonimpl.moc"

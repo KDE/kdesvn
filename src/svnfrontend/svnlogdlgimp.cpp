@@ -52,7 +52,7 @@ public:
     LogListViewItem (KListView *parent,const svn::LogEntry&);
     virtual int compare( QListViewItem* i, int col, bool ascending ) const;
 
-    static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
+    static const int COL_MARKER,COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
     const QString&message()const;
     svn_revnum_t rev()const{return _revision;}
     void showChangedEntries(KListView*);
@@ -71,6 +71,7 @@ protected:
     QValueList<svn::LogChangePathEntry> changedPaths;
 };
 
+const int LogListViewItem::COL_MARKER = 0;
 const int LogListViewItem::COL_REV = 2;
 const int LogListViewItem::COL_AUTHOR = 1;
 const int LogListViewItem::COL_DATE = 3;
@@ -193,7 +194,6 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
     :SvnLogDialogData(parent, name),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
-    m_LogView->header()->setLabel( 0, "");
     resize(dialogSize());
     m_ControlKeyDown = false;
     m_first = 0;
@@ -235,10 +235,10 @@ SvnLogDlgImp::~SvnLogDlgImp()
 
 void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString & what,const QString&root,const svn::Revision&peg,const QString&pegUrl)
 {
-    m_LogView->clear();
-    if (!_log) return;
     m_peg = peg;
     m_PegUrl = pegUrl;
+    m_startRevButton->setNoWorking(m_PegUrl.isUrl());
+    m_endRevButton->setNoWorking(m_PegUrl.isUrl());
     if (!m_PegUrl.isUrl() || Kdesvnsettings::remote_special_properties()) {
         QString s = m_Actions->searchProperty(_bugurl,"bugtraq:url",pegUrl,peg,true);
         if (!s.isEmpty() ){
@@ -263,6 +263,18 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     } else {
         setCaption(i18n("SVN Log"));
     }
+    _name = what;
+    dispLog(_log);
+}
+
+void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log)
+{
+    m_LogView->clear();
+    m_LogView->header()->setLabel(0, " ");
+    m_LogView->setColumnWidth(0,10);
+    if (!_log) {
+        return;
+    }
     svn::LogEntriesMap::const_iterator lit;
     LogListViewItem * item;
     QMap<long int,QString> namesMap;
@@ -281,7 +293,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     m_startRevButton->setRevision(max);
     m_endRevButton->setRevision(min);
     m_LogView->setSelected(m_LogView->firstChild(),true);
-    QString bef = what;
+    QString bef = _name;
     long rev;
     // YES! I'd checked it: this is much faster than getting list of keys
     // and iterating over that list!
@@ -294,7 +306,6 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
         }
         itemMap[c]->copiedFrom(bef,rev);
     }
-    _name = what;
 }
 
 QString SvnLogDlgImp::genReplace(const QString&r1match)
@@ -468,9 +479,8 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
         if (m_first==m_second) {
             m_second = 0;
         }
-        if (m_first) {
-            m_startRevButton->setRevision(m_first->rev());
-        }
+        m_startRevButton->setRevision(which->rev());
+
     /* other mouse or ctrl hold*/
     } else {
         if (m_second) m_second->setText(0,"");
@@ -483,11 +493,15 @@ void SvnLogDlgImp::slotItemClicked(int button,QListViewItem*item,const QPoint &,
         if (m_first==m_second) {
             m_first = 0;
         }
-        if (m_second) {
-            m_endRevButton->setRevision(m_second->rev());
-        }
+        m_endRevButton->setRevision(which->rev());
     }
     m_DispSpecDiff->setEnabled(m_first!=0 && m_second!=0);
+}
+
+void SvnLogDlgImp::slotRevisionSelected()
+{
+    m_goButton->setFocus();
+    //m_DispSpecDiff->setEnabled( m_first && m_second && m_first != m_second);
 }
 
 void SvnLogDlgImp::slotDispSelected()
@@ -505,6 +519,16 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStr
     }
     t=(*m_Entries)[r.revnum()];
     return true;
+}
+
+void SvnLogDlgImp::slotGetLogs()
+{
+    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
+            m_endRevButton->revision(),
+            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,this);
+    if (lm) {
+        dispLog(lm);
+    }
 }
 
 void SvnLogDlgImp::slotListEntries()
@@ -629,10 +653,5 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QListViewItem*_item)
         m_Actions->makeBlame(start,k->rev(),_base+name,kapp->activeModalWidget(),k->rev(),this);
     }
 }
-
-
-
-
-
 
 #include "svnlogdlgimp.moc"

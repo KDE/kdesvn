@@ -254,7 +254,7 @@ void kdesvnfilelist::setupActions()
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
+    //new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
     new KAction(i18n("Full Log"),"kdesvnlog",KShortcut(CTRL+Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
     new KAction(i18n("Full revision tree"),"kdesvnlog",KShortcut(CTRL+Key_T),this,SLOT(slotMakeTree()),m_filesAction,"make_svn_tree");
     new KAction(i18n("Partial revision tree"),"kdesvnlog",KShortcut(SHIFT+CTRL+Key_T),

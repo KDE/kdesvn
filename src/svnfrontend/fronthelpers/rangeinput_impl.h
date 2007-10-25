@@ -34,7 +34,8 @@ public:
 
     revision_range getRange();
 
-    void setStartOnly(bool theValue);
+    virtual void setStartOnly(bool theValue);
+    virtual void setNoWorking(bool aValue);
 
 
     bool StartOnly() const;

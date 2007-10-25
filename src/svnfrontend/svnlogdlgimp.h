@@ -54,6 +54,7 @@ protected slots:
     virtual void slotDispPrevious();
     virtual void slotDispSelected();
     virtual void slotItemClicked(int,QListViewItem*,const QPoint &,int);
+    virtual void slotRevisionSelected();
 protected:
     QString _name;
     QString _base;
@@ -66,6 +67,9 @@ protected:
     virtual void slotBlameItem();
     svn::SharedPointer<svn::LogEntriesMap> m_Entries;
     QString _bugurl;
+
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&);
+
     QRegExp _r1,_r2;
 
 protected slots:
@@ -73,6 +77,7 @@ protected slots:
     virtual void slotEntriesSelectionChanged();
     virtual void slotSingleContext(QListViewItem*, const QPoint &, int);
     virtual void slotSingleDoubleClicked(QListViewItem*);
+    virtual void slotGetLogs();
 
 protected:
     void replaceBugids(QString&msg);

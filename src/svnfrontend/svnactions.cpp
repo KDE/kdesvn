@@ -249,7 +249,8 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     makeLog(start,end,peg,k->fullName(),list_files,limit);
 }
 
-svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,int limit)
+svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,
+        int limit,QWidget*parent)
 {
     svn::SharedPointer<svn::LogEntriesMap> logs = new svn::LogEntriesMap;
     QString ex;
@@ -258,7 +259,7 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
     bool follow = Kdesvnsettings::log_follows_nodes();
 
     try {
-        StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,"Logs",
+        StopDlg sdlg(m_Data->m_SvnContext,(parent?parent:m_Data->m_ParentList->realWidget()),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         m_Data->m_Svnclient->log(which,start,end,*logs,list_files,!follow,limit);

@@ -21,11 +21,13 @@
 #include "helpers/sub2qt.h"
 
 #include <qpushbutton.h>
+#include <qlayout.h>
 #include <qradiobutton.h>
 #include <knuminput.h>
 #include <kdatetimewidget.h>
 #include <qbuttongroup.h>
 #include <klocale.h>
+#include <kdebug.h>
 
 Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
     :RangeInputDlg(parent, name)
@@ -39,7 +41,6 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
     m_stopDateInput->setEnabled(false);
     m_startDateInput->setEnabled(false);
     m_stopHeadButton->setChecked(true);
-    setMinimumSize(minimumSizeHint());
 }
 
 Rangeinput_impl::~Rangeinput_impl()
@@ -68,6 +69,20 @@ void Rangeinput_impl::startHeadToggled(bool how)
         m_startRevInput->setEnabled(!how);
         m_startDateInput->setEnabled(!how);
     }
+}
+
+void Rangeinput_impl::setNoWorking(bool aValue)
+{
+    if (!aValue) {
+        if (m_startWorkingButton->isChecked()) {
+            m_startHeadButton->setChecked(false);
+        }
+        if (m_stopWorkingButton->isChecked()) {
+            m_stopHeadButton->setChecked(false);
+        }
+    }
+    m_startWorkingButton->setEnabled(!aValue);
+    m_stopWorkingButton->setEnabled(!aValue);
 }
 
 void Rangeinput_impl::onHelp()
@@ -162,13 +177,17 @@ void Rangeinput_impl::setStartOnly(bool theValue)
 {
     m_StartOnly = theValue;
     if (m_StartOnly) {
+        RangeInputLayout->remove(m_stopRevBox);
         m_stopRevBox->hide();
         m_startRevBox->setTitle(i18n("Select revision"));
     } else {
+        RangeInputLayout->add(m_stopRevBox);
         m_stopRevBox->show();
         m_startRevBox->setTitle(i18n( "Start with revision" ));
     }
+    updateGeometry();
     setMinimumSize(minimumSizeHint());
+    resize( QSize(397, 272).expandedTo(minimumSizeHint()) );
 }
 
 #include "rangeinput_impl.moc"

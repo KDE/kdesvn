@@ -32,10 +32,20 @@ public:
 
     virtual void setRevision(const svn::Revision&aRev);
 
-public:
+    virtual void setNoWorking(bool);
+    const svn::Revision& revision()const {
+        return m_Rev;
+    }
+
+protected:
     svn::Revision m_Rev;
+    bool m_noWorking;
+
 public slots:
     virtual void askRevision();
+signals:
+    void revisionChanged();
+
 };
 
 #endif

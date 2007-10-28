@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>398</width>
-            <height>244</height>
+            <width>485</width>
+            <height>345</height>
         </rect>
     </property>
     <property name="caption">
@@ -21,35 +21,57 @@
         </property>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout6</cstring>
+                <cstring>layout5</cstring>
             </property>
-            <grid>
+            <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="KPushButton" row="1" column="3">
+                <widget class="QLayoutWidget">
                     <property name="name">
-                        <cstring>m_DispSpecDiff</cstring>
+                        <cstring>layout4</cstring>
                     </property>
-                    <property name="enabled">
-                        <bool>false</bool>
-                    </property>
-                    <property name="text">
-                        <string>Diff revisions</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Select second revision with right mouse button</string>
-                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="KPushButton" row="1" column="2">
+                            <property name="name">
+                                <cstring>m_goButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Get Logs</string>
+                            </property>
+                        </widget>
+                        <widget class="RevisionButtonImpl" row="1" column="1">
+                            <property name="name">
+                                <cstring>m_endRevButton</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="1">
+                            <property name="name">
+                                <cstring>endLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>End revision</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="0">
+                            <property name="name">
+                                <cstring>startLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Start revision</string>
+                            </property>
+                        </widget>
+                        <widget class="RevisionButtonImpl" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_startRevButton</cstring>
+                            </property>
+                        </widget>
+                    </grid>
                 </widget>
-                <widget class="RevisionButtonImpl" row="1" column="1">
-                    <property name="name">
-                        <cstring>m_endRevButton</cstring>
-                    </property>
-                </widget>
-                <spacer row="1" column="4">
+                <spacer>
                     <property name="name">
                         <cstring>spacer2</cstring>
                     </property>
@@ -61,41 +83,12 @@
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>40</width>
+                            <width>107</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="KPushButton" row="1" column="2">
-                    <property name="name">
-                        <cstring>m_goButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Get Logs</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="0" column="1">
-                    <property name="name">
-                        <cstring>endLabel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>End revision</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>startLabel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Start revision</string>
-                    </property>
-                </widget>
-                <widget class="RevisionButtonImpl" row="1" column="0">
-                    <property name="name">
-                        <cstring>m_startRevButton</cstring>
-                    </property>
-                </widget>
-            </grid>
+            </hbox>
         </widget>
         <widget class="QSplitter">
             <property name="name">
@@ -253,7 +246,7 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout7</cstring>
+                <cstring>layout3</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -271,6 +264,23 @@
                     </property>
                     <property name="accel">
                         <string></string>
+                    </property>
+                </widget>
+                <widget class="KPushButton">
+                    <property name="name">
+                        <cstring>m_DispSpecDiff</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="text">
+                        <string>Diff revisions</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Select second revision with right mouse button</string>
                     </property>
                 </widget>
                 <widget class="KPushButton">
@@ -313,7 +323,7 @@
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>75</width>
+                            <width>42</width>
                             <height>20</height>
                         </size>
                     </property>
@@ -456,11 +466,11 @@
 <includehints>
     <includehint>kpushbutton.h</includehint>
     <includehint>revisionbuttonimpl.h</includehint>
-    <includehint>kpushbutton.h</includehint>
     <includehint>revisionbuttonimpl.h</includehint>
     <includehint>klistview.h</includehint>
     <includehint>ktextbrowser.h</includehint>
     <includehint>klistview.h</includehint>
+    <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>

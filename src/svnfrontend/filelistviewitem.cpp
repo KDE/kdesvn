@@ -102,6 +102,14 @@ void FileListViewItem::setOpenNoBlock(bool o)
 
 FileListViewItem::~FileListViewItem()
 {
+    if (isSelected()) {
+        /*
+            when item is selected and deleted signal selectionChanged isn't emitted
+            in QListView anymore and let kdesvn crash.
+        */
+        setSelected(false);
+        m_Ksvnfilelist->selectionChanged();
+    }
 }
 
 void FileListViewItem::setStat(const svn::StatusPtr&stat)

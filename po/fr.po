@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-16 12:54+0200\n"
-"PO-Revision-Date: 2007-09-17 23:21+0200\n"
+"PO-Revision-Date: 2007-11-04 21:19+0100\n"
 "Last-Translator: Patrick ALLAERT <patrick.allaert@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -602,8 +602,7 @@ msgstr "Les entrées semblent identiques, ne peut faire de diff"
 
 #: svnfrontend/svnactions.cpp:1100
 msgid "Diff-process could not started, check command."
-msgstr ""
-"Le processus pour le diff ne peut pas être démarré, vérifiez la commande."
+msgstr "Le processus pour le diff ne peut pas être démarré, vérifiez la commande."
 
 #: svnfrontend/svnactions.cpp:1137
 msgid "Diffing - hit cancel for abort"
@@ -615,8 +614,7 @@ msgstr "Aucune différence à afficher"
 
 #: svnfrontend/svnactions.cpp:1234
 msgid "Display-process could not started, check command."
-msgstr ""
-"Le processus d'affichage ne peut pas être démarré, vérifiez la commande."
+msgstr "Le processus d'affichage ne peut pas être démarré, vérifiez la commande."
 
 #: svnfrontend/svnactions.cpp:1245
 msgid "Diff display"
@@ -1130,8 +1128,7 @@ msgid "A newline separated list of file patterns to ignore."
 msgstr "Un retour à ligne sépare la liste des motifs à ignorer."
 
 #: svnfrontend/editproperty_impl.cpp:96
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Label à afficher pour une boîte d'entrée où l'utilisateur introduit le "
 "numéro d'une issue."
@@ -1392,13 +1389,12 @@ msgid "Display Properties"
 msgstr "Afficher les propriétés"
 
 #: svnfrontend/kdesvnfilelist.cpp:268
-#, fuzzy
 msgid "Display last changes"
-msgstr "Diff des changements locaux"
+msgstr "Afficher les derniers changements"
 
 #: svnfrontend/kdesvnfilelist.cpp:270
 msgid "Display last changes as difference to previous commit."
-msgstr ""
+msgstr "Afficher les derniers changements comme différence depuis la dernière propagation."
 
 #: svnfrontend/kdesvnfilelist.cpp:272
 msgid "Details"
@@ -1409,8 +1405,7 @@ msgid "Check for updates"
 msgstr "Vérification pour des mises à jour"
 
 #: svnfrontend/kdesvnfilelist.cpp:279
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Vérifier si la copie de travail courante a des éléments avec de nouvelles "
 "versions dans le dépôt"
@@ -1446,8 +1441,7 @@ msgstr "Afficher la révision ..."
 
 #: svnfrontend/kdesvnfilelist.cpp:293
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Affiche le contenu des fichiers ou URLs spécifiés à une révision donnée."
+msgstr "Affiche le contenu des fichiers ou URLs spécifiés à une révision donnée."
 
 #: svnfrontend/kdesvnfilelist.cpp:295
 msgid "Lock current items"
@@ -1463,8 +1457,7 @@ msgstr "Changer de dépôt"
 
 #: svnfrontend/kdesvnfilelist.cpp:305
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr ""
-"Changer le chemin du dépôt de la copie de travail courante (\"svn switch\")"
+msgstr "Changer le chemin du dépôt de la copie de travail courante (\"svn switch\")"
 
 #: svnfrontend/kdesvnfilelist.cpp:306
 msgid "Relocate current working copy url"
@@ -1502,7 +1495,7 @@ msgstr ""
 
 #: svnfrontend/kdesvnfilelist.cpp:320
 msgid "Import folders into current"
-msgstr "Importe un répertoire dans le courent"
+msgstr "Importe des répertoires dans le répertoire courant"
 
 #: svnfrontend/kdesvnfilelist.cpp:322
 msgid "Import folder content into current url"
@@ -1627,20 +1620,19 @@ msgstr "Diff de révisions"
 
 #: svnfrontend/kdesvnfilelist.cpp:389
 msgid "Unfold File Tree"
-msgstr ""
+msgstr "Déplier l'arborescence de fichiers"
 
 #: svnfrontend/kdesvnfilelist.cpp:390
 msgid "Opens all branches of the file tree"
-msgstr ""
+msgstr "Ouvrir toutes les branches de l'arborescence de fichiers"
 
 #: svnfrontend/kdesvnfilelist.cpp:391
-#, fuzzy
 msgid "Fold File Tree"
-msgstr "Répertoire"
+msgstr "Plier l'arborescence de fichiers"
 
 #: svnfrontend/kdesvnfilelist.cpp:392
 msgid "Closes all branches of the file tree"
-msgstr ""
+msgstr "Fermer toutes les branches de l'arborescence de fichiers"
 
 #: svnfrontend/kdesvnfilelist.cpp:1065
 msgid "Failed: %1 %2"
@@ -1728,11 +1720,11 @@ msgstr "Désolé, erreur interne !"
 
 #: svnfrontend/kdesvnfilelist.cpp:2994
 msgid "Unfold tree"
-msgstr ""
+msgstr "Déplier l'arbre"
 
 #: svnfrontend/kdesvnfilelist.cpp:2994
 msgid "Unfold all folder"
-msgstr ""
+msgstr "Déplier tous les dossiers"
 
 #: kdesvn_part.cpp:60
 msgid "A Subversion Client for KDE (dynamic Part component)"
@@ -1881,8 +1873,7 @@ msgstr "Limiter la sortie du journal à <number>"
 
 #: main.cpp:43
 msgid "Execute subversion command (\"exec help\" for more information)"
-msgstr ""
-"Exécuter une commande subversion (\"exec help\" pour plus d'informations)"
+msgstr "Exécuter une commande subversion (\"exec help\" pour plus d'informations)"
 
 #: main.cpp:44
 msgid "Document to open"
@@ -2022,8 +2013,7 @@ msgstr "Désélectionner les nouveaux éléments"
 #: rc.cpp:55
 #, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr ""
-"Ne plus marquer tous les éléments non versionnés, ils seront ainsi ignorés."
+msgstr "Ne plus marquer tous les éléments non versionnés, ils seront ainsi ignorés."
 
 #: rc.cpp:58
 #, no-c-format
@@ -2033,8 +2023,7 @@ msgstr "Diff de l'élément sélectionné"
 #: rc.cpp:61
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
-msgstr ""
-"Générer et afficher les différences avec le dépôt pour l'élément sélectionné"
+msgstr "Générer et afficher les différences avec le dépôt pour l'élément sélectionné"
 
 #: rc.cpp:64
 #, no-c-format
@@ -2067,9 +2056,9 @@ msgid "If checked commit will not release locks."
 msgstr "Si sélectionné, la propagation ne libérera pas les verrous."
 
 #: rc.cpp:86
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Form1"
-msgstr "Forcer"
+msgstr "Forme1"
 
 #: rc.cpp:89
 #, no-c-format
@@ -2266,8 +2255,7 @@ msgstr "Valeur de la propriété :"
 #: rc.cpp:238
 #, no-c-format
 msgid "Click for short info about pre-defined property name"
-msgstr ""
-"Cliquer pour une information brève à propos des noms de propriétés prédéfinis"
+msgstr "Cliquer pour une information brève à propos des noms de propriétés prédéfinis"
 
 #: rc.cpp:241
 #, no-c-format
@@ -2312,8 +2300,7 @@ msgstr "Désactiver fsync à la propagation (BDB uniquement)"
 #: rc.cpp:272
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Désactive la suppression automatique du fichier de journal (BDB uniquement)"
+msgstr "Désactive la suppression automatique du fichier de journal (BDB uniquement)"
 
 #: rc.cpp:276
 #, no-c-format
@@ -2571,8 +2558,7 @@ msgstr "Vérifier si des éléments ont la propriété \"svn:needs-lock\" active
 #: rc.cpp:524
 #, no-c-format
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
-"Lors du listing d'une copie de travail, kdesvn peut vérifier cette propriété"
+msgstr "Lors du listing d'une copie de travail, kdesvn peut vérifier cette propriété"
 
 #: rc.cpp:527
 #, no-c-format
@@ -2678,13 +2664,11 @@ msgstr ""
 #: rc.cpp:571
 #, no-c-format
 msgid "Store passwords into KDE Wallet"
-msgstr ""
-"Conserver les mots de passe dans le Gestionnaire de portefeuilles de KDE"
+msgstr "Conserver les mots de passe dans le Gestionnaire de portefeuilles de KDE"
 
 #: rc.cpp:575
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Lors de la sauvegarde des mots de passe, le faire dans le Gestionnaire de "
 "portefeuilles de KDE plutôt que dans l'espace de stockage de subversion ?"
@@ -2769,8 +2753,7 @@ msgstr ""
 #: rc.cpp:611
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Nombre maximum d'entrées affichées dans le journal complet (0 pour illimité)"
+msgstr "Nombre maximum d'entrées affichées dans le journal complet (0 pour illimité)"
 
 #: rc.cpp:614
 #, fuzzy, no-c-format
@@ -2915,8 +2898,7 @@ msgstr "Préférer le programme de fusions externe"
 
 #: rc.cpp:683
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Spécifie si la fusion avec un programme externe est préférée à la fusion de "
 "subversion"
@@ -3005,8 +2987,7 @@ msgstr "0"
 
 #: rc.cpp:739
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "Le nombre minimum de lignes que doit contenir une entrée du journal avant "
 "que kdesvn affiche une fenêtre unique pour le journal"
@@ -3019,8 +3000,7 @@ msgstr "Ne pas afficher le menu contextuel dans Konqueror"
 #: rc.cpp:745
 #, no-c-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
-msgstr ""
-"Si actif, kdesvn n'affichera pas un menu dans le menu \"Action\" de Konqueror"
+msgstr "Si actif, kdesvn n'affichera pas un menu dans le menu \"Action\" de Konqueror"
 
 #: rc.cpp:748
 #, no-c-format
@@ -3240,8 +3220,7 @@ msgstr "Ajouter des identités ssh à l'agent ssh"
 
 #: kdesvn.cpp:139
 msgid "Force add ssh-identities to ssh-agent for future use."
-msgstr ""
-"Forcer l'ajout d'identités ssh à l'agent ssh pour des utilisations futures."
+msgstr "Forcer l'ajout d'identités ssh à l'agent ssh pour des utilisations futures."
 
 #: kdesvn.cpp:140
 msgid "Info about kdesvn part"
@@ -3282,3 +3261,4 @@ msgstr "Prêt"
 #: settings/cmdexecsettings_impl.cpp:32
 msgid "No minimum"
 msgstr "Pas de minimum"
+

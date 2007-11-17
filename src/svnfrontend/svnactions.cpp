@@ -104,6 +104,11 @@ public:
             m_DiffDialog->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
             delete m_DiffDialog;
         }
+        if (m_LogDialog) {
+            m_LogDialog->saveSize();
+            delete m_LogDialog;
+        }
+
         QMap<KProcess*,QStringList>::iterator it;
         for (it=m_tempfilelist.begin();it!=m_tempfilelist.end();++it) {
             for (QStringList::iterator it2 = (*it).begin();
@@ -140,6 +145,18 @@ public:
         m_InfoCache.clear();
     }
 
+    void cleanDialogs()
+    {
+        if (m_DiffDialog) {
+            m_DiffDialog->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
+            delete m_DiffDialog;
+        }
+        if (m_LogDialog) {
+            m_LogDialog->saveSize();
+            delete m_LogDialog;
+        }
+    }
+
     ItemDisplay* m_ParentList;
 
     svn::smart_pointer<CContextListener> m_SvnContext;
@@ -162,6 +179,7 @@ public:
     QTime m_UpdateCheckTick;
     QGuardedPtr<DiffBrowser> m_DiffBrowserPtr;
     QGuardedPtr<KDialogBase> m_DiffDialog;
+    QGuardedPtr<SvnLogDlgImp> m_LogDialog;
 
     QMap<QString,QString> m_contextData;
 
@@ -204,6 +222,7 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 void SvnActions::reInitClient()
 {
     m_Data->clearCaches();
+    m_Data->cleanDialogs();
     m_Data->m_CurrentContext = new svn::Context();
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContext);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
@@ -397,7 +416,6 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
 
 void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,int limit)
 {
-
     svn::InfoEntry info;
     if (!singleInfo(which,start,info)) {
         return;
@@ -406,19 +424,31 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
 
     svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,which,list_files,limit);
     if (!logs) return;
-    SvnLogDlgImp disp(this);
-    disp.dispLog(logs,info.url().mid(reposRoot.length()),reposRoot,
-                 (
-                         peg==svn::Revision::UNDEFINED?
+    bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
+    if (need_modal||!m_Data->m_LogDialog) {
+        m_Data->m_LogDialog=new SvnLogDlgImp(this,0,"logdialog",need_modal);
+        connect(m_Data->m_LogDialog,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+                 this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
+        connect(m_Data->m_LogDialog,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
+                 this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
+    }
+
+    if (m_Data->m_LogDialog) {
+        m_Data->m_LogDialog->dispLog(logs,info.url().mid(reposRoot.length()),reposRoot,
+                     (
+                      peg==svn::Revision::UNDEFINED?
                          (svn::Url::isValid(which)?svn::Revision::HEAD:svn::Revision::WORKING):
-                         peg
-                 ),which);
-    connect(&disp,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
-            this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
-    connect(&disp,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
-            this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
-    disp.exec();
-    disp.saveSize();
+                             peg
+                     ),which);
+        if (need_modal) {
+            m_Data->m_LogDialog->exec();
+            m_Data->m_LogDialog->saveSize();
+            delete m_Data->m_LogDialog;
+        } else {
+            m_Data->m_LogDialog->show();
+            m_Data->m_LogDialog->raise();
+        }
+    }
     EMIT_FINISHED;
 }
 

@@ -190,8 +190,8 @@ bool LogListViewItem::isParent(const QString&_par,const QString&tar)
     return tar.startsWith(par);
 }
 
-SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
-    :SvnLogDialogData(parent, name),_name("")
+SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool modal)
+    :SvnLogDialogData(parent, name,modal),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
     resize(dialogSize());

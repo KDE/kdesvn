@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-16 12:54+0200\n"
-"PO-Revision-Date: 2007-08-19 13:24+0200\n"
+"PO-Revision-Date: 2007-12-11 20:43+0100\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: es_ES <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -564,9 +564,8 @@ msgid "Commit"
 msgstr "Confirmar"
 
 #: svnfrontend/svnactions.cpp:883
-#, fuzzy
 msgid "Delete and Commit"
-msgstr "Añadir y Confirmar"
+msgstr "Eliminar y Confirmar"
 
 #: svnfrontend/svnactions.cpp:885
 msgid "Add and Commit"
@@ -671,8 +670,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1588
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1618
 msgid "Revert entries"
@@ -954,9 +952,8 @@ msgid "The certificate has an unknown error."
 msgstr "El certificado tiene un error desconocido."
 
 #: svnfrontend/fronthelpers/propertylist.cpp:31
-#, fuzzy
 msgid "Property"
-msgstr "Nombre de propiedad:"
+msgstr "Propiedad"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:32
 msgid "Value"
@@ -1038,8 +1035,7 @@ msgstr "Enlace SVN perdido"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -1117,8 +1113,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:96
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -1371,18 +1366,16 @@ msgid "Partial revision tree"
 msgstr "Árbol de revisiones parcial"
 
 #: svnfrontend/kdesvnfilelist.cpp:265
-#, fuzzy
 msgid "Display Properties"
-msgstr "Mostrar detalles"
+msgstr "Mostrar Propiedades"
 
 #: svnfrontend/kdesvnfilelist.cpp:268
-#, fuzzy
 msgid "Display last changes"
-msgstr "Diferencia con cambios locales"
+msgstr "Mostrar últimos cambios"
 
 #: svnfrontend/kdesvnfilelist.cpp:270
 msgid "Display last changes as difference to previous commit."
-msgstr ""
+msgstr "Muestra los últimos cambios como diferencias con la confirmación previa."
 
 #: svnfrontend/kdesvnfilelist.cpp:272
 msgid "Details"
@@ -1393,8 +1386,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:279
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -1429,8 +1421,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:293
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:295
 msgid "Lock current items"
@@ -1462,8 +1453,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:311
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:313
 msgid "Open repository of working copy"
@@ -1608,20 +1598,19 @@ msgstr "Diferencias entre revisiones"
 
 #: svnfrontend/kdesvnfilelist.cpp:389
 msgid "Unfold File Tree"
-msgstr ""
+msgstr "Expandir Árbol de Ficheros"
 
 #: svnfrontend/kdesvnfilelist.cpp:390
 msgid "Opens all branches of the file tree"
-msgstr ""
+msgstr "Abre todas las ramas del árbol de ficheros"
 
 #: svnfrontend/kdesvnfilelist.cpp:391
-#, fuzzy
 msgid "Fold File Tree"
-msgstr "Carpeta"
+msgstr "Contraer Árbol de Ficheros"
 
 #: svnfrontend/kdesvnfilelist.cpp:392
 msgid "Closes all branches of the file tree"
-msgstr ""
+msgstr "Cierra todas las ramas del árbol de ficheros"
 
 #: svnfrontend/kdesvnfilelist.cpp:1065
 msgid "Failed: %1 %2"
@@ -1709,11 +1698,11 @@ msgstr "¡Lo siento - error interno!"
 
 #: svnfrontend/kdesvnfilelist.cpp:2994
 msgid "Unfold tree"
-msgstr ""
+msgstr "Expandir árbol"
 
 #: svnfrontend/kdesvnfilelist.cpp:2994
 msgid "Unfold all folder"
-msgstr ""
+msgstr "Expandir todas las carpetas"
 
 #: kdesvn_part.cpp:60
 msgid "A Subversion Client for KDE (dynamic Part component)"
@@ -2043,19 +2032,19 @@ msgid "If checked commit will not release locks."
 msgstr "Si se selecciona, la confirmación no libera los bloqueos."
 
 #: rc.cpp:86
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Form1"
-msgstr "Forzar"
+msgstr "Form1"
 
 #: rc.cpp:89
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select encoding:"
-msgstr "Seleccionar revisión"
+msgstr "Seleccionar codificación:"
 
 #: rc.cpp:92
 #, no-c-format
 msgid "Default utf-8"
-msgstr ""
+msgstr "Por defecto utf-8"
 
 #: rc.cpp:95
 #, no-c-format
@@ -2250,7 +2239,7 @@ msgstr ""
 #: rc.cpp:241
 #, no-c-format
 msgid "leftpane"
-msgstr ""
+msgstr "leftpane"
 
 #: rc.cpp:250
 #, no-c-format
@@ -2275,8 +2264,7 @@ msgstr "Seleccione tipo de almacenamiento"
 #: rc.cpp:262
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
+msgstr "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
 #: rc.cpp:265
 #, no-c-format
@@ -2291,8 +2279,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 #: rc.cpp:272
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
+msgstr "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
 #: rc.cpp:276
 #, no-c-format
@@ -2472,8 +2459,7 @@ msgstr "Mensaje"
 #: rc.cpp:416
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:422
 #, no-c-format
@@ -2533,8 +2519,7 @@ msgstr "Acciones"
 #: rc.cpp:514
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:518
 #, no-c-format
@@ -2546,12 +2531,12 @@ msgstr ""
 #: rc.cpp:521
 #, no-c-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
 
 #: rc.cpp:524
 #, no-c-format
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
+msgstr "Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
 
 #: rc.cpp:527
 #, no-c-format
@@ -2560,7 +2545,7 @@ msgid ""
 "property.<br>But due this listings/updating on folders containing lot of "
 "items may get slow. So you should only switch on if you have repositories "
 "containing lot of such entries."
-msgstr ""
+msgstr "Mientras escucha en copias de trabajo kdesvn puede comprobar la propiedad <tt>svn:needs-lock</tt>.<br>Pero debido a esto, escuchar/actualizar en carpetas con muchos elementos puede ser lento. Por eso sólo se debería seleccionar si se tienen repositorios conteniendo muchas de tales entradas."
 
 #: rc.cpp:530
 #, no-c-format
@@ -2599,12 +2584,12 @@ msgstr "Obtener información recursiva del elemento"
 #: rc.cpp:546
 #, no-c-format
 msgid "Always get properties on networked repositories"
-msgstr ""
+msgstr "Obtener siempre propiedades en repositorios en red"
 
 #: rc.cpp:550
 #, no-c-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
-msgstr ""
+msgstr "Si se deben obtener las propiedades del elemento seleccionado en los repositorios"
 
 #: rc.cpp:553
 #, no-c-format
@@ -2614,7 +2599,7 @@ msgid ""
 "On networked repositories (eg., not opened via file:// protocol) this may "
 "get real slow. So if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
-msgstr ""
+msgstr "Mientras se navega,Kdesvn puede mostrar las propiedades bajo la lista de elementos del elemento seleccionado, \n En repositorios en red (ej: no abiertos mediante el protocolo file://) ésto puede ser muy lento. Por eso, si la conexión de red es lenta o se cuelga a menudo mientras se navega se debería desactivar esta opción."
 
 #: rc.cpp:561
 #, no-c-format
@@ -2648,8 +2633,7 @@ msgstr "Almacenar contraseñas en Cartera KDE"
 
 #: rc.cpp:575
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes "
 "de Subversion?"
@@ -2716,20 +2700,19 @@ msgid "List items next commit will send or not"
 msgstr "Elementos listados en la última confirmación se enviarán o no"
 
 #: rc.cpp:604
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Hide new items in commit box"
-msgstr "Ocultar elementos nuevos"
+msgstr "Ocultar elementos nuevos en el dialogo de confirmación"
 
 #: rc.cpp:608
 #, no-c-format
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
+msgstr "Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
 
 #: rc.cpp:611
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:614
 #, no-c-format
@@ -2752,16 +2735,16 @@ msgid "Diff ignores all white spaces"
 msgstr "Las diferencias ignoran todos los espacios en blanco"
 
 #: rc.cpp:629
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use external diff display"
-msgstr "Usar otro visor de diferencias"
+msgstr "Usar visor de diferencias externo"
 
 #: rc.cpp:632
 #, no-c-format
 msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
-msgstr ""
+msgstr "Si se debe usar un visor y/o generador de diferencias externo. Si no se selecciona se usará el visor interno."
 
 #: rc.cpp:635
 #, no-c-format
@@ -2870,8 +2853,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:683
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Establece si se prefiere un programa de fusionado externo y no el fusionado "
 "de subversion"
@@ -2958,8 +2940,7 @@ msgstr "0"
 
 #: rc.cpp:739
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "El mínimo que una salida de registro debe contener antes de que kdesvn "
 "muestre una ventana con el registro"
@@ -3236,56 +3217,3 @@ msgstr "Listo"
 msgid "No minimum"
 msgstr "Ningún mínimo"
 
-#~ msgid "Exported external at revision %1."
-#~ msgstr "Exportada definición externa en revisión %1."
-
-#~ msgid "Exported revision %1."
-#~ msgstr "Exportada revisión %1."
-
-#~ msgid "Checked out external at revision %1."
-#~ msgstr "Obtenida definición externa en revisión %1."
-
-#~ msgid "Checked out revision %1."
-#~ msgstr "Obtenida revisión %1."
-
-#~ msgid "Updated external to revision %1."
-#~ msgstr "Actualizada definición externa a la revisión %1."
-
-#~ msgid "Updated to revision %1."
-#~ msgstr "Actualizado a la revisión %1."
-
-#~ msgid "External at revision %1."
-#~ msgstr "Definición externa en revisión %1."
-
-#~ msgid "At revision %1."
-#~ msgstr "En revisión %1."
-
-#~ msgid "External export complete."
-#~ msgstr "Exportación externa completada."
-
-#~ msgid "Export complete."
-#~ msgstr "Exportación completada."
-
-#~ msgid "External checkout complete."
-#~ msgstr "Obtención externa completada."
-
-#~ msgid "Checkout complete."
-#~ msgstr "Obtención completada."
-
-#~ msgid "External update complete."
-#~ msgstr "Actualización externa completada."
-
-#~ msgid "Update complete."
-#~ msgstr "Actualización completada."
-
-#~ msgid "Use \"Kompare\" for displaying diffs"
-#~ msgstr "Usar \"Kompare\" para ver diferencias"
-
-#~ msgid "Internal"
-#~ msgstr "Interno"
-
-#~ msgid "Use Kompare for diff"
-#~ msgstr "Usar Kompare para las diferencias"
-
-#~ msgid "\"Kompare\" could not started."
-#~ msgstr "\"Kompare\" no se pudo iniciar."

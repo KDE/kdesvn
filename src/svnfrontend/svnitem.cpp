@@ -484,6 +484,11 @@ bool SvnItem::isDeleted()const
     return p_Item->m_Stat->textStatus()==svn_wc_status_deleted;
 }
 
+bool SvnItem::isConflicted()const
+{
+    return p_Item->m_Stat->textStatus()==svn_wc_status_conflicted;
+}
+
 /*!
     \fn SvnItem::getToolTipText()
  */

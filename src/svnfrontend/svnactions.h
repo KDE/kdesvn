@@ -195,6 +195,7 @@ public slots:
     virtual void slotRevertItems(const QStringList&);
     virtual void slotSwitch();
     virtual void slotResolved(const QString&);
+    virtual void slotResolve(const QString&);
     virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&,bool isDir);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,bool,QWidget*p);

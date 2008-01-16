@@ -88,6 +88,11 @@
    <Action name="report_bug" />
   </Menu>
 </MenuBar>
+ <Menu name="local_context_single_conflicted">
+     <text>Actions</text>
+     <Action name="make_resolved" />
+     <Action name="make_try_resolve"/>
+ </Menu>
  <Menu name="local_context_single_versioned" >
   <text>Actions</text>
   <Action name="make_svn_headupdate"/>

@@ -159,6 +159,7 @@ protected slots:
     virtual void slotChangeToRepository();
     virtual void slotCleanupAction();
     virtual void slotResolved();
+    virtual void slotTryResolve();
     virtual void slotMergeRevisions();
     virtual void slotMerge();
     virtual void slotDropped(QDropEvent *,QListViewItem*);

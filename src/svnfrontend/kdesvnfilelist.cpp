@@ -335,9 +335,14 @@ void kdesvnfilelist::setupActions()
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
     m_RevertAction  = new KAction(i18n("Revert current changes"),"revert",
         KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
-    m_ResolvedAction = new KAction(i18n("Resolve recursive"),KShortcut(),
+
+    m_ResolvedAction = new KAction(i18n("Mark resolved"),KShortcut(),
         this,SLOT(slotResolved()),m_filesAction,"make_resolved");
     m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
+
+    tmp_action = new KAction(i18n("Resolve conflicts"),KShortcut(),
+                             this,SLOT(slotTryResolve()),m_filesAction,"make_try_resolve");
+
     m_IgnoreAction = new KAction(i18n("Ignore/Unignore current item"),KShortcut(),this,SLOT(slotIgnore()),m_filesAction,"make_svn_ignore");
 
     m_UpdateHead = new KAction(i18n("Update to head"),"kdesvnupdate",
@@ -857,6 +862,7 @@ void kdesvnfilelist::enableActions()
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
     }
+    bool conflicted = single && allSelected()->at(0)->isConflicted();
     KAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
@@ -918,6 +924,11 @@ void kdesvnfilelist::enableActions()
     m_AddCurrent->setEnabled( (multi||single) && isWorkingCopy());
     m_RevertAction->setEnabled( (multi||single) && isWorkingCopy());
     m_ResolvedAction->setEnabled( (multi||single) && isWorkingCopy());
+    temp = filesActions()->action("make_try_resolve");
+    if (temp) {
+        temp->setEnabled(conflicted && !dir);
+    }
+
     m_InfoAction->setEnabled(isopen);
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
     temp = filesActions()->action("make_svn_merge");
@@ -1087,6 +1098,16 @@ void kdesvnfilelist::slotResolved()
     m_SvnWrapper->slotResolved(which->fullName());
     which->refreshStatus(true);
     slotRescanIcons(false);
+}
+
+void kdesvnfilelist::slotTryResolve()
+{
+    if (!isWorkingCopy()) return;
+    FileListViewItem*which= singleSelected();
+    if (!which || which->isDir()) {
+        return;
+    }
+    m_SvnWrapper->slotResolve(which->fullName());
 }
 
 template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp)
@@ -1409,9 +1430,13 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const 
         menuname+="_context_single";
         if (isWorkingCopy()) {
             if (l.at(0)->isRealVersioned()) {
-                menuname+="_versioned";
-                if (l.at(0)->isDir()) {
-                    menuname+="_dir";
+                if (l.at(0)->isConflicted()) {
+                    menuname+="_conflicted";
+                } else {
+                    menuname+="_versioned";
+                    if (l.at(0)->isDir()) {
+                        menuname+="_dir";
+                    }
                 }
             } else {
                 menuname+="_unversioned";

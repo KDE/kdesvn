@@ -129,6 +129,10 @@
       <label>Which program to use for external merges</label>
       <default>kdiff3 %s1 %s2 %t</default>
     </entry>
+    <entry key="conflict_resolver" type="String">
+      <label>Wich program for resolving conflicts</label>
+      <default>kdiff3 %o %m %n -o %t</default>
+    </entry>
     <entry name="extern_merge_default" type="Bool">
         <label>Prefer external merge program</label>
         <default>false</default>

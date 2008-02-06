@@ -1,5 +1,13 @@
+version 0.15.0
+    * fixed a crasher which happens (as example) when opening a folder where the svn-admin-area (eg, the .svn subdir)
+      is removed
+    * german translation corrected
+    * spain and russian translation updated
+    * direct call to resolve conflicted items with external editor like kdiff3 (default) integrated.
+
 version 0.14.1
-    * fixed a rare (new?) crasher
+    * fixed a rare crasher when selected entries are deleted
+    * frensh and lithuanian translation updated
 
 version 0.14.0
     * setting if an external diff-display should used is now a simple yes/no box, so there is no need checking for

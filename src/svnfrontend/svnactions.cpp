@@ -1837,11 +1837,11 @@ void SvnActions::slotResolve(const QString&p)
 
     KProcess*proc = new KProcess();
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
-        if (*it=="%o") {
+        if (*it=="%o"||*it=="%l") {
             *proc<<(base+"/"+i1.conflictOld());
-        } else if (*it=="%m") {
+        } else if (*it=="%m" || *it=="%w") {
             *proc<<(base+"/"+i1.conflictWrk());
-        } else if (*it=="%n") {
+        } else if (*it=="%n"||*it=="%r") {
             *proc<<(base+"/"+i1.conflictNew());
         } else if (*it=="%t") {
             *proc<<p;

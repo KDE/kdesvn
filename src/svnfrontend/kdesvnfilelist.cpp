@@ -1038,9 +1038,16 @@ void kdesvnfilelist::slotChangeToRepository()
     }
     FileListViewItem*k = static_cast<FileListViewItem*>(firstChild());
     /* huh... */
-    if (!k||!k->isDir()) return;
-    KURL nurl = k->Url();
-    sigSwitchUrl(nurl);
+    if (!k) return;
+    svn::InfoEntry i;
+    if (!m_SvnWrapper->singleInfo(k->Url(),svn::Revision::UNDEFINED,i)) {
+        return;
+    }
+    if (i.reposRoot().isEmpty()) {
+        KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository of working copy."),i18n("SVN Error"));
+    } else {
+        sigSwitchUrl(i.reposRoot());
+    }
 }
 
 void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)

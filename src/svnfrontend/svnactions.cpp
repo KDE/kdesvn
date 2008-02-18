@@ -223,6 +223,7 @@ void SvnActions::reInitClient()
 {
     m_Data->clearCaches();
     m_Data->cleanDialogs();
+    if (m_Data->m_CurrentContext) m_Data->m_CurrentContext->setListener(0L);
     m_Data->m_CurrentContext = new svn::Context();
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContext);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
@@ -2248,8 +2249,18 @@ void SvnActions::stopCheckUpdateThread()
     }
 }
 
+void SvnActions::stopMain()
+{
+    if (m_Data->m_CurrentContext) {
+        m_Data->m_SvnContext->setCanceled(true);
+        sleep(1);
+        m_Data->m_SvnContext->contextCancel();
+    }
+}
+
 void SvnActions::killallThreads()
 {
+    stopMain();
     stopCheckModThread();
     stopCheckUpdateThread();
 }

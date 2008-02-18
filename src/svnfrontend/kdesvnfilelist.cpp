@@ -478,6 +478,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
+    kdDebug()<<"Start open URL"<<endl;
     emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,QString(""));
     m_Dirsread.clear();
     if (m_SelectedItems) {
@@ -597,12 +598,15 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));
+    kdDebug()<<"End open URL"<<endl;
     return result;
 }
 
 void kdesvnfilelist::closeMe()
 {
+    kdDebug()<<"Close me"<<endl;
     m_SvnWrapper->killallThreads();
+
     selectAll(false);
     clear();
     setWorkingCopy("");

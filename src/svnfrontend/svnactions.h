@@ -148,6 +148,7 @@ public:
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
     void stopCheckUpdateThread();
+    void stopMain();
     void killallThreads();
 
     bool checkUpdatesRunning();

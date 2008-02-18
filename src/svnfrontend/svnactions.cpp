@@ -201,6 +201,7 @@ void SvnActions::slotNotifyMessage(const QString&aMsg)
 void SvnActions::reInitClient()
 {
     m_Data->clearCaches();
+    if (m_Data->m_CurrentContext) m_Data->m_CurrentContext->setListener(0L);
     m_Data->m_CurrentContext = new svn::Context();
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContext);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
@@ -1776,6 +1777,58 @@ void SvnActions::slotResolved(const QString&path)
     m_Data->m_conflictCache.deleteKey(path,false);
 }
 
+void SvnActions::slotResolve(const QString&p)
+{
+    if (!m_Data->m_CurrentContext) return;
+    QString eresolv = Kdesvnsettings::conflict_resolver();
+    QStringList wlist = QStringList::split(" ",eresolv);
+    if (wlist.size()==0) {
+        return;
+    }
+    kdDebug()<<"Resolve: "<<p<<endl;
+    svn::InfoEntry i1;
+    if (!singleInfo(p,svn::Revision::UNDEFINED,i1)) {
+        return;
+    }
+    QFileInfo fi(p);
+    QString base = fi.dirPath(true);
+    kdDebug()<<i1.conflictNew()<<" "
+            <<i1.conflictOld()<<" "
+            <<i1.conflictWrk()<<" "
+            <<endl;
+    if (!i1.conflictNew().length()||
+           !i1.conflictOld().length()||
+           !i1.conflictWrk().length() ) {
+        emit sendNotify(i18n("Could not retrieve conflict information - giving up."));
+        return;
+    }
+
+    KProcess*proc = new KProcess();
+    for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
+        if (*it=="%o"||*it=="%l") {
+            *proc<<(base+"/"+i1.conflictOld());
+        } else if (*it=="%m" || *it=="%w") {
+            *proc<<(base+"/"+i1.conflictWrk());
+        } else if (*it=="%n"||*it=="%r") {
+            *proc<<(base+"/"+i1.conflictNew());
+        } else if (*it=="%t") {
+            *proc<<p;
+        } else {
+            *proc << *it;
+        }
+    }
+    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
+    connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+    connect(proc,SIGNAL(receivedStdout(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
+    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::All)) {
+        return;
+    } else {
+        emit sendNotify(i18n("Resolve-process could not started, check command."));
+    }
+    delete proc;
+    return;
+}
+
 void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
 {
     if (!m_Data->m_CurrentContext) return;
@@ -2163,8 +2216,18 @@ void SvnActions::stopCheckUpdateThread()
     }
 }
 
+void SvnActions::stopMain()
+{
+    if (m_Data->m_CurrentContext) {
+        m_Data->m_SvnContext->setCanceled(true);
+        sleep(1);
+        m_Data->m_SvnContext->contextCancel();
+    }
+}
+
 void SvnActions::killallThreads()
 {
+    stopMain();
     stopCheckModThread();
     stopCheckUpdateThread();
 }

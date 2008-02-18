@@ -55,6 +55,7 @@ public:
     virtual const QDateTime&fullDate()const;
     virtual bool isDir()const;
     virtual bool isVersioned()const;
+    virtual bool isConflicted()const;
     virtual bool isValid()const;
     virtual bool isRealVersioned()const;
     virtual bool isIgnored()const;

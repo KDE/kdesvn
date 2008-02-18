@@ -2,7 +2,13 @@ include(FindQt3)
 include(FindKDE3)
 include(kdesvnMacros)
 
-set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" FORCE)
+IF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+  SET(DEF_SUFF "")
+ELSE(CMAKE_SIZEOF_VOID_P EQUAL 4)
+  SET(DEF_SUFF 64)
+ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+
+set(LIB_SUFFIX ${DEF_SUFF} CACHE STRING "Define suffix of directory name (32/64)" FORCE)
 
 SET(LIB_SEARCH_PATHES   ${KDE3_LIB_DIR}
   $ENV{KDEDIR}/lib

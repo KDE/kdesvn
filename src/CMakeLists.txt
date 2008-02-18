@@ -1,4 +1,5 @@
 ADD_EXECUTABLE(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde3)
 
 SET(kdesvnsrc
     main.cpp

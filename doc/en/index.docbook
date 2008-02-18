@@ -508,13 +508,31 @@ If recoursive isn't set, the export is done as a flat export. Be care: when doin
 </sect3>
 
 </sect2>
+<sect2 id="op-resolve">
+<title>Resolving conflicts</title>
+<para>
+&kappname; itself hasn't a module for resolving conflicts but you may use external software from within &kappname;. In <xref linkend="extern-resolve-setup"/> is a description how to setup up this application.
+</para>
+<para>
+When marking an item with status set to &quot;conflicted&quot; (you'll see a red cross in listview on such items) you may select 
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>Working copy</guisubmenu>
+<guisubmenu>Resolve conflict</guisubmenu>
+</menuchoice>.
+or from within context menu <menuchoice><guisubmenu>Resolve conflict</guisubmenu></menuchoice> (only on conflicted items)
+&kappname; now starts the program you setup (or the default on). After finish this job you should mark item as resolved 
+(<menuchoice><guimenu>Subversion</guimenu><guisubmenu>Working copy</guisubmenu><guisubmenu>Mark resolved</guisubmenu></menuchoice>) otherwise you will not able to commit your changes.
+
+</para>
+</sect2>
 </sect1>
 
 <sect1 id="used-properties">
 <title>Properties used by &kappname; for configuration</title>
 <sect2>
 <title>Bugtracker integration</title>
-<para>The <ulink url="http://tortoisesvn.tigris.org/">TortoiseSVN project</ulink> designed a nice property system 
+<para>The <ulink url="http://tortoisesvn.tigris.org/">TortoiseSVN project</ulink> designed a nice property system
 <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"> for integrating bugtracker</ulink> into
 subversion GUI. This moment &kappname; doesn't support extra fields in commit box (will follow later) and doesn't understand all but following properties:
 </para>
@@ -689,15 +707,6 @@ This entry (or entry below if folder) got conflicts to resolve with last update.
 
 </para>
 </sect1>
-
-<!--
-<sect1>
-<title>What &kdesvn; is not</title>
-<para>
-&kdesvn; has NOT the capability to modify direct on subversion repositories. This is not 'cause it is not implemented, this is 'cause except on special configured webserver based repositories this feature is not part of subversion itself. Subversion is NOT a transfer protocol like ftp or sftp. So you must always modify your data in working copies. Importing new files or folders into a repository with drag and drop is a different idea.
-</para>
-</sect1>
--->
 </chapter>
 
 <chapter id="kdesvn-kio">
@@ -1471,6 +1480,45 @@ Substituted with target.
 
 </variablelist>
 
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title>Conflict resolver program</title>
+<para>
+You may use an external program like <command>kdiff3</command> for resolving conflicts, the default is 
+<prompt>kdiff3 %o %m %n -o %t</prompt>.
+</para>
+<sect3>
+<title>Variable substitution for externel conflict resolver</title>
+<para>
+In paranthesis after each description an example how subversion would call the files. This options meaning are designed for kdiff3, 'cause this moment (2008-02-07) this is the only one I know supporting all parameters required for a good conflict resolving.
+<variablelist>
+<varlistentry>
+<term>%o or %l</term>
+<listitem><para>
+Old (local,left) version. This means the the lower revsion number, eg., the start point of conflicted changes. (<prompt>foo.cc.r2</prompt>)
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>%m or %w</term>
+<listitem><para>
+Mine (working) version of file, eg., what you had changed against old version. (<prompt>foo.cc.mine</prompt>)
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>%n or %r</term>
+<listitem><para>
+New (remote, right) version of file. Eg, version someone other had made. (<prompt>foo.cc.r3</prompt>)
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>%t</term>
+<listitem><para>
+Target name, eg., the origin name. For kdiff3 (as an example) this would be name after the <prompt>&quot;-o&quot;</prompt> parameter (= output file). (<prompt>foo.cc</prompt>)
+</para></listitem>
+</varlistentry>
+</variablelist>
 </para>
 </sect3>
 </sect2>

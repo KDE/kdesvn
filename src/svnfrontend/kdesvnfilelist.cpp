@@ -335,9 +335,14 @@ void kdesvnfilelist::setupActions()
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
     m_RevertAction  = new KAction(i18n("Revert current changes"),"revert",
         KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
-    m_ResolvedAction = new KAction(i18n("Resolve recursive"),KShortcut(),
+
+    m_ResolvedAction = new KAction(i18n("Mark resolved"),KShortcut(),
         this,SLOT(slotResolved()),m_filesAction,"make_resolved");
     m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
+
+    tmp_action = new KAction(i18n("Resolve conflicts"),KShortcut(),
+                             this,SLOT(slotTryResolve()),m_filesAction,"make_try_resolve");
+
     m_IgnoreAction = new KAction(i18n("Ignore/Unignore current item"),KShortcut(),this,SLOT(slotIgnore()),m_filesAction,"make_svn_ignore");
 
     m_UpdateHead = new KAction(i18n("Update to head"),"kdesvnupdate",
@@ -473,6 +478,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
+    kdDebug()<<"Start open URL"<<endl;
     emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,QString(""));
     m_Dirsread.clear();
     if (m_SelectedItems) {
@@ -592,12 +598,15 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));
+    kdDebug()<<"End open URL"<<endl;
     return result;
 }
 
 void kdesvnfilelist::closeMe()
 {
+    kdDebug()<<"Close me"<<endl;
     m_SvnWrapper->killallThreads();
+
     selectAll(false);
     clear();
     setWorkingCopy("");
@@ -857,6 +866,7 @@ void kdesvnfilelist::enableActions()
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
     }
+    bool conflicted = single && allSelected()->at(0)->isConflicted();
     KAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
@@ -918,6 +928,11 @@ void kdesvnfilelist::enableActions()
     m_AddCurrent->setEnabled( (multi||single) && isWorkingCopy());
     m_RevertAction->setEnabled( (multi||single) && isWorkingCopy());
     m_ResolvedAction->setEnabled( (multi||single) && isWorkingCopy());
+    temp = filesActions()->action("make_try_resolve");
+    if (temp) {
+        temp->setEnabled(conflicted && !dir);
+    }
+
     m_InfoAction->setEnabled(isopen);
     m_MergeRevisionAction->setEnabled(single&&isWorkingCopy());
     temp = filesActions()->action("make_svn_merge");
@@ -1027,9 +1042,16 @@ void kdesvnfilelist::slotChangeToRepository()
     }
     FileListViewItem*k = static_cast<FileListViewItem*>(firstChild());
     /* huh... */
-    if (!k||!k->isDir()) return;
-    KURL nurl = k->Url();
-    sigSwitchUrl(nurl);
+    if (!k) return;
+    svn::InfoEntry i;
+    if (!m_SvnWrapper->singleInfo(k->Url(),svn::Revision::UNDEFINED,i)) {
+        return;
+    }
+    if (i.reposRoot().isEmpty()) {
+        KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository of working copy."),i18n("SVN Error"));
+    } else {
+        sigSwitchUrl(i.reposRoot());
+    }
 }
 
 void kdesvnfilelist::slotItemDoubleClicked(QListViewItem*item)
@@ -1087,6 +1109,16 @@ void kdesvnfilelist::slotResolved()
     m_SvnWrapper->slotResolved(which->fullName());
     which->refreshStatus(true);
     slotRescanIcons(false);
+}
+
+void kdesvnfilelist::slotTryResolve()
+{
+    if (!isWorkingCopy()) return;
+    FileListViewItem*which= singleSelected();
+    if (!which || which->isDir()) {
+        return;
+    }
+    m_SvnWrapper->slotResolve(which->fullName());
 }
 
 template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp)
@@ -1419,9 +1451,13 @@ void kdesvnfilelist::slotContextMenuRequested(QListViewItem */* _item */, const 
         menuname+="_context_single";
         if (isWorkingCopy()) {
             if (l.at(0)->isRealVersioned()) {
-                menuname+="_versioned";
-                if (l.at(0)->isDir()) {
-                    menuname+="_dir";
+                if (l.at(0)->isConflicted()) {
+                    menuname+="_conflicted";
+                } else {
+                    menuname+="_versioned";
+                    if (l.at(0)->isDir()) {
+                        menuname+="_dir";
+                    }
                 }
             } else {
                 menuname+="_unversioned";

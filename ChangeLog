@@ -1,9 +1,10 @@
-version 0.15.0
+version 0.14.2
     * fixed a crasher which happens (as example) when opening a folder where the svn-admin-area (eg, the .svn subdir)
       is removed
     * german translation corrected
     * spain and russian translation updated
     * direct call to resolve conflicted items with external editor like kdiff3 (default) integrated.
+    * fixed a crasher in KIO protocoll when walking fast trough folders.
 
 version 0.14.1
     * fixed a rare crasher when selected entries are deleted

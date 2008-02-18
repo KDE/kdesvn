@@ -64,6 +64,9 @@ public:
     unsigned int counter()const{return m_notifyCounter;}
     void incCounter(){++m_notifyCounter;}
     virtual void contextProgress(long long int current, long long int max);
+
+    void setCancel(bool value){m_Canceld=value;}
+
 private:
     KIO::kio_svnProtocol *par;
 
@@ -73,6 +76,7 @@ protected:
     bool m_HasChanges;
     bool m_FirstTxDelta;
     PwStorage pws;
+    bool m_Canceld;
 };
 }
 

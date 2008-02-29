@@ -21,14 +21,14 @@ QString LogCache::s_CACHE_FOLDER="logcache";
  */
 LogCache::LogCache()
 {
-    m_BasePath=QDir::homeDirPath();
+    m_BasePath = QDir::HOMEDIR();
     setupCachePath();
 }
 
 LogCache::LogCache(const QString&aBasePath)
 {
     if (aBasePath.isEmpty()) {
-        m_BasePath=QDir::homeDirPath();
+        m_BasePath=QDir::HOMEDIR();
     } else {
         m_BasePath=aBasePath;
     }

@@ -20,8 +20,8 @@ SET(SOURCES
     status.cpp
     targets.cpp
     url.cpp
-    wc.cpp
     version_check.cpp
+    wc.cpp
     lock_entry.cpp
     client_lock.cpp
     info_entry.cpp
@@ -32,7 +32,9 @@ SET(SOURCES
     repositorydata.cpp
     repositorylistener.cpp
     svnstream.cpp
-    svnfilestream.cpp)
+    svnfilestream.cpp
+    cache/LogCache.cpp
+    )
 
 SET(INST_HEADERS
     annotate_line.hpp
@@ -63,7 +65,9 @@ SET(INST_HEADERS
     targets.hpp
     url.hpp
     version_check.hpp
-    wc.hpp)
+    wc.hpp
+    cache/LogCache.hpp
+    )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")
 
@@ -134,6 +138,11 @@ SET(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
 SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
 TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS})
 
+IF (SQLITE_FOUND)
+    TARGET_LINK_LIBRARIES(${svnqt-name} ${SQLITE_LIBRARIES})
+    INCLUDE_DIRECTORIES(SQLITE_INCLUDE_DIR)
+ENDIF (SQLITE_FOUND)
+
 IF (WIN32)
     TARGET_LINK_LIBRARIES( ${svnqt-name} wsock32.lib  )
 ENDIF (WIN32)
@@ -178,4 +187,5 @@ ENDIF(NOT WIN32)
 
 IF (BUILD_TESTS)
   ADD_SUBDIRECTORY(tests)
+  ADD_SUBDIRECTORY(cache/test)
 ENDIF (BUILD_TESTS)

@@ -39,6 +39,7 @@
 #include <svn_cmdline.h>
 
 #include <qstringlist.h>
+#include <qdir.h>
 
 namespace svn
 {
@@ -58,6 +59,16 @@ namespace svn
 
     SvnInit::SvnInit() {
         svn_cmdline_init("svnqt",0);
+        QString BasePath=QDir::homeDirPath();
+        QDir d;
+        if (!d.exists(BasePath)) {
+            d.mkdir(BasePath);
+        }
+        BasePath=BasePath+"/"+".svnqt";
+        if (!d.exists(BasePath)) {
+            d.mkdir(BasePath);
+        }
+
     }
 
     static SvnInit sInit;

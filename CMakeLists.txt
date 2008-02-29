@@ -20,7 +20,7 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde3)
 INCLUDE(MacroEnsureVersion)
 INCLUDE(FindSubversion)
 INCLUDE(SetupCompiler)
-# INCLUDE(FindSqlite)
+INCLUDE(FindSqlite)
 
 IF (HAVE_GCC_VISIBILITY)
     SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")

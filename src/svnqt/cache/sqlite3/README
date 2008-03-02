@@ -1,0 +1,32 @@
+With this driver you can access the files created by sqlite3 through 
+the standard Qt sql module. The driver name is QSQLITE3.
+
+Although there are many other solutions to access such DB files, I think
+that using this driver has some advantages:
+
+--> You use the standard Qt interface so you can reuse exinting code or 
+    switch to or from other DB types quite easily.
+
+--> Soft transition to Qt 4: Qt 4 supports sqlite3, you can prepare your
+    application now.
+
+--> The source of this driver is smaller than any other, you can incorporate
+    it on your application with little overhead and without requiring external
+    libraries.
+
+
+Developer note:
+
+The driver is a merge between the QSQLITE driver in Qt 3 and in Qt 4 beta 1, with
+small tweaks, so I think is quite stable and usable.
+Please report success or failure, thanks
+
+To compile
+
+qmake
+make
+cp sqldrivers/libqsqlite3.so $QTDIR/plugins/sqldrivers (probably as root)
+
+use it as any other Qt sql driver.
+
+Have fun, Stefano !!!

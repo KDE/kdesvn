@@ -17,5 +17,11 @@ int main(int argc,char**argv)
         ++it;
     }
     svn::cache::LogCache a(TESTDBPATH);
+    list = QSqlDatabase::drivers();
+    it = list.begin();
+    while( it != list.end() ) {
+        std::cout << (*it) << std::endl;
+        ++it;
+    }
     return 0;
 }

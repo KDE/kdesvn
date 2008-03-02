@@ -34,6 +34,8 @@ SET(SOURCES
     svnstream.cpp
     svnfilestream.cpp
     cache/LogCache.cpp
+    cache/ReposLog.cpp
+    cache/ReposLog.hpp
     )
 
 IF (SQLITE_FOUND AND NOT QT4_FOUND)

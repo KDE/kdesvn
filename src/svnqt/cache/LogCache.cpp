@@ -29,6 +29,10 @@ public:
     ~ThreadDBStore(){
         QSqlDatabase::removeDatabase(key);
         m_DB=0;
+        QMap<QString,QString>::Iterator it;
+        for (it=reposCacheNames.begin();it!=reposCacheNames.end();++it) {
+            QSqlDatabase::removeDatabase(it.data());
+        }
     }
 
     QSqlDatabase*m_DB;
@@ -60,10 +64,25 @@ public:
         QSqlQuery query("SELECT id from "+QString(SQLMAINTABLE)+" where reposroot='"+reposroot+"' ORDER by id DESC",getMainDB());
         QString db;
         if (query.isActive() && query.next()) {
-            //int next =
             db = query.value(0).toString();
         } else {
             qDebug("Error select: "+query.lastError().text());
+        }
+        if (!db.isEmpty()) {
+            db+=QString(".db");
+            QString fulldb = m_BasePath+"/"+db;
+            QSqlDatabase*_db = QSqlDatabase::addDatabase(SQLTYPE,"tmpdb");
+            _db->setDatabaseName(fulldb);
+            if (!_db->open()) {
+                qWarning("Failed to open new database: " + _db->lastError().text());
+                return db;
+            }
+            QSqlQuery _q(QString::null, _db);
+            _q.exec("BEGIN TRANSACTION;");
+            _q.exec("CREATE TABLE \"logentries\" (\"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
+            _q.exec("CREATE TABLE \"changeditems\" (\"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER PRIMARY KEY(revision,changeditem,action))");
+            _q.exec("Commit;");
+            QSqlDatabase::removeDatabase("tmpdb");
         }
         return db;
     }
@@ -72,9 +91,10 @@ public:
         if (!getMainDB()) {
             return 0;
         }
+        QString dbFile;
         QSqlCursor c(SQLMAINTABLE,true,getMainDB());
         c.select("reposroot='"+reposroot+"'");
-        QString dbFile;
+
         // only the first one
         if ( c.next() ) {
             qDebug( c.value( "reposroot" ).toString() + ": " +
@@ -83,7 +103,30 @@ public:
         }
         if (dbFile.isEmpty()) {
             dbFile = createReposDB(reposroot);
+            if (dbFile.isEmpty()) {
+                return 0;
+            }
         }
+        if (m_mainDB.localData()->reposCacheNames.find(dbFile)!=m_mainDB.localData()->reposCacheNames.end()) {
+            return QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
+        }
+        int i = 0;
+        QString _key = dbFile;
+        while (QSqlDatabase::contains(_key)) {
+            _key = QString("%1-%2").arg(dbFile).arg(i++);
+        }
+        QSqlDatabase*_db = QSqlDatabase::addDatabase(SQLTYPE,_key);
+        QString fulldb = m_BasePath+"/"+dbFile;
+        _db->setDatabaseName(fulldb);
+        if (!_db->isOpen()) {
+            QSqlDatabase::removeDatabase(_key);
+            _key = QString("Failed open database %1: %2").arg(fulldb).arg(_db->lastError().text());
+            qWarning(_key);
+            _db = 0;
+        } else {
+            m_mainDB.localData()->reposCacheNames[dbFile]=_key;
+        }
+        return _db;
     }
 
     QSqlDatabase*getMainDB()
@@ -180,8 +223,6 @@ void LogCache::setupMainDb()
             qWarning("Failed create main database: " + mainDB->lastError().text());
         }
         q.exec("COMMIT;");
-        QString v = m_CacheData->createReposDB("blub");
-        qDebug(v);
     }
 }
 

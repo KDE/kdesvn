@@ -10,12 +10,8 @@
 int main(int argc,char**argv)
 {
     QApplication app(argc,argv);
-    QStringList list = QSqlDatabase::drivers();
-    QStringList::Iterator it = list.begin();
-    while( it != list.end() ) {
-        std::cout << (*it) << std::endl;
-        ++it;
-    }
+    QStringList list;
+    QStringList::Iterator it;
     svn::cache::LogCache a(TESTDBPATH);
     list = QSqlDatabase::drivers();
     it = list.begin();

@@ -269,7 +269,7 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
     makeLog(start,end,peg,k->fullName(),list_files,limit);
 }
 
-svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const QString&which,bool list_files,
+svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,
         int limit,QWidget*parent)
 {
     svn::SharedPointer<svn::LogEntriesMap> logs = new svn::LogEntriesMap;
@@ -278,11 +278,12 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
 
     bool follow = Kdesvnsettings::log_follows_nodes();
 
+    kdDebug()<<"Get logs for "<< which<<endl;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,(parent?parent:m_Data->m_ParentList->realWidget()),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->log(which,start,end,*logs,list_files,!follow,limit);
+        m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit);
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return 0;
@@ -310,7 +311,7 @@ bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStrin
         }
         root = inf.reposRoot();
     }
-    svn::SharedPointer<svn::LogEntriesMap> log = getLog(r,r,root,true,1);
+    svn::SharedPointer<svn::LogEntriesMap> log = getLog(r,r,peg,root,true,1);
     if (log) {
         if (log->find(r.revnum())!=log->end()) {
             t = (*log)[r.revnum()];
@@ -422,8 +423,8 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
         return;
     }
     QString reposRoot = info.reposRoot();
-
-    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,which,list_files,limit);
+    kdDebug()<<"getting logs..."<<endl;
+    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,peg,which,list_files,limit);
     if (!logs) return;
     bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
     if (need_modal||!m_Data->m_LogDialog) {
@@ -438,7 +439,7 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
         m_Data->m_LogDialog->dispLog(logs,info.url().mid(reposRoot.length()),reposRoot,
                      (
                       peg==svn::Revision::UNDEFINED?
-                         (svn::Url::isValid(which)?svn::Revision::HEAD:svn::Revision::WORKING):
+                         (svn::Url::isValid(which)?svn::Revision::HEAD:svn::Revision::UNDEFINED):
                              peg
                      ),which);
         if (need_modal) {

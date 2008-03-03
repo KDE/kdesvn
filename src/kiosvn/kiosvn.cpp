@@ -759,7 +759,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
     for (unsigned j = 0; j<urls.count();++j) {
         logs = 0;
         try {
-            logs = m_pData->m_Svnclient->log(makeSvnUrl(urls[j]),start,end,true,true,0);
+            logs = m_pData->m_Svnclient->log(makeSvnUrl(urls[j]),start,end,svn::Revision::UNDEFINED,true,true,0);
         } catch (svn::ClientException e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             break;

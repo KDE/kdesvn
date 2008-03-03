@@ -382,18 +382,21 @@ namespace svn
   Client_impl::log (const Path& path, const Revision & revisionStart,
        const Revision & revisionEnd,
        LogEntriesMap&log_target,
+       const Revision & revisionPeg,
        bool discoverChangedPaths,
        bool strictNodeHistory,int limit) throw (ClientException)
   {
     Targets target(path);
+    qDebug("Log for "+QString(path)+" on peg "+revisionPeg.toString());
     Pool pool;
     sBaton l_baton;
     l_baton.m_context=m_context;
     l_baton.m_data = &log_target;
 
     svn_error_t *error;
-    error = svn_client_log2 (
+    error = svn_client_log3 (
       target.array (pool),
+      revisionPeg.revision(),
       revisionStart.revision (),
       revisionEnd.revision (),
       limit,
@@ -413,8 +416,9 @@ namespace svn
 
   LogEntriesPtr
   Client_impl::log (const Path& path, const Revision & revisionStart,
-               const Revision & revisionEnd, bool discoverChangedPaths,
-               bool strictNodeHistory,int limit) throw (ClientException)
+                    const Revision & revisionEnd, const Revision & revisionPeg,
+                    bool discoverChangedPaths,
+                    bool strictNodeHistory,int limit) throw (ClientException)
   {
     Targets target(path);
     Pool pool;
@@ -424,9 +428,11 @@ namespace svn
     l_baton.m_data = entries;
 
     svn_error_t *error;
+    qDebug("Log on peg "+revisionPeg.toString());
 
-    error = svn_client_log2 (
+    error = svn_client_log3 (
       target.array (pool),
+      revisionPeg.revision(),
       revisionStart.revision (),
       revisionEnd.revision (),
       limit,

@@ -91,7 +91,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
-        m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);
+        m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
     } catch (svn::ClientException ce) {
         kdDebug()<<ce.msg() << endl;
         KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1").arg(ce.msg()));

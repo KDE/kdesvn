@@ -2917,7 +2917,7 @@ void kdesvnfilelist::slotMakeRangeLog()
     int i = dlg->exec();
     if (i==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_SvnWrapper->makeLog(r.first,r.second,(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision), what,list,0);
+        m_SvnWrapper->makeLog(r.first,r.second,(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision), what,list,0);
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
 }
@@ -2963,7 +2963,7 @@ void kdesvnfilelist::slotMakePartTree()
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
 
     if (i==QDialog::Accepted) {
-        svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
+        svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
         m_SvnWrapper->makeTree(what,rev,r.first,r.second);
     }
 }
@@ -2991,7 +2991,7 @@ void kdesvnfilelist::slotMakeLog()
     svn::Revision end(svn::Revision::START);
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
     int l = Kdesvnsettings::self()->maximum_displayed_logs();
-    m_SvnWrapper->makeLog(start,end,(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision),what,list,l);
+    m_SvnWrapper->makeLog(start,end,(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision),what,list,l);
 }
 
 const svn::Revision& kdesvnfilelist::remoteRevision()const

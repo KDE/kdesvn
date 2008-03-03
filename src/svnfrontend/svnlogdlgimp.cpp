@@ -237,6 +237,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
 {
     m_peg = peg;
     m_PegUrl = pegUrl;
+    m_first = m_second = 0;
     m_startRevButton->setNoWorking(m_PegUrl.isUrl());
     m_endRevButton->setNoWorking(m_PegUrl.isUrl());
     if (!m_PegUrl.isUrl() || Kdesvnsettings::remote_special_properties()) {
@@ -523,8 +524,9 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStr
 
 void SvnLogDlgImp::slotGetLogs()
 {
+    kdDebug()<<"Displog: "<<m_peg.toString()<<endl;
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
-            m_endRevButton->revision(),
+            m_endRevButton->revision(),m_peg,
             _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,this);
     if (lm) {
         dispLog(lm);
@@ -538,7 +540,7 @@ void SvnLogDlgImp::slotListEntries()
         buttonListFiles->setEnabled(false);
         return;
     }
-    svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(it->rev(),it->rev(),_name,true,0);
+    svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(it->rev(),it->rev(),it->rev(),_name,true,0);
     if (!_log) {
         return;
     }

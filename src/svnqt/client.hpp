@@ -477,8 +477,10 @@ namespace svn
      * @return a vector with log entries
      */
     virtual LogEntriesPtr
-    log (const Path& path, const Revision & revisionStart,
+    log (const Path& path,
+         const Revision & revisionStart,
          const Revision & revisionEnd,
+         const Revision & revisionPeg,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
     /**
@@ -502,6 +504,7 @@ namespace svn
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          LogEntriesMap&target,
+         const Revision & revisionPeg=Revision::UNDEFINED,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
 

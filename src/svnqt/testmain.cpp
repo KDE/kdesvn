@@ -41,7 +41,7 @@ int main(int,char**)
     svn::LogEntriesMap m_OldHistory;
 
     try {
-        m_Svnclient->log("http://www.alwins-world.de/repos/kdesvn/trunk",svn::Revision::HEAD,20,m_OldHistory,true,false,0);
+        m_Svnclient->log("http://www.alwins-world.de/repos/kdesvn/trunk",svn::Revision::HEAD,20,m_OldHistory,svn::Revision::UNDEFINED,true,false,0);
     } catch (svn::ClientException ce) {
         gotit = false;
     }

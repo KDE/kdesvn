@@ -1,6 +1,10 @@
 #ifndef _REPOS_LOG_HPP
 #define _REPOS_LOG_HPP
 
+#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/revision.hpp"
+#include <qstring.h>
+
 class QSqlDatabase;
 
 namespace svn
@@ -11,18 +15,32 @@ class Client;
 namespace cache
 {
 
-class ReposLog
+class SVNQT_EXPORT ReposLog
 {
 protected:
     svn::Client*m_Client;
     QSqlDatabase*m_Database;
+    QString m_ReposRoot;
+    svn::Revision m_latestHead;
 
 public:
-    ReposLog(svn::Client*,QSqlDatabase*);
+    ReposLog(svn::Client*aClient,const QString&aRepository=QString::null);
+
+    QString ReposRoot() const
+    {
+        return m_ReposRoot;
+    }
+
+    QSqlDatabase* Database() const
+    {
+        return m_Database;
+    }
+    svn::Revision latestHeadRev();
+    svn::Revision latestCachedRev();
+
 };
 
 }
 }
 
 #endif
-

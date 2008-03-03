@@ -7,6 +7,8 @@
 #include <qthreadstorage.h>
 #include <qmap.h>
 
+#include "src/svnqt/path.hpp"
+
 #ifndef NO_SQLITE3
 #include "sqlite3/qsql_sqlite3.h"
 #define SQLTYPE "QSQLITE3"
@@ -19,6 +21,8 @@
 
 namespace svn {
 namespace cache {
+
+LogCache* LogCache::mSelf = 0;
 
 class ThreadDBStore
 {
@@ -54,13 +58,13 @@ public:
         }
     }
 
-    QString createReposDB(const QString&reposroot) {
+    QString createReposDB(const svn::Path&reposroot) {
         QMutexLocker locker( &m_singleDbMutex );
         QSqlQuery query1(QString::null,getMainDB());
         QString q("insert into "+QString(SQLMAINTABLE)+" (reposroot) VALUES('"+reposroot+"')");
-        query1.exec("BEGIN TRANSACTION;");
+        getMainDB()->transaction();
         query1.exec(q);
-        query1.exec("commit;");
+        getMainDB()->commit();
         QSqlQuery query("SELECT id from "+QString(SQLMAINTABLE)+" where reposroot='"+reposroot+"' ORDER by id DESC",getMainDB());
         QString db;
         if (query.isActive() && query.next()) {
@@ -69,31 +73,34 @@ public:
             qDebug("Error select: "+query.lastError().text());
         }
         if (!db.isEmpty()) {
-            db+=QString(".db");
-            QString fulldb = m_BasePath+"/"+db;
+            //db+=QString(".db");
+            QString fulldb = m_BasePath+"/"+db+".db";
             QSqlDatabase*_db = QSqlDatabase::addDatabase(SQLTYPE,"tmpdb");
             _db->setDatabaseName(fulldb);
             if (!_db->open()) {
                 qWarning("Failed to open new database: " + _db->lastError().text());
                 return db;
             }
+            _db->transaction();
             QSqlQuery _q(QString::null, _db);
-            _q.exec("BEGIN TRANSACTION;");
             _q.exec("CREATE TABLE \"logentries\" (\"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
-            _q.exec("CREATE TABLE \"changeditems\" (\"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER PRIMARY KEY(revision,changeditem,action))");
-            _q.exec("Commit;");
+            _q.exec("CREATE TABLE \"changeditems\" (\"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, PRIMARY KEY(revision,changeditem,action))");
+            _db->commit();
+
             QSqlDatabase::removeDatabase("tmpdb");
         }
         return db;
     }
 
-    QSqlDatabase*getReposDB(const QString&reposroot) {
+    QSqlDatabase*getReposDB(const svn::Path&reposroot) {
         if (!getMainDB()) {
             return 0;
         }
+        // make sure path is correct eg. without traling slashes.
         QString dbFile;
         QSqlCursor c(SQLMAINTABLE,true,getMainDB());
-        c.select("reposroot='"+reposroot+"'");
+        c.select("reposroot='"+reposroot.native()+"'");
+        qDebug("Check for path: "+reposroot.native());
 
         // only the first one
         if ( c.next() ) {
@@ -115,15 +122,22 @@ public:
         while (QSqlDatabase::contains(_key)) {
             _key = QString("%1-%2").arg(dbFile).arg(i++);
         }
+        qDebug("The repository key is now: %s",_key.latin1());
         QSqlDatabase*_db = QSqlDatabase::addDatabase(SQLTYPE,_key);
-        QString fulldb = m_BasePath+"/"+dbFile;
+        if (!_db) {
+            qWarning("Got no db!");
+            return 0;
+        }
+        QString fulldb = m_BasePath+"/"+dbFile+".db";
         _db->setDatabaseName(fulldb);
-        if (!_db->isOpen()) {
-            QSqlDatabase::removeDatabase(_key);
+        qDebug("try database open %s",fulldb.latin1());
+        if (!_db->open()) {
+            qDebug("no DB opened");
             _key = QString("Failed open database %1: %2").arg(fulldb).arg(_db->lastError().text());
             qWarning(_key);
             _db = 0;
         } else {
+            qDebug("Insert into map");
             m_mainDB.localData()->reposCacheNames[dbFile]=_key;
         }
         return _db;
@@ -172,6 +186,10 @@ LogCache::LogCache()
 
 LogCache::LogCache(const QString&aBasePath)
 {
+    if (mSelf) {
+        delete mSelf;
+    }
+    mSelf=this;
     if (aBasePath.isEmpty()) {
         m_BasePath=QDir::HOMEDIR();
     } else {
@@ -218,13 +236,35 @@ void LogCache::setupMainDb()
         qWarning("Failed to open main database: " + (mainDB?mainDB->lastError().text():"No database object."));
     } else {
         QSqlQuery q(QString::null, mainDB);
-        q.exec("BEGIN TRANSACTION;");
+        mainDB->transaction();
         if (!q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY NOT NULL);")) {
             qWarning("Failed create main database: " + mainDB->lastError().text());
         }
-        q.exec("COMMIT;");
+        mainDB->commit();
     }
 }
 
 }
+}
+
+
+/*!
+    \fn svn::cache::LogCache::self()
+ */
+svn::cache::LogCache* svn::cache::LogCache::self()
+{
+    if (!mSelf) {
+        mSelf=new LogCache();
+    }
+    return mSelf;
+}
+
+
+/*!
+    \fn svn::cache::LogCache::reposDb()
+ */
+QSqlDatabase* svn::cache::LogCache::reposDb(const QString&aRepository)
+{
+    qDebug("reposDB");
+    return m_CacheData->getReposDB(aRepository);
 }

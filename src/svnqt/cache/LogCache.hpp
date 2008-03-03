@@ -7,6 +7,8 @@
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/shared_pointer.hpp"
 
+class QSqlDatabase;
+
 namespace svn {
     namespace cache {
 
@@ -18,15 +20,19 @@ namespace svn {
             svn::SharedPointer<LogCacheData> m_CacheData;
 
         protected:
+            LogCache();
+            static LogCache* mSelf;
             QString m_BasePath;
             static QString s_CACHE_FOLDER;
             void setupCachePath();
             void setupMainDb();
 
         public:
-             LogCache();
-             LogCache(const QString&aBasePath);
-             virtual ~LogCache();
+            ///! should used for testing only!
+            LogCache(const QString&aBasePath);
+            virtual ~LogCache();
+            static LogCache* self();
+            QSqlDatabase* reposDb(const QString&aRepository);
         };
     }
 }

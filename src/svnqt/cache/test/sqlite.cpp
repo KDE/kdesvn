@@ -7,6 +7,7 @@
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/cache/test/testconfig.h"
+#include "src/svnqt/svnqttypes.hpp"
 
 int main(int argc,char**argv)
 {
@@ -50,5 +51,7 @@ int main(int argc,char**argv)
     {
         std::cerr << "Exception catched"<<std::endl;
     }
+    svn::LogEntriesMap lm;
+    rl.simpleLog(lm,1,svn::Revision::HEAD,false);
     return 0;
 }

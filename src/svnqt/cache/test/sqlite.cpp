@@ -7,6 +7,7 @@
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/cache/test/testconfig.h"
+#include "src/svnqt/cache/DatabaseException.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 
 int main(int argc,char**argv)
@@ -43,6 +44,7 @@ int main(int argc,char**argv)
         ++it;
     }
     //std::cerr << rl.latestHeadRev().toString()<<std::endl;
+    /*
     svn::cache::ReposLog rl2(m_Svnclient,"http://www.alwins-world.de/repos/");
     try {
         std::cerr << rl2.latestCachedRev().toString()<<std::endl;
@@ -51,7 +53,25 @@ int main(int argc,char**argv)
     {
         std::cerr << "Exception catched"<<std::endl;
     }
+    */
+#if 1
     svn::LogEntriesMap lm;
-    rl.simpleLog(lm,1,svn::Revision::HEAD,false);
+    try {
+        rl.simpleLog(lm,1,1000,false);
+    }
+    catch (const svn::cache::DatabaseException&cl)
+    {
+        std::cerr << cl.msg() <<std::endl;
+    }
+    catch (const svn::Exception&ce)
+    {
+        std::cerr << ce.msg() <<std::endl;
+    }
+#endif
+    svn::Revision r("{2006-09-27}");
+    std::cout << rl.date2numberRev(r).toString()<<std::endl;
+    r = svn::Revision::HEAD;
+    std::cout << rl.date2numberRev(r).toString()<<std::endl;
+
     return 0;
 }

@@ -2,7 +2,7 @@
 #define _REPOS_LOG_HPP
 
 #include "svnqt/svnqt_defines.hpp"
-#include "src/svnqt/svnqttypes.hpp"
+#include "svnqt/svnqttypes.hpp"
 #include "svnqt/revision.hpp"
 #include <qstring.h>
 
@@ -40,6 +40,7 @@ public:
     svn::Revision latestCachedRev();
     //! simple retrieves logentries
     bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end,bool force_headupdate);
+    svn::Revision date2numberRev(const svn::Revision&);
 };
 
 }

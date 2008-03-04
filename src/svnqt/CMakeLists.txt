@@ -35,7 +35,6 @@ SET(SOURCES
     svnfilestream.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp
-    cache/ReposLog.hpp
     )
 
 IF (SQLITE_FOUND AND NOT QT4_FOUND)
@@ -51,6 +50,12 @@ ENDIF (SQLITE_FOUND AND NOT QT4_FOUND)
 IF (SQLITE_FOUND AND QT4_FOUND)
     ADD_DEFINITIONS(-DNO_SQLITE3)
 ENDIF (SQLITE_FOUND AND QT4_FOUND)
+
+SET(CACHEINST_HEADERS
+    cache/LogCache.hpp
+    cache/ReposLog.hpp
+    cache/DatabaseException.hpp
+)
 
 SET(INST_HEADERS
     annotate_line.hpp
@@ -82,10 +87,10 @@ SET(INST_HEADERS
     url.hpp
     version_check.hpp
     wc.hpp
-    cache/LogCache.hpp
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")
+SET(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
 
 IF(QT4_FOUND)
     MESSAGE(STATUS "Qt: ${QT_LIBRARY_DIR}")
@@ -176,6 +181,7 @@ ENDIF (BUILD_TESTS)
 IF(NOT WIN32)
     INSTALL(TARGETS ${svnqt-name} DESTINATION ${LIB_INSTALL_DIR})
     INSTALL(FILES ${INST_HEADERS} DESTINATION include/${svnqt-name})
+    INSTALL(FILES ${CACHEINST_HEADERS} DESTINATION include/${svnqt-name}/cache)
 
     # and a libtool file
 #    GET_TARGET_PROPERTY(_target_location ${svnqt-name} LOCATION)

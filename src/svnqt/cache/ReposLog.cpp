@@ -4,8 +4,10 @@
 #include "src/svnqt/info_entry.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/client.hpp"
+#include "src/svnqt/cache/DatabaseException.hpp"
 
 #include <qsqldatabase.h>
+#include <qsqlcursor.h>
 
 /*!
     \fn svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&)
@@ -91,13 +93,9 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&st
 
     svn::Revision _latest=latestCachedRev();
     qDebug("Latest cached rev: %i",_latest.revnum());
-    /*
-    if (start==svn::Revision::HEAD||end==svn::Revision::HEAD||_latest==svn::Revision::UNDEFINED) {
-        force_headupdate=true;
-    }
-    */
 
-    ///@todo insert check if start is later than end, transform revisions in dateformat to a number (via select)
+    ///@todo insert check if start is later than end, transform revisions in dateformat to a number (via select and/or svn::Client::log)
+
     svn::Revision _rstart=_latest.revnum()+1;
     svn::Revision _rend = force_headupdate?svn::Revision::HEAD:end;
     if (_rend==svn::Revision::UNDEFINED) {
@@ -112,29 +110,106 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&st
     if (_rend==svn::Revision::HEAD) {
         _rend=latestHeadRev();
     }
+    QSqlCursor bcur("logentries",true,m_Database);
+    QSqlRecord *buffer;
     if (_rend==svn::Revision::HEAD||_rend.revnum()>_latest.revnum()) {
+        qDebug("Retrieving from network.");
         if (!m_Client->log(m_ReposRoot,_rstart,_rend,_internal,svn::Revision::UNDEFINED,true,false)) {
             return false;
         }
         LogEntriesMap::ConstIterator it=_internal.begin();
-        int j = 0;
-        m_Database->transaction();
         QSqlQuery _q(QString::null, m_Database);
         QString q;
+        QSqlCursor cur("changeditems",true,m_Database);
 
         for (;it!=_internal.end();++it) {
+            m_Database->transaction();
             svn::DateTime dt(it.data().date);
-            q=QString("insert into logentries (revision,date,author,message) values('%1','%2','%3','%4')").arg(it.data().revision).
-                                                                                arg(dt.toTime_t()).
-                                                                                arg(it.data().author).
-                                                                                arg(it.data().message);
-            _q.exec(q);
-            if (++j>100) {
-                m_Database->commit();
-                m_Database->transaction();
+            int j = it.data().revision;
+            qDebug("Insert revsion %i",j);
+            buffer=bcur.primeInsert();
+            buffer->setValue("revision",j);
+            buffer->setValue("date",dt.toTime_t());
+            buffer->setValue("author",it.data().author);
+            buffer->setValue("message",it.data().message);
+            bcur.insert();
+            if (bcur.lastError().type()!=QSqlError::None) {
+                m_Database->rollback();
+                throw DatabaseException(QString("Could not insert values: ")+bcur.lastError().text());
             }
+            svn::LogChangePathEntries::ConstIterator cpit = it.data().changedPaths.begin();
+            for (;cpit!=it.data().changedPaths.end();++cpit){
+                buffer = cur.primeInsert();
+                buffer->setValue("revision",j);
+                buffer->setValue("changeditem",(*cpit).path);
+                buffer->setValue("action",(*cpit).action);
+                buffer->setValue("copyfrom",(*cpit).copyFromPath);
+                buffer->setValue("copyfromrev",Q_LLONG((*cpit).copyFromRevision));
+                cur.insert();
+                if (cur.lastError().type()!=QSqlError::None) {
+                    m_Database->rollback();
+                    throw DatabaseException(QString("Could not insert values: ")+cur.lastError().text());
+                }
+            }
+            m_Database->commit();
         }
-        m_Database->commit();
     }
     return false;
+}
+
+
+/*!
+    \fn svn::cache::ReposLog::date2numberRev(const svn::Revision&)
+ */
+svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
+{
+    if (aRev!=svn::Revision::DATE) {
+        return aRev;
+    }
+    if (!m_Database) {
+        return svn::Revision::UNDEFINED;
+    }
+    svn::DateTime dt(aRev.date());
+    unsigned int value = dt.toTime_t();
+    QSqlCursor bcur("logentries",true,m_Database);
+    QSqlIndex order = bcur.index("revision");
+    order.setDescending(0,true);
+    /// @todo as I understood - the resulting revision should always the last one BEFORE this date...
+    //QString q=QString("date>='%1'").arg(value);
+    //qDebug(q);
+    bcur.select(order);
+    if (bcur.lastError().type()!=QSqlError::None) {
+        qDebug(bcur.lastError().text());
+    }
+    bool must_remote=true;
+    if (bcur.next()) {
+        QDateTime tdt;
+        tdt.setTime_t(bcur.value("date").toInt());
+        QDateTime t2(dt);
+        if (tdt >= t2) {
+            must_remote=false;
+        }
+    }
+    if (must_remote) {
+        svn::InfoEntries e = (m_Client->info(m_ReposRoot,false,aRev,aRev));;
+        if (e.count()<1||e[0].reposRoot().isEmpty()) {
+            return aRev;
+        }
+        return e[0].revision();
+    }
+    QString q=QString("date<'%1'").arg(value);
+    bcur.select(q,order);
+    qDebug(q);
+    if (bcur.lastError().type()!=QSqlError::None) {
+        qDebug(bcur.lastError().text());
+    }
+    if (bcur.next()) {
+        return bcur.value( "revision" ).toInt();
+    }
+    // not found...
+    svn::InfoEntries e = (m_Client->info(m_ReposRoot,false,svn::Revision::HEAD,svn::Revision::HEAD));;
+    if (e.count()<1||e[0].reposRoot().isEmpty()) {
+        return aRev;
+    }
+    return e[0].revision();
 }

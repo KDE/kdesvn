@@ -189,6 +189,7 @@ namespace svn
     bool operator==(const Revision&)const;
     bool operator!=(const svn_opt_revision_kind)const;
     bool operator==(const svn_opt_revision_kind)const;
+    bool operator==(int)const;
 
     bool operator!()const;
     bool operator!();

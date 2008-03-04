@@ -144,6 +144,7 @@ namespace svn
     SetRFC822Date (const char* date);
 
     void setAprTime(apr_time_t aTime);
+    unsigned int toTime_t();
   };
 }
 

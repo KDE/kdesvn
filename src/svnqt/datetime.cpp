@@ -141,8 +141,10 @@ namespace svn
   }
 }
 
-/* -----------------------------------------------------------------
- * local variables:
- * eval: (load-file "../../rapidsvn-dev.el")
- * end:
+/*!
+    \fn svn::DateTime::toTime_t()
  */
+unsigned int svn::DateTime::toTime_t()
+{
+    return m_time.toTime_t();
+}

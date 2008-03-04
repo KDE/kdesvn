@@ -235,6 +235,13 @@ namespace svn
     return true;
   }
 
+  bool Revision::operator==(int value)const
+  {
+    if (m_revision.kind!=svn_opt_revision_number || value!=revnum()) {
+        return false;
+    }
+  }
+
   bool Revision::operator!=(const svn_opt_revision_kind t)const
   {
     return kind()!=t;

@@ -95,6 +95,16 @@ namespace svn
   {
     return m_time != dateTime.m_time;
   }
+  const bool
+  DateTime::operator<=(const DateTime&dateTime)const
+  {
+      return *this==dateTime||*this<dateTime;
+  }
+  const bool
+  DateTime::operator>=(const DateTime&dateTime)const
+  {
+      return *this==dateTime||*this>dateTime;
+  }
 
   const bool
   DateTime::IsValid () const
@@ -123,6 +133,11 @@ namespace svn
     return m_time;
   }
 
+  const QDateTime&DateTime::toQDateTime()const
+  {
+      return *this;
+  }
+
   void DateTime::setAprTime(apr_time_t aTime)
   {
 #if QT_VERSION < 0x040000
@@ -144,7 +159,12 @@ namespace svn
 /*!
     \fn svn::DateTime::toTime_t()
  */
-unsigned int svn::DateTime::toTime_t()
+unsigned int svn::DateTime::toTime_t()const
 {
     return m_time.toTime_t();
+}
+
+void svn::DateTime::setTime_t(unsigned int sec)
+{
+    m_time.setTime_t(sec);
 }

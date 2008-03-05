@@ -58,6 +58,34 @@ public:
         }
     }
 
+    bool checkReposDb(QSqlDatabase*aDb)
+    {
+        if (!aDb) {
+            return false;
+        }
+        if (!aDb->open()) {
+            qWarning("Failed to open new database: " + aDb->lastError().text());
+            return false;
+        }
+        QStringList list = aDb->tables();
+        QSqlQuery _q(QString::null, aDb);
+        if (list.find("logentries")==list.end()) {
+            aDb->transaction();
+            _q.exec("CREATE TABLE \"logentries\" (\"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
+            aDb->commit();
+        }
+        if (list.find("changeditems")==list.end()) {
+            aDb->transaction();
+            _q.exec("CREATE TABLE \"changeditems\" (\"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, PRIMARY KEY(revision,changeditem,action))");
+            aDb->commit();
+        }
+        list = aDb->tables();
+        if (list.find("logentries")==list.end() || list.find("changeditems")==list.end()) {
+            return false;
+        }
+        return true;
+    }
+
     QString createReposDB(const svn::Path&reposroot) {
         QMutexLocker locker( &m_singleDbMutex );
         QSqlQuery query1(QString::null,getMainDB());
@@ -73,20 +101,11 @@ public:
             qDebug("Error select: "+query.lastError().text());
         }
         if (!db.isEmpty()) {
-            //db+=QString(".db");
             QString fulldb = m_BasePath+"/"+db+".db";
             QSqlDatabase*_db = QSqlDatabase::addDatabase(SQLTYPE,"tmpdb");
             _db->setDatabaseName(fulldb);
-            if (!_db->open()) {
-                qWarning("Failed to open new database: " + _db->lastError().text());
-                return db;
+            if (!checkReposDb(_db)) {
             }
-            _db->transaction();
-            QSqlQuery _q(QString::null, _db);
-            _q.exec("CREATE TABLE \"logentries\" (\"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
-            _q.exec("CREATE TABLE \"changeditems\" (\"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, PRIMARY KEY(revision,changeditem,action))");
-            _db->commit();
-
             QSqlDatabase::removeDatabase("tmpdb");
         }
         return db;
@@ -96,6 +115,7 @@ public:
         if (!getMainDB()) {
             return 0;
         }
+        bool checkDone = false;
         // make sure path is correct eg. without traling slashes.
         QString dbFile;
         QSqlCursor c(SQLMAINTABLE,true,getMainDB());
@@ -113,6 +133,7 @@ public:
             if (dbFile.isEmpty()) {
                 return 0;
             }
+            checkDone=true;
         }
         if (m_mainDB.localData()->reposCacheNames.find(dbFile)!=m_mainDB.localData()->reposCacheNames.end()) {
             return QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
@@ -131,7 +152,7 @@ public:
         QString fulldb = m_BasePath+"/"+dbFile+".db";
         _db->setDatabaseName(fulldb);
         qDebug("try database open %s",fulldb.latin1());
-        if (!_db->open()) {
+        if (!checkReposDb(_db)) {
             qDebug("no DB opened");
             _key = QString("Failed open database %1: %2").arg(fulldb).arg(_db->lastError().text());
             qWarning(_key);

@@ -104,6 +104,10 @@ namespace svn
     operator!=(const DateTime&dateTime)const;
     const bool
     operator==(const DateTime&dateTime)const;
+    const bool
+    operator<=(const DateTime&dateTime)const;
+    const bool
+    operator>=(const DateTime&dateTime)const;
 
 
     /**
@@ -122,6 +126,11 @@ namespace svn
      * @return QDateTime object
      */
     operator const QDateTime&()const;
+
+    /**
+     * @return QDateTime object
+     */
+    const QDateTime&toQDateTime()const;
 
     /**
      * @param format format string
@@ -144,7 +153,8 @@ namespace svn
     SetRFC822Date (const char* date);
 
     void setAprTime(apr_time_t aTime);
-    unsigned int toTime_t();
+    unsigned int toTime_t()const;
+    void setTime_t(unsigned int sec);
   };
 }
 

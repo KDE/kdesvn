@@ -56,8 +56,13 @@ namespace svn
 
   Revision::Revision (const svn_revnum_t revnum)
   {
-    m_revision.kind = svn_opt_revision_number;
-    m_revision.value.number = revnum;
+      if (revnum<0) {
+        m_revision.kind = svn_opt_revision_unspecified;
+        m_revision.value.number = 0;
+      } else {
+        m_revision.kind = svn_opt_revision_number;
+        m_revision.value.number = revnum;
+      }
   }
 
   Revision::Revision (const svn_opt_revision_kind kind)

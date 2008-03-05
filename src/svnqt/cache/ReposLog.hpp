@@ -7,6 +7,7 @@
 #include <qstring.h>
 
 class QSqlDatabase;
+class QSqlCursor;
 
 namespace svn
 {
@@ -23,6 +24,10 @@ protected:
     QSqlDatabase*m_Database;
     QString m_ReposRoot;
     svn::Revision m_latestHead;
+    //! internal insert.
+    /*! QSqlCursor as parameter so we may generate them outside a loop for re-usage.
+     */
+    bool insertLogEntry(const svn::LogEntry&,QSqlCursor&,QSqlCursor&);
 
 public:
     ReposLog(svn::Client*aClient,const QString&aRepository=QString::null);

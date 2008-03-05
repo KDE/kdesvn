@@ -79,11 +79,12 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
 /*!
     \fn svn::cache::ReposLog::simpleLog(const svn::Revision&start,const svn::Revision&end,LogEntriesMap&target)
  */
-bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end,bool force_headupdate)
+bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end,bool force_headupdate)
 {
     if (!m_Client||m_ReposRoot.isEmpty()) {
         return false;
     }
+    target.clear();
     if (!m_Database) {
         m_Database = LogCache::self()->reposDb(m_ReposRoot);
         if (!m_Database) {
@@ -94,14 +95,21 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&st
     svn::Revision _latest=latestCachedRev();
     qDebug("Latest cached rev: %i",_latest.revnum());
 
-    ///@todo insert check if start is later than end, transform revisions in dateformat to a number (via select and/or svn::Client::log)
+    svn::Revision start=date2numberRev(_start);
+    svn::Revision end=date2numberRev(_end);
 
+    // both should now one of START, HEAD or NUMBER
+    if (start==svn::Revision::HEAD || (end==svn::Revision::NUMBER && start==svn::Revision::NUMBER && start.revnum()>end.revnum())) {
+        svn::Revision tmp = start;
+        start = end;
+        end = tmp;
+    }
+    qDebug("End: "+end.toString());
     svn::Revision _rstart=_latest.revnum()+1;
     svn::Revision _rend = force_headupdate?svn::Revision::HEAD:end;
     if (_rend==svn::Revision::UNDEFINED) {
         _rend=svn::Revision::HEAD;
     }
-    LogEntriesMap _internal;
     // no catch - exception should go outside.
     if (_rstart==0){
         _rstart = 1;
@@ -110,48 +118,56 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&st
     if (_rend==svn::Revision::HEAD) {
         _rend=latestHeadRev();
     }
+    QSqlCursor cur("changeditems",true,m_Database);
     QSqlCursor bcur("logentries",true,m_Database);
-    QSqlRecord *buffer;
+
     if (_rend==svn::Revision::HEAD||_rend.revnum()>_latest.revnum()) {
+        LogEntriesMap _internal;
         qDebug("Retrieving from network.");
         if (!m_Client->log(m_ReposRoot,_rstart,_rend,_internal,svn::Revision::UNDEFINED,true,false)) {
             return false;
         }
         LogEntriesMap::ConstIterator it=_internal.begin();
-        QSqlQuery _q(QString::null, m_Database);
-        QString q;
-        QSqlCursor cur("changeditems",true,m_Database);
 
         for (;it!=_internal.end();++it) {
-            m_Database->transaction();
-            svn::DateTime dt(it.data().date);
-            int j = it.data().revision;
-            qDebug("Insert revsion %i",j);
-            buffer=bcur.primeInsert();
-            buffer->setValue("revision",j);
-            buffer->setValue("date",dt.toTime_t());
-            buffer->setValue("author",it.data().author);
-            buffer->setValue("message",it.data().message);
-            bcur.insert();
-            if (bcur.lastError().type()!=QSqlError::None) {
-                m_Database->rollback();
-                throw DatabaseException(QString("Could not insert values: ")+bcur.lastError().text());
-            }
-            svn::LogChangePathEntries::ConstIterator cpit = it.data().changedPaths.begin();
-            for (;cpit!=it.data().changedPaths.end();++cpit){
-                buffer = cur.primeInsert();
-                buffer->setValue("revision",j);
-                buffer->setValue("changeditem",(*cpit).path);
-                buffer->setValue("action",(*cpit).action);
-                buffer->setValue("copyfrom",(*cpit).copyFromPath);
-                buffer->setValue("copyfromrev",Q_LLONG((*cpit).copyFromRevision));
-                cur.insert();
-                if (cur.lastError().type()!=QSqlError::None) {
-                    m_Database->rollback();
-                    throw DatabaseException(QString("Could not insert values: ")+cur.lastError().text());
-                }
-            }
-            m_Database->commit();
+            insertLogEntry((*it),bcur,cur);
+        }
+    }
+    qDebug("End: "+end.toString());
+    if (end==svn::Revision::HEAD) {
+        end = latestCachedRev();
+    }
+    if (start==svn::Revision::HEAD) {
+        start=latestCachedRev();
+    }
+
+    QString lim = QString("revision<=%1 and revision>=%2").arg(end.revnum()).arg(start.revnum());
+    qDebug(lim);
+    if (!bcur.select(lim)) {
+        qDebug(bcur.lastError().text());
+        throw DatabaseException(QString("Could not retrieve values: ")+bcur.lastError().text());
+        return false;
+    }
+    while(bcur.next()) {
+        Q_LLONG revision= bcur.value("revision").toLongLong();
+        lim=QString("revision=%1").arg(revision);
+        if (!cur.select(lim)) {
+            qDebug(cur.lastError().text());
+            throw DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text());
+            return false;
+        }
+        target[revision].revision=revision;
+        target[revision].author=bcur.value("author").toString();
+        target[revision].date=bcur.value("date").toLongLong();
+        target[revision].message=bcur.value("message").toString();
+        while(cur.next()) {
+            char c = cur.value("action").toInt();
+            LogChangePathEntry lcp;
+            lcp.action=c;
+            lcp.copyFromPath=cur.value("copyfrom").toString();
+            lcp.path= cur.value("changeditem").toString();
+            lcp.copyFromRevision=cur.value("copyfromrev").toLongLong();
+            target[revision].changedPaths.push_back(lcp);
         }
     }
     return false;
@@ -169,8 +185,6 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
     if (!m_Database) {
         return svn::Revision::UNDEFINED;
     }
-    svn::DateTime dt(aRev.date());
-    unsigned int value = dt.toTime_t();
     QSqlCursor bcur("logentries",true,m_Database);
     QSqlIndex order = bcur.index("revision");
     order.setDescending(0,true);
@@ -183,10 +197,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
     }
     bool must_remote=true;
     if (bcur.next()) {
-        QDateTime tdt;
-        tdt.setTime_t(bcur.value("date").toInt());
-        QDateTime t2(dt);
-        if (tdt >= t2) {
+        if (bcur.value("date").toLongLong()>=aRev.date()) {
             must_remote=false;
         }
     }
@@ -197,9 +208,9 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
         }
         return e[0].revision();
     }
-    QString q=QString("date<'%1'").arg(value);
+    QString q=QString("date<'%1'").arg(aRev.date());
     bcur.select(q,order);
-    qDebug(q);
+    qDebug("Search for date: " +q);
     if (bcur.lastError().type()!=QSqlError::None) {
         qDebug(bcur.lastError().text());
     }
@@ -212,4 +223,46 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
         return aRev;
     }
     return e[0].revision();
+}
+
+
+/*!
+    \fn svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&)
+ */
+bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry,QSqlCursor&lCur,QSqlCursor&cCur)
+{
+    QSqlRecord *buffer;
+    m_Database->transaction();
+
+#if QT_VERSION < 0x040000
+    Q_LLONG j = aEntry.revision;
+#else
+    qlonglong j = aEntry.revision;
+#endif
+    buffer=lCur.primeInsert();
+    buffer->setValue("revision",j);
+    buffer->setValue("date",aEntry.date);
+    buffer->setValue("author",aEntry.author);
+    buffer->setValue("message",aEntry.message);
+    lCur.insert();
+    if (lCur.lastError().type()!=QSqlError::None) {
+        m_Database->rollback();
+        throw DatabaseException(QString("Could not insert values: ")+lCur.lastError().text());
+    }
+    svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();
+    for (;cpit!=aEntry.changedPaths.end();++cpit){
+        buffer = cCur.primeInsert();
+        buffer->setValue("revision",j);
+        buffer->setValue("changeditem",(*cpit).path);
+        buffer->setValue("action",(*cpit).action);
+        buffer->setValue("copyfrom",(*cpit).copyFromPath);
+        buffer->setValue("copyfromrev",Q_LLONG((*cpit).copyFromRevision));
+        cCur.insert();
+        if (cCur.lastError().type()!=QSqlError::None) {
+            m_Database->rollback();
+            throw DatabaseException(QString("Could not insert values: ")+cCur.lastError().text());
+        }
+    }
+    m_Database->commit();
+    return true;
 }

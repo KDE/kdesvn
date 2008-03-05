@@ -3,12 +3,16 @@
 #include <qstringlist.h>
 #include <iostream>
 #include <qapplication.h>
+#include <qtextstream.h>
+
+#include "src/svnqt/client.hpp"
+#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/log_entry.hpp"
+
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
-#include "src/svnqt/client.hpp"
 #include "src/svnqt/cache/test/testconfig.h"
 #include "src/svnqt/cache/DatabaseException.hpp"
-#include "src/svnqt/svnqttypes.hpp"
 
 int main(int argc,char**argv)
 {
@@ -57,7 +61,7 @@ int main(int argc,char**argv)
 #if 1
     svn::LogEntriesMap lm;
     try {
-        rl.simpleLog(lm,1,1000,false);
+        rl.simpleLog(lm,100,svn::Revision::HEAD,false);
     }
     catch (const svn::cache::DatabaseException&cl)
     {
@@ -65,11 +69,13 @@ int main(int argc,char**argv)
     }
     catch (const svn::Exception&ce)
     {
-        std::cerr << ce.msg() <<std::endl;
+        std::cerr << ce.msg().latin1() <<std::endl;
     }
+    svn::LogEntriesMap::ConstIterator lit = lm.begin();
+    std::cout<<"Count: "<<lm.count()<<std::endl;
 #endif
     svn::Revision r("{2006-09-27}");
-    std::cout << rl.date2numberRev(r).toString()<<std::endl;
+    std::cout << r.toString() << " -> " << rl.date2numberRev(r).toString()<<std::endl;
     r = svn::Revision::HEAD;
     std::cout << rl.date2numberRev(r).toString()<<std::endl;
 

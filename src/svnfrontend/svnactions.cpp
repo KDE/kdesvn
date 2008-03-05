@@ -25,6 +25,7 @@
 #include "propertiesdlg.h"
 #include "ccontextlistener.h"
 #include "modifiedthread.h"
+#include "fillcachethread.h"
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
 #include "blamedisplay_impl.h"
@@ -195,6 +196,7 @@ SvnActions::SvnActions(ItemDisplay *parent, const char *name,bool processes_bloc
 {
     m_CThread = 0;
     m_UThread = 0;
+    m_FCThread = 0;
     m_Data = new SvnActionsData();
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContext = new CContextListener(this);
@@ -2250,6 +2252,20 @@ void SvnActions::stopCheckUpdateThread()
     }
 }
 
+void SvnActions::stopFillCache()
+{
+    if (m_FCThread) {
+        m_FCThread->cancelMe();
+        if (!m_FCThread->wait(MAX_THREAD_WAITTIME)) {
+            m_FCThread->terminate();
+            m_FCThread->terminate();
+            m_FCThread->wait(MAX_THREAD_WAITTIME);
+        }
+        delete m_FCThread;
+        m_FCThread = 0;
+    }
+}
+
 void SvnActions::stopMain()
 {
     if (m_Data->m_CurrentContext) {
@@ -2264,6 +2280,7 @@ void SvnActions::killallThreads()
     stopMain();
     stopCheckModThread();
     stopCheckUpdateThread();
+    stopFillCache();
 }
 
 bool SvnActions::createModifiedCache(const QString&what)
@@ -2391,6 +2408,18 @@ bool SvnActions::checkReposLockCache(const QString&path,svn::SharedPointer<svn::
 bool SvnActions::checkConflictedCache(const QString&path)
 {
     return m_Data->m_conflictCache.find(path);
+}
+
+void SvnActions::startFillCache(const QString&path)
+{
+    stopFillCache();
+    svn::InfoEntry e;
+    if (!singleInfo(path,svn::Revision::HEAD,e)) {
+        return;
+    }
+    m_FCThread=new FillCacheThread(this,e.reposRoot());
+    m_FCThread->start();
+    emit sendNotify(i18n("Filling log cache in background"));
 }
 
 /*!

@@ -44,6 +44,7 @@ class KProcess;
 class SvnActionsData;
 class CheckModifiedThread;
 class CheckUpdatesThread;
+class FillCacheThread;
 
 namespace svn {
     class Context;
@@ -148,6 +149,8 @@ public:
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
     void stopCheckUpdateThread();
+    void startFillCache(const QString&path);
+    void stopFillCache();
     void stopMain();
     void killallThreads();
 
@@ -176,6 +179,7 @@ protected:
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
     CheckModifiedThread*m_CThread,*m_UThread;
+    FillCacheThread*m_FCThread;
     void makeDiffinternal(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     void makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p,bool rec=true);
 

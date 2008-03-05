@@ -4,6 +4,7 @@
 #include "src/svnqt/info_entry.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/client.hpp"
+#include "src/svnqt/context_listener.hpp"
 #include "src/svnqt/cache/DatabaseException.hpp"
 
 #include <qsqldatabase.h>
@@ -76,27 +77,22 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     return _r;
 }
 
-/*!
-    \fn svn::cache::ReposLog::simpleLog(const svn::Revision&start,const svn::Revision&end,LogEntriesMap&target)
- */
-bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end,bool force_headupdate)
+bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end)
 {
-    if (!m_Client||m_ReposRoot.isEmpty()) {
-        return false;
-    }
-    target.clear();
     if (!m_Database) {
         m_Database = LogCache::self()->reposDb(m_ReposRoot);
         if (!m_Database) {
             return false;
         }
     }
+    ContextP cp = m_Client->getContext();
+    long long icount=0;
 
     svn::Revision _latest=latestCachedRev();
     qDebug("Latest cached rev: %i",_latest.revnum());
 
-    svn::Revision start=date2numberRev(_start);
-    svn::Revision end=date2numberRev(_end);
+    start=date2numberRev(start);
+    end=date2numberRev(end);
 
     // both should now one of START, HEAD or NUMBER
     if (start==svn::Revision::HEAD || (end==svn::Revision::NUMBER && start==svn::Revision::NUMBER && start.revnum()>end.revnum())) {
@@ -106,7 +102,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     }
     qDebug("End: "+end.toString());
     svn::Revision _rstart=_latest.revnum()+1;
-    svn::Revision _rend = force_headupdate?svn::Revision::HEAD:end;
+    svn::Revision _rend = end;
     if (_rend==svn::Revision::UNDEFINED) {
         _rend=svn::Revision::HEAD;
     }
@@ -131,8 +127,44 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
 
         for (;it!=_internal.end();++it) {
             insertLogEntry((*it),bcur,cur);
+            if (cp && cp->getListener()) {
+                //cp->getListener()->contextProgress(++icount,_internal.size());
+                if (cp->getListener()->contextCancel()) {
+                    throw svn::ClientException(QString("Could not retrieve values: User cancel."));
+                }
+            }
         }
     }
+    return true;
+}
+
+bool svn::cache::ReposLog::fillCache(const svn::Revision&_end)
+{
+    svn::Revision end = _end;
+    svn::Revision start = latestCachedRev().revnum()+1;
+    return checkFill(start,end);
+}
+
+/*!
+    \fn svn::cache::ReposLog::simpleLog(const svn::Revision&start,const svn::Revision&end,LogEntriesMap&target)
+ */
+bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end)
+{
+    if (!m_Client||m_ReposRoot.isEmpty()) {
+        return false;
+    }
+    target.clear();
+    ContextP cp = m_Client->getContext();
+
+    svn::Revision end = _end;
+    svn::Revision start = _start;
+    if (!checkFill(start,end)) {
+        return false;
+    }
+
+    QSqlCursor cur("changeditems",true,m_Database);
+    QSqlCursor bcur("logentries",true,m_Database);
+
     qDebug("End: "+end.toString());
     if (end==svn::Revision::HEAD) {
         end = latestCachedRev();
@@ -145,7 +177,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     qDebug(lim);
     if (!bcur.select(lim)) {
         qDebug(bcur.lastError().text());
-        throw DatabaseException(QString("Could not retrieve values: ")+bcur.lastError().text());
+        throw svn::ClientException(QString("Could not retrieve values: ")+bcur.lastError().text());
         return false;
     }
     while(bcur.next()) {
@@ -153,7 +185,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         lim=QString("revision=%1").arg(revision);
         if (!cur.select(lim)) {
             qDebug(cur.lastError().text());
-            throw DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text());
+            throw svn::ClientException(QString("Could not retrieve values: ")+cur.lastError().text());
             return false;
         }
         target[revision].revision=revision;
@@ -163,11 +195,17 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         while(cur.next()) {
             char c = cur.value("action").toInt();
             LogChangePathEntry lcp;
-            lcp.action=c;
-            lcp.copyFromPath=cur.value("copyfrom").toString();
+            lcp.action=cur.value("action").toString()[0];
+            lcp.copyFromPath=cur.value("copyfrom").toString().latin1();
             lcp.path= cur.value("changeditem").toString();
             lcp.copyFromRevision=cur.value("copyfromrev").toLongLong();
             target[revision].changedPaths.push_back(lcp);
+        }
+        if (cp && cp->getListener()) {
+            //cp->getListener()->contextProgress(++icount,bcur.size());
+            if (cp->getListener()->contextCancel()) {
+                throw svn::ClientException(QString("Could not retrieve values: User cancel."));
+            }
         }
     }
     return false;
@@ -247,20 +285,21 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry,QSqlCursor&
     lCur.insert();
     if (lCur.lastError().type()!=QSqlError::None) {
         m_Database->rollback();
-        throw DatabaseException(QString("Could not insert values: ")+lCur.lastError().text());
+        qDebug(QString("Could not insert values: ")+lCur.lastError().text());
     }
     svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();
     for (;cpit!=aEntry.changedPaths.end();++cpit){
         buffer = cCur.primeInsert();
         buffer->setValue("revision",j);
         buffer->setValue("changeditem",(*cpit).path);
-        buffer->setValue("action",(*cpit).action);
+        buffer->setValue("action",QString(QChar((*cpit).action)));
         buffer->setValue("copyfrom",(*cpit).copyFromPath);
         buffer->setValue("copyfromrev",Q_LLONG((*cpit).copyFromRevision));
         cCur.insert();
         if (cCur.lastError().type()!=QSqlError::None) {
             m_Database->rollback();
-            throw DatabaseException(QString("Could not insert values: ")+cCur.lastError().text());
+            qDebug(QString("Could not insert values: ")+cCur.lastError().text());
+            //throw DatabaseException(QString("Could not insert values: ")+cCur.lastError().text());
         }
     }
     m_Database->commit();

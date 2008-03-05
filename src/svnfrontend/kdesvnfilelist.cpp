@@ -595,6 +595,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
              slotCheckUpdates();
         }
     }
+    m_SvnWrapper->startFillCache(baseUri());
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));

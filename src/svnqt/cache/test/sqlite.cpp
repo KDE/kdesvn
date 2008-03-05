@@ -61,7 +61,7 @@ int main(int argc,char**argv)
 #if 1
     svn::LogEntriesMap lm;
     try {
-        rl.simpleLog(lm,100,svn::Revision::HEAD,false);
+        rl.simpleLog(lm,100,svn::Revision::HEAD);
     }
     catch (const svn::cache::DatabaseException&cl)
     {

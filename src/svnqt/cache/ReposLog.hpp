@@ -28,6 +28,7 @@ protected:
     /*! QSqlCursor as parameter so we may generate them outside a loop for re-usage.
      */
     bool insertLogEntry(const svn::LogEntry&,QSqlCursor&,QSqlCursor&);
+    bool checkFill(svn::Revision&_start,svn::Revision&_end);
 
 public:
     ReposLog(svn::Client*aClient,const QString&aRepository=QString::null);
@@ -44,8 +45,9 @@ public:
     svn::Revision latestHeadRev();
     svn::Revision latestCachedRev();
     //! simple retrieves logentries
-    bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end,bool force_headupdate);
+    bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end);
     svn::Revision date2numberRev(const svn::Revision&);
+    bool fillCache(const svn::Revision&end);
 };
 
 }

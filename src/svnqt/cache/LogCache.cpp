@@ -201,7 +201,7 @@ QString LogCache::s_CACHE_FOLDER="logcache";
  */
 LogCache::LogCache()
 {
-    m_BasePath = QDir::HOMEDIR();
+    m_BasePath = QDir::HOMEDIR()+"/.svnqt";
     setupCachePath();
 }
 
@@ -212,7 +212,7 @@ LogCache::LogCache(const QString&aBasePath)
     }
     mSelf=this;
     if (aBasePath.isEmpty()) {
-        m_BasePath=QDir::HOMEDIR();
+        m_BasePath=QDir::HOMEDIR()+"/.svnqt";
     } else {
         m_BasePath=aBasePath;
     }

@@ -17,14 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "modifiedthread.h"
+#include "fillcachethread.h"
 #include "tcontextlistener.h"
+
+#include "src/svnqt/cache/LogCache.hpp"
+#include "src/svnqt/cache/ReposLog.hpp"
+#include "src/svnqt/cache/DatabaseException.hpp"
 
 #include <qobject.h>
 #include <kdebug.h>
 #include <kapplication.h>
 
-CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool _updates)
+FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
     : QThread(),mutex()
 {
     m_Parent = _parent;
@@ -35,35 +39,41 @@ CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool
     }
 
     m_CurrentContext->setListener(m_SvnContext);
-    m_what = what;
+    m_what = reposRoot;
     m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
-    m_updates = _updates;
 }
 
-CheckModifiedThread::~CheckModifiedThread()
+FillCacheThread::~FillCacheThread()
 {
     delete m_Svnclient;
 }
 
-void CheckModifiedThread::cancelMe()
+void FillCacheThread::cancelMe()
 {
     // method is threadsafe!
     m_SvnContext->setCanceled(true);
 }
 
-const svn::StatusEntries&CheckModifiedThread::getList()const
+void FillCacheThread::run()
 {
-    return m_Cache;
-}
-
-void CheckModifiedThread::run()
-{
-    // what must be cleaned!
     svn::Revision where = svn::Revision::HEAD;
     QString ex;
+    svn::cache::ReposLog rl(m_Svnclient,m_what);
+
     try {
-        //                                  rec  all    up        noign
-        m_Cache = m_Svnclient->status(m_what,true,false,m_updates,false,where);
+        svn::Revision latestCache = rl.latestCachedRev();
+        svn::Revision Head = rl.latestHeadRev();
+        Q_LLONG i = latestCache.revnum();
+        Q_LLONG j = Head.revnum();
+
+        for (;i<j;i+=200) {
+            rl.fillCache(i);
+            if (m_SvnContext->contextCancel()||latestCache==rl.latestCachedRev()) {
+                break;
+            }
+            latestCache=rl.latestCachedRev();
+        }
+        rl.fillCache(Head);
     } catch (const svn::ClientException&e) {
         m_SvnContext->contextNotify(e.msg());
     }

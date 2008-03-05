@@ -56,6 +56,8 @@ SET(svnfrontendsrc
     threadcontextlistenerdata.cpp
     leftpane/leftpane_impl.cpp
     leftpane/leftpane_impl.h
+    fillcachethread.cpp
+    fillcachethread.h
     )
 
 SET(svnfrontendui

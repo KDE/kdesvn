@@ -27,6 +27,7 @@
 #include <qobject.h>
 #include <kdebug.h>
 #include <kapplication.h>
+#include <klocale.h>
 
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
     : QThread(),mutex()
@@ -74,6 +75,8 @@ void FillCacheThread::run()
             latestCache=rl.latestCachedRev();
         }
         rl.fillCache(Head);
+        i=Head.revnum();
+        m_SvnContext->contextNotify(i18n("Cache filled up to revision %1").arg(i));
     } catch (const svn::ClientException&e) {
         m_SvnContext->contextNotify(e.msg());
     }

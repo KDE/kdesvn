@@ -90,6 +90,9 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end)
 
     svn::Revision _latest=latestCachedRev();
     qDebug("Latest cached rev: %i",_latest.revnum());
+    if (_latest.revnum()>=latestHeadRev().revnum()) {
+        return true;
+    }
 
     start=date2numberRev(start);
     end=date2numberRev(end);
@@ -130,7 +133,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end)
             if (cp && cp->getListener()) {
                 //cp->getListener()->contextProgress(++icount,_internal.size());
                 if (cp->getListener()->contextCancel()) {
-                    throw svn::ClientException(QString("Could not retrieve values: User cancel."));
+                    throw DatabaseException(QString("Could not retrieve values: User cancel."));
                 }
             }
         }
@@ -299,7 +302,7 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry,QSqlCursor&
         if (cCur.lastError().type()!=QSqlError::None) {
             m_Database->rollback();
             qDebug(QString("Could not insert values: ")+cCur.lastError().text());
-            //throw DatabaseException(QString("Could not insert values: ")+cCur.lastError().text());
+            throw DatabaseException(QString("Could not insert values: ")+cCur.lastError().text());
         }
     }
     m_Database->commit();

@@ -64,7 +64,7 @@ void CheckModifiedThread::run()
     try {
         //                                  rec  all    up        noign
         m_Cache = m_Svnclient->status(m_what,true,false,m_updates,false,where);
-    } catch (const svn::ClientException&e) {
+    } catch (const svn::Exception&e) {
         m_SvnContext->contextNotify(e.msg());
     }
     KApplication*k = KApplication::kApplication();

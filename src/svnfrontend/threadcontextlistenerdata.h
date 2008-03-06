@@ -34,6 +34,9 @@ public:
 
     virtual ~ThreadContextListenerData();
 
+    /* sometimes suppress progress messages */
+    bool noProgress;
+
     /* only one callback at time */
     QMutex m_CallbackMutex;
     QWaitCondition m_trustpromptWait;

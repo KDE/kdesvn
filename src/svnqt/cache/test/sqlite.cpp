@@ -47,18 +47,6 @@ int main(int argc,char**argv)
         std::cout << ( *it ) << std::endl;
         ++it;
     }
-    //std::cerr << rl.latestHeadRev().toString()<<std::endl;
-    /*
-    svn::cache::ReposLog rl2(m_Svnclient,"http://www.alwins-world.de/repos/");
-    try {
-        std::cerr << rl2.latestCachedRev().toString()<<std::endl;
-    }
-    catch (svn::ClientException cl)
-    {
-        std::cerr << "Exception catched"<<std::endl;
-    }
-    */
-#if 1
     svn::LogEntriesMap lm;
     try {
         rl.simpleLog(lm,100,svn::Revision::HEAD);
@@ -69,15 +57,25 @@ int main(int argc,char**argv)
     }
     catch (const svn::Exception&ce)
     {
-        std::cerr << ce.msg().latin1() <<std::endl;
+        std::cerr << "Exception: " << ce.msg().latin1() <<std::endl;
     }
     svn::LogEntriesMap::ConstIterator lit = lm.begin();
     std::cout<<"Count: "<<lm.count()<<std::endl;
-#endif
+
     svn::Revision r("{2006-09-27}");
     std::cout << r.toString() << " -> " << rl.date2numberRev(r).toString()<<std::endl;
     r = svn::Revision::HEAD;
     std::cout << rl.date2numberRev(r).toString()<<std::endl;
+    try {
+        rl.insertLogEntry(lm[100]);
+    }
+    catch (const svn::cache::DatabaseException&cl)
+    {
+        std::cerr << cl.msg() << std::endl;
+    }
+    QSqlQuery q("insert or ignore into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')",db);
+    q.exec();
+    std::cerr << "\n" << q.lastError().text().latin1()<<std::endl;
 
     return 0;
 }

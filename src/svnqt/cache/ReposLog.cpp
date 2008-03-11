@@ -180,7 +180,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     qDebug(lim);
     if (!bcur.select(lim)) {
         qDebug(bcur.lastError().text());
-        throw svn::ClientException(QString("Could not retrieve values: ")+bcur.lastError().text());
+        throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+bcur.lastError().text());
         return false;
     }
     while(bcur.next()) {
@@ -188,7 +188,8 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         lim=QString("revision=%1").arg(revision);
         if (!cur.select(lim)) {
             qDebug(cur.lastError().text());
-            throw svn::ClientException(QString("Could not retrieve values: ")+cur.lastError().text());
+            throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text()
+                    ,cur.lastError().number());
             return false;
         }
         target[revision].revision=revision;
@@ -207,7 +208,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         if (cp && cp->getListener()) {
             //cp->getListener()->contextProgress(++icount,bcur.size());
             if (cp->getListener()->contextCancel()) {
-                throw svn::ClientException(QString("Could not retrieve values: User cancel."));
+                throw svn::cache::DatabaseException(QString("Could not retrieve values: User cancel."));
             }
         }
     }
@@ -289,6 +290,9 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry,QSqlCursor&
     if (lCur.lastError().type()!=QSqlError::None) {
         m_Database->rollback();
         qDebug(QString("Could not insert values: ")+lCur.lastError().text());
+        qDebug(lCur.lastQuery());
+        throw svn::cache::DatabaseException(QString("Could not insert values: ")+lCur.lastError().text(),lCur.lastError().number());
+        return false;
     }
     svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();
     for (;cpit!=aEntry.changedPaths.end();++cpit){
@@ -302,9 +306,24 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry,QSqlCursor&
         if (cCur.lastError().type()!=QSqlError::None) {
             m_Database->rollback();
             qDebug(QString("Could not insert values: ")+cCur.lastError().text());
-            throw DatabaseException(QString("Could not insert values: ")+cCur.lastError().text());
+            throw svn::cache::DatabaseException(QString("Could not insert values: ")+cCur.lastError().text()
+                    ,cCur.lastError().number());
         }
     }
     m_Database->commit();
     return true;
+}
+
+bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry)
+{
+    QSqlCursor cur("changeditems",true,m_Database);
+    QSqlCursor bcur("logentries",true,m_Database);
+    bcur.select();
+    qDebug(bcur.lastQuery());
+    if (bcur.lastError().type()!=QSqlError::None) {
+        qDebug(QString("Could not select values: ")+bcur.lastError().text());
+        throw svn::cache::DatabaseException(QString("Could not insert values: ")+bcur.lastError().text(),bcur.lastError().number());
+        return false;
+    }
+    insertLogEntry(aEntry,bcur,cur);
 }

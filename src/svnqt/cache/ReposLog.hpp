@@ -48,6 +48,7 @@ public:
     bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end);
     svn::Revision date2numberRev(const svn::Revision&);
     bool fillCache(const svn::Revision&end);
+    bool insertLogEntry(const svn::LogEntry&);
 };
 
 }

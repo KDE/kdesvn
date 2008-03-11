@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -51,12 +51,12 @@ namespace svn
     Exception (const char * message) throw ();
     Exception (const QString&message) throw();
 
-    ~Exception () throw ();
+    virtual ~Exception () throw ();
 
     /**
      * @return the exception message.
      */
-    const QString& msg() const;
+    virtual const QString& msg() const;
 
     /**
      * @return the outermost error code.
@@ -68,6 +68,7 @@ namespace svn
   protected:
     struct Data;
     Data * m;
+    void setMessage(const QString&);
 
   private:
 

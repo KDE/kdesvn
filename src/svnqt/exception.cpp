@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -91,6 +91,11 @@ namespace svn
   Exception::msg () const
   {
     return m->message;
+  }
+
+  void Exception::setMessage(const QString&aMsg)
+  {
+      m->message=aMsg;
   }
 
   QString Exception::error2msg(svn_error_t*error)

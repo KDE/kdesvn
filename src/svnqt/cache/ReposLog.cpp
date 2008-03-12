@@ -318,12 +318,5 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry)
 {
     QSqlCursor cur("changeditems",true,m_Database);
     QSqlCursor bcur("logentries",true,m_Database);
-    bcur.select();
-    qDebug(bcur.lastQuery());
-    if (bcur.lastError().type()!=QSqlError::None) {
-        qDebug(QString("Could not select values: ")+bcur.lastError().text());
-        throw svn::cache::DatabaseException(QString("Could not insert values: ")+bcur.lastError().text(),bcur.lastError().number());
-        return false;
-    }
     insertLogEntry(aEntry,bcur,cur);
 }

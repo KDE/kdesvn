@@ -224,7 +224,7 @@ bool QSQLite3Result::reset (const QString &query)
 
     setSelect(false);
 
-    int res = sqlite3_prepare(d->access, query.utf8().data(), (query.length() + 1) * sizeof(QChar),
+    int res = sqlite3_prepare_v2(d->access, query.utf8().data(), (query.length() + 1) * sizeof(QChar),
                                 &d->stmt, 0);
 
     if (res != SQLITE_OK) {

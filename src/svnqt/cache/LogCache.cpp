@@ -3,7 +3,6 @@
 #include <qdir.h>
 #include <qsql.h>
 #include <qsqldatabase.h>
-#include <qsqlcursor.h>
 #include <qthreadstorage.h>
 #include <qmap.h>
 
@@ -93,12 +92,16 @@ public:
         getMainDB()->transaction();
         query1.exec(q);
         getMainDB()->commit();
-        QSqlQuery query("SELECT id from "+QString(SQLMAINTABLE)+" where reposroot='"+reposroot+"' ORDER by id DESC",getMainDB());
+
+        QSqlQuery query(QString::null,getMainDB());
+        query.prepare(s_reposSelect);
+        query.bindValue(0,reposroot.native());
+        query.exec();
         QString db;
-        if (query.isActive() && query.next()) {
+        if (query.lastError().type()==QSqlError::None && query.next()) {
             db = query.value(0).toString();
         } else {
-            qDebug("Error select: "+query.lastError().text());
+            qDebug("Error select_01: "+query.lastError().text()+" ("+query.lastQuery()+")");
         }
         if (!db.isEmpty()) {
             QString fulldb = m_BasePath+"/"+db+".db";
@@ -118,15 +121,19 @@ public:
         bool checkDone = false;
         // make sure path is correct eg. without traling slashes.
         QString dbFile;
-        QSqlCursor c(SQLMAINTABLE,true,getMainDB());
-        c.select("reposroot='"+reposroot.native()+"'");
+        QSqlQuery c(QString::null,getMainDB());
+        c.prepare(s_reposSelect);
+        c.bindValue(0,reposroot.native());
+        c.exec();
+
         qDebug("Check for path: "+reposroot.native());
+        qDebug("Last: "+c.lastQuery());
 
         // only the first one
         if ( c.next() ) {
-            qDebug( c.value( "reposroot" ).toString() + ": " +
-                    c.value( "id" ).toString() );
-            dbFile = c.value( "id" ).toString();
+            qDebug( c.value(0).toString() + ": " +
+                    c.value(0).toString() );
+            dbFile = c.value(0).toString();
         }
         if (dbFile.isEmpty()) {
             dbFile = createReposDB(reposroot);
@@ -192,9 +199,13 @@ public:
     QString m_BasePath;
 
     QThreadStorage<ThreadDBStore*> m_mainDB;
+
+    static const QString s_reposSelect;
 };
 
+
 QString LogCache::s_CACHE_FOLDER="logcache";
+const QString LogCacheData::s_reposSelect=QString("SELECT id from ")+QString(SQLMAINTABLE)+QString(" where reposroot=? ORDER by id DESC");
 
 /*!
     \fn svn::cache::LogCache::LogCache()

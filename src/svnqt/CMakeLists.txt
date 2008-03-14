@@ -39,7 +39,10 @@ SET(SOURCES
     cache/DatabaseException.cpp
     )
 
+MESSAGE(STATUS "QT4 found? ${QT4_FOUND}")
+
 IF (SQLITE_FOUND AND NOT QT4_FOUND)
+    message(status "insert own sqlite3")
     SET(SOURCES
     ${SOURCES}
     cache/sqlite3/qsqlcachedresult.cpp
@@ -49,9 +52,9 @@ IF (SQLITE_FOUND AND NOT QT4_FOUND)
     )
 ENDIF (SQLITE_FOUND AND NOT QT4_FOUND)
 
-IF (SQLITE_FOUND AND QT4_FOUND)
+IF (QT4_FOUND)
     ADD_DEFINITIONS(-DNO_SQLITE3)
-ENDIF (SQLITE_FOUND AND QT4_FOUND)
+ENDIF (QT4_FOUND)
 
 SET(CACHEINST_HEADERS
     cache/LogCache.hpp
@@ -100,14 +103,18 @@ IF(QT4_FOUND)
     SET(TOUTF8 "toUtf8")
     SET(FROMUTF8 "fromUtf8")
     SET(QLIST "QList")
+    SET(TOASCII "toAscii")
     SET(HOMEDIR "homePath")
     SET(svnqt-name svnqt-qt4)
+    SET(QDATABASE "QSqlDatabase")
 ELSE(QT4_FOUND)
     IF(QT_FOUND)
         SET(TOUTF8 "utf8")
         SET(FROMUTF8 "fromUtf8")
         SET(QLIST "QValueList")
+        SET(TOASCII "latin1")
         SET(HOMEDIR "homeDirPath")
+        SET(QDATABASE "QSqlDatabase*")
     ENDIF(QT_FOUND)
     SET(svnqt-name svnqt)
 ENDIF(QT4_FOUND)

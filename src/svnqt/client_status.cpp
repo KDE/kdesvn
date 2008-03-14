@@ -387,7 +387,6 @@ namespace svn
        bool strictNodeHistory,int limit) throw (ClientException)
   {
     Targets target(path);
-    qDebug("Log for "+QString(path)+" on peg "+revisionPeg.toString());
     Pool pool;
     sBaton l_baton;
     l_baton.m_context=m_context;
@@ -428,7 +427,6 @@ namespace svn
     l_baton.m_data = entries;
 
     svn_error_t *error;
-    qDebug("Log on peg "+revisionPeg.toString());
 
     error = svn_client_log3 (
       target.array (pool),

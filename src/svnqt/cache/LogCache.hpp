@@ -7,8 +7,6 @@
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/shared_pointer.hpp"
 
-class QSqlDatabase;
-
 namespace svn {
     namespace cache {
 
@@ -32,7 +30,7 @@ namespace svn {
             LogCache(const QString&aBasePath);
             virtual ~LogCache();
             static LogCache* self();
-            QSqlDatabase* reposDb(const QString&aRepository);
+            QDataBase reposDb(const QString&aRepository);
         };
     }
 }

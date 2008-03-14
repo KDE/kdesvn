@@ -31,5 +31,10 @@
 #define TOUTF8 @TOUTF8@
 #define FROMUTF8 @FROMUTF8@
 #define QLIST @QLIST@
+#define TOASCII @TOASCII@
 #define HOMEDIR @HOMEDIR@
+
+/* the difference between qt3 and qt4 is too much... :( */
+class QSqlDatabase;
+typedef @QDATABASE@ QDataBase;
 #endif

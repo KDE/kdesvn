@@ -4,9 +4,9 @@
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/svnqttypes.hpp"
 #include "svnqt/revision.hpp"
-#include <qstring.h>
 
-class QSqlDatabase;
+#include <qsqldatabase.h>
+#include <qstring.h>
 
 namespace svn
 {
@@ -20,7 +20,7 @@ class SVNQT_EXPORT ReposLog
 {
 protected:
     svn::Client*m_Client;
-    QSqlDatabase*m_Database;
+    QDataBase m_Database;
     QString m_ReposRoot;
     svn::Revision m_latestHead;
     //! internal insert.
@@ -35,7 +35,7 @@ public:
         return m_ReposRoot;
     }
 
-    QSqlDatabase* Database() const
+    QDataBase Database() const
     {
         return m_Database;
     }

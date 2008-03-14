@@ -42,6 +42,9 @@ public:
     svn::Revision latestHeadRev();
     svn::Revision latestCachedRev();
     //! simple retrieves logentries
+    /*!
+     * This method acts on network, too for checking if there are new entries on server.
+     */
     bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end);
     svn::Revision date2numberRev(const svn::Revision&);
     bool fillCache(const svn::Revision&end);

@@ -50,7 +50,11 @@ public:
         QSqlDatabase::removeDatabase(key);
         QMap<QString,QString>::Iterator it;
         for (it=reposCacheNames.begin();it!=reposCacheNames.end();++it) {
+#if QT_VERSION < 0x040000
+            QSqlDatabase::removeDatabase(it.data());
+#else
             QSqlDatabase::removeDatabase(it.value());
+#endif
         }
     }
 

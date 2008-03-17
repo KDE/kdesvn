@@ -185,7 +185,7 @@ bool svn::cache::ReposLog::fillCache(const svn::Revision&_end)
 /*!
     \fn svn::cache::ReposLog::simpleLog(const svn::Revision&start,const svn::Revision&end,LogEntriesMap&target)
  */
-bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end)
+bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end,bool noNetwork)
 {
     if (!m_Client||m_ReposRoot.isEmpty()) {
         return false;
@@ -195,8 +195,13 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
 
     svn::Revision end = _end;
     svn::Revision start = _start;
-    if (!checkFill(start,end)) {
-        return false;
+    if (!noNetwork) {
+        if (!checkFill(start,end)) {
+            return false;
+        }
+    } else {
+        end=date2numberRev(end,noNetwork);
+        start=date2numberRev(start,noNetwork);
     }
 
     if (end==svn::Revision::HEAD) {
@@ -205,7 +210,6 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     if (start==svn::Revision::HEAD) {
         start=latestCachedRev();
     }
-
     static QString sEntry("select revision,author,date,message from logentries where revision<=? and revision>=?");
     static QString sItems("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?");
 
@@ -264,7 +268,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
 /*!
     \fn svn::cache::ReposLog::date2numberRev(const svn::Revision&)
  */
-svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
+svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool noNetwork)
 {
     if (aRev!=svn::Revision::DATE) {
         return aRev;
@@ -286,7 +290,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev)
 #endif
         qDebug(query.lastError().text().TOUTF8().data());
     }
-    bool must_remote=true;
+    bool must_remote=!noNetwork;
     if (query.next()) {
         if (query.value(1).toLongLong()>=aRev.date()) {
             must_remote=false;
@@ -383,4 +387,75 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
 bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry)
 {
     _insertLogEntry(aEntry);
+}
+
+
+/*!
+    \fn svn::cache::ReposLog::log(const svn::Path&,const svn::Revision&start, const svn::Revision&end,const svn::Revision&peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit))
+ */
+bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, const svn::Revision&_end,const svn::Revision&_peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit)
+{
+    static QString s_q("select logentries.revision,logentries.author,logentries.date,logentries.message from logentries where logentries.revision in (select changeditems.revision from changeditems where (changeditems.changeditem='%1' or changeditems.changeditem GLOB '%2/*') %3 GROUP BY changeditems.revision) ORDER BY logentries.revision DESC");
+    svn::Revision peg = date2numberRev(_peg,true);
+    svn::Revision end = date2numberRev(_end,true);
+    svn::Revision start = date2numberRev(_start,true);
+    QString query_string = QString(s_q).arg(what.native()).arg(what.native()).arg((peg==svn::Revision::UNDEFINED?"":QString(" AND revision<=%1").arg(peg.revnum())));
+    if (peg==svn::Revision::UNDEFINED) {
+        peg = latestCachedRev();
+    }
+    if (!itemExists(peg,what)) {
+        throw svn::cache::DatabaseException(QString("Entry '%1' does not exists at revision %2").arg(what.native()).arg(peg.toString()));
+    }
+    if (limit>0) {
+        query_string+=QString(" LIMIT %1").arg(limit);
+    }
+    qDebug("Query-string: %s",query_string.TOUTF8().data());
+    QSqlQuery _q(QString::null,m_Database);
+    _q.prepare(query_string);
+    if (!_q.exec()) {
+        qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
+        qDebug(_q.lastQuery().TOUTF8().data());
+        throw svn::cache::DatabaseException(QString("Could not select values: ")+_q.lastError().text(),_q.lastError().number());
+    }
+    while(_q.next()) {
+        Q_LLONG revision = _q.value(0).toLongLong();
+        target[revision].revision=revision;
+        target[revision].author=_q.value(1).toString();
+        target[revision].date=_q.value(2).toLongLong();
+        target[revision].message=_q.value(3).toString();
+    }
+    return true;
+}
+
+
+/*!
+    \fn svn::cache::ReposLog::itemExists(const svn::Revision&,const QString&)
+ */
+bool svn::cache::ReposLog::itemExists(const svn::Revision&peg,const svn::Path&path)
+{
+    /// @todo this moment I have no idea how to check real  with all moves and deletes of parent folders without a hell of sql statements so we make it quite simple: it exists if we found it.
+
+
+#if 0
+    static QString _s1("select revision from changeditems where changeditem='%1' and action='A' and revision<=%2 order by revision desc limit 1");
+    QSqlQuery _q(QString::null,m_Database);
+    QString query_string=QString(_s1).arg(path.native()).arg(peg.revnum());
+    if (!_q.exec(query_string)) {
+        qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
+        qDebug(_q.lastQuery().TOUTF8().data());
+        throw svn::cache::DatabaseException(QString("Could not select values: ")+_q.lastError().text(),_q.lastError().number());
+    }
+    qDebug(_q.lastQuery().TOUTF8().data());
+
+
+    svn::Path _p = path;
+    static QString _s2("select revision from changeditem where changeditem in (%1) and action='D' and revision>%2 and revision<=%3 order by revision desc limit 1");
+    QStringList p_list;
+    while (_p.length()>0) {
+        p_list.append(QString("'%1'").arg(_p.native()));
+        _p.removeLast();
+    }
+    query_string=QString(_s2).arg(p_list.join(",")).arg();
+#endif
+    return true;
 }

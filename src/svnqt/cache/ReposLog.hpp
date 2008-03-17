@@ -45,10 +45,12 @@ public:
     /*!
      * This method acts on network, too for checking if there are new entries on server.
      */
-    bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end);
-    svn::Revision date2numberRev(const svn::Revision&);
+    bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end,bool noNetwork=false);
+    svn::Revision date2numberRev(const svn::Revision&,bool noNetwork=false);
     bool fillCache(const svn::Revision&end);
     bool insertLogEntry(const svn::LogEntry&);
+    bool log(const svn::Path&,const svn::Revision&start, const svn::Revision&end,const svn::Revision&peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit);
+    bool itemExists(const svn::Revision&,const svn::Path&);
 };
 
 }

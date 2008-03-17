@@ -96,6 +96,18 @@ int main(int argc,char**argv)
     db=QSqlDatabase();
 #endif
 
+    try {
+        rl.log("/trunk/src/svnqt",1,1000,svn::Revision::UNDEFINED,lm,false,-1);
+    }
+    catch (const svn::cache::DatabaseException&cl)
+    {
+        std::cerr << cl.msg().TOUTF8().data() <<std::endl;
+    }
+    catch (const svn::Exception&ce)
+    {
+        std::cerr << "Exception: " << ce.msg().TOUTF8().data() <<std::endl;
+    }
+    std::cout<<"Count: "<<lm.count()<<std::endl;
 
     return 0;
 }

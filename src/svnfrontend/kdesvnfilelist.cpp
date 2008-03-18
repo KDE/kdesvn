@@ -1201,8 +1201,8 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     if (!dlg) return;
 
     ptr->initHistory();
-
     if (dlg->exec()!=QDialog::Accepted) {
+        ptr->saveHistory(true);
         delete dlg;
         return;
     }
@@ -1210,7 +1210,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
-    ptr->saveHistory();
+    ptr->saveHistory(false);
     uri.setProtocol("");
     QString iurl = uri.path();
     while (iurl.endsWith("/")) {
@@ -2041,6 +2041,7 @@ void kdesvnfilelist::slotLock()
     ptr->setRecCheckboxtext(i18n("Steal lock?"),false);
 
     if (dlg->exec()!=QDialog::Accepted) {
+        ptr->saveHistory(true);
         delete dlg;
         return;
     }
@@ -2048,7 +2049,7 @@ void kdesvnfilelist::slotLock()
 
     QString logMessage = ptr->getMessage();
     bool rec = ptr->isRecursive();
-    ptr->saveHistory();
+    ptr->saveHistory(false);
 
     QStringList displist;
     while ((cur=liter.current())!=0){

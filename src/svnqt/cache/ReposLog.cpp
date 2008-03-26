@@ -386,7 +386,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
 
 bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry)
 {
-    _insertLogEntry(aEntry);
+    return _insertLogEntry(aEntry);
 }
 
 

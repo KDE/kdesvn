@@ -2535,15 +2535,15 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
         {
             m_Data->m_PropertiesCache.findSingleValid(fk,pm);
         }
-        if (pm) {
-        }
         if (!pm && !cacheOnly)
         {
             try {
                 pm = m_Data->m_Svnclient->proplist(p,where,where);
             } catch (const svn::Exception&e) {
                 /* no messagebox needed */
-                sendNotify(e.msg());
+                if (e.apr_err()!=SVN_ERR_WC_NOT_DIRECTORY) {
+                    sendNotify(e.msg());
+                }
             }
             if (where != svn::Revision::WORKING && pm) {
                 kdDebug()<<"Put into cache "<<endl;

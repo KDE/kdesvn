@@ -2471,7 +2471,9 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
                 pm = m_Data->m_Svnclient->proplist(p,where,where);
             } catch (const svn::ClientException&e) {
                 /* no messagebox needed */
-                sendNotify(e.msg());
+                if (e.apr_err()!=SVN_ERR_WC_NOT_DIRECTORY) {
+                    sendNotify(e.msg());
+                }
             }
             if (where != svn::Revision::WORKING && pm) {
                 m_Data->m_PropertiesCache.insertKey(pm,fk);

@@ -90,20 +90,20 @@ namespace svn
 
 
   QByteArray
-          Client_impl::diff (const Path & tmpPath, const Path & path,
-                             const Revision & revision1, const Revision & revision2,
+          Client_impl::diff_peg (const Path & tmpPath, const Path & path,
+                             const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                              const bool recurse, const bool ignoreAncestry,
                              const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)
     {
-        return diff(tmpPath,path,path,
-                    revision1,revision2,
+        return diff_peg(tmpPath,path,
+                    revision1,revision2,peg_revision,
                     recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype,
                     QStringList());
     }
 
   QByteArray
-  Client_impl::diff (const Path & tmpPath, const Path & path,
-                const Revision & revision1, const Revision & revision2,
+  Client_impl::diff_peg (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted,const bool ignore_contenttype,
                     const QStringList&extra) throw (ClientException)

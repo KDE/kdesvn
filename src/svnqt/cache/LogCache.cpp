@@ -87,9 +87,6 @@ public:
             return false;
         }
 #else
-        if (!aDb.isValid()) {
-            return false;
-        }
         if (!aDb.open()) {
             return false;
         }

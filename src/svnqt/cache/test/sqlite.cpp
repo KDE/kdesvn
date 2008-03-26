@@ -87,7 +87,7 @@ int main(int argc,char**argv)
     {
         std::cerr << cl.msg().TOUTF8().data() << std::endl;
     }
-    QSqlQuery q("insert or ignore into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')",db);
+    QSqlQuery q("insert into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')",db);
     q.exec();
     std::cerr << "\n" << q.lastError().text().TOUTF8().data()<<std::endl;
 
@@ -95,7 +95,6 @@ int main(int argc,char**argv)
 #else
     db=QSqlDatabase();
 #endif
-
     try {
         rl.log("/trunk/src/svnqt",1,1000,svn::Revision::UNDEFINED,lm,false,-1);
     }
@@ -108,6 +107,5 @@ int main(int argc,char**argv)
         std::cerr << "Exception: " << ce.msg().TOUTF8().data() <<std::endl;
     }
     std::cout<<"Count: "<<lm.count()<<std::endl;
-
     return 0;
 }

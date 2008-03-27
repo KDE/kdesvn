@@ -32,6 +32,7 @@ SET(SOURCES
     repositorydata.cpp
     repositorylistener.cpp
     svnstream.cpp
+    diff_data.cpp
     svnfilestream.cpp)
 
 SET(INST_HEADERS

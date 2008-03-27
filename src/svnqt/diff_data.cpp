@@ -25,17 +25,20 @@
 
 #include <svn_version.h>
 #include <svn_io.h>
+#include <svn_path.h>
 
 namespace svn
 {
-    DiffOutput::DiffOutput(const Path&aTmpPath)
+    DiffData::DiffData(const Path&aTmpPath,const Path&_p1,const Revision&_r1,const Path&_p2,const Revision&_r2)
         :m_Pool(),m_tmpPath(aTmpPath),
-        m_outFile(0),m_errFile(0),m_outFileName(0),m_errFileName(0)
+        m_outFile(0),m_errFile(0),m_outFileName(0),m_errFileName(0),
+        m_p1(_p1),m_p2(_p2),m_r1(_r1),m_r2(_r2),
+        m_working_copy_present(false),m_url_is_present(false)
     {
         init();
     }
 
-    void DiffOutput::init()
+    void DiffData::init()
     {
         svn_error_t * error;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
@@ -68,14 +71,31 @@ namespace svn
             clean();
             throw ClientException (error);
         }
+        if (svn_path_is_url(m_p1.cstr())) {
+            m_url_is_present = true;
+        } else {
+            m_working_copy_present = true;
+        }
+        if (svn_path_is_url(m_p2.cstr())) {
+            m_url_is_present = true;
+        } else {
+            m_working_copy_present = true;
+        }
+
+        if (m_r1.revision()->kind==svn_opt_revision_unspecified && m_working_copy_present) {
+            m_r1 = svn_opt_revision_base;
+        }
+        if (m_r2.revision()->kind==svn_opt_revision_unspecified) {
+            m_r2 = m_working_copy_present?svn_opt_revision_working : svn_opt_revision_head;
+        }
     }
 
-    DiffOutput::~DiffOutput()
+    DiffData::~DiffData()
     {
         clean();
     }
 
-    void DiffOutput::clean()
+    void DiffData::clean()
     {
         close();
 #if !((SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4))
@@ -90,7 +110,7 @@ namespace svn
 #endif
     }
 
-    void DiffOutput::close()
+    void DiffData::close()
     {
         if (m_outFile != 0) {
             svn_io_file_close(m_outFile,m_Pool);
@@ -102,7 +122,7 @@ namespace svn
         }
     }
 
-    QByteArray DiffOutput::content()
+    QByteArray DiffData::content()
     {
         if (!m_outFileName) {
             return QByteArray();

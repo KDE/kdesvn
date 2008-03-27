@@ -24,6 +24,7 @@
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/pool.hpp"
 #include "path.hpp"
+#include "revision.hpp"
 
 #include <qglobal.h>
 
@@ -39,7 +40,7 @@ namespace svn
 {
     class Path;
 
-    class SVNQT_NOEXPORT DiffOutput
+    class SVNQT_NOEXPORT DiffData
     {
         protected:
             Pool m_Pool;
@@ -49,16 +50,23 @@ namespace svn
             const char*m_outFileName;
             const char*m_errFileName;
 
+            Path m_p1,m_p2;
+            Revision m_r1,m_r2;
+
+            bool m_working_copy_present,m_url_is_present;
+
             void init();
             void clean();
             void close();
 
         public:
-            DiffOutput(const Path&aTmpPath);
-            virtual ~DiffOutput();
+            DiffData(const Path&aTmpPath,const Path&,const Revision&,const Path&,const Revision&);
+            virtual ~DiffData();
 
             apr_file_t*outFile(){return m_outFile;}
             apr_file_t*errFile(){return m_errFile;}
+            const Revision& r1()const{return m_r1;}
+            const Revision& r2()const{return m_r2;}
 
             QByteArray content();
     };

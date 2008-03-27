@@ -1137,10 +1137,17 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         StopDlg sdlg(m_Data->m_SvnContext,parent,0,"Diffing",
             i18n("Diffing - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-            svn::Path(p1),svn::Path(p2),
-            r1, r2,
-            true,false,false,ignore_content,extraOptions);
+        if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
+            kdDebug()<<"Pegged diff"<<endl;
+            ex = m_Data->m_Svnclient->diff_peg(svn::Path(tn),
+                svn::Path(p1),r1, r2,r2,
+                true,false,false,ignore_content,extraOptions);
+        } else {
+            ex = m_Data->m_Svnclient->diff(svn::Path(tn),
+                svn::Path(p1),svn::Path(p2),
+                r1, r2,
+                true,false,false,ignore_content,extraOptions);
+        }
     } catch (svn::ClientException e) {
         emit clientException(e.msg());
         return;

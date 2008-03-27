@@ -67,9 +67,31 @@ namespace svn
                 const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted,const bool ignore_contenttype,
-                    const QStringList&extra) throw (ClientException)
+                const QStringList&extra) throw (ClientException)
   {
-    return diff(tmpPath,path,path,revision1,revision2,recurse,ignoreAncestry,noDiffDeleted,ignore_contenttype,extra);
+    Pool pool;
+    svn_error_t * error;
+    const apr_array_header_t * options;
+
+    // svn_client_diff needs an options array, even if it is empty
+    options = list2array(extra,pool);
+    DiffData ddata(tmpPath,path,revision1,path,revision2);
+
+    error = svn_client_diff_peg3(
+                                 options,
+                                 path.cstr(),
+                                 peg_revision,ddata.r1().revision(),ddata.r2().revision(),
+                                 recurse?1:0,ignoreAncestry,noDiffDeleted,ignore_contenttype,
+                                 APR_LOCALE_CHARSET,
+                                 ddata.outFile(),ddata.errFile(),
+                                 *m_context,
+                                 pool
+                                );
+    if (error != NULL)
+    {
+        throw ClientException (error);
+    }
+    return ddata.content();
   }
 
   QByteArray
@@ -94,39 +116,16 @@ namespace svn
     Pool pool;
     svn_error_t * error;
     const apr_array_header_t * options;
-    bool working_copy_present = false;
-    bool url_is_present = false;
-    Revision r1,r2;
-    r1 = revision1;
-    r2 = revision2;
 
-    if (svn_path_is_url(path1.cstr())) {
-        url_is_present = true;
-    } else {
-        working_copy_present = true;
-    }
-    if (svn_path_is_url(path2.cstr())) {
-        url_is_present = true;
-    } else {
-        working_copy_present = true;
-    }
-
-    if (revision1.revision()->kind==svn_opt_revision_unspecified && working_copy_present) {
-        r1 = svn_opt_revision_base;
-    }
-    if (revision2.revision()->kind==svn_opt_revision_unspecified) {
-        r2 = working_copy_present?svn_opt_revision_working : svn_opt_revision_head;
-    }
     // svn_client_diff needs an options array, even if it is empty
     options = list2array(extra,pool);
-
-    DiffOutput ddata(tmpPath);
+    DiffData ddata(tmpPath,path1,revision1,path2,revision2);
 
     // run diff
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     error = svn_client_diff3 (options,
-                             path1.cstr (), r1.revision (),
-                             path2.cstr (), r2.revision (),
+                             path1.cstr (), ddata.r1().revision (),
+                             path2.cstr (), ddata.r2().revision (),
                              recurse?1:0, ignoreAncestry, noDiffDeleted, ignore_contenttype,
                              APR_LOCALE_CHARSET,
                              ddata.outFile(),ddata.errFile(),
@@ -134,8 +133,8 @@ namespace svn
                              pool);
 #else
     error = svn_client_diff2 (options,
-                             path1.cstr (), r1.revision (),
-                             path2.cstr (), r2.revision (),
+                             path1.cstr (), ddata.r1().revision (),
+                             path2.cstr (), ddata.r2().revision (),
                              recurse?1:0, ignoreAncestry, noDiffDeleted, ignore_contenttype,
                              ddata.outFile(),ddata.errFile(),
                              *m_context,

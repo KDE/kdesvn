@@ -996,9 +996,9 @@ bool SvnActions::get(const QString&what,const QString& to,const svn::Revision&re
 /*!
     \fn SvnActions::makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end)
  */
-void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end,bool isDir)
+void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end,const svn::Revision&_peg,bool isDir)
 {
-    makeDiff(what,start,what,end,isDir,m_Data->m_ParentList->realWidget());
+    makeDiff(what,start,what,end,_peg,isDir,m_Data->m_ParentList->realWidget());
 }
 
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end)
@@ -1012,7 +1012,7 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QStri
         kdDebug()<<"External diff..."<<endl;
         svn::InfoEntry info;
         if (singleInfo(p1,start,info)) {
-            makeDiff(p1,start,p2,end,info.isDir(),p);
+            makeDiff(p1,start,p2,end,end,info.isDir(),p);
         }
         return;
     }
@@ -1104,17 +1104,17 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     return;
 }
 
-void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p)
+void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,bool isDir,QWidget*p)
 {
     if (m_Data->isExternalDiff()) {
         kdDebug()<<"External diff 2..."<<endl;
         makeDiffExternal(p1,start,p2,end,isDir,p);
     } else {
-        makeDiffinternal(p1,start,p2,end,p);
+        makeDiffinternal(p1,start,p2,end,p,_peg);
     }
 }
 
-void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2,QWidget*p)
+void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2,QWidget*p,const svn::Revision&_peg)
 {
     if (!m_Data->m_CurrentContext) return;
     QByteArray ex;
@@ -1132,6 +1132,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     {
         extraOptions.append("-w");
     }
+    svn::Revision peg = _peg==svn::Revision::UNDEFINED?r2:_peg;
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,parent,0,"Diffing",
@@ -1140,7 +1141,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
             kdDebug()<<"Pegged diff"<<endl;
             ex = m_Data->m_Svnclient->diff_peg(svn::Path(tn),
-                svn::Path(p1),r1, r2,r2,
+                svn::Path(p1),r1, r2,peg,
                 true,false,false,ignore_content,extraOptions);
         } else {
             ex = m_Data->m_Svnclient->diff(svn::Path(tn),

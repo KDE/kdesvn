@@ -176,7 +176,7 @@ protected:
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
     CheckModifiedThread*m_CThread,*m_UThread;
-    void makeDiffinternal(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
+    void makeDiffinternal(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*,const svn::Revision&peg=svn::Revision::UNDEFINED);
     void makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p,bool rec=true);
 
 public slots:
@@ -197,9 +197,9 @@ public slots:
     virtual void slotSwitch();
     virtual void slotResolved(const QString&);
     virtual void slotResolve(const QString&);
-    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&,bool isDir);
+    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&,const svn::Revision&_peg,bool isDir);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
-    virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,bool,QWidget*p);
+    virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,const svn::Revision&,bool,QWidget*p);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);

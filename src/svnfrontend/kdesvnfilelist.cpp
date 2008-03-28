@@ -2159,7 +2159,7 @@ void kdesvnfilelist::slotSimpleBaseDiff()
         what = relativePath(kitem);
     }
     // only possible on working copies - so we may say this values
-    m_SvnWrapper->makeDiff(what,svn::Revision::BASE,svn::Revision::WORKING,kitem?kitem->isDir():true);
+    m_SvnWrapper->makeDiff(what,svn::Revision::BASE,svn::Revision::WORKING,svn::Revision::UNDEFINED,kitem?kitem->isDir():true);
 }
 
 void kdesvnfilelist::slotSimpleHeadDiff()
@@ -2177,7 +2177,7 @@ void kdesvnfilelist::slotSimpleHeadDiff()
         what = relativePath(kitem);
     }
     // only possible on working copies - so we may say this values
-    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,kitem?kitem->isDir():true);
+    m_SvnWrapper->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,svn::Revision::UNDEFINED,kitem?kitem->isDir():true);
 }
 
 void kdesvnfilelist::slotDisplayLastDiff()
@@ -2317,7 +2317,8 @@ void kdesvnfilelist::slotDiffRevisions()
     }
     if (dlg->exec()==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_SvnWrapper->makeDiff(what,r.first,r.second,k?k->isDir():true);
+        svn::Revision _peg=(isWorkingCopy()?svn::Revision::WORKING:remoteRevision());
+        m_SvnWrapper->makeDiff(what,r.first,r.second,_peg,k?k->isDir():true);
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
     delete dlg;

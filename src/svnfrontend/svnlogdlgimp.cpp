@@ -241,6 +241,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
 {
     if (!_log) return;
     _base = root;
+    m_first = m_second = 0;
     m_Entries = _log;
     kdDebug()<<"What: "<<what << endl;
     if (!what.isEmpty()){

@@ -102,6 +102,8 @@ namespace svn
     } else if (revstring=="START"){
         m_revision.kind = Revision::START;
         m_revision.value.number = 0;
+    } else if (revstring=="PREV"){
+        m_revision.kind = Revision::PREV;
     } else if (!revstring.isNull()) {
         Pool pool;
         svn_opt_revision_t endrev;
@@ -195,6 +197,9 @@ namespace svn
     case svn_opt_revision_working:
         value = "WORKING";
         break;
+    case svn_opt_revision_previous:
+        value="PREVIOUS";
+        break;
     case svn_opt_revision_unspecified:
     default:
         value="-1";
@@ -274,6 +279,11 @@ namespace svn
   Revision::operator bool()
   {
     return kind()!=UNDEFINED;
+  }
+
+  bool Revision::isRemote()const
+  {
+      return kind()!=UNDEFINED && kind()!=BASE && kind()!=WORKING;
   }
 
 }

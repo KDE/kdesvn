@@ -1017,7 +1017,6 @@ void SvnActions::procClosed(KProcess*proc)
 
 bool SvnActions::get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p)
 {
-    kdDebug()<<"Downloading "<<what<<endl;
     svn::Revision _peg = peg;
     if (_peg == svn::Revision::UNDEFINED) {
         _peg = rev;
@@ -1039,9 +1038,9 @@ bool SvnActions::get(const QString&what,const QString& to,const svn::Revision&re
 /*!
     \fn SvnActions::makeDiff(const QString&,const svn::Revision&start,const svn::Revision&end)
  */
-void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end,bool isDir)
+void SvnActions::makeDiff(const QString&what,const svn::Revision&start,const svn::Revision&end,const svn::Revision&_peg,bool isDir)
 {
-    makeDiff(what,start,what,end,isDir,m_Data->m_ParentList->realWidget());
+    makeDiff(what,start,what,end,_peg,isDir,m_Data->m_ParentList->realWidget());
 }
 
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end)
@@ -1055,14 +1054,15 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QStri
         kdDebug()<<"External diff..."<<endl;
         svn::InfoEntry info;
         if (singleInfo(p1,start,info)) {
-            makeDiff(p1,start,p2,end,info.isDir(),p);
+            makeDiff(p1,start,p2,end,end,info.isDir(),p);
         }
         return;
     }
     makeDiffinternal(p1,start,p2,end,p);
 }
 
-void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p,bool rec)
+void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,
+                                  bool isDir,QWidget*p,bool rec)
 {
     QString edisp = Kdesvnsettings::external_diff_display();
     QStringList wlist = QStringList::split(" ",edisp);
@@ -1076,6 +1076,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     tfile.setAutoDelete(true);
     tfile2.setAutoDelete(true);
     QString first,second;
+    svn::Revision peg = _peg;
 
     if (start != svn::Revision::WORKING) {
         first = isDir?tdir1.name()+"/"+s1:tfile.name();
@@ -1091,25 +1092,26 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
         KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("Both entries seems to be the same, can not diff."));
         return;
     }
+    kdDebug()<<"Diff: "<<peg.toString()<<endl;
 
     if (start != svn::Revision::WORKING) {
         if (!isDir) {
-            if (!get(p1,tfile.name(),start,svn::Revision::UNDEFINED,p)) {
+            if (!get(p1,tfile.name(),start,peg,p)) {
                 return;
             }
         } else {
-            if (!makeCheckout(p1,first,start,true,true,false,false,rec,p)) {
+            if (!makeCheckout(p1,first,start,peg,true,true,false,false,rec,p)) {
                 return;
             }
         }
     }
     if (end!=svn::Revision::WORKING) {
         if (!isDir) {
-            if (!get(p2,tfile2.name(),end,svn::Revision::UNDEFINED,p)) {
+            if (!get(p2,tfile2.name(),end,peg,p)) {
                 return;
             }
         } else {
-            if (!makeCheckout(p2,second,end,true,true,false,false,rec,p)) {
+            if (!makeCheckout(p2,second,end,peg,true,true,false,false,rec,p)) {
                 return;
             }
         }
@@ -1147,17 +1149,17 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     return;
 }
 
-void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p)
+void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,bool isDir,QWidget*p)
 {
     if (m_Data->isExternalDiff()) {
         kdDebug()<<"External diff 2..."<<endl;
-        makeDiffExternal(p1,start,p2,end,isDir,p);
+        makeDiffExternal(p1,start,p2,end,_peg,isDir,p);
     } else {
-        makeDiffinternal(p1,start,p2,end,p);
+        makeDiffinternal(p1,start,p2,end,p,_peg);
     }
 }
 
-void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2,QWidget*p)
+void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const QString&p2,const svn::Revision&r2,QWidget*p,const svn::Revision&_peg)
 {
     if (!m_Data->m_CurrentContext) return;
     QByteArray ex;
@@ -1175,15 +1177,23 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     {
         extraOptions.append("-w");
     }
+    svn::Revision peg = _peg==svn::Revision::UNDEFINED?r2:_peg;
 
     try {
         StopDlg sdlg(m_Data->m_SvnContext,parent,0,"Diffing",
             i18n("Diffing - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-            svn::Path(p1),svn::Path(p2),
-            r1, r2,
-            true,false,false,ignore_content,extraOptions);
+        if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
+            kdDebug()<<"Pegged diff"<<endl;
+            ex = m_Data->m_Svnclient->diff_peg(svn::Path(tn),
+                svn::Path(p1),r1, r2,peg,
+                true,false,false,ignore_content,extraOptions);
+        } else {
+            ex = m_Data->m_Svnclient->diff(svn::Path(tn),
+                svn::Path(p1),svn::Path(p2),
+                r1, r2,
+                true,false,false,ignore_content,extraOptions);
+        }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
@@ -1202,7 +1212,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     if (m_Data->isExternalDiff()) {
         svn::InfoEntry info;
         if (singleInfo(p1,r1,info)) {
-            makeDiffExternal(p1,r1,p2,r2,info.isDir(),_p,false);
+            makeDiffExternal(p1,r1,p2,r2,r2,info.isDir(),_p,false);
         }
         return;
     }
@@ -1519,7 +1529,7 @@ void SvnActions::CheckoutExport(bool _exp)
             svn::Revision r = ptr->toRevision();
             bool openit = ptr->openAfterJob();
             bool ignoreExternal=ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openit,ignoreExternal);
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->forceIt(),_exp,openit,ignoreExternal,true,0);
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
         delete dlg;
@@ -1568,7 +1578,7 @@ void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
             svn::Revision r = ptr->toRevision();
             bool openIt = ptr->openAfterJob();
             bool ignoreExternal = ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,ptr->forceIt(),_exp,openIt,ignoreExternal);
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->forceIt(),_exp,openIt,ignoreExternal,true,0);
         }
         delete dlg;
     }
@@ -1584,7 +1594,7 @@ void SvnActions::slotExportCurrent()
     CheckoutExportCurrent(true);
 }
 
-bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool force_recurse,bool _exp,bool openIt,bool ignoreExternal,bool exp_rec, QWidget*_p)
+bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,const svn::Revision&_peg,bool force_recurse,bool _exp,bool openIt,bool ignoreExternal,bool exp_rec, QWidget*_p)
 {
     QString fUrl = rUrl;
     QString ex;
@@ -1592,8 +1602,8 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         fUrl.truncate(fUrl.length()-1);
     }
     svn::Path p(tPath);
-    svn::Revision peg = svn::Revision::UNDEFINED;
-    if (r!=svn::Revision::BASE && r!=svn::Revision::WORKING) {
+    svn::Revision peg = _peg;
+    if (r!=svn::Revision::BASE && r!=svn::Revision::WORKING && _peg==svn::Revision::UNDEFINED) {
         peg = r;
     }
     if (!_exp||!m_Data->m_CurrentContext) reInitClient();
@@ -1965,7 +1975,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
 
     if (rev1 != svn::Revision::WORKING) {
         if (isDir) {
-            if (!makeCheckout(src1,first,rev1,true,true,false,false,rec)) {
+            if (!makeCheckout(src1,first,rev1,svn::Revision::UNDEFINED,true,true,false,false,rec,0)) {
                 return;
             }
         } else {
@@ -1978,7 +1988,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     if (!singleMerge) {
         if (rev2!=svn::Revision::WORKING) {
             if (isDir) {
-                if (!makeCheckout(src2,second,rev2,true,true,false,false,rec)) {
+                if (!makeCheckout(src2,second,rev2,svn::Revision::UNDEFINED,true,true,false,false,rec,0)) {
                     return;
                 }
             } else {

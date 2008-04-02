@@ -180,6 +180,8 @@ namespace svn
     operator QString ()const;
     QString toString()const;
 
+    bool isRemote()const;
+
     /**
      * @return date
      */

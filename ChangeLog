@@ -1,7 +1,11 @@
 version 1.0.0
     * implemented a sqlite-based logcache.
-    * within some circumstances kdesvn crashed in logviewer
     * removed support for subversion prior 1.4
+    
+version 0.14.3
+    * fixed problems with diff between copied/moved elements (#309)
+    * suppress some useless messages (#314)
+    * within some circumstances kdesvn crashed in logviewer
 
 version 0.14.2
     * fixed a crasher which happens (as example) when opening a folder where the svn-admin-area (eg, the .svn subdir)

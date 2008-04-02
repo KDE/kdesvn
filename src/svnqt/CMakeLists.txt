@@ -32,6 +32,7 @@ SET(SOURCES
     repositorydata.cpp
     repositorylistener.cpp
     svnstream.cpp
+    diff_data.cpp
     svnfilestream.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp

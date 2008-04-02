@@ -503,8 +503,8 @@ namespace svn
      * @exception ClientException
     */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path,
-                const Revision & revision1, const Revision & revision2,
+            diff_peg (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted,const bool ignore_contenttype,
                 const QStringList&extra)
@@ -514,8 +514,8 @@ namespace svn
      * Same as other diff but extra options always set to empty list.
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path,
-                const Revision & revision1, const Revision & revision2,
+            diff_peg (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted,const bool ignore_contenttype)
             throw (ClientException);

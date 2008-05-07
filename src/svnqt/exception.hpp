@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -76,6 +76,7 @@ namespace svn
     Exception () throw ();
 
     Exception & operator = (const Exception &);
+
   };
 
   /**
@@ -113,6 +114,12 @@ namespace svn
     ClientException () throw ();
 
     ClientException & operator = (ClientException &);
+    static QString getBackTrace();
+
+    void init();
+    /// backtrace from constructor;
+    QString m_backTraceConstr;
+
   };
 
 }

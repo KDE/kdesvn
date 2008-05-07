@@ -57,16 +57,17 @@ namespace svn
     };
 
     SvnInit::SvnInit() {
+        qDebug("Calling svnclient init");
         svn_cmdline_init("svnqt",0);
     }
 
-    static SvnInit sInit;
   }
 
 
   Client_impl::Client_impl (ContextP context)
 	: Client()
   {
+    static internal::SvnInit sInit;
     setContext (context);
   }
 

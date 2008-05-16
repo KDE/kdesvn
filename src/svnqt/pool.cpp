@@ -51,14 +51,13 @@ namespace svn
   {
     if(m_pool)
     {
-      svn_pool_destroy (m_pool);
+        svn_pool_destroy (m_pool);
     }
   }
 
   apr_pool_t *
   Pool::pool () const
   {
-      svn_pool_clear(m_pool);
     return m_pool;
   }
 

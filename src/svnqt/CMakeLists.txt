@@ -43,7 +43,7 @@ SET(SOURCES
 MESSAGE(STATUS "QT4 found? ${QT4_FOUND}")
 
 IF (SQLITE_FOUND AND NOT QT4_FOUND)
-    message(status "insert own sqlite3")
+    MESSAGE(STATUS "use own sqlite3")
     SET(SOURCES
     ${SOURCES}
     cache/sqlite3/qsqlcachedresult.cpp

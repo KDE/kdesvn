@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -39,13 +39,6 @@ namespace svn
   apr_pool_t *
   Pool::pool_create (apr_pool_t * parent)
   {
-    // CAUTION: this is not thread-safe!!!
-    if (!s_initialized)
-    {
-      s_initialized = true;
-      apr_pool_initialize ();
-    }
-
     return svn_pool_create (parent);
   }
 
@@ -65,6 +58,7 @@ namespace svn
   apr_pool_t *
   Pool::pool () const
   {
+      svn_pool_clear(m_pool);
     return m_pool;
   }
 

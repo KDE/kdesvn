@@ -142,6 +142,7 @@ namespace svn
       return m_targets;
     }
 
+    const Path& operator [](size_t which)const;
     /**
      * returns one single target.
      * the first in the vector, if no parameter given if there are more

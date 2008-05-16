@@ -455,6 +455,7 @@ namespace svn
                 const Revision & rev,
                 const Revision & peg_revision) throw (ClientException)
   {
+
     InfoEntries ientries;
     Pool pool;
     svn_error_t *error = NULL;
@@ -466,14 +467,15 @@ namespace svn
     baton.pool = pool;
     baton.m_Context=m_context;
     svn_opt_revision_t pegr;
-    const char *truepath;
+    const char *truepath = 0;
     bool internal_peg = false;
-    error = svn_opt_parse_path (&pegr, &truepath,
-                                 _p.cstr(),
+    QByteArray _buf = _p.cstr();
+
+    error = svn_opt_parse_path(&pegr, &truepath,
+                                 _buf,
                                  pool);
     if (error != NULL)
       throw ClientException (error);
-
 
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
         if ((svn_path_is_url (_p.cstr())) && (pegr.kind == svn_opt_revision_unspecified)) {
@@ -483,7 +485,7 @@ namespace svn
     }
 
     error =
-      svn_client_info(truepath,
+            svn_client_info(truepath,
                       internal_peg?&pegr:peg_revision.revision(),
                       rev.revision (),
                       &InfoEntryFunc,

@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -38,8 +38,44 @@
 
 #include "svn_opt.h"
 
+#include <svn_cmdline.h>
+
+#include <qstringlist.h>
+#include <qdir.h>
+
 namespace svn
 {
+    //! this namespace contains only internal stuff not for public use
+    namespace internal {
+    //! small helper class
+    /*!
+        There will be an static instance created for calling the constructor at program load.
+     */
+        class SvnInit
+        {
+            public:
+        //! constructor calling initialize functions
+                SvnInit();
+                ~SvnInit(){};
+        };
+
+        SvnInit::SvnInit() {
+            apr_pool_initialize();
+            svn_cmdline_init("svnqt",0);
+            qDebug("svn_cmdline_init done");
+            QString BasePath=QDir::HOMEDIR();
+            QDir d;
+            if (!d.exists(BasePath)) {
+                d.mkdir(BasePath);
+            }
+            BasePath=BasePath+"/"+".svnqt";
+            if (!d.exists(BasePath)) {
+                d.mkdir(BasePath);
+            }
+
+        }
+    }
+
   Client::Client()
   {
   }
@@ -50,6 +86,7 @@ namespace svn
 
   Client*Client::getobject(ContextP context,int subtype)
   {
+      static internal::SvnInit sInit;
     switch(subtype) {
       case 0:
        return new Client_impl(context);

@@ -64,6 +64,8 @@ IF (UNIX)
   EXEC_PROGRAM(${APR_CONFIG} ARGS "--ldflags --libs --link-ld" OUTPUT_VARIABLE APR_EXTRA_LIBFLAGS)
   EXEC_PROGRAM(${APU_CONFIG} ARGS "--ldflags --libs --link-ld" OUTPUT_VARIABLE APU_EXTRA_LIBFLAGS)
 
+  CHECK_INCLUDE_FILES(execinfo.h HAS_BACKTRACE_H)
+
 ENDIF (UNIX)
 
 #search libaries for Windows
@@ -73,7 +75,7 @@ IF (WIN32)
   FIND_PATH (SUBVERSION_BIN_DIR svn.exe
     "$ENV{ProgramFiles}/Subversion/bin"
   )
-  
+
   FIND_PATH (SUBVERSION_INCLUDE_DIR svn_client.h
     "$ENV{ProgramFiles}/Subversion/include"
   )

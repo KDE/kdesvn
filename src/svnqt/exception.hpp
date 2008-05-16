@@ -77,6 +77,7 @@ namespace svn
     Exception () throw ();
 
     Exception & operator = (const Exception &);
+
   };
 
   /**
@@ -114,6 +115,12 @@ namespace svn
     ClientException () throw ();
 
     ClientException & operator = (ClientException &);
+    static QString getBackTrace();
+
+    void init();
+    /// backtrace from constructor;
+    QString m_backTraceConstr;
+
   };
 
 }

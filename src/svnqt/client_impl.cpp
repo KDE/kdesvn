@@ -36,44 +36,9 @@
 #include "svn_opt.h"
 #include "svnqt/svnqt_defines.hpp"
 
-#include <svn_cmdline.h>
-
 #include <qstringlist.h>
-#include <qdir.h>
-
 namespace svn
 {
-  //! this namespace contains only internal stuff not for public use
-  namespace internal {
-    //! small helper class
-    /*!
-        There will be an static instance created for calling the constructor at program load.
-     */
-    class SvnInit
-    {
-    public:
-        //! constructor calling initialize functions
-        SvnInit();
-        ~SvnInit(){};
-    };
-
-    SvnInit::SvnInit() {
-        svn_cmdline_init("svnqt",0);
-        QString BasePath=QDir::HOMEDIR();
-        QDir d;
-        if (!d.exists(BasePath)) {
-            d.mkdir(BasePath);
-        }
-        BasePath=BasePath+"/"+".svnqt";
-        if (!d.exists(BasePath)) {
-            d.mkdir(BasePath);
-        }
-
-    }
-
-    static SvnInit sInit;
-  }
-
 
   Client_impl::Client_impl (ContextP context)
 	: Client()

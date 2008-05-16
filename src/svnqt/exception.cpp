@@ -35,11 +35,18 @@
 
 #include <qstring.h>
 
+#ifdef HAS_BACKTRACE_H
+#include <execinfo.h>
+#include <qstringlist.h>
+#define SVNQT_BACKTRACE_LENGTH 20
+#endif
+
 namespace svn
 {
 
   struct Exception::Data
   {
+  private:
   public:
     QString message;
     apr_status_t apr_err;
@@ -136,19 +143,20 @@ namespace svn
   ClientException::ClientException (svn_error_t * error) throw ()
     : Exception ("")
   {
+    init();
     if (error == 0)
-      return;
+        return;
 
     m->apr_err = error->apr_err;
-    m->message = error2msg(error);
+    m->message += error2msg(error);
     svn_error_clear (error);
   }
-
 
   ClientException::ClientException (apr_status_t status) throw ()
     : Exception ("")
   {
-    m->apr_err = status;
+      init();
+      m->apr_err = status;
   }
 
 
@@ -161,6 +169,48 @@ namespace svn
   {
     m->apr_err = src.apr_err();
   }
+
+  void ClientException::init()
+  {
+#ifdef USEBACKTRACE
+    if (m_backTraceConstr.length()==0) {
+        m_backTraceConstr = getBackTrace();
+        m->message=m_backTraceConstr;
+    }
+#else
+    m_backTraceConstr="";
+#endif
+  }
+
+  QString ClientException::getBackTrace()
+  {
+    QString Result;
+    qDebug("getBackTrace");
+#ifdef HAS_BACKTRACE_H
+    qDebug("Generating backtrace");
+    void *array[SVNQT_BACKTRACE_LENGTH];
+    size_t size;
+    size_t i;
+
+    size = backtrace (array, SVNQT_BACKTRACE_LENGTH);
+    if (!size) {
+        return Result;
+    }
+
+    char ** strings = backtrace_symbols (array, size);
+
+    QStringList r;
+    for (i = 0; i < size; ++i) {
+        r.push_back(QString::number(i) +
+             QString::FROMUTF8(": ") +
+             QString::FROMUTF8(strings[i]));
+    }
+    Result = QString::FROMUTF8("[\n")+r.join("\n")+QString::FROMUTF8("]\n");
+    free (strings);
+#endif
+    return Result;
+  }
+
 }
 /* -----------------------------------------------------------------
  * local variables:

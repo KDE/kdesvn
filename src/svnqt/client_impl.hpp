@@ -284,6 +284,17 @@ namespace svn
     copy (const Path & srcPath,
           const Revision & srcRevision,
           const Path & destPath) throw (ClientException);
+    /**
+     * Copies a versioned file with the history preserved.
+     * @since subversion 1.5 api
+     * @see svn_client_copy4
+     * @exception ClientException
+     */
+    virtual void
+    copy (const Targets & srcPath,
+          const Revision & srcRevision,
+          const Path & destPath,
+          bool asChild=false,bool makeParent=false) throw (ClientException);
 
     /**
      * Moves or renames a file.

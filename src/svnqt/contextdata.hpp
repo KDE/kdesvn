@@ -37,6 +37,7 @@ namespace svn {
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
+
 class SVNQT_NOEXPORT ContextData{
 public:
     ContextData(const QString & configDir_);
@@ -145,7 +146,7 @@ protected:
     static svn_error_t *
     onLogMsg (const char **log_msg,
               const char **tmp_file,
-              apr_array_header_t *, //UNUSED commit_items
+              apr_array_header_t * commit_items,
               void *baton,
               apr_pool_t * pool);
 
@@ -157,9 +158,23 @@ protected:
     static svn_error_t *
     onLogMsg2 (const char **log_msg,
               const char **tmp_file,
-              const apr_array_header_t *, //UNUSED commit_items
+              const apr_array_header_t * commit_items,
               void *baton,
               apr_pool_t * pool);
+
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+    /**
+     * this function gets called by the subversion api function
+     * when a log message is needed. This is the case on a commit
+     * for example
+     */
+    static svn_error_t *
+    onLogMsg3 (const char **log_msg,
+              const char **tmp_file,
+              const apr_array_header_t * commit_items,
+              void *baton,
+              apr_pool_t * pool);
+#endif
 
     /**
      * this is the callback function for the subversion
@@ -264,7 +279,7 @@ protected:
     bool logIsSet;
     int m_promptCounter;
     Pool pool;
-    svn_client_ctx_t m_ctx;
+    svn_client_ctx_t*m_ctx;
     QString username;
     QString password;
     QString logMessage;

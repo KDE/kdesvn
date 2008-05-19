@@ -1,6 +1,8 @@
 SET(SUBVERSIONFOUND)
 SET(SUBVERSION_ALL_LIBS)
 
+INCLUDE (CheckIncludeFiles)
+
 #search libraries for UNIX
 IF (UNIX)
 

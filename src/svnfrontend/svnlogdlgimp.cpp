@@ -22,6 +22,7 @@
 #include "src/svnqt/log_entry.hpp"
 #include "helpers/sub2qt.h"
 #include "svnactions.h"
+#include "src/svnfrontend/fronthelpers/revisionbuttonimpl.h"
 
 #include <k3listview.h>
 #include <ktextbrowser.h>
@@ -54,7 +55,7 @@ public:
     LogListViewItem (K3ListView *parent,const svn::LogEntry&);
     virtual int compare( Q3ListViewItem* i, int col, bool ascending ) const;
 
-    static const int COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
+    static const int COL_MARKER,COL_REV,COL_AUTHOR,COL_DATE,COL_MSG;
     const QString&message()const;
     svn_revnum_t rev()const{return _revision;}
     void showChangedEntries(K3ListView*);
@@ -73,6 +74,7 @@ protected:
     Q3ValueList<svn::LogChangePathEntry> changedPaths;
 };
 
+const int LogListViewItem::COL_MARKER = 0;
 const int LogListViewItem::COL_REV = 2;
 const int LogListViewItem::COL_AUTHOR = 1;
 const int LogListViewItem::COL_DATE = 3;
@@ -191,11 +193,10 @@ bool LogListViewItem::isParent(const QString&_par,const QString&tar)
     return tar.startsWith(par);
 }
 
-SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
-    :SvnLogDialogData(parent, name),_name("")
+SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool modal)
+    :SvnLogDialogData(parent, name,modal),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
-    m_LogView->header()->setLabel( 0, "");
     resize(dialogSize());
     m_ControlKeyDown = false;
     m_first = 0;
@@ -207,25 +208,17 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name)
         m_ChangedList->hide();
     }
     m_Actions = ac;
-    if (ac) {
-        _bugurl = m_Actions->getContextData("bugtraq:url");
-        QString reg = m_Actions->getContextData("bugtraq:logregex");
-        if (!reg.isEmpty()) {
-            QStringList s1 = QStringList::split("\n",reg);
-            if (s1.size()>0) {
-                _r1.setPattern(s1[0]);
-                if (s1.size()>1) {
-                    _r2.setPattern(s1[1]);
-                }
-            }
-        }
-    }
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
+        QTextStream st2(&t1,IO_ReadOnly);
+        st2 >> *m_centralSplitter;
+    }
+    t1 = cs.readEntry("right_logsplitter",QString::null);
+    if (!t1.isEmpty()) {
         if (cs.readBoolEntry("laststate",false)==m_ChangedList->isHidden()) {
             Q3TextStream st2(&t1,QIODevice::ReadOnly);
-            st2 >> *m_centralSplitter;
+            st2 >> *m_rightSplitter;
         }
     }
 }
@@ -234,22 +227,58 @@ SvnLogDlgImp::~SvnLogDlgImp()
 {
     QString t1,t2;
     Q3TextStream st1(&t1,QIODevice::WriteOnly);
-    st1 << *m_centralSplitter;
+    st1 << *m_rightSplitter;
+    QTextStream st2(&t2,IO_WriteOnly);
+    st2 << *m_centralSplitter;
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
-    cs.writeEntry("logsplitter",t1);
+    cs.writeEntry("right_logsplitter",t1);
+    cs.writeEntry("logsplitter",t2);
     cs.writeEntry("laststate",m_ChangedList->isHidden());
 }
 
-void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString & what,const QString&root)
+void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString & what,const QString&root,const svn::Revision&peg,const QString&pegUrl)
 {
-    if (!_log) return;
+    m_peg = peg;
+    m_PegUrl = pegUrl;
+    m_first = m_second = 0;
+    m_startRevButton->setNoWorking(m_PegUrl.isUrl());
+    m_endRevButton->setNoWorking(m_PegUrl.isUrl());
+    if (!m_PegUrl.isUrl() || Kdesvnsettings::remote_special_properties()) {
+        QString s = m_Actions->searchProperty(_bugurl,"bugtraq:url",pegUrl,peg,true);
+        if (!s.isEmpty() ){
+            QString reg;
+            s = m_Actions->searchProperty(reg,"bugtraq:logregex",pegUrl,peg,true);
+            if (!s.isNull() && !reg.isEmpty()) {
+                QStringList s1 = QStringList::split("\n",reg);
+                if (s1.size()>0) {
+                    _r1.setPattern(s1[0]);
+                    if (s1.size()>1) {
+                        _r2.setPattern(s1[1]);
+                    }
+                }
+            }
+        }
+    }
     _base = root;
+    m_first = m_second = 0;
     m_Entries = _log;
     kDebug()<<"What: "<<what << endl;
     if (!what.isEmpty()){
         setCaption(i18n("SVN Log of %1").arg(what));
     } else {
         setCaption(i18n("SVN Log"));
+    }
+    _name = what;
+    dispLog(_log);
+}
+
+void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log)
+{
+    m_LogView->clear();
+    m_LogView->header()->setLabel(0, " ");
+    m_LogView->setColumnWidth(0,10);
+    if (!_log) {
+        return;
     }
     svn::LogEntriesMap::const_iterator lit;
     LogListViewItem * item;
@@ -266,8 +295,10 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     if (itemMap.count()==0) {
         return;
     }
+    m_startRevButton->setRevision(max);
+    m_endRevButton->setRevision(min);
     m_LogView->setSelected(m_LogView->firstChild(),true);
-    QString bef = what;
+    QString bef = _name;
     long rev;
     // YES! I'd checked it: this is much faster than getting list of keys
     // and iterating over that list!
@@ -280,7 +311,6 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
         }
         itemMap[c]->copiedFrom(bef,rev);
     }
-    _name = what;
 }
 
 QString SvnLogDlgImp::genReplace(const QString&r1match)
@@ -454,6 +484,8 @@ void SvnLogDlgImp::slotItemClicked(int button,Q3ListViewItem*item,const QPoint &
         if (m_first==m_second) {
             m_second = 0;
         }
+        m_startRevButton->setRevision(which->rev());
+
     /* other mouse or ctrl hold*/
     } else {
         if (m_second) m_second->setText(0,"");
@@ -466,8 +498,15 @@ void SvnLogDlgImp::slotItemClicked(int button,Q3ListViewItem*item,const QPoint &
         if (m_first==m_second) {
             m_first = 0;
         }
+        m_endRevButton->setRevision(which->rev());
     }
     m_DispSpecDiff->setEnabled(m_first!=0 && m_second!=0);
+}
+
+void SvnLogDlgImp::slotRevisionSelected()
+{
+    m_goButton->setFocus();
+    //m_DispSpecDiff->setEnabled( m_first && m_second && m_first != m_second);
 }
 
 void SvnLogDlgImp::slotDispSelected()
@@ -487,6 +526,17 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStr
     return true;
 }
 
+void SvnLogDlgImp::slotGetLogs()
+{
+    kdDebug()<<"Displog: "<<m_peg.toString()<<endl;
+    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
+            m_endRevButton->revision(),m_peg,
+            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,this);
+    if (lm) {
+        dispLog(lm);
+    }
+}
+
 void SvnLogDlgImp::slotListEntries()
 {
     LogListViewItem * it = static_cast<LogListViewItem*>(m_LogView->selectedItem());
@@ -494,7 +544,7 @@ void SvnLogDlgImp::slotListEntries()
         buttonListFiles->setEnabled(false);
         return;
     }
-    svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(it->rev(),it->rev(),_name,true,0);
+    svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(it->rev(),it->rev(),it->rev(),_name,true,0);
     if (!_log) {
         return;
     }
@@ -609,10 +659,5 @@ void SvnLogDlgImp::slotSingleDoubleClicked(Q3ListViewItem*_item)
         m_Actions->makeBlame(start,k->rev(),_base+name,kapp->activeModalWidget(),k->rev(),this);
     }
 }
-
-
-
-
-
 
 #include "svnlogdlgimp.moc"

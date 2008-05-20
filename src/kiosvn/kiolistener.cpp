@@ -29,7 +29,7 @@
 namespace KIO {
 
 KioListener::KioListener(KIO::kio_svnProtocol*_par)
- : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false)
+    : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false),m_Canceld(false)
 {
     par = _par;
 }
@@ -47,7 +47,7 @@ KioListener::~KioListener()
  */
 bool KioListener::contextCancel()
 {
-    return par->wasKilled();
+    return par->wasKilled()||m_Canceld;
 }
 
 

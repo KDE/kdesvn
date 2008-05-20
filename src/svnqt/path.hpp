@@ -176,6 +176,9 @@ namespace svn
     /** returns the path with native separators */
     QString
     native () const;
+
+    /** returns if the path is a valid url, eg. points to a remote */
+    bool isUrl()const;
   };
 }
 

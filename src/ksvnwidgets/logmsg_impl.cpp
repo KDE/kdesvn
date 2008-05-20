@@ -43,6 +43,7 @@
 #define MAX_MESSAGE_HISTORY 10
 
 Q3ValueList<QString> Logmsg_impl::sLogHistory = Q3ValueList<QString>();
+QString Logmsg_impl::sLastMessage=QString();
 const QString Logmsg_impl::groupName("logmsg_dlg_size");
 
 unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
@@ -239,29 +240,37 @@ void Logmsg_impl::initHistory()
             m_LogHistory->insertItem((*it).left(37)+"...");
         }
     }
+    if (sLastMessage.length()>0) {
+        m_LogEdit->setText(sLastMessage);
+        sLastMessage=QString();
+    }
 }
 
 
 /*!
     \fn Logmsg_impl::saveHistory()
  */
-void Logmsg_impl::saveHistory()
+void Logmsg_impl::saveHistory(bool canceld)
 {
     if (m_LogEdit->text().length()==0) return;
     /// @todo make static threadsafe
-    Q3ValueList<QString>::iterator it;
-    if ( (it=sLogHistory.find(m_LogEdit->text()))!=sLogHistory.end()) {
-        sLogHistory.erase(it);
+    if (!canceld) {
+        Q3ValueList<QString>::iterator it;
+        if ( (it=sLogHistory.find(m_LogEdit->text()))!=sLogHistory.end()) {
+            sLogHistory.erase(it);
+        }
+        sLogHistory.push_front(m_LogEdit->text());
+        if (sLogHistory.size()>smax_message_history) {
+            sLogHistory.erase(sLogHistory.fromLast());
+        }
+        KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
+        for (unsigned int i = 0; i < sLogHistory.size();++i) {
+            cs.writeEntry(QString("log_%0").arg(i),sLogHistory[i]);
+        }
+        cs.sync();
+    } else {
+        sLastMessage=m_LogEdit->text();
     }
-    sLogHistory.push_front(m_LogEdit->text());
-    if (sLogHistory.size()>smax_message_history) {
-        sLogHistory.erase(sLogHistory.fromLast());
-    }
-    KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
-    for (unsigned int i = 0; i < sLogHistory.size();++i) {
-        cs.writeEntry(QString("log_%0").arg(i),sLogHistory[i]);
-    }
-    cs.sync();
 }
 
 QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
@@ -294,8 +303,9 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*pare
         _rec = ptr->isRecursive();
         _keep_locks = ptr->isKeeplocks();
         msg=ptr->getMessage();
-        ptr->saveHistory();
     }
+    ptr->saveHistory(!_ok);
+
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
@@ -333,8 +343,9 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
         _rec = ptr->isRecursive();
         _keep_locks = ptr->isKeeplocks();
         msg=ptr->getMessage();
-        ptr->saveHistory();
     }
+    ptr->saveHistory(!_ok);
+
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
@@ -372,9 +383,10 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
         _ok = true;
         _rec = ptr->isRecursive();
         msg=ptr->getMessage();
-        ptr->saveHistory();
         _keep_locks = ptr->isKeeplocks();
     }
+    ptr->saveHistory(!_ok);
+
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _rec;
@@ -415,9 +427,9 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     } else {
         _ok = true;
         msg=ptr->getMessage();
-        ptr->saveHistory();
         _keep_locks = ptr->isKeeplocks();
     }
+    ptr->saveHistory(!_ok);
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     _result = ptr->selectedEntries();

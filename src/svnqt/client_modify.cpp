@@ -188,9 +188,7 @@ namespace svn
 #endif
 
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 5)
-      svn_client_commit4
-#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_client_commit3
 #else
       svn_client_commit2
@@ -212,11 +210,54 @@ namespace svn
   }
 
   void
+    Client_impl::copy(const Targets & srcPaths,
+                    const Revision & srcRevision,
+                    const Path & destPath,
+                     bool asChild,bool makeParent) throw (ClientException)
+    {
+        if (srcPaths.size()<1)
+        {
+            throw ClientException("Wrong size of sources.");
+        }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+        Pool pool;
+        svn_commit_info_t *commit_info = 0L;
+        apr_array_header_t * sources = apr_array_make(pool,srcPaths.size(),sizeof(svn_client_copy_source_t *));
+        for (size_t j=0;j<srcPaths.size();++j)
+        {
+            svn_client_copy_source_t* source = (svn_client_copy_source_t*)apr_palloc(pool, sizeof(svn_client_copy_source_t));
+            source->path = apr_pstrdup(pool,srcPaths[j].path().TOUTF8());
+            source->revision=srcRevision.revision();
+            source->peg_revision=source->revision;
+            APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
+        }
+        svn_error_t * error =
+                svn_client_copy4(&commit_info,
+                    sources,
+                    destPath.cstr(),
+                    asChild,makeParent,*m_context,pool);
+        if (error!=0){
+            throw ClientException (error);
+        }
+#else
+        Q_UNUSED(asChild);
+        Q_UNUSED(makeParent);
+        for (size_t j=0;j<srcPaths.size();++j)
+        {
+            copy(srcPaths[j],srcRevision,destPath);
+        }
+#endif
+    }
+
+  void
   Client_impl::copy (const Path & srcPath,
                 const Revision & srcRevision,
                 const Path & destPath) throw (ClientException)
   {
-    Pool pool;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+      copy(srcPath,srcRevision,destPath,true,false);
+#else
+      Pool pool;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
 #else
@@ -237,6 +278,7 @@ namespace svn
 
     if(error != NULL)
       throw ClientException (error);
+#endif
   }
 
   void

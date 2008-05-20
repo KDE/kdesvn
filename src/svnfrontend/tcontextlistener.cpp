@@ -145,7 +145,7 @@ void ThreadContextListener::contextNotify(const QString&aMsg)
  */
 void ThreadContextListener::contextProgress(long long int current, long long int max)
 {
-    if (current==0) {
+    if (m_Data->noProgress||current==0) {
         return;
     }
     QMutexLocker lock(&(m_Data->m_CallbackMutex));

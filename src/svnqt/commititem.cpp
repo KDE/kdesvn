@@ -59,6 +59,28 @@ CommitItem::CommitItem(const svn_client_commit_item2_t*_item)
     }
 }
 
+CommitItem::CommitItem(const svn_client_commit_item3_t*_item)
+{
+    init();
+
+    if (_item) {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+        m_Path = QString::FROMUTF8(_item->path);
+        m_Kind = _item->kind;
+        m_Url = QString::FROMUTF8(_item->url);
+        m_Revision = _item->revision;
+        m_CopyFromRevision = _item->copyfrom_rev;
+        m_CopyFromUrl = QString::FROMUTF8(_item->copyfrom_url);
+        m_State = _item->state_flags;
+        convertprop(_item->incoming_prop_changes);
+        if (_item->outgoing_prop_changes)
+        {
+            convertprop(_item->outgoing_prop_changes);
+        }
+#endif
+    }
+}
+
 void CommitItem::convertprop(apr_array_header_t * list)
 {
     if (!list) {

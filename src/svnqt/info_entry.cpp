@@ -120,7 +120,10 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
 
 QString svn::InfoEntry::prettyUrl(const char*_url)const
 {
-    Pool pool;
-    _url = svn_path_uri_decode(_url,pool);
-    return QString::FROMUTF8(_url);
+    if (_url) {
+        Pool pool;
+        _url = svn_path_uri_decode(_url,pool);
+        return QString::FROMUTF8(_url);
+    }
+    return QString::FROMUTF8("");
 }

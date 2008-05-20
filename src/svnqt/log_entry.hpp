@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -32,12 +32,14 @@
 #define _SVNCPP_LOG_ENTRY_H_
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/datetime.hpp"
 
 //Qt
 #include <qglobal.h>
 
 #if QT_VERSION < 0x040000
 
+#include <qglobal.h>
 #include <qstring.h>
 #include <qvaluelist.h>
 
@@ -85,9 +87,9 @@ namespace svn
     QString copyToPath;
 
 #if QT_VERSION < 0x040000
-    svn_revnum_t copyFromRevision;
+    Q_LLONG copyFromRevision;
     //! future use or useful in backends
-    svn_revnum_t copyToRevision;
+    Q_LLONG copyToRevision;
 #else
     qlonglong copyFromRevision;
     qlonglong copyToRevision;
@@ -110,13 +112,14 @@ namespace svn
               const char * date,
               const char * message);
     void setDate(const char*date);
+
 #if QT_VERSION < 0x040000
     //! if -1 the entry is a fake entry and not real usable!
-    svn_revnum_t revision;
-    apr_time_t date;
+    Q_LLONG revision;
+    Q_LLONG date;
 #else
-    qlonglong revision;
     qlonglong date;
+    qlonglong revision;
 #endif
     QString author;
     QString message;
@@ -124,11 +127,11 @@ namespace svn
   };
 }
 
-SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogEntry&r);
-SVNQT_EXPORT QDataStream& operator<<(QDataStream&s,const svn::LogChangePathEntry&r);
+SVNQT_EXPORT QDataStream &operator<<(QDataStream&s,const svn::LogEntry&r);
+SVNQT_EXPORT QDataStream &operator<<(QDataStream&s,const svn::LogChangePathEntry&r);
 
-SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogEntry&r);
-SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogChangePathEntry&r);
+SVNQT_EXPORT QDataStream &operator>>(QDataStream&s,svn::LogEntry&r);
+SVNQT_EXPORT QDataStream &operator>>(QDataStream&s,svn::LogChangePathEntry&r);
 
 #endif
 /* -----------------------------------------------------------------

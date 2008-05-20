@@ -382,6 +382,7 @@ namespace svn
   Client_impl::log (const Path& path, const Revision & revisionStart,
        const Revision & revisionEnd,
        LogEntriesMap&log_target,
+       const Revision & revisionPeg,
        bool discoverChangedPaths,
        bool strictNodeHistory,int limit) throw (ClientException)
   {
@@ -392,8 +393,9 @@ namespace svn
     l_baton.m_data = &log_target;
 
     svn_error_t *error;
-    error = svn_client_log2 (
+    error = svn_client_log3 (
       target.array (pool),
+      revisionPeg.revision(),
       revisionStart.revision (),
       revisionEnd.revision (),
       limit,
@@ -413,8 +415,9 @@ namespace svn
 
   LogEntriesPtr
   Client_impl::log (const Path& path, const Revision & revisionStart,
-               const Revision & revisionEnd, bool discoverChangedPaths,
-               bool strictNodeHistory,int limit) throw (ClientException)
+                    const Revision & revisionEnd, const Revision & revisionPeg,
+                    bool discoverChangedPaths,
+                    bool strictNodeHistory,int limit) throw (ClientException)
   {
     Targets target(path);
     Pool pool;
@@ -425,8 +428,9 @@ namespace svn
 
     svn_error_t *error;
 
-    error = svn_client_log2 (
+    error = svn_client_log3 (
       target.array (pool),
+      revisionPeg.revision(),
       revisionStart.revision (),
       revisionEnd.revision (),
       limit,
@@ -451,6 +455,7 @@ namespace svn
                 const Revision & rev,
                 const Revision & peg_revision) throw (ClientException)
   {
+
     InfoEntries ientries;
     Pool pool;
     svn_error_t *error = NULL;
@@ -462,14 +467,15 @@ namespace svn
     baton.pool = pool;
     baton.m_Context=m_context;
     svn_opt_revision_t pegr;
-    const char *truepath;
+    const char *truepath = 0;
     bool internal_peg = false;
-    error = svn_opt_parse_path (&pegr, &truepath,
-                                 _p.cstr(),
+    QByteArray _buf = _p.cstr();
+
+    error = svn_opt_parse_path(&pegr, &truepath,
+                                 _buf,
                                  pool);
     if (error != NULL)
       throw ClientException (error);
-
 
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
         if ((svn_path_is_url (_p.cstr())) && (pegr.kind == svn_opt_revision_unspecified)) {
@@ -479,7 +485,7 @@ namespace svn
     }
 
     error =
-      svn_client_info(truepath,
+            svn_client_info(truepath,
                       internal_peg?&pegr:peg_revision.revision(),
                       rev.revision (),
                       &InfoEntryFunc,

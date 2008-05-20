@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -155,9 +155,3 @@ SVNQT_EXPORT QDataStream& operator>>(QDataStream&s,svn::LogChangePathEntry&r)
     r.action = ac;
     return s;
 }
-
-/* -----------------------------------------------------------------
- * local variables:
- * eval: (load-file "../../rapidsvn-dev.el")
- * end:
- */

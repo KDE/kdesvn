@@ -47,6 +47,7 @@ class K3Process;
 class SvnActionsData;
 class CheckModifiedThread;
 class CheckUpdatesThread;
+class FillCacheThread;
 
 namespace svn {
     class Context;
@@ -75,10 +76,10 @@ public:
             const char*name="standard_dialog",
             bool showHelp=false,bool modal=true,
             const KGuiItem&u1 = KGuiItem());
-    QByteArray makeGet(const svn::Revision&start, const QString&what,
-        const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
+
     bool makeGet(const svn::Revision&start, const QString&what,const QString&target,
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
+
 
     bool addItems(const Q3ValueList<svn::Path> &items,bool rec=false);
     bool addItems(const QStringList&w,bool rec=false);
@@ -120,9 +121,9 @@ public:
     void makeTree(const QString&what,const svn::Revision&rev,
         const svn::Revision&startr=svn::Revision(1),
         const svn::Revision&endr=svn::Revision::HEAD);
-    void makeLog(const svn::Revision&start,const svn::Revision&end,SvnItem*k,bool list_files=false,int limit = 0);
-    void makeLog(const svn::Revision&start,const svn::Revision&end,const QString&,bool list_files=false, int limit=0);
-    svn::SharedPointer<svn::LogEntriesMap> getLog(const svn::Revision&start,const svn::Revision& end,const QString&,bool list_files, int limit);
+    void makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,SvnItem*k,bool list_files=false,int limit = 0);
+    void makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&,bool list_files=false, int limit=0);
+    svn::SharedPointer<svn::LogEntriesMap> getLog(const svn::Revision&start,const svn::Revision& end,const svn::Revision&peg,const QString&,bool list_files, int limit,QWidget*parent=0);
     virtual bool getSingleLog(svn::LogEntry&,const svn::Revision&,const QString&,const svn::Revision&,QString&root);
 
     void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
@@ -131,7 +132,7 @@ public:
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
-    bool makeCheckout(const QString&,const QString&,const svn::Revision&,bool,bool,bool,bool,bool exp_rec=true, QWidget*p=0);
+    bool makeCheckout(const QString&,const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool,bool exp_rec,QWidget*p);
     void makeInfo(Q3PtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);
@@ -151,6 +152,9 @@ public:
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
     void stopCheckUpdateThread();
+    void startFillCache(const QString&path);
+    void stopFillCache();
+    void stopMain();
     void killallThreads();
 
     bool checkUpdatesRunning();
@@ -178,8 +182,9 @@ protected:
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
     CheckModifiedThread*m_CThread,*m_UThread;
-    void makeDiffinternal(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
-    void makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,bool isDir,QWidget*p,bool rec=true);
+    FillCacheThread*m_FCThread;
+    void makeDiffinternal(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*,const svn::Revision&peg=svn::Revision::UNDEFINED);
+    void makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,bool isDir,QWidget*p,bool rec=true);
 
 public slots:
     virtual void dispDiff(const QByteArray&);
@@ -198,9 +203,10 @@ public slots:
     virtual void slotRevertItems(const QStringList&);
     virtual void slotSwitch();
     virtual void slotResolved(const QString&);
-    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&,bool isDir);
+    virtual void slotResolve(const QString&);
+    virtual void makeDiff(const QString&,const svn::Revision&,const svn::Revision&,const svn::Revision&_peg,bool isDir);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&);
-    virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,bool,QWidget*p);
+    virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,const svn::Revision&,bool,QWidget*p);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void slotImport(const QString&,const QString&,const QString&,bool);

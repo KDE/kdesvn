@@ -107,6 +107,10 @@
       <label>Get properties on selected item on networked protocols</label>
       <default>false</default>
     </entry>
+    <entry key="remote_special_properties" type="Bool">
+      <label>Use properties like bugtraq:url on repository listings</label>
+      <default>true</default>
+    </entry>
     <entry key="check_needslock" type="Bool">
         <label>Check for propertie svn:needs-lock on listings</label>
         <default>false</default>
@@ -124,6 +128,10 @@
     <entry key="external_merge_program" type="String" >
       <label>Which program to use for external merges</label>
       <default>kdiff3 %s1 %s2 %t</default>
+    </entry>
+    <entry key="conflict_resolver" type="String">
+      <label>Wich program for resolving conflicts</label>
+      <default>kdiff3 %o %m %n -o %t</default>
     </entry>
     <entry name="extern_merge_default" type="Bool">
         <label>Prefer external merge program</label>

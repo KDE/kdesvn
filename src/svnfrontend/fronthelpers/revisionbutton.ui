@@ -1,0 +1,55 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>RevisionButton</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>RevisionButton</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>124</width>
+            <height>28</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>RevisionButton</string>
+    </property>
+    <hbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <property name="spacing">
+            <number>0</number>
+        </property>
+        <widget class="KPushButton">
+            <property name="name">
+                <cstring>m_RevisionButton</cstring>
+            </property>
+            <property name="text">
+                <string>-1</string>
+            </property>
+        </widget>
+    </hbox>
+</widget>
+<customwidgets>
+</customwidgets>
+<connections>
+    <connection>
+        <sender>m_RevisionButton</sender>
+        <signal>clicked()</signal>
+        <receiver>RevisionButton</receiver>
+        <slot>askRevision()</slot>
+    </connection>
+</connections>
+<slots>
+    <slot>askRevision()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kpushbutton.h</includehint>
+</includehints>
+</UI>

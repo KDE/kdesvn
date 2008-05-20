@@ -98,6 +98,11 @@ namespace svn
     }
   }
 
+  bool Path::isUrl()const
+  {
+      return Url::isValid(m_path);
+  }
+
   const QString &
   Path::path () const
   {

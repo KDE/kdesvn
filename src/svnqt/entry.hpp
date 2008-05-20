@@ -179,13 +179,13 @@ namespace svn
      * @return last up-to-date time for text contents
      * @retval 0 no information available
      */
-    const apr_time_t
+    const DateTime&
     textTime () const;
     /**
      * @return last up-to-date time for properties
      * @retval 0 no information available
      */
-    const apr_time_t
+    const DateTime&
     propTime()const;
 
     /**
@@ -204,7 +204,7 @@ namespace svn
     /**
      * @return last date this was changed
      */
-    const apr_time_t
+    const DateTime&
     cmtDate () const;
 
     /**

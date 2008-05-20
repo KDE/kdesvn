@@ -65,7 +65,7 @@ public:
 /*!
  * Implements a thread safe reference counter around any pointer.
  * This class takes ownership of data, eg., last reference will delete
- * the data it inspect.
+ * the data it inspects.
  */
 template<class T> class SharedPointer
 {

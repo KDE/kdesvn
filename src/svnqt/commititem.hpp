@@ -29,6 +29,8 @@
 struct svn_client_commit_item_t;
 // only used if build against svn 1.3 api
 struct svn_client_commit_item2_t;
+// only used if build against svn 1.5 api
+struct svn_client_commit_item3_t;
 
 namespace svn {
 
@@ -56,6 +58,10 @@ public:
      * This one will only do something if build against subversion 1.3
      */
     CommitItem(const svn_client_commit_item2_t*);
+    /*!
+     * This one will only do something if build against subversion 1.5
+     */
+    CommitItem(const svn_client_commit_item3_t*);
     //! Destructor
     /*!
      * Not virtual 'cause no child class is needed
@@ -78,6 +84,7 @@ public:
      * <LI>C - copy</LI>
      * <LI>D - deletion</LI>
      * <LI>M - Modify (content or property)</LI>
+     * <LI>R - replaced</LI>
      * <LI>L - (un-)lock</LI>
      * </UL>
      */

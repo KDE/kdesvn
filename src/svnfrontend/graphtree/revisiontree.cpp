@@ -20,6 +20,8 @@
 #include "revisiontree.h"
 #include "../stopdlg.h"
 #include "src/svnqt/log_entry.hpp"
+#include "src/svnqt/cache/LogCache.hpp"
+#include "src/svnqt/cache/ReposLog.hpp"
 #include "helpers/sub2qt.h"
 #include "revtreewidget.h"
 #include "revgraphview.h"
@@ -64,7 +66,7 @@ public:
     svn::Client*m_Client;
     QObject* m_Listener;
 
-    bool getLogs(const QString&,const svn::Revision&startr,const svn::Revision&endr);
+    bool getLogs(const QString&,const svn::Revision&startr,const svn::Revision&endr,const QString&origin);
 };
 
 RtreeData::RtreeData()
@@ -82,7 +84,7 @@ RtreeData::~RtreeData()
     delete progress;
 }
 
-bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const svn::Revision&endr)
+bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const svn::Revision&endr,const QString&origin)
 {
     if (!m_Listener||!m_Client) {
         return false;
@@ -91,7 +93,9 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
-        m_Client->log(reposRoot,endr,startr,m_OldHistory,true,false,0);
+        //m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
+        svn::cache::ReposLog rl(m_Client,reposRoot);
+        rl.simpleLog(m_OldHistory,startr,endr,true);
     } catch (svn::ClientException ce) {
         kDebug()<<ce.msg() << endl;
         KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1").arg(ce.msg()));
@@ -114,7 +118,7 @@ RevisionTree::RevisionTree(svn::Client*aClient,
     m_Data->m_Listener=aListener;
     m_Data->dlgParent=parent;
 
-    if (!m_Data->getLogs(reposRoot,startr,endr)) {
+    if (!m_Data->getLogs(reposRoot,startr,endr,origin)) {
         return;
     }
 

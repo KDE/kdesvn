@@ -152,10 +152,10 @@ ContextData::ContextData(const QString & configDir_)
       svn_auth_open (&ab, providers, pool);
 
       // initialize ctx structure
-      memset (&m_ctx, 0, sizeof (m_ctx));
+      svn_client_create_context(&m_ctx,pool);
 
       // get the config based on the configDir passed in
-      svn_config_get_config (&m_ctx.config, c_configDir, pool);
+      svn_config_get_config ( &(m_ctx->config), c_configDir, pool);
 
       // tell the auth functions where the config is
       if (c_configDir) {
@@ -163,23 +163,26 @@ ContextData::ContextData(const QString & configDir_)
             c_configDir);
       }
 
-      m_ctx.auth_baton = ab;
-      m_ctx.notify_func = onNotify;
-      m_ctx.notify_baton = this;
-      m_ctx.cancel_func = onCancel;
-      m_ctx.cancel_baton = this;
-      m_ctx.notify_func2 = onNotify2;
-      m_ctx.notify_baton2 = this;
+      m_ctx->auth_baton = ab;
+      m_ctx->notify_func = onNotify;
+      m_ctx->notify_baton = this;
+      m_ctx->cancel_func = onCancel;
+      m_ctx->cancel_baton = this;
+      m_ctx->notify_func2 = onNotify2;
+      m_ctx->notify_baton2 = this;
 
-      m_ctx.log_msg_func = onLogMsg;
-      m_ctx.log_msg_baton = this;
+      m_ctx->log_msg_func = onLogMsg;
+      m_ctx->log_msg_baton = this;
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
-      // as long as commit_items is unused it may used twice!
-      m_ctx.log_msg_func2 = onLogMsg2;
-      m_ctx.log_msg_baton2 = this;
+      m_ctx->log_msg_func2 = onLogMsg2;
+      m_ctx->log_msg_baton2 = this;
 
-      m_ctx.progress_func = onProgress;
-      m_ctx.progress_baton = this;
+      m_ctx->progress_func = onProgress;
+      m_ctx->progress_baton = this;
+#endif
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+      m_ctx->log_msg_func3 = onLogMsg3;
+      m_ctx->log_msg_baton3 = this;
 #endif
 }
 
@@ -279,7 +282,7 @@ bool ContextData::retrieveSavedLogin (const char * username_,
 
 svn_client_ctx_t *ContextData::ctx()
 {
-    return &m_ctx;
+    return m_ctx;
 }
 
 const QString&ContextData::configDir()const
@@ -310,7 +313,7 @@ void ContextData::setAuthCache(bool value)
     if (!value) {
         param = (void *)"1";
     }
-    svn_auth_set_parameter (m_ctx.auth_baton,
+    svn_auth_set_parameter (m_ctx->auth_baton,
         SVN_AUTH_PARAM_NO_AUTH_CACHE,param);
 }
 
@@ -318,7 +321,7 @@ void ContextData::setLogin(const QString& usr, const QString& pwd)
 {
     username = usr;
     password = pwd;
-    svn_auth_baton_t * ab = m_ctx.auth_baton;
+    svn_auth_baton_t * ab = m_ctx->auth_baton;
     svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_USERNAME, username.TOUTF8());
     svn_auth_set_parameter (ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD, password.TOUTF8());
 }
@@ -389,6 +392,37 @@ svn_error_t *ContextData::onLogMsg2 (const char **log_msg,
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
+
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+svn_error_t *ContextData::onLogMsg3 (const char **log_msg,
+              const char **tmp_file,
+              const apr_array_header_t * commit_items,
+              void *baton,
+              apr_pool_t * pool)
+{
+    ContextData * data = 0;
+    SVN_ERR (getContextData (baton, &data));
+
+    QString msg;
+    if (data->logIsSet) {
+        msg = data->getLogMessage ();
+    } else {
+        CommitItemList _items;
+        for (int j = 0; j < commit_items->nelts; ++j) {
+            svn_client_commit_item3_t*item = ((svn_client_commit_item3_t **)commit_items->elts)[j];
+            _items.push_back(CommitItem(item));
+        }
+
+        if (!data->retrieveLogMessage (msg,_items)) {
+            return data->generate_cancel_error();
+        }
+    }
+
+    *log_msg = apr_pstrdup (pool,msg.TOUTF8());
+    *tmp_file = NULL;
+    return SVN_NO_ERROR;
+}
+#endif
 
 void ContextData::onNotify (void * baton,
               const char *path,

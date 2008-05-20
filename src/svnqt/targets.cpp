@@ -144,6 +144,11 @@ namespace svn
     return m_targets.size ();
   }
 
+  const Path& Targets::operator [](size_t which)const
+  {
+    return m_targets[which];
+  }
+
   const Path
   Targets::target (unsigned int which) const
   {

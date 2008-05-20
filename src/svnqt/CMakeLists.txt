@@ -20,8 +20,8 @@ SET(SOURCES
     status.cpp
     targets.cpp
     url.cpp
-    wc.cpp
     version_check.cpp
+    wc.cpp
     lock_entry.cpp
     client_lock.cpp
     info_entry.cpp
@@ -32,7 +32,36 @@ SET(SOURCES
     repositorydata.cpp
     repositorylistener.cpp
     svnstream.cpp
-    svnfilestream.cpp)
+    diff_data.cpp
+    svnfilestream.cpp
+    cache/LogCache.cpp
+    cache/ReposLog.cpp
+    cache/DatabaseException.hpp
+    cache/DatabaseException.cpp
+    )
+
+MESSAGE(STATUS "QT4 found? ${QT4_FOUND}")
+
+IF (SQLITE_FOUND AND NOT QT4_FOUND)
+    MESSAGE(STATUS "use own sqlite3")
+    SET(SOURCES
+    ${SOURCES}
+    cache/sqlite3/qsqlcachedresult.cpp
+    cache/sqlite3/qsql_sqlite3.cpp
+    cache/sqlite3/qsqlcachedresult.h
+    cache/sqlite3/qsql_sqlite3.h
+    )
+ENDIF (SQLITE_FOUND AND NOT QT4_FOUND)
+
+IF (QT4_FOUND)
+    ADD_DEFINITIONS(-DNO_SQLITE3)
+ENDIF (QT4_FOUND)
+
+SET(CACHEINST_HEADERS
+    cache/LogCache.hpp
+    cache/ReposLog.hpp
+    cache/DatabaseException.hpp
+)
 
 SET(INST_HEADERS
     annotate_line.hpp
@@ -63,9 +92,11 @@ SET(INST_HEADERS
     targets.hpp
     url.hpp
     version_check.hpp
-    wc.hpp)
+    wc.hpp
+    )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")
+SET(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
 
 IF(QT4_FOUND)
     MESSAGE(STATUS "Qt: ${QT_LIBRARY_DIR}")
@@ -75,12 +106,18 @@ IF(QT4_FOUND)
     SET(TOUTF8 "toUtf8")
     SET(FROMUTF8 "fromUtf8")
     SET(QLIST "QList")
+    SET(TOASCII "toAscii")
+    SET(HOMEDIR "homePath")
     SET(svnqt-name svnqt-qt4)
+    SET(QDATABASE "QSqlDatabase")
 ELSE(QT4_FOUND)
     IF(QT_FOUND)
         SET(TOUTF8 "utf8")
         SET(FROMUTF8 "fromUtf8")
         SET(QLIST "QValueList")
+        SET(TOASCII "latin1")
+        SET(HOMEDIR "homeDirPath")
+        SET(QDATABASE "QSqlDatabase*")
     ENDIF(QT_FOUND)
     SET(svnqt-name svnqt)
 ENDIF(QT4_FOUND)
@@ -106,7 +143,7 @@ ADD_LIBRARY(${svnqt-name} SHARED ${SOURCES} ${svnhdr})
 IF(WIN32)
     ADD_DEFINITIONS(-D_USE_32BIT_TIME_T)
 ELSE(WIN32)
-    SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+    SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX})
     SET_TARGET_PROPERTIES(${svnqt-name}
         PROPERTIES
         COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
@@ -122,7 +159,7 @@ ENDIF(WIN32)
 #SET(LIB_RELEASE ${LIBLA_REVISION})
 
 SET(LIB_MAJOR 4)
-SET(LIB_MINOR 0)
+SET(LIB_MINOR 2)
 SET(LIB_RELEASE 0)
 
 SET(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
@@ -135,6 +172,13 @@ SET(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
 SET(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
 SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
 TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS})
+
+IF (SQLITE_FOUND AND NOT QT4_FOUND)
+    TARGET_LINK_LIBRARIES(${svnqt-name} ${SQLITE_LIBRARIES})
+    INCLUDE_DIRECTORIES(SQLITE_INCLUDE_DIR)
+ELSE (SQLITE_FOUND AND NOT QT4_FOUND)
+    TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_QTSQL_LIBRARY})
+ENDIF (SQLITE_FOUND AND NOT QT4_FOUND)
 
 IF (WIN32)
     TARGET_LINK_LIBRARIES( ${svnqt-name} wsock32.lib  )
@@ -151,6 +195,7 @@ ENDIF (BUILD_TESTS)
 IF(NOT WIN32)
     INSTALL(TARGETS ${svnqt-name} DESTINATION ${LIB_INSTALL_DIR})
     INSTALL(FILES ${INST_HEADERS} DESTINATION include/${svnqt-name})
+    INSTALL(FILES ${CACHEINST_HEADERS} DESTINATION include/${svnqt-name}/cache)
 
     # and a libtool file
 #    GET_TARGET_PROPERTY(_target_location ${svnqt-name} LOCATION)
@@ -180,4 +225,5 @@ ENDIF(NOT WIN32)
 
 IF (BUILD_TESTS)
   ADD_SUBDIRECTORY(tests)
+  ADD_SUBDIRECTORY(cache/test)
 ENDIF (BUILD_TESTS)

@@ -38,9 +38,9 @@ class SvnLogDlgImp: public SvnLogDialogData,public SimpleLogCb
 {
 Q_OBJECT
 public:
-    SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
+    SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0,bool modal=true);
     virtual ~SvnLogDlgImp();
-    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&);
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&,const svn::Revision&peg,const QString&pegUrl);
     void saveSize();
     QSize dialogSize();
 
@@ -56,6 +56,7 @@ protected slots:
     virtual void slotDispPrevious();
     virtual void slotDispSelected();
     virtual void slotItemClicked(int,Q3ListViewItem*,const QPoint &,int);
+    virtual void slotRevisionSelected();
 protected:
     QString _name;
     QString _base;
@@ -68,6 +69,9 @@ protected:
     virtual void slotBlameItem();
     svn::SharedPointer<svn::LogEntriesMap> m_Entries;
     QString _bugurl;
+
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&);
+
     QRegExp _r1,_r2;
 
 protected slots:
@@ -75,10 +79,13 @@ protected slots:
     virtual void slotEntriesSelectionChanged();
     virtual void slotSingleContext(Q3ListViewItem*, const QPoint &, int);
     virtual void slotSingleDoubleClicked(Q3ListViewItem*);
+    virtual void slotGetLogs();
 
 protected:
     void replaceBugids(QString&msg);
     QString genReplace(const QString&);
+    svn::Revision m_peg;
+    svn::Path m_PegUrl;
 };
 
 #endif

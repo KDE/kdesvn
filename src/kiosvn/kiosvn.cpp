@@ -110,7 +110,12 @@ void KioSvnData::reInitClient()
 
 KioSvnData::~KioSvnData()
 {
+    m_Listener.setCancel(true);
+    /* wait a little bit */
+    sleep(1);
     delete m_Svnclient;
+    m_CurrentContext->setListener(0L);
+    m_CurrentContext = 0;
 }
 
 svn::Revision KioSvnData::urlToRev(const KUrl&url)
@@ -143,6 +148,7 @@ kio_svnProtocol::kio_svnProtocol(const Q3CString &pool_socket, const Q3CString &
 
 kio_svnProtocol::~kio_svnProtocol()
 {
+    kdDebug()<<"Delete kio protocol"<<endl;
     delete m_pData;
 }
 
@@ -263,6 +269,10 @@ void kio_svnProtocol::stat(const KUrl& url)
 void kio_svnProtocol::get(const KUrl& url)
 {
     kDebug()<<"kio_svn::get "<< url << endl;
+    if (m_pData->m_Listener.contextCancel()) {
+        finished();
+        return;
+    }
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -750,7 +760,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
     for (unsigned j = 0; j<urls.count();++j) {
         logs = 0;
         try {
-            logs = m_pData->m_Svnclient->log(makeSvnUrl(urls[j]),start,end,true,true,0);
+            logs = m_pData->m_Svnclient->log(makeSvnUrl(urls[j]),start,end,svn::Revision::UNDEFINED,true,true,0);
         } catch (svn::ClientException e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             break;

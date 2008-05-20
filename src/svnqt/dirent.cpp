@@ -45,7 +45,7 @@ namespace svn
     svn_filesize_t size;
     bool hasProps;
     svn_revnum_t createdRev;
-    apr_time_t time;
+    DateTime time;
     QString lastAuthor;
     LockEntry m_Lock;
 
@@ -138,7 +138,7 @@ namespace svn
     return m->createdRev;
   }
 
-  apr_time_t
+  const DateTime&
   DirEntry::time () const
   {
     return m->time;

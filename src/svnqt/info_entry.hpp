@@ -20,7 +20,9 @@
 #ifndef __INFO_ENTRY_H
 #define __INFO_ENTRY_H
 
-#include "lock_entry.hpp"
+#include <svnqt/lock_entry.hpp>
+#include <svnqt/datetime.hpp>
+#include <svnqt/revision.hpp>
 
 #include <qstring.h>
 
@@ -38,15 +40,15 @@ public:
     void init(const svn_info_t*,const char*path);
     void init(const svn_info_t*,const QString&path);
 
-    apr_time_t cmtDate()const
+    DateTime cmtDate()const
     {
       return m_last_changed_date;
     }
-    apr_time_t textTime()const
+    DateTime textTime()const
     {
       return m_text_time;
     }
-    apr_time_t propTime()const
+    DateTime propTime()const
     {
       return m_prop_time;
     }
@@ -118,15 +120,15 @@ public:
     {
       return m_kind;
     }
-    svn_revnum_t cmtRev()const
+    const Revision& cmtRev()const
     {
       return m_last_changed_rev;
     }
-    svn_revnum_t copyfromRev()const
+    const Revision& copyfromRev()const
     {
       return m_copy_from_rev;
     }
-    svn_revnum_t revision()const
+    const Revision& revision()const
     {
       return m_revision;
     }
@@ -147,9 +149,9 @@ public:
     QString prettyUrl(const char*)const;
 
 protected:
-    apr_time_t m_last_changed_date;
-    apr_time_t m_text_time;
-    apr_time_t m_prop_time;
+    DateTime m_last_changed_date;
+    DateTime m_text_time;
+    DateTime m_prop_time;
     bool m_hasWc;
     LockEntry m_Lock;
     QString m_name;
@@ -165,9 +167,9 @@ protected:
     QString m_pUrl;
     QString m_UUID;
     svn_node_kind_t m_kind;
-    svn_revnum_t m_copy_from_rev;
-    svn_revnum_t m_last_changed_rev;
-    svn_revnum_t m_revision;
+    Revision m_copy_from_rev;
+    Revision m_last_changed_rev;
+    Revision m_revision;
     svn_wc_schedule_t m_schedule;
 protected:
     void init();

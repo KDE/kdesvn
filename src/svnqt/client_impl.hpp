@@ -284,6 +284,17 @@ namespace svn
     copy (const Path & srcPath,
           const Revision & srcRevision,
           const Path & destPath) throw (ClientException);
+    /**
+     * Copies a versioned file with the history preserved.
+     * @since subversion 1.5 api
+     * @see svn_client_copy4
+     * @exception ClientException
+     */
+    virtual void
+    copy (const Targets & srcPath,
+          const Revision & srcRevision,
+          const Path & destPath,
+          bool asChild=false,bool makeParent=false) throw (ClientException);
 
     /**
      * Moves or renames a file.
@@ -439,18 +450,20 @@ namespace svn
      * Revision::HEAD
      *
      * @param path
-     * @param revisionStart
-     * @param revisionEnd
-     * @param discoverChangedPaths
+     * @param revisionStart Start revision.
+     * @param revisionEnd End revision
+     * @param revisionPeg Revision where path is valid.
+     * @param discoverChangedPaths Should changed pathes transferred
      * @param strictNodeHistory
-     * @param limit (ignored when subversion 1.1 API)
+     * @param limit the maximum log entries count.
      * @return a vector with log entries
      */
     virtual LogEntriesPtr
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
-         bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0) throw (ClientException);
+         const Revision & revisionPeg,
+         bool discoverChangedPaths,
+         bool strictNodeHistory,int limit) throw (ClientException);
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored
@@ -462,6 +475,7 @@ namespace svn
      * @param path
      * @param revisionStart
      * @param revisionEnd
+     * @param revisionPeg Revision where path is valid.
      * @param target the logmap where to store the entries
      * @param discoverChangedPaths
      * @param strictNodeHistory
@@ -472,8 +486,9 @@ namespace svn
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          LogEntriesMap&target,
-         bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0) throw (ClientException);
+         const Revision & revisionPeg,
+         bool discoverChangedPaths,
+         bool strictNodeHistory,int limit) throw (ClientException);
 
    /**
      * Produce diff output which describes the delta between
@@ -499,8 +514,8 @@ namespace svn
      * @exception ClientException
     */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path,
-                const Revision & revision1, const Revision & revision2,
+            diff_peg (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted,const bool ignore_contenttype,
                 const QStringList&extra)
@@ -510,8 +525,8 @@ namespace svn
      * Same as other diff but extra options always set to empty list.
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path,
-                const Revision & revision1, const Revision & revision2,
+            diff_peg (const Path & tmpPath, const Path & path,
+                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                 const bool recurse, const bool ignoreAncestry,
                 const bool noDiffDeleted,const bool ignore_contenttype)
             throw (ClientException);

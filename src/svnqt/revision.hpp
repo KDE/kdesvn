@@ -77,6 +77,9 @@ namespace svn
     static const svn_opt_revision_kind UNDEFINED;
     static const svn_opt_revision_kind PREV;
 
+    static const svn_opt_revision_kind DATE;
+    static const svn_opt_revision_kind NUMBER;
+
     /**
      * Constructor
      *
@@ -177,6 +180,8 @@ namespace svn
     operator QString ()const;
     QString toString()const;
 
+    bool isRemote()const;
+
     /**
      * @return date
      */
@@ -186,6 +191,7 @@ namespace svn
     bool operator==(const Revision&)const;
     bool operator!=(const svn_opt_revision_kind)const;
     bool operator==(const svn_opt_revision_kind)const;
+    bool operator==(int)const;
 
     bool operator!()const;
     bool operator!();

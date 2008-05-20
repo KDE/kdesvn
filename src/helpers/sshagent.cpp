@@ -73,14 +73,18 @@ bool SshAgent::querySshAgent()
             ::putenv("SSH_ASKPASS="FORCE_ASKPASS);
 #endif
 #else
+/*
         char*agent = ::getenv("SSH_ASKPASS");
         if (!agent) {
+*/
 #ifdef HAS_SETENV
             ::setenv("SSH_ASKPASS", "kdesvnaskpass",1);
 #else
             ::putenv("SSH_ASKPASS=kdesvnaskpass");
 #endif
+/*
         }
+*/
 #endif
         m_isOurAgent = false;
         m_isRunning  = true;
@@ -118,9 +122,11 @@ bool SshAgent::addSshIdentities(bool force)
     proc.setEnvironment("SSH_ASKPASS",FORCE_ASKPASS);
 #else
     char*agent = 0;
+/*
     if (force) {
         agent = ::getenv("SSH_ASKPASS");
     }
+*/
     if (!agent) {
         proc.setEnvironment("SSH_ASKPASS", "kdesvnaskpass");
     }

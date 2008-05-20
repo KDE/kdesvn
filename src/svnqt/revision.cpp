@@ -45,6 +45,10 @@ namespace svn
   const svn_opt_revision_kind Revision::UNDEFINED = svn_opt_revision_unspecified;
   const svn_opt_revision_kind Revision::PREV = svn_opt_revision_previous;
 
+  const svn_opt_revision_kind Revision::DATE = svn_opt_revision_date;
+  const svn_opt_revision_kind Revision::NUMBER = Revision::START;
+
+
   Revision::Revision (const svn_opt_revision_t * revision)
   {
     init (revision);
@@ -52,8 +56,13 @@ namespace svn
 
   Revision::Revision (const svn_revnum_t revnum)
   {
-    m_revision.kind = svn_opt_revision_number;
-    m_revision.value.number = revnum;
+      if (revnum<0) {
+        m_revision.kind = svn_opt_revision_unspecified;
+        m_revision.value.number = 0;
+      } else {
+        m_revision.kind = svn_opt_revision_number;
+        m_revision.value.number = revnum;
+      }
   }
 
   Revision::Revision (const svn_opt_revision_kind kind)
@@ -93,6 +102,8 @@ namespace svn
     } else if (revstring=="START"){
         m_revision.kind = Revision::START;
         m_revision.value.number = 0;
+    } else if (revstring=="PREV"){
+        m_revision.kind = Revision::PREV;
     } else if (!revstring.isNull()) {
         Pool pool;
         svn_opt_revision_t endrev;
@@ -186,6 +197,9 @@ namespace svn
     case svn_opt_revision_working:
         value = "WORKING";
         break;
+    case svn_opt_revision_previous:
+        value="PREVIOUS";
+        break;
     case svn_opt_revision_unspecified:
     default:
         value="-1";
@@ -231,6 +245,13 @@ namespace svn
     return true;
   }
 
+  bool Revision::operator==(int value)const
+  {
+    if (m_revision.kind!=svn_opt_revision_number || value!=revnum()) {
+        return false;
+    }
+  }
+
   bool Revision::operator!=(const svn_opt_revision_kind t)const
   {
     return kind()!=t;
@@ -258,6 +279,11 @@ namespace svn
   Revision::operator bool()
   {
     return kind()!=UNDEFINED;
+  }
+
+  bool Revision::isRemote()const
+  {
+      return kind()!=UNDEFINED && kind()!=BASE && kind()!=WORKING;
   }
 
 }

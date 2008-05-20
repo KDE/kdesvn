@@ -57,7 +57,7 @@ public:
     bool isRecursive()const;
     bool isKeeplocks()const;
     void initHistory();
-    void saveHistory();
+    void saveHistory(bool canceld);
 
     static QString getLogmessage(bool*ok,bool*rec,bool*keeps_locks,QWidget*parent=0,const char*name=0);
     static QString getLogmessage(const svn::CommitItemList&,bool*ok,bool*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
@@ -84,6 +84,7 @@ protected:
     static Q3ValueList<QString> sLogHistory;
     QValueList<QListViewItem*> m_Hidden;
     static const QString groupName;
+    static QString sLastMessage;
     static unsigned int smax_message_history;
     bool m_hidden;
 

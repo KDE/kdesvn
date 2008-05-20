@@ -311,6 +311,17 @@ namespace svn
     copy (const Path & srcPath,
           const Revision & srcRevision,
           const Path & destPath) throw (ClientException)=0;
+    /**
+     * Copies a versioned file with the history preserved.
+     * @since subversion 1.5 api
+     * @see svn_client_copy4
+     * @exception ClientException
+     */
+    virtual void
+    copy (const Targets & srcPath,
+            const Revision & srcRevision,
+            const Path & destPath,
+            bool asChild,bool makeParent) throw (ClientException)=0;
 
     /**
      * Moves or renames a file.
@@ -477,8 +488,10 @@ namespace svn
      * @return a vector with log entries
      */
     virtual LogEntriesPtr
-    log (const Path& path, const Revision & revisionStart,
+    log (const Path& path,
+         const Revision & revisionStart,
          const Revision & revisionEnd,
+         const Revision & revisionPeg,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
     /**
@@ -502,6 +515,7 @@ namespace svn
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          LogEntriesMap&target,
+         const Revision & revisionPeg=Revision::UNDEFINED,
          bool discoverChangedPaths=false,
          bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
 
@@ -529,8 +543,8 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-    diff (const Path & tmpPath, const Path & path,
-          const Revision & revision1, const Revision & revision2,
+    diff_peg(const Path & tmpPath, const Path & path,
+          const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
           const bool recurse, const bool ignoreAncestry,
           const bool noDiffDeleted,const bool ignore_contenttype,const QStringList&extra) throw (ClientException)=0;
 
@@ -538,8 +552,8 @@ namespace svn
      * Same as other diff but extra options always set to empty list.
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path,
-                  const Revision & revision1, const Revision & revision2,
+            diff_peg (const Path & tmpPath, const Path & path,
+                  const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
                   const bool recurse, const bool ignoreAncestry,
                   const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
 

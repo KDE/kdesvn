@@ -32,7 +32,7 @@ SET(ksvnwidgethdr
 
 KDE_AUTOMOC(${ksvnwidgetsrc})
 
-ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui} ${ksvnwidgethdr})
+ADD_LIBRARY(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 SET_TARGET_PROPERTIES(ksvnwidgets
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

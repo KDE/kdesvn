@@ -27,8 +27,9 @@
 #include <qlabel.h>
 
 AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :AuthDialogData(parent, name),curPass("")
+    :QDialog(parent),curPass("")
 {
+    setupUi(this);
     m_UsernameEdit->setText(user);
     m_PasswordEdit->setText("");
     m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());

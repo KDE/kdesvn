@@ -20,13 +20,14 @@
 #ifndef AUTHDIALOGIMPL_H
 #define AUTHDIALOGIMPL_H
 
-#include "src/ksvnwidgets/authdlg.h"
+#include "src/ksvnwidgets/ui_authdlg.h"
 #include <qstring.h>
 
-class AuthDialogImpl: public AuthDialogData {
-Q_OBJECT
+class AuthDialogImpl: public QDialog, public Ui::AuthDialog {
+    Q_OBJECT
 public:
     AuthDialogImpl(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);
+    virtual ~AuthDialogImpl(){}
 
     const QString Username()const;
     const QString Password();

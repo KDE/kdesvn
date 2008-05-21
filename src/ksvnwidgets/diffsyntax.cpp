@@ -47,12 +47,12 @@ int DiffSyntax::highlightParagraph ( const QString & aText, int endStateOfLastPa
     if (endStateOfLastPara == 1) {
         ret = 2;
     } else if (endStateOfLastPara == 2) {
-        if (b.match(aText)!=0) {
+        if (b.indexIn(aText)!=0) {
             ret = 2;
         }
     }
 
-    if (a.match(aText)>-1) {
+    if (a.indexIn(aText)>-1) {
         c = QColor("#660033");
         if (endStateOfLastPara==1||endStateOfLastPara==2) {
             f.setBold(true);

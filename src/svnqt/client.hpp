@@ -79,6 +79,7 @@ namespace svn
   class SVNQT_EXPORT Client
   {
   public:
+
     /**
      * Initializes the primary memory pool.
      */

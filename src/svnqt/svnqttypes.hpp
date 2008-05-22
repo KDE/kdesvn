@@ -78,6 +78,21 @@ namespace svn
     typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 
     typedef QLIST<Path> Pathes;
+
+    //! Mapper enum for svn_depth_t
+    /*!
+     * Until subversion prior 1.5 is supported by this lib we must hide the svn_depth_t enum from interface.
+     * \since subversion 1.5 / svnqt 1.0
+     * \sa svn_depth_t
+     */
+    enum Depth {
+        DepthUnknown = -2,
+        DepthExclude = -1,
+        DepthEmpty = 0,
+        DepthFiles = 1,
+        DepthImmediates = 2,
+        DepthInfinity = 3
+    };
 }
 
 #endif

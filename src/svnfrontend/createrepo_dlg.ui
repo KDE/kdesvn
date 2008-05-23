@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>315</width>
-            <height>180</height>
+            <width>344</width>
+            <height>218</height>
         </rect>
     </property>
     <property name="caption">
@@ -133,13 +133,30 @@
                 <string>Compatible to subversion prior 1.4</string>
             </property>
             <property name="checked">
-                <bool>true</bool>
+                <bool>false</bool>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Is created repository compatible to subversion prior 1.4</string>
             </property>
             <property name="whatsThis" stdset="0">
                 <string>If set, the repository created will compatible to subversion prior 1.4. This is only usefull when svnqt is running with subversion 1.4 or above.</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>m_svn14compat</cstring>
+            </property>
+            <property name="enabled">
+                <bool>false</bool>
+            </property>
+            <property name="text">
+                <string>Compatible to subversion prior 1.5</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Is created repository compatible to subversion prior 1.5</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>If set, the repository created will compatible to subversion prior 1.5. This is only usefull when svnqt is running with subversion 1.5 or above.</string>
             </property>
         </widget>
     </vbox>
@@ -153,9 +170,32 @@
         <receiver>CreateRepo_Dlg</receiver>
         <slot>fsTypeChanged(int)</slot>
     </connection>
+    <connection>
+        <sender>m_svn13compat</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>CreateRepo_Dlg</receiver>
+        <slot>compatChanged13(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_svn14compat</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>CreateRepo_Dlg</receiver>
+        <slot>compatChanged14(bool)</slot>
+    </connection>
 </connections>
+<tabstops>
+    <tabstop>m_ReposPathinput</tabstop>
+    <tabstop>m_FilesystemSelector</tabstop>
+    <tabstop>m_DisableFsync</tabstop>
+    <tabstop>m_LogKeep</tabstop>
+    <tabstop>m_CreateMainDirs</tabstop>
+    <tabstop>m_svn13compat</tabstop>
+    <tabstop>m_svn14compat</tabstop>
+</tabstops>
 <slots>
     <slot access="protected">fsTypeChanged(int)</slot>
+    <slot access="protected">compatChanged13(bool)</slot>
+    <slot access="protected">compatChanged14(bool)</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>

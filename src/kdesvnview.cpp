@@ -272,7 +272,8 @@ void kdesvnView::slotCreateRepo()
     if (!dlg) return;
     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     bool compatneeded = svn::Version::version_major()>1||svn::Version::version_minor()>3;
-    Createrepo_impl*ptr = new Createrepo_impl(compatneeded,Dialog1Layout);
+    bool compat14 = svn::Version::version_major()>1||svn::Version::version_minor()>4;
+    Createrepo_impl*ptr = new Createrepo_impl(compatneeded,compat14,Dialog1Layout);
     dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size"));
     int i = dlg->exec();
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size",false);
@@ -289,7 +290,7 @@ void kdesvnView::slotCreateRepo()
     kdDebug()<<"Creating "<<path << endl;
     try {
         _rep->CreateOpen(path,ptr->fsType(),ptr->disableFsync(),
-            !ptr->keepLogs(),ptr->compat13());
+                         !ptr->keepLogs(),ptr->compat13(),ptr->compat14());
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());
         kdDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;
@@ -425,6 +426,15 @@ void kdesvnView::slotDumpRepo()
     delete dlg;
 
     m_ReposCancel = false;
+    svn::Revision st = svn::Revision::UNDEFINED;
+    svn::Revision en = svn::Revision::UNDEFINED;
+
+    if (s>-1) {
+        st=s;
+    }
+    if (e>-1) {
+        en=e;
+    }
 
     try {
         _rep->Open(re);
@@ -437,7 +447,7 @@ void kdesvnView::slotDumpRepo()
 
     try {
         StopDlg sdlg(this,this,0,"Dump",i18n("Dumping a repository"));
-        _rep->dump(out,s,e,incr,diffs);
+        _rep->dump(out,st,en,incr,diffs);
         slotAppendLog(i18n("Dump finished."));
     } catch(svn::ClientException e) {
         slotAppendLog(e.msg());

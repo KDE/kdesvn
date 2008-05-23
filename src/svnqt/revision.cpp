@@ -217,7 +217,10 @@ namespace svn
   const svn_revnum_t
   Revision::revnum () const
   {
-    return m_revision.value.number;
+      if (m_revision.kind==svn_opt_revision_number) {
+          return m_revision.value.number;
+      }
+      return SVN_INVALID_REVNUM;
   }
 
   const apr_time_t

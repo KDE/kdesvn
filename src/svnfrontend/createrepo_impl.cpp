@@ -26,17 +26,33 @@
 
 #include <qcheckbox.h>
 
-Createrepo_impl::Createrepo_impl(bool enable_compat, QWidget *parent, const char *name)
+class RecurseCheck
+{
+    bool&value;
+public:
+    RecurseCheck(bool&aValue):value(aValue){ value=true;}
+    ~RecurseCheck(){value = false;}
+};
+
+Createrepo_impl::Createrepo_impl(bool enable_compat13, bool enable_compat14, QWidget *parent, const char *name)
     :CreateRepo_Dlg(parent, name)
 {
+    inChangeCompat=true;
     m_DisableFsync->setEnabled(false);
     m_LogKeep->setEnabled(false);
-    if (!enable_compat){
+    if (!enable_compat13){
         m_svn13compat->setEnabled(false);
         m_svn13compat->hide();
     } else {
         m_svn13compat->setEnabled(true);
     }
+    if (!enable_compat14){
+        m_svn14compat->setEnabled(false);
+        m_svn14compat->hide();
+    } else {
+        m_svn14compat->setEnabled(true);
+    }
+    inChangeCompat=false;
 }
 
 void Createrepo_impl::fsTypeChanged(int which)
@@ -78,6 +94,33 @@ bool Createrepo_impl::createMain()
 bool Createrepo_impl::compat13()const
 {
     return (m_svn13compat->isChecked()||!m_svn13compat->isEnabled());
+}
+
+bool Createrepo_impl::compat14()const
+{
+    return (m_svn14compat->isChecked()||!m_svn14compat->isEnabled());
+}
+
+void Createrepo_impl::compatChanged14(bool)
+{
+    if (inChangeCompat) {
+        return;
+    }
+    RecurseCheck rc(inChangeCompat);
+    if (m_svn14compat->isChecked()) {
+        m_svn13compat->setChecked(false);
+    }
+}
+
+void Createrepo_impl::compatChanged13(bool)
+{
+    if (inChangeCompat) {
+        return;
+    }
+    RecurseCheck rc(inChangeCompat);
+    if (m_svn13compat->isChecked() && m_svn14compat->isEnabled()) {
+        m_svn14compat->setChecked(false);
+    }
 }
 
 #include "createrepo_impl.moc"

@@ -173,13 +173,13 @@ ContextData::ContextData(const QString & configDir_)
 
       m_ctx->log_msg_func = onLogMsg;
       m_ctx->log_msg_baton = this;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+      // subversion 1.3 functions
       m_ctx->log_msg_func2 = onLogMsg2;
       m_ctx->log_msg_baton2 = this;
 
       m_ctx->progress_func = onProgress;
       m_ctx->progress_baton = this;
-#endif
+
 #if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
       m_ctx->log_msg_func3 = onLogMsg3;
       m_ctx->log_msg_baton3 = this;

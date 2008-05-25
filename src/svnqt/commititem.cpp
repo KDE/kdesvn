@@ -46,7 +46,6 @@ CommitItem::CommitItem(const svn_client_commit_item2_t*_item)
     init();
 
     if (_item) {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
         m_Path = QString::FROMUTF8(_item->path);
         m_Kind = _item->kind;
         m_Url = QString::FROMUTF8(_item->url);
@@ -55,7 +54,6 @@ CommitItem::CommitItem(const svn_client_commit_item2_t*_item)
         m_CopyFromUrl = QString::FROMUTF8(_item->copyfrom_url);
         m_State = _item->state_flags;
         convertprop(_item->wcprop_changes);
-#endif
     }
 }
 

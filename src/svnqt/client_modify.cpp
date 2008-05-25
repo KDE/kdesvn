@@ -83,19 +83,11 @@ namespace svn
   {
     Pool pool;
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
-#else
-    svn_client_commit_info_t *commit_info = NULL;
-#endif
 
     svn_error_t * error =
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_client_delete2
-#else
-      svn_client_delete
-#endif
                     (&commit_info,
                          const_cast<apr_array_header_t*> (targets.array (pool)),
                          force,
@@ -127,20 +119,12 @@ namespace svn
   {
     Pool pool;
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_client_add3 (path.cstr (),
                       recurse,
                       force,
                       no_ignore,
                       *m_context,
                       pool);
-#else
-      svn_client_add2 (path.cstr (),
-                      recurse,
-                      force,
-                      *m_context,
-                      pool);
-#endif
     if(error != NULL)
       throw ClientException (error);
   }
@@ -181,18 +165,10 @@ namespace svn
 
     m_context->setLogMessage (message);
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
-#else
-    svn_client_commit_info_t *commit_info = NULL;
-#endif
 
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
       svn_client_commit3
-#else
-      svn_client_commit2
-#endif
                         (&commit_info,
                          targets.array (pool),
                          recurse,
@@ -258,17 +234,9 @@ namespace svn
       copy(srcPath,srcRevision,destPath,true,false);
 #else
       Pool pool;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
-#else
-    svn_client_commit_info_t *commit_info = NULL;
-#endif
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
         svn_client_copy2
-#else
-        svn_client_copy
-#endif
                     (&commit_info,
                        srcPath.cstr (),
                        srcRevision.revision (),
@@ -287,18 +255,12 @@ namespace svn
                 bool force) throw (ClientException)
   {
     Pool pool;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
-#else
-    svn_client_commit_info_t *commit_info = NULL;
-#endif
     svn_error_t * error =
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
     svn_client_move4
-#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
-    svn_client_move3
 #else
-    svn_client_move2
+    svn_client_move3
 #endif
                      (&commit_info,
                        srcPath.cstr (),
@@ -326,18 +288,10 @@ namespace svn
     Pool pool;
     m_context->setLogMessage(msg);
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_commit_info_t *commit_info = NULL;
-#else
-    svn_client_commit_info_t *commit_info = NULL;
-#endif
 
     svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     svn_client_mkdir2
-#else
-    svn_client_mkdir
-#endif
             (&commit_info,
                 const_cast<apr_array_header_t*>
                 (targets.array (pool)),
@@ -452,25 +406,12 @@ namespace svn
                   bool no_ignore) throw (ClientException)
 
   {
-#if (SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 3)
-      Q_UNUSED(no_ignore);
-      svn_client_commit_info_t *commit_info = NULL;
-#else
-      svn_commit_info_t *commit_info = NULL;
-#endif
+    svn_commit_info_t *commit_info = NULL;
     Pool pool;
 
     m_context->setLogMessage (message);
 
     svn_error_t * error =
-#if (SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 3)
-        svn_client_import (&commit_info,
-                        path.cstr (),
-                        url.TOUTF8(),
-                        !recurse,
-                        *m_context,
-                        pool);
-#else
         svn_client_import2(&commit_info,
                         path.cstr (),
                         url.TOUTF8(),
@@ -478,7 +419,6 @@ namespace svn
                         no_ignore,
                         *m_context,
                         pool);
-#endif
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString::null);
 

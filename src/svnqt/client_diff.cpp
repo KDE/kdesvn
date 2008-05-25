@@ -122,7 +122,6 @@ namespace svn
     DiffData ddata(tmpPath,path1,revision1,path2,revision2);
 
     // run diff
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
     error = svn_client_diff3 (options,
                              path1.cstr (), ddata.r1().revision (),
                              path2.cstr (), ddata.r2().revision (),
@@ -131,16 +130,6 @@ namespace svn
                              ddata.outFile(),ddata.errFile(),
                              *m_context,
                              pool);
-#else
-    error = svn_client_diff2 (options,
-                             path1.cstr (), ddata.r1().revision (),
-                             path2.cstr (), ddata.r2().revision (),
-                             recurse?1:0, ignoreAncestry, noDiffDeleted, ignore_contenttype,
-                             ddata.outFile(),ddata.errFile(),
-                             *m_context,
-                             pool);
-#endif
-
     if (error != NULL)
     {
         throw ClientException (error);

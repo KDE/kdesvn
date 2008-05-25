@@ -183,6 +183,9 @@ ContextData::ContextData(const QString & configDir_)
 #if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
       m_ctx->log_msg_func3 = onLogMsg3;
       m_ctx->log_msg_baton3 = this;
+
+      m_ctx->client_name = "SvnQt wrapper client";
+      initMimeTypes();
 #endif
 }
 
@@ -662,5 +665,26 @@ void ContextData::onProgress(apr_off_t progress, apr_off_t total, void*baton, ap
     }
     data->getListener()->contextProgress(progress,total);
 }
+
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+void ContextData::initMimeTypes()
+{
+    // code take from subversion 1.5 commandline client
+    const char *mimetypes_file;
+    svn_error_t * err = 0L;
+    svn_config_t * cfg = (svn_config_t *)apr_hash_get(m_ctx->config, SVN_CONFIG_CATEGORY_CONFIG,
+                       APR_HASH_KEY_STRING);
+
+    svn_config_get(cfg, &mimetypes_file,
+                   SVN_CONFIG_SECTION_MISCELLANY,
+                   SVN_CONFIG_OPTION_MIMETYPES_FILE, false);
+    if (mimetypes_file && *mimetypes_file) {
+        if ((err = svn_io_parse_mimetypes_file(&(m_ctx->mimetypes_map),
+             mimetypes_file, pool))) {
+                 svn_handle_error2(err, stderr, false, "svn: ");
+        }
+    }
+}
+#endif
 
 }

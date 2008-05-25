@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "logmsg_impl.h"
 #include "src/settings/kdesvnsettings.h"
+#include "depthselector.h"
 
 #include <ktextedit.h>
 #include <kcombobox.h>
@@ -193,9 +194,9 @@ QString Logmsg_impl::getMessage()const
 /*!
     \fn Logmsg_impl::isRecursive()const
  */
-bool Logmsg_impl::isRecursive()const
+svn::Depth Logmsg_impl::getDepth()const
 {
-    return m_RecursiveButton->isChecked();
+    return m_DepthSelector->getDepth();
 }
 
 /*!
@@ -271,9 +272,10 @@ void Logmsg_impl::saveHistory(bool canceld)
     }
 }
 
-QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
+QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent,const char*name)
 {
-    bool _ok,_rec,_keep_locks;
+    bool _ok,_keep_locks;
+    svn::Depth _depth = svn::DepthUnknown;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -284,7 +286,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*pare
 
     ptr = new Logmsg_impl(Dialog1Layout);
     if (!rec) {
-        ptr->m_RecursiveButton->hide();
+        //ptr->m_RecursiveButton->hide();
     }
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
@@ -294,11 +296,10 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*pare
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
-        _rec = false;
         _keep_locks = false;
     } else {
         _ok = true;
-        _rec = ptr->isRecursive();
+        _depth = ptr->getDepth();
         _keep_locks = ptr->isKeeplocks();
         msg=ptr->getMessage();
     }
@@ -306,13 +307,14 @@ QString Logmsg_impl::getLogmessage(bool*ok,bool*rec,bool*keep_locks,QWidget*pare
 
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
-    if (rec) *rec = _rec;
+    if (rec) *rec = _depth;
     return msg;
 }
 
-QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
+QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent,const char*name)
 {
-    bool _ok,_rec,_keep_locks;
+    bool _ok,_keep_locks;
+    svn::Depth _depth = svn::DepthUnknown;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -323,7 +325,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
 
     ptr = new Logmsg_impl(items,Dialog1Layout);
     if (!rec) {
-        ptr->m_RecursiveButton->hide();
+        //ptr->m_RecursiveButton->hide();
     }
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
@@ -334,11 +336,10 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
-        _rec = false;
         _keep_locks = false;
     } else {
         _ok = true;
-        _rec = ptr->isRecursive();
+        _depth = ptr->getDepth();
         _keep_locks = ptr->isKeeplocks();
         msg=ptr->getMessage();
     }
@@ -346,15 +347,16 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,bool*
 
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
-    if (rec) *rec = _rec;
+    if (rec) *rec = _depth;
     if (keep_locks) *keep_locks = _keep_locks;
     return msg;
 }
 
 QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
-    bool*ok,bool*rec,bool*keep_locks,QWidget*parent,const char*name)
+    bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent,const char*name)
 {
     bool _ok,_rec,_keep_locks;
+    svn::Depth _depth = svn::DepthUnknown;
     QString msg("");
 
     Logmsg_impl*ptr=0;
@@ -365,7 +367,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
 
     ptr = new Logmsg_impl(items,Dialog1Layout);
     if (!rec) {
-        ptr->m_RecursiveButton->hide();
+        //ptr->m_RecursiveButton->hide();
     }
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
@@ -379,7 +381,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
         _keep_locks=false;
     } else {
         _ok = true;
-        _rec = ptr->isRecursive();
+        _depth = ptr->getDepth();
         msg=ptr->getMessage();
         _keep_locks = ptr->isKeeplocks();
     }
@@ -387,7 +389,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
 
     dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
-    if (rec) *rec = _rec;
+    if (rec) *rec = _depth;
     if (keep_locks) *keep_locks = _keep_locks;
     return msg;
 }
@@ -407,7 +409,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             KDialogBase::Ok,true);
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
-    ptr->m_RecursiveButton->hide();
+    //ptr->m_RecursiveButton->hide();
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
     }
@@ -438,10 +440,10 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
 /*!
     \fn Logmsg_impl::setRecCheckboxtext(const QString&what)
  */
-void Logmsg_impl::setRecCheckboxtext(const QString&what,bool checked)
+void Logmsg_impl::addItemWidget(QWidget*aWidget)
 {
-    m_RecursiveButton->setText(what);
-    m_RecursiveButton->setChecked(checked);
+    aWidget->reparent(this,geometry().topLeft());
+    m_ItemsLayout->addWidget(aWidget);
 }
 
 Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()

@@ -881,7 +881,8 @@ void SvnActions::slotCommit()
 
 bool SvnActions::makeCommit(const svn::Targets&targets)
 {
-    bool ok,rec,keeplocks;
+    bool ok,keeplocks;
+    svn::Depth depth;
     svn::Revision nnum;
     svn::Targets _targets;
     svn::Pathes _deldir;
@@ -889,7 +890,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     QString msg,_p;
 
     if (!review) {
-        msg = Logmsg_impl::getLogmessage(&ok,&rec,&keeplocks,
+        msg = Logmsg_impl::getLogmessage(&ok,&depth,&keeplocks,
             m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok) {
             return false;
@@ -898,7 +899,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     } else {
         Logmsg_impl::logActionEntries _check,_uncheck,_result;
         svn::StatusEntries _Cache;
-        rec = false;
+        depth=svn::DepthEmpty;
         /// @todo filter out double entries
         for (unsigned j = 0; j < targets.size(); ++j) {
             svn::Revision where = svn::Revision::HEAD;
@@ -940,7 +941,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             if (_result[i]._kind==Logmsg_impl::logActionEntry::DELETE) {
                 QFileInfo fi(_result[i]._name);
                 if (fi.isDir()) {
-                    rec = true;
+                    depth = svn::DepthInfinity;
                 }
             }
             _commit.append(_result[i]._name);
@@ -965,7 +966,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Commiting"),
             i18n("Commiting - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->commit(_targets,msg,rec,keeplocks);
+        nnum = m_Data->m_Svnclient->commit(_targets,msg,depth,keeplocks);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -1882,13 +1883,13 @@ void SvnActions::slotResolve(const QString&p)
     return;
 }
 
-void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
+void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,svn::Depth depth)
 {
     if (!m_Data->m_CurrentContext) return;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Import"),i18n("Importing items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->import(svn::Path(path),target,message,rec);
+        m_Data->m_Svnclient->import(svn::Path(path),target,message,depth);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

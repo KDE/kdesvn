@@ -86,12 +86,12 @@ namespace svn
      * \sa svn_depth_t
      */
     enum Depth {
-        DepthUnknown = -2,
-        DepthExclude = -1,
-        DepthEmpty = 0,
-        DepthFiles = 1,
-        DepthImmediates = 2,
-        DepthInfinity = 3
+        DepthUnknown,
+        DepthExclude,
+        DepthEmpty,
+        DepthFiles,
+        DepthImmediates,
+        DepthInfinity
     };
 }
 

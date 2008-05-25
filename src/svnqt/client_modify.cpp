@@ -159,11 +159,12 @@ namespace svn
 
   svn::Revision
   Client_impl::commit (const Targets & targets, const QString& message,
-                  bool recurse,bool keep_locks) throw (ClientException)
+                  svn::Depth depth,bool keep_locks) throw (ClientException)
   {
     Pool pool;
 
     m_context->setLogMessage (message);
+    bool recurse = depth==DepthInfinity;
 
     svn_commit_info_t *commit_info = NULL;
 
@@ -393,21 +394,23 @@ namespace svn
   Client_impl::import (const Path & path,
                   const QString& url,
                   const QString& message,
-                  bool recurse) throw (ClientException)
+                  svn::Depth depth) throw (ClientException)
     {
-        import(path,url,message,recurse,false);
+        import(path,url,message,depth,false);
     }
 
   void
   Client_impl::import (const Path & path,
                   const QString& url,
                   const QString& message,
-                  bool recurse,
+                  svn::Depth depth,
                   bool no_ignore) throw (ClientException)
 
   {
     svn_commit_info_t *commit_info = NULL;
     Pool pool;
+
+    bool recurse = depth==DepthInfinity;
 
     m_context->setLogMessage (message);
 

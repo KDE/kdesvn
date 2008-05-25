@@ -295,14 +295,14 @@ namespace svn
      * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
      * @param targets files to commit.
      * @param message log message.
-     * @param recurse whether the operation should be done recursively.
+     * @param depth whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
      * @exception ClientException
      */
     virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
-            bool recurse,bool keep_locks=true) throw (ClientException)=0;
+            svn::Depth depth,bool keep_locks=true) throw (ClientException)=0;
 
     /**
      * Copies a versioned file with the history preserved.
@@ -419,20 +419,20 @@ namespace svn
      * @param path path to import
      * @param url
      * @param message log message.
-     * @param recurse
+     * @param depth
      * @exception ClientException
      */
     virtual void
     import (const Path & path, const QString& url,
             const QString& message,
-            bool recurse) throw (ClientException)=0;
+            svn::Depth recurse) throw (ClientException)=0;
     /**
      * Import file or directory PATH into repository directory URL at
      * head.  This usually requires authentication, see Auth.
      * @param path path to import
      * @param url
      * @param message log message.
-     * @param recurse do it recursive?
+     * @param depth kind of recurse operation
      * @param no_ignore if false, don't add items matching global ignore pattern
      * @since subversion 1.3
      * @exception ClientException
@@ -440,7 +440,7 @@ namespace svn
     virtual void
     import (const Path & path, const QString& url,
             const QString& message,
-            bool recurse,
+            svn::Depth depth,
             bool no_ignore) throw (ClientException)=0;
 
     /**

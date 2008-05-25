@@ -54,14 +54,13 @@ public:
     virtual ~Logmsg_impl();
 
     QString getMessage()const;
-    bool isRecursive()const;
     bool isKeeplocks()const;
     void initHistory();
     void saveHistory(bool canceld);
 
-    static QString getLogmessage(bool*ok,bool*rec,bool*keeps_locks,QWidget*parent=0,const char*name=0);
-    static QString getLogmessage(const svn::CommitItemList&,bool*ok,bool*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
-    static QString getLogmessage(const QMap<QString,QString>&,bool*ok,bool*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(bool*ok,svn::Depth*rec,bool*keeps_locks,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(const svn::CommitItemList&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(const QMap<QString,QString>&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
 
     static QString getLogmessage(const logActionEntries&,
             const logActionEntries&,
@@ -69,7 +68,9 @@ public:
             logActionEntries&,
             bool*ok,bool*keep_locks,QWidget*parent=0,const char*name=0);
 
-    void setRecCheckboxtext(const QString&what,bool checked=true);
+    void addItemWidget(QWidget*);
+
+    svn::Depth getDepth()const;
 
     logActionEntries selectedEntries();
 

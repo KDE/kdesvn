@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
- *   ral@alwins-world.de                                                   *
+ *   Copyright (C) 2007 by Rajko Albrecht  ral@alwins-world.de             *
+ *   http://kdesvn.alwins-world.de/                                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,34 +17,24 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "importdir_logmsg.h"
-#include <klocale.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qvbox.h>
+#ifndef DEPTHSELECTOR_H
+#define DEPTHSELECTOR_H
 
-Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
- : Logmsg_impl(parent, name)
-{
-    m_createDirBox = new QCheckBox("",this,"create_dir_checkbox");
-    m_keepLocksButton->hide();
-    createDirboxDir();
-    addItemWidget(m_createDirBox);
-    m_createDirBox->setChecked(true);
-}
+#include "depthform.h"
 
-Importdir_logmsg::~Importdir_logmsg()
-{
-}
+#include "src/svnqt/svnqttypes.hpp"
 
-bool Importdir_logmsg::createDir()
-{
-    return m_createDirBox->isChecked();
-}
+class QCheckBox;
 
-void Importdir_logmsg::createDirboxDir(const QString & which)
-{
-    m_createDirBox->setText(i18n("Create subdir %1 on import").arg(which.isEmpty()?i18n("(Last part)"):which));
-}
+class DepthSelector: public DepthSettings {
+    Q_OBJECT
+public:
+    DepthSelector(QWidget *parent = 0, const char *name = 0);
+    virtual ~DepthSelector();
+    svn::Depth getDepth()const;
 
-#include "importdir_logmsg.moc"
+protected:
+    QCheckBox*m_recurse;
+};
+
+#endif

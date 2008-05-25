@@ -714,7 +714,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
     }
     svn::Revision nnum=svn::Revision::UNDEFINED;
     try {
-        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,true,false);
+        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,svn::DepthInfinity,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -857,7 +857,7 @@ void kio_svnProtocol::import(const KURL& repos, const KURL& wc)
     QString target = makeSvnUrl(repos);
     QString path = wc.path();
     try {
-        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,true);
+        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,svn::DepthInfinity);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

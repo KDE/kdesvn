@@ -72,6 +72,7 @@
 #include <qpopupmenu.h>
 #include <qcursor.h>
 #include <qheader.h>
+#include <qcheckbox.h>
 
 #include <unistd.h>
 
@@ -1209,7 +1210,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"import_log_msg",false);
 
     QString logMessage = ptr->getMessage();
-    bool rec = ptr->isRecursive();
+    svn::Depth rec = ptr->getDepth();
     ptr->saveHistory(false);
     uri.setProtocol("");
     QString iurl = uri.path();
@@ -2038,7 +2039,10 @@ void kdesvnfilelist::slotLock()
     dlg = createDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
     if (!dlg) return;
     ptr->initHistory();
-    ptr->setRecCheckboxtext(i18n("Steal lock?"),false);
+    QCheckBox*_stealLock = new QCheckBox("",ptr,"create_dir_checkbox");
+    _stealLock->setText(i18n("Steal lock?"));
+    ptr->addItemWidget(_stealLock);
+    ptr->m_keepLocksButton->hide();
 
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);
@@ -2048,7 +2052,7 @@ void kdesvnfilelist::slotLock()
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"locking_log_msg",false);
 
     QString logMessage = ptr->getMessage();
-    bool rec = ptr->isRecursive();
+    bool steal = _stealLock->isChecked();
     ptr->saveHistory(false);
 
     QStringList displist;
@@ -2056,7 +2060,7 @@ void kdesvnfilelist::slotLock()
         ++liter;
         displist.append(cur->fullName());
     }
-    m_SvnWrapper->makeLock(displist,logMessage,rec);
+    m_SvnWrapper->makeLock(displist,logMessage,steal);
     refreshCurrentTree();
 }
 

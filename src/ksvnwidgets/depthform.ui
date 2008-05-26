@@ -10,91 +10,84 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>198</width>
-            <height>152</height>
+            <width>209</width>
+            <height>46</height>
         </rect>
     </property>
     <property name="caption">
         <string>Form1</string>
     </property>
-    <vbox>
+    <hbox>
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QButtonGroup">
-            <property name="name">
-                <cstring>depthButtonGroup</cstring>
-            </property>
-            <property name="title">
-                <string>Depth of operation</string>
-            </property>
-            <vbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
+        <widget class="QComboBox">
+            <item>
+                <property name="text">
+                    <string>Empty Depth</string>
                 </property>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>buttonEmptyDepth</cstring>
-                    </property>
-                    <property name="text">
-                        <string>empty Depth</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Just selected folder</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Just the named directory, no entries.  Updates will not pull in any files or subdirectories not already present.</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>buttonFileDepth</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Files depth</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>File childrens</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Folder and its file children, but not subdirs. Updates will pull in any files not already present, but not subdirectories.</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>buttonImmediateDepth</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Immediate depth</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Folder and its entries</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Folder and its entries. Updates will pull in any files or subdirectories not already present; those subdirectories entries will have depth-empty.</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton">
-                    <property name="name">
-                        <cstring>buttonInfinityDepth</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Infinity depth (recurse)</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Folder and all descendants</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Updates will pull in any files or subdirectories not already present; those subdirectories' this_dir entries will have depth-infinity.&lt;br&gt;
-Equivalent to the pre-1.5 default update behavior.</string>
-                    </property>
-                </widget>
-            </vbox>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Files Depth</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Immediate Depth</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Infinity Depth (recurse)</string>
+                </property>
+            </item>
+            <property name="name">
+                <cstring>m_DepthCombo</cstring>
+            </property>
+            <property name="duplicatesEnabled">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Select depth of operation</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>&lt;b&gt;Kind of depth&lt;/b&gt;:
+&lt;p&gt;
+&lt;i&gt;empty depth&lt;/i&gt;&lt;br&gt;Just the named directory, no entries.  Updates will not pull in any files or subdirectories not already present.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;i&gt;Files depth&lt;/i&gt;&lt;br&gt;Folder and its file children, but not subdirs. Updates will pull in any files not already present, but not subdirectories.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;i&gt;Immediate depth&lt;/i&gt;&lt;br&gt;
+Folder and its entries. Updates will pull in any files or subdirectories not already present; those subdirectories entries will have depth-empty.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;i&gt;Infinity depth&lt;/i&gt;&lt;br&gt;
+Updates will pull in any files or subdirectories not already present; those subdirectories' this_dir entries will have depth-infinity.&lt;br&gt;
+Equivalent to the pre-1.5 default update behavior.
+&lt;/p&gt;</string>
+            </property>
         </widget>
-    </vbox>
+        <spacer>
+            <property name="name">
+                <cstring>m_leftspacer</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>40</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </hbox>
 </widget>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>

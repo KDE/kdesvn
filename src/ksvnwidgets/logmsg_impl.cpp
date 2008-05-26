@@ -442,8 +442,12 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
  */
 void Logmsg_impl::addItemWidget(QWidget*aWidget)
 {
-    aWidget->reparent(this,geometry().topLeft());
+    m_DepthSelector->addItemWidget(aWidget);
+/*    aWidget->reparent(this,geometry().topLeft());
     m_ItemsLayout->addWidget(aWidget);
+    kdDebug()<<"SizeHint: "<<aWidget->minimumSizeHint()<< endl;
+    aWidget->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    setMinimumHeight(minimumSizeHint().height());*/
 }
 
 Logmsg_impl::logActionEntries Logmsg_impl::selectedEntries()
@@ -589,4 +593,13 @@ void Logmsg_impl::hideNewItems(bool how)
     }
 }
 
+/*!
+    \fn Logmsg_impl::hideDepth(bool hide)
+ */
+void Logmsg_impl::hideDepth(bool ahide)
+{
+    m_DepthSelector->hideDepth(ahide);
+//    if (hide) m_DepthSelector->hide();
+//    else m_DepthSelector->show();
+}
 #include "logmsg_impl.moc"

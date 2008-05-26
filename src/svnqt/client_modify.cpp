@@ -41,6 +41,8 @@
 #include "svnqt/targets.hpp"
 #include "svnqt/svnqt_defines.hpp"
 
+#include "svnqt/helper.hpp"
+
 namespace svn
 {
   svn_revnum_t
@@ -394,25 +396,21 @@ namespace svn
   Client_impl::import (const Path & path,
                   const QString& url,
                   const QString& message,
-                  svn::Depth depth) throw (ClientException)
-    {
-        import(path,url,message,depth,false);
-    }
-
-  void
-  Client_impl::import (const Path & path,
-                  const QString& url,
-                  const QString& message,
                   svn::Depth depth,
-                  bool no_ignore) throw (ClientException)
+                  bool no_ignore,bool no_unknown_nodetype) throw (ClientException)
 
   {
     svn_commit_info_t *commit_info = NULL;
     Pool pool;
 
-    bool recurse = depth==DepthInfinity;
-
     m_context->setLogMessage (message);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    svn_error_t * error =
+        svn_client_import3(&commit_info,path.cstr (),url.TOUTF8(),
+            internal::DepthToSvn(depth)(),no_ignore,no_unknown_nodetype,*m_context,pool);
+#else
+    bool recurse = depth==DepthInfinity;
+    Q_UNUSED(no_unknown_nodetype);
 
     svn_error_t * error =
         svn_client_import2(&commit_info,
@@ -422,6 +420,7 @@ namespace svn
                         no_ignore,
                         *m_context,
                         pool);
+#endif
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString::null);
 

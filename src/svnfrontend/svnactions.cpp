@@ -1883,13 +1883,14 @@ void SvnActions::slotResolve(const QString&p)
     return;
 }
 
-void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,svn::Depth depth)
+void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,svn::Depth depth,
+                            bool noIgnore,bool noUnknown)
 {
     if (!m_Data->m_CurrentContext) return;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Import"),i18n("Importing items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->import(svn::Path(path),target,message,depth);
+        m_Data->m_Svnclient->import(svn::Path(path),target,message,depth,noIgnore,noUnknown);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

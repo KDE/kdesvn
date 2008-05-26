@@ -1204,6 +1204,7 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     ptr->initHistory();
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"import_log_msg",false);
         delete dlg;
         return;
     }
@@ -1221,7 +1222,11 @@ void kdesvnfilelist::slotImportIntoDir(const KURL&importUrl,const QString&target
     if (dirs && ptr2 && ptr2->createDir()) {
         targetUri+= "/"+uri.fileName(true);
     }
-    m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec);
+    if (ptr2) {
+        m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec,ptr2->noIgnore(),ptr2->ignoreUnknownNodes());
+    } else {
+        m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec,false,false);
+    }
 
     if (!isWorkingCopy()) {
         if (allSelected()->count()==0) {
@@ -2039,6 +2044,7 @@ void kdesvnfilelist::slotLock()
     dlg = createDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
     if (!dlg) return;
     ptr->initHistory();
+    ptr->hideDepth(true);
     QCheckBox*_stealLock = new QCheckBox("",ptr,"create_dir_checkbox");
     _stealLock->setText(i18n("Steal lock?"));
     ptr->addItemWidget(_stealLock);

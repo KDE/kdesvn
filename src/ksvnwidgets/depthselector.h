@@ -32,6 +32,8 @@ public:
     DepthSelector(QWidget *parent = 0, const char *name = 0);
     virtual ~DepthSelector();
     svn::Depth getDepth()const;
+    void addItemWidget(QWidget*);
+    void hideDepth(bool hide);
 
 protected:
     QCheckBox*m_recurse;

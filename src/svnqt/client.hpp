@@ -419,29 +419,16 @@ namespace svn
      * @param path path to import
      * @param url
      * @param message log message.
-     * @param depth
-     * @exception ClientException
-     */
-    virtual void
-    import (const Path & path, const QString& url,
-            const QString& message,
-            svn::Depth recurse) throw (ClientException)=0;
-    /**
-     * Import file or directory PATH into repository directory URL at
-     * head.  This usually requires authentication, see Auth.
-     * @param path path to import
-     * @param url
-     * @param message log message.
      * @param depth kind of recurse operation
-     * @param no_ignore if false, don't add items matching global ignore pattern
-     * @since subversion 1.3
+     * @param no_ignore if false, don't add items matching global ignore pattern (@since subversion 1.3)
+     * @param no_unknown_nodetype if true ignore files type not known like pipes or device files (@since subversion 1.5)
      * @exception ClientException
      */
     virtual void
     import (const Path & path, const QString& url,
             const QString& message,
             svn::Depth depth,
-            bool no_ignore) throw (ClientException)=0;
+            bool no_ignore,bool no_unknown_nodetype) throw (ClientException)=0;
 
     /**
      * Merge changes from two paths into a new local path.

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>703</width>
-            <height>321</height>
+            <width>559</width>
+            <height>356</height>
         </rect>
     </property>
     <property name="caption">
@@ -19,225 +19,165 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLayoutWidget">
+        <widget class="QSplitter">
             <property name="name">
-                <cstring>layout8</cstring>
+                <cstring>m_MainSplitter</cstring>
             </property>
-            <hbox>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <widget class="QFrame">
                 <property name="name">
-                    <cstring>unnamed</cstring>
+                    <cstring>m_ReviewFrame</cstring>
                 </property>
-                <widget class="QSplitter">
+                <property name="frameShape">
+                    <enum>NoFrame</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>Plain</enum>
+                </property>
+                <vbox>
                     <property name="name">
-                        <cstring>m_MainSplitter</cstring>
+                        <cstring>unnamed</cstring>
                     </property>
-                    <property name="orientation">
-                        <enum>Vertical</enum>
-                    </property>
-                    <widget class="QFrame">
+                    <widget class="QLabel">
                         <property name="name">
-                            <cstring>m_ReviewFrame</cstring>
+                            <cstring>m_Reviewlabel</cstring>
                         </property>
-                        <property name="frameShape">
-                            <enum>NoFrame</enum>
+                        <property name="text">
+                            <string>Review affected items</string>
                         </property>
-                        <property name="frameShadow">
-                            <enum>Plain</enum>
+                        <property name="alignment">
+                            <set>AlignCenter</set>
                         </property>
-                        <vbox>
+                    </widget>
+                    <widget class="QListView">
+                        <column>
+                            <property name="text">
+                                <string>Entry</string>
+                            </property>
+                            <property name="clickable">
+                                <bool>true</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <column>
+                            <property name="text">
+                                <string>Action</string>
+                            </property>
+                            <property name="clickable">
+                                <bool>true</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <property name="name">
+                            <cstring>m_ReviewList</cstring>
+                        </property>
+                        <property name="resizePolicy">
+                            <enum>Manual</enum>
+                        </property>
+                        <property name="allColumnsShowFocus">
+                            <bool>true</bool>
+                        </property>
+                        <property name="showSortIndicator">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizeMode">
+                            <enum>LastColumn</enum>
+                        </property>
+                    </widget>
+                    <widget class="QLayoutWidget">
+                        <property name="name">
+                            <cstring>layout5</cstring>
+                        </property>
+                        <hbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel">
+                            <widget class="QPushButton">
                                 <property name="name">
-                                    <cstring>m_Reviewlabel</cstring>
+                                    <cstring>m_HideNewItems</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Review affected items</string>
+                                    <string>Hide new items</string>
                                 </property>
-                                <property name="alignment">
-                                    <set>AlignCenter</set>
-                                </property>
-                            </widget>
-                            <widget class="QListView">
-                                <column>
-                                    <property name="text">
-                                        <string>Entry</string>
-                                    </property>
-                                    <property name="clickable">
-                                        <bool>true</bool>
-                                    </property>
-                                    <property name="resizable">
-                                        <bool>true</bool>
-                                    </property>
-                                </column>
-                                <column>
-                                    <property name="text">
-                                        <string>Action</string>
-                                    </property>
-                                    <property name="clickable">
-                                        <bool>true</bool>
-                                    </property>
-                                    <property name="resizable">
-                                        <bool>true</bool>
-                                    </property>
-                                </column>
-                                <property name="name">
-                                    <cstring>m_ReviewList</cstring>
-                                </property>
-                                <property name="resizePolicy">
-                                    <enum>Manual</enum>
-                                </property>
-                                <property name="allColumnsShowFocus">
+                                <property name="toggleButton">
                                     <bool>true</bool>
                                 </property>
-                                <property name="showSortIndicator">
-                                    <bool>true</bool>
-                                </property>
-                                <property name="resizeMode">
-                                    <enum>LastColumn</enum>
-                                </property>
                             </widget>
-                            <widget class="QLayoutWidget">
+                            <widget class="QPushButton">
                                 <property name="name">
-                                    <cstring>layout5</cstring>
-                                </property>
-                                <hbox>
-                                    <property name="name">
-                                        <cstring>unnamed</cstring>
-                                    </property>
-                                    <widget class="QPushButton">
-                                        <property name="name">
-                                            <cstring>m_HideNewItems</cstring>
-                                        </property>
-                                        <property name="text">
-                                            <string>Hide new items</string>
-                                        </property>
-                                        <property name="toggleButton">
-                                            <bool>true</bool>
-                                        </property>
-                                    </widget>
-                                    <widget class="QPushButton">
-                                        <property name="name">
-                                            <cstring>m_MarkUnversioned</cstring>
-                                        </property>
-                                        <property name="text">
-                                            <string>Select new items</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Mark all new e.g. not versioned items for add and commit.</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QPushButton">
-                                        <property name="name">
-                                            <cstring>m_UnmarkUnversioned</cstring>
-                                        </property>
-                                        <property name="text">
-                                            <string>Unselect new items</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Unmark all unversioned items so they will be ignored.</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QPushButton">
-                                        <property name="name">
-                                            <cstring>m_DiffItem</cstring>
-                                        </property>
-                                        <property name="text">
-                                            <string>Diff highlighted item</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Generates and display difference against repository of selected item</string>
-                                        </property>
-                                    </widget>
-                                </hbox>
-                            </widget>
-                        </vbox>
-                    </widget>
-                    <widget class="QFrame">
-                        <property name="name">
-                            <cstring>m_EditFrame</cstring>
-                        </property>
-                        <property name="frameShape">
-                            <enum>NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                            <enum>Plain</enum>
-                        </property>
-                        <vbox>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QLabel">
-                                <property name="name">
-                                    <cstring>m_HeadLabel</cstring>
+                                    <cstring>m_MarkUnversioned</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Enter a log message</string>
+                                    <string>Select new items</string>
                                 </property>
-                                <property name="alignment">
-                                    <set>AlignCenter</set>
+                                <property name="toolTip" stdset="0">
+                                    <string>Mark all new e.g. not versioned items for add and commit.</string>
                                 </property>
                             </widget>
-                            <widget class="KTextEdit">
+                            <widget class="QPushButton">
                                 <property name="name">
-                                    <cstring>m_LogEdit</cstring>
+                                    <cstring>m_UnmarkUnversioned</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Unselect new items</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Unmark all unversioned items so they will be ignored.</string>
                                 </property>
                             </widget>
-                        </vbox>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>m_DiffItem</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Diff highlighted item</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Generates and display difference against repository of selected item</string>
+                                </property>
+                            </widget>
+                        </hbox>
                     </widget>
-                </widget>
-                <widget class="QLayoutWidget">
+                </vbox>
+            </widget>
+            <widget class="QFrame">
+                <property name="name">
+                    <cstring>m_EditFrame</cstring>
+                </property>
+                <property name="frameShape">
+                    <enum>NoFrame</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>Plain</enum>
+                </property>
+                <vbox>
                     <property name="name">
-                        <cstring>layout7</cstring>
+                        <cstring>unnamed</cstring>
                     </property>
-                    <vbox>
+                    <widget class="QLabel">
                         <property name="name">
-                            <cstring>unnamed</cstring>
+                            <cstring>m_HeadLabel</cstring>
                         </property>
-                        <widget class="DepthSelector">
-                            <property name="name">
-                                <cstring>m_DepthSelector</cstring>
-                            </property>
-                        </widget>
-                        <widget class="QLayoutWidget">
-                            <property name="name">
-                                <cstring>m_ItemsLayout</cstring>
-                            </property>
-                            <vbox>
-                                <property name="name">
-                                    <cstring>unnamed</cstring>
-                                </property>
-                                <widget class="QCheckBox">
-                                    <property name="name">
-                                        <cstring>m_RecursiveButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>Recursive</string>
-                                    </property>
-                                    <property name="checked">
-                                        <bool>true</bool>
-                                    </property>
-                                    <property name="toolTip" stdset="0">
-                                        <string>Make operation recursive.</string>
-                                    </property>
-                                </widget>
-                                <widget class="QCheckBox">
-                                    <property name="name">
-                                        <cstring>m_keepLocksButton</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>Keep locks</string>
-                                    </property>
-                                    <property name="toolTip" stdset="0">
-                                        <string>If checked commit will not release locks.</string>
-                                    </property>
-                                </widget>
-                            </vbox>
-                        </widget>
-                    </vbox>
-                </widget>
-            </hbox>
+                        <property name="text">
+                            <string>Enter a log message</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignCenter</set>
+                        </property>
+                    </widget>
+                    <widget class="KTextEdit">
+                        <property name="name">
+                            <cstring>m_LogEdit</cstring>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
@@ -272,6 +212,32 @@
                     </property>
                 </widget>
             </grid>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>m_ItemsLayout</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="DepthSelector">
+                    <property name="name">
+                        <cstring>m_DepthSelector</cstring>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>m_keepLocksButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Keep locks</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>If checked commit will not release locks.</string>
+                    </property>
+                </widget>
+            </hbox>
         </widget>
     </vbox>
 </widget>
@@ -341,7 +307,7 @@
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>
     <includehint>ktextedit.h</includehint>
-    <includehint>src/ksvnwidgets/depthselector.h</includehint>
     <includehint>kcombobox.h</includehint>
+    <includehint>src/ksvnwidgets/depthselector.h</includehint>
 </includehints>
 </UI>

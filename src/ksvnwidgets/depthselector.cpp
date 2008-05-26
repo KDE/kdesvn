@@ -26,28 +26,46 @@
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
+#include <qcombobox.h>
+
 
 DepthSelector::DepthSelector(QWidget *parent, const char *name)
     :DepthSettings(parent, name)
 {
-    if (svn::Version::version_major()>1|| svn::Version::version_minor()>5 ) {
+    if (svn::Version::version_major()>1|| svn::Version::version_minor()>4 ) {
         m_recurse = 0L;
         kdDebug()<<minimumSizeHint()<<endl;
+        m_DepthCombo->setCurrentItem(3);
     } else {
-        delete depthButtonGroup;
-        depthButtonGroup=0;
+        delete m_DepthCombo;
+        m_DepthCombo=0;
+        DepthFormLayout->removeItem(m_leftspacer);
         m_recurse = new QCheckBox( this, "m_RecursiveButton" );
         m_recurse->setChecked( TRUE );
         m_recurse->setText(i18n( "Recursive" ));
         DepthFormLayout->addWidget( m_recurse );
-        DepthFormLayout->setMargin(0);
-        kdDebug()<<minimumSizeHint()<<endl;
+        m_recurse->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+        DepthFormLayout->addItem(m_leftspacer);
+        adjustSize();
     }
-    setMinimumHeight(minimumSizeHint().height());
+    DepthFormLayout->setMargin(0);
+    //DepthFormLayout->setSpacing(0);
+    setMinimumSize(minimumSizeHint());
+    adjustSize();
 }
 
 DepthSelector::~DepthSelector()
 {
+}
+void DepthSelector::addItemWidget(QWidget*aWidget)
+{
+    DepthFormLayout->removeItem(m_leftspacer);
+    aWidget->reparent(this,geometry().topLeft());
+    DepthFormLayout->addWidget(aWidget);
+    kdDebug()<<"SizeHint: "<<aWidget->minimumSizeHint()<< endl;
+    aWidget->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    DepthFormLayout->addItem(m_leftspacer);
+    setMinimumSize(minimumSizeHint());
 }
 
 /*!
@@ -55,8 +73,8 @@ DepthSelector::~DepthSelector()
  */
 svn::Depth DepthSelector::getDepth()const
 {
-    if (depthButtonGroup) {
-        switch (depthButtonGroup->selectedId()){
+    if (m_DepthCombo) {
+        switch (m_DepthCombo->currentItem()){
             case 0:
                 return svn::DepthEmpty;
                 break;
@@ -73,6 +91,12 @@ svn::Depth DepthSelector::getDepth()const
     } else {
         return (m_recurse->isChecked()?svn::DepthInfinity:svn::DepthEmpty);
     }
+}
+
+void DepthSelector::hideDepth(bool hide)
+{
+    QWidget*w = m_DepthCombo? (QWidget*)m_DepthCombo:(QWidget*)m_recurse;
+    if (hide) w->hide(); else w->show();
 }
 
 #include "depthselector.moc"

@@ -857,7 +857,7 @@ void kio_svnProtocol::import(const KURL& repos, const KURL& wc)
     QString target = makeSvnUrl(repos);
     QString path = wc.path();
     try {
-        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,svn::DepthInfinity);
+        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,svn::DepthInfinity,false,false);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

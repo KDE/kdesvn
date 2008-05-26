@@ -73,6 +73,7 @@ public:
     svn::Depth getDepth()const;
 
     logActionEntries selectedEntries();
+    void hideDepth(bool ahide);
 
 protected slots:
     virtual void slotHistoryActivated(int);

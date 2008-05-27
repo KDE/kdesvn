@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "src/svnqt/stringarray.hpp"
-#include "src/svnqt/pool.hpp"
+#include "svnqt/stringarray.hpp"
+#include "svnqt/pool.hpp"
 
 #include <svn_types.h>
 // apr api

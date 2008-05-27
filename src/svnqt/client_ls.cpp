@@ -45,6 +45,8 @@
 #include "svnqt/exception.hpp"
 #include "svnqt/svnqt_defines.hpp"
 
+#include "svnqt/helper.hpp"
+
 static int
 compare_items_as_paths (const svn_sort__item_t *a, const svn_sort__item_t *b)
 {
@@ -154,10 +156,11 @@ namespace svn
     return entries;
   }
 
-#if (SVN_VER_MAJOR>=1) && (SVN_VER_MINOR>=4)
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
   static svn_error_t * s_list_func
           (void * baton,const char*path,const svn_dirent_t*dirent,const svn_lock_t*lock,const char* abs_path,apr_pool_t*)
   {
+      Q_UNUSED(abs_path);
       if (!baton || !path || !dirent) {
           return 0;
       }
@@ -178,14 +181,29 @@ namespace svn
   Client_impl::list(const Path& pathOrUrl,
                 const Revision& revision,
                 const Revision& peg,
-                bool recurse,bool retrieve_locks) throw (ClientException)
+                Depth depth,bool retrieve_locks) throw (ClientException)
   {
-#if (SVN_VER_MAJOR>=1) && (SVN_VER_MINOR>=4)
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
       sBaton _baton;
       Pool pool;
       DirEntries entries;
       _baton.m_data = &entries;
       _baton.m_context=m_context;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+      svn_error_t * error = svn_client_list2(pathOrUrl.cstr(),
+                                            peg,
+                                            revision,
+                                            svn::internal::DepthToSvn(depth)(),
+                                            SVN_DIRENT_ALL,
+                                            retrieve_locks,
+                                            s_list_func,
+                                            &_baton,
+                                            *m_context,
+                                            pool
+                                           );
+#else
+      bool recurse = depth==DepthInfinity;
       svn_error_t * error = svn_client_list(pathOrUrl.cstr(),
                                             peg,
                                             revision,
@@ -197,15 +215,16 @@ namespace svn
                                             *m_context,
                                             pool
                                            );
+#endif
       if (error != 0) {
           throw ClientException (error);
       }
       return entries;
 #else
       if (!retrieve_locks) {
-          return list_simple(pathOrUrl,revision,peg,recurse);
+          return list_simple(pathOrUrl,revision,peg,depth==DepthInfinity);
       } else {
-          return list_locks(pathOrUrl,revision,peg,recurse);
+          return list_locks(pathOrUrl,revision,peg,depth==DepthInfinity);
       }
 #endif
   }

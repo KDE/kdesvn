@@ -40,6 +40,7 @@
 #include "svnqt/pool.hpp"
 #include "svnqt/targets.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/stringarray.hpp"
 
 #include "svnqt/helper.hpp"
 
@@ -161,8 +162,11 @@ namespace svn
 
   svn::Revision
   Client_impl::commit (const Targets & targets, const QString& message,
-                  svn::Depth depth,bool keep_locks) throw (ClientException)
+                       svn::Depth depth,bool keep_locks,
+                       const svn::StringArray&changelist,bool keep_changelist) throw (ClientException)
   {
+      Q_UNUSED(changelist);
+      Q_UNUSED(keep_changelist);
     Pool pool;
 
     m_context->setLogMessage (message);

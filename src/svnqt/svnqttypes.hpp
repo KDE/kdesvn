@@ -48,6 +48,7 @@ namespace svn
     class Status;
     class Targets;
     class Path;
+    class StringArray;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
 

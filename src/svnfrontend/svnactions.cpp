@@ -905,7 +905,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             svn::Revision where = svn::Revision::HEAD;
             try {
                 StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
-                _Cache = m_Data->m_Svnclient->status(targets.target(j).path(),true,false,false,false,where);
+                _Cache = m_Data->m_Svnclient->status(targets.target(j).path(),svn::DepthInfinity,false,false,false,where);
             } catch (const svn::Exception&e) {
                 emit clientException(e.msg());
                 return false;
@@ -2187,11 +2187,12 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 {
     bool disp_remote_details = Kdesvnsettings::details_on_remote_listing();
     QString ex;
+    svn::Depth _d=rec?svn::DepthInfinity:svn::DepthEmpty;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         //                                      rec all  up     noign
-        dlist = m_Data->m_Svnclient->status(what,rec,all,updates,display_ignores,where,disp_remote_details,false);
+        dlist = m_Data->m_Svnclient->status(what,_d,all,updates,display_ignores,where,disp_remote_details,false);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2629,7 +2630,7 @@ bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&
     if (!m_Data->m_CurrentContext) return false;
     QString ex;
     try {
-        dlist = m_Data->m_Svnclient->list(url,where,where,rec,false);
+        dlist = m_Data->m_Svnclient->list(url,where,where,rec?svn::DepthInfinity:svn::DepthEmpty,false);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

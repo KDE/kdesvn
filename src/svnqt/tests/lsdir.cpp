@@ -2,6 +2,7 @@
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/tests/testconfig.h"
 #include "src/svnqt/status.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 #include <iostream>
 
 int main(int,char**)
@@ -18,7 +19,7 @@ int main(int,char**)
     QString l = QString("%1").arg(TESTCOPATH);
 
     try {
-        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,true,true);
+        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,true);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8() << std::endl;
@@ -33,7 +34,7 @@ int main(int,char**)
                 << dt.toTime_t() << std::endl;
     }
     try {
-        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,false,false);
+        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthEmpty,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8() << std::endl;
@@ -51,7 +52,7 @@ int main(int,char**)
     std::cout << "================"<<std::endl;
     svn::StatusEntries slist;
     try {
-        slist = m_Svnclient->status(svn::Path(p),true,true,true,true,svn::Revision::HEAD,true,false);
+        slist = m_Svnclient->status(svn::Path(p),svn::DepthInfinity,true,true,true,svn::Revision::HEAD,true,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8() << std::endl;
@@ -63,7 +64,7 @@ int main(int,char**)
     std::cout << "================"<<std::endl;
     std::cout << "Second status:"<<std::endl;
     try {
-        slist = m_Svnclient->status(svn::Path(l),true,true,true,true,svn::Revision::WORKING,true,false);
+        slist = m_Svnclient->status(svn::Path(l),svn::DepthInfinity,true,true,true,svn::Revision::WORKING,true,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8() << std::endl;

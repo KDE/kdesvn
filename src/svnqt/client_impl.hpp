@@ -100,13 +100,14 @@ namespace svn
      */
     virtual StatusEntries
     status (const Path& path,
-            const bool descend = false,
+            Depth depth=DepthEmpty,
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
             const Revision revision = svn::Revision::HEAD,
             bool detailed_remote = false,
-            const bool hide_externals = false) throw (ClientException);
+            const bool hide_externals = false,
+            const StringArray & changelists=StringArray()) throw (ClientException);
 
     /**
      * Returns the status of a single file in the path.
@@ -269,12 +270,16 @@ namespace svn
      * @param message log message.
      * @param depth whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
+     * @param changelist
+     * @param keep_changelist
      * @exception ClientException
      */
     virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
-            svn::Depth depth,bool keep_locks=true) throw (ClientException);
+            svn::Depth depth,bool keep_locks=true,
+            const svn::StringArray&changelist=svn::StringArray(),bool keep_changelist=false
+           ) throw (ClientException);
 
     /**
      * Copies a versioned file with the history preserved.
@@ -567,7 +572,7 @@ namespace svn
      * @param pathOrUrl
      * @param revision
      * @param peg at wich revision path exists
-     * @param recurse
+     * @param depth @sa svn::Depth
      * @param retrieve_locks check for REPOSITORY locks while listing
      * @return a vector of directory entries, each with
      *         a relative path (only filename)
@@ -576,7 +581,7 @@ namespace svn
     list (const Path& pathOrUrl,
           const Revision& revision,
           const Revision& peg,
-          bool recurse,bool retrieve_locks) throw (ClientException);
+          svn::Depth depth,bool retrieve_locks) throw (ClientException);
 
     /**
      * lists properties in @a path no matter whether local or

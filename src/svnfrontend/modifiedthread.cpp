@@ -20,6 +20,8 @@
 #include "modifiedthread.h"
 #include "tcontextlistener.h"
 
+#include "src/svnqt/svnqttypes.hpp"
+
 #include <qobject.h>
 #include <kdebug.h>
 #include <kapplication.h>
@@ -63,7 +65,7 @@ void CheckModifiedThread::run()
     QString ex;
     try {
         //                                  rec  all    up        noign
-        m_Cache = m_Svnclient->status(m_what,true,false,m_updates,false,where);
+        m_Cache = m_Svnclient->status(m_what,svn::DepthInfinity,false,m_updates,false,where);
     } catch (const svn::Exception&e) {
         m_SvnContext->contextNotify(e.msg());
     }

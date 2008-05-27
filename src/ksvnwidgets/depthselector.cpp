@@ -20,7 +20,6 @@
 #include "depthselector.h"
 #include "src/svnqt/version_check.hpp"
 
-#include <kdebug.h>
 #include <klocale.h>
 
 #include <qbuttongroup.h>
@@ -34,7 +33,6 @@ DepthSelector::DepthSelector(QWidget *parent, const char *name)
 {
     if (svn::Version::version_major()>1|| svn::Version::version_minor()>4 ) {
         m_recurse = 0L;
-        kdDebug()<<minimumSizeHint()<<endl;
         m_DepthCombo->setCurrentItem(3);
     } else {
         delete m_DepthCombo;
@@ -49,7 +47,6 @@ DepthSelector::DepthSelector(QWidget *parent, const char *name)
         adjustSize();
     }
     DepthFormLayout->setMargin(0);
-    //DepthFormLayout->setSpacing(0);
     setMinimumSize(minimumSizeHint());
     adjustSize();
 }
@@ -62,7 +59,6 @@ void DepthSelector::addItemWidget(QWidget*aWidget)
     DepthFormLayout->removeItem(m_leftspacer);
     aWidget->reparent(this,geometry().topLeft());
     DepthFormLayout->addWidget(aWidget);
-    kdDebug()<<"SizeHint: "<<aWidget->minimumSizeHint()<< endl;
     aWidget->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     DepthFormLayout->addItem(m_leftspacer);
     setMinimumSize(minimumSizeHint());

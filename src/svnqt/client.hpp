@@ -57,15 +57,16 @@
     #include <QtCore>
 #endif
 
-// svncpp
-#include "context.hpp"
-#include "exception.hpp"
-#include "path.hpp"
-#include "entry.hpp"
-#include "revision.hpp"
-#include "log_entry.hpp"
-#include "info_entry.hpp"
-#include "annotate_line.hpp"
+// svnqt
+#include "svnqt/context.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/path.hpp"
+#include "svnqt/entry.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/log_entry.hpp"
+#include "svnqt/info_entry.hpp"
+#include "svnqt/annotate_line.hpp"
+#include "svnqt/stringarray.hpp"
 
 class QStringList;
 
@@ -130,13 +131,14 @@ namespace svn
      */
     virtual StatusEntries
     status (const Path& path,
-            const bool descend = false,
+            Depth depth=DepthEmpty,
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
             const Revision revision = svn::Revision::HEAD,
             bool detailed_remote = false,
-            const bool hide_externals = false) throw (ClientException) = 0;
+            const bool hide_externals = false,
+            const StringArray & changelists=StringArray() ) throw (ClientException) = 0;
 
     /**
      * Returns the status of a single file in the path.
@@ -297,12 +299,16 @@ namespace svn
      * @param message log message.
      * @param depth whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
+     * @param changelist
+     * @param keep_changelist
      * @exception ClientException
      */
     virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
-            svn::Depth depth,bool keep_locks=true) throw (ClientException)=0;
+            svn::Depth depth,bool keep_locks=true,
+            const svn::StringArray&contents=svn::StringArray(),bool keep_changelist=false
+           ) throw (ClientException)=0;
 
     /**
      * Copies a versioned file with the history preserved.
@@ -593,7 +599,7 @@ namespace svn
      * @param pathOrUrl
      * @param revision
      * @param peg at wich revision path exists
-     * @param recurse
+     * @param depth @sa depth
      * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with
      *         a relative path (only filename). In subversion >= 1.4 an entry without a name is returned, too. This
@@ -603,7 +609,7 @@ namespace svn
     list (const Path& pathOrUrl,
           const Revision& revision,
           const Revision& peg,
-          bool recurse,bool retrieve_locks) throw (ClientException)=0;
+          svn::Depth depth,bool retrieve_locks) throw (ClientException)=0;
 
     /**
      * lists properties in @a path no matter whether local or

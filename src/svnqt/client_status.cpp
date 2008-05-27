@@ -34,6 +34,7 @@
 
 // svncpp
 #include "svnqt/client_impl.hpp"
+#include "svnqt/helper.hpp"
 
 // Subversion api
 #include "svn_client.h"
@@ -192,11 +193,12 @@ namespace svn
 
   static StatusEntries
   localStatus (const Path& path,
-               const bool descend,
+               Depth depth,
                const bool get_all,
                const bool update,
                const bool no_ignore,
                const bool hide_externals,
+               const StringArray & changelists,
                Context * context)
   {
     svn_error_t *error;
@@ -210,19 +212,37 @@ namespace svn
     status_hash = apr_hash_make (pool);
     baton.hash = status_hash;
     baton.pool = pool;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_status3 (
+        &revnum,           // revnum
+        path.path().TOUTF8(),         // path
+        rev,
+        StatusEntriesFunc, // status func
+        &baton,            // status baton
+        internal::DepthToSvn(depth)(), // see svn::Depth
+        get_all,           // get all not only interesting
+        update,            // check for updates
+        no_ignore,         // hide ignored files or not
+        hide_externals,    // hide external
+        changelists.array(pool),
+        *context,          //client ctx
+        pool);
+#else
+    Q_UNUSED(changelists);
     error = svn_client_status2 (
       &revnum,      // revnum
       path.path().TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
-      descend,       // recurse (true) or immediate childs
+      (depth==DepthInfinity), //recurse
       get_all,       // get all not only interesting
       update,        // check for updates
       no_ignore,     // hide ignored files or not
       hide_externals, // hide external
       *context,    //client ctx
       pool);
+#endif
 
     if (error!=NULL)
     {
@@ -268,7 +288,7 @@ namespace svn
   static StatusEntries
   remoteStatus (Client * client,
                 const Path& path,
-                const bool descend,
+                Depth depth,
                 const bool ,
                 const bool ,
                 const bool ,
@@ -276,7 +296,7 @@ namespace svn
                 Context * ,
                 bool detailed_remote)
   {
-    DirEntries dirEntries = client->list(path, revision, revision, descend,detailed_remote);
+    DirEntries dirEntries = client->list(path, revision, revision, depth,detailed_remote);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
@@ -295,20 +315,21 @@ namespace svn
 
   StatusEntries
   Client_impl::status (const Path& path,
-                  const bool descend,
+                  Depth depth,
                   const bool get_all,
                   const bool update,
                   const bool no_ignore,
                   const Revision revision,
                   bool detailed_remote,
-                  const bool hide_externals) throw (ClientException)
+                  const bool hide_externals,
+                  const StringArray & changelists) throw (ClientException)
   {
     if (Url::isValid (path.path())) {
-        return remoteStatus (this, path, descend, get_all, update,
+        return remoteStatus (this, path, depth, get_all, update,
                             no_ignore,revision,m_context,detailed_remote);
     } else {
-        return localStatus (path, descend, get_all, update,
-                            no_ignore, hide_externals, m_context);
+        return localStatus (path, depth, get_all, update,
+                            no_ignore, hide_externals,changelists, m_context);
     }
   }
 
@@ -326,6 +347,22 @@ namespace svn
     baton.hash = status_hash;
     baton.pool = pool;
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_status3 (
+        &revnum,           // revnum
+        path.path().TOUTF8(),         // path
+        rev,
+        StatusEntriesFunc, // status func
+        &baton,            // status baton
+        svn_depth_empty, // not recurse
+        true,           // get all not only interesting
+        update,            // check for updates
+        false,         // hide ignored files or not
+        false,    // hide external
+        0,
+        *context,          //client ctx
+        pool);
+#else
     error = svn_client_status2 (
       &revnum,      // revnum
       path.path().TOUTF8(),         // path
@@ -339,7 +376,7 @@ namespace svn
       false,
       *context,    //client ctx
       pool);
-
+#endif
     if (error != NULL)
     {
       throw ClientException (error);

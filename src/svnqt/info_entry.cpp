@@ -149,7 +149,7 @@ namespace svn
   {
       return m_working_size;
   }
-  svn::Depth InfoEntry::InfoEntry::depth()const
+  svn::Depth InfoEntry::depth()const
   {
       return m_depth;
   }

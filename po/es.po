@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Mario Palomo Torrero <mariopal@gmail.com>, 2007.
+# Mario Palomo Torrero <mariopal@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-24 10:14+0200\n"
-"PO-Revision-Date: 2007-12-11 20:43+0100\n"
+"PO-Revision-Date: 2008-05-28 18:45+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: es_ES <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -156,8 +156,7 @@ msgstr "0"
 
 #: rc.cpp:57
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "El mínimo que una salida de registro debe contener antes de que kdesvn "
 "muestre una ventana con el registro"
@@ -303,8 +302,7 @@ msgstr "Configuración Subversion"
 #: rc.cpp:127
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:131
 #, no-c-format
@@ -316,14 +314,12 @@ msgstr ""
 #: rc.cpp:134
 #, no-c-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
-"Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
+msgstr "Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
 
 #: rc.cpp:137
 #, no-c-format
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
-"Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
+msgstr "Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
 
 #: rc.cpp:140
 #, no-c-format
@@ -436,8 +432,7 @@ msgstr "Almacenar contraseñas en Cartera KDE"
 
 #: rc.cpp:188
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes "
 "de Subversion?"
@@ -511,14 +506,12 @@ msgstr "Ocultar elementos nuevos en el dialogo de confirmación"
 #: rc.cpp:221
 #, no-c-format
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
-"Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
+msgstr "Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
 
 #: rc.cpp:224
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:227
 #, no-c-format
@@ -621,8 +614,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:295
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Establece si se prefiere un programa de fusionado externo y no el fusionado "
 "de subversion"
@@ -635,7 +627,7 @@ msgstr "Ver \"¿Qué es ésto?\" para más detalles:"
 #: rc.cpp:301
 #, no-c-format
 msgid "Conflict resolver program:"
-msgstr ""
+msgstr "Programa para resolver conflictos:"
 
 #: rc.cpp:304
 #, no-c-format
@@ -643,12 +635,12 @@ msgid "External merge program:"
 msgstr "Programa externo para fusionar:"
 
 #: rc.cpp:307
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Setup an external program for conflict resolving"
-msgstr "Establecer un programa externo para fusionado"
+msgstr "Establecer un programa externo para resolver conflictos"
 
 #: rc.cpp:310
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "<p>\n"
 "Enter how kdesvn should call the conflict resolver program. The form is\n"
@@ -671,15 +663,22 @@ msgid ""
 "</p>"
 msgstr ""
 "<p>\n"
-"Introduzca cómo se debe llamar al programa externo. La forma es:\n"
+"Introduzca cómo se debe llamar al programa para resolver conflictos. La forma es:\n"
 "<p align=\"center\">\n"
-"<b><tt>&lt;programa&gt; &lt;opciones&gt; %s1 %s2 %t</tt></b>\n"
+"<b><tt>&lt;programa&gt; "
+"&lt;opciones&gt;</tt></b>\n"
 "</p>\n"
-"Las sustituciones significan:<br>\n"
-"<b><tt>%s1</tt></b> Primera fuente a fusionar<br>\n"
-"<b><tt>%s2</tt></b> Segunda fuente a fusionar, si no se establece igual a la "
-"primera, sino a otra revisión<br>\n"
-"<b><tt>%t</tt></b> Fuente local a fusionar.\n"
+"<p>\n"
+"Las opciones puede contener símbolos que se sustituirán con nombres de ficheros.\n"
+"</p>\n"
+"Las sustituciones posibles son:<br>\n"
+"<b><tt>%o</tt></b> Versión antigua<br>\n"
+"<b><tt>%m</tt></b> Versión local o propia<br>\n"
+"<b><tt>%n</tt></b> La versión más nueva<br>\n"
+"<b><tt>%t</tt></b> El destino a guardar, kdesvn usará el nombre de fichero original para ésto.\n"
+"</p>\n"
+"<p>\n"
+"Predeterminado: <tt>kdiff3 %o %m %n -o %t</tt>\n"
 "</p>"
 
 #: rc.cpp:329
@@ -943,8 +942,7 @@ msgstr "Seleccione tipo de almacenamiento"
 #: rc.cpp:502
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
+msgstr "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
 #: rc.cpp:505
 #, no-c-format
@@ -959,8 +957,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 #: rc.cpp:512
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
+msgstr "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
 #: rc.cpp:516
 #, no-c-format
@@ -1003,23 +1000,23 @@ msgstr ""
 "o posterior."
 
 #: rc.cpp:535
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Compatible to subversion prior 1.5"
-msgstr "Compatible con subversion anterior a 1.4"
+msgstr "Compatible con subversion anterior a 1.5"
 
 #: rc.cpp:538
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Is created repository compatible to subversion prior 1.5"
-msgstr "Creado repositorio compatible con subversion anterior a 1.4"
+msgstr "Creado repositorio compatible con subversion anterior a 1.5"
 
 #: rc.cpp:541
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.5. This "
 "is only usefull when svnqt is running with subversion 1.5 or above."
 msgstr ""
 "Si se establece, el repositorio creado será compatible con subversion "
-"anterior a 1.4. Ésto sólo es útil cuando svnqt se ejecuta con subversion 1.4 "
+"anterior a 1.5. Ésto sólo es útil cuando svnqt se ejecuta con subversion 1.5 "
 "o posterior."
 
 #: rc.cpp:544
@@ -1284,14 +1281,14 @@ msgid "Open after job"
 msgstr "Abrir al terminar"
 
 #: rc.cpp:735
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "RevisionButton"
-msgstr "Revisión"
+msgstr "RevisionButton"
 
 #: rc.cpp:738
 #, no-c-format
 msgid "-1"
-msgstr ""
+msgstr "-1"
 
 #: rc.cpp:741 svnfrontend/svnlogdlgimp.cpp:266
 #, no-c-format
@@ -1299,24 +1296,24 @@ msgid "SVN Log"
 msgstr "Mensaje de Registro SVN"
 
 #: rc.cpp:744
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Get Logs"
-msgstr "No se obtuvieron registros"
+msgstr "Obtener Registros"
 
 #: rc.cpp:747
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "End revision"
-msgstr "Revisión final:"
+msgstr "Revisión final"
 
 #: rc.cpp:750
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start revision"
-msgstr "Revisión inicial:"
+msgstr "Revisión inicial"
 
 #: rc.cpp:753
 #, no-c-format
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: rc.cpp:759
 #, no-c-format
@@ -1331,8 +1328,7 @@ msgstr "Mensaje"
 #: rc.cpp:768
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:771 rc.cpp:821 ksvnwidgets/logmsg_impl.cpp:82
 #: ksvnwidgets/logmsg_impl.cpp:109
@@ -1777,7 +1773,6 @@ msgid "Shows info about the kdesvn plugin not the standalone app."
 msgstr "Muestra información sobre el plugin y no la aplicación aislada."
 
 #: kdesvn.cpp:151
-#, fuzzy
 msgid "Could not load the part:\n"
 msgstr "No se ha podido cargar el componente:\n"
 
@@ -1978,7 +1973,7 @@ msgstr "Propiedad modificada"
 #: svnfrontend/fillcachethread.cpp:79
 #, fuzzy
 msgid "Cache filled up to revision %1"
-msgstr "Eliminado en revisión %1"
+msgstr "Cache lleno hasta la revisión %1"
 
 #: svnfrontend/tcontextlistener.cpp:157
 msgid "%1 of %2 transferred."
@@ -2227,8 +2222,7 @@ msgstr "Introducir el rango de fusionado"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2306,8 +2300,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:96
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -2652,8 +2645,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1642
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1672
 msgid "Revert entries"
@@ -2709,12 +2701,11 @@ msgstr "Marcando resueltos"
 
 #: svnfrontend/svnactions.cpp:1855
 msgid "Could not retrieve conflict information - giving up."
-msgstr ""
+msgstr "No es posible obtener información del conflicto - renunciando."
 
 #: svnfrontend/svnactions.cpp:1879
-#, fuzzy
 msgid "Resolve-process could not started, check command."
-msgstr "El proceso de fusionado no se ha podido iniciar, chequear comando."
+msgstr "El proceso de resolución no se ha podido iniciar, chequear comando."
 
 #: svnfrontend/svnactions.cpp:1889
 msgid "Importing items"
@@ -2789,9 +2780,8 @@ msgid "There are new items in repository"
 msgstr "Hay nuevos elementos en el repositorio"
 
 #: svnfrontend/svnactions.cpp:2439
-#, fuzzy
 msgid "Filling log cache in background"
-msgstr "Comprobación de actualizaciones iniciada en segundo plano"
+msgstr "Rellenando cache de registros en segundo plano"
 
 #: svnfrontend/svnactions.cpp:2453
 msgid "Checking for updates started in background"
@@ -2887,8 +2877,7 @@ msgstr "Mostrar últimos cambios"
 
 #: svnfrontend/kdesvnfilelist.cpp:270
 msgid "Display last changes as difference to previous commit."
-msgstr ""
-"Muestra los últimos cambios como diferencias con la confirmación previa."
+msgstr "Muestra los últimos cambios como diferencias con la confirmación previa."
 
 #: svnfrontend/kdesvnfilelist.cpp:272
 msgid "Details"
@@ -2899,8 +2888,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:279
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -2935,8 +2923,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:293
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:295
 msgid "Lock current items"
@@ -2968,8 +2955,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:311
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:313
 msgid "Open repository of working copy"
@@ -3024,18 +3010,16 @@ msgid "Revert current changes"
 msgstr "Deshacer cambios actuales"
 
 #: svnfrontend/kdesvnfilelist.cpp:339
-#, fuzzy
 msgid "Mark resolved"
-msgstr "Marcando resueltos"
+msgstr "Marcar resueltos"
 
 #: svnfrontend/kdesvnfilelist.cpp:341
 msgid "Marking files or dirs resolved"
 msgstr "Marcando ficheros o directorios como resueltos"
 
 #: svnfrontend/kdesvnfilelist.cpp:343
-#, fuzzy
 msgid "Resolve conflicts"
-msgstr "Resuelto conflicto de %1."
+msgstr "Resolver conflictos"
 
 #: svnfrontend/kdesvnfilelist.cpp:346
 msgid "Ignore/Unignore current item"
@@ -3130,9 +3114,8 @@ msgid "Closes all branches of the file tree"
 msgstr "Cierra todas las ramas del árbol de ficheros"
 
 #: svnfrontend/kdesvnfilelist.cpp:1052
-#, fuzzy
 msgid "Could not retrieve repository of working copy."
-msgstr "Abrir el repositorio de la copia de trabajo"
+msgstr "No se puede obtener el repositorio de la copia de trabajo"
 
 #: svnfrontend/kdesvnfilelist.cpp:1088
 msgid "Failed: %1 %2"
@@ -3366,11 +3349,3 @@ msgstr "Mensaje de registro"
 msgid "Open repository or working copy"
 msgstr "Abrir repositorio o copia de trabajo"
 
-#~ msgid "Pristine state was modified."
-#~ msgstr "El estado original ha sido modificado"
-
-#~ msgid "Log..."
-#~ msgstr "Mostrar registro..."
-
-#~ msgid "Resolve recursive"
-#~ msgstr "Resolver recursivamente"

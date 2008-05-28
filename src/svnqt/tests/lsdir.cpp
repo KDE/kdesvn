@@ -34,7 +34,7 @@ int main(int,char**)
                 << dt.toTime_t() << std::endl;
     }
     try {
-        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthEmpty,false);
+        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthImmediates,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8() << std::endl;

@@ -1940,7 +1940,7 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
             for (iter=lst.begin();iter!=lst.end();++iter) {
                 tmp.push_back(svn::Path((base+(*iter).fileName(true))));
             }
-            m_SvnWrapper->addItems(tmp,true);
+            m_SvnWrapper->addItems(tmp,svn::DepthInfinity);
         }
         refreshCurrentTree();
     }

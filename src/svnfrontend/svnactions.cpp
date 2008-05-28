@@ -952,7 +952,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             }
         }
         if (_add.count()>0) {
-            if (!addItems(_add,false)) {
+            if (!addItems(_add,svn::DepthEmpty)) {
                 return false;
             }
         }
@@ -1451,7 +1451,7 @@ void SvnActions::makeAdd(bool rec)
         }
         items.push_back(svn::Path(cur->fullName()));
     }
-    addItems(items,rec);
+    addItems(items,rec?svn::DepthInfinity:svn::DepthEmpty);
     liter.toFirst();
 #if 0
     while ((cur=liter.current())!=0){
@@ -1465,22 +1465,22 @@ void SvnActions::makeAdd(bool rec)
 #endif
 }
 
-bool SvnActions::addItems(const QStringList&w,bool rec)
+bool SvnActions::addItems(const QStringList&w,svn::Depth depth)
 {
     QValueList<svn::Path> items;
     for (unsigned int i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
-    return addItems(items,rec);
+    return addItems(items,depth);
 }
 
-bool SvnActions::addItems(const QValueList<svn::Path> &items,bool rec)
+bool SvnActions::addItems(const QValueList<svn::Path> &items,svn::Depth depth)
 {
     QString ex;
     try {
         QValueList<svn::Path>::const_iterator piter;
         for (piter=items.begin();piter!=items.end();++piter) {
-            m_Data->m_Svnclient->add((*piter),rec);
+            m_Data->m_Svnclient->add((*piter),depth);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -2187,7 +2187,7 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 {
     bool disp_remote_details = Kdesvnsettings::details_on_remote_listing();
     QString ex;
-    svn::Depth _d=rec?svn::DepthInfinity:svn::DepthEmpty;
+    svn::Depth _d=rec?svn::DepthInfinity:svn::DepthImmediates;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
@@ -2236,7 +2236,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
                 ++it;
             }
             if (displist.count()>0) {
-                addItems(displist,false);
+                addItems(displist,svn::DepthEmpty);
             }
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"add_items_dlg",false);

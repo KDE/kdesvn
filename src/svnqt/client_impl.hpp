@@ -177,13 +177,14 @@ namespace svn
     /**
      * Adds a file to the repository.
      * @param path the path to add
-     * @param recurse if @a path is a folder add items recursive
+     * @param depth if @a path is a folder add items recursive depending on value if it. Pre-subversion 1.5 DepthInfinity is mapped to recursive, all other to not-recursive.
      * @param force if true, do not error on already-versioned items.
-     * @param no_ignore if false don't add files or directories that match ignore patterns. @since subversion 1.3
+     * @param no_ignore if false don't add files or directories that match ignore patterns.
+     * @param add_parents if true, go up to the next versioned folder and add all between path and this folder. Used only with subversion 1.5 or newer
      * @exception ClientException
+     * @sa svn::Depth
      */
-    virtual void
-    add (const Path & path, bool recurse,bool force=false, bool no_ignore=false) throw (ClientException);
+    virtual void add (const Path & path, svn::Depth depth,bool force=false, bool no_ignore=false, bool add_parents = true) throw (ClientException);
 
     /**
      * Updates the file or directory.

@@ -131,7 +131,7 @@ namespace svn
      */
     virtual StatusEntries
     status (const Path& path,
-            Depth depth=DepthEmpty,
+            Depth depth=DepthImmediates,
             const bool get_all = true,
             const bool update = false,
             const bool no_ignore = false,
@@ -208,13 +208,14 @@ namespace svn
     /**
      * Adds a file to the repository.
      * @param path the path to add
-     * @param recurse if @a path is a folder add items recursive
+     * @param depth if @a path is a folder add items recursive depending on value if it.
      * @param force if true, do not error on already-versioned items.
      * @param no_ignore if false don't add files or directories that match ignore patterns. When build against svn 1.2 always false
+     * @param add_parents if true, go up to the next versioned folder and add all between path and this folder.
      * @exception ClientException
      */
     virtual void
-    add (const Path & path, bool recurse,bool force=false, bool no_ignore=false) throw (ClientException)=0;
+    add (const Path & path, svn::Depth depth,bool force=false, bool no_ignore=false, bool add_parents = true) throw (ClientException)=0;
 
     /**
      * Updates the file or directory.

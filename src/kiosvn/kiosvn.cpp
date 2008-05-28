@@ -195,7 +195,7 @@ void kio_svnProtocol::listDir(const KURL&url)
     }
 
     try {
-        dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,rev,svn::DepthEmpty,false);
+        dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,rev,svn::DepthImmediates,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
@@ -870,7 +870,7 @@ void kio_svnProtocol::add(const KURL& wc)
     QString path = wc.path();
     try {
                                                /* rec */
-        m_pData->m_Svnclient->add(svn::Path(path),true);
+        m_pData->m_Svnclient->add(svn::Path(path),svn::DepthInfinity);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

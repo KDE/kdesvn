@@ -79,8 +79,8 @@ public:
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
 
 
-    bool addItems(const QValueList<svn::Path> &items,bool rec=false);
-    bool addItems(const QStringList&w,bool rec=false);
+    bool addItems(const QValueList<svn::Path> &items,svn::Depth depth=svn::DepthEmpty);
+    bool addItems(const QStringList&w,svn::Depth depth=svn::DepthEmpty);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
     bool makeDelete(const svn::Pathes&);

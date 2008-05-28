@@ -547,7 +547,7 @@ void CommandExec::slotCmd_delete()
 
 void CommandExec::slotCmd_add()
 {
-    m_pCPart->m_SvnWrapper->addItems(m_pCPart->url,true);
+    m_pCPart->m_SvnWrapper->addItems(m_pCPart->url,svn::DepthInfinity);
 }
 
 void CommandExec::slotCmd_revert()

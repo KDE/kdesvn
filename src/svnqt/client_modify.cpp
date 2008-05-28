@@ -118,16 +118,28 @@ namespace svn
 
   void
   Client_impl::add (const Path & path,
-               bool recurse,bool force, bool no_ignore) throw (ClientException)
+                    svn::Depth depth,bool force, bool no_ignore, bool add_parents) throw (ClientException)
   {
     Pool pool;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    svn_error_t * error =
+            svn_client_add4(path.cstr (),
+                             internal::DepthToSvn(depth)(),
+                             force,
+                             no_ignore,
+                             add_parents,
+                             *m_context,
+                             pool);
+#else
+    Q_UNUSED(add_parents);
     svn_error_t * error =
       svn_client_add3 (path.cstr (),
-                      recurse,
+                      depth==DepthInfinity,
                       force,
                       no_ignore,
                       *m_context,
                       pool);
+#endif
     if(error != NULL)
       throw ClientException (error);
   }

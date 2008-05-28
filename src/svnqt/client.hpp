@@ -67,6 +67,7 @@
 #include "svnqt/info_entry.hpp"
 #include "svnqt/annotate_line.hpp"
 #include "svnqt/stringarray.hpp"
+#include "svnqt/diffoptions.hpp"
 
 class QStringList;
 
@@ -290,7 +291,11 @@ namespace svn
               const Path & path,
               const Revision & revisionStart,
               const Revision & revisionEnd,
-              const Revision & peg = Revision::UNDEFINED) throw (ClientException)=0;
+              const Revision & peg = Revision::UNDEFINED,
+              const DiffOptions&diffoptions = DiffOptions(),
+              bool ignore_mimetypes = false,
+              bool include_merged_revisions = false
+             ) throw (ClientException)=0;
 
     /**
      * Commits changes to the repository. This usually requires

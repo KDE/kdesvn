@@ -453,14 +453,18 @@ namespace svn
      * @param discoverChangedPaths Should changed pathes transferred
      * @param strictNodeHistory
      * @param limit the maximum log entries count.
+     * @param include_merged_revisions log information for revisions which have been merged to targets will also be returned. (subversion 1.5)
      * @return a vector with log entries
      */
     virtual LogEntriesPtr
     log (const Path& path, const Revision & revisionStart,
          const Revision & revisionEnd,
          const Revision & revisionPeg,
-         bool discoverChangedPaths,
-         bool strictNodeHistory,int limit) throw (ClientException);
+         bool discoverChangedPaths=false,
+         bool strictNodeHistory=true,int limit=0,
+         bool include_merged_revisions = false,
+         const StringArray&revprops=StringArray()
+        ) throw (ClientException);
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored
@@ -485,7 +489,10 @@ namespace svn
          LogEntriesMap&target,
          const Revision & revisionPeg,
          bool discoverChangedPaths,
-         bool strictNodeHistory,int limit) throw (ClientException);
+         bool strictNodeHistory,int limit,
+         bool include_merged_revisions = false,
+         const StringArray&revprops=StringArray()
+        ) throw (ClientException);
 
    /**
      * Produce diff output which describes the delta between
@@ -509,7 +516,7 @@ namespace svn
      * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
      * @return delta between the files
      * @exception ClientException
-    */
+     */
     virtual QByteArray
             diff_peg (const Path & tmpPath, const Path & path,
                 const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
@@ -748,6 +755,7 @@ namespace svn
     struct sBaton {
         Context*m_context;
         void*m_data;
+        void*m_revstack;
     };
 
   private:

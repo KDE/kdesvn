@@ -45,6 +45,8 @@ namespace svn
     {
         protected:
             QStringList m_content;
+            bool m_isNull;
+
         public:
             StringArray();
             StringArray(const QStringList&);
@@ -61,6 +63,10 @@ namespace svn
              * @return const reference to data, may used for searches.
              */
             const QStringList& data() const {return m_content;}
+
+            /** if array should return 0 instead of empty array */
+            bool isNull()const;
+            void setNull(bool _n);
     };
 }
 

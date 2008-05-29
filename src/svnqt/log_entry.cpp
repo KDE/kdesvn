@@ -33,6 +33,9 @@
 
 // subversion api
 #include "svn_time.h"
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#include "svn_compat.h"
+#endif
 
 
 namespace svn
@@ -82,6 +85,33 @@ namespace svn
     : revision(-1),date(0),author(""),message("")
   {
   }
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+  LogEntry::LogEntry(svn_log_entry_t*log_entry)
+    : revision(-1),date(0),author(""),message("")
+  {
+      Pool pool;
+      const char *author_;
+      const char *date_;
+      const char *message_;
+      svn_compat_log_revprops_out(&author_, &date_, &message_, log_entry->revprops);
+
+      author = author_ == 0 ? QString::fromLatin1("") : QString::FROMUTF8(author_);
+      message = message_ == 0 ? QString::fromLatin1("") : QString::FROMUTF8(message_);
+      revision = log_entry->revision;
+      for (apr_hash_index_t *hi = apr_hash_first (pool, log_entry->changed_paths);
+           hi != NULL;
+           hi = apr_hash_next (hi))
+      {
+          const void *pv;
+          void *val;
+          apr_hash_this (hi, &pv, NULL, &val);
+          svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
+          const char* path = reinterpret_cast<const char*>(pv);
+          changedPaths.push_back (LogChangePathEntry (path,log_item->action,log_item->copyfrom_path,log_item->copyfrom_rev) );
+      }
+  }
+#endif
 
   LogEntry::LogEntry (
     const svn_revnum_t revision_,

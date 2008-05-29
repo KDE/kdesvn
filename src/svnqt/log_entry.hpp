@@ -54,6 +54,7 @@
 
 // subversion api
 #include "svn_types.h"
+#include "svn_version.h"
 
 namespace svn
 {
@@ -111,6 +112,9 @@ namespace svn
               const char * author,
               const char * date,
               const char * message);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    LogEntry(svn_log_entry_t*);
+#endif
     void setDate(const char*date);
 
 #if QT_VERSION < 0x040000
@@ -139,4 +143,3 @@ SVNQT_EXPORT QDataStream &operator>>(QDataStream&s,svn::LogChangePathEntry&r);
  * eval: (load-file "../../rapidsvn-dev.el")
  * end:
  */
-

@@ -32,6 +32,7 @@
  svn::StringArray::StringArray()
     :m_content()
 {
+    setNull(true);
 }
 
 
@@ -41,6 +42,7 @@
 svn::StringArray::StringArray(const QStringList&aList)
     :m_content(aList)
 {
+    setNull(false);
 }
 
 /*!
@@ -65,6 +67,9 @@ svn::StringArray::StringArray(const apr_array_header_t * apr_targets)
  */
 size_t svn::StringArray::size()const
 {
+    if (isNull()) {
+        return 0;
+    }
     return m_content.size ();
 }
 
@@ -83,6 +88,9 @@ const QString& svn::StringArray::operator[](size_t which)
  */
 const apr_array_header_t * svn::StringArray::array (const Pool & pool) const
 {
+    if (isNull()) {
+        return 0;
+    }
     QStringList::const_iterator it;
 
     apr_pool_t *apr_pool = pool.pool ();
@@ -97,4 +105,17 @@ const apr_array_header_t * svn::StringArray::array (const Pool & pool) const
         (*((const char **) apr_array_push (apr_targets))) = t2;
     }
     return apr_targets;
+}
+
+bool svn::StringArray::isNull()const
+{
+    return m_isNull;
+}
+
+void svn::StringArray::setNull(bool _n)
+{
+    if (_n) {
+        m_content.clear();
+    }
+    m_isNull = _n;
 }

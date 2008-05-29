@@ -471,6 +471,7 @@ namespace svn
           bool rec,
           const Revision & rev,
           const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. The first
@@ -484,7 +485,7 @@ namespace svn
      * @param revisionEnd
      * @param discoverChangedPaths
      * @param strictNodeHistory
-     * @param limit (ignored when subversion 1.1 API)
+     * @param limit the maximum log entries count.
      * @return a vector with log entries
      */
     virtual LogEntriesPtr
@@ -493,7 +494,11 @@ namespace svn
          const Revision & revisionEnd,
          const Revision & revisionPeg,
          bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
+         bool strictNodeHistory=true,int limit = 0,
+         bool include_merged_revisions = false,
+         const StringArray&revprops=StringArray()
+        ) throw (ClientException)=0;
+
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored
@@ -517,7 +522,10 @@ namespace svn
          LogEntriesMap&target,
          const Revision & revisionPeg=Revision::UNDEFINED,
          bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
+         bool strictNodeHistory=true,int limit = 0,
+         bool include_merged_revisions = false,
+         const StringArray&revprops=StringArray()
+        ) throw (ClientException)=0;
 
     /**
      * Produce diff output which describes the delta between

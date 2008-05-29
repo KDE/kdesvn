@@ -1651,16 +1651,7 @@ void SvnActions::slotRevert()
         displist.push_back(m_Data->m_ParentList->baseUri());
     }
     slotRevertItems(displist);
-#if 0
-    liter.toFirst();
-    while ((cur=liter.current())!=0){
-        ++liter;
-        cur->refreshStatus(true,&lst,false);
-        cur->refreshStatus(false,&lst,true);
-    }
-#else
     EMIT_REFRESH;
-#endif
 }
 
 void SvnActions::slotRevertItems(const QStringList&displist)

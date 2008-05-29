@@ -42,6 +42,7 @@
 #include <qglobal.h>
 #include <qstring.h>
 #include <qvaluelist.h>
+#include <qmap.h>
 
 #else
 
@@ -87,14 +88,9 @@ namespace svn
     //! future use or useful in backends
     QString copyToPath;
 
-#if QT_VERSION < 0x040000
-    Q_LLONG copyFromRevision;
+    QLONG copyFromRevision;
     //! future use or useful in backends
-    Q_LLONG copyToRevision;
-#else
-    qlonglong copyFromRevision;
-    qlonglong copyToRevision;
-#endif
+    QLONG copyToRevision;
   };
 
 #if QT_VERSION < 0x040000
@@ -117,17 +113,13 @@ namespace svn
 #endif
     void setDate(const char*date);
 
-#if QT_VERSION < 0x040000
     //! if -1 the entry is a fake entry and not real usable!
-    Q_LLONG revision;
-    Q_LLONG date;
-#else
-    qlonglong date;
-    qlonglong revision;
-#endif
+    QLONG revision;
+    QLONG date;
     QString author;
     QString message;
     LogChangePathEntries changedPaths;
+    QLIST<QLONG> m_MergedInRevisions;
   };
 }
 

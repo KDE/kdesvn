@@ -52,8 +52,6 @@
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/context_listener.hpp"
 
-#include <stack>
-
 namespace svn
 {
 
@@ -68,8 +66,8 @@ namespace svn
         Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
         LogEntries * entries =
                 (LogEntries *) l_baton->m_data;
-        std::stack<svn_revnum_t>*rstack=
-                (std::stack<svn_revnum_t>*)l_baton->m_revstack;
+        QLIST<QLONG>*rstack=
+                (QLIST<QLONG>*)l_baton->m_revstack;
         Context*l_context = l_baton->m_context;
         svn_client_ctx_t*ctx = l_context->ctx();
         if (ctx&&ctx->cancel_func) {
@@ -78,14 +76,16 @@ namespace svn
         if (! SVN_IS_VALID_REVNUM(log_entry->revision))
         {
             if (rstack&&rstack->size()>0) {
-                rstack->pop();
+                rstack->pop_front();
             }
             return SVN_NO_ERROR;
         }
         entries->insert (entries->begin (), LogEntry (log_entry));
-        /// @TODO insert it into last logentry
-        if (log_entry->has_children && rstack) {
-            rstack->push(log_entry->revision);
+        if (rstack) {
+            entries->first().m_MergedInRevisions=(*rstack);
+            if (log_entry->has_children) {
+                rstack->push_front(log_entry->revision);
+            }
         }
         return SVN_NO_ERROR;
     }
@@ -152,8 +152,8 @@ namespace svn
       LogEntriesMap * entries =
               (LogEntriesMap *) l_baton->m_data;
       Context*l_context = l_baton->m_context;
-      std::stack<svn_revnum_t>*rstack=
-              (std::stack<svn_revnum_t>*)l_baton->m_revstack;
+      QLIST<QLONG>*rstack=
+              (QLIST<QLONG>*)l_baton->m_revstack;
       svn_client_ctx_t*ctx = l_context->ctx();
       if (ctx&&ctx->cancel_func) {
           SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
@@ -161,14 +161,17 @@ namespace svn
       if (! SVN_IS_VALID_REVNUM(log_entry->revision))
       {
           if (rstack&&rstack->size()>0) {
-              rstack->pop();
+              rstack->pop_front();
           }
           return SVN_NO_ERROR;
       }
       (*entries)[log_entry->revision]=LogEntry (log_entry);
       /// @TODO insert it into last logentry
-      if (log_entry->has_children && rstack) {
-          rstack->push(log_entry->revision);
+      if (rstack) {
+          (*entries)[log_entry->revision].m_MergedInRevisions=(*rstack);
+          if (log_entry->has_children) {
+              rstack->push_front(log_entry->revision);
+          }
       }
       return SVN_NO_ERROR;
   }
@@ -503,7 +506,7 @@ namespace svn
     Targets target(path);
     Pool pool;
     sBaton l_baton;
-    std::stack<svn_revnum_t> revstack;
+    QLIST<QLONG> revstack;
     l_baton.m_context=m_context;
     l_baton.m_data = &log_target;
     l_baton.m_revstack = &revstack;
@@ -560,7 +563,7 @@ namespace svn
     Targets target(path);
     Pool pool;
     LogEntriesPtr entries = LogEntriesPtr(new LogEntries ());
-    std::stack<svn_revnum_t> revstack;
+    QLIST<QLONG> revstack;
     sBaton l_baton;
     l_baton.m_context=m_context;
     l_baton.m_data = entries;

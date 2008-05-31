@@ -32,6 +32,7 @@
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/ksvnwidgets/diffbrowser.h"
 #include "src/ksvnwidgets/encodingselector_impl.h"
+#include "src/ksvnwidgets/revertform_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/client.hpp"
@@ -1659,21 +1660,19 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     if (displist.count()==0) {
         return;
     }
-    KDialogBase*dialog = new KDialogBase(
-                i18n("Revert entries"),
-                KDialogBase::Yes | KDialogBase::No,
-                KDialogBase::No, KDialogBase::No,
-                m_Data->m_ParentList->realWidget(),"warningRevert",true,true);
 
-    bool checkboxres = true;
-
-    int result = KMessageBox::createKMessageBox(dialog,QMessageBox::Warning,
-        i18n("Really revert these entries to pristine state?"), displist, i18n("Recursive"),
-        &checkboxres,
-        KMessageBox::Dangerous);
-    if (result != KDialogBase::Yes) {
+    svn::Depth depth;
+    RevertFormImpl*ptr;
+    KDialog * dlg = createDialog(&ptr,i18n("Revert entries"),true);
+    if (!dlg) {
         return;
     }
+    ptr->setDispList(displist);
+    if (dlg->exec()!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    depth = ptr->getDepth();
 
     QValueList<svn::Path> items;
     for (unsigned j = 0; j<displist.count();++j) {
@@ -1685,14 +1684,14 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Revert"),i18n("Reverting items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets target(items);
-        m_Data->m_Svnclient->revert(target,checkboxres);
+        m_Data->m_Svnclient->revert(target,depth);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
     }
     // remove them from cache
     for (unsigned int j = 0; j<items.count();++j) {
-        m_Data->m_Cache.deleteKey(items[j].path(),!checkboxres);
+        m_Data->m_Cache.deleteKey(items[j].path(),depth!=svn::DepthInfinity);
 //        m_Data->m_Cache.dump_tree();
     }
     EMIT_FINISHED;

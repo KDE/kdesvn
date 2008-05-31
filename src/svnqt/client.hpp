@@ -203,7 +203,10 @@ namespace svn
      * @exception ClientException
      */
     virtual void
-    revert (const Targets & targets, bool recurse) throw (ClientException)=0;
+    revert (const Targets & targets,
+            Depth depth,
+            const StringArray&changelist=StringArray()
+           ) throw (ClientException)=0;
 
 
     /**

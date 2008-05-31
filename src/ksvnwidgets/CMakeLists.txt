@@ -7,6 +7,7 @@ KDE3_ADD_UI_FILES(
     authdlg.ui
     encodingselector.ui
     depthform.ui
+    revertform.ui
 )
 
 SET(ksvnwidgetsrc
@@ -19,6 +20,7 @@ SET(ksvnwidgetsrc
     diffsyntax.cpp
     encodingselector_impl.cpp
     depthselector.cpp
+    revertform_impl.cpp
     )
 
 SET(ksvnwidgethdr
@@ -31,6 +33,7 @@ SET(ksvnwidgethdr
     diffsyntax.h
     encodingselector_impl.h
     depthselector.h
+    revertform_impl.h
 )
 
 KDE3_AUTOMOC(${ksvnwidgetsrc})

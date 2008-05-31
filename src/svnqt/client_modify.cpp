@@ -102,18 +102,22 @@ namespace svn
 
   void
   Client_impl::revert (const Targets & targets,
-                  bool recurse) throw (ClientException)
+                  Depth depth,
+                  const StringArray&changelist
+                      ) throw (ClientException)
   {
     Pool pool;
 
+    bool recurse = depth==DepthInfinity;
     svn_error_t * error =
       svn_client_revert ((targets.array (pool)),
                          recurse,
                          *m_context,
                          pool);
 
-    if(error != NULL)
-      throw ClientException (error);
+    if(error != NULL) {
+        throw ClientException (error);
+    }
   }
 
   void

@@ -807,7 +807,7 @@ void kio_svnProtocol::revert(const KURL::List&l)
     }
     svn::Targets target(list);
     try {
-        m_pData->m_Svnclient->revert(target,false);
+        m_pData->m_Svnclient->revert(target,svn::DepthEmpty);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

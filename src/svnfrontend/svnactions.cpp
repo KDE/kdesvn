@@ -2042,7 +2042,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
             svn::Path(s2),
             rev2,
             svn::Path(target),
-            forceIt,rec,ancestry,dry);
+            forceIt,rec?svn::DepthInfinity:svn::DepthFiles,ancestry,dry);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

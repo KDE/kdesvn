@@ -452,9 +452,12 @@ namespace svn
     merge (const Path & path1, const Revision & revision1,
            const Path & path2, const Revision & revision2,
            const Path & localPath, bool force,
-           bool recurse,
+           Depth depth,
            bool notice_ancestry=false,
-           bool dry_run=false) throw (ClientException)=0;
+           bool dry_run=false,
+           bool record_only=false,
+           const StringArray&merge_options=StringArray()
+          ) throw (ClientException)=0;
 
     /**
      * Retrieve information for the given path

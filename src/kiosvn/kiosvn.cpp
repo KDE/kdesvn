@@ -642,9 +642,10 @@ void kio_svnProtocol::update(const KURL&url,int revnumber,const QString&revkind)
     svn::Path p(url.path());
     try {
         svn::Targets pathes(p.path());
-        // recursive second last parameter
-        // always update externals, too. (last parameter)
-        m_pData->m_Svnclient->update(pathes, where,true,false);
+        // always update externals, too. (third last parameter)
+        // no unversioned items allowed (second last parameter)
+        // sticky depth (last parameter)
+        m_pData->m_Svnclient->update(pathes, where,svn::DepthInfinity,false,false,true);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

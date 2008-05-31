@@ -1345,8 +1345,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
             i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets pathes(what);
-        // always update externals, too. (last parameter)
-        ret = m_Data->m_Svnclient->update(pathes,rev, recurse,false);
+        ret = m_Data->m_Svnclient->update(pathes,rev, recurse?svn::DepthInfinity:svn::DepthFiles,false,false,true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

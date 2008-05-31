@@ -224,13 +224,15 @@ namespace svn
      * @param revision the revision number to checkout.
      *                 Revision::HEAD will checkout the
      *                 latest revision.
-     * @param recurse recursively update.
-     * @param ignore_externals ignore externals (only when Subversion 1.2 or above)
+     * @param depth Depthness for operation
+     * @param ignore_externals ignore externals
+     * @param allow_unversioned will operation not fail if there are unversioned items in tree with same name.
      * @exception ClientException
      */
     virtual Revisions
     update (const Targets & path, const Revision & revision,
-            bool recurse,bool ignore_externals) throw (ClientException) = 0;
+            Depth depth,bool ignore_externals,bool allow_unversioned,
+            bool sticky_depth) throw (ClientException) = 0;
 
     /**
      * Retrieves the contents for a specific @a revision of

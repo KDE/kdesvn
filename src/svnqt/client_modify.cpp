@@ -307,27 +307,40 @@ namespace svn
 
   void
   Client_impl::mkdir (const Path & path,
-                 const QString& message) throw (ClientException)
+                 const QString& message,
+                 bool makeParent
+                     ) throw (ClientException)
   {
     Targets targets(path.path());
-    mkdir(targets,message);
+    mkdir(targets,message,makeParent);
   }
 
   void
   Client_impl::mkdir (const Targets & targets,
-                 const QString&msg) throw (ClientException)
+                 const QString&msg,
+                 bool makeParent
+                     ) throw (ClientException)
   {
     Pool pool;
     m_context->setLogMessage(msg);
 
     svn_commit_info_t *commit_info = NULL;
 
-    svn_error_t * error =
-    svn_client_mkdir2
+    svn_error_t * error = 0;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_mkdir3
             (&commit_info,
-                const_cast<apr_array_header_t*>
-                (targets.array (pool)),
-                    *m_context, pool);
+              const_cast<apr_array_header_t*>(targets.array (pool)),
+              makeParent,
+              *m_context, pool);
+#else
+    Q_UNUSED(makeParent);
+    error = svn_client_mkdir2
+            (&commit_info,
+             const_cast<apr_array_header_t*>(targets.array (pool)),
+            *m_context, pool);
+#endif
 
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString::null);

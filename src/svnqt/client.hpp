@@ -356,11 +356,14 @@ namespace svn
      *
      * @param path
      * @param message log message. if it is QString::null asks when working on repository
+     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
      * @exception ClientException
      */
     virtual void
     mkdir (const Path & path,
-           const QString& message) throw (ClientException)=0;
+           const QString& message,
+           bool makeParent=true
+          ) throw (ClientException)=0;
     /**
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
@@ -369,11 +372,14 @@ namespace svn
      *
      * @param targets encoded pathes to create
      * @param message log message. if it is QString::null asks when working on repository
+     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
      * @exception ClientException
      */
     virtual void
     mkdir (const Targets & targets,
-           const QString& message) throw (ClientException)=0;
+           const QString& message,
+           bool makeParent=true
+          ) throw (ClientException)=0;
 
     /**
      * Recursively cleans up a local directory, finishing any
@@ -461,15 +467,13 @@ namespace svn
 
     /**
      * Retrieve information for the given path
-     * remote or local. Only gives with subversion 1.2
-     * usefull results
+     * remote or local.
      *
      * @param path path for info
      * @param rec recursive (if dir)
      * @param rev for which revision
      * @param peg_revision peg revision
      * @return InfoEntries
-     * @since subversion 1.2
      */
     virtual InfoEntries
     info (const Path &path,

@@ -329,7 +329,9 @@ namespace svn
      */
     virtual void
     mkdir (const Path & path,
-           const QString& message) throw (ClientException);
+           const QString& message,
+           bool makeParent=true
+          ) throw (ClientException);
     /**
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
@@ -342,7 +344,9 @@ namespace svn
      */
     virtual void
     mkdir (const Targets & targets,
-           const QString& message) throw (ClientException);
+           const QString& message,
+           bool makeParent=true
+          ) throw (ClientException);
 
     /**
      * Recursively cleans up a local directory, finishing any

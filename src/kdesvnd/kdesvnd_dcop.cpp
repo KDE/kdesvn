@@ -327,7 +327,7 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Listener->m_Svnclient->info(cleanUrl(url),false,rev,peg);
+        e = m_Listener->m_Svnclient->info(cleanUrl(url),svn::DepthEmpty,rev,peg);
     } catch (svn::ClientException e) {
         kdDebug()<< e.msg()<<endl;
         return false;

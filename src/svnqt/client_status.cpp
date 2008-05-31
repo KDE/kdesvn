@@ -476,7 +476,7 @@ namespace svn
   static StatusPtr
   remoteSingleStatus (Client * client, const Path& path,const Revision revision, Context * )
   {
-    InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
+    InfoEntries infoEntries = client->info(path,DepthEmpty,revision,Revision(Revision::UNDEFINED));
     if (infoEntries.size () == 0)
       return StatusPtr(new Status());
     else
@@ -612,9 +612,11 @@ namespace svn
 
   InfoEntries
   Client_impl::info(const Path& _p,
-                bool rec,
+                    Depth depth,
                 const Revision & rev,
-                const Revision & peg_revision) throw (ClientException)
+                const Revision & peg_revision,
+                const StringArray&changelists
+                    ) throw (ClientException)
   {
 
     InfoEntries ientries;
@@ -645,6 +647,20 @@ namespace svn
         }
     }
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error =
+            svn_client_info2(truepath,
+                        internal_peg?&pegr:peg_revision.revision(),
+                        rev.revision (),
+                        &InfoEntryFunc,
+                        &baton,
+                        internal::DepthToSvn(depth)(),
+                        changelists.array(pool),
+                        *m_context,    //client ctx
+                        pool);
+#else
+    bool rec = depth==DepthInfinity;
+    Q_UNUSED(changelists);
     error =
             svn_client_info(truepath,
                       internal_peg?&pegr:peg_revision.revision(),
@@ -654,6 +670,8 @@ namespace svn
                       rec,
                       *m_context,    //client ctx
                       pool);
+#endif
+
     if (error != NULL)
       throw ClientException (error);
 

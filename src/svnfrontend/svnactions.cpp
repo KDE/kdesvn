@@ -353,7 +353,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
 
     if (cacheKey.isEmpty() || !m_Data->m_InfoCache.findSingleValid(cacheKey,target)) {
         try {
-            e = (m_Data->m_Svnclient->info(url,false,_rev,peg));
+            e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
         } catch (const svn::Exception&ce) {
             kdDebug()<<ce.msg() << endl;
             emit clientException(ce.msg());
@@ -628,7 +628,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
             svn::InfoEntries e;
             entries = (m_Data->m_Svnclient->info(_what+
-                    (_what.find("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive,rev,peg));
+                    (_what.find("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive?svn::DepthInfinity:svn::DepthEmpty,rev,peg));
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
             return QString::null;
@@ -2644,7 +2644,7 @@ bool SvnActions::isLocalWorkingCopy(const KURL&url,QString&_baseUri)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Data->m_Svnclient->info(cleanpath,false,rev,peg);
+        e = m_Data->m_Svnclient->info(cleanpath,svn::DepthEmpty,rev,peg);
     } catch (const svn::Exception&e) {
         kdDebug()<< e.msg()<< " " << endl;
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())

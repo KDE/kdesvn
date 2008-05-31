@@ -435,9 +435,11 @@ namespace svn
      */
     virtual InfoEntries
     info(const Path &path,
-          bool rec,
-          const Revision & rev,
-          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException);
+         Depth depth,
+         const Revision & rev,
+         const Revision & peg_revision=svn_opt_revision_unspecified,
+         const StringArray&changelists=StringArray()
+        ) throw (ClientException);
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. The first

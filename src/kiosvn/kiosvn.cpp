@@ -235,7 +235,7 @@ void kio_svnProtocol::stat(const KURL& url)
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
-         e = m_pData->m_Svnclient->info(s,false,rev,peg);
+         e = m_pData->m_Svnclient->info(s,svn::DepthEmpty,rev,peg);
     } catch  (svn::ClientException e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
@@ -393,7 +393,7 @@ bool kio_svnProtocol::checkWc(const KURL&url)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_pData->m_Svnclient->info(url.prettyURL(),false,rev,peg);
+        e = m_pData->m_Svnclient->info(url.prettyURL(),svn::DepthEmpty,rev,peg);
     } catch (svn::ClientException e) {
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
         {

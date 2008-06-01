@@ -98,6 +98,7 @@ namespace svn
 
       author = author_ == 0 ? QString::fromLatin1("") : QString::FROMUTF8(author_);
       message = message_ == 0 ? QString::fromLatin1("") : QString::FROMUTF8(message_);
+      setDate(date_);
       revision = log_entry->revision;
       for (apr_hash_index_t *hi = apr_hash_first (pool, log_entry->changed_paths);
            hi != NULL;

@@ -218,14 +218,26 @@ namespace svn
                        svn::Depth depth,bool keep_locks,
                        const svn::StringArray&changelist,bool keep_changelist) throw (ClientException)
   {
-      Q_UNUSED(changelist);
-      Q_UNUSED(keep_changelist);
     Pool pool;
 
     m_context->setLogMessage (message);
-    bool recurse = depth==DepthInfinity;
-
     svn_commit_info_t *commit_info = NULL;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    svn_error_t * error =
+            svn_client_commit4 (
+                &commit_info,
+                targets.array (pool),
+                internal::DepthToSvn(depth)(),
+                keep_locks,
+                keep_changelist,
+                changelist.array(pool),
+                *m_context,
+                pool);
+#else
+    Q_UNUSED(changelist);
+    Q_UNUSED(keep_changelist);
+    bool recurse = depth==DepthInfinity;
 
     svn_error_t * error =
       svn_client_commit3
@@ -235,9 +247,10 @@ namespace svn
                          keep_locks,
                          *m_context,
                          pool);
-
-    if (error != NULL)
-      throw ClientException (error);
+#endif
+    if (error != NULL) {
+        throw ClientException (error);
+    }
 
     if (commit_info && SVN_IS_VALID_REVNUM (commit_info->revision))
       return (commit_info->revision);

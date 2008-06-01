@@ -44,7 +44,6 @@ DepthSelector::DepthSelector(QWidget *parent, const char *name)
         DepthFormLayout->addWidget( m_recurse );
         m_recurse->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
         DepthFormLayout->addItem(m_leftspacer);
-        adjustSize();
     }
     DepthFormLayout->setMargin(0);
     setMinimumSize(minimumSizeHint());

@@ -2761,14 +2761,15 @@ void kdesvnfilelist::slotRelocate()
     if (dlg) {
         ptr->setStartUrl(fromUrl);
         ptr->disableAppend(true);
-        ptr->forceAsRecursive(true);
         ptr->disableTargetDir(true);
         ptr->disableRange(true);
         ptr->disableOpen(true);
         ptr->disableExternals(true);
+        ptr->hideDepth(true,true);
         bool done = false;
+        dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"relocate_dlg"));
         if (dlg->exec()==QDialog::Accepted) {
-            done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->forceIt());
+            done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->overwrite());
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"relocate_dlg",false);
         delete dlg;

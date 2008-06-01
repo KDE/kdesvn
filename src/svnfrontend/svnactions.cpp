@@ -1102,7 +1102,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 return;
             }
         } else {
-            if (!makeCheckout(p1,first,start,peg,true,true,false,false,rec,p)) {
+            if (!makeCheckout(p1,first,start,peg,
+                 rec?svn::DepthInfinity:svn::DepthFiles,true,false,false,false,p)) {
                 return;
             }
         }
@@ -1113,7 +1114,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 return;
             }
         } else {
-            if (!makeCheckout(p2,second,end,peg,true,true,false,false,rec,p)) {
+            if (!makeCheckout(p2,second,end,peg,
+                 rec?svn::DepthInfinity:svn::DepthFiles,true,false,false,false,p)) {
                 return;
             }
         }
@@ -1520,23 +1522,6 @@ bool SvnActions::makeDelete(const svn::Pathes&items)
     return true;
 }
 
-void SvnActions::CheckoutExport(bool _exp)
-{
-    CheckoutInfo_impl*ptr;
-    KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
-    if (dlg) {
-        ptr->forceAsRecursive(!_exp);
-        if (dlg->exec()==QDialog::Accepted) {
-            svn::Revision r = ptr->toRevision();
-            bool openit = ptr->openAfterJob();
-            bool ignoreExternal=ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->forceIt(),_exp,openit,ignoreExternal,true,0);
-        }
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
-        delete dlg;
-    }
-}
-
 void SvnActions::slotCheckout()
 {
     CheckoutExport(false);
@@ -1545,6 +1530,57 @@ void SvnActions::slotCheckout()
 void SvnActions::slotExport()
 {
     CheckoutExport(true);
+}
+
+void SvnActions::slotCheckoutCurrent()
+{
+    CheckoutExportCurrent(false);
+}
+
+void SvnActions::slotExportCurrent()
+{
+    CheckoutExportCurrent(true);
+}
+
+void SvnActions::CheckoutExport(bool _exp)
+{
+    CheckoutInfo_impl*ptr;
+    KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
+    if (dlg) {
+        if (dlg->exec()==QDialog::Accepted) {
+            svn::Revision r = ptr->toRevision();
+            bool openit = ptr->openAfterJob();
+            bool ignoreExternal=ptr->ignoreExternals();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,
+                         ptr->getDepth(),
+                         _exp,
+                         openit,
+                         ignoreExternal,
+                         ptr->overwrite(),0);
+        }
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
+        delete dlg;
+    }
+}
+
+void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
+{
+    CheckoutInfo_impl*ptr;
+    KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
+    if (dlg) {
+        if (!urlisTarget) {
+            ptr->setStartUrl(what);
+        } else {
+            ptr->setTargetUrl(what);
+        }
+        if (dlg->exec()==QDialog::Accepted) {
+            svn::Revision r = ptr->toRevision();
+            bool openIt = ptr->openAfterJob();
+            bool ignoreExternal = ptr->ignoreExternals();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->getDepth(),_exp,openIt,ignoreExternal,ptr->overwrite(),0);
+        }
+        delete dlg;
+    }
 }
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
@@ -1564,38 +1600,18 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     CheckoutExport(what,_exp);
 }
 
-void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
-{
-    CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
-    if (dlg) {
-        if (!urlisTarget) {
-            ptr->setStartUrl(what);
-        } else {
-            ptr->setTargetUrl(what);
-        }
-        ptr->forceAsRecursive(!_exp);
-        if (dlg->exec()==QDialog::Accepted) {
-            svn::Revision r = ptr->toRevision();
-            bool openIt = ptr->openAfterJob();
-            bool ignoreExternal = ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->forceIt(),_exp,openIt,ignoreExternal,true,0);
-        }
-        delete dlg;
-    }
-}
-
-void SvnActions::slotCheckoutCurrent()
-{
-    CheckoutExportCurrent(false);
-}
-
-void SvnActions::slotExportCurrent()
-{
-    CheckoutExportCurrent(true);
-}
-
-bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,const svn::Revision&_peg,bool force_recurse,bool _exp,bool openIt,bool ignoreExternal,bool exp_rec, QWidget*_p)
+bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,const svn::Revision&_peg,
+                              svn::Depth depth,
+                              // kind of operation
+                              bool _exp,
+                              // open after job
+                              bool openIt,
+                              // ignore externals
+                              bool ignoreExternal,
+                              // overwrite/force not versioned items
+                              bool overwrite,
+                              QWidget*_p
+                             )
 {
     QString fUrl = rUrl;
     QString ex;
@@ -1613,9 +1629,9 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (_exp) {
             /// @todo setup parameter for export operation
-            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,force_recurse,QString::null,ignoreExternal,exp_rec);
+            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,overwrite,QString::null,ignoreExternal,depth);
         } else {
-            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,force_recurse,ignoreExternal);
+            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,depth,ignoreExternal,overwrite);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1626,6 +1642,7 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         else kapp->invokeBrowser(tPath);
     }
     EMIT_FINISHED;
+
     return true;
 }
 
@@ -1697,7 +1714,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     EMIT_FINISHED;
 }
 
-bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec)
+bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,svn::Depth depth,const svn::Revision&peg,bool stickydepth,bool ignore_externals,bool allow_unversioned)
 {
     if (!m_Data->m_CurrentContext) return false;
     QString fUrl = rUrl;
@@ -1709,7 +1726,7 @@ bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Switch url"),i18n("Switching url"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->doSwitch(p,fUrl,r,rec);
+        m_Data->m_Svnclient->doSwitch(p,fUrl,r,depth,peg,stickydepth,ignore_externals,allow_unversioned);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -1741,7 +1758,6 @@ bool SvnActions::makeRelocate(const QString&fUrl,const QString&tUrl,const QStrin
     }
     EMIT_FINISHED;
     return true;
-
 }
 
 void SvnActions::slotSwitch()
@@ -1778,13 +1794,12 @@ bool SvnActions::makeSwitch(const QString&path,const QString&what)
     bool done = false;
     if (dlg) {
         ptr->setStartUrl(what);
-        ptr->forceAsRecursive(true);
         ptr->disableAppend(true);
         ptr->disableTargetDir(true);
         ptr->disableOpen(true);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            done = makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
+            done = makeSwitch(ptr->reposURL(),path,r,ptr->getDepth(),r,true,ptr->ignoreExternals(),ptr->overwrite());
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"switch_url_dlg",false);
         delete dlg;
@@ -1966,7 +1981,12 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
 
     if (rev1 != svn::Revision::WORKING) {
         if (isDir) {
-            if (!makeCheckout(src1,first,rev1,svn::Revision::UNDEFINED,true,true,false,false,rec,0)) {
+            if (!makeCheckout(src1,first,rev1,svn::Revision::UNDEFINED,
+                 rec?svn::DepthInfinity:svn::DepthFiles,
+                 true,
+                 false,
+                 false,
+                 false,0)) {
                 return;
             }
         } else {
@@ -1979,7 +1999,9 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     if (!singleMerge) {
         if (rev2!=svn::Revision::WORKING) {
             if (isDir) {
-                if (!makeCheckout(src2,second,rev2,svn::Revision::UNDEFINED,true,true,false,false,rec,0)) {
+                if (!makeCheckout(src2,second,rev2,svn::Revision::UNDEFINED,
+                     rec?svn::DepthInfinity:svn::DepthFiles,
+                     true,false,false,false,0)) {
                     return;
                 }
             } else {

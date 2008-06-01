@@ -20,7 +20,7 @@
 #ifndef DEPTHSELECTOR_H
 #define DEPTHSELECTOR_H
 
-#include "depthform.h"
+#include "src/ksvnwidgets/depthform.h"
 
 #include "src/svnqt/svnqttypes.hpp"
 

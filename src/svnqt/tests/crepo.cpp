@@ -52,7 +52,7 @@ int main(int,char**)
 
     try {
         m_Svnclient->mkdir(svn::Targets(s),"Test mkdir");
-        m_Svnclient->checkout(p,TESTCOPATH,svn::Revision::HEAD,svn::Revision::HEAD,true,false);
+        m_Svnclient->checkout(p,TESTCOPATH,svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8() << std::endl;

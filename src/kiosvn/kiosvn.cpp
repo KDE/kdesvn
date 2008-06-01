@@ -745,7 +745,7 @@ void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, c
     KURL _src = makeSvnUrl(src);
     svn::Path _target(target.path());
     try {
-        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,true,false);
+        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,svn::DepthInfinity,false,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -818,7 +818,7 @@ void kio_svnProtocol::wc_switch(const KURL&wc,const KURL&target,bool rec,int rev
     svn::Revision where(rev,revstring);
     svn::Path wc_path(wc.path());
     try {
-        m_pData->m_Svnclient->doSwitch(wc_path,makeSvnUrl(target.url()),where,rec);
+        m_pData->m_Svnclient->doSwitch(wc_path,makeSvnUrl(target.url()),where,rec?svn::DepthInfinity:svn::DepthFiles);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

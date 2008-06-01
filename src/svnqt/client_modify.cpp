@@ -50,14 +50,30 @@ namespace svn
   Client_impl::checkout (const Path& url, const Path & destPath,
               const Revision & revision,
               const Revision & peg,
-              bool recurse,
-              bool ignore_externals) throw (ClientException)
+              svn::Depth depth,
+              bool ignore_externals,
+              bool overwrite
+                        ) throw (ClientException)
   {
     Pool subPool;
     svn_revnum_t revnum = 0;
     Path up(url);
-    svn_error_t * error =
-      svn_client_checkout2(&revnum,
+    svn_error_t * error = 0;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_checkout3(&revnum,
+                up.cstr(),
+                destPath.cstr(),
+                peg.revision(),
+                revision.revision (),
+                internal::DepthToSvn(depth)(),
+                ignore_externals,
+                overwrite,
+                *m_context,
+                subPool);
+#else
+    bool recurse = depth==DepthInfinity;
+    Q_UNUSED(overwrite);
+    error = svn_client_checkout2(&revnum,
                            up.cstr(),
                            destPath.cstr(),
                            peg.revision(),
@@ -66,18 +82,16 @@ namespace svn
                            ignore_externals,
                            *m_context,
                            subPool);
-
+#endif
     if(error != NULL)
       throw ClientException (error);
     return revnum;
   }
 
-  void
-  Client_impl::remove (const Path & path,
-                  bool force) throw (ClientException)
+  void Client_impl::remove (const Path & path,bool force) throw (ClientException)
   {
-    Targets targets (path.path());
-    remove(targets,force);
+      Targets targets (path.path());
+      remove(targets,force);
   }
 
   void
@@ -108,13 +122,23 @@ namespace svn
   {
     Pool pool;
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    svn_error_t * error =
+            svn_client_revert2 ((targets.array (pool)),
+                                internal::DepthToSvn(depth)(),
+                                changelist.array(pool),
+                                *m_context,
+                                pool);
+
+#else
     bool recurse = depth==DepthInfinity;
+    Q_UNUSED(changelist);
     svn_error_t * error =
       svn_client_revert ((targets.array (pool)),
                          recurse,
                          *m_context,
                          pool);
-
+#endif
     if(error != NULL) {
         throw ClientException (error);
     }
@@ -389,7 +413,7 @@ namespace svn
               bool overwrite,
               const QString&native_eol,
               bool ignore_externals,
-              bool recurse) throw (ClientException)
+              svn::Depth depth) throw (ClientException)
   {
     Pool pool;
     svn_revnum_t revnum = 0;
@@ -399,6 +423,21 @@ namespace svn
     } else {
         _neol = native_eol.TOUTF8();
     }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    svn_error_t * error =
+            svn_client_export4(&revnum,
+                                srcPath.cstr(),
+                                destPath.cstr(),
+                                peg.revision(),
+                                revision.revision(),
+                                overwrite,
+                                ignore_externals,
+                                internal::DepthToSvn(depth)(),
+                                _neol,
+                                *m_context,
+                                pool);
+#else
+    bool recurse = depth==svn::DepthInfinity;
     svn_error_t * error =
       svn_client_export3(&revnum,
                         srcPath.cstr(),
@@ -411,30 +450,58 @@ namespace svn
                         _neol,
                          *m_context,
                          pool);
+#endif
     if(error != NULL)
       throw ClientException (error);
     return revnum;
   }
 
   svn_revnum_t
-  Client_impl::doSwitch (const Path & path,
-                    const QString& url,
-                    const Revision & revision,
-                    bool recurse) throw (ClientException)
+  Client_impl::doSwitch (
+                         const Path & path, const QString& url,
+                         const Revision & revision,
+                         Depth depth,
+                         const Revision & peg,
+                         bool sticky_depth,
+                         bool ignore_externals,
+                         bool allow_unversioned
+                        ) throw (ClientException)
   {
     Pool pool;
     svn_revnum_t revnum = 0;
-    svn_error_t * error =
-      svn_client_switch (&revnum,
+    svn_error_t * error = 0;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_switch2(
+                               &revnum,
+                               path.cstr(),
+                               url.TOUTF8(),
+                               peg.revision(),
+                               revision.revision(),
+                               internal::DepthToSvn(depth)(),
+                               sticky_depth,
+                               ignore_externals,
+                               allow_unversioned,
+                               *m_context,
+                               pool
+                              );
+#else
+    bool recurse = depth==DepthInfinity;
+    Q_UNUSED(peg);
+    Q_UNUSED(sticky_depth);
+    Q_UNUSED(ignore_externals);
+    Q_UNUSED(allow_unversioned);
+    error = svn_client_switch (&revnum,
                          path.cstr(),
                          url.TOUTF8(),
                          revision.revision (),
                          recurse,
                          *m_context,
                          pool);
-
-    if(error != NULL)
-      throw ClientException (error);
+#endif
+    if(error != NULL) {
+        throw ClientException (error);
+    }
     return revnum;
   }
 

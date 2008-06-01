@@ -169,8 +169,10 @@ namespace svn
     checkout (const Path& moduleName, const Path & destPath,
               const Revision & revision,
               const Revision & peg = Revision::UNDEFINED,
-              bool recurse = true,
-              bool ignore_externals=false) throw (ClientException) = 0;
+              svn::Depth depth=DepthInfinity,
+              bool ignore_externals=false,
+              bool overwrite=false
+             ) throw (ClientException) = 0;
 
     /**
      * relocate wc @a from to @a to
@@ -423,7 +425,7 @@ namespace svn
               bool overwrite=false,
               const QString&native_eol=QString::null,
               bool ignore_externals = false,
-              bool recurse = true
+              svn::Depth depth=svn::DepthInfinity
               ) throw (ClientException)=0;
 
     /**
@@ -432,9 +434,15 @@ namespace svn
      * @exception ClientException
      */
     virtual svn_revnum_t
-    doSwitch (const Path & path, const QString& url,
+    doSwitch (
+              const Path & path, const QString& url,
               const Revision & revision,
-              bool recurse) throw (ClientException)=0;
+              Depth depth,
+              const Revision & peg=Revision::UNDEFINED,
+              bool sticky_depth = true,
+              bool ignore_externals=false,
+              bool allow_unversioned=false
+             ) throw (ClientException)=0;
 
     /**
      * Import file or directory PATH into repository directory URL at

@@ -101,12 +101,12 @@ namespace svn
     virtual StatusEntries
     status (const Path& path,
             Depth depth=DepthEmpty,
-            const bool get_all = true,
-            const bool update = false,
-            const bool no_ignore = false,
+            bool get_all = true,
+            bool update = false,
+            bool no_ignore = false,
             const Revision revision = svn::Revision::HEAD,
             bool detailed_remote = false,
-            const bool hide_externals = false,
+            bool hide_externals = false,
             const StringArray & changelists=StringArray()) throw (ClientException);
 
     /**
@@ -541,21 +541,23 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-            diff_peg (const Path & tmpPath, const Path & path,
+            diff_peg (const Path & tmpPath, const Path & path,const Path&relativeTo,
                 const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
-                const bool recurse, const bool ignoreAncestry,
-                const bool noDiffDeleted,const bool ignore_contenttype,
-                const QStringList&extra)
+                Depth depth, bool ignoreAncestry,
+                bool noDiffDeleted,bool ignore_contenttype,
+                const StringArray&extra,
+                const StringArray&changelists
+                     )
             throw (ClientException);
 
     /**
-     * Same as other diff but extra options always set to empty list.
+     * Same as other diff but extra options and changelists always set to empty list.
      */
     virtual QByteArray
-            diff_peg (const Path & tmpPath, const Path & path,
+            diff_peg (const Path & tmpPath, const Path & path,const Path&relativeTo,
                 const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
-                const bool recurse, const bool ignoreAncestry,
-                const bool noDiffDeleted,const bool ignore_contenttype)
+                Depth depth, bool ignoreAncestry,
+                bool noDiffDeleted,bool ignore_contenttype)
             throw (ClientException);
 
     /**
@@ -583,21 +585,23 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path1,const Path & path2,
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,const Path&relativeTo,
                 const Revision & revision1, const Revision & revision2,
-                const bool recurse, const bool ignoreAncestry,
-                const bool noDiffDeleted,const bool ignore_contenttype,
-                const QStringList&extra)
+                Depth depth, bool ignoreAncestry,
+                bool noDiffDeleted,bool ignore_contenttype,
+                const StringArray&extra,
+                const StringArray&changelists
+                 )
             throw (ClientException);
 
     /**
      * Same as other diff but extra options always set to empty list.
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path1,const Path & path2,
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,const Path&relativeTo,
                 const Revision & revision1, const Revision & revision2,
-                const bool recurse, const bool ignoreAncestry,
-                const bool noDiffDeleted,const bool ignore_contenttype)
+                Depth depth, bool ignoreAncestry,
+                bool noDiffDeleted,bool ignore_contenttype)
             throw (ClientException);
 
     /**

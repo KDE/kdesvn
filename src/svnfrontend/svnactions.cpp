@@ -1190,13 +1190,13 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
             kdDebug()<<"Pegged diff"<<endl;
             ex = m_Data->m_Svnclient->diff_peg(svn::Path(tn),
-                svn::Path(p1),r1, r2,peg,
-                true,false,false,ignore_content,extraOptions);
+                svn::Path(p1),svn::Path(),r1, r2,peg,
+                svn::DepthInfinity,false,false,ignore_content,extraOptions,svn::StringArray());
         } else {
             ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-                svn::Path(p1),svn::Path(p2),
+                svn::Path(p1),svn::Path(p2),svn::Path(),
                 r1, r2,
-                true,false,false,ignore_content,extraOptions);
+                svn::DepthInfinity,false,false,ignore_content,extraOptions,svn::StringArray());
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1239,9 +1239,9 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         StopDlg sdlg(m_Data->m_SvnContext,_p?_p:m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-            svn::Path(p1),svn::Path(p2),
+            svn::Path(p1),svn::Path(p2),svn::Path(),
             r1, r2,
-            false,false,false,ignore_content,extraOptions);
+            svn::DepthEmpty,false,false,ignore_content,extraOptions,svn::StringArray());
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

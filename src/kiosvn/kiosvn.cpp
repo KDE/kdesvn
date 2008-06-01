@@ -840,7 +840,7 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
     /// @todo read settings for diff (ignore contentype)
     try {
         ex = m_pData->m_Svnclient->diff(svn::Path(tdir.name()),
-        u1,u2,r1, r2,rec,false,false,false);
+                                        u1,u2,svn::Path(),r1, r2,rec?svn::DepthInfinity:svn::DepthEmpty,false,false,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

@@ -253,6 +253,7 @@ namespace svn
     if (m_revision.kind!=svn_opt_revision_number || value!=revnum()) {
         return false;
     }
+    return true;
   }
 
   bool Revision::operator!=(const svn_opt_revision_kind t)const

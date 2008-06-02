@@ -667,7 +667,9 @@ namespace svn
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,
-             bool recurse=false)=0;
+             Depth depth=DepthEmpty,
+             const StringArray&changelists=StringArray()
+            )=0;
 
     /**
      * lists one property in @a path no matter whether local or
@@ -678,14 +680,15 @@ namespace svn
      * @param revision
      * @param peg most case should set to @a revision
      * @param recurse
-     * @return PathPropertiesMapList
+     * @return PathPropertiesMapList and revision where the properties are taken from (svn 1.5) or undefined revision (prior 1.5)
      */
-    virtual PathPropertiesMapList
+    virtual QPair<QLONG,PathPropertiesMapList>
     propget(const QString& propName,
             const Path &path,
             const Revision &revision,
             const Revision &peg,
-            bool recurse=false) = 0;
+            Depth depth = svn::DepthEmpty,
+            const StringArray&changelists=StringArray()) = 0;
 
     /**
      * set property in @a path no matter whether local or
@@ -703,9 +706,10 @@ namespace svn
     propset(const QString& propName,
             const QString& propValue,
             const Path &path,
-            const Revision &revision,
-            bool recurse=false,
-            bool skip_checks=false) = 0;
+            Depth depth=DepthEmpty,
+            bool skip_checks=false,
+            const Revision&base_revision=Revision::UNDEFINED,
+            const StringArray&changelists=StringArray()) = 0;
 
     /**
      * delete property in @a path no matter whether local or
@@ -719,8 +723,10 @@ namespace svn
     virtual void
     propdel(const QString& propName,
             const Path &path,
-            const Revision &revision,
-            bool recurse=false)=0;
+            Depth depth=DepthEmpty,
+            bool skip_check=false,
+            const Revision&base_revision=Revision::UNDEFINED,
+            const StringArray&changelists=StringArray())=0;
 
 
     /**
@@ -731,7 +737,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<svn_revnum_t,PropertiesMap>
+    virtual QPair<QLONG,PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision)=0;
 
@@ -744,7 +750,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<svn_revnum_t,QString>
+    virtual QPair<QLONG,QString>
     revpropget(const QString& propName,
                const Path &path,
                const Revision &revision)=0;
@@ -760,7 +766,7 @@ namespace svn
      * @param force
      * @return Revision
      */
-    virtual svn_revnum_t
+    virtual QLONG
     revpropset(const QString& propName,
                const QString& propValue,
                const Path &path,
@@ -777,7 +783,7 @@ namespace svn
      * @param force
      * @return Revision
      */
-    virtual svn_revnum_t
+    virtual QLONG
     revpropdel(const QString& propName,
                const Path &path,
                const Revision &revision,

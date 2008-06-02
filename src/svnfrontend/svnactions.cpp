@@ -840,11 +840,11 @@ bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QValueL
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path),svn::Revision::WORKING);
+            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path));
         }
         svn::PropertiesMap::ConstIterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_Data->m_Svnclient->propset(it.key(),it.data(),svn::Path(path),svn::Revision::WORKING);
+            m_Data->m_Svnclient->propset(it.key(),it.data(),svn::Path(path));
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -2509,13 +2509,15 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     QString ex;
     svn::Path p(parentName);
     svn::Revision r(svn_opt_revision_unspecified);
-    svn::PathPropertiesMapList pm;
+
+    QPair<QLONG,svn::PathPropertiesMapList> pmp;
     try {
-        pm = m_Data->m_Svnclient->propget("svn:ignore",p,r,r);
+        pmp = m_Data->m_Svnclient->propget("svn:ignore",p,r,r);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
     }
+    svn::PathPropertiesMapList pm = pmp.second;
     QString data = "";
     if (pm.size()>0) {
         svn::PropertiesMap&mp = pm[0].second;
@@ -2538,7 +2540,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     if (result) {
         data = lst.join("\n");
         try {
-            m_Data->m_Svnclient->propset("svn:ignore",data,p,r);
+            m_Data->m_Svnclient->propset("svn:ignore",data,p);
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
             return false;
@@ -2583,14 +2585,16 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
     if (!which) return false;
     QString ex;
     svn::Path p(which->fullName());
-    svn::PathPropertiesMapList pm;
+
+    QPair<QLONG,svn::PathPropertiesMapList> pmp;
     try {
-        pm = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
+        pmp = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
     } catch (const svn::Exception&e) {
         /* no messagebox needed */
         //emit clientException(e.msg());
         return false;
     }
+    svn::PathPropertiesMapList pm = pmp.second;
     if (pm.size()>0) {
         svn::PropertiesMap&mp = pm[0].second;
         if (mp.find("svn:needs-lock")!=mp.end()) {

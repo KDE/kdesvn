@@ -636,7 +636,8 @@ namespace svn
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,
-             bool recurse=false);
+             Depth depth=DepthEmpty,
+             const StringArray&changelists=StringArray());
 
     /**
      * lists one property in @a path no matter whether local or
@@ -649,19 +650,19 @@ namespace svn
      * @param recurse
      * @return PathPropertiesMapList
      */
-    virtual PathPropertiesMapList
+    virtual QPair<QLONG,PathPropertiesMapList>
     propget(const QString& propName,
             const Path &path,
             const Revision &revision,
             const Revision &peg,
-            bool recurse=false);
+            Depth depth = svn::DepthEmpty,
+            const StringArray&changelists=StringArray());
 
     /**
      * set property in @a path no matter whether local or
      * repository
      *
      * @param path
-     * @param revision
      * @param propName
      * @param propValue
      * @param recurse
@@ -672,9 +673,11 @@ namespace svn
     propset(const QString& propName,
             const QString& propValue,
             const Path &path,
-            const Revision &revision,
-            bool recurse=false,
-            bool skip_check=false);
+            Depth depth=DepthEmpty,
+            bool skip_check=false,
+            const Revision&base_revision=Revision::UNDEFINED,
+            const StringArray&changelists=StringArray()
+           );
 
     /**
      * delete property in @a path no matter whether local or
@@ -688,8 +691,10 @@ namespace svn
     virtual void
     propdel(const QString& propName,
             const Path &path,
-            const Revision &revision,
-            bool recurse=false);
+            Depth depth=DepthEmpty,
+            bool skip_check=false,
+            const Revision&base_revision=Revision::UNDEFINED,
+            const StringArray&changelists=StringArray());
 
 
     /**
@@ -700,7 +705,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<svn_revnum_t,PropertiesMap>
+    virtual QPair<QLONG,PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision);
 
@@ -713,7 +718,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    QPair<svn_revnum_t,QString>
+    QPair<QLONG,QString>
     revpropget(const QString& propName,
                const Path &path,
                const Revision &revision);
@@ -729,7 +734,7 @@ namespace svn
      * @param force
      * @return Revision
      */
-    virtual svn_revnum_t
+    virtual QLONG
     revpropset(const QString& propName,
                const QString& propValue,
                const Path &path,
@@ -746,7 +751,7 @@ namespace svn
      * @param force
      * @return Revision
      */
-    virtual svn_revnum_t
+    virtual QLONG
     revpropdel(const QString& propName,
                const Path &path,
                const Revision &revision,
@@ -783,6 +788,11 @@ namespace svn
         Context*m_context;
         void*m_data;
         void*m_revstack;
+    };
+
+    struct propBaton {
+        Context*m_context;
+        PathPropertiesMapList*resultlist;
     };
 
   private:

@@ -21,8 +21,11 @@
 
 #include "contextdata.hpp"
 #include "context_listener.hpp"
+#include "conflictresult.hpp"
+#include "conflictdescription.hpp"
 
 #include <svn_config.h>
+#include <svn_wc.h>
 
 namespace svn {
 
@@ -183,6 +186,9 @@ ContextData::ContextData(const QString & configDir_)
 #if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
       m_ctx->log_msg_func3 = onLogMsg3;
       m_ctx->log_msg_baton3 = this;
+
+      m_ctx->conflict_func = onWcConflictResolver;
+      m_ctx->conflict_baton = this;
 
       m_ctx->client_name = "SvnQt wrapper client";
       initMimeTypes();
@@ -686,5 +692,62 @@ void ContextData::initMimeTypes()
     }
 }
 #endif
+
+svn_error_t* ContextData::onWcConflictResolver(svn_wc_conflict_result_t**result,const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool)
+{
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+    ContextData * data = 0;
+    SVN_ERR (getContextData (baton, &data));
+    ConflictResult cresult;
+    if (!data->getListener()->contextConflictResolve(cresult,description)) {
+        return data->generate_cancel_error();
+    }
+    (*result)->merged_file = 0;
+    switch (cresult.choice()) {
+        case ConflictResult::ChooseBase:
+            (*result)->choice=svn_wc_conflict_choose_base;
+            break;
+        case ConflictResult::ChooseTheirsFull:
+            (*result)->choice=svn_wc_conflict_choose_theirs_full;
+            break;
+        case ConflictResult::ChooseMineFull:
+            (*result)->choice=svn_wc_conflict_choose_mine_full;
+            break;
+        case ConflictResult::ChooseTheirsConflict:
+            (*result)->choice=svn_wc_conflict_choose_theirs_conflict;
+            break;
+        case ConflictResult::ChooseMineConflict:
+            (*result)->choice=svn_wc_conflict_choose_mine_conflict;
+            break;
+        case ConflictResult::ChooseMerged:
+            (*result)->choice=svn_wc_conflict_choose_merged;
+            (*result)->merged_file = apr_pstrdup (pool,cresult.mergedFile().TOUTF8());
+            break;
+        case ConflictResult::ChoosePostpone:
+        default:
+            (*result)->choice=svn_wc_conflict_choose_postpone;
+            break;
+
+    }
+    return SVN_NO_ERROR;
+#else
+    Q_UNUSED(result);
+    Q_UNUSED(description);
+    Q_UNUSED(baton);
+    Q_UNUSED(pool);
+    return svn_error_create (SVN_ERR_CANCELLED, NULL,"invalid subversion version.");
+#endif
+}
+
+bool ContextListener::contextConflictResolve(ConflictResult&result,const ConflictDescription&description)
+{
+    Q_UNUSED(description);
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+    result.setChoice(ConflictResult::ChoosePostpone);
+#else
+    Q_UNUSED(result);
+#endif
+    return true;
+}
 
 }

@@ -37,6 +37,7 @@ SET(SOURCES
     stringarray.cpp
     diffoptions.cpp
     conflictdescription.cpp
+    conflictresult.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp
     cache/DatabaseException.hpp
@@ -99,6 +100,7 @@ SET(INST_HEADERS
     stringarray.hpp
     diffoptions.hpp
     conflictdescription.hpp
+    conflictresult.hpp
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")

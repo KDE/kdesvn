@@ -23,6 +23,7 @@
 struct svn_wc_conflict_description_t;
 
 #include "svnqt/pool.hpp"
+#include "svnqt/svnqt_defines.hpp"
 #include <svn_types.h>
 
 #include <qstring.h>
@@ -34,7 +35,7 @@ namespace svn {
  * @since subversion 1.5
  * @author Rajko Albrecht
 */
-class ConflictDescription
+class SVNQT_EXPORT ConflictDescription
 {
 public:
     enum ConflictType {

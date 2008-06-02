@@ -36,6 +36,7 @@ SET(SOURCES
     svnfilestream.cpp
     stringarray.cpp
     diffoptions.cpp
+    conflictdescription.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp
     cache/DatabaseException.hpp
@@ -97,6 +98,7 @@ SET(INST_HEADERS
     wc.hpp
     stringarray.hpp
     diffoptions.hpp
+    conflictdescription.hpp
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")

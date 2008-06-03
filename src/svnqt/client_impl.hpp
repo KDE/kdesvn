@@ -155,7 +155,9 @@ namespace svn
      * @exception ClientException
      */
     virtual void
-    remove (const Path & path, bool force) throw (ClientException);
+            remove (const Path & path, bool force,
+                    bool keep_local = true,
+                    const PropertiesMap&revProps = PropertiesMap()) throw (ClientException);
 
     /**
      * Sets files for deletion.
@@ -166,7 +168,9 @@ namespace svn
      */
     virtual void
     remove (const Targets & targets,
-            bool force) throw (ClientException);
+            bool force,
+            bool keep_local = true,
+            const PropertiesMap&revProps = PropertiesMap()) throw (ClientException);
 
     /**
      * Reverts a couple of files to a pristiner state.

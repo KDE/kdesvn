@@ -88,30 +88,47 @@ namespace svn
     return revnum;
   }
 
-  void Client_impl::remove (const Path & path,bool force) throw (ClientException)
+  void Client_impl::remove (const Path & path,bool force,
+                            bool keep_local,
+                            const PropertiesMap&revProps) throw (ClientException)
   {
       Targets targets (path.path());
-      remove(targets,force);
+      remove(targets,force,keep_local,revProps);
   }
 
   void
   Client_impl::remove (const Targets & targets,
-                  bool force) throw (ClientException)
+                  bool force,
+                  bool keep_local,
+                  const PropertiesMap&revProps
+                      ) throw (ClientException)
   {
     Pool pool;
 
-    svn_commit_info_t *commit_info = NULL;
+    svn_commit_info_t *commit_info = 0;
 
     svn_error_t * error =
-
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+            svn_client_delete3(
+                               &commit_info,
+                               targets.array(pool),
+                               force,
+                               keep_local,
+                               map2hash(revProps,pool),
+                               *m_context,
+                               pool
+                              );
+#else
       svn_client_delete2
                     (&commit_info,
                          const_cast<apr_array_header_t*> (targets.array (pool)),
                          force,
                          *m_context,
                          pool);
-    if(error != NULL)
-      throw ClientException (error);
+#endif
+    if(error != 0) {
+        throw ClientException (error);
+    }
   }
 
   void

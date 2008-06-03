@@ -290,7 +290,9 @@ namespace svn
     commit (const Targets & targets,
             const QString& message,
             svn::Depth depth,bool keep_locks=true,
-            const svn::StringArray&changelist=svn::StringArray(),bool keep_changelist=false
+            const svn::StringArray&changelist=svn::StringArray(),
+            const PropertiesMap&revProps=PropertiesMap(),
+            bool keep_changelist=false
            ) throw (ClientException);
 
     /**
@@ -311,7 +313,7 @@ namespace svn
     copy (const Targets & srcPath,
           const Revision & srcRevision,
           const Path & destPath,
-          bool asChild=false,bool makeParent=false) throw (ClientException);
+          bool asChild=false,bool makeParent=false,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
 
     /**
      * Moves or renames a file.
@@ -335,7 +337,8 @@ namespace svn
     virtual void
     mkdir (const Path & path,
            const QString& message,
-           bool makeParent=true
+           bool makeParent=true,
+           const PropertiesMap&revProps=PropertiesMap()
           ) throw (ClientException);
     /**
      * Creates a directory directly in a repository or creates a
@@ -350,7 +353,8 @@ namespace svn
     virtual void
     mkdir (const Targets & targets,
            const QString& message,
-           bool makeParent=true
+           bool makeParent=true,
+           const PropertiesMap&revProps=PropertiesMap()
           ) throw (ClientException);
 
     /**
@@ -366,8 +370,7 @@ namespace svn
      * Removes the 'conflicted' state on a file.
      * @exception ClientException
      */
-    virtual void
-    resolved (const Path & path, bool recurse) throw (ClientException);
+    virtual void resolve (const Path & path,Depth depth,const ConflictResult&resolution=ConflictResult()) throw (ClientException);
 
     /**
      * Exports the contents of either a subversion repository into a
@@ -425,7 +428,8 @@ namespace svn
             import (const Path & path, const QString& url,
                     const QString& message,
                     svn::Depth depth,
-                    bool no_ignore,bool no_unknown_nodetype) throw (ClientException);
+                    bool no_ignore,bool no_unknown_nodetype,
+                    const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
 
     /**
      * Merge changes from two paths into a new local path.
@@ -676,7 +680,8 @@ namespace svn
             Depth depth=DepthEmpty,
             bool skip_check=false,
             const Revision&base_revision=Revision::UNDEFINED,
-            const StringArray&changelists=StringArray()
+            const StringArray&changelists=StringArray(),
+            const PropertiesMap&revProps=PropertiesMap()
            );
 
     /**
@@ -824,7 +829,7 @@ namespace svn
                 const Revision & peg_revision,
                 svn::stream::SvnStream&);
 
-    const apr_array_header_t * list2array(const QStringList&,const Pool &)const;
+    apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
   };
 
 }

@@ -61,6 +61,10 @@ class SVNQT_EXPORT ConflictResult
             return m_choice;
         }
         void setChoice(ConflictChoice aValue);
+
+        const svn_wc_conflict_result_t*result(const Pool&pool)const;
+        void assignResult(svn_wc_conflict_result_t**aResult,const Pool&pool)const;
+
     protected:
         ConflictChoice m_choice;
         //! Merged file

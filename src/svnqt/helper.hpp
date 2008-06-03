@@ -28,9 +28,9 @@ namespace svn
 {
     namespace internal
     {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
         class DepthToSvn
         {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
             protected:
                 svn_depth_t _value;
             public:
@@ -59,12 +59,12 @@ namespace svn
                     }
                 }
 
-                svn_depth_t operator()()
+                operator svn_depth_t ()
                 {
                     return _value;
                 }
-        };
 #endif
+        };
     }
 }
 #endif

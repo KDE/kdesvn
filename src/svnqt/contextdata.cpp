@@ -702,33 +702,7 @@ svn_error_t* ContextData::onWcConflictResolver(svn_wc_conflict_result_t**result,
     if (!data->getListener()->contextConflictResolve(cresult,description)) {
         return data->generate_cancel_error();
     }
-    (*result)->merged_file = 0;
-    switch (cresult.choice()) {
-        case ConflictResult::ChooseBase:
-            (*result)->choice=svn_wc_conflict_choose_base;
-            break;
-        case ConflictResult::ChooseTheirsFull:
-            (*result)->choice=svn_wc_conflict_choose_theirs_full;
-            break;
-        case ConflictResult::ChooseMineFull:
-            (*result)->choice=svn_wc_conflict_choose_mine_full;
-            break;
-        case ConflictResult::ChooseTheirsConflict:
-            (*result)->choice=svn_wc_conflict_choose_theirs_conflict;
-            break;
-        case ConflictResult::ChooseMineConflict:
-            (*result)->choice=svn_wc_conflict_choose_mine_conflict;
-            break;
-        case ConflictResult::ChooseMerged:
-            (*result)->choice=svn_wc_conflict_choose_merged;
-            (*result)->merged_file = apr_pstrdup (pool,cresult.mergedFile().TOUTF8());
-            break;
-        case ConflictResult::ChoosePostpone:
-        default:
-            (*result)->choice=svn_wc_conflict_choose_postpone;
-            break;
-
-    }
+    cresult.assignResult(result,pool);
     return SVN_NO_ERROR;
 #else
     Q_UNUSED(result);

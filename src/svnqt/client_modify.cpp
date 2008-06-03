@@ -65,7 +65,7 @@ namespace svn
                 destPath.cstr(),
                 peg.revision(),
                 revision.revision (),
-                internal::DepthToSvn(depth)(),
+                internal::DepthToSvn(depth),
                 ignore_externals,
                 overwrite,
                 *m_context,
@@ -125,7 +125,7 @@ namespace svn
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t * error =
             svn_client_revert2 ((targets.array (pool)),
-                                internal::DepthToSvn(depth)(),
+                                internal::DepthToSvn(depth),
                                 changelist.array(pool),
                                 *m_context,
                                 pool);
@@ -152,7 +152,7 @@ namespace svn
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t * error =
             svn_client_add4(path.cstr (),
-                             internal::DepthToSvn(depth)(),
+                             internal::DepthToSvn(depth),
                              force,
                              no_ignore,
                              add_parents,
@@ -193,7 +193,7 @@ namespace svn
         depth=DepthInfinity;
     }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    error = svn_client_update3(&apr_revisions,path.array(pool),revision,internal::DepthToSvn(depth)(),sticky_depth,ignore_externals,allow_unversioned,*m_context,pool);
+    error = svn_client_update3(&apr_revisions,path.array(pool),revision,internal::DepthToSvn(depth),sticky_depth,ignore_externals,allow_unversioned,*m_context,pool);
 #else
     bool recurse = depth==DepthInfinity;
     Q_UNUSED(sticky_depth);
@@ -216,7 +216,9 @@ namespace svn
   svn::Revision
   Client_impl::commit (const Targets & targets, const QString& message,
                        svn::Depth depth,bool keep_locks,
-                       const svn::StringArray&changelist,bool keep_changelist) throw (ClientException)
+                       const svn::StringArray&changelist,
+                       const PropertiesMap&revProps,
+                       bool keep_changelist) throw (ClientException)
   {
     Pool pool;
 
@@ -228,15 +230,17 @@ namespace svn
             svn_client_commit4 (
                 &commit_info,
                 targets.array (pool),
-                internal::DepthToSvn(depth)(),
+                internal::DepthToSvn(depth),
                 keep_locks,
                 keep_changelist,
                 changelist.array(pool),
+                map2hash(revProps,pool),
                 *m_context,
                 pool);
 #else
     Q_UNUSED(changelist);
     Q_UNUSED(keep_changelist);
+    Q_UNUSED(revProps);
     bool recurse = depth==DepthInfinity;
 
     svn_error_t * error =
@@ -262,7 +266,9 @@ namespace svn
     Client_impl::copy(const Targets & srcPaths,
                     const Revision & srcRevision,
                     const Path & destPath,
-                     bool asChild,bool makeParent) throw (ClientException)
+                     bool asChild,bool makeParent,
+                     const PropertiesMap&revProps
+                     ) throw (ClientException)
     {
         if (srcPaths.size()<1)
         {
@@ -284,13 +290,14 @@ namespace svn
                 svn_client_copy4(&commit_info,
                     sources,
                     destPath.cstr(),
-                    asChild,makeParent,*m_context,pool);
+                    asChild,makeParent,map2hash(revProps,pool),*m_context,pool);
         if (error!=0){
             throw ClientException (error);
         }
 #else
         Q_UNUSED(asChild);
         Q_UNUSED(makeParent);
+        Q_UNUSED(revProps);
         for (size_t j=0;j<srcPaths.size();++j)
         {
             copy(srcPaths[j],srcRevision,destPath);
@@ -349,17 +356,19 @@ namespace svn
   void
   Client_impl::mkdir (const Path & path,
                  const QString& message,
-                 bool makeParent
+                 bool makeParent,
+                 const PropertiesMap&revProps
                      ) throw (ClientException)
   {
     Targets targets(path.path());
-    mkdir(targets,message,makeParent);
+    mkdir(targets,message,makeParent,revProps);
   }
 
   void
   Client_impl::mkdir (const Targets & targets,
                  const QString&msg,
-                 bool makeParent
+                 bool makeParent,
+                 const PropertiesMap&revProps
                      ) throw (ClientException)
   {
     Pool pool;
@@ -374,9 +383,11 @@ namespace svn
             (&commit_info,
               const_cast<apr_array_header_t*>(targets.array (pool)),
               makeParent,
+              map2hash(revProps,pool),
               *m_context, pool);
 #else
     Q_UNUSED(makeParent);
+    Q_UNUSED(revProps);
     error = svn_client_mkdir2
             (&commit_info,
              const_cast<apr_array_header_t*>(targets.array (pool)),
@@ -403,19 +414,25 @@ namespace svn
       throw ClientException (error);
   }
 
-  void
-  Client_impl::resolved (const Path & path,
-                    bool recurse) throw (ClientException)
+  void Client_impl::resolve(const Path & path,Depth depth,const ConflictResult&resolution) throw (ClientException)
   {
     Pool pool;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    const svn_wc_conflict_result_t*aResult=resolution.result(pool);
+    svn_error_t*error=svn_client_resolve(path.cstr(),internal::DepthToSvn(depth),aResult->choice,*m_context,pool);
+
+#else
+    Q_UNUSED(resolution);
+    bool recurse=depth==DepthInfinity;
     svn_error_t * error =
       svn_client_resolved (path.cstr (),
                            recurse,
                            *m_context,
                            pool);
-
-    if(error != NULL)
-      throw ClientException (error);
+#endif
+    if(error != NULL) {
+        throw ClientException (error);
+    }
   }
 
   svn_revnum_t
@@ -445,7 +462,7 @@ namespace svn
                                 revision.revision(),
                                 overwrite,
                                 ignore_externals,
-                                internal::DepthToSvn(depth)(),
+                                internal::DepthToSvn(depth),
                                 _neol,
                                 *m_context,
                                 pool);
@@ -491,7 +508,7 @@ namespace svn
                                url.TOUTF8(),
                                peg.revision(),
                                revision.revision(),
-                               internal::DepthToSvn(depth)(),
+                               internal::DepthToSvn(depth),
                                sticky_depth,
                                ignore_externals,
                                allow_unversioned,
@@ -523,7 +540,9 @@ namespace svn
                   const QString& url,
                   const QString& message,
                   svn::Depth depth,
-                  bool no_ignore,bool no_unknown_nodetype) throw (ClientException)
+                  bool no_ignore,bool no_unknown_nodetype,
+                  const PropertiesMap&revProps
+                      ) throw (ClientException)
 
   {
     svn_commit_info_t *commit_info = NULL;
@@ -533,9 +552,12 @@ namespace svn
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t * error =
         svn_client_import3(&commit_info,path.cstr (),url.TOUTF8(),
-            internal::DepthToSvn(depth)(),no_ignore,no_unknown_nodetype,*m_context,pool);
+            internal::DepthToSvn(depth),no_ignore,no_unknown_nodetype,
+                                 map2hash(revProps,pool),
+                                 *m_context,pool);
 #else
     bool recurse = depth==DepthInfinity;
+    Q_UNUSED(revProps);
     Q_UNUSED(no_unknown_nodetype);
 
     svn_error_t * error =
@@ -574,7 +596,7 @@ namespace svn
                     path2.cstr (),
                     revision2.revision (),
                     localPath.cstr (),
-                    internal::DepthToSvn(depth)(),
+                    internal::DepthToSvn(depth),
                     !notice_ancestry,
                     force,
                     record_only,

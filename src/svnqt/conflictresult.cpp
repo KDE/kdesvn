@@ -27,6 +27,7 @@
 namespace svn
 {
     ConflictResult::ConflictResult()
+    :m_choice(ChooseMerged),m_MergedFile(QString::null)
     {
     }
 
@@ -77,5 +78,54 @@ namespace svn
     void ConflictResult::setChoice(ConflictChoice aValue)
     {
         m_choice=aValue;
+    }
+
+    void ConflictResult::assignResult(svn_wc_conflict_result_t**aResult,const Pool&pool)const
+    {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+        svn_wc_conflict_choice_t _choice;
+        switch (choice()) {
+            case ConflictResult::ChooseBase:
+                _choice=svn_wc_conflict_choose_base;
+                break;
+            case ConflictResult::ChooseTheirsFull:
+                _choice=svn_wc_conflict_choose_theirs_full;
+                break;
+            case ConflictResult::ChooseMineFull:
+                _choice=svn_wc_conflict_choose_mine_full;
+                break;
+            case ConflictResult::ChooseTheirsConflict:
+                _choice=svn_wc_conflict_choose_theirs_conflict;
+                break;
+            case ConflictResult::ChooseMineConflict:
+                _choice=svn_wc_conflict_choose_mine_conflict;
+                break;
+            case ConflictResult::ChooseMerged:
+                _choice=svn_wc_conflict_choose_merged;
+                break;
+            case ConflictResult::ChoosePostpone:
+            default:
+                _choice=svn_wc_conflict_choose_postpone;
+                break;
+
+        }
+        const char* _merged_file = mergedFile().isNull()?0:apr_pstrdup (pool,mergedFile().TOUTF8());
+        if ((*aResult)==0) {
+            (*aResult) = svn_wc_create_conflict_result(_choice,_merged_file,pool);
+        } else {
+            (*aResult)->choice=_choice;
+            (*aResult)->merged_file=_merged_file;
+        }
+#else
+        Q_UNUSED(aResult);
+        Q_UNUSED(pool);
+#endif
+    }
+
+    const svn_wc_conflict_result_t*ConflictResult::result(const Pool&pool)const
+    {
+        svn_wc_conflict_result_t*result=0;
+        assignResult(&result,pool);
+        return result;
     }
 }

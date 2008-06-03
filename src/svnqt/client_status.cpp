@@ -296,7 +296,7 @@ namespace svn
         rev,
         StatusEntriesFunc, // status func
         &baton,            // status baton
-        internal::DepthToSvn(depth)(), // see svn::Depth
+        internal::DepthToSvn(depth), // see svn::Depth
         get_all,           // get all not only interesting
         update,            // check for updates
         no_ignore,         // hide ignored files or not
@@ -654,7 +654,7 @@ namespace svn
                         rev.revision (),
                         &InfoEntryFunc,
                         &baton,
-                        internal::DepthToSvn(depth)(),
+                        internal::DepthToSvn(depth),
                         changelists.array(pool),
                         *m_context,    //client ctx
                         pool);

@@ -96,7 +96,7 @@ namespace svn
                            path.cstr (),
                            peg.revision(),
                            revision.revision (),
-                           internal::DepthToSvn(depth)(),
+                           internal::DepthToSvn(depth),
                            changelists.array(pool),
                            ProplistReceiver,
                            &baton,
@@ -168,7 +168,7 @@ namespace svn
                                                peg.revision(),
                                                revision.revision (),
                                                &actual,
-                                               internal::DepthToSvn(depth)(),
+                                               internal::DepthToSvn(depth),
                                                changelists.array(pool),
                                                *m_context,
                                                pool
@@ -219,7 +219,8 @@ namespace svn
                   Depth depth,
                   bool skip_checks,
                   const Revision&base_revision,
-                  const StringArray&changelists
+                  const StringArray&changelists,
+                  const PropertiesMap&revProps
                       )
     {
       Pool pool;
@@ -238,14 +239,16 @@ namespace svn
             &commit_info,
             propName.TOUTF8(),
             propval, path.cstr(),
-            internal::DepthToSvn(depth)(),skip_checks,
+            internal::DepthToSvn(depth),skip_checks,
                                  base_revision,
                                  changelists.array(pool),
+                                 map2hash(revProps,pool),
                                  *m_context, pool);
 
 #else
       Q_UNUSED(changelists);
       Q_UNUSED(base_revision);
+      Q_UNUSED(revProps);
       bool recurse = depth==DepthInfinity;
         svn_client_propset2(
                             propName.TOUTF8(),

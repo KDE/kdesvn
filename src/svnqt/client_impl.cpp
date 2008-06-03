@@ -36,6 +36,7 @@
 #include "svn_opt.h"
 #include "svnqt/svnqt_defines.hpp"
 
+#include <qmap.h>
 #include <qstringlist.h>
 namespace svn
 {
@@ -90,16 +91,24 @@ namespace svn
         }
   }
 
-  const apr_array_header_t * Client_impl::list2array(const QStringList&what,const Pool & pool)const
+  apr_hash_t * Client_impl::map2hash(const PropertiesMap&aMap,const Pool&pool)
   {
-      apr_array_header_t *apr_targets = apr_array_make (pool,what.size(),sizeof (const char *));
-      QStringList::const_iterator it;
-      for (it = what.begin();it!=what.end();++it) {
-          QByteArray s = (*it).TOUTF8();
-          char * t2 = apr_pstrndup (pool,s,s.size());
-          (*((const char **) apr_array_push (apr_targets))) = t2;
+      if (aMap.count()==0) {
+          return 0;
       }
-      return apr_targets;
+      apr_hash_t * hash = apr_hash_make(pool);
+      PropertiesMap::ConstIterator it;
+      const char*propval;
+      const char*propname;
+      QByteArray s,n;
+      for (it=aMap.begin();it!=aMap.end();++it) {
+          s=it.data().TOUTF8();
+          n=it.key().TOUTF8();
+          propval=apr_pstrndup(pool,s,s.size());
+          propname=apr_pstrndup(pool,n,n.size());
+          apr_hash_set(hash,propname,APR_HASH_KEY_STRING,propval);
+      }
+      return hash;
   }
 }
 

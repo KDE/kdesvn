@@ -897,7 +897,8 @@ void kio_svnProtocol::wc_delete(const KURL::List&l)
 void kio_svnProtocol::wc_resolve(const KURL&url,bool recurse)
 {
     try {
-        m_pData->m_Svnclient->resolved(url.path(),recurse);
+        svn::Depth depth=recurse?svn::DepthInfinity:svn::DepthEmpty;
+        m_pData->m_Svnclient->resolve(url.path(),depth);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

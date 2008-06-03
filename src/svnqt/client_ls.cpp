@@ -194,7 +194,7 @@ namespace svn
       svn_error_t * error = svn_client_list2(pathOrUrl.cstr(),
                                             peg,
                                             revision,
-                                            svn::internal::DepthToSvn(depth)(),
+                                            svn::internal::DepthToSvn(depth),
                                             SVN_DIRENT_ALL,
                                             retrieve_locks,
                                             s_list_func,

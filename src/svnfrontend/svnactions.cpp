@@ -1827,7 +1827,7 @@ void SvnActions::slotResolved(const QString&path)
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Resolve"),i18n("Marking resolved"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->resolved(svn::Path(path),true);
+        m_Data->m_Svnclient->resolve(svn::Path(path),svn::DepthEmpty);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

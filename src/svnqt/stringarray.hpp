@@ -58,7 +58,7 @@ namespace svn
              *
              * @param pool Pool used for conversion
              */
-            const apr_array_header_t * array (const Pool & pool) const;
+            apr_array_header_t * array (const Pool & pool) const;
             /** content of array
              * @return const reference to data, may used for searches.
              */

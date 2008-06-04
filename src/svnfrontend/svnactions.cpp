@@ -2076,14 +2076,17 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
 {
     if (!m_Data->m_CurrentContext) return false;
-    kdDebug()<<"Force: "<<force << endl;
+    svn::Revision nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item "));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
+        nnum = m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
+    }
+    if (nnum != svn::Revision::UNDEFINED) {
+        emit sendNotify(i18n("Committed revision %1.").arg(nnum.toString()));
     }
     EMIT_REFRESH;
     return true;
@@ -2091,6 +2094,7 @@ bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
 
 bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
 {
+    svn::Revision nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));

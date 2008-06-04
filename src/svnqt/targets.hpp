@@ -116,7 +116,7 @@ namespace svn
      *
      * @param pool Pool used for conversion
      */
-    const apr_array_header_t *
+    apr_array_header_t *
     array (const Pool & pool) const;
 
     /**

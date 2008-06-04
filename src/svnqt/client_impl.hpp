@@ -154,7 +154,7 @@ namespace svn
      * Sets a single file for deletion.
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
             remove (const Path & path, bool force,
                     bool keep_local = true,
                     const PropertiesMap&revProps = PropertiesMap()) throw (ClientException);
@@ -166,7 +166,7 @@ namespace svn
      * @param force force if files are locally modified
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     remove (const Targets & targets,
             bool force,
             bool keep_local = true,
@@ -303,7 +303,7 @@ namespace svn
      * Copies a versioned file with the history preserved.
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     copy (const Path & srcPath,
           const Revision & srcRevision,
           const Path & destPath) throw (ClientException);
@@ -313,9 +313,10 @@ namespace svn
      * @see svn_client_copy4
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     copy (const Targets & srcPath,
           const Revision & srcRevision,
+          const Revision & pegRevision,
           const Path & destPath,
           bool asChild=false,bool makeParent=false,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
 
@@ -323,10 +324,19 @@ namespace svn
      * Moves or renames a file.
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     move (const Path & srcPath,
           const Path & destPath,
           bool force) throw (ClientException);
+
+    /**
+     * Moves or renames a file.
+     * @exception ClientException
+     */
+    virtual svn::Revision
+            move (const Targets & srcPath,
+                  const Path & destPath,
+                  bool force,bool asChild,bool makeParent,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
 
     /**
      * Creates a directory directly in a repository or creates a
@@ -338,7 +348,7 @@ namespace svn
      * @param message log message. if it is QString::null asks when working on repository
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     mkdir (const Path & path,
            const QString& message,
            bool makeParent=true,
@@ -354,7 +364,7 @@ namespace svn
      * @param message log message. if it is QString::null asks when working on repository
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     mkdir (const Targets & targets,
            const QString& message,
            bool makeParent=true,
@@ -428,7 +438,7 @@ namespace svn
      * @param no_unknown_nodetype if true ignore files type not known like pipes or device files
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
             import (const Path & path, const QString& url,
                     const QString& message,
                     svn::Depth depth,

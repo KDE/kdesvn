@@ -86,7 +86,7 @@ const QString& svn::StringArray::operator[](size_t which)
 /*!
     \fn svn::StringArray::array (const Pool & pool) const
  */
-const apr_array_header_t * svn::StringArray::array (const Pool & pool) const
+apr_array_header_t * svn::StringArray::array (const Pool & pool) const
 {
     if (isNull()) {
         return 0;

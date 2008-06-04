@@ -88,15 +88,15 @@ namespace svn
     return revnum;
   }
 
-  void Client_impl::remove (const Path & path,bool force,
+  Revision Client_impl::remove (const Path & path,bool force,
                             bool keep_local,
                             const PropertiesMap&revProps) throw (ClientException)
   {
       Targets targets (path.path());
-      remove(targets,force,keep_local,revProps);
+      return remove(targets,force,keep_local,revProps);
   }
 
-  void
+  Revision
   Client_impl::remove (const Targets & targets,
                   bool force,
                   bool keep_local,
@@ -129,6 +129,10 @@ namespace svn
     if(error != 0) {
         throw ClientException (error);
     }
+    if (commit_info) {
+        return commit_info->revision;
+    }
+    return Revision::UNDEFINED;
   }
 
   void
@@ -279,9 +283,10 @@ namespace svn
     return svn::Revision::UNDEFINED;
   }
 
-  void
+  Revision
     Client_impl::copy(const Targets & srcPaths,
                     const Revision & srcRevision,
+                    const Revision &pegRevision,
                     const Path & destPath,
                      bool asChild,bool makeParent,
                      const PropertiesMap&revProps
@@ -300,7 +305,7 @@ namespace svn
             svn_client_copy_source_t* source = (svn_client_copy_source_t*)apr_palloc(pool, sizeof(svn_client_copy_source_t));
             source->path = apr_pstrdup(pool,srcPaths[j].path().TOUTF8());
             source->revision=srcRevision.revision();
-            source->peg_revision=source->revision;
+            source->peg_revision=pegRevision.revision();
             APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
         }
         svn_error_t * error =
@@ -311,24 +316,30 @@ namespace svn
         if (error!=0){
             throw ClientException (error);
         }
+        if (commit_info) {
+            return commit_info->revision;
+        }
+        return Revision::UNDEFINED;
 #else
         Q_UNUSED(asChild);
         Q_UNUSED(makeParent);
         Q_UNUSED(revProps);
+        Revision rev;
         for (size_t j=0;j<srcPaths.size();++j)
         {
-            copy(srcPaths[j],srcRevision,destPath);
+            rev  = copy(srcPaths[j],srcRevision,destPath);
         }
+        return rev;
 #endif
     }
 
-  void
+  Revision
   Client_impl::copy (const Path & srcPath,
                 const Revision & srcRevision,
                 const Path & destPath) throw (ClientException)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-      copy(srcPath,srcRevision,destPath,true,false);
+      return copy(srcPath,srcRevision,srcRevision,destPath,true,false);
 #else
       Pool pool;
     svn_commit_info_t *commit_info = NULL;
@@ -341,23 +352,31 @@ namespace svn
                        *m_context,
                        pool);
 
-    if(error != NULL)
-      throw ClientException (error);
+    if(error != 0) {
+          throw ClientException (error);
+    }
+    if (commit_info) {
+        return commit_info->revision;
+    }
+    return Revision::UNDEFINED;
 #endif
   }
 
-  void
-  Client_impl::move (const Path & srcPath,
+  svn::Revision Client_impl::move (const Path & srcPath,
                 const Path & destPath,
                 bool force) throw (ClientException)
   {
-    Pool pool;
-    svn_commit_info_t *commit_info = NULL;
-    svn_error_t * error =
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
-    svn_client_move4
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    return move(srcPath,destPath,force,false,false,PropertiesMap());
 #else
-    svn_client_move3
+    Pool pool;
+    svn_commit_info_t *commit_info = 0;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4))
+    svn_error_t * error = svn_client_move4
+#else
+    svn_error_t * error = svn_client_move3
 #endif
                      (&commit_info,
                        srcPath.cstr (),
@@ -366,11 +385,59 @@ namespace svn
                        *m_context,
                        pool);
 
-    if(error != NULL)
-      throw ClientException (error);
+    if(error != 0) {
+        throw ClientException (error);
+    }
+    if (commit_info) {
+        return commit_info->revision;
+    }
+    return Revision::UNDEFINED;
+#endif
   }
 
-  void
+  svn::Revision Client_impl::move (
+             const Targets & srcPaths,
+             const Path & destPath,
+             bool force,
+             bool asChild,
+             bool makeParent,
+             const PropertiesMap&revProps) throw (ClientException)
+  {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+      Pool pool;
+      svn_commit_info_t *commit_info = 0;
+      svn_error_t * error = svn_client_move5(
+                                             &commit_info,
+                                             srcPaths.array(pool),
+                                             destPath.cstr(),
+                                             force,
+                                             asChild,
+                                             makeParent,
+                                             map2hash(revProps,pool),
+                                             *m_context,
+                                             pool
+                                            );
+      if (error!=0) {
+          throw ClientException (error);
+      }
+      if (commit_info) {
+          return commit_info->revision;
+      }
+      return Revision::UNDEFINED;
+#else
+      Q_UNUSED(asChild);
+      Q_UNUSED(makeParent);
+      Q_UNUSED(revProps);
+      Revision rev;
+      for (size_t j=0;j<srcPaths.size();++j)
+      {
+          rev = move(srcPaths[j],destPath,force);
+      }
+      return rev;
+#endif
+  }
+
+  svn::Revision
   Client_impl::mkdir (const Path & path,
                  const QString& message,
                  bool makeParent,
@@ -378,10 +445,10 @@ namespace svn
                      ) throw (ClientException)
   {
     Targets targets(path.path());
-    mkdir(targets,message,makeParent,revProps);
+    return mkdir(targets,message,makeParent,revProps);
   }
 
-  void
+  svn::Revision
   Client_impl::mkdir (const Targets & targets,
                  const QString&msg,
                  bool makeParent,
@@ -416,6 +483,10 @@ namespace svn
 
     if(error != NULL)
       throw ClientException (error);
+    if (commit_info) {
+        return commit_info->revision;
+    }
+    return Revision::UNDEFINED;
   }
 
   void
@@ -552,7 +623,7 @@ namespace svn
     return revnum;
   }
 
-  void
+  Revision
   Client_impl::import (const Path & path,
                   const QString& url,
                   const QString& message,
@@ -589,8 +660,13 @@ namespace svn
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString::null);
 
-    if(error != NULL)
-      throw ClientException (error);
+    if(error != 0) {
+        throw ClientException (error);
+    }
+    if (commit_info) {
+        return commit_info->revision;
+    }
+    return Revision::UNDEFINED;
   }
 
   void

@@ -425,13 +425,23 @@ namespace svn
       }
       return Revision::UNDEFINED;
 #else
-      Q_UNUSED(asChild);
       Q_UNUSED(makeParent);
       Q_UNUSED(revProps);
       Revision rev;
+      if (srcPaths.size()>1 && !asChild)
+      {
+          throw ClientException("Multiple sources not allowed");
+      }
+      QString base,dir;
+      Path _dest;
       for (size_t j=0;j<srcPaths.size();++j)
       {
-          rev = move(srcPaths[j],destPath,force);
+          _dest=destPath;
+          if (asChild) {
+              srcPaths[j].split(dir,base);
+              _dest.addComponent(base);
+          }
+          rev = move(srcPaths[j],_dest,force);
       }
       return rev;
 #endif

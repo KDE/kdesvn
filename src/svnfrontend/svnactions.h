@@ -167,7 +167,7 @@ public:
     virtual bool makeCleanup(const QString&);
 
     bool get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p);
-    bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target);
+    bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target,const svn::Revision&_peg=svn::Revision::UNDEFINED);
 
     void setContextData(const QString&,const QString&);
     void clearContextData();

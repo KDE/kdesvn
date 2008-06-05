@@ -324,14 +324,14 @@ bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStrin
     return res;
 }
 
-bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::InfoEntry&target)
+bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::InfoEntry&target,const svn::Revision&_peg)
 {
     QString url;
     QString ex;
     QString cacheKey;
     QTime d; d.start();
     svn::Revision rev = _rev;
-    svn::Revision peg;
+    svn::Revision peg = _peg;
     if (!m_Data->m_CurrentContext) return false;
     if (!svn::Url::isValid(what)) {
         // working copy
@@ -347,7 +347,10 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         QString prot = svn::Url::transformProtokoll(_uri.protocol());
         _uri.setProtocol(prot);
         url = _uri.prettyURL();
-        peg = _rev;
+        if (peg==svn::Revision::UNDEFINED)
+        {
+            peg = _rev;
+        }
         cacheKey=_rev.toString()+"/"+url;
     }
     svn::InfoEntries e;
@@ -636,7 +639,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         }
     } else {
         svn::InfoEntry info;
-        if (!singleInfo(_what,rev,info)) {
+        if (!singleInfo(_what,rev,info,peg)) {
             return QString::null;
         }
         entries.append(info);
@@ -2100,14 +2103,18 @@ bool SvnActions::makeMove(const KURL::List&Old,const QString&New,bool force)
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
         bool local = false;
+
         if ((*it).protocol().isEmpty()) {
             local = true;
         }
+        it = Old.begin();
+        svn::Pathes p;
         for (;it!=Old.end();++it) {
-            svn::Path NPath(New);
-            NPath.addComponent((*it).fileName());
-            m_Data->m_Svnclient->move((local?(*it).path():(*it).url()),NPath,force);
+            p.append((local?(*it).path():(*it).url()));
         }
+        svn::Targets t(p);
+        svn::Path NPath(New);
+        m_Data->m_Svnclient->move(t,NPath,force,true,false);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2134,10 +2141,13 @@ bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revi
 {
     KURL::List::ConstIterator it = Old.begin();
     svn::Pathes p;
-    for (;it!=Old.end();++it) {
-        p.append(svn::Path((*it). pathOrURL()));
+    bool local = false;
+    if ((*it).protocol().isEmpty()) {
+        local = true;
     }
-
+    for (;it!=Old.end();++it) {
+        p.append((local?(*it).path():(*it).url()));
+    }
     svn::Targets t(p);
 
     try {

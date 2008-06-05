@@ -2132,13 +2132,19 @@ bool SvnActions::makeCopy(const QString&Old,const QString&New,const svn::Revisio
 
 bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revision&rev)
 {
+    KURL::List::ConstIterator it = Old.begin();
+    svn::Pathes p;
+    for (;it!=Old.end();++it) {
+        p.append(svn::Path((*it). pathOrURL()));
+    }
+
+    svn::Targets t(p);
+
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
-        for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->copy(svn::Path((*it). pathOrURL()),rev,svn::Path(New));
-        }
+        m_Data->m_Svnclient->copy(t,rev,rev,svn::Path(New),Old.count()>1);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

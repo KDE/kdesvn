@@ -349,7 +349,7 @@ namespace svn
             const Revision & srcRevision,
             const Revision & pegRevision,
             const Path & destPath,
-            bool asChild,bool makeParent,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
+            bool asChild=false,bool makeParent=false,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
 
     /**
      * Moves or renames a file.

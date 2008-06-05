@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-24 10:14+0200\n"
+"POT-Creation-Date: 2008-06-06 01:14+0200\n"
 "PO-Revision-Date: 2007-11-10 22:09+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -778,7 +778,7 @@ msgstr ""
 msgid "Ignore"
 msgstr "Ignoruoti"
 
-#: rc.cpp:475 rc.cpp:722 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:120
+#: rc.cpp:475
 #, no-c-format
 msgid "Force"
 msgstr ""
@@ -894,12 +894,12 @@ msgstr "Eilutė"
 msgid "Revision"
 msgstr "Revizija"
 
-#: rc.cpp:550 rc.cpp:672 rc.cpp:694 rc.cpp:762
+#: rc.cpp:550 rc.cpp:672 rc.cpp:694 rc.cpp:765
 #, no-c-format
 msgid "Date"
 msgstr "Data"
 
-#: rc.cpp:553 rc.cpp:756
+#: rc.cpp:553 rc.cpp:759
 #, no-c-format
 msgid "Author"
 msgstr "Autorius"
@@ -909,7 +909,7 @@ msgstr "Autorius"
 msgid "Content"
 msgstr "Turinys"
 
-#: rc.cpp:559 svnfrontend/svnactions.cpp:2105 svnfrontend/svnactions.cpp:2119
+#: rc.cpp:559 svnfrontend/svnactions.cpp:2129 svnfrontend/svnactions.cpp:2154
 #, no-c-format
 msgid "Copy / Move"
 msgstr "Koppijuoti / Perkelti"
@@ -974,8 +974,8 @@ msgstr ""
 msgid "Just dry run without modifications"
 msgstr ""
 
-#: rc.cpp:601 rc.cpp:855 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:117
-#: svnfrontend/svnactions.cpp:1680
+#: rc.cpp:601 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:113
+#: ksvnwidgets/depthselector.cpp:43
 #, no-c-format
 msgid "Recursive"
 msgstr "Rekursiškai"
@@ -1055,10 +1055,10 @@ msgstr "Savybės vertė:"
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 
-#: rc.cpp:663 svnfrontend/svnactions.cpp:1390
-#: svnfrontend/kdesvnfilelist.cpp:2126 svnfrontend/kdesvnfilelist.cpp:2306
-#: svnfrontend/kdesvnfilelist.cpp:2324 svnfrontend/kdesvnfilelist.cpp:2350
-#: svnfrontend/kdesvnfilelist.cpp:2915 svnfrontend/kdesvnfilelist.cpp:2957
+#: rc.cpp:663 svnfrontend/svnactions.cpp:1396
+#: svnfrontend/kdesvnfilelist.cpp:2136 svnfrontend/kdesvnfilelist.cpp:2316
+#: svnfrontend/kdesvnfilelist.cpp:2334 svnfrontend/kdesvnfilelist.cpp:2360
+#: svnfrontend/kdesvnfilelist.cpp:2926 svnfrontend/kdesvnfilelist.cpp:2968
 #, no-c-format
 msgid "Revisions"
 msgstr "Revizijos"
@@ -1128,257 +1128,324 @@ msgstr "Įveskite URL:"
 msgid "Append source url name to subfolder"
 msgstr ""
 
-#: rc.cpp:726
+#: rc.cpp:722 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
 #, no-c-format
-msgid "Ignore externals"
+msgid "Overwrite existing"
+msgstr ""
+
+#: rc.cpp:726 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
+#, no-c-format
+msgid "May existing unversioned items ovewritten"
 msgstr ""
 
 #: rc.cpp:729
 #, no-c-format
-msgid "Ignore externals while operation"
+msgid "Ignore externals"
 msgstr ""
 
 #: rc.cpp:732
 #, no-c-format
-msgid "Open after job"
+msgid "Ignore externals while operation"
 msgstr ""
 
 #: rc.cpp:735
+#, no-c-format
+msgid "Open after job"
+msgstr ""
+
+#: rc.cpp:738
 #, fuzzy, no-c-format
 msgid "RevisionButton"
 msgstr "Revizija"
 
-#: rc.cpp:738
+#: rc.cpp:741
 #, no-c-format
 msgid "-1"
 msgstr ""
 
-#: rc.cpp:741 svnfrontend/svnlogdlgimp.cpp:266
+#: rc.cpp:744 svnfrontend/svnlogdlgimp.cpp:266
 #, no-c-format
 msgid "SVN Log"
 msgstr "SVN žurnalas"
 
-#: rc.cpp:744
+#: rc.cpp:747
 #, fuzzy, no-c-format
 msgid "Get Logs"
 msgstr "Negauta žurnalų"
 
-#: rc.cpp:747
+#: rc.cpp:750
 #, fuzzy, no-c-format
 msgid "End revision"
 msgstr "Paskutinė revizija"
 
-#: rc.cpp:750
+#: rc.cpp:753
 #, fuzzy, no-c-format
 msgid "Start revision"
 msgstr "Paskutinė revizija"
 
-#: rc.cpp:753
+#: rc.cpp:756
 #, no-c-format
 msgid "1"
 msgstr ""
 
-#: rc.cpp:759
+#: rc.cpp:762
 #, no-c-format
 msgid "Revison"
 msgstr "Revizija"
 
-#: rc.cpp:765
+#: rc.cpp:768
 #, no-c-format
 msgid "Message"
 msgstr "Pranešimas"
 
-#: rc.cpp:768
+#: rc.cpp:771
 #, no-c-format
 msgid "Select in first column revisions for diff"
 msgstr ""
 
-#: rc.cpp:771 rc.cpp:821 ksvnwidgets/logmsg_impl.cpp:82
-#: ksvnwidgets/logmsg_impl.cpp:109
+#: rc.cpp:774 rc.cpp:824 ksvnwidgets/logmsg_impl.cpp:83
+#: ksvnwidgets/logmsg_impl.cpp:110
 #, no-c-format
 msgid "Action"
 msgstr "Veiksmas"
 
-#: rc.cpp:774
+#: rc.cpp:777
 #, no-c-format
 msgid "Item"
 msgstr "Elementas"
 
-#: rc.cpp:777
+#: rc.cpp:780
 #, no-c-format
 msgid "Copy from"
 msgstr "Kopijuoti iš"
 
-#: rc.cpp:780
+#: rc.cpp:783
 #, no-c-format
 msgid "Contextmenu on item for more operations"
 msgstr ""
 
-#: rc.cpp:783 svnfrontend/svnlogdlgimp.cpp:610
+#: rc.cpp:786 svnfrontend/svnlogdlgimp.cpp:610
 #, no-c-format
 msgid "Diff previous"
 msgstr ""
 
-#: rc.cpp:787 svnfrontend/kdesvnfilelist.cpp:391
+#: rc.cpp:790 svnfrontend/kdesvnfilelist.cpp:392
 #, no-c-format
 msgid "Diff revisions"
 msgstr ""
 
-#: rc.cpp:791
+#: rc.cpp:794
 #, no-c-format
 msgid "Select second revision with right mouse button"
 msgstr ""
 
-#: rc.cpp:794
+#: rc.cpp:797
 #, no-c-format
 msgid "List entries"
 msgstr ""
 
-#: rc.cpp:798 svnfrontend/svnlogdlgimp.cpp:608
+#: rc.cpp:801 svnfrontend/svnlogdlgimp.cpp:608
 #, no-c-format
 msgid "Annotate"
 msgstr "Anotuoti"
 
-#: rc.cpp:806
+#: rc.cpp:809
 #, no-c-format
 msgid "leftpane"
 msgstr ""
 
-#: rc.cpp:809 svnfrontend/svnactions.cpp:657
-#: svnfrontend/kdesvnfilelist.cpp:209
+#: rc.cpp:812 svnfrontend/svnactions.cpp:661
+#: svnfrontend/kdesvnfilelist.cpp:210
 #, no-c-format
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: rc.cpp:812
+#: rc.cpp:815
 #, no-c-format
 msgid "Logmessage"
 msgstr "Žurnalo pranešimas"
 
-#: rc.cpp:815
+#: rc.cpp:818
 #, no-c-format
 msgid "Review affected items"
 msgstr "Peržiūrėti paveiktus elementus"
 
-#: rc.cpp:818
+#: rc.cpp:821
 #, no-c-format
 msgid "Entry"
 msgstr "Įrašas"
 
-#: rc.cpp:824
+#: rc.cpp:827
 #, no-c-format
 msgid "Hide new items"
 msgstr "Slėpti elementus"
 
-#: rc.cpp:827
+#: rc.cpp:830
 #, no-c-format
 msgid "Select new items"
 msgstr "Pažymėti naujus elementus"
 
-#: rc.cpp:830
+#: rc.cpp:833
 #, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr ""
 
-#: rc.cpp:833
+#: rc.cpp:836
 #, no-c-format
 msgid "Unselect new items"
 msgstr "Nebežymėti naujų elemento"
 
-#: rc.cpp:836
+#: rc.cpp:839
 #, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr ""
 
-#: rc.cpp:839
+#: rc.cpp:842
 #, no-c-format
 msgid "Diff highlighted item"
 msgstr ""
 
-#: rc.cpp:842
+#: rc.cpp:845
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
 
-#: rc.cpp:845
+#: rc.cpp:848
 #, no-c-format
 msgid "Enter a log message"
 msgstr "Įveskite žurnalo pranešimą"
 
-#: rc.cpp:848
+#: rc.cpp:851
 #, no-c-format
 msgid "Or insert one of the last:"
 msgstr "Arba įterpkite vieną iš paskutinių:"
 
-#: rc.cpp:852
+#: rc.cpp:855
 #, no-c-format
 msgid "Last used log messages"
 msgstr "Vėliausiai naudoti žurnalo pranešimai"
 
 #: rc.cpp:858
 #, no-c-format
-msgid "Make operation recursive."
-msgstr "Padaro operaciją rekursyvią."
-
-#: rc.cpp:861
-#, no-c-format
 msgid "Keep locks"
 msgstr ""
 
-#: rc.cpp:864
+#: rc.cpp:861
 #, no-c-format
 msgid "If checked commit will not release locks."
 msgstr ""
 
-#: rc.cpp:867
-#, no-c-format
-msgid "Authentication"
-msgstr "Autentifikacija"
-
-#: rc.cpp:870
-#, no-c-format
-msgid "Enter authentification info for"
-msgstr ""
-
-#: rc.cpp:873
-#, no-c-format
-msgid "Password:"
-msgstr "Slaptažodis:"
-
-#: rc.cpp:876
-#, no-c-format
-msgid "Username:"
-msgstr "Vartotojo vardas:"
-
-#: rc.cpp:879
-#, no-c-format
-msgid "Store password"
-msgstr "Išsaugoti slaptažodį"
-
-#: rc.cpp:895
+#: rc.cpp:864 rc.cpp:934
 #, no-c-format
 msgid "Form1"
 msgstr ""
 
-#: rc.cpp:898
+#: rc.cpp:867
+#, no-c-format
+msgid "Empty Depth"
+msgstr ""
+
+#: rc.cpp:870
+#, no-c-format
+msgid "Files Depth"
+msgstr ""
+
+#: rc.cpp:873
+#, no-c-format
+msgid "Immediate Depth"
+msgstr ""
+
+#: rc.cpp:876
+#, no-c-format
+msgid "Infinity Depth (recurse)"
+msgstr ""
+
+#: rc.cpp:879
+#, fuzzy, no-c-format
+msgid "Select depth of operation"
+msgstr "Pasirinkite saugyklos tipą"
+
+#: rc.cpp:882
+#, no-c-format
+msgid ""
+"<b>Kind of depth</b>:\n"
+"<p>\n"
+"<i>empty depth</i><br>Just the named directory, no entries.  Updates will "
+"not pull in any files or subdirectories not already present.\n"
+"</p>\n"
+"<p>\n"
+"<i>Files depth</i><br>Folder and its file children, but not subdirs. Updates "
+"will pull in any files not already present, but not subdirectories.\n"
+"</p>\n"
+"<p>\n"
+"<i>Immediate depth</i><br>\n"
+"Folder and its entries. Updates will pull in any files or subdirectories not "
+"already present; those subdirectories entries will have depth-empty.\n"
+"</p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br>\n"
+"Updates will pull in any files or subdirectories not already present; those "
+"subdirectories' this_dir entries will have depth-infinity.<br>\n"
+"Equivalent to the pre-1.5 default update behavior.\n"
+"</p>"
+msgstr ""
+
+#: rc.cpp:900 svnfrontend/ccontextlistener.cpp:66
+#: svnfrontend/svnactions.cpp:1704
+#, no-c-format
+msgid "Revert"
+msgstr ""
+
+#: rc.cpp:903
+#, no-c-format
+msgid "Really revert these entries to pristine state?"
+msgstr ""
+
+#: rc.cpp:906
+#, no-c-format
+msgid "Authentication"
+msgstr "Autentifikacija"
+
+#: rc.cpp:909
+#, no-c-format
+msgid "Enter authentification info for"
+msgstr ""
+
+#: rc.cpp:912
+#, no-c-format
+msgid "Password:"
+msgstr "Slaptažodis:"
+
+#: rc.cpp:915
+#, no-c-format
+msgid "Username:"
+msgstr "Vartotojo vardas:"
+
+#: rc.cpp:918
+#, no-c-format
+msgid "Store password"
+msgstr "Išsaugoti slaptažodį"
+
+#: rc.cpp:937
 #, no-c-format
 msgid "Select encoding:"
 msgstr "Pasirinkite koduotę:"
 
-#: rc.cpp:901
+#: rc.cpp:940
 #, no-c-format
 msgid "Default utf-8"
 msgstr "Numatyta utf-8"
 
-#: kiosvn/kiosvn.cpp:724 svnfrontend/svnactions.cpp:974
+#: kiosvn/kiosvn.cpp:725 svnfrontend/svnactions.cpp:979
+#: svnfrontend/svnactions.cpp:2092
 msgid "Committed revision %1."
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:726
+#: kiosvn/kiosvn.cpp:727
 msgid "Nothing to commit."
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:770
+#: kiosvn/kiosvn.cpp:771
 msgid "Empty logs"
 msgstr "Tuščias žurnalas"
 
@@ -1664,10 +1731,6 @@ msgstr ""
 msgid "Restore missing"
 msgstr ""
 
-#: svnfrontend/ccontextlistener.cpp:66 svnfrontend/svnactions.cpp:1694
-msgid "Revert"
-msgstr ""
-
 #: svnfrontend/ccontextlistener.cpp:67
 msgid "Revert failed"
 msgstr ""
@@ -1941,12 +2004,12 @@ msgid "Save tree as png"
 msgstr "Išsaugoti medį kaip png"
 
 #: svnfrontend/graphtree/revgraphview.cpp:947 svnfrontend/commandexec.cpp:215
-#: svnfrontend/commandexec.cpp:341 svnfrontend/kdesvnfilelist.cpp:1026
-#: svnfrontend/kdesvnfilelist.cpp:1052
+#: svnfrontend/commandexec.cpp:341 svnfrontend/kdesvnfilelist.cpp:1027
+#: svnfrontend/kdesvnfilelist.cpp:1053
 msgid "SVN Error"
 msgstr "SVN klaida"
 
-#: svnfrontend/graphtree/revisiontree.cpp:95 svnfrontend/svnactions.cpp:286
+#: svnfrontend/graphtree/revisiontree.cpp:95 svnfrontend/svnactions.cpp:287
 msgid "Getting logs - hit cancel for abort"
 msgstr "Gaunamas žurnalas - nutraukimui spauskite atšaukti"
 
@@ -2006,6 +2069,10 @@ msgstr "Eiti į eilutę"
 msgid "Not versioned"
 msgstr ""
 
+#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:112
+msgid "Make operation recursive."
+msgstr "Padaro operaciją rekursyvią."
+
 #: svnfrontend/fronthelpers/revisionbuttonimpl.cpp:53
 #: svnfrontend/fronthelpers/rangeinput_impl.cpp:182
 msgid "Select revision"
@@ -2047,11 +2114,34 @@ msgstr "Dviguba savybė"
 msgid "Other..."
 msgstr "Kita..."
 
-#: svnfrontend/importdir_logmsg.cpp:47
+#: svnfrontend/importdir_logmsg.cpp:44
+#, fuzzy
+msgid "No ignore"
+msgstr "Ignoruoti"
+
+#: svnfrontend/importdir_logmsg.cpp:45
+msgid "If set, add files or directories that match ignore patterns."
+msgstr ""
+
+#: svnfrontend/importdir_logmsg.cpp:50
+msgid "Ignore unknown node types"
+msgstr ""
+
+#: svnfrontend/importdir_logmsg.cpp:51
+msgid "Should files with unknown node types be ignored"
+msgstr ""
+
+#: svnfrontend/importdir_logmsg.cpp:52
+msgid ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+msgstr ""
+
+#: svnfrontend/importdir_logmsg.cpp:84
 msgid "Create subdir %1 on import"
 msgstr ""
 
-#: svnfrontend/importdir_logmsg.cpp:47
+#: svnfrontend/importdir_logmsg.cpp:84
 #, fuzzy
 msgid "(Last part)"
 msgstr "Paskutinis autorius"
@@ -2178,417 +2268,413 @@ msgstr ""
 msgid "%1 of %2"
 msgstr "%1 iš %2"
 
-#: svnfrontend/svnactions.cpp:190
+#: svnfrontend/svnactions.cpp:191
 msgid "Finished"
 msgstr "Baigta"
 
-#: svnfrontend/svnactions.cpp:294
+#: svnfrontend/svnactions.cpp:295
 msgid "Got no logs"
 msgstr "Negauta žurnalų"
 
-#: svnfrontend/svnactions.cpp:364
+#: svnfrontend/svnactions.cpp:368
 msgid "Got no info."
 msgstr "Negauta informacijos."
 
-#: svnfrontend/svnactions.cpp:397
+#: svnfrontend/svnactions.cpp:401
 msgid "History of %1"
 msgstr "%1 istorija"
 
-#: svnfrontend/svnactions.cpp:482
+#: svnfrontend/svnactions.cpp:486
 msgid "Annotate lines - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:490
+#: svnfrontend/svnactions.cpp:494
 msgid "Got no annotate"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:508
+#: svnfrontend/svnactions.cpp:512
 msgid "Getting content - hit cancel for abort"
 msgstr "Gaunamas turinys - nutraukimui spauskite atšaukti"
 
-#: svnfrontend/svnactions.cpp:515
+#: svnfrontend/svnactions.cpp:519
 msgid "Error getting content"
 msgstr "Klaida gaunant turinį"
 
-#: svnfrontend/svnactions.cpp:554
+#: svnfrontend/svnactions.cpp:558
 msgid "Content of %1"
 msgstr "%1 turinys"
 
-#: svnfrontend/svnactions.cpp:565
+#: svnfrontend/svnactions.cpp:569
 msgid "Got no content."
 msgstr "Negauta turinio."
 
-#: svnfrontend/svnactions.cpp:587 svnfrontend/kdesvnfilelist.cpp:301
+#: svnfrontend/svnactions.cpp:591 svnfrontend/kdesvnfilelist.cpp:302
 msgid "New folder"
 msgstr "Naujas aplankas"
 
-#: svnfrontend/svnactions.cpp:587
+#: svnfrontend/svnactions.cpp:591
 msgid "Enter folder name:"
 msgstr "Įveskite aplanko pavadinimą:"
 
-#: svnfrontend/svnactions.cpp:627
+#: svnfrontend/svnactions.cpp:631
 msgid "Retrieving infos - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:660
+#: svnfrontend/svnactions.cpp:664
 msgid "URL"
 msgstr "URL"
 
-#: svnfrontend/svnactions.cpp:662
+#: svnfrontend/svnactions.cpp:666
 msgid "Canonical repository url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:665
+#: svnfrontend/svnactions.cpp:669
 msgid "Checksum"
 msgstr "Kontrolinė suma"
 
-#: svnfrontend/svnactions.cpp:668
+#: svnfrontend/svnactions.cpp:672
 msgid "Type"
 msgstr "Tipas"
 
-#: svnfrontend/svnactions.cpp:671
+#: svnfrontend/svnactions.cpp:675
 msgid "Absent"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:677
+#: svnfrontend/svnactions.cpp:681
 msgid "Folder"
 msgstr "Aplankas"
 
-#: svnfrontend/svnactions.cpp:681 svnfrontend/svnactions.cpp:701
+#: svnfrontend/svnactions.cpp:685 svnfrontend/svnactions.cpp:705
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: svnfrontend/svnactions.cpp:686
+#: svnfrontend/svnactions.cpp:690
 msgid "Schedule"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:689
+#: svnfrontend/svnactions.cpp:693
 msgid "Normal"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:692
+#: svnfrontend/svnactions.cpp:696
 msgid "Addition"
 msgstr "Pridėjimas"
 
-#: svnfrontend/svnactions.cpp:695
+#: svnfrontend/svnactions.cpp:699
 msgid "Deletion"
 msgstr "Trynimas"
 
-#: svnfrontend/svnactions.cpp:705
+#: svnfrontend/svnactions.cpp:709
 msgid "UUID"
 msgstr "UUID"
 
-#: svnfrontend/svnactions.cpp:707 svnfrontend/kdesvnfilelist.cpp:212
+#: svnfrontend/svnactions.cpp:711 svnfrontend/kdesvnfilelist.cpp:213
 msgid "Last author"
 msgstr "Paskutinis autorius"
 
-#: svnfrontend/svnactions.cpp:709
+#: svnfrontend/svnactions.cpp:713
 msgid "Last committed"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:711
+#: svnfrontend/svnactions.cpp:715
 msgid "Last revision"
 msgstr "Paskutinė revizija"
 
-#: svnfrontend/svnactions.cpp:713
+#: svnfrontend/svnactions.cpp:717
 msgid "Content last changed"
 msgstr "Turinys paskutinį kartą keistas"
 
-#: svnfrontend/svnactions.cpp:717
+#: svnfrontend/svnactions.cpp:721
 msgid "Property last changed"
 msgstr "Savybė paskutinį kartą keista"
 
-#: svnfrontend/svnactions.cpp:720
+#: svnfrontend/svnactions.cpp:724
 msgid "New version of conflicted file"
 msgstr "Nauja konfliktuojančio failo versija"
 
-#: svnfrontend/svnactions.cpp:723
+#: svnfrontend/svnactions.cpp:727
 msgid "Old version of conflicted file"
 msgstr "Sena konfliktuojančio failo versija"
 
-#: svnfrontend/svnactions.cpp:726
+#: svnfrontend/svnactions.cpp:730
 msgid "Working version of conflicted file"
 msgstr "Darbinė konfliktuojančio failo versija"
 
-#: svnfrontend/svnactions.cpp:730
+#: svnfrontend/svnactions.cpp:734
 msgid "Property reject file"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:735
+#: svnfrontend/svnactions.cpp:739
 msgid "Copy from URL"
 msgstr "Kopijuoti iš URL"
 
-#: svnfrontend/svnactions.cpp:738 svnfrontend/svnactions.cpp:748
+#: svnfrontend/svnactions.cpp:742 svnfrontend/svnactions.cpp:752
 msgid "Lock token"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:739 svnfrontend/svnactions.cpp:749
+#: svnfrontend/svnactions.cpp:743 svnfrontend/svnactions.cpp:753
 msgid "Owner"
 msgstr "Savininkas"
 
-#: svnfrontend/svnactions.cpp:740 svnfrontend/svnactions.cpp:750
+#: svnfrontend/svnactions.cpp:744 svnfrontend/svnactions.cpp:754
 msgid "Locked on"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:743 svnfrontend/svnactions.cpp:753
+#: svnfrontend/svnactions.cpp:747 svnfrontend/svnactions.cpp:757
 msgid "Lock comment"
 msgstr "Spynos komentaras"
 
-#: svnfrontend/svnactions.cpp:777 svnfrontend/svnactions.cpp:798
+#: svnfrontend/svnactions.cpp:781 svnfrontend/svnactions.cpp:802
 msgid "Infolist"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:906 svnfrontend/svnactions.cpp:2189
+#: svnfrontend/svnactions.cpp:911 svnfrontend/svnactions.cpp:2223
 msgid "Status / List"
 msgstr "Būsena / sąrašas"
 
-#: svnfrontend/svnactions.cpp:906 svnfrontend/svnactions.cpp:2189
+#: svnfrontend/svnactions.cpp:911 svnfrontend/svnactions.cpp:2223
 msgid "Creating list / check status"
 msgstr "Kuriamas sąrašas / tikrinama būsena"
 
-#: svnfrontend/svnactions.cpp:924 svnfrontend/kdesvnfilelist.cpp:352
+#: svnfrontend/svnactions.cpp:929 svnfrontend/kdesvnfilelist.cpp:353
 msgid "Commit"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:927
+#: svnfrontend/svnactions.cpp:932
 #, fuzzy
 msgid "Delete and Commit"
 msgstr "Ištrinti elementai:"
 
-#: svnfrontend/svnactions.cpp:929
+#: svnfrontend/svnactions.cpp:934
 msgid "Add and Commit"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:965
+#: svnfrontend/svnactions.cpp:970
 msgid "Commiting"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:966
+#: svnfrontend/svnactions.cpp:971
 msgid "Commiting - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1027
+#: svnfrontend/svnactions.cpp:1032
 msgid "Download - hit cancel for abort"
 msgstr "Atsiunčiama - nutraukimui spauskite atšaukti"
 
-#: svnfrontend/svnactions.cpp:1092
+#: svnfrontend/svnactions.cpp:1097
 msgid "Both entries seems to be the same, can not diff."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1146
+#: svnfrontend/svnactions.cpp:1153
 msgid "Diff-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1184
+#: svnfrontend/svnactions.cpp:1191
 msgid "Diffing - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1203 svnfrontend/svnactions.cpp:1247
+#: svnfrontend/svnactions.cpp:1210 svnfrontend/svnactions.cpp:1254
 msgid "No difference to display"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1288
+#: svnfrontend/svnactions.cpp:1295
 msgid "Display-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1299
+#: svnfrontend/svnactions.cpp:1306
 msgid "Diff display"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1344
+#: svnfrontend/svnactions.cpp:1351
 msgid "Making update - hit cancel for abort"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1438
+#: svnfrontend/svnactions.cpp:1444
 msgid "Which files or directories should I add?"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1447
+#: svnfrontend/svnactions.cpp:1453
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1493 svnfrontend/kdesvnfilelist.cpp:1975
+#: svnfrontend/svnactions.cpp:1499 svnfrontend/kdesvnfilelist.cpp:1981
 msgid "Really delete these entries?"
 msgstr "Ar tikrai trinti šiuos įrašus?"
 
-#: svnfrontend/svnactions.cpp:1493 svnfrontend/kdesvnfilelist.cpp:1975
+#: svnfrontend/svnactions.cpp:1499 svnfrontend/kdesvnfilelist.cpp:1981
 msgid "Delete from repository"
 msgstr "Ištrinti iš saugyklos"
 
-#: svnfrontend/svnactions.cpp:1525
+#: svnfrontend/svnactions.cpp:1551
 msgid "Export repository"
 msgstr "Eksportuoti saugyklą"
 
-#: svnfrontend/svnactions.cpp:1525 svnfrontend/svnactions.cpp:1569
-#: svnfrontend/kdesvnfilelist.cpp:385
+#: svnfrontend/svnactions.cpp:1551 svnfrontend/svnactions.cpp:1572
+#: svnfrontend/kdesvnfilelist.cpp:386
 msgid "Checkout a repository"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1554
-msgid "Exporting a file?"
-msgstr ""
-
-#: svnfrontend/svnactions.cpp:1554
-msgid "Checking out a file?"
-msgstr ""
-
-#: svnfrontend/svnactions.cpp:1569 svnfrontend/kdesvnfilelist.cpp:387
+#: svnfrontend/svnactions.cpp:1572 svnfrontend/kdesvnfilelist.cpp:388
 msgid "Export a repository"
 msgstr "Eksportuoti saugyklą"
 
-#: svnfrontend/svnactions.cpp:1611
+#: svnfrontend/svnactions.cpp:1594
+msgid "Exporting a file?"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1594
+msgid "Checking out a file?"
+msgstr ""
+
+#: svnfrontend/svnactions.cpp:1631
 msgid "Checkout"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1611
+#: svnfrontend/svnactions.cpp:1631
 msgid "Exporting"
 msgstr "Eksportuojama"
 
-#: svnfrontend/svnactions.cpp:1611
+#: svnfrontend/svnactions.cpp:1631
 msgid "Checking out"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1642
+#: svnfrontend/svnactions.cpp:1663
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1672
+#: svnfrontend/svnactions.cpp:1686
 msgid "Revert entries"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1680
-msgid "Really revert these entries to pristine state?"
-msgstr ""
-
-#: svnfrontend/svnactions.cpp:1694
+#: svnfrontend/svnactions.cpp:1704
 msgid "Reverting items"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1720 svnfrontend/svnactions.cpp:1787
+#: svnfrontend/svnactions.cpp:1730 svnfrontend/svnactions.cpp:1796
 msgid "Switch url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1720
+#: svnfrontend/svnactions.cpp:1730
 msgid "Switching url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1745
+#: svnfrontend/svnactions.cpp:1755
 msgid "Relocate url"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1745
+#: svnfrontend/svnactions.cpp:1755
 msgid "Relocate repository to new URL"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1766
+#: svnfrontend/svnactions.cpp:1775
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1773
+#: svnfrontend/svnactions.cpp:1782
 msgid "Error getting entry to switch"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1809 svnfrontend/kdesvnfilelist.cpp:317
+#: svnfrontend/svnactions.cpp:1817 svnfrontend/kdesvnfilelist.cpp:318
 msgid "Cleanup"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1809
+#: svnfrontend/svnactions.cpp:1817
 msgid "Cleaning up folder"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1823
+#: svnfrontend/svnactions.cpp:1831
 msgid "Resolve"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1823
+#: svnfrontend/svnactions.cpp:1831
 msgid "Marking resolved"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1855
+#: svnfrontend/svnactions.cpp:1863
 msgid "Could not retrieve conflict information - giving up."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1879
+#: svnfrontend/svnactions.cpp:1887
 msgid "Resolve-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1889
+#: svnfrontend/svnactions.cpp:1898
 msgid "Importing items"
 msgstr "Importuojami elementai"
 
-#: svnfrontend/svnactions.cpp:1912
+#: svnfrontend/svnactions.cpp:1921
 msgid "Nothing to merge."
 msgstr "Nėra ko apjungti."
 
-#: svnfrontend/svnactions.cpp:1916
+#: svnfrontend/svnactions.cpp:1925
 msgid "No destination to merge."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1922
+#: svnfrontend/svnactions.cpp:1931
 msgid "Target for merge must be local!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1941
+#: svnfrontend/svnactions.cpp:1950
 msgid "Both sources must be same type!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1949
+#: svnfrontend/svnactions.cpp:1958
 msgid "Target for merge must same type like sources!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1972
+#: svnfrontend/svnactions.cpp:1981
 msgid "Both entries seems to be the same, won't do a merge."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2024
+#: svnfrontend/svnactions.cpp:2040
 msgid "Merge-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2046 svnfrontend/kdesvnfilelist.cpp:1714
+#: svnfrontend/svnactions.cpp:2062 svnfrontend/kdesvnfilelist.cpp:1720
 msgid "Merge"
 msgstr "Apjungti"
 
-#: svnfrontend/svnactions.cpp:2046
+#: svnfrontend/svnactions.cpp:2062
 msgid "Merging items"
 msgstr "Apjungiami elementai"
 
-#: svnfrontend/svnactions.cpp:2068
+#: svnfrontend/svnactions.cpp:2084
 msgid "Moving/Rename item "
 msgstr "Perkelti/pervadinti elementą"
 
-#: svnfrontend/svnactions.cpp:2082
+#: svnfrontend/svnactions.cpp:2102
 msgid "Moving entries"
 msgstr "Perkeliami įrašai"
 
-#: svnfrontend/svnactions.cpp:2105 svnfrontend/svnactions.cpp:2119
+#: svnfrontend/svnactions.cpp:2129 svnfrontend/svnactions.cpp:2154
 msgid "Copy or Moving entries"
 msgstr "Kopijuojami arba perkeliami įrašai"
 
-#: svnfrontend/svnactions.cpp:2216
+#: svnfrontend/svnactions.cpp:2250
 msgid "No unversioned items found."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2219
+#: svnfrontend/svnactions.cpp:2253
 msgid "Add unversioned items"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2348
+#: svnfrontend/svnactions.cpp:2382
 msgid "Still checking for updates"
 msgstr "Vis dar tikrinama atnaujinimų"
 
-#: svnfrontend/svnactions.cpp:2372
+#: svnfrontend/svnactions.cpp:2406
 msgid "Checking for updates finished"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2374
+#: svnfrontend/svnactions.cpp:2408
 msgid "There are new items in repository"
 msgstr "Saugykloje yra naujų elementų"
 
-#: svnfrontend/svnactions.cpp:2439
+#: svnfrontend/svnactions.cpp:2473
 msgid "Filling log cache in background"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2453
+#: svnfrontend/svnactions.cpp:2487
 msgid "Checking for updates started in background"
 msgstr ""
 
@@ -2644,152 +2730,152 @@ msgstr ""
 msgid "Missing SVN link"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:210
+#: svnfrontend/kdesvnfilelist.cpp:211
 msgid "Status"
 msgstr "Būsena"
 
-#: svnfrontend/kdesvnfilelist.cpp:211
+#: svnfrontend/kdesvnfilelist.cpp:212
 msgid "Last changed Revision"
 msgstr "Paskutinio pakeitimo revizija"
 
-#: svnfrontend/kdesvnfilelist.cpp:213
+#: svnfrontend/kdesvnfilelist.cpp:214
 msgid "Last change date"
 msgstr "Paskutinio pakeitimo data"
 
-#: svnfrontend/kdesvnfilelist.cpp:214
+#: svnfrontend/kdesvnfilelist.cpp:215
 msgid "Locked by"
 msgstr "Užrakino"
 
-#: svnfrontend/kdesvnfilelist.cpp:258
+#: svnfrontend/kdesvnfilelist.cpp:259
 msgid "Full Log"
 msgstr "Pilnas žurnalas"
 
-#: svnfrontend/kdesvnfilelist.cpp:259
+#: svnfrontend/kdesvnfilelist.cpp:260
 msgid "Full revision tree"
 msgstr "Pilnas revizijų medis"
 
-#: svnfrontend/kdesvnfilelist.cpp:260
+#: svnfrontend/kdesvnfilelist.cpp:261
 msgid "Partial revision tree"
 msgstr "Dalinis revizijų medis"
 
-#: svnfrontend/kdesvnfilelist.cpp:265
+#: svnfrontend/kdesvnfilelist.cpp:266
 msgid "Display Properties"
 msgstr "Rodymo savybės"
 
-#: svnfrontend/kdesvnfilelist.cpp:268
+#: svnfrontend/kdesvnfilelist.cpp:269
 msgid "Display last changes"
 msgstr "Rodyti paskutinius pakeitimus"
 
-#: svnfrontend/kdesvnfilelist.cpp:270
+#: svnfrontend/kdesvnfilelist.cpp:271
 msgid "Display last changes as difference to previous commit."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:272
+#: svnfrontend/kdesvnfilelist.cpp:273
 msgid "Details"
 msgstr "Detalės"
 
-#: svnfrontend/kdesvnfilelist.cpp:278
+#: svnfrontend/kdesvnfilelist.cpp:279
 msgid "Check for updates"
 msgstr "Tikrinti atnaujinimų"
 
-#: svnfrontend/kdesvnfilelist.cpp:279
+#: svnfrontend/kdesvnfilelist.cpp:280
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:282
+#: svnfrontend/kdesvnfilelist.cpp:283
 msgid "Blame"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:284 svnfrontend/kdesvnfilelist.cpp:287
+#: svnfrontend/kdesvnfilelist.cpp:285 svnfrontend/kdesvnfilelist.cpp:288
 msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:285
+#: svnfrontend/kdesvnfilelist.cpp:286
 msgid "Blame range"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:288
+#: svnfrontend/kdesvnfilelist.cpp:289
 msgid "Cat head"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:290
+#: svnfrontend/kdesvnfilelist.cpp:291
 msgid "Output the content of specified files or URLs."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:291
+#: svnfrontend/kdesvnfilelist.cpp:292
 msgid "Cat revision..."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:293
+#: svnfrontend/kdesvnfilelist.cpp:294
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:295
+#: svnfrontend/kdesvnfilelist.cpp:296
 msgid "Lock current items"
 msgstr "Užrakinti dabartinius elementus"
 
-#: svnfrontend/kdesvnfilelist.cpp:297
+#: svnfrontend/kdesvnfilelist.cpp:298
 msgid "Unlock current items"
 msgstr "Atrakinti dabartinius elementus"
 
-#: svnfrontend/kdesvnfilelist.cpp:303
+#: svnfrontend/kdesvnfilelist.cpp:304
 msgid "Switch repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:305
+#: svnfrontend/kdesvnfilelist.cpp:306
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:306
+#: svnfrontend/kdesvnfilelist.cpp:307
 msgid "Relocate current working copy url"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:308
+#: svnfrontend/kdesvnfilelist.cpp:309
 msgid "Relocate url of current working copy path to other url"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:309
+#: svnfrontend/kdesvnfilelist.cpp:310
 msgid "Check for unversioned items"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:311
+#: svnfrontend/kdesvnfilelist.cpp:312
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:313
+#: svnfrontend/kdesvnfilelist.cpp:314
 msgid "Open repository of working copy"
 msgstr "Atverti darbinės kopijos saugyklą"
 
-#: svnfrontend/kdesvnfilelist.cpp:315
+#: svnfrontend/kdesvnfilelist.cpp:316
 msgid "Opens the repository the current working copy was checked out from"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:319
+#: svnfrontend/kdesvnfilelist.cpp:320
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:320
+#: svnfrontend/kdesvnfilelist.cpp:321
 msgid "Import folders into current"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:322
+#: svnfrontend/kdesvnfilelist.cpp:323
 msgid "Import folder content into current url"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:326
+#: svnfrontend/kdesvnfilelist.cpp:327
 msgid "Add selected files/dirs"
 msgstr "Pridėti pažymėtus failus/aplankus"
 
-#: svnfrontend/kdesvnfilelist.cpp:328
+#: svnfrontend/kdesvnfilelist.cpp:329
 msgid "Adding selected files and/or directories to repository"
 msgstr "Į saugyklą pridedami pažymėti failai ir/arba aplankai"
 
-#: svnfrontend/kdesvnfilelist.cpp:331
+#: svnfrontend/kdesvnfilelist.cpp:332
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
@@ -2797,215 +2883,215 @@ msgstr ""
 "Į saugyklą pridedami pažymėti failai ir/arba aplankai ir visi aplankų "
 "poelemenčiai"
 
-#: svnfrontend/kdesvnfilelist.cpp:333
+#: svnfrontend/kdesvnfilelist.cpp:334
 msgid "Delete selected files/dirs"
 msgstr "Trinti pažymėtus failus/aplankus"
 
-#: svnfrontend/kdesvnfilelist.cpp:335
+#: svnfrontend/kdesvnfilelist.cpp:336
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Iš saugyklos trinami pažymėti failai ir/arba aplankai"
 
-#: svnfrontend/kdesvnfilelist.cpp:336
+#: svnfrontend/kdesvnfilelist.cpp:337
 msgid "Revert current changes"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:339
+#: svnfrontend/kdesvnfilelist.cpp:340
 #, fuzzy
 msgid "Mark resolved"
 msgstr "Išspręsta"
 
-#: svnfrontend/kdesvnfilelist.cpp:341
+#: svnfrontend/kdesvnfilelist.cpp:342
 msgid "Marking files or dirs resolved"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:343
+#: svnfrontend/kdesvnfilelist.cpp:344
 msgid "Resolve conflicts"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:346
+#: svnfrontend/kdesvnfilelist.cpp:347
 msgid "Ignore/Unignore current item"
 msgstr "Ignoruoti/nebeignoruoti dabartinį elementą"
 
-#: svnfrontend/kdesvnfilelist.cpp:348
+#: svnfrontend/kdesvnfilelist.cpp:349
 msgid "Update to head"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:350
+#: svnfrontend/kdesvnfilelist.cpp:351
 msgid "Update to revision..."
 msgstr "Atnaujinti į reviziją..."
 
-#: svnfrontend/kdesvnfilelist.cpp:355
+#: svnfrontend/kdesvnfilelist.cpp:356
 msgid "Diff local changes"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:357
+#: svnfrontend/kdesvnfilelist.cpp:358
 msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:359
+#: svnfrontend/kdesvnfilelist.cpp:360
 msgid "Diff against HEAD"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:361
+#: svnfrontend/kdesvnfilelist.cpp:362
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:363
+#: svnfrontend/kdesvnfilelist.cpp:364
 #, fuzzy
 msgid "Diff items"
 msgstr "Trūkstami elementai:"
 
-#: svnfrontend/kdesvnfilelist.cpp:365
+#: svnfrontend/kdesvnfilelist.cpp:366
 msgid "Diff two items"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:368
+#: svnfrontend/kdesvnfilelist.cpp:369
 msgid "Merge two revisions"
 msgstr "Apjungti dvi revizijas"
 
-#: svnfrontend/kdesvnfilelist.cpp:370
+#: svnfrontend/kdesvnfilelist.cpp:371
 msgid "Merge two revisions of this entry into itself"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:372
+#: svnfrontend/kdesvnfilelist.cpp:373
 msgid "Merge..."
 msgstr "Apjungti..."
 
-#: svnfrontend/kdesvnfilelist.cpp:375 svnfrontend/kdesvnfilelist.cpp:1482
+#: svnfrontend/kdesvnfilelist.cpp:376 svnfrontend/kdesvnfilelist.cpp:1488
 msgid "Open With..."
 msgstr "Atverti su..."
 
-#: svnfrontend/kdesvnfilelist.cpp:378
+#: svnfrontend/kdesvnfilelist.cpp:379
 msgid "Checkout current repository path"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:380
+#: svnfrontend/kdesvnfilelist.cpp:381
 msgid "Export current repository path"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:382
+#: svnfrontend/kdesvnfilelist.cpp:383
 msgid "Select browse revision"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:389
+#: svnfrontend/kdesvnfilelist.cpp:390
 msgid "Refresh view"
 msgstr "Atnaujinti peržiūrą"
 
-#: svnfrontend/kdesvnfilelist.cpp:394
+#: svnfrontend/kdesvnfilelist.cpp:395
 msgid "Unfold File Tree"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:395
+#: svnfrontend/kdesvnfilelist.cpp:396
 msgid "Opens all branches of the file tree"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:396
+#: svnfrontend/kdesvnfilelist.cpp:397
 #, fuzzy
 msgid "Fold File Tree"
 msgstr "Aplankas"
 
-#: svnfrontend/kdesvnfilelist.cpp:397
+#: svnfrontend/kdesvnfilelist.cpp:398
 msgid "Closes all branches of the file tree"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1052
+#: svnfrontend/kdesvnfilelist.cpp:1053
 #, fuzzy
 msgid "Could not retrieve repository of working copy."
 msgstr "Atverti darbinės kopijos saugyklą"
 
-#: svnfrontend/kdesvnfilelist.cpp:1088
+#: svnfrontend/kdesvnfilelist.cpp:1089
 msgid "Failed: %1 %2"
 msgstr "Nepavyko: %1 %2"
 
-#: svnfrontend/kdesvnfilelist.cpp:1159
+#: svnfrontend/kdesvnfilelist.cpp:1160
 msgid "Cannot import into multiple targets!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1175
+#: svnfrontend/kdesvnfilelist.cpp:1176
 msgid "Cannot import into remote targets!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1194 svnfrontend/kdesvnfilelist.cpp:1198
+#: svnfrontend/kdesvnfilelist.cpp:1195 svnfrontend/kdesvnfilelist.cpp:1199
 msgid "Import log"
 msgstr "Importuoti žurnalą"
 
-#: svnfrontend/kdesvnfilelist.cpp:1847
+#: svnfrontend/kdesvnfilelist.cpp:1853
 msgid "Move Here"
 msgstr "Parkelti čia"
 
-#: svnfrontend/kdesvnfilelist.cpp:1848
+#: svnfrontend/kdesvnfilelist.cpp:1854
 msgid "Copy Here"
 msgstr "Kopijuoti čia"
 
-#: svnfrontend/kdesvnfilelist.cpp:1954
+#: svnfrontend/kdesvnfilelist.cpp:1960
 msgid "Nothing selected for delete"
 msgstr "Niekas nepažymėta trynimui"
 
-#: svnfrontend/kdesvnfilelist.cpp:2013
+#: svnfrontend/kdesvnfilelist.cpp:2019
 msgid "Please wait until job is finished"
 msgstr "Prašom palaukti, kol užduotis bus įvykdyta"
 
-#: svnfrontend/kdesvnfilelist.cpp:2033
+#: svnfrontend/kdesvnfilelist.cpp:2039
 msgid "Nothing selected for lock"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2038
+#: svnfrontend/kdesvnfilelist.cpp:2044
 msgid "Lock message"
 msgstr "Užrakinti pranešimą"
 
-#: svnfrontend/kdesvnfilelist.cpp:2041
+#: svnfrontend/kdesvnfilelist.cpp:2049
 msgid "Steal lock?"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2073
+#: svnfrontend/kdesvnfilelist.cpp:2083
 msgid "Nothing selected for unlock"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2076
+#: svnfrontend/kdesvnfilelist.cpp:2086
 msgid "Break lock or ignore missing locks?"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2076
+#: svnfrontend/kdesvnfilelist.cpp:2086
 msgid "Unlocking items"
 msgstr "Atrakinami elementai"
 
-#: svnfrontend/kdesvnfilelist.cpp:2255
+#: svnfrontend/kdesvnfilelist.cpp:2265
 msgid "May not make subdirs of a file"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2279
+#: svnfrontend/kdesvnfilelist.cpp:2289
 msgid "Automatic generated base layout by kdesvn"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2743
+#: svnfrontend/kdesvnfilelist.cpp:2753
 msgid "Error getting entry to relocate"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2750
+#: svnfrontend/kdesvnfilelist.cpp:2760
 msgid "Relocate path %1"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2885
+#: svnfrontend/kdesvnfilelist.cpp:2896
 msgid "Only in working copy possible."
 msgstr "Įmanoma tik darbinėje kopijoje."
 
-#: svnfrontend/kdesvnfilelist.cpp:2889
+#: svnfrontend/kdesvnfilelist.cpp:2900
 msgid "Only on single folder possible"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2894
+#: svnfrontend/kdesvnfilelist.cpp:2905
 msgid "Sorry - internal error!"
 msgstr "Apgailestaujame - vidinė klaida!"
 
-#: svnfrontend/kdesvnfilelist.cpp:3023
+#: svnfrontend/kdesvnfilelist.cpp:3034
 msgid "Unfold tree"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:3023
+#: svnfrontend/kdesvnfilelist.cpp:3034
 msgid "Unfold all folder"
 msgstr ""
 
@@ -3132,12 +3218,12 @@ msgstr "Išdavėjo vardas"
 msgid "Fingerprint"
 msgstr "Pirštų atspaudai"
 
-#: ksvnwidgets/logmsg_impl.cpp:81 ksvnwidgets/logmsg_impl.cpp:108
+#: ksvnwidgets/logmsg_impl.cpp:82 ksvnwidgets/logmsg_impl.cpp:109
 msgid "Items to commit"
 msgstr ""
 
-#: ksvnwidgets/logmsg_impl.cpp:280 ksvnwidgets/logmsg_impl.cpp:319
-#: ksvnwidgets/logmsg_impl.cpp:361 ksvnwidgets/logmsg_impl.cpp:405
+#: ksvnwidgets/logmsg_impl.cpp:282 ksvnwidgets/logmsg_impl.cpp:321
+#: ksvnwidgets/logmsg_impl.cpp:363 ksvnwidgets/logmsg_impl.cpp:407
 msgid "Commit log"
 msgstr ""
 

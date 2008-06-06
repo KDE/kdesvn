@@ -286,7 +286,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidge
 
     ptr = new Logmsg_impl(Dialog1Layout);
     if (!rec) {
-        //ptr->m_RecursiveButton->hide();
+        ptr->m_DepthSelector->hide();
     }
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
@@ -325,7 +325,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::
 
     ptr = new Logmsg_impl(items,Dialog1Layout);
     if (!rec) {
-        //ptr->m_RecursiveButton->hide();
+        ptr->m_DepthSelector->hide();
     }
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
@@ -367,7 +367,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
 
     ptr = new Logmsg_impl(items,Dialog1Layout);
     if (!rec) {
-        //ptr->m_RecursiveButton->hide();
+        ptr->m_DepthSelector->hide();
     }
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
@@ -409,7 +409,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             KDialogBase::Ok,true);
     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
-    //ptr->m_RecursiveButton->hide();
+    ptr->m_DepthSelector->hide();
     if (!keep_locks) {
         ptr->m_keepLocksButton->hide();
     }

@@ -2154,7 +2154,7 @@ bool SvnActions::makeCopy(const KURL::List&Old,const QString&New,const svn::Revi
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KURL::List::ConstIterator it = Old.begin();
-        m_Data->m_Svnclient->copy(t,rev,rev,svn::Path(New),Old.count()>1);
+        m_Data->m_Svnclient->copy(t,rev,rev,svn::Path(New),true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

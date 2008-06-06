@@ -125,6 +125,8 @@ namespace svn
                          force,
                          *m_context,
                          pool);
+      Q_UNUSED(keep_local);
+      Q_UNUSED(revProps);
 #endif
     if(error != 0) {
         throw ClientException (error);
@@ -324,10 +326,23 @@ namespace svn
         Q_UNUSED(asChild);
         Q_UNUSED(makeParent);
         Q_UNUSED(revProps);
+        Q_UNUSED(pegRevision);
         Revision rev;
+        if (srcPaths.size()>1 && !asChild)
+        {
+            throw ClientException("Multiple sources not allowed");
+        }
+
+        Path _dest;
+        QString base,dir;
         for (size_t j=0;j<srcPaths.size();++j)
         {
-            rev  = copy(srcPaths[j],srcRevision,destPath);
+            _dest=destPath;
+            if (asChild) {
+                srcPaths[j].split(dir,base);
+                _dest.addComponent(base);
+            }
+            rev  = copy(srcPaths[j],srcRevision,_dest);
         }
         return rev;
 #endif

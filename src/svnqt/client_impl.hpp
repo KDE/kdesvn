@@ -460,6 +460,31 @@ namespace svn
            const StringArray&merge_options=StringArray()
           ) throw (ClientException);
 
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRanges&ranges,
+                      const Revision&peg,
+                      const Path&targetWc,
+                      Depth depth,
+                      bool notice_ancestry=false,
+                      bool dry_run=false,
+                      bool force=false,
+                      bool record_only=false,
+                      const StringArray&merge_options=StringArray()
+                     ) throw (ClientException);
+
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRange&range,
+              const Revision&peg,
+              const Path&targetWc,
+              Depth depth,
+              bool notice_ancestry,
+              bool dry_run,
+              bool force,
+              const StringArray&merge_options
+            ) throw (ClientException);
+
     /**
      * Retrieve information for the given path
      * remote or local. Only gives with subversion 1.2

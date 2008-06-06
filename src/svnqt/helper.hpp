@@ -22,6 +22,7 @@
 #define __HELPER_HPP
 
 #include "svnqttypes.hpp"
+#include "revision.hpp"
 #include <svn_types.h>
 
 namespace svn
@@ -62,6 +63,31 @@ namespace svn
                 operator svn_depth_t ()
                 {
                     return _value;
+                }
+#endif
+        };
+
+        class RevisionRangesToHash
+        {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+            protected:
+                RevisionRanges m_ranges;
+            public:
+                RevisionRangesToHash(const RevisionRanges&_input):m_ranges(_input){}
+
+                apr_array_header_t*array(const Pool&pool)
+                {
+                    apr_array_header_t*ranges=apr_array_make(pool,0,sizeof(svn_opt_revision_range_t *));
+                    svn_opt_revision_range_t *range;
+
+                    for (unsigned long j=0;j<m_ranges.count();++j)
+                    {
+                        range = (svn_opt_revision_range_t *)apr_palloc(pool, sizeof(*range));
+                        range->start= *m_ranges[j].first.revision();
+                        range->end  = *m_ranges[j].second.revision();
+                        APR_ARRAY_PUSH(ranges,svn_opt_revision_range_t *) = range;
+                    }
+                    return ranges;
                 }
 #endif
         };

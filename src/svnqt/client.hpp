@@ -494,6 +494,31 @@ namespace svn
            const StringArray&merge_options=StringArray()
           ) throw (ClientException)=0;
 
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRanges&ranges,
+                      const Revision&peg,
+                      const Path&targetWc,
+                      Depth depth,
+                      bool notice_ancestry=false,
+                      bool dry_run=false,
+                      bool force=false,
+                      bool record_only=false,
+                      const StringArray&merge_options=StringArray()
+                     ) throw (ClientException)=0;
+
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRange&range,
+              const Revision&peg,
+              const Path&targetWc,
+              Depth depth,
+              bool notice_ancestry=false,
+              bool dry_run=false,
+              bool force=false,
+              const StringArray&merge_options=StringArray()
+             ) throw (ClientException)=0;
+
     /**
      * Retrieve information for the given path
      * remote or local.

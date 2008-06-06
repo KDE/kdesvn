@@ -144,7 +144,6 @@ namespace svn
     DiffData ddata(tmpPath,path1,revision1,path2,revision2);
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    qDebug("diff4 call");
     error = svn_client_diff4(options,
                              path1.cstr (), ddata.r1().revision (),
                              path2.cstr (), ddata.r2().revision (),

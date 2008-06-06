@@ -38,6 +38,7 @@ SET(SOURCES
     diffoptions.cpp
     conflictdescription.cpp
     conflictresult.cpp
+    client_merge.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp
     cache/DatabaseException.hpp

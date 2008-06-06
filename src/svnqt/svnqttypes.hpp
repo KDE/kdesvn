@@ -69,6 +69,11 @@ namespace svn
     typedef QLIST<StatusPtr> StatusEntries;
     typedef QLIST<Revision> Revisions;
 
+    /** Range of Revision */
+    typedef QPair<Revision,Revision> RevisionRange;
+    /** list of revision ranges */
+    typedef QLIST<RevisionRange> RevisionRanges;
+
     /// map of property names to values
     typedef QMap<QString,QString> PropertiesMap;
     /// pair of path, PropertiesMap

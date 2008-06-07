@@ -102,7 +102,11 @@ namespace svn
       const char*propname;
       QByteArray s,n;
       for (it=aMap.begin();it!=aMap.end();++it) {
+#if QT_VERSION < 0x040000
           s=it.data().TOUTF8();
+#else
+          s=it.value().TOUTF8();
+#endif
           n=it.key().TOUTF8();
           propval=apr_pstrndup(pool,s,s.size());
           propname=apr_pstrndup(pool,n,n.size());

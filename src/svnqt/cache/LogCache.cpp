@@ -15,6 +15,7 @@
 #include <qmap.h>
 
 #include "svnqt/path.hpp"
+#include "svnqt/cache/DatabaseException.hpp"
 
 #ifndef NO_SQLITE3
 #include "sqlite3/qsql_sqlite3.h"
@@ -265,7 +266,7 @@ public:
         return _db;
     }
 
-    QDataBase getMainDB()
+    QDataBase getMainDB()const
     {
         if (!m_mainDB.hasLocalData()) {
             unsigned i=0;
@@ -304,7 +305,7 @@ public:
     }
     QString m_BasePath;
 
-    QThreadStorage<ThreadDBStore*> m_mainDB;
+    mutable QThreadStorage<ThreadDBStore*> m_mainDB;
 
     static const QString s_reposSelect;
 };
@@ -420,4 +421,35 @@ QDataBase  svn::cache::LogCache::reposDb(const QString&aRepository)
 {
     qDebug("reposDB");
     return m_CacheData->getReposDB(aRepository);
+}
+
+
+/*!
+    \fn svn::cache::LogCache::cachedRepositories()const
+ */
+QStringList svn::cache::LogCache::cachedRepositories()const
+{
+    static QString s_q(QString("select \"reposroot\" from ")+QString(SQLMAINTABLE)+QString("order by reposroot"));
+    QDataBase mainDB = m_CacheData->getMainDB();
+    QStringList _res;
+#if QT_VERSION < 0x040000
+    if (!mainDB || !mainDB->open()) {
+#else
+    if (!mainDB.isValid()) {
+#endif
+        qWarning("Failed to open main database.");
+        return _res;
+    }
+    QSqlQuery cur(QString::null,mainDB);
+    cur.prepare(s_q);
+    if (!cur.exec()) {
+        qDebug(cur.lastError().text().TOUTF8().data());
+        throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text());
+        return _res;
+    }
+    while (cur.next()) {
+        _res.append(cur.value(0).toString());
+    }
+
+    return _res;
 }

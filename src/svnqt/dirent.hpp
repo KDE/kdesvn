@@ -84,7 +84,7 @@ namespace svn
     svn_node_kind_t
     kind () const;
 
-    svn_filesize_t
+    QLONG
     size () const;
 
     bool

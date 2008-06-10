@@ -102,7 +102,7 @@ namespace svn
     /**
      * @return base revision
      */
-    const svn_revnum_t
+    svn_revnum_t
     revision () const;
     /**
      * @return url in repository
@@ -123,27 +123,27 @@ namespace svn
     /**
      * @return node kind (file, dir, ...)
      */
-    const svn_node_kind_t
+    svn_node_kind_t
     kind () const;
     /**
      * @return scheduling (add, delete, replace)
      */
-    const svn_wc_schedule_t
+    svn_wc_schedule_t
     schedule () const;
     /**
      * @return TRUE if copied
      */
-    const bool
+    bool
     isCopied () const;
     /**
      * @return true if deleted
      */
-    const bool
+    bool
     isDeleted () const;
     /**
      * @return true if deleted
      */
-    const bool
+    bool
     isAbsent () const;
     /**
      * @return copyfrom location
@@ -153,7 +153,7 @@ namespace svn
     /**
      * @return copyfrom revision
      */
-    const svn_revnum_t
+    svn_revnum_t
     copyfromRev () const;
     /**
      * @return old version of conflicted file
@@ -198,7 +198,7 @@ namespace svn
     /**
      * @return last revision this was changed
      */
-    const svn_revnum_t
+    svn_revnum_t
     cmtRev () const;
 
     /**

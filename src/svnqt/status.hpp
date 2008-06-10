@@ -104,59 +104,59 @@ namespace svn
     /**
      * @return file status property enum of the "textual" component.
      */
-    const svn_wc_status_kind
+    svn_wc_status_kind
     textStatus () const;
 
     /**
      * @return file status property enum of the "property" component.
      */
-    const svn_wc_status_kind
+    svn_wc_status_kind
     propStatus () const;
 
     /**
      * @retval TRUE if under version control
      */
-    const bool
+    bool
     isVersioned () const;
 
     /**
      * @retval TRUE if under version control and not ignored
      */
-    const bool
+    bool
     isRealVersioned()const;
 
     /**
      * @retval TRUE if under version control and local modified
      */
-    const bool
+    bool
     isModified()const;
 
     /**
      * @retval TRUE if locked
      */
-    const bool
+    bool
     isLocked () const;
 
     /**
      * @retval TRUE if copied
      */
-    const bool
+    bool
     isCopied () const;
 
     /**
      * @retval TRUE if switched
      */
-    const bool
+    bool
     isSwitched () const;
     /**
      * @return the entry's text status in the repository
      */
-    const svn_wc_status_kind
+    svn_wc_status_kind
     reposTextStatus () const;
     /**
      * @return the entry's prop status in the repository
      */
-    const svn_wc_status_kind
+    svn_wc_status_kind
     reposPropStatus () const;
 
     const LockEntry&

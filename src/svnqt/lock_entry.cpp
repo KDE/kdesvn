@@ -77,7 +77,7 @@ namespace svn
   {
     return exp;
   }
-  const bool LockEntry::Locked()const
+  bool LockEntry::Locked()const
   {
     return locked;
   }

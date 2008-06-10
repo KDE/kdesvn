@@ -65,54 +65,54 @@ namespace svn
     return *this;
   }
 
-  const bool DateTime::operator<(const DateTime&dateTime)const
+  bool DateTime::operator<(const DateTime&dateTime)const
   {
     return m_time<dateTime.m_time;
   }
 
-  const bool DateTime::operator>(const DateTime&dateTime)const
+  bool DateTime::operator>(const DateTime&dateTime)const
   {
     return dateTime<*this;
   }
 
-  const bool DateTime::operator!=(const DateTime&dateTime)const
+  bool DateTime::operator!=(const DateTime&dateTime)const
   {
     return *this<dateTime||dateTime<*this;
   }
-  const bool DateTime::operator==(const DateTime&dateTime)const
+  bool DateTime::operator==(const DateTime&dateTime)const
   {
     return !(*this!=dateTime);
   }
 
-  const bool
+  bool
   DateTime::operator ==(const DateTime & dateTime)
   {
     return m_time == dateTime.m_time;
   }
 
-  const bool
+  bool
   DateTime::operator !=(const DateTime & dateTime)
   {
     return m_time != dateTime.m_time;
   }
-  const bool
+  bool
   DateTime::operator<=(const DateTime&dateTime)const
   {
       return *this==dateTime||*this<dateTime;
   }
-  const bool
+  bool
   DateTime::operator>=(const DateTime&dateTime)const
   {
       return *this==dateTime||*this>dateTime;
   }
 
-  const bool
+  bool
   DateTime::IsValid () const
   {
     return m_time.isValid();
   }
 
-  const apr_time_t
+  apr_time_t
   DateTime::GetAPRTimeT () const
   {
     apr_time_t aTime;
@@ -120,7 +120,7 @@ namespace svn
     return aTime;
   }
 
-  const bool
+  bool
   DateTime::SetRFC822Date (const char* date)
   {
     apr_time_t aTime = apr_date_parse_rfc(date);

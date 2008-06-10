@@ -49,6 +49,11 @@ FillCacheThread::~FillCacheThread()
     delete m_Svnclient;
 }
 
+const QString&FillCacheThread::reposRoot()const
+{
+    return m_what;
+}
+
 void FillCacheThread::cancelMe()
 {
     // method is threadsafe!
@@ -82,7 +87,7 @@ void FillCacheThread::run()
     }
     KApplication*k = KApplication::kApplication();
     if (k) {
-        QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_FINISHED);
+        QCustomEvent*ev = new QCustomEvent(EVENT_LOGCACHE_FINISHED);
         ev->setData((void*)this);
         k->postEvent(m_Parent,ev);
     }

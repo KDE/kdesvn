@@ -173,6 +173,8 @@ public:
     void clearContextData();
     QString getContextData(const QString&)const;
 
+    virtual bool event ( QEvent * e );
+
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;
 

@@ -198,6 +198,11 @@ void kdesvnPart::setupActions()
     toggletemp->setChecked(Kdesvnsettings::hide_unchanged_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotHideUnchanged(bool)));
 
+    toggletemp = new KToggleAction(i18n("Work online"),KShortcut(),
+                                   actionCollection(),"toggle_network");
+    toggletemp->setChecked(Kdesvnsettings::network_on());
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotEnableNetwork(bool)));
+
     kdDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
     KAction * t = KStdAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
@@ -255,6 +260,12 @@ void kdesvnPart::slotHideUnchanged(bool how)
     Kdesvnsettings::setHide_unchanged_files(how);
     Kdesvnsettings::writeConfig();
     emit refreshTree();
+}
+
+void kdesvnPart::slotEnableNetwork(bool how)
+{
+    Kdesvnsettings::setNetwork_on(how);
+    Kdesvnsettings::writeConfig();
 }
 
 /*!

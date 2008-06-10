@@ -893,6 +893,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     bool review = Kdesvnsettings::review_commit();
     QString msg,_p;
 
+    stopFillCache();
     if (!review) {
         msg = Logmsg_impl::getLogmessage(&ok,&depth,&keeplocks,
             m_Data->m_ParentList->realWidget(),"logmsg_impl");
@@ -977,6 +978,9 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     }
     EMIT_REFRESH;
     emit sendNotify(i18n("Committed revision %1.").arg(nnum.toString()));
+    if (_targets.size()>0) {
+        startFillCache(_targets[0]);
+    }
     return true;
 }
 
@@ -2471,6 +2475,17 @@ void SvnActions::startFillCache(const QString&path)
     m_FCThread=new FillCacheThread(this,e.reposRoot());
     m_FCThread->start();
     emit sendNotify(i18n("Filling log cache in background"));
+}
+
+
+bool SvnActions::event(QEvent * e)
+{
+    if (e->type()==EVENT_LOGCACHE_FINISHED) {
+        emit sendNotify(i18n("Filling log cache in background finished."));
+        stopFillCache();
+        return true;
+    }
+    return false;
 }
 
 /*!

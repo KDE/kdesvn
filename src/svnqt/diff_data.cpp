@@ -100,7 +100,7 @@ namespace svn
         close();
 #if !((SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4))
         if (m_outFileName != 0) {
-            svn_esrror_clear (svn_io_remove_file (m_outFileName, m_Pool));
+            svn_error_clear (svn_io_remove_file (m_outFileName, m_Pool));
             m_outFileName=0;
         }
         if (m_errFileName != 0) {

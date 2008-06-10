@@ -123,6 +123,10 @@
         <label>Store passwords in KDE Wallet instead subversion storage</label>
         <default>true</default>
     </entry>
+    <entry key="network_on" type="Bool">
+        <label>Is networking enabled</label>
+        <default>true</default>
+    </entry>
   </group>
   <group name="diffmerge_items">
     <entry key="external_merge_program" type="String" >

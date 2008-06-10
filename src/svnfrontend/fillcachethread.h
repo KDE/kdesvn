@@ -40,6 +40,8 @@ public:
     virtual void run();
     virtual void cancelMe();
 
+    const QString&reposRoot()const;
+
 protected:
     QMutex mutex;
     svn::Client* m_Svnclient;

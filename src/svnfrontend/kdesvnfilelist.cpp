@@ -545,6 +545,15 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
             }
         } else {
             setNetworked(true);
+            if (!Kdesvnsettings::network_on()) {
+                setBaseUri("");
+                setNetworked(false);
+                clear();
+                KMessageBox::error(this,i18n("Networked URL to open but networking is disabled!"));
+                emit changeCaption("");
+                emit sigUrlOpend(false);
+                return false;
+            }
         }
     }
     if (query.length()>1) {
@@ -586,7 +595,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
         setNetworked(false);
         clear();
     }
-    enableActions();
     m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
 
@@ -600,6 +608,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));
+    enableActions();
     kdDebug()<<"End open URL"<<endl;
     return result;
 }
@@ -865,9 +874,12 @@ void kdesvnfilelist::enableActions()
     bool none = c==0&&isopen;
     bool dir = false;
     bool unique = uniqueTypeSelected();
+    bool remote_enabled=m_SvnWrapper->doNetworking();
+
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
     }
+
     bool conflicted = single && allSelected()->at(0)->isConflicted();
     KAction * temp = 0;
     /* local and remote actions */
@@ -945,9 +957,9 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled( (multi||single) && isWorkingCopy());
     }
-    m_UpdateHead->setEnabled(isWorkingCopy()&&isopen);
-    m_UpdateRev->setEnabled(isWorkingCopy()&&isopen);
-    m_commitAction->setEnabled(isWorkingCopy()&&isopen);
+    m_UpdateHead->setEnabled(isWorkingCopy()&&isopen&&remote_enabled);
+    m_UpdateRev->setEnabled(isWorkingCopy()&&isopen&&remote_enabled);
+    m_commitAction->setEnabled(isWorkingCopy()&&isopen&&remote_enabled);
 
     temp = filesActions()->action("make_svn_basediff");
     if (temp) {
@@ -955,13 +967,13 @@ void kdesvnfilelist::enableActions()
     }
     temp = filesActions()->action("make_svn_headdiff");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&(single||none));
+        temp->setEnabled(isWorkingCopy()&&(single||none)&&remote_enabled);
     }
 
     /// @todo uberprüfen ob alle selektierten items den selben typ haben.
     temp = filesActions()->action("make_svn_itemsdiff");
     if (temp) {
-        temp->setEnabled(multi && c==2 && unique);
+        temp->setEnabled(multi && c==2 && unique && remote_enabled);
     }
 
     /* 2. on dirs only */
@@ -972,9 +984,9 @@ void kdesvnfilelist::enableActions()
     }
 
     /* remote actions only */
-    m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy());
+    m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy() && remote_enabled);
     /* independ actions */
-    m_CheckoutAction->setEnabled(true);
+    m_CheckoutAction->setEnabled(remote_enabled);
     m_ExportAction->setEnabled(true);
     m_RefreshViewAction->setEnabled(isopen);
 
@@ -992,7 +1004,7 @@ void kdesvnfilelist::enableActions()
     }
     temp = filesActions()->action("make_check_updates");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&isopen);
+        temp->setEnabled(isWorkingCopy()&&isopen && remote_enabled);
     }
     temp = filesActions()->action("openwith");
     if (temp) {

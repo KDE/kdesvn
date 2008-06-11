@@ -174,6 +174,7 @@ public:
     QString getContextData(const QString&)const;
 
     virtual bool event ( QEvent * e );
+    bool doNetworking();
 
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;

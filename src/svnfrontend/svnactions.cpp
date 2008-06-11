@@ -370,14 +370,12 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         }
         target = e[0];
         if (!cacheKey.isEmpty()) {
-            if (peg != svn::Revision::UNDEFINED) {
+            m_Data->m_InfoCache.insertKey(e[0],cacheKey);
+            if (peg != svn::Revision::UNDEFINED && peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
+                // for persistent storage, store head into persistent cache makes no sense.
+                cacheKey=e[0].revision().toString()+"/"+url;
+                kdDebug()<<"Extra: "<<cacheKey<<endl;
                 m_Data->m_InfoCache.insertKey(e[0],cacheKey);
-                if (peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
-                    // for persistent storage, store head into persistent cache makes no sense.
-                    cacheKey=e[0].revision().toString()+"/"+url;
-                    kdDebug()<<"Extra: "<<cacheKey<<endl;
-                    m_Data->m_InfoCache.insertKey(e[0],cacheKey);
-                }
             }
         }
     }
@@ -861,9 +859,9 @@ bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QValueL
  */
 void SvnActions::slotCommit()
 {
-    /// @todo remove reference to parentlist
-    if (!m_Data->m_CurrentContext) return;
-    if (!m_Data->m_ParentList->isWorkingCopy()) return;
+    if (!m_Data->m_CurrentContext||!m_Data->m_ParentList->isWorkingCopy()) {
+        return;
+    }
     QPtrList<SvnItem> which;
     m_Data->m_ParentList->SelectionList(&which);
     SvnItem*cur;
@@ -880,7 +878,9 @@ void SvnActions::slotCommit()
                                        ));
         }
     }
-    makeCommit(targets);
+    if (makeCommit(targets)) {
+        startFillCache(m_Data->m_ParentList->baseUri());
+    }
 }
 
 bool SvnActions::makeCommit(const svn::Targets&targets)
@@ -892,6 +892,11 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     svn::Pathes _deldir;
     bool review = Kdesvnsettings::review_commit();
     QString msg,_p;
+
+    if (!doNetworking()) {
+        emit clientException(i18n("Not commiting because networking is disabled"));
+        return false;
+    }
 
     stopFillCache();
     if (!review) {
@@ -978,9 +983,6 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     }
     EMIT_REFRESH;
     emit sendNotify(i18n("Committed revision %1.").arg(nnum.toString()));
-    if (_targets.size()>0) {
-        startFillCache(_targets[0]);
-    }
     return true;
 }
 
@@ -2472,11 +2474,32 @@ void SvnActions::startFillCache(const QString&path)
     if (!singleInfo(path,svn::Revision::HEAD,e)) {
         return;
     }
+    if (!doNetworking()) {
+        emit sendNotify(i18n("Not filling logcache because networking is disabled"));
+        return;
+    }
     m_FCThread=new FillCacheThread(this,e.reposRoot());
     m_FCThread->start();
     emit sendNotify(i18n("Filling log cache in background"));
 }
 
+bool SvnActions::doNetworking()
+{
+    if (Kdesvnsettings::network_on()||!m_Data->m_ParentList) {
+        return true;
+    }
+    bool is_url=false;
+    if (m_Data->m_ParentList->isNetworked()) {
+        is_url=true;
+    } else {
+        svn::InfoEntry e;
+        if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
+            return false;
+        }
+        is_url = !e.reposRoot().startsWith("file:/");
+    }
+    return !is_url;
+}
 
 bool SvnActions::event(QEvent * e)
 {
@@ -2496,6 +2519,11 @@ bool SvnActions::createUpdateCache(const QString&what)
     clearUpdateCache();
     m_Data->m_repoLockCache.clear();
     stopCheckUpdateThread();
+    if (!doNetworking()) {
+        emit sendNotify(i18n("Not checking for updates because networking is disabled"));
+        return false;
+    }
+
     m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();
     m_Data->m_UpdateCheckTimer.start(100,true);

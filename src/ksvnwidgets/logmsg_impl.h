@@ -26,7 +26,7 @@
 #include <qpair.h>
 
 class Logmsg_impl: public QDialog, Ui::LogmessageData {
-Q_OBJECT
+  Q_OBJECT
 public:
     struct logActionEntry {
         QString _name;

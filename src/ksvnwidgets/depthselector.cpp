@@ -28,24 +28,25 @@
 #include <qcombobox.h>
 
 
-DepthSelector::DepthSelector(QWidget *parent, const char *name)
-    :DepthSettings(parent, name)
+DepthSelector::DepthSelector(QWidget *parent)
+    :QWidget(parent),Ui::DepthForm()
 {
+    setupUi(this);
     if (svn::Version::version_major()>1|| svn::Version::version_minor()>4 ) {
         m_recurse = 0L;
         m_DepthCombo->setCurrentItem(3);
     } else {
         delete m_DepthCombo;
         m_DepthCombo=0;
-        DepthFormLayout->removeItem(m_leftspacer);
-        m_recurse = new QCheckBox( this, "m_RecursiveButton" );
+        hboxLayout->removeItem(spacerItem);
+        m_recurse = new QCheckBox( this);
         m_recurse->setChecked( TRUE );
         m_recurse->setText(i18n( "Recursive" ));
-        DepthFormLayout->addWidget( m_recurse );
+        hboxLayout->addWidget( m_recurse );
         m_recurse->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-        DepthFormLayout->addItem(m_leftspacer);
+        hboxLayout->addItem(spacerItem);
     }
-    DepthFormLayout->setMargin(0);
+    hboxLayout->setMargin(0);
     setMinimumSize(minimumSizeHint());
     adjustSize();
 }
@@ -55,11 +56,11 @@ DepthSelector::~DepthSelector()
 }
 void DepthSelector::addItemWidget(QWidget*aWidget)
 {
-    DepthFormLayout->removeItem(m_leftspacer);
+    hboxLayout->removeItem(spacerItem);
     aWidget->reparent(this,geometry().topLeft());
-    DepthFormLayout->addWidget(aWidget);
+    hboxLayout->addWidget(aWidget);
     aWidget->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-    DepthFormLayout->addItem(m_leftspacer);
+    hboxLayout->addItem(spacerItem);
     setMinimumSize(minimumSizeHint());
 }
 

@@ -20,16 +20,16 @@
 #ifndef DEPTHSELECTOR_H
 #define DEPTHSELECTOR_H
 
-#include "src/ksvnwidgets/depthform.h"
+#include "src/ksvnwidgets/ui_depthform.h"
 
 #include "src/svnqt/svnqttypes.hpp"
 
 class QCheckBox;
 
-class DepthSelector: public DepthSettings {
+class DepthSelector: public QWidget, Ui::DepthForm {
     Q_OBJECT
 public:
-    DepthSelector(QWidget *parent = 0, const char *name = 0);
+    DepthSelector(QWidget *parent = 0);
     virtual ~DepthSelector();
     svn::Depth getDepth()const;
     void addItemWidget(QWidget*);

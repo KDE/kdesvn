@@ -57,7 +57,7 @@ public:
      */
     virtual ~kdesvn();
 
-    virtual void openBookmarkURL (const QString &_url);
+    virtual void openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
     virtual QString currentURL () const;
     void checkReload();
 
@@ -66,14 +66,14 @@ protected:
      * This function is called when it is time for the app to save its
      * properties for session management purposes.
      */
-    void saveProperties(KConfig *);
+    virtual void saveProperties(KConfigGroup&);
 
     /**
      * This function is called when this app is restored.  The KConfig
      * object points to the session management config file that was saved
      * with @ref saveProperties
      */
-    void readProperties(KConfig *);
+    virtual void readProperties(const KConfigGroup&);
     virtual bool queryExit();
     void enableClose(bool how);
 
@@ -86,8 +86,8 @@ public slots:
     virtual void load(const KUrl&_url) {
         load(_url,true);
     }
-    virtual void loadRescent(const KURL&);
-    virtual void load(const KURL&,bool);
+    virtual void loadRescent(const KUrl&);
+    virtual void load(const KUrl&,bool);
 
 private slots:
     void fileOpen();

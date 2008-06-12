@@ -20,7 +20,7 @@
 #ifndef URLDLG_H
 #define URLDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kurl.h>
 
 class KUrlRequester;
@@ -28,12 +28,12 @@ class KUrlRequester;
 /**
 @author Rajko Albrecht
 */
-class UrlDlg : public KDialogBase
+class UrlDlg : public KDialog
 {
 Q_OBJECT
 public:
     UrlDlg(QWidget *parent = 0, const char *name = 0);
-    ~UrlDlg();
+    virtual ~UrlDlg();
     KUrl selectedURL();
     static KUrl getURL(QWidget*parent=0);
 protected:

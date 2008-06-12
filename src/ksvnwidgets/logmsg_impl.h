@@ -20,12 +20,12 @@
 #ifndef LOGMSG_IMPL_H
 #define LOGMSG_IMPL_H
 
-#include "src/ksvnwidgets/logmessage.h"
+#include "src/ksvnwidgets/ui_logmessage.h"
 #include "src/svnqt/commititem.hpp"
 #include <q3valuelist.h>
 #include <qpair.h>
 
-class Logmsg_impl: public LogmessageData {
+class Logmsg_impl: public QDialog, Ui::LogmessageData {
 Q_OBJECT
 public:
     struct logActionEntry {

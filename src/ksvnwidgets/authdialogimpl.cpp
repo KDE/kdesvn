@@ -27,7 +27,7 @@
 #include <qlabel.h>
 
 AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :QDialog(parent),curPass("")
+    :QDialog(parent),Ui::AuthDialog(),curPass("")
 {
     setupUi(this);
     m_UsernameEdit->setText(user);

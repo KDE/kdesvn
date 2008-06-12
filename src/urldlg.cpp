@@ -33,7 +33,7 @@
 #include <qlabel.h>
 
 UrlDlg::UrlDlg(QWidget *parent, const char *name)
- : KDialogBase(Plain, QString::null, Ok|Cancel|User1, Ok, parent, name,
+ : KDialog(Plain, QString::null, Ok|Cancel|User1, Ok, parent, name,
                 true,true, KStandardGuiItem::clear())
 {
     init_dlg();

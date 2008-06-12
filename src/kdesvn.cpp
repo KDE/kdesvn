@@ -268,29 +268,25 @@ void kdesvn::fileClose()
     }
 }
 
-void kdesvn::saveProperties(KConfig *config)
+void kdesvn::saveProperties(KConfigGroup &config)
 {
     // the 'config' object points to the session managed
     // config file.  anything you write here will be available
     // later when this app is restored
     if (!m_part) return;
     if (!m_part->url().isEmpty()) {
-#if KDE_IS_VERSION(3,1,3)
-        config->writePathEntry("lastURL", m_part->url().prettyUrl());
-#else
-        config->writeEntry("lastURL", m_part->url().prettyUrl());
-#endif
+        config.writeEntry("lastURL", m_part->url().prettyUrl());
     }
 }
 
-void kdesvn::readProperties(KConfig *config)
+void kdesvn::readProperties(const KConfigGroup&config)
 {
     // the 'config' object points to the session managed
     // config file.  this function is automatically called whenever
     // the app is being restored.  read in here whatever you wrote
     // in 'saveProperties'
 
-    QString url = config->readPathEntry("lastURL");
+    QString url = config.readPathEntry("lastURL");
 
     if (!url.isEmpty() && m_part)
         m_part->openURL(KUrl(url));
@@ -325,7 +321,7 @@ void kdesvn::resetStatusBar()
     statusBar()->message(i18n("Ready"));
 }
 
-void kdesvn::openBookmarkURL (const QString &_url)
+virtual void openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
 {
     if (!_url.isEmpty() && m_part)
         load(_url,false);

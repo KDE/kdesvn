@@ -61,7 +61,7 @@ namespace svn
     /**
      * @return the outermost error code.
      */
-    const apr_status_t apr_err () const;
+    apr_status_t apr_err () const;
 
     static QString error2msg(svn_error_t*error);
 

@@ -35,10 +35,14 @@ public:
     virtual ~Importdir_logmsg();
 
     bool createDir();
+    bool ignoreUnknownNodes();
+    bool noIgnore();
     void createDirboxDir(const QString & which=QString::null);
 
 protected:
     QCheckBox*m_createDirBox;
+    QCheckBox*m_ignoreUnknownNodes;
+    QCheckBox*m_noIgnore;
 };
 
 #endif

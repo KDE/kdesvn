@@ -214,19 +214,22 @@ namespace svn
     return &m_revision;
   }
 
-  const svn_revnum_t
+  svn_revnum_t
   Revision::revnum () const
   {
-    return m_revision.value.number;
+      if (m_revision.kind==svn_opt_revision_number) {
+          return m_revision.value.number;
+      }
+      return SVN_INVALID_REVNUM;
   }
 
-  const apr_time_t
+  apr_time_t
   Revision::date () const
   {
     return m_revision.value.date;
   }
 
-  const svn_opt_revision_kind
+  svn_opt_revision_kind
   Revision::kind () const
   {
     return m_revision.kind;
@@ -250,6 +253,7 @@ namespace svn
     if (m_revision.kind!=svn_opt_revision_number || value!=revnum()) {
         return false;
     }
+    return true;
   }
 
   bool Revision::operator!=(const svn_opt_revision_kind t)const

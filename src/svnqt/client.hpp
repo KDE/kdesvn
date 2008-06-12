@@ -57,15 +57,18 @@
     #include <QtCore>
 #endif
 
-// svncpp
-#include "context.hpp"
-#include "exception.hpp"
-#include "path.hpp"
-#include "entry.hpp"
-#include "revision.hpp"
-#include "log_entry.hpp"
-#include "info_entry.hpp"
-#include "annotate_line.hpp"
+// svnqt
+#include "svnqt/context.hpp"
+#include "svnqt/exception.hpp"
+#include "svnqt/path.hpp"
+#include "svnqt/entry.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/log_entry.hpp"
+#include "svnqt/info_entry.hpp"
+#include "svnqt/annotate_line.hpp"
+#include "svnqt/stringarray.hpp"
+#include "svnqt/diffoptions.hpp"
+#include "svnqt/conflictresult.hpp"
 
 class QStringList;
 
@@ -79,6 +82,7 @@ namespace svn
   class SVNQT_EXPORT Client
   {
   public:
+
     /**
      * Initializes the primary memory pool.
      */
@@ -129,13 +133,14 @@ namespace svn
      */
     virtual StatusEntries
     status (const Path& path,
-            const bool descend = false,
-            const bool get_all = true,
-            const bool update = false,
-            const bool no_ignore = false,
+            Depth depth=DepthImmediates,
+            bool get_all = true,
+            bool update = false,
+            bool no_ignore = false,
             const Revision revision = svn::Revision::HEAD,
             bool detailed_remote = false,
-            const bool hide_externals = false) throw (ClientException) = 0;
+            bool hide_externals = false,
+            const StringArray & changelists=StringArray() ) throw (ClientException) = 0;
 
     /**
      * Returns the status of a single file in the path.
@@ -165,8 +170,10 @@ namespace svn
     checkout (const Path& moduleName, const Path & destPath,
               const Revision & revision,
               const Revision & peg = Revision::UNDEFINED,
-              bool recurse = true,
-              bool ignore_externals=false) throw (ClientException) = 0;
+              svn::Depth depth=DepthInfinity,
+              bool ignore_externals=false,
+              bool overwrite=false
+             ) throw (ClientException) = 0;
 
     /**
      * relocate wc @a from to @a to
@@ -180,8 +187,10 @@ namespace svn
      * Sets a single file for deletion.
      * @exception ClientException
      */
-    virtual void
-    remove (const Path & path, bool force) throw (ClientException)=0;
+    virtual svn::Revision
+            remove (const Path & path, bool force,
+                    bool keep_local = true,
+                    const PropertiesMap&revProps = PropertiesMap()) throw (ClientException)=0;
 
     /**
      * Sets files for deletion.
@@ -190,28 +199,34 @@ namespace svn
      * @param force force if files are locally modified
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     remove (const Targets & targets,
-            bool force) throw (ClientException) = 0;
+            bool force,
+            bool keep_local=true,
+            const PropertiesMap&revProps=PropertiesMap()) throw (ClientException) = 0;
 
     /**
      * Reverts a couple of files to a pristiner state.
      * @exception ClientException
      */
     virtual void
-    revert (const Targets & targets, bool recurse) throw (ClientException)=0;
+    revert (const Targets & targets,
+            Depth depth,
+            const StringArray&changelist=StringArray()
+           ) throw (ClientException)=0;
 
 
     /**
      * Adds a file to the repository.
      * @param path the path to add
-     * @param recurse if @a path is a folder add items recursive
+     * @param depth if @a path is a folder add items recursive depending on value if it.
      * @param force if true, do not error on already-versioned items.
      * @param no_ignore if false don't add files or directories that match ignore patterns. When build against svn 1.2 always false
+     * @param add_parents if true, go up to the next versioned folder and add all between path and this folder.
      * @exception ClientException
      */
     virtual void
-    add (const Path & path, bool recurse,bool force=false, bool no_ignore=false) throw (ClientException)=0;
+    add (const Path & path, svn::Depth depth,bool force=false, bool no_ignore=false, bool add_parents = true) throw (ClientException)=0;
 
     /**
      * Updates the file or directory.
@@ -219,13 +234,15 @@ namespace svn
      * @param revision the revision number to checkout.
      *                 Revision::HEAD will checkout the
      *                 latest revision.
-     * @param recurse recursively update.
-     * @param ignore_externals ignore externals (only when Subversion 1.2 or above)
+     * @param depth Depthness for operation
+     * @param ignore_externals ignore externals
+     * @param allow_unversioned will operation not fail if there are unversioned items in tree with same name.
      * @exception ClientException
      */
     virtual Revisions
     update (const Targets & path, const Revision & revision,
-            bool recurse,bool ignore_externals) throw (ClientException) = 0;
+            Depth depth,bool ignore_externals,bool allow_unversioned,
+            bool sticky_depth) throw (ClientException) = 0;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -286,7 +303,11 @@ namespace svn
               const Path & path,
               const Revision & revisionStart,
               const Revision & revisionEnd,
-              const Revision & peg = Revision::UNDEFINED) throw (ClientException)=0;
+              const Revision & peg = Revision::UNDEFINED,
+              const DiffOptions&diffoptions = DiffOptions(),
+              bool ignore_mimetypes = false,
+              bool include_merged_revisions = false
+             ) throw (ClientException)=0;
 
     /**
      * Commits changes to the repository. This usually requires
@@ -294,20 +315,26 @@ namespace svn
      * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
      * @param targets files to commit.
      * @param message log message.
-     * @param recurse whether the operation should be done recursively.
+     * @param depth whether the operation should be done recursively.
      * @param keep_locks if false unlock items in paths
+     * @param changelist
+     * @param keep_changelist
      * @exception ClientException
      */
     virtual svn::Revision
     commit (const Targets & targets,
             const QString& message,
-            bool recurse,bool keep_locks=true) throw (ClientException)=0;
+            svn::Depth depth,bool keep_locks=true,
+            const svn::StringArray&contents=svn::StringArray(),
+            const PropertiesMap&revProps=PropertiesMap(),
+            bool keep_changelist=false
+           ) throw (ClientException)=0;
 
     /**
      * Copies a versioned file with the history preserved.
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     copy (const Path & srcPath,
           const Revision & srcRevision,
           const Path & destPath) throw (ClientException)=0;
@@ -317,20 +344,29 @@ namespace svn
      * @see svn_client_copy4
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     copy (const Targets & srcPath,
             const Revision & srcRevision,
+            const Revision & pegRevision,
             const Path & destPath,
-            bool asChild,bool makeParent) throw (ClientException)=0;
+            bool asChild=false,bool makeParent=false,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
 
     /**
      * Moves or renames a file.
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     move (const Path & srcPath,
           const Path & destPath,
           bool force) throw (ClientException)=0;
+    /**
+     * Moves or renames a file.
+     * @exception ClientException
+     */
+    virtual svn::Revision
+            move (const Targets & srcPath,
+                  const Path & destPath,
+                  bool force,bool asChild,bool makeParent,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
 
     /**
      * Creates a directory directly in a repository or creates a
@@ -341,11 +377,15 @@ namespace svn
      *
      * @param path
      * @param message log message. if it is QString::null asks when working on repository
+     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     mkdir (const Path & path,
-           const QString& message) throw (ClientException)=0;
+           const QString& message,
+           bool makeParent=true,
+           const PropertiesMap&revProps=PropertiesMap()
+          ) throw (ClientException)=0;
     /**
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
@@ -354,11 +394,15 @@ namespace svn
      *
      * @param targets encoded pathes to create
      * @param message log message. if it is QString::null asks when working on repository
+     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     mkdir (const Targets & targets,
-           const QString& message) throw (ClientException)=0;
+           const QString& message,
+           bool makeParent=true,
+           const PropertiesMap&revProps=PropertiesMap()
+          ) throw (ClientException)=0;
 
     /**
      * Recursively cleans up a local directory, finishing any
@@ -373,8 +417,7 @@ namespace svn
      * Removes the 'conflicted' state on a file.
      * @exception ClientException
      */
-    virtual void
-    resolved (const Path & path, bool recurse) throw (ClientException)=0;
+    virtual void resolve (const Path & path,Depth depth,const ConflictResult&resolution=ConflictResult()) throw (ClientException)=0;
 
     /**
      * Exports the contents of either a subversion repository into a
@@ -399,7 +442,7 @@ namespace svn
               bool overwrite=false,
               const QString&native_eol=QString::null,
               bool ignore_externals = false,
-              bool recurse = true
+              svn::Depth depth=svn::DepthInfinity
               ) throw (ClientException)=0;
 
     /**
@@ -408,9 +451,15 @@ namespace svn
      * @exception ClientException
      */
     virtual svn_revnum_t
-    doSwitch (const Path & path, const QString& url,
+    doSwitch (
+              const Path & path, const QString& url,
               const Revision & revision,
-              bool recurse) throw (ClientException)=0;
+              Depth depth,
+              const Revision & peg=Revision::UNDEFINED,
+              bool sticky_depth = true,
+              bool ignore_externals=false,
+              bool allow_unversioned=false
+             ) throw (ClientException)=0;
 
     /**
      * Import file or directory PATH into repository directory URL at
@@ -418,29 +467,17 @@ namespace svn
      * @param path path to import
      * @param url
      * @param message log message.
-     * @param recurse
+     * @param depth kind of recurse operation
+     * @param no_ignore if false, don't add items matching global ignore pattern (@since subversion 1.3)
+     * @param no_unknown_nodetype if true ignore files type not known like pipes or device files (@since subversion 1.5)
      * @exception ClientException
      */
-    virtual void
+    virtual svn::Revision
     import (const Path & path, const QString& url,
             const QString& message,
-            bool recurse) throw (ClientException)=0;
-    /**
-     * Import file or directory PATH into repository directory URL at
-     * head.  This usually requires authentication, see Auth.
-     * @param path path to import
-     * @param url
-     * @param message log message.
-     * @param recurse do it recursive?
-     * @param no_ignore if false, don't add items matching global ignore pattern
-     * @since subversion 1.3
-     * @exception ClientException
-     */
-    virtual void
-    import (const Path & path, const QString& url,
-            const QString& message,
-            bool recurse,
-            bool no_ignore) throw (ClientException)=0;
+            svn::Depth depth,
+            bool no_ignore,bool no_unknown_nodetype,
+            const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
 
     /**
      * Merge changes from two paths into a new local path.
@@ -450,27 +487,56 @@ namespace svn
     merge (const Path & path1, const Revision & revision1,
            const Path & path2, const Revision & revision2,
            const Path & localPath, bool force,
-           bool recurse,
+           Depth depth,
            bool notice_ancestry=false,
-           bool dry_run=false) throw (ClientException)=0;
+           bool dry_run=false,
+           bool record_only=false,
+           const StringArray&merge_options=StringArray()
+          ) throw (ClientException)=0;
+
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRanges&ranges,
+                      const Revision&peg,
+                      const Path&targetWc,
+                      Depth depth,
+                      bool notice_ancestry=false,
+                      bool dry_run=false,
+                      bool force=false,
+                      bool record_only=false,
+                      const StringArray&merge_options=StringArray()
+                     ) throw (ClientException)=0;
+
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRange&range,
+              const Revision&peg,
+              const Path&targetWc,
+              Depth depth,
+              bool notice_ancestry=false,
+              bool dry_run=false,
+              bool force=false,
+              const StringArray&merge_options=StringArray()
+             ) throw (ClientException)=0;
 
     /**
      * Retrieve information for the given path
-     * remote or local. Only gives with subversion 1.2
-     * usefull results
+     * remote or local.
      *
      * @param path path for info
      * @param rec recursive (if dir)
      * @param rev for which revision
      * @param peg_revision peg revision
      * @return InfoEntries
-     * @since subversion 1.2
      */
     virtual InfoEntries
-    info(const Path &path,
-          bool rec,
+    info (const Path &path,
+          Depth depth,
           const Revision & rev,
-          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+          const Revision & peg_revision=svn_opt_revision_unspecified,
+          const StringArray&changelists=StringArray()
+         ) throw (ClientException)=0;
+
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. The first
@@ -484,7 +550,7 @@ namespace svn
      * @param revisionEnd
      * @param discoverChangedPaths
      * @param strictNodeHistory
-     * @param limit (ignored when subversion 1.1 API)
+     * @param limit the maximum log entries count.
      * @return a vector with log entries
      */
     virtual LogEntriesPtr
@@ -493,7 +559,11 @@ namespace svn
          const Revision & revisionEnd,
          const Revision & revisionPeg,
          bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
+         bool strictNodeHistory=true,int limit = 0,
+         bool include_merged_revisions = false,
+         const StringArray&revprops=StringArray()
+        ) throw (ClientException)=0;
+
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored
@@ -517,7 +587,10 @@ namespace svn
          LogEntriesMap&target,
          const Revision & revisionPeg=Revision::UNDEFINED,
          bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0) throw (ClientException)=0;
+         bool strictNodeHistory=true,int limit = 0,
+         bool include_merged_revisions = false,
+         const StringArray&revprops=StringArray()
+        ) throw (ClientException)=0;
 
     /**
      * Produce diff output which describes the delta between
@@ -543,19 +616,22 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-    diff_peg(const Path & tmpPath, const Path & path,
+            diff_peg(const Path & tmpPath, const Path & path,const Path&relativeTo,
           const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
-          const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted,const bool ignore_contenttype,const QStringList&extra) throw (ClientException)=0;
+          Depth depth, bool ignoreAncestry,
+          bool noDiffDeleted,bool ignore_contenttype,
+          const StringArray&extra,
+          const StringArray&changelists
+            ) throw (ClientException)=0;
 
     /**
      * Same as other diff but extra options always set to empty list.
      */
     virtual QByteArray
-            diff_peg (const Path & tmpPath, const Path & path,
+            diff_peg (const Path & tmpPath, const Path & path,const Path&relativeTo,
                   const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
-                  const bool recurse, const bool ignoreAncestry,
-                  const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
+                  Depth depth, bool ignoreAncestry,
+                  bool noDiffDeleted,bool ignore_contenttype) throw (ClientException)=0;
 
     /**
      * Produce diff output which describes the delta between
@@ -582,19 +658,22 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-    diff (const Path & tmpPath, const Path & path1,const Path & path2,
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,const Path&relativeTo,
           const Revision & revision1, const Revision & revision2,
-          const bool recurse, const bool ignoreAncestry,
-          const bool noDiffDeleted,const bool ignore_contenttype,const QStringList&extra) throw (ClientException)=0;
+          Depth depth, bool ignoreAncestry,
+          bool noDiffDeleted,bool ignore_contenttype,
+          const StringArray&extra,
+          const StringArray&changelists
+         ) throw (ClientException)=0;
 
     /**
-     * Same as other diff but extra options always set to empty list.
+     * Same as other diff but extra options and changelists always set to empty list.
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path1,const Path & path2,
+            diff (const Path & tmpPath, const Path & path1,const Path & path2,const Path&relativeTo,
                   const Revision & revision1, const Revision & revision2,
-                  const bool recurse, const bool ignoreAncestry,
-                  const bool noDiffDeleted,const bool ignore_contenttype) throw (ClientException)=0;
+                  Depth depth, bool ignoreAncestry,
+                  bool noDiffDeleted,bool ignore_contenttype) throw (ClientException)=0;
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or
@@ -605,7 +684,7 @@ namespace svn
      * @param pathOrUrl
      * @param revision
      * @param peg at wich revision path exists
-     * @param recurse
+     * @param depth @sa depth
      * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with
      *         a relative path (only filename). In subversion >= 1.4 an entry without a name is returned, too. This
@@ -615,7 +694,7 @@ namespace svn
     list (const Path& pathOrUrl,
           const Revision& revision,
           const Revision& peg,
-          bool recurse,bool retrieve_locks) throw (ClientException)=0;
+          svn::Depth depth,bool retrieve_locks) throw (ClientException)=0;
 
     /**
      * lists properties in @a path no matter whether local or
@@ -631,7 +710,9 @@ namespace svn
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,
-             bool recurse=false)=0;
+             Depth depth=DepthEmpty,
+             const StringArray&changelists=StringArray()
+            )=0;
 
     /**
      * lists one property in @a path no matter whether local or
@@ -642,14 +723,15 @@ namespace svn
      * @param revision
      * @param peg most case should set to @a revision
      * @param recurse
-     * @return PathPropertiesMapList
+     * @return PathPropertiesMapList and revision where the properties are taken from (svn 1.5) or undefined revision (prior 1.5)
      */
-    virtual PathPropertiesMapList
+    virtual QPair<QLONG,PathPropertiesMapList>
     propget(const QString& propName,
             const Path &path,
             const Revision &revision,
             const Revision &peg,
-            bool recurse=false) = 0;
+            Depth depth = svn::DepthEmpty,
+            const StringArray&changelists=StringArray()) = 0;
 
     /**
      * set property in @a path no matter whether local or
@@ -667,9 +749,12 @@ namespace svn
     propset(const QString& propName,
             const QString& propValue,
             const Path &path,
-            const Revision &revision,
-            bool recurse=false,
-            bool skip_checks=false) = 0;
+            Depth depth=DepthEmpty,
+            bool skip_checks=false,
+            const Revision&base_revision=Revision::UNDEFINED,
+            const StringArray&changelists=StringArray(),
+            const PropertiesMap&revProps=PropertiesMap()
+           ) = 0;
 
     /**
      * delete property in @a path no matter whether local or
@@ -683,8 +768,10 @@ namespace svn
     virtual void
     propdel(const QString& propName,
             const Path &path,
-            const Revision &revision,
-            bool recurse=false)=0;
+            Depth depth=DepthEmpty,
+            bool skip_check=false,
+            const Revision&base_revision=Revision::UNDEFINED,
+            const StringArray&changelists=StringArray())=0;
 
 
     /**
@@ -695,7 +782,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<svn_revnum_t,PropertiesMap>
+    virtual QPair<QLONG,PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision)=0;
 
@@ -708,7 +795,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<svn_revnum_t,QString>
+    virtual QPair<QLONG,QString>
     revpropget(const QString& propName,
                const Path &path,
                const Revision &revision)=0;
@@ -724,7 +811,7 @@ namespace svn
      * @param force
      * @return Revision
      */
-    virtual svn_revnum_t
+    virtual QLONG
     revpropset(const QString& propName,
                const QString& propValue,
                const Path &path,
@@ -741,7 +828,7 @@ namespace svn
      * @param force
      * @return Revision
      */
-    virtual svn_revnum_t
+    virtual QLONG
     revpropdel(const QString& propName,
                const Path &path,
                const Revision &revision,

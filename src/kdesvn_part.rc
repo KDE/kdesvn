@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="15">
+<kpartgui name="kdesvn_part" version="16">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <Action name="kdesvnpart_pref" />
@@ -9,6 +9,7 @@
      <Action name="toggle_ignored_files" />
      <Action name="toggle_unknown_files" />
      <Action name="toggle_hide_unchanged_files" />
+     <Action name="toggle_network"/>
    </Menu>
   </Menu>
   <Menu name="subversion_main" >

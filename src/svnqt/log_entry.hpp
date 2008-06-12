@@ -42,6 +42,7 @@
 #include <qglobal.h>
 #include <qstring.h>
 #include <qvaluelist.h>
+#include <qmap.h>
 
 #else
 
@@ -54,6 +55,7 @@
 
 // subversion api
 #include "svn_types.h"
+#include "svn_version.h"
 
 namespace svn
 {
@@ -86,14 +88,9 @@ namespace svn
     //! future use or useful in backends
     QString copyToPath;
 
-#if QT_VERSION < 0x040000
-    Q_LLONG copyFromRevision;
+    QLONG copyFromRevision;
     //! future use or useful in backends
-    Q_LLONG copyToRevision;
-#else
-    qlonglong copyFromRevision;
-    qlonglong copyToRevision;
-#endif
+    QLONG copyToRevision;
   };
 
 #if QT_VERSION < 0x040000
@@ -111,19 +108,18 @@ namespace svn
               const char * author,
               const char * date,
               const char * message);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    LogEntry(svn_log_entry_t*);
+#endif
     void setDate(const char*date);
 
-#if QT_VERSION < 0x040000
     //! if -1 the entry is a fake entry and not real usable!
-    Q_LLONG revision;
-    Q_LLONG date;
-#else
-    qlonglong date;
-    qlonglong revision;
-#endif
+    QLONG revision;
+    QLONG date;
     QString author;
     QString message;
     LogChangePathEntries changedPaths;
+    QLIST<QLONG> m_MergedInRevisions;
   };
 }
 
@@ -139,4 +135,3 @@ SVNQT_EXPORT QDataStream &operator>>(QDataStream&s,svn::LogChangePathEntry&r);
  * eval: (load-file "../../rapidsvn-dev.el")
  * end:
  */
-

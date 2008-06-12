@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>310</width>
-            <height>249</height>
+            <width>275</width>
+            <height>185</height>
         </rect>
     </property>
     <property name="caption">
@@ -104,16 +104,19 @@
                 </property>
                 <widget class="QCheckBox">
                     <property name="name">
-                        <cstring>m_forceButton</cstring>
+                        <cstring>m_overwriteButton</cstring>
                     </property>
                     <property name="text">
-                        <string>Force</string>
+                        <string>Overwrite existing</string>
                     </property>
                     <property name="accel">
                         <string></string>
                     </property>
                     <property name="checked">
                         <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>May existing unversioned items ovewritten</string>
                     </property>
                 </widget>
                 <widget class="QCheckBox">
@@ -129,16 +132,37 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>m_ShowExplorer</cstring>
+                <cstring>layout4</cstring>
             </property>
-            <property name="text">
-                <string>Open after job</string>
-            </property>
-            <property name="checked">
-                <bool>true</bool>
-            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="DepthSelector">
+                    <property name="name">
+                        <cstring>m_DepthSelector</cstring>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>m_ShowExplorer</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Open after job</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
         </widget>
     </vbox>
 </widget>
@@ -160,6 +184,22 @@
         <pixmap>image0</pixmap>
         <property type="Bool">StartOnly</property>
     </customwidget>
+    <customwidget>
+        <class>DepthSelector</class>
+        <header location="local">src/ksvnwidgets/depthselector.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>30</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
 </customwidgets>
 <images>
     <image name="image0">
@@ -178,5 +218,6 @@
     <includehint>klineedit.h</includehint>
     <includehint>kpushbutton.h</includehint>
     <includehint>rangeinput_impl.h</includehint>
+    <includehint>src/ksvnwidgets/depthselector.h</includehint>
 </includehints>
 </UI>

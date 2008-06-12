@@ -19,10 +19,13 @@
  ***************************************************************************/
 #include "checkoutinfo_impl.h"
 #include "rangeinput_impl.h"
+#include "src/ksvnwidgets/depthselector.h"
 #include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
 #include <kurlrequester.h>
 #include <qlabel.h>
+#include <qtooltip.h>
+
 #include <klineedit.h>
 #include <qcheckbox.h>
 #include <klocale.h>
@@ -72,9 +75,9 @@ QString CheckoutInfo_impl::targetDir()
     return  m_TargetSelector->url()+"/"+l[l.count()-1];
 }
 
-bool CheckoutInfo_impl::forceIt()
+bool CheckoutInfo_impl::overwrite()
 {
-    return m_forceButton->isChecked();
+    return m_overwriteButton->isChecked();
 }
 
 /*!
@@ -100,26 +103,30 @@ void CheckoutInfo_impl::setStartUrl(const QString&what)
     m_UrlEdit->setURL(uri.prettyUrl());
 }
 
-void CheckoutInfo_impl::disableForce(bool how)
+void CheckoutInfo_impl::hideDepth(bool how,bool overwriteAsRecurse)
 {
     if (how) {
-        m_forceButton->setEnabled(false);
-        m_forceButton->hide();
+        m_DepthSelector->setEnabled(false);
+        m_DepthSelector->hide();
+        if (overwriteAsRecurse) {
+            QToolTip::add( m_overwriteButton, i18n( "Make operation recursive." ) );
+            m_overwriteButton->setText(i18n("Recursive"));
+        }
     } else if (!how) {
-        m_forceButton->setEnabled(false);
-        m_forceButton->show();
+        m_DepthSelector->setEnabled(false);
+        m_DepthSelector->show();
+        m_overwriteButton->setText( tr2i18n( "Overwrite existing" ) );
+        QToolTip::add( m_overwriteButton, tr2i18n( "May existing unversioned items ovewritten" ) );
     }
+    adjustSize();
 }
 
-void CheckoutInfo_impl::forceAsRecursive(bool how)
+svn::Depth CheckoutInfo_impl::getDepth()
 {
-    if (how) {
-        m_forceButton->setText(i18n("Recursive"));
-        m_forceButton->setChecked(true);
-    } else  {
-        m_forceButton->setText(i18n("Force"));
-        m_forceButton->setChecked(false);
+    if (m_DepthSelector->isEnabled()) {
+        return m_DepthSelector->getDepth();
     }
+    return svn::DepthUnknown;
 }
 
 void CheckoutInfo_impl::disableTargetDir(bool how)

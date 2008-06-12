@@ -21,8 +21,11 @@
 
 #include "contextdata.hpp"
 #include "context_listener.hpp"
+#include "conflictresult.hpp"
+#include "conflictdescription.hpp"
 
 #include <svn_config.h>
+#include <svn_wc.h>
 
 namespace svn {
 
@@ -173,16 +176,22 @@ ContextData::ContextData(const QString & configDir_)
 
       m_ctx->log_msg_func = onLogMsg;
       m_ctx->log_msg_baton = this;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 3)
+      // subversion 1.3 functions
       m_ctx->log_msg_func2 = onLogMsg2;
       m_ctx->log_msg_baton2 = this;
 
       m_ctx->progress_func = onProgress;
       m_ctx->progress_baton = this;
-#endif
+
 #if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
       m_ctx->log_msg_func3 = onLogMsg3;
       m_ctx->log_msg_baton3 = this;
+
+      m_ctx->conflict_func = onWcConflictResolver;
+      m_ctx->conflict_baton = this;
+
+      m_ctx->client_name = "SvnQt wrapper client";
+      initMimeTypes();
 #endif
 }
 
@@ -661,6 +670,58 @@ void ContextData::onProgress(apr_off_t progress, apr_off_t total, void*baton, ap
         return;
     }
     data->getListener()->contextProgress(progress,total);
+}
+
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+void ContextData::initMimeTypes()
+{
+    // code take from subversion 1.5 commandline client
+    const char *mimetypes_file;
+    svn_error_t * err = 0L;
+    svn_config_t * cfg = (svn_config_t *)apr_hash_get(m_ctx->config, SVN_CONFIG_CATEGORY_CONFIG,
+                       APR_HASH_KEY_STRING);
+
+    svn_config_get(cfg, &mimetypes_file,
+                   SVN_CONFIG_SECTION_MISCELLANY,
+                   SVN_CONFIG_OPTION_MIMETYPES_FILE, false);
+    if (mimetypes_file && *mimetypes_file) {
+        if ((err = svn_io_parse_mimetypes_file(&(m_ctx->mimetypes_map),
+             mimetypes_file, pool))) {
+                 svn_handle_error2(err, stderr, false, "svn: ");
+        }
+    }
+}
+#endif
+
+svn_error_t* ContextData::onWcConflictResolver(svn_wc_conflict_result_t**result,const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool)
+{
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+    ContextData * data = 0;
+    SVN_ERR (getContextData (baton, &data));
+    ConflictResult cresult;
+    if (!data->getListener()->contextConflictResolve(cresult,description)) {
+        return data->generate_cancel_error();
+    }
+    cresult.assignResult(result,pool);
+    return SVN_NO_ERROR;
+#else
+    Q_UNUSED(result);
+    Q_UNUSED(description);
+    Q_UNUSED(baton);
+    Q_UNUSED(pool);
+    return svn_error_create (SVN_ERR_CANCELLED, NULL,"invalid subversion version.");
+#endif
+}
+
+bool ContextListener::contextConflictResolve(ConflictResult&result,const ConflictDescription&description)
+{
+    Q_UNUSED(description);
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+    result.setChoice(ConflictResult::ChoosePostpone);
+#else
+    Q_UNUSED(result);
+#endif
+    return true;
 }
 
 }

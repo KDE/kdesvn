@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -43,6 +43,8 @@
 
 namespace svn
 {
+    class ConflictResult;
+    class ConflictDescription;
   /**
    * This is the interface that is used by @a Context
    * for callbacks.
@@ -229,6 +231,19 @@ namespace svn
      * @return translated text or origin.
      */
     virtual QString translate(const QString&what){return what;}
+
+    /** Callback for svn_wc_conflict_resolver_func_t in subversion 1.5
+     * This method is only useful when build with subverion 1.5 or above. The default implementation sets
+     * result to ConflictResult::ChoosePostpone. Then conflicts while merge, update and switch results in an
+     * item with "conflict" status set.
+     *
+     * @param result The result where to store
+     * @param description description of conflict.
+     * @return true if result may used and operaion should continue.
+     * @sa svn_wc_conflict_description_t, svn_wc_conflict_result_t
+     * @since subversion 1.5
+     */
+    virtual bool contextConflictResolve(ConflictResult&result,const ConflictDescription&description);
   };
 }
 

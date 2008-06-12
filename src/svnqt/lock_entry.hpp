@@ -69,7 +69,7 @@ namespace svn
     const QString&Token()const;
     const DateTime&Date()const;
     const DateTime&Expiration()const;
-    const bool Locked()const;
+    bool Locked()const;
 
   protected:
     DateTime date;

@@ -42,7 +42,7 @@ namespace svn
   public:
     QString name;
     svn_node_kind_t kind;
-    svn_filesize_t size;
+    QLONG size;
     bool hasProps;
     svn_revnum_t createdRev;
     DateTime time;
@@ -120,7 +120,7 @@ namespace svn
     return m->kind;
   }
 
-  svn_filesize_t
+  QLONG
   DirEntry::size () const
   {
     return m->size;

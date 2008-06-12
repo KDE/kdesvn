@@ -25,16 +25,22 @@
 class Createrepo_impl: public CreateRepo_Dlg {
     Q_OBJECT
 public:
-    Createrepo_impl(bool enable_compat, QWidget *parent = 0, const char *name = 0);
+    Createrepo_impl(bool enable_compat13,bool enable_compat14, QWidget *parent = 0, const char *name = 0);
     QString targetDir();
     QString fsType();
     bool disableFsync();
     bool keepLogs();
     bool createMain();
     bool compat13()const;
+    bool compat14()const;
 
 protected slots:
     virtual void fsTypeChanged(int);
+    virtual void compatChanged14(bool);
+    virtual void compatChanged13(bool);
+
+protected:
+    bool inChangeCompat;
 };
 
 #endif

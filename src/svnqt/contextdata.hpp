@@ -31,6 +31,9 @@
 #endif
 #include <qstring.h>
 
+struct svn_wc_conflict_result_t;
+struct svn_wc_conflict_description_t;
+
 namespace svn {
 
     class ContextListener;
@@ -270,8 +273,22 @@ protected:
      */
     static void onProgress(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *pool);
 
+    /**
+     * @see svn_wc_conflict_resolver_func_t
+     * @since subversion 1.5
+     */
+    static svn_error_t* onWcConflictResolver(svn_wc_conflict_result_t**result,const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool);
+
+    // extra methods
     svn_error_t *
         generate_cancel_error();
+
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+    /** read in mimetypes map
+     * @since subversion 1.5
+     */
+    void initMimeTypes();
+#endif
 protected:
     Apr apr;
 

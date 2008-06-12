@@ -126,8 +126,10 @@ svn_error_t * RepositoryData::Open(const QString&path)
 /*!
     \fn svn::RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false, bool _bdbautologremove = true, bool nosvn1diff=false)
  */
-svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync, bool _bdbautologremove,
-    bool _pre_1_4_compat)
+svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync,
+                                          bool _bdbautologremove,
+                                          bool _pre_1_4_compat,
+                                          bool _pre_1_5_compat)
 {
     Close();
     const char* _type;
@@ -153,13 +155,24 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
                  APR_HASH_KEY_STRING,
                  _type);
 
-    /// @todo comes with 1.4!
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4) || SVN_VER_MAJOR>1)
     if (_pre_1_4_compat) {
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+        qDebug("Pre 14");
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_4_COMPATIBLE,
             APR_HASH_KEY_STRING,"1");
-#endif
     }
+#else
+    Q_UNUSED(_pre_1_4_compat);
+#endif
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || SVN_VER_MAJOR>1)
+    if (_pre_1_5_compat) {
+        qDebug("Pre 15");
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE,
+                     APR_HASH_KEY_STRING,"1");
+    }
+#else
+    Q_UNUSED(_pre_1_5_compat);
+#endif
     /// @todo config as extra paramter? Meanwhile default config only
     /// (see svn::ContextData)
     SVN_ERR(svn_config_get_config(&config, 0, m_Pool));

@@ -196,7 +196,7 @@ void kio_svnProtocol::listDir(const KUrl&url)
     }
 
     try {
-        dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,rev,false,false);
+        dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,rev,svn::DepthImmediates,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         kDebug()<<ex<<endl;
@@ -236,7 +236,7 @@ void kio_svnProtocol::stat(const KUrl& url)
     QString s = makeSvnUrl(url);
     svn::InfoEntries e;
     try {
-         e = m_pData->m_Svnclient->info(s,false,rev,peg);
+         e = m_pData->m_Svnclient->info(s,svn::DepthEmpty,rev,peg);
     } catch  (svn::ClientException e) {
         QString ex = e.msg();
         kDebug()<<ex<<endl;
@@ -394,7 +394,7 @@ bool kio_svnProtocol::checkWc(const KUrl&url)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_pData->m_Svnclient->info(url.prettyUrl(),false,rev,peg);
+        e = m_pData->m_Svnclient->info(url.prettyUrl(),svn::DepthEmpty,rev,peg);
     } catch (svn::ClientException e) {
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
         {
@@ -643,9 +643,10 @@ void kio_svnProtocol::update(const KUrl&url,int revnumber,const QString&revkind)
     svn::Path p(url.path());
     try {
         svn::Targets pathes(p.path());
-        // recursive second last parameter
-        // always update externals, too. (last parameter)
-        m_pData->m_Svnclient->update(pathes, where,true,false);
+        // always update externals, too. (third last parameter)
+        // no unversioned items allowed (second last parameter)
+        // sticky depth (last parameter)
+        m_pData->m_Svnclient->update(pathes, where,svn::DepthInfinity,false,false,true);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -657,7 +658,7 @@ void kio_svnProtocol::status(const KUrl&wc,bool cR,bool rec)
     svn::StatusEntries dlist;
     try {
         //                                            rec all  up     noign
-        dlist = m_pData->m_Svnclient->status(wc.path(),rec,false,cR,false,where);
+        dlist = m_pData->m_Svnclient->status(wc.path(),rec?svn::DepthInfinity:svn::DepthEmpty,false,cR,false,where);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
@@ -715,7 +716,7 @@ void kio_svnProtocol::commit(const KUrl::List&url)
     }
     svn::Revision nnum=svn::Revision::UNDEFINED;
     try {
-        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,true,false);
+        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,svn::DepthInfinity,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -745,7 +746,7 @@ void kio_svnProtocol::checkout(const KUrl&src,const KUrl&target,const int rev, c
     KUrl _src = makeSvnUrl(src);
     svn::Path _target(target.path());
     try {
-        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,true,false);
+        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,svn::DepthInfinity,false,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -807,7 +808,7 @@ void kio_svnProtocol::revert(const KUrl::List&l)
     }
     svn::Targets target(list);
     try {
-        m_pData->m_Svnclient->revert(target,false);
+        m_pData->m_Svnclient->revert(target,svn::DepthEmpty);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -818,7 +819,7 @@ void kio_svnProtocol::wc_switch(const KUrl&wc,const KUrl&target,bool rec,int rev
     svn::Revision where(rev,revstring);
     svn::Path wc_path(wc.path());
     try {
-        m_pData->m_Svnclient->doSwitch(wc_path,makeSvnUrl(target.url()),where,rec);
+        m_pData->m_Svnclient->doSwitch(wc_path,makeSvnUrl(target.url()),where,rec?svn::DepthInfinity:svn::DepthFiles);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -840,7 +841,7 @@ void kio_svnProtocol::diff(const KUrl&uri1,const KUrl&uri2,int rnum1,const QStri
     /// @todo read settings for diff (ignore contentype)
     try {
         ex = m_pData->m_Svnclient->diff(svn::Path(tdir.name()),
-        u1,u2,r1, r2,rec,false,false,false);
+                                        u1,u2,svn::Path(),r1, r2,rec?svn::DepthInfinity:svn::DepthEmpty,false,false,false);
     } catch (svn::ClientException e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
@@ -858,7 +859,7 @@ void kio_svnProtocol::import(const KUrl& repos, const KUrl& wc)
     QString target = makeSvnUrl(repos);
     QString path = wc.path();
     try {
-        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,true);
+        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,svn::DepthInfinity,false,false);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
@@ -871,7 +872,7 @@ void kio_svnProtocol::add(const KUrl& wc)
     QString path = wc.path();
     try {
                                                /* rec */
-        m_pData->m_Svnclient->add(svn::Path(path),true);
+        m_pData->m_Svnclient->add(svn::Path(path),svn::DepthInfinity);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
@@ -897,7 +898,8 @@ void kio_svnProtocol::wc_delete(const KUrl::List&l)
 void kio_svnProtocol::wc_resolve(const KUrl&url,bool recurse)
 {
     try {
-        m_pData->m_Svnclient->resolved(url.path(),recurse);
+        svn::Depth depth=recurse?svn::DepthInfinity:svn::DepthEmpty;
+        m_pData->m_Svnclient->resolve(url.path(),depth);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

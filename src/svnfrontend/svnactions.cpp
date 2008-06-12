@@ -32,6 +32,7 @@
 #include "src/ksvnwidgets/logmsg_impl.h"
 #include "src/ksvnwidgets/diffbrowser.h"
 #include "src/ksvnwidgets/encodingselector_impl.h"
+#include "src/ksvnwidgets/revertform_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/client.hpp"
@@ -327,14 +328,14 @@ bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStrin
     return res;
 }
 
-bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::InfoEntry&target)
+bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::InfoEntry&target,const svn::Revision&_peg)
 {
     QString url;
     QString ex;
     QString cacheKey;
     QTime d; d.start();
     svn::Revision rev = _rev;
-    svn::Revision peg;
+    svn::Revision peg = _peg;
     if (!m_Data->m_CurrentContext) return false;
     if (!svn::Url::isValid(what)) {
         // working copy
@@ -350,14 +351,17 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         QString prot = svn::Url::transformProtokoll(_uri.protocol());
         _uri.setProtocol(prot);
         url = _uri.prettyUrl();
-        peg = _rev;
+        if (peg==svn::Revision::UNDEFINED)
+        {
+            peg = _rev;
+        }
         cacheKey=_rev.toString()+"/"+url;
     }
     svn::InfoEntries e;
 
     if (cacheKey.isEmpty() || !m_Data->m_InfoCache.findSingleValid(cacheKey,target)) {
         try {
-            e = (m_Data->m_Svnclient->info(url,false,_rev,peg));
+            e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
         } catch (const svn::Exception&ce) {
             kDebug()<<ce.msg() << endl;
             emit clientException(ce.msg());
@@ -370,14 +374,12 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         }
         target = e[0];
         if (!cacheKey.isEmpty()) {
-            if (peg != svn::Revision::UNDEFINED) {
+            m_Data->m_InfoCache.insertKey(e[0],cacheKey);
+            if (peg != svn::Revision::UNDEFINED && peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
+                // for persistent storage, store head into persistent cache makes no sense.
+                cacheKey=e[0].revision().toString()+"/"+url;
+                kdDebug()<<"Extra: "<<cacheKey<<endl;
                 m_Data->m_InfoCache.insertKey(e[0],cacheKey);
-                if (peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
-                    // for persistent storage, store head into persistent cache makes no sense.
-                    cacheKey=e[0].revision().toString()+"/"+url;
-                    kdDebug()<<"Extra: "<<cacheKey<<endl;
-                    m_Data->m_InfoCache.insertKey(e[0],cacheKey);
-                }
             }
         }
     }
@@ -631,14 +633,14 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
             svn::InfoEntries e;
             entries = (m_Data->m_Svnclient->info(_what+
-                    (_what.find("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive,rev,peg));
+                    (_what.find("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive?svn::DepthInfinity:svn::DepthEmpty,rev,peg));
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
             return QString::null;
         }
     } else {
         svn::InfoEntry info;
-        if (!singleInfo(_what,rev,info)) {
+        if (!singleInfo(_what,rev,info,peg)) {
             return QString::null;
         }
         entries.append(info);
@@ -842,11 +844,11 @@ bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QValueL
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         unsigned int pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path),svn::Revision::WORKING);
+            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path));
         }
         svn::PropertiesMap::ConstIterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_Data->m_Svnclient->propset(it.key(),it.data(),svn::Path(path),svn::Revision::WORKING);
+            m_Data->m_Svnclient->propset(it.key(),it.data(),svn::Path(path));
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -860,9 +862,9 @@ bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QValueL
  */
 void SvnActions::slotCommit()
 {
-    /// @todo remove reference to parentlist
-    if (!m_Data->m_CurrentContext) return;
-    if (!m_Data->m_ParentList->isWorkingCopy()) return;
+    if (!m_Data->m_CurrentContext||!m_Data->m_ParentList->isWorkingCopy()) {
+        return;
+    }
     Q3PtrList<SvnItem> which;
     m_Data->m_ParentList->SelectionList(&which);
     SvnItem*cur;
@@ -879,20 +881,29 @@ void SvnActions::slotCommit()
                                        ));
         }
     }
-    makeCommit(targets);
+    if (makeCommit(targets)) {
+        startFillCache(m_Data->m_ParentList->baseUri());
+    }
 }
 
 bool SvnActions::makeCommit(const svn::Targets&targets)
 {
-    bool ok,rec,keeplocks;
+    bool ok,keeplocks;
+    svn::Depth depth;
     svn::Revision nnum;
     svn::Targets _targets;
     svn::Pathes _deldir;
     bool review = Kdesvnsettings::review_commit();
     QString msg,_p;
 
+    if (!doNetworking()) {
+        emit clientException(i18n("Not commiting because networking is disabled"));
+        return false;
+    }
+
+    stopFillCache();
     if (!review) {
-        msg = Logmsg_impl::getLogmessage(&ok,&rec,&keeplocks,
+        msg = Logmsg_impl::getLogmessage(&ok,&depth,&keeplocks,
             m_Data->m_ParentList->realWidget(),"logmsg_impl");
         if (!ok) {
             return false;
@@ -901,13 +912,13 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     } else {
         Logmsg_impl::logActionEntries _check,_uncheck,_result;
         svn::StatusEntries _Cache;
-        rec = false;
+        depth=svn::DepthEmpty;
         /// @todo filter out double entries
         for (unsigned j = 0; j < targets.size(); ++j) {
             svn::Revision where = svn::Revision::HEAD;
             try {
                 StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
-                _Cache = m_Data->m_Svnclient->status(targets.target(j).path(),true,false,false,false,where);
+                _Cache = m_Data->m_Svnclient->status(targets.target(j).path(),svn::DepthInfinity,false,false,false,where);
             } catch (const svn::Exception&e) {
                 emit clientException(e.msg());
                 return false;
@@ -943,7 +954,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             if (_result[i]._kind==Logmsg_impl::logActionEntry::DELETE) {
                 QFileInfo fi(_result[i]._name);
                 if (fi.isDir()) {
-                    rec = true;
+                    depth = svn::DepthInfinity;
                 }
             }
             _commit.append(_result[i]._name);
@@ -954,7 +965,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             }
         }
         if (_add.count()>0) {
-            if (!addItems(_add,false)) {
+            if (!addItems(_add,svn::DepthEmpty)) {
                 return false;
             }
         }
@@ -968,7 +979,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Commiting"),
             i18n("Commiting - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->commit(_targets,msg,rec,keeplocks);
+        nnum = m_Data->m_Svnclient->commit(_targets,msg,depth,keeplocks);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -1104,7 +1115,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 return;
             }
         } else {
-            if (!makeCheckout(p1,first,start,peg,true,true,false,false,rec,p)) {
+            if (!makeCheckout(p1,first,start,peg,
+                 rec?svn::DepthInfinity:svn::DepthFiles,true,false,false,false,p)) {
                 return;
             }
         }
@@ -1115,7 +1127,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                 return;
             }
         } else {
-            if (!makeCheckout(p2,second,end,peg,true,true,false,false,rec,p)) {
+            if (!makeCheckout(p2,second,end,peg,
+                 rec?svn::DepthInfinity:svn::DepthFiles,true,false,false,false,p)) {
                 return;
             }
         }
@@ -1190,13 +1203,13 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
             kDebug()<<"Pegged diff"<<endl;
             ex = m_Data->m_Svnclient->diff_peg(svn::Path(tn),
-                svn::Path(p1),r1, r2,peg,
-                true,false,false,ignore_content,extraOptions);
+                svn::Path(p1),svn::Path(),r1, r2,peg,
+                svn::DepthInfinity,false,false,ignore_content,extraOptions,svn::StringArray());
         } else {
             ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-                svn::Path(p1),svn::Path(p2),
+                svn::Path(p1),svn::Path(p2),svn::Path(),
                 r1, r2,
-                true,false,false,ignore_content,extraOptions);
+                svn::DepthInfinity,false,false,ignore_content,extraOptions,svn::StringArray());
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1239,9 +1252,9 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
         StopDlg sdlg(m_Data->m_SvnContext,_p?_p:m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-            svn::Path(p1),svn::Path(p2),
+            svn::Path(p1),svn::Path(p2),svn::Path(),
             r1, r2,
-            false,false,false,ignore_content,extraOptions);
+            svn::DepthEmpty,false,false,ignore_content,extraOptions,svn::StringArray());
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
@@ -1348,8 +1361,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
             i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets pathes(what);
-        // always update externals, too. (last parameter)
-        ret = m_Data->m_Svnclient->update(pathes,rev, recurse,false);
+        ret = m_Data->m_Svnclient->update(pathes,rev, recurse?svn::DepthInfinity:svn::DepthFiles,false,false,true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
@@ -1454,7 +1466,7 @@ void SvnActions::makeAdd(bool rec)
         }
         items.push_back(svn::Path(cur->fullName()));
     }
-    addItems(items,rec);
+    addItems(items,rec?svn::DepthInfinity:svn::DepthEmpty);
     liter.toFirst();
 #if 0
     while ((cur=liter.current())!=0){
@@ -1468,22 +1480,22 @@ void SvnActions::makeAdd(bool rec)
 #endif
 }
 
-bool SvnActions::addItems(const QStringList&w,bool rec)
+bool SvnActions::addItems(const QStringList&w,svn::Depth depth)
 {
     Q3ValueList<svn::Path> items;
     for (unsigned int i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
-    return addItems(items,rec);
+    return addItems(items,depth);
 }
 
-bool SvnActions::addItems(const Q3ValueList<svn::Path> &items,bool rec)
+bool SvnActions::addItems(const Q3ValueList<svn::Path> &items,svn::Depth depth)
 {
     QString ex;
     try {
         Q3ValueList<svn::Path>::const_iterator piter;
         for (piter=items.begin();piter!=items.end();++piter) {
-            m_Data->m_Svnclient->add((*piter),rec);
+            m_Data->m_Svnclient->add((*piter),depth);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1523,23 +1535,6 @@ bool SvnActions::makeDelete(const svn::Pathes&items)
     return true;
 }
 
-void SvnActions::CheckoutExport(bool _exp)
-{
-    CheckoutInfo_impl*ptr;
-    KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
-    if (dlg) {
-        ptr->forceAsRecursive(!_exp);
-        if (dlg->exec()==QDialog::Accepted) {
-            svn::Revision r = ptr->toRevision();
-            bool openit = ptr->openAfterJob();
-            bool ignoreExternal=ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->forceIt(),_exp,openit,ignoreExternal,true,0);
-        }
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
-        delete dlg;
-    }
-}
-
 void SvnActions::slotCheckout()
 {
     CheckoutExport(false);
@@ -1548,6 +1543,57 @@ void SvnActions::slotCheckout()
 void SvnActions::slotExport()
 {
     CheckoutExport(true);
+}
+
+void SvnActions::slotCheckoutCurrent()
+{
+    CheckoutExportCurrent(false);
+}
+
+void SvnActions::slotExportCurrent()
+{
+    CheckoutExportCurrent(true);
+}
+
+void SvnActions::CheckoutExport(bool _exp)
+{
+    CheckoutInfo_impl*ptr;
+    KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
+    if (dlg) {
+        if (dlg->exec()==QDialog::Accepted) {
+            svn::Revision r = ptr->toRevision();
+            bool openit = ptr->openAfterJob();
+            bool ignoreExternal=ptr->ignoreExternals();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,
+                         ptr->getDepth(),
+                         _exp,
+                         openit,
+                         ignoreExternal,
+                         ptr->overwrite(),0);
+        }
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
+        delete dlg;
+    }
+}
+
+void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
+{
+    CheckoutInfo_impl*ptr;
+    KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
+    if (dlg) {
+        if (!urlisTarget) {
+            ptr->setStartUrl(what);
+        } else {
+            ptr->setTargetUrl(what);
+        }
+        if (dlg->exec()==QDialog::Accepted) {
+            svn::Revision r = ptr->toRevision();
+            bool openIt = ptr->openAfterJob();
+            bool ignoreExternal = ptr->ignoreExternals();
+            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->getDepth(),_exp,openIt,ignoreExternal,ptr->overwrite(),0);
+        }
+        delete dlg;
+    }
 }
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
@@ -1567,38 +1613,18 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     CheckoutExport(what,_exp);
 }
 
-void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
-{
-    CheckoutInfo_impl*ptr;
-    KDialog * dlg = createDialog(&ptr,_exp?i18n("Export a repository"):i18n("Checkout a repository"),true);
-    if (dlg) {
-        if (!urlisTarget) {
-            ptr->setStartUrl(what);
-        } else {
-            ptr->setTargetUrl(what);
-        }
-        ptr->forceAsRecursive(!_exp);
-        if (dlg->exec()==QDialog::Accepted) {
-            svn::Revision r = ptr->toRevision();
-            bool openIt = ptr->openAfterJob();
-            bool ignoreExternal = ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(),ptr->targetDir(),r,r,ptr->forceIt(),_exp,openIt,ignoreExternal,true,0);
-        }
-        delete dlg;
-    }
-}
-
-void SvnActions::slotCheckoutCurrent()
-{
-    CheckoutExportCurrent(false);
-}
-
-void SvnActions::slotExportCurrent()
-{
-    CheckoutExportCurrent(true);
-}
-
-bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,const svn::Revision&_peg,bool force_recurse,bool _exp,bool openIt,bool ignoreExternal,bool exp_rec, QWidget*_p)
+bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::Revision&r,const svn::Revision&_peg,
+                              svn::Depth depth,
+                              // kind of operation
+                              bool _exp,
+                              // open after job
+                              bool openIt,
+                              // ignore externals
+                              bool ignoreExternal,
+                              // overwrite/force not versioned items
+                              bool overwrite,
+                              QWidget*_p
+                             )
 {
     QString fUrl = rUrl;
     QString ex;
@@ -1616,9 +1642,9 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (_exp) {
             /// @todo setup parameter for export operation
-            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,force_recurse,QString::null,ignoreExternal,exp_rec);
+            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,overwrite,QString::null,ignoreExternal,depth);
         } else {
-            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,force_recurse,ignoreExternal);
+            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,depth,ignoreExternal,overwrite);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1629,6 +1655,7 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         else KToolInvocation::invokeBrowser(tPath);
     }
     EMIT_FINISHED;
+
     return true;
 }
 
@@ -1654,16 +1681,7 @@ void SvnActions::slotRevert()
         displist.push_back(m_Data->m_ParentList->baseUri());
     }
     slotRevertItems(displist);
-#if 0
-    liter.toFirst();
-    while ((cur=liter.current())!=0){
-        ++liter;
-        cur->refreshStatus(true,&lst,false);
-        cur->refreshStatus(false,&lst,true);
-    }
-#else
     EMIT_REFRESH;
-#endif
 }
 
 void SvnActions::slotRevertItems(const QStringList&displist)
@@ -1672,21 +1690,19 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     if (displist.count()==0) {
         return;
     }
-    KDialogBase*dialog = new KDialogBase(
-                i18n("Revert entries"),
-                KDialogBase::Yes | KDialogBase::No,
-                KDialogBase::No, KDialogBase::No,
-                m_Data->m_ParentList->realWidget(),"warningRevert",true,true);
 
-    bool checkboxres = true;
-
-    int result = KMessageBox::createKMessageBox(dialog,QMessageBox::Warning,
-        i18n("Really revert these entries to pristine state?"), displist, i18n("Recursive"),
-        &checkboxres,
-        KMessageBox::Dangerous);
-    if (result != KDialogBase::Yes) {
+    svn::Depth depth;
+    RevertFormImpl*ptr;
+    KDialog * dlg = createDialog(&ptr,i18n("Revert entries"),true);
+    if (!dlg) {
         return;
     }
+    ptr->setDispList(displist);
+    if (dlg->exec()!=QDialog::Accepted) {
+        delete dlg;
+        return;
+    }
+    depth = ptr->getDepth();
 
     Q3ValueList<svn::Path> items;
     for (unsigned j = 0; j<displist.count();++j) {
@@ -1698,20 +1714,20 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Revert"),i18n("Reverting items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets target(items);
-        m_Data->m_Svnclient->revert(target,checkboxres);
+        m_Data->m_Svnclient->revert(target,depth);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
     }
     // remove them from cache
     for (unsigned int j = 0; j<items.count();++j) {
-        m_Data->m_Cache.deleteKey(items[j].path(),!checkboxres);
+        m_Data->m_Cache.deleteKey(items[j].path(),depth!=svn::DepthInfinity);
 //        m_Data->m_Cache.dump_tree();
     }
     EMIT_FINISHED;
 }
 
-bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec)
+bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,svn::Depth depth,const svn::Revision&peg,bool stickydepth,bool ignore_externals,bool allow_unversioned)
 {
     if (!m_Data->m_CurrentContext) return false;
     QString fUrl = rUrl;
@@ -1723,7 +1739,7 @@ bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Switch url"),i18n("Switching url"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->doSwitch(p,fUrl,r,rec);
+        m_Data->m_Svnclient->doSwitch(p,fUrl,r,depth,peg,stickydepth,ignore_externals,allow_unversioned);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -1755,7 +1771,6 @@ bool SvnActions::makeRelocate(const QString&fUrl,const QString&tUrl,const QStrin
     }
     EMIT_FINISHED;
     return true;
-
 }
 
 void SvnActions::slotSwitch()
@@ -1792,13 +1807,12 @@ bool SvnActions::makeSwitch(const QString&path,const QString&what)
     bool done = false;
     if (dlg) {
         ptr->setStartUrl(what);
-        ptr->forceAsRecursive(true);
         ptr->disableAppend(true);
         ptr->disableTargetDir(true);
         ptr->disableOpen(true);
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
-            done = makeSwitch(ptr->reposURL(),path,r,ptr->forceIt());
+            done = makeSwitch(ptr->reposURL(),path,r,ptr->getDepth(),r,true,ptr->ignoreExternals(),ptr->overwrite());
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"switch_url_dlg",false);
         delete dlg;
@@ -1826,7 +1840,7 @@ void SvnActions::slotResolved(const QString&path)
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Resolve"),i18n("Marking resolved"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->resolved(svn::Path(path),true);
+        m_Data->m_Svnclient->resolve(svn::Path(path),svn::DepthEmpty);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
@@ -1886,13 +1900,14 @@ void SvnActions::slotResolve(const QString&p)
     return;
 }
 
-void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,bool rec)
+void SvnActions::slotImport(const QString&path,const QString&target,const QString&message,svn::Depth depth,
+                            bool noIgnore,bool noUnknown)
 {
     if (!m_Data->m_CurrentContext) return;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Import"),i18n("Importing items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->import(svn::Path(path),target,message,rec);
+        m_Data->m_Svnclient->import(svn::Path(path),target,message,depth,noIgnore,noUnknown);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
@@ -1979,7 +1994,12 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
 
     if (rev1 != svn::Revision::WORKING) {
         if (isDir) {
-            if (!makeCheckout(src1,first,rev1,svn::Revision::UNDEFINED,true,true,false,false,rec,0)) {
+            if (!makeCheckout(src1,first,rev1,svn::Revision::UNDEFINED,
+                 rec?svn::DepthInfinity:svn::DepthFiles,
+                 true,
+                 false,
+                 false,
+                 false,0)) {
                 return;
             }
         } else {
@@ -1992,7 +2012,9 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     if (!singleMerge) {
         if (rev2!=svn::Revision::WORKING) {
             if (isDir) {
-                if (!makeCheckout(src2,second,rev2,svn::Revision::UNDEFINED,true,true,false,false,rec,0)) {
+                if (!makeCheckout(src2,second,rev2,svn::Revision::UNDEFINED,
+                     rec?svn::DepthInfinity:svn::DepthFiles,
+                     true,false,false,false,0)) {
                     return;
                 }
             } else {
@@ -2054,7 +2076,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
             svn::Path(s2),
             rev2,
             svn::Path(target),
-            forceIt,rec,ancestry,dry);
+            forceIt,rec?svn::DepthInfinity:svn::DepthFiles,ancestry,dry);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
@@ -2067,14 +2089,17 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
 {
     if (!m_Data->m_CurrentContext) return false;
-    kdDebug()<<"Force: "<<force << endl;
+    svn::Revision nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item "));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
+        nnum = m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
+    }
+    if (nnum != svn::Revision::UNDEFINED) {
+        emit sendNotify(i18n("Committed revision %1.").arg(nnum.toString()));
     }
     EMIT_REFRESH;
     return true;
@@ -2082,19 +2107,24 @@ bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
 
 bool SvnActions::makeMove(const KUrl::List&Old,const QString&New,bool force)
 {
+    svn::Revision nnum;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KUrl::List::ConstIterator it = Old.begin();
         bool local = false;
+
         if ((*it).protocol().isEmpty()) {
             local = true;
         }
+        it = Old.begin();
+        svn::Pathes p;
         for (;it!=Old.end();++it) {
-            svn::Path NPath(New);
-            NPath.addComponent((*it).fileName());
-            m_Data->m_Svnclient->move((local?(*it).path():(*it).url()),NPath,force);
+            p.append((local?(*it).path():(*it).url()));
         }
+        svn::Targets t(p);
+        svn::Path NPath(New);
+        m_Data->m_Svnclient->move(t,NPath,force,true,false);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2119,13 +2149,22 @@ bool SvnActions::makeCopy(const QString&Old,const QString&New,const svn::Revisio
 
 bool SvnActions::makeCopy(const KUrl::List&Old,const QString&New,const svn::Revision&rev)
 {
+    KURL::List::ConstIterator it = Old.begin();
+    svn::Pathes p;
+    bool local = false;
+    if ((*it).protocol().isEmpty()) {
+        local = true;
+    }
+    for (;it!=Old.end();++it) {
+        p.append((local?(*it).path():(*it).url()));
+    }
+    svn::Targets t(p);
+
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         KUrl::List::ConstIterator it = Old.begin();
-        for (;it!=Old.end();++it) {
-            m_Data->m_Svnclient->copy(svn::Path((*it). pathOrUrl()),rev,svn::Path(New));
-        }
+        m_Data->m_Svnclient->copy(t,rev,rev,svn::Path(New),true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2189,11 +2228,12 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, svn::R
 {
     bool disp_remote_details = Kdesvnsettings::details_on_remote_listing();
     QString ex;
+    svn::Depth _d=rec?svn::DepthInfinity:svn::DepthImmediates;
     try {
         StopDlg sdlg(m_Data->m_SvnContext,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         //                                      rec all  up     noign
-        dlist = m_Data->m_Svnclient->status(what,rec,all,updates,display_ignores,where,disp_remote_details,false);
+        dlist = m_Data->m_Svnclient->status(what,_d,all,updates,display_ignores,where,disp_remote_details,false);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2237,7 +2277,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
                 ++it;
             }
             if (displist.count()>0) {
-                addItems(displist,false);
+                addItems(displist,svn::DepthEmpty);
             }
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"add_items_dlg",false);
@@ -2438,9 +2478,41 @@ void SvnActions::startFillCache(const QString&path)
     if (!singleInfo(path,svn::Revision::HEAD,e)) {
         return;
     }
+    if (!doNetworking()) {
+        emit sendNotify(i18n("Not filling logcache because networking is disabled"));
+        return;
+    }
     m_FCThread=new FillCacheThread(this,e.reposRoot());
     m_FCThread->start();
     emit sendNotify(i18n("Filling log cache in background"));
+}
+
+bool SvnActions::doNetworking()
+{
+    if (Kdesvnsettings::network_on()||!m_Data->m_ParentList) {
+        return true;
+    }
+    bool is_url=false;
+    if (m_Data->m_ParentList->isNetworked()) {
+        is_url=true;
+    } else {
+        svn::InfoEntry e;
+        if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
+            return false;
+        }
+        is_url = !e.reposRoot().startsWith("file:/");
+    }
+    return !is_url;
+}
+
+bool SvnActions::event(QEvent * e)
+{
+    if (e->type()==EVENT_LOGCACHE_FINISHED) {
+        emit sendNotify(i18n("Filling log cache in background finished."));
+        stopFillCache();
+        return true;
+    }
+    return false;
 }
 
 /*!
@@ -2451,6 +2523,11 @@ bool SvnActions::createUpdateCache(const QString&what)
     clearUpdateCache();
     m_Data->m_repoLockCache.clear();
     stopCheckUpdateThread();
+    if (!doNetworking()) {
+        emit sendNotify(i18n("Not checking for updates because networking is disabled"));
+        return false;
+    }
+
     m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();
     m_Data->m_UpdateCheckTimer.start(100,true);
@@ -2499,13 +2576,15 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     QString ex;
     svn::Path p(parentName);
     svn::Revision r(svn_opt_revision_unspecified);
-    svn::PathPropertiesMapList pm;
+
+    QPair<QLONG,svn::PathPropertiesMapList> pmp;
     try {
-        pm = m_Data->m_Svnclient->propget("svn:ignore",p,r,r);
+        pmp = m_Data->m_Svnclient->propget("svn:ignore",p,r,r);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
     }
+    svn::PathPropertiesMapList pm = pmp.second;
     QString data = "";
     if (pm.size()>0) {
         svn::PropertiesMap&mp = pm[0].second;
@@ -2528,7 +2607,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     if (result) {
         data = lst.join("\n");
         try {
-            m_Data->m_Svnclient->propset("svn:ignore",data,p,r);
+            m_Data->m_Svnclient->propset("svn:ignore",data,p);
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
             return false;
@@ -2573,14 +2652,16 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
     if (!which) return false;
     QString ex;
     svn::Path p(which->fullName());
-    svn::PathPropertiesMapList pm;
+
+    QPair<QLONG,svn::PathPropertiesMapList> pmp;
     try {
-        pm = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
+        pmp = m_Data->m_Svnclient->propget("svn:needs-lock",p,where,where);
     } catch (const svn::Exception&e) {
         /* no messagebox needed */
         //emit clientException(e.msg());
         return false;
     }
+    svn::PathPropertiesMapList pm = pmp.second;
     if (pm.size()>0) {
         svn::PropertiesMap&mp = pm[0].second;
         if (mp.find("svn:needs-lock")!=mp.end()) {
@@ -2631,7 +2712,7 @@ bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&
     if (!m_Data->m_CurrentContext) return false;
     QString ex;
     try {
-        dlist = m_Data->m_Svnclient->list(url,where,where,rec,false);
+        dlist = m_Data->m_Svnclient->list(url,where,where,rec?svn::DepthInfinity:svn::DepthEmpty,false);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2654,7 +2735,7 @@ bool SvnActions::isLocalWorkingCopy(const KUrl&url,QString&_baseUri)
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_Data->m_Svnclient->info(cleanpath,false,rev,peg);
+        e = m_Data->m_Svnclient->info(cleanpath,svn::DepthEmpty,rev,peg);
     } catch (const svn::Exception&e) {
         kDebug()<< e.msg()<< " " << endl;
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())

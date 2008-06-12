@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
-    <height>398</height>
+    <width>559</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -171,17 +171,7 @@
    <item>
     <layout class="QHBoxLayout" >
      <item>
-      <widget class="QCheckBox" name="m_RecursiveButton" >
-       <property name="toolTip" >
-        <string>Make operation recursive.</string>
-       </property>
-       <property name="text" >
-        <string>Recursive</string>
-       </property>
-       <property name="checked" >
-        <bool>true</bool>
-       </property>
-      </widget>
+      <widget class="DepthSelector" native="1" name="m_DepthSelector" />
      </item>
      <item>
       <widget class="QCheckBox" name="m_keepLocksButton" >
@@ -198,7 +188,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="2" margin="2" />
- <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
    <class>Q3Frame</class>
@@ -221,10 +210,16 @@
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>DepthSelector</class>
+   <extends>QWidget</extends>
+   <header>src/ksvnwidgets/depthselector.h</header>
+  </customwidget>
  </customwidgets>
  <includes>
   <include location="local" >ktextedit.h</include>
   <include location="local" >kcombobox.h</include>
+  <include location="local" >src/ksvnwidgets/depthselector.h</include>
  </includes>
  <resources/>
  <connections>

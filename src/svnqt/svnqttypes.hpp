@@ -48,6 +48,7 @@ namespace svn
     class Status;
     class Targets;
     class Path;
+    class StringArray;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
 
@@ -68,6 +69,11 @@ namespace svn
     typedef QLIST<StatusPtr> StatusEntries;
     typedef QLIST<Revision> Revisions;
 
+    /** Range of Revision */
+    typedef QPair<Revision,Revision> RevisionRange;
+    /** list of revision ranges */
+    typedef QLIST<RevisionRange> RevisionRanges;
+
     /// map of property names to values
     typedef QMap<QString,QString> PropertiesMap;
     /// pair of path, PropertiesMap
@@ -78,6 +84,21 @@ namespace svn
     typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 
     typedef QLIST<Path> Pathes;
+
+    //! Mapper enum for svn_depth_t
+    /*!
+     * Until subversion prior 1.5 is supported by this lib we must hide the svn_depth_t enum from interface.
+     * \since subversion 1.5 / svnqt 1.0
+     * \sa svn_depth_t
+     */
+    enum Depth {
+        DepthUnknown,
+        DepthExclude,
+        DepthEmpty,
+        DepthFiles,
+        DepthImmediates,
+        DepthInfinity
+    };
 }
 
 #endif

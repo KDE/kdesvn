@@ -24,6 +24,7 @@
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/smart_pointer.hpp"
 #include "src/svnqt/shared_pointer.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 
 #include "simple_logcb.h"
 
@@ -81,8 +82,8 @@ public:
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
 
 
-    bool addItems(const Q3ValueList<svn::Path> &items,bool rec=false);
-    bool addItems(const QStringList&w,bool rec=false);
+    bool addItems(const Q3ValueList<svn::Path> &items,svn::Depth depth=svn::DepthEmpty);
+    bool addItems(const QStringList&w,svn::Depth depth=svn::DepthEmpty);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
     bool makeDelete(const svn::Pathes&);
@@ -129,10 +130,10 @@ public:
     void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
     void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED,SimpleLogCb*_acb=0);
     void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
-    bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,bool rec = true);
+    bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,svn::Depth depth,const svn::Revision&peg,bool stickydepth,bool ignore_externals,bool allow_unversioned);
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
-    bool makeCheckout(const QString&,const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool,bool exp_rec,QWidget*p);
+    bool makeCheckout(const QString&,const QString&,const svn::Revision&,const svn::Revision&,svn::Depth,bool isExport,bool openit,bool ignore_externals,bool overwrite,QWidget*p);
     void makeInfo(Q3PtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);
@@ -169,11 +170,14 @@ public:
     virtual bool makeCleanup(const QString&);
 
     bool get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p);
-    bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target);
+    bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target,const svn::Revision&_peg=svn::Revision::UNDEFINED);
 
     void setContextData(const QString&,const QString&);
     void clearContextData();
     QString getContextData(const QString&)const;
+
+    virtual bool event ( QEvent * e );
+    bool doNetworking();
 
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;
@@ -209,13 +213,13 @@ public slots:
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,const svn::Revision&,bool,QWidget*p);
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
-    virtual void slotImport(const QString&,const QString&,const QString&,bool);
+    virtual void slotImport(const QString&,const QString&,const QString&,svn::Depth,bool noIgnore,bool noUnknown);
     virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
     virtual void slotMerge(const QString&,const QString&, const QString&,
         const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
-    void slotMergeExternal(const QString&src1,const QString&src2, const QString&target,const svn::Revision&rev1,const svn::Revision&rev2,bool);
+    virtual void slotMergeExternal(const QString&src1,const QString&src2, const QString&target,const svn::Revision&rev1,const svn::Revision&rev2,bool);
     virtual void slotExtraLogMsg(const QString&);
-    void slotMakeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg,QWidget*dlgparent);
+    virtual void slotMakeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg,QWidget*dlgparent);
 
     virtual void slotCancel(bool);
 

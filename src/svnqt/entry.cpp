@@ -265,7 +265,7 @@ namespace svn
     return m_Data->_cmt_date;
   }
 
-  const svn_revnum_t
+  svn_revnum_t
   Entry::cmtRev () const
   {
     return m_Data->_cmt_rev;
@@ -308,7 +308,7 @@ namespace svn
     {
       return m_Data->_conflict_old;
     }
-    const svn_revnum_t
+    svn_revnum_t
     Entry::copyfromRev () const
     {
       return m_Data->_copyfrom_rev;
@@ -319,27 +319,27 @@ namespace svn
       return m_Data->_copyfrom_url;
     }
 
-    const bool
+    bool
     Entry::isAbsent () const
     {
       return m_Data->_absent;
     }
-    const bool
+    bool
     Entry::isDeleted () const
     {
       return m_Data->_deleted != 0;
     }
-    const bool
+    bool
     Entry::isCopied () const
     {
       return m_Data->_copied != 0;
     }
-    const svn_wc_schedule_t
+    svn_wc_schedule_t
     Entry::schedule () const
     {
       return m_Data->_schedule;
     }
-    const svn_node_kind_t
+    svn_node_kind_t
     Entry::kind () const
     {
       return m_Data->_kind;
@@ -359,7 +359,7 @@ namespace svn
     {
       return m_Data->_url;
     }
-    const svn_revnum_t
+    svn_revnum_t
     Entry::revision () const
     {
       return m_Data->_revision;

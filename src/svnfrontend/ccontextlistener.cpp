@@ -94,7 +94,8 @@ const QString CContextListener::notify_state_strings[]={
     I18N_NOOP("unchanged"),
     I18N_NOOP("item wasn't present"),
     I18N_NOOP("unversioned item obstructed work"),
-    I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
+    // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
+    QString::null,
     I18N_NOOP("Modified state had mods merged in."),
     I18N_NOOP("Modified state got conflicting mods.")
 };

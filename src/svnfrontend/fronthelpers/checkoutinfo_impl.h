@@ -22,6 +22,7 @@
 
 #include "checkoutinfo.h"
 #include "src/svnqt/revision.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 #include "kurl.h"
 
 class CheckoutInfo_impl: public CheckoutInfo {
@@ -34,12 +35,12 @@ public:
     QString reposURL();
     QString targetDir();
 
-    bool forceIt();
+    bool overwrite();
+    svn::Depth getDepth();
     void setStartUrl(const QString&);
 
     void disableForce(bool how);
     void disableTargetDir(bool how);
-    void forceAsRecursive(bool how);
     void disableAppend(bool how);
     void disableOpen(bool how);
     void disableExternals(bool how);
@@ -47,6 +48,7 @@ public:
     virtual void disableRange(bool how);
     void setTargetUrl(const QString&);
     bool ignoreExternals();
+    void hideDepth(bool hide,bool overwriteAsRecurse);
 protected slots:
     virtual void urlChanged(const QString&);
 };

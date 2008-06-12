@@ -201,6 +201,12 @@ void kdesvnPart::setupActions()
 
     kDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
 
+    toggletemp = new KToggleAction(i18n("Work online"),KShortcut(),
+                                   actionCollection(),"toggle_network");
+    toggletemp->setChecked(Kdesvnsettings::network_on());
+    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotEnableNetwork(bool)));
+
+
     KAction * t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
     t->setText(i18n("&Configure %1...").arg("Kdesvn"));
     if (QString(kapp->instanceName())!=QString("kdesvn")) {
@@ -256,6 +262,12 @@ void kdesvnPart::slotHideUnchanged(bool how)
     Kdesvnsettings::setHide_unchanged_files(how);
     Kdesvnsettings::writeConfig();
     emit refreshTree();
+}
+
+void kdesvnPart::slotEnableNetwork(bool how)
+{
+    Kdesvnsettings::setNetwork_on(how);
+    Kdesvnsettings::writeConfig();
 }
 
 /*!

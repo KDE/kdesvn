@@ -85,6 +85,7 @@
 #include <QDragMoveEvent>
 #include <QPaintEvent>
 #include <Q3PtrList>
+#include <qcheckbox.h>
 
 #include <unistd.h>
 #include <kauthorized.h>
@@ -558,6 +559,15 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
             }
         } else {
             setNetworked(true);
+            if (!Kdesvnsettings::network_on()) {
+                setBaseUri("");
+                setNetworked(false);
+                clear();
+                KMessageBox::error(this,i18n("Networked URL to open but networking is disabled!"));
+                emit changeCaption("");
+                emit sigUrlOpend(false);
+                return false;
+            }
         }
     }
     if (query.length()>1) {
@@ -600,7 +610,6 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
         setNetworked(false);
         clear();
     }
-    enableActions();
     m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips()&&
         QToolTip::isGloballyEnabled(),true,6);
 
@@ -614,6 +623,7 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));
+    enableActions();
     kdDebug()<<"End open URL"<<endl;
     return result;
 }
@@ -879,9 +889,12 @@ void kdesvnfilelist::enableActions()
     bool none = c==0&&isopen;
     bool dir = false;
     bool unique = uniqueTypeSelected();
+    bool remote_enabled=m_SvnWrapper->doNetworking();
+
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
     }
+
     bool conflicted = single && allSelected()->at(0)->isConflicted();
     KAction * temp = 0;
     /* local and remote actions */
@@ -959,9 +972,9 @@ void kdesvnfilelist::enableActions()
     if (temp) {
         temp->setEnabled( (multi||single) && isWorkingCopy());
     }
-    m_UpdateHead->setEnabled(isWorkingCopy()&&isopen);
-    m_UpdateRev->setEnabled(isWorkingCopy()&&isopen);
-    m_commitAction->setEnabled(isWorkingCopy()&&isopen);
+    m_UpdateHead->setEnabled(isWorkingCopy()&&isopen&&remote_enabled);
+    m_UpdateRev->setEnabled(isWorkingCopy()&&isopen&&remote_enabled);
+    m_commitAction->setEnabled(isWorkingCopy()&&isopen&&remote_enabled);
 
     temp = filesActions()->action("make_svn_basediff");
     if (temp) {
@@ -969,13 +982,13 @@ void kdesvnfilelist::enableActions()
     }
     temp = filesActions()->action("make_svn_headdiff");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&(single||none));
+        temp->setEnabled(isWorkingCopy()&&(single||none)&&remote_enabled);
     }
 
     /// @todo uberprüfen ob alle selektierten items den selben typ haben.
     temp = filesActions()->action("make_svn_itemsdiff");
     if (temp) {
-        temp->setEnabled(multi && c==2 && unique);
+        temp->setEnabled(multi && c==2 && unique && remote_enabled);
     }
 
     /* 2. on dirs only */
@@ -986,9 +999,9 @@ void kdesvnfilelist::enableActions()
     }
 
     /* remote actions only */
-    m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy());
+    m_CheckoutCurrentAction->setEnabled( ((single&&dir)||none) && !isWorkingCopy() && remote_enabled);
     /* independ actions */
-    m_CheckoutAction->setEnabled(true);
+    m_CheckoutAction->setEnabled(remote_enabled);
     m_ExportAction->setEnabled(true);
     m_RefreshViewAction->setEnabled(isopen);
 
@@ -1006,7 +1019,7 @@ void kdesvnfilelist::enableActions()
     }
     temp = filesActions()->action("make_check_updates");
     if (temp) {
-        temp->setEnabled(isWorkingCopy()&&isopen);
+        temp->setEnabled(isWorkingCopy()&&isopen && remote_enabled);
     }
     temp = filesActions()->action("openwith");
     if (temp) {
@@ -1218,13 +1231,14 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     ptr->initHistory();
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);
+        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"import_log_msg",false);
         delete dlg;
         return;
     }
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"import_log_msg",false);
 
     QString logMessage = ptr->getMessage();
-    bool rec = ptr->isRecursive();
+    svn::Depth rec = ptr->getDepth();
     ptr->saveHistory(false);
     uri.setProtocol("");
     QString iurl = uri.path();
@@ -1235,7 +1249,11 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     if (dirs && ptr2 && ptr2->createDir()) {
         targetUri+= "/"+uri.fileName(true);
     }
-    m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec);
+    if (ptr2) {
+        m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec,ptr2->noIgnore(),ptr2->ignoreUnknownNodes());
+    } else {
+        m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec,false,false);
+    }
 
     if (!isWorkingCopy()) {
         if (allSelected()->count()==0) {
@@ -1949,7 +1967,7 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
             for (iter=lst.begin();iter!=lst.end();++iter) {
                 tmp.push_back(svn::Path((base+(*iter).fileName(true))));
             }
-            m_SvnWrapper->addItems(tmp,true);
+            m_SvnWrapper->addItems(tmp,svn::DepthInfinity);
         }
         refreshCurrentTree();
     }
@@ -2053,7 +2071,11 @@ void kdesvnfilelist::slotLock()
     dlg = createDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
     if (!dlg) return;
     ptr->initHistory();
-    ptr->setRecCheckboxtext(i18n("Steal lock?"),false);
+    ptr->hideDepth(true);
+    QCheckBox*_stealLock = new QCheckBox("",ptr,"create_dir_checkbox");
+    _stealLock->setText(i18n("Steal lock?"));
+    ptr->addItemWidget(_stealLock);
+    ptr->m_keepLocksButton->hide();
 
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);
@@ -2063,7 +2085,7 @@ void kdesvnfilelist::slotLock()
     dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"locking_log_msg",false);
 
     QString logMessage = ptr->getMessage();
-    bool rec = ptr->isRecursive();
+    bool steal = _stealLock->isChecked();
     ptr->saveHistory(false);
 
     QStringList displist;
@@ -2071,7 +2093,7 @@ void kdesvnfilelist::slotLock()
         ++liter;
         displist.append(cur->fullName());
     }
-    m_SvnWrapper->makeLock(displist,logMessage,rec);
+    m_SvnWrapper->makeLock(displist,logMessage,steal);
     refreshCurrentTree();
 }
 
@@ -2766,14 +2788,15 @@ void kdesvnfilelist::slotRelocate()
     if (dlg) {
         ptr->setStartUrl(fromUrl);
         ptr->disableAppend(true);
-        ptr->forceAsRecursive(true);
         ptr->disableTargetDir(true);
         ptr->disableRange(true);
         ptr->disableOpen(true);
         ptr->disableExternals(true);
+        ptr->hideDepth(true,true);
         bool done = false;
+        dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"relocate_dlg"));
         if (dlg->exec()==QDialog::Accepted) {
-            done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->forceIt());
+            done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->overwrite());
         }
         dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"relocate_dlg",false);
         delete dlg;

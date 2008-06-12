@@ -58,7 +58,7 @@ svn::Revision svn::cache::ReposLog::latestHeadRev()
         }
     }
     /// no catch - exception has go trough...
-    svn::InfoEntries e = (m_Client->info(m_ReposRoot,false,svn::Revision::HEAD,svn::Revision::HEAD));;
+    svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD));;
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
@@ -297,7 +297,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
         }
     }
     if (must_remote) {
-        svn::InfoEntries e = (m_Client->info(m_ReposRoot,false,aRev,aRev));;
+        svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,aRev,aRev));;
         if (e.count()<1||e[0].reposRoot().isEmpty()) {
             return aRev;
         }
@@ -317,7 +317,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
         return query.value(0).toInt();
     }
     // not found...
-    svn::InfoEntries e = (m_Client->info(m_ReposRoot,false,svn::Revision::HEAD,svn::Revision::HEAD));;
+    svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD));;
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
         return aRev;
     }

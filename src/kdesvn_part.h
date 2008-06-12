@@ -101,6 +101,7 @@ protected slots:
     void slotSettingsChanged();
 protected slots:
     virtual void slotHideUnchanged(bool);
+    virtual void slotEnableNetwork(bool);
 };
 
 class commandline_part;

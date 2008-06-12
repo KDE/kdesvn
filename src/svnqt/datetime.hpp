@@ -88,38 +88,38 @@ namespace svn
     /**
      * @param dateTime Comparator
      */
-    const bool
+    bool
     operator ==(const DateTime & dateTime);
     /**
      * @param dateTime Comparator
      */
-    const bool
+    bool
     operator !=(const DateTime & dateTime);
 
-    const bool
+    bool
     operator<(const DateTime&dateTime)const;
-    const bool
+    bool
     operator>(const DateTime&dateTime)const;
-    const bool
+    bool
     operator!=(const DateTime&dateTime)const;
-    const bool
+    bool
     operator==(const DateTime&dateTime)const;
-    const bool
+    bool
     operator<=(const DateTime&dateTime)const;
-    const bool
+    bool
     operator>=(const DateTime&dateTime)const;
 
 
     /**
      * @return Is a valid (non-zero) date
      */
-    const bool
+    bool
     IsValid () const;
 
     /**
      * @return APR apr_time_t
      */
-    const apr_time_t
+    apr_time_t
     GetAPRTimeT () const;
 
     /**
@@ -149,7 +149,7 @@ namespace svn
      * @see apr_date_parse_rfc
      * @return Successfully parsed
      */
-    const bool
+    bool
     SetRFC822Date (const char* date);
 
     void setAprTime(apr_time_t aTime);

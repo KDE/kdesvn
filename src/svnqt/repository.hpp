@@ -75,7 +75,7 @@ public:
      * \param _pre_1_4_compat Create repository compatibel to version earlier than 1.4 (only used with subversion 1.4)
      */
     void CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool _pre_1_4_compat=false) throw (ClientException);
+                    bool _bdbautologremove = true, bool _pre_1_4_compat=false, bool _pre_1_5_compat=false) throw (ClientException);
     //! dump content of repository to a file
     /*!
         The repository must opend before. Progress message go trough the assigned svn::repository::RepositoryListener object.

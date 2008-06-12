@@ -1,6 +1,6 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
- * (C) 2005-2007 by Rajko Albrecht
+ * (C) 2005-2008 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
  */
 /*
@@ -34,6 +34,7 @@
 
 // svncpp
 #include "svnqt/client_impl.hpp"
+#include "svnqt/helper.hpp"
 
 // Subversion api
 #include "svn_client.h"
@@ -53,14 +54,52 @@
 
 namespace svn
 {
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    static svn_error_t *
+    logReceiver2(
+                 void*baton,
+                 svn_log_entry_t *log_entry,
+                 apr_pool_t * pool
+                )
+    {
+        Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
+        LogEntries * entries =
+                (LogEntries *) l_baton->m_data;
+        QLIST<QLONG>*rstack=
+                (QLIST<QLONG>*)l_baton->m_revstack;
+        Context*l_context = l_baton->m_context;
+        svn_client_ctx_t*ctx = l_context->ctx();
+        if (ctx&&ctx->cancel_func) {
+            SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+        }
+        if (! SVN_IS_VALID_REVNUM(log_entry->revision))
+        {
+            if (rstack&&rstack->size()>0) {
+                rstack->pop_front();
+            }
+            return SVN_NO_ERROR;
+        }
+        entries->insert (entries->begin (), LogEntry (log_entry));
+        if (rstack) {
+            entries->first().m_MergedInRevisions=(*rstack);
+            if (log_entry->has_children) {
+                rstack->push_front(log_entry->revision);
+            }
+        }
+        return SVN_NO_ERROR;
+    }
+#else
   static svn_error_t *
-  logReceiver (void *baton,
-                   apr_hash_t * changedPaths,
-                   svn_revnum_t rev,
-                   const char *author,
-                   const char *date,
-                   const char *msg,
-                   apr_pool_t * pool)
+  logReceiver (
+                 void *baton,
+                 apr_hash_t * changedPaths,
+                 svn_revnum_t rev,
+                 const char *author,
+                 const char *date,
+                 const char *msg,
+                 apr_pool_t * pool
+              )
   {
     Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
     LogEntries * entries =
@@ -97,9 +136,46 @@ namespace svn
       }
     }
 
-    return NULL;
+    return SVN_NO_ERROR;
   }
+#endif
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+  static svn_error_t *
+          logMapReceiver2(
+                       void*baton,
+                       svn_log_entry_t *log_entry,
+                       apr_pool_t * pool
+                      )
+  {
+      Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
+      LogEntriesMap * entries =
+              (LogEntriesMap *) l_baton->m_data;
+      Context*l_context = l_baton->m_context;
+      QLIST<QLONG>*rstack=
+              (QLIST<QLONG>*)l_baton->m_revstack;
+      svn_client_ctx_t*ctx = l_context->ctx();
+      if (ctx&&ctx->cancel_func) {
+          SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+      }
+      if (! SVN_IS_VALID_REVNUM(log_entry->revision))
+      {
+          if (rstack&&rstack->size()>0) {
+              rstack->pop_front();
+          }
+          return SVN_NO_ERROR;
+      }
+      (*entries)[log_entry->revision]=LogEntry (log_entry);
+      /// @TODO insert it into last logentry
+      if (rstack) {
+          (*entries)[log_entry->revision].m_MergedInRevisions=(*rstack);
+          if (log_entry->has_children) {
+              rstack->push_front(log_entry->revision);
+          }
+      }
+      return SVN_NO_ERROR;
+  }
+#else
   static svn_error_t *
   logMapReceiver (void *baton,
                    apr_hash_t * changedPaths,
@@ -107,7 +183,8 @@ namespace svn
                    const char *author,
                    const char *date,
                    const char *msg,
-                   apr_pool_t * pool)
+                   apr_pool_t * pool
+                 )
   {
     Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
     LogEntriesMap * entries =
@@ -146,6 +223,7 @@ namespace svn
 
     return NULL;
   }
+#endif
 
   struct StatusEntriesBaton {
     apr_pool_t* pool;
@@ -192,11 +270,12 @@ namespace svn
 
   static StatusEntries
   localStatus (const Path& path,
-               const bool descend,
+               Depth depth,
                const bool get_all,
                const bool update,
                const bool no_ignore,
                const bool hide_externals,
+               const StringArray & changelists,
                Context * context)
   {
     svn_error_t *error;
@@ -210,19 +289,37 @@ namespace svn
     status_hash = apr_hash_make (pool);
     baton.hash = status_hash;
     baton.pool = pool;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_status3 (
+        &revnum,           // revnum
+        path.path().TOUTF8(),         // path
+        rev,
+        StatusEntriesFunc, // status func
+        &baton,            // status baton
+        internal::DepthToSvn(depth), // see svn::Depth
+        get_all,           // get all not only interesting
+        update,            // check for updates
+        no_ignore,         // hide ignored files or not
+        hide_externals,    // hide external
+        changelists.array(pool),
+        *context,          //client ctx
+        pool);
+#else
+    Q_UNUSED(changelists);
     error = svn_client_status2 (
       &revnum,      // revnum
       path.path().TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
-      descend,       // recurse (true) or immediate childs
+      (depth==DepthInfinity), //recurse
       get_all,       // get all not only interesting
       update,        // check for updates
       no_ignore,     // hide ignored files or not
       hide_externals, // hide external
       *context,    //client ctx
       pool);
+#endif
 
     if (error!=NULL)
     {
@@ -268,7 +365,7 @@ namespace svn
   static StatusEntries
   remoteStatus (Client * client,
                 const Path& path,
-                const bool descend,
+                Depth depth,
                 const bool ,
                 const bool ,
                 const bool ,
@@ -276,7 +373,7 @@ namespace svn
                 Context * ,
                 bool detailed_remote)
   {
-    DirEntries dirEntries = client->list(path, revision, revision, descend,detailed_remote);
+    DirEntries dirEntries = client->list(path, revision, revision, depth,detailed_remote);
     DirEntries::const_iterator it;
 
     StatusEntries entries;
@@ -295,20 +392,21 @@ namespace svn
 
   StatusEntries
   Client_impl::status (const Path& path,
-                  const bool descend,
+                  Depth depth,
                   const bool get_all,
                   const bool update,
                   const bool no_ignore,
                   const Revision revision,
                   bool detailed_remote,
-                  const bool hide_externals) throw (ClientException)
+                  const bool hide_externals,
+                  const StringArray & changelists) throw (ClientException)
   {
     if (Url::isValid (path.path())) {
-        return remoteStatus (this, path, descend, get_all, update,
+        return remoteStatus (this, path, depth, get_all, update,
                             no_ignore,revision,m_context,detailed_remote);
     } else {
-        return localStatus (path, descend, get_all, update,
-                            no_ignore, hide_externals, m_context);
+        return localStatus (path, depth, get_all, update,
+                            no_ignore, hide_externals,changelists, m_context);
     }
   }
 
@@ -326,6 +424,22 @@ namespace svn
     baton.hash = status_hash;
     baton.pool = pool;
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_status3 (
+        &revnum,           // revnum
+        path.path().TOUTF8(),         // path
+        rev,
+        StatusEntriesFunc, // status func
+        &baton,            // status baton
+        svn_depth_empty, // not recurse
+        true,           // get all not only interesting
+        update,            // check for updates
+        false,         // hide ignored files or not
+        false,    // hide external
+        0,
+        *context,          //client ctx
+        pool);
+#else
     error = svn_client_status2 (
       &revnum,      // revnum
       path.path().TOUTF8(),         // path
@@ -339,7 +453,7 @@ namespace svn
       false,
       *context,    //client ctx
       pool);
-
+#endif
     if (error != NULL)
     {
       throw ClientException (error);
@@ -362,7 +476,7 @@ namespace svn
   static StatusPtr
   remoteSingleStatus (Client * client, const Path& path,const Revision revision, Context * )
   {
-    InfoEntries infoEntries = client->info(path,false,revision,Revision(Revision::UNDEFINED));
+    InfoEntries infoEntries = client->info(path,DepthEmpty,revision,Revision(Revision::UNDEFINED));
     if (infoEntries.size () == 0)
       return StatusPtr(new Status());
     else
@@ -384,15 +498,39 @@ namespace svn
        LogEntriesMap&log_target,
        const Revision & revisionPeg,
        bool discoverChangedPaths,
-       bool strictNodeHistory,int limit) throw (ClientException)
+       bool strictNodeHistory,int limit,
+       bool include_merged_revisions,
+       const StringArray&revprops
+                   ) throw (ClientException)
   {
     Targets target(path);
     Pool pool;
     sBaton l_baton;
+    QLIST<QLONG> revstack;
     l_baton.m_context=m_context;
     l_baton.m_data = &log_target;
-
+    l_baton.m_revstack = &revstack;
     svn_error_t *error;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_log4 (
+                target.array (pool),
+                revisionPeg.revision(),
+                revisionStart.revision (),
+                revisionEnd.revision (),
+                limit,
+                discoverChangedPaths ? 1 : 0,
+                strictNodeHistory ? 1 : 0,
+                include_merged_revisions?1:0,
+                revprops.array(pool),
+                logMapReceiver2,
+                &l_baton,
+                *m_context, // client ctx
+                pool);
+#else
+    Q_UNUSED(include_merged_revisions);
+    Q_UNUSED(revprops);
+
     error = svn_client_log3 (
       target.array (pool),
       revisionPeg.revision(),
@@ -405,7 +543,7 @@ namespace svn
       &l_baton,
       *m_context, // client ctx
       pool);
-
+#endif
     if (error != NULL)
     {
       throw ClientException (error);
@@ -417,16 +555,39 @@ namespace svn
   Client_impl::log (const Path& path, const Revision & revisionStart,
                     const Revision & revisionEnd, const Revision & revisionPeg,
                     bool discoverChangedPaths,
-                    bool strictNodeHistory,int limit) throw (ClientException)
+                    bool strictNodeHistory,int limit,
+                    bool include_merged_revisions,
+                    const StringArray&revprops
+                   ) throw (ClientException)
   {
     Targets target(path);
     Pool pool;
     LogEntriesPtr entries = LogEntriesPtr(new LogEntries ());
+    QLIST<QLONG> revstack;
     sBaton l_baton;
     l_baton.m_context=m_context;
     l_baton.m_data = entries;
+    l_baton.m_revstack = &revstack;
 
     svn_error_t *error;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_log4 (
+        target.array (pool),
+        revisionPeg.revision(),
+        revisionStart.revision (),
+        revisionEnd.revision (),
+        limit,
+        discoverChangedPaths ? 1 : 0,
+        strictNodeHistory ? 1 : 0,
+        include_merged_revisions?1:0,
+        revprops.array(pool),
+        logReceiver2,
+        &l_baton,
+        *m_context, // client ctx
+        pool);
+#else
+    Q_UNUSED(include_merged_revisions);
+    Q_UNUSED(revprops);
 
     error = svn_client_log3 (
       target.array (pool),
@@ -440,7 +601,7 @@ namespace svn
       &l_baton,
       *m_context, // client ctx
       pool);
-
+#endif
     if (error != NULL)
     {
       throw ClientException (error);
@@ -451,9 +612,11 @@ namespace svn
 
   InfoEntries
   Client_impl::info(const Path& _p,
-                bool rec,
+                    Depth depth,
                 const Revision & rev,
-                const Revision & peg_revision) throw (ClientException)
+                const Revision & peg_revision,
+                const StringArray&changelists
+                    ) throw (ClientException)
   {
 
     InfoEntries ientries;
@@ -484,6 +647,20 @@ namespace svn
         }
     }
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error =
+            svn_client_info2(truepath,
+                        internal_peg?&pegr:peg_revision.revision(),
+                        rev.revision (),
+                        &InfoEntryFunc,
+                        &baton,
+                        internal::DepthToSvn(depth),
+                        changelists.array(pool),
+                        *m_context,    //client ctx
+                        pool);
+#else
+    bool rec = depth==DepthInfinity;
+    Q_UNUSED(changelists);
     error =
             svn_client_info(truepath,
                       internal_peg?&pegr:peg_revision.revision(),
@@ -493,6 +670,8 @@ namespace svn
                       rec,
                       *m_context,    //client ctx
                       pool);
+#endif
+
     if (error != NULL)
       throw ClientException (error);
 

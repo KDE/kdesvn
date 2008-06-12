@@ -88,7 +88,7 @@ namespace svn
     delete m;
   }
 
-  const apr_status_t
+  apr_status_t
   Exception::apr_err () const
   {
     return m->apr_err;

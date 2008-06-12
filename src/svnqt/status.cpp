@@ -221,59 +221,59 @@ namespace svn
   {
       return m_Data->m_Lock;
   }
-    const svn_wc_status_kind
+    svn_wc_status_kind
     Status::reposPropStatus () const
     {
       return m_Data->_repos_prop_status;
     }
-    const svn_wc_status_kind
+    svn_wc_status_kind
     Status::reposTextStatus () const
     {
       return m_Data->_repos_text_status;
     }
-    const bool
+    bool
     Status::isSwitched () const
     {
       return m_Data->_switched != 0;
     }
-    const bool
+    bool
     Status::isCopied () const
     {
       return m_Data->_copied;
     }
 
-    const bool
+    bool
     Status::isLocked () const
     {
       return m_Data->m_Lock.Locked();
     }
 
-    const bool
+    bool
     Status::isModified()const
     {
         return textStatus()==svn_wc_status_modified||propStatus()==svn_wc_status_modified
                 ||textStatus ()==svn_wc_status_replaced;
     }
 
-    const bool
+    bool
     Status::isRealVersioned()const
     {
       return m_Data->m_hasReal;
     }
 
-    const bool
+    bool
     Status::isVersioned () const
     {
       return m_Data->m_isVersioned;
     }
 
-    const svn_wc_status_kind
+    svn_wc_status_kind
     Status::propStatus () const
     {
       return m_Data->_prop_status;
     }
 
-    const svn_wc_status_kind
+    svn_wc_status_kind
     Status::textStatus () const
     {
       return m_Data->_text_status;

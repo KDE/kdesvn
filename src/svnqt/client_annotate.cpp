@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -41,8 +41,29 @@
 
 namespace svn
 {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    static svn_error_t *
+            annotateReceiver(void *baton,
+                              apr_int64_t line_no,
+                              svn_revnum_t revision,
+                              const char *author,
+                              const char *date,
+                              svn_revnum_t merge_revision,
+                              const char *merge_author,
+                              const char *merge_date,
+                              const char *merge_path,
+                              const char *line,
+                              apr_pool_t *)
+    {
+        AnnotatedFile * entries = (AnnotatedFile *) baton;
+        entries->push_back (AnnotateLine(line_no, revision,author,
+                            date,line,merge_revision,
+                            merge_author,merge_date,merge_path));
+        return NULL;
+    }
+#else
   static svn_error_t *
-  annotateReceiver (void *baton,
+  annotateReceiver(void *baton,
                     apr_int64_t line_no,
                     svn_revnum_t revision,
                     const char *author,
@@ -59,15 +80,50 @@ namespace svn
 
     return NULL;
   }
+#endif
 
   void
   Client_impl::annotate (AnnotatedFile&target,const Path & path,
             const Revision & revisionStart,
             const Revision & revisionEnd,
-            const Revision & peg) throw (ClientException)
+            const Revision & peg,
+            const DiffOptions&diffoptions,
+            bool ignore_mimetypes,
+            bool include_merged_revisions
+                        ) throw (ClientException)
   {
     Pool pool;
     svn_error_t *error;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_blame4(
+                path.path().TOUTF8(),
+                peg.revision(),
+                revisionStart.revision (),
+                revisionEnd.revision (),
+                diffoptions.options(pool),
+                ignore_mimetypes,
+                include_merged_revisions,
+                annotateReceiver,
+                &target,
+                *m_context, // client ctx
+                pool);
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
+    Q_UNUSED(include_merged_revisions);
+    error = svn_client_blame3(
+        path.path().TOUTF8(),
+        peg.revision(),
+        revisionStart.revision (),
+        revisionEnd.revision (),
+        diffoptions.options(pool),
+        ignore_mimetypes,
+        annotateReceiver,
+        &target,
+        *m_context, // client ctx
+        pool);
+#else
+    Q_UNUSED(include_merged_revisions);
+    Q_UNUSED(ignore_mimetypes);
+    Q_UNUSED(diffoptions);
     error = svn_client_blame2(
       path.path().TOUTF8(),
       peg.revision(),
@@ -77,7 +133,7 @@ namespace svn
       &target,
       *m_context, // client ctx
       pool);
-
+#endif
     if (error != NULL)
     {
       throw ClientException (error);

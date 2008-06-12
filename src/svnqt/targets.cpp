@@ -108,7 +108,7 @@ namespace svn
   {
   }
 
-  const apr_array_header_t *
+  apr_array_header_t *
   Targets::array (const Pool & pool) const
   {
     Pathes::const_iterator it;

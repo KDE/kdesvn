@@ -199,7 +199,7 @@ namespace svn
     const char * cdirpath;
     const char * cbasename;
 
-    svn_path_split (m_path.TOUTF8(), &cdirpath, &cbasename, pool);
+    svn_path_split (prettyPath().TOUTF8(), &cdirpath, &cbasename, pool);
     dirpath = QString::FROMUTF8(cdirpath);
     basename = QString::FROMUTF8(cbasename);
   }

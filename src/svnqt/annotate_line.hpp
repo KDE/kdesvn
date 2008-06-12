@@ -30,6 +30,8 @@
 #ifndef _SVNCPP_ANNOTATE_LINE_HPP_
 #define _SVNCPP_ANNOTATE_LINE_HPP_
 
+#include "svnqt/svnqt_defines.hpp"
+
 #include <qstring.h>
 #include <qdatetime.h>
 
@@ -41,16 +43,39 @@ namespace svn
   class AnnotateLine
   {
   public:
-    AnnotateLine (apr_int64_t line_no,
-                  svn_revnum_t revision,
-                  const char *author,
-                  const char *date,
-                  const char *line)
+      AnnotateLine (QLONG line_no,
+                    QLONG revision,
+                    const char *author,
+                    const char *date,
+                    const char *line)
     : m_line_no (line_no), m_revision (revision),
       m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
-      m_line(line?line:""),m_author(author?author:"")
+      m_line(line?line:""),m_author(author?author:""),
+      m_merge_revision(-1),
+      m_merge_date(QDateTime()),
+      m_merge_author(""),m_merge_path("")
+
     {
     }
+
+    AnnotateLine (QLONG line_no,
+                  QLONG revision,
+                  const char *author,
+                  const char *date,
+                  const char *line,
+                  QLONG merge_revision,
+                  const char *merge_author,
+                  const char *merge_date,
+                  const char *merge_path
+                 )
+          : m_line_no (line_no), m_revision (revision),
+            m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
+            m_line(line?line:""),m_author(author?author:""),
+            m_merge_revision(merge_revision),
+            m_merge_date( (merge_date&&strlen(merge_date))?QDateTime::fromString(QString::FROMUTF8(merge_date),Qt::ISODate):QDateTime()),
+            m_merge_author(merge_author?merge_author:""),m_merge_path(merge_path?merge_path:"")
+        {
+        }
 
     AnnotateLine ( const AnnotateLine &other)
           : m_line_no (other.m_line_no), m_revision (other.m_revision), m_date (other.m_date),
@@ -70,12 +95,12 @@ namespace svn
     {
     }
 
-    apr_int64_t
+    QLONG
     lineNumber () const
     {
         return m_line_no;
     }
-    svn_revnum_t
+    QLONG
     revision () const
     {
         return m_revision;
@@ -103,8 +128,8 @@ namespace svn
     }
 
   protected:
-    apr_int64_t m_line_no;
-    svn_revnum_t m_revision;
+    QLONG m_line_no;
+    QLONG m_revision;
     QDateTime m_date;
 #if QT_VERSION < 0x040000
     QCString m_line;
@@ -112,6 +137,16 @@ namespace svn
 #else
     QByteArray m_line;
     QByteArray m_author;
+#endif
+
+    QLONG m_merge_revision;
+    QDateTime m_merge_date;
+#if QT_VERSION < 0x040000
+    QCString m_merge_author;
+    QCString m_merge_path;
+#else
+    QByteArray m_merge_author;
+    QByteArray m_merge_path;
 #endif
   };
 }

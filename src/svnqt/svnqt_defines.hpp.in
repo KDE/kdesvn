@@ -33,6 +33,9 @@
 #define QLIST @QLIST@
 #define TOASCII @TOASCII@
 #define HOMEDIR @HOMEDIR@
+#define QLONG @QLONG@
+
+#define SVNQT_SIZE_UNKNOWN QLONG(-1)
 
 /* the difference between qt3 and qt4 is too much... :( */
 class QSqlDatabase;

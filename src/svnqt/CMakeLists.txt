@@ -34,6 +34,11 @@ SET(SOURCES
     svnstream.cpp
     diff_data.cpp
     svnfilestream.cpp
+    stringarray.cpp
+    diffoptions.cpp
+    conflictdescription.cpp
+    conflictresult.cpp
+    client_merge.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp
     cache/DatabaseException.hpp
@@ -93,6 +98,10 @@ SET(INST_HEADERS
     url.hpp
     version_check.hpp
     wc.hpp
+    stringarray.hpp
+    diffoptions.hpp
+    conflictdescription.hpp
+    conflictresult.hpp
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")
@@ -110,6 +119,7 @@ IF(QT4_FOUND)
     SET(HOMEDIR "homePath")
     SET(svnqt-name svnqt4)
     SET(QDATABASE "QSqlDatabase")
+    SET(QLONG "qlonglong")
 ELSE(QT4_FOUND)
     IF(QT_FOUND)
         SET(TOUTF8 "utf8")
@@ -118,6 +128,7 @@ ELSE(QT4_FOUND)
         SET(TOASCII "latin1")
         SET(HOMEDIR "homeDirPath")
         SET(QDATABASE "QSqlDatabase*")
+        SET(QLONG "Q_LLONG")
     ENDIF(QT_FOUND)
     SET(svnqt-name svnqt3)
 ENDIF(QT4_FOUND)

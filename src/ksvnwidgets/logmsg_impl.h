@@ -25,7 +25,9 @@
 #include <q3valuelist.h>
 #include <qpair.h>
 
-class Logmsg_impl: public QDialog, Ui::LogmessageData {
+class QStringList;
+
+class Logmsg_impl: public QWidget, Ui::LogmessageData {
   Q_OBJECT
 public:
     struct logActionEntry {
@@ -45,12 +47,12 @@ public:
 
     typedef Q3ValueList<logActionEntry> logActionEntries;
 
-    Logmsg_impl(QWidget *parent = 0, const char *name = 0);
-    Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent=0, const char *name=0);
-    Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent=0, const char *name=0);
+    Logmsg_impl(QWidget *parent = 0);
+    Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent=0);
+    Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent=0);
     Logmsg_impl(const logActionEntries&,
         const logActionEntries&,
-        QWidget *parent = 0, const char *name = 0);
+        QWidget *parent = 0);
     virtual ~Logmsg_impl();
 
     QString getMessage()const;
@@ -58,15 +60,15 @@ public:
     void initHistory();
     void saveHistory(bool canceld);
 
-    static QString getLogmessage(bool*ok,svn::Depth*rec,bool*keeps_locks,QWidget*parent=0,const char*name=0);
-    static QString getLogmessage(const svn::CommitItemList&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
-    static QString getLogmessage(const QMap<QString,QString>&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0,const char*name=0);
+    static QString getLogmessage(bool*ok,svn::Depth*rec,bool*keeps_locks,QWidget*parent=0);
+    static QString getLogmessage(const svn::CommitItemList&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0);
+    static QString getLogmessage(const QMap<QString,QString>&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0);
 
     static QString getLogmessage(const logActionEntries&,
             const logActionEntries&,
             QObject*callback,
             logActionEntries&,
-            bool*ok,bool*keep_locks,QWidget*parent=0,const char*name=0);
+            bool*ok,bool*keep_locks,QWidget*parent=0);
 
     void addItemWidget(QWidget*);
 
@@ -83,8 +85,8 @@ protected slots:
     virtual void hideNewItems(bool);
 
 protected:
-    static Q3ValueList<QString> sLogHistory;
-    QValueList<QListViewItem*> m_Hidden;
+    static QStringList sLogHistory;
+    Q3ValueList<Q3ListViewItem*> m_Hidden;
     static const QString groupName;
     static QString sLastMessage;
     static unsigned int smax_message_history;

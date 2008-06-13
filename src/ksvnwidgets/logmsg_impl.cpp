@@ -23,13 +23,15 @@
 
 #include <ktextedit.h>
 #include <kcombobox.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kapplication.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
+
+#include <QStringList>
 
 #include <q3vbox.h>
 #include <qcheckbox.h>
@@ -43,7 +45,7 @@
 
 #define MAX_MESSAGE_HISTORY 10
 
-Q3ValueList<QString> Logmsg_impl::sLogHistory = Q3ValueList<QString>();
+QStringList Logmsg_impl::sLogHistory = QStringList();
 QString Logmsg_impl::sLastMessage=QString();
 const QString Logmsg_impl::groupName("logmsg_dlg_size");
 
@@ -57,18 +59,20 @@ public:
     SvnCheckListItem(Q3ListView*,const Logmsg_impl::logActionEntry&);
     const Logmsg_impl::logActionEntry&data(){return m_Content;}
     virtual int rtti()const{return 1000;}
-    virtual int compare( QListViewItem* item, int col, bool ascending ) const;
+protected:
+    virtual int compare( Q3ListViewItem* item, int col, bool ascending ) const;
 };
 
-Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
-    :LogmessageData(parent, name)
+Logmsg_impl::Logmsg_impl(QWidget *parent)
+    :QWidget(parent),LogmessageData()
 {
+    setupUi(this);
     m_LogEdit->setFocus();
     m_Reviewlabel->hide();
     m_ReviewList->hide();
     m_hidden=true;
     hideButtons(true);
-    m_MainSplitter->moveToFirst(m_EditFrame);
+    m_MainSplitter->insertWidget(0,m_EditFrame);
     delete m_ReviewFrame;
     m_Reviewlabel=0;
     m_ReviewList=0;
@@ -77,9 +81,10 @@ Logmsg_impl::Logmsg_impl(QWidget *parent, const char *name)
     m_DiffItem=0;
 }
 
-Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const char *name)
-    :LogmessageData(parent, name)
+Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent)
+    :QWidget(parent),LogmessageData()
 {
+    setupUi(this);
     m_LogEdit->setFocus();
     m_ReviewList->setColumnText(1,i18n("Items to commit"));
     m_ReviewList->setColumnText(0,i18n("Action"));
@@ -104,9 +109,10 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent, const
     checkSplitterSize();
 }
 
-Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, const char *name)
-    :LogmessageData(parent, name)
+Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent)
+    :QWidget(parent),LogmessageData()
 {
+    setupUi(this);
     m_LogEdit->setFocus();
     m_ReviewList->setColumnText(1,i18n("Items to commit"));
     m_ReviewList->setColumnText(0,i18n("Action"));
@@ -117,7 +123,7 @@ Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, con
         for (;it!=_items.end();++it) {
             Q3ListViewItem*item = new Q3ListViewItem(m_ReviewList);
             item->setText(1,it.key());
-            item->setText(0,it.data());
+            item->setText(0,it.value());
         }
         m_hidden=false;
     } else {
@@ -130,9 +136,10 @@ Logmsg_impl::Logmsg_impl(const QMap<QString,QString>&_items,QWidget *parent, con
 
 Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
         const logActionEntries&_notActivatedList,
-        QWidget *parent, const char *name)
-    :LogmessageData(parent, name)
+        QWidget *parent)
+    :QWidget(parent),LogmessageData()
 {
+    setupUi(this);
     m_LogEdit->setFocus();
     m_hidden=false;
     for (unsigned j = 0; j<_activatedList.count();++j) {
@@ -143,7 +150,7 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
         item->setState(Q3CheckListItem::Off);
     }
-    m_HideNewItems->setOn(Kdesvnsettings::commit_hide_new());
+    m_HideNewItems->setChecked(Kdesvnsettings::commit_hide_new());
     checkSplitterSize();
 }
 
@@ -152,12 +159,12 @@ Logmsg_impl::~Logmsg_impl()
     Q3ValueList<int> list = m_MainSplitter->sizes();
     if (!m_hidden && list.count()==2) {
         Kdesvnsettings::setCommit_splitter_height(list);
-        Kdesvnsettings::writeConfig();
+        Kdesvnsettings::self()->writeConfig();
     }
     for (unsigned int j=0; j<m_Hidden.size();++j) {
         delete m_Hidden[j];
     }
-    Kdesvnsettings::setCommit_hide_new(m_HideNewItems->state()==QButton::On);
+    Kdesvnsettings::setCommit_hide_new(m_HideNewItems->isChecked());
 }
 
 void Logmsg_impl::checkSplitterSize()
@@ -189,7 +196,7 @@ void Logmsg_impl::slotHistoryActivated(int number)
  */
 QString Logmsg_impl::getMessage()const
 {
-    return m_LogEdit->text();
+    return m_LogEdit->toPlainText();
 }
 
 
@@ -233,7 +240,7 @@ void Logmsg_impl::initHistory()
             s = cs.readEntry(key,QString::null);
         }
     }
-    Q3ValueList<QString>::const_iterator it;
+    QStringList::const_iterator it;
     for (it=sLogHistory.begin();it!=sLogHistory.end();++it) {
         if ((*it).length()<=40) {
             m_LogHistory->insertItem((*it));
@@ -253,16 +260,17 @@ void Logmsg_impl::initHistory()
  */
 void Logmsg_impl::saveHistory(bool canceld)
 {
-    if (m_LogEdit->text().length()==0) return;
+    QString _text = m_LogEdit->toPlainText();
+    if (_text.length()==0) return;
     /// @todo make static threadsafe
     if (!canceld) {
-        Q3ValueList<QString>::iterator it;
-        if ( (it=sLogHistory.find(m_LogEdit->text()))!=sLogHistory.end()) {
-            sLogHistory.erase(it);
+        int it;
+        if ( (it=sLogHistory.indexOf(_text))!=-1) {
+            sLogHistory.removeAt(it);
         }
-        sLogHistory.push_front(m_LogEdit->text());
+        sLogHistory.push_front(_text);
         if (sLogHistory.size()>smax_message_history) {
-            sLogHistory.erase(sLogHistory.fromLast());
+            sLogHistory.removeLast();
         }
         KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
         for (unsigned int i = 0; i < sLogHistory.size();++i) {
@@ -270,11 +278,11 @@ void Logmsg_impl::saveHistory(bool canceld)
         }
         cs.sync();
     } else {
-        sLastMessage=m_LogEdit->text();
+        sLastMessage=_text;
     }
 }
 
-QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent,const char*name)
+QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent)
 {
     bool _ok,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
@@ -313,7 +321,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidge
     return msg;
 }
 
-QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent,const char*name)
+QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent)
 {
     bool _ok,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
@@ -355,7 +363,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::
 }
 
 QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
-    bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent,const char*name)
+    bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent)
 {
     bool _ok,_rec,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
@@ -400,7 +408,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
             const logActionEntries&_off,
             QObject*callback,
             logActionEntries&_result,
-            bool*ok,bool*keep_locks,QWidget*parent,const char*name)
+            bool*ok,bool*keep_locks,QWidget*parent)
 {
     bool _ok,_keep_locks;
     QString msg("");
@@ -490,19 +498,19 @@ SvnCheckListItem::SvnCheckListItem(Q3ListView*parent,const Logmsg_impl::logActio
     }
 }
 
-int SvnCheckListItem::compare( QListViewItem* item, int col, bool ascending ) const
+int SvnCheckListItem::compare( Q3ListViewItem* item, int col, bool ascending ) const
 {
     if (item->rtti()!=1000 || col>0) {
-        return QCheckListItem::compare(item,col,ascending);
+        return Q3CheckListItem::compare(item,col,ascending);
     }
     SvnCheckListItem* k = static_cast<SvnCheckListItem*>( item );
     if (Kdesvnsettings::case_sensitive_sort()) {
         if (Kdesvnsettings::locale_is_casesensitive()) {
-            return m_Content._name.lower().localeAwareCompare(k->m_Content._name.lower());
+            return m_Content._name.toLower().localeAwareCompare(k->m_Content._name.toLower());
         }
         return m_Content._name.compare(k->m_Content._name);
     } else {
-        return m_Content._name.lower().localeAwareCompare(k->m_Content._name.lower());
+        return m_Content._name.toLower().localeAwareCompare(k->m_Content._name.toLower());
     }
 }
 
@@ -573,7 +581,7 @@ void Logmsg_impl::hideNewItems(bool how)
     if (!m_ReviewList)return;
 
     if (how) {
-        QListViewItemIterator it( m_ReviewList );
+        Q3ListViewItemIterator it( m_ReviewList );
         while ( it.current() ) {
             if (it.current()->rtti()==1000) {
                 SvnCheckListItem *item = static_cast<SvnCheckListItem*>(it.current());
@@ -601,7 +609,6 @@ void Logmsg_impl::hideNewItems(bool how)
 void Logmsg_impl::hideDepth(bool ahide)
 {
     m_DepthSelector->hideDepth(ahide);
-//    if (hide) m_DepthSelector->hide();
-//    else m_DepthSelector->show();
 }
+
 #include "logmsg_impl.moc"

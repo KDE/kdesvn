@@ -66,7 +66,11 @@ KUrl KTranslateUrl::translateSystemUrl(const KUrl&_url)
 bool KTranslateUrl::parseURL(const KUrl&url,QString&name,QString&path)
 {
     QString url_path = url.path();
+#if QT_VERSION < 0x040000
     int i = url_path.find('/', 1);
+#else
+    int i = url_path.indexOf('/',1);
+#endif
     if (i > 0)
     {
         name = url_path.mid(1, i-1);
@@ -105,15 +109,26 @@ KUrl KTranslateUrl::findSystemBase(const QString&filename)
         {
             if (*name==filename+".desktop")
             {
+#if QT_VERSION < 0x040000
                 KDesktopFile desktop(*dirpath+filename+".desktop", true);
+#else
+                KDesktopFile desktop(*dirpath+filename+".desktop");
+#endif
+#if QT_VERSION < 0x040000
                 if ( desktop.readURL().isEmpty() )
+#else
+                if ( desktop.readUrl().isEmpty() )
+#endif
                 {
                     KUrl url;
                     url.setPath( desktop.readPath() );
                     return url;
                 }
-
+#if QT_VERSION < 0x040000
                 return desktop.readURL();
+#else
+                return desktop.readUrl();
+#endif
             }
         }
     }

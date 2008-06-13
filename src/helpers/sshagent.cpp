@@ -38,8 +38,8 @@ QString SshAgent::m_authSock   = QString::null;
 QString SshAgent::m_pid        = QString::null;
 
 
-SshAgent::SshAgent(QObject* parent, const char* name)
-    : QObject(parent, name)
+SshAgent::SshAgent(QObject* parent)
+    : QObject(parent)
 {
 }
 
@@ -170,7 +170,7 @@ void SshAgent::slotProcessExited(K3Process*)
 
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
-    QStringList m_outputLines = QStringList::split("\n",m_Output);
+    QStringList m_outputLines = m_Output.split("\n",QString::SkipEmptyParts);
 
     QStringList::Iterator it  = m_outputLines.begin();
     QStringList::Iterator end = m_outputLines.end();
@@ -178,14 +178,14 @@ void SshAgent::slotProcessExited(K3Process*)
     {
         if( m_pid.isEmpty() )
         {
-            int pos = cshPidRx.search(*it);
+            int pos = cshPidRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_pid = cshPidRx.cap(1);
                 continue;
             }
 
-            pos = bashPidRx.search(*it);
+            pos = bashPidRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_pid = bashPidRx.cap(1);
@@ -195,14 +195,14 @@ void SshAgent::slotProcessExited(K3Process*)
 
         if( m_authSock.isEmpty() )
         {
-            int pos = cshSockRx.search(*it);
+            int pos = cshSockRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_authSock = cshSockRx.cap(1);
                 continue;
             }
 
-            pos = bashSockRx.search(*it);
+            pos = bashSockRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_authSock = bashSockRx.cap(1);

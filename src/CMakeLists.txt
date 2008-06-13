@@ -3,7 +3,6 @@ add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 ELSE (NOT BUILD_KDE4)
 kde4_add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 ENDIF (NOT BUILD_KDE4)
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde3)
 
 SET(kdesvnsrc
     main.cpp

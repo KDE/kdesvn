@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>339</width>
-            <height>384</height>
+            <height>358</height>
         </rect>
     </property>
     <property name="caption">
@@ -93,17 +93,6 @@
             <property name="whatsThis" stdset="0">
                 <string>When browsing kdesvn may try displaying properties below itemlist from a selected item. 
 On networked repositories (eg., not opened via file:// protocol) this may get real slow. So if you have slow network connections or when browsing hangs often you should deactivate it.</string>
-            </property>
-        </widget>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_display_ignored_files</cstring>
-            </property>
-            <property name="text">
-                <string>Display ignored files</string>
-            </property>
-            <property name="accel">
-                <string></string>
             </property>
         </widget>
         <widget class="QCheckBox">

@@ -267,9 +267,9 @@ template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_he
  */
 void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,SvnItem*k,bool list_files,int limit)
 {
-    if (!k)return;
-    kdDebug()<<"Log für " << k->fullName()<<endl;
-    makeLog(start,end,peg,k->fullName(),list_files,limit);
+    if (k) {
+        makeLog(start,end,peg,k->fullName(),list_files,limit);
+    }
 }
 
 svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,
@@ -878,7 +878,7 @@ void SvnActions::slotCommit()
                                        ));
         }
     }
-    if (makeCommit(targets)) {
+    if (makeCommit(targets) && Kdesvnsettings::start_log_cache_on_open()) {
         startFillCache(m_Data->m_ParentList->baseUri());
     }
 }
@@ -2471,11 +2471,11 @@ void SvnActions::startFillCache(const QString&path)
 {
     stopFillCache();
     svn::InfoEntry e;
-    if (!singleInfo(path,svn::Revision::HEAD,e)) {
-        return;
-    }
     if (!doNetworking()) {
         emit sendNotify(i18n("Not filling logcache because networking is disabled"));
+        return;
+    }
+    if (!singleInfo(path,svn::Revision::HEAD,e)) {
         return;
     }
     m_FCThread=new FillCacheThread(this,e.reposRoot());

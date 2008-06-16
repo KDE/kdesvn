@@ -479,7 +479,6 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
-    kdDebug()<<"Start open URL"<<endl;
     emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,QString(""));
     m_Dirsread.clear();
     if (m_SelectedItems) {
@@ -539,7 +538,7 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
                 setWorkingCopy(true);
             } else {
                 // yes! KURL sometimes makes a correct localfile url (file:///)
-                // to a simple file:/ - that brakes subverision lib. so we make sure
+                // to a simple file:/ - that breakes subversion lib. so we make sure
                 // that we have a correct url
                 setBaseUri("file://"+baseUri());
             }
@@ -604,18 +603,18 @@ bool kdesvnfilelist::openURL( const KURL &url,bool noReinit )
              slotCheckUpdates();
         }
     }
-    m_SvnWrapper->startFillCache(baseUri());
+    if (Kdesvnsettings::start_log_cache_on_open()) {
+        m_SvnWrapper->startFillCache(baseUri());
+    }
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));
     enableActions();
-    kdDebug()<<"End open URL"<<endl;
     return result;
 }
 
 void kdesvnfilelist::closeMe()
 {
-    kdDebug()<<"Close me"<<endl;
     m_SvnWrapper->killallThreads();
 
     selectAll(false);
@@ -737,24 +736,8 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             }
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
-#if 0
-            if (item->fileItem()) {
-                oneItem.append(item->fileItem());
-            }
-#endif
-//            kdDebug()<< "Watching file: " + item->fullName() << endl;
         }
     }
-#if 0
-    if (oneItem.count()>0) {
-        int size = Kdesvnsettings::listview_icon_size();
-        KIO::PreviewJob* m_previewJob= KIO::filePreview(oneItem, size, size, size, 70, true, true, 0);
-        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem *, const QPixmap & ) ),
-                 this, SLOT( gotPreview( const KFileItem *, const QPixmap & ) ) );
-        connect( m_previewJob, SIGNAL( result( KIO::Job * ) ),
-                 this, SLOT( gotPreviewResult() ) );
-    }
-#endif
 }
 
 /* newdir is the NEW directory! just required if local */
@@ -785,7 +768,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
     svn::StatusPtr stat;
     try {
         stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         m_LastException = e.msg();
         kdDebug()<<"Catched on singlestatus"<< endl;
         emit sigLogMessage(m_LastException);

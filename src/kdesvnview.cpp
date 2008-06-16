@@ -26,7 +26,6 @@
 #include "svnfrontend/hotcopydlg_impl.h"
 #include "svnfrontend/loaddmpdlg_impl.h"
 #include "svnfrontend/stopdlg.h"
-#include "svnfrontend/leftpane/leftpane_impl.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/url.hpp"
@@ -62,26 +61,14 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
       m_currentURL("")
 {
+    Q_UNUSED(full);
     setupActions();
     QVBoxLayout *top_layout = new QVBoxLayout(this);
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
-    leftpane_impl * _leftpane;
 
-    if (full) {
-        m_treeSplitter = new QSplitter(m_Splitter);
-        m_treeSplitter->setOrientation( QSplitter::Horizontal );
-        m_treeSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_treeSplitter->sizePolicy().hasHeightForWidth() ) );
-
-        // just for testing - get filled with a real widget
-        _leftpane = new leftpane_impl(m_treeSplitter);
-        m_flist=new kdesvnfilelist(m_Collection,m_treeSplitter);
-    } else {
-        m_treeSplitter=0;
-        m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
-        _leftpane = 0;
-    }
+    m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
 
     m_infoSplitter = new QSplitter(m_Splitter);
     m_infoSplitter->setOrientation( QSplitter::Horizontal );
@@ -94,10 +81,6 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
             pl,SLOT(displayList(const svn::PathPropertiesMapListPtr&,bool,const QString&)));
 
     m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_flist->sizePolicy().hasHeightForWidth() ) );
-    if (full ) {
-        m_treeSplitter->setCollapsible(m_flist,false);
-        m_Splitter->setCollapsible(m_treeSplitter,false);
-    }
 
     top_layout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
@@ -112,13 +95,6 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
     if (!t1.isEmpty()) {
         QTextStream st1(&t1,IO_ReadOnly);
         st1 >> *m_Splitter;
-    }
-    if (m_treeSplitter) {
-        t1 = cs.readEntry("split2",QString::null);
-        if (!t1.isEmpty()) {
-            QTextStream st2(&t1,IO_ReadOnly);
-            st2 >> *m_treeSplitter;
-        }
     }
     if (m_infoSplitter) {
         t1 = cs.readEntry("infosplit",QString::null);
@@ -142,11 +118,6 @@ kdesvnView::~kdesvnView()
     st1 << *m_Splitter;
     cs.writeEntry("split1",t1);
 
-    if (m_treeSplitter) {
-        QTextStream st2(&t2,IO_WriteOnly);
-        st2 << *m_treeSplitter;
-        cs.writeEntry("split2",t2);
-    }
     if (m_infoSplitter) {
         t2="";
         QTextStream st2(&t2,IO_WriteOnly);

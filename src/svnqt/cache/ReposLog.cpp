@@ -317,9 +317,12 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
         return query.value(0).toInt();
     }
     // not found...
+    if (noNetwork) {
+        return svn::Revision::UNDEFINED;
+    }
     svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD));;
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
-        return aRev;
+        return svn::Revision::UNDEFINED;
     }
     return e[0].revision();
 }

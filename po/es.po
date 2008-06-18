@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-06 01:14+0200\n"
-"PO-Revision-Date: 2008-05-28 18:45+0200\n"
+"PO-Revision-Date: 2008-06-18 17:43+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: es_ES <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -156,8 +156,7 @@ msgstr "0"
 
 #: rc.cpp:57
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "El mínimo que una salida de registro debe contener antes de que kdesvn "
 "muestre una ventana con el registro"
@@ -303,8 +302,7 @@ msgstr "Configuración Subversion"
 #: rc.cpp:127
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:131
 #, no-c-format
@@ -316,14 +314,12 @@ msgstr ""
 #: rc.cpp:134
 #, no-c-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
-"Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
+msgstr "Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
 
 #: rc.cpp:137
 #, no-c-format
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
-"Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
+msgstr "Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
 
 #: rc.cpp:140
 #, no-c-format
@@ -436,8 +432,7 @@ msgstr "Almacenar contraseñas en Cartera KDE"
 
 #: rc.cpp:188
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes "
 "de Subversion?"
@@ -511,14 +506,12 @@ msgstr "Ocultar elementos nuevos en el dialogo de confirmación"
 #: rc.cpp:221
 #, no-c-format
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
-"Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
+msgstr "Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
 
 #: rc.cpp:224
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:227
 #, no-c-format
@@ -621,8 +614,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:295
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Establece si se prefiere un programa de fusionado externo y no el fusionado "
 "de subversion"
@@ -952,8 +944,7 @@ msgstr "Seleccione tipo de almacenamiento"
 #: rc.cpp:502
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
+msgstr "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
 #: rc.cpp:505
 #, no-c-format
@@ -968,8 +959,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 #: rc.cpp:512
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
+msgstr "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
 #: rc.cpp:516
 #, no-c-format
@@ -1280,12 +1270,12 @@ msgstr "Crear en un subdirectorio con el nombre final de la URL"
 #: rc.cpp:722 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
 #, no-c-format
 msgid "Overwrite existing"
-msgstr ""
+msgstr "Sobreescribir existente"
 
 #: rc.cpp:726 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "May existing unversioned items ovewritten"
-msgstr "Ningún elemento sin versionar encontrado."
+msgstr "Pueden existir elementos sin versionar sobreescritos"
 
 #: rc.cpp:729
 #, no-c-format
@@ -1350,8 +1340,7 @@ msgstr "Mensaje"
 #: rc.cpp:771
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:774 rc.cpp:824 ksvnwidgets/logmsg_impl.cpp:83
 #: ksvnwidgets/logmsg_impl.cpp:110
@@ -1495,27 +1484,27 @@ msgstr "Form1"
 #: rc.cpp:867
 #, no-c-format
 msgid "Empty Depth"
-msgstr ""
+msgstr "Sin profundidad"
 
 #: rc.cpp:870
 #, no-c-format
 msgid "Files Depth"
-msgstr ""
+msgstr "Profundidad de Ficheros"
 
 #: rc.cpp:873
 #, no-c-format
 msgid "Immediate Depth"
-msgstr ""
+msgstr "Profundidad inmediata"
 
 #: rc.cpp:876
 #, no-c-format
 msgid "Infinity Depth (recurse)"
-msgstr ""
+msgstr "Profundidad infinita (recursivo)"
 
 #: rc.cpp:879
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select depth of operation"
-msgstr "Seleccione tipo de almacenamiento"
+msgstr "Seleccione profundidad de la operación"
 
 #: rc.cpp:882
 #, no-c-format
@@ -1541,6 +1530,22 @@ msgid ""
 "Equivalent to the pre-1.5 default update behavior.\n"
 "</p>"
 msgstr ""
+"<b>Tipo de profundidad</b>:\n"
+"<p>\n"
+"<i>Sin profundidad</i><br>Solo el directorio nombrado, no sus entradas.  Las actualizaciones no tocarán ningún fichero o subdirectorio no presentes todavía.\n"
+"</p>\n"
+"<p>\n"
+"<i>Profundidad de ficheros</i><br> El directorio y sus ficheros hijos, pero no subdirectorios. Las actualizaciones tocarán ficheros no presentes todavía, pero no subdirectorios.\n"
+"</p>\n"
+"<p>\n"
+"<i>Profundidad inmediata</i><br>\n"
+"El directorio y sus entradas. Las actualizaciones tocarán cualquier fichero o subdirectorios no presentes todavía; las entradas de los subdirectorios se tratarán sin profundidad.\n"
+"</p>\n"
+"<p>\n"
+"<i>Profundidad infinita</i><br>\n"
+"Las actualizaciones tocarán cualquier fichero o subdirectorios no presentes todavía; las entradas de los subdirectorios se tratarán igualmente con profundidad infinita.<br>\n"
+"Equivalente al comportamiento por defecto de versiones anteriores a la 1.5.\n"
+"</p>"
 
 #: rc.cpp:900 svnfrontend/ccontextlistener.cpp:66
 #: svnfrontend/svnactions.cpp:1704
@@ -2047,7 +2052,6 @@ msgid "Property modified"
 msgstr "Propiedad modificada"
 
 #: svnfrontend/fillcachethread.cpp:79
-#, fuzzy
 msgid "Cache filled up to revision %1"
 msgstr "Cache lleno hasta la revisión %1"
 
@@ -2277,27 +2281,26 @@ msgid "Other..."
 msgstr "Otro..."
 
 #: svnfrontend/importdir_logmsg.cpp:44
-#, fuzzy
 msgid "No ignore"
-msgstr "Ignorar"
+msgstr "No ignorar"
 
 #: svnfrontend/importdir_logmsg.cpp:45
 msgid "If set, add files or directories that match ignore patterns."
-msgstr ""
+msgstr "Si establecido, se añaden ficheros o directorios que concuerdan con los patrones a ignorar."
 
 #: svnfrontend/importdir_logmsg.cpp:50
 msgid "Ignore unknown node types"
-msgstr ""
+msgstr "Ignorar tipos de nodos desconocidos"
 
 #: svnfrontend/importdir_logmsg.cpp:51
 msgid "Should files with unknown node types be ignored"
-msgstr ""
+msgstr "Si ficheros con tipos de nodos desconocidos deben ser ignorados"
 
 #: svnfrontend/importdir_logmsg.cpp:52
 msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
-msgstr ""
+msgstr "Ignorar ficheros cuyo tipo de nodo es desconocido, tales como ficheros de dispositivo y tuberías."
 
 #: svnfrontend/importdir_logmsg.cpp:84
 msgid "Create subdir %1 on import"
@@ -2325,8 +2328,7 @@ msgstr "Introducir el rango de fusionado"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2404,8 +2406,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:96
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -2750,8 +2751,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1663
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1686
 msgid "Revert entries"
@@ -2979,8 +2979,7 @@ msgstr "Mostrar últimos cambios"
 
 #: svnfrontend/kdesvnfilelist.cpp:271
 msgid "Display last changes as difference to previous commit."
-msgstr ""
-"Muestra los últimos cambios como diferencias con la confirmación previa."
+msgstr "Muestra los últimos cambios como diferencias con la confirmación previa."
 
 #: svnfrontend/kdesvnfilelist.cpp:273
 msgid "Details"
@@ -2991,8 +2990,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:280
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -3027,8 +3025,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:294
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:296
 msgid "Lock current items"
@@ -3060,8 +3057,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:312
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:314
 msgid "Open repository of working copy"
@@ -3454,3 +3450,4 @@ msgstr "Mensaje de registro"
 #: urldlg.cpp:52
 msgid "Open repository or working copy"
 msgstr "Abrir repositorio o copia de trabajo"
+

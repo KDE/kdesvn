@@ -363,6 +363,10 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         {
             peg = _rev;
         }
+        if (peg==svn::Revision::UNDEFINED)
+        {
+            peg=svn::Revision::HEAD;
+        }
         cacheKey=_rev.toString()+"/"+url;
     }
     svn::InfoEntries e;
@@ -376,7 +380,6 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             return false;
         }
         if (e.count()<1||e[0].reposRoot().isEmpty()) {
-            kdDebug()<<"No info found" << endl;
             emit clientException(i18n("Got no info."));
             return false;
         }
@@ -2503,7 +2506,7 @@ bool SvnActions::doNetworking()
     bool is_url=false;
     if (m_Data->m_ParentList->isNetworked()) {
         is_url=true;
-    } else {
+    } else if (m_Data->m_ParentList->baseUri().startsWith("/")){
         svn::InfoEntry e;
         if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
             return false;

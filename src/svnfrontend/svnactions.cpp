@@ -43,6 +43,9 @@
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/wc.hpp"
 #include "src/svnqt/svnqt_defines.hpp"
+#include "src/svnqt/cache/LogCache.hpp"
+#include "src/svnqt/cache/ReposLog.hpp"
+
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
@@ -276,7 +279,6 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
         int limit,QWidget*parent)
 {
     svn::SharedPointer<svn::LogEntriesMap> logs = new svn::LogEntriesMap;
-    QString ex;
     if (!m_Data->m_CurrentContext) return 0;
 
     bool follow = Kdesvnsettings::log_follows_nodes();
@@ -286,14 +288,24 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
         StopDlg sdlg(m_Data->m_SvnContext,(parent?parent:m_Data->m_ParentList->realWidget()),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit);
+        if (doNetworking()) {
+            m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit);
+        } else {
+            svn::InfoEntry e;
+            if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
+                return 0;
+            }
+            svn::cache::ReposLog rl(m_Data->m_Svnclient,e.reposRoot());
+            QString s1=e.url().mid(e.reposRoot().length());
+            QString s2=which.mid(m_Data->m_ParentList->baseUri().length());
+            rl.log(s1+"/"+s2,start,end,peg,*logs,!follow,limit);
+        }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return 0;
     }
     if (!logs) {
-        ex = i18n("Got no logs");
-        emit clientException(ex);
+        emit clientException(i18n("Got no logs"));
         return 0;
     }
     return logs;
@@ -1594,7 +1606,7 @@ void SvnActions::CheckoutExport(const QString&what,bool _exp,bool urlisTarget)
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
 {
-    if (!m_Data->m_ParentList || !_exp&&m_Data->m_ParentList->isWorkingCopy()) return;
+    if ( !m_Data->m_ParentList || (!_exp&&m_Data->m_ParentList->isWorkingCopy()) ) return;
     SvnItem*k = m_Data->m_ParentList->Selected();
     if (k && !k->isDir()) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(),_exp?i18n("Exporting a file?"):i18n("Checking out a file?"));

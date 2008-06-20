@@ -2500,13 +2500,16 @@ void SvnActions::startFillCache(const QString&path)
 
 bool SvnActions::doNetworking()
 {
+    // if networking is allowd we don't need extra checks, second is just for avoiding segfaults
     if (Kdesvnsettings::network_on()||!m_Data->m_ParentList) {
         return true;
     }
     bool is_url=false;
     if (m_Data->m_ParentList->isNetworked()) {
+        // if called http:// etc.pp.
         is_url=true;
     } else if (m_Data->m_ParentList->baseUri().startsWith("/")){
+        // if opened a working copy we must check if it points to a networking repository
         svn::InfoEntry e;
         if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
             return false;

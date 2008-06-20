@@ -179,6 +179,7 @@ protected slots:
 
     /* internal slots */
     virtual void readSupportData();
+    virtual void slotUpdateLogCache();
 
 signals:
     void sigLogMessage(const QString&);

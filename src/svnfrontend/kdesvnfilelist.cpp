@@ -397,6 +397,10 @@ void kdesvnfilelist::setupActions()
     tmp_action = new KAction( i18n("Fold File Tree"), 0, this, SLOT(slotFoldTree()), m_filesAction, "view_fold_tree" );
     tmp_action->setToolTip(i18n("Closes all branches of the file tree"));
 
+    /* caching */
+    tmp_action = new KAction( i18n("Update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"update_log_cache" );
+    tmp_action->setToolTip(i18n("Update the log cache for current repository"));
+
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
@@ -857,7 +861,7 @@ void kdesvnfilelist::enableActions()
     bool none = c==0&&isopen;
     bool dir = false;
     bool unique = uniqueTypeSelected();
-    bool remote_enabled=m_SvnWrapper->doNetworking();
+    bool remote_enabled=isopen&&m_SvnWrapper->doNetworking();
 
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
@@ -992,6 +996,11 @@ void kdesvnfilelist::enableActions()
     temp = filesActions()->action("openwith");
     if (temp) {
         temp->setEnabled(kapp->authorizeKAction("openwith")&&single&&!dir);
+    }
+
+    temp = filesActions()->action("update_log_cache");
+    if (temp) {
+        temp->setEnabled(remote_enabled);
     }
 }
 
@@ -3105,6 +3114,13 @@ void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QVal
         which->refreshStatus();
         refreshCurrent(which);
         _propListTimeout();
+    }
+}
+
+void kdesvnfilelist::slotUpdateLogCache()
+{
+    if (baseUri().length()>0 && m_SvnWrapper->doNetworking()) {
+        m_SvnWrapper->startFillCache(baseUri());
     }
 }
 

@@ -96,8 +96,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     }
     int _r;
     if (_q.isActive() && _q.next()) {
-
-        qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
         _r = _q.value(0).toInt();
     } else {
         qDebug(_q.lastError().text().TOUTF8().data());

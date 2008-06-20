@@ -173,7 +173,8 @@ public:
     void clearContextData();
     QString getContextData(const QString&)const;
 
-    virtual bool event ( QEvent * e );
+    virtual void customEvent ( QCustomEvent * e );
+
     bool doNetworking();
 
 protected:
@@ -229,6 +230,7 @@ signals:
     void sigRefreshIcons(bool);
     void sigExtraLogMsg(const QString&);
     void sigGotourl(const QString&);
+    void sigCacheStatus(Q_LONG,Q_LONG);
 
 protected slots:
     virtual void wroteStdin(KProcess*);

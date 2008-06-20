@@ -56,6 +56,7 @@
 #include <kshortcut.h>
 #include <kdialog.h>
 #include <kdialogbase.h>
+#include <kprogress.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name,bool full)
     : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
@@ -63,7 +64,9 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
 {
     Q_UNUSED(full);
     setupActions();
-    QVBoxLayout *top_layout = new QVBoxLayout(this);
+    m_CacheProgressBar=0;
+
+    m_topLayout = new QVBoxLayout(this);
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
@@ -82,13 +85,14 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
 
     m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_flist->sizePolicy().hasHeightForWidth() ) );
 
-    top_layout->addWidget(m_Splitter);
+    m_topLayout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
     connect(m_flist,SIGNAL(sigShowPopup(const QString&,QWidget**)),this,SLOT(slotDispPopup(const QString&,QWidget**)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
     connect(m_flist,SIGNAL(sigSwitchUrl(const KURL&)),this,SIGNAL(sigSwitchUrl(const KURL&)));
     connect(m_flist,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
+    connect(m_flist,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SLOT(fillCacheStatus(Q_LONG,Q_LONG)));
     connect(this,SIGNAL(sigMakeBaseDirs()),m_flist,SLOT(slotMkBaseDirs()));
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
     QString t1 = cs.readEntry("split1",QString::null);
@@ -458,6 +462,24 @@ void kdesvnView::setCanceled(bool how)
     m_ReposCancel = how;
 }
 
+void kdesvnView::fillCacheStatus(Q_LONG current,Q_LONG max)
+{
+    if (current>-1 && max>-1) {
+        kdDebug()<<"Fillcache "<<current<<" von "<<max<<endl;
+        if (!m_CacheProgressBar) {
+            kdDebug()<<"Creating progressbar"<<endl;
+            m_CacheProgressBar=new KProgress((int)max,this);
+            m_topLayout->addWidget(m_CacheProgressBar);
+            m_CacheProgressBar->setFormat(i18n("Inserted %v not cached log entries of %m."));
+        }
+        if (!m_CacheProgressBar->isVisible()) {
+            m_CacheProgressBar->show();
+        }
+        m_CacheProgressBar->setValue((int)current);
+    } else {
+        delete m_CacheProgressBar;
+        m_CacheProgressBar=0;
+    }
+}
+
 #include "kdesvnview.moc"
-
-

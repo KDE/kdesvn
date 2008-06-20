@@ -234,6 +234,9 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(this,SIGNAL(dropped (QDropEvent*,QListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,QListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
+
+    connect(m_SvnWrapper,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)));
+
     m_pList->connectDirTimer(this);
     m_pList->connectPropTimer(this);
 
@@ -2744,6 +2747,9 @@ void kdesvnfilelist::slotSettingsChanged()
     }
     enableActions();
     sort();
+    if (m_SvnWrapper && !m_SvnWrapper->doNetworking()) {
+        m_SvnWrapper->stopFillCache();
+    }
 }
 
 

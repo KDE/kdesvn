@@ -35,6 +35,7 @@
 #include "src/ksvnwidgets/revertform_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
+#include "src/kdesvn_events.h"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/annotate_line.hpp"
 #include "src/svnqt/context_listener.hpp"
@@ -2330,11 +2331,11 @@ void SvnActions::stopFillCache()
         m_FCThread->cancelMe();
         if (!m_FCThread->wait(MAX_THREAD_WAITTIME)) {
             m_FCThread->terminate();
-            m_FCThread->terminate();
             m_FCThread->wait(MAX_THREAD_WAITTIME);
         }
         delete m_FCThread;
         m_FCThread = 0;
+        emit sigCacheStatus(-1,-1);
     }
 }
 
@@ -2519,14 +2520,16 @@ bool SvnActions::doNetworking()
     return !is_url;
 }
 
-bool SvnActions::event(QEvent * e)
+void SvnActions::customEvent(QCustomEvent * e)
 {
     if (e->type()==EVENT_LOGCACHE_FINISHED) {
         emit sendNotify(i18n("Filling log cache in background finished."));
         stopFillCache();
-        return true;
+        return;
+    } else if (e&&e->type()==EVENT_LOGCACHE_STATUS && m_FCThread && m_FCThread->running()) {
+        FillCacheStatusEvent*fev=(FillCacheStatusEvent*)e;
+        emit sigCacheStatus(fev->current(),fev->max());
     }
-    return false;
 }
 
 /*!

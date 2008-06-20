@@ -37,6 +37,7 @@ class QSpacerItem;
 class QSplitter;
 class KActionCollection;
 class KTextBrowser;
+class KProgress;
 
 
 /**
@@ -115,6 +116,7 @@ public slots:
 
     /* repositorylistener methods */
     virtual void setCanceled(bool);
+    virtual void fillCacheStatus(Q_LONG,Q_LONG);
 
 protected slots:
     virtual void slotOnURL(const QString& url);
@@ -129,6 +131,9 @@ protected:
     QSplitter *m_Splitter,*m_infoSplitter;
     QString m_currentURL;
     KTextBrowser*m_LogWindow;
+    QVBoxLayout*m_topLayout;
+    KProgress*m_CacheProgressBar;
+
 protected:
     virtual void setupActions();
     bool m_ReposCancel;

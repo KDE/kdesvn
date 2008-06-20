@@ -30,5 +30,6 @@
 #define EVENT_THREAD_CERT_SELECT_PROMPT QEvent::User+5
 #define EVENT_THREAD_NOTIFY QEvent::User+6
 #define EVENT_LOGCACHE_FINISHED QEvent::User+7
+#define EVENT_LOGCACHE_STATUS QEvent::User+8
 
 #endif

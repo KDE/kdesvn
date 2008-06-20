@@ -190,6 +190,7 @@ signals:
     void sigUrlChanged(const QString&);
     void sigProplist(const svn::PathPropertiesMapListPtr&,bool,const QString&);
     void sigListError();
+    void sigCacheStatus(Q_LONG,Q_LONG);
 
 public slots:
     virtual void refreshCurrentTree();

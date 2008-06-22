@@ -88,7 +88,7 @@ void FillCacheThread::run()
             _cur+=200;
             rl.fillCache(i);
             if (m_SvnContext->contextCancel()) {
-                m_SvnContext->contextNotify(i18n("Filling cache canceld."));
+                m_SvnContext->contextNotify(i18n("Filling cache canceled."));
                 kdDebug()<<"Cancel thread"<<endl;
                 breakit=true;
                 break;

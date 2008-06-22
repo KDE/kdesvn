@@ -97,7 +97,7 @@ void FillCacheThread::run()
                 break;
             }
             if (k) {
-                fev = new FillCacheStatusEvent(_cur,_max);
+                fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
                 k->postEvent(m_Parent,fev);
             }
             latestCache=rl.latestCachedRev();

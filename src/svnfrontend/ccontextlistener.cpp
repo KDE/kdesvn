@@ -127,8 +127,7 @@ CContextListener::~CContextListener()
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-    m_Data->pws.getLogin(realm,username,password);
-    return true;
+    return m_Data->pws.getLogin(realm,username,password);
 }
 
 bool CContextListener::contextGetLogin (

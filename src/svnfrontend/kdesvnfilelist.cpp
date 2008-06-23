@@ -960,7 +960,7 @@ void kdesvnfilelist::enableActions()
         temp->setEnabled(isWorkingCopy()&&(single||none)&&remote_enabled);
     }
 
-    /// @todo uberprüfen ob alle selektierten items den selben typ haben.
+    /// @todo check if all items have same type
     temp = filesActions()->action("make_svn_itemsdiff");
     if (temp) {
         temp->setEnabled(multi && c==2 && unique && remote_enabled);

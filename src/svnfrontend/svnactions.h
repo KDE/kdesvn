@@ -64,6 +64,12 @@ class SvnActions : public QObject,public SimpleLogCb
 {
     Q_OBJECT
 public:
+    enum ThreadType {
+        checkupdatethread,
+        fillcachethread,
+        checkmodifiedthread
+    };
+
     SvnActions(ItemDisplay *parent, const char *name = 0,bool processes_blocked=false);
     ~SvnActions();
     void reInitClient();
@@ -173,6 +179,8 @@ public:
     void clearContextData();
     QString getContextData(const QString&)const;
 
+    bool threadRunning(ThreadType which);
+
     virtual void customEvent ( QCustomEvent * e );
 
     bool doNetworking();
@@ -226,6 +234,7 @@ signals:
     void sendNotify(const QString&);
     void reinitItem(SvnItem*);
     void sigRefreshAll();
+    void sigThreadsChanged();
     void sigRefreshCurrent(SvnItem*);
     void sigRefreshIcons(bool);
     void sigExtraLogMsg(const QString&);

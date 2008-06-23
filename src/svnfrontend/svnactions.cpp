@@ -2524,6 +2524,7 @@ void SvnActions::customEvent(QCustomEvent * e)
 {
     if (e->type()==EVENT_LOGCACHE_FINISHED) {
         emit sendNotify(i18n("Filling log cache in background finished."));
+	emit sigThreadsChanged();
         stopFillCache();
         return;
     } else if (e&&e->type()==EVENT_LOGCACHE_STATUS && m_FCThread && m_FCThread->running()) {
@@ -2799,6 +2800,22 @@ QString SvnActions::getContextData(const QString&aKey)const
         return m_Data->m_contextData[aKey];
     }
     return QString::null;
+}
+
+bool SvnActions::threadRunning(ThreadType which)
+{
+    switch(which) {
+        case checkupdatethread:
+            return (m_UThread && m_UThread->running());
+            break;
+        case fillcachethread:
+            return (m_FCThread && m_FCThread->running());
+            break;
+        case checkmodifiedthread:
+            return (m_CThread && m_CThread->running());
+            break;
+    }
+    return false;
 }
 
 #include "svnactions.moc"

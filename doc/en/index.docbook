@@ -736,6 +736,45 @@ This entry (or entry below if folder) got conflicts to resolve with last update.
 
 </para>
 </sect1>
+
+<sect1 id="kdesvn-passwords">
+<title>&kappname; and passwords</title>
+<para>
+&kappname;/subversion is able to save passwords. Saving passwords is always a security risk, but may let a graphical frontend more useable.
+</para>
+<sect2>
+<title>Not saving passwords</title>
+<para>
+Most secure way, but sometimes unhandy with GUIs like &kappname;. In particular the background processes of &kappname; would always ask for a password in case the repository has restricted access for reading operations like update and status. The same for &quot;commit&quot; and so on. So if you not saving passwords you should disable "Check for updates on open working copy" and so on.
+</para>
+</sect2>
+<sect2>
+<title>Saving passwords in kdewallet</title>
+<para>
+Secured password storage used by a lot of kde programs like kmail and konqueror. If you'saving passwords and mostly using kdesvn you should use this. Keep care that the encrypted storage isn't a high-secure storage. Details see kdewallet documentation.
+</para>
+</sect2>
+<sect2>
+<title>Saving to subversions own password storage</title>
+<para>
+This is not recommended 'cause the passwords are stored as cleartext! Not believing? Take a look into the files in <prompt>~/.subversion/auth/svn.simple</prompt>. You should only use this if you're using frequently other clients than &kappname; like rapidsvn or esvn or the original svn commandline client. If you're using the commandline client mostly for checkouts or updates which doesn't require a password and kdesvn for commit/move/copy you should use kdewallet instead.
+</para>
+</sect2>
+<sect2>
+<title>Specialcase svn+ssh</title>
+<para>
+When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote mashine and repository. When want to store you must using the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your pulic ssh-key on the target, eg., the repository system.
+</para>
+<para>
+If you don't want asked for the password of you ssh-key you may use the <prompt>ssh-agent</prompt>, with selecting the menu
+<menuchoice><guimenu>
+Subversion
+</guimenu>
+<guimenuitem>Add ssh identities to ssh-agent</guimenuitem></menuchoice>
+you may store you ssh-key-password for your current session so no further entering of your password is needed.
+</para>
+</sect2>
+</sect1>
 </chapter>
 
 <chapter id="kdesvn-kio">
@@ -2017,10 +2056,6 @@ repository. If your public identity has a password, ssh-agent will asked (when s
 <para>
 When you're running a ssh-agent before starting &kdesvn;, you should add your identity to its cache, &kdesvn; will not
 modifiy it due security reasons, so it would ask for your password again and again. (see <ulink url="man:ssh-add">Manpage of ssh-add</ulink>)
-</para>
-<para>
-<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin has a nice description</ulink> how to use kdesvn
-with ssh and keychain.
 </para>
 </answer>
 </qandaentry>

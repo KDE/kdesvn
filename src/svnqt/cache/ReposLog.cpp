@@ -436,6 +436,7 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
             qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
         } else {
             while (_q2.next()) {
+#if QT_VERSION < 0x040000
                 target[revision].changedPaths.push_back (
                         LogChangePathEntry (_q2.value(0).toString(),
                                             _q2.value(1).toString()[0],
@@ -443,6 +444,15 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
                                             _q2.value(3).toLongLong()
                                            )
                                                         );
+#else
+                target[revision].changedPaths.push_back (
+                        LogChangePathEntry (_q2.value(0).toString(),
+                                            _q2.value(1).toChar().toLatin1(),
+                                            _q2.value(2).toString(),
+                                            _q2.value(3).toLongLong()
+                                           )
+                                                        );
+#endif
             }
         }
 

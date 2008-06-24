@@ -92,7 +92,6 @@ protected:
     void setupActions();
     svn::Client*svnclient();
 
-    void enableActions();
 
     FileListViewItem* singleSelected();
     FileListViewItemList* allSelected();
@@ -180,6 +179,8 @@ protected slots:
     /* internal slots */
     virtual void readSupportData();
     virtual void slotUpdateLogCache();
+
+    virtual void enableActions();
 
 signals:
     void sigLogMessage(const QString&);

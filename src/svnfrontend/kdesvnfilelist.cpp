@@ -236,6 +236,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
 
     connect(m_SvnWrapper,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)));
+    connect(m_SvnWrapper,SIGNAL(sigThreadsChanged()),this,SLOT(enableActions()));
 
     m_pList->connectDirTimer(this);
     m_pList->connectPropTimer(this);
@@ -403,6 +404,9 @@ void kdesvnfilelist::setupActions()
     /* caching */
     tmp_action = new KAction( i18n("Update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"update_log_cache" );
     tmp_action->setToolTip(i18n("Update the log cache for current repository"));
+    /*    tmp_action = new KAction( i18n("Stop update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"stop_update_log_cache" );
+        tmp_action->setToolTip(i18n("Stop the update of the log cache"));
+    */
 
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
@@ -1004,6 +1008,11 @@ void kdesvnfilelist::enableActions()
     temp = filesActions()->action("update_log_cache");
     if (temp) {
         temp->setEnabled(remote_enabled);
+        if (!m_SvnWrapper->threadRunning(SvnActions::fillcachethread)) {
+            temp->setText(i18n("Update log cache"));
+        } else {
+            temp->setText(i18n("Stop updating the logcache"));
+        }
     }
 }
 
@@ -3126,7 +3135,19 @@ void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QVal
 void kdesvnfilelist::slotUpdateLogCache()
 {
     if (baseUri().length()>0 && m_SvnWrapper->doNetworking()) {
-        m_SvnWrapper->startFillCache(baseUri());
+        KAction*temp = filesActions()->action("update_log_cache");
+
+        if (!m_SvnWrapper->threadRunning(SvnActions::fillcachethread)) {
+            m_SvnWrapper->startFillCache(baseUri());
+            if (temp) {
+                temp->setText(i18n("Stop updating the logcache"));
+            }
+        } else {
+            m_SvnWrapper->stopFillCache();
+            if (temp) {
+                temp->setText(i18n("Update log cache"));
+            }
+        }
     }
 }
 

@@ -2524,8 +2524,8 @@ void SvnActions::customEvent(QCustomEvent * e)
 {
     if (e->type()==EVENT_LOGCACHE_FINISHED) {
         emit sendNotify(i18n("Filling log cache in background finished."));
-	emit sigThreadsChanged();
         stopFillCache();
+        emit sigThreadsChanged();
         return;
     } else if (e&&e->type()==EVENT_LOGCACHE_STATUS && m_FCThread && m_FCThread->running()) {
         FillCacheStatusEvent*fev=(FillCacheStatusEvent*)e;

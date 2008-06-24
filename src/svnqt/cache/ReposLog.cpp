@@ -414,7 +414,6 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     if (limit>0) {
         query_string+=QString(" LIMIT %1").arg(limit);
     }
-    qDebug("Query-string: %s",query_string.TOUTF8().data());
     QSqlQuery _q(QString::null,m_Database);
     QSqlQuery _q2(QString::null,m_Database);
     _q.prepare(query_string);
@@ -430,7 +429,6 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
         target[revision].date=_q.value(2).toLongLong();
         target[revision].message=_q.value(3).toString();
         query_string=s_e.arg(revision);
-        qDebug("Query-string: %s",query_string.TOUTF8().data());
         _q2.prepare(query_string);
         if (!_q2.exec()) {
             qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());

@@ -297,9 +297,15 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
                 return 0;
             }
             svn::cache::ReposLog rl(m_Data->m_Svnclient,e.reposRoot());
-            QString s1=e.url().mid(e.reposRoot().length());
-            QString s2=which.mid(m_Data->m_ParentList->baseUri().length());
-            rl.log(s1+"/"+s2,start,end,peg,*logs,!follow,limit);
+            QString s1,s2,what;
+            s1=e.url().mid(e.reposRoot().length());
+            if (which==".") {
+                what=s1;
+            } else {
+                s2=which.mid(m_Data->m_ParentList->baseUri().length());
+                what=s1+"/"+s2;
+            }
+            rl.log(what,start,end,peg,*logs,!follow,limit);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1077,6 +1083,11 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QStri
 
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,QWidget*p)
 {
+    if (!doNetworking()&&start!=svn::Revision::BASE && end!=svn::Revision::WORKING) {
+        emit sendNotify(i18n("Can not do this diff because networking is disabled."));
+        kdDebug()<<"No diff 'cause no network"<<endl;
+        return;
+    }
     if (m_Data->isExternalDiff()) {
         kdDebug()<<"External diff..."<<endl;
         svn::InfoEntry info;

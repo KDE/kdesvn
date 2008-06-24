@@ -382,7 +382,8 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         try {
             e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
         } catch (const svn::Exception&ce) {
-            kdDebug()<<ce.msg() << endl;
+            kdDebug()<<"Singleinfo: "<<_rev.toString()<<endl;
+            kdDebug()<<"Singleinfo: "<<ce.msg() << endl;
             emit clientException(ce.msg());
             return false;
         }
@@ -2523,7 +2524,7 @@ bool SvnActions::doNetworking()
     } else if (m_Data->m_ParentList->baseUri().startsWith("/")){
         // if opened a working copy we must check if it points to a networking repository
         svn::InfoEntry e;
-        if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
+        if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::UNDEFINED,e)) {
             return false;
         }
         is_url = !e.reposRoot().startsWith("file:/");

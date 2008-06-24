@@ -917,8 +917,8 @@ void kdesvnfilelist::enableActions()
     m_CopyAction->setEnabled(single && (!isWorkingCopy()||singleSelected()!=firstChild()));
 
     /* 2. only on files */
-    m_BlameAction->setEnabled(single&&!dir);
-    m_BlameRangeAction->setEnabled(single&&!dir);
+    m_BlameAction->setEnabled(single&&!dir&&remote_enabled);
+    m_BlameRangeAction->setEnabled(single&&!dir&&remote_enabled);
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
     m_MkdirAction->setEnabled(dir||none && isopen);

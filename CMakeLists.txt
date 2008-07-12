@@ -1,4 +1,6 @@
 PROJECT(kdesvn)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+
 OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
 
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
@@ -65,6 +67,7 @@ SET(KDESVN_VERSION \"${VERSION}\")
 
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
+CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/kdesvn.spec @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 

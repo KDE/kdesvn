@@ -16,8 +16,6 @@ Requires: /usr/bin/dot
 BuildRequires: cmake >= 2.4
 BuildRequires: gcc-c++
 BuildRequires: subversion-devel
-Patch1: build_fix.patch
-Patch2: diff_data_fix.patch
 
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
 BuildRequires: apr-devel
@@ -71,8 +69,6 @@ Development files for kdesvn.
 
 %prep
 %setup
-%patch1 -p1
-%patch2 -p1
 mkdir build
 cd build
 cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release -DLIB_SUFFIX=`kde-config --libsuffix`

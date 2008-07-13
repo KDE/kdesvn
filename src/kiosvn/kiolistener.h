@@ -75,7 +75,6 @@ protected:
     bool m_External;
     bool m_HasChanges;
     bool m_FirstTxDelta;
-    PwStorage pws;
     bool m_Canceld;
 };
 }

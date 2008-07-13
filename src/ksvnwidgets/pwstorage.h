@@ -21,24 +21,31 @@
 #define _PWSTORAGE_H
 
 #include <qstring.h>
+#include <qobject.h>
 
 class PwStorageData;
 
-class PwStorage
+class PwStorage:public QObject
 {
+    Q_OBJECT
 protected:
     PwStorageData* mData;
 public:
-    PwStorage();
-    virtual ~PwStorage();
     bool getCertPw(const QString&realm,QString&pw);
     bool getLogin(const QString&realm,QString&user,QString&pw);
     bool setCertPw(const QString&realm, const QString&pw);
     bool setLogin(const QString&realm,const QString&user,const QString&pw);
     bool connectWallet();
-protected:
 
+    static PwStorage*self();
+
+protected slots:
+    void walletClosed();
+
+protected:
     bool initWallet();
+    PwStorage();
+    virtual ~PwStorage();
 };
 
 #endif

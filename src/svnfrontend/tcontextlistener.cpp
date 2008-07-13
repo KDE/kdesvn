@@ -43,6 +43,7 @@ ThreadContextListener::~ThreadContextListener()
 
 bool ThreadContextListener::contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave)
 {
+    kdDebug()<<"Getting threaded login"<<endl;
     QMutexLocker lock(&(m_Data->m_CallbackMutex));
     ThreadContextListenerData::slogin_data _data;
     _data.realm=realm;
@@ -183,7 +184,8 @@ void ThreadContextListener::event_contextGetLogin(void*data)
     }
     ThreadContextListenerData::slogin_data*_data = (ThreadContextListenerData::slogin_data*)data;
 
-    _data->ok = CContextListener::contextGetLogin(_data->realm, _data->user, _data->password, _data->maysave);
+    //_data->ok = CContextListener::contextGetLogin(_data->realm, _data->user, _data->password, _data->maysave);
+    _data->ok = CContextListener::contextGetSavedLogin(_data->realm, _data->user, _data->password);
     m_Data->m_trustpromptWait.wakeAll();
 }
 

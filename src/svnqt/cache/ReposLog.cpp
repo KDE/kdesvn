@@ -21,7 +21,7 @@
     \fn svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&)
  */
 svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&aRepository)
-    :m_Client(aClient),
+    :m_Client(),
 #if QT_VERSION < 0x040000
               m_Database(0),
 #else
@@ -29,6 +29,8 @@ svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&aRepository)
 #endif
               m_ReposRoot(aRepository),m_latestHead(svn::Revision::UNDEFINED)
 {
+    m_Client=aClient;
+    ContextP ctx = m_Client->getContext();
     if (!aRepository.isEmpty()) {
         m_Database = LogCache::self()->reposDb(aRepository);
     }
@@ -58,10 +60,12 @@ svn::Revision svn::cache::ReposLog::latestHeadRev()
         }
     }
     /// no catch - exception has go trough...
-    svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD));;
+    qDebug("Getting headrev");
+    svn::InfoEntries e = m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD);
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
+    qDebug("Getting headrev done");
     return e[0].revision();
 }
 

@@ -43,8 +43,8 @@ public:
     // data
     bool m_cancelMe;
     QMutex m_CancelMutex;
-    PwStorage pws;
     bool loginDialogRunning;
+    bool noDialogs;
 };
 
 class simpleBoolCheck
@@ -66,7 +66,7 @@ public:
 };
 
 CContextListenerData::CContextListenerData()
-    : m_cancelMe(false),m_CancelMutex(),loginDialogRunning(false)
+    : m_cancelMe(false),m_CancelMutex(),loginDialogRunning(false),noDialogs(false)
 {
 }
 
@@ -136,7 +136,6 @@ CContextListener::CContextListener(QObject *parent, const char *name)
     m_Data = new CContextListenerData();
 }
 
-
 CContextListener::~CContextListener()
 {
     disconnect();
@@ -146,7 +145,7 @@ CContextListener::~CContextListener()
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
     simpleBoolCheck(&(m_Data->loginDialogRunning));
-    return m_Data->pws.getLogin(realm,username,password);
+    return PwStorage::self()->getLogin(realm,username,password);
 }
 
 bool CContextListener::contextGetLogin (
@@ -156,7 +155,7 @@ bool CContextListener::contextGetLogin (
                     bool & maySave)
 {
     maySave = false;
-    simpleBoolCheck(&(m_Data->loginDialogRunning));
+    //simpleBoolCheck(&(m_Data->loginDialogRunning));
     kdDebug()<<"Context get login"<<endl;
     emit waitShow(true);
     emit sendNotify(realm);
@@ -166,7 +165,7 @@ bool CContextListener::contextGetLogin (
         password=auth.Password();
         maySave = (Kdesvnsettings::passwords_in_wallet()?false:auth.maySave());
         if (Kdesvnsettings::passwords_in_wallet() && auth.maySave()) {
-            m_Data->pws.setLogin(realm,username,password);
+            PwStorage::self()->setLogin(realm,username,password);
         }
         emit waitShow(false);
         return true;
@@ -293,7 +292,7 @@ bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 
 bool CContextListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
 {
-    return m_Data->pws.getCertPw(realm,password);
+    return PwStorage::self()->getCertPw(realm,password);
 }
 
 bool CContextListener::contextSslClientCertPwPrompt (QString & password,
@@ -312,7 +311,7 @@ bool CContextListener::contextSslClientCertPwPrompt (QString & password,
     }
     maysave = (Kdesvnsettings::passwords_in_wallet()?false:keep!=0);
     if (Kdesvnsettings::store_passwords() && keep) {
-        m_Data->pws.setCertPw(realm,password);
+        PwStorage::self()->setCertPw(realm,password);
     }
     password = npass;
     return true;

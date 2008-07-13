@@ -1,4 +1,6 @@
-INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt
+${CMAKE_BINARY_DIR}/src/ksvnwidgets)
+
 SET(kiosvn_src kiosvn.cpp kiolistener.cpp kiobytestream.cpp ../ksvnwidgets/pwstorage.cpp)
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 

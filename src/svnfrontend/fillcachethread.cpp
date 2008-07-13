@@ -38,9 +38,6 @@ FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
     m_SvnContext = new ThreadContextListener(m_Parent,0);
     if (m_Parent) {
         QObject::connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
-        kdDebug()<<"Parent ="<<m_Parent<<endl;
-    } else {
-        kdDebug()<<"Parent == 0??"<<endl;
     }
 
     m_CurrentContext->setListener(m_SvnContext);
@@ -76,6 +73,9 @@ void FillCacheThread::run()
         kdDebug()<<"Getting cachedrev"<<endl;
         svn::Revision latestCache = rl.latestCachedRev();
         kdDebug()<<"Getting headrev"<<endl;
+        m_Svnclient->info(m_what,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD);
+        svn::ContextP ctx = m_Svnclient->getContext();
+#if 1
         svn::Revision Head = rl.latestHeadRev();
         kdDebug()<<"Getting headrev done "<<endl;
         Q_LLONG i = latestCache.revnum();
@@ -111,6 +111,7 @@ void FillCacheThread::run()
         rl.fillCache(Head);
         i=Head.revnum();
         m_SvnContext->contextNotify(i18n("Cache filled up to revision %1").arg(i));
+#endif
     } catch (const svn::Exception&e) {
         m_SvnContext->contextNotify(e.msg());
     }

@@ -54,7 +54,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_PROMPT);
     void*t = (void*)&_data;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" from thread " << endl;
+    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" (login) from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     username = _data.user;

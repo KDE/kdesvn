@@ -35,8 +35,9 @@ public:
     bool getLogin(const QString&realm,QString&user,QString&pw);
     bool setCertPw(const QString&realm, const QString&pw);
     bool setLogin(const QString&realm,const QString&user,const QString&pw);
-protected:
     bool connectWallet();
+protected:
+
     bool initWallet();
 };
 

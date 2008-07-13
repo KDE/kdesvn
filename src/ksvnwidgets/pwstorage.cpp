@@ -22,15 +22,37 @@
 #include "src/settings/kdesvnsettings.h"
 
 #include <kwallet.h>
+#include <qthread.h>
+#include <qthreadstorage.h>
 
 class PwStorageData
 {
 public:
-    KWallet::Wallet *m_Wallet;
-    PwStorageData(){m_Wallet = 0;}
+
+    PwStorageData(){m_Wallet=0;}
     ~PwStorageData(){}
+    static QMutex WalletMutex;
+    KWallet::Wallet* m_Wallet;
+
+    // call only from connectWallet
+    KWallet::Wallet*getWallet();
 };
 
+QMutex PwStorageData::WalletMutex;
+
+KWallet::Wallet*PwStorageData::getWallet()
+{
+    QMutexLocker lock(&(WalletMutex));
+    static KWallet::Wallet*s_Wallet=0;
+    if (!s_Wallet) {
+        kdDebug()<<"getWallet new wallet"<<endl;
+        s_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),0);
+        kdDebug()<<"getWallet new wallet end" << endl;
+    } else {
+        kdDebug()<<"Had a wallet"<<endl;
+    }
+    return s_Wallet;
+}
 
 /*!
     \fn PwStorage::PwStorageData()
@@ -59,7 +81,11 @@ bool PwStorage::connectWallet()
         return false;
     }
     if (!mData->m_Wallet) {
-        mData->m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),0);
+        kdDebug()<<"Creating new wallet"<<endl;
+        mData->m_Wallet=mData->getWallet();
+        kdDebug()<<"Creating new wallet done"<<endl;
+    } else {
+        kdDebug()<<"Reusing wallet"<<endl;
     }
     if (!mData->m_Wallet) {
         return false;
@@ -85,19 +111,22 @@ bool PwStorage::getCertPw(const QString&realm,QString&pw)
  */
 bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
 {
+    kdDebug()<<"Try getting login for "<<user<<" and "<<realm<<endl;
     if (!initWallet()) {
+        kdDebug()<<"No wallet init!"<<endl;
         return false;
     }
+    QMutexLocker lock(&(mData->WalletMutex));
     QMap<QString,QString> content;
     int j = mData->m_Wallet->readMap(realm,content);
     if (j!=0||content.find("user")==content.end()) {
+        kdDebug()<<"Not found"<<endl;
         return false;
     }
     user = content["user"];
     pw = content["password"];
     return true;
 }
-
 
 /*!
     \fn PwStorage::setCertPw(const QString&realm, const QString&pw)

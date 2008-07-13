@@ -40,6 +40,7 @@
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
 #include "fronthelpers/widgetblockstack.h"
+#include "src/ksvnwidgets/pwstorage.h"
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -194,6 +195,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
 {
     m_SelectedItems = 0;
     m_pList = new KdesvnFileListPrivate;
+    PwStorage pw; pw.connectWallet();
     m_filesAction = aCollect;
     m_pList->m_fileTip=new SvnFileTip(this);
     m_pList->m_fileTip->setOptions(Kdesvnsettings::display_file_tips()&&

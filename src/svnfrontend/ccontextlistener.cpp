@@ -44,11 +44,29 @@ public:
     bool m_cancelMe;
     QMutex m_CancelMutex;
     PwStorage pws;
+    bool loginDialogRunning;
 };
 
+class simpleBoolCheck
+{
+private:
+    bool*which;
+public:
+    simpleBoolCheck(bool*val):which(val)
+    {
+        while(*which == true) {
+            sleep(1);
+        }
+        *which = true;
+    }
+    ~simpleBoolCheck()
+    {
+        *which = false;
+    }
+};
 
 CContextListenerData::CContextListenerData()
-    : m_cancelMe(false),m_CancelMutex()
+    : m_cancelMe(false),m_CancelMutex(),loginDialogRunning(false)
 {
 }
 
@@ -127,6 +145,7 @@ CContextListener::~CContextListener()
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
+    simpleBoolCheck(&(m_Data->loginDialogRunning));
     return m_Data->pws.getLogin(realm,username,password);
 }
 
@@ -137,6 +156,8 @@ bool CContextListener::contextGetLogin (
                     bool & maySave)
 {
     maySave = false;
+    simpleBoolCheck(&(m_Data->loginDialogRunning));
+    kdDebug()<<"Context get login"<<endl;
     emit waitShow(true);
     emit sendNotify(realm);
     AuthDialogImpl auth(realm,username);

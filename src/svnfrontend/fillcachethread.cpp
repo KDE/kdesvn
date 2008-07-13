@@ -73,9 +73,6 @@ void FillCacheThread::run()
         kdDebug()<<"Getting cachedrev"<<endl;
         svn::Revision latestCache = rl.latestCachedRev();
         kdDebug()<<"Getting headrev"<<endl;
-        m_Svnclient->info(m_what,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD);
-        svn::ContextP ctx = m_Svnclient->getContext();
-#if 1
         svn::Revision Head = rl.latestHeadRev();
         kdDebug()<<"Getting headrev done "<<endl;
         Q_LLONG i = latestCache.revnum();
@@ -111,7 +108,6 @@ void FillCacheThread::run()
         rl.fillCache(Head);
         i=Head.revnum();
         m_SvnContext->contextNotify(i18n("Cache filled up to revision %1").arg(i));
-#endif
     } catch (const svn::Exception&e) {
         m_SvnContext->contextNotify(e.msg());
     }

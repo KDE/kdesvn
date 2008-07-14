@@ -4,6 +4,7 @@ version 1.0.0
     * integrated direct support for subversion 1.5
     * dutch handbook added
     * kdesvn may work (simplified) offline
+    * fixed the problems accessing KWallet from within threads which let sometimes kdesvn die
 
 version 0.14.4
     * fix a binary compatible issue, see #329

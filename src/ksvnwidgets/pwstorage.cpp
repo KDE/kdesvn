@@ -22,6 +22,8 @@
 #include "src/settings/kdesvnsettings.h"
 
 #include <kwallet.h>
+#include <kwin.h>
+#include <kapp.h>
 
 class PwStorageData
 {
@@ -30,22 +32,41 @@ public:
     PwStorageData(){
         m_Wallet=0;
     }
-    ~PwStorageData(){}
-    KWallet::Wallet* m_Wallet;
+
+    ~PwStorageData()
+    {
+        delete m_Wallet;
+        m_Wallet=0;
+    }
 
     // call only from connectWallet
     KWallet::Wallet*getWallet();
+protected:
+    KWallet::Wallet* m_Wallet;
 };
 
 KWallet::Wallet*PwStorageData::getWallet()
 {
-    if (!m_Wallet) {
-        kdDebug()<<"getWallet new wallet"<<endl;
-        m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),0);
-        kdDebug()<<"getWallet new wallet end" << endl;
-    } else {
-        kdDebug()<<"Had a wallet"<<endl;
+    static bool walletOpenFailed = false;
+    if (m_Wallet && m_Wallet->isOpen()) {
+        return m_Wallet;
     }
+
+    if (KWallet::Wallet::isEnabled() && Kdesvnsettings::passwords_in_wallet()) {
+        WId window = 0;
+        if ( qApp->activeWindow() ) {
+            window = qApp->activeWindow()->winId();
+        }
+        delete m_Wallet;
+        m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),window);
+    }
+    if (!m_Wallet) {
+        walletOpenFailed = true;
+    }
+    if (!m_Wallet->hasFolder(WALLETNAME)) {
+        m_Wallet->createFolder(WALLETNAME);
+    }
+    m_Wallet->setFolder(WALLETNAME);
     return m_Wallet;
 }
 
@@ -81,33 +102,7 @@ PwStorage::~PwStorage()
  */
 bool PwStorage::connectWallet()
 {
-    if (!Kdesvnsettings::passwords_in_wallet()) {
-        return false;
-    }
-    bool con = false;
-    if (!mData->m_Wallet) {
-        kdDebug()<<"Creating new wallet"<<endl;
-        mData->getWallet();
-        con = true;
-        kdDebug()<<"Creating new wallet done"<<endl;
-    } else {
-        kdDebug()<<"Reusing wallet"<<endl;
-    }
-    if (!mData->m_Wallet) {
-        return false;
-    }
-    if (con) {
-        kdDebug()<<"Connecting signals for wallet"<<endl;
-        connect(mData->m_Wallet,SIGNAL(walletClosed()),this,SLOT(walletClosed()));
-    }
-    return true;
-}
-
-void PwStorage::walletClosed()
-{
-    kdDebug()<<"Got a walletClosed"<<endl;
-    delete mData->m_Wallet;
-    mData->m_Wallet=0;
+    return mData->getWallet()!=0L;
 }
 
 /*!
@@ -115,10 +110,10 @@ void PwStorage::walletClosed()
  */
 bool PwStorage::getCertPw(const QString&realm,QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
-    return (mData->m_Wallet->readPassword(realm,pw)==0);
+    return (mData->getWallet()->readPassword(realm,pw)==0);
 }
 
 
@@ -127,15 +122,12 @@ bool PwStorage::getCertPw(const QString&realm,QString&pw)
  */
 bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
 {
-    kdDebug()<<"Try getting login for "<<user<<" and "<<realm<<endl;
-    if (!initWallet()) {
-        kdDebug()<<"No wallet init!"<<endl;
+    if (!mData->getWallet()) {
         return false;
     }
     QMap<QString,QString> content;
-    int j = mData->m_Wallet->readMap(realm,content);
+    int j = mData->getWallet()->readMap(realm,content);
     if (j!=0||content.find("user")==content.end()) {
-        kdDebug()<<"Not found"<<endl;
         return false;
     }
     user = content["user"];
@@ -148,10 +140,10 @@ bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
  */
 bool PwStorage::setCertPw(const QString&realm, const QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
-    return (mData->m_Wallet->writePassword(realm,pw)==0);
+    return (mData->getWallet()->writePassword(realm,pw)==0);
 }
 
 
@@ -160,31 +152,13 @@ bool PwStorage::setCertPw(const QString&realm, const QString&pw)
  */
 bool PwStorage::setLogin(const QString&realm,const QString&user,const QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
     QMap<QString,QString> content;
     content["user"]=user;
     content["password"]=pw;
-    return (mData->m_Wallet->writeMap(realm,content)==0);
-}
-
-/*!
-    \fn PwStorage::initWallet()
- */
-bool PwStorage::initWallet()
-{
-    if (!connectWallet()) {
-        return false;
-    }
-    if (!mData->m_Wallet->hasFolder(WALLETNAME)) {
-        mData->m_Wallet->createFolder(WALLETNAME);
-    }
-    if (!mData->m_Wallet->setFolder(WALLETNAME)) {
-        return false;
-    }
-    return true;
+    return (mData->getWallet()->writeMap(realm,content)==0);
 }
 
 #include "pwstorage.moc"
-

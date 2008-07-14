@@ -31,5 +31,6 @@
 #define EVENT_THREAD_NOTIFY QEvent::User+6
 #define EVENT_LOGCACHE_FINISHED QEvent::User+7
 #define EVENT_LOGCACHE_STATUS QEvent::User+8
+#define EVENT_THREAD_LOGIN_SAVED QEvent::User+9
 
 #endif

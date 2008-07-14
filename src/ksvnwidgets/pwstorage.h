@@ -39,11 +39,7 @@ public:
 
     static PwStorage*self();
 
-protected slots:
-    void walletClosed();
-
 protected:
-    bool initWallet();
     PwStorage();
     virtual ~PwStorage();
 };

@@ -155,8 +155,7 @@ bool CContextListener::contextGetLogin (
                     bool & maySave)
 {
     maySave = false;
-    //simpleBoolCheck(&(m_Data->loginDialogRunning));
-    kdDebug()<<"Context get login"<<endl;
+    simpleBoolCheck(&(m_Data->loginDialogRunning));
     emit waitShow(true);
     emit sendNotify(realm);
     AuthDialogImpl auth(realm,username);

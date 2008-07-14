@@ -76,10 +76,9 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     _data.maysave=false;
     _data.ok=false;
 
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_PROMPT);
+    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_SAVED);
     void*t = (void*)&_data;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_SAVED<<" (login saved) from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     username = _data.user;
@@ -97,7 +96,6 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGMSG_PROMPT);
     void*t = (void*)&log;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGMSG_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     msg = log.msg;
@@ -297,7 +295,7 @@ void ThreadContextListener::customEvent(QCustomEvent*ev)
     }else if (ev->type()==EVENT_THREAD_NOTIFY) {
         event_contextNotify(ev->data());
     } else if (ev->type() == EVENT_THREAD_LOGIN_SAVED) {
-        event_contextGetLogin(ev->data());
+        event_contextGetSavedLogin(ev->data());
     }
 }
 

@@ -144,7 +144,7 @@ CContextListener::~CContextListener()
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-    simpleBoolCheck(&(m_Data->loginDialogRunning));
+//    simpleBoolCheck(&(m_Data->loginDialogRunning));
     return PwStorage::self()->getLogin(realm,username,password);
 }
 

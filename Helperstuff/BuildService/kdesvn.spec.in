@@ -10,7 +10,6 @@ Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
-Obsoletes: kdesvn-kioksvn kdesvn-svnqt
 Requires: subversion >= 1.3.0
 Requires: /usr/bin/dot
 BuildRequires: cmake >= 2.4

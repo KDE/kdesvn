@@ -42,6 +42,8 @@ public:
     ~ThreadContextListener();
 
     virtual bool contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave);
+    virtual bool contextGetSavedLogin(const QString & realm,QString & username,QString & password);
+
     virtual bool contextGetLogMessage(QString& msg,const svn::CommitItemList&);
     virtual bool contextSslClientCertPrompt(QString& certFile);
     virtual bool contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave);
@@ -52,6 +54,7 @@ public:
 
 protected:
     virtual void event_contextGetLogin(void*_data);
+    virtual void event_contextGetSavedLogin(void*_data);
     virtual void event_contextGetLogMessage(void*data);
     virtual void event_contextSslClientCertPrompt(void*data);
     virtual void event_contextSslClientCertPwPrompt(void*data);

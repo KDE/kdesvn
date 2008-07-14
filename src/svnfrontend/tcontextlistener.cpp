@@ -43,6 +43,7 @@ ThreadContextListener::~ThreadContextListener()
 
 bool ThreadContextListener::contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave)
 {
+    kdDebug()<<"Getting threaded login"<<endl;
     QMutexLocker lock(&(m_Data->m_CallbackMutex));
     ThreadContextListenerData::slogin_data _data;
     _data.realm=realm;
@@ -54,12 +55,35 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_PROMPT);
     void*t = (void*)&_data;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" from thread " << endl;
+    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" (login) from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
     username = _data.user;
     password = _data.password;
     maySave = _data.maysave;
+    return _data.ok;
+}
+
+bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString & username,QString & password)
+{
+
+    kdDebug()<<"Getting threaded saved login"<<endl;
+    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    ThreadContextListenerData::slogin_data _data;
+    _data.realm=realm;
+    _data.user=username;
+    _data.password=password;
+    _data.maysave=false;
+    _data.ok=false;
+
+    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_PROMPT);
+    void*t = (void*)&_data;
+    ev->setData(t);
+    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_SAVED<<" (login saved) from thread " << endl;
+    kapp->postEvent(this,ev);
+    m_Data->m_trustpromptWait.wait();
+    username = _data.user;
+    password = _data.password;
     return _data.ok;
 }
 
@@ -143,7 +167,7 @@ void ThreadContextListener::contextNotify(const QString&aMsg)
  */
 void ThreadContextListener::contextProgress(long long int current, long long int max)
 {
-    if (current==0) {
+    if (m_Data->noProgress||current==0) {
         return;
     }
     QMutexLocker lock(&(m_Data->m_CallbackMutex));
@@ -184,6 +208,18 @@ void ThreadContextListener::event_contextGetLogin(void*data)
     ThreadContextListenerData::slogin_data*_data = (ThreadContextListenerData::slogin_data*)data;
 
     _data->ok = CContextListener::contextGetLogin(_data->realm, _data->user, _data->password, _data->maysave);
+    //_data->ok = CContextListener::contextGetSavedLogin(_data->realm, _data->user, _data->password);
+    m_Data->m_trustpromptWait.wakeAll();
+}
+
+void ThreadContextListener::event_contextGetSavedLogin(void*data)
+{
+    if (!data) {
+        m_Data->m_trustpromptWait.wakeAll();
+        return;
+    }
+    ThreadContextListenerData::slogin_data*_data = (ThreadContextListenerData::slogin_data*)data;
+    _data->ok = CContextListener::contextGetSavedLogin(_data->realm, _data->user, _data->password);
     m_Data->m_trustpromptWait.wakeAll();
 }
 
@@ -260,6 +296,8 @@ void ThreadContextListener::customEvent(QCustomEvent*ev)
         event_contextSslClientCertPrompt(ev->data());
     }else if (ev->type()==EVENT_THREAD_NOTIFY) {
         event_contextNotify(ev->data());
+    } else if (ev->type() == EVENT_THREAD_LOGIN_SAVED) {
+        event_contextGetLogin(ev->data());
     }
 }
 

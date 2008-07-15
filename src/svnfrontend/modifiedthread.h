@@ -35,7 +35,7 @@ class QObject;
 class CheckModifiedThread:public QThread
 {
 public:
-    CheckModifiedThread(QObject*,const QString&what,bool _updates=false);
+    CheckModifiedThread(QObject*,const ThreadContextListenerP&,const QString&what,bool _updates=false);
     virtual ~CheckModifiedThread();
     virtual void run();
     virtual void cancelMe();

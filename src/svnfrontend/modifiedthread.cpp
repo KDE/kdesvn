@@ -27,13 +27,15 @@
 #include <kdebug.h>
 #include <kapplication.h>
 
-CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool _updates)
-    : QThread(),mutex(),m_ContextListener(0)
+CheckModifiedThread::CheckModifiedThread(QObject*_parent,const ThreadContextListenerP&_listener,const QString&what,bool _updates)
+    : QThread(),mutex(),m_ContextListener(_listener)
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
-    m_ContextListener = new ThreadContextListener(m_Parent);
-    QObject::connect(m_ContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
+    if (!m_ContextListener) {
+        m_ContextListener = new ThreadContextListener(m_Parent);
+        QObject::connect(m_ContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
+    }
 
     m_CurrentContext->setListener(m_ContextListener);
     m_what = what;

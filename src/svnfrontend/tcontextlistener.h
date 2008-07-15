@@ -65,6 +65,7 @@ protected:
     virtual void customEvent(QCustomEvent*);
 
     /* stores all internals */
+    QMutex m_WaitMutex;
     ThreadContextListenerData*m_Data;
 };
 

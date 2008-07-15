@@ -52,6 +52,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
 {
     kdDebug()<<"Getting threaded login"<<endl;
     QMutexLocker lock(callbackMutex());
+    m_WaitMutex.lock();
     ThreadContextListenerData::slogin_data _data;
     _data.realm=realm;
     _data.user=username;
@@ -64,11 +65,12 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     ev->setData(t);
     kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" (login) from thread " << endl;
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait();
+    m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     kdDebug()<<"Got a login"<<endl;
     username = _data.user;
     password = _data.password;
     maySave = _data.maysave;
+    m_WaitMutex.unlock();
     return _data.ok;
 }
 
@@ -77,6 +79,7 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
 
     kdDebug()<<"Getting threaded saved login"<<endl;
     QMutexLocker lock(callbackMutex());
+    m_WaitMutex.lock();
     ThreadContextListenerData::slogin_data _data;
     _data.realm=realm;
     _data.user=username;
@@ -89,16 +92,18 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     ev->setData(t);
     kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_SAVED<<" (saved login) from thread " << endl;
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait();
+    m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     kdDebug()<<"Got a saved login"<<endl;
     username = _data.user;
     password = _data.password;
+    m_WaitMutex.unlock();
     return _data.ok;
 }
 
 bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitItemList&_items)
 {
     QMutexLocker lock(callbackMutex());
+    m_WaitMutex.lock();
     ThreadContextListenerData::slog_message log;
     log.ok = false;
     log.msg = "";
@@ -107,14 +112,17 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
     void*t = (void*)&log;
     ev->setData(t);
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait();
+    m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     msg = log.msg;
+    m_WaitMutex.unlock();
     return log.ok;
 }
 
 bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
 {
     QMutexLocker lock(callbackMutex());
+    m_WaitMutex.lock();
+
     ThreadContextListenerData::scert_file scertf;
     scertf.ok = false;
     scertf.certfile="";
@@ -122,14 +130,16 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
     ev->setData((void*)&scertf);
     kdDebug()<<"Post event "<<EVENT_THREAD_CERT_SELECT_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait();
+    m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     certFile = scertf.certfile;
+    m_WaitMutex.unlock();
     return scertf.ok;
 }
 
 bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave)
 {
     QMutexLocker lock(callbackMutex());
+    m_WaitMutex.lock();
     ThreadContextListenerData::scert_pw scert_data;
     scert_data.ok=false;
     scert_data.maysave=false;
@@ -139,15 +149,17 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
     ev->setData((void*)&scert_data);
     kdDebug()<<"Post event "<<EVENT_THREAD_CERT_PW_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait();
+    m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     password = scert_data.password;
     maySave = scert_data.maysave;
+    m_WaitMutex.unlock();
     return scert_data.ok;
 }
 
 svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t&/* acceptedFailures*/)
 {
     QMutexLocker lock(callbackMutex());
+    m_WaitMutex.lock();
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_SSL_TRUST_PROMPT);
     ThreadContextListenerData::strust_answer trust_answer;
     trust_answer.m_SslTrustAnswer=DONT_ACCEPT;
@@ -155,7 +167,8 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
     ev->setData((void*)&trust_answer);
     kdDebug()<<"Post event "<<EVENT_THREAD_SSL_TRUST_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
-    m_Data->m_trustpromptWait.wait();
+    m_Data->m_trustpromptWait.wait(&m_WaitMutex);
+    m_WaitMutex.unlock();
     return trust_answer.m_SslTrustAnswer;
 }
 
@@ -209,6 +222,7 @@ void ThreadContextListener::sendTick()
 /* methods below may only called from mainthread! (via event) */
 void ThreadContextListener::event_contextGetLogin(void*data)
 {
+    QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
@@ -221,6 +235,7 @@ void ThreadContextListener::event_contextGetLogin(void*data)
 
 void ThreadContextListener::event_contextGetSavedLogin(void*data)
 {
+    QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
@@ -232,6 +247,7 @@ void ThreadContextListener::event_contextGetSavedLogin(void*data)
 
 void ThreadContextListener::event_contextGetLogMessage(void * data)
 {
+    QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
@@ -244,6 +260,7 @@ void ThreadContextListener::event_contextGetLogMessage(void * data)
 
 void ThreadContextListener::event_contextSslClientCertPrompt(void*data)
 {
+    QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
@@ -255,6 +272,7 @@ void ThreadContextListener::event_contextSslClientCertPrompt(void*data)
 
 void ThreadContextListener::event_contextSslClientCertPwPrompt(void*data)
 {
+    QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
@@ -266,6 +284,7 @@ void ThreadContextListener::event_contextSslClientCertPwPrompt(void*data)
 
 void ThreadContextListener::event_contextSslServerTrustPrompt(void*data)
 {
+    QMutexLocker lock(&m_WaitMutex);
     /*
      * m_SslTrustAnswer is made threadsafe due the m_trustpromptWait - the calling thread waits until wakeAll is called!
      */

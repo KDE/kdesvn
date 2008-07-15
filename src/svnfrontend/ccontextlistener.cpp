@@ -43,30 +43,11 @@ public:
     // data
     bool m_cancelMe;
     QMutex m_CancelMutex;
-    bool loginDialogRunning;
     bool noDialogs;
 };
 
-class simpleBoolCheck
-{
-private:
-    bool*which;
-public:
-    simpleBoolCheck(bool*val):which(val)
-    {
-        while(*which == true) {
-            sleep(1);
-        }
-        *which = true;
-    }
-    ~simpleBoolCheck()
-    {
-        *which = false;
-    }
-};
-
 CContextListenerData::CContextListenerData()
-    : m_cancelMe(false),m_CancelMutex(),loginDialogRunning(false),noDialogs(false)
+    : m_cancelMe(false),m_CancelMutex(),noDialogs(false)
 {
 }
 
@@ -144,7 +125,7 @@ CContextListener::~CContextListener()
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-//    simpleBoolCheck(&(m_Data->loginDialogRunning));
+    kdDebug()<<"Saved Login in object "<<this<<endl;
     return PwStorage::self()->getLogin(realm,username,password);
 }
 
@@ -154,8 +135,8 @@ bool CContextListener::contextGetLogin (
                     QString & password,
                     bool & maySave)
 {
+    kdDebug()<<"Login in object "<<this<<endl;
     maySave = false;
-    simpleBoolCheck(&(m_Data->loginDialogRunning));
     emit waitShow(true);
     emit sendNotify(realm);
     AuthDialogImpl auth(realm,username);

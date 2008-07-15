@@ -38,13 +38,20 @@ ThreadContextListener::ThreadContextListener(QObject* parent, const char* name)
 
 ThreadContextListener::~ThreadContextListener()
 {
+    kdDebug()<<"ThreadContextListener destructor"<<endl;
     delete m_Data;
+}
+
+QMutex*ThreadContextListener::callbackMutex()
+{
+    static QMutex s_CallbackMutex;
+    return &s_CallbackMutex;
 }
 
 bool ThreadContextListener::contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave)
 {
     kdDebug()<<"Getting threaded login"<<endl;
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     ThreadContextListenerData::slogin_data _data;
     _data.realm=realm;
     _data.user=username;
@@ -58,6 +65,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" (login) from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
+    kdDebug()<<"Got a login"<<endl;
     username = _data.user;
     password = _data.password;
     maySave = _data.maysave;
@@ -68,7 +76,7 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
 {
 
     kdDebug()<<"Getting threaded saved login"<<endl;
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     ThreadContextListenerData::slogin_data _data;
     _data.realm=realm;
     _data.user=username;
@@ -79,8 +87,10 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_SAVED);
     void*t = (void*)&_data;
     ev->setData(t);
+    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_SAVED<<" (saved login) from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait();
+    kdDebug()<<"Got a saved login"<<endl;
     username = _data.user;
     password = _data.password;
     return _data.ok;
@@ -88,7 +98,7 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
 
 bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitItemList&_items)
 {
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     ThreadContextListenerData::slog_message log;
     log.ok = false;
     log.msg = "";
@@ -104,7 +114,7 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
 
 bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
 {
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     ThreadContextListenerData::scert_file scertf;
     scertf.ok = false;
     scertf.certfile="";
@@ -119,7 +129,7 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
 
 bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave)
 {
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     ThreadContextListenerData::scert_pw scert_data;
     scert_data.ok=false;
     scert_data.maysave=false;
@@ -137,7 +147,7 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
 
 svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t&/* acceptedFailures*/)
 {
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_SSL_TRUST_PROMPT);
     ThreadContextListenerData::strust_answer trust_answer;
     trust_answer.m_SslTrustAnswer=DONT_ACCEPT;
@@ -151,7 +161,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
 
 void ThreadContextListener::contextNotify(const QString&aMsg)
 {
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
@@ -168,7 +178,7 @@ void ThreadContextListener::contextProgress(long long int current, long long int
     if (m_Data->noProgress||current==0) {
         return;
     }
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
@@ -187,7 +197,7 @@ void ThreadContextListener::contextProgress(long long int current, long long int
 
 void ThreadContextListener::sendTick()
 {
-    QMutexLocker lock(&(m_Data->m_CallbackMutex));
+    QMutexLocker lock(callbackMutex());
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
@@ -206,7 +216,6 @@ void ThreadContextListener::event_contextGetLogin(void*data)
     ThreadContextListenerData::slogin_data*_data = (ThreadContextListenerData::slogin_data*)data;
 
     _data->ok = CContextListener::contextGetLogin(_data->realm, _data->user, _data->password, _data->maysave);
-    //_data->ok = CContextListener::contextGetSavedLogin(_data->realm, _data->user, _data->password);
     m_Data->m_trustpromptWait.wakeAll();
 }
 

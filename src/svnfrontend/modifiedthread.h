@@ -25,12 +25,12 @@
 #include "src/svnqt/status.hpp"
 #include "ccontextlistener.h"
 #include "eventnumbers.h"
+#include "frontendtypes.h"
 
 #include <qthread.h>
 #include <qevent.h>
 
 class QObject;
-class ThreadContextListener;
 
 class CheckModifiedThread:public QThread
 {
@@ -45,7 +45,7 @@ protected:
     QMutex mutex;
     svn::Client* m_Svnclient;
     svn::ContextP m_CurrentContext;
-    svn::smart_pointer<ThreadContextListener> m_SvnContext;
+    ThreadContextListenerP m_ContextListener;
     QObject*m_Parent;
     QString m_what;
     bool m_updates;

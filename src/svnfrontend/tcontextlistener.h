@@ -37,9 +37,9 @@ class ThreadContextListener : public CContextListener
 {
     Q_OBJECT
 public:
-    ThreadContextListener(QObject* parent, const char* name);
+    ThreadContextListener(QObject* parent, const char* name=0);
 
-    ~ThreadContextListener();
+    virtual ~ThreadContextListener();
 
     virtual bool contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave);
     virtual bool contextGetSavedLogin(const QString & realm,QString & username,QString & password);
@@ -51,6 +51,8 @@ public:
     virtual void contextNotify(const QString&aMsg);
     virtual void sendTick();
     virtual void contextProgress(long long int current, long long int max);
+
+    static QMutex*callbackMutex();
 
 protected:
     virtual void event_contextGetLogin(void*_data);
@@ -65,6 +67,5 @@ protected:
     /* stores all internals */
     ThreadContextListenerData*m_Data;
 };
-
 
 #endif

@@ -31,23 +31,24 @@
 #include <klocale.h>
 
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
-    : QThread(),mutex()
+    : QThread(),mutex(),m_SvnContextListener(0)
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
-    m_SvnContext = new ThreadContextListener(m_Parent,0);
-    if (m_Parent) {
-        QObject::connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
-    }
 
-    m_CurrentContext->setListener(m_SvnContext);
+    m_SvnContextListener = new ThreadContextListener(m_Parent);
+    QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
+
+    m_CurrentContext->setListener(m_SvnContextListener);
     m_what = reposRoot;
     m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
 }
 
 FillCacheThread::~FillCacheThread()
 {
+    m_CurrentContext->setListener(0);
     delete m_Svnclient;
+    m_SvnContextListener=0;
 }
 
 const QString&FillCacheThread::reposRoot()const
@@ -58,7 +59,7 @@ const QString&FillCacheThread::reposRoot()const
 void FillCacheThread::cancelMe()
 {
     // method is threadsafe!
-    m_SvnContext->setCanceled(true);
+    m_SvnContextListener->setCanceled(true);
 }
 
 void FillCacheThread::run()
@@ -90,8 +91,8 @@ void FillCacheThread::run()
         for (;i<j;i+=200) {
             _cur+=200;
             rl.fillCache(i);
-            if (m_SvnContext->contextCancel()) {
-                m_SvnContext->contextNotify(i18n("Filling cache canceled."));
+            if (m_SvnContextListener->contextCancel()) {
+                m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
                 kdDebug()<<"Cancel thread"<<endl;
                 breakit=true;
                 break;
@@ -107,9 +108,9 @@ void FillCacheThread::run()
         }
         rl.fillCache(Head);
         i=Head.revnum();
-        m_SvnContext->contextNotify(i18n("Cache filled up to revision %1").arg(i));
+        m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1").arg(i));
     } catch (const svn::Exception&e) {
-        m_SvnContext->contextNotify(e.msg());
+        m_SvnContextListener->contextNotify(e.msg());
     }
     if (k && !breakit) {
         QCustomEvent*ev = new QCustomEvent(EVENT_LOGCACHE_FINISHED);

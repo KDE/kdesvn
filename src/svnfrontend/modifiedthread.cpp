@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+
 #include "modifiedthread.h"
 #include "tcontextlistener.h"
 
@@ -27,16 +28,14 @@
 #include <kapplication.h>
 
 CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool _updates)
-    : QThread(),mutex()
+    : QThread(),mutex(),m_ContextListener(0)
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
-    m_SvnContext = new ThreadContextListener(m_Parent,0);
-    if (m_Parent) {
-        QObject::connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
-    }
+    m_ContextListener = new ThreadContextListener(m_Parent);
+    QObject::connect(m_ContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
 
-    m_CurrentContext->setListener(m_SvnContext);
+    m_CurrentContext->setListener(m_ContextListener);
     m_what = what;
     m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
     m_updates = _updates;
@@ -44,13 +43,15 @@ CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool
 
 CheckModifiedThread::~CheckModifiedThread()
 {
+    m_CurrentContext->setListener(0);
     delete m_Svnclient;
+    m_ContextListener=0;
 }
 
 void CheckModifiedThread::cancelMe()
 {
     // method is threadsafe!
-    m_SvnContext->setCanceled(true);
+    m_ContextListener->setCanceled(true);
 }
 
 const svn::StatusEntries&CheckModifiedThread::getList()const
@@ -67,7 +68,7 @@ void CheckModifiedThread::run()
         //                                  rec  all    up        noign
         m_Cache = m_Svnclient->status(m_what,svn::DepthInfinity,false,m_updates,false,where);
     } catch (const svn::Exception&e) {
-        m_SvnContext->contextNotify(e.msg());
+        m_ContextListener->contextNotify(e.msg());
     }
     KApplication*k = KApplication::kApplication();
     if (k) {

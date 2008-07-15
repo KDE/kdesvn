@@ -38,7 +38,6 @@ public:
     bool noProgress;
 
     /* only one callback at time */
-    QMutex m_CallbackMutex;
     QWaitCondition m_trustpromptWait;
 
     /* safed due condition above */

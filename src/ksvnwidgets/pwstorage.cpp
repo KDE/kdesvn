@@ -128,7 +128,7 @@ bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
     QMap<QString,QString> content;
     int j = mData->getWallet()->readMap(realm,content);
     if (j!=0||content.find("user")==content.end()) {
-        return false;
+        return true;
     }
     user = content["user"];
     pw = content["password"];

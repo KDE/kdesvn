@@ -38,7 +38,6 @@ ThreadContextListener::ThreadContextListener(QObject* parent, const char* name)
 
 ThreadContextListener::~ThreadContextListener()
 {
-    kdDebug()<<"ThreadContextListener destructor"<<endl;
     delete m_Data;
 }
 
@@ -76,7 +75,6 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
 
 bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString & username,QString & password)
 {
-
     kdDebug()<<"Getting threaded saved login"<<endl;
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();

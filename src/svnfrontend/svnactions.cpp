@@ -168,8 +168,6 @@ public:
     ItemDisplay* m_ParentList;
 
     svn::smart_pointer<CContextListener> m_SvnContextListener;
-    ThreadContextListenerP m_ThreadContextListener;
-
     svn::ContextP m_CurrentContext;
     svn::Client*m_Svnclient;
 
@@ -209,10 +207,8 @@ SvnActions::SvnActions(ItemDisplay *parent, const char *name,bool processes_bloc
     m_Data = new SvnActionsData();
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContextListener = new CContextListener(this);
-    m_Data->m_ThreadContextListener = new ThreadContextListener(this);
     m_Data->runblocked = processes_blocked;
     connect(m_Data->m_SvnContextListener,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
-    connect(m_Data->m_ThreadContextListener,SIGNAL(sendNotify(const QString&)),this,SLOT(slotNotifyMessage(const QString&)));
     connect(&(m_Data->m_ThreadCheckTimer),SIGNAL(timeout()),this,SLOT(checkModthread()));
     connect(&(m_Data->m_UpdateCheckTimer),SIGNAL(timeout()),this,SLOT(checkUpdateThread()));
 }
@@ -2380,7 +2376,7 @@ bool SvnActions::createModifiedCache(const QString&what)
     m_Data->m_Cache.clear();
     m_Data->m_conflictCache.clear();
     kdDebug()<<"Create cache for " << what << endl;
-    m_CThread = new CheckModifiedThread(this,m_Data->m_ThreadContextListener,what);
+    m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
     m_Data->m_ThreadCheckTimer.start(100,true);
     return true;
@@ -2512,7 +2508,7 @@ void SvnActions::startFillCache(const QString&path)
     if (!singleInfo(path,svn::Revision::UNDEFINED,e)) {
         return;
     }
-    m_FCThread=new FillCacheThread(this,m_Data->m_ThreadContextListener,e.reposRoot());
+    m_FCThread=new FillCacheThread(this,e.reposRoot());
     m_FCThread->start();
     emit sendNotify(i18n("Filling log cache in background"));
 }
@@ -2564,7 +2560,7 @@ bool SvnActions::createUpdateCache(const QString&what)
         return false;
     }
 
-    m_UThread = new CheckModifiedThread(this,m_Data->m_ThreadContextListener,what,true);
+    m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();
     m_Data->m_UpdateCheckTimer.start(100,true);
     emit sendNotify(i18n("Checking for updates started in background"));

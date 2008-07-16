@@ -126,7 +126,9 @@ CContextListener::~CContextListener()
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
     kdDebug()<<"Saved Login in object "<<this<<endl;
-    return PwStorage::self()->getLogin(realm,username,password);
+    PwStorage::self()->getLogin(realm,username,password);
+    /* the return value isn't interesting to us... */
+    return true;
 }
 
 bool CContextListener::contextGetLogin (
@@ -272,7 +274,8 @@ bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 
 bool CContextListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
 {
-    return PwStorage::self()->getCertPw(realm,password);
+    PwStorage::self()->getCertPw(realm,password);
+    return true;
 }
 
 bool CContextListener::contextSslClientCertPwPrompt (QString & password,

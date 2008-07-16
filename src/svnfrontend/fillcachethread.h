@@ -35,7 +35,7 @@ class QObject;
 class FillCacheThread:public QThread
 {
 public:
-    FillCacheThread(QObject*,const ThreadContextListenerP&,const QString&reposRoot);
+    FillCacheThread(QObject*,const QString&reposRoot);
     virtual ~FillCacheThread();
     virtual void run();
     virtual void cancelMe();

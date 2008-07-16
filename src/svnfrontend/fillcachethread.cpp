@@ -30,16 +30,14 @@
 #include <kapplication.h>
 #include <klocale.h>
 
-FillCacheThread::FillCacheThread(QObject*_parent,const ThreadContextListenerP&_listener,const QString&reposRoot)
-    : QThread(),mutex(),m_SvnContextListener(_listener)
+FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
+    : QThread(),mutex(),m_SvnContextListener(0)
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
 
-    if (!m_SvnContextListener) {
-        m_SvnContextListener = new ThreadContextListener(m_Parent);
-        QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
-    }
+    m_SvnContextListener = new ThreadContextListener(m_Parent);
+    QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
 
     m_CurrentContext->setListener(m_SvnContextListener);
     m_what = reposRoot;

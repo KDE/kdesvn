@@ -72,14 +72,11 @@ PwStorageData::cache_type*PwStorageData::getLoginCache()
 KWallet::Wallet*PwStorageData::getWallet()
 {
     static bool walletOpenFailed = false;
-    if (!Kdesvnsettings::passwords_in_wallet()) {
-        return 0;
-    }
     if (m_Wallet && m_Wallet->isOpen()) {
         return m_Wallet;
     }
 
-    if (KWallet::Wallet::isEnabled() && Kdesvnsettings::passwords_in_wallet()) {
+    if (KWallet::Wallet::isEnabled()) {
         WId window = 0;
         if ( qApp->activeWindow() ) {
             window = qApp->activeWindow()->winId();

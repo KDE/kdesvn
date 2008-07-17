@@ -44,6 +44,8 @@ public:
                      QString & password,
                      bool & maySave);
     virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+    virtual bool contextGetCachedLogin(const QString & realm,QString & username,QString & password);
+
 
     virtual void contextNotify (const char *path,
                    svn_wc_notify_action_t action,

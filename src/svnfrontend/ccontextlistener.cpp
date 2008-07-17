@@ -31,6 +31,7 @@
 #include <kdebug.h>
 #include <kfiledialog.h>
 
+#include <qmap.h>
 #include <qtextstream.h>
 #include <qthread.h>
 
@@ -43,6 +44,7 @@ public:
     // data
     bool m_cancelMe;
     QMutex m_CancelMutex;
+
     bool noDialogs;
 };
 
@@ -121,6 +123,12 @@ CContextListener::~CContextListener()
 {
     disconnect();
     delete m_Data;
+}
+
+bool CContextListener::contextGetCachedLogin (const QString & realm,QString & username,QString & password)
+{
+    PwStorage::self()->getCachedLogin(realm,username,password);
+    return true;
 }
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)

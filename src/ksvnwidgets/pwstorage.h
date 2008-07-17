@@ -25,6 +25,9 @@
 
 class PwStorageData;
 
+/**
+    Access to wallet isn't threadsafe 'cause wallet has not to be called from within threads!
+ */
 class PwStorage:public QObject
 {
     Q_OBJECT
@@ -33,8 +36,10 @@ protected:
 public:
     bool getCertPw(const QString&realm,QString&pw);
     bool getLogin(const QString&realm,QString&user,QString&pw);
+    bool getCachedLogin(const QString&realm,QString&user,QString&pw);
     bool setCertPw(const QString&realm, const QString&pw);
     bool setLogin(const QString&realm,const QString&user,const QString&pw);
+    bool setCachedLogin(const QString&realm,const QString&user,const QString&pw);
     bool connectWallet();
 
     static PwStorage*self();

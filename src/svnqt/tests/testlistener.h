@@ -26,6 +26,7 @@ class TestListener:public svn::ContextListener
                                     svn_wc_notify_state_t,
                                     svn_revnum_t){}
         virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password){return false;}
+        virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password){return false;} 
         virtual bool contextGetLogin (const QString & realm,
                                       QString & username,
                                       QString & password,

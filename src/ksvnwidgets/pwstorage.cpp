@@ -25,6 +25,10 @@
 #include <kwin.h>
 #include <kapp.h>
 
+#include <qthread.h>
+#include <qmap.h>
+#include <qpair.h>
+
 class PwStorageData
 {
 public:
@@ -39,15 +43,38 @@ public:
         m_Wallet=0;
     }
 
-    // call only from connectWallet
     KWallet::Wallet*getWallet();
+
+    typedef QPair<QString,QString> userpw_type;
+    typedef QMap<QString, userpw_type> cache_type;
+
+    cache_type*getLoginCache();
+
+    QMutex*getCacheMutex();
+
 protected:
     KWallet::Wallet* m_Wallet;
+
 };
+
+QMutex*PwStorageData::getCacheMutex()
+{
+    static QMutex _mutex;
+    return &_mutex;
+}
+
+PwStorageData::cache_type*PwStorageData::getLoginCache()
+{
+    static PwStorageData::cache_type _LoginCache;
+    return &_LoginCache;
+}
 
 KWallet::Wallet*PwStorageData::getWallet()
 {
     static bool walletOpenFailed = false;
+    if (!Kdesvnsettings::passwords_in_wallet()) {
+        return 0;
+    }
     if (m_Wallet && m_Wallet->isOpen()) {
         return m_Wallet;
     }
@@ -62,11 +89,12 @@ KWallet::Wallet*PwStorageData::getWallet()
     }
     if (!m_Wallet) {
         walletOpenFailed = true;
+    } else {
+        if (!m_Wallet->hasFolder(WALLETNAME)) {
+            m_Wallet->createFolder(WALLETNAME);
+        }
+        m_Wallet->setFolder(WALLETNAME);
     }
-    if (!m_Wallet->hasFolder(WALLETNAME)) {
-        m_Wallet->createFolder(WALLETNAME);
-    }
-    m_Wallet->setFolder(WALLETNAME);
     return m_Wallet;
 }
 
@@ -135,6 +163,12 @@ bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
     return true;
 }
 
+bool PwStorage::getCachedLogin(const QString&realm,QString&user,QString&pw)
+{
+    QMutexLocker lc(mData->getCacheMutex());
+    return true;
+}
+
 /*!
     \fn PwStorage::setCertPw(const QString&realm, const QString&pw)
  */
@@ -159,6 +193,12 @@ bool PwStorage::setLogin(const QString&realm,const QString&user,const QString&pw
     content["user"]=user;
     content["password"]=pw;
     return (mData->getWallet()->writeMap(realm,content)==0);
+}
+
+bool PwStorage::setCachedLogin(const QString&realm,const QString&user,const QString&pw)
+{
+    QMutexLocker lc(mData->getCacheMutex());
+    return true;
 }
 
 #include "pwstorage.moc"

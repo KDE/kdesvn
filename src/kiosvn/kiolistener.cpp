@@ -358,6 +358,10 @@ bool KioListener::contextGetSavedLogin (const QString & realm,QString & username
     return true;
 }
 
+bool KioListener::contextGetCachedLogin (const QString & realm,QString & username,QString & password)
+{
+    return true;
+}
 
 bool KioListener::contextGetLogin (const QString & realm, QString & username, QString & password, bool & maySave)
 {

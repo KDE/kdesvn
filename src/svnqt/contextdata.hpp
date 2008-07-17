@@ -112,7 +112,7 @@ public:
     /**
      * if the @a listener is set and no password has been
      * set yet, use it to retrieve login and password using
-     * ContextListener::contextGetLogin.
+     * ContextListener::contextGetSavedLogin.
      *
      * if the @a listener is not set, check if setLogin
      * has been called yet.
@@ -124,6 +124,22 @@ public:
     retrieveSavedLogin(const char * username_,
                        const char * realm,
                        bool &may_save);
+    /**
+     * if the @a listener is set and no password has been
+     * set yet, use it to retrieve login and password using
+     * ContextListener::contextGetCachedLogin.
+     *
+     * if the @a listener is not set, check if setLogin
+     * has been called yet.
+     *
+     * @return continue?
+     * @retval false cancel
+     */
+    bool
+    retrieveCachedLogin(const char * username_,
+                       const char * realm,
+                       bool &may_save);
+
 protected:
     // static methods
     /**
@@ -215,7 +231,20 @@ protected:
      * So we can try load password from other source.
      */
     static svn_error_t *
-    onFirstPrompt(svn_auth_cred_simple_t **cred,
+    onCachedPrompt(svn_auth_cred_simple_t **cred,
+                           void *baton,
+                           const char *realm,
+                           const char *username,
+                           svn_boolean_t _may_save,
+                           apr_pool_t *pool);
+
+    /**
+     * @see svn_auth_simple_prompt_func_t
+     * this method is an alternate and called ONEs before onSimplePrompt.
+     * So we can try load password from other source.
+     */
+    static svn_error_t *
+    onSavedPrompt(svn_auth_cred_simple_t **cred,
                            void *baton,
                            const char *realm,
                            const char *username,

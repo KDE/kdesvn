@@ -63,6 +63,7 @@ public:
                                   QString & password,
                                   bool & maySave);
     virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+    virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password);
 
     virtual void contextNotify (const char *path,
                                 svn_wc_notify_action_t action,
@@ -337,6 +338,11 @@ bool kdesvnd_dcop::isWorkingCopy(const KURL&_url,QString&base)
 bool IListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
     PwStorage::self()->getLogin(realm,username,password);
+    return true;
+}
+
+bool IListener::contextGetCachedLogin (const QString & realm,QString & username,QString & password)
+{
     return true;
 }
 

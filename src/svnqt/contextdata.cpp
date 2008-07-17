@@ -45,6 +45,7 @@ ContextData::ContextData(const QString & configDir_)
       // intialize authentication providers
       // * simple
       // * username
+      // * simple pw cache of frontend app
       // * simple pw storage
       // * simple prompt
       // * ssl server trust file
@@ -54,10 +55,14 @@ ContextData::ContextData(const QString & configDir_)
       // * ssl client cert pw prompt
       // * ssl client cert file
       // ===================
-      // 10 providers
+      // 11 providers (+1 for windowsvariant)
 
     apr_array_header_t *providers =
+#if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+        apr_array_make (pool, 12, sizeof (svn_auth_provider_object_t *));
+#else
         apr_array_make (pool, 11, sizeof (svn_auth_provider_object_t *));
+#endif
     svn_auth_provider_object_t *provider;
 
 #if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
@@ -86,7 +91,15 @@ ContextData::ContextData(const QString & configDir_)
 #else
     svn_client_get_simple_prompt_provider
 #endif
-    (&provider,onFirstPrompt,this,0,pool);
+    (&provider,onCachedPrompt,this,0,pool);
+    *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
+
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+    svn_auth_get_simple_prompt_provider
+#else
+    svn_client_get_simple_prompt_provider
+#endif
+    (&provider,onSavedPrompt,this,0,pool);
     *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
@@ -289,6 +302,21 @@ bool ContextData::retrieveSavedLogin (const char * username_,
     return ok;
 }
 
+bool ContextData::retrieveCachedLogin (const char * username_,
+                                 const char * realm,
+                                 bool & may_save)
+{
+    bool ok;
+    may_save = false;
+
+    if (listener == 0)
+        return false;
+
+    username = QString::FROMUTF8(username_);
+    ok = listener->contextGetCachedLogin(QString::FROMUTF8(realm),username, password);
+    return ok;
+}
+
 svn_client_ctx_t *ContextData::ctx()
 {
     return m_ctx;
@@ -466,7 +494,34 @@ svn_error_t * ContextData::onCancel (void * baton)
         return SVN_NO_ERROR;
 }
 
-svn_error_t *ContextData::onFirstPrompt(svn_auth_cred_simple_t **cred,
+svn_error_t *ContextData::onCachedPrompt(svn_auth_cred_simple_t **cred,
+                                            void *baton,
+                                            const char *realm,
+                                            const char *username,
+                                            svn_boolean_t _may_save,
+                                            apr_pool_t *pool)
+{
+    ContextData * data = 0;
+    SVN_ERR (getContextData (baton, &data));
+    bool may_save = _may_save != 0;
+    if (!data->retrieveCachedLogin (username, realm, may_save ))
+        return SVN_NO_ERROR;
+    svn_auth_cred_simple_t* lcred = (svn_auth_cred_simple_t*)
+            apr_palloc (pool, sizeof (svn_auth_cred_simple_t));
+    QByteArray l;
+    l = data->getPassword().TOUTF8();
+    lcred->password = apr_pstrndup (pool,l,l.size());
+    l = data->getUsername().TOUTF8();
+    lcred->username = apr_pstrndup (pool,l,l.size());
+
+      // tell svn if the credentials need to be saved
+    lcred->may_save = may_save;
+    *cred = lcred;
+
+    return SVN_NO_ERROR;
+}
+
+svn_error_t *ContextData::onSavedPrompt(svn_auth_cred_simple_t **cred,
                                             void *baton,
                                             const char *realm,
                                             const char *username,

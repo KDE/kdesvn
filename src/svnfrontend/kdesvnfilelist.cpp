@@ -248,6 +248,10 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(this,SIGNAL(dropped (QDropEvent*,Q3ListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,Q3ListViewItem*)));
     connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
+
+    connect(m_SvnWrapper,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)));
+    connect(m_SvnWrapper,SIGNAL(sigThreadsChanged()),this,SLOT(enableActions()));
+
     m_pList->connectDirTimer(this);
     m_pList->connectPropTimer(this);
 
@@ -411,6 +415,13 @@ void kdesvnfilelist::setupActions()
     tmp_action = new KAction( i18n("Fold File Tree"), 0, this, SLOT(slotFoldTree()), m_filesAction, "view_fold_tree" );
     tmp_action->setToolTip(i18n("Closes all branches of the file tree"));
 
+    /* caching */
+    tmp_action = new KAction( i18n("Update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"update_log_cache" );
+    tmp_action->setToolTip(i18n("Update the log cache for current repository"));
+    /*    tmp_action = new KAction( i18n("Stop update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"stop_update_log_cache" );
+        tmp_action->setToolTip(i18n("Stop the update of the log cache"));
+    */
+
     enableActions();
     m_filesAction->setHighlightingEnabled(true);
 }
@@ -493,7 +504,6 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
     CursorStack a;
     m_SvnWrapper->killallThreads();
     clear();
-    kdDebug()<<"Start open URL"<<endl;
     emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,QString(""));
     m_Dirsread.clear();
     if (m_SelectedItems) {
@@ -553,7 +563,7 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
                 setWorkingCopy(true);
             } else {
                 // yes! KUrl sometimes makes a correct localfile url (file:///)
-                // to a simple file:/ - that brakes subverision lib. so we make sure
+                // to a simple file:/ - that breakes subversion lib. so we make sure
                 // that we have a correct url
                 setBaseUri("file://"+baseUri());
             }
@@ -619,18 +629,18 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
              slotCheckUpdates();
         }
     }
-    m_SvnWrapper->startFillCache(baseUri());
+    if (Kdesvnsettings::start_log_cache_on_open()) {
+        m_SvnWrapper->startFillCache(baseUri());
+    }
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     QTimer::singleShot(1,this,SLOT(readSupportData()));
     enableActions();
-    kdDebug()<<"End open URL"<<endl;
     return result;
 }
 
 void kdesvnfilelist::closeMe()
 {
-    kdDebug()<<"Close me"<<endl;
     m_SvnWrapper->killallThreads();
 
     selectAll(false);
@@ -752,25 +762,11 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
             }
         } else if (isWorkingCopy()) {
             m_pList->m_DirWatch->addFile(item->fullName());
-#if 0
-            if (item->fileItem()) {
-                oneItem.append(item->fileItem());
-            }
-#endif
-//            kDebug()<< "Watching file: " + item->fullName() << endl;
         }
     }
-#if 0
-    if (oneItem.count()>0) {
-        int size = Kdesvnsettings::listview_icon_size();
-        KIO::PreviewJob* m_previewJob= KIO::filePreview(oneItem, size, size, size, 70, true, true, 0);
-        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem& , const QPixmap & ) ),
-                 this, SLOT( gotPreview( const KFileItem& , const QPixmap & ) ) );
-        connect( m_previewJob, SIGNAL( result( KIO::Job * ) ),
-                 this, SLOT( gotPreviewResult() ) );
-    }
-#endif
 }
+        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem *, const QPixmap & ) ),
+                 this, SLOT( gotPreview( const KFileItem *, const QPixmap & ) ) );
 
 /* newdir is the NEW directory! just required if local */
 void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
@@ -800,7 +796,7 @@ void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
     svn::StatusPtr stat;
     try {
         stat = m_SvnWrapper->svnclient()->singleStatus(newdir);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         m_LastException = e.msg();
         kDebug()<<"Catched on singlestatus"<< endl;
         emit sigLogMessage(m_LastException);
@@ -889,7 +885,7 @@ void kdesvnfilelist::enableActions()
     bool none = c==0&&isopen;
     bool dir = false;
     bool unique = uniqueTypeSelected();
-    bool remote_enabled=m_SvnWrapper->doNetworking();
+    bool remote_enabled=isopen&&m_SvnWrapper->doNetworking();
 
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;
@@ -938,8 +934,8 @@ void kdesvnfilelist::enableActions()
     m_CopyAction->setEnabled(single && (!isWorkingCopy()||singleSelected()!=firstChild()));
 
     /* 2. only on files */
-    m_BlameAction->setEnabled(single&&!dir);
-    m_BlameRangeAction->setEnabled(single&&!dir);
+    m_BlameAction->setEnabled(single&&!dir&&remote_enabled);
+    m_BlameRangeAction->setEnabled(single&&!dir&&remote_enabled);
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
     m_MkdirAction->setEnabled(dir||none && isopen);
@@ -985,7 +981,7 @@ void kdesvnfilelist::enableActions()
         temp->setEnabled(isWorkingCopy()&&(single||none)&&remote_enabled);
     }
 
-    /// @todo uberprüfen ob alle selektierten items den selben typ haben.
+    /// @todo check if all items have same type
     temp = filesActions()->action("make_svn_itemsdiff");
     if (temp) {
         temp->setEnabled(multi && c==2 && unique && remote_enabled);
@@ -1024,6 +1020,16 @@ void kdesvnfilelist::enableActions()
     temp = filesActions()->action("openwith");
     if (temp) {
         temp->setEnabled(KAuthorized::authorizeKAction("openwith")&&single&&!dir);
+    }
+
+    temp = filesActions()->action("update_log_cache");
+    if (temp) {
+        temp->setEnabled(remote_enabled);
+        if (!m_SvnWrapper->threadRunning(SvnActions::fillcachethread)) {
+            temp->setText(i18n("Update log cache"));
+        } else {
+            temp->setText(i18n("Stop updating the logcache"));
+        }
     }
 }
 
@@ -2765,7 +2771,11 @@ void kdesvnfilelist::slotSettingsChanged()
     } else {
         viewport()->repaint();
     }
+    enableActions();
     sort();
+    if (m_SvnWrapper && !m_SvnWrapper->doNetworking()) {
+        m_SvnWrapper->stopFillCache();
+    }
 }
 
 
@@ -3136,6 +3146,25 @@ void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QVal
         which->refreshStatus();
         refreshCurrent(which);
         _propListTimeout();
+    }
+}
+
+void kdesvnfilelist::slotUpdateLogCache()
+{
+    if (baseUri().length()>0 && m_SvnWrapper->doNetworking()) {
+        KAction*temp = filesActions()->action("update_log_cache");
+
+        if (!m_SvnWrapper->threadRunning(SvnActions::fillcachethread)) {
+            m_SvnWrapper->startFillCache(baseUri());
+            if (temp) {
+                temp->setText(i18n("Stop updating the logcache"));
+            }
+        } else {
+            m_SvnWrapper->stopFillCache();
+            if (temp) {
+                temp->setText(i18n("Update log cache"));
+            }
+        }
     }
 }
 

@@ -91,6 +91,22 @@ namespace svn
                          QString & username,
                          QString & password) = 0;
     /**
+     * this method will be called to retrieve
+     * authentication information stored not persistent. This
+     * will only called once!
+     *
+     * @param username username set as default by subversion
+     * @param realm in which username/password will be used
+     * @param password  target storage for password
+     * @return continue action? should only in case of emergency return false.
+     * @retval true continue
+     */
+    virtual bool
+    contextGetCachedLogin(const QString & realm,
+                         QString & username,
+                         QString & password) = 0;
+
+    /**
      * this method will be called to notify about
      * the progress of an ongoing action
      *

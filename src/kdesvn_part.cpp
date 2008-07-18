@@ -102,6 +102,8 @@ void kdesvnPart::init( QWidget *parentWidget, const char *widgetName,bool full)
     connect(this,SIGNAL(refreshTree()),m_view,SLOT(refreshCurrentTree()));
     connect(m_view,SIGNAL(setWindowCaption(const QString&)),this,SIGNAL(setWindowCaption(const QString&)));
     connect(m_view,SIGNAL(sigUrlChanged( const QString&)),this,SLOT(slotUrlChanged(const QString&)));
+    connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
+
     m_browserExt->setPropertiesActionEnabled(false);
 }
 
@@ -268,6 +270,7 @@ void kdesvnPart::slotEnableNetwork(bool how)
 {
     Kdesvnsettings::setNetwork_on(how);
     Kdesvnsettings::writeConfig();
+    emit settingsChanged();
 }
 
 /*!
@@ -313,7 +316,6 @@ void kdesvnPart::reportBug()
   KBugReport dlg(m_view, true, createAboutData());
   dlg.exec();
 }
-
 
 /*!
     \fn kdesvnPart::showAboutApplication()
@@ -366,7 +368,6 @@ void kdesvnPart::slotShowSettings()
         "KIO/"+i18n("Commandline"),"terminal",i18n("Settings for commandline and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
-    connect(this,SIGNAL(settingsChanged()),widget(),SLOT(slotSettingsChanged()));
     dialog->show();
 }
 

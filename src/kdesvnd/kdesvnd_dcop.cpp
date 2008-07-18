@@ -56,8 +56,6 @@ class IListener:public svn::ContextListener
     friend class kdesvnd_dcop;
 
     kdesvnd_dcop*m_back;
-
-    PwStorage pws;
 public:
     IListener(kdesvnd_dcop*p);
     virtual ~IListener();
@@ -67,6 +65,7 @@ public:
                                   QString & password,
                                   bool & maySave);
     virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+    virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password);
 
     virtual void contextNotify (const char *path,
                                 svn_wc_notify_action_t action,
@@ -340,7 +339,12 @@ bool kdesvnd_dcop::isWorkingCopy(const KUrl&_url,QString&base)
 
 bool IListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-    pws.getLogin(realm,username,password);
+    PwStorage::self()->getLogin(realm,username,password);
+    return true;
+}
+
+bool IListener::contextGetCachedLogin (const QString & realm,QString & username,QString & password)
+{
     return true;
 }
 
@@ -358,7 +362,7 @@ bool IListener::contextGetLogin (const QString & realm,
     password = res[1];
     maySave = (res[2]=="true");
     if (maySave && Kdesvnsettings::passwords_in_wallet() ) {
-        pws.setLogin(realm,username,password);
+        PwStorage::self()->setLogin(realm,username,password);
         maySave=false;
     }
     return true;
@@ -429,14 +433,14 @@ bool IListener::contextSslClientCertPrompt (QString & certFile)
 
 bool IListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
 {
-    return pws.getCertPw(realm,password);
+    return PwStorage::self()->getCertPw(realm,password);
 }
 
 bool IListener::contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave)
 {
     maySave=false;
-    if (pws.getCertPw(realm,password)) {
+    if (PwStorage::self()->getCertPw(realm,password)) {
         return true;
     }
     QStringList res = m_back->get_sslclientcertpw(realm);
@@ -447,7 +451,7 @@ bool IListener::contextSslClientCertPwPrompt (QString & password,
     maySave=res[1]==QString("true");
 
     if (maySave && Kdesvnsettings::passwords_in_wallet() ) {
-        pws.setCertPw(realm,password);
+        PwStorage::self()->setCertPw(realm,password);
         maySave=false;
     }
 

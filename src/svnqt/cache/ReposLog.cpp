@@ -21,7 +21,7 @@
     \fn svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&)
  */
 svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&aRepository)
-    :m_Client(aClient),
+    :m_Client(),
 #if QT_VERSION < 0x040000
               m_Database(0),
 #else
@@ -29,6 +29,8 @@ svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&aRepository)
 #endif
               m_ReposRoot(aRepository),m_latestHead(svn::Revision::UNDEFINED)
 {
+    m_Client=aClient;
+    ContextP ctx = m_Client->getContext();
     if (!aRepository.isEmpty()) {
         m_Database = LogCache::self()->reposDb(aRepository);
     }
@@ -58,10 +60,12 @@ svn::Revision svn::cache::ReposLog::latestHeadRev()
         }
     }
     /// no catch - exception has go trough...
-    svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD));;
+    qDebug("Getting headrev");
+    svn::InfoEntries e = m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD);
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
+    qDebug("Getting headrev done");
     return e[0].revision();
 }
 
@@ -96,8 +100,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     }
     int _r;
     if (_q.isActive() && _q.next()) {
-
-        qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
         _r = _q.value(0).toInt();
     } else {
         qDebug(_q.lastError().text().TOUTF8().data());
@@ -317,9 +320,12 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
         return query.value(0).toInt();
     }
     // not found...
+    if (noNetwork) {
+        return svn::Revision::UNDEFINED;
+    }
     svn::InfoEntries e = (m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD));;
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
-        return aRev;
+        return svn::Revision::UNDEFINED;
     }
     return e[0].revision();
 }
@@ -396,6 +402,9 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry)
 bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, const svn::Revision&_end,const svn::Revision&_peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit)
 {
     static QString s_q("select logentries.revision,logentries.author,logentries.date,logentries.message from logentries where logentries.revision in (select changeditems.revision from changeditems where (changeditems.changeditem='%1' or changeditems.changeditem GLOB '%2/*') %3 GROUP BY changeditems.revision) ORDER BY logentries.revision DESC");
+
+    static QString s_e("select changeditem,action,copyfrom,copyfromrev from changeditems where changeditems.revision='%1'");
+
     svn::Revision peg = date2numberRev(_peg,true);
     svn::Revision end = date2numberRev(_end,true);
     svn::Revision start = date2numberRev(_start,true);
@@ -409,8 +418,8 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     if (limit>0) {
         query_string+=QString(" LIMIT %1").arg(limit);
     }
-    qDebug("Query-string: %s",query_string.TOUTF8().data());
     QSqlQuery _q(QString::null,m_Database);
+    QSqlQuery _q2(QString::null,m_Database);
     _q.prepare(query_string);
     if (!_q.exec()) {
         qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
@@ -423,6 +432,32 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
         target[revision].author=_q.value(1).toString();
         target[revision].date=_q.value(2).toLongLong();
         target[revision].message=_q.value(3).toString();
+        query_string=s_e.arg(revision);
+        _q2.prepare(query_string);
+        if (!_q2.exec()) {
+            qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
+        } else {
+            while (_q2.next()) {
+#if QT_VERSION < 0x040000
+                target[revision].changedPaths.push_back (
+                        LogChangePathEntry (_q2.value(0).toString(),
+                                            _q2.value(1).toString()[0],
+                                            _q2.value(2).toString(),
+                                            _q2.value(3).toLongLong()
+                                           )
+                                                        );
+#else
+                target[revision].changedPaths.push_back (
+                        LogChangePathEntry (_q2.value(0).toString(),
+                                            _q2.value(1).toChar().toLatin1(),
+                                            _q2.value(2).toString(),
+                                            _q2.value(3).toLongLong()
+                                           )
+                                                        );
+#endif
+            }
+        }
+
     }
     return true;
 }

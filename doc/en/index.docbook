@@ -39,7 +39,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <copyright>
 <year>2005</year>
-<year>2006</year>
+<year>2008</year>
 <holder>Rajko Albrecht</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -55,7 +55,7 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date>$Date$</date>
-<releaseinfo>0.3</releaseinfo>
+<releaseinfo>0.4</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -506,8 +506,8 @@ In difference to internal merge target may a flat folder/file not under sourceco
 If recoursive isn't set, the export is done as a flat export. Be care: when doing this with working copies externals will NOT exported.
 </para>
 </sect3>
-
 </sect2>
+
 <sect2 id="op-resolve">
 <title>Resolving conflicts</title>
 <para>
@@ -521,11 +521,11 @@ When marking an item with status set to &quot;conflicted&quot; (you'll see a red
 <guisubmenu>Resolve conflict</guisubmenu>
 </menuchoice>.
 or from within context menu <menuchoice><guisubmenu>Resolve conflict</guisubmenu></menuchoice> (only on conflicted items)
-&kappname; now starts the program you setup (or the default on). After finish this job you should mark item as resolved 
+&kappname; now starts the program you setup (or the default one). After finish this job you should mark item as resolved 
 (<menuchoice><guimenu>Subversion</guimenu><guisubmenu>Working copy</guisubmenu><guisubmenu>Mark resolved</guisubmenu></menuchoice>) otherwise you will not able to commit your changes.
-
 </para>
 </sect2>
+
 </sect1>
 
 <sect1 id="used-properties">
@@ -587,6 +587,35 @@ On local opened repositories (eg., <prompt>file://</prompt>-Protocoll) and on wo
 </para>
 <para>
 Support for multiple sets of this properties may follow later, (eg., in subfolder extra values for other tracker etc.) but in most cases evaluatin single tracker links should be enough.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title>The revision tree</title>
+<para>
+The revision tree try display the whole history of an item so user may get a bette feeling about the history of an item. It has to scan the complete log of the repository 'cause it requires some information subversion does not (and I think will not) give. 'Cause this produces a lot of traffic the revisiontree uses always the internal <link linkend="logcache-descr">logcache</link>.
+</para>
+<sect2>
+<title>Requirements</title>
+<para>
+The revisiontree is generated via <prompt>dot</prompt>. So for a working revisiontree the <prompt>graphviz</prompt> package must installed.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr"> 
+<title>Internal log cache</title>
+<para>&kappname; may use an internal logcache for some operations. Mostly it is used for <link linkend="revision-tree">the revisiontree</link> but when viewing simplified log in offline modus, too. The caches are oranized as sqlite databases stored in <prompt>$HOME/.sqvnqt/logcache</prompt>. Every numbered file is a storage for a different repository.<warning><para>The databases may get large! So you may disable automatic update of logcache in settings.</para></warning>You may simply remove a database, than no cached log will given back for that repository (and no revisiontree!) but when you don't disable automatic filling the cache on next open this repository or an associated working copy of it the cache will refilled again.
+</para>
+<sect2>
+<title>Offline mode</title>
+<para>Kdesvn may work without network access, eg., you may switch that no network access is allowed. This may usefull when working without network like on notebooks. In such cases &kappname; always get the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <prompt>&quot;Log follows nodechanges&quot;</prompt> is set.</para>
+</sect2>
+<sect2>
+<title>Logcache and revisiontree</title>
+<para>
+The revisiontree will only use the logcache 'cause otherwise it must get always the logs again. It will NOT refresh the logcache (but this may changed in later releases).
 </para>
 </sect2>
 </sect1>
@@ -706,6 +735,45 @@ This entry (or entry below if folder) got conflicts to resolve with last update.
 </variablelist>
 
 </para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title>&kappname; and passwords</title>
+<para>
+&kappname;/subversion is able to save passwords. Saving passwords is always a security risk, but may let a graphical frontend more useable.
+</para>
+<sect2>
+<title>Not saving passwords</title>
+<para>
+Most secure way, but sometimes unhandy with GUIs like &kappname;. In particular the background processes of &kappname; would always ask for a password in case the repository has restricted access for reading operations like update and status. The same for &quot;commit&quot; and so on. So if you not saving passwords you should disable "Check for updates on open working copy" and so on.
+</para>
+</sect2>
+<sect2>
+<title>Saving passwords in kdewallet</title>
+<para>
+Secured password storage used by a lot of kde programs like kmail and konqueror. If you'saving passwords and mostly using kdesvn you should use this. Keep care that the encrypted storage isn't a high-secure storage. Details see kdewallet documentation.
+</para>
+</sect2>
+<sect2>
+<title>Saving to subversions own password storage</title>
+<para>
+This is not recommended 'cause the passwords are stored as cleartext! Not believing? Take a look into the files in <prompt>~/.subversion/auth/svn.simple</prompt>. You should only use this if you're using frequently other clients than &kappname; like rapidsvn or esvn or the original svn commandline client. If you're using the commandline client mostly for checkouts or updates which doesn't require a password and kdesvn for commit/move/copy you should use kdewallet instead.
+</para>
+</sect2>
+<sect2>
+<title>Specialcase svn+ssh</title>
+<para>
+When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote mashine and repository. When want to store you must using the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your pulic ssh-key on the target, eg., the repository system.
+</para>
+<para>
+If you don't want asked for the password of you ssh-key you may use the <prompt>ssh-agent</prompt>, with selecting the menu
+<menuchoice><guimenu>
+Subversion
+</guimenu>
+<guimenuitem>Add ssh identities to ssh-agent</guimenuitem></menuchoice>
+you may store you ssh-key-password for your current session so no further entering of your password is needed.
+</para>
+</sect2>
 </sect1>
 </chapter>
 
@@ -1989,10 +2057,6 @@ repository. If your public identity has a password, ssh-agent will asked (when s
 When you're running a ssh-agent before starting &kdesvn;, you should add your identity to its cache, &kdesvn; will not
 modifiy it due security reasons, so it would ask for your password again and again. (see <ulink url="man:ssh-add">Manpage of ssh-add</ulink>)
 </para>
-<para>
-<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin has a nice description</ulink> how to use kdesvn
-with ssh and keychain.
-</para>
 </answer>
 </qandaentry>
 <qandaentry>
@@ -2181,11 +2245,11 @@ part of KDE CVS.  You should remove it if you are releasing your
 application -->
 <para>
 &kdesvn; itself can be found
-at <ulink url="http://kdesvn.alwins-world.de/downloads/">
+at <ulink url="http://kdesvn.alwins-world.de/trac.fcgi/downloads/">
 the &kdesvn; download area</ulink>.
 </para>
 <para>
-You may get <ulink url="http://kdesvn.alwins-world.de/browser/trunk">latest repository version</ulink> when looking whats going on.
+You may get <ulink url="http://kdesvn.alwins-world.de/trac.fcgi/browser/trunk">latest repository version</ulink> when looking whats going on.
 </para>
 <para>
 The homepage of that project is <ulink url="http://kdesvn.alwins-world.de/">http://kdesvn.alwins-world.de/</ulink>
@@ -2207,8 +2271,8 @@ information here.
 -->
 
 <para>
-You need installed subversion 1.2 or above and &kde; 3.4.x
-or above. Subversion prior 1.2 is NOT supported!
+You need installed subversion 1.3 or above and &kde; 3.4.x
+or above. Subversion prior 1.3 is NOT supported!
 </para>
 <para>
 Subversion may found on <ulink url="http://subversion.tigris.org">its homepage</ulink> but your
@@ -2218,7 +2282,7 @@ distributor should have packages for your system and/or distribution.
 or the ChangeLog file, or ... -->
 <para>
 You can find a list of changes at <ulink
-url="http://kdesvn.alwins-world.de/browser/trunk/ChangeLog">http://kdesvn.alwins-world.de/browser/trunk/ChangeLog</ulink>.
+url="http://kdesvn.alwins-world.de/trac.fcgi/browser/trunk/ChangeLog">http://kdesvn.alwins-world.de/browser/trunk/ChangeLog</ulink>.
 </para>
 </sect1>
 
@@ -2243,16 +2307,3 @@ or checkout / export a copy from repository and change to the resulting sourcedi
 
 &documentation.index;
 </book>
-
-<!--
-Local Variables:
-mode: sgml
-sgml-minimize-attributes:nil
-sgml-general-insert-case:lower
-sgml-indent-step:0
-sgml-indent-data:nil
-End:
-
-vim:tabstop=2:shiftwidth=2:expandtab
--->
-

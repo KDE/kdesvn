@@ -36,7 +36,7 @@ class CContextListener : public QObject, public svn::ContextListener,public svn:
     Q_OBJECT
 public:
     CContextListener(QObject *parent = 0, const char *name = 0);
-    ~CContextListener();
+    virtual ~CContextListener();
 
     /* context-listener methods */
     virtual bool contextGetLogin (const QString & realm,
@@ -44,6 +44,8 @@ public:
                      QString & password,
                      bool & maySave);
     virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+    virtual bool contextGetCachedLogin(const QString & realm,QString & username,QString & password);
+
 
     virtual void contextNotify (const char *path,
                    svn_wc_notify_action_t action,

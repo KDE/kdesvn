@@ -11,6 +11,8 @@ SET(kdesvnsrc
     commandline.cpp)
 
 SET(partsrc
+    kdesvn_events.cpp
+    kdesvn_events.h
     kdesvn_part.cpp
     kdesvnview.cpp
     commandline_part.cpp)

@@ -39,11 +39,13 @@ class ThreadContextListener : public CContextListener
 {
     Q_OBJECT
 public:
-    ThreadContextListener(QObject* parent, const char* name);
+    ThreadContextListener(QObject* parent, const char* name=0);
 
-    ~ThreadContextListener();
+    virtual ~ThreadContextListener();
 
     virtual bool contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave);
+    virtual bool contextGetSavedLogin(const QString & realm,QString & username,QString & password);
+
     virtual bool contextGetLogMessage(QString& msg,const svn::CommitItemList&);
     virtual bool contextSslClientCertPrompt(QString& certFile);
     virtual bool contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave);
@@ -52,8 +54,11 @@ public:
     virtual void sendTick();
     virtual void contextProgress(long long int current, long long int max);
 
+    static QMutex*callbackMutex();
+
 protected:
     virtual void event_contextGetLogin(void*_data);
+    virtual void event_contextGetSavedLogin(void*_data);
     virtual void event_contextGetLogMessage(void*data);
     virtual void event_contextSslClientCertPrompt(void*data);
     virtual void event_contextSslClientCertPwPrompt(void*data);
@@ -62,8 +67,8 @@ protected:
     virtual void customEvent(QCustomEvent*);
 
     /* stores all internals */
+    QMutex m_WaitMutex;
     ThreadContextListenerData*m_Data;
 };
-
 
 #endif

@@ -1,7 +1,7 @@
 #first straigth forward until we have a doc translation
 
 MACRO (GENBOOK _language_code)
-    FILE(GLOB docimages ${_language_code}/*.png)
+    FILE(GLOB docimages ${_language_code}/hi128-filesys-*.png)
     ADD_CUSTOM_COMMAND(
         OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}_index.cache.bz2
         COMMAND

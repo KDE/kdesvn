@@ -42,6 +42,7 @@ public:
                      QString & password,
                      bool & maySave);
     virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
+    virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password);
 
     virtual void contextNotify (const char *path,
                    svn_wc_notify_action_t action,
@@ -75,7 +76,6 @@ protected:
     bool m_External;
     bool m_HasChanges;
     bool m_FirstTxDelta;
-    PwStorage pws;
     bool m_Canceld;
 };
 }

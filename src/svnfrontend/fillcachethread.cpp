@@ -23,6 +23,7 @@
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/cache/DatabaseException.hpp"
+#include "src/kdesvn_events.h"
 
 #include <qobject.h>
 #include <kdebug.h>
@@ -30,23 +31,24 @@
 #include <klocale.h>
 
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
-    : QThread(),mutex()
+    : QThread(),mutex(),m_SvnContextListener(0)
 {
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
-    m_SvnContext = new ThreadContextListener(m_Parent,0);
-    if (m_Parent) {
-        QObject::connect(m_SvnContext,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
-    }
 
-    m_CurrentContext->setListener(m_SvnContext);
+    m_SvnContextListener = new ThreadContextListener(m_Parent);
+    QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
+
+    m_CurrentContext->setListener(m_SvnContextListener);
     m_what = reposRoot;
     m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
 }
 
 FillCacheThread::~FillCacheThread()
 {
+    m_CurrentContext->setListener(0);
     delete m_Svnclient;
+    m_SvnContextListener=0;
 }
 
 const QString&FillCacheThread::reposRoot()const
@@ -57,7 +59,7 @@ const QString&FillCacheThread::reposRoot()const
 void FillCacheThread::cancelMe()
 {
     // method is threadsafe!
-    m_SvnContext->setCanceled(true);
+    m_SvnContextListener->setCanceled(true);
 }
 
 void FillCacheThread::run()
@@ -65,28 +67,52 @@ void FillCacheThread::run()
     svn::Revision where = svn::Revision::HEAD;
     QString ex;
     svn::cache::ReposLog rl(m_Svnclient,m_what);
+    bool breakit=false;
+    KApplication*k = KApplication::kApplication();
 
     try {
+        kdDebug()<<"Getting cachedrev"<<endl;
         svn::Revision latestCache = rl.latestCachedRev();
+        kdDebug()<<"Getting headrev"<<endl;
         svn::Revision Head = rl.latestHeadRev();
+        kdDebug()<<"Getting headrev done "<<endl;
         Q_LLONG i = latestCache.revnum();
         Q_LLONG j = Head.revnum();
 
+        Q_LLONG _max=j-i;
+        Q_LLONG _cur=0;
+
+        FillCacheStatusEvent*fev;
+        if (k) {
+            fev = new FillCacheStatusEvent(_cur,_max);
+            k->postEvent(m_Parent,fev);
+        }
+
         for (;i<j;i+=200) {
+            _cur+=200;
             rl.fillCache(i);
-            if (m_SvnContext->contextCancel()||latestCache==rl.latestCachedRev()) {
+            if (m_SvnContextListener->contextCancel()) {
+                m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
+                kdDebug()<<"Cancel thread"<<endl;
+                breakit=true;
                 break;
+            }
+            if (latestCache==rl.latestCachedRev()) {
+                break;
+            }
+            if (k) {
+                fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
+                k->postEvent(m_Parent,fev);
             }
             latestCache=rl.latestCachedRev();
         }
         rl.fillCache(Head);
         i=Head.revnum();
-        m_SvnContext->contextNotify(i18n("Cache filled up to revision %1").arg(i));
-    } catch (const svn::ClientException&e) {
-        m_SvnContext->contextNotify(e.msg());
+        m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1").arg(i));
+    } catch (const svn::Exception&e) {
+        m_SvnContextListener->contextNotify(e.msg());
     }
-    KApplication*k = KApplication::kApplication();
-    if (k) {
+    if (k && !breakit) {
         QCustomEvent*ev = new QCustomEvent(EVENT_LOGCACHE_FINISHED);
         ev->setData((void*)this);
         k->postEvent(m_Parent,ev);

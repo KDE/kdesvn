@@ -1,4 +1,6 @@
 PROJECT(kdesvn)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+
 OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
 OPTION(BUILD_KDE4 "Building for kde4 yes or no (default On)")
 
@@ -131,6 +133,7 @@ SET(KDESVN_VERSION \"${VERSION}\")
 
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
+CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/kdesvn.spec @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 

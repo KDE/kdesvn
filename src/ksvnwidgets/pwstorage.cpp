@@ -22,29 +22,101 @@
 #include "src/settings/kdesvnsettings.h"
 
 #include <kwallet.h>
+#include <kwin.h>
+#include <kapp.h>
+
+#include <qthread.h>
+#include <qmap.h>
+#include <qpair.h>
 
 class PwStorageData
 {
 public:
-    KWallet::Wallet *m_Wallet;
-    PwStorageData(){m_Wallet = 0;}
-    ~PwStorageData(){}
+
+    PwStorageData(){
+        m_Wallet=0;
+    }
+
+    ~PwStorageData()
+    {
+        delete m_Wallet;
+        m_Wallet=0;
+    }
+
+    KWallet::Wallet*getWallet();
+
+    typedef QPair<QString,QString> userpw_type;
+    typedef QMap<QString, userpw_type> cache_type;
+
+    cache_type*getLoginCache();
+
+    QMutex*getCacheMutex();
+
+protected:
+    KWallet::Wallet* m_Wallet;
+
 };
 
+QMutex*PwStorageData::getCacheMutex()
+{
+    static QMutex _mutex;
+    return &_mutex;
+}
+
+PwStorageData::cache_type*PwStorageData::getLoginCache()
+{
+    static PwStorageData::cache_type _LoginCache;
+    return &_LoginCache;
+}
+
+KWallet::Wallet*PwStorageData::getWallet()
+{
+    static bool walletOpenFailed = false;
+    if (m_Wallet && m_Wallet->isOpen()) {
+        return m_Wallet;
+    }
+
+    if (KWallet::Wallet::isEnabled()) {
+        WId window = 0;
+        if ( qApp->activeWindow() ) {
+            window = qApp->activeWindow()->winId();
+        }
+        delete m_Wallet;
+        m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),window);
+    }
+    if (!m_Wallet) {
+        walletOpenFailed = true;
+    } else {
+        if (!m_Wallet->hasFolder(WALLETNAME)) {
+            m_Wallet->createFolder(WALLETNAME);
+        }
+        m_Wallet->setFolder(WALLETNAME);
+    }
+    return m_Wallet;
+}
+
+PwStorage*PwStorage::self()
+{
+    static PwStorage*_me = 0;
+    if (!_me) {
+        _me = new PwStorage();
+    }
+    return _me;
+}
 
 /*!
     \fn PwStorage::PwStorageData()
  */
- PwStorage::PwStorage()
+PwStorage::PwStorage()
+    :QObject()
 {
     mData = new PwStorageData;
 }
 
-
 /*!
     \fn PwStorage::~PwStorageData()
  */
- PwStorage::~PwStorage()
+PwStorage::~PwStorage()
 {
     delete mData;
 }
@@ -55,28 +127,18 @@ public:
  */
 bool PwStorage::connectWallet()
 {
-    if (!Kdesvnsettings::passwords_in_wallet()) {
-        return false;
-    }
-    if (!mData->m_Wallet) {
-        mData->m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),0);
-    }
-    if (!mData->m_Wallet) {
-        return false;
-    }
-    return true;
+    return mData->getWallet()!=0L;
 }
-
 
 /*!
     \fn PwStorage::getCertPw(const QString&realm,QString&pw)
  */
 bool PwStorage::getCertPw(const QString&realm,QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
-    return (mData->m_Wallet->readPassword(realm,pw)==0);
+    return (mData->getWallet()->readPassword(realm,pw)==0);
 }
 
 
@@ -85,29 +147,39 @@ bool PwStorage::getCertPw(const QString&realm,QString&pw)
  */
 bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
     QMap<QString,QString> content;
-    int j = mData->m_Wallet->readMap(realm,content);
+    int j = mData->getWallet()->readMap(realm,content);
     if (j!=0||content.find("user")==content.end()) {
-        return false;
+        return true;
     }
     user = content["user"];
     pw = content["password"];
     return true;
 }
 
+bool PwStorage::getCachedLogin(const QString&realm,QString&user,QString&pw)
+{
+    QMutexLocker lc(mData->getCacheMutex());
+    PwStorageData::cache_type::ConstIterator it = mData->getLoginCache()->find(realm);
+    if (it!=mData->getLoginCache()->end()) {
+        user=(*it).first;
+        pw = (*it).second;
+    }
+    return true;
+}
 
 /*!
     \fn PwStorage::setCertPw(const QString&realm, const QString&pw)
  */
 bool PwStorage::setCertPw(const QString&realm, const QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
-    return (mData->m_Wallet->writePassword(realm,pw)==0);
+    return (mData->getWallet()->writePassword(realm,pw)==0);
 }
 
 
@@ -116,29 +188,21 @@ bool PwStorage::setCertPw(const QString&realm, const QString&pw)
  */
 bool PwStorage::setLogin(const QString&realm,const QString&user,const QString&pw)
 {
-    if (!initWallet()) {
+    if (!mData->getWallet()) {
         return false;
     }
     QMap<QString,QString> content;
     content["user"]=user;
     content["password"]=pw;
-    return (mData->m_Wallet->writeMap(realm,content)==0);
+    return (mData->getWallet()->writeMap(realm,content)==0);
 }
 
-
-/*!
-    \fn PwStorage::initWallet()
- */
-bool PwStorage::initWallet()
+bool PwStorage::setCachedLogin(const QString&realm,const QString&user,const QString&pw)
 {
-    if (!connectWallet()) {
-        return false;
-    }
-    if (!mData->m_Wallet->hasFolder(WALLETNAME)) {
-        mData->m_Wallet->createFolder(WALLETNAME);
-    }
-    if (!mData->m_Wallet->setFolder(WALLETNAME)) {
-        return false;
-    }
+    QMutexLocker lc(mData->getCacheMutex());
+    PwStorageData::cache_type*_Cache = mData->getLoginCache();
+    (*_Cache)[realm]=PwStorageData::userpw_type(user,pw);
     return true;
 }
+
+#include "pwstorage.moc"

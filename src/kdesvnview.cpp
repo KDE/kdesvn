@@ -26,7 +26,6 @@
 #include "svnfrontend/hotcopydlg_impl.h"
 #include "svnfrontend/loaddmpdlg_impl.h"
 #include "svnfrontend/stopdlg.h"
-#include "svnfrontend/leftpane/leftpane_impl.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/url.hpp"
@@ -59,31 +58,22 @@
 #include <kshortcut.h>
 #include <kdialog.h>
 #include <kdialogbase.h>
+#include <kprogress.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name,bool full)
     : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
       m_currentURL("")
 {
+    Q_UNUSED(full);
     setupActions();
-    Q3VBoxLayout *top_layout = new Q3VBoxLayout(this);
+    m_CacheProgressBar=0;
+
+    m_topLayout = new Q3VBoxLayout(this);
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
     m_Splitter->setOrientation( QSplitter::Vertical );
-    leftpane_impl * _leftpane;
 
-    if (full) {
-        m_treeSplitter = new QSplitter(m_Splitter);
-        m_treeSplitter->setOrientation( QSplitter::Horizontal );
-        m_treeSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_treeSplitter->sizePolicy().hasHeightForWidth() ) );
-
-        // just for testing - get filled with a real widget
-        _leftpane = new leftpane_impl(m_treeSplitter);
-        m_flist=new kdesvnfilelist(m_Collection,m_treeSplitter);
-    } else {
-        m_treeSplitter=0;
-        m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
-        _leftpane = 0;
-    }
+    m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
 
     m_infoSplitter = new QSplitter(m_Splitter);
     m_infoSplitter->setOrientation( QSplitter::Horizontal );
@@ -96,31 +86,21 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*
             pl,SLOT(displayList(const svn::PathPropertiesMapListPtr&,bool,const QString&)));
 
     m_flist->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_flist->sizePolicy().hasHeightForWidth() ) );
-    if (full ) {
-        m_treeSplitter->setCollapsible(m_flist,false);
-        m_Splitter->setCollapsible(m_treeSplitter,false);
-    }
 
-    top_layout->addWidget(m_Splitter);
+    m_topLayout->addWidget(m_Splitter);
     connect(m_flist,SIGNAL(sigLogMessage(const QString&)),this,SLOT(slotAppendLog(const QString&)));
     connect(m_flist,SIGNAL(changeCaption(const QString&)),this,SLOT(slotSetTitle(const QString&)));
     connect(m_flist,SIGNAL(sigShowPopup(const QString&,QWidget**)),this,SLOT(slotDispPopup(const QString&,QWidget**)));
     connect(m_flist,SIGNAL(sigUrlOpend(bool)),parent,SLOT(slotUrlOpened(bool)));
     connect(m_flist,SIGNAL(sigSwitchUrl(const KUrl&)),this,SIGNAL(sigSwitchUrl(const KUrl&)));
     connect(m_flist,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
+    connect(m_flist,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SLOT(fillCacheStatus(Q_LONG,Q_LONG)));
     connect(this,SIGNAL(sigMakeBaseDirs()),m_flist,SLOT(slotMkBaseDirs()));
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
     QString t1 = cs.readEntry("split1",QString::null);
     if (!t1.isEmpty()) {
         Q3TextStream st1(&t1,QIODevice::ReadOnly);
         st1 >> *m_Splitter;
-    }
-    if (m_treeSplitter) {
-        t1 = cs.readEntry("split2",QString::null);
-        if (!t1.isEmpty()) {
-            Q3TextStream st2(&t1,QIODevice::ReadOnly);
-            st2 >> *m_treeSplitter;
-        }
     }
     if (m_infoSplitter) {
         t1 = cs.readEntry("infosplit",QString::null);
@@ -144,14 +124,9 @@ kdesvnView::~kdesvnView()
     st1 << *m_Splitter;
     cs.writeEntry("split1",t1);
 
-    if (m_treeSplitter) {
-        Q3TextStream st2(&t2,QIODevice::WriteOnly);
-        st2 << *m_treeSplitter;
-        cs.writeEntry("split2",t2);
-    }
     if (m_infoSplitter) {
         t2="";
-        QTextStream st2(&t2,IO_WriteOnly);
+        Q3TextStream st2(&t2,IO_WriteOnly);
         st2 << *m_infoSplitter;
         cs.writeEntry("infosplit",t2);
     }
@@ -489,6 +464,24 @@ void kdesvnView::setCanceled(bool how)
     m_ReposCancel = how;
 }
 
+void kdesvnView::fillCacheStatus(Q_LONG current,Q_LONG max)
+{
+    if (current>-1 && max>-1) {
+        kdDebug()<<"Fillcache "<<current<<" von "<<max<<endl;
+        if (!m_CacheProgressBar) {
+            kdDebug()<<"Creating progressbar"<<endl;
+            m_CacheProgressBar=new KProgress((int)max,this);
+            m_topLayout->addWidget(m_CacheProgressBar);
+            m_CacheProgressBar->setFormat(i18n("Inserted %v not cached log entries of %m."));
+        }
+        if (!m_CacheProgressBar->isVisible()) {
+            m_CacheProgressBar->show();
+        }
+        m_CacheProgressBar->setValue((int)current);
+    } else {
+        delete m_CacheProgressBar;
+        m_CacheProgressBar=0;
+    }
+}
+
 #include "kdesvnview.moc"
-
-

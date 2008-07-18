@@ -135,6 +135,7 @@ bool CContextListener::contextGetSavedLogin (const QString & realm,QString & use
 {
     kdDebug()<<"Saved Login in object "<<this<<endl;
     PwStorage::self()->getLogin(realm,username,password);
+    PwStorage::self()->setCachedLogin(realm,username,password);
     /* the return value isn't interesting to us... */
     return true;
 }
@@ -157,6 +158,7 @@ bool CContextListener::contextGetLogin (
         if (Kdesvnsettings::passwords_in_wallet() && auth.maySave()) {
             PwStorage::self()->setLogin(realm,username,password);
         }
+        PwStorage::self()->setCachedLogin(realm,username,password);
         emit waitShow(false);
         return true;
     }

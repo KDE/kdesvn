@@ -163,6 +163,11 @@ bool PwStorage::getLogin(const QString&realm,QString&user,QString&pw)
 bool PwStorage::getCachedLogin(const QString&realm,QString&user,QString&pw)
 {
     QMutexLocker lc(mData->getCacheMutex());
+    PwStorageData::cache_type::ConstIterator it = mData->getLoginCache()->find(realm);
+    if (it!=mData->getLoginCache()->end()) {
+        user=(*it).first;
+        pw = (*it).second;
+    }
     return true;
 }
 
@@ -195,6 +200,8 @@ bool PwStorage::setLogin(const QString&realm,const QString&user,const QString&pw
 bool PwStorage::setCachedLogin(const QString&realm,const QString&user,const QString&pw)
 {
     QMutexLocker lc(mData->getCacheMutex());
+    PwStorageData::cache_type*_Cache = mData->getLoginCache();
+    (*_Cache)[realm]=PwStorageData::userpw_type(user,pw);
     return true;
 }
 

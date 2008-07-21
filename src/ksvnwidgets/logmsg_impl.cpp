@@ -455,7 +455,7 @@ void Logmsg_impl::addItemWidget(QWidget*aWidget)
     m_DepthSelector->addItemWidget(aWidget);
 /*    aWidget->reparent(this,geometry().topLeft());
     m_ItemsLayout->addWidget(aWidget);
-    kdDebug()<<"SizeHint: "<<aWidget->minimumSizeHint()<< endl;
+    kDebug()<<"SizeHint: "<<aWidget->minimumSizeHint()<< endl;
     aWidget->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     setMinimumHeight(minimumSizeHint().height());*/
 }

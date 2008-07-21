@@ -16,7 +16,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="KListView">
+        <widget class="K3ListView">
             <column>
                 <property name="text">
                     <string>Line</string>
@@ -86,9 +86,9 @@
 <connections>
     <connection>
         <sender>m_BlameList</sender>
-        <signal>contextMenu(KListView*,QListViewItem*,const QPoint&amp;)</signal>
+        <signal>contextMenu(K3ListView*,QListViewItem*,const QPoint&amp;)</signal>
         <receiver>BlameDisplay</receiver>
-        <slot>slotContextMenuRequested(KListView*,QListViewItem*,const QPoint&amp;)</slot>
+        <slot>slotContextMenuRequested(K3ListView*,QListViewItem*,const QPoint&amp;)</slot>
     </connection>
     <connection>
         <sender>m_BlameList</sender>
@@ -98,7 +98,7 @@
     </connection>
 </connections>
 <slots>
-    <slot access="protected">slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&amp;)</slot>
+    <slot access="protected">slotContextMenuRequested(K3ListView*,QListViewItem*, const QPoint&amp;)</slot>
     <slot access="protected">slotItemDoubleClicked(QListViewItem*)</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>

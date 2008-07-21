@@ -71,11 +71,11 @@ void FillCacheThread::run()
     KApplication*k = KApplication::kApplication();
 
     try {
-        kdDebug()<<"Getting cachedrev"<<endl;
+        kDebug()<<"Getting cachedrev"<<endl;
         svn::Revision latestCache = rl.latestCachedRev();
-        kdDebug()<<"Getting headrev"<<endl;
+        kDebug()<<"Getting headrev"<<endl;
         svn::Revision Head = rl.latestHeadRev();
-        kdDebug()<<"Getting headrev done "<<endl;
+        kDebug()<<"Getting headrev done "<<endl;
         Q_LLONG i = latestCache.revnum();
         Q_LLONG j = Head.revnum();
 
@@ -93,7 +93,7 @@ void FillCacheThread::run()
             rl.fillCache(i);
             if (m_SvnContextListener->contextCancel()) {
                 m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
-                kdDebug()<<"Cancel thread"<<endl;
+                kDebug()<<"Cancel thread"<<endl;
                 breakit=true;
                 break;
             }

@@ -60,7 +60,7 @@
 #include <kinputdialog.h>
 #include <k3process.h>
 #include <ktempdir.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kdialogbase.h>
 #include <kapplication.h>
 #include <kio/jobclasses.h>
@@ -290,7 +290,7 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
 
     bool follow = Kdesvnsettings::log_follows_nodes();
 
-    kdDebug()<<"Get logs for "<< which<<endl;
+    kDebug()<<"Get logs for "<< which<<endl;
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,(parent?parent:m_Data->m_ParentList->realWidget()),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
@@ -402,7 +402,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             if (peg != svn::Revision::UNDEFINED && peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
                 // for persistent storage, store head into persistent cache makes no sense.
                 cacheKey=e[0].revision().toString()+"/"+url;
-                kdDebug()<<"Extra: "<<cacheKey<<endl;
+                kDebug()<<"Extra: "<<cacheKey<<endl;
                 m_Data->m_InfoCache.insertKey(e[0],cacheKey);
             }
         }
@@ -461,7 +461,7 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
         return;
     }
     QString reposRoot = info.reposRoot();
-    kdDebug()<<"getting logs..."<<endl;
+    kDebug()<<"getting logs..."<<endl;
     svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,peg,which,list_files,limit);
     if (!logs) return;
     bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
@@ -550,7 +550,7 @@ bool SvnActions::makeGet(const svn::Revision&start, const QString&what, const QS
 
 void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg,QWidget*_dlgparent)
 {
-    KTempFile content;
+    KTemporaryFile content;
     content.setAutoDelete(true);
     if (!makeGet(start,what,content.name(),peg,_dlgparent)) {
         return;
@@ -1091,11 +1091,11 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QStri
 {
     if (!doNetworking()&&start!=svn::Revision::BASE && end!=svn::Revision::WORKING) {
         emit sendNotify(i18n("Can not do this diff because networking is disabled."));
-        kdDebug()<<"No diff 'cause no network"<<endl;
+        kDebug()<<"No diff 'cause no network"<<endl;
         return;
     }
     if (m_Data->isExternalDiff()) {
-        kdDebug()<<"External diff..."<<endl;
+        kDebug()<<"External diff..."<<endl;
         svn::InfoEntry info;
         if (singleInfo(p1,start,info)) {
             makeDiff(p1,start,p2,end,end,info.isDir(),p);
@@ -1112,7 +1112,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     QStringList wlist = QStringList::split(" ",edisp);
     QFileInfo f1(p1);
     QFileInfo f2(p2);
-    KTempFile tfile(QString::null,f1.fileName()+"-"+start.toString()),tfile2(QString::null,f2.fileName()+"-"+end.toString());
+    KTemporaryFile tfile(QString::null,f1.fileName()+"-"+start.toString()),tfile2(QString::null,f2.fileName()+"-"+end.toString());
     QString s1 = f1.fileName()+"-"+start.toString();
     QString s2 = f2.fileName()+"-"+end.toString();
     KTempDir tdir1;
@@ -1198,7 +1198,7 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,bool isDir,QWidget*p)
 {
     if (m_Data->isExternalDiff()) {
-        kdDebug()<<"External diff 2..."<<endl;
+        kDebug()<<"External diff 2..."<<endl;
         makeDiffExternal(p1,start,p2,end,_peg,isDir,p);
     } else {
         makeDiffinternal(p1,start,p2,end,p,_peg);
@@ -1306,7 +1306,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
         QStringList wlist = QStringList::split(" ",what);
         K3Process*proc = new K3Process();
         bool fname_used = false;
-        KTempFile tfile;
+        KTemporaryFile tfile;
         tfile.setAutoDelete(false);
 
         for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
@@ -1885,14 +1885,14 @@ void SvnActions::slotResolve(const QString&p)
     if (wlist.size()==0) {
         return;
     }
-    kdDebug()<<"Resolve: "<<p<<endl;
+    kDebug()<<"Resolve: "<<p<<endl;
     svn::InfoEntry i1;
     if (!singleInfo(p,svn::Revision::UNDEFINED,i1)) {
         return;
     }
     QFileInfo fi(p);
     QString base = fi.dirPath(true);
-    kdDebug()<<i1.conflictNew()<<" "
+    kDebug()<<i1.conflictNew()<<" "
             <<i1.conflictOld()<<" "
             <<i1.conflictWrk()<<" "
             <<endl;
@@ -1903,7 +1903,7 @@ void SvnActions::slotResolve(const QString&p)
         return;
     }
 
-    KProcess*proc = new KProcess();
+    K3Process*proc = new K3Process();
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%o"||*it=="%l") {
             *proc<<(base+"/"+i1.conflictOld());
@@ -1917,10 +1917,10 @@ void SvnActions::slotResolve(const QString&p)
             *proc << *it;
         }
     }
-    connect(proc,SIGNAL(processExited(KProcess*)),this,SLOT(procClosed(KProcess*)));
-    connect(proc,SIGNAL(receivedStderr(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-    connect(proc,SIGNAL(receivedStdout(KProcess*,char*,int)),this,SLOT(receivedStderr(KProcess*,char*,int)));
-    if (proc->start(m_Data->runblocked?KProcess::Block:KProcess::NotifyOnExit,KProcess::All)) {
+    connect(proc,SIGNAL(processExited(K3Process*)),this,SLOT(procClosed(K3Process*)));
+    connect(proc,SIGNAL(receivedStderr(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
+    connect(proc,SIGNAL(receivedStdout(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
+    if (proc->start(m_Data->runblocked?K3Process::Block:K3Process::NotifyOnExit,K3Process::All)) {
         return;
     } else {
         emit sendNotify(i18n("Resolve-process could not started, check command."));
@@ -2178,7 +2178,7 @@ bool SvnActions::makeCopy(const QString&Old,const QString&New,const svn::Revisio
 
 bool SvnActions::makeCopy(const KUrl::List&Old,const QString&New,const svn::Revision&rev)
 {
-    KURL::List::ConstIterator it = Old.begin();
+    KUrl::List::ConstIterator it = Old.begin();
     svn::Pathes p;
     bool local = false;
     if ((*it).protocol().isEmpty()) {
@@ -2674,7 +2674,7 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
                 }
             }
             if (where != svn::Revision::WORKING && pm) {
-                kdDebug()<<"Put into cache "<<endl;
+                kDebug()<<"Put into cache "<<endl;
                 m_Data->m_PropertiesCache.insertKey(pm,fk);
             }
         }
@@ -2709,7 +2709,7 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
 QString SvnActions::searchProperty(QString&Store, const QString&property, const QString&start,const svn::Revision&where,bool up)
 {
     svn::Path pa(start);
-    kdDebug()<<"Url? "<<pa.isUrl()<<endl;
+    kDebug()<<"Url? "<<pa.isUrl()<<endl;
     svn::InfoEntry inf;
 
     if (!singleInfo(start,where,inf)) {
@@ -2729,9 +2729,9 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
         }
         if (up) {
             pa.removeLast();
-            kdDebug()<<"Going up to " << pa.path() << endl;
+            kDebug()<<"Going up to " << pa.path() << endl;
             if (pa.isUrl() && inf.reposRoot().length()>pa.path().length()) {
-                kdDebug()<<pa.path()<<" is not in repository" << endl;
+                kDebug()<<pa.path()<<" is not in repository" << endl;
                 break;
             }
 

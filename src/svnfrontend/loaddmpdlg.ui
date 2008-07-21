@@ -52,7 +52,7 @@
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                 </widget>
-                <widget class="KURLRequester" row="0" column="1">
+                <widget class="KUrlRequester" row="0" column="1">
                     <property name="name">
                         <cstring>m_Dumpfile</cstring>
                     </property>
@@ -79,7 +79,7 @@
                         <string>If not empty, load the dump into a specific folder instead into root of repository. This folder must exist before loading the dump.</string>
                     </property>
                 </widget>
-                <widget class="KURLRequester" row="1" column="1">
+                <widget class="KUrlRequester" row="1" column="1">
                     <property name="name">
                         <cstring>m_Repository</cstring>
                     </property>

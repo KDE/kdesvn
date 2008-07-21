@@ -35,7 +35,7 @@
 #include <QHideEvent>
 #include <Q3VBoxLayout>
 #include <Q3Frame>
-#include <kprogress.h>
+#include <kprogressdialog.h>
 #include <kdebug.h>
 #include <ktextbrowser.h>
 #include <kiconloader.h>

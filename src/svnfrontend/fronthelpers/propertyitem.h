@@ -1,20 +1,20 @@
 #ifndef _PROPERTYITEM_H
 #define _PROPERTYITEM_H
 
-#include <klistview.h>
+#include <k3listview.h>
 
 class PropertiesDlg;
 class Propertylist;
 
-class PropertyListViewItem:public KListViewItem
+class PropertyListViewItem:public K3ListViewItem
 {
     friend class PropertiesDlg;
     friend class Propertylist;
 
     public:
         static const int _RTTI_ = 1001;
-        PropertyListViewItem(KListView *parent,const QString&,const QString&);
-        PropertyListViewItem(KListView *parent);
+        PropertyListViewItem(K3ListView *parent,const QString&,const QString&);
+        PropertyListViewItem(K3ListView *parent);
         virtual ~PropertyListViewItem();
 
         const QString&startName()const{return m_startName;}

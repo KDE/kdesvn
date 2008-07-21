@@ -329,7 +329,7 @@ QString SvnLogDlgImp::genReplace(const QString&r1match)
     int count=0;
     int oldpos;
 
-    kdDebug()<<"Search second pattern: "<<_r2.pattern()<<" in "<<r1match<<endl;
+    kDebug()<<"Search second pattern: "<<_r2.pattern()<<" in "<<r1match<<endl;
 
     while (pos > -1) {
         oldpos = pos+count;
@@ -354,7 +354,7 @@ void SvnLogDlgImp::replaceBugids(QString&msg)
     if (!_r1.isValid() || _r1.pattern().length()<1 || _bugurl.isEmpty()) {
         return;
     }
-    kdDebug()<<"Try match "<< _r1.pattern() << endl;
+    kDebug()<<"Try match "<< _r1.pattern() << endl;
     int pos = 0;
     int count = 0;
 
@@ -362,12 +362,12 @@ void SvnLogDlgImp::replaceBugids(QString&msg)
     count = _r1.matchedLength();
 
     while (pos>-1) {
-        kdDebug()<<"Found at "<<pos << " length "<<count << " with " << _r1.pattern()<< endl;
+        kDebug()<<"Found at "<<pos << " length "<<count << " with " << _r1.pattern()<< endl;
         QString s1 = msg.mid(pos,count);
-        kdDebug()<<"Sub: "<<s1 << endl;
-        kdDebug()<<_r1.cap(1) << endl;
+        kDebug()<<"Sub: "<<s1 << endl;
+        kDebug()<<_r1.cap(1) << endl;
         QString rep = genReplace(s1);
-        kdDebug()<<"Replace with "<<rep << endl;
+        kDebug()<<"Replace with "<<rep << endl;
         msg = msg.replace(pos,count,rep);
 
         pos = _r1.search(msg,pos+rep.length());
@@ -528,7 +528,7 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStr
 
 void SvnLogDlgImp::slotGetLogs()
 {
-    kdDebug()<<"Displog: "<<m_peg.toString()<<endl;
+    kDebug()<<"Displog: "<<m_peg.toString()<<endl;
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
             m_endRevButton->revision(),m_peg,
             _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,this);

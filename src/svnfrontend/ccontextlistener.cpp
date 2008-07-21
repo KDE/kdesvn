@@ -134,7 +134,7 @@ bool CContextListener::contextGetCachedLogin (const QString & realm,QString & us
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-    kdDebug()<<"Saved Login in object "<<this<<endl;
+    kDebug()<<"Saved Login in object "<<this<<endl;
     PwStorage::self()->getLogin(realm,username,password);
     PwStorage::self()->setCachedLogin(realm,username,password);
     /* the return value isn't interesting to us... */
@@ -147,7 +147,7 @@ bool CContextListener::contextGetLogin (
                     QString & password,
                     bool & maySave)
 {
-    kdDebug()<<"Login in object "<<this<<endl;
+    kDebug()<<"Login in object "<<this<<endl;
     maySave = false;
     emit waitShow(true);
     emit sendNotify(realm);

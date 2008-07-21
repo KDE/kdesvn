@@ -27,7 +27,7 @@
 
 #include <kapplication.h>
 #include <kdebug.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <ktempdir.h>
 #include <k3process.h>
 #include <klocale.h>
@@ -451,7 +451,7 @@ void RevGraphView::dumpRevtree()
     delete dotTmpFile;
     clear();
     dotOutput = "";
-    dotTmpFile = new KTempFile(QString::null,".dot");
+    dotTmpFile = new KTemporaryFile(QString::null,".dot");
     dotTmpFile->setAutoDelete(true);
 
     Q3TextStream* stream = dotTmpFile->textStream();

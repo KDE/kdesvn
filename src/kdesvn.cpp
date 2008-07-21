@@ -81,7 +81,7 @@ kdesvn::kdesvn()
     // and a status bar
     statusBar()->show();
 
-    m_bookmarkFile = locateLocal("appdata",QString::fromLatin1("bookmarks.xml"),true);
+    m_bookmarkFile = KStandardDirs::locateLocal("appdata",QString::fromLatin1("bookmarks.xml"),true);
 
     m_BookmarkManager = KBookmarkManager::managerForFile(m_bookmarkFile,false);
     m_BookmarkManager->setShowNSBookmarks(false);
@@ -105,7 +105,7 @@ kdesvn::kdesvn()
     if (factory)
     {
         if (QCString(factory->className())!="cFactory") {
-            kdDebug()<<"wrong factory"<<endl;
+            kDebug()<<"wrong factory"<<endl;
             KMessageBox::error(this, i18n("Could not find our part"));
             kapp->quit();
             return;
@@ -184,12 +184,12 @@ kdesvn::~kdesvn()
 {
 }
 
-void kdesvn::loadRescent(const KURL& url)
+void kdesvn::loadRescent(const KUrl& url)
 {
     load(url,true);
 }
 
-void kdesvn::load(const KURL& url,bool addRescent)
+void kdesvn::load(const KUrl& url,bool addRescent)
 {
     if (m_part) {
         bool ret = m_part->openURL(url);
@@ -226,7 +226,7 @@ void kdesvn::setupActions()
     ac->setEnabled(getMemberList()->count()>1);
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 
-    KRecentFilesAction*rac = KStandardAction::openRecent(this,SLOT(loadRescent(const KURL&)),actionCollection());
+    KRecentFilesAction*rac = KStandardAction::openRecent(this,SLOT(loadRescent(const KUrl&)),actionCollection());
     if (rac)
     {
         rac->setMaxItems(8);
@@ -286,7 +286,7 @@ void kdesvn::readProperties(const KConfigGroup&config)
     // the app is being restored.  read in here whatever you wrote
     // in 'saveProperties'
 
-    QString url = config.readPathEntry("lastURL");
+    QString url = config.readPathEntry("lastURL", QString());
 
     if (!url.isEmpty() && m_part)
         m_part->openURL(KUrl(url));
@@ -427,10 +427,10 @@ void kdesvn::checkReload()
     if (!cs.readBoolEntry("load_last_on_start",false))
         return;
 
-    QString url = cs.readPathEntry("lastURL");
+    QString url = cs.readPathEntry("lastURL", QString());
 
     if (!url.isEmpty() && m_part)
-        load(KURL(url),false);
+        load(KUrl(url),false);
 }
 
 

@@ -29,7 +29,7 @@
 #include "src/svnfrontend/fronthelpers/cursorstack.h"
 
 #include <kdebug.h>
-#include <kprogress.h>
+#include <kprogressdialog.h>
 #include <klocale.h>
 #include <kapplication.h>
 #include <k3listview.h>

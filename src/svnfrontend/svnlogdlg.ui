@@ -105,7 +105,7 @@
             <property name="orientation">
                 <enum>Horizontal</enum>
             </property>
-            <widget class="KListView">
+            <widget class="K3ListView">
                 <column>
                     <property name="text">
                         <string>1</string>
@@ -198,7 +198,7 @@
                         <cstring>m_LogDisplay</cstring>
                     </property>
                 </widget>
-                <widget class="KListView">
+                <widget class="K3ListView">
                     <column>
                         <property name="text">
                             <string>Action</string>

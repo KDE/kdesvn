@@ -58,7 +58,7 @@
 #include <kshortcut.h>
 #include <kdialog.h>
 #include <kdialogbase.h>
-#include <kprogress.h>
+#include <kprogressdialog.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name,bool full)
     : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
@@ -467,9 +467,9 @@ void kdesvnView::setCanceled(bool how)
 void kdesvnView::fillCacheStatus(Q_LONG current,Q_LONG max)
 {
     if (current>-1 && max>-1) {
-        kdDebug()<<"Fillcache "<<current<<" von "<<max<<endl;
+        kDebug()<<"Fillcache "<<current<<" von "<<max<<endl;
         if (!m_CacheProgressBar) {
-            kdDebug()<<"Creating progressbar"<<endl;
+            kDebug()<<"Creating progressbar"<<endl;
             m_CacheProgressBar=new KProgress((int)max,this);
             m_topLayout->addWidget(m_CacheProgressBar);
             m_CacheProgressBar->setFormat(i18n("Inserted %v not cached log entries of %m."));

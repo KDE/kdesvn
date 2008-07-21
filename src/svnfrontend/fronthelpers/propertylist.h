@@ -20,13 +20,13 @@
 #ifndef PROPERTYLIST_H
 #define PROPERTYLIST_H
 
-#include <klistview.h>
+#include <k3listview.h>
 #include "src/svnqt/svnqttypes.hpp"
 
 /**
 	@author
 */
-class Propertylist : public KListView
+class Propertylist : public K3ListView
 {
     Q_OBJECT
 public:

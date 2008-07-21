@@ -100,7 +100,7 @@ void FileListViewItem::setOpenNoBlock(bool o)
             m_Ksvnfilelist->slotItemRead(this);
         }
     }
-    KListViewItem::setOpen(o);
+    K3ListViewItem::setOpen(o);
 }
 
 FileListViewItem::~FileListViewItem()

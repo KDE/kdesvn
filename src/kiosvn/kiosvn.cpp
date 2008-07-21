@@ -42,7 +42,7 @@
 #include <kdebug.h>
 #include <kdemacros.h>
 #include <kmessagebox.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
@@ -148,7 +148,7 @@ kio_svnProtocol::kio_svnProtocol(const Q3CString &pool_socket, const Q3CString &
 
 kio_svnProtocol::~kio_svnProtocol()
 {
-    kdDebug()<<"Delete kio protocol"<<endl;
+    kDebug()<<"Delete kio protocol"<<endl;
     delete m_pData;
 }
 

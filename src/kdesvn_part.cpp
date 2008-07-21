@@ -33,7 +33,7 @@
 #include "helpers/ktranslateurl.h"
 #include "helpers/sshagent.h"
 
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kaction.h>
 #include <kstandardaction.h>
 #include <kfiledialog.h>

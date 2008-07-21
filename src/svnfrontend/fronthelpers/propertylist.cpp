@@ -26,7 +26,7 @@
 
 
 Propertylist::Propertylist(QWidget *parent, const char *name)
-    : KListView(parent, name),m_commitit(false)
+    : K3ListView(parent, name),m_commitit(false)
 {
     addColumn(i18n("Property"));
     addColumn(i18n("Value"));
@@ -76,7 +76,7 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr&propList,bool
 
 void Propertylist::clear()
 {
-    KListView::clear();
+    K3ListView::clear();
 }
 
 /*!
@@ -87,7 +87,7 @@ void Propertylist::slotItemRenamed(QListViewItem*_item,const QString & text,int 
     if (!_item || _item->rtti()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*item = static_cast<PropertyListViewItem*> (_item);
 
-    kdDebug()<<"Text: "<< text << " in col "<<col << endl;
+    kDebug()<<"Text: "<< text << " in col "<<col << endl;
 
     if (text.isEmpty()&&col == 0) {
         // fresh added

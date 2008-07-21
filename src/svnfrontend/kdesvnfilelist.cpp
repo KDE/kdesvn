@@ -55,7 +55,7 @@
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <kurldrag.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kio/job.h>
 #include <krun.h>
 #include <kurldrag.h>
@@ -681,7 +681,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     m_SvnWrapper->getaddedItems(what,neweritems);
     dlist+=neweritems;
     bool ownupdates = true;
-    //kdDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
+    //kDebug() << "makeStatus on " << what << " created: " << dlist.count() << "items" <<endl;
 
     if (isUpdatesEnabled()) {
         viewport()->setUpdatesEnabled(false);
@@ -692,7 +692,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     FileListViewItem * pitem = 0;
     bool main_found = false;
     for (;it!=dlist.end();++it) {
-        //kdDebug() << "iterate over it: " << (*it)->entry().url() << endl;
+        //kDebug() << "iterate over it: " << (*it)->entry().url() << endl;
 
         // current item is not versioned
         if (!(*it)->isVersioned() && !filterOut((*it))) {
@@ -704,7 +704,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
         if ((*it)->path()==what||QString::compare((*it)->entry().url(),what)==0){
             if (!_parent) {
                 pitem = new FileListViewItem(this,*it);
-                //kdDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it)->path() << endl;
+                //kDebug()<< "CheckDirs::creating new FileListViewitem as parent " + (*it)->path() << endl;
                 m_Dirsread[pitem->fullName()]=true;
                 pitem->setDropEnabled(true);
             }
@@ -718,7 +718,7 @@ bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
     }
     insertDirs(pitem,dlist);
     if (ownupdates) {
-        kdDebug()<<"Enable update"<<endl;
+        kDebug()<<"Enable update"<<endl;
         viewport()->setUpdatesEnabled(true);
         viewport()->repaint();
     }
@@ -765,8 +765,8 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         }
     }
 }
-        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem *, const QPixmap & ) ),
-                 this, SLOT( gotPreview( const KFileItem *, const QPixmap & ) ) );
+        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem& , const QPixmap & ) ),
+                 this, SLOT( gotPreview( const KFileItem& , const QPixmap & ) ) );
 
 /* newdir is the NEW directory! just required if local */
 void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
@@ -2534,7 +2534,7 @@ void kdesvnfilelist::dispProperties(bool force)
         emit sigProplist(svn::PathPropertiesMapListPtr(),false,QString(""));
         return;
     }
-    kdDebug()<<"Cacheonly: "<<cache_Only<<endl;
+    kDebug()<<"Cacheonly: "<<cache_Only<<endl;
     svn::Revision rev(isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision);
     pm =m_SvnWrapper->propList(k->fullName(),rev,cache_Only);
     emit sigProplist(pm,isWorkingCopy(),k->fullName());
@@ -3141,7 +3141,7 @@ void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QVal
 {
     m_SvnWrapper->changeProperties(pm,dellist,path);
     FileListViewItem* which = singleSelected();
-    kdDebug()<<(which?which->fullName():"nix") << " -> " << path<<endl;
+    kDebug()<<(which?which->fullName():"nix") << " -> " << path<<endl;
     if (which && which->fullName()==path) {
         which->refreshStatus();
         refreshCurrent(which);

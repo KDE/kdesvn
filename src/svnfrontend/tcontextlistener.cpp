@@ -51,7 +51,7 @@ QMutex*ThreadContextListener::callbackMutex()
 
 bool ThreadContextListener::contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave)
 {
-    kdDebug()<<"Getting threaded login"<<endl;
+    kDebug()<<"Getting threaded login"<<endl;
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
     ThreadContextListenerData::slogin_data _data;
@@ -67,7 +67,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     kDebug()<<"Post event "<<EVENT_THREAD_LOGIN_PROMPT<<" from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
-    kdDebug()<<"Got a login"<<endl;
+    kDebug()<<"Got a login"<<endl;
     username = _data.user;
     password = _data.password;
     maySave = _data.maysave;
@@ -77,7 +77,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
 
 bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString & username,QString & password)
 {
-    kdDebug()<<"Getting threaded saved login"<<endl;
+    kDebug()<<"Getting threaded saved login"<<endl;
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
     ThreadContextListenerData::slogin_data _data;
@@ -90,10 +90,10 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_SAVED);
     void*t = (void*)&_data;
     ev->setData(t);
-    kdDebug()<<"Post event "<<EVENT_THREAD_LOGIN_SAVED<<" (saved login) from thread " << endl;
+    kDebug()<<"Post event "<<EVENT_THREAD_LOGIN_SAVED<<" (saved login) from thread " << endl;
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
-    kdDebug()<<"Got a saved login"<<endl;
+    kDebug()<<"Got a saved login"<<endl;
     username = _data.user;
     password = _data.password;
     m_WaitMutex.unlock();

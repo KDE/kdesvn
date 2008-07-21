@@ -47,6 +47,9 @@ ELSE (NOT BUILD_KDE4)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 # search packages used by KDE
 ADD_DEFINITIONS("-DBUILD_KDE4")
+SET (QT_USE_QT3SUPPORT 1)
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
+MESSAGE(STATUS "Building with Q3Supoort module. It should be removed after final kde4 port")
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include (MacroLibrary)
@@ -109,7 +112,8 @@ INCLUDE_DIRECTORIES (
     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_BINARY_DIR}/src/svnfrontend
     ${CMAKE_BINARY_DIR}
-    ${KDE3_INCLUDE_DIR}
+#    ${KDE3_INCLUDE_DIR}
+    ${KDE4_INCLUDE_DIR}
     ${QT_INCLUDE_DIR}
     ${APR_INCLUDE_DIR}
     ${APU_INCLUDE_DIR}

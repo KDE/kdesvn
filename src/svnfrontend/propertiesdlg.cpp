@@ -47,7 +47,7 @@
 PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
     :
     KDialogBase(parent,name,modal,i18n("Modify properties"),Ok|Cancel/*|Help|User1|User2*/, Ok,
-      true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
+      true/*, KStandardGuiItem::add(),KStandardGuiItem::remove() */),
       m_Item(which),m_changed(false),
       m_Client(aClient),m_Rev(aRev)
 {

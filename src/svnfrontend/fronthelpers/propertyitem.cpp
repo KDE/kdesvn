@@ -2,16 +2,16 @@
 #include <klocale.h>
 #include <kiconloader.h>
 
-PropertyListViewItem::PropertyListViewItem(KListView *parent,const QString&aName,const QString&aValue)
-    : KListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(K3ListView *parent,const QString&aName,const QString&aValue)
+    : K3ListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
 {
     setMultiLinesEnabled(true);
     setText(0,startName());
     setText(1,startValue());
 }
 
-PropertyListViewItem::PropertyListViewItem(KListView *parent)
-    : KListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(K3ListView *parent)
+    : K3ListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
 {
     setMultiLinesEnabled(true);
     setText(0,startName());
@@ -40,7 +40,7 @@ bool PropertyListViewItem::different()const
 void PropertyListViewItem::deleteIt()
 {
     m_deleted = true;
-    setPixmap(0,KGlobal::iconLoader()->loadIcon("cancel",KIcon::Desktop,16));
+    setPixmap(0,KIconLoader::global()->loadIcon("cancel",KIconLoader::Desktop,16));
 }
 
 void PropertyListViewItem::unDeleteIt()

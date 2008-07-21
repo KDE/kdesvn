@@ -34,7 +34,7 @@ namespace svn {
     class Client;
 }
 
-class KTempFile;
+class KTemporaryFile;
 class K3Process;
 class RevisionTree;
 class GraphTreeLabel;
@@ -111,7 +111,7 @@ protected:
     svn::Client*m_Client;
     GraphTreeLabel*m_Selected;
     QObject*m_Listener;
-    KTempFile*dotTmpFile;
+    KTemporaryFile*dotTmpFile;
     QString dotOutput;
     K3Process*renderProcess;
     trevTree m_Tree;

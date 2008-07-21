@@ -97,7 +97,7 @@ public:
     virtual void insertKey(QStringList&,const C&);
     virtual void setValidContent(const QString&key,const C&st)
     {
-        kdDebug()<<"Insert for "<<key<<endl;
+        kDebug()<<"Insert for "<<key<<endl;
         m_key = key;
         m_isValid=true;
         m_content=st;
@@ -161,27 +161,27 @@ template<class C> inline  bool cacheEntry<C>::find(QStringList&what,QLIST<C>&t)c
     citer it;
     it = m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
-       // kdDebug()<<what[0]<< " not found in tree"<<endl;
+       // kDebug()<<what[0]<< " not found in tree"<<endl;
         return false;
     }
-   // kdDebug()<<what[0]<< " found in tree"<<endl;
+   // kDebug()<<what[0]<< " found in tree"<<endl;
     if (what.count()==1) {
-       // kdDebug()<<"Seems last item in stage "<< m_key << " - " << what[0] << endl;
+       // kDebug()<<"Seems last item in stage "<< m_key << " - " << what[0] << endl;
 //         if (it->second.m_key == what[0]) {
         /* the item itself */
         if (it->second.isValid()) {
             t.append(it->second.content());
         }
         /* and now check valid subitems */
-           // kdDebug()<<"Appending valid subs"<<endl;
+           // kDebug()<<"Appending valid subs"<<endl;
         it->second.appendValidSub(t);
-           // kdDebug()<<"Appended valid subs"<<endl;
+           // kDebug()<<"Appended valid subs"<<endl;
         return true;
 //        }
         return false;
     }
     what.erase(what.begin());
-   // kdDebug()<<"Searching "<<what<<" in next stage"<<endl;
+   // kDebug()<<"Searching "<<what<<" in next stage"<<endl;
     return it->second.find(what,t);
 }
 
@@ -206,20 +206,20 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList&what,C&
     if (what.count()==0) {
         return false;
     }
-    //kdDebug()<<"cacheEntry::findSingleValid(QStringList&what,C&t)"<< what << endl;
+    //kDebug()<<"cacheEntry::findSingleValid(QStringList&what,C&t)"<< what << endl;
     citer it;
     it = m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
-        //kdDebug()<<"Not found here..."<<endl;
+        //kDebug()<<"Not found here..."<<endl;
         return false;
     }
     if (what.count()==1) {
-        //kdDebug()<<"Found here and set content. "<<it->second.isValid()<<endl;
+        //kDebug()<<"Found here and set content. "<<it->second.isValid()<<endl;
         t=it->second.content();
         return it->second.isValid();
     }
     what.erase(what.begin());
-    //kdDebug()<<"Search next stage down..."<<endl;
+    //kDebug()<<"Search next stage down..."<<endl;
     return it->second.findSingleValid(what,t);
 }
 
@@ -228,7 +228,7 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList&what,bo
     if (what.count()==0) {
         return false;
     }
-   // kdDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
+   // kDebug()<<"cacheEntry::findSingleValid(QStringList&what,svn::Status&t)"<< what << endl;
     citer it = m_subMap.find(what[0]);
     if (it==m_subMap.end()) {
         return false;
@@ -245,10 +245,10 @@ template<class C> inline void cacheEntry<C>::appendValidSub(QLIST<C>&t)const
     citer it;
     for (it=m_subMap.begin();it!=m_subMap.end();++it) {
         if (it->second.isValid()) {
-           // kdDebug()<<"Appending single sub"<<endl;
+           // kDebug()<<"Appending single sub"<<endl;
             t.append(it->second.content());
         } else {
-           // kdDebug()<<it->second.key()<<" isnt valid"<<endl;
+           // kDebug()<<it->second.key()<<" isnt valid"<<endl;
         }
         it->second.appendValidSub(t);
     }
@@ -300,20 +300,20 @@ template<class C> inline void cacheEntry<C>::insertKey(QStringList&what,const C&
     if (what.count()==0) {
         return;
     }
-    //kdDebug()<<"inserting "<<what<< "into " << m_key << endl;
+    //kDebug()<<"inserting "<<what<< "into " << m_key << endl;
     QString m = what[0];
 
     if (m_subMap.find(m)==m_subMap.end()) {
         m_subMap[m].m_key=m;
     }
     if (what.count()==1) {
-        // kdDebug()<<"Inserting valid key "<< m << endl;
+        // kDebug()<<"Inserting valid key "<< m << endl;
         m_subMap[m].setValidContent(m,st);
-        // kdDebug()<<"Inserting valid key done"<< endl;
+        // kDebug()<<"Inserting valid key done"<< endl;
         return;
     }
     what.erase(what.begin());
-    //kdDebug()<<"Go into loop"<<endl;
+    //kDebug()<<"Go into loop"<<endl;
     m_subMap[m].insertKey(what,st);
 }
 
@@ -391,7 +391,7 @@ template<class C> inline void itemCache<C>::setContent(const QLIST<C>&dlist)
 
 template<class C> inline void itemCache<C>::insertKey(const C&st,const QString&path)
 {
-   // kdDebug()<<"Inserting "<<st.path()<<endl;
+   // kDebug()<<"Inserting "<<st.path()<<endl;
     QStringList _keys = QStringList::split("/",path);
     if (_keys.count()==0) {
         return;
@@ -444,7 +444,7 @@ template<class C> inline bool itemCache<C>::find(const QString&_what,QLIST<C>&dl
         return false;
     }
     what.erase(what.begin());
-   // kdDebug()<<"itemCache::find(const QString&_what,svn::StatusEntries&dlist) "<<what<<endl;
+   // kDebug()<<"itemCache::find(const QString&_what,svn::StatusEntries&dlist) "<<what<<endl;
     return it->second.find(what,dlist);
 }
 
@@ -499,10 +499,10 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,
     if (what.count()==0) {
         return false;
     }
-    //kdDebug()<<"Itemcache What: "<<what << endl;
+    //kDebug()<<"Itemcache What: "<<what << endl;
     citer it=m_contentMap.find(what[0]);
     if (it==m_contentMap.end()) {
-        //kdDebug()<<"Entry in cache not found"<<endl;
+        //kDebug()<<"Entry in cache not found"<<endl;
         return false;
     }
     if (what.count()==1) {
@@ -512,7 +512,7 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,
         }
         return false;
     }
-    //kdDebug()<<"Stage down"<<endl;
+    //kDebug()<<"Stage down"<<endl;
     what.erase(what.begin());
     return it->second.findSingleValid(what,st);
 }

@@ -127,6 +127,10 @@
         <label>Store passwords in KDE Wallet instead subversion storage</label>
         <default>true</default>
     </entry>
+    <entry key="use_password_cache" type="Bool">
+        <label>Use internal password cache</label>
+        <default>true</default>
+    </entry>
     <entry key="network_on" type="Bool">
         <label>Is networking enabled</label>
         <default>true</default>

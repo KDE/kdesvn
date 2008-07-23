@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>339</width>
-            <height>358</height>
+            <height>384</height>
         </rect>
     </property>
     <property name="caption">
@@ -129,6 +129,17 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
                 <string>&lt;p&gt;Tells if your passwords set in kdesvn should stored into kde wallet instead of simple cleartext storage of subversion.&lt;/p&gt;
 &lt;p&gt;This would be a little bit more secure 'cause KDE wallet is (mostly) encrypted with a password. On other hand you must re-enter your passwords with other subversion clients not accessing KDE wallet (eg. svn commandline itself, rapidsvn and so on).&lt;/p&gt;
 &lt;p&gt;If you're HOME storage eg. subversions configfolder is on a network drive you should hard think about not storing passwords in a plain text file like subversion does but put it into an encrypted storage like kde wallet or don't save passwords.&lt;/p&gt;</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_use_password_cache</cstring>
+            </property>
+            <property name="text">
+                <string>Use internal password cache</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Use an internal password cache</string>
             </property>
         </widget>
         <widget class="QCheckBox">

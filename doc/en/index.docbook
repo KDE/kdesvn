@@ -761,9 +761,15 @@ This is not recommended 'cause the passwords are stored as cleartext! Not believ
 </para>
 </sect2>
 <sect2>
+<title>Internal password cache</title>
+<para>
+You may activate an internal password cache which will hold passwords as long &kappname; is running in memory. So you must not enter a password twice even if you didn't save it in wallet.
+</para>
+</sect2>
+<sect2>
 <title>Specialcase svn+ssh</title>
 <para>
-When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote mashine and repository. When want to store you must using the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your pulic ssh-key on the target, eg., the repository system.
+When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote mashine and repository. When want to store you must using the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your pulic ssh-key on the target, eg., the repository system. SSH passwords will never handled by subversion passwords storage or kde-wallet or internal password cache.
 </para>
 <para>
 If you don't want asked for the password of you ssh-key you may use the <prompt>ssh-agent</prompt>, with selecting the menu

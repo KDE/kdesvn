@@ -20,11 +20,12 @@
 #ifndef LOCALESELECTOR_IMPL_H
 #define LOCALESELECTOR_IMPL_H
 
-#include "src/ksvnwidgets/encodingselector.h"
+// #include "src/ksvnwidgets/encodingselector.h"
+#include "ui_encodingselector.h"
 
 class QTextCodec;
 
-class EncodingSelector_impl: public EncodingSelector {
+class EncodingSelector_impl: public QWidget, public Ui::EncodingSelector {
 Q_OBJECT
 public:
     EncodingSelector_impl(const QString&cur, QWidget *parent = 0, const char *name = 0);

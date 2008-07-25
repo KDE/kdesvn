@@ -89,7 +89,7 @@ protected:
     Q3ValueList<Q3ListViewItem*> m_Hidden;
     static const QString groupName;
     static QString sLastMessage;
-    static unsigned int smax_message_history;
+    static int smax_message_history;
     bool m_hidden;
 
     void hideButtons(bool);

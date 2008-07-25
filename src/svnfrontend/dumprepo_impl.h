@@ -20,9 +20,9 @@
 #ifndef DUMPREPO_IMPL_H
 #define DUMPREPO_IMPL_H
 
-#include "dumprepo_dlg.h"
+#include "ui_dumprepo_dlg.h"
 
-class DumpRepo_impl: public DumpRepoDlg {
+class DumpRepo_impl: public QWidget, public Ui::DumpRepoDlg {
 Q_OBJECT
 public:
     DumpRepo_impl(QWidget *parent = 0, const char *name = 0);

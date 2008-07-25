@@ -1,4 +1,6 @@
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers ${CMAKE_BINARY_DIR}/src/svnqt)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
+                    ${CMAKE_BINARY_DIR}/src/svnqt
+                    ${CMAKE_BINARY_DIR}/src/ksvnwidgets)
 
 SET(svnfrontendsrc
     ccontextlistener.cpp

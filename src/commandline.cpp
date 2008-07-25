@@ -21,7 +21,8 @@
 #include "kdesvn_part.h"
 #include "commandline_part.h"
 #include <kcmdlineargs.h>
-#include <kdialogbase.h>
+// #include <kdialogbase.h>
+#include <KDialog>
 #include <ktextbrowser.h>
 #include <kapplication.h>
 #include <klocale.h>

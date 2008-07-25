@@ -28,8 +28,11 @@
 #include <qcheckbox.h>
 
 DumpRepo_impl::DumpRepo_impl(QWidget *parent, const char *name)
-    :DumpRepoDlg(parent, name)
+//     :DumpRepoDlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
 }
 
 void DumpRepo_impl::slotDumpRange(bool how)

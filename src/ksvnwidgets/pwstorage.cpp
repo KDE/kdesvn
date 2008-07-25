@@ -26,6 +26,7 @@
 #include <kapplication.h>
 
 #include <qthread.h>
+#include <QMutex>
 #include <qmap.h>
 #include <qpair.h>
 

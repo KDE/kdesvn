@@ -21,9 +21,9 @@
 #ifndef COPYMOVEVIEW_IMPL_H
 #define COPYMOVEVIEW_IMPL_H
 
-#include "copymoveview.h"
+#include "ui_copymoveview.h"
 
-class CopyMoveView_impl : public CopyMoveView
+class CopyMoveView_impl : public QWidget, public Ui::CopyMoveView
 {
   Q_OBJECT
 

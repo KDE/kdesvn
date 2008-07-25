@@ -25,12 +25,18 @@
 #include <qlabel.h>
 #include <klineedit.h>
 #include <klocale.h>
-#include <kdialogbase.h>
+// #include <kdialogbase.h>
+#include <KDialog>
+#include <KVBox>
 #include <q3vbox.h>
 
 CopyMoveView_impl::CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,QWidget* parent, const char* name, Qt::WFlags fl)
-: CopyMoveView(parent,name,fl)
+// : CopyMoveView(parent,name,fl)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     m_BaseName = baseName;
     if (m_BaseName.length()>0 && !m_BaseName.endsWith("/")) {
         m_BaseName+="/";
@@ -82,10 +88,20 @@ bool CopyMoveView_impl::force()
 QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
     const QString&old,const QString&base,QWidget*parent,const char*name)
 {
-    KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
-            KDialogBase::Ok|KDialogBase::Cancel,
-            KDialogBase::NoDefault);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+//     KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
+//             KDialogBase::Ok|KDialogBase::Cancel,
+//             KDialogBase::NoDefault);
+//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(parent);
+    dlg.setCaption(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir"));
+    dlg.setModal(true);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg.setDefaultButton(KDialog::Ok);
+    dlg.showButtonSeparator( false );
+
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
+
     CopyMoveView_impl*ptr=new CopyMoveView_impl(base,old,(move),Dialog1Layout);
     QString nName = QString::null;
     dlg.resize( QSize(500,160).expandedTo(dlg.minimumSizeHint()) );

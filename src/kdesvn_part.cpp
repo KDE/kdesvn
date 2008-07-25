@@ -398,7 +398,8 @@ void kdesvnPart::slotSettingsChanged()
 
 /*
  * we may not use generic factory 'cause we make some specials */
-KInstance*  cFactory::s_instance = 0L;
+// KInstance*  cFactory::s_instance = 0L;
+KComponentData* cFactory::s_instance = 0L;
 KAboutData* cFactory::s_about = 0L;
 commandline_part* cFactory::s_cline = 0L;
 
@@ -432,11 +433,13 @@ cFactory::~cFactory()
     s_cline = 0L;
 }
 
-KInstance* cFactory::instance()
+// KInstance* cFactory::instance()
+KComponentData* cFactory::instance()
 {
     if( !s_instance ) {
         s_about = kdesvnPart::createAboutData();
-        s_instance = new KInstance(s_about);
+//         s_instance = new KInstance(s_about);
+        s_instance = new KComponentData(s_about);
     }
     return s_instance;
 }

@@ -271,7 +271,11 @@ bool CContextListener::contextSslClientCertPrompt (QString & certFile)
     kDebug()<<"CContextListener::contextSslClientCertPrompt "
         << certFile << endl;
     emit waitShow(true);
-    QString afile = KFileDialog::getOpenFileName(QString::null,
+//     QString afile = KFileDialog::getOpenFileName(QString::null,
+//         QString::null,
+//         0,
+//         i18n("Open a file with a #PKCS12 certificate"));
+    QString afile = KFileDialog::getOpenFileName(KUrl(),
         QString::null,
         0,
         i18n("Open a file with a #PKCS12 certificate"));
@@ -294,11 +298,19 @@ bool CContextListener::contextSslClientCertPwPrompt (QString & password,
 {
     maysave = false;
     emit waitShow(true);
-    Q3CString npass;
+//     Q3CString npass;
+    QString npass;
     int keep = 1;
-    int res = KPasswordDialog::getPassword(npass,
-        i18n("Enter password for realm %1").arg(realm),
-        &keep);
+//     int res = KPasswordDialog::getPassword(npass,
+//         i18n("Enter password for realm %1").arg(realm),
+//         &keep);
+    KPasswordDialog dlg(0);
+    dlg.setPrompt(i18n("Enter password for realm %1").arg(realm));
+    dlg.setWindowTitle(realm);
+    int res = dlg.exec();
+    if (res == QDialog::Accepted)
+        npass = dlg.password();
+
     emit waitShow(false);
     if (res!=KPasswordDialog::Accepted) {
         return false;

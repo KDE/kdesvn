@@ -20,9 +20,9 @@
 #ifndef CREATEREPO_IMPL_H
 #define CREATEREPO_IMPL_H
 
-#include "createrepo_dlg.h"
+#include "ui_createrepo_dlg.h"
 
-class Createrepo_impl: public CreateRepo_Dlg {
+class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg {
     Q_OBJECT
 public:
     Createrepo_impl(bool enable_compat13,bool enable_compat14, QWidget *parent = 0, const char *name = 0);

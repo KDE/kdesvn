@@ -32,8 +32,12 @@
 #include <kdebug.h>
 
 CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent, const char *name)
-    :CheckoutInfo(parent, name)
+//     :CheckoutInfo(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     m_RangeInput->setStartOnly(true);
     m_RangeInput->setHeadDefault();
 }
@@ -51,7 +55,7 @@ QString CheckoutInfo_impl::reposURL()
 {
     KUrl uri(m_UrlEdit->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto=="file"&&!m_UrlEdit->url().startsWith("ksvn+file:")) {
+    if (proto=="file"&&!m_UrlEdit->url().url().startsWith("ksvn+file:")) {
         uri.setProtocol("");
     } else {
         uri.setProtocol(proto);
@@ -62,7 +66,7 @@ QString CheckoutInfo_impl::reposURL()
 QString CheckoutInfo_impl::targetDir()
 {
     if (!m_CreateDirButton->isChecked()) {
-        return  m_TargetSelector->url();
+        return  m_TargetSelector->url().url();
     }
     QString _uri = reposURL();
     while (_uri.endsWith("/")) {
@@ -70,9 +74,9 @@ QString CheckoutInfo_impl::targetDir()
     }
     QStringList l = QStringList::split('/',_uri);
     if (l.count()==0) {
-        return m_TargetSelector->url();
+        return m_TargetSelector->url().url();
     }
-    return  m_TargetSelector->url()+"/"+l[l.count()-1];
+    return  m_TargetSelector->url().url()+"/"+l[l.count()-1];
 }
 
 bool CheckoutInfo_impl::overwrite()
@@ -85,7 +89,7 @@ bool CheckoutInfo_impl::overwrite()
  */
 void CheckoutInfo_impl::setTargetUrl(const QString&what)
 {
-    m_TargetSelector->setURL(what);
+    m_TargetSelector->setUrl(what);
 }
 
 void CheckoutInfo_impl::setStartUrl(const QString&what)
@@ -100,7 +104,7 @@ void CheckoutInfo_impl::setStartUrl(const QString&what)
     } else {
         uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
     }
-    m_UrlEdit->setURL(uri.prettyUrl());
+    m_UrlEdit->setUrl(uri.prettyUrl());
 }
 
 void CheckoutInfo_impl::hideDepth(bool how,bool overwriteAsRecurse)

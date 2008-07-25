@@ -57,8 +57,10 @@ public:
      */
     virtual ~kdesvn();
 
-    virtual void openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
-    virtual QString currentURL () const;
+    virtual void openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km){
+    qDebug("non-implemented virtual void kdesvn::openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km)");
+    };
+    virtual QString currentUrl () const;
     void checkReload();
 
 protected:

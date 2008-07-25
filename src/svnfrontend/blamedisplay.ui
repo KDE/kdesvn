@@ -1,108 +1,106 @@
-<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>BlameDisplay</class>
-<widget class="QWidget">
-    <property name="name">
-        <cstring>BlameDisplay</cstring>
+<ui version="4.0" stdsetdef="1" >
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>BlameDisplay</class>
+  <widget class="QWidget" name="BlameDisplay" >
+    <property name="geometry" >
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>341</width>
+        <height>243</height>
+      </rect>
     </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>341</width>
-            <height>243</height>
-        </rect>
-    </property>
-    <vbox>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="K3ListView">
-            <column>
-                <property name="text">
-                    <string>Line</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Revision</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Date</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Author</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Content</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <property name="name">
-                <cstring>m_BlameList</cstring>
+    <layout class="QVBoxLayout" >
+      <item>
+        <widget class="K3ListView" name="m_BlameList" >
+          <property name="allColumnsShowFocus" >
+            <bool>true</bool>
+          </property>
+          <column>
+            <property name="text" >
+              <string>Line</string>
             </property>
-            <property name="allColumnsShowFocus">
-                <bool>true</bool>
+            <property name="clickable" >
+              <bool>false</bool>
             </property>
+            <property name="resizable" >
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text" >
+              <string>Revision</string>
+            </property>
+            <property name="clickable" >
+              <bool>false</bool>
+            </property>
+            <property name="resizable" >
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text" >
+              <string>Date</string>
+            </property>
+            <property name="clickable" >
+              <bool>false</bool>
+            </property>
+            <property name="resizable" >
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text" >
+              <string>Author</string>
+            </property>
+            <property name="clickable" >
+              <bool>false</bool>
+            </property>
+            <property name="resizable" >
+              <bool>true</bool>
+            </property>
+          </column>
+          <column>
+            <property name="text" >
+              <string>Content</string>
+            </property>
+            <property name="clickable" >
+              <bool>false</bool>
+            </property>
+            <property name="resizable" >
+              <bool>true</bool>
+            </property>
+          </column>
         </widget>
-    </vbox>
-</widget>
-<customwidgets>
-</customwidgets>
-<connections>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="6" margin="11" />
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <customwidgets>
+    <customwidget>
+      <class>K3ListView</class>
+      <extends>Q3ListView</extends>
+      <header location="global" >k3listview.h</header>
+    </customwidget>
+  </customwidgets>
+  <includes>
+    <include location="local" >klistview.h</include>
+  </includes>
+  <connections>
     <connection>
-        <sender>m_BlameList</sender>
-        <signal>contextMenu(K3ListView*,QListViewItem*,const QPoint&amp;)</signal>
-        <receiver>BlameDisplay</receiver>
-        <slot>slotContextMenuRequested(K3ListView*,QListViewItem*,const QPoint&amp;)</slot>
+      <sender>m_BlameList</sender>
+      <signal>contextMenu(K3ListView*,Q3ListViewItem*,QPoint)</signal>
+      <receiver>BlameDisplay</receiver>
+      <slot>slotContextMenuRequested(K3ListView*,Q3ListViewItem*,QPoint)</slot>
     </connection>
     <connection>
-        <sender>m_BlameList</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
-        <receiver>BlameDisplay</receiver>
-        <slot>slotItemDoubleClicked(QListViewItem*)</slot>
+      <sender>m_BlameList</sender>
+      <signal>doubleClicked(Q3ListViewItem*)</signal>
+      <receiver>BlameDisplay</receiver>
+      <slot>slotItemDoubleClicked(Q3ListViewItem*)</slot>
     </connection>
-</connections>
-<slots>
-    <slot access="protected">slotContextMenuRequested(K3ListView*,QListViewItem*, const QPoint&amp;)</slot>
-    <slot access="protected">slotItemDoubleClicked(QListViewItem*)</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>klistview.h</includehint>
-</includehints>
-</UI>
+  </connections>
+</ui>

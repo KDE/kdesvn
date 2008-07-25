@@ -34,11 +34,12 @@ Q_OBJECT
 public:
     UrlDlg(QWidget *parent = 0, const char *name = 0);
     virtual ~UrlDlg();
-    KUrl selectedURL();
-    static KUrl getURL(QWidget*parent=0);
+    KUrl selectedUrl();
+    static KUrl getUrl(QWidget*parent=0);
 protected:
     virtual void init_dlg();
     KUrlRequester*urlRequester_;
+    QWidget * m_plainPage;
 protected slots:
     virtual void accept();
     virtual void slotTextChanged(const QString&);

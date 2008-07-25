@@ -36,7 +36,9 @@
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kdialogbase.h>
+// #include <kdialogbase.h>
+#include <KDialog>
+#include <KVBox>
 #include <ktextbrowser.h>
 
 #include <qfile.h>
@@ -313,19 +315,23 @@ int CommandExec::exec()
     emit executeMe();
     if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
         m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
-        KDialogBase dlg (
-            KApplication::activeModalWidget(),
-            "execution_log",
-            true,
-            i18n("Execution log"),
-            KDialogBase::Ok);
+//         KDialogBase dlg (
+//             KApplication::activeModalWidget(),
+//             "execution_log",
+//             true,
+//             i18n("Execution log"),
+//             KDialogBase::Ok);
+// 
+//         QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+        KDialog dlg(KApplication::activeModalWidget());
+        KVBox *Dialog1Layout = new KVBox(&dlg);
+        dlg.setMainWidget(Dialog1Layout);
 
-        QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
         KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
         ptr->setText(m_lastMessages);
-        dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log"));
+// KDE4 port        dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log"));
         dlg.exec();
-        dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log",false);
+// KDE4 port        dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log",false);
     }
     return 0;
 }
@@ -591,13 +597,18 @@ void CommandExec::slotNotifyMessage(const QString&msg)
 bool CommandExec::askRevision()
 {
     QString _head = m_pCPart->cmd+" - Revision";
-    KDialogBase dlg(
-        0,
-        "Revisiondlg",
-        true,
-        _head,
-        KDialogBase::Ok|KDialogBase::Cancel);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+//     KDialogBase dlg(
+//         0,
+//         "Revisiondlg",
+//         true,
+//         _head,
+//         KDialogBase::Ok|KDialogBase::Cancel);
+//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(0);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
+
     Rangeinput_impl*rdlg;
     rdlg = new Rangeinput_impl(Dialog1Layout);
     dlg.resize( QSize(120,60).expandedTo(dlg.minimumSizeHint()));
@@ -633,12 +644,14 @@ void CommandExec::slotCmd_switch()
 
 void CommandExec::slotCmd_lock()
 {
-    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
+//     m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url,"",m_pCPart->force);
 }
 
 void CommandExec::slotCmd_unlock()
 {
-    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
+//     m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url,m_pCPart->force);
 }
 
 #include "commandexec.moc"

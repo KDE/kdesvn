@@ -20,12 +20,12 @@
 #ifndef CHECKOUTINFO_IMPL_H
 #define CHECKOUTINFO_IMPL_H
 
-#include "checkoutinfo.h"
+#include "ui_checkoutinfo.h"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include "kurl.h"
 
-class CheckoutInfo_impl: public CheckoutInfo {
+class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo {
 Q_OBJECT
 public:
     CheckoutInfo_impl(QWidget *parent = 0, const char *name = 0);

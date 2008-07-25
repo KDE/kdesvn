@@ -20,20 +20,18 @@
 #ifndef _DIFFSYNTAX_H
 #define _DIFFSYNTAX_H
 
-#include <q3syntaxhighlighter.h>
-#include <qregexp.h>
-#include <qfont.h>
+#include <QSyntaxHighlighter>
 
-class Q3TextEdit;
-class QString;
-class QColor;
 
-class DiffSyntax : public Q3SyntaxHighlighter
+class DiffSyntax : public QSyntaxHighlighter
 {
 public:
-     DiffSyntax(Q3TextEdit*);
-    virtual int highlightParagraph ( const QString & text, int endStateOfLastPara );
+    DiffSyntax(QTextEdit*);
+//     virtual int highlightParagraph ( const QString & text, int endStateOfLastPara );
     virtual  ~DiffSyntax();
+
+    protected:
+        void highlightBlock(const QString &aText);
 };
 
 #endif

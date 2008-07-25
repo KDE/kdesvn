@@ -20,9 +20,10 @@
 #ifndef SSLTRUSTPROMPT_IMPL_H
 #define SSLTRUSTPROMPT_IMPL_H
 
-#include "src/ksvnwidgets/ssltrustprompt.h"
+// #include "src/ksvnwidgets/ssltrustprompt.h"
+#include "ui_ssltrustprompt.h"
 
-class SslTrustPrompt_impl: public SslTrustPrompt {
+class SslTrustPrompt_impl: public QWidget, public Ui::SslTrustPrompt {//public SslTrustPrompt {
 Q_OBJECT
 public:
     SslTrustPrompt_impl(const QString&,QWidget *parent = 0, const char *name = 0);

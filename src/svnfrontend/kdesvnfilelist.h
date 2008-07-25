@@ -209,7 +209,7 @@ public slots:
     virtual void slotMkdir();
     virtual void slotMkBaseDirs();
     virtual void slotSettingsChanged();
-    virtual void slotChangeProperties(const svn::PropertiesMap&,const QValueList<QString>&,const QString&);
+    virtual void slotChangeProperties(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&);
 
 
 protected slots:

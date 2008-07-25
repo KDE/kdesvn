@@ -25,8 +25,8 @@
 #include <QKeyEvent>
 
 class DiffSyntax;
-class KEdFind;
-
+// class KEdFind;
+/* FIXME TODO fix the search */
 class DiffBrowserData;
 
 class DiffBrowser : public KTextBrowser

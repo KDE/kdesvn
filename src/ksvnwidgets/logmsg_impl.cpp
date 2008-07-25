@@ -33,7 +33,8 @@
 
 #include <QStringList>
 
-#include <q3vbox.h>
+// #include <q3vbox.h>
+#include <KVBox>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <q3listview.h>
@@ -49,7 +50,7 @@ QStringList Logmsg_impl::sLogHistory = QStringList();
 QString Logmsg_impl::sLastMessage=QString();
 const QString Logmsg_impl::groupName("logmsg_dlg_size");
 
-unsigned int Logmsg_impl::smax_message_history = 0xFFFF;
+int Logmsg_impl::smax_message_history = 0xFFFF;
 
 class SvnCheckListItem:public Q3CheckListItem
 {
@@ -91,7 +92,7 @@ Logmsg_impl::Logmsg_impl(const svn::CommitItemList&_items,QWidget *parent)
     m_ReviewList->setSortColumn(1);
     hideButtons(true);
     if (_items.count()>0) {
-        for (unsigned i = 0;i<_items.count();++i) {
+        for (int i = 0;i<_items.count();++i) {
             Q3ListViewItem*item = new Q3ListViewItem(m_ReviewList);
             if (_items[i].path().isEmpty()) {
                 item->setText(1,_items[i].url());
@@ -142,11 +143,11 @@ Logmsg_impl::Logmsg_impl(const logActionEntries&_activatedList,
     setupUi(this);
     m_LogEdit->setFocus();
     m_hidden=false;
-    for (unsigned j = 0; j<_activatedList.count();++j) {
+    for (int j = 0; j<_activatedList.count();++j) {
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_activatedList[j]);
         item->setState(Q3CheckListItem::On);
     }
-    for (unsigned j = 0; j<_notActivatedList.count();++j) {
+    for (int j = 0; j<_notActivatedList.count();++j) {
         SvnCheckListItem * item = new SvnCheckListItem(m_ReviewList,_notActivatedList[j]);
         item->setState(Q3CheckListItem::Off);
     }
@@ -161,7 +162,7 @@ Logmsg_impl::~Logmsg_impl()
         Kdesvnsettings::setCommit_splitter_height(list);
         Kdesvnsettings::self()->writeConfig();
     }
-    for (unsigned int j=0; j<m_Hidden.size();++j) {
+    for (int j=0; j<m_Hidden.size();++j) {
         delete m_Hidden[j];
     }
     Kdesvnsettings::setCommit_hide_new(m_HideNewItems->isChecked());
@@ -184,7 +185,7 @@ void Logmsg_impl::checkSplitterSize()
 
 void Logmsg_impl::slotHistoryActivated(int number)
 {
-    if (number < 1||(unsigned)number>sLogHistory.size()) {
+    if (number < 1||number>sLogHistory.size()) {
         m_LogEdit->setText("");
     } else {
         m_LogEdit->setText(sLogHistory[number-1]);
@@ -225,11 +226,11 @@ void Logmsg_impl::initHistory()
     if (smax_message_history==0xFFFF) {
         smax_message_history = Kdesvnsettings::max_log_messages();
         KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
-        QString s = QString::null;
-        unsigned int current = 0;
+        QString s;/* = QString::null;*/
+        int current = 0;
         QString key = QString("log_%0").arg(current);
-        s = cs.readEntry(key,QString::null);
-        while (s!=QString::null) {
+        s = cs.readEntry(key,QString());
+        while (!s.isNull()) {
             if (current<smax_message_history) {
                 sLogHistory.push_back(s);
             } else {
@@ -237,7 +238,7 @@ void Logmsg_impl::initHistory()
             }
             ++current;
             key = QString("log_%0").arg(current);
-            s = cs.readEntry(key,QString::null);
+            s = cs.readEntry(key,QString());
         }
     }
     QStringList::const_iterator it;
@@ -273,7 +274,7 @@ void Logmsg_impl::saveHistory(bool canceld)
             sLogHistory.removeLast();
         }
         KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
-        for (unsigned int i = 0; i < sLogHistory.size();++i) {
+        for (int i = 0; i < sLogHistory.size();++i) {
             cs.writeEntry(QString("log_%0").arg(i),sLogHistory[i]);
         }
         cs.sync();
@@ -289,10 +290,19 @@ QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidge
     QString msg("");
 
     Logmsg_impl*ptr=0;
-    KDialogBase dlg(parent,name,true,i18n("Commit log"),
-            KDialogBase::Ok|KDialogBase::Cancel,
-            KDialogBase::Ok,true);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+//     KDialogBase dlg(parent,name,true,i18n("Commit log"),
+//             KDialogBase::Ok|KDialogBase::Cancel,
+//             KDialogBase::Ok,true);
+//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(parent);
+    dlg.setCaption(i18n("Commit log"));
+    dlg.setModal(true);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg.setDefaultButton(KDialog::Ok);
+    dlg.showButtonSeparator(true);
+
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
 
     ptr = new Logmsg_impl(Dialog1Layout);
     if (!rec) {
@@ -302,7 +312,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidge
         ptr->m_keepLocksButton->hide();
     }
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
+// KDE4 port - pv     dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -315,7 +325,7 @@ QString Logmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWidge
     }
     ptr->saveHistory(!_ok);
 
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
+// KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _depth;
     return msg;
@@ -328,10 +338,19 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::
     QString msg("");
 
     Logmsg_impl*ptr=0;
-    KDialogBase dlg(parent,name,true,i18n("Commit log"),
-            KDialogBase::Ok|KDialogBase::Cancel,
-            KDialogBase::Ok,true);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+//     KDialogBase dlg(parent,name,true,i18n("Commit log"),
+//             KDialogBase::Ok|KDialogBase::Cancel,
+//             KDialogBase::Ok,true);
+//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(parent);
+    dlg.setCaption(i18n("Commit log"));
+    dlg.setModal(true);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg.setDefaultButton(KDialog::Ok);
+    dlg.showButtonSeparator(true);
+
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
 
     ptr = new Logmsg_impl(items,Dialog1Layout);
     if (!rec) {
@@ -342,7 +361,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::
     }
 
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
+// KDE4 port - pvdlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -355,7 +374,7 @@ QString Logmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,svn::
     }
     ptr->saveHistory(!_ok);
 
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
+// KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _depth;
     if (keep_locks) *keep_locks = _keep_locks;
@@ -370,10 +389,19 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
     QString msg("");
 
     Logmsg_impl*ptr=0;
-    KDialogBase dlg(parent,name,true,i18n("Commit log"),
-            KDialogBase::Ok|KDialogBase::Cancel,
-            KDialogBase::Ok,true);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+//     KDialogBase dlg(parent,name,true,i18n("Commit log"),
+//             KDialogBase::Ok|KDialogBase::Cancel,
+//             KDialogBase::Ok,true);
+//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(parent);
+    dlg.setCaption(i18n("Commit log"));
+    dlg.setModal(true);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg.setDefaultButton(KDialog::Ok);
+    dlg.showButtonSeparator(true);
+
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
 
     ptr = new Logmsg_impl(items,Dialog1Layout);
     if (!rec) {
@@ -383,7 +411,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
         ptr->m_keepLocksButton->hide();
     }
     ptr->initHistory();
-    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
+// KDE4 port - pv    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -397,7 +425,7 @@ QString Logmsg_impl::getLogmessage(const QMap<QString,QString>&items,
     }
     ptr->saveHistory(!_ok);
 
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
+// KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     if (rec) *rec = _depth;
     if (keep_locks) *keep_locks = _keep_locks;
@@ -414,10 +442,20 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
     QString msg("");
 
     Logmsg_impl*ptr=0;
-    KDialogBase dlg(parent,name,true,i18n("Commit log"),
-            KDialogBase::Ok|KDialogBase::Cancel,
-            KDialogBase::Ok,true);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+//     KDialogBase dlg(parent,name,true,i18n("Commit log"),
+//             KDialogBase::Ok|KDialogBase::Cancel,
+//             KDialogBase::Ok,true);
+//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(parent);
+    dlg.setCaption(i18n("Commit log"));
+    dlg.setModal(true);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg.setDefaultButton(KDialog::Ok);
+    dlg.showButtonSeparator(true);
+
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
+
     ptr = new Logmsg_impl(_on,_off,Dialog1Layout);
     ptr->m_DepthSelector->hide();
     if (!keep_locks) {
@@ -429,7 +467,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
         connect(ptr,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
                 callback,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
     }
-    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
+// KDE4 port - pv    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),groupName));
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -440,7 +478,7 @@ QString Logmsg_impl::getLogmessage(const logActionEntries&_on,
         _keep_locks = ptr->isKeeplocks();
     }
     ptr->saveHistory(!_ok);
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
+// KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),groupName,false);
     if (ok) *ok = _ok;
     _result = ptr->selectedEntries();
     if (keep_locks) *keep_locks = _keep_locks;
@@ -592,11 +630,11 @@ void Logmsg_impl::hideNewItems(bool how)
             }
             ++it;
         }
-        for (unsigned j=0;j<m_Hidden.size();++j) {
+        for (int j=0;j<m_Hidden.size();++j) {
             m_ReviewList->takeItem(m_Hidden[j]);
         }
     } else {
-        for (unsigned j=0;j<m_Hidden.size();++j) {
+        for (int j=0;j<m_Hidden.size();++j) {
             m_ReviewList->insertItem(m_Hidden[j]);
         }
         m_Hidden.clear();
@@ -611,4 +649,4 @@ void Logmsg_impl::hideDepth(bool ahide)
     m_DepthSelector->hideDepth(ahide);
 }
 
-#include "logmsg_impl.moc"
+// #include "logmsg_impl.moc"

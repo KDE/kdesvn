@@ -31,8 +31,12 @@
 
 
 EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
-    :EditPropsDlgData(parent, name)
+//     :EditPropsDlgData(parent, name)
+    : QDialog(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     /// @TODO Read these values from a text or config file
     fileProperties += ("svn:eol-style");
     fileProperties += ("svn:executable");

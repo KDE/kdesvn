@@ -21,14 +21,19 @@
 #include "depthselector.h"
 
 #include <qstringlist.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
+
 
 /*!
     \fn RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
  */
  RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
-    :RevertForm(parent,name)
+//     :RevertForm(parent,name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     setMinimumSize(minimumSizeHint());
 }
 

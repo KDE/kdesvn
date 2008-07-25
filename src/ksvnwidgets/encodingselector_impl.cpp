@@ -25,8 +25,12 @@
 #include <qcombobox.h>
 
 EncodingSelector_impl::EncodingSelector_impl(const QString&cur,QWidget *parent, const char *name)
-    :EncodingSelector(parent, name)
+//     :EncodingSelector(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     m_encodingList->insertStringList( KGlobal::charsets()->availableEncodingNames());
 
     for (int j = 1;j<m_encodingList->count();++j ) {

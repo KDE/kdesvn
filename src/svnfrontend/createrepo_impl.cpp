@@ -35,8 +35,12 @@ public:
 };
 
 Createrepo_impl::Createrepo_impl(bool enable_compat13, bool enable_compat14, QWidget *parent, const char *name)
-    :CreateRepo_Dlg(parent, name)
+//     :CreateRepo_Dlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     inChangeCompat=true;
     m_DisableFsync->setEnabled(false);
     m_LogKeep->setEnabled(false);

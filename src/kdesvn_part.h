@@ -29,6 +29,8 @@
 #include <kparts/statusbarextension.h>
 #include <kparts/browserextension.h>
 
+#include <KComponentData>
+
 class kdesvnView;
 class QPainter;
 class KUrl;
@@ -121,10 +123,12 @@ public:
                                             QObject *parent, const char *name,
                                             const char *classname, const QStringList &args );
     virtual commandline_part*createCommandIf(QObject*parent,const char*name, KCmdLineArgs *args);
-    static KInstance* instance();
+//     static KInstance* instance();
+    static KComponentData* instance();
 
 private:
-    static KInstance* s_instance;
+//     static KInstance* s_instance;
+    static KComponentData* s_instance;
     static KAboutData* s_about;
     static commandline_part*s_cline;
 };

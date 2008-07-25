@@ -20,12 +20,12 @@
 #ifndef EDITPROPERTY_IMPL_H
 #define EDITPROPERTY_IMPL_H
 
-#include "editpropsdlg.h"
+#include "ui_editpropsdlg.h"
 
 class QStringList;
 class QString;
 
-class EditProperty_impl: public EditPropsDlgData {
+class EditProperty_impl: public QDialog, public Ui::EditPropsDlgData {
 Q_OBJECT
 public:
     EditProperty_impl(QWidget *parent = 0, const char *name = 0);

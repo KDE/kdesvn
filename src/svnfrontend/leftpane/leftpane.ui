@@ -16,16 +16,7 @@
    <property name="spacing" >
     <number>0</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -33,15 +24,21 @@
      <property name="rootIsDecorated" >
       <bool>true</bool>
      </property>
-     <property name="fullWidth" stdset="0" >
+     <property name="fullWidth" >
       <bool>true</bool>
      </property>
-     <property name="autoOpen" stdset="0" >
+     <property name="autoOpen" >
       <bool>false</bool>
      </property>
      <column>
       <property name="text" >
        <string>Name</string>
+      </property>
+      <property name="clickable" >
+       <bool>true</bool>
+      </property>
+      <property name="resizable" >
+       <bool>true</bool>
       </property>
      </column>
     </widget>
@@ -53,10 +50,12 @@
  <customwidgets>
   <customwidget>
    <class>K3ListView</class>
+   <extends>Q3ListView</extends>
+   <header>k3listview.h</header>
   </customwidget>
  </customwidgets>
  <includes>
-  <include location="local" >klistview.h</include>
+  <include location="local" >k3listview.h</include>
  </includes>
  <resources/>
  <connections/>

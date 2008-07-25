@@ -2,6 +2,7 @@ PROJECT(kdesvn)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
 OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
+OPTION(DAILY_BUILD "Generate version number for a daily build (default off)")
 
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 IF (TESTINGBUILD)
@@ -62,7 +63,14 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib/kde3)
 SET(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib")
 
 # current version
-SET(VERSION daily-0.99.0)
+IF (DAILY_BUILD)
+EXECUTE_PROCESS(COMMAND "date" "+%Y%m%d" OUTPUT_VARIABLE BUILDDATE)
+STRING(REPLACE "\n" "" BUILDDATE ${BUILDDATE})
+SET(VERSION "0.14.99.${BUILDDATE}")
+ELSE(DAILY_BUILD)
+SET(VERSION 0.14.99)
+ENDIF(DAILY_BUILD)
+
 SET(KDESVN_VERSION \"${VERSION}\")
 
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
@@ -71,7 +79,7 @@ CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 
-SET(DIST_EXCLUDE "Helperstuff")
+SET(DIST_EXCLUDE "Helperstuff/pic_design")
 CONFIGURE_FILE(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/makedist.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/makedist.sh"

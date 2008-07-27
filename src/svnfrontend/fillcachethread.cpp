@@ -106,7 +106,9 @@ void FillCacheThread::run()
                 }
                 latestCache=rl.latestCachedRev();
             }
-            rl.fillCache(Head.revnum());
+            if (latestCache.revnum()<Head.revnum()) {
+                rl.fillCache(Head.revnum());
+            }
             i=Head.revnum();
             m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1").arg(i));
         }

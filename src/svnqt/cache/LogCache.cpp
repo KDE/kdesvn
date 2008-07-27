@@ -208,14 +208,14 @@ public:
         c.exec();
 
 #if QT_VERSION < 0x040000
-        qDebug("Check for path: "+reposroot.native());
+        //qDebug("Check for path: "+reposroot.native());
 #endif
 
         // only the first one
         if ( c.next() ) {
 #if QT_VERSION < 0x040000
-            qDebug( c.value(0).toString() + ": " +
-                    c.value(0).toString() );
+/*            qDebug( c.value(0).toString() + ": " +
+                    c.value(0).toString() );*/
 #endif
             dbFile = c.value(0).toString();
         }
@@ -238,7 +238,7 @@ public:
         while (QSqlDatabase::contains(_key)) {
             _key = QString("%1-%2").arg(dbFile).arg(i++);
         }
-        qDebug("The repository key is now: %s",_key.TOUTF8().data());
+//        qDebug("The repository key is now: %s",_key.TOUTF8().data());
         QDataBase _db = QSqlDatabase::addDatabase(SQLTYPE,_key);
 #if QT_VERSION < 0x040000
         if (!_db) {
@@ -251,7 +251,7 @@ public:
 #else
         _db.setDatabaseName(fulldb);
 #endif
-        qDebug("try database open %s",fulldb.TOUTF8().data());
+//        qDebug("try database open %s",fulldb.TOUTF8().data());
         if (!checkReposDb(_db)) {
             qDebug("no DB opened");
 #if QT_VERSION < 0x040000
@@ -419,7 +419,7 @@ svn::cache::LogCache* svn::cache::LogCache::self()
  */
 QDataBase  svn::cache::LogCache::reposDb(const QString&aRepository)
 {
-    qDebug("reposDB");
+//    qDebug("reposDB");
     return m_CacheData->getReposDB(aRepository);
 }
 

@@ -69,11 +69,13 @@ void FillCacheThread::run()
     svn::cache::ReposLog rl(m_Svnclient,m_what);
     bool breakit=false;
     KApplication*k = KApplication::kApplication();
-
     try {
         svn::Revision latestCache = rl.latestCachedRev();
         svn::Revision Head = rl.latestHeadRev();
         Q_LLONG i = latestCache.revnum();
+        if (i<0) {
+            i=0;
+        }
         Q_LLONG j = Head.revnum();
 
         Q_LLONG _max=j-i;
@@ -85,26 +87,29 @@ void FillCacheThread::run()
             k->postEvent(m_Parent,fev);
         }
 
-        for (;i<j;i+=200) {
-            _cur+=200;
-            rl.fillCache(i);
-            if (m_SvnContextListener->contextCancel()) {
-                m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
-                breakit=true;
-                break;
+        if (i<j) {
+            for (;i<j;i+=200) {
+                _cur+=200;
+                rl.fillCache(i);
+
+                if (m_SvnContextListener->contextCancel()) {
+                    m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
+                    breakit=true;
+                    break;
+                }
+                if (latestCache==rl.latestCachedRev()) {
+                    break;
+                }
+                if (k) {
+                    fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
+                    k->postEvent(m_Parent,fev);
+                }
+                latestCache=rl.latestCachedRev();
             }
-            if (latestCache==rl.latestCachedRev()) {
-                break;
-            }
-            if (k) {
-                fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
-                k->postEvent(m_Parent,fev);
-            }
-            latestCache=rl.latestCachedRev();
+            rl.fillCache(Head.revnum());
+            i=Head.revnum();
+            m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1").arg(i));
         }
-        rl.fillCache(Head);
-        i=Head.revnum();
-        m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1").arg(i));
     } catch (const svn::Exception&e) {
         m_SvnContextListener->contextNotify(e.msg());
     }

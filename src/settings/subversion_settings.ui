@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>339</width>
-            <height>384</height>
+            <height>410</height>
         </rect>
     </property>
     <property name="caption">
@@ -31,6 +31,17 @@
             </property>
             <property name="toolTip" stdset="0">
                 <string>Select if kdesvn should check for updates when open a working copy</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>kcfg_log_cache_on_open</cstring>
+            </property>
+            <property name="text">
+                <string>Start fill log cache on open</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Start refresh the logcache for repository when networking enabled</string>
             </property>
         </widget>
         <widget class="QCheckBox">

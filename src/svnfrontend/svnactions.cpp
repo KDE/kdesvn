@@ -903,7 +903,7 @@ void SvnActions::slotCommit()
                                        ));
         }
     }
-    if (makeCommit(targets) && Kdesvnsettings::start_log_cache_on_open()) {
+    if (makeCommit(targets) && Kdesvnsettings::log_cache_on_open()) {
         startFillCache(m_Data->m_ParentList->baseUri());
     }
 }

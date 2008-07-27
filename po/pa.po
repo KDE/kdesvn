@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-23 20:43+0200\n"
+"POT-Creation-Date: 2008-07-27 11:12+0200\n"
 "PO-Revision-Date: 2007-03-22 17:51+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
@@ -42,7 +42,7 @@ msgstr "ਰਿਪੋਜ਼ਟਰੀ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸ�
 msgid "No repository open"
 msgstr "ਕੋਈ ਖੁੱਲ੍ਹੀ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਹੈ"
 
-#: kdesvnview.cpp:245 rc.cpp:507
+#: kdesvnview.cpp:245 rc.cpp:513
 #, no-c-format
 msgid "Create new repository"
 msgstr "ਨਵੀਂ ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਓ"
@@ -104,7 +104,7 @@ msgstr "#PKCS12 ਸਰਟੀਫਿਕੇਟ ਨਾਲ ਇੱਕ ਫਾਇਲ ਖ
 msgid "Quick settings"
 msgstr "ਤੇਜ਼ ਸੈਟਿੰਗ"
 
-#: rc.cpp:6 rc.cpp:432 kdesvn_part.cpp:358
+#: rc.cpp:6 rc.cpp:438 kdesvn_part.cpp:358
 #, no-c-format
 msgid "Subversion"
 msgstr "ਸਬਵਰਜਨ"
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Actions"
 msgstr "ਕਾਰਵਾਈਆਂ"
 
-#: rc.cpp:39 rc.cpp:441
+#: rc.cpp:39 rc.cpp:447
 #, no-c-format
 msgid "Subversion toolbar"
 msgstr "Subversion ਸੰਦ-ਪੱਟੀ"
@@ -321,16 +321,26 @@ msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr "ਚੁਣੋ ਕਿ ਕੀ ਇੱਕ ਵਰਕਿੰਗ ਨਕਲ ਖੋਲ੍ਹੋਣ ਸਮੇਂ kdesvn ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਕਰੇ"
 
 #: rc.cpp:152
+#, fuzzy, no-c-format
+msgid "Start fill log cache on open"
+msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਬੈਕ-ਗਰਾਊਂਡ 'ਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+
+#: rc.cpp:155
+#, fuzzy, no-c-format
+msgid "Start refresh the logcache for repository when networking enabled"
+msgstr "ਜਦੋਂ ਇੱਕ ਵਰਕਿੰਗ ਨਕਲ ਖੋਲ੍ਹੀ ਜਾਵੇ ਤਾਂ ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਕਰੋ"
+
+#: rc.cpp:158
 #, no-c-format
 msgid "Check if items has \"svn:needs-lock\" property set"
 msgstr ""
 
-#: rc.cpp:155
+#: rc.cpp:161
 #, no-c-format
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
 
-#: rc.cpp:158
+#: rc.cpp:164
 #, no-c-format
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
@@ -339,19 +349,19 @@ msgid ""
 "containing lot of such entries."
 msgstr ""
 
-#: rc.cpp:161
+#: rc.cpp:167
 #, no-c-format
 msgid "Get file details while remote listing"
 msgstr "ਰਿਮੋਟ ਸੂਚੀ ਵੇਖਾਉਣ ਦੌਰਾਨ ਫਾਇਲ ਵੇਰਵਾ ਲਵੋ"
 
-#: rc.cpp:165
+#: rc.cpp:171
 #, no-c-format
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
 msgstr ""
 
-#: rc.cpp:168
+#: rc.cpp:174
 #, no-c-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
@@ -361,22 +371,22 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
 msgstr ""
 
-#: rc.cpp:173
+#: rc.cpp:179
 #, no-c-format
 msgid "Gain item info recursive"
 msgstr "ਇਕਾਈ ਜਾਣਕਾਰੀ ਲਗਾਤਾਰ ਲਵੋ"
 
-#: rc.cpp:177
+#: rc.cpp:183
 #, no-c-format
 msgid "Always get properties on networked repositories"
 msgstr ""
 
-#: rc.cpp:181
+#: rc.cpp:187
 #, no-c-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
 msgstr ""
 
-#: rc.cpp:184
+#: rc.cpp:190
 #, no-c-format
 msgid ""
 "When browsing kdesvn may try displaying properties below itemlist from a "
@@ -386,17 +396,17 @@ msgid ""
 "hangs often you should deactivate it."
 msgstr ""
 
-#: rc.cpp:188
+#: rc.cpp:194
 #, no-c-format
 msgid "Store passwords for remote connections"
 msgstr "ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨਾਂ ਲਈ ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲ ਕੇ ਰੱਖੋ"
 
-#: rc.cpp:192
+#: rc.cpp:198
 #, no-c-format
 msgid "Should subversion store passwords in default"
 msgstr "ਕੀ ਸਬ-ਵਰਜਨ ਮੂਲ ਰੂਪ ਵਿੱਚ ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲੇ"
 
-#: rc.cpp:195
+#: rc.cpp:201
 #, no-c-format
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
@@ -406,18 +416,18 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: rc.cpp:198
+#: rc.cpp:204
 #, fuzzy, no-c-format
 msgid "Store passwords into KDE Wallet"
 msgstr "ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲੋ"
 
-#: rc.cpp:202
+#: rc.cpp:208
 #, no-c-format
 msgid ""
 "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 
-#: rc.cpp:205
+#: rc.cpp:211
 #, no-c-format
 msgid ""
 "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
@@ -432,32 +442,32 @@ msgid ""
 "don't save passwords.</p>"
 msgstr ""
 
-#: rc.cpp:210
+#: rc.cpp:216
 #, fuzzy, no-c-format
 msgid "Use internal password cache"
 msgstr "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਗੁਪਤ-ਕੋਡ ਹੇਠਾਂ ਦਿਓ।"
 
-#: rc.cpp:213
+#: rc.cpp:219
 #, no-c-format
 msgid "Use an internal password cache"
 msgstr ""
 
-#: rc.cpp:216
+#: rc.cpp:222
 #, no-c-format
 msgid "Log follows node changes"
 msgstr "ਨੋਡ ਤਬਦੀਲੀਆਂ ਲਈ ਲਾਗ"
 
-#: rc.cpp:220
+#: rc.cpp:226
 #, no-c-format
 msgid "Logs always reads list of changed files"
 msgstr "ਲਾਗ ਹਮੇਸ਼ਾਂ ਤਬਦੀਲ ਫਾਇਲਾਂ ਦੀ ਸੂਚੀ ਪੜ੍ਹੋ"
 
-#: rc.cpp:224
+#: rc.cpp:230
 #, no-c-format
 msgid "Read detailed change lists"
 msgstr "ਵੇਰਵੇ ਸਮੇਤ ਤਬਦੀਲੀ ਸੂਚੀ ਪੜ੍ਹੋ"
 
-#: rc.cpp:227
+#: rc.cpp:233
 #, no-c-format
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
@@ -465,155 +475,155 @@ msgid ""
 "between nodechanges from within the logviewer."
 msgstr ""
 
-#: rc.cpp:230
+#: rc.cpp:236
 #, no-c-format
 msgid "Review items before commit"
 msgstr "ਕਮਿਟ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਇਕਾਈਆਂ ਦੀ ਪੜਤਾਲ ਕਰੋ"
 
-#: rc.cpp:234
+#: rc.cpp:240
 #, no-c-format
 msgid "List items next commit will send or not"
 msgstr ""
 
-#: rc.cpp:237
+#: rc.cpp:243
 #, fuzzy, no-c-format
 msgid "Hide new items in commit box"
 msgstr "ਨਵੀਆਂ ਇਕਾਈਆਂ ਚੁਣੋ"
 
-#: rc.cpp:241
+#: rc.cpp:247
 #, no-c-format
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
 
-#: rc.cpp:244
+#: rc.cpp:250
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
 msgstr ""
 
-#: rc.cpp:247
+#: rc.cpp:253
 #, no-c-format
 msgid "ColorSettings"
 msgstr "ਰੰਗ ਸੈਟਿੰਗ"
 
-#: rc.cpp:250
+#: rc.cpp:256
 #, no-c-format
 msgid "Mark changed and locked items colored"
 msgstr "ਤਬਦੀਲ ਅਤੇ ਲਾਕ ਇਕਾਈਆਂ ਲਈ ਰੰਗ"
 
-#: rc.cpp:258
+#: rc.cpp:264
 #, no-c-format
 msgid "Locked items:"
 msgstr "ਤਾਲਾਬੰਦ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:262
+#: rc.cpp:268
 #, no-c-format
 msgid "Not versioned items:"
 msgstr "ਬਿਨ-ਵਰਜਨ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:265
+#: rc.cpp:271
 #, no-c-format
 msgid "Remote changed items:"
 msgstr "ਰਿਮੋਟ ਤਬਦੀਲ ਹੋਈਆਂ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:268
+#: rc.cpp:274
 #, no-c-format
 msgid "Added items:"
 msgstr "ਜੋੜੀਆਂ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:271
+#: rc.cpp:277
 #, no-c-format
 msgid "Deleted items:"
 msgstr "ਹਟਾਈਆਂ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:278
+#: rc.cpp:284
 #, no-c-format
 msgid "Conflicted items:"
 msgstr "ਅਪਵਾਦ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:281
+#: rc.cpp:287
 #, no-c-format
 msgid "Missed items:"
 msgstr "ਗੁੰਮ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:284
+#: rc.cpp:290
 #, no-c-format
 msgid "Local changed items:"
 msgstr "ਲੋਕਲ ਤਬਦੀਲ ਇਕਾਈਆਂ:"
 
-#: rc.cpp:287
+#: rc.cpp:293
 #, no-c-format
 msgid "Item needs lock:"
 msgstr "ਇਕਾਈਆਂ, ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਤਾਲਾਬੰਦ:"
 
-#: rc.cpp:291
+#: rc.cpp:297
 #, fuzzy, no-c-format
 msgid "DiffMergeSettings"
 msgstr "ਮਿਲਾਨ ਸੈਟਿੰਗ"
 
-#: rc.cpp:294
+#: rc.cpp:300
 #, no-c-format
 msgid "Diff ignores content type"
 msgstr "ਅੰਤਰ ਅਣਡਿੱਠ ਭਾਗ ਕਿਸਮ"
 
-#: rc.cpp:297 svnfrontend/graphtree/revgraphview.cpp:813
+#: rc.cpp:303 svnfrontend/graphtree/revgraphview.cpp:813
 #, no-c-format
 msgid "Diff in revisiontree is recursive"
 msgstr "ਰੀਵਿਜ਼ਨ-ਟਰੀ 'ਚ ਅੰਤਰ ਲਗਾਤਾਰ ਹੈ"
 
-#: rc.cpp:300
+#: rc.cpp:306
 #, fuzzy, no-c-format
 msgid "Diff ignores white space changes"
 msgstr "ਅੰਤਰ ਅਣਡਿੱਠ ਭਾਗ ਕਿਸਮ"
 
-#: rc.cpp:303
+#: rc.cpp:309
 #, fuzzy, no-c-format
 msgid "Diff ignores all white spaces"
 msgstr "ਅੰਤਰ ਅਣਡਿੱਠ ਭਾਗ ਕਿਸਮ"
 
-#: rc.cpp:306
+#: rc.cpp:312
 #, fuzzy, no-c-format
 msgid "Use external diff display"
 msgstr "ਹੋਰ ਅੰਤਰ ਵੇਖਾਓ"
 
-#: rc.cpp:309
+#: rc.cpp:315
 #, no-c-format
 msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
 msgstr ""
 
-#: rc.cpp:312
+#: rc.cpp:318
 #, no-c-format
 msgid "Prefer external merge program"
 msgstr ""
 
-#: rc.cpp:315
+#: rc.cpp:321
 #, no-c-format
 msgid ""
 "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 
-#: rc.cpp:318
+#: rc.cpp:324
 #, no-c-format
 msgid "see \"Whats this\" for details"
 msgstr "ਵੇਰਵੇ ਲਈ \"ਇਹ ਕੀ ਹੈ\" ਨੂੰ ਵੇਖੋ"
 
-#: rc.cpp:321
+#: rc.cpp:327
 #, no-c-format
 msgid "Conflict resolver program:"
 msgstr ""
 
-#: rc.cpp:324
+#: rc.cpp:330
 #, no-c-format
 msgid "External merge program:"
 msgstr "ਬਾਹਰੀ ਮਿਲਾਨ ਪ੍ਰੋਗਰਾਮ:"
 
-#: rc.cpp:327
+#: rc.cpp:333
 #, no-c-format
 msgid "Setup an external program for conflict resolving"
 msgstr ""
 
-#: rc.cpp:330
+#: rc.cpp:336
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -637,17 +647,17 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:349
+#: rc.cpp:355
 #, no-c-format
 msgid "External diff display:"
 msgstr "ਬਾਹਰੀ ਅੰਤਰ ਵੇਖਾਓ:"
 
-#: rc.cpp:352
+#: rc.cpp:358
 #, no-c-format
 msgid "Setup an external program for merging"
 msgstr ""
 
-#: rc.cpp:355
+#: rc.cpp:361
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -663,7 +673,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:367
+#: rc.cpp:373
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -691,119 +701,119 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:388
+#: rc.cpp:394
 #, no-c-format
 msgid "Revisiontree Settings"
 msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਸੈਟਿੰਗ"
 
-#: rc.cpp:391
+#: rc.cpp:397
 #, no-c-format
 msgid "Direction of revision tree"
 msgstr "ਰੀਵਿਜ਼ਨ ਲੜੀ ਦੀ ਦਿਸ਼ਾ"
 
-#: rc.cpp:394
+#: rc.cpp:400
 #, no-c-format
 msgid "Left to right"
 msgstr "ਖੱਬੇ ਤੋਂ ਸੱਜੇ"
 
-#: rc.cpp:397
+#: rc.cpp:403
 #, no-c-format
 msgid "Bottom to top"
 msgstr "ਹੇਠਾਂ ਤੋਂ ਉੱਪਰ"
 
-#: rc.cpp:400
+#: rc.cpp:406
 #, no-c-format
 msgid "Right to left"
 msgstr "ਸੱਜੇ ਤੋਂ ਖੱਬੇ"
 
-#: rc.cpp:403
+#: rc.cpp:409
 #, no-c-format
 msgid "Top to bottom"
 msgstr "ਉੱਤੇ ਤੋਂ ਹੇਠਾਂ"
 
-#: rc.cpp:406
+#: rc.cpp:412
 #, no-c-format
 msgid "Color for added items:"
 msgstr "ਜੋੜੀਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
-#: rc.cpp:410
+#: rc.cpp:416
 #, no-c-format
 msgid "Color for deleted items:"
 msgstr "ਹਟਾਈਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
-#: rc.cpp:414
+#: rc.cpp:420
 #, no-c-format
 msgid "Color for copied items:"
 msgstr "ਨਕਲ ਕੀਤੀਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
-#: rc.cpp:418
+#: rc.cpp:424
 #, no-c-format
 msgid "Color for renamed items:"
 msgstr "ਨਾਂ-ਤਬਦੀਲ ਕੀਤੀਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
-#: rc.cpp:422
+#: rc.cpp:428
 #, no-c-format
 msgid "Color for modified items:"
 msgstr "ਸੋਧੀਆਂ ਇਕਾਈਆਂ ਦਾ ਰੰਗ:"
 
-#: rc.cpp:429
+#: rc.cpp:435
 #, no-c-format
 msgid "Subversion Admin"
 msgstr "ਸਬਵਰਜਨ ਪਰਸ਼ਾਸ਼ਕ"
 
-#: rc.cpp:447
+#: rc.cpp:453
 #, no-c-format
 msgid "Destination folder:"
 msgstr "ਟਿਕਾਣਾ ਫੋਲਡਰ:"
 
-#: rc.cpp:450
+#: rc.cpp:456
 #, no-c-format
 msgid "Repository to copy:"
 msgstr "ਨਕਲ ਲਈ ਰਿਪੋਜ਼ਟਰੀ:"
 
-#: rc.cpp:453
+#: rc.cpp:459
 #, no-c-format
 msgid "Clean logs"
 msgstr "ਲਾਗ ਸਾਫ਼ ਕਰੋ"
 
-#: rc.cpp:457
+#: rc.cpp:463
 #, no-c-format
 msgid "Load into folder:"
 msgstr "ਫੋਲਡਰ ਵਿੱਚ ਲੋਡ:"
 
-#: rc.cpp:460 rc.cpp:472
+#: rc.cpp:466 rc.cpp:478
 #, no-c-format
 msgid "Path to load the dump into (see contexthelp)"
 msgstr ""
 
-#: rc.cpp:463 rc.cpp:475
+#: rc.cpp:469 rc.cpp:481
 #, no-c-format
 msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
 
-#: rc.cpp:466
+#: rc.cpp:472
 #, no-c-format
 msgid "Dump file:"
 msgstr "ਡੰਪ ਫਾਇਲ:"
 
-#: rc.cpp:469
+#: rc.cpp:475
 #, no-c-format
 msgid "Load into repository:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ ਲੋਡ:"
 
-#: rc.cpp:478
+#: rc.cpp:484
 #, no-c-format
 msgid "Uuid action"
 msgstr "Uuid ਕਾਰਵਾਈ"
 
-#: rc.cpp:481
+#: rc.cpp:487
 #, no-c-format
 msgid "How to handle UUIDs"
 msgstr "UUID ਨੂੰ ਕਿਵੇਂ ਕੰਟਰੋਲ ਕਰਨਾ ਹੈ"
 
-#: rc.cpp:484
+#: rc.cpp:490
 #, no-c-format
 msgid ""
 "The repository's UUID will be updated if the dumpstream contains a UUID and "
@@ -812,599 +822,599 @@ msgid ""
 "ignored."
 msgstr ""
 
-#: rc.cpp:491
+#: rc.cpp:497
 #, no-c-format
 msgid "Ignore"
 msgstr "ਅਣਡਿੱਠਾ"
 
-#: rc.cpp:495
+#: rc.cpp:501
 #, no-c-format
 msgid "Force"
 msgstr "ਧੱਕੇ ਨਾਲ"
 
-#: rc.cpp:499
+#: rc.cpp:505
 #, no-c-format
 msgid "Use pre-commit hook"
 msgstr "ਪ੍ਰੀ-ਕਮਿਟ ਹੁੱਕ ਵਰਤੋਂ"
 
-#: rc.cpp:503
+#: rc.cpp:509
 #, no-c-format
 msgid "Use post-commit hook"
 msgstr "ਪੋਸਟ-ਕਮਿਟ ਹੁੱਕ ਵਰਤੋਂ"
 
-#: rc.cpp:510
+#: rc.cpp:516
 #, no-c-format
 msgid "Type of repository:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਕਿਸਮ:"
 
-#: rc.cpp:513
+#: rc.cpp:519
 #, no-c-format
 msgid "FSFS"
 msgstr "FSFS"
 
-#: rc.cpp:516
+#: rc.cpp:522
 #, no-c-format
 msgid "BDB"
 msgstr "BDB"
 
-#: rc.cpp:519
+#: rc.cpp:525
 #, no-c-format
 msgid "Select type of storage"
 msgstr "ਸੰਭਾਲਣ ਕਿਸਮ ਦੀ ਚੋਣ ਕਰੋ"
 
-#: rc.cpp:522
+#: rc.cpp:528
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr ""
 
-#: rc.cpp:525
+#: rc.cpp:531
 #, no-c-format
 msgid "Path to repository:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਲਈ ਮਾਰਗ:"
 
-#: rc.cpp:528
+#: rc.cpp:534
 #, no-c-format
 msgid "Disable fsync at commit (BDB only)"
 msgstr ""
 
-#: rc.cpp:532
+#: rc.cpp:538
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
 msgstr ""
 
-#: rc.cpp:536
+#: rc.cpp:542
 #, no-c-format
 msgid "Create main folders"
 msgstr "ਮੁੱਖ ਫੋਲਡਰ ਬਣਾਓ"
 
-#: rc.cpp:540
+#: rc.cpp:546
 #, no-c-format
 msgid "Create trunk, tags and branches folder"
 msgstr "ਟਰੰਕ, ਟੈਗ ਅਤੇ ਬਰਾਂਚ ਫੋਲਡਰ ਬਣਾਓ"
 
-#: rc.cpp:543
+#: rc.cpp:549
 #, no-c-format
 msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
 
-#: rc.cpp:546
+#: rc.cpp:552
 #, no-c-format
 msgid "Compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:549
+#: rc.cpp:555
 #, no-c-format
 msgid "Is created repository compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:552
+#: rc.cpp:558
 #, no-c-format
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only usefull when svnqt is running with subversion 1.4 or above."
 msgstr ""
 
-#: rc.cpp:555
+#: rc.cpp:561
 #, no-c-format
 msgid "Compatible to subversion prior 1.5"
 msgstr ""
 
-#: rc.cpp:558
+#: rc.cpp:564
 #, no-c-format
 msgid "Is created repository compatible to subversion prior 1.5"
 msgstr ""
 
-#: rc.cpp:561
+#: rc.cpp:567
 #, no-c-format
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.5. This "
 "is only usefull when svnqt is running with subversion 1.5 or above."
 msgstr ""
 
-#: rc.cpp:564
+#: rc.cpp:570
 #, no-c-format
 msgid "Line"
 msgstr "ਰੇਖਾ"
 
-#: rc.cpp:567
+#: rc.cpp:573
 #, no-c-format
 msgid "Revision"
 msgstr "ਰੀਵਿਜ਼"
 
-#: rc.cpp:570 rc.cpp:692 rc.cpp:714 rc.cpp:785
+#: rc.cpp:576 rc.cpp:698 rc.cpp:720 rc.cpp:791
 #, no-c-format
 msgid "Date"
 msgstr "ਮਿਤੀ"
 
-#: rc.cpp:573 rc.cpp:779
+#: rc.cpp:579 rc.cpp:785
 #, no-c-format
 msgid "Author"
 msgstr "ਲੇਖਕ"
 
-#: rc.cpp:576
+#: rc.cpp:582
 #, no-c-format
 msgid "Content"
 msgstr "ਸਮੱਗਰੀ"
 
-#: rc.cpp:579 svnfrontend/svnactions.cpp:2165 svnfrontend/svnactions.cpp:2190
+#: rc.cpp:585 svnfrontend/svnactions.cpp:2165 svnfrontend/svnactions.cpp:2190
 #, no-c-format
 msgid "Copy / Move"
 msgstr "ਨਕਲ / ਭੇਜੋ"
 
-#: rc.cpp:582
+#: rc.cpp:588
 #, no-c-format
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">ਨਾਂ-ਤਬਦੀਲ</p>"
 
-#: rc.cpp:585
+#: rc.cpp:591
 #, no-c-format
 msgid "this long text"
 msgstr "ਇਹ ਪਾਠ ਲੰਮਾ ਹੈ"
 
-#: rc.cpp:588
+#: rc.cpp:594
 #, no-c-format
 msgid "to"
 msgstr "ਵੱਲ"
 
-#: rc.cpp:591
+#: rc.cpp:597
 #, no-c-format
 msgid "/there/"
 msgstr "/ਏਥੇ/"
 
-#: rc.cpp:594 main.cpp:40
+#: rc.cpp:600 main.cpp:40
 #, no-c-format
 msgid "Force operation"
 msgstr "ਧੱਕੇ ਨਾਲ ਕਾਰਵਾਈ"
 
-#: rc.cpp:598
+#: rc.cpp:604
 #, no-c-format
 msgid "MergeSettings"
 msgstr "ਮਿਲਾਨ ਸੈਟਿੰਗ"
 
-#: rc.cpp:601
+#: rc.cpp:607
 #, no-c-format
 msgid "Source 1:"
 msgstr "ਸਰੋਤ 1:"
 
-#: rc.cpp:604
+#: rc.cpp:610
 #, no-c-format
 msgid "Source 2:"
 msgstr "ਸਰੋਤ 2:"
 
-#: rc.cpp:607
+#: rc.cpp:613
 #, no-c-format
 msgid "Output to:"
 msgstr "ਆਉਟਪੁੱਟ:"
 
-#: rc.cpp:610
+#: rc.cpp:616
 #, no-c-format
 msgid "Force delete on modified/unversioned"
 msgstr "ਸੋਧ/ਬਿਨ-ਵਰਜਨ ਉੱਤੇ ਧੱਕੇ ਨਾਲ ਹਟਾਓ"
 
-#: rc.cpp:614
+#: rc.cpp:620
 #, no-c-format
 msgid "Handle unrelated as related items"
 msgstr ""
 
-#: rc.cpp:617
+#: rc.cpp:623
 #, no-c-format
 msgid "Just dry run without modifications"
 msgstr "ਸੋਧ ਤੋਂ ਬਿਨਾਂ ਹੀ ਸਿਰਫ਼ ਚਲਾਓ"
 
-#: rc.cpp:621 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:113
+#: rc.cpp:627 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:113
 #: ksvnwidgets/depthselector.cpp:43
 #, no-c-format
 msgid "Recursive"
 msgstr "ਲਗਾਤਾਰ"
 
-#: rc.cpp:625
+#: rc.cpp:631
 #, no-c-format
 msgid "Use external merge not subversions merge"
 msgstr ""
 
-#: rc.cpp:628
+#: rc.cpp:634
 #, no-c-format
 msgid "Dump repo"
 msgstr "ਰਿਪੋ ਡੰਪ"
 
-#: rc.cpp:631
+#: rc.cpp:637
 #, no-c-format
 msgid "Repository to dump:"
 msgstr "ਡੰਪ ਲਈ ਰਿਪੋਜ਼ਟਰੀ:"
 
-#: rc.cpp:634
+#: rc.cpp:640
 #, no-c-format
 msgid "Dump into:"
 msgstr "ਇੱਥੇ ਡੰਪ:"
 
-#: rc.cpp:637
+#: rc.cpp:643
 #, no-c-format
 msgid "incremental Dump"
 msgstr "ਆਵਰਤੀ ਡੰਪ"
 
-#: rc.cpp:641
+#: rc.cpp:647
 #, no-c-format
 msgid "Use deltas"
 msgstr "ਡੈਲਟਾ ਵਰਤੋਂ"
 
-#: rc.cpp:645
+#: rc.cpp:651
 #, no-c-format
 msgid "Dump revision range"
 msgstr "ਡੰਪ ਰੀਵਿਜ਼ਨ ਰੇਜ਼"
 
-#: rc.cpp:649
+#: rc.cpp:655
 #, no-c-format
 msgid "End revision:"
 msgstr "ਆਖਰੀ ਰੀਵਿਜ਼ਨ:"
 
-#: rc.cpp:652
+#: rc.cpp:658
 #, no-c-format
 msgid "Start revision:"
 msgstr "ਸ਼ੁਰੂਆਤ ਰੀਵਿਜ਼ਨ:"
 
-#: rc.cpp:655
+#: rc.cpp:661
 #, no-c-format
 msgid "-1 for Head"
 msgstr "ਹੈੱਡ ਲਈ -1"
 
-#: rc.cpp:658
+#: rc.cpp:664
 #, no-c-format
 msgid "-1 for Start"
 msgstr "ਸ਼ੁਰੂ ਲਈ -1"
 
-#: rc.cpp:661
+#: rc.cpp:667
 #, no-c-format
 msgid "Edit property"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੋਧ"
 
-#: rc.cpp:672
+#: rc.cpp:678
 #, no-c-format
 msgid "Property name:"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਨਾਂ:"
 
-#: rc.cpp:675
+#: rc.cpp:681
 #, no-c-format
 msgid "Property value:"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਮੁੱਲ:"
 
-#: rc.cpp:680
+#: rc.cpp:686
 #, no-c-format
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 
-#: rc.cpp:683 svnfrontend/svnactions.cpp:1432
-#: svnfrontend/kdesvnfilelist.cpp:2152 svnfrontend/kdesvnfilelist.cpp:2332
-#: svnfrontend/kdesvnfilelist.cpp:2350 svnfrontend/kdesvnfilelist.cpp:2376
-#: svnfrontend/kdesvnfilelist.cpp:2946 svnfrontend/kdesvnfilelist.cpp:2988
+#: rc.cpp:689 svnfrontend/svnactions.cpp:1432
+#: svnfrontend/kdesvnfilelist.cpp:2153 svnfrontend/kdesvnfilelist.cpp:2333
+#: svnfrontend/kdesvnfilelist.cpp:2351 svnfrontend/kdesvnfilelist.cpp:2377
+#: svnfrontend/kdesvnfilelist.cpp:2947 svnfrontend/kdesvnfilelist.cpp:2989
 #, no-c-format
 msgid "Revisions"
 msgstr "ਰੀਵਿਜ਼ਨ"
 
-#: rc.cpp:686 svnfrontend/fronthelpers/rangeinput_impl.cpp:186
+#: rc.cpp:692 svnfrontend/fronthelpers/rangeinput_impl.cpp:186
 #, no-c-format
 msgid "Start with revision"
 msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ ਸ਼ੁਰੂ"
 
-#: rc.cpp:689
+#: rc.cpp:695
 #, no-c-format
 msgid "N&umber"
 msgstr "ਨੰਬਰ(&u)"
 
-#: rc.cpp:696
+#: rc.cpp:702
 #, no-c-format
 msgid "S&TART"
 msgstr "ਸ਼ੁਰੂ(&T)"
 
-#: rc.cpp:699 rc.cpp:721
+#: rc.cpp:705 rc.cpp:727
 #, no-c-format
 msgid "HEAD"
 msgstr "ਹੈੱਡ"
 
-#: rc.cpp:702 rc.cpp:724
+#: rc.cpp:708 rc.cpp:730
 #, no-c-format
 msgid "WORKING"
 msgstr "ਵਰਕਿੰਗ"
 
-#: rc.cpp:705 rc.cpp:727
+#: rc.cpp:711 rc.cpp:733
 #, no-c-format
 msgid "Select current working copy changes"
 msgstr "ਮੌਜੂਦਾ ਵਰਕਿੰਗ ਨਕਲ ਤਬਦੀਲੀਆਂ ਚੁਣੋ"
 
-#: rc.cpp:708
+#: rc.cpp:714
 #, no-c-format
 msgid "Stop with revision"
 msgstr "ਰੀਵਿਜ਼ਨ ਨਾਲ ਰੋਕੋ"
 
-#: rc.cpp:711
+#: rc.cpp:717
 #, no-c-format
 msgid "Number"
 msgstr "ਨੰਬਰ"
 
-#: rc.cpp:718
+#: rc.cpp:724
 #, no-c-format
 msgid "START"
 msgstr "ਸ਼ੁਰੂ"
 
-#: rc.cpp:730
+#: rc.cpp:736
 #, no-c-format
 msgid "Checkout info"
 msgstr "ਚੈਕਆਉਟ ਜਾਣਕਾਰੀ"
 
-#: rc.cpp:733
+#: rc.cpp:739
 #, no-c-format
 msgid "Select target directory:"
 msgstr "ਨਿਸ਼ਾਨਾ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ:"
 
-#: rc.cpp:736
+#: rc.cpp:742
 #, no-c-format
 msgid "Enter URL:"
 msgstr "URL ਦਿਓ:"
 
-#: rc.cpp:739
+#: rc.cpp:745
 #, no-c-format
 msgid "Append source url name to subfolder"
 msgstr "ਅਧੀਨ-ਫੋਲਡਰ ਲਈ ਸਰੋਤ URL ਨਾਂ ਜੋੜ੍ਹੋ"
 
-#: rc.cpp:742 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
+#: rc.cpp:748 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
 #, no-c-format
 msgid "Overwrite existing"
 msgstr ""
 
-#: rc.cpp:746 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
+#: rc.cpp:752 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
 #, fuzzy, no-c-format
 msgid "May existing unversioned items ovewritten"
 msgstr "ਕੋਈ ਬਿਨਾਂ-ਵਰਜਨ ਇਕਾਈ ਨਹੀਂ ਲੱਭੀ ਹੈ।"
 
-#: rc.cpp:749
+#: rc.cpp:755
 #, fuzzy, no-c-format
 msgid "Ignore externals"
 msgstr "ਅੰਦਰੂਨੀ"
 
-#: rc.cpp:752
+#: rc.cpp:758
 #, no-c-format
 msgid "Ignore externals while operation"
 msgstr ""
 
-#: rc.cpp:755
+#: rc.cpp:761
 #, no-c-format
 msgid "Open after job"
 msgstr "ਕਾਰਵਾਈ ਬਾਅਦ ਖੋਲ੍ਹੋ"
 
-#: rc.cpp:758
+#: rc.cpp:764
 #, fuzzy, no-c-format
 msgid "RevisionButton"
 msgstr "ਰੀਵਿਜ਼"
 
-#: rc.cpp:761
+#: rc.cpp:767
 #, no-c-format
 msgid "-1"
 msgstr ""
 
-#: rc.cpp:764 svnfrontend/svnlogdlgimp.cpp:266
+#: rc.cpp:770 svnfrontend/svnlogdlgimp.cpp:266
 #, no-c-format
 msgid "SVN Log"
 msgstr "SVN ਲਾਗ"
 
-#: rc.cpp:767
+#: rc.cpp:773
 #, fuzzy, no-c-format
 msgid "Get Logs"
 msgstr "ਕੋਈ ਲਾਗ ਨਹੀਂ ਮਿਲਿਆ"
 
-#: rc.cpp:770
+#: rc.cpp:776
 #, fuzzy, no-c-format
 msgid "End revision"
 msgstr "ਆਖਰੀ ਰੀਵਿਜ਼ਨ:"
 
-#: rc.cpp:773
+#: rc.cpp:779
 #, fuzzy, no-c-format
 msgid "Start revision"
 msgstr "ਸ਼ੁਰੂਆਤ ਰੀਵਿਜ਼ਨ:"
 
-#: rc.cpp:776
+#: rc.cpp:782
 #, no-c-format
 msgid "1"
 msgstr ""
 
-#: rc.cpp:782
+#: rc.cpp:788
 #, no-c-format
 msgid "Revison"
 msgstr "ਰੀਵਿਜ਼ਨ"
 
-#: rc.cpp:788
+#: rc.cpp:794
 #, no-c-format
 msgid "Message"
 msgstr "ਸੁਨੇਹਾ"
 
-#: rc.cpp:791
+#: rc.cpp:797
 #, no-c-format
 msgid "Select in first column revisions for diff"
 msgstr "ਅੰਤਰ ਲਈ ਪਹਿਲਾਂ ਕਾਲਮ ਰੀਵਿਜ਼ਨ ਵਿੱਚੋਂ ਚੁਣੋ"
 
-#: rc.cpp:794 rc.cpp:844 ksvnwidgets/logmsg_impl.cpp:83
+#: rc.cpp:800 rc.cpp:850 ksvnwidgets/logmsg_impl.cpp:83
 #: ksvnwidgets/logmsg_impl.cpp:110
 #, no-c-format
 msgid "Action"
 msgstr "ਕਾਰਵਾਈ"
 
-#: rc.cpp:797
+#: rc.cpp:803
 #, no-c-format
 msgid "Item"
 msgstr "ਇਕਾਈ"
 
-#: rc.cpp:800
+#: rc.cpp:806
 #, no-c-format
 msgid "Copy from"
 msgstr "ਇੱਥੋਂ ਨਕਲ"
 
-#: rc.cpp:803
+#: rc.cpp:809
 #, no-c-format
 msgid "Contextmenu on item for more operations"
 msgstr ""
 
-#: rc.cpp:806 svnfrontend/svnlogdlgimp.cpp:610
+#: rc.cpp:812 svnfrontend/svnlogdlgimp.cpp:610
 #, no-c-format
 msgid "Diff previous"
 msgstr "ਪੁਰਾਣਾ ਅੰਤਰ"
 
-#: rc.cpp:810 svnfrontend/kdesvnfilelist.cpp:396
+#: rc.cpp:816 svnfrontend/kdesvnfilelist.cpp:396
 #, no-c-format
 msgid "Diff revisions"
 msgstr "ਰੀਵਿਜ਼ਨ ਅੰਤਰ"
 
-#: rc.cpp:814
+#: rc.cpp:820
 #, no-c-format
 msgid "Select second revision with right mouse button"
 msgstr "ਸੱਜੇ ਮਾਊਂਸ ਬਟਨ ਨਾਲ ਦੂਜਾ ਰੀਵਿਜ਼ਨ ਚੁਣੋ"
 
-#: rc.cpp:817
+#: rc.cpp:823
 #, no-c-format
 msgid "List entries"
 msgstr "ਇੰਦਰਾਜ਼ ਲਿਸਟ"
 
-#: rc.cpp:821 svnfrontend/svnlogdlgimp.cpp:608
+#: rc.cpp:827 svnfrontend/svnlogdlgimp.cpp:608
 #, no-c-format
 msgid "Annotate"
 msgstr ""
 
-#: rc.cpp:829
+#: rc.cpp:835
 #, no-c-format
 msgid "leftpane"
 msgstr ""
 
-#: rc.cpp:832 svnfrontend/svnactions.cpp:684
+#: rc.cpp:838 svnfrontend/svnactions.cpp:684
 #: svnfrontend/kdesvnfilelist.cpp:210
 #, no-c-format
 msgid "Name"
 msgstr "ਨਾਂ"
 
-#: rc.cpp:835
+#: rc.cpp:841
 #, no-c-format
 msgid "Logmessage"
 msgstr "ਲਾਗ-ਸੁਨੇਹਾ"
 
-#: rc.cpp:838
+#: rc.cpp:844
 #, no-c-format
 msgid "Review affected items"
 msgstr "ਪਰਭਾਵਿਤ ਇਕਾਈਆਂ ਦੀ ਪੜਤਾਲ"
 
-#: rc.cpp:841
+#: rc.cpp:847
 #, no-c-format
 msgid "Entry"
 msgstr "ਇੰਦਰਾਜ਼"
 
-#: rc.cpp:847
+#: rc.cpp:853
 #, fuzzy, no-c-format
 msgid "Hide new items"
 msgstr "ਨਵੀਆਂ ਇਕਾਈਆਂ ਚੁਣੋ"
 
-#: rc.cpp:850
+#: rc.cpp:856
 #, no-c-format
 msgid "Select new items"
 msgstr "ਨਵੀਆਂ ਇਕਾਈਆਂ ਚੁਣੋ"
 
-#: rc.cpp:853
+#: rc.cpp:859
 #, no-c-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr "ਸਭ ਨਵੀਆਂ ਬਣਾਓ ਮਤਲਬ ਕਿ ਜੋੜਨ ਅਤੇ ਕਮਿਟ ਕਰਨ ਲਈ ਬਿਨ-ਵਰਜਨ ਇਕਾਈਆਂ ਹਨ।"
 
-#: rc.cpp:856
+#: rc.cpp:862
 #, no-c-format
 msgid "Unselect new items"
 msgstr "ਨਵੀਆਂ ਇਕਾਈਆਂ ਅਣ-ਚੁਣੀਆਂ"
 
-#: rc.cpp:859
+#: rc.cpp:865
 #, no-c-format
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr ""
 
-#: rc.cpp:862
+#: rc.cpp:868
 #, no-c-format
 msgid "Diff highlighted item"
 msgstr "ਉਭਾਰੀ ਇਕਾਈ ਅੰਤਰ"
 
-#: rc.cpp:865
+#: rc.cpp:871
 #, no-c-format
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
 
-#: rc.cpp:868
+#: rc.cpp:874
 #, no-c-format
 msgid "Enter a log message"
 msgstr "ਇੱਕ ਲਾਗ ਸੁਨੇਹਾ ਦਿਓ"
 
-#: rc.cpp:871
+#: rc.cpp:877
 #, no-c-format
 msgid "Or insert one of the last:"
 msgstr "ਜਾਂ ਆਖਰੀ ਵਿੱਚੋਂ ਦਿਓ:"
 
-#: rc.cpp:875
+#: rc.cpp:881
 #, no-c-format
 msgid "Last used log messages"
 msgstr "ਆਖਰੀ ਵਰਤਿਆ ਲਾਗ ਸੁਨੇਹਾ"
 
-#: rc.cpp:878
+#: rc.cpp:884
 #, no-c-format
 msgid "Keep locks"
 msgstr ""
 
-#: rc.cpp:881
+#: rc.cpp:887
 #, no-c-format
 msgid "If checked commit will not release locks."
 msgstr ""
 
-#: rc.cpp:884 rc.cpp:954
+#: rc.cpp:890 rc.cpp:960
 #, no-c-format
 msgid "Form1"
 msgstr "Form1"
 
-#: rc.cpp:887
+#: rc.cpp:893
 #, no-c-format
 msgid "Empty Depth"
 msgstr ""
 
-#: rc.cpp:890
+#: rc.cpp:896
 #, no-c-format
 msgid "Files Depth"
 msgstr ""
 
-#: rc.cpp:893
+#: rc.cpp:899
 #, no-c-format
 msgid "Immediate Depth"
 msgstr ""
 
-#: rc.cpp:896
+#: rc.cpp:902
 #, no-c-format
 msgid "Infinity Depth (recurse)"
 msgstr ""
 
-#: rc.cpp:899
+#: rc.cpp:905
 #, fuzzy, no-c-format
 msgid "Select depth of operation"
 msgstr "ਸੰਭਾਲਣ ਕਿਸਮ ਦੀ ਚੋਣ ਕਰੋ"
 
-#: rc.cpp:902
+#: rc.cpp:908
 #, no-c-format
 msgid ""
 "<b>Kind of depth</b>:\n"
@@ -1429,48 +1439,48 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:920 svnfrontend/ccontextlistener.cpp:67
+#: rc.cpp:926 svnfrontend/ccontextlistener.cpp:67
 #: svnfrontend/svnactions.cpp:1740
 #, no-c-format
 msgid "Revert"
 msgstr "ਮੁੜ-ਪ੍ਰਾਪਤ"
 
-#: rc.cpp:923
+#: rc.cpp:929
 #, no-c-format
 msgid "Really revert these entries to pristine state?"
 msgstr ""
 
-#: rc.cpp:926
+#: rc.cpp:932
 #, no-c-format
 msgid "Authentication"
 msgstr "ਪਰਮਾਣਕਿਤਾ"
 
-#: rc.cpp:929
+#: rc.cpp:935
 #, no-c-format
 msgid "Enter authentification info for"
 msgstr "ਇਸ ਲਈ ਪਰਮਾਣਕਿਤਾ ਦਿਓ"
 
-#: rc.cpp:932
+#: rc.cpp:938
 #, no-c-format
 msgid "Password:"
 msgstr "ਗੁਪਤ-ਕੋਡ:"
 
-#: rc.cpp:935
+#: rc.cpp:941
 #, no-c-format
 msgid "Username:"
 msgstr "ਉਪਭੋਗੀ ਨਾਂ:"
 
-#: rc.cpp:938
+#: rc.cpp:944
 #, no-c-format
 msgid "Store password"
 msgstr "ਗੁਪਤ-ਕੋਡ ਸੰਭਾਲੋ"
 
-#: rc.cpp:957
+#: rc.cpp:963
 #, fuzzy, no-c-format
 msgid "Select encoding:"
 msgstr "ਰੀਵਿਜ਼ਨ ਚੁਣੋ"
 
-#: rc.cpp:960
+#: rc.cpp:966
 #, no-c-format
 msgid "Default utf-8"
 msgstr ""
@@ -1932,12 +1942,12 @@ msgstr "ਨਾ-ਮੁਕੰਮਲ"
 msgid "Property modified"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਸੋਧੀ ਗਈ"
 
-#: svnfrontend/fillcachethread.cpp:92
+#: svnfrontend/fillcachethread.cpp:96
 #, fuzzy
 msgid "Filling cache canceled."
 msgstr "ਅੱਪਡੇਟ ਲਈ ਜਾਂਚ ਬੈਕ-ਗਰਾਊਂਡ 'ਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: svnfrontend/fillcachethread.cpp:107
+#: svnfrontend/fillcachethread.cpp:111
 #, fuzzy
 msgid "Cache filled up to revision %1"
 msgstr "ਰੀਵਿਜ਼ਨ %1 ਚੈੱਕਆਉਟ ਕੀਤਾ ਹੈ।"
@@ -2051,8 +2061,8 @@ msgid "Save tree as png"
 msgstr "ਲੜੀ ਨੂੰ png ਵਾਂਗ ਸੰਭਾਲੋ"
 
 #: svnfrontend/graphtree/revgraphview.cpp:947 svnfrontend/commandexec.cpp:215
-#: svnfrontend/commandexec.cpp:341 svnfrontend/kdesvnfilelist.cpp:1043
-#: svnfrontend/kdesvnfilelist.cpp:1069
+#: svnfrontend/commandexec.cpp:341 svnfrontend/kdesvnfilelist.cpp:1044
+#: svnfrontend/kdesvnfilelist.cpp:1070
 msgid "SVN Error"
 msgstr "SVN ਗਲਤੀ"
 
@@ -2558,11 +2568,11 @@ msgstr "ਕੇਹੜੀਆਂ ਫਾਇਲਾਂ ਜਾਂ ਡਾਇਰੈਕਟ
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr "<center>ਇੰਦਰਾਜ਼<br>%1<br> ਵਰਜਨ ਵਿੱਚ ਹੈ - ਬਰੇਕ।</center>"
 
-#: svnfrontend/svnactions.cpp:1535 svnfrontend/kdesvnfilelist.cpp:1997
+#: svnfrontend/svnactions.cpp:1535 svnfrontend/kdesvnfilelist.cpp:1998
 msgid "Really delete these entries?"
 msgstr "ਕੀ ਇਹ ਇੰਦਰਾਜ਼ ਹਟਾਉਣੇ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: svnfrontend/svnactions.cpp:1535 svnfrontend/kdesvnfilelist.cpp:1997
+#: svnfrontend/svnactions.cpp:1535 svnfrontend/kdesvnfilelist.cpp:1998
 msgid "Delete from repository"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ 'ਚੋਂ ਹਟਾਓ"
 
@@ -2691,7 +2701,7 @@ msgstr ""
 msgid "Merge-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2098 svnfrontend/kdesvnfilelist.cpp:1736
+#: svnfrontend/svnactions.cpp:2098 svnfrontend/kdesvnfilelist.cpp:1737
 msgid "Merge"
 msgstr "ਮਿਲਾਨ"
 
@@ -3045,7 +3055,7 @@ msgstr ""
 msgid "Merge..."
 msgstr "ਮਿਲਾਨ..."
 
-#: svnfrontend/kdesvnfilelist.cpp:380 svnfrontend/kdesvnfilelist.cpp:1504
+#: svnfrontend/kdesvnfilelist.cpp:380 svnfrontend/kdesvnfilelist.cpp:1505
 msgid "Open With..."
 msgstr "ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ..."
 
@@ -3082,8 +3092,8 @@ msgstr "ਫੋਲਡਰ"
 msgid "Closes all branches of the file tree"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:405 svnfrontend/kdesvnfilelist.cpp:1012
-#: svnfrontend/kdesvnfilelist.cpp:3148
+#: svnfrontend/kdesvnfilelist.cpp:405 svnfrontend/kdesvnfilelist.cpp:1013
+#: svnfrontend/kdesvnfilelist.cpp:3149
 #, fuzzy
 msgid "Update log cache"
 msgstr "ਹੈੱਡ ਲਈ ਅੱਪਡੇਟ"
@@ -3097,105 +3107,105 @@ msgstr "ਮੌਜੂਦਾ ਰਿਪੋਜ਼ਟਰੀ ਮਾਰਗ ਚੈੱਕ
 msgid "Networked URL to open but networking is disabled!"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:1014 svnfrontend/kdesvnfilelist.cpp:3143
+#: svnfrontend/kdesvnfilelist.cpp:1015 svnfrontend/kdesvnfilelist.cpp:3144
 #, fuzzy
 msgid "Stop updating the logcache"
 msgstr "ਹੈੱਡ ਲਈ ਅੱਪਡੇਟ"
 
-#: svnfrontend/kdesvnfilelist.cpp:1069
+#: svnfrontend/kdesvnfilelist.cpp:1070
 #, fuzzy
 msgid "Could not retrieve repository of working copy."
 msgstr "ਵਰਕਿੰਗ ਨਕਲ ਲਈ ਰਿਪੋਜ਼ਟਰੀ ਖੋਲ੍ਹੋ"
 
-#: svnfrontend/kdesvnfilelist.cpp:1105
+#: svnfrontend/kdesvnfilelist.cpp:1106
 msgid "Failed: %1 %2"
 msgstr "ਫੇਲ੍ਹ ਹੋਇਆ: %1 %2"
 
-#: svnfrontend/kdesvnfilelist.cpp:1176
+#: svnfrontend/kdesvnfilelist.cpp:1177
 msgid "Cannot import into multiple targets!"
 msgstr "ਬਹੁਤੇ ਨਿਸ਼ਾਨਿਆਂ ਲਈ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ!"
 
-#: svnfrontend/kdesvnfilelist.cpp:1192
+#: svnfrontend/kdesvnfilelist.cpp:1193
 msgid "Cannot import into remote targets!"
 msgstr "ਰਿਮੋਟ ਨਿਸ਼ਾਨੇ ਲਈ ਆਯਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ!"
 
-#: svnfrontend/kdesvnfilelist.cpp:1211 svnfrontend/kdesvnfilelist.cpp:1215
+#: svnfrontend/kdesvnfilelist.cpp:1212 svnfrontend/kdesvnfilelist.cpp:1216
 msgid "Import log"
 msgstr "ਲਾਗ ਆਯਾਤ"
 
-#: svnfrontend/kdesvnfilelist.cpp:1869
+#: svnfrontend/kdesvnfilelist.cpp:1870
 msgid "Move Here"
 msgstr "ਇੱਥੇ ਭੇਜੋ"
 
-#: svnfrontend/kdesvnfilelist.cpp:1870
+#: svnfrontend/kdesvnfilelist.cpp:1871
 msgid "Copy Here"
 msgstr "ਇੱਥੇ ਨਕਲ"
 
-#: svnfrontend/kdesvnfilelist.cpp:1976
+#: svnfrontend/kdesvnfilelist.cpp:1977
 msgid "Nothing selected for delete"
 msgstr "ਹਟਾਉਣ ਲਈ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2035
+#: svnfrontend/kdesvnfilelist.cpp:2036
 msgid "Please wait until job is finished"
 msgstr "ਕਿਰਪਾ ਕਰਕੇ ਕੰਮ ਖਤਮ ਹੋਣ ਤੱਕ ਉਡੀਕ ਕਰੋ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2055
+#: svnfrontend/kdesvnfilelist.cpp:2056
 msgid "Nothing selected for lock"
 msgstr "ਤਾਲੇ ਲਈ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2060
+#: svnfrontend/kdesvnfilelist.cpp:2061
 msgid "Lock message"
 msgstr "ਲਾਕ ਸੁਨੇਹਾ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2065
+#: svnfrontend/kdesvnfilelist.cpp:2066
 msgid "Steal lock?"
 msgstr "ਕੀ ਲਾਕ ਚੋਰੀ ਕਰਨਾ ਹੈ?"
 
-#: svnfrontend/kdesvnfilelist.cpp:2099
+#: svnfrontend/kdesvnfilelist.cpp:2100
 msgid "Nothing selected for unlock"
 msgstr "ਅਣ-ਲਾੱਕ ਲਈ ਕੁਝ ਚੁਣਿਆ ਨਹੀਂ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2102
+#: svnfrontend/kdesvnfilelist.cpp:2103
 msgid "Break lock or ignore missing locks?"
 msgstr "ਲਾਕ ਤੋੜਨਾ ਹੈ ਜਾਂ ਗੁੰਮ ਲਾਕ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨਾ ਹੈ?"
 
-#: svnfrontend/kdesvnfilelist.cpp:2102
+#: svnfrontend/kdesvnfilelist.cpp:2103
 msgid "Unlocking items"
 msgstr "ਇਕਾਈਆਂ ਲਈ ਤਾਲਾ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2281
+#: svnfrontend/kdesvnfilelist.cpp:2282
 msgid "May not make subdirs of a file"
 msgstr "ਇੱਕ ਫਾਇਲ ਲਈ ਸਬ-ਡਾਇ ਨਹੀਂ ਬਣਾਈ ਜਾ ਸਕਦੀ ਹੈ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2305
+#: svnfrontend/kdesvnfilelist.cpp:2306
 msgid "Automatic generated base layout by kdesvn"
 msgstr "kdesvn ਵਲੋਂ ਆਟੋਮੈਟਿਕ ਤਿਆਰ ਆਧਾਰ ਖਾਕਾ ਹੈ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2773
+#: svnfrontend/kdesvnfilelist.cpp:2774
 msgid "Error getting entry to relocate"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:2780
+#: svnfrontend/kdesvnfilelist.cpp:2781
 msgid "Relocate path %1"
 msgstr "ਬਦਲਿਆ ਮਾਰਗ %1"
 
-#: svnfrontend/kdesvnfilelist.cpp:2916
+#: svnfrontend/kdesvnfilelist.cpp:2917
 msgid "Only in working copy possible."
 msgstr "ਸਿਰਫ਼ ਵਰਕਿੰਗ ਨਕਲ 'ਚ ਹੀ ਸੰਭਵ ਹੈ।"
 
-#: svnfrontend/kdesvnfilelist.cpp:2920
+#: svnfrontend/kdesvnfilelist.cpp:2921
 msgid "Only on single folder possible"
 msgstr "ਇੱਕ ਫੋਲਡਰ ਉੱਤੇ ਹੀ ਸੰਭਵ ਹੈ"
 
-#: svnfrontend/kdesvnfilelist.cpp:2925
+#: svnfrontend/kdesvnfilelist.cpp:2926
 msgid "Sorry - internal error!"
 msgstr "ਅਫਸੋਸ - ਅੰਦਰੂਨੀ ਗਲਤੀ ਹੈ!"
 
-#: svnfrontend/kdesvnfilelist.cpp:3054
+#: svnfrontend/kdesvnfilelist.cpp:3055
 msgid "Unfold tree"
 msgstr ""
 
-#: svnfrontend/kdesvnfilelist.cpp:3054
+#: svnfrontend/kdesvnfilelist.cpp:3055
 msgid "Unfold all folder"
 msgstr ""
 

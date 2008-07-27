@@ -257,7 +257,7 @@ void Logmsg_impl::initHistory()
  */
 void Logmsg_impl::saveHistory(bool canceld)
 {
-    if (m_LogEdit->text().length()==0) return;
+    if (m_LogEdit->text().length()==0||m_LogEdit->text().length()>512) return;
     /// @todo make static threadsafe
     if (!canceld) {
         QValueList<QString>::iterator it;

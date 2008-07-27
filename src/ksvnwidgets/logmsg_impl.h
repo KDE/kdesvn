@@ -83,6 +83,7 @@ protected slots:
     virtual void slotDiffSelected();
     virtual void slotMarkUnversioned();
     virtual void hideNewItems(bool);
+    virtual void insertFile();
 
 protected:
     static QStringList sLogHistory;
@@ -95,6 +96,7 @@ protected:
     void hideButtons(bool);
     void markUnversioned(bool mark);
     void checkSplitterSize();
+    virtual void insertFile(const QString&);
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 };

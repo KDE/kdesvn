@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>357</width>
-    <height>358</height>
+    <width>370</width>
+    <height>366</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -23,6 +23,16 @@
      </property>
      <property name="shortcut" >
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_log_cache_on_open" >
+     <property name="toolTip" >
+      <string>Start refresh the logcache for repository when networking enabled</string>
+     </property>
+     <property name="text" >
+      <string>Start fill log cache on open</string>
      </property>
     </widget>
    </item>
@@ -119,6 +129,16 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="kcfg_use_password_cache" >
+     <property name="toolTip" >
+      <string>Use an internal password cache</string>
+     </property>
+     <property name="text" >
+      <string>Use internal password cache</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QCheckBox" name="kcfg_log_follows_nodes" >
      <property name="text" >
       <string>Log follows node changes</string>
@@ -171,8 +191,8 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
     </widget>
    </item>
    <item>
-    <widget class="KIntNumInput" name="kcfg_maximum_displayed_logs" >
-     <property name="label" >
+    <widget class="KIntNumInput" native="1" name="kcfg_maximum_displayed_logs" >
+     <property name="label" stdset="0" >
       <string>Maximum displayed logs when full log (0 for no limit)</string>
      </property>
      <property name="minValue" stdset="0" >
@@ -204,7 +224,7 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
   <customwidget>
    <class>KIntNumInput</class>
    <extends>QWidget</extends>
-   <header>knuminput.h</header>
+   <header>kintnuminput.h</header>
   </customwidget>
  </customwidgets>
  <includes>

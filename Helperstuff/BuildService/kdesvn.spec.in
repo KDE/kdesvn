@@ -14,6 +14,7 @@ Requires: subversion >= 1.3.0
 Requires: /usr/bin/dot
 BuildRequires: cmake >= 2.4
 BuildRequires: gcc-c++
+BuildPreReq: sqlite-devel
 BuildRequires: subversion-devel
 
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0

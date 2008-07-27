@@ -109,7 +109,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     return _r;
 }
 
-bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end)
+bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool checkHead)
 {
 #if QT_VERSION < 0x040000
     if (!m_Database) {
@@ -129,8 +129,10 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end)
     long long icount=0;
 
     svn::Revision _latest=latestCachedRev();
-    qDebug("Latest cached rev: %i",_latest.revnum());
-    if (_latest.revnum()>=latestHeadRev().revnum()) {
+//    qDebug("Latest cached rev: %i",_latest.revnum());
+//    qDebug("End revision is: %s",end.toString().TOUTF8().data());
+
+    if (checkHead && _latest.revnum()>=latestHeadRev().revnum()) {
         return true;
     }
 
@@ -146,20 +148,21 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end)
     svn::Revision _rstart=_latest.revnum()+1;
     svn::Revision _rend = end;
     if (_rend==svn::Revision::UNDEFINED) {
+//        qDebug("Setting end to Head");
         _rend=svn::Revision::HEAD;
     }
     // no catch - exception should go outside.
     if (_rstart==0){
         _rstart = 1;
     }
-    qDebug("Getting log %s -> %s",_rstart.toString().TOUTF8().data(),_rend.toString().TOUTF8().data());
+//    qDebug("Getting log %s -> %s",_rstart.toString().TOUTF8().data(),_rend.toString().TOUTF8().data());
     if (_rend==svn::Revision::HEAD) {
         _rend=latestHeadRev();
     }
 
     if (_rend==svn::Revision::HEAD||_rend.revnum()>_latest.revnum()) {
         LogEntriesMap _internal;
-        qDebug("Retrieving from network.");
+//        qDebug("Retrieving from network.");
         if (!m_Client->log(m_ReposRoot,_rstart,_rend,_internal,svn::Revision::UNDEFINED,true,false)) {
             return false;
         }
@@ -182,7 +185,7 @@ bool svn::cache::ReposLog::fillCache(const svn::Revision&_end)
 {
     svn::Revision end = _end;
     svn::Revision start = latestCachedRev().revnum()+1;
-    return checkFill(start,end);
+    return checkFill(start,end,false);
 }
 
 /*!
@@ -199,7 +202,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     svn::Revision end = _end;
     svn::Revision start = _start;
     if (!noNetwork) {
-        if (!checkFill(start,end)) {
+        if (!checkFill(start,end,true)) {
             return false;
         }
     } else {

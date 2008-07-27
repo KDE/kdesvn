@@ -25,7 +25,7 @@ protected:
     svn::Revision m_latestHead;
     //! internal insert.
     bool _insertLogEntry(const svn::LogEntry&);
-    bool checkFill(svn::Revision&_start,svn::Revision&_end);
+    bool checkFill(svn::Revision&_start,svn::Revision&_end,bool checkHead);
 
 public:
     ReposLog(svn::Client*aClient,const QString&aRepository=QString::null);

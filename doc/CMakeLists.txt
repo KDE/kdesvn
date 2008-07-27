@@ -25,7 +25,7 @@ MACRO (GENBOOK _language_code)
     )
     ADD_CUSTOM_TARGET(${_language_code}_doc
         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}_index.cache.bz2
-        COMMENT "Building doc language ${_language_code}"
+#        COMMENT "Building doc language ${_language_code}"
     )
     ADD_DEPENDENCIES(doc ${_language_code}_doc)
 

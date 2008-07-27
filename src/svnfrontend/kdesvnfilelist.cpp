@@ -629,7 +629,8 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
              slotCheckUpdates();
         }
     }
-    if (Kdesvnsettings::start_log_cache_on_open()) {
+    if (Kdesvnsettings::log_cache_on_open()) {
+        kdDebug()<<"Starting logcache"<<endl;
         m_SvnWrapper->startFillCache(baseUri());
     }
     emit changeCaption(baseUri());

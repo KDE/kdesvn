@@ -95,7 +95,7 @@
       <label>Start check for updates when open working copy</label>
       <default>true</default>
     </entry>
-    <entry key="start_log_cache_on_open" type="Bool">
+    <entry key="log_cache_on_open" type="Bool">
       <label>Start caching latest logs on open or commit</label>
       <default>true</default>
     </entry>
@@ -125,6 +125,10 @@
     </entry>
     <entry key="passwords_in_wallet" type="Bool">
         <label>Store passwords in KDE Wallet instead subversion storage</label>
+        <default>true</default>
+    </entry>
+    <entry key="use_password_cache" type="Bool">
+        <label>Use internal password cache</label>
         <default>true</default>
     </entry>
     <entry key="network_on" type="Bool">

@@ -30,6 +30,11 @@
 #include <kapp.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
+#include <kurlrequesterdlg.h>
+#include <kio/netaccess.h>
+#include <kmessagebox.h>
+#include <kfile.h>
+#include <kurlrequester.h>
 
 #include <qvbox.h>
 #include <qcheckbox.h>
@@ -38,6 +43,7 @@
 #include <qlayout.h>
 #include <qwidget.h>
 #include <qpushbutton.h>
+#include <qfile.h>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -602,4 +608,46 @@ void Logmsg_impl::hideDepth(bool ahide)
 //    if (hide) m_DepthSelector->hide();
 //    else m_DepthSelector->show();
 }
+
+void Logmsg_impl::insertFile(const QString&fname)
+{
+    QFile ifs(fname);
+    if (ifs.open(IO_ReadOnly)) {
+        QTextStream ts(&ifs);
+        QString _content = ts.read();
+        int para,index;
+        m_LogEdit->getCursorPosition(&para,&index);
+        m_LogEdit->insertAt(_content,para,index);
+    }
+}
+
+void Logmsg_impl::insertFile()
+{
+    QString head = i18n("Select textfile for insert");
+    KURLRequesterDlg dlg(QString::null,this,head);
+    dlg.setCaption(head);
+    KFile::Mode mode = static_cast<KFile::Mode>(KFile::File);
+    dlg.urlRequester()->setMode(mode);
+    dlg.urlRequester()->setCaption(head);
+
+    if (dlg.exec()!=QDialog::Accepted) {
+        return;
+    }
+    KURL _url = dlg.selectedURL();
+    if (_url.isEmpty() || !_url.isValid()) {
+        return;
+    }
+    if (_url.isLocalFile()) {
+        insertFile(_url.path());
+    } else {
+        QString tmpFile;
+        if( KIO::NetAccess::download(_url, tmpFile, this) ) {
+            insertFile( tmpFile );
+            KIO::NetAccess::removeTempFile( tmpFile );
+        } else {
+            KMessageBox::error(this, KIO::NetAccess::lastErrorString() );
+        }
+    }
+}
+
 #include "logmsg_impl.moc"

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>559</width>
-            <height>356</height>
+            <width>584</width>
+            <height>368</height>
         </rect>
     </property>
     <property name="caption">
@@ -181,20 +181,12 @@
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>layout4</cstring>
+                <cstring>layout6</cstring>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>m_LogLabel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Or insert one of the last:</string>
-                    </property>
-                </widget>
                 <widget class="KComboBox" row="1" column="0">
                     <item>
                         <property name="text">
@@ -204,11 +196,43 @@
                     <property name="name">
                         <cstring>m_LogHistory</cstring>
                     </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>2</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
                     <property name="duplicatesEnabled">
                         <bool>false</bool>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Last used log messages</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_LogLabel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Or insert one of the last:</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton" row="1" column="1">
+                    <property name="name">
+                        <cstring>m_insert_file_button</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>1</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Insert Textfile</string>
                     </property>
                 </widget>
             </grid>
@@ -295,6 +319,12 @@
         <receiver>LogmessageData</receiver>
         <slot>hideNewItems(bool)</slot>
     </connection>
+    <connection>
+        <sender>m_insert_file_button</sender>
+        <signal>clicked()</signal>
+        <receiver>LogmessageData</receiver>
+        <slot>insertFile()</slot>
+    </connection>
 </connections>
 <slots>
     <slot access="protected">slotHistoryActivated(const QString&amp;)</slot>
@@ -303,6 +333,7 @@
     <slot access="protected">slotDiffSelected()</slot>
     <slot access="protected">slotUnmarkUnversioned()</slot>
     <slot access="protected">hideNewItems(bool)</slot>
+    <slot access="protected">insertFile()</slot>
 </slots>
 <layoutdefaults spacing="2" margin="2"/>
 <includehints>

@@ -30,7 +30,7 @@
 #include <kapplication.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
-#include <kurlrequesterdlg.h>
+#include <kurlrequesterdialog.h>
 #include <kio/netaccess.h>
 #include <kmessagebox.h>
 #include <kfile.h>
@@ -48,6 +48,7 @@
 #include <qpushbutton.h>
 //Added by qt3to4:
 #include <Q3ValueList>
+#include <Q3TextStream>
 #include <qfile.h>
 
 #define MAX_MESSAGE_HISTORY 10
@@ -658,19 +659,17 @@ void Logmsg_impl::hideDepth(bool ahide)
 void Logmsg_impl::insertFile(const QString&fname)
 {
     QFile ifs(fname);
-    if (ifs.open(IO_ReadOnly)) {
-        QTextStream ts(&ifs);
+    if (ifs.open(QIODevice::ReadOnly)) {
+        Q3TextStream ts(&ifs);
         QString _content = ts.read();
-        int para,index;
-        m_LogEdit->getCursorPosition(&para,&index);
-        m_LogEdit->insertAt(_content,para,index);
+        m_LogEdit->textCursor ().insertText(_content);
     }
 }
 
 void Logmsg_impl::insertFile()
 {
     QString head = i18n("Select textfile for insert");
-    KURLRequesterDlg dlg(QString::null,this,head);
+    KUrlRequesterDialog dlg(QString::null,head,this);
     dlg.setCaption(head);
     KFile::Mode mode = static_cast<KFile::Mode>(KFile::File);
     dlg.urlRequester()->setMode(mode);
@@ -679,7 +678,7 @@ void Logmsg_impl::insertFile()
     if (dlg.exec()!=QDialog::Accepted) {
         return;
     }
-    KURL _url = dlg.selectedURL();
+    KUrl _url = dlg.selectedUrl();
     if (_url.isEmpty() || !_url.isValid()) {
         return;
     }

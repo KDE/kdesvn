@@ -96,7 +96,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         //m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
         svn::cache::ReposLog rl(m_Client,reposRoot);
         rl.simpleLog(m_OldHistory,startr,endr,true);
-    } catch (svn::ClientException ce) {
+    } catch (const svn::Exception&ce) {
         kdDebug()<<ce.msg() << endl;
         KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1").arg(ce.msg()));
         return false;

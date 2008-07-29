@@ -196,7 +196,7 @@ void kio_svnProtocol::listDir(const KURL&url)
 
     try {
         dlist = m_pData->m_Svnclient->list(makeSvnUrl(url),rev,rev,svn::DepthImmediates,false);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error(KIO::ERR_CANNOT_ENTER_DIRECTORY,ex);
@@ -236,7 +236,7 @@ void kio_svnProtocol::stat(const KURL& url)
     svn::InfoEntries e;
     try {
          e = m_pData->m_Svnclient->info(s,svn::DepthEmpty,rev,peg);
-    } catch  (svn::ClientException e) {
+    } catch  (const svn::ClientException&e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,ex);
@@ -279,7 +279,7 @@ void kio_svnProtocol::get(const KURL& url)
     KioByteStream dstream(this,url.filename());
     try {
         m_pData->m_Svnclient->cat(dstream,makeSvnUrl(url),rev,rev);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
@@ -301,7 +301,7 @@ void kio_svnProtocol::mkdir(const KURL &url, int)
     svn::Path p(makeSvnUrl(url));
     try {
         m_pData->m_Svnclient->mkdir(p,getDefaultLog());
-    }catch (svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     kdDebug()<<"kio_svn::mkdir finished " << url << endl;
@@ -330,7 +330,7 @@ void kio_svnProtocol::rename(const KURL&src,const KURL&target,bool force)
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->move(makeSvnUrl(src),makeSvnUrl(target),force);
-    }catch (svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     kdDebug()<<"kio_svn::rename finished" <<  endl;
@@ -350,7 +350,7 @@ void kio_svnProtocol::copy(const KURL&src,const KURL&dest,int permissions,bool o
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->copy(makeSvnUrl(src),rev,makeSvnUrl(dest));
-    }catch (svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         error( KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     m_pData->dispProgress=false;
@@ -371,7 +371,7 @@ void kio_svnProtocol::del(const KURL&src,bool isfile)
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->remove(target,false);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         QString ex = e.msg();
         kdDebug()<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,ex);
@@ -394,7 +394,7 @@ bool kio_svnProtocol::checkWc(const KURL&url)
     svn::InfoEntries e;
     try {
         e = m_pData->m_Svnclient->info(url.prettyURL(),svn::DepthEmpty,rev,peg);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
         {
             return false;
@@ -646,7 +646,7 @@ void kio_svnProtocol::update(const KURL&url,int revnumber,const QString&revkind)
         // no unversioned items allowed (second last parameter)
         // sticky depth (last parameter)
         m_pData->m_Svnclient->update(pathes, where,svn::DepthInfinity,false,false,true);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
@@ -658,7 +658,7 @@ void kio_svnProtocol::status(const KURL&wc,bool cR,bool rec)
     try {
         //                                            rec all  up     noign
         dlist = m_pData->m_Svnclient->status(wc.path(),rec?svn::DepthInfinity:svn::DepthEmpty,false,cR,false,where);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
@@ -716,7 +716,7 @@ void kio_svnProtocol::commit(const KURL::List&url)
     svn::Revision nnum=svn::Revision::UNDEFINED;
     try {
         nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,svn::DepthInfinity,false);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     for (unsigned j=0;j<url.count();++j) {
@@ -746,7 +746,7 @@ void kio_svnProtocol::checkout(const KURL&src,const KURL&target,const int rev, c
     svn::Path _target(target.path());
     try {
         m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,svn::DepthInfinity,false,false);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
@@ -761,7 +761,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
         logs = 0;
         try {
             logs = m_pData->m_Svnclient->log(makeSvnUrl(urls[j]),start,end,svn::Revision::UNDEFINED,true,true,0);
-        } catch (svn::ClientException e) {
+        } catch (const svn::ClientException&e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             break;
         }
@@ -808,7 +808,7 @@ void kio_svnProtocol::revert(const KURL::List&l)
     svn::Targets target(list);
     try {
         m_pData->m_Svnclient->revert(target,svn::DepthEmpty);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
@@ -819,7 +819,7 @@ void kio_svnProtocol::wc_switch(const KURL&wc,const KURL&target,bool rec,int rev
     svn::Path wc_path(wc.path());
     try {
         m_pData->m_Svnclient->doSwitch(wc_path,makeSvnUrl(target.url()),where,rec?svn::DepthInfinity:svn::DepthFiles);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
@@ -841,7 +841,7 @@ void kio_svnProtocol::diff(const KURL&uri1,const KURL&uri2,int rnum1,const QStri
     try {
         ex = m_pData->m_Svnclient->diff(svn::Path(tdir.name()),
                                         u1,u2,svn::Path(),r1, r2,rec?svn::DepthInfinity:svn::DepthEmpty,false,false,false);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }

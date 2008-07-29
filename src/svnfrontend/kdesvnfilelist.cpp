@@ -2398,7 +2398,7 @@ bool kdesvnfilelist::refreshItem(FileListViewItem*item)
     }
     try {
         item->setStat(svnclient()->singleStatus(item->fullName(),false,m_pList->m_remoteRevision));
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         item->setStat(new svn::Status());
         return false;
     }

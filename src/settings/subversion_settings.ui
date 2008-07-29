@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>370</width>
-    <height>366</height>
+    <height>384</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -191,8 +191,8 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
     </widget>
    </item>
    <item>
-    <widget class="KIntNumInput" native="1" name="kcfg_maximum_displayed_logs" >
-     <property name="label" stdset="0" >
+    <widget class="KIntNumInput" name="kcfg_maximum_displayed_logs" >
+     <property name="label" >
       <string>Maximum displayed logs when full log (0 for no limit)</string>
      </property>
      <property name="minValue" stdset="0" >
@@ -224,7 +224,7 @@ On networked repositories (eg., not opened via file:// protocol) this may get re
   <customwidget>
    <class>KIntNumInput</class>
    <extends>QWidget</extends>
-   <header>kintnuminput.h</header>
+   <header>knuminput.h</header>
   </customwidget>
  </customwidgets>
  <includes>

@@ -1,9 +1,10 @@
 version 1.0.0
-    * implemented a sqlite-based logcache.
+    * implemented a sqlite-based logcache used by revision tree
     * removed support for subversion prior 1.3
     * integrated direct support for subversion 1.5
     * dutch handbook added
     * kdesvn may work (simplified) offline
+    * Passwords may hold in a memory cache until application ends
 
 version 0.14.5
     * fixed the problems accessing KWallet from within threads which let sometimes kdesvn die

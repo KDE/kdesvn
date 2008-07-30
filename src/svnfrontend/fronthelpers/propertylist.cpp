@@ -26,8 +26,10 @@
 
 
 Propertylist::Propertylist(QWidget *parent, const char *name)
-    : K3ListView(parent, name),m_commitit(false)
+    : K3ListView(parent),m_commitit(false)
 {
+    setObjectName(name);
+
     addColumn(i18n("Property"));
     addColumn(i18n("Value"));
     setShowSortIndicator(true);
@@ -35,10 +37,10 @@ Propertylist::Propertylist(QWidget *parent, const char *name)
     setRootIsDecorated(false);
     setSortColumn(0);
     setAcceptDrops(false);
-    connect(this,SIGNAL(itemRenamed(QListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(QListViewItem*,const QString&,int)));
+    connect(this,SIGNAL(itemRenamed(Q3ListViewItem*,const QString&,int)),this,SLOT(slotItemRenamed(Q3ListViewItem*,const QString&,int)));
 
-    connect(this,SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)),this,
-            SLOT(slotContextMenuRequested(QListViewItem *, const QPoint &, int)));
+    connect(this,SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)),this,
+            SLOT(slotContextMenuRequested(Q3ListViewItem *, const QPoint &, int)));
     //setFullWidth( TRUE );
 }
 
@@ -82,7 +84,7 @@ void Propertylist::clear()
 /*!
     \fn PropertiesDlg::slotItemRenamed(QListViewItem*item,const QString & str,int col )
  */
-void Propertylist::slotItemRenamed(QListViewItem*_item,const QString & text,int col )
+void Propertylist::slotItemRenamed(Q3ListViewItem*_item,const QString & text,int col )
 {
     if (!_item || _item->rtti()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*item = static_cast<PropertyListViewItem*> (_item);
@@ -119,7 +121,7 @@ void Propertylist::slotItemRenamed(QListViewItem*_item,const QString & text,int 
     }
     if (commitchanges() && item->different()) {
         svn::PropertiesMap pm;
-        QValueList<QString> dels;
+        Q3ValueList<QString> dels;
         pm[item->currentName()]=item->currentValue();
         if (item->currentName()!=item->startName()){
             dels.push_back(item->startName());
@@ -128,12 +130,12 @@ void Propertylist::slotItemRenamed(QListViewItem*_item,const QString & text,int 
     }
 }
 
-bool Propertylist::checkExisting(const QString&aName,QListViewItem*it)
+bool Propertylist::checkExisting(const QString&aName,Q3ListViewItem*it)
 {
     if (!it) {
         return findItem(aName,0)!=0;
     }
-    QListViewItemIterator iter(this);
+    Q3ListViewItemIterator iter(this);
     while ( iter.current() ) {
         if ( iter.current()==it) {
             ++iter;
@@ -150,15 +152,15 @@ bool Propertylist::checkExisting(const QString&aName,QListViewItem*it)
 void Propertylist::addCallback(QObject*ob)
 {
     if (ob) {
-        connect(this,SIGNAL(sigSetProperty(const svn::PropertiesMap&,const QValueList<QString>&,const QString&)),
-                ob,SLOT(slotChangeProperties(const svn::PropertiesMap&,const QValueList<QString>&,const QString&)));
+        connect(this,SIGNAL(sigSetProperty(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&)),
+                ob,SLOT(slotChangeProperties(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&)));
     }
 }
 
 /*!
     \fn Propertylist::slotContextMenuRequested(QListViewItem *, const QPoint &, int)
  */
-void Propertylist::slotContextMenuRequested(QListViewItem *, const QPoint &, int)
+void Propertylist::slotContextMenuRequested(Q3ListViewItem *, const QPoint &, int)
 {
     /// @todo implement me
 }

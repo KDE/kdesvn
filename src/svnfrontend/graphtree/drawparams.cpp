@@ -275,7 +275,7 @@ void RectDrawing::drawBack(QPainter* p, DrawParams* dp)
     bool goDark = qGray(normal.rgb())>128;
     int rBase, gBase, bBase;
     normal.rgb(&rBase, &gBase, &bBase);
-    p->setBrush(QBrush::NoBrush);
+    p->setBrush(Qt::NoBrush);
 
     // shade parameters:
     int d = 7;
@@ -335,7 +335,7 @@ void RectDrawing::drawBack(QPainter* p, DrawParams* dp)
   }
 
   // fill inside
-  p->setPen(QPen::NoPen);
+  p->setPen(Qt::NoPen);
   p->setBrush(normal);
   p->drawRect(r);
 }

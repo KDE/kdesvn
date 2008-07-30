@@ -45,6 +45,7 @@
 #include <QPixmap>
 #include <QResizeEvent>
 #include <QMouseEvent>
+#include <QDesktopWidget>
 
 #include <math.h>
 
@@ -181,8 +182,7 @@ void RevGraphView::dotExit(K3Process*p)
     dotOutput.replace(endslash,"");
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;
-    Q3TextStream* dotStream;
-    dotStream = new Q3TextStream(dotOutput, QIODevice::ReadOnly);
+    QTextStream* dotStream = new QTextStream(&dotOutput, QIODevice::ReadOnly);
     QString line,cmd;
     int lineno=0;
     clear();
@@ -193,7 +193,7 @@ void RevGraphView::dotExit(K3Process*p)
         if (line.isNull()) break;
         lineno++;
         if (line.isEmpty()) continue;
-        Q3TextStream lineStream(line, QIODevice::ReadOnly);
+        QTextStream lineStream(&line, QIODevice::ReadOnly);
         lineStream >> cmd;
         if (cmd == "stop") {break; }
 
@@ -454,7 +454,7 @@ void RevGraphView::dumpRevtree()
     dotTmpFile = new KTemporaryFile(QString::null,".dot");
     dotTmpFile->setAutoDelete(true);
 
-    Q3TextStream* stream = dotTmpFile->textStream();
+    QTextStream* stream = dotTmpFile->textStream();
     if (!stream) {
         showText(i18n("Could not open tempfile %1 for writing.").arg(dotTmpFile->name()));
         return;
@@ -490,7 +490,7 @@ void RevGraphView::dumpRevtree()
             << "shape=box, "
             << "label=\""<<getLabelstring(it1.key())<<"\","
             << "];\n";
-        for (unsigned j=0;j<it1.data().targets.count();++j) {
+        for (int j=0;j<it1.data().targets.count();++j) {
             *stream<<"  "<<it1.key().latin1()<< " "
                 << "->"<<" "<<it1.data().targets[j].key
                 << " [fontsize=10,style=\"solid\"];\n";
@@ -506,8 +506,9 @@ void RevGraphView::dumpRevtree()
         this,SLOT(readDotOutput(K3Process*,char*,int)) );
     if (!renderProcess->start(K3Process::NotifyOnExit,K3Process::Stdout)) {
         QString arguments;
-        for (unsigned c=0;c<renderProcess->args().count();++c) {
-            arguments+=QString(" %1").arg(renderProcess->args()[c]);
+        for (int c=0;c<renderProcess->args().count();++c) {
+//             arguments+=QString(" %1").arg(renderProcess->args()[c]);
+            arguments+= " " + renderProcess->args()[c];
         }
         QString error = i18n("Could not start process \"%1\".").arg(arguments);
         showText(error);
@@ -532,7 +533,7 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
         if (!full) {
             sm = sp[0]+"...";
         } else {
-            for (unsigned j = 0; j<sp.count(); ++j) {
+            for (int j = 0; j<sp.count(); ++j) {
                 if (j>0) sm+="<br>";
                 sm+=sp[j];
             }
@@ -838,7 +839,12 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         break;
         case 201:
         {
-            QString fn = KFileDialog::getSaveFileName(":","*.png");
+//             QString fn = KFileDialog::getSaveFileName(":","*.png");
+            QString fn = KFileDialog::getSaveFileName(KUrl(),
+                                                   i18n("PNG Images (*.png)"),
+                                                   this/*,
+                                                   i18n("Save diff to")*/
+                                                   );
             if (!fn.isEmpty()) {
                 if (m_Marker) {
                     m_Marker->hide();

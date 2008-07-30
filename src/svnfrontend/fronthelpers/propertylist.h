@@ -21,6 +21,7 @@
 #define PROPERTYLIST_H
 
 #include <k3listview.h>
+#include <Q3ValueList>
 #include "src/svnqt/svnqttypes.hpp"
 
 /**
@@ -33,7 +34,7 @@ public:
     Propertylist(QWidget *parent = 0, const char *name = 0);
     ~Propertylist();
 
-    bool checkExisting(const QString&aName,QListViewItem*it=0);
+    bool checkExisting(const QString&aName,Q3ListViewItem*it=0);
     bool commitchanges()const{return m_commitit;}
     void setCommitchanges(bool how){m_commitit=how;}
     void addCallback(QObject*);
@@ -43,15 +44,15 @@ public slots:
     virtual void clear();
 
 protected slots:
-    virtual void slotItemRenamed(QListViewItem*item,const QString & str,int col );
+    virtual void slotItemRenamed(Q3ListViewItem*item,const QString & str,int col );
 
 signals:
-    void sigSetProperty(const svn::PropertiesMap&,const QValueList<QString>&,const QString&);
+    void sigSetProperty(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&);
 protected:
     bool m_commitit;
     QString m_current;
 protected slots:
-    virtual void slotContextMenuRequested(QListViewItem *, const QPoint &, int);
+    virtual void slotContextMenuRequested(Q3ListViewItem *, const QPoint &, int);
 };
 
 #endif

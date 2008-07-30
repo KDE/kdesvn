@@ -23,7 +23,7 @@
 #include <QMouseEvent>
 
 PannerView::PannerView(QWidget* parent, const char* name)
-    : Q3CanvasView(parent, name,WNoAutoErase | WStaticContents )
+    : Q3CanvasView(parent, name)// KDE4 check , /*Qt::WNoAutoErase |*/ Qt::WA_StaticContents/*WStaticContents*/ )
 {
     m_Moving = false;
     viewport()->setBackgroundMode(Qt::NoBackground);
@@ -40,9 +40,9 @@ void PannerView::drawContents(QPainter* p,  int clipx, int clipy, int clipw, int
     Q3CanvasView::drawContents(p,clipx,clipy,clipw,cliph);
     p->restore();
     if (m_ZoomRect.isValid()) {
-        p->setPen(red.dark());
+        p->setPen(/*red*/QColor(Qt::red).dark());
         p->drawRect(m_ZoomRect);
-        p->setPen( red);
+        p->setPen( /*red*/Qt::red);
         p->drawRect(QRect(m_ZoomRect.x()+1, m_ZoomRect.y()+1,
             m_ZoomRect.width()-2, m_ZoomRect.height()-2));
     }

@@ -181,11 +181,13 @@ void Rangeinput_impl::setStartOnly(bool theValue)
 {
     m_StartOnly = theValue;
     if (m_StartOnly) {
-        RangeInputLayout->remove(m_stopRevBox);
+//         RangeInputLayout->remove(m_stopRevBox);
+        layout()->remove(m_stopRevBox);
         m_stopRevBox->hide();
         m_startRevBox->setTitle(i18n("Select revision"));
     } else {
-        RangeInputLayout->add(m_stopRevBox);
+//         RangeInputLayout->add(m_stopRevBox);
+        layout()->add(m_stopRevBox);
         m_stopRevBox->show();
         m_startRevBox->setTitle(i18n( "Start with revision" ));
     }

@@ -163,7 +163,7 @@ void PropertiesDlg::initItem()
     svn::PathPropertiesMapListPtr propList;
     try {
         propList = m_Client->proplist(what,m_Rev,m_Rev);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException&e) {
         emit clientException(e.msg());
         return;
     }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-27 11:12+0200\n"
+"POT-Creation-Date: 2008-07-29 23:32+0200\n"
 "PO-Revision-Date: 2007-12-21 10:54+0500\n"
 "Last-Translator: Andy Mikhailenko <neithere@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1250,8 +1250,8 @@ msgstr "Сообщение"
 msgid "Select in first column revisions for diff"
 msgstr ""
 
-#: rc.cpp:800 rc.cpp:850 ksvnwidgets/logmsg_impl.cpp:83
-#: ksvnwidgets/logmsg_impl.cpp:110
+#: rc.cpp:800 rc.cpp:850 ksvnwidgets/logmsg_impl.cpp:89
+#: ksvnwidgets/logmsg_impl.cpp:116
 #, no-c-format
 msgid "Action"
 msgstr "Действие"
@@ -1362,57 +1362,62 @@ msgstr ""
 msgid "Enter a log message"
 msgstr "Введите сообщение для журнала"
 
-#: rc.cpp:877
-#, no-c-format
-msgid "Or insert one of the last:"
-msgstr ""
-
-#: rc.cpp:881
+#: rc.cpp:878
 #, no-c-format
 msgid "Last used log messages"
 msgstr ""
 
+#: rc.cpp:881
+#, no-c-format
+msgid "Or insert one of the last:"
+msgstr ""
+
 #: rc.cpp:884
+#, no-c-format
+msgid "Insert Textfile"
+msgstr ""
+
+#: rc.cpp:887
 #, no-c-format
 msgid "Keep locks"
 msgstr "Сохранять блокировку"
 
-#: rc.cpp:887
+#: rc.cpp:890
 #, no-c-format
 msgid "If checked commit will not release locks."
 msgstr "Если отмечено, при коммите не будет сниматься блокировка."
 
-#: rc.cpp:890 rc.cpp:960
+#: rc.cpp:893 rc.cpp:963
 #, fuzzy, no-c-format
 msgid "Form1"
 msgstr "Принудительно"
 
-#: rc.cpp:893
+#: rc.cpp:896
 #, no-c-format
 msgid "Empty Depth"
 msgstr ""
 
-#: rc.cpp:896
+#: rc.cpp:899
 #, no-c-format
 msgid "Files Depth"
 msgstr ""
 
-#: rc.cpp:899
+#: rc.cpp:902
 #, no-c-format
 msgid "Immediate Depth"
 msgstr ""
 
-#: rc.cpp:902
+#: rc.cpp:905
 #, no-c-format
 msgid "Infinity Depth (recurse)"
 msgstr ""
 
-#: rc.cpp:905
+#: rc.cpp:908
 #, no-c-format
 msgid "Select depth of operation"
 msgstr ""
 
-#: rc.cpp:908
+#: rc.cpp:911
 #, no-c-format
 msgid ""
 "<b>Kind of depth</b>:\n"
@@ -1437,48 +1442,48 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:926 svnfrontend/ccontextlistener.cpp:67
+#: rc.cpp:929 svnfrontend/ccontextlistener.cpp:67
 #: svnfrontend/svnactions.cpp:1740
 #, no-c-format
 msgid "Revert"
 msgstr "Откатить"
 
-#: rc.cpp:929
+#: rc.cpp:932
 #, no-c-format
 msgid "Really revert these entries to pristine state?"
 msgstr "Действительно откатить элементы к исходному состоянию?"
 
-#: rc.cpp:932
+#: rc.cpp:935
 #, no-c-format
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: rc.cpp:935
+#: rc.cpp:938
 #, no-c-format
 msgid "Enter authentification info for"
 msgstr "Введите реквизиты доступа для"
 
-#: rc.cpp:938
+#: rc.cpp:941
 #, no-c-format
 msgid "Password:"
 msgstr "Пароль:"
 
-#: rc.cpp:941
+#: rc.cpp:944
 #, no-c-format
 msgid "Username:"
 msgstr "Имя пользователя:"
 
-#: rc.cpp:944
+#: rc.cpp:947
 #, no-c-format
 msgid "Store password"
 msgstr "Сохранить пароль"
 
-#: rc.cpp:963
+#: rc.cpp:966
 #, no-c-format
 msgid "Select encoding:"
 msgstr "Выберите кодировку"
 
-#: rc.cpp:966
+#: rc.cpp:969
 #, no-c-format
 msgid "Default utf-8"
 msgstr "По умолчанию UTF-8"
@@ -1947,7 +1952,7 @@ msgstr "Свойство изменено"
 msgid "Filling cache canceled."
 msgstr ""
 
-#: svnfrontend/fillcachethread.cpp:111
+#: svnfrontend/fillcachethread.cpp:113
 #, fuzzy
 msgid "Cache filled up to revision %1"
 msgstr "Удален в %1-й правке"
@@ -3316,14 +3321,18 @@ msgstr ""
 msgid "Fingerprint"
 msgstr "Отпечаток"
 
-#: ksvnwidgets/logmsg_impl.cpp:82 ksvnwidgets/logmsg_impl.cpp:109
+#: ksvnwidgets/logmsg_impl.cpp:88 ksvnwidgets/logmsg_impl.cpp:115
 msgid "Items to commit"
 msgstr ""
 
-#: ksvnwidgets/logmsg_impl.cpp:282 ksvnwidgets/logmsg_impl.cpp:321
-#: ksvnwidgets/logmsg_impl.cpp:363 ksvnwidgets/logmsg_impl.cpp:407
+#: ksvnwidgets/logmsg_impl.cpp:288 ksvnwidgets/logmsg_impl.cpp:327
+#: ksvnwidgets/logmsg_impl.cpp:369 ksvnwidgets/logmsg_impl.cpp:413
 msgid "Commit log"
 msgstr "Журнал правок"
+
+#: ksvnwidgets/logmsg_impl.cpp:626
+msgid "Select textfile for insert"
+msgstr ""
 
 #: urldlg.cpp:52
 msgid "Open repository or working copy"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-27 11:12+0200\n"
-"PO-Revision-Date: 2008-07-27 11:14+0200\n"
+"POT-Creation-Date: 2008-07-29 23:32+0200\n"
+"PO-Revision-Date: 2008-07-29 23:32+0200\n"
 "Last-Translator: Rajko Albrecht <ral@alwins-world.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -361,7 +361,9 @@ msgstr "Fülle Logpuffer nach dem Öffnen"
 #: rc.cpp:155
 #, no-c-format
 msgid "Start refresh the logcache for repository when networking enabled"
-msgstr "Beginne das Erneuern des Logpuffers für ein Repository falls Netzwerkzugriff aktiviert ist."
+msgstr ""
+"Beginne das Erneuern des Logpuffers für ein Repository falls Netzwerkzugriff "
+"aktiviert ist."
 
 #: rc.cpp:158
 #, no-c-format
@@ -1389,8 +1391,8 @@ msgstr "Meldung"
 msgid "Select in first column revisions for diff"
 msgstr "Wähle in der ersten Spalte Revisionen für Diff"
 
-#: rc.cpp:800 rc.cpp:850 ksvnwidgets/logmsg_impl.cpp:83
-#: ksvnwidgets/logmsg_impl.cpp:110
+#: rc.cpp:800 rc.cpp:850 ksvnwidgets/logmsg_impl.cpp:89
+#: ksvnwidgets/logmsg_impl.cpp:116
 #, no-c-format
 msgid "Action"
 msgstr "Aktion"
@@ -1507,57 +1509,62 @@ msgstr ""
 msgid "Enter a log message"
 msgstr "Gib einen Log-Eintrag ein"
 
-#: rc.cpp:877
-#, no-c-format
-msgid "Or insert one of the last:"
-msgstr "Oder nutze einen der letzten:"
-
-#: rc.cpp:881
+#: rc.cpp:878
 #, no-c-format
 msgid "Last used log messages"
 msgstr "Zuletzt genutzte Log-Meldungen"
 
+#: rc.cpp:881
+#, no-c-format
+msgid "Or insert one of the last:"
+msgstr "Oder nutze einen der letzten:"
+
 #: rc.cpp:884
+#, no-c-format
+msgid "Insert Textfile"
+msgstr "Füge Textdatei ein"
+
+#: rc.cpp:887
 #, no-c-format
 msgid "Keep locks"
 msgstr "Erhalte Sperren"
 
-#: rc.cpp:887
+#: rc.cpp:890
 #, no-c-format
 msgid "If checked commit will not release locks."
 msgstr "Falls markiert dann wird das Commit die Sperren nicht lösen."
 
-#: rc.cpp:890 rc.cpp:960
+#: rc.cpp:893 rc.cpp:963
 #, no-c-format
 msgid "Form1"
 msgstr "Form1"
 
-#: rc.cpp:893
+#: rc.cpp:896
 #, no-c-format
 msgid "Empty Depth"
 msgstr "Keine Tiefe"
 
-#: rc.cpp:896
+#: rc.cpp:899
 #, no-c-format
 msgid "Files Depth"
 msgstr "Dateitiefe"
 
-#: rc.cpp:899
+#: rc.cpp:902
 #, no-c-format
 msgid "Immediate Depth"
 msgstr "Unmittelbare Tiefe"
 
-#: rc.cpp:902
+#: rc.cpp:905
 #, no-c-format
 msgid "Infinity Depth (recurse)"
 msgstr "Unendliche Tiefe (rekursiv)"
 
-#: rc.cpp:905
+#: rc.cpp:908
 #, no-c-format
 msgid "Select depth of operation"
 msgstr "Wählen Sie die Tiefe der Operation"
 
-#: rc.cpp:908
+#: rc.cpp:911
 #, no-c-format
 msgid ""
 "<b>Kind of depth</b>:\n"
@@ -1594,48 +1601,48 @@ msgstr ""
 "Unterverzeichnisse werden uendliche Tiefe haben.<br> Äquivalent zum "
 "Verhalten vor Subversion 1.5.</p>"
 
-#: rc.cpp:926 svnfrontend/ccontextlistener.cpp:67
+#: rc.cpp:929 svnfrontend/ccontextlistener.cpp:67
 #: svnfrontend/svnactions.cpp:1740
 #, no-c-format
 msgid "Revert"
 msgstr "Rückgängig"
 
-#: rc.cpp:929
+#: rc.cpp:932
 #, no-c-format
 msgid "Really revert these entries to pristine state?"
 msgstr "Einträge wirklich auf den vorherigen Zustand zurücksetzen?"
 
-#: rc.cpp:932
+#: rc.cpp:935
 #, no-c-format
 msgid "Authentication"
 msgstr "Authentifizierung"
 
-#: rc.cpp:935
+#: rc.cpp:938
 #, no-c-format
 msgid "Enter authentification info for"
 msgstr "Gib Anmeldeinfos ein für"
 
-#: rc.cpp:938
+#: rc.cpp:941
 #, no-c-format
 msgid "Password:"
 msgstr "Passwort:"
 
-#: rc.cpp:941
+#: rc.cpp:944
 #, no-c-format
 msgid "Username:"
 msgstr "Nutzername:"
 
-#: rc.cpp:944
+#: rc.cpp:947
 #, no-c-format
 msgid "Store password"
 msgstr "Speichere Passwort"
 
-#: rc.cpp:963
+#: rc.cpp:966
 #, no-c-format
 msgid "Select encoding:"
 msgstr "Wähle Kodierung:"
 
-#: rc.cpp:966
+#: rc.cpp:969
 #, no-c-format
 msgid "Default utf-8"
 msgstr "Standard utf-8"
@@ -2107,7 +2114,7 @@ msgstr "Eigenschaft verändert"
 msgid "Filling cache canceled."
 msgstr "Füllen des Logpuffers abgebrochen."
 
-#: svnfrontend/fillcachethread.cpp:111
+#: svnfrontend/fillcachethread.cpp:113
 msgid "Cache filled up to revision %1"
 msgstr "Cache bis Revision %1 gefüllt"
 
@@ -3540,14 +3547,18 @@ msgstr "Ausstellername"
 msgid "Fingerprint"
 msgstr "Fingerabdruck"
 
-#: ksvnwidgets/logmsg_impl.cpp:82 ksvnwidgets/logmsg_impl.cpp:109
+#: ksvnwidgets/logmsg_impl.cpp:88 ksvnwidgets/logmsg_impl.cpp:115
 msgid "Items to commit"
 msgstr "Zu übertragende Einträge"
 
-#: ksvnwidgets/logmsg_impl.cpp:282 ksvnwidgets/logmsg_impl.cpp:321
-#: ksvnwidgets/logmsg_impl.cpp:363 ksvnwidgets/logmsg_impl.cpp:407
+#: ksvnwidgets/logmsg_impl.cpp:288 ksvnwidgets/logmsg_impl.cpp:327
+#: ksvnwidgets/logmsg_impl.cpp:369 ksvnwidgets/logmsg_impl.cpp:413
 msgid "Commit log"
 msgstr "Commit log"
+
+#: ksvnwidgets/logmsg_impl.cpp:626
+msgid "Select textfile for insert"
+msgstr "Wähle Textdatei für das Einfügen aus"
 
 #: urldlg.cpp:52
 msgid "Open repository or working copy"

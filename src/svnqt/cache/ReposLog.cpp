@@ -261,7 +261,6 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
             target[revision].changedPaths.push_back(lcp);
         }
         if (cp && cp->getListener()) {
-            //cp->getListener()->contextProgress(++icount,bcur.size());
             if (cp->getListener()->contextCancel()) {
                 throw svn::cache::DatabaseException(QString("Could not retrieve values: User cancel."));
             }

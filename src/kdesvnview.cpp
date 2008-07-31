@@ -268,7 +268,7 @@ void kdesvnView::slotCreateRepo()
     try {
         _rep->CreateOpen(path,ptr->fsType(),ptr->disableFsync(),
                          !ptr->keepLogs(),ptr->compat13(),ptr->compat14());
-    } catch(svn::ClientException e) {
+    } catch(const svn::ClientException&e) {
         slotAppendLog(e.msg());
         kDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;
         ok = false;
@@ -315,7 +315,7 @@ void kdesvnView::slotHotcopy()
     try {
         svn::repository::Repository::hotcopy( src,dest,cleanlogs);
         slotAppendLog(i18n("Hotcopy finished."));
-    } catch(svn::ClientException e) {
+    } catch(const svn::ClientException&e) {
         slotAppendLog(e.msg());
         kDebug()<<"Hotcopy of "<< src << " failed "<<e.msg() << endl;
     }
@@ -342,7 +342,7 @@ void kdesvnView::slotLoaddump()
 
     try {
         _rep.Open(ptr->repository());
-    } catch(svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
         kDebug()<<"Open "<<ptr->repository() << " failed "<<e.msg() << endl;
         return ;
@@ -365,7 +365,7 @@ void kdesvnView::slotLoaddump()
         StopDlg sdlg(this,this,0,"Load Dump",i18n("Loading a dump into a repository."));
         _rep.loaddump(ptr->dumpFile(),_act,ptr->parentPath(),ptr->usePre(),ptr->usePost());
         slotAppendLog(i18n("Loading dump finished."));
-    } catch(svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
         kDebug()<<"Load dump into "<<ptr->repository() << " failed "<<e.msg() << endl;
     }
@@ -415,7 +415,7 @@ void kdesvnView::slotDumpRepo()
 
     try {
         _rep->Open(re);
-    } catch(svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
         kDebug()<<"Open "<<re << " failed "<<e.msg() << endl;
         delete _rep;
@@ -426,7 +426,7 @@ void kdesvnView::slotDumpRepo()
         StopDlg sdlg(this,this,0,"Dump",i18n("Dumping a repository"));
         _rep->dump(out,st,en,incr,diffs);
         slotAppendLog(i18n("Dump finished."));
-    } catch(svn::ClientException e) {
+    }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
         kDebug()<<"Dump "<<out << " failed "<<e.msg() << endl;
     }

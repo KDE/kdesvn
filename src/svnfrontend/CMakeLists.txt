@@ -54,8 +54,6 @@ SET(svnfrontendsrc
     tcontextlistener.cpp
     blamedisplay_impl.cpp
     threadcontextlistenerdata.cpp
-    leftpane/leftpane_impl.cpp
-    leftpane/leftpane_impl.h
     fillcachethread.cpp
     fillcachethread.h
     )
@@ -73,7 +71,6 @@ SET(svnfrontendui
     merge_dlg.ui
     blamedisplay.ui
     svnlogdlg.ui
-    leftpane/leftpane.ui
     )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

@@ -27,10 +27,11 @@
 
 #include <k3listview.h>
 #include <kurl.h>
-#include <ktrader.h>
+#include <kservice.h>
 #include <qmap.h>
 #include <q3ptrlist.h>
 #include <qevent.h>
+
 //Added by qt3to4:
 #include <QDragMoveEvent>
 #include <QDropEvent>
@@ -40,6 +41,7 @@
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QDragEnterEvent>
+#include <Q3ValueList>
 
 class KAction;
 class KActionMenu;
@@ -141,7 +143,7 @@ protected:
     virtual void leaveEvent(QEvent*e);
     virtual void rescanIconsRec(FileListViewItem*_parent=0,bool checkNewer=false,bool no_update=false);
 
-    KTrader::OfferList offersList(SvnItem*item,bool execOnly=false);
+    KService::List offersList(SvnItem*item,bool execOnly=false);
 
 private:
     KdesvnFileListPrivate*m_pList;

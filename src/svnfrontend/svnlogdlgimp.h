@@ -20,7 +20,7 @@
 #ifndef SVNLOGDLGIMP_H
 #define SVNLOGDLGIMP_H
 
-#include "svnlogdlg.h"
+#include "ui_svnlogdlg.h"
 #include "simple_logcb.h"
 #include "src/svnqt/log_entry.hpp"
 #include "src/svnqt/client.hpp"
@@ -34,11 +34,11 @@
 class LogListViewItem;
 class SvnActions;
 
-class SvnLogDlgImp: public SvnLogDialogData,public SimpleLogCb
+class SvnLogDlgImp: public QDialog,public Ui::LogDialog,public SimpleLogCb
 {
 Q_OBJECT
 public:
-    SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0,bool modal=true);
+    SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0);
     virtual ~SvnLogDlgImp();
     void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&,const svn::Revision&peg,const QString&pegUrl);
     void saveSize();

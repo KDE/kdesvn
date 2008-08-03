@@ -22,6 +22,7 @@
 #include "src/svnqt/log_entry.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
+#include "src/svnqt/url.hpp"
 #include "helpers/sub2qt.h"
 #include "revtreewidget.h"
 #include "revgraphview.h"
@@ -94,9 +95,12 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
-        //m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
-        svn::cache::ReposLog rl(m_Client,reposRoot);
-        rl.simpleLog(m_OldHistory,startr,endr,!Kdesvnsettings::network_on());
+        if (svn::Url::isLocal(reposRoot)) {
+            m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
+        } else {
+            svn::cache::ReposLog rl(m_Client,reposRoot);
+            rl.simpleLog(m_OldHistory,startr,endr,!Kdesvnsettings::network_on());
+        }
     } catch (const svn::Exception&ce) {
         kdDebug()<<ce.msg() << endl;
         KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1").arg(ce.msg()));

@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -68,8 +68,25 @@ namespace svn
 
   Url::~Url () {}
 
-  bool
-  Url::isValid (const QString& url)
+  bool Url::isLocal(const QString& url)
+  {
+#if QT_VERSION < 0x040000
+      bool cs = false;
+#else
+      Qt::CaseSensitivity cs=Qt::CaseInsensitive;
+#endif
+    if (
+        url.startsWith("file://",cs) ||
+        url.startsWith("/") ||
+        url.startsWith("svn+file://",cs) ||
+        url.startsWith("ksvn+file://",cs) )
+    {
+        return true;
+    }
+    return false;
+  }
+
+  bool Url::isValid (const QString& url)
   {
     QString urlTest(url);
     unsigned int index = 0;

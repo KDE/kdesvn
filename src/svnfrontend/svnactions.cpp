@@ -47,6 +47,7 @@
 #include "src/svnqt/svnqt_defines.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
+#include "src/svnqt/url.hpp"
 
 #include "helpers/sub2qt.h"
 #include "fronthelpers/cursorstack.h"
@@ -298,16 +299,20 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
             if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
                 return 0;
             }
-            svn::cache::ReposLog rl(m_Data->m_Svnclient,e.reposRoot());
-            QString s1,s2,what;
-            s1=e.url().mid(e.reposRoot().length());
-            if (which==".") {
-                what=s1;
+            if (svn::Url::isLocal(e.reposRoot())) {
+                m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit);
             } else {
-                s2=which.mid(m_Data->m_ParentList->baseUri().length());
-                what=s1+"/"+s2;
+                svn::cache::ReposLog rl(m_Data->m_Svnclient,e.reposRoot());
+                QString s1,s2,what;
+                s1=e.url().mid(e.reposRoot().length());
+                if (which==".") {
+                    what=s1;
+                } else {
+                    s2=which.mid(m_Data->m_ParentList->baseUri().length());
+                    what=s1+"/"+s2;
+                }
+                rl.log(what,start,end,peg,*logs,!follow,limit);
             }
-            rl.log(what,start,end,peg,*logs,!follow,limit);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -2506,6 +2511,9 @@ void SvnActions::startFillCache(const QString&path)
         return;
     }
     if (!singleInfo(path,svn::Revision::UNDEFINED,e)) {
+        return;
+    }
+    if (svn::Url::isLocal(e.reposRoot())) {
         return;
     }
     m_FCThread=new FillCacheThread(this,e.reposRoot());

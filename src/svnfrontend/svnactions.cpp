@@ -340,11 +340,27 @@ bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStrin
         }
         root = inf.reposRoot();
     }
-    svn::SharedPointer<svn::LogEntriesMap> log = getLog(r,r,peg,root,true,1);
-    if (log) {
-        if (log->find(r.revnum())!=log->end()) {
-            t = (*log)[r.revnum()];
-            res = true;
+
+    if (!svn::Url::isLocal(root)) {
+        svn::LogEntriesMap _m;
+        try {
+            svn::cache::ReposLog rl(m_Data->m_Svnclient ,root);
+            if (rl.simpleLog(_m,r,r,true) && _m.find(r.revnum())!=_m.end() ) {
+                t = _m[r.revnum()];
+                res = true;
+            }
+        } catch (const svn::Exception&e) {
+            emit clientException(e.msg());
+        }
+    }
+
+    if (!res) {
+        svn::SharedPointer<svn::LogEntriesMap> log = getLog(r,r,peg,root,true,1);
+        if (log) {
+            if (log->find(r.revnum())!=log->end()) {
+                t = (*log)[r.revnum()];
+                res = true;
+            }
         }
     }
     return res;

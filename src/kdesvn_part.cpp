@@ -60,30 +60,29 @@ QString kdesvnPart::m_Extratext = "";
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (dynamic Part component)");
 
-kdesvnPart::kdesvnPart( QWidget *parentWidget, const char *widgetName,
-                                  QObject *parent, const char *name , const QStringList&)
-    : KParts::ReadOnlyPart(parent, name)
+kdesvnPart::kdesvnPart( QWidget *parentWidget, QObject *parent, const QStringList&)
+    : KParts::ReadOnlyPart(parent)
 {
-    init(parentWidget,widgetName,false);
+    init(parentWidget,false);
 }
 
-kdesvnPart::kdesvnPart(QWidget *parentWidget, const char *widgetName,
-               QObject *parent, const char *name,bool ownapp, const QStringList&)
-    : KParts::ReadOnlyPart(parent, name)
+kdesvnPart::kdesvnPart(QWidget *parentWidget, QObject *parent, bool ownapp, const QStringList&)
+    : KParts::ReadOnlyPart(parent)
 {
-    init(parentWidget,widgetName,ownapp);
+    init(parentWidget,ownapp);
 }
 
-void kdesvnPart::init( QWidget *parentWidget, const char *widgetName,bool full)
+void kdesvnPart::init( QWidget *parentWidget, bool full)
 {
     m_aboutDlg = 0;
     KGlobal::locale()->insertCatalog("kdesvn");
     // we need an instance
-    setInstance( kdesvnPartFactory::instance() );
+    ///@fixme check if this is not longer needed or replaced with a new call
+    //setInstance( kdesvnPartFactory::instance() );
     m_browserExt = new KdesvnBrowserExtension( this );
 
     // this should be your custom internal widget
-    m_view = new kdesvnView(actionCollection(),parentWidget,widgetName,full);
+    m_view = new kdesvnView(actionCollection(),parentWidget,full);
 
     // notify the part that this is our internal widget
     setWidget(m_view);
@@ -403,13 +402,13 @@ KComponentData* cFactory::s_instance = 0L;
 KAboutData* cFactory::s_about = 0L;
 commandline_part* cFactory::s_cline = 0L;
 
-KParts::Part* cFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
-                                                        QObject *parent, const char *name,
+KParts::Part* cFactory::createPartObject( QWidget *parentWidget,
+                                                        QObject *parent,
                                                         const char *classname, const QStringList &args )
 {
     Q_UNUSED(classname);
     // Create an instance of our Part
-    return new kdesvnPart( parentWidget, widgetName, parent, name, args );
+    return new kdesvnPart( parentWidget, parent, args );
 }
 
 KParts::Part* cFactory::createAppPart( QWidget *parentWidget, const char *widgetName,

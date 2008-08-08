@@ -67,7 +67,7 @@
 #endif
 
 kdesvn::kdesvn()
-    : KParts::MainWindow( 0, "kdesvn" ),
+    : KParts::MainWindow(),
       KBookmarkOwner()
 {
     m_part = 0;
@@ -88,8 +88,11 @@ kdesvn::kdesvn()
     m_bookmarkFile = KStandardDirs::locateLocal("appdata",QString::fromLatin1("bookmarks.xml"),true);
 
 //     m_BookmarkManager = KBookmarkManager::managerForFile(m_bookmarkFile,false);
+#if KDE_VERSION_MAJOR==4 && KDE_VERSION_MINOR>0
     m_BookmarkManager = KBookmarkManager::managerForExternalFile(m_bookmarkFile);
-#warning "m_BookmarkManager->setShowNSBookmarks(false); is commented out. What the hell are "NS" bookmarks?"
+#else
+    m_BookmarkManager = KBookmarkManager::managerForFile(m_bookmarkFile,"kdesvn");
+#endif
 //     m_BookmarkManager->setShowNSBookmarks(false);
     m_BookmarkManager->setEditorOptions(QString::fromLatin1("KDE Svn"),false);
 

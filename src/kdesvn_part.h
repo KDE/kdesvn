@@ -52,11 +52,11 @@ public:
     /**
      * Default constructor
      */
-    kdesvnPart(QWidget *parentWidget, const char *widgetName,
-                    QObject *parent, const char *name, const QStringList&);
+    kdesvnPart(QWidget *parentWidget,
+                    QObject *parent, const QStringList&);
 
-    kdesvnPart(QWidget *parentWidget, const char *widgetName,
-               QObject *parent, const char *name,bool ownapp, const QStringList&);
+    kdesvnPart(QWidget *parentWidget,
+               QObject *parent, bool ownapp, const QStringList&);
 
     /**
      * Destructor
@@ -83,7 +83,7 @@ protected:
     virtual void setupActions();
     K3AboutApplication* m_aboutDlg;
 
-    void init(QWidget *parentWidget, const char *widgetName,bool full);
+    void init(QWidget *parentWidget, bool full);
 
 protected slots:
     virtual void slotLogFollowNodes(bool);
@@ -116,8 +116,8 @@ class KDESVN_EXPORT cFactory : public KParts::Factory
 public:
     cFactory():KParts::Factory(){}
     virtual ~cFactory();
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
+    virtual KParts::Part* createPartObject( QWidget *parentWidget,
+                                            QObject *parent,
                                             const char *classname, const QStringList &args );
     virtual KParts::Part* createAppPart( QWidget *parentWidget, const char *widgetName,
                                             QObject *parent, const char *name,

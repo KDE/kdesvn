@@ -20,20 +20,20 @@
 #ifndef BLAMEDISPLAY_IMPL_H
 #define BLAMEDISPLAY_IMPL_H
 
-#include "blamedisplay.h"
+#include "ui_blamedisplay.h"
 #include "src/svnqt/client.hpp"
 
 class BlameDisplayData;
 class SimpleLogCb;
 class BlameDisplayItem;
-class KListViewSearchLineWidget;
+class K3ListViewSearchLineWidget;
 
-class BlameDisplay_impl:public BlameDisplay
+class BlameDisplay_impl:public QWidget,public Ui::BlameDisplay
 {
     Q_OBJECT
 public:
-    BlameDisplay_impl(const QString&,const svn::AnnotatedFile&,QWidget*parent=0,const char*name=0);
-    BlameDisplay_impl(QWidget*parent=0,const char*name=0);
+    BlameDisplay_impl(const QString&,const svn::AnnotatedFile&,QWidget*parent=0);
+    BlameDisplay_impl(QWidget*parent=0);
     virtual ~BlameDisplay_impl();
 
     virtual void setContent(const QString&,const svn::AnnotatedFile&);
@@ -41,7 +41,7 @@ public:
 
     const QColor rev2color(svn_revnum_t)const;
 
-    static void displayBlame(SimpleLogCb*,const QString&,const svn::AnnotatedFile&,QWidget*parent=0,const char*name=0);
+    static void displayBlame(SimpleLogCb*,const QString&,const svn::AnnotatedFile&,QWidget*parent=0);
 
 public slots:
     virtual void slotGoLine();
@@ -54,7 +54,7 @@ protected slots:
 
 protected:
     virtual void showCommit(BlameDisplayItem*);
-    KListViewSearchLineWidget* m_SearchWidget;
+    K3ListViewSearchLineWidget* m_SearchWidget;
 
 private:
     BlameDisplayData*m_Data;

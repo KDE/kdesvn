@@ -32,10 +32,13 @@
 #include <kdebug.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kapplication.h>
 #include <ktextbrowser.h>
 #include <k3listviewsearchline.h>
+#include <kvbox.h>
+#include <kcolorscheme.h>
+#include <ktextedit.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -184,20 +187,20 @@ int BlameDisplayItem::compare(Q3ListViewItem *item, int col, bool ascending)cons
 
 void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
-    if (alignment & (Qt::AlignTop || Qt::AlignBottom) == 0)
+    if ((alignment & (Qt::AlignTop || Qt::AlignBottom)) == 0)
         alignment |= Qt::AlignVCenter;
 
     /* don't copy string */
     const QString & str = text(column);;
     if (column == COL_LINE) {
-        p->setFont(KGlobalSettings::fixedFont());
+        p->setFont(KGlobalSettings::self()->fixedFont());
     }
 
     QColorGroup _cg = cg;
     QColor _bgColor;
     if (column==COL_LINENR || isSelected()) {
-        _bgColor = KGlobalSettings::highlightColor();
-        p->setPen(KGlobalSettings::highlightedTextColor());
+        _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
     } else {
         if (Kdesvnsettings::self()->colored_blame()) {
             _bgColor = cb->rev2color(m_Content.revision());
@@ -238,20 +241,21 @@ class BlameDisplayData
         bool up;
         SimpleLogCb*m_cb;
         QString m_File;
-        KDialogBase*m_dlg;
+        KDialog*m_dlg;
 
         QString reposRoot;
 };
 
-BlameDisplay_impl::BlameDisplay_impl(QWidget*parent,const char*name)
-    : BlameDisplay(parent,name)
+BlameDisplay_impl::BlameDisplay_impl(QWidget*parent)
+    : QWidget(parent),Ui::BlameDisplay()
 {
+    setupUi(this);
     m_Data = new BlameDisplayData();
     connect(m_BlameList,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
 }
 
-BlameDisplay_impl::BlameDisplay_impl(const QString&what,const svn::AnnotatedFile&blame,QWidget*parent,const char*name)
-    : BlameDisplay(parent,name)
+BlameDisplay_impl::BlameDisplay_impl(const QString&what,const svn::AnnotatedFile&blame,QWidget*parent)
+    : QWidget(parent),Ui::BlameDisplay()
 {
     m_Data = new BlameDisplayData();
     connect(m_BlameList,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
@@ -266,22 +270,22 @@ void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
 void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&blame)
 {
     m_Data->m_File = what;
-    m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this);
+    m_SearchWidget = new K3ListViewSearchLineWidget(m_BlameList,this);
     EncodingSelector_impl*m_Ls = new EncodingSelector_impl(Kdesvnsettings::locale_for_blame(),this);
     connect(m_Ls,SIGNAL(TextCodecChanged(const QString&)),
             this,SLOT(slotTextCodecChanged(const QString&)));
 
-    BlameDisplayLayout->remove(m_BlameList);
-    BlameDisplayLayout->addWidget(m_Ls);
-    BlameDisplayLayout->addWidget(m_SearchWidget);
-    BlameDisplayLayout->addWidget(m_BlameList);
+    vboxLayout->remove(m_BlameList);
+    vboxLayout->addWidget(m_Ls);
+    vboxLayout->addWidget(m_SearchWidget);
+    vboxLayout->addWidget(m_BlameList);
 
     m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
     m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
 
     m_BlameList->clear();
     if (m_Data->m_dlg) {
-        m_Data->m_dlg->enableButton(KDialogBase::User2,false);
+        m_Data->m_dlg->enableButton(KDialog::User2,false);
     }
     svn::AnnotatedFile::const_iterator bit;
     m_BlameList->setSorting(COL_LINENR,false);
@@ -409,18 +413,20 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
             text = m_Data->m_logCache[bit->rev()].message;
         }
     }
-    KDialogBase* dlg = new KDialogBase(
-            KApplication::activeModalWidget(),
-    "simplelog",true,QString(i18n("Logmessage for revision %1").arg(bit->rev())),
-    KDialogBase::Close);
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
-    KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
+    KDialog* dlg = new KDialog(KApplication::activeModalWidget());
+    dlg->setButtons(KDialog::Close);
+    dlg->setCaption(QString(i18n("Logmessage for revision %1").arg(bit->rev())));
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
+    KTextEdit*ptr = new KTextEdit(Dialog1Layout);
     ptr->setFont(KGlobalSettings::fixedFont());
-    ptr->setWordWrap(Q3TextEdit::NoWrap);
-    ptr->setText(text);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display"));
+    ptr->setReadOnly(true);
+    ptr->setWordWrapMode(QTextOption::NoWrap);
+    ptr->setPlainText(text);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"simplelog_display");
+    dlg->restoreDialogSize(k);
     dlg->exec();
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display",false);
+    dlg->saveDialogSize(k);
 }
 
 void BlameDisplay_impl::slotShowCurrentCommit()
@@ -436,33 +442,36 @@ void BlameDisplay_impl::slotSelectionChanged()
     if (!m_Data->m_dlg) return;
     Q3ListViewItem*item = m_BlameList->selectedItem();
     if (item==0||item->rtti()!=1000) {
-        m_Data->m_dlg->enableButton(KDialogBase::User2,false);
+        m_Data->m_dlg->enableButton(KDialog::User2,false);
     } else {
-        m_Data->m_dlg->enableButton(KDialogBase::User2,true);
+        m_Data->m_dlg->enableButton(KDialog::User2,true);
     }
 }
 
-void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const svn::AnnotatedFile&blame,QWidget*,const char*name)
+void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const svn::AnnotatedFile&blame,QWidget*)
 {
-    int buttons = KDialogBase::Close|KDialogBase::User1|KDialogBase::User2;
-    KDialogBase * dlg = new KDialogBase(
-            KApplication::activeModalWidget(),
-            name,true,QString(i18n("Blame %1")).arg(item),buttons,KDialogBase::Close,false,
-            KGuiItem(i18n("Goto line")),KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
+    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+    dlg->setButtons(KDialog::Close|KDialog::User1|KDialog::User2);
+    dlg->setButtonGuiItem(KDialog::User1,KGuiItem(i18n("Goto line")));
+    dlg->setButtonGuiItem(KDialog::User2,KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     BlameDisplay_impl*ptr = new BlameDisplay_impl(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg"));
+
+    KConfigGroup k(Kdesvnsettings::self()->config(),"blame_dlg");
+    dlg->restoreDialogSize(k);
+
     ptr->setContent(item,blame);
     ptr->setCb(_cb);
     ptr->m_Data->m_dlg = dlg;
-    dlg->enableButton(KDialogBase::User2,false);
+    dlg->enableButton(KDialog::User2,false);
     connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
     connect(dlg,SIGNAL(user2Clicked()),ptr,SLOT(slotShowCurrentCommit()));
     Dialog1Layout->adjustSize();
     dlg->exec();
 
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
+    dlg->saveDialogSize(k);
 }
 
 void BlameDisplay_impl::slotItemDoubleClicked(Q3ListViewItem*item)
@@ -478,7 +487,7 @@ void BlameDisplay_impl::slotTextCodecChanged(const QString&what)
         Kdesvnsettings::setLocale_for_blame(what);
         Kdesvnsettings::self()->writeConfig();
         LocalizedAnnotatedLine::reset_codec();
-        QListViewItemIterator it(m_BlameList);
+        Q3ListViewItemIterator it(m_BlameList);
         while ( it.current() ) {
             BlameDisplayItem*_it = static_cast<BlameDisplayItem*>(it.current());
             _it->localeChanged();

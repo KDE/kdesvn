@@ -119,13 +119,13 @@ namespace svn
      * @param revision
      */
     virtual void
-    contextNotify (const char *path,
-                   svn_wc_notify_action_t action,
-                   svn_node_kind_t kind,
-                   const char *mime_type,
-                   svn_wc_notify_state_t content_state,
-                   svn_wc_notify_state_t prop_state,
-                   svn_revnum_t revision) = 0;
+    contextNotify(const char *path,
+                  svn_wc_notify_action_t action,
+                  svn_node_kind_t kind,
+                  const char *mime_type,
+                  svn_wc_notify_state_t content_state,
+                  svn_wc_notify_state_t prop_state,
+                  svn_revnum_t revision) = 0;
     /**
      * this method will be called to notify about
      * the progress of an ongoing action
@@ -133,8 +133,8 @@ namespace svn
      * @param action the action got notified about
      * @since subversion 1.2
      */
-    virtual void
-    contextNotify (const svn_wc_notify_t *action) = 0;
+    virtual void contextNotify (const svn_wc_notify_t *action)=0;
+
     /**
      * this method will be called periodically to allow
      * the app to cancel long running operations

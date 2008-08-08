@@ -54,9 +54,11 @@ public:
                    svn_wc_notify_state_t content_state,
                    svn_wc_notify_state_t prop_state,
                    svn_revnum_t revision);
-    virtual void contextNotify(const QString&aMsg);
-    virtual void sendTick();
     virtual void contextNotify (const svn_wc_notify_t *action);
+    virtual void contextNotify(const QString&);
+
+
+    virtual void sendTick();
 
     virtual bool contextCancel();
     /*!

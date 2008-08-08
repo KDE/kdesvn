@@ -299,8 +299,13 @@ void ThreadContextListener::event_contextNotify(void*data)
     delete _notify;
 }
 
-void ThreadContextListener::customEvent(QCustomEvent*ev)
+void ThreadContextListener::customEvent(QEvent*_ev)
 {
+    ///@todo use own customized event here not deprecated QCustomEvent
+    if (_ev->type()<QEvent::User) {
+        return;
+    }
+    QCustomEvent*ev = (QCustomEvent*)_ev;
     if (ev->type()==EVENT_THREAD_SSL_TRUST_PROMPT) {
         event_contextSslServerTrustPrompt(ev->data());
     }else if (ev->type()==EVENT_THREAD_LOGIN_PROMPT) {
@@ -316,6 +321,17 @@ void ThreadContextListener::customEvent(QCustomEvent*ev)
     } else if (ev->type() == EVENT_THREAD_LOGIN_SAVED) {
         event_contextGetSavedLogin(ev->data());
     }
+}
+
+void ThreadContextListener::contextNotify (const char *path,
+                svn_wc_notify_action_t action,
+                svn_node_kind_t kind,
+                const char *mime_type,
+                svn_wc_notify_state_t content_state,
+                svn_wc_notify_state_t prop_state,
+                svn_revnum_t revision)
+{
+    CContextListener::contextNotify(path,action,kind,mime_type,content_state,prop_state,revision);
 }
 
 #include "tcontextlistener.moc"

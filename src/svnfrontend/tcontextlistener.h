@@ -50,10 +50,18 @@ public:
     virtual bool contextSslClientCertPrompt(QString& certFile);
     virtual bool contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave);
     virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t& acceptedFailures);
-    virtual void contextNotify(const QString&aMsg);
     virtual void sendTick();
     virtual void contextProgress(long long int current, long long int max);
 
+    virtual void contextNotify (const char *path,
+                svn_wc_notify_action_t action,
+                svn_node_kind_t kind,
+                const char *mime_type,
+                svn_wc_notify_state_t content_state,
+                svn_wc_notify_state_t prop_state,
+                svn_revnum_t revision);
+    virtual void contextNotify (const svn_wc_notify_t *action){CContextListener::contextNotify(action);}
+    virtual void contextNotify(const QString&);
     static QMutex*callbackMutex();
 
 protected:
@@ -64,7 +72,7 @@ protected:
     virtual void event_contextSslClientCertPwPrompt(void*data);
     virtual void event_contextSslServerTrustPrompt(void* data);
     virtual void event_contextNotify(void*data);
-    virtual void customEvent(QCustomEvent*);
+    virtual void customEvent(QEvent*);
 
     /* stores all internals */
     QMutex m_WaitMutex;

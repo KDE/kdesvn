@@ -140,6 +140,7 @@ void Client_impl::merge (const Path & path1, const Revision & revision1,
         bool recurse=depth==DepthInfinity;
         svn_error_t*error;
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
         error = svn_client_merge_peg2(
                                       src.cstr(),
                                       range.first,
@@ -154,6 +155,22 @@ void Client_impl::merge (const Path & path1, const Revision & revision1,
                                       *m_context,
                                       pool
                                      );
+#else
+        Q_UNUSED(merge_options);
+        error = svn_client_merge_peg(
+                                      src.cstr(),
+                                      range.first,
+                                      range.second,
+                                      peg.revision(),
+                                      targetWc.cstr(),
+                                      recurse,
+                                      !notice_ancestry,
+                                      force,
+                                      dry_run,
+                                      *m_context,
+                                      pool
+                                     );
+#endif
         if(error != 0) {
             throw ClientException (error);
         }

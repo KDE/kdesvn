@@ -1,12 +1,11 @@
 # norootforbuild
-Summary:   A subversion client for the KDE with KIO integration.
+Summary:   A subversion client for the KDE with KIO integration
 Name:      kdesvn
 Version:   @VERSION@
 Release:   1
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
 Url:       http://kdesvn.alwins-world.de
-Packager:  Rajko Albrecht <ral@alwins-world.de>
 Group:     Development/Tools
 Source:    kdesvn-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
@@ -14,7 +13,7 @@ Requires: subversion >= 1.3.0
 Requires: /usr/bin/dot
 BuildRequires: cmake >= 2.4
 BuildRequires: gcc-c++
-BuildPreReq: sqlite-devel
+BuildRequires: sqlite-devel
 BuildRequires: subversion-devel
 
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
@@ -47,7 +46,7 @@ BuildRequires:  libapr0
 %description
 Kdesvn is a subversion client for KDE.
 It may used as standalone application or plugin (KPart). Base functions are provided
-via a KIO protocoll, too.
+via a KIO protocol, too.
 
 %package kiosvn
 Requires: kdesvn = %{version}
@@ -59,16 +58,15 @@ KIO integration (KIO::svn) based on kdesvn alternative protocol name.
 
 %package devel
 Group:    Development/Libraries
-Summary:  Wrapper lib for subversion QT integration.
-Requires: subversion-devel >= 1.2.0
+Summary:  Wrapper lib for subversion QT integration
+Requires: subversion-devel >= 1.3.0
 Requires: kdesvn = %{version}
-Obsoletes: kdesvn-svnqt-devel
 
 %description devel
-Development files for kdesvn.
+Development files for kdesvn. It is required when you plan use svnqt wrapper library in your own application.
 
 %prep
-%setup
+%setup -q
 mkdir build
 cd build
 cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release -DLIB_SUFFIX=`kde-config --libsuffix`
@@ -82,14 +80,16 @@ make %{?jobs:-j%jobs}
 
 %install
 cd build
+rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
+gzip $RPM_BUILD_ROOT/%{_datadir}/man/man1/*
 
 %clean
-rm -rf $RPM_BUILD_ROOT/*
-rm -rf $RPM_BUILD_DIR/kdesvn
+rm -rf $RPM_BUILD_ROOT
 
 
 %files
+%defattr(-,root,root)
 %{_bindir}/kdesvn
 %{_bindir}/kdesvnaskpass
 %{_libdir}/*/*part*
@@ -108,11 +108,15 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/services/ksvn*.protocol
 %{_datadir}/man/man1/*
 %{_libdir}/libsvnqt*.so*
+%doc AUTHORS ChangeLog GPL.txt TODO COPYING COPYING.OpenSSL
 
 %files kiosvn
+%defattr(-,root,root)
 %{_datadir}/services/svn*.protocol
 
 %files devel
+%defattr(-,root,root)
 %dir %{_includedir}/svnqt
 %{_includedir}/svnqt/*
 
+%changelog

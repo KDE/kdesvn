@@ -527,13 +527,29 @@ namespace svn
                 &l_baton,
                 *m_context, // client ctx
                 pool);
-#else
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
     Q_UNUSED(include_merged_revisions);
     Q_UNUSED(revprops);
 
     error = svn_client_log3 (
       target.array (pool),
       revisionPeg.revision(),
+      revisionStart.revision (),
+      revisionEnd.revision (),
+      limit,
+      discoverChangedPaths ? 1 : 0,
+      strictNodeHistory ? 1 : 0,
+      logMapReceiver,
+      &l_baton,
+      *m_context, // client ctx
+      pool);
+#else
+    Q_UNUSED(include_merged_revisions);
+    Q_UNUSED(revprops);
+    Q_UNUSED(revisionPeg);
+
+    error = svn_client_log2 (
+      target.array (pool),
       revisionStart.revision (),
       revisionEnd.revision (),
       limit,
@@ -585,13 +601,29 @@ namespace svn
         &l_baton,
         *m_context, // client ctx
         pool);
-#else
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
     Q_UNUSED(include_merged_revisions);
     Q_UNUSED(revprops);
 
     error = svn_client_log3 (
       target.array (pool),
       revisionPeg.revision(),
+      revisionStart.revision (),
+      revisionEnd.revision (),
+      limit,
+      discoverChangedPaths ? 1 : 0,
+      strictNodeHistory ? 1 : 0,
+      logReceiver,
+      &l_baton,
+      *m_context, // client ctx
+      pool);
+#else
+    Q_UNUSED(include_merged_revisions);
+    Q_UNUSED(revprops);
+    Q_UNUSED(revisionPeg);
+
+    error = svn_client_log2 (
+      target.array (pool),
       revisionStart.revision (),
       revisionEnd.revision (),
       limit,

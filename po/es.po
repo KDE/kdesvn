@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-29 23:32+0200\n"
-"PO-Revision-Date: 2008-06-18 17:43+0200\n"
+"PO-Revision-Date: 2008-08-06 01:12+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: es_ES <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgstr "Volcado finalizado."
 
 #: kdesvnview.cpp:473
 msgid "Inserted %v not cached log entries of %m."
-msgstr ""
+msgstr "Insertadas %v entradas de registro no cacheadas de %m."
 
 #: kdesvnd/main.cpp:32
 msgid "Kdesvn DCOP service"
@@ -126,7 +126,7 @@ msgstr "Repositorio"
 #: rc.cpp:21
 #, no-c-format
 msgid "Logcache"
-msgstr ""
+msgstr "Logcache"
 
 #: rc.cpp:27 rc.cpp:30 rc.cpp:33 rc.cpp:36
 #, no-c-format
@@ -165,8 +165,7 @@ msgstr "0"
 
 #: rc.cpp:60
 #, no-c-format
-msgid ""
-"The minimum a log output must contain before kdesvn shows a single logwindow"
+msgid "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "El mínimo que una salida de registro debe contener antes de que kdesvn "
 "muestre una ventana con el registro"
@@ -273,14 +272,12 @@ msgstr "Mostrar ficheros ignorados"
 #: rc.cpp:112
 #, no-c-format
 msgid "Automatic update of logcache"
-msgstr ""
+msgstr "Actualización automática de logcache"
 
 #: rc.cpp:115
-#, fuzzy, no-c-format
-msgid ""
-"If set start filling the logcache when open a repository or working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+#, no-c-format
+msgid "If set start filling the logcache when open a repository or working copy"
+msgstr "Si se establece, se inicia el relleno del logcache al abrir un repositorio o una copia de trabajo"
 
 #: rc.cpp:118
 #, no-c-format
@@ -290,6 +287,9 @@ msgid ""
 "\n"
 "If networking is disabled, then this flag is ignored."
 msgstr ""
+"Establece si el logcache interno se debe actualizar después de abrir una copia de trabajo o un repositorio o después de una confirmación en una copia de trabajo.\n"
+"\n"
+"Si la red está deshabilitada, entonces esta etiqueta se ignora."
 
 #: rc.cpp:123
 #, no-c-format
@@ -338,8 +338,7 @@ msgstr "Configuración Subversion"
 #: rc.cpp:145
 #, no-c-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
 #: rc.cpp:149
 #, no-c-format
@@ -349,27 +348,24 @@ msgstr ""
 "trabajo"
 
 #: rc.cpp:152
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start fill log cache on open"
-msgstr "Rellenando cache de registros en segundo plano"
+msgstr "Inicio del relleno del logcache al abrir"
 
 #: rc.cpp:155
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start refresh the logcache for repository when networking enabled"
-msgstr ""
-"Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
+msgstr "Inicio del refresco del logcache para el repositorio cuando la red está habilitada"
 
 #: rc.cpp:158
 #, no-c-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
-"Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
+msgstr "Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
 
 #: rc.cpp:161
 #, no-c-format
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
-"Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
+msgstr "Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
 
 #: rc.cpp:164
 #, no-c-format
@@ -477,8 +473,7 @@ msgstr "Almacenar contraseñas en Cartera KDE"
 
 #: rc.cpp:208
 #, no-c-format
-msgid ""
-"When saving passwords, do it into KDE wallet instead of subversions storage?"
+msgid "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes "
 "de Subversion?"
@@ -509,14 +504,14 @@ msgstr ""
 "de kde, o bien no guardar las contraseñas en ningún sitio.</p>"
 
 #: rc.cpp:216
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use internal password cache"
-msgstr "Por favor, introduzca su contraseña abajo."
+msgstr "Utilizar clave de cache interna"
 
 #: rc.cpp:219
 #, no-c-format
 msgid "Use an internal password cache"
-msgstr ""
+msgstr "Utilizar una clave de cache interna"
 
 #: rc.cpp:222
 #, no-c-format
@@ -562,14 +557,12 @@ msgstr "Ocultar elementos nuevos en el dialogo de confirmación"
 #: rc.cpp:247
 #, no-c-format
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
-"Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
+msgstr "Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
 
 #: rc.cpp:250
 #, no-c-format
 msgid "Maximum displayed logs when full log (0 for no limit)"
-msgstr ""
-"Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
+msgstr "Máximo número de registros mostrados cuando está lleno (0 para ningún límite)"
 
 #: rc.cpp:253
 #, no-c-format
@@ -672,8 +665,7 @@ msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:321
 #, no-c-format
-msgid ""
-"Set if merge with external program is prefered and not subversions merge"
+msgid "Set if merge with external program is prefered and not subversions merge"
 msgstr ""
 "Establece si se prefiere un programa de fusionado externo y no el fusionado "
 "de subversion"
@@ -1003,8 +995,7 @@ msgstr "Seleccione tipo de almacenamiento"
 #: rc.cpp:528
 #, no-c-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
+msgstr "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
 #: rc.cpp:531
 #, no-c-format
@@ -1019,8 +1010,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 #: rc.cpp:538
 #, no-c-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
-"Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
+msgstr "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
 #: rc.cpp:542
 #, no-c-format
@@ -1401,8 +1391,7 @@ msgstr "Mensaje"
 #: rc.cpp:797
 #, no-c-format
 msgid "Select in first column revisions for diff"
-msgstr ""
-"Seleccione en la primera columna las revisiones para mostrar diferencias"
+msgstr "Seleccione en la primera columna las revisiones para mostrar diferencias"
 
 #: rc.cpp:800 rc.cpp:850 ksvnwidgets/logmsg_impl.cpp:89
 #: ksvnwidgets/logmsg_impl.cpp:116
@@ -1531,7 +1520,7 @@ msgstr "O inserte uno de los últimos:"
 #: rc.cpp:884
 #, no-c-format
 msgid "Insert Textfile"
-msgstr ""
+msgstr "Insertar Fichero de Texto"
 
 #: rc.cpp:887
 #, no-c-format
@@ -1836,9 +1825,8 @@ msgid "Hide unchanged files"
 msgstr "Ocultar ficheros sin cambios"
 
 #: kdesvn_part.cpp:203
-#, fuzzy
 msgid "Work online"
-msgstr "Mostrar línea"
+msgstr "Trabajar conectado"
 
 #: kdesvn_part.cpp:211
 msgid "&Configure %1..."
@@ -2132,9 +2120,8 @@ msgid "Property modified"
 msgstr "Propiedad modificada"
 
 #: svnfrontend/fillcachethread.cpp:96
-#, fuzzy
 msgid "Filling cache canceled."
-msgstr "Rellenando cache de registros en segundo plano"
+msgstr "Relleno de cache cancelado."
 
 #: svnfrontend/fillcachethread.cpp:113
 msgid "Cache filled up to revision %1"
@@ -2417,8 +2404,7 @@ msgstr "Introducir el rango de fusionado"
 
 #: svnfrontend/editproperty_impl.cpp:43 svnfrontend/editproperty_impl.cpp:79
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
-msgstr ""
-"Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
+msgstr "Uno de los <b>'nativos'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>."
 
 #: svnfrontend/editproperty_impl.cpp:44 svnfrontend/editproperty_impl.cpp:80
 msgid ""
@@ -2496,8 +2482,7 @@ msgstr ""
 "ignorar."
 
 #: svnfrontend/editproperty_impl.cpp:96
-msgid ""
-"Label text to show for the edit box where the user enters the issue number."
+msgid "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "Etiqueta de texto para mostrar la caja de edición donde el usuario introduce "
 "el número de emisión."
@@ -2733,7 +2718,7 @@ msgstr "Lista de información"
 
 #: svnfrontend/svnactions.cpp:922
 msgid "Not commiting because networking is disabled"
-msgstr ""
+msgstr "No se confirma porque la red está deshabilitada"
 
 #: svnfrontend/svnactions.cpp:942 svnfrontend/svnactions.cpp:2259
 msgid "Status / List"
@@ -2768,9 +2753,8 @@ msgid "Download - hit cancel for abort"
 msgstr "Descargando - pulse cancelar para abortar"
 
 #: svnfrontend/svnactions.cpp:1090
-#, fuzzy
 msgid "Can not do this diff because networking is disabled."
-msgstr "Terminada la comprobación de actualizaciones"
+msgstr "No se puede hacer el diff porque la red está deshabilitada"
 
 #: svnfrontend/svnactions.cpp:1133
 msgid "Both entries seems to be the same, can not diff."
@@ -2851,8 +2835,7 @@ msgstr "Obteniendo"
 
 #: svnfrontend/svnactions.cpp:1699
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
-msgstr ""
-"<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
+msgstr "<center>La entrada<br>%1<br>no está versionada - interrumpido.</center>"
 
 #: svnfrontend/svnactions.cpp:1722
 msgid "Revert entries"
@@ -2984,21 +2967,19 @@ msgstr "Hay nuevos elementos en el repositorio"
 
 #: svnfrontend/svnactions.cpp:2505
 msgid "Not filling logcache because networking is disabled"
-msgstr ""
+msgstr "No se rellena el logcache porque la red está deshabilitada"
 
 #: svnfrontend/svnactions.cpp:2513
 msgid "Filling log cache in background"
 msgstr "Rellenando cache de registros en segundo plano"
 
 #: svnfrontend/svnactions.cpp:2540
-#, fuzzy
 msgid "Filling log cache in background finished."
-msgstr "Rellenando cache de registros en segundo plano"
+msgstr "Finalizado el relleno de logcache en segundo plano."
 
 #: svnfrontend/svnactions.cpp:2559
-#, fuzzy
 msgid "Not checking for updates because networking is disabled"
-msgstr "Terminada la comprobación de actualizaciones"
+msgstr "No se chequean actualizaciones porque la red está deshabilitada."
 
 #: svnfrontend/svnactions.cpp:2566
 msgid "Checking for updates started in background"
@@ -3094,8 +3075,7 @@ msgstr "Mostrar últimos cambios"
 
 #: svnfrontend/kdesvnfilelist.cpp:275
 msgid "Display last changes as difference to previous commit."
-msgstr ""
-"Muestra los últimos cambios como diferencias con la confirmación previa."
+msgstr "Muestra los últimos cambios como diferencias con la confirmación previa."
 
 #: svnfrontend/kdesvnfilelist.cpp:277
 msgid "Details"
@@ -3106,8 +3086,7 @@ msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
 #: svnfrontend/kdesvnfilelist.cpp:284
-msgid ""
-"Check if current working copy has items with newer version in repository"
+msgid "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
@@ -3142,8 +3121,7 @@ msgstr "Volcar revisión..."
 
 #: svnfrontend/kdesvnfilelist.cpp:298
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
-"Muestra el contenido de ficheros o URLs concretos con versión indicada."
+msgstr "Muestra el contenido de ficheros o URLs concretos con versión indicada."
 
 #: svnfrontend/kdesvnfilelist.cpp:300
 msgid "Lock current items"
@@ -3175,8 +3153,7 @@ msgstr "Chequear elementos no versionados"
 
 #: svnfrontend/kdesvnfilelist.cpp:316
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
-"Busca en la carpeta elementos no versionados y los añade si se requiere."
+msgstr "Busca en la carpeta elementos no versionados y los añade si se requiere."
 
 #: svnfrontend/kdesvnfilelist.cpp:318
 msgid "Open repository of working copy"
@@ -3336,23 +3313,20 @@ msgstr "Cierra todas las ramas del árbol de ficheros"
 
 #: svnfrontend/kdesvnfilelist.cpp:405 svnfrontend/kdesvnfilelist.cpp:1013
 #: svnfrontend/kdesvnfilelist.cpp:3149
-#, fuzzy
 msgid "Update log cache"
-msgstr "Actualizar a HEAD"
+msgstr "Actualizar logcache"
 
 #: svnfrontend/kdesvnfilelist.cpp:406
-#, fuzzy
 msgid "Update the log cache for current repository"
-msgstr "Obtener lugar del repositorio actual"
+msgstr "Actualiza el logcache para el repositorio actual"
 
 #: svnfrontend/kdesvnfilelist.cpp:562
 msgid "Networked URL to open but networking is disabled!"
-msgstr ""
+msgstr "Solicitada URL de red para abrir, pero la red está deshabilitada!"
 
 #: svnfrontend/kdesvnfilelist.cpp:1015 svnfrontend/kdesvnfilelist.cpp:3144
-#, fuzzy
 msgid "Stop updating the logcache"
-msgstr "Actualizar a HEAD"
+msgstr "Deteniendo actualización de logcache"
 
 #: svnfrontend/kdesvnfilelist.cpp:1070
 msgid "Could not retrieve repository of working copy."
@@ -3588,8 +3562,9 @@ msgstr "Mensaje de registro"
 
 #: ksvnwidgets/logmsg_impl.cpp:626
 msgid "Select textfile for insert"
-msgstr ""
+msgstr "Seleccione fichero de texto para insertar"
 
 #: urldlg.cpp:52
 msgid "Open repository or working copy"
 msgstr "Abrir repositorio o copia de trabajo"
+

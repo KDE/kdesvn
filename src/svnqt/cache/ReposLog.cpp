@@ -216,14 +216,31 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     if (start==svn::Revision::HEAD) {
         start=latestCachedRev();
     }
+    static QString sCount("select count(*) from logentries where revision<=? and revision>=?");
     static QString sEntry("select revision,author,date,message from logentries where revision<=? and revision>=?");
     static QString sItems("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?");
+
+    QSqlQuery bcount(QString::null,m_Database);
+    bcount.prepare(sCount);
 
     QSqlQuery bcur(QString::null,m_Database);
     bcur.prepare(sEntry);
 
     QSqlQuery cur(QString::null,m_Database);
     cur.prepare(sItems);
+
+    bcount.bindValue(0,Q_LLONG(end.revnum()));
+    bcount.bindValue(1,Q_LLONG(start.revnum()));
+    if (!bcount.exec()) {
+        qDebug(bcount.lastError().text().TOUTF8().data());
+        throw svn::cache::DatabaseException(QString("Could not retrieve count: ")+bcount.lastError().text());
+        return false;
+    }
+    bcount.next();
+    if (bcount.value(0).toLongLong()<1) {
+        // we didn't found logs with this parameters
+        return false;
+    }
 
     bcur.bindValue(0,Q_LLONG(end.revnum()));
     bcur.bindValue(1,Q_LLONG(start.revnum()));
@@ -263,10 +280,11 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         if (cp && cp->getListener()) {
             if (cp->getListener()->contextCancel()) {
                 throw svn::cache::DatabaseException(QString("Could not retrieve values: User cancel."));
+                return false;
             }
         }
     }
-    return false;
+    return true;
 }
 
 

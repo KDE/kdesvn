@@ -1384,6 +1384,10 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 <entry>When open a working copy start a check for updates in background</entry>
 </row>
 <row>
+<entry>Start fill log cache on open</entry>
+<entry>If set &kappname; start (re-)filling the logcache when open a repository or working copy if repository url is not assigned local (<programlisting>file:&#047;&#047;</programlisting>)</entry>
+</row>
+<row>
 <entry>Check if items has svn:needs-lock set</entry>
 <entry>Check on working copies if an item has this property set and if yes, displays a special overlayed icon. Setting this may let listings get real slow.</entry>
 </row>
@@ -1410,6 +1414,11 @@ Setting may changed from the setup dialog. Them are seperated into some subdialo
 <row>
 <entry>Store passwords into KDE wallet</entry>
 <entry>When saving passwords, the cleartext file from subversion is a security hole. &kappname; is able saving them into encrypted kde wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like svn-cmdline or rapidsvn, too. As long as subversion don't encrypt password storage you should think twice about it.</entry>
+</row>
+
+<row>
+<entry>Use internal password cache</entry>
+<entry>When a password isn't stored persistent &kappname; may hold is until &kappname; ends so you may not need enter it again on each operation. This cache is never persistent, eg., it will not saved anywhere.</entry>
 </row>
 
 <row>
@@ -1571,7 +1580,7 @@ In paranthesis after each description an example how subversion would call the f
 <varlistentry>
 <term>%o or %l</term>
 <listitem><para>
-Old (local,left) version. This means the the lower revsion number, eg., the start point of conflicted changes. (<prompt>foo.cc.r2</prompt>)
+Old (local,left) version. This means the lower revsion number, eg., the start point of conflicted changes. (<prompt>foo.cc.r2</prompt>)
 </para></listitem>
 </varlistentry>
 <varlistentry>

@@ -1,7 +1,7 @@
 #first straigth forward until we have a doc translation
 
 MACRO (GENBOOK _language_code)
-    FILE(GLOB docimages ${_language_code}/hi128-filesys-*.png)
+    FILE(GLOB docimages RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code} ${_language_code}/hi128-filesys-*.png)
     ADD_CUSTOM_COMMAND(
         OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}_index.cache.bz2
         COMMAND
@@ -10,7 +10,6 @@ MACRO (GENBOOK _language_code)
         ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}/index.docbook
         DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}/index.docbook
-        ${docimages}
     )
     INSTALL(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}_index.cache.bz2
@@ -20,12 +19,21 @@ MACRO (GENBOOK _language_code)
     )
     INSTALL(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}/index.docbook
-        ${docimages}
         DESTINATION ${HTML_INSTALL_DIR}/${_language_code}/kdesvn
     )
+
+    FOREACH(_img ${docimages})
+        CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}/${_img}
+                        ${CMAKE_CURRENT_BINARY_DIR}/${_language_code}/${_img}
+                        COPYONLY
+                        )
+        INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${_language_code}/${_img}
+                DESTINATION ${HTML_INSTALL_DIR}/${_language_code}/kdesvn
+                )
+    ENDFOREACH(_img)
+
     ADD_CUSTOM_TARGET(${_language_code}_doc
         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${_language_code}_index.cache.bz2
-#        COMMENT "Building doc language ${_language_code}"
     )
     ADD_DEPENDENCIES(doc ${_language_code}_doc)
 

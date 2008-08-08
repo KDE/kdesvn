@@ -2577,6 +2577,7 @@ void kdesvnfilelist::_dirwatchTimeout()
                     checkUnversionedDirs(item);
                 }
             }
+            updateParents(static_cast<FileListViewItem*>(item->parent()));
         } else if (c=='D') {
             if (item->isDir()) {
                 m_pList->m_DirWatch->removeDir(what);

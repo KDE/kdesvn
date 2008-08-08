@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -68,6 +68,14 @@ namespace svn
      */
     static bool
     isValid (const QString& url);
+
+    /**
+     * Checks if @a url points to a local filesystem.
+     *
+     * @return true if url is accessed local without network.
+     */
+    static bool
+    isLocal(const QString& url);
 
     static QString
     transformProtokoll(const QString&);

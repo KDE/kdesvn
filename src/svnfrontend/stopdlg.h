@@ -22,7 +22,7 @@
 
 #include "src/svnfrontend/fronthelpers/cursorstack.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include <qdatetime.h>
 #include <qobject.h>
@@ -36,14 +36,14 @@ class QTimer;
 
 class CContextListener;
 class QLabel;
-class KProgress;
+class QProgressBar;
 class KTextBrowser;
 class Q3VBoxLayout;
 
 /**
 @author Rajko Albrecht
 */
-class StopDlg : public KDialogBase
+class StopDlg : public KDialog
 {
 Q_OBJECT
 public:
@@ -60,8 +60,8 @@ protected:
     QString mCancelText;
     bool mShown,mWait;
     QLabel*mLabel;
-    KProgress*m_ProgressBar;
-    KProgress*m_NetBar;
+    QProgressBar*m_ProgressBar;
+    QProgressBar*m_NetBar;
     bool m_BarShown;
     bool m_netBarShown;
     QTime m_StopTick;
@@ -74,6 +74,8 @@ protected:
 
     virtual void showEvent(QShowEvent*);
     virtual void hideEvent(QHideEvent*);
+
+    QWidget*m_mainWidget;
 
 public slots:
     virtual void slotTick();

@@ -38,9 +38,9 @@ class CommandExec : public QObject
 {
 Q_OBJECT
 public:
-    CommandExec(QObject*parent,KCmdLineArgs *args);
+    CommandExec(QObject*parent);
     virtual ~CommandExec();
-    virtual int exec();
+    virtual int exec(KCmdLineArgs*args);
 
 protected slots:
     virtual void clientException(const QString&);

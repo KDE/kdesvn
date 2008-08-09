@@ -93,11 +93,11 @@ pCPart::~pCPart()
     delete disp;
 }
 
-CommandExec::CommandExec(QObject*parent, KCmdLineArgs *args)
+CommandExec::CommandExec(QObject*parent)
     : QObject(parent)
 {
     m_pCPart = new pCPart;
-    m_pCPart->args = args;
+    m_pCPart->args = 0;
     SshAgent ag;
     ag.querySshAgent();
 
@@ -112,8 +112,9 @@ CommandExec::~CommandExec()
     delete m_pCPart;
 }
 
-int CommandExec::exec()
+int CommandExec::exec(KCmdLineArgs*args)
 {
+    m_pCPart->args=args;
     if (!m_pCPart->args) {
         return -1;
     }

@@ -8,14 +8,15 @@ SET(kdesvnsrc
     main.cpp
     kdesvn.cpp
     urldlg.cpp
-    commandline.cpp)
+    commandline.cpp
+)
 
 SET(partsrc
     kdesvn_events.cpp
-    kdesvn_events.h
     kdesvn_part.cpp
     kdesvnview.cpp
-    commandline_part.cpp)
+    commandline_part.cpp
+)
 
 KDE_AUTOMOC(${kdesvnsrc})
 KDE_AUTOMOC(${partsrc})

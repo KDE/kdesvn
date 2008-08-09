@@ -53,7 +53,7 @@
 #include <q3popupmenu.h>
 #include <ktoolinvocation.h>
 
-K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnPart>();registerPlugin<commandline_part>();)
+K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnPart>();registerPlugin<commandline_part>("commandline_part");)
 K_EXPORT_PLUGIN(KdesvnFactory( "kdesvnPart", "kdesvn" ) )
 
 static const char version[] = VERSION;

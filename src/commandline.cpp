@@ -70,13 +70,13 @@ int CommandLine::exec()
     }
     KLibFactory *factory = KLibLoader::self()->factory("libkdesvnpart");
     if (factory) {
-        if (Q3CString(factory->className())!="cFactory") {
-            kDebug()<<"wrong factory"<<endl;
-            return -1;
+        QObject * _p = (factory->create<QObject>("commandline_part",this));
+        if (!_p || QString(_p->metaObject()->className()).compare("commandline_part")!=0) {
+            kDebug()<<"wrong object returned"<<endl;
+            return 0;
         }
-        cFactory*cfa = static_cast<cFactory*>(factory);
-        commandline_part * cpart = cfa->createCommandIf((QObject*)0,(const char*)0,m_args);
-        int res = cpart->exec();
+        commandline_part * cpart = static_cast<commandline_part*>(_p);
+        int res = cpart->exec(m_args);
         return res;
     }
     return 0;
@@ -86,3 +86,5 @@ void CommandLineData::displayHelp()
 {
     KToolInvocation::invokeHelp("kdesvn-commandline","kdesvn");
 }
+
+#include "commandline.moc"

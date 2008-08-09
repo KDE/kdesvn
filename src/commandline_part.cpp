@@ -23,7 +23,7 @@
 
 #include <kstandarddirs.h>
 
-commandline_part::commandline_part(QObject *parent, const QVariantList& args)
+commandline_part::commandline_part(QObject *parent, const QVariantList&)
  : QObject(parent)
 {
     KGlobal::locale()->insertCatalog("kdesvn");
@@ -37,16 +37,16 @@ commandline_part::commandline_part(QObject *parent, const QVariantList& args)
         KStandardDirs::kde_default("data")+ QString::fromLatin1( inst->instanceName() ) + '/' );
     */
 
-    m_pCPart = new CommandExec(this,args);
+    m_pCPart = new CommandExec(this);
 }
 
 commandline_part::~commandline_part()
 {
 }
 
-int commandline_part::exec()
+int commandline_part::exec(KCmdLineArgs*args)
 {
-    return m_pCPart->exec();
+    return m_pCPart->exec(args);
 }
 
 #include "commandline_part.moc"

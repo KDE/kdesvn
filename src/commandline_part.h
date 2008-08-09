@@ -21,6 +21,7 @@
 #define COMMANDLINE_PART_H
 
 #include <qobject.h>
+#include <QVariantList>
 
 class CommandExec;
 class KCmdLineArgs;
@@ -34,7 +35,7 @@ class commandline_part : public QObject
 public:
     commandline_part(QObject *parent, const QVariantList& args = QVariantList());
     virtual ~commandline_part();
-    virtual int exec();
+    virtual int exec(KCmdLineArgs*);
 private:
     CommandExec*m_pCPart;
 

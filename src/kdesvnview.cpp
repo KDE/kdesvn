@@ -60,9 +60,9 @@
 #include <kdialogbase.h>
 #include <kprogressdialog.h>
 
-kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,const char*name,bool full)
-    : QWidget(parent,name),svn::repository::RepositoryListener(),m_Collection(aCollection),
-      m_currentURL("")
+kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
+    : QWidget(parent),svn::repository::RepositoryListener(),m_Collection(aCollection),
+      m_currentUrl("")
 {
     Q_UNUSED(full);
     setupActions();
@@ -134,26 +134,26 @@ kdesvnView::~kdesvnView()
 
 void kdesvnView::slotUrlChanged(const QString&url)
 {
-    m_currentURL=url;
+    m_currentUrl=url;
     slotSetTitle(url);
     emit sigUrlChanged(url);
     slotOnURL(i18n("Repository opened"));
 }
 
-QString kdesvnView::currentURL()
+QString kdesvnView::currentUrl()
 {
-    return m_currentURL;
+    return m_currentUrl;
 }
 
-bool kdesvnView::openURL(QString url)
+bool kdesvnView::openUrl(QString url)
 {
-    return openURL(KUrl(url));
+    return openUrl(KUrl(url));
 }
 
-bool kdesvnView::openURL(const KUrl& url)
+bool kdesvnView::openUrl(const KUrl& url)
 {
     /* transform of url must be done in part! otherwise we will run into different troubles! */
-    m_currentURL = "";
+    m_currentUrl = "";
     KUrl _url;
     bool open = false;
     _url = url;
@@ -163,7 +163,7 @@ bool kdesvnView::openURL(const KUrl& url)
         QString _f = _url.path();
         QFileInfo f(_f);
         if (!f.isDir()) {
-            m_currentURL="";
+            m_currentUrl="";
             return open;
         }
         if (query.length()>1) {
@@ -176,9 +176,9 @@ bool kdesvnView::openURL(const KUrl& url)
     }
     m_LogWindow->setText("");
     slotSetTitle(url.prettyUrl());
-    if (m_flist->openURL(url)) {
+    if (m_flist->openUrl(url)) {
         slotOnURL(i18n("Repository opened"));
-        m_currentURL=url.url();
+        m_currentUr=url.url();
         open = true;
     } else {
         QString t = m_flist->lastError();
@@ -280,7 +280,7 @@ void kdesvnView::slotCreateRepo()
     if (!ok) {
         return;
     }
-    openURL(path);
+    openUrl(path);
     if (createdirs) {
         emit sigMakeBaseDirs();
     }

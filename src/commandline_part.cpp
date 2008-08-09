@@ -23,17 +23,21 @@
 
 #include <kstandarddirs.h>
 
-commandline_part::commandline_part(QObject *parent, const char *name,KCmdLineArgs *args)
- : QObject(parent, name)
+commandline_part::commandline_part(QObject *parent, const QVariantList& args)
+ : QObject(parent)
 {
     KGlobal::locale()->insertCatalog("kdesvn");
-    KInstance * inst = kdesvnPartFactory::instance();
+
+    ///@fixme replace with kde4
+    //KInstance * inst = kdesvnPartFactory::instance();
+
+    /*
     KGlobal::locale()->insertCatalog(inst->instanceName());
     KGlobal::dirs()->addResourceType( inst->instanceName() + "data",
         KStandardDirs::kde_default("data")+ QString::fromLatin1( inst->instanceName() ) + '/' );
+    */
 
-
-    m_pCPart = new CommandExec(this,name?QString(name)+QString("_exec"):QString::fromLatin1("command_executer"),args);
+    m_pCPart = new CommandExec(this,args);
 }
 
 commandline_part::~commandline_part()

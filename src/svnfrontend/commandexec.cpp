@@ -93,8 +93,8 @@ pCPart::~pCPart()
     delete disp;
 }
 
-CommandExec::CommandExec(QObject*parent, const char *name,KCmdLineArgs *args)
-    : QObject(parent,name)
+CommandExec::CommandExec(QObject*parent, KCmdLineArgs *args)
+    : QObject(parent)
 {
     m_pCPart = new pCPart;
     m_pCPart->args = args;
@@ -321,7 +321,7 @@ int CommandExec::exec()
 //             true,
 //             i18n("Execution log"),
 //             KDialogBase::Ok);
-// 
+//
 //         QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
         KDialog dlg(KApplication::activeModalWidget());
         KVBox *Dialog1Layout = new KVBox(&dlg);

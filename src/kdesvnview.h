@@ -60,7 +60,7 @@ public:
     /**
      * Default constructor
      */
-    kdesvnView(KActionCollection*,QWidget *parent,const char*name=0,bool full=false);
+    kdesvnView(KActionCollection*,QWidget *parent,bool full=false);
 
     /**
      * Destructor
@@ -70,17 +70,17 @@ public:
     /**
      * Random 'get' function
      */
-    QString currentURL();
+    QString currentUrl();
 
     /**
      * Random 'set' function accessed by DCOP
      */
-    virtual bool openURL(QString url);
+    virtual bool openUrl(QString url);
 
     /**
      * Random 'set' function
      */
-    virtual bool openURL(const KUrl& url);
+    virtual bool openUrl(const KUrl& url);
 
     /* repositorylistener methods */
     virtual void sendWarning(const QString&);
@@ -133,7 +133,7 @@ protected:
     KActionCollection*m_Collection;
 
     QSplitter *m_Splitter,*m_infoSplitter;
-    QString m_currentURL;
+    QString m_currentUrl;
     KTextBrowser*m_LogWindow;
     Q3VBoxLayout*m_topLayout;
     KProgress*m_CacheProgressBar;

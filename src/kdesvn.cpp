@@ -127,60 +127,51 @@ kdesvn::kdesvn()
             kapp->quit();
             return;
         }
+#if KDE_VERSION_MAJOR<4
         cFactory*cfa = static_cast<cFactory*>(factory);
 
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
         m_part = static_cast<KParts::ReadOnlyPart *>(cfa->createAppPart(this,"kdesvn_part", this, "kdesvn_part", "KParts::ReadOnlyPart",QStringList()));
-
+#else
+        m_part = factory->create<KParts::ReadOnlyPart>(this);
+#endif
         if (m_part)
         {
             // tell the KParts::MainWindow that this is indeed the main widget
             setCentralWidget(m_part->widget());
 
             KAction*tmpAction;
-//             tmpAction = new KAction(i18n("Create and open new repository"),"filenew",
-//                 KShortcut(),m_part->widget(),SLOT(slotCreateRepo()),actionCollection(),"subversion_create_repo");
             tmpAction = actionCollection()->addAction("subversion_create_repo",
                                                        m_part->widget(),
                                                        SLOT(slotCreateRepo()));
             tmpAction->setText(i18n("Create and open new repository"));
             tmpAction->setToolTip(i18n("Create and opens a new local subversion repository"));
 
-//             tmpAction = new KAction(i18n("Dump repository to file"),"filenew",
-//                 KShortcut(),m_part->widget(),SLOT(slotDumpRepo()),actionCollection(),"subversion_dump_repo");
             tmpAction = actionCollection()->addAction("subversion_dump_repo",
                                                        m_part->widget(),
                                                        SLOT(slotDumpRepo()));
             tmpAction->setText(i18n("Dump repository to file"));
             tmpAction->setToolTip(i18n("Dump a subversion repository to a file"));
 
-//             tmpAction = new KAction(i18n("Hotcopy a repository"),"filenew",
-//                 KShortcut(),m_part->widget(),SLOT(slotHotcopy()),actionCollection(),"subversion_hotcopy_repo");
             tmpAction = actionCollection()->addAction("subversion_hotcopy_repo",
                                                        m_part->widget(),
                                                        SLOT(slotHotcopy()));
             tmpAction->setText(i18n("Hotcopy a repository"));
             tmpAction->setToolTip(i18n("Hotcopy a subversion repository to a new folder"));
 
-//             tmpAction = new KAction(i18n("Load dump into repository"),"filenew",
-//                 KShortcut(),m_part->widget(),SLOT(slotLoaddump()),actionCollection(),"subversion_load_repo");
             tmpAction = actionCollection()->addAction("subversion_load_repo",
                                                        m_part->widget(),
                                                        SLOT(slotLoaddump()));
             tmpAction->setText(i18n("Load dump into repository"));
             tmpAction->setToolTip(i18n("Load a dump file into a repository."));
 
-//             tmpAction = new KAction(i18n("Add ssh identities to ssh-agent"),"password",
-//                 KShortcut(),m_part,SLOT(slotSshAdd()),actionCollection(),"kdesvn_ssh_add");
             tmpAction = actionCollection()->addAction("kdesvn_ssh_add",
                                                        m_part,
                                                        SLOT(slotSshAdd()));
             tmpAction->setText(i18n("Add ssh identities to ssh-agent"));
             tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
 
-//             tmpAction = new KAction(i18n("Info about kdesvn part"), "kdesvn",
-//                         KShortcut(), m_part, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
             tmpAction = actionCollection()->addAction("help_about_kdesvnpart",
                                                        m_part,
                                                        SLOT(showAboutApplication()));
@@ -190,9 +181,14 @@ kdesvn::kdesvn()
             /* enable tooltips in statusbar for menu */
 // KDE4 port - pv             actionCollection()->setHighlightingEnabled(true);
             connectActionCollection(actionCollection());
+
+            setHelpMenuEnabled(false);
+            (void) new KHelpMenu(this, componentData().aboutData(), false, actionCollection());
+
             // and integrate the part's GUI with the shells
             createGUI(m_part);
             connectActionCollection(m_part->actionCollection());
+
         } else {
             KMessageBox::error(this, i18n("Could not load the part:\n")+KLibLoader::self()->lastErrorMessage());
             kapp->quit();
@@ -441,33 +437,19 @@ void kdesvn::optionsConfigureToolbars()
  */
 void kdesvn::applyNewToolbarConfig()
 {
-// #if defined(KDE_MAKE_VERSION)
-// # if KDE_VERSION >= KDE_MAKE_VERSION(3,1,0)
-//     applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
     KConfigGroup cg(KGlobal::config(), autoSaveGroup());
     applyMainWindowSettings(cg);
-// # else
-//     applyMainWindowSettings(kdesvnPart::config());
-// # endif
-// #else
-//     applyMainWindowSettings(kdesvnPart::config());
-// #endif
 }
 
 void kdesvn::optionsConfigureKeys()
 {
-//     KKeyDialog kdlg(true,m_part->widget());
     KShortcutsDialog kdlg(KShortcutsEditor::AllActions,
                            KShortcutsEditor::LetterShortcutsAllowed,
                            m_part->widget());
-//     kdlg.insert(actionCollection());
-//     kdlg.insert(m_part->actionCollection());
     kdlg.addCollection(actionCollection());
     kdlg.addCollection(m_part->actionCollection());
-    bool b = kdlg.configure(true);
-//     if (b) {
-//         kdlg.commitChanges();
-//     }
+
+    kdlg.configure(true);
 }
 
 

@@ -35,7 +35,7 @@ class kdesvnView;
 class QPainter;
 class KUrl;
 class KdesvnBrowserExtension;
-class K3AboutApplication;
+class KAboutApplicationDialog;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -53,16 +53,16 @@ public:
      * Default constructor
      */
     kdesvnPart(QWidget *parentWidget,
-                    QObject *parent, const QStringList&);
+                    QObject *parent, const QVariantList& args = QVariantList());
 
     kdesvnPart(QWidget *parentWidget,
-               QObject *parent, bool ownapp, const QStringList&);
+               QObject *parent, bool ownapp, const QVariantList& args = QVariantList());
 
     /**
      * Destructor
      */
     virtual ~kdesvnPart();
-    virtual bool closeURL();
+    virtual bool closeUrl();
     static KAboutData* createAboutData();
 
 signals:
@@ -72,7 +72,7 @@ signals:
 public slots:
     virtual void slotDispPopup(const QString&,QWidget**target);
     virtual void slotFileProperties();
-    virtual bool openURL(const KUrl&);
+    virtual bool openUrl(const KUrl&);
     virtual void slotSshAdd();
 
 protected:
@@ -81,7 +81,7 @@ protected:
      */
     virtual bool openFile();
     virtual void setupActions();
-    K3AboutApplication* m_aboutDlg;
+    KAboutApplicationDialog* m_aboutDlg;
 
     void init(QWidget *parentWidget, bool full);
 
@@ -90,7 +90,9 @@ protected slots:
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
     virtual void slotUrlChanged(const QString&);
+#if KDE_VERSION_MAJOR<4
     void reportBug();
+#endif
     void showAboutApplication();
     void appHelpActivated();
     virtual void slotShowSettings();
@@ -98,9 +100,10 @@ protected slots:
 private:
     kdesvnView *m_view;
     KdesvnBrowserExtension*m_browserExt;
-    static QString m_Extratext;
+
 protected slots:
     void slotSettingsChanged();
+
 protected slots:
     virtual void slotHideUnchanged(bool);
     virtual void slotEnableNetwork(bool);
@@ -110,6 +113,7 @@ class commandline_part;
 class KCmdLineArgs;
 
 /* we make it ourself 'cause we will enhance a little bit! */
+#if KDE_VERSION_MAJOR < 4
 class KDESVN_EXPORT cFactory : public KParts::Factory
 {
     Q_OBJECT
@@ -132,14 +136,21 @@ private:
     static KAboutData* s_about;
     static commandline_part*s_cline;
 };
-
 typedef cFactory kdesvnPartFactory;
+
+#else
+
+/// KDE4 style
+///K_PLUGIN_FACTORY_DECLARATION(cFactory);
+
+#endif
+
 
 class KPARTS_EXPORT KdesvnBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 public:
-    KdesvnBrowserExtension( kdesvnPart * );
+    KdesvnBrowserExtension(kdesvnPart *);
     virtual ~KdesvnBrowserExtension();
     void setPropertiesActionEnabled(bool enabled);
 

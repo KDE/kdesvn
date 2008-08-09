@@ -35,40 +35,40 @@
 
 #include <kcomponentdata.h>
 #include <kaction.h>
+#include <ktoggleaction.h>
+#include <kactioncollection.h>
 #include <kstandardaction.h>
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <kbugreport.h>
 #include <kxmlguifactory.h>
-#include <k3aboutapplication.h>
+#include <kaboutapplicationdialog.h>
 #include <kapplication.h>
 #include <kconfigdialog.h>
 #include <kaboutdata.h>
 #include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <qcursor.h>
 #include <q3popupmenu.h>
 #include <ktoolinvocation.h>
 
-//K_EXPORT_COMPONENT_FACTORY( libkdesvnpart, kdesvnPartFactory )
-
-extern "C" { KDESVN_EXPORT void *init_libkdesvnpart() { return new kdesvnPartFactory; } }
+K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnPart>();registerPlugin<commandline_part>();)
+K_EXPORT_PLUGIN(KdesvnFactory( "kdesvnPart", "kdesvn" ) )
 
 static const char version[] = VERSION;
-QString kdesvnPart::m_Extratext = "";
 
-static const char description[] =
-    I18N_NOOP("A Subversion Client for KDE (dynamic Part component)");
-
-kdesvnPart::kdesvnPart( QWidget *parentWidget, QObject *parent, const QStringList&)
+kdesvnPart::kdesvnPart( QWidget *parentWidget, QObject *parent, const QVariantList& args)
     : KParts::ReadOnlyPart(parent)
 {
+    Q_UNUSED(args);
     init(parentWidget,false);
 }
 
-kdesvnPart::kdesvnPart(QWidget *parentWidget, QObject *parent, bool ownapp, const QStringList&)
+kdesvnPart::kdesvnPart(QWidget *parentWidget, QObject *parent, bool ownapp, const QVariantList& args)
     : KParts::ReadOnlyPart(parent)
 {
+    Q_UNUSED(args);
     init(parentWidget,ownapp);
 }
 
@@ -77,8 +77,8 @@ void kdesvnPart::init( QWidget *parentWidget, bool full)
     m_aboutDlg = 0;
     KGlobal::locale()->insertCatalog("kdesvn");
     // we need an instance
-    ///@fixme check if this is not longer needed or replaced with a new call
-    //setInstance( kdesvnPartFactory::instance() );
+    setComponentData( KdesvnFactory::componentData() );
+
     m_browserExt = new KdesvnBrowserExtension( this );
 
     // this should be your custom internal widget
@@ -108,39 +108,40 @@ void kdesvnPart::init( QWidget *parentWidget, bool full)
 
 kdesvnPart::~kdesvnPart()
 {
-    kdesvnPartFactory::instance()->config()->sync();
+    ///@todo replace with KDE4 like stuff
+    //kdesvnPartFactory::instance()->config()->sync();
 }
 
 void kdesvnPart::slotUrlChanged(const QString&url)
 {
-    m_url = url;
+    setUrl(url);
 }
 
 bool kdesvnPart::openFile()
 {
-    m_view->openURL(m_url);
+    m_view->openUrl(url());
     // just for fun, set the status bar
-    emit setStatusBarText( m_url.prettyUrl() );
+    emit setStatusBarText( url().prettyUrl() );
 
     return true;
 }
 
-bool kdesvnPart::openURL(const KUrl&url)
+bool kdesvnPart::openUrl(const KUrl&aUrl)
 {
 
-    KUrl _url = helpers::KTranslateUrl::translateSystemUrl(url);
+    KUrl _url = helpers::KTranslateUrl::translateSystemUrl(aUrl);
 
     _url.setProtocol(svn::Url::transformProtokoll(_url.protocol()));
 
-    if (!_url.isValid()||!closeURL()) {
+    if (!_url.isValid()||!closeUrl()) {
         return false;
     }
-    m_url = _url;
+    setUrl(_url);
     emit started(0);
-    bool ret = m_view->openURL(m_url);
+    bool ret = m_view->openUrl(url());
     if (ret) {
         emit completed();
-        emit setWindowCaption(url.prettyUrl());
+        emit setWindowCaption(url().prettyUrl());
     }
     return ret;
 }
@@ -156,18 +157,23 @@ void kdesvnPart::slotDispPopup(const QString&name,QWidget**target)
 
 KAboutData* kdesvnPart::createAboutData()
 {
-    m_Extratext = QString(I18N_NOOP("Built with Subversion library: %1\n")).arg(svn::Version::linked_version());
-    m_Extratext+=QString(I18N_NOOP("Running Subversion library: %1")).arg(svn::Version::running_version());
+    KLocalizedString m_Extratext = ki18n("Built with Subversion library: %1\nRunning Subversion library: %2").subs(svn::Version::linked_version()).subs(svn::Version::running_version());
 
-    KAboutData*about = new KAboutData("kdesvnpart", I18N_NOOP("kdesvn Part"), version, description,
-                     KAboutData::License_GPL, "(C) 2005-2007 Rajko Albrecht",0,
-                         0, "ral@alwins-world.de");
-    about->addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
+    KAboutData*about = new KAboutData("kdesvnpart",
+                                      "kdesvn",
+                                      ki18n("kdesvn Part"),
+                                      version,
+                                      ki18n("A Subversion Client for KDE (dynamic Part component)"),
+                                      KAboutData::License_LGPL_V2,
+                                      ki18n("(C) 2005-2008 Rajko Albrecht"),
+                                      KLocalizedString(),
+                                      QByteArray(),
+                                      "kdesvn-bugs@alwins-world.de");
+
+    about->addAuthor(ki18n("Rajko Albrecht"), ki18n("Original author and maintainer"), "ral@alwins-world.de" );
     about->setOtherText(m_Extratext);
     about->setHomepage("http://kdesvn.alwins-world.de/");
     about->setBugAddress("kdesvn-bugs@alwins-world.de");
-    about->setTranslator(I18N_NOOP("kdesvn: NAME OF TRANSLATORS\\nYour names"),
-        I18N_NOOP("kdesvn: EMAIL OF TRANSLATORS\\nYour emails"));
     return about;
 }
 
@@ -179,43 +185,50 @@ void kdesvnPart::setupActions()
 {
     KToggleAction *toggletemp;
 
-    toggletemp = new KToggleAction(i18n("Logs follow node changes"),KShortcut(),
-            actionCollection(),"toggle_log_follows");
+    toggletemp = new KToggleAction(i18n("Logs follow node changes"),this);
+    actionCollection()->addAction("toggle_log_follows",toggletemp);
     toggletemp->setChecked(Kdesvnsettings::log_follows_nodes());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLogFollowNodes(bool)));
 
-    toggletemp = new KToggleAction(i18n("Display ignored files"),KShortcut(),
-            actionCollection(),"toggle_ignored_files");
+    toggletemp = new KToggleAction(i18n("Display ignored files"),this);
+    actionCollection()->addAction("toggle_ignored_files",toggletemp);
     toggletemp->setChecked(Kdesvnsettings::display_ignored_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayIgnored(bool)));
 
 
-    toggletemp = new KToggleAction(i18n("Display unknown files"),KShortcut(),
-            actionCollection(),"toggle_unknown_files");
+    toggletemp = new KToggleAction(i18n("Display unknown files"),this);
+    actionCollection()->addAction("toggle_unknown_files",toggletemp);
     toggletemp->setChecked(Kdesvnsettings::display_unknown_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotDisplayUnkown(bool)));
 
-    toggletemp = new KToggleAction(i18n("Hide unchanged files"),KShortcut(),
-                                   actionCollection(),"toggle_hide_unchanged_files");
+    toggletemp = new KToggleAction(i18n("Hide unchanged files"),this);
+    actionCollection()->addAction("toggle_hide_unchanged_files",toggletemp);
     toggletemp->setChecked(Kdesvnsettings::hide_unchanged_files());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotHideUnchanged(bool)));
 
-    kDebug()<<"Appname = " << (QString)kapp->instanceName() << endl;
-
-    toggletemp = new KToggleAction(i18n("Work online"),KShortcut(),
-                                   actionCollection(),"toggle_network");
+    toggletemp = new KToggleAction(i18n("Work online"),this);
+    actionCollection()->addAction("toggle_network",toggletemp);
     toggletemp->setChecked(Kdesvnsettings::network_on());
     connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotEnableNetwork(bool)));
 
 
-    KAction * t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection(),"kdesvnpart_pref");
+    KAction * t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection());
+
     t->setText(i18n("&Configure %1...").arg("Kdesvn"));
-    if (QString(kapp->instanceName())!=QString("kdesvn")) {
-        (void)new KAction(i18n("&About kdesvn part"), "kdesvn", 0, this, SLOT(showAboutApplication()), actionCollection(), "help_about_kdesvnpart");
-        (void)new KAction(i18n("Kdesvn &Handbook"), "help", 0, this, SLOT(appHelpActivated()), actionCollection(), "help_kdesvn");
-        (void)new KAction(i18n("Send Bugreport for kdesvn"), 0, 0, this, SLOT(reportBug()), actionCollection(), "report_bug");
+
+    if (QString(kapp->applicationName())!=QString("kdesvn")) {
+        t = new KAction(KIcon("kdesvn"),i18n("&About kdesvn part"),this);
+        connect(t,SIGNAL(triggered(bool) ), SLOT(showAboutApplication()));
+        actionCollection()->addAction("help_about_kdesvnpart",t);
+
+        t = new KAction(KIcon("help"),i18n("Kdesvn &Handbook"), this);
+        connect(t,SIGNAL(triggered(bool) ), SLOT(appHelpActivated()));
+        actionCollection()->addAction("help_kdesvn",t);
+
+        t = new KAction(i18n("Send Bugreport for kdesvn"), this);
+        connect(t,SIGNAL(triggered(bool) ), SLOT(reportBug()));
+        actionCollection()->addAction("report_bug",t);
     }
-    actionCollection()->setHighlightingEnabled(true);
 }
 
 void kdesvnPart::slotSshAdd()
@@ -230,7 +243,7 @@ void kdesvnPart::slotSshAdd()
 void kdesvnPart::slotLogFollowNodes(bool how)
 {
     Kdesvnsettings::setLog_follows_nodes(how);
-    Kdesvnsettings::writeConfig();
+    Kdesvnsettings::self()->writeConfig();
 }
 
 
@@ -240,7 +253,7 @@ void kdesvnPart::slotLogFollowNodes(bool how)
 void kdesvnPart::slotDisplayIgnored(bool how)
 {
     Kdesvnsettings::setDisplay_ignored_files(how);
-    Kdesvnsettings::writeConfig();
+    Kdesvnsettings::self()->writeConfig();
     emit refreshTree();
 }
 
@@ -251,7 +264,7 @@ void kdesvnPart::slotDisplayIgnored(bool how)
 void kdesvnPart::slotDisplayUnkown(bool how)
 {
     Kdesvnsettings::setDisplay_unknown_files(how);
-    Kdesvnsettings::writeConfig();
+    Kdesvnsettings::self()->writeConfig();
     emit refreshTree();
 }
 
@@ -261,30 +274,31 @@ void kdesvnPart::slotDisplayUnkown(bool how)
 void kdesvnPart::slotHideUnchanged(bool how)
 {
     Kdesvnsettings::setHide_unchanged_files(how);
-    Kdesvnsettings::writeConfig();
+    Kdesvnsettings::self()->writeConfig();
     emit refreshTree();
 }
 
 void kdesvnPart::slotEnableNetwork(bool how)
 {
     Kdesvnsettings::setNetwork_on(how);
-    Kdesvnsettings::writeConfig();
+    Kdesvnsettings::self()->writeConfig();
     emit settingsChanged();
 }
 
 /*!
     \fn kdesvnPart::closeURL()
  */
-bool kdesvnPart::closeURL()
+bool kdesvnPart::closeUrl()
 {
-    m_url=KUrl();
+    KParts::ReadOnlyPart::closeUrl();
+    setUrl(KUrl());
     m_view->closeMe();
     emit setWindowCaption("");
     return true;
 }
 
 KdesvnBrowserExtension::KdesvnBrowserExtension( kdesvnPart *p )
-    : KParts::BrowserExtension( p, "KdesvnBrowserExtension" )
+    : KParts::BrowserExtension(p)
 {
     KGlobal::locale()->insertCatalog("kdesvn");
 }
@@ -307,6 +321,7 @@ void KdesvnBrowserExtension::properties()
 }
 
 
+#if KDE_VERSION_MAJOR<4
 /*!
     \fn kdesvnPart::reportBug()
  */
@@ -315,13 +330,14 @@ void kdesvnPart::reportBug()
   KBugReport dlg(m_view, true, createAboutData());
   dlg.exec();
 }
+#endif
 
 /*!
     \fn kdesvnPart::showAboutApplication()
  */
 void kdesvnPart::showAboutApplication()
 {
-    if (!m_aboutDlg) m_aboutDlg = new K3AboutApplication(createAboutData(), (QWidget *)0, (const char *)0, false);
+    if (!m_aboutDlg) m_aboutDlg = new KAboutApplicationDialog(createAboutData(), (QWidget *)0);
     if(m_aboutDlg == 0)
         return;
     if(!m_aboutDlg->isVisible())
@@ -329,7 +345,6 @@ void kdesvnPart::showAboutApplication()
     else
         m_aboutDlg->raise();
 }
-
 
 /*!
     \fn kdesvnPart::appHelpActivated()
@@ -350,20 +365,21 @@ void kdesvnPart::slotShowSettings()
     }
     KConfigDialog *dialog = new KConfigDialog(widget(),
          "kdesvnpart_settings",
-         Kdesvnsettings::self(),
-         KDialogBase::IconList);
+         Kdesvnsettings::self());
+    dialog->setFaceType(KPageDialog::List);
+
     dialog->setHelp("setup","kdesvn");
-    dialog->addPage(new DisplaySettings_impl(0,"general_items"),
+    dialog->addPage(new DisplaySettings_impl(0),
         i18n("General"),"configure",i18n("General"),true);
-    dialog->addPage(new SubversionSettings_impl(0,"subversion_items"),
+    dialog->addPage(new SubversionSettings_impl(0),
         i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
-    dialog->addPage(new DiffMergeSettings_impl(0,"diffmerge_items"),
+    dialog->addPage(new DiffMergeSettings_impl(0),
         i18n("Diff & Merge"),"kdesvnmerge",i18n("Settings for diff and merge"),true);
-    dialog->addPage(new DispColorSettings_impl(0,"color_items"),
+    dialog->addPage(new DispColorSettings_impl(0),
         i18n("Colors"),"colorize",i18n("Color Settings"),true);
-    dialog->addPage(new RevisiontreeSettingsDlg_impl(0,"revisiontree_items"),
+    dialog->addPage(new RevisiontreeSettingsDlg_impl(0),
         i18n("Revision tree"),"configure",i18n("Revision tree Settings"),true);
-    dialog->addPage(new CmdExecSettings_impl(0,"cmdexec_items"),
+    dialog->addPage(new CmdExecSettings_impl(0),
         "KIO/"+i18n("Commandline"),"terminal",i18n("Settings for commandline and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged()),this,SLOT(slotSettingsChanged()));
@@ -376,14 +392,14 @@ void kdesvnPart::slotShowSettings()
  */
 void kdesvnPart::slotSettingsChanged()
 {
-    KAction * temp;
+    QAction * temp;
     temp = actionCollection()->action("toggle_log_follows");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::log_follows_nodes());
+        temp->setChecked(Kdesvnsettings::log_follows_nodes());
     }
     temp = actionCollection()->action("toggle_ignored_files");
     if (temp) {
-        ((KToggleAction*)temp)->setChecked(Kdesvnsettings::display_ignored_files());
+        temp->setChecked(Kdesvnsettings::display_ignored_files());
     }
 #if 0
     /// not needed this momenta
@@ -395,6 +411,7 @@ void kdesvnPart::slotSettingsChanged()
     emit settingsChanged();
 }
 
+#if KDE_VERSION_MAJOR < 4
 /*
  * we may not use generic factory 'cause we make some specials */
 // KInstance*  cFactory::s_instance = 0L;
@@ -451,5 +468,6 @@ commandline_part*cFactory::createCommandIf(QObject*parent,const char*name, KCmdL
     }
     return s_cline;
 }
+#endif
 
 #include "kdesvn_part.moc"

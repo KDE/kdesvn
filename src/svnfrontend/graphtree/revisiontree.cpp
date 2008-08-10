@@ -88,6 +88,7 @@ RtreeData::~RtreeData()
 
 bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const svn::Revision&endr,const QString&origin)
 {
+    Q_UNUSED(origin);
     if (!m_Listener||!m_Client) {
         return false;
     }
@@ -130,19 +131,18 @@ RevisionTree::RevisionTree(svn::Client*aClient,
     long possible_rev=-1;
     kDebug()<<"Origin: "<<origin << endl;
 
-    m_Data->progress=new KProgressDialog(
-        parent,"progressdlg",i18n("Scanning logs"),i18n("Scanning the logs for %1").arg(origin),true);
+    m_Data->progress=new KProgressDialog(parent,i18n("Scanning logs"),i18n("Scanning the logs for %1").arg(origin));
     m_Data->progress->setMinimumDuration(100);
     m_Data->progress->show();
     m_Data->progress->setAllowCancel(true);
-    m_Data->progress->progressBar()->setTotalSteps(m_Data->m_OldHistory.size());
+    m_Data->progress->progressBar()->setRange(0,m_Data->m_OldHistory.size());
     m_Data->progress->setAutoClose(false);
     m_Data->progress->show();
     bool cancel=false;
     svn::LogEntriesMap::Iterator it;
     unsigned count = 0;
     for (it=m_Data->m_OldHistory.begin();it!=m_Data->m_OldHistory.end();++it) {
-        m_Data->progress->progressBar()->setProgress(count);
+        m_Data->progress->progressBar()->setValue(count);
         kapp->processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
@@ -155,7 +155,7 @@ RevisionTree::RevisionTree(svn::Client*aClient,
             m_Data->min_rev=it.key();
         }
         if (baserevision.kind()==svn_opt_revision_date) {
-            if (baserevision.date()<=it.data().date && possible_rev==-1||possible_rev>it.key()) {
+            if ( (baserevision.date()<=it.data().date && possible_rev==-1) || possible_rev>it.key()) {
                 possible_rev=it.key();
             }
         }
@@ -174,8 +174,8 @@ RevisionTree::RevisionTree(svn::Client*aClient,
         if (topDownScan()) {
             kDebug()<<"topdown end"<<endl;
             m_Data->progress->setAutoReset(true);
-            m_Data->progress->progressBar()->setTotalSteps(100);
-            m_Data->progress->progressBar()->setPercentageVisible(false);
+            m_Data->progress->progressBar()->setRange(0,100);
+            m_Data->progress->progressBar()->setTextVisible(false);
             m_Data->m_stopTick.restart();
             m_Data->m_TreeDisplay=new RevTreeWidget(m_Data->m_Listener,m_Data->m_Client,treeParent);
             if (bottomUpScan(m_InitialRevsion,0,m_Path,0)) {
@@ -201,7 +201,7 @@ RevisionTree::~RevisionTree()
 
 bool RevisionTree::isDeleted(long revision,const QString&path)
 {
-    for (unsigned i = 0;i<m_Data->m_History[revision].changedPaths.count();++i) {
+    for (long i = 0;i<m_Data->m_History[revision].changedPaths.count();++i) {
         if (isParent(m_Data->m_History[revision].changedPaths[i].path,path) &&
             m_Data->m_History[revision].changedPaths[i].action=='D') {
             return true;
@@ -212,18 +212,18 @@ bool RevisionTree::isDeleted(long revision,const QString&path)
 
 bool RevisionTree::topDownScan()
 {
-    m_Data->progress->progressBar()->setTotalSteps(m_Data->max_rev-m_Data->min_rev);
+    m_Data->progress->progressBar()->setRange(0,m_Data->max_rev-m_Data->min_rev);
     bool cancel=false;
     QString label;
     QString olabel = m_Data->progress->labelText();
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
-        m_Data->progress->progressBar()->setProgress(m_Data->max_rev-j);
+        m_Data->progress->progressBar()->setValue(m_Data->max_rev-j);
         kapp->processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
         }
-        for (unsigned i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
+        for (long i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
             if (i>0 && i%100==0) {
                 if (m_Data->progress->wasCancelled()) {
                     cancel=true;
@@ -231,7 +231,7 @@ bool RevisionTree::topDownScan()
                 }
                 label = i18n("%1<br>Check change entry %2 of %3")
                         .arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
-                m_Data->progress->setLabel(label);
+                m_Data->progress->setLabelText(label);
                 kapp->processEvents();
             }
             /* find min revision of item */
@@ -256,23 +256,23 @@ bool RevisionTree::topDownScan()
     if (cancel==true) {
         return false;
     }
-    m_Data->progress->setLabel(olabel);
+    m_Data->progress->setLabelText(olabel);
     /* find forward references and filter them out */
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
-        m_Data->progress->progressBar()->setProgress(m_Data->max_rev-j);
+        m_Data->progress->progressBar()->setValue(m_Data->max_rev-j);
         kapp->processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
         }
-        for (unsigned i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
+        for (long i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
             if (i>0 && i%100==0) {
                 if (m_Data->progress->wasCancelled()) {
                     cancel=true;
                     break;
                 }
                 label = i18n("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
-                m_Data->progress->setLabel(label);
+                m_Data->progress->setLabelText(label);
                 kapp->processEvents();
             }
             if (!m_Data->m_OldHistory[j].changedPaths[i].copyFromPath.isEmpty()) {
@@ -287,7 +287,7 @@ bool RevisionTree::topDownScan()
                     m_Data->m_OldHistory[j].changedPaths[i].action=0;
                 } else if (a=='A'){
                     a=INTERNALCOPY;
-                    for (unsigned z = 0;z<m_Data->m_OldHistory[j].changedPaths.count();++z) {
+                    for (long z = 0;z<m_Data->m_OldHistory[j].changedPaths.count();++z) {
                         if (m_Data->m_OldHistory[j].changedPaths[z].action=='D'
                             && isParent(m_Data->m_OldHistory[j].changedPaths[z].path,sourcepath) ) {
                             a=INTERNALRENAME;
@@ -307,15 +307,15 @@ bool RevisionTree::topDownScan()
     if (cancel==true) {
         return false;
     }
-    m_Data->progress->setLabel(olabel);
+    m_Data->progress->setLabelText(olabel);
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
-        m_Data->progress->progressBar()->setProgress(m_Data->max_rev-j);
+        m_Data->progress->progressBar()->setValue(m_Data->max_rev-j);
         kapp->processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
         }
-        for (unsigned i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
+        for (long i = 0; i<m_Data->m_OldHistory[j].changedPaths.count();++i) {
             if (m_Data->m_OldHistory[j].changedPaths[i].action==0) {
                 continue;
             }
@@ -325,7 +325,7 @@ bool RevisionTree::topDownScan()
                     break;
                 }
                 label = i18n("%1<br>Check change entry %2 of %3").arg(olabel).arg(i).arg(m_Data->m_OldHistory[j].changedPaths.count());
-                m_Data->progress->setLabel(label);
+                m_Data->progress->setLabelText(label);
                 kapp->processEvents();
             }
             m_Data->m_History[j].addCopyTo(m_Data->m_OldHistory[j].changedPaths[i].path,QString::null,-1,m_Data->m_OldHistory[j].changedPaths[i].action);
@@ -377,7 +377,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
     bool cancel = false;
     for (long j=startrev;j<=m_Data->max_rev;++j) {
         if (m_Data->m_stopTick.elapsed()>500) {
-            m_Data->progress->progressBar()->advance(1);
+            m_Data->progress->progressBar()->setValue(m_Data->progress->progressBar()->value()+1);
             kapp->processEvents();
             m_Data->m_stopTick.restart();
         }
@@ -385,7 +385,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
             cancel=true;
             break;
         }
-        for (unsigned i=0;i<REVENTRY.changedPaths.count();++i) {
+        for (long i=0;i<REVENTRY.changedPaths.count();++i) {
             if (!isParent(FORWARDENTRY.path,path)) {
                 continue;
             }

@@ -17,11 +17,11 @@ class Listener:public svn::repository::RepositoryListener
         virtual ~Listener(){}
         virtual void sendWarning(const QString&msg)
         {
-            std::cout << msg << std::endl;
+            std::cout << msg.toAscii().data() << std::endl;
         }
         virtual void sendError(const QString&msg)
         {
-            std::cout << msg << std::endl;
+            std::cout << msg.toAscii().data() << std::endl;
         }
         virtual bool isCanceld(){return false;}
 };
@@ -35,7 +35,7 @@ int main(int,char**)
         rp.CreateOpen(p,"fsfs");
     } catch (svn::ClientException e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8() << std::endl;
+        std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
 
@@ -55,7 +55,7 @@ int main(int,char**)
         m_Svnclient->checkout(p,TESTCOPATH,svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8() << std::endl;
+        std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
 

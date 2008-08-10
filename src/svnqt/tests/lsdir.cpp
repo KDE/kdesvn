@@ -22,14 +22,14 @@ int main(int,char**)
         dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,true);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8() << std::endl;
+        std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
     std::cout << "List 1 "<<dlist.size()<<std::endl;
     for (unsigned int i=0; i < dlist.size();++i) {
         QDateTime dt = svn::DateTime(dlist[i]->time());
-        std::cout << dlist[i]->name() << " "
-                << dlist[i]->lastAuthor() << " "
+        std::cout << dlist[i]->name().TOUTF8().data() << " "
+                << dlist[i]->lastAuthor().TOUTF8().data() << " "
                 << dlist[i]->size() << " "
                 << dt.toTime_t() << std::endl;
     }
@@ -37,15 +37,15 @@ int main(int,char**)
         dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthImmediates,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8() << std::endl;
+        std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
     std::cout << "================"<<std::endl;
     std::cout << "List 2 "<<dlist.size()<<std::endl;
     for (unsigned int i=0; i < dlist.size();++i) {
         QDateTime dt = svn::DateTime(dlist[i]->time());
-        std::cout << dlist[i]->name() << " "
-                << dlist[i]->lastAuthor() << " "
+        std::cout << dlist[i]->name().TOUTF8().data() << " "
+                << dlist[i]->lastAuthor().TOUTF8().data() << " "
                 << dlist[i]->size() << " "
                 << dt.toTime_t() << std::endl;
     }
@@ -55,11 +55,11 @@ int main(int,char**)
         slist = m_Svnclient->status(svn::Path(p),svn::DepthInfinity,true,true,true,svn::Revision::HEAD,true,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8() << std::endl;
+        std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
     for (unsigned int i=0; i < slist.size();++i) {
-        std::cout << slist[i]->path()<< std::endl;
+        std::cout << slist[i]->path().TOUTF8().data()<< std::endl;
     }
     std::cout << "================"<<std::endl;
     std::cout << "Second status:"<<std::endl;
@@ -67,11 +67,11 @@ int main(int,char**)
         slist = m_Svnclient->status(svn::Path(l),svn::DepthInfinity,true,true,true,svn::Revision::WORKING,true,false);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8() << std::endl;
+        std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
     for (unsigned int i=0; i < slist.size();++i) {
-        std::cout << slist[i]->path()<< std::endl;
+        std::cout << slist[i]->path().TOUTF8().data()<< std::endl;
     }
 
     return 0;

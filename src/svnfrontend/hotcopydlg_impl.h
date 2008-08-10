@@ -20,12 +20,15 @@
 #ifndef HOTCOPYDLG_IMPL_H
 #define HOTCOPYDLG_IMPL_H
 
-#include "hotcopydlg.h"
+#include "ui_hotcopydlg.h"
 
-class HotcopyDlg_impl: public HotcopyDlg {
-Q_OBJECT
+#include <QWidget>
+#include <QString>
+
+class HotcopyDlg_impl: public QWidget, public Ui::HotcopyDlg {
+    Q_OBJECT
 public:
-    HotcopyDlg_impl(QWidget *parent = 0, const char *name = 0);
+    HotcopyDlg_impl(QWidget *parent = 0);
     virtual ~HotcopyDlg_impl();
 
     QString srcPath()const;

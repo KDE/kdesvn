@@ -584,6 +584,15 @@ void Logmsg_impl::slotDiffSelected()
     }
 }
 
+void Logmsg_impl::hideKeepsLock(bool how)
+{
+    if (how) {
+        m_keepLocksButton->show();
+    } else {
+        m_keepLocksButton->hide();
+    }
+}
+
 void Logmsg_impl::hideButtons(bool how)
 {
     if (!m_MarkUnversioned)return;

@@ -30,7 +30,7 @@ class Importdir_logmsg : public Logmsg_impl
 {
 Q_OBJECT
 public:
-    Importdir_logmsg(QWidget *parent = 0, const char *name = 0);
+    Importdir_logmsg(QWidget *parent = 0);
 
     virtual ~Importdir_logmsg();
 

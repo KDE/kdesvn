@@ -30,12 +30,12 @@
 #include <qtooltip.h>
 
 
-Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
- : Logmsg_impl(parent, name)
+Importdir_logmsg::Importdir_logmsg(QWidget *parent)
+ : Logmsg_impl(parent)
 {
+    setObjectName(QString::fromUtf8("Importdir_logmsg"));
     m_createDirBox = new QCheckBox("",this,"create_dir_checkbox");
-    m_keepLocksButton->hide();
-    //delete m_keepLocksButton;
+    hideKeepsLock(true);
     createDirboxDir();
     addItemWidget(m_createDirBox);
     m_createDirBox->setChecked(true);
@@ -57,7 +57,9 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
     }
     QSpacerItem* m_leftspacer = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     tmpLayout->addItem(m_leftspacer);
-    LogmessageDataLayout->addItem(tmpLayout);
+    if (layout()) {
+        layout()->addItem(tmpLayout);
+    }
 }
 
 Importdir_logmsg::~Importdir_logmsg()

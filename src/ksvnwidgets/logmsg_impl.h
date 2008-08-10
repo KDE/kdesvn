@@ -97,6 +97,8 @@ protected:
     void markUnversioned(bool mark);
     void checkSplitterSize();
     virtual void insertFile(const QString&);
+    virtual void hideKeepsLock(bool);
+
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 };

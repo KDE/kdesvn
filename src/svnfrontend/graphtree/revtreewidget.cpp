@@ -43,8 +43,7 @@ RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const c
         setName( "RevTreeWidget" );
     RevTreeWidgetLayout = new Q3VBoxLayout( this, 11, 6, "RevTreeWidgetLayout");
 
-    m_Splitter = new QSplitter( this, "m_Splitter" );
-    m_Splitter->setOrientation( QSplitter::Vertical );
+    m_Splitter = new QSplitter(Qt::Vertical,this);
 
     m_RevGraphView = new RevGraphView(lt,cl, m_Splitter, "m_RevGraphView" );
     m_RevGraphView->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)5, 0, 2, m_RevGraphView->sizePolicy().hasHeightForWidth() ) );
@@ -67,10 +66,9 @@ RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const c
 
     m_Detailstext = new KTextBrowser( m_Splitter, "m_Detailstext" );
     m_Detailstext->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 0, m_Detailstext->sizePolicy().hasHeightForWidth() ) );
-    m_Detailstext->setResizePolicy( KTextBrowser::Manual );
+    //m_Detailstext->setResizePolicy( KTextBrowser::Manual );
     RevTreeWidgetLayout->addWidget( m_Splitter );
     resize( QSize(600, 480).expandedTo(minimumSizeHint()) );
-    clearWState( WState_Polished );
     Q3ValueList<int> list = Kdesvnsettings::tree_detail_height();
     if (list.count()==2 && (list[0]>0||list[1]>0)) {
         m_Splitter->setSizes(list);
@@ -86,7 +84,7 @@ RevTreeWidget::~RevTreeWidget()
     Q3ValueList<int> list = m_Splitter->sizes();
     if (list.count()==2) {
         Kdesvnsettings::setTree_detail_height(list);
-        Kdesvnsettings::writeConfig();
+        Kdesvnsettings::self()->writeConfig();
     }
 }
 

@@ -23,7 +23,7 @@
 #include "loaddmpdlg.h"
 
 class LoadDmpDlg_impl: public LoadDmpDlg {
-Q_OBJECT
+    Q_OBJECT
 public:
     LoadDmpDlg_impl(QWidget *parent = 0, const char *name = 0);
     virtual ~LoadDmpDlg_impl();

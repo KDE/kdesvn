@@ -38,7 +38,6 @@ class KTemporaryFile;
 class K3Process;
 class RevisionTree;
 class GraphTreeLabel;
-class GraphViewTip;
 class GraphMark;
 class PannerView;
 class CContextListener;
@@ -46,7 +45,7 @@ class CContextListener;
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevGraphView : public Q3CanvasView
+class RevGraphView : virtual public Q3CanvasView
 {
     Q_OBJECT
 public:
@@ -124,7 +123,6 @@ protected:
     QMap<QString,QString> m_LabelMap;
 
     int _xMargin,_yMargin;
-    GraphViewTip*m_Tip;
     PannerView*m_CompleteView;
     double _cvZoom;
     ZoomPosition m_LastAutoPosition;
@@ -135,6 +133,9 @@ protected:
     virtual void contentsMouseMoveEvent ( QMouseEvent*e);
     virtual void contentsContextMenuEvent(QContextMenuEvent*e);
     virtual void contentsMouseDoubleClickEvent ( QMouseEvent * e );
+
+    virtual bool event(QEvent*event);
+    virtual void maybeTip(const QPoint&pos,const QPoint & globalPos);
 
     bool _isMoving;
     QPoint _lastPos;

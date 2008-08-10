@@ -52,37 +52,6 @@
 #define LABEL_WIDTH 160
 #define LABEL_HEIGHT 90
 
-
-class GraphViewTip:public QToolTip
-{
-public:
-  GraphViewTip( QWidget* p ):QToolTip(p) {}
-  virtual ~GraphViewTip(){}
-
-protected:
-    void maybeTip( const QPoint & );
-};
-
-void GraphViewTip::maybeTip( const QPoint & pos)
-{
-    if (!parentWidget()->inherits( "RevGraphView" )) return;
-    RevGraphView* cgv = (RevGraphView*)parentWidget();
-    QPoint cPos = cgv->viewportToContents(pos);
-    Q3CanvasItemList l = cgv->canvas()->collisions(cPos);
-    if (l.count() == 0) return;
-    Q3CanvasItem* i = l.first();
-    if (i->rtti() == GRAPHTREE_LABEL) {
-        GraphTreeLabel*tl = (GraphTreeLabel*)i;
-        QString nm = tl->nodename();
-        QString tipStr = cgv->toolTip(nm);
-        if (tipStr.length()>0) {
-            QPoint vPosTL = cgv->contentsToViewport(i->boundingRect().topLeft());
-            QPoint vPosBR = cgv->contentsToViewport(i->boundingRect().bottomRight());
-            tip(QRect(vPosTL, vPosBR), tipStr);
-        }
-    }
-}
-
 RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name, Qt::WFlags f)
  : Q3CanvasView(parent,name,f)
 {
@@ -93,7 +62,6 @@ RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * paren
     m_Selected = 0;
     renderProcess = 0;
     m_Marker = 0;
-    m_Tip = new GraphViewTip(this);
     m_CompleteView = new PannerView(this);
     m_CompleteView->setVScrollBarMode(Q3ScrollView::AlwaysOff);
     m_CompleteView->setHScrollBarMode(Q3ScrollView::AlwaysOff);
@@ -117,7 +85,6 @@ RevGraphView::~RevGraphView()
     delete m_Canvas;
     delete dotTmpFile;
     delete m_CompleteView;
-    delete m_Tip;
     delete renderProcess;
 }
 
@@ -451,56 +418,58 @@ void RevGraphView::dumpRevtree()
     delete dotTmpFile;
     clear();
     dotOutput = "";
-    dotTmpFile = new KTemporaryFile(QString::null,".dot");
-    dotTmpFile->setAutoDelete(true);
+    KTemporaryFile dotTmpFile;
+    dotTmpFile.setSuffix(".dot");
+    dotTmpFile.setAutoRemove(true);
 
-    QTextStream* stream = dotTmpFile->textStream();
+    QTextStream stream(&dotTmpFile);
+#if 0
     if (!stream) {
         showText(i18n("Could not open tempfile %1 for writing.").arg(dotTmpFile->name()));
         return;
     }
-
-    *stream << "digraph \"callgraph\" {\n";
-    *stream << "  bgcolor=\"transparent\";\n";
+#endif
+    stream << "digraph \"callgraph\" {\n";
+    stream << "  bgcolor=\"transparent\";\n";
     int dir = Kdesvnsettings::tree_direction();
-    *stream << QString("  rankdir=\"");
+    stream << QString("  rankdir=\"");
     switch (dir) {
         case 3:
-            *stream << "TB";
+            stream << "TB";
         break;
         case 2:
-            *stream << "RL";
+            stream << "RL";
         break;
         case 1:
-            *stream << "BT";
+            stream << "BT";
         break;
         case 0:
         default:
-            *stream << "LR";
+            stream << "LR";
         break;
     }
-    *stream << "\";\n";
+    stream << "\";\n";
 
-    //*stream << QString("  overlap=false;\n  splines=true;\n");
+    //stream << QString("  overlap=false;\n  splines=true;\n");
 
     RevGraphView::trevTree::ConstIterator it1;
     for (it1=m_Tree.begin();it1!=m_Tree.end();++it1) {
-        *stream << "  " << it1.key()
+        stream << "  " << it1.key()
             << "[ "
             << "shape=box, "
             << "label=\""<<getLabelstring(it1.key())<<"\","
             << "];\n";
         for (int j=0;j<it1.data().targets.count();++j) {
-            *stream<<"  "<<it1.key().latin1()<< " "
+            stream<<"  "<<it1.key().latin1()<< " "
                 << "->"<<" "<<it1.data().targets[j].key
                 << " [fontsize=10,style=\"solid\"];\n";
         }
     }
-    *stream << "}\n"<<flush;
+    stream << "}\n"<<flush;
     renderProcess = new K3Process();
     renderProcess->setEnvironment("LANG","C");
     *renderProcess << "dot";
-    *renderProcess << dotTmpFile->name() << "-Tplain";
+    *renderProcess << dotTmpFile.name() << "-Tplain";
     connect(renderProcess,SIGNAL(processExited(K3Process*)),this,SLOT(dotExit(K3Process*)));
     connect(renderProcess,SIGNAL(receivedStdout(K3Process*,char*,int)),
         this,SLOT(readDotOutput(K3Process*,char*,int)) );
@@ -710,6 +679,34 @@ void RevGraphView::zoomRectMoveFinished()
     if (_zoomPosition == Auto)
 #endif
     updateZoomerPos();
+}
+
+bool RevGraphView::event(QEvent*event)
+{
+    if (event->type() == QEvent::ToolTip) {
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+        maybeTip(helpEvent->pos(),helpEvent->globalPos());
+    }
+    return QWidget::event(event);
+}
+
+void RevGraphView::maybeTip(const QPoint & pos,const QPoint & globalPos)
+{
+    Q3CanvasItemList l = canvas()->collisions(pos);
+    if (l.count() == 0) return;
+    Q3CanvasItem* i = l.first();
+    if (i->rtti() == GRAPHTREE_LABEL) {
+        GraphTreeLabel*tl = (GraphTreeLabel*)i;
+        QString nm = tl->nodename();
+        QString tipStr = toolTip(nm);
+        if (tipStr.length()>0) {
+            QPoint vPosTL = contentsToViewport(i->boundingRect().topLeft());
+            QPoint vPosBR = contentsToViewport(i->boundingRect().bottomRight());
+            QToolTip::showText(globalPos,tipStr,this,QRect(vPosTL,vPosBR));
+        }
+    } else {
+        QToolTip::hideText();
+    }
 }
 
 void RevGraphView::resizeEvent(QResizeEvent*e)

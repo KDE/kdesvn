@@ -20,6 +20,7 @@
 #ifndef PANNERVIEW_H
 #define PANNERVIEW_H
 
+///@todo replace QCanvasView with QGraphicsView
 #include <q3canvas.h>
 //Added by qt3to4:
 #include <QMouseEvent>
@@ -27,7 +28,7 @@
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class PannerView : public Q3CanvasView
+class PannerView : virtual public Q3CanvasView
 {
 Q_OBJECT
 public:

@@ -20,13 +20,13 @@
 #ifndef MERGEDLG_IMPL_H
 #define MERGEDLG_IMPL_H
 
-#include "merge_dlg.h"
+#include "ui_merge_dlg.h"
 #include "rangeinput_impl.h"
 
-class MergeDlg_impl: public MergeDlg {
+class MergeDlg_impl: public QWidget, public Ui::MergeDlg {
 Q_OBJECT
 public:
-    MergeDlg_impl(QWidget *parent = 0, const char *name = 0,bool src1=true,bool src2=true,bool out=true);
+    MergeDlg_impl(QWidget *parent = 0, bool src1=true,bool src2=true,bool out=true);
     virtual ~MergeDlg_impl();
 
     bool recursive()const;

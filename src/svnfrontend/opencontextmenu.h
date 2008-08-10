@@ -20,7 +20,7 @@
 #ifndef OPENCONTEXTMENU_H
 #define OPENCONTEXTMENU_H
 
-#include <ktrader.h>
+#include <kservice.h>
 #include <kaction.h>
 #include <kurl.h>
 #include <q3popupmenu.h>
@@ -33,11 +33,11 @@ class OpenContextmenu : public Q3PopupMenu
 {
 Q_OBJECT
 public:
-    OpenContextmenu(const KUrl&,const KTrader::OfferList&,QWidget* parent, const char* name);
+    OpenContextmenu(const KUrl&,const KService::List&,QWidget* parent, const char* name);
     virtual ~OpenContextmenu();
 protected:
     KUrl m_Path;
-    KTrader::OfferList m_List;
+    KService::List m_List;
     QMap<int,KService::Ptr> m_mapPopup;
 
     void setup();

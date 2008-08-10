@@ -50,6 +50,8 @@ class KDialog;
 class KDialogBase;
 class KdesvnFileListPrivate;
 class SvnActions;
+class KShortcut;
+class KIcon;
 
 namespace KIO {
     class Job;
@@ -150,6 +152,13 @@ private:
     void cleanHighLighter();
     bool validDropEvent(QDropEvent*event,Q3ListViewItem*&item);
     void copy_move(bool move);
+
+    KAction* add_action(const QString&actionname,
+        const QString&text,
+        const KShortcut&sequ,
+        const KIcon&,
+        QObject*,
+        const char*slot);
 
 protected slots:
     virtual void slotSelectBrowsingRevision();

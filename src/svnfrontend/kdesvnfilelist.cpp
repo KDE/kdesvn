@@ -54,11 +54,10 @@
 #include <kdialog.h>
 #include <kfiledialog.h>
 #include <kdebug.h>
-#include <kurldrag.h>
+#include <k3urldrag.h>
 #include <ktemporaryfile.h>
 #include <kio/job.h>
 #include <krun.h>
-#include <kurldrag.h>
 #include <ktrader.h>
 
 #include <q3vbox.h>
@@ -204,14 +203,20 @@ bool KdesvnFileListPrivate::reReadSettings()
 }
 
 kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const char *name)
- : K3ListView(parent, name),ItemDisplay(),m_SvnWrapper(new SvnActions(this))
+ : K3ListView(parent),ItemDisplay(),m_SvnWrapper(new SvnActions(this))
 {
+    if (name) {
+        setObjectName(name);
+    }
     m_SelectedItems = 0;
     m_pList = new KdesvnFileListPrivate;
     m_filesAction = aCollect;
+
+    ///@todo replacement for SvnFileTip
+#if 0
     m_pList->m_fileTip=new SvnFileTip(this);
-    m_pList->m_fileTip->setOptions(Kdesvnsettings::display_file_tips()&&
-        QToolTip::isGloballyEnabled(),true,6);
+    m_pList->m_fileTip->setOptions(Kdesvnsettings::display_file_tips()&&QToolTip::isGloballyEnabled(),true,6);
+#endif
 
     SshAgent ssh;
     ssh.querySshAgent();
@@ -267,77 +272,73 @@ svn::Client*kdesvnfilelist::svnclient()
     return m_SvnWrapper->svnclient();
 }
 
+KAction*kdesvnfilelist::add_action(const QString&actionname,
+        const QString&text,
+        const KShortcut&sequ,
+        const KIcon&icon,
+        QObject*target,
+        const char*slot)
+{
+    KAction*tmp_action = 0;
+    tmp_action=m_filesAction->addAction(actionname);
+    tmp_action->setText(text);
+    tmp_action->setShortcut(sequ);
+    tmp_action->setIcon(icon);
+    connect(tmp_action, SIGNAL(triggered()), target,slot);
+    return tmp_action;
+}
+
 void kdesvnfilelist::setupActions()
 {
     if (!m_filesAction) return;
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    //new KAction(i18n("Log..."),"kdesvnlog",KShortcut(SHIFT+CTRL+Qt::Key_L),this,SLOT(slotMakeRangeLog()),m_filesAction,"make_svn_log");
-    new KAction(i18n("Full Log"),"kdesvnlog",KShortcut(CTRL+Qt::Key_L),this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
-    new KAction(i18n("Full revision tree"),"kdesvnlog",KShortcut(CTRL+Qt::Key_T),this,SLOT(slotMakeTree()),m_filesAction,"make_svn_tree");
-    new KAction(i18n("Partial revision tree"),"kdesvnlog",KShortcut(SHIFT+CTRL+Qt::Key_T),
-        this,SLOT(slotMakePartTree()),m_filesAction,"make_svn_partialtree");
-
-    new KAction(i18n("Properties"),"edit",
-        KShortcut(CTRL+Qt::Key_P),m_SvnWrapper,SLOT(slotProperties()),m_filesAction,"make_svn_property");
-    new KAction(i18n("Display Properties"),"edit",
-        KShortcut(Qt::Key_P),this,SLOT(slotDisplayProperties()),m_filesAction,"get_svn_property");
-
-    tmp_action = new KAction(i18n("Display last changes"),"kdesvndiff",
-                KShortcut(),this,SLOT(slotDisplayLastDiff()),m_filesAction,"make_last_change");
-    tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
-
-    m_InfoAction = new KAction(i18n("Details"),"kdesvninfo",
-        KShortcut(Qt::Key_I),this,SLOT(slotInfo()),m_filesAction,"make_svn_info");
-    m_RenameAction = new KAction(i18n("Move"),"move",
-        KShortcut(Qt::Key_F2),this,SLOT(slotRename()),m_filesAction,"make_svn_rename");
-    m_CopyAction = new KAction(i18n("Copy"),"kdesvncopy",
-        KShortcut(Qt::Key_C),this,SLOT(slotCopy()),m_filesAction,"make_svn_copy");
-    tmp_action = new KAction(i18n("Check for updates"),"kdesvncheckupdates",KShortcut(),this,SLOT(slotCheckUpdates()),m_filesAction,"make_check_updates");
+    //new KAction(,"kdesvnlog",,this,SLOT(slotMakeLog()),m_filesAction,"make_svn_log_full");
+    add_action("make_svn_log_full",i18n("Full Log"),KShortcut(Qt::CTRL+Qt::Key_L),KIcon("kdesvnlog"),this,SLOT(slotMakeLog()));
+    add_action("make_svn_tree",i18n("Full revision tree"),KShortcut(Qt::CTRL+Qt::Key_T),KIcon("kdesvnlog"),this,SLOT(slotMakeTree()));
+    add_action("make_svn_partialtree",i18n("Partial revision tree"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_T),KIcon("kdesvnlog"),this,SLOT(slotMakePartTree()));
+    add_action("make_svn_property",i18n("Properties"),KShortcut(Qt::CTRL+Qt::Key_P),KIcon("edit"),m_SvnWrapper,SLOT(slotProperties()));
+    add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::Key_P),KIcon("edit"),this,SLOT(slotDisplayProperties()));
+    tmp_action = add_action("make_last_change",i18n("Display last changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDisplayLastDiff()));
+    if (tmp_action) tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
+    add_action("make_svn_info",i18n("Details"),KShortcut(Qt::Key_I),KIcon("kdesvninfo"),this,SLOT(slotInfo()));
+    add_action("make_svn_rename",i18n("Move"),KShortcut(Qt::Key_F2),KIcon("move"),this,SLOT(slotRename()));
+    add_action("make_svn_copy",i18n("Copy"),KShortcut(Qt::Key_C),KIcon(),this,SLOT(slotCopy()));
+    tmp_action = add_action("make_check_updates",i18n("Check for updates"),KShortcut(),KIcon(),this,SLOT(slotCheckUpdates()));
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
     /* 2. actions only on files */
-    m_BlameAction = new KAction(i18n("Blame"),"kdesvnblame",
-        KShortcut(),this,SLOT(slotBlame()),m_filesAction,"make_svn_blame");
+    m_BlameAction = add_action("make_svn_blame",i18n("Blame"),KShortcut(),KIcon("kdesvnblame"),this,SLOT(slotBlame()));
     m_BlameAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_BlameRangeAction = new KAction(i18n("Blame range"),"kdesvnblame",
-        KShortcut(),this,SLOT(slotRangeBlame()),m_filesAction,"make_svn_range_blame");
+    m_BlameRangeAction = add_action("make_svn_range_blame",i18n("Blame range"),KShortcut(),KIcon("kdesvnblame"),this,SLOT(slotRangeBlame()));
     m_BlameRangeAction->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
-    m_CatAction = new KAction(i18n("Cat head"), "kdesvncat",
-        KShortcut(),this,SLOT(slotCat()),m_filesAction,"make_svn_cat");
+
+    m_CatAction = add_action("make_svn_cat",i18n("Cat head"), KShortcut(), KIcon("kdesvncat"),this,SLOT(slotCat()));
     m_CatAction->setToolTip(i18n("Output the content of specified files or URLs."));
-    tmp_action = new KAction(i18n("Cat revision..."),"kdesvncat",
-        KShortcut(),this,SLOT(slotRevisionCat()),m_filesAction,"make_revisions_cat");
+    tmp_action = add_action("make_revisions_cat",i18n("Cat revision..."),KShortcut(),KIcon("kdesvncat"),this,SLOT(slotRevisionCat()));
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
 
-    m_LockAction = new KAction(i18n("Lock current items"),"kdesvnlock",
-        KShortcut(),this,SLOT(slotLock()),m_filesAction,"make_svn_lock");
-    m_UnlockAction = new KAction(i18n("Unlock current items"),"kdesvnunlock",
-        KShortcut(),this,SLOT(slotUnlock()),m_filesAction,"make_svn_unlock");
+    m_LockAction = add_action("make_svn_lock",i18n("Lock current items"),KShortcut(),KIcon("kdesvnlock"),this,SLOT(slotLock()));
+    m_UnlockAction = add_action("make_svn_unlock",i18n("Unlock current items"),KShortcut(),KIcon("kdesvnunlock"),this,SLOT(slotUnlock()));
 
     /* 3. actions only on dirs */
-    m_MkdirAction = new KAction(i18n("New folder"),"folder_new",
-        KShortcut(),this,SLOT(slotMkdir()),m_filesAction,"make_svn_mkdir");
-    m_switchRepository = new KAction(i18n("Switch repository"),"kdesvnswitch",
-        KShortcut(), m_SvnWrapper,SLOT(slotSwitch()),m_filesAction,"make_svn_switch");
+    m_MkdirAction = add_action("make_svn_mkdir",i18n("New folder"),KShortcut(),KIcon("folder_new"),this,SLOT(slotMkdir()));
+    m_switchRepository = add_action("make_svn_switch",i18n("Switch repository"),KShortcut(),KIcon("kdesvnswitch"), m_SvnWrapper,SLOT(slotSwitch()));
     m_switchRepository->setToolTip(i18n("Switch repository path of current working copy path (\"svn switch\")"));
-    tmp_action = new KAction(i18n("Relocate current working copy url"),"kdesvnrelocate",KShortcut(),
-        this,SLOT(slotRelocate()),m_filesAction,"make_svn_relocate");
+
+    tmp_action = add_action("make_svn_relocate",i18n("Relocate current working copy url"),KShortcut(),KIcon("kdesvnrelocate"),this,SLOT(slotRelocate()));
     tmp_action->setToolTip(i18n("Relocate url of current working copy path to other url"));
-    tmp_action = new KAction(i18n("Check for unversioned items"),"kdesvnaddrecursive",KShortcut(),
-        this,SLOT(slotCheckNewItems()),m_filesAction,"make_check_unversioned");
+
+    tmp_action = add_action("make_check_unversioned",i18n("Check for unversioned items"),KShortcut(),KIcon("kdesvnaddrecursive"),this,SLOT(slotCheckNewItems()));
     tmp_action->setToolTip(i18n("Browse folder for unversioned items and add them if wanted."));
 
-    m_changeToRepository = new KAction(i18n("Open repository of working copy"),"gohome",KShortcut(),
-        this,SLOT(slotChangeToRepository()),m_filesAction,"make_switch_to_repo");
+    m_changeToRepository = add_action("make_switch_to_repo",i18n("Open repository of working copy"),KShortcut(),KIcon("gohome"),this,SLOT(slotChangeToRepository()));
     m_changeToRepository->setToolTip(i18n("Opens the repository the current working copy was checked out from"));
 
-    m_CleanupAction = new KAction(i18n("Cleanup"),"kdesvncleanup",
-	KShortcut(),this,SLOT(slotCleanupAction()),m_filesAction,"make_cleanup");
+    m_CleanupAction = add_action("make_cleanup",i18n("Cleanup"),KShortcut(),KIcon("kdesvncleanup"),this,SLOT(slotCleanupAction()));
     m_CleanupAction->setToolTip(i18n("Recursively clean up the working copy, removing locks, resuming unfinished operations, etc."));
-    m_ImportDirsIntoCurrent  = new KAction(i18n("Import folders into current"),"fileimport",KShortcut(),
-        this,SLOT(slotImportDirsIntoCurrent()),m_filesAction,"make_import_dirs_into_current");
+    m_ImportDirsIntoCurrent=add_action("make_import_dirs_into_current",i18n("Import folders into current"),KShortcut(), KIcon("fileimport"),this,SLOT(slotImportDirsIntoCurrent()));
     m_ImportDirsIntoCurrent->setToolTip(i18n("Import folder content into current url"));
 
     /* local only actions */
@@ -423,7 +424,6 @@ void kdesvnfilelist::setupActions()
     */
 
     enableActions();
-    m_filesAction->setHighlightingEnabled(true);
 }
 
 KActionCollection*kdesvnfilelist::filesActions()

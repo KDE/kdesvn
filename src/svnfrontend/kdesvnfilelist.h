@@ -47,7 +47,6 @@ class KAction;
 class KActionMenu;
 class KActionCollection;
 class KDialog;
-class KDialogBase;
 class KdesvnFileListPrivate;
 class SvnActions;
 class KShortcut;
@@ -109,7 +108,7 @@ protected:
     FileListViewItem* singleSelected();
     FileListViewItemList* allSelected();
 
-    template<class T> KDialogBase* createDialog(T**ptr,
+    template<class T> KDialog* createDialog(T**ptr,
         const QString&_head,
         bool OkCancel=false,
         const char*name="dialog",

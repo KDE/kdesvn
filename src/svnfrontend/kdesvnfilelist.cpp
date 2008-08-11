@@ -59,6 +59,7 @@
 #include <kio/job.h>
 #include <krun.h>
 #include <ktrader.h>
+#include <kvbox.h>
 
 #include <q3vbox.h>
 #include <qpainter.h>
@@ -333,91 +334,85 @@ void kdesvnfilelist::setupActions()
     tmp_action = add_action("make_check_unversioned",i18n("Check for unversioned items"),KShortcut(),KIcon("kdesvnaddrecursive"),this,SLOT(slotCheckNewItems()));
     tmp_action->setToolTip(i18n("Browse folder for unversioned items and add them if wanted."));
 
-    m_changeToRepository = add_action("make_switch_to_repo",i18n("Open repository of working copy"),KShortcut(),KIcon("gohome"),this,SLOT(slotChangeToRepository()));
+    m_changeToRepository = add_action("make_switch_to_repo",i18n("Open repository of working copy"),KShortcut(),KIcon("gohome"),
+                            this,SLOT(slotChangeToRepository()));
     m_changeToRepository->setToolTip(i18n("Opens the repository the current working copy was checked out from"));
 
     m_CleanupAction = add_action("make_cleanup",i18n("Cleanup"),KShortcut(),KIcon("kdesvncleanup"),this,SLOT(slotCleanupAction()));
     m_CleanupAction->setToolTip(i18n("Recursively clean up the working copy, removing locks, resuming unfinished operations, etc."));
-    m_ImportDirsIntoCurrent=add_action("make_import_dirs_into_current",i18n("Import folders into current"),KShortcut(), KIcon("fileimport"),this,SLOT(slotImportDirsIntoCurrent()));
+    m_ImportDirsIntoCurrent=add_action("make_import_dirs_into_current",i18n("Import folders into current"),KShortcut(), KIcon("fileimport"),
+                            this,SLOT(slotImportDirsIntoCurrent()));
     m_ImportDirsIntoCurrent->setToolTip(i18n("Import folder content into current url"));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
-    m_AddCurrent = new KAction(i18n("Add selected files/dirs"),
-        "kdesvnadd",KShortcut(Qt::Key_Insert),m_SvnWrapper,SLOT(slotAdd()),m_filesAction,"make_svn_add");
+    m_AddCurrent = add_action("make_svn_add",i18n("Add selected files/dirs"),KShortcut(Qt::Key_Insert),KIcon("kdesvnadd"),m_SvnWrapper,SLOT(slotAdd()));
     m_AddCurrent->setToolTip(i18n("Adding selected files and/or directories to repository"));
-    tmp_action = new KAction("Add selected files/dirs recursive",
-        "kdesvnaddrecursive",KShortcut(CTRL+Qt::Key_Insert),m_SvnWrapper,SLOT(slotAddRec()),m_filesAction,"make_svn_addrec");
+    tmp_action = add_action("make_svn_addrec",i18n("Add selected files/dirs recursive"),KShortcut(Qt::CTRL+Qt::Key_Insert),KIcon("kdesvnaddrecursive"),
+                            m_SvnWrapper,SLOT(slotAddRec()));
     tmp_action->setToolTip(i18n("Adding selected files and/or directories to repository and all subitems of folders"));
 
-    m_DelCurrent = new KAction(i18n("Delete selected files/dirs"),"kdesvndelete",
-        KShortcut(Qt::Key_Delete),this,SLOT(slotDelete()),m_filesAction,"make_svn_remove");
+    m_DelCurrent = add_action("make_svn_remove",i18n("Delete selected files/dirs"),KShortcut(Qt::Key_Delete),KIcon("kdesvndelete"),this,SLOT(slotDelete()));
     m_DelCurrent->setToolTip(i18n("Deleting selected files and/or directories from repository"));
-    m_RevertAction  = new KAction(i18n("Revert current changes"),"revert",
-        KShortcut(),m_SvnWrapper,SLOT(slotRevert()),m_filesAction,"make_svn_revert");
+    m_RevertAction  = add_action("make_svn_revert",i18n("Revert current changes"),KShortcut(),KIcon("revert"),m_SvnWrapper,SLOT(slotRevert()));
 
-    m_ResolvedAction = new KAction(i18n("Mark resolved"),KShortcut(),
-        this,SLOT(slotResolved()),m_filesAction,"make_resolved");
+    m_ResolvedAction = add_action("make_resolved",i18n("Mark resolved"),KShortcut(),KIcon(),this,SLOT(slotResolved()));
     m_ResolvedAction->setToolTip(i18n("Marking files or dirs resolved"));
 
-    tmp_action = new KAction(i18n("Resolve conflicts"),KShortcut(),
-                             this,SLOT(slotTryResolve()),m_filesAction,"make_try_resolve");
+    tmp_action = add_action("make_try_resolve",i18n("Resolve conflicts"),KShortcut(),KIcon(),this,SLOT(slotTryResolve()));
 
-    m_IgnoreAction = new KAction(i18n("Ignore/Unignore current item"),KShortcut(),this,SLOT(slotIgnore()),m_filesAction,"make_svn_ignore");
+    m_IgnoreAction = add_action("make_svn_ignore",i18n("Ignore/Unignore current item"),KShortcut(),KIcon(),this,SLOT(slotIgnore()));
 
-    m_UpdateHead = new KAction(i18n("Update to head"),"kdesvnupdate",
-        KShortcut(),m_SvnWrapper,SLOT(slotUpdateHeadRec()),m_filesAction,"make_svn_headupdate");
-    m_UpdateRev = new KAction(i18n("Update to revision..."),"kdesvnupdate",
-        KShortcut(),m_SvnWrapper,SLOT(slotUpdateTo()),m_filesAction,"make_svn_revupdate");
-    m_commitAction = new KAction(i18n("Commit"),"kdesvncommit",
-        KShortcut("#"),m_SvnWrapper,SLOT(slotCommit()),m_filesAction,"make_svn_commit");
+    m_UpdateHead = add_action("make_svn_headupdate",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),m_SvnWrapper,SLOT(slotUpdateHeadRec()));
+    m_UpdateRev = add_action("make_svn_revupdate",i18n("Update to revision..."),KShortcut(),KIcon("kdesvnupdate"),m_SvnWrapper,SLOT(slotUpdateTo()));
+    m_commitAction = add_action("make_svn_commit",i18n("Commit"),KShortcut("#"),KIcon("kdesvncommit"),m_SvnWrapper,SLOT(slotCommit()));
 
-    tmp_action = new KAction(i18n("Diff local changes"),"kdesvndiff",
-        KShortcut(CTRL+Qt::Key_D),this,SLOT(slotSimpleBaseDiff()),m_filesAction,"make_svn_basediff");
+    tmp_action =
+        add_action("make_svn_basediff",i18n("Diff local changes"),KShortcut(Qt::CTRL+Qt::Key_D),KIcon("kdesvndiff"),this,SLOT(slotSimpleBaseDiff()));
     tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
 
-    tmp_action = new KAction(i18n("Diff against HEAD"),"kdesvndiff",
-        KShortcut(CTRL+Qt::Key_H),this,SLOT(slotSimpleHeadDiff()),m_filesAction,"make_svn_headdiff");
+    tmp_action =
+        add_action("make_svn_headdiff",i18n("Diff against HEAD"),KShortcut(Qt::CTRL+Qt::Key_H),KIcon("kdesvndiff"),this,SLOT(slotSimpleHeadDiff()));
     tmp_action->setToolTip(i18n("Diff working copy against HEAD (last checked in version)- requires access to repository"));
 
-    tmp_action = new KAction(i18n("Diff items"),"kdesvndiff",
-                             KShortcut(),this,SLOT(slotDiffPathes()),m_filesAction,"make_svn_itemsdiff");
+    tmp_action =
+        add_action("make_svn_itemsdiff",i18n("Diff items"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDiffPathes()));
     tmp_action->setToolTip(i18n("Diff two items"));
 
 
-    m_MergeRevisionAction = new KAction(i18n("Merge two revisions"),"kdesvnmerge",
-        KShortcut(),this,SLOT(slotMergeRevisions()),m_filesAction,"make_svn_merge_revisions");
+    m_MergeRevisionAction =
+        add_action("make_svn_merge_revisions",i18n("Merge two revisions"),KShortcut(),KIcon("kdesvnmerge"),this,SLOT(slotMergeRevisions()));
     m_MergeRevisionAction->setToolTip(i18n("Merge two revisions of this entry into itself"));
 
-    tmp_action=new KAction(i18n("Merge..."),"kdesvnmerge",
-        KShortcut(),this,SLOT(slotMerge()),m_filesAction,"make_svn_merge");
+    tmp_action=
+        add_action("make_svn_merge",i18n("Merge..."),KShortcut(),KIcon("kdesvnmerge"),this,SLOT(slotMerge()));
     tmp_action->setToolTip("Merge repository path into current worky copy path or current repository path into a target");
-    tmp_action=new KAction( i18n( "Open With..." ), 0, this, SLOT( slotOpenWith() ), m_filesAction, "openwith" );
+    tmp_action=add_action("openwith",i18n("Open With..."),KShortcut(),KIcon(),this, SLOT(slotOpenWith()));
 
     /* remote actions only */
-    m_CheckoutCurrentAction = new KAction(i18n("Checkout current repository path"),"kdesvncheckout",KShortcut(),
-        m_SvnWrapper,SLOT(slotCheckoutCurrent()),m_filesAction,"make_svn_checkout_current");
-    m_ExportCurrentAction = new KAction(i18n("Export current repository path"),"kdesvnexport",KShortcut(),
-        m_SvnWrapper,SLOT(slotExportCurrent()),m_filesAction,"make_svn_export_current");
-    new KAction(i18n("Select browse revision"),KShortcut(),this,SLOT(slotSelectBrowsingRevision()),m_filesAction,"switch_browse_revision");
+    m_CheckoutCurrentAction =
+        add_action("make_svn_checkout_current",i18n("Checkout current repository path"),KShortcut(),KIcon("kdesvncheckout"), m_SvnWrapper,SLOT(slotCheckoutCurrent()));
+    m_ExportCurrentAction =
+        add_action("make_svn_export_current",i18n("Export current repository path"),KShortcut(),KIcon("kdesvnexport"), m_SvnWrapper,SLOT(slotExportCurrent()));
+    add_action("switch_browse_revision",i18n("Select browse revision"),KShortcut(),KIcon(),this,SLOT(slotSelectBrowsingRevision()));
 
     /* independe actions */
-    m_CheckoutAction = new KAction(i18n("Checkout a repository"),"kdesvncheckout",
-        KShortcut(),m_SvnWrapper,SLOT(slotCheckout()),m_filesAction,"make_svn_checkout");
-    m_ExportAction = new KAction(i18n("Export a repository"),"kdesvnexport",
-        KShortcut(),m_SvnWrapper,SLOT(slotExport()),m_filesAction,"make_svn_export");
-    m_RefreshViewAction = new KAction(i18n("Refresh view"),"reload",KShortcut(Qt::Key_F5),this,SLOT(refreshCurrentTree()),m_filesAction,"make_view_refresh");
+    m_CheckoutAction =
+        add_action("make_svn_checkout",i18n("Checkout a repository"),KShortcut(),KIcon("kdesvncheckout"),m_SvnWrapper,SLOT(slotCheckout()));
+    m_ExportAction =
+        add_action("make_svn_export",i18n("Export a repository"),KShortcut(),KIcon("kdesvnexport"),m_SvnWrapper,SLOT(slotExport()));
+    m_RefreshViewAction = add_action("make_view_refresh",i18n("Refresh view"),KShortcut(Qt::Key_F5),KIcon("reload"),this,SLOT(refreshCurrentTree()));
 
-    new KAction(i18n("Diff revisions"),"kdesvndiff",KShortcut(),this,SLOT(slotDiffRevisions()),m_filesAction,"make_revisions_diff");
+    add_action("make_revisions_diff",i18n("Diff revisions"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDiffRevisions()));
 
     /* folding options */
-    tmp_action = new KAction( i18n("Unfold File Tree"), 0, this , SLOT(slotUnfoldTree()), m_filesAction, "view_unfold_tree" );
+    tmp_action = add_action("view_unfold_tree",i18n("Unfold File Tree"),KShortcut(),KIcon(),this,SLOT(slotUnfoldTree()));
     tmp_action->setToolTip(i18n("Opens all branches of the file tree"));
-    tmp_action = new KAction( i18n("Fold File Tree"), 0, this, SLOT(slotFoldTree()), m_filesAction, "view_fold_tree" );
+    tmp_action = add_action("view_fold_tree",i18n("Fold File Tree"),KShortcut(),KIcon(),this ,SLOT(slotFoldTree()));
     tmp_action->setToolTip(i18n("Closes all branches of the file tree"));
 
     /* caching */
-    tmp_action = new KAction( i18n("Update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"update_log_cache" );
+    tmp_action = add_action("update_log_cache",i18n("Update log cache"),KShortcut(),KIcon(),this,SLOT(slotUpdateLogCache()));
     tmp_action->setToolTip(i18n("Update the log cache for current repository"));
     /*    tmp_action = new KAction( i18n("Stop update log cache"),0,this,SLOT(slotUpdateLogCache()),m_filesAction,"stop_update_log_cache" );
         tmp_action->setToolTip(i18n("Stop the update of the log cache"));
@@ -521,9 +516,9 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
 
     KUrl _url = url;
     QString proto = svn::Url::transformProtokoll(url.protocol());
-    _url.cleanPath(true);
+    _url.cleanPath();
     _url.setProtocol(proto);
-    proto = _url.url(-1);
+    proto = _url.url(KUrl::RemoveTrailingSlash);
 
     QStringList s = QStringList::split("?",proto);
     if (s.size()>1) {
@@ -605,8 +600,8 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
         connect(m_pList->m_DirWatch,SIGNAL(created(const QString&)),this,SLOT(slotDirItemCreated(const QString&)));
         connect(m_pList->m_DirWatch,SIGNAL(deleted(const QString&)),this,SLOT(slotDirItemDeleted(const QString&)));
         /* seems that recursive does not work */
-        if (m_pList->m_DirWatch) {
-            m_pList->m_DirWatch->addDir(baseUri()+"/",false,false);
+        if (m_pList->m_DirWatch && !m_pList->m_DirWatch->contains(baseUri()+"/")) {
+            m_pList->m_DirWatch->addDir(baseUri()+"/",KDirWatch::WatchDirOnly);
             m_pList->m_DirWatch->startScan(true);
         }
     }
@@ -620,8 +615,8 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
         setNetworked(false);
         clear();
     }
-    m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips()&&
-        QToolTip::isGloballyEnabled(),true,6);
+    ///@todo replace with another tooltip handler - this one isn't working anymore
+    m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips(),true,6);
 
     if (result && isWorkingCopy()) {
         m_SvnWrapper->createModifiedCache(baseUri());
@@ -766,8 +761,6 @@ void kdesvnfilelist::insertDirs(FileListViewItem * _parent,svn::StatusEntries&dl
         }
     }
 }
-        connect( m_previewJob, SIGNAL( gotPreview( const KFileItem& , const QPixmap & ) ),
-                 this, SLOT( gotPreview( const KFileItem& , const QPixmap & ) ) );
 
 /* newdir is the NEW directory! just required if local */
 void kdesvnfilelist::slotDirAdded(const QString&newdir,FileListViewItem*k)
@@ -893,7 +886,7 @@ void kdesvnfilelist::enableActions()
     }
 
     bool conflicted = single && allSelected()->at(0)->isConflicted();
-    KAction * temp = 0;
+    QAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
     temp = filesActions()->action("make_svn_log");
@@ -939,7 +932,7 @@ void kdesvnfilelist::enableActions()
     m_BlameRangeAction->setEnabled(single&&!dir&&remote_enabled);
     m_CatAction->setEnabled(single&&!dir);
     /* 3. actions only on dirs */
-    m_MkdirAction->setEnabled(dir||none && isopen);
+    m_MkdirAction->setEnabled(dir||(none && isopen));
     m_switchRepository->setEnabled(isWorkingCopy()&& (single||none));
     m_changeToRepository->setEnabled(isWorkingCopy());
     m_ImportDirsIntoCurrent->setEnabled(dir);
@@ -1068,7 +1061,7 @@ void kdesvnfilelist::slotClientException(const QString&what)
 void kdesvnfilelist::slotNotifyMessage(const QString&what)
 {
     emit sigLogMessage(what);
-    kapp->processEvents(20);
+    kapp->processEvents();
 }
 
 void kdesvnfilelist::slotChangeToRepository()
@@ -1108,18 +1101,18 @@ void kdesvnfilelist::slotItemDoubleClicked(Q3ListViewItem*item)
     if ( feditor.compare("default") == 0 ) {
         KUrl::List lst;
         lst.append(fki->kdeName(rev));
-        KTrader::OfferList li = offersList(fki,true);
+        KService::List li = offersList(fki,true);
         if (li.count()==0||li.first()->exec().isEmpty()) {
             li = offersList(fki);
         }
         if (li.count()>0&&!li.first()->exec().isEmpty()) {
             KService::Ptr ptr = li.first();
-            KRun::run( *ptr, lst);
+            KRun::run(*ptr, lst, KApplication::activeWindow());
         } else {
-            KRun::displayOpenWithDialog(lst);
+            KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
         }
     } else {
-        if ( KRun::runCommand(feditor + " " +  fki->kdeName(rev).prettyUrl()) <= 0) {
+        if ( KRun::runCommand(feditor + " " +  fki->kdeName(rev).prettyUrl(),KApplication::activeWindow()) <= 0) {
             KMessageBox::error(this,i18n("Failed: %1 %2").arg(feditor).arg(fki->fullName()));
         }
     }
@@ -1157,26 +1150,33 @@ void kdesvnfilelist::slotTryResolve()
     m_SvnWrapper->slotResolve(which->fullName());
 }
 
-template<class T> KDialogBase* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp)
+template<class T> KDialog* kdesvnfilelist::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp)
 {
-    int buttons = KDialogBase::Ok;
+    QFlags<KDialog::ButtonCode> buttons = KDialog::Ok;
     if (OkCancel) {
-        buttons = buttons|KDialogBase::Cancel;
+        buttons = buttons|KDialog::Cancel;
     }
     if (showHelp) {
-        buttons = buttons|KDialogBase::Help;
+        buttons = buttons|KDialog::Help;
     }
-    KDialogBase * dlg = new KDialogBase(
-        KApplication::activeModalWidget(),
+    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+
+    /*,
         name,
         true,
         _head,
         buttons);
-
+        */
     if (!dlg) return dlg;
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    dlg->setCaption(_head);
+    dlg->setModal(true);
+    dlg->setButtons(buttons);
+    dlg->setObjectName(name);
+
+    QWidget* Dialog1Layout = new KVBox(dlg);
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),name?name:"standard_size"));
+    KConfigGroup k(Kdesvnsettings::self()->config(),name?name:"standard_size");
+    dlg->restoreDialogSize(k);
     return dlg;
 }
 
@@ -1201,8 +1201,8 @@ void kdesvnfilelist::slotImportIntoCurrent(bool dirs)
         targetUri = allSelected()->at(0)->Url();
     }
     KUrl uri;
-    if (dirs) uri = KFileDialog::getExistingDirectory(QString::null,this,"Import files from folder");
-    else uri = KFileDialog::getImageOpenUrl(QString::null,this,"Import file");
+    if (dirs) uri = KFileDialog::getExistingDirectory(KUrl(),this,"Import files from folder");
+    else uri = KFileDialog::getImageOpenUrl(KUrl(),this,"Import file");
 
     if (uri.url().isEmpty()) return;
 
@@ -1218,7 +1218,7 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     Logmsg_impl*ptr;
     Importdir_logmsg*ptr2 = 0;
 
-    KDialogBase*dlg;
+    KDialog*dlg;
     KUrl uri = importUrl;
     QString targetUri = target;
     while (targetUri.endsWith("/")) {
@@ -1228,7 +1228,7 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     if (dirs) {
          dlg = createDialog(&ptr2,QString(i18n("Import log")),true,"import_log_msg");
          ptr = ptr2;
-         ptr2->createDirboxDir("\""+uri.fileName(true)+"\"");
+         ptr2->createDirboxDir("\""+uri.fileName()+"\"");
     } else {
         dlg = createDialog(&ptr,QString(i18n("Import log")),true,"import_log_msg");
     }
@@ -1236,13 +1236,14 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     if (!dlg) return;
 
     ptr->initHistory();
+    KConfigGroup k(Kdesvnsettings::self()->config(),"import_log_msg");
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"import_log_msg",false);
+        dlg->saveDialogSize(k);
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"import_log_msg",false);
+    dlg->saveDialogSize(k);
 
     QString logMessage = ptr->getMessage();
     svn::Depth rec = ptr->getDepth();
@@ -1254,7 +1255,7 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     }
 
     if (dirs && ptr2 && ptr2->createDir()) {
-        targetUri+= "/"+uri.fileName(true);
+        targetUri+= "/"+uri.fileName();
     }
     if (ptr2) {
         m_SvnWrapper->slotImport(iurl,targetUri,logMessage,rec,ptr2->noIgnore(),ptr2->ignoreUnknownNodes());
@@ -1283,7 +1284,7 @@ void kdesvnfilelist::refreshCurrentTree()
     t.start();
     FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
     if (!item) return;
-    //m_pList->stopScan();
+    //m_pList->tsopScan();
     m_pList->m_fileTip->setItem(0);
     kapp->processEvents();
     setUpdatesEnabled(false);
@@ -1441,9 +1442,9 @@ bool kdesvnfilelist::refreshRecursive(FileListViewItem*_parent,bool down)
     return dispchanged;
 }
 
-KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item,bool execOnly)
+KService::List kdesvnfilelist::offersList(SvnItem*item,bool execOnly)
 {
-    KTrader::OfferList offers;
+    KService::List offers;
     if (!item) {
         return offers;
     }
@@ -1453,7 +1454,7 @@ KTrader::OfferList kdesvnfilelist::offersList(SvnItem*item,bool execOnly)
     } else {
         constraint = "Type == 'Application'";
     }
-    offers = KTrader::self()->query(item->mimeType()->name(), constraint);
+    offers = KMimeTypeTrader::self()->query(item->mimeType()->name(), constraint);
 
     return offers;
 }
@@ -1506,9 +1507,9 @@ void kdesvnfilelist::slotContextMenuRequested(Q3ListViewItem */* _item */, const
         return;
     }
 
-    KTrader::OfferList offers;
+    KService::List offers;
     OpenContextmenu*me=0;
-    KAction*temp = 0;
+    QAction*temp = 0;
 
     int id = -1;
 
@@ -1523,7 +1524,7 @@ void kdesvnfilelist::slotContextMenuRequested(Q3ListViewItem */* _item */, const
         } else {
             temp = filesActions()->action("openwith");
             if (temp) {
-                temp->plug(popup);
+                popup->addAction(temp);
             }
         }
     }
@@ -1533,7 +1534,7 @@ void kdesvnfilelist::slotContextMenuRequested(Q3ListViewItem */* _item */, const
     }
     delete me;
     if (temp) {
-        temp->unplug(popup);
+        popup->removeAction(temp);
     }
 }
 
@@ -1572,7 +1573,7 @@ Q3DragObject* kdesvnfilelist::dragObject()
     bool pixmap0Invalid = !m_pressedItem->pixmap(0) || m_pressedItem->pixmap(0)->isNull();
     if (( urls.count() > 1 ) || (pixmap0Invalid)) {
       int iconSize = Kdesvnsettings::listview_icon_size();;
-      iconSize = iconSize ? iconSize : kdesvnPartFactory::instance()->iconLoader()->currentSize( KIcon::Small ); // Default = small
+      iconSize = iconSize ? iconSize : KIconLoader::global()->currentSize(KIconLoader::Small); // Default = small
       pixmap2 = DesktopIcon( "kmultiple", iconSize );
       if ( pixmap2.isNull() ) {
           kWarning() << "Could not find multiple pixmap" << endl;
@@ -1751,7 +1752,7 @@ void kdesvnfilelist::slotMerge()
     bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog",true);
+    KDialog*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog",true);
     if (!dlg) {
         return;
     }
@@ -1787,7 +1788,8 @@ void kdesvnfilelist::slotMerge()
         }
     }
 
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"merge_dialog",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"merge_dialog");
+    dlg->saveDialogSize(k);
 
     delete dlg;
 }
@@ -2073,7 +2075,7 @@ void kdesvnfilelist::slotLock()
         KMessageBox::error(this,i18n("Nothing selected for lock"));
         return;
     }
-    KDialogBase*dlg;
+    KDialog*dlg;
     Logmsg_impl*ptr;
     dlg = createDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
     if (!dlg) return;
@@ -2089,7 +2091,8 @@ void kdesvnfilelist::slotLock()
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"locking_log_msg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"locking_log_msg");
+    dlg->saveDialogSize(k);
 
     QString logMessage = ptr->getMessage();
     bool steal = _stealLock->isChecked();
@@ -2167,7 +2170,7 @@ void kdesvnfilelist::slotRangeBlame()
     SvnItem*k = singleSelected();
     if (!k) return;
     Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -2175,7 +2178,8 @@ void kdesvnfilelist::slotRangeBlame()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeBlame(r.first,r.second,k);
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(k);
     delete dlg;
 }
 
@@ -2347,7 +2351,7 @@ void kdesvnfilelist::slotDiffRevisions()
         what = relativePath(k);
     }
     Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -2356,7 +2360,8 @@ void kdesvnfilelist::slotDiffRevisions()
         svn::Revision _peg=(isWorkingCopy()?svn::Revision::WORKING:remoteRevision());
         m_SvnWrapper->makeDiff(what,r.first,r.second,_peg,k?k->isDir():true);
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(k);
     delete dlg;
 
 }
@@ -2365,7 +2370,7 @@ void kdesvnfilelist::slotSelectBrowsingRevision()
 {
     if (isWorkingCopy()) return;
     Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -2379,7 +2384,8 @@ void kdesvnfilelist::slotSelectBrowsingRevision()
             refreshCurrentTree();
         }
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(k);
     delete dlg;
 }
 
@@ -2391,7 +2397,7 @@ void kdesvnfilelist::slotRevisionCat()
     SvnItem*k = singleSelected();
     if (!k) return;
     Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -2400,7 +2406,8 @@ void kdesvnfilelist::slotRevisionCat()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->slotMakeCat(r.first, k->fullName(),k->shortName(),r.first,0);
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(k);
     delete dlg;
 }
 
@@ -2796,7 +2803,7 @@ void kdesvnfilelist::slotRelocate()
     path = k->fullName();
     fromUrl = k->Url();
     CheckoutInfo_impl*ptr;
-    KDialogBase * dlg = createDialog(&ptr,i18n("Relocate path %1").arg(path),true,"relocate_dlg");
+    KDialog * dlg = createDialog(&ptr,i18n("Relocate path %1").arg(path),true,"relocate_dlg");
     if (dlg) {
         ptr->setStartUrl(fromUrl);
         ptr->disableAppend(true);
@@ -2810,7 +2817,8 @@ void kdesvnfilelist::slotRelocate()
         if (dlg->exec()==QDialog::Accepted) {
             done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->overwrite());
         }
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"relocate_dlg",false);
+        KConfigGroup k(Kdesvnsettings::self()->config(),"relocate_dlg");
+        dlg->saveDialogSize(k);
         delete dlg;
         if (!done) return;
     }
@@ -2962,7 +2970,7 @@ void kdesvnfilelist::slotMakeRangeLog()
         return;
     }
     Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -2972,7 +2980,8 @@ void kdesvnfilelist::slotMakeRangeLog()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeLog(r.first,r.second,(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision), what,list,0);
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(k);
 }
 
 
@@ -3004,7 +3013,7 @@ void kdesvnfilelist::slotMakePartTree()
         return;
     }
     Rangeinput_impl*rdlg;
-    KDialogBase*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -3013,7 +3022,8 @@ void kdesvnfilelist::slotMakePartTree()
     if (i==QDialog::Accepted) {
         r = rdlg->getRange();
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"revisions_dlg",false);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(k);
 
     if (i==QDialog::Accepted) {
         svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);

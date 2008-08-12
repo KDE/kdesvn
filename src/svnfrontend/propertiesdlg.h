@@ -21,10 +21,10 @@
 #define PROPERTIESDLG_H
 
 #include <qvariant.h>
-#include <kdialogbase.h>
-#include <qvaluelist.h>
+#include <kdialog.h>
 #include <qmap.h>
 #include <qstring.h>
+#include <QStringList>
 
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/revision.hpp"
@@ -35,7 +35,7 @@ class QGridLayout;
 class QSpacerItem;
 class QLabel;
 class Propertylist;
-class QListViewItem;
+class Q3ListViewItem;
 class KPushButton;
 class FileListViewItem;
 class SvnItem;
@@ -44,7 +44,7 @@ namespace svn {
     class Client;
 }
 
-class PropertiesDlg : public KDialogBase
+class PropertiesDlg : public KDialog
 {
     Q_OBJECT
 
@@ -55,7 +55,7 @@ public:
     ~PropertiesDlg();
 
     bool hasChanged()const;
-    void changedItems(svn::PropertiesMap&toSet,QValueList<QString>&toDelete);
+    void changedItems(svn::PropertiesMap&toSet,QStringList&toDelete);
 
 protected:
     Propertylist* m_PropertiesListview;
@@ -77,8 +77,8 @@ protected slots:
     virtual void languageChange();
 
     virtual void slotHelp();
-    virtual void slotSelectionChanged(QListViewItem*);
-    virtual void slotSelectionExecuted(QListViewItem*);
+    virtual void slotSelectionChanged(Q3ListViewItem*);
+    virtual void slotSelectionExecuted(Q3ListViewItem*);
     virtual void slotAdd();
     virtual void slotDelete();
     virtual void slotModify();

@@ -924,6 +924,9 @@ void SvnActions::slotCommit()
                                        ));
         }
     }
+    if (m_Data->m_ParentList->baseUri().length()>0) {
+        chdir(m_Data->m_ParentList->baseUri().local8Bit());
+    }
     if (makeCommit(targets) && Kdesvnsettings::log_cache_on_open()) {
         startFillCache(m_Data->m_ParentList->baseUri());
     }

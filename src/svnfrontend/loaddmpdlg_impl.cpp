@@ -28,8 +28,10 @@
 #include <qcheckbox.h>
 
 LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent, const char *name)
-    :LoadDmpDlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
 }
 
 LoadDmpDlg_impl::~LoadDmpDlg_impl()

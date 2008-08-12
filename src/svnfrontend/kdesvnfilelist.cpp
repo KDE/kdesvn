@@ -1691,8 +1691,8 @@ void kdesvnfilelist::viewportPaintEvent(QPaintEvent *ev)
     K3ListView::viewportPaintEvent(ev);
     if (m_pList->mOldDropHighlighter.isValid() && ev->rect().intersects(m_pList->mOldDropHighlighter)) {
         QPainter painter(viewport());
-        style().drawPrimitive(QStyle::PE_FocusRect, &painter, m_pList->mOldDropHighlighter, colorGroup(),
-                QStyle::Style_FocusAtBorder);
+        style().drawPrimitive(QStyle::PE_FrameFocusRect, &painter, m_pList->mOldDropHighlighter, colorGroup(),
+                QStyle::State_FocusAtBorder);
     }
 }
 
@@ -2050,7 +2050,7 @@ void kdesvnfilelist::slotDeleteFinished(KIO::Job*job)
 void kdesvnfilelist::dispDummy()
 {
     // wait for job
-    QLabel dummy(this,0,Qt::WStyle_NoBorder|WShowModal);
+    QLabel dummy(this,0,Qt::WStyle_NoBorder|Qt::WShowModal);
     QSize csize = size();
     dummy.setText(i18n("Please wait until job is finished"));
     dummy.resize(dummy.minimumSizeHint());
@@ -2231,7 +2231,7 @@ void kdesvnfilelist::slotDisplayLastDiff()
     svn::Revision end = svn::Revision::PREV;
     if (!kitem) {
         if (isWorkingCopy()) {
-            QListViewItem*fi = firstChild();
+            Q3ListViewItem*fi = firstChild();
             kitem = static_cast<FileListViewItem*>(fi);
             if (!kitem) {
                 return;
@@ -3085,13 +3085,13 @@ void kdesvnfilelist::slotUnfoldTree()
     connect(this,SIGNAL(sigListError()),
             &sdlg,SLOT(makeCancel()));
 
-    QListViewItemIterator it(this);
+    Q3ListViewItemIterator it(this);
     QTime t;t.start();
 
     setUpdatesEnabled(false);
     {
         WidgetBlockStack a(this);
-        while (QListViewItem* item = it.current())
+        while (Q3ListViewItem* item = it.current())
         {
             if (item->isExpandable()) {
                 if (sdlg.isCanceld()) {
@@ -3117,8 +3117,8 @@ void kdesvnfilelist::slotUnfoldTree()
 
 void kdesvnfilelist::slotFoldTree()
 {
-    QListViewItemIterator it(this);
-    while (QListViewItem* item = it.current())
+    Q3ListViewItemIterator it(this);
+    while (Q3ListViewItem* item = it.current())
     {
         // don't close the top level directory
         if (item->isExpandable() && item->parent())

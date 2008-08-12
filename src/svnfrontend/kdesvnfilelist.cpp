@@ -1175,8 +1175,8 @@ template<class T> KDialog* kdesvnfilelist::createDialog(T**ptr,const QString&_he
 
     QWidget* Dialog1Layout = new KVBox(dlg);
     *ptr = new T(Dialog1Layout);
-    KConfigGroup k(Kdesvnsettings::self()->config(),name?name:"standard_size");
-    dlg->restoreDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),name?name:"standard_size");
+    dlg->restoreDialogSize(_k);
     return dlg;
 }
 
@@ -1236,14 +1236,14 @@ void kdesvnfilelist::slotImportIntoDir(const KUrl&importUrl,const QString&target
     if (!dlg) return;
 
     ptr->initHistory();
-    KConfigGroup k(Kdesvnsettings::self()->config(),"import_log_msg");
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"import_log_msg");
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);
-        dlg->saveDialogSize(k);
+        dlg->saveDialogSize(_k);
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(k);
+    dlg->saveDialogSize(_k);
 
     QString logMessage = ptr->getMessage();
     svn::Depth rec = ptr->getDepth();
@@ -1788,8 +1788,8 @@ void kdesvnfilelist::slotMerge()
         }
     }
 
-    KConfigGroup k(Kdesvnsettings::self()->config(),"merge_dialog");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"merge_dialog");
+    dlg->saveDialogSize(_k);
 
     delete dlg;
 }
@@ -2091,8 +2091,8 @@ void kdesvnfilelist::slotLock()
         delete dlg;
         return;
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"locking_log_msg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"locking_log_msg");
+    dlg->saveDialogSize(_k);
 
     QString logMessage = ptr->getMessage();
     bool steal = _stealLock->isChecked();
@@ -2178,8 +2178,8 @@ void kdesvnfilelist::slotRangeBlame()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeBlame(r.first,r.second,k);
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(_k);
     delete dlg;
 }
 
@@ -2360,8 +2360,8 @@ void kdesvnfilelist::slotDiffRevisions()
         svn::Revision _peg=(isWorkingCopy()?svn::Revision::WORKING:remoteRevision());
         m_SvnWrapper->makeDiff(what,r.first,r.second,_peg,k?k->isDir():true);
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(_k);
     delete dlg;
 
 }
@@ -2384,8 +2384,8 @@ void kdesvnfilelist::slotSelectBrowsingRevision()
             refreshCurrentTree();
         }
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(_k);
     delete dlg;
 }
 
@@ -2406,8 +2406,8 @@ void kdesvnfilelist::slotRevisionCat()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->slotMakeCat(r.first, k->fullName(),k->shortName(),r.first,0);
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(_k);
     delete dlg;
 }
 
@@ -2481,7 +2481,8 @@ void kdesvnfilelist::slotInfo()
     }
     if (lst.count()==0) {
         if (!isWorkingCopy()) {
-            m_SvnWrapper->makeInfo(baseUri(),rev,svn::Revision::UNDEFINED,Kdesvnsettings::info_recursive());
+            QStringList _sl(baseUri());
+            m_SvnWrapper->makeInfo(_sl,rev,svn::Revision::UNDEFINED,Kdesvnsettings::info_recursive());
         } else {
             lst.append(SelectedOrMain());
         }
@@ -2773,8 +2774,7 @@ void kdesvnfilelist::leaveEvent(QEvent*e)
 
 void kdesvnfilelist::slotSettingsChanged()
 {
-    m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips()&&
-        QToolTip::isGloballyEnabled(),true,6);
+    m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips(),true,6);
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();
     } else {
@@ -2813,12 +2813,14 @@ void kdesvnfilelist::slotRelocate()
         ptr->disableExternals(true);
         ptr->hideDepth(true,true);
         bool done = false;
-        dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"relocate_dlg"));
+
+        KConfigGroup _k(Kdesvnsettings::self()->config(),"relocate_dlg");
+        dlg->restoreDialogSize(_k);
+
         if (dlg->exec()==QDialog::Accepted) {
             done = m_SvnWrapper->makeRelocate(fromUrl,ptr->reposURL(),path,ptr->overwrite());
         }
-        KConfigGroup k(Kdesvnsettings::self()->config(),"relocate_dlg");
-        dlg->saveDialogSize(k);
+        dlg->saveDialogSize(_k);
         delete dlg;
         if (!done) return;
     }
@@ -2835,18 +2837,17 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
 
     d.setFilter( QDir::Files | QDir::Dirs );
 
-    const QFileInfoList *list = d.entryInfoList();
-    if (!list) {
+    QFileInfoList list = d.entryInfoList();
+    if (list.size()==0) {
         return;
     }
-    QFileInfoListIterator nonversioned_it( *list );
-    QFileInfo *fi;
+    QFileInfoList::const_iterator nonversioned_it = list.begin();
 
     svn::StatusEntries nonversioned_list;
 
     // FIXME: create a dlist and feed to insertDirs, mean while .. we are copying insertDirs since we weren't able to set svn_node_kind into appropriate value
-    while ( (fi = nonversioned_it.current()) != 0 ) {
-        if ((fi->fileName()!=".") && (fi->fileName()!="..")) {
+    for (;nonversioned_it!=list.end();++nonversioned_it) {
+        if ((nonversioned_it->fileName()!=".") && (nonversioned_it->fileName()!="..")) {
             // trying to set entry->kind
 //             svn_wc_status2_t wc_stat;
 //             svn_wc_entry_t entry;
@@ -2862,7 +2863,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
 //
 //             svn::Status stat(fi->fileName(), &wc_stat);
 
-            svn::StatusPtr stat(new svn::Status(fi->absoluteFilePath()));
+            svn::StatusPtr stat(new svn::Status(nonversioned_it->absoluteFilePath()));
 
             // start copying insertDirs
             FileListViewItem * item;
@@ -2873,7 +2874,7 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
                 item = new FileListViewItem(this,_parent, stat);
                 kDebug()<< "creating new FileListViewitem (with parent) " + item->fullName() << endl;
             }
-            if (fi->isDir()) {
+            if (nonversioned_it->isDir()) {
                 m_Dirsread[item->fullName()]=false;
                 item->setDropEnabled(true);
                 if (isWorkingCopy()) {
@@ -2887,9 +2888,8 @@ void kdesvnfilelist::checkUnversionedDirs( FileListViewItem * _parent )
             // end of copying insertDirs
 
             nonversioned_list.append(stat);
-            kDebug() << "creating new FileListViewItem from QDir entry: " << fi->fileName() << endl;
+            kDebug() << "creating new FileListViewItem from QDir entry: " << nonversioned_it->fileName() << endl;
         }
-        ++nonversioned_it;
     }
 
     // uncomment this if you've ben able to set svn_node_kind (see above)
@@ -2980,8 +2980,8 @@ void kdesvnfilelist::slotMakeRangeLog()
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_SvnWrapper->makeLog(r.first,r.second,(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision), what,list,0);
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(_k);
 }
 
 
@@ -3022,8 +3022,8 @@ void kdesvnfilelist::slotMakePartTree()
     if (i==QDialog::Accepted) {
         r = rdlg->getRange();
     }
-    KConfigGroup k(Kdesvnsettings::self()->config(),"revisions_dlg");
-    dlg->saveDialogSize(k);
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
+    dlg->saveDialogSize(_k);
 
     if (i==QDialog::Accepted) {
         svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
@@ -3075,7 +3075,7 @@ void kdesvnfilelist::slotOpenWith()
     svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:m_pList->m_remoteRevision);
     KUrl::List lst;
     lst.append(which->kdeName(rev));
-    KRun::displayOpenWithDialog(lst);
+    KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
 }
 
 void kdesvnfilelist::slotUnfoldTree()
@@ -3100,7 +3100,7 @@ void kdesvnfilelist::slotUnfoldTree()
                 }
                 if (t.elapsed()>=200) {
                     sdlg.slotTick();
-                    kapp->processEvents(20);
+                    kapp->processEvents();
                     t.restart();
                 }
                 ((FileListViewItem*)item)->setOpenNoBlock(true);
@@ -3149,7 +3149,7 @@ bool kdesvnfilelist::uniqueTypeSelected()
     return true;
 }
 
-void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QValueList<QString>&dellist,const QString&path)
+void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const Q3ValueList<QString>&dellist,const QString&path)
 {
     m_SvnWrapper->changeProperties(pm,dellist,path);
     FileListViewItem* which = singleSelected();
@@ -3164,7 +3164,7 @@ void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QVal
 void kdesvnfilelist::slotUpdateLogCache()
 {
     if (baseUri().length()>0 && m_SvnWrapper->doNetworking()) {
-        KAction*temp = filesActions()->action("update_log_cache");
+        QAction*temp = filesActions()->action("update_log_cache");
 
         if (!m_SvnWrapper->threadRunning(SvnActions::fillcachethread)) {
             m_SvnWrapper->startFillCache(baseUri());

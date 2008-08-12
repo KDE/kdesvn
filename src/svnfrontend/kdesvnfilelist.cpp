@@ -60,6 +60,8 @@
 #include <krun.h>
 #include <ktrader.h>
 #include <kvbox.h>
+#include <kio/copyjob.h>
+#include <kio/deletejob.h>
 
 #include <q3vbox.h>
 #include <qpainter.h>
@@ -84,6 +86,7 @@
 #include <QDropEvent>
 #include <QDragMoveEvent>
 #include <QPaintEvent>
+#include <QStyleOption>
 #include <Q3PtrList>
 #include <qcheckbox.h>
 
@@ -1691,8 +1694,11 @@ void kdesvnfilelist::viewportPaintEvent(QPaintEvent *ev)
     K3ListView::viewportPaintEvent(ev);
     if (m_pList->mOldDropHighlighter.isValid() && ev->rect().intersects(m_pList->mOldDropHighlighter)) {
         QPainter painter(viewport());
-        style().drawPrimitive(QStyle::PE_FrameFocusRect, &painter, m_pList->mOldDropHighlighter, colorGroup(),
-                QStyle::State_FocusAtBorder);
+        QStyleOption _opt;
+        _opt.rect=m_pList->mOldDropHighlighter;
+        _opt.palette = colorGroup();
+        _opt.state = QStyle::State_FocusAtBorder;
+        style()->drawPrimitive(QStyle::PE_FrameFocusRect, &_opt, &painter);
     }
 }
 
@@ -1830,7 +1836,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,Q3ListViewItem*item)
                 //m_pList->stopScan();
                 KIO::Job * job = 0L;
                 job = KIO::copy(urlList,tdir);
-                connect( job, SIGNAL( result( KIO::Job * ) ),SLOT( slotCopyFinished( KIO::Job * ) ) );
+                connect(job, SIGNAL(result(KIO::Job*)),SLOT(slotCopyFinished( KIO::Job*)));
                 dispDummy();
                 event->acceptAction();
                 return;
@@ -1886,10 +1892,10 @@ void kdesvnfilelist::slotInternalDrop()
     QDropEvent::Action action = m_pList->intern_drop_action;
     if (action==QDropEvent::UserAction) {
          Q3PopupMenu popup;
-         popup.insertItem(SmallIconSet("goto"), i18n( "Move Here" ) + "\t" + KKey::modFlagLabel( KKey::SHIFT ), 2 );
-         popup.insertItem(SmallIconSet("editcopy"), i18n( "Copy Here" ) + "\t" + KKey::modFlagLabel( KKey::CTRL ), 1 );
+         popup.insertItem(SmallIconSet("goto"), i18n( "Move Here" ) + "\t" + QKeySequence(Qt::SHIFT).toString(), 2 );
+         popup.insertItem(SmallIconSet("editcopy"), i18n( "Copy Here" ) + "\t" + QKeySequence(Qt::CTRL).toString(), 1 );
          popup.insertSeparator();
-         popup.insertItem(SmallIconSet("cancel"), i18n( "Cancel" ) + "\t" + KKey( Qt::Key_Escape ).toString(), 5);
+         popup.insertItem(SmallIconSet("cancel"), i18n( "Cancel" ) + "\t" + QKeySequence(Qt::Key_Escape).toString(), 5);
          int result = popup.exec(m_pList->intern_drop_pos);
          switch (result) {
             case 1 : action = QDropEvent::Copy; break;
@@ -1968,13 +1974,14 @@ void kdesvnfilelist::slotCopyFinished( KIO::Job * job)
         }
         // always just connect a CopyJob here!!!!
         if (ok) {
-            KUrl::List lst = static_cast<KIO::CopyJob*>(job)->srcURLs();
-            KUrl turl = static_cast<KIO::CopyJob*>(job)->destURL();
-            QString base = turl.path(1);
+            KUrl::List lst = static_cast<KIO::CopyJob*>(job)->srcUrls();
+            KUrl turl = static_cast<KIO::CopyJob*>(job)->destUrl();
+            QString base = turl.path(KUrl::AddTrailingSlash);
             KUrl::List::iterator iter;
             Q3ValueList<svn::Path> tmp;
             for (iter=lst.begin();iter!=lst.end();++iter) {
-                tmp.push_back(svn::Path((base+(*iter).fileName(true))));
+                QString _ne = base+(*iter).fileName(KUrl::IgnoreTrailingSlash);
+                tmp.push_back(svn::Path(_ne));
             }
             m_SvnWrapper->addItems(tmp,svn::DepthInfinity);
         }
@@ -2084,7 +2091,7 @@ void kdesvnfilelist::slotLock()
     QCheckBox*_stealLock = new QCheckBox("",ptr,"create_dir_checkbox");
     _stealLock->setText(i18n("Steal lock?"));
     ptr->addItemWidget(_stealLock);
-    ptr->m_keepLocksButton->hide();
+    ptr->keepsLocks(false);
 
     if (dlg->exec()!=QDialog::Accepted) {
         ptr->saveHistory(true);

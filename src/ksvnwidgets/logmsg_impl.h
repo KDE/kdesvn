@@ -59,6 +59,7 @@ public:
     bool isKeeplocks()const;
     void initHistory();
     void saveHistory(bool canceld);
+    void keepsLocks(bool);
 
     static QString getLogmessage(bool*ok,svn::Depth*rec,bool*keeps_locks,QWidget*parent=0);
     static QString getLogmessage(const svn::CommitItemList&,bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent=0);

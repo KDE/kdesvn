@@ -216,6 +216,15 @@ svn::Depth Logmsg_impl::getDepth()const
     return m_DepthSelector->getDepth();
 }
 
+void Logmsg_impl::keepsLocks(bool keeps_lock)
+{
+    if (keeps_lock) {
+        m_keepLocksButton->show();
+    } else {
+        m_keepLocksButton->hide();
+    }
+}
+
 /*!
     \fn Logmsg_impl::isRecursive()const
  */

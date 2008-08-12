@@ -21,11 +21,12 @@
 
 #include <krun.h>
 #include <klocale.h>
+#include <kapplication.h>
 //Added by qt3to4:
 #include <Q3PopupMenu>
 #include <Q3CString>
 
-OpenContextmenu::OpenContextmenu(const KUrl&aPath,const KTrader::OfferList&aList,QWidget* parent, const char* name)
+OpenContextmenu::OpenContextmenu(const KUrl&aPath,const KService::List&aList,QWidget* parent, const char* name)
     : Q3PopupMenu(parent, name),m_Path(aPath),m_List(aList)
 {
     setup();
@@ -38,41 +39,43 @@ OpenContextmenu::~OpenContextmenu()
 void OpenContextmenu::setup()
 {
     m_mapPopup.clear();
-    KTrader::OfferList::ConstIterator it = m_List.begin();
+    KService::List::ConstIterator it = m_List.begin();
     int id = 1;
     KAction*act;
     for( ; it != m_List.end(); ++it ) {
         if ((*it)->noDisplay())
             continue;
 
-        Q3CString nam;
-        nam.setNum( id );
-
         QString actionName( (*it)->name().replace("&", "&&") );
-        act = new KAction( actionName, (*it)->pixmap( KIcon::Small ), 0,
-                                    this, SLOT( slotRunService() ), this, nam.prepend( "appservice_" ) );
-        act->plug(this);
+        act = new KAction(actionName,this);
+        QVariant _data=id;
+        act->setData(_data);
+        addAction(act);
+        //post increment!!!!!
         m_mapPopup[ id++ ] = *it;
     }
+    connect(this,SIGNAL(triggered(QAction*)),this,SLOT(slotRunService(QAction*)));
     if (m_List.count()>0) {
         insertSeparator( );
     }
-    act = new KAction(i18n("Other..."),0, 0,
-        this, SLOT( slotOpenWith() ),this,"openwith");
-    act->plug(this);
+    act = new KAction(i18n("Other..."),this);
+    QVariant _data=int(0);
+
+    //connect(act,SIGNAL(triggered()),this,SLOT(slotOpenWith()));
+    addAction(act);
 }
 
-void OpenContextmenu::slotRunService()
+void OpenContextmenu::slotRunService(QAction*act)
 {
-  Q3CString senderName = sender()->name();
-  int id = senderName.mid( senderName.find( '_' ) + 1 ).toInt();
+    QVariant _data = act->data();
+    int id = _data.toInt();
 
-  QMap<int,KService::Ptr>::Iterator it = m_mapPopup.find( id );
-  if ( it != m_mapPopup.end() )
-  {
-    KRun::run( **it, m_Path );
-    return;
-  }
+    QMap<int,KService::Ptr>::Iterator it = m_mapPopup.find( id );
+    if ( it != m_mapPopup.end() )
+    {
+        KRun::run(**it,m_Path,KApplication::activeWindow());
+        return;
+    }
 
 }
 
@@ -80,7 +83,7 @@ void OpenContextmenu::slotOpenWith()
 {
     KUrl::List lst;
     lst.append(m_Path);
-    KRun::displayOpenWithDialog(lst);
+    KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
 }
 
 #include "opencontextmenu.moc"

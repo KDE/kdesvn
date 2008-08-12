@@ -44,7 +44,7 @@ protected:
 
 protected slots:
     virtual void slotOpenWith();
-    virtual void slotRunService();
+    virtual void slotRunService(QAction*);
 };
 
 #endif

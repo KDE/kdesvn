@@ -55,7 +55,6 @@
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <k3urldrag.h>
-#include <ktemporaryfile.h>
 #include <kio/job.h>
 #include <krun.h>
 #include <ktrader.h>
@@ -3156,7 +3155,7 @@ bool kdesvnfilelist::uniqueTypeSelected()
     return true;
 }
 
-void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const Q3ValueList<QString>&dellist,const QString&path)
+void kdesvnfilelist::slotChangeProperties(const svn::PropertiesMap&pm,const QStringList&dellist,const QString&path)
 {
     m_SvnWrapper->changeProperties(pm,dellist,path);
     FileListViewItem* which = singleSelected();

@@ -21,7 +21,7 @@
 #define PROPERTYLIST_H
 
 #include <k3listview.h>
-#include <Q3ValueList>
+#include <QStringList>
 #include "src/svnqt/svnqttypes.hpp"
 
 /**
@@ -47,7 +47,7 @@ protected slots:
     virtual void slotItemRenamed(Q3ListViewItem*item,const QString & str,int col );
 
 signals:
-    void sigSetProperty(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&);
+    void sigSetProperty(const svn::PropertiesMap&,const QStringList&,const QString&);
 protected:
     bool m_commitit;
     QString m_current;

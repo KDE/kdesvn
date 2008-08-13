@@ -41,7 +41,6 @@
 class ItemDisplay;
 class SvnItem;
 class KDialog;
-class KDialogBase;
 class QDialog;
 class CContextListener;
 class K3Process;
@@ -79,7 +78,7 @@ public:
     //svn::Client&svnClient(){return m_Svnclient;}
     svn::Client* svnclient();
     void prepareUpdate(bool ask);
-    template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,
+    template<class T> KDialog* createDialog(T**ptr,const QString&_head,bool OkCance=false,
             const char*name="standard_dialog",
             bool showHelp=false,bool modal=true,
             const KGuiItem&u1 = KGuiItem());
@@ -88,7 +87,7 @@ public:
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
 
 
-    bool addItems(const Q3ValueList<svn::Path> &items,svn::Depth depth=svn::DepthEmpty);
+    bool addItems(const svn::Pathes &items,svn::Depth depth=svn::DepthEmpty);
     bool addItems(const QStringList&w,svn::Depth depth=svn::DepthEmpty);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
@@ -114,7 +113,7 @@ public:
     QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
     svn::PathPropertiesMapListPtr propList(const QString&which,const svn::Revision&where,bool cacheOnly);
 
-    bool changeProperties(const svn::PropertiesMap&setList,const Q3ValueList<QString>&,const QString&path);
+    bool changeProperties(const svn::PropertiesMap&setList,const QStringList&,const QString&path);
 
     //! generate and displays a revision tree
     /*!
@@ -184,7 +183,7 @@ public:
 
     bool threadRunning(ThreadType which);
 
-    virtual void customEvent ( QCustomEvent * e );
+    virtual void customEvent (QEvent *e);
 
     bool doNetworking();
 

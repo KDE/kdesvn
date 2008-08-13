@@ -42,6 +42,7 @@
 #include <QMouseEvent>
 #include <QDragEnterEvent>
 #include <Q3ValueList>
+#include <QStringList>
 
 class KAction;
 class KActionMenu;
@@ -219,7 +220,7 @@ public slots:
     virtual void slotMkdir();
     virtual void slotMkBaseDirs();
     virtual void slotSettingsChanged();
-    virtual void slotChangeProperties(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&);
+    virtual void slotChangeProperties(const svn::PropertiesMap&,const QStringList&,const QString&);
 
 
 protected slots:

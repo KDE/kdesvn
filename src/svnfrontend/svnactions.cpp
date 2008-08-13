@@ -45,6 +45,7 @@
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/wc.hpp"
 #include "src/svnqt/svnqt_defines.hpp"
+#include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/url.hpp"
@@ -62,7 +63,6 @@
 #include <k3process.h>
 #include <ktempdir.h>
 #include <ktemporaryfile.h>
-#include <kdialogbase.h>
 #include <kapplication.h>
 #include <kio/jobclasses.h>
 #include <kio/job.h>
@@ -74,12 +74,12 @@
 #include <ktrader.h>
 #include <krun.h>
 #include <kstdguiitem.h>
+#include <kvbox.h>
 
 #include <qstring.h>
 #include <qmap.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <q3valuelist.h>
 #include <q3vbox.h>
 #include <q3stylesheet.h>
 #include <qregexp.h>
@@ -112,7 +112,8 @@ public:
     virtual ~SvnActionsData()
     {
         if (m_DiffDialog) {
-            m_DiffDialog->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
+            KConfigGroup _kc(Kdesvnsettings::self()->config(),"diff_display");
+            m_DiffDialog->saveDialogSize(_kc);
             delete m_DiffDialog;
         }
         QMap<K3Process*,QStringList>::iterator it;
@@ -159,7 +160,8 @@ public:
     void cleanDialogs()
     {
         if (m_DiffDialog) {
-            m_DiffDialog->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
+            KConfigGroup _kc(Kdesvnsettings::self()->config(),"diff_display");
+            m_DiffDialog->saveDialogSize(_kc);
             delete m_DiffDialog;
             m_DiffDialog=0;
         }
@@ -191,8 +193,8 @@ public:
     QTimer m_UpdateCheckTimer;
     QTime m_UpdateCheckTick;
     QPointer<DiffBrowser> m_DiffBrowserPtr;
-    QPointer<KDialogBase> m_DiffDialog;
-    QGuardedPtr<SvnLogDlgImp> m_LogDialog;
+    QPointer<KDialog> m_DiffDialog;
+    QPointer<SvnLogDlgImp> m_LogDialog;
 
     QMap<QString,QString> m_contextData;
 
@@ -243,33 +245,35 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
 }
 
-template<class T> KDialogBase* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,bool modal,const KGuiItem&u1)
+template<class T> KDialog* SvnActions::createDialog(T**ptr,const QString&_head,bool OkCancel,const char*name,bool showHelp,bool modal,const KGuiItem&u1)
 {
-    int buttons = KDialogBase::Ok;
+    QFlags<KDialog::ButtonCode> buttons = KDialog::Ok;
     if (OkCancel) {
-        buttons = buttons|KDialogBase::Cancel;
+        buttons = buttons|KDialog::Cancel;
     }
     if (showHelp) {
-        buttons = buttons|KDialogBase::Help;
+        buttons = buttons|KDialog::Help;
     }
     if (!u1.text().isEmpty()) {
-        buttons = buttons|KDialogBase::User1;
+        buttons = buttons|KDialog::User1;
     }
-    KDialogBase * dlg = new KDialogBase(
-        modal?KApplication::activeModalWidget():0, // parent
-        name, // name
-        modal, // modal
-        _head, // caption
-        buttons, // buttonmask
-        KDialogBase::Ok, // defaultButton
-        false , // separator
-        (u1.text().isEmpty()?KGuiItem():u1) //user1
-                                       );
 
+    KDialog * dlg = new KDialog(modal?KApplication::activeModalWidget():0);
     if (!dlg) return dlg;
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    if (name) {
+        dlg->setObjectName(name);
+    }
+    dlg->setModal(modal);
+    dlg->setCaption(_head);
+    dlg->setButtons(buttons);
+    if (!u1.text().isEmpty()) {
+        dlg->setButtonGuiItem(KDialog::User1,u1);
+    }
+
+    QWidget* Dialog1Layout = new KVBox(dlg);
     *ptr = new T(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),name?name:DIALOGS_SIZES));
+    KConfigGroup _k(Kdesvnsettings::self()->config(),name?name:"standard_size");
+    dlg->restoreDialogSize(_k);
     return dlg;
 }
 
@@ -444,10 +448,14 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
         stopFillCache();
     }
     QWidget*disp;
-    KDialogBase dlg(m_Data->m_ParentList->realWidget(),"historylist",true,i18n("History of %1").arg(info.url().mid(reposRoot.length())),
-        KDialogBase::Ok,
-        KDialogBase::Ok,true);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+
+    KDialog dlg(m_Data->m_ParentList->realWidget());
+    dlg.setObjectName("historylist");
+    dlg.setCaption(i18n("History of %1").arg(info.url().mid(reposRoot.length())));
+    dlg.setButtons(KDialog::Ok);
+    dlg.setModal(true);
+
+    QWidget* Dialog1Layout = new KVBox(&dlg);
 
     RevisionTree rt(m_Data->m_Svnclient,m_Data->m_SvnContextListener,reposRoot,
             startr,endr,
@@ -465,9 +473,10 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
                    );
             connect(disp,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
                 this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
-            dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg"));
+            KConfigGroup _kc(Kdesvnsettings::self()->config(),"revisiontree_dlg");
+            dlg.restoreDialogSize(_kc);
             dlg.exec();
-            dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"revisiontree_dlg",false);
+            dlg.saveDialogSize(_kc);
         }
     }
     if (restartCache) {
@@ -542,7 +551,7 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
         return;
     }
     EMIT_FINISHED;
-    BlameDisplay_impl::displayBlame(_acb?_acb:this,k,blame,_p,"blame_dlg");
+    BlameDisplay_impl::displayBlame(_acb?_acb:this,k,blame,_p);
 }
 
 bool SvnActions::makeGet(const svn::Revision&start, const QString&what, const QString&target,
@@ -572,18 +581,18 @@ bool SvnActions::makeGet(const svn::Revision&start, const QString&what, const QS
 void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, const QString&disp,const svn::Revision&peg,QWidget*_dlgparent)
 {
     KTemporaryFile content;
-    content.setAutoDelete(true);
+    content.setAutoRemove(true);
     if (!makeGet(start,what,content.name(),peg,_dlgparent)) {
         return;
     }
     EMIT_FINISHED;
     KMimeType::Ptr mptr;
     mptr = KMimeType::findByFileContent(content.name());
-    KTrader::OfferList offers = KTrader::self()->query(mptr->name(), "Type == 'Application' or (exist Exec)");
+    KService::List offers = KMimeTypeTrader::self()->query(mptr->name(), "Type == 'Application' or (exist Exec)");
     if (offers.count()==0 || offers.first()->exec().isEmpty()) {
-        offers = KTrader::self()->query(mptr->name(), "Type == 'Application'");
+        offers = KMimeTypeTrader::self()->query(mptr->name(), "Type == 'Application'");
     }
-    KTrader::OfferList::ConstIterator it = offers.begin();
+    KService::List::ConstIterator it = offers.begin();
     for( ; it != offers.end(); ++it ) {
         if ((*it)->noDisplay())
             continue;
@@ -591,23 +600,25 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     }
 
     if (it!=offers.end()) {
-        content.setAutoDelete(false);
-        KRun::run(**it,KUrl(content.name()),true);
+        content.setAutoRemove(false);
+        KRun::run(**it,KUrl(content.name()), KApplication::activeWindow(),true);
         return;
     }
-    KTextBrowser*ptr;
+    KTextEdit*ptr;
     QFile file(content.name());
     file.open( QIODevice::ReadOnly );
     QByteArray co = file.readAll();
 
     if (co.size()) {
-        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
+        KDialog*dlg = createDialog(&ptr,QString(i18n("Content of %1")).arg(disp),false,"cat_display_dlg");
         if (dlg) {
             ptr->setFont(KGlobalSettings::fixedFont());
-            ptr->setWordWrap(Q3TextEdit::NoWrap);
+            ptr->setWordWrapMode(QTextOption::NoWrap);
+            ptr->setReadOnly(true);
             ptr->setText(QString::FROMUTF8(co,co.size()));
             dlg->exec();
-            dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"cat_display_dlg",false);
+            KConfigGroup _kc(Kdesvnsettings::self()->config(),"cat_display_dlg");
+            dlg->saveDialogSize(_kc);
             delete dlg;
         }
     } else {
@@ -824,11 +835,12 @@ void SvnActions::makeInfo(Q3PtrList<SvnItem> lst,const svn::Revision&rev,const s
     }
     res+="</body></html>";
     KTextBrowser*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
+    KDialog*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
     if (dlg) {
         ptr->setText(res);
         dlg->exec();
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"info_dialog",false);
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),"info_dialog");
+    dlg->saveDialogSize(_kc);
         delete dlg;
     }
 }
@@ -836,7 +848,7 @@ void SvnActions::makeInfo(Q3PtrList<SvnItem> lst,const svn::Revision&rev,const s
 void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive)
 {
     QString text = "";
-    for (unsigned int i=0; i < lst.count();++i) {
+    for (long i=0; i < lst.count();++i) {
         QString res = getInfo(lst[i],rev,peg,recursive,true);
         if (!res.isEmpty()) {
             text+="<h4 align=\"center\">"+lst[i]+"</h4>";
@@ -845,11 +857,12 @@ void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const sv
     }
     text = "<html><head></head><body>"+text+"</body></html>";
     KTextBrowser*ptr;
-    KDialogBase*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
+    KDialog*dlg = createDialog(&ptr,QString(i18n("Infolist")),false,"info_dialog");
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"info_dialog",false);
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),"info_dialog");
+        dlg->saveDialogSize(_kc);
         delete dlg;
     }
 }
@@ -868,26 +881,27 @@ void SvnActions::slotProperties()
     PropertiesDlg dlg(k,svnclient(),
         m_Data->m_ParentList->isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
-    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()), "properties_dlg"));
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),"properties_dlg");
+    dlg.restoreDialogSize(_kc);
     if (dlg.exec()!=QDialog::Accepted) {
         return;
     }
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"properties_dlg",false);
+    dlg.saveDialogSize(_kc);
     QString ex;
     svn::PropertiesMap setList;
-    Q3ValueList<QString> delList;
+    QStringList delList;
     dlg.changedItems(setList,delList);
     changeProperties(setList,delList,k->fullName());
     k->refreshStatus();
     EMIT_FINISHED;
 }
 
-bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&delList,const QString&path)
+bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QStringList&delList,const QString&path)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        unsigned int pos;
+        long pos;
         for (pos = 0; pos<delList.size();++pos) {
             m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path));
         }
@@ -948,8 +962,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
 
     stopFillCache();
     if (!review) {
-        msg = Logmsg_impl::getLogmessage(&ok,&depth,&keeplocks,
-            m_Data->m_ParentList->realWidget(),"logmsg_impl");
+        msg = Logmsg_impl::getLogmessage(&ok,&depth,&keeplocks,m_Data->m_ParentList->realWidget());
         if (!ok) {
             return false;
         }
@@ -968,7 +981,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 emit clientException(e.msg());
                 return false;
             }
-            for (unsigned int i = 0; i < _Cache.count();++i) {
+            for (long i = 0; i < _Cache.count();++i) {
                 _p = _Cache[i]->path();
                 if (_Cache[i]->isRealVersioned()&& (
                     _Cache[i]->textStatus()==svn_wc_status_modified||
@@ -989,13 +1002,12 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 }
             }
         }
-        msg = Logmsg_impl::getLogmessage(_check,_uncheck,this,_result,&ok,&keeplocks,
-            m_Data->m_ParentList->realWidget(),"logmsg_impl");
+        msg = Logmsg_impl::getLogmessage(_check,_uncheck,this,_result,&ok,&keeplocks,m_Data->m_ParentList->realWidget());
         if (!ok||_result.count()==0) {
             return false;
         }
         svn::Pathes _add,_commit,_delete;
-        for (unsigned int i=0; i < _result.count();++i) {
+        for (long i=0; i < _result.count();++i) {
             if (_result[i]._kind==Logmsg_impl::logActionEntry::DELETE) {
                 QFileInfo fi(_result[i]._name);
                 if (fi.isDir()) {
@@ -1133,13 +1145,17 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     QStringList wlist = QStringList::split(" ",edisp);
     QFileInfo f1(p1);
     QFileInfo f2(p2);
-    KTemporaryFile tfile(QString::null,f1.fileName()+"-"+start.toString()),tfile2(QString::null,f2.fileName()+"-"+end.toString());
+    KTemporaryFile tfile, tfile2;
+
+    tfile.setPrefix(f1.fileName()+"-"+start.toString());
+    tfile2.setPrefix(f2.fileName()+"-"+end.toString());
+
     QString s1 = f1.fileName()+"-"+start.toString();
     QString s2 = f2.fileName()+"-"+end.toString();
     KTempDir tdir1;
-    tdir1.setAutoDelete(true);
-    tfile.setAutoDelete(true);
-    tfile2.setAutoDelete(true);
+    tdir1.setAutoRemove(true);
+    tfile.setAutoRemove(true);
+    tfile2.setAutoRemove(true);
     QString first,second;
     svn::Revision peg = _peg;
 
@@ -1199,12 +1215,12 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     if (proc->start(m_Data->runblocked?K3Process::Block:K3Process::NotifyOnExit,K3Process::All)) {
         if (!m_Data->runblocked) {
             if (!isDir) {
-                tfile2.setAutoDelete(false);
-                tfile.setAutoDelete(false);
+                tfile2.setAutoRemove(false);
+                tfile.setAutoRemove(false);
                 m_Data->m_tempfilelist[proc].append(tfile.name());
                 m_Data->m_tempfilelist[proc].append(tfile2.name());
             } else {
-                tdir1.setAutoDelete(false);
+                tdir1.setAutoRemove(false);
                 m_Data->m_tempdirlist[proc].append(tdir1.name());
             }
         }
@@ -1231,7 +1247,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     if (!m_Data->m_CurrentContext) return;
     QByteArray ex;
     KTempDir tdir;
-    tdir.setAutoDelete(true);
+    tdir.setAutoRemove(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     QWidget*parent = p?p:m_Data->m_ParentList->realWidget();
@@ -1294,7 +1310,7 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     }
     QByteArray ex;
     KTempDir tdir;
-    tdir.setAutoDelete(true);
+    tdir.setAutoRemove(true);
     kDebug()<<"Non recourse diff"<<endl;
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
@@ -1328,13 +1344,13 @@ void SvnActions::dispDiff(const QByteArray&ex)
         K3Process*proc = new K3Process();
         bool fname_used = false;
         KTemporaryFile tfile;
-        tfile.setAutoDelete(false);
+        tfile.setAutoRemove(false);
 
         for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
             if (*it=="%f") {
                 fname_used = true;
-                QDataStream*ds = tfile.dataStream();
-                ds->writeRawBytes(ex,ex.size());
+                QDataStream ds(&tfile);
+                ds.writeRawBytes(ex,ex.size());
                 tfile.close();
                 *proc<<tfile.name();
             } else {
@@ -1363,7 +1379,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
         if (!need_modal && m_Data->m_DiffBrowserPtr) {
             delete m_Data->m_DiffBrowserPtr;
         }
-        KDialogBase*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,
+        KDialog*dlg = createDialog(&ptr,QString(i18n("Diff display")),false,
                                         "diff_display",false,need_modal,
                                       KStandardGuiItem::saveAs());
         if (dlg) {
@@ -1378,7 +1394,8 @@ void SvnActions::dispDiff(const QByteArray&ex)
             if (need_modal) {
                 ptr->setFocus();
                 dlg->exec();
-                dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"diff_display",false);
+                KConfigGroup _kc(Kdesvnsettings::self()->config(),"diff_display");
+    dlg->saveDialogSize(_kc);
                 delete dlg;
                 return;
             } else {
@@ -1532,18 +1549,18 @@ void SvnActions::makeAdd(bool rec)
 
 bool SvnActions::addItems(const QStringList&w,svn::Depth depth)
 {
-    Q3ValueList<svn::Path> items;
-    for (unsigned int i = 0; i<w.count();++i) {
+    svn::Pathes items;
+    for (long i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
     return addItems(items,depth);
 }
 
-bool SvnActions::addItems(const Q3ValueList<svn::Path> &items,svn::Depth depth)
+bool SvnActions::addItems(const svn::Pathes&items, svn::Depth depth)
 {
     QString ex;
     try {
-        Q3ValueList<svn::Path>::const_iterator piter;
+        svn::Pathes::const_iterator piter;
         for (piter=items.begin();piter!=items.end();++piter) {
             m_Data->m_Svnclient->add((*piter),depth);
         }
@@ -1561,7 +1578,7 @@ bool SvnActions::makeDelete(const QStringList&w)
         return false;
     }
     svn::Pathes items;
-    for (unsigned int i = 0; i<w.count();++i) {
+    for (long i = 0; i<w.count();++i) {
         items.push_back(w[i]);
     }
     return makeDelete(items);
@@ -1608,7 +1625,7 @@ void SvnActions::slotExportCurrent()
 void SvnActions::CheckoutExport(bool _exp)
 {
     CheckoutInfo_impl*ptr;
-    KDialogBase * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
+    KDialog * dlg = createDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
     if (dlg) {
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
@@ -1621,7 +1638,8 @@ void SvnActions::CheckoutExport(bool _exp)
                          ignoreExternal,
                          ptr->overwrite(),0);
         }
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"checkout_export_dialog",false);
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),"checkout_export_dialog");
+    dlg->saveDialogSize(_kc);
         delete dlg;
     }
 }
@@ -1754,9 +1772,9 @@ void SvnActions::slotRevertItems(const QStringList&displist)
     }
     depth = ptr->getDepth();
 
-    Q3ValueList<svn::Path> items;
-    for (unsigned j = 0; j<displist.count();++j) {
-        items.push_back(svn::Path((*(displist.at(j)))));
+    svn::Pathes items;
+    for (long j = 0; j<displist.count();++j) {
+        items.push_back(svn::Path(displist[j]));
     }
     QString ex;
 
@@ -1770,7 +1788,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         return;
     }
     // remove them from cache
-    for (unsigned int j = 0; j<items.count();++j) {
+    for (long j = 0; j<items.count();++j) {
         m_Data->m_Cache.deleteKey(items[j].path(),depth!=svn::DepthInfinity);
 //        m_Data->m_Cache.dump_tree();
     }
@@ -1853,7 +1871,7 @@ void SvnActions::slotSwitch()
 bool SvnActions::makeSwitch(const QString&path,const QString&what)
 {
     CheckoutInfo_impl*ptr;
-    KDialogBase * dlg = createDialog(&ptr,i18n("Switch url"),true,"switch_url_dlg");
+    KDialog * dlg = createDialog(&ptr,i18n("Switch url"),true,"switch_url_dlg");
     bool done = false;
     if (dlg) {
         ptr->setStartUrl(what);
@@ -1864,7 +1882,8 @@ bool SvnActions::makeSwitch(const QString&path,const QString&what)
             svn::Revision r = ptr->toRevision();
             done = makeSwitch(ptr->reposURL(),path,r,ptr->getDepth(),r,true,ptr->ignoreExternals(),ptr->overwrite());
         }
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"switch_url_dlg",false);
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),"switch_url_dlg");
+    dlg->saveDialogSize(_kc);
         delete dlg;
     }
     return done;
@@ -1968,7 +1987,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     const svn::Revision&rev1,const svn::Revision&rev2,bool rec)
 {
     KTempDir tdir1;
-    tdir1.setAutoDelete(true);
+    tdir1.setAutoRemove(true);
     QString src1 = _src1;
     QString src2 = _src2;
     QString target = _target;
@@ -2092,7 +2111,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
     connect(proc,SIGNAL(receivedStderr(K3Process*,char*,int)),this,SLOT(receivedStderr(K3Process*,char*,int)));
     if (proc->start(m_Data->runblocked?K3Process::Block:K3Process::NotifyOnExit,K3Process::Stderr)) {
         if (!m_Data->runblocked) {
-            tdir1.setAutoDelete(false);
+            tdir1.setAutoRemove(false);
             m_Data->m_tempdirlist[proc].append(tdir1.name());
         }
         return;
@@ -2227,11 +2246,11 @@ bool SvnActions::makeCopy(const KUrl::List&Old,const QString&New,const svn::Revi
  */
 void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit)
 {
-    Q3ValueList<svn::Path> targets;
-    for (unsigned int i = 0; i<what.count();++i) {
-        targets.push_back(svn::Path((*(what.at(i)))));
-    }
     if (!m_Data->m_CurrentContext) return;
+    svn::Pathes targets;
+    for (long i = 0; i<what.count();++i) {
+        targets.push_back(svn::Path(what[i]));
+    }
     try {
         m_Data->m_Svnclient->lock(svn::Targets(targets),_msg,breakit);
     } catch (const svn::Exception&e) {
@@ -2246,10 +2265,10 @@ void SvnActions::makeLock(const QStringList&what,const QString&_msg,bool breakit
  */
 void SvnActions::makeUnlock(const QStringList&what,bool breakit)
 {
-    Q3ValueList<svn::Path> targets;
     if (!m_Data->m_CurrentContext) return;
-    for (unsigned int i = 0; i<what.count();++i) {
-        targets.push_back(svn::Path((*(what.at(i)))));
+    svn::Pathes targets;
+    for (long i = 0; i<what.count();++i) {
+        targets.push_back(svn::Path(what[i]));
     }
 
     try {
@@ -2258,8 +2277,8 @@ void SvnActions::makeUnlock(const QStringList&what,bool breakit)
         emit clientException(e.msg());
         return;
     }
-    for (unsigned int i = 0; i<what.count();++i) {
-        m_Data->m_repoLockCache.deleteKey(*(what.at(i)),true);
+    for (long i = 0; i<what.count();++i) {
+        m_Data->m_repoLockCache.deleteKey(what[i],true);
     }
 //    m_Data->m_repoLockCache.dump_tree();
 }
@@ -2300,7 +2319,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
     if (!makeStatus(path,dlist,where,true,true,false,false)) {
         return;
     }
-    for (unsigned int i = 0; i<dlist.size();++i) {
+    for (long i = 0; i<dlist.size();++i) {
         if (!dlist[i]->isVersioned()) {
             rlist.append(dlist[i]);
             displist.append(dlist[i]->path());
@@ -2310,9 +2329,9 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
         if (print_error_box) KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("No unversioned items found."));
     } else {
         K3ListView*ptr;
-        KDialogBase * dlg = createDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");
+        KDialog * dlg = createDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");
         ptr->addColumn("Item");
-        for (unsigned j = 0; j<displist.size();++j) {
+        for (long j = 0; j<displist.size();++j) {
             Q3CheckListItem * n = new Q3CheckListItem(ptr,displist[j],Q3CheckListItem::CheckBox);
             n->setOn(true);
         }
@@ -2330,7 +2349,8 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
                 addItems(displist,svn::DepthEmpty);
             }
         }
-        dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"add_items_dlg",false);
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),"add_items_dlg");
+    dlg->saveDialogSize(_kc);
         delete dlg;
     }
 }
@@ -2414,7 +2434,7 @@ void SvnActions::checkModthread()
         return;
     }
     kDebug()<<"ModifiedThread seems stopped"<<endl;
-    for (unsigned int i = 0; i < m_CThread->getList().count();++i) {
+    for (long i = 0; i < m_CThread->getList().count();++i) {
         svn::StatusPtr ptr = m_CThread->getList()[i];
         if (m_CThread->getList()[i]->isRealVersioned()&& (
             m_CThread->getList()[i]->textStatus()==svn_wc_status_modified||
@@ -2447,7 +2467,7 @@ void SvnActions::checkUpdateThread()
     kDebug()<<"Updates Thread seems stopped"<<endl;
 
     bool newer=false;
-    for (unsigned int i = 0; i < m_UThread->getList().count();++i) {
+    for (long i = 0; i < m_UThread->getList().count();++i) {
         svn::StatusPtr ptr = m_UThread->getList()[i];
         if (ptr->validReposStatus()) {
             m_Data->m_UpdateCache.insertKey(ptr,ptr->path());
@@ -2561,7 +2581,7 @@ bool SvnActions::doNetworking()
     return !is_url;
 }
 
-void SvnActions::customEvent(QCustomEvent * e)
+void SvnActions::customEvent(QEvent * e)
 {
     if (e->type()==EVENT_LOGCACHE_FINISHED) {
         emit sendNotify(i18n("Filling log cache in background finished."));
@@ -2602,7 +2622,7 @@ bool SvnActions::checkUpdateCache(const QString&path)const
 
 void SvnActions::removeFromUpdateCache(const QStringList&what,bool exact_only)
 {
-    for (unsigned int i = 0; i < what.count(); ++i) {
+    for (long i = 0; i < what.count(); ++i) {
         m_Data->m_UpdateCache.deleteKey(what[i],exact_only);
     }
 }

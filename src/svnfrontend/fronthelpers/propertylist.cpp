@@ -121,7 +121,7 @@ void Propertylist::slotItemRenamed(Q3ListViewItem*_item,const QString & text,int
     }
     if (commitchanges() && item->different()) {
         svn::PropertiesMap pm;
-        Q3ValueList<QString> dels;
+        QStringList dels;
         pm[item->currentName()]=item->currentValue();
         if (item->currentName()!=item->startName()){
             dels.push_back(item->startName());
@@ -152,8 +152,8 @@ bool Propertylist::checkExisting(const QString&aName,Q3ListViewItem*it)
 void Propertylist::addCallback(QObject*ob)
 {
     if (ob) {
-        connect(this,SIGNAL(sigSetProperty(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&)),
-                ob,SLOT(slotChangeProperties(const svn::PropertiesMap&,const Q3ValueList<QString>&,const QString&)));
+        connect(this,SIGNAL(sigSetProperty(const svn::PropertiesMap&,const QStringList&,const QString&)),
+                ob,SLOT(slotChangeProperties(const svn::PropertiesMap&,const QStringList&,const QString&)));
     }
 }
 

@@ -44,7 +44,7 @@
 #include <Q3ValueList>
 #include <QKeyEvent>
 #include <QDesktopWidget>
-
+#include <Q3StyleSheet>
 #include <list>
 
 
@@ -202,6 +202,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
     setModal(modal);
 
     m_LogView->setSorting(LogListViewItem::COL_REV);
+
     resize(dialogSize());
     m_ControlKeyDown = false;
     m_first = 0;
@@ -215,12 +216,12 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
     m_Actions = ac;
     //FIXME: port QTextStream hell into Qt4 QSplitter save/restore state methods
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
-    QString t1 = cs.readEntry("logsplitter",QString::null);
+    QString t1 = cs.readEntry("logsplitter",QString());
     if (!t1.isEmpty()) {
         QTextStream st2(&t1,IO_ReadOnly);
         st2 >> *m_centralSplitter;
     }
-    t1 = cs.readEntry("right_logsplitter",QString::null);
+    t1 = cs.readEntry("right_logsplitter",QString());
     if (!t1.isEmpty()) {
         if (cs.readEntry("laststate",false)==m_ChangedList->isHidden()) {
             QTextStream st2(&t1,QIODevice::ReadOnly);
@@ -356,7 +357,7 @@ QString SvnLogDlgImp::genReplace(const QString&r1match)
 
 void SvnLogDlgImp::replaceBugids(QString&msg)
 {
-    msg = QStyleSheet::convertFromPlainText(msg);
+    msg = Q3StyleSheet::convertFromPlainText(msg);
     if (!_r1.isValid() || _r1.pattern().length()<1 || _bugurl.isEmpty()) {
         return;
     }
@@ -450,24 +451,23 @@ void SvnLogDlgImp::saveSize()
 {
     int scnum = QApplication::desktop()->screenNumber(parentWidget());
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
-    KConfigGroupSaver cs(Kdesvnsettings::self()->config(), groupName);
+    KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QSize sizeToSave = size();
-    Kdesvnsettings::self()->config()->writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),
-        QString::number( sizeToSave.width()), true, false);
-    Kdesvnsettings::self()->config()->writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),
-        QString::number( sizeToSave.height()), true, false);
+    cs.writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),QString::number( sizeToSave.width()));
+    cs.writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),QString::number( sizeToSave.height()));
 }
 
 QSize SvnLogDlgImp::dialogSize()
 {
     int w, h;
+
     int scnum = QApplication::desktop()->screenNumber(parentWidget());
     QRect desk = QApplication::desktop()->screenGeometry(scnum);
     w = sizeHint().width();
     h = sizeHint().height();
-    KConfigGroupSaver cs(Kdesvnsettings::self()->config(), groupName);
-    w = Kdesvnsettings::self()->config()->readNumEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
-    h = Kdesvnsettings::self()->config()->readNumEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
+    KConfigGroup cs(Kdesvnsettings::self()->config(),groupName);
+    w = cs.readEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
+    h = cs.readEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
     return( QSize( w, h ) );
 }
 
@@ -568,7 +568,7 @@ void SvnLogDlgImp::keyPressEvent (QKeyEvent * e)
     if (e->text().isEmpty()&&e->key()==Qt::Key_Control) {
         m_ControlKeyDown = true;
     }
-    SvnLogDialogData::keyPressEvent(e);
+    QDialog::keyPressEvent(e);
 }
 
 void SvnLogDlgImp::keyReleaseEvent (QKeyEvent * e)
@@ -577,7 +577,7 @@ void SvnLogDlgImp::keyReleaseEvent (QKeyEvent * e)
     if (e->text().isEmpty()&&e->key()==Qt::Key_Control) {
         m_ControlKeyDown = false;
     }
-    SvnLogDialogData::keyReleaseEvent(e);
+    QDialog::keyReleaseEvent(e);
 }
 
 void SvnLogDlgImp::slotBlameItem()

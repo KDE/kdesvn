@@ -713,3 +713,4 @@ void Logmsg_impl::insertFile()
     }
 }
 
+#include "logmsg_impl.moc"

@@ -100,4 +100,6 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     }
     return *ok;
 }
-// #include "ssltrustprompt_impl.moc"
+
+#include "ssltrustprompt_impl.moc"
+

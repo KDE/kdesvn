@@ -480,8 +480,8 @@ void CommandExec::slotCmd_info()
 
 void CommandExec::slotCmd_commit()
 {
-    Q3ValueList<svn::Path> targets;
-    for (unsigned j=0; j<m_pCPart->url.count();++j) {
+    QStringList targets;
+    for (long j=0; j<m_pCPart->url.count();++j) {
         targets.push_back(svn::Path(m_pCPart->url[j]));
     }
     m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
@@ -499,7 +499,7 @@ void CommandExec::slotCmd_list()
     if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,rev,false)) {
         return;
     }
-    for (unsigned int i = 0; i < res.count();++i) {
+    for (long i = 0; i < res.count();++i) {
         QString d = svn::DateTime(res[i]->time()).toString(QString("yyyy-MM-dd hh:mm::ss"));
         m_pCPart->Stdout
             << (res[i]->kind()==svn_node_dir?"D":"F")<<" "

@@ -71,7 +71,7 @@ public:
     kdesvnfilelist(KActionCollection*,QWidget *parent = 0, const char *name = 0);
     virtual ~kdesvnfilelist();
 
-    virtual bool openURL( const KUrl &url,bool noReinit=false );
+    virtual bool openUrl( const KUrl &url,bool noReinit=false );
     virtual SvnItem*SelectedOrMain();
     virtual SvnItem*Selected();
     virtual void SelectionList(SvnItemList*target);
@@ -192,7 +192,7 @@ protected slots:
     /* callback slots */
     virtual void slotCopyFinished( KIO::Job *);
     virtual void slotDeleteFinished(KIO::Job*);
-    virtual void _openURL(const QString&);
+    virtual void _openUrl(const QString&);
     virtual void _dirwatchTimeout();
     virtual void _propListTimeout();
 

@@ -97,6 +97,7 @@ void SvnFileTip::setOptions( bool on, bool preview, int num )
 
 void SvnFileTip::setItem(SvnItem*item, const QRect &rect, const QPixmap *pixmap )
 {
+    return;
     hideTip();
 
     if (!m_on) return;
@@ -238,6 +239,7 @@ void SvnFileTip::setFilter( bool enable )
 
 void SvnFileTip::showTip()
 {
+    return;
     if (!m_svnitem) {
         hide();
         return;
@@ -260,6 +262,7 @@ void SvnFileTip::showTip()
 
 void SvnFileTip::hideTip()
 {
+    return;
     m_timer->stop();
     setFilter( false );
     if ( isShown() && m_view && m_view->viewport() &&
@@ -269,6 +272,7 @@ void SvnFileTip::hideTip()
 }
 void SvnFileTip::startDelayed()
 {
+    return;
     if (!m_svnitem) {
         return;
     }

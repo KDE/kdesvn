@@ -44,13 +44,17 @@ ENDIF (NOT BUILD_KDE4)
 
 KDE_ADD_KPART(kdesvnpart WITH_PREFIX ${partsrc})
 
-TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnqt
+SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}" )
+
+TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnqt4
     #${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_PART_LIBRARY} ${KDE3_UI_LIBRARY} ${KDE3_WALLET_LIBRARY}
     ${QT_LIBRARIES}
+    ${QT_QT3SUPPORT_LIBRARY}
+    ${KDE4_KDE3SUPPORT_LIBS}
     ${KDE4_KDECORE_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}
     ${KDE4_KIO_LIBRARY}
-#     ${KDE4_KPARTS_LIBRARY}
+    ${KDE4_KPARTS_LIBRARY}
     )
 SET_TARGET_PROPERTIES(kdesvnpart
     PROPERTIES

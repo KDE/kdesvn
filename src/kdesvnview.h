@@ -41,7 +41,7 @@ class QSpacerItem;
 class QSplitter;
 class KActionCollection;
 class KTextBrowser;
-class KProgress;
+class QProgressBar;
 
 
 /**
@@ -136,7 +136,7 @@ protected:
     QString m_currentUrl;
     KTextBrowser*m_LogWindow;
     Q3VBoxLayout*m_topLayout;
-    KProgress*m_CacheProgressBar;
+    QProgressBar*m_CacheProgressBar;
 
 protected:
     virtual void setupActions();

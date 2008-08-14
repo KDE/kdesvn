@@ -121,12 +121,14 @@ kdesvn::kdesvn()
     if (factory)
     {
 //         if (QCString(factory->className())!="cFactory") {
+/*
         if (QString(factory->metaObject()->className())!=QString("cFactory")) {
             kDebug()<<"wrong factory"<<endl;
             KMessageBox::error(this, i18n("Could not find our part"));
             kapp->quit();
             return;
         }
+*/
 #if KDE_VERSION_MAJOR<4
         cFactory*cfa = static_cast<cFactory*>(factory);
 

@@ -255,7 +255,7 @@ kdesvnfilelist::kdesvnfilelist(KActionCollection*aCollect,QWidget *parent, const
     connect(m_SvnWrapper,SIGNAL(sigRefreshIcons(bool)),this,SLOT(slotRescanIcons(bool)));
     connect(this,SIGNAL(dropped (QDropEvent*,Q3ListViewItem*)),
             this,SLOT(slotDropped(QDropEvent*,Q3ListViewItem*)));
-    connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openURL(const QString&)));
+    connect(m_SvnWrapper,SIGNAL(sigGotourl(const QString&)),this,SLOT(_openUrl(const QString&)));
 
     connect(m_SvnWrapper,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)));
     connect(m_SvnWrapper,SIGNAL(sigThreadsChanged()),this,SLOT(enableActions()));
@@ -305,9 +305,9 @@ void kdesvnfilelist::setupActions()
     add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::Key_P),KIcon("edit"),this,SLOT(slotDisplayProperties()));
     tmp_action = add_action("make_last_change",i18n("Display last changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDisplayLastDiff()));
     if (tmp_action) tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
-    add_action("make_svn_info",i18n("Details"),KShortcut(Qt::Key_I),KIcon("kdesvninfo"),this,SLOT(slotInfo()));
-    add_action("make_svn_rename",i18n("Move"),KShortcut(Qt::Key_F2),KIcon("move"),this,SLOT(slotRename()));
-    add_action("make_svn_copy",i18n("Copy"),KShortcut(Qt::Key_C),KIcon(),this,SLOT(slotCopy()));
+    m_InfoAction = add_action("make_svn_info",i18n("Details"),KShortcut(Qt::Key_I),KIcon("kdesvninfo"),this,SLOT(slotInfo()));
+    m_RenameAction = add_action("make_svn_rename",i18n("Move"),KShortcut(Qt::Key_F2),KIcon("move"),this,SLOT(slotRename()));
+    m_CopyAction = add_action("make_svn_copy",i18n("Copy"),KShortcut(Qt::Key_C),KIcon(),this,SLOT(slotCopy()));
     tmp_action = add_action("make_check_updates",i18n("Check for updates"),KShortcut(),KIcon(),this,SLOT(slotCheckUpdates()));
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
@@ -490,13 +490,13 @@ SvnItem*kdesvnfilelist::Selected()
     return singleSelected();
 }
 
-void kdesvnfilelist::_openURL(const QString&url)
+void kdesvnfilelist::_openUrl(const QString&url)
 {
-    openURL(url,true);
+    openUrl(url,true);
     emit sigUrlChanged(baseUri());
 }
 
-bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
+bool kdesvnfilelist::openUrl( const KUrl &url,bool noReinit )
 {
     CursorStack a;
     m_SvnWrapper->killallThreads();
@@ -618,7 +618,7 @@ bool kdesvnfilelist::openURL( const KUrl &url,bool noReinit )
         clear();
     }
     ///@todo replace with another tooltip handler - this one isn't working anymore
-    m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips(),true,6);
+    //m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips(),true,6);
 
     if (result && isWorkingCopy()) {
         m_SvnWrapper->createModifiedCache(baseUri());
@@ -655,7 +655,7 @@ void kdesvnfilelist::closeMe()
     m_SvnWrapper->reInitClient();
     delete m_pList->m_DirWatch;
     m_pList->m_DirWatch = 0;
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
 }
 
 bool kdesvnfilelist::checkDirs(const QString&_what,FileListViewItem * _parent)
@@ -1287,7 +1287,7 @@ void kdesvnfilelist::refreshCurrentTree()
     FileListViewItem*item = static_cast<FileListViewItem*>(firstChild());
     if (!item) return;
     //m_pList->tsopScan();
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
     kapp->processEvents();
     setUpdatesEnabled(false);
     if (item->fullName()==baseUri()) {
@@ -1557,7 +1557,7 @@ void kdesvnfilelist::contentsDragEnterEvent(QDragEnterEvent *event)
 //void kdesvnfilelist::startDrag()
 Q3DragObject* kdesvnfilelist::dragObject()
 {
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
     Q3ListViewItem * m_pressedItem = currentItem();
     if (!m_pressedItem) {
         return 0;
@@ -1822,7 +1822,7 @@ void kdesvnfilelist::slotDropped(QDropEvent* event,Q3ListViewItem*item)
     if (event->source()!=viewport()) {
         kDebug()<<"Dropped from outside" << endl;
         if (baseUri().length()==0) {
-            openURL(urlList[0]);
+            openUrl(urlList[0]);
             event->acceptAction();
             return;
         }
@@ -2005,7 +2005,7 @@ void kdesvnfilelist::slotDelete()
     FileListViewItemListIterator liter(*lst);
     FileListViewItem*cur;
     //m_pList->stopScan();
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
 
     Q3ValueList<svn::Path> items;
     QStringList displist;
@@ -2276,7 +2276,7 @@ void kdesvnfilelist::slotDiffPathes()
     if (lst->count()!=2 || !uniqueTypeSelected()) {
         return;
     }
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
 
     FileListViewItem*k1,*k2;
     k1 = lst->at(0);
@@ -2559,7 +2559,7 @@ void kdesvnfilelist::_dirwatchTimeout()
 {
     kDebug()<<"dirtimer"<<endl;
     QMap<QString,QChar>::Iterator it;
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
     viewport()->setUpdatesEnabled(false);
     bool repaintit=false;
     for (it=m_pList->dirItems.begin();it!=m_pList->dirItems.end();++it)
@@ -2637,7 +2637,7 @@ void kdesvnfilelist::_dirwatchTimeout()
 void kdesvnfilelist::slotDirItemDeleted(const QString&what)
 {
     m_pList->stopDirTimer();
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
     QMap<QString,QChar>::Iterator it = m_pList->dirItems.find(what);
     if (it!=m_pList->dirItems.end() && m_pList->dirItems[what]=='A')  {
         m_pList->dirItems.erase(it);
@@ -2712,24 +2712,24 @@ void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
             if (item) {
                 vp.setY( itemRect( item ).y() );
                 QRect rect( viewportToContents( vp ), QSize(20, item->height()) );
-                m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
-                m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())/*&&isWorkingCopy()*/
-                        &&Kdesvnsettings::display_previews_in_file_tips());
-                setShowToolTips(false);
+                //m_pList->m_fileTip->setItem( static_cast<SvnItem*>(item), rect, item->pixmap(0));
+                //m_pList->m_fileTip->setPreview(KGlobalSettings::showFilePreview(item->fullName())/*&&isWorkingCopy()*/
+                //        &&Kdesvnsettings::display_previews_in_file_tips());
+                //setShowToolTips(false);
             } else {
-                m_pList->m_fileTip->setItem(0);
-                setShowToolTips(true);
+                //m_pList->m_fileTip->setItem(0);
+                //setShowToolTips(true);
             }
         } else {
-            m_pList->m_fileTip->setItem(0);
-            setShowToolTips(true);
+            //m_pList->m_fileTip->setItem(0);
+            //setShowToolTips(true);
         }
     }
     else
     {
         if (( m_pList->presspos - e->pos() ).manhattanLength() > QApplication::startDragDistance())
         {
-            m_pList->m_fileTip->setItem(0);
+            //m_pList->m_fileTip->setItem(0);
             m_pList->mousePressed=false;
             //beginDrag();
         }
@@ -2740,7 +2740,7 @@ void kdesvnfilelist::contentsMouseMoveEvent( QMouseEvent *e )
 void kdesvnfilelist::contentsMousePressEvent(QMouseEvent*e)
 {
     K3ListView::contentsMousePressEvent(e);
-    m_pList->m_fileTip->setItem(0);
+    //m_pList->m_fileTip->setItem(0);
     QPoint p(contentsToViewport( e->pos()));
     Q3ListViewItem *i = itemAt( p );
     // this is from qt the example - hopefully I got my problems with drag&drop fixed.
@@ -2768,19 +2768,19 @@ void kdesvnfilelist::contentsMouseReleaseEvent(QMouseEvent*e)
 void kdesvnfilelist::contentsWheelEvent( QWheelEvent * e )
 {
    // when scrolling with mousewheel, stop possible pending filetip
-   m_pList->m_fileTip->setItem(0);
+   //m_pList->m_fileTip->setItem(0);
    K3ListView::contentsWheelEvent( e );
 }
 
 void kdesvnfilelist::leaveEvent(QEvent*e)
 {
-    m_pList->m_fileTip->setItem( 0 );
+    //m_pList->m_fileTip->setItem( 0 );
     K3ListView::leaveEvent( e );
 }
 
 void kdesvnfilelist::slotSettingsChanged()
 {
-    m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips(),true,6);
+    //m_pList->m_fileTip->setOptions(!isNetworked()&&Kdesvnsettings::display_file_tips(),true,6);
     if (m_pList->reReadSettings()) {
         refreshCurrentTree();
     } else {

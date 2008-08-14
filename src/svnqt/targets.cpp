@@ -45,7 +45,7 @@
 
 namespace svn
 {
-  Targets::Targets (const Pathes & targets)
+  Targets::Targets (const svn::Pathes & targets)
   {
     m_targets = targets;
   }

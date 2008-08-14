@@ -57,8 +57,8 @@
 #include <kactioncollection.h>
 #include <kshortcut.h>
 #include <kdialog.h>
-#include <kdialogbase.h>
 #include <kprogressdialog.h>
+#include <kvbox.h>
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
     : QWidget(parent),svn::repository::RepositoryListener(),m_Collection(aCollection),
@@ -71,12 +71,12 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
     m_topLayout = new Q3VBoxLayout(this);
 
     m_Splitter = new QSplitter( this, "m_Splitter" );
-    m_Splitter->setOrientation( QSplitter::Vertical );
+    m_Splitter->setOrientation( Qt::Vertical );
 
     m_flist=new kdesvnfilelist(m_Collection,m_Splitter);
 
     m_infoSplitter = new QSplitter(m_Splitter);
-    m_infoSplitter->setOrientation( QSplitter::Horizontal );
+    m_infoSplitter->setOrientation( Qt::Horizontal );
     m_infoSplitter->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 1, m_infoSplitter->sizePolicy().hasHeightForWidth() ) );
     m_LogWindow=new KTextBrowser(m_infoSplitter);
     Propertylist*pl = new Propertylist(m_infoSplitter);
@@ -97,15 +97,15 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
     connect(m_flist,SIGNAL(sigCacheStatus(Q_LONG,Q_LONG)),this,SLOT(fillCacheStatus(Q_LONG,Q_LONG)));
     connect(this,SIGNAL(sigMakeBaseDirs()),m_flist,SLOT(slotMkBaseDirs()));
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
-    QString t1 = cs.readEntry("split1",QString::null);
+    QString t1 = cs.readEntry("split1",QString());
     if (!t1.isEmpty()) {
-        Q3TextStream st1(&t1,QIODevice::ReadOnly);
+        QTextStream st1(&t1,QIODevice::ReadOnly);
         st1 >> *m_Splitter;
     }
     if (m_infoSplitter) {
-        t1 = cs.readEntry("infosplit",QString::null);
+        t1 = cs.readEntry("infosplit",QString());
         if (!t1.isEmpty()) {
-            QTextStream st2(&t1,IO_ReadOnly);
+            QTextStream st2(&t1,QIODevice::IO_ReadOnly);
             st2 >> *m_infoSplitter;
         }
     }
@@ -120,13 +120,13 @@ kdesvnView::~kdesvnView()
 {
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
     QString t1,t2;
-    Q3TextStream st1(&t1,QIODevice::WriteOnly);
+    QTextStream st1(&t1,QIODevice::WriteOnly);
     st1 << *m_Splitter;
     cs.writeEntry("split1",t1);
 
     if (m_infoSplitter) {
         t2="";
-        Q3TextStream st2(&t2,IO_WriteOnly);
+        QTextStream st2(&t2,QIODevice::IO_WriteOnly);
         st2 << *m_infoSplitter;
         cs.writeEntry("infosplit",t2);
     }
@@ -178,7 +178,7 @@ bool kdesvnView::openUrl(const KUrl& url)
     slotSetTitle(url.prettyUrl());
     if (m_flist->openUrl(url)) {
         slotOnURL(i18n("Repository opened"));
-        m_currentUr=url.url();
+        m_currentUrl=url.url();
         open = true;
     } else {
         QString t = m_flist->lastError();
@@ -240,20 +240,25 @@ void kdesvnView::slotSettingsChanged()
  */
 void kdesvnView::slotCreateRepo()
 {
-    KDialogBase * dlg = new KDialogBase(
-        KApplication::activeModalWidget(),
-        "create_repository",
-        true,
-        i18n("Create new repository"),
-        KDialogBase::Ok|KDialogBase::Cancel);
-    if (!dlg) return;
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+    if (!dlg) {
+        return;
+    }
+    dlg->setObjectName("create_repository");
+    dlg->setModal(true);
+    dlg->setCaption(i18n("Create new repository"));
+    dlg->setButtons(KDialog::Ok|KDialog::Cancel);
+
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
+    //dlg->makeVBoxMainWidget();
     bool compatneeded = svn::Version::version_major()>1||svn::Version::version_minor()>3;
     bool compat14 = svn::Version::version_major()>1||svn::Version::version_minor()>4;
     Createrepo_impl*ptr = new Createrepo_impl(compatneeded,compat14,Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size"));
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),"create_repo_size");
+    dlg->restoreDialogSize(_kc);
     int i = dlg->exec();
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"create_repo_size",false);
+    dlg->saveDialogSize(_kc,KConfigGroup::Normal);
 
     if (i!=QDialog::Accepted) {
         delete dlg;
@@ -288,18 +293,20 @@ void kdesvnView::slotCreateRepo()
 
 void kdesvnView::slotHotcopy()
 {
-    KDialogBase * dlg = new KDialogBase(
-        KApplication::activeModalWidget(),
-        "hotcopy_repository",
-        true,
-        i18n("Hotcopy a repository"),
-        KDialogBase::Ok|KDialogBase::Cancel);
+    KDialog* dlg = new KDialog(KApplication::activeModalWidget());
     if (!dlg) return;
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    dlg->setObjectName("hotcopy_repository");
+    dlg->setModal(true);
+    dlg->setCaption(i18n("Hotcopy a repository"));
+    dlg->setButtons(KDialog::Ok|KDialog::Cancel);
+
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
     HotcopyDlg_impl * ptr = new HotcopyDlg_impl(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"hotcopy_repo_size"));
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),"hotcopy_repo_size");
+    dlg->restoreDialogSize(_kc);
     int i = dlg->exec();
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"hotcopy_repo_size",false);
+    dlg->saveDialogSize(_kc,KConfigGroup::Normal);
 
     if (i!=QDialog::Accepted) {
         delete dlg;
@@ -323,17 +330,21 @@ void kdesvnView::slotHotcopy()
 
 void kdesvnView::slotLoaddump()
 {
-    KDialogBase dlg(
-        KApplication::activeModalWidget(),
-        "hotcopy_repository",
-        true,
-        i18n("Hotcopy a repository"),
-        KDialogBase::Ok|KDialogBase::Cancel);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(KApplication::activeModalWidget());
+    dlg.setObjectName("hotcopy_repository");
+    dlg.setModal(true);
+    dlg.setCaption(i18n("Hotcopy a repository"));
+    dlg.setButtons(KDialog::Ok|KDialog::Cancel);
+    QWidget* Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
+
     LoadDmpDlg_impl * ptr = new LoadDmpDlg_impl(Dialog1Layout);
-    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"loaddump_repo_size"));
+
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),"loaddump_repo_size");
+    dlg.restoreDialogSize(_kc);
     int i = dlg.exec();
-    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"loaddump_repo_size",false);
+
+    dlg.saveDialogSize(_kc,KConfigGroup::Normal);
     if (i!=QDialog::Accepted) {
         return;
     }
@@ -373,18 +384,20 @@ void kdesvnView::slotLoaddump()
 
 void kdesvnView::slotDumpRepo()
 {
-    KDialogBase * dlg = new KDialogBase(
-        KApplication::activeModalWidget(),
-        "dump_repository",
-        true,
-        i18n("Dump a repository"),
-        KDialogBase::Ok|KDialogBase::Cancel);
+    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
     if (!dlg) return;
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    dlg->setObjectName("dump_repository");
+    dlg->setModal(true);
+    dlg->setCaption(i18n("Dump a repository"));
+    dlg->setButtons(KDialog::Ok|KDialog::Cancel);
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
+
     DumpRepo_impl*ptr = new DumpRepo_impl(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"dump_repo_size"));
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),"dump_repo_size");
+    dlg->restoreDialogSize(_kc);
     int i = dlg->exec();
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"dump_repo_size",false);
+    dlg->saveDialogSize(_kc,KConfigGroup::Normal);
 
     if (i!=QDialog::Accepted) {
         delete dlg;
@@ -470,7 +483,8 @@ void kdesvnView::fillCacheStatus(Q_LONG current,Q_LONG max)
         kDebug()<<"Fillcache "<<current<<" von "<<max<<endl;
         if (!m_CacheProgressBar) {
             kDebug()<<"Creating progressbar"<<endl;
-            m_CacheProgressBar=new KProgress((int)max,this);
+            m_CacheProgressBar=new QProgressBar(this);
+            m_CacheProgressBar->setRange(0,(int)max);
             m_topLayout->addWidget(m_CacheProgressBar);
             m_CacheProgressBar->setFormat(i18n("Inserted %v not cached log entries of %m."));
         }

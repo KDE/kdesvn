@@ -101,7 +101,7 @@ public:
             m_DirWatch->stopScan();
             delete m_DirWatch;
         }
-        delete m_fileTip;
+        //delete m_fileTip;
         kDebug()<<"Destructor KdesvnFileListPrivate done"<<endl;
     };
     Q3ListViewItem *dragOverItem;

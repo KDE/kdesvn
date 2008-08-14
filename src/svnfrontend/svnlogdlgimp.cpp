@@ -43,6 +43,7 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 #include <QKeyEvent>
+#include <QDesktopWidget>
 
 #include <list>
 
@@ -141,7 +142,7 @@ void LogListViewItem::showChangedEntries(K3ListView*where)
     if (changedPaths.count()==0) {
         return;
     }
-    for (unsigned i = 0; i < changedPaths.count();++i) {
+    for (int i = 0; i < changedPaths.count();++i) {
         new LogChangePathItem(where,changedPaths[i]);
     }
 }
@@ -168,7 +169,7 @@ void LogListViewItem::setChangedEntries(const svn::LogEntry&_entry)
 
 bool LogListViewItem::copiedFrom(QString&_n,long&_rev)const
 {
-    for (unsigned i = 0; i < changedPaths.count();++i) {
+    for (int i = 0; i < changedPaths.count();++i) {
         if (changedPaths[i].action=='A' &&
             !changedPaths[i].copyFromPath.isEmpty() &&
             isParent(changedPaths[i].path,_realName)) {
@@ -212,6 +213,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
         m_ChangedList->hide();
     }
     m_Actions = ac;
+    //FIXME: port QTextStream hell into Qt4 QSplitter save/restore state methods
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
     QString t1 = cs.readEntry("logsplitter",QString::null);
     if (!t1.isEmpty()) {
@@ -220,8 +222,8 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
     }
     t1 = cs.readEntry("right_logsplitter",QString::null);
     if (!t1.isEmpty()) {
-        if (cs.readBoolEntry("laststate",false)==m_ChangedList->isHidden()) {
-            Q3TextStream st2(&t1,QIODevice::ReadOnly);
+        if (cs.readEntry("laststate",false)==m_ChangedList->isHidden()) {
+            QTextStream st2(&t1,QIODevice::ReadOnly);
             st2 >> *m_rightSplitter;
         }
     }
@@ -230,7 +232,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
 SvnLogDlgImp::~SvnLogDlgImp()
 {
     QString t1,t2;
-    Q3TextStream st1(&t1,QIODevice::WriteOnly);
+    QTextStream st1(&t1,QIODevice::WriteOnly);
     st1 << *m_rightSplitter;
     QTextStream st2(&t2,IO_WriteOnly);
     st2 << *m_centralSplitter;

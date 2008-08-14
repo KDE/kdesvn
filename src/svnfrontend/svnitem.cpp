@@ -213,10 +213,11 @@ QPixmap SvnItem::internalTransform(const QPixmap&first,int size)
     if (result.isNull()) {
         return result;
     }
-    const QBitmap * b = first.mask();
+//     const QBitmap * b = first.mask();
+    const QBitmap b = first.mask();
     result.fill(Qt::white);
-    if (b) {
-        result.setMask(*b);
+    if (!b.isNull()) {
+        result.setMask(b);
     } else {
         QBitmap m(size,size,true);
         m.fill(Qt::white);

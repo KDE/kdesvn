@@ -40,7 +40,9 @@
 #include <QEvent>
 
 SvnFileTip::SvnFileTip(Q3ScrollView*parent)
-    :  Q3Frame( 0, 0, Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool | Qt::WStyle_StaysOnTop | WX11BypassWM ),
+    :  Q3Frame( 0, 0, Qt::WStyle_Customize | Qt::WStyle_NoBorder
+                | Qt::WStyle_Tool | Qt::WStyle_StaysOnTop
+                | Qt::X11BypassWindowManagerHint ),
     m_on( false ),
     m_preview( false ),
     m_filter( false ),
@@ -196,7 +198,7 @@ void SvnFileTip::drawContents( QPainter *p )
     }
 
     if ( m_corners[m_corner].isNull())
-        m_corners[m_corner].load( locate( "data", QString::fromLatin1( "konqueror/pics/%1.png" ).arg( names[m_corner] ) ) );
+        m_corners[m_corner].load( KStandardDirs::locate( "data", QString::fromLatin1( "konqueror/pics/%1.png" ).arg( names[m_corner] ) ) );
 
     QPixmap &pix = m_corners[m_corner];
 
@@ -272,7 +274,7 @@ void SvnFileTip::startDelayed()
     }
     if ( m_preview && m_svnitem->fileItem() ) {
         KFileItemList oneItem;
-        oneItem.append( m_svnitem->fileItem() );
+        oneItem.append( * m_svnitem->fileItem() );
 
         m_previewJob = KIO::filePreview( oneItem, 256, 256, 64, 70, true, true, 0);
         connect( m_previewJob, SIGNAL( gotPreview( const KFileItem& , const QPixmap & ) ),

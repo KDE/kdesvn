@@ -104,6 +104,11 @@ namespace svn
     */
     ClientException (const char*msg) throw ();
 
+   /**
+    * Constructor
+    */
+    ClientException (const QString&message) throw();
+
     /**
      * Copy constructor
      */

@@ -347,14 +347,20 @@ void CommandExec::clientException(const QString&what)
  */
 void CommandExec::slotCmd_log()
 {
+    int limit = m_pCPart->log_limit;
     if (m_pCPart->end == svn::Revision::UNDEFINED) {
         m_pCPart->end = svn::Revision::HEAD;
+        limit = 0;
     }
     if (m_pCPart->start == svn::Revision::UNDEFINED) {
         m_pCPart->start = 1;
+        limit = 0;
     }
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
-    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->extraRevisions[0],m_pCPart->url[0],list,m_pCPart->log_limit);
+    if (m_pCPart->extraRevisions[0]==svn::Revision::WORKING) {
+        m_pCPart->extraRevisions[0]=svn::Revision::UNDEFINED;
+    }
+    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->extraRevisions[0],m_pCPart->url[0],list,limit);
 }
 
 /*!

@@ -100,16 +100,18 @@ namespace svn
       message = message_ == 0 ? QString::fromLatin1("") : QString::FROMUTF8(message_);
       setDate(date_);
       revision = log_entry->revision;
-      for (apr_hash_index_t *hi = apr_hash_first (pool, log_entry->changed_paths);
-           hi != NULL;
-           hi = apr_hash_next (hi))
-      {
-          const void *pv;
-          void *val;
-          apr_hash_this (hi, &pv, NULL, &val);
-          svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
-          const char* path = reinterpret_cast<const char*>(pv);
-          changedPaths.push_back (LogChangePathEntry (path,log_item->action,log_item->copyfrom_path,log_item->copyfrom_rev) );
+      if (log_entry->changed_paths) {
+        for (apr_hash_index_t *hi = apr_hash_first (pool, log_entry->changed_paths);
+            hi != NULL;
+            hi = apr_hash_next (hi))
+        {
+            const void *pv;
+            void *val;
+            apr_hash_this (hi, &pv, NULL, &val);
+            svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
+            const char* path = reinterpret_cast<const char*>(pv);
+            changedPaths.push_back (LogChangePathEntry (path,log_item->action,log_item->copyfrom_path,log_item->copyfrom_rev) );
+        }
       }
   }
 #endif

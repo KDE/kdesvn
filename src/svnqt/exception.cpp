@@ -140,6 +140,11 @@ namespace svn
   {
   }
 
+  ClientException::ClientException (const QString&msg) throw ()
+    : Exception (msg)
+  {
+  }
+
   ClientException::ClientException (svn_error_t * error) throw ()
     : Exception ("")
   {

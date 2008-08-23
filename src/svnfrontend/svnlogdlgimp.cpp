@@ -123,10 +123,10 @@ int LogListViewItem::compare( QListViewItem* item, int col, bool ) const
 {
     LogListViewItem* k = static_cast<LogListViewItem*>( item );
     if (col==COL_REV) {
-        return k->_revision-_revision;
+        return _revision-k->_revision;
     }
     if (col==COL_DATE) {
-        return fullDate.secsTo(k->fullDate);
+        return k->fullDate.secsTo(fullDate);
     }
     return text(col).localeAwareCompare(k->text(col));
 }
@@ -194,6 +194,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
     :SvnLogDialogData(parent, name,modal),_name("")
 {
     m_LogView->setSorting(LogListViewItem::COL_REV);
+    m_LogView->setSortOrder(Qt::Descending);
     resize(dialogSize());
     m_ControlKeyDown = false;
     m_first = 0;

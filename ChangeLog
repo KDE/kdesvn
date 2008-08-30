@@ -1,3 +1,9 @@
+version 1.0.1
+    * fixed a crasher with svn 1.5
+    * some smaller fixes
+    * various bugfixes in buildsystem, build failure with svn 1.3
+    * improvement in handling of logcache errors
+
 version 1.0.0
     * implemented a sqlite-based logcache used by revision tree
     * removed support for subversion prior 1.3

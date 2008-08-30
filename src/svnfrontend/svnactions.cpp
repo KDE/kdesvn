@@ -345,7 +345,7 @@ bool SvnActions::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStrin
         svn::LogEntriesMap _m;
         try {
             svn::cache::ReposLog rl(m_Data->m_Svnclient ,root);
-            if (rl.simpleLog(_m,r,r,true) && _m.find(r.revnum())!=_m.end() ) {
+            if (rl.isValid() && rl.simpleLog(_m,r,r,true) && _m.find(r.revnum())!=_m.end() ) {
                 t = _m[r.revnum()];
                 res = true;
             }

@@ -514,3 +514,22 @@ bool svn::cache::ReposLog::itemExists(const svn::Revision&peg,const svn::Path&pa
 #endif
     return true;
 }
+
+bool svn::cache::ReposLog::isValid()const
+{
+#if QT_VERSION < 0x040000
+    if (!m_Database) {
+#else
+    if (!m_Database.isValid()) {
+#endif
+        m_Database = LogCache::self()->reposDb(m_ReposRoot);
+#if QT_VERSION < 0x040000
+        if (!m_Database) {
+#else
+        if (!m_Database.isValid()) {
+#endif
+            return false;
+        }
+    }
+    return true;
+}

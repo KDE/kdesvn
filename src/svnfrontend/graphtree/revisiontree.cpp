@@ -95,11 +95,18 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
-        if (svn::Url::isLocal(reposRoot)) {
+        if (svn::Url::isLocal(reposRoot) ) {
             m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
         } else {
             svn::cache::ReposLog rl(m_Client,reposRoot);
-            rl.simpleLog(m_OldHistory,startr,endr,!Kdesvnsettings::network_on());
+            if (rl.isValid()) {
+                rl.simpleLog(m_OldHistory,startr,endr,!Kdesvnsettings::network_on());
+            } else if (Kdesvnsettings::network_on()) {
+                m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
+            } else {
+                KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1").arg(i18n("No logcache possible due broken database and networking not allowed.")));
+                return false;
+            }
         }
     } catch (const svn::Exception&ce) {
         kdDebug()<<ce.msg() << endl;

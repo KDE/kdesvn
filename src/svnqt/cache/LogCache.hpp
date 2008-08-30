@@ -31,7 +31,9 @@ namespace svn {
             virtual ~LogCache();
             static LogCache* self();
             QDataBase reposDb(const QString&aRepository);
-    QStringList cachedRepositories()const;
+            QStringList cachedRepositories()const;
+
+            bool valid()const;
         };
     }
 }

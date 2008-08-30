@@ -20,7 +20,7 @@ class SVNQT_EXPORT ReposLog
 {
 protected:
     svn::Client*m_Client;
-    QDataBase m_Database;
+    mutable QDataBase m_Database;
     QString m_ReposRoot;
     svn::Revision m_latestHead;
     //! internal insert.
@@ -60,6 +60,8 @@ public:
     bool insertLogEntry(const svn::LogEntry&);
     bool log(const svn::Path&,const svn::Revision&start, const svn::Revision&end,const svn::Revision&peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit);
     bool itemExists(const svn::Revision&,const svn::Path&);
+
+    bool isValid()const;
 };
 
 }

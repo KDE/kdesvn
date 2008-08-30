@@ -453,3 +453,16 @@ QStringList svn::cache::LogCache::cachedRepositories()const
 
     return _res;
 }
+
+bool svn::cache::LogCache::valid()const
+{
+    QDataBase mainDB = m_CacheData->getMainDB();
+#if QT_VERSION < 0x040000
+    if (!mainDB || !mainDB->open()) {
+#else
+    if (!mainDB.isValid()) {
+#endif
+        return false;
+    }
+    return true;
+}

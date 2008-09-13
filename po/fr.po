@@ -14,18 +14,19 @@
 #
 # Frederic Rodrigo <f.rodrigo free.fr>, 2006-2007.
 # Patrick ALLAERT <patrick.allaert@gmail.com>, 2007, 2008.
+# Patrick Allaert <patrick.allaert@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-29 23:32+0200\n"
-"PO-Revision-Date: 2008-05-25 13:47+0200\n"
-"Last-Translator: Patrick ALLAERT <patrick.allaert@gmail.com>\n"
-"Language-Team: Français <fr@li.org>\n"
+"PO-Revision-Date: 2008-09-13 12:56+0200\n"
+"Last-Translator: Patrick Allaert <patrick.allaert@gmail.com>\n"
+"Language-Team: French <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -87,7 +88,7 @@ msgstr "Dump terminé."
 
 #: kdesvnview.cpp:473
 msgid "Inserted %v not cached log entries of %m."
-msgstr ""
+msgstr "%v entrées du journal non cachées insérées pour %m."
 
 #: kdesvnd/main.cpp:32
 msgid "Kdesvn DCOP service"
@@ -137,7 +138,7 @@ msgstr "Dépôt"
 #: rc.cpp:21
 #, no-c-format
 msgid "Logcache"
-msgstr ""
+msgstr "Cache du journal"
 
 #: rc.cpp:27 rc.cpp:30 rc.cpp:33 rc.cpp:36
 #, no-c-format
@@ -285,15 +286,15 @@ msgstr "Afficher les fichiers ignorés"
 #: rc.cpp:112
 #, no-c-format
 msgid "Automatic update of logcache"
-msgstr ""
+msgstr "Mise à jour automatique de la cache du journal"
 
 #: rc.cpp:115
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "If set start filling the logcache when open a repository or working copy"
 msgstr ""
-"Commencer par vérifier les mises à jour lors de l'ouverture d'une copie de "
-"travail"
+"Si activé, rempli la cache du journal lors de l'ouverture d'un dépôt ou "
+"d'une copie de travail"
 
 #: rc.cpp:118
 #, no-c-format
@@ -303,6 +304,12 @@ msgid ""
 "\n"
 "If networking is disabled, then this flag is ignored."
 msgstr ""
+"Décide si la cache du journal doit être mise à jour après l'ouverture d'une "
+"copie "
+"de travail ou d'un dépôt ou après une propagation dans une copie de travail."
+"\n"
+"\n"
+"Si le réseau est inactif, cette option est ignorée."
 
 #: rc.cpp:123
 #, no-c-format
@@ -363,16 +370,16 @@ msgstr ""
 "copie de travail"
 
 #: rc.cpp:152
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start fill log cache on open"
-msgstr "Remplissage de la cache de log en tâche de fond"
+msgstr "Commence à remplir la cache du journal à l'ouverture"
 
 #: rc.cpp:155
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Start refresh the logcache for repository when networking enabled"
 msgstr ""
-"Commencer par vérifier les mises à jour lors de l'ouverture d'une copie de "
-"travail"
+"Commence à metre à jour la cache du journal du dépôt lorsque le réseau est "
+"activé"
 
 #: rc.cpp:158
 #, no-c-format
@@ -529,14 +536,14 @@ msgstr ""
 "portefeuilles de KDE ou de ne pas les sauver du tout.</p>"
 
 #: rc.cpp:216
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use internal password cache"
-msgstr "Entrer votre mot de passe ci-dessous."
+msgstr "Utiliser la cache interne des mots de passe"
 
 #: rc.cpp:219
 #, no-c-format
 msgid "Use an internal password cache"
-msgstr ""
+msgstr "Utiliser une cache interne des mots de passe"
 
 #: rc.cpp:222
 #, no-c-format
@@ -594,7 +601,7 @@ msgstr ""
 "Nombre maximum d'entrées affichées dans le journal complet (0 pour illimité)"
 
 #: rc.cpp:253
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ColorSettings"
 msgstr "Configuration des couleurs"
 
@@ -1350,12 +1357,12 @@ msgstr "Ajouter le nom de l'URL source au sous répertoire"
 #: rc.cpp:748 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
 #, no-c-format
 msgid "Overwrite existing"
-msgstr ""
+msgstr "Écraser existant"
 
 #: rc.cpp:752 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "May existing unversioned items ovewritten"
-msgstr "Pas d'élément non versionné trouvé."
+msgstr "Les éléments non versionnés peuvent-ils être écrasés"
 
 #: rc.cpp:755
 #, no-c-format
@@ -1551,7 +1558,7 @@ msgstr "Ou insérer un des derniers :"
 #: rc.cpp:884
 #, no-c-format
 msgid "Insert Textfile"
-msgstr ""
+msgstr "Inséré un fichier texte"
 
 #: rc.cpp:887
 #, no-c-format
@@ -1569,29 +1576,29 @@ msgid "Form1"
 msgstr "Forme1"
 
 #: rc.cpp:896
-#, no-c-format
+#, fuzzy, no-c-format
 msgid "Empty Depth"
-msgstr ""
+msgstr "Profondeur vide"
 
 #: rc.cpp:899
-#, no-c-format
+#, fuzzy, no-c-format
 msgid "Files Depth"
-msgstr ""
+msgstr "Profondeur de fichiers"
 
 #: rc.cpp:902
 #, no-c-format
 msgid "Immediate Depth"
-msgstr ""
+msgstr "Profondeur immédiate"
 
 #: rc.cpp:905
 #, no-c-format
 msgid "Infinity Depth (recurse)"
-msgstr ""
+msgstr "Profondeur infinie (récursion)"
 
 #: rc.cpp:908
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select depth of operation"
-msgstr "Sélectionner le type de stockage"
+msgstr "Sélectionner la profondeur de l'opération"
 
 #: rc.cpp:911
 #, no-c-format
@@ -1617,6 +1624,32 @@ msgid ""
 "Equivalent to the pre-1.5 default update behavior.\n"
 "</p>"
 msgstr ""
+"<b>Type de profondeur</b>:\n"
+"<p>\n"
+"<i>Profondeur vide</i><br>Seulement le dossier spécifié, pas les entrées.  "
+"La mise à jour"
+"ne prendra aucun fichier ou dossier qui n'est pas déjà présent.\n"
+"</p>\n"
+"<p>\n"
+"<i>Profondeur de fichiers</i><br>Dossier et ses fichiers directs, pas les "
+"sous-dossiers. La "
+"mise à jour prendra tous les fichiers qui ne sont pas encore présent mais "
+"pas les sous-dossiers.\n"
+"</p>\n"
+"<p>\n"
+"<i>Profondeur immédiate</i><br>\n"
+"Dossier et ses entrées directes. La mise à jour prendra tous les fichiers et "
+"sous-dossiers "
+"qui ne sont pas encore présent ; ces sous-dossiers seront en profondeur vide."
+"\n"
+"</p>\n"
+"<p>\n"
+"<i>Profondeur infinie</i><br>\n"
+"La mise à jour prendra tous les fichiers et sous-dossiers qui ne sont pas "
+"encore présent; "
+"les sous-dossiers seront aussi en profondeur infinie.<br>\n"
+"Équivaut au fonctionnement par défaut pré-1.5.\n"
+"</p>"
 
 #: rc.cpp:929 svnfrontend/ccontextlistener.cpp:67
 #: svnfrontend/svnactions.cpp:1740
@@ -1830,9 +1863,8 @@ msgid "Hide unchanged files"
 msgstr "Cacher les fichiers non modifiés"
 
 #: kdesvn_part.cpp:203
-#, fuzzy
 msgid "Work online"
-msgstr "Afficher la ligne"
+msgstr "Travailler en ligne"
 
 #: kdesvn_part.cpp:211
 msgid "&Configure %1..."
@@ -2130,9 +2162,8 @@ msgid "Property modified"
 msgstr "Propriété modifiée"
 
 #: svnfrontend/fillcachethread.cpp:96
-#, fuzzy
 msgid "Filling cache canceled."
-msgstr "Remplissage de la cache de log en tâche de fond"
+msgstr "Remplissage de la cache annulée."
 
 #: svnfrontend/fillcachethread.cpp:113
 msgid "Cache filled up to revision %1"
@@ -2366,27 +2397,31 @@ msgid "Other..."
 msgstr "Autre ..."
 
 #: svnfrontend/importdir_logmsg.cpp:44
-#, fuzzy
 msgid "No ignore"
-msgstr "Ignorer"
+msgstr "Pas d'ignore"
 
 #: svnfrontend/importdir_logmsg.cpp:45
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
+"Si défini, ajoute les fichiers et dossiers qui correspondent au motif à "
+"ignorer."
 
 #: svnfrontend/importdir_logmsg.cpp:50
 msgid "Ignore unknown node types"
-msgstr ""
+msgstr "Ignorer les types de nœud inconnus"
 
 #: svnfrontend/importdir_logmsg.cpp:51
 msgid "Should files with unknown node types be ignored"
-msgstr ""
+msgstr "Les fichiers d'un type de nœud inconnu doivent-ils être ignorés"
 
 #: svnfrontend/importdir_logmsg.cpp:52
 msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
 msgstr ""
+"Ignore les fichiers d'un type de nœud inconnu comme les fichiers "
+"périphériques "
+"et pipes."
 
 #: svnfrontend/importdir_logmsg.cpp:84
 msgid "Create subdir %1 on import"
@@ -2728,7 +2763,7 @@ msgstr "Liste d'informations"
 
 #: svnfrontend/svnactions.cpp:922
 msgid "Not commiting because networking is disabled"
-msgstr ""
+msgstr "Pas de propagation car le réseau est inactif"
 
 #: svnfrontend/svnactions.cpp:942 svnfrontend/svnactions.cpp:2259
 msgid "Status / List"
@@ -2764,9 +2799,8 @@ msgid "Download - hit cancel for abort"
 msgstr "Téléchargement - annuler pour abandonner"
 
 #: svnfrontend/svnactions.cpp:1090
-#, fuzzy
 msgid "Can not do this diff because networking is disabled."
-msgstr "Vérification de mises à jour terminée"
+msgstr "Impossible de récupérer la différence car le réseau est inactif"
 
 #: svnfrontend/svnactions.cpp:1133
 msgid "Both entries seems to be the same, can not diff."
@@ -2982,21 +3016,19 @@ msgstr "Il y a de nouveaux éléments dans le dépôt"
 
 #: svnfrontend/svnactions.cpp:2505
 msgid "Not filling logcache because networking is disabled"
-msgstr ""
+msgstr "Pas de remplissage de la cache du journal car le réseau est inactif"
 
 #: svnfrontend/svnactions.cpp:2513
 msgid "Filling log cache in background"
 msgstr "Remplissage de la cache de log en tâche de fond"
 
 #: svnfrontend/svnactions.cpp:2540
-#, fuzzy
 msgid "Filling log cache in background finished."
-msgstr "Remplissage de la cache de log en tâche de fond"
+msgstr "Remplissage de la cache du journal en tâche de fond terminé."
 
 #: svnfrontend/svnactions.cpp:2559
-#, fuzzy
 msgid "Not checking for updates because networking is disabled"
-msgstr "Vérification de mises à jour terminée"
+msgstr "Pas de vérification pour des mises à jour, le réseau est inactif"
 
 #: svnfrontend/svnactions.cpp:2566
 msgid "Checking for updates started in background"
@@ -3338,23 +3370,20 @@ msgstr "Fermer toutes les branches de l'arborescence de fichiers"
 
 #: svnfrontend/kdesvnfilelist.cpp:405 svnfrontend/kdesvnfilelist.cpp:1013
 #: svnfrontend/kdesvnfilelist.cpp:3149
-#, fuzzy
 msgid "Update log cache"
-msgstr "Mise à jour à HEAD"
+msgstr "Mise à jour de la cache du journal"
 
 #: svnfrontend/kdesvnfilelist.cpp:406
-#, fuzzy
 msgid "Update the log cache for current repository"
-msgstr "Récupération du chemin du dépôt courant"
+msgstr "Mise à jour de la cache du journal du dépôt courant"
 
 #: svnfrontend/kdesvnfilelist.cpp:562
 msgid "Networked URL to open but networking is disabled!"
-msgstr ""
+msgstr "URL réseau à ouvrir, mais le réseau est inactif"
 
 #: svnfrontend/kdesvnfilelist.cpp:1015 svnfrontend/kdesvnfilelist.cpp:3144
-#, fuzzy
 msgid "Stop updating the logcache"
-msgstr "Mise à jour à HEAD"
+msgstr "Interrompre la mise à jour de la cache du journal"
 
 #: svnfrontend/kdesvnfilelist.cpp:1070
 msgid "Could not retrieve repository of working copy."
@@ -3595,8 +3624,9 @@ msgstr "Entrées du journal"
 
 #: ksvnwidgets/logmsg_impl.cpp:626
 msgid "Select textfile for insert"
-msgstr ""
+msgstr "Sélectionner le fichier texte pour l'insertion"
 
 #: urldlg.cpp:52
 msgid "Open repository or working copy"
 msgstr "Ouvrir un dépôt ou une copie de travail"
+

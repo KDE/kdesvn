@@ -33,6 +33,7 @@
 
 #include <qstring.h>
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 
 namespace svn
 {
@@ -47,7 +48,7 @@ namespace svn
     /**
      * initialize the class
      *
-     * @param path Path string
+     * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
     void init (const QString& path);
 
@@ -57,7 +58,7 @@ namespace svn
      * The string is converted to subversion internal
      * representation. The string is copied.
      *
-     * @param path Path string
+     * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
     Path (const QString & path = QString::null);
 
@@ -65,7 +66,7 @@ namespace svn
      * Constructor
      *
      * @see Path::Path (const QString &)
-     * @param path Path string
+     * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
     Path (const char * path);
 
@@ -166,6 +167,15 @@ namespace svn
      */
     static Path
     getTempDir ();
+
+    /** Parse a string for a peg revision
+     * @param pathorurl url to parse
+     * @param _path target to store the cleaned url
+     * @param _peg target where to store the peg url.
+     * @throw svn::ClientException on errors
+     */
+    static void
+    parsePeg(const QString&pathorurl,Path&_path,svn::Revision&_peg);
 
 
     /** return the length of the path-string */

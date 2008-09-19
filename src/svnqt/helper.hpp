@@ -25,6 +25,8 @@
 #include "revision.hpp"
 #include <svn_types.h>
 
+#include <iostream>
+
 namespace svn
 {
     namespace internal
@@ -77,7 +79,7 @@ namespace svn
 
                 apr_array_header_t*array(const Pool&pool)
                 {
-                    apr_array_header_t*ranges=apr_array_make(pool,0,sizeof(svn_opt_revision_range_t *));
+                    apr_array_header_t*ranges=apr_array_make(pool,m_ranges.size(),sizeof(svn_opt_revision_range_t *));
                     svn_opt_revision_range_t *range;
 
                     for (unsigned long j=0;j<m_ranges.count();++j)

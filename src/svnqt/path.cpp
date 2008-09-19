@@ -40,6 +40,8 @@
 #include "svnqt/pool.hpp"
 #include "svnqt/url.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/revision.hpp"
+#include "svnqt/exception.hpp"
 
 #include <qurl.h>
 
@@ -246,6 +248,23 @@ namespace svn
     return tempdir;
   }
 
+    void
+    Path::parsePeg(const QString&pathorurl,Path&_path,svn::Revision&_peg)
+    {
+        const char *truepath = 0;
+        svn_opt_revision_t pegr;
+        svn_error_t *error = 0;
+        QByteArray _buf = pathorurl.TOUTF8();
+
+        Pool pool;
+        error = svn_opt_parse_path(&pegr, &truepath,_buf,pool);
+        if (error != 0) {
+            throw ClientException (error);
+        }
+        qDebug("Path: %s",truepath);
+        _peg = svn::Revision(&pegr);
+        _path=Path(truepath);
+    }
 
   unsigned int
   Path::length () const

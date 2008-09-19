@@ -1,6 +1,6 @@
 PROJECT(kdesvn)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
-SET(BASE_VERSION 1.0.1)
+SET(BASE_VERSION 1.0.2)
 
 OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
 OPTION(DAILY_BUILD "Generate version number for a daily build (default off)")

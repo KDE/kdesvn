@@ -1965,7 +1965,7 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 }
 
 void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, const QString&_target,
-    const svn::Revision&rev1,const svn::Revision&rev2,bool rec)
+                const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,bool rec)
 {
     KTempDir tdir1;
     tdir1.setAutoDelete(true);
@@ -2103,30 +2103,59 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
 }
 
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
-                    const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
+                                       const svn::Revision&rev2,
+                                       bool rec,bool ancestry,bool forceIt,bool dry)
 {
-    slotMerge(_entry,_entry,_entry,rev1,rev2,rec,ancestry,forceIt,dry);
+    slotMerge(_entry,_entry,_entry,rev1,rev2,svn::Revision::UNDEFINED,rec,ancestry,forceIt,dry);
 }
 
 void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&target,
-        const svn::Revision&rev1,const svn::Revision&rev2,bool rec,bool ancestry,bool forceIt,bool dry)
+                            const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,
+                            bool rec,bool ancestry,bool forceIt,bool dry)
 {
     if (!m_Data->m_CurrentContext) return;
     QString s2;
-    if (src2.isEmpty()) {
-        s2 = src1;
-    } else {
-        s2 = src2;
+
+    svn::Revision peg = svn::Revision::HEAD;
+    svn::Revision tpeg;
+    svn::RevisionRanges ranges;
+    svn::Path p1;
+    try {
+        svn::Path::parsePeg(src1,p1,tpeg);
+    } catch (const svn::Exception&e) {
+        emit clientException(e.msg());
+        return;
+    }
+    if (tpeg!=svn::Revision::UNDEFINED) {
+        peg=tpeg;
+    }
+    svn::Path p2(src2);
+
+    bool pegged_merge=false;
+
+    if(!p2.isset() || src1==src2) {
+        // pegged merge
+        pegged_merge=true;
+        ranges.append(svn::RevisionRange(rev1,rev2));
+        if (peg==svn::Revision::UNDEFINED) {
+            if (p1.isUrl()) {
+                peg = rev2;
+            } else {
+                peg=svn::Revision::WORKING;
+            }
+        }
     }
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Merge"),i18n("Merging items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->merge(svn::Path(src1),
-            rev1,
-            svn::Path(s2),
-            rev2,
-            svn::Path(target),
-            forceIt,rec?svn::DepthInfinity:svn::DepthFiles,ancestry,dry);
+        if (pegged_merge) {
+            m_Data->m_Svnclient->merge_peg(p1,ranges,svn::Revision::HEAD,svn::Path(target),rec?svn::DepthUnknown:svn::DepthFiles,
+                                            ancestry,dry,forceIt,false);
+        } else {
+            m_Data->m_Svnclient->merge(p1,rev1,p2,rev2,
+                                        svn::Path(target),
+                                        forceIt,rec?svn::DepthUnknown:svn::DepthFiles,ancestry,dry);
+        }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

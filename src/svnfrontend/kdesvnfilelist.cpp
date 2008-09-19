@@ -1703,9 +1703,10 @@ void kdesvnfilelist::slotMergeRevisions()
         return;
     }
     if (!useExternal) {
-        m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,irelated,force,dry);
+        m_SvnWrapper->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,!irelated,force,dry);
     } else {
-        m_SvnWrapper->slotMergeExternal(which->fullName(),which->fullName(),which->fullName(),range.first,range.second,rec);
+        m_SvnWrapper->slotMergeExternal(which->fullName(),which->fullName(),which->fullName(),range.first,range.second,
+                                         isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision,rec);
     }
     refreshItem(which);
     refreshRecursive(which);
@@ -1759,9 +1760,12 @@ void kdesvnfilelist::slotMerge()
         useExternal = ptr->useExtern();
         range = ptr->getRange();
         if (!useExternal) {
-            m_SvnWrapper->slotMerge(src1,src2,target,range.first,range.second,rec,irelated,force,dry);
+            m_SvnWrapper->slotMerge(src1,src2,target,range.first,range.second,
+                                     isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision,
+                                     rec,!irelated,force,dry);
         } else {
-            m_SvnWrapper->slotMergeExternal(src1,src2,target,range.first,range.second,rec);
+            m_SvnWrapper->slotMergeExternal(src1,src2,target,range.first,range.second,
+                                             isWorkingCopy()?svn::Revision::WORKING:m_pList->m_remoteRevision,rec);
         }
         if (isWorkingCopy()) {
 //            refreshItem(which);

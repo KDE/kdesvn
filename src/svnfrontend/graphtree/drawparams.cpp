@@ -28,11 +28,13 @@
 #include <qtooltip.h>
 #include <qregexp.h>
 #include <qstyle.h>
-#include <qpopupmenu.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 #include <klocale.h>
 #include <kconfig.h>
 #include <kdebug.h>
+#include <kglobalsettings.h>
 
 #include "drawparams.h"
 
@@ -103,12 +105,9 @@ int StoredDrawParams::maxLines(int f) const
   return _field[f].maxLines;
 }
 
-const QFont& StoredDrawParams::font() const
+QFont StoredDrawParams::font() const
 {
-  static QFont* f = 0;
-  if (!f) f = new QFont(QApplication::font());
-
-  return *f;
+  return KGlobalSettings::fixedFont();
 }
 
 void StoredDrawParams::ensureField(int f)
@@ -122,7 +121,9 @@ void StoredDrawParams::ensureField(int f)
 
   if (f<0 || f>=MAX_FIELD) return;
 
-  if ((int)_field.size() < f+1) _field.resize(f+1, *def);
+  while(_field.size()<f+1) {
+      _field.append(*def);
+  }
 }
 
 
@@ -246,463 +247,511 @@ QRect RectDrawing::remainingRect(DrawParams* dp)
 
 void RectDrawing::drawBack(QPainter* p, DrawParams* dp)
 {
-  if (!dp) dp = drawParams();
-  if (_rect.width()<=0 || _rect.height()<=0) return;
+    if (!dp) dp = drawParams();
+    if (_rect.width()<=0 || _rect.height()<=0) return;
 
-  QRect r = _rect;
-  QColor normal = dp->backColor();
-  if (dp->selected()) normal = normal.light();
-  bool isCurrent = dp->current();
+    QRect r = _rect;
+    QColor normal = dp->backColor();
+    if (dp->selected()) normal = normal.light();
+    bool isCurrent = dp->current();
 
-  if (dp->drawFrame() || isCurrent) {
-    // 3D raised/sunken frame effect...
-    QColor high = normal.light();
-    QColor low = normal.dark();
-    p->setPen( isCurrent ? low:high);
-    p->drawLine(r.left(), r.top(), r.right(), r.top());
-    p->drawLine(r.left(), r.top(), r.left(), r.bottom());
-    p->setPen( isCurrent ? high:low);
-    p->drawLine(r.right(), r.top(), r.right(), r.bottom());
-    p->drawLine(r.left(), r.bottom(), r.right(), r.bottom());
-    r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
-  }
-  if (r.width()<=0 || r.height()<=0) return;
+    if (dp->drawFrame() || isCurrent) {
+        // 3D raised/sunken frame effect...
+        QColor high = normal.light();
+        QColor low = normal.dark();
+        p->setPen( isCurrent ? low:high);
+        p->drawLine(r.left(), r.top(), r.right(), r.top());
+        p->drawLine(r.left(), r.top(), r.left(), r.bottom());
+        p->setPen( isCurrent ? high:low);
+        p->drawLine(r.right(), r.top(), r.right(), r.bottom());
+        p->drawLine(r.left(), r.bottom(), r.right(), r.bottom());
+        r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
+    }
+    if (r.width()<=0 || r.height()<=0) return;
+    if (dp->shaded() && (r.width()>0 && r.height()>0)) {
+        // adjustment for drawRect semantic in Qt4: decrement height/width
+        r.setRect(r.x(), r.y(), r.width()-1, r.height()-1);
 
-  if (dp->shaded()) {
-    // some shading
-    bool goDark = qGray(normal.rgb())>128;
-    int rBase, gBase, bBase;
-    normal.rgb(&rBase, &gBase, &bBase);
-    p->setBrush(QBrush::NoBrush);
+        // some shading
+        bool goDark = qGray(normal.rgb())>128;
+        int rBase, gBase, bBase;
+        normal.getRgb(&rBase, &gBase, &bBase);
+        p->setBrush(Qt::NoBrush);
 
-    // shade parameters:
-    int d = 7;
-    float factor = 0.1, forth=0.7, back1 =0.9, toBack2 = .7, back2 = 0.97;
+        // shade parameters:
+        int d = 7;
+        float factor = 0.1, forth=0.7, back1 =0.9, toBack2 = .7, back2 = 0.97;
 
-    // coefficient corrections because of rectangle size
-    int s = r.width();
-    if (s > r.height()) s = r.height();
-    if (s<100) {
-      forth -= .3  * (100-s)/100;
-      back1 -= .2  * (100-s)/100;
-      back2 -= .02 * (100-s)/100;
+        // coefficient corrections because of rectangle size
+        int s = r.width();
+        if (s > r.height()) s = r.height();
+        if (s<100) {
+            forth -= .3  * (100-s)/100;
+            back1 -= .2  * (100-s)/100;
+            back2 -= .02 * (100-s)/100;
+        }
+
+
+        // maximal color difference
+        int rDiff = goDark ? -rBase/d : (255-rBase)/d;
+        int gDiff = goDark ? -gBase/d : (255-gBase)/d;
+        int bDiff = goDark ? -bBase/d : (255-bBase)/d;
+
+        QColor shadeColor;
+        while (factor<.95 && (r.width()>=0 && r.height()>=0)) {
+            shadeColor.setRgb((int)(rBase+factor*rDiff+.5),
+                               (int)(gBase+factor*gDiff+.5),
+                               (int)(bBase+factor*bDiff+.5));
+                               p->setPen(shadeColor);
+                               p->drawRect(r);
+                               r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
+                               factor = 1.0 - ((1.0 - factor) * forth);
+        }
+
+        // and back (1st half)
+        while (factor>toBack2 && (r.width()>=0 && r.height()>=0)) {
+            shadeColor.setRgb((int)(rBase+factor*rDiff+.5),
+                               (int)(gBase+factor*gDiff+.5),
+                               (int)(bBase+factor*bDiff+.5));
+                               p->setPen(shadeColor);
+                               p->drawRect(r);
+                               r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
+                               factor = 1.0 - ((1.0 - factor) / back1);
+        }
+
+        // and back (2nd half)
+        while (factor>.01 && (r.width()>=0 && r.height()>=0)) {
+            shadeColor.setRgb((int)(rBase+factor*rDiff+.5),
+                               (int)(gBase+factor*gDiff+.5),
+                               (int)(bBase+factor*bDiff+.5));
+                               p->setPen(shadeColor);
+                               p->drawRect(r);
+                               r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
+                               factor = factor * back2;
+        }
+
+        normal = shadeColor;
+        // for filling, width and height has to be incremented again
+        r.setRect(r.x(), r.y(), r.width()+1, r.height()+1);
     }
 
+    // fill inside
+    p->fillRect(r, normal);
+}
 
-    // maximal color difference
-    int rDiff = goDark ? -rBase/d : (255-rBase)/d;
-    int gDiff = goDark ? -gBase/d : (255-gBase)/d;
-    int bDiff = goDark ? -bBase/d : (255-bBase)/d;
+/* Helper for drawField
+* Find a line break position in a string, given a font and maximum width
+*
+* Returns the actually used width, and sets <breakPos>
+*/
+static
+int findBreak(int& breakPos, QString text, QFontMetrics* fm, int maxWidth)
+{
+    int usedWidth;
 
-    QColor shadeColor;
-    while (factor<.95) {
-      shadeColor.setRgb((int)(rBase+factor*rDiff+.5),
-                        (int)(gBase+factor*gDiff+.5),
-                        (int)(bBase+factor*bDiff+.5));
-      p->setPen(shadeColor);
-      p->drawRect(r);
-      r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
-      if (r.width()<=0 || r.height()<=0) return;
-      factor = 1.0 - ((1.0 - factor) * forth);
+    // does full text fit?
+    breakPos = text.length();
+    usedWidth = fm->width(text);
+    if (usedWidth < maxWidth)
+        return usedWidth;
+
+    // now lower breakPos until best position is found.
+    // first by binary search, resulting in a position a little bit too large
+    int bottomPos = 0;
+    while(qAbs(maxWidth - usedWidth) > 3 * fm->maxWidth()) {
+        int halfPos = (bottomPos + breakPos)/2;
+        int halfWidth = fm->width(text, halfPos);
+        if (halfWidth < maxWidth)
+            bottomPos = halfPos;
+        else {
+            breakPos = halfPos;
+            usedWidth = halfWidth;
+        }
     }
 
-    // and back (1st half)
-    while (factor>toBack2) {
-      shadeColor.setRgb((int)(rBase+factor*rDiff+.5),
-                        (int)(gBase+factor*gDiff+.5),
-                        (int)(bBase+factor*bDiff+.5));
-      p->setPen(shadeColor);
-      p->drawRect(r);
-      r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
-      if (r.width()<=0 || r.height()<=0) return;
-      factor = 1.0 - ((1.0 - factor) / back1);
+    // final position by taking break boundaries into account.
+    // possible break boundaries are changing char categories but not middle of "Aa"
+    QChar::Category lastCat, cat;
+    int pos = breakPos;
+    lastCat = text[pos-1].category();
+    // at minimum 2 chars before break
+    while (pos > 2) {
+        pos--;
+        cat = text[pos-1].category();
+        if (cat == lastCat) continue;
+
+        // "Aa" has not a possible break inbetween
+        if ((cat == QChar::Letter_Uppercase) &&
+            (lastCat == QChar::Letter_Lowercase)) {
+            lastCat = cat;
+        continue;
+        }
+        lastCat = cat;
+
+        breakPos = pos;
+        usedWidth = fm->width(text, breakPos);
+        if (usedWidth < maxWidth) break;
     }
-
-    // and back (2nd half)
-    while ( factor>.01) {
-      shadeColor.setRgb((int)(rBase+factor*rDiff+.5),
-                        (int)(gBase+factor*gDiff+.5),
-                        (int)(bBase+factor*bDiff+.5));
-      p->setPen(shadeColor);
-      p->drawRect(r);
-      r.setRect(r.x()+1, r.y()+1, r.width()-2, r.height()-2);
-      if (r.width()<=0 || r.height()<=0) return;
-
-      factor = factor * back2;
-    }
-  }
-
-  // fill inside
-  p->setPen(QPen::NoPen);
-  p->setBrush(normal);
-  p->drawRect(r);
+    return usedWidth;
 }
 
 
+/* Helper for drawField
+* Find last line break position in a string from backwards,
+* given a font and maximum width
+*
+* Returns the actually used width, and sets <breakPos>
+*/
+static
+int findBreakBackwards(int& breakPos, QString text, QFontMetrics* fm, int maxWidth)
+{
+    int usedWidth;
+
+    // does full text fit?
+    breakPos = 0;
+    usedWidth = fm->width(text);
+    if (usedWidth < maxWidth)
+        return usedWidth;
+
+    // now raise breakPos until best position is found.
+    // first by binary search, resulting in a position a little bit too small
+    int topPos = text.length();
+    while(qAbs(maxWidth - usedWidth) > 3 * fm->maxWidth()) {
+        int halfPos = (breakPos + topPos)/2;
+        int halfWidth = fm->width(text.mid(halfPos));
+        if (halfWidth < maxWidth) {
+            breakPos = halfPos;
+            usedWidth = halfWidth;
+        }
+        else
+            topPos = halfPos;
+    }
+
+    // final position by taking break boundaries into account.
+    // possible break boundaries are changing char categories but not middle of "Aa"
+    QChar::Category lastCat, cat;
+    int pos = breakPos;
+    lastCat = text[pos].category();
+    // at minimum 2 chars before break
+    while (pos < text.length()-2) {
+        pos++;
+        cat = text[pos].category();
+        if (cat == lastCat) continue;
+
+        // "Aa" has not a possible break inbetween
+        if ((lastCat == QChar::Letter_Uppercase) &&
+            (cat == QChar::Letter_Lowercase)) {
+            lastCat = cat;
+        continue;
+        }
+        lastCat = cat;
+
+        breakPos = pos;
+        usedWidth = fm->width(text.mid(breakPos));
+        if (usedWidth < maxWidth) break;
+    }
+    return usedWidth;
+}
+
 bool RectDrawing::drawField(QPainter* p, int f, DrawParams* dp)
 {
-  if (!dp) dp = drawParams();
+    if (!dp) dp = drawParams();
 
-  if (!_fm) {
-    _fm = new QFontMetrics(dp->font());
-    _fontHeight = _fm->height();
-  }
-
-  QRect r = _rect;
-
-  if (0) kdDebug(90100) << "DrawField: Rect " << r.x() << "/" << r.y()
-		   << " - " << r.width() << "x" << r.height() << endl;
-
-  int h = _fontHeight;
-  bool rotate = dp->rotated();
-  int width   = (rotate ? r.height() : r.width()) -4;
-  int height  = (rotate ? r.width() : r.height());
-  int lines   = height / h;
-
-  // stop if we have no space available
-  if (lines<1) return false;
-
-  // calculate free space in first line (<unused>)
-  int pos = dp->position(f);
-  if (pos == DrawParams::Default) {
-    switch(f%4) {
-    case 0: pos = DrawParams::TopLeft; break;
-    case 1: pos = DrawParams::TopRight; break;
-    case 2: pos = DrawParams::BottomRight; break;
-    case 3: pos = DrawParams::BottomLeft; break;
+    if (!_fm) {
+        _fm = new QFontMetrics(dp->font());
+        _fontHeight = _fm->height();
     }
-  }
 
-  int unused = 0;
-  bool isBottom = false;
-  bool isCenter = false;
-  bool isRight = false;
-  int* used = 0;
-  switch(pos) {
-  case DrawParams::TopLeft:
-    used = &_usedTopLeft;
-    if (_usedTopLeft == 0) {
-      if (_usedTopCenter)
-        unused = (width - _usedTopCenter)/2;
-      else
-        unused = width - _usedTopRight;
-    }
-    break;
+    QRect r = _rect;
 
-  case DrawParams::TopCenter:
-    isCenter = true;
-    used = &_usedTopCenter;
-    if (_usedTopCenter == 0) {
-      if (_usedTopLeft > _usedTopRight)
-        unused = width - 2 * _usedTopLeft;
-      else
-        unused = width - 2 * _usedTopRight;
-    }
-    break;
+    int h = _fontHeight;
+    bool rotate = dp->rotated();
+    int width   = (rotate ? r.height() : r.width()) -4;
+    int height  = (rotate ? r.width() : r.height());
+    int lines   = height / h;
 
-  case DrawParams::TopRight:
-    isRight = true;
-    used = &_usedTopRight;
-    if (_usedTopRight == 0) {
-      if (_usedTopCenter)
-        unused = (width - _usedTopCenter)/2;
-      else
-        unused = width - _usedTopLeft;
-    }
-    break;
-
-  case DrawParams::BottomLeft:
-    isBottom = true;
-    used = &_usedBottomLeft;
-    if (_usedBottomLeft == 0) {
-      if (_usedBottomCenter)
-        unused = (width - _usedBottomCenter)/2;
-      else
-        unused = width - _usedBottomRight;
-    }
-    break;
-
-  case DrawParams::BottomCenter:
-    isCenter = true;
-    isBottom = true;
-    used = &_usedBottomCenter;
-    if (_usedBottomCenter == 0) {
-      if (_usedBottomLeft > _usedBottomRight)
-        unused = width - 2 * _usedBottomLeft;
-      else
-        unused = width - 2 * _usedBottomRight;
-    }
-    break;
-
-  case DrawParams::BottomRight:
-    isRight = true;
-    isBottom = true;
-    used = &_usedBottomRight;
-    if (_usedBottomRight == 0) {
-      if (_usedBottomCenter)
-        unused = (width - _usedBottomCenter)/2;
-      else
-        unused = width - _usedBottomLeft;
-    }
-    break;
-  }
-
-  if (isBottom) {
-    if ((_usedTopLeft >0) ||
-        (_usedTopCenter >0) ||
-        (_usedTopRight >0))
-      lines--;
-  }
-  else if (!isBottom) {
-    if ((_usedBottomLeft >0) ||
-        (_usedBottomCenter >0) ||
-        (_usedBottomRight >0))
-      lines--;
-  }
-  if (lines<1) return false;
-
-
-  int y = isBottom ? height - h : 0;
-
-  if (unused < 0) unused = 0;
-  if (unused == 0) {
-    // no space available in last line at this position
-    y = isBottom ? (y-h) : (y+h);
-    lines--;
-
+    // stop if there is no space available
     if (lines<1) return false;
 
-    // new line: reset used space
-    if (isBottom)
-      _usedBottomLeft = _usedBottomCenter = _usedBottomRight = 0;
-    else
-      _usedTopLeft = _usedTopCenter = _usedTopRight = 0;
-
-    unused = width;
-  }
-
-  // stop as soon as possible when there's no space for "..."
-  static int dotW = 0;
-  if (!dotW) dotW = _fm->width("...");
-  if (width < dotW) return false;
-
-  // get text and pixmap now, only if we need to, because it is possible
-  // that they are calculated on demand (and this can take some time)
-  QString name = dp->text(f);
-  if (name.isEmpty()) return 0;
-  QPixmap pix = dp->pixmap(f);
-
-  // check if pixmap can be drawn
-  int pixW = pix.width();
-  int pixH = pix.height();
-  int pixY = 0;
-  bool pixDrawn = true;
-  if (pixW>0) {
-    pixW += 2; // X distance from pix
-    if ((width < pixW + dotW) || (height < pixH)) {
-      // don't draw
-      pixW = 0;
+    // calculate free space in first line (<unused>)
+    int pos = dp->position(f);
+    if (pos == DrawParams::Default) {
+        switch(f%4) {
+            case 0: pos = DrawParams::TopLeft; break;
+            case 1: pos = DrawParams::TopRight; break;
+            case 2: pos = DrawParams::BottomRight; break;
+            case 3: pos = DrawParams::BottomLeft; break;
+        }
     }
-    else
-      pixDrawn = false;
-  }
 
-  // width of text and pixmap to be drawn
-  int w = pixW + _fm->width(name);
+    int unused = 0;
+    bool isBottom = false;
+    bool isCenter = false;
+    bool isRight = false;
+    int* used = 0;
+    switch(pos) {
+        case DrawParams::TopLeft:
+            used = &_usedTopLeft;
+            if (_usedTopLeft == 0) {
+                if (_usedTopCenter)
+                    unused = (width - _usedTopCenter)/2;
+                else
+                    unused = width - _usedTopRight;
+            }
+            break;
 
-  if (0) kdDebug(90100) << "  For '" << name << "': Unused " << unused
-		   << ", StrW " << w << ", Width " << width << endl;
+        case DrawParams::TopCenter:
+            isCenter = true;
+            used = &_usedTopCenter;
+            if (_usedTopCenter == 0) {
+                if (_usedTopLeft > _usedTopRight)
+                    unused = width - 2 * _usedTopLeft;
+                else
+                    unused = width - 2 * _usedTopRight;
+            }
+            break;
 
-  // if we have limited space at 1st line:
-  // use it only if whole name does fit in last line...
-  if ((unused < width) && (w > unused)) {
-    y = isBottom ? (y-h) : (y+h);
-    lines--;
+        case DrawParams::TopRight:
+            isRight = true;
+            used = &_usedTopRight;
+            if (_usedTopRight == 0) {
+                if (_usedTopCenter)
+                    unused = (width - _usedTopCenter)/2;
+                else
+                    unused = width - _usedTopLeft;
+            }
+            break;
 
+        case DrawParams::BottomLeft:
+            isBottom = true;
+            used = &_usedBottomLeft;
+            if (_usedBottomLeft == 0) {
+                if (_usedBottomCenter)
+                    unused = (width - _usedBottomCenter)/2;
+                else
+                    unused = width - _usedBottomRight;
+            }
+            break;
+
+        case DrawParams::BottomCenter:
+            isCenter = true;
+            isBottom = true;
+            used = &_usedBottomCenter;
+            if (_usedBottomCenter == 0) {
+                if (_usedBottomLeft > _usedBottomRight)
+                    unused = width - 2 * _usedBottomLeft;
+                else
+                    unused = width - 2 * _usedBottomRight;
+            }
+            break;
+
+        case DrawParams::BottomRight:
+            isRight = true;
+            isBottom = true;
+            used = &_usedBottomRight;
+            if (_usedBottomRight == 0) {
+                if (_usedBottomCenter)
+                    unused = (width - _usedBottomCenter)/2;
+                else
+                    unused = width - _usedBottomLeft;
+            }
+            break;
+    }
+    if (isBottom) {
+        if ((_usedTopLeft >0) ||
+            (_usedTopCenter >0) ||
+            (_usedTopRight >0))
+            lines--;
+    }
+    else if (!isBottom) {
+        if ((_usedBottomLeft >0) ||
+            (_usedBottomCenter >0) ||
+            (_usedBottomRight >0))
+            lines--;
+    }
     if (lines<1) return false;
 
-    // new line: reset used space
-    if (isBottom)
-      _usedBottomLeft = _usedBottomCenter = _usedBottomRight = 0;
-    else
-      _usedTopLeft = _usedTopCenter = _usedTopRight = 0;
-  }
+    int y = isBottom ? height - h : 0;
 
-  p->save();
-  p->setPen( (qGray(dp->backColor().rgb())>100) ? Qt::black : Qt::white);
-  p->setFont(dp->font());
-  if (rotate) {
-    //p->translate(r.x()+2, r.y()+r.height());
-    p->translate(r.x(), r.y()+r.height()-2);
-    p->rotate(270);
-  }
-  else
-    p->translate(r.x()+2, r.y());
+    if (unused < 0) unused = 0;
+    if (unused == 0) {
+        // no space available in last line at this position
+        y = isBottom ? (y-h) : (y+h);
+        lines--;
 
+        if (lines<1) return false;
 
-  // adjust available lines according to maxLines
-  int max = dp->maxLines(f);
-  if ((max > 0) && (lines>max)) lines = max;
-
-  /* loop over name parts to break up string depending on available width.
-   * every char category change is supposed a possible break,
-   * with the exception Uppercase=>Lowercase.
-   * It's good enough for numbers, Symbols...
-   *
-   * If the text is to be written at the bottom, we start with the
-   * end of the string (so everything is reverted)
-   */
-  QString remaining;
-  int origLines = lines;
-  while (lines>0) {
-
-    if (w>width && lines>1) {
-      int lastBreakPos = name.length(), lastWidth = w;
-      int len = name.length();
-      QChar::Category caOld, ca;
-
-      if (!isBottom) {
-        // start with comparing categories of last 2 chars
-        caOld = name[len-1].category();
-        while (len>2) {
-          len--;
-          ca = name[len-1].category();
-          if (ca != caOld) {
-            // "Aa" has no break between...
-            if (ca == QChar::Letter_Uppercase &&
-                caOld == QChar::Letter_Lowercase) {
-              caOld = ca;
-              continue;
-            }
-            caOld = ca;
-            lastBreakPos = len;
-            w = pixW + _fm->width(name, len);
-            lastWidth = w;
-            if (w <= width) break;
-          }
-        }
-        w = lastWidth;
-        remaining = name.mid(lastBreakPos);
-        // remove space on break point
-        if (name[lastBreakPos-1].category() == QChar::Separator_Space)
-          name = name.left(lastBreakPos-1);
+        // new line: reset used space
+        if (isBottom)
+            _usedBottomLeft = _usedBottomCenter = _usedBottomRight = 0;
         else
-          name = name.left(lastBreakPos);
-      }
-      else { // bottom
-        int l = len;
-        caOld = name[l-len].category();
-        while (len>2) {
-          len--;
-          ca = name[l-len].category();
+            _usedTopLeft = _usedTopCenter = _usedTopRight = 0;
 
-          if (ca != caOld) {
-            // "Aa" has no break between...
-            if (caOld == QChar::Letter_Uppercase &&
-                ca == QChar::Letter_Lowercase) {
-              caOld = ca;
-              continue;
-            }
-            caOld = ca;
-            lastBreakPos = len;
-            w = pixW + _fm->width(name.right(len));
-            lastWidth = w;
-            if (w <= width) break;
-          }
+        unused = width;
+    }
+
+    // stop as soon as possible when there is no space for "..."
+    static int dotW = 0;
+    if (!dotW) dotW = _fm->width("...");
+    if (width < dotW) return false;
+
+    // get text and pixmap now, only if we need to, because it is possible
+    // that they are calculated on demand (and this can take some time)
+    QString name = dp->text(f);
+    if (name.isEmpty()) return 0;
+    QPixmap pix = dp->pixmap(f);
+
+    // check if pixmap can be drawn
+    int pixW = pix.width();
+    int pixH = pix.height();
+    int pixY = 0;
+    bool pixDrawn = true;
+    if (pixW>0) {
+        pixW += 2; // X distance from pix
+        if ((width < pixW + dotW) || (height < pixH)) {
+            // do not draw
+            pixW = 0;
+        } else {
+            pixDrawn = false;
         }
-        w = lastWidth;
-        remaining = name.left(l-lastBreakPos);
-        // remove space on break point
-        if (name[l-lastBreakPos].category() == QChar::Separator_Space)
-          name = name.right(lastBreakPos-1);
+    }
+
+    // width of text and pixmap to be drawn
+    int w = pixW + _fm->width(name);
+
+    // if we have limited space at 1st line:
+    // use it only if whole name does fit in last line...
+    if ((unused < width) && (w > unused)) {
+        y = isBottom ? (y-h) : (y+h);
+        lines--;
+
+        if (lines<1) return false;
+
+        // new line: reset used space
+        if (isBottom)
+            _usedBottomLeft = _usedBottomCenter = _usedBottomRight = 0;
         else
-          name = name.right(lastBreakPos);
-      }
-    }
-    else
-      remaining = QString::null;
-
-    /* truncate and add ... if needed */
-    if (w>width) {
-      int len = name.length();
-      w += dotW;
-      while (len>2 && (w > width)) {
-        len--;
-        w = pixW + _fm->width(name, len) + dotW;
-      }
-      // stop drawing: we cannot draw 2 chars + "..."
-      if (w>width) break;
-
-      name = name.left(len) + "...";
+            _usedTopLeft = _usedTopCenter = _usedTopRight = 0;
     }
 
-    int x = 0;
-    if (isCenter)
-      x = (width - w)/2;
-    else if (isRight)
-      x = width - w;
+    p->save();
+    p->setPen( (qGray(dp->backColor().rgb())>100) ? Qt::black : Qt::white);
+    p->setFont(dp->font());
+    if (rotate) {
+        //p->translate(r.x()+2, r.y()+r.height());
+        p->translate(r.x(), r.y()+r.height()-2);
+        p->rotate(270);
+    } else {
+        p->translate(r.x()+2, r.y());
+    }
+    // adjust available lines according to maxLines
+    int max = dp->maxLines(f);
+    if ((max > 0) && (lines>max)) lines = max;
+    /* loop over name parts to break up string depending on available width.
+     * every char category change is supposed a possible break,
+     * with the exception Uppercase=>Lowercase.
+     * It is good enough for numbers, Symbols...
+     *
+     * If the text is to be written at the bottom, we start with the
+     * end of the string (so everything is reverted)
+    */
+    QString remaining;
+    int origLines = lines;
+    while (lines>0) {
 
-    if (!pixDrawn) {
-        pixY = y+(h-pixH)/2; // default: center vertically
-        if (pixH > h) pixY = isBottom ? y-(pixH-h) : y;
+        // more than one line: search for line break
+        if (w>width && lines>1) {
+            int breakPos;
 
-	p->drawPixmap( x, pixY, pix);
+            if (!isBottom) {
+                w = pixW + findBreak(breakPos, name, _fm, width - pixW);
 
-        // for distance to next text
-	pixY = isBottom ? (pixY - h - 2) : (pixY + pixH + 2);
-	pixDrawn = true;
+                remaining = name.mid(breakPos);
+                // remove space on break point
+                if (name[breakPos-1].category() == QChar::Separator_Space)
+                    name = name.left(breakPos-1);
+                else
+                    name = name.left(breakPos);
+            } else { // bottom
+                w = pixW + findBreakBackwards(breakPos, name, _fm, width - pixW);
+
+                remaining = name.left(breakPos);
+                // remove space on break point
+                if (name[breakPos].category() == QChar::Separator_Space)
+                    name = name.mid(breakPos+1);
+                else
+                    name = name.mid(breakPos);
+            }
+        } else {
+            remaining = QString();
+        }
+        /* truncate and add ... if needed */
+        if (w > width) {
+            name = _fm->elidedText(name, Qt::ElideRight, width - pixW);
+            w = _fm->width(name) + pixW;
+        }
+
+        int x = 0;
+        if (isCenter)
+            x = (width - w)/2;
+        else if (isRight)
+            x = width - w;
+        if (!pixDrawn) {
+            pixY = y+(h-pixH)/2; // default: center vertically
+            if (pixH > h) pixY = isBottom ? y-(pixH-h) : y;
+
+            p->drawPixmap( x, pixY, pix);
+
+            // for distance to next text
+            pixY = isBottom ? (pixY - h - 2) : (pixY + pixH + 2);
+            pixDrawn = true;
+        }
+        p->drawText( x+pixW, y,
+                    width - pixW, h,
+                    Qt::AlignLeft, name);
+                    y = isBottom ? (y-h) : (y+h);
+                    lines--;
+
+                    if (remaining.isEmpty()) break;
+                    name = remaining;
+                    w = pixW + _fm->width(name);
     }
 
-
-    if (0) kdDebug(90100) << "  Drawing '" << name << "' at "
-		     << x+pixW << "/" << y << endl;
-
-    p->drawText( x+pixW, y,
-		 width - pixW, h,
-		 Qt::AlignLeft, name);
-    y = isBottom ? (y-h) : (y+h);
-    lines--;
-
-    if (remaining.isEmpty()) break;
-    name = remaining;
-    w = pixW + _fm->width(name);
-  }
-
-  // make sure the pix stays visible
-  if (pixDrawn && (pixY>0)) {
-    if (isBottom && (pixY<y)) y = pixY;
-    if (!isBottom && (pixY>y)) y = pixY;
-  }
-
-  if (origLines > lines) {
-    // if only 1 line written, don't reset _used* vars
-    if (lines - origLines >1) {
-      if (isBottom)
-        _usedBottomLeft = _usedBottomCenter = _usedBottomRight = 0;
-      else
-        _usedTopLeft = _usedTopCenter = _usedTopRight = 0;
+    // make sure the pix stays visible
+    if (pixDrawn && (pixY>0)) {
+        if (isBottom && (pixY<y)) y = pixY;
+        if (!isBottom && (pixY>y)) y = pixY;
     }
 
-    // take back one line
-    y = isBottom ? (y+h) : (y-h);
-    if (used) *used = w;
-  }
+    if (origLines > lines) {
+        // if only 1 line written, do not reset _used* vars
+        if (lines - origLines >1) {
+            if (isBottom)
+                _usedBottomLeft = _usedBottomCenter = _usedBottomRight = 0;
+            else
+                _usedTopLeft = _usedTopCenter = _usedTopRight = 0;
+        }
 
-  // update free space
-  if (!isBottom) {
-    if (rotate)
-      _rect.setRect(r.x()+y, r.y(), r.width()-y, r.height());
-    else
-      _rect.setRect(r.x(), r.y()+y, r.width(), r.height()-y);
-  }
-  else {
-    if (rotate)
-      _rect.setRect(r.x(), r.y(), y+h, r.height());
-    else
-      _rect.setRect(r.x(), r.y(), r.width(), y+h);
-  }
+        // take back one line
+        y = isBottom ? (y+h) : (y-h);
+        if (used) *used = w;
+    }
 
-  p->restore();
+    // update free space
+    if (!isBottom) {
+        if (rotate)
+            _rect.setRect(r.x()+y, r.y(), r.width()-y, r.height());
+        else
+            _rect.setRect(r.x(), r.y()+y, r.width(), r.height()-y);
+    }
+    else {
+        if (rotate)
+            _rect.setRect(r.x(), r.y(), y+h, r.height());
+        else
+            _rect.setRect(r.x(), r.y(), r.width(), y+h);
+    }
 
-  return true;
+    p->restore();
+
+    return true;
 }

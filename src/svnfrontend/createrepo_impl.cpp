@@ -35,8 +35,17 @@ public:
 };
 
 Createrepo_impl::Createrepo_impl(bool enable_compat13, bool enable_compat14, QWidget *parent, const char *name)
-    :CreateRepo_Dlg(parent, name)
+//     :CreateRepo_Dlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    if (name) {
+        setObjectName(name);
+    } else {
+        setObjectName("Createrepo_impl");
+    }
+    m_ReposPathinput->setMode(KFile::Directory|KFile::LocalOnly);
+
     inChangeCompat=true;
     m_DisableFsync->setEnabled(false);
     m_LogKeep->setEnabled(false);
@@ -63,7 +72,7 @@ void Createrepo_impl::fsTypeChanged(int which)
 
 QString Createrepo_impl::targetDir()
 {
-    KURL u = m_ReposPathinput->url();
+    KUrl u = m_ReposPathinput->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

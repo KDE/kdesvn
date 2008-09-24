@@ -129,13 +129,8 @@ namespace svn
         }
         close();
         QFile fi(m_outFileName);
-#if QT_VERSION < 0x040000
-        if (!fi.open(IO_ReadOnly|IO_Raw)) {
-            throw ClientException(QString("%1 '%2'").arg(fi.errorString()).arg(m_outFileName));
-#else
         if (!fi.open(QIODevice::ReadOnly)) {
             throw ClientException(QString("%1 '%2'").arg(fi.errorString()).arg(m_outFileName).toLatin1().constData());
-#endif
         }
 
         QByteArray res = fi.readAll();

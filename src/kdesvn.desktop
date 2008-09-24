@@ -16,7 +16,6 @@ Comment[es]=Un cliente de Subversion para KDE
 Comment[lt]=Subversion klientas skirtas KDE
 Terminal=false
 MimeType=inode/directory;
-ServiceTypes=KParts/ReadOnlyPart,Browser/View
-X-KDE-BrowserView-Args=DetailedList
-X-KDE-Library=libkdesvnpart
-Categories=Qt;KDE;Development;
+Categories=Qt;KDE;Development;RevisionControl;
+X-KDE-StartupNotify=true
+

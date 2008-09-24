@@ -35,17 +35,7 @@
 
 // qt
 #include <qglobal.h>
-#if QT_VERSION < 0x040000
-
-#include <qstring.h>
-#include <qvaluelist.h>
-
-#else
-
 #include <QtCore>
-
-#endif
-
 
 namespace svn
 {
@@ -86,11 +76,7 @@ namespace svn
      *
      * @return vector with entries like "file:", "http:"
      */
-#if QT_VERSION < 0x040000
-    static QValueList<QString>
-#else
-    static QList<QString>
-#endif
+    static QStringList
     supportedSchemas ();
   };
 }

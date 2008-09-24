@@ -37,53 +37,103 @@
 /*!
     \fn DiffSyntax::highlightParagraph ( const QString & text, int endStateOfLastPara )
  */
-int DiffSyntax::highlightParagraph ( const QString & aText, int endStateOfLastPara)
+// int DiffSyntax::highlightParagraph ( const QString & aText, int endStateOfLastPara)
+// {
+//     static QRegExp a("^\\w+:\\s.*$");
+//     static QRegExp b("^\\W+$");
+//     QColor c(0,0,0);
+//     QFont f(KGlobalSettings::fixedFont());
+//     int ret = 0;
+//     if (endStateOfLastPara == 1) {
+//         ret = 2;
+//     } else if (endStateOfLastPara == 2) {
+//         if (b.indexIn(aText)!=0) {
+//             ret = 2;
+//         }
+//     }
+// 
+//     if (a.indexIn(aText)>-1) {
+//         c = QColor("#660033");
+//         if (endStateOfLastPara==1||endStateOfLastPara==2) {
+//             f.setBold(true);
+//         } else {
+//             f.setItalic(true);
+//         }
+//     } else if (aText.startsWith("_____" )) {
+//         ret = 1;
+//         c = QColor("#1D1D8F");
+//     } else if (aText.startsWith("+")) {
+//         c = QColor("#008B00");
+//         if (aText.startsWith("+++")) {
+//             f.setBold(true);
+//         }
+//     } else if (aText.startsWith("-")) {
+//         c = QColor("#CD3333");
+//         if (aText.startsWith("---")) {
+//             f.setBold(true);
+//         }
+//     } else if (aText.startsWith("@@")) {
+//         c = QColor("#1D1D8F");
+//     }
+//     if (endStateOfLastPara==2 && ret==2) {
+//         if (aText.startsWith("   +")) {
+//             c = QColor("#008B00");
+//         } else if (aText.startsWith("   -")) {
+//             c = QColor("#CD3333");
+//         }
+//     }
+//     setFormat(0,(int)aText.length(),f,c);
+//     return ret;
+// }
+
+void DiffSyntax::highlightBlock(const QString &aText)
 {
     static QRegExp a("^\\w+:\\s.*$");
     static QRegExp b("^\\W+$");
-    QColor c(0,0,0);
-    QFont f(KGlobalSettings::fixedFont());
-    int ret = 0;
-    if (endStateOfLastPara == 1) {
-        ret = 2;
-    } else if (endStateOfLastPara == 2) {
-        if (b.match(aText)!=0) {
-            ret = 2;
+    QTextCharFormat format;
+//     QColor c(0,0,0);
+//     QFont f(KGlobalSettings::fixedFont());
+    format.setFont(KGlobalSettings::fixedFont());
+
+    if (previousBlockState() == 1) {
+        setCurrentBlockState(2);
+    } else if (previousBlockState() == 2) {
+        if (b.indexIn(aText)!=0) {
+            setCurrentBlockState(2);
         }
     }
 
-    if (a.match(aText)>-1) {
-        c = QColor("#660033");
-        if (endStateOfLastPara==1||endStateOfLastPara==2) {
-            f.setBold(true);
+    if (a.indexIn(aText)>-1) {
+        format.setForeground(QColor("#660033"));
+        if (previousBlockState()==1 || previousBlockState()==2) {
+            format.setFontWeight(QFont::Bold);
         } else {
-            f.setItalic(true);
+            format.setFontItalic(true);
         }
     } else if (aText.startsWith("_____" )) {
-        ret = 1;
-        c = QColor("#1D1D8F");
+        setCurrentBlockState(1);
+        format.setForeground(QColor("#1D1D8F"));
     } else if (aText.startsWith("+")) {
-        c = QColor("#008B00");
+        format.setForeground(QColor("#008B00"));
         if (aText.startsWith("+++")) {
-            f.setBold(true);
+            format.setFontWeight(QFont::Bold);
         }
     } else if (aText.startsWith("-")) {
-        c = QColor("#CD3333");
+        format.setForeground(QColor("#CD3333"));
         if (aText.startsWith("---")) {
-            f.setBold(true);
+            format.setFontWeight(QFont::Bold);
         }
     } else if (aText.startsWith("@@")) {
-        c = QColor("#1D1D8F");
+        format.setForeground(QColor("#1D1D8F"));
     }
-    if (endStateOfLastPara==2 && ret==2) {
+    if (previousBlockState()==2 && currentBlockState()==2) {
         if (aText.startsWith("   +")) {
-            c = QColor("#008B00");
+            format.setForeground(QColor("#008B00"));
         } else if (aText.startsWith("   -")) {
-            c = QColor("#CD3333");
+            format.setForeground(QColor("#CD3333"));
         }
     }
-    setFormat(0,(int)aText.length(),f,c);
-    return ret;
+    setFormat(0, aText.length(), format);
 }
 
 

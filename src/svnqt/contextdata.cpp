@@ -768,6 +768,18 @@ svn_error_t* ContextData::onWcConflictResolver(svn_wc_conflict_result_t**result,
 #endif
 }
 
+bool ContextData::contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path)
+{
+    if (!getListener()) {
+        if (!entries || !dirent) {
+            return false;
+        }
+        entries->push_back(new DirEntry(/*QString::FROMUTF8(path)*/path, dirent, lock));
+        return true;
+    }
+    return getListener()->contextAddListItem(entries,dirent,lock,path);
+}
+
 bool ContextListener::contextConflictResolve(ConflictResult&result,const ConflictDescription&description)
 {
     Q_UNUSED(description);
@@ -776,6 +788,15 @@ bool ContextListener::contextConflictResolve(ConflictResult&result,const Conflic
 #else
     Q_UNUSED(result);
 #endif
+    return true;
+}
+
+bool ContextListener::contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path)
+{
+    if (!entries || !dirent) {
+        return false;
+    }
+    entries->push_back(new DirEntry(/*QString::FROMUTF8(path)*/path,dirent,lock));
     return true;
 }
 

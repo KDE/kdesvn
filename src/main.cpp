@@ -33,35 +33,31 @@ static const char description[] =
 
 static const char version[] = VERSION;
 
-static KCmdLineOptions options[] =
-{
-    { "r startrev[:endrev]",I18N_NOOP("Execute single subversion command on specific revision(-range)"),0},
-    {"R",I18N_NOOP("Ask for revision when executing single command"),0},
-    {"f",I18N_NOOP("Force operation"),0},
-    {"o <file>",I18N_NOOP("Save output of subversion command (eg \"cat\") into file <file>"),0},
-    {"l <number>",I18N_NOOP("Limit log output to <number>"),0},
-    { "+exec <command>",I18N_NOOP("Execute subversion command (\"exec help\" for more information)"),0},
-    { "+[URL]", I18N_NOOP( "Document to open" ), 0 },
-    KCmdLineLastOption
-};
 
 int main(int argc, char **argv)
 {
-    KAboutData about("kdesvn", I18N_NOOP("kdesvn"), version, description,
-                     KAboutData::License_GPL, "(C) 2005-2007 Rajko Albrecht",0,
-                         0, "ral@alwins-world.de");
-    about.addAuthor( "Rajko Albrecht", 0, "ral@alwins-world.de" );
+    KAboutData about(QByteArray("kdesvn"),QByteArray("kdesvn"),ki18n("kdesvn"),QByteArray(version),ki18n(description),
+                     KAboutData::License_GPL,ki18n("(C) 2005-2007 Rajko Albrecht"));
+    about.addAuthor( ki18n("Rajko Albrecht"),ki18n("Developer"),QByteArray("ral@alwins-world.de"),QByteArray());
     about.setHomepage("http://kdesvn.alwins-world.de/");
     about.setBugAddress("kdesvn-bugs@alwins-world.de");
 
     KCmdLineArgs::init(argc, argv, &about);
+    KCmdLineOptions options;
+    options.add("r startrev[:endrev]",ki18n("Execute single subversion command on specific revision(-range)"));
+    options.add("R",ki18n("Ask for revision when executing single command"));
+    options.add("f",ki18n("Force operation"));
+    options.add("o <file>",ki18n("Save output of subversion command (eg \"cat\") into file <file>"));
+    options.add("l <number>",ki18n("Limit log output to <number>"));
+    options.add("+exec <command>",ki18n("Execute subversion command (\"exec help\" for more information)"));
+    options.add("+[URL]", ki18n( "Document to open" ));
     KCmdLineArgs::addCmdLineOptions(options);
 
 
     KApplication app;
 
     // see if we are starting with session management
-    if (app.isRestored())
+    if (app.isSessionRestored())
     {
         RESTORE(kdesvn);
     }
@@ -78,7 +74,7 @@ int main(int argc, char **argv)
         else
         {
             if (QString(args->arg(0))==QString("exec")) {
-                kdDebug()<<"Execute a command" << endl;
+                kDebug()<<"Execute a command" << endl;
                 CommandLine cl(args);
                 return cl.exec();
             } else {

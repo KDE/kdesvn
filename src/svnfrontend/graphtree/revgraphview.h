@@ -21,27 +21,35 @@
 #define REVGRAPHVIEW_H
 
 #include <svnqt/revision.hpp>
+#include <svnqt/shared_pointer.hpp>
 
-#include <qcanvas.h>
+#include <QContextMenuEvent>
+#include <QGraphicsView>
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QProcess>
 
 namespace svn {
     class LogEntry;
     class Client;
 }
 
-class KTempFile;
+class KTemporaryFile;
 class KProcess;
 class RevisionTree;
 class GraphTreeLabel;
-class GraphViewTip;
 class GraphMark;
 class PannerView;
+class QGraphicsScene;
 class CContextListener;
+class GraphTreeLabel;
+
+typedef svn::SharedPointer<KTemporaryFile> TempFilePtr;
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevGraphView : public QCanvasView
+class RevGraphView : virtual public QGraphicsView
 {
     Q_OBJECT
 public:
@@ -49,7 +57,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(QObject*,svn::Client*,QWidget * parent = 0, const char * name = 0, WFlags f = 0);
+    RevGraphView(QObject*,svn::Client*,QWidget * parent = 0, const char * name = 0);
     virtual ~RevGraphView();
 
     void showText(const QString&s);
@@ -68,7 +76,7 @@ public:
         }
         targetData(){Action=0;key="";}
     };
-    typedef QValueList<targetData> tlist;
+    typedef QList<targetData> tlist;
 
     struct keyData {
         QString name,Author,Date,Message;
@@ -91,22 +99,21 @@ signals:
     void makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
 
 public slots:
-    virtual void contentsMovingSlot(int,int);
-    virtual void zoomRectMoved(int,int);
+    virtual void zoomRectMoved(qreal,qreal);
     virtual void zoomRectMoveFinished();
     virtual void slotClientException(const QString&what);
 
 protected slots:
-    virtual void readDotOutput(KProcess *   proc,char *   buffer,int   buflen);
-    virtual void dotExit(KProcess*);
+    virtual void readDotOutput();
+    virtual void dotExit(int,QProcess::ExitStatus);
 
 protected:
-    QCanvas*m_Canvas;
+    QGraphicsScene*m_Scene;
     GraphMark*m_Marker;
     svn::Client*m_Client;
     GraphTreeLabel*m_Selected;
     QObject*m_Listener;
-    KTempFile*dotTmpFile;
+    TempFilePtr dotTmpFile;
     QString dotOutput;
     KProcess*renderProcess;
     trevTree m_Tree;
@@ -119,17 +126,19 @@ protected:
     QMap<QString,QString> m_LabelMap;
 
     int _xMargin,_yMargin;
-    GraphViewTip*m_Tip;
     PannerView*m_CompleteView;
     double _cvZoom;
     ZoomPosition m_LastAutoPosition;
 
     virtual void resizeEvent(QResizeEvent*);
-    virtual void contentsMousePressEvent ( QMouseEvent * e );
-    virtual void contentsMouseReleaseEvent ( QMouseEvent * e );
-    virtual void contentsMouseMoveEvent ( QMouseEvent*e);
-    virtual void contentsContextMenuEvent(QContextMenuEvent*e);
-    virtual void contentsMouseDoubleClickEvent ( QMouseEvent * e );
+    virtual void mousePressEvent ( QMouseEvent * e );
+    virtual void mouseReleaseEvent ( QMouseEvent * e );
+    virtual void mouseMoveEvent ( QMouseEvent*e);
+    virtual void contextMenuEvent(QContextMenuEvent*e);
+    virtual void mouseDoubleClickEvent ( QMouseEvent * e );
+    virtual void scrollContentsBy(int dx, int dy);
+
+    GraphTreeLabel*firstLabelAt(const QPoint&pos)const;
 
     bool _isMoving;
     QPoint _lastPos;

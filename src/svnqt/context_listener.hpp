@@ -119,13 +119,13 @@ namespace svn
      * @param revision
      */
     virtual void
-    contextNotify (const char *path,
-                   svn_wc_notify_action_t action,
-                   svn_node_kind_t kind,
-                   const char *mime_type,
-                   svn_wc_notify_state_t content_state,
-                   svn_wc_notify_state_t prop_state,
-                   svn_revnum_t revision) = 0;
+    contextNotify(const char *path,
+                  svn_wc_notify_action_t action,
+                  svn_node_kind_t kind,
+                  const char *mime_type,
+                  svn_wc_notify_state_t content_state,
+                  svn_wc_notify_state_t prop_state,
+                  svn_revnum_t revision) = 0;
     /**
      * this method will be called to notify about
      * the progress of an ongoing action
@@ -133,8 +133,8 @@ namespace svn
      * @param action the action got notified about
      * @since subversion 1.2
      */
-    virtual void
-    contextNotify (const svn_wc_notify_t *action) = 0;
+    virtual void contextNotify (const svn_wc_notify_t *action)=0;
+
     /**
      * this method will be called periodically to allow
      * the app to cancel long running operations
@@ -260,6 +260,16 @@ namespace svn
      * @since subversion 1.5
      */
     virtual bool contextConflictResolve(ConflictResult&result,const ConflictDescription&description);
+    /** Callback for generating list entries
+     * This base implementation just adds items to @a entries. This may used for special listener like the one from KIO
+     * where items may displayed direkt on call and not stored into @a entries.
+     * @param entries default target list
+     * @param dirent entry to add (send by subversion)
+     * @param lock accociated lock (may be null!)
+     * @param path the path of the item
+     * @return true if inserted/displayd, false if dirent or entries aren't valid.
+     */
+    virtual bool contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
   };
 }
 

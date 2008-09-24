@@ -30,19 +30,19 @@
 #include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "src/svnfrontend/copymoveview_impl.h"
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kglobal.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kdialogbase.h>
+// #include <kdialogbase.h>
+#include <KDialog>
+#include <KVBox>
 #include <ktextbrowser.h>
 
 #include <qfile.h>
-#include <qtextstream.h>
-#include <qvaluelist.h>
-#include <qvbox.h>
+#include <QTextStream>
 
 class pCPart
 {
@@ -63,7 +63,6 @@ public:
     svn::Revision start,end;
 
     // for output
-    QFile toStdout,toStderr;
     QString outfile;
     QTextStream Stdout,Stderr;
     DummyDisplay * disp;
@@ -72,15 +71,11 @@ public:
 };
 
 pCPart::pCPart()
-    :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false),single_revision(false),log_limit(0)
+    :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false),single_revision(false),log_limit(0),Stdout(stdout),Stderr(stderr)
 {
     m_SvnWrapper = 0;
     start = svn::Revision::UNDEFINED;
     end = svn::Revision::UNDEFINED;
-    toStdout.open(IO_WriteOnly, stdout);
-    toStderr.open(IO_WriteOnly, stderr);
-    Stdout.setDevice(&toStdout);
-    Stderr.setDevice(&toStderr);
     disp = new DummyDisplay();
     m_SvnWrapper = new SvnActions(disp,0,true);
 }
@@ -91,11 +86,11 @@ pCPart::~pCPart()
     delete disp;
 }
 
-CommandExec::CommandExec(QObject*parent, const char *name,KCmdLineArgs *args)
-    : QObject(parent,name)
+CommandExec::CommandExec(QObject*parent)
+    : QObject(parent)
 {
     m_pCPart = new pCPart;
-    m_pCPart->args = args;
+    m_pCPart->args = 0;
     SshAgent ag;
     ag.querySshAgent();
 
@@ -110,8 +105,9 @@ CommandExec::~CommandExec()
     delete m_pCPart;
 }
 
-int CommandExec::exec()
+int CommandExec::exec(KCmdLineArgs*args)
 {
+    m_pCPart->args=args;
     if (!m_pCPart->args) {
         return -1;
     }
@@ -126,7 +122,7 @@ int CommandExec::exec()
 
     if (m_pCPart->args->count()>=2) {
         m_pCPart->cmd=m_pCPart->args->arg(1);
-        m_pCPart->cmd=m_pCPart->cmd.lower();
+        m_pCPart->cmd=m_pCPart->cmd.toLower();
     }
     QString slotCmd;
     if (!QString::compare(m_pCPart->cmd,"log")) {
@@ -209,9 +205,9 @@ int CommandExec::exec()
         check_force=true;
     }
 
-    bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.ascii());
+    bool found = connect(this,SIGNAL(executeMe()),this,slotCmd.toAscii());
     if (!found) {
-        slotCmd=i18n("Command \"%1\" not implemented or known").arg(m_pCPart->cmd);
+        slotCmd=i18n("Command \"%1\" not implemented or known",m_pCPart->cmd);
         KMessageBox::sorry(0,slotCmd,i18n("SVN Error"));
         return -1;
     }
@@ -219,11 +215,11 @@ int CommandExec::exec()
     QString tmp,query,proto,v;
     QMap<QString,QString> q;
 
-    KURL tmpurl;
+    KUrl tmpurl;
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
-        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyURL());
+        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyUrl());
         query = tmpurl.query();
         q = m_pCPart->args->url(j).queryItems();
         if (q.find("rev")!=q.end()) {
@@ -232,7 +228,7 @@ int CommandExec::exec()
             v = "";
         }
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
-        if (tmpurl.protocol().find("ssh")!=-1) {
+        if (tmpurl.protocol().indexOf("ssh")!=-1) {
             SshAgent ag;
             // this class itself checks if done before
             ag.addSshIdentities();
@@ -260,7 +256,7 @@ int CommandExec::exec()
                 tmp = tmpurl.path();
             }
         }
-        QStringList l = QStringList::split('?',tmp);
+        QStringList l = tmp.split('?',QString::SkipEmptyParts);
         if (l.count()>0) {
             tmp=l[0];
         }
@@ -313,19 +309,15 @@ int CommandExec::exec()
     emit executeMe();
     if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
         m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
-        KDialogBase dlg (
-            KApplication::activeModalWidget(),
-            "execution_log",
-            true,
-            i18n("Execution log"),
-            KDialogBase::Ok);
-
-        QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+        KDialog dlg(KApplication::activeModalWidget());
+        KVBox *Dialog1Layout = new KVBox(&dlg);
+        dlg.setMainWidget(Dialog1Layout);
         KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
         ptr->setText(m_lastMessages);
-        dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log"));
+        KConfigGroup _k(Kdesvnsettings::self()->config(),"kdesvn_cmd_log");
+        dlg.restoreDialogSize(_k);
         dlg.exec();
-        dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"kdesvn_cmd_log",false);
+        dlg.saveDialogSize(_k);
     }
     return 0;
 }
@@ -342,19 +334,14 @@ void CommandExec::clientException(const QString&what)
 }
 
 
-/*!
-    \fn CommandExec::slotCmdLog
- */
 void CommandExec::slotCmd_log()
 {
     int limit = m_pCPart->log_limit;
     if (m_pCPart->end == svn::Revision::UNDEFINED) {
         m_pCPart->end = svn::Revision::HEAD;
-        limit = 0;
     }
     if (m_pCPart->start == svn::Revision::UNDEFINED) {
         m_pCPart->start = 1;
-        limit = 0;
     }
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
     if (m_pCPart->extraRevisions[0]==svn::Revision::WORKING) {
@@ -363,9 +350,6 @@ void CommandExec::slotCmd_log()
     m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->extraRevisions[0],m_pCPart->url[0],list,limit);
 }
 
-/*!
-    \fn CommandExec::slotCmdLog
- */
 void CommandExec::slotCmd_tree()
 {
     if (m_pCPart->end == svn::Revision::UNDEFINED) {
@@ -479,8 +463,8 @@ void CommandExec::slotCmd_info()
 
 void CommandExec::slotCmd_commit()
 {
-    QValueList<svn::Path> targets;
-    for (unsigned j=0; j<m_pCPart->url.count();++j) {
+    QStringList targets;
+    for (long j=0; j<m_pCPart->url.count();++j) {
         targets.push_back(svn::Path(m_pCPart->url[j]));
     }
     m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
@@ -498,7 +482,7 @@ void CommandExec::slotCmd_list()
     if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,rev,false)) {
         return;
     }
-    for (unsigned int i = 0; i < res.count();++i) {
+    for (long i = 0; i < res.count();++i) {
         QString d = svn::DateTime(res[i]->time()).toString(QString("yyyy-MM-dd hh:mm::ss"));
         m_pCPart->Stdout
             << (res[i]->kind()==svn_node_dir?"D":"F")<<" "
@@ -572,7 +556,7 @@ void CommandExec::slotCmd_addnew()
 bool CommandExec::scanRevision()
 {
     QString revstring = m_pCPart->args->getOption("r");
-    QStringList revl = QStringList::split(":",revstring);
+    QStringList revl = revstring.split(":",QString::SkipEmptyParts);
     if (revl.count()==0) {
         return false;
     }
@@ -597,13 +581,11 @@ void CommandExec::slotNotifyMessage(const QString&msg)
 bool CommandExec::askRevision()
 {
     QString _head = m_pCPart->cmd+" - Revision";
-    KDialogBase dlg(
-        0,
-        "Revisiondlg",
-        true,
-        _head,
-        KDialogBase::Ok|KDialogBase::Cancel);
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
+    KDialog dlg(0);
+    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
+    KVBox *Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
+
     Rangeinput_impl*rdlg;
     rdlg = new Rangeinput_impl(Dialog1Layout);
     dlg.resize( QSize(120,60).expandedTo(dlg.minimumSizeHint()));
@@ -639,12 +621,14 @@ void CommandExec::slotCmd_switch()
 
 void CommandExec::slotCmd_lock()
 {
-    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
+//     m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url,"",m_pCPart->force);
 }
 
 void CommandExec::slotCmd_unlock()
 {
-    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
+//     m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url,m_pCPart->force);
 }
 
 #include "commandexec.moc"

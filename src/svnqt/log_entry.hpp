@@ -37,18 +37,7 @@
 //Qt
 #include <qglobal.h>
 
-#if QT_VERSION < 0x040000
-
-#include <qglobal.h>
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qmap.h>
-
-#else
-
 #include <QtCore>
-
-#endif
 
 // apr
 #include "apr_time.h"
@@ -93,11 +82,7 @@ namespace svn
     QLONG copyToRevision;
   };
 
-#if QT_VERSION < 0x040000
-  typedef QValueList<LogChangePathEntry> LogChangePathEntries;
-#else
   typedef QList<LogChangePathEntry> LogChangePathEntries;
-#endif
 
   class SVNQT_EXPORT LogEntry
   {

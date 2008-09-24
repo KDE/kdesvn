@@ -21,14 +21,14 @@
 #ifndef COPYMOVEVIEW_IMPL_H
 #define COPYMOVEVIEW_IMPL_H
 
-#include "copymoveview.h"
+#include "ui_copymoveview.h"
 
-class CopyMoveView_impl : public CopyMoveView
+class CopyMoveView_impl : public QWidget, public Ui::CopyMoveView
 {
   Q_OBJECT
 
 public:
-  CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0 );
   ~CopyMoveView_impl();
     virtual QString newName();
     bool force();

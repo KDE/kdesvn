@@ -47,15 +47,7 @@
 
 // qt
 #include <qglobal.h>
-
-#if QT_VERSION < 0x040000
-    #include <qstring.h>
-    #include <qpair.h>
-    #include <qvaluelist.h>
-    #include <qmap.h>
-#else
-    #include <QtCore>
-#endif
+#include <QtCore>
 
 // svnqt
 #include "svnqt/context.hpp"
@@ -860,6 +852,8 @@ namespace svn
     virtual void
     url2Revision(const QString&revstring,
             Revision&start)=0;
+
+    virtual bool RepoHasCapability(const Path&repository,Capability capability)=0;
 
   private:
     /**

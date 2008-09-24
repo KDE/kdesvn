@@ -25,34 +25,43 @@
 #include "fronthelpers/widgetblockstack.h"
 #include "src/ksvnwidgets/encodingselector_impl.h"
 
-#include <klistview.h>
 #include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
-#include <kdialogbase.h>
-#include <kapp.h>
+#include <kdialog.h>
+#include <kapplication.h>
 #include <ktextbrowser.h>
-#include <klistviewsearchline.h>
+#include <kvbox.h>
+#include <kcolorscheme.h>
+#include <ktextedit.h>
+#include <kmenu.h>
+#include <kaction.h>
 
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qheader.h>
-#include <qmap.h>
-#include <qpopupmenu.h>
-#include <qvbox.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qlayout.h>
-#include <qtextcodec.h>
+#include <QPixmap>
+#include <QPainter>
+#include <QMap>
+#include <QToolTip>
+#include <QLayout>
+#include <QTextCodec>
+#include <QBrush>
+#include <QTime>
+
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QTreeWidgetItemIterator>
 
 #define COL_LINENR 0
 #define COL_REV 1
 #define COL_DATE 2
 #define COL_AUT 3
 #define COL_LINE 4
+
+#define TREE_ITEM_TYPE QTreeWidgetItem::UserType+1
+
+#define BORDER 4
 
 class LocalizedAnnotatedLine:public svn::AnnotateLine
 {
@@ -66,7 +75,7 @@ public:
     void localeChanged()
     {
         if (!codec_searched) {
-            cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_blame());
+            cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_blame().toLocal8Bit());
             codec_searched = true;
         }
         if (cc) {
@@ -93,21 +102,15 @@ protected:
 QTextCodec* LocalizedAnnotatedLine::cc = 0;
 bool LocalizedAnnotatedLine::codec_searched = false;
 
-class BlameDisplayItem:public KListViewItem
+class BlameTreeItem:public QTreeWidgetItem
 {
 public:
-    BlameDisplayItem(KListView*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
-    BlameDisplayItem(KListView*,BlameDisplayItem*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
-    virtual ~BlameDisplayItem(){}
-    virtual int compare(QListViewItem *i, int col, bool ascending)const;
-    virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
-    virtual int rtti()const{return 1000;}
-
-    virtual int width( const QFontMetrics & fm, const QListView * lv, int c ) const;
-
+    BlameTreeItem(QTreeWidget*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
+    BlameTreeItem(const svn::AnnotateLine&,bool,BlameDisplay_impl*);
+    BlameTreeItem(QTreeWidget*,BlameTreeItem*,const svn::AnnotateLine&,bool,BlameDisplay_impl*);
+    virtual ~BlameTreeItem(){}
     apr_int64_t lineNumber(){return m_Content.lineNumber();}
     svn_revnum_t rev(){return m_Content.revision();}
-
     void localeChanged()
     {
         m_Content.localeChanged();
@@ -123,97 +126,50 @@ protected:
     LocalizedAnnotatedLine m_Content;
 
     bool m_disp;
-
     void display();
     BlameDisplay_impl*cb;
 };
 
-BlameDisplayItem::BlameDisplayItem(KListView*lv,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
-    : KListViewItem(lv),m_Content(al),m_disp(disp),cb(_c)
+BlameTreeItem::BlameTreeItem(const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
+    : QTreeWidgetItem(TREE_ITEM_TYPE),m_Content(al),m_disp(disp),cb(_c)
 {
     display();
 }
 
-BlameDisplayItem::BlameDisplayItem(KListView*lv,BlameDisplayItem*it,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
-    : KListViewItem(lv,it),m_Content(al),m_disp(disp),cb(_c)
+BlameTreeItem::BlameTreeItem(QTreeWidget*tv,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
+    : QTreeWidgetItem(tv,TREE_ITEM_TYPE),m_Content(al),m_disp(disp),cb(_c)
 {
     display();
 }
 
-#define BORDER 4
-
-int BlameDisplayItem::width (const QFontMetrics & fm, const QListView * lv, int c ) const
+BlameTreeItem::BlameTreeItem(QTreeWidget*tv,BlameTreeItem*it,const svn::AnnotateLine&al,bool disp,BlameDisplay_impl*_c)
+    : QTreeWidgetItem(tv,it,TREE_ITEM_TYPE),m_Content(al),m_disp(disp),cb(_c)
 {
-    if (c == COL_LINE) {
-        return KListViewItem::width(QFontMetrics(KGlobalSettings::fixedFont()),lv,c)+2*BORDER;
-    }
-    return KListViewItem::width(fm,lv,c)+2*BORDER;
+    display();
 }
 
-void BlameDisplayItem::display()
+void BlameTreeItem::display()
 {
+    setTextAlignment(COL_LINENR,Qt::AlignRight);
+    setFont(COL_LINENR,KGlobalSettings::self()->fixedFont());
+    setFont(COL_LINE,KGlobalSettings::self()->fixedFont());
+
     if (m_disp){
+        setTextAlignment(COL_REV,Qt::AlignRight);
+        setFont(COL_REV,KGlobalSettings::self()->fixedFont());
+        setFont(COL_AUT,KGlobalSettings::self()->fixedFont());
+
         setText(COL_REV,QString("%1").arg(m_Content.revision()));
         setText(COL_AUT,m_Content.tAuthor());
         if (m_Content.date().isValid()) {
+            setFont(COL_DATE,KGlobalSettings::self()->fixedFont());
             setText(COL_DATE,KGlobal::locale()->formatDateTime(m_Content.date()));
         }
     }
-
     setText(COL_LINENR,QString("%1").arg(m_Content.lineNumber()+1));
     QString _line = m_Content.tLine();
     _line.replace("\t","    ");
     setText(COL_LINE,QString("%1").arg(_line));
-}
-
-int BlameDisplayItem::compare(QListViewItem *item, int col, bool ascending)const
-{
-    Q_UNUSED(ascending);
-    BlameDisplayItem* k = static_cast<BlameDisplayItem*>(item);
-    if (col == COL_REV) {
-        return k->m_Content.revision()-m_Content.revision();
-    }
-    if (col == COL_AUT) {
-        if (Kdesvnsettings::locale_is_casesensitive()) {
-            return m_Content.tAuthor().localeAwareCompare(k->m_Content.author());
-        }
-        return m_Content.tAuthor().compare(k->m_Content.author());
-    }
-    return k->m_Content.lineNumber()-m_Content.lineNumber();
-}
-
-void BlameDisplayItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
-{
-    if (alignment & (AlignTop || AlignBottom) == 0)
-        alignment |= AlignVCenter;
-
-    /* don't copy string */
-    const QString & str = text(column);;
-    if (column == COL_LINE) {
-        p->setFont(KGlobalSettings::fixedFont());
-    }
-
-    QColorGroup _cg = cg;
-    QColor _bgColor;
-    if (column==COL_LINENR || isSelected()) {
-        _bgColor = KGlobalSettings::highlightColor();
-        p->setPen(KGlobalSettings::highlightedTextColor());
-    } else {
-        if (Kdesvnsettings::self()->colored_blame()) {
-            _bgColor = cb->rev2color(m_Content.revision());
-        } else {
-            _bgColor = listView()->viewport()->colorGroup().base();
-        }
-    }
-
-    p->fillRect(0, 0, width, height(), _bgColor);
-    if (column==COL_AUT) {
-        p->drawLine(width-1,0,width-1,height());
-    }
-
-    if (str.isEmpty())
-        return;
-    p->drawText(BORDER, 0, width - 2*BORDER, height(), alignment, str);
 }
 
 class BlameDisplayData
@@ -238,24 +194,21 @@ class BlameDisplayData
         bool up;
         SimpleLogCb*m_cb;
         QString m_File;
-        KDialogBase*m_dlg;
+        KDialog*m_dlg;
 
         QString reposRoot;
 };
 
-BlameDisplay_impl::BlameDisplay_impl(QWidget*parent,const char*name)
-    : BlameDisplay(parent,name)
+BlameDisplay_impl::BlameDisplay_impl(QWidget*parent)
+    : QWidget(parent),Ui::BlameDisplay()
 {
+    setupUi(this);
+    KAction*ac = new KAction(KIcon("kdesvnlog"),i18n("Log message for revision"),this);
+    connect(ac,SIGNAL(triggered()), this,SLOT(slotShowCurrentCommit()));
+    m_BlameTree->addAction(ac);
     m_Data = new BlameDisplayData();
-    connect(m_BlameList,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
-}
-
-BlameDisplay_impl::BlameDisplay_impl(const QString&what,const svn::AnnotatedFile&blame,QWidget*parent,const char*name)
-    : BlameDisplay(parent,name)
-{
-    m_Data = new BlameDisplayData();
-    connect(m_BlameList,SIGNAL(selectionChanged()),this,SLOT(slotSelectionChanged()));
-    setContent(what,blame);
+    KTreeWidgetSearchLine * searchLine = m_TreeSearch->searchLine();
+    searchLine->addTreeWidget(m_BlameTree);
 }
 
 void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
@@ -266,76 +219,103 @@ void BlameDisplay_impl::setCb(SimpleLogCb*_cb)
 void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&blame)
 {
     m_Data->m_File = what;
-    m_SearchWidget = new KListViewSearchLineWidget(m_BlameList,this);
-    EncodingSelector_impl*m_Ls = new EncodingSelector_impl(Kdesvnsettings::locale_for_blame(),this);
-    connect(m_Ls,SIGNAL(TextCodecChanged(const QString&)),
+    connect(m_encodingSel,SIGNAL(TextCodecChanged(const QString&)),
             this,SLOT(slotTextCodecChanged(const QString&)));
 
-    BlameDisplayLayout->remove(m_BlameList);
-    BlameDisplayLayout->addWidget(m_Ls);
-    BlameDisplayLayout->addWidget(m_SearchWidget);
-    BlameDisplayLayout->addWidget(m_BlameList);
-
-    m_BlameList->setColumnAlignment(COL_REV,Qt::AlignRight);
-    m_BlameList->setColumnAlignment(COL_LINENR,Qt::AlignRight);
-
-    m_BlameList->clear();
     if (m_Data->m_dlg) {
-        m_Data->m_dlg->enableButton(KDialogBase::User2,false);
+        m_Data->m_dlg->enableButton(KDialog::User2,false);
     }
     svn::AnnotatedFile::const_iterator bit;
-    m_BlameList->setSorting(COL_LINENR,false);
+    //m_BlameList->setSorting(COL_LINENR,false);
     m_Data->max = -1;
     svn_revnum_t lastRev(-1);
+    QColor a(160,160,160);
+    int offset = 10;
+    int r=0; int g=0;int b=0;
+    uint colinc=0;
+    QColor _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+
+    QTime t,s;
+    t.start();
+    QList<QTreeWidgetItem*> _list;
+    QBrush _b,_bt,_bb;
+
+    bool _b_init=false,_bt_init=false;
+
+
     for (bit=blame.begin();bit!=blame.end();++bit) {
         bool disp = (*bit).revision()!=lastRev || bit==blame.begin() ;
 
         if ((*bit).revision()>m_Data->max) {m_Data->max=(*bit).revision();++(m_Data->rev_count);}
         if ((*bit).revision()<m_Data->min) m_Data->min=(*bit).revision();
-        new BlameDisplayItem(m_BlameList,(*bit),disp,this);
+        s.start();
+        BlameTreeItem*item = new BlameTreeItem((*bit),disp,this);
+        _list.append(item);
+
         if (disp) {
             lastRev = (*bit).revision();
         }
-        if (m_Data->m_shadingMap.find((*bit).revision())==m_Data->m_shadingMap.end()) {
+        if (Kdesvnsettings::self()->colored_blame()) {
+            if (m_Data->m_shadingMap.find((*bit).revision())==m_Data->m_shadingMap.end()) {
+                m_Data->m_shadingMap[(*bit).revision()]=QColor();
+                a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
+                m_Data->m_shadingMap[(*bit).revision()]=a;
+                if ( a.red()>245||a.green()>245||a.blue()>245 ) {
+                    if (colinc==0) {
+                        ++colinc;
+                    } else if (r>=50||g>=50||b>=50) {
+                        if (++colinc>6) {
+                            colinc = 0;
+                            r=g=b=0;
+                        } else {
+                            r=g=b=-10;
+                        }
+                    }
+                    if (colinc & 0x1) {
+                        r+=10;
+                    }
+                    if (colinc & 0x2) {
+                        g+=10;
+                    }
+                    if (colinc & 0x4) {
+                        b+=10;
+                    }
+                    a.setRgb(160+r,160+g,160+b);
+                }
+            }
+            if (!_b_init) {
+                _b_init= true;
+                _b = item->foreground(COL_LINENR);
+                _b.setColor(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
+                _bb = item->background(COL_LINENR);
+                _b.setStyle(Qt::SolidPattern);
+                _bb.setStyle(Qt::SolidPattern);
+                _bb.setColor(KColorScheme(QPalette::Active, KColorScheme::Selection).background().color());
+            }
+            item->setForeground(COL_LINENR,_b);
+            item->setBackground(COL_LINENR,_bb);
+
+            if(!_bt_init) {
+                _bt_init = true;
+                _bt = item->background(COL_REV);
+                _bt.setStyle(Qt::SolidPattern);
+            }
+            _bt.setColor(m_Data->m_shadingMap[(*bit).revision()]);
+            item->setBackground(COL_REV,_bt);
+            item->setBackground(COL_DATE,_bt);
+            item->setBackground(COL_AUT,_bt);
+            item->setBackground(COL_LINE,_bt);
+        } else {
             m_Data->m_shadingMap[(*bit).revision()]=QColor();
         }
     }
-    if (Kdesvnsettings::self()->colored_blame()) {
-        QColor a(160,160,160);
-        int offset = 10;
-        int r=0; int g=0;int b=0;
-        uint colinc=0;
-
-        for (svn_revnum_t i = m_Data->min; i<= m_Data->max;++i) {
-            if (m_Data->m_shadingMap.find(i)==m_Data->m_shadingMap.end()) {
-                continue;
-            }
-            a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
-            m_Data->m_shadingMap[i]=a;
-            if ( a.red()>245||a.green()>245||a.blue()>245 ) {
-                if (colinc==0) {
-                    ++colinc;
-                } else if (r>=50||g>=50||b>=50) {
-                    if (++colinc>6) {
-                        colinc = 0;
-                        r=g=b=0;
-                    } else {
-                        r=g=b=-10;
-                    }
-                }
-                if (colinc & 0x1) {
-                    r+=10;
-                }
-                if (colinc & 0x2) {
-                    g+=10;
-                }
-                if (colinc & 0x4) {
-                    b+=10;
-                }
-                a.setRgb(160+r,160+g,160+b);
-            }
-        }
-    }
+    m_BlameTree->addTopLevelItems(_list);
+    qDebug("Time elapsed: %d ms", t.elapsed());
+    m_BlameTree->resizeColumnToContents(COL_REV);
+    m_BlameTree->resizeColumnToContents(COL_DATE);
+    m_BlameTree->resizeColumnToContents(COL_AUT);
+    m_BlameTree->resizeColumnToContents(COL_LINENR);
+    m_BlameTree->resizeColumnToContents(COL_LINE);
 }
 
 const QColor BlameDisplay_impl::rev2color(svn_revnum_t r )const
@@ -344,7 +324,7 @@ const QColor BlameDisplay_impl::rev2color(svn_revnum_t r )const
     {
         return m_Data->m_shadingMap[r];
     } else {
-        return m_BlameList->viewport()->colorGroup().base();
+        return m_BlameTree->viewport()->palette().base().color();
     }
 }
 
@@ -357,47 +337,27 @@ void BlameDisplay_impl::slotGoLine()
 {
     bool ok = true;
     int line = KInputDialog::getInteger(i18n("Show line"),i18n("Show line number"),
-                                        1,1,m_BlameList->childCount(),1,&ok,this);
+                                        1,1,m_BlameTree->topLevelItemCount(),1,&ok,this);
     if (!ok) {
         return;
     }
-    QListViewItem*item = m_BlameList->firstChild();
+    QTreeWidgetItemIterator it(m_BlameTree);
     --line;
-    while (item) {
-        if (item->rtti()==1000) {
-            BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
-            if (bit->lineNumber()==line) {
-                m_BlameList->ensureItemVisible(bit);
-                m_BlameList->setSelected(bit,true);
-                return;
-            }
+    while(*it) {
+        BlameTreeItem*_it = static_cast<BlameTreeItem*>((*it));
+        if (_it->lineNumber()==line) {
+            m_BlameTree->scrollToItem(*it);
+            m_BlameTree->setCurrentItem(*it);
+            return;
         }
-        item = item->nextSibling();
+        ++it;
     }
 }
 
-void BlameDisplay_impl::slotContextMenuRequested(KListView*,QListViewItem*item, const QPoint&pos)
-{
-    if (item==0||item->rtti()!=1000) return;
-    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
-    QPopupMenu popup;
-    popup.insertItem(i18n("Log message for revision"),101);
-    int r = popup.exec(pos);
-
-    switch (r)
-    {
-        case 101:
-            showCommit(bit);
-            break;
-        default:
-            break;
-    }
-}
-
-void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
+void BlameDisplay_impl::showCommit(BlameTreeItem*bit)
 {
     if (!bit) return;
-    WidgetBlockStack a(m_BlameList);
+    WidgetBlockStack a(m_BlameTree);
     QString text;
     if (m_Data->m_logCache.find(bit->rev())!=m_Data->m_logCache.end()) {
         text = m_Data->m_logCache[bit->rev()].message;
@@ -409,66 +369,70 @@ void BlameDisplay_impl::showCommit(BlameDisplayItem*bit)
             text = m_Data->m_logCache[bit->rev()].message;
         }
     }
-    KDialogBase* dlg = new KDialogBase(
-            KApplication::activeModalWidget(),
-    "simplelog",true,QString(i18n("Logmessage for revision %1").arg(bit->rev())),
-    KDialogBase::Close);
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
-    KTextBrowser*ptr = new KTextBrowser(Dialog1Layout);
+    KDialog* dlg = new KDialog(KApplication::activeModalWidget());
+    dlg->setButtons(KDialog::Close);
+    dlg->setCaption(i18n("Logmessage for revision %1",bit->rev()));
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
+    KTextEdit*ptr = new KTextEdit(Dialog1Layout);
     ptr->setFont(KGlobalSettings::fixedFont());
-    ptr->setWordWrap(QTextEdit::NoWrap);
-    ptr->setText(text);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display"));
+    ptr->setReadOnly(true);
+    ptr->setWordWrapMode(QTextOption::NoWrap);
+    ptr->setPlainText(text);
+    KConfigGroup k(Kdesvnsettings::self()->config(),"simplelog_display");
+    dlg->restoreDialogSize(k);
     dlg->exec();
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"simplelog_display",false);
+    dlg->saveDialogSize(k);
 }
 
 void BlameDisplay_impl::slotShowCurrentCommit()
 {
-    QListViewItem*item = m_BlameList->selectedItem();
-    if (item==0||item->rtti()!=1000) return;
-    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+    QTreeWidgetItem*item = m_BlameTree->currentItem();
+    if (item==0||item->type()!=TREE_ITEM_TYPE) return;
+    BlameTreeItem*bit = static_cast<BlameTreeItem*>(item);
     showCommit(bit);
 }
 
-void BlameDisplay_impl::slotSelectionChanged()
+void BlameDisplay_impl::slotCurrentItemChanged(QTreeWidgetItem*item,QTreeWidgetItem*)
 {
     if (!m_Data->m_dlg) return;
-    QListViewItem*item = m_BlameList->selectedItem();
-    if (item==0||item->rtti()!=1000) {
-        m_Data->m_dlg->enableButton(KDialogBase::User2,false);
+    if (item==0||item->type()!=TREE_ITEM_TYPE) {
+        m_Data->m_dlg->enableButton(KDialog::User2,false);
     } else {
-        m_Data->m_dlg->enableButton(KDialogBase::User2,true);
+        m_Data->m_dlg->enableButton(KDialog::User2,true);
     }
 }
 
-void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const svn::AnnotatedFile&blame,QWidget*,const char*name)
+void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const svn::AnnotatedFile&blame,QWidget*)
 {
-    int buttons = KDialogBase::Close|KDialogBase::User1|KDialogBase::User2;
-    KDialogBase * dlg = new KDialogBase(
-            KApplication::activeModalWidget(),
-            name,true,QString(i18n("Blame %1")).arg(item),buttons,KDialogBase::Close,false,
-            KGuiItem(i18n("Goto line")),KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
+    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+    dlg->setButtons(KDialog::Close|KDialog::User1|KDialog::User2);
+    dlg->setButtonGuiItem(KDialog::User1,KGuiItem(i18n("Goto line")));
+    dlg->setButtonGuiItem(KDialog::User2,KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
+    QWidget* Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
     BlameDisplay_impl*ptr = new BlameDisplay_impl(Dialog1Layout);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg"));
+
+    KConfigGroup k(Kdesvnsettings::self()->config(),"blame_dlg");
+    dlg->restoreDialogSize(k);
+
     ptr->setContent(item,blame);
     ptr->setCb(_cb);
     ptr->m_Data->m_dlg = dlg;
-    dlg->enableButton(KDialogBase::User2,false);
+    dlg->enableButton(KDialog::User2,false);
     connect(dlg,SIGNAL(user1Clicked()),ptr,SLOT(slotGoLine()));
     connect(dlg,SIGNAL(user2Clicked()),ptr,SLOT(slotShowCurrentCommit()));
     Dialog1Layout->adjustSize();
     dlg->exec();
 
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"blame_dlg",false);
+    dlg->saveDialogSize(k);
 }
 
-void BlameDisplay_impl::slotItemDoubleClicked(QListViewItem*item)
+void BlameDisplay_impl::slotItemDoubleClicked (QTreeWidgetItem*item,int)
 {
-    if (item==0||item->rtti()!=1000) return;
-    BlameDisplayItem*bit = static_cast<BlameDisplayItem*>(item);
+    if (item==0||item->type()!=TREE_ITEM_TYPE) return;
+    BlameTreeItem*bit = static_cast<BlameTreeItem*>(item);
     showCommit(bit);
 }
 
@@ -478,9 +442,11 @@ void BlameDisplay_impl::slotTextCodecChanged(const QString&what)
         Kdesvnsettings::setLocale_for_blame(what);
         Kdesvnsettings::self()->writeConfig();
         LocalizedAnnotatedLine::reset_codec();
-        QListViewItemIterator it(m_BlameList);
-        while ( it.current() ) {
-            BlameDisplayItem*_it = static_cast<BlameDisplayItem*>(it.current());
+
+        QTreeWidgetItemIterator it(m_BlameTree);
+
+        while(*it) {
+            BlameTreeItem*_it = static_cast<BlameTreeItem*>((*it));
             _it->localeChanged();
             ++it;
         }

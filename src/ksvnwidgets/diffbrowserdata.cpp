@@ -27,9 +27,6 @@
 {
     m_Syntax=0;
     srchdialog=0;
-    last_search = NONE;
-    last_finished_search = NONE;
-    cs = false;
 }
 
 

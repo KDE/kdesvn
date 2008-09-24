@@ -20,13 +20,16 @@
 #ifndef COMMANDLINE_H
 #define COMMANDLINE_H
 
+#include <QObject>
+
 class KCmdLineArgs;
 class CommandLineData;
 
 /**
 @author Rajko Albrecht
 */
-class CommandLine{
+class CommandLine:public QObject{
+    Q_OBJECT
 public:
     CommandLine(KCmdLineArgs*);
     virtual ~CommandLine();

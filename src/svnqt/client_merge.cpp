@@ -114,7 +114,7 @@ void Client_impl::merge (const Path & path1, const Revision & revision1,
       }
 #else
       Q_UNUSED(record_only);
-      for (unsigned long i=0;i<ranges.count();++i) {
+      for (RevisionRanges::size_type i=0;i<ranges.count();++i) {
           merge_peg(src,ranges[i],peg,targetWc,depth,notice_ancestry,dry_run,force,merge_options);
       }
 #endif

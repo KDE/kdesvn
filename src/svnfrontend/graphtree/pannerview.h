@@ -20,34 +20,41 @@
 #ifndef PANNERVIEW_H
 #define PANNERVIEW_H
 
-#include <qcanvas.h>
+#include <QGraphicsView>
+#include <QMouseEvent>
+#include <QPointF>
 
+
+class GraphPanMark;
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class PannerView : public QCanvasView
+class PannerView : public QGraphicsView
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     PannerView(QWidget* parent=0, const char* name=0);
     virtual ~PannerView();
 
-    void setZoomRect(const QRect& theValue);
+    void setZoomRect(const QRectF& theValue);
     void updateCurrentRect();
+    virtual void setScene(QGraphicsScene*sc);
 
 signals:
-  void zoomRectMoved(int dx, int dy);
-  void zoomRectMoveFinished();
+    void zoomRectMoved(qreal dx, qreal dy);
+    void zoomRectMoveFinished();
 
 protected:
-    virtual void drawContents(QPainter* p,  int clipx, int clipy, int clipw, int cliph);
-    virtual void contentsMouseMoveEvent(QMouseEvent* e);
-    virtual void contentsMousePressEvent(QMouseEvent* e);
-    virtual void contentsMouseReleaseEvent(QMouseEvent*);
+    virtual void mousePressEvent(QMouseEvent*);
+    virtual void mouseMoveEvent(QMouseEvent*);
+    virtual void mouseReleaseEvent(QMouseEvent*);
+
 protected:
-    QRect m_ZoomRect;
+    QRectF m_ZoomRect;
     bool m_Moving;
     QPoint m_LastPos;
+
+    GraphPanMark*m_Mark;
 };
 
 #endif

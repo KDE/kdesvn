@@ -24,7 +24,7 @@
 #include <qstring.h>
 
 class KCmdLineArgs;
-class KURL;
+class KUrl;
 class pCPart;
 
 namespace svn {
@@ -38,9 +38,9 @@ class CommandExec : public QObject
 {
 Q_OBJECT
 public:
-    CommandExec(QObject*parent,const char *name,KCmdLineArgs *args);
+    CommandExec(QObject*parent);
     virtual ~CommandExec();
-    virtual int exec();
+    virtual int exec(KCmdLineArgs*args);
 
 protected slots:
     virtual void clientException(const QString&);

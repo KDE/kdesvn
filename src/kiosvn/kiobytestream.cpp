@@ -42,15 +42,15 @@ long KioByteStream::write(const char* data, const unsigned long max)
     if (m_Cb) {
         if (!m_mimeSend) {
             m_mimeSend = true;
-            array.setRawData(data, max);
-            KMimeMagicResult * result = KMimeMagic::self()->findBufferFileType(array,m_Filename);
+            array = QByteArray::fromRawData(data, max);
+            KMimeType::Ptr result = KMimeType::findByNameAndContent(m_Filename,array);
             m_Cb->streamSendMime(result);
-            array.resetRawData(data, max);
+            array.clear();
             m_Cb->streamTotalSizeNull();
         }
-        array.setRawData(data, max);
+        array = QByteArray::fromRawData(data, max);
         m_Cb->streamPushData(array);
-        array.resetRawData(data, max);
+        array.clear();
 
         m_Written+=max;
         if (m_MessageTick.elapsed() >=100 || forceInfo) {

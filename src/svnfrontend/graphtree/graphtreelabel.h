@@ -21,19 +21,22 @@
 #define GRAPHTREELABEL_H
 
 #include "graphtree/drawparams.h"
-#include <qcanvas.h>
+
+#include <QGraphicsRectItem>
+#include <QPixmap>
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class GraphTreeLabel : public QCanvasRectangle,StoredDrawParams
+class GraphTreeLabel : public QGraphicsRectItem,StoredDrawParams
 {
 public:
-    GraphTreeLabel(const QString&,const QString&,const QRect&r,QCanvas*c);
+    GraphTreeLabel(const QString&,const QString&,const QRectF&r,QGraphicsItem*p=0);
     virtual ~GraphTreeLabel();
 
-    virtual int rtti()const;
-    virtual void drawShape(QPainter& p);
+    virtual int type()const;
+    //virtual void drawShape(QPainter& p);
+    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
     void setBgColor(const QColor&);
 
@@ -49,39 +52,43 @@ protected:
 
 class GraphEdge;
 
-class GraphEdgeArrow:public QCanvasPolygon
+class GraphEdgeArrow:public QGraphicsPolygonItem
 {
 public:
-    GraphEdgeArrow(GraphEdge*,QCanvas*);
+    GraphEdgeArrow(GraphEdge*,QGraphicsItem*p=0);
     GraphEdge*edge();
-    virtual void drawShape(QPainter&);
-    virtual int rtti()const;
+    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+    virtual int type()const;
 
 private:
     GraphEdge*_edge;
 };
 
 /* line */
-class GraphEdge:public QCanvasSpline
+class GraphEdge:public QGraphicsPathItem
 {
 public:
-    GraphEdge(QCanvas*);
+    GraphEdge(QGraphicsItem*p=0);
     virtual ~GraphEdge();
 
-    virtual void drawShape(QPainter&);
-    QPointArray areaPoints() const;
-    virtual int rtti()const;
+    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+    const QPolygonF& controlPoints()const;
+    void setControlPoints(const QPolygonF& a);
+    virtual int type()const;
+
+private:
+    QPolygonF _points;
 };
 
-class GraphMark:public QCanvasRectangle
+class GraphMark:public QGraphicsRectItem
 {
 public:
-    GraphMark(GraphTreeLabel*,QCanvas*);
+    GraphMark(GraphTreeLabel*,QGraphicsItem*p=0);
     virtual ~GraphMark();
-    virtual int rtti()const;
+    virtual int type()const;
     virtual bool hit(const QPoint&)const;
+    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
-    virtual void drawShape(QPainter&);
 private:
     static QPixmap*_p;
 };

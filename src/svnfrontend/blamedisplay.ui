@@ -1,108 +1,126 @@
-<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>BlameDisplay</class>
-<widget class="QWidget">
-    <property name="name">
-        <cstring>BlameDisplay</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>341</width>
-            <height>243</height>
-        </rect>
-    </property>
-    <vbox>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="KListView">
-            <column>
-                <property name="text">
-                    <string>Line</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Revision</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Date</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Author</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Content</string>
-                </property>
-                <property name="clickable">
-                    <bool>false</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <property name="name">
-                <cstring>m_BlameList</cstring>
-            </property>
-            <property name="allColumnsShowFocus">
-                <bool>true</bool>
-            </property>
-        </widget>
-    </vbox>
-</widget>
-<customwidgets>
-</customwidgets>
-<connections>
-    <connection>
-        <sender>m_BlameList</sender>
-        <signal>contextMenu(KListView*,QListViewItem*,const QPoint&amp;)</signal>
-        <receiver>BlameDisplay</receiver>
-        <slot>slotContextMenuRequested(KListView*,QListViewItem*,const QPoint&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>m_BlameList</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
-        <receiver>BlameDisplay</receiver>
-        <slot>slotItemDoubleClicked(QListViewItem*)</slot>
-    </connection>
-</connections>
-<slots>
-    <slot access="protected">slotContextMenuRequested(KListView*,QListViewItem*, const QPoint&amp;)</slot>
-    <slot access="protected">slotItemDoubleClicked(QListViewItem*)</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>klistview.h</includehint>
-</includehints>
-</UI>
+<ui version="4.0" >
+ <class>BlameDisplay</class>
+ <widget class="QWidget" name="BlameDisplay" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>375</width>
+    <height>261</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="EncodingSelector_impl" native="1" name="m_encodingSel" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="KTreeWidgetSearchLineWidget" name="m_TreeSearch" />
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="m_BlameTree" >
+     <property name="contextMenuPolicy" >
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
+     <property name="allColumnsShowFocus" >
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text" >
+       <string>Line</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Revision</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Author</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Content</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>KTreeWidgetSearchLineWidget</class>
+   <extends>QWidget</extends>
+   <header>ktreewidgetsearchline.h</header>
+  </customwidget>
+  <customwidget>
+   <class>EncodingSelector_impl</class>
+   <extends>QWidget</extends>
+   <header>src/ksvnwidgets/encodingselector_impl.h</header>
+   <container>1</container>
+   <slots>
+    <slot>itemActivated(int)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <includes>
+  <include location="local" >k3listview.h</include>
+ </includes>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_BlameTree</sender>
+   <signal>itemDoubleClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>BlameDisplay</receiver>
+   <slot>slotItemDoubleClicked(QTreeWidgetItem*,int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>187</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>187</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_BlameTree</sender>
+   <signal>currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</signal>
+   <receiver>BlameDisplay</receiver>
+   <slot>slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>187</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>187</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slotItemDoubleClicked(QTreeWidgetItem*,int)</slot>
+  <slot>slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
+ </slots>
+</ui>

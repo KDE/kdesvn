@@ -1,55 +1,35 @@
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+
 SET(kded_kdesvnd_src
-    kdesvnd_dcop.cpp
+    kdesvnd.cpp
     ${hdr}
    )
 
-KDE3_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
+qt4_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
-KDE3_ADD_DCOP_SKELS(kded_kdesvnd_src
-    kdesvnd_dcop.h)
+KDE4_ADD_PLUGIN(kded_kdesvnd ${kded_kdesvnd_src})
 
-KDE3_ADD_KPART(kded_kdesvnd ${kded_kdesvnd_src})
+
+KDE_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
 
 TARGET_LINK_LIBRARIES(kded_kdesvnd
-    svnqt
+    svnqt4
     ksvnwidgets
     kdesvnhelpers
     kdesvncfgreader
-    ${QT_AND_KDECORE_LIBS} ${KDE3_KIO_LIBRARY} ${KDE3_DCOP_LIBRARY}
-    ${KDE3_UI_LIBRARY} ${KDE3_WALLET_LIBRARY} 
-    ${KDE3_KINIT_KDED_LIBRARY})
-
-SET_TARGET_PROPERTIES(kded_kdesvnd
-    PROPERTIES
-    LINK_FLAGS "${LINK_NO_UNDEFINED} ${_BASE_LDADD} ${APR_EXTRA_LIBFLAGS} ${APU_EXTRA_LIBFLAGS} -avoid-version -module")
+    ${KDE4_KIO_LIBS}
+    ${QT_QT3SUPPORT_LIBRARY}
+)
 
 INSTALL(TARGETS kded_kdesvnd
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
-KDESVN_GENERATE_LIBTOOL_FILE(kded_kdesvnd)
-
-IF(KDE3_KDECONFIG_EXECUTABLE)
-    EXECUTE_PROCESS(COMMAND ${KDE3_KDECONFIG_EXECUTABLE} "--version" OUTPUT_VARIABLE output)
-    STRING(REGEX MATCH "KDE: [0-9]+\\.[0-9]+\\.[0-9]+" KDEVERSION "${output}")
-    STRING(REGEX REPLACE "^KDE: " "" KDEVERSION "${KDEVERSION}")
-ENDIF(KDE3_KDECONFIG_EXECUTABLE)
-SET(KDE_MIN_VERSION "3.5.0")
-MACRO_ENSURE_VERSION(${KDE_MIN_VERSION} ${KDEVERSION} VERSION_OK)
-
-IF(VERSION_OK)
-    SET(ACTION_MENU "X-KDE-GetActionMenu=kded kdesvnd getActionMenu(KURL::List)")
-ELSE(VERSION_OK)
-    SET(ACTION_MENU "Actions=Update;Commit;Add;Delete;Blame;Log;Diff;Checkout;Export;Info;Addnew;Switch;Revert;Rename;Tree")
-ENDIF(VERSION_OK)
-
-CONFIGURE_FILE(kdesvn_subversion.desktop.in
-    ${CMAKE_CURRENT_BINARY_DIR}/kdesvn_subversion.desktop @ONLY)
-
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdesvn_subversion.desktop
-    DESTINATION ${DATA_INSTALL_DIR}/konqueror/servicemenus)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
+    DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/kded)
+
+install( FILES org.kde.kdesvnd.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )

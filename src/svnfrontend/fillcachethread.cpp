@@ -33,6 +33,7 @@
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
     : QThread(),mutex(),m_SvnContextListener(0)
 {
+    setObjectName("fillcachethread");
     m_Parent = _parent;
     m_CurrentContext = new svn::Context();
 
@@ -72,14 +73,14 @@ void FillCacheThread::run()
     try {
         svn::Revision latestCache = rl.latestCachedRev();
         svn::Revision Head = rl.latestHeadRev();
-        Q_LLONG i = latestCache.revnum();
+        qlonglong i = latestCache.revnum();
         if (i<0) {
             i=0;
         }
-        Q_LLONG j = Head.revnum();
+        qlonglong j = Head.revnum();
 
-        Q_LLONG _max=j-i;
-        Q_LLONG _cur=0;
+        qlonglong _max=j-i;
+        qlonglong _cur=0;
 
         FillCacheStatusEvent*fev;
         if (k) {
@@ -110,13 +111,13 @@ void FillCacheThread::run()
                 rl.fillCache(Head.revnum());
             }
             i=Head.revnum();
-            m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1").arg(i));
+            m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1",i));
         }
     } catch (const svn::Exception&e) {
         m_SvnContextListener->contextNotify(e.msg());
     }
     if (k && !breakit) {
-        QCustomEvent*ev = new QCustomEvent(EVENT_LOGCACHE_FINISHED);
+        DataEvent*ev = new DataEvent(EVENT_LOGCACHE_FINISHED);
         ev->setData((void*)this);
         k->postEvent(m_Parent,ev);
     }

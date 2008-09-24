@@ -27,7 +27,6 @@
 
 #include <qvariant.h>
 #include <qlabel.h>
-#include <qheader.h>
 #include <kpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
@@ -45,34 +44,36 @@
  *  TRUE to construct a modal dialog.
  */
 PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
-    :
-    KDialogBase(parent,name,modal,i18n("Modify properties"),Ok|Cancel/*|Help|User1|User2*/, Ok,
-      true/*, KStdGuiItem::add(),KStdGuiItem::remove() */),
+    : KDialog(parent),
       m_Item(which),m_changed(false),
       m_Client(aClient),m_Rev(aRev)
 {
-    if ( !name )
-    setName( "PropertiesDlg" );
-    QWidget * m = makeMainWidget();
-    PropertiesDlgLayout = new QHBoxLayout(m, marginHint(), spacingHint(), "PropertiesDlgLayout");
+    setModal(modal);
+    setButtons(KDialog::Ok|KDialog::Cancel);
+    setCaption(i18n("Modify properties"));
+    if ( !name ) {
+        setObjectName( "PropertiesDlg" );
+    } else {
+        setObjectName(name);
+    }
+    QWidget * m = new QWidget(this);
+    setMainWidget(m);
+    PropertiesDlgLayout = new QHBoxLayout(m);
 
     m_PropertiesListview = new Propertylist(m, "m_PropertiesListview" );
     m_PropertiesListview->setAllColumnsShowFocus( TRUE );
-    m_PropertiesListview->setShowSortIndicator( TRUE );
     m_PropertiesListview->setCommitchanges(false);
-    m_PropertiesListview->setItemsRenameable(true);
-    m_PropertiesListview->setRenameable(0,true);
-    m_PropertiesListview->setRenameable(1,true);
-
-    m_PropertiesListview->setFullWidth( TRUE );
     PropertiesDlgLayout->addWidget( m_PropertiesListview);
 
-    m_rightLayout = new QVBoxLayout(0, marginHint(), spacingHint(), "m_rightLayout");
-    m_AddButton = new KPushButton(m, "m_AddButton" );
-    m_rightLayout->addWidget( m_AddButton );
-    m_ModifyButton = new KPushButton(m, "m_ModifyButton" );
-    m_rightLayout->addWidget( m_ModifyButton );
-    m_DeleteButton = new KPushButton(m, "m_DeleteButton" );
+    m_rightLayout = new QVBoxLayout();
+    m_AddButton = new KPushButton(m);
+    m_AddButton->setObjectName("m_AddButton");
+    m_rightLayout->addWidget(m_AddButton);
+    m_ModifyButton = new KPushButton(m);
+    m_ModifyButton->setObjectName("m_ModifyButton" );
+    m_rightLayout->addWidget(m_ModifyButton);
+    m_DeleteButton = new KPushButton(m);
+    m_DeleteButton->setObjectName("m_DeleteButton");
     m_rightLayout->addWidget( m_DeleteButton );
     m_rightSpacer = new QSpacerItem( 20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_rightLayout->addItem(m_rightSpacer);
@@ -82,16 +83,16 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
 
     //PropertiesDlgLayout->addLayout(midLayout);
     languageChange();
-    clearWState( WState_Polished );
 
     // signals and slots connections
     connect( m_AddButton, SIGNAL(clicked()), this, SLOT(slotAdd()));
     connect( m_ModifyButton, SIGNAL(clicked()), this, SLOT(slotModify()));
     connect( m_DeleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
     connect(this,SIGNAL(helpClicked()),SLOT(slotHelp()));
-    connect(m_PropertiesListview,SIGNAL(selectionChanged(QListViewItem*)),this,SLOT(slotSelectionChanged(QListViewItem*)));
-//    connect(m_PropertiesListview,SIGNAL(executed(QListViewItem*)),this,SLOT(slotSelectionExecuted(QListViewItem*)));
-
+    connect(m_PropertiesListview,
+        SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+        this,
+        SLOT(slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
     if (!m_Client) {
         m_PropertiesListview->setEnabled(false);
     }
@@ -107,7 +108,6 @@ bool PropertiesDlg::hasChanged()const
  */
 PropertiesDlg::~PropertiesDlg()
 {
-    // no need to delete child widgets, Qt does it all for us
 }
 
 /*
@@ -117,7 +117,7 @@ PropertiesDlg::~PropertiesDlg()
 void PropertiesDlg::languageChange()
 {
     setCaption( i18n("View and modify properties") );
-    QToolTip::add(m_PropertiesListview, i18n( "List of properties set" ));
+    m_PropertiesListview->setToolTip(i18n( "List of properties set"));
     m_AddButton->setText(i18n("Add property"));
     m_ModifyButton->setText(i18n("Modify property"));
     m_DeleteButton->setText(i18n("Delete property"));
@@ -128,11 +128,11 @@ void PropertiesDlg::slotHelp()
     qWarning( "PropertiesDlg::slotHelp(): Not implemented yet" );
 }
 
-void PropertiesDlg::slotSelectionChanged(QListViewItem*item)
+void PropertiesDlg::slotCurrentItemChanged(QTreeWidgetItem*item,QTreeWidgetItem*)
 {
     m_DeleteButton->setEnabled(item);
     m_ModifyButton->setEnabled(item);
-    if (!item || item->rtti()!=PropertyListViewItem::_RTTI_) return;
+    if (!item || item->type()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (item);
     if (PropertyListViewItem::protected_Property(ki->currentName())) {
         m_DeleteButton->setEnabled(false);
@@ -167,7 +167,7 @@ void PropertiesDlg::initItem()
         emit clientException(e.msg());
         return;
     }
-    m_PropertiesListview->displayList(propList,true,m_Item->fullName());
+    m_PropertiesListview->displayList(propList,true,m_Item->isDir(),m_Item->fullName());
     initDone = true;
 }
 
@@ -176,28 +176,27 @@ void PropertiesDlg::initItem()
  */
 int PropertiesDlg::exec()
 {
-    return KDialogBase::exec();
+    return KDialog::exec();
 }
 
-void PropertiesDlg::polish()
+bool PropertiesDlg::event (QEvent * event)
 {
-    KDialogBase::polish();
-    initItem();
+    bool res = KDialog::event(event);
+    if (event->type()==QEvent::Polish) {
+        initItem();
+    }
+    return res;
 }
 
 /*!
-    \fn PropertiesDlg::slotSelectionExecuted(QListViewItem*)
+    \fn PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem*)
  */
-void PropertiesDlg::slotSelectionExecuted(QListViewItem*)
+void PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem*)
 {
 }
 
-/*!
-    \fn PropertiesDlg::slotAdd()
- */
 void PropertiesDlg::slotAdd()
 {
-    /// @TODO Use a object variable to store a reference to dlg for further reuse
     EditProperty_impl dlg(this);
     dlg.setDir(m_Item->isDir());
     if (dlg.exec()==QDialog::Accepted) {
@@ -210,7 +209,6 @@ void PropertiesDlg::slotAdd()
             return;
         }
         PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview);
-        ki->setMultiLinesEnabled(true);
         ki->setText(0,dlg.propName());
         ki->setText(1,dlg.propValue());
         ki->checkName();
@@ -223,7 +221,7 @@ void PropertiesDlg::slotAdd()
  */
 void PropertiesDlg::slotDelete()
 {
-    QListViewItem*qi = m_PropertiesListview->selectedItem();
+    QTreeWidgetItem*qi = m_PropertiesListview->currentItem();
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
     if (PropertyListViewItem::protected_Property(ki->currentName())) return;
@@ -232,7 +230,7 @@ void PropertiesDlg::slotDelete()
     } else {
         ki->deleteIt();
     }
-    slotSelectionChanged(qi);
+    m_PropertiesListview->setCurrentItem(qi);
 }
 
 
@@ -241,7 +239,7 @@ void PropertiesDlg::slotDelete()
  */
 void PropertiesDlg::slotModify()
 {
-    QListViewItem*qi = m_PropertiesListview->selectedItem();
+    QTreeWidgetItem*qi = m_PropertiesListview->currentItem();
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
     if (PropertyListViewItem::protected_Property(ki->currentName())) return;
@@ -266,14 +264,14 @@ void PropertiesDlg::slotModify()
     }
 }
 
-void PropertiesDlg::changedItems(svn::PropertiesMap&toSet,QValueList<QString>&toDelete)
+void PropertiesDlg::changedItems(svn::PropertiesMap&toSet,QStringList&toDelete)
 {
     toSet.clear();
     toDelete.clear();
-    QListViewItemIterator iter( m_PropertiesListview );
+    QTreeWidgetItemIterator iter( m_PropertiesListview );
     PropertyListViewItem*ki;
-    while ( iter.current() ) {
-        ki = static_cast<PropertyListViewItem*> (iter.current());
+    while ( *iter ) {
+        ki = static_cast<PropertyListViewItem*> ( (*iter));
         ++iter;
         if (PropertyListViewItem::protected_Property(ki->currentName())||
             PropertyListViewItem::protected_Property(ki->startName())) {

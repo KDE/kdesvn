@@ -25,12 +25,8 @@
 #include "svnqt/svnqttypes.hpp"
 
 #include <qglobal.h>
-#if QT_VERSION < 0x040000
-#include <qstringlist.h>
-#else
 #include <QtCore>
 #include <QStringList>
-#endif
 
 // apr api
 #include "apr_tables.h"

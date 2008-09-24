@@ -1,13 +1,12 @@
 PROJECT(kdesvn)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
-SET(BASE_VERSION 1.0.2)
+SET(BASE_VERSION 1.2.0.kde4)
 
 OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
-OPTION(DAILY_BUILD "Generate version number for a daily build (default off)")
 
 SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 IF (TESTINGBUILD)
-   ADD_DEFINITIONS("-DTESTING_RC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\"")
+    ADD_DEFINITIONS("-DTESTING_RC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\"")
    ADD_DEFINITIONS("-DFORCE_ASKPASS=\"\\\"\${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\\\"\"")
 ENDIF (TESTINGBUILD)
 
@@ -17,20 +16,54 @@ ENDIF(BUILD_TESTS)
 
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
 
-INCLUDE(FindKdeLibs)
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde3)
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
+find_package(KDE4 REQUIRED)
+include (KDE4Defaults)
+include (MacroLibrary)
+
+MACRO(KDE_AUTOMOC)
+ QT4_AUTOMOC(${ARGV})
+ENDMACRO(KDE_AUTOMOC)
+
+MACRO(KDE_ADD_UI_FILES)
+ KDE4_ADD_UI_FILES(${ARGV})
+ENDMACRO(KDE_ADD_UI_FILES)
+
+MACRO(KDE_ADD_KCFG_FILES)
+ KDE4_ADD_KCFG_FILES(${ARGV})
+ENDMACRO(KDE_ADD_KCFG_FILES)
+
+MACRO(KDE_ADD_KPART)
+ kde4_add_plugin(${ARGV})
+ENDMACRO(KDE_ADD_KPART)
+
+MACRO(KDE_ADD_MOC_FILES)
+ KDE4_MOC_HEADERS(${ARGV})
+ENDMACRO(KDE_ADD_MOC_FILES)
+
+MACRO(KDESVN_INSTALL_ICONS)
+ kde4_install_icons( ${ICON_INSTALL_DIR}  )
+ENDMACRO(KDESVN_INSTALL_ICONS)
+
+MACRO(KDESVN_GENERATE_LIBTOOL_FILE _subdir _target)
+ KDE4_INSTALL_LIBTOOL_FILE(${_subdir} ${_target})
+ENDMACRO(KDESVN_GENERATE_LIBTOOL_FILE)
+
+include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
+${QT_QTDBUS_INCLUDE_DIR})
+
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 
 INCLUDE(MacroEnsureVersion)
 INCLUDE(FindSubversion)
 INCLUDE(SetupCompiler)
-INCLUDE(FindSqlite)
+INCLUDE(FindGettext)
 
-IF (HAVE_GCC_VISIBILITY)
-    SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+IF (__KDE_HAVE_GCC_VISIBILITY)
+    SET(HAVE_GCC_VISIBILITY On)
     SET(_KDESVN_EXPORT "__attribute__ ((visibility(\"default\")))")
     SET(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
-ENDIF (HAVE_GCC_VISIBILITY)
+ENDIF (__KDE_HAVE_GCC_VISIBILITY)
 
 INCLUDE_DIRECTORIES (
     BEFORE
@@ -44,23 +77,24 @@ INCLUDE_DIRECTORIES (
     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_BINARY_DIR}/src/svnfrontend
     ${CMAKE_BINARY_DIR}
-    ${KDE3_INCLUDE_DIR}
+    ${KDE4_INCLUDE_DIR}
     ${QT_INCLUDE_DIR}
     ${APR_INCLUDE_DIR}
     ${APU_INCLUDE_DIR}
     ${SUBVERSION_INCLUDE_DIR}
 )
 
-ADD_DEFINITIONS(${KDE3_DEFINITIONS} ${QT_DEFINITIONS} ${APR_CPP_FLAGS})
+ADD_DEFINITIONS(${APR_CPP_FLAGS})
 
 IF(CMAKE_BUILD_TYPE MATCHES Debug)
   # FindKde3 always make a "-O2" into it. That isn't nice.
   STRING(REGEX REPLACE "-O2 " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 ENDIF(CMAKE_BUILD_TYPE MATCHES Debug)
+
+#we requires exeptions!!!!
 STRING(REGEX REPLACE "-fno-exceptions " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib/kde3)
 SET(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib")
 
 # current version
@@ -78,8 +112,8 @@ ELSE(DAILY_BUILD)
 ENDIF(DAILY_BUILD)
 
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
-CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
-CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/kdesvn.spec @ONLY)
+CONFIGURE_FILE(kdesvn.spec.in ${PROJECT_NAME}.spec @ONLY)
+CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/${PROJECT_NAME}.spec @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 

@@ -23,13 +23,20 @@
 #include <qlabel.h>
 #include <kurlrequester.h>
 #include <klineedit.h>
-#include <qbuttongroup.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 
 LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent, const char *name)
-    :LoadDmpDlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    if (name) {
+        setObjectName(name);
+    } else {
+        setObjectName("LoadDmpDlg_impl");
+    }
+    m_Dumpfile->setMode(KFile::File);
+    m_Repository->setMode(KFile::Directory|KFile::LocalOnly);
 }
 
 LoadDmpDlg_impl::~LoadDmpDlg_impl()
@@ -59,21 +66,21 @@ bool LoadDmpDlg_impl::usePre()const
  */
 int LoadDmpDlg_impl::uuidAction()const
 {
-    return m_UuidGroup->selectedId();
+    if (m_UUidForce->isChecked()) {
+        return 2;
+    } else if (m_UUidIgnore->isChecked()) {
+        return 1;
+    }
+    return 0;
 }
 
 
 /*!
     \fn LoadDmpDlg_impl::dumpFile()const
  */
-QString LoadDmpDlg_impl::dumpFile()const
+KUrl LoadDmpDlg_impl::dumpFile()const
 {
-    KURL u = m_Dumpfile->url();
-    QString res = u.path();
-    while (res.endsWith("/")) {
-        res.truncate(res.length()-1);
-    }
-    return res;
+    return m_Dumpfile->url();
 }
 
 
@@ -82,7 +89,7 @@ QString LoadDmpDlg_impl::dumpFile()const
  */
 QString LoadDmpDlg_impl::repository()const
 {
-    KURL u = m_Repository->url();
+    KUrl u = m_Repository->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

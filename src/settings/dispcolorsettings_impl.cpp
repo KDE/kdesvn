@@ -22,8 +22,10 @@
 #include <qcheckbox.h>
 
 DispColorSettings_impl::DispColorSettings_impl(QWidget *parent, const char *name)
-    :DispColorSettings(parent, name)
+    :QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
     coloredStateToggled(kcfg_colored_state->isChecked());
 }
 

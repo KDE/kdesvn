@@ -21,13 +21,14 @@
 #include "kdesvn_part.h"
 #include "commandline_part.h"
 #include <kcmdlineargs.h>
-#include <kdialogbase.h>
+// #include <kdialogbase.h>
+#include <KDialog>
 #include <ktextbrowser.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <qstring.h>
 #include <qlayout.h>
-#include <qvbox.h>
+#include <ktoolinvocation.h>
 
 class CommandLineData
 {
@@ -64,15 +65,20 @@ int CommandLine::exec()
         m_data->displayHelp();
         return 0;
     }
-    KLibFactory *factory = KLibLoader::self()->factory("libkdesvnpart");
+    KLibFactory *factory = 0;
+#ifdef EXTRA_KDE_LIBPATH
+    factory = KLibLoader::self()->factory(EXTRA_KDE_LIBPATH+QString("/kdesvnpart.so"));
+    if (!factory)
+#endif
+    factory = KLibLoader::self()->factory("kdesvnpart");
     if (factory) {
-        if (QCString(factory->className())!="cFactory") {
-            kdDebug()<<"wrong factory"<<endl;
-            return -1;
+        QObject * _p = (factory->create<QObject>("commandline_part",this));
+        if (!_p || QString(_p->metaObject()->className()).compare("commandline_part")!=0) {
+            kDebug()<<"wrong object returned"<<endl;
+            return 0;
         }
-        cFactory*cfa = static_cast<cFactory*>(factory);
-        commandline_part * cpart = cfa->createCommandIf((QObject*)0,(const char*)0,m_args);
-        int res = cpart->exec();
+        commandline_part * cpart = static_cast<commandline_part*>(_p);
+        int res = cpart->exec(m_args);
         return res;
     }
     return 0;
@@ -80,5 +86,7 @@ int CommandLine::exec()
 
 void CommandLineData::displayHelp()
 {
-    kapp->invokeHelp("kdesvn-commandline","kdesvn");
+    KToolInvocation::invokeHelp("kdesvn-commandline","kdesvn");
 }
+
+#include "commandline.moc"

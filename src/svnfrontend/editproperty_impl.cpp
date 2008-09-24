@@ -17,22 +17,29 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include <qstringlist.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <QStringList>
+#include <QToolTip>
+#include <QWhatsThis>
 
 #include <ktextedit.h>
 #include <kcombobox.h>
 #include <kglobalsettings.h>
 #include <kdebug.h>
 #include <klocale.h>
+#include <kicon.h>
 
 #include "editproperty_impl.h"
 
 
 EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
-    :EditPropsDlgData(parent, name)
+//     :EditPropsDlgData(parent, name)
+    : QDialog(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
+    helpButton->setIcon(KIcon("help"));
+
     /// @TODO Read these values from a text or config file
     fileProperties += ("svn:eol-style");
     fileProperties += ("svn:executable");
@@ -122,13 +129,13 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
     m_NameEdit->setHistoryItems(fileProperties, true);
     isDir = false;
 
-    QToolTip::add(m_NameEdit, "Select or enter new property");
+    m_NameEdit->setToolTip("Select or enter new property");
     connect(m_NameEdit, SIGNAL(activated(const QString &)), this, SLOT(updateToolTip(const QString &)));
 }
 
 
 EditProperty_impl::~EditProperty_impl() {
-    kdDebug() << "EditProperty_impl got destroyed" << endl;
+    kDebug() << "EditProperty_impl got destroyed" << endl;
 }
 
 
@@ -137,22 +144,21 @@ void EditProperty_impl::updateToolTip(const QString & selection)
     int i;
 
     if (isDir) {
-        i = dirProperties.findIndex(selection);
+        i = dirProperties.indexOf(selection);
         if (i >= 0) {
             comment = dirComments[i];
         } else {
             comment = "No help for this property available";
         }
     } else {
-        i = fileProperties.findIndex(selection);
+        i = fileProperties.indexOf(selection);
         if (i >= 0) {
             comment = fileComments[i];
         } else {
             comment = "No help for this property available";
         }
     }
-
-    QToolTip::add(m_NameEdit, comment);
+    m_NameEdit->setToolTip(comment);
 }
 
 void EditProperty_impl::setDir(bool dir)
@@ -181,7 +187,7 @@ QString EditProperty_impl::propName()const
 
 QString EditProperty_impl::propValue()const
 {
-    return m_ValueEdit->text();
+    return m_ValueEdit->toPlainText();
 }
 
 void EditProperty_impl::setPropName(const QString&n)
@@ -202,8 +208,7 @@ void EditProperty_impl::showHelp()
     QPoint pos = m_ValueEdit->pos();
     pos.setX(pos.x() + m_ValueEdit->width()/2);
     pos.setY(pos.y() + m_ValueEdit->height()/4);
-    QWhatsThis::display(comment, mapToGlobal(pos));
+    QWhatsThis::showText(mapToGlobal(pos),comment);
 }
-
 
 #include "editproperty_impl.moc"

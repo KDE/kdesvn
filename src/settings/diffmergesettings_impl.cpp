@@ -20,15 +20,15 @@
 #include "diffmergesettings_impl.h"
 #include "src/settings/kdesvnsettings.h"
 
-#include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qradiobutton.h>
 #include <klineedit.h>
 #include <kdebug.h>
 
-DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent, const char *name)
-    :DiffMergeSettings(parent, name)
+DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent)
+    :QWidget(parent)
 {
+    setupUi(this);
     kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_external_diff());
 }
 

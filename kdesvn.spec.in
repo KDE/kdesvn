@@ -1,12 +1,12 @@
 Summary:   A subversion client for the KDE with KIO integration.
-Name:      kdesvn
+Name:      @PROJECT_NAME@
 Version:   @VERSION@
 Release:   1%{?dist}
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
 Url:       http://kdesvn.alwins-world.de
 Group:     Development/Tools
-Source:    kdesvn-%version.tar.bz2
+Source:    @PROJECT_NAME@-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
 Requires: /usr/bin/dot
 BuildRequires: apr-devel
@@ -14,7 +14,7 @@ BuildRequires: apr-util-devel
 BuildRequires: subversion-devel >= 1.3.0
 BuildRequires: cmake >= 2.4
 BuildRequires: sqlite-devel
-BuildRequires: kdelibs-devel >= 3.4
+BuildRequires: kdelibs-devel >= 4.1
 
 %description
 Kdesvn is a subversion client for KDE.
@@ -32,7 +32,7 @@ KIO integration (KIO::svn) based on kdesvn alternative protocol name.
 %package devel
 Group:    Development/Libraries
 Summary:  Wrapper lib for subversion QT integration.
-Requires: subversion-devel >= 1.2.0
+Requires: subversion-devel >= 1.3.0
 Requires: kdesvn = %{version}
 
 %description devel
@@ -42,7 +42,7 @@ Development files for kdesvn.
 %setup -q
 mkdir build
 cd build
-cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release -DLIB_SUFFIX=`kde-config --libsuffix`
+cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLIB_SUFFIX=`kde-config --libsuffix`
 
 %build
 cd build
@@ -71,28 +71,30 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_bindir}/kdesvnaskpass
 %{_libdir}/*/*part*
 %{_datadir}/applications/*
-%{_datadir}/apps/kdesvn/*
-%{_datadir}/apps/kdesvnpart/*
-%{_datadir}/apps/kconf_update/*
+%{_datadir}/kde4/apps/kdesvn/*
+%{_datadir}/kde4/apps/kdesvnpart/*
+%{_datadir}/kde4/apps/kconf_update/*
 %{_datadir}/config.kcfg/*
 %{_datadir}/doc/*
 %{_datadir}/icons/*
 %{_datadir}/locale/*
 %{_libdir}/*/kded_kdesvnd.*
-%{_datadir}/services/kded/kdesvnd.desktop
-%{_datadir}/apps/konqueror/servicemenus/kdesvn*
+%{_datadir}/kde4/services/kded/kdesvnd.desktop
+%{_datadir}/kde4/services/ServiceMenus/kdesvn*
+%{_datadir}/kde4/services/kdesvnpart.desktop
 %{_libdir}/*/kio_ksvn*
-%{_datadir}/services/ksvn*.protocol
+%{_datadir}/kde4/services/ksvn*.protocol
 %{_datadir}/man/man1/*
+%{_datadir}/dbus-1/interfaces/org.kde.kdesvnd.xml
 %{_libdir}/libsvnqt*.so*
 %doc AUTHORS ChangeLog GPL.txt TODO COPYING COPYING.OpenSSL
 
 %files kiosvn
 %defattr(-,root,root)
-%{_datadir}/services/svn*.protocol
+%{_datadir}/kde4/services/svn*.protocol
 
 %files devel
 %defattr(-,root,root)
-%{_includedir}/svnqt/*
+%{_includedir}/svnqt4/*
 
 %changelog

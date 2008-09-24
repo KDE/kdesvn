@@ -23,9 +23,12 @@
 #include <kurl.h>
 #include <kurlrequester.h>
 
-HotcopyDlg_impl::HotcopyDlg_impl(QWidget *parent, const char *name)
-    :HotcopyDlg(parent, name)
+HotcopyDlg_impl::HotcopyDlg_impl(QWidget *parent)
+    :QWidget(parent),Ui::HotcopyDlg()
 {
+    setupUi(this);
+    m_SrcpathEditor->setMode(KFile::Directory|KFile::LocalOnly);
+    m_DestpathEditor->setMode(KFile::Directory|KFile::LocalOnly);
 }
 
 HotcopyDlg_impl::~HotcopyDlg_impl()
@@ -34,12 +37,12 @@ HotcopyDlg_impl::~HotcopyDlg_impl()
 
 QString HotcopyDlg_impl::srcPath()const
 {
-    return checkPath(m_SrcpathEditor->url());
+    return checkPath(m_SrcpathEditor->url().prettyUrl());
 }
 
 QString HotcopyDlg_impl::destPath()const
 {
-    return checkPath(m_DestpathEditor->url());
+    return checkPath(m_DestpathEditor->url().prettyUrl());
 }
 
 bool HotcopyDlg_impl::cleanLogs()const
@@ -49,7 +52,7 @@ bool HotcopyDlg_impl::cleanLogs()const
 
 QString HotcopyDlg_impl::checkPath(const QString&_p)const
 {
-    KURL u = _p;
+    KUrl u = _p;
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

@@ -77,21 +77,12 @@ namespace svn
         }
       }
       m_path = QString::FROMUTF8(int_path);
-#if QT_VERSION < 0x040000
-      if (Url::isValid(path) && m_path.find("@")!=-1 ) {
-#else
       if (Url::isValid(path) && m_path.indexOf("@")!=-1 ) {
-#endif
         /// @todo make sure that "@" is never used as revision paramter
         QUrl uri = m_path;
         m_path = uri.path();
         m_path.replace("@","%40");
-#if QT_VERSION < 0x040000
-        m_path = uri.protocol()+"://"+(uri.hasUser()?uri.user()+(uri.hasPassword()?":"+uri.password():"")+"@":"")
-                +uri.host()+m_path;
-#else
         m_path = uri.scheme()+"://"+uri.authority()+m_path;
-#endif
         if (m_path.endsWith("/")) {
             int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
             m_path = QString::FROMUTF8(int_path);
@@ -216,11 +207,7 @@ namespace svn
     split (dir, basename);
 
     // next search for last .
-#if QT_VERSION < 0x040000
-    int pos = basename.findRev(QChar('.'));
-#else
     int pos = basename.lastIndexOf(QChar('.'));
-#endif
 
     if (pos == -1)
     {

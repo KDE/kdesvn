@@ -63,6 +63,7 @@ namespace svn
                  apr_pool_t * pool
                 )
     {
+        Q_UNUSED(pool);
         Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
         LogEntries * entries =
                 (LogEntries *) l_baton->m_data;
@@ -148,6 +149,7 @@ namespace svn
                        apr_pool_t * pool
                       )
   {
+      Q_UNUSED(pool);
       Client_impl::sBaton * l_baton = (Client_impl::sBaton*)baton;
       LogEntriesMap * entries =
               (LogEntriesMap *) l_baton->m_data;

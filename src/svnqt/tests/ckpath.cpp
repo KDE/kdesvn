@@ -1,4 +1,6 @@
 #include "src/svnqt/path.hpp"
+#include <qstring.h>
+#include "svnqt/svnqt_defines.hpp"
 #include <iostream>
 
 int main(int,char**)
@@ -15,7 +17,7 @@ int main(int,char**)
     }
     unsigned j = 0;
     while (pa.length()>0) {
-        std::cout << pa.path() << std::endl;
+        std::cout << pa.path().TOASCII().data() << std::endl;
         pa.removeLast();
         ++j;
     }

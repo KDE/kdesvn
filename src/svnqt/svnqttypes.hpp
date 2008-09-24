@@ -26,15 +26,7 @@
 
 // qt
 #include <qglobal.h>
-
-#if QT_VERSION < 0x040000
-    #include <qstring.h>
-    #include <qpair.h>
-    #include <qvaluelist.h>
-    #include <qmap.h>
-#else
-    #include <QtCore>
-#endif
+#include <QtCore>
 
 namespace svn
 {
@@ -49,6 +41,7 @@ namespace svn
     class Targets;
     class Path;
     class StringArray;
+    class CommitItem;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
 
@@ -85,6 +78,8 @@ namespace svn
 
     typedef QLIST<Path> Pathes;
 
+    typedef QLIST<CommitItem> CommitItemList;
+
     //! Mapper enum for svn_depth_t
     /*!
      * Until subversion prior 1.5 is supported by this lib we must hide the svn_depth_t enum from interface.
@@ -98,6 +93,16 @@ namespace svn
         DepthFiles,
         DepthImmediates,
         DepthInfinity
+    };
+
+    //! For search specific server capabilities
+    /*!
+     * \since subversion 1.5
+     * when build with subversion earlier 1.5 this will not used.
+     * \sa svn_repos_has_capability
+     */
+    enum Capability {
+        CapabilityMergeinfo=0
     };
 }
 

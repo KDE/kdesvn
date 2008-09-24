@@ -1,285 +1,312 @@
-<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>RangeInputDlg</class>
-<widget class="QWidget">
-    <property name="name">
-        <cstring>RangeInput</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>397</width>
-            <height>272</height>
-        </rect>
-    </property>
-    <property name="caption">
-        <string>Revisions</string>
-    </property>
-    <vbox>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QButtonGroup">
-            <property name="name">
-                <cstring>m_startRevBox</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>3</hsizetype>
-                    <vsizetype>3</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="title">
-                <string>Start with revision</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="KIntNumInput" row="0" column="2">
-                    <property name="name">
-                        <cstring>m_startRevInput</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>1</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="0" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_startNumberButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>N&amp;umber</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="1" column="0">
-                    <property name="name">
-                        <cstring>m_startDateButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Date</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="2" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_startStartButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>S&amp;TART</string>
-                    </property>
-                </widget>
-                <widget class="KDateTimeWidget" row="1" column="1" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_startDateInput</cstring>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="3" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_startHeadButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>HEAD</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="4" column="0">
-                    <property name="name">
-                        <cstring>m_startWorkingButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>WORKING</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Select current working copy changes</string>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
-        <widget class="QButtonGroup">
-            <property name="name">
-                <cstring>m_stopRevBox</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>3</hsizetype>
-                    <vsizetype>3</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="title">
-                <string>Stop with revision</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="KIntNumInput" row="0" column="2">
-                    <property name="name">
-                        <cstring>m_endRevInput</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>1</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="0" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_stopNumberButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Number</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="KDateTimeWidget" row="1" column="1" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_stopDateInput</cstring>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="1" column="0">
-                    <property name="name">
-                        <cstring>m_stopDateButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Date</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="2" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_stopStartButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>START</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="3" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>m_stopHeadButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>HEAD</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="4" column="0">
-                    <property name="name">
-                        <cstring>m_stopWorkingButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>WORKING</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Select current working copy changes</string>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
-    </vbox>
-</widget>
-<customwidgets>
-</customwidgets>
-<connections>
-    <connection>
-        <sender>m_startNumberButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>startNumberToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_startHeadButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>startHeadToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_startStartButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>startBaseToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_stopStartButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>stopBaseToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_stopHeadButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>stopHeadToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_stopNumberButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>stopNumberToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_stopDateButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>stopDateToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>m_startDateButton</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>RangeInput</receiver>
-        <slot>startDateToggled(bool)</slot>
-    </connection>
-</connections>
-<tabstops>
-    <tabstop>m_startNumberButton</tabstop>
-    <tabstop>m_startRevInput</tabstop>
-    <tabstop>m_startStartButton</tabstop>
-    <tabstop>m_startHeadButton</tabstop>
-    <tabstop>m_stopNumberButton</tabstop>
-    <tabstop>m_endRevInput</tabstop>
-    <tabstop>m_stopStartButton</tabstop>
-    <tabstop>m_stopHeadButton</tabstop>
-</tabstops>
-<slots>
-    <slot access="protected">stopHeadToggled(bool)</slot>
-    <slot access="protected">stopBaseToggled(bool)</slot>
-    <slot access="protected">stopNumberToggled(bool)</slot>
-    <slot access="protected">startHeadToggled(bool)</slot>
-    <slot access="protected">startBaseToggled(bool)</slot>
-    <slot access="protected">startNumberToggled(bool)</slot>
-    <slot access="protected">startDateToggled(bool)</slot>
-    <slot access="protected">stopDateToggled(bool)</slot>
-</slots>
-<layoutdefaults spacing="2" margin="2"/>
-<includehints>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>kdatetimewidget.h</includehint>
-    <includehint>kdatewidget.h</includehint>
-    <includehint>ktimewidget.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>kdatetimewidget.h</includehint>
-    <includehint>kdatewidget.h</includehint>
-    <includehint>ktimewidget.h</includehint>
-</includehints>
-</UI>
+<ui version="4.0" >
+ <class>RangeInput</class>
+ <widget class="QWidget" name="RangeInput" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>449</width>
+    <height>398</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Revisions</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3" >
+   <item>
+    <widget class="QGroupBox" name="m_startRevBox" >
+     <property name="title" >
+      <string>Start with revision</string>
+     </property>
+     <property name="checkable" >
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" >
+      <item>
+       <layout class="QGridLayout" name="gridLayout_2" >
+        <item row="0" column="0" colspan="2" >
+         <widget class="QRadioButton" name="m_startNumberButton" >
+          <property name="text" >
+           <string>N&amp;umber</string>
+          </property>
+          <property name="checked" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" >
+         <widget class="KIntNumInput" name="m_startRevInput" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" >
+         <widget class="QRadioButton" name="m_startDateButton" >
+          <property name="text" >
+           <string>Date</string>
+          </property>
+          <property name="shortcut" >
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2" >
+         <widget class="KDateTimeWidget" name="m_startDateInput" />
+        </item>
+        <item row="2" column="0" colspan="2" >
+         <widget class="QRadioButton" name="m_startStartButton" >
+          <property name="text" >
+           <string>S&amp;TART</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2" >
+         <widget class="QRadioButton" name="m_startHeadButton" >
+          <property name="text" >
+           <string>HEAD</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" >
+         <widget class="QRadioButton" name="m_startWorkingButton" >
+          <property name="toolTip" >
+           <string>Select current working copy changes</string>
+          </property>
+          <property name="text" >
+           <string>WORKING</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="m_stopRevBox" >
+     <property name="title" >
+      <string>Stop with revision</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <layout class="QGridLayout" name="gridLayout" >
+        <item row="0" column="0" colspan="2" >
+         <widget class="QRadioButton" name="m_stopNumberButton" >
+          <property name="text" >
+           <string>Number</string>
+          </property>
+          <property name="checked" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" >
+         <widget class="KIntNumInput" name="m_endRevInput" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" >
+         <widget class="QRadioButton" name="m_stopDateButton" >
+          <property name="text" >
+           <string>Date</string>
+          </property>
+          <property name="shortcut" >
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2" >
+         <widget class="KDateTimeWidget" name="m_stopDateInput" />
+        </item>
+        <item row="2" column="0" colspan="2" >
+         <widget class="QRadioButton" name="m_stopStartButton" >
+          <property name="text" >
+           <string>START</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2" >
+         <widget class="QRadioButton" name="m_stopHeadButton" >
+          <property name="text" >
+           <string>HEAD</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" >
+         <widget class="QRadioButton" name="m_stopWorkingButton" >
+          <property name="toolTip" >
+           <string>Select current working copy changes</string>
+          </property>
+          <property name="text" >
+           <string>WORKING</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="2" margin="2" />
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>KDateTimeWidget</class>
+   <extends>QWidget</extends>
+   <header>kdatetimewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_stopNumberButton</tabstop>
+  <tabstop>m_endRevInput</tabstop>
+  <tabstop>m_stopStartButton</tabstop>
+  <tabstop>m_stopHeadButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_startNumberButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>startNumberToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_startHeadButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>startHeadToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_startStartButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>startBaseToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_stopStartButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>stopBaseToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_stopHeadButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>stopHeadToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_stopNumberButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>stopNumberToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_stopDateButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>stopDateToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_startDateButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RangeInput</receiver>
+   <slot>startDateToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

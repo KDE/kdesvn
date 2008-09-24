@@ -24,16 +24,16 @@
 #include "src/svnqt/smart_pointer.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include <kmimetype.h>
-#include <qstring.h>
+#include <QString>
 #include <qdatetime.h>
-#include <qpixmap.h>
-#include <qptrlist.h>
+#include <QPixmap>
+#include <QList>
 
-class FileListViewItem;
+class SvnItemModelNode;
 class SvnItem_p;
 class SvnActions;
 class KFileItem;
-class KURL;
+class KUrl;
 
 namespace svn
 {
@@ -50,7 +50,7 @@ public:
     virtual const QString&fullName()const;
     virtual const QString&shortName()const;
     virtual const QString&Url()const;
-    virtual const KURL&kdeName(const svn::Revision&);
+    virtual const KUrl&kdeName(const svn::Revision&);
     virtual KMimeType::Ptr mimeType();
     virtual const QDateTime&fullDate()const;
     virtual bool isDir()const;
@@ -68,15 +68,16 @@ public:
     virtual QString getParentDir()const=0;
     virtual SvnItem* getParentItem()const=0;
     virtual const svn::Revision&correctPeg()const=0;
-    virtual void refreshStatus(bool childs=false,QPtrList<SvnItem> *exclude = 0,bool depsonly=false)=0;
+    virtual void refreshStatus(bool childs=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false)=0;
 
     QPixmap getPixmap(int size,bool overlay=true);
     QPixmap getPixmap(const QPixmap&,int size,bool overlay=true);
 
-    virtual FileListViewItem*fItem(){return 0;}
+    virtual SvnItemModelNode*sItem(){return 0;}
     virtual void setStat(const svn::StatusPtr&);
     virtual const svn::StatusPtr& stat()const;
     virtual bool isModified()const;
+    virtual bool isChildModified()const;
     bool isNormal()const;
     bool isMissing()const;
     bool isDeleted()const;
@@ -104,8 +105,5 @@ protected:
     static QPixmap internalTransform(const QPixmap&,int size);
 
 };
-
-typedef QPtrList<SvnItem> SvnItemList;
-typedef QPtrListIterator<SvnItem> SvnItemListIterator;
 
 #endif

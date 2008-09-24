@@ -35,11 +35,7 @@
 #include "svnqt/svnqttypes.hpp"
 
 #include <qglobal.h>
-#if QT_VERSION < 0x040000
-#include <qvaluelist.h>
-#else
 #include <QtCore>
-#endif
 
 // apr api
 #include "apr_tables.h"
@@ -62,13 +58,13 @@ namespace svn
      *
      * @param targets vector of paths
      */
-    Targets (const Pathes & targets);
+    Targets (const svn::Pathes & targets);
 
     /**
      * Constructor
      * @param path a single paths
      */
-    Targets (const Path & targets);
+    Targets (const svn::Path & target);
 
     /**
      * Constructor from an APR array containing
@@ -152,7 +148,7 @@ namespace svn
      * @return single path
      */
     const Path
-    target(unsigned int which = 0) const;
+    target(Pathes::size_type which) const;
 
 
   private:

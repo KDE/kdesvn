@@ -131,23 +131,13 @@ namespace svn
     QLONG m_line_no;
     QLONG m_revision;
     QDateTime m_date;
-#if QT_VERSION < 0x040000
-    QCString m_line;
-    QCString m_author;
-#else
     QByteArray m_line;
     QByteArray m_author;
-#endif
 
     QLONG m_merge_revision;
     QDateTime m_merge_date;
-#if QT_VERSION < 0x040000
-    QCString m_merge_author;
-    QCString m_merge_path;
-#else
     QByteArray m_merge_author;
     QByteArray m_merge_path;
-#endif
   };
 }
 

@@ -1,8 +1,8 @@
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
 
-KDE3_ADD_UI_FILES(
+KDE_ADD_UI_FILES(
     kdesvn_shared_ui
-    logmessage.ui
+    commitmessage.ui
     ssltrustprompt.ui
     authdlg.ui
     encodingselector.ui
@@ -12,7 +12,7 @@ KDE3_ADD_UI_FILES(
 
 SET(ksvnwidgetsrc
     authdialogimpl.cpp
-    logmsg_impl.cpp
+    commitmsg_impl.cpp
     ssltrustprompt_impl.cpp
     pwstorage.cpp
     diffbrowser.cpp
@@ -21,11 +21,13 @@ SET(ksvnwidgetsrc
     encodingselector_impl.cpp
     depthselector.cpp
     revertform_impl.cpp
+    models/commitmodelhelper.cpp
+    models/commitmodel.cpp
     )
 
 SET(ksvnwidgethdr
     authdialogimpl.h
-    logmsg_impl.h
+    commitmsg_impl.h
     ssltrustprompt_impl.h
     pwstorage.h
     diffbrowser.h
@@ -34,11 +36,13 @@ SET(ksvnwidgethdr
     encodingselector_impl.h
     depthselector.h
     revertform_impl.h
+    models/commitmodelhelper.h
+    models/commitmodel.h
 )
 
-KDE3_AUTOMOC(${ksvnwidgetsrc})
+KDE_AUTOMOC(${ksvnwidgetsrc})
 
-ADD_LIBRARY(ksvnwidgets STATIC ${ksvnwidgetsrc} ${kdesvn_shared_ui} ${ksvnwidgethdr})
+ADD_LIBRARY(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 SET_TARGET_PROPERTIES(ksvnwidgets
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

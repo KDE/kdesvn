@@ -24,16 +24,18 @@
 #include "src/settings/kdesvnsettings.h"
 
 #include <kurlrequester.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kvbox.h>
+
 #include <qlabel.h>
 #include <qcheckbox.h>
-#include <qvbox.h>
 
-MergeDlg_impl::MergeDlg_impl(QWidget *parent, const char *name,bool src1,bool src2,bool out)
-    :MergeDlg(parent, name)
+MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out)
+    :QWidget(parent),Ui::MergeDlg()
 {
+    setupUi(this);
     m_SrcOneInput->setMode(KFile::Directory|KFile::File);
     if (!src1) {
         m_SrcOneInput->setEnabled(false);
@@ -64,11 +66,11 @@ MergeDlg_impl::~MergeDlg_impl()
 void MergeDlg_impl::setSrc1(const QString&what)
 {
     if (what.isEmpty()) {
-        m_SrcOneInput->setURL("");
+        m_SrcOneInput->setUrl(QString(""));
         return;
     }
-    KURL uri(what);
-    kdDebug()<<"What: "<<what << " URL: "<<uri<<endl;
+    KUrl uri(what);
+    kDebug()<<"What: "<<what << " URL: "<<uri<<endl;
     if (uri.protocol()=="file") {
         if (what.startsWith("file:")) {
             uri.setProtocol("ksvn+file");
@@ -78,16 +80,16 @@ void MergeDlg_impl::setSrc1(const QString&what)
     } else {
         uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
     }
-    m_SrcOneInput->setURL(uri.url());
+    m_SrcOneInput->setUrl(uri);
 }
 
 void MergeDlg_impl::setSrc2(const QString&what)
 {
     if (what.isEmpty()) {
-        m_SrcTwoInput->setURL("");
+        m_SrcTwoInput->setUrl(QString(""));
         return;
     }
-    KURL uri(what);
+    KUrl uri(what);
     if (uri.protocol()=="file") {
         if (what.startsWith("file:")) {
             uri.setProtocol("ksvn+file");
@@ -97,18 +99,18 @@ void MergeDlg_impl::setSrc2(const QString&what)
     } else {
         uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
     }
-    m_SrcTwoInput->setURL(uri.url());
+    m_SrcTwoInput->setUrl(uri);
 }
 
 void MergeDlg_impl::setDest(const QString&what)
 {
     if (what.isEmpty()) {
-        m_OutInput->setURL("");
+        m_OutInput->setUrl(QString(""));
         return;
     }
-    KURL uri(what);
+    KUrl uri(what);
     uri.setProtocol("");
-    m_OutInput->setURL(uri.url());
+    m_OutInput->setUrl(uri);
 }
 
 bool MergeDlg_impl::recursive()const
@@ -138,9 +140,9 @@ bool MergeDlg_impl::useExtern()const
 
 QString MergeDlg_impl::Src1()const
 {
-    KURL uri(m_SrcOneInput->url());
+    KUrl uri(m_SrcOneInput->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto=="file"&&!m_SrcOneInput->url().startsWith("ksvn+file:")) {
+    if (proto=="file"&&!m_SrcOneInput->url().prettyUrl().startsWith("ksvn+file:")) {
         uri.setProtocol("");
     } else {
         uri.setProtocol(proto);
@@ -153,9 +155,9 @@ QString MergeDlg_impl::Src2()const
     if (m_SrcTwoInput->url().isEmpty()) {
         return "";
     }
-    KURL uri(m_SrcTwoInput->url());
+    KUrl uri(m_SrcTwoInput->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto=="file"&&!m_SrcTwoInput->url().startsWith("ksvn+file:")) {
+    if (proto=="file"&&!m_SrcTwoInput->url().prettyUrl().startsWith("ksvn+file:")) {
         uri.setProtocol("");
     } else {
         uri.setProtocol(proto);
@@ -165,7 +167,7 @@ QString MergeDlg_impl::Src2()const
 
 QString MergeDlg_impl::Dest()const
 {
-    KURL uri(m_OutInput->url());
+    KUrl uri(m_OutInput->url());
     uri.setProtocol("");
     return uri.url();
 }
@@ -184,12 +186,20 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     QWidget*parent,const char*name)
 {
     MergeDlg_impl*ptr = 0;
-    KDialogBase dlg(parent,name,true,i18n("Enter merge range"),
-            KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help,
-            KDialogBase::Ok,true);
+    KDialog dlg(parent);
+    dlg.setButtons(KDialog::Ok|KDialog::Cancel|KDialog::Help);
+    dlg.setObjectName( name );
+    dlg.setModal(true);
+    dlg.setCaption(i18n("Enter merge range"));
+    dlg.setDefaultButton(KDialog::Ok);
     dlg.setHelp("merging-items","kdesvn");
-    QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
-    ptr = new MergeDlg_impl(Dialog1Layout,"merge_range_dlg",false,false,false);
+    KVBox*Dialog1Layout = new KVBox(&dlg);
+    dlg.setMainWidget(Dialog1Layout);
+
+    ptr = new MergeDlg_impl(Dialog1Layout,false,false,false);
+    if (name) {
+        ptr->setObjectName(name);
+    }
     dlg.resize( QSize(480,360).expandedTo(dlg.minimumSizeHint()) );
     if (dlg.exec()!=QDialog::Accepted) {
         return false;

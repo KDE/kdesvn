@@ -20,10 +20,10 @@
 #ifndef REVISIONBUTTONIMPL_H
 #define REVISIONBUTTONIMPL_H
 
-#include "revisionbutton.h"
+#include "ui_revisionbutton.h"
 #include "svnqt/revision.hpp"
 
-class RevisionButtonImpl: public RevisionButton {
+class RevisionButtonImpl: public QWidget, public Ui::RevisionButton {
     Q_OBJECT
 
 public:

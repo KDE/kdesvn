@@ -20,6 +20,7 @@
 
 #include "modifiedthread.h"
 #include "tcontextlistener.h"
+#include "src/kdesvn_events.h"
 
 #include "src/svnqt/svnqttypes.hpp"
 
@@ -72,7 +73,7 @@ void CheckModifiedThread::run()
     }
     KApplication*k = KApplication::kApplication();
     if (k) {
-        QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_FINISHED);
+        DataEvent*ev = new DataEvent(m_updates?EVENT_UPDATE_CACHE_FINISHED:EVENT_CACHE_THREAD_FINISHED);
         ev->setData((void*)this);
         k->postEvent(m_Parent,ev);
     }

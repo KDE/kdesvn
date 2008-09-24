@@ -77,24 +77,15 @@ const QString&ItemDisplay::lastError()const
  */
 bool ItemDisplay::filterOut(const SvnItem*item)
 {
-    return filterOut(item->stat());
-}
-
-
-/*!
-    \fn ItemDisplay::filterOut(const svn::Status&)
- */
-bool ItemDisplay::filterOut(const svn::StatusPtr&item)
-{
-    bool res = false;
-
-    if (!item->validReposStatus()) {
-        if ((!Kdesvnsettings::display_unknown_files() && !item->isVersioned()) ||
-            (Kdesvnsettings::hide_unchanged_files() && item->isRealVersioned() && !item->isModified() && !item->entry().isDir())) {
-            res = true;
-              }
+    if (!item->stat()->validReposStatus()) {
+        if ( (item->isIgnored() && !Kdesvnsettings::display_ignored_files()) ||
+            ( Kdesvnsettings::hide_unchanged_files() && item->isRealVersioned() && !item->isModified() && !item->isChildModified() )||
+            (!Kdesvnsettings::display_unknown_files() && !item->stat()->isVersioned())
+            ) {
+            return true;
+        }
     }
-    return res;
+    return false;
 }
 
 

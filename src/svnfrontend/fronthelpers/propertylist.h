@@ -20,38 +20,41 @@
 #ifndef PROPERTYLIST_H
 #define PROPERTYLIST_H
 
-#include <klistview.h>
+#include <QTreeWidget>
+#include <QStringList>
 #include "src/svnqt/svnqttypes.hpp"
 
+class SvnItem;
 /**
 	@author
 */
-class Propertylist : public KListView
+class Propertylist : public QTreeWidget
 {
     Q_OBJECT
 public:
     Propertylist(QWidget *parent = 0, const char *name = 0);
     ~Propertylist();
 
-    bool checkExisting(const QString&aName,QListViewItem*it=0);
+    bool checkExisting(const QString&aName,QTreeWidgetItem*it=0);
     bool commitchanges()const{return m_commitit;}
     void setCommitchanges(bool how){m_commitit=how;}
     void addCallback(QObject*);
 
 public slots:
-    virtual void displayList(const svn::PathPropertiesMapListPtr&,bool,const QString&);
+    virtual void displayList(const svn::PathPropertiesMapListPtr&,bool,bool,const QString&);
     virtual void clear();
 
 protected slots:
-    virtual void slotItemRenamed(QListViewItem*item,const QString & str,int col );
+    virtual void slotItemChanged(QTreeWidgetItem*item,int col );
 
 signals:
-    void sigSetProperty(const svn::PropertiesMap&,const QValueList<QString>&,const QString&);
+    void sigSetProperty(const svn::PropertiesMap&,const QStringList&,const QString&);
 protected:
     bool m_commitit;
     QString m_current;
-protected slots:
-    virtual void slotContextMenuRequested(QListViewItem *, const QPoint &, int);
+    bool m_Dir;
+
+    virtual void keyPressEvent(QKeyEvent*);
 };
 
 #endif

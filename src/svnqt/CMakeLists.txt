@@ -45,24 +45,6 @@ SET(SOURCES
     cache/DatabaseException.cpp
     )
 
-IF (NOT QT4_FOUND)
-    IF (SQLITE_FOUND)
-        MESSAGE(STATUS "Build own sqlite3 database modul")
-        SET(SOURCES
-            ${SOURCES}
-            cache/sqlite3/qsqlcachedresult.cpp
-            cache/sqlite3/qsql_sqlite3.cpp
-            cache/sqlite3/qsqlcachedresult.h
-            cache/sqlite3/qsql_sqlite3.h
-        )
-    ELSE (SQLITE_FOUND)
-        MESSAGE(SEND_ERROR "The QT3 version requires sqlite3 but could not found")
-    ENDIF (SQLITE_FOUND)
-ELSE (NOT QT4_FOUND)
-    MESSAGE(STATUS "Build with QT4.")
-    ADD_DEFINITIONS(-DNO_SQLITE3)
-ENDIF (NOT QT4_FOUND)
-
 SET(CACHEINST_HEADERS
     cache/LogCache.hpp
     cache/ReposLog.hpp
@@ -108,34 +90,23 @@ SET(INST_HEADERS
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")
 SET(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
 
-IF(QT4_FOUND)
-    MESSAGE(STATUS "Qt: ${QT_LIBRARY_DIR}")
-    MESSAGE(STATUS "Qt: ${QT_QTCORE_LIBRARY}")
-    SET(TOUTF8 "toUtf8")
-    SET(FROMUTF8 "fromUtf8")
-    SET(QLIST "QList")
-    SET(TOASCII "toAscii")
-    SET(HOMEDIR "homePath")
-    SET(svnqt-name svnqt-qt4)
-        SET(QDATABASE "QSqlDatabase")
-    SET(QLONG "qlonglong")
-ELSE(QT4_FOUND)
-    IF(QT_FOUND)
-        SET(TOUTF8 "utf8")
-        SET(FROMUTF8 "fromUtf8")
-        SET(QLIST "QValueList")
-        SET(TOASCII "latin1")
-        SET(HOMEDIR "homeDirPath")
-        SET(QDATABASE "QSqlDatabase*")
-        SET(QLONG "Q_LLONG")
-    ENDIF(QT_FOUND)
-    SET(svnqt-name svnqt)
-ENDIF(QT4_FOUND)
+SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}")
+MESSAGE(STATUS "Qt: ${QT_LIBRARIES}")
+SET(TOUTF8 "toUtf8")
+SET(FROMUTF8 "fromUtf8")
+SET(QLIST "QList")
+SET(TOASCII "toAscii")
+SET(HOMEDIR "homePath")
+SET(svnqt-name svnqt4)
+SET(QDATABASE "QSqlDatabase")
+SET(QLONG "qlonglong")
 
+# must set from caller before - here no checks of compiler will done!
 IF (HAVE_GCC_VISIBILITY)
     SET(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
     SET(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
 ENDIF (HAVE_GCC_VISIBILITY)
+
 IF (WIN32)
     SET(_SVNQT_EXPORT "__declspec(dllexport)")
 ENDIF (WIN32)
@@ -159,8 +130,8 @@ ELSE(WIN32)
         COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 ENDIF(WIN32)
 
-SET(LIB_MAJOR 4)
-SET(LIB_MINOR 2)
+SET(LIB_MAJOR 5)
+SET(LIB_MINOR 0)
 SET(LIB_RELEASE 0)
 
 SET(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
@@ -172,14 +143,7 @@ SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES
 SET(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
 SET(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
 SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
-TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS})
-
-IF (SQLITE_FOUND AND NOT QT4_FOUND)
-    TARGET_LINK_LIBRARIES(${svnqt-name} ${SQLITE_LIBRARIES})
-    INCLUDE_DIRECTORIES(SQLITE_INCLUDE_DIR)
-ELSE (SQLITE_FOUND AND NOT QT4_FOUND)
-    TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_QTSQL_LIBRARY})
-ENDIF (SQLITE_FOUND AND NOT QT4_FOUND)
+TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS} ${QT_QTSQL_LIBRARY})
 
 IF (WIN32)
     TARGET_LINK_LIBRARIES( ${svnqt-name} wsock32.lib  )

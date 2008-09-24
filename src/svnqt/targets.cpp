@@ -45,7 +45,7 @@
 
 namespace svn
 {
-  Targets::Targets (const Pathes & targets)
+  Targets::Targets (const svn::Pathes & targets)
   {
     m_targets = targets;
   }
@@ -53,7 +53,7 @@ namespace svn
   Targets::Targets(const QStringList&targets)
   {
     m_targets.clear();
-    for (unsigned int i = 0; i < targets.size();++i) {
+    for (int i = 0; i < targets.size();++i) {
         if (targets[i].isEmpty()) {
             m_targets.push_back("");
         } else {
@@ -150,7 +150,7 @@ namespace svn
   }
 
   const Path
-  Targets::target (unsigned int which) const
+  Targets::target (Pathes::size_type which) const
   {
     if (m_targets.size () > which)
     {

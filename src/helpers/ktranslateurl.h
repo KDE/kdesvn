@@ -32,9 +32,9 @@ public:
     KTranslateUrl();
     ~KTranslateUrl();
 
-    static KURL translateSystemUrl(const KURL&);
-    static bool parseURL(const KURL&,QString&name,QString&path);
-    static KURL findSystemBase(const QString&name);
+    static KUrl translateSystemUrl(const KUrl&);
+    static bool parseURL(const KUrl&,QString&name,QString&path);
+    static KUrl findSystemBase(const QString&name);
     static QString makeKdeUrl(const QString&inUrl);
 };
 

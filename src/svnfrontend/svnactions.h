@@ -27,25 +27,26 @@
 #include "src/svnqt/svnqttypes.hpp"
 
 #include "simple_logcb.h"
+#include "frontendtypes.h"
 
 #include <kurl.h>
 #include <kguiitem.h>
 
-#include <qobject.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
+#include <QObject>
+#include <QDateTime>
+#include <QStringList>
+#include <QList>
 
 class ItemDisplay;
 class SvnItem;
 class KDialog;
-class KDialogBase;
 class QDialog;
 class CContextListener;
-class KProcess;
 class SvnActionsData;
 class CheckModifiedThread;
 class CheckUpdatesThread;
 class FillCacheThread;
+class WatchedProcess;
 
 namespace svn {
     class Context;
@@ -76,16 +77,12 @@ public:
     //svn::Client&svnClient(){return m_Svnclient;}
     svn::Client* svnclient();
     void prepareUpdate(bool ask);
-    template<class T> KDialogBase* createDialog(T**ptr,const QString&_head,bool OkCance=false,
-            const char*name="standard_dialog",
-            bool showHelp=false,bool modal=true,
-            const KGuiItem&u1 = KGuiItem());
 
     bool makeGet(const svn::Revision&start, const QString&what,const QString&target,
         const svn::Revision&peg=svn::Revision::UNDEFINED,QWidget*dlgparent=0);
 
 
-    bool addItems(const QValueList<svn::Path> &items,svn::Depth depth=svn::DepthEmpty);
+    bool addItems(const svn::Pathes &items,svn::Depth depth=svn::DepthEmpty);
     bool addItems(const QStringList&w,svn::Depth depth=svn::DepthEmpty);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
@@ -94,9 +91,9 @@ public:
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);
 
-    bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec=false,bool all=true);
-    bool makeStatus(const QString&what, svn::StatusEntries&dlist, svn::Revision&where, bool rec,bool all,bool display_ignored,bool updates=false);
-    bool makeList(const QString&url,svn::DirEntries&dlist,svn::Revision&where,bool rec=false);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where, bool rec=false,bool all=true);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where, bool rec,bool all,bool display_ignored,bool updates=false);
+    bool makeList(const QString&url,svn::DirEntries&dlist,const svn::Revision&where,bool rec=false);
 
     bool createModifiedCache(const QString&base);
     bool checkModifiedCache(const QString&path);
@@ -111,7 +108,7 @@ public:
     QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
     svn::PathPropertiesMapListPtr propList(const QString&which,const svn::Revision&where,bool cacheOnly);
 
-    bool changeProperties(const svn::PropertiesMap&setList,const QValueList<QString>&,const QString&path);
+    bool changeProperties(const svn::PropertiesMap&setList,const QStringList&,const QString&path);
 
     //! generate and displays a revision tree
     /*!
@@ -137,17 +134,17 @@ public:
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);
     bool makeCheckout(const QString&,const QString&,const svn::Revision&,const svn::Revision&,svn::Depth,bool isExport,bool openit,bool ignore_externals,bool overwrite,QWidget*p);
-    void makeInfo(QPtrList<SvnItem> lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
+    void makeInfo(const SvnItemList& lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     void makeInfo(const QStringList&lst,const svn::Revision&,const svn::Revision&,bool recursive = true);
     bool makeCommit(const svn::Targets&);
     void CheckoutExport(const QString&what,bool _exp,bool urlisTarget=false);
 
-    QString getInfo(QPtrList<SvnItem> lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
+    QString getInfo(const SvnItemList& lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
     QString getInfo(const QString&_what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
 
     QString makeMkdir(const QString&);
     bool makeMkdir(const QStringList&,const QString&);
-    bool isLocalWorkingCopy(const KURL&url,QString&_baseUri);
+    bool isLocalWorkingCopy(const KUrl&url,QString&_baseUri);
     bool createUpdateCache(const QString&what);
     bool checkUpdateCache(const QString&path)const;
     bool isUpdated(const QString&path)const;
@@ -157,7 +154,6 @@ public:
     void stopCheckModThread();
     void stopCheckUpdateThread();
     void startFillCache(const QString&path);
-    void stopFillCache();
     void stopMain();
     void killallThreads();
 
@@ -165,15 +161,16 @@ public:
     void getaddedItems(const QString&path,svn::StatusEntries&target);
 
     bool makeCopy(const QString&,const QString&,const svn::Revision&rev);
-    bool makeCopy(const KURL::List&,const QString&,const svn::Revision&rev);
+    bool makeCopy(const KUrl::List&,const QString&,const svn::Revision&rev);
 
     bool makeMove(const QString&,const QString&,bool);
-    bool makeMove(const KURL::List&,const QString&,bool);
+    bool makeMove(const KUrl::List&,const QString&,bool);
 
     virtual bool makeCleanup(const QString&);
 
     bool get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p);
     bool singleInfo(const QString&what,const svn::Revision&rev,svn::InfoEntry&target,const svn::Revision&_peg=svn::Revision::UNDEFINED);
+    bool hasMergeInfo(const QString&originpath);
 
     void setContextData(const QString&,const QString&);
     void clearContextData();
@@ -181,7 +178,7 @@ public:
 
     bool threadRunning(ThreadType which);
 
-    virtual void customEvent ( QCustomEvent * e );
+    virtual void customEvent (QEvent *e);
 
     bool doNetworking();
 
@@ -230,6 +227,7 @@ public slots:
     virtual void slotMakeCat(const svn::Revision&start, const QString&what,const QString&disp,const svn::Revision&peg,QWidget*dlgparent);
 
     virtual void slotCancel(bool);
+    virtual void stopFillCache();
 
 signals:
     void clientException(const QString&);
@@ -241,14 +239,13 @@ signals:
     void sigRefreshIcons(bool);
     void sigExtraLogMsg(const QString&);
     void sigGotourl(const QString&);
-    void sigCacheStatus(Q_LONG,Q_LONG);
+    void sigCacheStatus(qlonglong,qlonglong);
+    void sigCacheDataChanged();
 
 protected slots:
-    virtual void wroteStdin(KProcess*);
-    virtual void procClosed(KProcess*);
     virtual void checkModthread();
     virtual void checkUpdateThread();
-    virtual void receivedStderr(KProcess*,char*,int);
+    virtual void slotProcessDataRead(const QByteArray&,WatchedProcess*);
 };
 
 #endif

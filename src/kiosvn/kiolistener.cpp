@@ -19,10 +19,12 @@
  ***************************************************************************/
 #include "kiolistener.h"
 #include "kiosvn.h"
+#include "kdesvndinterface.h"
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <dcopclient.h>
+
+#include <qvariant.h>
 
 namespace KIO {
 
@@ -54,52 +56,38 @@ bool KioListener::contextCancel()
  */
 bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&_items)
 {
-#if 1
-    QByteArray reply;
-    QByteArray params;
-    QCString replyType;
-    QDataStream stream(params,IO_WriteOnly);
+    QDBusReply<QStringList> res;
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+       kWarning() << "Communication with KDED:KdeSvnd failed";
+       return false;
+    }
+
 
     if (_items.count()>0) {
-        QMap<QString,QString> list;
-        for (unsigned i = 0;i<_items.count();++i) {
+        QMap<QString,QVariant> list;
+        for (int i = 0;i<_items.count();++i) {
             if (_items[i].path().isEmpty()) {
-                list[_items[i].url()]=QChar(_items[i].actionType());
+                list[_items[i].url()]=QString(QChar(_items[i].actionType()));
             } else {
-                list[_items[i].path()]=QChar(_items[i].actionType());
+                list[_items[i].path()]=QString(QChar(_items[i].actionType()));
             }
         }
-        stream << list;
-        if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg(QMap<QString,QString>)",params,replyType,reply)) {
-            msg = "Communication with dcop failed";
-            kdWarning()<<msg<<endl;
-            return false;
-        }
+        QDBusVariant v; v.setVariant(QVariant(list));
+        res = kdesvndInterface.get_logmsg(v);
     } else {
-        if (!par->dcopClient()->call("kded","kdesvnd","get_logmsg()",params,replyType,reply)) {
-            msg = "Communication with dcop failed";
-            kdWarning()<<msg<<endl;
-            return false;
-        }
+        res = kdesvndInterface.get_logmsg();
     }
 
-    if (replyType!="QStringList") {
-        msg = "Wrong reply type";
-        kdWarning()<<msg<<endl;
-        return false;
-    }
-    QDataStream stream2(reply,IO_ReadOnly);
-    QStringList lt;
-    stream2>>lt;
+    QStringList lt = res;
+
     if (lt.count()!=1) {
         msg = "Wrong or missing log (may cancel pressed).";
-        kdDebug()<< msg << endl;
+        kDebug()<< msg << endl;
         return false;
     }
     msg = lt[0];
-#else
-    msg = "Made with a kio::svn client";
-#endif
+
     return true;
 }
 
@@ -253,14 +241,14 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
         default:
             break;
     }
-    par->setMetaData(QString::number(counter()).rightJustify( 10,'0' )+ "path" , QString::FROMUTF8( path ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "action", QString::number( action ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "kind", QString::number( kind ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "mime_t", QString::FROMUTF8( mime_type ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "content", QString::number( content_state ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "prop", QString::number( prop_state ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "rev", QString::number( revision ));
-    par->setMetaData(QString::number( counter() ).rightJustify( 10,'0' )+ "string", userstring );
+    par->setMetaData(QString::number(counter()).rightJustified( 10,'0' )+ "path" , QString::FROMUTF8( path ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "action", QString::number( action ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "kind", QString::number( kind ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "mime_t", QString::FROMUTF8( mime_type ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "content", QString::number( content_state ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "prop", QString::number( prop_state ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "rev", QString::number( revision ));
+    par->setMetaData(QString::number( counter() ).rightJustified( 10,'0' )+ "string", userstring );
     incCounter();
 }
 
@@ -278,31 +266,23 @@ void KioListener::contextNotify (const svn_wc_notify_t *action)
 svn::ContextListener::SslServerTrustAnswer
 KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data, apr_uint32_t & acceptedFailures)
 {
-    QByteArray reply;
-    QByteArray params;
-    QCString replyType;
-    QDataStream stream(params,IO_WriteOnly);
-    stream << data.hostname
-        << data.fingerprint
-        << data.validFrom
-        << data.validUntil
-        << data.issuerDName
-        << data.realm;
+    Q_UNUSED(acceptedFailures);
+    QDBusReply<int> res;
 
-    if (!par->dcopClient()->call("kded","kdesvnd",
-        "get_sslaccept(QString,QString,QString,QString,QString,QString)",
-        params,replyType,reply)) {
-        kdWarning()<<"Communication with dcop failed"<<endl;
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+       kWarning() << "Communication with KDED:KdeSvnd failed";
+       return DONT_ACCEPT;
+    }
+    res = kdesvndInterface.get_sslaccept(data.hostname,
+            data.fingerprint, data.validFrom, data.validUntil, data.issuerDName, data.realm);
+
+    if ( !res.isValid() ) {
+        kWarning() << "Unexpected reply type";
         return DONT_ACCEPT;
     }
-    if (replyType!="int") {
-        kdWarning()<<"Wrong reply type"<<endl;
-        return DONT_ACCEPT;
-    }
-    QDataStream stream2(reply,IO_ReadOnly);
-    int res;
-    stream2>>res;
-    switch (res) {
+
+    switch (res.value()) {
         case -1:
             return DONT_ACCEPT;
             break;
@@ -325,21 +305,19 @@ bool KioListener::contextLoadSslClientCertPw(QString&password,const QString&real
 
 bool KioListener::contextSslClientCertPrompt (QString & certFile)
 {
-    QByteArray reply;
-    QByteArray params;
-    QCString replyType;
-    if (!par->dcopClient()->call("kded","kdesvnd",
-        "get_sslclientcertfile()",
-        params,replyType,reply)) {
-        kdWarning()<<"Communication with dcop failed"<<endl;
+    QDBusReply<QString> res;
+
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+       kWarning() << "Communication with KDED:KdeSvnd failed";
+       return false;
+    }
+    res=kdesvndInterface.get_sslclientcertfile();
+    if (!res.isValid()) {
+        kWarning() << "Unexpected reply type";
         return false;
     }
-    if (replyType!="QString") {
-        kdWarning()<<"Wrong reply type"<<endl;
-        return false;
-    }
-    QDataStream stream2(reply,IO_ReadOnly);
-    stream2>>certFile;
+    certFile = res.value();
     if (certFile.isEmpty()) {
         return false;
     }
@@ -349,6 +327,9 @@ bool KioListener::contextSslClientCertPrompt (QString & certFile)
 bool KioListener::contextSslClientCertPwPrompt (QString & password,
                                    const QString & realm, bool & maySave)
 {
+    Q_UNUSED(password);
+    Q_UNUSED(realm);
+    Q_UNUSED(maySave);
     return false;
 }
 
@@ -360,32 +341,29 @@ bool KioListener::contextGetSavedLogin (const QString & realm,QString & username
 
 bool KioListener::contextGetCachedLogin (const QString & realm,QString & username,QString & password)
 {
+    Q_UNUSED(realm);
+    Q_UNUSED(username);
+    Q_UNUSED(password);
     return true;
 }
 
 bool KioListener::contextGetLogin (const QString & realm, QString & username, QString & password, bool & maySave)
 {
-    QByteArray reply;
-    QByteArray params;
-    QCString replyType;
+    QDBusReply<QStringList> res;
 
-    QDataStream stream(params,IO_WriteOnly);
-    stream << realm;
-    stream << username;
-
-    if (!par->dcopClient()->call("kded","kdesvnd","get_login(QString,QString)",params,replyType,reply)) {
-        kdWarning()<<"Communication with dcop failed"<<endl;
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+       kWarning() << "Communication with KDED:KdeSvnd failed";
+       return false;
+    }
+    res=kdesvndInterface.get_login(realm,username);
+    if (!res.isValid()) {
+        kWarning() << "Unexpected reply type";
         return false;
     }
-    if (replyType!="QStringList") {
-        kdWarning()<<"Wrong reply type"<<endl;
-        return false;
-    }
-    QDataStream stream2(reply,IO_ReadOnly);
-    QStringList lt;
-    stream2>>lt;
+    QStringList lt = res.value();
     if (lt.count()!=3) {
-        kdDebug()<<"Wrong or missing auth list (may cancel pressed)." << endl;
+        kDebug()<<"Wrong or missing auth list (may cancel pressed)." << endl;
         return false;
     }
     username = lt[0];
@@ -394,6 +372,19 @@ bool KioListener::contextGetLogin (const QString & realm, QString & username, QS
     return true;
 }
 
+bool KioListener::contextAddListItem(svn::DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path)
+{
+    Q_UNUSED(entries);
+    if (!dirent || path.isEmpty()) {
+        // the path itself? is a problem within kio
+        return false;
+    }
+    if (par) {
+        par->listSendDirEntry(svn::DirEntry(path, dirent,lock));
+        return true;
+    }
+    return false;
+}
 
 /*!
     \fn KioListener::contextProgress(long long int current, long long int max)

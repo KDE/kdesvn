@@ -7,7 +7,9 @@ STRING(REGEX REPLACE "\n" ";" files "${files}")
 FOREACH(file ${files})
   MESSAGE(STATUS "Uninstalling \"${file}\"")
   IF(NOT EXISTS "${file}")
-    MESSAGE(FATAL_ERROR "File \"${file}\" does not exists.")
+#not a failure - missing links are marked as missed too, so when lib is removed the links are 
+#there but invalid!
+    MESSAGE(STATUS "File \"${file}\" does not exists.")
   ENDIF(NOT EXISTS "${file}")
   EXEC_PROGRAM("@CMAKE_COMMAND@" ARGS "-E remove \"${file}\""
     OUTPUT_VARIABLE rm_out

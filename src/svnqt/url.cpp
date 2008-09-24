@@ -37,11 +37,7 @@
 #include "url.hpp"
 
 #include <qglobal.h>
-#if QT_VERSION < 0x040000
-#include <qvaluelist.h>
-#else
 #include <QtCore>
-#endif
 
 // subversion api
 #include "svn_ra.h"
@@ -58,11 +54,7 @@ namespace svn
   };
 
   static bool mSchemasInitialized = false;
-#if QT_VERSION < 0x040000
-  QValueList<QString> mSchemas;
-#else
-  QList<QString> mSchemas;
-#endif
+  QStringList mSchemas;
 
   Url::Url () {}
 
@@ -70,11 +62,7 @@ namespace svn
 
   bool Url::isLocal(const QString& url)
   {
-#if QT_VERSION < 0x040000
-      bool cs = false;
-#else
-      Qt::CaseSensitivity cs=Qt::CaseInsensitive;
-#endif
+    Qt::CaseSensitivity cs=Qt::CaseInsensitive;
     if (
         url.startsWith("file://",cs) ||
         url.startsWith("/") ||
@@ -108,11 +96,7 @@ namespace svn
   QString
   Url::transformProtokoll(const QString&prot)
   {
-#if QT_VERSION < 0x040000
-    QString _prot = prot.lower();
-#else
     QString _prot = prot.toLower();
-#endif
     if (QString::compare(_prot,"svn+http")==0||
         QString::compare(_prot,"ksvn+http")==0) {
         return QString("http");
@@ -136,11 +120,7 @@ namespace svn
    * url schemas out of the ra layer it rather dirty now since
    * we are lacking a higher level of abstraction
    */
-#if QT_VERSION < 0x040000
-  QValueList<QString>
-#else
-  QList<QString>
-#endif
+  QStringList
   Url::supportedSchemas ()
   {
     if (mSchemasInitialized)
@@ -171,21 +151,13 @@ namespace svn
     {
       const QString tokenStart ("handles '");
       const QString tokenEnd ("' schem");
-#if QT_VERSION < 0x040000
-      pos = descriptions.find (tokenStart, pos);
-#else
       pos = descriptions.indexOf( tokenStart, pos );
-#endif
       if (pos == not_found)
         break;
 
       pos += tokenStart.length ();
 
-#if QT_VERSION < 0x040000
-      int posEnd = descriptions.find (tokenEnd, pos);
-#else
       int posEnd = descriptions.indexOf( tokenEnd, pos );
-#endif
       if (posEnd == not_found)
         break;
 

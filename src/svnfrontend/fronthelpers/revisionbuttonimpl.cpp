@@ -27,11 +27,16 @@
 #include <kapplication.h>
 #include <klocale.h>
 
-#include <qvbox.h>
+// #include <qvbox.h>
+#include <KVBox>
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent, const char *name)
-    :RevisionButton(parent, name),m_Rev(svn::Revision::UNDEFINED),m_noWorking(false)
+//     :RevisionButton(parent, name),
+    : QWidget(parent),
+    m_Rev(svn::Revision::UNDEFINED),m_noWorking(false)
 {
+    setupUi(this);
+    setObjectName(name);
 }
 
 RevisionButtonImpl::~RevisionButtonImpl()
@@ -48,22 +53,31 @@ void RevisionButtonImpl::setRevision(const svn::Revision&aRev)
 void RevisionButtonImpl::askRevision()
 {
     Rangeinput_impl*rdlg;
-    int buttons = KDialogBase::Ok|KDialogBase::Cancel;
+//     int buttons = KDialog::Ok|KDialog::Cancel;
 
-    KDialogBase * dlg = new KDialogBase(KApplication::activeModalWidget(),"Revinput",true,i18n("Select revision"),buttons);
+//     KDialogBase * dlg = new KDialogBase(KApplication::activeModalWidget(),"Revinput",
+//                                          true,i18n("Select revision"),buttons);
+    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+    dlg->setCaption(i18n("Select revision"));
+    dlg->setModal(true);
+    dlg->setButtons(KDialog::Ok|KDialog::Cancel);
+    dlg->showButtonSeparator( false );
 
     if (!dlg) {
         return;
     }
-    QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+//     QWidget* Dialog1Layout = dlg->makeVBoxMainWidget();
+    KVBox *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
+
     rdlg = new Rangeinput_impl(Dialog1Layout);
     rdlg->setStartOnly(true);
     rdlg->setNoWorking(m_noWorking);
-    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg"));
+// KDE4 port    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg"));
     if (dlg->exec()==QDialog::Accepted) {
         setRevision(rdlg->getRange().first);
     }
-    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg",false);
+// KDE4 port    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg",false);
     delete dlg;
 }
 

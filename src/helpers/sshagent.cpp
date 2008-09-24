@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or
@@ -37,10 +37,21 @@ bool    SshAgent::m_addIdentitiesDone = false;
 QString SshAgent::m_authSock   = QString::null;
 QString SshAgent::m_pid        = QString::null;
 
-
-SshAgent::SshAgent(QObject* parent, const char* name)
-    : QObject(parent, name)
+class SshClean
 {
+public:
+    SshClean() {};
+
+    ~SshClean()
+    {
+        SshAgent ssh; ssh.killSshAgent();
+    }
+};
+
+SshAgent::SshAgent(QObject* parent)
+    : QObject(parent),sshAgent(0)
+{
+    static SshClean st;
 }
 
 
@@ -66,21 +77,23 @@ bool SshAgent::querySshAgent()
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
 #ifdef FORCE_ASKPASS
-        kdDebug()<<"Using test askpass"<<endl;
+        kDebug()<<"Using test askpass"<<endl;
 #ifdef HAS_SETENV
             ::setenv("SSH_ASKPASS",FORCE_ASKPASS,1);
 #else
             ::putenv("SSH_ASKPASS="FORCE_ASKPASS);
 #endif
 #else
-/*
-        char*agent = ::getenv("SSH_ASKPASS");
-        if (!agent) {
-*/
+            QString pro = BIN_INSTALL_DIR;
+            if (pro.size()>0) {
+                pro.append("/");
+            }
+            pro.append("kdesvnaskpass");
 #ifdef HAS_SETENV
-            ::setenv("SSH_ASKPASS", "kdesvnaskpass",1);
+            ::setenv("SSH_ASKPASS", pro.toAscii(),1);
 #else
-            ::putenv("SSH_ASKPASS=kdesvnaskpass");
+            pro = "SSH_ASKPASS="+pro;
+            ::putenv(pro.toAscii());
 #endif
 /*
         }
@@ -114,41 +127,24 @@ bool SshAgent::addSshIdentities(bool force)
     // add identities to ssh-agent
     KProcess proc;
 
-    proc.setEnvironment("SSH_AGENT_PID", m_pid);
-    proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
+    proc.setEnv("SSH_AGENT_PID", m_pid);
+    proc.setEnv("SSH_AUTH_SOCK", m_authSock);
 
 #ifdef FORCE_ASKPASS
-    kdDebug()<<"Using test askpass"<<endl;
-    proc.setEnvironment("SSH_ASKPASS",FORCE_ASKPASS);
+    kDebug()<<"Using test askpass"<<endl;
+    proc.setEnv("SSH_ASKPASS",FORCE_ASKPASS);
 #else
-    char*agent = 0;
-/*
-    if (force) {
-        agent = ::getenv("SSH_ASKPASS");
-    }
-*/
-    if (!agent) {
-        proc.setEnvironment("SSH_ASKPASS", "kdesvnaskpass");
-    }
+    proc.setEnv("SSH_ASKPASS", "kdesvnaskpass");
 #endif
 
     proc << "ssh-add";
+    proc.start();
+    // endless
+    proc.waitForFinished(-1);
 
-    connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
-            SLOT(slotReceivedStdout(KProcess*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
-            SLOT(slotReceivedStderr(KProcess*, char*, int)));
-
-    proc.start(KProcess::DontCare, KProcess::AllOutput);
-
-    // wait for process to finish
-    // TODO CL use timeout?
-    proc.wait();
-
-    m_addIdentitiesDone = proc.normalExit() && proc.exitStatus() == 0;
+    m_addIdentitiesDone = proc.exitStatus()==QProcess::NormalExit && proc.exitStatus() == 0;
     return m_addIdentitiesDone;
 }
-
 
 void SshAgent::killSshAgent()
 {
@@ -159,18 +155,22 @@ void SshAgent::killSshAgent()
 
     proc << "kill" << m_pid;
 
-    proc.start(KProcess::DontCare, KProcess::NoCommunication);
+    proc.start();
+    proc.waitForFinished();
 }
 
 
-void SshAgent::slotProcessExited(KProcess*)
+void SshAgent::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
 {
+    if (exitStatus!=QProcess::NormalExit || exitCode!=0) {
+        return;
+    }
     QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
     QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
 
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
-    QStringList m_outputLines = QStringList::split("\n",m_Output);
+    QStringList m_outputLines = m_Output.split("\n",QString::SkipEmptyParts);
 
     QStringList::Iterator it  = m_outputLines.begin();
     QStringList::Iterator end = m_outputLines.end();
@@ -178,14 +178,14 @@ void SshAgent::slotProcessExited(KProcess*)
     {
         if( m_pid.isEmpty() )
         {
-            int pos = cshPidRx.search(*it);
+            int pos = cshPidRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_pid = cshPidRx.cap(1);
                 continue;
             }
 
-            pos = bashPidRx.search(*it);
+            pos = bashPidRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_pid = bashPidRx.cap(1);
@@ -195,14 +195,14 @@ void SshAgent::slotProcessExited(KProcess*)
 
         if( m_authSock.isEmpty() )
         {
-            int pos = cshSockRx.search(*it);
+            int pos = cshSockRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_authSock = cshSockRx.cap(1);
                 continue;
             }
 
-            pos = bashSockRx.search(*it);
+            pos = bashSockRx.indexIn(*it);
             if( pos > -1 )
             {
                 m_authSock = bashSockRx.cap(1);
@@ -214,44 +214,33 @@ void SshAgent::slotProcessExited(KProcess*)
 }
 
 
-void SshAgent::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
+void SshAgent::slotReceivedStdout()
 {
-    Q_UNUSED(proc);
-
-    QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_Output+=output;
-}
-
-
-void SshAgent::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
-{
-    Q_UNUSED(proc);
-
-    QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_Output+=output;
+    if (!sshAgent) return;
+    m_Output+=QString::fromLocal8Bit(sshAgent->readAllStandardOutput());
 }
 
 
 bool SshAgent::startSshAgent()
 {
-    KProcess proc;
+    if (sshAgent)  return false;
+    sshAgent = new KProcess();
+    *sshAgent << "ssh-agent";
 
-    proc << "ssh-agent";
+    sshAgent->setOutputChannelMode(KProcess::MergedChannels);
 
-    connect(&proc, SIGNAL(processExited(KProcess*)),
-            SLOT(slotProcessExited(KProcess*)));
-    connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
-            SLOT(slotReceivedStdout(KProcess*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
-            SLOT(slotReceivedStderr(KProcess*, char*, int)) );
+    connect(sshAgent, SIGNAL(finished(int,QProcess::ExitStatus)),
+            SLOT(slotProcessExited(int, QProcess::ExitStatus)));
+    connect(sshAgent, SIGNAL(readyReadStandardOutput()),
+            SLOT(slotReceivedStdout()));
+    sshAgent->start();
+    // wait for process to finish eg. backgrounding
+    sshAgent->waitForFinished(-1);
+    bool ok = (sshAgent->exitStatus()==QProcess::NormalExit && sshAgent->exitStatus() == 0);
+    delete sshAgent;
+    sshAgent=0;
 
-    proc.start(KProcess::NotifyOnExit, KProcess::All);
-
-    // wait for process to finish
-    // TODO CL use timeout?
-    proc.wait();
-
-    return (proc.normalExit() && proc.exitStatus() == 0);
+    return ok;
 }
 
 #include "sshagent.moc"

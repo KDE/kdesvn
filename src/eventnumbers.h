@@ -22,15 +22,16 @@
 
 #include <qevent.h>
 
-#define EVENT_THREAD_FINISHED QEvent::User
-#define EVENT_THREAD_SSL_TRUST_PROMPT QEvent::User+1
-#define EVENT_THREAD_LOGIN_PROMPT QEvent::User+2
-#define EVENT_THREAD_LOGMSG_PROMPT QEvent::User+3
-#define EVENT_THREAD_CERT_PW_PROMPT QEvent::User+4
-#define EVENT_THREAD_CERT_SELECT_PROMPT QEvent::User+5
-#define EVENT_THREAD_NOTIFY QEvent::User+6
-#define EVENT_LOGCACHE_FINISHED QEvent::User+7
-#define EVENT_LOGCACHE_STATUS QEvent::User+8
-#define EVENT_THREAD_LOGIN_SAVED QEvent::User+9
+#define EVENT_CACHE_THREAD_FINISHED QEvent::Type(QEvent::User)
+#define EVENT_THREAD_SSL_TRUST_PROMPT QEvent::Type(QEvent::User+1)
+#define EVENT_THREAD_LOGIN_PROMPT QEvent::Type(QEvent::User+2)
+#define EVENT_THREAD_LOGMSG_PROMPT QEvent::Type(QEvent::User+3)
+#define EVENT_THREAD_CERT_PW_PROMPT QEvent::Type(QEvent::User+4)
+#define EVENT_THREAD_CERT_SELECT_PROMPT QEvent::Type(QEvent::User+5)
+#define EVENT_THREAD_NOTIFY QEvent::Type(QEvent::User+6)
+#define EVENT_LOGCACHE_FINISHED QEvent::Type(QEvent::User+7)
+#define EVENT_LOGCACHE_STATUS QEvent::Type(QEvent::User+8)
+#define EVENT_THREAD_LOGIN_SAVED QEvent::Type(QEvent::User+9)
+#define EVENT_UPDATE_CACHE_FINISHED QEvent::Type(QEvent::User+10)
 
 #endif

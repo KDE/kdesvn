@@ -22,18 +22,21 @@
 #include "diffbrowserdata.h"
 #include "src/settings/kdesvnsettings.h"
 
-#include <kglobalsettings.h>
-#include <kglobal.h>
-#include <kdebug.h>
-#include <kfiledialog.h>
-#include <kmessagebox.h>
-#include <kapplication.h>
-#include <klocale.h>
+#include <KGlobalSettings>
+#include <KGlobal>
+#include <KDebug>
+#include <KFileDialog>
+#include <KMessageBox>
+#include <KApplication>
+#include <KLocale>
+#include <KStandardGuiItem>
+#include <KFind>
 
-#include <qfont.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qtextcodec.h>
+#include <QFont>
+#include <QToolTip>
+#include <QWhatsThis>
+#include <QKeyEvent>
+#include <QTextCodec>
 
 /*!
     \fn DiffBrowser::DiffBrowser(QWidget*parent=0,const char*name=0)
@@ -41,14 +44,15 @@
 DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
     : KTextBrowser( parent, name)
 {
-    setTextFormat(Qt::PlainText);
+//     setTextFormat(Qt::PlainText);
+    setLineWrapMode(QTextEdit::NoWrap);
     setFont(KGlobalSettings::fixedFont());
     m_Data = new DiffBrowserData;
 
-    setWordWrap(QTextEdit::NoWrap);
+    setLineWrapMode(QTextEdit::NoWrap);
     m_Data->m_Syntax = new DiffSyntax(this);
-    QToolTip::add(this,i18n("Ctrl-F for search, F3 or Shift-F3 for search again."));
-    QWhatsThis::add(this,i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
+    setToolTip(i18n("Ctrl-F for search, F3 or Shift-F3 for search again."));
+    setWhatsThis(i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
     setFocus();
 }
 
@@ -62,25 +66,25 @@ DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
 
 void DiffBrowser::setText(const QString&aText)
 {
-    m_Data->m_content.setRawData(aText.local8Bit(),aText.local8Bit().size());
+    m_Data->m_content.fromRawData(aText.toLocal8Bit(),aText.toLocal8Bit().size());
     KTextBrowser::setText(aText);
-    setCursorPosition(0,0);
+    moveCursor(QTextCursor::Start);
 }
 
 void DiffBrowser::setText(const QByteArray&aText)
 {
     m_Data->m_content=aText;
     printContent();
-    setCursorPosition(0,0);
+    moveCursor(QTextCursor::Start);
 }
 
 void DiffBrowser::printContent()
 {
-    QTextCodec * cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_diff());
+    QTextCodec * cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_diff().toLocal8Bit());
     if (!cc) {
         KTextBrowser::setText(QString::fromLocal8Bit(m_Data->m_content,m_Data->m_content.size()));
     } else {
-        KTextBrowser::setText(cc->toUnicode(m_Data->m_content,m_Data->m_content.size()));
+        KTextBrowser::setText(cc->toUnicode(m_Data->m_content));
     }
 }
 
@@ -89,7 +93,10 @@ void DiffBrowser::printContent()
  */
 void DiffBrowser::saveDiff()
 {
-    QString saveTo = KFileDialog::getSaveFileName(QString::null,"text/x-diff");
+    QString saveTo = KFileDialog::getSaveFileName(KUrl(),
+                                                   "text/x-patch text/plain",
+                                                   this
+                                                   );
     if (saveTo.isEmpty()) {
         return;
     }
@@ -101,26 +108,26 @@ void DiffBrowser::saveDiff()
             return;
         }
     }
-    tfile.open(IO_Truncate|IO_WriteOnly|IO_Raw);
+    tfile.open(QIODevice::Truncate|QIODevice::WriteOnly|QIODevice::Unbuffered);
     QDataStream stream( &tfile );
-    stream.writeRawBytes(m_Data->m_content.data(),m_Data->m_content.size());
+    stream.writeRawData(m_Data->m_content.data(),m_Data->m_content.size());
 }
 
 void DiffBrowser::keyPressEvent(QKeyEvent*ev)
 {
-    if ( ev->key() == Key_Return) {
+    if ( ev->key() == Qt::Key_Return) {
         ev->ignore();
         return;
     }
-    if (ev->key() == Key_F3) {
-        if (ev->state() == ShiftButton) {
+    if (ev->key() == Qt::Key_F3) {
+        if (ev->modifiers() == Qt::ShiftModifier) {
             searchagainback_slot();
         } else {
             searchagain_slot();
         }
-    } else if (ev->key()==Key_F && ev->state() == ControlButton) {
+    } else if (ev->key()==Qt::Key_F && ev->modifiers() == Qt::ControlModifier) {
         startSearch();
-    } else if (ev->key()==Key_S && ev->state() == ControlButton) {
+    } else if (ev->key()==Qt::Key_S && ev->modifiers() == Qt::ControlModifier) {
         saveDiff();
     } else {
         KTextBrowser::keyPressEvent(ev);
@@ -130,14 +137,16 @@ void DiffBrowser::keyPressEvent(QKeyEvent*ev)
 void DiffBrowser::startSearch()
 {
     if( !m_Data->srchdialog ) {
-        m_Data->srchdialog = new KEdFind( this, "searchdialog", false);
-        connect(m_Data->srchdialog,SIGNAL(search()),this,SLOT(search_slot()));
-        connect(m_Data->srchdialog,SIGNAL(done()),this,SLOT(searchdone_slot()));
+        m_Data->srchdialog = new KFindDialog(this);
+        m_Data->srchdialog->setSupportsWholeWordsFind(true);
+        m_Data->srchdialog->setHasCursor(false);
+        m_Data->srchdialog->setHasSelection(false);
+        m_Data->srchdialog->setSupportsRegularExpressionFind(false);
+        connect(m_Data->srchdialog,SIGNAL(okClicked()),this,SLOT(search_slot()));
     }
-    QString _st = m_Data->srchdialog->getText();
-    m_Data->srchdialog->setText(_st.isEmpty() ? m_Data->pattern : _st);
+    QString _st = m_Data->srchdialog->pattern();
+    m_Data->srchdialog->setPattern(_st.isEmpty() ? m_Data->pattern : _st);
     m_Data->srchdialog->show();
-    m_Data->srchdialog->result();
 }
 
 /*!
@@ -148,41 +157,46 @@ void DiffBrowser::search_slot()
     if( !m_Data->srchdialog ) {
         return;
     }
-    QString to_find_string = m_Data->srchdialog->getText();
-    doSearch(to_find_string,m_Data->srchdialog->case_sensitive(),m_Data->srchdialog->get_direction());
+    doSearch(m_Data->srchdialog->pattern(),
+              m_Data->srchdialog->options() & KFind::FindBackwards?true:false);
 }
 
-void DiffBrowser::doSearch(const QString&to_find_string,bool case_sensitive,bool back)
+void DiffBrowser::doSearch(const QString&to_find_string,bool back)
 {
     if( !m_Data->srchdialog ) {
         return;
     }
-    int line, col;
-    getCursorPosition(&line,&col);
-    if (m_Data->last_search != DiffBrowserData::NONE && !back) {
-        col = col+1;
-    }
     while (1) {
-        bool result = find(to_find_string,case_sensitive,false,
-                        (!back),&line,&col);
+        bool result;
+        QTextDocument::FindFlags f;
+        if (back) {
+            f=QTextDocument::FindBackward;
+        }
+        if (m_Data->srchdialog->options()&KFind::WholeWordsOnly) {
+            f |= QTextDocument::FindWholeWords;
+        }
+        if (m_Data->srchdialog->options()&KFind::CaseSensitive) {
+            f |= QTextDocument::FindCaseSensitively;
+        }
+
+        result=find(to_find_string,f);
 
         if (result) {
-            m_Data->last_search = back?DiffBrowserData::BACKWARD:DiffBrowserData::FORWARD;
             m_Data->pattern=to_find_string;
             break;
         }
         QWidget * _parent = m_Data->srchdialog->isVisible()?m_Data->srchdialog:parentWidget();
-        if (!m_Data->srchdialog->get_direction()) {
-            // forward
+        QTextCursor tc = textCursor();
+        if (!back) {
             int query = KMessageBox::questionYesNo(
                     _parent,
                     i18n("End of document reached.\n"\
-                            "Continue from the beginning?"),
-                            i18n("Find"),KStdGuiItem::cont(),i18n("Stop"));
+                         "Continue from the beginning?"),
+                    i18n("Find"),
+                    KStandardGuiItem::yes(),
+                    KStandardGuiItem::no());
             if (query == KMessageBox::Yes){
-                line = 0;
-                col = 0;
-                m_Data->last_search = DiffBrowserData::FORWARD;
+                moveCursor(QTextCursor::Start);
             } else {
                 break;
             }
@@ -190,36 +204,17 @@ void DiffBrowser::doSearch(const QString&to_find_string,bool case_sensitive,bool
             int query = KMessageBox::questionYesNo(
                     _parent,
                     i18n("Beginning of document reached.\n"\
-                            "Continue from the end?"),
-                            i18n("Find"),KStdGuiItem::cont(),i18n("Stop"));
+                         "Continue from the end?"),
+                    i18n("Find"),
+                    KStandardGuiItem::yes(),
+                    KStandardGuiItem::no());
             if (query == KMessageBox::Yes){
-                line = lines()-1;
-                QString string = text(line);
-                col  = string.length();
-                if (col>0) {
-                    --col;
-                }
-                m_Data->last_search = DiffBrowserData::BACKWARD;
+                moveCursor(QTextCursor::End);
             } else {
                 break;
             }
         }
     }
-}
-
-/*!
-    \fn DiffBrowser::searchdone_slot()
- */
-void DiffBrowser::searchdone_slot()
-{
-    if (!m_Data->srchdialog)
-        return;
-
-    m_Data->srchdialog->hide();
-    setFocus();
-    m_Data->last_finished_search = m_Data->last_search;
-    m_Data->last_search = DiffBrowserData::NONE;
-    m_Data->cs = m_Data->srchdialog->case_sensitive();
 }
 
 void DiffBrowser::searchagain_slot()
@@ -238,9 +233,7 @@ void DiffBrowser::doSearchAgain(bool back)
         startSearch();
     } else {
         m_Data->last_search = m_Data->last_finished_search;
-        doSearch(m_Data->pattern,m_Data->cs,back);
-        m_Data->last_finished_search = m_Data->last_search;
-        m_Data->last_search = DiffBrowserData::NONE;
+        doSearch(m_Data->pattern,back);
     }
 }
 

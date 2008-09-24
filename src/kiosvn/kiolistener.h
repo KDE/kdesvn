@@ -68,6 +68,16 @@ public:
 
     void setCancel(bool value){m_Canceld=value;}
 
+    /** Callback for generating list entries
+     * This implementation sends items to the protocol, @a entries will ignored.
+     * @param entries default target list - ignored
+     * @param dirent entry to add (send by subversion)
+     * @param lock accociated lock (may be null!)
+     * @param path the path of the item
+     * @return true if inserted/displayd, false if dirent or entries aren't valid.
+     */
+    virtual bool contextAddListItem(svn::DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
+
 private:
     KIO::kio_svnProtocol *par;
 

@@ -233,11 +233,7 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
   m_size = item->size!=SVN_INFO_SIZE_UNKNOWN?QLONG(item->size):SVNQT_SIZE_UNKNOWN;
   m_working_size = item->working_size!=SVN_INFO_SIZE_UNKNOWN?QLONG(item->working_size):SVNQT_SIZE_UNKNOWN;
   if (item->changelist) {
-#if QT_VERSION < 0x040000
-      m_changeList = QByteArray(QCString(item->changelist,strlen(item->changelist)));
-#else
       m_changeList = QByteArray(item->changelist,strlen(item->changelist));
-#endif
   } else {
       m_changeList=QByteArray();
   }

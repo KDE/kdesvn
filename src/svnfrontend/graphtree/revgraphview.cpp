@@ -25,77 +25,51 @@
 #include "../stopdlg.h"
 #include "src/svnqt/client.hpp"
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <ktempdir.h>
 #include <kprocess.h>
 #include <klocale.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
+#include <kmenu.h>
+#include <kglobalsettings.h>
 
-#include <qtooltip.h>
-#include <qwmatrix.h>
-#include <qpopupmenu.h>
-#include <qpainter.h>
-#include <qregexp.h>
+#include <QMatrix>
+#include <QPainter>
+#include <QRegExp>
+#include <QContextMenuEvent>
+#include <QPixmap>
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QDesktopWidget>
+#include <QGraphicsScene>
+#include <QScrollBar>
 
 #include <math.h>
 
 #define LABEL_WIDTH 160
 #define LABEL_HEIGHT 90
 
-
-class GraphViewTip:public QToolTip
+RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name)
+: QGraphicsView(parent)
 {
-public:
-  GraphViewTip( QWidget* p ):QToolTip(p) {}
-  virtual ~GraphViewTip(){}
-
-protected:
-    void maybeTip( const QPoint & );
-};
-
-void GraphViewTip::maybeTip( const QPoint & pos)
-{
-    if (!parentWidget()->inherits( "RevGraphView" )) return;
-    RevGraphView* cgv = (RevGraphView*)parentWidget();
-    QPoint cPos = cgv->viewportToContents(pos);
-    QCanvasItemList l = cgv->canvas()->collisions(cPos);
-    if (l.count() == 0) return;
-    QCanvasItem* i = l.first();
-    if (i->rtti() == GRAPHTREE_LABEL) {
-        GraphTreeLabel*tl = (GraphTreeLabel*)i;
-        QString nm = tl->nodename();
-        QString tipStr = cgv->toolTip(nm);
-        if (tipStr.length()>0) {
-            QPoint vPosTL = cgv->contentsToViewport(i->boundingRect().topLeft());
-            QPoint vPosBR = cgv->contentsToViewport(i->boundingRect().bottomRight());
-            tip(QRect(vPosTL, vPosBR), tipStr);
-        }
-    }
-}
-
-RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent, const char * name, WFlags f)
- : QCanvasView(parent,name,f)
-{
-    m_Canvas = 0L;
+    setObjectName(name?name:"RevGraphView");
+    m_Scene = 0L;
     m_Client = _client;
     m_Listener = aListener;
     dotTmpFile = 0;
     m_Selected = 0;
     renderProcess = 0;
     m_Marker = 0;
-    m_Tip = new GraphViewTip(this);
     m_CompleteView = new PannerView(this);
-    m_CompleteView->setVScrollBarMode(QScrollView::AlwaysOff);
-    m_CompleteView->setHScrollBarMode(QScrollView::AlwaysOff);
+    m_CompleteView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_CompleteView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_CompleteView->raise();
     m_CompleteView->hide();
-    connect(this, SIGNAL(contentsMoving(int,int)),
-            this, SLOT(contentsMovingSlot(int,int)));
-    connect(m_CompleteView, SIGNAL(zoomRectMoved(int,int)),
-            this, SLOT(zoomRectMoved(int,int)));
+    connect(m_CompleteView, SIGNAL(zoomRectMoved(qreal,qreal)),
+            this, SLOT(zoomRectMoved(qreal,qreal)));
     connect(m_CompleteView, SIGNAL(zoomRectMoveFinished()),
             this, SLOT(zoomRectMoveFinished()));
     m_LastAutoPosition = TopLeft;
@@ -106,26 +80,20 @@ RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * paren
 
 RevGraphView::~RevGraphView()
 {
-    setCanvas(0);
-    delete m_Canvas;
-    delete dotTmpFile;
+    setScene(0);
+    delete m_Scene;
+    dotTmpFile = 0;
     delete m_CompleteView;
-    delete m_Tip;
     delete renderProcess;
 }
 
 void RevGraphView::showText(const QString&s)
 {
     clear();
-    m_Canvas = new QCanvas(QApplication::desktop()->width(),
-                        QApplication::desktop()->height());
-
-    QCanvasText* t = new QCanvasText(s, m_Canvas);
-    t->move(5, 5);
-    t->show();
-    center(0,0);
-    setCanvas(m_Canvas);
-    m_Canvas->update();
+    m_Scene = new QGraphicsScene;
+    m_Scene->addSimpleText(s);
+    setScene(m_Scene);
+    m_Scene->update();
     m_CompleteView->hide();
 }
 
@@ -140,11 +108,10 @@ void RevGraphView::clear()
         delete m_Marker;
         m_Marker=0;
     }
-    if (!m_Canvas) return;
-    delete m_Canvas;
-    m_Canvas = 0;
-    setCanvas(0);
-    m_CompleteView->setCanvas(0);
+    setScene(0);
+    m_CompleteView->setScene(0);
+    delete m_Scene;
+    m_Scene = 0;
 }
 
 void RevGraphView::beginInsert()
@@ -154,61 +121,72 @@ void RevGraphView::beginInsert()
 
 void RevGraphView::endInsert()
 {
-    if (m_Canvas) {
+    if (m_Scene) {
+/*
         _cvZoom = 0;
         updateSizes();
-        m_Canvas->update();
+*/
+        m_Scene->update();
     }
     viewport()->setUpdatesEnabled(true);
 }
 
-void RevGraphView::readDotOutput(KProcess*,char *   buffer,int   buflen)
+void RevGraphView::readDotOutput()
 {
-    dotOutput+=QString::fromLocal8Bit(buffer, buflen);
+    if (!renderProcess) return;
+    dotOutput+=QString::fromLocal8Bit(renderProcess->readAllStandardOutput());
 }
 
-void RevGraphView::dotExit(KProcess*p)
+void RevGraphView::dotExit(int exitcode,QProcess::ExitStatus exitStatus)
 {
-    if (p!=renderProcess)return;
+    if (!renderProcess)return;
+    if (exitStatus!=QProcess::NormalExit || exitcode!=0) {
+        QString error = i18n("Could not run process \"%1\".\n\nProcess stopped with message:\n%2",renderProcess->program().join(" "),
+                              QString::fromLocal8Bit(renderProcess->readAllStandardError()));
+        showText(error);
+        delete renderProcess;
+        renderProcess=0;
+        return;
+    }
     // remove line breaks when lines to long
     QRegExp endslash("\\\\\\n");
     dotOutput.replace(endslash,"");
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;
-    QTextStream* dotStream;
-    dotStream = new QTextStream(dotOutput, IO_ReadOnly);
+    QTextStream* dotStream = new QTextStream(&dotOutput, QIODevice::ReadOnly);
     QString line,cmd;
     int lineno=0;
-    clear();
     beginInsert();
+    clear();
     /* mostly taken from kcachegrind */
+    scaleX = scale * 60; scaleY = scale * 70;
+    QRect startRect;
     while (1) {
         line = dotStream->readLine();
         if (line.isNull()) break;
         lineno++;
         if (line.isEmpty()) continue;
-        QTextStream lineStream(line, IO_ReadOnly);
+        QTextStream lineStream(&line, QIODevice::ReadOnly);
         lineStream >> cmd;
         if (cmd == "stop") {break; }
 
         if (cmd == "graph") {
             lineStream >> scale >> dotWidth >> dotHeight;
-            scaleX = scale * 60; scaleY = scale * 100;
             int w = (int)(scaleX * dotWidth);
             int h = (int)(scaleY * dotHeight);
-
             _xMargin = 50;
             if (w < QApplication::desktop()->width())
                 _xMargin += (QApplication::desktop()->width()-w)/2;
             _yMargin = 50;
             if (h < QApplication::desktop()->height())
                 _yMargin += (QApplication::desktop()->height()-h)/2;
-            m_Canvas = new QCanvas(int(w+2*_xMargin), int(h+2*_yMargin));
+            m_Scene = new QGraphicsScene(0.0,0.0,qreal(w+2*_xMargin), qreal(h+2*_yMargin));
+            m_Scene->setBackgroundBrush(Qt::white);
             continue;
         }
         if ((cmd != "node") && (cmd != "edge")) {
-            kdWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
-                << dotTmpFile->name() << ":" << lineno << ")" << endl;
+            kWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
+                << dotTmpFile->fileName() << ":" << lineno << ")" << endl;
             continue;
         }
         if (cmd=="node") {
@@ -228,19 +206,22 @@ void RevGraphView::dotExit(KProcess*p)
             int w = (int)(scaleX * width);
             int h = (int)(scaleY * height);
             QRect r(xx-w/2, yy-h/2, w, h);
-            GraphTreeLabel*t=new GraphTreeLabel(label,nodeName,r,m_Canvas);
+            GraphTreeLabel*t=new GraphTreeLabel(label,nodeName,r);
+            m_Scene->addItem(t);
             if (isStart(nodeName)) {
-                ensureVisible(r.x(),r.y());
+                startRect = r;
+                ensureVisible(startRect);
             }
             t->setBgColor(getBgColor(nodeName));
-            t->setZ(1.0);
+            t->setZValue(1.0);
             t->show();
             m_NodeList[nodeName]=t;
+            t->setToolTip(toolTip(nodeName));
         } else {
             QString node1Name, node2Name, label;
             QString _x,_y;
             double x, y;
-            QPointArray pa;
+            QPolygonF pa;
             int points, i;
             lineStream >> node1Name >> node2Name;
             lineStream >> points;
@@ -250,12 +231,13 @@ void RevGraphView::dotExit(KProcess*p)
                 lineStream >> _x >> _y;
                 x=_x.toDouble();
                 y=_y.toDouble();
-                int xx = (int)(scaleX * x + _xMargin);
-                int yy = (int)(scaleY * (dotHeight - y) + _yMargin);
-
+                double xx = (double)(scaleX * x + _xMargin);
+                double yy = (double)(scaleY * (dotHeight - y) + _yMargin);
+#if 0
                 if (0) qDebug("   P %d: ( %f / %f ) => ( %d / %d)",
                     i, x, y, xx, yy);
-                pa.setPoint(i, xx, yy);
+#endif
+                pa[i]=QPointF(xx, yy);
             }
             if (i < points) {
                 qDebug("CallGraphView: Can't read %d spline points (%d)",
@@ -263,37 +245,41 @@ void RevGraphView::dotExit(KProcess*p)
                 continue;
             }
 
-            GraphEdge * n = new GraphEdge(m_Canvas);
+            GraphEdge * n = new GraphEdge();
             QColor arrowColor = Qt::black;
+            m_Scene->addItem(n);
             n->setPen(QPen(arrowColor,1));
-            n->setControlPoints(pa,false);
-            n->setZ(0.5);
+            n->setControlPoints(pa);
+            n->setZValue(0.5);
             n->show();
 
-            /* arrow */
-            QPoint arrowDir;
+            /* arrow dir
+             * eg. it is vx and vy for computing, NO absolute points!
+             */
+            QPointF arrowDir;
             int indexHead = -1;
 
             QMap<QString,GraphTreeLabel*>::Iterator it;
             it = m_NodeList.find(node2Name);
             if (it!=m_NodeList.end()) {
-                it.data()->setSource(node1Name);
+                it.value()->setSource(node1Name);
             }
             it = m_NodeList.find(node1Name);
             if (it!=m_NodeList.end()) {
-                GraphTreeLabel*tlab = it.data();
+                GraphTreeLabel*tlab = it.value();
                 if (tlab) {
-                    QPoint toCenter = tlab->rect().center();
-                    int dx0 = pa.point(0).x() - toCenter.x();
-                    int dy0 = pa.point(0).y() - toCenter.y();
-                    int dx1 = pa.point(points-1).x() - toCenter.x();
-                    int dy1 = pa.point(points-1).y() - toCenter.y();
+                    QPointF toCenter = tlab->rect().center();
+                    qreal dx0 = pa[0].x() - toCenter.x();
+                    qreal dy0 = pa[0].y() - toCenter.y();
+                    qreal dx1 = pa[points-1].x() - toCenter.x();
+                    qreal dy1 = pa[points-1].y() - toCenter.y();
+
                     if (dx0*dx0+dy0*dy0 > dx1*dx1+dy1*dy1) {
-                    // start of spline is nearer to call target node
+                        // start of spline is nearer to call target node
                         indexHead=-1;
                         while(arrowDir.isNull() && (indexHead<points-2)) {
                             indexHead++;
-                            arrowDir = pa.point(indexHead) - pa.point(indexHead+1);
+                            arrowDir = pa[indexHead] - pa[indexHead+1];
                         }
                     }
                 }
@@ -304,37 +290,43 @@ void RevGraphView::dotExit(KProcess*p)
                 // sometimes the last spline points from dot are the same...
                 while(arrowDir.isNull() && (indexHead>1)) {
                     indexHead--;
-                    arrowDir = pa.point(indexHead) - pa.point(indexHead-1);
+                    arrowDir = pa[indexHead] - pa[indexHead-1];
                 }
             }
             if (!arrowDir.isNull()) {
-                arrowDir *= 10.0/sqrt(double(arrowDir.x()*arrowDir.x() +
-                    arrowDir.y()*arrowDir.y()));
-                QPointArray a(3);
-                a.setPoint(0, pa.point(indexHead) + arrowDir);
-                a.setPoint(1, pa.point(indexHead) + QPoint(arrowDir.y()/2,
-                    -arrowDir.x()/2));
-                a.setPoint(2, pa.point(indexHead) + QPoint(-arrowDir.y()/2,
-                    arrowDir.x()/2));
-                GraphEdgeArrow* aItem = new GraphEdgeArrow(n,m_Canvas);
-                aItem->setPoints(a);
+                QPointF baseDir = arrowDir;
+                arrowDir *= 10.0/sqrt(double(arrowDir.x()*arrowDir.x() +arrowDir.y()*arrowDir.y()));
+                baseDir/=(sqrt(baseDir.x()*baseDir.x()+baseDir.y()*baseDir.y()));
+
+                QPointF t1(-baseDir.y()-baseDir.x(),baseDir.x()-baseDir.y());
+                QPointF t2(baseDir.y()-baseDir.x(),-baseDir.x()-baseDir.y());
+                QPolygonF a;
+                t1*=3;
+                t2*=3;
+                a<<pa[indexHead]+t1<<pa[indexHead]+arrowDir<<pa[indexHead]+t2;
+
+                GraphEdgeArrow* aItem = new GraphEdgeArrow(n,0);
+                m_Scene->addItem(aItem);
+                aItem->setPolygon(a);
                 aItem->setBrush(arrowColor);
-                aItem->setZ(1.5);
+                aItem->setZValue(1.5);
                 aItem->show();
-//                sItem->setArrow(aItem);
             }
         }
     }
-    if (!m_Canvas) {
+    if (!m_Scene) {
         QString s = i18n("Error running the graph layouting tool.\n");
         s += i18n("Please check that 'dot' is installed (package GraphViz).");
         showText(s);
     } else {
-        setCanvas(m_Canvas);
-        m_CompleteView->setCanvas(m_Canvas);
+        setScene(m_Scene);
+        m_CompleteView->setScene(m_Scene);
+        if (startRect.isValid()) {
+            ensureVisible(startRect);
+        }
     }
     endInsert();
-    delete p;
+    delete renderProcess;
     renderProcess=0;
 }
 
@@ -346,7 +338,7 @@ bool RevGraphView::isStart(const QString&nodeName)const
     if (it==m_Tree.end()) {
         return res;
     }
-    switch (it.data().Action) {
+    switch (it.value().Action) {
         case 'A':
             res = true;
             break;
@@ -361,7 +353,7 @@ char RevGraphView::getAction(const QString&nodeName)const
     if (it==m_Tree.end()) {
         return (char)0;
     }
-    return it.data().Action;
+    return it.value().Action;
 }
 
 QColor RevGraphView::getBgColor(const QString&nodeName)const
@@ -372,7 +364,7 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
     if (it==m_Tree.end()) {
         return res;
     }
-    switch (it.data().Action) {
+    switch (it.value().Action) {
         case 'D':
             res = Kdesvnsettings::tree_delete_color();
             break;
@@ -402,7 +394,7 @@ const QString&RevGraphView::getLabelstring(const QString&nodeName)
     QMap<QString,QString>::ConstIterator nIt;
     nIt = m_LabelMap.find(nodeName);
     if (nIt!=m_LabelMap.end()) {
-        return nIt.data();
+        return nIt.value();
     }
     trevTree::ConstIterator it1;
     it1 = m_Tree.find(nodeName);
@@ -410,30 +402,31 @@ const QString&RevGraphView::getLabelstring(const QString&nodeName)
         return m_LabelMap[""];
     }
     QString res;
-    switch (it1.data().Action) {
+    QString revstring = svn::Revision(it1.value().rev).toString();
+    switch (it1.value().Action) {
     case 'D':
-        res = i18n("Deleted at revision %1").arg(it1.data().rev);
+        res = i18n("Deleted at revision %1",revstring);
     break;
     case 'A':
-        res = i18n("Added at revision %1 as %2")
-            .arg(it1.data().rev)
-            .arg(it1.data().name);
+        res = i18n("Added at revision %1 as %2",
+                    revstring,
+                    it1.value().name);
     break;
     case 'C':
     case 1:
-        res = i18n("Copied to %1 at revision %2").arg(it1.data().name).arg(it1.data().rev);
+        res = i18n("Copied to %1 at revision %2",it1.value().name,revstring);
     break;
     case 2:
-        res = i18n("Renamed to %1 at revision %2").arg(it1.data().name).arg(it1.data().rev);
+        res = i18n("Renamed to %1 at revision %2",it1.value().name,revstring);
     break;
     case 'M':
-        res = i18n("Modified at revision %1").arg(it1.data().rev);
+        res = i18n("Modified at revision %1",revstring);
     break;
     case 'R':
-        res = i18n("Replaced at revision %1").arg(it1.data().rev);
+        res = i18n("Replaced at revision %1",revstring);
         break;
     default:
-        res=i18n("Revision %1").arg(it1.data().rev);
+        res=i18n("Revision %1",revstring);
     break;
     }
     m_LabelMap[nodeName]=res;
@@ -442,72 +435,75 @@ const QString&RevGraphView::getLabelstring(const QString&nodeName)
 
 void RevGraphView::dumpRevtree()
 {
-    delete dotTmpFile;
+    if (dotTmpFile) {
+        dotTmpFile->close();
+    }
     clear();
     dotOutput = "";
-    dotTmpFile = new KTempFile(QString::null,".dot");
-    dotTmpFile->setAutoDelete(true);
+    dotTmpFile = new KTemporaryFile;
+    dotTmpFile->setSuffix(".dot");
+    dotTmpFile->setAutoRemove(true);
+    dotTmpFile->open();
 
-    QTextStream* stream = dotTmpFile->textStream();
-    if (!stream) {
-        showText(i18n("Could not open tempfile %1 for writing.").arg(dotTmpFile->name()));
+    if (!dotTmpFile->open()) {
+        showText(i18n("Could not open tempfile %1 for writing.",dotTmpFile->fileName()));
         return;
     }
+    QTextStream stream(dotTmpFile);
+    QFont f = KGlobalSettings::fixedFont();
+    int _fontsize=f.pointSize();
+    if (_fontsize<0) {
+        _fontsize=10;
+    }
 
-    *stream << "digraph \"callgraph\" {\n";
-    *stream << "  bgcolor=\"transparent\";\n";
+    stream << "digraph \"callgraph\" {\n";
+    stream << "  bgcolor=\"transparent\";\n";
     int dir = Kdesvnsettings::tree_direction();
-    *stream << QString("  rankdir=\"");
+    stream << QString("  rankdir=\"");
     switch (dir) {
         case 3:
-            *stream << "TB";
+            stream << "TB";
         break;
         case 2:
-            *stream << "RL";
+            stream << "RL";
         break;
         case 1:
-            *stream << "BT";
+            stream << "BT";
         break;
         case 0:
         default:
-            *stream << "LR";
+            stream << "LR";
         break;
     }
-    *stream << "\";\n";
+    stream << "\";\n";
 
-    //*stream << QString("  overlap=false;\n  splines=true;\n");
+    //stream << QString("  overlap=false;\n  splines=true;\n");
 
     RevGraphView::trevTree::ConstIterator it1;
     for (it1=m_Tree.begin();it1!=m_Tree.end();++it1) {
-        *stream << "  " << it1.key()
+        stream << "  " << it1.key()
             << "[ "
             << "shape=box, "
             << "label=\""<<getLabelstring(it1.key())<<"\","
+	    <<"fontsize="<<_fontsize<<",fontname=\""<<f.family()<<"\","
             << "];\n";
-        for (unsigned j=0;j<it1.data().targets.count();++j) {
-            *stream<<"  "<<it1.key().latin1()<< " "
-                << "->"<<" "<<it1.data().targets[j].key
-                << " [fontsize=10,style=\"solid\"];\n";
+        for (int j=0;j<it1.value().targets.count();++j) {
+            stream<<"  "<<it1.key().toLatin1()<< " "
+                << "->"<<" "<<it1.value().targets[j].key
+                << " [fontsize="<<_fontsize<<",fontname=\""<<f.family()<<"\",style=\"solid\"];\n";
         }
     }
-    *stream << "}\n"<<flush;
+    stream << "}\n"<<flush;
     renderProcess = new KProcess();
-    renderProcess->setEnvironment("LANG","C");
+    renderProcess->setEnv("LANG","C");
     *renderProcess << "dot";
-    *renderProcess << dotTmpFile->name() << "-Tplain";
-    connect(renderProcess,SIGNAL(processExited(KProcess*)),this,SLOT(dotExit(KProcess*)));
-    connect(renderProcess,SIGNAL(receivedStdout(KProcess*,char*,int)),
-        this,SLOT(readDotOutput(KProcess*,char*,int)) );
-    if (!renderProcess->start(KProcess::NotifyOnExit,KProcess::Stdout)) {
-        QString arguments;
-        for (unsigned c=0;c<renderProcess->args().count();++c) {
-            arguments+=QString(" %1").arg(renderProcess->args()[c]);
-        }
-        QString error = i18n("Could not start process \"%1\".").arg(arguments);
-        showText(error);
-        renderProcess=0;
-        //delete renderProcess;<
-    }
+    *renderProcess << dotTmpFile->fileName() << "-Tplain";
+    connect(renderProcess,SIGNAL(finished(int,QProcess::ExitStatus)),
+        this,SLOT(dotExit(int,QProcess::ExitStatus)));
+    connect(renderProcess,SIGNAL(readyReadStandardOutput()),
+        this,SLOT(readDotOutput()) );
+    renderProcess->setOutputChannelMode(KProcess::SeparateChannels);
+    renderProcess->start();
 }
 
 QString RevGraphView::toolTip(const QString&_nodename,bool full)const
@@ -518,15 +514,15 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
     if (it==m_Tree.end()) {
         return res;
     }
-    QStringList sp = QStringList::split("\n",it.data().Message);
+    QStringList sp = it.value().Message.split("\n");
     QString sm;
     if (sp.count()==0) {
-        sm = it.data().Message;
+        sm = it.value().Message;
     } else {
         if (!full) {
             sm = sp[0]+"...";
         } else {
-            for (unsigned j = 0; j<sp.count(); ++j) {
+            for (int j = 0; j<sp.count(); ++j) {
                 if (j>0) sm+="<br>";
                 sm+=sp[j];
             }
@@ -542,19 +538,19 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
     res = QString("<html><body>");
 
     if (!full) {
-        res+=QString("<b>%1</b>").arg(it.data().name);
-        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>")
-            .arg(it.data().rev)
-            .arg(it.data().Author)
-            .arg(it.data().Date)
-            .arg(sm);
+        res+=QString("<b>%1</b>").arg(it.value().name);
+        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>",
+                     it.value().rev,
+                     it.value().Author,
+                     it.value().Date,
+                     sm);
     } else {
-        res+="<table><tr><th colspan=\"2\"><b>"+it.data().name+"</b></th></tr>";
+        res+="<table><tr><th colspan=\"2\"><b>"+it.value().name+"</b></th></tr>";
         res+=rstart;
-        res+=i18n("<b>Revision</b>%1%2%3").arg(csep).arg(it.data().rev).arg(rend);
-        res+=rstart+i18n("<b>Author</b>%1%2%3").arg(csep).arg(it.data().Author).arg(rend);
-        res+=rstart+i18n("<b>Date</b>%1%2%3").arg(csep).arg(it.data().Date).arg(rend);
-        res+=rstart+i18n("<b>Log</b>%1%2%3").arg(csep).arg(sm).arg(rend);
+        res+=i18n("<b>Revision</b>%1%2%3",csep,it.value().rev,rend);
+        res+=rstart+i18n("<b>Author</b>%1%2%3",csep,it.value().Author,rend);
+        res+=rstart+i18n("<b>Date</b>%1%2%3",csep,it.value().Date,rend);
+        res+=rstart+i18n("<b>Log</b>%1%2%3",csep,sm,rend);
         res+="</table></body></html>";
     }
     return res;
@@ -562,12 +558,12 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
 
 void RevGraphView::updateSizes(QSize s)
 {
-    if (!m_Canvas) return;
+    if (!m_Scene) return;
     if (s == QSize(0,0)) s = size();
 
     // the part of the canvas that should be visible
-    int cWidth  = m_Canvas->width()  - 2*_xMargin + 100;
-    int cHeight = m_Canvas->height() - 2*_yMargin + 100;
+    qreal cWidth  = m_Scene->width()  - 2*_xMargin + 100;
+    qreal cHeight = m_Scene->height() - 2*_yMargin + 100;
 
     // hide birds eye view if no overview needed
     if (((cWidth < s.width()) && cHeight < s.height())||m_NodeList.count()==0) {
@@ -593,24 +589,18 @@ void RevGraphView::updateSizes(QSize s)
 
     if (zoom != _cvZoom) {
       _cvZoom = zoom;
-      if (0) qDebug("Canvas Size: %dx%d, Visible: %dx%d, Zoom: %f",
-            m_Canvas->width(), m_Canvas->height(),
-            cWidth, cHeight, zoom);
-
-      QWMatrix wm;
-      wm.scale( zoom, zoom );
-      m_CompleteView->setWorldMatrix(wm);
+      QMatrix wm;
+      m_CompleteView->setMatrix(wm.scale( zoom, zoom ));
 
       // make it a little bigger to compensate for widget frame
       m_CompleteView->resize(int(cWidth * zoom) + 4,
                             int(cHeight * zoom) + 4);
 
       // update ZoomRect in completeView
-      contentsMovingSlot(contentsX(), contentsY());
+      scrollContentsBy(0, 0);
     }
 
-    m_CompleteView->setContentsPos(int(zoom*(_xMargin-50)),
-                  int(zoom*(_yMargin-50)));
+    m_CompleteView->centerOn(m_Scene->width()/2, m_Scene->height()/2);
     updateZoomerPos();
 }
 
@@ -624,25 +614,13 @@ void RevGraphView::updateZoomerPos()
     QPoint oldZoomPos = m_CompleteView->pos();
     QPoint newZoomPos = QPoint(0,0);
 
-#if 0
-    ZoomPosition zp = _zoomPosition;
-    if (zp == Auto) {
-#else
     ZoomPosition zp = m_LastAutoPosition;
-#endif
-    QPoint tl1Pos = viewportToContents(QPoint(0,0));
-    QPoint tl2Pos = viewportToContents(QPoint(cvW,cvH));
-    QPoint tr1Pos = viewportToContents(QPoint(x,0));
-    QPoint tr2Pos = viewportToContents(QPoint(x+cvW,cvH));
-    QPoint bl1Pos = viewportToContents(QPoint(0,y));
-    QPoint bl2Pos = viewportToContents(QPoint(cvW,y+cvH));
-    QPoint br1Pos = viewportToContents(QPoint(x,y));
-    QPoint br2Pos = viewportToContents(QPoint(x+cvW,y+cvH));
-    int tlCols = m_Canvas->collisions(QRect(tl1Pos,tl2Pos)).count();
-    int trCols = m_Canvas->collisions(QRect(tr1Pos,tr2Pos)).count();
-    int blCols = m_Canvas->collisions(QRect(bl1Pos,bl2Pos)).count();
-    int brCols = m_Canvas->collisions(QRect(br1Pos,br2Pos)).count();
+    int tlCols = items(QRect(0,0, cvW,cvH)).count();
+    int trCols = items(QRect(x,0, cvW,cvH)).count();
+    int blCols = items(QRect(0,y, cvW,cvH)).count();
+    int brCols = items(QRect(x,y, cvW,cvH)).count();
     int minCols = tlCols;
+
     zp = m_LastAutoPosition;
     switch(zp) {
         case TopRight:    minCols = trCols; break;
@@ -657,9 +635,6 @@ void RevGraphView::updateZoomerPos()
     if (minCols > brCols) { minCols = brCols; zp = BottomRight; }
 
     m_LastAutoPosition = zp;
-#if 0
-    }
-#endif
     switch(zp) {
     case TopRight:
         newZoomPos = QPoint(x,0);
@@ -676,24 +651,15 @@ void RevGraphView::updateZoomerPos()
     if (newZoomPos != oldZoomPos) m_CompleteView->move(newZoomPos);
 }
 
-void RevGraphView::contentsMovingSlot(int x,int y)
+void RevGraphView::zoomRectMoved(qreal dx,qreal dy)
 {
-    QRect z(int(x * _cvZoom), int(y * _cvZoom),
-        int(visibleWidth() * _cvZoom)-1, int(visibleHeight() * _cvZoom)-1);
-    if (0) qDebug("moving: (%d,%d) => (%d/%d - %dx%d)",
-                x, y, z.x(), z.y(), z.width(), z.height());
-    m_CompleteView->setZoomRect(z);
-    if (!_noUpdateZoomerPos) {
-        updateZoomerPos();
-    }
-}
-
-void RevGraphView::zoomRectMoved(int dx,int dy)
-{
-  if (leftMargin()>0) dx = 0;
-  if (topMargin()>0) dy = 0;
+  //if (leftMargin()>0) dx = 0;
+  //if (topMargin()>0) dy = 0;
   _noUpdateZoomerPos = true;
-  scrollBy(int(dx/_cvZoom),int(dy/_cvZoom));
+  QScrollBar *hBar = horizontalScrollBar();
+  QScrollBar *vBar = verticalScrollBar();
+  hBar->setValue(hBar->value() + int(dx));
+  vBar->setValue(vBar->value() + int(dy));
   _noUpdateZoomerPos = false;
 }
 
@@ -707,8 +673,8 @@ void RevGraphView::zoomRectMoveFinished()
 
 void RevGraphView::resizeEvent(QResizeEvent*e)
 {
-    QCanvasView::resizeEvent(e);
-    if (m_Canvas) updateSizes(e->size());
+    QGraphicsView::resizeEvent(e);
+    if (m_Scene) updateSizes(e->size());
 }
 
 void RevGraphView::makeSelected(GraphTreeLabel*gtl)
@@ -723,52 +689,84 @@ void RevGraphView::makeSelected(GraphTreeLabel*gtl)
         m_Marker=0;
     }
     if (gtl) {
-        m_Marker = new GraphMark(gtl,m_Canvas);
-        m_Marker->setZ(-1);
-        m_Marker->show();
-        m_Selected->setSelected(true);
+        m_Marker = new GraphMark(gtl);
+        m_Scene->addItem(m_Marker);
+        m_Marker->setPos(gtl->pos());
+        m_Marker->setZValue(-1);
     }
-    m_Canvas->update();
-    m_CompleteView->updateCurrentRect();
+    m_Scene->update();
+    m_CompleteView->update();
+
 }
 
-void RevGraphView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
+GraphTreeLabel*RevGraphView::firstLabelAt(const QPoint&pos)const
+{
+    QList<QGraphicsItem*> its=items(pos);
+    for (QList<QGraphicsItem*>::size_type i=0;i<its.size();++i) {
+        if (its[i]->type()==GRAPHTREE_LABEL) {
+            return static_cast<GraphTreeLabel*>(its[i]);
+        }
+    }
+
+    return 0;
+}
+
+void RevGraphView::mouseDoubleClickEvent ( QMouseEvent * e )
 {
     setFocus();
     if (e->button() == Qt::LeftButton) {
-        QCanvasItemList l = canvas()->collisions(e->pos());
-        if (l.count()>0) {
-            QCanvasItem* i = l.first();
-            if (i->rtti()==GRAPHTREE_LABEL) {
-                makeSelected( (GraphTreeLabel*)i);
-                emit dispDetails(toolTip(((GraphTreeLabel*)i)->nodename(),true));
-            }
+        GraphTreeLabel* i = firstLabelAt(e->pos());
+        if (i == 0) {
+            return;
         }
+        makeSelected((GraphTreeLabel*)i);
+        emit dispDetails(toolTip(((GraphTreeLabel*)i)->nodename(),true));
     }
 }
 
-void RevGraphView::contentsMousePressEvent ( QMouseEvent * e )
+void RevGraphView::mousePressEvent ( QMouseEvent * e )
 {
     setFocus();
-    _isMoving = true;
-    _lastPos = e->globalPos();
+    if (e->button() == Qt::LeftButton) {
+        _isMoving = true;
+        _lastPos = e->pos();
+    }
 }
 
-void RevGraphView::contentsMouseReleaseEvent ( QMouseEvent * )
+void RevGraphView::mouseReleaseEvent ( QMouseEvent * e)
 {
-    _isMoving = false;
-    updateZoomerPos();
+    if (e->button() == Qt::LeftButton && _isMoving) {
+        QPointF topLeft = mapToScene(QPoint(0, 0));
+        QPointF bottomRight = mapToScene(QPoint(width(), height()));
+        QRectF z(topLeft, bottomRight);
+        m_CompleteView->setZoomRect(z);
+        _isMoving = false;
+        updateZoomerPos();
+    }
 }
 
-void RevGraphView::contentsMouseMoveEvent ( QMouseEvent * e )
+void RevGraphView::scrollContentsBy(int dx, int dy)
+{
+    // call QGraphicsView implementation
+    QGraphicsView::scrollContentsBy(dx, dy);
+
+    QPointF topLeft = mapToScene(QPoint(0, 0));
+    QPointF bottomRight = mapToScene(QPoint(width(), height()));
+    m_CompleteView->setZoomRect(QRectF(topLeft, bottomRight));
+    if (!_noUpdateZoomerPos && !_isMoving) {
+        updateZoomerPos();
+    }
+}
+
+void RevGraphView::mouseMoveEvent ( QMouseEvent * e )
 {
     if (_isMoving) {
-        int dx = e->globalPos().x() - _lastPos.x();
-        int dy = e->globalPos().y() - _lastPos.y();
-        _noUpdateZoomerPos = true;
-        scrollBy(-dx, -dy);
-        _noUpdateZoomerPos = false;
-        _lastPos = e->globalPos();
+        QPoint delta = e->pos() - _lastPos;
+        QScrollBar *hBar = horizontalScrollBar();
+        QScrollBar *vBar = verticalScrollBar();
+        hBar->setValue(hBar->value() - delta.x());
+        vBar->setValue(vBar->value() - delta.y());
+        _lastPos = e->pos();
     }
 }
 
@@ -780,42 +778,50 @@ void RevGraphView::setNewDirection(int dir)
     dumpRevtree();
 }
 
-void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
+void RevGraphView::contextMenuEvent(QContextMenuEvent* e)
 {
-    if (!m_Canvas) return;
-    QCanvasItemList l = canvas()->collisions(e->pos());
-    QCanvasItem* i = (l.count() == 0) ? 0 : l.first();
+    if (!m_Scene) {
+        return;
+    }
+    GraphTreeLabel* i = firstLabelAt(e->pos());
 
-    QPopupMenu popup;
-    if (i && i->rtti()==GRAPHTREE_LABEL) {
+    QAction * ac;
+
+    KMenu popup;
+    if (i) {
         if (!((GraphTreeLabel*)i)->source().isEmpty() && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
-            popup.insertItem(i18n("Diff to previous"),301);
+            popup.addAction(i18n("Diff to previous"))->setData(301);
         }
         if (m_Selected && m_Selected != i && getAction(m_Selected->nodename())!='D'
             && getAction(((GraphTreeLabel*)i)->nodename())!='D') {
-            popup.insertItem(i18n("Diff to selected item"),302);
+            popup.addAction(i18n("Diff to selected item"))->setData(302);
         }
         if (getAction(((GraphTreeLabel*)i)->nodename())!='D') {
-            popup.insertItem(i18n("Cat this version"),303);
+            popup.addAction(i18n("Cat this version"))->setData(303);
         }
         if (m_Selected == i) {
-            popup.insertItem(i18n("Unselect item"),401);
+            popup.addAction(i18n("Unselect item"))->setData(401);
         } else {
-            popup.insertItem(i18n("Select item"),402);
+            popup.addAction(i18n("Select item"))->setData(402);
         }
-        popup.insertSeparator();
-        popup.insertItem(i18n("Display details"),403);
-        popup.insertSeparator();
+        popup.addSeparator();
+        popup.addAction(i18n("Display details"))->setData(403);
+        popup.addSeparator();
     }
-    popup.insertItem(i18n("Rotate counter-clockwise"),101);
-    popup.insertItem(i18n("Rotate clockwise"),102);
-    popup.insertSeparator();
-    int it = popup.insertItem(i18n("Diff in revisiontree is recursive"),202);
-    popup.setCheckable(true);
-    popup.setItemChecked(it,Kdesvnsettings::tree_diff_rec());
-    popup.insertItem(i18n("Save tree as png"),201);
+    popup.addAction(i18n("Rotate counter-clockwise"))->setData(101);
+    popup.addAction(i18n("Rotate clockwise"))->setData(102);
+    popup.addSeparator();
+    ac = popup.addAction(i18n("Diff in revisiontree is recursive"));
+    ac->setData(202);
+    ac->setCheckable(true);
+    ac->setChecked(Kdesvnsettings::tree_diff_rec());
+    popup.addAction(i18n("Save tree as png"))->setData(201);
 
-    int r = popup.exec(e->globalPos());
+    ac = popup.exec(e->globalPos());
+    int r = 0;
+    if (ac) {
+        r = ac->data().toInt();
+    }
 
     switch (r) {
         case 101:
@@ -832,7 +838,10 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         break;
         case 201:
         {
-            QString fn = KFileDialog::getSaveFileName(":","*.png");
+            QString fn = KFileDialog::getSaveFileName(KUrl(),
+                                                   "image/png",
+                                                   this
+                                                   );
             if (!fn.isEmpty()) {
                 if (m_Marker) {
                     m_Marker->hide();
@@ -840,16 +849,18 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
                 if (m_Selected) {
                     m_Selected->setSelected(false);
                 }
-                QPixmap pix(m_Canvas->size());
+                QRect r = m_Scene->sceneRect().toRect();
+                QPixmap pix(r.width(),r.height());
+                pix.fill();
                 QPainter p(&pix);
-                m_Canvas->drawArea( m_Canvas->rect(), &p );
+                m_Scene->render(&p);
                 pix.save(fn,"PNG");
                 if (m_Marker) {
                     m_Marker->show();
                 }
                 if (m_Selected) {
                     m_Selected->setSelected(true);
-                    m_Canvas->update();
+                    m_Scene->update();
                     m_CompleteView->updateCurrentRect();
                 }
             }
@@ -861,28 +872,28 @@ void RevGraphView::contentsContextMenuEvent(QContextMenuEvent* e)
         }
         break;
         case 301:
-            if (i && i->rtti()==GRAPHTREE_LABEL && !((GraphTreeLabel*)i)->source().isEmpty()) {
-                makeDiffPrev((GraphTreeLabel*)i);
+            if (i && i->type()==GRAPHTREE_LABEL && !((GraphTreeLabel*)i)->source().isEmpty()) {
+                makeDiffPrev(i);
             }
         break;
         case 302:
-            if (i && i->rtti()==GRAPHTREE_LABEL && m_Selected) {
-                makeDiff(((GraphTreeLabel*)i)->nodename(),m_Selected->nodename());
+            if (i && m_Selected) {
+                makeDiff(i->nodename(),m_Selected->nodename());
             }
         break;
         case 303:
-            if (i && i->rtti()==GRAPHTREE_LABEL) {
-                makeCat((GraphTreeLabel*)i);
+            if (i) {
+                makeCat(i);
             }
         break;
         case 401:
             makeSelected(0);
         break;
         case 402:
-            makeSelected((GraphTreeLabel*)i);
+            makeSelected(i);
         break;
         case 403:
-            emit dispDetails(toolTip(((GraphTreeLabel*)i)->nodename(),true));
+            emit dispDetails(toolTip(i->nodename(),true));
         break;
         default:
         break;
@@ -899,9 +910,9 @@ void RevGraphView::makeCat(GraphTreeLabel*_l)
     if (it==m_Tree.end()) {
         return;
     }
-    svn::Revision tr(it.data().rev);
-    QString tp = _basePath+it.data().name;
-    emit makeCat(tr,tp,it.data().name,tr,kapp->activeModalWidget());
+    svn::Revision tr(it.value().rev);
+    QString tp = _basePath+it.value().name;
+    emit makeCat(tr,tp,it.value().name,tr,kapp->activeModalWidget());
 }
 
 void RevGraphView::makeDiffPrev(GraphTreeLabel*_l)
@@ -921,15 +932,15 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
     if (it==m_Tree.end()) {
         return;
     }
-    svn::Revision sr(it.data().rev);
-    QString sp = _basePath+it.data().name;
+    svn::Revision sr(it.value().rev);
+    QString sp = _basePath+it.value().name;
 
     it = m_Tree.find(n1);
     if (it==m_Tree.end()) {
         return;
     }
-    svn::Revision tr(it.data().rev);
-    QString tp = _basePath+it.data().name;
+    svn::Revision tr(it.value().rev);
+    QString tp = _basePath+it.value().name;
     if (Kdesvnsettings::tree_diff_rec()) {
         emit makeRecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
     } else {

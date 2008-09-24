@@ -33,8 +33,11 @@
 
 // svncpp
 #include "svnqt/client_impl.hpp"
-#include "svn_opt.h"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/exception.hpp"
+
+#include "svn_opt.h"
+#include "svn_ra.h"
 
 #include <qmap.h>
 #include <qstringlist.h>
@@ -102,17 +105,52 @@ namespace svn
       const char*propname;
       QByteArray s,n;
       for (it=aMap.begin();it!=aMap.end();++it) {
-#if QT_VERSION < 0x040000
-          s=it.data().TOUTF8();
-#else
           s=it.value().TOUTF8();
-#endif
           n=it.key().TOUTF8();
           propval=apr_pstrndup(pool,s,s.size());
           propname=apr_pstrndup(pool,n,n.size());
           apr_hash_set(hash,propname,APR_HASH_KEY_STRING,propval);
       }
       return hash;
+  }
+
+  bool Client_impl::RepoHasCapability(const Path&repository,Capability capability)
+  {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+        svn_error_t* error = 0;
+        Pool pool;
+
+        svn_ra_session_t*session=0;
+        error = svn_client_open_ra_session(&session,
+                                            repository.cstr(),
+                                            *m_context,
+                                            pool);
+        if (error != 0) {
+            throw ClientException(error);
+        }
+        if (!session) {
+            return false;
+        }
+        const char*capa=0;
+        switch (capability) {
+            case CapabilityMergeinfo:
+                capa = SVN_RA_CAPABILITY_MERGEINFO;
+                break;
+            default:
+                return false;
+        }
+        svn_boolean_t has=0;
+        error = svn_ra_has_capability(session,&has,capa,pool);
+        if (error != 0) {
+            throw ClientException(error);
+        }
+        return has;
+#else
+      Q_UNUSED(repository);
+      Q_UNUSED(capability);
+      return false;
+#endif
+
   }
 }
 

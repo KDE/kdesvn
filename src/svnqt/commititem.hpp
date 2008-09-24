@@ -91,11 +91,6 @@ public:
     char actionType()const;
 };
 
-#if QT_VERSION < 0x040000
-    typedef QValueList<CommitItem> CommitItemList;
-#else
-    typedef QList<CommitItem> CommitItemList;
-#endif
 }
 
 #endif

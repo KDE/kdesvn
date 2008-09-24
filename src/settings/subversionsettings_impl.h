@@ -21,14 +21,14 @@
 #ifndef SUBVERSIONSETTINGS_IMPL_H
 #define SUBVERSIONSETTINGS_IMPL_H
 
-#include "src/settings/subversion_settings.h"
+#include "src/settings/ui_subversion_settings.h"
 
-class SubversionSettings_impl : public SubversionSettings
+class SubversionSettings_impl : public QWidget, public Ui::SubversionSettings
 {
   Q_OBJECT
 
 public:
-  SubversionSettings_impl(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  SubversionSettings_impl(QWidget* parent = 0);
   ~SubversionSettings_impl();
   /*$PUBLIC_FUNCTIONS$*/
 

@@ -20,17 +20,17 @@
 #ifndef IMPORTDIR_LOGMSG_H
 #define IMPORTDIR_LOGMSG_H
 
-#include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/ksvnwidgets/commitmsg_impl.h"
 
 class QCheckBox;
 /**
 @author Rajko Albrecht
 */
-class Importdir_logmsg : public Logmsg_impl
+class Importdir_logmsg : public Commitmsg_impl
 {
 Q_OBJECT
 public:
-    Importdir_logmsg(QWidget *parent = 0, const char *name = 0);
+    Importdir_logmsg(QWidget *parent = 0);
 
     virtual ~Importdir_logmsg();
 

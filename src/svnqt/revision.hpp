@@ -37,12 +37,7 @@
 
 // qt
 #include <qglobal.h>
-#if QT_VERSION < 0x040000
-    #include <qstring.h>
-    #include <qtextstream.h>
-#else
-    #include <QtCore>
-#endif
+#include <QtCore>
 
 // subversion api
 #include "svn_types.h"

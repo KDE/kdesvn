@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "dummydisplay.h"
+#include "svnqt/revision.hpp"
+#include <QList>
 
 DummyDisplay::DummyDisplay()
  : ItemDisplay()
@@ -34,22 +36,27 @@ QWidget*DummyDisplay::realWidget()
     return 0L;
 }
 
-SvnItem*DummyDisplay::Selected()
+SvnItem*DummyDisplay::Selected()const
 {
     return 0L;
 }
 
-void DummyDisplay::SelectionList(QPtrList<SvnItem>*)
+void DummyDisplay::SelectionList(QList<SvnItem*>&)const
 {
 }
 
-bool DummyDisplay::openURL( const KURL &,bool)
+bool DummyDisplay::openUrl( const KUrl &,bool)
 {
     return false;
 }
 
-SvnItem*DummyDisplay::SelectedOrMain()
+SvnItem*DummyDisplay::SelectedOrMain()const
 {
     return 0;
 }
 
+const svn::Revision&DummyDisplay::baseRevision()const
+{
+    static svn::Revision fake(svn::Revision::UNDEFINED);
+    return fake;
+}

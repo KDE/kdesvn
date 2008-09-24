@@ -22,25 +22,20 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 
 #include <iostream>
-static KCmdLineOptions options[] =
-{
-    { "+[prompt]", I18N_NOOP("prompt"), 0 },
-    KCmdLineLastOption
-};
 
 int main(int argc, char** argv)
 {
-    KAboutData about("kdesvnaskpass",I18N_NOOP("kdesvnaskpass"),"0.1",
-                    I18N_NOOP("ssh-askpass for kdesvn"),
+    KAboutData about(QByteArray("kdesvnaskpass"),QByteArray("kdesvnaskpass"),ki18n("kdesvnaskpass"),QByteArray("0.1"),
+                    ki18n("ssh-askpass for kdesvn"),
                     KAboutData::License_LGPL,
-                    I18N_NOOP("Copyright (c) 2005 Rajko Albrecht"));
+                    ki18n("Copyright (c) 2005 Rajko Albrecht"));
     KCmdLineArgs::init(argc, argv, &about);
+    KCmdLineOptions options;
+    options.add("+[prompt]",ki18n("Prompt"));
     KCmdLineArgs::addCmdLineOptions(options);
-    // no need to register with the dcop server
-    KApplication::disableAutoDcopRegistration();
 
     KApplication app;
     // no need for session management
@@ -52,13 +47,17 @@ int main(int argc, char** argv)
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
     }
-    QCString pw;
-    KPasswordDialog::disableCoreDumps();
-    if (KPasswordDialog::getPassword(pw,prompt,0)==KPasswordDialog::Accepted) {
-        std::cout << pw << std::endl;
+    QString pw;
+    KPasswordDialog dlg;
+    dlg.setPrompt(prompt);
+    dlg.setCaption(i18n("SSH password"));
+    if (dlg.exec()==KPasswordDialog::Accepted) {
+        pw = dlg.password();
+        std::cout << pw.toUtf8().data() << std::endl;
         /* cleanup memory */
         pw.replace(0,pw.length(),"0");
         return 0;
     }
     return 1;
 }
+

@@ -28,11 +28,7 @@
 
 #include <qglobal.h>
 
-#if QT_VERSION < 0x040000
-    #include <qstring.h>
-#else
-    #include <QtCore>
-#endif
+#include <QtCore>
 
 struct apr_file_t;
 

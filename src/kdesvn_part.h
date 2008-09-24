@@ -29,11 +29,13 @@
 #include <kparts/statusbarextension.h>
 #include <kparts/browserextension.h>
 
+#include <KComponentData>
+
 class kdesvnView;
 class QPainter;
-class KURL;
+class KUrl;
 class KdesvnBrowserExtension;
-class KAboutApplication;
+class KAboutApplicationDialog;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -43,24 +45,24 @@ class KAboutApplication;
  * @author Rajko Albrecht <rajko.albrecht@tecways.com>
  * @version 0.1
  */
-class KDESVN_EXPORT kdesvnPart : public KParts::ReadOnlyPart
+class KDESVN_EXPORT kdesvnpart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 public:
     /**
      * Default constructor
      */
-    kdesvnPart(QWidget *parentWidget, const char *widgetName,
-                    QObject *parent, const char *name, const QStringList&);
+    kdesvnpart(QWidget *parentWidget,
+                    QObject *parent, const QVariantList& args = QVariantList());
 
-    kdesvnPart(QWidget *parentWidget, const char *widgetName,
-               QObject *parent, const char *name,bool ownapp, const QStringList&);
+    kdesvnpart(QWidget *parentWidget,
+               QObject *parent, bool ownapp, const QVariantList& args = QVariantList());
 
     /**
      * Destructor
      */
-    virtual ~kdesvnPart();
-    virtual bool closeURL();
+    virtual ~kdesvnpart();
+    virtual bool closeUrl();
     static KAboutData* createAboutData();
 
 signals:
@@ -70,7 +72,7 @@ signals:
 public slots:
     virtual void slotDispPopup(const QString&,QWidget**target);
     virtual void slotFileProperties();
-    virtual bool openURL(const KURL&);
+    virtual bool openUrl(const KUrl&);
     virtual void slotSshAdd();
 
 protected:
@@ -79,16 +81,18 @@ protected:
      */
     virtual bool openFile();
     virtual void setupActions();
-    KAboutApplication* m_aboutDlg;
+    KAboutApplicationDialog* m_aboutDlg;
 
-    void init(QWidget *parentWidget, const char *widgetName,bool full);
+    void init(QWidget *parentWidget, bool full);
 
 protected slots:
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
     virtual void slotUrlChanged(const QString&);
+#if KDE_VERSION_MAJOR<4
     void reportBug();
+#endif
     void showAboutApplication();
     void appHelpActivated();
     virtual void slotShowSettings();
@@ -96,9 +100,10 @@ protected slots:
 private:
     kdesvnView *m_view;
     KdesvnBrowserExtension*m_browserExt;
-    static QString m_Extratext;
+
 protected slots:
-    void slotSettingsChanged();
+    void slotSettingsChanged(const QString&);
+
 protected slots:
     virtual void slotHideUnchanged(bool);
     virtual void slotEnableNetwork(bool);
@@ -107,37 +112,12 @@ protected slots:
 class commandline_part;
 class KCmdLineArgs;
 
-/* we make it ourself 'cause we will enhance a little bit! */
-class KDESVN_EXPORT cFactory : public KParts::Factory
-{
-    Q_OBJECT
-public:
-    cFactory():KParts::Factory(){}
-    virtual ~cFactory();
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
-                                            const char *classname, const QStringList &args );
-    virtual KParts::Part* createAppPart( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
-                                            const char *classname, const QStringList &args );
-    virtual commandline_part*createCommandIf(QObject*parent,const char*name, KCmdLineArgs *args);
-    static KInstance* instance();
-
-private:
-    static KInstance* s_instance;
-    static KAboutData* s_about;
-    static commandline_part*s_cline;
-};
-
-typedef cFactory kdesvnPartFactory;
-
 class KPARTS_EXPORT KdesvnBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 public:
-    KdesvnBrowserExtension( kdesvnPart * );
+    KdesvnBrowserExtension(kdesvnpart*);
     virtual ~KdesvnBrowserExtension();
-    void setPropertiesActionEnabled(bool enabled);
 
 public slots:
     void properties();

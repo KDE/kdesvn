@@ -24,16 +24,16 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qstringlist.h>
+#include <qprocess.h>
 
 class KProcess;
-
 
 class SshAgent : public QObject
 {
     Q_OBJECT
 
 public:
-    SshAgent(QObject* parent = 0, const char* name = 0);
+    SshAgent(QObject* parent = 0);
     ~SshAgent();
 
     bool querySshAgent();
@@ -45,9 +45,8 @@ public:
     QString authSock() const { return m_authSock; }
 
 private slots:
-    void slotProcessExited(KProcess*);
-    void slotReceivedStdout(KProcess* proc, char* buffer, int buflen);
-    void slotReceivedStderr(KProcess* proc, char* buffer, int buflen);
+    void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
+    void slotReceivedStdout();
 
 private:
     bool startSshAgent();
@@ -59,6 +58,8 @@ private:
     static bool    m_addIdentitiesDone;
     static QString m_authSock;
     static QString m_pid;
+
+    KProcess*sshAgent;
 };
 
 

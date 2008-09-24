@@ -19,10 +19,13 @@
  ***************************************************************************/
 #include "graphtreelabel.h"
 #include "graphtree_defines.h"
-#include <qpainter.h>
 
-GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRect&r,QCanvas*c)
-    : QCanvasRectangle(r,c),StoredDrawParams()
+#include <QStyleOptionGraphicsItem>
+#include <QPainter>
+#include <QPixmap>
+
+GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRectF&r,QGraphicsItem*p)
+    : QGraphicsRectItem (r,p),StoredDrawParams()
 {
     m_Nodename = _nodename;
     m_SourceNode = QString::null;
@@ -40,7 +43,7 @@ const QString&GraphTreeLabel::nodename()const
     return m_Nodename;
 }
 
-int GraphTreeLabel::rtti()const
+int GraphTreeLabel::type()const
 {
     return GRAPHTREE_LABEL;
 }
@@ -50,22 +53,20 @@ void GraphTreeLabel::setBgColor(const QColor&c)
     _backColor=c;
 }
 
-void GraphTreeLabel::drawShape(QPainter& p)
+void GraphTreeLabel::paint(QPainter* p,const QStyleOptionGraphicsItem* option, QWidget*)
 {
-    QRect r = rect();
-/*
-    p.setPen(blue);
-    p.drawRect(r);
-*/
+    Q_UNUSED(option);
+    QRect r = rect().toRect();
+
     RectDrawing d(r);
-    d.drawBack(&p,this);
-    d.drawField(&p, 0, this);
-    d.drawField(&p, 1, this);
+    d.drawBack(p,this);
+    d.drawField(p, 0, this);
+    d.drawField(p, 1, this);
 }
 
 void GraphTreeLabel::setSelected(bool s)
 {
-    QCanvasRectangle::setSelected(s);
+    QGraphicsItem::setSelected(s);
     StoredDrawParams::setSelected(s);
     update();
 }
@@ -80,8 +81,8 @@ void GraphTreeLabel::setSource(const QString&_s)
     m_SourceNode=_s;
 }
 
-GraphEdge::GraphEdge(QCanvas*c)
-    : QCanvasSpline(c)
+GraphEdge::GraphEdge(QGraphicsItem*c)
+    : QGraphicsPathItem(c)
 {
 }
 
@@ -89,65 +90,56 @@ GraphEdge::~GraphEdge()
 {
 }
 
-void GraphEdge::drawShape(QPainter& p)
+void GraphEdge::paint(QPainter* p,const QStyleOptionGraphicsItem* options, QWidget*)
 {
-    p.drawPolyline(poly);
+    Q_UNUSED(options);
+    p->save();
+    p->setRenderHint(QPainter::Antialiasing);
+
+    QPen pen = QPen(Qt::black);
+    pen.setWidthF(1.0);
+    p->setPen(pen);
+    p->drawPath(path());
+    p->restore();
 }
 
-QPointArray GraphEdge::areaPoints() const
+const QPolygonF& GraphEdge::controlPoints()const
 {
-  int minX = poly[0].x(), minY = poly[0].y();
-  int maxX = minX, maxY = minY;
-  int i;
-
-  if (0) qDebug("GraphEdge::areaPoints\n  P 0: %d/%d", minX, minY);
-  int len = poly.count();
-  for (i=1;i<len;i++) {
-    if (poly[i].x() < minX) minX = poly[i].x();
-    if (poly[i].y() < minY) minY = poly[i].y();
-    if (poly[i].x() > maxX) maxX = poly[i].x();
-    if (poly[i].y() > maxY) maxY = poly[i].y();
-    if (0) qDebug("  P %d: %d/%d", i, poly[i].x(), poly[i].y());
-  }
-  QPointArray a = poly.copy(),  b = poly.copy();
-  if (minX == maxX) {
-    a.translate(-2, 0);
-    b.translate(2, 0);
-  }
-  else {
-    a.translate(0, -2);
-    b.translate(0, 2);
-  }
-  a.resize(2*len);
-  for (i=0;i<len;i++)
-    a[2 * len - 1 -i] = b[i];
-
-  if (0) {
-      qDebug(" Result:");
-      for (i=0;i<2*len;i++)
-      qDebug("  P %d: %d/%d", i, a[i].x(), a[i].y());
-  }
-
-  return a;
-
+    return _points;
 }
 
-int GraphEdge::rtti()const
+void GraphEdge::setControlPoints(const QPolygonF& pa)
+{
+    _points = pa;
+
+    QPainterPath path;
+    path.moveTo(pa[0]);
+    for (int i = 1; i < pa.size(); i += 3)
+        path.cubicTo(pa[i], pa[(i + 1) % pa.size()], pa[(i + 2) % pa.size()]);
+
+    setPath(path);
+}
+
+int GraphEdge::type()const
 {
     return GRAPHTREE_LINE;
 }
 
-GraphEdgeArrow::GraphEdgeArrow(GraphEdge*_parent,QCanvas*c)
-    : QCanvasPolygon(c),_edge(_parent)
+GraphEdgeArrow::GraphEdgeArrow(GraphEdge*_parent,QGraphicsItem*p)
+    : QGraphicsPolygonItem(p),_edge(_parent)
 {
 }
 
-void GraphEdgeArrow::drawShape(QPainter&p)
+void GraphEdgeArrow::paint(QPainter* p,const QStyleOptionGraphicsItem *, QWidget *)
 {
-    QCanvasPolygon::drawShape(p);
+    p->save();
+    p->setRenderHint(QPainter::Antialiasing);
+    p->setBrush(Qt::black);
+    p->drawPolygon(polygon(),Qt::OddEvenFill);
+    p->restore();
 }
 
-int GraphEdgeArrow::rtti()const
+int GraphEdgeArrow::type()const
 {
     return GRAPHTREE_ARROW;
 }
@@ -160,13 +152,13 @@ GraphEdge*GraphEdgeArrow::edge()
 /* taken from KCacheGrind project */
 QPixmap*GraphMark::_p=0;
 
-GraphMark::GraphMark(GraphTreeLabel*n,QCanvas*c)
-    : QCanvasRectangle(c)
+GraphMark::GraphMark(GraphTreeLabel*n,QGraphicsItem*p)
+    : QGraphicsRectItem(p)
 {
     if (!_p) {
 
         int d = 5;
-        float v1 = 130.0, v2 = 10.0, v = v1, f = 1.03;
+        float v1 = 130.0f, v2 = 10.0f, v = v1, f = 1.03f;
 
         // calculate pix size
         QRect r(0, 0, 30, 30);
@@ -180,7 +172,7 @@ GraphMark::GraphMark(GraphTreeLabel*n,QCanvas*c)
         QPainter p(_p);
         p.setPen(Qt::NoPen);
 
-        r.moveBy(-r.x(), -r.y());
+        r.translate(-r.x(), -r.y());
 
         while (v<v1) {
             v *= f;
@@ -195,9 +187,8 @@ GraphMark::GraphMark(GraphTreeLabel*n,QCanvas*c)
         }
     }
 
-    setSize(_p->width(), _p->height());
-    move(n->rect().center().x()-_p->width()/2,
-    n->rect().center().y()-_p->height()/2);
+    setRect(QRectF(n->rect().center().x() - _p->width()/2,
+                   n->rect().center().y() - _p->height()/2, _p->width(), _p->height()) );
 }
 
 GraphMark::~ GraphMark()
@@ -209,12 +200,23 @@ bool GraphMark::hit(const QPoint&)const
     return false;
 }
 
-int GraphMark::rtti()const
+int GraphMark::type()const
 {
     return GRAPHTREE_MARK;
 }
 
-void GraphMark::drawShape(QPainter&p)
+void GraphMark::paint(QPainter* p,const QStyleOptionGraphicsItem* option, QWidget*)
 {
-    p.drawPixmap( int(x()), int(y()), *_p );
+    if (option->levelOfDetail < .5) {
+        QRadialGradient g(rect().center(), rect().width()/3);
+        g.setColorAt(0.0, Qt::gray);
+        g.setColorAt(1.0, Qt::white);
+
+        p->setBrush(QBrush(g));
+        p->setPen(Qt::NoPen);
+        p->drawRect(rect());
+        return;
+    }
+
+    p->drawPixmap(int( rect().x()),int( rect().y()), *_p );
 }

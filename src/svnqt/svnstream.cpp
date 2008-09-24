@@ -153,41 +153,6 @@ void SvnStream::setError(const QString&aError)const
     m_Data->m_LastError = aError;
 }
 
-#if QT_VERSION < 0x040000
-void SvnStream::setError(int ioError)const
-{
-   switch (ioError) {
-       case IO_Ok:
-            setError("Operation was successfull.");
-            break;
-        case IO_ReadError:
-            setError("Could not read from device");
-            break;
-        case IO_WriteError:
-            setError("Could not write to device");
-            break;
-        case IO_FatalError:
-            setError("A fatal unrecoverable error occurred.");
-            break;
-        case IO_OpenError:
-            setError("Could not open device or stream.");
-            break;
-        case IO_AbortError:
-            setError("The operation was unexpectedly aborted.");
-            break;
-        case IO_TimeOutError:
-            setError("The operation timed out.");
-            break;
-        case IO_UnspecifiedError:
-            setError("An unspecified error happened on close.");
-            break;
-        default:
-            setError("Unknown error happend.");
-            break;
-    }
-}
-#endif
-
 class SvnByteStream_private {
 public:
     SvnByteStream_private();
@@ -197,19 +162,11 @@ public:
     QBuffer mBuf;
 };
 
-#if QT_VERSION < 0x040000
-SvnByteStream_private::SvnByteStream_private()
-    :mBuf(m_Content)
-{
-    mBuf.open(IO_WriteOnly);
-}
-#else
 SvnByteStream_private::SvnByteStream_private()
     :mBuf(&m_Content, 0)
 {
     mBuf.open(QFile::WriteOnly);
 }
-#endif
 
 /* ByteStream implementation start */
 SvnByteStream::SvnByteStream(svn_client_ctx_t * ctx)
@@ -217,11 +174,7 @@ SvnByteStream::SvnByteStream(svn_client_ctx_t * ctx)
 {
     m_ByteData = new SvnByteStream_private;
     if (!m_ByteData->mBuf.isOpen()) {
-#if QT_VERSION < 0x040000
-        setError(m_ByteData->mBuf.status());
-#else
         setError(m_ByteData->mBuf.errorString());
-#endif
     }
 }
 
@@ -232,17 +185,10 @@ SvnByteStream::~SvnByteStream()
 
 long SvnByteStream::write(const char*aData,const unsigned long max)
 {
-#if QT_VERSION < 0x040000
-    long i = m_ByteData->mBuf.writeBlock(aData,max);
-    if (i<0) {
-        setError(m_ByteData->mBuf.status());
-    }
-#else
     long i = m_ByteData->mBuf.write(aData,max);
     if (i<0) {
         setError(m_ByteData->mBuf.errorString());
     }
-#endif
     return i;
 }
 

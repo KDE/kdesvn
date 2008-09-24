@@ -22,12 +22,15 @@
 #include "src/settings/kdesvnsettings.h"
 
 #include <kwallet.h>
-#include <kwin.h>
-#include <kapp.h>
+#include <kwindowsystem.h>
+#include <kapplication.h>
 
 #include <qthread.h>
+#include <QMutex>
 #include <qmap.h>
 #include <qpair.h>
+#include <QWidget>
+
 
 class PwStorageData
 {

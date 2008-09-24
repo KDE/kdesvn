@@ -34,13 +34,10 @@
 #include <qstring.h>
 #include <qwidget.h>
 #include <qpixmap.h>
-#include <qptrlist.h>
-#include <qvaluevector.h>
 #include <qcolor.h>
 #include <qapplication.h>
 #include <qstringlist.h>
 
-class QPopupMenu;
 class QString;
 
 class KConfigGroup;
@@ -79,7 +76,7 @@ public:
   virtual int      fieldCount() const { return 0; }
 
   virtual QColor   backColor() const { return Qt::white; }
-  virtual const QFont& font() const = 0;
+  virtual QFont font() const = 0;
 
   virtual bool selected() const { return false; }
   virtual bool current() const { return false; }
@@ -113,7 +110,7 @@ public:
   bool rotated() const { return _rotated; }
   bool drawFrame() const { return _drawFrame; }
 
-  const QFont& font() const;
+  QFont font() const;
 
   // attribute setters
   void setField(int f, QString t, QPixmap pm = QPixmap(),
@@ -148,7 +145,7 @@ private:
     int maxLines;
   };
 
-  QValueVector<Field> _field;
+  QList<Field> _field;
 };
 
 

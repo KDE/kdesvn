@@ -1,4 +1,6 @@
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers ${CMAKE_BINARY_DIR}/src/svnqt)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
+                    ${CMAKE_BINARY_DIR}/src/svnqt
+                    ${CMAKE_BINARY_DIR}/src/ksvnwidgets)
 
 SET(svnfrontendsrc
     ccontextlistener.cpp
@@ -8,7 +10,6 @@ SET(svnfrontendsrc
     dummydisplay.cpp
     dumprepo_impl.cpp
     editproperty_impl.cpp
-    filelistviewitem.cpp
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
     fronthelpers/rangeinput_impl.cpp
@@ -22,6 +23,10 @@ SET(svnfrontendsrc
     fronthelpers/propertylist.h
     fronthelpers/propertyitem.cpp
     fronthelpers/propertyitem.h
+    fronthelpers/kmultilinedelegate.cpp
+    fronthelpers/kmultilinedelegate.h
+    fronthelpers/watchedprocess.cpp
+    fronthelpers/watchedprocess.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp
@@ -36,11 +41,20 @@ SET(svnfrontendsrc
     graphtree/revisiontree.h
     graphtree/revtreewidget.cpp
     graphtree/revtreewidget.h
+    models/logitemmodel.cpp
+    models/logitemmodel.h
+    models/logmodelhelper.cpp
+    models/logmodelhelper.h
+    models/svnitemnode.cpp
+    models/svnitemnode.h
+    models/svnitemmodelfwd.h
+    models/svnitemmodel.h
+    models/svnitemmodel.cpp
+    models/svnsortfilter.cpp
+    models/svnsortfilter.h
     hotcopydlg_impl.cpp
     importdir_logmsg.cpp
     itemdisplay.cpp
-    kdesvnfilelist.cpp
-    keystatus.cpp
     loaddmpdlg_impl.cpp
     mergedlg_impl.cpp
     modifiedthread.cpp
@@ -48,7 +62,6 @@ SET(svnfrontendsrc
     propertiesdlg.cpp
     stopdlg.cpp
     svnactions.cpp
-    svnfiletip.cpp
     svnitem.cpp
     svnlogdlgimp.cpp
     tcontextlistener.cpp
@@ -56,6 +69,8 @@ SET(svnfrontendsrc
     threadcontextlistenerdata.cpp
     fillcachethread.cpp
     fillcachethread.h
+    maintreewidget.h
+    maintreewidget.cpp
     )
 
 SET(svnfrontendui
@@ -71,12 +86,13 @@ SET(svnfrontendui
     merge_dlg.ui
     blamedisplay.ui
     svnlogdlg.ui
+    treeWidget.ui
     )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE3_AUTOMOC(${svnfrontendsrc})
-KDE3_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
+KDE_AUTOMOC(${svnfrontendsrc})
+KDE_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 
 ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 SET_TARGET_PROPERTIES(svnfrontend

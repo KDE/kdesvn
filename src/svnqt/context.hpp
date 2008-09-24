@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -32,6 +32,7 @@
 #define _SVNCPP_CONTEXT_HPP_
 
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 
 // qt
 #include <qstring.h>
@@ -42,7 +43,6 @@
 // svncpp
 #include "svnqt/pool.hpp"
 #include "svnqt/smart_pointer.hpp"
-
 
 namespace svn
 {
@@ -155,6 +155,17 @@ namespace svn
      */
     ContextListener *
     getListener () const;
+
+    /** Callback for generating list entries
+     * This base implementation just adds items to @a entries. This may used for special listener like the one from KIO
+     * where items may displayed direkt on call and not stored into @a entries.
+     * @param entries default target list
+     * @param dirent entry to add (send by subversion)
+     * @param lock accociated lock (may be null!)
+     * @param path the path of the item
+     * @return true if inserted/displayd, false if dirent or entries aren't valid.
+     */
+    virtual bool contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
 
   private:
     ContextData * m;

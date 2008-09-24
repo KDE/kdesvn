@@ -29,11 +29,12 @@
 #include <qtimer.h>
 #include <kbookmarkmanager.h>
 
-class KURL;
+class KUrl;
 class KAction;
 class KActionMenu;
 class KToggleAction;
 class KBookmarkMenu;
+class KBookmarkActionMenu;
 
 /**
  * This class serves as the main window for kdesvn.  It handles the
@@ -57,8 +58,9 @@ public:
      */
     virtual ~kdesvn();
 
-    virtual void openBookmarkURL (const QString &_url);
-    virtual QString currentURL () const;
+    virtual void openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
+    virtual QString currentUrl () const;
+    virtual QString currentTitle() const;
     void checkReload();
 
 protected:
@@ -66,22 +68,28 @@ protected:
      * This function is called when it is time for the app to save its
      * properties for session management purposes.
      */
-    void saveProperties(KConfig *);
+    virtual void saveProperties(KConfigGroup&);
 
     /**
      * This function is called when this app is restored.  The KConfig
      * object points to the session management config file that was saved
      * with @ref saveProperties
      */
-    void readProperties(KConfig *);
+    virtual void readProperties(const KConfigGroup&);
     virtual bool queryExit();
     void enableClose(bool how);
 
 
 public slots:
     virtual void slotUrlOpened(bool);
-    virtual void loadRescent(const KURL&);
-    virtual void load(const KURL&,bool);
+    /**
+     * Use this method to load whatever file/URL you have
+     */
+    virtual void load(const KUrl&_url) {
+        load(_url,true);
+    }
+    virtual void loadRescent(const KUrl&);
+    virtual void load(const KUrl&,bool);
 
 private slots:
     void fileOpen();
@@ -90,17 +98,17 @@ private slots:
     void optionsShowStatusbar();
     void changeStatusbar(const QString&);
     void resetStatusBar();
+    void actionHovered(QAction*action);
 
 private:
     void setupAccel();
     void setupActions();
     void connectActionCollection( KActionCollection *coll );
-    void disconnectActionCollection( KActionCollection *coll );
 
     KActionMenu *m_FileMenu;
     QString m_bookmarkFile;
     KBookmarkManager * m_BookmarkManager;
-    KActionMenu* m_BookmarksActionmenu;
+    KBookmarkActionMenu* m_BookmarksActionmenu;
     KActionCollection*m_Bookmarkactions;
     KBookmarkMenu * m_pBookmarkMenu;
     KParts::ReadOnlyPart *m_part;
@@ -111,6 +119,9 @@ protected slots:
     virtual void optionsConfigureKeys();
     virtual void applyNewToolbarConfig();
     virtual void slotLoadLast(bool);
+
+Q_SIGNALS:
+    void sigSavestate();
 };
 
 #endif // _KDESVN_H_

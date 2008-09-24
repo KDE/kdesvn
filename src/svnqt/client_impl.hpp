@@ -828,6 +828,8 @@ namespace svn
     url2Revision(const QString&revstring,
             Revision&start);
 
+    virtual bool RepoHasCapability(const Path&repository,Capability capability);
+
     struct sBaton {
         Context*m_context;
         void*m_data;

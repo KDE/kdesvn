@@ -1,0 +1,21 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=kdesvnpart
+GenericName=SVN client
+GenericName[de]=Graphische Oberfläche für SVN
+GenericName[es]=Cliente SVN
+GenericName[lt]=SVN klientas
+Icon=kdesvn
+Type=Service
+DocPath=kdesvn/index.html
+Comment=A Subversion client for KDE
+Comment[de]=Ein Subversionclient für KDE
+Comment[nl]=Een Subversion-client voor KDE
+Comment[es]=Un cliente de Subversion para KDE
+Comment[lt]=Subversion klientas skirtas KDE
+Terminal=false
+ServiceTypes=KParts/ReadOnlyPart,Browser/View
+X-KDE-BrowserView-Args=DetailedList
+X-KDE-Library=kdesvnpart
+Categories=Qt;KDE;Development;RevisionControl;
+MimeType=inode/directory;

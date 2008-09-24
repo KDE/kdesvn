@@ -30,8 +30,6 @@
 
 class RtreeData;
 class QWidget;
-class KListViewItem;
-class KListView;
 class CContextListener;
 
 namespace svn

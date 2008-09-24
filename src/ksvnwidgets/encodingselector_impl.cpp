@@ -24,14 +24,30 @@
 
 #include <qcombobox.h>
 
-EncodingSelector_impl::EncodingSelector_impl(const QString&cur,QWidget *parent, const char *name)
-    :EncodingSelector(parent, name)
+EncodingSelector_impl::EncodingSelector_impl(QWidget *parent)
+    : QWidget(parent)
 {
-    m_encodingList->insertStringList( KGlobal::charsets()->availableEncodingNames());
+    setupUi(this);
+    m_encodingList->addItems( KGlobal::charsets()->availableEncodingNames());
+}
 
+EncodingSelector_impl::EncodingSelector_impl(const QString&cur,QWidget *parent, const char *name)
+    : QWidget(parent)
+{
+    setupUi(this);
+    if (name) {
+        setObjectName(name);
+    }
+
+    m_encodingList->addItems( KGlobal::charsets()->availableEncodingNames());
+    setCurrentEncoding(cur);
+}
+
+void EncodingSelector_impl::setCurrentEncoding(const QString&cur)
+{
     for (int j = 1;j<m_encodingList->count();++j ) {
-        if(m_encodingList->text(j)==cur) {
-            m_encodingList->setCurrentItem(j);
+        if(m_encodingList->itemText(j)==cur) {
+            m_encodingList->setCurrentIndex(j);
             break;
         }
     }

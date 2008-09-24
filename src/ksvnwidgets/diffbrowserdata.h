@@ -20,8 +20,11 @@
 
 #include "diffsyntax.h"
 
-#include <keditcl.h>
+// #include <keditcl.h>
+#include <KTextEditor/Editor>
+#include <KFindDialog>
 
+/* FIXME TODO fix the search */
 #include <qstring.h>
 
 class DiffBrowserData
@@ -30,13 +33,12 @@ public:
     DiffBrowserData();
     virtual ~DiffBrowserData();
 
-    enum {NONE, FORWARD, BACKWARD};
+//     enum {NONE, FORWARD, BACKWARD};
 
     DiffSyntax*m_Syntax;
     QByteArray m_content;
-    KEdFind   *srchdialog;
+    KFindDialog *srchdialog;
 
     int last_search,last_finished_search;
     QString pattern;
-    bool cs;
 };

@@ -1,20 +1,21 @@
 #ifndef _PROPERTYITEM_H
 #define _PROPERTYITEM_H
 
-#include <klistview.h>
+#include <QTreeWidgetItem>
 
 class PropertiesDlg;
 class Propertylist;
+class QTreeWidget;
 
-class PropertyListViewItem:public KListViewItem
+class PropertyListViewItem:public QTreeWidgetItem
 {
     friend class PropertiesDlg;
     friend class Propertylist;
 
     public:
-        static const int _RTTI_ = 1001;
-        PropertyListViewItem(KListView *parent,const QString&,const QString&);
-        PropertyListViewItem(KListView *parent);
+        static const int _RTTI_ = QTreeWidgetItem::UserType+2;
+        PropertyListViewItem(QTreeWidget *parent,const QString&,const QString&);
+        PropertyListViewItem(QTreeWidget *parent);
         virtual ~PropertyListViewItem();
 
         const QString&startName()const{return m_startName;}
@@ -29,8 +30,6 @@ class PropertyListViewItem:public KListViewItem
         bool deleted()const{return m_deleted;}
 
         bool different()const;
-
-        virtual int rtti()const{return _RTTI_;}
 
        //! Check if a specific property may just internale
        /*!

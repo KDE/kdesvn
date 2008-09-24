@@ -9,24 +9,17 @@
 
 #include <qsqldatabase.h>
 
-#if QT_VERSION < 0x040000
-#else
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
 #define Q_LLONG qlonglong
-#endif
 
 /*!
     \fn svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&)
  */
 svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&aRepository)
     :m_Client(),
-#if QT_VERSION < 0x040000
-              m_Database(0),
-#else
               m_Database(),
-#endif
               m_ReposRoot(aRepository),m_latestHead(svn::Revision::UNDEFINED)
 {
     m_Client=aClient;
@@ -45,17 +38,9 @@ svn::Revision svn::cache::ReposLog::latestHeadRev()
     if (!m_Client||m_ReposRoot.isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
-#if QT_VERSION < 0x040000
-    if (!m_Database) {
-#else
     if (!m_Database.isValid()) {
-#endif
         m_Database = LogCache::self()->reposDb(m_ReposRoot);
-#if QT_VERSION < 0x040000
-        if (!m_Database) {
-#else
         if (!m_Database.isValid()) {
-#endif
             return svn::Revision::UNDEFINED;
         }
     }
@@ -78,24 +63,16 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     if (m_ReposRoot.isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
-#if QT_VERSION < 0x040000
-    if (!m_Database) {
-#else
     if (!m_Database.isValid()) {
-#endif
         m_Database = LogCache::self()->reposDb(m_ReposRoot);
-#if QT_VERSION < 0x040000
-        if (!m_Database) {
-#else
         if (!m_Database.isValid()) {
-#endif
             return svn::Revision::UNDEFINED;
         }
     }
     QString q("select revision from 'logentries' order by revision DESC limit 1");
     QSqlQuery _q(QString::null, m_Database);
     if (!_q.exec(q)) {
-        qDebug(_q.lastError().text().TOUTF8().data());
+        qDebug() << _q.lastError().text();
         return svn::Revision::UNDEFINED;
     }
     int _r;
@@ -103,7 +80,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
         //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
         _r = _q.value(0).toInt();
     } else {
-        qDebug(_q.lastError().text().TOUTF8().data());
+        qDebug() << _q.lastError().text();
         return svn::Revision::UNDEFINED;
     }
     return _r;
@@ -111,22 +88,14 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
 
 bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool checkHead)
 {
-#if QT_VERSION < 0x040000
-    if (!m_Database) {
-#else
     if (!m_Database.isValid()) {
-#endif
         m_Database = LogCache::self()->reposDb(m_ReposRoot);
-#if QT_VERSION < 0x040000
-        if (!m_Database) {
-#else
         if (!m_Database.isValid()) {
-#endif
             return false;
         }
     }
     ContextP cp = m_Client->getContext();
-    long long icount=0;
+//     long long icount=0;
 
     svn::Revision _latest=latestCachedRev();
 //    qDebug("Latest cached rev: %i",_latest.revnum());
@@ -232,7 +201,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     bcount.bindValue(0,Q_LLONG(end.revnum()));
     bcount.bindValue(1,Q_LLONG(start.revnum()));
     if (!bcount.exec()) {
-        qDebug(bcount.lastError().text().TOUTF8().data());
+        qDebug() << bcount.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve count: ")+bcount.lastError().text());
         return false;
     }
@@ -246,7 +215,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     bcur.bindValue(1,Q_LLONG(start.revnum()));
 
     if (!bcur.exec()) {
-        qDebug(bcur.lastError().text().TOUTF8().data());
+        qDebug() << bcur.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+bcur.lastError().text());
         return false;
     }
@@ -255,7 +224,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         revision = bcur.value(0).toLongLong();
         cur.bindValue(0,revision);
         if (!cur.exec()) {
-            qDebug(cur.lastError().text().TOUTF8().data());
+            qDebug() << cur.lastError().text();
             throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text()
                     ,cur.lastError().number());
             return false;
@@ -267,11 +236,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         while(cur.next()) {
             LogChangePathEntry lcp;
             QString ac = cur.value(1).toString();
-#if QT_VERSION < 0x040000
-            lcp.action=ac[0].latin1();
-#else
             lcp.action=ac[0].toLatin1();
-#endif
             lcp.copyFromPath=cur.value(2).toString();
             lcp.path= cur.value(0).toString();
             lcp.copyFromRevision=cur.value(3).toLongLong();
@@ -296,22 +261,14 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
     if (aRev!=svn::Revision::DATE) {
         return aRev;
     }
-#if QT_VERSION < 0x040000
-    if (!m_Database) {
-#else
     if (!m_Database.isValid()) {
-#endif
         return svn::Revision::UNDEFINED;
     }
     static QString _q("select revision from logentries where date<? order by revision desc");
     QSqlQuery query("select revision,date from logentries order by revision desc limit 1",m_Database);
 
-#if QT_VERSION < 0x040000
-    if (query.lastError().type()!=QSqlError::None) {
-#else
     if (query.lastError().type()!=QSqlError::NoError) {
-#endif
-        qDebug(query.lastError().text().TOUTF8().data());
+        qDebug() << query.lastError().text();
     }
     bool must_remote=!noNetwork;
     if (query.next()) {
@@ -329,12 +286,8 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
     query.prepare(_q);
     query.bindValue(0,Q_LLONG(aRev.date()));
     query.exec();
-#if QT_VERSION < 0x040000
-    if (query.lastError().type()!=QSqlError::None) {
-#else
     if (query.lastError().type()!=QSqlError::NoError) {
-#endif
-        qDebug(query.lastError().text().TOUTF8().data());
+        qDebug() << query.lastError().text();
     }
     if (query.next()) {
         return query.value(0).toInt();
@@ -356,15 +309,8 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
  */
 bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
 {
-    QSqlRecord *buffer;
-
-#if QT_VERSION < 0x040000
-    m_Database->transaction();
-    Q_LLONG j = aEntry.revision;
-#else
     m_Database.transaction();
     qlonglong j = aEntry.revision;
-#endif
     static QString qEntry("insert into logentries (revision,date,author,message) values (?,?,?,?)");
     static QString qPathes("insert into changeditems (revision,changeditem,action,copyfrom,copyfromrev) values (?,?,?,?,?)");
     QSqlQuery _q(QString::null,m_Database);
@@ -374,13 +320,9 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
     _q.bindValue(2,aEntry.author);
     _q.bindValue(3,aEntry.message);
     if (!_q.exec()) {
-#if QT_VERSION < 0x040000
-        m_Database->rollback();
-#else
         m_Database.rollback();
-#endif
         qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
-        qDebug(_q.lastQuery().TOUTF8().data());
+        qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
     }
     _q.prepare(qPathes);
@@ -392,21 +334,31 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
         _q.bindValue(3,(*cpit).copyFromPath);
         _q.bindValue(4,Q_LLONG((*cpit).copyFromRevision));
         if (!_q.exec()) {
-#if QT_VERSION < 0x040000
-            m_Database->rollback();
-#else
             m_Database.rollback();
-#endif
             qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
-            qDebug(_q.lastQuery().TOUTF8().data());
+            qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
         }
     }
-#if QT_VERSION < 0x040000
-        m_Database->commit();
-#else
-        m_Database.commit();
-#endif
+    if (aEntry.m_MergedInRevisions.size()>0) {
+        static QString qMerges("insert into mergeditems(revision,mergeditems) values(?,?)");
+        _q.prepare(qMerges);
+        QByteArray _merges;
+        QBuffer buffer(&_merges);
+        buffer.open(QIODevice::QIODevice::ReadWrite);
+        QDataStream af(&buffer);
+        af << aEntry.m_MergedInRevisions;
+        buffer.close();
+        _q.bindValue(0,j);
+        _q.bindValue(1,_merges.data());
+        if (!_q.exec()) {
+            m_Database.rollback();
+            qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+            qDebug() << _q.lastQuery();
+            throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
+        }
+    }
+    m_Database.commit();
     return true;
 }
 
@@ -424,6 +376,7 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     static QString s_q("select logentries.revision,logentries.author,logentries.date,logentries.message from logentries where logentries.revision in (select changeditems.revision from changeditems where (changeditems.changeditem='%1' or changeditems.changeditem GLOB '%2/*') %3 GROUP BY changeditems.revision) ORDER BY logentries.revision DESC");
 
     static QString s_e("select changeditem,action,copyfrom,copyfromrev from changeditems where changeditems.revision='%1'");
+    static QString s_m("select mergeditems from mergeditems where mergeditems.revision='%1'");
 
     svn::Revision peg = date2numberRev(_peg,true);
     svn::Revision end = date2numberRev(_end,true);
@@ -443,7 +396,7 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     _q.prepare(query_string);
     if (!_q.exec()) {
         qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
-        qDebug(_q.lastQuery().TOUTF8().data());
+        qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("Could not select values: ")+_q.lastError().text(),_q.lastError().number());
     }
     while(_q.next()) {
@@ -458,15 +411,6 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
             qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
         } else {
             while (_q2.next()) {
-#if QT_VERSION < 0x040000
-                target[revision].changedPaths.push_back (
-                        LogChangePathEntry (_q2.value(0).toString(),
-                                            _q2.value(1).toString()[0],
-                                            _q2.value(2).toString(),
-                                            _q2.value(3).toLongLong()
-                                           )
-                                                        );
-#else
                 target[revision].changedPaths.push_back (
                         LogChangePathEntry (_q2.value(0).toString(),
                                             _q2.value(1).toChar().toLatin1(),
@@ -474,10 +418,20 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
                                             _q2.value(3).toLongLong()
                                            )
                                                         );
-#endif
             }
         }
-
+        query_string=s_m.arg(revision);
+        _q2.prepare(query_string);
+        if (!_q2.exec()) {
+            qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
+        } else {
+            if (_q2.next()) {
+                QByteArray byteArray = _q2.value(0).toByteArray();
+                QBuffer buffer(&byteArray);
+                QDataStream in(&buffer);
+                in >> target[revision].m_MergedInRevisions;
+            }
+        }
     }
     return true;
 }
@@ -517,17 +471,9 @@ bool svn::cache::ReposLog::itemExists(const svn::Revision&peg,const svn::Path&pa
 
 bool svn::cache::ReposLog::isValid()const
 {
-#if QT_VERSION < 0x040000
-    if (!m_Database) {
-#else
     if (!m_Database.isValid()) {
-#endif
         m_Database = LogCache::self()->reposDb(m_ReposRoot);
-#if QT_VERSION < 0x040000
-        if (!m_Database) {
-#else
         if (!m_Database.isValid()) {
-#endif
             return false;
         }
     }

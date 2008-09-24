@@ -186,6 +186,11 @@ public:
      * \return true if content not set or a null-pointer, otherwise false
      */
     bool operator! () { return (data == 0 || data->data == 0); }
+
+    //! required for searches in lists etc.
+    bool operator==(const T*p)const{return (data != 0 && data->data==p);}
+    //! required for searches in lists etc.
+    bool operator==(T*p){return (data && data->data==p);}
 };
 
 }

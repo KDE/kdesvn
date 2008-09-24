@@ -20,31 +20,32 @@
 #ifndef OPENCONTEXTMENU_H
 #define OPENCONTEXTMENU_H
 
-#include <ktrader.h>
+#include <kservice.h>
 #include <kaction.h>
 #include <kurl.h>
-#include <qpopupmenu.h>
-#include <qmap.h>
+#include <kmenu.h>
+
+#include <QMap>
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class OpenContextmenu : public QPopupMenu
+class OpenContextmenu : public KMenu
 {
 Q_OBJECT
 public:
-    OpenContextmenu(const KURL&,const KTrader::OfferList&,QWidget* parent, const char* name);
+    OpenContextmenu(const KUrl&,const KService::List&,QWidget* parent, const char* name);
     virtual ~OpenContextmenu();
 protected:
-    KURL m_Path;
-    KTrader::OfferList m_List;
+    KUrl m_Path;
+    KService::List m_List;
     QMap<int,KService::Ptr> m_mapPopup;
 
     void setup();
 
 protected slots:
     virtual void slotOpenWith();
-    virtual void slotRunService();
+    virtual void slotRunService(QAction*);
 };
 
 #endif

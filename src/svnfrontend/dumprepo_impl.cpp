@@ -28,8 +28,13 @@
 #include <qcheckbox.h>
 
 DumpRepo_impl::DumpRepo_impl(QWidget *parent, const char *name)
-    :DumpRepoDlg(parent, name)
+//     :DumpRepoDlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+    m_ReposPath->setMode(KFile::Directory|KFile::LocalOnly);
+    m_OutputFile->setMode(KFile::File|KFile::LocalOnly);
 }
 
 void DumpRepo_impl::slotDumpRange(bool how)
@@ -44,7 +49,7 @@ void DumpRepo_impl::slotDumpRange(bool how)
  */
 QString DumpRepo_impl::reposPath()
 {
-    KURL u = m_ReposPath->url();
+    KUrl u = m_ReposPath->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);
@@ -58,7 +63,7 @@ QString DumpRepo_impl::reposPath()
  */
 QString DumpRepo_impl::targetFile()
 {
-    KURL u = m_OutputFile->url();
+    KUrl u = m_OutputFile->url();
     QString res = u.path();
     while (res.endsWith("/")) {
         res.truncate(res.length()-1);

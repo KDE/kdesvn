@@ -24,7 +24,6 @@
 
 #include <kio/global.h>
 #include <kmimetype.h>
-#include <kmimemagic.h>
 #include <qbuffer.h>
 #include <qdatetime.h>
 
@@ -35,7 +34,7 @@ public:
     virtual ~StreamWrittenCb(){}
     virtual void streamWritten(const KIO::filesize_t current) = 0;
     virtual void streamPushData(QByteArray)=0;
-    virtual void streamSendMime(KMimeMagicResult*mt)=0;
+    virtual void streamSendMime(KMimeType::Ptr)=0;
     virtual void streamTotalSizeNull()=0;
 };
 

@@ -21,10 +21,12 @@
 #define _DIFF_BROWSER_H
 
 #include <ktextbrowser.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 class DiffSyntax;
-class KEdFind;
-
+// class KEdFind;
+/* FIXME TODO fix the search */
 class DiffBrowserData;
 
 class DiffBrowser : public KTextBrowser
@@ -45,7 +47,7 @@ protected:
     virtual void keyPressEvent(QKeyEvent*);
 
     virtual void startSearch();
-    virtual void doSearch(const QString&to_find_string,bool case_sensitive,bool back);
+    virtual void doSearch(const QString&to_find_string,bool back);
     virtual void doSearchAgain(bool back);
 
 protected:
@@ -55,7 +57,6 @@ protected:
 
 protected slots:
     virtual void search_slot();
-    virtual void searchdone_slot();
     virtual void searchagain_slot();
     virtual void searchagainback_slot();
 };

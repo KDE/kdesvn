@@ -23,7 +23,6 @@
 #include "kiobytestream.h"
 
 #include <qstring.h>
-#include <qcstring.h>
 #include <kurl.h>
 
 #include <kio/global.h>
@@ -31,7 +30,11 @@
 
 
 #include <sys/stat.h>
-#include <qvaluelist.h>
+
+namespace svn
+{
+    class DirEntry;
+}
 
 namespace KIO
 {
@@ -44,72 +47,74 @@ class KioSvnData;
 class kio_svnProtocol : public KIO::SlaveBase,public StreamWrittenCb
 {
 public:
-    kio_svnProtocol(const QCString &pool_socket, const QCString &app_socket);
+    kio_svnProtocol(const QByteArray&pool_socket, const QByteArray&app_socket);
     virtual ~kio_svnProtocol();
-    virtual void listDir (const KURL&url);
-    virtual void stat(const KURL& url);
-    virtual void get(const KURL& url);
-    virtual void mkdir (const KURL &url, int permissions);
-    virtual void mkdir (const KURL::List &urls, int permissions);
-    virtual void rename(const KURL&src,const KURL&target,bool force);
-    virtual void del(const KURL&url,bool isfile);
-    virtual void copy(const KURL&src,const KURL&dest,int permissions,bool overwrite);
-    virtual void checkout(const KURL&src,const KURL&target,const int rev, const QString&revstring);
-    virtual void svnlog(int,const QString&,int, const QString&, const KURL::List&);
-    virtual void revert(const KURL::List&);
-    virtual void wc_switch(const KURL&,const KURL&,bool,int,const QString&);
-    virtual void diff(const KURL&,const KURL&,int,const QString&,int, const QString&,bool);
-    virtual void import( const KURL& repos, const KURL& wc);
-    virtual void add(const KURL& wc);
-    virtual void wc_delete(const KURL::List&);
+    virtual void listDir (const KUrl&url);
+    virtual void stat(const KUrl& url);
+    virtual void get(const KUrl& url);
+    virtual void mkdir (const KUrl &url, int permissions);
+    virtual void mkdir (const KUrl::List &urls, int permissions);
+    virtual void rename(const KUrl&src,const KUrl&target,KIO::JobFlags flags);
+    virtual void del(const KUrl&url,bool isfile);
+    virtual void copy(const KUrl&src,const KUrl&dest,int permissions,KIO::JobFlags flags);
+    virtual void checkout(const KUrl&src,const KUrl&target,const int rev, const QString&revstring);
+    virtual void svnlog(int,const QString&,int, const QString&, const KUrl::List&);
+    virtual void revert(const KUrl::List&);
+    virtual void wc_switch(const KUrl&,const KUrl&,bool,int,const QString&);
+    virtual void diff(const KUrl&,const KUrl&,int,const QString&,int, const QString&,bool);
+    virtual void import( const KUrl& repos, const KUrl& wc);
+    virtual void add(const KUrl& wc);
+    virtual void wc_delete(const KUrl::List&);
     virtual void special(const QByteArray& data);
-    virtual void wc_resolve(const KURL&,bool);
+    virtual void wc_resolve(const KUrl&,bool);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
-        /* KURL repository, KURL target, int revnumber, QString revkind */
+        /* KUrl repository, KUrl target, int revnumber, QString revkind */
         SVN_CHECKOUT = 1,
-        /* KURL wc, int revnumber, QString revkind */
+        /* KUrl wc, int revnumber, QString revkind */
         /* refkind may empty or HEAD or START, will get parsed if revnumber is -1 */
         SVN_UPDATE = 2,
-        /* KURL::List */
+        /* KUrl::List */
         SVN_COMMIT = 3,
-        /* int revstart, QString revstartstring, int revend, QString revendstring, KURL::List */
+        /* int revstart, QString revstartstring, int revend, QString revendstring, KUrl::List */
         SVN_LOG=4,
         SVN_IMPORT=5,
-        /* KURL */
+        /* KUrl */
         SVN_ADD=6,
-        /*KURL::List */
+        /*KUrl::List */
         SVN_DEL=7,
-        /* KURL::List */
+        /* KUrl::List */
         SVN_REVERT=8,
-        /* KURL wc,bool checkRepos, bool recurse */
+        /* KUrl wc,bool checkRepos, bool recurse */
         SVN_STATUS=9,
-        /* KURL::List */
+        /* KUrl::List */
         SVN_MKDIR=10,
-        /* KURL, bool */
+        /* KUrl, bool */
         SVN_RESOLVE=11,
-        /* KURL working copy, KURL new_repository_url, bool recurse, int rev, QString revstring */
+        /* KUrl working copy, KUrl new_repository_url, bool recurse, int rev, QString revstring */
         SVN_SWITCH=12,
-        /* KURL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive */
+        /* KUrl uri1, KUrl uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive */
         SVN_DIFF=13
     };
 
     void contextProgress(long long int current, long long int max);
     virtual void streamWritten(const KIO::filesize_t current);
     virtual void streamPushData(QByteArray);
-    virtual void streamSendMime(KMimeMagicResult*mt);
+    virtual void streamSendMime(KMimeType::Ptr mt);
     virtual void streamTotalSizeNull();
 
+    virtual void listSendDirEntry(const svn::DirEntry&);
+
 protected:
-    virtual void commit(const KURL::List&);
-    virtual void status(const KURL&,bool,bool);
-    virtual void update(const KURL&,int,const QString&);
+    virtual void commit(const KUrl::List&);
+    virtual void status(const KUrl&,bool,bool);
+    virtual void update(const KUrl&,int,const QString&);
 
 private:
     KioSvnData*m_pData;
     bool createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);
-    QString makeSvnUrl(const KURL&url,bool check_wc=true);
-    bool checkWc(const KURL&url);
+    QString makeSvnUrl(const KUrl&url,bool check_wc=true);
+    bool checkWc(const KUrl&url);
     bool getLogMsg(QString&);
 protected:
     QString getDefaultLog();

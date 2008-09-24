@@ -18,7 +18,8 @@ svn export "${SRCROOT}" ${EXPORT_DIR}
 
 echo "Copy required files to export"
 cp ${BUILDDIR}/${PROJECT}.spec ${EXPORT_DIR}
-cp ${SRCROOT}/doc/*.cache.bz2 ${EXPORT_DIR}/doc
+cp ${BUILDDIR}/doc/en/*.cache.bz2 ${EXPORT_DIR}/doc/en/
+cp ${BUILDDIR}/doc/nl/*.cache.bz2 ${EXPORT_DIR}/doc/nl/
 
 echo "Removing not needed stuff"
 for i in $EXCLUDE ; do

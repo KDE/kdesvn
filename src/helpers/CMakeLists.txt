@@ -5,7 +5,7 @@ SET(helperssrc
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE3_AUTOMOC(${helperssrc} )
+KDE_AUTOMOC(${helperssrc} )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 ADD_LIBRARY(kdesvnhelpers STATIC ${helperssrc} ${hdr})
 

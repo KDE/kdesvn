@@ -30,12 +30,21 @@ if test -z "$EXTRACTRC"; then EXTRACTRC=extractrc ; fi
 if test -z "$PREPARETIPS"; then PREPARETIPS=preparetips ; fi
 export EXTRACTRC PREPARETIPS
 
+kde_inc=${includedir:-${KDEDIR:-@CMAKE_INSTALL_PREFIX@}/include/kde}/kde.pot
+
+if [ -f ${kde_inc} ]; then
+   kde_inc=" -x ${kde_inc} "
+else
+   kde_inc=""
+fi
+
+
 for subdir in $dirs; do
   test -z "$VERBOSE" || echo "Making messages in $subdir"
   (cd $subdir
    echo -e 'i18n("_: NAME OF TRANSLATORS\\n"\n"Your names")\ni18n("_: EMAIL OF TRANSLATORS\\n"\n"Your emails")' > _translatorinfo.cpp
    $EXTRACTRC `find . -name \*.ui -o -name \*.rc` > rc.cpp
-   XGETTEXT="${XGETTEXT:-xgettext} -C -ki18n -ktr2i18n -kI18N_NOOP -ktranslate -kaliasLocale --add-comments="TRANSLATORS:" -x ${includedir:-${KDEDIR:-@CMAKE_INSTALL_PREFIX@}/include/kde}/kde.pot"
+   XGETTEXT="${XGETTEXT:-xgettext} -C -kki18n -ki18n -ktr2i18n -kI18N_NOOP -ktranslate -kaliasLocale --add-comments=\"TRANSLATORS:\" ${kde_inc}"
    find . -name '*.cpp' | xargs ${XGETTEXT} _translatorinfo.cpp -o ${podir}/@PROJECT_NAME@.pot
    ) 2>&1 | grep -v '^make\[1\]' > $tmpname
    test -s $tmpname && { echo $subdir ; cat "$tmpname"; }
@@ -65,18 +74,3 @@ for i in `ls -1 po/*.pot 2>/dev/null | sed -e "s#po/##"`; do
 done
 rm -f temp.pot
 rm -rf po.backup
-
-echo Merging messages
-for cat in $POFILES; do
-  msgmerge -o $cat.new $cat @CMAKE_SOURCE_DIR@/po/@PROJECT_NAME@.pot
-  if test -s $cat.new; then
-    grep -v "\"POT-Creation" $cat.new > $cat.new.2
-    grep -v "\"POT-Creation" $cat >> $cat.new.1
-    if diff $cat.new.1 $cat.new.2; then
-	rm $cat.new
-    else
-	mv $cat.new $cat
-    fi
-    rm -f $cat.new.1 $cat.new.2
-  fi
-done

@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht
  * http://kdesvn.alwins-world.de
@@ -126,6 +126,11 @@ namespace svn
   Context::reset ()
   {
     m->reset();
+  }
+
+  bool Context::contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path)
+  {
+    return m->contextAddListItem(entries,dirent,lock,path);
   }
 }
 

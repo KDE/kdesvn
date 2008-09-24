@@ -98,8 +98,8 @@ namespace svn
 
       dirent = static_cast<svn_dirent_t *>
         (apr_hash_get (hash, entryname, item->klen));
-
-      entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent));
+      m_context->contextAddListItem(&entries,dirent,0,QString::FROMUTF8(entryname));
+      //entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent));
     }
 
     return entries;
@@ -150,7 +150,8 @@ namespace svn
         (apr_hash_get (hash, entryname, item->klen));
       lockent = static_cast<svn_lock_t *>
         (apr_hash_get(lock_hash,entryname,item->klen));
-      entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent,lockent));
+      m_context->contextAddListItem(&entries,dirent,lockent,QString::FROMUTF8(entryname));
+      //entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent,lockent));
     }
 
     return entries;
@@ -172,7 +173,8 @@ namespace svn
       if (ctx&&ctx->cancel_func) {
           SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
       }
-      entries->push_back(new DirEntry(QString::FROMUTF8(path),dirent,lock));
+      l_context->contextAddListItem(entries,dirent,lock,QString::FROMUTF8(path));
+      //entries->push_back(new DirEntry(QString::FROMUTF8(path),dirent,lock));
       return 0;
   }
 #endif

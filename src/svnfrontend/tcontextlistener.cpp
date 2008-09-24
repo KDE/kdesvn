@@ -21,10 +21,11 @@
 
 #include "ccontextlistener.h"
 #include "src/ksvnwidgets/authdialogimpl.h"
-#include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/helpers/stringhelper.h"
 #include "threadcontextlistenerdata.h"
+#include "src/kdesvn_events.h"
 
 #include <kapplication.h>
 #include <kdebug.h>
@@ -58,7 +59,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     _data.maysave=maySave;
     _data.ok=false;
 
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_PROMPT);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_LOGIN_PROMPT);
     void*t = (void*)&_data;
     ev->setData(t);
     kapp->postEvent(this,ev);
@@ -81,7 +82,7 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     _data.maysave=false;
     _data.ok=false;
 
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGIN_SAVED);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_LOGIN_SAVED);
     void*t = (void*)&_data;
     ev->setData(t);
     kapp->postEvent(this,ev);
@@ -100,7 +101,7 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
     log.ok = false;
     log.msg = "";
     log._items = &_items;
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_LOGMSG_PROMPT);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_LOGMSG_PROMPT);
     void*t = (void*)&log;
     ev->setData(t);
     kapp->postEvent(this,ev);
@@ -118,7 +119,7 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
     ThreadContextListenerData::scert_file scertf;
     scertf.ok = false;
     scertf.certfile="";
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
     ev->setData((void*)&scertf);
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
@@ -136,7 +137,7 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
     scert_data.maysave=false;
     scert_data.password="";
     scert_data.realm=realm;
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_CERT_PW_PROMPT);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_PW_PROMPT);
     ev->setData((void*)&scert_data);
     kapp->postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
@@ -150,7 +151,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_SSL_TRUST_PROMPT);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_SSL_TRUST_PROMPT);
     ThreadContextListenerData::strust_answer trust_answer;
     trust_answer.m_SslTrustAnswer=DONT_ACCEPT;
     trust_answer.m_Trustdata = &data;
@@ -164,7 +165,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
 void ThreadContextListener::contextNotify(const QString&aMsg)
 {
     QMutexLocker lock(callbackMutex());
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     _notify->msg = aMsg;
@@ -181,16 +182,16 @@ void ThreadContextListener::contextProgress(long long int current, long long int
         return;
     }
     QMutexLocker lock(callbackMutex());
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     QString msg;
     QString s1 = helpers::ByteToString()(current);
     if (max>-1) {
         QString s2 = helpers::ByteToString()(max);
-        msg = i18n("%1 of %2 transferred.").arg(s1).arg(s2);
+        msg = i18n("%1 of %2 transferred.",s1,s2);
     } else {
-        msg = i18n("%1 transferred.").arg(s1);
+        msg = i18n("%1 transferred.",s1);
     }
     _notify->msg = msg;
     ev->setData((void*)_notify);
@@ -200,7 +201,7 @@ void ThreadContextListener::contextProgress(long long int current, long long int
 void ThreadContextListener::sendTick()
 {
     QMutexLocker lock(callbackMutex());
-    QCustomEvent*ev = new QCustomEvent(EVENT_THREAD_NOTIFY);
+    DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     _notify->msg = "";
@@ -297,8 +298,12 @@ void ThreadContextListener::event_contextNotify(void*data)
     delete _notify;
 }
 
-void ThreadContextListener::customEvent(QCustomEvent*ev)
+void ThreadContextListener::customEvent(QEvent*_ev)
 {
+    if (_ev->type()<QEvent::User) {
+        return;
+    }
+    DataEvent*ev = (DataEvent*)_ev;
     if (ev->type()==EVENT_THREAD_SSL_TRUST_PROMPT) {
         event_contextSslServerTrustPrompt(ev->data());
     }else if (ev->type()==EVENT_THREAD_LOGIN_PROMPT) {
@@ -314,6 +319,17 @@ void ThreadContextListener::customEvent(QCustomEvent*ev)
     } else if (ev->type() == EVENT_THREAD_LOGIN_SAVED) {
         event_contextGetSavedLogin(ev->data());
     }
+}
+
+void ThreadContextListener::contextNotify (const char *path,
+                svn_wc_notify_action_t action,
+                svn_node_kind_t kind,
+                const char *mime_type,
+                svn_wc_notify_state_t content_state,
+                svn_wc_notify_state_t prop_state,
+                svn_revnum_t revision)
+{
+    CContextListener::contextNotify(path,action,kind,mime_type,content_state,prop_state,revision);
 }
 
 #include "tcontextlistener.moc"

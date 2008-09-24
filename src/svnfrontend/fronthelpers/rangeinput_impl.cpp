@@ -25,13 +25,16 @@
 #include <qradiobutton.h>
 #include <knuminput.h>
 #include <kdatetimewidget.h>
-#include <qbuttongroup.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
-    :RangeInputDlg(parent, name)
+//     :RangeInputDlg(parent, name)
+    : QWidget(parent)
 {
+    setupUi(this);
+    setObjectName(name);
+
     m_startRevInput->setRange(0,INT_MAX,1,false);
     m_endRevInput->setRange(0,INT_MAX,1,false);
     m_startRevInput->setValue(1);
@@ -177,11 +180,11 @@ void Rangeinput_impl::setStartOnly(bool theValue)
 {
     m_StartOnly = theValue;
     if (m_StartOnly) {
-        RangeInputLayout->remove(m_stopRevBox);
+        layout()->removeWidget(m_stopRevBox);
         m_stopRevBox->hide();
         m_startRevBox->setTitle(i18n("Select revision"));
     } else {
-        RangeInputLayout->add(m_stopRevBox);
+        layout()->addWidget(m_stopRevBox);
         m_stopRevBox->show();
         m_startRevBox->setTitle(i18n( "Start with revision" ));
     }

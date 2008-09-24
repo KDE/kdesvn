@@ -20,15 +20,18 @@
 #include "authdialogimpl.h"
 #include "src/settings/kdesvnsettings.h"
 
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 
 AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :AuthDialogData(parent, name),curPass("")
+    :QDialog(parent),Ui::AuthDialog(),curPass("")
 {
+    setupUi(this);
+    setObjectName(name);
+
     m_UsernameEdit->setText(user);
     m_PasswordEdit->setText("");
     m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());

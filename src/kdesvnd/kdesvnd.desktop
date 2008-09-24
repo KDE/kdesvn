@@ -4,9 +4,8 @@ Type=Service
 Name=kdesvnd subversion module
 Name[es]=módulo para subversion kdesvnd
 ServiceTypes=KDEDModule
-X-KDE-ModuleType=Library
+X-KDE-ServiceTypes=KDEDModule
 X-KDE-Library=kdesvnd
-X-KDE-FactoryName=kdesvnd
+X-KDE-DBus-ModuleName=kdesvnd
 X-KDE-Kded-autoload=true
 X-KDE-Kded-load-on-demand=true
-

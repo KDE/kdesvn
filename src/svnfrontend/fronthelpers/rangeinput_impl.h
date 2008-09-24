@@ -20,11 +20,11 @@
 #ifndef RANGEINPUT_IMPL_H
 #define RANGEINPUT_IMPL_H
 
-#include "rangeinput.h"
+#include "ui_rangeinput.h"
 #include "src/svnqt/revision.hpp"
 #include <qpair.h>
 
-class Rangeinput_impl: public RangeInputDlg {
+class Rangeinput_impl: public QWidget, public Ui::RangeInput {
 Q_OBJECT
 public:
     Rangeinput_impl(QWidget *parent = 0, const char *name = 0);

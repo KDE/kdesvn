@@ -74,6 +74,8 @@ public:
      */
     bool retrieveLogMessage (QString & msg,const CommitItemList&);
 
+    bool contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
+
     /**
      * if the @a listener is set call the method
      * @a contextNotify

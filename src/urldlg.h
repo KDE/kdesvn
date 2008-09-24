@@ -20,25 +20,26 @@
 #ifndef URLDLG_H
 #define URLDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kurl.h>
 
-class KURLRequester;
+class KUrlRequester;
 
 /**
 @author Rajko Albrecht
 */
-class UrlDlg : public KDialogBase
+class UrlDlg : public KDialog
 {
 Q_OBJECT
 public:
     UrlDlg(QWidget *parent = 0, const char *name = 0);
-    ~UrlDlg();
-    KURL selectedURL();
-    static KURL getURL(QWidget*parent=0);
+    virtual ~UrlDlg();
+    KUrl selectedUrl();
+    static KUrl getUrl(QWidget*parent=0);
 protected:
     virtual void init_dlg();
-    KURLRequester*urlRequester_;
+    KUrlRequester*urlRequester_;
+    QWidget * m_plainPage;
 protected slots:
     virtual void accept();
     virtual void slotTextChanged(const QString&);

@@ -2,10 +2,10 @@
 
 import os
 
-def convert(file, px):
-    new_file=file.replace('.svgz','.png').replace('.svg','.png').replace('hisc-','')
-    os.system('/usr/bin/inkscape -e hicolor/hi%s-%s -w %s -h %s  %s' % (px, new_file,  px, px,  file))
-    
+def convert(_file, px):
+    new_file=_file.replace('.svgz','.png').replace('.svg','.png').replace('hisc-','')
+    os.system('/usr/bin/inkscape -e hicolor/hi%s-%s -w %s -h %s  %s' % (px, new_file,  px, px,  _file))
+
 all_files=[
 'hisc-action-kdesvnaddrecursive.svgz',
 'hisc-action-kdesvnadd.svgz',
@@ -27,6 +27,8 @@ all_files=[
 'hisc-action-kdesvnswitch.svgz',
 'hisc-action-kdesvnunlock.svgz',
 'hisc-action-kdesvnupdate.svgz',
+'hisc-action-kdesvnleft.svgz',
+'hisc-action-kdesvnright.svgz',
 'hisc-filesys-kdesvnadded.svgz',
 'hisc-filesys-kdesvnconflicted.svgz',
 'hisc-filesys-kdesvndeleted.svgz',
@@ -34,17 +36,21 @@ all_files=[
 'hisc-filesys-kdesvnmodified.svgz',
 'hisc-filesys-kdesvnupdates.svgz',
 'hisc-filesys-kdesvnneedlock.svgz',
+'hisc-action-kdesvnrightreload.svgz',
 ]
 
 i_sizes=[
-32,128,16,96,22,48,64]
+16,22,32,48,64,96,128]
 
 i_sizes.sort()
 
-for px in i_sizes:
-    os.system('mkdir -p hicolor/%sx%s/actions' % (px,px))
-    os.system('mkdir -p hicolor/%sx%s/filesystems' % (px,px))
+os.system('mkdir -p hicolor')
 
-for file in all_files:
+
+#for px in i_sizes:
+#    os.system('mkdir -p hicolor/%sx%s/actions' % (px,px))
+#    os.system('mkdir -p hicolor/%sx%s/filesystems' % (px,px))
+
+for _file in all_files:
     for px in i_sizes:
-	convert(file, px)
+        convert(_file, px)

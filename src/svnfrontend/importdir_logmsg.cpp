@@ -25,31 +25,30 @@
 
 #include <qcheckbox.h>
 #include <qlayout.h>
-#include <qvbox.h>
 #include <qwhatsthis.h>
 #include <qtooltip.h>
 
 
-Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
- : Logmsg_impl(parent, name)
+Importdir_logmsg::Importdir_logmsg(QWidget *parent)
+ : Commitmsg_impl(parent)
 {
-    m_createDirBox = new QCheckBox("",this,"create_dir_checkbox");
-    m_keepLocksButton->hide();
-    //delete m_keepLocksButton;
+    setObjectName(QString::fromUtf8("Importdir_logmsg"));
+    m_createDirBox = new QCheckBox("",this);
+    hideKeepsLock(true);
     createDirboxDir();
     addItemWidget(m_createDirBox);
     m_createDirBox->setChecked(true);
-    QHBoxLayout* tmpLayout = new QHBoxLayout( this, 11, 6, "ExtraLayout");
-    m_noIgnore = new QCheckBox("",this,"no_ignore_pattern");
+    QHBoxLayout* tmpLayout = new QHBoxLayout(this);
+    m_noIgnore = new QCheckBox("",this);
     m_noIgnore->setText(i18n("No ignore"));
-    QToolTip::add(m_noIgnore,i18n("If set, add files or directories that match ignore patterns."));
+    m_noIgnore->setToolTip(i18n("If set, add files or directories that match ignore patterns."));
     tmpLayout->addWidget(m_noIgnore);
     //LogmessageDataLayout->addWidget(m_createDirBox);
     if (svn::Version::version_major()>1|| svn::Version::version_minor()>4 ) {
-        m_ignoreUnknownNodes = new QCheckBox("",this,"ignore_unknown_nodes_box");
+        m_ignoreUnknownNodes = new QCheckBox("",this);
         m_ignoreUnknownNodes->setText(i18n("Ignore unknown node types"));
-        QToolTip::add(m_ignoreUnknownNodes,i18n("Should files with unknown node types be ignored"));
-        QWhatsThis::add(m_ignoreUnknownNodes,i18n("Ignore files of which the node type is unknown, such as device files and pipes."));
+        m_ignoreUnknownNodes->setToolTip(i18n("Should files with unknown node types be ignored"));
+        m_ignoreUnknownNodes->setWhatsThis(i18n("Ignore files of which the node type is unknown, such as device files and pipes."));
         tmpLayout->addWidget(m_ignoreUnknownNodes);
         //addItemWidget(m_ignoreUnknownNodes);
     } else {
@@ -57,7 +56,9 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent, const char *name)
     }
     QSpacerItem* m_leftspacer = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     tmpLayout->addItem(m_leftspacer);
-    LogmessageDataLayout->addItem(tmpLayout);
+    if (layout()) {
+        layout()->addItem(tmpLayout);
+    }
 }
 
 Importdir_logmsg::~Importdir_logmsg()
@@ -81,7 +82,7 @@ bool Importdir_logmsg::createDir()
 
 void Importdir_logmsg::createDirboxDir(const QString & which)
 {
-    m_createDirBox->setText(i18n("Create subdir %1 on import").arg(which.isEmpty()?i18n("(Last part)"):which));
+    m_createDirBox->setText(i18n("Create subdir %1 on import",(which.isEmpty()?i18n("(Last part)"):which)));
 }
 
 #include "importdir_logmsg.moc"

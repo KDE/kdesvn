@@ -14,11 +14,8 @@
 #include "svnqt/cache/test/testconfig.h"
 #include "svnqt/cache/DatabaseException.hpp"
 
-#if QT_VERSION < 0x040000
-#else
 #include <QSqlQuery>
 #include <QSqlError>
-#endif
 
 int main(int argc,char**argv)
 {
@@ -43,19 +40,11 @@ int main(int argc,char**argv)
     }
     svn::cache::ReposLog rl(m_Svnclient,"http://www.alwins-world.de/repos/kdesvn");
     QDataBase db = rl.Database();
-#if QT_VERSION < 0x040000
-    if (!db) {
-#else
     if (!db.isValid()) {
-#endif
         std::cerr << "No database object."<<std::endl;
         exit(-1);
     }
-#if QT_VERSION < 0x040000
-    list = db->tables();
-#else
     list = db.tables();
-#endif
     it = list.begin();
     while( it != list.end() ) {
         std::cout << ( *it ).TOUTF8().data() << std::endl;
@@ -91,10 +80,7 @@ int main(int argc,char**argv)
     q.exec();
     std::cerr << "\n" << q.lastError().text().TOUTF8().data()<<std::endl;
 
-#if QT_VERSION < 0x040000
-#else
     db=QSqlDatabase();
-#endif
     try {
         rl.log("/trunk/src/svnqt",1,1000,svn::Revision::UNDEFINED,lm,false,-1);
     }

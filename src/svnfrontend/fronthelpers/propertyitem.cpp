@@ -1,21 +1,19 @@
 #include "propertyitem.h"
 #include <klocale.h>
 #include <kiconloader.h>
+#include <kicon.h>
+#include <kdebug.h>
 
-PropertyListViewItem::PropertyListViewItem(KListView *parent,const QString&aName,const QString&aValue)
-    : KListViewItem(parent),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent,const QString&aName,const QString&aValue)
+    : QTreeWidgetItem(parent,_RTTI_),m_currentName(aName),m_startName(aName),m_currentValue(aValue),m_startValue(aValue),m_deleted(false)
 {
-    setMultiLinesEnabled(true);
     setText(0,startName());
     setText(1,startValue());
 }
 
-PropertyListViewItem::PropertyListViewItem(KListView *parent)
-    : KListViewItem(parent),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent)
+    : QTreeWidgetItem(parent,_RTTI_),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
 {
-    setMultiLinesEnabled(true);
-    setText(0,startName());
-    setText(1,startValue());
 }
 
 PropertyListViewItem::~PropertyListViewItem()
@@ -40,17 +38,23 @@ bool PropertyListViewItem::different()const
 void PropertyListViewItem::deleteIt()
 {
     m_deleted = true;
-    setPixmap(0,KGlobal::iconLoader()->loadIcon("cancel",KIcon::Desktop,16));
+    setIcon(0,KIconLoader::global()->loadIcon("cancel",KIconLoader::Desktop,16));
 }
 
 void PropertyListViewItem::unDeleteIt()
 {
     m_deleted = false;
-    setPixmap(0,QPixmap());
+    setIcon(0,KIcon());
 }
 
 bool PropertyListViewItem::protected_Property(const QString&what)
 {
-    if (what.compare("svn:special")!=0) return false;
-    return true;
+    kDebug()<<"What: "<<what<<endl;
+    if (
+        what.compare("svn:mergeinfo")==0 ||
+        what.compare("svn:special")==0
+        ) {
+        return true;
+    }
+    return false;
 }

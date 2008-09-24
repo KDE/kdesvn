@@ -24,45 +24,58 @@
 
 #include <kapplication.h>
 #include <klocale.h>
-#include <kwin.h>
-#include <qtimer.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qwidgetlist.h>
-#include <kprogress.h>
+#include <kvbox.h>
+#include <kwindowsystem.h>
 #include <kdebug.h>
 #include <ktextbrowser.h>
+#include <kiconloader.h>
+
+#include <QTimer>
+#include <QPushButton>
+#include <QLayout>
+#include <QLabel>
+#include <QWidget>
+#include <QShowEvent>
+#include <QHideEvent>
+#include <QVBoxLayout>
+#include <QProgressBar>
 
 StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
- : KDialogBase(KDialogBase::Plain,caption,KDialogBase::Cancel, KDialogBase::Cancel,parent, name,true)
+ : KDialog(parent)
     ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false),
     cstack(0)
 {
-    KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
+    setObjectName(name);
+    setCaption(caption);
+
+    setButtons(KDialog::Cancel);
+    m_mainWidget = new QFrame( this );
+    setMainWidget( m_mainWidget );
+
     m_lastLogLines = 0;
     m_lastLog = "";
 
     mShowTimer = new QTimer(this);
     m_StopTick.start();
-    showButton(KDialogBase::Close, false);
-    mCancelText = actionButton(KDialogBase::Cancel)->text();
+    showButton(KDialog::Close, false);
+    mCancelText = buttonText(KDialog::Cancel);
 
-    QFrame* mainWidget = plainPage();
-    layout = new QVBoxLayout(mainWidget, 10);
-    mLabel = new QLabel(text, mainWidget);
+    layout = new QVBoxLayout(m_mainWidget);
+    mLabel = new QLabel(text, m_mainWidget);
     layout->addWidget(mLabel);
-    m_ProgressBar=new KProgress(15,mainWidget);
-    m_ProgressBar->setCenterIndicator (false);
-    m_ProgressBar->setTextEnabled(false);
+    m_ProgressBar=new QProgressBar(m_mainWidget);
+    m_ProgressBar->setRange(0,15);
+    m_ProgressBar->setTextVisible(false);
     layout->addWidget(m_ProgressBar);
-    m_NetBar = new KProgress(15,mainWidget);
+    m_NetBar = new QProgressBar(m_mainWidget);
+    m_NetBar->setRange(0,15);
     layout->addWidget(m_NetBar);
 
     mWait = false;
     m_LogWindow = 0;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
+    connect(this,SIGNAL(cancelClicked()),this,SLOT(slotCancel()));
     if (m_Context) {
         connect(m_Context,SIGNAL(tickProgress()),this,SLOT(slotTick()));
         connect(m_Context,SIGNAL(waitShow(bool)),this,SLOT(slotWait(bool)));
@@ -70,7 +83,8 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
                 this,SLOT(slotNetProgres(long long int, long long int)));
         connect(this,SIGNAL(sigCancel(bool)),m_Context,SLOT(setCanceled(bool)));
     }
-    mShowTimer->start(m_MinDuration, true);
+    mShowTimer->setSingleShot(true);
+    mShowTimer->start(m_MinDuration);
     setMinimumSize(280,160);
     adjustSize();
 }
@@ -107,15 +121,15 @@ void StopDlg::slotAutoShow()
         hasDialogs = true;
     }
     if (hasDialogs) {
-        kdDebug()<<"Hide me! (" << caption() << ")" << endl;
         hide();
     }
     if (mShown||mWait||hasDialogs) {
+        mShowTimer->setSingleShot(true);
         if (mWait) {
-            //kdDebug() << "Waiting for show"<<endl;
-            mShowTimer->start(m_MinDuration, true);
+            //kDebug() << "Waiting for show"<<endl;
+            mShowTimer->start(m_MinDuration);
         }
-        mShowTimer->start(m_MinDuration, true);
+        mShowTimer->start(m_MinDuration);
         return;
     }
     m_ProgressBar->hide();
@@ -125,7 +139,8 @@ void StopDlg::slotAutoShow()
     show();
     kapp->processEvents();
     mShown = true;
-    mShowTimer->start(m_MinDuration, true);
+    mShowTimer->setSingleShot(true);
+    mShowTimer->start(m_MinDuration);
 }
 
 void StopDlg::slotCancel()
@@ -146,10 +161,10 @@ void StopDlg::slotTick()
             m_ProgressBar->show();
             m_BarShown=true;
         }
-        if (m_ProgressBar->progress()==15) {
+        if (m_ProgressBar->value()==15) {
             m_ProgressBar->reset();
         } else {
-            m_ProgressBar->setProgress(m_ProgressBar->progress()+1);
+            m_ProgressBar->setValue(m_ProgressBar->value()+1);
         }
         m_StopTick.restart();
         kapp->processEvents();
@@ -160,8 +175,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
 {
     ++m_lastLogLines;
     if (!m_LogWindow) {
-        QFrame* mainWidget = plainPage();
-        m_LogWindow = new KTextBrowser(mainWidget);
+        m_LogWindow = new KTextBrowser(m_mainWidget);
         layout->addWidget(m_LogWindow);
         m_LogWindow->show();
         resize( QSize(500, 400).expandedTo(minimumSizeHint()) );
@@ -182,14 +196,14 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
             m_netBarShown=true;
         }
         QString s1 = helpers::ByteToString()(current);
-        if (max > -1 && max != m_NetBar->totalSteps()) {
+        if (max > -1 && max != m_NetBar->maximum()) {
             QString s2 = helpers::ByteToString()(max);
-            m_NetBar->setFormat(i18n("%1 of %2").arg(s1).arg(s2));
-            m_NetBar->setTotalSteps(max);
+            m_NetBar->setFormat(i18n("%1 of %2",s1,s2));
+            m_NetBar->setRange(0,max);
         }
         if (max == -1) {
-            m_NetBar->setFormat(i18n("%1 transferred.").arg(s1));
-            m_NetBar->setTotalSteps(current+1);
+            m_NetBar->setFormat(i18n("%1 transferred.",s1));
+            m_NetBar->setRange(0,current+1);
         }
         m_NetBar->setValue(current);
         m_StopTick.restart();

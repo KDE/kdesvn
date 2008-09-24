@@ -20,17 +20,17 @@
 #ifndef LOADDMPDLG_IMPL_H
 #define LOADDMPDLG_IMPL_H
 
-#include "loaddmpdlg.h"
+#include "ui_loaddmpdlg.h"
 
-class LoadDmpDlg_impl: public LoadDmpDlg {
-Q_OBJECT
+class LoadDmpDlg_impl: public QWidget, public Ui::LoadDmpDlg {
+    Q_OBJECT
 public:
     LoadDmpDlg_impl(QWidget *parent = 0, const char *name = 0);
     virtual ~LoadDmpDlg_impl();
     bool usePost()const;
     bool usePre()const;
     int uuidAction()const;
-    QString dumpFile()const;
+    KUrl dumpFile()const;
     QString repository()const;
     QString parentPath()const;
 

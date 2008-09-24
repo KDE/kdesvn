@@ -195,6 +195,10 @@
     </entry>
   </group>
   <group name="revision_tree" >
+    <entry key="fill_cache_on_tree" type="Bool">
+        <default>false</default>
+        <label>Check status of log cachen when starting revision tree</label>
+    </entry>
     <entry key="tree_direction" type="Int" >
       <default>0</default>
       <label>Direction of revision tree</label>

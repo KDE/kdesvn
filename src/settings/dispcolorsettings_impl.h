@@ -20,9 +20,9 @@
 #ifndef DISPCOLORSETTINGS_IMPL_H
 #define DISPCOLORSETTINGS_IMPL_H
 
-#include "src/settings/dispcolor_settings.h"
+#include "src/settings/ui_dispcolor_settings.h"
 
-class DispColorSettings_impl: public DispColorSettings {
+class DispColorSettings_impl: public QWidget, public Ui::DispColorSettings {
 Q_OBJECT
 public:
     DispColorSettings_impl(QWidget *parent = 0, const char *name = 0);

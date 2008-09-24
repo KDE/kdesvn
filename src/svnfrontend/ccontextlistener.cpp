@@ -20,19 +20,18 @@
 #include "ccontextlistener.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/ksvnwidgets/authdialogimpl.h"
-#include "src/ksvnwidgets/logmsg_impl.h"
+#include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/ksvnwidgets/pwstorage.h"
 
 #include <klocale.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kinputdialog.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
 
-#include <qmap.h>
-#include <qtextstream.h>
+#include <QTextStream>
 #include <qthread.h>
 
 class CContextListenerData
@@ -104,18 +103,19 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
     if (action>=smax_actionstring||action<0) {
         return QString::null;
     }
-    return action_strings[action].isEmpty()?QString::null:i18n(action_strings[action]);
+    return action_strings[action].isEmpty() ? QString(): /*i18n(*/action_strings[action]/*)*/;
 }
 
 QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 {
     if (state > svn_wc_notify_state_conflicted || state<0) return QString::null;
-    return notify_state_strings[state].isEmpty()?QString::null:i18n(notify_state_strings[state]);
+    return notify_state_strings[state].isEmpty()?QString():/*i18n(*/notify_state_strings[state]/*)*/;
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)
- : QObject(parent, name), svn::ContextListener(),ref_count()
+ : QObject(parent), svn::ContextListener(),ref_count()
 {
+    setObjectName(name);
     m_Data = new CContextListenerData();
 }
 
@@ -183,11 +183,14 @@ void CContextListener::contextNotify (const char *path,
                     svn_wc_notify_state_t prop_state,
                     svn_revnum_t revision)
 {
+    Q_UNUSED(mime_type);
+    Q_UNUSED(prop_state);
+
     QString msg;
     QString aString = NotifyAction(action);
 
     if (!aString.isEmpty()) {
-        QTextStream ts(&msg,IO_WriteOnly);
+        QTextStream ts(&msg,QIODevice::WriteOnly);
         ts << NotifyAction(action) << " " << QString::FROMUTF8(path);
         if (revision>-1) {
             ts << " (Rev "<<revision<<")";
@@ -234,7 +237,7 @@ bool CContextListener::contextGetLogMessage (QString & msg,const svn::CommitItem
 {
     bool isOk = false;
     emit waitShow(true);
-    QString logMessage = Logmsg_impl::getLogmessage(items,&isOk,0,0,0);
+    QString logMessage = Commitmsg_impl::getLogmessage(items,&isOk,0,0,0);
     if (isOk) {
         msg = logMessage;
     }
@@ -267,10 +270,14 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 
 bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 {
-    kdDebug()<<"CContextListener::contextSslClientCertPrompt "
+    kDebug()<<"CContextListener::contextSslClientCertPrompt "
         << certFile << endl;
     emit waitShow(true);
-    QString afile = KFileDialog::getOpenFileName(QString::null,
+//     QString afile = KFileDialog::getOpenFileName(QString::null,
+//         QString::null,
+//         0,
+//         i18n("Open a file with a #PKCS12 certificate"));
+    QString afile = KFileDialog::getOpenFileName(KUrl(),
         QString::null,
         0,
         i18n("Open a file with a #PKCS12 certificate"));
@@ -293,11 +300,15 @@ bool CContextListener::contextSslClientCertPwPrompt (QString & password,
 {
     maysave = false;
     emit waitShow(true);
-    QCString npass;
+    QString npass;
     int keep = 1;
-    int res = KPasswordDialog::getPassword(npass,
-        i18n("Enter password for realm %1").arg(realm),
-        &keep);
+    KPasswordDialog dlg(0);
+    dlg.setPrompt(i18n("Enter password for realm %1",realm));
+    dlg.setWindowTitle(realm);
+    int res = dlg.exec();
+    if (res == QDialog::Accepted)
+        npass = dlg.password();
+
     emit waitShow(false);
     if (res!=KPasswordDialog::Accepted) {
         return false;
@@ -339,7 +350,7 @@ QStringList CContextListener::failure2Strings(apr_uint32_t acceptedFailures)
 
 QString CContextListener::translate(const QString&what)
 {
-    return i18n(what);
+    return i18n(what.toLocal8Bit());
 }
 
 /*!

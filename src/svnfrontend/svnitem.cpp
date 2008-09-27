@@ -24,6 +24,7 @@
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/status.hpp"
 #include "src/svnqt/smart_pointer.hpp"
+#include "src/svnqt/url.hpp"
 #include "helpers/sub2qt.h"
 #include "helpers/ktranslateurl.h"
 
@@ -123,7 +124,7 @@ KMimeType::Ptr SvnItem_p::mimeType(bool dir)
 
 const KURL& SvnItem_p::kdeName(const svn::Revision&r)
 {
-    isWc = QString::compare(m_Stat->entry().url(),m_Stat->path())!=0;
+    isWc = !svn::Url::isValid(m_Stat->path());
     QString name;
     if (!(r==lRev)||m_kdename.isEmpty()) {
         lRev=r;
@@ -305,7 +306,7 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
     /* yes - different way to "isDir" above 'cause here we try to use the
        mime-features of KDE on ALL not just unversioned entries.
      */
-    if (QString::compare(p_Item->m_Stat->entry().url(),p_Item->m_Stat->path())==0) {
+    if (svn::Url::isValid(p_Item->m_Stat->path())) {
         /* remote access */
         p = p_Item->mimeType(isDir())->pixmap(KIcon::Desktop,size,KIcon::DefaultState);
         if (isLocked()) {
@@ -499,7 +500,7 @@ const QString& SvnItem::getToolTipText()
             SvnActions*wrap = getWrapper();
             svn::Revision peg(svn_opt_revision_unspecified);
             svn::Revision rev(svn_opt_revision_unspecified);
-            if (QString::compare(p_Item->m_Stat->entry().url(),p_Item->m_Stat->path())==0) {
+            if (svn::Url::isValid(p_Item->m_Stat->path())) {
                 /* remote */
                 rev = p_Item->m_Stat->entry().revision();
                 peg = correctPeg();

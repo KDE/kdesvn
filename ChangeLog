@@ -1,6 +1,9 @@
 version 1.2.0
     * complete port to kde4
 
+version 1.0.3
+    * fixed a problem with pathes containing multiple special chars like space (#588)
+
 version 1.0.2
     * fixed distorted logic in "merge" parameter, results in working merge tracking with svn1.5, too.
 

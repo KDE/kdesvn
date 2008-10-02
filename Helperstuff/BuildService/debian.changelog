@@ -1,0 +1,357 @@
+kdesvn (1.0.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Rajko Albrecht <ral@alwins-world.de>  Tue, 15 Sep 2008 14:26:45 +0200
+ 
+kdesvn (0.14.6-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 15 Jul 2008 14:26:45 +0200
+
+kdesvn (0.14.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control
+    - Don't conflict with kde4 versions of kdesdk-kio-plugins. Closes: #483260
+    - Bump Standards-Version to 3.8.0. No further changes.
+  * debian/watch
+    - Update watch file to match the new download location.
+  * debian/patches/02-docimages.patch
+    - Specifiy the path to the doc images directly.
+      Beginning with version 2.4.7, cmake copies symlinks verbatim, leading to
+      dangling symlinks. Closes: #480585
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 14 Jul 2008 20:06:12 +0200
+
+kdesvn (0.14.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 19 May 2008 18:25:35 +0200
+
+kdesvn (0.14.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/rules
+    - Include the cmake.mk class provided by cdbs.
+  * debian/cdbs/cmake.mk
+    - Drop our custom cmake.mk Makefile as we now use the one provided by
+      cdbs.
+  * debian/control
+    - Bump Build-Depends on cdbs to (>= 0.4.50) for the cmake support.
+    - Drop the "-1" revsion of the libssl-dev Build-Depends to make lintian
+      happy.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 04 Apr 2008 01:02:42 +0200
+
+kdesvn (0.14.2-2) unstable; urgency=low
+
+  * debian/rules
+    - Pass -DLIB_SUFFIX="" to DEB_CMAKE_EXTRA_FLAGS. This ensures that the
+      libraries are installed into lib and not lib64 on 64-bit architectures.
+      Closes: #468064
+    - Update DEB_DH_MAKESHLIBS_ARGS for libsvnqt4.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 26 Feb 2008 23:31:17 +0100
+
+kdesvn (0.14.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control
+    - Bump Standards-Version to 3.7.3. No further changes required.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 20 Feb 2008 00:15:24 +0100
+
+kdesvn (0.14.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/watch
+    - Updated for the new download location. Closes: #449689
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 12 Nov 2007 11:36:34 +0100
+
+kdesvn (0.14.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/kdesvn.menu
+    - Change section to "Applications/Programming" to comply with the new menu
+      spec.
+  * debian/patches/01-bashisms_kconf_update.patch
+    - Fix a bashism in the kconf_update script.
+  * debian/control
+    - Use the new "Homepage:" field to specify the upstream URL.
+    - SONAME bump, rename the libsvnqt3 package to libsvnqt4.
+  * Rename libsvnqt3.install to libsvnqt4.install.
+  * debian/kdesvn.install
+    - Install the kconf_update files.
+  * debian/libsvnqt-dev.install
+    - No longer install the libtool *.la files for libsvnqt.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 18 Oct 2007 02:20:32 +0200
+
+kdesvn (0.13.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 10 Aug 2007 00:13:38 +0200
+
+kdesvn (0.12.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/watch
+    - Adapt to new directory layout.
+  * debian/control
+    - Replace ${Source-Version} with ${binary:Version}.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 13 Jun 2007 16:07:32 +0200
+
+kdesvn (0.12.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/01-po_ca.patch
+    + Removed. Merged upstream.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 05 May 2007 02:07:52 +0200
+
+kdesvn (0.11.2-2) unstable; urgency=low
+
+  * debian/patches/01-po_ca.patch
+    - Added. Updates to the Catalan translation by Antoni Bella Pérez. Thanks!
+      Closes: #417963
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 05 Apr 2007 21:16:11 +0200
+
+kdesvn (0.11.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 26 Mar 2007 00:51:07 +0200
+
+kdesvn (0.11.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Mon,  5 Mar 2007 06:44:49 +0100
+
+kdesvn (0.11.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/01-kompare_diff.patch
+    + Removed. Fixed upstream.
+  * debian/control
+    + Add a "Suggests: kdiff3" to kdesvn. kdiff3 can be used as an external
+      merge program.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 27 Oct 2006 12:52:15 +0200
+
+kdesvn (0.10.0-2) unstable; urgency=low
+
+  * Update maintainer email address to biebl@debian.org.
+  * debian/patches/01-kompare_diff.patch
+    + Added. Fixes a problem when using kompare as external diff application.
+      Closes: #394817
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 23 Oct 2006 13:12:45 +0200
+
+kdesvn (0.10.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * API bump for libsvnqt
+    + Updated debian/control: libsvnqt2 -> libsvnqt3.
+    + Moved debian/libsvnqt2.install to debian/libsvnqt3.install.
+
+ -- Michael Biebl <biebl@teco.edu>  Thu,  5 Oct 2006 01:50:41 +0200
+
+kdesvn (0.9.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control
+    + Changed build dependency from libsvn0-dev to libsvn-dev.
+    + libsvnqt-dev: Changed "Depends: libsvn0-dev" to libsvn-dev.
+  * debian/patches/01-cmake_uic.patch
+    + Removed, merged upstream.
+  * debian/patches/02-build_system.patch
+    + Removed, fixed upstream.
+
+ -- Michael Biebl <biebl@teco.edu>  Sat, 16 Sep 2006 16:54:55 +0200
+
+kdesvn (0.9.2-1) unstable; urgency=low
+
+  * New upstream release.
+    + Improved UTF-8 handling. Closes: #381424
+    + Dynamic context menues can now be disabled from within kdesvn.
+      Closes: #377592. This also addresses #370303.
+  * Switched the build system to CMake.
+    + Added debian/cdbs/cmake.mk, a cdbs class for CMake (taken from the
+      strigi package).
+    + Updated the build dependencies in debian/control accordingly.
+    + Updated debian/rules. Include debian/cdbs/cmake.mk instead of
+      /usr/share/cdbs/1/class/kde.mk.
+  * Updated debian/watch to scan for bz2 tarballs.
+  * Backported two build system related fixes from trunk (01-cmake_uic.patch
+    and 02-build_system.patch).
+
+ -- Michael Biebl <biebl@teco.edu>  Fri,  1 Sep 2006 13:40:57 +0200
+
+kdesvn (0.9.1-1) unstable; urgency=medium
+
+  * New upstream release.
+    + Correct diffs for non-UTF8 locales. Closes: #369809
+  * Ship updated admin/cvs.sh with support for autoconf-2.6. Closes: #379826
+
+ -- Michael Biebl <biebl@teco.edu>  Tue, 25 Jul 2006 22:36:03 +0200
+
+kdesvn (0.9.0-1) unstable; urgency=low
+
+  * New upstream release.
+    + The dynamic context menu entries are now in their own, exclusive
+      submenu. This is a workaround for #370303. 
+  * Removed patch makefile_am.diff, merged upstream.
+
+ -- Michael Biebl <biebl@teco.edu>  Mon, 24 Jul 2006 02:52:17 +0200
+
+kdesvn (0.8.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@teco.edu>  Sun, 25 Jun 2006 08:00:01 +0200
+
+kdesvn (0.8.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bumped Standards-Version to 3.7.2, no further changes required.
+
+ -- Michael Biebl <biebl@teco.edu>  Sun, 21 May 2006 13:32:16 +0200
+
+kdesvn (0.8.3-1) unstable; urgency=low
+
+  * New upstream release. Closes: #365643
+    + Local characters in URLs are properly encoded now. Closes: #364910
+    + Do not print a warning message if svnqt and kdesvn version differ.
+      Closes: #365743
+  * Bumped Standards-Version to 3.7.1, no further changes required.
+
+ -- Michael Biebl <biebl@teco.edu>  Thu,  4 May 2006 00:18:09 +0200
+
+kdesvn (0.8.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added a "Recommends: graphviz" to kdesvn. dot is part of the graphviz
+    package and used by kdesvn to generate nice looking revision graphs.
+  * The soname of svnqt changed from 1 to 2. Updated the control files
+    accordingly.
+  * Moved libsvnqt2 in front of kdesvn in debian/control. This way the shlibs
+    file of libsvnqt2 is created before dh_shlibdeps for kdesvn is run.
+
+ -- Michael Biebl <biebl@teco.edu>  Sun, 23 Apr 2006 00:40:43 +0200
+
+kdesvn (0.8.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@teco.edu>  Sun,  2 Apr 2006 15:18:56 +0200
+
+kdesvn (0.8.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added two new binary packages libsvnqt1 and libsvnqt-dev. svnqt is a Qt
+    wrapper library for subversion. kdesvn uses it to ease the access to
+    libsvn.
+  * Updated copyright file and added information about svnqt.
+  * Bumped debhelper compatibility to 5. 
+
+ -- Michael Biebl <biebl@teco.edu>  Fri, 24 Mar 2006 08:56:09 +0100
+
+kdesvn (0.7.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fixed indentation of homepage url in the long description.
+  * Disabled autoloading of kded service, added patch kded_no_autoload.diff.
+    Fixes problem with dynamic context menus. Closes: #348411
+
+ -- Michael Biebl <biebl@teco.edu>  Wed,  1 Mar 2006 22:19:30 +0100
+
+kdesvn (0.7.3-1) unstable; urgency=low
+
+  * New upstream release.
+    + Removed patch store_passwords_config.diff, merged upstream.
+    + Removed patch settings_icons.diff, merged upstream.
+
+ -- Michael Biebl <biebl@teco.edu>  Thu,  2 Feb 2006 15:25:50 +0100
+
+kdesvn (0.7.2-2) unstable; urgency=low
+
+  * subversion_settings.cpp was not regenerated from the patched ui file.
+    Enforce its recreation via rm. This really fixes #345518. 
+
+ -- Michael Biebl <biebl@teco.edu>  Fri, 13 Jan 2006 16:09:35 +0100
+
+kdesvn (0.7.2-1) unstable; urgency=low
+
+  * New upstream release.
+    + Removed patch context_menu.diff, merged upstream.
+  * Added patch store_passwords_config.diff. Closes: #345518
+  * Added patch settings_icons.diff for more distinct icons in the settings
+    dialog.
+
+ -- Michael Biebl <biebl@teco.edu>  Fri, 13 Jan 2006 04:31:54 +0100
+
+kdesvn (0.7.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Tightened build dependency on kdelibs4-dev because of the C++ allocator
+    change.
+  * Tightened build dependency on libsvn0-dev as kdesvn now requires subversion
+    1.2 or higher.
+  * Split up package into core application kdesvn and KIO plugin package
+    kdesvn-kio-plugins.
+  * Updated menu icon.
+  * Use Debian libtool and regenerate the autotools files. Closes: #343952
+    + Add build dependencies to automake1.9, autoconf and libtool.
+    + Patch makefile_am.diff from Aurelien Jarno <aurel32@debian.org> adds
+      missing libraries needed for linking. 
+
+ -- Michael Biebl <biebl@teco.edu>  Mon, 19 Dec 2005 21:47:39 +0100
+
+kdesvn (0.6.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@teco.edu>  Mon, 24 Oct 2005 17:37:02 +0200
+
+kdesvn (0.6.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added a versioned build dependency to libssl-dev (>= 0.9.8a-1) to make
+    sure kdesvn links against a version of openssl which has symbol
+    versioning.
+
+ -- Michael Biebl <biebl@teco.edu>  Wed,  5 Oct 2005 15:40:53 +0200
+
+kdesvn (0.6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@teco.edu>  Tue,  4 Oct 2005 04:04:14 +0200
+
+kdesvn (0.6.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@teco.edu>  Fri, 23 Sep 2005 16:47:04 +0200
+
+kdesvn (0.5.3-2) unstable; urgency=low
+
+  * Removed useless build dependency on build-essential which was 
+    generated by cdbs. Closes: #326638
+
+ -- Michael Biebl <biebl@teco.edu>  Mon,  5 Sep 2005 18:50:39 +0200
+
+kdesvn (0.5.3-1) unstable; urgency=low
+
+  * Initial release. Closes: #323697
+
+ -- Michael Biebl <biebl@teco.edu>  Fri,  2 Sep 2005 19:26:13 +0200
+

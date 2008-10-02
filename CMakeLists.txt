@@ -80,6 +80,7 @@ ENDIF(DAILY_BUILD)
 CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
 CONFIGURE_FILE(kdesvn.spec.in kdesvn.spec @ONLY)
 CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/kdesvn.spec @ONLY)
+CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.dsc.in Helperstuff/BuildService/kdesvn.dsc @ONLY)
 CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
 CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 

@@ -1,0 +1,13 @@
+Format: 1.0
+Source: kdesvn
+Binary: libsvnqt4, libsvnqt-dev, kdesvn, kdesvn-kio-plugins
+Architecture: any
+Version: @VERSION@-1
+Maintainer: Rajko Albrecht <ral@alwins-world.de>
+Homepage: http://kdesvn.alwins-world.de/
+Standards-Version: 3.8.0
+Build-Depends: cdbs (>= 0.4.50), cmake (>= 2.4), debhelper (>= 5.0.0), gettext, kdelibs4-dev (>= 4:3.4.3-2), libssl-dev (>= 0.9.8a), libsvn-dev (>= 1.2.0)
+Files: 
+ 1a7ef78663645b9a1e4b9b5161fdfe0d 11338 kdesvn_@VERSION@-1.diff.tar.gz
+ d57283ebb8157ae919762c58419353c8 133282 kdesvn_@VERSION@.orig.tar.gz
+

@@ -345,7 +345,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
         _q.prepare(qMerges);
         QByteArray _merges;
         QBuffer buffer(&_merges);
-        buffer.open(QIODevice::QIODevice::ReadWrite);
+        buffer.open(QIODevice::ReadWrite);
         QDataStream af(&buffer);
         af << aEntry.m_MergedInRevisions;
         buffer.close();

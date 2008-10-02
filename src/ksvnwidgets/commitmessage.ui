@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>667</width>
-    <height>567</height>
+    <width>659</width>
+    <height>622</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -18,14 +18,14 @@
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <widget class="Q3Frame" name="m_ReviewFrame" >
+     <widget class="QFrame" name="m_ReviewFrame" >
       <property name="frameShape" >
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow" >
-       <enum>QFrame::Plain</enum>
+       <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout" name="verticalLayout" >
        <item>
         <widget class="QLabel" name="m_Reviewlabel" >
          <property name="text" >
@@ -103,15 +103,22 @@
         </layout>
        </item>
       </layout>
+      <zorder>m_HeadLabel</zorder>
+      <zorder>m_LogEdit</zorder>
+      <zorder>frame</zorder>
+      <zorder>frame</zorder>
+      <zorder>m_CommitItemTree</zorder>
+      <zorder>m_Reviewlabel</zorder>
+      <zorder></zorder>
      </widget>
-     <widget class="Q3Frame" name="m_EditFrame" >
+     <widget class="QFrame" name="m_EditFrame" >
       <property name="frameShape" >
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow" >
-       <enum>QFrame::Plain</enum>
+       <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout" name="verticalLayout_2" >
        <item>
         <widget class="QLabel" name="m_HeadLabel" >
          <property name="text" >
@@ -198,15 +205,12 @@
     </layout>
    </item>
   </layout>
+  <zorder>m_MainSplitter</zorder>
+  <zorder>m_ReviewFrame</zorder>
+  <zorder>frame</zorder>
  </widget>
  <layoutdefault spacing="2" margin="2" />
  <customwidgets>
-  <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>

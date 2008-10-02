@@ -26,7 +26,6 @@
     \fn RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
  */
  RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
-//     :RevertForm(parent,name)
     : QWidget(parent)
 {
     setupUi(this);
@@ -54,7 +53,7 @@ svn::Depth RevertFormImpl::getDepth()const
  */
 void RevertFormImpl::setDispList(const QStringList&_list)
 {
-    m_ItemsList->insertStringList(_list);
+    m_ItemsList->addItems(_list);
 }
 
 #include "revertform_impl.moc"

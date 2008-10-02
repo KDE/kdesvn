@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>449</width>
-    <height>398</height>
+    <height>402</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -159,7 +159,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="2" margin="2" />
- <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
    <class>KDateTimeWidget</class>
@@ -178,6 +177,7 @@
   <tabstop>m_stopStartButton</tabstop>
   <tabstop>m_stopHeadButton</tabstop>
  </tabstops>
+ <includes/>
  <resources/>
  <connections>
   <connection>

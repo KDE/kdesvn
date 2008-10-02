@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>284</width>
-    <height>263</height>
+    <width>286</width>
+    <height>262</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -96,34 +96,6 @@ see which items has newer items in repository you may have to set "Check for upd
    <item>
     <layout class="QGridLayout" >
      <item row="0" column="0" >
-      <widget class="QLabel" name="m_display_label" >
-       <property name="text" >
-        <string>External display:</string>
-       </property>
-       <property name="wordWrap" >
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" >
-      <widget class="KLineEdit" name="kcfg_external_display" >
-       <property name="whatsThis" >
-        <string>&lt;p align="left">
-Enter an external program for opening file on doubleclick in form
-&lt;br>
-&lt;tt>&amp;lt;program&amp;gt;&lt;/tt>
-&lt;/p>
-&lt;p>
-When kde-default is wanted for opening on double click, enter &amp;quot;default&amp;quot; and kde selects action.
-&lt;/p></string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" >
-     <item row="0" column="0" >
       <widget class="QLabel" name="m_MaxLogLabel" >
        <property name="text" >
         <string>Maximum logmessages in history:</string>
@@ -177,11 +149,6 @@ When kde-default is wanted for opening on double click, enter &amp;quot;default&
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
  </customwidgets>
  <includes>
   <include location="local" >knuminput.h</include>
@@ -195,22 +162,6 @@ When kde-default is wanted for opening on double click, enter &amp;quot;default&
    <signal>toggled(bool)</signal>
    <receiver>DisplaySettings</receiver>
    <slot>dispFileInfotoggled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>kcfg_external_display</sender>
-   <signal>selectionChanged()</signal>
-   <receiver>DisplaySettings</receiver>
-   <slot>diffDispChanged()</slot>
    <hints>
     <hint type="sourcelabel" >
      <x>20</x>

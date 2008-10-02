@@ -35,10 +35,13 @@ template<class T> inline KDialog* createDialog(T**ptr,const QString&_head,bool O
     if (showHelp) {
         buttons = buttons|KDialog::Help;
     }
+    if (!u1.text().isEmpty()) {
+        buttons=buttons|KDialog::User1;
+    }
     KDialog * dlg = new KDialog(modal?KApplication::activeModalWidget():0);
     if (!dlg) return dlg;
     dlg->setCaption(_head);
-    dlg->setModal(true);
+    dlg->setModal(modal);
     dlg->setButtons(buttons);
     if (!u1.text().isEmpty()) {
         dlg->setButtonGuiItem(KDialog::User1,u1);

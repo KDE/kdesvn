@@ -151,6 +151,12 @@
        <property name="enabled" >
         <bool>false</bool>
        </property>
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text" >
         <string>Diff previous</string>
        </property>
@@ -163,6 +169,12 @@
       <widget class="KPushButton" name="m_DispSpecDiff" >
        <property name="enabled" >
         <bool>false</bool>
+       </property>
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="toolTip" >
         <string>Select second revision with right mouse button</string>
@@ -180,6 +192,12 @@
        <property name="enabled" >
         <bool>false</bool>
        </property>
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text" >
         <string>List entries</string>
        </property>
@@ -192,6 +210,12 @@
       <widget class="KPushButton" name="buttonBlame" >
        <property name="enabled" >
         <bool>false</bool>
+       </property>
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="text" >
         <string>Annotate</string>
@@ -216,16 +240,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="KPushButton" name="buttonClose" >
-       <property name="text" >
-        <string>Close</string>
-       </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -264,22 +278,6 @@
  </includes>
  <resources/>
  <connections>
-  <connection>
-   <sender>buttonClose</sender>
-   <signal>clicked()</signal>
-   <receiver>LogDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>532</x>
-     <y>307</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>m_DispPrevButton</sender>
    <signal>clicked()</signal>

@@ -37,6 +37,9 @@ all_files=[
 'hisc-filesys-kdesvnupdates.svgz',
 'hisc-filesys-kdesvnneedlock.svgz',
 'hisc-action-kdesvnrightreload.svgz',
+'hisc-action-kdesvnreverse.svgz',
+'hisc-action-kdesvntree.svgz',
+'hisc-action-kdesvnresolved.svgz',
 ]
 
 i_sizes=[

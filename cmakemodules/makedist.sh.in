@@ -2,11 +2,12 @@
 VERSION=@VERSION@
 SRCROOT=@CMAKE_SOURCE_DIR@
 BUILDDIR=@CMAKE_BINARY_DIR@
+PACKAGE=@PACKAGENAME@
 PROJECT=@PROJECT_NAME@
 KDESVN_VERSION=@KDESVN_VERSION@
 
 EXCLUDE="@DIST_EXCLUDE@"
-EXPORT_DIR="${PROJECT}-${VERSION}"
+EXPORT_DIR="${PACKAGE}-${VERSION}"
 
 if [ ! -d ${SRCROOT}/.svn ]; then
     echo "This script must run for a svn dir!"
@@ -28,11 +29,11 @@ for i in $EXCLUDE ; do
 done
 
 echo "Generating archive"
-tar cjf ${BUILDDIR}/${PROJECT}-${VERSION}.tar.bz2 ${EXPORT_DIR}
+tar cjf ${BUILDDIR}/${PACKAGE}-${VERSION}.tar.bz2 ${EXPORT_DIR}
 
 echo "Cleaning up"
 rm -rf ${EXPORT_DIR}
 
 if [ "x$1" = "xrpm" ]; then
-    KDESVN_VERSION=${KDESVN_VERSION} rpmbuild -tb ${BUILDDIR}/${PROJECT}-${VERSION}.tar.bz2
+    KDESVN_VERSION=${KDESVN_VERSION} rpmbuild -tb ${BUILDDIR}/${PACKAGE}-${VERSION}.tar.bz2
 fi

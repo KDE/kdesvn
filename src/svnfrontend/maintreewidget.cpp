@@ -107,6 +107,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
 {
     setObjectName("MainTreeWidget");
     setupUi(this);
+    setFocusPolicy(Qt::StrongFocus);
     m_TreeView->setFocusPolicy(Qt::StrongFocus);
     m_Data->m_Collection = aCollection;
     m_Data->m_SortModel = new SvnSortFilterProxy();
@@ -387,15 +388,15 @@ void MainTreeWidget::setupActions()
     /* 1. actions on dirs AND files */
     //new KAction(,"kdesvnlog",,this,SLOT(slotMakeLog()),m_Data->m_Collection,"make_svn_log_full");
     add_action("make_svn_log_full",i18n("Full Log"),KShortcut(Qt::CTRL+Qt::Key_L),KIcon("kdesvnlog"),this,SLOT(slotMakeLog()));
-    add_action("make_svn_tree",i18n("Full revision tree"),KShortcut(Qt::CTRL+Qt::Key_T),KIcon("kdesvnlog"),this,SLOT(slotMakeTree()));
-    add_action("make_svn_partialtree",i18n("Partial revision tree"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_T),KIcon("kdesvnlog"),this,SLOT(slotMakePartTree()));
-    add_action("make_svn_property",i18n("Properties"),KShortcut(Qt::CTRL+Qt::Key_P),KIcon("edit"),m_Data->m_Model->svnWrapper(),SLOT(slotProperties()));
-    add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::Key_P),KIcon("edit"),this,SLOT(slotDisplayProperties()));
+    add_action("make_svn_tree",i18n("Full revision tree"),KShortcut(Qt::CTRL+Qt::Key_T),KIcon("kdesvntree"),this,SLOT(slotMakeTree()));
+    add_action("make_svn_partialtree",i18n("Partial revision tree"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_T),KIcon("kdesvntree"),this,SLOT(slotMakePartTree()));
+    add_action("make_svn_property",i18n("Properties"),KShortcut(Qt::CTRL+Qt::Key_P),KIcon(),m_Data->m_Model->svnWrapper(),SLOT(slotProperties()));
+    add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::Key_P),KIcon(),this,SLOT(slotDisplayProperties()));
     tmp_action = add_action("make_last_change",i18n("Display last changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDisplayLastDiff()));
     if (tmp_action) tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
-    add_action("make_svn_info",i18n("Details"),KShortcut(Qt::Key_I),KIcon("kdesvninfo"),this,SLOT(slotInfo()));
-    add_action("make_svn_rename",i18n("Move"),KShortcut(Qt::Key_F2),KIcon("move"),this,SLOT(slotRename()));
-    add_action("make_svn_copy",i18n("Copy"),KShortcut(Qt::Key_C),KIcon(),this,SLOT(slotCopy()));
+    add_action("make_svn_info",i18n("Details"),KShortcut(Qt::CTRL+Qt::Key_I),KIcon("kdesvninfo"),this,SLOT(slotInfo()));
+    add_action("make_svn_rename",i18n("Move"),KShortcut(Qt::Key_F2),KIcon("kdesvnmove"),this,SLOT(slotRename()));
+    add_action("make_svn_copy",i18n("Copy"),KShortcut(Qt::CTRL+Qt::Key_C),KIcon("kdesvncopy"),this,SLOT(slotCopy()));
     tmp_action = add_action("make_check_updates",i18n("Check for updates"),KShortcut(),KIcon("kdesvncheckupdates"),this,SLOT(slotCheckUpdates()));
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
 
@@ -414,7 +415,7 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_svn_unlock",i18n("Unlock current items"),KShortcut(),KIcon("kdesvnunlock"),this,SLOT(slotUnlock()));
 
     /* 3. actions only on dirs */
-    tmp_action = add_action("make_svn_mkdir",i18n("New folder"),KShortcut(),KIcon("folder_new"),this,SLOT(slotMkdir()));
+    tmp_action = add_action("make_svn_mkdir",i18n("New folder"),KShortcut(),KIcon("kdesvnnewfolder"),this,SLOT(slotMkdir()));
     tmp_action = add_action("make_svn_switch",i18n("Switch repository"),KShortcut(),KIcon("kdesvnswitch"), m_Data->m_Model->svnWrapper(),SLOT(slotSwitch()));
     tmp_action->setToolTip(i18n("Switch repository path of current working copy path (\"svn switch\")"));
 
@@ -424,13 +425,13 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_check_unversioned",i18n("Check for unversioned items"),KShortcut(),KIcon("kdesvnaddrecursive"),this,SLOT(slotCheckNewItems()));
     tmp_action->setToolTip(i18n("Browse folder for unversioned items and add them if wanted."));
 
-    tmp_action = add_action("make_switch_to_repo",i18n("Open repository of working copy"),KShortcut(),KIcon("gohome"),
+    tmp_action = add_action("make_switch_to_repo",i18n("Open repository of working copy"),KShortcut(),KIcon("kdesvnrepository"),
                             this,SLOT(slotChangeToRepository()));
     tmp_action->setToolTip(i18n("Opens the repository the current working copy was checked out from"));
 
     tmp_action = add_action("make_cleanup",i18n("Cleanup"),KShortcut(),KIcon("kdesvncleanup"),this,SLOT(slotCleanupAction()));
     tmp_action->setToolTip(i18n("Recursively clean up the working copy, removing locks, resuming unfinished operations, etc."));
-    tmp_action=add_action("make_import_dirs_into_current",i18n("Import folders into current"),KShortcut(), KIcon("fileimport"),
+    tmp_action=add_action("make_import_dirs_into_current",i18n("Import folders into current"),KShortcut(), KIcon("kdesvnimportfolder"),
                             this,SLOT(slotImportDirsIntoCurrent()));
     tmp_action->setToolTip(i18n("Import folder content into current url"));
 
@@ -444,12 +445,12 @@ void MainTreeWidget::setupActions()
 
     tmp_action = add_action("make_svn_remove",i18n("Delete selected files/dirs"),KShortcut(Qt::Key_Delete),KIcon("kdesvndelete"),this,SLOT(slotDelete()));
     tmp_action->setToolTip(i18n("Deleting selected files and/or directories from repository"));
-    tmp_action  = add_action("make_svn_revert",i18n("Revert current changes"),KShortcut(),KIcon("revert"),m_Data->m_Model->svnWrapper(),SLOT(slotRevert()));
+    tmp_action  = add_action("make_svn_revert",i18n("Revert current changes"),KShortcut(),KIcon("kdesvnreverse"),m_Data->m_Model->svnWrapper(),SLOT(slotRevert()));
 
-    tmp_action = add_action("make_resolved",i18n("Mark resolved"),KShortcut(),KIcon(),this,SLOT(slotResolved()));
+    tmp_action = add_action("make_resolved",i18n("Mark resolved"),KShortcut(),KIcon("kdesvnresolved"),this,SLOT(slotResolved()));
     tmp_action->setToolTip(i18n("Marking files or dirs resolved"));
 
-    tmp_action = add_action("make_try_resolve",i18n("Resolve conflicts"),KShortcut(),KIcon(),this,SLOT(slotTryResolve()));
+    tmp_action = add_action("make_try_resolve",i18n("Resolve conflicts"),KShortcut(),KIcon("kdesvnresolved"),this,SLOT(slotTryResolve()));
 
     tmp_action = add_action("make_svn_ignore",i18n("Ignore/Unignore current item"),KShortcut(),KIcon(),this,SLOT(slotIgnore()));
 
@@ -728,25 +729,18 @@ void MainTreeWidget::itemActivated(const QModelIndex&index,bool keypress)
     if (index.isValid() && (item=static_cast<SvnItemModelNode*>(index.internalPointer()))) {
         if (!item->isDir()) {
             svn::Revision rev;
-            QString feditor = Kdesvnsettings::external_display();
-            if ( feditor.compare("default") == 0 ) {
-                KUrl::List lst;
-                lst.append(item->kdeName(rev));
-                KService::List li = offersList(item,true);
-                if (li.count()==0||li.first()->exec().isEmpty()) {
-                    li = offersList(item);
-                }
-                if (li.count()>0&&!li.first()->exec().isEmpty()) {
-                    KService::Ptr ptr = li.first();
-                    KRun::run(*ptr, lst, KApplication::activeWindow());
-                } else {
-                    KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
-                }
-                } else {
-                    if ( KRun::runCommand(feditor + " " +  item->kdeName(rev).prettyUrl(),KApplication::activeWindow()) <= 0) {
-                        KMessageBox::error(this,i18n("Failed: %1 %2",feditor,item->fullName()));
-                    }
-                }
+            KUrl::List lst;
+            lst.append(item->kdeName(rev));
+            KService::List li = offersList(item,true);
+            if (li.count()==0||li.first()->exec().isEmpty()) {
+                li = offersList(item);
+            }
+            if (li.count()>0&&!li.first()->exec().isEmpty()) {
+                KService::Ptr ptr = li.first();
+                KRun::run(*ptr, lst, KApplication::activeWindow());
+            } else {
+                KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
+            }
         } else if (keypress){
             QModelIndex i=m_Data->m_SortModel->mapFromSource(index);
             if (m_TreeView->isExpanded(i)) {

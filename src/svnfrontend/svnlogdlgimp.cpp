@@ -46,11 +46,24 @@
 const char* SvnLogDlgImp::groupName = "log_dialog_size";
 
 SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool modal)
-    :QDialog(parent),_name("")
+    :KDialog(parent),_name("")
 {
     setupUi(this);
     setObjectName(name);
     setModal(modal);
+    setHelp("logdisplay-dlg","kdesvn");
+    setButtons(Help|Close);
+    QWidget * b = button(Help);
+    if (b) {
+        m_ButtonLayout->addWidget(b);
+    }
+    b = button(Close);
+    if (b) {
+        m_ButtonLayout->addWidget(b);
+    }
+    m_DispPrevButton->setIcon(KIcon("kdesvndiff"));
+    m_DispSpecDiff->setIcon(KIcon("kdesvndiff"));
+    buttonBlame->setIcon(KIcon("kdesvnblame"));
     m_SortModel = 0;
     m_CurrentModel=0;
 
@@ -381,7 +394,7 @@ void SvnLogDlgImp::keyPressEvent (QKeyEvent * e)
     if (e->text().isEmpty()&&e->key()==Qt::Key_Control) {
         m_ControlKeyDown = true;
     }
-    QDialog::keyPressEvent(e);
+    KDialog::keyPressEvent(e);
 }
 
 void SvnLogDlgImp::keyReleaseEvent (QKeyEvent * e)
@@ -390,7 +403,7 @@ void SvnLogDlgImp::keyReleaseEvent (QKeyEvent * e)
     if (e->text().isEmpty()&&e->key()==Qt::Key_Control) {
         m_ControlKeyDown = false;
     }
-    QDialog::keyReleaseEvent(e);
+    KDialog::keyReleaseEvent(e);
 }
 
 void SvnLogDlgImp::slotBlameItem()

@@ -372,11 +372,11 @@ void kdesvnpart::slotShowSettings()
     dialog->addPage(new DiffMergeSettings_impl(0),
         i18n("Diff & Merge"),"kdesvnmerge",i18n("Settings for diff and merge"),true);
     dialog->addPage(new DispColorSettings_impl(0),
-        i18n("Colors"),"colorize",i18n("Color Settings"),true);
+        i18n("Colors"),"kdesvncolors",i18n("Color Settings"),true);
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0),
-        i18n("Revision tree"),"configure",i18n("Revision tree Settings"),true);
+                     i18n("Revision tree"),"kdesvntree",i18n("Revision tree Settings"),true);
     dialog->addPage(new CmdExecSettings_impl(0),
-        "KIO/"+i18n("Commandline"),"terminal",i18n("Settings for commandline and KIO execution"),true);
+        "KIO/"+i18n("Commandline"),"kdesvnterminal",i18n("Settings for commandline and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged(const QString&)),this,SLOT(slotSettingsChanged(const QString&)));
     dialog->show();

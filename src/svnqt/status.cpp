@@ -31,8 +31,10 @@
 // svncpp
 #include "status.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/path.hpp"
+#include "svnqt/url.hpp"
 
-//#include <assert.h>
+#include "svn_path.h"
 
 namespace svn
 {
@@ -56,6 +58,8 @@ namespace svn
     void
     init(const QString&url,const InfoEntry&src);
 
+    void setPath(const QString&);
+
     QString m_Path;
     bool m_isVersioned;
     bool m_hasReal;
@@ -75,10 +79,21 @@ namespace svn
   {
   }
 
+  void Status_private::setPath(const QString&aPath)
+  {
+    Pool pool;
+    if (!Url::isValid(aPath)) {
+        m_Path = aPath;
+    } else {
+        Pool pool;
+        const char * int_path = svn_path_uri_decode(aPath.TOUTF8(), pool.pool () );
+        m_Path = QString::FROMUTF8(int_path);
+    }
+  }
+
   void Status_private::init (const QString&path, const svn_wc_status2_t * status)
   {
-    m_Path = path;
-
+    setPath(path);
     if (!status)
     {
       m_isVersioned = false;
@@ -119,7 +134,7 @@ namespace svn
   void
   Status_private::init (const QString&path,const Status_private&src)
   {
-    m_Path=path;
+    setPath(path);
     m_Lock=src.m_Lock;
     m_entry=src.m_entry;
     m_isVersioned=src.m_isVersioned;
@@ -135,7 +150,7 @@ namespace svn
   void Status_private::init(const QString&url,const DirEntryPtr&src)
   {
     m_entry=Entry(url,src);
-    m_Path=url;
+    setPath(url);
     _text_status = svn_wc_status_normal;
     _prop_status = svn_wc_status_normal;
     if (src) {
@@ -151,7 +166,7 @@ namespace svn
   void Status_private::init(const QString&url,const InfoEntry&src)
   {
     m_entry=Entry(url,src);
-    m_Path=url;
+    setPath(url);
     m_Lock=src.lockEntry();
     _text_status = svn_wc_status_normal;
     _prop_status = svn_wc_status_normal;
@@ -167,7 +182,7 @@ namespace svn
     if( &src != this )
     {
         if (src.m_Data) {
-             m_Data->init (src.m_Data->m_Path, *(src.m_Data));
+             m_Data->init(src.m_Data->m_Path, *(src.m_Data));
         } else {
             m_Data->init(src.m_Data->m_Path,0);
         }

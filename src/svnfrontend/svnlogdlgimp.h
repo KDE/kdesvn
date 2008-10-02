@@ -38,7 +38,7 @@ class SvnLogModel;
 class QSortFilterProxyModel;
 class QModelIndex;
 
-class SvnLogDlgImp: public QDialog,public Ui::LogDialog,public SimpleLogCb
+class SvnLogDlgImp: public KDialog,public Ui::LogDialog,public SimpleLogCb
 {
 Q_OBJECT
 public:

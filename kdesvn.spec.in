@@ -1,19 +1,21 @@
+# norootforbuild
 Summary:   A subversion client for the KDE with KIO integration.
-Name:      @PROJECT_NAME@
+Name:      @PACKAGENAME@
 Version:   @VERSION@
 Release:   1%{?dist}
 License:   LGPL
 Vendor:    Rajko Albrecht <ral@alwins-world.de>
 Url:       http://kdesvn.alwins-world.de
 Group:     Development/Tools
-Source:    @PROJECT_NAME@-%version.tar.bz2
+Source:    @PACKAGENAME@-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
+Requires: subversion >= 1.3.0
 Requires: /usr/bin/dot
+BuildRequires: cmake >= 2.4
+BuildRequires: gcc-c++
 BuildRequires: apr-devel
 BuildRequires: apr-util-devel
 BuildRequires: subversion-devel >= 1.3.0
-BuildRequires: cmake >= 2.4
-BuildRequires: sqlite-devel
 BuildRequires: kdelibs-devel >= 4.1
 
 %description
@@ -22,7 +24,7 @@ It may used as standalone application or plugin (KPart). Base functions are prov
 via a KIO protocol, too.
 
 %package kiosvn
-Requires: kdesvn = %{version}
+Requires: @PACKAGENAME@ = %{version}
 Group:    Development/Tools
 Summary:  A kde-kio integration for subversion based on kdesvn
 
@@ -33,7 +35,7 @@ KIO integration (KIO::svn) based on kdesvn alternative protocol name.
 Group:    Development/Libraries
 Summary:  Wrapper lib for subversion QT integration.
 Requires: subversion-devel >= 1.3.0
-Requires: kdesvn = %{version}
+Requires: @PACKAGENAME@ = %{version}
 
 %description devel
 Development files for kdesvn.
@@ -62,7 +64,7 @@ gzip $RPM_BUILD_ROOT/%{_datadir}/man/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT/*
-rm -rf $RPM_BUILD_DIR/kdesvn
+rm -rf $RPM_BUILD_DIR/@PACKAGENAME@
 
 
 %files
@@ -86,7 +88,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 %{_datadir}/kde4/services/ksvn*.protocol
 %{_datadir}/man/man1/*
 %{_datadir}/dbus-1/interfaces/org.kde.kdesvnd.xml
-%{_libdir}/libsvnqt*.so*
+%{_libdir}/lib@svnqt-name@.so*
 %doc AUTHORS ChangeLog GPL.txt TODO COPYING COPYING.OpenSSL
 
 %files kiosvn
@@ -95,6 +97,7 @@ rm -rf $RPM_BUILD_DIR/kdesvn
 
 %files devel
 %defattr(-,root,root)
-%{_includedir}/svnqt4/*
+%dir %{_includedir}/@svnqt-name@
+%{_includedir}/@svnqt-name@/*
 
 %changelog

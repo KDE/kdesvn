@@ -38,7 +38,7 @@ SvnItemModelNode::~SvnItemModelNode()
 int SvnItemModelNode::rowNumber()const
 {
     if (!_parentNode) {
-        return 0;
+        return -1;
     }
     return _parentNode->childList().indexOf(const_cast<SvnItemModelNode*>(this));
 }
@@ -123,7 +123,7 @@ void SvnItemModelNode::refreshStatus(bool childs,const QList<SvnItem*>&exclude, 
     if (!depsonly) {
         _display->refreshItem(this);
     }
-    if (!childs) {
+    if (!childs && _parentNode) {
         _parentNode->refreshStatus(false,exclude,depsonly);
     }
 }

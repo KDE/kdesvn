@@ -329,7 +329,6 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
     if (!m_Data->m_Display->isWorkingCopy()|| (!_parent) || ((_parent) && (_parent->isVersioned()))) {
         if (!svnWrapper()->makeStatus(what,dlist,m_Data->m_Display->baseRevision(),false,true,true) ) {
-            kDebug() << "unable makeStatus" <<endl;
             return -1;
         }
     } else {
@@ -497,7 +496,6 @@ bool SvnItemModel::dropMimeData(const QMimeData * data, Qt::DropAction action, i
 QMimeData* SvnItemModel::mimeData(const QModelIndexList & indexes )const
 {
     KUrl::List urls;
-    kDebug()<<indexes.size()<<indexes<<endl;
     foreach ( const QModelIndex &index, indexes ) {
         if(index.column()==0) {
             urls<<m_Data->nodeForIndex(index)->kdeName(m_Data->m_Display->baseRevision());
@@ -593,7 +591,6 @@ void SvnItemModel::initDirWatch()
 
 void SvnItemModel::slotCreated(const QString&what)
 {
-    kDebug()<<what<<endl;
     QModelIndex ind = findIndex(what);
     if (!ind.isValid()) {
         return;
@@ -602,7 +599,6 @@ void SvnItemModel::slotCreated(const QString&what)
     if (!n) {
         return;
     }
-    kDebug()<<what<<endl;
     if (n->isRealVersioned()) {
         refreshIndex(ind);
     }
@@ -610,7 +606,6 @@ void SvnItemModel::slotCreated(const QString&what)
 
 void SvnItemModel::slotDeleted(const QString&what)
 {
-    kDebug()<<what<<endl;
     QModelIndex ind = findIndex(what);
     if (!ind.isValid()) {
         m_Data->m_DirWatch->removeDir(what);
@@ -669,7 +664,6 @@ void SvnItemModel::checkAddNewItems(const QModelIndex&ind)
 
 void SvnItemModel::slotDirty(const QString&what)
 {
-    kDebug()<<what<<endl;
     QModelIndex ind = findIndex(what);
     if (!ind.isValid()) {
         return;

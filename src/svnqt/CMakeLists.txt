@@ -97,7 +97,10 @@ SET(FROMUTF8 "fromUtf8")
 SET(QLIST "QList")
 SET(TOASCII "toAscii")
 SET(HOMEDIR "homePath")
+IF(NOT svnqt-name)
 SET(svnqt-name svnqt4)
+ENDIF(NOT svnqt-name)
+
 SET(QDATABASE "QSqlDatabase")
 SET(QLONG "qlonglong")
 

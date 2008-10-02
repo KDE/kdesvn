@@ -1774,6 +1774,7 @@ bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
         emit clientException(e.msg());
         return false;
     }
+    m_Data->clearCaches();
     EMIT_FINISHED;
     return true;
 }
@@ -1799,6 +1800,7 @@ bool SvnActions::makeRelocate(const QString&fUrl,const QString&tUrl,const QStrin
         emit clientException(e.msg());
         return false;
     }
+    m_Data->clearCaches();
     EMIT_FINISHED;
     return true;
 }

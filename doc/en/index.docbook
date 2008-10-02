@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
-<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kdesvn "<application>kdesvn</application>">
   <!ENTITY kappname "&kdesvn;"><!-- Do *not* replace kappname-->
   <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc -->
   <!ENTITY % addindex "IGNORE">
   <!ENTITY konqi "<application>konqueror</application>">
-  <!ENTITY krus "<application>krusader</application>">
+  <!ENTITY krus "<application>dolphin</application>">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 
 
@@ -370,12 +370,44 @@ Deleting items is always recursive. Eg., when you delete a folder all subitems w
 </para>
 </sect3>
 </sect2>
-</sect1>
+
+<sect2 id="logdisplay">
+<title>Displaying logs</title>
+<para>
+The log display may start with
+<keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo>
+when one or none item is marked in overview. Depending on your settings (see <xref linkend="subversion-settings" xreflabel="settings"/>) &kdesvn; retrieves some log entries beginning on head and displays them.
+</para>
+<sect3  id="logdisplay-dlg">
+<title>The log display dialog</title>
+<para>
+On left side you see the list of logentries &kdesvn; retrieved. The logmessage is stripped-down to one line to fit. The full logmessage appears in right upper window when marking an entry. In the right lower window you'll the list of changed files. This windows ONLY appears if this list ist fetched depending on your settings.
+</para>
+<para>
+With the buttons above you may select another range of logs to display.
+
+<important><para>This range is called without any pre-limit so you have to think about yourself on large repositories.</para></important>
+
+</para>
+<para>
+The buttons below displays always work on item selected for log, not on item selected in list of changed files. So when you select 
+&quot;<literal>Diff previous</literal>&quot; there it makes the diff over all changed items in this revision if them are equivalent or below the subversion 
+entry selected for retrievung logs before. Same for &quot;<literal>Diff revisions</literal>&quot;
+</para>
+<para>
+&quot;<literal>Annotate</literal>&quot; of course works only if item to log is a file.
+</para>
+<para>
+On all listentries (both lists) you have context menu enabled for some extra operations. In left list this is &quot;Set version as left side of diff&quot; (eg, beginning revision) and &quot;Set version as right side of diff&quot; (eg., end or target of diff, in unified the part marked with a &quot;<computeroutput>+++</computeroutput>&quot;). If you selected these revisions them are marked with some small arrows.
+</para>
+</sect3>
+</sect2>
+</sect1>	
 
 <sect1 id="working-with-repositories">
 <title>Working on repositories</title>
 <para>
-Simple repository browsing may done within &konqi; &krus; or similar filebrowsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with &quot;k&quot;) and them will display the content. So simple operations like copy, move and delete may work. When appending a query &quot;?rev=&lt;xxx&gt;&quot; the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
+Simple repository browsing may done within &konqi;, &krus; or similar filebrowsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with &quot;k&quot;) and them will display the content. So simple operations like copy, move and delete may work. When appending a query &quot;?rev=&lt;xxx&gt;&quot; the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
 </para>
 <para>
 All work except &quot;Copy&quot; may only done when browsing at revision HEAD.
@@ -447,7 +479,7 @@ The checkboxes have following meanings:
 <variablelist>
 
 <varlistentry>
-<term>Recoursive</term>
+<term>Recursive</term>
 <listitem><para>
 Do all operations recoursive when working with folders.
 </para></listitem>
@@ -2286,7 +2318,7 @@ information here.
 -->
 
 <para>
-You need installed subversion 1.3 or above and &kde; 3.4.x
+You need installed subversion 1.3 or above and &kde; 4.1.x
 or above. Subversion prior 1.3 is NOT supported!
 </para>
 <para>

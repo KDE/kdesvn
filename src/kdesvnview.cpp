@@ -60,6 +60,7 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
       m_currentUrl("")
 {
     Q_UNUSED(full);
+    setFocusPolicy(Qt::StrongFocus);
     setupActions();
     m_CacheProgressBar=0;
 

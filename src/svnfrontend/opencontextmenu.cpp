@@ -43,8 +43,9 @@ void OpenContextmenu::setup()
     QAction*act;
     QStringList _found;
     for( ; it != m_List.end(); ++it ) {
-        if ((*it)->noDisplay() || _found.indexOf((*it)->name())!=-1)
+        if (_found.indexOf((*it)->name())!=-1) {
             continue;
+        }
         _found.append((*it)->name());
         QString actionName( (*it)->name().replace("&", "&&") );
         act = addAction(SmallIcon((*it)->icon()),actionName);

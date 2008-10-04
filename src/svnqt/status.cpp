@@ -85,7 +85,6 @@ namespace svn
     if (!Url::isValid(aPath)) {
         m_Path = aPath;
     } else {
-        Pool pool;
         const char * int_path = svn_path_uri_decode(aPath.TOUTF8(), pool.pool () );
         m_Path = QString::FROMUTF8(int_path);
     }

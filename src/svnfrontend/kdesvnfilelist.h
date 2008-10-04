@@ -64,13 +64,11 @@ public:
     virtual void SelectionList(SvnItemList*target);
 
     virtual QWidget*realWidget();
-    const svn::Status&maindir()const{return m_mainEntry;}
 
     KActionCollection*filesActions();
     bool refreshItem(FileListViewItem*);
 
 protected:
-    svn::Status m_mainEntry;
     const svn::Revision& remoteRevision()const;
     bool m_deletePerfect;
     QMap<QString,bool> m_Dirsread;

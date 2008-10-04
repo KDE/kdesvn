@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="17">
+<kpartgui name="kdesvn_part" version="18">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <Action name="kdesvnpart_pref" />
@@ -219,14 +219,12 @@
   <text>Subversion toolbar</text>
   <Action name="make_svn_headupdate" />
   <Action name="make_svn_commit" />
-  <Action name="make_check_updates" />
   <Separator name="separator_3" />
   <Action name="make_svn_log_full" />
   <Action name="make_svn_info" />
   <Action name="make_svn_blame" />
   <Separator name="separator_2" />
   <Action name="make_svn_add" />
-  <Action name="make_check_unversioned" />
   <Action name="make_svn_remove" />
   <Action name="make_svn_merge_revisions" />
   <Separator name="separator_1" />

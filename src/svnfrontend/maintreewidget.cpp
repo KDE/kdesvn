@@ -396,7 +396,7 @@ void MainTreeWidget::setupActions()
     tmp_action->setStatusTip(i18n("Shows history of item as linked tree for a revision range"));
 
     tmp_action = add_action("make_svn_property",i18n("Properties"),KShortcut(Qt::CTRL+Qt::Key_P),KIcon(),m_Data->m_Model->svnWrapper(),SLOT(slotProperties()));
-    add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::Key_P),KIcon(),this,SLOT(slotDisplayProperties()));
+    add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_P),KIcon(),this,SLOT(slotDisplayProperties()));
     tmp_action = add_action("make_last_change",i18n("Display last changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDisplayLastDiff()));
     tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
     tmp_action = add_action("make_svn_info",i18n("Details"),KShortcut(Qt::CTRL+Qt::Key_I),KIcon("kdesvninfo"),this,SLOT(slotInfo()));
@@ -482,7 +482,7 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_svn_headupdate",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),m_Data->m_Model->svnWrapper(),SLOT(slotUpdateHeadRec()));
     tmp_action->setIconText(i18n("Update"));
     tmp_action = add_action("make_svn_revupdate",i18n("Update to revision..."),KShortcut(),KIcon("kdesvnupdate"),m_Data->m_Model->svnWrapper(),SLOT(slotUpdateTo()));
-    tmp_action = add_action("make_svn_commit",i18n("Commit"),KShortcut("#"),KIcon("kdesvncommit"),m_Data->m_Model->svnWrapper(),SLOT(slotCommit()));
+    tmp_action = add_action("make_svn_commit",i18n("Commit"),KShortcut("CTRL+#"),KIcon("kdesvncommit"),m_Data->m_Model->svnWrapper(),SLOT(slotCommit()));
     tmp_action->setIconText(i18n("Commit"));
 
     tmp_action =

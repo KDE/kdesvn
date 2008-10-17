@@ -2,20 +2,20 @@
 .TH KDESVN 1 "Sep 2008" "K Desktop Environment" "A Subversion Client for KDE (standalone application)"
 .SH NAME
 kdesvn
-\- A Subversion Client for KDE (standalone application)
+\- A Subversion client for KDE (standalone application)
 .SH SYNOPSIS
 kdesvn [Qt\-options] [KDE\-options] [options] exec <command> [URL] 
 .SH DESCRIPTION
-A Subversion Client for KDE (standalone application)
+A Subversion client for KDE (standalone application)
 .SH OPTIONS
 .SS
 .SS Arguments:
 .TP
 .B exec
-<command>            Execute subversion command ("exec help" for more information)
+<command>            Execute subversion command ("exec help" for more information, opens KDE Help Center)
 .TP
 .B URL
-Document to open
+Path to local working copy or a repository.
 .SS Options:
 .TP
 .B  \-r  startrev
@@ -151,6 +151,11 @@ mirrors the whole layout of widgets
 .B  \-\-stylesheet  
 <file.qss>   applies the Qt stylesheet to the application widgets
 .SS 
+
+.SH EXAMPLE
+kdesvn file:///path/to/local/working/copy
+.br
+kdesvn http://remote/svn/project/trunk
 
 .SH SEE ALSO
 Full user documentation is available through the KDE Help Center.  You can also enter the URL

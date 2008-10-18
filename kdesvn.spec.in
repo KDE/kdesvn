@@ -97,7 +97,7 @@ rm -rf $RPM_BUILD_DIR/@PACKAGENAME@
 
 %files devel
 %defattr(-,root,root)
-%dir %{_includedir}/@svnqt-name@
-%{_includedir}/@svnqt-name@/*
+%dir %{_includedir}/svnqt
+%{_includedir}/svnqt/*
 
 %changelog

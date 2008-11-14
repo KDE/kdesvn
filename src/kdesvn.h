@@ -98,7 +98,9 @@ private slots:
     void optionsShowStatusbar();
     void changeStatusbar(const QString&);
     void resetStatusBar();
+#if 0
     void actionHovered(QAction*action);
+#endif
 
 private:
     void setupAccel();

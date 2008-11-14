@@ -39,6 +39,10 @@ namespace svn
   apr_pool_t *
   Pool::pool_create (apr_pool_t * parent)
   {
+    if (!s_initialized) {
+        apr_pool_initialize();
+        s_initialized=true;
+    }
     return svn_pool_create (parent);
   }
 

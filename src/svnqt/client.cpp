@@ -60,7 +60,6 @@ namespace svn
         };
 
         SvnInit::SvnInit() {
-            apr_pool_initialize();
             svn_cmdline_init("svnqt",0);
             qDebug("svn_cmdline_init done");
             QString BasePath=QDir::HOMEDIR();

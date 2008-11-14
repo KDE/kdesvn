@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>276</width>
+    <width>293</width>
     <height>162</height>
    </rect>
   </property>
@@ -36,7 +36,7 @@
     </widget>
    </item>
    <item>
-    <widget class="Q3ListBox" name="m_ItemsList" />
+    <widget class="QListWidget" name="m_ItemsList" />
    </item>
    <item>
     <widget class="DepthSelector" native="1" name="m_DepthSelect" >
@@ -52,11 +52,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <customwidgets>
-  <customwidget>
-   <class>Q3ListBox</class>
-   <extends>Q3Frame</extends>
-   <header>q3listbox.h</header>
-  </customwidget>
   <customwidget>
    <class>DepthSelector</class>
    <extends>QWidget</extends>

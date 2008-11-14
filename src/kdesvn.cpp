@@ -185,13 +185,17 @@ kdesvn::kdesvn()
 void kdesvn::connectActionCollection( KActionCollection *coll )
 {
     if (!coll)return;
-    connect(coll,SIGNAL(actionHovered (QAction *action)),this,SLOT(actionHovered(QAction*action)));
+#if 0
+    connect(coll,SIGNAL(actionHovered(QAction*)),this,SLOT(actionHovered(QAction*)));
+#endif
 }
 
+#if 0
 void kdesvn::actionHovered(QAction*action)
 {
     if (action) changeStatusbar(action->statusTip());
 }
+#endif
 
 kdesvn::~kdesvn()
 {

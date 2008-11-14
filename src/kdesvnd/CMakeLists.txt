@@ -19,7 +19,6 @@ TARGET_LINK_LIBRARIES(kded_kdesvnd
     kdesvnhelpers
     kdesvncfgreader
     ${KDE4_KIO_LIBS}
-    ${QT_QT3SUPPORT_LIBRARY}
 )
 
 INSTALL(TARGETS kded_kdesvnd

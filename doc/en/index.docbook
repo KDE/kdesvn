@@ -2119,6 +2119,16 @@ in a X-Dialog like kdesvnaskpass. (see <ulink url="man:ssh-add">Manpage of ssh-a
 </qandaentry>
 <qandaentry>
 <question>
+<para>How can I give a different port or username to svn+ssh protocoll?</para>
+</question>
+<answer>
+<para>
+You may use an entry in <prompt>$HOME/.ssh/config</prompt>, see <ulink url="man:ssh_config">Ssh config manpage</ulink> for exact syntax.
+</para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
 <para>When checking for updates kdesvn doesn't display something but I know there are newer items!</para>
 </question>
 <answer>

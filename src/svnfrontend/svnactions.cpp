@@ -925,7 +925,11 @@ void SvnActions::slotCommit()
         }
     }
     if (m_Data->m_ParentList->baseUri().length()>0) {
-        chdir(m_Data->m_ParentList->baseUri().toLocal8Bit());
+        if (chdir(m_Data->m_ParentList->baseUri().toLocal8Bit())!=0) {
+            QString msg = i18n("Could not change to folder %1\n").arg(m_Data->m_ParentList->baseUri())
+                +QString::fromLocal8Bit(strerror(errno));
+            emit sendNotify(msg);
+        }
     }
     if (makeCommit(targets) && Kdesvnsettings::log_cache_on_open()) {
         startFillCache(m_Data->m_ParentList->baseUri());

@@ -175,7 +175,7 @@ void SvnItem::setStat(const svn::StatusPtr&aStat)
     m_overlaycolor = false;
     p_Item = new SvnItem_p(aStat);
     SvnActions*wrap = getWrapper();
-    if (isModified()) {
+    if (isChanged()||isConflicted()) {
         wrap->addModifiedCache(aStat);
     } else {
         wrap->deleteFromModifiedCache(fullName());
@@ -263,7 +263,7 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
         } else if (p_Item->m_Stat->textStatus()==svn_wc_status_deleted) {
             if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvndeleted",KIconLoader::Desktop,size);
             m_bgColor = DELETED;
-        } else if (p_Item->m_Stat->textStatus()==svn_wc_status_added ) {
+        } else if (p_Item->m_Stat->textStatus()==svn_wc_status_added) {
             if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvnadded",KIconLoader::Desktop,size);
             m_bgColor = ADDED;
         } else if (isModified()) {
@@ -376,6 +376,11 @@ bool SvnItem::isRemoteAdded()const
             p_Item->m_Stat->validReposStatus()&&!p_Item->m_Stat->validLocalStatus();
 }
 
+bool SvnItem::isLocalAdded()const
+{
+    return p_Item->m_Stat->textStatus()==svn_wc_status_added;
+}
+
 QString SvnItem::infoText()const
 {
     QString info_text = "";
@@ -470,6 +475,11 @@ bool SvnItem::isModified()const
 {
     return p_Item->m_Stat->textStatus ()==svn_wc_status_modified||p_Item->m_Stat->propStatus()==svn_wc_status_modified
             ||p_Item->m_Stat->textStatus ()==svn_wc_status_replaced;
+}
+
+bool SvnItem::isChanged()const
+{
+    return isRealVersioned()&&(isModified()||isDeleted()||isLocalAdded());
 }
 
 bool SvnItem::isChildModified()const

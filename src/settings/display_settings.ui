@@ -109,22 +109,6 @@ see which items has newer items in repository you may have to set "Check for upd
                 <string></string>
             </property>
         </widget>
-        <widget class="QCheckBox">
-            <property name="name">
-                <cstring>kcfg_start_log_cache_on_open</cstring>
-            </property>
-            <property name="text">
-                <string>Automatic update of logcache</string>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>If set start filling the logcache when open a repository or working copy</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>Set if the internal logcache should updated after open a working copy or repository or after a commit in a working copy.
-
-If networking is disabled, then this flag is ignored.</string>
-            </property>
-        </widget>
         <widget class="QLayoutWidget">
             <property name="name">
                 <cstring>layout2_2</cstring>

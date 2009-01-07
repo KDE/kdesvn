@@ -14,7 +14,7 @@ KDE4_ADD_PLUGIN(kded_kdesvnd ${kded_kdesvnd_src})
 KDE_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
 
 TARGET_LINK_LIBRARIES(kded_kdesvnd
-    svnqt4
+    ${svnqt-name}
     ksvnwidgets
     kdesvnhelpers
     kdesvncfgreader

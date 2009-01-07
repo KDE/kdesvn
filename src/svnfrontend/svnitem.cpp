@@ -174,6 +174,12 @@ void SvnItem::setStat(const svn::StatusPtr&aStat)
 {
     m_overlaycolor = false;
     p_Item = new SvnItem_p(aStat);
+    SvnActions*wrap = getWrapper();
+    if (isModified()) {
+        wrap->addModifiedCache(aStat);
+    } else {
+        wrap->deleteFromModifiedCache(fullName());
+    }
 }
 
 const QString&SvnItem::fullName()const

@@ -98,7 +98,7 @@ SET(QLIST "QList")
 SET(TOASCII "toAscii")
 SET(HOMEDIR "homePath")
 IF(NOT svnqt-name)
-SET(svnqt-name svnqt4)
+SET(svnqt-name svnqt)
 ENDIF(NOT svnqt-name)
 
 SET(QDATABASE "QSqlDatabase")

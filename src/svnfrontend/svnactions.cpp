@@ -882,18 +882,18 @@ void SvnActions::slotProperties()
     EMIT_FINISHED;
 }
 
-bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QStringList&delList,const QString&path)
+bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QStringList&delList,const QString&path,const svn::Depth&depth)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,"Applying properties","<center>Applying<br>hit cancel for abort</center>");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         long pos;
         for (pos = 0; pos<delList.size();++pos) {
-            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path));
+            m_Data->m_Svnclient->propdel(delList[pos],svn::Path(path),depth);
         }
         svn::PropertiesMap::ConstIterator it;
         for (it=setList.begin(); it!=setList.end();++it) {
-            m_Data->m_Svnclient->propset(it.key(),it.value(),svn::Path(path));
+            m_Data->m_Svnclient->propset(it.key(),it.value(),svn::Path(path),depth);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());

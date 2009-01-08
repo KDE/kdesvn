@@ -108,7 +108,7 @@ public:
     QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
     svn::PathPropertiesMapListPtr propList(const QString&which,const svn::Revision&where,bool cacheOnly);
 
-    bool changeProperties(const svn::PropertiesMap&setList,const QStringList&,const QString&path);
+    bool changeProperties(const svn::PropertiesMap&setList,const QStringList&,const QString&path,const svn::Depth&depth=svn::DepthEmpty);
 
     //! generate and displays a revision tree
     /*!

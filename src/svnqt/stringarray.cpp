@@ -88,21 +88,23 @@ const QString& svn::StringArray::operator[](size_t which)
  */
 apr_array_header_t * svn::StringArray::array (const Pool & pool) const
 {
+    apr_pool_t *apr_pool = pool.pool();
+    apr_array_header_t *apr_targets;
     if (isNull()) {
-        return 0;
-    }
-    QStringList::const_iterator it;
+        apr_targets = apr_array_make(apr_pool, 0, 0);
+    } else {
+        QStringList::const_iterator it;
 
-    apr_pool_t *apr_pool = pool.pool ();
-    apr_array_header_t *apr_targets =
-            apr_array_make (apr_pool,m_content.size(),sizeof (const char *));
+        apr_targets =
+                apr_array_make (apr_pool,m_content.size(),sizeof (const char *));
 
-    for (it = m_content.begin (); it != m_content.end (); it++)
-    {
-        QByteArray s = (*it).TOUTF8();
-        char * t2 = apr_pstrndup (apr_pool,s,s.size());
+        for (it = m_content.begin (); it != m_content.end (); it++)
+        {
+            QByteArray s = (*it).TOUTF8();
+            char * t2 = apr_pstrndup (apr_pool,s,s.size());
 
-        (*((const char **) apr_array_push (apr_targets))) = t2;
+            (*((const char **) apr_array_push (apr_targets))) = t2;
+        }
     }
     return apr_targets;
 }

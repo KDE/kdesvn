@@ -140,7 +140,10 @@ namespace svn
     const apr_array_header_t * options;
 
     // svn_client_diff needs an options array, even if it is empty
-    options = extra.array(pool);
+    if(extra.isNull())
+        options = apr_array_make(pool, 0, 0);
+    else
+        options = extra.array(pool);
     DiffData ddata(tmpPath,path1,revision1,path2,revision2);
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)

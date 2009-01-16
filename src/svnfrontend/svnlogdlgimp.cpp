@@ -174,6 +174,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log)
         m_LogTreeView->selectionModel()->select(m_SortModel->mapFromSource(ind),
             QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
     }
+    m_LogTreeView->setFocus();
 }
 
 QString SvnLogDlgImp::genReplace(const QString&r1match)

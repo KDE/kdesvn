@@ -1,4 +1,5 @@
 <ui version="4.0" >
+ <author>Rajko Albrecht</author>
  <class>LogDialog</class>
  <widget class="QDialog" name="LogDialog" >
   <property name="geometry" >
@@ -85,6 +86,9 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QTreeView" name="m_LogTreeView" >
+      <property name="focusPolicy" >
+       <enum>Qt::WheelFocus</enum>
+      </property>
       <property name="contextMenuPolicy" >
        <enum>Qt::CustomContextMenu</enum>
       </property>
@@ -263,16 +267,20 @@
    <header>revisionbuttonimpl.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_LogTreeView</tabstop>
+  <tabstop>m_LogDisplay</tabstop>
+  <tabstop>m_ChangedList</tabstop>
+  <tabstop>m_goButton</tabstop>
+  <tabstop>m_DispPrevButton</tabstop>
+  <tabstop>m_DispSpecDiff</tabstop>
+  <tabstop>buttonListFiles</tabstop>
+  <tabstop>buttonBlame</tabstop>
+ </tabstops>
  <includes>
   <include location="local" >kpushbutton.h</include>
   <include location="local" >revisionbuttonimpl.h</include>
-  <include location="local" >revisionbuttonimpl.h</include>
   <include location="local" >ktextbrowser.h</include>
-  <include location="local" >kpushbutton.h</include>
-  <include location="local" >kpushbutton.h</include>
-  <include location="local" >kpushbutton.h</include>
-  <include location="local" >kpushbutton.h</include>
-  <include location="local" >kpushbutton.h</include>
  </includes>
  <resources/>
  <connections>

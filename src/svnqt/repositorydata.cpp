@@ -153,7 +153,7 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4) || SVN_VER_MAJOR>1)
     if (_pre_1_4_compat) {
-        qDebug("Pre 14");
+        //qDebug("Pre 14");
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_4_COMPATIBLE,
             APR_HASH_KEY_STRING,"1");
     }
@@ -162,7 +162,7 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
 #endif
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || SVN_VER_MAJOR>1)
     if (_pre_1_5_compat) {
-        qDebug("Pre 15");
+        //qDebug("Pre 15");
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE,
                      APR_HASH_KEY_STRING,"1");
     }

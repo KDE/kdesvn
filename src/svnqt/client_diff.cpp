@@ -79,7 +79,7 @@ namespace svn
     DiffData ddata(tmpPath,path,revision1,path,revision2);
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    qDebug("pegged diff4 call");
+    //qDebug("pegged diff4 call");
     error = svn_client_diff_peg4(
                 options,
                 path.cstr(),

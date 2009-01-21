@@ -36,8 +36,8 @@ namespace stream {
 class SVNQT_NOEXPORT SvnStream_private
 {
 public:
-    SvnStream_private(){m_Stream=0;m_LastError="";_context=0;cancel_timeout.start();}
-    ~SvnStream_private(){qDebug("Time elapsed: %i ",cancel_timeout.elapsed());}
+    SvnStream_private(){m_Stream=0;m_LastError="";_context=0;/*cancel_timeout.start();*/}
+    ~SvnStream_private(){/*qDebug("Time elapsed: %i ",cancel_timeout.elapsed());*/}
 
     static svn_error_t * stream_write(void*baton,const char*data,apr_size_t*len);
     static svn_error_t * stream_read(void*baton,char*data,apr_size_t*len);
@@ -75,7 +75,7 @@ svn_error_t * SvnStream_private::stream_write(void*baton,const char*data,apr_siz
     svn_client_ctx_t*ctx = b->context();
 
     if (ctx&&ctx->cancel_func&&b->cancelElapsed()>50) {
-        qDebug("Check cancel");
+        //qDebug("Check cancel");
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
         b->cancelTimeReset();
     }

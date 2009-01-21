@@ -75,6 +75,9 @@ IF (__KDE_HAVE_GCC_VISIBILITY)
     SET(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
 ENDIF (__KDE_HAVE_GCC_VISIBILITY)
 
+# from http://www.kdedevelopers.org/node/3171 and http://kdesvn.alwins-world.de/ticket/595#comment:5
+ADD_DEFINITIONS(-DKDE_DEFAULT_DEBUG_AREA=9510)
+
 INCLUDE_DIRECTORIES (
     BEFORE
     ${CMAKE_SOURCE_DIR}/src/svnqt

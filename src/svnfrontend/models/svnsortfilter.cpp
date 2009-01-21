@@ -54,7 +54,6 @@ bool SvnSortFilterProxy::hasChildren(const QModelIndex & parent)const
 
 void SvnSortFilterProxy::setSourceSvnModel(SvnItemModel*sourceModel)
 {
-    kDebug()<<"Setting source..."<<endl;
     m_sourceModel=sourceModel;
     setSourceModel(sourceModel);
 }

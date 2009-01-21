@@ -83,7 +83,7 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
 
     if (lt.count()!=1) {
         msg = "Wrong or missing log (may cancel pressed).";
-        kDebug()<< msg << endl;
+        kDebug(9510)<< msg << endl;
         return false;
     }
     msg = lt[0];
@@ -363,7 +363,7 @@ bool KioListener::contextGetLogin (const QString & realm, QString & username, QS
     }
     QStringList lt = res.value();
     if (lt.count()!=3) {
-        kDebug()<<"Wrong or missing auth list (may cancel pressed)." << endl;
+        kDebug(9510)<<"Wrong or missing auth list (may cancel pressed)." << endl;
         return false;
     }
     username = lt[0];

@@ -76,14 +76,11 @@ bool SvnLogModelNode::copiedFrom(QString&_n,long&_rev)const
         if (changedPaths()[i].action=='A' &&
             !changedPaths()[i].copyFromPath.isEmpty() &&
             isParent(changedPaths()[i].path,_realName)) {
-            kDebug()<<_realName<< " - " << changedPaths()[i].path << endl;
             QString tmpPath = _realName;
             QString r = _realName.mid(changedPaths()[i].path.length());
             _n=changedPaths()[i].copyFromPath;
             _n+=r;
             _rev = changedPaths()[i].copyFromRevision;
-            kDebug()<<"Found switch from  "<< changedPaths()[i].copyFromPath << " rev "<<changedPaths()[i].copyFromRevision<<endl;
-            kDebug()<<"Found switch from  "<< _n << " rev "<<_rev<<endl;
             return true;
         }
     }

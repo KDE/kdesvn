@@ -368,9 +368,9 @@ bool MainTreeWidget::event(QEvent*event)
                 m_Data->tipTimer->start(5000);
             }
         }
-    } else if (event->type()==QEvent::Drop) {
-        kDebug()<<event<<endl;
-    }
+    }/* else if (event->type()==QEvent::Drop) {
+        kDebug(9510)<<event<<endl;
+    }*/
     return QWidget::event(event);
 }
 
@@ -714,7 +714,7 @@ void MainTreeWidget::refreshCurrentTree()
         m_Data->m_Model->svnWrapper()->createModifiedCache(baseUri());
     }
     m_Data->m_SortModel->invalidate();
-    kDebug()<<"Refresh time: "<<t.elapsed()<<" ms"<<endl;
+    //kDebug(9510)<<"Refresh time: "<<t.elapsed()<<" ms"<<endl;
     setUpdatesEnabled(true);
     //viewport()->repaint();
     QTimer::singleShot(1,this,SLOT(readSupportData()));
@@ -807,7 +807,7 @@ void MainTreeWidget::slotClientException(const QString&what)
 
 void MainTreeWidget::slotCacheDataChanged()
 {
-    kDebug()<<"Cache thread signaled"<<endl;
+    //kDebug(9510)<<"Cache thread signaled"<<endl;
     m_Data->m_SortModel->invalidate();
 }
 
@@ -881,7 +881,7 @@ void MainTreeWidget::slotContextMenu(const QPoint&)
     emit sigShowPopup(menuname,&target);
     QMenu* popup = static_cast<QMenu*>(target);
     if (!popup) {
-        kDebug()<<"Error getting popupMenu"<<endl;
+        //kDebug(9510)<<"Error getting popupMenu"<<endl;
         return;
     }
 
@@ -1270,11 +1270,11 @@ void MainTreeWidget::refreshItem(SvnItemModelNode*node)
 
 void MainTreeWidget::slotChangeProperties(const svn::PropertiesMap&pm,const QStringList&dellist,const QString&path)
 {
-    kDebug()<<"change it"<<endl;
+    //kDebug(9510)<<"change it"<<endl;
     m_Data->m_Model->svnWrapper()->changeProperties(pm,dellist,path);
-    kDebug()<<"change it"<<endl;
+    //kDebug(9510)<<"change it"<<endl;
     SvnItemModelNode* which = SelectedNode();
-    kDebug()<<(which?which->fullName():"nix") << " -> " << path<<endl;
+    //kDebug(9510)<<(which?which->fullName():"nix") << " -> " << path<<endl;
     if (which && which->fullName()==path) {
         m_Data->m_Model->refreshItem(which);
         dispProperties(true);
@@ -1419,7 +1419,7 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
     } else {
         target=baseUri();
     }
-    kDebug()<<"Target: "<<target<<" "<<l<<endl;
+    //kDebug(9510)<<"Target: "<<target<<" "<<l<<endl;
     if (action==Qt::MoveAction) {
         m_Data->m_Model->svnWrapper()->makeMove(lst,target,false);
     } else if (action==Qt::CopyAction) {
@@ -1430,7 +1430,7 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
 
 void MainTreeWidget::slotUrlDropped(const KUrl::List&_lst,Qt::DropAction action,const QModelIndex&index,bool intern)
 {
-    kDebug()<<_lst<< " " << action<<" " << intern << endl;
+    //kDebug(9510)<<_lst<< " " << action<<" " << intern << endl;
     if (_lst.size()==0) {
         return;
     }
@@ -1860,7 +1860,7 @@ void MainTreeWidget::refreshCurrent(SvnItem*cur)
 void MainTreeWidget::slotReinitItem(SvnItem*item)
 {
     if (!item) {
-        kDebug()<<"MainTreeWidget::slotReinitItem(SvnItem*item): item == null" << endl;
+        //kDebug(9510)<<"MainTreeWidget::slotReinitItem(SvnItem*item): item == null" << endl;
         return;
     }
     SvnItemModelNode*k = item->sItem();

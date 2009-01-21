@@ -126,7 +126,7 @@ void StopDlg::slotAutoShow()
     if (mShown||mWait||hasDialogs) {
         mShowTimer->setSingleShot(true);
         if (mWait) {
-            //kDebug() << "Waiting for show"<<endl;
+            //kDebug(9510) << "Waiting for show"<<endl;
             mShowTimer->start(m_MinDuration);
         }
         mShowTimer->start(m_MinDuration);

@@ -74,7 +74,6 @@ int main(int argc, char **argv)
         else
         {
             if (QString(args->arg(0))==QString("exec")) {
-                kDebug()<<"Execute a command" << endl;
                 CommandLine cl(args);
                 return cl.exec();
             } else {

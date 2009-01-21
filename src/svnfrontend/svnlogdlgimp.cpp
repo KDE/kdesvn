@@ -130,14 +130,12 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
     }
     _base = root;
     m_Entries = _log;
-    kDebug()<<"What: "<<what << endl;
     if (!what.isEmpty()){
         setWindowTitle(i18n("SVN Log of %1",what));
     } else {
         setWindowTitle(i18n("SVN Log"));
     }
     _name = what;
-    kDebug()<<"Name: "<<_name<<endl;
     dispLog(_log);
 }
 
@@ -168,9 +166,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log)
     m_startRevButton->setRevision(m_CurrentModel->max());
     m_endRevButton->setRevision(m_CurrentModel->min());
     QModelIndex ind = m_CurrentModel->index(m_CurrentModel->rowCount(QModelIndex())-1);
-    if (!ind.isValid()) {
-        kDebug()<<"index is invalid"<<endl;
-    } else {
+    if (ind.isValid()) {
         m_LogTreeView->selectionModel()->select(m_SortModel->mapFromSource(ind),
             QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
     }
@@ -192,8 +188,6 @@ QString SvnLogDlgImp::genReplace(const QString&r1match)
     int pos=0;
     int count=0;
     int oldpos;
-
-    kDebug()<<"Search second pattern: "<<_r2.pattern()<<" in "<<r1match<<endl;
 
     while (pos > -1) {
         oldpos = pos+count;
@@ -217,7 +211,6 @@ void SvnLogDlgImp::replaceBugids(QString&msg)
     if (!_r1.isValid() || _r1.pattern().length()<1 || _bugurl.isEmpty()) {
         return;
     }
-    kDebug()<<"Try match "<< _r1.pattern() << endl;
     int pos = 0;
     int count = 0;
 
@@ -225,12 +218,8 @@ void SvnLogDlgImp::replaceBugids(QString&msg)
     count = _r1.matchedLength();
 
     while (pos>-1) {
-        kDebug()<<"Found at "<<pos << " length "<<count << " with " << _r1.pattern()<< endl;
         QString s1 = msg.mid(pos,count);
-        kDebug()<<"Sub: "<<s1 << endl;
-        kDebug()<<_r1.cap(1) << endl;
         QString rep = genReplace(s1);
-        kDebug()<<"Replace with "<<rep << endl;
         msg = msg.replace(pos,count,rep);
         pos = _r1.indexIn(msg,pos+rep.length());
         count = _r1.matchedLength();
@@ -255,14 +244,8 @@ void SvnLogDlgImp::slotSelectionChanged(const QItemSelection & current, const QI
     QString msg = _m.toHtml();
     replaceBugids(msg);
     m_LogDisplay->setHtml(msg);
-    kDebug()<<"Row: "<<_index.row()<<endl;
     if (_index.row()>0) {
         QModelIndex _it = m_CurrentModel->index(_index.row()-1);
-        if (_it.isValid()) {
-            kDebug()<<"Row sibling: "<<_it.row()<<" -> "<<m_CurrentModel->toRevision(_it)<<endl;
-        } else {
-            kDebug()<<"Sibling is invalid"<<endl;
-        }
         m_DispPrevButton->setEnabled(true);
     } else {
         m_DispPrevButton->setEnabled(false);
@@ -337,10 +320,9 @@ void SvnLogDlgImp::slotDispSelected()
 {
     SvnLogModelNodePtr m_first = m_CurrentModel->indexNode(m_CurrentModel->index(m_CurrentModel->leftRow()));
     SvnLogModelNodePtr m_second = m_CurrentModel->indexNode(m_CurrentModel->index(m_CurrentModel->rightRow()));
-    if (!m_first || !m_second) {
-        kDebug()<<"No valid nodes"<<endl;
+    if (m_first && m_second) {
+        emit makeDiff(_base+m_first->realName(),m_first->revision(),_base+m_second->realName(),m_second->revision(),this);
     }
-    emit makeDiff(_base+m_first->realName(),m_first->revision(),_base+m_second->realName(),m_second->revision(),this);
 }
 
 bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg,QString&root)
@@ -356,8 +338,6 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QStr
 
 void SvnLogDlgImp::slotGetLogs()
 {
-    kDebug()<<"Displog: "<<m_peg.toString()<<endl;
-    kDebug()<<_base+"/"+_name<<endl;
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
             m_endRevButton->revision(),m_peg,
             _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,this);
@@ -432,14 +412,15 @@ QModelIndex SvnLogDlgImp::selectedRow(int column)
 void SvnLogDlgImp::slotCustomContextMenu(const QPoint&e)
 {
     QModelIndex ind=m_LogTreeView->indexAt(e);
-    if (!ind.isValid()) {
-        kDebug()<<"Not valid..."<<endl;
+    if (ind.isValid()) {
+        ind = m_SortModel->mapToSource(ind);
     }
-    ind = m_SortModel->mapToSource(ind);
-    if (!ind.isValid()) {
-        kDebug()<<"Not valid..."<<endl;
+    int row = -1;
+    if (ind.isValid()) {
+        row = ind.row();
+    } else {
+        return;
     }
-    int row = ind.row();
     KMenu popup;
     QAction*ac;
     bool unset=false;
@@ -496,7 +477,6 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint&e)
     }
     QModelIndex ind = selectedRow();
     if (!ind.isValid()) {
-        kDebug()<<"????"<<endl;
         return;
     }
     QLONG rev = m_CurrentModel->toRevision(ind);
@@ -557,7 +537,6 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QTreeWidgetItem*_item,int)
     LogChangePathItem* item = static_cast<LogChangePathItem*>(_item);
     QModelIndex ind = selectedRow();
     if (!ind.isValid()) {
-        kDebug()<<"????"<<endl;
         return;
     }
     QLONG rev = m_CurrentModel->toRevision(ind);

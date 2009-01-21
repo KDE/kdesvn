@@ -47,7 +47,6 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,
     switch (_action) {
         case 'A':
             if (!target.isEmpty()) {
-                //kDebug()<<"Adding a history "<< current << " -> " << target << endl;
                 _entry.action = 'H';
             }else{
             }
@@ -55,11 +54,6 @@ void eLog_Entry::addCopyTo(const QString&current,const QString&target,
         case 'D':
             break;
         case 'R':
-#if 0
-            if (!target.isEmpty()) {
-                kDebug()<<"Adding a rename "<< current << " -> " << target << endl;
-            }
-#endif
             break;
         case 'M':
             break;

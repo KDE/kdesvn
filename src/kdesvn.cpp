@@ -73,7 +73,7 @@ kdesvn::kdesvn()
     m_part = 0;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
-    kDebug()<<"Using test rc file in " << TESTING_RC << endl;
+    kDebug(9510)<<"Using test rc file in " << TESTING_RC << endl;
     // I hate this crashhandler in development
     KCrash::setCrashHandler(0);
 #else

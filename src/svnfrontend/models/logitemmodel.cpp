@@ -56,7 +56,6 @@ SvnLogModel::SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap>&_log,const
 
 SvnLogModel::~SvnLogModel()
 {
-    kDebug()<<"Deleting Model"<<endl;
 }
 
 QModelIndex SvnLogModel::index(int row,int column,const QModelIndex & parent)const

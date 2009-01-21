@@ -70,7 +70,6 @@ void MergeDlg_impl::setSrc1(const QString&what)
         return;
     }
     KUrl uri(what);
-    kDebug()<<"What: "<<what << " URL: "<<uri<<endl;
     if (uri.protocol()=="file") {
         if (what.startsWith("file:")) {
             uri.setProtocol("ksvn+file");

@@ -74,7 +74,6 @@ int CommandLine::exec()
     if (factory) {
         QObject * _p = (factory->create<QObject>("commandline_part",this));
         if (!_p || QString(_p->metaObject()->className()).compare("commandline_part")!=0) {
-            kDebug()<<"wrong object returned"<<endl;
             return 0;
         }
         commandline_part * cpart = static_cast<commandline_part*>(_p);

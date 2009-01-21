@@ -77,7 +77,7 @@ bool SshAgent::querySshAgent()
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
 #ifdef FORCE_ASKPASS
-        kDebug()<<"Using test askpass"<<endl;
+        kDebug(9510)<<"Using test askpass"<<endl;
 #ifdef HAS_SETENV
             ::setenv("SSH_ASKPASS",FORCE_ASKPASS,1);
 #else
@@ -131,7 +131,7 @@ bool SshAgent::addSshIdentities(bool force)
     proc.setEnv("SSH_AUTH_SOCK", m_authSock);
 
 #ifdef FORCE_ASKPASS
-    kDebug()<<"Using test askpass"<<endl;
+    kDebug(9510)<<"Using test askpass"<<endl;
     proc.setEnv("SSH_ASKPASS",FORCE_ASKPASS);
 #else
     proc.setEnv("SSH_ASKPASS", "kdesvnaskpass");

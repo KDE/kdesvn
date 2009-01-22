@@ -49,6 +49,7 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
     :KDialog(parent),_name("")
 {
     setupUi(this);
+    setMainWidget(mMainWidget);
     setObjectName(name);
     setModal(modal);
     setHelp("logdisplay-dlg","kdesvn");
@@ -67,7 +68,6 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
     m_SortModel = 0;
     m_CurrentModel=0;
 
-    resize(dialogSize());
     m_ControlKeyDown = false;
 
     if (Kdesvnsettings::self()->log_always_list_changed_files()) {
@@ -104,6 +104,12 @@ SvnLogDlgImp::~SvnLogDlgImp()
     cs.writeEntry("logsplitter",t2);
     cs.writeEntry("laststate",m_ChangedList->isHidden());
     delete m_SortModel;
+}
+
+void SvnLogDlgImp::loadSize()
+{
+    KConfigGroup _k(Kdesvnsettings::self()->config(),groupName);
+    restoreDialogSize(_k);
 }
 
 void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString & what,const QString&root,const svn::Revision&peg,const QString&pegUrl)
@@ -162,6 +168,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log)
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Revision);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Author);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Date);
+        loadSize();
     }
     m_startRevButton->setRevision(m_CurrentModel->max());
     m_endRevButton->setRevision(m_CurrentModel->min());
@@ -294,20 +301,6 @@ void SvnLogDlgImp::saveSize()
     QSize sizeToSave = size();
     cs.writeEntry( QString::fromLatin1("Width %1").arg( desk.width()),QString::number( sizeToSave.width()));
     cs.writeEntry( QString::fromLatin1("Height %1").arg( desk.height()),QString::number( sizeToSave.height()));
-}
-
-QSize SvnLogDlgImp::dialogSize()
-{
-    int w, h;
-
-    int scnum = QApplication::desktop()->screenNumber(parentWidget());
-    QRect desk = QApplication::desktop()->screenGeometry(scnum);
-    w = sizeHint().width();
-    h = sizeHint().height();
-    KConfigGroup cs(Kdesvnsettings::self()->config(),groupName);
-    w = cs.readEntry( QString::fromLatin1("Width %1").arg( desk.width()), w );
-    h = cs.readEntry( QString::fromLatin1("Height %1").arg( desk.height()), h );
-    return( QSize( w, h ) );
 }
 
 void SvnLogDlgImp::slotRevisionSelected()

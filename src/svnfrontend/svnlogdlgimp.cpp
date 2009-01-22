@@ -76,32 +76,24 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool 
         m_ChangedList->hide();
     }
     m_Actions = ac;
-    ///FIXME port QTextStream hell into Qt4 QSplitter save/restore state methods
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
-    QString t1 = cs.readEntry("logsplitter",QString());
+    QByteArray t1 = cs.readEntry("logsplitter",QByteArray());
     if (!t1.isEmpty()) {
-        QTextStream st2(&t1,QIODevice::ReadOnly);
-        st2 >> *m_centralSplitter;
+        m_centralSplitter->restoreState(t1);
     }
-    t1 = cs.readEntry("right_logsplitter",QString());
+    t1 = cs.readEntry("right_logsplitter",QByteArray());
     if (!t1.isEmpty()) {
         if (cs.readEntry("laststate",false)==m_ChangedList->isHidden()) {
-            QTextStream st2(&t1,QIODevice::ReadOnly);
-            st2 >> *m_rightSplitter;
+            m_rightSplitter->restoreState(t1);
         }
     }
 }
 
 SvnLogDlgImp::~SvnLogDlgImp()
 {
-    QString t1,t2;
-    QTextStream st1(&t1,QIODevice::WriteOnly);
-    st1 << *m_rightSplitter;
-    QTextStream st2(&t2,QIODevice::WriteOnly);
-    st2 << *m_centralSplitter;
     KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
-    cs.writeEntry("right_logsplitter",t1);
-    cs.writeEntry("logsplitter",t2);
+    cs.writeEntry("right_logsplitter",m_rightSplitter->saveState());
+    cs.writeEntry("logsplitter",m_centralSplitter->saveState());
     cs.writeEntry("laststate",m_ChangedList->isHidden());
     delete m_SortModel;
 }

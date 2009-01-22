@@ -270,7 +270,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
         }
     }
     if (result && Kdesvnsettings::log_cache_on_open()) {
-        kdDebug()<<"Starting logcache"<<endl;
+        kDebug()<<"Starting logcache"<<endl;
         m_Data->m_Model->svnWrapper()->startFillCache(baseUri());
     }
 
@@ -1410,7 +1410,7 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
             (*it) = KUrl::fromPathOrUrl( (*it).path());
         }
         (*it).setProtocol(nProto);
-        kdDebug()<<"Dropped: "<<(*it)<<endl;
+        kDebug()<<"Dropped: "<<(*it)<<endl;
     }
 
     if (index.isValid()) {

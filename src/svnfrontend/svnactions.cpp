@@ -2647,7 +2647,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
         data = mp["svn:ignore"];
     }
     bool result = false;
-    QStringList lst = data.split("\n");
+    QStringList lst = data.split("\n",QString::SkipEmptyParts);
     QStringList::size_type it = lst.indexOf(name);
     if (it != -1) {
         if (unignore) {

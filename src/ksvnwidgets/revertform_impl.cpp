@@ -34,12 +34,16 @@
     setMinimumSize(minimumSizeHint());
 }
 
+void RevertFormImpl::setRecursive(bool rec)
+{
+    m_DepthSelect->setRecursive(rec);
+}
+
 /*!
     \fn RevertFormImpl::~RevertFormImpl()
  */
 RevertFormImpl::~RevertFormImpl()
 {
-    /// @todo implement me
 }
 
 svn::Depth RevertFormImpl::getDepth()const

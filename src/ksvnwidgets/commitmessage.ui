@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>622</height>
+    <width>716</width>
+    <height>483</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -59,7 +59,7 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" >
+        <layout class="QHBoxLayout" name="m_ButtonBarLayout" >
          <item>
           <widget class="QPushButton" name="m_HideNewItems" >
            <property name="text" >
@@ -100,13 +100,16 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="m_RevertItemButton" >
+           <property name="text" >
+            <string>Revert highlighted item</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
-      <zorder>m_HeadLabel</zorder>
-      <zorder>m_LogEdit</zorder>
-      <zorder>frame</zorder>
-      <zorder>frame</zorder>
       <zorder>m_CommitItemTree</zorder>
       <zorder>m_Reviewlabel</zorder>
       <zorder></zorder>
@@ -205,9 +208,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>m_MainSplitter</zorder>
-  <zorder>m_ReviewFrame</zorder>
-  <zorder>frame</zorder>
  </widget>
  <layoutdefault spacing="2" margin="2" />
  <customwidgets>
@@ -241,8 +241,8 @@
    <slot>slotHistoryActivated(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
+     <x>25</x>
+     <y>524</y>
     </hint>
     <hint type="destinationlabel" >
      <x>20</x>
@@ -257,8 +257,8 @@
    <slot>slotMarkUnversioned()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
+     <x>152</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel" >
      <x>20</x>
@@ -273,8 +273,8 @@
    <slot>slotUnmarkUnversioned()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
+     <x>280</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel" >
      <x>20</x>
@@ -289,8 +289,8 @@
    <slot>slotDiffSelected()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
+     <x>422</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel" >
      <x>20</x>
@@ -305,8 +305,8 @@
    <slot>hideNewItems(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
+     <x>32</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel" >
      <x>20</x>
@@ -321,8 +321,8 @@
    <slot>insertFile()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
+     <x>497</x>
+     <y>524</y>
     </hint>
     <hint type="destinationlabel" >
      <x>20</x>
@@ -330,5 +330,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_RevertItemButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotRevertSelected()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>624</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>357</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>slotRevertSelected()</slot>
+ </slots>
 </ui>

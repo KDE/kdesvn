@@ -1700,11 +1700,11 @@ void SvnActions::slotRevert()
     } else {
         displist.push_back(m_Data->m_ParentList->baseUri());
     }
-    slotRevertItems(displist);
+    slotRevertItems(displist,true);
     EMIT_REFRESH;
 }
 
-void SvnActions::slotRevertItems(const QStringList&displist)
+void SvnActions::slotRevertItems(const QStringList&displist, bool rec_default)
 {
     if (!m_Data->m_CurrentContext) return;
     if (displist.count()==0) {
@@ -1718,6 +1718,7 @@ void SvnActions::slotRevertItems(const QStringList&displist)
         return;
     }
     ptr->setDispList(displist);
+    ptr->setRecursive(rec_default);
     if (dlg->exec()!=QDialog::Accepted) {
         delete dlg;
         return;

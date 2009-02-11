@@ -450,6 +450,8 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries&_on,
     {
         connect(ptr,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
                 callback,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
+        connect(ptr,SIGNAL(sigRevertItem(const QStringList&,bool)),
+                callback,SLOT(slotRevertItems(const QStringList&,bool)));
     }
     KConfigGroup _k(Kdesvnsettings::self()->config(),groupName);
     dlg.restoreDialogSize(_k);
@@ -504,6 +506,16 @@ void Commitmsg_impl::slotDiffSelected()
     }
     QString what=ptr->actionEntry().name();
     emit makeDiff(what,svn::Revision::BASE,what,svn::Revision::WORKING,parentWidget());
+}
+
+void Commitmsg_impl::slotRevertSelected()
+{
+    CommitModelNodePtr ptr = currentCommitItem();
+    if (!ptr) {
+        return;
+    }
+    QStringList what(ptr->actionEntry().name());
+    emit sigRevertItem(what,false);
 }
 
 CommitModelNodePtr Commitmsg_impl::currentCommitItem(int column)

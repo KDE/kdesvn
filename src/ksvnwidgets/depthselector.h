@@ -34,6 +34,7 @@ public:
     svn::Depth getDepth()const;
     void addItemWidget(QWidget*);
     void hideDepth(bool hide);
+    void setRecursive(bool rec);
 
 protected:
     QCheckBox*m_recurse;

@@ -54,6 +54,16 @@ DepthSelector::DepthSelector(QWidget *parent)
 DepthSelector::~DepthSelector()
 {
 }
+
+void DepthSelector::setRecursive(bool rec)
+{
+    if (m_DepthCombo) {
+        m_DepthCombo->setCurrentIndex(rec?3:0);
+    } else {
+        m_recurse->setChecked(rec);
+    }
+}
+
 void DepthSelector::addItemWidget(QWidget*aWidget)
 {
     hboxLayout->removeItem(spacerItem);

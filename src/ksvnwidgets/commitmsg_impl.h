@@ -68,6 +68,7 @@ protected slots:
     virtual void slotHistoryActivated(int);
     virtual void slotUnmarkUnversioned();
     virtual void slotDiffSelected();
+    virtual void slotRevertSelected();
     virtual void slotMarkUnversioned();
     virtual void hideNewItems(bool);
     virtual void insertFile();
@@ -91,6 +92,7 @@ protected:
 
 signals:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
+    void sigRevertItem(const QStringList&,bool);
 };
 
 #endif

@@ -34,6 +34,7 @@ public:
     virtual ~RevertFormImpl();
     svn::Depth getDepth()const;
     void setDispList(const QStringList&_list);
+    void setRecursive(bool rec);
 };
 
 #endif

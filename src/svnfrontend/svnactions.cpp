@@ -1743,8 +1743,8 @@ void SvnActions::slotRevertItems(const QStringList&displist, bool rec_default)
     // remove them from cache
     for (long j = 0; j<items.count();++j) {
         m_Data->m_Cache.deleteKey(items[j].path(),depth!=svn::DepthInfinity);
-//        m_Data->m_Cache.dump_tree();
     }
+    emit sigItemsReverted(displist);
     EMIT_FINISHED;
 }
 

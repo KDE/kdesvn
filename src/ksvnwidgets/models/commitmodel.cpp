@@ -183,6 +183,27 @@ void CommitModel::hideItems(bool hide,CommitActionEntry::ACTION_TYPE _type)
     }
 }
 
+
+/*!
+    \fn CommitModel::removeEntries(const QStringList&)
+ */
+void CommitModel::removeEntries(const QStringList&items)
+{
+    int i;
+    QModelIndex _index;
+    for (int i = 0; i<items.size();++i) {
+        for (int j=0;j<m_Content->m_List.count();++j) {
+            if (m_Content->m_List[j]->actionEntry().name() == items[i]) {
+                beginRemoveRows(QModelIndex(),j,j);
+                m_Content->m_List.removeAt(j);
+                endRemoveRows();
+                // Important!
+                j=0;
+            }
+        }
+    }
+}
+
 /************************************
  * begin overload of Model methods  *
  ************************************/

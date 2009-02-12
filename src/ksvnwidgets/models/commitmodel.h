@@ -62,6 +62,7 @@ public:
     CommitActionEntries checkedEntries()const;
     virtual void markItems(bool,CommitActionEntry::ACTION_TYPE _type=CommitActionEntry::ADD_COMMIT);
     virtual void hideItems(bool,CommitActionEntry::ACTION_TYPE _type=CommitActionEntry::ADD_COMMIT);
+    void removeEntries(const QStringList&);
 
 protected:
     CommitModelDataPtr m_Content;

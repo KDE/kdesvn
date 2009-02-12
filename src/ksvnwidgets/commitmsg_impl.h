@@ -72,6 +72,7 @@ protected slots:
     virtual void slotMarkUnversioned();
     virtual void hideNewItems(bool);
     virtual void insertFile();
+    virtual void slotItemReverted(const QStringList&);
 
 protected:
     static QStringList sLogHistory;

@@ -241,6 +241,7 @@ signals:
     void sigGotourl(const QString&);
     void sigCacheStatus(qlonglong,qlonglong);
     void sigCacheDataChanged();
+    void sigItemsReverted(const QStringList&);
 
 protected slots:
     virtual void checkModthread();

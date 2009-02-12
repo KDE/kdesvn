@@ -452,6 +452,8 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries&_on,
                 callback,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
         connect(ptr,SIGNAL(sigRevertItem(const QStringList&,bool)),
                 callback,SLOT(slotRevertItems(const QStringList&,bool)));
+        connect(callback,SIGNAL(sigItemsReverted(const QStringList&)),
+                ptr,SLOT(slotItemReverted(const QStringList&)));
     }
     KConfigGroup _k(Kdesvnsettings::self()->config(),groupName);
     dlg.restoreDialogSize(_k);
@@ -628,6 +630,18 @@ void Commitmsg_impl::insertFile()
             KMessageBox::error(this, KIO::NetAccess::lastErrorString() );
         }
     }
+}
+
+
+/*!
+    \fn Commitmsg_impl::slotItemReverted(const QStringList&)
+ */
+void Commitmsg_impl::slotItemReverted(const QStringList&items)
+{
+    if (!m_CurrentModel) {
+        return;
+    }
+    m_CurrentModel->removeEntries(items);
 }
 
 #include "commitmsg_impl.moc"

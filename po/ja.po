@@ -2,19 +2,20 @@
 # Copyright (C) 2005-2008 by Rajko Albrecht
 # This file is distributed under the same license as the kdesvn package.
 #
-# Muneyuki Noguchi <nogu.dev@gmail.com>, 2008.
+# Muneyuki Noguchi <nogu.dev@gmail.com>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-17 11:31+0200\n"
-"PO-Revision-Date: 2008-09-14 16:17+0900\n"
+"PO-Revision-Date: 2009-02-12 22:34+0900\n"
 "Last-Translator: Muneyuki Noguchi <nogu.dev@gmail.com>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: rc.cpp:354
 msgid " line(s)"
@@ -47,23 +48,20 @@ msgid "%1<br>Check change entry %2 of %3"
 msgstr ""
 
 #: main.cpp:40
-#, fuzzy
 msgid "(C) 2005-2007 Rajko Albrecht"
-msgstr "Copyright (c) 2005 Rajko Albrecht"
+msgstr "(C) 2005-2007 Rajko Albrecht"
 
 #: kdesvn_part.cpp:168
-#, fuzzy
 msgid "(C) 2005-2008 Rajko Albrecht"
-msgstr "Copyright (c) 2005 Rajko Albrecht"
+msgstr "(C) 2005-2008 Rajko Albrecht"
 
 #: svnfrontend/importdir_logmsg.cpp:85
 msgid "(Last part)"
 msgstr ""
 
 #: ksvnwidgets/models/commitmodelhelper.cpp:88
-#, fuzzy
 msgid "(Un)Lock"
-msgstr "ロック解除されました"
+msgstr "ロック（解除）"
 
 #: rc.cpp:810
 msgid "-1"
@@ -138,13 +136,16 @@ msgstr "<br>リビジョン: %1<br>作成者: %2<br>日付: %3<br>ログ: %4</ht
 #: svnfrontend/svnactions.cpp:1676
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr ""
+"<center>エントリ <br>%1<br> はバージョンづけされていません - 中止します。</"
+"center>"
 
 #: svnfrontend/svnactions.cpp:1474
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr ""
+"<center>エントリ <br>%1<br> はバージョンづけされています - 中止します。</"
+"center>"
 
 #: rc.cpp:225
-#, fuzzy
 msgid ""
 "<p align=\"left\">\n"
 "Enter an external program for opening file on doubleclick in form\n"
@@ -163,8 +164,8 @@ msgstr ""
 "<tt>&lt;プログラム&gt;</tt>\n"
 "</p>\n"
 "<p>\n"
-"ダブルクリックで開くことに対して kde 標準設定にしたいならば、&quot;"
-"default&quot; を入力すると kde が動作を選択します。\n"
+"ダブルクリックで開くことに対して kde 標準設定にしたいならば、\"default\" を入"
+"力すると kde が動作を選択します。\n"
 "</p>"
 
 #: rc.cpp:495
@@ -391,9 +392,8 @@ msgstr ""
 "それを拒否しています。"
 
 #: kdesvn_part.cpp:224
-#, fuzzy
 msgid "About kdesvn part"
-msgstr "kdesvn part について(&A)"
+msgstr "kdesvn part について"
 
 #: svnfrontend/svnactions.cpp:688
 msgid "Absent"
@@ -428,9 +428,8 @@ msgid "Add selected files/dirs"
 msgstr "選択されたファイルやディレクトリを追加"
 
 #: svnfrontend/maintreewidget.cpp:437
-#, fuzzy
 msgid "Add selected files/dirs recursive"
-msgstr "選択されたファイルやディレクトリを追加"
+msgstr "選択されたファイルやディレクトリを再帰的に追加"
 
 #: kdesvn.cpp:146
 msgid "Add ssh identities to ssh-agent"
@@ -476,7 +475,7 @@ msgstr "選択されたファイルやディレクトリをリポジトリに追
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
-msgstr ""
+msgstr "ファイル、ディレクトリやフォルダのサブ項目をリポジトリに追加しています"
 
 #: svnfrontend/svnactions.cpp:709
 msgid "Addition"
@@ -512,7 +511,7 @@ msgstr "作成者"
 
 #: svnfrontend/maintreewidget.cpp:1500
 msgid "Automatic generated base layout by kdesvn"
-msgstr ""
+msgstr "kdesvn によって自動的に生成された基本レイアウト"
 
 #: rc.cpp:666
 msgid "BDB"
@@ -561,11 +560,12 @@ msgstr ""
 "加します。"
 
 #: kdesvn_part.cpp:160
-#, fuzzy
 msgid ""
 "Built with Subversion library: %1\n"
 "Running Subversion library: %2"
-msgstr "Subversion ライブラリでビルドされた: %1\n"
+msgstr ""
+"右の Subversion ライブラリでビルドされました: %1\n"
+"右の Subversion ライブラリで動作しています: %2"
 
 #: svnfrontend/fillcachethread.cpp:114
 msgid "Cache filled up to revision %1"
@@ -624,7 +624,7 @@ msgstr "項目が「svn:needs-lock」属性セットをもっているかを調�
 
 #: rc.cpp:413
 msgid "Check logcache fill before reading tree"
-msgstr ""
+msgstr "ツリーを読み込む前にキャッシュが満たされているか確認する"
 
 #: svnfrontend/svnactions.cpp:2428
 msgid "Checking for updates finished"
@@ -757,9 +757,8 @@ msgid "Commiting - hit cancel for abort"
 msgstr "コミットしています - 中止するにはキャンセルを押してください"
 
 #: rc.cpp:102
-#, fuzzy
 msgid "Commitmessage"
-msgstr "ログメッセージ"
+msgstr "コミットメッセージ"
 
 #: svnfrontend/svnactions.cpp:1002 svnfrontend/svnactions.cpp:2109
 #: kiosvn/kiosvn.cpp:709
@@ -775,9 +774,8 @@ msgid "Compatible to subversion prior 1.5"
 msgstr "subversion 1.5 以前と互換性がある"
 
 #: kdesvn_part.cpp:220
-#, fuzzy
 msgid "Configure %1..."
-msgstr "%1 を設定(&C)..."
+msgstr "%1 を設定..."
 
 #: svnfrontend/svnitem.cpp:407
 msgid "Conflict"
@@ -825,7 +823,7 @@ msgstr "URL からのコピー"
 
 #: svnfrontend/svnactions.cpp:2146 svnfrontend/svnactions.cpp:2171
 msgid "Copy or Moving entries"
-msgstr ""
+msgstr "エントリをコピーまたは移動します"
 
 #: askpass/kdesvn-askpass.cpp:34
 msgid "Copyright (c) 2005 Rajko Albrecht"
@@ -875,6 +873,10 @@ msgid ""
 "Process stopped with message:\n"
 "%2"
 msgstr ""
+"プロセス \"%1\" を実行できませんでした。\n"
+"\n"
+"プロセスは以下のメッセージとともに停止しました:\n"
+"%2"
 
 #: kdesvn.cpp:122
 msgid "Create and open new repository"
@@ -1014,7 +1016,7 @@ msgstr "ローカルの変更を Diff"
 
 #: rc.cpp:615 svnfrontend/svnlogdlgimp.cpp:500
 msgid "Diff previous"
-msgstr ""
+msgstr "前と Diff"
 
 #: rc.cpp:621 svnfrontend/maintreewidget.cpp:492
 msgid "Diff revisions"
@@ -1022,11 +1024,11 @@ msgstr "Diff 履歴"
 
 #: svnfrontend/graphtree/revgraphview.cpp:785
 msgid "Diff to previous"
-msgstr ""
+msgstr "前との Diff"
 
 #: svnfrontend/graphtree/revgraphview.cpp:789
 msgid "Diff to selected item"
-msgstr ""
+msgstr "選択した項目との Diff"
 
 #: svnfrontend/maintreewidget.cpp:466
 msgid "Diff two items"
@@ -1223,11 +1225,11 @@ msgstr "中身を取得しているときにエラー"
 
 #: svnfrontend/maintreewidget.cpp:1658
 msgid "Error getting entry to relocate"
-msgstr ""
+msgstr "移動するエントリを取得しているときにエラー"
 
 #: svnfrontend/svnactions.cpp:1793
 msgid "Error getting entry to switch"
-msgstr ""
+msgstr "切り替えるエントリを取得しているときにエラー"
 
 #: svnfrontend/graphtree/revgraphview.cpp:317
 msgid "Error running the graph layouting tool.\n"
@@ -1239,7 +1241,7 @@ msgstr "エラー「%1」に対するサーバ認証の検証"
 
 #: svnfrontend/svnactions.cpp:534
 msgid "Error while open temporary file"
-msgstr ""
+msgstr "一時ファイルを開いているときにエラー"
 
 #: main.cpp:47
 msgid "Execute single subversion command on specific revision(-range)"
@@ -1382,9 +1384,8 @@ msgid "Force operation"
 msgstr "操作を強制"
 
 #: rc.cpp:705
-#, fuzzy
 msgid "Form"
-msgstr "フォーム1"
+msgstr "フォーム"
 
 #: rc.cpp:66 rc.cpp:171
 msgid "Form1"
@@ -1480,7 +1481,7 @@ msgstr "コミットボックスの中の新しい項目を隠す"
 
 #: kdesvn_part.cpp:207
 msgid "Hide unchanged files"
-msgstr "変更されていないファイルを隠します"
+msgstr "変更されていないファイルを隠す"
 
 #: svnfrontend/svnactions.cpp:404
 msgid "History of %1"
@@ -1565,6 +1566,8 @@ msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
+"もしこれが設定されていれば、新規リポジトリを開いた後に基本レイアウト （<tt>/"
+"trunk</tt>、<tt>/branches</tt> と <tt>/tags</tt>）が作成されます。"
 
 #: rc.cpp:576
 msgid "Ignore"
@@ -1674,9 +1677,8 @@ msgid "KIO operations use standard logmessage"
 msgstr "KIO 操作は標準ログメッセージを使う"
 
 #: kdesvn_part.cpp:228
-#, fuzzy
 msgid "Kdesvn Handbook"
-msgstr "Kdesvn ハンドブック(&H)"
+msgstr "Kdesvn ハンドブック"
 
 #: rc.cpp:144
 msgid "Keep locks"
@@ -1697,7 +1699,7 @@ msgstr ""
 #: svnfrontend/editproperty_impl.cpp:103
 msgid ""
 "Label text to show for the edit box where the user enters the issue number."
-msgstr ""
+msgstr "ユーザが問題番号を入力する編集ボックスに対して表示するラベルテキスト"
 
 #: svnfrontend/models/svnitemmodel.cpp:282 svnfrontend/svnactions.cpp:724
 msgid "Last author"
@@ -1737,7 +1739,7 @@ msgstr "行"
 
 #: rc.cpp:624
 msgid "List entries"
-msgstr ""
+msgstr "エントリをリストアップ"
 
 #: rc.cpp:327
 msgid "List items next commit will send or not"
@@ -1903,7 +1905,7 @@ msgstr "ファイルのサブディレクトリは作れません"
 
 #: svnfrontend/commandexec.cpp:611
 msgid "May only switch one url at time!"
-msgstr ""
+msgstr "一度に一つだけの url に切り替えられます"
 
 #: svnfrontend/svnactions.cpp:2079 svnfrontend/maintreewidget.cpp:1611
 msgid "Merge"
@@ -1955,7 +1957,7 @@ msgstr "ありません"
 
 #: svnfrontend/propertiesdlg.cpp:158
 msgid "Missing SVN link"
-msgstr ""
+msgstr "SVN リンクが無くなっています"
 
 #: svnfrontend/graphtree/revgraphview.cpp:421
 msgid "Modified at revision %1"
@@ -1970,9 +1972,8 @@ msgid "Modified state had mods merged in."
 msgstr ""
 
 #: ksvnwidgets/models/commitmodelhelper.cpp:80
-#, fuzzy
 msgid "Modify (content or property)"
-msgstr "属性を変更"
+msgstr "変更（中身または属性）"
 
 #: svnfrontend/propertiesdlg.cpp:53
 msgid "Modify properties"
@@ -1992,7 +1993,7 @@ msgstr "エントリを移動しています"
 
 #: svnfrontend/svnactions.cpp:2101
 msgid "Moving/Rename item "
-msgstr ""
+msgstr "項目を移動/名前変更しています"
 
 #: rc.cpp:819
 msgid "N&umber"
@@ -2020,7 +2021,7 @@ msgstr "衝突したファイルの新しいバージョン"
 
 #: svnfrontend/svnactions.cpp:1937
 msgid "No destination to merge."
-msgstr ""
+msgstr "マージする先がありません"
 
 #: svnfrontend/svnactions.cpp:1225 svnfrontend/svnactions.cpp:1269
 msgid "No difference to display"
@@ -2033,6 +2034,8 @@ msgstr "無視なし"
 #: svnfrontend/graphtree/revisiontree.cpp:106
 msgid "No logcache possible due broken database and networking not allowed."
 msgstr ""
+"データベースが壊れネットワークが許可されていないのでログキャッシュは不可能で"
+"す。"
 
 #: settings/cmdexecsettings_impl.cpp:33
 msgid "No minimum"
@@ -2141,7 +2144,7 @@ msgstr ""
 
 #: kdesvn_part.cpp:173
 msgid "Original author and maintainer"
-msgstr ""
+msgstr "オリジナル作者とメンテナ"
 
 #: svnfrontend/opencontextmenu.cpp:61
 msgid "Other..."
@@ -2209,7 +2212,6 @@ msgid "Prefer external merge program"
 msgstr "外部マージプログラムを選ぶ"
 
 #: askpass/kdesvn-askpass.cpp:37
-#, fuzzy
 msgid "Prompt"
 msgstr "プロンプト"
 
@@ -2248,7 +2250,7 @@ msgstr "クイック設定"
 
 #: kdesvn_part.cpp:173 main.cpp:41
 msgid "Rajko Albrecht"
-msgstr ""
+msgstr "Rajko Albrecht"
 
 #: rc.cpp:318
 msgid "Read detailed change lists"
@@ -2312,7 +2314,7 @@ msgstr ""
 
 #: svnfrontend/maintreewidget.cpp:417
 msgid "Relocate current working copy url"
-msgstr "現在の作業コピーの url を移動します"
+msgstr "現在の作業コピーの url を移動"
 
 #: svnfrontend/maintreewidget.cpp:1665
 msgid "Relocate path %1"
@@ -2483,9 +2485,8 @@ msgid "S&TART"
 msgstr "S&TART"
 
 #: askpass/kdesvn-askpass.cpp:53
-#, fuzzy
 msgid "SSH password"
-msgstr "パスワードを保存"
+msgstr "SSH パスワード"
 
 #: rc.cpp:846
 msgid "START"
@@ -2526,13 +2527,12 @@ msgid "Schedule"
 msgstr "スケジュール"
 
 #: rc.cpp:600 rc.cpp:603
-#, fuzzy
 msgid "See context menu for more actions"
-msgstr "更なる操作については項目上のコンテキストメニュー"
+msgstr "更なる操作については項目上のコンテキストメニューを参照してください"
 
 #: svnfrontend/maintreewidget.cpp:483
 msgid "Select browse revision"
-msgstr ""
+msgstr "ブラウズするリビジョンを選択"
 
 #: rc.cpp:831 rc.cpp:852
 msgid "Select current working copy changes"
@@ -2614,6 +2614,9 @@ msgid ""
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""
+"ログメッセージの最初にバグ追跡 ID を挿入したいならば <b>'false'</b> に 設定し"
+"てください。標準設定は <b>'true'</b> で、これはバグ追跡 ID が ログメッセージ"
+"の後に追加されるということです。"
 
 #: svnfrontend/editproperty_impl.cpp:115
 msgid ""
@@ -3228,7 +3231,7 @@ msgstr "kdesvn に対する ssh-askpass"
 
 #: rc.cpp:639
 msgid "this long text"
-msgstr ""
+msgstr "この長いテキスト"
 
 #: rc.cpp:642
 msgid "to"

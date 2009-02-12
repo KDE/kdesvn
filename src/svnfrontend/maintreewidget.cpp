@@ -576,7 +576,7 @@ void MainTreeWidget::enableActions()
     bool none = c==0&&isopen;
     bool dir = false;
     bool unique = uniqueTypeSelected();
-    bool remote_enabled=isopen&&m_Data->m_Model->svnWrapper()->doNetworking();
+    bool remote_enabled=/*isopen&&*/m_Data->m_Model->svnWrapper()->doNetworking();
 
     if (single && si && si->isDir()) {
         dir = true;

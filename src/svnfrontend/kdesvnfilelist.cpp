@@ -869,7 +869,7 @@ void kdesvnfilelist::enableActions()
     bool none = c==0&&isopen;
     bool dir = false;
     bool unique = uniqueTypeSelected();
-    bool remote_enabled=isopen&&m_SvnWrapper->doNetworking();
+    bool remote_enabled=m_SvnWrapper->doNetworking();
 
     if (single && allSelected()->at(0)->isDir()) {
         dir = true;

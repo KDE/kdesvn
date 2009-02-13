@@ -236,10 +236,14 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
 svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,
         int limit,QWidget*parent)
 {
+    return getLog(start,end,peg,which,list_files,limit,Kdesvnsettings::log_follows_nodes(),parent);
+}
+
+svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,
+        int limit,bool follow,QWidget*parent)
+{
     svn::SharedPointer<svn::LogEntriesMap> logs = new svn::LogEntriesMap;
     if (!m_Data->m_CurrentContext) return 0;
-
-    bool follow = Kdesvnsettings::log_follows_nodes();
 
     bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().size()>0?m_Data->m_ParentList->baseUri():which);
 

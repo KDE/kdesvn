@@ -834,7 +834,8 @@ void MainTreeWidget::slotMakeLog()const
     }
     svn::Revision end(svn::Revision::START);
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
-    int l = Kdesvnsettings::self()->maximum_displayed_logs();
+    //int l = Kdesvnsettings::self()->maximum_displayed_logs();
+    int l = 50;
     m_Data->m_Model->svnWrapper()->makeLog(start,end,(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision()),what,list,l);
 }
 

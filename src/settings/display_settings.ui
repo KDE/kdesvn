@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>286</width>
-    <height>262</height>
+    <width>252</width>
+    <height>207</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -47,16 +47,6 @@
      </property>
      <property name="text" >
       <string>Show file info</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_display_previews_in_file_tips" >
-     <property name="whatsThis" >
-      <string>Here you can control if you want the popup window to contain a larger preview for the file, when moving the mouse over it</string>
-     </property>
-     <property name="text" >
-      <string>Display previews in file tips</string>
      </property>
     </widget>
    </item>
@@ -156,22 +146,5 @@ see which items has newer items in repository you may have to set "Check for upd
   <include location="local" >knuminput.h</include>
  </includes>
  <resources/>
- <connections>
-  <connection>
-   <sender>kcfg_display_file_tips</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>DisplaySettings</receiver>
-   <slot>dispFileInfotoggled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

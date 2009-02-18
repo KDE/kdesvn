@@ -27,8 +27,6 @@ Q_OBJECT
 public:
     DisplaySettings_impl(QWidget *parent = 0);
     virtual ~DisplaySettings_impl();
-protected slots:
-    virtual void dispFileInfotoggled(bool);
 };
 
 #endif

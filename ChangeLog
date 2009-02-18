@@ -1,8 +1,23 @@
+version 1.3.0
+    * log limit setup removed, fixed to 50, inside logdialog it is possible stepping for- and backwards
+    * modified items may reverted from within commit dialog
+
+version 1.2.4
+    * fix a small problem with (un-)ignore action
+    * reduced debug output, changed default debugoutput area
+    * fixed some smaller layout problems
+    * fixed porting error (ssl-trust-dialog didn't ask the right questions)
+    
+version 1.2.3
+    * fix a potential crasher in svnqt wrapper libraries (by Andreas Richter)
+    * fix some bug reports (#568, #584, #594)
+    * renamed svnqt4 back to svnqt 
+    
 version 1.2.2
     * Icons get a short text in menubar
-	* some fixes to shortcuts (Michael Biebl)
-	* fixed a possible initialize problem
-
+    * some fixes to shortcuts (Michael Biebl)
+    * fixed a possible initialize problem
+    
 version 1.2.1
     * complete port to kde4
 

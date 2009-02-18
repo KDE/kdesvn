@@ -261,6 +261,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
         &ok,&saveit)) {
         return DONT_ACCEPT;
     }
+    kDebug()<<"SslServerTrustAnswer asking..." <<endl;
     emit waitShow(false);
     if (!saveit) {
         return ACCEPT_TEMPORARILY;

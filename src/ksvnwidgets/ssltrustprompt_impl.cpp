@@ -50,12 +50,13 @@ SslTrustPrompt_impl::SslTrustPrompt_impl(const QString&host,QWidget *parent, con
 bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,const QStringList&reasons,bool*ok,bool*saveit)
 {
     SslTrustPrompt_impl*ptr=0;
-//     KDialogBase dlg(i18n("Trust ssl certificate"));
     KDialog dlg(0);
     dlg.setCaption(i18n("Trust ssl certificate"));
+    QFlags<KDialog::ButtonCode> buttons = KDialog::Yes|KDialog::Cancel|KDialog::No;
+
+    dlg.setButtons(buttons);
     dlg.setButtonText(KDialog::Yes,i18n("Accept permanently"));
     dlg.setButtonText(KDialog::No,i18n("Accept temporarily"));
-//     dlg.setButtonCancel(KGuiItem(i18n("Reject")));
     dlg.setButtonText(KDialog::Cancel, i18n("Reject"));
 
     static QString rb = "<tr><td>";
@@ -80,7 +81,6 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     text+=rb+i18n("Fingerprint")+rs+fingerprint+re;
     text+="</table></p></body></html>";
 
-//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     KVBox *Dialog1Layout = new KVBox(&dlg);
     dlg.setMainWidget(Dialog1Layout);
 
@@ -89,15 +89,9 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
     ptr->m_ContentText->setText(text);
     int i = dlg.exec();
 // KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"trustssldlg",false);
-    *saveit = false;
-    *ok = true;
-    if (i == KDialog::Yes) {
-        *saveit = true;
-    } else if (i==KDialog::Cancel) {
-        *ok = false;
-    }
+    *saveit = i==KDialog::Yes;
+    *ok = (i==KDialog::Yes||i==KDialog::No);
     return *ok;
 }
 
 #include "ssltrustprompt_impl.moc"
-

@@ -320,7 +320,7 @@ bool kdesvnd::isRepository(const KUrl&url)
         try {
             m_Listener->m_Svnclient->status("file://"+cleanUrl(url),svn::DepthEmpty,false,false,false,where);
         } catch (const svn::ClientException&e) {
-            kDebug()<< e.msg()<<endl;
+            kDebug(9510)<< e.msg()<<endl;
             return false;
         }
         return true;

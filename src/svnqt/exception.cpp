@@ -190,9 +190,9 @@ namespace svn
   QString ClientException::getBackTrace()
   {
     QString Result;
-    qDebug("getBackTrace");
+    //qDebug("getBackTrace");
 #ifdef HAS_BACKTRACE_H
-    qDebug("Generating backtrace");
+    //qDebug("Generating backtrace");
     void *array[SVNQT_BACKTRACE_LENGTH];
     size_t size;
     size_t i;

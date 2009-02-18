@@ -134,8 +134,8 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
 }
 
 
-EditProperty_impl::~EditProperty_impl() {
-    kDebug() << "EditProperty_impl got destroyed" << endl;
+EditProperty_impl::~EditProperty_impl()
+{
 }
 
 

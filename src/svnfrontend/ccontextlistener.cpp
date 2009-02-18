@@ -270,8 +270,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 
 bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 {
-    kDebug()<<"CContextListener::contextSslClientCertPrompt "
-        << certFile << endl;
+    kDebug(9510)<< certFile << endl;
     emit waitShow(true);
 //     QString afile = KFileDialog::getOpenFileName(QString::null,
 //         QString::null,

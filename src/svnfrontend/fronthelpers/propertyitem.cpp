@@ -49,7 +49,6 @@ void PropertyListViewItem::unDeleteIt()
 
 bool PropertyListViewItem::protected_Property(const QString&what)
 {
-    kDebug()<<"What: "<<what<<endl;
     if (
         what.compare("svn:mergeinfo")==0 ||
         what.compare("svn:special")==0

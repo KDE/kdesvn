@@ -91,7 +91,6 @@ void Propertylist::clear()
  */
 void Propertylist::slotItemChanged(QTreeWidgetItem*_item,int col )
 {
-    kDebug()<<"Col: "<<col<<endl;
     if (!_item || _item->type()!=PropertyListViewItem::_RTTI_) return;
     PropertyListViewItem*item = static_cast<PropertyListViewItem*> (_item);
     QString text = item->text(col);
@@ -170,7 +169,7 @@ void Propertylist::addCallback(QObject*ob)
 void Propertylist::keyPressEvent(QKeyEvent*key)
 {
     if (key->key()==Qt::Key_Return) {
-        kDebug()<<"Return pressed"<<endl;
+        // kDebug(9510)<<"Return pressed"<<endl;
     }
     key->ignore();
 }

@@ -46,8 +46,7 @@ public:
     virtual ~SvnLogDlgImp();
     void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&,const svn::Revision&peg,const QString&pegUrl);
     void saveSize();
-    QSize dialogSize();
-
+    void loadSize();
     virtual bool getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg,QString&root);
 
 signals:

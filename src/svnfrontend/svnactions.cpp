@@ -241,15 +241,12 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
 
     bool follow = Kdesvnsettings::log_follows_nodes();
 
-    kDebug()<<"Get logs for "<< which<<endl;
-
     bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().size()>0?m_Data->m_ParentList->baseUri():which);
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,(parent?parent:m_Data->m_ParentList->realWidget()),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        kDebug()<<"Has: "<<mergeinfo<<endl;
         if (doNetworking()) {
             m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit,mergeinfo);
         } else {
@@ -391,7 +388,6 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         try {
             e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
         } catch (const svn::Exception&ce) {
-            kDebug()<<ce.msg() << endl;
             emit clientException(ce.msg());
             return false;
         }
@@ -405,7 +401,6 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             if (peg != svn::Revision::UNDEFINED && peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
                 // for persistent storage, store head into persistent cache makes no sense.
                 cacheKey=e[0].revision().toString()+"/"+url;
-                kDebug()<<"Extra: "<<cacheKey<<endl;
                 m_Data->m_InfoCache.insertKey(e[0],cacheKey);
             }
         }
@@ -1045,7 +1040,6 @@ void SvnActions::slotProcessDataRead(const QByteArray&data,WatchedProcess*)
 
 bool SvnActions::get(const QString&what,const QString& to,const svn::Revision&rev,const svn::Revision&peg,QWidget*p)
 {
-    kDebug()<<"Downloading "<<what<<endl;
     svn::Revision _peg = peg;
     if (_peg == svn::Revision::UNDEFINED) {
         _peg = rev;
@@ -1081,11 +1075,9 @@ void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QStri
 {
     if (!doNetworking()&&start!=svn::Revision::BASE && end!=svn::Revision::WORKING) {
         emit sendNotify(i18n("Can not do this diff because networking is disabled."));
-        kDebug()<<"No diff 'cause no network"<<endl;
         return;
     }
     if (m_Data->isExternalDiff()) {
-        kDebug()<<"External diff..."<<endl;
         svn::InfoEntry info;
         if (singleInfo(p1,start,info)) {
             makeDiff(p1,start,p2,end,end,info.isDir(),p);
@@ -1119,8 +1111,6 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
 
     tfile.open();
     tfile2.open();
-
-    kDebug()<<tfile.fileName()<<" - "<<tfile2.fileName()<<endl;
 
     QString first,second;
     svn::Revision peg = _peg;
@@ -1168,10 +1158,8 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%1") {
             *proc<<first;
-            kDebug()<<first<<endl;
         } else if (*it=="%2") {
             *proc<<second;
-            kDebug()<<second<<endl;
         } else {
             *proc << *it;
         }
@@ -1208,7 +1196,6 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
 void SvnActions::makeDiff(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,bool isDir,QWidget*p)
 {
     if (m_Data->isExternalDiff()) {
-        kDebug()<<"External diff 2..."<<endl;
         makeDiffExternal(p1,start,p2,end,_peg,isDir,p);
     } else {
         makeDiffinternal(p1,start,p2,end,p,_peg);
@@ -1283,7 +1270,6 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     QByteArray ex;
     KTempDir tdir;
     tdir.setAutoRemove(true);
-    kDebug()<<"Non recourse diff"<<endl;
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     try {
@@ -1899,10 +1885,6 @@ void SvnActions::slotResolve(const QString&p)
     }
     QFileInfo fi(p);
     QString base = fi.absolutePath();
-    kDebug()<<i1.conflictNew()<<" "
-            <<i1.conflictOld()<<" "
-            <<i1.conflictWrk()<<" "
-            <<endl;
     if (!i1.conflictNew().length()||
            !i1.conflictOld().length()||
            !i1.conflictWrk().length() ) {
@@ -2422,7 +2404,6 @@ bool SvnActions::createModifiedCache(const QString&what)
     stopCheckModThread();
     m_Data->m_Cache.clear();
     m_Data->m_conflictCache.clear();
-    kDebug()<<"Create cache for " << what << endl;
     m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
     return true;
@@ -2435,7 +2416,6 @@ void SvnActions::checkModthread()
         //m_Data->m_ThreadCheckTimer.start(100);
         return;
     }
-    kDebug()<<"ModifiedThread seems stopped"<<endl;
     for (long i = 0; i < m_CThread->getList().count();++i) {
         svn::StatusPtr ptr = m_CThread->getList()[i];
         if (m_CThread->getList()[i]->isRealVersioned()&& (
@@ -2462,8 +2442,6 @@ void SvnActions::checkUpdateThread()
     if (m_UThread->isRunning()) {
         return;
     }
-    kDebug()<<"Updates Thread seems stopped"<<endl;
-
     bool newer=false;
     for (long i = 0; i < m_UThread->getList().count();++i) {
         svn::StatusPtr ptr = m_UThread->getList()[i];
@@ -2669,7 +2647,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
         data = mp["svn:ignore"];
     }
     bool result = false;
-    QStringList lst = data.split("\n");
+    QStringList lst = data.split("\n",QString::SkipEmptyParts);
     QStringList::size_type it = lst.indexOf(name);
     if (it != -1) {
         if (unignore) {
@@ -2717,7 +2695,6 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
                 }
             }
             if (where != svn::Revision::WORKING && pm) {
-                kDebug()<<"Put into cache "<<endl;
                 m_Data->m_PropertiesCache.insertKey(pm,fk);
             }
         }
@@ -2752,7 +2729,6 @@ bool SvnActions::isLockNeeded(SvnItem*which,const svn::Revision&where)
 QString SvnActions::searchProperty(QString&Store, const QString&property, const QString&start,const svn::Revision&where,bool up)
 {
     svn::Path pa(start);
-    kDebug()<<"Url? "<<pa.isUrl()<<endl;
     svn::InfoEntry inf;
 
     if (!singleInfo(start,where,inf)) {
@@ -2772,9 +2748,7 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
         }
         if (up) {
             pa.removeLast();
-            kDebug()<<"Going up to " << pa.path() << endl;
             if (pa.isUrl() && inf.reposRoot().length()>pa.path().length()) {
-                kDebug()<<pa.path()<<" is not in repository" << endl;
                 break;
             }
 
@@ -2815,7 +2789,6 @@ bool SvnActions::isLocalWorkingCopy(const KUrl&url,QString&_baseUri)
     try {
         e = m_Data->m_Svnclient->info(cleanpath,svn::DepthEmpty,rev,peg);
     } catch (const svn::Exception&e) {
-        //kDebug()<< e.msg()<< " " << endl;
         if (SVN_ERR_WC_NOT_DIRECTORY==e.apr_err())
         {
             return false;

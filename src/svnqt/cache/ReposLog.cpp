@@ -45,12 +45,12 @@ svn::Revision svn::cache::ReposLog::latestHeadRev()
         }
     }
     /// no catch - exception has go trough...
-    qDebug("Getting headrev");
+    //qDebug("Getting headrev");
     svn::InfoEntries e = m_Client->info(m_ReposRoot,svn::DepthEmpty,svn::Revision::HEAD,svn::Revision::HEAD);
     if (e.count()<1||e[0].reposRoot().isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
-    qDebug("Getting headrev done");
+    //qDebug("Getting headrev done");
     return e[0].revision();
 }
 
@@ -72,7 +72,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     QString q("select revision from 'logentries' order by revision DESC limit 1");
     QSqlQuery _q(QString::null, m_Database);
     if (!_q.exec(q)) {
-        qDebug() << _q.lastError().text();
+        //qDebug() << _q.lastError().text();
         return svn::Revision::UNDEFINED;
     }
     int _r;
@@ -80,7 +80,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
         //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
         _r = _q.value(0).toInt();
     } else {
-        qDebug() << _q.lastError().text();
+        //qDebug() << _q.lastError().text();
         return svn::Revision::UNDEFINED;
     }
     return _r;
@@ -98,8 +98,8 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool 
 //     long long icount=0;
 
     svn::Revision _latest=latestCachedRev();
-//    qDebug("Latest cached rev: %i",_latest.revnum());
-//    qDebug("End revision is: %s",end.toString().TOUTF8().data());
+//    //qDebug("Latest cached rev: %i",_latest.revnum());
+//    //qDebug("End revision is: %s",end.toString().TOUTF8().data());
 
     if (checkHead && _latest.revnum()>=latestHeadRev().revnum()) {
         return true;
@@ -117,21 +117,21 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool 
     svn::Revision _rstart=_latest.revnum()+1;
     svn::Revision _rend = end;
     if (_rend==svn::Revision::UNDEFINED) {
-//        qDebug("Setting end to Head");
+//        //qDebug("Setting end to Head");
         _rend=svn::Revision::HEAD;
     }
     // no catch - exception should go outside.
     if (_rstart==0){
         _rstart = 1;
     }
-//    qDebug("Getting log %s -> %s",_rstart.toString().TOUTF8().data(),_rend.toString().TOUTF8().data());
+//    //qDebug("Getting log %s -> %s",_rstart.toString().TOUTF8().data(),_rend.toString().TOUTF8().data());
     if (_rend==svn::Revision::HEAD) {
         _rend=latestHeadRev();
     }
 
     if (_rend==svn::Revision::HEAD||_rend.revnum()>_latest.revnum()) {
         LogEntriesMap _internal;
-//        qDebug("Retrieving from network.");
+//        //qDebug("Retrieving from network.");
         if (!m_Client->log(m_ReposRoot,_rstart,_rend,_internal,svn::Revision::UNDEFINED,true,false)) {
             return false;
         }
@@ -201,7 +201,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     bcount.bindValue(0,Q_LLONG(end.revnum()));
     bcount.bindValue(1,Q_LLONG(start.revnum()));
     if (!bcount.exec()) {
-        qDebug() << bcount.lastError().text();
+        //qDebug() << bcount.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve count: ")+bcount.lastError().text());
         return false;
     }
@@ -215,7 +215,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     bcur.bindValue(1,Q_LLONG(start.revnum()));
 
     if (!bcur.exec()) {
-        qDebug() << bcur.lastError().text();
+        //qDebug() << bcur.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+bcur.lastError().text());
         return false;
     }
@@ -224,7 +224,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         revision = bcur.value(0).toLongLong();
         cur.bindValue(0,revision);
         if (!cur.exec()) {
-            qDebug() << cur.lastError().text();
+            //qDebug() << cur.lastError().text();
             throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text()
                     ,cur.lastError().number());
             return false;
@@ -268,7 +268,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
     QSqlQuery query("select revision,date from logentries order by revision desc limit 1",m_Database);
 
     if (query.lastError().type()!=QSqlError::NoError) {
-        qDebug() << query.lastError().text();
+        //qDebug() << query.lastError().text();
     }
     bool must_remote=!noNetwork;
     if (query.next()) {
@@ -287,7 +287,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision&aRev,bool
     query.bindValue(0,Q_LLONG(aRev.date()));
     query.exec();
     if (query.lastError().type()!=QSqlError::NoError) {
-        qDebug() << query.lastError().text();
+        //qDebug() << query.lastError().text();
     }
     if (query.next()) {
         return query.value(0).toInt();
@@ -321,8 +321,8 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
     _q.bindValue(3,aEntry.message);
     if (!_q.exec()) {
         m_Database.rollback();
-        qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
-        qDebug() << _q.lastQuery();
+        //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+        //qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
     }
     _q.prepare(qPathes);
@@ -335,8 +335,8 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
         _q.bindValue(4,Q_LLONG((*cpit).copyFromRevision));
         if (!_q.exec()) {
             m_Database.rollback();
-            qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
-            qDebug() << _q.lastQuery();
+            //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+            //qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
         }
     }
@@ -353,8 +353,8 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
         _q.bindValue(1,_merges.data());
         if (!_q.exec()) {
             m_Database.rollback();
-            qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
-            qDebug() << _q.lastQuery();
+            //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+            //qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
         }
     }
@@ -395,8 +395,8 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     QSqlQuery _q2(QString::null,m_Database);
     _q.prepare(query_string);
     if (!_q.exec()) {
-        qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
-        qDebug() << _q.lastQuery();
+        //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
+        //qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("Could not select values: ")+_q.lastError().text(),_q.lastError().number());
     }
     while(_q.next()) {
@@ -408,7 +408,7 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
         query_string=s_e.arg(revision);
         _q2.prepare(query_string);
         if (!_q2.exec()) {
-            qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
+            //qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
         } else {
             while (_q2.next()) {
                 target[revision].changedPaths.push_back (
@@ -423,7 +423,7 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
         query_string=s_m.arg(revision);
         _q2.prepare(query_string);
         if (!_q2.exec()) {
-            qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
+            //qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
         } else {
             if (_q2.next()) {
                 QByteArray byteArray = _q2.value(0).toByteArray();
@@ -450,11 +450,11 @@ bool svn::cache::ReposLog::itemExists(const svn::Revision&peg,const svn::Path&pa
     QSqlQuery _q(QString::null,m_Database);
     QString query_string=QString(_s1).arg(path.native()).arg(peg.revnum());
     if (!_q.exec(query_string)) {
-        qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
-        qDebug(_q.lastQuery().TOUTF8().data());
+        //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
+        //qDebug(_q.lastQuery().TOUTF8().data());
         throw svn::cache::DatabaseException(QString("Could not select values: ")+_q.lastError().text(),_q.lastError().number());
     }
-    qDebug(_q.lastQuery().TOUTF8().data());
+    //qDebug(_q.lastQuery().TOUTF8().data());
 
 
     svn::Path _p = path;

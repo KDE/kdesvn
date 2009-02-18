@@ -248,7 +248,7 @@ namespace svn
         if (error != 0) {
             throw ClientException (error);
         }
-        qDebug("Path: %s",truepath);
+        //qDebug("Path: %s",truepath);
         _peg = svn::Revision(&pegr);
         _path=Path(truepath);
     }

@@ -1,3 +1,9 @@
+version 1.2.4
+    * fix a small problem with (un-)ignore action
+    * reduced debug output, changed default debugoutput area
+    * fixed some smaller layout problems
+    * fixed porting error (ssl-trust-dialog didn't ask the right questions)
+    
 version 1.2.3
     * fix a potential crasher in svnqt wrapper libraries (by Andreas Richter)
     * fix some bug reports (#568, #584, #594)

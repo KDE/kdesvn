@@ -112,7 +112,7 @@ public:
             db = query.value(0).toString();
         }
         else {
-            qDebug() << "Error select_01: " << query.lastError().text() << "(" << query.lastQuery() << ")";
+            //qDebug() << "Error select_01: " << query.lastError().text() << "(" << query.lastQuery() << ")";
         }
         if (!db.isEmpty()) {
             QString fulldb = m_BasePath+"/"+db+".db";
@@ -159,12 +159,12 @@ public:
         QDataBase _db = QSqlDatabase::addDatabase(SQLTYPE,_key);
         QString fulldb = m_BasePath+"/"+dbFile+".db";
         _db.setDatabaseName(fulldb);
-//        qDebug("try database open %s",fulldb.TOUTF8().data());
+//        //qDebug("try database open %s",fulldb.TOUTF8().data());
         if (!checkReposDb(_db)) {
-            qDebug("no DB opened");
+            //qDebug("no DB opened");
             _db = QSqlDatabase();
         } else {
-            qDebug("Insert into map");
+            //qDebug("Insert into map");
             m_mainDB.localData()->reposCacheNames[dbFile]=_key;
         }
         return _db;
@@ -178,7 +178,7 @@ public:
             while (QSqlDatabase::contains(_key)) {
                 _key.sprintf("%s-%i",SQLMAIN,i++);
             }
-            qDebug("The key is now: %s",_key.TOUTF8().data());
+            //qDebug("The key is now: %s",_key.TOUTF8().data());
 
             QDataBase db = QSqlDatabase::addDatabase(SQLTYPE,_key);
             db.setDatabaseName(m_BasePath+"/maindb.db");
@@ -289,7 +289,7 @@ svn::cache::LogCache* svn::cache::LogCache::self()
  */
 QDataBase  svn::cache::LogCache::reposDb(const QString&aRepository)
 {
-//    qDebug("reposDB");
+//    //qDebug("reposDB");
     return m_CacheData->getReposDB(aRepository);
 }
 
@@ -309,7 +309,7 @@ QStringList svn::cache::LogCache::cachedRepositories()const
     QSqlQuery cur(QString::null,mainDB);
     cur.prepare(s_q);
     if (!cur.exec()) {
-        qDebug() << cur.lastError().text();
+        //qDebug() << cur.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text());
         return _res;
     }

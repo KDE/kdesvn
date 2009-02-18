@@ -263,16 +263,13 @@ void kdesvnView::slotCreateRepo()
     bool createdirs;
     QString path = ptr->targetDir();
     closeMe();
-    kDebug()<<"Creating "<<path << endl;
     try {
         _rep->CreateOpen(path,ptr->fsType(),ptr->disableFsync(),
                          !ptr->keepLogs(),ptr->compat13(),ptr->compat14());
     } catch(const svn::ClientException&e) {
         slotAppendLog(e.msg());
-        kDebug()<<"Creating "<<path << " failed "<<e.msg() << endl;
         ok = false;
     }
-    kDebug()<<"Creating "<<path << " done " << endl;
     createdirs = ptr->createMain();
     delete dlg;
     delete _rep;
@@ -318,7 +315,6 @@ void kdesvnView::slotHotcopy()
         slotAppendLog(i18n("Hotcopy finished."));
     } catch(const svn::ClientException&e) {
         slotAppendLog(e.msg());
-        kDebug()<<"Hotcopy of "<< src << " failed "<<e.msg() << endl;
     }
 }
 
@@ -349,7 +345,6 @@ void kdesvnView::slotLoaddump()
         _rep.Open(ptr->repository());
     }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
-        kDebug()<<"Open "<<ptr->repository() << " failed "<<e.msg() << endl;
         return ;
     }
 
@@ -372,10 +367,8 @@ void kdesvnView::slotLoaddump()
     QString tmpfile;
     bool networked = false;
     if (_uri.isLocalFile()) {
-        kDebug()<<"Local stuff: "<<_uri<<endl;
         _input = _uri.path();
     } else {
-        kDebug()<<"Remote stuff: "<<_uri<<endl;
         networked = true;
         if(! KIO::NetAccess::download(_uri, tmpfile, this) ) {
             KMessageBox::error(this, KIO::NetAccess::lastErrorString() );
@@ -391,7 +384,6 @@ void kdesvnView::slotLoaddump()
         slotAppendLog(i18n("Loading dump finished."));
     }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
-        kDebug()<<"Load dump into "<<ptr->repository() << " failed "<<e.msg() << endl;
     }
     if (networked && tmpfile.length()>0) {
         KIO::NetAccess::removeTempFile(tmpfile);
@@ -446,7 +438,6 @@ void kdesvnView::slotDumpRepo()
         _rep->Open(re);
     }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
-        kDebug()<<"Open "<<re << " failed "<<e.msg() << endl;
         delete _rep;
         return ;
     }
@@ -457,7 +448,6 @@ void kdesvnView::slotDumpRepo()
         slotAppendLog(i18n("Dump finished."));
     }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());
-        kDebug()<<"Dump "<<out << " failed "<<e.msg() << endl;
     }
     delete _rep;
 }
@@ -496,9 +486,7 @@ void kdesvnView::setCanceled(bool how)
 void kdesvnView::fillCacheStatus(qlonglong current,qlonglong max)
 {
     if (current>-1 && max>-1) {
-        kDebug()<<"Fillcache "<<current<<" von "<<max<<endl;
         if (!m_CacheProgressBar) {
-            kDebug()<<"Creating progressbar"<<endl;
             m_CacheProgressBar=new QProgressBar(this);
             m_CacheProgressBar->setRange(0,(int)max);
             m_topLayout->addWidget(m_CacheProgressBar);

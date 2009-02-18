@@ -51,7 +51,6 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
 {
     SslTrustPrompt_impl*ptr=0;
     KDialog dlg(0);
-    kDebug()<<"Asking sslTrust"<<endl;
     dlg.setCaption(i18n("Trust ssl certificate"));
     QFlags<KDialog::ButtonCode> buttons = KDialog::Yes|KDialog::Cancel|KDialog::No;
 
@@ -92,7 +91,6 @@ bool SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,
 // KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"trustssldlg",false);
     *saveit = i==KDialog::Yes;
     *ok = (i==KDialog::Yes||i==KDialog::No);
-    kDebug()<<"ok: "<<*ok<< " save: "<<*saveit<<" ret: "<< i <<endl;
     return *ok;
 }
 

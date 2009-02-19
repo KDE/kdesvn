@@ -1,3 +1,6 @@
+version 1.0.5
+    * repository checkout action was disabled if no working copy/repository opened, fix. (#604)
+
 version 1.0.4
     * due a backporting mistake from kde4 branch kdesvn 1.0.3 were not able to run - fixed (#562 - #564)
 

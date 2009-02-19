@@ -214,7 +214,22 @@ const QDateTime&SvnItem::fullDate()const
 
 QPixmap SvnItem::internalTransform(const QPixmap&first,int size)
 {
-    return first.scaled(QSize(size,size),Qt::KeepAspectRatio);
+    if (first.isNull()) {
+        return QPixmap();
+    }
+    QPixmap _p = first.scaled(QSize(size,size),Qt::KeepAspectRatio);
+    if (_p.width()==size && _p.height()==size) {
+        return _p;
+    }
+    QPixmap result(size,size);
+    result.fill(Qt::transparent);
+    QPainter pa;
+    pa.begin(&result);
+    int w = _p.width()>size?size:_p.width();
+    int h = _p.height()>size?size:_p.height();
+    pa.drawPixmap(0,0,_p,0,0,w,h);
+    pa.end();
+    return result;
 }
 
 QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
@@ -303,13 +318,14 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
                 KIconLoader::DefaultState);
         if (isLocked()) {
             m_bgColor = LOCKED;
-            QPixmap p2;
-            if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvnlocked",KIconLoader::Desktop,size);
-            if (!p2.isNull()) {
-                QImage i1; i1 = p.toImage();
-                QImage i2; i2 = p2.toImage();
-                KIconEffect::overlay(i1,i2);
-                p.fromImage(i1);
+            if (overlay) {
+                QPixmap p2 = KIconLoader::global()->loadIcon("kdesvnlocked",KIconLoader::Desktop,size);
+                if (!p2.isNull()) {
+                    QImage i1; i1 = p.toImage();
+                    QImage i2; i2 = p2.toImage();
+                    KIconEffect::overlay(i1,i2);
+                    p.fromImage(i1);
+                }
             }
         }
     } else {

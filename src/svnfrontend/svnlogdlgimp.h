@@ -57,6 +57,9 @@ protected slots:
     virtual void slotDispPrevious();
     virtual void slotDispSelected();
     virtual void slotRevisionSelected();
+    virtual void slotPrevFifty();
+    virtual void slotBeginHead();
+
 protected:
     QString _name;
     QString _base;

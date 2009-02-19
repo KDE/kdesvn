@@ -63,17 +63,17 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="3" >
+        <item row="1" column="4" >
          <widget class="QPushButton" name="m_PrevFiftyButton" >
           <property name="text" >
-           <string>Previous 50 entries</string>
+           <string>Previous entries</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="4" >
+        <item row="1" column="3" >
          <widget class="QPushButton" name="m_NextFiftyButton" >
           <property name="text" >
-           <string>Next 50 entries</string>
+           <string>Show from HEAD</string>
           </property>
          </widget>
         </item>
@@ -488,7 +488,7 @@
    <sender>m_NextFiftyButton</sender>
    <signal>clicked()</signal>
    <receiver>LogDialog</receiver>
-   <slot>slotNextFifty()</slot>
+   <slot>slotBeginHead()</slot>
    <hints>
     <hint type="sourcelabel" >
      <x>410</x>
@@ -505,7 +505,7 @@
   <slot>slotSingleDoubleClicked(QTreeWidgetItem*,int)</slot>
   <slot>slotChangedPathContextMenu(QPoint)</slot>
   <slot>slotCustomContextMenu(QPoint)</slot>
-  <slot>slotNextFifty()</slot>
   <slot>slotPrevFifty()</slot>
+  <slot>slotBeginHead()</slot>
  </slots>
 </ui>

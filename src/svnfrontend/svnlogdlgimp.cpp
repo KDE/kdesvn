@@ -331,6 +331,34 @@ void SvnLogDlgImp::slotGetLogs()
     }
 }
 
+void SvnLogDlgImp::slotPrevFifty()
+{
+    svn::Revision now = m_CurrentModel->min();
+    if (now == 1) {
+        return;
+    }
+    svn::Revision begin=now.revnum()-50;
+    if (begin.revnum()<1) {
+        begin = 1;
+    }
+    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(begin,
+                            svn::Revision::HEAD,m_peg,
+                            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,this);
+    if (lm) {
+        dispLog(lm);
+    }
+}
+
+void SvnLogDlgImp::slotBeginHead()
+{
+    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(svn::Revision::HEAD,
+                                        1,m_peg,
+                                        _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,this);
+    if (lm) {
+        dispLog(lm);
+    }
+}
+
 void SvnLogDlgImp::slotListEntries()
 {
     QModelIndex _index = selectedRow();

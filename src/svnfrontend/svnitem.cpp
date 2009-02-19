@@ -214,27 +214,7 @@ const QDateTime&SvnItem::fullDate()const
 
 QPixmap SvnItem::internalTransform(const QPixmap&first,int size)
 {
-    QPixmap result(size,size);
-    if (result.isNull()) {
-        return result;
-    }
-//     const QBitmap * b = first.mask();
-    const QBitmap b = first.mask();
-    result.fill(Qt::white);
-    if (!b.isNull()) {
-        result.setMask(b);
-    } else {
-        QBitmap m(size,size);
-        m.fill(Qt::white);
-        result.setMask(m);
-    }
-    QPainter pa;
-    pa.begin(&result);
-    int w = first.width()>size?size:first.width();
-    int h = first.height()>size?size:first.height();
-    pa.drawPixmap(0,0,first,0,0,w,h);
-    pa.end();
-    return result;
+    return first.scaled(QSize(size,size),Qt::KeepAspectRatio);
 }
 
 QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
@@ -292,6 +272,9 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
                 p = internalTransform(_p,size);
             } else {
                 p = _p;
+            }
+            if (p2.width()!=size || p2.height()!=size) {
+                p2=internalTransform(p2,size);
             }
             m_overlaycolor = true;
             QImage i1(p.toImage());

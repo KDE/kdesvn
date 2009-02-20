@@ -50,8 +50,8 @@ public:
     SvnItem_p();
     SvnItem_p(const svn::StatusPtr&);
     virtual ~SvnItem_p();
-    KFileItem*createItem(const svn::Revision&peg);
-    const KUrl& kdeName(const svn::Revision&);
+    KFileItem&createItem(const svn::Revision&peg);
+    KUrl&kdeName(const svn::Revision&);
     KMimeType::Ptr mimeType(bool dir=false);
 
 protected:
@@ -61,7 +61,7 @@ protected:
     KUrl m_kdename;
     QDateTime m_fullDate;
     QString m_infoText;
-    KFileItem*m_fitem;
+    KFileItem m_fitem;
     bool isWc;
     svn::Revision lRev;
     KMimeType::Ptr mptr;
@@ -81,7 +81,6 @@ SvnItem_p::SvnItem_p(const svn::StatusPtr&aStat)
 
 SvnItem_p::~SvnItem_p()
 {
-    delete m_fitem;
 }
 
 void SvnItem_p::init()
@@ -104,7 +103,6 @@ void SvnItem_p::init()
     m_url = m_Stat->entry().url();
     m_fullDate = svn::DateTime(m_Stat->entry().cmtDate());
     m_infoText = QString::null;
-    m_fitem = 0;
 }
 
 KMimeType::Ptr SvnItem_p::mimeType(bool dir)
@@ -122,7 +120,7 @@ KMimeType::Ptr SvnItem_p::mimeType(bool dir)
     return mptr;
 }
 
-const KUrl& SvnItem_p::kdeName(const svn::Revision&r)
+KUrl& SvnItem_p::kdeName(const svn::Revision&r)
 {
     isWc = !svn::Url::isValid(m_Stat->path());
     QString name;
@@ -144,12 +142,10 @@ const KUrl& SvnItem_p::kdeName(const svn::Revision&r)
     return m_kdename;
 }
 
-KFileItem*SvnItem_p::createItem(const svn::Revision&peg)
+KFileItem&SvnItem_p::createItem(const svn::Revision&peg)
 {
-    if (!m_fitem||!(peg==lRev) ) {
-        delete m_fitem;
-        m_fitem=0;
-        m_fitem=new KFileItem(KFileItem::Unknown,KFileItem::Unknown,kdeName(peg));
+    if (m_fitem.isNull()||!(peg==lRev) ) {
+        m_fitem=KFileItem(KFileItem::Unknown,KFileItem::Unknown,kdeName(peg));
     }
     return m_fitem;
 }
@@ -534,16 +530,16 @@ const QString& SvnItem::getToolTipText()
             if (wrap) {
                 QList<SvnItem*> lst; lst.append(this);
                 p_Item->m_infoText = wrap->getInfo(lst,rev,peg,false,false);
-                if (p_Item->m_fitem) p_Item->m_infoText+=p_Item->m_fitem->getToolTipText(0);
+                if (!p_Item->m_fitem.isNull()) p_Item->m_infoText+=p_Item->m_fitem.getToolTipText(0);
             }
-        } else if (p_Item->m_fitem){
-            p_Item->m_infoText=p_Item->m_fitem->getToolTipText(6);
+        } else if (!p_Item->m_fitem.isNull()){
+            p_Item->m_infoText=p_Item->m_fitem.getToolTipText(6);
         }
     }
     return p_Item->m_infoText;
 }
 
-KFileItem*SvnItem::fileItem()
+KFileItem SvnItem::fileItem()
 {
     return p_Item->createItem(correctPeg());
 }

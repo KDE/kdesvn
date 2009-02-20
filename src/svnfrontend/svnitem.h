@@ -84,7 +84,7 @@ public:
     bool isMissing()const;
     bool isDeleted()const;
     const QString& getToolTipText();
-    KFileItem*fileItem();
+    KFileItem fileItem();
 
 protected:
     bool m_overlaycolor;

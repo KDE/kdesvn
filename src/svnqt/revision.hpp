@@ -65,15 +65,37 @@ namespace svn
     assign(const QDateTime&);
 
   public:
+    /*!
+     * \defgroup Predefinedrevisions Predefined revision
+     *
+     * defines some well-known revision and revision-types for easier use.
+     */
+    /*@{*/
+    //! Describes the start revision
     static const svn_opt_revision_kind START;
+    //! Describes the base revision (eg, last update of working copy)
     static const svn_opt_revision_kind BASE;
+    //! Describes HEAD revision of repository, eg. latest commit into repository
     static const svn_opt_revision_kind HEAD;
+    //! Describes current working state of working copy
     static const svn_opt_revision_kind WORKING;
+    //! Describes not know revision
     static const svn_opt_revision_kind UNDEFINED;
+    //! Defines the revision before current head.
     static const svn_opt_revision_kind PREV;
-
+    //! the revision contains a date.
+    /*!
+     * When Revision is of this type the date() methode returns a valid value.
+     * \sa date()
+     */
     static const svn_opt_revision_kind DATE;
+    //! Revision contains a revision number
+    /*!
+     * When revision is of this type revnum() returns a valid value.
+     * @sa revnum()
+     */
     static const svn_opt_revision_kind NUMBER;
+    /*@}*/
 
     /**
      * Constructor
@@ -178,7 +200,7 @@ namespace svn
     bool isRemote()const;
 
     /**
-     * @return date
+     * @return valid date if kind is Revision::DATE
      */
     apr_time_t
     date () const;

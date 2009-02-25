@@ -33,6 +33,10 @@
       <arg type="as" direction="out"/>
       <arg name="wclist" type="as" direction="in"/>
   </method>
+  <method name="getTopLevelActionMenu">
+      <arg type="as" direction="out"/>
+      <arg name="wclist" type="as" direction="in"/>
+  </method>
   <method name="getSingleActionMenu">
       <arg type="as" direction="out"/>
       <arg name="wc" type="s" direction="in"/>

@@ -33,6 +33,7 @@ CmdExecSettings_impl::CmdExecSettings_impl(QWidget* parent)
     kcfg_cmdline_log_minline->setSpecialValueText(i18n("No minimum"));
     kcfg_cmdline_log_minline->setEnabled(kcfg_cmdline_show_logwindow->isChecked());
     kcfg_kio_standard_logmsg->setEnabled(kcfg_kio_use_standard_logmsg->isChecked());
+    kcfg_no_konqueror_toplevelmenu->setDisabled(kcfg_no_konqueror_contextmenu->isChecked());
 }
 
 CmdExecSettings_impl::~CmdExecSettings_impl()

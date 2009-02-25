@@ -5,11 +5,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>326</width>
-    <height>163</height>
+    <width>330</width>
+    <height>205</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
     <widget class="QCheckBox" name="kcfg_cmdline_show_logwindow" >
      <property name="toolTip" >
@@ -61,6 +61,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="kcfg_no_konqueror_toplevelmenu" >
+     <property name="toolTip" >
+      <string>If set, kdesvn will not show some extra actions inside "Action" menu of konqueror/dolphin</string>
+     </property>
+     <property name="text" >
+      <string>Don't display entries in toplevel action menu</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QCheckBox" name="kcfg_kio_use_standard_logmsg" >
      <property name="text" >
       <string>KIO operations use standard logmessage</string>
@@ -69,9 +79,6 @@
    </item>
    <item>
     <layout class="QGridLayout" >
-     <item row="0" column="1" >
-      <widget class="KLineEdit" name="kcfg_kio_standard_logmsg" />
-     </item>
      <item row="0" column="0" >
       <widget class="QLabel" name="stdLogmsgLabel" >
        <property name="text" >
@@ -85,6 +92,9 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="1" >
+      <widget class="KLineEdit" name="kcfg_kio_standard_logmsg" />
+     </item>
     </layout>
    </item>
    <item>
@@ -95,7 +105,7 @@
      <property name="sizeType" >
       <enum>QSizePolicy::Expanding</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>16</height>
@@ -154,6 +164,22 @@
     <hint type="destinationlabel" >
      <x>20</x>
      <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_no_konqueror_contextmenu</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_no_konqueror_toplevelmenu</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>164</x>
+     <y>85</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>164</x>
+     <y>114</y>
     </hint>
    </hints>
   </connection>

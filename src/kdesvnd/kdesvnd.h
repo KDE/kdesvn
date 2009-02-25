@@ -42,6 +42,7 @@ protected:
     bool isRepository(const KUrl&url);
     static QString cleanUrl(const KUrl&url);
     IListener*m_Listener;
+    QStringList getActionMenu(const KUrl::List&,bool toplevel);
 
 public Q_SLOTS:
     //! get a subversion login
@@ -65,6 +66,7 @@ public Q_SLOTS:
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
     QStringList get_sslclientcertpw(const QString&);
     QStringList getActionMenu(const KUrl::List&);
+    QStringList getTopLevelActionMenu(const KUrl::List&);
     QStringList getSingleActionMenu(const QString&);
 };
 #endif

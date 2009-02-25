@@ -225,6 +225,10 @@
       <default>false</default>
       <label>Should konqueror not display context menus for kdesvn?</label>
     </entry>
+    <entry key="no_konqueror_toplevelmenu" type="Bool" >
+        <default>false</default>
+        <label>Should konqueror not display kdesvn entries in main action menu?</label>
+    </entry>
     <entry key="cmdline_show_logwindow" type="Bool" >
       <default>true</default>
       <label>Show a small logwindow after executing a command.</label>

@@ -122,15 +122,25 @@ kdesvnd::~kdesvnd()
     delete m_Listener;
 }
 
+QStringList kdesvnd::getTopLevelActionMenu(const KUrl::List&list)
+{
+    return getActionMenu(list,true);
+}
+
 QStringList kdesvnd::getActionMenu (const KUrl::List& list)
+{
+    return getActionMenu(list,false);
+}
+
+QStringList kdesvnd::getActionMenu(const KUrl::List& list,bool toplevel)
 {
     QStringList result;
     Kdesvnsettings::self()->readConfig();
-    if (Kdesvnsettings::no_konqueror_contextmenu()||list.count()==0) {
+    if (Kdesvnsettings::no_konqueror_contextmenu()||list.count()==0 ||
+        (toplevel&&Kdesvnsettings::no_konqueror_toplevelmenu()) ) {
         return result;
     }
     QString base;
-
 
     bool parentIsWc = false;
     bool itemIsWc = isWorkingCopy(list[0],base);
@@ -158,41 +168,41 @@ QStringList kdesvnd::getActionMenu (const KUrl::List& list)
 
     if (!parentIsWc && !itemIsWc) {
         if (itemIsRepository) {
-            result << "Log"
-                    << "Info";
-            if (isRepository(list[0].upUrl())) {
-                result << "Blame"
-                        << "Rename";
+            result << "Log";
+            if (!toplevel) {
+                result << "Info";
+                if (isRepository(list[0].upUrl())) {
+                    result << "Blame"
+                            << "Rename";
+                }
+                result << "Tree";
             }
-            result << "Tree";
         }
-        return result;
+    } else if (!toplevel) {
+        if (!itemIsWc) {
+            result << "Add";
+            return result;
+        }
+
+        result << "Log"
+            << "Tree"
+            << "Info"
+            << "Diff"
+            << "Rename"
+            << "Revert";
+
+        KUrl url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
+
+        QFileInfo f(url.path());
+        if (f.isFile()) {
+            result << "Blame";
+        }
+
+        if (f.isDir()) {
+            result << "Addnew";
+            result << "Switch";
+        }
     }
-
-    if (!itemIsWc) {
-        result << "Add";
-        return result;
-    }
-
-    result << "Log"
-        << "Tree"
-        << "Info"
-        << "Diff"
-        << "Rename"
-        << "Revert";
-
-    KUrl url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
-
-    QFileInfo f(url.path());
-    if (f.isFile()) {
-        result << "Blame";
-    }
-
-    if (f.isDir()) {
-        result << "Addnew";
-        result << "Switch";
-    }
-
     return result;
 }
 

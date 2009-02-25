@@ -1,0 +1,107 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
+X-KDE-Priority=TopLevel
+
+X-KDE-GetActionMenu=org.kde.kded /modules/kdesvnd org.kde.kdesvnd getTopLevelActionMenu
+Actions=Checkout;Export;Update;Commit;Log;Exportto;Checkoutto;
+
+[Desktop Action Log]
+Name=kdesvn log (last 100)
+Name[es]=Mostrar registros (últimos 100)
+Icon=kdesvnlog
+Exec=kdesvn exec -r HEAD:1 -l 100 log %U
+Comment=Displays the subversion log
+Comment[es]=Muestra los registros de Subversion
+
+[Desktop Action Checkout]
+Name=Checkout From Repository...
+Name[bg]=Изтегляне от хранилището...
+Name[da]=Tjek ud fra lager...
+Name[et]=Hoidla väljavõte...
+Name[sr]=Довуци из складишта...
+Name[sr@Latn]=Dovuci iz skladišta...
+Name[sv]=Checka ut från ett arkiv...
+Name[tr]=Depodan Kontrol Et...
+Name[es]=Obtener del Repositorio...
+Icon=kdesvncheckout
+Exec=kdesvn exec checkout %U
+Comment=Checkout out files from an existing repository into this folder.
+Comment[bg]=Изтегляне на файлове от хранилището в текущата директория.
+Comment[da]=Tjek filer ud fra et eksisterende lager til denne mappe.
+Comment[et]=Olemasoleva hoidla failide väljavõte sellesse kataloogi.
+Comment[sr]=Довуци фајлове из постојећег складишта у ову фасциклу.
+Comment[sr@Latn]=Dovuci fajlove iz postojećeg skladišta u ovu fasciklu.
+Comment[sv]=Checka ut filer från ett befintligt arkiv till katalogen.
+Comment[tr]=Bu dizinde var olan bir depodan hatalı dosyaları kontrol et.
+Comment[es]=Extrae ficheros de un repositorio existente hacia esta carpeta.
+
+[Desktop Action Export]
+Name=Export...
+Name[bg]=Експорт...
+Name[br]=Ezporzh ...
+Name[cy]=Allforio...
+Name[da]=Eksportér...
+Name[et]=Eksport...
+Name[ga]=Easpórtáil...
+Name[sr]=Извези...
+Name[sr@Latn]=Izvezi...
+Name[sv]=Exportera...
+Name[tr]=Dışa Aktar...
+Name[es]=Exportar...
+Icon=kdesvnexport
+Exec=kdesvn exec export %U
+Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[bg]=Изтегляне на копие на дървото от хранилището.
+Comment[da]=Tjek en kopi uden version ud af et træ fra et lager
+Comment[et]=Hoidla failipuu versioonita koopia väljavõte
+Comment[sr]=Довуци неверзирану копију стабла из складишта
+Comment[sr@Latn]=Dovuci neverziranu kopiju stabla iz skladišta
+Comment[sv]=Checka ut en kopia utan versionskontroll från ett arkiv
+Comment[tr]=Depodaki bir ağaçtan kusurlu bir versionsuz kopyayı kontrol et
+Comment[es]=Obtener una copia no versionada de un árbol de un repositorio
+
+[Desktop Action Update]
+Name=Update (Kdesvn)
+Name[bg]=Обновяване SVN
+Name[da]=SVN Opdatér
+Name[et]=SVN uuendamine
+Name[sr]=SVN ажурирање
+Name[sr@Latn]=SVN ažuriranje
+Name[sv]=SVN-uppdatera
+Name[tr]=SVN Güncelleme
+Name[es]=(SVN) Actualizar
+Icon=kdesvnupdate
+Exec=kdesvn exec update %U
+
+[Desktop Action Commit]
+Name=Commit (Kdesvn)
+Name[bg]=Предаване SVN
+Name[et]=SVN sissekanne
+Name[sr]=SVN предаја
+Name[sr@Latn]=SVN predaja
+Name[sv]=SVN-arkivera
+Name[tr]=SVN Teslim Etme
+Name[es]=(SVN) Confirmar
+Icon=kdesvncommit
+Exec=kdesvn exec commit %U
+
+[Desktop Action Checkoutto]
+Name=Checkout from a repository...
+Name[de]=Checkout einer Repository
+Name[es]=Obtener de Subversion...
+Icon=kdesvncheckout
+Exec=kdesvn exec checkoutto %U
+Comment=Checkout out files from an existing repository into this folder.
+Comment[de]=Erzeuge eine Arbeitskopie von einer Repository
+Comment[es]=Extraer ficheros de un repositorio existente hacia esta carpeta.
+
+[Desktop Action Exportto]
+Name=Export from a subversion repository...
+Name[de]=Exportiere von einer Subversion Repository...
+Name[es]=Exportar de Subversion...
+Icon=kdesvnexport
+Exec=kdesvn exec exportto %U
+Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[de]=Hole eine unversionierte Kopie eines Baums von einer Repository
+Comment[es]=Obtener una copia no versionada del árbol de un repositorio

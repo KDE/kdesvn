@@ -212,6 +212,18 @@ QStringList kdesvnd::getSingleActionMenu(const QString& what)
     return getActionMenu(l);
 }
 
+QStringList kdesvnd::get_saved_login(const QString&realm,const QString&user)
+{
+    QString username;
+    QString password;
+    PwStorage::self()->getLogin(realm,username,password);
+    QStringList res;
+    res.append(username);
+    res.append(password);
+    return res;
+
+}
+
 QStringList kdesvnd::get_login(const QString&realm,const QString&user)
 {
     AuthDialogImpl auth(realm,user);
@@ -246,6 +258,15 @@ int kdesvnd::get_sslaccept(const QString& hostname,const QString& fingerprint,co
         return 0;
     }
     return 1;
+}
+
+QString kdesvnd::load_sslclientcertpw(const QString& realm)
+{
+    QString password;
+    if (!PwStorage::self()->getCertPw(realm,password)) {
+        return QString::null;
+    }
+    return password;
 }
 
 QStringList kdesvnd::get_sslclientcertpw(const QString& realm)

@@ -52,6 +52,13 @@ public Q_SLOTS:
     * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
     */
     QStringList get_login(const QString&,const QString&);
+    //! get a saved subversion login
+    /*!
+    * \param realm the realm
+    * \param user default username
+    * \return a stringlist containing username-password
+    */
+    QStringList get_saved_login(const QString&realm,const QString&user);
 
     // return: -1 dont accept 0 accept temporary 1 accept always
     //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
@@ -63,6 +70,9 @@ public Q_SLOTS:
     QStringList get_logmsg();
     // return a logmessage at pos 0, null-size list if cancel hit, parameter is path -> action for display
     QStringList get_logmsg(const QDBusVariant&);
+
+    // return pw loaded from wallet if existent
+    QString load_sslclientcertpw(const QString& realm);
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
     QStringList get_sslclientcertpw(const QString&);
     QStringList getActionMenu(const KUrl::List&);

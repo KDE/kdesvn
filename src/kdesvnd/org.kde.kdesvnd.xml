@@ -2,44 +2,53 @@
 <node>
   <interface name="org.kde.kdesvnd">
     <method name="get_login">
-      <arg type="as" direction="out"/>
-      <arg name="realm" type="s" direction="in"/>
-      <arg name="user" type="s" direction="in"/>
-     </method>
-  <method name="get_sslaccept">
-    <arg type="i" direction="out" />
-    <arg type="s" direction="in" name="hostname"/>
-    <arg type="s" direction="in" name="fingerprint"/>
-    <arg type="s" direction="in" name="validfrom"/>
-    <arg type="s" direction="in" name="validuntil"/>
-    <arg type="s" direction="in" name="issuerDName"/>
-    <arg type="s" direction="in" name="realm"/>
-  </method>
-  <method name="get_sslclientcertfile">
-    <arg type="s" direction="out"/>
-  </method>
-  <method name="get_logmsg">
-   <arg type="as" direction="out" />
-  </method>
-  <method name="get_logmsg">
-   <arg type="as" direction="out" />
-   <arg type="v" direction="in" name="pathactions" />
-  </method>
-  <method name="get_sslclientcertpw">
+        <arg type="as" direction="out"/>
+        <arg name="realm" type="s" direction="in"/>
+        <arg name="user" type="s" direction="in"/>
+    </method>
+    <method name="get_saved_login">
+        <arg type="as" direction="out"/>
+        <arg name="realm" type="s" direction="in"/>
+        <arg name="user" type="s" direction="in"/>
+    </method>
+    <method name="get_sslaccept">
+        <arg type="i" direction="out" />
+        <arg type="s" direction="in" name="hostname"/>
+        <arg type="s" direction="in" name="fingerprint"/>
+        <arg type="s" direction="in" name="validfrom"/>
+        <arg type="s" direction="in" name="validuntil"/>
+        <arg type="s" direction="in" name="issuerDName"/>
+        <arg type="s" direction="in" name="realm"/>
+    </method>
+    <method name="get_sslclientcertfile">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="get_logmsg">
     <arg type="as" direction="out" />
-    <arg type="s" direction="in" name="realm"/>
-  </method>
-  <method name="getActionMenu">
-      <arg type="as" direction="out"/>
-      <arg name="wclist" type="as" direction="in"/>
-  </method>
-  <method name="getTopLevelActionMenu">
-      <arg type="as" direction="out"/>
-      <arg name="wclist" type="as" direction="in"/>
-  </method>
-  <method name="getSingleActionMenu">
-      <arg type="as" direction="out"/>
-      <arg name="wc" type="s" direction="in"/>
-  </method>
+    </method>
+    <method name="get_logmsg">
+    <arg type="as" direction="out" />
+    <arg type="v" direction="in" name="pathactions" />
+    </method>
+    <method name="load_sslclientcertpw">
+        <arg type="s" direction="out" />
+        <arg type="s" direction="in" name="realm"/>
+    </method>
+    <method name="get_sslclientcertpw">
+        <arg type="as" direction="out" />
+        <arg type="s" direction="in" name="realm"/>
+    </method>
+    <method name="getActionMenu">
+        <arg type="as" direction="out"/>
+        <arg name="wclist" type="as" direction="in"/>
+    </method>
+    <method name="getTopLevelActionMenu">
+        <arg type="as" direction="out"/>
+        <arg name="wclist" type="as" direction="in"/>
+    </method>
+    <method name="getSingleActionMenu">
+        <arg type="as" direction="out"/>
+        <arg name="wc" type="s" direction="in"/>
+    </method>
   </interface>
  </node>

@@ -300,7 +300,20 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data, apr_u
 
 bool KioListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
 {
-    return PwStorage::self()->getCertPw(realm,password);
+    QDBusReply<QString> res;
+
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+        kWarning() << "Communication with KDED:KdeSvnd failed";
+        return false;
+    }
+    res=kdesvndInterface.load_sslclientcertpw(realm);
+    if (!res.isValid()) {
+        kWarning() << "Unexpected reply type";
+        return false;
+    }
+    password = res.value();
+    return true;
 }
 
 bool KioListener::contextSslClientCertPrompt (QString & certFile)
@@ -335,7 +348,25 @@ bool KioListener::contextSslClientCertPwPrompt (QString & password,
 
 bool KioListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
-    PwStorage::self()->getLogin(realm,username,password);
+    QDBusReply<QStringList> res;
+
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+        kWarning() << "Communication with KDED:KdeSvnd failed";
+        return false;
+    }
+    res=kdesvndInterface.get_saved_login(realm,username);
+    if (!res.isValid()) {
+        kWarning() << "Unexpected reply type";
+        return false;
+    }
+    QStringList lt = res.value();
+    if (lt.count()!=2) {
+        kDebug(9510)<<"Wrong or missing auth list." << endl;
+        return false;
+    }
+    username = lt[0];
+    password = lt[1];
     return true;
 }
 

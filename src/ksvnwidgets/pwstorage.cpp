@@ -75,13 +75,12 @@ PwStorageData::cache_type*PwStorageData::getLoginCache()
 KWallet::Wallet*PwStorageData::getWallet()
 {
     static bool walletOpenFailed = false;
-    if (m_Wallet && m_Wallet->isOpen()) {
+    if ( (m_Wallet && m_Wallet->isOpen()) || !qApp) {
         return m_Wallet;
     }
-
     if (KWallet::Wallet::isEnabled()) {
         WId window = 0;
-        if ( qApp->activeWindow() ) {
+        if (qApp && qApp->activeWindow() ) {
             window = qApp->activeWindow()->winId();
         }
         delete m_Wallet;

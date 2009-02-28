@@ -840,6 +840,13 @@ namespace svn
         Context*m_context;
         PathPropertiesMapList*resultlist;
     };
+    static void checkErrorThrow(svn_error_t*error)throw(ClientException)
+    {
+        if (!error || error->apr_err==APR_SUCCESS) {
+            return;
+        }
+        throw ClientException (error);
+    }
 
   private:
     ContextP m_context;

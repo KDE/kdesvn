@@ -323,11 +323,7 @@ namespace svn
       pool);
 #endif
 
-    if (error!=NULL)
-    {
-      throw ClientException (error);
-    }
-
+    Client_impl::checkErrorThrow(error);
     apr_array_header_t *statusarray =
       svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
                             pool);
@@ -456,10 +452,7 @@ namespace svn
       *context,    //client ctx
       pool);
 #endif
-    if (error != NULL)
-    {
-      throw ClientException (error);
-    }
+    Client_impl::checkErrorThrow(error);
 
     apr_array_header_t *statusarray =
       svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
@@ -562,10 +555,7 @@ namespace svn
       *m_context, // client ctx
       pool);
 #endif
-    if (error != NULL)
-    {
-      throw ClientException (error);
-    }
+    checkErrorThrow(error);
     return true;
   }
 
@@ -636,11 +626,7 @@ namespace svn
       *m_context, // client ctx
       pool);
 #endif
-    if (error != NULL)
-    {
-      throw ClientException (error);
-    }
-
+    checkErrorThrow(error);
     return entries;
   }
 
@@ -671,9 +657,7 @@ namespace svn
     error = svn_opt_parse_path(&pegr, &truepath,
                                  _buf,
                                  pool);
-    if (error != NULL)
-      throw ClientException (error);
-
+    checkErrorThrow(error);
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
         if ((svn_path_is_url (_p.cstr())) && (pegr.kind == svn_opt_revision_unspecified)) {
             pegr.kind = svn_opt_revision_head;
@@ -706,9 +690,7 @@ namespace svn
                       pool);
 #endif
 
-    if (error != NULL)
-      throw ClientException (error);
-
+    checkErrorThrow(error);
     apr_array_header_t *statusarray =
       svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
                             pool);
@@ -724,8 +706,7 @@ namespace svn
       ientries.push_back(*e);
       delete e;
     }
-    if (error != NULL)
-      throw ClientException (error);
+    checkErrorThrow(error);
     return ientries;
   }
 

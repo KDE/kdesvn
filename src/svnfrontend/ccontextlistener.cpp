@@ -133,8 +133,10 @@ bool CContextListener::contextGetCachedLogin (const QString & realm,QString & us
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
+    emit waitShow(true);
     PwStorage::self()->getLogin(realm,username,password);
     PwStorage::self()->setCachedLogin(realm,username,password);
+    emit waitShow(false);
     /* the return value isn't interesting to us... */
     return true;
 }

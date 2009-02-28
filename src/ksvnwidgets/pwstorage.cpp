@@ -80,8 +80,12 @@ KWallet::Wallet*PwStorageData::getWallet()
     }
     if (KWallet::Wallet::isEnabled()) {
         WId window = 0;
-        if (qApp && qApp->activeWindow() ) {
-            window = qApp->activeWindow()->winId();
+        if (qApp) {
+            if (qApp->activeModalWidget()) {
+                window = qApp->activeModalWidget()->winId();
+            } else if (qApp->activeWindow()) {
+                window = qApp->activeWindow()->winId();
+            }
         }
         delete m_Wallet;
         m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),window);

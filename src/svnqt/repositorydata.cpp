@@ -31,7 +31,7 @@ namespace svn {
 
 namespace repository {
 
-class RepoOutStream:public stream::SvnStream
+class SVNQT_NOEXPORT RepoOutStream:public stream::SvnStream
 {
 public:
     RepoOutStream(RepositoryData*);

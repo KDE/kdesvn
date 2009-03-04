@@ -22,6 +22,7 @@
 #include "models/svnitemmodel.h"
 #include "models/svnitemnode.h"
 #include "models/svnsortfilter.h"
+#include "models/svndirsortfilter.h"
 #include "cursorstack.h"
 #include "svnactions.h"
 #include "copymoveview_impl.h"
@@ -66,6 +67,7 @@ public:
         m_Collection=0;
         m_Model = 0;
         m_SortModel=0;
+        m_DirSortModel = 0;
         m_remoteRevision=svn::Revision::UNDEFINED;
         tipTimer=0;
     }
@@ -74,6 +76,7 @@ public:
     {
         delete m_Model;
         delete m_SortModel;
+        delete m_DirSortModel;
         delete tipTimer;
     }
 
@@ -97,6 +100,7 @@ public:
     KActionCollection*m_Collection;
     SvnItemModel*m_Model;
     SvnSortFilterProxy*m_SortModel;
+    SvnDirSortFilterProxy*m_DirSortModel;
     svn::Revision m_remoteRevision;
     QTimer*tipTimer;
     QString merge_Target,merge_Src2,merge_Src1;
@@ -118,6 +122,14 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     m_TreeView->setModel(m_Data->m_SortModel);
     m_Data->m_Model = new SvnItemModel(this);
     m_Data->m_SortModel->setSourceSvnModel(m_Data->m_Model);
+
+    m_Data->m_DirSortModel = new SvnDirSortFilterProxy();
+    m_Data->m_DirSortModel->setDynamicSortFilter(true);
+    m_Data->m_DirSortModel->setSortRole(SORT_ROLE);
+    m_Data->m_DirSortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort()?Qt::CaseSensitive:Qt::CaseInsensitive);
+    m_DirTreeView->sortByColumn(0,Qt::AscendingOrder);
+    m_DirTreeView->setModel(m_Data->m_DirSortModel);
+    m_Data->m_DirSortModel->setSourceSvnModel(m_Data->m_Model);
 
     m_Data->tipTimer = new QTimer(this);
     m_Data->tipTimer->setSingleShot(true);

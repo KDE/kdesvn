@@ -176,17 +176,20 @@ bool SvnItemModel::hasChildren(const QModelIndex & parent)const
     return static_cast<SvnItemModelNode*>(parent.internalPointer())->NodeHasChilds();
 }
 
-bool SvnItemModel::filterIndex(const QModelIndex&parent,int childRow)const
+bool SvnItemModel::filterIndex(const QModelIndex&parent,int childRow,svnmodel::ItemTypeFlag showOnly)const
 {
+    SvnItemModelNode* node=m_Data->nodeForIndex(parent);
     if (childRow<0) {
         return false;
     }
-    SvnItemModelNode* node=m_Data->nodeForIndex(parent);
-    if (!node->isDir()) {
-        return false;
+    if (!node->NodeIsDir()) {
+       return false;
     }
     SvnItemModelNode*child=static_cast<SvnItemModelNodeDir*>(node)->child(childRow);
     if (child) {
+        if ( (child->isDir()&&!showOnly.testFlag(svnmodel::Dir))  || (!child->isDir()&&!showOnly.testFlag(svnmodel::File)) ) {
+            return true;
+        }
         return m_Data->m_Display->filterOut(child);
     }
     return false;

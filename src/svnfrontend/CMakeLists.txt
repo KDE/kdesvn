@@ -52,6 +52,8 @@ SET(svnfrontendsrc
     models/svnitemmodel.cpp
     models/svnsortfilter.cpp
     models/svnsortfilter.h
+    models/svndirsortfilter.cpp
+    models/svndirsortfilter.h
     hotcopydlg_impl.cpp
     importdir_logmsg.cpp
     itemdisplay.cpp

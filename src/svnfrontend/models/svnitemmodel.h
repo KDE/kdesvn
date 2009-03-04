@@ -21,6 +21,9 @@
 #define _SVNITEMMODEL_H
 
 #include <QAbstractListModel>
+
+#include "svnitemmodelfwd.h"
+
 #include "src/svnqt/shared_pointer.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 
@@ -29,8 +32,6 @@
 class SvnItemModelData;
 class QItemSelectionModel;
 class MainTreeWidget;
-class SvnItemModelNode;
-class SvnItemModelNodeDir;
 class SvnActions;
 class QMimeData;
 
@@ -92,7 +93,7 @@ public:
     QMimeData* mimeData(const QModelIndexList & indexes )const;
     virtual bool dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column,const QModelIndex & parent);
 
-    bool filterIndex(const QModelIndex&,int)const;
+    bool filterIndex(const QModelIndex&,int,svnmodel::ItemTypeFlag)const;
 
     /* svn actions starts here */
     void makeIgnore(const QModelIndex&);

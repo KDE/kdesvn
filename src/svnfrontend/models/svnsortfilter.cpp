@@ -25,7 +25,7 @@
 #include <kdebug.h>
 
 SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
-    :QSortFilterProxyModel(parent),m_sourceModel(0),m_order(Qt::AscendingOrder)
+    :QSortFilterProxyModel(parent),m_sourceModel(0),m_order(Qt::AscendingOrder),m_ShowFilter(svnmodel::All)
 {
 }
 
@@ -79,13 +79,26 @@ bool SvnSortFilterProxy::lessThan(const QModelIndex & left,const QModelIndex & r
 
 bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex & source_parent)const
 {
+#if 0
     if (!source_parent.isValid()) {
+
+        kDebug()<<"Invalid parent"<<endl;
+        if (!m_ShowFilter.testFlag(svnmodel::Dir)) {
+            return false;
+        }
         return QSortFilterProxyModel::filterAcceptsRow(source_row,source_parent);
     }
-    if (m_sourceModel->filterIndex(source_parent,source_row)) {
+#endif
+    kDebug()<<source_parent<<endl;
+    if (m_sourceModel->filterIndex(source_parent,source_row,m_ShowFilter)) {
         return false;
     }
     return QSortFilterProxyModel::filterAcceptsRow(source_row,source_parent);
+}
+
+void SvnSortFilterProxy::setShowFilter(svnmodel::ItemTypeFlag fl)
+{
+    m_ShowFilter = fl;
 }
 
 #include "svnsortfilter.moc"

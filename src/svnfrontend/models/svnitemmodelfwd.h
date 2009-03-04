@@ -18,7 +18,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
+#ifndef _SVNITEMMODELFWD_H
+#define _SVNITEMMODELFWD_H
+
 #include "src/svnqt/shared_pointer.hpp"
+
+#include <QFlags>
 
 class SvnItemModelNode;
 class SvnItemModelNodeDir;
+class SvnItemModel;
+
+namespace svnmodel {
+
+    enum ItemType {
+        None = 0x0,
+        Dir  = 1,
+        File = 2,
+        All = Dir|File
+    };
+
+    Q_DECLARE_FLAGS(ItemTypeFlag, ItemType);
+    Q_DECLARE_OPERATORS_FOR_FLAGS(svnmodel::ItemTypeFlag);
+}
+
+#endif

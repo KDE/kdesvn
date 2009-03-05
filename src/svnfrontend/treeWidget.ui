@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>527</width>
-    <height>401</height>
+    <width>368</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="contextMenuPolicy" >
@@ -24,7 +24,14 @@
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QTreeView" name="m_DirTreeView" />
+     <property name="handleWidth" >
+      <number>4</number>
+     </property>
+     <widget class="QTreeView" name="m_DirTreeView" >
+      <property name="sortingEnabled" >
+       <bool>true</bool>
+      </property>
+     </widget>
      <widget class="QTreeView" name="m_TreeView" >
       <property name="sizeIncrement" >
        <size>
@@ -47,14 +54,23 @@
       <property name="verticalScrollMode" >
        <enum>QAbstractItemView::ScrollPerItem</enum>
       </property>
+      <property name="rootIsDecorated" >
+       <bool>false</bool>
+      </property>
       <property name="uniformRowHeights" >
        <bool>true</bool>
+      </property>
+      <property name="itemsExpandable" >
+       <bool>false</bool>
       </property>
       <property name="sortingEnabled" >
        <bool>true</bool>
       </property>
       <property name="allColumnsShowFocus" >
        <bool>true</bool>
+      </property>
+      <property name="expandsOnDoubleClick" >
+       <bool>false</bool>
       </property>
      </widget>
     </widget>
@@ -70,8 +86,8 @@
    <slot>slotItemActivated(QModelIndex)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>72</x>
-     <y>59</y>
+     <x>184</x>
+     <y>68</y>
     </hint>
     <hint type="destinationlabel" >
      <x>72</x>
@@ -86,8 +102,8 @@
    <slot>slotContextMenu(QPoint)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>64</x>
-     <y>42</y>
+     <x>184</x>
+     <y>51</y>
     </hint>
     <hint type="destinationlabel" >
      <x>64</x>
@@ -102,8 +118,8 @@
    <slot>slotItemExpanded(QModelIndex)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>41</x>
-     <y>29</y>
+     <x>184</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel" >
      <x>41</x>
@@ -116,5 +132,6 @@
   <slot>slotItemActivated(QModelIndex)</slot>
   <slot>slotContextMenu(QPoint)</slot>
   <slot>slotItemExpanded(QModelIndex)</slot>
+  <slot>slotDirItemActivated(QModelIndex)</slot>
  </slots>
 </ui>

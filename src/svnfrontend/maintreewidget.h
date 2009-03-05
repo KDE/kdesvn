@@ -128,6 +128,8 @@ protected Q_SLOTS:
     void slotChangeToRepository();
     void slotCheckNewItems();
 
+    void slotDirSelectionChanged(const QItemSelection&,const QItemSelection&);
+
     void _openUrl(const QString&);
     void enableActions();
     void slotUnfoldTree();

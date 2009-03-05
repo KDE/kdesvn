@@ -85,6 +85,11 @@ public:
         return m_SortModel->mapToSource(ind);
     }
 
+    QModelIndex srcDirInd(const QModelIndex&ind)
+    {
+        return m_DirSortModel->mapToSource(ind);
+    }
+
     SvnItemModelNode*sourceNode(const QModelIndex&index)
     {
         if (!index.isValid()) {
@@ -138,6 +143,10 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     connect(m_TreeView->selectionModel(),
         SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)),
         this,SLOT(slotSelectionChanged(const QItemSelection&,const QItemSelection&)));
+
+    connect(m_DirTreeView->selectionModel(),
+        SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)),
+        this,SLOT(slotDirSelectionChanged(const QItemSelection&,const QItemSelection&)));
 
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
     connect(m_Data->m_Model,SIGNAL(clientException(const QString&)),this,SLOT(slotClientException(const QString&)));
@@ -261,7 +270,8 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
     bool result = m_Data->m_Model->checkDirs(baseUri(),0)>-1;
     if (result && isWorkingCopy()) {
         m_Data->m_Model->svnWrapper()->createModifiedCache(baseUri());
-        m_TreeView->expandToDepth(0);
+        m_DirTreeView->expandToDepth(0);
+        m_DirTreeView->selectionModel()->select(m_Data->m_DirSortModel->mapFromSource(m_Data->m_Model->firstRootIndex()),QItemSelectionModel::Select);
     }
 
     m_TreeView->resizeColumnToContents(SvnItemModel::Name);
@@ -1908,6 +1918,24 @@ void MainTreeWidget::slotItemsInserted(const QModelIndex&)
     m_TreeView->resizeColumnToContents(SvnItemModel::Status);
     m_TreeView->resizeColumnToContents(SvnItemModel::LastAuthor);
     m_TreeView->resizeColumnToContents(SvnItemModel::LastDate);
+}
+
+void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QItemSelection&)
+{
+    QModelIndexList _indexes = _item.indexes();
+    if (_indexes.size()<1) {
+        return;
+    }
+    QModelIndex ind = _indexes[0];
+    kDebug()<<ind <<" -> " <<m_Data->srcDirInd(ind)<<endl;
+    QModelIndex _t =m_Data->srcDirInd(ind);
+    if (m_Data->m_Model->canFetchMore(_t)) {
+        WidgetBlockStack st(m_TreeView);
+        WidgetBlockStack st2(m_DirTreeView);
+        m_Data->m_Model->fetchMore(_t);
+    }
+    _t = m_Data->m_SortModel->mapFromSource(_t);
+    m_TreeView->setRootIndex(_t);
 }
 
 #include "maintreewidget.moc"

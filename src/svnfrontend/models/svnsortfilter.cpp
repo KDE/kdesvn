@@ -89,7 +89,7 @@ bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex & so
         return QSortFilterProxyModel::filterAcceptsRow(source_row,source_parent);
     }
 #endif
-    kDebug()<<source_parent<<endl;
+    kDebug()<<m_ShowFilter<< " -> " << source_parent<<endl;
     if (m_sourceModel->filterIndex(source_parent,source_row,m_ShowFilter)) {
         return false;
     }

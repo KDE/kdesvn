@@ -178,6 +178,16 @@ void MainTreeWidget::_openUrl(const QString&url)
     openUrl(url,true);
 }
 
+void MainTreeWidget::resizeAllColumns()
+{
+    m_TreeView->resizeColumnToContents(SvnItemModel::Name);
+    m_TreeView->resizeColumnToContents(SvnItemModel::Status);
+    m_TreeView->resizeColumnToContents(SvnItemModel::LastRevision);
+    m_TreeView->resizeColumnToContents(SvnItemModel::LastAuthor);
+    m_TreeView->resizeColumnToContents(SvnItemModel::LastDate);
+    m_DirTreeView->resizeColumnToContents(SvnItemModel::Name);
+}
+
 bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
 {
     CursorStack a;
@@ -273,12 +283,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
         m_DirTreeView->expandToDepth(0);
         m_DirTreeView->selectionModel()->select(m_Data->m_DirSortModel->mapFromSource(m_Data->m_Model->firstRootIndex()),QItemSelectionModel::Select);
     }
-
-    m_TreeView->resizeColumnToContents(SvnItemModel::Name);
-    m_TreeView->resizeColumnToContents(SvnItemModel::Status);
-    m_TreeView->resizeColumnToContents(SvnItemModel::LastRevision);
-    m_TreeView->resizeColumnToContents(SvnItemModel::LastAuthor);
-    m_TreeView->resizeColumnToContents(SvnItemModel::LastDate);
+    resizeAllColumns();
 
     if (!result) {
         setBaseUri("");
@@ -292,7 +297,6 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
         }
     }
     if (result && Kdesvnsettings::log_cache_on_open()) {
-        kDebug()<<"Starting logcache"<<endl;
         m_Data->m_Model->svnWrapper()->startFillCache(baseUri());
     }
 
@@ -379,20 +383,25 @@ bool MainTreeWidget::event(QEvent*event)
 {
     if (event->type() == QEvent::ToolTip) {
         hideTips();
+        QModelIndex mi,sm;
         QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
         QPoint vp = m_TreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
-        QModelIndex mi = m_TreeView->indexAt(vp);
+        mi = m_TreeView->indexAt(vp);
         if (mi.isValid()) {
-            QModelIndex sm = m_Data->m_SortModel->mapToSource(mi);
-            if (sm.isValid()) {
-                SvnItemModelNode*item = static_cast<SvnItemModelNode*>(sm.internalPointer());
-                QToolTip::showText(helpEvent->globalPos(),item->getToolTipText());
-                m_Data->tipTimer->start(5000);
+            sm = m_Data->m_SortModel->mapToSource(mi);
+        } else {
+            vp = m_DirTreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
+            mi = m_DirTreeView->indexAt(vp);
+            if (mi.isValid()) {
+                sm = m_Data->m_DirSortModel->mapToSource(mi);
             }
         }
-    }/* else if (event->type()==QEvent::Drop) {
-        kDebug(9510)<<event<<endl;
-    }*/
+        if (sm.isValid()) {
+            SvnItemModelNode*item = static_cast<SvnItemModelNode*>(sm.internalPointer());
+            QToolTip::showText(helpEvent->globalPos(),item->getToolTipText());
+            m_Data->tipTimer->start(5000);
+        }
+    }
     return QWidget::event(event);
 }
 
@@ -778,6 +787,7 @@ void MainTreeWidget::slotItemActivated(const QModelIndex&_index)
 
 void MainTreeWidget::itemActivated(const QModelIndex&index,bool keypress)
 {
+    Q_UNUSED(keypress);
     SvnItemModelNode*item;
     if (index.isValid() && (item=static_cast<SvnItemModelNode*>(index.internalPointer()))) {
         if (!item->isDir()) {
@@ -794,12 +804,11 @@ void MainTreeWidget::itemActivated(const QModelIndex&index,bool keypress)
             } else {
                 KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
             }
-        } else if (keypress){
-            QModelIndex i=m_Data->m_SortModel->mapFromSource(index);
-            if (m_TreeView->isExpanded(i)) {
-                m_TreeView->collapse(i);
-            } else {
-                m_TreeView->expand(i);
+        } else {
+            m_DirTreeView->selectionModel()->select(m_Data->m_DirSortModel->mapFromSource(index),QItemSelectionModel::ClearAndSelect);
+            QModelIndex _ind = m_Data->m_Model->parent(index);
+            if (_ind.isValid()) {
+                m_DirTreeView->expand(m_Data->m_DirSortModel->mapFromSource(_ind));
             }
         }
     }
@@ -1914,20 +1923,17 @@ void MainTreeWidget::slotItemExpanded(const QModelIndex&)
 
 void MainTreeWidget::slotItemsInserted(const QModelIndex&)
 {
-    m_TreeView->resizeColumnToContents(SvnItemModel::Name);
-    m_TreeView->resizeColumnToContents(SvnItemModel::Status);
-    m_TreeView->resizeColumnToContents(SvnItemModel::LastAuthor);
-    m_TreeView->resizeColumnToContents(SvnItemModel::LastDate);
+    resizeAllColumns();
 }
 
 void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QItemSelection&)
 {
     QModelIndexList _indexes = _item.indexes();
     if (_indexes.size()<1) {
+        m_TreeView->setRootIndex(QModelIndex());
         return;
     }
     QModelIndex ind = _indexes[0];
-    kDebug()<<ind <<" -> " <<m_Data->srcDirInd(ind)<<endl;
     QModelIndex _t =m_Data->srcDirInd(ind);
     if (m_Data->m_Model->canFetchMore(_t)) {
         WidgetBlockStack st(m_TreeView);
@@ -1936,6 +1942,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
     }
     _t = m_Data->m_SortModel->mapFromSource(_t);
     m_TreeView->setRootIndex(_t);
+    resizeAllColumns();
 }
 
 #include "maintreewidget.moc"

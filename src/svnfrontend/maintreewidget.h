@@ -155,6 +155,8 @@ protected:
 
     void internalDrop(const KUrl::List&_lst,Qt::DropAction action,const QModelIndex&index);
 
+    void resizeAllColumns();
+
 private:
     MainTreeWidgetData*m_Data;
     void enableAction(const QString&,bool);

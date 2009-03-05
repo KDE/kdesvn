@@ -20,7 +20,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
-    <widget class="QSplitter" name="splitter" >
+    <widget class="QSplitter" name="m_ViewSplitter" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
@@ -28,16 +28,22 @@
       <number>4</number>
      </property>
      <widget class="QTreeView" name="m_DirTreeView" >
+      <property name="sizePolicy" >
+       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="sortingEnabled" >
        <bool>true</bool>
       </property>
      </widget>
      <widget class="QTreeView" name="m_TreeView" >
-      <property name="sizeIncrement" >
-       <size>
-        <width>2</width>
-        <height>0</height>
-       </size>
+      <property name="sizePolicy" >
+       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+        <horstretch>2</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
       <property name="contextMenuPolicy" >
        <enum>Qt::CustomContextMenu</enum>

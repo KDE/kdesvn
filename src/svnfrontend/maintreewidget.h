@@ -53,6 +53,7 @@ public:
     virtual QModelIndex SelectedIndex()const;
     SvnItemModelNode*SelectedNode()const;
     virtual void SelectionList(SvnItemList&target)const;
+    virtual void DirSelectionList(SvnItemList&target)const;
     virtual SvnItem* SelectedOrMain()const;
     virtual const svn::Revision&baseRevision()const;
     void refreshItem(SvnItemModelNode*node);
@@ -128,6 +129,9 @@ protected Q_SLOTS:
     void slotChangeToRepository();
     void slotCheckNewItems();
 
+    void slotCommit();
+    void slotDirCommit();
+
     void slotDirSelectionChanged(const QItemSelection&,const QItemSelection&);
 
     void _openUrl(const QString&);
@@ -137,6 +141,7 @@ protected Q_SLOTS:
     void slotOpenWith();
 
     void slotContextMenu(const QPoint&);
+    void slotDirContextMenu(const QPoint&);
     void slotCopyFinished(KJob*job);
     void slotUpdateLogCache();
 
@@ -156,6 +161,8 @@ protected:
     void internalDrop(const KUrl::List&_lst,Qt::DropAction action,const QModelIndex&index);
 
     void resizeAllColumns();
+
+    void execContextMenu(const SvnItemList&);
 
 private:
     MainTreeWidgetData*m_Data;

@@ -182,6 +182,7 @@ public:
     virtual void customEvent (QEvent *e);
 
     bool doNetworking();
+    virtual void doCommit(const SvnItemList&);
 
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;
@@ -198,7 +199,6 @@ public slots:
     virtual void dispDiff(const QByteArray&);
     virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
-    virtual void slotCommit();
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();
     virtual void slotAdd();

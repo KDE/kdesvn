@@ -904,13 +904,11 @@ bool SvnActions::changeProperties(const svn::PropertiesMap&setList,const QString
 /*!
     \fn SvnActions::slotCommit()
  */
-void SvnActions::slotCommit()
+void SvnActions::doCommit(const SvnItemList&which)
 {
     if (!m_Data->m_CurrentContext||!m_Data->m_ParentList->isWorkingCopy()) {
         return;
     }
-    SvnItemList which;
-    m_Data->m_ParentList->SelectionList(which);
     SvnItemList::const_iterator liter = which.begin();
 
     svn::Pathes targets;

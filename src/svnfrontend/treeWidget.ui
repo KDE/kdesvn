@@ -34,6 +34,9 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="contextMenuPolicy" >
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
       <property name="sortingEnabled" >
        <bool>true</bool>
       </property>
@@ -92,8 +95,8 @@
    <slot>slotItemActivated(QModelIndex)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>184</x>
-     <y>68</y>
+     <x>358</x>
+     <y>77</y>
     </hint>
     <hint type="destinationlabel" >
      <x>72</x>
@@ -108,8 +111,8 @@
    <slot>slotContextMenu(QPoint)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>184</x>
-     <y>51</y>
+     <x>358</x>
+     <y>60</y>
     </hint>
     <hint type="destinationlabel" >
      <x>64</x>
@@ -124,12 +127,28 @@
    <slot>slotItemExpanded(QModelIndex)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>184</x>
-     <y>38</y>
+     <x>358</x>
+     <y>47</y>
     </hint>
     <hint type="destinationlabel" >
      <x>41</x>
      <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_DirTreeView</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>mainTreeWidget</receiver>
+   <slot>slotDirContextMenu(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>128</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>100</x>
+     <y>265</y>
     </hint>
    </hints>
   </connection>
@@ -139,5 +158,6 @@
   <slot>slotContextMenu(QPoint)</slot>
   <slot>slotItemExpanded(QModelIndex)</slot>
   <slot>slotDirItemActivated(QModelIndex)</slot>
+  <slot>slotDirContextMenu(QPoint)</slot>
  </slots>
 </ui>

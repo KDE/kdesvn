@@ -538,6 +538,9 @@ void MainTreeWidget::setupActions()
     tmp_action =
         add_action("make_svn_itemsdiff",i18n("Diff items"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDiffPathes()));
     tmp_action->setToolTip(i18n("Diff two items"));
+    tmp_action =
+        add_action("make_svn_diritemsdiff",i18n("Diff items"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDiffPathes()));
+    tmp_action->setToolTip(i18n("Diff two items"));
 
 
     tmp_action =
@@ -682,6 +685,7 @@ void MainTreeWidget::enableActions()
 
     /// @todo check if all items have same type
     enableAction("make_svn_itemsdiff",multi && c==2 && unique && remote_enabled);
+    enableAction("make_svn_diritemsdiff",d==2 && isopen && remote_enabled);
 
     /* 2. on dirs only */
     enableAction("make_cleanup",isWorkingCopy()&& (dir||none));
@@ -901,6 +905,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     int count = 0;
     if ( (temp=filesActions()->action("make_dir_commit")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_dir_update")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_svn_diritemsdiff")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
     OpenContextmenu*me=0;
@@ -1263,9 +1268,18 @@ void MainTreeWidget::slotDiffRevisions()
 void MainTreeWidget::slotDiffPathes()
 {
     SvnItemList lst;
-    SelectionList(lst);
 
-    if (lst.count()!=2 || !uniqueTypeSelected()) {
+    QObject * tr = sender();
+    bool unique=false;
+
+    if (tr==filesActions()->action("make_svn_diritemsdiff")) {
+        unique=true;
+        DirSelectionList(lst);
+    } else {
+        SelectionList(lst);
+    }
+
+    if (lst.count()!=2 || (!unique && !uniqueTypeSelected()) ) {
         return;
     }
 
@@ -1994,7 +2008,11 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
     }
     _t = m_Data->m_SortModel->mapFromSource(_t);
     m_TreeView->setRootIndex(_t);
-    m_TreeView->selectionModel()->clearSelection();
+    if (m_TreeView->selectionModel()->hasSelection()) {
+        m_TreeView->selectionModel()->clearSelection();
+    } else {
+        enableActions();
+    }
     resizeAllColumns();
 }
 

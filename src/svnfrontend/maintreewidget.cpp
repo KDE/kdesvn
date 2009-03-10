@@ -578,11 +578,9 @@ void MainTreeWidget::setupActions()
     /* caching */
     tmp_action = add_action("update_log_cache",i18n("Update log cache"),KShortcut(),KIcon(),this,SLOT(slotUpdateLogCache()));
     tmp_action->setToolTip(i18n("Update the log cache for current repository"));
-    /*    tmp_action = new KAction( i18n("Stop update log cache"),0,this,SLOT(slotUpdateLogCache()),m_Data->m_Collection,"stop_update_log_cache" );
-        tmp_action->setToolTip(i18n("Stop the update of the log cache"));
-    */
 
     tmp_action = add_action("make_dir_commit",i18n("Commit"),KShortcut(),KIcon("kdesvncommit"),this,SLOT(slotDirCommit()));
+    tmp_action = add_action("make_dir_update",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),this,SLOT(slotDirUpdate()));
     enableActions();
 }
 
@@ -673,6 +671,8 @@ void MainTreeWidget::enableActions()
     enableAction("make_svn_merge",single||none);
     enableAction("make_svn_addrec",(multi||single) && isWorkingCopy());
     enableAction("make_svn_headupdate",isWorkingCopy()&&isopen&&remote_enabled);
+    enableAction("make_dir_update",isWorkingCopy()&&isopen&&remote_enabled);
+
     enableAction("make_svn_revupdate",isWorkingCopy()&&isopen&&remote_enabled);
     enableAction("make_svn_commit",isWorkingCopy()&&isopen&&remote_enabled);
     enableAction("make_dir_commit",isWorkingCopy()&&isopen&&remote_enabled);
@@ -897,11 +897,10 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     SvnItemList l;
     DirSelectionList(l);
     KMenu popup;
-    QAction * temp = filesActions()->action("make_dir_commit");
-    unsigned int count = 0;
-    if (temp && temp->isEnabled() && ++count) {
-        popup.addAction(temp);
-    }
+    QAction * temp = 0;
+    int count = 0;
+    if ( (temp=filesActions()->action("make_dir_commit")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_dir_update")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if (count) {
         popup.exec(m_DirTreeView->viewport()->mapToGlobal(vp));
     }
@@ -1992,6 +1991,22 @@ void MainTreeWidget::slotDirCommit()
     SvnItemList which;
     DirSelectionList(which);
     m_Data->m_Model->svnWrapper()->doCommit(which);
+}
+
+void MainTreeWidget::slotDirUpdate()
+{
+    SvnItemList which;
+    DirSelectionList(which);
+    QStringList what;
+    if (which.count()==0) {
+        what.append(baseUri());
+    } else {
+        SvnItemListConstIterator liter=which.begin();
+        for(;liter!=which.end();++liter){
+            what.append((*liter)->fullName());
+        }
+    }
+    m_Data->m_Model->svnWrapper()->makeUpdate(what,svn::Revision::HEAD,true);
 }
 
 #include "maintreewidget.moc"

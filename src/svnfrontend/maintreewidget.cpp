@@ -901,9 +901,29 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     int count = 0;
     if ( (temp=filesActions()->action("make_dir_commit")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_dir_update")) && temp->isEnabled() && ++count) popup.addAction(temp);
+
+    KService::List offers;
+    OpenContextmenu*me=0;
+    QAction*menuAction = 0;
+
+    if (l.count()==1) {
+        offers = offersList(l.at(0),l.at(0)->isDir());
+        if (offers.count()>0) {
+            svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision());
+            me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0,0);
+            me->setTitle(i18n("Open With..."));
+            menuAction=popup.addMenu(me);
+            ++count;
+        }
+    }
     if (count) {
         popup.exec(m_DirTreeView->viewport()->mapToGlobal(vp));
     }
+    if (menuAction) {
+        popup.removeAction(menuAction);
+    }
+    delete me;
+
 }
 
 void MainTreeWidget::execContextMenu(const SvnItemList&l)
@@ -958,7 +978,6 @@ void MainTreeWidget::execContextMenu(const SvnItemList&l)
     if (l.count()==1) offers = offersList(l.at(0),l.at(0)->isDir());
 
     if (l.count()==1/*&&!l.at(0)->isDir()*/) {
-        temp = filesActions()->action("openwith");
         if (offers.count()>0) {
             svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision());
             me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0,0);

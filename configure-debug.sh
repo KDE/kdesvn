@@ -11,10 +11,6 @@ fi
 
 cd Build/Debug||exit
 
-if [ "x${HOSTTYPE}" = "xx86_64" ]; then
-  LIBSUFFIX=64
-fi
-
-cmake ../.. -DCMAKE_BUILD_TYPE=Debug -DLIB_SUFFIX=${LIBSUFFIX} -DTESTINGBUILD=On -DBUILD_TESTS=On
+cmake ../.. -DCMAKE_BUILD_TYPE=Debug -DTESTINGBUILD=On -DBUILD_TESTS=On
 cd -
 

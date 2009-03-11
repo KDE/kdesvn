@@ -50,8 +50,11 @@ public:
     virtual bool openUrl(const KUrl &url,bool noReinit=false);
     virtual QWidget* realWidget();
     virtual SvnItem* Selected()const;
+    virtual SvnItem* DirSelected()const;
     virtual QModelIndex SelectedIndex()const;
+    virtual QModelIndex DirSelectedIndex()const;
     SvnItemModelNode*SelectedNode()const;
+    SvnItemModelNode*DirSelectedNode()const;
     virtual void SelectionList(SvnItemList&target)const;
     virtual void DirSelectionList(SvnItemList&target)const;
     virtual SvnItem* SelectedOrMain()const;
@@ -105,6 +108,7 @@ protected Q_SLOTS:
     void slotDisplayLastDiff();
     void slotSimpleHeadDiff();
     void slotSimpleBaseDiff();
+    void slotDirSimpleBaseDiff();
     void slotDiffRevisions();
     void slotDiffPathes();
     void slotInfo();
@@ -164,6 +168,9 @@ protected:
     void resizeAllColumns();
 
     void execContextMenu(const SvnItemList&);
+
+    void simpleWcDiff(SvnItem*which,const svn::Revision&,const svn::Revision&);
+
 
 private:
     MainTreeWidgetData*m_Data;

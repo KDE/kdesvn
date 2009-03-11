@@ -360,9 +360,28 @@ QModelIndex MainTreeWidget::SelectedIndex()const
     return m_Data->m_SortModel->mapToSource(_mi[0]);
 }
 
+QModelIndex MainTreeWidget::DirSelectedIndex()const
+{
+    QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
+    if (_mi.count()!=1) {
+        return QModelIndex();
+    }
+    return m_Data->m_DirSortModel->mapToSource(_mi[0]);
+}
+
 SvnItemModelNode* MainTreeWidget::SelectedNode()const
 {
     QModelIndex index = SelectedIndex();
+    if (index.isValid()) {
+        SvnItemModelNode*item = static_cast<SvnItemModelNode*>(index.internalPointer());
+        return item;
+    }
+    return 0;
+}
+
+SvnItemModelNode* MainTreeWidget::DirSelectedNode()const
+{
+    QModelIndex index = DirSelectedIndex();
     if (index.isValid()) {
         SvnItemModelNode*item = static_cast<SvnItemModelNode*>(index.internalPointer());
         return item;
@@ -379,6 +398,11 @@ void MainTreeWidget::slotSelectionChanged(const QItemSelection&,const QItemSelec
 SvnItem* MainTreeWidget::Selected()const
 {
     return SelectedNode();
+}
+
+SvnItem* MainTreeWidget::DirSelected()const
+{
+    return DirSelectedNode();
 }
 
 SvnItem* MainTreeWidget::SelectedOrMain()const
@@ -527,8 +551,9 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_svn_commit",i18n("Commit"),KShortcut("CTRL+#"),KIcon("kdesvncommit"),this,SLOT(slotCommit()));
     tmp_action->setIconText(i18n("Commit"));
 
-    tmp_action =
-        add_action("make_svn_basediff",i18n("Diff local changes"),KShortcut(Qt::CTRL+Qt::Key_D),KIcon("kdesvndiff"),this,SLOT(slotSimpleBaseDiff()));
+    tmp_action = add_action("make_svn_basediff",i18n("Diff local changes"),KShortcut(Qt::CTRL+Qt::Key_D),KIcon("kdesvndiff"),this,SLOT(slotSimpleBaseDiff()));
+    tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
+    tmp_action = add_action("make_svn_dirbasediff",i18n("Diff local changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDirSimpleBaseDiff()));
     tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
 
     tmp_action =
@@ -681,6 +706,7 @@ void MainTreeWidget::enableActions()
     enableAction("make_dir_commit",isWorkingCopy()&&isopen&&remote_enabled);
 
     enableAction("make_svn_basediff",isWorkingCopy()&&(single||none));
+    enableAction("make_svn_dirbasediff",isWorkingCopy()&&(d<2));
     enableAction("make_svn_headdiff",isWorkingCopy()&&(single||none)&&remote_enabled);
 
     /// @todo check if all items have same type
@@ -905,6 +931,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     int count = 0;
     if ( (temp=filesActions()->action("make_dir_commit")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_dir_update")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_svn_dirbasediff")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_diritemsdiff")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
@@ -1201,25 +1228,21 @@ void MainTreeWidget::slotDisplayLastDiff()
 
 void MainTreeWidget::slotSimpleBaseDiff()
 {
-    SvnItem*kitem = Selected();
-    if (isWorkingCopy())
-    {
-        chdir(baseUri().toLocal8Bit());
-    }
+    simpleWcDiff(Selected(),svn::Revision::BASE,svn::Revision::WORKING);
+}
 
-    QString what;
-    if (!kitem) {
-        what==".";
-    } else {
-        what = relativePath(kitem);
-    }
-    // only possible on working copies - so we may say this values
-    m_Data->m_Model->svnWrapper()->makeDiff(what,svn::Revision::BASE,svn::Revision::WORKING,svn::Revision::UNDEFINED,kitem?kitem->isDir():true);
+void MainTreeWidget::slotDirSimpleBaseDiff()
+{
+    simpleWcDiff(DirSelected(),svn::Revision::BASE,svn::Revision::WORKING);
 }
 
 void MainTreeWidget::slotSimpleHeadDiff()
 {
-    SvnItem*kitem = Selected();
+    simpleWcDiff(Selected(),svn::Revision::WORKING,svn::Revision::HEAD);
+}
+
+void MainTreeWidget::simpleWcDiff(SvnItem*kitem,const svn::Revision&first,const svn::Revision&second)
+{
     QString what;
     if (isWorkingCopy())
     {
@@ -1232,7 +1255,7 @@ void MainTreeWidget::slotSimpleHeadDiff()
         what = relativePath(kitem);
     }
     // only possible on working copies - so we may say this values
-    m_Data->m_Model->svnWrapper()->makeDiff(what,svn::Revision::WORKING,svn::Revision::HEAD,svn::Revision::UNDEFINED,kitem?kitem->isDir():true);
+    m_Data->m_Model->svnWrapper()->makeDiff(what,first,second,svn::Revision::UNDEFINED,kitem?kitem->isDir():true);
 }
 
 void MainTreeWidget::slotDiffRevisions()

@@ -337,12 +337,13 @@ void SvnLogDlgImp::slotPrevFifty()
     if (now == 1) {
         return;
     }
-    svn::Revision begin=now.revnum()-50;
+    kDebug()<<"Min: "<<now.revnum()<<endl;
+    svn::Revision begin=now.revnum()-1;
     if (begin.revnum()<1) {
         begin = 1;
     }
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(begin,
-                            svn::Revision::HEAD,m_peg,
+                            (begin.revnum()>50?svn::Revision::START:svn::Revision::HEAD),m_peg,
                             _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,this);
     if (lm) {
         dispLog(lm);

@@ -11,10 +11,6 @@ fi
 
 cd Build/Release||exit
 
-if [ "x${HOSTTYPE}" = "xx86_64" ]; then
-  LIBSUFFIX=64
-fi
-
-cmake ../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLIB_SUFFIX=${LIBSUFFIX}
+cmake ../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo 
 cd -
 

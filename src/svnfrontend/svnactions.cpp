@@ -2436,13 +2436,12 @@ void SvnActions::checkModthread()
     delete m_CThread;
     m_CThread = 0;
     emit sigCacheDataChanged();
-    emit sigRefreshIcons(false);
+    emit sigRefreshIcons();
 }
 
 void SvnActions::checkUpdateThread()
 {
-    if (!m_UThread)return;
-    if (m_UThread->isRunning()) {
+    if (!m_UThread || m_UThread->isRunning()) {
         return;
     }
     bool newer=false;
@@ -2461,7 +2460,7 @@ void SvnActions::checkUpdateThread()
             m_Data->m_repoLockCache.insertKey(ptr,ptr->path());
         }
     }
-    emit sigRefreshIcons(newer);
+    emit sigRefreshIcons();
     emit sendNotify(i18n("Checking for updates finished"));
     if (newer) {
         emit sendNotify(i18n("There are new items in repository"));

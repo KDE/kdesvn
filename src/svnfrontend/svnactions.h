@@ -237,7 +237,7 @@ signals:
     void sigRefreshAll();
     void sigThreadsChanged();
     void sigRefreshCurrent(SvnItem*);
-    void sigRefreshIcons(bool);
+    void sigRefreshIcons();
     void sigExtraLogMsg(const QString&);
     void sigGotourl(const QString&);
     void sigCacheStatus(qlonglong,qlonglong);

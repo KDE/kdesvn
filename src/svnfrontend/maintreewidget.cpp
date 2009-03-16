@@ -154,7 +154,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(reinitItem(SvnItem*)),this,SLOT(slotReinitItem(SvnItem*)));
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigRefreshAll()),this,SLOT(refreshCurrentTree()));
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigRefreshCurrent(SvnItem*)),this,SLOT(refreshCurrent(SvnItem*)));
-    //connect(m_Data->m_Model->svqnWrapper(),SIGNAL(sigRefreshIcons(bool)),this,SLOT(slotRescanIcons(bool)));
+    connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigRefreshIcons()),this,SLOT(slotRescanIcons()));
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigGotourl(const QString&)),this,SLOT(_openUrl(const QString&)));
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigCacheStatus(qlonglong,qlonglong)),this,SIGNAL(sigCacheStatus(qlonglong,qlonglong)));
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigThreadsChanged()),this,SLOT(enableActions()));
@@ -2069,4 +2069,8 @@ void MainTreeWidget::slotDirUpdate()
     m_Data->m_Model->svnWrapper()->makeUpdate(what,svn::Revision::HEAD,true);
 }
 
+void MainTreeWidget::slotRescanIcons()
+{
+    m_Data->m_Model->refreshIndex(m_Data->m_Model->firstRootIndex());
+}
 #include "maintreewidget.moc"

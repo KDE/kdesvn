@@ -112,6 +112,7 @@ public:
     bool refreshCurrentTree();
     bool refreshDirnode(SvnItemModelNodeDir*,bool check_empty=false,bool notrec=false);
     bool refreshItem(SvnItemModelNode*);
+    bool refreshIndex(const QModelIndex&,bool sendSignal=true);
 
     void clearNodeDir(SvnItemModelNodeDir*);
 
@@ -123,7 +124,6 @@ Q_SIGNALS:
 protected:
    /* the parent entry must removed from list before */
    void insertDirs(SvnItemModelNode* _parent,svn::StatusEntries&);
-   bool refreshIndex(const QModelIndex&,bool sendSignal=true);
    //! \a ind must be a directory index
    void checkAddNewItems(const QModelIndex&ind);
    bool checkRootNode();

@@ -1403,6 +1403,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
     removeFromUpdateCache(what,!recurse);
     EMIT_REFRESH;
     EMIT_FINISHED;
+    m_Data->clearCaches();
 }
 
 /*!
@@ -2137,6 +2138,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
         emit clientException(e.msg());
         return;
     }
+    m_Data->clearCaches();
 }
 
 /*!

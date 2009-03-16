@@ -1797,6 +1797,7 @@ void MainTreeWidget::slotMerge()
     dlg->saveDialogSize(_k);
 
     delete dlg;
+    enableActions();
 }
 
 void MainTreeWidget::slotRelocate()

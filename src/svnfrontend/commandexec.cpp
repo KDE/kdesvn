@@ -347,7 +347,10 @@ void CommandExec::slotCmd_log()
     if (m_pCPart->extraRevisions[0]==svn::Revision::WORKING) {
         m_pCPart->extraRevisions[0]=svn::Revision::UNDEFINED;
     }
-    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->extraRevisions[0],m_pCPart->url[0],list,limit);
+    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start,m_pCPart->end,m_pCPart->extraRevisions[0],m_pCPart->url[0],
+            Kdesvnsettings::log_follows_nodes(),
+            list,
+            limit);
 }
 
 void CommandExec::slotCmd_tree()

@@ -223,14 +223,41 @@ void SvnActions::reInitClient()
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
 }
 
-/*!
-    \fn SvnActions::makeLog(svn::Revision start,svn::Revision end,FileListViewItem*k)
- */
-void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,SvnItem*k,bool list_files,int limit)
+void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool follow,bool list_files,int limit)
 {
-    if (k) {
-        makeLog(start,end,peg,k->fullName(),list_files,limit);
+    svn::InfoEntry info;
+    if (!singleInfo(which,peg,info)) {
+        return;
     }
+    QString reposRoot = info.reposRoot();
+    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,peg,which,list_files,limit,follow);
+    if (!logs) return;
+    bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
+    if (need_modal||!m_Data->m_LogDialog) {
+        m_Data->m_LogDialog=new SvnLogDlgImp(this,0,"logdialog",need_modal);
+        connect(m_Data->m_LogDialog,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+                 this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
+                 connect(m_Data->m_LogDialog,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
+                          this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
+    }
+
+    if (m_Data->m_LogDialog) {
+        m_Data->m_LogDialog->dispLog(logs,info.url().mid(reposRoot.length()),reposRoot,
+                                      (
+                                      peg==svn::Revision::UNDEFINED?
+                                      (svn::Url::isValid(which)?svn::Revision::HEAD:svn::Revision::UNDEFINED):
+                                      peg
+                                      ),which);
+                                      if (need_modal) {
+                                          m_Data->m_LogDialog->exec();
+                                          m_Data->m_LogDialog->saveSize();
+                                          delete m_Data->m_LogDialog;
+                                      } else {
+                                          m_Data->m_LogDialog->show();
+                                          m_Data->m_LogDialog->raise();
+                                      }
+    }
+    EMIT_FINISHED;
 }
 
 svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,
@@ -457,43 +484,6 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
             dlg.saveDialogSize(_kc);
         }
     }
-}
-
-void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool list_files,int limit)
-{
-    svn::InfoEntry info;
-    if (!singleInfo(which,peg,info)) {
-        return;
-    }
-    QString reposRoot = info.reposRoot();
-    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,peg,which,list_files,limit);
-    if (!logs) return;
-    bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
-    if (need_modal||!m_Data->m_LogDialog) {
-        m_Data->m_LogDialog=new SvnLogDlgImp(this,0,"logdialog",need_modal);
-        connect(m_Data->m_LogDialog,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
-                 this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
-        connect(m_Data->m_LogDialog,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
-                 this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
-    }
-
-    if (m_Data->m_LogDialog) {
-        m_Data->m_LogDialog->dispLog(logs,info.url().mid(reposRoot.length()),reposRoot,
-                     (
-                      peg==svn::Revision::UNDEFINED?
-                         (svn::Url::isValid(which)?svn::Revision::HEAD:svn::Revision::UNDEFINED):
-                             peg
-                     ),which);
-        if (need_modal) {
-            m_Data->m_LogDialog->exec();
-            m_Data->m_LogDialog->saveSize();
-            delete m_Data->m_LogDialog;
-        } else {
-            m_Data->m_LogDialog->show();
-            m_Data->m_LogDialog->raise();
-        }
-    }
-    EMIT_FINISHED;
 }
 
 void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k)

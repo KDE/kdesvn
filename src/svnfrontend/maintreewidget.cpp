@@ -452,10 +452,13 @@ void MainTreeWidget::setupActions()
     KAction*tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    //new KAction(,"kdesvnlog",,this,SLOT(slotMakeLog()),m_Data->m_Collection,"make_svn_log_full");
     tmp_action = add_action("make_svn_log_full",i18n("History of item"),KShortcut(Qt::CTRL+Qt::Key_L),KIcon("kdesvnlog"),this,SLOT(slotMakeLog()));
     tmp_action->setIconText(i18n("History"));
     tmp_action->setStatusTip(i18n("Displays the history log of selected item"));
+    tmp_action = add_action("make_svn_log_nofollow",i18n("History of item ignoring copies"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_L),KIcon("kdesvnlog"),this,SLOT(slotMakeLogNoFollow()));
+    tmp_action->setIconText(i18n("History"));
+    tmp_action->setStatusTip(i18n("Displays the history log of selected item without following copies"));
+
     tmp_action = add_action("make_svn_tree",i18n("Full revision tree"),KShortcut(Qt::CTRL+Qt::Key_T),KIcon("kdesvntree"),this,SLOT(slotMakeTree()));
     tmp_action->setStatusTip(i18n("Shows history of item as linked tree"));
     tmp_action = add_action("make_svn_partialtree",i18n("Partial revision tree"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_T),KIcon("kdesvntree"),this,SLOT(slotMakePartTree()));
@@ -656,7 +659,7 @@ void MainTreeWidget::enableActions()
     QAction * temp = 0;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    enableAction("make_svn_log",single||none);
+    enableAction("make_svn_log_nofollow",single||none);
     enableAction("make_last_change",isopen);
     enableAction("make_svn_log_full",single||none);
     enableAction("make_svn_tree",single||none);
@@ -892,7 +895,17 @@ void MainTreeWidget::slotIgnore()
     m_Data->m_SortModel->invalidate();
 }
 
+void MainTreeWidget::slotMakeLogNoFollow()const
+{
+    doLog(false);
+}
+
 void MainTreeWidget::slotMakeLog()const
+{
+    doLog(true);
+}
+
+void MainTreeWidget::doLog(bool use_follow_settings)const
 {
     SvnItem*k=SelectedOrMain();
     QString what;
@@ -909,9 +922,10 @@ void MainTreeWidget::slotMakeLog()const
     }
     svn::Revision end(svn::Revision::START);
     bool list = Kdesvnsettings::self()->log_always_list_changed_files();
-    //int l = Kdesvnsettings::self()->maximum_displayed_logs();
+    bool follow = use_follow_settings?Kdesvnsettings::log_follows_nodes():false;
+    Kdesvnsettings::setLast_node_follow(follow);
     int l = 50;
-    m_Data->m_Model->svnWrapper()->makeLog(start,end,(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision()),what,list,l);
+    m_Data->m_Model->svnWrapper()->makeLog(start,end,(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision()),what,follow,list,l);
 }
 
 

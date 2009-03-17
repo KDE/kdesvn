@@ -325,7 +325,7 @@ void SvnLogDlgImp::slotGetLogs()
 {
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
             m_endRevButton->revision(),m_peg,
-            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,this);
+            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -344,7 +344,7 @@ void SvnLogDlgImp::slotPrevFifty()
     }
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(begin,
                             (begin.revnum()>50?svn::Revision::START:svn::Revision::HEAD),m_peg,
-                            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,this);
+                            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -354,7 +354,7 @@ void SvnLogDlgImp::slotBeginHead()
 {
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(svn::Revision::HEAD,
                                         1,m_peg,
-                                        _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,this);
+                                        _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -369,7 +369,8 @@ void SvnLogDlgImp::slotListEntries()
         return;
     }
     if (ptr->changedPaths().count()==0) {
-        svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(ptr->revision(),ptr->revision(),ptr->revision(),_name,true,0);
+        svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(ptr->revision(),ptr->revision(),ptr->revision(),
+        _name,true,0,Kdesvnsettings::last_node_follow());
         if (!_log) {
             return;
         }

@@ -253,5 +253,9 @@ Never overwrite the default computed value unless you know what you're doing.</w
       <default code="true" >QString(&quot;a&quot;).localeAwareCompare(&quot;B&quot;)>0</default>
       <label>Check if current locale is case sensitive or not</label>
     </entry>
+    <entry key="last_node_follow" type="Bool">
+        <whatsthis>This value holds for log dialog which kind of log is used, its internal only.</whatsthis>
+        <default>true</default>
+    </entry>
   </group>
 </kcfg>

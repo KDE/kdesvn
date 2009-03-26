@@ -93,6 +93,8 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+/// @todo has to be removed for a real fix of ticket #613
+#include <svn_config.h>
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
 
@@ -154,6 +156,22 @@ public:
             delete m_LogDialog;
             m_LogDialog=0;
         }
+    }
+
+    /// @todo set some standards options to svn::Context. This should made via a Config class in svnqt (future release 1.4)
+    /// this is a workaround for ticket #613
+    void setStandards()
+    {
+        if (!m_CurrentContext) {
+            return;
+        }
+        svn_config_t*cfg_config = static_cast<svn_config_t*>(apr_hash_get(m_CurrentContext->ctx()->config, SVN_CONFIG_CATEGORY_CONFIG,
+                                                APR_HASH_KEY_STRING));
+        if (!cfg_config) {
+            return;
+        }
+        svn_config_set(cfg_config, SVN_CONFIG_SECTION_HELPERS,
+                        SVN_CONFIG_OPTION_DIFF_CMD, 0L);
     }
 
     ItemDisplay* m_ParentList;
@@ -221,6 +239,8 @@ void SvnActions::reInitClient()
     m_Data->m_CurrentContext = new svn::Context();
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContextListener);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
+    ///@todo workaround has to be replaced
+    m_Data->setStandards();
 }
 
 void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool follow,bool list_files,int limit)
@@ -237,8 +257,8 @@ void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const
         m_Data->m_LogDialog=new SvnLogDlgImp(this,0,"logdialog",need_modal);
         connect(m_Data->m_LogDialog,SIGNAL(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
                  this,SLOT(makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)));
-                 connect(m_Data->m_LogDialog,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
-                          this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
+        connect(m_Data->m_LogDialog,SIGNAL(makeCat(const svn::Revision&, const QString&,const QString&,const svn::Revision&,QWidget*)),
+                this,SLOT(slotMakeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)));
     }
 
     if (m_Data->m_LogDialog) {

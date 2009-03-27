@@ -60,7 +60,7 @@ public Q_SLOTS:
     */
     QStringList get_saved_login(const QString&realm,const QString&user);
 
-    // return: -1 dont accept 0 accept temporary 1 accept always
+    // return: -1 don't accept 0 accept temporary 1 accept always
     //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
     int get_sslaccept(const QString&, const QString&, const QString& , const QString& , const QString&, const QString&);
 

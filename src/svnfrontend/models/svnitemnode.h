@@ -47,7 +47,7 @@ public:
     virtual QString getParentDir()const;
     virtual SvnItem* getParentItem()const;
     virtual const svn::Revision& correctPeg()const;
-    virtual void refreshStatus(bool childs=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false);
+    virtual void refreshStatus(bool children=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false);
     virtual SvnActions* getWrapper() const;
     virtual bool NodeIsDir();
     virtual bool NodeHasChilds();
@@ -80,13 +80,13 @@ public:
     virtual char sortChar();
 
     bool contains(const QString&fullName);
-    virtual void refreshStatus(bool childs=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false);
+    virtual void refreshStatus(bool children=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false);
 
     void clear();
     virtual bool NodeHasChilds();
 
 protected:
-    QList<SvnItemModelNode*> m_Childs;
+    QList<SvnItemModelNode*> m_Children;
 };
 
 #endif

@@ -97,7 +97,7 @@ apr_array_header_t * svn::StringArray::array (const Pool & pool) const
     apr_array_header_t *apr_targets =
             apr_array_make (apr_pool,m_content.size(),sizeof (const char *));
 
-    for (it = m_content.begin (); it != m_content.end (); it++)
+    for (it = m_content.begin (); it != m_content.end (); ++it)
     {
         QByteArray s = (*it).TOUTF8();
         char * t2 = apr_pstrndup (apr_pool,s,s.size());

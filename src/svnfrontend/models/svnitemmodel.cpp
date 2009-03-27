@@ -355,7 +355,7 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
                     node=new SvnItemModelNode(m_Data->m_rootNode,svnWrapper(),m_Data->m_Display);
                 }
                 node->setStat((*it));
-                m_Data->m_rootNode->m_Childs.prepend(node);
+                m_Data->m_rootNode->m_Children.prepend(node);
                 endInsertRows();
             }
             dlist.erase(it);
@@ -399,7 +399,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode*_parent,svn::StatusEntries&dlist)
                 m_Data->addWatchFile(node->fullName());
             }
         }
-        parent->m_Childs.append(node);
+        parent->m_Children.append(node);
     }
     endInsertRows();
 }
@@ -626,11 +626,11 @@ void SvnItemModel::slotDeleted(const QString&what)
         if (!pi.isValid()) {
             return;
         }
-        if (ind.row()>=p->m_Childs.count()) {
+        if (ind.row()>=p->m_Children.count()) {
             return;
         }
         beginRemoveRows(pi,ind.row(),ind.row());
-        p->m_Childs.removeAt(ind.row());
+        p->m_Children.removeAt(ind.row());
         endRemoveRows();
         if (n->isDir()) {
             m_Data->m_DirWatch->removeDir(what);
@@ -711,8 +711,8 @@ bool SvnItemModel::refreshCurrentTree()
     }
     SvnItemModelNodeDir*_start=m_Data->m_rootNode;
     if (m_Data->m_Display->isWorkingCopy()) {
-        if (m_Data->m_rootNode->m_Childs.size()>0 && m_Data->m_rootNode->m_Childs[0]->NodeIsDir()) {
-            _start=static_cast<SvnItemModelNodeDir*>(m_Data->m_rootNode->m_Childs[0]);
+        if (m_Data->m_rootNode->m_Children.size()>0 && m_Data->m_rootNode->m_Children[0]->NodeIsDir()) {
+            _start=static_cast<SvnItemModelNodeDir*>(m_Data->m_rootNode->m_Children[0]);
             refreshItem(_start);
         } else {
             return false;
@@ -725,7 +725,7 @@ bool SvnItemModel::refreshCurrentTree()
         check_created=true;
     }
     return refreshDirnode(_start,check_created);
-    //emit dataChanged(QModelIndex(),0,m_Data->m_rootNode->m_Childs.size());
+    //emit dataChanged(QModelIndex(),0,m_Data->m_rootNode->m_Children.size());
 }
 
 bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool notrec)
@@ -742,7 +742,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool
     }
     QString what = (node!=m_Data->m_rootNode)?node->fullName():m_Data->m_Display->baseUri();
 
-    if (node->m_Childs.size()==0 && !check_empty) {
+    if (node->m_Children.size()==0 && !check_empty) {
         if (node->fullName()==m_Data->m_Display->baseUri()) {
             return refreshItem(node);
         }
@@ -769,18 +769,18 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool
         }
     }
     QModelIndex ind = m_Data->indexForNode(node);
-    for (int i = 0;i<node->m_Childs.size();++i) {
+    for (int i = 0;i<node->m_Children.size();++i) {
         bool found = false;
         for (it=dlist.begin();it!=dlist.end();++it) {
-            if ((*it)->path()==node->m_Childs[i]->fullName()) {
+            if ((*it)->path()==node->m_Children[i]->fullName()) {
                 found = true;
                 break;
             }
         }
         if (!found) {
-            SvnItemModelNode*n=node->m_Childs[i];
+            SvnItemModelNode*n=node->m_Children[i];
             beginRemoveRows(ind,i,i);
-            node->m_Childs.removeAt(i);
+            node->m_Children.removeAt(i);
             delete n;
             endRemoveRows();
             --i;
@@ -790,11 +790,11 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool
     for (it=dlist.begin();it!=dlist.end();) {
         index = node->indexOf((*it)->path());
         if (index!=-1) {
-            node->m_Childs[index]->setStat((*it));
-            if (node->m_Childs[index]->NodeIsDir()!=node->m_Childs[index]->isDir()) {
-                SvnItemModelNode*n=node->m_Childs[index];
+            node->m_Children[index]->setStat((*it));
+            if (node->m_Children[index]->NodeIsDir()!=node->m_Children[index]->isDir()) {
+                SvnItemModelNode*n=node->m_Children[index];
                 beginRemoveRows(ind,index,index);
-                node->m_Childs.removeAt(index);
+                node->m_Children.removeAt(index);
                 delete n;
                 endRemoveRows();
             } else {
@@ -806,11 +806,11 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool
     }
 
     // make sure that we do not read in the whole tree when just refreshing the current tree.
-    if (node->m_Childs.size()>0 && !notrec) {
-        for (int i=0; i<node->m_Childs.size();++i) {
-            if (node->m_Childs[i]->NodeIsDir()) {
+    if (node->m_Children.size()>0 && !notrec) {
+        for (int i=0; i<node->m_Children.size();++i) {
+            if (node->m_Children[i]->NodeIsDir()) {
                 // both other parameters makes no sense at this point - defaults
-                refreshDirnode(static_cast<SvnItemModelNodeDir*>(node->m_Childs[i]),false,false);
+                refreshDirnode(static_cast<SvnItemModelNodeDir*>(node->m_Children[i]),false,false);
             }
         }
     }

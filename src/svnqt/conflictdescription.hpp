@@ -33,7 +33,7 @@ namespace svn {
 /** Wrapper for svn_wc_conflict_description_t
  * does nothing when build against subversion prior 1.5
  * @since subversion 1.5
- * @author Rajko Albrecht
+ * @author Rajko Albrecht (ral@alwins-world.de)
 */
 class SVNQT_EXPORT ConflictDescription
 {

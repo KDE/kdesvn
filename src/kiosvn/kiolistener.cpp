@@ -113,7 +113,7 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
         case svn_wc_notify_copy: //copy
             break;
         case svn_wc_notify_delete: //delete
-            m_HasChanges = TRUE;
+            m_HasChanges = true;
             userstring = i18n( "D %1" ).arg( path );
             break;
         case svn_wc_notify_restore : //restore
@@ -135,11 +135,11 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
                 userstring=i18n("Skipped %1.").arg( path );
             break;
         case svn_wc_notify_update_delete: //update_delete
-            m_HasChanges = TRUE;
+            m_HasChanges = true;
             userstring=i18n( "D %1" ).arg( path );
             break;
         case svn_wc_notify_update_add: //update_add
-            m_HasChanges = TRUE;
+            m_HasChanges = true;
             userstring=i18n( "A %1" ).arg( path );
             break;
         case svn_wc_notify_update_update: //update_update
@@ -151,7 +151,7 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
                             && ((prop_state == svn_wc_notify_state_inapplicable)
                                 || (prop_state == svn_wc_notify_state_unknown)
                                 || (prop_state == svn_wc_notify_state_unchanged)))) {
-                    m_HasChanges = TRUE;
+                    m_HasChanges = true;
 
                     if (kind == svn_node_file) {
                         if (content_state == svn_wc_notify_state_conflicted)
@@ -196,10 +196,10 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
                 }
             }
             if (m_External)
-                m_External = FALSE;
+                m_External = false;
             break;
         case svn_wc_notify_update_external: //update_external
-            m_External = TRUE;
+            m_External = true;
             userstring = i18n("Fetching external item into %1." ).arg( path );
             break;
         case svn_wc_notify_status_completed: //status_completed
@@ -227,7 +227,7 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
             break;
         case svn_wc_notify_commit_postfix_txdelta: //commit_postfix_txdelta
             if (!m_FirstTxDelta) {
-                m_FirstTxDelta = TRUE;
+                m_FirstTxDelta = true;
 		// check fullstops!
                 userstring=i18n("Transmitting file data ");
             } else {

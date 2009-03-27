@@ -570,7 +570,7 @@ void kio_svnProtocol::special(const QByteArray& data)
             KUrl::List list;
             stream >> list;
             kDebug(0) << "kio_svnProtocol MKDIR" << endl;
-            mkdir(list,0);
+            this->mkdir(list,0);
             break;
         }
         case SVN_RESOLVE:

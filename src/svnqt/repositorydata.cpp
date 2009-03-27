@@ -169,7 +169,7 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
 #else
     Q_UNUSED(_pre_1_5_compat);
 #endif
-    /// @todo config as extra paramter? Meanwhile default config only
+    /// @todo config as extra parameter? Meanwhile default config only
     /// (see svn::ContextData)
     SVN_ERR(svn_config_get_config(&config, 0, m_Pool));
     const char*repository_path = apr_pstrdup (m_Pool,path.TOUTF8());

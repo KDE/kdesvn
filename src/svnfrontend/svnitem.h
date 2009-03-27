@@ -70,7 +70,7 @@ public:
     virtual QString getParentDir()const=0;
     virtual SvnItem* getParentItem()const=0;
     virtual const svn::Revision&correctPeg()const=0;
-    virtual void refreshStatus(bool childs=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false)=0;
+    virtual void refreshStatus(bool children=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false)=0;
 
     QPixmap getPixmap(int size,bool overlay=true);
     QPixmap getPixmap(const QPixmap&,int size,bool overlay=true);

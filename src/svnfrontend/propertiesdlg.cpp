@@ -61,7 +61,7 @@ PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revi
     PropertiesDlgLayout = new QHBoxLayout(m);
 
     m_PropertiesListview = new Propertylist(m, "m_PropertiesListview" );
-    m_PropertiesListview->setAllColumnsShowFocus( TRUE );
+    m_PropertiesListview->setAllColumnsShowFocus(true);
     m_PropertiesListview->setCommitchanges(false);
     PropertiesDlgLayout->addWidget( m_PropertiesListview);
 

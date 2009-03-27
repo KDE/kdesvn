@@ -1,6 +1,6 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
- * (C) 2005-2007 by Rajko Albrecht
+ * (C) 2005-2007 by Rajko Albrecht (ral@alwins-world.de)
  * http://kdesvn.alwins-world.de
  */
 /*
@@ -86,11 +86,11 @@ namespace svn
     svn_error_t * error = 0;
     svn_wc_adm_access_t *adm_access;
     const svn_wc_entry_t *entry;
-    error = svn_wc_adm_probe_open2(&adm_access,0,itemPath.path().TOUTF8(),FALSE,0,pool);
+    error = svn_wc_adm_probe_open2(&adm_access,0,itemPath.path().TOUTF8(),false,0,pool);
     if (error!=0) {
         throw ClientException(error);
     }
-    error = svn_wc_entry(&entry,itemPath.path().TOUTF8(),adm_access,FALSE,pool);
+    error = svn_wc_entry(&entry,itemPath.path().TOUTF8(),adm_access,false,pool);
     if (error!=0) {
         throw ClientException(error);
     }

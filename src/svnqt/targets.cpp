@@ -1,6 +1,6 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
- * (C) 2005-2007 by Rajko Albrecht
+ * (C) 2005-2007 by Rajko Albrecht (ral@alwins-world.de)
  * http://kdesvn.alwins-world.de
  */
 /*
@@ -119,7 +119,7 @@ namespace svn
                       m_targets.size(),
                       sizeof (const char *));
 
-    for (it = m_targets.begin (); it != m_targets.end (); it++)
+    for (it = m_targets.begin (); it != m_targets.end (); ++it)
     {
       QByteArray s = (*it).path().TOUTF8();
 

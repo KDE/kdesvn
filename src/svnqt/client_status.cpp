@@ -1,6 +1,6 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
- * (C) 2005-2008 by Rajko Albrecht
+ * (C) 2005-2008 by Rajko Albrecht (ral@alwins-world.de)
  * http://kdesvn.alwins-world.de
  */
 /*
@@ -378,7 +378,7 @@ namespace svn
     QString url = path.path();
     url+=QString::FROMUTF8("/");
 
-    for (it = dirEntries.begin (); it != dirEntries.end (); it++)
+    for (it = dirEntries.begin (); it != dirEntries.end (); ++it)
     {
         DirEntryPtr dirEntry = *it;
         if (dirEntry->name().isEmpty())

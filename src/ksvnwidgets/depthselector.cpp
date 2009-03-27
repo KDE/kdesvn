@@ -40,7 +40,7 @@ DepthSelector::DepthSelector(QWidget *parent)
         m_DepthCombo=0;
         hboxLayout->removeItem(spacerItem);
         m_recurse = new QCheckBox( this);
-        m_recurse->setChecked( TRUE );
+        m_recurse->setChecked(true);
         m_recurse->setText(i18n( "Recursive" ));
         hboxLayout->addWidget( m_recurse );
         m_recurse->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);

@@ -29,7 +29,7 @@
 /*!
  * \file smart_pointer.h
  * \brief smart pointer and reference counter
- * \author Rajko Albrecht
+ * \author Rajko Albrecht (ral@alwins-world.de)
  *
  */
 

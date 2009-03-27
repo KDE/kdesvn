@@ -74,7 +74,7 @@ QString Createrepo_impl::targetDir()
 {
     KUrl u = m_ReposPathinput->url();
     QString res = u.path();
-    while (res.endsWith("/")) {
+    while (res.endsWith('/')) {
         res.truncate(res.length()-1);
     }
     return res;

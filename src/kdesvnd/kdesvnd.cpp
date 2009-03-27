@@ -340,7 +340,7 @@ QString kdesvnd::cleanUrl(const KUrl&url)
     return cleanpath;
 }
 
-/* just simple name check of course - no network acess! */
+/* just simple name check of course - no network access! */
 bool kdesvnd::isRepository(const KUrl&url)
 {
     QString proto = svn::Url::transformProtokoll(url.protocol());

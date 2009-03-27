@@ -347,7 +347,7 @@ void kdesvnpart::showAboutApplication()
  */
 void kdesvnpart::appHelpActivated()
 {
-    KToolInvocation::invokeHelp(QString::null, "kdesvn");
+    KToolInvocation::invokeHelp(QString(), "kdesvn");
 }
 
 
@@ -366,7 +366,7 @@ void kdesvnpart::slotShowSettings()
 
     dialog->setHelp("setup","kdesvn");
     dialog->addPage(new DisplaySettings_impl(0),
-        i18n("General"),"configure",i18n("General"),true);
+        i18n("General"),"configure",i18n("General Settings"),true);
     dialog->addPage(new SubversionSettings_impl(0),
         i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
     dialog->addPage(new DiffMergeSettings_impl(0),

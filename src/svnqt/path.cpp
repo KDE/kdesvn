@@ -1,6 +1,6 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
- * (C) 2005-2007 by Rajko Albrecht
+ * (C) 2005-2007 by Rajko Albrecht (ral@alwins-world.de)
  * http://kdesvn.alwins-world.de
  */
 /*
@@ -78,7 +78,7 @@ namespace svn
       }
       m_path = QString::FROMUTF8(int_path);
       if (Url::isValid(path) && m_path.indexOf("@")!=-1 ) {
-        /// @todo make sure that "@" is never used as revision paramter
+        /// @todo make sure that "@" is never used as revision parameter
         QUrl uri = m_path;
         m_path = uri.path();
         m_path.replace("@","%40");

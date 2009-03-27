@@ -66,13 +66,13 @@ bool SshAgent::querySshAgent()
         return true;
 
     // Did the user already start a ssh-agent process?
-    char* pid;
-    if( (pid = ::getenv("SSH_AGENT_PID")) != 0 )
+    QByteArray pid = qgetenv("SSH_AGENT_PID");
+    if( pid.length() != 0 )
     {
         m_pid = QString::fromLocal8Bit(pid);
 
-        char* sock = ::getenv("SSH_AUTH_SOCK");
-        if( sock )
+        QByteArray sock = qgetenv("SSH_AUTH_SOCK");
+        if( sock.length()>0 )
             m_authSock = QString::fromLocal8Bit(sock);
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/

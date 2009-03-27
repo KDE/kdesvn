@@ -50,7 +50,7 @@ namespace svn
         error = svn_io_open_unique_file (&m_outFile, &m_outFileName,
                         m_tmpPath.path().TOUTF8(),
                         ".tmp",
-                        FALSE, m_Pool);
+                        false, m_Pool);
 #endif
         if (error!=0) {
             clean();
@@ -65,7 +65,7 @@ namespace svn
         error = svn_io_open_unique_file (&m_errFile, &m_errFileName,
                         m_tmpPath.path().TOUTF8(),
                         ".tmp",
-                        FALSE, m_Pool);
+                        false, m_Pool);
 #endif
         if (error!=0) {
             clean();

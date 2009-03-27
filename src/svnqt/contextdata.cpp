@@ -42,7 +42,7 @@ ContextData::ContextData(const QString & configDir_)
     // make sure the configuration directory exists
     svn_config_ensure (c_configDir, pool);
 
-      // intialize authentication providers
+      // initialize authentication providers
       // * simple
       // * username
       // * simple pw cache of frontend app

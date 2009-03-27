@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _MAINVIEW_H
-#define _MAINVIEW_H
+#ifndef MAINTREEWIDGET_H
+#define MAINTREEWIDGET_H
 
 #include "src/svnfrontend/ui_treeWidget.h"
 #include "itemdisplay.h"
@@ -44,7 +44,7 @@ class MainTreeWidget:public QWidget,public Ui::mainTreeWidget,public ItemDisplay
 {
     Q_OBJECT
 public:
-    MainTreeWidget(KActionCollection*aCollection,QWidget*parent=0,Qt::WindowFlags f = 0);
+    explicit MainTreeWidget(KActionCollection*aCollection,QWidget*parent=0,Qt::WindowFlags f = 0);
     virtual ~MainTreeWidget();
 
     virtual bool openUrl(const KUrl &url,bool noReinit=false);

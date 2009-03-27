@@ -954,7 +954,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     QString msg,_p;
 
     if (!doNetworking()) {
-        emit clientException(i18n("Not commiting because networking is disabled"));
+        emit clientException(i18n("Not commit because networking is disabled"));
         return false;
     }
 
@@ -1031,8 +1031,8 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     }
 
     try {
-        StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Commiting"),
-            i18n("Commiting - hit cancel for abort"));
+        StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Commit"),
+            i18n("Commit - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         nnum = m_Data->m_Svnclient->commit(_targets,msg,depth,keeplocks);
     } catch (const svn::Exception&e) {

@@ -327,7 +327,7 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
 
     QString what = _what;
     svn::StatusEntries dlist;
-    while (what.endsWith("/")) {
+    while (what.endsWith('/')) {
         what.truncate(what.length()-1);
     }
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
@@ -565,7 +565,7 @@ SvnItemModelNode* SvnItemModel::findPath(const svn::Path&_p)
         if (!n1->isDir()) {
             return 0;
         }
-        QStringList lp = ip.split("/",QString::SkipEmptyParts);
+        QStringList lp = ip.split('/',QString::SkipEmptyParts);
         SvnItemModelNodeDir*d1 = static_cast<SvnItemModelNodeDir*>(n1);
         return d1->findPath(lp);
     }
@@ -587,7 +587,7 @@ void SvnItemModel::initDirWatch()
         connect(m_Data->m_DirWatch,SIGNAL(created(const QString&)),this,SLOT(slotCreated(const QString&)));
         connect(m_Data->m_DirWatch,SIGNAL(deleted(const QString&)),this,SLOT(slotDeleted(const QString&)));
         if (m_Data->m_DirWatch) {
-            m_Data->m_DirWatch->addDir(m_Data->m_Display->baseUri()+"/",KDirWatch::WatchDirOnly);
+            m_Data->m_DirWatch->addDir(m_Data->m_Display->baseUri()+'/',KDirWatch::WatchDirOnly);
             m_Data->m_DirWatch->startScan(true);
         }
     }
@@ -647,7 +647,7 @@ void SvnItemModel::checkAddNewItems(const QModelIndex&ind)
     SvnItemModelNodeDir*n = static_cast<SvnItemModelNodeDir*>(ind.internalPointer());
     QString what = n->fullName();
     svn::StatusEntries dlist;
-    while (what.endsWith("/")) {
+    while (what.endsWith('/')) {
         what.truncate(what.length()-1);
     }
     if (!svnWrapper()->makeStatus(what,dlist,m_Data->m_Display->baseRevision(),false,true,true) ) {

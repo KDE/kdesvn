@@ -561,7 +561,7 @@ namespace svn
     Pool pool;
     svn_revnum_t revnum = 0;
     const char*_neol;
-    if (native_eol==QString::null) {
+    if (native_eol.isNull()) {
         _neol = (const char*)0;
     } else {
         _neol = native_eol.TOUTF8();

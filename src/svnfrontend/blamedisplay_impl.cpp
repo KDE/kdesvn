@@ -118,7 +118,7 @@ public:
             setText(COL_AUT,m_Content.tAuthor());
         }
         QString _line = m_Content.tLine();
-        _line.replace("\t","    ");
+        _line.replace('\t',"    ");
         setText(COL_LINE,QString("%1").arg(_line));
     }
 
@@ -168,7 +168,7 @@ void BlameTreeItem::display()
     }
     setText(COL_LINENR,QString("%1").arg(m_Content.lineNumber()+1));
     QString _line = m_Content.tLine();
-    _line.replace("\t","    ");
+    _line.replace('\t',"    ");
     setText(COL_LINE,QString("%1").arg(_line));
 }
 

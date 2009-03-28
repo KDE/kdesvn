@@ -71,14 +71,14 @@ QString CheckoutInfo_impl::targetDir()
         return  m_TargetSelector->url().url();
     }
     QString _uri = reposURL();
-    while (_uri.endsWith("/")) {
+    while (_uri.endsWith('/')) {
         _uri.truncate(_uri.length()-1);
     }
     QStringList l = _uri.split('/',QString::SkipEmptyParts);
     if (l.count()==0) {
         return m_TargetSelector->url().url();
     }
-    return  m_TargetSelector->url().path()+"/"+l[l.count()-1];
+    return  m_TargetSelector->url().path()+'/'+l[l.count()-1];
 }
 
 bool CheckoutInfo_impl::overwrite()

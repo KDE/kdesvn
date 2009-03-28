@@ -57,7 +57,7 @@ SvnLogModelNode::SvnLogModelNode(const svn::LogEntry&_entry)
     :_data(_entry),_realName(QString())
 {
     _date = svn::DateTime(_entry.date);
-    QStringList sp = _entry.message.split("\n");
+    QStringList sp = _entry.message.split('\n');
     if (sp.count()==0) {
         _shortMessage=_entry.message;
     } else {
@@ -90,7 +90,7 @@ bool SvnLogModelNode::copiedFrom(QString&_n,long&_rev)const
 bool SvnLogModelNode::isParent(const QString&_par,const QString&tar)
 {
     if (_par==tar) return true;
-    QString par = _par+(_par.endsWith("/")?"":"/");
+    QString par = _par.endsWith('/')?_par:_par+'/';
     return tar.startsWith(par);
 }
 

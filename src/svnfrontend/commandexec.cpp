@@ -260,7 +260,7 @@ int CommandExec::exec(KCmdLineArgs*args)
         if (l.count()>0) {
             tmp=l[0];
         }
-        while (tmp.endsWith("/")) {
+        while (tmp.endsWith('/')) {
             tmp.truncate(tmp.length()-1);
         }
         m_pCPart->url.append(tmp);
@@ -559,7 +559,7 @@ void CommandExec::slotCmd_addnew()
 bool CommandExec::scanRevision()
 {
     QString revstring = m_pCPart->args->getOption("r");
-    QStringList revl = revstring.split(":",QString::SkipEmptyParts);
+    QStringList revl = revstring.split(':',QString::SkipEmptyParts);
     if (revl.count()==0) {
         return false;
     }

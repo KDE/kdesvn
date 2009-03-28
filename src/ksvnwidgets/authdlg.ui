@@ -1,6 +1,6 @@
 <ui version="4.0" >
  <class>AuthDialog</class>
- <widget class="QDialog" name="AuthDialog" >
+ <widget class="KDialog" name="AuthDialog" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -19,7 +19,7 @@
    <item>
     <widget class="QLabel" name="m_RealmLabel" >
      <property name="text" >
-      <string>Enter authentification info for</string>
+      <string>Enter authentication info for</string>
      </property>
      <property name="wordWrap" >
       <bool>false</bool>

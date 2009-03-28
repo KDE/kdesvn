@@ -427,7 +427,7 @@ QString kio_svnProtocol::makeSvnUrl(const KUrl&url,bool check_Wc)
     QStringList s = res.split("://");
     QString base = url.path();
     QString host = url.host();
-    QString user = (url.hasUser()?url.user()+(url.hasPass()?":"+url.pass():""):"");
+    QString user = (url.hasUser()?url.user()+(url.hasPass()?':'+url.pass():""):"");
     if (host.isEmpty()) {
         res=proto+"://"+base;
     } else {

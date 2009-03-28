@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>276</width>
-    <height>237</height>
+    <width>356</width>
+    <height>275</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -21,7 +21,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="kcfg_tree_direction" >
+    <widget class="KComboBox" name="kcfg_tree_direction" >
      <item>
       <property name="text" >
        <string>Left to right</string>
@@ -204,14 +204,12 @@ But this may slow down tree generation so it is disabled by default.</string>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
   </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
  </customwidgets>
- <includes>
-  <include location="local" >kcolorbutton.h</include>
-  <include location="local" >kcolorbutton.h</include>
-  <include location="local" >kcolorbutton.h</include>
-  <include location="local" >kcolorbutton.h</include>
-  <include location="local" >kcolorbutton.h</include>
- </includes>
  <resources/>
  <connections/>
 </ui>

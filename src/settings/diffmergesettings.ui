@@ -54,7 +54,7 @@
    <item>
     <widget class="QCheckBox" name="kcfg_extern_merge_default" >
      <property name="toolTip" >
-      <string>Set if merge with external program is prefered and not subversions merge</string>
+      <string>Set if merge with external program is preferred and not subversions merge</string>
      </property>
      <property name="text" >
       <string>Prefer external merge program</string>
@@ -122,7 +122,7 @@ The substitutions means:&lt;br>
 &lt;b>&lt;tt>%o&lt;/tt>&lt;/b> Old version&lt;br>
 &lt;b>&lt;tt>%m&lt;/tt>&lt;/b> Mine or local edit version&lt;br>
 &lt;b>&lt;tt>%n&lt;/tt>&lt;/b> Newest version&lt;br>
-&lt;b>&lt;tt>%t&lt;/tt>&lt;/b> The target to save as, kdesvn will use the orignal file name for it.
+&lt;b>&lt;tt>%t&lt;/tt>&lt;/b> The target to save as, kdesvn will use the original file name for it.
 &lt;/p>
 &lt;p>
 Default: &lt;tt>kdiff3 %o %m %n -o %t&lt;/tt>

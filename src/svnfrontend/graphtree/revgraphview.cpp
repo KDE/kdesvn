@@ -150,7 +150,7 @@ void RevGraphView::dotExit(int exitcode,QProcess::ExitStatus exitStatus)
     }
     // remove line breaks when lines to long
     QRegExp endslash("\\\\\\n");
-    dotOutput.replace(endslash,"");
+    dotOutput.remove(endslash);
     double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
     double dotWidth, dotHeight;
     QTextStream* dotStream = new QTextStream(&dotOutput, QIODevice::ReadOnly);
@@ -514,7 +514,7 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
     if (it==m_Tree.end()) {
         return res;
     }
-    QStringList sp = it.value().Message.split("\n");
+    QStringList sp = it.value().Message.split('\n');
     QString sm;
     if (sp.count()==0) {
         sm = it.value().Message;

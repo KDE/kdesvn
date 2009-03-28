@@ -153,13 +153,9 @@ KUrl UrlDlg::getUrl(QWidget*parent)
     QString url = dlg.selectedUrl().prettyUrl();
 
     // decodes %20 to normal spaces
-    QUrl decoded = QUrl::fromEncoded(url.toAscii());
-
     // trims the whitespace from both ends
     // of the URL
-    QString trimmed = decoded.toString().trimmed();
-
-    return KUrl(trimmed);
+    return KUrl(QUrl::fromEncoded(url.toAscii()).toString().trimmed());
 }
 
 #include "urldlg.moc"

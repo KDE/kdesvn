@@ -32,8 +32,7 @@
 
 
 EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
-//     :EditPropsDlgData(parent, name)
-    : QDialog(parent)
+    : KDialog(parent)
 {
     setupUi(this);
     setObjectName(name);

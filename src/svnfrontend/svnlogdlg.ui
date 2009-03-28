@@ -1,7 +1,7 @@
 <ui version="4.0" >
  <author>Rajko Albrecht</author>
  <class>LogDialog</class>
- <widget class="QDialog" name="LogDialog" >
+ <widget class="KDialog" name="LogDialog" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -302,6 +302,7 @@
   <tabstop>buttonBlame</tabstop>
  </tabstops>
  <includes>
+  <include location="local" >kdialog.h</include>
   <include location="local" >kpushbutton.h</include>
   <include location="local" >revisionbuttonimpl.h</include>
   <include location="local" >ktextbrowser.h</include>

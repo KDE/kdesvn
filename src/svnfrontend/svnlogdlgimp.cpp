@@ -116,7 +116,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
             QString reg;
             s = m_Actions->searchProperty(reg,"bugtraq:logregex",pegUrl,peg,true);
             if (!s.isNull() && !reg.isEmpty()) {
-                QStringList s1 = reg.split("\n");
+                QStringList s1 = reg.split('\n');
                 if (s1.size()>0) {
                     _r1.setPattern(s1[0]);
                     if (s1.size()>1) {
@@ -325,7 +325,7 @@ void SvnLogDlgImp::slotGetLogs()
 {
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
             m_endRevButton->revision(),m_peg,
-            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,Kdesvnsettings::last_node_follow(),this);
+            _base+'/'+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -344,7 +344,7 @@ void SvnLogDlgImp::slotPrevFifty()
     }
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(begin,
                             (begin.revnum()>50?svn::Revision::START:svn::Revision::HEAD),m_peg,
-                            _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
+                            _base+'/'+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -354,7 +354,7 @@ void SvnLogDlgImp::slotBeginHead()
 {
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(svn::Revision::HEAD,
                                         1,m_peg,
-                                        _base+"/"+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
+                                        _base+'/'+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }

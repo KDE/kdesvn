@@ -67,7 +67,7 @@ namespace svn
             if (!d.exists(BasePath)) {
                 d.mkdir(BasePath);
             }
-            BasePath=BasePath+"/"+".svnqt";
+            BasePath=BasePath+'/'+".svnqt";
             if (!d.exists(BasePath)) {
                 d.mkdir(BasePath);
             }

@@ -51,7 +51,7 @@ QString DumpRepo_impl::reposPath()
 {
     KUrl u = m_ReposPath->url();
     QString res = u.path();
-    while (res.endsWith("/")) {
+    while (res.endsWith('/')) {
         res.truncate(res.length()-1);
     }
     return res;
@@ -65,7 +65,7 @@ QString DumpRepo_impl::targetFile()
 {
     KUrl u = m_OutputFile->url();
     QString res = u.path();
-    while (res.endsWith("/")) {
+    while (res.endsWith('/')) {
         res.truncate(res.length()-1);
     }
     return res;

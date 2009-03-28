@@ -27,7 +27,7 @@
 #include <qlabel.h>
 
 AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :QDialog(parent),Ui::AuthDialog(),curPass("")
+    :KDialog(parent),Ui::AuthDialog(),curPass("")
 {
     setupUi(this);
     setObjectName(name);
@@ -40,7 +40,7 @@ AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget 
             m_StorePasswordButton->text()+QString(" (%1)")
             .arg((Kdesvnsettings::passwords_in_wallet()?i18n("into KDE Wallet"):i18n("into subversions simple storage"))));
     if (!realm.isEmpty()) {
-        m_RealmLabel->setText(m_RealmLabel->text()+" "+realm);
+        m_RealmLabel->setText(m_RealmLabel->text()+' '+realm);
         resize( QSize(334, 158).expandedTo(minimumSizeHint()) );
     }
 }

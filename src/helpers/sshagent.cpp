@@ -170,7 +170,7 @@ void SshAgent::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
 
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
-    QStringList m_outputLines = m_Output.split("\n",QString::SkipEmptyParts);
+    QStringList m_outputLines = m_Output.split('\n',QString::SkipEmptyParts);
 
     QStringList::Iterator it  = m_outputLines.begin();
     QStringList::Iterator end = m_outputLines.end();

@@ -44,14 +44,6 @@
 
 namespace svn
 {
-  static const char *
-  VALID_SCHEMAS [] =
-  {
-    "http","https","file",
-    "svn","svn+ssh","svn+http","svn+https","svn+file",
-    "ksvn","ksvn+ssh","ksvn+http","ksvn+https","ksvn+file","ksvn",
-    0
-  };
 
   static bool mSchemasInitialized = false;
   QStringList mSchemas;
@@ -62,12 +54,15 @@ namespace svn
 
   bool Url::isLocal(const QString& url)
   {
-    Qt::CaseSensitivity cs=Qt::CaseInsensitive;
+    static Qt::CaseSensitivity cs=Qt::CaseInsensitive;
+    static QString stf("file://");
+    static QString stsf("svn+file://");
+    static QString stkf("ksvn+file://");
     if (
-        url.startsWith("file://",cs) ||
-        url.startsWith("/") ||
-        url.startsWith("svn+file://",cs) ||
-        url.startsWith("ksvn+file://",cs) )
+        url.startsWith(stf,cs) ||
+        url.startsWith('/') ||
+        url.startsWith(stsf,cs) ||
+        url.startsWith(stkf,cs) )
     {
         return true;
     }
@@ -76,11 +71,19 @@ namespace svn
 
   bool Url::isValid (const QString& url)
   {
+    static QString
+    VALID_SCHEMAS [] =
+    {
+        QString("http"),QString("https"),QString("file"),
+        QString("svn"),QString("svn+ssh"),QString("svn+http"),QString("svn+https"),QString("svn+file"),
+        QString("ksvn"),QString("ksvn+ssh"),QString("ksvn+http"),QString("ksvn+https"),QString("ksvn+file"),
+        QString()
+    };
     QString urlTest(url);
     unsigned int index = 0;
-    while (VALID_SCHEMAS[index]!=0)
+    while (!VALID_SCHEMAS[index].isEmpty())
     {
-      QString schema = QString::FROMUTF8(VALID_SCHEMAS[index]);
+      QString&schema = VALID_SCHEMAS[index];
       QString urlComp = urlTest.mid(0, schema.length());
 
       if (schema == urlComp)
@@ -89,7 +92,6 @@ namespace svn
       }
       ++index;
     }
-
     return false;
   }
 
@@ -162,7 +164,7 @@ namespace svn
         break;
 
       // found
-      QString schema (descriptions.mid(pos, posEnd-pos) + ":");
+      QString schema (descriptions.mid(pos, posEnd-pos) + ':');
       mSchemas.push_back (schema);
 
       // forward to the next newline

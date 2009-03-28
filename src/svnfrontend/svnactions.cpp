@@ -128,7 +128,7 @@ public:
     {
         if (Kdesvnsettings::use_external_diff()) {
             QString edisp = Kdesvnsettings::external_diff_display();
-            QStringList wlist = edisp.split(" ");
+            QStringList wlist = edisp.split(' ');
             if (wlist.count()>=3 && edisp.indexOf("%1")!=-1 && edisp.indexOf("%2")!=-1) {
                 return true;
             }
@@ -315,7 +315,7 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
                     what=s1;
                 } else {
                     s2=which.mid(m_Data->m_ParentList->baseUri().length());
-                    what=s1+"/"+s2;
+                    what=s1+'/'+s2;
                 }
                 rl.log(what,start,end,peg,*logs,!follow,limit);
             }
@@ -431,7 +431,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         {
             peg=svn::Revision::HEAD;
         }
-        cacheKey=_rev.toString()+"/"+url;
+        cacheKey=_rev.toString()+'/'+url;
     }
     svn::InfoEntries e;
 
@@ -451,7 +451,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             m_Data->m_InfoCache.insertKey(e[0],cacheKey);
             if (peg != svn::Revision::UNDEFINED && peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
                 // for persistent storage, store head into persistent cache makes no sense.
-                cacheKey=e[0].revision().toString()+"/"+url;
+                cacheKey=e[0].revision().toString()+'/'+url;
                 m_Data->m_InfoCache.insertKey(e[0],cacheKey);
             }
         }
@@ -1103,16 +1103,16 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
                                   bool isDir,QWidget*p,bool rec)
 {
     QString edisp = Kdesvnsettings::external_diff_display();
-    QStringList wlist = edisp.split(" ");
+    QStringList wlist = edisp.split(' ');
     QFileInfo f1(p1);
     QFileInfo f2(p2);
     KTemporaryFile tfile, tfile2;
 
-    tfile.setPrefix(f1.fileName()+"-"+start.toString());
-    tfile2.setPrefix(f2.fileName()+"-"+end.toString());
+    tfile.setPrefix(f1.fileName()+'-'+start.toString());
+    tfile2.setPrefix(f2.fileName()+'-'+end.toString());
 
-    QString s1 = f1.fileName()+"-"+start.toString();
-    QString s2 = f2.fileName()+"-"+end.toString();
+    QString s1 = f1.fileName()+'-'+start.toString();
+    QString s2 = f2.fileName()+'-'+end.toString();
     if (f1.fileName()==f2.fileName() && p1!=p2) {
         s2.append("-sec");
     }
@@ -1128,12 +1128,12 @@ void SvnActions::makeDiffExternal(const QString&p1,const svn::Revision&start,con
     svn::Revision peg = _peg;
 
     if (start != svn::Revision::WORKING) {
-        first = isDir?tdir1.name()+"/"+s1:tfile.fileName();
+        first = isDir?tdir1.name()+'/'+s1:tfile.fileName();
     } else {
         first = p1;
     }
     if (end!=svn::Revision::WORKING) {
-        second = isDir?tdir1.name()+"/"+s2:tfile2.fileName();
+        second = isDir?tdir1.name()+'/'+s2:tfile2.fileName();
     } else {
         second = p2;
     }
@@ -1309,7 +1309,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
     QString what = Kdesvnsettings::external_diff_display();
 
     if (Kdesvnsettings::use_external_diff() && (what.indexOf("%1")==-1 || what.indexOf("%2")==-1)) {
-        QStringList wlist = what.split(" ");
+        QStringList wlist = what.split(' ');
         WatchedProcess*proc = new WatchedProcess(this);
         bool fname_used = false;
 
@@ -1662,7 +1662,7 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
 {
     QString fUrl = rUrl;
     QString ex;
-    while (fUrl.endsWith("/")) {
+    while (fUrl.endsWith('/')) {
         fUrl.truncate(fUrl.length()-1);
     }
     svn::Path p(KUrl(tPath).path());
@@ -1766,7 +1766,7 @@ bool SvnActions::makeSwitch(const QString&rUrl,const QString&tPath,const svn::Re
     if (!m_Data->m_CurrentContext) return false;
     QString fUrl = rUrl;
     QString ex;
-    while (fUrl.endsWith("/")) {
+    while (fUrl.endsWith('/')) {
         fUrl.truncate(fUrl.length()-1);
     }
     svn::Path p(tPath);
@@ -1789,10 +1789,10 @@ bool SvnActions::makeRelocate(const QString&fUrl,const QString&tUrl,const QStrin
     QString _f = fUrl;
     QString _t = tUrl;
     QString ex;
-    while (_f.endsWith("/")) {
+    while (_f.endsWith('/')) {
         _f.truncate(_f.length()-1);
     }
-    while (_t.endsWith("/")) {
+    while (_t.endsWith('/')) {
         _t.truncate(_t.length()-1);
     }
     svn::Path p(path);
@@ -1889,7 +1889,7 @@ void SvnActions::slotResolve(const QString&p)
 {
     if (!m_Data->m_CurrentContext) return;
     QString eresolv = Kdesvnsettings::conflict_resolver();
-    QStringList wlist = eresolv.split(" ");
+    QStringList wlist = eresolv.split(' ');
     if (wlist.size()==0) {
         return;
     }
@@ -1909,11 +1909,11 @@ void SvnActions::slotResolve(const QString&p)
     WatchedProcess*proc = new WatchedProcess(this);
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%o"||*it=="%l") {
-            *proc<<(base+"/"+i1.conflictOld());
+            *proc<<(base+'/'+i1.conflictOld());
         } else if (*it=="%m" || *it=="%w") {
-            *proc<<(base+"/"+i1.conflictWrk());
+            *proc<<(base+'/'+i1.conflictWrk());
         } else if (*it=="%n"||*it=="%r") {
-            *proc<<(base+"/"+i1.conflictNew());
+            *proc<<(base+'/'+i1.conflictNew());
         } else if (*it=="%t") {
             *proc<<p;
         } else {
@@ -2002,17 +2002,17 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         return;
     }
 
-    QString s1 = f1.fileName()+"-"+rev1.toString();
-    QString s2 = f2.fileName()+"-"+rev2.toString();
+    QString s1 = f1.fileName()+'-'+rev1.toString();
+    QString s2 = f2.fileName()+'-'+rev2.toString();
     QString first,second,out;
     if (rev1 != svn::Revision::WORKING) {
-        first = tdir1.name()+"/"+s1;
+        first = tdir1.name()+'/'+s1;
     } else {
         first = src1;
     }
     if (!singleMerge) {
         if (rev2!=svn::Revision::WORKING) {
-            second = tdir1.name()+"/"+s2;
+            second = tdir1.name()+'/'+s2;
         } else {
             second = src2;
         }
@@ -2058,7 +2058,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         }
     }
     QString edisp = Kdesvnsettings::external_merge_program();
-    QStringList wlist = edisp.split(" ");
+    QStringList wlist = edisp.split(' ');
     WatchedProcess*proc = new WatchedProcess(this);
     for (QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%s1") {
@@ -2561,7 +2561,7 @@ bool SvnActions::doNetworking()
     if (m_Data->m_ParentList->isNetworked()) {
         // if called http:// etc.pp.
         is_url=true;
-    } else if (m_Data->m_ParentList->baseUri().startsWith("/")){
+    } else if (m_Data->m_ParentList->baseUri().startsWith('/')){
         // if opened a working copy we must check if it points to a networking repository
         svn::InfoEntry e;
         if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::UNDEFINED,e)) {
@@ -2661,7 +2661,7 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
         data = mp["svn:ignore"];
     }
     bool result = false;
-    QStringList lst = data.split("\n",QString::SkipEmptyParts);
+    QStringList lst = data.split('\n',QString::SkipEmptyParts);
     QStringList::size_type it = lst.indexOf(name);
     if (it != -1) {
         if (unignore) {
@@ -2690,7 +2690,7 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn
 {
     svn::PathPropertiesMapListPtr pm;
     if (!which.isEmpty()) {
-        QString fk=where.toString()+"/"+which;
+        QString fk=where.toString()+'/'+which;
         QString ex;
         svn::Path p(which);
 
@@ -2793,7 +2793,7 @@ bool SvnActions::isLocalWorkingCopy(const KUrl&url,QString&_baseUri)
 {
     if (url.isEmpty()||!url.isLocalFile()) return false;
     QString cleanpath = url.path();
-    while (cleanpath.endsWith("/")) {
+    while (cleanpath.endsWith('/')) {
         cleanpath.truncate(cleanpath.length()-1);
     }
     _baseUri="";

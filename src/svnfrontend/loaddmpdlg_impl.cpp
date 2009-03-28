@@ -91,7 +91,7 @@ QString LoadDmpDlg_impl::repository()const
 {
     KUrl u = m_Repository->url();
     QString res = u.path();
-    while (res.endsWith("/")) {
+    while (res.endsWith('/')) {
         res.truncate(res.length()-1);
     }
     return res;
@@ -104,7 +104,7 @@ QString LoadDmpDlg_impl::repository()const
 QString LoadDmpDlg_impl::parentPath()const
 {
     QString res = m_Rootfolder->text();
-    while (res.endsWith("/")) {
+    while (res.endsWith('/')) {
         res.truncate(res.length()-1);
     }
     return res;

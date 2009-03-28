@@ -89,7 +89,7 @@ void SvnItem_p::init()
     m_kdename="";
     mptr = 0;
     lRev=svn::Revision::UNDEFINED;
-    while (m_full.endsWith("/")) {
+    while (m_full.endsWith('/')) {
         /* dir name possible */
         m_full.truncate(m_full.length()-1);
     }

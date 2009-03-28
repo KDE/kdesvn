@@ -126,7 +126,7 @@ namespace svn
     }
     while (next != NULL && next->message != NULL)
     {
-      message = message + "\n" + QString::FROMUTF8(next->message);
+      message = message + '\n' + QString::FROMUTF8(next->message);
 
       next = next->child;
     }

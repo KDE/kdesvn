@@ -204,7 +204,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
     _url.setProtocol(proto);
     proto = _url.url(KUrl::RemoveTrailingSlash);
 
-    QStringList s = proto.split("?");
+    QStringList s = proto.split('?');
     if (s.size()>1) {
         setBaseUri(s[0]);
     } else {
@@ -221,16 +221,16 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
     } else {
         if (url.isLocalFile()) {
             QString s = url.path();
-            while(s.endsWith("/")) {
+            while(s.endsWith('/')) {
                 s.remove(s.length()-1,1);
             }
             QFileInfo fi(s);
             if (fi.exists() && fi.isSymLink()) {
                 QString sl = fi.readLink();
-                if (sl.startsWith("/")) {
+                if (sl.startsWith('/')) {
                     setBaseUri(sl);
                 } else {
-                    fi.setFile(fi.path()+"/"+sl);
+                    fi.setFile(fi.path()+'/'+sl);
                     setBaseUri(fi.absoluteFilePath());
                 }
             } else {
@@ -1537,7 +1537,7 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
     KUrl::List::iterator it = lst.begin();
     QStringList l;
     for (;it!=lst.end();++it) {
-        l = (*it).prettyUrl().split("?");
+        l = (*it).prettyUrl().split('?');
         if (l.size()>1) {
             (*it) = l[0];
         } else if (isWorkingCopy())
@@ -1889,7 +1889,7 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
     KDialog*dlg;
     KUrl uri = importUrl;
     QString targetUri = target;
-    while (targetUri.endsWith("/")) {
+    while (targetUri.endsWith('/')) {
         targetUri.truncate(targetUri.length()-1);
     }
 
@@ -1918,11 +1918,11 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
     ptr->saveHistory(false);
     uri.setProtocol("");
     QString iurl = uri.path();
-    while (iurl.endsWith("/")) {
+    while (iurl.endsWith('/')) {
         iurl.truncate(iurl.length()-1);
     }
     if (dirs && ptr2 && ptr2->createDir()) {
-        targetUri+= "/"+uri.fileName();
+        targetUri+= '/'+uri.fileName();
     }
     if (ptr2) {
         m_Data->m_Model->svnWrapper()->slotImport(iurl,targetUri,logMessage,rec,ptr2->noIgnore(),ptr2->ignoreUnknownNodes());

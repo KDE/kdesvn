@@ -25,7 +25,7 @@
 class QStringList;
 class QString;
 
-class EditProperty_impl: public QDialog, public Ui::EditPropsDlg {
+class EditProperty_impl: public KDialog, public Ui::EditPropsDlg {
 Q_OBJECT
 public:
     EditProperty_impl(QWidget *parent = 0, const char *name = 0);

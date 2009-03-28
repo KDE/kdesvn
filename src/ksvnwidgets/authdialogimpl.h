@@ -23,7 +23,7 @@
 #include "src/ksvnwidgets/ui_authdlg.h"
 #include <qstring.h>
 
-class AuthDialogImpl: public QDialog, public Ui::AuthDialog {
+class AuthDialogImpl: public KDialog, public Ui::AuthDialog {
     Q_OBJECT
 public:
     AuthDialogImpl(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);

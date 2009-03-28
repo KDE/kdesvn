@@ -81,9 +81,9 @@ namespace svn
         /// @todo make sure that "@" is never used as revision parameter
         QUrl uri = m_path;
         m_path = uri.path();
-        m_path.replace("@","%40");
+        m_path.replace('@',"%40");
         m_path = uri.scheme()+"://"+uri.authority()+m_path;
-        if (m_path.endsWith("/")) {
+        if (m_path.endsWith('/')) {
             int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
             m_path = QString::FROMUTF8(int_path);
         }

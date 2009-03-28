@@ -163,19 +163,19 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
                     }
 
                     if (prop_state == svn_wc_notify_state_conflicted)
-                        userstring += "C";
+                        userstring += 'C';
                     else if (prop_state == svn_wc_notify_state_merged)
-                        userstring += "G";
+                        userstring += 'G';
                     else if (prop_state == svn_wc_notify_state_changed)
-                        userstring += "U";
+                        userstring += 'U';
                     else
-                        userstring += " ";
+                        userstring += ' ';
 
                     if (! ((content_state == svn_wc_notify_state_unchanged
                                     || content_state == svn_wc_notify_state_unknown)
                                 && (prop_state == svn_wc_notify_state_unchanged
                                     || prop_state == svn_wc_notify_state_unknown)))
-                        userstring += QString( " " ) + path;
+                        userstring += QString(' ') + path;
                 }
                 break;
             }

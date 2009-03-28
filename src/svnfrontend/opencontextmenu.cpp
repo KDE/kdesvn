@@ -47,7 +47,7 @@ void OpenContextmenu::setup()
             continue;
         }
         _found.append((*it)->name());
-        QString actionName( (*it)->name().replace("&", "&&") );
+        QString actionName( (*it)->name().replace('&', "&&") );
         act = addAction(SmallIcon((*it)->icon()),actionName);
         QVariant _data=id;
         act->setData(_data);

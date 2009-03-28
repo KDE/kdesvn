@@ -332,7 +332,7 @@ bool RevisionTree::topDownScan()
 bool RevisionTree::isParent(const QString&_par,const QString&tar)
 {
     if (_par==tar) return true;
-    QString par = _par+(_par.endsWith("/")?"":"/");
+    QString par = _par.endsWith('/')?_par:_par+'/';
     return tar.startsWith(par);
 }
 
@@ -344,8 +344,8 @@ bool RevisionTree::isValid()const
 static QString uniqueNodeName(long rev,const QString&path)
 {
     QString res = KCodecs::base64Encode(path.toLocal8Bit(),false);
-    res.replace("\"","_quot_");
-    res.replace(" ","_space_");
+    res.replace('\"',"_quot_");
+    res.replace(' ',"_space_");
     QString n; n.sprintf("%05ld",rev);
     res = "\""+n+QString("_%1\"").arg(res);
     return res;

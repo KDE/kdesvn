@@ -7,39 +7,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>209</width>
-    <height>46</height>
+    <width>241</width>
+    <height>45</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Form1</string>
   </property>
-  <layout class="QHBoxLayout" >
+  <layout class="QHBoxLayout" name="hboxLayout" >
    <item>
-    <widget class="QComboBox" name="m_DepthCombo" >
+    <widget class="KComboBox" name="m_DepthCombo" >
      <property name="toolTip" >
       <string>Select depth of operation</string>
      </property>
-     <property name="whatsThis" >
-      <string>&lt;b>Kind of depth&lt;/b>:
-&lt;p>
-&lt;i>empty depth&lt;/i>&lt;br>Just the named directory, no entries.  Updates will not pull in any files or subdirectories not already present.
-&lt;/p>
-&lt;p>
-&lt;i>Files depth&lt;/i>&lt;br>Folder and its file children, but not subdirs. Updates will pull in any files not already present, but not subdirectories.
-&lt;/p>
-&lt;p>
-&lt;i>Immediate depth&lt;/i>&lt;br>
-Folder and its entries. Updates will pull in any files or subdirectories not already present; those subdirectories entries will have depth-empty.
-&lt;/p>
-&lt;p>
-&lt;i>Infinity depth&lt;/i>&lt;br>
-Updates will pull in any files or subdirectories not already present; those subdirectories' this_dir entries will have depth-infinity.&lt;br>
-Equivalent to the pre-1.5 default update behavior.
-&lt;/p></string>
+     <property name="statusTip" >
+      <string>Select depth of operation</string>
      </property>
-     <property name="duplicatesEnabled" >
-      <bool>false</bool>
+     <property name="whatsThis" >
+      <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:8pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Kind of depth&lt;/span>: &lt;/p>
+&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-style:italic;">empty depth&lt;/span>&lt;br />Just the named directory, no entries. Updates will not pull in any files or subdirectories not already present. &lt;/p>
+&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-style:italic;">Files depth&lt;/span>&lt;br />Folder and its file children, but not subdirs. Updates will pull in any files not already present, but not subdirectories. &lt;/p>
+&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-style:italic;">Immediate depth&lt;/span>&lt;br />Folder and its entries. Updates will pull in any files or subdirectories not already present; those subdirectories entries will have depth-empty. &lt;/p>
+&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-style:italic;">Infinity depth&lt;/span>&lt;br />Updates will pull in any files or subdirectories not already present; those subdirectories' this_dir entries will have depth-infinity.&lt;br />Equivalent to the pre-1.5 default update behavior. &lt;/p>&lt;/body>&lt;/html></string>
      </property>
      <item>
       <property name="text" >
@@ -64,14 +57,14 @@ Equivalent to the pre-1.5 default update behavior.
     </widget>
    </item>
    <item>
-    <spacer>
+    <spacer name="spacerItem" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeType" >
       <enum>QSizePolicy::Expanding</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>40</width>
        <height>20</height>
@@ -82,6 +75,13 @@ Equivalent to the pre-1.5 default update behavior.
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -1,3 +1,22 @@
+/***************************************************************************
+ *   Copyright (C) 2005-2009 by Rajko Albrecht  ral@alwins-world.de        *
+ *   http://kdesvn.alwins-world.de/                                        *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
+ ***************************************************************************/
 #include "LogCache.hpp"
 
 #include <qdir.h>
@@ -115,7 +134,7 @@ public:
             //qDebug() << "Error select_01: " << query.lastError().text() << "(" << query.lastQuery() << ")";
         }
         if (!db.isEmpty()) {
-            QString fulldb = m_BasePath+"/"+db+".db";
+            QString fulldb = m_BasePath+'/'+db+".db";
             QDataBase _db = QSqlDatabase::addDatabase(SQLTYPE,"tmpdb");
             _db.setDatabaseName(fulldb);
             if (!checkReposDb(_db)) {
@@ -157,7 +176,7 @@ public:
             _key = QString("%1-%2").arg(dbFile).arg(i++);
         }
         QDataBase _db = QSqlDatabase::addDatabase(SQLTYPE,_key);
-        QString fulldb = m_BasePath+"/"+dbFile+".db";
+        QString fulldb = m_BasePath+'/'+dbFile+".db";
         _db.setDatabaseName(fulldb);
 //        //qDebug("try database open %s",fulldb.TOUTF8().data());
         if (!checkReposDb(_db)) {
@@ -244,7 +263,7 @@ void LogCache::setupCachePath()
     if (!d.exists(m_BasePath)) {
         d.mkdir(m_BasePath);
     }
-    m_BasePath=m_BasePath+"/"+s_CACHE_FOLDER;
+    m_BasePath=m_BasePath+'/'+s_CACHE_FOLDER;
     if (!d.exists(m_BasePath)) {
         d.mkdir(m_BasePath);
     }

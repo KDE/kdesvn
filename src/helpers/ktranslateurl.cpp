@@ -146,7 +146,7 @@ QString helpers::KTranslateUrl::makeKdeUrl(const QString&_proto)
 {
     QString proto;
     if (_proto.startsWith("svn+")){
-        proto = "k"+_proto;
+        proto = 'k'+_proto;
     } else if (_proto== QString("svn")){
         proto = "ksvn";
     } else {

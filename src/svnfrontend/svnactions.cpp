@@ -49,7 +49,6 @@
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
-#include "src/svnqt/url.hpp"
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"
 
@@ -637,23 +636,23 @@ bool SvnActions::makeMkdir(const QStringList&which,const QString&logMessage)
 
 QString SvnActions::makeMkdir(const QString&parentDir)
 {
-    if (!m_Data->m_CurrentContext) return QString::null;
+    if (!m_Data->m_CurrentContext) return QString();
     QString ex;
     bool isOk=false;
-    ex = KInputDialog::getText(i18n("New folder"),i18n("Enter folder name:"),QString::null,&isOk);
+    ex = KInputDialog::getText(i18n("New folder"),i18n("Enter folder name:"),QString(),&isOk);
     if (!isOk) {
-        return QString::null;
+        return QString();
     }
     svn::Path target(parentDir);
     target.addComponent(ex);
     ex = "";
 
-    QString logMessage=QString::null;
+    QString logMessage;
     try {
         m_Data->m_Svnclient->mkdir(target,logMessage);
     }catch (const svn::Exception&e) {
         emit clientException(e.msg());
-        return QString::null;
+        return QString();
     }
 
     ex = target.path();
@@ -674,7 +673,7 @@ QString SvnActions::getInfo(const SvnItemList&lst,const svn::Revision&rev,const 
 
 QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all)
 {
-    if (!m_Data->m_CurrentContext) return QString::null;
+    if (!m_Data->m_CurrentContext) return QString();
     QString ex;
     svn::InfoEntries entries;
     if (recursive) {
@@ -687,12 +686,12 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                     (_what.indexOf("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive?svn::DepthInfinity:svn::DepthEmpty,rev,peg));
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
-            return QString::null;
+            return QString();
         }
     } else {
         svn::InfoEntry info;
         if (!singleInfo(_what,rev,info,peg)) {
-            return QString::null;
+            return QString();
         }
         entries.append(info);
     }
@@ -933,7 +932,7 @@ void SvnActions::doCommit(const SvnItemList&which)
     }
     if (m_Data->m_ParentList->baseUri().length()>0) {
         if (chdir(m_Data->m_ParentList->baseUri().toLocal8Bit())!=0) {
-            QString msg = i18n("Could not change to folder %1\n").arg(m_Data->m_ParentList->baseUri())
+            QString msg = i18n("Could not change to folder %1\n",m_Data->m_ParentList->baseUri())
                 +QString::fromLocal8Bit(strerror(errno));
             emit sendNotify(msg);
         }
@@ -1676,7 +1675,7 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (_exp) {
             /// @todo setup parameter for export operation
-            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,overwrite,QString::null,ignoreExternal,depth);
+            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,overwrite,QString(),ignoreExternal,depth);
         } else {
             m_Data->m_Svnclient->checkout(fUrl,p,r,peg,depth,ignoreExternal,overwrite);
         }
@@ -2018,7 +2017,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
         }
     } else {
         // only two-way  merge
-        second = QString::null;
+        second.clear();
     }
     if (second == first) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("Both entries seems to be the same, won't do a merge."));
@@ -2746,12 +2745,12 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
     svn::InfoEntry inf;
 
     if (!singleInfo(start,where,inf)) {
-        return QString::null;
+        return QString();
     }
     while(pa.length()>0) {
         svn::PathPropertiesMapListPtr pm = propList(pa,where,false);
         if (!pm) {
-            return QString::null;
+            return QString();
         }
         if (pm->size()>0) {
             svn::PropertiesMap&mp = (*pm)[0].second;
@@ -2770,7 +2769,7 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
             break;
         }
     }
-    return QString::null;
+    return QString();
 }
 
 bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,const svn::Revision&where,bool rec)
@@ -2846,7 +2845,7 @@ QString SvnActions::getContextData(const QString&aKey)const
     if (m_Data->m_contextData.find(aKey)!=m_Data->m_contextData.end()) {
         return m_Data->m_contextData[aKey];
     }
-    return QString::null;
+    return QString();
 }
 
 bool SvnActions::threadRunning(ThreadType which)

@@ -319,7 +319,7 @@ bool RevisionTree::topDownScan()
                 m_Data->progress->setLabelText(label);
                 kapp->processEvents();
             }
-            m_Data->m_History[j].addCopyTo(m_Data->m_OldHistory[j].changedPaths[i].path,QString::null,-1,m_Data->m_OldHistory[j].changedPaths[i].action);
+            m_Data->m_History[j].addCopyTo(m_Data->m_OldHistory[j].changedPaths[i].path,QString(),-1,m_Data->m_OldHistory[j].changedPaths[i].action);
         }
         m_Data->m_History[j].author=m_Data->m_OldHistory[j].author;
         m_Data->m_History[j].date=m_Data->m_OldHistory[j].date;

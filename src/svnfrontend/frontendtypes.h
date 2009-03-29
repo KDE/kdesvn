@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _FRONTEND_TYPES_H
-#define _FRONTEND_TYPES_H
+#ifndef FRONTEND_TYPES_H
+#define FRONTEND_TYPES_H
 
 #include "svnqt/shared_pointer.hpp"
 #include <QList>

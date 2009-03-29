@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef __KDESVN_EVENTS_H
-#define __KDESVN_EVENTS_H
+#ifndef KDESVN_EVENTS_H
+#define KDESVN_EVENTS_H
 
 #include <qevent.h>
 #include "src/svnqt/svnqt_defines.hpp"

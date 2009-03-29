@@ -268,7 +268,7 @@ namespace svn
                        const Revision&base_revision,
                        const StringArray&changelists)
   {
-      propset(propName,QString::null,path,depth,skip_checks,base_revision,changelists);
+      propset(propName,QString(),path,depth,skip_checks,base_revision,changelists);
   }
 
 //--------------------------------------------------------------------------------

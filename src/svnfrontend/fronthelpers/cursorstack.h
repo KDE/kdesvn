@@ -21,11 +21,11 @@
  * \file cursorstack.h
  * \brief Defines and implements CursorStack
  */
-#ifndef __CURSOR_STACK_H
-#define __CURSOR_STACK_H
+#ifndef CURSOR_STACK_H
+#define CURSOR_STACK_H
 
 #include <kapplication.h>
-#include <qcursor.h>
+#include <QCursor>
 
 //! Change cursor on stack.
 /*! May used in methods where more than returns exists. Cursor will restored on destruction

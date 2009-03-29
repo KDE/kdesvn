@@ -66,11 +66,7 @@ KUrl KTranslateUrl::translateSystemUrl(const KUrl&_url)
 bool KTranslateUrl::parseURL(const KUrl&url,QString&name,QString&path)
 {
     QString url_path = url.path();
-#if QT_VERSION < 0x040000
-    int i = url_path.find('/', 1);
-#else
     int i = url_path.indexOf('/',1);
-#endif
     if (i > 0)
     {
         name = url_path.mid(1, i-1);
@@ -79,10 +75,10 @@ bool KTranslateUrl::parseURL(const KUrl&url,QString&name,QString&path)
     else
     {
         name = url_path.mid(1);
-        path = QString::null;
+        path.clear();
     }
 
-    return name != QString::null;
+    return !name.isEmpty();
 }
 
 KUrl KTranslateUrl::findSystemBase(const QString&filename)

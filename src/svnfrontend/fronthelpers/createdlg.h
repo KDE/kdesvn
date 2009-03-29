@@ -17,9 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-
-#ifndef _CREATE_DIALOG_H
-#define _CREATE_DIALOG_H
+#ifndef CREATEDLG_H
+#define CREATEDLG_H
 
 #include <kdialog.h>
 #include <kconfig.h>

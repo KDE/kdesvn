@@ -1,11 +1,10 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=kdesvn
 GenericName=SVN client
 GenericName[de]=Graphische Oberfläche für SVN
 GenericName[es]=Cliente SVN
 GenericName[lt]=SVN klientas
-Exec=kdesvn %i %m -caption "%c"
+Exec=kdesvn -caption "%c"
 Icon=kdesvn
 Type=Application
 DocPath=kdesvn/index.html

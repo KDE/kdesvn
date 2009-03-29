@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef __ITEMDISPLAY_H
-#define __ITEMDISPLAY_H
+#ifndef ITEMDISPLAY_H
+#define ITEMDISPLAY_H
 
 #include "src/svnqt/svnqttypes.hpp"
 #include <QString>

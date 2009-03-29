@@ -72,14 +72,14 @@ const QString CContextListener::action_strings[]={
     I18N_NOOP("Update"), //svn_wc_notify_update_update
     I18N_NOOP("Update complete"),
     I18N_NOOP("Update external module"),
-    QString::null, // status completed - will not send is just noisy
+    QString(), // status completed - will not send is just noisy
     I18N_NOOP("Status on external"), //svn_wc_notify_status_external
     I18N_NOOP("Commit Modified"),
     I18N_NOOP("Commit Added"),
     I18N_NOOP("Commit Deleted"),
     I18N_NOOP("Commit Replaced"),
-    QString::null, //tx delta -> making ticks instead
-    QString::null, //svn_wc_notify_blame_revision - using ticks
+    QString(), //tx delta -> making ticks instead
+    QString(), //svn_wc_notify_blame_revision - using ticks
     I18N_NOOP("Locking"),
     I18N_NOOP("Unlocked"),
     I18N_NOOP("Lock failed"),
@@ -87,13 +87,13 @@ const QString CContextListener::action_strings[]={
 };
 
 const QString CContextListener::notify_state_strings[]={
-    QString::null, // = 0
-    QString::null,
+    QString(), // = 0
+    QString(),
     I18N_NOOP("unchanged"),
     I18N_NOOP("item wasn't present"),
     I18N_NOOP("unversioned item obstructed work"),
     // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
-    QString::null,
+    QString(),
     I18N_NOOP("Modified state had mods merged in."),
     I18N_NOOP("Modified state got conflicting mods.")
 };
@@ -101,14 +101,14 @@ const QString CContextListener::notify_state_strings[]={
 QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
 {
     if (action>=smax_actionstring||action<0) {
-        return QString::null;
+        return QString();
     }
     return action_strings[action].isEmpty() ? QString(): /*i18n(*/action_strings[action]/*)*/;
 }
 
 QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 {
-    if (state > svn_wc_notify_state_conflicted || state<0) return QString::null;
+    if (state > svn_wc_notify_state_conflicted || state<0) return QString();
     return notify_state_strings[state].isEmpty()?QString():/*i18n(*/notify_state_strings[state]/*)*/;
 }
 
@@ -274,12 +274,12 @@ bool CContextListener::contextSslClientCertPrompt (QString & certFile)
 {
     kDebug(9510)<< certFile << endl;
     emit waitShow(true);
-//     QString afile = KFileDialog::getOpenFileName(QString::null,
-//         QString::null,
+//     QString afile = KFileDialog::getOpenFileName(QString(),
+//         QString(),
 //         0,
 //         i18n("Open a file with a #PKCS12 certificate"));
     QString afile = KFileDialog::getOpenFileName(KUrl(),
-        QString::null,
+        QString(),
         0,
         i18n("Open a file with a #PKCS12 certificate"));
     emit waitShow(false);

@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef _COMMITMODEL_H
-#define _COMMITMODEL_H
+#ifndef COMMITMODEL_H
+#define COMMITMODEL_H
 
 #include "commitmodelfwd.h"
 #include "commitmodelhelper.h"

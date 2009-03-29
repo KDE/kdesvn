@@ -86,7 +86,7 @@ public:
             return false;
         }
 
-        QSqlQuery _q(QString::null, aDb);
+        QSqlQuery _q(QString(), aDb);
         QStringList list = aDb.tables();
 
         if (list.indexOf("logentries")==-1) {
@@ -116,13 +116,13 @@ public:
 
         QDataBase _mdb = getMainDB();
 
-        QSqlQuery query1(QString::null,_mdb);
+        QSqlQuery query1(QString(),_mdb);
         QString q("insert into "+QString(SQLMAINTABLE)+" (reposroot) VALUES('"+reposroot+"')");
         _mdb.transaction();
 
         query1.exec(q);
         _mdb.commit();
-        QSqlQuery query(QString::null,_mdb);
+        QSqlQuery query(QString(),_mdb);
         query.prepare(s_reposSelect);
         query.bindValue(0,reposroot.native());
         query.exec();
@@ -151,7 +151,7 @@ public:
         bool checkDone = false;
         // make sure path is correct eg. without traling slashes.
         QString dbFile;
-        QSqlQuery c(QString::null,getMainDB());
+        QSqlQuery c(QString(),getMainDB());
         c.prepare(s_reposSelect);
         c.bindValue(0,reposroot.native());
         c.exec();
@@ -279,7 +279,7 @@ void LogCache::setupMainDb()
     if (!mainDB.isValid()) {
         qWarning("Failed to open main database.");
     } else {
-        QSqlQuery q(QString::null, mainDB);
+        QSqlQuery q(QString(), mainDB);
         mainDB.transaction();
         if (!q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY NOT NULL);")) {
         }
@@ -325,7 +325,7 @@ QStringList svn::cache::LogCache::cachedRepositories()const
         qWarning("Failed to open main database.");
         return _res;
     }
-    QSqlQuery cur(QString::null,mainDB);
+    QSqlQuery cur(QString(),mainDB);
     cur.prepare(s_q);
     if (!cur.exec()) {
         //qDebug() << cur.lastError().text();

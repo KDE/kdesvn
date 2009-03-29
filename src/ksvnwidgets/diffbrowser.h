@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _DIFF_BROWSER_H
-#define _DIFF_BROWSER_H
+#ifndef DIFF_BROWSER_H
+#define DIFF_BROWSER_H
 
 #include <ktextbrowser.h>
 #include <QKeyEvent>

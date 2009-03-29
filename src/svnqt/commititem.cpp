@@ -20,6 +20,7 @@
 #include "commititem.hpp"
 
 #include <svn_client.h>
+#include <svn_props.h>
 
 namespace svn {
 
@@ -94,7 +95,6 @@ void CommitItem::convertprop(apr_array_header_t * list)
 
 void CommitItem::init()
 {
-    m_Path=m_Url=m_CopyFromUrl = QString::null;
     m_Kind = svn_node_unknown;
     m_Revision=m_CopyFromRevision = -1;
     m_State = 0;

@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 
-#ifndef _KDESVN_H_
-#define _KDESVN_H_
+#ifndef KDESVN_H
+#define KDESVN_H
 
 #include "kdesvn-config.h"
 

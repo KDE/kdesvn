@@ -18,9 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
+#include "propertiesdlg.h"
 #include "src/svnfrontend/fronthelpers/propertyitem.h"
 #include "src/svnfrontend/fronthelpers/propertylist.h"
-#include "propertiesdlg.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
 #include "src/svnqt/client.hpp"

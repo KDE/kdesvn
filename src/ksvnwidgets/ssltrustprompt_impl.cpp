@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "src/settings/kdesvnsettings.h"
 #include "ssltrustprompt_impl.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <klocale.h>
 #include <qlabel.h>
@@ -39,7 +39,7 @@ SslTrustPrompt_impl::SslTrustPrompt_impl(const QString&host,QWidget *parent, con
     setObjectName(name);
 
     m_MainLabel->setText("<p align=\"center\"><b>"+
-        i18n("Error validating server certificate for '%1'").arg(host)+
+        i18n("Error validating server certificate for '%1'",host)+
         QString("</b></p>"));
 }
 

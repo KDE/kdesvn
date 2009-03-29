@@ -12,7 +12,7 @@
       <default>22</default>
     </entry>
     <entry key="display_file_tips" type="Bool" >
-      <label>Show file informations in tooltip</label>
+      <label>Show file information in tooltip</label>
       <default>true</default>
     </entry>
     <entry key="use_external_diff" type="Bool" >
@@ -56,7 +56,7 @@
       <default>true</default>
     </entry>
     <entry key="info_recursive" type="Bool" >
-      <label>Get item informations recursively</label>
+      <label>Get item information recursively</label>
       <default>false</default>
     </entry>
     <entry key="review_commit" type="Bool" >
@@ -130,7 +130,7 @@
       <default>kdiff3 %s1 %s2 %t</default>
     </entry>
     <entry key="conflict_resolver" type="String">
-      <label>Wich program for resolving conflicts</label>
+      <label>Which program for resolving conflicts</label>
       <default>kdiff3 %o %m %n -o %t</default>
     </entry>
     <entry name="extern_merge_default" type="Bool">

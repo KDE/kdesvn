@@ -17,10 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _REVERT_FORM_IMPL_H
-#define _REVERT_FORM_IMPL_H
+#ifndef REVERT_FORM_IMPL_H
+#define REVERT_FORM_IMPL_H
 
-// #include "src/ksvnwidgets/revertform.h"
 #include "ui_revertform.h"
 #include "src/svnqt/svnqttypes.hpp"
 

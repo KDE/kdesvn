@@ -57,7 +57,7 @@ bool PropertyListViewItem::different()const
 void PropertyListViewItem::deleteIt()
 {
     m_deleted = true;
-    setIcon(0,KIconLoader::global()->loadIcon("cancel",KIconLoader::Desktop,16));
+    setIcon(0,KIconLoader::global()->loadIcon("dialog-cancel",KIconLoader::Desktop,16));
 }
 
 void PropertyListViewItem::unDeleteIt()

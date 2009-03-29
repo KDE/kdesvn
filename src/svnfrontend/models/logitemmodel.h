@@ -18,12 +18,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
+#ifndef LOG_ITEM_MODEL_H
+#define LOG_ITEM_MODEL_H
+
 #include <QAbstractListModel>
 
 #include "src/svnqt/svnqttypes.hpp"
 
-#ifndef _LOG_ITEM_MODEL_H
-#define _LOG_ITEM_MODEL_H
 
 class SvnLogModelData;
 class SvnLogModelNode;

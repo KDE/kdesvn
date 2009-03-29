@@ -46,7 +46,7 @@ class StopDlg : public KDialog
 {
 Q_OBJECT
 public:
-    StopDlg(QObject*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
+    StopDlg(QObject*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString(),const QString&text=QString());
     virtual ~StopDlg();
 
     bool cancelld();
@@ -93,7 +93,7 @@ class StopSimpleDlg:public StopDlg
 {
     Q_OBJECT
 public:
-    StopSimpleDlg(QWidget *parent = 0, const char *name = 0,const QString&caption=QString::null,const QString&text=QString::null);
+    StopSimpleDlg(QWidget *parent = 0, const char *name = 0,const QString&caption=QString(),const QString&text=QString());
     virtual ~StopSimpleDlg(){}
 
     bool isCanceld()const{return cancelld;}

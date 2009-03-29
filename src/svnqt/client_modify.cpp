@@ -504,7 +504,7 @@ namespace svn
 #endif
 
     /* important! otherwise next op on repository uses that logmessage again! */
-    m_context->setLogMessage(QString::null);
+    m_context->setLogMessage(QString());
 
     if(error != NULL)
       throw ClientException (error);
@@ -683,7 +683,7 @@ namespace svn
                         pool);
 #endif
     /* important! otherwise next op on repository uses that logmessage again! */
-    m_context->setLogMessage(QString::null);
+    m_context->setLogMessage(QString());
 
     if(error != 0) {
         throw ClientException (error);

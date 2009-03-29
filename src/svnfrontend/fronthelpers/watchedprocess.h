@@ -19,8 +19,8 @@
  ***************************************************************************/
 #include <kprocess.h>
 
-#ifndef _WATCHEDPROCESS_H
-#define _WATCHEDPROCESS_H
+#ifndef WATCHEDPROCESS_H
+#define WATCHEDPROCESS_H
 
 class ProcessData;
 

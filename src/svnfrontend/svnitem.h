@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef __SVN_ITEM_H
-#define __SVN_ITEM_H
+#ifndef SVN_ITEM_H
+#define SVN_ITEM_H
 
 #include "src/svnqt/smart_pointer.hpp"
 #include "src/svnqt/svnqttypes.hpp"

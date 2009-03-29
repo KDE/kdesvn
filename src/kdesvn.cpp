@@ -54,7 +54,6 @@
 #include <kstandardaction.h>
 #include <kstandarddirs.h>
 #include <kbookmarkmanager.h>
-#include <kbookmarkmenu.h>
 #include <kdebug.h>
 #include <klibloader.h>
 #include <kedittoolbar.h>
@@ -219,7 +218,7 @@ void kdesvn::load(const KUrl& url,bool addRescent)
             }
         }
         if (!ret) {
-            changeStatusbar(i18n("Could not open url %1").arg(url.prettyUrl()));
+            changeStatusbar(i18n("Could not open url %1",url.prettyUrl()));
             if (rac) {
                 rac->removeUrl(url);
             }

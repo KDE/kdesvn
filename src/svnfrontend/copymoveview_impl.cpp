@@ -103,7 +103,7 @@ QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
     dlg.setMainWidget(Dialog1Layout);
 
     CopyMoveView_impl*ptr=new CopyMoveView_impl(base,old,(move),Dialog1Layout);
-    QString nName = QString::null;
+    QString nName;
     dlg.resize( QSize(500,160).expandedTo(dlg.minimumSizeHint()) );
     if (dlg.exec()!=QDialog::Accepted) {
         if (ok) *ok = false;

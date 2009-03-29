@@ -20,7 +20,7 @@
 #include "version_check.hpp"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include <config.h>
 #endif
 
 #include <svn_version.h>

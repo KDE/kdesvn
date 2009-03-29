@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef __WIDGET_BLOCK_STACK_H
-#define __WIDGET_BLOCK_STACK_H
+#ifndef WIDGET_BLOCK_STACK_H
+#define WIDGET_BLOCK_STACK_H
 
 class QWidget;
 

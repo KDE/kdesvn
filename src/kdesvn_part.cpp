@@ -224,7 +224,7 @@ void kdesvnpart::setupActions()
         connect(t,SIGNAL(triggered(bool) ), SLOT(showAboutApplication()));
         actionCollection()->addAction("help_about_kdesvnpart",t);
 
-        t = new KAction(KIcon("help"),i18n("Kdesvn Handbook"), this);
+        t = new KAction(KIcon("help-contents"),i18n("Kdesvn Handbook"), this);
         connect(t,SIGNAL(triggered(bool) ), SLOT(appHelpActivated()));
         actionCollection()->addAction("help_kdesvn",t);
 

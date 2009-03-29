@@ -37,7 +37,7 @@ public:
     bool createDir();
     bool ignoreUnknownNodes();
     bool noIgnore();
-    void createDirboxDir(const QString & which=QString::null);
+    void createDirboxDir(const QString & which=QString());
 
 protected:
     QCheckBox*m_createDirBox;

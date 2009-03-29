@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _DIFFSYNTAX_H
-#define _DIFFSYNTAX_H
+#ifndef DIFFSYNTAX_H
+#define DIFFSYNTAX_H
 
 #include <QSyntaxHighlighter>
 

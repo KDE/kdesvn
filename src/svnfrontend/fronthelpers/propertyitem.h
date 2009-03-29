@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _PROPERTYITEM_H
-#define _PROPERTYITEM_H
+#ifndef PROPERTYITEM_H
+#define PROPERTYITEM_H
 
 #include <QTreeWidgetItem>
 

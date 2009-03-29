@@ -26,6 +26,8 @@
  * The API is similar to QListView.
  */
 
+#include "drawparams.h"
+
 #include <math.h>
 
 #include <qpainter.h>
@@ -39,7 +41,6 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 
-#include "drawparams.h"
 
 
 // set this to 1 to enable debug output
@@ -79,7 +80,7 @@ StoredDrawParams::StoredDrawParams(QColor c,
 QString StoredDrawParams::text(int f) const
 {
   if ((f<0) || (f >= (int)_field.size()))
-    return QString::null;
+    return QString();
 
   return _field[f].text;
 }
@@ -686,7 +687,7 @@ bool RectDrawing::drawField(QPainter* p, int f, DrawParams* dp)
                     name = name.mid(breakPos);
             }
         } else {
-            remaining = QString();
+            remaining.clear();
         }
         /* truncate and add ... if needed */
         if (w > width) {

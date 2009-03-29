@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef _kdesvnd_H
-#define _kdesvnd_H
+#ifndef kdesvnd_H
+#define kdesvnd_H
 
 #include <qstringlist.h>
 #include <qstring.h>

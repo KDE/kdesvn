@@ -89,7 +89,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
         }
     }
     QString q("select revision from 'logentries' order by revision DESC limit 1");
-    QSqlQuery _q(QString::null, m_Database);
+    QSqlQuery _q(QString(), m_Database);
     if (!_q.exec(q)) {
         //qDebug() << _q.lastError().text();
         return svn::Revision::UNDEFINED;
@@ -208,13 +208,13 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     static QString sEntry("select revision,author,date,message from logentries where revision<=? and revision>=?");
     static QString sItems("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?");
 
-    QSqlQuery bcount(QString::null,m_Database);
+    QSqlQuery bcount(QString(),m_Database);
     bcount.prepare(sCount);
 
-    QSqlQuery bcur(QString::null,m_Database);
+    QSqlQuery bcur(QString(),m_Database);
     bcur.prepare(sEntry);
 
-    QSqlQuery cur(QString::null,m_Database);
+    QSqlQuery cur(QString(),m_Database);
     cur.prepare(sItems);
 
     bcount.bindValue(0,Q_LLONG(end.revnum()));
@@ -332,7 +332,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
     qlonglong j = aEntry.revision;
     static QString qEntry("insert into logentries (revision,date,author,message) values (?,?,?,?)");
     static QString qPathes("insert into changeditems (revision,changeditem,action,copyfrom,copyfromrev) values (?,?,?,?,?)");
-    QSqlQuery _q(QString::null,m_Database);
+    QSqlQuery _q(QString(),m_Database);
     _q.prepare(qEntry);
     _q.bindValue(0,j);
     _q.bindValue(1,aEntry.date);
@@ -410,8 +410,8 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     if (limit>0) {
         query_string+=QString(" LIMIT %1").arg(limit);
     }
-    QSqlQuery _q(QString::null,m_Database);
-    QSqlQuery _q2(QString::null,m_Database);
+    QSqlQuery _q(QString(),m_Database);
+    QSqlQuery _q2(QString(),m_Database);
     _q.prepare(query_string);
     if (!_q.exec()) {
         //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
@@ -466,7 +466,7 @@ bool svn::cache::ReposLog::itemExists(const svn::Revision&peg,const svn::Path&pa
 
 #if 0
     static QString _s1("select revision from changeditems where changeditem='%1' and action='A' and revision<=%2 order by revision desc limit 1");
-    QSqlQuery _q(QString::null,m_Database);
+    QSqlQuery _q(QString(),m_Database);
     QString query_string=QString(_s1).arg(path.native()).arg(peg.revnum());
     if (!_q.exec(query_string)) {
         //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());

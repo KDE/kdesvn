@@ -25,10 +25,9 @@
 #include <QPixmap>
 
 GraphTreeLabel::GraphTreeLabel(const QString&text, const QString&_nodename,const QRectF&r,QGraphicsItem*p)
-    : QGraphicsRectItem (r,p),StoredDrawParams()
+    : QGraphicsRectItem (r,p),StoredDrawParams(),m_Nodename(_nodename),m_SourceNode()
 {
     m_Nodename = _nodename;
-    m_SourceNode = QString::null;
     setText(0,text);
     setPosition(0, DrawParams::TopCenter);
     drawFrame(true);

@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _FILLCACHE_THREAD_H
-#define _FILLCACHE_THREAD_H
+#ifndef FILLCACHE_THREAD_H
+#define FILLCACHE_THREAD_H
 
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"

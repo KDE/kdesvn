@@ -116,7 +116,6 @@ const QString&svn::ConflictDescription::baseFile() const
  */
 void svn::ConflictDescription::init()
 {
-    m_baseFile=m_Path=m_mergedFile=m_propertyName=m_theirFile=m_myFile=m_mimeType=QString::null;
     m_action=ConflictEdit;
     m_Type=ConflictText;
     m_reason=ReasonEdited;

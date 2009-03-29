@@ -17,6 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#ifndef DIFFBROWSERDATA_H
+#define DIFFBROWSERDATA_H
 
 #include "diffsyntax.h"
 
@@ -42,3 +44,6 @@ public:
     int last_search,last_finished_search;
     QString pattern;
 };
+
+#endif
+

@@ -37,7 +37,6 @@
 #include <QLayout>
 #include <QFileInfo>
 #include <QSplitter>
-#include <QLayout>
 
 #include <kurl.h>
 #include <ktrader.h>

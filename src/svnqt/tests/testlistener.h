@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _TESTLISTENER_
-#define _TESTLISTENER_
+#ifndef TESTLISTENER_H
+#define TESTLISTENER_H
 
 #include "src/svnqt/context_listener.hpp"
 

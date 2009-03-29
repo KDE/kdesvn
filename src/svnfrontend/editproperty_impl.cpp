@@ -17,6 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#include "editproperty_impl.h"
+
 #include <QStringList>
 #include <QToolTip>
 #include <QWhatsThis>
@@ -28,16 +30,13 @@
 #include <klocale.h>
 #include <kicon.h>
 
-#include "editproperty_impl.h"
-
-
 EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
     : KDialog(parent)
 {
     setupUi(this);
     setObjectName(name);
 
-    helpButton->setIcon(KIcon("help"));
+    helpButton->setIcon(KIcon("help-hint"));
 
     /// @TODO Read these values from a text or config file
     fileProperties += ("svn:eol-style");
@@ -46,7 +45,7 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
     fileProperties += ("svn:needs-lock");
     fileProperties += ("svn:mime-type");
 
-    fileComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>.");
+    fileComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>.");
     fileComments += i18n("If present, make the file executable.<br>"
         "This property can not be set on a directory. "
         "A non-recursive attempt will fail, and a recursive attempt "
@@ -82,7 +81,7 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
     dirProperties += ("bugtraq:append");
     dirProperties += ("bugtraq:logregex");
 
-    dirComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b></b>.");
+    dirComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>.");
     dirComments += i18n("If present, make the file executable.<br>"
         "This property can not be set on a directory. "
         "A non-recursive attempt will fail, and a recursive attempt "

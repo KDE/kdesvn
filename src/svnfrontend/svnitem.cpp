@@ -34,7 +34,6 @@
 #include <kdebug.h>
 #include <kiconeffect.h>
 #include <kfileitem.h>
-#include <kdebug.h>
 
 #include <QString>
 #include <QFileInfo>
@@ -102,7 +101,7 @@ void SvnItem_p::init()
     }
     m_url = m_Stat->entry().url();
     m_fullDate = svn::DateTime(m_Stat->entry().cmtDate());
-    m_infoText = QString::null;
+    m_infoText.clear();
 }
 
 KMimeType::Ptr SvnItem_p::mimeType(bool dir)

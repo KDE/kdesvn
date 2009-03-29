@@ -17,10 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef LOCALESELECTOR_IMPL_H
-#define LOCALESELECTOR_IMPL_H
+#ifndef ENCODINGSELECTOR_IMPL_H
+#define ENCODINGSELECTOR_IMPL_H
 
-// #include "src/ksvnwidgets/encodingselector.h"
 #include "ui_encodingselector.h"
 
 class QTextCodec;

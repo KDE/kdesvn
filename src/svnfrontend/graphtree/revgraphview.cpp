@@ -508,7 +508,7 @@ void RevGraphView::dumpRevtree()
 
 QString RevGraphView::toolTip(const QString&_nodename,bool full)const
 {
-    QString res = QString::null;
+    QString res;
     trevTree::ConstIterator it;
     it = m_Tree.find(_nodename);
     if (it==m_Tree.end()) {

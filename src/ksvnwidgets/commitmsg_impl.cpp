@@ -51,7 +51,7 @@
 #define MAX_MESSAGE_HISTORY 10
 
 QStringList Commitmsg_impl::sLogHistory = QStringList();
-QString Commitmsg_impl::sLastMessage=QString();
+QString Commitmsg_impl::sLastMessage;
 const QString Commitmsg_impl::groupName("logmsg_dlg_size");
 
 int Commitmsg_impl::smax_message_history = 0xFFFF;
@@ -222,7 +222,7 @@ void Commitmsg_impl::initHistory()
     if (smax_message_history==0xFFFF) {
         smax_message_history = Kdesvnsettings::max_log_messages();
         KConfigGroup cs(Kdesvnsettings::self()->config(),"log_messages");
-        QString s;/* = QString::null;*/
+        QString s;
         int current = 0;
         QString key = QString("log_%0").arg(current);
         s = cs.readEntry(key,QString());
@@ -247,7 +247,7 @@ void Commitmsg_impl::initHistory()
     }
     if (sLastMessage.length()>0) {
         m_LogEdit->setText(sLastMessage);
-        sLastMessage=QString();
+        sLastMessage.clear();
     }
 }
 
@@ -606,7 +606,7 @@ void Commitmsg_impl::insertFile(const QString&fname)
 void Commitmsg_impl::insertFile()
 {
     QString head = i18n("Select textfile for insert");
-    KUrlRequesterDialog dlg(QString::null,head,this);
+    KUrlRequesterDialog dlg(QString(),head,this);
     dlg.setCaption(head);
     KFile::Mode mode = static_cast<KFile::Mode>(KFile::File);
     dlg.urlRequester()->setMode(mode);

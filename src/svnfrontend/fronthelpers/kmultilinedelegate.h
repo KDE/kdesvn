@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _KMULTILINE_DELEGATE_H
-#define _KMULTILINE_DELEGATE_H
+#ifndef KMULTILINE_DELEGATE_H
+#define KMULTILINE_DELEGATE_H
 
 #include <QItemDelegate>
 

@@ -17,6 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#ifndef LOGMODELHELPER_H
+#define LOGMODELHELPER_H
+
 #include <QTreeWidgetItem>
 #include <QString>
 
@@ -71,3 +74,6 @@ protected:
     QDateTime _date;
     QString _shortMessage;
 };
+
+#endif
+

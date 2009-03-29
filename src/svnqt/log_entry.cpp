@@ -58,14 +58,14 @@ namespace svn
     : path(path_),
         action(action_),
         copyFromPath(copyFromPath_),
-        copyToPath(QString::null),
+        copyToPath(),
         copyFromRevision(copyFromRevision_),
         copyToRevision(-1)
   {
   }
 
   LogChangePathEntry::LogChangePathEntry()
-    : path(QString::null),action(0),copyFromPath(QString::null),copyToPath(QString::null),
+    : path(),action(0),copyFromPath(),copyToPath(),
         copyFromRevision(-1),copyToRevision(-1)
   {
   }

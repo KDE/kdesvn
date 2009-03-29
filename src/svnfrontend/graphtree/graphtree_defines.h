@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef __GRAPHTREE_DEFINES
-#define __GRAPHTREE_DEFINES
+#ifndef GRAPHTREE_DEFINES
+#define GRAPHTREE_DEFINES
 
 enum {
     GRAPHTREE_LABEL = 1100,

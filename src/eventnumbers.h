@@ -17,10 +17,10 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _EVENT_NUMBERS_H
-#define _EVENT_NUMBERS_H
+#ifndef EVENTNUMBERS_H
+#define EVENTNUMBERS_H
 
-#include <qevent.h>
+#include <QEvent>
 
 #define EVENT_CACHE_THREAD_FINISHED QEvent::Type(QEvent::User)
 #define EVENT_THREAD_SSL_TRUST_PROMPT QEvent::Type(QEvent::User+1)

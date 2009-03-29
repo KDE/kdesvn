@@ -37,7 +37,6 @@
 #include "url.hpp"
 
 #include <qglobal.h>
-#include <QtCore>
 
 // subversion api
 #include "svn_ra.h"

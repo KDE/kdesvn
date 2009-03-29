@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _MODIFIED_THREAD_H
-#define _MODIFIED_THREAD_H
+#ifndef MODIFIED_THREAD_H
+#define MODIFIED_THREAD_H
 
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"

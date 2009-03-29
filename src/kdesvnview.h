@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 
-#ifndef _KDESVNVIEW_H_
-#define _KDESVNVIEW_H_
+#ifndef KDESVNVIEW_H
+#define KDESVNVIEW_H
 
 #include "src/svnqt/repositorylistener.hpp"
 #include <qwidget.h>

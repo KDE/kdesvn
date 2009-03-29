@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef _COMMITMODELFWD_H
-#define _COMMITMODELFWD_H
+#ifndef COMMITMODELFWD_H
+#define COMMITMODELFWD_H
 
 #include "src/svnqt/shared_pointer.hpp"
 

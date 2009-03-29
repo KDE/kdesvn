@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef _PWSTORAGE_H
-#define _PWSTORAGE_H
+#ifndef PWSTORAGE_H
+#define PWSTORAGE_H
 
 #include <qstring.h>
 #include <qobject.h>

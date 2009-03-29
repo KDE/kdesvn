@@ -52,13 +52,6 @@
 #include <kmimetype.h>
 #include <krun.h>
 
-#include <stdlib.h>
-#include <math.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-
 namespace KIO
 {
 
@@ -706,7 +699,7 @@ void kio_svnProtocol::commit(const KUrl::List&url)
     for (long j=0;j<url.count();++j) {
         QString userstring;
         if (nnum!=svn::Revision::UNDEFINED) {
-            userstring = i18n( "Committed revision %1." ).arg(nnum.toString());
+            userstring = i18n( "Committed revision %1.",nnum.toString());
         } else {
             userstring = i18n ( "Nothing to commit." );
         }
@@ -842,7 +835,7 @@ void kio_svnProtocol::import(const KUrl& repos, const KUrl& wc)
     try {
         QString target = makeSvnUrl(repos);
         QString path = wc.path();
-        m_pData->m_Svnclient->import(svn::Path(path),target,QString::null,svn::DepthInfinity,false,false);
+        m_pData->m_Svnclient->import(svn::Path(path),target,QString(),svn::DepthInfinity,false,false);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
@@ -925,7 +918,7 @@ void kio_svnProtocol::streamTotalSizeNull()
  */
 QString kio_svnProtocol::getDefaultLog()
 {
-    QString res = QString::null;
+    QString res;
     Kdesvnsettings::self()->readConfig();
     if (Kdesvnsettings::kio_use_standard_logmsg()) {
         res = Kdesvnsettings::kio_standard_logmsg();

@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef _KDESVNPART_H_
-#define _KDESVNPART_H_
+#ifndef KDESVN_PART_H
+#define KDESVN_PART_H
 
 #include "kdesvn-config.h"
 

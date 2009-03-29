@@ -17,10 +17,10 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include <QSortFilterProxyModel>
+#ifndef SVNSORTFILTER_H
+#define SVNSORTFILTER_H
 
-#ifndef _SVNSORTFILTER_H
-#define _SVNSORTFILTER_H
+#include <QSortFilterProxyModel>
 
 #include "svnitemmodelfwd.h"
 

@@ -103,7 +103,7 @@ void DiffBrowser::saveDiff()
     QFile tfile(saveTo);
     if (tfile.exists()) {
         if (KMessageBox::warningYesNo(KApplication::activeModalWidget(),
-                                     i18n("File %1 exists - overwrite?").arg(saveTo))
+                                     i18n("File %1 exists - overwrite?",saveTo))
             !=KMessageBox::Yes) {
             return;
         }

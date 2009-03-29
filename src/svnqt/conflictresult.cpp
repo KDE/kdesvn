@@ -27,7 +27,7 @@
 namespace svn
 {
     ConflictResult::ConflictResult()
-    :m_choice(ChooseMerged),m_MergedFile(QString::null)
+    :m_choice(ChooseMerged),m_MergedFile()
     {
     }
 
@@ -64,7 +64,7 @@ namespace svn
         if (aResult->merged_file) {
             m_MergedFile=QString::FROMUTF8(aResult->merged_file);
         } else {
-            m_MergedFile=QString::null;
+            m_MergedFile.clear();
         }
 #else
         Q_UNUSED(aResult);

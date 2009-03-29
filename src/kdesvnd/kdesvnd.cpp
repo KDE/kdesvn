@@ -264,7 +264,7 @@ QString kdesvnd::load_sslclientcertpw(const QString& realm)
 {
     QString password;
     if (!PwStorage::self()->getCertPw(realm,password)) {
-        return QString::null;
+        return QString();
     }
     return password;
 }
@@ -274,7 +274,7 @@ QStringList kdesvnd::get_sslclientcertpw(const QString& realm)
     QStringList resList;
     KPasswordDialog dlg(0,KPasswordDialog::DomainReadOnly|KPasswordDialog::ShowKeepPassword);
     dlg.setDomain(realm);
-    dlg.setCaption(i18n("Enter password for realm %1").arg(realm));
+    dlg.setCaption(i18n("Enter password for realm %1",realm));
     dlg.setKeepPassword(true);
     if (dlg.exec()!=KPasswordDialog::Accepted) {
         return resList;
@@ -291,7 +291,7 @@ QStringList kdesvnd::get_sslclientcertpw(const QString& realm)
 QString kdesvnd::get_sslclientcertfile()
 {
     QString afile = KFileDialog::getOpenFileName(KUrl(),
-        QString::null,
+        QString(),
         0,
         i18n("Open a file with a #PKCS12 certificate"));
     return afile;

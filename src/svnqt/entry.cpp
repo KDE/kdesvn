@@ -67,8 +67,17 @@ namespace svn
 
     void Entry_private::init_clean()
     {
-        _name = _url = _repos = _uuid = _copyfrom_url = _conflict_old = _conflict_new = _conflict_wrk
-            = _prejfile = _checksum = _cmt_author = QString::null;
+        _name.clear();
+        _url.clear();
+        _repos.clear();
+        _uuid.clear();
+        _copyfrom_url.clear();
+        _conflict_old.clear();
+        _conflict_new.clear();
+        _conflict_wrk.clear();
+        _prejfile.clear();
+        _checksum.clear();
+        _cmt_author.clear();
         _revision = _copyfrom_rev = _cmt_rev = -1;
         _kind = svn_node_unknown;
         _schedule = svn_wc_schedule_normal;
@@ -126,8 +135,9 @@ namespace svn
         } else {
             m_valid = false;
             m_Lock=LockEntry();
-            _name=
-            _url=_repos=_uuid=_copyfrom_url=_conflict_old=_conflict_new=_conflict_wrk=_prejfile=_checksum=_cmt_author= QString::null;
+            _name.clear();
+            _url.clear();_repos.clear();_uuid.clear();_copyfrom_url.clear();_conflict_old.clear();_conflict_new.clear();_conflict_wrk.clear();
+            _prejfile.clear();_checksum.clear();_cmt_author.clear();
             _copied=_deleted=_absent=_incomplete = false;
             _kind = svn_node_unknown;
             _schedule=svn_wc_schedule_normal;

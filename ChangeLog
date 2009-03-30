@@ -3,6 +3,8 @@ version 1.3.0
     * modified items may reverted from within commit dialog
     * integrated an extra navigation view (#99)
     * Fixed a problem with KIO module and KWallet
+    * fixed/solved/workarounds for tickets #601 (resolve sometimes not working), #599 (icon size bug), #605 (slow logs),
+      #613 (problems when a custom diff tool like colordiff is set for subversion)
 
 version 1.2.4
     * fix a small problem with (un-)ignore action

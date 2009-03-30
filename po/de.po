@@ -245,7 +245,8 @@ msgstr ""
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">Benenne um</p>"
 
-#: rc.cpp:497, no-c-format
+#: rc.cpp:497
+#, no-c-format
 msgid ""
 "<p>\n"
 "Enter how kdesvn should call the conflict resolver program. The form is\n"
@@ -847,7 +848,7 @@ msgstr "Copyright (c) 2005 Rajko Albrecht"
 
 #: svnfrontend/svnactions.cpp:935
 msgid "Could not change to folder %1\n"
-msgstr "Konnte nicht zum Verzeichnis %1 wechseln "
+msgstr "Konnte nicht zum Verzeichnis %1 wechseln\n"
 
 #: kdesvn.cpp:175
 msgid "Could not find our part"

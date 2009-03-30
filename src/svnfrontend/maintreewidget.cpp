@@ -405,6 +405,15 @@ SvnItem* MainTreeWidget::DirSelected()const
     return DirSelectedNode();
 }
 
+SvnItem* MainTreeWidget::DirSelectedOrMain()const
+{
+    SvnItem*_item=DirSelected();
+    if (_item==0 && isWorkingCopy()) {
+        _item=m_Data->m_Model->firstRootChild();
+    }
+    return _item;
+}
+
 SvnItem* MainTreeWidget::SelectedOrMain()const
 {
     SvnItem*_item=Selected();
@@ -456,6 +465,10 @@ void MainTreeWidget::setupActions()
     tmp_action->setIconText(i18n("History"));
     tmp_action->setStatusTip(i18n("Displays the history log of selected item"));
     tmp_action = add_action("make_svn_log_nofollow",i18n("History of item ignoring copies"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_L),KIcon("kdesvnlog"),this,SLOT(slotMakeLogNoFollow()));
+    tmp_action->setIconText(i18n("History"));
+    tmp_action->setStatusTip(i18n("Displays the history log of selected item without following copies"));
+
+    tmp_action = add_action("make_svn_dir_log_nofollow",i18n("History of item ignoring copies"),KShortcut(),KIcon("kdesvnlog"),this,SLOT(slotDirMakeLogNoFollow()));
     tmp_action->setIconText(i18n("History"));
     tmp_action->setStatusTip(i18n("Displays the history log of selected item without following copies"));
 
@@ -660,6 +673,7 @@ void MainTreeWidget::enableActions()
     /* local and remote actions */
     /* 1. actions on dirs AND files */
     enableAction("make_svn_log_nofollow",single||none);
+    enableAction("make_svn_dir_log_nofollow",d==1&&isopen);
     enableAction("make_last_change",isopen);
     enableAction("make_svn_log_full",single||none);
     enableAction("make_svn_tree",single||none);
@@ -897,17 +911,22 @@ void MainTreeWidget::slotIgnore()
 
 void MainTreeWidget::slotMakeLogNoFollow()const
 {
-    doLog(false);
+    doLog(false,false);
 }
 
 void MainTreeWidget::slotMakeLog()const
 {
-    doLog(true);
+    doLog(true,false);
 }
 
-void MainTreeWidget::doLog(bool use_follow_settings)const
+void MainTreeWidget::slotDirMakeLogNoFollow()const
 {
-    SvnItem*k=SelectedOrMain();
+    doLog(false,true);
+}
+
+void MainTreeWidget::doLog(bool use_follow_settings,bool left)const
+{
+    SvnItem*k=left?DirSelectedOrMain():SelectedOrMain();
     QString what;
     if (k) {
         what=k->fullName();
@@ -947,6 +966,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     if ( (temp=filesActions()->action("make_dir_update")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_dirbasediff")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_diritemsdiff")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_svn_dir_log_nofollow")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
     OpenContextmenu*me=0;

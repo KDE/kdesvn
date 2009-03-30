@@ -58,6 +58,7 @@ public:
     virtual void SelectionList(SvnItemList&target)const;
     virtual void DirSelectionList(SvnItemList&target)const;
     virtual SvnItem* SelectedOrMain()const;
+    virtual SvnItem* DirSelectedOrMain()const;
     virtual const svn::Revision&baseRevision()const;
     void refreshItem(SvnItemModelNode*node);
 
@@ -102,6 +103,7 @@ protected Q_SLOTS:
     void slotIgnore();
     void slotMakeLog()const;
     void slotMakeLogNoFollow()const;
+    void slotDirMakeLogNoFollow()const;
     void slotMakeTree();
     void slotMakePartTree();
     void slotSelectBrowsingRevision();
@@ -169,7 +171,7 @@ protected:
     void resizeAllColumns();
     void execContextMenu(const SvnItemList&);
     void simpleWcDiff(SvnItem*which,const svn::Revision&,const svn::Revision&);
-    void doLog(bool)const;
+    void doLog(bool,bool)const;
 
 private:
     MainTreeWidgetData*m_Data;

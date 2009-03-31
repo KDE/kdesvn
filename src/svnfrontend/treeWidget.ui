@@ -16,7 +16,7 @@
    <bool>true</bool>
   </property>
   <property name="windowTitle" >
-   <string></string>
+   <string/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
@@ -38,9 +38,12 @@
        <enum>Qt::CustomContextMenu</enum>
       </property>
       <property name="selectionMode" >
-       <enum>QAbstractItemView::ExtendedSelection</enum>
+       <enum>QAbstractItemView::MultiSelection</enum>
       </property>
       <property name="sortingEnabled" >
+       <bool>true</bool>
+      </property>
+      <property name="allColumnsShowFocus" >
        <bool>true</bool>
       </property>
      </widget>

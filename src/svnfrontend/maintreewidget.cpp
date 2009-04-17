@@ -2060,7 +2060,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
     QModelIndexList _indexes = _item.indexes();
     switch (DirselectionCount()) {
     case 1:
-        m_DirTreeView->setStatusTip(i18n("Hold STRG key while click on selected item for unselect"));
+        m_DirTreeView->setStatusTip(i18n("Hold CTRL key while click on selected item for unselect"));
         break;
     case 2:
         m_DirTreeView->setStatusTip(i18n("See context menu for more actions"));

@@ -329,6 +329,11 @@ int MainTreeWidget::selectionCount()const
     return m_TreeView->selectionModel()->selectedRows(0).count();
 }
 
+int MainTreeWidget::DirselectionCount()const
+{
+    return m_DirTreeView->selectionModel()->selectedRows(0).count();
+}
+
 void MainTreeWidget::SelectionList(SvnItemList&target)const
 {
     QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
@@ -2053,6 +2058,20 @@ void MainTreeWidget::slotItemsInserted(const QModelIndex&)
 void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QItemSelection&)
 {
     QModelIndexList _indexes = _item.indexes();
+    switch (DirselectionCount()) {
+    case 1:
+        m_DirTreeView->setStatusTip(i18n("Hold STRG key while click on selected item for unselect"));
+        break;
+    case 2:
+        m_DirTreeView->setStatusTip(i18n("See context menu for more actions"));
+        break;
+    case 0:
+        m_DirTreeView->setStatusTip(i18n("Click for navigate"));
+        break;
+    default:
+        m_DirTreeView->setStatusTip(i18n("Navigation"));
+        break;
+    }
     if (_indexes.size()<1) {
         m_TreeView->setRootIndex(QModelIndex());
         return;

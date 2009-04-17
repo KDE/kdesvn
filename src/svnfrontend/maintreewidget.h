@@ -163,6 +163,7 @@ protected:
     bool uniqueTypeSelected();
     KService::List offersList(SvnItem*item,bool execOnly=false)const;
     int selectionCount()const;
+    int DirselectionCount()const;
     void dispProperties(bool);
     void copy_move(bool move);
     void itemActivated(const QModelIndex&index,bool keypress=false);

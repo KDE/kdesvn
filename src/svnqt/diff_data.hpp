@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef __DIFF_DATA
-#define __DIFF_DATA
+#ifndef DIFF_DATA_HPP
+#define DIFF_DATA_HPP
 
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/pool.hpp"

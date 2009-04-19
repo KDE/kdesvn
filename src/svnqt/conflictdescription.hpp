@@ -40,14 +40,16 @@ class SVNQT_EXPORT ConflictDescription
 public:
     enum ConflictType {
         ConflictText,
-        ConflictProperty
+        ConflictProperty,
+        ConflictTree
     };
     enum ConflictReason {
         ReasonEdited,
         ReasonObstructed,
         ReasonDeleted,
         ReasonMissing,
-        ReasonUnversioned
+        ReasonUnversioned,
+        ReasonAdded
     };
     enum ConflictAction {
         ConflictEdit,

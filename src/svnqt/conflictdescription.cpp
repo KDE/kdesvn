@@ -68,6 +68,11 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t*con
         case svn_wc_conflict_kind_property:
             m_Type=ConflictProperty;
             break;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        case svn_wc_conflict_kind_tree:
+            m_Type=ConflictTree;
+            break;
+#endif
     }
     m_nodeKind=conflict->node_kind;
     m_binary=conflict->is_binary;
@@ -87,6 +92,11 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t*con
         case svn_wc_conflict_reason_unversioned:
             m_reason=ReasonUnversioned;
             break;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        case svn_wc_conflict_reason_added:
+            m_reason = ReasonAdded;
+            break;
+#endif
     }
 #else
     Q_UNUSED(conflict);

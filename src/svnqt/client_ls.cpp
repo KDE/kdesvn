@@ -62,9 +62,16 @@ namespace svn
           const Revision& peg,
           bool recurse) throw (ClientException)
   {
-    Pool pool;
+    DirEntries entries;
 
-    apr_hash_t * hash;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
+    Q_UNUSED(_p);
+    Q_UNUSED(revision);
+    Q_UNUSED(peg);
+    Q_UNUSED(recurse);
+#else
+    Pool pool;
+    apr_hash_t * hash = 0;
     /* don't want the lock hashs, so we simply use ls2 on svn 1.3, too.
      * there is that method a cast to ls3 with lock_hash == 0
      */
@@ -84,8 +91,6 @@ namespace svn
       array = svn_sort__hash (
         hash, compare_items_as_paths, pool);
 
-    DirEntries entries;
-
     for (int i = 0; i < array->nelts; ++i)
     {
       const char *entryname;
@@ -101,6 +106,7 @@ namespace svn
       m_context->contextAddListItem(&entries,dirent,0,QString::FROMUTF8(entryname));
       //entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent));
     }
+#endif
 
     return entries;
   }
@@ -111,6 +117,13 @@ namespace svn
         const Revision& peg,
         bool recurse) throw (ClientException)
   {
+    DirEntries entries;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
+    Q_UNUSED(pathOrUrl);
+    Q_UNUSED(revision);
+    Q_UNUSED(peg);
+    Q_UNUSED(recurse);
+#else
     Pool pool;
 
     apr_hash_t * hash;
@@ -133,7 +146,6 @@ namespace svn
       array = svn_sort__hash (
         hash, compare_items_as_paths, pool);
 
-    DirEntries entries;
 
     for (int i = 0; i < array->nelts; ++i)
     {
@@ -153,7 +165,7 @@ namespace svn
       m_context->contextAddListItem(&entries,dirent,lockent,QString::FROMUTF8(entryname));
       //entries.push_back (new DirEntry(QString::FROMUTF8(entryname), dirent,lockent));
     }
-
+#endif
     return entries;
   }
 

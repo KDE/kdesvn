@@ -41,7 +41,13 @@ namespace svn
     void DiffData::init()
     {
         svn_error_t * error;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 6)
+        Pool scratchPool;
+        error = svn_io_open_unique_file3(&m_outFile, &m_outFileName,
+                        m_tmpPath.path().TOUTF8(),
+                        svn_io_file_del_on_pool_cleanup, m_Pool,scratchPool);
+
+#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
         error = svn_io_open_unique_file2(&m_outFile, &m_outFileName,
                         m_tmpPath.path().TOUTF8(),
                         ".tmp",
@@ -56,7 +62,11 @@ namespace svn
             clean();
             throw ClientException (error);
         }
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 6)
+        error = svn_io_open_unique_file3(&m_errFile, &m_errFileName,
+                        m_tmpPath.path().TOUTF8(),
+                        svn_io_file_del_on_pool_cleanup, m_Pool,scratchPool);
+#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
         error = svn_io_open_unique_file2(&m_errFile, &m_errFileName,
                         m_tmpPath.path().TOUTF8(),
                         ".tmp",
@@ -71,6 +81,8 @@ namespace svn
             clean();
             throw ClientException (error);
         }
+//        qDebug("Ausgabe: %s",m_outFileName);
+//        qDebug("Fehler: %s",m_errFileName);
         if (svn_path_is_url(m_p1.cstr())) {
             m_url_is_present = true;
         } else {

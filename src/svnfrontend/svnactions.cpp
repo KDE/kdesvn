@@ -1220,6 +1220,8 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     KTempDir tdir;
     tdir.setAutoRemove(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
+    QDir d1(tdir.name());
+    d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     QWidget*parent = p?p:m_Data->m_ParentList->realWidget();
     QStringList extraOptions;

@@ -12,6 +12,7 @@ KDE_ADD_UI_FILES(
 
 SET(ksvnwidgetsrc
     authdialogimpl.cpp
+    authdialogwidget.cpp
     commitmsg_impl.cpp
     ssltrustprompt_impl.cpp
     pwstorage.cpp
@@ -27,6 +28,7 @@ SET(ksvnwidgetsrc
 
 SET(ksvnwidgethdr
     authdialogimpl.h
+    authdialogwidget.h
     commitmsg_impl.h
     ssltrustprompt_impl.h
     pwstorage.h

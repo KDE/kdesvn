@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
+ *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -20,10 +20,13 @@
 #ifndef AUTHDIALOGIMPL_H
 #define AUTHDIALOGIMPL_H
 
-#include "src/ksvnwidgets/ui_authdlg.h"
-#include <qstring.h>
+#include <QString>
+#include <kdialog.h>
 
-class AuthDialogImpl: public KDialog, public Ui::AuthDialog {
+class AuthDialogWidget;
+
+class AuthDialogImpl: public KDialog
+{
     Q_OBJECT
 public:
     AuthDialogImpl(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);
@@ -32,10 +35,10 @@ public:
     const QString Username()const;
     const QString Password();
     bool maySave()const;
-protected slots:
-    virtual void slotHelp();
+
 protected:
     QString curPass;
+    AuthDialogWidget * m_AuthWidget;
 };
 
 #endif

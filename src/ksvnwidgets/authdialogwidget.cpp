@@ -17,9 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "authdialogimpl.h"
 #include "authdialogwidget.h"
-
 #include "src/settings/kdesvnsettings.h"
 
 #include <kpassworddialog.h>
@@ -28,29 +26,42 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 
-AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :KDialog(parent)
+AuthDialogWidget::AuthDialogWidget(const QString & realm,const QString&user,QWidget *parent, const char *name)
+    :QWidget(parent),Ui::AuthDialogWidget(),curPass("")
 {
+    setupUi(this);
     setObjectName(name);
-    m_AuthWidget = new AuthDialogWidget(realm,user,parent);
-    setMainWidget(m_AuthWidget);
-    setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Help);
-    connect(this, SIGNAL(helpClicked()), m_AuthWidget, SLOT(slotHelp()));
+
+    m_UsernameEdit->setText(user);
+    m_PasswordEdit->setText("");
+    m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());
+    QString text = m_StorePasswordButton->text();
+    m_StorePasswordButton->setText(
+            m_StorePasswordButton->text()+QString(" (%1)")
+            .arg((Kdesvnsettings::passwords_in_wallet()?i18n("into KDE Wallet"):i18n("into subversions simple storage"))));
+    if (!realm.isEmpty()) {
+        m_RealmLabel->setText(m_RealmLabel->text()+' '+realm);
+        resize( QSize(334, 158).expandedTo(minimumSizeHint()) );
+    }
 }
 
-const QString AuthDialogImpl::Username()const
+void AuthDialogWidget::slotHelp()
 {
-    return m_AuthWidget->Username();
 }
 
-const QString AuthDialogImpl::Password()
+const QString AuthDialogWidget::Username()const
 {
-    return m_AuthWidget->Password();
+    return m_UsernameEdit->text();
 }
 
-bool AuthDialogImpl::maySave()const
+const QString AuthDialogWidget::Password()
 {
-    return m_AuthWidget->maySave();
+    return m_PasswordEdit->text();
 }
 
-#include "authdialogimpl.moc"
+bool AuthDialogWidget::maySave()const
+{
+    return m_StorePasswordButton->isChecked();
+}
+
+#include "authdialogwidget.moc"

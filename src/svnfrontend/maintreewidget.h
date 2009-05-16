@@ -174,6 +174,8 @@ protected:
     void simpleWcDiff(SvnItem*which,const svn::Revision&,const svn::Revision&);
     void doLog(bool,bool)const;
 
+    void checkUseNavigation(bool startup = false);
+
 private:
     MainTreeWidgetData*m_Data;
     void enableAction(const QString&,bool);

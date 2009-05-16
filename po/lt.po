@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-17 13:34+0200\n"
+"POT-Creation-Date: 2009-05-16 11:33+0200\n"
 "PO-Revision-Date: 2008-11-14 22:22+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Language: Lithuanian\n"
 "X-Poedit-Country: LITHUANIA\n"
 
-#: rc.cpp:601
+#: rc.cpp:592
 msgid " line(s)"
 msgstr "eilutė(s)"
 
@@ -52,15 +52,15 @@ msgstr ""
 msgid "&Bookmarks"
 msgstr ""
 
-#: rc.cpp:803
+#: rc.cpp:797
 msgid "&File"
 msgstr ""
 
-#: rc.cpp:815 rc.cpp:845
+#: rc.cpp:809 rc.cpp:839
 msgid "&Help"
 msgstr ""
 
-#: rc.cpp:812
+#: rc.cpp:806
 #, fuzzy
 msgid "&Settings"
 msgstr "Nustatymai"
@@ -151,7 +151,7 @@ msgid ""
 "infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
 msgstr ""
 
-#: rc.cpp:535
+#: rc.cpp:526
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -179,7 +179,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:738
+#: rc.cpp:729
 msgid ""
 "<p align=\"left\">\n"
 "Mark an items with non-normal state with an overlayed icon. When you wish "
@@ -189,7 +189,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:652
+#: rc.cpp:643
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
 "items when making a listing to remote repositories. So you may see remote "
@@ -202,7 +202,7 @@ msgstr ""
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">Pervadinti</p>"
 
-#: rc.cpp:496
+#: rc.cpp:487
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -226,7 +226,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:522
+#: rc.cpp:513
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -242,7 +242,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:685
+#: rc.cpp:676
 msgid ""
 "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
 "instead of simple cleartext storage of subversion.</p>\n"
@@ -313,11 +313,11 @@ msgstr "Priimti laikinai"
 msgid "Action"
 msgstr "Veiksmas"
 
-#: rc.cpp:848 rc.cpp:851 rc.cpp:854 rc.cpp:857
+#: rc.cpp:842 rc.cpp:845 rc.cpp:848 rc.cpp:851
 msgid "Actions"
 msgstr "Veiksmai"
 
-#: svnfrontend/maintreewidget.cpp:552
+#: svnfrontend/maintreewidget.cpp:557
 #: ksvnwidgets/models/commitmodelhelper.cpp:68
 #, fuzzy
 msgid "Add"
@@ -331,11 +331,11 @@ msgstr ""
 msgid "Add property"
 msgstr "Pridėti savybę"
 
-#: svnfrontend/maintreewidget.cpp:550
+#: svnfrontend/maintreewidget.cpp:555
 msgid "Add selected files/dirs"
 msgstr "Pridėti pažymėtus failus/aplankus"
 
-#: svnfrontend/maintreewidget.cpp:553
+#: svnfrontend/maintreewidget.cpp:558
 msgid "Add selected files/dirs recursive"
 msgstr "Pridėti pažymėtus failus/aplankus rekursiškai"
 
@@ -363,7 +363,7 @@ msgstr "Pridėta revizijoje %1 kaip %2"
 msgid "Added in repository"
 msgstr "Pridėtas saugykloje"
 
-#: rc.cpp:571
+#: rc.cpp:562
 msgid "Added items:"
 msgstr "Pridėti elementai:"
 
@@ -375,11 +375,11 @@ msgstr "Pridedama %1."
 msgid "Adding (bin) %1."
 msgstr "Pridedama (bin) %1."
 
-#: svnfrontend/maintreewidget.cpp:551
+#: svnfrontend/maintreewidget.cpp:556
 msgid "Adding selected files and/or directories to repository"
 msgstr "Į saugyklą pridedami pažymėti failai ir/arba aplankai"
 
-#: svnfrontend/maintreewidget.cpp:555
+#: svnfrontend/maintreewidget.cpp:560
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
@@ -391,7 +391,7 @@ msgstr ""
 msgid "Addition"
 msgstr "Pridėjimas"
 
-#: rc.cpp:670
+#: rc.cpp:661
 msgid "Always get properties on networked repositories"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgstr "Autentifikacija"
 msgid "Author"
 msgstr "Autorius"
 
-#: svnfrontend/maintreewidget.cpp:1681
+#: svnfrontend/maintreewidget.cpp:1689
 msgid "Automatic generated base layout by kdesvn"
 msgstr ""
 
@@ -435,11 +435,11 @@ msgstr ""
 "Pasiekta dokumento pradžia.\n"
 "Tęsti iš pabaigos?"
 
-#: svnfrontend/maintreewidget.cpp:501
+#: svnfrontend/maintreewidget.cpp:506
 msgid "Blame"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:504
+#: svnfrontend/maintreewidget.cpp:509
 msgid "Blame range"
 msgstr ""
 
@@ -455,15 +455,15 @@ msgstr ""
 msgid "Both sources must be same type!"
 msgstr ""
 
-#: rc.cpp:768
+#: rc.cpp:762
 msgid "Bottom to top"
 msgstr "Iš apačios į viršų"
 
-#: svnfrontend/maintreewidget.cpp:1212
+#: svnfrontend/maintreewidget.cpp:1220
 msgid "Break lock or ignore missing locks?"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:535
+#: svnfrontend/maintreewidget.cpp:540
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 
@@ -486,15 +486,15 @@ msgstr ""
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: rc.cpp:18 rc.cpp:450
+#: rc.cpp:18
 msgid "Cancel"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1887
+#: svnfrontend/maintreewidget.cpp:1895
 msgid "Cannot import into multiple targets!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1903
+#: svnfrontend/maintreewidget.cpp:1911
 msgid "Cannot import into remote targets!"
 msgstr ""
 
@@ -502,11 +502,11 @@ msgstr ""
 msgid "Canonical repository url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:508
+#: svnfrontend/maintreewidget.cpp:513
 msgid "Cat head"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:511
+#: svnfrontend/maintreewidget.cpp:516
 msgid "Cat revision..."
 msgstr ""
 
@@ -514,28 +514,28 @@ msgstr ""
 msgid "Cat this version"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:533
+#: svnfrontend/maintreewidget.cpp:538
 msgid "Check for unversioned items"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:495
+#: svnfrontend/maintreewidget.cpp:500
 msgid "Check for updates"
 msgstr "Tikrinti atnaujinimų"
 
-#: svnfrontend/maintreewidget.cpp:496
+#: svnfrontend/maintreewidget.cpp:501
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
 
-#: rc.cpp:646
+#: rc.cpp:637
 msgid "Check if items has \"svn:needs-lock\" property set"
 msgstr ""
 
-#: rc.cpp:800
+#: rc.cpp:794
 msgid "Check logcache fill before reading tree"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:498
+#: svnfrontend/maintreewidget.cpp:503
 #, fuzzy
 msgid "Check updates"
 msgstr "Tikrinti atnaujinimų"
@@ -556,17 +556,17 @@ msgstr ""
 msgid "Checking out a file?"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:605 svnfrontend/maintreewidget.cpp:613
+#: svnfrontend/maintreewidget.cpp:610 svnfrontend/maintreewidget.cpp:618
 #: svnfrontend/svnactions.cpp:1674
 msgid "Checkout"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:612 svnfrontend/svnactions.cpp:1593
+#: svnfrontend/maintreewidget.cpp:617 svnfrontend/svnactions.cpp:1593
 #: svnfrontend/svnactions.cpp:1615
 msgid "Checkout a repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:604
+#: svnfrontend/maintreewidget.cpp:609
 msgid "Checkout current repository path"
 msgstr ""
 
@@ -586,7 +586,7 @@ msgstr "Valyti žurnalus"
 msgid "Cleaning up folder"
 msgstr "Išvalomas aplankas"
 
-#: svnfrontend/maintreewidget.cpp:542 svnfrontend/svnactions.cpp:1863
+#: svnfrontend/maintreewidget.cpp:547 svnfrontend/svnactions.cpp:1863
 msgid "Cleanup"
 msgstr "Išvalyti"
 
@@ -595,7 +595,7 @@ msgstr "Išvalyti"
 msgid "Clear"
 msgstr "Išvalyti"
 
-#: svnfrontend/maintreewidget.cpp:2069
+#: svnfrontend/maintreewidget.cpp:2077
 #, fuzzy
 msgid "Click for navigate"
 msgstr "Tikrinti atnaujinimų"
@@ -604,7 +604,7 @@ msgstr "Tikrinti atnaujinimų"
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:625
+#: svnfrontend/maintreewidget.cpp:630
 msgid "Closes all branches of the file tree"
 msgstr ""
 
@@ -612,27 +612,27 @@ msgstr ""
 msgid "Color Settings"
 msgstr "Spalvų nustatymai"
 
-#: rc.cpp:777
+#: rc.cpp:771
 msgid "Color for added items:"
 msgstr "Pridėtų elementų spalva:"
 
-#: rc.cpp:783
+#: rc.cpp:777
 msgid "Color for copied items:"
 msgstr "Nukopijuotų elementų spalva:"
 
-#: rc.cpp:780
+#: rc.cpp:774
 msgid "Color for deleted items:"
 msgstr "Ištrintų elementų spalva:"
 
-#: rc.cpp:789
+#: rc.cpp:783
 msgid "Color for modified items:"
 msgstr "Pakeistų elementų spalva:"
 
-#: rc.cpp:786
+#: rc.cpp:780
 msgid "Color for renamed items:"
 msgstr "Pervadintų elementų spalva:"
 
-#: rc.cpp:556
+#: rc.cpp:547
 msgid "ColorSettings"
 msgstr "Spalvų nustatymai"
 
@@ -648,8 +648,8 @@ msgstr "Komanda „%1“ nesuprogramuota arba nežinoma"
 msgid "Commandline"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:572 svnfrontend/maintreewidget.cpp:573
-#: svnfrontend/maintreewidget.cpp:631 svnfrontend/svnactions.cpp:993
+#: svnfrontend/maintreewidget.cpp:577 svnfrontend/maintreewidget.cpp:578
+#: svnfrontend/maintreewidget.cpp:636 svnfrontend/svnactions.cpp:993
 #: svnfrontend/svnactions.cpp:1033
 msgid "Commit"
 msgstr ""
@@ -706,11 +706,11 @@ msgstr "Konfigūruoti %1..."
 msgid "Conflict"
 msgstr "Konfliktas"
 
-#: rc.cpp:486
+#: rc.cpp:477
 msgid "Conflict resolver program:"
 msgstr ""
 
-#: rc.cpp:577
+#: rc.cpp:568
 msgid "Conflicted items:"
 msgstr "Konfliktuojantys elementai:"
 
@@ -730,7 +730,7 @@ msgstr "%1 turinys"
 msgid "Copied to %1 at revision %2"
 msgstr "Nukopijuota į %1 revizijoje %2"
 
-#: svnfrontend/copymoveview_impl.cpp:56 svnfrontend/maintreewidget.cpp:493
+#: svnfrontend/copymoveview_impl.cpp:56 svnfrontend/maintreewidget.cpp:498
 #: svnfrontend/ccontextlistener.cpp:63
 #: ksvnwidgets/models/commitmodelhelper.cpp:72
 #, fuzzy
@@ -799,7 +799,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1980
+#: svnfrontend/maintreewidget.cpp:1988
 #, fuzzy
 msgid "Could not retrieve repository of working copy."
 msgstr "Atverti darbinės kopijos saugyklą"
@@ -812,11 +812,11 @@ msgid ""
 "%2"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:494
+#: svnfrontend/maintreewidget.cpp:499
 msgid "Create a copy of current item"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:524
+#: svnfrontend/maintreewidget.cpp:529
 #, fuzzy
 msgid "Create a new folder"
 msgstr "Sukurti pagrindinius aplankus"
@@ -870,7 +870,7 @@ msgstr "Numatyta utf-8"
 msgid "Default utf-8"
 msgstr "Numatyta utf-8"
 
-#: svnfrontend/maintreewidget.cpp:558 svnfrontend/svnactions.cpp:991
+#: svnfrontend/maintreewidget.cpp:563 svnfrontend/svnactions.cpp:991
 #: svnfrontend/ccontextlistener.cpp:64
 #: ksvnwidgets/models/commitmodelhelper.cpp:76
 #, fuzzy
@@ -882,7 +882,7 @@ msgstr "Ištrinta"
 msgid "Delete and Commit"
 msgstr "Ištrinti elementai:"
 
-#: svnfrontend/maintreewidget.cpp:1530 svnfrontend/svnactions.cpp:1541
+#: svnfrontend/maintreewidget.cpp:1538 svnfrontend/svnactions.cpp:1541
 msgid "Delete from repository"
 msgstr "Ištrinti iš saugyklos"
 
@@ -890,7 +890,7 @@ msgstr "Ištrinti iš saugyklos"
 msgid "Delete property"
 msgstr "Trinti savybę"
 
-#: svnfrontend/maintreewidget.cpp:557
+#: svnfrontend/maintreewidget.cpp:562
 msgid "Delete selected files/dirs"
 msgstr "Trinti pažymėtus failus/aplankus"
 
@@ -902,7 +902,7 @@ msgstr "Ištrinta"
 msgid "Deleted at revision %1"
 msgstr "Ištrinta revizijoje %1"
 
-#: rc.cpp:574
+#: rc.cpp:565
 msgid "Deleted items:"
 msgstr "Ištrinti elementai:"
 
@@ -910,7 +910,7 @@ msgstr "Ištrinti elementai:"
 msgid "Deleting %1."
 msgstr "Šalinama %1."
 
-#: svnfrontend/maintreewidget.cpp:559
+#: svnfrontend/maintreewidget.cpp:564
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Iš saugyklos trinami pažymėti failai ir/arba aplankai"
 
@@ -922,7 +922,7 @@ msgstr "Trynimas"
 msgid "Destination folder:"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:489
+#: svnfrontend/maintreewidget.cpp:494
 msgid "Details"
 msgstr "Detalės"
 
@@ -934,7 +934,7 @@ msgstr "Programuotojas"
 msgid "Diff & Merge"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:581
+#: svnfrontend/maintreewidget.cpp:586
 msgid "Diff against HEAD"
 msgstr ""
 
@@ -946,28 +946,28 @@ msgstr ""
 msgid "Diff highlighted item"
 msgstr ""
 
-#: rc.cpp:468
+#: rc.cpp:459
 msgid "Diff ignores all white spaces"
 msgstr ""
 
-#: rc.cpp:459
+#: rc.cpp:450
 msgid "Diff ignores content type"
 msgstr ""
 
-#: rc.cpp:465
+#: rc.cpp:456
 msgid "Diff ignores white space changes"
 msgstr ""
 
-#: svnfrontend/graphtree/revgraphview.cpp:814 rc.cpp:462
+#: svnfrontend/graphtree/revgraphview.cpp:814 rc.cpp:453
 msgid "Diff in revisiontree is recursive"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:585 svnfrontend/maintreewidget.cpp:588
+#: svnfrontend/maintreewidget.cpp:590 svnfrontend/maintreewidget.cpp:593
 #, fuzzy
 msgid "Diff items"
 msgstr "Trūkstami elementai:"
 
-#: svnfrontend/maintreewidget.cpp:575 svnfrontend/maintreewidget.cpp:577
+#: svnfrontend/maintreewidget.cpp:580 svnfrontend/maintreewidget.cpp:582
 msgid "Diff local changes"
 msgstr ""
 
@@ -975,7 +975,7 @@ msgstr ""
 msgid "Diff previous"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:619 rc.cpp:60
+#: svnfrontend/maintreewidget.cpp:624 rc.cpp:60
 msgid "Diff revisions"
 msgstr ""
 
@@ -987,17 +987,17 @@ msgstr ""
 msgid "Diff to selected item"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:586 svnfrontend/maintreewidget.cpp:589
+#: svnfrontend/maintreewidget.cpp:591 svnfrontend/maintreewidget.cpp:594
 msgid "Diff two items"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:576 svnfrontend/maintreewidget.cpp:578
+#: svnfrontend/maintreewidget.cpp:581 svnfrontend/maintreewidget.cpp:583
 msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:582
+#: svnfrontend/maintreewidget.cpp:587
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
@@ -1007,7 +1007,7 @@ msgstr ""
 msgid "Diff-process could not started, check command."
 msgstr ""
 
-#: rc.cpp:456
+#: rc.cpp:447
 #, fuzzy
 msgid "DiffMergeSettings"
 msgstr "Nustatymai"
@@ -1016,7 +1016,7 @@ msgstr "Nustatymai"
 msgid "Diffing - hit cancel for abort"
 msgstr ""
 
-#: rc.cpp:762
+#: rc.cpp:756
 msgid "Direction of revision tree"
 msgstr ""
 
@@ -1028,11 +1028,11 @@ msgstr ""
 msgid "Disable fsync at commit (BDB only)"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:486
+#: svnfrontend/maintreewidget.cpp:491
 msgid "Display Properties"
 msgstr "Rodymo savybės"
 
-#: rc.cpp:756
+#: rc.cpp:747
 msgid "Display colored annotate"
 msgstr ""
 
@@ -1040,15 +1040,15 @@ msgstr ""
 msgid "Display details"
 msgstr "Rodyti detales"
 
-#: kdesvn_part.cpp:195 rc.cpp:750
+#: kdesvn_part.cpp:195 rc.cpp:741
 msgid "Display ignored files"
 msgstr "Rodyti ignoruotus failus"
 
-#: svnfrontend/maintreewidget.cpp:487
+#: svnfrontend/maintreewidget.cpp:492
 msgid "Display last changes"
 msgstr "Rodyti paskutinius pakeitimus"
 
-#: svnfrontend/maintreewidget.cpp:488
+#: svnfrontend/maintreewidget.cpp:493
 msgid "Display last changes as difference to previous commit."
 msgstr ""
 
@@ -1060,11 +1060,11 @@ msgstr "Rodyti nežinomus failus"
 msgid "Display-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:471
+#: svnfrontend/maintreewidget.cpp:476
 msgid "Displays the history log of selected item"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:474 svnfrontend/maintreewidget.cpp:478
+#: svnfrontend/maintreewidget.cpp:479 svnfrontend/maintreewidget.cpp:483
 msgid "Displays the history log of selected item without following copies"
 msgstr ""
 
@@ -1072,11 +1072,11 @@ msgstr ""
 msgid "Document to open"
 msgstr ""
 
-#: rc.cpp:610
+#: rc.cpp:601
 msgid "Don't display contextmenu in Konqueror"
 msgstr ""
 
-#: rc.cpp:616
+#: rc.cpp:607
 msgid "Don't display entries in toplevel action menu"
 msgstr ""
 
@@ -1182,8 +1182,8 @@ msgstr ""
 msgid "Entry"
 msgstr "Įrašas"
 
-#: svnfrontend/maintreewidget.cpp:1989 svnfrontend/maintreewidget.cpp:1993
-#: svnfrontend/maintreewidget.cpp:1998
+#: svnfrontend/maintreewidget.cpp:1997 svnfrontend/maintreewidget.cpp:2001
+#: svnfrontend/maintreewidget.cpp:2006
 #, fuzzy
 msgid "Error"
 msgstr "SVN klaida"
@@ -1192,7 +1192,7 @@ msgstr "SVN klaida"
 msgid "Error getting content"
 msgstr "Klaida gaunant turinį"
 
-#: svnfrontend/maintreewidget.cpp:1847
+#: svnfrontend/maintreewidget.cpp:1855
 msgid "Error getting entry to relocate"
 msgstr ""
 
@@ -1220,16 +1220,16 @@ msgstr ""
 msgid "Execute subversion command (\"exec help\" for more information)"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:615 svnfrontend/svnactions.cpp:1674
+#: svnfrontend/maintreewidget.cpp:620 svnfrontend/svnactions.cpp:1674
 #, fuzzy
 msgid "Export"
 msgstr "Eksportuojama"
 
-#: svnfrontend/maintreewidget.cpp:614 svnfrontend/svnactions.cpp:1615
+#: svnfrontend/maintreewidget.cpp:619 svnfrontend/svnactions.cpp:1615
 msgid "Export a repository"
 msgstr "Eksportuoti saugyklą"
 
-#: svnfrontend/maintreewidget.cpp:607
+#: svnfrontend/maintreewidget.cpp:612
 msgid "Export current repository path"
 msgstr ""
 
@@ -1249,11 +1249,11 @@ msgstr ""
 msgid "External"
 msgstr "Išorinis"
 
-#: rc.cpp:515
+#: rc.cpp:506
 msgid "External diff display:"
 msgstr ""
 
-#: rc.cpp:489
+#: rc.cpp:480
 msgid "External merge program:"
 msgstr "Išorinė apjungimo programa:"
 
@@ -1326,7 +1326,7 @@ msgstr "Atnaujinti į reviziją %1."
 msgid "Finished external."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:624
+#: svnfrontend/maintreewidget.cpp:629
 #, fuzzy
 msgid "Fold File Tree"
 msgstr "Aplankas"
@@ -1355,20 +1355,20 @@ msgstr ""
 msgid "Form1"
 msgstr "Forma1"
 
-#: svnfrontend/maintreewidget.cpp:519
+#: svnfrontend/maintreewidget.cpp:524
 #, fuzzy
 msgid "Free existing lock on current item"
 msgstr "Atrakinti dabartinius elementus"
 
-#: svnfrontend/maintreewidget.cpp:480
+#: svnfrontend/maintreewidget.cpp:485
 msgid "Full revision tree"
 msgstr "Pilnas revizijų medis"
 
-#: rc.cpp:660
+#: rc.cpp:651
 msgid "Gain item info recursive"
 msgstr ""
 
-#: kdesvn_part.cpp:369 rc.cpp:830
+#: kdesvn_part.cpp:369 rc.cpp:824
 msgid "General"
 msgstr "Bendra"
 
@@ -1385,7 +1385,7 @@ msgstr ""
 msgid "Get Logs"
 msgstr "Gauti žurnalus"
 
-#: rc.cpp:657
+#: rc.cpp:648
 msgid "Get file details while remote listing"
 msgstr ""
 
@@ -1425,11 +1425,7 @@ msgstr "HEAD"
 msgid "Handle unrelated as related items"
 msgstr ""
 
-#: rc.cpp:453
-msgid "Help"
-msgstr ""
-
-#: rc.cpp:729
+#: rc.cpp:720
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
@@ -1439,7 +1435,7 @@ msgstr ""
 msgid "Hide new items"
 msgstr "Slėpti elementus"
 
-#: rc.cpp:720
+#: rc.cpp:711
 #, fuzzy
 msgid "Hide new items in commit box"
 msgstr "Pažymėti elementą"
@@ -1448,8 +1444,8 @@ msgstr "Pažymėti elementą"
 msgid "Hide unchanged files"
 msgstr "Slėpti nepakeistus failus"
 
-#: svnfrontend/maintreewidget.cpp:470 svnfrontend/maintreewidget.cpp:473
-#: svnfrontend/maintreewidget.cpp:477
+#: svnfrontend/maintreewidget.cpp:475 svnfrontend/maintreewidget.cpp:478
+#: svnfrontend/maintreewidget.cpp:482
 #, fuzzy
 msgid "History"
 msgstr "%1 istorija"
@@ -1458,16 +1454,16 @@ msgstr "%1 istorija"
 msgid "History of %1"
 msgstr "%1 istorija"
 
-#: svnfrontend/maintreewidget.cpp:469
+#: svnfrontend/maintreewidget.cpp:474
 #, fuzzy
 msgid "History of item"
 msgstr "%1 istorija"
 
-#: svnfrontend/maintreewidget.cpp:472 svnfrontend/maintreewidget.cpp:476
+#: svnfrontend/maintreewidget.cpp:477 svnfrontend/maintreewidget.cpp:481
 msgid "History of item ignoring copies"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2063
+#: svnfrontend/maintreewidget.cpp:2071
 msgid "Hold CTRL key while click on selected item for unselect"
 msgstr ""
 
@@ -1491,7 +1487,7 @@ msgstr ""
 msgid "If checked commit will not release locks."
 msgstr ""
 
-#: rc.cpp:471
+#: rc.cpp:462
 msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
@@ -1514,11 +1510,11 @@ msgstr ""
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
 
-#: rc.cpp:607
+#: rc.cpp:598
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
 msgstr ""
 
-#: rc.cpp:613
+#: rc.cpp:604
 msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "konqueror/dolphin"
@@ -1564,7 +1560,7 @@ msgstr ""
 msgid "Ignore unknown node types"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:567
+#: svnfrontend/maintreewidget.cpp:572
 msgid "Ignore/Unignore current item"
 msgstr "Ignoruoti/nebeignoruoti dabartinį elementą"
 
@@ -1581,15 +1577,15 @@ msgstr ""
 msgid "Import"
 msgstr "Importuoti žurnalą"
 
-#: svnfrontend/maintreewidget.cpp:546
+#: svnfrontend/maintreewidget.cpp:551
 msgid "Import folder content into current url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:544
+#: svnfrontend/maintreewidget.cpp:549
 msgid "Import folders into current"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1922 svnfrontend/maintreewidget.cpp:1926
+#: svnfrontend/maintreewidget.cpp:1930 svnfrontend/maintreewidget.cpp:1934
 msgid "Import log"
 msgstr "Importuoti žurnalą"
 
@@ -1637,11 +1633,11 @@ msgstr "Išdavėjo vardas"
 msgid "Item"
 msgstr "Elementas"
 
-#: rc.cpp:586
+#: rc.cpp:577
 msgid "Item needs lock:"
 msgstr "Elementui reikia spynos:"
 
-#: rc.cpp:747
+#: rc.cpp:738
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
@@ -1649,7 +1645,7 @@ msgstr ""
 msgid "Just dry run without modifications"
 msgstr ""
 
-#: rc.cpp:619
+#: rc.cpp:610
 msgid "KIO operations use standard logmessage"
 msgstr ""
 
@@ -1702,7 +1698,7 @@ msgstr "Paskutinė revizija"
 msgid "Last used log messages"
 msgstr "Vėliausiai naudoti žurnalo pranešimai"
 
-#: rc.cpp:765
+#: rc.cpp:759
 msgid "Left to right"
 msgstr "Iš kairės į dešinę"
 
@@ -1718,7 +1714,7 @@ msgstr "Eilutė"
 msgid "List entries"
 msgstr ""
 
-#: rc.cpp:711
+#: rc.cpp:702
 msgid "List items next commit will send or not"
 msgstr ""
 
@@ -1754,7 +1750,7 @@ msgstr ""
 msgid "Loading dump finished."
 msgstr ""
 
-#: rc.cpp:583
+#: rc.cpp:574
 msgid "Local changed items:"
 msgstr "Vietiniai pakeisti elementai:"
 
@@ -1770,7 +1766,7 @@ msgstr ""
 msgid "Lock comment"
 msgstr "Spynos komentaras"
 
-#: svnfrontend/maintreewidget.cpp:515
+#: svnfrontend/maintreewidget.cpp:520
 msgid "Lock current items"
 msgstr "Užrakinti dabartinius elementus"
 
@@ -1778,7 +1774,7 @@ msgstr "Užrakinti dabartinius elementus"
 msgid "Lock failed"
 msgstr "Užrakinimas nepavyko"
 
-#: svnfrontend/maintreewidget.cpp:1170
+#: svnfrontend/maintreewidget.cpp:1178
 msgid "Lock message"
 msgstr "Užrakinti pranešimą"
 
@@ -1790,7 +1786,7 @@ msgstr ""
 msgid "Locked by"
 msgstr "Užrakino"
 
-#: rc.cpp:562
+#: rc.cpp:553
 msgid "Locked items:"
 msgstr "Užrakinti elementai:"
 
@@ -1802,7 +1798,7 @@ msgstr ""
 msgid "Locking"
 msgstr "Užrakinama"
 
-#: rc.cpp:699
+#: rc.cpp:690
 msgid "Log follows node changes"
 msgstr ""
 
@@ -1810,7 +1806,7 @@ msgstr ""
 msgid "Log message for revision"
 msgstr ""
 
-#: rc.cpp:842
+#: rc.cpp:836
 msgid "Logcache"
 msgstr ""
 
@@ -1818,7 +1814,7 @@ msgstr ""
 msgid "Logmessage for revision %1"
 msgstr ""
 
-#: rc.cpp:708
+#: rc.cpp:699
 msgid "Logs always reads list of changed files"
 msgstr ""
 
@@ -1826,7 +1822,7 @@ msgstr ""
 msgid "Logs follow node changes"
 msgstr ""
 
-#: rc.cpp:821 rc.cpp:863
+#: rc.cpp:815 rc.cpp:857
 msgid "Main Toolbar"
 msgstr ""
 
@@ -1842,24 +1838,24 @@ msgstr ""
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr ""
 
-#: rc.cpp:559
+#: rc.cpp:550
 msgid "Mark changed and locked items colored"
 msgstr ""
 
-#: rc.cpp:744
+#: rc.cpp:735
 msgid "Mark item status with icon overlay"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:562
+#: svnfrontend/maintreewidget.cpp:567
 #, fuzzy
 msgid "Mark resolved"
 msgstr "Išspręsta"
 
-#: rc.cpp:735
+#: rc.cpp:726
 msgid "Mark subversion states with an overlayed icon"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:563
+#: svnfrontend/maintreewidget.cpp:568
 msgid "Marking files or dirs resolved"
 msgstr ""
 
@@ -1867,7 +1863,7 @@ msgstr ""
 msgid "Marking resolved"
 msgstr ""
 
-#: rc.cpp:753
+#: rc.cpp:744
 msgid "Maximum logmessages in history:"
 msgstr ""
 
@@ -1875,7 +1871,7 @@ msgstr ""
 msgid "May existing unversioned items ovewritten"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1694
+#: svnfrontend/maintreewidget.cpp:1702
 msgid "May not make subdirs of a file"
 msgstr ""
 
@@ -1883,16 +1879,16 @@ msgstr ""
 msgid "May only switch one url at time!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:594 svnfrontend/maintreewidget.cpp:1795
+#: svnfrontend/maintreewidget.cpp:599 svnfrontend/maintreewidget.cpp:1803
 #: svnfrontend/svnactions.cpp:2136
 msgid "Merge"
 msgstr "Apjungti"
 
-#: svnfrontend/maintreewidget.cpp:593
+#: svnfrontend/maintreewidget.cpp:598
 msgid "Merge two revisions"
 msgstr "Apjungti dvi revizijas"
 
-#: svnfrontend/maintreewidget.cpp:595
+#: svnfrontend/maintreewidget.cpp:600
 msgid "Merge two revisions of this entry into itself"
 msgstr ""
 
@@ -1900,7 +1896,7 @@ msgstr ""
 msgid "Merge-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:598
+#: svnfrontend/maintreewidget.cpp:603
 msgid "Merge..."
 msgstr "Apjungti..."
 
@@ -1920,11 +1916,11 @@ msgstr "Apjungiami elementai"
 msgid "Message"
 msgstr "Pranešimas"
 
-#: rc.cpp:595
+#: rc.cpp:586
 msgid "Minimum log lines to show:"
 msgstr ""
 
-#: rc.cpp:580
+#: rc.cpp:571
 msgid "Missed items:"
 msgstr "Trūkstami elementai:"
 
@@ -1961,7 +1957,7 @@ msgstr "Keisti savybes"
 msgid "Modify property"
 msgstr "Keisti savybę"
 
-#: svnfrontend/maintreewidget.cpp:491 svnfrontend/svnactions.cpp:2161
+#: svnfrontend/maintreewidget.cpp:496 svnfrontend/svnactions.cpp:2161
 #: svnfrontend/svnactions.cpp:2179
 msgid "Move"
 msgstr ""
@@ -1970,7 +1966,7 @@ msgstr ""
 msgid "Move/Rename file/dir"
 msgstr "Perkelti/pervadinti failą/aplanką"
 
-#: svnfrontend/maintreewidget.cpp:492
+#: svnfrontend/maintreewidget.cpp:497
 #, fuzzy
 msgid "Moves or renames current item"
 msgstr "Ignoruoti/nebeignoruoti dabartinį elementą"
@@ -1991,7 +1987,7 @@ msgstr "N&umeris"
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: svnfrontend/maintreewidget.cpp:2072
+#: svnfrontend/maintreewidget.cpp:2080
 msgid "Navigation"
 msgstr ""
 
@@ -1999,11 +1995,11 @@ msgstr ""
 msgid "Needs update"
 msgstr "Reikia atnaujinimo"
 
-#: svnfrontend/maintreewidget.cpp:253
+#: svnfrontend/maintreewidget.cpp:258
 msgid "Networked URL to open but networking is disabled!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:523 svnfrontend/svnactions.cpp:642
+#: svnfrontend/maintreewidget.cpp:528 svnfrontend/svnactions.cpp:642
 msgid "New folder"
 msgstr "Naujas aplankas"
 
@@ -2060,15 +2056,15 @@ msgstr ""
 msgid "Not versioned"
 msgstr ""
 
-#: rc.cpp:565
+#: rc.cpp:556
 msgid "Not versioned items:"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1514
+#: svnfrontend/maintreewidget.cpp:1522
 msgid "Nothing selected for delete"
 msgstr "Niekas nepažymėta trynimui"
 
-#: svnfrontend/maintreewidget.cpp:1166 svnfrontend/maintreewidget.cpp:1209
+#: svnfrontend/maintreewidget.cpp:1174 svnfrontend/maintreewidget.cpp:1217
 msgid "Nothing selected for unlock"
 msgstr ""
 
@@ -2084,7 +2080,7 @@ msgstr "Nėra ko apjungti."
 msgid "Number"
 msgstr "Numeris"
 
-#: rc.cpp:15 rc.cpp:447
+#: rc.cpp:15
 msgid "OK"
 msgstr ""
 
@@ -2096,11 +2092,11 @@ msgstr "Sena konfliktuojančio failo versija"
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1989
+#: svnfrontend/maintreewidget.cpp:1997
 msgid "Only in working copy possible."
 msgstr "Įmanoma tik darbinėje kopijoje."
 
-#: svnfrontend/maintreewidget.cpp:1993
+#: svnfrontend/maintreewidget.cpp:2001
 msgid "Only on single folder possible"
 msgstr ""
 
@@ -2108,8 +2104,8 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:600 svnfrontend/maintreewidget.cpp:985
-#: svnfrontend/maintreewidget.cpp:1055
+#: svnfrontend/maintreewidget.cpp:605 svnfrontend/maintreewidget.cpp:993
+#: svnfrontend/maintreewidget.cpp:1063
 msgid "Open With..."
 msgstr "Atverti su..."
 
@@ -2121,7 +2117,7 @@ msgstr "Atverkite failą su #PKCS12 sertifikatu"
 msgid "Open after job"
 msgstr "Atverti po uždoties"
 
-#: svnfrontend/maintreewidget.cpp:538
+#: svnfrontend/maintreewidget.cpp:543
 msgid "Open repository of working copy"
 msgstr "Atverti darbinės kopijos saugyklą"
 
@@ -2129,11 +2125,11 @@ msgstr "Atverti darbinės kopijos saugyklą"
 msgid "Open repository or working copy"
 msgstr "Atverti saugyklą arba darbinę kopiją"
 
-#: svnfrontend/maintreewidget.cpp:623
+#: svnfrontend/maintreewidget.cpp:628
 msgid "Opens all branches of the file tree"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:540
+#: svnfrontend/maintreewidget.cpp:545
 msgid "Opens the repository the current working copy was checked out from"
 msgstr ""
 
@@ -2149,17 +2145,17 @@ msgstr "Pradinis autorius ir prižiūrėtojas"
 msgid "Other..."
 msgstr "Kita..."
 
-#: svnfrontend/maintreewidget.cpp:512
+#: svnfrontend/maintreewidget.cpp:517
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:502 svnfrontend/maintreewidget.cpp:505
+#: svnfrontend/maintreewidget.cpp:507 svnfrontend/maintreewidget.cpp:510
 msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:509
+#: svnfrontend/maintreewidget.cpp:514
 msgid "Output the content of specified files or URLs."
 msgstr ""
 
@@ -2175,7 +2171,7 @@ msgstr ""
 msgid "Owner"
 msgstr "Savininkas"
 
-#: svnfrontend/maintreewidget.cpp:482
+#: svnfrontend/maintreewidget.cpp:487
 msgid "Partial revision tree"
 msgstr "Dalinis revizijų medis"
 
@@ -2203,7 +2199,7 @@ msgstr ""
 msgid "Please enter your password below."
 msgstr ""
 
-#: rc.cpp:480
+#: rc.cpp:471
 msgid "Prefer external merge program"
 msgstr "Teikti pirmenybę išorinei apjungimo programai"
 
@@ -2217,7 +2213,7 @@ msgstr "Perkeliami įrašai"
 msgid "Prompt"
 msgstr "Savybė"
 
-#: svnfrontend/maintreewidget.cpp:485
+#: svnfrontend/maintreewidget.cpp:490
 #, fuzzy
 msgid "Properties"
 msgstr "Savybė"
@@ -2251,7 +2247,7 @@ msgstr "Savybės vertė:"
 msgid "Protected property"
 msgstr "Apsaugota savybė"
 
-#: rc.cpp:824
+#: rc.cpp:818
 msgid "Quick settings"
 msgstr "Greiti nustatymai"
 
@@ -2259,11 +2255,11 @@ msgstr "Greiti nustatymai"
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: rc.cpp:702
+#: rc.cpp:693
 msgid "Read detailed change lists"
 msgstr ""
 
-#: rc.cpp:705
+#: rc.cpp:696
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
 "But if this feature is switched off, kdesvn may fail generating differences "
@@ -2274,7 +2270,7 @@ msgstr ""
 msgid "Ready"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1530 svnfrontend/svnactions.cpp:1541
+#: svnfrontend/maintreewidget.cpp:1538 svnfrontend/svnactions.cpp:1541
 msgid "Really delete these entries?"
 msgstr "Ar tikrai trinti šiuos įrašus?"
 
@@ -2295,18 +2291,18 @@ msgstr "Neseniai atidaryti URL"
 msgid "Recursive"
 msgstr "Rekursiškai"
 
-#: svnfrontend/maintreewidget.cpp:543
+#: svnfrontend/maintreewidget.cpp:548
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:617
+#: svnfrontend/maintreewidget.cpp:622
 #, fuzzy
 msgid "Refresh"
 msgstr "Atnaujinti peržiūrą"
 
-#: svnfrontend/maintreewidget.cpp:616
+#: svnfrontend/maintreewidget.cpp:621
 msgid "Refresh view"
 msgstr "Atnaujinti peržiūrą"
 
@@ -2318,11 +2314,11 @@ msgstr "Atmesti"
 msgid "Reload last opened url if no one is given on commandline"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:529
+#: svnfrontend/maintreewidget.cpp:534
 msgid "Relocate current working copy url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1854
+#: svnfrontend/maintreewidget.cpp:1862
 msgid "Relocate path %1"
 msgstr ""
 
@@ -2334,11 +2330,11 @@ msgstr ""
 msgid "Relocate url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:530
+#: svnfrontend/maintreewidget.cpp:535
 msgid "Relocate url of current working copy path to other url"
 msgstr ""
 
-#: rc.cpp:568
+#: rc.cpp:559
 msgid "Remote changed items:"
 msgstr "Nutolę pakeisti elementai:"
 
@@ -2368,7 +2364,7 @@ msgstr "Atnaujinti į reviziją %1."
 msgid "Replacing %1."
 msgstr "Pakeičiama %1."
 
-#: rc.cpp:836
+#: rc.cpp:830
 msgid "Repository"
 msgstr "Saugykla"
 
@@ -2388,7 +2384,7 @@ msgstr ""
 msgid "Resolve"
 msgstr "Spręsti"
 
-#: svnfrontend/maintreewidget.cpp:565
+#: svnfrontend/maintreewidget.cpp:570
 msgid "Resolve conflicts"
 msgstr "Spręsti konfliktus"
 
@@ -2421,7 +2417,7 @@ msgstr ""
 msgid "Revert"
 msgstr "Atstatyti"
 
-#: svnfrontend/maintreewidget.cpp:560
+#: svnfrontend/maintreewidget.cpp:565
 msgid "Revert current changes"
 msgstr "Atstatyti dabartinius pakeitimus"
 
@@ -2450,7 +2446,7 @@ msgstr "Atstatomi objektai"
 msgid "Review affected items"
 msgstr "Peržiūrėti paveiktus elementus"
 
-#: rc.cpp:714
+#: rc.cpp:705
 msgid "Review items before commit"
 msgstr ""
 
@@ -2475,18 +2471,18 @@ msgstr ""
 msgid "RevisionButton"
 msgstr "Revizija"
 
-#: svnfrontend/maintreewidget.cpp:1100 svnfrontend/maintreewidget.cpp:1143
-#: svnfrontend/maintreewidget.cpp:1315 svnfrontend/maintreewidget.cpp:1402
-#: svnfrontend/maintreewidget.cpp:1472 svnfrontend/svnactions.cpp:1448
+#: svnfrontend/maintreewidget.cpp:1108 svnfrontend/maintreewidget.cpp:1151
+#: svnfrontend/maintreewidget.cpp:1323 svnfrontend/maintreewidget.cpp:1410
+#: svnfrontend/maintreewidget.cpp:1480 svnfrontend/svnactions.cpp:1448
 #: rc.cpp:153
 msgid "Revisions"
 msgstr "Revizijos"
 
-#: rc.cpp:759
+#: rc.cpp:753
 msgid "Revisiontree Settings"
 msgstr ""
 
-#: rc.cpp:771
+#: rc.cpp:765
 msgid "Right to left"
 msgstr "Iš dešinės į kairę"
 
@@ -2510,7 +2506,7 @@ msgstr "SSH slaptažodis"
 msgid "START"
 msgstr "START"
 
-#: svnfrontend/maintreewidget.cpp:902 svnfrontend/maintreewidget.cpp:1980
+#: svnfrontend/maintreewidget.cpp:910 svnfrontend/maintreewidget.cpp:1988
 #: svnfrontend/commandexec.cpp:211 svnfrontend/commandexec.cpp:333
 #: svnfrontend/graphtree/revgraphview.cpp:958
 msgid "SVN Error"
@@ -2544,11 +2540,11 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2066 rc.cpp:39 rc.cpp:42
+#: svnfrontend/maintreewidget.cpp:2074 rc.cpp:39 rc.cpp:42
 msgid "See context menu for more actions"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:608
+#: svnfrontend/maintreewidget.cpp:613
 msgid "Select browse revision"
 msgstr ""
 
@@ -2564,7 +2560,7 @@ msgstr "Pasirinkite operacijos gylį"
 msgid "Select encoding:"
 msgstr "Pasirinkite koduotę:"
 
-#: rc.cpp:628
+#: rc.cpp:619
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 
@@ -2609,7 +2605,7 @@ msgstr "Pranešti apie kdesvn ydą"
 msgid "Sending %1."
 msgstr "Siunčiama %1."
 
-#: rc.cpp:477
+#: rc.cpp:468
 msgid ""
 "Set if merge with external program is preferred and not subversions merge"
 msgstr ""
@@ -2651,7 +2647,7 @@ msgstr ""
 msgid "Set version as right side of diff"
 msgstr ""
 
-#: rc.cpp:723
+#: rc.cpp:714
 msgid "Settings"
 msgstr "Nustatymai"
 
@@ -2663,11 +2659,11 @@ msgstr ""
 msgid "Settings for diff and merge"
 msgstr "Skirtumų ir apjungimų nustatymai"
 
-#: rc.cpp:492
+#: rc.cpp:483
 msgid "Setup an external program for conflict resolving"
 msgstr "Nustatyti išorinę konfliktų sprendimų programą"
 
-#: rc.cpp:518
+#: rc.cpp:509
 msgid "Setup an external program for merging"
 msgstr "Nustatyti išorinę apjungimo programą"
 
@@ -2675,31 +2671,31 @@ msgstr "Nustatyti išorinę apjungimo programą"
 msgid "Should files with unknown node types be ignored"
 msgstr ""
 
-#: rc.cpp:792
+#: rc.cpp:786
 msgid "Should kdesvn check content of logcache before starting the tree"
 msgstr ""
 
-#: rc.cpp:663
+#: rc.cpp:654
 msgid "Should kdesvn retrieves properties on selected item in repositories"
 msgstr ""
 
-#: rc.cpp:673
+#: rc.cpp:664
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:717
+#: rc.cpp:708
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
 
-#: rc.cpp:589
+#: rc.cpp:580
 msgid "Show a small window containing the log after command executed"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:490
+#: svnfrontend/maintreewidget.cpp:495
 msgid "Show details about selected item"
 msgstr ""
 
-#: rc.cpp:732
+#: rc.cpp:723
 msgid "Show file info"
 msgstr "Rodyti failo informaciją"
 
@@ -2715,15 +2711,15 @@ msgstr "Rodyti eilutę"
 msgid "Show line number"
 msgstr "Rodyti eilutės numerį"
 
-#: rc.cpp:592
+#: rc.cpp:583
 msgid "Show log after executing a command"
 msgstr "Rodyti žurnalą po komandos įvykdymo"
 
-#: svnfrontend/maintreewidget.cpp:481
+#: svnfrontend/maintreewidget.cpp:486
 msgid "Shows history of item as linked tree"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:483
+#: svnfrontend/maintreewidget.cpp:488
 msgid "Shows history of item as linked tree for a revision range"
 msgstr ""
 
@@ -2731,7 +2727,7 @@ msgstr ""
 msgid "Shows info about the kdesvn plugin not the standalone app."
 msgstr ""
 
-#: rc.cpp:726
+#: rc.cpp:717
 msgid "Size of Listviewicons"
 msgstr ""
 
@@ -2747,7 +2743,7 @@ msgstr "Praleista %1."
 msgid "Skipped missing target %1."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1998
+#: svnfrontend/maintreewidget.cpp:2006
 msgid "Sorry - internal error!"
 msgstr "Apgailestaujame - vidinė klaida!"
 
@@ -2759,19 +2755,19 @@ msgstr "Šaltinis 1:"
 msgid "Source 2:"
 msgstr "Šaltinis 2:"
 
-#: rc.cpp:622
+#: rc.cpp:613
 msgid "Standard message:"
 msgstr "Standartinis pranešimas:"
 
-#: rc.cpp:631
+#: rc.cpp:622
 msgid "Start check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:637
+#: rc.cpp:628
 msgid "Start fill log cache on open"
 msgstr ""
 
-#: rc.cpp:634
+#: rc.cpp:625
 msgid "Start refresh the logcache for repository when networking enabled"
 msgstr ""
 
@@ -2803,11 +2799,11 @@ msgstr ""
 msgid "Status on external"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1178
+#: svnfrontend/maintreewidget.cpp:1186
 msgid "Steal lock?"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:761 svnfrontend/maintreewidget.cpp:1659
+#: svnfrontend/maintreewidget.cpp:766 svnfrontend/maintreewidget.cpp:1667
 msgid "Stop updating the logcache"
 msgstr ""
 
@@ -2819,15 +2815,15 @@ msgstr ""
 msgid "Store password"
 msgstr "Išsaugoti slaptažodį"
 
-#: rc.cpp:679
+#: rc.cpp:670
 msgid "Store passwords for remote connections"
 msgstr "Išsaugoti nutolusių susijungimų slaptažodžius"
 
-#: rc.cpp:690
+#: rc.cpp:681
 msgid "Store passwords into KDE Wallet"
 msgstr "Išsaugoti slaptažodžius KDE slaptažodinėje"
 
-#: rc.cpp:676
+#: rc.cpp:667
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
 "any passwords, but the subversion itself inside the configuration area of "
@@ -2843,19 +2839,19 @@ msgid ""
 "issue number."
 msgstr ""
 
-#: kdesvn_part.cpp:371 rc.cpp:809 rc.cpp:827
+#: kdesvn_part.cpp:371 rc.cpp:803 rc.cpp:821
 msgid "Subversion"
 msgstr "Subversion"
 
-#: rc.cpp:806
+#: rc.cpp:800
 msgid "Subversion Admin"
 msgstr ""
 
-#: kdesvn_part.cpp:371 rc.cpp:625
+#: kdesvn_part.cpp:371 rc.cpp:616
 msgid "Subversion Settings"
 msgstr "Subversion nustatymai"
 
-#: rc.cpp:818 rc.cpp:860
+#: rc.cpp:812 rc.cpp:854
 msgid "Subversion toolbar"
 msgstr ""
 
@@ -2863,11 +2859,11 @@ msgstr ""
 msgid "Switch only on working copies!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:525
+#: svnfrontend/maintreewidget.cpp:530
 msgid "Switch repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:526
+#: svnfrontend/maintreewidget.cpp:531
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
 
@@ -2916,7 +2912,7 @@ msgid ""
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:589
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
@@ -2932,7 +2928,7 @@ msgid ""
 "Rejecting it."
 msgstr ""
 
-#: rc.cpp:774
+#: rc.cpp:768
 msgid "Top to bottom"
 msgstr "Iš viršaus į apačią"
 
@@ -2944,7 +2940,7 @@ msgstr "Siunčiami failo duomenys"
 msgid "Trust ssl certificate"
 msgstr "Patikėti ssl sertifikatu"
 
-#: svnfrontend/maintreewidget.cpp:516
+#: svnfrontend/maintreewidget.cpp:521
 msgid "Try lock current item against changes from other users"
 msgstr ""
 
@@ -2982,7 +2978,7 @@ msgstr "UUID"
 msgid "Undelete property"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:622
+#: svnfrontend/maintreewidget.cpp:627
 msgid "Unfold File Tree"
 msgstr ""
 
@@ -2990,7 +2986,7 @@ msgstr ""
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: svnfrontend/maintreewidget.cpp:518
+#: svnfrontend/maintreewidget.cpp:523
 msgid "Unlock current items"
 msgstr "Atrakinti dabartinius elementus"
 
@@ -3002,7 +2998,7 @@ msgstr "Atrakinimas nepavyko"
 msgid "Unlocked"
 msgstr "Atrakinta"
 
-#: svnfrontend/maintreewidget.cpp:1212
+#: svnfrontend/maintreewidget.cpp:1220
 msgid "Unlocking items"
 msgstr "Atrakinami elementai"
 
@@ -3022,12 +3018,12 @@ msgstr "Nebežymėti naujų elementų"
 msgid "Unset version for diff"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:534
+#: svnfrontend/maintreewidget.cpp:539
 #, fuzzy
 msgid "Unversioned"
 msgstr "Subversion"
 
-#: svnfrontend/maintreewidget.cpp:570 svnfrontend/ccontextlistener.cpp:72
+#: svnfrontend/maintreewidget.cpp:575 svnfrontend/ccontextlistener.cpp:72
 msgid "Update"
 msgstr "Atnaujinti"
 
@@ -3044,24 +3040,24 @@ msgstr "Atnaujinti išorinį modulį"
 msgid "Update finished."
 msgstr "Baigta."
 
-#: svnfrontend/maintreewidget.cpp:628 svnfrontend/maintreewidget.cpp:759
-#: svnfrontend/maintreewidget.cpp:1664
+#: svnfrontend/maintreewidget.cpp:633 svnfrontend/maintreewidget.cpp:764
+#: svnfrontend/maintreewidget.cpp:1672
 msgid "Update log cache"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:629
+#: svnfrontend/maintreewidget.cpp:634
 msgid "Update the log cache for current repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:569 svnfrontend/maintreewidget.cpp:632
+#: svnfrontend/maintreewidget.cpp:574 svnfrontend/maintreewidget.cpp:637
 msgid "Update to head"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:571
+#: svnfrontend/maintreewidget.cpp:576
 msgid "Update to revision..."
 msgstr "Atnaujinti į reviziją..."
 
-#: rc.cpp:693
+#: rc.cpp:684
 msgid "Use an internal password cache"
 msgstr ""
 
@@ -3069,7 +3065,7 @@ msgstr ""
 msgid "Use deltas"
 msgstr "Naudoti deltas"
 
-#: rc.cpp:474
+#: rc.cpp:465
 msgid "Use external diff display"
 msgstr ""
 
@@ -3077,8 +3073,12 @@ msgstr ""
 msgid "Use external merge not subversions merge"
 msgstr ""
 
-#: rc.cpp:696
+#: rc.cpp:687
 msgid "Use internal password cache"
+msgstr ""
+
+#: rc.cpp:750
+msgid "Use navigation panel"
 msgstr ""
 
 #: rc.cpp:120
@@ -3109,7 +3109,7 @@ msgstr "Galioja iki"
 msgid "Value"
 msgstr "Vertė"
 
-#: rc.cpp:839
+#: rc.cpp:833
 msgid "View"
 msgstr ""
 
@@ -3121,7 +3121,7 @@ msgstr "Žiūrėti ir keisti savybes"
 msgid "WORKING"
 msgstr "WORKING"
 
-#: rc.cpp:666
+#: rc.cpp:657
 msgid ""
 "When browsing kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -3130,7 +3130,7 @@ msgid ""
 "hangs often you should deactivate it."
 msgstr ""
 
-#: rc.cpp:643
+#: rc.cpp:634
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>But due this listings/updating on folders containing lot of "
@@ -3138,16 +3138,16 @@ msgid ""
 "containing lot of such entries."
 msgstr ""
 
-#: rc.cpp:640
+#: rc.cpp:631
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
 
-#: rc.cpp:682
+#: rc.cpp:673
 msgid ""
 "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 
-#: rc.cpp:795
+#: rc.cpp:789
 msgid ""
 "When starting the tree generation and reading data from log cache kdesvn may "
 "check for newer items in repository if network is enabled. \n"
@@ -3155,7 +3155,7 @@ msgid ""
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
 
-#: rc.cpp:649
+#: rc.cpp:640
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
@@ -3169,7 +3169,7 @@ msgstr "Kuriuos failus ar aplankus turėčiau pridėti?"
 msgid "Work online"
 msgstr "Dirbti prisijungus"
 
-#: rc.cpp:833
+#: rc.cpp:827
 msgid "Working copy"
 msgstr "Darbinė kopija"
 
@@ -3193,11 +3193,11 @@ msgstr "Andrius Štikonas"
 msgid "incremental Dump"
 msgstr ""
 
-#: ksvnwidgets/authdialogimpl.cpp:41
+#: ksvnwidgets/authdialogwidget.cpp:41
 msgid "into KDE Wallet"
 msgstr "į KDE slaptažodinę"
 
-#: ksvnwidgets/authdialogimpl.cpp:41
+#: ksvnwidgets/authdialogwidget.cpp:41
 msgid "into subversions simple storage"
 msgstr ""
 
@@ -3226,7 +3226,7 @@ msgstr "Andrius Štikonas"
 msgid "kdesvnaskpass"
 msgstr ""
 
-#: rc.cpp:483
+#: rc.cpp:474
 msgid "see \"Whats this\" for details"
 msgstr "detalių ieškokite „Kas tai“"
 

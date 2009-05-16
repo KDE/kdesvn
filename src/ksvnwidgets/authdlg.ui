@@ -1,59 +1,60 @@
-<ui version="4.0" >
- <class>AuthDialog</class>
- <widget class="KDialog" name="AuthDialog" >
-  <property name="geometry" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AuthDialogWidget</class>
+ <widget class="QWidget" name="AuthDialogWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>418</width>
-    <height>163</height>
+    <width>362</width>
+    <height>135</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Authentication</string>
   </property>
-  <property name="sizeGripEnabled" >
-   <bool>true</bool>
+  <property name="sizeGripEnabled" stdset="0">
+   <bool>false</bool>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="m_RealmLabel" >
-     <property name="text" >
+    <widget class="QLabel" name="m_RealmLabel">
+     <property name="text">
       <string>Enter authentication info for</string>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>false</bool>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" >
-     <item row="1" column="0" >
-      <widget class="QLabel" name="m_PasswordLabel" >
-       <property name="text" >
+    <layout class="QGridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="m_PasswordLabel">
+       <property name="text">
         <string>Password:</string>
        </property>
-       <property name="wordWrap" >
+       <property name="wordWrap">
         <bool>false</bool>
        </property>
       </widget>
      </item>
-     <item row="1" column="1" >
-      <widget class="KLineEdit" name="m_PasswordEdit" >
-       <property name="echoMode" >
+     <item row="1" column="1">
+      <widget class="KLineEdit" name="m_PasswordEdit">
+       <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
       </widget>
      </item>
-     <item row="0" column="1" >
-      <widget class="KLineEdit" name="m_UsernameEdit" />
+     <item row="0" column="1">
+      <widget class="KLineEdit" name="m_UsernameEdit"/>
      </item>
-     <item row="0" column="0" >
-      <widget class="QLabel" name="m_UsernameLabel" >
-       <property name="text" >
+     <item row="0" column="0">
+      <widget class="QLabel" name="m_UsernameLabel">
+       <property name="text">
         <string>Username:</string>
        </property>
-       <property name="wordWrap" >
+       <property name="wordWrap">
         <bool>false</bool>
        </property>
       </widget>
@@ -61,80 +62,18 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="m_StorePasswordButton" >
-     <property name="text" >
+    <widget class="QCheckBox" name="m_StorePasswordButton">
+     <property name="text">
       <string>Store password</string>
      </property>
-     <property name="checked" >
+     <property name="checked">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" >
-     <item>
-      <widget class="QPushButton" name="buttonOk" >
-       <property name="text" >
-        <string>OK</string>
-       </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
-       <property name="autoDefault" >
-        <bool>true</bool>
-       </property>
-       <property name="default" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonCancel" >
-       <property name="text" >
-        <string>Cancel</string>
-       </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
-       <property name="autoDefault" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType" >
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>90</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonHelp" >
-       <property name="text" >
-        <string>Help</string>
-       </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
-       <property name="autoDefault" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
    <class>KLineEdit</class>
@@ -146,63 +85,11 @@
   <tabstop>m_UsernameEdit</tabstop>
   <tabstop>m_PasswordEdit</tabstop>
   <tabstop>m_StorePasswordButton</tabstop>
-  <tabstop>buttonOk</tabstop>
-  <tabstop>buttonCancel</tabstop>
-  <tabstop>buttonHelp</tabstop>
  </tabstops>
  <includes>
-  <include location="local" >klineedit.h</include>
-  <include location="local" >klineedit.h</include>
+  <include location="local">klineedit.h</include>
+  <include location="local">klineedit.h</include>
  </includes>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonOk</sender>
-   <signal>clicked()</signal>
-   <receiver>AuthDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>AuthDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonHelp</sender>
-   <signal>clicked()</signal>
-   <receiver>AuthDialog</receiver>
-   <slot>slotHelp()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

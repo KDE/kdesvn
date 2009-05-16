@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>mainTreeWidget</class>
- <widget class="QWidget" name="mainTreeWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="mainTreeWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,82 +10,82 @@
     <height>271</height>
    </rect>
   </property>
-  <property name="contextMenuPolicy" >
+  <property name="contextMenuPolicy">
    <enum>Qt::DefaultContextMenu</enum>
   </property>
-  <property name="acceptDrops" >
+  <property name="acceptDrops">
    <bool>true</bool>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QSplitter" name="m_ViewSplitter" >
-     <property name="orientation" >
+    <widget class="QSplitter" name="m_ViewSplitter">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="handleWidth" >
+     <property name="handleWidth">
       <number>4</number>
      </property>
-     <widget class="QTreeView" name="m_DirTreeView" >
-      <property name="sizePolicy" >
-       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+     <widget class="QTreeView" name="m_DirTreeView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="contextMenuPolicy" >
+      <property name="contextMenuPolicy">
        <enum>Qt::CustomContextMenu</enum>
       </property>
-      <property name="selectionMode" >
+      <property name="selectionMode">
        <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
-      <property name="sortingEnabled" >
+      <property name="sortingEnabled">
        <bool>true</bool>
       </property>
-      <property name="allColumnsShowFocus" >
+      <property name="allColumnsShowFocus">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QTreeView" name="m_TreeView" >
-      <property name="sizePolicy" >
-       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+     <widget class="QTreeView" name="m_TreeView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>2</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="contextMenuPolicy" >
+      <property name="contextMenuPolicy">
        <enum>Qt::CustomContextMenu</enum>
       </property>
-      <property name="dragEnabled" >
+      <property name="dragEnabled">
        <bool>true</bool>
       </property>
-      <property name="dragDropMode" >
+      <property name="dragDropMode">
        <enum>QAbstractItemView::DragDrop</enum>
       </property>
-      <property name="selectionMode" >
+      <property name="selectionMode">
        <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
-      <property name="verticalScrollMode" >
+      <property name="verticalScrollMode">
        <enum>QAbstractItemView::ScrollPerItem</enum>
       </property>
-      <property name="rootIsDecorated" >
+      <property name="rootIsDecorated">
        <bool>false</bool>
       </property>
-      <property name="uniformRowHeights" >
+      <property name="uniformRowHeights">
        <bool>true</bool>
       </property>
-      <property name="itemsExpandable" >
+      <property name="itemsExpandable">
        <bool>false</bool>
       </property>
-      <property name="sortingEnabled" >
+      <property name="sortingEnabled">
        <bool>true</bool>
       </property>
-      <property name="allColumnsShowFocus" >
+      <property name="allColumnsShowFocus">
        <bool>true</bool>
       </property>
-      <property name="expandsOnDoubleClick" >
+      <property name="expandsOnDoubleClick">
        <bool>false</bool>
       </property>
      </widget>
@@ -100,11 +101,11 @@
    <receiver>mainTreeWidget</receiver>
    <slot>slotItemActivated(QModelIndex)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>358</x>
      <y>77</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>72</x>
      <y>59</y>
     </hint>
@@ -116,11 +117,11 @@
    <receiver>mainTreeWidget</receiver>
    <slot>slotContextMenu(QPoint)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>358</x>
      <y>60</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>64</x>
      <y>42</y>
     </hint>
@@ -132,11 +133,11 @@
    <receiver>mainTreeWidget</receiver>
    <slot>slotItemExpanded(QModelIndex)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>358</x>
      <y>47</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>41</x>
      <y>29</y>
     </hint>
@@ -148,11 +149,11 @@
    <receiver>mainTreeWidget</receiver>
    <slot>slotDirContextMenu(QPoint)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>128</x>
      <y>153</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>100</x>
      <y>265</y>
     </hint>

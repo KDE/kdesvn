@@ -123,8 +123,9 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     m_Data->m_SortModel->setDynamicSortFilter(true);
     m_Data->m_SortModel->setSortRole(SORT_ROLE);
     m_Data->m_SortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort()?Qt::CaseSensitive:Qt::CaseInsensitive);
-    m_TreeView->sortByColumn(0,Qt::AscendingOrder);
+    m_Data->m_SortModel->sort(0);
     m_TreeView->setModel(m_Data->m_SortModel);
+    m_TreeView->sortByColumn(0,Qt::AscendingOrder);
     m_Data->m_Model = new SvnItemModel(this);
     m_Data->m_SortModel->setSourceSvnModel(m_Data->m_Model);
 
@@ -132,7 +133,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     m_Data->m_DirSortModel->setDynamicSortFilter(true);
     m_Data->m_DirSortModel->setSortRole(SORT_ROLE);
     m_Data->m_DirSortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort()?Qt::CaseSensitive:Qt::CaseInsensitive);
-    m_DirTreeView->sortByColumn(0,Qt::AscendingOrder);
+
     m_DirTreeView->setModel(m_Data->m_DirSortModel);
     m_Data->m_DirSortModel->setSourceSvnModel(m_Data->m_Model);
 
@@ -165,6 +166,10 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
 
     connect(m_Data->m_Model,SIGNAL(itemsFetched(const QModelIndex&)),this,SLOT(slotItemsInserted(const QModelIndex&)));
 
+    m_TreeView->sortByColumn(0,Qt::AscendingOrder);
+    m_DirTreeView->sortByColumn(0,Qt::AscendingOrder);
+
+    checkUseNavigation(true);
     setupActions();
 }
 
@@ -825,6 +830,7 @@ void MainTreeWidget::slotSettingsChanged()
     if (m_Data->m_Model->svnWrapper() && !m_Data->m_Model->svnWrapper()->doNetworking()) {
         m_Data->m_Model->svnWrapper()->stopFillCache();
     }
+    checkUseNavigation();
 }
 
 KService::List MainTreeWidget::offersList(SvnItem*item,bool execOnly)const
@@ -870,12 +876,14 @@ void MainTreeWidget::itemActivated(const QModelIndex&index,bool keypress)
             } else {
                 KRun::displayOpenWithDialog(lst,KApplication::activeWindow());
             }
-        } else {
+        } else if (Kdesvnsettings::show_navigation_panel()) {
             m_DirTreeView->selectionModel()->select(m_Data->m_DirSortModel->mapFromSource(index),QItemSelectionModel::ClearAndSelect);
             QModelIndex _ind = m_Data->m_Model->parent(index);
             if (_ind.isValid()) {
                 m_DirTreeView->expand(m_Data->m_DirSortModel->mapFromSource(_ind));
             }
+        } else {
+
         }
     }
 }
@@ -2084,7 +2092,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
         m_Data->m_Model->fetchMore(_t);
     }
     _t = m_Data->m_SortModel->mapFromSource(_t);
-    m_TreeView->setRootIndex(_t);
+    if (Kdesvnsettings::show_navigation_panel()) m_TreeView->setRootIndex(_t);
     if (m_TreeView->selectionModel()->hasSelection()) {
         m_TreeView->selectionModel()->clearSelection();
     } else {
@@ -2127,4 +2135,32 @@ void MainTreeWidget::slotRescanIcons()
 {
     m_Data->m_Model->refreshIndex(m_Data->m_Model->firstRootIndex());
 }
+
+void MainTreeWidget::checkUseNavigation(bool startup)
+{
+    bool use = Kdesvnsettings::show_navigation_panel();
+    if (use) {
+        m_TreeView->collapseAll();
+    }
+    m_TreeView->setExpandsOnDoubleClick(!use);
+    m_TreeView->setRootIsDecorated(!use);
+    m_TreeView->setItemsExpandable(!use);
+    QList<int> si;
+    if (use) {
+        if (!startup) {
+            si = m_ViewSplitter->sizes();
+            if (si.size()==2 && si[0]<5) {
+                si[0]=200;
+                m_ViewSplitter->setSizes(si);
+            }
+            m_DirTreeView->selectionModel()->clearSelection();
+        }
+    } else {
+        si << 0 << 300;
+        m_ViewSplitter->setSizes(si);
+
+    }
+    m_TreeView->setRootIndex(QModelIndex());
+}
+
 #include "maintreewidget.moc"

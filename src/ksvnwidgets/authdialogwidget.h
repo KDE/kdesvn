@@ -17,40 +17,26 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "authdialogimpl.h"
-#include "authdialogwidget.h"
+#ifndef AUTHDIALOGWIDGET_H
+#define AUTHDIALOGWIDGET_H
 
-#include "src/settings/kdesvnsettings.h"
+#include "src/ksvnwidgets/ui_authdlg.h"
+#include <qstring.h>
+#include <QWidget>
 
-#include <kpassworddialog.h>
-#include <klineedit.h>
-#include <klocale.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+class AuthDialogWidget: public QWidget, public Ui::AuthDialogWidget {
+    Q_OBJECT
+public:
+    AuthDialogWidget(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);
+    virtual ~AuthDialogWidget(){}
 
-AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :KDialog(parent)
-{
-    setObjectName(name);
-    m_AuthWidget = new AuthDialogWidget(realm,user,parent);
-    setMainWidget(m_AuthWidget);
-    setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Help);
-    connect(this, SIGNAL(helpClicked()), m_AuthWidget, SLOT(slotHelp()));
-}
+    const QString Username()const;
+    const QString Password();
+    bool maySave()const;
+protected slots:
+    virtual void slotHelp();
+protected:
+    QString curPass;
+};
 
-const QString AuthDialogImpl::Username()const
-{
-    return m_AuthWidget->Username();
-}
-
-const QString AuthDialogImpl::Password()
-{
-    return m_AuthWidget->Password();
-}
-
-bool AuthDialogImpl::maySave()const
-{
-    return m_AuthWidget->maySave();
-}
-
-#include "authdialogimpl.moc"
+#endif

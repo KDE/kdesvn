@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-16 11:33+0200\n"
-"PO-Revision-Date: 2009-03-30 13:55+0200\n"
+"PO-Revision-Date: 2009-05-22 17:25+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
-"Language-Team: es_ES <mariopal@gmail.com>\n"
+"Language-Team: Spanish <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: rc.cpp:592
@@ -581,7 +581,7 @@ msgstr ""
 
 #: svnfrontend/fillcachethread.cpp:114
 msgid "Cache filled up to revision %1"
-msgstr "Cache lleno hasta la revisión %1"
+msgstr "Caché lleno hasta la revisión %1"
 
 #: svnfrontend/svnactions.cpp:1088
 msgid "Can not do this diff because networking is disabled."
@@ -702,9 +702,8 @@ msgid "Clear"
 msgstr "Limpiar"
 
 #: svnfrontend/maintreewidget.cpp:2077
-#, fuzzy
 msgid "Click for navigate"
-msgstr "Comprobar actualizaciones"
+msgstr "Pulsar para navegar"
 
 #: rc.cpp:12
 msgid "Click for short info about pre-defined property name"
@@ -1399,11 +1398,11 @@ msgstr "Relleno de cache cancelado."
 
 #: svnfrontend/svnactions.cpp:2550
 msgid "Filling log cache in background"
-msgstr "Rellenando cache de registros en segundo plano"
+msgstr "Rellenando caché de registros en segundo plano"
 
 #: svnfrontend/svnactions.cpp:2577
 msgid "Filling log cache in background finished."
-msgstr "Finalizado el relleno de logcache en segundo plano."
+msgstr "Finalizado el relleno de la caché de registros en segundo plano."
 
 #: ksvnwidgets/diffbrowser.cpp:195 ksvnwidgets/diffbrowser.cpp:208
 msgid "Find"
@@ -1568,6 +1567,8 @@ msgstr "Historial de elemento ignorando copias"
 #: svnfrontend/maintreewidget.cpp:2071
 msgid "Hold CTRL key while click on selected item for unselect"
 msgstr ""
+"Mantenga pulsada la tecla CTRL mientras pulsa el elemento seleccionado para "
+"deseleccionarlo"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:77
 msgid "Host"
@@ -1944,7 +1945,7 @@ msgstr "Mensaje de registro para revisión"
 
 #: rc.cpp:836
 msgid "Logcache"
-msgstr "Logcache"
+msgstr "Caché de registros"
 
 #: svnfrontend/blamedisplay_impl.cpp:374
 msgid "Logmessage for revision %1"
@@ -2122,7 +2123,7 @@ msgstr "Nombre"
 
 #: svnfrontend/maintreewidget.cpp:2080
 msgid "Navigation"
-msgstr ""
+msgstr "Navegacion"
 
 #: svnfrontend/svnitem.cpp:387
 msgid "Needs update"
@@ -2155,7 +2156,7 @@ msgstr "No ignorar"
 #: svnfrontend/graphtree/revisiontree.cpp:106
 msgid "No logcache possible due broken database and networking not allowed."
 msgstr ""
-"No hay cache de registros posible debido a base de datos defectuosa o red no "
+"No hay caché de registros posible debido a base de datos defectuosa o red no "
 "disponible."
 
 #: settings/cmdexecsettings_impl.cpp:33
@@ -2184,7 +2185,7 @@ msgstr "No se confirma porque la red está deshabilitada"
 
 #: svnfrontend/svnactions.cpp:2539
 msgid "Not filling logcache because networking is disabled"
-msgstr "No se rellena el logcache porque la red está deshabilitada"
+msgstr "No se rellena la caché de registros porque la red está deshabilitada"
 
 #: svnfrontend/svnitem.cpp:382
 msgid "Not versioned"
@@ -2929,12 +2930,13 @@ msgstr ""
 
 #: rc.cpp:628
 msgid "Start fill log cache on open"
-msgstr "Inicio del relleno del logcache al abrir"
+msgstr "Inicio del relleno de la caché de registros al abrir"
 
 #: rc.cpp:625
 msgid "Start refresh the logcache for repository when networking enabled"
 msgstr ""
-"Inicio del refresco del logcache para el repositorio cuando la red está "
+"Inicio del refresco de la caché de registros para el repositorio cuando la "
+"red está "
 "habilitada"
 
 #: rc.cpp:24
@@ -2971,7 +2973,7 @@ msgstr "¿Robar bloqueo?"
 
 #: svnfrontend/maintreewidget.cpp:766 svnfrontend/maintreewidget.cpp:1667
 msgid "Stop updating the logcache"
-msgstr "Deteniendo actualización de logcache"
+msgstr "Deteniendo actualización de la caché de registros"
 
 #: rc.cpp:177
 msgid "Stop with revision"
@@ -3206,7 +3208,6 @@ msgid "Unselect new items"
 msgstr "Deseleccionar elementos nuevos"
 
 #: svnfrontend/svnlogdlgimp.cpp:455
-#, fuzzy
 msgid "Unset version for diff"
 msgstr "Desactivar versión para diferencias"
 
@@ -3233,11 +3234,11 @@ msgstr "Actualización finalizada."
 #: svnfrontend/maintreewidget.cpp:633 svnfrontend/maintreewidget.cpp:764
 #: svnfrontend/maintreewidget.cpp:1672
 msgid "Update log cache"
-msgstr "Actualizar logcache"
+msgstr "Actualizar caché de registros"
 
 #: svnfrontend/maintreewidget.cpp:634
 msgid "Update the log cache for current repository"
-msgstr "Actualiza el logcache para el repositorio actual"
+msgstr "Actualiza la caché de registros para el repositorio actual"
 
 #: svnfrontend/maintreewidget.cpp:574 svnfrontend/maintreewidget.cpp:637
 msgid "Update to head"
@@ -3249,7 +3250,7 @@ msgstr "Actualizar a la revisión..."
 
 #: rc.cpp:684
 msgid "Use an internal password cache"
-msgstr "Utilizar una clave de cache interna"
+msgstr "Utilizar una clave de caché interna"
 
 #: rc.cpp:135
 msgid "Use deltas"
@@ -3265,11 +3266,11 @@ msgstr "Usar fusionado externo y no el de subversion"
 
 #: rc.cpp:687
 msgid "Use internal password cache"
-msgstr "Utilizar clave de cache interna"
+msgstr "Utilizar clave de caché interna"
 
 #: rc.cpp:750
 msgid "Use navigation panel"
-msgstr ""
+msgstr "Utilice el panel de navegacion"
 
 #: rc.cpp:120
 msgid "Use post-commit hook"
@@ -3357,7 +3358,8 @@ msgid ""
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
 "Cuando se inicia la generación del árbol y se leen datos de la caché de "
-"registros Kdesvn puede chequear si hay nuevos elementos en el repositorio si "
+"registros, Kdesvn puede chequear si hay nuevos elementos en el repositorio "
+"si "
 "la red está activada.\n"
 "\n"
 "Pero ésto puede retardar la generación del árbol y por lo tanto está "

@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-/* This file was part of KCachegrind. 
+/* This file was part of KCachegrind.
    Copyright (C) 2002, 2003 Josef Weidendorfer <Josef.Weidendorfer@gmx.de>
    Adapted for the needs of kdesvn  by Rajko Albrecht <ral@alwins-world.de>
 */

@@ -451,7 +451,8 @@ void RevGraphView::dumpRevtree()
     }
     QTextStream stream(dotTmpFile);
     QFont f = KGlobalSettings::fixedFont();
-    int _fontsize=f.pointSize();
+    QFontMetrics _fm(KGlobalSettings::fixedFont());
+    int _fontsize = _fm.height();
     if (_fontsize<0) {
         _fontsize=10;
     }

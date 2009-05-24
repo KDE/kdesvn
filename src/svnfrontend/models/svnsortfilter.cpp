@@ -66,7 +66,15 @@ bool SvnSortFilterProxy::lessThan(const QModelIndex & left,const QModelIndex & r
     SvnItemModelNode *n1,*n2;
     n1 = static_cast<SvnItemModelNode*>(left.internalPointer());
     n2 = static_cast<SvnItemModelNode*>(right.internalPointer());
-    if (!n1 || !n2 || n1->sortChar()==n2->sortChar()) {
+    /*
+     * when having valid model indexes the internal pointer MUST be valid, too.
+     * so we may skip if for this.
+     */
+    Q_ASSERT(n1 && n2);
+    if (n1->sortChar()==n2->sortChar()) {
+        if (sortColumn()==SvnItemModel::LastRevision) {
+            return n1->cmtRev()<n2->cmtRev();
+        }
         return QSortFilterProxyModel::lessThan(left,right);
     }
     // we want folders always @first

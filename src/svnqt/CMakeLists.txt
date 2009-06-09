@@ -43,6 +43,8 @@ SET(SOURCES
     cache/ReposLog.cpp
     cache/DatabaseException.hpp
     cache/DatabaseException.cpp
+    client_parameter.hpp
+    client_parameter.cpp
     )
 
 SET(CACHEINST_HEADERS
@@ -133,9 +135,9 @@ ELSE(WIN32)
         COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 ENDIF(WIN32)
 
-SET(LIB_MAJOR 5)
+SET(LIB_MAJOR 6)
 SET(LIB_MINOR 0)
-SET(LIB_RELEASE 1)
+SET(LIB_RELEASE 0)
 
 SET(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
 

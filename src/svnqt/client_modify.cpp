@@ -41,6 +41,7 @@
 #include "svnqt/targets.hpp"
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/stringarray.hpp"
+#include "svnqt/client_parameter.hpp"
 
 #include "svnqt/helper.hpp"
 
@@ -286,35 +287,58 @@ namespace svn
   }
 
   Revision
-    Client_impl::copy(const Targets & srcPaths,
-                    const Revision & srcRevision,
-                    const Revision &pegRevision,
-                    const Path & destPath,
-                     bool asChild,bool makeParent,
-                     const PropertiesMap&revProps
-                     ) throw (ClientException)
+    Client_impl::copy(const CopyParameter&parameter)throw (ClientException)
     {
-        if (srcPaths.size()<1)
+        if (parameter.srcPath().size()<1)
         {
             throw ClientException("Wrong size of sources.");
         }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR < 5) )
+        Revision rev;
+        if (parameter.srcPath().size()>1 && !paramter.getAsChild())
+        {
+            throw ClientException("Multiple sources not allowed");
+        }
+
+        Path _dest;
+        QString base,dir;
+        for (size_t j=0;j<parameter.srcPath().size();++j)
+        {
+            _dest=parameter.destination();
+            if (paramter.getAsChild()) {
+                sparameter.srcPath()[j].split(dir,base);
+                _dest.addComponent(base);
+            }
+            rev  = copy(parameter.srcPath()[j],srcRevision,_dest);
+        }
+        return rev;
+#else
         Pool pool;
         svn_commit_info_t *commit_info = 0L;
-        apr_array_header_t * sources = apr_array_make(pool,srcPaths.size(),sizeof(svn_client_copy_source_t *));
-        for (size_t j=0;j<srcPaths.size();++j)
+        apr_array_header_t * sources = apr_array_make(pool,parameter.srcPath().size(),sizeof(svn_client_copy_source_t *));
+        // not using .array() 'cause some extra information is needed for copy
+        for (size_t j=0;j<parameter.srcPath().size();++j)
         {
             svn_client_copy_source_t* source = (svn_client_copy_source_t*)apr_palloc(pool, sizeof(svn_client_copy_source_t));
-            source->path = apr_pstrdup(pool,srcPaths[j].path().TOUTF8());
-            source->revision=srcRevision.revision();
-            source->peg_revision=pegRevision.revision();
+            source->path = apr_pstrdup(pool,parameter.srcPath()[j].path().TOUTF8());
+            source->revision=parameter.getSrcRevision().revision();
+            source->peg_revision=parameter.getPegRevision().revision();
             APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
         }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        svn_error_t * error =
+                svn_client_copy5(&commit_info,
+                    sources,
+                    parameter.destination().cstr(),
+                    parameter.getAsChild(),parameter.getMakeParent(),parameter.getIgnoreExternal(),
+                    map2hash(parameter.getProperties(),pool),*m_context,pool);
+#else
         svn_error_t * error =
                 svn_client_copy4(&commit_info,
                     sources,
-                    destPath.cstr(),
-                    asChild,makeParent,map2hash(revProps,pool),*m_context,pool);
+                    parameter.destination().cstr(),
+                    parameter.getAsChild(),parameter.getMakeParent(),map2hash(parameter.getProperties(),pool),*m_context,pool);
+#endif
         if (error!=0){
             throw ClientException (error);
         }
@@ -322,29 +346,6 @@ namespace svn
             return commit_info->revision;
         }
         return Revision::UNDEFINED;
-#else
-        Q_UNUSED(asChild);
-        Q_UNUSED(makeParent);
-        Q_UNUSED(revProps);
-        Q_UNUSED(pegRevision);
-        Revision rev;
-        if (srcPaths.size()>1 && !asChild)
-        {
-            throw ClientException("Multiple sources not allowed");
-        }
-
-        Path _dest;
-        QString base,dir;
-        for (size_t j=0;j<srcPaths.size();++j)
-        {
-            _dest=destPath;
-            if (asChild) {
-                srcPaths[j].split(dir,base);
-                _dest.addComponent(base);
-            }
-            rev  = copy(srcPaths[j],srcRevision,_dest);
-        }
-        return rev;
 #endif
     }
 
@@ -354,7 +355,7 @@ namespace svn
                 const Path & destPath) throw (ClientException)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-      return copy(srcPath,srcRevision,srcRevision,destPath,true,false);
+    return copy(CopyParameter(srcPath,destPath).srcRevision(srcRevision).asChild(true).makeParent(false));
 #else
       Pool pool;
     svn_commit_info_t *commit_info = NULL;
@@ -383,7 +384,7 @@ namespace svn
   {
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    return move(srcPath,destPath,force,false,false,PropertiesMap());
+    return move(CopyParameter(srcPath,destPath).force(force).asChild(false).makeParent(false));
 #else
     Pool pool;
     svn_commit_info_t *commit_info = 0;
@@ -410,25 +411,19 @@ namespace svn
 #endif
   }
 
-  svn::Revision Client_impl::move (
-             const Targets & srcPaths,
-             const Path & destPath,
-             bool force,
-             bool asChild,
-             bool makeParent,
-             const PropertiesMap&revProps) throw (ClientException)
+  svn::Revision Client_impl::move (const CopyParameter&parameter) throw (ClientException)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
       Pool pool;
       svn_commit_info_t *commit_info = 0;
       svn_error_t * error = svn_client_move5(
                                              &commit_info,
-                                             srcPaths.array(pool),
-                                             destPath.cstr(),
-                                             force,
-                                             asChild,
-                                             makeParent,
-                                             map2hash(revProps,pool),
+                                             parameter.srcPath().array(pool),
+                                             parameter.destination().cstr(),
+                                             parameter.getForce(),
+                                             parameter.getAsChild(),
+                                             parameter.getMakeParent(),
+                                             map2hash(parameter.getProperties(),pool),
                                              *m_context,
                                              pool
                                             );
@@ -440,8 +435,6 @@ namespace svn
       }
       return Revision::UNDEFINED;
 #else
-      Q_UNUSED(makeParent);
-      Q_UNUSED(revProps);
       Revision rev;
       if (srcPaths.size()>1 && !asChild)
       {

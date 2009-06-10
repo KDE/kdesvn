@@ -42,6 +42,7 @@ namespace svn
     class Path;
     class StringArray;
     class CommitItem;
+    class CopyParameter;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
 

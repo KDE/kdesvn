@@ -49,6 +49,8 @@
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
+#include "src/svnqt/client_parameter.hpp"
+
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"
 
@@ -2193,7 +2195,7 @@ bool SvnActions::makeMove(const KUrl::List&Old,const QString&New,bool force)
         }
         svn::Targets t(p);
         svn::Path NPath(New);
-        m_Data->m_Svnclient->move(t,NPath,force,true,false);
+        m_Data->m_Svnclient->move(svn::CopyParameter(t,NPath).force(force).asChild(true).makeParent(false));
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2232,8 +2234,7 @@ bool SvnActions::makeCopy(const KUrl::List&Old,const QString&New,const svn::Revi
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Copy / Move"),i18n("Copy or Moving entries"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        KUrl::List::ConstIterator it = Old.begin();
-        m_Data->m_Svnclient->copy(t,rev,rev,svn::Path(New),true);
+        m_Data->m_Svnclient->copy(svn::CopyParameter(t,svn::Path(New)).srcRevision(rev).pegRevision(rev).asChild(true));
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

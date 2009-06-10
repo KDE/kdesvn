@@ -337,11 +337,7 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    copy (const Targets & srcPath,
-            const Revision & srcRevision,
-            const Revision & pegRevision,
-            const Path & destPath,
-            bool asChild=false,bool makeParent=false,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
+    copy (const CopyParameter&parameter) throw (ClientException)=0;
 
     /**
      * Moves or renames a file.
@@ -356,9 +352,7 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-            move (const Targets & srcPath,
-                  const Path & destPath,
-                  bool force,bool asChild,bool makeParent,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException)=0;
+            move (const CopyParameter&parameter) throw (ClientException)=0;
 
     /**
      * Creates a directory directly in a repository or creates a

@@ -6,7 +6,7 @@ namespace svn
     struct SVNQT_NOEXPORT CopyParameterData
     {
         CopyParameterData()
-            :_srcPath(),_srcRevision(),_pegRevision(),_destPath(),_asChild(false),_makeParent(false),_ignoreExternal(false),_properties()
+            :_srcPath(),_srcRevision(),_pegRevision(),_destPath(),_asChild(false),_makeParent(false),_ignoreExternal(false),_force(false),_properties()
         {
         }
         Targets  _srcPath;
@@ -16,6 +16,8 @@ namespace svn
         bool _asChild;
         bool _makeParent;
         bool _ignoreExternal;
+        //! used for move operation instead of copy
+        bool _force;
         PropertiesMap _properties;
     };
 
@@ -26,7 +28,7 @@ namespace svn
         _data->_destPath = _destPath;
     }
 
-    const Targets& CopyParameter::targets()const
+    const Targets& CopyParameter::srcPath()const
     {
         return _data->_srcPath;
     }
@@ -41,39 +43,36 @@ namespace svn
         _data = 0;
     }
 
-    CopyParameter&CopyParameter::asChild()
+    CopyParameter&CopyParameter::asChild(bool value)
     {
-        _data->_asChild=true;return *this;
-    }
-    CopyParameter&CopyParameter::notAsChild()
-    {
-        _data->_asChild=false;return *this;
+        _data->_asChild=value;return *this;
     }
     bool CopyParameter::getAsChild()const
     {
         return _data->_asChild;
     }
 
-    CopyParameter&CopyParameter::makeParent()
+    CopyParameter&CopyParameter::makeParent(bool value)
     {
-        _data->_makeParent=true;return *this;
-    }
-    CopyParameter&CopyParameter::notMakeParent()
-    {
-        _data->_makeParent=false;return *this;
+        _data->_makeParent=value;return *this;
     }
     bool CopyParameter::getMakeParent()const
     {
         return _data->_makeParent;
     }
 
-    CopyParameter&CopyParameter::ignoreExternal()
+    CopyParameter&CopyParameter::force(bool value)
     {
-        _data->_ignoreExternal=true;return *this;
+        _data->_force=value;return *this;
     }
-    CopyParameter&CopyParameter::notIgnoreExternal()
+    bool CopyParameter::getForce()const
     {
-        _data->_ignoreExternal=false;return *this;
+        return _data->_force;
+    }
+
+    CopyParameter&CopyParameter::ignoreExternal(bool value)
+    {
+        _data->_ignoreExternal=value;return *this;
     }
     bool CopyParameter::getIgnoreExternal()const
     {

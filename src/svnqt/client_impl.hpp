@@ -310,15 +310,12 @@ namespace svn
     /**
      * Copies a versioned file with the history preserved.
      * @since subversion 1.5 api
-     * @see svn_client_copy4
+     * @param parameter Class holding old required parameter
+     * @see svn_client_copy4,svn_client_copy5
      * @exception ClientException
      */
     virtual svn::Revision
-    copy (const Targets & srcPath,
-          const Revision & srcRevision,
-          const Revision & pegRevision,
-          const Path & destPath,
-          bool asChild=false,bool makeParent=false,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
+    copy (const CopyParameter&parameter) throw (ClientException);
 
     /**
      * Moves or renames a file.
@@ -331,12 +328,11 @@ namespace svn
 
     /**
      * Moves or renames a file.
+     * @param parameter Class holding old required parameter
      * @exception ClientException
      */
     virtual svn::Revision
-            move (const Targets & srcPath,
-                  const Path & destPath,
-                  bool force,bool asChild,bool makeParent,const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
+    move (const CopyParameter&parameter) throw (ClientException);
 
     /**
      * Creates a directory directly in a repository or creates a

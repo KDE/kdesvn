@@ -55,14 +55,12 @@ namespace svn
         ~CopyParameter();
 
         //! Targets for copy operation
-        const Targets&targets()const;
+        const Targets&srcPath()const;
         //! Destination path for copy operation
         const Path&destination()const;
 
         //! set copy operation parameter asChild to true
-        CopyParameter&asChild();
-        //! set copy operation parameter asChild to false
-        CopyParameter&notAsChild();
+        CopyParameter&asChild(bool);
         //! return value for asChild
         bool getAsChild()const;
 
@@ -70,24 +68,24 @@ namespace svn
         /*!
          * \since subversion 1.6
          */
-        CopyParameter&ignoreExternal();
-        //! copy should not ignore externals
-        /*!
-         * \since subversion 1.6
-         */
-        CopyParameter&notIgnoreExternal();
+        CopyParameter&ignoreExternal(bool);
         //! return externals has to ignored
         /*!
          * \since subversion 1.6
          */
         bool getIgnoreExternal()const;
 
-        //! set copy operation parameter makeParent to true
-        CopyParameter&makeParent();
-        //! set copy operation parameter makeParent to false
-        CopyParameter&notMakeParent();
+        //! set copy/move operation parameter makeParent to true
+        CopyParameter&makeParent(bool);
         //! return value for asChild
         bool getMakeParent()const;
+
+        //! set move operation parameter force to true
+        /*! this is ignored for copy operation */
+        CopyParameter&force(bool);
+        //! return value for force
+        /*! this is ignored for copy operation */
+        bool getForce()const;
 
         //! set the source revision for the copy operation
         CopyParameter&srcRevision(const Revision&);

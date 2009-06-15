@@ -40,6 +40,7 @@ namespace svn
 {
 
     struct CopyParameterData;
+    struct DiffParameterData;
 
     //! parameter for svn_copy wrapper
     /*!
@@ -101,6 +102,47 @@ namespace svn
         //! get the properties map for the copy operation
         const PropertiesMap& getProperties()const;
 
+    };
+
+    //! parameter for svn_copy wrapper
+    /*!
+     * This class should never contains virtual methods. New Methods are always appended at end of class definition
+     * \sa svn::Client::copy
+     */
+    class SVNQT_EXPORT DiffParameter
+    {
+    private:
+        SharedPointer<DiffParameterData> _data;
+    public:
+        DiffParameter();
+        
+        const svn::StringArray& getChangeList()const;
+        Depth getDepth()const;
+        const svn::StringArray& getExtra()const;
+        bool getIgnoreAncestry()const;
+        bool getIgnoreContentType()const;
+        bool getNoDiffDeleted()const;
+        const Path& getPath1()const;
+        const Path& getPath2()const;
+        const svn::Revision& getPeg()const;
+        const Path&getRelativeTo()const;
+        const svn::Revision& getRev1()const;
+        const svn::Revision& getRev2()const;
+        const Path& getTmpPath()const;
+
+        DiffParameter& path1(const Path&path);
+        DiffParameter& path2(const Path&path);
+        DiffParameter& tmpPath(const Path&path);
+        DiffParameter& relativeTo(const Path&path);
+        DiffParameter& depth(Depth _depth);
+        svn::DiffParameter& changeList(const svn::StringArray&changeList);
+        svn::DiffParameter& extra(const svn::StringArray&_extra);
+        svn::DiffParameter& ignoreAncestry(bool value);
+        svn::DiffParameter& ignoreContentType(bool value);
+        svn::DiffParameter& peg_revision(const svn::Revision&_rev);
+        svn::DiffParameter& rev1(const svn::Revision&_rev);
+        svn::DiffParameter& rev2(const svn::Revision&_rev);
+        svn::DiffParameter& noDiffDeleted(bool value);
     };
 }
 

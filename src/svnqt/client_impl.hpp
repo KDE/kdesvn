@@ -556,7 +556,7 @@ namespace svn
          const StringArray&revprops=StringArray()
         ) throw (ClientException);
 
-   /**
+    /**
      * Produce diff output which describes the delta between
      * @a path/@a revision1 and @a path/@a revision2. @a path
      * can be either a working-copy path or a URL.
@@ -564,39 +564,12 @@ namespace svn
      * A ClientException will be thrown if either @a revision1 or
      * @a revision2 has an `unspecified' or unrecognized `kind'.
      *
-     * @param tmpPath prefix for a temporary directory needed by diff.
-     * Filenames will have ".tmp" and similar added to this prefix in
-     * order to ensure uniqueness.
-     * @param path path of the file.
-     * @param revision1 one of the revisions to check.
-     * @param revision2 the other revision.
-     * @param recurse whether the operation should be done recursively.
-     * @param ignoreAncestry whether the files will be checked for
-     * relatedness.
-     * @param noDiffDeleted if true, no diff output will be generated on deleted files.
-     * @param ignore_contenttype if true generate diff even the items are marked as binaries
-     * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
+     * @param options set of options required for diff
      * @return delta between the files
      * @exception ClientException
      */
     virtual QByteArray
-            diff_peg (const Path & tmpPath, const Path & path,const Path&relativeTo,
-                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
-                Depth depth, bool ignoreAncestry,
-                bool noDiffDeleted,bool ignore_contenttype,
-                const StringArray&extra,
-                const StringArray&changelists
-                     )
-            throw (ClientException);
-
-    /**
-     * Same as other diff but extra options and changelists always set to empty list.
-     */
-    virtual QByteArray
-            diff_peg (const Path & tmpPath, const Path & path,const Path&relativeTo,
-                const Revision & revision1, const Revision & revision2, const Revision& peg_revision,
-                Depth depth, bool ignoreAncestry,
-                bool noDiffDeleted,bool ignore_contenttype)
+            diff_peg (const DiffParameter&options)
             throw (ClientException);
 
     /**
@@ -607,40 +580,12 @@ namespace svn
      * A ClientException will be thrown if either @a revision1 or
      * @a revision2 has an `unspecified' or unrecognized `kind'.
      *
-     * @param tmpPath prefix for a temporary directory needed by diff.
-     * Filenames will have ".tmp" and similar added to this prefix in
-     * order to ensure uniqueness.
-     * @param path1 first file or folder to diff.
-     * @param path2 second file or folder to diff.
-     * @param revision1 one of the revisions to check (path1).
-     * @param revision2 the other revision (path2).
-     * @param recurse whether the operation should be done recursively.
-     * @param ignoreAncestry whether the files will be checked for
-     * relatedness.
-     * @param noDiffDeleted if true, no diff output will be generated on deleted files.
-     * @param ignore_contenttype if true generate diff even the items are marked as binaries
-     * @param extra extra options for diff ("-b", "-w","--ignore-eol-style")
+     * @param options set of options required for diff
      * @return delta between the files
      * @exception ClientException
      */
     virtual QByteArray
-            diff (const Path & tmpPath, const Path & path1,const Path & path2,const Path&relativeTo,
-                const Revision & revision1, const Revision & revision2,
-                Depth depth, bool ignoreAncestry,
-                bool noDiffDeleted,bool ignore_contenttype,
-                const StringArray&extra,
-                const StringArray&changelists
-                 )
-            throw (ClientException);
-
-    /**
-     * Same as other diff but extra options always set to empty list.
-     */
-    virtual QByteArray
-            diff (const Path & tmpPath, const Path & path1,const Path & path2,const Path&relativeTo,
-                const Revision & revision1, const Revision & revision2,
-                Depth depth, bool ignoreAncestry,
-                bool noDiffDeleted,bool ignore_contenttype)
+            diff (const DiffParameter&options)
             throw (ClientException);
 
     /**

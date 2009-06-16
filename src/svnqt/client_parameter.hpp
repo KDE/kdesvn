@@ -104,10 +104,10 @@ namespace svn
 
     };
 
-    //! parameter for svn_copy wrapper
+    //! parameter for svn_diff and svn_diff_peg wrapper
     /*!
      * This class should never contains virtual methods. New Methods are always appended at end of class definition
-     * \sa svn::Client::copy
+     * \sa svn::Client::diff svn::Client::diff_peg
      */
     class SVNQT_EXPORT DiffParameter
     {
@@ -115,19 +115,51 @@ namespace svn
         SharedPointer<DiffParameterData> _data;
     public:
         DiffParameter();
-        
+        ~DiffParameter();
+
+        //! Changelist filter
+        /*!
+         * if empty. no filtering is done
+         * \since subversion 1.5
+         * \sa svn_client_diff4
+         */
         const svn::StringArray& getChangeList()const;
+        //! type of recurse operation
+        /*!
+         * \sa svn::Depth
+         */
         Depth getDepth()const;
+        //! extra options for diff ("-b", "-w","--ignore-eol-style")
         const svn::StringArray& getExtra()const;
+        //! whether the files will be checked for relatedness.
         bool getIgnoreAncestry()const;
+        //! if true generate diff even the items are marked as binaries
         bool getIgnoreContentType()const;
+        //! if true, no diff output will be generated on deleted files.
         bool getNoDiffDeleted()const;
+        //! first file or folder to diff.
         const Path& getPath1()const;
+        //! second file or folder to diff.
+        /*!
+         * this is ignored for diff_peg calls
+         */
         const Path& getPath2()const;
+        //! peg revision (only used for diff_peg)
         const svn::Revision& getPeg()const;
+        //! if set, all pathes are related to this folder
+        /*!
+         * Must not be an url! May be empty
+         */
         const Path&getRelativeTo()const;
+        //! one of the revisions to check (path1).
         const svn::Revision& getRev1()const;
+        //! the other revision (path2 for non peg diff).
         const svn::Revision& getRev2()const;
+        //! prefix for a temporary directory needed by diff.
+        /*!
+         * Filenames will have ".tmp" and similar added to this prefix in
+         * order to ensure uniqueness.
+         */
         const Path& getTmpPath()const;
 
         DiffParameter& path1(const Path&path);
@@ -139,7 +171,7 @@ namespace svn
         svn::DiffParameter& extra(const svn::StringArray&_extra);
         svn::DiffParameter& ignoreAncestry(bool value);
         svn::DiffParameter& ignoreContentType(bool value);
-        svn::DiffParameter& peg_revision(const svn::Revision&_rev);
+        svn::DiffParameter& peg(const svn::Revision&_rev);
         svn::DiffParameter& rev1(const svn::Revision&_rev);
         svn::DiffParameter& rev2(const svn::Revision&_rev);
         svn::DiffParameter& noDiffDeleted(bool value);

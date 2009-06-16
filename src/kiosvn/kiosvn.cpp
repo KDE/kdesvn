@@ -27,6 +27,7 @@
 #include "src/svnqt/status.hpp"
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/info_entry.hpp"
+#include "src/svnqt/client_parameter.hpp"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
 #include "src/helpers/sshagent.h"
@@ -814,10 +815,15 @@ void kio_svnProtocol::diff(const KUrl&uri1,const KUrl&uri2,int rnum1,const QStri
         kDebug(9510) << "kio_ksvn::diff : " << u1 << " at revision " << r1.toString() << " with "
             << u2 << " at revision " << r2.toString()
             << endl ;
+        svn::DiffParameter _opts;
+        // no peg revision required
+        _opts.path1(u1).path2(u2).tmpPath(tdir.name()).
+            rev1(r1).rev2(r2).
+            ignoreContentType(false).extra(svn::StringArray()).depth(rec?svn::DepthInfinity:svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).
+            relativeTo(svn::Path((u1==u2?u1:""))).changeList(svn::StringArray());
 
         tdir.setAutoRemove(true);
-            ex = m_pData->m_Svnclient->diff(svn::Path(tdir.name()),
-                                            u1,u2,svn::Path(),r1, r2,rec?svn::DepthInfinity:svn::DepthEmpty,false,false,false);
+        ex = m_pData->m_Svnclient->diff(_opts);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

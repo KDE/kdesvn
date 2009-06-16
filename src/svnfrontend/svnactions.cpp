@@ -1236,20 +1236,20 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         extraOptions.append("-w");
     }
     svn::Revision peg = _peg==svn::Revision::UNDEFINED?r2:_peg;
+    svn::DiffParameter _opts;
+    _opts.path1(p1).path2(p2).tmpPath(tn).
+        peg(peg).rev1(r1).rev2(r2).
+        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).
+        relativeTo(svn::Path((p1==p2?p1:""))).changeList(svn::StringArray());
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,parent,0,"Diffing",
             i18n("Diffing - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
-            ex = m_Data->m_Svnclient->diff_peg(svn::Path(tn),
-                svn::Path(p1),svn::Path(),r1, r2,peg,
-                svn::DepthInfinity,false,false,ignore_content,extraOptions,svn::StringArray());
+            ex = m_Data->m_Svnclient->diff_peg(_opts);
         } else {
-            ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-                svn::Path(p1),svn::Path(p2),svn::Path((p1==p2?p1:"")),
-                r1, r2,
-                svn::DepthInfinity,false,false,ignore_content,extraOptions,svn::StringArray());
+            ex = m_Data->m_Svnclient->diff(_opts);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
@@ -1287,13 +1287,17 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     tdir.setAutoRemove(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
+    svn::DiffParameter _opts;
+    // no peg revision required
+    _opts.path1(p1).path2(p2).tmpPath(tn).
+        rev1(r1).rev2(r2).
+        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).
+        relativeTo(svn::Path((p1==p2?p1:""))).changeList(svn::StringArray());
+
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,_p?_p:m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        ex = m_Data->m_Svnclient->diff(svn::Path(tn),
-            svn::Path(p1),svn::Path(p2),svn::Path(),
-            r1, r2,
-            svn::DepthEmpty,false,false,ignore_content,extraOptions,svn::StringArray());
+        ex = m_Data->m_Svnclient->diff(_opts);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

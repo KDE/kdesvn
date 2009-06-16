@@ -235,6 +235,10 @@ svn::DiffParameter& svn::DiffParameter::depth(svn::Depth _depth)
     _data = new DiffParameterData();
 }
 
+svn::DiffParameter::~DiffParameter()
+{
+    _data = 0;
+}
 
 /*!
     \fn svn::DiffParameter::getIgnoreAncestry()const
@@ -351,7 +355,7 @@ svn::DiffParameter& svn::DiffParameter::ignoreContentType(bool value)
 /*!
     \fn svn::DiffParameter::peg_revision(const svn::Revision&_rev)
  */
-svn::DiffParameter& svn::DiffParameter::peg_revision(const svn::Revision&_rev)
+svn::DiffParameter& svn::DiffParameter::peg(const svn::Revision&_rev)
 {
     _data->_peg_revision=_rev;
     return *this;

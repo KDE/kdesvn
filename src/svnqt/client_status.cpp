@@ -228,12 +228,21 @@ namespace svn
 #endif
 
   struct StatusEntriesBaton {
+    StatusEntries entries;
     apr_pool_t* pool;
-    apr_hash_t* hash;
     Context*m_Context;
-    StatusEntriesBaton() {
+    StatusEntriesBaton():entries() {
         pool = 0;
-        hash = 0;
+        m_Context = 0;
+    }
+  };
+
+  struct InfoEntriesBaton {
+    InfoEntries entries;
+    apr_pool_t* pool;
+    Context*m_Context;
+    InfoEntriesBaton():entries() {
+        pool = 0;
         m_Context = 0;
     }
   };
@@ -243,7 +252,7 @@ namespace svn
                             const svn_info_t*info,
                             apr_pool_t *)
   {
-    StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
+    InfoEntriesBaton* seb = (InfoEntriesBaton*)baton;
     if (seb->m_Context) {
         /* check every loop for cancel of operation */
         Context*l_context = seb->m_Context;
@@ -252,23 +261,40 @@ namespace svn
             SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
         }
     }
-    path = apr_pstrdup (seb->pool, path);
-    InfoEntry*e = new InfoEntry(info,path);
-    apr_hash_set (seb->hash, path, APR_HASH_KEY_STRING, e);
+    seb->entries.push_back(InfoEntry(info,path));
     return NULL;
   }
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+  static svn_error_t* StatusEntriesFunc (void *baton,
+                                 const char *path,
+                                 svn_wc_status2_t *status,
+                                 apr_pool_t *pool)
+  {
+        // use own pool - the parameter will cleared between loops!
+        Q_UNUSED(pool);
+        StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
+        if (seb->m_Context) {
+            /* check every loop for cancel of operation */
+            Context*l_context = seb->m_Context;
+            svn_client_ctx_t*ctx = l_context->ctx();
+            if (ctx&&ctx->cancel_func) {
+                SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+            }
+        }
+
+        seb->entries.push_back (StatusPtr(new Status(path,status)));
+        return NULL;
+  }
+#else
   static void StatusEntriesFunc (void *baton,
                                  const char *path,
                                  svn_wc_status2_t *status)
   {
-    svn_wc_status2_t* stat;
       StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
-
-      path = apr_pstrdup (seb->pool, path);
-      stat = svn_wc_dup_status2 (status, seb->pool);
-      apr_hash_set (seb->hash, path, APR_HASH_KEY_STRING, stat);
+      seb->entries.push_back (StatusPtr(new Status(path,status)));
   }
+#endif
 
   static StatusEntries
   localStatus (const Path& path,
@@ -282,17 +308,20 @@ namespace svn
   {
     svn_error_t *error;
     StatusEntries entries;
-    apr_hash_t *status_hash;
     svn_revnum_t revnum;
     Revision rev (Revision::HEAD);
     Pool pool;
     StatusEntriesBaton baton;
 
-    status_hash = apr_hash_make (pool);
-    baton.hash = status_hash;
     baton.pool = pool;
+
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_status4 (
+#else
     error = svn_client_status3 (
+#endif
         &revnum,           // revnum
         path.path().TOUTF8(),         // path
         rev,
@@ -324,25 +353,7 @@ namespace svn
 #endif
 
     Client_impl::checkErrorThrow(error);
-    apr_array_header_t *statusarray =
-      svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
-                            pool);
-    int i;
-
-    /* Loop over array, printing each name/status-structure */
-    for (i = 0; i < statusarray->nelts; ++i)
-    {
-      const svn_sort__item_t *item;
-      const char *filePath;
-      svn_wc_status2_t *status = NULL;
-
-      item = &APR_ARRAY_IDX (statusarray, i, const svn_sort__item_t);
-      status = (svn_wc_status2_t *) item->value;
-
-      filePath = (const char *) item->key;
-      entries.push_back (StatusPtr(new Status(filePath, status)));
-    }
-    return entries;
+    return baton.entries;
   }
 
   static StatusPtr
@@ -412,18 +423,20 @@ namespace svn
   localSingleStatus (const Path& path, Context * context,bool update=false)
   {
     svn_error_t *error;
-    apr_hash_t *status_hash;
     Pool pool;
     StatusEntriesBaton baton;
     svn_revnum_t revnum;
     Revision rev (Revision::HEAD);
 
-    status_hash = apr_hash_make( pool );
-    baton.hash = status_hash;
     baton.pool = pool;
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_status4 (
+#else
     error = svn_client_status3 (
+#endif
         &revnum,           // revnum
         path.path().TOUTF8(),         // path
         rev,
@@ -431,9 +444,9 @@ namespace svn
         &baton,            // status baton
         svn_depth_empty, // not recurse
         true,           // get all not only interesting
-        update,            // check for updates
-        false,         // hide ignored files or not
-        false,    // hide external
+        update,         // check for updates
+        false,          // hide ignored files or not
+        false,          // hide external
         0,
         *context,          //client ctx
         pool);
@@ -454,18 +467,7 @@ namespace svn
 #endif
     Client_impl::checkErrorThrow(error);
 
-    apr_array_header_t *statusarray =
-      svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
-                            pool);
-    const svn_sort__item_t *item;
-    const char *filePath;
-    svn_wc_status2_t *status = NULL;
-
-    item = &APR_ARRAY_IDX (statusarray, 0, const svn_sort__item_t);
-    status = (svn_wc_status2_t *) item->value;
-    filePath = (const char *) item->key;
-
-    return StatusPtr(new Status (filePath, status));
+    return baton.entries[0];
   };
 
   static StatusPtr
@@ -639,14 +641,10 @@ namespace svn
                     ) throw (ClientException)
   {
 
-    InfoEntries ientries;
     Pool pool;
     svn_error_t *error = NULL;
-    StatusEntriesBaton baton;
-    apr_hash_t *status_hash;
+    InfoEntriesBaton baton;
 
-    status_hash = apr_hash_make (pool);
-    baton.hash = status_hash;
     baton.pool = pool;
     baton.m_Context=m_context;
     svn_opt_revision_t pegr;
@@ -691,23 +689,7 @@ namespace svn
 #endif
 
     checkErrorThrow(error);
-    apr_array_header_t *statusarray =
-      svn_sort__hash (status_hash, svn_sort_compare_items_as_paths,
-                            pool);
-    int i;
-
-    /* Loop over array, printing each name/status-structure */
-    for (i=0; i< statusarray->nelts; ++i)
-    {
-      const svn_sort__item_t *item;
-      InfoEntry*e = NULL;
-      item = &APR_ARRAY_IDX (statusarray, i, const svn_sort__item_t);
-      e = (InfoEntry *) item->value;
-      ientries.push_back(*e);
-      delete e;
-    }
-    checkErrorThrow(error);
-    return ientries;
+    return baton.entries;
   }
 
 }

@@ -131,57 +131,56 @@ namespace svn
         StringArray _extra;
         bool _ignore_contenttype;
     };
-}
 
 
 /*!
-    \fn svn::DiffParameter::getPath1()const
+    \fn DiffParameter::getPath1()const
  */
-const svn::Path& svn::DiffParameter::getPath1()const
+const svn::Path& DiffParameter::getPath1()const
 {
     return _data->_path1;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getPath2()const
+    \fn DiffParameter::getPath2()const
  */
-const svn::Path& svn::DiffParameter::getPath2()const
+const svn::Path& DiffParameter::getPath2()const
 {
     return _data->_path2;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getTmpPath()const
+    \fn DiffParameter::getTmpPath()const
  */
-const svn::Path& svn::DiffParameter::getTmpPath()const
+const svn::Path& DiffParameter::getTmpPath()const
 {
     return _data->_tmpPath;
 }
 
 /*!
-    \fn svn::DiffParameter::getRelativeTo()const
+    \fn DiffParameter::getRelativeTo()const
  */
-const svn::Path& svn::DiffParameter::getRelativeTo()const
+const svn::Path& DiffParameter::getRelativeTo()const
 {
     return _data->_relativeTo;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getDepth()const
+    \fn DiffParameter::getDepth()const
  */
-svn::Depth svn::DiffParameter::getDepth()const
+svn::Depth DiffParameter::getDepth()const
 {
     return _data->_depth;
 }
 
 
 /*!
-    \fn svn::DiffParameter::path1(const Path&path)
+    \fn DiffParameter::path1(const Path&path)
  */
-svn::DiffParameter& svn::DiffParameter::path1(const svn::Path&path)
+DiffParameter& DiffParameter::path1(const svn::Path&path)
 {
     _data->_path1 = path;
     return *this;
@@ -189,9 +188,9 @@ svn::DiffParameter& svn::DiffParameter::path1(const svn::Path&path)
 
 
 /*!
-    \fn svn::DiffParameter::path2(const Path&path)
+    \fn DiffParameter::path2(const Path&path)
  */
-svn::DiffParameter& svn::DiffParameter::path2(const svn::Path&path)
+DiffParameter& DiffParameter::path2(const svn::Path&path)
 {
     _data->_path2 = path;
     return *this;
@@ -199,18 +198,18 @@ svn::DiffParameter& svn::DiffParameter::path2(const svn::Path&path)
 
 
 /*!
-    \fn svn::DiffParameter::tmpPath(const Path&path)
+    \fn DiffParameter::tmpPath(const Path&path)
  */
-svn::DiffParameter& svn::DiffParameter::tmpPath(const svn::Path&path)
+DiffParameter& DiffParameter::tmpPath(const svn::Path&path)
 {
     _data->_tmpPath = path;
     return *this;
 }
 
 /*!
-    \fn svn::DiffParameter::relativeTo(const Path&path)
+    \fn DiffParameter::relativeTo(const Path&path)
  */
-svn::DiffParameter& svn::DiffParameter::relativeTo(const svn::Path&path)
+DiffParameter& DiffParameter::relativeTo(const svn::Path&path)
 {
     _data->_relativeTo = path;
     return *this;
@@ -218,9 +217,9 @@ svn::DiffParameter& svn::DiffParameter::relativeTo(const svn::Path&path)
 
 
 /*!
-    \fn svn::DiffParameter::depth(Depth _depth)
+    \fn DiffParameter::depth(Depth _depth)
  */
-svn::DiffParameter& svn::DiffParameter::depth(svn::Depth _depth)
+DiffParameter& DiffParameter::depth(svn::Depth _depth)
 {
     _data->_depth=_depth;
     return *this;
@@ -228,94 +227,94 @@ svn::DiffParameter& svn::DiffParameter::depth(svn::Depth _depth)
 
 
 /*!
-    \fn svn::DiffParameter::DiffParameter()
+    \fn DiffParameter::DiffParameter()
  */
- svn::DiffParameter::DiffParameter()
+ DiffParameter::DiffParameter()
 {
     _data = new DiffParameterData();
 }
 
-svn::DiffParameter::~DiffParameter()
+DiffParameter::~DiffParameter()
 {
     _data = 0;
 }
 
 /*!
-    \fn svn::DiffParameter::getIgnoreAncestry()const
+    \fn DiffParameter::getIgnoreAncestry()const
  */
-bool svn::DiffParameter::getIgnoreAncestry()const
+bool DiffParameter::getIgnoreAncestry()const
 {
     return _data->_ignoreAncestry;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getIgnoreContentType()const
+    \fn DiffParameter::getIgnoreContentType()const
  */
-bool svn::DiffParameter::getIgnoreContentType()const
+bool DiffParameter::getIgnoreContentType()const
 {
     return _data->_ignore_contenttype;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getNoDiffDeleted()const
+    \fn DiffParameter::getNoDiffDeleted()const
  */
-bool svn::DiffParameter::getNoDiffDeleted()const
+bool DiffParameter::getNoDiffDeleted()const
 {
     return _data->_noDiffDeleted;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getPeg()const
+    \fn DiffParameter::getPeg()const
  */
-const svn::Revision& svn::DiffParameter::getPeg()const
+const svn::Revision& DiffParameter::getPeg()const
 {
     return _data->_peg_revision;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getRev1()const
+    \fn DiffParameter::getRev1()const
  */
-const svn::Revision& svn::DiffParameter::getRev1()const
+const svn::Revision& DiffParameter::getRev1()const
 {
     return _data->_rev1;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getRev2()const
+    \fn DiffParameter::getRev2()const
  */
-const svn::Revision& svn::DiffParameter::getRev2()const
+const svn::Revision& DiffParameter::getRev2()const
 {
     return _data->_rev2;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getChangeList()const
+    \fn DiffParameter::getChangeList()const
  */
-const svn::StringArray& svn::DiffParameter::getChangeList()const
+const svn::StringArray& DiffParameter::getChangeList()const
 {
     return _data->_changeList;
 }
 
 
 /*!
-    \fn svn::DiffParameter::getExtra()const
+    \fn DiffParameter::getExtra()const
  */
-const svn::StringArray& svn::DiffParameter::getExtra()const
+const svn::StringArray& DiffParameter::getExtra()const
 {
     return _data->_extra;
 }
 
 
 /*!
-    \fn svn::DiffParameter::changeList(const svn::StringArray&changeList)
+    \fn DiffParameter::changeList(const svn::StringArray&changeList)
  */
-svn::DiffParameter& svn::DiffParameter::changeList(const svn::StringArray&changeList)
+DiffParameter& DiffParameter::changeList(const svn::StringArray&changeList)
 {
     _data->_changeList=changeList;
     return *this;
@@ -323,9 +322,9 @@ svn::DiffParameter& svn::DiffParameter::changeList(const svn::StringArray&change
 
 
 /*!
-    \fn svn::DiffParameter::extra(const svn::StringArray&_extra)
+    \fn DiffParameter::extra(const svn::StringArray&_extra)
  */
-svn::DiffParameter& svn::DiffParameter::extra(const svn::StringArray&_extra)
+DiffParameter& DiffParameter::extra(const svn::StringArray&_extra)
 {
     _data->_extra=_extra;
     return *this;
@@ -333,9 +332,9 @@ svn::DiffParameter& svn::DiffParameter::extra(const svn::StringArray&_extra)
 
 
 /*!
-    \fn svn::DiffParameter::ignoreAncestry(bool value)
+    \fn DiffParameter::ignoreAncestry(bool value)
  */
-svn::DiffParameter& svn::DiffParameter::ignoreAncestry(bool value)
+DiffParameter& DiffParameter::ignoreAncestry(bool value)
 {
     _data->_ignoreAncestry=value;
     return *this;
@@ -343,9 +342,9 @@ svn::DiffParameter& svn::DiffParameter::ignoreAncestry(bool value)
 
 
 /*!
-    \fn svn::DiffParameter::ignoreContentType(bool value)
+    \fn DiffParameter::ignoreContentType(bool value)
  */
-svn::DiffParameter& svn::DiffParameter::ignoreContentType(bool value)
+DiffParameter& DiffParameter::ignoreContentType(bool value)
 {
     _data->_ignore_contenttype=value;
     return *this;
@@ -353,9 +352,9 @@ svn::DiffParameter& svn::DiffParameter::ignoreContentType(bool value)
 
 
 /*!
-    \fn svn::DiffParameter::peg_revision(const svn::Revision&_rev)
+    \fn DiffParameter::peg_revision(const svn::Revision&_rev)
  */
-svn::DiffParameter& svn::DiffParameter::peg(const svn::Revision&_rev)
+DiffParameter& DiffParameter::peg(const svn::Revision&_rev)
 {
     _data->_peg_revision=_rev;
     return *this;
@@ -363,9 +362,9 @@ svn::DiffParameter& svn::DiffParameter::peg(const svn::Revision&_rev)
 
 
 /*!
-    \fn svn::DiffParameter::rev1(const svn::Revision&_rev)
+    \fn DiffParameter::rev1(const svn::Revision&_rev)
  */
-svn::DiffParameter& svn::DiffParameter::rev1(const svn::Revision&_rev)
+DiffParameter& DiffParameter::rev1(const svn::Revision&_rev)
 {
     _data->_rev1=_rev;
     return *this;
@@ -373,9 +372,9 @@ svn::DiffParameter& svn::DiffParameter::rev1(const svn::Revision&_rev)
 
 
 /*!
-    \fn svn::DiffParameter::rev2(const svn::Revision&_rev)
+    \fn DiffParameter::rev2(const svn::Revision&_rev)
  */
-svn::DiffParameter& svn::DiffParameter::rev2(const svn::Revision&_rev)
+DiffParameter& DiffParameter::rev2(const svn::Revision&_rev)
 {
     _data->_rev2=_rev;
     return *this;
@@ -383,10 +382,12 @@ svn::DiffParameter& svn::DiffParameter::rev2(const svn::Revision&_rev)
 
 
 /*!
-    \fn svn::DiffParameter::noDiffDeleted(bool value)
+    \fn DiffParameter::noDiffDeleted(bool value)
  */
-svn::DiffParameter& svn::DiffParameter::noDiffDeleted(bool value)
+DiffParameter& DiffParameter::noDiffDeleted(bool value)
 {
     _data->_noDiffDeleted=value;
     return *this;
+}
+
 }

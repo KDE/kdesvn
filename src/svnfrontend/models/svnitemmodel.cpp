@@ -27,11 +27,13 @@
 #include "src/svnqt/status.hpp"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/path.hpp"
+#include "src/svnqt/svnqt_defines.hpp"
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kdirwatch.h>
+#include <kdebug.h>
 
 #include <QItemSelectionModel>
 #include <QFileInfo>
@@ -207,11 +209,11 @@ QVariant SvnItemModel::data(const QModelIndex&index,int role)const
         case Status:
             return node->infoText();
         case LastRevision:
-            return QString("%1").arg(node->cmtRev());
+            return QVariant(QLONG(node->cmtRev()));
         case LastAuthor:
             return node->cmtAuthor();
         case LastDate:
-            return KGlobal::locale()->formatDateTime(node->fullDate());
+            return node->fullDate();
         case Locked:
             return node->lockOwner();
         }

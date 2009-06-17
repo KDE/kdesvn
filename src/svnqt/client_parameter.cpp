@@ -478,4 +478,118 @@ namespace svn
         SETIT(_detailedRemote,value)
     }
 
+
+    struct LogParameterData
+    {
+    public:
+        LogParameterData()
+            :_targets(),_ranges(),_peg(Revision::UNDEFINED),_limit(0),
+            _discoverChangedPathes(false),_strictNodeHistory(true),_includeMergedRevisions(false),
+            _revisionProperties()
+        {
+        }
+        Targets _targets;
+        RevisionRanges _ranges;
+        Revision _peg;
+        int _limit;
+        bool _discoverChangedPathes,_strictNodeHistory,_includeMergedRevisions;
+        StringArray _revisionProperties;
+    };
+
+    LogParameter::LogParameter()
+    {
+        _data = new LogParameterData();
+    }
+    LogParameter::~LogParameter()
+    {
+        _data = 0;
+    }
+
+    const Targets&LogParameter::targets()const
+    {
+        return _data->_targets;
+    }
+    LogParameter&LogParameter::targets(const Targets&targets)
+    {
+        SETIT(_targets,targets)
+    }
+
+    const RevisionRanges&LogParameter::revisions()const
+    {
+        return _data->_ranges;
+    }
+    LogParameter&LogParameter::revisions(const RevisionRanges&revisions)
+    {
+        SETIT(_ranges,revisions)
+    }
+
+    const RevisionRange&LogParameter::revisionRange()const
+    {
+        if (_data->_ranges.size()<1) {
+            const static RevisionRange r(Revision::UNDEFINED,Revision::UNDEFINED);
+            return r;
+        }
+        return _data->_ranges[0];
+    }
+    LogParameter&LogParameter::revisionRange(const Revision&start,const Revision&end)
+    {
+        _data->_ranges.clear();
+        _data->_ranges.append(RevisionRange(start,end));
+        return *this;
+    }
+
+    const Revision&LogParameter::peg()const
+    {
+        return _data->_peg;
+    }
+    LogParameter&LogParameter::peg(const Revision&peg)
+    {
+        SETIT(_peg,peg)
+    }
+
+    int LogParameter::limit()const
+    {
+        return _data->_limit;
+    }
+    LogParameter&LogParameter::limit(int limit)
+    {
+        SETIT(_limit,limit)
+    }
+
+    bool LogParameter::discoverChangedPathes()const
+    {
+        return _data->_discoverChangedPathes;
+    }
+    LogParameter&LogParameter::discoverChangedPathes(bool value)
+    {
+        SETIT(_discoverChangedPathes,value)
+    }
+
+    bool LogParameter::strictNodeHistory()const
+    {
+        return _data->_strictNodeHistory;
+    }
+    LogParameter&LogParameter::strictNodeHistory(bool value)
+    {
+        SETIT(_strictNodeHistory,value)
+    }
+
+    bool LogParameter::includeMergedRevisions()const
+    {
+        return _data->_includeMergedRevisions;
+    }
+    LogParameter&LogParameter::includeMergedRevisions(bool value)
+    {
+        SETIT(_includeMergedRevisions,value)
+    }
+
+    const StringArray& LogParameter::revisionProperties()const
+    {
+        return _data->_revisionProperties;
+    }
+    LogParameter&LogParameter::revisionProperties(const StringArray&props)
+    {
+        SETIT(_revisionProperties,props)
+    }
+
 }

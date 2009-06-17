@@ -233,7 +233,39 @@ namespace svn
         const Targets&targets()const;
         //! set items to get the logs for
         LogParameter&targets(const Targets&targets);
+        //! range of revisions getting logs for
+        /*!
+         * when build against subversion prior 1.6 only the first pair is used!
+         */
+        const RevisionRanges&revisions()const;
+        //! set range of revisions getting logs for
+        LogParameter&revisions(const RevisionRanges&revisions);
+        //! simple start-end range.
+        /*!
+         * in fact it is the first item in internal revision range. May used when only one pair is required.
+         */
+        const RevisionRange&revisionRange()const;
+        //! set a simple start-end range
+        /*!
+         * this is usefull if only one range is required. This will converted into internal ranges when set.
+         */
+        LogParameter&revisionRange(const Revision&start,const Revision&end);
 
+        //! the peg revision to use
+        const Revision&peg()const;
+        //! set the peg revision to use
+        LogParameter&peg(const Revision&peg);
+        //! if not zero limit logs to this count
+        int limit()const;
+        LogParameter&limit(int limit);
+        bool discoverChangedPathes()const;
+        LogParameter&discoverChangedPathes(bool value);
+        bool strictNodeHistory()const;
+        LogParameter&strictNodeHistory(bool value);
+        bool includeMergedRevisions()const;
+        LogParameter&includeMergedRevisions(bool value);
+        const StringArray& revisionProperties()const;
+        LogParameter&revisionProperties(const StringArray&props);
     };
 }
 

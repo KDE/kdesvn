@@ -484,33 +484,7 @@ namespace svn
          const Revision & peg_revision=svn_opt_revision_unspecified,
          const StringArray&changelists=StringArray()
         ) throw (ClientException);
-    /**
-     * Retrieve log information for the given path
-     * Loads the log messages result set. The first
-     * entry  is the youngest revision.
-     *
-     * You can use the constants Revision::START and
-     * Revision::HEAD
-     *
-     * @param path
-     * @param revisionStart Start revision.
-     * @param revisionEnd End revision
-     * @param revisionPeg Revision where path is valid.
-     * @param discoverChangedPaths Should changed pathes transferred
-     * @param strictNodeHistory
-     * @param limit the maximum log entries count.
-     * @param include_merged_revisions log information for revisions which have been merged to targets will also be returned. (subversion 1.5)
-     * @return a vector with log entries
-     */
-    virtual LogEntriesPtr
-    log (const Path& path, const Revision & revisionStart,
-         const Revision & revisionEnd,
-         const Revision & revisionPeg,
-         bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit=0,
-         bool include_merged_revisions = false,
-         const StringArray&revprops=StringArray()
-        ) throw (ClientException);
+
     /**
      * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored

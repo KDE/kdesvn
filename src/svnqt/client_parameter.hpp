@@ -217,6 +217,24 @@ namespace svn
         bool detailedRemote()const;
         StatusParameter&detailedRemote(bool value);
     };
+
+    struct LogParameterData;
+
+    class SVNQT_EXPORT LogParameter
+    {
+    private:
+        SharedPointer<LogParameterData> _data;
+
+    public:
+        LogParameter();
+        ~LogParameter();
+
+        //! items to get the logs for
+        const Targets&targets()const;
+        //! set items to get the logs for
+        LogParameter&targets(const Targets&targets);
+
+    };
 }
 
 

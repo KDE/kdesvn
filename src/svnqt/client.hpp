@@ -509,33 +509,6 @@ namespace svn
 
     /**
      * Retrieve log information for the given path
-     * Loads the log messages result set. The first
-     * entry  is the youngest revision.
-     *
-     * You can use the constants Revision::START and
-     * Revision::HEAD
-     *
-     * @param path
-     * @param revisionStart
-     * @param revisionEnd
-     * @param discoverChangedPaths
-     * @param strictNodeHistory
-     * @param limit the maximum log entries count.
-     * @return a vector with log entries
-     */
-    virtual LogEntriesPtr
-    log (const Path& path,
-         const Revision & revisionStart,
-         const Revision & revisionEnd,
-         const Revision & revisionPeg,
-         bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0,
-         bool include_merged_revisions = false,
-         const StringArray&revprops=StringArray()
-        ) throw (ClientException)=0;
-
-    /**
-     * Retrieve log information for the given path
      * Loads the log messages result set. Result will stored
      * in a map where the key is the revision number
      *

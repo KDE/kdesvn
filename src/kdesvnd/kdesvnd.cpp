@@ -31,6 +31,7 @@
 #include "src/svnqt/context_listener.hpp"
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/client_parameter.hpp"
 #include "helpers/ktranslateurl.h"
 #include "kdesvndadaptor.h"
 
@@ -346,10 +347,10 @@ bool kdesvnd::isRepository(const KUrl&url)
     QString proto = svn::Url::transformProtokoll(url.protocol());
     if (proto=="file") {
         // local access - may a repository
-        svn::Revision where = svn::Revision::HEAD;
         svn::StatusEntries dlist;
+        svn::StatusParameter params("file://"+cleanUrl(url));
         try {
-            m_Listener->m_Svnclient->status("file://"+cleanUrl(url),svn::DepthEmpty,false,false,false,where);
+            m_Listener->m_Svnclient->status(params.depth(svn::DepthEmpty).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD));
         } catch (const svn::ClientException&e) {
             kDebug(9510)<< e.msg()<<endl;
             return false;

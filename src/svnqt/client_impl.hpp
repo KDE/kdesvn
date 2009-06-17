@@ -87,27 +87,11 @@ namespace svn
      *
      * Throws an exception if an error occurs
      *
-     * @param path Path to explore.
-     * @param descend Recurse into subdirectories if existant.
-     * @param get_all Return all entries, not just the interesting ones.
-     * @param update Query the repository for updates.
-     * @param no_ignore Disregard default and svn:ignore property ignores.
-     * @param hide_externals don't recurse into external definitions
-     * @param revision list specific revision when browsing remote, on working copies parameter will ignored
-     * @param detailed_remote if on remote listing detailed item info should get if possible
-     *                        that may slow so should configureable in frontends!
+     * @param params the parameter for this method
      * @return vector with Status entries.
      */
     virtual StatusEntries
-    status (const Path& path,
-            Depth depth=DepthEmpty,
-            bool get_all = true,
-            bool update = false,
-            bool no_ignore = false,
-            const Revision revision = svn::Revision::HEAD,
-            bool detailed_remote = false,
-            bool hide_externals = false,
-            const StringArray & changelists=StringArray()) throw (ClientException);
+    status (const StatusParameter&params) throw (ClientException);
 
     /**
      * Returns the status of a single file in the path.

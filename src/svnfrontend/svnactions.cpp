@@ -45,11 +45,11 @@
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/wc.hpp"
-#include "src/svnqt/svnqt_defines.hpp"
 #include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/svnqt_defines.hpp"
+#include "src/svnqt/client_parameter.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
-#include "src/svnqt/client_parameter.hpp"
 
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"
@@ -970,12 +970,13 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         CommitActionEntries _check,_uncheck,_result;
         svn::StatusEntries _Cache;
         depth=svn::DepthEmpty;
+        svn::StatusParameter params("");
+        params.depth(svn::DepthInfinity).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD);
         /// @todo filter out double entries
         for (unsigned j = 0; j < targets.size(); ++j) {
-            svn::Revision where = svn::Revision::HEAD;
             try {
                 StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
-                _Cache = m_Data->m_Svnclient->status(targets.target(j).path(),svn::DepthInfinity,false,false,false,where);
+                _Cache = m_Data->m_Svnclient->status(params.path(targets.target(j).path()));
             } catch (const svn::Exception&e) {
                 emit clientException(e.msg());
                 return false;
@@ -2304,10 +2305,11 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, const 
     QString ex;
     svn::Depth _d=rec?svn::DepthInfinity:svn::DepthImmediates;
     try {
+        svn::StatusParameter params(what);
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         //                                      rec all  up     noign
-        dlist = m_Data->m_Svnclient->status(what,_d,all,updates,display_ignores,where,disp_remote_details,false);
+        dlist = m_Data->m_Svnclient->status(params.depth(_d).all(all).update(updates).noIgnore(display_ignores).revision(where).detailedRemote(disp_remote_details).ignoreExternals(false));
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

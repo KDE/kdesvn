@@ -40,7 +40,6 @@ namespace svn
 {
 
     struct CopyParameterData;
-    struct DiffParameterData;
 
     //! parameter for svn_copy wrapper
     /*!
@@ -63,7 +62,7 @@ namespace svn
         //! set copy operation parameter asChild to true
         CopyParameter&asChild(bool);
         //! return value for asChild
-        bool getAsChild()const;
+        bool asChild()const;
 
         //! copy should ignore externals
         /*!
@@ -74,35 +73,37 @@ namespace svn
         /*!
          * \since subversion 1.6
          */
-        bool getIgnoreExternal()const;
+        bool ignoreExternal()const;
 
         //! set copy/move operation parameter makeParent to true
         CopyParameter&makeParent(bool);
         //! return value for asChild
-        bool getMakeParent()const;
+        bool makeParent()const;
 
         //! set move operation parameter force to true
         /*! this is ignored for copy operation */
         CopyParameter&force(bool);
         //! return value for force
         /*! this is ignored for copy operation */
-        bool getForce()const;
+        bool force()const;
 
         //! set the source revision for the copy operation
         CopyParameter&srcRevision(const Revision&);
         //! get the source revision for the copy operation
-        const Revision& getSrcRevision()const;
+        const Revision& srcRevision()const;
         //! set the peg revision for the copy operation
         CopyParameter&pegRevision(const Revision&);
         //! get the peg revision for the copy operation
-        const Revision& getPegRevision()const;
+        const Revision& pegRevision()const;
 
         //! set the properties map for the copy operation
         CopyParameter&properties(const PropertiesMap&);
         //! get the properties map for the copy operation
-        const PropertiesMap& getProperties()const;
+        const PropertiesMap& properties()const;
 
     };
+
+    struct DiffParameterData;
 
     //! parameter for svn_diff and svn_diff_peg wrapper
     /*!
@@ -123,44 +124,44 @@ namespace svn
          * \since subversion 1.5
          * \sa svn_client_diff4
          */
-        const svn::StringArray& getChangeList()const;
+        const svn::StringArray& changeList()const;
         //! type of recurse operation
         /*!
          * \sa svn::Depth
          */
-        Depth getDepth()const;
+        Depth depth()const;
         //! extra options for diff ("-b", "-w","--ignore-eol-style")
-        const svn::StringArray& getExtra()const;
+        const svn::StringArray& extra()const;
         //! whether the files will be checked for relatedness.
-        bool getIgnoreAncestry()const;
+        bool ignoreAncestry()const;
         //! if true generate diff even the items are marked as binaries
-        bool getIgnoreContentType()const;
+        bool ignoreContentType()const;
         //! if true, no diff output will be generated on deleted files.
-        bool getNoDiffDeleted()const;
+        bool noDiffDeleted()const;
         //! first file or folder to diff.
-        const Path& getPath1()const;
+        const Path& path1()const;
         //! second file or folder to diff.
         /*!
          * this is ignored for diff_peg calls
          */
-        const Path& getPath2()const;
+        const Path& path2()const;
         //! peg revision (only used for diff_peg)
-        const svn::Revision& getPeg()const;
+        const svn::Revision& peg()const;
         //! if set, all pathes are related to this folder
         /*!
          * Must not be an url! May be empty
          */
-        const Path&getRelativeTo()const;
+        const Path&relativeTo()const;
         //! one of the revisions to check (path1).
-        const svn::Revision& getRev1()const;
+        const svn::Revision& rev1()const;
         //! the other revision (path2 for non peg diff).
-        const svn::Revision& getRev2()const;
+        const svn::Revision& rev2()const;
         //! prefix for a temporary directory needed by diff.
         /*!
          * Filenames will have ".tmp" and similar added to this prefix in
          * order to ensure uniqueness.
          */
-        const Path& getTmpPath()const;
+        const Path& tmpPath()const;
 
         DiffParameter& path1(const Path&path);
         DiffParameter& path2(const Path&path);
@@ -175,6 +176,46 @@ namespace svn
         svn::DiffParameter& rev1(const svn::Revision&_rev);
         svn::DiffParameter& rev2(const svn::Revision&_rev);
         svn::DiffParameter& noDiffDeleted(bool value);
+    };
+
+    struct StatusParameterData;
+
+    class SVNQT_EXPORT StatusParameter
+    {
+    private:
+        SharedPointer<StatusParameterData> _data;
+    public:
+        StatusParameter(const Path&_path);
+        ~StatusParameter();
+
+        //! path to explore
+        const Path &path()const;
+        StatusParameter&path(const Path&_path);
+        //! list specific revision when browsing remote, on working copies parameter will ignored
+        const Revision& revision()const;
+        StatusParameter&revision(const Revision&rev);
+        //! recursion level
+        Depth depth()const;
+        StatusParameter&depth(Depth d);
+        //! Return all entries, not just the interesting ones.
+        bool all()const;
+        StatusParameter&all(bool getall);
+        //! Query the repository for updates.
+        bool update()const;
+        StatusParameter&update(bool updates);
+        //! Disregard default and svn:ignore property ignores.
+        bool noIgnore()const;
+        StatusParameter&noIgnore(bool noignore);
+        //! don't recurse into external definitions
+        bool ignoreExternals()const;
+        StatusParameter&ignoreExternals(bool noexternals);
+        const StringArray& changeList()const;
+        StatusParameter&changeList(const StringArray&list);
+        //!if on remote listing detailed item info should get if possible
+        /*! that may slow so should configureable in frontends!
+         */
+        bool detailedRemote()const;
+        StatusParameter&detailedRemote(bool value);
     };
 }
 

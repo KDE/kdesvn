@@ -51,6 +51,7 @@
 #include "svnqt/url.hpp"
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/context_listener.hpp"
+#include "svnqt/client_parameter.hpp"
 
 namespace svn
 {
@@ -297,13 +298,7 @@ namespace svn
 #endif
 
   static StatusEntries
-  localStatus (const Path& path,
-               Depth depth,
-               const bool get_all,
-               const bool update,
-               const bool no_ignore,
-               const bool hide_externals,
-               const StringArray & changelists,
+  localStatus (const StatusParameter&params,
                Context * context)
   {
     svn_error_t *error;
@@ -323,31 +318,30 @@ namespace svn
     error = svn_client_status3 (
 #endif
         &revnum,           // revnum
-        path.path().TOUTF8(),         // path
+        params.path().path().TOUTF8(),         // path
         rev,
         StatusEntriesFunc, // status func
         &baton,            // status baton
-        internal::DepthToSvn(depth), // see svn::Depth
-        get_all,           // get all not only interesting
-        update,            // check for updates
-        no_ignore,         // hide ignored files or not
-        hide_externals,    // hide external
-        changelists.array(pool),
+        internal::DepthToSvn(params.depth()), // see svn::Depth
+        params.all(),           // get all not only interesting
+        params.update(),            // check for updates
+        params.noIgnore(),         // hide ignored files or not
+        params.ignoreExternals(),    // hide external
+        params.changeList().array(pool),
         *context,          //client ctx
         pool);
 #else
-    Q_UNUSED(changelists);
     error = svn_client_status2 (
       &revnum,      // revnum
-      path.path().TOUTF8(),         // path
+      params.path().path().TOUTF8(),         // path
       rev,
       StatusEntriesFunc, // status func
       &baton,        // status baton
-      (depth==DepthInfinity), //recurse
-      get_all,       // get all not only interesting
-      update,        // check for updates
-      no_ignore,     // hide ignored files or not
-      hide_externals, // hide external
+      (params.depth()==DepthInfinity), //recurse
+      params.all(),       // get all not only interesting
+      params.update(),        // check for updates
+      params.noIgnore(),     // hide ignored files or not
+      params.ignoreExternals(), // hide external
       *context,    //client ctx
       pool);
 #endif
@@ -373,20 +367,14 @@ namespace svn
 
   static StatusEntries
   remoteStatus (Client * client,
-                const Path& path,
-                Depth depth,
-                const bool ,
-                const bool ,
-                const bool ,
-                const Revision revision,
-                Context * ,
-                bool detailed_remote)
+                const StatusParameter&params,
+                Context *)
   {
-    DirEntries dirEntries = client->list(path, revision, revision, depth,detailed_remote);
+    DirEntries dirEntries = client->list(params.path(), params.revision(), params.revision(), params.depth(),params.detailedRemote());
     DirEntries::const_iterator it;
 
     StatusEntries entries;
-    QString url = path.path();
+    QString url = params.path().path();
     url+=QString::FROMUTF8("/");
 
     for (it = dirEntries.begin (); it != dirEntries.end (); ++it)
@@ -394,28 +382,18 @@ namespace svn
         DirEntryPtr dirEntry = *it;
         if (dirEntry->name().isEmpty())
             continue;
-        entries.push_back(dirEntryToStatus (path, dirEntry));
+        entries.push_back(dirEntryToStatus (params.path(), dirEntry));
     }
     return entries;
   }
 
   StatusEntries
-  Client_impl::status (const Path& path,
-                  Depth depth,
-                  const bool get_all,
-                  const bool update,
-                  const bool no_ignore,
-                  const Revision revision,
-                  bool detailed_remote,
-                  const bool hide_externals,
-                  const StringArray & changelists) throw (ClientException)
+  Client_impl::status (const StatusParameter&params) throw (ClientException)
   {
-    if (Url::isValid (path.path())) {
-        return remoteStatus (this, path, depth, get_all, update,
-                            no_ignore,revision,m_context,detailed_remote);
+    if (Url::isValid (params.path().path())) {
+        return remoteStatus (this, params,m_context);
     } else {
-        return localStatus (path, depth, get_all, update,
-                            no_ignore, hide_externals,changelists, m_context);
+        return localStatus (params,m_context);
     }
   }
 

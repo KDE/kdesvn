@@ -23,6 +23,7 @@
 #include "src/kdesvn_events.h"
 
 #include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/client_parameter.hpp"
 
 #include <qobject.h>
 #include <kdebug.h>
@@ -63,11 +64,10 @@ const svn::StatusEntries&CheckModifiedThread::getList()const
 void CheckModifiedThread::run()
 {
     // what must be cleaned!
-    svn::Revision where = svn::Revision::HEAD;
     QString ex;
+    svn::StatusParameter params(m_what);
     try {
-        //                                  rec  all    up        noign
-        m_Cache = m_Svnclient->status(m_what,svn::DepthInfinity,false,m_updates,false,where);
+        m_Cache = m_Svnclient->status(params.depth(svn::DepthInfinity).all(false).update(m_updates).noIgnore(false).revision(svn::Revision::HEAD));
     } catch (const svn::Exception&e) {
         m_ContextListener->contextNotify(e.msg());
     }

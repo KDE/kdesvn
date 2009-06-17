@@ -632,11 +632,10 @@ void kio_svnProtocol::update(const KUrl&url,int revnumber,const QString&revkind)
 
 void kio_svnProtocol::status(const KUrl&wc,bool cR,bool rec)
 {
-    svn::Revision where = svn::Revision::UNDEFINED;
     svn::StatusEntries dlist;
+    svn::StatusParameter params(wc.path());
     try {
-        //                                            rec all  up     noign
-        dlist = m_pData->m_Svnclient->status(wc.path(),rec?svn::DepthInfinity:svn::DepthEmpty,false,cR,false,where);
+        dlist = m_pData->m_Svnclient->status(params.depth(rec?svn::DepthInfinity:svn::DepthEmpty).all(false).update(cR).noIgnore(false).revision(svn::Revision::UNDEFINED));
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;

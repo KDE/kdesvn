@@ -305,7 +305,7 @@ namespace svn
         for (size_t j=0;j<parameter.srcPath().size();++j)
         {
             _dest=parameter.destination();
-            if (paramter.getAsChild()) {
+            if (paramter.asChild()) {
                 sparameter.srcPath()[j].split(dir,base);
                 _dest.addComponent(base);
             }
@@ -321,8 +321,8 @@ namespace svn
         {
             svn_client_copy_source_t* source = (svn_client_copy_source_t*)apr_palloc(pool, sizeof(svn_client_copy_source_t));
             source->path = apr_pstrdup(pool,parameter.srcPath()[j].path().TOUTF8());
-            source->revision=parameter.getSrcRevision().revision();
-            source->peg_revision=parameter.getPegRevision().revision();
+            source->revision=parameter.srcRevision().revision();
+            source->peg_revision=parameter.pegRevision().revision();
             APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
         }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
@@ -330,14 +330,14 @@ namespace svn
                 svn_client_copy5(&commit_info,
                     sources,
                     parameter.destination().cstr(),
-                    parameter.getAsChild(),parameter.getMakeParent(),parameter.getIgnoreExternal(),
-                    map2hash(parameter.getProperties(),pool),*m_context,pool);
+                    parameter.asChild(),parameter.makeParent(),parameter.ignoreExternal(),
+                    map2hash(parameter.properties(),pool),*m_context,pool);
 #else
         svn_error_t * error =
                 svn_client_copy4(&commit_info,
                     sources,
                     parameter.destination().cstr(),
-                    parameter.getAsChild(),parameter.getMakeParent(),map2hash(parameter.getProperties(),pool),*m_context,pool);
+                    parameter.asChild(),parameter.makeParent(),map2hash(parameter.properties(),pool),*m_context,pool);
 #endif
         if (error!=0){
             throw ClientException (error);
@@ -420,10 +420,10 @@ namespace svn
                                              &commit_info,
                                              parameter.srcPath().array(pool),
                                              parameter.destination().cstr(),
-                                             parameter.getForce(),
-                                             parameter.getAsChild(),
-                                             parameter.getMakeParent(),
-                                             map2hash(parameter.getProperties(),pool),
+                                             parameter.force(),
+                                             parameter.asChild(),
+                                             parameter.makeParent(),
+                                             map2hash(parameter.properties(),pool),
                                              *m_context,
                                              pool
                                             );

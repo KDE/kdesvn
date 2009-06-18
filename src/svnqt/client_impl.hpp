@@ -493,26 +493,13 @@ namespace svn
      * You can use the constants Revision::START and
      * Revision::HEAD
      *
-     * @param path
-     * @param revisionStart
-     * @param revisionEnd
-     * @param revisionPeg Revision where path is valid.
-     * @param target the logmap where to store the entries
-     * @param discoverChangedPaths
-     * @param strictNodeHistory
-     * @param limit (ignored when subversion 1.1 API)
+     * @param params Parameter to use for log
+     * @param target where to store the resulting logs
      * @return true if success
+     * @sa LogParameter
      */
     virtual bool
-    log (const Path& path, const Revision & revisionStart,
-         const Revision & revisionEnd,
-         LogEntriesMap&target,
-         const Revision & revisionPeg,
-         bool discoverChangedPaths,
-         bool strictNodeHistory,int limit,
-         bool include_merged_revisions = false,
-         const StringArray&revprops=StringArray()
-        ) throw (ClientException);
+    log (const LogParameter&params,LogEntriesMap&target) throw (ClientException);
 
     /**
      * Produce diff output which describes the delta between
@@ -776,7 +763,8 @@ namespace svn
                 const Revision & peg_revision,
                 svn::stream::SvnStream&);
 
-    apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
+    static apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
+    static apr_array_header_t * revListToHeader(const RevisionRanges&,const Pool&);
   };
 
 }

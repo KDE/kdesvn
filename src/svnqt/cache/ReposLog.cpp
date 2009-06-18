@@ -25,6 +25,7 @@
 #include "svnqt/client.hpp"
 #include "svnqt/context_listener.hpp"
 #include "svnqt/cache/DatabaseException.hpp"
+#include "svnqt/client_parameter.hpp"
 
 #include <qsqldatabase.h>
 
@@ -151,7 +152,9 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool 
     if (_rend==svn::Revision::HEAD||_rend.revnum()>_latest.revnum()) {
         LogEntriesMap _internal;
 //        //qDebug("Retrieving from network.");
-        if (!m_Client->log(m_ReposRoot,_rstart,_rend,_internal,svn::Revision::UNDEFINED,true,false)) {
+        LogParameter params;
+
+        if (!m_Client->log(params.targets(m_ReposRoot).revisionRange(_rstart,_rend).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).strictNodeHistory(false),_internal)) {
             return false;
         }
         LogEntriesMap::ConstIterator it=_internal.begin();

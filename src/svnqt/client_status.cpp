@@ -382,17 +382,8 @@ namespace svn
   }
 
   bool
-  Client_impl::log (const Path& path, const Revision & revisionStart,
-       const Revision & revisionEnd,
-       LogEntriesMap&log_target,
-       const Revision & revisionPeg,
-       bool discoverChangedPaths,
-       bool strictNodeHistory,int limit,
-       bool include_merged_revisions,
-       const StringArray&revprops
-                   ) throw (ClientException)
+  Client_impl::log (const LogParameter&params,LogEntriesMap&log_target) throw (ClientException)
   {
-    Targets target(path);
     Pool pool;
     sBaton l_baton;
     QLIST<QLONG> revstack;
@@ -401,53 +392,60 @@ namespace svn
     l_baton.m_revstack = &revstack;
     svn_error_t *error;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_log5 (
+        params.targets().array (pool),
+        params.peg().revision(),
+        revListToHeader(params.revisions(),pool),
+        params.limit(),
+        params.discoverChangedPathes() ? 1 : 0,
+        params.strictNodeHistory() ? 1 : 0,
+        params.includeMergedRevisions()?1:0,
+        params.revisionProperties().array(pool),
+        logMapReceiver2,
+        &l_baton,
+        *m_context, // client ctx
+        pool);
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5))
     error = svn_client_log4 (
-                target.array (pool),
-                revisionPeg.revision(),
-                revisionStart.revision (),
-                revisionEnd.revision (),
-                limit,
-                discoverChangedPaths ? 1 : 0,
-                strictNodeHistory ? 1 : 0,
-                include_merged_revisions?1:0,
-                revprops.array(pool),
-                logMapReceiver2,
-                &l_baton,
-                *m_context, // client ctx
-                pool);
+        params.targets().array (pool),
+        params.peg().revision(),
+        params.revisionRange().first.revision (),
+        params.revisionRange().second.revision (),
+        params.limit(),
+        params.discoverChangedPathes() ? 1 : 0,
+        params.strictNodeHistory() ? 1 : 0,
+        params.includeMergedRevisions()?1:0,
+        params.revisionProperties().array(pool),
+        logMapReceiver2,
+        &l_baton,
+        *m_context, // client ctx
+        pool);
 #elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
-    Q_UNUSED(include_merged_revisions);
-    Q_UNUSED(revprops);
-
     error = svn_client_log3 (
-      target.array (pool),
-      revisionPeg.revision(),
-      revisionStart.revision (),
-      revisionEnd.revision (),
-      limit,
-      discoverChangedPaths ? 1 : 0,
-      strictNodeHistory ? 1 : 0,
-      logMapReceiver,
-      &l_baton,
-      *m_context, // client ctx
-      pool);
+        params.targets().array (pool),
+        params.peg().revision(),
+        params.revisionRange().first.revision (),
+        params.revisionRange().second.revision (),
+        params.limit(),
+        params.discoverChangedPathes() ? 1 : 0,
+        params.strictNodeHistory() ? 1 : 0,
+        logMapReceiver,
+        &l_baton,
+        *m_context, // client ctx
+        pool);
 #else
-    Q_UNUSED(include_merged_revisions);
-    Q_UNUSED(revprops);
-    Q_UNUSED(revisionPeg);
-
     error = svn_client_log2 (
-      target.array (pool),
-      revisionStart.revision (),
-      revisionEnd.revision (),
-      limit,
-      discoverChangedPaths ? 1 : 0,
-      strictNodeHistory ? 1 : 0,
-      logMapReceiver,
-      &l_baton,
-      *m_context, // client ctx
-      pool);
+        params.targets().array (pool),
+        params.revisionRange().first.revision (),
+        params.revisionRange().second.revision (),
+        params.limit(),
+        params.discoverChangedPathes() ? 1 : 0,
+        params.strictNodeHistory() ? 1 : 0,
+        logMapReceiver,
+        &l_baton,
+        *m_context, // client ctx
+        pool);
 #endif
     checkErrorThrow(error);
     return true;

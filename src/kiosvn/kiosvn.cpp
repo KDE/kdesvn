@@ -732,11 +732,13 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
 {
     svn::Revision start(revstart,revstringstart);
     svn::Revision end(revend,revstringend);
+    svn::LogParameter params;
+    params.revisionRange(start,end).peg(svn::Revision::UNDEFINED).limit(0).discoverChangedPathes(true).strictNodeHistory(true);
 
     for (long j = 0; j<urls.count();++j) {
         svn::LogEntriesMap logs;
         try {
-            m_pData->m_Svnclient->log(makeSvnUrl(urls[j]),start,end,logs,svn::Revision::UNDEFINED,true,true,0);
+            m_pData->m_Svnclient->log(params.targets(makeSvnUrl(urls[j])),logs);
         } catch (const svn::ClientException&e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             break;

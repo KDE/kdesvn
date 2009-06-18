@@ -114,6 +114,18 @@ namespace svn
       return hash;
   }
 
+  apr_array_header_t * Client_impl::revListToHeader(const RevisionRanges&_ranges,const Pool&pool)
+  {
+    apr_array_header_t * revision_ranges = apr_array_make(pool, 0, sizeof(svn_opt_revision_range_t *));
+    for (int i = 0; i<_ranges.size();++i) {
+        svn_opt_revision_range_t * range = (svn_opt_revision_range_t *)apr_palloc(pool, sizeof(*range));
+        range->start = *(_ranges[i].first);
+        range->end = *(_ranges[i].second);
+        APR_ARRAY_PUSH(revision_ranges,svn_opt_revision_range_t *) = range;
+    }
+    return revision_ranges;
+  }
+
   bool Client_impl::RepoHasCapability(const Path&repository,Capability capability)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)

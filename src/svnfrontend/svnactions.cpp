@@ -295,19 +295,22 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision&st
 
     bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().size()>0?m_Data->m_ParentList->baseUri():which);
 
+    svn::LogParameter params;
+    params.targets(which).revisionRange(start,end).peg(peg).includeMergedRevisions(mergeinfo).limit(limit).discoverChangedPathes(list_files).strictNodeHistory(!follow);
+
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,(parent?parent:m_Data->m_ParentList->realWidget()),0,"Logs",
             i18n("Getting logs - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (doNetworking()) {
-            m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit,mergeinfo);
+            m_Data->m_Svnclient->log(params,*logs);
         } else {
             svn::InfoEntry e;
             if (!singleInfo(m_Data->m_ParentList->baseUri(),svn::Revision::BASE,e)) {
                 return 0;
             }
             if (svn::Url::isLocal(e.reposRoot())) {
-                m_Data->m_Svnclient->log(which,start,end,*logs,peg,list_files,!follow,limit,mergeinfo);
+                m_Data->m_Svnclient->log(params,*logs);
             } else {
                 svn::cache::ReposLog rl(m_Data->m_Svnclient,e.reposRoot());
                 QString s1,s2,what;

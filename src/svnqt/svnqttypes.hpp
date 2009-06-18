@@ -45,6 +45,7 @@ namespace svn
     class CopyParameter;
     class DiffParameter;
     class StatusParameter;
+    class LogParameter;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
 

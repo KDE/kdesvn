@@ -515,25 +515,13 @@ namespace svn
      * You can use the constants Revision::START and
      * Revision::HEAD
      *
-     * @param path Path to make a log for
-     * @param revisionStart
-     * @param revisionEnd
-     * @param target the logmap where to store the entries
-     * @param discoverChangedPaths
-     * @param strictNodeHistory
-     * @param limit (ignored when subversion 1.1 API)
+     * @param params Parameter to use for log
+     * @param target where to store the resulting logs
      * @return true if success
+     * @sa LogParameter
      */
     virtual bool
-    log (const Path& path, const Revision & revisionStart,
-         const Revision & revisionEnd,
-         LogEntriesMap&target,
-         const Revision & revisionPeg=Revision::UNDEFINED,
-         bool discoverChangedPaths=false,
-         bool strictNodeHistory=true,int limit = 0,
-         bool include_merged_revisions = false,
-         const StringArray&revprops=StringArray()
-        ) throw (ClientException)=0;
+    log (const LogParameter&params,LogEntriesMap&target) throw (ClientException)=0;
 
     /**
      * Produce diff output which describes the delta between

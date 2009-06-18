@@ -21,6 +21,7 @@
 #include "repository.hpp"
 #include "context.hpp"
 #include "datetime.hpp"
+#include "client_parameter.hpp"
 
 #include <qdatastream.h>
 
@@ -36,9 +37,11 @@ int main(int,char**)
     m_Svnclient->setContext(m_CurrentContext);
     bool gotit = true;
     svn::LogEntriesMap m_OldHistory;
+    svn::LogParameter params;
 
     try {
-        m_Svnclient->log("http://www.alwins-world.de/repos/kdesvn/trunk",svn::Revision::HEAD,20,m_OldHistory,svn::Revision::UNDEFINED,true,false,0);
+        m_Svnclient->log(params.targets("http://www.alwins-world.de/repos/kdesvn/trunk").revisionRange(svn::Revision::HEAD,20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
+        strictNodeHistory(false).limit(0),m_OldHistory);
     } catch (svn::ClientException ce) {
         gotit = false;
     }

@@ -23,6 +23,7 @@
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/url.hpp"
+#include "src/svnqt/client_parameter.hpp"
 #include "helpers/sub2qt.h"
 #include "revtreewidget.h"
 #include "revgraphview.h"
@@ -90,18 +91,20 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
     if (!m_Listener||!m_Client) {
         return false;
     }
+    svn::LogParameter params;
+    params.targets(reposRoot).revisionRange(endr,startr).peg(startr).limit(0).discoverChangedPathes(true).strictNodeHistory(false);
     try {
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
                      0,"Logs",i18n("Getting logs - hit cancel for abort"));
         if (svn::Url::isLocal(reposRoot) ) {
-            m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
+            m_Client->log(params,m_OldHistory);
         } else {
             svn::cache::ReposLog rl(m_Client,reposRoot);
             if (rl.isValid()) {
                 rl.simpleLog(m_OldHistory,startr,endr,(!Kdesvnsettings::network_on()||!Kdesvnsettings::fill_cache_on_tree()));
             } else if (Kdesvnsettings::network_on()) {
-                m_Client->log(reposRoot,endr,startr,m_OldHistory,startr,true,false,0);
+                m_Client->log(params,m_OldHistory);
             } else {
                 KMessageBox::error(0,i18n("Could not retrieve logs, reason:\n%1",i18n("No logcache possible due broken database and networking not allowed.")));
                 return false;

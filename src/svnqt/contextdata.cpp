@@ -135,12 +135,17 @@ ContextData::ContextData(const QString & configDir_)
     (&provider, pool);
     *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
+    svn_auth_get_ssl_client_cert_pw_file_provider2
+    (&provider, maySavePlaintext,this, pool);
+#else
+#if (SVN_VER_MINOR >= 4)
     svn_auth_get_ssl_client_cert_pw_file_provider
 #else
     svn_client_get_ssl_client_cert_pw_file_provider
 #endif
     (&provider, pool);
+#endif
     *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)

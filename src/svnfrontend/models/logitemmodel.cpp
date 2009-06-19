@@ -60,6 +60,7 @@ SvnLogModel::~SvnLogModel()
 
 QModelIndex SvnLogModel::index(int row,int column,const QModelIndex & parent)const
 {
+    Q_UNUSED(parent);
     if (row >= m_data->m_List.count()||row<0) {
         return QModelIndex();
     }

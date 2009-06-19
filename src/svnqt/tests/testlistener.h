@@ -28,7 +28,7 @@ class TestListener:public svn::ContextListener
         TestListener(){}
         virtual ~TestListener(){}
 
-        virtual void contextProgress(long long int current, long long int max){};
+        virtual void contextProgress(long long int , long long int ){};
         virtual bool contextSslClientCertPwPrompt (QString &,const QString &, bool &){return false;}
         virtual bool contextLoadSslClientCertPw(QString&,const QString&){return false;}
         virtual bool contextSslClientCertPrompt (QString &){return false;}
@@ -44,11 +44,11 @@ class TestListener:public svn::ContextListener
                                     svn_wc_notify_state_t,
                                     svn_wc_notify_state_t,
                                     svn_revnum_t){}
-        virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password){return false;}
-        virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password){return false;} 
-        virtual bool contextGetLogin (const QString & realm,
-                                      QString & username,
-                                      QString & password,
+        virtual bool contextGetSavedLogin (const QString & ,QString & ,QString & ){return false;}
+        virtual bool contextGetCachedLogin (const QString & ,QString & ,QString & ){return false;}
+        virtual bool contextGetLogin (const QString & ,
+                                      QString & ,
+                                      QString & ,
                                       bool & maySave){maySave=false;return false;}
 
 };

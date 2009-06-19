@@ -215,6 +215,7 @@ QStringList kdesvnd::getSingleActionMenu(const QString& what)
 
 QStringList kdesvnd::get_saved_login(const QString&realm,const QString&user)
 {
+    Q_UNUSED(user);
     QString username;
     QString password;
     PwStorage::self()->getLogin(realm,username,password);

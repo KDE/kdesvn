@@ -1961,6 +1961,7 @@ void SvnActions::slotImport(const QString&path,const QString&target,const QStrin
 void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, const QString&_target,
                 const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,bool rec)
 {
+    Q_UNUSED(_peg);
     KTempDir tdir1;
     tdir1.setAutoRemove(true);
     QString src1 = _src1;
@@ -2112,6 +2113,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
                             const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,
                             bool rec,bool ancestry,bool forceIt,bool dry)
 {
+    Q_UNUSED(_peg);
     if (!m_Data->m_CurrentContext) return;
     QString s2;
 

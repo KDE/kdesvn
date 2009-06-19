@@ -189,7 +189,6 @@ void CommitModel::hideItems(bool hide,CommitActionEntry::ACTION_TYPE _type)
  */
 void CommitModel::removeEntries(const QStringList&items)
 {
-    int i;
     QModelIndex _index;
     for (int i = 0; i<items.size();++i) {
         for (int j=0;j<m_Content->m_List.count();++j) {

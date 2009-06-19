@@ -395,6 +395,7 @@ bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry&aEntry)
  */
 bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, const svn::Revision&_end,const svn::Revision&_peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit)
 {
+    Q_UNUSED(strictNodeHistory);
     static QString s_q("select logentries.revision,logentries.author,logentries.date,logentries.message from logentries where logentries.revision in (select changeditems.revision from changeditems where (changeditems.changeditem='%1' or changeditems.changeditem GLOB '%2/*') %3 GROUP BY changeditems.revision) ORDER BY logentries.revision DESC");
 
     static QString s_e("select changeditem,action,copyfrom,copyfromrev from changeditems where changeditems.revision='%1'");
@@ -466,6 +467,8 @@ bool svn::cache::ReposLog::itemExists(const svn::Revision&peg,const svn::Path&pa
 {
     /// @todo this moment I have no idea how to check real  with all moves and deletes of parent folders without a hell of sql statements so we make it quite simple: it exists if we found it.
 
+    Q_UNUSED(peg);
+    Q_UNUSED(path);
 
 #if 0
     static QString _s1("select revision from changeditems where changeditem='%1' and action='A' and revision<=%2 order by revision desc limit 1");

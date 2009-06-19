@@ -44,7 +44,6 @@
 #include "src/svnqt/dirent.hpp"
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/url.hpp"
-#include "src/svnqt/wc.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/svnqt_defines.hpp"
 #include "src/svnqt/client_parameter.hpp"

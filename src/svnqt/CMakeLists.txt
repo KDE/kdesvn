@@ -21,7 +21,6 @@ SET(SOURCES
     targets.cpp
     url.cpp
     version_check.cpp
-    wc.cpp
     lock_entry.cpp
     client_lock.cpp
     info_entry.cpp
@@ -82,7 +81,6 @@ SET(INST_HEADERS
     targets.hpp
     url.hpp
     version_check.hpp
-    wc.hpp
     stringarray.hpp
     diffoptions.hpp
     conflictdescription.hpp

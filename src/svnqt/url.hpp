@@ -70,14 +70,6 @@ namespace svn
     static QString
     transformProtokoll(const QString&);
 
-    /**
-     * returns a vector with url schemas that are
-     * supported by svn
-     *
-     * @return vector with entries like "file:", "http:"
-     */
-    static QStringList
-    supportedSchemas ();
   };
 }
 

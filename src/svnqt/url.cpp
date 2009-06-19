@@ -38,14 +38,8 @@
 
 #include <qglobal.h>
 
-// subversion api
-#include "svn_ra.h"
-
 namespace svn
 {
-
-  static bool mSchemasInitialized = false;
-  QStringList mSchemas;
 
   Url::Url () {}
 
@@ -113,65 +107,6 @@ namespace svn
         return QString("svn");
     }
     return _prot;
-  }
-
-
-  /**
-   * the implementation of the function that pull the supported
-   * url schemas out of the ra layer it rather dirty now since
-   * we are lacking a higher level of abstraction
-   */
-  QStringList
-  Url::supportedSchemas ()
-  {
-    if (mSchemasInitialized)
-      return mSchemas;
-
-    mSchemasInitialized = true;
-    Pool pool;
-    void * ra_baton;
-
-    svn_error_t * error =
-      svn_ra_init_ra_libs (&ra_baton, pool);
-    if (error)
-      return mSchemas;
-
-    svn_stringbuf_t *descr;
-    error =
-      svn_ra_print_ra_libraries (&descr, ra_baton, pool);
-    if (error)
-      return mSchemas;
-
-    // schemas are in the following form:
-    // <schema>:<whitespace><description>\n...
-    // find the f�st :
-    QString descriptions (descr->data);
-    int pos=0;
-    const int not_found = -1;
-    do
-    {
-      const QString tokenStart ("handles '");
-      const QString tokenEnd ("' schem");
-      pos = descriptions.indexOf( tokenStart, pos );
-      if (pos == not_found)
-        break;
-
-      pos += tokenStart.length ();
-
-      int posEnd = descriptions.indexOf( tokenEnd, pos );
-      if (posEnd == not_found)
-        break;
-
-      // found
-      QString schema (descriptions.mid(pos, posEnd-pos) + ':');
-      mSchemas.push_back (schema);
-
-      // forward to the next newline
-      pos = posEnd + tokenEnd.length ();
-    }
-    while (pos != not_found);
-
-    return mSchemas;
   }
 }
 

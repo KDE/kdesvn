@@ -141,14 +141,21 @@ namespace svn
   }
 
   void
-  Path::addComponent (const QString& component)
+  Path::addComponent (const QString& _component)
   {
-      Pool pool;
-
+    Pool pool;
+    QString component = _component;
+    while (component.endsWith('/') && component.size()>0) {
+        component.chop(1);
+    }
     if (Url::isValid (m_path))
     {
       const char * newPath =
-          svn_path_url_add_component (m_path.TOUTF8(), component.TOUTF8(), pool);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        svn_path_url_add_component2(m_path.TOUTF8(), component.TOUTF8(), pool);
+#else
+        svn_path_url_add_component(m_path.TOUTF8(), component.TOUTF8(), pool);
+#endif
       m_path = QString::FROMUTF8(newPath);
     }
     else

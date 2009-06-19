@@ -260,6 +260,11 @@ namespace svn
      * @since subversion 1.5
      */
     virtual bool contextConflictResolve(ConflictResult&result,const ConflictDescription&description);
+    /** Callback for svn_auth_plaintext_prompt_func_t in subversion 1.6
+     * @param may_save call back memory where to store true (yes, save plaintext) or false (no save of plaintext passwords)
+     * The default implementation set it to "true"
+     */
+    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring);
     /** Callback for generating list entries
      * This base implementation just adds items to @a entries. This may used for special listener like the one from KIO
      * where items may displayed direkt on call and not stored into @a entries.

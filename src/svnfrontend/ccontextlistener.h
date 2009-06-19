@@ -79,6 +79,8 @@ public:
     static QStringList failure2Strings(apr_uint32_t acceptedFailures);
     virtual void contextProgress(long long int current, long long int max);
 
+    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring);
+
 public slots:
     virtual void setCanceled(bool);
 

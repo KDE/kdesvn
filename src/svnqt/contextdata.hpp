@@ -310,11 +310,17 @@ protected:
      */
     static svn_error_t* onWcConflictResolver(svn_wc_conflict_result_t**result,const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool);
 
+    /**
+     * @see svn_auth_plaintext_prompt_func_t
+     * @since subversion 1.6
+     */
+    static svn_error_t* maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool);
+
     // extra methods
     svn_error_t *
         generate_cancel_error();
 
-#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 1))
     /** read in mimetypes map
      * @since subversion 1.5
      */

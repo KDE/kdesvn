@@ -70,12 +70,17 @@ ContextData::ContextData(const QString & configDir_)
 	APR_ARRAY_PUSH (providers, svn_auth_provider_object_t *) = provider;
 #endif
 
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
+    svn_auth_get_simple_provider2
+    (&provider, maySavePlaintext,this, pool);
+#else
+#if (SVN_VER_MINOR >= 4)
     svn_auth_get_simple_provider
 #else
     svn_client_get_simple_provider
 #endif
     (&provider, pool);
+#endif
     *(svn_auth_provider_object_t **)apr_array_push (providers) = provider;
 
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
@@ -768,6 +773,22 @@ svn_error_t* ContextData::onWcConflictResolver(svn_wc_conflict_result_t**result,
 #endif
 }
 
+svn_error_t* ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool)
+{
+    Q_UNUSED(pool);
+#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
+    ContextData * data = 0;
+    SVN_ERR(getContextData (baton, &data));
+    data->getListener()->maySavePlaintext(may_save_plaintext,QString::FROMUTF8(realmstring));
+    return SVN_NO_ERROR;
+#else
+    Q_UNUSED(may_save_plaintext);
+    Q_UNUSED(realmstring);
+    Q_UNUSED(baton);
+    return svn_error_create (SVN_ERR_CANCELLED, NULL,"invalid subversion version.");
+#endif
+}
+
 bool ContextData::contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path)
 {
     if (!getListener()) {
@@ -798,6 +819,14 @@ bool ContextListener::contextAddListItem(DirEntries*entries, const svn_dirent_t*
     }
     entries->push_back(new DirEntry(/*QString::FROMUTF8(path)*/path,dirent,lock));
     return true;
+}
+
+void ContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring)
+{
+    Q_UNUSED(realmstring);
+    if (may_save_plaintext) {
+        *may_save_plaintext = true;
+    }
 }
 
 }

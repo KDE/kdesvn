@@ -30,6 +30,7 @@
 #include <kpassworddialog.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
+#include <kmessagebox.h>
 
 #include <QTextStream>
 #include <qthread.h>
@@ -133,6 +134,9 @@ bool CContextListener::contextGetCachedLogin (const QString & realm,QString & us
 
 bool CContextListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
+    if (!Kdesvnsettings::passwords_in_wallet()) {
+        return true;
+    }
     emit waitShow(true);
     PwStorage::self()->getLogin(realm,username,password);
     PwStorage::self()->setCachedLogin(realm,username,password);
@@ -360,6 +364,21 @@ QString CContextListener::translate(const QString&what)
 void CContextListener::contextProgress(long long int current, long long int max)
 {
     emit netProgress(current,max);
+}
+
+void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring)
+{
+    emit waitShow(true);
+    if (may_save_plaintext) {
+        QString question = i18n("%1\nRealy save clear plaintext password?",realmstring);
+        QString head = i18n("Save plain password");
+        if (KMessageBox::questionYesNo(0,question,head)==KMessageBox::Yes) {
+            *may_save_plaintext = true;
+        } else {
+            *may_save_plaintext = false;
+        }
+    }
+    emit waitShow(false);
 }
 
 #include "ccontextlistener.moc"

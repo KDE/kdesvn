@@ -378,39 +378,6 @@ namespace svn
 #endif
   }
 
-  svn::Revision Client_impl::move (const Path & srcPath,
-                const Path & destPath,
-                bool force) throw (ClientException)
-  {
-
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    return move(CopyParameter(srcPath,destPath).force(force).asChild(false).makeParent(false));
-#else
-    Pool pool;
-    svn_commit_info_t *commit_info = 0;
-
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4))
-    svn_error_t * error = svn_client_move4
-#else
-    svn_error_t * error = svn_client_move3
-#endif
-                     (&commit_info,
-                       srcPath.cstr (),
-                       destPath.cstr (),
-                       force,
-                       *m_context,
-                       pool);
-
-    if(error != 0) {
-        throw ClientException (error);
-    }
-    if (commit_info) {
-        return commit_info->revision;
-    }
-    return Revision::UNDEFINED;
-#endif
-  }
-
   svn::Revision Client_impl::move (const CopyParameter&parameter) throw (ClientException)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)

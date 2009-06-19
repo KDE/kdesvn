@@ -2167,14 +2167,16 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 /*!
     \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)
  */
-bool SvnActions::makeMove(const QString&Old,const QString&New,bool force)
+bool SvnActions::makeMove(const QString&Old,const QString&New,bool _force)
 {
     if (!m_Data->m_CurrentContext) return false;
+    svn::CopyParameter params(Old,New);
     svn::Revision nnum;
+
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item "));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->move(svn::Path(Old),svn::Path(New),force);
+        nnum = m_Data->m_Svnclient->move(params.force(_force).asChild(false).makeParent(false));
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

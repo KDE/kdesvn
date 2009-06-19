@@ -75,7 +75,7 @@ namespace svn
          */
         bool ignoreExternal()const;
 
-        //! set copy/move operation parameter makeParent to true
+        //! set copy/move operation parameter makeParent
         CopyParameter&makeParent(bool);
         //! return value for asChild
         bool makeParent()const;

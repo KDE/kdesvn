@@ -328,14 +328,6 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    move (const Path & srcPath,
-          const Path & destPath,
-          bool force) throw (ClientException)=0;
-    /**
-     * Moves or renames a file.
-     * @exception ClientException
-     */
-    virtual svn::Revision
             move (const CopyParameter&parameter) throw (ClientException)=0;
 
     /**

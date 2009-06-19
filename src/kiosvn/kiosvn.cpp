@@ -315,7 +315,7 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
     QString msg;
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
-        m_pData->m_Svnclient->move(makeSvnUrl(src),makeSvnUrl(target),false);
+        m_pData->m_Svnclient->move(svn::CopyParameter(makeSvnUrl(src),makeSvnUrl(target)).force(false));
     } catch (const svn::ClientException&e) {
         if (e.apr_err()==SVN_ERR_ENTRY_EXISTS) {
             error(KIO::ERR_DIR_ALREADY_EXIST,e.msg());

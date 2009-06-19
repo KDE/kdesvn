@@ -303,15 +303,6 @@ namespace svn
 
     /**
      * Moves or renames a file.
-     * @exception ClientException
-     */
-    virtual svn::Revision
-    move (const Path & srcPath,
-          const Path & destPath,
-          bool force) throw (ClientException);
-
-    /**
-     * Moves or renames a file.
      * @param parameter Class holding old required parameter
      * @exception ClientException
      */

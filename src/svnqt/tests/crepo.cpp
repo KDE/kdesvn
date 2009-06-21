@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "src/svnqt/client.hpp"
-#include "src/svnqt/tests/testconfig.h"
+#include "svnqt/tests/testconfig.h"
 #include "src/svnqt/repository.hpp"
 #include "src/svnqt/repositorylistener.hpp"
 #include "src/svnqt/targets.hpp"
@@ -77,6 +77,5 @@ int main(int,char**)
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
-
     return 0;
 }

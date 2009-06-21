@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "src/svnqt/client.hpp"
-#include "src/svnqt/tests/testconfig.h"
+#include "svnqt/tests/testconfig.h"
 #include "src/svnqt/status.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/client_parameter.hpp"

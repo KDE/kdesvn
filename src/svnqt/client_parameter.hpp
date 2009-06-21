@@ -168,14 +168,14 @@ namespace svn
         DiffParameter& tmpPath(const Path&path);
         DiffParameter& relativeTo(const Path&path);
         DiffParameter& depth(Depth _depth);
-        svn::DiffParameter& changeList(const svn::StringArray&changeList);
-        svn::DiffParameter& extra(const svn::StringArray&_extra);
-        svn::DiffParameter& ignoreAncestry(bool value);
-        svn::DiffParameter& ignoreContentType(bool value);
-        svn::DiffParameter& peg(const svn::Revision&_rev);
-        svn::DiffParameter& rev1(const svn::Revision&_rev);
-        svn::DiffParameter& rev2(const svn::Revision&_rev);
-        svn::DiffParameter& noDiffDeleted(bool value);
+        DiffParameter& changeList(const svn::StringArray&changeList);
+        DiffParameter& extra(const svn::StringArray&_extra);
+        DiffParameter& ignoreAncestry(bool value);
+        DiffParameter& ignoreContentType(bool value);
+        DiffParameter& peg(const svn::Revision&_rev);
+        DiffParameter& rev1(const svn::Revision&_rev);
+        DiffParameter& rev2(const svn::Revision&_rev);
+        DiffParameter& noDiffDeleted(bool value);
     };
 
     struct StatusParameterData;
@@ -266,6 +266,92 @@ namespace svn
         LogParameter&includeMergedRevisions(bool value);
         const StringArray& revisionProperties()const;
         LogParameter&revisionProperties(const StringArray&props);
+    };
+
+    struct PropertiesParameterData;
+
+    class PropertiesParameter
+    {
+    private:
+        SharedPointer<PropertiesParameterData> _data;
+    public:
+        PropertiesParameter();
+        ~PropertiesParameter();
+
+        PropertiesParameter& propertyName(const QString&);
+        const QString&propertyName()const;
+
+        PropertiesParameter& propertyValue(const QString&);
+        const QString&propertyValue()const;
+
+        //! Old value to check against
+        /*!
+         * used for revpropset only
+         */
+        PropertiesParameter& propertyOriginalValue(const QString&);
+        const QString&propertyOriginalValue()const;
+
+        //! path or url
+        PropertiesParameter& path(const Path&);
+        const Path& path()const;
+
+        //! set on revision
+        /*! for revpropset it should be a valid Revision, for propset it should be INVALID
+         * if url is a local path otherwise it must be a valid revision.
+         */
+        PropertiesParameter& revision(const Revision&);
+        //! set/get on revision
+        /*! for revpropset it should be a valid Revision, for propset it should be INVALID
+         * if url is a local path otherwise it must be a valid revision.
+         */
+        const Revision& revision()const;
+
+        //! allow newlines in author property
+        /*!
+         * used for revprop_set only
+         */
+        PropertiesParameter& force(bool);
+        //! allow newlines in author property
+        /*!
+         * used for revprop_set only
+         */
+        bool force()const;
+
+        //! set depth of operation
+        /*!
+         * used for local propset only
+         */
+        PropertiesParameter&depth(Depth depth);
+        //! depth of operation
+        /*!
+         * used for local propset only
+         */
+        Depth depth()const;
+
+        //! set skip check
+        /*!
+         * used for local propset only
+         */
+        PropertiesParameter&skipCheck(bool value);
+        //! skip check
+        /*!
+         * used for local propset only
+         */
+        bool skipCheck()const;
+
+        //! set filter list. if empty no filtering is done
+        /*!
+         * used for local propset only
+         */
+        PropertiesParameter&changeList(const StringArray&_list);
+        //! filter list. if empty no filtering is done
+        /*!
+         * used for local propset only
+         */
+        const StringArray&changeList()const;
+
+        PropertiesParameter&revisionProperties(const PropertiesMap&props);
+        const PropertiesMap&revisionProperties()const;
     };
 }
 

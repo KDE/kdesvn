@@ -648,19 +648,12 @@ namespace svn
      * set revision property in @a path no matter whether local or
      * repository
      *
-     * @param propName
-     * @param propValue
-     * @param path
-     * @param revision
-     * @param force
+     * @param params parameter to use
      * @return Revision
+     * @sa PropertiesParameter
      */
     virtual QLONG
-    revpropset(const QString& propName,
-               const QString& propValue,
-               const Path &path,
-               const Revision &revision,
-               bool force=false);
+    revpropset(const PropertiesParameter&params);
 
     /**
      * delete revision property in @a path no matter whether local or
@@ -675,8 +668,7 @@ namespace svn
     virtual QLONG
     revpropdel(const QString& propName,
                const Path &path,
-               const Revision &revision,
-               bool force=false);
+               const Revision &revision);
 
   /**
    * lock files in repository or working copy

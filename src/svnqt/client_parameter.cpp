@@ -592,4 +592,121 @@ namespace svn
         SETIT(_revisionProperties,props)
     }
 
+    struct PropertiesParameterData
+    {
+        PropertiesParameterData()
+            :_name(QString()),_value(QString()),_originalValue(QString()),
+            _path(),_revision(Revision::UNDEFINED),_force(false),_depth(DepthEmpty),_skipCheck(false),_changeList(),_revProperties()
+        {}
+        QString _name;
+        QString _value;
+        QString _originalValue;
+        Path _path;
+        Revision _revision;
+        bool _force;
+        Depth _depth;
+        bool _skipCheck;
+        StringArray _changeList;
+        PropertiesMap _revProperties;
+    };
+
+    PropertiesParameter::PropertiesParameter()
+    {
+        _data = new PropertiesParameterData();
+    }
+    PropertiesParameter::~PropertiesParameter()
+    {
+        _data = 0;
+    }
+
+    PropertiesParameter& PropertiesParameter::propertyName(const QString&_name)
+    {
+        SETIT(_name,_name)
+    }
+    const QString&PropertiesParameter::propertyName()const
+    {
+        return _data->_name;
+    }
+
+    PropertiesParameter& PropertiesParameter::propertyValue(const QString&value)
+    {
+        SETIT(_value,value);
+    }
+    const QString&PropertiesParameter::propertyValue()const
+    {
+        return _data->_value;
+    }
+
+    PropertiesParameter& PropertiesParameter::propertyOriginalValue(const QString&value)
+    {
+        SETIT(_originalValue,value);
+    }
+    const QString&PropertiesParameter::propertyOriginalValue()const
+    {
+        return _data->_originalValue;
+    }
+
+    PropertiesParameter& PropertiesParameter::path(const Path&_path)
+    {
+        SETIT(_path,_path);
+    }
+    const Path& PropertiesParameter::path()const
+    {
+        return _data->_path;
+    }
+
+    PropertiesParameter& PropertiesParameter::revision(const Revision&_rev)
+    {
+        SETIT(_revision,_rev);
+    }
+    const Revision& PropertiesParameter::revision()const
+    {
+        return _data->_revision;
+    }
+
+    PropertiesParameter& PropertiesParameter::force(bool force)
+    {
+        SETIT(_force,force);
+    }
+    bool PropertiesParameter::force()const
+    {
+        return _data->_force;
+    }
+
+    PropertiesParameter&PropertiesParameter::depth(Depth depth)
+    {
+        SETIT(_depth,depth);
+    }
+    Depth PropertiesParameter::depth()const
+    {
+        return _data->_depth;
+    }
+
+    PropertiesParameter&PropertiesParameter::skipCheck(bool value)
+    {
+        SETIT(_skipCheck,value);
+    }
+    bool PropertiesParameter::skipCheck()const
+    {
+        return _data->_skipCheck;
+    }
+
+    PropertiesParameter&PropertiesParameter::changeList(const StringArray&_list)
+    {
+        SETIT(_changeList,_list);
+    }
+    const StringArray&PropertiesParameter::changeList()const
+    {
+        return _data->_changeList;
+    }
+
+    PropertiesParameter&PropertiesParameter::revisionProperties(const PropertiesMap&props)
+    {
+        SETIT(_revProperties,props);
+    }
+    const PropertiesMap&PropertiesParameter::revisionProperties()const
+    {
+        return _data->_revProperties;
+    }
+
 }

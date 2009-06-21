@@ -42,6 +42,7 @@
 #include "svnqt/pool.hpp"
 #include "svnqt/revision.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/client_parameter.hpp"
 
 #include "svnqt/helper.hpp"
 
@@ -374,67 +375,76 @@ namespace svn
    * @return PropertiesList
    */
   QLONG
-  Client_impl::revpropset(const QString& propName,
-                     const QString& propValue,
-                     const Path &path,
-                     const Revision &revision,
-                     bool force)
+  Client_impl::revpropset(const PropertiesParameter&param)
   {
     Pool pool;
 
     const svn_string_t * propval
-      = svn_string_create (
-                            propValue.TOUTF8(),
-                            pool);
+      = param.propertyValue().isNull()?0:svn_string_create (param.propertyValue().TOUTF8(),pool);
 
     svn_revnum_t revnum;
-    svn_error_t * error =
-      svn_client_revprop_set (
-                              propName.TOUTF8(),
-                              propval,
-                              path.cstr (),
-                              revision.revision (),
-                              &revnum,
-                              force,
-                              *m_context,
-                              pool);
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+    const svn_string_t * oldpropval = param.propertyOriginalValue().isNull()?0:svn_string_create (param.propertyOriginalValue().TOUTF8(),pool);
+    svn_error_t * error = svn_client_revprop_set2 (
+                            param.propertyName().TOUTF8(),
+                            propval,
+                            oldpropval,
+                            param.path().cstr (),
+                            param.revision().revision (),
+                            &revnum,
+                            param.force(),
+                            *m_context,
+                            pool);
+#else
+    svn_error_t * error = svn_client_revprop_set (
+                            param.propertyName().TOUTF8(),
+                            propval,
+                            param.path().cstr (),
+                            param.revision().revision (),
+                            &revnum,
+                            param.force(),
+                            *m_context,
+                            pool);
+#endif
     if(error != NULL)
       throw ClientException (error);
 
     return revnum;
   }
 
-  /**
-   * delete property in @a path no matter whether local or
-   * repository
-   *
-   * @param path
-   * @param revision
-   * @param propName
-   * @param propValue
-   * @param recurse
-   * @param revprop
-   * @return PropertiesList
-   */
   QLONG
   Client_impl::revpropdel(const QString& propName,
                   const Path &path,
-                  const Revision &revision,
-                  bool force)
+                  const Revision &revision)
   {
     Pool pool;
 
     svn_revnum_t revnum;
     svn_error_t * error =
-              svn_client_revprop_set (
-                                      propName.TOUTF8(),
-                                      0, // value = NULL
-                                      path.cstr (),
-                                      revision.revision (),
-                                      &revnum,
-                                      force,
-                                      *m_context,
-                                      pool);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        svn_client_revprop_set2 (
+                                propName.TOUTF8(),
+                                0, // value = NULL
+                                0,
+                                path.cstr (),
+                                revision.revision (),
+                                &revnum,
+                                false,
+                                *m_context,
+                                pool);
+
+#else
+        svn_client_revprop_set (
+                                propName.TOUTF8(),
+                                0, // value = NULL
+                                path.cstr (),
+                                revision.revision (),
+                                &revnum,
+                                false,
+                                *m_context,
+                                pool);
+#endif
     if(error != NULL)
       throw ClientException (error);
 

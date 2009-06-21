@@ -607,42 +607,20 @@ namespace svn
      * set property in @a path no matter whether local or
      * repository
      *
-     * @param path
-     * @param revision
-     * @param propName
-     * @param propValue
-     * @param recurse
-     * @param skip_checks if true skip validity checks
-     * @return PropertiesList
+     * @param params svn::PropertiesParamter holding required values.
+     * Following is used:<br>
+     * <ul>
+     * <li> svn::PropertiesParameter::propertyName()
+     * <li> svn::PropertiesParameter::propertyValue()
+     * <li> svn::PropertiesParameter::depth()
+     * <li> svn::PropertiesParameter::skipCheck()
+     * <li> svn::PropertiesParameter::revision()
+     * <li> svn::PropertiesParameter::changeList()
+     * <li> svn::PropertiesParameter::revisionProperties()
+     * </ul>
      */
     virtual void
-    propset(const QString& propName,
-            const QString& propValue,
-            const Path &path,
-            Depth depth=DepthEmpty,
-            bool skip_checks=false,
-            const Revision&base_revision=Revision::UNDEFINED,
-            const StringArray&changelists=StringArray(),
-            const PropertiesMap&revProps=PropertiesMap()
-           ) = 0;
-
-    /**
-     * delete property in @a path no matter whether local or
-     * repository
-     *
-     * @param propName
-     * @param path
-     * @param revision
-     * @param recurse
-     */
-    virtual void
-    propdel(const QString& propName,
-            const Path &path,
-            Depth depth=DepthEmpty,
-            bool skip_check=false,
-            const Revision&base_revision=Revision::UNDEFINED,
-            const StringArray&changelists=StringArray())=0;
-
+    propset(const PropertiesParameter&params)=0;
 
     /**
      * lists revision properties in @a path no matter whether local or

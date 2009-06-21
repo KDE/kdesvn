@@ -214,63 +214,40 @@ namespace svn
   }
 
   void
-  Client_impl::propset(const QString& propName,
-                  const QString& propValue,
-                  const Path &path,
-                  Depth depth,
-                  bool skip_checks,
-                  const Revision&base_revision,
-                  const StringArray&changelists,
-                  const PropertiesMap&revProps
-                      )
+  Client_impl::propset(const PropertiesParameter&params)
     {
-      Pool pool;
-      const svn_string_t * propval;
+        Pool pool;
+        const svn_string_t * propval;
 
-      if (propValue.isNull()) {
-          propval=0;
-      } else {
-          propval = svn_string_create (propValue.TOUTF8(),pool);
-      }
+        if (params.propertyValue().isNull()) {
+            propval=0;
+        } else {
+            propval = svn_string_create (params.propertyValue().TOUTF8(),pool);
+        }
 
-      svn_error_t * error = 0;
+        svn_error_t * error = 0;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-      svn_commit_info_t * commit_info;
-      svn_client_propset3(
+        svn_commit_info_t * commit_info;
+        svn_client_propset3(
             &commit_info,
-            propName.TOUTF8(),
-            propval, path.cstr(),
-            internal::DepthToSvn(depth),skip_checks,
-                                 base_revision,
-                                 changelists.array(pool),
-                                 map2hash(revProps,pool),
-                                 *m_context, pool);
-
+            params.propertyName().TOUTF8(),
+            propval, params.path().cstr(),
+            internal::DepthToSvn(params.depth()),params.skipCheck(),
+            params.revision(),
+            params.changeList().array(pool),
+            map2hash(params.revisionProperties(),pool),
+            *m_context, pool);
 #else
-      Q_UNUSED(changelists);
-      Q_UNUSED(base_revision);
-      Q_UNUSED(revProps);
-      bool recurse = depth==DepthInfinity;
+        bool recurse = params.depth()==DepthInfinity;
         svn_client_propset2(
-                            propName.TOUTF8(),
-                            propval, path.cstr(),
-                            recurse,skip_checks, *m_context, pool);
+            params.propertyName().TOUTF8(),
+            propval, params.path().cstr(),
+                            recurse,params.skipCheck(), *m_context, pool);
 #endif
       if(error != NULL) {
           throw ClientException (error);
       }
     }
-
-  void
-  Client_impl::propdel(const QString& propName,
-                       const Path &path,
-                       Depth depth,
-                       bool skip_checks,
-                       const Revision&base_revision,
-                       const StringArray&changelists)
-  {
-      propset(propName,QString(),path,depth,skip_checks,base_revision,changelists);
-  }
 
 //--------------------------------------------------------------------------------
 //
@@ -362,18 +339,6 @@ namespace svn
     return QPair<QLONG,QString>( revnum, QString::FROMUTF8(propval->data) );
   }
 
-  /**
-   * set property in @a path no matter whether local or
-   * repository
-   *
-   * @param path
-   * @param revision
-   * @param propName
-   * @param propValue
-   * @param recurse
-   * @param revprop
-   * @return PropertiesList
-   */
   QLONG
   Client_impl::revpropset(const PropertiesParameter&param)
   {

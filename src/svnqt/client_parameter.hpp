@@ -270,7 +270,7 @@ namespace svn
 
     struct PropertiesParameterData;
 
-    class PropertiesParameter
+    class SVNQT_EXPORT PropertiesParameter
     {
     private:
         SharedPointer<PropertiesParameterData> _data;

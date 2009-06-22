@@ -144,6 +144,11 @@ QModelIndex SvnItemModel::firstRootIndex()
     return m_Data->indexForNode(firstRootChild());
 }
 
+SvnItemModelNode* SvnItemModel::nodeForIndex(const QModelIndex&index)
+{
+    return m_Data->nodeForIndex(index);
+}
+
 void SvnItemModel::setRootNodeStat(const svn::StatusPtr&stat)
 {
     m_Data->m_rootNode->setStat(stat);

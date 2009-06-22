@@ -48,7 +48,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QTreeView" name="m_TreeView">
+     <widget class="SvnTreeView" name="m_TreeView">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>2</horstretch>
@@ -66,6 +66,9 @@
       </property>
       <property name="selectionMode">
        <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectItems</enum>
       </property>
       <property name="verticalScrollMode">
        <enum>QAbstractItemView::ScrollPerItem</enum>
@@ -93,6 +96,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SvnTreeView</class>
+   <extends>QTreeView</extends>
+   <header>svntreeview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

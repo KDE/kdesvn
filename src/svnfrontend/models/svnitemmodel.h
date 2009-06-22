@@ -82,6 +82,7 @@ public:
      * When opened a repository it is just an entry.
      */
     SvnItemModelNode* firstRootChild();
+    SvnItemModelNode* nodeForIndex(const QModelIndex&index);
     QModelIndex firstRootIndex();
     void setRootNodeStat(const svn::StatusPtr&);
 

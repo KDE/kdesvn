@@ -73,6 +73,8 @@ SET(svnfrontendsrc
     fillcachethread.h
     maintreewidget.h
     maintreewidget.cpp
+    svntreeview.cpp
+    svntreeview.h
     )
 
 SET(svnfrontendui

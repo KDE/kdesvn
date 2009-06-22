@@ -101,8 +101,8 @@ namespace svn
     static const char * ADM_DIR_NAME;
 
   private:
-    Wc(){};
-    Wc(const Wc&){};
+    Wc();
+    Wc(const Wc&);
     ContextP _context;
   };
 }

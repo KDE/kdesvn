@@ -44,7 +44,7 @@
 namespace svn
 {
 
-  Client_impl::Client_impl (ContextP context)
+  Client_impl::Client_impl (const ContextP&context)
 	: Client()
   {
     setContext (context);
@@ -61,7 +61,7 @@ namespace svn
   }
 
   void
-  Client_impl::setContext (ContextP context)
+  Client_impl::setContext (const ContextP&context)
   {
     m_context = context;
   }

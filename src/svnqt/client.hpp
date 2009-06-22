@@ -97,7 +97,7 @@ namespace svn
      * @param context new context to use
      */
     virtual void
-    setContext (ContextP context) = 0;
+    setContext (const ContextP&context) = 0;
 
     /**
      * get a real instance. Result must cleaned with delete.

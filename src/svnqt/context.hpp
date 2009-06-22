@@ -94,12 +94,12 @@ namespace svn
     /**
      * operator to get svn_client_ctx object
      */
-    operator svn_client_ctx_t * ();
+    operator svn_client_ctx_t * ()const;
 
     /**
      * return the svn_client_ctx object
      */
-    svn_client_ctx_t * ctx ();
+    svn_client_ctx_t * ctx ()const;
 
     /**
      * this will be called at the beginning of an action.
@@ -175,8 +175,6 @@ namespace svn
      */
     Context & operator = (const Context &);
   };
-
-  typedef svn::smart_pointer<svn::Context> ContextP;
 }
 
 #endif

@@ -1,4 +1,4 @@
-/* 
+/*
  * Port for usage with qt-framework and development for kdesvn
  * (C) 2005-2007 by Rajko Albrecht (ral@alwins-world.de)
  * http://kdesvn.alwins-world.de
@@ -40,6 +40,7 @@
 #include "svnqt/exception.hpp"
 #include "svnqt/revision.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "svnqt/svnqttypes.hpp"
 
 #include <qstring.h>
 
@@ -51,6 +52,12 @@ namespace svn
   class SVNQT_EXPORT Wc
   {
   public:
+
+    /** initialize
+     * @param context the context to use for cancel operations, if 0 then no cancel operation possible
+     */
+    Wc(const ContextP&context);
+    ~Wc();
     /**
      * check if Path is a valid working directory
      *
@@ -68,23 +75,35 @@ namespace svn
      * @param uuid
      * @param url corresponding url
      * @param revision expected working copy revision
+     * @param repository if not QString::null prefix of url
+     * @param depth definite depth never DepthUnknown
+     * @sa svn_wc_ensure_adm3 for more details
      */
     static void
     ensureAdm (const QString& dir, const QString& uuid,
-               const QString& url, const Revision & revision) throw (ClientException);
+               const QString& url, const Revision & revision,
+               const QString&repository, Depth depth) throw (ClientException);
 
     /**
      * retrieve the url of a given working copy item
      * @param path the working copy item to check
      * @return the repository url of @a path
      */
-    static QString getUrl(const QString&path) throw (ClientException);
-    static QString getRepos(const QString&path) throw (ClientException);
+    QString getUrl(const QString&path)const throw (ClientException);
+    QString getRepos(const QString&path)const throw (ClientException);
+    Entry getEntry(const QString &path)const throw ( ClientException );
+
+    /**
+     * @return returns the context (may 0)
+     */
+    const ContextP getContext () const;
+
     static const char * ADM_DIR_NAME;
 
   private:
-    static const svn_wc_entry_t *getEntry( const QString &path ) throw ( ClientException );
-
+    Wc(){};
+    Wc(const Wc&){};
+    ContextP _context;
   };
 }
 

@@ -34,6 +34,7 @@ namespace svn
     class AnnotateLine;
     class Context;
     class DirEntry;
+    class Entry;
     class InfoEntry;
     class LogEntry;
     class Revision;
@@ -49,6 +50,7 @@ namespace svn
     class PropertiesParameter;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
+    typedef smart_pointer<svn::Context> ContextP;
 
     typedef SharedPointer<DirEntry> DirEntryPtr;
     typedef QLIST<DirEntryPtr> DirEntries;

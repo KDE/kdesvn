@@ -75,13 +75,13 @@ namespace svn
     m->setLogin (username, password);
   }
 
-  Context::operator svn_client_ctx_t * ()
+  Context::operator svn_client_ctx_t * ()const
   {
     return m->ctx();
   }
 
   svn_client_ctx_t *
-  Context::ctx ()
+  Context::ctx ()const
   {
     return m->ctx();
   }

@@ -61,7 +61,7 @@ namespace svn
     /**
      * Initializes the primary memory pool.
      */
-    Client_impl(ContextP context);
+    Client_impl(const ContextP&context);
 
     virtual ~Client_impl();
 
@@ -79,7 +79,7 @@ namespace svn
      * @param context new context to use
      */
     virtual void
-    setContext (ContextP context);
+    setContext (const ContextP&context);
 
 
     /**

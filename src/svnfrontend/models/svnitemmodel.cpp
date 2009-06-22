@@ -124,7 +124,6 @@ SvnItemModel::SvnItemModel(MainTreeWidget*display,QObject*parent)
 {
     m_Data->m_SvnActions = new SvnActions(display);
     m_Data->m_rootNode=new SvnItemModelNodeDir(m_Data->m_SvnActions,display);
-    setSupportedDragActions(Qt::CopyAction|Qt::MoveAction);
 }
 
 SvnItemModel::~SvnItemModel()

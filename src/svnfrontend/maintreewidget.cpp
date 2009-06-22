@@ -1591,7 +1591,7 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
     if (action==Qt::MoveAction) {
         m_Data->m_Model->svnWrapper()->makeMove(lst,target,false);
     } else if (action==Qt::CopyAction) {
-        m_Data->m_Model->svnWrapper()->makeCopy(lst,target,svn::Revision::HEAD);
+        m_Data->m_Model->svnWrapper()->makeCopy(lst,target,(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision()));
     }
     refreshCurrentTree();
 }

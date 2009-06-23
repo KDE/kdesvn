@@ -145,7 +145,14 @@ void SvnTreeView::doDrop(const KUrl::List&list,const QModelIndex&parent,bool int
 
     QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
     SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
-    itemModel->dropUrls(list,action,parent.row(),parent.column(),parent,intern);
+    QModelIndex _p;
+    if (!parent.isValid() && (_p = rootIndex()).isValid() ) {
+        QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
+        _p = proxyModel->mapToSource(_p);
+    } else {
+        _p = parent;
+    }
+    itemModel->dropUrls(list,action,parent.row(),parent.column(),_p,intern);
 }
 
 #include "svntreeview.moc"

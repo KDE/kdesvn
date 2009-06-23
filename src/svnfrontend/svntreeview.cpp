@@ -45,7 +45,7 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
     static bool isDrag = false;
     if (isDrag) return;
     isDrag = true;
-    QModelIndexList indexes = selectionModel()->selectedIndexes();
+    QModelIndexList indexes = selectionModel()->selectedRows();
     if (indexes.count()>0) {
         QMimeData * data = model()->mimeData(indexes);
         if (data == 0) {

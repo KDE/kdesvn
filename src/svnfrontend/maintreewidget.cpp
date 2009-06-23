@@ -1621,6 +1621,9 @@ void MainTreeWidget::slotUrlDropped(const KUrl::List&_lst,Qt::DropAction action,
     QString path = _lst[0].path();
     QFileInfo fi(path);
     if  (!isWorkingCopy()) {
+        if (!fi.isDir()) {
+            target+= '/'+_lst[0].fileName();
+        }
         slotImportIntoDir(_lst[0],target,fi.isDir());
     } else {
         WidgetBlockStack(this);

@@ -479,27 +479,17 @@ QStringList SvnItemModel::mimeTypes( ) const
                         << QLatin1String( "application/x-kde-urilist" );
 }
 
-bool SvnItemModel::dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column,const QModelIndex & parent)
+bool SvnItemModel::dropUrls(const KUrl::List& data, Qt::DropAction action, int row, int column,const QModelIndex & parent,bool intern)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);
-    if (!data->hasFormat(QLatin1String("text/uri-list")) &&
-        !data->hasFormat(QLatin1String( "application/x-kde-urilist" )) ) {
-        return false;
-    }
     if (action==Qt::IgnoreAction) {
         return true;
     }
     if (action==Qt::LinkAction) {
         return false;
     }
-    bool intern=false;
-    KUrl::MetaDataMap metaMap;
-    KUrl::List lst = KUrl::List::fromMimeData(data,&metaMap);
-    if (metaMap.find("kdesvn-source")!=metaMap.end()) {
-        intern=true;
-    }
-    emit urlDropped(lst,action,parent,intern);
+    emit urlDropped(data,action,parent,intern);
     return true;
 }
 

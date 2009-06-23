@@ -20,6 +20,7 @@
 #ifndef SVNTREEVIEW_H
 #define SVNTREEVIEW_H
 
+#include <KUrl>
 #include <QTreeView>
 #include "src/svnqt/shared_pointer.hpp"
 
@@ -34,6 +35,10 @@ public:
 
 protected:
     virtual void startDrag(Qt::DropActions supportedActions);
+    virtual void dropEvent(QDropEvent*event);
+
+protected Q_SLOTS:
+    virtual void doDrop(const KUrl::List&,const QModelIndex&,bool,Qt::DropAction,Qt::KeyboardModifiers);
 };
 
 #endif

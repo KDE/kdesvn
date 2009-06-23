@@ -24,10 +24,16 @@
 
 #include <QDrag>
 #include <QAbstractProxyModel>
+#include <QDropEvent>
+#include <QApplication>
+#include <QAction>
+#include <QMenu>
 
 #include <KIcon>
 #include <KIconLoader>
 #include <KDebug>
+#include <KUrl>
+#include <KLocale>
 
 SvnTreeView::SvnTreeView(QWidget * parent)
     :QTreeView(parent)
@@ -62,7 +68,6 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
             SvnItemModelNode*item = itemModel->nodeForIndex(index);
             pixmap = item->getPixmap(KIconLoader::SizeMedium,false);
         } else {
-            kDebug()<<"Multi pix"<<endl;
             pixmap = KIcon("document-multiple").pixmap(KIconLoader::SizeMedium,KIconLoader::SizeMedium);
         }
         drag->setPixmap(pixmap);
@@ -70,6 +75,77 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
         drag->exec(supportedActions, Qt::IgnoreAction);
     }
     isDrag = false;
+}
+
+void SvnTreeView::dropEvent(QDropEvent*event)
+{
+    if (!KUrl::List::canDecode(event->mimeData())) {
+        return;
+    }
+
+    QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
+
+    const QModelIndex index = indexAt(event->pos());
+    QModelIndex index2;
+    QMap<QString, QString> metaMap;
+    if (index.isValid()) {
+         index2 = proxyModel->mapToSource(index);
+    }
+
+    Qt::DropAction action = event->dropAction();
+    KUrl::List list = KUrl::List::fromMimeData(event->mimeData(),&metaMap);
+    bool intern = false;
+    if (metaMap.find("kdesvn-source")!=metaMap.end()) {
+        intern=true;
+    }
+    Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
+
+
+    QMetaObject::invokeMethod(this,"doDrop",
+        Q_ARG(KUrl::List,list),
+        Q_ARG(QModelIndex,index2),
+        Q_ARG(bool,intern),
+        Q_ARG(Qt::DropAction,action),
+        Q_ARG(Qt::KeyboardModifiers,modifiers)
+        );
+    event->acceptProposedAction();
+}
+
+void SvnTreeView::doDrop(const KUrl::List&list,const QModelIndex&parent,bool intern,Qt::DropAction action,Qt::KeyboardModifiers modifiers)
+{
+    if (intern && ((modifiers & Qt::ControlModifier) == 0) &&
+         ((modifiers & Qt::ShiftModifier) == 0) ) {
+
+        QMenu popup;
+        QString seq = QKeySequence( Qt::ShiftModifier ).toString();
+        seq.chop(1); // chop superfluous '+'
+        QAction* popupMoveAction = new QAction(i18n( "&Move Here" ) + '\t' + seq, this);
+        popupMoveAction->setIcon(KIcon("go-jump"));
+        seq = QKeySequence( Qt::ControlModifier ).toString();
+        seq.chop(1);
+        QAction* popupCopyAction = new QAction(i18n( "&Copy Here" ) + '\t' + seq, this);
+        popupCopyAction->setIcon(KIcon("edit-copy"));
+        QAction* popupCancelAction = new QAction(i18n( "C&ancel" ) + '\t' + QKeySequence( Qt::Key_Escape ).toString(), this);
+        popupCancelAction->setIcon(KIcon("process-stop"));
+
+        popup.addAction(popupMoveAction);
+        popup.addAction(popupCopyAction);
+        popup.addSeparator();
+        popup.addAction(popupCancelAction);
+        QAction* result = popup.exec(QCursor::pos());
+
+        if(result == popupCopyAction) {
+            action = Qt::CopyAction;
+        } else if(result == popupMoveAction) {
+            action = Qt::MoveAction;
+        } else if(result == popupCancelAction || !result) {
+            return;
+        }
+    }
+
+    QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
+    SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
+    itemModel->dropUrls(list,action,parent.row(),parent.column(),parent,intern);
 }
 
 #include "svntreeview.moc"

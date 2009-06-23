@@ -92,7 +92,8 @@ public:
     virtual Qt::DropActions supportedDropActions()const;
     virtual QStringList mimeTypes()const;
     QMimeData* mimeData(const QModelIndexList & indexes )const;
-    virtual bool dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column,const QModelIndex & parent);
+
+    virtual bool dropUrls(const KUrl::List& data, Qt::DropAction action, int row, int column,const QModelIndex & parent,bool intern);
 
     bool filterIndex(const QModelIndex&,int,svnmodel::ItemTypeFlag)const;
 

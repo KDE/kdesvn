@@ -539,11 +539,7 @@ CommitModelNodePtr Commitmsg_impl::currentCommitItem(int column)
 
 void Commitmsg_impl::hideKeepsLock(bool how)
 {
-    if (how) {
-        m_keepLocksButton->show();
-    } else {
-        m_keepLocksButton->hide();
-    }
+    m_keepLocksButton->setVisible(!how);
 }
 
 void Commitmsg_impl::hideButtons(bool how)

@@ -38,7 +38,7 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent)
     createDirboxDir();
     addItemWidget(m_createDirBox);
     m_createDirBox->setChecked(true);
-    QHBoxLayout* tmpLayout = new QHBoxLayout(this);
+    QHBoxLayout* tmpLayout = new QHBoxLayout();
     m_noIgnore = new QCheckBox("",this);
     m_noIgnore->setText(i18n("No ignore"));
     m_noIgnore->setToolTip(i18n("If set, add files or directories that match ignore patterns."));

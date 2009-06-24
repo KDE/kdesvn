@@ -111,6 +111,10 @@ namespace svn
     enum Capability {
         CapabilityMergeinfo=0
     };
+
+    namespace repository {
+        class CreateRepoParameter;
+    }
 }
 
 #endif

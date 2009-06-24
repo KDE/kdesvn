@@ -31,6 +31,7 @@ SET(SOURCES
     repository.cpp
     repositorydata.cpp
     repositorylistener.cpp
+    repoparameter.cpp
     svnstream.cpp
     diff_data.cpp
     svnfilestream.cpp
@@ -72,6 +73,7 @@ SET(INST_HEADERS
     pool.hpp
     repository.hpp
     repositorylistener.hpp
+    repoparameter.cpp
     revision.hpp
     smart_pointer.hpp
     shared_pointer.hpp

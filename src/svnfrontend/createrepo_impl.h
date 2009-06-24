@@ -22,25 +22,30 @@
 
 #include "ui_createrepo_dlg.h"
 
+#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/shared_pointer.hpp"
+
+class CreateRepoData;
+
 class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg {
     Q_OBJECT
 public:
-    Createrepo_impl(bool enable_compat13,bool enable_compat14, QWidget *parent = 0, const char *name = 0);
-    QString targetDir();
-    QString fsType();
-    bool disableFsync();
-    bool keepLogs();
-    bool createMain();
-    bool compat13()const;
-    bool compat14()const;
+    Createrepo_impl(QWidget *parent = 0, const char *name = 0);
+    const svn::repository::CreateRepoParameter&parameter()const;
+    bool createMain()const;
+    QString targetDir()const;
 
-protected slots:
+protected Q_SLOTS:
     virtual void fsTypeChanged(int);
+    virtual void compatChanged15(bool);
     virtual void compatChanged14(bool);
     virtual void compatChanged13(bool);
 
+private:
+    svn::SharedPointer<CreateRepoData> _data;
+
 protected:
-    bool inChangeCompat;
+    void checkCompatList();
 };
 
 #endif

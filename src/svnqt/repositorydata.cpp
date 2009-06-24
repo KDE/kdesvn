@@ -22,6 +22,7 @@
 #include "svnqt/exception.hpp"
 #include "svnqt/repositorylistener.hpp"
 #include "svnqt/svnfilestream.hpp"
+#include "svnqt/repoparameter.hpp"
 
 #include <svn_fs.h>
 #include <svn_path.h>
@@ -126,14 +127,11 @@ svn_error_t * RepositoryData::Open(const QString&path)
 /*!
     \fn svn::RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false, bool _bdbautologremove = true, bool nosvn1diff=false)
  */
-svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync,
-                                          bool _bdbautologremove,
-                                          bool _pre_1_4_compat,
-                                          bool _pre_1_5_compat)
+svn_error_t * RepositoryData::CreateOpen(const CreateRepoParameter&params)
 {
     Close();
     const char* _type;
-    if (fstype.toLower()=="bdb") {
+    if (params.fstype().toLower()=="bdb") {
         _type="bdb";
     } else {
         _type="fsfs";
@@ -143,36 +141,37 @@ svn_error_t * RepositoryData::CreateOpen(const QString&path, const QString&fstyp
 
     apr_hash_set(fs_config, SVN_FS_CONFIG_BDB_TXN_NOSYNC,
                 APR_HASH_KEY_STRING,
-                (_bdbnosync ? "1" : "0"));
+                (params.bdbnosync() ? "1" : "0"));
     apr_hash_set(fs_config, SVN_FS_CONFIG_BDB_LOG_AUTOREMOVE,
                 APR_HASH_KEY_STRING,
-                (_bdbautologremove ? "1" : "0"));
+                (params.bdbautologremove() ? "1" : "0"));
     apr_hash_set(fs_config, SVN_FS_CONFIG_FS_TYPE,
                  APR_HASH_KEY_STRING,
                  _type);
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4) || SVN_VER_MAJOR>1)
-    if (_pre_1_4_compat) {
-        //qDebug("Pre 14");
+    if (params.pre14_compat()) {
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_4_COMPATIBLE,
             APR_HASH_KEY_STRING,"1");
     }
-#else
-    Q_UNUSED(_pre_1_4_compat);
 #endif
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || SVN_VER_MAJOR>1)
-    if (_pre_1_5_compat) {
-        //qDebug("Pre 15");
+    if (params.pre15_compat()) {
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE,
                      APR_HASH_KEY_STRING,"1");
     }
-#else
-    Q_UNUSED(_pre_1_5_compat);
 #endif
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
+    if (params.pre16_compat()) {
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_6_COMPATIBLE,
+                     APR_HASH_KEY_STRING,"1");
+    }
+#endif
+
     /// @todo config as extra parameter? Meanwhile default config only
     /// (see svn::ContextData)
     SVN_ERR(svn_config_get_config(&config, 0, m_Pool));
-    const char*repository_path = apr_pstrdup (m_Pool,path.TOUTF8());
+    const char*repository_path = apr_pstrdup (m_Pool,params.path().TOUTF8());
 
     repository_path = svn_path_internal_style(repository_path, m_Pool);
 

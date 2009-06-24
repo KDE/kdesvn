@@ -21,6 +21,7 @@
 #include "svnqt/tests/testconfig.h"
 #include "src/svnqt/repository.hpp"
 #include "src/svnqt/repositorylistener.hpp"
+#include "src/svnqt/repoparameter.hpp"
 #include "src/svnqt/targets.hpp"
 
 #include "testlistener.h"
@@ -51,7 +52,7 @@ int main(int,char**)
     Listener ls;
     svn::repository::Repository rp(&ls);
     try {
-        rp.CreateOpen(p,"fsfs");
+        rp.CreateOpen(svn::repository::CreateRepoParameter().path(p).fstype("fsfs"));
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;

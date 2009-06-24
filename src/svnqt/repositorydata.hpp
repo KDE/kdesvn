@@ -36,6 +36,7 @@ namespace repository {
 
 class Repository;
 class RepositoryListener;
+class CreateRepoParameter;
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
@@ -48,8 +49,7 @@ public:
     virtual ~RepositoryData();
     void Close();
     svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-        bool _bdbautologremove = true, bool _pre_1_4_compat=false, bool _pre_1_5_compat=false);
+    svn_error_t * CreateOpen(const CreateRepoParameter&params);
 
     void reposFsWarning(const QString&msg);
     svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);

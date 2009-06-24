@@ -37,6 +37,7 @@ namespace repository {
 
 class RepositoryData;
 class RepositoryListener;
+class CreateRepoParameter;
 
 //! wrapper class for subversions administrative repository functions
 /*!
@@ -68,14 +69,9 @@ public:
     /*!
      * Creates a new repository in path with type fstype. If create succeeded open and assigns with the object.
      * If a repository was opened before it will closed.
-     * \param path the path where to create the new repository. Must not be an url.
-     * \param fstype type of repository ("fsfs" or "bdb"). If wrong is set fsfs is the default.
-     * \param _bdbnosync disable fsync at transaction commit [Berkeley DB]
-     * \param _bdbautologremove enable automatic log file removal [Berkeley DB]
-     * \param _pre_1_4_compat Create repository compatibel to version earlier than 1.4 (only used with subversion 1.4)
+     * @param params All values needed
      */
-    void CreateOpen(const QString&path, const QString&fstype, bool _bdbnosync = false,
-                    bool _bdbautologremove = true, bool _pre_1_4_compat=false, bool _pre_1_5_compat=false) throw (ClientException);
+    void CreateOpen(const CreateRepoParameter&params) throw (ClientException);
     //! dump content of repository to a file
     /*!
         The repository must opend before. Progress message go trough the assigned svn::repository::RepositoryListener object.

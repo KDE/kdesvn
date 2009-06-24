@@ -2100,19 +2100,19 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
         m_DirTreeView->setStatusTip(i18n("Navigation"));
         break;
     }
-    if (_indexes.size()<1) {
+    if (_indexes.size()>=1) {
+        QModelIndex ind = _indexes[0];
+        QModelIndex _t =m_Data->srcDirInd(ind);
+        if (m_Data->m_Model->canFetchMore(_t)) {
+            WidgetBlockStack st(m_TreeView);
+            WidgetBlockStack st2(m_DirTreeView);
+            m_Data->m_Model->fetchMore(_t);
+        }
+        _t = m_Data->m_SortModel->mapFromSource(_t);
+        if (Kdesvnsettings::show_navigation_panel()) m_TreeView->setRootIndex(_t);
+    } else {
         m_TreeView->setRootIndex(QModelIndex());
-        return;
     }
-    QModelIndex ind = _indexes[0];
-    QModelIndex _t =m_Data->srcDirInd(ind);
-    if (m_Data->m_Model->canFetchMore(_t)) {
-        WidgetBlockStack st(m_TreeView);
-        WidgetBlockStack st2(m_DirTreeView);
-        m_Data->m_Model->fetchMore(_t);
-    }
-    _t = m_Data->m_SortModel->mapFromSource(_t);
-    if (Kdesvnsettings::show_navigation_panel()) m_TreeView->setRootIndex(_t);
     if (m_TreeView->selectionModel()->hasSelection()) {
         m_TreeView->selectionModel()->clearSelection();
     } else {

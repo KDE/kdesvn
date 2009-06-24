@@ -331,7 +331,13 @@ QWidget*MainTreeWidget::realWidget()
 
 int MainTreeWidget::selectionCount()const
 {
-    return m_TreeView->selectionModel()->selectedRows(0).count();
+    int count = m_TreeView->selectionModel()->selectedRows(0).count();
+    if (count == 0) {
+        if (m_TreeView->rootIndex().isValid()) {
+            return 1;
+        }
+    }
+    return count;
 }
 
 int MainTreeWidget::DirselectionCount()const
@@ -343,6 +349,10 @@ void MainTreeWidget::SelectionList(SvnItemList&target)const
 {
     QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
     if (_mi.count()<1) {
+        QModelIndex ind = m_TreeView->rootIndex();
+        if (ind.isValid()) {
+            target.push_back(m_Data->sourceNode(ind));
+        }
         return;
     }
     for (int i = 0; i<_mi.count();++i) {
@@ -365,6 +375,13 @@ QModelIndex MainTreeWidget::SelectedIndex()const
 {
     QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
     if (_mi.count()!=1) {
+        if (_mi.count()==0) {
+            QModelIndex ind = m_TreeView->rootIndex();
+            if (ind.isValid()) {
+                ind = m_Data->m_SortModel->mapToSource(ind);
+                return ind;
+            }
+        }
         return QModelIndex();
     }
     return m_Data->m_SortModel->mapToSource(_mi[0]);

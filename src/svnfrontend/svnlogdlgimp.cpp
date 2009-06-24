@@ -337,7 +337,6 @@ void SvnLogDlgImp::slotPrevFifty()
     if (now == 1) {
         return;
     }
-    kDebug()<<"Min: "<<now.revnum()<<endl;
     svn::Revision begin=now.revnum()-1;
     if (begin.revnum()<1) {
         begin = 1;

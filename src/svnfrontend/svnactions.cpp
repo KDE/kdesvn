@@ -1245,8 +1245,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     svn::DiffParameter _opts;
     _opts.path1(p1).path2(p2).tmpPath(tn).
         peg(peg).rev1(r1).rev2(r2).
-        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).
-        relativeTo(svn::Path((p1==p2?p1:""))).changeList(svn::StringArray());
+        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray());
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,parent,0,"Diffing",
@@ -1255,7 +1254,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
             ex = m_Data->m_Svnclient->diff_peg(_opts);
         } else {
-            ex = m_Data->m_Svnclient->diff(_opts);
+            ex = m_Data->m_Svnclient->diff(_opts.relativeTo(svn::Path(p1)));
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());

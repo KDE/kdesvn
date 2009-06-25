@@ -37,6 +37,8 @@
 #define SQLTYPE "QSQLITE"
 #define SQLMAIN "logmain-logcache"
 #define SQLMAINTABLE "logdb"
+#define SQLREPOSPARAMETER "repoparameter"
+#define SQLSTATUS QString("logstatus")
 
 namespace svn {
 namespace cache {
@@ -283,12 +285,73 @@ void LogCache::setupMainDb()
     if (!mainDB.isValid()) {
         qWarning("Failed to open main database.");
     } else {
+        QStringList list = mainDB.tables();
         QSqlQuery q(QString(), mainDB);
-        mainDB.transaction();
-        if (!q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY NOT NULL);")) {
+        if (list.indexOf(SQLSTATUS)==-1) {
+            mainDB.transaction();
+            if (q.exec("CREATE TABLE \""+SQLSTATUS+"\" (\"key\" TEXT PRIMARY KEY NOT NULL, \"value\" TEXT);")) {
+                q.exec("INSERT INTO \""+SQLSTATUS+"\" (key,value) values(\"version\",\"0\");");
+            }
+            mainDB.commit();
         }
-        mainDB.commit();
+        int version = databaseVersion();
+        if (version == 0) {
+            mainDB.transaction();
+            if (list.indexOf(SQLMAINTABLE)==-1) {
+                q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);");
+            }/* else {
+                q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"new\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);");
+                q.exec("insert into \""+QString(SQLMAINTABLE)+"new\" select \"reposroot\",\"id\" from \""+QString(SQLMAINTABLE)+"\");");
+                q.exec("drop table \""+QString(SQLMAINTABLE)+"\";");
+                q.exec("alter table \""+QString(SQLMAINTABLE)+"new\" to \""+QString(SQLMAINTABLE)+"\";");
+            }*/
+            ++version;
+        }
+        if (version == 1) {
+            mainDB.transaction();
+            if (!q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLREPOSPARAMETER)+"\" (\"id\" INTEGER PRIMARY KEY NOT NULL, \"parameter\" TEXT, \"value\" TEXT);")) {
+                qDebug() << "Error create: " << q.lastError().text() << "(" << q.lastQuery() << ")";
+            }
+            mainDB.commit();
+            ++version;
+        }
+        databaseVersion(version);
     }
+}
+
+void LogCache::databaseVersion(int newversion)
+{
+    QDataBase mainDB = m_CacheData->getMainDB();
+    if (!mainDB.isValid()) {
+        return;
+    }
+    static QString _qs("update \""+SQLSTATUS+"\" SET value = ? WHERE \"key\" = \"version\"");
+    QSqlQuery cur(QString(),mainDB);
+    cur.prepare(_qs);
+    cur.bindValue(0,newversion);
+    if (!cur.exec()) {
+        qDebug() << "Error set version: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+    }
+}
+
+int LogCache::databaseVersion()const
+{
+    QDataBase mainDB = m_CacheData->getMainDB();
+    if (!mainDB.isValid()) {
+        return -1;
+    }
+    static QString _qs("select value from \""+SQLSTATUS+"\" WHERE \"key\" = \"version\"");
+    QSqlQuery cur(QString(),mainDB);
+    cur.prepare(_qs);
+    if (!cur.exec()) {
+        qDebug() << "Error select version: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+        return -1;
+    }
+    if (cur.isActive() && cur.next()) {
+        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        return cur.value(0).toInt();
+    }
+    return -1;
 }
 
 }

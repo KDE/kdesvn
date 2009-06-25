@@ -24,6 +24,8 @@ namespace svn {
             static QString s_CACHE_FOLDER;
             void setupCachePath();
             void setupMainDb();
+            int databaseVersion()const;
+            void databaseVersion(int newversion);
 
         public:
             ///! should used for testing only!

@@ -50,14 +50,18 @@ public:
         m_DB=QSqlDatabase();
     }
     ~ThreadDBStore(){
+        m_DB.commit();
         m_DB.close();
         m_DB=QSqlDatabase();
-        QSqlDatabase::removeDatabase(key);
         QMap<QString,QString>::Iterator it;
         for (it=reposCacheNames.begin();it!=reposCacheNames.end();++it) {
-            QSqlDatabase::database(it.value()).close();
+            if (QSqlDatabase::database(it.value()).isOpen()) {
+                QSqlDatabase::database(it.value()).commit();
+                QSqlDatabase::database(it.value()).close();
+            }
             QSqlDatabase::removeDatabase(it.value());
         }
+        QSqlDatabase::removeDatabase(key);
     }
 
     QDataBase m_DB;

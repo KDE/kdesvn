@@ -679,9 +679,11 @@ namespace svn
     virtual bool RepoHasCapability(const Path&repository,Capability capability);
 
     struct sBaton {
+        sBaton():m_context(0),m_data(0),m_revstack(0),excludeList(0){}
         Context*m_context;
         void*m_data;
         void*m_revstack;
+        const StringArray*excludeList;
     };
 
     struct propBaton {

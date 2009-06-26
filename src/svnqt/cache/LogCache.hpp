@@ -1,13 +1,15 @@
 #ifndef _LOG_CACHE_HPP
 #define _LOG_CACHE_HPP
 
-#include <qstring.h>
-#include <qdir.h>
+#include <QString>
+#include <QDir>
+#include <QVariant>
 
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/shared_pointer.hpp"
 
 namespace svn {
+    class Path;
     namespace cache {
 
         class LogCacheData;
@@ -36,6 +38,14 @@ namespace svn {
             QStringList cachedRepositories()const;
 
             bool valid()const;
+
+            QVariant getRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&_def=QVariant())const;
+            //! set or delete parameter
+            /*!
+             * if value is invalid the parameter will removed from database
+             */
+            bool setRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&value);
+
         };
     }
 }

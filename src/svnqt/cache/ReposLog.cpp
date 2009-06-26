@@ -182,7 +182,7 @@ bool svn::cache::ReposLog::fillCache(const svn::Revision&_end)
 /*!
     \fn svn::cache::ReposLog::simpleLog(const svn::Revision&start,const svn::Revision&end,LogEntriesMap&target)
  */
-bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end,bool noNetwork)
+bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_start,const svn::Revision&_end,bool noNetwork,const QStringList&exclude)
 {
     if (!m_Client||m_ReposRoot.isEmpty()) {
         return false;
@@ -210,6 +210,9 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     static QString sCount("select count(*) from logentries where revision<=? and revision>=?");
     static QString sEntry("select revision,author,date,message from logentries where revision<=? and revision>=?");
     static QString sItems("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?");
+    for (int i = 0; i < exclude.size();++i) {
+        sItems+=" and changeditem not like ?";
+    }
 
     QSqlQuery bcount(QString(),m_Database);
     bcount.prepare(sCount);
@@ -245,6 +248,10 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     while(bcur.next()) {
         revision = bcur.value(0).toLongLong();
         cur.bindValue(0,revision);
+        for (int i = 0; i < exclude.size();++i) {
+            cur.bindValue(i+1,exclude[i]+"%");
+        }
+
         if (!cur.exec()) {
             //qDebug() << cur.lastError().text();
             throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text()
@@ -345,7 +352,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry&aEntry)
         m_Database.rollback();
         //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
         //qDebug() << _q.lastQuery();
-        throw svn::cache::DatabaseException(QString("Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
+        throw svn::cache::DatabaseException(QString("_insertLogEntry_0: Could not insert values: ")+_q.lastError().text(),_q.lastError().number());
     }
     _q.prepare(qPathes);
     svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();

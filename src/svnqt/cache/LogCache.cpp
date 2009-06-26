@@ -150,13 +150,11 @@ public:
         return db;
     }
 
-    QDataBase getReposDB(const svn::Path&reposroot) {
+    QString getReposId(const svn::Path&reposroot)
+    {
         if (!getMainDB().isValid()) {
-            return QDataBase();
+            return QString();
         }
-        bool checkDone = false;
-        // make sure path is correct eg. without traling slashes.
-        QString dbFile;
         QSqlQuery c(QString(),getMainDB());
         c.prepare(s_reposSelect);
         c.bindValue(0,reposroot.native());
@@ -164,8 +162,19 @@ public:
 
         // only the first one
         if ( c.next() ) {
-            dbFile = c.value(0).toString();
+            return c.value(0).toString();
         }
+        return QString();
+    }
+
+    QDataBase getReposDB(const svn::Path&reposroot)
+    {
+        if (!getMainDB().isValid()) {
+            return QDataBase();
+        }
+        bool checkDone = false;
+        QString dbFile = getReposId(reposroot);
+
         if (dbFile.isEmpty()) {
             dbFile = createReposDB(reposroot);
             if (dbFile.isEmpty()) {
@@ -309,7 +318,7 @@ void LogCache::setupMainDb()
         }
         if (version == 1) {
             mainDB.transaction();
-            if (!q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLREPOSPARAMETER)+"\" (\"id\" INTEGER PRIMARY KEY NOT NULL, \"parameter\" TEXT, \"value\" TEXT);")) {
+            if (!q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLREPOSPARAMETER)+"\" (\"id\" INTEGER NOT NULL, \"parameter\" TEXT, \"value\" TEXT, PRIMARY KEY(\"id\",\"parameter\"));")) {
                 qDebug() << "Error create: " << q.lastError().text() << "(" << q.lastQuery() << ")";
             }
             mainDB.commit();
@@ -354,6 +363,65 @@ int LogCache::databaseVersion()const
     return -1;
 }
 
+QVariant LogCache::getRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&_def)const
+{
+    QDataBase mainDB = m_CacheData->getMainDB();
+    if (!mainDB.isValid()) {
+        return _def;
+    }
+    static QString qs("select \"value\",\"repoparameter\".\"parameter\" as \"key\" from \""+QString(SQLREPOSPARAMETER)+"\" INNER JOIN \""+QString(SQLMAINTABLE)+"\" ON (\""+QString(SQLREPOSPARAMETER)+"\".id = \""+QString(SQLMAINTABLE)+"\".id and \""+QString(SQLMAINTABLE)+"\".reposroot = ?)  WHERE \"parameter\" = ?;");
+    QSqlQuery cur(QString(),mainDB);
+    cur.prepare(qs);
+    cur.bindValue(0,repository.native());
+    cur.bindValue(1,key);
+    if (!cur.exec()) {
+        qDebug() << "Error select version: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+        return _def;
+    }
+    if (cur.isActive() && cur.next()) {
+        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        return cur.value(0);
+    }
+    return _def;
+}
+
+bool LogCache::setRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&value)
+{
+    QDataBase mainDB = m_CacheData->getMainDB();
+    if (!mainDB.isValid()) {
+        return false;
+    }
+    QString id = m_CacheData->getReposId(repository);
+    if (id.isEmpty()) {
+        return false;
+    }
+    static QString qs("INSERT OR REPLACE INTO \""+QString(SQLREPOSPARAMETER)+"\" (\"id\",\"parameter\",\"value\") values (\"%1\",\"%2\",\"%3\");");
+    static QString dqs("DELETE FROM \""+QString(SQLREPOSPARAMETER)+"\" WHERE \"id\"=? and \"parameter\" = ?");
+    mainDB.transaction();
+    QSqlQuery cur(QString(),mainDB);
+    if (value.isValid()) {
+        QString _qs = qs.arg(id).arg(key).arg(value.toString());
+        if (!cur.exec(_qs)) {
+            qDebug() << "Error insert new value: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+            cur.finish();
+            mainDB.rollback();
+            return false;
+        }
+    } else {
+        cur.prepare(dqs);
+        cur.bindValue(0,id);
+        cur.bindValue(1,key);
+        if (!cur.exec()) {
+            qDebug() << "Error insert new value: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+            cur.finish();
+            mainDB.rollback();
+            return false;
+        }
+    }
+    mainDB.commit();
+    return true;
+}
+
 }
 }
 
@@ -395,7 +463,6 @@ QStringList svn::cache::LogCache::cachedRepositories()const
     QSqlQuery cur(QString(),mainDB);
     cur.prepare(s_q);
     if (!cur.exec()) {
-        //qDebug() << cur.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text());
         return _res;
     }

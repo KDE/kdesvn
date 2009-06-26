@@ -93,6 +93,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
     }
     svn::LogParameter params;
     params.targets(reposRoot).revisionRange(endr,startr).peg(startr).limit(0).discoverChangedPathes(true).strictNodeHistory(false);
+    QStringList ex;
     try {
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
@@ -102,7 +103,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
         } else {
             svn::cache::ReposLog rl(m_Client,reposRoot);
             if (rl.isValid()) {
-                rl.simpleLog(m_OldHistory,startr,endr,(!Kdesvnsettings::network_on()||!Kdesvnsettings::fill_cache_on_tree()));
+                rl.simpleLog(m_OldHistory,startr,endr,(!Kdesvnsettings::network_on()||!Kdesvnsettings::fill_cache_on_tree()),ex);
             } else if (Kdesvnsettings::network_on()) {
                 m_Client->log(params,m_OldHistory);
             } else {

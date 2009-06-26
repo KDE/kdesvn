@@ -66,7 +66,7 @@ int main(int argc,char**argv)
     list = db.tables();
     it = list.begin();
     while( it != list.end() ) {
-        std::cout << ( *it ).TOUTF8().data() << std::endl;
+        std::cout << "Table: "<<( *it ).TOUTF8().data() << std::endl;
         ++it;
     }
     svn::LogEntriesMap lm;
@@ -97,7 +97,8 @@ int main(int argc,char**argv)
     }
     QSqlQuery q("insert into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')",db);
     q.exec();
-    std::cerr << "\n" << q.lastError().text().TOUTF8().data()<<std::endl;
+    std::cerr << "\nSelf: \n" << q.lastError().text().TOUTF8().data()<<std::endl;
+
 
     db=QSqlDatabase();
     try {
@@ -112,5 +113,15 @@ int main(int argc,char**argv)
         std::cerr << "Exception: " << ce.msg().TOUTF8().data() <<std::endl;
     }
     std::cout<<"Count: "<<lm.count()<<std::endl;
+
+    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"nocheckupdate",QVariant(true));
+    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"bommel",QVariant(true));
+
+    QVariant v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"nocheckupdate");
+    std::cout << "Value: "<<v.toBool()<<std::endl;
+    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"bommel",QVariant());
+    v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"bommel");
+    v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path("http://www.gahi.de/projekte"),"bommel");
+    std::cout << "Value: "<<v.isValid()<<std::endl;
     return 0;
 }

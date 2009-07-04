@@ -443,11 +443,8 @@ bool kdesvn::queryExit()
     emit sigSavestate();
     if (m_part) {
         KConfigGroup cs(KGlobal::config(),"startup");
-#if KDE_IS_VERSION(3,1,3)
-        cs.writePathEntry("lastURL", m_part->url().prettyUrl());
-#else
         cs.writeEntry("lastURL", m_part->url().prettyUrl());
-#endif
+        cs.sync();
     }
     return KParts::MainWindow::queryExit();
 }
@@ -459,9 +456,9 @@ bool kdesvn::queryExit()
 void kdesvn::checkReload()
 {
     KConfigGroup cs(KGlobal::config(),"startup");
-//     if (!cs.readBoolEntry("load_last_on_start",false))
-    if (!cs.readEntry("load_last_on_start",false))
+    if (!cs.readEntry("load_last_on_start",false)) {
         return;
+    }
 
     QString url = cs.readPathEntry("lastURL", QString());
 
@@ -477,6 +474,7 @@ void kdesvn::slotLoadLast(bool how)
 {
     KConfigGroup cs(KGlobal::config(),"startup");
     cs.writeEntry("load_last_on_start",how);
+    cs.sync();
 }
 
 #include "kdesvn.moc"

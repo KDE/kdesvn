@@ -30,6 +30,7 @@
 
 #include "svnqt/cache/LogCache.hpp"
 #include "svnqt/cache/ReposLog.hpp"
+#include "svnqt/cache/ReposConfig.hpp"
 #include "svnqt/cache/test/testconfig.h"
 #include "svnqt/cache/DatabaseException.hpp"
 
@@ -114,14 +115,15 @@ int main(int argc,char**argv)
     }
     std::cout<<"Count: "<<lm.count()<<std::endl;
 
-    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"nocheckupdate",QVariant(true));
-    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"bommel",QVariant(true));
+    QStringList s; s << "a" << "b" << "c";
 
-    QVariant v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"nocheckupdate");
-    std::cout << "Value: "<<v.toBool()<<std::endl;
-    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"bommel",QVariant());
-    v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path("http://www.alwins-world.de/repos/kdesvn"),"bommel");
-    v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path("http://www.gahi.de/projekte"),"bommel");
-    std::cout << "Value: "<<v.isValid()<<std::endl;
+    svn::cache::ReposConfig::self()->setValue("http://www.alwins-world.de/repos/kdesvn","bommel",s);
+    QVariant v = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn","bommel",QStringList());
+    std::cout<<"Value: ";
+    list = v.toStringList();
+    foreach(const QString &entry, list) {
+        std::cout << entry.TOUTF8().data()<<",";
+    }
+    std::cout <<" Type: "<< v.typeName()<<std::endl;
     return 0;
 }

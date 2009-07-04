@@ -42,7 +42,7 @@ class KAboutApplicationDialog;
  * application.
  *
  * @short Main Part
- * @author Rajko Albrecht <rajko.albrecht@tecways.com>
+ * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
 class KDESVN_EXPORT kdesvnpart : public KParts::ReadOnlyPart

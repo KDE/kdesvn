@@ -44,6 +44,8 @@ SET(SOURCES
     cache/ReposLog.cpp
     cache/DatabaseException.hpp
     cache/DatabaseException.cpp
+    cache/ReposConfig.cpp
+    cache/ReposConfig.hpp
     client_parameter.hpp
     client_parameter.cpp
     )

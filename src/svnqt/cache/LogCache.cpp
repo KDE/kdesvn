@@ -363,11 +363,11 @@ int LogCache::databaseVersion()const
     return -1;
 }
 
-QVariant LogCache::getRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&_def)const
+QVariant LogCache::getRepositoryParameter(const svn::Path&repository,const QString&key)const
 {
     QDataBase mainDB = m_CacheData->getMainDB();
     if (!mainDB.isValid()) {
-        return _def;
+        return QVariant();
     }
     static QString qs("select \"value\",\"repoparameter\".\"parameter\" as \"key\" from \""+QString(SQLREPOSPARAMETER)+"\" INNER JOIN \""+QString(SQLMAINTABLE)+"\" ON (\""+QString(SQLREPOSPARAMETER)+"\".id = \""+QString(SQLMAINTABLE)+"\".id and \""+QString(SQLMAINTABLE)+"\".reposroot = ?)  WHERE \"parameter\" = ?;");
     QSqlQuery cur(QString(),mainDB);
@@ -375,14 +375,13 @@ QVariant LogCache::getRepositoryParameter(const svn::Path&repository,const QStri
     cur.bindValue(0,repository.native());
     cur.bindValue(1,key);
     if (!cur.exec()) {
-        qDebug() << "Error select version: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
-        return _def;
+        qWarning() << "Error select: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+        return QVariant();
     }
     if (cur.isActive() && cur.next()) {
-        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
         return cur.value(0);
     }
-    return _def;
+    return QVariant();
 }
 
 bool LogCache::setRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&value)
@@ -395,13 +394,15 @@ bool LogCache::setRepositoryParameter(const svn::Path&repository,const QString&k
     if (id.isEmpty()) {
         return false;
     }
-    static QString qs("INSERT OR REPLACE INTO \""+QString(SQLREPOSPARAMETER)+"\" (\"id\",\"parameter\",\"value\") values (\"%1\",\"%2\",\"%3\");");
+    static QString qs("INSERT OR REPLACE INTO \""+QString(SQLREPOSPARAMETER)+"\" (\"id\",\"parameter\",\"value\") values (\"%1\",\"%2\",?);");
     static QString dqs("DELETE FROM \""+QString(SQLREPOSPARAMETER)+"\" WHERE \"id\"=? and \"parameter\" = ?");
     mainDB.transaction();
     QSqlQuery cur(QString(),mainDB);
     if (value.isValid()) {
-        QString _qs = qs.arg(id).arg(key).arg(value.toString());
-        if (!cur.exec(_qs)) {
+        QString _qs = qs.arg(id).arg(key);//.arg(value.toByteArray());
+        cur.prepare(_qs);
+        cur.bindValue(0,value);
+        if (!cur.exec()) {
             qDebug() << "Error insert new value: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
             cur.finish();
             mainDB.rollback();
@@ -412,7 +413,7 @@ bool LogCache::setRepositoryParameter(const svn::Path&repository,const QString&k
         cur.bindValue(0,id);
         cur.bindValue(1,key);
         if (!cur.exec()) {
-            qDebug() << "Error insert new value: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
+            qDebug() << "Error delete value: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
             cur.finish();
             mainDB.rollback();
             return false;

@@ -39,7 +39,7 @@ namespace svn {
 
             bool valid()const;
 
-            QVariant getRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&_def=QVariant())const;
+            QVariant getRepositoryParameter(const svn::Path&repository,const QString&key)const;
             //! set or delete parameter
             /*!
              * if value is invalid the parameter will removed from database

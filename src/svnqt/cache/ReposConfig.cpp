@@ -292,5 +292,20 @@ QVariant ReposConfig::readEntry(const QString&repository,const QString&key, cons
     return ReposConfigPrivate::convertToQVariant(v.toByteArray(),aDefault);
 }
 
+int ReposConfig::readEntry(const QString&repository,const QString&key,int aDefault)
+{
+    return readEntry(repository,key,QVariant(aDefault)).toInt();
+}
+
+bool ReposConfig::readEntry(const QString&repository,const QString&key,bool aDefault)
+{
+    return readEntry(repository,key,QVariant(aDefault)).toBool();
+}
+
+QStringList ReposConfig::readEntry(const QString&repository,const QString&key,const QStringList&aDefault)
+{
+    return readEntry(repository,key,QVariant(aDefault)).toStringList();
+}
+
 } // namespace cache
 } // namespace svn

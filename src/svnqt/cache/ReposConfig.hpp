@@ -62,6 +62,9 @@ public:
     void eraseValue(const QString&repository,const QString&key);
 
     QVariant readEntry(const QString&repository,const QString&key, const QVariant&aDefault);
+    int readEntry(const QString&repository,const QString&key,int aDefault);
+    bool readEntry(const QString&repository,const QString&key,bool aDefault);
+    QStringList readEntry(const QString&repository,const QString&key,const QStringList&aDefault);
 };
 
 template<typename T> inline void ReposConfig::setValue(const QString&repository,const QString&key,const T&value)

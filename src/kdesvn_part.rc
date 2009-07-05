@@ -1,8 +1,8 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="19">
+<kpartgui name="kdesvn_part" version="20">
 <MenuBar>
   <Menu noMerge="1" name="settings">
-    <Action name="kdesvnpart_pref" />
+    <text>Subversion settings</text>
     <Menu name="quicksettings">
      <text>Quick settings</text>
      <Action name="toggle_log_follows" />
@@ -11,6 +11,7 @@
      <Action name="toggle_hide_unchanged_files" />
      <Action name="toggle_network"/>
    </Menu>
+   <Action name="kdesvnpart_pref" group = "settings_configure"/>
   </Menu>
   <Menu name="subversion_main" >
    <text>Subversion</text>

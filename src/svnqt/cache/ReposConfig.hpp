@@ -75,7 +75,7 @@ template<typename T> inline void ReposConfig::setValue(const QString&repository,
 template <typename T> inline
 void ReposConfig::writeCheck(const QString&repository,const QString&key, const T &value)
 {
-     svn::ConversionCheck::to_QVariant<T>();
+     ConversionCheck::to_QVariant<T>();
      setValue(repository,key, qVariantFromValue(value));
 }
 

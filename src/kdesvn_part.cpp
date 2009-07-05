@@ -32,6 +32,7 @@
 #include "src/svnqt/url.hpp"
 #include "helpers/ktranslateurl.h"
 #include "helpers/sshagent.h"
+#include "svnfrontend/database/dboverview.h"
 
 #include <kcomponentdata.h>
 #include <kaction.h>
@@ -405,6 +406,11 @@ void kdesvnpart::slotSettingsChanged(const QString&)
     }
 #endif
     emit settingsChanged();
+}
+
+void kdesvnpart::showDbStatus()
+{
+    DbOverview::showDbOverview();
 }
 
 #include "kdesvn_part.moc"

@@ -454,7 +454,7 @@ QDataBase  svn::cache::LogCache::reposDb(const QString&aRepository)
  */
 QStringList svn::cache::LogCache::cachedRepositories()const
 {
-    static QString s_q(QString("select \"reposroot\" from ")+QString(SQLMAINTABLE)+QString("order by reposroot"));
+    static QString s_q(QString("select \"reposroot\" from ")+QString(SQLMAINTABLE)+QString(" order by reposroot"));
     QDataBase mainDB = m_CacheData->getMainDB();
     QStringList _res;
     if (!mainDB.isValid()) {

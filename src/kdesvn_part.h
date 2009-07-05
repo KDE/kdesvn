@@ -74,6 +74,7 @@ public slots:
     virtual void slotFileProperties();
     virtual bool openUrl(const KUrl&);
     virtual void slotSshAdd();
+    virtual void showDbStatus();
 
 protected:
     /**

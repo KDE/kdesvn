@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DBOverView</class>
+ <widget class="QWidget" name="DBOverView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>659</width>
+    <height>376</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="m_ReposLayout">
+     <item>
+      <widget class="QLabel" name="m_RepositoryLabel">
+       <property name="text">
+        <string>Known repositories</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListView" name="m_ReposListView"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>ktextbrowser.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

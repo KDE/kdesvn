@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Rajko Albrecht  ral@alwins-world.de             *
+ *   Copyright (C) 2005-2009 by Rajko Albrecht  ral@alwins-world.de        *
  *   http://kdesvn.alwins-world.de/                                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,47 +17,24 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef CREATEDLG_H
-#define CREATEDLG_H
+#ifndef DBOVERVIEW_H
+#define DBOVERVIEW_H
 
-#include "src/settings/kdesvnsettings.h"
-#include <kdialog.h>
-#include <kconfig.h>
-#include <kvbox.h>
-#include <kapplication.h>
+#include "ui_dboverview.h"
 
-#include <QString>
+class DbOverViewData;
 
-template<class T> inline KDialog* createDialog(T**ptr,const QString&_head,bool OkCancel=false,const char*name="standard_dialog",bool showHelp=false,bool modal=true,const KGuiItem&u1=KGuiItem())
+class DbOverview: public QWidget,public Ui::DBOverView
 {
-    QFlags<KDialog::ButtonCode> buttons = KDialog::Ok;
-    if (OkCancel) {
-        buttons = buttons|KDialog::Cancel;
-    }
-    if (showHelp) {
-        buttons = buttons|KDialog::Help;
-    }
-    if (!u1.text().isEmpty()) {
-        buttons=buttons|KDialog::User1;
-    }
-    KDialog * dlg = new KDialog(modal?KApplication::activeModalWidget():0);
-    if (!dlg) return dlg;
-    dlg->setCaption(_head);
-    dlg->setModal(modal);
-    dlg->setButtons(buttons);
-    if (!u1.text().isEmpty()) {
-        dlg->setButtonGuiItem(KDialog::User1,u1);
-    }
-    if (name) {
-        dlg->setObjectName(name);
-    }
+    Q_OBJECT
+public:
+    DbOverview(QWidget *parent = 0, const char *name = 0);
+    virtual ~DbOverview();
 
-    QWidget* Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-    *ptr = new T(Dialog1Layout);
-    KConfigGroup _k(Kdesvnsettings::self()->config(),name?name:"standard_size");
-    dlg->restoreDialogSize(_k);
-    return dlg;
-}
+    static void showDbOverview();
+
+private:
+    DbOverViewData * _data;
+};
 
 #endif

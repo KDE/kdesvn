@@ -26,6 +26,11 @@
       <Merge/>
       <Action name="kdesvn_ssh_add"/>
   </Menu>
+  <Menu noMerge="1" name="database_menu">
+    <text>Database</text>
+    <Merge/>
+    <Action name="db_show_status"/>
+  </Menu>
   <Menu noMerge="1" name="settings">
     <text>&amp;Settings</text>
     <Action name="options_show_toolbar"/>

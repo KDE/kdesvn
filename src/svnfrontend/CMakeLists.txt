@@ -75,6 +75,8 @@ SET(svnfrontendsrc
     maintreewidget.cpp
     svntreeview.cpp
     svntreeview.h
+    database/dboverview.cpp
+    database/dboverview.h
     )
 
 SET(svnfrontendui
@@ -91,6 +93,7 @@ SET(svnfrontendui
     blamedisplay.ui
     svnlogdlg.ui
     treeWidget.ui
+    database/dboverview.ui
     )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

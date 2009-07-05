@@ -118,12 +118,11 @@ int main(int argc,char**argv)
     QStringList s; s << "a" << "b" << "c";
 
     svn::cache::ReposConfig::self()->setValue("http://www.alwins-world.de/repos/kdesvn","bommel",s);
-    QVariant v = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn","bommel",QStringList());
+    list = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn","bommel",QStringList());
     std::cout<<"Value: ";
-    list = v.toStringList();
     foreach(const QString &entry, list) {
         std::cout << entry.TOUTF8().data()<<",";
     }
-    std::cout <<" Type: "<< v.typeName()<<std::endl;
+    std::cout << std::endl;
     return 0;
 }

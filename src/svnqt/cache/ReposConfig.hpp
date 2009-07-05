@@ -30,7 +30,7 @@
 #include <QString>
 #include <QList>
 
-#include "svnqt/cache/conversion_check.h"
+#include "svnqt/cache/conversion_check.hpp"
 #include "svnqt/svnqt_defines.hpp"
 
 namespace svn

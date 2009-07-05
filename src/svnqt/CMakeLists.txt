@@ -42,11 +42,8 @@ SET(SOURCES
     client_merge.cpp
     cache/LogCache.cpp
     cache/ReposLog.cpp
-    cache/DatabaseException.hpp
     cache/DatabaseException.cpp
     cache/ReposConfig.cpp
-    cache/ReposConfig.hpp
-    client_parameter.hpp
     client_parameter.cpp
     )
 
@@ -54,6 +51,9 @@ SET(CACHEINST_HEADERS
     cache/LogCache.hpp
     cache/ReposLog.hpp
     cache/DatabaseException.hpp
+    cache/ReposConfig.hpp
+    cache/DatabaseException.hpp
+    cache/conversion_check.hpp
 )
 
 SET(INST_HEADERS
@@ -91,6 +91,8 @@ SET(INST_HEADERS
     diffoptions.hpp
     conflictdescription.hpp
     conflictresult.hpp
+    client_parameter.hpp
+    repoparameter.hpp
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")

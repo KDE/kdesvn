@@ -90,12 +90,12 @@ public:
         return m_DirSortModel->mapToSource(ind);
     }
 
-    SvnItemModelNode*sourceNode(const QModelIndex&index)
+    SvnItemModelNode*sourceNode(const QModelIndex&index,bool left)
     {
         if (!index.isValid()) {
             return 0;
         }
-        QModelIndex ind = m_SortModel->mapToSource(index);
+        QModelIndex ind = left?m_DirSortModel->mapToSource(index):m_SortModel->mapToSource(index);
         if (ind.isValid()) {
             return static_cast<SvnItemModelNode*>(ind.internalPointer());
         }
@@ -346,18 +346,19 @@ void MainTreeWidget::SelectionList(SvnItemList&target)const
         return;
     }
     for (int i = 0; i<_mi.count();++i) {
-        target.push_back(m_Data->sourceNode(_mi[i]));
+        target.push_back(m_Data->sourceNode(_mi[i],false));
     }
 }
 
 void MainTreeWidget::DirSelectionList(SvnItemList&target)const
 {
+    target.clear();
     QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
     if (_mi.count()<1) {
         return;
     }
     for (int i = 0; i<_mi.count();++i) {
-        target.push_back(m_Data->sourceNode(_mi[i]));
+        target.push_back(m_Data->sourceNode(_mi[i],true));
     }
 }
 
@@ -985,7 +986,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     OpenContextmenu*me=0;
     QAction*menuAction = 0;
 
-    if (l.count()==1) {
+    if (l.count()==1 && l.at(0)) {
         offers = offersList(l.at(0),l.at(0)->isDir());
         if (offers.count()>0) {
             svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision());

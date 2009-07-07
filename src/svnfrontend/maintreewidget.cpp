@@ -331,7 +331,13 @@ QWidget*MainTreeWidget::realWidget()
 
 int MainTreeWidget::selectionCount()const
 {
-    return m_TreeView->selectionModel()->selectedRows(0).count();
+    int count = m_TreeView->selectionModel()->selectedRows(0).count();
+    if (count == 0) {
+        if (m_TreeView->rootIndex().isValid()) {
+            return 1;
+        }
+    }
+    return count;
 }
 
 int MainTreeWidget::DirselectionCount()const
@@ -343,6 +349,10 @@ void MainTreeWidget::SelectionList(SvnItemList&target)const
 {
     QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
     if (_mi.count()<1) {
+        QModelIndex ind = m_TreeView->rootIndex();
+        if (ind.isValid()) {
+            target.push_back(m_Data->sourceNode(ind));
+        }
         return;
     }
     for (int i = 0; i<_mi.count();++i) {
@@ -366,6 +376,13 @@ QModelIndex MainTreeWidget::SelectedIndex()const
 {
     QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
     if (_mi.count()!=1) {
+        if (_mi.count()==0) {
+            QModelIndex ind = m_TreeView->rootIndex();
+            if (ind.isValid()) {
+                ind = m_Data->m_SortModel->mapToSource(ind);
+                return ind;
+            }
+        }
         return QModelIndex();
     }
     return m_Data->m_SortModel->mapToSource(_mi[0]);
@@ -1622,6 +1639,9 @@ void MainTreeWidget::slotUrlDropped(const KUrl::List&_lst,Qt::DropAction action,
     QString path = _lst[0].path();
     QFileInfo fi(path);
     if  (!isWorkingCopy()) {
+        if (!fi.isDir()) {
+            target+= '/'+_lst[0].fileName();
+        }
         slotImportIntoDir(_lst[0],target,fi.isDir());
     } else {
         WidgetBlockStack(this);
@@ -2081,19 +2101,19 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
         m_DirTreeView->setStatusTip(i18n("Navigation"));
         break;
     }
-    if (_indexes.size()<1) {
+    if (_indexes.size()>=1) {
+        QModelIndex ind = _indexes[0];
+        QModelIndex _t =m_Data->srcDirInd(ind);
+        if (m_Data->m_Model->canFetchMore(_t)) {
+            WidgetBlockStack st(m_TreeView);
+            WidgetBlockStack st2(m_DirTreeView);
+            m_Data->m_Model->fetchMore(_t);
+        }
+        _t = m_Data->m_SortModel->mapFromSource(_t);
+        if (Kdesvnsettings::show_navigation_panel()) m_TreeView->setRootIndex(_t);
+    } else {
         m_TreeView->setRootIndex(QModelIndex());
-        return;
     }
-    QModelIndex ind = _indexes[0];
-    QModelIndex _t =m_Data->srcDirInd(ind);
-    if (m_Data->m_Model->canFetchMore(_t)) {
-        WidgetBlockStack st(m_TreeView);
-        WidgetBlockStack st2(m_DirTreeView);
-        m_Data->m_Model->fetchMore(_t);
-    }
-    _t = m_Data->m_SortModel->mapFromSource(_t);
-    if (Kdesvnsettings::show_navigation_panel()) m_TreeView->setRootIndex(_t);
     if (m_TreeView->selectionModel()->hasSelection()) {
         m_TreeView->selectionModel()->clearSelection();
     } else {

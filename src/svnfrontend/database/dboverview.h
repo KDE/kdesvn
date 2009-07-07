@@ -24,6 +24,11 @@
 
 class DbOverViewData;
 
+namespace svn
+{
+    class Client;
+}
+
 class DbOverview: public QWidget,public Ui::DBOverView
 {
     Q_OBJECT
@@ -31,7 +36,11 @@ public:
     DbOverview(QWidget *parent = 0, const char *name = 0);
     virtual ~DbOverview();
 
-    static void showDbOverview();
+    static void showDbOverview(svn::Client*aClient = 0);
+
+protected Q_SLOTS:
+    virtual void itemActivated(const QItemSelection&,const QItemSelection&);
+    virtual void setClient(svn::Client*aClient);
 
 private:
     DbOverViewData * _data;

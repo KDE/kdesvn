@@ -32,6 +32,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QFileInfo>
 #define Q_LLONG qlonglong
 
 /*!
@@ -43,7 +44,6 @@ svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&aRepository)
               m_ReposRoot(aRepository),m_latestHead(svn::Revision::UNDEFINED)
 {
     m_Client=aClient;
-    ContextP ctx = m_Client->getContext();
     if (!aRepository.isEmpty()) {
         m_Database = LogCache::self()->reposDb(aRepository);
     }
@@ -104,6 +104,81 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
         return svn::Revision::UNDEFINED;
     }
     return _r;
+}
+
+qlonglong svn::cache::ReposLog::count()const
+{
+    if (!m_Database.isValid()) {
+        m_Database = LogCache::self()->reposDb(m_ReposRoot);
+        if (!m_Database.isValid()) {
+            return svn::Revision::UNDEFINED;
+        }
+    }
+    QString q("select count(*) from 'logentries'");
+    QSqlQuery _q(QString(), m_Database);
+    if (!_q.exec(q)) {
+        //qDebug() << _q.lastError().text();
+        return -1;
+    }
+    qlonglong _r;
+    QVariant v;
+    if (_q.isActive() && _q.next()) {
+        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        v=_q.value(0);
+        if (v.canConvert(QVariant::LongLong)) {
+            bool ok = false;
+            _r = v.toLongLong(&ok);
+            if (ok) {
+                return _r;
+            }
+        }
+    }
+    return -1;
+}
+
+qlonglong svn::cache::ReposLog::fileSize()const
+{
+    if (!m_Database.isValid()) {
+        m_Database = LogCache::self()->reposDb(m_ReposRoot);
+        if (!m_Database.isValid()) {
+            return -1;
+        }
+    }
+    QFileInfo fi(m_Database.databaseName());
+    if (fi.exists()) {
+        return fi.size();
+    }
+    return -1;
+}
+
+qlonglong svn::cache::ReposLog::itemCount()const
+{
+    if (!m_Database.isValid()) {
+        m_Database = LogCache::self()->reposDb(m_ReposRoot);
+        if (!m_Database.isValid()) {
+            return -1;
+        }
+    }
+    QString q("select count(*) from 'changeditems'");
+    QSqlQuery _q(QString(), m_Database);
+    if (!_q.exec(q)) {
+        //qDebug() << _q.lastError().text();
+        return -1;
+    }
+    qlonglong _r;
+    QVariant v;
+    if (_q.isActive() && _q.next()) {
+        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        v=_q.value(0);
+        if (v.canConvert(QVariant::LongLong)) {
+            bool ok = false;
+            _r = v.toLongLong(&ok);
+            if (ok) {
+                return _r;
+            }
+        }
+    }
+    return -1;
 }
 
 bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool checkHead)

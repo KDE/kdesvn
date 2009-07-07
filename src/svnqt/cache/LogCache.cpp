@@ -97,12 +97,12 @@ public:
 
         if (list.indexOf("logentries")==-1) {
             aDb.transaction();
-            _q.exec("CREATE TABLE \"logentries\" (\"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
+            _q.exec("CREATE TABLE \"logentries\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
             aDb.commit();
         }
         if (list.indexOf("changeditems")==-1) {
             aDb.transaction();
-            _q.exec("CREATE TABLE \"changeditems\" (\"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, PRIMARY KEY(revision,changeditem,action))");
+            _q.exec("CREATE TABLE \"changeditems\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, UNIQUE(revision,changeditem,action))");
             aDb.commit();
         }
         if (list.indexOf("mergeditems")==-1) {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>376</height>
+    <width>786</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,4 +42,7 @@
  </customwidgets>
  <resources/>
  <connections/>
+ <slots>
+  <slot>itemActivated(QModelIndex)</slot>
+ </slots>
 </ui>

@@ -63,6 +63,10 @@ public:
     bool log(const svn::Path&,const svn::Revision&start, const svn::Revision&end,const svn::Revision&peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit);
     bool itemExists(const svn::Revision&,const svn::Path&);
 
+    qlonglong count()const;
+    qlonglong itemCount()const;
+    qlonglong fileSize()const;
+
     bool isValid()const;
 };
 

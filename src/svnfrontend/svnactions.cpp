@@ -1254,7 +1254,7 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
         if (p1==p2 && (r1.isRemote()||r2.isRemote())) {
             ex = m_Data->m_Svnclient->diff_peg(_opts);
         } else {
-            ex = m_Data->m_Svnclient->diff(_opts.relativeTo(svn::Path(p1)));
+            ex = m_Data->m_Svnclient->diff(_opts.relativeTo(p1==p2?svn::Path(p1):("")));
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());

@@ -11,6 +11,8 @@
 #include <QItemSelectionModel>
 
 #include <KDebug>
+#include <KMessageBox>
+#include <KLocale>
 
 class DbOverViewData
 {
@@ -35,6 +37,7 @@ DbOverview::DbOverview(QWidget *parent, const char *name)
 {
     setupUi(this);
     setObjectName(name);
+    enableButtons(false);
     _data = new DbOverViewData;
 
     try {
@@ -74,21 +77,63 @@ void DbOverview::setClient(svn::Client*aClient)
     _data->_Client = aClient;
 }
 
+void DbOverview::enableButtons(bool how)
+{
+    m_DeleteCacheButton->setEnabled(how);
+    m_DeleteRepositoryButton->setEnabled(how);
+}
+
 void DbOverview::itemActivated(const QItemSelection&indexes,const QItemSelection&deindexes)
 {
     Q_UNUSED(deindexes);
 
+    enableButtons(false);
     QModelIndexList _indexes = indexes.indexes();
     if (_indexes.count()!=1) {
         kDebug()<<"Handle only with single selection"<<endl;
         return;
     }
-    QModelIndex index = _indexes[0];
-    QString repo = index.data().toString();
+    genInfo(_indexes[0].data().toString());
+    enableButtons(true);
+}
+
+void DbOverview::genInfo(const QString&repo)
+{
     svn::cache::ReposLog rl(_data->_Client,repo);
-    const static QString info("Log cache holds %1 logentries and consumes %2 on disk.");
+    const static QString info(i18n("Log cache holds %1 logentries and consumes %2 on disk."));
     QString msg = info.arg(rl.count()).arg(helpers::ByteToString()(rl.fileSize()));
     m_RepostatusBrowser->setText(msg);
+}
+
+QString DbOverview::selectedRepository()const
+{
+    QModelIndexList _indexes = m_ReposListView->selectionModel()->selectedIndexes();
+    if (_indexes.size()!=1) {
+        return QString();
+    }
+    return _indexes[0].data().toString();
+}
+
+void DbOverview::deleteCacheItems()
+{
+    int i = KMessageBox::questionYesNo(this,i18n("Realy clean cache for repository\n%1?").arg(selectedRepository()),i18n("Clean repository cache"));
+    if (i != KMessageBox::Yes) {
+        return;
+    }
+    try
+    {
+        svn::cache::ReposLog rl(_data->_Client,selectedRepository());
+        rl.cleanLogEntries();
+    }
+    catch (const svn::cache::DatabaseException&e)
+    {
+        kDebug()<<e.msg();
+    }
+    genInfo(selectedRepository());
+}
+
+void DbOverview::deleteRepository()
+{
 }
 
 #include "dboverview.moc"

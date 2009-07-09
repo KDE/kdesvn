@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>786</width>
-    <height>599</height>
+    <width>589</width>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="m_ReposLayout">
      <item>
@@ -29,7 +29,41 @@
     </layout>
    </item>
    <item>
-    <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="m_DeleteCacheButton">
+         <property name="toolTip">
+          <string>Delete cache entries for current selected repository</string>
+         </property>
+         <property name="statusTip">
+          <string>Delete cache entries for current selected repository</string>
+         </property>
+         <property name="text">
+          <string>Delete cache</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="m_DeleteRepositoryButton">
+         <property name="toolTip">
+          <string>Delete all entries and settings for selected repository</string>
+         </property>
+         <property name="statusTip">
+          <string>Delete all entries and settings for selected repository</string>
+         </property>
+         <property name="text">
+          <string>Delete repository</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -41,8 +75,43 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_DeleteCacheButton</sender>
+   <signal>clicked()</signal>
+   <receiver>DBOverView</receiver>
+   <slot>deleteCacheItems()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>286</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>367</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_DeleteRepositoryButton</sender>
+   <signal>clicked()</signal>
+   <receiver>DBOverView</receiver>
+   <slot>deleteRepository()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>624</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>602</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>itemActivated(QModelIndex)</slot>
+  <slot>deleteCacheItems()</slot>
+  <slot>deleteRepository()</slot>
  </slots>
 </ui>

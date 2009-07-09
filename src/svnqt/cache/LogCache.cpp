@@ -182,15 +182,18 @@ public:
             }
             checkDone=true;
         }
+        QDataBase _db;
         if (m_mainDB.localData()->reposCacheNames.find(dbFile)!=m_mainDB.localData()->reposCacheNames.end()) {
-            return QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
+            _db = QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
+            checkReposDb(_db);
+            return _db;
         }
         int i = 0;
         QString _key = dbFile;
         while (QSqlDatabase::contains(_key)) {
             _key = QString("%1-%2").arg(dbFile).arg(i++);
         }
-        QDataBase _db = QSqlDatabase::addDatabase(SQLTYPE,_key);
+        _db = QSqlDatabase::addDatabase(SQLTYPE,_key);
         QString fulldb = m_BasePath+'/'+dbFile+".db";
         _db.setDatabaseName(fulldb);
 //        //qDebug("try database open %s",fulldb.TOUTF8().data());
@@ -212,7 +215,6 @@ public:
             while (QSqlDatabase::contains(_key)) {
                 _key.sprintf("%s-%i",SQLMAIN,i++);
             }
-            //qDebug("The key is now: %s",_key.TOUTF8().data());
 
             QDataBase db = QSqlDatabase::addDatabase(SQLTYPE,_key);
             db.setDatabaseName(m_BasePath+"/maindb.db");
@@ -476,9 +478,5 @@ QStringList svn::cache::LogCache::cachedRepositories()const
 
 bool svn::cache::LogCache::valid()const
 {
-    QDataBase mainDB = m_CacheData->getMainDB();
-    if (!mainDB.isValid()) {
-        return false;
-    }
-    return true;
+    return m_CacheData->getMainDB().isValid();
 }

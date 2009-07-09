@@ -60,6 +60,7 @@ public:
     svn::Revision date2numberRev(const svn::Revision&,bool noNetwork=false);
     bool fillCache(const svn::Revision&end);
     bool insertLogEntry(const svn::LogEntry&);
+    void cleanLogEntries();
     bool log(const svn::Path&,const svn::Revision&start, const svn::Revision&end,const svn::Revision&peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit);
     bool itemExists(const svn::Revision&,const svn::Path&);
 

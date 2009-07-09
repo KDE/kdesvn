@@ -41,6 +41,13 @@ public:
 protected Q_SLOTS:
     virtual void itemActivated(const QItemSelection&,const QItemSelection&);
     virtual void setClient(svn::Client*aClient);
+    virtual void deleteCacheItems();
+    virtual void deleteRepository();
+
+protected:
+    QString selectedRepository()const;
+    void enableButtons(bool);
+    void genInfo(const QString&);
 
 private:
     DbOverViewData * _data;

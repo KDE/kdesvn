@@ -586,3 +586,18 @@ bool svn::cache::ReposLog::isValid()const
     }
     return true;
 }
+
+void svn::cache::ReposLog::cleanLogEntries()
+{
+
+    if (!isValid()) {
+        return;
+    }
+    QFile fi(m_Database.databaseName());
+    if (fi.exists()) {
+        if (!fi.remove()) {
+            throw svn::cache::DatabaseException(QString("Could not free space."));
+        }
+    }
+    m_Database = LogCache::self()->reposDb(m_ReposRoot);
+}

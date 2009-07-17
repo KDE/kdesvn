@@ -38,6 +38,7 @@
 #include <QItemSelectionModel>
 #include <QFileInfo>
 #include <QBrush>
+#include <QUuid>
 
 /*****************************
  * Internal data class begin *
@@ -48,6 +49,7 @@ public:
     SvnItemModelData(SvnItemModel*aCb,MainTreeWidget*display)
         :m_rootNode(0),m_Cb(aCb),m_Display(display),m_DirWatch(0)
     {
+        m_Uid = QUuid::createUuid().toString();
     }
 
     virtual ~SvnItemModelData()
@@ -114,6 +116,7 @@ public:
     SvnItemModel*m_Cb;
     MainTreeWidget*m_Display;
     KDirWatch*m_DirWatch;
+    QString m_Uid;
 };
 /*****************************
  * Internal data class end   *
@@ -504,6 +507,7 @@ QMimeData* SvnItemModel::mimeData(const QModelIndexList & indexes )const
     QMimeData *data = new QMimeData();
     KUrl::MetaDataMap metaMap;
     metaMap["kdesvn-source"]="t";
+    metaMap["kdesvn-id"]=uniqueIdentifier();
     urls.populateMimeData(data,metaMap);
     return data;
 }
@@ -845,6 +849,11 @@ int SvnItemModel::checkUnversionedDirs(SvnItemModelNode* _parent)
         insertDirs(_parent,dlist);
     }
     return dlist.size();
+}
+
+const QString&SvnItemModel::uniqueIdentifier()const
+{
+    return m_Data->m_Uid;
 }
 
 #include "svnitemmodel.moc"

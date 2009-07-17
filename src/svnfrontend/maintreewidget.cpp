@@ -1929,10 +1929,6 @@ void MainTreeWidget::slotImportIntoCurrent(bool dirs)
 
     if (uri.url().isEmpty()) return;
 
-    if ( !uri.protocol().isEmpty() && uri.protocol()!="file") {
-        KMessageBox::error(this,i18n("Cannot import into remote targets!"));
-        return;
-    }
     slotImportIntoDir(uri,targetUri,dirs);
 }
 
@@ -1943,6 +1939,10 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
 
     KDialog*dlg;
     KUrl uri = importUrl;
+    if ( !uri.protocol().isEmpty() && uri.protocol()!="file") {
+        KMessageBox::error(this,i18n("Cannot import remote urls!"));
+        return;
+    }
     QString targetUri = target;
     while (targetUri.endsWith('/')) {
         targetUri.truncate(targetUri.length()-1);

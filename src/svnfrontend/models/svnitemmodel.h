@@ -118,6 +118,8 @@ public:
 
     void clearNodeDir(SvnItemModelNodeDir*);
 
+    const QString&uniqueIdentifier()const;
+
 Q_SIGNALS:
     void urlDropped(const KUrl::List&,Qt::DropAction,const QModelIndex &,bool);
     void clientException(const QString&);

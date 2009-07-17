@@ -96,7 +96,11 @@ void SvnTreeView::dropEvent(QDropEvent*event)
     KUrl::List list = KUrl::List::fromMimeData(event->mimeData(),&metaMap);
     bool intern = false;
     if (metaMap.find("kdesvn-source")!=metaMap.end()) {
-        intern=true;
+        SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
+        QMap<QString, QString>::const_iterator it = metaMap.find("kdesvn-id");
+        if (it!=metaMap.end() && it.value()==itemModel->uniqueIdentifier()) {
+            intern=true;
+        }
     }
     Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
 

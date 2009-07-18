@@ -280,6 +280,7 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
+    m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         svn::Path p(makeSvnUrl(url));
         m_pData->m_Svnclient->mkdir(p,getDefaultLog());

@@ -63,7 +63,6 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
        return false;
     }
 
-
     if (_items.count()>0) {
         QMap<QString,QVariant> list;
         for (int i = 0;i<_items.count();++i) {
@@ -74,12 +73,16 @@ bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&
             }
         }
         QDBusVariant v; v.setVariant(QVariant(list));
-        res = kdesvndInterface.get_logmsg(v);
+        res = kdesvndInterface.get_logmsg_path(v);
     } else {
         res = kdesvndInterface.get_logmsg();
     }
 
-    QStringList lt = res;
+    if (!res.isValid()) {
+        kWarning()<<"Didn't get a valid reply!"<<endl;
+        return false;
+    }
+    QStringList lt = res.value();
 
     if (lt.count()!=1) {
         msg = "Wrong or missing log (may cancel pressed).";

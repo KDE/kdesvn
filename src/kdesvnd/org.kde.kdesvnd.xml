@@ -26,7 +26,7 @@
     <method name="get_logmsg">
     <arg type="as" direction="out" />
     </method>
-    <method name="get_logmsg">
+    <method name="get_logmsg_path">
     <arg type="as" direction="out" />
     <arg type="v" direction="in" name="pathactions" />
     </method>

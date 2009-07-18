@@ -311,11 +311,12 @@ QStringList kdesvnd::get_logmsg()
     return res;
 }
 
-QStringList kdesvnd::get_logmsg(const QDBusVariant&_in)
+QStringList kdesvnd::get_logmsg_path(const QDBusVariant&_in)
 {
     QStringList res;
     if (_in.variant().type()!=QVariant::Map) {
-        return res;
+        kWarning()<<"Wrong parameter class"<<endl;
+        return get_logmsg();
     }
     QMap<QString,QVariant> v = _in.variant().toMap();
     QMap<QString,QString> list;

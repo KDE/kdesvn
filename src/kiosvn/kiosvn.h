@@ -54,6 +54,7 @@ public:
     virtual void get(const KUrl& url);
     virtual void mkdir (const KUrl &url, int permissions);
     virtual void mkdir (const KUrl::List &urls, int permissions);
+    virtual void put(const KUrl&url,int permissions,KIO::JobFlags flags);
     virtual void rename(const KUrl&src,const KUrl&target,KIO::JobFlags flags);
     virtual void del(const KUrl&url,bool isfile);
     virtual void copy(const KUrl&src,const KUrl&dest,int permissions,KIO::JobFlags flags);

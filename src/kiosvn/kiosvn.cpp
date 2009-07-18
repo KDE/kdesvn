@@ -49,7 +49,8 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kurl.h>
-#include <ktempdir.h>
+#include <KTempDir>
+#include <KTemporaryFile>
 #include <kmimetype.h>
 #include <krun.h>
 
@@ -327,6 +328,71 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
         return;
     }
     kDebug(9510)<<"kio_svn::rename finished" <<  endl;
+    finished();
+}
+
+void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
+{
+    kDebug(9510)<<"kio_svn::put "<< url <<endl;
+    svn::Revision rev = m_pData->urlToRev(url);
+    if (rev == svn::Revision::UNDEFINED) {
+        rev = svn::Revision::HEAD;
+    }
+    if (rev != svn::Revision::HEAD) {
+        error(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        return;
+    }
+    svn::Revision peg = rev;
+    svn::InfoEntries e;
+    bool exists = true;
+    try {
+         e = m_pData->m_Svnclient->info(makeSvnUrl(url),svn::DepthEmpty,rev,peg);
+    } catch  (const svn::ClientException&e) {
+        if (e.apr_err()==SVN_ERR_ENTRY_NOT_FOUND || e.apr_err()==SVN_ERR_RA_ILLEGAL_URL) {
+            exists = false;
+        } else {
+            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            return;
+        }
+    }
+    if (exists) {
+        error(KIO::ERR_SLAVE_DEFINED ,i18n("Writing to existing item not allowed"));
+        return;
+    }
+    KTemporaryFile tmpfile;
+    if (!tmpfile.open()) {
+        error(KIO::ERR_SLAVE_DEFINED,i18n("Could not open temporary file"));
+        return;
+    }
+    int result = 0;
+    QByteArray buffer;
+    KIO::fileoffset_t processed_size = 0;
+    do {
+        dataReq();
+        result = readData(buffer);
+        if (result>0) {
+            tmpfile.write(buffer);
+            processed_size += result;
+            processedSize (processed_size);
+        }
+        buffer.clear();
+    } while (result>0);
+
+    tmpfile.flush();
+
+    if (result!=0) {
+        error(KIO::ERR_ABORTED,i18n("Could not retrieve data for write."));
+        return;
+    }
+
+    try {
+        m_pData->m_Svnclient->import(tmpfile.fileName(),makeSvnUrl(url),getDefaultLog(),svn::DepthEmpty,false,false);
+    } catch  (const svn::ClientException&e) {
+        QString ex = e.msg();
+        kDebug(9510)<<ex<<endl;
+        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        return;
+    }
     finished();
 }
 

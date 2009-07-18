@@ -21,6 +21,9 @@
 #include "kiosvn.h"
 #include "kiolistener.h"
 
+#include <QFile>
+#include <QTemporaryFile>
+
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/dirent.hpp"
 #include "src/svnqt/url.hpp"
@@ -28,6 +31,7 @@
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/info_entry.hpp"
 #include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/shared_pointer.hpp"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
 #include "src/helpers/sshagent.h"
@@ -53,6 +57,7 @@
 #include <KTemporaryFile>
 #include <kmimetype.h>
 #include <krun.h>
+
 
 namespace KIO
 {
@@ -333,7 +338,7 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
 
 void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
 {
-    kDebug(9510)<<"kio_svn::put "<< url <<endl;
+    kDebug(9510)<<"kio_svn::put "<< url << "Flags: "<< flags <<endl;
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -355,14 +360,39 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             return;
         }
     }
+    svn::SharedPointer<QFile> tmpfile = 0;
+    svn::SharedPointer<KTempDir> _codir = 0;
     if (exists) {
-        error(KIO::ERR_SLAVE_DEFINED ,i18n("Writing to existing item not allowed"));
-        return;
-    }
-    KTemporaryFile tmpfile;
-    if (!tmpfile.open()) {
-        error(KIO::ERR_SLAVE_DEFINED,i18n("Could not open temporary file"));
-        return;
+        if (flags & KIO::Overwrite) {
+            if (!supportOverwrite()) {
+                error(KIO::ERR_SLAVE_DEFINED,i18n("Overwriting existing items is disabled in settings."));
+                return;
+            }
+            _codir = new KTempDir;
+            _codir->setAutoRemove(true);
+            svn::Path path = makeSvnUrl(url.url());
+            path.removeLast();
+            try {
+                kDebug()<<"Checking out to "<<_codir->name()<<endl;
+                m_pData->m_Svnclient->checkout(path,svn::Path(_codir->name()),rev,peg,svn::DepthFiles,false,false);
+            } catch (const svn::ClientException&e) {
+                error(KIO::ERR_SLAVE_DEFINED,e.msg());
+                return;
+            }
+            kDebug()<<"Writing to "<<url.fileName()<<endl;
+            tmpfile = new QFile(_codir->name()+url.fileName());
+            tmpfile->open(QIODevice::ReadWrite|QIODevice::Truncate);
+        } else {
+            error(KIO::ERR_FILE_ALREADY_EXIST,i18n("Could not write to existing item."));
+            return;
+        }
+    } else {
+        svn::SharedPointer<KTemporaryFile> _tmpfile = new KTemporaryFile();
+        if (!_tmpfile->open()) {
+            error(KIO::ERR_SLAVE_DEFINED,i18n("Could not open temporary file"));
+            return;
+        }
+        tmpfile = _tmpfile;
     }
     int result = 0;
     QByteArray buffer;
@@ -371,27 +401,36 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         dataReq();
         result = readData(buffer);
         if (result>0) {
-            tmpfile.write(buffer);
+            tmpfile->write(buffer);
             processed_size += result;
             processedSize (processed_size);
         }
         buffer.clear();
     } while (result>0);
 
-    tmpfile.flush();
+    tmpfile->flush();
 
     if (result!=0) {
         error(KIO::ERR_ABORTED,i18n("Could not retrieve data for write."));
         return;
     }
 
-    try {
-        m_pData->m_Svnclient->import(tmpfile.fileName(),makeSvnUrl(url),getDefaultLog(),svn::DepthEmpty,false,false);
-    } catch  (const svn::ClientException&e) {
-        QString ex = e.msg();
-        kDebug(9510)<<ex<<endl;
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
-        return;
+    if (exists) {
+        try {
+            m_pData->m_Svnclient->commit(svn::Targets(tmpfile->fileName()),getDefaultLog(),svn::DepthEmpty,false);
+        } catch (const svn::ClientException&e) {
+            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            return;
+        }
+    } else  {
+        try {
+            m_pData->m_Svnclient->import(tmpfile->fileName(),makeSvnUrl(url),getDefaultLog(),svn::DepthEmpty,false,false);
+        } catch  (const svn::ClientException&e) {
+            QString ex = e.msg();
+            kDebug(9510)<<ex<<endl;
+            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            return;
+        }
     }
     finished();
 }
@@ -988,6 +1027,11 @@ void kio_svnProtocol::streamTotalSizeNull()
     totalSize(0);
 }
 
+bool kio_svnProtocol::supportOverwrite()
+{
+    Kdesvnsettings::self()->readConfig();
+    return Kdesvnsettings::kio_can_overwrite();
+}
 
 /*!
     \fn kio_svnProtocol::getDefaultLog()

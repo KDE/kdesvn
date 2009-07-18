@@ -248,6 +248,10 @@
         <default>Revision made with kdesvn KIO.</default>
         <label>The standard logmessage to use with KIO if not asking for it.</label>
     </entry>
+    <entry key="kio_can_overwrite" type="Bool">
+        <default>false</default>
+        <label>Support overwrite for KIO modul</label>
+    </entry>
   </group>
   <group name="internals" >
     <entry key="locale_is_casesensitive" type="Bool" >

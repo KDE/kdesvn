@@ -119,6 +119,7 @@ private:
     bool getLogMsg(QString&);
 protected:
     QString getDefaultLog();
+    bool supportOverwrite();
 };
 
 }

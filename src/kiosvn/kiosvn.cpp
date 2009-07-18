@@ -338,7 +338,7 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
 
 void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
 {
-    kDebug(9510)<<"kio_svn::put "<< url << "Flags: "<< flags <<endl;
+    Q_UNUSED(permissions);
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -373,13 +373,11 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             svn::Path path = makeSvnUrl(url.url());
             path.removeLast();
             try {
-                kDebug()<<"Checking out to "<<_codir->name()<<endl;
                 m_pData->m_Svnclient->checkout(path,svn::Path(_codir->name()),rev,peg,svn::DepthFiles,false,false);
             } catch (const svn::ClientException&e) {
                 error(KIO::ERR_SLAVE_DEFINED,e.msg());
                 return;
             }
-            kDebug()<<"Writing to "<<url.fileName()<<endl;
             tmpfile = new QFile(_codir->name()+url.fileName());
             tmpfile->open(QIODevice::ReadWrite|QIODevice::Truncate);
         } else {
@@ -427,7 +425,6 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             m_pData->m_Svnclient->import(tmpfile->fileName(),makeSvnUrl(url),getDefaultLog(),svn::DepthEmpty,false,false);
         } catch  (const svn::ClientException&e) {
             QString ex = e.msg();
-            kDebug(9510)<<ex<<endl;
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             return;
         }

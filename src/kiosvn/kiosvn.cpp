@@ -385,9 +385,10 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             return;
         }
     } else {
-        svn::SharedPointer<KTemporaryFile> _tmpfile = new KTemporaryFile();
+        KTemporaryFile* _tmpfile = new KTemporaryFile();
         if (!_tmpfile->open()) {
             error(KIO::ERR_SLAVE_DEFINED,i18n("Could not open temporary file"));
+            delete _tmpfile;
             return;
         }
         tmpfile = _tmpfile;
@@ -408,17 +409,19 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
 
     tmpfile->flush();
 
+
     if (result!=0) {
         error(KIO::ERR_ABORTED,i18n("Could not retrieve data for write."));
         return;
     }
 
+    bool err = false;
     if (exists) {
         try {
             m_pData->m_Svnclient->commit(svn::Targets(tmpfile->fileName()),getDefaultLog(),svn::DepthEmpty,false);
         } catch (const svn::ClientException&e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
-            return;
+            err = true;
         }
     } else  {
         try {
@@ -426,10 +429,10 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         } catch  (const svn::ClientException&e) {
             QString ex = e.msg();
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
-            return;
+            err = true;
         }
     }
-    finished();
+    if (!err) finished();
 }
 
 void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::JobFlags flags)

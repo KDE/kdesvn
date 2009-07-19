@@ -593,11 +593,21 @@ void svn::cache::ReposLog::cleanLogEntries()
     if (!isValid()) {
         return;
     }
-    QFile fi(m_Database.databaseName());
-    if (fi.exists()) {
-        if (!fi.remove()) {
-            throw svn::cache::DatabaseException(QString("Could not free space."));
-        }
+    m_Database.transaction();
+    QSqlQuery _q(QString(),m_Database);
+    if (!_q.exec("delete from logentries")) {
+        m_Database.rollback();
+        return;
     }
-    m_Database = LogCache::self()->reposDb(m_ReposRoot);
+    if (!_q.exec("delete from changeditems")) {
+        m_Database.rollback();
+        return;
+    }
+    if (!_q.exec("delete from mergeditems")) {
+        m_Database.rollback();
+        return;
+    }
+
+    m_Database.commit();
+    _q.exec("vacuum");
 }

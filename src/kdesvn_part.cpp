@@ -410,7 +410,10 @@ void kdesvnpart::slotSettingsChanged(const QString&)
 
 void kdesvnpart::showDbStatus()
 {
-    DbOverview::showDbOverview();
+    if (m_view) {
+        m_view->stopCacheThreads();
+        DbOverview::showDbOverview();
+    }
 }
 
 #include "kdesvn_part.moc"

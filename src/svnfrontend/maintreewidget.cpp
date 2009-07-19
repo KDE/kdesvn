@@ -1679,6 +1679,15 @@ void MainTreeWidget::slotCopyFinished(KJob*_job)
     refreshCurrentTree();
 }
 
+void MainTreeWidget::stopLogCache()
+{
+    QAction*temp = filesActions()->action("update_log_cache");
+    m_Data->m_Model->svnWrapper()->stopFillCache();
+    if (temp) {
+        temp->setText(i18n("Update log cache"));
+    }
+}
+
 void MainTreeWidget::slotUpdateLogCache()
 {
     if (baseUri().length()>0 && m_Data->m_Model->svnWrapper()->doNetworking()) {

@@ -134,6 +134,17 @@ void DbOverview::deleteCacheItems()
 
 void DbOverview::deleteRepository()
 {
+    int i = KMessageBox::questionYesNo(this,i18n("Realy clean cache and data for repository\n%1?").arg(selectedRepository()),i18n("Delete repository"));
+    if (i != KMessageBox::Yes) {
+        return;
+    }
+
+    try {
+        svn::cache::LogCache::self()->deleteRepository(selectedRepository());
+        _data->repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
+    }catch (const svn::cache::DatabaseException&e) {
+        kDebug()<<e.msg()<<endl;
+    }
 }
 
 #include "dboverview.moc"

@@ -45,7 +45,7 @@ namespace svn {
              * if value is invalid the parameter will removed from database
              */
             bool setRepositoryParameter(const svn::Path&repository,const QString&key,const QVariant&value);
-
+            bool deleteRepository(const QString&aRepository);
         };
     }
 }

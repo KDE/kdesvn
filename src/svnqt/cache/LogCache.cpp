@@ -66,6 +66,22 @@ public:
         QSqlDatabase::removeDatabase(key);
     }
 
+    void deleteDb(const QString&path)
+    {
+        QMap<QString,QString>::Iterator it;
+        for (it=reposCacheNames.begin();it!=reposCacheNames.end();++it) {
+            QSqlDatabase _db = QSqlDatabase::database(it.value());
+            if (_db.databaseName()==path) {
+                qDebug()<<"Removing database "<<_db.databaseName()<<endl;
+                if (_db.isOpen()) {
+                    _db.commit();
+                    _db.close();
+                }
+                QSqlDatabase::removeDatabase(it.value());
+                it = reposCacheNames.begin();
+            }
+        }
+    }
     QDataBase m_DB;
     QString key;
     QMap<QString,QString> reposCacheNames;
@@ -84,6 +100,55 @@ public:
             m_mainDB.localData()->m_DB.close();
             m_mainDB.setLocalData(0L);
         }
+    }
+
+    QString idToPath(const QString&id)
+    {
+        return m_BasePath+'/'+id+".db";
+    }
+
+    bool deleteRepository(const QString&aRepository)
+    {
+        QString id = getReposId(aRepository);
+
+        static QString s_q(QString("delete from ")+QString(SQLREPOSPARAMETER)+" where id = ?");
+        static QString r_q(QString("delete from ")+QString(SQLMAINTABLE)+" where id = ?");
+        QDataBase mainDB = getMainDB();
+        if (!mainDB.isValid()) {
+            qWarning("Failed to open main database.");
+            return false;
+        }
+        qDebug()<<m_mainDB.localData()->reposCacheNames;
+        m_mainDB.localData()->deleteDb(idToPath(id));
+        qDebug()<<m_mainDB.localData()->reposCacheNames;
+        QFile fi(idToPath(id));
+        if (fi.exists()) {
+            if (!fi.remove()) {
+                qWarning()<<"Could not delete "<< fi.fileName();
+                return false;
+            }
+        }
+        qDebug()<<"Removed "<<fi.fileName()<<endl;
+        mainDB.transaction();
+        QSqlQuery _q(QString(),mainDB);
+        _q.prepare(s_q);
+        _q.bindValue(0,id);
+        if (!_q.exec()) {
+            qDebug() << "Error delete value: " << _q.lastError().text() << "(" << _q.lastQuery() << ")";
+            _q.finish();
+            mainDB.rollback();
+            return false;
+        }
+        _q.prepare(r_q);
+        _q.bindValue(0,id);
+        if (!_q.exec()) {
+            qDebug() << "Error delete value: " << _q.lastError().text() << "(" << _q.lastQuery() << ")";
+            _q.finish();
+            mainDB.rollback();
+            return false;
+        }
+        mainDB.commit();
+        return true;
     }
 
     bool checkReposDb(QDataBase aDb)
@@ -140,7 +205,7 @@ public:
             //qDebug() << "Error select_01: " << query.lastError().text() << "(" << query.lastQuery() << ")";
         }
         if (!db.isEmpty()) {
-            QString fulldb = m_BasePath+'/'+db+".db";
+            QString fulldb = idToPath(db);
             QDataBase _db = QSqlDatabase::addDatabase(SQLTYPE,"tmpdb");
             _db.setDatabaseName(fulldb);
             if (!checkReposDb(_db)) {
@@ -194,14 +259,11 @@ public:
             _key = QString("%1-%2").arg(dbFile).arg(i++);
         }
         _db = QSqlDatabase::addDatabase(SQLTYPE,_key);
-        QString fulldb = m_BasePath+'/'+dbFile+".db";
+        QString fulldb = idToPath(dbFile);
         _db.setDatabaseName(fulldb);
-//        //qDebug("try database open %s",fulldb.TOUTF8().data());
         if (!checkReposDb(_db)) {
-            //qDebug("no DB opened");
             _db = QSqlDatabase();
         } else {
-            //qDebug("Insert into map");
             m_mainDB.localData()->reposCacheNames[dbFile]=_key;
         }
         return _db;
@@ -479,4 +541,9 @@ QStringList svn::cache::LogCache::cachedRepositories()const
 bool svn::cache::LogCache::valid()const
 {
     return m_CacheData->getMainDB().isValid();
+}
+
+bool svn::cache::LogCache::deleteRepository(const QString&aRepository)
+{
+    return m_CacheData->deleteRepository(aRepository);
 }

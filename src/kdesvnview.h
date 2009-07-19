@@ -80,6 +80,7 @@ public:
     virtual void sendWarning(const QString&);
     virtual void sendError(const QString&);
     virtual bool isCanceld();
+    virtual void stopCacheThreads();
 
 signals:
     /**

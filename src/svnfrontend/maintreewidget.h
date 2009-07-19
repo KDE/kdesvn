@@ -86,6 +86,7 @@ public Q_SLOTS:
     virtual void slotMkdir();
     virtual void refreshCurrent(SvnItem*);
     virtual void slotReinitItem(SvnItem*);
+    virtual void stopLogCache();
 
 protected Q_SLOTS:
     void hideTips();

@@ -20,6 +20,7 @@
 #include "commititem.hpp"
 
 #include <svn_client.h>
+#include <svn_props.h>
 
 namespace svn {
 

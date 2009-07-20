@@ -73,13 +73,11 @@ public:
     KioListener m_Listener;
     bool first_done;
     bool dispProgress;
+    bool dispWritten;
     svn::ContextP m_CurrentContext;
     svn::Client* m_Svnclient;
-
     svn::Revision urlToRev(const KUrl&);
-
     QTime _last;
-
 };
 
 KioSvnData::KioSvnData(kio_svnProtocol*par)
@@ -88,6 +86,7 @@ KioSvnData::KioSvnData(kio_svnProtocol*par)
     m_Svnclient=svn::Client::getobject(0,0);
     m_CurrentContext = 0;
     dispProgress = false;
+    dispWritten = false;
     _last = QTime::currentTime();
     reInitClient();
 }
@@ -408,7 +407,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         if (result>0) {
             tmpfile->write(buffer);
             processed_size += result;
-            processedSize (processed_size);
+            processedSize(processed_size);
         }
         buffer.clear();
     } while (result>0);
@@ -422,8 +421,8 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     }
 
     totalSize(processed_size);
-    processedSize (0);
-    m_pData->dispProgress = true;
+    written (0);
+    m_pData->dispWritten = true;
     bool err = false;
     if (exists) {
         try {
@@ -441,7 +440,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             err = true;
         }
     }
-    m_pData->dispProgress = false;
+    m_pData->dispWritten = false;
     if (!err) finished();
 }
 
@@ -1031,10 +1030,14 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
         totalSize(KIO::filesize_t(max));
     }
 
-    if (m_pData->dispProgress) {
+    if (m_pData->dispProgress||m_pData->dispWritten) {
         QTime now = QTime::currentTime();
         if (m_pData->_last.msecsTo(now)>=90) {
-            processedSize(KIO::filesize_t(current));
+            if (m_pData->dispProgress) {
+                processedSize(KIO::filesize_t(current));
+            } else {
+                written(current);
+            }
             m_pData->_last = now;
         }
     }

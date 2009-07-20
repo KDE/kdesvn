@@ -54,6 +54,7 @@
 #include "fronthelpers/watchedprocess.h"
 
 #include "helpers/sub2qt.h"
+#include "helpers/stringhelper.h"
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
@@ -741,6 +742,15 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             break;
         }
         text+=re;
+        if ((*it).kind() == svn_node_file){
+            text+=rb+i18n("Size")+cs;
+            if ((*it).size()!=SVNQT_SIZE_UNKNOWN) {
+                text+=QString("%1").arg(helpers::ByteToString()((*it).size()));
+            } else {
+                text+=QString("%1").arg(helpers::ByteToString()((*it).working_size()));
+            }
+            text+=re;
+        }
         if (all) {
             text+=rb+i18n("Schedule")+cs;
             switch ((*it).Schedule()) {

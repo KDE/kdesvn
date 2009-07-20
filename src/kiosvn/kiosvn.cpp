@@ -57,7 +57,7 @@
 #include <KTemporaryFile>
 #include <kmimetype.h>
 #include <krun.h>
-
+#include <kio/slaveinterface.h>
 
 namespace KIO
 {
@@ -78,6 +78,8 @@ public:
 
     svn::Revision urlToRev(const KUrl&);
 
+    QTime _last;
+
 };
 
 KioSvnData::KioSvnData(kio_svnProtocol*par)
@@ -86,6 +88,7 @@ KioSvnData::KioSvnData(kio_svnProtocol*par)
     m_Svnclient=svn::Client::getobject(0,0);
     m_CurrentContext = 0;
     dispProgress = false;
+    _last = QTime::currentTime();
     reInitClient();
 }
 
@@ -256,7 +259,6 @@ void kio_svnProtocol::stat(const KUrl& url)
 
 void kio_svnProtocol::get(const KUrl& url)
 {
-    kDebug(9510)<<"kio_svn::get "<< url << endl;
     if (m_pData->m_Listener.contextCancel()) {
         finished();
         return;
@@ -267,14 +269,18 @@ void kio_svnProtocol::get(const KUrl& url)
     }
     KioByteStream dstream(this,url.fileName());
     try {
-        m_pData->m_Svnclient->cat(dstream,makeSvnUrl(url),rev,rev);
+        QString _url = makeSvnUrl(url);
+        svn::InfoEntries e;
+        e = m_pData->m_Svnclient->info(_url,svn::DepthEmpty,rev,rev);
+        if (e.size()>0) {
+            totalSize(e[0].size());
+        }
+        m_pData->m_Svnclient->cat(dstream,_url,rev,rev);
     } catch (const svn::ClientException&e) {
         QString ex = e.msg();
-        kDebug(9510)<<ex<<endl;
         error( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
         return;
     }
-    totalSize(dstream.written());
     data(QByteArray()); // empty array means we're done sending the data
     finished();
 }
@@ -415,6 +421,9 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         return;
     }
 
+    totalSize(processed_size);
+    processedSize (0);
+    m_pData->dispProgress = true;
     bool err = false;
     if (exists) {
         try {
@@ -432,6 +441,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             err = true;
         }
     }
+    m_pData->dispProgress = false;
     if (!err) finished();
 }
 
@@ -1015,10 +1025,18 @@ void kio_svnProtocol::streamPushData(QByteArray array)
     data(array);
 }
 
-void kio_svnProtocol::contextProgress(long long int current, long long int)
+void kio_svnProtocol::contextProgress(long long int current, long long int max)
 {
+    if (max > -1) {
+        totalSize(KIO::filesize_t(max));
+    }
+
     if (m_pData->dispProgress) {
-        processedSize(current);
+        QTime now = QTime::currentTime();
+        if (m_pData->_last.msecsTo(now)>=90) {
+            processedSize(KIO::filesize_t(current));
+            m_pData->_last = now;
+        }
     }
 }
 

@@ -229,9 +229,15 @@ void svn::InfoEntry::init(const svn_info_t*item,const QString&path)
   m_hasWc = item->has_wc_info;
   m_schedule = item->schedule;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+  m_size = item->size64!=SVN_INVALID_FILESIZE?QLONG(item->size64):SVNQT_SIZE_UNKNOWN;
+  m_working_size = item->working_size64!=SVN_INVALID_FILESIZE?QLONG(item->working_size64):SVNQT_SIZE_UNKNOWN;
+#elif (SVN_VER_MINOR == 5)
   m_size = item->size!=SVN_INFO_SIZE_UNKNOWN?QLONG(item->size):SVNQT_SIZE_UNKNOWN;
   m_working_size = item->working_size!=SVN_INFO_SIZE_UNKNOWN?QLONG(item->working_size):SVNQT_SIZE_UNKNOWN;
+#endif
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
   if (item->changelist) {
       m_changeList = QByteArray(item->changelist,strlen(item->changelist));
   } else {

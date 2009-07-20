@@ -46,12 +46,10 @@ long KioByteStream::write(const char* data, const unsigned long max)
             KMimeType::Ptr result = KMimeType::findByNameAndContent(m_Filename,array);
             m_Cb->streamSendMime(result);
             array.clear();
-            m_Cb->streamTotalSizeNull();
         }
         array = QByteArray::fromRawData(data, max);
         m_Cb->streamPushData(array);
         array.clear();
-
         m_Written+=max;
         if (m_MessageTick.elapsed() >=100 || forceInfo) {
             m_Cb->streamWritten(m_Written);

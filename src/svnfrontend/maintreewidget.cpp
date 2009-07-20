@@ -1128,12 +1128,14 @@ void MainTreeWidget::slotSelectBrowsingRevision()
     if (!dlg) {
         return;
     }
+    rdlg->setNoWorking(true);
     rdlg->setStartOnly(true);
     if (dlg->exec()==QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_Data->m_remoteRevision= r.first;
         clear();
         m_Data->m_Model->checkDirs(baseUri(),0);
+        emit changeCaption(baseUri()+"@"+r.first.toString());
     }
     KConfigGroup _k(Kdesvnsettings::self()->config(),"revisions_dlg");
     dlg->saveDialogSize(_k);

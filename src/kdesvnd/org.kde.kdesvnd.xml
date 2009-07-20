@@ -26,10 +26,6 @@
     <method name="get_logmsg">
     <arg type="as" direction="out" />
     </method>
-    <method name="get_logmsg_path">
-    <arg type="as" direction="out" />
-    <arg type="v" direction="in" name="pathactions" />
-    </method>
     <method name="load_sslclientcertpw">
         <arg type="s" direction="out" />
         <arg type="s" direction="in" name="realm"/>

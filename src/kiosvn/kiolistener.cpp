@@ -56,27 +56,14 @@ bool KioListener::contextCancel()
  */
 bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&_items)
 {
-    QDBusReply<QStringList> res;
+    Q_UNUSED(_items);
     OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
     if(!kdesvndInterface.isValid()) {
        kWarning() << "Communication with KDED:KdeSvnd failed";
        return false;
     }
 
-    if (_items.count()>0) {
-        QMap<QString,QVariant> list;
-        for (int i = 0;i<_items.count();++i) {
-            if (_items[i].path().isEmpty()) {
-                list[_items[i].url()]=QString(QChar(_items[i].actionType()));
-            } else {
-                list[_items[i].path()]=QString(QChar(_items[i].actionType()));
-            }
-        }
-        QDBusVariant v; v.setVariant(QVariant(list));
-        res = kdesvndInterface.get_logmsg_path(v);
-    } else {
-        res = kdesvndInterface.get_logmsg();
-    }
+    QDBusReply<QStringList> res= kdesvndInterface.get_logmsg();
 
     if (!res.isValid()) {
         kWarning()<<"Didn't get a valid reply!"<<endl;

@@ -311,29 +311,6 @@ QStringList kdesvnd::get_logmsg()
     return res;
 }
 
-QStringList kdesvnd::get_logmsg_path(const QDBusVariant&_in)
-{
-    QStringList res;
-    if (_in.variant().type()!=QVariant::Map) {
-        kWarning()<<"Wrong parameter class"<<endl;
-        return get_logmsg();
-    }
-    QMap<QString,QVariant> v = _in.variant().toMap();
-    QMap<QString,QString> list;
-    QMap<QString,QVariant>::const_iterator _it=v.begin();
-    for(;_it!=v.end();++_it) {
-        list[_it.key()]=_it.value().toString();
-    }
-
-    bool ok;
-    QString logMessage = Commitmsg_impl::getLogmessage(list,&ok,0,0,0);
-    if (!ok) {
-        return res;
-    }
-    res.append(logMessage);
-    return res;
-}
-
 QString kdesvnd::cleanUrl(const KUrl&url)
 {
     QString cleanpath = url.path();

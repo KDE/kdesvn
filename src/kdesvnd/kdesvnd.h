@@ -67,8 +67,6 @@ public Q_SLOTS:
     QString get_sslclientcertfile();
     // return a logmessage at pos 0, null-size list if cancel hit
     QStringList get_logmsg();
-    // return a logmessage at pos 0, null-size list if cancel hit, parameter is path -> action for display
-    QStringList get_logmsg_path(const QDBusVariant&);
 
     // return pw loaded from wallet if existent
     QString load_sslclientcertpw(const QString& realm);

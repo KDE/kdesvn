@@ -370,8 +370,8 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
 {
     emit waitShow(true);
     if (may_save_plaintext) {
-        QString question = i18n("%1\nRealy save clear plaintext password?",realmstring);
-        QString head = i18n("Save plain password");
+        QString question = i18n("%1\nRealy store password as plain text?",realmstring);
+        QString head = i18n("Save password");
         if (KMessageBox::questionYesNo(0,question,head)==KMessageBox::Yes) {
             *may_save_plaintext = true;
         } else {

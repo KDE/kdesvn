@@ -359,6 +359,31 @@ bool kdesvnd::isWorkingCopy(const KUrl&_url,QString&base)
     return true;
 }
 
+bool kdesvnd::canceldKioOperation(qulonglong kioid)
+{
+    return false;
+}
+
+void kdesvnd::maxTransferKioOperation(qulonglong kioid, qulonglong maxtransfer)
+{
+}
+
+void kdesvnd::registerKioFeedback(qulonglong kioid)
+{
+}
+
+void kdesvnd::titleKioOperation(qulonglong kioid, const QString &title, const QString &label)
+{
+}
+
+void kdesvnd::transferedKioOperation(qulonglong kioid, qulonglong transfered)
+{
+}
+
+void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
+{
+}
+
 bool IListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
 {
     PwStorage::self()->getLogin(realm,username,password);

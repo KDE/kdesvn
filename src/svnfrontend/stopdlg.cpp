@@ -198,12 +198,17 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
         QString s1 = helpers::ByteToString()(current);
         if (max > -1 && max != m_NetBar->maximum()) {
             QString s2 = helpers::ByteToString()(max);
-            m_NetBar->setFormat(i18n("%1 of %2",s1,s2));
+            m_NetBar->setFormat(i18n("%p% of %1",s2));
             m_NetBar->setRange(0,max);
         }
         if (max == -1) {
-            m_NetBar->setFormat(i18n("%1 transferred.",s1));
-            m_NetBar->setRange(0,current+1);
+            if (m_NetBar->maximum()==-1 || m_NetBar->maximum()<current) {
+                m_NetBar->setFormat(i18n("%1 transferred.",s1));
+                m_NetBar->setRange(0,current+1);
+            } else {
+                kDebug()<<i18n("%1 of %2",s1,helpers::ByteToString()(m_NetBar->maximum()))<<endl;
+                m_NetBar->setFormat(i18n("%1 of %2",s1,helpers::ByteToString()(m_NetBar->maximum())));
+            }
         }
         m_NetBar->setValue(current);
         m_StopTick.restart();

@@ -94,6 +94,7 @@ SET(svnfrontendui
     svnlogdlg.ui
     treeWidget.ui
     database/dboverview.ui
+    database/dbsettings.ui
     )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

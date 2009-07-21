@@ -291,6 +291,10 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
     }
+    if (rev != svn::Revision::HEAD) {
+        error(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        return;
+    }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         svn::Path p(makeSvnUrl(url));
@@ -481,6 +485,10 @@ void kio_svnProtocol::del(const KUrl&src,bool isfile)
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
+    }
+    if (rev != svn::Revision::HEAD) {
+        error(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        return;
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {

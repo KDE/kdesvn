@@ -77,6 +77,8 @@ SET(svnfrontendsrc
     svntreeview.h
     database/dboverview.cpp
     database/dboverview.h
+    database/dbsettings.cpp
+    database/dbsettings.h
     )
 
 SET(svnfrontendui

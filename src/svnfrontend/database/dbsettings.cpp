@@ -1,6 +1,7 @@
 #include "dbsettings.h"
 #include "src/svnqt/shared_pointer.hpp"
 #include "src/svnqt/cache/ReposConfig.hpp"
+#include "src/svnfrontend/fronthelpers/createdlg.h"
 
 class DbSettingsData
 {
@@ -11,13 +12,12 @@ public:
     QString m_repository;
 };
 
-DbSettings::DbSettings(const QString&repository,QWidget*parent,const char*name)
+DbSettings::DbSettings(QWidget*parent,const char*name)
     :QWidget(parent)
 {
     setupUi(this);
     setObjectName(name);
     _data = new DbSettingsData;
-    setRepository(repository);
 }
 
 DbSettings::~DbSettings()
@@ -36,7 +36,7 @@ void DbSettings::init()
 {
     QStringList _v = svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"tree_exclude_list",QStringList());
     dbcfg_exclude_box->setItems(_v);
-    dbcfg_noCacheUpdate->setChecked(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"update_cache",false));
+    dbcfg_noCacheUpdate->setChecked(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"no_update_cache",false));
 }
 
 void DbSettings::store()
@@ -47,7 +47,23 @@ void DbSettings::store()
     } else {
         svn::cache::ReposConfig::self()->eraseValue(_data->m_repository,"tree_exclude_list");
     }
-    svn::cache::ReposConfig::self()->setValue(_data->m_repository,"update_cache",dbcfg_noCacheUpdate->isChecked());
+    svn::cache::ReposConfig::self()->setValue(_data->m_repository,"no_update_cache",dbcfg_noCacheUpdate->isChecked());
+}
+
+void DbSettings::showSettings(const QString&repository)
+{
+    DbSettings*ptr = 0;
+    static const char*cfg_text = "db_settings_dlg";
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),cfg_text);
+    KDialog*dlg = createDialog(&ptr,i18n("Settings for %1",repository),true,"RepositorySettings",cfg_text);
+    dlg->restoreDialogSize(_kc);
+    ptr->setRepository(repository);
+    if (dlg->exec()==QDialog::Accepted) {
+        ptr->store();
+    }
+    dlg->saveDialogSize(_kc);
+    _kc.sync();
+    delete dlg;
 }
 
 #include "dbsettings.moc"

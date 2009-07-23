@@ -6,36 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>589</width>
-    <height>487</height>
+    <width>348</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="m_ReposLayout">
-     <item>
-      <widget class="QLabel" name="m_RepositoryLabel">
-       <property name="text">
-        <string>Known repositories</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QListView" name="m_ReposListView"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QWidget" name="">
+      <layout class="QVBoxLayout" name="m_ReposLayout">
        <item>
+        <widget class="QLabel" name="m_RepositoryLabel">
+         <property name="text">
+          <string>Known repositories</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListView" name="m_ReposListView"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
+       </item>
+       <item row="1" column="0">
         <widget class="QPushButton" name="m_DeleteCacheButton">
          <property name="toolTip">
           <string>Delete cache entries for current selected repository</string>
@@ -48,7 +51,7 @@
          </property>
         </widget>
        </item>
-       <item>
+       <item row="2" column="0">
         <widget class="QPushButton" name="m_DeleteRepositoryButton">
          <property name="toolTip">
           <string>Delete all entries and settings for selected repository</string>
@@ -61,9 +64,16 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="m_SettingsButton">
+         <property name="text">
+          <string>Repository Settings</string>
+         </property>
+        </widget>
+       </item>
       </layout>
-     </item>
-    </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -83,8 +93,8 @@
    <slot>deleteCacheItems()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>396</x>
-     <y>286</y>
+     <x>289</x>
+     <y>475</y>
     </hint>
     <hint type="destinationlabel">
      <x>377</x>
@@ -99,12 +109,28 @@
    <slot>deleteRepository()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>624</x>
-     <y>292</y>
+     <x>433</x>
+     <y>475</y>
     </hint>
     <hint type="destinationlabel">
      <x>602</x>
      <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_SettingsButton</sender>
+   <signal>clicked()</signal>
+   <receiver>DBOverView</receiver>
+   <slot>repositorySettings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>585</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -113,5 +139,6 @@
   <slot>itemActivated(QModelIndex)</slot>
   <slot>deleteCacheItems()</slot>
   <slot>deleteRepository()</slot>
+  <slot>repositorySettings()</slot>
  </slots>
 </ui>

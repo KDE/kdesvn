@@ -23,6 +23,7 @@
 #include "models/svnitemnode.h"
 #include "models/svnsortfilter.h"
 #include "models/svndirsortfilter.h"
+#include "database/dbsettings.h"
 #include "cursorstack.h"
 #include "svnactions.h"
 #include "copymoveview_impl.h"
@@ -302,7 +303,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
         }
     }
     if (result && Kdesvnsettings::log_cache_on_open()) {
-        m_Data->m_Model->svnWrapper()->startFillCache(baseUri());
+        m_Data->m_Model->svnWrapper()->startFillCache(baseUri(),true);
     }
 
     emit changeCaption(baseUri());
@@ -654,6 +655,8 @@ void MainTreeWidget::setupActions()
 
     tmp_action = add_action("make_dir_commit",i18n("Commit"),KShortcut(),KIcon("kdesvncommit"),this,SLOT(slotDirCommit()));
     tmp_action = add_action("make_dir_update",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),this,SLOT(slotDirUpdate()));
+
+    tmp_action = add_action("show_repository_settings",i18n("Settings for current repository"),KShortcut(),KIcon(),this,SLOT(slotRepositorySettings()));
     enableActions();
 }
 
@@ -775,6 +778,7 @@ void MainTreeWidget::enableActions()
     enableAction("switch_browse_revision",!isWorkingCopy()&&isopen);
     enableAction("make_check_updates",isWorkingCopy()&&isopen && remote_enabled);
     enableAction("openwith",KAuthorized::authorizeKAction("openwith")&&single&&!dir);
+    enableAction("show_repository_settings",isopen);
 
     temp = filesActions()->action("update_log_cache");
     if (temp) {
@@ -2194,6 +2198,22 @@ void MainTreeWidget::checkUseNavigation(bool startup)
 
     }
     m_TreeView->setRootIndex(QModelIndex());
+}
+
+void MainTreeWidget::slotRepositorySettings()
+{
+    if (baseUri().length()==0) {
+        return;
+    }
+    svn::InfoEntry inf;
+    if (!m_Data->m_Model->svnWrapper()->singleInfo(baseUri(),baseRevision(),inf)) {
+        return;
+    }
+    if (inf.reposRoot().isEmpty()) {
+        KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository."),i18n("SVN Error"));
+    } else {
+        DbSettings::showSettings(inf.reposRoot());
+    }
 }
 
 #include "maintreewidget.moc"

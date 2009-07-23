@@ -285,18 +285,17 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
     static QString sCount("select count(*) from logentries where revision<=? and revision>=?");
     static QString sEntry("select revision,author,date,message from logentries where revision<=? and revision>=?");
     static QString sItems("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?");
+
     for (int i = 0; i < exclude.size();++i) {
-        sItems+=" and changeditem not like ?";
+        sItems+=" and changeditem not like '"+exclude[i]+"%'";
     }
 
     QSqlQuery bcount(QString(),m_Database);
     bcount.prepare(sCount);
 
     QSqlQuery bcur(QString(),m_Database);
-    bcur.prepare(sEntry);
 
     QSqlQuery cur(QString(),m_Database);
-    cur.prepare(sItems);
 
     bcount.bindValue(0,Q_LLONG(end.revnum()));
     bcount.bindValue(1,Q_LLONG(start.revnum()));
@@ -311,25 +310,23 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap&target,const svn::Revision&_s
         return false;
     }
 
+    bcur.prepare(sEntry);
     bcur.bindValue(0,Q_LLONG(end.revnum()));
     bcur.bindValue(1,Q_LLONG(start.revnum()));
 
     if (!bcur.exec()) {
-        //qDebug() << bcur.lastError().text();
         throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+bcur.lastError().text());
         return false;
     }
     Q_LLONG revision;
     while(bcur.next()) {
+        cur.prepare(sItems);
         revision = bcur.value(0).toLongLong();
         cur.bindValue(0,revision);
-        for (int i = 0; i < exclude.size();++i) {
-            cur.bindValue(i+1,exclude[i]+"%");
-        }
 
         if (!cur.exec()) {
             //qDebug() << cur.lastError().text();
-            throw svn::cache::DatabaseException(QString("Could not retrieve values: ")+cur.lastError().text()
+            throw svn::cache::DatabaseException(QString("Could not retrieve revision values: ")+cur.lastError().text()
                     ,cur.lastError().number());
             return false;
         }

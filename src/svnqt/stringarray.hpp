@@ -47,8 +47,9 @@ namespace svn
             StringArray();
             StringArray(const QStringList&);
             StringArray(const apr_array_header_t * apr_targets);
-            size_t size()const;
-            const QString& operator[](size_t which);
+            QStringList::size_type size()const;
+            const QString& operator[](QStringList::size_type which)const;
+            QString& operator[](QStringList::size_type which);
             /**
              * Returns an apr array containing char*.
              *

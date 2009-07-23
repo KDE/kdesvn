@@ -43,6 +43,7 @@ protected Q_SLOTS:
     virtual void setClient(svn::Client*aClient);
     virtual void deleteCacheItems();
     virtual void deleteRepository();
+    virtual void repositorySettings();
 
 protected:
     QString selectedRepository()const;

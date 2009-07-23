@@ -153,7 +153,7 @@ public:
     void removeFromUpdateCache(const QStringList&what,bool exact_only);
     void stopCheckModThread();
     void stopCheckUpdateThread();
-    void startFillCache(const QString&path);
+    void startFillCache(const QString&path,bool startup=false);
     void stopMain();
     void killallThreads();
 

@@ -49,6 +49,7 @@
 namespace svn
 {
 
+  class StringArray;
   class SVNQT_EXPORT LogChangePathEntry
   {
   public:
@@ -94,7 +95,7 @@ namespace svn
               const char * date,
               const char * message);
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    LogEntry(svn_log_entry_t*);
+    LogEntry(svn_log_entry_t*,const StringArray&excludeList);
 #endif
     void setDate(const char*date);
 

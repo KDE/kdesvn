@@ -156,6 +156,7 @@ protected Q_SLOTS:
     void slotUpdateLogCache();
 
     void slotUrlDropped(const KUrl::List&,Qt::DropAction,const QModelIndex&,bool);
+    void slotRepositorySettings();
 
 protected:
     virtual bool event(QEvent*event);

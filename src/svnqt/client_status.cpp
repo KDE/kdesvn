@@ -82,7 +82,7 @@ namespace svn
           }
           return SVN_NO_ERROR;
       }
-      (*entries)[log_entry->revision]=LogEntry (log_entry);
+      (*entries)[log_entry->revision]=LogEntry (log_entry,(l_baton->excludeList?*(l_baton->excludeList):svn::StringArray()));
       /// @TODO insert it into last logentry
       if (rstack) {
           (*entries)[log_entry->revision].m_MergedInRevisions=(*rstack);
@@ -117,6 +117,7 @@ namespace svn
     if (changedPaths != NULL)
     {
       LogEntry &entry = (*entries)[rev];
+      bool blocked = false;
 
       for (apr_hash_index_t *hi = apr_hash_first (pool, changedPaths);
            hi != NULL;
@@ -129,12 +130,23 @@ namespace svn
         svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
         const char* path = reinterpret_cast<const char*>(pv);
 
-        entry.changedPaths.push_back (
-              LogChangePathEntry (path,
-                                  log_item->action,
-                                  log_item->copyfrom_path,
-                                  log_item->copyfrom_rev) );
-
+        blocked = false;
+        if (l_baton->excludeList) {
+            QString _p(path);
+            for (int _exnr=0;_exnr < l_baton->excludeList.size();++_exnr) {
+                if (_p.startsWith(l_baton->excludeList[_exnr])) {
+                    blocked=true;
+                    break;
+                }
+            }
+        }
+        if (!blocked) {
+            entry.changedPaths.push_back (
+                LogChangePathEntry (path,
+                                    log_item->action,
+                                    log_item->copyfrom_path,
+                                    log_item->copyfrom_rev) );
+        }
       }
     }
 
@@ -390,6 +402,7 @@ namespace svn
     l_baton.m_context=m_context;
     l_baton.m_data = &log_target;
     l_baton.m_revstack = &revstack;
+    l_baton.excludeList = & (params.excludeList());
     svn_error_t *error;
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)

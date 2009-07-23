@@ -65,7 +65,7 @@ svn::StringArray::StringArray(const apr_array_header_t * apr_targets)
 /*!
     \fn svn::StringArray::size()const
  */
-size_t svn::StringArray::size()const
+QStringList::size_type svn::StringArray::size()const
 {
     if (isNull()) {
         return 0;
@@ -74,10 +74,12 @@ size_t svn::StringArray::size()const
 }
 
 
-/*!
-    \fn svn::StringArray::operator[](size_t which)
- */
-const QString& svn::StringArray::operator[](size_t which)
+const QString& svn::StringArray::operator[](QStringList::size_type which)const
+{
+    return m_content[which];
+}
+
+QString& svn::StringArray::operator[](QStringList::size_type which)
 {
     return m_content[which];
 }

@@ -266,6 +266,8 @@ namespace svn
         LogParameter&includeMergedRevisions(bool value);
         const StringArray& revisionProperties()const;
         LogParameter&revisionProperties(const StringArray&props);
+        const StringArray& excludeList()const;
+        LogParameter&excludeList(const StringArray&props);
     };
 
     struct PropertiesParameterData;

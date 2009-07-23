@@ -30,6 +30,7 @@
 // svncpp
 #include "log_entry.hpp"
 #include "pool.hpp"
+#include "stringarray.hpp"
 
 // subversion api
 #include "svn_time.h"
@@ -87,7 +88,7 @@ namespace svn
   }
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-  LogEntry::LogEntry(svn_log_entry_t*log_entry)
+  LogEntry::LogEntry(svn_log_entry_t*log_entry,const StringArray&excludeList)
     : revision(-1),date(0),author(""),message("")
   {
       Pool pool;
@@ -101,16 +102,35 @@ namespace svn
       setDate(date_);
       revision = log_entry->revision;
       if (log_entry->changed_paths) {
+        bool blocked=false;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        for (apr_hash_index_t *hi = apr_hash_first (pool, log_entry->changed_paths2);
+#else
         for (apr_hash_index_t *hi = apr_hash_first (pool, log_entry->changed_paths);
+#endif
             hi != NULL;
             hi = apr_hash_next (hi))
         {
             const void *pv;
             void *val;
+            blocked = false;
             apr_hash_this (hi, &pv, NULL, &val);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+            svn_log_changed_path2_t *log_item = reinterpret_cast<svn_log_changed_path2_t *> (val);
+#else
             svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
+#endif
             const char* path = reinterpret_cast<const char*>(pv);
-            changedPaths.push_back (LogChangePathEntry (path,log_item->action,log_item->copyfrom_path,log_item->copyfrom_rev) );
+            QString _p(path);
+            for (int _exnr=0;_exnr < excludeList.size();++_exnr) {
+                if (_p.startsWith(excludeList[_exnr])) {
+                    blocked=true;
+                    break;
+                }
+            }
+            if (!blocked) {
+                changedPaths.push_back (LogChangePathEntry (path,log_item->action,log_item->copyfrom_path,log_item->copyfrom_rev) );
+            }
         }
       }
   }

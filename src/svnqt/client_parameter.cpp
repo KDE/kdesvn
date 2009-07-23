@@ -485,7 +485,7 @@ namespace svn
         LogParameterData()
             :_targets(),_ranges(),_peg(Revision::UNDEFINED),_limit(0),
             _discoverChangedPathes(false),_strictNodeHistory(true),_includeMergedRevisions(false),
-            _revisionProperties()
+            _revisionProperties(),_excludeList()
         {
         }
         Targets _targets;
@@ -494,6 +494,7 @@ namespace svn
         int _limit;
         bool _discoverChangedPathes,_strictNodeHistory,_includeMergedRevisions;
         StringArray _revisionProperties;
+        StringArray _excludeList;
     };
 
     LogParameter::LogParameter()
@@ -590,6 +591,15 @@ namespace svn
     LogParameter&LogParameter::revisionProperties(const StringArray&props)
     {
         SETIT(_revisionProperties,props)
+    }
+
+    const StringArray& LogParameter::excludeList()const
+    {
+        return _data->_excludeList;
+    }
+    LogParameter&LogParameter::excludeList(const StringArray&excludeList)
+    {
+        SETIT(_excludeList,excludeList)
     }
 
     struct PropertiesParameterData

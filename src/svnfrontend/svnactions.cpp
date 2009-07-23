@@ -49,6 +49,7 @@
 #include "src/svnqt/client_parameter.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
+#include "src/svnqt/cache/ReposConfig.hpp"
 
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"
@@ -955,7 +956,7 @@ void SvnActions::doCommit(const SvnItemList&which)
         }
     }
     if (makeCommit(targets) && Kdesvnsettings::log_cache_on_open()) {
-        startFillCache(m_Data->m_ParentList->baseUri());
+        startFillCache(m_Data->m_ParentList->baseUri(),true);
     }
 }
 
@@ -1301,13 +1302,14 @@ void SvnActions::makeNorecDiff(const QString&p1,const svn::Revision&r1,const QSt
     KTempDir tdir;
     tdir.setAutoRemove(true);
     QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
+    QDir d1(tdir.name());
+    d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     svn::DiffParameter _opts;
     // no peg revision required
     _opts.path1(p1).path2(p2).tmpPath(tn).
         rev1(r1).rev2(r2).
-        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).
-        relativeTo(svn::Path((p1==p2?p1:""))).changeList(svn::StringArray());
+        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray());
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,_p?_p:m_Data->m_ParentList->realWidget(),0,"Diffing","Diffing - hit cancel for abort");
@@ -2558,7 +2560,7 @@ bool SvnActions::checkConflictedCache(const QString&path)
     return m_Data->m_conflictCache.find(path);
 }
 
-void SvnActions::startFillCache(const QString&path)
+void SvnActions::startFillCache(const QString&path,bool startup)
 {
     stopFillCache();
     svn::InfoEntry e;
@@ -2570,6 +2572,10 @@ void SvnActions::startFillCache(const QString&path)
         return;
     }
     if (svn::Url::isLocal(e.reposRoot())) {
+        return;
+    }
+    if (startup && svn::cache::ReposConfig::self()->readEntry(e.reposRoot(),"no_update_cache",false)) {
+        emit sendNotify(i18n("Not filling logcache because it is disabled due setting for this repository."));
         return;
     }
     m_FCThread=new FillCacheThread(this,e.reposRoot());

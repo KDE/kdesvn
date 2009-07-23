@@ -1,4 +1,5 @@
 #include "dboverview.h"
+#include "dbsettings.h"
 #include "src/svnqt/cache/ReposConfig.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
@@ -81,6 +82,7 @@ void DbOverview::enableButtons(bool how)
 {
     m_DeleteCacheButton->setEnabled(how);
     m_DeleteRepositoryButton->setEnabled(how);
+    m_SettingsButton->setEnabled(how);
 }
 
 void DbOverview::itemActivated(const QItemSelection&indexes,const QItemSelection&deindexes)
@@ -145,6 +147,11 @@ void DbOverview::deleteRepository()
     }catch (const svn::cache::DatabaseException&e) {
         kDebug()<<e.msg()<<endl;
     }
+}
+
+void DbOverview::repositorySettings()
+{
+    DbSettings::showSettings(selectedRepository());
 }
 
 #include "dboverview.moc"

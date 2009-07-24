@@ -75,12 +75,5 @@ public Q_SLOTS:
     QStringList getActionMenu(const KUrl::List&);
     QStringList getTopLevelActionMenu(const KUrl::List&);
     QStringList getSingleActionMenu(const QString&);
-
-    bool canceldKioOperation(qulonglong kioid);
-    void maxTransferKioOperation(qulonglong kioid, qulonglong maxtransfer);
-    void registerKioFeedback(qulonglong kioid);
-    void titleKioOperation(qulonglong kioid, const QString &title, const QString &label);
-    void transferedKioOperation(qulonglong kioid, qulonglong transfered);
-    void unRegisterKioFeedback(qulonglong kioid);
 };
 #endif

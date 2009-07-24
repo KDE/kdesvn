@@ -46,28 +46,5 @@
         <arg type="as" direction="out"/>
         <arg name="wc" type="s" direction="in"/>
     </method>
-    <method name="registerKioFeedback">
-        <arg type="t" name="kioid" direction="in"/>
-    </method>
-    <method name="unRegisterKioFeedback">
-        <arg type="t" name="kioid" direction="in"/>
-    </method>
-    <method name="canceldKioOperation">
-       <arg type="t" name="kioid" direction="in"/>
-       <arg type="b" direction="out"/>
-    </method>
-    <method name="maxTransferKioOperation">
-        <arg type="t" name="kioid" direction="in"/>
-        <arg type="t" name="maxtransfer" direction="in"/>
-    </method>
-    <method name="transferedKioOperation">
-        <arg type="t" name="kioid" direction="in"/>
-        <arg type="t" name="transfered" direction="in"/>
-    </method>
-    <method name="titleKioOperation">
-        <arg type="t" name="kioid" direction="in"/>
-        <arg type="s" name="title" direction="in"/>
-        <arg type="s" name="label" direction="in"/>
-    </method>
-    </interface>
+  </interface>
  </node>

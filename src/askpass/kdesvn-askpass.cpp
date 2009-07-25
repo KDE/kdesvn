@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2007 by Rajko Albrecht                             *
+ *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -21,43 +21,68 @@
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
-#include <klocale.h>
 #include <kpassworddialog.h>
-
-#include <iostream>
+#include <kdebug.h>
+#include <kwallet.h>
+#include <KLocalizedString>
+#include <QTextStream>
 
 int main(int argc, char** argv)
 {
-    KAboutData about(QByteArray("kdesvnaskpass"),QByteArray("kdesvnaskpass"),ki18n("kdesvnaskpass"),QByteArray("0.1"),
+    KAboutData about(QByteArray("kdesvnaskpass"),QByteArray("kdesvnaskpass"),ki18n("kdesvnaskpass"),QByteArray("0.2"),
                     ki18n("ssh-askpass for kdesvn"),
                     KAboutData::License_LGPL,
-                    ki18n("Copyright (c) 2005 Rajko Albrecht"));
+                    ki18n("Copyright (c) 2005-2009 Rajko Albrecht"));
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineOptions options;
     options.add("+[prompt]",ki18n("Prompt"));
     KCmdLineArgs::addCmdLineOptions(options);
-
     KApplication app;
     // no need for session management
     app.disableSessionManagement();
+    KGlobal::locale()->insertCatalog("kdesvn");
+
+
     QString prompt;
+    QString kfile;
 
     if( !KCmdLineArgs::parsedArgs()->count() ) {
         prompt = i18n("Please enter your password below.");
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
+        kfile = prompt.section(" ", -2).remove(":").simplified();
     }
     QString pw;
-    KPasswordDialog dlg;
-    dlg.setPrompt(prompt);
-    dlg.setCaption(i18n("SSH password"));
-    if (dlg.exec()==KPasswordDialog::Accepted) {
-        pw = dlg.password();
-        std::cout << pw.toUtf8().data() << std::endl;
-        /* cleanup memory */
-        pw.replace(0,pw.length(),"0");
-        return 0;
+    QString wfolder = about.appName();
+
+    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0 );
+    if (wallet && wallet->hasFolder(wfolder)) {
+        wallet->setFolder(wfolder);
+        wallet->readPassword(kfile,pw);
     }
-    return 1;
+
+    if (pw.isEmpty()) {
+        KPasswordDialog dlg(0,(wallet?KPasswordDialog::ShowKeepPassword:KPasswordDialog::NoFlags));
+        dlg.setPrompt(prompt);
+        dlg.setCaption(i18n("Password"));
+        if (dlg.exec()!=KPasswordDialog::Accepted) {
+            delete wallet;
+            return 1;
+        }
+        pw = dlg.password();
+        if (wallet && dlg.keepPassword()) {
+            if ( !wallet->hasFolder( wfolder ) ) {
+                wallet->createFolder(wfolder);
+            }
+            wallet->setFolder(wfolder);
+            wallet->writePassword(kfile, pw);
+        }
+    }
+
+    QTextStream out(stdout);
+    out << pw;
+    /* cleanup memory */
+    pw.replace(0,pw.length(),"0");
+    return 0;
 }
 

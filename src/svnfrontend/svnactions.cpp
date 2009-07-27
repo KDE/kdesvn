@@ -2147,10 +2147,18 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 
     bool pegged_merge=false;
 
+    // build merge Parameters
+    svn::MergeParameter _merge_parameter;
+    ranges.append(svn::RevisionRange(rev1,rev2));
+    /// @todo implement "record_only" parameter into merge dialog
+    /// @todo implement "reintegrate" parameter into merge dialog
+    _merge_parameter.revisions(ranges).path1(p1).path2(p2).depth(rec?svn::DepthInfinity:svn::DepthFiles).notice_ancestry(ancestry).force(forceIt)
+        .dry_run(dry).record_only(false).reintegrate(false)
+        .localPath(svn::Path(target)).merge_options(svn::StringArray());
+
     if(!p2.isset() || src1==src2) {
         // pegged merge
         pegged_merge=true;
-        ranges.append(svn::RevisionRange(rev1,rev2));
         if (peg==svn::Revision::UNDEFINED) {
             if (p1.isUrl()) {
                 peg = rev2;
@@ -2158,17 +2166,16 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
                 peg=svn::Revision::WORKING;
             }
         }
+        _merge_parameter.peg(peg);
     }
+
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Merge"),i18n("Merging items"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (pegged_merge) {
-            m_Data->m_Svnclient->merge_peg(p1,ranges,svn::Revision::HEAD,svn::Path(target),rec?svn::DepthUnknown:svn::DepthFiles,
-                                            ancestry,dry,forceIt,false);
+            m_Data->m_Svnclient->merge_peg(_merge_parameter);
         } else {
-            m_Data->m_Svnclient->merge(p1,rev1,p2,rev2,
-                                        svn::Path(target),
-                                        forceIt,rec?svn::DepthUnknown:svn::DepthFiles,ancestry,dry);
+            m_Data->m_Svnclient->merge(_merge_parameter);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());

@@ -250,13 +250,14 @@ namespace svn
     public:
         MergeParameterData()
             :_path1(),_path2(),_localPath(),
-             revision1(Revision::UNDEFINED),revision2(Revision::UNDEFINED),_peg(Revision::UNDEFINED),
-             _force(false),_notice_anchestry(true),_dry_run(false),_record_only(false),_reintegrate(false),
+             _peg(Revision::UNDEFINED),_ranges(),
+             _force(false),_notice_ancestry(true),_dry_run(false),_record_only(false),_reintegrate(false),
              _depth(DepthInfinity),_merge_options()
         {}
         Path _path1,_path2,_localPath;
-        Revision revision1,revision2,_peg;
-        bool _force,_notice_anchestry,_dry_run,_record_only,_reintegrate;
+        Revision _peg;
+        RevisionRanges _ranges;
+        bool _force,_notice_ancestry,_dry_run,_record_only,_reintegrate;
         Depth _depth;
         StringArray _merge_options;
     };
@@ -274,15 +275,38 @@ namespace svn
     GETSET(MergeParameter,Path,_path1,path1);
     GETSET(MergeParameter,Path,_path2,path2);
     GETSET(MergeParameter,Path,_localPath,localPath);
-    GETSET(MergeParameter,Revision,revision1,revision1);
-    GETSET(MergeParameter,Revision,revision2,revision2);
     GETSET(MergeParameter,Revision,_peg,peg);
     GETSET(MergeParameter,StringArray,_merge_options,merge_options);
+    GETSET(MergeParameter,RevisionRanges,_ranges,revisions);
 
     GETSETSI(MergeParameter,bool,_force,force);
-    GETSETSI(MergeParameter,bool,_notice_anchestry,notice_anchestry);
+    GETSETSI(MergeParameter,bool,_notice_ancestry,notice_ancestry);
     GETSETSI(MergeParameter,bool,_dry_run,dry_run);
     GETSETSI(MergeParameter,bool,_record_only,record_only);
     GETSETSI(MergeParameter,Depth,_depth,depth);
     GETSETSI(MergeParameter,bool,_reintegrate,reintegrate);
+
+    const RevisionRange&MergeParameter::revisionRange()const
+    {
+        if (_data->_ranges.size()<1) {
+            const static RevisionRange r(Revision::UNDEFINED,Revision::UNDEFINED);
+            return r;
+        }
+        return _data->_ranges[0];
+    }
+    MergeParameter&MergeParameter::revisionRange(const Revision&start,const Revision&end)
+    {
+        _data->_ranges.clear();
+        _data->_ranges.append(RevisionRange(start,end));
+        return *this;
+    }
+    const Revision&MergeParameter::revision1()const
+    {
+        return revisionRange().first;
+    }
+    const Revision&MergeParameter::revision2()const
+    {
+        return revisionRange().second;
+    }
+
 }

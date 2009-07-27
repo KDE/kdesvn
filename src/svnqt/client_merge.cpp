@@ -29,63 +29,53 @@
 #include "svnqt/stringarray.hpp"
 
 #include "svnqt/helper.hpp"
+#include "svnqt/client_parameter.hpp"
 
 namespace svn
 {
-void Client_impl::merge (const Path & path1, const Revision & revision1,
-                 const Path & path2, const Revision & revision2,
-                 const Path & localPath,
-                 bool force,
-                 Depth depth,
-                 bool notice_ancestry,
-                 bool dry_run,
-                 bool record_only,
-                 const StringArray&merge_options
-                     ) throw (ClientException)
+void Client_impl::merge (const MergeParameter&parameters) throw (ClientException)
 {
     Pool pool;
     svn_error_t * error = 0;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    error = svn_client_merge3(path1.cstr (),
-                    revision1.revision (),
-                    path2.cstr (),
-                    revision2.revision (),
-                    localPath.cstr (),
-                    internal::DepthToSvn(depth),
-                    !notice_ancestry,
-                    force,
-                    record_only,
-                    dry_run,
-                    merge_options.array(pool),
+    error = svn_client_merge3(parameters.path1().cstr (),
+                    parameters.revision1().revision(),
+                    parameters.path2().cstr(),
+                    parameters.revision2().revision(),
+                    parameters.localPath().cstr (),
+                    internal::DepthToSvn(parameters.depth()),
+                    !parameters.notice_ancestry(),
+                    parameters.force(),
+                    parameters.record_only(),
+                    parameters.dry_run(),
+                    parameters.merge_options().array(pool),
                     *m_context,
                     pool);
 #else
-    bool recurse = depth==DepthInfinity;
-    Q_UNUSED(record_only);
+    bool recurse = parameters.depth()==DepthInfinity;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4))
-    error = svn_client_merge2(path1.cstr (),
-                    revision1.revision (),
-                    path2.cstr (),
-                    revision2.revision (),
-                    localPath.cstr (),
+    error = svn_client_merge2(parameters.path1().cstr (),
+                    parameters.revision1().revision (),
+                    parameters.path2().cstr (),
+                    parameters.revision2().revision(),
+                    parameters.localPath().cstr (),
                     recurse,
-                    !notice_ancestry,
-                    force,
-                    dry_run,
-                    merge_options.array(pool),
+                    !parameters.notice_ancestry(),
+                    parameters.force(),
+                    parameters.dry_run(),
+                    parameters.merge_options().array(pool),
                     *m_context,
                     pool);
 #else
-    Q_UNUSED(merge_options);
-    error = svn_client_merge(path1.cstr (),
-                        revision1.revision (),
-                        path2.cstr (),
-                        revision2.revision (),
-                        localPath.cstr (),
+    error = svn_client_merge(parameters.path1().cstr (),
+                        parameters.revision1().revision (),
+                        parameters.path2().cstr (),
+                        parameters.revision2().revision (),
+                        parameters.localPath().cstr (),
                         recurse,
-                        !notice_ancestry,
-                        force,
-                        dry_run,
+                        !parameters.notice_ancestry(),
+                        parameters.force(),
+                        parameters.dry_run(),
                         *m_context,
                         pool);
 #endif
@@ -96,35 +86,25 @@ void Client_impl::merge (const Path & path1, const Revision & revision1,
     }
   }
 
-  void Client_impl::merge_peg(const Path&src,
-                              const RevisionRanges&ranges,
-                    const Revision&peg,
-                    const Path&targetWc,
-                    Depth depth,
-                    bool notice_ancestry,
-                    bool dry_run,
-                    bool force,
-                    bool record_only,
-                    const StringArray&merge_options
-                   ) throw (ClientException)
+  void Client_impl::merge_peg(const MergeParameter&parameters) throw (ClientException)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
       Pool pool;
-      internal::RevisionRangesToHash _rhash(ranges);
+      internal::RevisionRangesToHash _rhash(parameters.revisions());
 
       svn_error_t*error;
 
       error = svn_client_merge_peg3(
-                                    src.cstr(),
+                                    parameters.path1().cstr(),
                                     _rhash.array(pool),
-                                    peg,
-                                    targetWc.cstr(),
-                                    internal::DepthToSvn(depth),
-                                    !notice_ancestry,
-                                    force,
-                                    record_only,
-                                    dry_run,
-                                    merge_options.array(pool),
+                                    parameters.peg(),
+                                    parameters.localPath().cstr(),
+                                    internal::DepthToSvn(parameters.depth()),
+                                    !parameters.notice_ancestry(),
+                                    parameters.force(),
+                                    parameters.record_only(),
+                                    parameters.dry_run(),
+                                    parameters.merge_options().array(pool),
                                     *m_context,
                                     pool
                                    );
@@ -132,9 +112,9 @@ void Client_impl::merge (const Path & path1, const Revision & revision1,
           throw ClientException (error);
       }
 #else
-      Q_UNUSED(record_only);
-      for (RevisionRanges::size_type i=0;i<ranges.count();++i) {
-          merge_peg(src,ranges[i],peg,targetWc,depth,notice_ancestry,dry_run,force,merge_options);
+      for (RevisionRanges::size_type i=0;i<parameters.revisions().count();++i) {
+          merge_peg(parameters.path1(),parameters.revisions()[i],parameters.peg(),parameters.localPath(),
+            parameters.depth(),parameters.notice_ancestry(),parameters.dry_run(),parameters.force(),parameters.merge_options());
       }
 #endif
   }
@@ -151,9 +131,16 @@ void Client_impl::merge (const Path & path1, const Revision & revision1,
                              ) throw (ClientException)
     {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-        RevisionRanges ranges;
-        ranges.append(range);
-        merge_peg(src,ranges,peg,targetWc,depth,notice_ancestry,dry_run,force,false,merge_options);
+        Q_UNUSED(src);
+        Q_UNUSED(range);
+        Q_UNUSED(peg);
+        Q_UNUSED(targetWc);
+        Q_UNUSED(depth);
+        Q_UNUSED(notice_ancestry);
+        Q_UNUSED(dry_run);
+        Q_UNUSED(force);
+        Q_UNUSED(merge_options);
+        qWarning()<<"This methode is obsolete!";
 #else
         Pool pool;
         bool recurse=depth==DepthInfinity;

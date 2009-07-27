@@ -419,42 +419,13 @@ namespace svn
     /**
      * Merge changes from two paths into a new local path.
      * @exception ClientException
+     * @sa svn::MergeParameter
      */
     virtual void
-    merge (const Path & path1, const Revision & revision1,
-           const Path & path2, const Revision & revision2,
-           const Path & localPath, bool force,
-           Depth depth,
-           bool notice_ancestry=false,
-           bool dry_run=false,
-           bool record_only=false,
-           const StringArray&merge_options=StringArray()
-          ) throw (ClientException);
+    merge (const MergeParameter&parameters) throw (ClientException);
 
     virtual void
-    merge_peg(const Path&src,
-              const RevisionRanges&ranges,
-                      const Revision&peg,
-                      const Path&targetWc,
-                      Depth depth,
-                      bool notice_ancestry=false,
-                      bool dry_run=false,
-                      bool force=false,
-                      bool record_only=false,
-                      const StringArray&merge_options=StringArray()
-                     ) throw (ClientException);
-
-    virtual void
-    merge_peg(const Path&src,
-              const RevisionRange&range,
-              const Revision&peg,
-              const Path&targetWc,
-              Depth depth,
-              bool notice_ancestry,
-              bool dry_run,
-              bool force,
-              const StringArray&merge_options
-            ) throw (ClientException);
+    merge_peg(const MergeParameter&parameters) throw (ClientException);
 
     /**
      * Retrieve information for the given path
@@ -729,7 +700,21 @@ namespace svn
 
     static apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
     static apr_array_header_t * revListToHeader(const RevisionRanges&,const Pool&);
-  };
+
+    //! helper method
+    virtual void
+    merge_peg(const Path&src,
+              const RevisionRange&range,
+              const Revision&peg,
+              const Path&targetWc,
+              Depth depth,
+              bool notice_ancestry,
+              bool dry_run,
+              bool force,
+              const StringArray&merge_options
+            ) throw (ClientException);
+
+    };
 
 }
 

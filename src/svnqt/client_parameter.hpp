@@ -56,8 +56,12 @@ namespace svn
 
         //! Targets for copy operation
         const Targets&srcPath()const;
+        //! Targets for copy operation
+        CopyParameter&srcPath(const Targets&_srcPath);
         //! Destination path for copy operation
         const Path&destination()const;
+        //! Destination path for copy operation
+        CopyParameter&destination(const Path&destination);
 
         //! set copy operation parameter asChild to true
         CopyParameter&asChild(bool);
@@ -354,6 +358,49 @@ namespace svn
 
         PropertiesParameter&revisionProperties(const PropertiesMap&props);
         const PropertiesMap&revisionProperties()const;
+    };
+
+    struct MergeParameterData;
+
+    class SVNQT_EXPORT MergeParameter
+    {
+    private:
+        SharedPointer<MergeParameterData> _data;
+    public:
+        MergeParameter();
+        ~MergeParameter();
+
+        MergeParameter&path1(const Path&path);
+        const Path&path1()const;
+        MergeParameter&path2(const Path&path);
+        const Path&path2()const;
+        MergeParameter&localPath(const Path&path);
+        const Path&localPath()const;
+
+        MergeParameter&revision1(const Revision&rev);
+        const Revision&revision1()const;
+        MergeParameter&revision2(const Revision&rev);
+        const Revision&revision2()const;
+        MergeParameter&peg(const Revision&rev);
+        const Revision&peg()const;
+
+        MergeParameter&force(bool how);
+        bool force()const;
+        MergeParameter&notice_anchestry(bool how);
+        bool notice_anchestry()const;
+        MergeParameter&dry_run(bool how);
+        bool dry_run()const;
+        MergeParameter&record_only(bool how);
+        bool record_only()const;
+
+        MergeParameter&depth(Depth depth);
+        Depth depth()const;
+
+        MergeParameter&merge_options(const StringArray&options);
+        const StringArray&merge_options()const;
+
+        MergeParameter&reintegrate(bool reintegrate);
+        bool reintegrate()const;
     };
 }
 

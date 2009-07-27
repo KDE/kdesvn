@@ -64,7 +64,7 @@ public:
 
     CommitModelNodePtr currentCommitItem(int column=0);
 
-protected slots:
+protected Q_SLOTS:
     virtual void slotHistoryActivated(int);
     virtual void slotUnmarkUnversioned();
     virtual void slotDiffSelected();
@@ -73,6 +73,7 @@ protected slots:
     virtual void hideNewItems(bool);
     virtual void insertFile();
     virtual void slotItemReverted(const QStringList&);
+    virtual void slotItemDoubleClicked(const QModelIndex&);
 
 protected:
     static QStringList sLogHistory;
@@ -91,7 +92,7 @@ protected:
     CommitModel*m_CurrentModel;
     QSortFilterProxyModel*m_SortModel;
 
-signals:
+Q_SIGNALS:
     void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     void sigRevertItem(const QStringList&,bool);
 };

@@ -35,7 +35,6 @@ public:
     virtual void streamWritten(const KIO::filesize_t current) = 0;
     virtual void streamPushData(QByteArray)=0;
     virtual void streamSendMime(KMimeType::Ptr)=0;
-    virtual void streamTotalSizeNull()=0;
 };
 
 /**

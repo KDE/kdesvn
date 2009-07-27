@@ -102,7 +102,6 @@ public:
     virtual void streamWritten(const KIO::filesize_t current);
     virtual void streamPushData(QByteArray);
     virtual void streamSendMime(KMimeType::Ptr mt);
-    virtual void streamTotalSizeNull();
 
     virtual void listSendDirEntry(const svn::DirEntry&);
 

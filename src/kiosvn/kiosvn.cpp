@@ -1051,11 +1051,6 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
     }
 }
 
-void kio_svnProtocol::streamTotalSizeNull()
-{
-    totalSize(0);
-}
-
 bool kio_svnProtocol::supportOverwrite()
 {
     Kdesvnsettings::self()->readConfig();

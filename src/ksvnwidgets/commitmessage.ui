@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>899</width>
-    <height>483</height>
+    <width>507</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Commitmessage</string>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="QSplitter" name="m_MainSplitter">
      <property name="orientation">
@@ -60,8 +60,8 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="m_ButtonBarLayout">
-         <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
           <widget class="QPushButton" name="m_HideNewItems">
            <property name="text">
             <string>Hide new items</string>
@@ -71,7 +71,7 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="1" colspan="2">
           <widget class="QPushButton" name="m_MarkUnversioned">
            <property name="toolTip">
             <string>Mark all new e.g. not versioned items for add and commit.</string>
@@ -81,7 +81,7 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="3">
           <widget class="QPushButton" name="m_UnmarkUnversioned">
            <property name="toolTip">
             <string>Unmark all unversioned items so they will be ignored.</string>
@@ -91,7 +91,7 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="0" colspan="2">
           <widget class="QPushButton" name="m_DiffItem">
            <property name="toolTip">
             <string>Generates and display difference against repository of selected item</string>
@@ -101,7 +101,7 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="2" colspan="2">
           <widget class="QPushButton" name="m_RevertItemButton">
            <property name="text">
             <string>Revert highlighted item</string>
@@ -194,9 +194,6 @@
    <item>
     <layout class="QHBoxLayout" name="m_CheckBoxLayout">
      <item>
-      <widget class="DepthSelector" name="m_DepthSelector" native="true"/>
-     </item>
-     <item>
       <widget class="QCheckBox" name="m_keepLocksButton">
        <property name="toolTip">
         <string>If checked commit will not release locks.</string>
@@ -205,6 +202,9 @@
         <string>Keep locks</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <widget class="DepthSelector" name="m_DepthSelector" native="true"/>
      </item>
     </layout>
    </item>
@@ -242,8 +242,8 @@
    <slot>slotHistoryActivated(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>25</x>
-     <y>524</y>
+     <x>35</x>
+     <y>415</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -258,8 +258,8 @@
    <slot>slotMarkUnversioned()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>152</x>
-     <y>242</y>
+     <x>311</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -274,8 +274,8 @@
    <slot>slotUnmarkUnversioned()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>280</x>
-     <y>242</y>
+     <x>485</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -290,8 +290,8 @@
    <slot>slotDiffSelected()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>422</x>
-     <y>242</y>
+     <x>234</x>
+     <y>204</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -306,8 +306,8 @@
    <slot>hideNewItems(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>32</x>
-     <y>242</y>
+     <x>53</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -322,8 +322,8 @@
    <slot>insertFile()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>497</x>
-     <y>524</y>
+     <x>496</x>
+     <y>417</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -338,8 +338,8 @@
    <slot>slotRevertSelected()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>624</x>
-     <y>191</y>
+     <x>485</x>
+     <y>204</y>
     </hint>
     <hint type="destinationlabel">
      <x>357</x>
@@ -347,8 +347,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_CommitItemTree</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotItemDoubleClicked(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>506</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotRevertSelected()</slot>
+  <slot>slotItemDoubleClicked(QModelIndex)</slot>
  </slots>
 </ui>

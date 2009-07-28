@@ -206,7 +206,6 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
                 m_NetBar->setFormat(i18n("%1 transferred.",s1));
                 m_NetBar->setRange(0,current+1);
             } else {
-                kDebug()<<i18n("%1 of %2",s1,helpers::ByteToString()(m_NetBar->maximum()))<<endl;
                 m_NetBar->setFormat(i18n("%1 of %2",s1,helpers::ByteToString()(m_NetBar->maximum())));
             }
         }

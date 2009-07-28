@@ -446,40 +446,10 @@ namespace svn
      * @exception ClientException
      */
     virtual void
-    merge (const Path & path1, const Revision & revision1,
-           const Path & path2, const Revision & revision2,
-           const Path & localPath, bool force,
-           Depth depth,
-           bool notice_ancestry=false,
-           bool dry_run=false,
-           bool record_only=false,
-           const StringArray&merge_options=StringArray()
-          ) throw (ClientException)=0;
+    merge (const MergeParameter&parameters) throw (ClientException)=0;
 
     virtual void
-    merge_peg(const Path&src,
-              const RevisionRanges&ranges,
-                      const Revision&peg,
-                      const Path&targetWc,
-                      Depth depth,
-                      bool notice_ancestry=false,
-                      bool dry_run=false,
-                      bool force=false,
-                      bool record_only=false,
-                      const StringArray&merge_options=StringArray()
-                     ) throw (ClientException)=0;
-
-    virtual void
-    merge_peg(const Path&src,
-              const RevisionRange&range,
-              const Revision&peg,
-              const Path&targetWc,
-              Depth depth,
-              bool notice_ancestry=false,
-              bool dry_run=false,
-              bool force=false,
-              const StringArray&merge_options=StringArray()
-             ) throw (ClientException)=0;
+    merge_peg(const MergeParameter&parameters) throw (ClientException)=0;
 
     /**
      * Retrieve information for the given path

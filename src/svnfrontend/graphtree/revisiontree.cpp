@@ -95,7 +95,6 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
     svn::LogParameter params;
     params.targets(reposRoot).revisionRange(endr,startr).peg(startr).limit(0).discoverChangedPathes(true).strictNodeHistory(false);
     QStringList ex = svn::cache::ReposConfig::self()->readEntry(reposRoot,"tree_exclude_list",QStringList());
-    kDebug()<<"Exclude "<<ex<< "for "<<reposRoot<<endl;;
     try {
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,

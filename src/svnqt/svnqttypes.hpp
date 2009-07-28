@@ -48,6 +48,7 @@ namespace svn
     class StatusParameter;
     class LogParameter;
     class PropertiesParameter;
+    class MergeParameter;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
     typedef smart_pointer<svn::Context> ContextP;

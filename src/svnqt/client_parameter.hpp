@@ -56,8 +56,12 @@ namespace svn
 
         //! Targets for copy operation
         const Targets&srcPath()const;
+        //! Targets for copy operation
+        CopyParameter&srcPath(const Targets&_srcPath);
         //! Destination path for copy operation
         const Path&destination()const;
+        //! Destination path for copy operation
+        CopyParameter&destination(const Path&destination);
 
         //! set copy operation parameter asChild to true
         CopyParameter&asChild(bool);
@@ -354,6 +358,82 @@ namespace svn
 
         PropertiesParameter&revisionProperties(const PropertiesMap&props);
         const PropertiesMap&revisionProperties()const;
+    };
+
+    struct MergeParameterData;
+
+    class SVNQT_EXPORT MergeParameter
+    {
+    private:
+        SharedPointer<MergeParameterData> _data;
+    public:
+        MergeParameter();
+        ~MergeParameter();
+
+        MergeParameter&path1(const Path&path);
+        const Path&path1()const;
+        MergeParameter&path2(const Path&path);
+        const Path&path2()const;
+        MergeParameter&localPath(const Path&path);
+        const Path&localPath()const;
+
+        /*!
+         * used for Client::merge_peg only, when build against subversion prior 1.6 only the first pair is used!
+         */
+        MergeParameter&peg(const Revision&rev);
+        /*!
+         * used for Client::merge_peg only
+         */
+        const Revision&peg()const;
+        /*!
+         * used for Client::merge_peg only, when build against subversion prior 1.6 only the first pair is used!
+         */
+        MergeParameter&revisions(const RevisionRanges&revs);
+        /*!
+         * used for Client::merge_peg only, when build against subversion prior 1.6 only the first pair is used!
+         */
+        const RevisionRanges&revisions()const;
+        //! simple start-end range.
+        /*!
+         * in fact it is the first item in internal revision range. May used when only one pair is required.
+         * used for Client::merge, pair is [start,end], with subversion prior 1.6 for Client::merge_peg, too.
+         */
+        const RevisionRange&revisionRange()const;
+        //! set a simple start-end range
+        /*!
+         * this is usefull if only one range is required. This will converted into internal ranges when set.
+         * used for Client::merge, pair is [rev1,rev2], with subversion prior 1.6 for Client::merge_peg, too.
+         */
+        MergeParameter&revisionRange(const Revision&start,const Revision&end);
+
+        //! get start revision
+        /*!
+         * used for Client::merge. Revision1 is the first item in first pair of Revision ranges
+         */
+        const Revision&revision1()const;
+        //! get end revision
+        /*!
+         * used for Client::merge. Revision2 is the second item in first pair of Revision ranges
+         */
+        const Revision&revision2()const;
+
+        MergeParameter&force(bool how);
+        bool force()const;
+        MergeParameter&notice_ancestry(bool how);
+        bool notice_ancestry()const;
+        MergeParameter&dry_run(bool how);
+        bool dry_run()const;
+        MergeParameter&record_only(bool how);
+        bool record_only()const;
+
+        MergeParameter&depth(Depth depth);
+        Depth depth()const;
+
+        MergeParameter&merge_options(const StringArray&options);
+        const StringArray&merge_options()const;
+
+        MergeParameter&reintegrate(bool reintegrate);
+        bool reintegrate()const;
     };
 }
 

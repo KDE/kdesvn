@@ -744,9 +744,9 @@ void MainTreeWidget::enableActions()
     enableAction("make_try_resolve",conflicted && !dir);
 
     enableAction("make_svn_info",isopen);
-    enableAction("make_svn_merge_revisions",single&&isWorkingCopy());
-    enableAction("make_svn_merge",single||none);
-    enableAction("make_svn_addrec",(multi||single) && isWorkingCopy());
+    enableAction("make_svn_merge_revisions",(single||d==1)&&isWorkingCopy());
+    enableAction("make_svn_merge",single||d==1||none);
+    enableAction("make_svn_addrec",(multi||single||d>0) && isWorkingCopy());
     enableAction("make_svn_headupdate",isWorkingCopy()&&isopen&&remote_enabled);
     enableAction("make_dir_update",isWorkingCopy()&&isopen&&remote_enabled);
 

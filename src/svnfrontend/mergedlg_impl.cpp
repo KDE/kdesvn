@@ -200,16 +200,23 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
         ptr->setObjectName(name);
     }
     dlg.resize( QSize(480,360).expandedTo(dlg.minimumSizeHint()) );
-    if (dlg.exec()!=QDialog::Accepted) {
-        return false;
+    KConfigGroup _kc(Kdesvnsettings::self()->config(),"merge_range");
+    dlg.restoreDialogSize(_kc);
+
+    bool ret = false;
+    if (dlg.exec()==QDialog::Accepted) {
+        range = ptr->getRange();
+        *force = ptr->force();
+        *recursive=ptr->recursive();
+        *ignorerelated=ptr->ignorerelated();
+        *dry = ptr->dryrun();
+        *useExternal = ptr->useExtern();
+        ret = true;
     }
-    range = ptr->getRange();
-    *force = ptr->force();
-    *recursive=ptr->recursive();
-    *ignorerelated=ptr->ignorerelated();
-    *dry = ptr->dryrun();
-    *useExternal = ptr->useExtern();
-    return true;
+    dlg.saveDialogSize(_kc);
+    _kc.sync();
+
+    return ret;
 }
 
 void MergeDlg_impl::externDisplayToggled(bool how)

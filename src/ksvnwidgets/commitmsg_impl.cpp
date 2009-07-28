@@ -640,4 +640,10 @@ void Commitmsg_impl::slotItemReverted(const QStringList&items)
     m_CurrentModel->removeEntries(items);
 }
 
+void Commitmsg_impl::slotItemDoubleClicked(const QModelIndex&index)
+{
+    Q_UNUSED(index);
+    slotDiffSelected();
+}
+
 #include "commitmsg_impl.moc"

@@ -309,4 +309,35 @@ namespace svn
         return revisionRange().second;
     }
 
+    struct CheckoutParameterData
+    {
+        CheckoutParameterData()
+            :_moduleName(),_destination(),_revision(Revision::UNDEFINED),_peg(Revision::UNDEFINED),_depth(DepthInfinity),
+             _ignoreExternals(false),_overWrite(false),_nativeEol(QString())
+        {}
+        Path _moduleName,_destination;
+        Revision _revision,_peg;
+        Depth _depth;
+        bool _ignoreExternals,_overWrite;
+        QString _nativeEol;
+    };
+
+    CheckoutParameter::CheckoutParameter()
+    {
+        _data = new CheckoutParameterData;
+    }
+    CheckoutParameter::~CheckoutParameter()
+    {
+        _data = 0;
+    }
+
+    GETSET(CheckoutParameter,Path,_moduleName,moduleName)
+    GETSET(CheckoutParameter,Path,_destination,destination)
+    GETSET(CheckoutParameter,Revision,_revision,revision)
+    GETSET(CheckoutParameter,Revision,_peg,peg)
+    GETSET(CheckoutParameter,QString,_nativeEol,nativeEol)
+
+    GETSETSI(CheckoutParameter,Depth,_depth,depth)
+    GETSETSI(CheckoutParameter,bool,_ignoreExternals,ignoreExternals)
+    GETSETSI(CheckoutParameter,bool,_overWrite,overWrite)
 }

@@ -382,7 +382,9 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             svn::Path path = makeSvnUrl(url.url());
             path.removeLast();
             try {
-                m_pData->m_Svnclient->checkout(path,svn::Path(_codir->name()),rev,peg,svn::DepthFiles,false,false);
+                svn::CheckoutParameter params;
+                params.moduleName(path).destination(svn::Path(_codir->name())).revision(rev).peg(peg).depth(svn::DepthFiles);
+                m_pData->m_Svnclient->checkout(params);
             } catch (const svn::ClientException&e) {
                 error(KIO::ERR_SLAVE_DEFINED,e.msg());
                 return;
@@ -841,11 +843,10 @@ void kio_svnProtocol::commit(const KUrl::List&url)
 void kio_svnProtocol::checkout(const KUrl&src,const KUrl&target,const int rev, const QString&revstring)
 {
     svn::Revision where(rev,revstring);
-    svn::Revision peg = svn::Revision::UNDEFINED;
-    svn::Path _target(target.path());
     try {
-        KUrl _src = makeSvnUrl(src);
-        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,svn::DepthInfinity,false,false);
+        svn::CheckoutParameter params;
+        params.moduleName(makeSvnUrl(src)).destination(target.path()).revision(where).peg(svn::Revision::UNDEFINED).depth(svn::DepthInfinity);
+        m_pData->m_Svnclient->checkout(params);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

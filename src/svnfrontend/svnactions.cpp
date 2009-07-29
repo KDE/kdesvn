@@ -1695,14 +1695,17 @@ bool SvnActions::makeCheckout(const QString&rUrl,const QString&tPath,const svn::
         peg = r;
     }
     if (!_exp||!m_Data->m_CurrentContext) reInitClient();
+    svn::CheckoutParameter cparams;
+    cparams.moduleName(fUrl).destination(p).revision(r).peg(peg).depth(depth).ignoreExternals(ignoreExternal).overWrite(overwrite);
+
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,_p?_p:m_Data->m_ParentList->realWidget(),0,_exp?i18n("Export"):i18n("Checkout"),_exp?i18n("Exporting"):i18n("Checking out"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         if (_exp) {
             /// @todo setup parameter for export operation
-            m_Data->m_Svnclient->doExport(svn::Path(fUrl),p,r,peg,overwrite,QString(),ignoreExternal,depth);
+            m_Data->m_Svnclient->doExport(cparams.nativeEol(QString()));
         } else {
-            m_Data->m_Svnclient->checkout(fUrl,p,r,peg,depth,ignoreExternal,overwrite);
+            m_Data->m_Svnclient->checkout(cparams);
         }
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());

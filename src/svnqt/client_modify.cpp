@@ -47,7 +47,7 @@
 
 namespace svn
 {
-  svn_revnum_t
+  Revision
   Client_impl::checkout (const Path& url, const Path & destPath,
               const Revision & revision,
               const Revision & peg,
@@ -86,7 +86,7 @@ namespace svn
 #endif
     if(error != NULL)
       throw ClientException (error);
-    return revnum;
+    return Revision(revnum);
   }
 
   Revision Client_impl::remove (const Path & path,bool force,
@@ -508,7 +508,7 @@ namespace svn
     }
   }
 
-  svn_revnum_t
+  Revision
   Client_impl::doExport (const Path & srcPath,
               const Path & destPath,
               const Revision & revision,
@@ -556,10 +556,10 @@ namespace svn
 #endif
     if(error != NULL)
       throw ClientException (error);
-    return revnum;
+    return Revision(revnum);
   }
 
-  svn_revnum_t
+  Revision
   Client_impl::doSwitch (
                          const Path & path, const QString& url,
                          const Revision & revision,
@@ -605,7 +605,7 @@ namespace svn
     if(error != NULL) {
         throw ClientException (error);
     }
-    return revnum;
+    return Revision(revnum);
   }
 
   Revision

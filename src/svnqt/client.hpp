@@ -142,7 +142,7 @@ namespace svn
      * @param ignore_externals if true don't process externals definitions.
      * @exception ClientException
      */
-    virtual svn_revnum_t
+    virtual Revision
     checkout (const Path& moduleName, const Path & destPath,
               const Revision & revision,
               const Revision & peg = Revision::UNDEFINED,
@@ -232,7 +232,7 @@ namespace svn
     virtual QByteArray
     cat (const Path & path,
           const Revision & revision,
-          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+          const Revision & peg_revision=Revision::UNDEFINED) throw (ClientException)=0;
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
@@ -262,7 +262,7 @@ namespace svn
     get (const Path & path,
           const QString  & target,
           const Revision & revision,
-          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+          const Revision & peg_revision=Revision::UNDEFINED) throw (ClientException)=0;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -396,7 +396,7 @@ namespace svn
      * @param recurse if true, export recursively.<br>
       Otherwise, export just the directory represented by from and its immediate non-directory children.
      */
-    virtual svn_revnum_t
+    virtual Revision
     doExport (const Path & srcPath,
               const Path & destPath,
               const Revision & revision,
@@ -412,7 +412,7 @@ namespace svn
      * svn_client_switch() client method.
      * @exception ClientException
      */
-    virtual svn_revnum_t
+    virtual Revision
     doSwitch (
               const Path & path, const QString& url,
               const Revision & revision,
@@ -465,7 +465,7 @@ namespace svn
     info (const Path &path,
           Depth depth,
           const Revision & rev,
-          const Revision & peg_revision=svn_opt_revision_unspecified,
+          const Revision & peg_revision=Revision::UNDEFINED,
           const StringArray&changelists=StringArray()
          ) throw (ClientException)=0;
 

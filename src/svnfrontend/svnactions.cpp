@@ -701,12 +701,11 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         }
         entries.append(info);
     }
-    //if (!all) EMIT_FINISHED;
     QString text = "";
     svn::InfoEntries::const_iterator it;
-    static QString rb = "<tr><td><nobr><font color=\"black\">";
-    static QString re = "</font></nobr></td></tr>\n";
-    static QString cs = "</font></nobr>:</td><td><nobr><font color=\"black\">";
+    static QString rb = "<tr><td><nobr>";
+    static QString re = "</nobr></td></tr>\n";
+    static QString cs = "</nobr>:</td><td><nobr>";
     unsigned int val = 0;
     for (it=entries.begin();it!=entries.end();++it) {
         if (val>0) {

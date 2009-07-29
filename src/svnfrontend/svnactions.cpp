@@ -747,7 +747,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
             text+=rb+i18n("Size")+cs;
             if ((*it).size()!=SVNQT_SIZE_UNKNOWN) {
                 text+=QString("%1").arg(helpers::ByteToString()((*it).size()));
-            } else {
+            } else if ((*it).working_size()!=SVNQT_SIZE_UNKNOWN) {
                 text+=QString("%1").arg(helpers::ByteToString()((*it).working_size()));
             }
             text+=re;

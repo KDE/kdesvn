@@ -70,7 +70,6 @@ public:
         m_SortModel=0;
         m_DirSortModel = 0;
         m_remoteRevision=svn::Revision::UNDEFINED;
-        tipTimer=0;
     }
 
     ~MainTreeWidgetData()
@@ -78,7 +77,6 @@ public:
         delete m_Model;
         delete m_SortModel;
         delete m_DirSortModel;
-        delete tipTimer;
     }
 
     QModelIndex srcInd(const QModelIndex&ind)
@@ -108,7 +106,6 @@ public:
     SvnSortFilterProxy*m_SortModel;
     SvnDirSortFilterProxy*m_DirSortModel;
     svn::Revision m_remoteRevision;
-    QTimer*tipTimer;
     QString merge_Target,merge_Src2,merge_Src1;
 };
 
@@ -138,10 +135,6 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     m_DirTreeView->setModel(m_Data->m_DirSortModel);
     m_Data->m_DirSortModel->setSourceSvnModel(m_Data->m_Model);
 
-    m_Data->tipTimer = new QTimer(this);
-    m_Data->tipTimer->setSingleShot(true);
-    connect(m_Data->tipTimer, SIGNAL(timeout()),
-            this, SLOT(hideTips()));
     connect(m_TreeView->selectionModel(),
         SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)),
         this,SLOT(slotSelectionChanged(const QItemSelection&,const QItemSelection&)));
@@ -451,38 +444,6 @@ SvnItem* MainTreeWidget::SelectedOrMain()const
         _item=m_Data->m_Model->firstRootChild();
     }
     return _item;
-}
-
-bool MainTreeWidget::event(QEvent*event)
-{
-    if (event->type() == QEvent::ToolTip) {
-        hideTips();
-        QModelIndex mi,sm;
-        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
-        QPoint vp = m_TreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
-        mi = m_TreeView->indexAt(vp);
-        if (mi.isValid()) {
-            sm = m_Data->m_SortModel->mapToSource(mi);
-        } else {
-            vp = m_DirTreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
-            mi = m_DirTreeView->indexAt(vp);
-            if (mi.isValid()) {
-                sm = m_Data->m_DirSortModel->mapToSource(mi);
-            }
-        }
-        if (sm.isValid()) {
-            SvnItemModelNode*item = static_cast<SvnItemModelNode*>(sm.internalPointer());
-            QToolTip::showText(helpEvent->globalPos(),item->getToolTipText());
-            m_Data->tipTimer->start(5000);
-        }
-    }
-    return QWidget::event(event);
-}
-
-void MainTreeWidget::hideTips()
-{
-    m_Data->tipTimer->stop();
-    QToolTip::hideText();
 }
 
 void MainTreeWidget::setupActions()

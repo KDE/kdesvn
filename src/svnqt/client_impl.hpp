@@ -108,23 +108,12 @@ namespace svn
 
   /**
      * Executes a revision checkout.
-     * @param moduleName name of the module to checkout.
-     * @param destPath destination directory for checkout.
-     * @param revision the revision number to checkout. If the number is -1
-     *                 then it will checkout the latest revision.
-     * @param peg Revision to look up
-     * @param recurse whether you want it to checkout files recursively.
-     * @param ignore_externals if true don't process externals definitions.
+     * @param params the parameters to use
+     * @return revision number checked out
      * @exception ClientException
      */
     virtual Revision
-    checkout (const Path& moduleName, const Path & destPath,
-              const Revision & revision,
-              const Revision & peg = Revision::UNDEFINED,
-              svn::Depth depth=DepthInfinity,
-              bool ignore_externals=false,
-              bool overwrite=false
-             ) throw (ClientException);
+    checkout (const CheckoutParameter&params) throw (ClientException);
 
     /**
      * relocate wc @a from to @a to
@@ -362,25 +351,11 @@ namespace svn
      * 'clean' directory (meaning a directory with no administrative
      * directories).
      * @exception ClientException
-     * @param srcPath source path
-     * @param destPath a destination path that must not already exist.
-     * @param revision revision to use for the export
-     * @param peg the revision where the path is first looked up when exporting from a repository.
-     * @param overwrite overwrite existing files
-     * @param native_eol Either "LF", "CR" or "CRLF" or NULL.
-     * @param ignore_externals don't process externals definitions as part of this operation.
-     * @param recurse if true, export recursively. Otherwise, export just the directory represented by from and its immediate non-directory children.
+     * @param params Parameter to use
+     * @return revision exported
      */
     virtual Revision
-    doExport (const Path & srcPath,
-              const Path & destPath,
-              const Revision & revision,
-              const Revision & peg = Revision::UNDEFINED,
-              bool overwrite=false,
-              const QString&native_eol=QString::null,
-              bool ignore_externals = false,
-              svn::Depth depth=svn::DepthInfinity
-             ) throw (ClientException);
+    doExport (const CheckoutParameter&params) throw (ClientException);
 
     /**
      * Update local copy to mirror a new url. This excapsulates the

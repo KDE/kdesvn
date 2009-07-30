@@ -50,6 +50,7 @@ namespace svn
     class PropertiesParameter;
     class MergeParameter;
     class CheckoutParameter;
+    class CommitParameter;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
     typedef smart_pointer<svn::Context> ContextP;

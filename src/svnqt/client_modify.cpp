@@ -42,6 +42,7 @@
 #include "svnqt/svnqt_defines.hpp"
 #include "svnqt/stringarray.hpp"
 #include "svnqt/client_parameter.hpp"
+#include "svnqt/client_commit_parameter.hpp"
 
 #include "svnqt/helper.hpp"
 
@@ -223,41 +224,34 @@ namespace svn
   }
 
   svn::Revision
-  Client_impl::commit (const Targets & targets, const QString& message,
-                       svn::Depth depth,bool keep_locks,
-                       const svn::StringArray&changelist,
-                       const PropertiesMap&revProps,
-                       bool keep_changelist) throw (ClientException)
+  Client_impl::commit (const CommitParameter&parameters) throw (ClientException)
   {
     Pool pool;
 
-    m_context->setLogMessage (message);
+    m_context->setLogMessage (parameters.message());
     svn_commit_info_t *commit_info = NULL;
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t * error =
             svn_client_commit4 (
                 &commit_info,
-                targets.array (pool),
-                internal::DepthToSvn(depth),
-                keep_locks,
-                keep_changelist,
-                changelist.array(pool),
-                map2hash(revProps,pool),
+                parameters.targets().array (pool),
+                internal::DepthToSvn(parameters.depth()),
+                parameters.keepLocks(),
+                parameters.keepChangeList(),
+                parameters.changeList().array(pool),
+                map2hash(parameters.revisionProperties(),pool),
                 *m_context,
                 pool);
 #else
-    Q_UNUSED(changelist);
-    Q_UNUSED(keep_changelist);
-    Q_UNUSED(revProps);
-    bool recurse = depth==DepthInfinity;
+    bool recurse = parameters.depth()==DepthInfinity;
 
     svn_error_t * error =
       svn_client_commit3
                         (&commit_info,
-                         targets.array (pool),
+                         parameters.targets().array (pool),
                          recurse,
-                         keep_locks,
+                         parameters.keepLocks(),
                          *m_context,
                          pool);
 #endif

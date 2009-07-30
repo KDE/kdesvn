@@ -2,25 +2,7 @@
 #include "svnqt/svnqttypes.hpp"
 #include "svnqt/stringarray.hpp"
 
-#define GETSET(cl,ty,var,name) \
-    cl&cl::name(const ty&x)\
-    {\
-        _data->var = x; return *this;\
-    }\
-    const ty&cl::name()const\
-    {\
-        return _data->var;\
-    }
-
-#define GETSETSI(cl,ty,var,name) \
-    cl&cl::name(ty x)\
-    {\
-        _data->var = x; return *this;\
-    }\
-    ty cl::name()const\
-    {\
-        return _data->var;\
-    }
+#include "svnqt/client_parameter_macros.hpp"
 
 namespace svn
 {

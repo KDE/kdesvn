@@ -269,23 +269,12 @@ namespace svn
     /**
      * Commits changes to the repository. This usually requires
      * authentication, see Auth.
+     * @param parameters CommitParameter to use
      * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
-     * @param targets files to commit.
-     * @param message log message.
-     * @param depth whether the operation should be done recursively.
-     * @param keep_locks if false unlock items in paths
-     * @param changelist
-     * @param keep_changelist
      * @exception ClientException
      */
     virtual svn::Revision
-    commit (const Targets & targets,
-            const QString& message,
-            svn::Depth depth,bool keep_locks=true,
-            const svn::StringArray&contents=svn::StringArray(),
-            const PropertiesMap&revProps=PropertiesMap(),
-            bool keep_changelist=false
-           ) throw (ClientException)=0;
+    commit (const CommitParameter&parameters) throw (ClientException)=0;
 
     /**
      * Copies a versioned file with the history preserved.

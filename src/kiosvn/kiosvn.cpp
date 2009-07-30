@@ -31,6 +31,7 @@
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/info_entry.hpp"
 #include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/client_commit_parameter.hpp"
 #include "src/svnqt/shared_pointer.hpp"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
@@ -431,8 +432,10 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     m_pData->dispWritten = true;
     bool err = false;
     if (exists) {
+        svn::CommitParameter commit_parameters;
+        commit_parameters.targets(svn::Targets(tmpfile->fileName())).message(getDefaultLog()).depth(svn::DepthEmpty).keepLocks(false);
         try {
-            m_pData->m_Svnclient->commit(svn::Targets(tmpfile->fileName()),getDefaultLog(),svn::DepthEmpty,false);
+            m_pData->m_Svnclient->commit(commit_parameters);
         } catch (const svn::ClientException&e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             err = true;
@@ -816,8 +819,11 @@ void kio_svnProtocol::commit(const KUrl::List&url)
         targets.push_back(svn::Path(url[j].path()));
     }
     svn::Revision nnum=svn::Revision::UNDEFINED;
+    svn::CommitParameter commit_parameters;
+    commit_parameters.targets(svn::Targets(targets)).message(msg).depth(svn::DepthInfinity).keepLocks(false);
+
     try {
-        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,svn::DepthInfinity,false);
+        nnum = m_pData->m_Svnclient->commit(commit_parameters);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

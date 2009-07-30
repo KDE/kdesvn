@@ -47,6 +47,7 @@
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/svnqt_defines.hpp"
 #include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/client_commit_parameter.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/cache/ReposConfig.hpp"
@@ -964,7 +965,6 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
     bool ok,keeplocks;
     svn::Depth depth;
     svn::Revision nnum;
-    svn::Targets _targets;
     svn::Pathes _deldir;
     bool review = Kdesvnsettings::review_commit();
     QString msg,_p;
@@ -974,13 +974,14 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         return false;
     }
 
+    svn::CommitParameter commit_parameters;
     stopFillCache();
     if (!review) {
         msg = Commitmsg_impl::getLogmessage(&ok,&depth,&keeplocks,m_Data->m_ParentList->realWidget());
         if (!ok) {
             return false;
         }
-        _targets = targets;
+        commit_parameters.targets(targets);
     } else {
         CommitActionEntries _check,_uncheck,_result;
         svn::StatusEntries _Cache;
@@ -1044,14 +1045,14 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
         if (_delete.count()>0) {
             makeDelete(_delete);
         }
-        _targets = svn::Targets(_commit);
+        commit_parameters.targets(svn::Targets(_commit));
     }
-
+    commit_parameters.keepLocks(keeplocks).depth(depth).message(msg);
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Commit"),
             i18n("Commit - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->commit(_targets,msg,depth,keeplocks);
+        nnum = m_Data->m_Svnclient->commit(commit_parameters);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

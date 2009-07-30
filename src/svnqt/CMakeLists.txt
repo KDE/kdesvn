@@ -46,6 +46,7 @@ SET(SOURCES
     cache/ReposConfig.cpp
     client_parameter.cpp
     client_commit_parameter.cpp
+    client_annotate_parameter.cpp
     )
 
 SET(CACHEINST_HEADERS
@@ -95,6 +96,7 @@ SET(INST_HEADERS
     client_parameter.hpp
     repoparameter.hpp
     client_commit_parameter.hpp
+    client_annotate_parameter.hpp
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")

@@ -48,6 +48,7 @@
 #include "src/svnqt/svnqt_defines.hpp"
 #include "src/svnqt/client_parameter.hpp"
 #include "src/svnqt/client_commit_parameter.hpp"
+#include "src/svnqt/client_annotate_parameter.hpp"
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/cache/ReposConfig.hpp"
@@ -522,17 +523,16 @@ void SvnActions::makeBlame(const svn::Revision&start, const svn::Revision&end,co
     if (!m_Data->m_CurrentContext) return;
     svn::AnnotatedFile blame;
     QString ex;
-    svn::Path p(k);
     QWidget*_parent = _p?_p:m_Data->m_ParentList->realWidget();
-    svn::Revision peg = _peg==svn::Revision::UNDEFINED?end:_peg;
 
-    bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri());
+    svn::AnnotateParameter params;
+    params.path(k).pegRevision(_peg==svn::Revision::UNDEFINED?end:_peg).revisionRange(svn::RevisionRange(start,end)).includeMerged(hasMergeInfo(m_Data->m_ParentList->baseUri()));
 
     try {
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Data->m_SvnContextListener,_parent,0,"Annotate",i18n("Annotate lines - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        m_Data->m_Svnclient->annotate(blame,p,start,end,peg,svn::DiffOptions(),false,mergeinfo);
+        m_Data->m_Svnclient->annotate(blame,params);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

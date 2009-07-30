@@ -256,15 +256,7 @@ namespace svn
      * @param peg indicates in which revision path is valid
      */
     virtual void
-    annotate (AnnotatedFile&target,
-              const Path & path,
-              const Revision & revisionStart,
-              const Revision & revisionEnd,
-              const Revision & peg = Revision::UNDEFINED,
-              const DiffOptions&diffoptions = DiffOptions(),
-              bool ignore_mimetypes = false,
-              bool include_merged_revisions = false
-             ) throw (ClientException)=0;
+    annotate (AnnotatedFile&target,const AnnotateParameter&params) throw (ClientException)=0;
 
     /**
      * Commits changes to the repository. This usually requires

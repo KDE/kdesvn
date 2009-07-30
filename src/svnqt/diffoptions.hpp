@@ -18,21 +18,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef _DIFF_OPTIONS_HPP
-#define _DIFF_OPTIONS_HPP
+#ifndef DIFF_OPTIONS_HPP
+#define DIFF_OPTIONS_HPP
 
 #include "svnqt/svnqt_defines.hpp"
-
-namespace svn {
-    class Pool;
-    struct DiffOptionsData;
-}
 
 struct svn_diff_file_options_t;
 class QStringList;
 
 namespace svn
 {
+    class Pool;
+    struct DiffOptionsData;
     /** c++ wrapper for svn_diffoptions_t
      *
      * This is needed until svnqt stops support for subversion prior 1.4

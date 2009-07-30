@@ -258,6 +258,13 @@ QVariant SvnItemModel::data(const QModelIndex&index,int role)const
                 return QBrush(cl);
             }
         }
+    case Qt::ToolTipRole:
+        {
+            switch(index.column()) {
+                case Name:
+                    return node->getToolTipText();
+            }
+        }
     }
     return QVariant();
 }

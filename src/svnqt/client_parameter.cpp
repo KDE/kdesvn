@@ -2,25 +2,7 @@
 #include "svnqt/svnqttypes.hpp"
 #include "svnqt/stringarray.hpp"
 
-#define GETSET(cl,ty,var,name) \
-    cl&cl::name(const ty&x)\
-    {\
-        _data->var = x; return *this;\
-    }\
-    const ty&cl::name()const\
-    {\
-        return _data->var;\
-    }
-
-#define GETSETSI(cl,ty,var,name) \
-    cl&cl::name(ty x)\
-    {\
-        _data->var = x; return *this;\
-    }\
-    ty cl::name()const\
-    {\
-        return _data->var;\
-    }
+#include "svnqt/client_parameter_macros.hpp"
 
 namespace svn
 {
@@ -309,4 +291,35 @@ namespace svn
         return revisionRange().second;
     }
 
+    struct CheckoutParameterData
+    {
+        CheckoutParameterData()
+            :_moduleName(),_destination(),_revision(Revision::UNDEFINED),_peg(Revision::UNDEFINED),_depth(DepthInfinity),
+             _ignoreExternals(false),_overWrite(false),_nativeEol(QString())
+        {}
+        Path _moduleName,_destination;
+        Revision _revision,_peg;
+        Depth _depth;
+        bool _ignoreExternals,_overWrite;
+        QString _nativeEol;
+    };
+
+    CheckoutParameter::CheckoutParameter()
+    {
+        _data = new CheckoutParameterData;
+    }
+    CheckoutParameter::~CheckoutParameter()
+    {
+        _data = 0;
+    }
+
+    GETSET(CheckoutParameter,Path,_moduleName,moduleName)
+    GETSET(CheckoutParameter,Path,_destination,destination)
+    GETSET(CheckoutParameter,Revision,_revision,revision)
+    GETSET(CheckoutParameter,Revision,_peg,peg)
+    GETSET(CheckoutParameter,QString,_nativeEol,nativeEol)
+
+    GETSETSI(CheckoutParameter,Depth,_depth,depth)
+    GETSETSI(CheckoutParameter,bool,_ignoreExternals,ignoreExternals)
+    GETSETSI(CheckoutParameter,bool,_overWrite,overWrite)
 }

@@ -31,6 +31,7 @@
 #include "src/svnqt/targets.hpp"
 #include "src/svnqt/info_entry.hpp"
 #include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/client_commit_parameter.hpp"
 #include "src/svnqt/shared_pointer.hpp"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
@@ -382,7 +383,9 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             svn::Path path = makeSvnUrl(url.url());
             path.removeLast();
             try {
-                m_pData->m_Svnclient->checkout(path,svn::Path(_codir->name()),rev,peg,svn::DepthFiles,false,false);
+                svn::CheckoutParameter params;
+                params.moduleName(path).destination(svn::Path(_codir->name())).revision(rev).peg(peg).depth(svn::DepthFiles);
+                m_pData->m_Svnclient->checkout(params);
             } catch (const svn::ClientException&e) {
                 error(KIO::ERR_SLAVE_DEFINED,e.msg());
                 return;
@@ -429,8 +432,10 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     m_pData->dispWritten = true;
     bool err = false;
     if (exists) {
+        svn::CommitParameter commit_parameters;
+        commit_parameters.targets(svn::Targets(tmpfile->fileName())).message(getDefaultLog()).depth(svn::DepthEmpty).keepLocks(false);
         try {
-            m_pData->m_Svnclient->commit(svn::Targets(tmpfile->fileName()),getDefaultLog(),svn::DepthEmpty,false);
+            m_pData->m_Svnclient->commit(commit_parameters);
         } catch (const svn::ClientException&e) {
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             err = true;
@@ -814,8 +819,11 @@ void kio_svnProtocol::commit(const KUrl::List&url)
         targets.push_back(svn::Path(url[j].path()));
     }
     svn::Revision nnum=svn::Revision::UNDEFINED;
+    svn::CommitParameter commit_parameters;
+    commit_parameters.targets(svn::Targets(targets)).message(msg).depth(svn::DepthInfinity).keepLocks(false);
+
     try {
-        nnum = m_pData->m_Svnclient->commit(svn::Targets(targets),msg,svn::DepthInfinity,false);
+        nnum = m_pData->m_Svnclient->commit(commit_parameters);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
@@ -841,11 +849,10 @@ void kio_svnProtocol::commit(const KUrl::List&url)
 void kio_svnProtocol::checkout(const KUrl&src,const KUrl&target,const int rev, const QString&revstring)
 {
     svn::Revision where(rev,revstring);
-    svn::Revision peg = svn::Revision::UNDEFINED;
-    svn::Path _target(target.path());
     try {
-        KUrl _src = makeSvnUrl(src);
-        m_pData->m_Svnclient->checkout(_src.url(),_target,where,peg,svn::DepthInfinity,false,false);
+        svn::CheckoutParameter params;
+        params.moduleName(makeSvnUrl(src)).destination(target.path()).revision(where).peg(svn::Revision::UNDEFINED).depth(svn::DepthInfinity);
+        m_pData->m_Svnclient->checkout(params);
     } catch (const svn::ClientException&e) {
         error(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

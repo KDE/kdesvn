@@ -435,6 +435,70 @@ namespace svn
         MergeParameter&reintegrate(bool reintegrate);
         bool reintegrate()const;
     };
+
+    struct CheckoutParameterData;
+    //! parameter for Checkout and Export
+    class SVNQT_EXPORT CheckoutParameter
+    {
+    private:
+        SharedPointer<CheckoutParameterData> _data;
+
+    public:
+        CheckoutParameter();
+        ~CheckoutParameter();
+
+        //!name of the module to checkout.
+        CheckoutParameter&moduleName(const Path&path);
+        //!name of the module to checkout.
+        const Path&moduleName()const;
+        //!destination directory for checkout.
+        CheckoutParameter&destination(const Path&path);
+        //!destination directory for checkout.
+        const Path&destination()const;
+        //!the revision number to checkout.
+        /*! If the number is -1
+         *  then it will checkout the latest revision.
+         */
+        CheckoutParameter&revision(const Revision&rev);
+        //!the revision number to checkout.
+        /*! If the number is -1
+         *  then it will checkout the latest revision.
+         */
+        const Revision&revision()const;
+        //! Revision to look up
+        CheckoutParameter&peg(const Revision&rev);
+        //! Revision to look up
+        const Revision&peg()const;
+        //! depth of operation
+        /*!
+         * \sa svn::Depth
+         */
+        CheckoutParameter&depth(Depth depth);
+        //! depth of operation
+        /*!
+         * \sa svn::Depth
+         */
+        Depth depth()const;
+        //!if true don't process externals definitions.
+        CheckoutParameter&ignoreExternals(bool ignore);
+        //!if true don't process externals definitions.
+        bool ignoreExternals()const;
+        //!if true overwrite existing not versioned items.
+        CheckoutParameter&overWrite(bool overwrite);
+        //!if true overwrite existing not versioned items.
+        bool overWrite()const;
+
+        //!Either "LF", "CR" or "CRLF" or QString().
+        /*!
+         * Used only from Client::doExport, QString() is default (will used as NULL for subversion)
+         */
+        CheckoutParameter&nativeEol(const QString&native);
+        //!Either "LF", "CR" or "CRLF" or QString().
+        /*!
+         * Used only from Client::doExport, QString() is default (will used as NULL for subversion)
+         */
+        const QString&nativeEol()const;
+    };
 }
 
 

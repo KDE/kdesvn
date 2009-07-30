@@ -133,23 +133,12 @@ namespace svn
 
   /**
      * Executes a revision checkout.
-     * @param moduleName name of the module to checkout.
-     * @param destPath destination directory for checkout.
-     * @param revision the revision number to checkout. If the number is -1
-     *                 then it will checkout the latest revision.
-     * @param peg Revision to look up
-     * @param recurse whether you want it to checkout files recursively.
-     * @param ignore_externals if true don't process externals definitions.
+     * @param params the parameters to use
+     * @return revision number checked out
      * @exception ClientException
      */
-    virtual svn_revnum_t
-    checkout (const Path& moduleName, const Path & destPath,
-              const Revision & revision,
-              const Revision & peg = Revision::UNDEFINED,
-              svn::Depth depth=DepthInfinity,
-              bool ignore_externals=false,
-              bool overwrite=false
-             ) throw (ClientException) = 0;
+    virtual Revision
+    checkout (const CheckoutParameter&params) throw (ClientException) = 0;
 
     /**
      * relocate wc @a from to @a to
@@ -160,19 +149,11 @@ namespace svn
               const QString &to_url, bool recurse) throw (ClientException)=0;
 
     /**
-     * Sets a single file for deletion.
-     * @exception ClientException
-     */
-    virtual svn::Revision
-            remove (const Path & path, bool force,
-                    bool keep_local = true,
-                    const PropertiesMap&revProps = PropertiesMap()) throw (ClientException)=0;
-
-    /**
-     * Sets files for deletion.
+     * Sets entries for deletion.
      *
      * @param targets targets to delete
      * @param force force if files are locally modified
+     * @param keep_local don't delete entries from hard disk when deleting from working copy
      * @exception ClientException
      */
     virtual svn::Revision
@@ -232,7 +213,7 @@ namespace svn
     virtual QByteArray
     cat (const Path & path,
           const Revision & revision,
-          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+          const Revision & peg_revision=Revision::UNDEFINED) throw (ClientException)=0;
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
@@ -262,7 +243,7 @@ namespace svn
     get (const Path & path,
           const QString  & target,
           const Revision & revision,
-          const Revision & peg_revision=svn_opt_revision_unspecified) throw (ClientException)=0;
+          const Revision & peg_revision=Revision::UNDEFINED) throw (ClientException)=0;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -275,36 +256,17 @@ namespace svn
      * @param peg indicates in which revision path is valid
      */
     virtual void
-    annotate (AnnotatedFile&target,
-              const Path & path,
-              const Revision & revisionStart,
-              const Revision & revisionEnd,
-              const Revision & peg = Revision::UNDEFINED,
-              const DiffOptions&diffoptions = DiffOptions(),
-              bool ignore_mimetypes = false,
-              bool include_merged_revisions = false
-             ) throw (ClientException)=0;
+    annotate (AnnotatedFile&target,const AnnotateParameter&params) throw (ClientException)=0;
 
     /**
      * Commits changes to the repository. This usually requires
      * authentication, see Auth.
+     * @param parameters CommitParameter to use
      * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
-     * @param targets files to commit.
-     * @param message log message.
-     * @param depth whether the operation should be done recursively.
-     * @param keep_locks if false unlock items in paths
-     * @param changelist
-     * @param keep_changelist
      * @exception ClientException
      */
     virtual svn::Revision
-    commit (const Targets & targets,
-            const QString& message,
-            svn::Depth depth,bool keep_locks=true,
-            const svn::StringArray&contents=svn::StringArray(),
-            const PropertiesMap&revProps=PropertiesMap(),
-            bool keep_changelist=false
-           ) throw (ClientException)=0;
+    commit (const CommitParameter&parameters) throw (ClientException)=0;
 
     /**
      * Copies a versioned file with the history preserved.
@@ -330,24 +292,6 @@ namespace svn
     virtual svn::Revision
             move (const CopyParameter&parameter) throw (ClientException)=0;
 
-    /**
-     * Creates a directory directly in a repository or creates a
-     * directory on disk and schedules it for addition. If <i>path</i>
-     * is a URL then authentication is usually required, see Auth and
-     * the callback asks for a logmessage. With subversion 1.4 the target
-     * must not exist (\sa svn_client_move4)
-     *
-     * @param path
-     * @param message log message. if it is QString::null asks when working on repository
-     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
-     * @exception ClientException
-     */
-    virtual svn::Revision
-    mkdir (const Path & path,
-           const QString& message,
-           bool makeParent=true,
-           const PropertiesMap&revProps=PropertiesMap()
-          ) throw (ClientException)=0;
     /**
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
@@ -386,33 +330,18 @@ namespace svn
      * 'clean' directory (meaning a directory with no administrative
      * directories).
      * @exception ClientException
-     * @param srcPath source path
-     * @param destPath a destination path that must not already exist.
-     * @param revision revision to use for the export
-     * @param peg the revision where the path is first looked up when exporting from a repository.
-     * @param overwrite overwrite existing files
-     * @param native_eol Either "LF", "CR" or "CRLF" or NULL.
-     * @param ignore_externals don't process externals definitions as part of this operation.
-     * @param recurse if true, export recursively.<br>
-      Otherwise, export just the directory represented by from and its immediate non-directory children.
+     * @param params Parameter to use
+     * @return revision exported
      */
-    virtual svn_revnum_t
-    doExport (const Path & srcPath,
-              const Path & destPath,
-              const Revision & revision,
-              const Revision & peg = Revision::UNDEFINED,
-              bool overwrite=false,
-              const QString&native_eol=QString::null,
-              bool ignore_externals = false,
-              svn::Depth depth=svn::DepthInfinity
-              ) throw (ClientException)=0;
+    virtual Revision
+    doExport (const CheckoutParameter&params) throw (ClientException)=0;
 
     /**
      * Update local copy to mirror a new url. This excapsulates the
      * svn_client_switch() client method.
      * @exception ClientException
      */
-    virtual svn_revnum_t
+    virtual Revision
     doSwitch (
               const Path & path, const QString& url,
               const Revision & revision,
@@ -465,7 +394,7 @@ namespace svn
     info (const Path &path,
           Depth depth,
           const Revision & rev,
-          const Revision & peg_revision=svn_opt_revision_unspecified,
+          const Revision & peg_revision=Revision::UNDEFINED,
           const StringArray&changelists=StringArray()
          ) throw (ClientException)=0;
 

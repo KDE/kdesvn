@@ -89,7 +89,6 @@ public Q_SLOTS:
     virtual void stopLogCache();
 
 protected Q_SLOTS:
-    void hideTips();
     void slotCacheDataChanged();
     void slotItemActivated(const QModelIndex&);
     void slotItemExpanded(const QModelIndex&);
@@ -159,7 +158,6 @@ protected Q_SLOTS:
     void slotRepositorySettings();
 
 protected:
-    virtual bool event(QEvent*event);
     virtual void keyPressEvent(QKeyEvent*);
     void setupActions();
     bool uniqueTypeSelected();

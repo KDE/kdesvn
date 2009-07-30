@@ -33,6 +33,7 @@
 // svncpp
 #include "svnqt/client_impl.hpp"
 #include "svnqt/svnqt_defines.hpp"
+#include "src/svnqt/client_annotate_parameter.hpp"
 
 // Subversion api
 #include "svn_client.h"
@@ -83,56 +84,35 @@ namespace svn
 #endif
 
   void
-  Client_impl::annotate (AnnotatedFile&target,const Path & path,
-            const Revision & revisionStart,
-            const Revision & revisionEnd,
-            const Revision & peg,
-            const DiffOptions&diffoptions,
-            bool ignore_mimetypes,
-            bool include_merged_revisions
-                        ) throw (ClientException)
+  Client_impl::annotate (AnnotatedFile&target,const AnnotateParameter&params) throw (ClientException)
   {
     Pool pool;
     svn_error_t *error;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error = svn_client_blame4(
-                path.path().TOUTF8(),
-                peg.revision(),
-                revisionStart.revision (),
-                revisionEnd.revision (),
-                diffoptions.options(pool),
-                ignore_mimetypes,
-                include_merged_revisions,
+                params.path().cstr(),
+                params.pegRevision().revision(),
+                params.revisionRange().first,
+                params.revisionRange().second,
+                params.diffOptions().options(pool),
+                params.ignoreMimeTypes(),
+                params.includeMerged(),
                 annotateReceiver,
                 &target,
                 *m_context, // client ctx
                 pool);
 #elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
-    Q_UNUSED(include_merged_revisions);
     error = svn_client_blame3(
-        path.path().TOUTF8(),
-        peg.revision(),
-        revisionStart.revision (),
-        revisionEnd.revision (),
-        diffoptions.options(pool),
-        ignore_mimetypes,
-        annotateReceiver,
-        &target,
-        *m_context, // client ctx
-        pool);
-#else
-    Q_UNUSED(include_merged_revisions);
-    Q_UNUSED(ignore_mimetypes);
-    Q_UNUSED(diffoptions);
-    error = svn_client_blame2(
-      path.path().TOUTF8(),
-      peg.revision(),
-      revisionStart.revision (),
-      revisionEnd.revision (),
-      annotateReceiver,
-      &target,
-      *m_context, // client ctx
-      pool);
+                params.path().cstr(),
+                params.pegRevision().revision(),
+                params.revisionRange().first,
+                params.revisionRange().second,
+                params.diffOptions().options(pool),
+                params.ignoreMimeTypes(),
+                annotateReceiver,
+                &target,
+                *m_context, // client ctx
+                pool);
 #endif
     if (error != NULL)
     {

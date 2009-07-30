@@ -40,8 +40,8 @@ namespace svn
     };
 
     DiffOptions::DiffOptions()
-        :m_data(new DiffOptionsData())
     {
+        m_data = new DiffOptionsData;
     }
 
     void DiffOptions::init(const svn_diff_file_options_t*_diffopts)
@@ -72,8 +72,8 @@ namespace svn
     }
 
     DiffOptions::DiffOptions(const QStringList&options)
-        :m_data(new DiffOptionsData())
     {
+        m_data = new DiffOptionsData;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
         Pool pool;
         StringArray _ar(options);
@@ -90,8 +90,8 @@ namespace svn
     }
 
     DiffOptions::DiffOptions(const svn_diff_file_options_t*options)
-        :m_data(new DiffOptionsData())
     {
+        m_data = new DiffOptionsData;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
         if (options) {
             init(options);
@@ -129,8 +129,8 @@ namespace svn
     }
 
     DiffOptions::DiffOptions(const DiffOptions&old)
-        :m_data(new DiffOptionsData())
     {
+        m_data = new DiffOptionsData;
         m_data->_showc = old.m_data->_showc;
         m_data->_ignorespace=old.m_data->_ignorespace;
         m_data->_ignoreeol=old.m_data->_ignoreeol;

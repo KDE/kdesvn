@@ -23,6 +23,7 @@
 #include "src/svnqt/repositorylistener.hpp"
 #include "src/svnqt/repoparameter.hpp"
 #include "src/svnqt/targets.hpp"
+#include "src/svnqt/client_parameter.hpp"
 
 #include "testlistener.h"
 
@@ -69,10 +70,12 @@ int main(int,char**)
 
     m_Svnclient->setContext(m_CurrentContext);
     QStringList s; s.append(p+"/trunk"); s.append(p+"/branches"); s.append(p+"/tags");
+    svn::CheckoutParameter cparams;
+    cparams.moduleName(p).destination(TESTCOPATH).revision(svn::Revision::HEAD).peg(svn::Revision::HEAD).depth(svn::DepthInfinity);
 
     try {
         m_Svnclient->mkdir(svn::Targets(s),"Test mkdir");
-        m_Svnclient->checkout(p,TESTCOPATH,svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,false);
+        m_Svnclient->checkout(cparams);
     } catch (svn::ClientException e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;

@@ -124,15 +124,6 @@ namespace svn
               const QString &to_url, bool recurse) throw (ClientException);
 
     /**
-     * Sets a single file for deletion.
-     * @exception ClientException
-     */
-    virtual svn::Revision
-            remove (const Path & path, bool force,
-                    bool keep_local = true,
-                    const PropertiesMap&revProps = PropertiesMap()) throw (ClientException);
-
-    /**
      * Sets files for deletion.
      *
      * @param targets targets to delete

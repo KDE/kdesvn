@@ -82,14 +82,6 @@ namespace svn
     return Revision(revnum);
   }
 
-  Revision Client_impl::remove (const Path & path,bool force,
-                            bool keep_local,
-                            const PropertiesMap&revProps) throw (ClientException)
-  {
-      Targets targets (path.path());
-      return remove(targets,force,keep_local,revProps);
-  }
-
   Revision
   Client_impl::remove (const Targets & targets,
                   bool force,

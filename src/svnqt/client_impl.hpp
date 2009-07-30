@@ -284,22 +284,6 @@ namespace svn
      * is a URL then authentication is usually required, see Auth and
      * the callback asks for a logmessage.
      *
-     * @param path
-     * @param message log message. if it is QString::null asks when working on repository
-     * @exception ClientException
-     */
-    virtual svn::Revision
-    mkdir (const Path & path,
-           const QString& message,
-           bool makeParent=true,
-           const PropertiesMap&revProps=PropertiesMap()
-          ) throw (ClientException);
-    /**
-     * Creates a directory directly in a repository or creates a
-     * directory on disk and schedules it for addition. If <i>path</i>
-     * is a URL then authentication is usually required, see Auth and
-     * the callback asks for a logmessage.
-     *
      * @param targets encoded pathes to create
      * @param message log message. if it is QString::null asks when working on repository
      * @exception ClientException

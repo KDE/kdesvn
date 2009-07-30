@@ -402,17 +402,6 @@ namespace svn
   }
 
   svn::Revision
-  Client_impl::mkdir (const Path & path,
-                 const QString& message,
-                 bool makeParent,
-                 const PropertiesMap&revProps
-                     ) throw (ClientException)
-  {
-    Targets targets(path.path());
-    return mkdir(targets,message,makeParent,revProps);
-  }
-
-  svn::Revision
   Client_impl::mkdir (const Targets & targets,
                  const QString&msg,
                  bool makeParent,

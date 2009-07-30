@@ -304,24 +304,6 @@ namespace svn
      * Creates a directory directly in a repository or creates a
      * directory on disk and schedules it for addition. If <i>path</i>
      * is a URL then authentication is usually required, see Auth and
-     * the callback asks for a logmessage. With subversion 1.4 the target
-     * must not exist (\sa svn_client_move4)
-     *
-     * @param path
-     * @param message log message. if it is QString::null asks when working on repository
-     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
-     * @exception ClientException
-     */
-    virtual svn::Revision
-    mkdir (const Path & path,
-           const QString& message,
-           bool makeParent=true,
-           const PropertiesMap&revProps=PropertiesMap()
-          ) throw (ClientException)=0;
-    /**
-     * Creates a directory directly in a repository or creates a
-     * directory on disk and schedules it for addition. If <i>path</i>
-     * is a URL then authentication is usually required, see Auth and
      * the callback asks for a logmessage.
      *
      * @param targets encoded pathes to create

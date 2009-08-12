@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-23 17:33+0200\n"
+"POT-Creation-Date: 2009-08-13 00:10+0200\n"
 "PO-Revision-Date: 2007-12-21 10:54+0500\n"
 "Last-Translator: Andy Mikhailenko <neithere@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -17,8 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: rc.cpp:631
-msgid " line(s)"
+#: settings/cmdexecsettings_impl.cpp:37
+#, fuzzy
+msgid " lines"
 msgstr "строка (строки)"
 
 #: svnfrontend/commandexec.cpp:420
@@ -35,7 +36,7 @@ msgstr ""
 msgid "%1 at revision %2"
 msgstr "%1 в %2 правке"
 
-#: svnfrontend/stopdlg.cpp:209 svnfrontend/stopdlg.cpp:210
+#: svnfrontend/stopdlg.cpp:209
 msgid "%1 of %2"
 msgstr "%1 из %2"
 
@@ -43,13 +44,13 @@ msgstr "%1 из %2"
 msgid "%1 of %2 transferred."
 msgstr "%1 из %2 перемещено."
 
-#: svnfrontend/stopdlg.cpp:206 svnfrontend/tcontextlistener.cpp:194
+#: svnfrontend/tcontextlistener.cpp:194 svnfrontend/stopdlg.cpp:206
 msgid "%1 transferred."
 msgstr "%1 передан."
 
-#: svnfrontend/graphtree/revisiontree.cpp:235
-#: svnfrontend/graphtree/revisiontree.cpp:275
-#: svnfrontend/graphtree/revisiontree.cpp:324
+#: svnfrontend/graphtree/revisiontree.cpp:234
+#: svnfrontend/graphtree/revisiontree.cpp:274
+#: svnfrontend/graphtree/revisiontree.cpp:323
 msgid "%1<br>Check change entry %2 of %3"
 msgstr ""
 
@@ -58,14 +59,32 @@ msgstr ""
 msgid "%p% of %1"
 msgstr "%1 из %2"
 
+#: kdesvn.cpp:91
+msgid "&Bookmarks"
+msgstr ""
+
 #: svnfrontend/svntreeview.cpp:130
 #, fuzzy
 msgid "&Copy Here"
 msgstr "Скопировать из"
 
+#: rc.cpp:406
+#, fuzzy
+msgid "&File"
+msgstr "Каталог"
+
+#: rc.cpp:27 rc.cpp:424
+msgid "&Help"
+msgstr ""
+
 #: svnfrontend/svntreeview.cpp:126
 msgid "&Move Here"
 msgstr ""
+
+#: rc.cpp:418
+#, fuzzy
+msgid "&Settings"
+msgstr "Настройки"
 
 #: main.cpp:40
 msgid "(C) 2005-2007 Rajko Albrecht"
@@ -84,19 +103,19 @@ msgstr "(Последняя часть)"
 msgid "(Un)Lock"
 msgstr "Разблокировано"
 
-#: rc.cpp:234
+#: rc.cpp:757
 msgid "-1"
 msgstr ""
 
-#: rc.cpp:180
+#: rc.cpp:658
 msgid "-1 for Head"
 msgstr ""
 
-#: rc.cpp:183
+#: rc.cpp:661
 msgid "-1 for Start"
 msgstr ""
 
-#: rc.cpp:372
+#: rc.cpp:601
 msgid "/there/"
 msgstr ""
 
@@ -128,7 +147,7 @@ msgstr "<b>Правка</b>%1%2%3"
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
 msgstr "<br>Правка: %1<br>Автор: %2<br>Дата: %3<br>Журнал:%4</html>"
 
-#: svnfrontend/svnactions.cpp:1732
+#: svnfrontend/svnactions.cpp:1735
 msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgstr ""
 
@@ -138,7 +157,7 @@ msgstr ""
 "<center>На объект <br>%1<br>распространяется контроль версий- действие "
 "прервано.</center>"
 
-#: rc.cpp:402
+#: rc.cpp:817
 msgid ""
 "<p ><b>Kind of depth</b>: </p>\n"
 "<p ><i>empty depth</i><br />\n"
@@ -156,7 +175,7 @@ msgid ""
 "infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
 msgstr ""
 
-#: rc.cpp:565
+#: rc.cpp:341
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -184,7 +203,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:779
+#: rc.cpp:107
 msgid ""
 "<p align=\"left\">\n"
 "Mark an items with non-normal state with an overlayed icon. When you wish "
@@ -194,7 +213,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:693
+#: rc.cpp:158
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
 "items when making a listing to remote repositories. So you may see remote "
@@ -203,11 +222,11 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
 msgstr ""
 
-#: rc.cpp:363
+#: rc.cpp:592
 msgid "<p align=\"right\">Rename</p>"
 msgstr ""
 
-#: rc.cpp:526
+#: rc.cpp:302
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -231,7 +250,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:552
+#: rc.cpp:328
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -247,7 +266,7 @@ msgid ""
 "</p>"
 msgstr ""
 
-#: rc.cpp:726
+#: rc.cpp:191
 msgid ""
 "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
 "instead of simple cleartext storage of subversion.</p>\n"
@@ -315,13 +334,19 @@ msgstr "Принять навсегда"
 msgid "Accept temporarily"
 msgstr "Принять временно"
 
-#: ksvnwidgets/models/commitmodel.cpp:248 rc.cpp:45
+#: rc.cpp:784 ksvnwidgets/models/commitmodel.cpp:248
 msgid "Action"
 msgstr "Действие"
 
-#: rc.cpp:901 rc.cpp:904 rc.cpp:907 rc.cpp:910
+#: rc.cpp:30 rc.cpp:33 rc.cpp:36 rc.cpp:39
 msgid "Actions"
 msgstr "Действия"
+
+#: svnfrontend/maintreewidget.cpp:538
+#: ksvnwidgets/models/commitmodelhelper.cpp:68
+#, fuzzy
+msgid "Add"
+msgstr "Добавлен"
 
 #: svnfrontend/svnactions.cpp:1017
 msgid "Add and Commit"
@@ -331,11 +356,11 @@ msgstr "Добавить и зафиксировать"
 msgid "Add property"
 msgstr "Добавить свойство"
 
-#: svnfrontend/maintreewidget.cpp:575
+#: svnfrontend/maintreewidget.cpp:536
 msgid "Add selected files/dirs"
 msgstr "Добавить выбранные файлы/каталоги"
 
-#: svnfrontend/maintreewidget.cpp:578
+#: svnfrontend/maintreewidget.cpp:539
 #, fuzzy
 msgid "Add selected files/dirs recursive"
 msgstr "Добавить выбранные файлы/каталоги"
@@ -348,7 +373,7 @@ msgstr ""
 msgid "Add to revision control"
 msgstr "Добавить в контроль версий"
 
-#: svnfrontend/svnactions.cpp:2359
+#: svnfrontend/svnactions.cpp:2369
 msgid "Add unversioned items"
 msgstr ""
 
@@ -364,7 +389,7 @@ msgstr "Добавлен в %1-й правке как %2"
 msgid "Added in repository"
 msgstr "Добавлен в репозиторий"
 
-#: rc.cpp:601
+#: rc.cpp:244
 msgid "Added items:"
 msgstr "Добавленные объекты:"
 
@@ -376,11 +401,11 @@ msgstr "Добавляем %1."
 msgid "Adding (bin) %1."
 msgstr "Добавляем (бин.) %1."
 
-#: svnfrontend/maintreewidget.cpp:576
+#: svnfrontend/maintreewidget.cpp:537
 msgid "Adding selected files and/or directories to repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:580
+#: svnfrontend/maintreewidget.cpp:541
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
@@ -390,20 +415,20 @@ msgstr ""
 msgid "Addition"
 msgstr "Добавление"
 
-#: rc.cpp:711
+#: rc.cpp:176
 msgid "Always get properties on networked repositories"
 msgstr ""
 
-#: svnfrontend/svnlogdlgimp.cpp:503 rc.cpp:66
+#: rc.cpp:805 svnfrontend/svnlogdlgimp.cpp:503
 msgid "Annotate"
 msgstr "Аннотировать"
 
-#: svnfrontend/svnactions.cpp:532
+#: svnfrontend/svnactions.cpp:533
 #, fuzzy
 msgid "Annotate lines - hit cancel for abort"
 msgstr "Фиксируются изменения - можете отменить"
 
-#: rc.cpp:246
+#: rc.cpp:736
 msgid "Append source url name to subfolder"
 msgstr ""
 
@@ -411,19 +436,19 @@ msgstr ""
 msgid "Ask for revision when executing single command"
 msgstr ""
 
-#: rc.cpp:471
+#: rc.cpp:844
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: svnfrontend/models/logitemmodel.cpp:210 rc.cpp:78
+#: rc.cpp:583 svnfrontend/models/logitemmodel.cpp:210
 msgid "Author"
 msgstr "Автор"
 
-#: svnfrontend/maintreewidget.cpp:1726
+#: svnfrontend/maintreewidget.cpp:1687
 msgid "Automatic generated base layout by kdesvn"
 msgstr ""
 
-#: rc.cpp:279
+#: rc.cpp:529
 msgid "BDB"
 msgstr ""
 
@@ -433,11 +458,11 @@ msgid ""
 "Continue from the end?"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:526
+#: svnfrontend/maintreewidget.cpp:487
 msgid "Blame"
 msgstr "Кто менял строки"
 
-#: svnfrontend/maintreewidget.cpp:529
+#: svnfrontend/maintreewidget.cpp:490
 msgid "Blame range"
 msgstr "Кто менял строки в диапазоне"
 
@@ -445,23 +470,23 @@ msgstr "Кто менял строки в диапазоне"
 msgid "Both entries seems to be the same, can not diff."
 msgstr "Оба элемента одинаковы, нет смысла в построчном сравнении."
 
-#: svnfrontend/svnactions.cpp:2049
+#: svnfrontend/svnactions.cpp:2052
 msgid "Both entries seems to be the same, won't do a merge."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2018
+#: svnfrontend/svnactions.cpp:2021
 msgid "Both sources must be same type!"
 msgstr ""
 
-#: rc.cpp:812
+#: rc.cpp:371
 msgid "Bottom to top"
 msgstr "Снизу вверх"
 
-#: svnfrontend/maintreewidget.cpp:1245
+#: svnfrontend/maintreewidget.cpp:1206
 msgid "Break lock or ignore missing locks?"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:560
+#: svnfrontend/maintreewidget.cpp:521
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 
@@ -480,7 +505,7 @@ msgstr ""
 msgid "Cache filled up to revision %1"
 msgstr "Удален в %1-й правке"
 
-#: rc.cpp:655
+#: rc.cpp:81
 msgid "Can KIO overwrite existing files?"
 msgstr ""
 
@@ -488,20 +513,24 @@ msgstr ""
 msgid "Can not do this diff because networking is disabled."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1845
+#: svnfrontend/svnactions.cpp:1848
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:295 kiosvn/kiosvn.cpp:356 kiosvn/kiosvn.cpp:490
+#: kiosvn/kiosvn.cpp:296 kiosvn/kiosvn.cpp:357 kiosvn/kiosvn.cpp:495
 #, fuzzy
 msgid "Can only write on head revision!"
 msgstr "Остановиться на правке"
 
-#: svnfrontend/maintreewidget.cpp:1932
+#: rc.cpp:679
+msgid "Cancel"
+msgstr ""
+
+#: svnfrontend/maintreewidget.cpp:1893
 msgid "Cannot import into multiple targets!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1958
+#: svnfrontend/maintreewidget.cpp:1919
 msgid "Cannot import remote urls!"
 msgstr ""
 
@@ -509,53 +538,53 @@ msgstr ""
 msgid "Canonical repository url"
 msgstr "URL канонического репозитория"
 
-#: svnfrontend/maintreewidget.cpp:533
+#: svnfrontend/maintreewidget.cpp:494
 msgid "Cat head"
 msgstr "Смотреть содержимое"
 
-#: svnfrontend/maintreewidget.cpp:536
+#: svnfrontend/maintreewidget.cpp:497
 msgid "Cat revision..."
 msgstr "Показать исходный код правки..."
 
-#: svnfrontend/svnlogdlgimp.cpp:513 svnfrontend/graphtree/revgraphview.cpp:801
+#: svnfrontend/graphtree/revgraphview.cpp:801 svnfrontend/svnlogdlgimp.cpp:513
 msgid "Cat this version"
 msgstr "Показать исходный код этой версии"
 
-#: svnfrontend/maintreewidget.cpp:558
+#: svnfrontend/maintreewidget.cpp:519
 msgid "Check for unversioned items"
 msgstr "Все ли объекты под контролем версий?"
 
-#: svnfrontend/maintreewidget.cpp:520
+#: svnfrontend/maintreewidget.cpp:481
 msgid "Check for updates"
 msgstr "Проверить наличие обновлений"
 
-#: svnfrontend/maintreewidget.cpp:521
+#: svnfrontend/maintreewidget.cpp:482
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
 
-#: rc.cpp:687
+#: rc.cpp:152
 msgid "Check if items has \"svn:needs-lock\" property set"
 msgstr ""
 
-#: rc.cpp:844
+#: rc.cpp:403
 msgid "Check logcache fill before reading tree"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:523
+#: svnfrontend/maintreewidget.cpp:484
 #, fuzzy
 msgid "Check updates"
 msgstr "Проверить наличие обновлений"
 
-#: svnfrontend/svnactions.cpp:2504
+#: svnfrontend/svnactions.cpp:2514
 msgid "Checking for updates finished"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2637
+#: svnfrontend/svnactions.cpp:2647
 msgid "Checking for updates started in background"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1699
+#: svnfrontend/svnactions.cpp:1702
 msgid "Checking out"
 msgstr "Получение"
 
@@ -563,21 +592,21 @@ msgstr "Получение"
 msgid "Checking out a file?"
 msgstr "Получить файл?"
 
-#: svnfrontend/maintreewidget.cpp:630 svnfrontend/maintreewidget.cpp:638
-#: svnfrontend/svnactions.cpp:1699
+#: svnfrontend/maintreewidget.cpp:591 svnfrontend/maintreewidget.cpp:599
+#: svnfrontend/svnactions.cpp:1702
 msgid "Checkout"
 msgstr "Получить"
 
-#: svnfrontend/maintreewidget.cpp:637 svnfrontend/svnactions.cpp:1618
+#: svnfrontend/maintreewidget.cpp:598 svnfrontend/svnactions.cpp:1618
 #: svnfrontend/svnactions.cpp:1640
 msgid "Checkout a repository"
 msgstr "Получить из репозитория"
 
-#: svnfrontend/maintreewidget.cpp:629
+#: svnfrontend/maintreewidget.cpp:590
 msgid "Checkout current repository path"
 msgstr ""
 
-#: rc.cpp:237
+#: rc.cpp:727
 msgid "Checkout info"
 msgstr ""
 
@@ -585,7 +614,7 @@ msgstr ""
 msgid "Checksum"
 msgstr "Контрольная сумма"
 
-#: rc.cpp:357
+#: rc.cpp:439
 msgid "Clean logs"
 msgstr ""
 
@@ -594,24 +623,29 @@ msgstr ""
 msgid "Clean repository cache"
 msgstr "Создать репозиторий"
 
-#: svnfrontend/svnactions.cpp:1888
+#: svnfrontend/svnactions.cpp:1891
 msgid "Cleaning up folder"
 msgstr "Очистка каталога"
 
-#: svnfrontend/maintreewidget.cpp:567 svnfrontend/svnactions.cpp:1888
+#: svnfrontend/maintreewidget.cpp:528 svnfrontend/svnactions.cpp:1891
 msgid "Cleanup"
 msgstr "Очистка"
 
-#: svnfrontend/maintreewidget.cpp:2114
+#: urldlg.cpp:84
+#, fuzzy
+msgid "Clear"
+msgstr "Очистка"
+
+#: svnfrontend/maintreewidget.cpp:2075
 #, fuzzy
 msgid "Click for navigate"
 msgstr "Проверить наличие обновлений"
 
-#: rc.cpp:12
+#: rc.cpp:673
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:650
+#: svnfrontend/maintreewidget.cpp:611
 msgid "Closes all branches of the file tree"
 msgstr "Сворачивает все ветви дерева файлов"
 
@@ -619,27 +653,27 @@ msgstr "Сворачивает все ветви дерева файлов"
 msgid "Color Settings"
 msgstr "Настройки цветов"
 
-#: rc.cpp:821
+#: rc.cpp:380
 msgid "Color for added items:"
 msgstr "Цвет добавленных элементов:"
 
-#: rc.cpp:827
+#: rc.cpp:386
 msgid "Color for copied items:"
 msgstr "Цвет скопированных элементов:"
 
-#: rc.cpp:824
+#: rc.cpp:383
 msgid "Color for deleted items:"
 msgstr "Цвет удаленных элементов:"
 
-#: rc.cpp:833
+#: rc.cpp:392
 msgid "Color for modified items:"
 msgstr "Цвет измененных элементов:"
 
-#: rc.cpp:830
+#: rc.cpp:389
 msgid "Color for renamed items:"
 msgstr "Цвет переименованных элементов:"
 
-#: rc.cpp:586
+#: rc.cpp:229
 #, fuzzy
 msgid "ColorSettings"
 msgstr "Настройки цветов"
@@ -656,8 +690,8 @@ msgstr ""
 msgid "Commandline"
 msgstr "Командная строка"
 
-#: svnfrontend/maintreewidget.cpp:597 svnfrontend/maintreewidget.cpp:598
-#: svnfrontend/maintreewidget.cpp:656 svnfrontend/svnactions.cpp:1012
+#: svnfrontend/maintreewidget.cpp:558 svnfrontend/maintreewidget.cpp:559
+#: svnfrontend/maintreewidget.cpp:617 svnfrontend/svnactions.cpp:1012
 #: svnfrontend/svnactions.cpp:1052
 msgid "Commit"
 msgstr "Зафиксировать изменения"
@@ -688,25 +722,25 @@ msgstr ""
 msgid "Commit log"
 msgstr "Журнал правок"
 
-#: rc.cpp:423
+#: rc.cpp:859
 #, fuzzy
 msgid "Commitmessage"
 msgstr "Сообщение в журнал"
 
-#: svnfrontend/svnactions.cpp:1061 svnfrontend/svnactions.cpp:2198
-#: kiosvn/kiosvn.cpp:825
+#: kiosvn/kiosvn.cpp:833 svnfrontend/svnactions.cpp:1061
+#: svnfrontend/svnactions.cpp:2208
 msgid "Committed revision %1."
 msgstr "Изменения зафиксированы в %1-й правке."
 
-#: rc.cpp:306
+#: rc.cpp:556
 msgid "Compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:315
+#: rc.cpp:565
 msgid "Compatible to subversion prior 1.5"
 msgstr ""
 
-#: rc.cpp:321
+#: rc.cpp:571
 msgid "Compatible to subversion prior 1.6"
 msgstr ""
 
@@ -719,15 +753,15 @@ msgstr "&Настроить %1..."
 msgid "Conflict"
 msgstr "Конфликт"
 
-#: rc.cpp:516
+#: rc.cpp:292
 msgid "Conflict resolver program:"
 msgstr ""
 
-#: rc.cpp:607
+#: rc.cpp:250
 msgid "Conflicted items:"
 msgstr "Конфликтные объекты:"
 
-#: rc.cpp:81
+#: rc.cpp:586
 #, fuzzy
 msgid "Content"
 msgstr "Содержимое %1"
@@ -736,7 +770,7 @@ msgstr "Содержимое %1"
 msgid "Content last changed"
 msgstr "Содержимое обновлено"
 
-#: svnfrontend/svnactions.cpp:613
+#: svnfrontend/svnactions.cpp:614
 msgid "Content of %1"
 msgstr "Содержимое %1"
 
@@ -744,7 +778,14 @@ msgstr "Содержимое %1"
 msgid "Copied to %1 at revision %2"
 msgstr "Скопирован в %1 на %2 правке"
 
-#: svnfrontend/svnactions.cpp:2235 svnfrontend/svnactions.cpp:2260 rc.cpp:360
+#: svnfrontend/ccontextlistener.cpp:64 svnfrontend/maintreewidget.cpp:479
+#: svnfrontend/copymoveview_impl.cpp:56
+#: ksvnwidgets/models/commitmodelhelper.cpp:72
+#, fuzzy
+msgid "Copy"
+msgstr "Скопировать сюда"
+
+#: rc.cpp:589 svnfrontend/svnactions.cpp:2245 svnfrontend/svnactions.cpp:2270
 msgid "Copy / Move"
 msgstr "Копировать / Переместить"
 
@@ -752,7 +793,7 @@ msgstr "Копировать / Переместить"
 msgid "Copy file/dir"
 msgstr "Скопировать файл/каталог"
 
-#: rc.cpp:51
+#: rc.cpp:790
 msgid "Copy from"
 msgstr "Скопировать из"
 
@@ -760,12 +801,12 @@ msgstr "Скопировать из"
 msgid "Copy from URL"
 msgstr "Скопировать из URL"
 
-#: svnfrontend/svnactions.cpp:2235 svnfrontend/svnactions.cpp:2260
+#: svnfrontend/svnactions.cpp:2245 svnfrontend/svnactions.cpp:2270
 msgid "Copy or Moving entries"
 msgstr "Копируем или перемещаем элементы"
 
-#: askpass/kdesvn-askpass.cpp:34
-msgid "Copyright (c) 2005 Rajko Albrecht"
+#: askpass/kdesvn-askpass.cpp:35
+msgid "Copyright (c) 2005-2009 Rajko Albrecht"
 msgstr ""
 
 #: svnfrontend/svnactions.cpp:953
@@ -791,7 +832,7 @@ msgstr "Невозможно открыть репозиторий"
 msgid "Could not open tempfile %1 for writing."
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:399
+#: kiosvn/kiosvn.cpp:402
 #, fuzzy
 msgid "Could not open temporary file"
 msgstr "Невозможно открыть репозиторий"
@@ -801,28 +842,28 @@ msgstr "Невозможно открыть репозиторий"
 msgid "Could not open url %1"
 msgstr "Невозможно открыть репозиторий"
 
-#: svnfrontend/svnactions.cpp:1929
+#: svnfrontend/svnactions.cpp:1932
 msgid "Could not retrieve conflict information - giving up."
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:423
+#: kiosvn/kiosvn.cpp:426
 #, fuzzy
 msgid "Could not retrieve data for write."
 msgstr "Открыть репозиторий рабочей копии"
 
-#: svnfrontend/graphtree/revisiontree.cpp:112
-#: svnfrontend/graphtree/revisiontree.cpp:117
+#: svnfrontend/graphtree/revisiontree.cpp:111
+#: svnfrontend/graphtree/revisiontree.cpp:116
 msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2025
+#: svnfrontend/maintreewidget.cpp:1986
 #, fuzzy
 msgid "Could not retrieve repository of working copy."
 msgstr "Открыть репозиторий рабочей копии"
 
-#: svnfrontend/maintreewidget.cpp:2213
+#: svnfrontend/maintreewidget.cpp:2174
 #, fuzzy
 msgid "Could not retrieve repository."
 msgstr "Невозможно открыть репозиторий"
@@ -835,15 +876,15 @@ msgid ""
 "%2"
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:393
+#: kiosvn/kiosvn.cpp:396
 msgid "Could not write to existing item."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:519
+#: svnfrontend/maintreewidget.cpp:480
 msgid "Create a copy of current item"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:549
+#: svnfrontend/maintreewidget.cpp:510
 #, fuzzy
 msgid "Create a new folder"
 msgstr "Создать основные каталоги"
@@ -856,11 +897,11 @@ msgstr "Создать и открыть репозиторий"
 msgid "Create and opens a new local subversion repository"
 msgstr "Создать и открыть локальный репозиторий Subversion"
 
-#: rc.cpp:297
+#: rc.cpp:547
 msgid "Create main folders"
 msgstr "Создать основные каталоги"
 
-#: rc.cpp:264 kdesvnview.cpp:242
+#: kdesvnview.cpp:242 rc.cpp:514
 msgid "Create new repository"
 msgstr "Создать репозиторий"
 
@@ -868,11 +909,11 @@ msgstr "Создать репозиторий"
 msgid "Create subdir %1 on import"
 msgstr ""
 
-#: rc.cpp:291
+#: rc.cpp:541
 msgid "Create trunk, tags and branches folder"
 msgstr "Создать каталоги trunk, tags и branch"
 
-#: svnfrontend/svnactions.cpp:994 svnfrontend/svnactions.cpp:2329
+#: svnfrontend/svnactions.cpp:994 svnfrontend/svnactions.cpp:2339
 msgid "Creating list / check status"
 msgstr "Создание списка / проверка статуса"
 
@@ -884,20 +925,31 @@ msgstr "Ctrl-F для поиска, F3 или Shift-F3 для повторног
 msgid "D %1"
 msgstr ""
 
-#: rc.cpp:856
+#: rc.cpp:415
 #, fuzzy
 msgid "Database"
 msgstr "Дата"
 
-#: svnfrontend/models/logitemmodel.cpp:212 rc.cpp:75 rc.cpp:195 rc.cpp:216
+#: rc.cpp:580 rc.cpp:691 rc.cpp:712 svnfrontend/models/logitemmodel.cpp:212
 msgid "Date"
 msgstr "Дата"
 
-#: rc.cpp:390
+#: rc.cpp:499
+#, fuzzy
+msgid "Default"
+msgstr "По умолчанию UTF-8"
+
+#: rc.cpp:913
 msgid "Default utf-8"
 msgstr "По умолчанию UTF-8"
 
-#: rc.cpp:99 rc.cpp:102
+#: svnfrontend/ccontextlistener.cpp:65 svnfrontend/maintreewidget.cpp:544
+#: svnfrontend/svnactions.cpp:1010 ksvnwidgets/models/commitmodelhelper.cpp:76
+#, fuzzy
+msgid "Delete"
+msgstr "Удален"
+
+#: rc.cpp:457 rc.cpp:460
 #, fuzzy
 msgid "Delete all entries and settings for selected repository"
 msgstr "Удалить выбранные каталоги и/или файлы из репозитория"
@@ -906,16 +958,16 @@ msgstr "Удалить выбранные каталоги и/или файлы 
 msgid "Delete and Commit"
 msgstr "Удалить и зафиксировать"
 
-#: rc.cpp:96
+#: rc.cpp:454
 #, fuzzy
 msgid "Delete cache"
 msgstr "Удален"
 
-#: rc.cpp:90 rc.cpp:93
+#: rc.cpp:448 rc.cpp:451
 msgid "Delete cache entries for current selected repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1563 svnfrontend/svnactions.cpp:1566
+#: svnfrontend/maintreewidget.cpp:1524 svnfrontend/svnactions.cpp:1566
 msgid "Delete from repository"
 msgstr "Удалить из репозитория"
 
@@ -923,16 +975,16 @@ msgstr "Удалить из репозитория"
 msgid "Delete property"
 msgstr "Удалить свойство"
 
-#: svnfrontend/database/dboverview.cpp:139 rc.cpp:105
+#: rc.cpp:463 svnfrontend/database/dboverview.cpp:139
 #, fuzzy
 msgid "Delete repository"
 msgstr "Удалить из репозитория"
 
-#: svnfrontend/maintreewidget.cpp:582
+#: svnfrontend/maintreewidget.cpp:543
 msgid "Delete selected files/dirs"
 msgstr "Удалить"
 
-#: svnfrontend/svnitem.cpp:401 svnfrontend/ccontextlistener.cpp:71
+#: svnfrontend/ccontextlistener.cpp:71 svnfrontend/svnitem.cpp:401
 msgid "Deleted"
 msgstr "Удален"
 
@@ -940,7 +992,7 @@ msgstr "Удален"
 msgid "Deleted at revision %1"
 msgstr "Удален в %1-й правке"
 
-#: rc.cpp:604
+#: rc.cpp:247
 msgid "Deleted items:"
 msgstr "Удаленные объекты:"
 
@@ -948,7 +1000,7 @@ msgstr "Удаленные объекты:"
 msgid "Deleting %1."
 msgstr "Удаляем %1."
 
-#: svnfrontend/maintreewidget.cpp:584
+#: svnfrontend/maintreewidget.cpp:545
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Удалить выбранные каталоги и/или файлы из репозитория"
 
@@ -956,11 +1008,11 @@ msgstr "Удалить выбранные каталоги и/или файлы 
 msgid "Deletion"
 msgstr "Удаление"
 
-#: rc.cpp:351
+#: rc.cpp:433
 msgid "Destination folder:"
 msgstr "Каталог назначения:"
 
-#: svnfrontend/maintreewidget.cpp:514
+#: svnfrontend/maintreewidget.cpp:475
 msgid "Details"
 msgstr "Подробности"
 
@@ -972,7 +1024,7 @@ msgstr "Разработчик"
 msgid "Diff & Merge"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:606
+#: svnfrontend/maintreewidget.cpp:567
 msgid "Diff against HEAD"
 msgstr "Сравнить с HEAD"
 
@@ -980,42 +1032,42 @@ msgstr "Сравнить с HEAD"
 msgid "Diff display"
 msgstr "Показ построчного сравнения"
 
-#: rc.cpp:447
+#: rc.cpp:883
 #, fuzzy
 msgid "Diff highlighted item"
 msgstr "Удаленные объекты:"
 
-#: rc.cpp:498
+#: rc.cpp:274
 msgid "Diff ignores all white spaces"
 msgstr ""
 
-#: rc.cpp:489
+#: rc.cpp:265
 msgid "Diff ignores content type"
 msgstr ""
 
-#: rc.cpp:495
+#: rc.cpp:271
 #, fuzzy
 msgid "Diff ignores white space changes"
 msgstr "Сравнить локально"
 
-#: svnfrontend/graphtree/revgraphview.cpp:815 rc.cpp:492
+#: rc.cpp:268 svnfrontend/graphtree/revgraphview.cpp:815
 msgid "Diff in revisiontree is recursive"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:610 svnfrontend/maintreewidget.cpp:613
+#: svnfrontend/maintreewidget.cpp:571 svnfrontend/maintreewidget.cpp:574
 msgid "Diff items"
 msgstr "Сравнить объекты"
 
-#: svnfrontend/maintreewidget.cpp:600 svnfrontend/maintreewidget.cpp:602
+#: svnfrontend/maintreewidget.cpp:561 svnfrontend/maintreewidget.cpp:563
 msgid "Diff local changes"
 msgstr "Сравнить локально"
 
-#: svnfrontend/svnlogdlgimp.cpp:508 rc.cpp:54
+#: rc.cpp:793 svnfrontend/svnlogdlgimp.cpp:508
 #, fuzzy
 msgid "Diff previous"
 msgstr "Сравнить правки"
 
-#: svnfrontend/maintreewidget.cpp:644 rc.cpp:60
+#: rc.cpp:799 svnfrontend/maintreewidget.cpp:605
 msgid "Diff revisions"
 msgstr "Сравнить правки"
 
@@ -1027,11 +1079,11 @@ msgstr "Сравнить с предыдущим"
 msgid "Diff to selected item"
 msgstr "Сравнить с выбранным элементом"
 
-#: svnfrontend/maintreewidget.cpp:611 svnfrontend/maintreewidget.cpp:614
+#: svnfrontend/maintreewidget.cpp:572 svnfrontend/maintreewidget.cpp:575
 msgid "Diff two items"
 msgstr "Сравнить два объекта"
 
-#: svnfrontend/maintreewidget.cpp:601 svnfrontend/maintreewidget.cpp:603
+#: svnfrontend/maintreewidget.cpp:562 svnfrontend/maintreewidget.cpp:564
 msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
@@ -1039,7 +1091,7 @@ msgstr ""
 "Сравнить рабочую копию с BASE (последней полученной правкой) - не требует "
 "доступа к репозиторию"
 
-#: svnfrontend/maintreewidget.cpp:607
+#: svnfrontend/maintreewidget.cpp:568
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
@@ -1049,7 +1101,7 @@ msgstr ""
 msgid "Diff-process could not started, check command."
 msgstr ""
 
-#: rc.cpp:486
+#: rc.cpp:262
 #, fuzzy
 msgid "DiffMergeSettings"
 msgstr "Настройки"
@@ -1058,24 +1110,24 @@ msgstr "Настройки"
 msgid "Diffing - hit cancel for abort"
 msgstr "Идет сравнение - можете отменить"
 
-#: rc.cpp:806
+#: rc.cpp:365
 msgid "Direction of revision tree"
 msgstr "Направление дерева правок"
 
-#: rc.cpp:288
+#: rc.cpp:538
 msgid "Disable automatic log file removal (BDB only)"
 msgstr ""
 
-#: rc.cpp:285
+#: rc.cpp:535
 msgid "Disable fsync at commit (BDB only)"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:511
+#: svnfrontend/maintreewidget.cpp:472
 #, fuzzy
 msgid "Display Properties"
 msgstr "Показать подробности"
 
-#: rc.cpp:797
+#: rc.cpp:125
 msgid "Display colored annotate"
 msgstr "Показывать цветную аннотацию"
 
@@ -1083,16 +1135,16 @@ msgstr "Показывать цветную аннотацию"
 msgid "Display details"
 msgstr "Показать подробности"
 
-#: kdesvn_part.cpp:196 rc.cpp:791
+#: rc.cpp:119 kdesvn_part.cpp:196
 msgid "Display ignored files"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:512
+#: svnfrontend/maintreewidget.cpp:473
 #, fuzzy
 msgid "Display last changes"
 msgstr "Сравнить локально"
 
-#: svnfrontend/maintreewidget.cpp:513
+#: svnfrontend/maintreewidget.cpp:474
 msgid "Display last changes as difference to previous commit."
 msgstr ""
 
@@ -1104,12 +1156,12 @@ msgstr ""
 msgid "Display-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:496
+#: svnfrontend/maintreewidget.cpp:457
 #, fuzzy
 msgid "Displays the history log of selected item"
 msgstr "Сравнить с выбранным элементом"
 
-#: svnfrontend/maintreewidget.cpp:499 svnfrontend/maintreewidget.cpp:503
+#: svnfrontend/maintreewidget.cpp:460 svnfrontend/maintreewidget.cpp:464
 msgid "Displays the history log of selected item without following copies"
 msgstr ""
 
@@ -1117,16 +1169,16 @@ msgstr ""
 msgid "Document to open"
 msgstr "Какой документ открыть"
 
-#: rc.cpp:640
+#: rc.cpp:66
 msgid "Don't display contextmenu in Konqueror"
 msgstr "Не показывать контекстное меню в Konqueror'е"
 
-#: rc.cpp:646
+#: rc.cpp:72
 #, fuzzy
 msgid "Don't display entries in toplevel action menu"
 msgstr "Не показывать контекстное меню в Konqueror'е"
 
-#: rc.cpp:111
+#: rc.cpp:469
 #, fuzzy
 msgid "Don't update logcache on open"
 msgstr "Обновиться до head"
@@ -1149,7 +1201,7 @@ msgstr "Сделать дамп репозитория"
 msgid "Dump a subversion repository to a file"
 msgstr "Выгрузить репозиторий в дамп-файл"
 
-#: rc.cpp:126
+#: rc.cpp:484
 msgid "Dump file:"
 msgstr "Выгрузить файл:"
 
@@ -1157,11 +1209,11 @@ msgstr "Выгрузить файл:"
 msgid "Dump finished."
 msgstr "Дамп готов."
 
-#: rc.cpp:162
+#: rc.cpp:640
 msgid "Dump into:"
 msgstr "Выгрузить в:"
 
-#: rc.cpp:156
+#: rc.cpp:634
 msgid "Dump repo"
 msgstr "Выгрузить репозиторий"
 
@@ -1169,7 +1221,7 @@ msgstr "Выгрузить репозиторий"
 msgid "Dump repository to file"
 msgstr "Выгрузить репозиторий в файл"
 
-#: rc.cpp:171
+#: rc.cpp:649
 msgid "Dump revision range"
 msgstr ""
 
@@ -1177,15 +1229,15 @@ msgstr ""
 msgid "Dumping a repository"
 msgstr "Создается дамп репозитория"
 
-#: rc.cpp:3
+#: rc.cpp:664
 msgid "Edit property"
 msgstr "Изменить свойство:"
 
-#: rc.cpp:411
+#: rc.cpp:826
 msgid "Empty Depth"
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:872
+#: kiosvn/kiosvn.cpp:879
 msgid "Empty logs"
 msgstr ""
 
@@ -1195,29 +1247,29 @@ msgid ""
 "Continue from the beginning?"
 msgstr ""
 
-#: rc.cpp:27
+#: rc.cpp:766
 #, fuzzy
 msgid "End revision"
 msgstr "Конечная правка:"
 
-#: rc.cpp:174
+#: rc.cpp:652
 msgid "End revision:"
 msgstr "Конечная правка:"
 
-#: rc.cpp:243
+#: rc.cpp:733
 msgid "Enter URL:"
 msgstr "Введите URL:"
 
-#: rc.cpp:453
+#: rc.cpp:889
 msgid "Enter a log message"
 msgstr "Введите сообщение для журнала"
 
-#: rc.cpp:474
+#: rc.cpp:847
 #, fuzzy
 msgid "Enter authentication info for"
 msgstr "Введите реквизиты доступа для"
 
-#: svnfrontend/svnactions.cpp:648
+#: svnfrontend/svnactions.cpp:649
 msgid "Enter folder name:"
 msgstr "Введите имя каталога:"
 
@@ -1225,7 +1277,7 @@ msgstr "Введите имя каталога:"
 msgid "Enter merge range"
 msgstr "Укажите диапазон "
 
-#: svnfrontend/ccontextlistener.cpp:311 kdesvnd/kdesvnd.cpp:279
+#: kdesvnd/kdesvnd.cpp:279 svnfrontend/ccontextlistener.cpp:311
 msgid "Enter password for realm %1"
 msgstr ""
 
@@ -1233,15 +1285,21 @@ msgstr ""
 msgid "Entry"
 msgstr "Элемент"
 
-#: svnfrontend/svnactions.cpp:565
+#: svnfrontend/maintreewidget.cpp:1995 svnfrontend/maintreewidget.cpp:1999
+#: svnfrontend/maintreewidget.cpp:2004
+#, fuzzy
+msgid "Error"
+msgstr "Ошибка SVN"
+
+#: svnfrontend/svnactions.cpp:566
 msgid "Error getting content"
 msgstr "Ошибка получения содержимого"
 
-#: svnfrontend/maintreewidget.cpp:1892
+#: svnfrontend/maintreewidget.cpp:1853
 msgid "Error getting entry to relocate"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1852
+#: svnfrontend/svnactions.cpp:1855
 msgid "Error getting entry to switch"
 msgstr ""
 
@@ -1253,7 +1311,7 @@ msgstr ""
 msgid "Error validating server certificate for '%1'"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:578
+#: svnfrontend/svnactions.cpp:579
 msgid "Error while open temporary file"
 msgstr ""
 
@@ -1265,11 +1323,16 @@ msgstr ""
 msgid "Execute subversion command (\"exec help\" for more information)"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:639 svnfrontend/svnactions.cpp:1640
+#: svnfrontend/maintreewidget.cpp:601 svnfrontend/svnactions.cpp:1702
+#, fuzzy
+msgid "Export"
+msgstr "Экспорт"
+
+#: svnfrontend/maintreewidget.cpp:600 svnfrontend/svnactions.cpp:1640
 msgid "Export a repository"
 msgstr "Экспортировать репозиторий"
 
-#: svnfrontend/maintreewidget.cpp:632
+#: svnfrontend/maintreewidget.cpp:593
 msgid "Export current repository path"
 msgstr ""
 
@@ -1277,7 +1340,7 @@ msgstr ""
 msgid "Export repository"
 msgstr "Экспортировать репозиторий"
 
-#: svnfrontend/svnactions.cpp:1699
+#: svnfrontend/svnactions.cpp:1702
 msgid "Exporting"
 msgstr "Экспорт"
 
@@ -1289,16 +1352,16 @@ msgstr "Экспортировать файл?"
 msgid "External"
 msgstr "Внешний"
 
-#: rc.cpp:545
+#: rc.cpp:321
 msgid "External diff display:"
 msgstr ""
 
-#: rc.cpp:519
+#: rc.cpp:295
 #, fuzzy
 msgid "External merge program:"
 msgstr "Укажите диапазон "
 
-#: rc.cpp:276
+#: rc.cpp:526
 msgid "FSFS"
 msgstr ""
 
@@ -1316,11 +1379,16 @@ msgstr ""
 msgid "Fetching external item into %1."
 msgstr ""
 
+#: svnfrontend/svnactions.cpp:735
+#, fuzzy
+msgid "File"
+msgstr "Каталог"
+
 #: ksvnwidgets/diffbrowser.cpp:106
 msgid "File %1 exists - overwrite?"
 msgstr "Файл %1 существует - заменить его?"
 
-#: rc.cpp:414
+#: rc.cpp:829
 msgid "Files Depth"
 msgstr ""
 
@@ -1328,11 +1396,11 @@ msgstr ""
 msgid "Filling cache canceled."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2583
+#: svnfrontend/svnactions.cpp:2593
 msgid "Filling log cache in background"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2610
+#: svnfrontend/svnactions.cpp:2620
 msgid "Filling log cache in background finished."
 msgstr ""
 
@@ -1345,7 +1413,7 @@ msgstr "Готово"
 msgid "Fingerprint"
 msgstr "Отпечаток"
 
-#: svnfrontend/svnactions.cpp:203
+#: svnfrontend/svnactions.cpp:205
 msgid "Finished"
 msgstr "Готово"
 
@@ -1363,7 +1431,7 @@ msgstr "Удален в %1-й правке."
 msgid "Finished external."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:649
+#: svnfrontend/maintreewidget.cpp:610
 msgid "Fold File Tree"
 msgstr "Свернуть дерево файлов"
 
@@ -1371,7 +1439,7 @@ msgstr "Свернуть дерево файлов"
 msgid "Folder"
 msgstr "Каталог"
 
-#: rc.cpp:147
+#: rc.cpp:505
 msgid "Force"
 msgstr "Принудительно"
 
@@ -1379,38 +1447,38 @@ msgstr "Принудительно"
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
 
-#: rc.cpp:336
+#: rc.cpp:619
 msgid "Force delete on modified/unversioned"
 msgstr ""
 
-#: rc.cpp:375 main.cpp:49
+#: rc.cpp:604 main.cpp:49
 msgid "Force operation"
 msgstr ""
 
-#: rc.cpp:84
+#: rc.cpp:442
 #, fuzzy
 msgid "Form"
 msgstr "Принудительно"
 
-#: rc.cpp:384 rc.cpp:393
+#: rc.cpp:808 rc.cpp:907
 #, fuzzy
 msgid "Form1"
 msgstr "Принудительно"
 
-#: svnfrontend/maintreewidget.cpp:544
+#: svnfrontend/maintreewidget.cpp:505
 #, fuzzy
 msgid "Free existing lock on current item"
 msgstr "Разблокировать"
 
-#: svnfrontend/maintreewidget.cpp:505
+#: svnfrontend/maintreewidget.cpp:466
 msgid "Full revision tree"
 msgstr "Полное дерево правок"
 
-#: rc.cpp:701
+#: rc.cpp:166
 msgid "Gain item info recursive"
 msgstr ""
 
-#: kdesvn_part.cpp:370 rc.cpp:883
+#: rc.cpp:12 kdesvn_part.cpp:370
 msgid "General"
 msgstr ""
 
@@ -1419,40 +1487,40 @@ msgstr ""
 msgid "General Settings"
 msgstr "Настройки цветов"
 
-#: rc.cpp:444
+#: rc.cpp:880
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
 
-#: rc.cpp:30
+#: rc.cpp:769
 #, fuzzy
 msgid "Get Logs"
 msgstr "Журналов нет"
 
-#: rc.cpp:698
+#: rc.cpp:163
 msgid "Get file details while remote listing"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:558
+#: svnfrontend/svnactions.cpp:559
 msgid "Getting content - hit cancel for abort"
 msgstr "Получение содержимого - можете отменить"
 
-#: svnfrontend/svnactions.cpp:304 svnfrontend/graphtree/revisiontree.cpp:102
+#: svnfrontend/graphtree/revisiontree.cpp:101 svnfrontend/svnactions.cpp:306
 msgid "Getting logs - hit cancel for abort"
 msgstr "Получаю журналы - можете отменить"
 
-#: svnfrontend/svnactions.cpp:540
+#: svnfrontend/svnactions.cpp:541
 msgid "Got no annotate"
 msgstr "Аннотации нет"
 
-#: svnfrontend/svnactions.cpp:626
+#: svnfrontend/svnactions.cpp:627
 msgid "Got no content."
 msgstr "Получили пустое содержимое."
 
-#: svnfrontend/svnactions.cpp:451
+#: svnfrontend/svnactions.cpp:453
 msgid "Got no info."
 msgstr "Информации нет."
 
-#: svnfrontend/svnactions.cpp:333
+#: svnfrontend/svnactions.cpp:335
 msgid "Got no logs"
 msgstr "Журналов нет"
 
@@ -1460,26 +1528,26 @@ msgstr "Журналов нет"
 msgid "Goto line"
 msgstr "Перейти к строке"
 
-#: rc.cpp:201 rc.cpp:222
+#: rc.cpp:697 rc.cpp:718
 msgid "HEAD"
 msgstr ""
 
-#: rc.cpp:339
+#: rc.cpp:622
 msgid "Handle unrelated as related items"
 msgstr ""
 
-#: rc.cpp:770
+#: rc.cpp:98
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
 msgstr ""
 
-#: rc.cpp:429
+#: rc.cpp:865
 #, fuzzy
 msgid "Hide new items"
 msgstr "Выбрать объект"
 
-#: rc.cpp:761
+#: rc.cpp:226
 #, fuzzy
 msgid "Hide new items in commit box"
 msgstr "Выбрать объект"
@@ -1488,26 +1556,26 @@ msgstr "Выбрать объект"
 msgid "Hide unchanged files"
 msgstr "Спрятать не изменившиеся файлы"
 
-#: svnfrontend/maintreewidget.cpp:495 svnfrontend/maintreewidget.cpp:498
-#: svnfrontend/maintreewidget.cpp:502
+#: svnfrontend/maintreewidget.cpp:456 svnfrontend/maintreewidget.cpp:459
+#: svnfrontend/maintreewidget.cpp:463
 #, fuzzy
 msgid "History"
 msgstr "История %1"
 
-#: svnfrontend/svnactions.cpp:483
+#: svnfrontend/svnactions.cpp:485
 msgid "History of %1"
 msgstr "История %1"
 
-#: svnfrontend/maintreewidget.cpp:494
+#: svnfrontend/maintreewidget.cpp:455
 #, fuzzy
 msgid "History of item"
 msgstr "История %1"
 
-#: svnfrontend/maintreewidget.cpp:497 svnfrontend/maintreewidget.cpp:501
+#: svnfrontend/maintreewidget.cpp:458 svnfrontend/maintreewidget.cpp:462
 msgid "History of item ignoring copies"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2108
+#: svnfrontend/maintreewidget.cpp:2069
 msgid "Hold CTRL key while click on selected item for unselect"
 msgstr ""
 
@@ -1527,17 +1595,17 @@ msgstr ""
 msgid "Hotcopy finished."
 msgstr ""
 
-#: rc.cpp:465
+#: rc.cpp:901
 msgid "If checked commit will not release locks."
 msgstr "Если отмечено, при коммите не будет сниматься блокировка."
 
-#: rc.cpp:501
+#: rc.cpp:277
 msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
 msgstr ""
 
-#: rc.cpp:120 rc.cpp:135
+#: rc.cpp:478 rc.cpp:493
 msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
@@ -1554,29 +1622,29 @@ msgstr ""
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
 
-#: rc.cpp:637
+#: rc.cpp:63
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
 msgstr ""
 
-#: rc.cpp:643
+#: rc.cpp:69
 msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "konqueror/dolphin"
 msgstr ""
 
-#: rc.cpp:303
+#: rc.cpp:553
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only useful when svnqt is running with subversion 1.4 or above."
 msgstr ""
 
-#: rc.cpp:312
+#: rc.cpp:562
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.5. This "
 "is only useful when svnqt is running with subversion 1.5 or above."
 msgstr ""
 
-#: rc.cpp:658
+#: rc.cpp:84
 msgid ""
 "If this flag is set, you're have a simple write support for existing items. "
 "Eg. you can open files in your editor and save them direct without checking "
@@ -1585,22 +1653,22 @@ msgid ""
 "Use this only if you're sure what you're doing!"
 msgstr ""
 
-#: rc.cpp:294
+#: rc.cpp:544
 msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
 
-#: rc.cpp:144
+#: rc.cpp:502
 msgid "Ignore"
 msgstr "Игнорировать"
 
-#: rc.cpp:258
+#: rc.cpp:748
 #, fuzzy
 msgid "Ignore externals"
 msgstr "Внутренний"
 
-#: rc.cpp:255
+#: rc.cpp:745
 msgid "Ignore externals while operation"
 msgstr ""
 
@@ -1614,7 +1682,7 @@ msgstr ""
 msgid "Ignore unknown node types"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:592
+#: svnfrontend/maintreewidget.cpp:553
 msgid "Ignore/Unignore current item"
 msgstr ""
 
@@ -1622,23 +1690,28 @@ msgstr ""
 msgid "Ignored"
 msgstr "Игнорируется"
 
-#: rc.cpp:417
+#: rc.cpp:832
 msgid "Immediate Depth"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:571
+#: svnfrontend/svnactions.cpp:1968
+#, fuzzy
+msgid "Import"
+msgstr "Испорт журнала"
+
+#: svnfrontend/maintreewidget.cpp:532
 msgid "Import folder content into current url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:569
+#: svnfrontend/maintreewidget.cpp:530
 msgid "Import folders into current"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1967 svnfrontend/maintreewidget.cpp:1971
+#: svnfrontend/maintreewidget.cpp:1928 svnfrontend/maintreewidget.cpp:1932
 msgid "Import log"
 msgstr "Испорт журнала"
 
-#: svnfrontend/svnactions.cpp:1965
+#: svnfrontend/svnactions.cpp:1968
 msgid "Importing items"
 msgstr "Импортируем элементы"
 
@@ -1646,7 +1719,7 @@ msgstr "Импортируем элементы"
 msgid "Incomplete"
 msgstr "Неполный"
 
-#: rc.cpp:420
+#: rc.cpp:835
 msgid "Infinity Depth (recurse)"
 msgstr ""
 
@@ -1659,7 +1732,7 @@ msgstr "kdesvn Part"
 msgid "Infolist"
 msgstr ""
 
-#: rc.cpp:462
+#: rc.cpp:898
 msgid "Insert Textfile"
 msgstr ""
 
@@ -1667,15 +1740,15 @@ msgstr ""
 msgid "Inserted %v not cached log entries of %m."
 msgstr ""
 
-#: rc.cpp:300
+#: rc.cpp:550
 msgid "Is created repository compatible to subversion prior 1.4"
 msgstr ""
 
-#: rc.cpp:309
+#: rc.cpp:559
 msgid "Is created repository compatible to subversion prior 1.5"
 msgstr ""
 
-#: rc.cpp:318
+#: rc.cpp:568
 msgid "Is created repository compatible to subversion prior 1.6"
 msgstr ""
 
@@ -1683,27 +1756,27 @@ msgstr ""
 msgid "Issuer name"
 msgstr ""
 
-#: rc.cpp:48
+#: rc.cpp:787
 msgid "Item"
 msgstr "Объект"
 
-#: rc.cpp:616
+#: rc.cpp:259
 msgid "Item needs lock:"
 msgstr "Элемент требует блокировки:"
 
-#: rc.cpp:788
+#: rc.cpp:116
 msgid "Items sortorder is case sensitive"
 msgstr ""
 
-#: rc.cpp:342
+#: rc.cpp:625
 msgid "Just dry run without modifications"
 msgstr ""
 
-#: rc.cpp:663
+#: rc.cpp:89
 msgid "KIO can overwrite"
 msgstr ""
 
-#: rc.cpp:649
+#: rc.cpp:75
 msgid "KIO operations use standard logmessage"
 msgstr ""
 
@@ -1712,7 +1785,7 @@ msgstr ""
 msgid "Kdesvn Handbook"
 msgstr "&Руководство по Kdesvn"
 
-#: rc.cpp:468
+#: rc.cpp:904
 msgid "Keep locks"
 msgstr "Сохранять блокировку"
 
@@ -1728,7 +1801,7 @@ msgid ""
 "keywords."
 msgstr ""
 
-#: rc.cpp:87
+#: rc.cpp:445
 #, fuzzy
 msgid "Known repositories"
 msgstr "Нет открытых репозиториев"
@@ -1738,15 +1811,15 @@ msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 
-#: svnfrontend/models/svnitemmodel.cpp:295 svnfrontend/svnactions.cpp:777
+#: svnfrontend/models/svnitemmodel.cpp:302 svnfrontend/svnactions.cpp:777
 msgid "Last author"
 msgstr "Последний автор"
 
-#: svnfrontend/models/svnitemmodel.cpp:297
+#: svnfrontend/models/svnitemmodel.cpp:304
 msgid "Last change date"
 msgstr "Последнее изменение"
 
-#: svnfrontend/models/svnitemmodel.cpp:293
+#: svnfrontend/models/svnitemmodel.cpp:300
 msgid "Last changed Revision"
 msgstr "Последняя правка"
 
@@ -1758,11 +1831,11 @@ msgstr "Последняя фиксация"
 msgid "Last revision"
 msgstr "Последняя правка"
 
-#: rc.cpp:456
+#: rc.cpp:892
 msgid "Last used log messages"
 msgstr ""
 
-#: rc.cpp:809
+#: rc.cpp:368
 msgid "Left to right"
 msgstr "Слева направо"
 
@@ -1770,16 +1843,16 @@ msgstr "Слева направо"
 msgid "Limit log output to <number>"
 msgstr ""
 
-#: rc.cpp:69
+#: rc.cpp:574
 msgid "Line"
 msgstr "Строка"
 
-#: rc.cpp:63
+#: rc.cpp:802
 #, fuzzy
 msgid "List entries"
 msgstr "Список элементов"
 
-#: rc.cpp:752
+#: rc.cpp:217
 msgid "List items next commit will send or not"
 msgstr ""
 
@@ -1795,11 +1868,11 @@ msgstr "Выгрузить дамп в репозиторий."
 msgid "Load dump into repository"
 msgstr "Загрузить дамп в репозиторий"
 
-#: rc.cpp:123
+#: rc.cpp:481
 msgid "Load into folder:"
 msgstr "Загрузить в каталог:"
 
-#: rc.cpp:129
+#: rc.cpp:487
 msgid "Load into repository:"
 msgstr "Загрузить в репозиторий:"
 
@@ -1815,7 +1888,7 @@ msgstr "Загрузка дампа в репозиторий"
 msgid "Loading dump finished."
 msgstr "Загрузка дампа завершена."
 
-#: rc.cpp:613
+#: rc.cpp:256
 msgid "Local changed items:"
 msgstr "Локально измененные объекты:"
 
@@ -1831,7 +1904,7 @@ msgstr "Изменен локально"
 msgid "Lock comment"
 msgstr "Комментарий к блокировке"
 
-#: svnfrontend/maintreewidget.cpp:540
+#: svnfrontend/maintreewidget.cpp:501
 msgid "Lock current items"
 msgstr "Заблокировать"
 
@@ -1839,7 +1912,7 @@ msgstr "Заблокировать"
 msgid "Lock failed"
 msgstr "Блокировка не удалась"
 
-#: svnfrontend/maintreewidget.cpp:1203
+#: svnfrontend/maintreewidget.cpp:1164
 msgid "Lock message"
 msgstr "Комментарий к блокировке"
 
@@ -1847,11 +1920,11 @@ msgstr "Комментарий к блокировке"
 msgid "Lock token"
 msgstr ""
 
-#: svnfrontend/models/svnitemmodel.cpp:299
+#: svnfrontend/models/svnitemmodel.cpp:306
 msgid "Locked by"
 msgstr "Блокировка"
 
-#: rc.cpp:592
+#: rc.cpp:235
 msgid "Locked items:"
 msgstr "Заблокированные объекты:"
 
@@ -1867,7 +1940,7 @@ msgstr "Блокируем"
 msgid "Log cache holds %1 logentries and consumes %2 on disk."
 msgstr ""
 
-#: rc.cpp:740
+#: rc.cpp:205
 msgid "Log follows node changes"
 msgstr ""
 
@@ -1875,7 +1948,7 @@ msgstr ""
 msgid "Log message for revision"
 msgstr "Комментарий к правке"
 
-#: rc.cpp:895
+#: rc.cpp:24
 msgid "Logcache"
 msgstr ""
 
@@ -1883,13 +1956,18 @@ msgstr ""
 msgid "Logmessage for revision %1"
 msgstr "Комментарий к %1-й правке"
 
-#: rc.cpp:749
+#: rc.cpp:214
 msgid "Logs always reads list of changed files"
 msgstr ""
 
 #: kdesvn_part.cpp:191
 msgid "Logs follow node changes"
 msgstr ""
+
+#: rc.cpp:45 rc.cpp:430
+#, fuzzy
+msgid "Main Toolbar"
+msgstr "Панель инструментов Subversion"
 
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
 msgid "Make operation recursive."
@@ -1899,45 +1977,45 @@ msgstr ""
 msgid "Making update - hit cancel for abort"
 msgstr "Происходит обновление - можете отменить"
 
-#: rc.cpp:432
+#: rc.cpp:868
 #, fuzzy
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr "Объекты вне контроля версий:"
 
-#: rc.cpp:589
+#: rc.cpp:232
 msgid "Mark changed and locked items colored"
 msgstr ""
 
-#: rc.cpp:785
+#: rc.cpp:113
 msgid "Mark item status with icon overlay"
 msgstr "Отмечать состояние элемента значком"
 
-#: svnfrontend/maintreewidget.cpp:587
+#: svnfrontend/maintreewidget.cpp:548
 #, fuzzy
 msgid "Mark resolved"
 msgstr "Отмечаем как разрешенный"
 
-#: rc.cpp:776
+#: rc.cpp:104
 msgid "Mark subversion states with an overlayed icon"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:588
+#: svnfrontend/maintreewidget.cpp:549
 msgid "Marking files or dirs resolved"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1902
+#: svnfrontend/svnactions.cpp:1905
 msgid "Marking resolved"
 msgstr "Отмечаем как разрешенный"
 
-#: rc.cpp:794
+#: rc.cpp:122
 msgid "Maximum logmessages in history:"
 msgstr "Максимальное количество журнальных сообщений в истории:"
 
-#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125 rc.cpp:249
+#: rc.cpp:739 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125
 msgid "May existing unversioned items ovewritten"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1739
+#: svnfrontend/maintreewidget.cpp:1700
 msgid "May not make subdirs of a file"
 msgstr ""
 
@@ -1945,28 +2023,28 @@ msgstr ""
 msgid "May only switch one url at time!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:619 svnfrontend/maintreewidget.cpp:1840
-#: svnfrontend/svnactions.cpp:2163
+#: svnfrontend/maintreewidget.cpp:580 svnfrontend/maintreewidget.cpp:1801
+#: svnfrontend/svnactions.cpp:2176
 msgid "Merge"
 msgstr "Объединение"
 
-#: svnfrontend/maintreewidget.cpp:618
+#: svnfrontend/maintreewidget.cpp:579
 msgid "Merge two revisions"
 msgstr "Объединение двух правок"
 
-#: svnfrontend/maintreewidget.cpp:620
+#: svnfrontend/maintreewidget.cpp:581
 msgid "Merge two revisions of this entry into itself"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2114
+#: svnfrontend/svnactions.cpp:2117
 msgid "Merge-process could not started, check command."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:623
+#: svnfrontend/maintreewidget.cpp:584
 msgid "Merge..."
 msgstr "Объединить..."
 
-#: rc.cpp:324
+#: rc.cpp:607
 msgid "MergeSettings"
 msgstr ""
 
@@ -1974,7 +2052,7 @@ msgstr ""
 msgid "Merged"
 msgstr "Объединен"
 
-#: svnfrontend/svnactions.cpp:2163
+#: svnfrontend/svnactions.cpp:2176
 msgid "Merging items"
 msgstr "Объединение элементов"
 
@@ -1982,11 +2060,11 @@ msgstr "Объединение элементов"
 msgid "Message"
 msgstr "Сообщение"
 
-#: rc.cpp:625
+#: rc.cpp:54
 msgid "Minimum log lines to show:"
 msgstr ""
 
-#: rc.cpp:610
+#: rc.cpp:253
 msgid "Missed items:"
 msgstr "Отсутствующие объекты:"
 
@@ -2023,32 +2101,38 @@ msgstr "Изменить свойства"
 msgid "Modify property"
 msgstr "Изменить свойство"
 
+#: svnfrontend/maintreewidget.cpp:477 svnfrontend/svnactions.cpp:2200
+#: svnfrontend/svnactions.cpp:2218
+#, fuzzy
+msgid "Move"
+msgstr "Переместить сюда"
+
 #: svnfrontend/copymoveview_impl.cpp:96
 msgid "Move/Rename file/dir"
 msgstr "Переименовать/переместить файл/каталог"
 
-#: svnfrontend/maintreewidget.cpp:517
+#: svnfrontend/maintreewidget.cpp:478
 #, fuzzy
 msgid "Moves or renames current item"
 msgstr "Цвет переименованных элементов:"
 
-#: svnfrontend/svnactions.cpp:2208
+#: svnfrontend/svnactions.cpp:2218
 msgid "Moving entries"
 msgstr "Перемещаем элементы"
 
-#: svnfrontend/svnactions.cpp:2190
+#: svnfrontend/svnactions.cpp:2200
 msgid "Moving/Rename item "
 msgstr "Переместить/Переименовать элемент"
 
-#: rc.cpp:192
+#: rc.cpp:688
 msgid "N&umber"
 msgstr "Н&омер"
 
-#: svnfrontend/models/svnitemmodel.cpp:289 svnfrontend/svnactions.cpp:718
+#: svnfrontend/models/svnitemmodel.cpp:296 svnfrontend/svnactions.cpp:718
 msgid "Name"
 msgstr "Название"
 
-#: svnfrontend/maintreewidget.cpp:2117
+#: svnfrontend/maintreewidget.cpp:2078
 msgid "Navigation"
 msgstr ""
 
@@ -2056,11 +2140,11 @@ msgstr ""
 msgid "Needs update"
 msgstr "Нужно обновить"
 
-#: svnfrontend/maintreewidget.cpp:259
+#: svnfrontend/maintreewidget.cpp:252
 msgid "Networked URL to open but networking is disabled!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:548 svnfrontend/svnactions.cpp:648
+#: svnfrontend/maintreewidget.cpp:509 svnfrontend/svnactions.cpp:649
 msgid "New folder"
 msgstr "Новый каталог"
 
@@ -2068,7 +2152,7 @@ msgstr "Новый каталог"
 msgid "New version of conflicted file"
 msgstr "Новая версия конфликтующего файла"
 
-#: svnfrontend/svnactions.cpp:1993
+#: svnfrontend/svnactions.cpp:1996
 msgid "No destination to merge."
 msgstr "Нет цели для объединения."
 
@@ -2081,19 +2165,15 @@ msgstr "Нет различий для показа"
 msgid "No ignore"
 msgstr "Игнорировать"
 
-#: svnfrontend/graphtree/revisiontree.cpp:112
+#: svnfrontend/graphtree/revisiontree.cpp:111
 msgid "No logcache possible due broken database and networking not allowed."
-msgstr ""
-
-#: settings/cmdexecsettings_impl.cpp:33
-msgid "No minimum"
 msgstr ""
 
 #: kdesvnview.cpp:205
 msgid "No repository open"
 msgstr "Нет открытых репозиториев"
 
-#: svnfrontend/svnactions.cpp:2356
+#: svnfrontend/svnactions.cpp:2366
 msgid "No unversioned items found."
 msgstr ""
 
@@ -2101,20 +2181,20 @@ msgstr ""
 msgid "Normal"
 msgstr "Обычный"
 
-#: svnfrontend/svnactions.cpp:2632
+#: svnfrontend/svnactions.cpp:2642
 msgid "Not checking for updates because networking is disabled"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:974
+#: svnfrontend/svnactions.cpp:973
 msgid "Not commit because networking is disabled"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2578
+#: svnfrontend/svnactions.cpp:2588
 msgid ""
 "Not filling logcache because it is disabled due setting for this repository."
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2568
+#: svnfrontend/svnactions.cpp:2578
 msgid "Not filling logcache because networking is disabled"
 msgstr ""
 
@@ -2122,29 +2202,33 @@ msgstr ""
 msgid "Not versioned"
 msgstr "Вне контроля версий"
 
-#: rc.cpp:595
+#: rc.cpp:238
 msgid "Not versioned items:"
 msgstr "Объекты вне контроля версий:"
 
-#: svnfrontend/maintreewidget.cpp:1547
+#: svnfrontend/maintreewidget.cpp:1508
 msgid "Nothing selected for delete"
 msgstr "Не выделены объекты для удаления"
 
-#: svnfrontend/maintreewidget.cpp:1199 svnfrontend/maintreewidget.cpp:1242
+#: svnfrontend/maintreewidget.cpp:1160 svnfrontend/maintreewidget.cpp:1203
 msgid "Nothing selected for unlock"
 msgstr "Не выделены объекты для разблокирования"
 
-#: kiosvn/kiosvn.cpp:827
+#: kiosvn/kiosvn.cpp:835
 msgid "Nothing to commit."
 msgstr "Нет целей для публикации."
 
-#: svnfrontend/svnactions.cpp:1989
+#: svnfrontend/svnactions.cpp:1992
 msgid "Nothing to merge."
 msgstr "Нет объектов для объединения."
 
-#: rc.cpp:213
+#: rc.cpp:709
 msgid "Number"
 msgstr "Номер"
+
+#: rc.cpp:676
+msgid "OK"
+msgstr ""
 
 #: svnfrontend/svnactions.cpp:793
 msgid "Old version of conflicted file"
@@ -2154,28 +2238,32 @@ msgstr "Старая версия конфликтующего файла"
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2034
+#: svnfrontend/maintreewidget.cpp:1995
 msgid "Only in working copy possible."
 msgstr "Это возможно только в рабочей копии."
 
-#: svnfrontend/maintreewidget.cpp:2038
+#: svnfrontend/maintreewidget.cpp:1999
 msgid "Only on single folder possible"
 msgstr "Это возможно только в единичном каталоге"
 
-#: svnfrontend/maintreewidget.cpp:625 svnfrontend/maintreewidget.cpp:1016
-#: svnfrontend/maintreewidget.cpp:1086
+#: urldlg.cpp:146
+msgid "Open"
+msgstr ""
+
+#: svnfrontend/maintreewidget.cpp:586 svnfrontend/maintreewidget.cpp:977
+#: svnfrontend/maintreewidget.cpp:1047
 msgid "Open With..."
 msgstr "Открыть с помощью..."
 
-#: svnfrontend/ccontextlistener.cpp:288 kdesvnd/kdesvnd.cpp:298
+#: kdesvnd/kdesvnd.cpp:298 svnfrontend/ccontextlistener.cpp:288
 msgid "Open a file with a #PKCS12 certificate"
 msgstr ""
 
-#: rc.cpp:261
+#: rc.cpp:751
 msgid "Open after job"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:563
+#: svnfrontend/maintreewidget.cpp:524
 msgid "Open repository of working copy"
 msgstr "Открыть репозиторий рабочей копии"
 
@@ -2183,15 +2271,15 @@ msgstr "Открыть репозиторий рабочей копии"
 msgid "Open repository or working copy"
 msgstr "Открыть репозиторий или рабочую копию"
 
-#: svnfrontend/maintreewidget.cpp:648
+#: svnfrontend/maintreewidget.cpp:609
 msgid "Opens all branches of the file tree"
 msgstr "Разворачивает все ветви дерева файлов"
 
-#: svnfrontend/maintreewidget.cpp:565
+#: svnfrontend/maintreewidget.cpp:526
 msgid "Opens the repository the current working copy was checked out from"
 msgstr ""
 
-#: rc.cpp:459
+#: rc.cpp:895
 msgid "Or insert one of the last:"
 msgstr ""
 
@@ -2203,21 +2291,21 @@ msgstr ""
 msgid "Other..."
 msgstr "Другое..."
 
-#: svnfrontend/maintreewidget.cpp:537
+#: svnfrontend/maintreewidget.cpp:498
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:527 svnfrontend/maintreewidget.cpp:530
+#: svnfrontend/maintreewidget.cpp:488 svnfrontend/maintreewidget.cpp:491
 msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:534
+#: svnfrontend/maintreewidget.cpp:495
 msgid "Output the content of specified files or URLs."
 msgstr ""
 
-#: rc.cpp:333
+#: rc.cpp:616
 msgid "Output to:"
 msgstr ""
 
@@ -2225,11 +2313,11 @@ msgstr ""
 msgid "Overview about cache database content"
 msgstr ""
 
-#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124 rc.cpp:252
+#: rc.cpp:742 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124
 msgid "Overwrite existing"
 msgstr ""
 
-#: kiosvn/kiosvn.cpp:377
+#: kiosvn/kiosvn.cpp:378
 msgid "Overwriting existing items is disabled in settings."
 msgstr ""
 
@@ -2237,19 +2325,24 @@ msgstr ""
 msgid "Owner"
 msgstr "Владелец"
 
-#: svnfrontend/maintreewidget.cpp:507
+#: svnfrontend/maintreewidget.cpp:468
 msgid "Partial revision tree"
 msgstr "Частичное дерево правок"
 
-#: rc.cpp:477
+#: askpass/kdesvn-askpass.cpp:67
+#, fuzzy
+msgid "Password"
+msgstr "Пароль:"
+
+#: rc.cpp:850
 msgid "Password:"
 msgstr "Пароль:"
 
-#: rc.cpp:117 rc.cpp:132
+#: rc.cpp:475 rc.cpp:490
 msgid "Path to load the dump into (see contexthelp)"
 msgstr ""
 
-#: rc.cpp:282
+#: rc.cpp:532
 msgid "Path to repository:"
 msgstr "Путь к репозиторию:"
 
@@ -2261,27 +2354,32 @@ msgstr ""
 msgid "Please check that 'dot' is installed (package GraphViz)."
 msgstr ""
 
-#: askpass/kdesvn-askpass.cpp:46
+#: askpass/kdesvn-askpass.cpp:50
 msgid "Please enter your password below."
 msgstr "Введите пароль."
 
-#: rc.cpp:510
+#: rc.cpp:286
 msgid "Prefer external merge program"
 msgstr "Выбрать другую программу для объединения правок"
 
-#: rc.cpp:114
+#: rc.cpp:472
 #, fuzzy
 msgid "Prefixes to filter out in revision tree"
 msgstr "Частичное дерево правок"
 
-#: rc.cpp:33
+#: rc.cpp:772
 #, fuzzy
 msgid "Previous entries"
 msgstr "Список элементов"
 
-#: askpass/kdesvn-askpass.cpp:37
+#: askpass/kdesvn-askpass.cpp:38
 #, fuzzy
 msgid "Prompt"
+msgstr "Свойство"
+
+#: svnfrontend/maintreewidget.cpp:471
+#, fuzzy
+msgid "Properties"
 msgstr "Свойство"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:37
@@ -2296,7 +2394,7 @@ msgstr "Свойство обновлено"
 msgid "Property modified"
 msgstr "Свойство изменено"
 
-#: rc.cpp:6
+#: rc.cpp:667
 msgid "Property name:"
 msgstr "Имя свойства:"
 
@@ -2304,7 +2402,7 @@ msgstr "Имя свойства:"
 msgid "Property reject file"
 msgstr ""
 
-#: rc.cpp:9
+#: rc.cpp:670
 msgid "Property value:"
 msgstr "Значение свойства:"
 
@@ -2313,7 +2411,7 @@ msgstr "Значение свойства:"
 msgid "Protected property"
 msgstr "Защищенное свойство"
 
-#: rc.cpp:862 rc.cpp:877
+#: rc.cpp:6 rc.cpp:421
 msgid "Quick settings"
 msgstr "Быстрые настройки"
 
@@ -2321,11 +2419,11 @@ msgstr "Быстрые настройки"
 msgid "Rajko Albrecht"
 msgstr ""
 
-#: rc.cpp:743
+#: rc.cpp:208
 msgid "Read detailed change lists"
 msgstr ""
 
-#: rc.cpp:746
+#: rc.cpp:211
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
 "But if this feature is switched off, kdesvn may fail generating differences "
@@ -2336,11 +2434,11 @@ msgstr ""
 msgid "Ready"
 msgstr "Готово"
 
-#: svnfrontend/maintreewidget.cpp:1563 svnfrontend/svnactions.cpp:1566
+#: svnfrontend/maintreewidget.cpp:1524 svnfrontend/svnactions.cpp:1566
 msgid "Really delete these entries?"
 msgstr "Действительно удалить эти элементы?"
 
-#: rc.cpp:381
+#: rc.cpp:841
 msgid "Really revert these entries to pristine state?"
 msgstr "Действительно откатить элементы к исходному состоянию?"
 
@@ -2365,23 +2463,23 @@ msgstr "Удалить из репозитория"
 msgid "Recent opened URLs"
 msgstr ""
 
-#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
-#: ksvnwidgets/depthselector.cpp:44 rc.cpp:345
+#: rc.cpp:628 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
+#: ksvnwidgets/depthselector.cpp:44
 msgid "Recursive"
 msgstr "Рекурсивно"
 
-#: svnfrontend/maintreewidget.cpp:568
+#: svnfrontend/maintreewidget.cpp:529
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:642
+#: svnfrontend/maintreewidget.cpp:603
 #, fuzzy
 msgid "Refresh"
 msgstr "Обновить"
 
-#: svnfrontend/maintreewidget.cpp:641
+#: svnfrontend/maintreewidget.cpp:602
 msgid "Refresh view"
 msgstr "Обновить"
 
@@ -2393,27 +2491,27 @@ msgstr "Отклонить"
 msgid "Reload last opened url if no one is given on commandline"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:554
+#: svnfrontend/maintreewidget.cpp:515
 msgid "Relocate current working copy url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1899
+#: svnfrontend/maintreewidget.cpp:1860
 msgid "Relocate path %1"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1824
+#: svnfrontend/svnactions.cpp:1827
 msgid "Relocate repository to new URL"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1824
+#: svnfrontend/svnactions.cpp:1827
 msgid "Relocate url"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:555
+#: svnfrontend/maintreewidget.cpp:516
 msgid "Relocate url of current working copy path to other url"
 msgstr ""
 
-#: rc.cpp:598
+#: rc.cpp:241
 msgid "Remote changed items:"
 msgstr "Удаленно измененные элементы:"
 
@@ -2424,6 +2522,11 @@ msgstr "Переименовать/переместить"
 #: svnfrontend/graphtree/revgraphview.cpp:420
 msgid "Renamed to %1 at revision %2"
 msgstr "Переименован в %1 на %2 правке"
+
+#: svnfrontend/svnactions.cpp:768 ksvnwidgets/models/commitmodelhelper.cpp:84
+#, fuzzy
+msgid "Replace"
+msgstr "Заменен"
 
 #: svnfrontend/svnitem.cpp:404
 msgid "Replaced"
@@ -2438,11 +2541,11 @@ msgstr "Удален в %1-й правке"
 msgid "Replacing %1."
 msgstr "Заменяем %1."
 
-#: rc.cpp:889
+#: rc.cpp:18
 msgid "Repository"
 msgstr "Репозиторий"
 
-#: rc.cpp:108
+#: rc.cpp:466
 #, fuzzy
 msgid "Repository Settings"
 msgstr "Настройки дерева правок"
@@ -2451,24 +2554,24 @@ msgstr "Настройки дерева правок"
 msgid "Repository opened"
 msgstr "Репозиторий открыт"
 
-#: rc.cpp:354
+#: rc.cpp:436
 msgid "Repository to copy:"
 msgstr ""
 
-#: rc.cpp:159
+#: rc.cpp:637
 msgid "Repository to dump:"
 msgstr "Репозиторий для выгрузки:"
 
-#: svnfrontend/svnactions.cpp:1902
+#: svnfrontend/svnactions.cpp:1905
 msgid "Resolve"
 msgstr "Разрешить [конфликт]"
 
-#: svnfrontend/maintreewidget.cpp:590
+#: svnfrontend/maintreewidget.cpp:551
 #, fuzzy
 msgid "Resolve conflicts"
 msgstr "Разрешен конфликт %1."
 
-#: svnfrontend/svnactions.cpp:1956
+#: svnfrontend/svnactions.cpp:1959
 msgid "Resolve-process could not started, check command."
 msgstr ""
 
@@ -2488,20 +2591,20 @@ msgstr "Восстановить пропавшие элементы"
 msgid "Restored %1."
 msgstr "Восстановлен %1."
 
-#: svnfrontend/svnactions.cpp:688
+#: svnfrontend/svnactions.cpp:689
 msgid "Retrieving infos - hit cancel for abort"
 msgstr "Получаю информацию - можете отменить"
 
-#: svnfrontend/svnactions.cpp:1772 svnfrontend/ccontextlistener.cpp:67
-#: rc.cpp:378
+#: rc.cpp:838 svnfrontend/ccontextlistener.cpp:67
+#: svnfrontend/svnactions.cpp:1775
 msgid "Revert"
 msgstr "Откатить"
 
-#: svnfrontend/maintreewidget.cpp:585
+#: svnfrontend/maintreewidget.cpp:546
 msgid "Revert current changes"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1753
+#: svnfrontend/svnactions.cpp:1756
 msgid "Revert entries"
 msgstr "Откатить элементы"
 
@@ -2509,7 +2612,7 @@ msgstr "Откатить элементы"
 msgid "Revert failed"
 msgstr ""
 
-#: rc.cpp:450
+#: rc.cpp:886
 #, fuzzy
 msgid "Revert highlighted item"
 msgstr "Удаленные объекты:"
@@ -2518,19 +2621,19 @@ msgstr "Удаленные объекты:"
 msgid "Reverted %1."
 msgstr "Восстановлен %1."
 
-#: svnfrontend/svnactions.cpp:1772
+#: svnfrontend/svnactions.cpp:1775
 msgid "Reverting items"
 msgstr "Откатываем изменения"
 
-#: rc.cpp:426
+#: rc.cpp:862
 msgid "Review affected items"
 msgstr ""
 
-#: rc.cpp:755
+#: rc.cpp:220
 msgid "Review items before commit"
 msgstr ""
 
-#: svnfrontend/models/logitemmodel.cpp:208 rc.cpp:72
+#: rc.cpp:577 svnfrontend/models/logitemmodel.cpp:208
 #, fuzzy
 msgid "Revision"
 msgstr "Правки"
@@ -2547,23 +2650,23 @@ msgstr "Дерево правок"
 msgid "Revision tree Settings"
 msgstr "Настройки дерева правок"
 
-#: rc.cpp:231
+#: rc.cpp:754
 #, fuzzy
 msgid "RevisionButton"
 msgstr "Правки"
 
-#: svnfrontend/maintreewidget.cpp:1131 svnfrontend/maintreewidget.cpp:1176
-#: svnfrontend/maintreewidget.cpp:1348 svnfrontend/maintreewidget.cpp:1435
-#: svnfrontend/maintreewidget.cpp:1505 svnfrontend/svnactions.cpp:1473
-#: rc.cpp:186
+#: rc.cpp:682 svnfrontend/maintreewidget.cpp:1092
+#: svnfrontend/maintreewidget.cpp:1137 svnfrontend/maintreewidget.cpp:1309
+#: svnfrontend/maintreewidget.cpp:1396 svnfrontend/maintreewidget.cpp:1466
+#: svnfrontend/svnactions.cpp:1473
 msgid "Revisions"
 msgstr "Правки"
 
-#: rc.cpp:803
+#: rc.cpp:362
 msgid "Revisiontree Settings"
 msgstr "Настройки дерева правок"
 
-#: rc.cpp:815
+#: rc.cpp:374
 msgid "Right to left"
 msgstr "Справа налево"
 
@@ -2575,26 +2678,22 @@ msgstr "Повернуть по часовой стрелке"
 msgid "Rotate counter-clockwise"
 msgstr "Повернуть против часовой стрелки"
 
-#: rc.cpp:198
+#: rc.cpp:694
 msgid "S&TART"
 msgstr ""
 
-#: askpass/kdesvn-askpass.cpp:53
-#, fuzzy
-msgid "SSH password"
-msgstr "Сохранить пароль"
-
-#: rc.cpp:219
+#: rc.cpp:715
 msgid "START"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:933 svnfrontend/maintreewidget.cpp:2025
-#: svnfrontend/maintreewidget.cpp:2213 svnfrontend/commandexec.cpp:211
-#: svnfrontend/commandexec.cpp:333 svnfrontend/graphtree/revgraphview.cpp:959
+#: svnfrontend/maintreewidget.cpp:894 svnfrontend/maintreewidget.cpp:1986
+#: svnfrontend/maintreewidget.cpp:2174
+#: svnfrontend/graphtree/revgraphview.cpp:959 svnfrontend/commandexec.cpp:211
+#: svnfrontend/commandexec.cpp:333
 msgid "SVN Error"
 msgstr "Ошибка SVN"
 
-#: svnfrontend/svnlogdlgimp.cpp:134 rc.cpp:21
+#: rc.cpp:760 svnfrontend/svnlogdlgimp.cpp:134
 msgid "SVN Log"
 msgstr "Журнал SVN"
 
@@ -2615,11 +2714,11 @@ msgstr "Сохранить пароль"
 msgid "Save tree as png"
 msgstr "Сохранить дерево в PNG"
 
-#: svnfrontend/graphtree/revisiontree.cpp:143
+#: svnfrontend/graphtree/revisiontree.cpp:142
 msgid "Scanning logs"
 msgstr "Чтение журналов"
 
-#: svnfrontend/graphtree/revisiontree.cpp:143
+#: svnfrontend/graphtree/revisiontree.cpp:142
 msgid "Scanning the logs for %1"
 msgstr "Чтение журналов для %1"
 
@@ -2627,27 +2726,27 @@ msgstr "Чтение журналов для %1"
 msgid "Schedule"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2111 rc.cpp:39 rc.cpp:42
+#: rc.cpp:778 rc.cpp:781 svnfrontend/maintreewidget.cpp:2072
 msgid "See context menu for more actions"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:633
+#: svnfrontend/maintreewidget.cpp:594
 msgid "Select browse revision"
 msgstr "Выберите правку для просмотра"
 
-#: rc.cpp:204 rc.cpp:225
+#: rc.cpp:700 rc.cpp:721
 msgid "Select current working copy changes"
 msgstr ""
 
-#: rc.cpp:396 rc.cpp:399
+#: rc.cpp:811 rc.cpp:814
 msgid "Select depth of operation"
 msgstr ""
 
-#: rc.cpp:387
+#: rc.cpp:910
 msgid "Select encoding:"
 msgstr "Выберите кодировку"
 
-#: rc.cpp:669
+#: rc.cpp:134
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 
@@ -2655,7 +2754,7 @@ msgstr ""
 msgid "Select item"
 msgstr "Выбрать объект"
 
-#: rc.cpp:435
+#: rc.cpp:871
 #, fuzzy
 msgid "Select new items"
 msgstr "Выбрать объект"
@@ -2665,11 +2764,11 @@ msgstr "Выбрать объект"
 msgid "Select revision"
 msgstr "Выберите правку"
 
-#: rc.cpp:57
+#: rc.cpp:796
 msgid "Select second revision with right mouse button"
 msgstr ""
 
-#: rc.cpp:240
+#: rc.cpp:730
 msgid "Select target directory:"
 msgstr "Укажите целевой каталог:"
 
@@ -2677,11 +2776,11 @@ msgstr "Укажите целевой каталог:"
 msgid "Select textfile for insert"
 msgstr ""
 
-#: rc.cpp:273
+#: rc.cpp:523
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr ""
 
-#: rc.cpp:270
+#: rc.cpp:520
 msgid "Select type of storage"
 msgstr ""
 
@@ -2693,7 +2792,7 @@ msgstr "Отправить отчет об ошибке"
 msgid "Sending %1."
 msgstr "Отправляем %1."
 
-#: rc.cpp:507
+#: rc.cpp:283
 msgid ""
 "Set if merge with external program is preferred and not subversions merge"
 msgstr ""
@@ -2735,7 +2834,7 @@ msgstr ""
 msgid "Set version as right side of diff"
 msgstr ""
 
-#: rc.cpp:764
+#: rc.cpp:92
 msgid "Settings"
 msgstr "Настройки"
 
@@ -2748,7 +2847,7 @@ msgstr "Настройки"
 msgid "Settings for commandline and KIO execution"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:659
+#: svnfrontend/maintreewidget.cpp:620
 #, fuzzy
 msgid "Settings for current repository"
 msgstr "Удалить из репозитория"
@@ -2757,11 +2856,11 @@ msgstr "Удалить из репозитория"
 msgid "Settings for diff and merge"
 msgstr ""
 
-#: rc.cpp:522
+#: rc.cpp:298
 msgid "Setup an external program for conflict resolving"
 msgstr ""
 
-#: rc.cpp:548
+#: rc.cpp:324
 msgid "Setup an external program for merging"
 msgstr ""
 
@@ -2769,23 +2868,23 @@ msgstr ""
 msgid "Should files with unknown node types be ignored"
 msgstr ""
 
-#: rc.cpp:836
+#: rc.cpp:395
 msgid "Should kdesvn check content of logcache before starting the tree"
 msgstr ""
 
-#: rc.cpp:704
+#: rc.cpp:169
 msgid "Should kdesvn retrieves properties on selected item in repositories"
 msgstr ""
 
-#: rc.cpp:714
+#: rc.cpp:179
 msgid "Should subversion store passwords in default"
 msgstr ""
 
-#: rc.cpp:758
+#: rc.cpp:223
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
 
-#: rc.cpp:619
+#: rc.cpp:48
 msgid "Show a small window containing the log after command executed"
 msgstr ""
 
@@ -2793,16 +2892,16 @@ msgstr ""
 msgid "Show database content"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:515
+#: svnfrontend/maintreewidget.cpp:476
 #, fuzzy
 msgid "Show details about selected item"
 msgstr "Сравнить с выбранным элементом"
 
-#: rc.cpp:773
+#: rc.cpp:101
 msgid "Show file info"
 msgstr "Показать сведения о файле"
 
-#: rc.cpp:36
+#: rc.cpp:775
 msgid "Show from HEAD"
 msgstr ""
 
@@ -2814,7 +2913,7 @@ msgstr "Показать строку"
 msgid "Show line number"
 msgstr "Показать строку с указанным номером"
 
-#: rc.cpp:622
+#: rc.cpp:51
 msgid "Show log after executing a command"
 msgstr "Показывать журнал после выполнения команды"
 
@@ -2822,11 +2921,11 @@ msgstr "Показывать журнал после выполнения ком
 msgid "Show the content of logcache database"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:506
+#: svnfrontend/maintreewidget.cpp:467
 msgid "Shows history of item as linked tree"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:508
+#: svnfrontend/maintreewidget.cpp:469
 msgid "Shows history of item as linked tree for a revision range"
 msgstr ""
 
@@ -2838,7 +2937,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: rc.cpp:767
+#: rc.cpp:95
 msgid "Size of Listviewicons"
 msgstr "Размер значков в списке"
 
@@ -2854,53 +2953,53 @@ msgstr "Пропущен %1."
 msgid "Skipped missing target %1."
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:2043
+#: svnfrontend/maintreewidget.cpp:2004
 msgid "Sorry - internal error!"
 msgstr "Пардон - внутренняя ошибка!"
 
-#: rc.cpp:327
+#: rc.cpp:610
 msgid "Source 1:"
 msgstr ""
 
-#: rc.cpp:330
+#: rc.cpp:613
 msgid "Source 2:"
 msgstr ""
 
-#: rc.cpp:652
+#: rc.cpp:78
 msgid "Standard message:"
 msgstr "Стандартное сообщение:"
 
-#: rc.cpp:672
+#: rc.cpp:137
 msgid "Start check for updates when open a working copy"
 msgstr ""
 
-#: rc.cpp:678
+#: rc.cpp:143
 msgid "Start fill log cache on open"
 msgstr ""
 
-#: rc.cpp:675
+#: rc.cpp:140
 msgid "Start refresh the logcache for repository when networking enabled"
 msgstr ""
 
-#: rc.cpp:24
+#: rc.cpp:763
 #, fuzzy
 msgid "Start revision"
 msgstr "Начальная правка:"
 
-#: rc.cpp:177
+#: rc.cpp:655
 #, fuzzy
 msgid "Start revision:"
 msgstr "Начальная правка:"
 
-#: svnfrontend/fronthelpers/rangeinput_impl.cpp:189 rc.cpp:189
+#: rc.cpp:685 svnfrontend/fronthelpers/rangeinput_impl.cpp:189
 msgid "Start with revision"
 msgstr "Начать с правки"
 
-#: svnfrontend/models/svnitemmodel.cpp:291
+#: svnfrontend/models/svnitemmodel.cpp:298
 msgid "Status"
 msgstr "Статус"
 
-#: svnfrontend/svnactions.cpp:994 svnfrontend/svnactions.cpp:2329
+#: svnfrontend/svnactions.cpp:994 svnfrontend/svnactions.cpp:2339
 msgid "Status / List"
 msgstr "Статус / список"
 
@@ -2912,33 +3011,33 @@ msgstr ""
 msgid "Status on external"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:1211
+#: svnfrontend/maintreewidget.cpp:1172
 msgid "Steal lock?"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:789 svnfrontend/maintreewidget.cpp:1704
+#: svnfrontend/maintreewidget.cpp:750 svnfrontend/maintreewidget.cpp:1665
 #, fuzzy
 msgid "Stop updating the logcache"
 msgstr "Обновиться до head"
 
-#: rc.cpp:210
+#: rc.cpp:706
 msgid "Stop with revision"
 msgstr "Остановиться на правке"
 
-#: rc.cpp:483
+#: rc.cpp:856
 msgid "Store password"
 msgstr "Сохранить пароль"
 
-#: rc.cpp:720
+#: rc.cpp:185
 msgid "Store passwords for remote connections"
 msgstr ""
 
-#: rc.cpp:731
+#: rc.cpp:196
 #, fuzzy
 msgid "Store passwords into KDE Wallet"
 msgstr "Сохранить пароль"
 
-#: rc.cpp:717
+#: rc.cpp:182
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
 "any passwords, but the subversion itself inside the configuration area of "
@@ -2954,24 +3053,24 @@ msgid ""
 "issue number."
 msgstr ""
 
-#: kdesvn_part.cpp:372 rc.cpp:853 rc.cpp:880
+#: rc.cpp:9 rc.cpp:412 kdesvn_part.cpp:372
 msgid "Subversion"
 msgstr ""
 
-#: rc.cpp:850
+#: rc.cpp:409
 msgid "Subversion Admin"
 msgstr "Администрирование"
 
-#: kdesvn_part.cpp:372 rc.cpp:666
+#: rc.cpp:131 kdesvn_part.cpp:372
 msgid "Subversion Settings"
 msgstr "Настройки Subversion"
 
-#: rc.cpp:874
+#: rc.cpp:3
 #, fuzzy
 msgid "Subversion settings"
 msgstr "Настройки Subversion"
 
-#: rc.cpp:868 rc.cpp:913
+#: rc.cpp:42 rc.cpp:427
 msgid "Subversion toolbar"
 msgstr "Панель инструментов Subversion"
 
@@ -2979,27 +3078,27 @@ msgstr "Панель инструментов Subversion"
 msgid "Switch only on working copies!"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:550
+#: svnfrontend/maintreewidget.cpp:511
 msgid "Switch repository"
 msgstr "Переключить репозиторий"
 
-#: svnfrontend/maintreewidget.cpp:551
+#: svnfrontend/maintreewidget.cpp:512
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:1798 svnfrontend/svnactions.cpp:1866
+#: svnfrontend/svnactions.cpp:1801 svnfrontend/svnactions.cpp:1869
 msgid "Switch url"
 msgstr "Переключить URL"
 
-#: svnfrontend/svnactions.cpp:1798
+#: svnfrontend/svnactions.cpp:1801
 msgid "Switching url"
 msgstr "Переключаем URL"
 
-#: svnfrontend/svnactions.cpp:1999
+#: svnfrontend/svnactions.cpp:2002
 msgid "Target for merge must be local!"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2026
+#: svnfrontend/svnactions.cpp:2029
 msgid "Target for merge must same type like sources!"
 msgstr ""
 
@@ -3032,12 +3131,12 @@ msgid ""
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
 
-#: rc.cpp:628
+#: rc.cpp:57
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 
-#: svnfrontend/svnactions.cpp:2506
+#: svnfrontend/svnactions.cpp:2516
 msgid "There are new items in repository"
 msgstr "Есть новые элементы в репозитории"
 
@@ -3048,7 +3147,7 @@ msgid ""
 "Rejecting it."
 msgstr ""
 
-#: rc.cpp:818
+#: rc.cpp:377
 msgid "Top to bottom"
 msgstr "Сверху вниз"
 
@@ -3060,7 +3159,7 @@ msgstr "Пересылка данных файла"
 msgid "Trust ssl certificate"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:541
+#: svnfrontend/maintreewidget.cpp:502
 msgid "Try lock current item against changes from other users"
 msgstr ""
 
@@ -3075,7 +3174,7 @@ msgstr ""
 msgid "Type"
 msgstr "Тип"
 
-#: rc.cpp:267
+#: rc.cpp:517
 msgid "Type of repository:"
 msgstr "Тип репозитория:"
 
@@ -3098,7 +3197,7 @@ msgstr "UUID"
 msgid "Undelete property"
 msgstr "Восстановить свойство"
 
-#: svnfrontend/maintreewidget.cpp:647
+#: svnfrontend/maintreewidget.cpp:608
 msgid "Unfold File Tree"
 msgstr "Развернуть дерево файлов"
 
@@ -3106,7 +3205,7 @@ msgstr "Развернуть дерево файлов"
 msgid "Unknown"
 msgstr "Неизвестный"
 
-#: svnfrontend/maintreewidget.cpp:543
+#: svnfrontend/maintreewidget.cpp:504
 msgid "Unlock current items"
 msgstr "Разблокировать"
 
@@ -3118,11 +3217,11 @@ msgstr "Разблокировка не удалась"
 msgid "Unlocked"
 msgstr "Разблокировано"
 
-#: svnfrontend/maintreewidget.cpp:1245
+#: svnfrontend/maintreewidget.cpp:1206
 msgid "Unlocking items"
 msgstr "Разблокируем элементы"
 
-#: rc.cpp:438
+#: rc.cpp:874
 #, fuzzy
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr "Все ли объекты под контролем версий?"
@@ -3131,7 +3230,7 @@ msgstr "Все ли объекты под контролем версий?"
 msgid "Unselect item"
 msgstr "Отменить выбор объекта"
 
-#: rc.cpp:441
+#: rc.cpp:877
 #, fuzzy
 msgid "Unselect new items"
 msgstr "Отменить выбор объекта"
@@ -3140,12 +3239,12 @@ msgstr "Отменить выбор объекта"
 msgid "Unset version for diff"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:559
+#: svnfrontend/maintreewidget.cpp:520
 #, fuzzy
 msgid "Unversioned"
 msgstr "Вне контроля версий"
 
-#: svnfrontend/maintreewidget.cpp:595 svnfrontend/ccontextlistener.cpp:73
+#: svnfrontend/ccontextlistener.cpp:73 svnfrontend/maintreewidget.cpp:556
 msgid "Update"
 msgstr "Обновление"
 
@@ -3162,63 +3261,63 @@ msgstr ""
 msgid "Update finished."
 msgstr "Дамп готов."
 
-#: svnfrontend/maintreewidget.cpp:653 svnfrontend/maintreewidget.cpp:787
-#: svnfrontend/maintreewidget.cpp:1693 svnfrontend/maintreewidget.cpp:1709
+#: svnfrontend/maintreewidget.cpp:614 svnfrontend/maintreewidget.cpp:748
+#: svnfrontend/maintreewidget.cpp:1654 svnfrontend/maintreewidget.cpp:1670
 #, fuzzy
 msgid "Update log cache"
 msgstr "Обновиться до head"
 
-#: svnfrontend/maintreewidget.cpp:654
+#: svnfrontend/maintreewidget.cpp:615
 msgid "Update the log cache for current repository"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:594 svnfrontend/maintreewidget.cpp:657
+#: svnfrontend/maintreewidget.cpp:555 svnfrontend/maintreewidget.cpp:618
 msgid "Update to head"
 msgstr "Обновиться до head"
 
-#: svnfrontend/maintreewidget.cpp:596
+#: svnfrontend/maintreewidget.cpp:557
 msgid "Update to revision..."
 msgstr "Обновиться до правки..."
 
-#: rc.cpp:734
+#: rc.cpp:199
 msgid "Use an internal password cache"
 msgstr ""
 
-#: rc.cpp:168
+#: rc.cpp:646
 msgid "Use deltas"
 msgstr ""
 
-#: rc.cpp:504
+#: rc.cpp:280
 #, fuzzy
 msgid "Use external diff display"
 msgstr "Использовать другую утилиту сравнения"
 
-#: rc.cpp:348
+#: rc.cpp:631
 msgid "Use external merge not subversions merge"
 msgstr ""
 
-#: rc.cpp:737
+#: rc.cpp:202
 #, fuzzy
 msgid "Use internal password cache"
 msgstr "Введите пароль."
 
-#: rc.cpp:800
+#: rc.cpp:128
 msgid "Use navigation panel"
 msgstr ""
 
-#: rc.cpp:153
+#: rc.cpp:511
 msgid "Use post-commit hook"
 msgstr ""
 
-#: rc.cpp:150
+#: rc.cpp:508
 msgid "Use pre-commit hook"
 msgstr ""
 
-#: rc.cpp:480
+#: rc.cpp:853
 msgid "Username:"
 msgstr "Имя пользователя:"
 
-#: rc.cpp:138
+#: rc.cpp:496
 msgid "Uuid action"
 msgstr ""
 
@@ -3234,15 +3333,19 @@ msgstr "Действителен до"
 msgid "Value"
 msgstr "Значение"
 
+#: rc.cpp:21
+msgid "View"
+msgstr ""
+
 #: svnfrontend/propertiesdlg.cpp:119
 msgid "View and modify properties"
 msgstr "Просмотр и изменение свойств"
 
-#: rc.cpp:207 rc.cpp:228
+#: rc.cpp:703 rc.cpp:724
 msgid "WORKING"
 msgstr ""
 
-#: rc.cpp:707
+#: rc.cpp:172
 msgid ""
 "When browsing kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -3251,7 +3354,7 @@ msgid ""
 "hangs often you should deactivate it."
 msgstr ""
 
-#: rc.cpp:684
+#: rc.cpp:149
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>But due this listings/updating on folders containing lot of "
@@ -3259,16 +3362,16 @@ msgid ""
 "containing lot of such entries."
 msgstr ""
 
-#: rc.cpp:681
+#: rc.cpp:146
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
 
-#: rc.cpp:723
+#: rc.cpp:188
 msgid ""
 "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 
-#: rc.cpp:839
+#: rc.cpp:398
 msgid ""
 "When starting the tree generation and reading data from log cache kdesvn may "
 "check for newer items in repository if network is enabled. \n"
@@ -3276,7 +3379,7 @@ msgid ""
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
 
-#: rc.cpp:690
+#: rc.cpp:155
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
@@ -3291,7 +3394,7 @@ msgstr "Какие файлы и каталоги следует добавит�
 msgid "Work online"
 msgstr "Показать строку"
 
-#: rc.cpp:886
+#: rc.cpp:15
 msgid "Working copy"
 msgstr "Рабочая копия"
 
@@ -3311,7 +3414,7 @@ msgid ""
 "Your names"
 msgstr "Andy Mikhailenko"
 
-#: rc.cpp:165
+#: rc.cpp:643
 msgid "incremental Dump"
 msgstr ""
 
@@ -3343,23 +3446,23 @@ msgstr "kdesvn: EMAIL'ы ПЕРЕВОДЧИКОВ\\nneithere@gmail.com"
 msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
 msgstr "kdesvn: ПЕРЕВОДЧИКИ\\nАндрей Михайленко"
 
-#: askpass/kdesvn-askpass.cpp:31
+#: askpass/kdesvn-askpass.cpp:32
 msgid "kdesvnaskpass"
 msgstr ""
 
-#: rc.cpp:513
+#: rc.cpp:289
 msgid "see \"Whats this\" for details"
 msgstr ""
 
-#: askpass/kdesvn-askpass.cpp:32
+#: askpass/kdesvn-askpass.cpp:33
 msgid "ssh-askpass for kdesvn"
 msgstr ""
 
-#: rc.cpp:366
+#: rc.cpp:595
 msgid "this long text"
 msgstr ""
 
-#: rc.cpp:369
+#: rc.cpp:598
 msgid "to"
 msgstr "в"
 
@@ -3371,24 +3474,8 @@ msgstr ""
 msgid "unversioned item obstructed work"
 msgstr ""
 
-#, fuzzy
-#~ msgid "&File"
-#~ msgstr "Каталог"
-
-#, fuzzy
-#~ msgid "&Settings"
-#~ msgstr "Настройки"
-
-#, fuzzy
-#~ msgid "Add"
-#~ msgstr "Добавлен"
-
 #~ msgid "Blame %1"
 #~ msgstr "Кто менял строки %1"
-
-#, fuzzy
-#~ msgid "Clear"
-#~ msgstr "Очистка"
 
 #, fuzzy
 #~ msgid "Close"
@@ -3397,34 +3484,14 @@ msgstr ""
 #~ msgid "Commiting"
 #~ msgstr "Фиксируются изменения"
 
-#, fuzzy
-#~ msgid "Copy"
-#~ msgstr "Скопировать сюда"
-
-#, fuzzy
-#~ msgid "Default"
-#~ msgstr "По умолчанию UTF-8"
-
 #~ msgid "Display previews in file tips"
 #~ msgstr "Показывать предпросмотр в подсказках"
-
-#, fuzzy
-#~ msgid "Error"
-#~ msgstr "Ошибка SVN"
 
 #~ msgid "Execution log"
 #~ msgstr "Журнал выполнения"
 
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Экспорт"
-
 #~ msgid "Failed: %1 %2"
 #~ msgstr "Операция не удалась: %1 %2"
-
-#, fuzzy
-#~ msgid "File"
-#~ msgstr "Каталог"
 
 #~ msgid "Finished."
 #~ msgstr "Готово."
@@ -3432,23 +3499,11 @@ msgstr ""
 #~ msgid "Full Log"
 #~ msgstr "Полный журнал"
 
-#, fuzzy
-#~ msgid "Import"
-#~ msgstr "Испорт журнала"
-
 #~ msgid "Kdesvn DCOP service"
 #~ msgstr "DCOP сервис Kdesvn"
 
 #~ msgid "Log..."
 #~ msgstr "Журнал..."
-
-#, fuzzy
-#~ msgid "Main Toolbar"
-#~ msgstr "Панель инструментов Subversion"
-
-#, fuzzy
-#~ msgid "Move"
-#~ msgstr "Переместить сюда"
 
 #~ msgid "Nothing selected for lock"
 #~ msgstr "Не выделены объекты для блокировки"
@@ -3456,16 +3511,12 @@ msgstr ""
 #~ msgid "Please wait until job is finished"
 #~ msgstr "Пожалуйста, подождите, пока выполняется текущее задание"
 
-#, fuzzy
-#~ msgid "Properties"
-#~ msgstr "Свойство"
-
-#, fuzzy
-#~ msgid "Replace"
-#~ msgstr "Заменен"
-
 #~ msgid "Revison"
 #~ msgstr "Правка"
+
+#, fuzzy
+#~ msgid "SSH password"
+#~ msgstr "Сохранить пароль"
 
 #, fuzzy
 #~ msgid "Save plain password"

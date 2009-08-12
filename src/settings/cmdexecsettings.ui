@@ -38,8 +38,11 @@
        <property name="toolTip">
         <string>The minimum a log output must contain before kdesvn shows a single logwindow</string>
        </property>
+       <property name="minimum">
+        <number>0</number>
+       </property>
        <property name="specialValueText">
-        <string comment="no limit">0</string>
+        <string comment="no limit">No minimum</string>
        </property>
        <property name="minValue" stdset="0">
         <number>0</number>
@@ -131,14 +134,14 @@ Use this only if you're sure what you're doing!</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
   </customwidget>
  </customwidgets>
  <includes>

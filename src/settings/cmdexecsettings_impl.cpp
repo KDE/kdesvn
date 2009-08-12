@@ -21,6 +21,7 @@
 
 #include "cmdexecsettings_impl.h"
 
+#include <kdeversion.h>
 #include <klocale.h>
 #include <knuminput.h>
 #include <qcheckbox.h>
@@ -30,6 +31,11 @@ CmdExecSettings_impl::CmdExecSettings_impl(QWidget* parent)
 : QWidget(parent)
 {
     setupUi(this);
+#if KDE_IS_VERSION(4, 2, 80)
+    kcfg_cmdline_log_minline->setSuffix(ki18np(" line", " lines"));
+#else
+    kcfg_cmdline_log_minline->setSuffix(i18n(" lines"));
+#endif
     kcfg_cmdline_log_minline->setSpecialValueText(i18n("No minimum"));
     kcfg_cmdline_log_minline->setEnabled(kcfg_cmdline_show_logwindow->isChecked());
     kcfg_kio_standard_logmsg->setEnabled(kcfg_kio_use_standard_logmsg->isChecked());

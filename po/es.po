@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-13 00:10+0200\n"
+"POT-Creation-Date: 2009-08-13 12:06+0300\n"
 "PO-Revision-Date: 2009-05-22 17:25+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: Spanish <mariopal@gmail.com>\n"
@@ -16,6 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: settings/cmdexecsettings_impl.cpp:35
+#, fuzzy
+msgid " line"
+msgid_plural " lines"
+msgstr[0] " línea(s)"
+msgstr[1] " línea(s)"
 
 #: settings/cmdexecsettings_impl.cpp:37
 #, fuzzy
@@ -68,11 +75,11 @@ msgstr "&Marcadores"
 msgid "&Copy Here"
 msgstr "Copiado de"
 
-#: rc.cpp:406
+#: rc.cpp:514
 msgid "&File"
 msgstr "&Archivo"
 
-#: rc.cpp:27 rc.cpp:424
+#: rc.cpp:27 rc.cpp:532
 msgid "&Help"
 msgstr "A&yuda"
 
@@ -80,7 +87,7 @@ msgstr "A&yuda"
 msgid "&Move Here"
 msgstr ""
 
-#: rc.cpp:418
+#: rc.cpp:526
 msgid "&Settings"
 msgstr "P&referencias"
 
@@ -100,19 +107,19 @@ msgstr "(Última parte)"
 msgid "(Un)Lock"
 msgstr "(Des)Bloquear"
 
-#: rc.cpp:757
+#: rc.cpp:646
 msgid "-1"
 msgstr "-1"
 
-#: rc.cpp:658
+#: rc.cpp:895
 msgid "-1 for Head"
 msgstr "-1 para HEAD"
 
-#: rc.cpp:661
+#: rc.cpp:898
 msgid "-1 for Start"
 msgstr "-1 para START"
 
-#: rc.cpp:601
+#: rc.cpp:553
 msgid "/there/"
 msgstr "/ahí/"
 
@@ -156,7 +163,7 @@ msgstr ""
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr "<center>La entrada<br>%1<br>tiene el  versionado - roto.</center>"
 
-#: rc.cpp:817
+#: rc.cpp:478
 msgid ""
 "<p ><b>Kind of depth</b>: </p>\n"
 "<p ><i>empty depth</i><br />\n"
@@ -190,7 +197,7 @@ msgstr ""
 "tratarán igualmente con profundidad infinita.<br>Equivalente al "
 "comportamiento por defecto de versiones anteriores a la 1.5.</p>"
 
-#: rc.cpp:341
+#: rc.cpp:243
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -243,7 +250,7 @@ msgstr ""
 "grandes y recursivas ésto puede ir bastante lento!\n"
 "</p>"
 
-#: rc.cpp:107
+#: rc.cpp:63
 msgid ""
 "<p align=\"left\">\n"
 "Mark an items with non-normal state with an overlayed icon. When you wish "
@@ -260,7 +267,7 @@ msgstr ""
 "Subversión.\n"
 "</p>"
 
-#: rc.cpp:158
+#: rc.cpp:291
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
 "items when making a listing to remote repositories. So you may see remote "
@@ -274,11 +281,11 @@ msgstr ""
 "</p>\n"
 "<p align=\"left\"><i>¡CUIDADO: Esto puede hacer el listado MUY lento!</i></p>"
 
-#: rc.cpp:592
+#: rc.cpp:544
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">Renombrar</p>"
 
-#: rc.cpp:302
+#: rc.cpp:204
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -322,7 +329,7 @@ msgstr ""
 "Predeterminado: <tt>kdiff3 %o %m %n -o %t</tt>\n"
 "</p>"
 
-#: rc.cpp:328
+#: rc.cpp:230
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -349,7 +356,7 @@ msgstr ""
 "<b><tt>%t</tt></b> Fuente local a fusionar.\n"
 "</p>"
 
-#: rc.cpp:191
+#: rc.cpp:324
 msgid ""
 "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
 "instead of simple cleartext storage of subversion.</p>\n"
@@ -434,7 +441,7 @@ msgstr "Aceptado permanentemente"
 msgid "Accept temporarily"
 msgstr "Aceptado temporalmente"
 
-#: rc.cpp:784 ksvnwidgets/models/commitmodel.cpp:248
+#: rc.cpp:805 ksvnwidgets/models/commitmodel.cpp:248
 msgid "Action"
 msgstr "Acción"
 
@@ -442,8 +449,8 @@ msgstr "Acción"
 msgid "Actions"
 msgstr "Acciones"
 
-#: svnfrontend/maintreewidget.cpp:538
 #: ksvnwidgets/models/commitmodelhelper.cpp:68
+#: svnfrontend/maintreewidget.cpp:538
 msgid "Add"
 msgstr "Añadir"
 
@@ -487,7 +494,7 @@ msgstr "Añadido en revisión %1 como %2"
 msgid "Added in repository"
 msgstr "Añadido en el repositorio"
 
-#: rc.cpp:244
+#: rc.cpp:102
 msgid "Added items:"
 msgstr "Elementos añadidos:"
 
@@ -515,11 +522,11 @@ msgstr ""
 msgid "Addition"
 msgstr "Añadido"
 
-#: rc.cpp:176
+#: rc.cpp:309
 msgid "Always get properties on networked repositories"
 msgstr "Obtener siempre propiedades en repositorios en red"
 
-#: rc.cpp:805 svnfrontend/svnlogdlgimp.cpp:503
+#: rc.cpp:826 svnfrontend/svnlogdlgimp.cpp:503
 msgid "Annotate"
 msgstr "Ver anotado"
 
@@ -527,7 +534,7 @@ msgstr "Ver anotado"
 msgid "Annotate lines - hit cancel for abort"
 msgstr "Anotando líneas - pulse cancelar para abortar"
 
-#: rc.cpp:736
+#: rc.cpp:625
 msgid "Append source url name to subfolder"
 msgstr "Crear en un subdirectorio con el nombre final de la URL"
 
@@ -535,11 +542,11 @@ msgstr "Crear en un subdirectorio con el nombre final de la URL"
 msgid "Ask for revision when executing single command"
 msgstr "Preguntar por la revisión cuando se ejecute un comando"
 
-#: rc.cpp:844
+#: rc.cpp:499
 msgid "Authentication"
 msgstr "Autentificación"
 
-#: rc.cpp:583 svnfrontend/models/logitemmodel.cpp:210
+#: rc.cpp:910 svnfrontend/models/logitemmodel.cpp:210
 msgid "Author"
 msgstr "Autor"
 
@@ -547,7 +554,7 @@ msgstr "Autor"
 msgid "Automatic generated base layout by kdesvn"
 msgstr "Generado árbol de directorios base"
 
-#: rc.cpp:529
+#: rc.cpp:736
 msgid "BDB"
 msgstr "BDB"
 
@@ -579,7 +586,7 @@ msgstr "Ambas entradas parecen ser la misma, no se fusionará."
 msgid "Both sources must be same type!"
 msgstr "¡Ambas fuentes deben ser del mismo tipo!"
 
-#: rc.cpp:371
+#: rc.cpp:129
 msgid "Bottom to top"
 msgstr "De abajo a arriba"
 
@@ -609,7 +616,7 @@ msgstr "Cancelar"
 msgid "Cache filled up to revision %1"
 msgstr "Caché lleno hasta la revisión %1"
 
-#: rc.cpp:81
+#: rc.cpp:395
 #, fuzzy
 msgid "Can KIO overwrite existing files?"
 msgstr "Sobreescribir existente"
@@ -627,7 +634,7 @@ msgstr "Sólo se puede relocalizar un elemento a la vez"
 msgid "Can only write on head revision!"
 msgstr "Sólo se puede relocalizar un elemento a la vez"
 
-#: rc.cpp:679
+#: rc.cpp:613
 #, fuzzy
 msgid "Cancel"
 msgstr "Cancelar"
@@ -672,12 +679,12 @@ msgstr ""
 "Comprueba si la copia de trabajo tiene elementos con versiones más nuevas en "
 "el repositorio"
 
-#: rc.cpp:152
+#: rc.cpp:285
 msgid "Check if items has \"svn:needs-lock\" property set"
 msgstr ""
 "Comprobar si los elementos tienen establecida la propiedad \"svn:needs-lock\""
 
-#: rc.cpp:403
+#: rc.cpp:161
 msgid "Check logcache fill before reading tree"
 msgstr "Comprobar el relleno de la caché de registros antes de leer el árbol"
 
@@ -715,7 +722,7 @@ msgstr "Obtener un repositorio"
 msgid "Checkout current repository path"
 msgstr "Obtener lugar del repositorio actual"
 
-#: rc.cpp:727
+#: rc.cpp:616
 msgid "Checkout info"
 msgstr "Información sobre la extracción"
 
@@ -723,7 +730,7 @@ msgstr "Información sobre la extracción"
 msgid "Checksum"
 msgstr "Checksum"
 
-#: rc.cpp:439
+#: rc.cpp:835
 msgid "Clean logs"
 msgstr "Limpiar registros"
 
@@ -748,7 +755,7 @@ msgstr "Limpiar"
 msgid "Click for navigate"
 msgstr "Pulsar para navegar"
 
-#: rc.cpp:673
+#: rc.cpp:607
 msgid "Click for short info about pre-defined property name"
 msgstr ""
 "Pulse para obtener una pequeña información acerca del nombre predefinido de "
@@ -762,27 +769,27 @@ msgstr "Cierra todas las ramas del árbol de ficheros"
 msgid "Color Settings"
 msgstr "Configuración de Colores"
 
-#: rc.cpp:380
+#: rc.cpp:138
 msgid "Color for added items:"
 msgstr "Color para elementos añadidos:"
 
-#: rc.cpp:386
+#: rc.cpp:144
 msgid "Color for copied items:"
 msgstr "Color para elementos copiados:"
 
-#: rc.cpp:383
+#: rc.cpp:141
 msgid "Color for deleted items:"
 msgstr "Color para elementos eliminados:"
 
-#: rc.cpp:392
+#: rc.cpp:150
 msgid "Color for modified items:"
 msgstr "Color para elementos modificados:"
 
-#: rc.cpp:389
+#: rc.cpp:147
 msgid "Color for renamed items:"
 msgstr "Color para elementos renombrados:"
 
-#: rc.cpp:229
+#: rc.cpp:87
 msgid "ColorSettings"
 msgstr "Configuración de Colores"
 
@@ -829,7 +836,7 @@ msgstr "Confirmación Reemplazada"
 msgid "Commit log"
 msgstr "Mensaje de registro"
 
-#: rc.cpp:859
+#: rc.cpp:421
 msgid "Commitmessage"
 msgstr "Commitmessage"
 
@@ -838,15 +845,15 @@ msgstr "Commitmessage"
 msgid "Committed revision %1."
 msgstr "Confirmada revisión %1."
 
-#: rc.cpp:556
+#: rc.cpp:763
 msgid "Compatible to subversion prior 1.4"
 msgstr "Compatible con subversion anterior a 1.4"
 
-#: rc.cpp:565
+#: rc.cpp:772
 msgid "Compatible to subversion prior 1.5"
 msgstr "Compatible con subversion anterior a 1.5"
 
-#: rc.cpp:571
+#: rc.cpp:778
 #, fuzzy
 msgid "Compatible to subversion prior 1.6"
 msgstr "Compatible con subversion anterior a 1.4"
@@ -859,15 +866,15 @@ msgstr "Configurar %1..."
 msgid "Conflict"
 msgstr "Conflicto"
 
-#: rc.cpp:292
+#: rc.cpp:194
 msgid "Conflict resolver program:"
 msgstr "Programa para resolver conflictos:"
 
-#: rc.cpp:250
+#: rc.cpp:108
 msgid "Conflicted items:"
 msgstr "Elementos en conflicto:"
 
-#: rc.cpp:586
+#: rc.cpp:913
 msgid "Content"
 msgstr "Contenido"
 
@@ -883,13 +890,13 @@ msgstr "Contenido de %1"
 msgid "Copied to %1 at revision %2"
 msgstr "Copiado a %1 en la revisión %2"
 
-#: svnfrontend/ccontextlistener.cpp:64 svnfrontend/maintreewidget.cpp:479
-#: svnfrontend/copymoveview_impl.cpp:56
 #: ksvnwidgets/models/commitmodelhelper.cpp:72
+#: svnfrontend/copymoveview_impl.cpp:56 svnfrontend/maintreewidget.cpp:479
+#: svnfrontend/ccontextlistener.cpp:64
 msgid "Copy"
 msgstr "Copiar"
 
-#: rc.cpp:589 svnfrontend/svnactions.cpp:2245 svnfrontend/svnactions.cpp:2270
+#: rc.cpp:541 svnfrontend/svnactions.cpp:2245 svnfrontend/svnactions.cpp:2270
 msgid "Copy / Move"
 msgstr "Copiar/Mover"
 
@@ -897,7 +904,7 @@ msgstr "Copiar/Mover"
 msgid "Copy file/dir"
 msgstr "Copiar fichero/directorio"
 
-#: rc.cpp:790
+#: rc.cpp:811
 msgid "Copy from"
 msgstr "Copiado de"
 
@@ -1002,11 +1009,11 @@ msgstr "Crear y abrir nuevo repositorio"
 msgid "Create and opens a new local subversion repository"
 msgstr "Crea y abre un nuevo repositorio subversion local"
 
-#: rc.cpp:547
+#: rc.cpp:754
 msgid "Create main folders"
 msgstr "Crear carpetas principales"
 
-#: kdesvnview.cpp:242 rc.cpp:514
+#: rc.cpp:721 kdesvnview.cpp:242
 msgid "Create new repository"
 msgstr "Crear nuevo repositorio"
 
@@ -1014,7 +1021,7 @@ msgstr "Crear nuevo repositorio"
 msgid "Create subdir %1 on import"
 msgstr "Crear subdirectorio %1 al importar"
 
-#: rc.cpp:541
+#: rc.cpp:748
 msgid "Create trunk, tags and branches folder"
 msgstr "Crear directorios trunk, tags y branches"
 
@@ -1030,30 +1037,31 @@ msgstr "Ctrl-F para buscar, F3 o Mayusculas-F3 para buscar de nuevo."
 msgid "D %1"
 msgstr "D %1"
 
-#: rc.cpp:415
+#: rc.cpp:523
 #, fuzzy
 msgid "Database"
 msgstr "Fecha"
 
-#: rc.cpp:580 rc.cpp:691 rc.cpp:712 svnfrontend/models/logitemmodel.cpp:212
+#: rc.cpp:658 rc.cpp:679 rc.cpp:907 svnfrontend/models/logitemmodel.cpp:212
 msgid "Date"
 msgstr "Fecha"
 
-#: rc.cpp:499
+#: rc.cpp:583
 msgid "Default"
 msgstr "Por defecto"
 
-#: rc.cpp:913
+#: rc.cpp:418
 msgid "Default utf-8"
 msgstr "Por defecto utf-8"
 
-#: svnfrontend/ccontextlistener.cpp:65 svnfrontend/maintreewidget.cpp:544
-#: svnfrontend/svnactions.cpp:1010 ksvnwidgets/models/commitmodelhelper.cpp:76
+#: ksvnwidgets/models/commitmodelhelper.cpp:76
+#: svnfrontend/maintreewidget.cpp:544 svnfrontend/ccontextlistener.cpp:65
+#: svnfrontend/svnactions.cpp:1010
 #, fuzzy
 msgid "Delete"
 msgstr "Eliminado"
 
-#: rc.cpp:457 rc.cpp:460
+#: rc.cpp:859 rc.cpp:862
 #, fuzzy
 msgid "Delete all entries and settings for selected repository"
 msgstr "Eliminar del repositorio los ficheros y/o directorios seleccionados"
@@ -1062,12 +1070,12 @@ msgstr "Eliminar del repositorio los ficheros y/o directorios seleccionados"
 msgid "Delete and Commit"
 msgstr "Eliminar y Confirmar"
 
-#: rc.cpp:454
+#: rc.cpp:856
 #, fuzzy
 msgid "Delete cache"
 msgstr "Eliminado"
 
-#: rc.cpp:448 rc.cpp:451
+#: rc.cpp:850 rc.cpp:853
 #, fuzzy
 msgid "Delete cache entries for current selected repository"
 msgstr "Actualiza la caché de registros para el repositorio actual"
@@ -1080,7 +1088,7 @@ msgstr "Borrar desde el repositorio"
 msgid "Delete property"
 msgstr "Eliminar propiedad"
 
-#: rc.cpp:463 svnfrontend/database/dboverview.cpp:139
+#: rc.cpp:865 svnfrontend/database/dboverview.cpp:139
 #, fuzzy
 msgid "Delete repository"
 msgstr "Borrar desde el repositorio"
@@ -1089,7 +1097,7 @@ msgstr "Borrar desde el repositorio"
 msgid "Delete selected files/dirs"
 msgstr "Eliminar ficheros/directorios seleccionados"
 
-#: svnfrontend/ccontextlistener.cpp:71 svnfrontend/svnitem.cpp:401
+#: svnfrontend/svnitem.cpp:401 svnfrontend/ccontextlistener.cpp:71
 msgid "Deleted"
 msgstr "Eliminado"
 
@@ -1097,7 +1105,7 @@ msgstr "Eliminado"
 msgid "Deleted at revision %1"
 msgstr "Eliminado en revisión %1"
 
-#: rc.cpp:247
+#: rc.cpp:105
 msgid "Deleted items:"
 msgstr "Elementos eliminados:"
 
@@ -1113,7 +1121,7 @@ msgstr "Eliminar del repositorio los ficheros y/o directorios seleccionados"
 msgid "Deletion"
 msgstr "Eliminado"
 
-#: rc.cpp:433
+#: rc.cpp:829
 msgid "Destination folder:"
 msgstr "Carpeta de destino:"
 
@@ -1137,23 +1145,23 @@ msgstr "Diferencias con HEAD"
 msgid "Diff display"
 msgstr "Visor de diferencias"
 
-#: rc.cpp:883
+#: rc.cpp:445
 msgid "Diff highlighted item"
 msgstr "Diferencias con elemento resaltado"
 
-#: rc.cpp:274
+#: rc.cpp:176
 msgid "Diff ignores all white spaces"
 msgstr "Las diferencias ignoran todos los espacios en blanco"
 
-#: rc.cpp:265
+#: rc.cpp:167
 msgid "Diff ignores content type"
 msgstr "Las diferencias ignoran el tipo de contenido"
 
-#: rc.cpp:271
+#: rc.cpp:173
 msgid "Diff ignores white space changes"
 msgstr "Las diferencias ignoran cambios de espacios en blanco"
 
-#: rc.cpp:268 svnfrontend/graphtree/revgraphview.cpp:815
+#: rc.cpp:170 svnfrontend/graphtree/revgraphview.cpp:815
 msgid "Diff in revisiontree is recursive"
 msgstr "Diferencias recursivas en el árbol de revisiones"
 
@@ -1165,11 +1173,11 @@ msgstr "Mostrar diferencias entre elementos"
 msgid "Diff local changes"
 msgstr "Diferencia con cambios locales"
 
-#: rc.cpp:793 svnfrontend/svnlogdlgimp.cpp:508
+#: rc.cpp:814 svnfrontend/svnlogdlgimp.cpp:508
 msgid "Diff previous"
 msgstr "Diferencias con el anterior"
 
-#: rc.cpp:799 svnfrontend/maintreewidget.cpp:605
+#: rc.cpp:820 svnfrontend/maintreewidget.cpp:605
 msgid "Diff revisions"
 msgstr "Diferencias entre revisiones"
 
@@ -1205,7 +1213,7 @@ msgstr ""
 msgid "Diff-process could not started, check command."
 msgstr "No se ha podido iniciar el procesado de diferencias, chequear comando."
 
-#: rc.cpp:262
+#: rc.cpp:164
 msgid "DiffMergeSettings"
 msgstr "DiffMergeSettings"
 
@@ -1213,16 +1221,16 @@ msgstr "DiffMergeSettings"
 msgid "Diffing - hit cancel for abort"
 msgstr "Calculando diferencias - pulse cancelar para abortar"
 
-#: rc.cpp:365
+#: rc.cpp:123
 msgid "Direction of revision tree"
 msgstr "Dirección del arbol de revisiones"
 
-#: rc.cpp:538
+#: rc.cpp:745
 msgid "Disable automatic log file removal (BDB only)"
 msgstr ""
 "Deshabilitar eliminación automática del fichero de registro (sólo para BDB)"
 
-#: rc.cpp:535
+#: rc.cpp:742
 msgid "Disable fsync at commit (BDB only)"
 msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 
@@ -1230,7 +1238,7 @@ msgstr "Deshabilitar fsync en confirmación (sólo para BDB)"
 msgid "Display Properties"
 msgstr "Mostrar Propiedades"
 
-#: rc.cpp:125
+#: rc.cpp:81
 msgid "Display colored annotate"
 msgstr "Mostrar anotaciones coloreadas"
 
@@ -1238,7 +1246,7 @@ msgstr "Mostrar anotaciones coloreadas"
 msgid "Display details"
 msgstr "Mostrar detalles"
 
-#: rc.cpp:119 kdesvn_part.cpp:196
+#: rc.cpp:75 kdesvn_part.cpp:196
 msgid "Display ignored files"
 msgstr "Mostrar ficheros ignorados"
 
@@ -1271,15 +1279,15 @@ msgstr "Muestra el historial del elemento seleccionado sin seguir las copias"
 msgid "Document to open"
 msgstr "Documento a abrir"
 
-#: rc.cpp:66
+#: rc.cpp:380
 msgid "Don't display contextmenu in Konqueror"
 msgstr "No mostrar menús contextuales en Konqueror"
 
-#: rc.cpp:72
+#: rc.cpp:386
 msgid "Don't display entries in toplevel action menu"
 msgstr "No mostrar entradas en el menú de acciones de alto nivel"
 
-#: rc.cpp:469
+#: rc.cpp:838
 #, fuzzy
 msgid "Don't update logcache on open"
 msgstr "Inicio del relleno de la caché de registros al abrir"
@@ -1301,7 +1309,7 @@ msgstr "Volcar un repositorio"
 msgid "Dump a subversion repository to a file"
 msgstr "Vuelca un repositorio Subversion en un fichero"
 
-#: rc.cpp:484
+#: rc.cpp:568
 msgid "Dump file:"
 msgstr "Fichero de volcado:"
 
@@ -1309,11 +1317,11 @@ msgstr "Fichero de volcado:"
 msgid "Dump finished."
 msgstr "Volcado finalizado."
 
-#: rc.cpp:640
+#: rc.cpp:877
 msgid "Dump into:"
 msgstr "Volcar hacia:"
 
-#: rc.cpp:634
+#: rc.cpp:871
 msgid "Dump repo"
 msgstr "Volcar repositorio"
 
@@ -1321,7 +1329,7 @@ msgstr "Volcar repositorio"
 msgid "Dump repository to file"
 msgstr "Volcar repositorio a fichero"
 
-#: rc.cpp:649
+#: rc.cpp:886
 msgid "Dump revision range"
 msgstr "Volcar rango de revisiones"
 
@@ -1329,11 +1337,11 @@ msgstr "Volcar rango de revisiones"
 msgid "Dumping a repository"
 msgstr "Volcando un repositorio"
 
-#: rc.cpp:664
+#: rc.cpp:598
 msgid "Edit property"
 msgstr "Editar propiedad"
 
-#: rc.cpp:826
+#: rc.cpp:487
 msgid "Empty Depth"
 msgstr "Sin profundidad"
 
@@ -1349,23 +1357,23 @@ msgstr ""
 "Alcanzado final del documento.\n"
 "Continuar desde el principio?"
 
-#: rc.cpp:766
+#: rc.cpp:787
 msgid "End revision"
 msgstr "Revisión final"
 
-#: rc.cpp:652
+#: rc.cpp:889
 msgid "End revision:"
 msgstr "Revisión final:"
 
-#: rc.cpp:733
+#: rc.cpp:622
 msgid "Enter URL:"
 msgstr "Introduzca URL del repositorio:"
 
-#: rc.cpp:889
+#: rc.cpp:451
 msgid "Enter a log message"
 msgstr "Introduzca un mensaje de registro"
 
-#: rc.cpp:847
+#: rc.cpp:502
 msgid "Enter authentication info for"
 msgstr "Introducir información de autentificación para"
 
@@ -1450,15 +1458,15 @@ msgstr "¿Exportando un fichero?"
 msgid "External"
 msgstr "Definición externa"
 
-#: rc.cpp:321
+#: rc.cpp:223
 msgid "External diff display:"
 msgstr "Visor de diferencias externo:"
 
-#: rc.cpp:295
+#: rc.cpp:197
 msgid "External merge program:"
 msgstr "Programa externo para fusionar:"
 
-#: rc.cpp:526
+#: rc.cpp:733
 msgid "FSFS"
 msgstr "FSFS"
 
@@ -1486,7 +1494,7 @@ msgstr "Fichero"
 msgid "File %1 exists - overwrite?"
 msgstr "El fichero %1 existe - sobreescribirlo?"
 
-#: rc.cpp:829
+#: rc.cpp:490
 msgid "Files Depth"
 msgstr "Profundidad de Ficheros"
 
@@ -1534,7 +1542,7 @@ msgstr "Contraer Árbol de Ficheros"
 msgid "Folder"
 msgstr "Carpeta"
 
-#: rc.cpp:505
+#: rc.cpp:589
 msgid "Force"
 msgstr "Forzar"
 
@@ -1542,20 +1550,20 @@ msgstr "Forzar"
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr "Fuerza el añadir identidades ssh a ssh-agent para uso futuro."
 
-#: rc.cpp:619
+#: rc.cpp:706
 msgid "Force delete on modified/unversioned"
 msgstr "Forzar la eliminación de modificados/no-versionados"
 
-#: rc.cpp:604 main.cpp:49
+#: rc.cpp:556 main.cpp:49
 msgid "Force operation"
 msgstr "Forzar operación"
 
-#: rc.cpp:442
+#: rc.cpp:844
 #, fuzzy
 msgid "Form"
 msgstr "Form1"
 
-#: rc.cpp:808 rc.cpp:907
+#: rc.cpp:412 rc.cpp:469
 msgid "Form1"
 msgstr "Form1"
 
@@ -1567,7 +1575,7 @@ msgstr "Liberar bloqueos existentes en el elemento actual"
 msgid "Full revision tree"
 msgstr "Árbol de revisiones completo"
 
-#: rc.cpp:166
+#: rc.cpp:299
 msgid "Gain item info recursive"
 msgstr "Obtener información recursiva del elemento"
 
@@ -1579,17 +1587,17 @@ msgstr "General"
 msgid "General Settings"
 msgstr "Configuraciones Generales"
 
-#: rc.cpp:880
+#: rc.cpp:442
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
 "Genera y muestra las diferencias entre el elemento seleccionado y su "
 "repositorio"
 
-#: rc.cpp:769
+#: rc.cpp:790
 msgid "Get Logs"
 msgstr "Obtener Registros"
 
-#: rc.cpp:163
+#: rc.cpp:296
 msgid "Get file details while remote listing"
 msgstr "Obtener detalles de ficheros en listado remoto"
 
@@ -1621,15 +1629,15 @@ msgstr "No se obtuvieron registros"
 msgid "Goto line"
 msgstr "Ir a la línea"
 
-#: rc.cpp:697 rc.cpp:718
+#: rc.cpp:664 rc.cpp:685
 msgid "HEAD"
 msgstr "HEAD"
 
-#: rc.cpp:622
+#: rc.cpp:709
 msgid "Handle unrelated as related items"
 msgstr "Gestionar no-relacionados como elementos relacionados"
 
-#: rc.cpp:98
+#: rc.cpp:54
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
@@ -1638,11 +1646,11 @@ msgstr ""
 "quiere ver una pequeña ventana emergente con información adicional acerca de "
 "ese fichero"
 
-#: rc.cpp:865
+#: rc.cpp:427
 msgid "Hide new items"
 msgstr "Ocultar elementos nuevos"
 
-#: rc.cpp:226
+#: rc.cpp:359
 msgid "Hide new items in commit box"
 msgstr "Ocultar elementos nuevos en el dialogo de confirmación"
 
@@ -1677,7 +1685,7 @@ msgstr ""
 msgid "Host"
 msgstr "Host"
 
-#: kdesvnview.cpp:287 kdesvnview.cpp:322 kdesvn.cpp:133
+#: kdesvn.cpp:133 kdesvnview.cpp:287 kdesvnview.cpp:322
 msgid "Hotcopy a repository"
 msgstr "Copiar un repositorio"
 
@@ -1689,11 +1697,11 @@ msgstr "Copia un repositorio Subversion en una nueva carpeta"
 msgid "Hotcopy finished."
 msgstr "Copia finalizada."
 
-#: rc.cpp:901
+#: rc.cpp:463
 msgid "If checked commit will not release locks."
 msgstr "Si se selecciona, la confirmación no libera los bloqueos."
 
-#: rc.cpp:277
+#: rc.cpp:179
 msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
@@ -1701,7 +1709,7 @@ msgstr ""
 "Si se debe usar un visor y/o generador de diferencias externo. Si no se "
 "selecciona se usará el visor interno."
 
-#: rc.cpp:478 rc.cpp:493
+#: rc.cpp:562 rc.cpp:577
 msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
@@ -1726,13 +1734,13 @@ msgstr ""
 "Si establecido, se añaden ficheros o directorios que concuerdan con los "
 "patrones a ignorar."
 
-#: rc.cpp:63
+#: rc.cpp:377
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
 msgstr ""
 "Si se activa, kdesvn no mostrará un submenú dentro del menú \"Action\" de "
 "Konqueror."
 
-#: rc.cpp:69
+#: rc.cpp:383
 msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "konqueror/dolphin"
@@ -1740,7 +1748,7 @@ msgstr ""
 "Si se activa, kdesvn no mostrará algunas acciones extra dentro del menú de "
 "\"Acciones\" de Konqueror/Dolphin"
 
-#: rc.cpp:553
+#: rc.cpp:760
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only useful when svnqt is running with subversion 1.4 or above."
@@ -1749,7 +1757,7 @@ msgstr ""
 "anterior a 1.4. Ésto sólo es útil cuando svnqt se ejecuta con subversion 1.4 "
 "o posterior."
 
-#: rc.cpp:562
+#: rc.cpp:769
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.5. This "
 "is only useful when svnqt is running with subversion 1.5 or above."
@@ -1758,7 +1766,7 @@ msgstr ""
 "anterior a 1.5. Ésto sólo es útil cuando svnqt se ejecuta con subversion 1.5 "
 "o posterior."
 
-#: rc.cpp:84
+#: rc.cpp:398
 msgid ""
 "If this flag is set, you're have a simple write support for existing items. "
 "Eg. you can open files in your editor and save them direct without checking "
@@ -1767,7 +1775,7 @@ msgid ""
 "Use this only if you're sure what you're doing!"
 msgstr ""
 
-#: rc.cpp:544
+#: rc.cpp:751
 msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
@@ -1776,15 +1784,15 @@ msgstr ""
 "tt>, <tt>/branches</tt> y <tt>/tags</tt> después de abrir el nuevo "
 "repositorio."
 
-#: rc.cpp:502
+#: rc.cpp:586
 msgid "Ignore"
 msgstr "Ignorar"
 
-#: rc.cpp:748
+#: rc.cpp:637
 msgid "Ignore externals"
 msgstr "Ignorar definiciones externas"
 
-#: rc.cpp:745
+#: rc.cpp:634
 msgid "Ignore externals while operation"
 msgstr "Ignorar definiciones externas durante la operación"
 
@@ -1808,7 +1816,7 @@ msgstr "Ignora o no el elemento actual"
 msgid "Ignored"
 msgstr "Ignorado"
 
-#: rc.cpp:832
+#: rc.cpp:493
 msgid "Immediate Depth"
 msgstr "Profundidad inmediata"
 
@@ -1836,7 +1844,7 @@ msgstr "Importando elementos"
 msgid "Incomplete"
 msgstr "Incompleto"
 
-#: rc.cpp:835
+#: rc.cpp:496
 msgid "Infinity Depth (recurse)"
 msgstr "Profundidad infinita (recursivo)"
 
@@ -1848,7 +1856,7 @@ msgstr "Información acerca del kdesvn part"
 msgid "Infolist"
 msgstr "Lista de información"
 
-#: rc.cpp:898
+#: rc.cpp:460
 msgid "Insert Textfile"
 msgstr "Insertar Fichero de Texto"
 
@@ -1856,15 +1864,15 @@ msgstr "Insertar Fichero de Texto"
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Insertadas %v entradas de registro no cacheadas de %m."
 
-#: rc.cpp:550
+#: rc.cpp:757
 msgid "Is created repository compatible to subversion prior 1.4"
 msgstr "Creado repositorio compatible con subversion anterior a 1.4"
 
-#: rc.cpp:559
+#: rc.cpp:766
 msgid "Is created repository compatible to subversion prior 1.5"
 msgstr "Creado repositorio compatible con subversion anterior a 1.5"
 
-#: rc.cpp:568
+#: rc.cpp:775
 #, fuzzy
 msgid "Is created repository compatible to subversion prior 1.6"
 msgstr "Creado repositorio compatible con subversion anterior a 1.4"
@@ -1873,27 +1881,27 @@ msgstr "Creado repositorio compatible con subversion anterior a 1.4"
 msgid "Issuer name"
 msgstr "Nombre del emisor"
 
-#: rc.cpp:787
+#: rc.cpp:808
 msgid "Item"
 msgstr "Elemento"
 
-#: rc.cpp:259
+#: rc.cpp:117
 msgid "Item needs lock:"
 msgstr "Elementos que necesitan bloqueo:"
 
-#: rc.cpp:116
+#: rc.cpp:72
 msgid "Items sortorder is case sensitive"
 msgstr "El orden de los elementos es sensible a mayúsculas"
 
-#: rc.cpp:625
+#: rc.cpp:712
 msgid "Just dry run without modifications"
 msgstr "Ejecutar simulacro sin modificar nada"
 
-#: rc.cpp:89
+#: rc.cpp:403
 msgid "KIO can overwrite"
 msgstr ""
 
-#: rc.cpp:75
+#: rc.cpp:389
 msgid "KIO operations use standard logmessage"
 msgstr "Operaciones KIO usan mensaje de registro estándar"
 
@@ -1901,7 +1909,7 @@ msgstr "Operaciones KIO usan mensaje de registro estándar"
 msgid "Kdesvn Handbook"
 msgstr "Manual de Kdesvn"
 
-#: rc.cpp:904
+#: rc.cpp:466
 msgid "Keep locks"
 msgstr "Mantener bloqueos"
 
@@ -1925,7 +1933,7 @@ msgstr ""
 "LastChangedRevision</b> La última revisión en la que se cambió el objeto."
 "<br><b>Id</b> Un resumen compacto de las 4 palabras clave anteriores."
 
-#: rc.cpp:445
+#: rc.cpp:847
 #, fuzzy
 msgid "Known repositories"
 msgstr "Ningún repositorio abierto"
@@ -1957,11 +1965,11 @@ msgstr "Último confirmado"
 msgid "Last revision"
 msgstr "Última revisión"
 
-#: rc.cpp:892
+#: rc.cpp:454
 msgid "Last used log messages"
 msgstr "Últimos mensajes de registro usados:"
 
-#: rc.cpp:368
+#: rc.cpp:126
 msgid "Left to right"
 msgstr "De izquierda a derecha"
 
@@ -1969,15 +1977,15 @@ msgstr "De izquierda a derecha"
 msgid "Limit log output to <number>"
 msgstr "Limitar salida de registro a <number>"
 
-#: rc.cpp:574
+#: rc.cpp:901
 msgid "Line"
 msgstr "Línea"
 
-#: rc.cpp:802
+#: rc.cpp:823
 msgid "List entries"
 msgstr "Listar entradas"
 
-#: rc.cpp:217
+#: rc.cpp:350
 msgid "List items next commit will send or not"
 msgstr "Elementos listados en la última confirmación se enviarán o no"
 
@@ -1993,11 +2001,11 @@ msgstr "Carga un fichero de volcado en un repositorio."
 msgid "Load dump into repository"
 msgstr "Cargar volcado hacia repositorio"
 
-#: rc.cpp:481
+#: rc.cpp:565
 msgid "Load into folder:"
 msgstr "Cargar a carpeta:"
 
-#: rc.cpp:487
+#: rc.cpp:571
 msgid "Load into repository:"
 msgstr "Cargar hacia el repositorio:"
 
@@ -2013,7 +2021,7 @@ msgstr "Cargando un volcado en un repositorio."
 msgid "Loading dump finished."
 msgstr "Carga finalizada."
 
-#: rc.cpp:256
+#: rc.cpp:114
 msgid "Local changed items:"
 msgstr "Elementos locales modificados:"
 
@@ -2049,7 +2057,7 @@ msgstr "Elemento bloqueado"
 msgid "Locked by"
 msgstr "Bloqueado por"
 
-#: rc.cpp:235
+#: rc.cpp:93
 msgid "Locked items:"
 msgstr "Elementos bloqueados:"
 
@@ -2065,7 +2073,7 @@ msgstr "Bloqueando"
 msgid "Log cache holds %1 logentries and consumes %2 on disk."
 msgstr ""
 
-#: rc.cpp:205
+#: rc.cpp:338
 msgid "Log follows node changes"
 msgstr "El registro muestra los cambios en los nodos"
 
@@ -2081,7 +2089,7 @@ msgstr "Caché de registros"
 msgid "Logmessage for revision %1"
 msgstr "Mensaje de registro para la revisión %1"
 
-#: rc.cpp:214
+#: rc.cpp:347
 msgid "Logs always reads list of changed files"
 msgstr "Los registros siempre leen la lista de ficheros cambiados"
 
@@ -2089,7 +2097,7 @@ msgstr "Los registros siempre leen la lista de ficheros cambiados"
 msgid "Logs follow node changes"
 msgstr "Los registros muestran los cambios en los nodos"
 
-#: rc.cpp:45 rc.cpp:430
+#: rc.cpp:45 rc.cpp:538
 msgid "Main Toolbar"
 msgstr "Barra de herramientas Principal"
 
@@ -2101,15 +2109,15 @@ msgstr "Realiza la operación recursivamente."
 msgid "Making update - hit cancel for abort"
 msgstr "Actualizando - pulse cancelar para abortar"
 
-#: rc.cpp:868
+#: rc.cpp:430
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr "Marca todos los elementos sin versionar para añadirlos."
 
-#: rc.cpp:232
+#: rc.cpp:90
 msgid "Mark changed and locked items colored"
 msgstr "Marcar elementos modificados y bloqueados con colores"
 
-#: rc.cpp:113
+#: rc.cpp:69
 msgid "Mark item status with icon overlay"
 msgstr "Marcar estado del elemento superponiendo un dibujo en el icono"
 
@@ -2117,7 +2125,7 @@ msgstr "Marcar estado del elemento superponiendo un dibujo en el icono"
 msgid "Mark resolved"
 msgstr "Marcar resueltos"
 
-#: rc.cpp:104
+#: rc.cpp:60
 msgid "Mark subversion states with an overlayed icon"
 msgstr "Marcar estados de subversion superponiendo dibujos en iconos"
 
@@ -2129,11 +2137,11 @@ msgstr "Marcando ficheros o directorios como resueltos"
 msgid "Marking resolved"
 msgstr "Marcando resueltos"
 
-#: rc.cpp:122
+#: rc.cpp:78
 msgid "Maximum logmessages in history:"
 msgstr "Máximo número de mensajes de registro en el historial:"
 
-#: rc.cpp:739 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125
+#: rc.cpp:628 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125
 msgid "May existing unversioned items ovewritten"
 msgstr "Pueden existir elementos sin versionar sobreescritos"
 
@@ -2166,7 +2174,7 @@ msgstr "El proceso de fusionado no se ha podido iniciar, chequear comando."
 msgid "Merge..."
 msgstr "Fusionar..."
 
-#: rc.cpp:607
+#: rc.cpp:694
 msgid "MergeSettings"
 msgstr "Configuración del Fusionado"
 
@@ -2182,11 +2190,11 @@ msgstr "Fusionando elementos"
 msgid "Message"
 msgstr "Mensaje"
 
-#: rc.cpp:54
+#: rc.cpp:368
 msgid "Minimum log lines to show:"
 msgstr "Líneas de registro mínimas a mostrar:"
 
-#: rc.cpp:253
+#: rc.cpp:111
 msgid "Missed items:"
 msgstr "Elementos perdidos:"
 
@@ -2243,7 +2251,7 @@ msgstr "Moviendo elementos"
 msgid "Moving/Rename item "
 msgstr "Mover/Renombrar elemento"
 
-#: rc.cpp:688
+#: rc.cpp:655
 msgid "N&umber"
 msgstr "N&úmero"
 
@@ -2289,6 +2297,12 @@ msgstr ""
 "No hay caché de registros posible debido a base de datos defectuosa o red no "
 "disponible."
 
+#: rc.cpp:374
+#, fuzzy
+msgctxt "no limit"
+msgid "No minimum"
+msgstr "Ningún mínimo"
+
 #: kdesvnview.cpp:205
 msgid "No repository open"
 msgstr "Ningún repositorio abierto"
@@ -2323,7 +2337,7 @@ msgstr "No se rellena la caché de registros porque la red está deshabilitada"
 msgid "Not versioned"
 msgstr "No versionado"
 
-#: rc.cpp:238
+#: rc.cpp:96
 msgid "Not versioned items:"
 msgstr "Elementos no versionados:"
 
@@ -2343,11 +2357,11 @@ msgstr "Nada que confirmar."
 msgid "Nothing to merge."
 msgstr "Nada que fusionar."
 
-#: rc.cpp:709
+#: rc.cpp:676
 msgid "Number"
 msgstr "Número"
 
-#: rc.cpp:676
+#: rc.cpp:610
 msgid "OK"
 msgstr "OK"
 
@@ -2381,7 +2395,7 @@ msgstr "Abrir con..."
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Abrir un fichero con un certificado #PKCS12"
 
-#: rc.cpp:751
+#: rc.cpp:640
 msgid "Open after job"
 msgstr "Abrir al terminar"
 
@@ -2401,7 +2415,7 @@ msgstr "Abre todas las ramas del árbol de ficheros"
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "Abre el repositorio desde el que se obtuvo la actual copia de trabajo"
 
-#: rc.cpp:895
+#: rc.cpp:457
 msgid "Or insert one of the last:"
 msgstr "O inserte uno de los últimos:"
 
@@ -2430,7 +2444,7 @@ msgstr ""
 msgid "Output the content of specified files or URLs."
 msgstr "Muestra el contenido de ficheros o URLs específicos."
 
-#: rc.cpp:616
+#: rc.cpp:703
 msgid "Output to:"
 msgstr "Salida hacia:"
 
@@ -2438,7 +2452,7 @@ msgstr "Salida hacia:"
 msgid "Overview about cache database content"
 msgstr ""
 
-#: rc.cpp:742 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124
+#: rc.cpp:631 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124
 msgid "Overwrite existing"
 msgstr "Sobreescribir existente"
 
@@ -2459,15 +2473,15 @@ msgstr "Árbol de revisiones parcial"
 msgid "Password"
 msgstr "Contraseña:"
 
-#: rc.cpp:850
+#: rc.cpp:505
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: rc.cpp:475 rc.cpp:490
+#: rc.cpp:559 rc.cpp:574
 msgid "Path to load the dump into (see contexthelp)"
 msgstr "Camino destino del volcado (ver ayuda contextual)"
 
-#: rc.cpp:532
+#: rc.cpp:739
 msgid "Path to repository:"
 msgstr "Camino al repositorio:"
 
@@ -2483,16 +2497,16 @@ msgstr "Por favor, compruebe que 'dot' está instalado (paquete GraphViz)."
 msgid "Please enter your password below."
 msgstr "Por favor, introduzca su contraseña abajo."
 
-#: rc.cpp:286
+#: rc.cpp:188
 msgid "Prefer external merge program"
 msgstr "Se prefiere un programa de fusionado externo"
 
-#: rc.cpp:472
+#: rc.cpp:841
 #, fuzzy
 msgid "Prefixes to filter out in revision tree"
 msgstr "Árbol de revisiones parcial"
 
-#: rc.cpp:772
+#: rc.cpp:793
 msgid "Previous entries"
 msgstr "Entradas previas"
 
@@ -2516,7 +2530,7 @@ msgstr "Último cambio de propiedad"
 msgid "Property modified"
 msgstr "Propiedad modificada"
 
-#: rc.cpp:667
+#: rc.cpp:601
 msgid "Property name:"
 msgstr "Nombre de propiedad:"
 
@@ -2524,7 +2538,7 @@ msgstr "Nombre de propiedad:"
 msgid "Property reject file"
 msgstr "Fichero rechazado por propiedad"
 
-#: rc.cpp:670
+#: rc.cpp:604
 msgid "Property value:"
 msgstr "Valor de propiedad:"
 
@@ -2533,7 +2547,7 @@ msgstr "Valor de propiedad:"
 msgid "Protected property"
 msgstr "Propiedad protegida"
 
-#: rc.cpp:6 rc.cpp:421
+#: rc.cpp:6 rc.cpp:529
 msgid "Quick settings"
 msgstr "Configuración rápida"
 
@@ -2541,11 +2555,11 @@ msgstr "Configuración rápida"
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: rc.cpp:208
+#: rc.cpp:341
 msgid "Read detailed change lists"
 msgstr "Leer listas de cambios detallados"
 
-#: rc.cpp:211
+#: rc.cpp:344
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
 "But if this feature is switched off, kdesvn may fail generating differences "
@@ -2563,7 +2577,7 @@ msgstr "Listo"
 msgid "Really delete these entries?"
 msgstr "¿Quiere eliminar realmente esas entradas?"
 
-#: rc.cpp:841
+#: rc.cpp:409
 msgid "Really revert these entries to pristine state?"
 msgstr "¿Quiere realmente revertir esas entradas a su estado original?"
 
@@ -2588,8 +2602,8 @@ msgstr "Borrar desde el repositorio"
 msgid "Recent opened URLs"
 msgstr "URLs abiertas recientemente"
 
-#: rc.cpp:628 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
-#: ksvnwidgets/depthselector.cpp:44
+#: rc.cpp:715 ksvnwidgets/depthselector.cpp:44
+#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
 msgid "Recursive"
 msgstr "Recursivo"
 
@@ -2639,7 +2653,7 @@ msgstr "Recolocar url"
 msgid "Relocate url of current working copy path to other url"
 msgstr "Posiciona la url de la copia de trabajo actual en un lugar nuevo"
 
-#: rc.cpp:241
+#: rc.cpp:99
 msgid "Remote changed items:"
 msgstr "Elementos remotos modificados:"
 
@@ -2651,7 +2665,7 @@ msgstr "Renombrar/mover"
 msgid "Renamed to %1 at revision %2"
 msgstr "Renombrado a %1 en la revisión %2"
 
-#: svnfrontend/svnactions.cpp:768 ksvnwidgets/models/commitmodelhelper.cpp:84
+#: ksvnwidgets/models/commitmodelhelper.cpp:84 svnfrontend/svnactions.cpp:768
 msgid "Replace"
 msgstr "Reemplazar"
 
@@ -2671,7 +2685,7 @@ msgstr "Reemplazando %1."
 msgid "Repository"
 msgstr "Repositorio"
 
-#: rc.cpp:466
+#: rc.cpp:868
 #, fuzzy
 msgid "Repository Settings"
 msgstr "Configuración del árbol de revisiones"
@@ -2680,11 +2694,11 @@ msgstr "Configuración del árbol de revisiones"
 msgid "Repository opened"
 msgstr "Repositorio abierto"
 
-#: rc.cpp:436
+#: rc.cpp:832
 msgid "Repository to copy:"
 msgstr "Repositorio a copiar:"
 
-#: rc.cpp:637
+#: rc.cpp:874
 msgid "Repository to dump:"
 msgstr "Repositorio a volcar:"
 
@@ -2720,7 +2734,7 @@ msgstr "Restaurado %1"
 msgid "Retrieving infos - hit cancel for abort"
 msgstr "Obteniendo infos - pulse cancelar para abortar"
 
-#: rc.cpp:838 svnfrontend/ccontextlistener.cpp:67
+#: rc.cpp:406 svnfrontend/ccontextlistener.cpp:67
 #: svnfrontend/svnactions.cpp:1775
 msgid "Revert"
 msgstr "Revertir"
@@ -2737,7 +2751,7 @@ msgstr "Revertir entradas"
 msgid "Revert failed"
 msgstr "Revertir ha fallado"
 
-#: rc.cpp:886
+#: rc.cpp:448
 msgid "Revert highlighted item"
 msgstr "Revertir elemento resaltado"
 
@@ -2749,15 +2763,15 @@ msgstr "Revertido %1"
 msgid "Reverting items"
 msgstr "Rehaciendo elementos"
 
-#: rc.cpp:862
+#: rc.cpp:424
 msgid "Review affected items"
 msgstr "Revisar elementos afectados"
 
-#: rc.cpp:220
+#: rc.cpp:353
 msgid "Review items before commit"
 msgstr "Revisar elementos antes de confirmar"
 
-#: rc.cpp:577 svnfrontend/models/logitemmodel.cpp:208
+#: rc.cpp:904 svnfrontend/models/logitemmodel.cpp:208
 msgid "Revision"
 msgstr "Revisión"
 
@@ -2773,22 +2787,22 @@ msgstr "Árbol de revisiones"
 msgid "Revision tree Settings"
 msgstr "Configuración del árbol de revisiones"
 
-#: rc.cpp:754
+#: rc.cpp:643
 msgid "RevisionButton"
 msgstr "RevisionButton"
 
-#: rc.cpp:682 svnfrontend/maintreewidget.cpp:1092
+#: rc.cpp:649 svnfrontend/maintreewidget.cpp:1092
 #: svnfrontend/maintreewidget.cpp:1137 svnfrontend/maintreewidget.cpp:1309
 #: svnfrontend/maintreewidget.cpp:1396 svnfrontend/maintreewidget.cpp:1466
 #: svnfrontend/svnactions.cpp:1473
 msgid "Revisions"
 msgstr "Revisiones"
 
-#: rc.cpp:362
+#: rc.cpp:120
 msgid "Revisiontree Settings"
 msgstr "Configuración del árbol de revisiones"
 
-#: rc.cpp:374
+#: rc.cpp:132
 msgid "Right to left"
 msgstr "De derecha a izquierda"
 
@@ -2800,22 +2814,21 @@ msgstr "Rotar a la derecha"
 msgid "Rotate counter-clockwise"
 msgstr "Rotar a la izquierda"
 
-#: rc.cpp:694
+#: rc.cpp:661
 msgid "S&TART"
 msgstr "S&TART"
 
-#: rc.cpp:715
+#: rc.cpp:682
 msgid "START"
 msgstr "START"
 
-#: svnfrontend/maintreewidget.cpp:894 svnfrontend/maintreewidget.cpp:1986
-#: svnfrontend/maintreewidget.cpp:2174
 #: svnfrontend/graphtree/revgraphview.cpp:959 svnfrontend/commandexec.cpp:211
-#: svnfrontend/commandexec.cpp:333
+#: svnfrontend/commandexec.cpp:333 svnfrontend/maintreewidget.cpp:894
+#: svnfrontend/maintreewidget.cpp:1986 svnfrontend/maintreewidget.cpp:2174
 msgid "SVN Error"
 msgstr "Error de SVN"
 
-#: rc.cpp:760 svnfrontend/svnlogdlgimp.cpp:134
+#: rc.cpp:781 svnfrontend/svnlogdlgimp.cpp:134
 msgid "SVN Log"
 msgstr "Mensaje de Registro SVN"
 
@@ -2848,7 +2861,7 @@ msgstr "Escaneando registro para %1"
 msgid "Schedule"
 msgstr "Planificación"
 
-#: rc.cpp:778 rc.cpp:781 svnfrontend/maintreewidget.cpp:2072
+#: rc.cpp:799 rc.cpp:802 svnfrontend/maintreewidget.cpp:2072
 msgid "See context menu for more actions"
 msgstr "Mirar menú contextual para más acciones"
 
@@ -2856,19 +2869,19 @@ msgstr "Mirar menú contextual para más acciones"
 msgid "Select browse revision"
 msgstr "Seleccionar revisión a visualizar"
 
-#: rc.cpp:700 rc.cpp:721
+#: rc.cpp:667 rc.cpp:688
 msgid "Select current working copy changes"
 msgstr "Seleccione cambios actuales en la copia de trabajo"
 
-#: rc.cpp:811 rc.cpp:814
+#: rc.cpp:472 rc.cpp:475
 msgid "Select depth of operation"
 msgstr "Seleccione profundidad de la operación"
 
-#: rc.cpp:910
+#: rc.cpp:415
 msgid "Select encoding:"
 msgstr "Seleccionar codificación:"
 
-#: rc.cpp:134
+#: rc.cpp:267
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 "Seleccionar si hay que comprobar actualizaciones cuando se abre una copia de "
@@ -2878,20 +2891,20 @@ msgstr ""
 msgid "Select item"
 msgstr "Elemento seleccionado"
 
-#: rc.cpp:871
+#: rc.cpp:433
 msgid "Select new items"
 msgstr "Seleccionar elementos nuevos"
 
-#: svnfrontend/fronthelpers/revisionbuttonimpl.cpp:61
 #: svnfrontend/fronthelpers/rangeinput_impl.cpp:185
+#: svnfrontend/fronthelpers/revisionbuttonimpl.cpp:61
 msgid "Select revision"
 msgstr "Seleccionar revisión"
 
-#: rc.cpp:796
+#: rc.cpp:817
 msgid "Select second revision with right mouse button"
 msgstr "Seleccione la segunda revisión con el botón secundario del ratón"
 
-#: rc.cpp:730
+#: rc.cpp:619
 msgid "Select target directory:"
 msgstr "Seleccione el directorio destino:"
 
@@ -2899,12 +2912,12 @@ msgstr "Seleccione el directorio destino:"
 msgid "Select textfile for insert"
 msgstr "Seleccione fichero de texto para insertar"
 
-#: rc.cpp:523
+#: rc.cpp:730
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr ""
 "Seleccione el tipo de almacenamiento del repositorio (FSFS o DB Berkeley)"
 
-#: rc.cpp:520
+#: rc.cpp:727
 msgid "Select type of storage"
 msgstr "Seleccione tipo de almacenamiento"
 
@@ -2916,7 +2929,7 @@ msgstr "Enviar informe de error para KDEsvn"
 msgid "Sending %1."
 msgstr "Enviando %1."
 
-#: rc.cpp:283
+#: rc.cpp:185
 msgid ""
 "Set if merge with external program is preferred and not subversions merge"
 msgstr ""
@@ -2974,7 +2987,7 @@ msgstr "Establecer versión al lado izquierdo de las diferencias"
 msgid "Set version as right side of diff"
 msgstr "Establecer versión al lado derecho de las diferencias"
 
-#: rc.cpp:92
+#: rc.cpp:48
 msgid "Settings"
 msgstr "Configuraciones"
 
@@ -2996,11 +3009,11 @@ msgstr "Actualiza la caché de registros para el repositorio actual"
 msgid "Settings for diff and merge"
 msgstr "Configuraciones para diff y merge"
 
-#: rc.cpp:298
+#: rc.cpp:200
 msgid "Setup an external program for conflict resolving"
 msgstr "Establecer un programa externo para resolver conflictos"
 
-#: rc.cpp:324
+#: rc.cpp:226
 msgid "Setup an external program for merging"
 msgstr "Establecer un programa externo para fusionado"
 
@@ -3008,28 +3021,28 @@ msgstr "Establecer un programa externo para fusionado"
 msgid "Should files with unknown node types be ignored"
 msgstr "Si ficheros con tipos de nodos desconocidos deben ser ignorados"
 
-#: rc.cpp:395
+#: rc.cpp:153
 msgid "Should kdesvn check content of logcache before starting the tree"
 msgstr ""
 "Si Kdesvn debería comprobar el contenido de la caché de registros antes de "
 "inicializar el árbol"
 
-#: rc.cpp:169
+#: rc.cpp:302
 msgid "Should kdesvn retrieves properties on selected item in repositories"
 msgstr ""
 "Si se deben obtener las propiedades del elemento seleccionado en los "
 "repositorios"
 
-#: rc.cpp:179
+#: rc.cpp:312
 msgid "Should subversion store passwords in default"
 msgstr "Debería subversion guardar contraseñas por defecto"
 
-#: rc.cpp:223
+#: rc.cpp:356
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
 "Si elementos no versionados se mostrarán o no en el dialogo de confirmación."
 
-#: rc.cpp:48
+#: rc.cpp:362
 msgid "Show a small window containing the log after command executed"
 msgstr "Muestra una pequeña ventana con el registro tras ejecutar el comando"
 
@@ -3041,11 +3054,11 @@ msgstr ""
 msgid "Show details about selected item"
 msgstr "Muestra detalles acerca del elemento seleccionado"
 
-#: rc.cpp:101
+#: rc.cpp:57
 msgid "Show file info"
 msgstr "Mostrar información del fichero"
 
-#: rc.cpp:775
+#: rc.cpp:796
 msgid "Show from HEAD"
 msgstr "Mostrar desde el HEAD"
 
@@ -3057,7 +3070,7 @@ msgstr "Mostrar línea"
 msgid "Show line number"
 msgstr "Mostrar número de línea"
 
-#: rc.cpp:51
+#: rc.cpp:365
 msgid "Show log after executing a command"
 msgstr "Mostrar registro tras ejecutar un comando"
 
@@ -3083,7 +3096,7 @@ msgstr "Muestra información sobre el plugin y no la aplicación aislada."
 msgid "Size"
 msgstr ""
 
-#: rc.cpp:95
+#: rc.cpp:51
 msgid "Size of Listviewicons"
 msgstr "Tamaño de los iconos de la lista"
 
@@ -3103,42 +3116,42 @@ msgstr "Ignorado objetivo perdido %1."
 msgid "Sorry - internal error!"
 msgstr "¡Lo siento - error interno!"
 
-#: rc.cpp:610
+#: rc.cpp:697
 msgid "Source 1:"
 msgstr "Fuente 1:"
 
-#: rc.cpp:613
+#: rc.cpp:700
 msgid "Source 2:"
 msgstr "Fuente 2:"
 
-#: rc.cpp:78
+#: rc.cpp:392
 msgid "Standard message:"
 msgstr "Mensaje estándar:"
 
-#: rc.cpp:137
+#: rc.cpp:270
 msgid "Start check for updates when open a working copy"
 msgstr ""
 "Iniciar comprobación de actualizaciones cuando se abre una copia de trabajo"
 
-#: rc.cpp:143
+#: rc.cpp:276
 msgid "Start fill log cache on open"
 msgstr "Inicio del relleno de la caché de registros al abrir"
 
-#: rc.cpp:140
+#: rc.cpp:273
 msgid "Start refresh the logcache for repository when networking enabled"
 msgstr ""
 "Inicio del refresco de la caché de registros para el repositorio cuando la "
 "red está habilitada"
 
-#: rc.cpp:763
+#: rc.cpp:784
 msgid "Start revision"
 msgstr "Revisión inicial"
 
-#: rc.cpp:655
+#: rc.cpp:892
 msgid "Start revision:"
 msgstr "Revisión inicial:"
 
-#: rc.cpp:685 svnfrontend/fronthelpers/rangeinput_impl.cpp:189
+#: rc.cpp:652 svnfrontend/fronthelpers/rangeinput_impl.cpp:189
 msgid "Start with revision"
 msgstr "Comenzar con la revisión"
 
@@ -3166,23 +3179,23 @@ msgstr "¿Robar bloqueo?"
 msgid "Stop updating the logcache"
 msgstr "Deteniendo actualización de la caché de registros"
 
-#: rc.cpp:706
+#: rc.cpp:673
 msgid "Stop with revision"
 msgstr "Detener con la revisión"
 
-#: rc.cpp:856
+#: rc.cpp:511
 msgid "Store password"
 msgstr "Almacenar contraseña"
 
-#: rc.cpp:185
+#: rc.cpp:318
 msgid "Store passwords for remote connections"
 msgstr "Almacenar contraseñas para conexiones remotas"
 
-#: rc.cpp:196
+#: rc.cpp:329
 msgid "Store passwords into KDE Wallet"
 msgstr "Almacenar contraseñas en Cartera KDE"
 
-#: rc.cpp:182
+#: rc.cpp:315
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
 "any passwords, but the subversion itself inside the configuration area of "
@@ -3206,15 +3219,15 @@ msgstr ""
 "de incidencia. La cadena debe contener <b>%BUGID%</b> el cual es reemplazado "
 "con el número de error de la incidencia."
 
-#: rc.cpp:9 rc.cpp:412 kdesvn_part.cpp:372
+#: rc.cpp:9 rc.cpp:520 kdesvn_part.cpp:372
 msgid "Subversion"
 msgstr "Subversion"
 
-#: rc.cpp:409
+#: rc.cpp:517
 msgid "Subversion Admin"
 msgstr "Administración de Subversion"
 
-#: rc.cpp:131 kdesvn_part.cpp:372
+#: rc.cpp:264 kdesvn_part.cpp:372
 msgid "Subversion Settings"
 msgstr "Configuración Subversion"
 
@@ -3223,7 +3236,7 @@ msgstr "Configuración Subversion"
 msgid "Subversion settings"
 msgstr "Configuración Subversion"
 
-#: rc.cpp:42 rc.cpp:427
+#: rc.cpp:42 rc.cpp:535
 msgid "Subversion toolbar"
 msgstr "Barra de herramientas de Subversion"
 
@@ -3290,7 +3303,7 @@ msgstr ""
 "b> (o un tipo MIME ausente) es tratado como texto. Cualquier otra cosa es "
 "tratada como binario."
 
-#: rc.cpp:57
+#: rc.cpp:371
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
@@ -3310,7 +3323,7 @@ msgstr ""
 "Esta propiedad no se puede establecer por los usuarios.\n"
 "Rechazándola."
 
-#: rc.cpp:377
+#: rc.cpp:135
 msgid "Top to bottom"
 msgstr "De arriba a abajo"
 
@@ -3341,7 +3354,7 @@ msgstr ""
 msgid "Type"
 msgstr "Tipo"
 
-#: rc.cpp:517
+#: rc.cpp:724
 msgid "Type of repository:"
 msgstr "Tipo de repositorio:"
 
@@ -3391,7 +3404,7 @@ msgstr "Desbloqueado"
 msgid "Unlocking items"
 msgstr "Desbloqueando elementos"
 
-#: rc.cpp:874
+#: rc.cpp:436
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr "Desmarca todos los elementos sin versionar para no añadirlos."
 
@@ -3399,7 +3412,7 @@ msgstr "Desmarca todos los elementos sin versionar para no añadirlos."
 msgid "Unselect item"
 msgstr "Elemento no seleccionado"
 
-#: rc.cpp:877
+#: rc.cpp:439
 msgid "Unselect new items"
 msgstr "Deseleccionar elementos nuevos"
 
@@ -3411,7 +3424,7 @@ msgstr "Desactivar versión para diferencias"
 msgid "Unversioned"
 msgstr "No versionado"
 
-#: svnfrontend/ccontextlistener.cpp:73 svnfrontend/maintreewidget.cpp:556
+#: svnfrontend/maintreewidget.cpp:556 svnfrontend/ccontextlistener.cpp:73
 msgid "Update"
 msgstr "Actualizado"
 
@@ -3444,43 +3457,43 @@ msgstr "Actualizar a HEAD"
 msgid "Update to revision..."
 msgstr "Actualizar a la revisión..."
 
-#: rc.cpp:199
+#: rc.cpp:332
 msgid "Use an internal password cache"
 msgstr "Utilizar una clave de caché interna"
 
-#: rc.cpp:646
+#: rc.cpp:883
 msgid "Use deltas"
 msgstr "Usar deltas"
 
-#: rc.cpp:280
+#: rc.cpp:182
 msgid "Use external diff display"
 msgstr "Usar visor de diferencias externo"
 
-#: rc.cpp:631
+#: rc.cpp:718
 msgid "Use external merge not subversions merge"
 msgstr "Usar fusionado externo y no el de subversion"
 
-#: rc.cpp:202
+#: rc.cpp:335
 msgid "Use internal password cache"
 msgstr "Utilizar clave de caché interna"
 
-#: rc.cpp:128
+#: rc.cpp:84
 msgid "Use navigation panel"
 msgstr "Utilice el panel de navegacion"
 
-#: rc.cpp:511
+#: rc.cpp:595
 msgid "Use post-commit hook"
 msgstr "Utilizar hook de post-commit"
 
-#: rc.cpp:508
+#: rc.cpp:592
 msgid "Use pre-commit hook"
 msgstr "Utilizar hook de pre-commit"
 
-#: rc.cpp:853
+#: rc.cpp:508
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
-#: rc.cpp:496
+#: rc.cpp:580
 msgid "Uuid action"
 msgstr "Acción uuid"
 
@@ -3504,11 +3517,11 @@ msgstr "Ver"
 msgid "View and modify properties"
 msgstr "Ver y modificar propiedades"
 
-#: rc.cpp:703 rc.cpp:724
+#: rc.cpp:670 rc.cpp:691
 msgid "WORKING"
 msgstr "WORKING"
 
-#: rc.cpp:172
+#: rc.cpp:305
 msgid ""
 "When browsing kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -3522,7 +3535,7 @@ msgstr ""
 "puede ser muy lento. Por eso, si la conexión de red es lenta o se cuelga a "
 "menudo mientras se navega se debería desactivar esta opción."
 
-#: rc.cpp:149
+#: rc.cpp:282
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>But due this listings/updating on folders containing lot of "
@@ -3534,19 +3547,19 @@ msgstr ""
 "carpetas con muchos elementos puede ser lento. Por eso sólo se debería "
 "seleccionar si se tienen repositorios conteniendo muchas de tales entradas."
 
-#: rc.cpp:146
+#: rc.cpp:279
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
 "Kdesvn puede comprobar esta propiedad mientras escucha en copias de trabajo"
 
-#: rc.cpp:188
+#: rc.cpp:321
 msgid ""
 "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Al guardar contraseñas, ¿hacerlo en la Cartera de KDE en vez de en almacenes "
 "de Subversion?"
 
-#: rc.cpp:398
+#: rc.cpp:156
 msgid ""
 "When starting the tree generation and reading data from log cache kdesvn may "
 "check for newer items in repository if network is enabled. \n"
@@ -3560,7 +3573,7 @@ msgstr ""
 "Pero ésto puede retardar la generación del árbol y por lo tanto está "
 "desactivado por defecto."
 
-#: rc.cpp:155
+#: rc.cpp:288
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
@@ -3596,7 +3609,7 @@ msgid ""
 "Your names"
 msgstr "Mario Palomo Torrero"
 
-#: rc.cpp:643
+#: rc.cpp:880
 msgid "incremental Dump"
 msgstr "Volcado incremental"
 
@@ -3633,7 +3646,7 @@ msgstr "kdesvn: Mario Palomo Torrero"
 msgid "kdesvnaskpass"
 msgstr "kdesvnaskpass"
 
-#: rc.cpp:289
+#: rc.cpp:191
 msgid "see \"Whats this\" for details"
 msgstr "Ver \"¿Qué es ésto?\" para más detalles:"
 
@@ -3641,11 +3654,11 @@ msgstr "Ver \"¿Qué es ésto?\" para más detalles:"
 msgid "ssh-askpass for kdesvn"
 msgstr "ssh-askpass para KDEsvn"
 
-#: rc.cpp:595
+#: rc.cpp:547
 msgid "this long text"
 msgstr "este largo texto"
 
-#: rc.cpp:598
+#: rc.cpp:550
 msgid "to"
 msgstr "hacia"
 
@@ -3659,9 +3672,6 @@ msgstr "elemento no versionado interrumpe la ejecución"
 
 #~ msgid "Help"
 #~ msgstr "Ayuda"
-
-#~ msgid "No minimum"
-#~ msgstr "Ningún mínimo"
 
 #~ msgid "SSH password"
 #~ msgstr "Contraseña SSH"

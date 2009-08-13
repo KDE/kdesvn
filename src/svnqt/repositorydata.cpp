@@ -93,7 +93,7 @@ svn_error_t*RepositoryData::cancel_func(void*baton)
 {
     RepositoryListener*m_L = (RepositoryListener*)baton;
     if (m_L && m_L->isCanceld()) {
-        return svn_error_create (SVN_ERR_CANCELLED, 0, QString::FROMUTF8("Cancelled by user.").TOUTF8());
+        return svn_error_create (SVN_ERR_CANCELLED, 0, QObject::tr("Cancelled by user.").TOUTF8());
     }
     return SVN_NO_ERROR;
 }
@@ -177,7 +177,7 @@ svn_error_t * RepositoryData::CreateOpen(const CreateRepoParameter&params)
 
     if (svn_path_is_url(repository_path)) {
         return svn_error_createf(SVN_ERR_CL_ARG_PARSING_ERROR, NULL,
-            "'%s' is an URL when it should be a path",repository_path);
+            QObject::tr("'%s' is an URL when it should be a path").TOUTF8(),repository_path);
     }
     SVN_ERR(svn_repos_create(&m_Repository, repository_path,
             NULL, NULL,config, fs_config,m_Pool));
@@ -194,7 +194,7 @@ svn_error_t * RepositoryData::CreateOpen(const CreateRepoParameter&params)
 svn_error_t* RepositoryData::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
 {
     if (!m_Repository) {
-        return svn_error_create(SVN_ERR_CANCELLED,0,"No repository selected.");
+        return svn_error_create(SVN_ERR_CANCELLED,0,QObject::tr("No repository selected.").TOUTF8());
     }
     Pool pool;
     svn::stream::SvnFileOStream out(output);
@@ -211,7 +211,7 @@ svn_error_t* RepositoryData::dump(const QString&output,const svn::Revision&start
 svn_error_t* RepositoryData::loaddump(const QString&dump,svn_repos_load_uuid uuida, const QString&parentFolder, bool usePre, bool usePost)
 {
     if (!m_Repository) {
-        return svn_error_create(SVN_ERR_CANCELLED,0,"No repository selected.");
+        return svn_error_create(SVN_ERR_CANCELLED,0,QObject::tr("No repository selected.").TOUTF8());
     }
     svn::stream::SvnFileIStream infile(dump);
     RepoOutStream backstream(this);

@@ -1,3 +1,5 @@
+include (SvnqtMacros)
+
 SET(SOURCES
     apr.cpp
     client_annotate.cpp
@@ -126,6 +128,26 @@ IF (WIN32)
     SET(_SVNQT_EXPORT "__declspec(dllexport)")
 ENDIF (WIN32)
 
+IF (QT_LUPDATE_EXECUTABLE)
+    MESSAGE(STATUS "Setting up language target")
+
+    FILE(GLOB _LANGFILES lang/*.ts)
+    FOREACH(_p ${_LANGFILES})
+        SET(LANGFILES "-ts ${_p} ${LANGFILES}")
+    ENDFOREACH(_p)
+    CONFIGURE_FILE(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/update-language.sh.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
+    IMMEDIATE
+    @ONLY)
+    ADD_CUSTOM_TARGET(svnqt_update_translation
+        "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        VERBATIM
+    )
+    ADD_SUBDIRECTORY(lang)
+ENDIF (QT_LUPDATE_EXECUTABLE)
+
 CONFIGURE_FILE(
     "${CMAKE_CURRENT_SOURCE_DIR}/svnqt_defines.hpp.in"
     "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp"
@@ -147,7 +169,7 @@ ENDIF(WIN32)
 
 SET(LIB_MAJOR 6)
 SET(LIB_MINOR 0)
-SET(LIB_RELEASE 0)
+SET(LIB_RELEASE 1)
 
 SET(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
 

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2008 by Rajko Albrecht                             *
+ *   Copyright (C) 2006-2009 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

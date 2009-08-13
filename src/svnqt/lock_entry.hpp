@@ -1,6 +1,6 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
- * (C) 2005-2007 by Rajko Albrecht (ral@alwins-world.de)
+ * Copyright (C) 2005-2009 by Rajko Albrecht (ral@alwins-world.de)
  * http://kdesvn.alwins-world.de
  */
 /*

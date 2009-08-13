@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007 by Rajko Albrecht  ral@alwins-world.de             *
+ *   Copyright (C) 2007-2009 by Rajko Albrecht  ral@alwins-world.de        *
  *   http://kdesvn.alwins-world.de/                                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

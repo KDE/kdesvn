@@ -8,35 +8,35 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-13 12:06+0300\n"
-"PO-Revision-Date: 2009-02-12 22:34+0900\n"
-"Last-Translator: Muneyuki Noguchi <nogu.dev@gmail.com>\n"
-"Language-Team: Japanese\n"
+"PO-Revision-Date: 2009-08-14 18:34+0900\n"
+"Last-Translator: Muneyuki Noguchi\n"
+"Language-Team: 日本語 <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.2\n"
+"X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: settings/cmdexecsettings_impl.cpp:35
-#, fuzzy
 msgid " line"
 msgid_plural " lines"
 msgstr[0] "行"
 
 #: settings/cmdexecsettings_impl.cpp:37
-#, fuzzy
 msgid " lines"
 msgstr "行"
 
 #: svnfrontend/commandexec.cpp:420
 msgid "\"GET\" requires output file!"
-msgstr "「GET」は出力ファイルを必要とします!"
+msgstr "「GET」は出力ファイルを必要とします！"
 
 #: svnfrontend/ccontextlistener.cpp:373
 msgid ""
 "%1\n"
 "Realy store password as plain text?"
 msgstr ""
+"%1\n"
+"本当にパスワードをプレーンテキストとして保存しますか？"
 
 #: svnfrontend/models/logmodelhelper.cpp:52
 msgid "%1 at revision %2"
@@ -58,40 +58,35 @@ msgstr "%1 が転送されました。"
 #: svnfrontend/graphtree/revisiontree.cpp:274
 #: svnfrontend/graphtree/revisiontree.cpp:323
 msgid "%1<br>Check change entry %2 of %3"
-msgstr ""
+msgstr "%1<br>変更されたエントリ %3 のうち %2 を確認しています"
 
 #: svnfrontend/stopdlg.cpp:201
-#, fuzzy
 msgid "%p% of %1"
-msgstr "%2 のうち %1"
+msgstr "%1 のうち %p%"
 
 #: kdesvn.cpp:91
 msgid "&Bookmarks"
-msgstr ""
+msgstr "ブックマーク(&B)"
 
 #: svnfrontend/svntreeview.cpp:130
-#, fuzzy
 msgid "&Copy Here"
-msgstr "ここにコピー"
+msgstr "ここにコピー(&C)"
 
 #: rc.cpp:514
-#, fuzzy
 msgid "&File"
-msgstr "フォルダ"
+msgstr "ファイル(&F)"
 
 #: rc.cpp:27 rc.cpp:532
 msgid "&Help"
-msgstr ""
+msgstr "ヘルプ(&H)"
 
 #: svnfrontend/svntreeview.cpp:126
-#, fuzzy
 msgid "&Move Here"
-msgstr "ここにコピー"
+msgstr "ここに移動(&M)"
 
 #: rc.cpp:526
-#, fuzzy
 msgid "&Settings"
-msgstr "設定"
+msgstr "設定(&S)"
 
 #: main.cpp:40
 msgid "(C) 2005-2007 Rajko Albrecht"
@@ -103,7 +98,7 @@ msgstr "(C) 2005-2008 Rajko Albrecht"
 
 #: svnfrontend/importdir_logmsg.cpp:85
 msgid "(Last part)"
-msgstr ""
+msgstr "（最後の部分）"
 
 #: ksvnwidgets/models/commitmodelhelper.cpp:88
 msgid "(Un)Lock"
@@ -123,7 +118,7 @@ msgstr "Start に対して -1"
 
 #: rc.cpp:553
 msgid "/there/"
-msgstr ""
+msgstr "/そこへ/"
 
 #: svnfrontend/graphtree/revgraphview.cpp:552
 msgid "<b>Author</b>%1%2%3"
@@ -184,6 +179,20 @@ msgid ""
 "not already present; those subdirectories' this_dir entries will have depth-"
 "infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
 msgstr ""
+"<p ><b>深さの種類</b>: </p>\n"
+"<p ><i>空の深さ</i><br />\n"
+"名前の付けられたディレクトリのみで、エントリなし。まだ存在しない、どのファイ"
+"ルやサブディレクトリも 更新は引き込みません。</p>\n"
+"<p><i>ファイルの深さ</i><br />フォルダとそのファイルの子だが、サブディレクト"
+"リではない。まだ存在しない、どのファイルも更新は引き込みますが、サブディレク"
+"トリにはしません。 </p>\n"
+"<p><i>直ぐの深さ</i><br />フォルダとそのエントリ。まだ存在しない、どのファイ"
+"ルやディレクトリも更新は引き込みます。これらのサブティレクトリのエントリは "
+"depth-empty を持ちます。</p>\n"
+"<p>\n"
+"<i>無限の深さ</i><br />まだ存在しない、どのファイルやサブディレクトリも更新は"
+"引き込みます。これらのサブディレクトリの this_dir エントリは depth-infinity "
+"を持ちます。<br />1.5 前の標準の更新における振る舞いに等しいです。</p>"
 
 #: rc.cpp:243
 #, no-c-format
@@ -234,7 +243,7 @@ msgstr ""
 "ために kdesvn は一時エクスポートを行うかパラメータを正しい値で（必要ならば）"
 "取得し満たします。%1 は開始リビジョンの中身で満たされ、%2 は終了リビジョンの"
 "中身で満たされます。大きな再帰的 diff ではこれは非常に遅くなるかもしれませ"
-"ん!\n"
+"ん！\n"
 "</p>"
 
 #: rc.cpp:63
@@ -266,14 +275,14 @@ msgstr ""
 "モートのロックがわかるかもしれません。\n"
 "</p>\n"
 "<p align=\"left\"><i>注意してください: これにより一覧表にするのが本当に遅くな"
-"るかもしれません!</i></p>"
+"るかもしれません！</i></p>"
 
 #: rc.cpp:544
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">名前変更</p>"
 
 #: rc.cpp:204
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "<p>\n"
 "Enter how kdesvn should call the conflict resolver program. The form is\n"
@@ -395,9 +404,10 @@ msgid ""
 "nobr>"
 msgstr ""
 "改行で区切られた、モジュール指定子のリストで、それぞれが相対ディレクトリパ"
-"ス、オプションのリビジョンフラグと URL からなります。例えば:<br><nobr><b>foo "
-"http://example.com/repos/projectA</b></nobr><br><nobr><b>foo/bar -r 1234 "
-"http://example.com/repos/projectB</b></nobr>"
+"ス、オプションのリビジョンフラグと URL からなります。例えば："
+"<br><nobr><b>foo http://example.com/repos/projectA</b></"
+"nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+"nobr>"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:116
 #: svnfrontend/propertiesdlg.cpp:208 svnfrontend/propertiesdlg.cpp:257
@@ -414,7 +424,7 @@ msgstr "kdesvn part について"
 
 #: svnfrontend/svnactions.cpp:732
 msgid "Absent"
-msgstr ""
+msgstr "不在"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:58
 msgid "Accept permanently"
@@ -434,9 +444,8 @@ msgstr "アクション"
 
 #: ksvnwidgets/models/commitmodelhelper.cpp:68
 #: svnfrontend/maintreewidget.cpp:538
-#, fuzzy
 msgid "Add"
-msgstr "追加されました"
+msgstr "追加"
 
 #: svnfrontend/svnactions.cpp:1017
 msgid "Add and Commit"
@@ -448,7 +457,7 @@ msgstr "属性を追加"
 
 #: svnfrontend/maintreewidget.cpp:536
 msgid "Add selected files/dirs"
-msgstr "選択されたファイルやディレクトリを追加"
+msgstr "選択されたファイルやディレクトリを追加(&A)"
 
 #: svnfrontend/maintreewidget.cpp:539
 msgid "Add selected files/dirs recursive"
@@ -456,7 +465,7 @@ msgstr "選択されたファイルやディレクトリを再帰的に追加"
 
 #: kdesvn.cpp:145
 msgid "Add ssh identities to ssh-agent"
-msgstr "ssh-agent に ssh identity を追加"
+msgstr "ssh-agent に ssh identity を追加(&A)"
 
 #: svnfrontend/ccontextlistener.cpp:63
 msgid "Add to revision control"
@@ -480,7 +489,7 @@ msgstr "リポジトリ内に追加しました"
 
 #: rc.cpp:102
 msgid "Added items:"
-msgstr "追加された項目:"
+msgstr "追加された項目："
 
 #: kiosvn/kiolistener.cpp:209
 msgid "Adding %1."
@@ -506,7 +515,7 @@ msgstr "追加"
 
 #: rc.cpp:309
 msgid "Always get properties on networked repositories"
-msgstr "ネットワークに接続されたリポジトリ上の属性を常に得る"
+msgstr "ネットワークに接続されたリポジトリ上の属性を常に得る(&W)"
 
 #: rc.cpp:826 svnfrontend/svnlogdlgimp.cpp:503
 msgid "Annotate"
@@ -550,11 +559,11 @@ msgstr ""
 
 #: svnfrontend/maintreewidget.cpp:487
 msgid "Blame"
-msgstr "ブレイム"
+msgstr "ブレイム(&B)"
 
 #: svnfrontend/maintreewidget.cpp:490
 msgid "Blame range"
-msgstr "ブレイム範囲"
+msgstr "ブレイム範囲(&G)"
 
 #: svnfrontend/svnactions.cpp:1159
 msgid "Both entries seems to be the same, can not diff."
@@ -566,7 +575,7 @@ msgstr "両方のエントリは同じようです。マージしません。"
 
 #: svnfrontend/svnactions.cpp:2021
 msgid "Both sources must be same type!"
-msgstr "両方のソースは同じ種類でなければなりません!"
+msgstr "両方のソースは同じ種類でなければなりません！"
 
 #: rc.cpp:129
 msgid "Bottom to top"
@@ -574,7 +583,7 @@ msgstr "下から上へ"
 
 #: svnfrontend/maintreewidget.cpp:1206
 msgid "Break lock or ignore missing locks?"
-msgstr "ロックを壊すか、欠けているロックを無視しますか?"
+msgstr "ロックを壊すか、欠けているロックを無視しますか？"
 
 #: svnfrontend/maintreewidget.cpp:521
 msgid "Browse folder for unversioned items and add them if wanted."
@@ -592,16 +601,15 @@ msgstr ""
 
 #: svnfrontend/svntreeview.cpp:132
 msgid "C&ancel"
-msgstr ""
+msgstr "キャンセル(&A)"
 
 #: svnfrontend/fillcachethread.cpp:114
 msgid "Cache filled up to revision %1"
 msgstr "リビジョン %1 までキャッシュが充填されました"
 
 #: rc.cpp:395
-#, fuzzy
 msgid "Can KIO overwrite existing files?"
-msgstr "既存のファイルを上書き"
+msgstr "既存のファイルを上書きできますか？"
 
 #: svnfrontend/svnactions.cpp:1107
 msgid "Can not do this diff because networking is disabled."
@@ -612,34 +620,32 @@ msgid "Can only switch one item at time"
 msgstr "一度に一つの項目だけ切り替えられます"
 
 #: kiosvn/kiosvn.cpp:296 kiosvn/kiosvn.cpp:357 kiosvn/kiosvn.cpp:495
-#, fuzzy
 msgid "Can only write on head revision!"
-msgstr "一度に一つの項目だけ切り替えられます"
+msgstr "head リビジョンにだけ書き込めます！"
 
 #: rc.cpp:613
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: svnfrontend/maintreewidget.cpp:1893
 msgid "Cannot import into multiple targets!"
-msgstr "複数の対象にインポートできません!"
+msgstr "複数の対象にインポートできません！"
 
 #: svnfrontend/maintreewidget.cpp:1919
-#, fuzzy
 msgid "Cannot import remote urls!"
-msgstr "リモートの対象にインポートできません!"
+msgstr "リモートの url にインポートできません！"
 
 #: svnfrontend/svnactions.cpp:723
 msgid "Canonical repository url"
-msgstr ""
+msgstr "基準リポジトリ url"
 
 #: svnfrontend/maintreewidget.cpp:494
 msgid "Cat head"
-msgstr "head を表示"
+msgstr "head を表示(&C)"
 
 #: svnfrontend/maintreewidget.cpp:497
 msgid "Cat revision..."
-msgstr "リビジョンを表示..."
+msgstr "リビジョンを表示(&R)..."
 
 #: svnfrontend/graphtree/revgraphview.cpp:801 svnfrontend/svnlogdlgimp.cpp:513
 msgid "Cat this version"
@@ -647,11 +653,11 @@ msgstr "このバージョンを出力"
 
 #: svnfrontend/maintreewidget.cpp:519
 msgid "Check for unversioned items"
-msgstr "バージョン付けされていない項目を調べる"
+msgstr "バージョン付けされていない項目を調べる(&F)"
 
 #: svnfrontend/maintreewidget.cpp:481
 msgid "Check for updates"
-msgstr "更新を確認"
+msgstr "更新を確認(&K)"
 
 #: svnfrontend/maintreewidget.cpp:482
 msgid ""
@@ -662,14 +668,13 @@ msgstr ""
 
 #: rc.cpp:285
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr "項目が「svn:needs-lock」属性セットをもっているかを調べる"
+msgstr "項目が「svn:needs-lock」属性セットをもっているかを調べる(&E)"
 
 #: rc.cpp:161
 msgid "Check logcache fill before reading tree"
-msgstr "ツリーを読み込む前にキャッシュが満たされているか確認する"
+msgstr "ツリーを読み込む前にキャッシュが満たされているか確認する(&L)"
 
 #: svnfrontend/maintreewidget.cpp:484
-#, fuzzy
 msgid "Check updates"
 msgstr "更新を確認"
 
@@ -701,7 +706,7 @@ msgstr "リポジトリをチェックアウト"
 
 #: svnfrontend/maintreewidget.cpp:590
 msgid "Checkout current repository path"
-msgstr "現在のリポジトリのパスをチェックアウト"
+msgstr "現在のリポジトリのパスをチェックアウト(&C)"
 
 #: rc.cpp:616
 msgid "Checkout info"
@@ -716,9 +721,8 @@ msgid "Clean logs"
 msgstr "ログをクリーンアップ"
 
 #: svnfrontend/database/dboverview.cpp:121
-#, fuzzy
 msgid "Clean repository cache"
-msgstr "新しいリポジトリを作成"
+msgstr "リポジトリのキャッシュをクリーンアップ"
 
 #: svnfrontend/svnactions.cpp:1891
 msgid "Cleaning up folder"
@@ -729,14 +733,12 @@ msgid "Cleanup"
 msgstr "クリーンアップ"
 
 #: urldlg.cpp:84
-#, fuzzy
 msgid "Clear"
 msgstr "クリーンアップ"
 
 #: svnfrontend/maintreewidget.cpp:2075
-#, fuzzy
 msgid "Click for navigate"
-msgstr "更新を確認"
+msgstr "ナビゲートするにはクリックしてください"
 
 #: rc.cpp:607
 msgid "Click for short info about pre-defined property name"
@@ -752,23 +754,23 @@ msgstr "色設定"
 
 #: rc.cpp:138
 msgid "Color for added items:"
-msgstr "追加した項目に対する色:"
+msgstr "追加した項目に対する色："
 
 #: rc.cpp:144
 msgid "Color for copied items:"
-msgstr "コピーした項目に対する色:"
+msgstr "コピーした項目に対する色："
 
 #: rc.cpp:141
 msgid "Color for deleted items:"
-msgstr "削除した項目に対する色:"
+msgstr "削除した項目に対する色："
 
 #: rc.cpp:150
 msgid "Color for modified items:"
-msgstr "変更した項目に対する色:"
+msgstr "変更した項目に対する色："
 
 #: rc.cpp:147
 msgid "Color for renamed items:"
-msgstr "名前変更した項目に対する色:"
+msgstr "名前変更した項目に対する色："
 
 #: rc.cpp:87
 msgid "ColorSettings"
@@ -793,9 +795,8 @@ msgid "Commit"
 msgstr "コミット"
 
 #: svnfrontend/svnactions.cpp:1053
-#, fuzzy
 msgid "Commit - hit cancel for abort"
-msgstr "コミットしています - 中止するにはキャンセルを押してください"
+msgstr "コミット- 中止するにはキャンセルを押してください"
 
 #: svnfrontend/ccontextlistener.cpp:79
 msgid "Commit Added"
@@ -836,9 +837,8 @@ msgid "Compatible to subversion prior 1.5"
 msgstr "subversion 1.5 以前と互換性がある"
 
 #: rc.cpp:778
-#, fuzzy
 msgid "Compatible to subversion prior 1.6"
-msgstr "subversion 1.4 以前と互換性がある"
+msgstr "subversion 1.6 以前と互換性がある"
 
 #: kdesvn_part.cpp:220
 msgid "Configure %1..."
@@ -850,11 +850,11 @@ msgstr "衝突"
 
 #: rc.cpp:194
 msgid "Conflict resolver program:"
-msgstr "衝突解消プログラム:"
+msgstr "衝突解消プログラム："
 
 #: rc.cpp:108
 msgid "Conflicted items:"
-msgstr "衝突した項目:"
+msgstr "衝突した項目："
 
 #: rc.cpp:913
 msgid "Content"
@@ -862,7 +862,7 @@ msgstr "内容"
 
 #: svnfrontend/svnactions.cpp:783
 msgid "Content last changed"
-msgstr "最後に変更した中身"
+msgstr "中身の最終変更"
 
 #: svnfrontend/svnactions.cpp:614
 msgid "Content of %1"
@@ -875,9 +875,8 @@ msgstr "リビジョン %2 で %1 にコピーされました"
 #: ksvnwidgets/models/commitmodelhelper.cpp:72
 #: svnfrontend/copymoveview_impl.cpp:56 svnfrontend/maintreewidget.cpp:479
 #: svnfrontend/ccontextlistener.cpp:64
-#, fuzzy
 msgid "Copy"
-msgstr "コピー元"
+msgstr "コピー"
 
 #: rc.cpp:541 svnfrontend/svnactions.cpp:2245 svnfrontend/svnactions.cpp:2270
 msgid "Copy / Move"
@@ -900,14 +899,12 @@ msgid "Copy or Moving entries"
 msgstr "エントリをコピーまたは移動します"
 
 #: askpass/kdesvn-askpass.cpp:35
-#, fuzzy
 msgid "Copyright (c) 2005-2009 Rajko Albrecht"
-msgstr "Copyright (c) 2005 Rajko Albrecht"
+msgstr "Copyright (c) 2005-2009 Rajko Albrecht"
 
 #: svnfrontend/svnactions.cpp:953
-#, fuzzy
 msgid "Could not change to folder %1\n"
-msgstr "url %1 を開けませんでした"
+msgstr "フォルダ %1 に移動できませんでした\n"
 
 #: kdesvn.cpp:179
 msgid "Could not find our part"
@@ -926,9 +923,8 @@ msgid "Could not open tempfile %1 for writing."
 msgstr "書き込み用にファイル %1 を開くことができませんでした。"
 
 #: kiosvn/kiosvn.cpp:402
-#, fuzzy
 msgid "Could not open temporary file"
-msgstr "リポジトリを開けませんでした"
+msgstr "一時ファイルを開けませんでした"
 
 #: kdesvn.cpp:225
 msgid "Could not open url %1"
@@ -939,9 +935,8 @@ msgid "Could not retrieve conflict information - giving up."
 msgstr "衝突情報を取り出せませんでした - 断念しています。"
 
 #: kiosvn/kiosvn.cpp:426
-#, fuzzy
 msgid "Could not retrieve data for write."
-msgstr "書き込み用にファイル %1 を開くことができませんでした。"
+msgstr "書き込むためのデータを取得できませんでした。"
 
 #: svnfrontend/graphtree/revisiontree.cpp:111
 #: svnfrontend/graphtree/revisiontree.cpp:116
@@ -957,9 +952,8 @@ msgid "Could not retrieve repository of working copy."
 msgstr "作業コピーのリポジトリを取り出せませんでした。"
 
 #: svnfrontend/maintreewidget.cpp:2174
-#, fuzzy
 msgid "Could not retrieve repository."
-msgstr "リポジトリを開けませんでした"
+msgstr "リポジトリを取得できませんでした。"
 
 #: svnfrontend/graphtree/revgraphview.cpp:144
 msgid ""
@@ -975,20 +969,19 @@ msgstr ""
 
 #: kiosvn/kiosvn.cpp:396
 msgid "Could not write to existing item."
-msgstr ""
+msgstr "既存の項目に書き込めませんでした。"
 
 #: svnfrontend/maintreewidget.cpp:480
 msgid "Create a copy of current item"
-msgstr ""
+msgstr "現在の項目のコピーを作成します"
 
 #: svnfrontend/maintreewidget.cpp:510
-#, fuzzy
 msgid "Create a new folder"
-msgstr "メインフォルダを作成"
+msgstr "新規フォルダを作成します"
 
 #: kdesvn.cpp:121
 msgid "Create and open new repository"
-msgstr "新しいリポジトリを作成して開く"
+msgstr "新しいリポジトリを作成して開く(&C)"
 
 #: kdesvn.cpp:122
 msgid "Create and opens a new local subversion repository"
@@ -1023,18 +1016,16 @@ msgid "D %1"
 msgstr "D %1"
 
 #: rc.cpp:523
-#, fuzzy
 msgid "Database"
-msgstr "日付"
+msgstr "データベース(&D)"
 
 #: rc.cpp:658 rc.cpp:679 rc.cpp:907 svnfrontend/models/logitemmodel.cpp:212
 msgid "Date"
 msgstr "日付"
 
 #: rc.cpp:583
-#, fuzzy
 msgid "Default"
-msgstr "標準 utf-8"
+msgstr "標準"
 
 #: rc.cpp:418
 msgid "Default utf-8"
@@ -1043,28 +1034,24 @@ msgstr "標準 utf-8"
 #: ksvnwidgets/models/commitmodelhelper.cpp:76
 #: svnfrontend/maintreewidget.cpp:544 svnfrontend/ccontextlistener.cpp:65
 #: svnfrontend/svnactions.cpp:1010
-#, fuzzy
 msgid "Delete"
-msgstr "削除されました"
+msgstr "削除"
 
 #: rc.cpp:859 rc.cpp:862
-#, fuzzy
 msgid "Delete all entries and settings for selected repository"
-msgstr "リポジトリから選択したファイルやディレクトリを削除しています"
+msgstr "選択したリポジトリのすべてのデータと設定を削除します"
 
 #: svnfrontend/svnactions.cpp:1015
 msgid "Delete and Commit"
 msgstr "削除とコミット"
 
 #: rc.cpp:856
-#, fuzzy
 msgid "Delete cache"
-msgstr "削除されました"
+msgstr "キャッシュを削除(&D)"
 
 #: rc.cpp:850 rc.cpp:853
-#, fuzzy
 msgid "Delete cache entries for current selected repository"
-msgstr "現在のリポジトリに対するログキャッシュを更新します"
+msgstr "現在選択したリポジトリのキャッシュエントリを削除します"
 
 #: svnfrontend/maintreewidget.cpp:1524 svnfrontend/svnactions.cpp:1566
 msgid "Delete from repository"
@@ -1075,13 +1062,12 @@ msgid "Delete property"
 msgstr "属性を削除"
 
 #: rc.cpp:865 svnfrontend/database/dboverview.cpp:139
-#, fuzzy
 msgid "Delete repository"
-msgstr "リポジトリから削除"
+msgstr "リポジトリを削除"
 
 #: svnfrontend/maintreewidget.cpp:543
 msgid "Delete selected files/dirs"
-msgstr "選択されたファイルやディレクトリを削除"
+msgstr "選択されたファイルやディレクトリを削除(&S)"
 
 #: svnfrontend/svnitem.cpp:401 svnfrontend/ccontextlistener.cpp:71
 msgid "Deleted"
@@ -1093,7 +1079,7 @@ msgstr "リビジョン %1 で削除されました"
 
 #: rc.cpp:105
 msgid "Deleted items:"
-msgstr "削除された項目:"
+msgstr "削除された項目："
 
 #: kiosvn/kiolistener.cpp:213
 msgid "Deleting %1."
@@ -1109,11 +1095,11 @@ msgstr "削除"
 
 #: rc.cpp:829
 msgid "Destination folder:"
-msgstr "行き先フォルダ:"
+msgstr "行き先フォルダ："
 
 #: svnfrontend/maintreewidget.cpp:475
 msgid "Details"
-msgstr "詳細"
+msgstr "詳細(&D)"
 
 #: main.cpp:41
 msgid "Developer"
@@ -1125,7 +1111,7 @@ msgstr "Diff & マージ"
 
 #: svnfrontend/maintreewidget.cpp:567
 msgid "Diff against HEAD"
-msgstr "HEAD に対して Diff"
+msgstr "&HEAD に対して Diff"
 
 #: svnfrontend/svnactions.cpp:1383
 msgid "Diff display"
@@ -1137,15 +1123,15 @@ msgstr "強調された項目を Diff"
 
 #: rc.cpp:176
 msgid "Diff ignores all white spaces"
-msgstr "Diff はすべての空白文字を無視"
+msgstr "Diff はすべての空白文字を無視する(&S)"
 
 #: rc.cpp:167
 msgid "Diff ignores content type"
-msgstr "Diff がコンテンツタイプを無視"
+msgstr "Diff はコンテンツタイプを無視する(&I)"
 
 #: rc.cpp:173
 msgid "Diff ignores white space changes"
-msgstr "Diff は空白文字の変化を無視"
+msgstr "Diff は空白文字の変化を無視する(&W)"
 
 #: rc.cpp:170 svnfrontend/graphtree/revgraphview.cpp:815
 msgid "Diff in revisiontree is recursive"
@@ -1165,7 +1151,7 @@ msgstr "前と Diff"
 
 #: rc.cpp:820 svnfrontend/maintreewidget.cpp:605
 msgid "Diff revisions"
-msgstr "Diff 履歴"
+msgstr "リビジョンを Diff"
 
 #: svnfrontend/graphtree/revgraphview.cpp:794
 msgid "Diff to previous"
@@ -1225,7 +1211,7 @@ msgstr "属性を表示"
 
 #: rc.cpp:81
 msgid "Display colored annotate"
-msgstr "色の付いた注釈を表示"
+msgstr "色の付いた注釈を表示する(&P)"
 
 #: svnfrontend/graphtree/revgraphview.cpp:809
 msgid "Display details"
@@ -1233,7 +1219,7 @@ msgstr "詳細を表示"
 
 #: rc.cpp:75 kdesvn_part.cpp:196
 msgid "Display ignored files"
-msgstr "無視されたファイルを表示"
+msgstr "無視されたファイルを表示する"
 
 #: svnfrontend/maintreewidget.cpp:473
 msgid "Display last changes"
@@ -1245,20 +1231,19 @@ msgstr "前のコミットとの違いとして最終変更を表示します。
 
 #: kdesvn_part.cpp:202
 msgid "Display unknown files"
-msgstr "不明なファイルを表示"
+msgstr "不明なファイルを表示(&U)"
 
 #: svnfrontend/svnactions.cpp:1373
 msgid "Display-process could not started, check command."
 msgstr "表示プロセスが起動できませんでした。コマンドを確認してください。"
 
 #: svnfrontend/maintreewidget.cpp:457
-#, fuzzy
 msgid "Displays the history log of selected item"
-msgstr "選択した項目との Diff"
+msgstr "選択した項目の履歴ログを表示します"
 
 #: svnfrontend/maintreewidget.cpp:460 svnfrontend/maintreewidget.cpp:464
 msgid "Displays the history log of selected item without following copies"
-msgstr ""
+msgstr "コピーを追わずに選択した項目の履歴ログを表示します"
 
 #: main.cpp:53
 msgid "Document to open"
@@ -1266,17 +1251,15 @@ msgstr "開く文書"
 
 #: rc.cpp:380
 msgid "Don't display contextmenu in Konqueror"
-msgstr "Konqueror 内のコンテキストメニューを表示しない"
+msgstr "Konqueror 内のコンテキストメニューを表示しない(&T)"
 
 #: rc.cpp:386
-#, fuzzy
 msgid "Don't display entries in toplevel action menu"
-msgstr "Konqueror 内のコンテキストメニューを表示しない"
+msgstr "トップレベルのアクションメニューにエントリを表示しない(&E)"
 
 #: rc.cpp:838
-#, fuzzy
 msgid "Don't update logcache on open"
-msgstr "開いたときにログキャッシュを満たし始める"
+msgstr "開いたときにログキャッシュを更新しない(&D)"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:116
 #: svnfrontend/propertiesdlg.cpp:208 svnfrontend/propertiesdlg.cpp:257
@@ -1297,7 +1280,7 @@ msgstr "subversion リポジトリをファイルにダンプします"
 
 #: rc.cpp:568
 msgid "Dump file:"
-msgstr "ファイルをダンプ:"
+msgstr "ファイルをダンプ："
 
 #: kdesvnview.cpp:444
 msgid "Dump finished."
@@ -1305,7 +1288,7 @@ msgstr "ダンプが完了しました。"
 
 #: rc.cpp:877
 msgid "Dump into:"
-msgstr "ダンプ先:"
+msgstr "ダンプ先："
 
 #: rc.cpp:871
 msgid "Dump repo"
@@ -1313,7 +1296,7 @@ msgstr "リポジトリをダンプ"
 
 #: kdesvn.cpp:127
 msgid "Dump repository to file"
-msgstr "リポジトリをファイルにダンプ"
+msgstr "リポジトリをファイルにダンプ(&D)"
 
 #: rc.cpp:886
 msgid "Dump revision range"
@@ -1349,24 +1332,23 @@ msgstr "終了リビジョン"
 
 #: rc.cpp:889
 msgid "End revision:"
-msgstr "終了リビジョン:"
+msgstr "終了リビジョン："
 
 #: rc.cpp:622
 msgid "Enter URL:"
-msgstr "URL を入力:"
+msgstr "URL を入力："
 
 #: rc.cpp:451
 msgid "Enter a log message"
 msgstr "ログメッセージを入力"
 
 #: rc.cpp:502
-#, fuzzy
 msgid "Enter authentication info for"
-msgstr "認証情報を入力"
+msgstr "以下に対する認証情報を入力"
 
 #: svnfrontend/svnactions.cpp:649
 msgid "Enter folder name:"
-msgstr "フォルダ名を入力:"
+msgstr "フォルダ名を入力："
 
 #: svnfrontend/mergedlg_impl.cpp:192
 msgid "Enter merge range"
@@ -1382,9 +1364,8 @@ msgstr "エントリ"
 
 #: svnfrontend/maintreewidget.cpp:1995 svnfrontend/maintreewidget.cpp:1999
 #: svnfrontend/maintreewidget.cpp:2004
-#, fuzzy
 msgid "Error"
-msgstr "SVN エラー"
+msgstr "エラー"
 
 #: svnfrontend/svnactions.cpp:566
 msgid "Error getting content"
@@ -1419,9 +1400,8 @@ msgid "Execute subversion command (\"exec help\" for more information)"
 msgstr "subversion コマンドを実行（更なる情報については「exec help」）"
 
 #: svnfrontend/maintreewidget.cpp:601 svnfrontend/svnactions.cpp:1702
-#, fuzzy
 msgid "Export"
-msgstr "エクスポートしています"
+msgstr "エクスポート"
 
 #: svnfrontend/maintreewidget.cpp:600 svnfrontend/svnactions.cpp:1640
 msgid "Export a repository"
@@ -1429,7 +1409,7 @@ msgstr "リポジトリをエクスポート"
 
 #: svnfrontend/maintreewidget.cpp:593
 msgid "Export current repository path"
-msgstr "現在のリポジトリのパスをエクスポート"
+msgstr "現在のリポジトリのパスをエクスポート(&X)"
 
 #: svnfrontend/svnactions.cpp:1618
 msgid "Export repository"
@@ -1449,11 +1429,11 @@ msgstr "外部"
 
 #: rc.cpp:223
 msgid "External diff display:"
-msgstr "外部の diff 表示:"
+msgstr "外部の diff 表示："
 
 #: rc.cpp:197
 msgid "External merge program:"
-msgstr "外部のマージプログラム:"
+msgstr "外部のマージプログラム："
 
 #: rc.cpp:733
 msgid "FSFS"
@@ -1476,9 +1456,8 @@ msgid "Fetching external item into %1."
 msgstr "%1 に外部の項目を取得しています。"
 
 #: svnfrontend/svnactions.cpp:735
-#, fuzzy
 msgid "File"
-msgstr "フォルダ"
+msgstr "ファイル"
 
 #: ksvnwidgets/diffbrowser.cpp:106
 msgid "File %1 exists - overwrite?"
@@ -1526,7 +1505,7 @@ msgstr "外部が完了しました。"
 
 #: svnfrontend/maintreewidget.cpp:610
 msgid "Fold File Tree"
-msgstr "ファイルツリーをたたむ"
+msgstr "ファイルツリーをたたむ(&F)"
 
 #: svnfrontend/svnactions.cpp:738
 msgid "Folder"
@@ -1557,26 +1536,24 @@ msgid "Form1"
 msgstr "フォーム1"
 
 #: svnfrontend/maintreewidget.cpp:505
-#, fuzzy
 msgid "Free existing lock on current item"
-msgstr "現在の項目をロック解除"
+msgstr "現在の項目に対する既存のロックを開放します"
 
 #: svnfrontend/maintreewidget.cpp:466
 msgid "Full revision tree"
-msgstr "完全リビジョンツリー"
+msgstr "完全リビジョンツリー(&F)"
 
 #: rc.cpp:299
 msgid "Gain item info recursive"
-msgstr "再帰的に項目の情報を得るか"
+msgstr "再帰的に項目の情報を得る(&I)"
 
 #: rc.cpp:12 kdesvn_part.cpp:370
 msgid "General"
 msgstr "一般"
 
 #: kdesvn_part.cpp:370
-#, fuzzy
 msgid "General Settings"
-msgstr "MergeSettings"
+msgstr "全般設定"
 
 #: rc.cpp:442
 msgid "Generates and display difference against repository of selected item"
@@ -1588,7 +1565,7 @@ msgstr "ログを取得"
 
 #: rc.cpp:296
 msgid "Get file details while remote listing"
-msgstr "リモートの一覧表にする間にファイルの詳細を得る"
+msgstr "リモートの一覧表にする間にファイルの詳細を得る(&G)"
 
 #: svnfrontend/svnactions.cpp:559
 msgid "Getting content - hit cancel for abort"
@@ -1640,34 +1617,34 @@ msgstr "新しい項目を隠す"
 
 #: rc.cpp:359
 msgid "Hide new items in commit box"
-msgstr "コミットボックスの中の新しい項目を隠す"
+msgstr "コミットボックスの中の新しい項目を隠す(&N)"
 
 #: kdesvn_part.cpp:207
 msgid "Hide unchanged files"
-msgstr "変更されていないファイルを隠す"
+msgstr "変更されていないファイルを隠す(&H)"
 
 #: svnfrontend/maintreewidget.cpp:456 svnfrontend/maintreewidget.cpp:459
 #: svnfrontend/maintreewidget.cpp:463
-#, fuzzy
 msgid "History"
-msgstr "%1 の履歴"
+msgstr "履歴"
 
 #: svnfrontend/svnactions.cpp:485
 msgid "History of %1"
 msgstr "%1 の履歴"
 
 #: svnfrontend/maintreewidget.cpp:455
-#, fuzzy
 msgid "History of item"
-msgstr "%1 の履歴"
+msgstr "項目の履歴(&H)"
 
 #: svnfrontend/maintreewidget.cpp:458 svnfrontend/maintreewidget.cpp:462
 msgid "History of item ignoring copies"
-msgstr ""
+msgstr "コピーを無視した項目の履歴"
 
 #: svnfrontend/maintreewidget.cpp:2069
 msgid "Hold CTRL key while click on selected item for unselect"
 msgstr ""
+"非選択にするには選択した項目をクリックしている間 CTRL キーを押したままにしま"
+"す"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:77
 msgid "Host"
@@ -1675,7 +1652,7 @@ msgstr "ホスト"
 
 #: kdesvn.cpp:133 kdesvnview.cpp:287 kdesvnview.cpp:322
 msgid "Hotcopy a repository"
-msgstr "リポジトリをハードコピー"
+msgstr "リポジトリをハードコピー(&H)"
 
 #: kdesvn.cpp:134
 msgid "Hotcopy a subversion repository to a new folder"
@@ -1728,16 +1705,14 @@ msgstr ""
 "示しません"
 
 #: rc.cpp:383
-#, fuzzy
 msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "konqueror/dolphin"
 msgstr ""
-"設定されていれば、kdesvn は konqueror の「アクション」メニュー内メニューを表"
-"示しません"
+"もし設定されていれば、kdesvn は konqueror や dolphin の「アクション」メニュー"
+"内に追加メニューを 表示しません"
 
 #: rc.cpp:760
-#, fuzzy
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only useful when svnqt is running with subversion 1.4 or above."
@@ -1746,7 +1721,6 @@ msgstr ""
 "ちます。これは svnqt が subversion 1.4 以上で動作しているときだけ役に立ちます"
 
 #: rc.cpp:769
-#, fuzzy
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.5. This "
 "is only useful when svnqt is running with subversion 1.5 or above."
@@ -1762,6 +1736,11 @@ msgid ""
 "\n"
 "Use this only if you're sure what you're doing!"
 msgstr ""
+"もしこのフラグが設定されていれば、既存の項目に対する単純な書き込みに対応しま"
+"す。 例えば、エディタでファイルを開いて、前もってそれらをチェックアウトせずに"
+"直接 保存できます（kdesvn はバックグラウンドでそれを行います）。\n"
+"\n"
+"自分が何をやっているのか本当に分かっているときだけ、これを使ってください！"
 
 #: rc.cpp:751
 msgid ""
@@ -1787,8 +1766,7 @@ msgstr "操作中は外部を無視"
 msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
-msgstr ""
-"デバイスファイルやパイプのような、ノードの種類が不明なファイルを無視します。"
+msgstr "デバイスファイルやパイプのような、ノードの種類が不明なファイルを無視します。"
 
 #: svnfrontend/importdir_logmsg.cpp:49
 msgid "Ignore unknown node types"
@@ -1796,7 +1774,7 @@ msgstr "不明なノードの種類を無視"
 
 #: svnfrontend/maintreewidget.cpp:553
 msgid "Ignore/Unignore current item"
-msgstr "現在の項目を無視する/しない"
+msgstr "現在の項目を無視する/しない(&I)"
 
 #: svnfrontend/svnitem.cpp:407
 msgid "Ignored"
@@ -1807,9 +1785,8 @@ msgid "Immediate Depth"
 msgstr "直接の深さ"
 
 #: svnfrontend/svnactions.cpp:1968
-#, fuzzy
 msgid "Import"
-msgstr "インポートログ"
+msgstr "インポート"
 
 #: svnfrontend/maintreewidget.cpp:532
 msgid "Import folder content into current url"
@@ -1817,7 +1794,7 @@ msgstr "フォルダの中身を現在の url へインポートします"
 
 #: svnfrontend/maintreewidget.cpp:530
 msgid "Import folders into current"
-msgstr "フォルダを現在へインポート"
+msgstr "フォルダを現在へインポート(&I)"
 
 #: svnfrontend/maintreewidget.cpp:1928 svnfrontend/maintreewidget.cpp:1932
 msgid "Import log"
@@ -1860,9 +1837,8 @@ msgid "Is created repository compatible to subversion prior 1.5"
 msgstr "作成されたリポジトリが subversion 1.5 以前と互換性があるか"
 
 #: rc.cpp:775
-#, fuzzy
 msgid "Is created repository compatible to subversion prior 1.6"
-msgstr "作成されたリポジトリが subversion 1.4 以前と互換性があるか"
+msgstr "作成されたリポジトリが subversion 1.6 以前と互換性があるか"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:80
 msgid "Issuer name"
@@ -1874,11 +1850,11 @@ msgstr "項目"
 
 #: rc.cpp:117
 msgid "Item needs lock:"
-msgstr "ロックが必要な項目:"
+msgstr "ロックが必要な項目："
 
 #: rc.cpp:72
 msgid "Items sortorder is case sensitive"
-msgstr "項目の並び順は大文字と小文字を区別"
+msgstr "項目の並び順は大文字と小文字を区別する(&I)"
 
 #: rc.cpp:712
 msgid "Just dry run without modifications"
@@ -1886,11 +1862,11 @@ msgstr "変更なしでリハーサルだけ"
 
 #: rc.cpp:403
 msgid "KIO can overwrite"
-msgstr ""
+msgstr "K&IO は上書き可能"
 
 #: rc.cpp:389
 msgid "KIO operations use standard logmessage"
-msgstr "KIO 操作は標準ログメッセージを使う"
+msgstr "&KIO 操作は標準ログメッセージを使う"
 
 #: kdesvn_part.cpp:228
 msgid "Kdesvn Handbook"
@@ -1911,11 +1887,17 @@ msgid ""
 "the object changed.<br><b>Id</b> A compressed summary of the previous 4 "
 "keywords."
 msgstr ""
+"ファイルの中身に展開するキーワード。<br>$KeywordName$ のように フォーマットさ"
+"れたキーワードアンカーを置くことでドキュメントにそれらを挿入できます。 <br>有"
+"効なキーワードは：<br><b>URL/HeadURL</b> プロジェクトの head リビジョンに対す"
+"る URL。<br><b>Author/LastChangedBy</b> ファイルを変更した最後の人。"
+"<br><b>Date/LastChangedDate</b> オブジェクトが最後に変更された日時。"
+"<br><b>Revision/Rev/LastChangedRevision</b> オブジェクトが変更された最後のリ"
+"ビジョン。<br><b>Id</b> 前の4つのキーワードを圧縮した 概要。"
 
 #: rc.cpp:847
-#, fuzzy
 msgid "Known repositories"
-msgstr "どのリポジトリも開いていません"
+msgstr "既知のリポジトリ"
 
 #: svnfrontend/editproperty_impl.cpp:101
 msgid ""
@@ -1964,7 +1946,7 @@ msgstr "エントリをリストアップ"
 
 #: rc.cpp:350
 msgid "List items next commit will send or not"
-msgstr ""
+msgstr "次のコミットが送る項目をリストアップするかどうか"
 
 #: svnfrontend/propertiesdlg.cpp:120
 msgid "List of properties set"
@@ -1976,19 +1958,19 @@ msgstr "リポジトリにダンプファイルを読み込みます。"
 
 #: kdesvn.cpp:139
 msgid "Load dump into repository"
-msgstr "リポジトリにダンプを読み込む"
+msgstr "リポジトリにダンプを読み込む(&L)"
 
 #: rc.cpp:565
 msgid "Load into folder:"
-msgstr "フォルダに読み込み:"
+msgstr "フォルダに読み込み："
 
 #: rc.cpp:571
 msgid "Load into repository:"
-msgstr "リポジトリに読み込む:"
+msgstr "リポジトリに読み込む："
 
 #: kdesvn.cpp:271
 msgid "Load last opened URL on start"
-msgstr "起動時に最後に開いた URL を読み込む"
+msgstr "起動時に最後に開いた URL を読み込む(&L)"
 
 #: kdesvnview.cpp:378
 msgid "Loading a dump into a repository."
@@ -2000,7 +1982,7 @@ msgstr "ダンプの読み込みが完了しました。"
 
 #: rc.cpp:114
 msgid "Local changed items:"
-msgstr "ローカルで変更された項目:"
+msgstr "ローカルで変更された項目："
 
 #: svnfrontend/svnitem.cpp:395
 msgid "Locally added"
@@ -2016,7 +1998,7 @@ msgstr "ロックコメント"
 
 #: svnfrontend/maintreewidget.cpp:501
 msgid "Lock current items"
-msgstr "現在の項目をロック"
+msgstr "現在の項目をロック(&L)"
 
 #: svnfrontend/ccontextlistener.cpp:86
 msgid "Lock failed"
@@ -2028,7 +2010,7 @@ msgstr "ロックメッセージ"
 
 #: svnfrontend/svnactions.cpp:808 svnfrontend/svnactions.cpp:818
 msgid "Lock token"
-msgstr ""
+msgstr "ロックトークン"
 
 #: svnfrontend/models/svnitemmodel.cpp:306
 msgid "Locked by"
@@ -2036,11 +2018,11 @@ msgstr "ロックした人"
 
 #: rc.cpp:93
 msgid "Locked items:"
-msgstr "ロックされた項目:"
+msgstr "ロックされた項目："
 
 #: svnfrontend/svnactions.cpp:810 svnfrontend/svnactions.cpp:820
 msgid "Locked on"
-msgstr ""
+msgstr "ロック日時"
 
 #: svnfrontend/ccontextlistener.cpp:84
 msgid "Locking"
@@ -2048,11 +2030,11 @@ msgstr "ロックしています"
 
 #: svnfrontend/database/dboverview.cpp:105
 msgid "Log cache holds %1 logentries and consumes %2 on disk."
-msgstr ""
+msgstr "ログキャッシュは %1 のログエントリを持ちディスク上に %2 消費しています。"
 
 #: rc.cpp:338
 msgid "Log follows node changes"
-msgstr "ログはノードの変化に従う"
+msgstr "ログはノードの変化に従う(&L)"
 
 #: svnfrontend/blamedisplay_impl.cpp:206 svnfrontend/blamedisplay_impl.cpp:411
 msgid "Log message for revision"
@@ -2060,7 +2042,7 @@ msgstr "リビジョンに対するログメッセージ"
 
 #: rc.cpp:24
 msgid "Logcache"
-msgstr "ログキャッシュ"
+msgstr "ログキャッシュ(&L)"
 
 #: svnfrontend/blamedisplay_impl.cpp:374
 msgid "Logmessage for revision %1"
@@ -2068,16 +2050,15 @@ msgstr "リビジョン %1 に対するログメッセージ"
 
 #: rc.cpp:347
 msgid "Logs always reads list of changed files"
-msgstr "ログは常に変更したファイルのリストを読む"
+msgstr "ログは常に変更したファイルのリストを読む(&Y)"
 
 #: kdesvn_part.cpp:191
 msgid "Logs follow node changes"
-msgstr "ログはノードの変化に従う"
+msgstr "ログはノードの変化に従う(&F)"
 
 #: rc.cpp:45 rc.cpp:538
-#, fuzzy
 msgid "Main Toolbar"
-msgstr "Subversion ツールバー"
+msgstr "メインツールバー"
 
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:118
 msgid "Make operation recursive."
@@ -2095,15 +2076,15 @@ msgstr ""
 
 #: rc.cpp:90
 msgid "Mark changed and locked items colored"
-msgstr "変更やロックされた項目を色でマークする"
+msgstr "変更やロックされた項目を色でマークする(&M)"
 
 #: rc.cpp:69
 msgid "Mark item status with icon overlay"
-msgstr "アイコンを重ねることで項目の状態をマークする"
+msgstr "アイコンを重ねることで項目の状態をマークする(&M)"
 
 #: svnfrontend/maintreewidget.cpp:548
 msgid "Mark resolved"
-msgstr "解消したとマークする"
+msgstr "解消したとマークする(&M)"
 
 #: rc.cpp:60
 msgid "Mark subversion states with an overlayed icon"
@@ -2119,7 +2100,7 @@ msgstr "解消したとマークしています"
 
 #: rc.cpp:78
 msgid "Maximum logmessages in history:"
-msgstr "履歴内の最大ログメッセージ:"
+msgstr "履歴内の最大ログメッセージ："
 
 #: rc.cpp:628 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125
 msgid "May existing unversioned items ovewritten"
@@ -2131,7 +2112,7 @@ msgstr "ファイルのサブディレクトリは作れません"
 
 #: svnfrontend/commandexec.cpp:614
 msgid "May only switch one url at time!"
-msgstr "一度に一つだけの url に切り替えられます"
+msgstr "一度に一つだけの url に切り替えられます！"
 
 #: svnfrontend/maintreewidget.cpp:580 svnfrontend/maintreewidget.cpp:1801
 #: svnfrontend/svnactions.cpp:2176
@@ -2140,7 +2121,7 @@ msgstr "マージ"
 
 #: svnfrontend/maintreewidget.cpp:579
 msgid "Merge two revisions"
-msgstr "二つのリビジョンをマージ"
+msgstr "二つのリビジョンをマージ(&T)"
 
 #: svnfrontend/maintreewidget.cpp:581
 msgid "Merge two revisions of this entry into itself"
@@ -2152,7 +2133,7 @@ msgstr "マージプロセスは起動できませんでした。コマンドを
 
 #: svnfrontend/maintreewidget.cpp:584
 msgid "Merge..."
-msgstr "マージ..."
+msgstr "マージ(&M)..."
 
 #: rc.cpp:694
 msgid "MergeSettings"
@@ -2172,11 +2153,11 @@ msgstr "メッセージ"
 
 #: rc.cpp:368
 msgid "Minimum log lines to show:"
-msgstr "表示する最小ログ行:"
+msgstr "表示する最小ログ行："
 
 #: rc.cpp:111
 msgid "Missed items:"
-msgstr "失われた項目:"
+msgstr "失われた項目："
 
 #: svnfrontend/svnitem.cpp:398
 msgid "Missing"
@@ -2192,11 +2173,11 @@ msgstr "リビジョン %1 で変更されました"
 
 #: svnfrontend/ccontextlistener.cpp:99
 msgid "Modified state got conflicting mods."
-msgstr ""
+msgstr "変更された状態は衝突モードになりました。"
 
 #: svnfrontend/ccontextlistener.cpp:98
 msgid "Modified state had mods merged in."
-msgstr ""
+msgstr "変更された状態はマージされたモードになりました。"
 
 #: ksvnwidgets/models/commitmodelhelper.cpp:80
 msgid "Modify (content or property)"
@@ -2212,18 +2193,16 @@ msgstr "属性を変更"
 
 #: svnfrontend/maintreewidget.cpp:477 svnfrontend/svnactions.cpp:2200
 #: svnfrontend/svnactions.cpp:2218
-#, fuzzy
 msgid "Move"
-msgstr "ここに移動"
+msgstr "移動"
 
 #: svnfrontend/copymoveview_impl.cpp:96
 msgid "Move/Rename file/dir"
 msgstr "ファイルやディレクトリの移動と名前変更"
 
 #: svnfrontend/maintreewidget.cpp:478
-#, fuzzy
 msgid "Moves or renames current item"
-msgstr "現在の項目を無視する/しない"
+msgstr "現在の項目を移動するか名前を変更します"
 
 #: svnfrontend/svnactions.cpp:2218
 msgid "Moving entries"
@@ -2243,7 +2222,7 @@ msgstr "名前"
 
 #: svnfrontend/maintreewidget.cpp:2078
 msgid "Navigation"
-msgstr ""
+msgstr "ナビゲーション"
 
 #: svnfrontend/svnitem.cpp:387
 msgid "Needs update"
@@ -2251,7 +2230,7 @@ msgstr "更新が必要です"
 
 #: svnfrontend/maintreewidget.cpp:252
 msgid "Networked URL to open but networking is disabled!"
-msgstr "開く URL に接続しましたがネットワークが無効です!"
+msgstr "開く URL に接続しましたがネットワークが無効です！"
 
 #: svnfrontend/maintreewidget.cpp:509 svnfrontend/svnactions.cpp:649
 msgid "New folder"
@@ -2280,7 +2259,6 @@ msgstr ""
 "す。"
 
 #: rc.cpp:374
-#, fuzzy
 msgctxt "no limit"
 msgid "No minimum"
 msgstr "最小値なし"
@@ -2302,15 +2280,15 @@ msgid "Not checking for updates because networking is disabled"
 msgstr "ネットワークが無効なので更新の確認をしていません"
 
 #: svnfrontend/svnactions.cpp:973
-#, fuzzy
 msgid "Not commit because networking is disabled"
 msgstr "ネットワークが無効なのでコミットしていません"
 
 #: svnfrontend/svnactions.cpp:2588
-#, fuzzy
 msgid ""
 "Not filling logcache because it is disabled due setting for this repository."
-msgstr "ネットワークが無効なのでログキャッシュを充填していません"
+msgstr ""
+"このリポジトリに対する設定により無効になっているのでログキャッシュを充填して"
+"いません"
 
 #: svnfrontend/svnactions.cpp:2578
 msgid "Not filling logcache because networking is disabled"
@@ -2322,7 +2300,7 @@ msgstr "バージョン付けされていません"
 
 #: rc.cpp:96
 msgid "Not versioned items:"
-msgstr "バージョン付けされていない項目:"
+msgstr "バージョン付けされていない項目："
 
 #: svnfrontend/maintreewidget.cpp:1508
 msgid "Nothing selected for delete"
@@ -2346,17 +2324,15 @@ msgstr "数"
 
 #: rc.cpp:610
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: svnfrontend/svnactions.cpp:793
 msgid "Old version of conflicted file"
 msgstr "衝突したファイルの古いバージョン"
 
 #: svnfrontend/editproperty_impl.cpp:48 svnfrontend/editproperty_impl.cpp:84
-#, fuzzy
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
-msgstr ""
-"<b>'native'</b>、<b>'LF'</b>、<b>'CR'</b>、<b>'CRLF'</b></b>のうちの一つ。"
+msgstr "<b>'native'</b>、<b>'LF'</b>、<b>'CR'</b>、<b>'CRLF'</b></b>のうちの一つ。"
 
 #: svnfrontend/maintreewidget.cpp:1995
 msgid "Only in working copy possible."
@@ -2368,7 +2344,7 @@ msgstr "単一のフォルダ上のみで可能です"
 
 #: urldlg.cpp:146
 msgid "Open"
-msgstr ""
+msgstr "開く"
 
 #: svnfrontend/maintreewidget.cpp:586 svnfrontend/maintreewidget.cpp:977
 #: svnfrontend/maintreewidget.cpp:1047
@@ -2385,7 +2361,7 @@ msgstr "ジョブ後に開く"
 
 #: svnfrontend/maintreewidget.cpp:524
 msgid "Open repository of working copy"
-msgstr "作業コピーのリポジトリを開く"
+msgstr "作業コピーのリポジトリを開く(&O)"
 
 #: urldlg.cpp:60
 msgid "Open repository or working copy"
@@ -2401,7 +2377,7 @@ msgstr "現在の作業コピーのチェックアウト元のリポジトリを
 
 #: rc.cpp:457
 msgid "Or insert one of the last:"
-msgstr ""
+msgstr "または最後のものを挿入する："
 
 #: kdesvn_part.cpp:173
 msgid "Original author and maintainer"
@@ -2429,11 +2405,11 @@ msgstr "指定されたファイルや URL の中身を出力します。"
 
 #: rc.cpp:703
 msgid "Output to:"
-msgstr "出力先:"
+msgstr "出力先："
 
 #: svnfrontend/database/dboverview.cpp:67
 msgid "Overview about cache database content"
-msgstr ""
+msgstr "キャッシュのデータベースの中身についての概観"
 
 #: rc.cpp:631 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124
 msgid "Overwrite existing"
@@ -2441,7 +2417,7 @@ msgstr "既存のファイルを上書き"
 
 #: kiosvn/kiosvn.cpp:378
 msgid "Overwriting existing items is disabled in settings."
-msgstr ""
+msgstr "設定で既存の項目に対する上書きは無効です。"
 
 #: svnfrontend/svnactions.cpp:809 svnfrontend/svnactions.cpp:819
 msgid "Owner"
@@ -2449,16 +2425,15 @@ msgstr "所有者"
 
 #: svnfrontend/maintreewidget.cpp:468
 msgid "Partial revision tree"
-msgstr "部分リビジョンツリー"
+msgstr "部分リビジョンツリー(&P)"
 
 #: askpass/kdesvn-askpass.cpp:67
-#, fuzzy
 msgid "Password"
-msgstr "パスワード:"
+msgstr "パスワード："
 
 #: rc.cpp:505
 msgid "Password:"
-msgstr "パスワード:"
+msgstr "パスワード："
 
 #: rc.cpp:559 rc.cpp:574
 msgid "Path to load the dump into (see contexthelp)"
@@ -2466,7 +2441,7 @@ msgstr "ダンプを読み込むパス（コンテキストヘルプ参照）"
 
 #: rc.cpp:739
 msgid "Path to repository:"
-msgstr "リポジトリへのパス:"
+msgstr "リポジトリへのパス："
 
 #: kiosvn/kiolistener.cpp:200
 msgid "Performing status on external item at %1."
@@ -2474,8 +2449,7 @@ msgstr "%1 の外部の項目のステータスを実行しています。"
 
 #: svnfrontend/graphtree/revgraphview.cpp:319
 msgid "Please check that 'dot' is installed (package GraphViz)."
-msgstr ""
-"「dot」がインストールされているか確認してください（パッケージ GraphViz）。"
+msgstr "「dot」がインストールされているか確認してください（パッケージ GraphViz）。"
 
 #: askpass/kdesvn-askpass.cpp:50
 msgid "Please enter your password below."
@@ -2483,26 +2457,23 @@ msgstr "下にパスワードを入力してください。"
 
 #: rc.cpp:188
 msgid "Prefer external merge program"
-msgstr "外部マージプログラムを選ぶ"
+msgstr "外部マージプログラムを選ぶ(&P)"
 
 #: rc.cpp:841
-#, fuzzy
 msgid "Prefixes to filter out in revision tree"
-msgstr "部分リビジョンツリー"
+msgstr "リビジョンツリー内で除去するためのプレフィックス"
 
 #: rc.cpp:793
-#, fuzzy
 msgid "Previous entries"
-msgstr "エントリをリストアップ"
+msgstr "前のエントリ"
 
 #: askpass/kdesvn-askpass.cpp:38
 msgid "Prompt"
 msgstr "プロンプト"
 
 #: svnfrontend/maintreewidget.cpp:471
-#, fuzzy
 msgid "Properties"
-msgstr "属性"
+msgstr "属性(&P)"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:37
 msgid "Property"
@@ -2518,15 +2489,15 @@ msgstr "属性が変更されました"
 
 #: rc.cpp:601
 msgid "Property name:"
-msgstr "属性名:"
+msgstr "属性名："
 
 #: svnfrontend/svnactions.cpp:800
 msgid "Property reject file"
-msgstr ""
+msgstr "属性が拒否したファイル"
 
 #: rc.cpp:604
 msgid "Property value:"
-msgstr "属性値:"
+msgstr "属性値："
 
 #: svnfrontend/fronthelpers/propertylist.cpp:111
 #: svnfrontend/propertiesdlg.cpp:204 svnfrontend/propertiesdlg.cpp:253
@@ -2535,7 +2506,7 @@ msgstr "保護された属性"
 
 #: rc.cpp:6 rc.cpp:529
 msgid "Quick settings"
-msgstr "クイック設定"
+msgstr "クイック設定(&Q)"
 
 #: kdesvn_part.cpp:173 main.cpp:41
 msgid "Rajko Albrecht"
@@ -2576,13 +2547,16 @@ msgid ""
 "Realy clean cache and data for repository\n"
 "%1?"
 msgstr ""
+"本当にリポジトリ %1 に対するキャッシュやデータをクリーンアップ\n"
+"しますか？"
 
 #: svnfrontend/database/dboverview.cpp:121
-#, fuzzy
 msgid ""
 "Realy clean cache for repository\n"
 "%1?"
-msgstr "リポジトリから削除"
+msgstr ""
+"本当にリポジトリ %1 に対するキャッシュをクリーンアップ\n"
+"しますか？"
 
 #: kdesvn.cpp:260
 msgid "Recent opened URLs"
@@ -2602,13 +2576,12 @@ msgstr ""
 "開するなどします。"
 
 #: svnfrontend/maintreewidget.cpp:603
-#, fuzzy
 msgid "Refresh"
-msgstr "ビューを更新"
+msgstr "更新"
 
 #: svnfrontend/maintreewidget.cpp:602
 msgid "Refresh view"
-msgstr "ビューを更新"
+msgstr "ビューを更新(&R)"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:60
 msgid "Reject"
@@ -2616,12 +2589,11 @@ msgstr "拒否"
 
 #: kdesvn.cpp:274
 msgid "Reload last opened url if no one is given on commandline"
-msgstr ""
-"コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
+msgstr "コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
 
 #: svnfrontend/maintreewidget.cpp:515
 msgid "Relocate current working copy url"
-msgstr "現在の作業コピーの url を移動"
+msgstr "現在の作業コピーの url を移動(&W)"
 
 #: svnfrontend/maintreewidget.cpp:1860
 msgid "Relocate path %1"
@@ -2637,11 +2609,11 @@ msgstr "url を移動"
 
 #: svnfrontend/maintreewidget.cpp:516
 msgid "Relocate url of current working copy path to other url"
-msgstr "現在の作業コピーの url を他の url へ移動"
+msgstr "現在の作業コピーの url を他の url へ移動します"
 
 #: rc.cpp:99
 msgid "Remote changed items:"
-msgstr "リモートで変更された項目:"
+msgstr "リモートで変更された項目："
 
 #: svnfrontend/copymoveview_impl.cpp:54
 msgid "Rename/move"
@@ -2652,9 +2624,8 @@ msgid "Renamed to %1 at revision %2"
 msgstr "リビジョン %2 で %1 に名前変更されました"
 
 #: ksvnwidgets/models/commitmodelhelper.cpp:84 svnfrontend/svnactions.cpp:768
-#, fuzzy
 msgid "Replace"
-msgstr "置き換えられました"
+msgstr "置換"
 
 #: svnfrontend/svnitem.cpp:404
 msgid "Replaced"
@@ -2670,12 +2641,11 @@ msgstr "%1 を置換しています。"
 
 #: rc.cpp:18
 msgid "Repository"
-msgstr "リポジトリ"
+msgstr "リポジトリ(&R)"
 
 #: rc.cpp:868
-#, fuzzy
 msgid "Repository Settings"
-msgstr "リビジョンツリーの設定"
+msgstr "リポジトリの設定(&R)"
 
 #: kdesvnview.cpp:133 kdesvnview.cpp:173
 msgid "Repository opened"
@@ -2683,11 +2653,11 @@ msgstr "リポジトリが開かれました"
 
 #: rc.cpp:832
 msgid "Repository to copy:"
-msgstr "コピーするリポジトリ:"
+msgstr "コピーするリポジトリ："
 
 #: rc.cpp:874
 msgid "Repository to dump:"
-msgstr "ダンプするリポジトリ:"
+msgstr "ダンプするリポジトリ："
 
 #: svnfrontend/svnactions.cpp:1905
 msgid "Resolve"
@@ -2695,7 +2665,7 @@ msgstr "解消"
 
 #: svnfrontend/maintreewidget.cpp:551
 msgid "Resolve conflicts"
-msgstr "衝突を解消"
+msgstr "衝突を解消(&E)"
 
 #: svnfrontend/svnactions.cpp:1959
 msgid "Resolve-process could not started, check command."
@@ -2728,7 +2698,7 @@ msgstr "取り消し"
 
 #: svnfrontend/maintreewidget.cpp:546
 msgid "Revert current changes"
-msgstr "現在の変更を元に戻す"
+msgstr "現在の変更を元に戻す(&R)"
 
 #: svnfrontend/svnactions.cpp:1756
 msgid "Revert entries"
@@ -2739,9 +2709,8 @@ msgid "Revert failed"
 msgstr "元に戻すのに失敗しました"
 
 #: rc.cpp:448
-#, fuzzy
 msgid "Revert highlighted item"
-msgstr "強調された項目を Diff"
+msgstr "強調表示されている項目を元に戻す"
 
 #: kiosvn/kiolistener.cpp:113
 msgid "Reverted %1."
@@ -2753,11 +2722,11 @@ msgstr "項目を元に戻しています"
 
 #: rc.cpp:424
 msgid "Review affected items"
-msgstr ""
+msgstr "影響を受けたファイルを見直す"
 
 #: rc.cpp:353
 msgid "Review items before commit"
-msgstr "コミットする前に項目を再検討"
+msgstr "コミットする前に項目を再検討する(&R)"
 
 #: rc.cpp:904 svnfrontend/models/logitemmodel.cpp:208
 msgid "Revision"
@@ -2829,7 +2798,6 @@ msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgstr "subversion コマンド（例えば「cat」）の出力をファイル <file> に保存"
 
 #: svnfrontend/ccontextlistener.cpp:374
-#, fuzzy
 msgid "Save password"
 msgstr "パスワードを保存"
 
@@ -2855,7 +2823,7 @@ msgstr "更なる操作については項目上のコンテキストメニュー
 
 #: svnfrontend/maintreewidget.cpp:594
 msgid "Select browse revision"
-msgstr "ブラウズするリビジョンを選択"
+msgstr "ブラウズするリビジョンを選択(&S)"
 
 #: rc.cpp:667 rc.cpp:688
 msgid "Select current working copy changes"
@@ -2867,7 +2835,7 @@ msgstr "操作の深さを選択"
 
 #: rc.cpp:415
 msgid "Select encoding:"
-msgstr "エンコーディングを選択:"
+msgstr "エンコーディングを選択："
 
 #: rc.cpp:267
 msgid "Select if kdesvn should check for updates when open a working copy"
@@ -2892,7 +2860,7 @@ msgstr "右マウスボタンで二番目のリビジョンを選択"
 
 #: rc.cpp:619
 msgid "Select target directory:"
-msgstr "エクスポート先ディレクトリを選択:"
+msgstr "エクスポート先ディレクトリを選択："
 
 #: ksvnwidgets/commitmsg_impl.cpp:604
 msgid "Select textfile for insert"
@@ -2915,10 +2883,9 @@ msgid "Sending %1."
 msgstr "%1 を送信しています。"
 
 #: rc.cpp:185
-#, fuzzy
 msgid ""
 "Set if merge with external program is preferred and not subversions merge"
-msgstr "subversion のマージではなく外部プログラムによるマージを優先するか設定"
+msgstr "subversion のマージではなく外部プログラムによるマージを優先するか設定します"
 
 #: svnfrontend/editproperty_impl.cpp:62
 msgid ""
@@ -2963,29 +2930,27 @@ msgstr ""
 
 #: svnfrontend/svnlogdlgimp.cpp:448
 msgid "Set version as left side of diff"
-msgstr ""
+msgstr "バージョンを diff の左側に設定"
 
 #: svnfrontend/svnlogdlgimp.cpp:442
 msgid "Set version as right side of diff"
-msgstr ""
+msgstr "バージョンを diff の右側に設定"
 
 #: rc.cpp:48
 msgid "Settings"
 msgstr "設定"
 
 #: svnfrontend/database/dbsettings.cpp:58
-#, fuzzy
 msgid "Settings for %1"
-msgstr "設定"
+msgstr "%1 に対する設定"
 
 #: kdesvn_part.cpp:380
 msgid "Settings for commandline and KIO execution"
 msgstr "コマンドラインと KIO 実行に関する設定"
 
 #: svnfrontend/maintreewidget.cpp:620
-#, fuzzy
 msgid "Settings for current repository"
-msgstr "現在のリポジトリに対するログキャッシュを更新します"
+msgstr "現在のリポジトリに対する設定(&F)"
 
 #: kdesvn_part.cpp:374
 msgid "Settings for diff and merge"
@@ -3005,7 +2970,7 @@ msgstr "不明なノードの種類を持ったファイルを無視するか"
 
 #: rc.cpp:153
 msgid "Should kdesvn check content of logcache before starting the tree"
-msgstr ""
+msgstr "ツリーを開始する前に kdesvn がログキャッシュの中身を確認するか"
 
 #: rc.cpp:302
 msgid "Should kdesvn retrieves properties on selected item in repositories"
@@ -3017,8 +2982,7 @@ msgstr "subversion が標準の方法でパスワードを保存するのか"
 
 #: rc.cpp:356
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
-"コミットダイアログにバージョン付けされていない項目を表示するのかどうか。"
+msgstr "コミットダイアログにバージョン付けされていない項目を表示するのかどうか。"
 
 #: rc.cpp:362
 msgid "Show a small window containing the log after command executed"
@@ -3026,20 +2990,19 @@ msgstr "コマンドの実行後にログを含む小さなウィンドウを表
 
 #: kdesvn.cpp:155
 msgid "Show database content"
-msgstr ""
+msgstr "データベースの中身を表示(&S)"
 
 #: svnfrontend/maintreewidget.cpp:476
-#, fuzzy
 msgid "Show details about selected item"
-msgstr "選択した項目との Diff"
+msgstr "選択した項目についての詳細を表示します"
 
 #: rc.cpp:57
 msgid "Show file info"
-msgstr "ファイル情報を表示"
+msgstr "ファイル情報を表示する(&S)"
 
 #: rc.cpp:796
 msgid "Show from HEAD"
-msgstr ""
+msgstr "HEAD から表示"
 
 #: svnfrontend/blamedisplay_impl.cpp:339
 msgid "Show line"
@@ -3051,19 +3014,19 @@ msgstr "行番号を表示"
 
 #: rc.cpp:365
 msgid "Show log after executing a command"
-msgstr "コマンドの実行後にログを表示"
+msgstr "コマンドの実行後にログを表示(&S)"
 
 #: kdesvn.cpp:156
 msgid "Show the content of logcache database"
-msgstr ""
+msgstr "ログキャッシュデータベースの中身を表示します"
 
 #: svnfrontend/maintreewidget.cpp:467
 msgid "Shows history of item as linked tree"
-msgstr ""
+msgstr "項目の履歴を連結されたツリーとして表示します"
 
 #: svnfrontend/maintreewidget.cpp:469
 msgid "Shows history of item as linked tree for a revision range"
-msgstr ""
+msgstr "リビジョンの範囲に対して項目の履歴を連結されたツリーとして表示します"
 
 #: kdesvn.cpp:152
 msgid "Shows info about the kdesvn plugin not the standalone app."
@@ -3073,7 +3036,7 @@ msgstr ""
 
 #: svnfrontend/svnactions.cpp:747
 msgid "Size"
-msgstr ""
+msgstr "サイズ"
 
 #: rc.cpp:51
 msgid "Size of Listviewicons"
@@ -3093,23 +3056,23 @@ msgstr "紛失したターゲット %1 をスキップしました。"
 
 #: svnfrontend/maintreewidget.cpp:2004
 msgid "Sorry - internal error!"
-msgstr "すいません - 内部エラー!"
+msgstr "すいません - 内部エラー！"
 
 #: rc.cpp:697
 msgid "Source 1:"
-msgstr "ソース 1:"
+msgstr "ソース 1："
 
 #: rc.cpp:700
 msgid "Source 2:"
-msgstr "ソース 2:"
+msgstr "ソース 2："
 
 #: rc.cpp:392
 msgid "Standard message:"
-msgstr "標準メッセージ:"
+msgstr "標準メッセージ："
 
 #: rc.cpp:270
 msgid "Start check for updates when open a working copy"
-msgstr "作業コピーを開くときに更新を確認し始める"
+msgstr "作業コピーを開くときに更新を確認し始める(&S)"
 
 #: rc.cpp:276
 msgid "Start fill log cache on open"
@@ -3125,7 +3088,7 @@ msgstr "開始リビジョン"
 
 #: rc.cpp:892
 msgid "Start revision:"
-msgstr "開始リビジョン:"
+msgstr "開始リビジョン："
 
 #: rc.cpp:652 svnfrontend/fronthelpers/rangeinput_impl.cpp:189
 msgid "Start with revision"
@@ -3149,7 +3112,7 @@ msgstr "外部についての状態"
 
 #: svnfrontend/maintreewidget.cpp:1172
 msgid "Steal lock?"
-msgstr ""
+msgstr "ロックを横取り？"
 
 #: svnfrontend/maintreewidget.cpp:750 svnfrontend/maintreewidget.cpp:1665
 msgid "Stop updating the logcache"
@@ -3165,11 +3128,11 @@ msgstr "パスワードを保存"
 
 #: rc.cpp:318
 msgid "Store passwords for remote connections"
-msgstr "リモート接続のためのパスワードを保存"
+msgstr "リモート接続のためのパスワードを保存する(&P)"
 
 #: rc.cpp:329
 msgid "Store passwords into KDE Wallet"
-msgstr "KDE ウォレットの中へパスワードを保存"
+msgstr "&KDE ウォレットの中へパスワードを保存する"
 
 #: rc.cpp:315
 msgid ""
@@ -3206,7 +3169,6 @@ msgid "Subversion Settings"
 msgstr "Subversion 設定"
 
 #: rc.cpp:3
-#, fuzzy
 msgid "Subversion settings"
 msgstr "Subversion 設定"
 
@@ -3216,16 +3178,15 @@ msgstr "Subversion ツールバー"
 
 #: svnfrontend/commandexec.cpp:618
 msgid "Switch only on working copies!"
-msgstr ""
+msgstr "作業コピー上だけで切り替えます！"
 
 #: svnfrontend/maintreewidget.cpp:511
 msgid "Switch repository"
-msgstr "リポジトリを切り替え"
+msgstr "リポジトリを切り替え(&S)"
 
 #: svnfrontend/maintreewidget.cpp:512
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr ""
-"現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
+msgstr "現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
 
 #: svnfrontend/svnactions.cpp:1801 svnfrontend/svnactions.cpp:1869
 msgid "Switch url"
@@ -3237,11 +3198,11 @@ msgstr "url を切り替えています"
 
 #: svnfrontend/svnactions.cpp:2002
 msgid "Target for merge must be local!"
-msgstr "マージの対象はローカルでなければなりません!"
+msgstr "マージの対象はローカルでなければなりません！"
 
 #: svnfrontend/svnactions.cpp:2029
 msgid "Target for merge must same type like sources!"
-msgstr "マージの対象はソースと同じ種類でなければなりません!"
+msgstr "マージの対象はソースと同じ種類でなければなりません！"
 
 #: svnfrontend/ccontextlistener.cpp:351
 msgid "The certificate has an unknown error."
@@ -3261,7 +3222,7 @@ msgid ""
 "validate the certificate manually!"
 msgstr ""
 "証明書が信頼された認証局によって発行されていません。手動で証明書を検証するた"
-"めにフィンガープリントを使ってください!"
+"めにフィンガープリントを使ってください！"
 
 #: svnfrontend/ccontextlistener.cpp:345
 msgid "The certificate is not yet valid."
@@ -3273,11 +3234,17 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
+"ファイルの mimetype。ファイルをマージするのかどうかや Apache からそれをどのよ"
+"うに出すかを 決めるのに使われます。<b>'text/'</b> で始まる mimetype（または "
+"mimetype を欠いている）は テキストとして扱われます。それ以外のすべてはバイナ"
+"リとして扱われます。"
 
 #: rc.cpp:371
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
+"kdesvn が単一のログウィンドウを表示する前にログ出力が含まれていなければならな"
+"い最小値"
 
 #: svnfrontend/svnactions.cpp:2516
 msgid "There are new items in repository"
@@ -3306,7 +3273,7 @@ msgstr "信頼済み ssl 認証"
 
 #: svnfrontend/maintreewidget.cpp:502
 msgid "Try lock current item against changes from other users"
-msgstr ""
+msgstr "他のユーザに変更されないよう現在の項目をロックしようとします"
 
 #: svnfrontend/editproperty_impl.cpp:120
 msgid ""
@@ -3314,6 +3281,9 @@ msgid ""
 "used to find a string referring to an issue, the second expression is used "
 "to extract the bare bug ID from that string."
 msgstr ""
+"改行で区切られた二つの正規表現。<br>最初の表現は 問題に言及する文字列を見つけ"
+"るのに使われ、二番目の表現は その文字列から裸のバグ ID を抽出するのに使われま"
+"す。"
 
 #: svnfrontend/svnactions.cpp:729
 msgid "Type"
@@ -3321,7 +3291,7 @@ msgstr "種類"
 
 #: rc.cpp:724
 msgid "Type of repository:"
-msgstr "リポジトリの種類:"
+msgstr "リポジトリの種類："
 
 #: svnfrontend/svnactions.cpp:721
 msgid "URL"
@@ -3343,11 +3313,11 @@ msgstr "UUID"
 
 #: svnfrontend/propertiesdlg.cpp:143
 msgid "Undelete property"
-msgstr ""
+msgstr "属性を復活"
 
 #: svnfrontend/maintreewidget.cpp:608
 msgid "Unfold File Tree"
-msgstr "ファイルツリーを展開"
+msgstr "ファイルツリーを展開(&U)"
 
 #: svnfrontend/svnactions.cpp:742 svnfrontend/svnactions.cpp:771
 msgid "Unknown"
@@ -3355,7 +3325,7 @@ msgstr "不明"
 
 #: svnfrontend/maintreewidget.cpp:504
 msgid "Unlock current items"
-msgstr "現在の項目をロック解除"
+msgstr "現在の項目をロック解除(&U)"
 
 #: svnfrontend/ccontextlistener.cpp:87
 msgid "Unlock failed"
@@ -3371,8 +3341,7 @@ msgstr "項目のロックを解除しています"
 
 #: rc.cpp:436
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr ""
-"無視されるようにバージョン付けされていないすべての項目のマークを解除します。"
+msgstr "無視されるようにバージョン付けされていないすべての項目のマークを解除します。"
 
 #: svnfrontend/graphtree/revgraphview.cpp:804
 msgid "Unselect item"
@@ -3384,12 +3353,11 @@ msgstr "新しい項目を選択解除"
 
 #: svnfrontend/svnlogdlgimp.cpp:454
 msgid "Unset version for diff"
-msgstr ""
+msgstr "diff のためのバージョンを解除"
 
 #: svnfrontend/maintreewidget.cpp:520
-#, fuzzy
 msgid "Unversioned"
-msgstr "バージョン付けされていません"
+msgstr "バージョン付けされていない"
 
 #: svnfrontend/maintreewidget.cpp:556 svnfrontend/ccontextlistener.cpp:73
 msgid "Update"
@@ -3404,9 +3372,8 @@ msgid "Update external module"
 msgstr "外部モジュールを更新"
 
 #: kiosvn/kiolistener.cpp:178
-#, fuzzy
 msgid "Update finished."
-msgstr "ダンプが完了しました。"
+msgstr "更新が完了しました。"
 
 #: svnfrontend/maintreewidget.cpp:614 svnfrontend/maintreewidget.cpp:748
 #: svnfrontend/maintreewidget.cpp:1654 svnfrontend/maintreewidget.cpp:1670
@@ -3423,7 +3390,7 @@ msgstr "head に更新"
 
 #: svnfrontend/maintreewidget.cpp:557
 msgid "Update to revision..."
-msgstr "リビジョンに更新..."
+msgstr "リビジョンに更新(&V)..."
 
 #: rc.cpp:332
 msgid "Use an internal password cache"
@@ -3435,7 +3402,7 @@ msgstr "差分を使う"
 
 #: rc.cpp:182
 msgid "Use external diff display"
-msgstr "外部 diff 表示を使う"
+msgstr "外部 diff 表示を使う(&U)"
 
 #: rc.cpp:718
 msgid "Use external merge not subversions merge"
@@ -3443,11 +3410,11 @@ msgstr "subversion の merge ではなく外部マージを使う"
 
 #: rc.cpp:335
 msgid "Use internal password cache"
-msgstr "内部パスワードキャッシュを使う"
+msgstr "内部パスワードキャッシュを使う(&U)"
 
 #: rc.cpp:84
 msgid "Use navigation panel"
-msgstr ""
+msgstr "ナビゲーションパネルを使う(&U)"
 
 #: rc.cpp:595
 msgid "Use post-commit hook"
@@ -3459,7 +3426,7 @@ msgstr "コミット前のフックを使う"
 
 #: rc.cpp:508
 msgid "Username:"
-msgstr "ユーザ名:"
+msgstr "ユーザ名："
 
 #: rc.cpp:580
 msgid "Uuid action"
@@ -3479,7 +3446,7 @@ msgstr "値"
 
 #: rc.cpp:21
 msgid "View"
-msgstr ""
+msgstr "表示(&V)"
 
 #: svnfrontend/propertiesdlg.cpp:119
 msgid "View and modify properties"
@@ -3518,8 +3485,7 @@ msgstr ""
 
 #: rc.cpp:279
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
-"作業コピーについて一覧表にするときに kdesvn はこの属性を調べるかもしれません"
+msgstr "作業コピーについて一覧表にするときに kdesvn はこの属性を調べるかもしれません"
 
 #: rc.cpp:321
 msgid ""
@@ -3535,13 +3501,17 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
+"ツリーを生成し始めてログキャッシュからデータを読み込んでいるときにネットワー"
+"クが有効であれば kdesvn はリポジトリ内のより新しい項目があるか調べられま"
+"す。\n"
+"\n"
+"しかしこれはツリーの生成を遅くするかもしればいので標準で無効です。"
 
 #: rc.cpp:288
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
-msgstr ""
-"リポジトリについて一覧表を作っている間に項目に付いての詳細を得るかどうか"
+msgstr "リポジトリについて一覧表を作っている間に項目に付いての詳細を得るかどうか"
 
 #: svnfrontend/svnactions.cpp:1521
 msgid "Which files or directories should I add?"
@@ -3549,11 +3519,11 @@ msgstr "どのファイルやディレクトリを追加しますか？"
 
 #: kdesvn_part.cpp:212
 msgid "Work online"
-msgstr "オンライン作業"
+msgstr "オンライン作業(&W)"
 
 #: rc.cpp:15
 msgid "Working copy"
-msgstr "作業コピー"
+msgstr "作業コピー(&W)"
 
 #: svnfrontend/svnactions.cpp:796
 msgid "Working version of conflicted file"
@@ -3621,7 +3591,7 @@ msgstr "この長いテキスト"
 
 #: rc.cpp:550
 msgid "to"
-msgstr ""
+msgstr "を"
 
 #: svnfrontend/ccontextlistener.cpp:93
 msgid "unchanged"
@@ -3629,7 +3599,7 @@ msgstr "未変更"
 
 #: svnfrontend/ccontextlistener.cpp:95
 msgid "unversioned item obstructed work"
-msgstr ""
+msgstr "バージョン付けされていない項目が作業を妨げました"
 
 #~ msgid "0"
 #~ msgstr "0"

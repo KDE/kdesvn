@@ -1766,7 +1766,8 @@ msgstr "操作中は外部を無視"
 msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
-msgstr "デバイスファイルやパイプのような、ノードの種類が不明なファイルを無視します。"
+msgstr ""
+"デバイスファイルやパイプのような、ノードの種類が不明なファイルを無視します。"
 
 #: svnfrontend/importdir_logmsg.cpp:49
 msgid "Ignore unknown node types"
@@ -2030,7 +2031,8 @@ msgstr "ロックしています"
 
 #: svnfrontend/database/dboverview.cpp:105
 msgid "Log cache holds %1 logentries and consumes %2 on disk."
-msgstr "ログキャッシュは %1 のログエントリを持ちディスク上に %2 消費しています。"
+msgstr ""
+"ログキャッシュは %1 のログエントリを持ちディスク上に %2 消費しています。"
 
 #: rc.cpp:338
 msgid "Log follows node changes"
@@ -2332,7 +2334,8 @@ msgstr "衝突したファイルの古いバージョン"
 
 #: svnfrontend/editproperty_impl.cpp:48 svnfrontend/editproperty_impl.cpp:84
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
-msgstr "<b>'native'</b>、<b>'LF'</b>、<b>'CR'</b>、<b>'CRLF'</b></b>のうちの一つ。"
+msgstr ""
+"<b>'native'</b>、<b>'LF'</b>、<b>'CR'</b>、<b>'CRLF'</b></b>のうちの一つ。"
 
 #: svnfrontend/maintreewidget.cpp:1995
 msgid "Only in working copy possible."
@@ -2449,7 +2452,8 @@ msgstr "%1 の外部の項目のステータスを実行しています。"
 
 #: svnfrontend/graphtree/revgraphview.cpp:319
 msgid "Please check that 'dot' is installed (package GraphViz)."
-msgstr "「dot」がインストールされているか確認してください（パッケージ GraphViz）。"
+msgstr ""
+"「dot」がインストールされているか確認してください（パッケージ GraphViz）。"
 
 #: askpass/kdesvn-askpass.cpp:50
 msgid "Please enter your password below."
@@ -2589,7 +2593,8 @@ msgstr "拒否"
 
 #: kdesvn.cpp:274
 msgid "Reload last opened url if no one is given on commandline"
-msgstr "コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
+msgstr ""
+"コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
 
 #: svnfrontend/maintreewidget.cpp:515
 msgid "Relocate current working copy url"
@@ -2885,7 +2890,8 @@ msgstr "%1 を送信しています。"
 #: rc.cpp:185
 msgid ""
 "Set if merge with external program is preferred and not subversions merge"
-msgstr "subversion のマージではなく外部プログラムによるマージを優先するか設定します"
+msgstr ""
+"subversion のマージではなく外部プログラムによるマージを優先するか設定します"
 
 #: svnfrontend/editproperty_impl.cpp:62
 msgid ""
@@ -2982,7 +2988,8 @@ msgstr "subversion が標準の方法でパスワードを保存するのか"
 
 #: rc.cpp:356
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr "コミットダイアログにバージョン付けされていない項目を表示するのかどうか。"
+msgstr ""
+"コミットダイアログにバージョン付けされていない項目を表示するのかどうか。"
 
 #: rc.cpp:362
 msgid "Show a small window containing the log after command executed"
@@ -3186,7 +3193,8 @@ msgstr "リポジトリを切り替え(&S)"
 
 #: svnfrontend/maintreewidget.cpp:512
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr "現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
+msgstr ""
+"現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
 
 #: svnfrontend/svnactions.cpp:1801 svnfrontend/svnactions.cpp:1869
 msgid "Switch url"
@@ -3341,7 +3349,8 @@ msgstr "項目のロックを解除しています"
 
 #: rc.cpp:436
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr "無視されるようにバージョン付けされていないすべての項目のマークを解除します。"
+msgstr ""
+"無視されるようにバージョン付けされていないすべての項目のマークを解除します。"
 
 #: svnfrontend/graphtree/revgraphview.cpp:804
 msgid "Unselect item"
@@ -3485,7 +3494,8 @@ msgstr ""
 
 #: rc.cpp:279
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr "作業コピーについて一覧表にするときに kdesvn はこの属性を調べるかもしれません"
+msgstr ""
+"作業コピーについて一覧表にするときに kdesvn はこの属性を調べるかもしれません"
 
 #: rc.cpp:321
 msgid ""
@@ -3511,7 +3521,8 @@ msgstr ""
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
-msgstr "リポジトリについて一覧表を作っている間に項目に付いての詳細を得るかどうか"
+msgstr ""
+"リポジトリについて一覧表を作っている間に項目に付いての詳細を得るかどうか"
 
 #: svnfrontend/svnactions.cpp:1521
 msgid "Which files or directories should I add?"

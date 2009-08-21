@@ -1,3 +1,7 @@
+version 1.4.1:
+    * kdesvnaskpass checks if last given password were wrong and ignores stored pw in that case
+    * fixed a buildproblem with qt < 4.5
+
 version 1.4.0:
     * integrated subversion 1.6 api
     * some speedups in subversion interface

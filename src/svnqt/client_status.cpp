@@ -370,6 +370,9 @@ namespace svn
       pool);
 #endif
     Client_impl::checkErrorThrow(error);
+    if (baton.entries.size()==0) {
+        return StatusPtr(new Status());
+    }
 
     return baton.entries[0];
   };

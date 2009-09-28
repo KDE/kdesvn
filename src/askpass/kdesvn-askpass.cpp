@@ -45,18 +45,22 @@ int main(int argc, char** argv)
 
     QString prompt;
     QString kfile;
+    bool error = false;
 
     if( !KCmdLineArgs::parsedArgs()->count() ) {
         prompt = i18n("Please enter your password below.");
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
+        if (prompt.contains("Bad passphrase",Qt::CaseInsensitive)) {
+            error = true;
+        }
         kfile = prompt.section(" ", -2).remove(":").simplified();
     }
     QString pw;
     QString wfolder = about.appName();
 
     KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0 );
-    if (wallet && wallet->hasFolder(wfolder)) {
+    if (!error && wallet && wallet->hasFolder(wfolder)) {
         wallet->setFolder(wfolder);
         wallet->readPassword(kfile,pw);
     }

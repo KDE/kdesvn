@@ -1,3 +1,8 @@
+version 1.4.1:
+    * kdesvnaskpass checks if last given password were wrong and ignores stored pw in that case
+    * fixed a buildproblem with qt < 4.5
+    * fixed a crasher while update to new added items
+
 version 1.4.0:
     * integrated subversion 1.6 api
     * some speedups in subversion interface
@@ -6,6 +11,7 @@ version 1.4.0:
     * integrated first repository specific settings
     * Revisiontree may ignore path prefixes (done with repository settings)
     * logcache overview, user may delete entries for repositories, see, how many entries and how large them are.
+    * various small bugfixes and enhancements
 
 version 1.3.2:
     * fixing crash when calling contextmenu in left panel. (#644,#643,#642,#639 and others)

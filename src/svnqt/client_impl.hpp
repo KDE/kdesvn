@@ -106,7 +106,7 @@ namespace svn
     virtual StatusPtr
     singleStatus (const Path& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException);
 
-  /**
+    /**
      * Executes a revision checkout.
      * @param params the parameters to use
      * @return revision number checked out

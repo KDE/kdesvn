@@ -8,26 +8,24 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-13 12:06+0300\n"
-"PO-Revision-Date: 2009-05-22 17:25+0200\n"
+"PO-Revision-Date: 2009-10-15 01:08+0200\n"
 "Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
 "Language-Team: Spanish <mariopal@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: settings/cmdexecsettings_impl.cpp:35
-#, fuzzy
 msgid " line"
 msgid_plural " lines"
-msgstr[0] " línea(s)"
-msgstr[1] " línea(s)"
+msgstr[0] " línea"
+msgstr[1] " líneas"
 
 #: settings/cmdexecsettings_impl.cpp:37
-#, fuzzy
 msgid " lines"
-msgstr " línea(s)"
+msgstr " líneas"
 
 #: svnfrontend/commandexec.cpp:420
 msgid "\"GET\" requires output file!"
@@ -38,6 +36,8 @@ msgid ""
 "%1\n"
 "Realy store password as plain text?"
 msgstr ""
+"%1\n"
+"¿Seguro que quiere almacenar la contraseña en texto plano?"
 
 #: svnfrontend/models/logmodelhelper.cpp:52
 msgid "%1 at revision %2"
@@ -62,18 +62,16 @@ msgid "%1<br>Check change entry %2 of %3"
 msgstr "%1<br>Verificar cambios en entrada %2 de %3"
 
 #: svnfrontend/stopdlg.cpp:201
-#, fuzzy
 msgid "%p% of %1"
-msgstr "%1 de %2"
+msgstr "%p% de %1"
 
 #: kdesvn.cpp:91
 msgid "&Bookmarks"
 msgstr "&Marcadores"
 
 #: svnfrontend/svntreeview.cpp:130
-#, fuzzy
 msgid "&Copy Here"
-msgstr "Copiado de"
+msgstr "&Copiar Aquí"
 
 #: rc.cpp:514
 msgid "&File"
@@ -85,7 +83,7 @@ msgstr "A&yuda"
 
 #: svnfrontend/svntreeview.cpp:126
 msgid "&Move Here"
-msgstr ""
+msgstr "&Mover Aquí"
 
 #: rc.cpp:526
 msgid "&Settings"
@@ -608,18 +606,16 @@ msgstr ""
 "Ejecutándose con Librería Subversión: %2"
 
 #: svnfrontend/svntreeview.cpp:132
-#, fuzzy
 msgid "C&ancel"
-msgstr "Cancelar"
+msgstr "C&ancelar"
 
 #: svnfrontend/fillcachethread.cpp:114
 msgid "Cache filled up to revision %1"
 msgstr "Caché lleno hasta la revisión %1"
 
 #: rc.cpp:395
-#, fuzzy
 msgid "Can KIO overwrite existing files?"
-msgstr "Sobreescribir existente"
+msgstr "¿Puede KIO sobreescribir ficheros ya existentes?"
 
 #: svnfrontend/svnactions.cpp:1107
 msgid "Can not do this diff because networking is disabled."
@@ -630,12 +626,10 @@ msgid "Can only switch one item at time"
 msgstr "Sólo se puede relocalizar un elemento a la vez"
 
 #: kiosvn/kiosvn.cpp:296 kiosvn/kiosvn.cpp:357 kiosvn/kiosvn.cpp:495
-#, fuzzy
 msgid "Can only write on head revision!"
-msgstr "Sólo se puede relocalizar un elemento a la vez"
+msgstr "¡Sólo se puede escribir en la revisión HEAD!"
 
 #: rc.cpp:613
-#, fuzzy
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -644,9 +638,8 @@ msgid "Cannot import into multiple targets!"
 msgstr "¡No se puede importar hacia múltiples destinos!"
 
 #: svnfrontend/maintreewidget.cpp:1919
-#, fuzzy
 msgid "Cannot import remote urls!"
-msgstr "¡No se puede importar hacia destinos remotos!"
+msgstr "¡No se pueden importar URLs remotas!"
 
 #: svnfrontend/svnactions.cpp:723
 msgid "Canonical repository url"
@@ -735,9 +728,8 @@ msgid "Clean logs"
 msgstr "Limpiar registros"
 
 #: svnfrontend/database/dboverview.cpp:121
-#, fuzzy
 msgid "Clean repository cache"
-msgstr "Crear nuevo repositorio"
+msgstr "Limpiar la caché del repositorio"
 
 #: svnfrontend/svnactions.cpp:1891
 msgid "Cleaning up folder"
@@ -854,9 +846,8 @@ msgid "Compatible to subversion prior 1.5"
 msgstr "Compatible con subversion anterior a 1.5"
 
 #: rc.cpp:778
-#, fuzzy
 msgid "Compatible to subversion prior 1.6"
-msgstr "Compatible con subversion anterior a 1.4"
+msgstr "Compatible con subversion anterior a 1.6"
 
 #: kdesvn_part.cpp:220
 msgid "Configure %1..."
@@ -917,9 +908,8 @@ msgid "Copy or Moving entries"
 msgstr "Copiando o Moviendo elementos"
 
 #: askpass/kdesvn-askpass.cpp:35
-#, fuzzy
 msgid "Copyright (c) 2005-2009 Rajko Albrecht"
-msgstr "Copyright (c) 2005 Rajko Albrecht"
+msgstr "Copyright (c) 2005-2009 Rajko Albrecht"
 
 #: svnfrontend/svnactions.cpp:953
 msgid "Could not change to folder %1\n"
@@ -942,9 +932,8 @@ msgid "Could not open tempfile %1 for writing."
 msgstr "No se puede abrir fichero temporal %1 para escritura."
 
 #: kiosvn/kiosvn.cpp:402
-#, fuzzy
 msgid "Could not open temporary file"
-msgstr "No se puede abrir el repositorio"
+msgstr "No se puede abrir fichero temporal"
 
 #: kdesvn.cpp:225
 msgid "Could not open url %1"
@@ -955,9 +944,8 @@ msgid "Could not retrieve conflict information - giving up."
 msgstr "No es posible obtener información del conflicto - renunciando."
 
 #: kiosvn/kiosvn.cpp:426
-#, fuzzy
 msgid "Could not retrieve data for write."
-msgstr "No se puede abrir fichero temporal %1 para escritura."
+msgstr "No se pueden recuperar los datos para escribir."
 
 #: svnfrontend/graphtree/revisiontree.cpp:111
 #: svnfrontend/graphtree/revisiontree.cpp:116
@@ -973,9 +961,8 @@ msgid "Could not retrieve repository of working copy."
 msgstr "No se puede obtener el repositorio de la copia de trabajo"
 
 #: svnfrontend/maintreewidget.cpp:2174
-#, fuzzy
 msgid "Could not retrieve repository."
-msgstr "No se puede abrir el repositorio"
+msgstr "No se puede recuperar el repositorio."
 
 #: svnfrontend/graphtree/revgraphview.cpp:144
 msgid ""
@@ -991,7 +978,7 @@ msgstr ""
 
 #: kiosvn/kiosvn.cpp:396
 msgid "Could not write to existing item."
-msgstr ""
+msgstr "No se puede escribir en elemento existente."
 
 #: svnfrontend/maintreewidget.cpp:480
 msgid "Create a copy of current item"
@@ -1038,9 +1025,8 @@ msgid "D %1"
 msgstr "D %1"
 
 #: rc.cpp:523
-#, fuzzy
 msgid "Database"
-msgstr "Fecha"
+msgstr "Base de Datos"
 
 #: rc.cpp:658 rc.cpp:679 rc.cpp:907 svnfrontend/models/logitemmodel.cpp:212
 msgid "Date"
@@ -1057,28 +1043,25 @@ msgstr "Por defecto utf-8"
 #: ksvnwidgets/models/commitmodelhelper.cpp:76
 #: svnfrontend/maintreewidget.cpp:544 svnfrontend/ccontextlistener.cpp:65
 #: svnfrontend/svnactions.cpp:1010
-#, fuzzy
 msgid "Delete"
-msgstr "Eliminado"
+msgstr "Eliminar"
 
 #: rc.cpp:859 rc.cpp:862
-#, fuzzy
 msgid "Delete all entries and settings for selected repository"
-msgstr "Eliminar del repositorio los ficheros y/o directorios seleccionados"
+msgstr ""
+"Eliminar todas las entradas y configuraciones del repositorio seleccionado"
 
 #: svnfrontend/svnactions.cpp:1015
 msgid "Delete and Commit"
 msgstr "Eliminar y Confirmar"
 
 #: rc.cpp:856
-#, fuzzy
 msgid "Delete cache"
-msgstr "Eliminado"
+msgstr "Eliminar caché"
 
 #: rc.cpp:850 rc.cpp:853
-#, fuzzy
 msgid "Delete cache entries for current selected repository"
-msgstr "Actualiza la caché de registros para el repositorio actual"
+msgstr "Borrar las entradas en caché para el repositorio seleccionado"
 
 #: svnfrontend/maintreewidget.cpp:1524 svnfrontend/svnactions.cpp:1566
 msgid "Delete from repository"
@@ -1089,9 +1072,8 @@ msgid "Delete property"
 msgstr "Eliminar propiedad"
 
 #: rc.cpp:865 svnfrontend/database/dboverview.cpp:139
-#, fuzzy
 msgid "Delete repository"
-msgstr "Borrar desde el repositorio"
+msgstr "Borrar repositorio"
 
 #: svnfrontend/maintreewidget.cpp:543
 msgid "Delete selected files/dirs"
@@ -1288,9 +1270,8 @@ msgid "Don't display entries in toplevel action menu"
 msgstr "No mostrar entradas en el menú de acciones de alto nivel"
 
 #: rc.cpp:838
-#, fuzzy
 msgid "Don't update logcache on open"
-msgstr "Inicio del relleno de la caché de registros al abrir"
+msgstr "No actualizar la caché de registros al abrir"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:116
 #: svnfrontend/propertiesdlg.cpp:208 svnfrontend/propertiesdlg.cpp:257
@@ -1559,9 +1540,8 @@ msgid "Force operation"
 msgstr "Forzar operación"
 
 #: rc.cpp:844
-#, fuzzy
 msgid "Form"
-msgstr "Form1"
+msgstr "Form"
 
 #: rc.cpp:412 rc.cpp:469
 msgid "Form1"
@@ -1774,6 +1754,13 @@ msgid ""
 "\n"
 "Use this only if you're sure what you're doing!"
 msgstr ""
+"Si está activado, se tiene soporte sencillo de escritura para elementos "
+"existentes. "
+"Ej: se pueden abrir ficheros en un editor y guardarlos directamente sin "
+"comprobarlos "
+"antes (kdesvn lo hará en segundo plano).\n"
+"\n"
+"¡Usar sólo si se sabe lo que se está haciendo!"
 
 #: rc.cpp:751
 msgid ""
@@ -1873,9 +1860,8 @@ msgid "Is created repository compatible to subversion prior 1.5"
 msgstr "Creado repositorio compatible con subversion anterior a 1.5"
 
 #: rc.cpp:775
-#, fuzzy
 msgid "Is created repository compatible to subversion prior 1.6"
-msgstr "Creado repositorio compatible con subversion anterior a 1.4"
+msgstr "Se ha creado repositorio compatible con subversion anterior a 1.6"
 
 #: ksvnwidgets/ssltrustprompt_impl.cpp:80
 msgid "Issuer name"
@@ -1899,7 +1885,7 @@ msgstr "Ejecutar simulacro sin modificar nada"
 
 #: rc.cpp:403
 msgid "KIO can overwrite"
-msgstr ""
+msgstr "KIO puede sobreescribir"
 
 #: rc.cpp:389
 msgid "KIO operations use standard logmessage"
@@ -1934,9 +1920,8 @@ msgstr ""
 "<br><b>Id</b> Un resumen compacto de las 4 palabras clave anteriores."
 
 #: rc.cpp:847
-#, fuzzy
 msgid "Known repositories"
-msgstr "Ningún repositorio abierto"
+msgstr "Repositorios conocidos"
 
 #: svnfrontend/editproperty_impl.cpp:101
 msgid ""
@@ -2071,7 +2056,7 @@ msgstr "Bloqueando"
 
 #: svnfrontend/database/dboverview.cpp:105
 msgid "Log cache holds %1 logentries and consumes %2 on disk."
-msgstr ""
+msgstr "La caché de registros mantiene %1 entradas y consume %2 en el disco."
 
 #: rc.cpp:338
 msgid "Log follows node changes"
@@ -2298,7 +2283,6 @@ msgstr ""
 "disponible."
 
 #: rc.cpp:374
-#, fuzzy
 msgctxt "no limit"
 msgid "No minimum"
 msgstr "Ningún mínimo"
@@ -2324,10 +2308,11 @@ msgid "Not commit because networking is disabled"
 msgstr "No se confirma porque la red está deshabilitada"
 
 #: svnfrontend/svnactions.cpp:2588
-#, fuzzy
 msgid ""
 "Not filling logcache because it is disabled due setting for this repository."
-msgstr "No se rellena la caché de registros porque la red está deshabilitada"
+msgstr ""
+"No se rellena la caché de registros porque está deshabilitada debido a la "
+"configuración de este repositorio."
 
 #: svnfrontend/svnactions.cpp:2578
 msgid "Not filling logcache because networking is disabled"
@@ -2450,7 +2435,7 @@ msgstr "Salida hacia:"
 
 #: svnfrontend/database/dboverview.cpp:67
 msgid "Overview about cache database content"
-msgstr ""
+msgstr "Información sobre el contenido de la base de datos de la caché"
 
 #: rc.cpp:631 svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124
 msgid "Overwrite existing"
@@ -2459,6 +2444,8 @@ msgstr "Sobreescribir existente"
 #: kiosvn/kiosvn.cpp:378
 msgid "Overwriting existing items is disabled in settings."
 msgstr ""
+"La sobreescritura de elementos existentes está deshabilitada en la "
+"configuración."
 
 #: svnfrontend/svnactions.cpp:809 svnfrontend/svnactions.cpp:819
 msgid "Owner"
@@ -2469,9 +2456,8 @@ msgid "Partial revision tree"
 msgstr "Árbol de revisiones parcial"
 
 #: askpass/kdesvn-askpass.cpp:67
-#, fuzzy
 msgid "Password"
-msgstr "Contraseña:"
+msgstr "Contraseña"
 
 #: rc.cpp:505
 msgid "Password:"
@@ -2502,9 +2488,8 @@ msgid "Prefer external merge program"
 msgstr "Se prefiere un programa de fusionado externo"
 
 #: rc.cpp:841
-#, fuzzy
 msgid "Prefixes to filter out in revision tree"
-msgstr "Árbol de revisiones parcial"
+msgstr "Prefijos a filtrar en el árbol de revisiones"
 
 #: rc.cpp:793
 msgid "Previous entries"
@@ -2590,13 +2575,16 @@ msgid ""
 "Realy clean cache and data for repository\n"
 "%1?"
 msgstr ""
+"¿Seguro que quiere limpiar la cache y los datos del repositorio\n"
+"%1?"
 
 #: svnfrontend/database/dboverview.cpp:121
-#, fuzzy
 msgid ""
 "Realy clean cache for repository\n"
 "%1?"
-msgstr "Borrar desde el repositorio"
+msgstr ""
+"¿Seguro que quiere limpiar la cache del repositorio\n"
+"%1?"
 
 #: kdesvn.cpp:260
 msgid "Recent opened URLs"
@@ -2686,9 +2674,8 @@ msgid "Repository"
 msgstr "Repositorio"
 
 #: rc.cpp:868
-#, fuzzy
 msgid "Repository Settings"
-msgstr "Configuración del árbol de revisiones"
+msgstr "Configuración del Repositorio"
 
 #: kdesvnview.cpp:133 kdesvnview.cpp:173
 msgid "Repository opened"
@@ -2841,7 +2828,6 @@ msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgstr "Guardar la salida del comando subversion en el fichero <file>"
 
 #: svnfrontend/ccontextlistener.cpp:374
-#, fuzzy
 msgid "Save password"
 msgstr "Almacenar contraseña"
 
@@ -2992,18 +2978,16 @@ msgid "Settings"
 msgstr "Configuraciones"
 
 #: svnfrontend/database/dbsettings.cpp:58
-#, fuzzy
 msgid "Settings for %1"
-msgstr "Configuraciones"
+msgstr "Configuración para %1"
 
 #: kdesvn_part.cpp:380
 msgid "Settings for commandline and KIO execution"
 msgstr "Configuraciones para línea de comandos y ejecución KIO"
 
 #: svnfrontend/maintreewidget.cpp:620
-#, fuzzy
 msgid "Settings for current repository"
-msgstr "Actualiza la caché de registros para el repositorio actual"
+msgstr "Configuración para el repositorio actual"
 
 #: kdesvn_part.cpp:374
 msgid "Settings for diff and merge"
@@ -3048,7 +3032,7 @@ msgstr "Muestra una pequeña ventana con el registro tras ejecutar el comando"
 
 #: kdesvn.cpp:155
 msgid "Show database content"
-msgstr ""
+msgstr "Mostrar contenido de la base de datos"
 
 #: svnfrontend/maintreewidget.cpp:476
 msgid "Show details about selected item"
@@ -3076,7 +3060,7 @@ msgstr "Mostrar registro tras ejecutar un comando"
 
 #: kdesvn.cpp:156
 msgid "Show the content of logcache database"
-msgstr ""
+msgstr "Mostrar el contenido de la base de datos de la caché de registros"
 
 #: svnfrontend/maintreewidget.cpp:467
 msgid "Shows history of item as linked tree"
@@ -3094,7 +3078,7 @@ msgstr "Muestra información sobre el plugin y no la aplicación aislada."
 
 #: svnfrontend/svnactions.cpp:747
 msgid "Size"
-msgstr ""
+msgstr "Tamaño"
 
 #: rc.cpp:51
 msgid "Size of Listviewicons"
@@ -3232,9 +3216,8 @@ msgid "Subversion Settings"
 msgstr "Configuración Subversion"
 
 #: rc.cpp:3
-#, fuzzy
 msgid "Subversion settings"
-msgstr "Configuración Subversion"
+msgstr "Configuración de Subversion"
 
 #: rc.cpp:42 rc.cpp:535
 msgid "Subversion toolbar"
@@ -3642,7 +3625,6 @@ msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
 msgstr "kdesvn: Mario Palomo Torrero"
 
 #: askpass/kdesvn-askpass.cpp:32
-#, fuzzy
 msgid "kdesvnaskpass"
 msgstr "kdesvnaskpass"
 

@@ -125,6 +125,7 @@ protected Q_SLOTS:
     void slotResolved();
     void slotTryResolve();
     void slotDelete();
+    void slotLeftDelete();
     void slotRename();
     void slotCopy();
     void slotCleanupAction();
@@ -175,6 +176,7 @@ protected:
     void doLog(bool,bool)const;
 
     void checkUseNavigation(bool startup = false);
+    void makeDelete(const SvnItemList&lst);
 
 private:
     MainTreeWidgetData*m_Data;

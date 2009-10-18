@@ -543,6 +543,9 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_svn_remove",i18n("Delete selected files/dirs"),KShortcut(Qt::Key_Delete),KIcon("kdesvndelete"),this,SLOT(slotDelete()));
     tmp_action->setIconText(i18n("Delete"));
     tmp_action->setToolTip(i18n("Deleting selected files and/or directories from repository"));
+    tmp_action = add_action("make_svn_remove_left",i18n("Delete folder"),KShortcut(),KIcon("kdesvndelete"),this,SLOT(slotLeftDelete()));
+    tmp_action->setToolTip(i18n("Deleting selected directories from repository"));
+    tmp_action->setIconText(i18n("Delete"));
     tmp_action  = add_action("make_svn_revert",i18n("Revert current changes"),KShortcut(),KIcon("kdesvnreverse"),m_Data->m_Model->svnWrapper(),SLOT(slotRevert()));
 
     tmp_action = add_action("make_resolved",i18n("Mark resolved"),KShortcut(),KIcon("kdesvnresolved"),this,SLOT(slotResolved()));
@@ -675,6 +678,7 @@ void MainTreeWidget::enableActions()
     enableAction("make_svn_property",single);
     enableAction("get_svn_property",single);
     enableAction("make_svn_remove",(multi||single));
+    enableAction("make_svn_remove_left",d>0);
     enableAction("make_svn_lock",(multi||single));
     enableAction("make_svn_unlock",(multi||single));
 
@@ -964,6 +968,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     if ( (temp=filesActions()->action("make_svn_dirbasediff")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_diritemsdiff")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_dir_log_nofollow")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_svn_remove_left")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
     OpenContextmenu*me=0;
@@ -1497,13 +1502,22 @@ void MainTreeWidget::slotTryResolve()
     m_Data->m_Model->svnWrapper()->slotResolve(which->fullName());
 }
 
+void MainTreeWidget::slotLeftDelete()
+{
+    SvnItemList lst;
+    DirSelectionList(lst);
+    makeDelete(lst);
+}
+
 void MainTreeWidget::slotDelete()
 {
-    //m_deletePerfect = true;
-
     SvnItemList lst;
     SelectionList(lst);
+    makeDelete(lst);
+}
 
+void MainTreeWidget::makeDelete(const SvnItemList&lst)
+{
     if (lst.size()==0) {
         KMessageBox::error(this,i18n("Nothing selected for delete"));
         return;
@@ -1528,10 +1542,10 @@ void MainTreeWidget::slotDelete()
     WidgetBlockStack st(this);
     if (kioList.count()>0) {
         KIO::Job*aJob = KIO::del(kioList);
-	if (!aJob->exec()) {
-	  aJob->showErrorDialog(this);
-	  return;
-	}
+        if (!aJob->exec()) {
+        aJob->showErrorDialog(this);
+        return;
+        }
     }
     if (items.size()>0) {
         m_Data->m_Model->svnWrapper()->makeDelete(items);

@@ -37,6 +37,7 @@
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
+#include "src/ksvnwidgets/deleteform_impl.h"
 #include "opencontextmenu.h"
 
 #include <kmessagebox.h>
@@ -1521,6 +1522,13 @@ void MainTreeWidget::slotDelete()
         }
         displist.append((*liter)->fullName());
     }
+#if 0
+    DeleteForm_impl*ptr = 0;
+    KDialog*dlg = createDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog",true);
+    if (!dlg) {
+        return;
+    }
+#endif
     int answer = KMessageBox::questionYesNoList(this,i18n("Really delete these entries?"),displist,i18n("Delete from repository"));
     if (answer!=KMessageBox::Yes) {
         return;

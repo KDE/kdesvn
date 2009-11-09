@@ -1577,13 +1577,13 @@ bool SvnActions::makeDelete(const QStringList&w)
 /*!
     \fn SvnActions::makeDelete()
  */
-bool SvnActions::makeDelete(const svn::Pathes&items)
+bool SvnActions::makeDelete(const svn::Pathes&items,bool keep_local)
 {
     if (!m_Data->m_CurrentContext) return false;
     QString ex;
     try {
         svn::Targets target(items);
-        m_Data->m_Svnclient->remove(target,false);
+        m_Data->m_Svnclient->remove(target,false,keep_local);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

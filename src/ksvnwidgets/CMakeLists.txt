@@ -8,6 +8,7 @@ KDE_ADD_UI_FILES(
     encodingselector.ui
     depthform.ui
     revertform.ui
+    deleteform.ui
 )
 
 SET(ksvnwidgetsrc
@@ -22,6 +23,7 @@ SET(ksvnwidgetsrc
     encodingselector_impl.cpp
     depthselector.cpp
     revertform_impl.cpp
+    deleteform_impl.cpp
     models/commitmodelhelper.cpp
     models/commitmodel.cpp
     )
@@ -38,6 +40,7 @@ SET(ksvnwidgethdr
     encodingselector_impl.h
     depthselector.h
     revertform_impl.h
+    deleteform_impl.h
     models/commitmodelhelper.h
     models/commitmodel.h
 )

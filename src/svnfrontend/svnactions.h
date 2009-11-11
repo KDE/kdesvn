@@ -86,7 +86,7 @@ public:
     bool addItems(const QStringList&w,svn::Depth depth=svn::DepthEmpty);
     void checkAddItems(const QString&path,bool print_error_box=true);
 
-    bool makeDelete(const svn::Pathes&,bool keep_local=true);
+    bool makeDelete(const svn::Pathes&,bool keep_local=true,bool force=false);
     bool makeDelete(const QStringList&);
     void makeLock(const QStringList&,const QString&,bool);
     void makeUnlock(const QStringList&,bool);

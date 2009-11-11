@@ -28,12 +28,9 @@
 
 #include <QString>
 
-template<class T> inline KDialog* createDialog(T**ptr,const QString&_head,bool OkCancel=false,const char*name="standard_dialog",bool showHelp=false,bool modal=true,const KGuiItem&u1=KGuiItem())
+template<class T> inline KDialog* createDialog(T**ptr,const QString&_head,const QFlags<KDialog::ButtonCode>&_buttons,const char*name="standard_dialog",bool showHelp=false,bool modal=true,const KGuiItem&u1=KGuiItem())
 {
-    QFlags<KDialog::ButtonCode> buttons = KDialog::Ok;
-    if (OkCancel) {
-        buttons = buttons|KDialog::Cancel;
-    }
+    QFlags<KDialog::ButtonCode> buttons = _buttons;
     if (showHelp) {
         buttons = buttons|KDialog::Help;
     }
@@ -58,6 +55,24 @@ template<class T> inline KDialog* createDialog(T**ptr,const QString&_head,bool O
     KConfigGroup _k(Kdesvnsettings::self()->config(),name?name:"standard_size");
     dlg->restoreDialogSize(_k);
     return dlg;
+}
+
+template<class T> inline KDialog*createYesDialog(T**ptr,const QString&_head,bool YesNo=false,const char*name="standard_dialog",bool showHelp=false,bool modal=true,const KGuiItem&u1=KGuiItem())
+{
+    QFlags<KDialog::ButtonCode> buttons = KDialog::Yes;
+    if (YesNo) {
+        buttons = buttons|KDialog::No;
+    }
+    return createDialog(ptr,_head,buttons,name,showHelp,modal,u1);
+}
+
+template<class T> inline KDialog*createOkDialog(T**ptr,const QString&_head,bool OkCancel=false,const char*name="standard_dialog",bool showHelp=false,bool modal=true,const KGuiItem&u1=KGuiItem())
+{
+    QFlags<KDialog::ButtonCode> buttons = KDialog::Ok;
+    if (OkCancel) {
+        buttons = buttons|KDialog::Cancel;
+    }
+    return createDialog(ptr,_head,buttons,name,showHelp,modal,u1);
 }
 
 #endif

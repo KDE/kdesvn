@@ -32,6 +32,8 @@ class DeleteForm_impl: public QWidget, Ui::DeleteForm {
 
         bool keep_local()const;
         bool force_delete()const;
+
+        void showExtraButtons(bool show);
 };
 
 #endif

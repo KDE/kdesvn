@@ -78,7 +78,7 @@ void DbSettings::showSettings(const QString&repository)
     DbSettings*ptr = 0;
     static const char*cfg_text = "db_settings_dlg";
     KConfigGroup _kc(Kdesvnsettings::self()->config(),cfg_text);
-    KDialog*dlg = createDialog(&ptr,i18n("Settings for %1",repository),true,"RepositorySettings",cfg_text);
+    KDialog*dlg = createOkDialog(&ptr,i18n("Settings for %1",repository),true,"RepositorySettings",cfg_text);
     dlg->restoreDialogSize(_kc);
     ptr->setRepository(repository);
     if (dlg->exec()==QDialog::Accepted) {

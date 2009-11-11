@@ -30,6 +30,12 @@ DeleteForm_impl::~DeleteForm_impl()
 {
 }
 
+void DeleteForm_impl::showExtraButtons(bool show)
+{
+    m_keepLocal->setVisible(show);
+    m_forceDelete->setVisible(show);
+}
+
 void DeleteForm_impl::setStringList(const QStringList&aList)
 {
     m_ItemsList->clear();

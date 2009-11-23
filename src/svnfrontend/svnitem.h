@@ -84,6 +84,7 @@ public:
     bool isMissing()const;
     bool isDeleted()const;
     const QString& getToolTipText();
+    bool hasToolTipText();
     KFileItem fileItem();
 
 protected:

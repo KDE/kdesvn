@@ -41,6 +41,7 @@
 #include <QPainter>
 #include <QBitmap>
 #include <QPixmap>
+#include <QMutexLocker>
 
 class SvnItem_p:public svn::ref_count
 {
@@ -64,6 +65,7 @@ protected:
     bool isWc;
     svn::Revision lRev;
     KMimeType::Ptr mptr;
+    QMutex _infoTextMutex;
 };
 
 SvnItem_p::SvnItem_p()
@@ -305,6 +307,10 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
     /* yes - different way to "isDir" above 'cause here we try to use the
        mime-features of KDE on ALL not just unversioned entries.
      */
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
     if (svn::Url::isValid(p_Item->m_Stat->path())) {
         /* remote access */
         p = KIconLoader::global()->loadMimeTypeIcon(p_Item->mimeType(isDir())->iconName(),
@@ -337,6 +343,9 @@ QPixmap SvnItem::getPixmap(int size,bool overlay)
             p = getPixmap(p,size,overlay);
         }
     }
+#ifdef DEBUG_TIMER
+    //kDebug()<<"Time getting icon: "<<_counttime.elapsed();
+#endif
     return p;
 }
 
@@ -509,12 +518,19 @@ bool SvnItem::isConflicted()const
     return p_Item->m_Stat->textStatus()==svn_wc_status_conflicted;
 }
 
+bool SvnItem::hasToolTipText()
+{
+    QMutexLocker ml(&(p_Item->_infoTextMutex));
+    return !p_Item->m_infoText.isNull();
+}
+
 /*!
     \fn SvnItem::getToolTipText()
  */
 const QString& SvnItem::getToolTipText()
 {
-    if (p_Item->m_infoText.isNull()) {
+    if (!hasToolTipText()) {
+        QString text;
         if (isRealVersioned() && !p_Item->m_Stat->entry().url().isEmpty()) {
             SvnActions*wrap = getWrapper();
             svn::Revision peg(svn_opt_revision_unspecified);
@@ -528,13 +544,16 @@ const QString& SvnItem::getToolTipText()
             }
             if (wrap) {
                 QList<SvnItem*> lst; lst.append(this);
-                p_Item->m_infoText = wrap->getInfo(lst,rev,peg,false,false);
-                if (!p_Item->m_fitem.isNull()) p_Item->m_infoText+=p_Item->m_fitem.getToolTipText(0);
+                text = wrap->getInfo(lst,rev,peg,false,false);
+                if (!p_Item->m_fitem.isNull()) text+=p_Item->m_fitem.getToolTipText(0);
             }
         } else if (!p_Item->m_fitem.isNull()){
-            p_Item->m_infoText=p_Item->m_fitem.getToolTipText(6);
+            text = p_Item->m_fitem.getToolTipText(6);
         }
+        QMutexLocker ml(&(p_Item->_infoTextMutex));
+        p_Item->m_infoText = text;
     }
+    QMutexLocker ml(&(p_Item->_infoTextMutex));
     return p_Item->m_infoText;
 }
 

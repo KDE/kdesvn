@@ -190,6 +190,12 @@ void MainTreeWidget::resizeAllColumns()
 
 bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
 {
+
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
+
     CursorStack a;
     m_Data->m_Model->svnWrapper()->killallThreads();
     clear();
@@ -296,16 +302,30 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
              slotCheckUpdates();
         }
     }
+#ifdef DEBUG_TIMER
+    _counttime.restart();
+#endif
+
     if (result && Kdesvnsettings::log_cache_on_open()) {
         m_Data->m_Model->svnWrapper()->startFillCache(baseUri(),true);
     }
-
+#ifdef DEBUG_TIMER
+    kDebug()<<"Starting cache "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     emit sigUrlChanged(baseUri());
+#ifdef DEBUG_TIMER
+    kDebug()<<"Fired signals "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
 
     QTimer::singleShot(1,this,SLOT(readSupportData()));
     enableActions();
+#ifdef DEBUG_TIMER
+    kDebug()<<"Enabled actions "<<_counttime.elapsed();
+#endif
     return result;
 }
 

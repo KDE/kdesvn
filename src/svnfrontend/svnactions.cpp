@@ -2335,11 +2335,19 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, const 
     QString ex;
     svn::Depth _d=rec?svn::DepthInfinity:svn::DepthImmediates;
     try {
+#ifdef DEBUG_TIMER
+        QTime _counttime;
+        _counttime.start();
+#endif
         svn::StatusParameter params(what);
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Status / List"),i18n("Creating list / check status"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         //                                      rec all  up     noign
         dlist = m_Data->m_Svnclient->status(params.depth(_d).all(all).update(updates).noIgnore(display_ignores).revision(where).detailedRemote(disp_remote_details).ignoreExternals(false));
+#ifdef DEBUG_TIMER
+        kDebug()<<"Time for getting status: "<<_counttime.elapsed();
+#endif
+
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2572,7 +2580,16 @@ bool SvnActions::checkConflictedCache(const QString&path)
 
 void SvnActions::startFillCache(const QString&path,bool startup)
 {
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
     stopFillCache();
+#ifdef DEBUG_TIMER
+    kDebug()<<"Stopped cache "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
+
     svn::InfoEntry e;
     if (!doNetworking()) {
         emit sendNotify(i18n("Not filling logcache because networking is disabled"));
@@ -2581,6 +2598,10 @@ void SvnActions::startFillCache(const QString&path,bool startup)
     if (!singleInfo(path,svn::Revision::UNDEFINED,e)) {
         return;
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Get info "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
     if (svn::Url::isLocal(e.reposRoot())) {
         return;
     }
@@ -2588,8 +2609,17 @@ void SvnActions::startFillCache(const QString&path,bool startup)
         emit sendNotify(i18n("Not filling logcache because it is disabled due setting for this repository."));
         return;
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Checked db value "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
+
     m_FCThread=new FillCacheThread(this,e.reposRoot());
     m_FCThread->start();
+#ifdef DEBUG_TIMER
+    kDebug()<<"Thread started "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
     emit sendNotify(i18n("Filling log cache in background"));
 }
 

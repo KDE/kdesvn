@@ -262,7 +262,11 @@ QVariant SvnItemModel::data(const QModelIndex&index,int role)const
         {
             switch(index.column()) {
                 case Name:
-                    return node->getToolTipText();
+                    if (node->hasToolTipText()) {
+                        return node->getToolTipText();
+                    } else {
+                        return QVariant();
+                    }
             }
         }
     }
@@ -347,6 +351,11 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
         what.truncate(what.length()-1);
     }
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
+
     if (!m_Data->m_Display->isWorkingCopy()|| (!_parent) || ((_parent) && (_parent->isVersioned()))) {
         if (!svnWrapper()->makeStatus(what,dlist,m_Data->m_Display->baseRevision(),false,true,true) ) {
             return -1;
@@ -354,6 +363,10 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
     } else {
         return checkUnversionedDirs(_parent);
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Time for getting entries: "<<_counttime.elapsed();
+    _counttime.restart();
+#endif
     svn::StatusEntries neweritems;
     svnWrapper()->getaddedItems(what,neweritems);
     dlist+=neweritems;
@@ -382,6 +395,9 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
     if (_parent) {
         node=_parent;
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Time finding parent node: "<<_counttime.elapsed();
+#endif
     insertDirs(node,dlist);
     return dlist.size();
 }
@@ -401,13 +417,24 @@ void SvnItemModel::insertDirs(SvnItemModelNode*_parent,svn::StatusEntries&dlist)
     SvnItemModelNode*node = 0;
     beginInsertRows(ind,parent->childList().count(),parent->childList().count()+dlist.count()-1);
     svn::StatusEntries::iterator it = dlist.begin();
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
     for (;it!=dlist.end();++it) {
+#ifdef DEBUG_TIMER
+        _counttime.restart();
+#endif
         if (m_Data->MustCreateDir(*(*it))) {
             node=new SvnItemModelNodeDir(parent,svnWrapper(),m_Data->m_Display);
         } else {
             node=new SvnItemModelNode(parent,svnWrapper(),m_Data->m_Display);
         }
         node->setStat((*it));
+#ifdef DEBUG_TIMER
+        kDebug()<<"Time creating item: "<<_counttime.elapsed();
+        _counttime.restart();
+#endif
         if (m_Data->m_Display->isWorkingCopy() && m_Data->m_DirWatch) {
             if (node->isDir()) {
                 m_Data->addWatchDir(node->fullName());
@@ -415,9 +442,22 @@ void SvnItemModel::insertDirs(SvnItemModelNode*_parent,svn::StatusEntries&dlist)
                 m_Data->addWatchFile(node->fullName());
             }
         }
+#ifdef DEBUG_TIMER
+        kDebug()<<"Time add watch: "<<_counttime.elapsed();
+        _counttime.restart();
+#endif
         parent->m_Children.append(node);
+#ifdef DEBUG_TIMER
+        kDebug()<<"Time append node: "<<_counttime.elapsed();
+#endif
     }
+#ifdef DEBUG_TIMER
+    _counttime.restart();
+#endif
     endInsertRows();
+#ifdef DEBUG_TIMER
+    kDebug()<<"Time append all node: "<<_counttime.elapsed();
+#endif
 }
 
 bool SvnItemModel::canFetchMore(const QModelIndex & parent)const

@@ -50,7 +50,6 @@ void GetInfoThread::run()
         {
             QMutexLocker ml(&m_QueueLock);
             if (m_NodeQueue.count()>0) {
-                kDebug()<<m_NodeQueue.count();
                 current = m_NodeQueue.dequeue ();
                 kDebug()<<m_NodeQueue.count();
             }
@@ -78,15 +77,25 @@ void GetInfoThread::cancelMe()
 void GetInfoThread::appendNode(SvnItemModelNode*node)
 {
     QMutexLocker ml(&m_QueueLock);
-    m_NodeQueue.enqueue(node);
-    if (!isRunning()) {
-        kDebug()<<"Restart thread"<<endl;
-        {
-            QWriteLocker cl(&m_CancelLock);
-            m_Cancel = false;
+    bool found = false;
+    QQueue<SvnItemModelNode*>::const_iterator it=m_NodeQueue.constBegin();
+    for (;it!=m_NodeQueue.constEnd();++it) {
+        if ((*it)->fullName()==node->fullName()) {
+            found = true;
+            break;
         }
+    }
+    if (!found) {
+        m_NodeQueue.enqueue(node);
+        if (!isRunning()) {
+            kDebug()<<"Restart thread"<<endl;
+            {
+                QWriteLocker cl(&m_CancelLock);
+                m_Cancel = false;
+            }
 
-        start();
+            start();
+        }
     }
 }
 

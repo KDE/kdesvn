@@ -35,20 +35,25 @@ class QObject;
 class FillCacheThread:public QThread
 {
 public:
-    FillCacheThread(QObject*,const QString&reposRoot);
+    FillCacheThread(QObject*,const QString&aPath,bool startup);
     virtual ~FillCacheThread();
     virtual void run();
     virtual void cancelMe();
 
     const QString&reposRoot()const;
+    const QString&Path()const;
 
 protected:
+    void fillInfo();
+
     QMutex mutex;
     svn::Client* m_Svnclient;
     svn::ContextP m_CurrentContext;
     svn::smart_pointer<ThreadContextListener> m_SvnContextListener;
     QObject*m_Parent;
     QString m_what;
+    QString m_path;
+    bool m_startup;
 };
 
 #endif

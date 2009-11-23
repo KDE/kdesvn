@@ -93,6 +93,7 @@
 #include <QFileInfo>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QReadWriteLock>
 
 #include <sys/time.h>
 #include <unistd.h>
@@ -142,6 +143,7 @@ public:
 
     void clearCaches()
     {
+        QWriteLocker wl(&(m_InfoCacheLock));
         m_PropertiesCache.clear();
         m_contextData.clear();
         m_InfoCache.clear();
@@ -198,6 +200,7 @@ public:
     QPointer<SvnLogDlgImp> m_LogDialog;
 
     QMap<QString,QString> m_contextData;
+    QReadWriteLock m_InfoCacheLock;
 
     bool runblocked;
 };
@@ -441,19 +444,27 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
         cacheKey=_rev.toString()+'/'+url;
     }
     svn::InfoEntries e;
+    bool must_write = false;
 
-    if (cacheKey.isEmpty() || !m_Data->m_InfoCache.findSingleValid(cacheKey,target)) {
-        try {
-            e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
-        } catch (const svn::Exception&ce) {
-            emit clientException(ce.msg());
-            return false;
+    {
+        QReadLocker rl(&(m_Data->m_InfoCacheLock));
+        if (cacheKey.isEmpty() || !m_Data->m_InfoCache.findSingleValid(cacheKey,target)) {
+            must_write = true;
+            try {
+                e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
+            } catch (const svn::Exception&ce) {
+                emit clientException(ce.msg());
+                return false;
+            }
+            if (e.count()<1||e[0].reposRoot().isEmpty()) {
+                emit clientException(i18n("Got no info."));
+                return false;
+            }
+            target = e[0];
         }
-        if (e.count()<1||e[0].reposRoot().isEmpty()) {
-            emit clientException(i18n("Got no info."));
-            return false;
-        }
-        target = e[0];
+    }
+    if (must_write) {
+        QWriteLocker wl(&(m_Data->m_InfoCacheLock));
         if (!cacheKey.isEmpty()) {
             m_Data->m_InfoCache.insertKey(e[0],cacheKey);
             if (peg != svn::Revision::UNDEFINED && peg.kind()!= svn::Revision::NUMBER &&  peg.kind()!= svn::Revision::DATE ) {
@@ -463,6 +474,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             }
         }
     }
+
     return true;
 }
 
@@ -2589,38 +2601,14 @@ void SvnActions::startFillCache(const QString&path,bool startup)
     kDebug()<<"Stopped cache "<<_counttime.elapsed();
     _counttime.restart();
 #endif
-
-    svn::InfoEntry e;
     if (!doNetworking()) {
         emit sendNotify(i18n("Not filling logcache because networking is disabled"));
         return;
     }
-    if (!singleInfo(path,svn::Revision::UNDEFINED,e)) {
-        return;
-    }
-#ifdef DEBUG_TIMER
-    kDebug()<<"Get info "<<_counttime.elapsed();
-    _counttime.restart();
-#endif
-    if (svn::Url::isLocal(e.reposRoot())) {
-        return;
-    }
-    if (startup && svn::cache::ReposConfig::self()->readEntry(e.reposRoot(),"no_update_cache",false)) {
-        emit sendNotify(i18n("Not filling logcache because it is disabled due setting for this repository."));
-        return;
-    }
-#ifdef DEBUG_TIMER
-    kDebug()<<"Checked db value "<<_counttime.elapsed();
-    _counttime.restart();
-#endif
 
-    m_FCThread=new FillCacheThread(this,e.reposRoot());
+    m_FCThread = new FillCacheThread(this,path,startup);
     m_FCThread->start();
-#ifdef DEBUG_TIMER
-    kDebug()<<"Thread started "<<_counttime.elapsed();
-    _counttime.restart();
-#endif
-    emit sendNotify(i18n("Filling log cache in background"));
+
 }
 
 bool SvnActions::doNetworking()

@@ -22,15 +22,18 @@
 
 #include "src/svnqt/cache/LogCache.hpp"
 #include "src/svnqt/cache/ReposLog.hpp"
+#include "src/svnqt/cache/ReposConfig.hpp"
 #include "src/svnqt/cache/DatabaseException.hpp"
+#include "src/svnqt/url.hpp"
 #include "src/kdesvn_events.h"
 
-#include <qobject.h>
+#include <QObject>
 #include <kdebug.h>
 #include <kapplication.h>
 #include <klocale.h>
+#include <kurl.h>
 
-FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
+FillCacheThread::FillCacheThread(QObject*_parent,const QString&aPath,bool startup)
     : QThread(),mutex(),m_SvnContextListener(0)
 {
     setObjectName("fillcachethread");
@@ -41,8 +44,14 @@ FillCacheThread::FillCacheThread(QObject*_parent,const QString&reposRoot)
     QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
 
     m_CurrentContext->setListener(m_SvnContextListener);
-    m_what = reposRoot;
+    m_path = aPath;
     m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
+    m_startup = startup;
+}
+
+const QString&FillCacheThread::Path()const
+{
+    return m_path;
 }
 
 FillCacheThread::~FillCacheThread()
@@ -63,55 +72,104 @@ void FillCacheThread::cancelMe()
     m_SvnContextListener->setCanceled(true);
 }
 
+void FillCacheThread::fillInfo()
+{
+    QString url,cacheKey;
+    svn::Revision _rev = svn::Revision::UNDEFINED;
+    svn::Revision peg = svn::Revision::UNDEFINED;
+
+    if (!svn::Url::isValid(Path())) {
+        // working copy
+        // url = svn::Wc::getUrl(what);
+        url = Path();
+        if (url.indexOf("@")!=-1) {
+            url+="@BASE";
+        }
+        peg = svn::Revision::UNDEFINED;
+        cacheKey=url;
+    } else {
+        KUrl _uri = Path();
+        QString prot = svn::Url::transformProtokoll(_uri.protocol());
+        _uri.setProtocol(prot);
+        url = _uri.prettyUrl();
+        if (peg==svn::Revision::UNDEFINED)
+        {
+            peg = _rev;
+        }
+        if (peg==svn::Revision::UNDEFINED)
+        {
+            peg=svn::Revision::HEAD;
+        }
+        cacheKey=_rev.toString()+'/'+url;
+    }
+    svn::InfoEntries e;
+    e = (m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
+    if (e.count()>0 && !e[0].reposRoot().isEmpty()) {
+        m_what = e[0].reposRoot();
+    }
+
+}
+
 void FillCacheThread::run()
 {
     svn::Revision where = svn::Revision::HEAD;
     QString ex;
-    svn::cache::ReposLog rl(m_Svnclient,m_what);
     bool breakit=false;
     KApplication*k = KApplication::kApplication();
     try {
-        svn::Revision latestCache = rl.latestCachedRev();
-        svn::Revision Head = rl.latestHeadRev();
-        qlonglong i = latestCache.revnum();
-        if (i<0) {
-            i=0;
+        fillInfo();
+
+        if (m_what.isEmpty() || svn::Url::isLocal(m_what) ) {
+            return;
         }
-        qlonglong j = Head.revnum();
+        if (m_startup && svn::cache::ReposConfig::self()->readEntry(m_what,"no_update_cache",false)) {
+            m_SvnContextListener->contextNotify(i18n("Not filling logcache because it is disabled due setting for this repository."));
+        } else {
+            m_SvnContextListener->contextNotify(i18n("Filling log cache in background"));
 
-        qlonglong _max=j-i;
-        qlonglong _cur=0;
-
-        FillCacheStatusEvent*fev;
-        if (k) {
-            fev = new FillCacheStatusEvent(_cur,_max);
-            k->postEvent(m_Parent,fev);
-        }
-
-        if (i<j) {
-            for (;i<j;i+=200) {
-                _cur+=200;
-                rl.fillCache(i);
-
-                if (m_SvnContextListener->contextCancel()) {
-                    m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
-                    breakit=true;
-                    break;
-                }
-                if (latestCache==rl.latestCachedRev()) {
-                    break;
-                }
-                if (k) {
-                    fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
-                    k->postEvent(m_Parent,fev);
-                }
-                latestCache=rl.latestCachedRev();
+            svn::cache::ReposLog rl(m_Svnclient,m_what);
+            svn::Revision latestCache = rl.latestCachedRev();
+            svn::Revision Head = rl.latestHeadRev();
+            qlonglong i = latestCache.revnum();
+            if (i<0) {
+                i=0;
             }
-            if (latestCache.revnum()<Head.revnum()) {
-                rl.fillCache(Head.revnum());
+            qlonglong j = Head.revnum();
+
+            qlonglong _max=j-i;
+            qlonglong _cur=0;
+
+            FillCacheStatusEvent*fev;
+            if (k) {
+                fev = new FillCacheStatusEvent(_cur,_max);
+                k->postEvent(m_Parent,fev);
             }
-            i=Head.revnum();
-            m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1",i));
+
+            if (i<j) {
+                for (;i<j;i+=200) {
+                    _cur+=200;
+                    rl.fillCache(i);
+
+                    if (m_SvnContextListener->contextCancel()) {
+                        m_SvnContextListener->contextNotify(i18n("Filling cache canceled."));
+                        breakit=true;
+                        break;
+                    }
+                    if (latestCache==rl.latestCachedRev()) {
+                        break;
+                    }
+                    if (k) {
+                        fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
+                        k->postEvent(m_Parent,fev);
+                    }
+                    latestCache=rl.latestCachedRev();
+                }
+                if (latestCache.revnum()<Head.revnum()) {
+                    rl.fillCache(Head.revnum());
+                }
+                i=Head.revnum();
+                m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1",i));
+            }
         }
     } catch (const svn::Exception&e) {
         m_SvnContextListener->contextNotify(e.msg());

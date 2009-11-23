@@ -132,6 +132,7 @@ protected:
    void checkAddNewItems(const QModelIndex&ind);
    bool checkRootNode();
    int checkUnversionedDirs(SvnItemModelNode* _parent);
+   void beginRemoveRows( const QModelIndex & parent, int first, int last );
 
 protected Q_SLOTS:
     void slotCreated(const QString&);

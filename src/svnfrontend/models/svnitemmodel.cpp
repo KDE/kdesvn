@@ -21,6 +21,7 @@
 #include "svnitemmodel.h"
 #include "svnitemnode.h"
 #include "svnactions.h"
+#include "getinfothread.h"
 #include "src/svnfrontend/maintreewidget.h"
 #include "src/settings/kdesvnsettings.h"
 
@@ -117,6 +118,7 @@ public:
     MainTreeWidget*m_Display;
     KDirWatch*m_DirWatch;
     QString m_Uid;
+    mutable GetInfoThread m_InfoThread;
 };
 /*****************************
  * Internal data class end   *
@@ -163,6 +165,16 @@ void SvnItemModel::clear()
     beginRemoveRows(QModelIndex(),0,numRows);
     m_Data->clear();
     endRemoveRows();
+}
+
+void SvnItemModel::beginRemoveRows( const QModelIndex & parent, int first, int last )
+{
+    m_Data->m_InfoThread.clearNodes();
+    m_Data->m_InfoThread.cancelMe();
+    if (!m_Data->m_InfoThread.wait(1000)) {
+
+    }
+    QAbstractItemModel::beginRemoveRows(parent,first,last);
 }
 
 void SvnItemModel::clearNodeDir(SvnItemModelNodeDir*node)
@@ -263,8 +275,11 @@ QVariant SvnItemModel::data(const QModelIndex&index,int role)const
             switch(index.column()) {
                 case Name:
                     if (node->hasToolTipText()) {
+                        kDebug()<<"Have tooltip for "<<node->shortName();
                         return node->getToolTipText();
                     } else {
+                        kDebug()<<"Search tooltip for "<<node->shortName();
+                        m_Data->m_InfoThread.appendNode(node);
                         return QVariant();
                     }
             }

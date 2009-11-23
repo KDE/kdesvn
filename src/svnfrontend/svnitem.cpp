@@ -530,6 +530,7 @@ bool SvnItem::hasToolTipText()
 const QString& SvnItem::getToolTipText()
 {
     if (!hasToolTipText()) {
+        kDebug()<<"Try getting text"<<endl;
         QString text;
         if (isRealVersioned() && !p_Item->m_Stat->entry().url().isEmpty()) {
             SvnActions*wrap = getWrapper();
@@ -545,6 +546,7 @@ const QString& SvnItem::getToolTipText()
             if (wrap) {
                 QList<SvnItem*> lst; lst.append(this);
                 text = wrap->getInfo(lst,rev,peg,false,false);
+                kDebug()<<text<<endl;
                 if (!p_Item->m_fitem.isNull()) text+=p_Item->m_fitem.getToolTipText(0);
             }
         } else if (!p_Item->m_fitem.isNull()){

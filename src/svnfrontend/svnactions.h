@@ -141,6 +141,8 @@ public:
 
     QString getInfo(const SvnItemList& lst,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
     QString getInfo(const QString&_what,const svn::Revision&rev,const svn::Revision&peg,bool recursive,bool all=true);
+    QString getInfo(const svn::InfoEntries&entries,const QString&what,bool all);
+
 
     QString makeMkdir(const QString&);
     bool makeMkdir(const QStringList&,const QString&);

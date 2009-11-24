@@ -23,30 +23,23 @@
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/status.hpp"
-#include "ccontextlistener.h"
-#include "eventnumbers.h"
-#include "frontendtypes.h"
+#include "svnthread.h"
 
 #include <qthread.h>
 #include <qevent.h>
 
 class QObject;
 
-class CheckModifiedThread:public QThread
+class CheckModifiedThread:public SvnThread
 {
 public:
     CheckModifiedThread(QObject*,const QString&what,bool _updates=false);
     virtual ~CheckModifiedThread();
     virtual void run();
-    virtual void cancelMe();
     virtual const svn::StatusEntries&getList()const;
 
 protected:
     QMutex mutex;
-    svn::Client* m_Svnclient;
-    svn::ContextP m_CurrentContext;
-    ThreadContextListenerP m_ContextListener;
-    QObject*m_Parent;
     QString m_what;
     bool m_updates;
     svn::StatusEntries m_Cache;

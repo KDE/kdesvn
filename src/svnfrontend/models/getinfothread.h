@@ -21,6 +21,8 @@
 #ifndef GETINFOTHREAD_H
 #define GETINFOTHREAD_H
 
+#include "svnthread.h"
+
 #include <QThread>
 #include <QEvent>
 #include <QQueue>
@@ -29,10 +31,10 @@
 
 class SvnItemModelNode;
 
-class GetInfoThread:public QThread
+class GetInfoThread:public SvnThread
 {
 public:
-    GetInfoThread();
+    GetInfoThread(QObject*parent);
     virtual ~GetInfoThread();
     virtual void run();
     virtual void cancelMe();

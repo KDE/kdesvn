@@ -23,22 +23,17 @@
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/status.hpp"
-#include "ccontextlistener.h"
-#include "eventnumbers.h"
 #include "frontendtypes.h"
-
-#include <qthread.h>
-#include <qevent.h>
+#include "svnthread.h"
 
 class QObject;
 
-class FillCacheThread:public QThread
+class FillCacheThread:public SvnThread
 {
 public:
     FillCacheThread(QObject*,const QString&aPath,bool startup);
     virtual ~FillCacheThread();
     virtual void run();
-    virtual void cancelMe();
 
     const QString&reposRoot()const;
     const QString&Path()const;
@@ -47,10 +42,6 @@ protected:
     void fillInfo();
 
     QMutex mutex;
-    svn::Client* m_Svnclient;
-    svn::ContextP m_CurrentContext;
-    svn::smart_pointer<ThreadContextListener> m_SvnContextListener;
-    QObject*m_Parent;
     QString m_what;
     QString m_path;
     bool m_startup;

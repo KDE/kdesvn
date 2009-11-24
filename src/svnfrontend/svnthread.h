@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006-2009 by Rajko Albrecht                             *
- *   ral@alwins-world.de                                                   *
+ *   Copyright (C) 2009 by Rajko Albrecht  ral@alwins-world.de             *
+ *   http://kdesvn.alwins-world.de/                                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,47 +18,42 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "modifiedthread.h"
-#include "tcontextlistener.h"
-#include "src/kdesvn_events.h"
+#ifndef SVNTHREAD_H
+#define SVNTHREAD_H
 
-#include "src/svnqt/svnqttypes.hpp"
-#include "src/svnqt/client_parameter.hpp"
+#include "ccontextlistener.h"
+#include "frontendtypes.h"
 
-#include <qobject.h>
-#include <kdebug.h>
-#include <kapplication.h>
+#include <QThread>
+#include <QEvent>
+#include <QQueue>
+#include <QMutex>
+#include <QReadWriteLock>
 
-CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool _updates)
-    : SvnThread(_parent),mutex()
+//! Base class for creating threads holding an subversion connection
+class SvnThread:public QThread
 {
-    m_what = what;
-    m_updates = _updates;
-}
+public:
+    //! Creator
+    /*!
+     * \param parent A qobject derived class which should have a qt-slot slotNotifyMessage(const QString&)
+     */
+    SvnThread(QObject*parent);
+    virtual ~SvnThread();
+    virtual void run()=0;
+    virtual void cancelMe();
 
-CheckModifiedThread::~CheckModifiedThread()
-{
-}
+protected:
+    svn::Client* m_Svnclient;
+    svn::ContextP m_CurrentContext;
+    svn::smart_pointer<ThreadContextListener> m_SvnContextListener;
+    QObject*m_Parent;
 
-const svn::StatusEntries&CheckModifiedThread::getList()const
-{
-    return m_Cache;
-}
+    //! a base method often needed
+    /*!
+     * Exceptions will NOT catched, the caller has to do it!
+     */
+    void itemInfo(const QString&what,svn::InfoEntry&target,const svn::Revision&_rev=svn::Revision::UNDEFINED,const svn::Revision&_peg = svn::Revision::UNDEFINED);
+};
 
-void CheckModifiedThread::run()
-{
-    // what must be cleaned!
-    QString ex;
-    svn::StatusParameter params(m_what);
-    try {
-        m_Cache = m_Svnclient->status(params.depth(svn::DepthInfinity).all(false).update(m_updates).noIgnore(false).revision(svn::Revision::HEAD));
-    } catch (const svn::Exception&e) {
-        m_SvnContextListener->contextNotify(e.msg());
-    }
-    KApplication*k = KApplication::kApplication();
-    if (k) {
-        DataEvent*ev = new DataEvent(m_updates?EVENT_UPDATE_CACHE_FINISHED:EVENT_CACHE_THREAD_FINISHED);
-        ev->setData((void*)this);
-        k->postEvent(m_Parent,ev);
-    }
-}
+#endif

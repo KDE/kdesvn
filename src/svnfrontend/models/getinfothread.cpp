@@ -20,15 +20,16 @@
 
 #include "getinfothread.h"
 #include "svnitemnode.h"
+#include "tcontextlistener.h"
+#include "src/svnqt/status.hpp"
+#include "src/svnqt/url.hpp"
 
 #include <QMutexLocker>
 #include <QReadLocker>
 #include <QWriteLocker>
 
-#include <kdebug.h>
-
-GetInfoThread::GetInfoThread()
-: QThread(),m_NodeQueue(),m_Cancel(false),m_QueueLock(),m_CancelLock()
+GetInfoThread::GetInfoThread(QObject*_parent)
+: SvnThread(_parent),m_NodeQueue(),m_Cancel(false),m_QueueLock(),m_CancelLock()
 {
 }
 
@@ -38,44 +39,58 @@ GetInfoThread::~GetInfoThread()
 
 void GetInfoThread::run()
 {
-    while (1) {
-        kDebug()<<"Loop..."<<endl;
-        {
-            QReadLocker cl(&m_CancelLock);
-            if (m_Cancel) {
+    svn::InfoEntry info;
+    svn::Revision rev = svn::Revision::UNDEFINED;
+    try {
+        while (1) {
+            {
+                QReadLocker cl(&m_CancelLock);
+                if (m_Cancel) {
+                    break;
+                }
+            }
+            SvnItemModelNode*current = 0;
+            {
+                QMutexLocker ml(&m_QueueLock);
+                if (m_NodeQueue.count()>0) {
+                    current = m_NodeQueue.dequeue ();
+                }
+            }
+            if (current) {
+                if (!current->hasToolTipText()) {
+                    if (current->isRealVersioned() && !current->stat()->entry().url().isEmpty()) {
+                        if (svn::Url::isValid(current->fullName())) {
+                            rev = current->revision();
+                        } else {
+                            rev = svn::Revision::UNDEFINED;
+                        }
+                        itemInfo(current->fullName(),info,rev,current->correctPeg());
+                    }
+                    current->generateToolTip(info);
+                }
+            } else {
                 break;
             }
         }
-        SvnItemModelNode*current = 0;
-        {
-            QMutexLocker ml(&m_QueueLock);
-            if (m_NodeQueue.count()>0) {
-                current = m_NodeQueue.dequeue ();
-                kDebug()<<m_NodeQueue.count();
-            }
-        }
-        if (current) {
-            kDebug()<<"Got an item" << endl;
-            if (!current->hasToolTipText()) {
-                kDebug()<<"Get tooltip for "<<current->shortName();
-                current->getToolTipText();
-            } else {
-                kDebug()<<"Found it for "<<current->shortName();
-            }
-        } else {
-            break;
-        }
+    } catch (const svn::Exception&e) {
+        m_SvnContextListener->contextNotify(e.msg());
     }
 }
 
 void GetInfoThread::cancelMe()
 {
-    QWriteLocker cl(&m_CancelLock);
-    m_Cancel = true;
+    SvnThread::cancelMe();
+    {
+        QWriteLocker cl(&m_CancelLock);
+        m_Cancel = true;
+    }
 }
 
 void GetInfoThread::appendNode(SvnItemModelNode*node)
 {
+    if (!node) {
+        return;
+    }
     QMutexLocker ml(&m_QueueLock);
     bool found = false;
     QQueue<SvnItemModelNode*>::const_iterator it=m_NodeQueue.constBegin();
@@ -87,15 +102,14 @@ void GetInfoThread::appendNode(SvnItemModelNode*node)
     }
     if (!found) {
         m_NodeQueue.enqueue(node);
-        if (!isRunning()) {
-            kDebug()<<"Restart thread"<<endl;
-            {
-                QWriteLocker cl(&m_CancelLock);
-                m_Cancel = false;
-            }
-
-            start();
+    }
+    m_SvnContextListener->setCanceled(false);
+    if (!isRunning()) {
+        {
+            QWriteLocker cl(&m_CancelLock);
+            m_Cancel = false;
         }
+        start();
     }
 }
 

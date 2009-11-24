@@ -714,6 +714,11 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
         }
         entries.append(info);
     }
+    return getInfo(entries,_what,all);
+}
+
+QString SvnActions::getInfo(const svn::InfoEntries&entries,const QString&_what,bool all)
+{
     QString text = "";
     svn::InfoEntries::const_iterator it;
     static QString rb = "<tr><td><nobr>";

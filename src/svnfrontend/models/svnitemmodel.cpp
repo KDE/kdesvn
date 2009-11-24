@@ -51,10 +51,17 @@ public:
         :m_rootNode(0),m_Cb(aCb),m_Display(display),m_DirWatch(0)
     {
         m_Uid = QUuid::createUuid().toString();
+        m_InfoThread = new GetInfoThread(aCb);
     }
 
     virtual ~SvnItemModelData()
     {
+        m_InfoThread->cancelMe();
+        if (!m_InfoThread->wait(500)) {
+            m_InfoThread->terminate();
+        }
+        delete m_InfoThread;
+
         delete m_rootNode;
         delete m_DirWatch;
         m_rootNode=0;
@@ -118,7 +125,7 @@ public:
     MainTreeWidget*m_Display;
     KDirWatch*m_DirWatch;
     QString m_Uid;
-    mutable GetInfoThread m_InfoThread;
+    mutable GetInfoThread*m_InfoThread;
 };
 /*****************************
  * Internal data class end   *
@@ -169,9 +176,9 @@ void SvnItemModel::clear()
 
 void SvnItemModel::beginRemoveRows( const QModelIndex & parent, int first, int last )
 {
-    m_Data->m_InfoThread.clearNodes();
-    m_Data->m_InfoThread.cancelMe();
-    if (!m_Data->m_InfoThread.wait(1000)) {
+    m_Data->m_InfoThread->clearNodes();
+    m_Data->m_InfoThread->cancelMe();
+    if (!m_Data->m_InfoThread->wait(1000)) {
 
     }
     QAbstractItemModel::beginRemoveRows(parent,first,last);
@@ -275,11 +282,9 @@ QVariant SvnItemModel::data(const QModelIndex&index,int role)const
             switch(index.column()) {
                 case Name:
                     if (node->hasToolTipText()) {
-                        kDebug()<<"Have tooltip for "<<node->shortName();
                         return node->getToolTipText();
                     } else {
-                        kDebug()<<"Search tooltip for "<<node->shortName();
-                        m_Data->m_InfoThread.appendNode(node);
+                        m_Data->m_InfoThread->appendNode(node);
                         return QVariant();
                     }
             }
@@ -918,4 +923,8 @@ const QString&SvnItemModel::uniqueIdentifier()const
     return m_Data->m_Uid;
 }
 
+void SvnItemModel::slotNotifyMessage(const QString&msg)
+{
+    kDebug()<<msg;
+}
 #include "svnitemmodel.moc"

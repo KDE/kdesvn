@@ -77,6 +77,8 @@ SET(svnfrontendsrc
     maintreewidget.cpp
     svntreeview.cpp
     svntreeview.h
+    svnthread.cpp
+    svnthread.h
     database/dboverview.cpp
     database/dboverview.h
     database/dbsettings.cpp

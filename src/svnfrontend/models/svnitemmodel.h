@@ -134,6 +134,9 @@ protected:
    int checkUnversionedDirs(SvnItemModelNode* _parent);
    void beginRemoveRows( const QModelIndex & parent, int first, int last );
 
+public Q_SLOTS:
+    virtual void slotNotifyMessage(const QString&);
+
 protected Q_SLOTS:
     void slotCreated(const QString&);
     void slotDeleted(const QString&);

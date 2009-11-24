@@ -24,8 +24,8 @@
 #include "src/svnqt/cache/ReposLog.hpp"
 #include "src/svnqt/cache/ReposConfig.hpp"
 #include "src/svnqt/cache/DatabaseException.hpp"
-#include "src/svnqt/url.hpp"
 #include "src/kdesvn_events.h"
+#include "src/svnqt/url.hpp"
 
 #include <QObject>
 #include <kdebug.h>
@@ -34,18 +34,10 @@
 #include <kurl.h>
 
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&aPath,bool startup)
-    : QThread(),mutex(),m_SvnContextListener(0)
+    : SvnThread(_parent),mutex()
 {
     setObjectName("fillcachethread");
-    m_Parent = _parent;
-    m_CurrentContext = new svn::Context();
-
-    m_SvnContextListener = new ThreadContextListener(m_Parent);
-    QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
-
-    m_CurrentContext->setListener(m_SvnContextListener);
     m_path = aPath;
-    m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
     m_startup = startup;
 }
 
@@ -56,9 +48,6 @@ const QString&FillCacheThread::Path()const
 
 FillCacheThread::~FillCacheThread()
 {
-    m_CurrentContext->setListener(0);
-    delete m_Svnclient;
-    m_SvnContextListener=0;
 }
 
 const QString&FillCacheThread::reposRoot()const
@@ -66,48 +55,13 @@ const QString&FillCacheThread::reposRoot()const
     return m_what;
 }
 
-void FillCacheThread::cancelMe()
-{
-    // method is threadsafe!
-    m_SvnContextListener->setCanceled(true);
-}
-
 void FillCacheThread::fillInfo()
 {
-    QString url,cacheKey;
-    svn::Revision _rev = svn::Revision::UNDEFINED;
-    svn::Revision peg = svn::Revision::UNDEFINED;
-
-    if (!svn::Url::isValid(Path())) {
-        // working copy
-        // url = svn::Wc::getUrl(what);
-        url = Path();
-        if (url.indexOf("@")!=-1) {
-            url+="@BASE";
-        }
-        peg = svn::Revision::UNDEFINED;
-        cacheKey=url;
-    } else {
-        KUrl _uri = Path();
-        QString prot = svn::Url::transformProtokoll(_uri.protocol());
-        _uri.setProtocol(prot);
-        url = _uri.prettyUrl();
-        if (peg==svn::Revision::UNDEFINED)
-        {
-            peg = _rev;
-        }
-        if (peg==svn::Revision::UNDEFINED)
-        {
-            peg=svn::Revision::HEAD;
-        }
-        cacheKey=_rev.toString()+'/'+url;
+    svn::InfoEntry e;
+    itemInfo(Path(),e);
+    if (!e.reposRoot().isEmpty()) {
+        m_what = e.reposRoot();
     }
-    svn::InfoEntries e;
-    e = (m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
-    if (e.count()>0 && !e[0].reposRoot().isEmpty()) {
-        m_what = e[0].reposRoot();
-    }
-
 }
 
 void FillCacheThread::run()

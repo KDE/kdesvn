@@ -524,6 +524,14 @@ bool SvnItem::hasToolTipText()
     return !p_Item->m_infoText.isNull();
 }
 
+svn::Revision SvnItem::revision() const
+{
+    if (isRealVersioned() && !p_Item->m_Stat->entry().url().isEmpty()) {
+        return p_Item->m_Stat->entry().revision();
+    }
+    return svn::Revision::UNDEFINED;
+}
+
 /*!
     \fn SvnItem::getToolTipText()
  */
@@ -557,6 +565,25 @@ const QString& SvnItem::getToolTipText()
     }
     QMutexLocker ml(&(p_Item->_infoTextMutex));
     return p_Item->m_infoText;
+}
+
+void SvnItem::generateToolTip(const svn::InfoEntry&entry)
+{
+    QString text;
+    if (isRealVersioned() &&  !p_Item->m_Stat->entry().url().isEmpty()) {
+        SvnActions*wrap = getWrapper();
+        if (wrap) {
+            svn::InfoEntries e; e.append(entry);
+            text = wrap->getInfo(e,fullName(),false);
+        }
+        if (!p_Item->m_fitem.isNull()) text+=p_Item->m_fitem.getToolTipText(0);
+    } else if (!p_Item->m_fitem.isNull()){
+        text = p_Item->m_fitem.getToolTipText(6);
+    }
+    {
+        QMutexLocker ml(&(p_Item->_infoTextMutex));
+        p_Item->m_infoText = text;
+    }
 }
 
 KFileItem SvnItem::fileItem()

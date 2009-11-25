@@ -4,34 +4,34 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../contextdata.cpp" line="345"/>
+        <location filename="../contextdata.cpp" line="349"/>
         <source>invalid baton</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../contextdata.cpp" line="351"/>
+        <location filename="../contextdata.cpp" line="355"/>
         <source>invalid listener</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../contextdata.cpp" line="727"/>
-        <location filename="../repositorydata.cpp" line="96"/>
+        <location filename="../contextdata.cpp" line="731"/>
+        <location filename="../repositorydata.cpp" line="100"/>
         <source>Cancelled by user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../contextdata.cpp" line="793"/>
+        <location filename="../contextdata.cpp" line="797"/>
         <source>invalid subversion version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../repositorydata.cpp" line="180"/>
+        <location filename="../repositorydata.cpp" line="184"/>
         <source>&apos;%s&apos; is an URL when it should be a path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../repositorydata.cpp" line="197"/>
-        <location filename="../repositorydata.cpp" line="214"/>
+        <location filename="../repositorydata.cpp" line="201"/>
+        <location filename="../repositorydata.cpp" line="218"/>
         <source>No repository selected.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -39,7 +39,7 @@
 <context>
     <name>svn::ContextData</name>
     <message>
-        <location filename="../contextdata.cpp" line="777"/>
+        <location filename="../contextdata.cpp" line="781"/>
         <source>invalid subversion version.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -27,8 +27,11 @@
 // std::map 'cause QMap isn't usable, it don't work with with the typenames in class
 #include <map>
 #include <algorithm>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <QString>
+#include <QStringList>
+#include <QReadWriteLock>
+#include <QReadLocker>
+#include <QWriteLocker>
 
 namespace helpers {
 
@@ -322,12 +325,14 @@ public:
 protected:
     cache_map_type m_contentMap;
 
+    mutable QReadWriteLock m_RWLock;
+
 public:
-    itemCache():m_contentMap(){}
+    itemCache():m_contentMap(),m_RWLock(){}
     virtual ~itemCache(){};
 
     void setContent(const QLIST<C>&dlist);
-    void clear(){m_contentMap.clear();}
+    void clear(){QWriteLocker locker(&m_RWLock);m_contentMap.clear();}
     //! Checks if cache contains a specific item
     /*!
      * the keylist will manipulated - so copy-operations aren't needed.
@@ -349,6 +354,7 @@ public:
 
 template<class C> inline void itemCache<C>::setContent(const QLIST<C>&dlist)
 {
+    QWriteLocker locker(&m_RWLock);
     m_contentMap.clear();
     citer it;
     for (it=dlist.begin();it!=dlist.end();++it) {
@@ -372,6 +378,8 @@ template<class C> inline void itemCache<C>::insertKey(const C&st,const QString&p
     if (_keys.count()==0) {
         return;
     }
+    QWriteLocker locker(&m_RWLock);
+
     iter it=m_contentMap.find(_keys[0]);
 
     if (it==m_contentMap.end()) {
@@ -388,6 +396,8 @@ template<class C> inline void itemCache<C>::insertKey(const C&st,const QString&p
 
 template<class C> inline bool itemCache<C>::find(const QString&what)const
 {
+    QReadLocker locker(&m_RWLock);
+
     if (m_contentMap.size()==0) {
         return false;
     }
@@ -408,6 +418,8 @@ template<class C> inline bool itemCache<C>::find(const QString&what)const
 
 template<class C> inline bool itemCache<C>::find(const QString&_what,QLIST<C>&dlist)const
 {
+    QReadLocker locker(&m_RWLock);
+
     if (m_contentMap.size()==0) {
         return false;
     }
@@ -425,6 +437,8 @@ template<class C> inline bool itemCache<C>::find(const QString&_what,QLIST<C>&dl
 
 template<class C> inline void itemCache<C>::deleteKey(const QString&_what,bool exact)
 {
+    QWriteLocker locker(&m_RWLock);
+
     if (m_contentMap.size()==0) {
         return;
     }
@@ -458,6 +472,7 @@ template<class C> inline void itemCache<C>::deleteKey(const QString&_what,bool e
 
 template<class C> inline void itemCache<C>::dump_tree()
 {
+    QReadLocker locker(&m_RWLock);
     citer it;
     for (it=m_contentMap.begin();it!=m_contentMap.end();++it) {
 //        std::cout<<it->first.latin1() << " (" << it->second.key().latin1() << ")"<<std::endl;
@@ -467,6 +482,8 @@ template<class C> inline void itemCache<C>::dump_tree()
 
 template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,C&st)const
 {
+    QReadLocker locker(&m_RWLock);
+
     if (m_contentMap.size()==0) {
         return false;
     }
@@ -491,6 +508,8 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,
 
 template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,bool check_valid_subs)const
 {
+    QReadLocker locker(&m_RWLock);
+
     if (m_contentMap.size()==0) {
         return false;
     }
@@ -511,6 +530,8 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString&_what,
 
 template<class C> template<class T> inline void itemCache<C>::listsubs_if(const QString&_what,T&oper)const
 {
+    QReadLocker locker(&m_RWLock);
+
     if (m_contentMap.size()==0) {
         return;
     }

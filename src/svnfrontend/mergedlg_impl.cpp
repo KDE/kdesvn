@@ -32,7 +32,7 @@
 #include <qlabel.h>
 #include <qcheckbox.h>
 
-MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out)
+MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out,bool record_only)
     :QWidget(parent),Ui::MergeDlg()
 {
     setupUi(this);
@@ -53,6 +53,10 @@ MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out)
         m_OutInput->setEnabled(false);
         m_OutInput->hide();
         m_OutLabel->hide();
+    }
+    if (!record_only) {
+        m_RecordOnly->setEnabled(false);
+        m_RecordOnly->hide();
     }
     adjustSize();
     setMinimumSize(minimumSizeHint());
@@ -137,6 +141,11 @@ bool MergeDlg_impl::useExtern()const
     return m_useExternMerge->isChecked();
 }
 
+bool MergeDlg_impl::recordOnly()const
+{
+    return m_RecordOnly->isChecked();
+}
+
 QString MergeDlg_impl::Src1()const
 {
     KUrl uri(m_SrcOneInput->url());
@@ -195,7 +204,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     KVBox*Dialog1Layout = new KVBox(&dlg);
     dlg.setMainWidget(Dialog1Layout);
 
-    ptr = new MergeDlg_impl(Dialog1Layout,false,false,false);
+    ptr = new MergeDlg_impl(Dialog1Layout,false,false,false,false);
     if (name) {
         ptr->setObjectName(name);
     }
@@ -224,6 +233,11 @@ void MergeDlg_impl::externDisplayToggled(bool how)
     m_DryCheck->setEnabled(!how);
     m_RelatedCheck->setEnabled(!how);
     m_ForceCheck->setEnabled(!how);
+    m_RecordOnly->setEnabled(!how);
+}
+
+void MergeDlg_impl::recordOnlyToggled(bool)
+{
 }
 
 #include "mergedlg_impl.moc"

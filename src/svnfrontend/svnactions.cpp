@@ -2139,12 +2139,12 @@ void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&r
                                        const svn::Revision&rev2,
                                        bool rec,bool ancestry,bool forceIt,bool dry)
 {
-    slotMerge(_entry,_entry,_entry,rev1,rev2,svn::Revision::UNDEFINED,rec,ancestry,forceIt,dry);
+    slotMerge(_entry,_entry,_entry,rev1,rev2,svn::Revision::UNDEFINED,rec,ancestry,forceIt,dry,false);
 }
 
 void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&target,
                             const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,
-                            bool rec,bool ancestry,bool forceIt,bool dry)
+                            bool rec,bool ancestry,bool forceIt,bool dry,bool recordOnly)
 {
     Q_UNUSED(_peg);
     if (!m_Data->m_CurrentContext) return;
@@ -2170,10 +2170,9 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
     // build merge Parameters
     svn::MergeParameter _merge_parameter;
     ranges.append(svn::RevisionRange(rev1,rev2));
-    /// @todo implement "record_only" parameter into merge dialog
     /// @todo implement "reintegrate" parameter into merge dialog
     _merge_parameter.revisions(ranges).path1(p1).path2(p2).depth(rec?svn::DepthInfinity:svn::DepthFiles).notice_ancestry(ancestry).force(forceIt)
-        .dry_run(dry).record_only(false).reintegrate(false)
+        .dry_run(dry).record_only(recordOnly).reintegrate(false)
         .localPath(svn::Path(target)).merge_options(svn::StringArray());
 
     if(!p2.isset() || src1==src2) {

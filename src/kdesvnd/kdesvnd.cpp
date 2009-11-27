@@ -45,6 +45,7 @@
 
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
+#include <knotification.h>
 
 #include <qdir.h>
 #include <qvariant.h>
@@ -111,11 +112,12 @@ IListener::~IListener()
 {
 }
 
-kdesvnd::kdesvnd(QObject* parent, const QList<QVariant>&) : KDEDModule(parent)
+kdesvnd::kdesvnd(QObject* parent, const QList<QVariant>&) : KDEDModule(parent),m_componentData("kdesvn")
 {
     KGlobal::locale()->insertCatalog("kdesvn");
     m_Listener=new IListener(this);
     new KdesvndAdaptor(this);
+    kDebug()<<"Component: "<<m_componentData.config()<<endl;
 }
 
 kdesvnd::~kdesvnd()
@@ -382,6 +384,14 @@ void kdesvnd::transferedKioOperation(qulonglong kioid, qulonglong transfered)
 
 void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
 {
+}
+
+void kdesvnd::notifyKioOperation(const QString &text)
+{
+    KNotification *notification= new KNotification ("kdesvn-kio");
+    notification->setText(text);
+    notification->setComponentData(m_componentData);
+    notification->sendEvent();
 }
 
 bool IListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)

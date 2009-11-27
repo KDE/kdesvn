@@ -417,4 +417,14 @@ void KioListener::contextProgress(long long int cur, long long int max)
     }
 }
 
+void KioListener::notify(const QString&text)
+{
+    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
+    if(!kdesvndInterface.isValid()) {
+        kWarning() << "Communication with KDED:KdeSvnd failed";
+        return;
+    }
+    kdesvndInterface.notifyKioOperation(text);
+}
+
 } // namespace KIO

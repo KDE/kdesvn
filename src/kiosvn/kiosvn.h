@@ -110,6 +110,8 @@ protected:
     virtual void status(const KUrl&,bool,bool);
     virtual void update(const KUrl&,int,const QString&);
 
+    virtual void notify(const QString&text);
+
 private:
     KioSvnData*m_pData;
     bool createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);

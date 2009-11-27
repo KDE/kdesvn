@@ -69,5 +69,8 @@
         <arg type="s" name="title" direction="in"/>
         <arg type="s" name="label" direction="in"/>
     </method>
+    <method name="notifyKioOperation">
+        <arg type="s" name="text" direction="in"/>
+    </method>
     </interface>
  </node>

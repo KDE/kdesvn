@@ -78,6 +78,8 @@ public:
      */
     virtual bool contextAddListItem(svn::DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
 
+    virtual void notify(const QString&text);
+
 private:
     KIO::kio_svnProtocol *par;
 

@@ -342,7 +342,7 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
         kDebug(9510)<<"kio_svn::rename aborted" <<  endl;
         return;
     }
-    kDebug(9510)<<"kio_svn::rename finished" <<  endl;
+    notify(i18n("Renaming %1 to %2 succesfull").arg(src.prettyUrl()).arg(target.prettyUrl()));
     finished();
 }
 
@@ -431,6 +431,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     written (0);
     m_pData->dispWritten = true;
     bool err = false;
+    notify(i18n("Start commiting file %1").arg(makeSvnUrl(url)));
     if (exists) {
         svn::CommitParameter commit_parameters;
         commit_parameters.targets(svn::Targets(tmpfile->fileName())).message(getDefaultLog()).depth(svn::DepthEmpty).keepLocks(false);
@@ -450,7 +451,10 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         }
     }
     m_pData->dispWritten = false;
-    if (!err) finished();
+    if (!err) {
+        notify(i18n("Wrote %1 bytes to repository").arg(processed_size));
+        finished();
+    }
 }
 
 void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::JobFlags flags)
@@ -479,6 +483,7 @@ void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::J
     }
     m_pData->dispProgress=false;
     kDebug(9510)<<"kio_svn::copy finished" <<  endl;
+    notify(i18n("Copied %1 to %2").arg(makeSvnUrl(src)).arg(makeSvnUrl(dest)));
     finished();
 }
 
@@ -1075,6 +1080,11 @@ QString kio_svnProtocol::getDefaultLog()
         res = Kdesvnsettings::kio_standard_logmsg();
     }
     return res;
+}
+
+void kio_svnProtocol::notify(const QString&text)
+{
+    m_pData->m_Listener.notify(text);
 }
 
 } // namespace KIO

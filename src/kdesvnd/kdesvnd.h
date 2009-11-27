@@ -26,6 +26,7 @@
 #include <kurl.h>
 #include <kdedmodule.h>
 #include <QDBusVariant>
+#include <kcomponentdata.h>
 
 class IListener;
 
@@ -42,6 +43,7 @@ protected:
     static QString cleanUrl(const KUrl&url);
     IListener*m_Listener;
     QStringList getActionMenu(const KUrl::List&,bool toplevel);
+    KComponentData m_componentData;
 
 public Q_SLOTS:
     //! get a subversion login
@@ -82,5 +84,7 @@ public Q_SLOTS:
     void titleKioOperation(qulonglong kioid, const QString &title, const QString &label);
     void transferedKioOperation(qulonglong kioid, qulonglong transfered);
     void unRegisterKioFeedback(qulonglong kioid);
+    void notifyKioOperation(const QString &text);
+
 };
 #endif

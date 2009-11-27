@@ -52,6 +52,7 @@
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
 #include <kfiledialog.h>
+#include <knotification.h>
 
 #include <QSortFilterProxyModel>
 #include <QEvent>
@@ -326,6 +327,10 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
 #ifdef DEBUG_TIMER
     kDebug()<<"Enabled actions "<<_counttime.elapsed();
 #endif
+/*  KNotification * notification=new KNotification("kdesvn-open");
+    notification->setText("Opened url");
+    notification->sendEvent();
+*/
     return result;
 }
 

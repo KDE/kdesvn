@@ -28,6 +28,22 @@
 
 namespace KIO {
 
+
+
+#define CON_DBUS_BASE OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );\
+    if(!kdesvndInterface.isValid()) {\
+        kWarning() << "Communication with KDED:KdeSvnd failed";
+
+#define CON_DBUS\
+        CON_DBUS_BASE\
+        return;\
+    }
+
+#define CON_DBUS_VAL(x)\
+        CON_DBUS_BASE\
+        return x;\
+    }
+        
 KioListener::KioListener(KIO::kio_svnProtocol*_par)
     : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false),m_Canceld(false)
 {
@@ -57,11 +73,7 @@ bool KioListener::contextCancel()
 bool KioListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&_items)
 {
     Q_UNUSED(_items);
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-       kWarning() << "Communication with KDED:KdeSvnd failed";
-       return false;
-    }
+    CON_DBUS_VAL(false);
 
     QDBusReply<QStringList> res= kdesvndInterface.get_logmsg();
 
@@ -259,11 +271,7 @@ KioListener::contextSslServerTrustPrompt (const SslServerTrustData & data, apr_u
     Q_UNUSED(acceptedFailures);
     QDBusReply<int> res;
 
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-       kWarning() << "Communication with KDED:KdeSvnd failed";
-       return DONT_ACCEPT;
-    }
+    CON_DBUS_VAL(DONT_ACCEPT);
     res = kdesvndInterface.get_sslaccept(data.hostname,
             data.fingerprint, data.validFrom, data.validUntil, data.issuerDName, data.realm);
 
@@ -292,11 +300,7 @@ bool KioListener::contextLoadSslClientCertPw(QString&password,const QString&real
 {
     QDBusReply<QString> res;
 
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-        kWarning() << "Communication with KDED:KdeSvnd failed";
-        return false;
-    }
+    CON_DBUS_VAL(false);
     res=kdesvndInterface.load_sslclientcertpw(realm);
     if (!res.isValid()) {
         kWarning() << "Unexpected reply type";
@@ -310,11 +314,7 @@ bool KioListener::contextSslClientCertPrompt (QString & certFile)
 {
     QDBusReply<QString> res;
 
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-       kWarning() << "Communication with KDED:KdeSvnd failed";
-       return false;
-    }
+    CON_DBUS_VAL(false);
     res=kdesvndInterface.get_sslclientcertfile();
     if (!res.isValid()) {
         kWarning() << "Unexpected reply type";
@@ -340,11 +340,7 @@ bool KioListener::contextGetSavedLogin (const QString & realm,QString & username
 {
     QDBusReply<QStringList> res;
 
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-        kWarning() << "Communication with KDED:KdeSvnd failed";
-        return false;
-    }
+    CON_DBUS_VAL(false);
     res=kdesvndInterface.get_saved_login(realm,username);
     if (!res.isValid()) {
         kWarning() << "Unexpected reply type";
@@ -372,11 +368,7 @@ bool KioListener::contextGetLogin (const QString & realm, QString & username, QS
 {
     QDBusReply<QStringList> res;
 
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-       kWarning() << "Communication with KDED:KdeSvnd failed";
-       return false;
-    }
+    CON_DBUS_VAL(false);
     res=kdesvndInterface.get_login(realm,username);
     if (!res.isValid()) {
         kWarning() << "Unexpected reply type";
@@ -419,11 +411,7 @@ void KioListener::contextProgress(long long int cur, long long int max)
 
 void KioListener::notify(const QString&text)
 {
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid()) {
-        kWarning() << "Communication with KDED:KdeSvnd failed";
-        return;
-    }
+    CON_DBUS;
     kdesvndInterface.notifyKioOperation(text);
 }
 

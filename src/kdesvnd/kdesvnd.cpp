@@ -20,15 +20,15 @@
 
 #include "kdesvn-config.h"
 #include "kdesvnd.h"
+#include "kdesvnd_listener.h"
 #include "src/ksvnwidgets/authdialogimpl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
-#include "src/settings/kdesvnsettings.h"
 #include "src/ksvnwidgets/pwstorage.h"
+#include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
 #include "src/svnqt/status.hpp"
-#include "src/svnqt/context_listener.hpp"
 #include "src/svnqt/url.hpp"
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/client_parameter.hpp"
@@ -47,75 +47,20 @@
 #include <kpluginloader.h>
 #include <knotification.h>
 
-#include <qdir.h>
-#include <qvariant.h>
+#include <QDir>
+#include <QVariant>
+#include <QList>
 
 K_PLUGIN_FACTORY(KdeSvndFactory,
                  registerPlugin<kdesvnd>();
                  )
 K_EXPORT_PLUGIN(KdeSvndFactory("kio_kdesvn"))
 
-class IListener:public svn::ContextListener
-{
-    friend class kdesvnd;
-
-    kdesvnd*m_back;
-public:
-    IListener(kdesvnd*p);
-    virtual ~IListener();
-    /* context-listener methods */
-    virtual bool contextGetLogin (const QString & realm,
-                                  QString & username,
-                                  QString & password,
-                                  bool & maySave);
-    virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
-    virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password);
-
-    virtual void contextNotify (const char *path,
-                                svn_wc_notify_action_t action,
-                                svn_node_kind_t kind,
-                                const char *mime_type,
-                                svn_wc_notify_state_t content_state,
-                                svn_wc_notify_state_t prop_state,
-                                svn_revnum_t revision);
-    virtual void contextNotify (const svn_wc_notify_t *action);
-
-    virtual bool contextCancel();
-    virtual bool contextGetLogMessage (QString & msg,const svn::CommitItemList&);
-    virtual svn::ContextListener::SslServerTrustAnswer
-            contextSslServerTrustPrompt (const SslServerTrustData & data,
-            apr_uint32_t & acceptedFailures);
-    virtual bool contextSslClientCertPrompt (QString & certFile);
-    virtual bool contextLoadSslClientCertPw(QString&password,const QString&realm);
-    virtual bool contextSslClientCertPwPrompt (QString & password,
-                                               const QString & realm, bool & maySave);
-    virtual void contextProgress(long long int current, long long int max);
-
-    /* context listener virtuals end */
-
-protected:
-    svn::Client* m_Svnclient;
-    svn::ContextP m_CurrentContext;
-};
-
-IListener::IListener(kdesvnd*p)
-    :svn::ContextListener()
-{
-    m_Svnclient = svn::Client::getobject(0,0);
-    m_back=p;
-    m_CurrentContext = new svn::Context();
-    m_CurrentContext->setListener(this);
-    m_Svnclient->setContext(m_CurrentContext);
-}
-
-IListener::~IListener()
-{
-}
 
 kdesvnd::kdesvnd(QObject* parent, const QList<QVariant>&) : KDEDModule(parent),m_componentData("kdesvn")
 {
     KGlobal::locale()->insertCatalog("kdesvn");
-    m_Listener=new IListener(this);
+    m_Listener=new KdesvndListener(this);
     new KdesvndAdaptor(this);
     kDebug()<<"Component: "<<m_componentData.config()<<endl;
 }
@@ -388,134 +333,8 @@ void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
 
 void kdesvnd::notifyKioOperation(const QString &text)
 {
-    KNotification *notification= new KNotification ("kdesvn-kio");
-    notification->setText(text);
-    notification->setComponentData(m_componentData);
-    notification->sendEvent();
-}
-
-bool IListener::contextGetSavedLogin (const QString & realm,QString & username,QString & password)
-{
-    PwStorage::self()->getLogin(realm,username,password);
-    return true;
-}
-
-bool IListener::contextGetCachedLogin (const QString & realm,QString & username,QString & password)
-{
-    PwStorage::self()->getCachedLogin(realm,username,password);
-    return true;
-}
-
-bool IListener::contextGetLogin (const QString & realm,
-                                  QString & username,
-                                  QString & password,
-                                  bool & maySave)
-{
-    maySave=false;
-    QStringList res = m_back->get_login(realm,username);
-    if (res.count()!=3) {
-        return false;
-    }
-    username = res[0];
-    password = res[1];
-    maySave = (res[2]=="true");
-    if (maySave && Kdesvnsettings::passwords_in_wallet() ) {
-        PwStorage::self()->setLogin(realm,username,password);
-        maySave=false;
-    }
-    return true;
-}
-
-void IListener::contextNotify(const char * /*path*/,
-                                 svn_wc_notify_action_t /*action*/,
-                                 svn_node_kind_t /*kind*/,
-                                 const char */*mime_type*/,
-                                 svn_wc_notify_state_t /*content_state*/,
-                                 svn_wc_notify_state_t /*prop_state*/,
-                                 svn_revnum_t /*revision*/)
-{
-}
-
-void IListener::contextNotify(const svn_wc_notify_t * /*action*/)
-{
-}
-
-bool IListener::contextCancel()
-{
-    return false;
-}
-
-bool IListener::contextGetLogMessage (QString & msg,const svn::CommitItemList&)
-{
-    QStringList res = m_back->get_logmsg();
-    if (res.count()==0) {
-        return false;
-    }
-    msg = res[1];
-    return true;
-}
-
-svn::ContextListener::SslServerTrustAnswer IListener::contextSslServerTrustPrompt (const SslServerTrustData & data,
-        apr_uint32_t & /*acceptedFailures*/)
-{
-    int res = m_back->get_sslaccept(data.hostname,
-            data.fingerprint,
-            data.validFrom,
-            data.validUntil,
-            data.issuerDName,
-            data.realm);
-    switch (res) {
-        case -1:
-            return DONT_ACCEPT;
-            break;
-        case 1:
-            return ACCEPT_PERMANENTLY;
-            break;
-        default:
-        case 0:
-            return ACCEPT_TEMPORARILY;
-            break;
-    }
-    /* avoid compiler warnings */
-    return ACCEPT_TEMPORARILY;
-}
-
-bool IListener::contextSslClientCertPrompt (QString & certFile)
-{
-    certFile = m_back->get_sslclientcertfile();
-    if (certFile.isEmpty()) {
-        return false;
-    }
-    return true;
-}
-
-bool IListener::contextLoadSslClientCertPw(QString&password,const QString&realm)
-{
-    return PwStorage::self()->getCertPw(realm,password);
-}
-
-bool IListener::contextSslClientCertPwPrompt (QString & password,
-                                   const QString & realm, bool & maySave)
-{
-    maySave=false;
-    if (PwStorage::self()->getCertPw(realm,password)) {
-        return true;
-    }
-    QStringList res = m_back->get_sslclientcertpw(realm);
-    if (res.size()!=2) {
-        return false;
-    }
-    password=res[0];
-    maySave=res[1]==QString("true");
-
-    if (maySave && Kdesvnsettings::passwords_in_wallet() ) {
-        PwStorage::self()->setCertPw(realm,password);
-        maySave=false;
-    }
-
-    return true;
-}
-
-void IListener::contextProgress(long long int, long long int)
-{
+    KNotification::event(
+        "kdesvn-kio",text,
+        QPixmap(),0L,KNotification::CloseOnTimeout,
+        m_componentData);
 }

@@ -20,6 +20,7 @@
 #include "kiolistener.h"
 #include "kiosvn.h"
 #include "kdesvndinterface.h"
+#include "kio_macros.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -29,21 +30,6 @@
 namespace KIO {
 
 
-
-#define CON_DBUS_BASE OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );\
-    if(!kdesvndInterface.isValid()) {\
-        kWarning() << "Communication with KDED:KdeSvnd failed";
-
-#define CON_DBUS\
-        CON_DBUS_BASE\
-        return;\
-    }
-
-#define CON_DBUS_VAL(x)\
-        CON_DBUS_BASE\
-        return x;\
-    }
-        
 KioListener::KioListener(KIO::kio_svnProtocol*_par)
     : svn::ContextListener(),m_notifyCounter(0),m_External(false),m_HasChanges(false),m_FirstTxDelta(false),m_Canceld(false)
 {
@@ -407,12 +393,6 @@ void KioListener::contextProgress(long long int cur, long long int max)
     if (par) {
         par->contextProgress(cur,max);
     }
-}
-
-void KioListener::notify(const QString&text)
-{
-    CON_DBUS;
-    kdesvndInterface.notifyKioOperation(text);
 }
 
 } // namespace KIO

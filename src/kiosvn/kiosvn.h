@@ -118,6 +118,10 @@ private:
     QString makeSvnUrl(const KUrl&url,bool check_wc=true);
     bool checkWc(const KUrl&url);
     bool getLogMsg(QString&);
+
+    void registerToDaemon();
+    void unregisterFromDaemon();
+
 protected:
     QString getDefaultLog();
     bool supportOverwrite();

@@ -28,7 +28,7 @@
 #include <QDBusVariant>
 #include <kcomponentdata.h>
 
-class IListener;
+class KdesvndListener;
 
 class kdesvnd :  public KDEDModule
 {
@@ -41,7 +41,7 @@ protected:
     bool isWorkingCopy(const KUrl&url,QString&base);
     bool isRepository(const KUrl&url);
     static QString cleanUrl(const KUrl&url);
-    IListener*m_Listener;
+    KdesvndListener*m_Listener;
     QStringList getActionMenu(const KUrl::List&,bool toplevel);
     KComponentData m_componentData;
 

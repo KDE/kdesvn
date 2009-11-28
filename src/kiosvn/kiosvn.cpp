@@ -35,8 +35,10 @@
 #include "src/svnqt/shared_pointer.hpp"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
+#include "src/helpers/stringhelper.h"
 #include "src/helpers/sshagent.h"
 #include "kdesvndinterface.h"
+#include "kio_macros.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -79,6 +81,7 @@ public:
     svn::Client* m_Svnclient;
     svn::Revision urlToRev(const KUrl&);
     QTime _last;
+    qulonglong m_Id;
 };
 
 KioSvnData::KioSvnData(kio_svnProtocol*par)
@@ -89,6 +92,8 @@ KioSvnData::KioSvnData(kio_svnProtocol*par)
     dispProgress = false;
     dispWritten = false;
     _last = QTime::currentTime();
+    // null is an invalid id
+    m_Id = 0;
     reInitClient();
 }
 
@@ -142,10 +147,13 @@ kio_svnProtocol::kio_svnProtocol(const QByteArray &pool_socket, const QByteArray
 {
     m_pData=new KioSvnData(this);
     KGlobal::locale()->insertCatalog("kdesvn");
+    registerToDaemon();
+    m_pData->m_Id = reinterpret_cast<qulonglong>(this);
 }
 
 kio_svnProtocol::~kio_svnProtocol()
 {
+    unregisterFromDaemon();
     delete m_pData;
 }
 
@@ -452,7 +460,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     }
     m_pData->dispWritten = false;
     if (!err) {
-        notify(i18n("Wrote %1 bytes to repository").arg(processed_size));
+        notify(i18n("Wrote %1 to repository").arg(helpers::ByteToString()(processed_size)));
         finished();
     }
 }
@@ -798,12 +806,7 @@ void kio_svnProtocol::commit(const KUrl::List&url)
     /// @todo replace with direct call to kdesvn?
     QString msg;
 
-    OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );
-    if(!kdesvndInterface.isValid())
-    {
-       kWarning() << "Communication with KDED:KdeSvnd failed";
-       return;
-    }
+    CON_DBUS;
 
     QDBusReply<QStringList> res = kdesvndInterface.get_logmsg();
     if ( !res.isValid() )
@@ -1084,7 +1087,20 @@ QString kio_svnProtocol::getDefaultLog()
 
 void kio_svnProtocol::notify(const QString&text)
 {
-    m_pData->m_Listener.notify(text);
+    CON_DBUS;
+    kdesvndInterface.notifyKioOperation(text);
+}
+
+void kio_svnProtocol::registerToDaemon()
+{
+    CON_DBUS;
+    kdesvndInterface.registerKioFeedback(m_pData->m_Id);
+}
+
+void kio_svnProtocol::unregisterFromDaemon()
+{
+    CON_DBUS;
+    kdesvndInterface.unRegisterKioFeedback(m_pData->m_Id);
 }
 
 } // namespace KIO

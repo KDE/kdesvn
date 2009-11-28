@@ -23,6 +23,7 @@ FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 SET(kded_kdesvnd_src
     kdesvnd.cpp
+    kdesvnd_listener.cpp
     ${hdr}
    )
 

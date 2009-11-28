@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
- *   ral@alwins-world.de                                                   *
+ *   Copyright (C) 2005-2009 by Rajko Albrecht  ral@alwins-world.de        *
+ *   http://kdesvn.alwins-world.de/                                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,77 +17,54 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef KIOLISTENER_H
-#define KIOLISTENER_H
+#ifndef KDESVND_LISTENER_H
+#define KDESVND_LISTENER_H
 
 #include "src/svnqt/context_listener.hpp"
-#include "src/ksvnwidgets/pwstorage.h"
 
-namespace KIO {
-    class SlaveBase;
-    class kio_svnProtocol;
+class kdesvnd;
 
-/**
-@author Rajko Albrecht
-*/
-class KioListener : public svn::ContextListener
+class KdesvndListener:public svn::ContextListener
 {
-public:
-    KioListener(KIO::kio_svnProtocol*_par);
-    virtual ~KioListener();
+    friend class kdesvnd;
 
+    kdesvnd*m_back;
+public:
+    KdesvndListener(kdesvnd*p);
+    virtual ~KdesvndListener();
     /* context-listener methods */
     virtual bool contextGetLogin (const QString & realm,
-                     QString & username,
-                     QString & password,
-                     bool & maySave);
+                                  QString & username,
+                                  QString & password,
+                                  bool & maySave);
     virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
     virtual bool contextGetCachedLogin (const QString & realm,QString & username,QString & password);
 
     virtual void contextNotify (const char *path,
-                   svn_wc_notify_action_t action,
-                   svn_node_kind_t kind,
-                   const char *mime_type,
-                   svn_wc_notify_state_t content_state,
-                   svn_wc_notify_state_t prop_state,
-                   svn_revnum_t revision);
+                                svn_wc_notify_action_t action,
+                                svn_node_kind_t kind,
+                                const char *mime_type,
+                                svn_wc_notify_state_t content_state,
+                                svn_wc_notify_state_t prop_state,
+                                svn_revnum_t revision);
     virtual void contextNotify (const svn_wc_notify_t *action);
 
     virtual bool contextCancel();
     virtual bool contextGetLogMessage (QString & msg,const svn::CommitItemList&);
-    virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
-                                 apr_uint32_t & acceptedFailures);
+    virtual svn::ContextListener::SslServerTrustAnswer
+            contextSslServerTrustPrompt (const SslServerTrustData & data,
+            apr_uint32_t & acceptedFailures);
     virtual bool contextSslClientCertPrompt (QString & certFile);
-    virtual bool contextSslClientCertPwPrompt (QString & password,
-                                   const QString & realm, bool & maySave);
     virtual bool contextLoadSslClientCertPw(QString&password,const QString&realm);
-    /* context listener virtuals end */
-    unsigned int counter()const{return m_notifyCounter;}
-    void incCounter(){++m_notifyCounter;}
+    virtual bool contextSslClientCertPwPrompt (QString & password,
+                                               const QString & realm, bool & maySave);
     virtual void contextProgress(long long int current, long long int max);
 
-    void setCancel(bool value){m_Canceld=value;}
-
-    /** Callback for generating list entries
-     * This implementation sends items to the protocol, @a entries will ignored.
-     * @param entries default target list - ignored
-     * @param dirent entry to add (send by subversion)
-     * @param lock accociated lock (may be null!)
-     * @param path the path of the item
-     * @return true if inserted/displayd, false if dirent or entries aren't valid.
-     */
-    virtual bool contextAddListItem(svn::DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
-
-private:
-    KIO::kio_svnProtocol *par;
+    /* context listener virtuals end */
 
 protected:
-    unsigned int  m_notifyCounter;
-    bool m_External;
-    bool m_HasChanges;
-    bool m_FirstTxDelta;
-    bool m_Canceld;
+    svn::Client* m_Svnclient;
+    svn::ContextP m_CurrentContext;
 };
-}
 
 #endif

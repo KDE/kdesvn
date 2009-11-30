@@ -1102,5 +1102,11 @@ void kio_svnProtocol::unregisterFromDaemon()
     CON_DBUS;
     kdesvndInterface.unRegisterKioFeedback(m_pData->m_Id);
 }
+bool kio_svnProtocol::checkKioCancel()const
+{
+    CON_DBUS_VAL(false);
+    QDBusReply<bool> res=kdesvndInterface.canceldKioOperation(m_pData->m_Id);
+    return res.isValid()?res.value():false;
+}
 
 } // namespace KIO

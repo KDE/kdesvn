@@ -25,6 +25,7 @@
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/pwstorage.h"
+
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/client.hpp"
 #include "src/svnqt/revision.hpp"
@@ -34,6 +35,7 @@
 #include "src/svnqt/client_parameter.hpp"
 #include "helpers/ktranslateurl.h"
 #include "kdesvndadaptor.h"
+#include "ksvnjobview.h"
 
 #include <kdebug.h>
 #include <kapplication.h>
@@ -42,6 +44,7 @@
 #include <kglobal.h>
 #include <kfiledialog.h>
 #include <kpassworddialog.h>
+#include <kaboutdata.h>
 
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
@@ -50,6 +53,7 @@
 #include <QDir>
 #include <QVariant>
 #include <QList>
+#include <QDBusConnection>
 
 K_PLUGIN_FACTORY(KdeSvndFactory,
                  registerPlugin<kdesvnd>();
@@ -57,7 +61,8 @@ K_PLUGIN_FACTORY(KdeSvndFactory,
 K_EXPORT_PLUGIN(KdeSvndFactory("kio_kdesvn"))
 
 
-kdesvnd::kdesvnd(QObject* parent, const QList<QVariant>&) : KDEDModule(parent),m_componentData("kdesvn")
+kdesvnd::kdesvnd(QObject* parent, const QList<QVariant>&) : KDEDModule(parent),m_componentData("kdesvn"),
+    m_uiserver("org.kde.JobViewServer", "/JobViewServer", QDBusConnection::sessionBus())
 {
     KGlobal::locale()->insertCatalog("kdesvn");
     m_Listener=new KdesvndListener(this);
@@ -308,27 +313,53 @@ bool kdesvnd::isWorkingCopy(const KUrl&_url,QString&base)
 
 bool kdesvnd::canceldKioOperation(qulonglong kioid)
 {
-    return false;
+    registerKioFeedback(kioid);
+    return progressJobView[kioid]->state()==KsvnJobView::CANCELD;
 }
 
 void kdesvnd::maxTransferKioOperation(qulonglong kioid, qulonglong maxtransfer)
 {
+    registerKioFeedback(kioid);
+    progressJobView[kioid]->setState(KsvnJobView::RUNNING);
 }
 
 void kdesvnd::registerKioFeedback(qulonglong kioid)
 {
+    if (progressJobView.contains(kioid)) {
+        return;
+    }
+    QString programIconName = m_componentData.aboutData()->programIconName();
+    if (programIconName.isEmpty()) {
+        programIconName = m_componentData.aboutData()->appName();
+    }
+    QDBusReply<QDBusObjectPath> reply = m_uiserver.requestView(m_componentData.aboutData()->programName(),
+                                                                            programIconName,
+                                                                            0x0001);
+    if (reply.isValid()) {
+        KsvnJobView*jobView = new KsvnJobView(kioid,"org.kde.JobViewServer",
+                                                           reply.value().path(),
+                                                           QDBusConnection::sessionBus());
+        progressJobView.insert(kioid, jobView);
+    }
 }
 
 void kdesvnd::titleKioOperation(qulonglong kioid, const QString &title, const QString &label)
 {
+    registerKioFeedback(kioid);
 }
 
 void kdesvnd::transferedKioOperation(qulonglong kioid, qulonglong transfered)
 {
+    registerKioFeedback(kioid);
 }
 
 void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
 {
+    if (!progressJobView.contains(kioid)) {
+        return;
+    }
+    KsvnJobView*jobView = progressJobView.take(kioid);
+    delete jobView;
 }
 
 void kdesvnd::notifyKioOperation(const QString &text)

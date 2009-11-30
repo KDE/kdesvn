@@ -105,6 +105,8 @@ public:
 
     virtual void listSendDirEntry(const svn::DirEntry&);
 
+    virtual bool checkKioCancel()const;
+
 protected:
     virtual void commit(const KUrl::List&);
     virtual void status(const KUrl&,bool,bool);

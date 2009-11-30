@@ -21,6 +21,8 @@
 #ifndef kdesvnd_H
 #define kdesvnd_H
 
+#include "src/ksvnwidgets/jobviewserverinterface.h"
+
 #include <qstringlist.h>
 #include <qstring.h>
 #include <kurl.h>
@@ -29,6 +31,7 @@
 #include <kcomponentdata.h>
 
 class KdesvndListener;
+class KsvnJobView;
 
 class kdesvnd :  public KDEDModule
 {
@@ -44,6 +47,10 @@ protected:
     KdesvndListener*m_Listener;
     QStringList getActionMenu(const KUrl::List&,bool toplevel);
     KComponentData m_componentData;
+
+    org::kde::JobViewServer m_uiserver;
+
+    QHash<qulonglong,KsvnJobView*> progressJobView;
 
 public Q_SLOTS:
     //! get a subversion login

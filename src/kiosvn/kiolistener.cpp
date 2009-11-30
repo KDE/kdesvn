@@ -86,6 +86,9 @@ void KioListener::contextNotify (const char * path,svn_wc_notify_action_t action
     if (par->wasKilled()) {
         return;
     }
+    if (par->checkKioCancel()) {
+        m_Canceld = true;
+    }
     QString userstring;
 
     switch(action) {
@@ -379,6 +382,9 @@ bool KioListener::contextAddListItem(svn::DirEntries*entries, const svn_dirent_t
         return false;
     }
     if (par) {
+        if (par->checkKioCancel()) {
+            m_Canceld = true;
+        }
         par->listSendDirEntry(svn::DirEntry(path, dirent,lock));
         return true;
     }
@@ -391,6 +397,9 @@ bool KioListener::contextAddListItem(svn::DirEntries*entries, const svn_dirent_t
 void KioListener::contextProgress(long long int cur, long long int max)
 {
     if (par) {
+        if (par->checkKioCancel()) {
+            m_Canceld = true;
+        }
         par->contextProgress(cur,max);
     }
 }

@@ -65,6 +65,9 @@ SET(ksvnwidgethdr
     models/commitmodel.h
 )
 
+qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
+qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
+
 KDE_AUTOMOC(${ksvnwidgetsrc})
 
 ADD_LIBRARY(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})

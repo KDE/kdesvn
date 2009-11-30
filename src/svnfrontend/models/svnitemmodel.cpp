@@ -792,7 +792,6 @@ bool SvnItemModel::refreshCurrentTree()
         check_created=true;
     }
     return refreshDirnode(_start,check_created);
-    //emit dataChanged(QModelIndex(),0,m_Data->m_rootNode->m_Children.size());
 }
 
 bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool notrec)

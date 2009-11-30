@@ -2479,8 +2479,6 @@ void SvnActions::killallThreads()
 bool SvnActions::createModifiedCache(const QString&what)
 {
     stopCheckModThread();
-    m_Data->m_Cache.clear();
-    m_Data->m_conflictCache.clear();
     m_CThread = new CheckModifiedThread(this,what);
     m_CThread->start();
     return true;
@@ -2490,9 +2488,11 @@ void SvnActions::checkModthread()
 {
     if (!m_CThread)return;
     if (m_CThread->isRunning()) {
-        //m_Data->m_ThreadCheckTimer.start(100);
+        QTimer::singleShot(2,this,SLOT(checkModthread()));
         return;
     }
+    m_Data->m_Cache.clear();
+    m_Data->m_conflictCache.clear();
     for (long i = 0; i < m_CThread->getList().count();++i) {
         svn::StatusPtr ptr = m_CThread->getList()[i];
         if (m_CThread->getList()[i]->isRealVersioned()&& (
@@ -2516,6 +2516,7 @@ void SvnActions::checkModthread()
 void SvnActions::checkUpdateThread()
 {
     if (!m_UThread || m_UThread->isRunning()) {
+        if (m_UThread) QTimer::singleShot(2,this,SLOT(checkUpdateThread()));
         return;
     }
     bool newer=false;
@@ -2646,9 +2647,9 @@ void SvnActions::customEvent(QEvent * e)
         FillCacheStatusEvent*fev=(FillCacheStatusEvent*)e;
         emit sigCacheStatus(fev->current(),fev->max());
     } else if (e->type()==EVENT_UPDATE_CACHE_FINISHED) {
-        QTimer::singleShot(1,this,SLOT(checkUpdateThread()));
+        QTimer::singleShot(2,this,SLOT(checkUpdateThread()));
     } else if (e->type()==EVENT_CACHE_THREAD_FINISHED){
-        QTimer::singleShot(1,this,SLOT(checkModthread()));
+        QTimer::singleShot(2,this,SLOT(checkModthread()));
     }
 }
 

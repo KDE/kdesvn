@@ -253,6 +253,20 @@
         <label>Support overwrite for KIO modul</label>
     </entry>
   </group>
+  <group name="timed_jobs">
+    <entry key="poll_modified" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="poll_modified_minutes" type="UInt">
+        <default>10</default>
+    </entry>
+    <entry key="poll_updates" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="poll_updates_minutes" type="UInt">
+        <default>10</default>
+    </entry>
+  </group>
   <group name="internals" >
     <entry key="locale_is_casesensitive" type="Bool" >
       <whatsthis>This value computes how casesensitive string ordering will made.

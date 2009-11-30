@@ -47,6 +47,7 @@ SET(svnfrontendsrc
     fronthelpers/kmultilinedelegate.h
     fronthelpers/watchedprocess.cpp
     fronthelpers/watchedprocess.h
+    fronthelpers/fronthelpers.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp

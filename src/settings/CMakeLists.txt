@@ -32,6 +32,7 @@ KDE_ADD_UI_FILES(
     subversion_settings.ui
     cmdexecsettings.ui
     diffmergesettings.ui
+    polling_settings.ui
 )
 
 SET(settings_sources
@@ -40,7 +41,9 @@ SET(settings_sources
     revisiontreesettingsdlg_impl.cpp
     subversionsettings_impl.cpp
     cmdexecsettings_impl.cpp
-    diffmergesettings_impl.cpp)
+    diffmergesettings_impl.cpp
+    polling_settings_impl.cpp
+    )
 
 FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 

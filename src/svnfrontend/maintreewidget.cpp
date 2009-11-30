@@ -36,6 +36,7 @@
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"
+#include "fronthelpers/fronthelpers.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/deleteform_impl.h"
 #include "opencontextmenu.h"
@@ -109,6 +110,8 @@ public:
     SvnDirSortFilterProxy*m_DirSortModel;
     svn::Revision m_remoteRevision;
     QString merge_Target,merge_Src2,merge_Src1;
+
+    QTimer m_TimeModified,m_TimeUpdates;
 };
 
 MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::WindowFlags f)
@@ -167,6 +170,11 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
 
     checkUseNavigation(true);
     setupActions();
+
+    m_Data->m_TimeModified.setParent(this);
+    connect(&(m_Data->m_TimeModified),SIGNAL(timeout()),this,SLOT(slotCheckModified()));
+    m_Data->m_TimeUpdates.setParent(this);
+    connect(&(m_Data->m_TimeUpdates),SIGNAL(timeout()),this,SLOT(slotCheckUpdates()));
 }
 
 MainTreeWidget::~MainTreeWidget()
@@ -900,7 +908,18 @@ void MainTreeWidget::itemActivated(const QModelIndex&index,bool keypress)
 
 void MainTreeWidget::slotCheckUpdates()
 {
-    m_Data->m_Model->svnWrapper()->createUpdateCache(baseUri());
+    if (isWorkingCopy() && m_Data->m_Model->svnWrapper()->doNetworking()) {
+        m_Data->m_TimeUpdates.stop();
+        m_Data->m_Model->svnWrapper()->createUpdateCache(baseUri());
+    }
+}
+
+void MainTreeWidget::slotCheckModified()
+{
+    if (isWorkingCopy()) {
+        m_Data->m_TimeModified.stop();
+        m_Data->m_Model->svnWrapper()->createModifiedCache(baseUri());
+    }
 }
 
 void MainTreeWidget::slotNotifyMessage(const QString&what)
@@ -924,6 +943,16 @@ void MainTreeWidget::slotCacheDataChanged()
 {
     //kDebug(9510)<<"Cache thread signaled"<<endl;
     m_Data->m_SortModel->invalidate();
+    if (isWorkingCopy()) {
+        if (!m_Data->m_TimeModified.isActive() && Kdesvnsettings::poll_modified()) {
+            m_Data->m_TimeModified.setInterval(MinutesToMsec(Kdesvnsettings::poll_modified_minutes()));
+            m_Data->m_TimeModified.start();
+        }
+        if (!m_Data->m_TimeUpdates.isActive() && Kdesvnsettings::poll_updates()) {
+            m_Data->m_TimeUpdates.setInterval(MinutesToMsec(Kdesvnsettings::poll_updates_minutes()));
+            m_Data->m_TimeUpdates.start();
+        }
+    }
 }
 
 void MainTreeWidget::slotIgnore()

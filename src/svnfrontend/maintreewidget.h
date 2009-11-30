@@ -97,6 +97,7 @@ protected Q_SLOTS:
     void _propListTimeout();
 
     void slotCheckUpdates();
+    void slotCheckModified();
     void readSupportData();
     void slotClientException(const QString&);
 

@@ -22,6 +22,9 @@
 
 #include <qstring.h>
 
+#include <kglobal.h>
+#include <klocale.h>
+
 namespace helpers
 {
 
@@ -29,34 +32,18 @@ class ByteToString
 {
 protected:
 
-public:
-    ByteToString(){};
+    qulonglong m_value;
+    QString m_text;
 
-    QString operator()(long value)
+public:
+    explicit ByteToString(qulonglong value)
+    :m_value (value),m_text(KGlobal::locale()->formatByteSize(value))
     {
-        char pre = 0;
-        double v = (double)value;
-        if (v<0) v=0;
-        while (v>=1024.0 && pre != 'T')
-        {
-            switch (pre)
-            {
-            case 'k':
-                pre = 'M';
-                break;
-            case 'M':
-                pre = 'G';
-                break;
-            case 'G':
-                pre = 'T';
-                break;
-            default:
-                pre = 'k';
-                break;
-            }
-            v /= 1024.0;
-        }
-        return QString("%1 %2Byte").arg(v,0,'f',pre?2:0).arg(pre?QString(QChar(pre)):QString(""));
+    };
+
+    operator const QString&()const
+    {
+        return m_text;
     }
 };
 

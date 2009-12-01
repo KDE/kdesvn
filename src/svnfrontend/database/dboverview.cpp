@@ -126,7 +126,7 @@ void DbOverview::genInfo(const QString&repo)
 {
     svn::cache::ReposLog rl(_data->_Client,repo);
     const static QString info(i18n("Log cache holds %1 logentries and consumes %2 on disk."));
-    QString msg = info.arg(rl.count()).arg(helpers::ByteToString()(rl.fileSize()));
+    QString msg = info.arg(rl.count()).arg(helpers::ByteToString(rl.fileSize()));
     m_RepostatusBrowser->setText(msg);
 }
 

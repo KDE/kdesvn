@@ -52,6 +52,11 @@
     <method name="unRegisterKioFeedback">
         <arg type="t" name="kioid" direction="in"/>
     </method>
+    <method name="setKioStatus">
+        <arg type="t" name="kioid" direction="in"/>
+        <arg type="i" name="status" direction="in"/>
+        <arg type="s" name="message" direction="in"/>
+    </method>
     <method name="canceldKioOperation">
        <arg type="t" name="kioid" direction="in"/>
        <arg type="b" direction="out"/>

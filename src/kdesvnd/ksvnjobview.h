@@ -40,11 +40,17 @@ class KsvnJobView:public org::kde::JobView
         void setState(jobstate aState){m_state = aState;}
         qulonglong id()const{return m_id;}
 
+        unsigned long percent(qulonglong amount);
+
+        virtual void setTotal(qulonglong max);
+        qulonglong max()const{return m_max;}
+
     protected Q_SLOTS:
         virtual void killJob();
     private:
         qulonglong m_id;
         jobstate m_state;
+        qulonglong m_max;
 };
 
 #endif

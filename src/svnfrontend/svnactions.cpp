@@ -763,9 +763,9 @@ QString SvnActions::getInfo(const svn::InfoEntries&entries,const QString&_what,b
         if ((*it).kind() == svn_node_file){
             text+=rb+i18n("Size")+cs;
             if ((*it).size()!=SVNQT_SIZE_UNKNOWN) {
-                text+=QString("%1").arg(helpers::ByteToString()((*it).size()));
+                text+=QString("%1").arg(helpers::ByteToString((*it).size()));
             } else if ((*it).working_size()!=SVNQT_SIZE_UNKNOWN) {
-                text+=QString("%1").arg(helpers::ByteToString()((*it).working_size()));
+                text+=QString("%1").arg(helpers::ByteToString((*it).working_size()));
             }
             text+=re;
         }

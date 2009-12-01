@@ -186,9 +186,9 @@ void ThreadContextListener::contextProgress(long long int current, long long int
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     QString msg;
-    QString s1 = helpers::ByteToString()(current);
+    QString s1 = helpers::ByteToString(current);
     if (max>-1) {
-        QString s2 = helpers::ByteToString()(max);
+        QString s2 = helpers::ByteToString(max);
         msg = i18n("%1 of %2 transferred.",s1,s2);
     } else {
         msg = i18n("%1 transferred.",s1);

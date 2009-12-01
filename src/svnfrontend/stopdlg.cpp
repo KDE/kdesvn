@@ -195,9 +195,9 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
             m_NetBar->show();
             m_netBarShown=true;
         }
-        QString s1 = helpers::ByteToString()(current);
+        QString s1 = helpers::ByteToString(current);
         if (max > -1 && max != m_NetBar->maximum()) {
-            QString s2 = helpers::ByteToString()(max);
+            QString s2 = helpers::ByteToString(max);
             m_NetBar->setFormat(i18n("%p% of %1",s2));
             m_NetBar->setRange(0,max);
         }
@@ -206,7 +206,7 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
                 m_NetBar->setFormat(i18n("%1 transferred.",s1));
                 m_NetBar->setRange(0,current+1);
             } else {
-                m_NetBar->setFormat(i18n("%1 of %2",s1,helpers::ByteToString()(m_NetBar->maximum())));
+                m_NetBar->setFormat(i18n("%1 of %2",s1,helpers::ByteToString(m_NetBar->maximum())));
             }
         }
         m_NetBar->setValue(current);

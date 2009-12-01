@@ -61,13 +61,17 @@ K_PLUGIN_FACTORY(KdeSvndFactory,
 K_EXPORT_PLUGIN(KdeSvndFactory("kio_kdesvn"))
 
 
+#define CHECK_KIO     if (!progressJobView.contains(kioid)) { \
+    return;\
+   }
+
+
 kdesvnd::kdesvnd(QObject* parent, const QList<QVariant>&) : KDEDModule(parent),m_componentData("kdesvn"),
     m_uiserver("org.kde.JobViewServer", "/JobViewServer", QDBusConnection::sessionBus())
 {
     KGlobal::locale()->insertCatalog("kdesvn");
     m_Listener=new KdesvndListener(this);
     new KdesvndAdaptor(this);
-    kDebug()<<"Component: "<<m_componentData.config()<<endl;
 }
 
 kdesvnd::~kdesvnd()
@@ -313,14 +317,17 @@ bool kdesvnd::isWorkingCopy(const KUrl&_url,QString&base)
 
 bool kdesvnd::canceldKioOperation(qulonglong kioid)
 {
-    registerKioFeedback(kioid);
+    if (!progressJobView.contains(kioid)) {
+        return false;
+    }
     return progressJobView[kioid]->state()==KsvnJobView::CANCELD;
 }
 
 void kdesvnd::maxTransferKioOperation(qulonglong kioid, qulonglong maxtransfer)
 {
-    registerKioFeedback(kioid);
+    CHECK_KIO;
     progressJobView[kioid]->setState(KsvnJobView::RUNNING);
+    progressJobView[kioid]->setTotal(maxtransfer);
 }
 
 void kdesvnd::registerKioFeedback(qulonglong kioid)
@@ -334,32 +341,38 @@ void kdesvnd::registerKioFeedback(qulonglong kioid)
     }
     QDBusReply<QDBusObjectPath> reply = m_uiserver.requestView(m_componentData.aboutData()->programName(),
                                                                             programIconName,
-                                                                            0x0001);
+                                                                            0x0003);
     if (reply.isValid()) {
         KsvnJobView*jobView = new KsvnJobView(kioid,"org.kde.JobViewServer",
                                                            reply.value().path(),
                                                            QDBusConnection::sessionBus());
         progressJobView.insert(kioid, jobView);
+        kDebug()<<"Register "<<kioid<<endl;
+    } else {
+        kDebug()<<"Could not register "<<kioid<<endl;
     }
 }
 
 void kdesvnd::titleKioOperation(qulonglong kioid, const QString &title, const QString &label)
 {
-    registerKioFeedback(kioid);
+    CHECK_KIO;
+    progressJobView[kioid]->setInfoMessage(title);
+    progressJobView[kioid]->setDescriptionField(0,"Description",label);
 }
 
 void kdesvnd::transferedKioOperation(qulonglong kioid, qulonglong transfered)
 {
-    registerKioFeedback(kioid);
+    CHECK_KIO;
+    progressJobView[kioid]->setProcessedAmount(transfered,"bytes");
+    progressJobView[kioid]->setPercent(progressJobView[kioid]->percent(transfered));
 }
 
 void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
 {
-    if (!progressJobView.contains(kioid)) {
-        return;
-    }
+    CHECK_KIO;
     KsvnJobView*jobView = progressJobView.take(kioid);
     delete jobView;
+    kDebug()<<"Removed "<<kioid<<endl;
 }
 
 void kdesvnd::notifyKioOperation(const QString &text)
@@ -368,4 +381,23 @@ void kdesvnd::notifyKioOperation(const QString &text)
         "kdesvn-kio",text,
         QPixmap(),0L,KNotification::CloseOnTimeout,
         m_componentData);
+}
+
+void kdesvnd::setKioStatus(qulonglong kioid, int status, const QString&message)
+{
+    CHECK_KIO;
+    switch (status) {
+        case 0:
+            progressJobView[kioid]->setState(KsvnJobView::STOPPED);
+            progressJobView[kioid]->terminate(message);
+            break;
+        case 2:
+            progressJobView[kioid]->setState(KsvnJobView::CANCELD);
+            progressJobView[kioid]->terminate(message);
+            break;
+        case 1:
+            progressJobView[kioid]->setState(KsvnJobView::RUNNING);
+            progressJobView[kioid]->setSuspended(false);
+            break;
+    }
 }

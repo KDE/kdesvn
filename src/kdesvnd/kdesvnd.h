@@ -92,6 +92,12 @@ public Q_SLOTS:
     void transferedKioOperation(qulonglong kioid, qulonglong transfered);
     void unRegisterKioFeedback(qulonglong kioid);
     void notifyKioOperation(const QString &text);
-
+    //! set status from KIO
+    /*!
+     * \param kioid the kio makes an action
+     * \param status the status to set: 0 - stopped (terminated) 1 - running 2 - canceld (terminated)
+     * \param message a message to print when not running
+     */
+    void setKioStatus(qulonglong kioid, int status, const QString&message);
 };
 #endif

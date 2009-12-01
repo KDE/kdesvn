@@ -72,6 +72,7 @@ public:
     virtual ~KioSvnData();
 
     void reInitClient();
+    void resetListener();
 
     KioListener m_Listener;
     bool first_done;
@@ -111,6 +112,14 @@ void KioSvnData::reInitClient()
     m_Svnclient->setContext(m_CurrentContext);
 }
 
+void KioSvnData::resetListener()
+{
+    if (!first_done) {
+        reInitClient();
+    }
+    m_Listener.uncancel();
+}
+
 KioSvnData::~KioSvnData()
 {
     m_Listener.setCancel(true);
@@ -147,7 +156,6 @@ kio_svnProtocol::kio_svnProtocol(const QByteArray &pool_socket, const QByteArray
 {
     m_pData=new KioSvnData(this);
     KGlobal::locale()->insertCatalog("kdesvn");
-    registerToDaemon();
     m_pData->m_Id = reinterpret_cast<qulonglong>(this);
 }
 
@@ -206,6 +214,7 @@ void kio_svnProtocol::listSendDirEntry(const svn::DirEntry&direntry)
 void kio_svnProtocol::listDir(const KUrl&url)
 {
     kDebug(9510) << "kio_svn::listDir(const KUrl& url) : " << url.url() << endl ;
+    m_pData->resetListener();
     svn::DirEntries dlist;
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
@@ -229,6 +238,7 @@ void kio_svnProtocol::listDir(const KUrl&url)
 void kio_svnProtocol::stat(const KUrl& url)
 {
     kDebug(9510)<<"kio_svn::stat "<< url << endl;
+    m_pData->resetListener();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -296,6 +306,7 @@ void kio_svnProtocol::get(const KUrl& url)
 void kio_svnProtocol::mkdir(const KUrl &url, int)
 {
     kDebug(9510)<<"kio_svn::mkdir "<< url << endl;
+    m_pData->resetListener();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -320,6 +331,7 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
 void kio_svnProtocol::mkdir(const KUrl::List &urls, int)
 {
     svn::Pathes p;
+    m_pData->resetListener();
     for (KUrl::List::const_iterator it = urls.begin(); it != urls.end() ; ++it ) {
         p.append((*it).path());
     }
@@ -335,6 +347,7 @@ void kio_svnProtocol::mkdir(const KUrl::List &urls, int)
 void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flags)
 {
     kDebug(9510)<<"kio_svn::rename "<< src << " to " << target <<  endl;
+    m_pData->resetListener();
     Q_UNUSED(flags);
     //bool force  = flags&KIO::Overwrite;
     QString msg;
@@ -357,6 +370,7 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
 void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
 {
     Q_UNUSED(permissions);
+    m_pData->resetListener();
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
         rev = svn::Revision::HEAD;
@@ -438,8 +452,9 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     totalSize(processed_size);
     written (0);
     m_pData->dispWritten = true;
+    registerToDaemon();
+    startOp(processed_size, i18n("Commiting %1").arg(makeSvnUrl(url)));
     bool err = false;
-    notify(i18n("Start commiting file %1").arg(makeSvnUrl(url)));
     if (exists) {
         svn::CommitParameter commit_parameters;
         commit_parameters.targets(svn::Targets(tmpfile->fileName())).message(getDefaultLog()).depth(svn::DepthEmpty).keepLocks(false);
@@ -456,11 +471,12 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             QString ex = e.msg();
             error(KIO::ERR_SLAVE_DEFINED,e.msg());
             err = true;
+            stopOp(ex);
         }
     }
     m_pData->dispWritten = false;
     if (!err) {
-        notify(i18n("Wrote %1 to repository").arg(helpers::ByteToString()(processed_size)));
+        stopOp(i18n("Wrote %1 to repository").arg(helpers::ByteToString(processed_size)));
         finished();
     }
 }
@@ -470,7 +486,7 @@ void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::J
     Q_UNUSED(permissions);
     Q_UNUSED(flags);
     //bool force = flags&KIO::Overwrite;
-
+    m_pData->resetListener();
     kDebug(9510)<<"kio_svn::copy "<< src << " to " << dest <<  endl;
     svn::Revision rev = m_pData->urlToRev(src);
     if (rev == svn::Revision::UNDEFINED) {
@@ -498,6 +514,7 @@ void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::J
 void kio_svnProtocol::del(const KUrl&src,bool isfile)
 {
     Q_UNUSED(isfile);
+    m_pData->resetListener();
     kDebug(9510)<<"kio_svn::del "<< src << endl;
     //m_pData->reInitClient();
     svn::Revision rev = m_pData->urlToRev(src);
@@ -531,6 +548,7 @@ bool kio_svnProtocol::getLogMsg(QString&t)
 
 bool kio_svnProtocol::checkWc(const KUrl&url)
 {
+    m_pData->resetListener();
     if (url.isEmpty()||!url.isLocalFile()) return false;
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
@@ -589,6 +607,7 @@ void kio_svnProtocol::special(const QByteArray& data)
     kDebug(9510)<<"kio_svnProtocol::special"<<endl;
     QByteArray tmpData(data);
     QDataStream stream(&tmpData,QIODevice::ReadOnly);
+    m_pData->resetListener();
     int tmp;
     stream >> tmp;
     kDebug(9510) << "kio_svnProtocol::special " << tmp << endl;
@@ -758,6 +777,7 @@ void kio_svnProtocol::special(const QByteArray& data)
 void kio_svnProtocol::update(const KUrl&url,int revnumber,const QString&revkind)
 {
     svn::Revision where(revnumber,revkind);
+    m_pData->resetListener();
     /* update is always local - so make a path instead URI */
     svn::Path p(url.path());
     try {
@@ -775,6 +795,7 @@ void kio_svnProtocol::status(const KUrl&wc,bool cR,bool rec)
 {
     svn::StatusEntries dlist;
     svn::StatusParameter params(wc.path());
+    m_pData->resetListener();
     try {
         dlist = m_pData->m_Svnclient->status(params.depth(rec?svn::DepthInfinity:svn::DepthEmpty).all(false).update(cR).noIgnore(false).revision(svn::Revision::UNDEFINED));
     } catch (const svn::ClientException&e) {
@@ -1053,6 +1074,7 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
         totalSize(KIO::filesize_t(max));
     }
 
+    bool to_dbus = false;
     if (m_pData->dispProgress||m_pData->dispWritten) {
         QTime now = QTime::currentTime();
         if (m_pData->_last.msecsTo(now)>=90) {
@@ -1060,9 +1082,17 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
                 processedSize(KIO::filesize_t(current));
             } else {
                 written(current);
+                to_dbus = true;
             }
             m_pData->_last = now;
         }
+    }
+    if (to_dbus) {
+        CON_DBUS;
+        if (max > -1) {
+            kdesvndInterface.maxTransferKioOperation(m_pData->m_Id,max);
+        }
+        kdesvndInterface.transferedKioOperation(m_pData->m_Id,current);
     }
 }
 
@@ -1107,6 +1137,21 @@ bool kio_svnProtocol::checkKioCancel()const
     CON_DBUS_VAL(false);
     QDBusReply<bool> res=kdesvndInterface.canceldKioOperation(m_pData->m_Id);
     return res.isValid()?res.value():false;
+}
+
+void kio_svnProtocol::startOp(qulonglong max, const QString&title)
+{
+    CON_DBUS;
+    kdesvndInterface.maxTransferKioOperation(m_pData->m_Id,max);
+    kdesvndInterface.titleKioOperation(m_pData->m_Id,title,title);
+    kdesvndInterface.setKioStatus(m_pData->m_Id,1,QString());
+}
+
+void kio_svnProtocol::stopOp(const QString&message)
+{
+    CON_DBUS;
+    kdesvndInterface.setKioStatus(m_pData->m_Id,0,message);
+    unregisterFromDaemon();
 }
 
 } // namespace KIO

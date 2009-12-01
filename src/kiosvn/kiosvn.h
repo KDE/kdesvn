@@ -123,6 +123,8 @@ private:
 
     void registerToDaemon();
     void unregisterFromDaemon();
+    void startOp(qulonglong max, const QString&title);
+    void stopOp(const QString&message);
 
 protected:
     QString getDefaultLog();

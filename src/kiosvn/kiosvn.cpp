@@ -405,13 +405,20 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             svn::Path path = makeSvnUrl(url.url());
             path.removeLast();
             try {
+                notify(i18n("Start checking out to temporary folder"));
+                m_pData->dispWritten = true;
+                registerToDaemon();
+                startOp(-1, i18n("Checking out %1").arg(path.native()));
                 svn::CheckoutParameter params;
                 params.moduleName(path).destination(svn::Path(_codir->name())).revision(rev).peg(peg).depth(svn::DepthFiles);
                 m_pData->m_Svnclient->checkout(params);
             } catch (const svn::ClientException&e) {
                 error(KIO::ERR_SLAVE_DEFINED,e.msg());
+                notify(e.msg());
                 return;
             }
+            m_pData->dispWritten = false;
+            stopOp(i18n("Temporary checkout done."));
             tmpfile = new QFile(_codir->name()+url.fileName());
             tmpfile->open(QIODevice::ReadWrite|QIODevice::Truncate);
         } else {
@@ -1075,7 +1082,7 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
     }
 
     bool to_dbus = false;
-    if (m_pData->dispProgress||m_pData->dispWritten) {
+    if (m_pData->dispProgress||m_pData->dispWritten||max > -1) {
         QTime now = QTime::currentTime();
         if (m_pData->_last.msecsTo(now)>=90) {
             if (m_pData->dispProgress) {

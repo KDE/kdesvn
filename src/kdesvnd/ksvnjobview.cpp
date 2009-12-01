@@ -43,7 +43,7 @@ unsigned long KsvnJobView::percent(qulonglong amount)
     return (unsigned long)((float)(amount)/(float)(m_max)*100.0);
 }
 
-void KsvnJobView::setTotal(qulonglong amount)
+void KsvnJobView::setTotal(qlonglong amount)
 {
     static const QString unit("bytes");
     m_max = amount;

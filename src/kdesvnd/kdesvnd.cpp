@@ -34,6 +34,7 @@
 #include "src/svnqt/svnqttypes.hpp"
 #include "src/svnqt/client_parameter.hpp"
 #include "helpers/ktranslateurl.h"
+#include "src/helpers/stringhelper.h"
 #include "kdesvndadaptor.h"
 #include "ksvnjobview.h"
 
@@ -357,14 +358,20 @@ void kdesvnd::titleKioOperation(qulonglong kioid, const QString &title, const QS
 {
     CHECK_KIO;
     progressJobView[kioid]->setInfoMessage(title);
-    progressJobView[kioid]->setDescriptionField(0,"Description",label);
+    progressJobView[kioid]->setDescriptionField(0,i18n("Current task"),label);
 }
 
 void kdesvnd::transferedKioOperation(qulonglong kioid, qulonglong transfered)
 {
     CHECK_KIO;
-    progressJobView[kioid]->setProcessedAmount(transfered,"bytes");
-    progressJobView[kioid]->setPercent(progressJobView[kioid]->percent(transfered));
+    if (progressJobView[kioid]->max()>-1) {
+        progressJobView[kioid]->setProcessedAmount(transfered,"bytes");
+        progressJobView[kioid]->setPercent(progressJobView[kioid]->percent(transfered));
+        progressJobView[kioid]->clearDescriptionField(1);
+    } else {
+        progressJobView[kioid]->setPercent(100.0);
+        progressJobView[kioid]->setDescriptionField(1,i18n("Current transfer"),helpers::ByteToString(transfered));
+    }
 }
 
 void kdesvnd::unRegisterKioFeedback(qulonglong kioid)

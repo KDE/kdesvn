@@ -26,42 +26,53 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="m_Reviewlabel">
-         <property name="text">
-          <string>Review affected items</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>false</bool>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="m_Reviewlabel">
+           <property name="text">
+            <string>Review affected items</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTreeView" name="m_CommitItemTree">
+           <property name="verticalScrollMode">
+            <enum>QAbstractItemView::ScrollPerPixel</enum>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QTreeView" name="m_CommitItemTree">
-         <property name="verticalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
-         </property>
-         <property name="rootIsDecorated">
-          <bool>false</bool>
-         </property>
-         <property name="itemsExpandable">
-          <bool>false</bool>
-         </property>
-         <property name="sortingEnabled">
-          <bool>true</bool>
-         </property>
-         <property name="allColumnsShowFocus">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="m_SelectAllButton">
+           <property name="text">
+            <string>Select all</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="m_HideNewItems">
            <property name="text">
             <string>Hide new items</string>
@@ -71,7 +82,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1" colspan="2">
+         <item>
           <widget class="QPushButton" name="m_MarkUnversioned">
            <property name="toolTip">
             <string>Mark all new e.g. not versioned items for add and commit.</string>
@@ -81,7 +92,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="3">
+         <item>
           <widget class="QPushButton" name="m_UnmarkUnversioned">
            <property name="toolTip">
             <string>Unmark all unversioned items so they will be ignored.</string>
@@ -91,29 +102,42 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="2">
+         <item>
+          <widget class="QPushButton" name="m_RevertItemButton">
+           <property name="toolTip">
+            <string>Revert highlighted item</string>
+           </property>
+           <property name="text">
+            <string>Revert item</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="m_DiffItem">
            <property name="toolTip">
             <string>Generates and display difference against repository of selected item</string>
            </property>
            <property name="text">
-            <string>Diff highlighted item</string>
+            <string>Diff item</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2" colspan="2">
-          <widget class="QPushButton" name="m_RevertItemButton">
-           <property name="text">
-            <string>Revert highlighted item</string>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-          </widget>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
       </layout>
-      <zorder>m_CommitItemTree</zorder>
-      <zorder>m_Reviewlabel</zorder>
-      <zorder></zorder>
      </widget>
      <widget class="QFrame" name="m_EditFrame">
       <property name="frameShape">
@@ -258,8 +282,8 @@
    <slot>slotMarkUnversioned()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>311</x>
-     <y>168</y>
+     <x>494</x>
+     <y>100</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -274,8 +298,8 @@
    <slot>slotUnmarkUnversioned()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>485</x>
-     <y>168</y>
+     <x>494</x>
+     <y>131</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -290,8 +314,8 @@
    <slot>slotDiffSelected()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>234</x>
-     <y>204</y>
+     <x>494</x>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -306,8 +330,8 @@
    <slot>hideNewItems(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>53</x>
-     <y>168</y>
+     <x>383</x>
+     <y>69</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -338,8 +362,8 @@
    <slot>slotRevertSelected()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>485</x>
-     <y>204</y>
+     <x>494</x>
+     <y>162</y>
     </hint>
     <hint type="destinationlabel">
      <x>357</x>
@@ -363,9 +387,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_SelectAllButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotSelectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>456</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>507</x>
+     <y>381</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotRevertSelected()</slot>
   <slot>slotItemDoubleClicked(QModelIndex)</slot>
+  <slot>slotSelectAll()</slot>
  </slots>
 </ui>

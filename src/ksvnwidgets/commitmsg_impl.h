@@ -74,6 +74,7 @@ protected Q_SLOTS:
     virtual void insertFile();
     virtual void slotItemReverted(const QStringList&);
     virtual void slotItemDoubleClicked(const QModelIndex&);
+    virtual void slotSelectAll();
 
 protected:
     static QStringList sLogHistory;

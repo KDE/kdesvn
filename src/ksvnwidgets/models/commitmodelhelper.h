@@ -29,10 +29,12 @@ class CommitActionEntry
 {
 public:
     enum ACTION_TYPE{
-        COMMIT=0,
-        ADD_COMMIT=1,
-        DELETE=2,
-        MISSING_DELETE=3,
+        COMMIT         = 1,
+        ADD_COMMIT     = 2,
+        DELETE         = 4,
+        MISSING_DELETE = 8,
+
+        ALL            = COMMIT|ADD_COMMIT|DELETE|MISSING_DELETE,
     };
 
     CommitActionEntry(const QString&,const QString&,ACTION_TYPE kind = COMMIT);

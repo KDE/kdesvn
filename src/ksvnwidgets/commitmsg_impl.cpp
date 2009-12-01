@@ -551,6 +551,7 @@ void Commitmsg_impl::hideButtons(bool how)
         m_UnmarkUnversioned->hide();
         m_DiffItem->hide();
         m_HideNewItems->hide();
+        m_SelectAllButton->hide();
     }
     else
     {
@@ -558,6 +559,7 @@ void Commitmsg_impl::hideButtons(bool how)
         m_UnmarkUnversioned->show();
         m_DiffItem->show();
         m_HideNewItems->show();
+        m_SelectAllButton->show();
     }
 }
 
@@ -570,6 +572,14 @@ void Commitmsg_impl::markUnversioned(bool mark)
         return;
     }
     m_CurrentModel->markItems(mark,CommitActionEntry::ADD_COMMIT);
+}
+
+void Commitmsg_impl::slotSelectAll()
+{
+    if (!m_CurrentModel) {
+        return;
+    }
+    m_CurrentModel->markItems(true,CommitActionEntry::ALL);
 }
 
 void Commitmsg_impl::hideNewItems(bool how)

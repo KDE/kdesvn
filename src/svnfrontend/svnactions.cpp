@@ -2563,7 +2563,6 @@ void SvnActions::addModifiedCache(const svn::StatusPtr&what)
         m_Data->m_conflictCache.insertKey(what,what->path());
     } else {
         m_Data->m_Cache.insertKey(what,what->path());
-//        m_Data->m_Cache.dump_tree();
     }
 }
 

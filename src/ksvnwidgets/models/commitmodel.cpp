@@ -144,7 +144,7 @@ void CommitModel::markItems(bool mark,CommitActionEntry::ACTION_TYPE _type)
     QModelIndex _index;
     QVariant v = mark?int(2):int(0);
     for (int i=0;i<m_Content->m_List.count();++i) {
-        if (m_Content->m_List[i]->actionEntry().type()==_type) {
+        if (m_Content->m_List[i]->actionEntry().type() & _type) {
             _index=index(i,0,QModelIndex());
             setData(_index,v,Qt::CheckStateRole);
         }

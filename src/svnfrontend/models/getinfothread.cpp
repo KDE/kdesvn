@@ -21,8 +21,8 @@
 #include "getinfothread.h"
 #include "svnitemnode.h"
 #include "tcontextlistener.h"
-#include "src/svnqt/status.hpp"
-#include "src/svnqt/url.hpp"
+#include "src/svnqt/status.h"
+#include "src/svnqt/url.h"
 
 #include <QMutexLocker>
 #include <QReadLocker>

@@ -30,8 +30,8 @@
 
 
 // svncpp
-#include "revision.hpp"
-#include "pool.hpp"
+#include "revision.h"
+#include "pool.h"
 
 // qt
 #include "qdatetime.h"

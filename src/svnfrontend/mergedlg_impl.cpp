@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "mergedlg_impl.h"
 #include "rangeinput_impl.h"
-#include "src/svnqt/url.hpp"
+#include "src/svnqt/url.h"
 #include "helpers/ktranslateurl.h"
 #include "src/settings/kdesvnsettings.h"
 

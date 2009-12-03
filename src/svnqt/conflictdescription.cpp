@@ -21,8 +21,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "conflictdescription.hpp"
-#include "svnqt_defines.hpp"
+#include "conflictdescription.h"
+#include "svnqt_defines.h"
 
 #include <svn_wc.h>
 

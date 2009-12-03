@@ -32,9 +32,9 @@
 #endif
 
 // svncpp
-#include "svnqt/client_impl.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/exception.hpp"
+#include "svnqt/client_impl.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/exception.h"
 
 #include "svn_opt.h"
 #include "svn_ra.h"

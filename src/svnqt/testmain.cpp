@@ -21,11 +21,11 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "client.hpp"
-#include "repository.hpp"
-#include "context.hpp"
-#include "datetime.hpp"
-#include "client_parameter.hpp"
+#include "client.h"
+#include "repository.h"
+#include "context.h"
+#include "datetime.h"
+#include "client_parameter.h"
 
 #include <qdatastream.h>
 

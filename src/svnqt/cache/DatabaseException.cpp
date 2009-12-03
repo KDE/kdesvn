@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "DatabaseException.hpp"
+#include "DatabaseException.h"
 
 /*!
     \fn svn::cache::DatabaseException::DatabaseException(const QString&msg,int aNumber)throw()

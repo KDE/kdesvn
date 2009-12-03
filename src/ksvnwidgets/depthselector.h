@@ -22,7 +22,7 @@
 
 #include "src/ksvnwidgets/ui_depthform.h"
 
-#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/svnqttypes.h"
 
 class QCheckBox;
 

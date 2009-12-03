@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "importdir_logmsg.h"
 
-#include "src/svnqt/version_check.hpp"
+#include "src/svnqt/version_check.h"
 
 #include <klocale.h>
 

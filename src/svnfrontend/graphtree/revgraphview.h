@@ -20,8 +20,8 @@
 #ifndef REVGRAPHVIEW_H
 #define REVGRAPHVIEW_H
 
-#include <svnqt/revision.hpp>
-#include <svnqt/shared_pointer.hpp>
+#include <svnqt/revision.h>
+#include <svnqt/shared_pointer.h>
 
 #include <QContextMenuEvent>
 #include <QGraphicsView>

@@ -21,7 +21,7 @@
 #ifndef SVNITEMMODELFWD_H
 #define SVNITEMMODELFWD_H
 
-#include "src/svnqt/shared_pointer.hpp"
+#include "src/svnqt/shared_pointer.h"
 
 #include <QFlags>
 

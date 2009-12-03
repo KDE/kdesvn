@@ -20,7 +20,7 @@
 
 #include "svnitemnode.h"
 #include "src/svnfrontend/maintreewidget.h"
-#include "src/svnqt/revision.hpp"
+#include "src/svnqt/revision.h"
 #include "src/settings/kdesvnsettings.h"
 
 #include <kdebug.h>

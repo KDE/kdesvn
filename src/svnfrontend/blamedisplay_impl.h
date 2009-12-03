@@ -21,7 +21,7 @@
 #define BLAMEDISPLAY_IMPL_H
 
 #include "ui_blamedisplay.h"
-#include "src/svnqt/client.hpp"
+#include "src/svnqt/client.h"
 
 class BlameDisplayData;
 class SimpleLogCb;

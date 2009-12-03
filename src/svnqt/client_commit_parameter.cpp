@@ -21,10 +21,10 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "client_commit_parameter.hpp"
-#include "svnqt/svnqttypes.hpp"
-#include "svnqt/stringarray.hpp"
-#include "svnqt/client_parameter_macros.hpp"
+#include "client_commit_parameter.h"
+#include "svnqt/svnqttypes.h"
+#include "svnqt/stringarray.h"
+#include "svnqt/client_parameter_macros.h"
 
 namespace svn
 {

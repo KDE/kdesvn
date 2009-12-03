@@ -32,7 +32,7 @@
 #include "apr_date.h"
 
 // svncpp
-#include "datetime.hpp"
+#include "datetime.h"
 
 
 namespace svn

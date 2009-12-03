@@ -22,7 +22,7 @@
 
 #include <KUrl>
 #include <QTreeView>
-#include "src/svnqt/shared_pointer.hpp"
+#include "src/svnqt/shared_pointer.h"
 
 class SvnTreeView:public QTreeView
 {

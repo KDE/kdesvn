@@ -22,8 +22,8 @@
 #include "tcontextlistener.h"
 #include "src/kdesvn_events.h"
 
-#include "src/svnqt/svnqttypes.hpp"
-#include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/svnqttypes.h"
+#include "src/svnqt/client_parameter.h"
 
 #include <qobject.h>
 #include <kdebug.h>

@@ -22,7 +22,7 @@
 
 #include "src/ksvnwidgets/ui_commitmessage.h"
 #include "src/ksvnwidgets/models/commitmodelfwd.h"
-#include "src/svnqt/commititem.hpp"
+#include "src/svnqt/commititem.h"
 
 #include <QList>
 #include <QPair>

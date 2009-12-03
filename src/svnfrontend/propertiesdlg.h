@@ -26,8 +26,8 @@
 #include <qstring.h>
 #include <QStringList>
 
-#include "src/svnqt/svnqttypes.hpp"
-#include "src/svnqt/revision.hpp"
+#include "src/svnqt/svnqttypes.h"
+#include "src/svnqt/revision.h"
 
 class QVBoxLayout;
 class QHBoxLayout;

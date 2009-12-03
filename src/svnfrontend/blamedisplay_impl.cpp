@@ -20,7 +20,7 @@
 #include "blamedisplay_impl.h"
 #include "simple_logcb.h"
 #include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/log_entry.hpp"
+#include "src/svnqt/log_entry.h"
 #include "fronthelpers/cursorstack.h"
 #include "fronthelpers/widgetblockstack.h"
 #include "src/ksvnwidgets/encodingselector_impl.h"

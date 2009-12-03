@@ -29,7 +29,7 @@
  */
 
 // svncpp
-#include "pool.hpp"
+#include "pool.h"
 
 
 namespace svn

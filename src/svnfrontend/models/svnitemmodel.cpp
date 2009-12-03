@@ -25,10 +25,10 @@
 #include "src/svnfrontend/maintreewidget.h"
 #include "src/settings/kdesvnsettings.h"
 
-#include "src/svnqt/status.hpp"
-#include "src/svnqt/client.hpp"
-#include "src/svnqt/path.hpp"
-#include "src/svnqt/svnqt_defines.hpp"
+#include "src/svnqt/status.h"
+#include "src/svnqt/client.h"
+#include "src/svnqt/path.h"
+#include "src/svnqt/svnqt_defines.h"
 
 #include <klocale.h>
 #include <kdebug.h>

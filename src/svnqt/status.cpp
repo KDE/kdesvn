@@ -29,10 +29,10 @@
  */
 
 // svncpp
-#include "status.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/path.hpp"
-#include "svnqt/url.hpp"
+#include "status.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/path.h"
+#include "svnqt/url.h"
 
 #include "svn_path.h"
 

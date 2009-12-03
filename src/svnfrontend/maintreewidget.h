@@ -24,8 +24,8 @@
 #include "itemdisplay.h"
 #include "frontendtypes.h"
 
-#include "src/svnqt/status.hpp"
-#include "src/svnqt/client.hpp"
+#include "src/svnqt/status.h"
+#include "src/svnqt/client.h"
 
 #include <kservice.h>
 #include <krun.h>

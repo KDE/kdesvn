@@ -30,8 +30,8 @@
 
 
 // svncpp
-#include "exception.hpp"
-#include "svnqt/svnqt_defines.hpp"
+#include "exception.h"
+#include "svnqt/svnqt_defines.h"
 
 #include <qstring.h>
 

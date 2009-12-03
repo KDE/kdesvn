@@ -28,15 +28,15 @@
 #include <qapplication.h>
 #include <qtextstream.h>
 
-#include "svnqt/client.hpp"
-#include "svnqt/svnqttypes.hpp"
-#include "svnqt/log_entry.hpp"
+#include "svnqt/client.h"
+#include "svnqt/svnqttypes.h"
+#include "svnqt/log_entry.h"
 
-#include "svnqt/cache/LogCache.hpp"
-#include "svnqt/cache/ReposLog.hpp"
-#include "svnqt/cache/ReposConfig.hpp"
+#include "svnqt/cache/LogCache.h"
+#include "svnqt/cache/ReposLog.h"
+#include "svnqt/cache/ReposConfig.h"
 #include "svnqt/cache/test/testconfig.h"
-#include "svnqt/cache/DatabaseException.hpp"
+#include "svnqt/cache/DatabaseException.h"
 
 #include <QSqlQuery>
 #include <QSqlError>

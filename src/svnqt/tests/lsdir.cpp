@@ -22,11 +22,11 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#include "src/svnqt/client.hpp"
+#include "src/svnqt/client.h"
 #include "svnqt/tests/testconfig.h"
-#include "src/svnqt/status.hpp"
-#include "src/svnqt/svnqttypes.hpp"
-#include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/status.h"
+#include "src/svnqt/svnqttypes.h"
+#include "src/svnqt/client_parameter.h"
 #include <iostream>
 
 int main(int,char**)

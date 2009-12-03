@@ -31,18 +31,18 @@
 #pragma warning( disable: 4786 )// debug symbol truncated
 #endif
 // svncpp
-#include "client_impl.hpp"
+#include "client_impl.h"
 
 // Subversion api
 #include "svn_client.h"
 //#include "svn_io.h"
 
-#include "svnqt/exception.hpp"
-#include "svnqt/pool.hpp"
-#include "svnqt/status.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/svnstream.hpp"
-#include "svnqt/svnfilestream.hpp"
+#include "svnqt/exception.h"
+#include "svnqt/pool.h"
+#include "svnqt/status.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/svnstream.h"
+#include "svnqt/svnfilestream.h"
 
 namespace svn
 {

@@ -21,7 +21,7 @@
 #define RANGEINPUT_IMPL_H
 
 #include "ui_rangeinput.h"
-#include "src/svnqt/revision.hpp"
+#include "src/svnqt/revision.h"
 #include <qpair.h>
 
 class Rangeinput_impl: public QWidget, public Ui::RangeInput {

@@ -20,12 +20,12 @@
 #include "fillcachethread.h"
 #include "tcontextlistener.h"
 
-#include "src/svnqt/cache/LogCache.hpp"
-#include "src/svnqt/cache/ReposLog.hpp"
-#include "src/svnqt/cache/ReposConfig.hpp"
-#include "src/svnqt/cache/DatabaseException.hpp"
+#include "src/svnqt/cache/LogCache.h"
+#include "src/svnqt/cache/ReposLog.h"
+#include "src/svnqt/cache/ReposConfig.h"
+#include "src/svnqt/cache/DatabaseException.h"
 #include "src/kdesvn_events.h"
-#include "src/svnqt/url.hpp"
+#include "src/svnqt/url.h"
 
 #include <QObject>
 #include <kdebug.h>

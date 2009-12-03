@@ -23,7 +23,7 @@
 #include "src/svnfrontend/fronthelpers/propertylist.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
-#include "src/svnqt/client.hpp"
+#include "src/svnqt/client.h"
 
 #include <qvariant.h>
 #include <qlabel.h>

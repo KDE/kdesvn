@@ -20,7 +20,7 @@
 #ifndef FRONTEND_TYPES_H
 #define FRONTEND_TYPES_H
 
-#include "svnqt/shared_pointer.hpp"
+#include "svnqt/shared_pointer.h"
 #include <QList>
 
 class ThreadContextListener;

@@ -21,9 +21,9 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "svnqt/svnstream.hpp"
-#include "svnqt/pool.hpp"
-#include "svnqt/apr.hpp"
+#include "svnqt/svnstream.h"
+#include "svnqt/pool.h"
+#include "svnqt/apr.h"
 
 // Subversion api
 #include "svn_client.h"

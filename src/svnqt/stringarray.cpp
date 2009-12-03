@@ -22,8 +22,8 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#include "svnqt/stringarray.hpp"
-#include "svnqt/pool.hpp"
+#include "svnqt/stringarray.h"
+#include "svnqt/pool.h"
 
 #include <svn_types.h>
 // apr api

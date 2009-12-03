@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "LogCache.hpp"
+#include "LogCache.h"
 
 #include <qdir.h>
 #include <qsql.h>
@@ -35,8 +35,8 @@
 #include <qmap.h>
 #include <QtDebug>
 
-#include "svnqt/path.hpp"
-#include "svnqt/cache/DatabaseException.hpp"
+#include "svnqt/path.h"
+#include "svnqt/cache/DatabaseException.h"
 
 #define SQLTYPE "QSQLITE"
 #define SQLMAIN "logmain-logcache"

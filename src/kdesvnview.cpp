@@ -28,10 +28,10 @@
 #include "svnfrontend/stopdlg.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
 #include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/url.hpp"
-#include "src/svnqt/repository.hpp"
-#include "src/svnqt/version_check.hpp"
-#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/url.h"
+#include "src/svnqt/repository.h"
+#include "src/svnqt/version_check.h"
+#include "src/svnqt/svnqttypes.h"
 
 #include <QPainter>
 #include <QLayout>

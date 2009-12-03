@@ -24,7 +24,7 @@
 #ifndef TESTLISTENER_H
 #define TESTLISTENER_H
 
-#include "src/svnqt/context_listener.hpp"
+#include "src/svnqt/context_listener.h"
 
 class TestListener:public svn::ContextListener
 {

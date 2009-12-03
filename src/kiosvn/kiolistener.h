@@ -20,7 +20,7 @@
 #ifndef KIOLISTENER_H
 #define KIOLISTENER_H
 
-#include "src/svnqt/context_listener.hpp"
+#include "src/svnqt/context_listener.h"
 #include "src/ksvnwidgets/pwstorage.h"
 
 namespace KIO {

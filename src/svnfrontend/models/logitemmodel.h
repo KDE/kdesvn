@@ -23,7 +23,7 @@
 
 #include <QAbstractListModel>
 
-#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/svnqttypes.h"
 
 
 class SvnLogModelData;

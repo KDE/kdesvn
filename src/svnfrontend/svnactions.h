@@ -20,11 +20,11 @@
 #ifndef SVNACTIONS_H
 #define SVNACTIONS_H
 
-#include "src/svnqt/client.hpp"
-#include "src/svnqt/revision.hpp"
-#include "src/svnqt/smart_pointer.hpp"
-#include "src/svnqt/shared_pointer.hpp"
-#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/client.h"
+#include "src/svnqt/revision.h"
+#include "src/svnqt/smart_pointer.h"
+#include "src/svnqt/shared_pointer.h"
+#include "src/svnqt/svnqttypes.h"
 
 #include "simple_logcb.h"
 #include "frontendtypes.h"

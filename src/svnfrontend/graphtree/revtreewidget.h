@@ -20,7 +20,7 @@
 #ifndef REVTREEWIDGET_H
 #define REVTREEWIDGET_H
 
-#include <svnqt/revision.hpp>
+#include <svnqt/revision.h>
 
 #include <qvariant.h>
 #include <qpixmap.h>

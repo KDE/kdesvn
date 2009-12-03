@@ -72,56 +72,56 @@ SET(SOURCES
     )
 
 SET(CACHEINST_HEADERS
-    cache/LogCache.hpp
-    cache/ReposLog.hpp
-    cache/DatabaseException.hpp
-    cache/ReposConfig.hpp
-    cache/DatabaseException.hpp
-    cache/conversion_check.hpp
+    cache/LogCache.h
+    cache/ReposLog.h
+    cache/DatabaseException.h
+    cache/ReposConfig.h
+    cache/DatabaseException.h
+    cache/conversion_check.h
 )
 
 SET(INST_HEADERS
-    annotate_line.hpp
-    apr.hpp
-    check.hpp
-    client.hpp
-    commititem.hpp
-    context.hpp
-    context_listener.hpp
-    datetime.hpp
-    dirent.hpp
-    entry.hpp
-    exception.hpp
-    info_entry.hpp
-    lock_entry.hpp
-    log_entry.hpp
-    path.hpp
-    pool.hpp
-    repository.hpp
-    repositorylistener.hpp
+    annotate_line.h
+    apr.h
+    check.h
+    client.h
+    commititem.h
+    context.h
+    context_listener.h
+    datetime.h
+    dirent.h
+    entry.h
+    exception.h
+    info_entry.h
+    lock_entry.h
+    log_entry.h
+    path.h
+    pool.h
+    repository.h
+    repositorylistener.h
     repoparameter.cpp
-    revision.hpp
-    smart_pointer.hpp
-    shared_pointer.hpp
-    status.hpp
-    svnfilestream.hpp
-    svnstream.hpp
-    svnqttypes.hpp
-    targets.hpp
-    url.hpp
-    version_check.hpp
-    wc.hpp
-    stringarray.hpp
-    diffoptions.hpp
-    conflictdescription.hpp
-    conflictresult.hpp
-    client_parameter.hpp
-    repoparameter.hpp
-    client_commit_parameter.hpp
-    client_annotate_parameter.hpp
+    revision.h
+    smart_pointer.h
+    shared_pointer.h
+    status.h
+    svnfilestream.h
+    svnstream.h
+    svnqttypes.h
+    targets.h
+    url.h
+    version_check.h
+    wc.h
+    stringarray.h
+    diffoptions.h
+    conflictdescription.h
+    conflictresult.h
+    client_parameter.h
+    repoparameter.h
+    client_commit_parameter.h
+    client_annotate_parameter.h
     )
 
-FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.hpp")
+FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 SET(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
 
 SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}")
@@ -169,12 +169,12 @@ IF (QT_LUPDATE_EXECUTABLE)
 ENDIF (QT_LUPDATE_EXECUTABLE)
 
 CONFIGURE_FILE(
-    "${CMAKE_CURRENT_SOURCE_DIR}/svnqt_defines.hpp.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/svnqt_defines.h.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h"
     IMMEDIATE
     @ONLY)
 
-SET(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.hpp)
+SET(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h)
 INCLUDE_DIRECTORIES(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
 ADD_LIBRARY(${svnqt-name} SHARED ${SOURCES} ${svnhdr})

@@ -22,9 +22,9 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#include "diffoptions.hpp"
-#include "stringarray.hpp"
-#include "pool.hpp"
+#include "diffoptions.h"
+#include "stringarray.h"
+#include "pool.h"
 
 #include <svn_diff.h>
 

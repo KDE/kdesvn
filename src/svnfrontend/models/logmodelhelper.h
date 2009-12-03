@@ -23,9 +23,9 @@
 #include <QTreeWidgetItem>
 #include <QString>
 
-#include "src/svnqt/svnqttypes.hpp"
-#include "src/svnqt/shared_pointer.hpp"
-#include "src/svnqt/log_entry.hpp"
+#include "src/svnqt/svnqttypes.h"
+#include "src/svnqt/shared_pointer.h"
+#include "src/svnqt/log_entry.h"
 
 class LogChangePathItem:public QTreeWidgetItem
 {

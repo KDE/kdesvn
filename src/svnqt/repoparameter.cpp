@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "repoparameter.hpp"
+#include "repoparameter.h"
 
 #define SETIT(x,y) _data->x = y ; return *this;
 

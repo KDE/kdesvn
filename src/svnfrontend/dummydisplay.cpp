@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "dummydisplay.h"
-#include "svnqt/revision.hpp"
+#include "svnqt/revision.h"
 #include <QList>
 
 DummyDisplay::DummyDisplay()

@@ -21,7 +21,7 @@
 #define KDESVN_EVENTS_H
 
 #include <qevent.h>
-#include "src/svnqt/svnqt_defines.hpp"
+#include "src/svnqt/svnqt_defines.h"
 
 class FillCacheStatusEvent:public QEvent
 {

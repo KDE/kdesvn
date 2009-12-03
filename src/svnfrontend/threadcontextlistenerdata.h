@@ -20,7 +20,7 @@
 #ifndef THREADCONTEXTLISTENERDATA_H
 #define THREADCONTEXTLISTENERDATA_H
 
-#include "src/svnqt/context_listener.hpp"
+#include "src/svnqt/context_listener.h"
 
 #include <qthread.h>
 #include <qstring.h>

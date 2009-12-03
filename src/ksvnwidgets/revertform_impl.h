@@ -21,7 +21,7 @@
 #define REVERT_FORM_IMPL_H
 
 #include "ui_revertform.h"
-#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/svnqttypes.h"
 
 class QStringList;
 

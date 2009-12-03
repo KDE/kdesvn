@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "svnfilestream.hpp"
+#include "svnfilestream.h"
 
 #include <qfile.h>
 

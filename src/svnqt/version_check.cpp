@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "version_check.hpp"
+#include "version_check.h"
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

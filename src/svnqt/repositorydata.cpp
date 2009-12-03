@@ -21,12 +21,12 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "svnqt/repositorydata.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/exception.hpp"
-#include "svnqt/repositorylistener.hpp"
-#include "svnqt/svnfilestream.hpp"
-#include "svnqt/repoparameter.hpp"
+#include "svnqt/repositorydata.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/exception.h"
+#include "svnqt/repositorylistener.h"
+#include "svnqt/svnfilestream.h"
+#include "svnqt/repoparameter.h"
 
 #include <svn_fs.h>
 #include <svn_path.h>

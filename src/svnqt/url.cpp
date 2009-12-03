@@ -33,8 +33,8 @@
 
 
 // svncpp
-#include "pool.hpp"
-#include "url.hpp"
+#include "pool.h"
+#include "url.h"
 
 #include <qglobal.h>
 

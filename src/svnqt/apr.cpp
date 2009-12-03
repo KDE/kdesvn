@@ -32,7 +32,7 @@
 #include "apr_general.h"
 
 // svncpp
-#include "apr.hpp"
+#include "apr.h"
 
 
 /**

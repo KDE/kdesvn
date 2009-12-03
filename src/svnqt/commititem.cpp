@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "commititem.hpp"
+#include "commititem.h"
 
 #include <svn_client.h>
 #include <svn_props.h>

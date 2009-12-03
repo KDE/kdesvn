@@ -21,7 +21,7 @@
 #define REVISIONBUTTONIMPL_H
 
 #include "ui_revisionbutton.h"
-#include "svnqt/revision.hpp"
+#include "svnqt/revision.h"
 
 class RevisionButtonImpl: public QWidget, public Ui::RevisionButton {
     Q_OBJECT

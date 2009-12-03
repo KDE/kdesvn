@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commitmodelhelper.h"
-#include "src/svnqt/commititem.hpp"
+#include "src/svnqt/commititem.h"
 
 #include <klocale.h>
 

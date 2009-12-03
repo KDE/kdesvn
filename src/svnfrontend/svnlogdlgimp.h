@@ -22,9 +22,9 @@
 
 #include "ui_svnlogdlg.h"
 #include "simple_logcb.h"
-#include "src/svnqt/log_entry.hpp"
-#include "src/svnqt/client.hpp"
-#include "src/svnqt/shared_pointer.hpp"
+#include "src/svnqt/log_entry.h"
+#include "src/svnqt/client.h"
+#include "src/svnqt/shared_pointer.h"
 
 #include <qsize.h>
 #include <QKeyEvent>

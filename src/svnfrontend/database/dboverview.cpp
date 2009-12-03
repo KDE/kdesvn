@@ -23,12 +23,12 @@
  ***************************************************************************/
 #include "dboverview.h"
 #include "dbsettings.h"
-#include "src/svnqt/cache/ReposConfig.hpp"
-#include "src/svnqt/cache/LogCache.hpp"
-#include "src/svnqt/cache/ReposLog.hpp"
-#include "src/svnqt/cache/DatabaseException.hpp"
+#include "src/svnqt/cache/ReposConfig.h"
+#include "src/svnqt/cache/LogCache.h"
+#include "src/svnqt/cache/ReposLog.h"
+#include "src/svnqt/cache/DatabaseException.h"
 #include "src/svnfrontend/fronthelpers/createdlg.h"
-#include "src/svnqt/client.hpp"
+#include "src/svnqt/client.h"
 #include "helpers/stringhelper.h"
 
 #include <QStringListModel>

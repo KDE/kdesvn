@@ -21,13 +21,13 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "src/svnqt/client.hpp"
+#include "src/svnqt/client.h"
 #include "svnqt/tests/testconfig.h"
-#include "src/svnqt/repository.hpp"
-#include "src/svnqt/repositorylistener.hpp"
-#include "src/svnqt/repoparameter.hpp"
-#include "src/svnqt/targets.hpp"
-#include "src/svnqt/client_parameter.hpp"
+#include "src/svnqt/repository.h"
+#include "src/svnqt/repositorylistener.h"
+#include "src/svnqt/repoparameter.h"
+#include "src/svnqt/targets.h"
+#include "src/svnqt/client_parameter.h"
 
 #include "testlistener.h"
 

@@ -29,7 +29,7 @@
  */
 
 // svncpp
-#include "entry.hpp"
+#include "entry.h"
 
 namespace svn
 {

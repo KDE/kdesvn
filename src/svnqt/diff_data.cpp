@@ -21,9 +21,9 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "diff_data.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/exception.hpp"
+#include "diff_data.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/exception.h"
 
 #include <qfile.h>
 

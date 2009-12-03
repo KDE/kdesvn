@@ -20,9 +20,9 @@
 #ifndef HELPERSCACHEENTRY_H
 #define HELPERSCACHEENTRY_H
 
-#include "src/svnqt/svnqttypes.hpp"
-#include "src/svnqt/shared_pointer.hpp"
-#include "src/svnqt/status.hpp"
+#include "src/svnqt/svnqttypes.h"
+#include "src/svnqt/shared_pointer.h"
+#include "src/svnqt/status.h"
 
 // std::map 'cause QMap isn't usable, it don't work with with the typenames in class
 #include <map>

@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "sub2qt.h"
 
-#include "src/svnqt/datetime.hpp"
+#include "src/svnqt/datetime.h"
 #include "kglobal.h"
 #include "klocale.h"
 #include <qmap.h>

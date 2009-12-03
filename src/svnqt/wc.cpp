@@ -32,15 +32,15 @@
 #include "svn_wc.h"
 
 // svncpp
-#include "exception.hpp"
-#include "path.hpp"
-#include "pool.hpp"
-#include "wc.hpp"
-#include "context.hpp"
+#include "exception.h"
+#include "path.h"
+#include "pool.h"
+#include "wc.h"
+#include "context.h"
 
-#include "entry.hpp"
+#include "entry.h"
 
-#include "svnqt/helper.hpp"
+#include "svnqt/helper.h"
 
 namespace svn
 {

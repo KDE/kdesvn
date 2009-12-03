@@ -36,12 +36,12 @@
 #include "apr_file_io.h"
 
 // svncpp
-#include "svnqt/path.hpp"
-#include "svnqt/pool.hpp"
-#include "svnqt/url.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/revision.hpp"
-#include "svnqt/exception.hpp"
+#include "svnqt/path.h"
+#include "svnqt/pool.h"
+#include "svnqt/url.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/revision.h"
+#include "svnqt/exception.h"
 
 #include <qurl.h>
 

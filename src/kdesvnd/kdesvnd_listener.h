@@ -20,7 +20,7 @@
 #ifndef KDESVND_LISTENER_H
 #define KDESVND_LISTENER_H
 
-#include "src/svnqt/context_listener.hpp"
+#include "src/svnqt/context_listener.h"
 
 class kdesvnd;
 

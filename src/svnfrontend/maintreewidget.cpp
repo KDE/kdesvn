@@ -32,7 +32,7 @@
 #include "importdir_logmsg.h"
 #include "src/settings/kdesvnsettings.h"
 #include "helpers/sshagent.h"
-#include "src/svnqt/url.hpp"
+#include "src/svnqt/url.h"
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"

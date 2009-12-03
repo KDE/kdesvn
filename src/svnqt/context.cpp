@@ -38,10 +38,10 @@
 //#include "svn_utf.h"
 
 // svncpp
-#include "apr.hpp"
-#include "context.hpp"
-#include "context_listener.hpp"
-#include "contextdata.hpp"
+#include "apr.h"
+#include "context.h"
+#include "context_listener.h"
+#include "contextdata.h"
 
 namespace svn
 {

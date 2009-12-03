@@ -36,10 +36,10 @@
 #include "apr_strings.h"
 
 // svncpp
-#include "svnqt/targets.hpp"
-#include "svnqt/path.hpp"
-#include "svnqt/pool.hpp"
-#include "svnqt/svnqt_defines.hpp"
+#include "svnqt/targets.h"
+#include "svnqt/path.h"
+#include "svnqt/pool.h"
+#include "svnqt/svnqt_defines.h"
 
 #include <qstringlist.h>
 

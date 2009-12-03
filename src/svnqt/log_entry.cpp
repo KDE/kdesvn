@@ -28,9 +28,9 @@
  * ====================================================================
  */
 // svncpp
-#include "log_entry.hpp"
-#include "pool.hpp"
-#include "stringarray.hpp"
+#include "log_entry.h"
+#include "pool.h"
+#include "stringarray.h"
 
 // subversion api
 #include "svn_time.h"

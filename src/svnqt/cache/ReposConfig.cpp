@@ -26,9 +26,9 @@
  * Lot of code and ideas taken from KDE 4 KConfigGroup source code         *
  * ksvn://anonsvn.kde.org/home/kde/branches/KDE/4.2/kdelibs/kdecore/config *
  ***************************************************************************/
-#include "ReposConfig.hpp"
-#include "LogCache.hpp"
-#include "src/svnqt/path.hpp"
+#include "ReposConfig.h"
+#include "LogCache.h"
+#include "src/svnqt/path.h"
 
 namespace svn
 {

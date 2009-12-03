@@ -21,7 +21,7 @@
 #include "itemdisplay.h"
 #include "svnitem.h"
 #include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/status.hpp"
+#include "src/svnqt/status.h"
 
 
 ItemDisplay::ItemDisplay()

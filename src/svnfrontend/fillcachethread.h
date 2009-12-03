@@ -20,9 +20,9 @@
 #ifndef FILLCACHE_THREAD_H
 #define FILLCACHE_THREAD_H
 
-#include "src/svnqt/client.hpp"
-#include "src/svnqt/revision.hpp"
-#include "src/svnqt/status.hpp"
+#include "src/svnqt/client.h"
+#include "src/svnqt/revision.h"
+#include "src/svnqt/status.h"
 #include "frontendtypes.h"
 #include "svnthread.h"
 

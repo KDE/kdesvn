@@ -23,10 +23,10 @@
  ***************************************************************************/
 
 
-#include "contextdata.hpp"
-#include "context_listener.hpp"
-#include "conflictresult.hpp"
-#include "conflictdescription.hpp"
+#include "contextdata.h"
+#include "context_listener.h"
+#include "conflictresult.h"
+#include "conflictdescription.h"
 
 #include <svn_config.h>
 #include <svn_wc.h>

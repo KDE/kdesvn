@@ -20,7 +20,7 @@
 #ifndef ELOGENTRY_H
 #define ELOGENTRY_H
 
-#include <svnqt/log_entry.hpp>
+#include <svnqt/log_entry.h>
 
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>

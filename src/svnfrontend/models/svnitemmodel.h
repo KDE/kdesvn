@@ -24,8 +24,8 @@
 
 #include "svnitemmodelfwd.h"
 
-#include "src/svnqt/shared_pointer.hpp"
-#include "src/svnqt/svnqttypes.hpp"
+#include "src/svnqt/shared_pointer.h"
+#include "src/svnqt/svnqttypes.h"
 
 #include <kurl.h>
 

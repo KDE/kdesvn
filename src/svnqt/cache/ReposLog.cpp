@@ -21,15 +21,15 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "ReposLog.hpp"
+#include "ReposLog.h"
 
-#include "LogCache.hpp"
-#include "svnqt/info_entry.hpp"
-#include "svnqt/svnqttypes.hpp"
-#include "svnqt/client.hpp"
-#include "svnqt/context_listener.hpp"
-#include "svnqt/cache/DatabaseException.hpp"
-#include "svnqt/client_parameter.hpp"
+#include "LogCache.h"
+#include "svnqt/info_entry.h"
+#include "svnqt/svnqttypes.h"
+#include "svnqt/client.h"
+#include "svnqt/context_listener.h"
+#include "svnqt/cache/DatabaseException.h"
+#include "svnqt/client_parameter.h"
 
 #include <qsqldatabase.h>
 

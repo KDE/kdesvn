@@ -22,9 +22,9 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#include "conflictresult.hpp"
+#include "conflictresult.h"
 
-#include "svnqt_defines.hpp"
+#include "svnqt_defines.h"
 
 #include <svn_wc.h>
 

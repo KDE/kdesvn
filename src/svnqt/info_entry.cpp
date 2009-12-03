@@ -21,9 +21,9 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "svnqt/info_entry.hpp"
-#include "svnqt/svnqt_defines.hpp"
-#include "svnqt/pool.hpp"
+#include "svnqt/info_entry.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/pool.h"
 #include <svn_client.h>
 #include <svn_path.h>
 

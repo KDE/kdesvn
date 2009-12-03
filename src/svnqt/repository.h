@@ -62,7 +62,7 @@ public:
     //! destructor
     virtual ~Repository();
 
-    //! open a local repository path for maintainance
+    //! open a local repository path for maintenance
     /*!
         Assigns a repository with that object. If a path was opened before it will closed.
         \param path Path to a local repository, must not be an url
@@ -78,7 +78,7 @@ public:
     void CreateOpen(const CreateRepoParameter&params) throw (ClientException);
     //! dump content of repository to a file
     /*!
-        The repository must opend before. Progress message go trough the assigned svn::repository::RepositoryListener object.
+        The repository must opened before. Progress message go trough the assigned svn::repository::RepositoryListener object.
         The revision parameter must be numbers, no constant values like svn::Revision::HEAD.
         \param output where to output the content
         \param start Begin on revision. If revision == -1 than start with first entry.

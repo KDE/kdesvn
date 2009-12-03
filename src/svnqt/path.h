@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_PATH_HPP_
-#define _SVNCPP_PATH_HPP_
+#ifndef SVNQT_PATH_H
+#define SVNQT_PATH_H
 
 #include <qstring.h>
 #include "svnqt/svnqt_defines.h"
@@ -60,7 +60,7 @@ namespace svn
      *
      * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
-    Path (const QString & path = QString::null);
+    Path (const QString & path = QString());
 
     /**
      * Constructor

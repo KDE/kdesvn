@@ -28,16 +28,16 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_REVISION_HPP_
-#define _SVNCPP_REVISION_HPP_
+#ifndef SVNQT_REVISION_H
+#define SVNQT_REVISION_H
 
 // svncpp
 #include <svnqt/datetime.h>
 #include <svnqt/svnqt_defines.h>
 
-// qt
-#include <qglobal.h>
-#include <QtCore>
+#include <QString>
+#include <QDateTime>
+#include <QTextStream>
 
 // subversion api
 #include "svn_types.h"

@@ -28,16 +28,14 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_LOG_ENTRY_H_
-#define _SVNCPP_LOG_ENTRY_H_
+#ifndef SVNQT_LOG_ENTRY_H
+#define SVNQT_LOG_ENTRY_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/datetime.h"
 
-//Qt
-#include <qglobal.h>
-
-#include <QtCore>
+#include <QString>
+#include <QList>
 
 // apr
 #include "apr_time.h"

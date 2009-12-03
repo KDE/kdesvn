@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_CLIENT_IMPL_H_
-#define _SVNCPP_CLIENT_IMPL_H_
+#ifndef SVNQT_CLIENT_IMPL_H
+#define SVNQT_CLIENT_IMPL_H
 
 #include "svnqt/client.h"
 #include "svnqt/svnqt_defines.h"
@@ -361,7 +361,7 @@ namespace svn
     /**
      * Retrieve information for the given path
      * remote or local. Only gives with subversion 1.2
-     * usefull results
+     * useful results
      *
      * @param path path for info
      * @param rec recursive (if dir)
@@ -432,7 +432,7 @@ namespace svn
      *
      * @param pathOrUrl
      * @param revision
-     * @param peg at wich revision path exists
+     * @param peg at which revision path exists
      * @param depth @sa svn::Depth
      * @param retrieve_locks check for REPOSITORY locks while listing
      * @return a vector of directory entries, each with

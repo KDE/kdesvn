@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_CLIENT_H_
-#define _SVNCPP_CLIENT_H_
+#ifndef SVNQT_CLIENT_H
+#define SVNQT_CLIENT_H
 
 // Ignore MSVC 6 compiler warning: debug symbol truncated
 #if defined (_MSC_VER) && _MSC_VER <= 1200
@@ -44,10 +44,6 @@
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
 #include "svnqt/svnstream.h"
-
-// qt
-#include <qglobal.h>
-#include <QtCore>
 
 // svnqt
 #include "svnqt/context.h"
@@ -300,7 +296,7 @@ namespace svn
      *
      * @param targets encoded pathes to create
      * @param message log message. if it is QString::null asks when working on repository
-     * @param makeParent create parent folders if not existant (only when build with svn 1.5 or above)
+     * @param makeParent create parent folders if not existent (only when build with svn 1.5 or above)
      * @exception ClientException
      */
     virtual svn::Revision
@@ -452,7 +448,7 @@ namespace svn
      * working copy!
      * @param pathOrUrl
      * @param revision
-     * @param peg at wich revision path exists
+     * @param peg at which revision path exists
      * @param depth @sa depth
      * @param retrieve_locks check for REPOSITORY locks while listing.
      * @return a vector of directory entries, each with

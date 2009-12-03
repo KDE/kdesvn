@@ -28,14 +28,12 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_TARGETS_HPP_
-#define _SVNCPP_TARGETS_HPP_
+#ifndef SVNQT_TARGETS_H
+#define SVNQT_TARGETS_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
 
-#include <qglobal.h>
-#include <QtCore>
 
 // apr api
 #include "apr_tables.h"
@@ -80,7 +78,7 @@ namespace svn
      *
      * @param target
      */
-    Targets (const QString& target = QString::null);
+    Targets (const QString& target = QString());
     /**
      * Constructor. Initializes list with just
      * one entry

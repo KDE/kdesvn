@@ -79,22 +79,12 @@ namespace svn
   {
     return *this<dateTime||dateTime<*this;
   }
+  
   bool DateTime::operator==(const DateTime&dateTime)const
   {
     return !(*this!=dateTime);
   }
 
-  bool
-  DateTime::operator ==(const DateTime & dateTime)
-  {
-    return m_time == dateTime.m_time;
-  }
-
-  bool
-  DateTime::operator !=(const DateTime & dateTime)
-  {
-    return m_time != dateTime.m_time;
-  }
   bool
   DateTime::operator<=(const DateTime&dateTime)const
   {

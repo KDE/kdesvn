@@ -27,8 +27,8 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#ifndef _SVNCPP_ENTRY_HPP_
-#define _SVNCPP_ENTRY_HPP_
+#ifndef SVNQT_ENTRY_H
+#define SVNQT_ENTRY_H
 
 // svncpp
 #include "svnqt/pool.h"

@@ -21,12 +21,10 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef _smart_pointer_hpp
-#define _smart_pointer_hpp
+#ifndef smart_pointer_h
+#define smart_pointer_h
 
-#if defined  QT_THREAD_SUPPORT
-#include "qmutex.h"
-#endif
+#include <QMutex>
 
 #include "svnqt/svnqt_defines.h"
 
@@ -45,29 +43,21 @@ class ref_count {
 protected:
     //! reference count member
     long m_RefCount;
-#ifdef QT_THREAD_SUPPORT
     QMutex m_RefcountMutex;
-#endif
 public:
     //! first reference must be added after "new" via Pointer()
     ref_count() : m_RefCount(0)
-#ifdef QT_THREAD_SUPPORT
                   ,m_RefcountMutex()
-#endif
     {}
     virtual ~ref_count() {}
     //! add a reference
     void Incr() {
-#ifdef QT_THREAD_SUPPORT
         QMutexLocker a(&m_RefcountMutex);
-#endif
         ++m_RefCount;
     }
     //! delete a reference
     bool Decr() {
-#ifdef QT_THREAD_SUPPORT
         QMutexLocker a(&m_RefcountMutex);
-#endif
         --m_RefCount;
         return Shared();
     }

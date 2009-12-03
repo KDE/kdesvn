@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_APR_H_
-#define _SVNCPP_APR_H_
+#ifndef SVNQT_APR_H
+#define SVNQT_APR_H
 
 namespace svn
 {

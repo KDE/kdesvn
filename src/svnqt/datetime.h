@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_DATETIME_HPP_
-#define _SVNCPP_DATETIME_HPP_
+#ifndef SVNQT_DATETIME_H
+#define SVNQT_DATETIME_H
 
 #include "svnqt/svnqt_defines.h"
 
@@ -84,17 +84,6 @@ namespace svn
      */
     const DateTime &
     operator =(const DateTime & dateTime);
-
-    /**
-     * @param dateTime Comparator
-     */
-    bool
-    operator ==(const DateTime & dateTime);
-    /**
-     * @param dateTime Comparator
-     */
-    bool
-    operator !=(const DateTime & dateTime);
 
     bool
     operator<(const DateTime&dateTime)const;

@@ -22,8 +22,9 @@
 
 #include "src/svnqt/context_listener.h"
 
-#include <qthread.h>
-#include <qstring.h>
+#include <QThread>
+#include <QString>
+#include <QWaitCondition>
 
 /**
 @author Rajko Albrecht

@@ -35,6 +35,8 @@
 #include "svnqt/helper.h"
 #include "svnqt/client_parameter.h"
 
+#include <QDebug>
+
 namespace svn
 {
 void Client_impl::merge (const MergeParameter&parameters) throw (ClientException)

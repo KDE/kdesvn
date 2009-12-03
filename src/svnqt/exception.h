@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_EXCEPTION_H_
-#define _SVNCPP_EXCEPTION_H_
+#ifndef SVNQT_EXCEPTION_H
+#define SVNQT_EXCEPTION_H
 
 #include "svnqt/svnqt_defines.h"
 // subversion api

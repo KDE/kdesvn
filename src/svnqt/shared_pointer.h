@@ -65,7 +65,7 @@ public:
     }
 };
 
-//! Shared pointer adapater
+//! Shared pointer adapter
 /*!
  * Implements a thread safe reference counter around any pointer.
  * This class takes ownership of data, eg., last reference will delete

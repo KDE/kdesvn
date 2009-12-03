@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_CONTEXT_HPP_
-#define _SVNCPP_CONTEXT_HPP_
+#ifndef SVNQT_CONTEXT_H
+#define SVNQT_CONTEXT_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
@@ -65,7 +65,7 @@ namespace svn
      *                  subversion api stores its
      *                  configuration
      */
-    Context (const QString & configDir=QString::null);
+    Context (const QString & configDir=QString());
 
     /**
      * copy constructor

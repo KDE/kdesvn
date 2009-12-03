@@ -21,8 +21,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef _DATABASE_EXCEPTION_HPP
-#define _DATABASE_EXCEPTION_HPP
+#ifndef DATABASE_EXCEPTION_H
+#define DATABASE_EXCEPTION_H
 
 #include "svnqt/exception.h"
 

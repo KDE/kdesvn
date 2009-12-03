@@ -40,6 +40,8 @@
 #include <QFileInfo>
 #include <QBrush>
 #include <QUuid>
+#include <QMimeData>
+#include <QDir>
 
 /*****************************
  * Internal data class begin *

@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_DIRENT_HPP_
-#define _SVNCPP_DIRENT_HPP_
+#ifndef SVNQT_DIRENT_H
+#define SVNQT_DIRENT_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/lock_entry.h"

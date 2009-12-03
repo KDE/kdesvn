@@ -27,8 +27,8 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#ifndef _SVNCPP_ANNOTATE_LINE_HPP_
-#define _SVNCPP_ANNOTATE_LINE_HPP_
+#ifndef SVNQT_ANNOTATE_LINE_HPP
+#define SVNQT_ANNOTATE_LINE_HPP
 
 #include "svnqt/svnqt_defines.h"
 

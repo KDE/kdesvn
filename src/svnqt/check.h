@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_CHECK_HPP_
-#define _SVNCPP_CHECK_HPP_
+#ifndef SVNQT_CHECK_H
+#define SVNQT_CHECK_H
 
 // subversion api
 #include "svn_version.h"

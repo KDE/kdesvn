@@ -22,17 +22,15 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#ifndef DIFF_DATA_HPP
-#define DIFF_DATA_HPP
+#ifndef SVNQT_DIFF_DATA_H
+#define SVNQT_DIFF_DATA_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/pool.h"
 #include "path.h"
 #include "revision.h"
 
-#include <qglobal.h>
-
-#include <QtCore>
+#include <QByteArray>
 
 struct apr_file_t;
 

@@ -27,8 +27,8 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#ifndef _SVNCPP_STATUS_HPP_
-#define _SVNCPP_STATUS_HPP_
+#ifndef SVNQT_STATUS_H
+#define SVNQT_STATUS_H
 
 // subversion api
 #include "svn_wc.h"
@@ -67,14 +67,14 @@ namespace svn
      * @param path path for this status entry
      * @param status status entry
      */
-    Status (const QString&path=QString::null, svn_wc_status2_t * status = NULL);
+    explicit Status (const QString&path=QString(), svn_wc_status2_t * status = NULL);
     /**
      * default constructor
      *
      * @param path path for this status entry
      * @param status status entry
      */
-    Status (const char*path, svn_wc_status2_t * status = NULL);
+    explicit Status (const char*path, svn_wc_status2_t * status = NULL);
     /**
      * converting constructor
      */

@@ -21,8 +21,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef _REPOS_LOG_HPP
-#define _REPOS_LOG_HPP
+#ifndef REPOS_LOG_H
+#define REPOS_LOG_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
@@ -53,7 +53,7 @@ protected:
     bool checkFill(svn::Revision&_start,svn::Revision&_end,bool checkHead);
 
 public:
-    ReposLog(svn::Client*aClient,const QString&aRepository=QString::null);
+    explicit ReposLog(svn::Client*aClient,const QString&aRepository=QString());
 
     QString ReposRoot() const
     {

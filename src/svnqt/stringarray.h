@@ -22,14 +22,12 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#ifndef _STRING_ARRAY_HPP
-#define _STRING_ARRAY_HPP
+#ifndef STRING_ARRAY_H
+#define STRING_ARRAY_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
 
-#include <qglobal.h>
-#include <QtCore>
 #include <QStringList>
 
 // apr api

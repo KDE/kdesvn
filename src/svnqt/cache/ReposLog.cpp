@@ -37,6 +37,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QFileInfo>
+#include <QBuffer>
 #define Q_LLONG qlonglong
 
 /*!

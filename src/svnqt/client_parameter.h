@@ -255,7 +255,7 @@ namespace svn
         const RevisionRange&revisionRange()const;
         //! set a simple start-end range
         /*!
-         * this is usefull if only one range is required. This will converted into internal ranges when set.
+         * this is useful if only one range is required. This will converted into internal ranges when set.
          */
         LogParameter&revisionRange(const Revision&start,const Revision&end);
 
@@ -405,7 +405,7 @@ namespace svn
         const RevisionRange&revisionRange()const;
         //! set a simple start-end range
         /*!
-         * this is usefull if only one range is required. This will converted into internal ranges when set.
+         * this is useful if only one range is required. This will converted into internal ranges when set.
          * used for Client::merge, pair is [rev1,rev2], with subversion prior 1.6 for Client::merge_peg, too.
          */
         MergeParameter&revisionRange(const Revision&start,const Revision&end);

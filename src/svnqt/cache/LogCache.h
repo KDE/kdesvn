@@ -21,8 +21,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef _LOG_CACHE_HPP
-#define _LOG_CACHE_HPP
+#ifndef LOG_CACHE_H
+#define LOG_CACHE_H
 
 #include <QString>
 #include <QDir>

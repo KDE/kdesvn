@@ -22,8 +22,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef __HELPER_HPP
-#define __HELPER_HPP
+#ifndef SVNQT_HELPER_H
+#define SVNQT_HELPER_H
 
 #include "svnqttypes.h"
 #include "revision.h"

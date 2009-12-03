@@ -28,14 +28,12 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_URL_H_
-#define _SVNCPP_URL_H_
+#ifndef SVNQT_URL_H
+#define SVNQT_URL_H
 
 #include "svnqt/svnqt_defines.h"
 
-// qt
-#include <qglobal.h>
-#include <QtCore>
+#include <QString>
 
 namespace svn
 {

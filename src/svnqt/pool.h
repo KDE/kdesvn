@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_POOL_H_
-#define _SVNCPP_POOL_H_
+#ifndef SVNQT_POOL_H
+#define SVNQT_POOL_H
 
 // subversion api
 #include "svn_pools.h"

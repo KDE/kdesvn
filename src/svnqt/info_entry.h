@@ -21,8 +21,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef __INFO_ENTRY_H
-#define __INFO_ENTRY_H
+#ifndef SVNQT_INFO_ENTRY_H
+#define SVNQT_INFO_ENTRY_H
 
 #include <svnqt/lock_entry.h>
 #include <svnqt/datetime.h>

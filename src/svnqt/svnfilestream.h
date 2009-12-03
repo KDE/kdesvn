@@ -39,7 +39,7 @@ class SvnFileStream_private;
 class SVNQT_EXPORT SvnFileOStream : public SvnStream
 {
 public:
-    SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx=0);
+    explicit SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx=0);
 
     virtual ~SvnFileOStream();
 
@@ -56,7 +56,7 @@ private:
 class SVNQT_EXPORT SvnFileIStream : public SvnStream
 {
 public:
-    SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx=0);
+    explicit SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx=0);
 
     virtual ~SvnFileIStream();
     virtual bool isOk() const;

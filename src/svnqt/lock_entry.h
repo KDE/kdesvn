@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_LOCK_ENTRY_H_
-#define _SVNCPP_LOCK_ENTRY_H_
+#ifndef SVNQT_LOCK_ENTRY_H
+#define SVNQT_LOCK_ENTRY_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/datetime.h"

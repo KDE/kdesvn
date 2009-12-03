@@ -22,8 +22,8 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#ifndef _CONFLICT_RESULT_HPP
-#define _CONFLICT_RESULT_HPP
+#ifndef SVNQT_CONFLICT_RESULT_H
+#define SVNQT_CONFLICT_RESULT_H
 
 struct svn_wc_conflict_result_t;
 
@@ -50,7 +50,7 @@ class SVNQT_EXPORT ConflictResult
         };
         ConflictResult();
         //! Copy constructor
-        /*! only usefull wenn build with subversion 1.5 or newer
+        /*! only useful wenn build with subversion 1.5 or newer
          */
         ConflictResult(const svn_wc_conflict_result_t*);
 

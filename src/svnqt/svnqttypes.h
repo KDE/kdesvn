@@ -22,15 +22,15 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
-#ifndef _SVNQT_TYPES_HPP
-#define _SVNQT_TYPES_HPP
+#ifndef SVNQT_TYPES_H
+#define SVNQT_TYPES_H
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/shared_pointer.h"
 
-// qt
-#include <qglobal.h>
-#include <QtCore>
+#include <QList>
+#include <QMap>
+#include <QPair>
 
 namespace svn
 {

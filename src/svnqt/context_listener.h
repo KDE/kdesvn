@@ -28,8 +28,8 @@
  * ====================================================================
  */
 
-#ifndef _SVNCPP_CONTEXT_LISTENER_HPP_
-#define _SVNCPP_CONTEXT_LISTENER_HPP_
+#ifndef SVNQT_CONTEXT_LISTENER_H
+#define SVNQT_CONTEXT_LISTENER_H
 
 // svncpp
 #include "svnqt/pool.h"

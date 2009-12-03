@@ -21,8 +21,8 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef REPOPARAMETER_H_
-#define REPOPARAMETER_H_
+#ifndef REPOPARAMETER_H
+#define REPOPARAMETER_H
 
 #include <QString>
 

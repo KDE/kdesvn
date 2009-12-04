@@ -227,7 +227,7 @@ void kio_svnProtocol::listDir(const KUrl&url)
     } catch (const svn::ClientException&e) {
         QString ex = e.msg();
         kDebug(9510)<<ex<<endl;
-        error(KIO::ERR_SLAVE_DEFINED,ex);
+        extraError(KIO::ERR_SLAVE_DEFINED,ex);
         return;
     }
     listEntry(KIO::UDSEntry(), true );
@@ -251,7 +251,7 @@ void kio_svnProtocol::stat(const KUrl& url)
     } catch  (const svn::ClientException&e) {
         QString ex = e.msg();
         kDebug(9510)<<ex<<endl;
-        error( KIO::ERR_SLAVE_DEFINED,ex);
+        extraError( KIO::ERR_SLAVE_DEFINED,ex);
         return;
     }
 
@@ -296,7 +296,7 @@ void kio_svnProtocol::get(const KUrl& url)
         m_pData->m_Svnclient->cat(dstream,_url,rev,rev);
     } catch (const svn::ClientException&e) {
         QString ex = e.msg();
-        error( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
+        extraError( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
         return;
     }
     data(QByteArray()); // empty array means we're done sending the data
@@ -312,7 +312,7 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        error(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
         return;
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
@@ -320,11 +320,9 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
         svn::Path p(makeSvnUrl(url));
         m_pData->m_Svnclient->mkdir(p,getDefaultLog());
     }catch (const svn::ClientException&e) {
-        error( KIO::ERR_SLAVE_DEFINED,e.msg());
-        kDebug(9510)<<"kio_svn::mkdir aborted" << url << endl;
+        extraError( KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
-    kDebug(9510)<<"kio_svn::mkdir finished " << url << endl;
     finished();
 }
 
@@ -338,7 +336,7 @@ void kio_svnProtocol::mkdir(const KUrl::List &urls, int)
     try {
         m_pData->m_Svnclient->mkdir(svn::Targets(p),getDefaultLog());
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     finished();
@@ -358,9 +356,8 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
         if (e.apr_err()==SVN_ERR_ENTRY_EXISTS) {
             error(KIO::ERR_DIR_ALREADY_EXIST,e.msg());
         } else {
-            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         }
-        kDebug(9510)<<"kio_svn::rename aborted" <<  endl;
         return;
     }
     notify(i18n("Renaming %1 to %2 succesfull").arg(src.prettyUrl()).arg(target.prettyUrl()));
@@ -376,7 +373,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        error(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
         return;
     }
     svn::Revision peg = rev;
@@ -388,7 +385,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         if (e.apr_err()==SVN_ERR_ENTRY_NOT_FOUND || e.apr_err()==SVN_ERR_RA_ILLEGAL_URL) {
             exists = false;
         } else {
-            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
             return;
         }
     }
@@ -397,7 +394,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     if (exists) {
         if (flags & KIO::Overwrite) {
             if (!supportOverwrite()) {
-                error(KIO::ERR_SLAVE_DEFINED,i18n("Overwriting existing items is disabled in settings."));
+                extraError(KIO::ERR_SLAVE_DEFINED,i18n("Overwriting existing items is disabled in settings."));
                 return;
             }
             _codir = new KTempDir;
@@ -413,8 +410,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
                 params.moduleName(path).destination(svn::Path(_codir->name())).revision(rev).peg(peg).depth(svn::DepthFiles);
                 m_pData->m_Svnclient->checkout(params);
             } catch (const svn::ClientException&e) {
-                error(KIO::ERR_SLAVE_DEFINED,e.msg());
-                notify(e.msg());
+                extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
                 return;
             }
             m_pData->dispWritten = false;
@@ -422,13 +418,13 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             tmpfile = new QFile(_codir->name()+url.fileName());
             tmpfile->open(QIODevice::ReadWrite|QIODevice::Truncate);
         } else {
-            error(KIO::ERR_FILE_ALREADY_EXIST,i18n("Could not write to existing item."));
+            extraError(KIO::ERR_FILE_ALREADY_EXIST,i18n("Could not write to existing item."));
             return;
         }
     } else {
         KTemporaryFile* _tmpfile = new KTemporaryFile();
         if (!_tmpfile->open()) {
-            error(KIO::ERR_SLAVE_DEFINED,i18n("Could not open temporary file"));
+            extraError(KIO::ERR_SLAVE_DEFINED,i18n("Could not open temporary file"));
             delete _tmpfile;
             return;
         }
@@ -468,7 +464,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         try {
             m_pData->m_Svnclient->commit(commit_parameters);
         } catch (const svn::ClientException&e) {
-            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
             err = true;
         }
     } else  {
@@ -476,7 +472,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
             m_pData->m_Svnclient->import(tmpfile->fileName(),makeSvnUrl(url),getDefaultLog(),svn::DepthEmpty,false,false);
         } catch  (const svn::ClientException&e) {
             QString ex = e.msg();
-            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
             err = true;
             stopOp(ex);
         }
@@ -507,7 +503,7 @@ void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::J
         if (e.apr_err()==SVN_ERR_ENTRY_EXISTS) {
             error(KIO::ERR_DIR_ALREADY_EXIST,e.msg());
         } else {
-            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         }
         kDebug(9510)<<"kio_svn::copy aborted" <<  endl;
         return;
@@ -529,7 +525,7 @@ void kio_svnProtocol::del(const KUrl&src,bool isfile)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        error(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
         return;
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
@@ -537,9 +533,7 @@ void kio_svnProtocol::del(const KUrl&src,bool isfile)
         svn::Targets target(makeSvnUrl(src));
         m_pData->m_Svnclient->remove(target,false);
     } catch (const svn::ClientException&e) {
-        QString ex = e.msg();
-        kDebug(9510)<<ex<<endl;
-        error( KIO::ERR_SLAVE_DEFINED,ex);
+        extraError( KIO::ERR_SLAVE_DEFINED,e.msg());
         kDebug(9510)<<"kio_svn::del aborted" << endl;
         return;
     }
@@ -794,7 +788,7 @@ void kio_svnProtocol::update(const KUrl&url,int revnumber,const QString&revkind)
         // sticky depth (last parameter)
         m_pData->m_Svnclient->update(pathes, where,svn::DepthInfinity,false,false,true);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -806,7 +800,7 @@ void kio_svnProtocol::status(const KUrl&wc,bool cR,bool rec)
     try {
         dlist = m_pData->m_Svnclient->status(params.depth(rec?svn::DepthInfinity:svn::DepthEmpty).all(false).update(cR).noIgnore(false).revision(svn::Revision::UNDEFINED));
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     kDebug(9510)<<"Status got " << dlist.count() << " entries." << endl;
@@ -861,7 +855,7 @@ void kio_svnProtocol::commit(const KUrl::List&url)
     try {
         nnum = m_pData->m_Svnclient->commit(commit_parameters);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
     for (long j=0;j<url.count();++j) {
         QString userstring;
@@ -890,7 +884,7 @@ void kio_svnProtocol::checkout(const KUrl&src,const KUrl&target,const int rev, c
         params.moduleName(makeSvnUrl(src)).destination(target.path()).revision(where).peg(svn::Revision::UNDEFINED).depth(svn::DepthInfinity);
         m_pData->m_Svnclient->checkout(params);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -906,7 +900,7 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
         try {
             m_pData->m_Svnclient->log(params.targets(makeSvnUrl(urls[j])),logs);
         } catch (const svn::ClientException&e) {
-            error(KIO::ERR_SLAVE_DEFINED,e.msg());
+            extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
             break;
         }
         if (logs.size()==0) {
@@ -956,7 +950,7 @@ void kio_svnProtocol::revert(const KUrl::List&l)
     try {
         m_pData->m_Svnclient->revert(target,svn::DepthEmpty);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -967,7 +961,7 @@ void kio_svnProtocol::wc_switch(const KUrl&wc,const KUrl&target,bool rec,int rev
     try {
         m_pData->m_Svnclient->doSwitch(wc_path,makeSvnUrl(target.url()),where,rec?svn::DepthInfinity:svn::DepthFiles);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
     }
 }
 
@@ -994,7 +988,7 @@ void kio_svnProtocol::diff(const KUrl&uri1,const KUrl&uri2,int rnum1,const QStri
         tdir.setAutoRemove(true);
         ex = m_pData->m_Svnclient->diff(_opts);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     QString out = QString::FROMUTF8(ex);
@@ -1012,7 +1006,7 @@ void kio_svnProtocol::import(const KUrl& repos, const KUrl& wc)
         QString path = wc.path();
         m_pData->m_Svnclient->import(svn::Path(path),target,QString(),svn::DepthInfinity,false,false);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     finished();
@@ -1025,7 +1019,7 @@ void kio_svnProtocol::add(const KUrl& wc)
                                                /* rec */
         m_pData->m_Svnclient->add(svn::Path(path),svn::DepthInfinity);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     finished();
@@ -1040,7 +1034,7 @@ void kio_svnProtocol::wc_delete(const KUrl::List&l)
     try {
         m_pData->m_Svnclient->remove(svn::Targets(p),false);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     finished();
@@ -1052,7 +1046,7 @@ void kio_svnProtocol::wc_resolve(const KUrl&url,bool recurse)
         svn::Depth depth=recurse?svn::DepthInfinity:svn::DepthEmpty;
         m_pData->m_Svnclient->resolve(url.path(),depth);
     } catch (const svn::ClientException&e) {
-        error(KIO::ERR_SLAVE_DEFINED,e.msg());
+        extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
         return;
     }
     finished();
@@ -1126,6 +1120,15 @@ void kio_svnProtocol::notify(const QString&text)
 {
     CON_DBUS;
     kdesvndInterface.notifyKioOperation(text);
+}
+
+void kio_svnProtocol::extraError(int _errid,const QString&text)
+{
+    error(_errid,text);
+    if (!text.isNull()) {
+        CON_DBUS;
+        kdesvndInterface.errorKioOperation(text);
+    }
 }
 
 void kio_svnProtocol::registerToDaemon()

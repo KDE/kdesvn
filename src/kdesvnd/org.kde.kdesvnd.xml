@@ -77,5 +77,8 @@
     <method name="notifyKioOperation">
         <arg type="s" name="text" direction="in"/>
     </method>
+    <method name="errorKioOperation">
+        <arg type="s" name="text" direction="in"/>
+    </method>
     </interface>
  </node>

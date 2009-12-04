@@ -92,6 +92,7 @@ public Q_SLOTS:
     void transferedKioOperation(qulonglong kioid, qulonglong transfered);
     void unRegisterKioFeedback(qulonglong kioid);
     void notifyKioOperation(const QString &text);
+    void errorKioOperation(const QString&text);
     //! set status from KIO
     /*!
      * \param kioid the kio makes an action

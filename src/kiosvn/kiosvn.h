@@ -113,6 +113,7 @@ protected:
     virtual void update(const KUrl&,int,const QString&);
 
     virtual void notify(const QString&text);
+    virtual void extraError(int _errid,const QString&text);
 
 private:
     KioSvnData*m_pData;

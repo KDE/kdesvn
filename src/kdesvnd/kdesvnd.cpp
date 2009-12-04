@@ -390,6 +390,14 @@ void kdesvnd::notifyKioOperation(const QString &text)
         m_componentData);
 }
 
+void kdesvnd::errorKioOperation(const QString&text)
+{
+    KNotification::event(
+        KNotification::Error,text,
+        QPixmap(),0L,KNotification::CloseOnTimeout
+    );
+}
+
 void kdesvnd::setKioStatus(qulonglong kioid, int status, const QString&message)
 {
     CHECK_KIO;

@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="kdesvn_part" version="21">
+<kpartgui name="kdesvn_part" version="22">
 <MenuBar>
   <Menu noMerge="1" name="settings">
     <text>Subversion settings</text>
@@ -123,6 +123,8 @@
   <Action name="make_svn_rename" />
   <Action name="make_svn_remove" />
   <Separator/>
+  <Action name="make_svn_property" />
+  <Separator/>
  </Menu>
  <Menu name="local_context_single_versioned_dir">
      <Action name="make_svn_headupdate"/>
@@ -139,6 +141,8 @@
      <Action name="make_svn_rename" />
      <Action name="make_svn_mkdir" />
      <Action name="make_view_refresh" />
+    <Separator/>
+    <Action name="make_svn_property" />
  </Menu>
  <Menu name="local_context_single_unversioned" >
      <text>Actions</text>

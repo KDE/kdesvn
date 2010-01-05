@@ -485,7 +485,7 @@ void RevGraphView::dumpRevtree()
         stream << "  " << it1.key()
             << "[ "
             << "shape=box, "
-            << "label=\""<<getLabelstring(it1.key())<<"\","
+            << "label=\""<<"Zeile 1 geht ab Zeile 2 geht ab"/*getLabelstring(it1.key())*/<<"\","
 	    <<"fontsize="<<_fontsize<<",fontname=\""<<f.family()<<"\","
             << "];\n";
         for (int j=0;j<it1.value().targets.count();++j) {

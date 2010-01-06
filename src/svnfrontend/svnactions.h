@@ -184,6 +184,7 @@ public:
 
     bool doNetworking();
     virtual void doCommit(const SvnItemList&);
+    virtual void editProperties(SvnItem*k,const svn::Revision&rev);
 
 protected:
     svn::smart_pointer<SvnActionsData> m_Data;
@@ -196,9 +197,8 @@ protected:
     void makeDiffinternal(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*,const svn::Revision&peg=svn::Revision::UNDEFINED);
     void makeDiffExternal(const QString&p1,const svn::Revision&start,const QString&p2,const svn::Revision&end,const svn::Revision&_peg,bool isDir,QWidget*p,bool rec=true);
 
-public slots:
+public Q_SLOTS:
     virtual void dispDiff(const QByteArray&);
-    virtual void slotProperties();
     virtual void slotNotifyMessage(const QString&);
     virtual void slotUpdateHeadRec();
     virtual void slotUpdateTo();

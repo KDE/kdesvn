@@ -502,7 +502,8 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_svn_partialtree",i18n("Partial revision tree"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_T),KIcon("kdesvntree"),this,SLOT(slotMakePartTree()));
     tmp_action->setStatusTip(i18n("Shows history of item as linked tree for a revision range"));
 
-    tmp_action = add_action("make_svn_property",i18n("Properties"),KShortcut(Qt::CTRL+Qt::Key_P),KIcon(),m_Data->m_Model->svnWrapper(),SLOT(slotProperties()));
+    tmp_action = add_action("make_svn_property",i18n("Properties"),KShortcut(Qt::CTRL+Qt::Key_P),KIcon(),this,SLOT(slotRightProperties()));
+    tmp_action = add_action("make_left_svn_property",i18n("Properties"),KShortcut(),KIcon(),this,SLOT(slotLeftProperties()));
     add_action("get_svn_property",i18n("Display Properties"),KShortcut(Qt::SHIFT+Qt::CTRL+Qt::Key_P),KIcon(),this,SLOT(slotDisplayProperties()));
     tmp_action = add_action("make_last_change",i18n("Display last changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDisplayLastDiff()));
     tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
@@ -707,6 +708,7 @@ void MainTreeWidget::enableActions()
     enableAction("make_svn_partialtree",single||none);
 
     enableAction("make_svn_property",single);
+    enableAction("make_left_svn_property",d==1);
     enableAction("get_svn_property",single);
     enableAction("make_svn_remove",(multi||single));
     enableAction("make_svn_lock",(multi||single));
@@ -1019,6 +1021,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     if ( (temp=filesActions()->action("make_svn_dirbasediff")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_diritemsdiff")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_dir_log_nofollow")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_left_svn_property")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
     OpenContextmenu*me=0;
@@ -2244,6 +2247,20 @@ void MainTreeWidget::slotRepositorySettings()
     } else {
         DbSettings::showSettings(inf.reposRoot());
     }
+}
+
+void MainTreeWidget::slotRightProperties()
+{
+    SvnItem*k = Selected();
+    if (!k) return;
+    m_Data->m_Model->svnWrapper()->editProperties(k,isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
+}
+
+void MainTreeWidget::slotLeftProperties()
+{
+    SvnItem*k = DirSelected();
+    if (!k) return;
+    m_Data->m_Model->svnWrapper()->editProperties(k,isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
 }
 
 #include "maintreewidget.moc"

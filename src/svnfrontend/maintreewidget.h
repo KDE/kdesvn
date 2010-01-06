@@ -158,6 +158,9 @@ protected Q_SLOTS:
     void slotUrlDropped(const KUrl::List&,Qt::DropAction,const QModelIndex&,bool);
     void slotRepositorySettings();
 
+    void slotRightProperties();
+    void slotLeftProperties();
+
 protected:
     virtual void keyPressEvent(QKeyEvent*);
     void setupActions();

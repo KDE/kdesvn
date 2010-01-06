@@ -893,19 +893,11 @@ void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const sv
     }
 }
 
-
-/*!
-    \fn SvnActions::slotProperties()
- */
-void SvnActions::slotProperties()
+void SvnActions::editProperties(SvnItem*k,const svn::Revision&rev)
 {
-    /// @todo remove reference to parentlist
     if (!m_Data->m_CurrentContext) return;
-    if (!m_Data->m_ParentList) return;
-    SvnItem*k = m_Data->m_ParentList->Selected();
     if (!k) return;
-    PropertiesDlg dlg(k,svnclient(),
-        m_Data->m_ParentList->isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
+    PropertiesDlg dlg(k,svnclient(),rev);
     connect(&dlg,SIGNAL(clientException(const QString&)),m_Data->m_ParentList->realWidget(),SLOT(slotClientException(const QString&)));
     KConfigGroup _kc(Kdesvnsettings::self()->config(),"properties_dlg");
     dlg.restoreDialogSize(_kc);

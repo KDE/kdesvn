@@ -342,6 +342,10 @@ int SvnItemModel::columnCount(const QModelIndex & /*parent*/)const
 
 int SvnItemModel::rowCount(const QModelIndex & parent)const
 {
+    if (!m_Data || !m_Data->m_rootNode) {
+        return 0;
+    }
+
     if (!parent.isValid()) {
         return m_Data->m_rootNode->childList().count();
     }

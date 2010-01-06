@@ -366,6 +366,9 @@ namespace svn
 
     struct MergeParameterData;
 
+    /**
+     * Wrapper for all mergeparameters.
+     */
     class SVNQT_EXPORT MergeParameter
     {
     private:
@@ -386,7 +389,7 @@ namespace svn
          */
         MergeParameter&peg(const Revision&rev);
         /*!
-         * used for Client::merge_peg only
+         * used for Client::merge_peg only or reintegrate merge
          */
         const Revision&peg()const;
         /*!
@@ -436,7 +439,20 @@ namespace svn
         MergeParameter&merge_options(const StringArray&options);
         const StringArray&merge_options()const;
 
+        /**
+         * @param reintegrate must be true if this parameter are for a reintegrate merge.
+         */
         MergeParameter&reintegrate(bool reintegrate);
+        /**
+         * Check wheter the parameters are for a reintegrate merge or not. If yes, than parameters are used as follows:
+         *   - peg() - setup the required peg revision
+         *   - path1() gives the source path
+         *   - localPath() the local working copy to merge into
+         *   - dry_run() run without real modifications
+         *   - merge_options() all other svn options for merge
+         *
+         * All other parameters are ignored in that case.
+         */
         bool reintegrate()const;
     };
 

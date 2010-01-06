@@ -348,7 +348,7 @@ namespace svn
                     const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
 
     /**
-     * Merge changes from two paths into a new local path.
+     * Merge changes from two paths into a new local path. For reintegrate merge see svn::MergeParameter!
      * @exception ClientException
      * @sa svn::MergeParameter
      */
@@ -645,7 +645,12 @@ namespace svn
               const StringArray&merge_options
             ) throw (ClientException);
 
-    };
+    /** helper method
+     * @sa svn_client_merge_reintegrate
+     */
+    virtual void merge_reintegrate(const MergeParameter&parameters) throw (ClientException);
+  };
+
 
 }
 

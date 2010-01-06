@@ -148,6 +148,15 @@ namespace svn
             case CapabilityMergeinfo:
                 capa = SVN_RA_CAPABILITY_MERGEINFO;
                 break;
+            case CapabilityDepth:
+                capa = SVN_RA_CAPABILITY_DEPTH;
+                break;
+            case CapabilityCommitRevProps:
+                capa = SVN_RA_CAPABILITY_COMMIT_REVPROPS;
+                break;
+            case CapabilityLogRevProps:
+                capa = SVN_RA_CAPABILITY_LOG_REVPROPS;
+                break;
             default:
                 return false;
         }

@@ -39,27 +39,52 @@
 
 namespace svn
 {
-void Client_impl::merge (const MergeParameter&parameters) throw (ClientException)
+
+void Client_impl::merge_reintegrate(const MergeParameter&parameters) throw (ClientException)
 {
     Pool pool;
     svn_error_t * error = 0;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    error = svn_client_merge3(parameters.path1().cstr (),
-                    parameters.revision1().revision(),
-                    parameters.path2().cstr(),
-                    parameters.revision2().revision(),
-                    parameters.localPath().cstr (),
-                    internal::DepthToSvn(parameters.depth()),
-                    !parameters.notice_ancestry(),
-                    parameters.force(),
-                    parameters.record_only(),
-                    parameters.dry_run(),
-                    parameters.merge_options().array(pool),
-                    *m_context,
-                    pool);
+    error = svn_client_merge_reintegrate(parameters.path1().cstr(),
+                                         parameters.peg().revision(),
+                                         parameters.localPath().cstr(),
+                                         parameters.dry_run(),
+                                         parameters.merge_options().array(pool),
+                                         *m_context,
+                                         pool
+                                         );
+#else
+    Q_UNUSED(parameters);
+#endif
+    if(error != 0) {
+        throw ClientException (error);
+    }
+}
+
+void Client_impl::merge(const MergeParameter&parameters) throw (ClientException)
+{
+    Pool pool;
+    svn_error_t * error = 0;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    if (parameters.reintegrate()) {
+        merge_reintegrate(parameters);
+    } else {
+        error = svn_client_merge3(parameters.path1().cstr (),
+                                  parameters.revision1().revision(),
+                                  parameters.path2().cstr(),
+                                  parameters.revision2().revision(),
+                                  parameters.localPath().cstr (),
+                                  internal::DepthToSvn(parameters.depth()),
+                                  !parameters.notice_ancestry(),
+                                  parameters.force(),
+                                  parameters.record_only(),
+                                  parameters.dry_run(),
+                                  parameters.merge_options().array(pool),
+                                  *m_context,
+                                  pool);
+    }
 #else
     bool recurse = parameters.depth()==DepthInfinity;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4))
     error = svn_client_merge2(parameters.path1().cstr (),
                     parameters.revision1().revision (),
                     parameters.path2().cstr (),
@@ -72,19 +97,6 @@ void Client_impl::merge (const MergeParameter&parameters) throw (ClientException
                     parameters.merge_options().array(pool),
                     *m_context,
                     pool);
-#else
-    error = svn_client_merge(parameters.path1().cstr (),
-                        parameters.revision1().revision (),
-                        parameters.path2().cstr (),
-                        parameters.revision2().revision (),
-                        parameters.localPath().cstr (),
-                        recurse,
-                        !parameters.notice_ancestry(),
-                        parameters.force(),
-                        parameters.dry_run(),
-                        *m_context,
-                        pool);
-#endif
 #endif
 
     if(error != 0) {

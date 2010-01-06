@@ -117,7 +117,10 @@ namespace svn
      * \sa svn_repos_has_capability
      */
     enum Capability {
-        CapabilityMergeinfo=0
+        CapabilityMergeinfo=0,
+        CapabilityDepth,
+        CapabilityCommitRevProps,
+        CapabilityLogRevProps
     };
 
     namespace repository {

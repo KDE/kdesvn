@@ -728,7 +728,7 @@ void MainTreeWidget::enableActions()
     enableAction("make_svn_mkdir",dir||(none && isopen));
     enableAction("make_svn_switch",isWorkingCopy()&& (single||none));
     enableAction("make_switch_to_repo",isWorkingCopy());
-    enableAction("make_import_dirs_into_current",dir);
+    enableAction("make_import_dirs_into_current",dir||d==1);
     enableAction("make_svn_relocate",isWorkingCopy()&& (single||none));
 
     enableAction("make_svn_export_current",((single&&dir)||none));

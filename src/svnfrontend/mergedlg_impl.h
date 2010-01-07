@@ -30,7 +30,7 @@ namespace svn{
 class MergeDlg_impl: public QWidget, public Ui::MergeDlg {
 Q_OBJECT
 public:
-    MergeDlg_impl(QWidget *parent = 0, bool src1=true,bool src2=true,bool out=true,bool record_only=true);
+    MergeDlg_impl(QWidget *parent = 0, bool src1=true,bool src2=true,bool out=true,bool record_only=true,bool reintegrate=true);
     virtual ~MergeDlg_impl();
 
     bool recursive()const;
@@ -39,6 +39,7 @@ public:
     bool dryrun()const;
     bool useExtern()const;
     bool recordOnly()const;
+    bool reintegrate()const;
 
     QString Src1()const;
     QString Src2()const;
@@ -55,9 +56,10 @@ public:
      */
     static bool getMergeRange(Rangeinput_impl::revision_range&range,
         bool*force,bool*recursive,bool*ignorerelated,bool*dry,bool*useExternal,QWidget*parent=0,const char*name=0);
-protected slots:
+protected Q_SLOTS:
     virtual void externDisplayToggled(bool);
     virtual void recordOnlyToggled(bool);
+    virtual void reintegrateToggled(bool);
 
 };
 

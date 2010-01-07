@@ -32,7 +32,7 @@
 #include <qlabel.h>
 #include <qcheckbox.h>
 
-MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out,bool record_only)
+MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out,bool record_only,bool reintegrate)
     :QWidget(parent),Ui::MergeDlg()
 {
     setupUi(this);
@@ -57,6 +57,10 @@ MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1,bool src2,bool out,bool 
     if (!record_only) {
         m_RecordOnly->setEnabled(false);
         m_RecordOnly->hide();
+    }
+    if (!reintegrate) {
+        m_Reintegrate->setEnabled(false);
+        m_Reintegrate->hide();
     }
     adjustSize();
     setMinimumSize(minimumSizeHint());
@@ -146,6 +150,11 @@ bool MergeDlg_impl::recordOnly()const
     return m_RecordOnly->isChecked();
 }
 
+bool MergeDlg_impl::reintegrate()const
+{
+    return m_Reintegrate->isChecked();
+}
+
 QString MergeDlg_impl::Src1()const
 {
     KUrl uri(m_SrcOneInput->url());
@@ -204,7 +213,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     KVBox*Dialog1Layout = new KVBox(&dlg);
     dlg.setMainWidget(Dialog1Layout);
 
-    ptr = new MergeDlg_impl(Dialog1Layout,false,false,false,false);
+    ptr = new MergeDlg_impl(Dialog1Layout,false,false,false,false,false);
     if (name) {
         ptr->setObjectName(name);
     }
@@ -234,10 +243,29 @@ void MergeDlg_impl::externDisplayToggled(bool how)
     m_RelatedCheck->setEnabled(!how);
     m_ForceCheck->setEnabled(!how);
     m_RecordOnly->setEnabled(!how);
+    m_Reintegrate->setEnabled(!how);
 }
 
 void MergeDlg_impl::recordOnlyToggled(bool)
 {
+}
+
+void MergeDlg_impl::reintegrateToggled(bool how)
+{
+    m_RelatedCheck->setEnabled(!how);
+    m_ForceCheck->setEnabled(!how);
+    m_RecordOnly->setEnabled(!how);
+    m_useExternMerge->setEnabled(!how);
+    m_RecursiveCheck->setEnabled(!how);
+    m_SrcTwoInput->setEnabled(!how);
+    m_RangeInput->setStartOnly(how);
+    if (how) {
+        m_RecursiveCheck->setChecked(true);
+        m_useExternMerge->setChecked(false);
+        m_RecordOnly->setChecked(false);
+        m_ForceCheck->setChecked(false);
+        m_RelatedCheck->setChecked(false);
+    }
 }
 
 #include "mergedlg_impl.moc"

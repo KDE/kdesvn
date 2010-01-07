@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>442</height>
+    <width>715</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,6 +121,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="m_Reintegrate">
+          <property name="toolTip">
+           <string>lump-merge all of source URL's unmerged changes</string>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Reintegrate merge</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="m_DryCheck">
           <property name="toolTip">
            <string>Just dry run without modifications</string>
@@ -189,6 +202,18 @@
    <header>rangeinput_impl.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_SrcOneInput</tabstop>
+  <tabstop>m_SrcTwoInput</tabstop>
+  <tabstop>m_OutInput</tabstop>
+  <tabstop>m_RecursiveCheck</tabstop>
+  <tabstop>m_RelatedCheck</tabstop>
+  <tabstop>m_ForceCheck</tabstop>
+  <tabstop>m_Reintegrate</tabstop>
+  <tabstop>m_DryCheck</tabstop>
+  <tabstop>m_RecordOnly</tabstop>
+  <tabstop>m_useExternMerge</tabstop>
+ </tabstops>
  <includes>
   <include location="local">kurlrequester.h</include>
   <include location="local">klineedit.h</include>
@@ -210,8 +235,8 @@
    <slot>externDisplayToggled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>547</x>
-     <y>278</y>
+     <x>693</x>
+     <y>327</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -226,8 +251,8 @@
    <slot>recordOnlyToggled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>565</x>
-     <y>237</y>
+     <x>693</x>
+     <y>298</y>
     </hint>
     <hint type="destinationlabel">
      <x>684</x>
@@ -235,8 +260,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_Reintegrate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MergeDlg</receiver>
+   <slot>reintegrateToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>561</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>715</x>
+     <y>438</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>recordOnlyToggled(bool)</slot>
+  <slot>reintegrateToggled(bool)</slot>
  </slots>
 </ui>

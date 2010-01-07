@@ -1866,7 +1866,7 @@ void MainTreeWidget::slotMerge()
         target = m_Data->merge_Target;
     }
     src2 = m_Data->merge_Src2;
-    bool force,dry,rec,irelated,useExternal,recordOnly;
+    bool force,dry,rec,irelated,useExternal,recordOnly,reintegrate;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr = 0;
     KDialog*dlg = createOkDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog",true);
@@ -1894,10 +1894,11 @@ void MainTreeWidget::slotMerge()
         useExternal = ptr->useExtern();
         recordOnly = ptr->recordOnly();
         range = ptr->getRange();
+        reintegrate=ptr->reintegrate();
         if (!useExternal) {
             m_Data->m_Model->svnWrapper()->slotMerge(src1,src2,target,range.first,range.second,
                                                       isWorkingCopy()?svn::Revision::UNDEFINED:m_Data->m_remoteRevision,
-                                                      rec,!irelated,force,dry,recordOnly);
+                                                      rec,!irelated,force,dry,recordOnly,reintegrate);
         } else {
             m_Data->m_Model->svnWrapper()->slotMergeExternal(src1,src2,target,range.first,range.second,
                                                               isWorkingCopy()?svn::Revision::UNDEFINED:m_Data->m_remoteRevision,

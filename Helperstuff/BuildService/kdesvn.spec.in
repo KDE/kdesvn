@@ -60,11 +60,11 @@ Development files for kdesvn. It is required when you plan use svnqt wrapper lib
 %setup -q
 mkdir build
 cd build
-cmake ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release -DLIB_SUFFIX=`kde-config --libsuffix`
+cmake ../ -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_BUILD_TYPE=Release
 
 %build
 %if 0%{?suse_version} > 0
-. /etc/opt/kde4/common_options
+#. /etc/opt/kde4/common_options
 %endif
 cd build
 make %{?jobs:-j%jobs}
@@ -85,25 +85,28 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/kdesvnaskpass
 %{_libdir}/*/*part*
 %{_datadir}/applications/*
-%{_datadir}/apps/kdesvn/*
-%{_datadir}/apps/kdesvnpart/*
-%{_datadir}/apps/kconf_update/*
+%{_datadir}/kde4/apps/kdesvn/*
+%{_datadir}/kde4/apps/kdesvnpart/*
+%{_datadir}/kde4/apps/kconf_update/*
 %{_datadir}/config.kcfg/*
 %{_datadir}/doc/*
 %{_datadir}/icons/*
 %{_datadir}/locale/*
 %{_libdir}/*/kded_kdesvnd.*
-%{_datadir}/services/kded/kdesvnd.desktop
-%{_datadir}/apps/konqueror/servicemenus/kdesvn*
+%{_datadir}/kde4/services/kded/kdesvnd.desktop
+%{_datadir}/kde4/services/ServiceMenus/kdesvn*
+%{_datadir}/kde4/services/kdesvnpart.desktop
 %{_libdir}/*/kio_ksvn*
-%{_datadir}/services/ksvn*.protocol
+%{_datadir}/kde4/services/ksvn*.protocol
 %{_datadir}/man/man1/*
-%{_libdir}/lib@svnqt-name@.so*
+%{_datadir}/dbus-1/interfaces/org.kde.kdesvnd.xml
+%{_libdir}/libsvnqt.so*
+%{_datadir}/svnqt/*
 %doc AUTHORS ChangeLog GPL.txt TODO COPYING COPYING.OpenSSL
 
 %files kiosvn
 %defattr(-,root,root)
-%{_datadir}/services/svn*.protocol
+%{_datadir}/kde4/services/svn*.protocol
 
 %files devel
 %defattr(-,root,root)

@@ -2,7 +2,7 @@ version 1.5.0:
     * fixed performance problems on remote repositories, all special infos are now retrieved in background
     * integrated missing merge parameters for subversion 1.5 or newer
     * KIO operations send notify messages to KDE notify system
-    * user may setup a timed polling for updates in repository and/or local modified items
+    * user may setup a timed check for updates in repository and/or local modified items
     * some UI fixes
 
 version 1.4.1:

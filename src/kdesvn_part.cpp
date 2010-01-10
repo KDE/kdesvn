@@ -372,7 +372,7 @@ void kdesvnpart::slotShowSettings()
     dialog->addPage(new SubversionSettings_impl(0),
         i18n("Subversion"),"kdesvn",i18n("Subversion Settings"),true);
     dialog->addPage(new PollingSettings_impl(0),
-                    i18n("Timed jobs"),"clock",i18n("Settings for timed jobs"),true);
+                    i18n("Timed jobs"),"kdesvnclock",i18n("Settings for timed jobs"),true);
     dialog->addPage(new DiffMergeSettings_impl(0),
         i18n("Diff & Merge"),"kdesvnmerge",i18n("Settings for diff and merge"),true);
     dialog->addPage(new DispColorSettings_impl(0),

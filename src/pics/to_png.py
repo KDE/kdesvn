@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import os
 
@@ -40,6 +41,7 @@ all_files=[
 'hisc-action-kdesvnreverse.svgz',
 'hisc-action-kdesvntree.svgz',
 'hisc-action-kdesvnresolved.svgz',
+'hisc-action-kdesvnclock.svgz'
 ]
 
 i_sizes=[

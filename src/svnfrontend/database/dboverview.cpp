@@ -87,7 +87,7 @@ void DbOverview::showDbOverview(svn::Client*aClient)
     DbOverview*ptr = 0;
     static const char*cfg_text = "db_overview_dlg";
     KConfigGroup _kc(Kdesvnsettings::self()->config(),cfg_text);
-    KDialog*dlg = createDialog(&ptr,QString(i18n("Overview about cache database content")),false,"DatabaseOverview",cfg_text);
+    KDialog*dlg = createDialog(&ptr,QString(i18n("Overview about cache database content")),KDialog::Close,cfg_text,false);
     ptr->setClient(aClient);
     dlg->restoreDialogSize(_kc);
     dlg->exec();

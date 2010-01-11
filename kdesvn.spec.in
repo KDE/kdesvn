@@ -89,6 +89,7 @@ rm -rf $RPM_BUILD_DIR/@PACKAGENAME@
 %{_datadir}/man/man1/*
 %{_datadir}/dbus-1/interfaces/org.kde.kdesvnd.xml
 %{_libdir}/lib@svnqt-name@.so*
+%{_datadir}/svnqt/*
 %doc AUTHORS ChangeLog GPL.txt TODO COPYING COPYING.OpenSSL
 
 %files kiosvn

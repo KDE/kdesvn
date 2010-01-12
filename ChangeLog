@@ -1,5 +1,8 @@
 version 1.5.1:
     * added remove action to left pane context menu
+    * fixed UI problems which where hidden since the port to kde4
+    * fixed wrong license information in header files of libsvnqt
+    * workaround for KIO generating a lot of useless notification messages
 
 version 1.5.0:
     * fixed performance problems on remote repositories, all special infos are now retrieved in background

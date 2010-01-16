@@ -160,6 +160,8 @@ MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigThreadsChanged()),this,SLOT(enableActions()));
     connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigCacheDataChanged()),this,SLOT(slotCacheDataChanged()));
 
+    connect(m_Data->m_Model->svnWrapper(),SIGNAL(sigExtraStatusMessage(const QString&)),this,SIGNAL(sigExtraStatusMessage(const QString&)));
+
     connect(m_Data->m_Model,SIGNAL(urlDropped(const KUrl::List&,Qt::DropAction,const QModelIndex &,bool)),
             this,SLOT(slotUrlDropped(const KUrl::List&,Qt::DropAction,const QModelIndex &,bool)));
 

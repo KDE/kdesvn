@@ -82,11 +82,15 @@ public:
     virtual bool isCanceld();
     virtual void stopCacheThreads();
 
-signals:
+Q_SIGNALS:
     /**
      * Use this signal to change the content of the statusbar
      */
     void signalChangeStatusbar(const QString&);
+    /**
+     * Extra messages for a temporary status bar
+     */
+    void sigExtraStatusMessage(const QString&);
 
     /**
      * Use this signal to change the content of the caption
@@ -103,7 +107,7 @@ signals:
     void tickProgress();
     void waitShow(bool);
 
-public slots:
+public Q_SLOTS:
     virtual void closeMe();
     virtual void slotDispPopup(const QString&,QWidget**);
     virtual void refreshCurrentTree();
@@ -119,7 +123,7 @@ public slots:
 
     virtual void slotSavestate();
 
-protected slots:
+protected Q_SLOTS:
     virtual void slotOnURL(const QString& url);
     virtual void slotSetTitle(const QString& title);
     virtual void slotAppendLog(const QString& text);

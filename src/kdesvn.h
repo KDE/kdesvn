@@ -80,7 +80,7 @@ protected:
     void enableClose(bool how);
 
 
-public slots:
+public Q_SLOTS:
     virtual void slotUrlOpened(bool);
     /**
      * Use this method to load whatever file/URL you have
@@ -116,11 +116,12 @@ private:
     KParts::ReadOnlyPart *m_part;
     KToggleAction *m_statusbarAction;
 
-protected slots:
+protected Q_SLOTS:
     virtual void optionsConfigureToolbars();
     virtual void optionsConfigureKeys();
     virtual void applyNewToolbarConfig();
     virtual void slotLoadLast(bool);
+    virtual void slotExtraStatus(const QString&);
 
 Q_SIGNALS:
     void sigSavestate();

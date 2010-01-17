@@ -296,7 +296,11 @@ void kio_svnProtocol::get(const KUrl& url)
         m_pData->m_Svnclient->cat(dstream,_url,rev,rev);
     } catch (const svn::ClientException&e) {
         QString ex = e.msg();
-        extraError( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
+        // dolphin / Konqueror try to get the content without check if it is a folder when listing a folder
+        // which results in a lot of error messages via kio notify
+        if (e.apr_err()!=SVN_ERR_CLIENT_IS_DIRECTORY) {
+            extraError( KIO::ERR_SLAVE_DEFINED,"Subversion error "+ex);
+        }
         return;
     }
     data(QByteArray()); // empty array means we're done sending the data

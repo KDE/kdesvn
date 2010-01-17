@@ -2484,7 +2484,8 @@ void SvnActions::checkModthread()
     }
     m_Data->m_Cache.clear();
     m_Data->m_conflictCache.clear();
-    for (long i = 0; i < m_CThread->getList().count();++i) {
+    long i = 0;
+    for (; i < m_CThread->getList().count();++i) {
         svn::StatusPtr ptr = m_CThread->getList()[i];
         if (m_CThread->getList()[i]->isRealVersioned()&& (
             m_CThread->getList()[i]->textStatus()==svn_wc_status_modified||
@@ -2498,6 +2499,7 @@ void SvnActions::checkModthread()
             m_Data->m_conflictCache.insertKey(ptr,ptr->path());
         }
     }
+    sigExtraStatusMessage(i18n("Found %1 modified items",i));
     delete m_CThread;
     m_CThread = 0;
     emit sigCacheDataChanged();
@@ -2527,9 +2529,9 @@ void SvnActions::checkUpdateThread()
         }
     }
     emit sigRefreshIcons();
-    emit sendNotify(i18n("Checking for updates finished"));
+    emit sigExtraStatusMessage(i18n("Checking for updates finished"));
     if (newer) {
-        emit sendNotify(i18n("There are new items in repository"));
+        emit sigExtraStatusMessage(i18n("There are new items in repository"));
     }
     delete m_UThread;
     m_UThread = 0;
@@ -2652,12 +2654,12 @@ bool SvnActions::createUpdateCache(const QString&what)
     m_Data->m_repoLockCache.clear();
     stopCheckUpdateThread();
     if (!doNetworking()) {
-        emit sendNotify(i18n("Not checking for updates because networking is disabled"));
+        emit sigExtraStatusMessage(i18n("Not checking for updates because networking is disabled"));
         return false;
     }
     m_UThread = new CheckModifiedThread(this,what,true);
     m_UThread->start();
-    emit sendNotify(i18n("Checking for updates started in background"));
+    emit sigExtraStatusMessage(i18n("Checking for updates started in background"));
     return true;
 }
 

@@ -231,7 +231,7 @@ public Q_SLOTS:
     virtual void slotCancel(bool);
     virtual void stopFillCache();
 
-signals:
+Q_SIGNALS:
     void clientException(const QString&);
     void sendNotify(const QString&);
     void reinitItem(SvnItem*);
@@ -244,8 +244,9 @@ signals:
     void sigCacheStatus(qlonglong,qlonglong);
     void sigCacheDataChanged();
     void sigItemsReverted(const QStringList&);
+    void sigExtraStatusMessage(const QString&);
 
-protected slots:
+protected Q_SLOTS:
     virtual void checkModthread();
     virtual void checkUpdateThread();
     virtual void slotProcessDataRead(const QByteArray&,WatchedProcess*);

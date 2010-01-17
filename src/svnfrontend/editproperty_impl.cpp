@@ -31,7 +31,7 @@
 #include <kicon.h>
 
 EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
-    : KDialog(parent)
+    : QWidget(parent)
 {
     setupUi(this);
     setObjectName(name);

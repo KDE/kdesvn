@@ -93,7 +93,10 @@ kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
     connect(m_TreeWidget,SIGNAL(sigSwitchUrl(const KUrl&)),this,SIGNAL(sigSwitchUrl(const KUrl&)));
     connect(m_TreeWidget,SIGNAL(sigUrlChanged( const QString& )),this,SLOT(slotUrlChanged(const QString&)));
     connect(m_TreeWidget,SIGNAL(sigCacheStatus(qlonglong,qlonglong)),this,SLOT(fillCacheStatus(qlonglong,qlonglong)));
+    connect(m_TreeWidget,SIGNAL(sigExtraStatusMessage(const QString&)),this,SIGNAL(sigExtraStatusMessage(const QString&)));
+    
     connect(this,SIGNAL(sigMakeBaseDirs()),m_TreeWidget,SLOT(slotMkBaseDirs()));
+
     KConfigGroup cs(Kdesvnsettings::self()->config(),"kdesvn-mainlayout");
     QByteArray t1 = cs.readEntry("split1",QByteArray());
     if (!t1.isEmpty()) {

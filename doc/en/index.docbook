@@ -2153,11 +2153,11 @@ The next big thing could that you forgot to give a libsuffix on 64-Bit systems a
 </para>
 <para>If this does not solve your problem, you may try out on a console:
 <programlisting>
-  export LD_PRELOAD=/usr/lib/kde3/libkdesvnpart.so
+  export LD_PRELOAD=/usr/lib/kde4/libkdesvnpart.so
   kdesvn
   unset LD_PRELOAD
 </programlisting>
-(/usr/lib/kde3 depends of course on your system, please check where it is installed)
+(/usr/lib/kde4 depends of course on your system, please check where it is installed)
 </para>
 <para>
 You should see a lot of output why loading of libkdesvnpart.so isn't possible, that may help solving your problem.

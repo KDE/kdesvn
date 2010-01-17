@@ -65,7 +65,7 @@ public:
     virtual bool closeUrl();
     static KAboutData* createAboutData();
 
-signals:
+Q_SIGNALS:
     void refreshTree();
     void settingsChanged();
 

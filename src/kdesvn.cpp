@@ -113,6 +113,7 @@ kdesvn::kdesvn()
             // tell the KParts::MainWindow that this is indeed the main widget
             setCentralWidget(m_part->widget());
             connect(this,SIGNAL(sigSavestate()),m_part->widget(),SLOT(slotSavestate()));
+            connect(m_part->widget(),SIGNAL(sigExtraStatusMessage(const QString&)),this,SLOT(slotExtraStatus(const QString&)));
 
             KAction*tmpAction;
             tmpAction = actionCollection()->addAction("subversion_create_repo",
@@ -155,8 +156,6 @@ kdesvn::kdesvn()
             tmpAction->setText(i18n("Show database content"));
             tmpAction->setToolTip(i18n("Show the content of logcache database"));
 
-            /* enable tooltips in statusbar for menu */
-// KDE4 port - pv             actionCollection()->setHighlightingEnabled(true);
             connectActionCollection(actionCollection());
 
             setHelpMenuEnabled(false);
@@ -192,13 +191,6 @@ void kdesvn::connectActionCollection( KActionCollection *coll )
     connect(coll,SIGNAL(actionHovered(QAction*)),this,SLOT(actionHovered(QAction*)));
 #endif
 }
-
-#if 0
-void kdesvn::actionHovered(QAction*action)
-{
-    if (action) changeStatusbar(action->statusTip());
-}
-#endif
 
 kdesvn::~kdesvn()
 {
@@ -343,15 +335,12 @@ void kdesvn::fileOpen()
 
 void kdesvn::changeStatusbar(const QString& text)
 {
-    // display the text on the statusbar
-//     statusBar()->message(text);
     statusBar()->showMessage(text);
 }
 
 void kdesvn::resetStatusBar()
 {
-//     statusBar()->message(i18n("Ready"));
-    statusBar()->showMessage(i18n("Ready"));
+    statusBar()->showMessage(i18n("Ready"),4000);
 }
 
 // kde4 port - pv
@@ -398,17 +387,8 @@ void kdesvn::slotUrlOpened(bool how)
  */
 void kdesvn::optionsConfigureToolbars()
 {
-// #if defined(KDE_MAKE_VERSION)
-// # if KDE_VERSION >= KDE_MAKE_VERSION(3,1,0)
-//     saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
     KConfigGroup cg(KGlobal::config(), autoSaveGroup());
     saveMainWindowSettings(cg);
-// # else
-//     saveMainWindowSettings(KGlobal::config() );
-// # endif
-// #else
-//     saveMainWindowSettings(KGlobal::config() );
-// #endif
 
     // use the standard toolbar editor
     KEditToolBar dlg(factory());
@@ -479,6 +459,15 @@ void kdesvn::slotLoadLast(bool how)
     KConfigGroup cs(KGlobal::config(),"startup");
     cs.writeEntry("load_last_on_start",how);
     cs.sync();
+}
+
+void kdesvn::slotExtraStatus(const QString&what)
+{
+    if (!statusBar()->hasItem(1)) {
+        statusBar()->insertItem(what,1);
+    } else {
+        statusBar()->changeItem(what,1);
+    }
 }
 
 #include "kdesvn.moc"

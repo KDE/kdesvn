@@ -67,6 +67,7 @@ public:
 
 Q_SIGNALS:
     void sigLogMessage(const QString&);
+    void sigExtraStatusMessage(const QString&);
     void changeCaption(const QString&);
     void sigShowPopup(const QString&,QWidget**);
     void sigUrlOpend(bool);

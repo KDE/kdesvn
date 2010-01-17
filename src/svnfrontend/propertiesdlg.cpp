@@ -21,6 +21,7 @@
 #include "propertiesdlg.h"
 #include "src/svnfrontend/fronthelpers/propertyitem.h"
 #include "src/svnfrontend/fronthelpers/propertylist.h"
+#include "fronthelpers/createdlg.h"
 #include "editproperty_impl.h"
 #include "svnitem.h"
 #include "src/svnqt/client.h"
@@ -197,20 +198,25 @@ void PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem*)
 
 void PropertiesDlg::slotAdd()
 {
-    EditProperty_impl dlg(this);
-    dlg.setDir(m_Item->isDir());
-    if (dlg.exec()==QDialog::Accepted) {
-        if (PropertyListViewItem::protected_Property(dlg.propName())) {
+    EditProperty_impl*ptr = 0L;
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Modify property")),true,"modify_properties");
+    if (!dlg) {
+        return;
+    }
+    ptr->setDir(m_Item->isDir());
+
+    if (dlg->exec()==QDialog::Accepted) {
+        if (PropertyListViewItem::protected_Property(ptr->propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
             return;
         }
-        if (m_PropertiesListview->checkExisting(dlg.propName())) {
+        if (m_PropertiesListview->checkExisting(ptr->propName())) {
             KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
         PropertyListViewItem * ki = new PropertyListViewItem(m_PropertiesListview);
-        ki->setText(0,dlg.propName());
-        ki->setText(1,dlg.propValue());
+        ki->setText(0,ptr->propName());
+        ki->setText(1,ptr->propValue());
         ki->checkName();
         ki->checkValue();
     }
@@ -243,22 +249,26 @@ void PropertiesDlg::slotModify()
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
     if (PropertyListViewItem::protected_Property(ki->currentName())) return;
-    /// @TODO Use a object variable to store a reference to dlg for further reuse
-    EditProperty_impl dlg(this);
-    dlg.setDir(m_Item->isDir());
-    dlg.setPropName(ki->currentName());
-    dlg.setPropValue(ki->currentValue());
-    if (dlg.exec()==QDialog::Accepted) {
-        if (PropertyListViewItem::protected_Property(dlg.propName())) {
+    EditProperty_impl*ptr = 0L;
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Modify property")),true,"modify_properties");
+    if (!dlg) {
+        return;
+    }
+    ptr->setDir(m_Item->isDir());
+    ptr->setPropName(ki->currentName());
+    ptr->setPropValue(ki->currentValue());
+
+    if (dlg->exec()==QDialog::Accepted) {
+        if (PropertyListViewItem::protected_Property(ptr->propName())) {
             KMessageBox::error(this,i18n("This property may not set by users.\nRejecting it."),i18n("Protected property"));
             return;
         }
-        if (m_PropertiesListview->checkExisting(dlg.propName(),qi)) {
+        if (m_PropertiesListview->checkExisting(ptr->propName(),qi)) {
             KMessageBox::error(this,i18n("A property with that name exists.\nRejecting it."),i18n("Double property"));
             return;
         }
-        ki->setText(0,dlg.propName());
-        ki->setText(1,dlg.propValue());
+        ki->setText(0,ptr->propName());
+        ki->setText(1,ptr->propValue());
         ki->checkName();
         ki->checkValue();
     }

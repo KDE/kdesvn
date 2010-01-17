@@ -115,133 +115,133 @@ IF (WIN32)
 
   # search for pathes
   FIND_PATH (SUBVERSION_BIN_DIR svn.exe
-    "$ENV{SubversionDir}/bin"
+    "${SUBVERSION_INSTALL_PATH}/bin"
     "$ENV{ProgramFiles}/Subversion/bin"
   )
 
   FIND_PATH (SUBVERSION_INCLUDE_DIR svn_client.h
-    "$ENV{SubversionDir}/include"
+    "${SUBVERSION_INSTALL_PATH}/include"
     "$ENV{ProgramFiles}/Subversion/include"
   )
 
   FIND_PATH(APR_INCLUDE_DIR apr.h
-    "$ENV{SubversionDir}/include/apr"
+    "${SUBVERSION_INSTALL_PATH}/include/apr"
     "$ENV{ProgramFiles}/Subversion/include/apr"
   )
 
   FIND_PATH(APU_INCLUDE_DIR apu.h
-    "$ENV{SubversionDir}/include/apr-util"
+    "${SUBVERSION_INSTALL_PATH}/include/apr-util"
     "$ENV{ProgramFiles}/Subversion/include/apr-util"
   )
 
   # search for libraries
   FIND_LIBRARY(APR_LIB libapr-1
-    "$ENV{SubversionDir}/lib/apr"
+    "${SUBVERSION_INSTALL_PATH}/lib/apr"
     "$ENV{ProgramFiles}/Subversion/lib/apr"
   )
 
   FIND_LIBRARY(APRICONV_LIB libapriconv-1
-    "$ENV{SubversionDir}/lib/apr-iconv"
+    "${SUBVERSION_INSTALL_PATH}/lib/apr-iconv"
     "$ENV{ProgramFiles}/Subversion/lib/apr-iconv"
   )
 
   FIND_LIBRARY(APU_LIB libaprutil-1
-    "$ENV{SubversionDir}/lib/apr-util"
+    "${SUBVERSION_INSTALL_PATH}/lib/apr-util"
     "$ENV{ProgramFiles}/Subversion/lib/apr-util"
   )
 
   FIND_LIBRARY(APU_XMLLIB xml
-    "$ENV{SubversionDir}/lib/apr-util"
+    "${SUBVERSION_INSTALL_PATH}/lib/apr-util"
     "$ENV{ProgramFiles}/Subversion/lib/apr-util"
   )
 
   FIND_LIBRARY(NEON_LIB libneon
-    "$ENV{SubversionDir}/lib/neon"
+    "${SUBVERSION_INSTALL_PATH}/lib/neon"
     "$ENV{ProgramFiles}/Subversion/lib/neon"
   )
 
   FIND_LIBRARY(NEON_ZLIBSTATLIB zlibstat
-    "$ENV{SubversionDir}/lib/neon"
+    "${SUBVERSION_INSTALL_PATH}/lib/neon"
     "$ENV{ProgramFiles}/Subversion/lib/neon"
   )
 
   FIND_LIBRARY(INTL3LIB intl3_svn
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(DB44_LIB libdb44
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_CLIENTLIB libsvn_client-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_DELTALIB libsvn_delta-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_DIFFLIB libsvn_diff-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_FSBASELIB libsvn_fs_base-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_FSFSLIB libsvn_fs_fs-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_FSUTILLIB libsvn_fs_util-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_FSLIB libsvn_fs-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_RALOCALLIB libsvn_ra_local-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_RANEONLIB libsvn_ra_neon-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_RASVNLIB libsvn_ra_svn-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_RALIB libsvn_ra-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_REPOSITORYLIB libsvn_repos-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_SUBRLIB libsvn_subr-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 
   FIND_LIBRARY(SUBVERSION_WCLIB libsvn_wc-1
-    "$ENV{SubversionDir}/lib"
+    "${SUBVERSION_INSTALL_PATH}/lib"
     "$ENV{ProgramFiles}/Subversion/lib"
   )
 

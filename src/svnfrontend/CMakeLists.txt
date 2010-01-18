@@ -19,6 +19,8 @@
  ####
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
+                    ${CMAKE_SOURCE_DIR}/src/svnfrontend/svncharts
+                    ${CMAKE_BINARY_DIR}/src/svnfrontend/svncharts
                     ${CMAKE_BINARY_DIR}/src/svnqt
                     ${CMAKE_BINARY_DIR}/src/ksvnwidgets)
 

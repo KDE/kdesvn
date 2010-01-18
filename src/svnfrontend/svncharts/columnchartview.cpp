@@ -27,7 +27,7 @@
 #include <QToolTip>
 #include <QWhatsThis>
 
-
+#include <kdebug.h>
 
 ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
 
@@ -40,6 +40,8 @@ ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
     _vertGridLines = 5;
     _minorVertGridLines = 0;
     _legendwidth = 100;
+    _minimumBarWidth = 40;
+
     setItemDelegate(new ChartBarDelegate(this));
     updateGeometries();
 
@@ -215,23 +217,26 @@ QModelIndex ColumnChartView::moveCursor( CursorAction cursorAction, Qt::Keyboard
 }
 
 void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::SelectionFlags flags ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+    kDebug()<<rect<<endl;
     QModelIndexList indexes;
     QRect contentsRect = rect.translated(horizontalScrollBar()->value(),
                                          verticalScrollBar()->value());
     int rows = model()->rowCount(rootIndex());
     int columns = model()->columnCount(rootIndex());
     QRect adj = contentsRect.adjusted(-1,-1,1,1);
+    kDebug()<<"Adjusted: "<<adj<<endl;
     for (int row = 0; row < rows; ++row)
         for(int column = 0; column < columns; ++column) {
             QModelIndex index = model()->index(row, column, rootIndex());
             QRect r = visualRect(index);
             r.translate(horizontalScrollBar()->value(), verticalScrollBar()->value());
+
             if (adj.intersects(r)) {
+                kDebug()<<"Translated: "<<r<<endl;
                 indexes.append(index);
             }
         }
-    if (!indexes.empty() > 0) {
+    if (indexes.empty()) {
         int firstRow = indexes[0].row();
         int lastRow = indexes[0].row();
         int firstColumn = indexes[0].column();
@@ -352,10 +357,19 @@ void ColumnChartView::resizeEvent( QResizeEvent *e ) {
     updateGeometries();
 }
 
+void ColumnChartView::setMinimumBarWidth(uint v)
+{
+    if (_minimumBarWidth==v) {
+        return;
+    }
+    _minimumBarWidth=v;
+    updateGeometries();
+}
+
 void ColumnChartView::updateGeometries( ) {
 //qDebug(qPrintable(QString::number(__LINE__)));
     if(model()) {
-        int minimumWidth = model()->columnCount()*model()->rowCount()*7;
+        int minimumWidth = model()->columnCount()*model()->rowCount()*minimumBarWidth();
         int minimumHeight = _vertGridLines*(1+font().pointSize());
         setChartSize(QSize(minimumWidth, minimumHeight));
     } else
@@ -850,3 +864,5 @@ QSize ColumnChartView::valueSize( ) const {
     int m = QFontMetrics(font()).width(QString::number(maximumValue()));
     return QSize(m+4, 0);
 }
+
+#include "columnchartview.moc"

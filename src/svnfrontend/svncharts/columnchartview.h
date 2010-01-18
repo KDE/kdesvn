@@ -83,10 +83,12 @@ public:
     void setChartTitle(const QVariant& theValue, int role = Qt::DisplayRole);
     void setXTitle(const QVariant& theValue, int role = Qt::DisplayRole);
     void setYTitle(const QVariant& theValue, int role = Qt::DisplayRole);
+    void setMinimumBarWidth(uint v);
+    uint minimumBarWidth()const{return _minimumBarWidth;}
     inline void setItemDelegate(ChartDelegate *dele){ QAbstractItemView::setItemDelegate(dele); }
 
     void setLegend(const ChartLegend &l){ _legend = l; }
-signals:
+Q_SIGNALS:
     void xTitleChanged();
     void yTitleChanged();
     void chartTitleChanged();
@@ -112,6 +114,7 @@ protected:
     int _maxVal;
     uint _vertGridLines;
     uint _minorVertGridLines;
+    uint _minimumBarWidth;
     QMap<uint, QVariant> _chartTitle;
     QMap<uint, QVariant> _xTitle;
     QMap<uint, QVariant> _yTitle;
@@ -137,7 +140,7 @@ protected:
     virtual QSize rowNameSize() const;
     virtual QSize valueSize() const;
 
-protected slots:
+protected Q_SLOTS:
     void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 
 private:

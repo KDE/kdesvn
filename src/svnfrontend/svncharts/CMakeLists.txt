@@ -19,9 +19,13 @@
 ############################################################################
 
 ####
-# The base code is taken from http://www.wysota.eu.org/charts.html
+# The base code for bar graph is taken from http://www.wysota.eu.org/charts.html
 # see copyright statement in header of source files which were taken
 #####
+
+INCLUDE_DIRECTORIES(
+                    ${CMAKE_BINARY_DIR}/src/svnqt
+                    )
 
 SET(chartssrc
     chartbardelegate.cpp
@@ -29,15 +33,22 @@ SET(chartssrc
     columnchartview.cpp
     columnchartview.h
     columnchartview_p.h
+    dbstatistic.cpp
+    dbstatistic.h
+    statisticview.cpp
+    statisticview.h
 )
 
+set (chartsui
+    statisticview.ui
+    )
 KDE_AUTOMOC(${chartssrc})
 # no uis yet
-#KDE_ADD_UI_FILES(chartsui ${svnfrontendui})
+KDE_ADD_UI_FILES(chartsui_src ${chartsui})
 
 ADD_LIBRARY(svncharts STATIC
     ${chartssrc}
-    #${frontend_ui_sources}
+    ${chartsui_src}
 )
 
 SET_TARGET_PROPERTIES(svncharts

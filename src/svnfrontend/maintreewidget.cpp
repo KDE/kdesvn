@@ -37,6 +37,7 @@
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"
 #include "fronthelpers/fronthelpers.h"
+#include "svncharts/statisticview.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/deleteform_impl.h"
 #include "opencontextmenu.h"
@@ -658,6 +659,8 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_dir_update",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),this,SLOT(slotDirUpdate()));
 
     tmp_action = add_action("show_repository_settings",i18n("Settings for current repository"),KShortcut(),KIcon(),this,SLOT(slotRepositorySettings()));
+
+    add_action("repo_statistic",i18n("Show author statistic"),KShortcut(),KIcon(),this,SLOT(slotSimpleStatistic()));
     enableActions();
 }
 
@@ -782,6 +785,8 @@ void MainTreeWidget::enableActions()
     enableAction("make_check_updates",isWorkingCopy()&&isopen && remote_enabled);
     enableAction("openwith",KAuthorized::authorizeKAction("openwith")&&single&&!dir);
     enableAction("show_repository_settings",isopen);
+
+    enableAction("repo_statistic",isopen);
 
     temp = filesActions()->action("update_log_cache");
     if (temp) {
@@ -2278,6 +2283,27 @@ void MainTreeWidget::slotLeftProperties()
     SvnItem*k = DirSelected();
     if (!k) return;
     m_Data->m_Model->svnWrapper()->editProperties(k,isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
+}
+
+void MainTreeWidget::slotSimpleStatistic()
+{
+    svn::InfoEntry inf;
+    if (!m_Data->m_Model->svnWrapper()->singleInfo(baseUri(),baseRevision(),inf)) {
+        return;
+    }
+    if (inf.reposRoot().isEmpty()) {
+        KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository."),i18n("SVN Error"));
+    } else {
+        StatisticView*ptr;
+        svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Statistic")),true,"statistic_dlg");
+        if (!dlg) {
+            return;
+        }
+        ptr->setRepository(inf.reposRoot());
+        dlg->exec();
+        KConfigGroup _k(Kdesvnsettings::self()->config(),"statistic_dlg");
+        dlg->saveDialogSize(_k);
+    }
 }
 
 #include "maintreewidget.moc"

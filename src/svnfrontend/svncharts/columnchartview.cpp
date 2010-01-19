@@ -18,7 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "columnchartview.h"
-#include "chartbardelegate.h"
 #include <QPainter>
 #include <QScrollBar>
 #include <QAbstractItemModel>
@@ -144,25 +143,6 @@ void ColumnChartView::drawCanvas( QPainter * p ) {
     int items = model()->rowCount(rootIndex());
     int jtems = model()->columnCount(rootIndex());
 
-    //     ChartBarDelegate *chartdelegate = dynamic_cast<ChartBarDelegate*>(itemDelegate());
-    //     if(chartdelegate) {
-    //         for(int i=1;i<items;i++) {
-    //             for(int j=1;j<jtems;j++) {
-    //                 QModelIndex index = model()->index(i,j);
-    //                 QPen pen = painter.pen();
-    //                 QPen pennew = QPen(QColor(model()->data(index, Qt::DecorationRole).toString()));
-    //                 pennew.setWidth(3);
-    //                 bool aa = painter.renderHints() & QPainter::Antialiasing;
-    //                 painter.setRenderHint(QPainter::Antialiasing, true);
-    //                 painter.setPen(pennew);
-    //                 QStyleOptionViewItem option = viewOptions();
-    //                 chartdelegate->drawConnector(&painter, option, visualRect(index), visualRect(model()->index(index.row()-1, index.column(), index.parent())));
-    //                 painter.setRenderHint(QPainter::Antialiasing, aa);
-    //                 painter.setPen(pen);
-    //             }
-    //         }
-    //     }
-    //
     for(int i=0;i<items;i++) {
         for(int j=jtems-1;j>=0;j--) {
             paintItem(p, model()->index(i,j, rootIndex()));
@@ -217,26 +197,22 @@ QModelIndex ColumnChartView::moveCursor( CursorAction cursorAction, Qt::Keyboard
 }
 
 void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::SelectionFlags flags ) {
-    kDebug()<<rect<<endl;
     QModelIndexList indexes;
     QRect contentsRect = rect.translated(horizontalScrollBar()->value(),
                                          verticalScrollBar()->value());
     int rows = model()->rowCount(rootIndex());
     int columns = model()->columnCount(rootIndex());
     QRect adj = contentsRect.adjusted(-1,-1,1,1);
-    kDebug()<<"Adjusted: "<<adj<<endl;
-    for (int row = 0; row < rows; ++row)
+    for (int row = 0; row < rows; ++row) {
         for(int column = 0; column < columns; ++column) {
             QModelIndex index = model()->index(row, column, rootIndex());
             QRect r = visualRect(index);
-            r.translate(horizontalScrollBar()->value(), verticalScrollBar()->value());
-
             if (adj.intersects(r)) {
-                kDebug()<<"Translated: "<<r<<endl;
                 indexes.append(index);
             }
         }
-    if (indexes.empty()) {
+    }
+    if (!indexes.empty()) {
         int firstRow = indexes[0].row();
         int lastRow = indexes[0].row();
         int firstColumn = indexes[0].column();
@@ -309,7 +285,6 @@ void ColumnChartView::paintItem( QPainter * p, const QModelIndex & index ) {
     ChartDelegate *delegate = dynamic_cast<ChartDelegate*>(itemDelegate());
     delegate->paint(p, option, index);
 
-
     if (!selectionRect.isEmpty()) {
         QStyleOptionRubberBand band;
         band.shape = QRubberBand::Rectangle;
@@ -321,7 +296,8 @@ void ColumnChartView::paintItem( QPainter * p, const QModelIndex & index ) {
 
 }
 
-int ColumnChartView::itemWidth( ) const {
+int ColumnChartView::itemWidth() const
+{
     int maxw = qMax((int)(viewport()->width()-horizontalMargins()), chartSize().width());
     return 2*(maxw/model()->rowCount(rootIndex()))/3;
 }

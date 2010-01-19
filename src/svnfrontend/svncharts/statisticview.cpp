@@ -50,7 +50,7 @@ void StatisticView::init()
     m_TableView->setSelectionModel(sm);
     m_ColumnView->setSelectionModel(sm);
     m_ColumnView->setCanvasMargins(QSize(50,50));
-    m_ColumnView->setMinimumBarWidth(50);
+    m_ColumnView->setMinimumBarWidth(60);
 }
 
 void StatisticView::setRepository(const QString&repository)

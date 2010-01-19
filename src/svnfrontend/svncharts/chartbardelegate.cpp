@@ -146,10 +146,3 @@ void ChartPointDelegate::drawConnector( QPainter *, const QStyleOptionViewItem &
 QSize ChartPointDelegate::sizeHint( const QStyleOptionViewItem &, const QModelIndex & ) const {
     return QSize();
 }
-
-// void ChartLineDelegate::drawConnector( QPainter * painter, const QStyleOptionViewItem & option, const QRect & r1, const QRect & r2 ) const {
-//     int x1 = r1.x()+r1.width()/2;
-//     int x2 = r2.x()+r2.width()/2;
-//     painter->drawLine(x1, r1.top(), x2, r2.top());
-// }
-

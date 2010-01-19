@@ -304,6 +304,9 @@ void ColumnChartView::paintItem( QPainter * p, const QModelIndex & index ) {
 
 int ColumnChartView::itemWidth() const
 {
+    if (model()->rowCount(rootIndex())==0) {
+        return 0;
+    }
     int maxw = qMax((int)(viewport()->width()-horizontalMargins()), chartSize().width());
     return 2*(maxw/model()->rowCount(rootIndex()))/3;
 }

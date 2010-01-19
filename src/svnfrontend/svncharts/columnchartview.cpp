@@ -53,8 +53,22 @@ ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
 
 ColumnChartView::~ColumnChartView() {}
 
-void ColumnChartView::scrollTo( const QModelIndex & /*index*/, ScrollHint /*hint*/ ) {
-    return;
+void ColumnChartView::scrollTo( const QModelIndex & index, ScrollHint /*hint*/ )
+{
+    static int margin = 30;
+    if (!index.isValid()) {
+        return;
+    }
+    QRect r = visualRect(index);
+
+    int logicalX = QStyle::visualPos(Qt::LeftToRight,viewport()->rect(), QPoint(r.x(), r.y())).x();
+    int logicalXL = QStyle::visualPos(Qt::LeftToRight,viewport()->rect(), QPoint(r.x()+r.width(), r.y())).x();
+    
+    if (logicalX-margin < horizontalScrollBar()->value()) {
+        horizontalScrollBar()->setValue(qMax(0,logicalX-margin));
+    } else if (logicalXL>horizontalScrollBar()->value()+viewport()->width()-margin) {
+        horizontalScrollBar()->setValue(qMin(logicalXL-viewport()->width()+margin,horizontalScrollBar()->maximum()));
+    }
 }
 
 QModelIndex ColumnChartView::indexAt( const QPoint & point ) const {
@@ -63,13 +77,6 @@ QModelIndex ColumnChartView::indexAt( const QPoint & point ) const {
 
     int wx = point.x() + horizontalScrollBar()->value();
     int wy = point.y() + verticalScrollBar()->value();
-    // qDebug("indexAt: %d, %d", wx, wy);
-    //     if( wx<(int)_canvasHMargin
-    //             || wy<(int)_canvasVMargin
-    //             || wx>viewport()->width()-(int)_canvasHMargin
-    //             || wy>viewport()->height()-(int)_canvasVMargin
-    //       )
-    //         return QModelIndex();
     uint items = model()->rowCount(rootIndex());
     uint jtems = model()->columnCount(rootIndex());
     for(uint ind = 0; ind < items; ind++) {
@@ -281,7 +288,6 @@ void ColumnChartView::paintItem( QPainter * p, const QModelIndex & index ) {
     if(selections->isSelected(index)) {
         option.state |= QStyle::State_Selected;
     }
-    //QAbstractItemDelegate *delegate = itemDelegate();
     ChartDelegate *delegate = dynamic_cast<ChartDelegate*>(itemDelegate());
     delegate->paint(p, option, index);
 
@@ -327,8 +333,8 @@ bool ColumnChartView::event( QEvent * event ) {
     return QAbstractItemView::event(event);
 }
 
-void ColumnChartView::resizeEvent( QResizeEvent *e ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::resizeEvent( QResizeEvent *e )
+{
     QAbstractItemView::resizeEvent(e);
     updateGeometries();
 }

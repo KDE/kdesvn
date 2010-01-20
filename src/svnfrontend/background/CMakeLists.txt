@@ -18,38 +18,31 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
 ############################################################################
 
-####
-# The base code for bar graph is taken from http://www.wysota.eu.org/charts.html
-# see copyright statement in header of source files which were taken
-#####
-
 INCLUDE_DIRECTORIES(
                     ${CMAKE_BINARY_DIR}/src/svnqt
                     )
 
-SET(chartssrc
-    chartbardelegate.cpp
-    chartbardelegate.h
-    columnchartview.cpp
-    columnchartview.h
-    columnchartview_p.h
-    dbstatistic.cpp
-    dbstatistic.h
-    statisticview.cpp
-    statisticview.h
-)
-
-set (chartsui
-    statisticview.ui
+set (backgroundsrc
+    fillcachethread.cpp
+    fillcachethread.h
+    modifiedthread.cpp
+    modifiedthread.h
+    svnthread.cpp
+    svnthread.h
+    tcontextlistener.cpp
+    tcontextlistener.h
+    threadcontextlistenerdata.cpp
+    threadcontextlistenerdata.h
+    getinfothread.cpp
+    getinfothread.h
     )
-KDE_AUTOMOC(${chartssrc})
-KDE_ADD_UI_FILES(chartsui_src ${chartsui})
 
-ADD_LIBRARY(svncharts STATIC
-    ${chartssrc}
-    ${chartsui_src}
+KDE_AUTOMOC(${backgroundsrc})
+
+ADD_LIBRARY(svnbackground STATIC
+    ${backgroundsrc}
 )
 
-SET_TARGET_PROPERTIES(svncharts
+SET_TARGET_PROPERTIES(svnbackground
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

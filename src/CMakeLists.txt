@@ -55,7 +55,7 @@ KDE_ADD_KPART(kdesvnpart ${partsrc})
 
 SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}" )
 
-TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svncharts ${svnqt-name}
+TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svncharts svnbackground ${svnqt-name}
     ${QT_LIBRARIES}
     ${KDE4_KDECORE_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}

@@ -19,6 +19,7 @@
  ####
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
+                    ${CMAKE_SOURCE_DIR}/src/svnfrontend/background
                     ${CMAKE_SOURCE_DIR}/src/svnfrontend/svncharts
                     ${CMAKE_BINARY_DIR}/src/svnfrontend/svncharts
                     ${CMAKE_BINARY_DIR}/src/svnqt
@@ -77,31 +78,22 @@ SET(svnfrontendsrc
     models/svnsortfilter.h
     models/svndirsortfilter.cpp
     models/svndirsortfilter.h
-    models/getinfothread.cpp
-    models/getinfothread.h
     hotcopydlg_impl.cpp
     importdir_logmsg.cpp
     itemdisplay.cpp
     loaddmpdlg_impl.cpp
     mergedlg_impl.cpp
-    modifiedthread.cpp
     opencontextmenu.cpp
     propertiesdlg.cpp
     stopdlg.cpp
     svnactions.cpp
     svnitem.cpp
     svnlogdlgimp.cpp
-    tcontextlistener.cpp
     blamedisplay_impl.cpp
-    threadcontextlistenerdata.cpp
-    fillcachethread.cpp
-    fillcachethread.h
     maintreewidget.h
     maintreewidget.cpp
     svntreeview.cpp
     svntreeview.h
-    svnthread.cpp
-    svnthread.h
     database/dboverview.cpp
     database/dboverview.h
     database/dbsettings.cpp
@@ -132,6 +124,7 @@ KDE_AUTOMOC(${svnfrontendsrc})
 KDE_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 
 ADD_SUBDIRECTORY(svncharts)
+ADD_SUBDIRECTORY(background)
 
 ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 SET_TARGET_PROPERTIES(svnfrontend

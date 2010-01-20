@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "getinfothread.h"
-#include "svnitemnode.h"
+#include "src/svnfrontend/models/svnitemnode.h"
 #include "tcontextlistener.h"
 #include "src/svnqt/status.h"
 #include "src/svnqt/url.h"

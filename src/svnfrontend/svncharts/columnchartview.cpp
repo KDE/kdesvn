@@ -63,7 +63,7 @@ void ColumnChartView::scrollTo( const QModelIndex & index, ScrollHint /*hint*/ )
 
     int logicalX = QStyle::visualPos(Qt::LeftToRight,viewport()->rect(), QPoint(r.x(), r.y())).x();
     int logicalXL = QStyle::visualPos(Qt::LeftToRight,viewport()->rect(), QPoint(r.x()+r.width(), r.y())).x();
-    
+
     if (logicalX-margin < horizontalScrollBar()->value()) {
         horizontalScrollBar()->setValue(qMax(0,logicalX-margin));
     } else if (logicalXL>horizontalScrollBar()->value()+viewport()->width()-margin) {
@@ -278,7 +278,8 @@ void ColumnChartView::mouseReleaseEvent( QMouseEvent * event ) {
     viewport()->update();
 }
 
-void ColumnChartView::paintItem( QPainter * p, const QModelIndex & index ) {
+void ColumnChartView::paintItem( QPainter * p, const QModelIndex & index )
+{
     QItemSelectionModel *selections = selectionModel();
     QStyleOptionViewItem option = viewOptions();
     option.rect = visualRect(index).translated(-horizontalScrollBar()->value(), -verticalScrollBar()->value());
@@ -351,8 +352,8 @@ void ColumnChartView::setMinimumBarWidth(uint v)
     updateGeometries();
 }
 
-void ColumnChartView::updateGeometries( ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::updateGeometries( )
+{
     if(model()) {
         int minimumWidth = model()->columnCount()*model()->rowCount()*minimumBarWidth();
         int minimumHeight = _vertGridLines*(1+font().pointSize());
@@ -373,8 +374,8 @@ void ColumnChartView::scrollContentsBy( int dx, int dy ) {
     viewport()->scroll(dx, dy);
 }
 
-void ColumnChartView::drawGridLines( QPainter * painter ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::drawGridLines( QPainter * painter )
+{
     int maxw = chartSize().width();
     int maxh = chartSize().height();
     painter->save();
@@ -403,8 +404,8 @@ void ColumnChartView::drawGridLines( QPainter * painter ) {
     painter->restore();
 }
 
-void ColumnChartView::drawAxis( QPainter * painter ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::drawAxis( QPainter * painter )
+{
     int maxw = chartSize().width();
     int maxh = chartSize().height();
     painter->save();
@@ -416,18 +417,18 @@ void ColumnChartView::drawAxis( QPainter * painter ) {
     painter->restore();
 }
 
-uint ColumnChartView::horizontalMargins( ) const {
-//qDebug(qPrintable(QString::number(__LINE__)));
+uint ColumnChartView::horizontalMargins( ) const
+{
     return 2*_canvasHMargin + (_flags & Legend ? _legendwidth : 0);
 }
 
-void ColumnChartView::drawLegend( QPainter * painter ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::drawLegend( QPainter * painter )
+{
     painter->save();
     QFontMetrics fm(font());
     painter->translate(4+yTitleSize().height()+4+valueSize().width()+chartSize().width()+2, 4+chartTitleSize().height());
-#ifdef DEBUG
 
+#ifdef DEBUG
     painter->save();
     QPen pn(Qt::black);
     pn.setStyle(Qt::DashLine);
@@ -456,7 +457,8 @@ void ColumnChartView::drawLegend( QPainter * painter ) {
     painter->restore();
 }
 
-void ColumnChartView::drawRowNames( QPainter * p ) {
+void ColumnChartView::drawRowNames( QPainter * p )
+{
 //qDebug(qPrintable(QString::number(__LINE__)));
     int itemwidth = itemWidth();
     int seriesCount = model()->columnCount();
@@ -467,7 +469,8 @@ void ColumnChartView::drawRowNames( QPainter * p ) {
     //opt.displayAlignment |= Qt::AlignHCenter;
     uint rowHeight = rowNameSize().height();//(_flags & XTitle) ? xTitleSize().height()+4-QFontMetrics(font()).height()-2 : 4;
     p->save();
-    for(int i=0;i<model()->rowCount(rootIndex());i++) {
+    int _max = model()->rowCount(rootIndex());
+    for(int i=0;i<_max;i++) {
         QRect rect(qRound(4+yTitleSize().height()+4+valueSize().width()+itemwidth/4+i*itemwidth*3/2), maxh+4+chartTitleSize().height()+2, itemwidth, rowHeight);
         QStyleOptionViewItem opt = getOptionsForRowLabel(i);
         p->setFont(opt.font);
@@ -477,32 +480,33 @@ void ColumnChartView::drawRowNames( QPainter * p ) {
     p->restore();
 }
 
-QStyleOptionViewItem ColumnChartView::getOptionsForRowLabel( int row ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+QStyleOptionViewItem ColumnChartView::getOptionsForRowLabel( int row )
+{
     QStyleOptionViewItem opt = viewOptions();
     opt.displayAlignment |= Qt::AlignHCenter;
     opt.displayAlignment &= ~Qt::AlignVCenter;
     opt.displayAlignment |= Qt::AlignTop;
     QVariant value;
     value = model()->headerData(row, Qt::Vertical, Qt::FontRole);
-    if(value.isValid())
+    if(value.isValid()) {
         opt.font = qvariant_cast<QFont>(value);
+    }
     value = model()->headerData(row, Qt::Vertical, Qt::TextColorRole);
-    if(value.isValid() && qvariant_cast<QColor>(value).isValid())
+    if(value.isValid() && qvariant_cast<QColor>(value).isValid()) {
         opt.palette.setColor(QPalette::Text, qvariant_cast<QColor>(value));
+    }
     return opt;
 }
 
-void ColumnChartView::dataChanged( const QModelIndex & topLeft, const QModelIndex & bottomRight ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::dataChanged( const QModelIndex & topLeft, const QModelIndex & bottomRight )
+{
     QAbstractItemView::dataChanged(topLeft, bottomRight);
     updateGeometries();
     viewport()->update();
 }
 
-void ColumnChartView::drawVerticalScale( QPainter * p ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
-    //    int maxw = chartSize().width();
+void ColumnChartView::drawVerticalScale( QPainter * p )
+{
     int maxh = chartSize().height();
     p->save();
     p->translate(4+yTitleSize().height(), 4+chartTitleSize().height()+maxh);
@@ -529,8 +533,8 @@ void ColumnChartView::drawVerticalScale( QPainter * p ) {
     p->restore();
 }
 
-void ColumnChartView::drawChartTitle( QPainter * p ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::drawChartTitle( QPainter * p )
+{
     QVariant v;
     QFont f = p->font();
     p->save();
@@ -661,12 +665,13 @@ void ColumnChartView::drawYTitle( QPainter *p  ) {
     p->restore();
 }
 
-QVariant ColumnChartView::yTitle( int role ) const {
+QVariant ColumnChartView::yTitle( int role ) const
+{
     return _yTitle[role];
 }
 
-void ColumnChartView::setYTitle( const QVariant & theValue, int role ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setYTitle( const QVariant & theValue, int role )
+{
     if(theValue!=_yTitle[role]) {
         _yTitle[role] = theValue;
         if(_flags & YTitle)
@@ -678,8 +683,8 @@ QVariant ColumnChartView::xTitle( int role ) const {
     return _xTitle[role];
 }
 
-void ColumnChartView::setXTitle( const QVariant & theValue, int role ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setXTitle( const QVariant & theValue, int role )
+{
     if(theValue!=_xTitle[role]) {
         _xTitle[role] = theValue;
         if(_flags & XTitle)
@@ -687,12 +692,13 @@ void ColumnChartView::setXTitle( const QVariant & theValue, int role ) {
     }
 }
 
-QVariant ColumnChartView::chartTitle( int role ) const {
+QVariant ColumnChartView::chartTitle( int role ) const
+{
     return _chartTitle[role];
 }
 
-void ColumnChartView::setChartTitle( const QVariant & theValue, int role ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setChartTitle( const QVariant & theValue, int role )
+{
     if(theValue!=_chartTitle[role]) {
         _chartTitle[role] = theValue;
         if(_flags & ChartTitle)
@@ -700,54 +706,60 @@ void ColumnChartView::setChartTitle( const QVariant & theValue, int role ) {
     }
 }
 
-uint ColumnChartView::minorVerticalGridLines( ) const {
+uint ColumnChartView::minorVerticalGridLines( ) const
+{
     return _minorVertGridLines;
 }
 
-void ColumnChartView::setMinorVerticalGridLines( const uint & theValue ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setMinorVerticalGridLines( const uint & theValue )
+{
     _minorVertGridLines = theValue;
     if(_flags & VerticalGrid)
         viewport()->update();
 }
 
-uint ColumnChartView::verticalGridLines( ) const {
+uint ColumnChartView::verticalGridLines( ) const
+{
     return _vertGridLines;
 }
 
-void ColumnChartView::setVerticalGridLines( const uint & theValue ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setVerticalGridLines( const uint & theValue )
+{
     _vertGridLines = theValue;
     if(_flags & VerticalGrid)
         viewport()->update();
 }
 
-void ColumnChartView::setMaximumValue( const int & theValue ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setMaximumValue( const int & theValue )
+{
     _maxVal = theValue;
     viewport()->update();
 }
 
-void ColumnChartView::setMinimumValue( const int & theValue ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setMinimumValue( const int & theValue )
+{
     _minVal = theValue;
     viewport()->update();
 }
 
-int ColumnChartView::minimumValue( ) const {
+int ColumnChartView::minimumValue( ) const
+{
     return _minVal;
 }
 
-QSize ColumnChartView::canvasMargins( ) {
+QSize ColumnChartView::canvasMargins( )
+{
     return QSize(_canvasHMargin, _canvasVMargin);
 }
 
-void ColumnChartView::setCanvasMargins( QSize s ) {
+void ColumnChartView::setCanvasMargins( QSize s )
+{
     _canvasHMargin = s.width();
     _canvasVMargin = s.height();
 }
 
-int ColumnChartView::maximumValue( ) const {
+int ColumnChartView::maximumValue( ) const
+{
     return _maxVal;
 }
 
@@ -759,8 +771,8 @@ QSize ColumnChartView::chartSize( ) const {
     return _chartSize;
 }
 
-void ColumnChartView::setFlags( const quint32 & theValue ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::setFlags( const quint32 & theValue )
+{
     if(theValue!=_flags) {
         _flags = theValue;
         updateGeometries();
@@ -768,12 +780,13 @@ void ColumnChartView::setFlags( const quint32 & theValue ) {
     }
 }
 
-quint32 ColumnChartView::flags( ) const {
+quint32 ColumnChartView::flags( ) const
+{
     return _flags;
 }
 
-QSize ColumnChartView::chartTitleSize( ) const {
-//qDebug(qPrintable(QString::number(__LINE__)));
+QSize ColumnChartView::chartTitleSize( ) const
+{
     QSize s;
     if(!(_flags & ChartTitle) || chartTitle().isNull())
         return QSize(chartSize().width()+yTitleSize().height()+4+_legendwidth+4+valueSize().width(), 0);
@@ -795,8 +808,8 @@ QSize ColumnChartView::chartTitleSize( ) const {
     return s;
 }
 
-QSize ColumnChartView::xTitleSize( ) const {
-//qDebug("QSize ColumnChartView::xTitleSize( ) const");
+QSize ColumnChartView::xTitleSize( ) const
+{
     QSize s;
     if(!(_flags & XTitle) || xTitle().isNull())
         return QSize(chartSize().width(), 0);
@@ -817,8 +830,8 @@ QSize ColumnChartView::xTitleSize( ) const {
     return s;
 }
 
-QSize ColumnChartView::yTitleSize( ) const {
-//    qDebug("ColumnChartView::yTitleSize( ) const");
+QSize ColumnChartView::yTitleSize( ) const
+{
     QSize s;
     if(!(_flags & YTitle) || yTitle().isNull())
         return QSize(chartSize().width(), 0);
@@ -839,13 +852,13 @@ QSize ColumnChartView::yTitleSize( ) const {
     return s;
 }
 
-QSize ColumnChartView::rowNameSize( ) const {
-//    qDebug("QSize ColumnChartView::rowNameSize( ) const");
+QSize ColumnChartView::rowNameSize( ) const
+{
     return QSize(0, QFontMetrics(font()).height());
 }
 
-QSize ColumnChartView::valueSize( ) const {
-//    qDebug("QSize ColumnChartView::valueSize( ) const");
+QSize ColumnChartView::valueSize( ) const
+{
     int m = QFontMetrics(font()).width(QString::number(maximumValue()));
     return QSize(m+4, 0);
 }

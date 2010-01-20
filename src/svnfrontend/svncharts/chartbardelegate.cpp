@@ -21,12 +21,13 @@
 #include <QModelIndex>
 #include <QAbstractItemModel>
 #include <QPainter>
-
+#include <kcolorscheme.h>
 
 ChartDelegate::ChartDelegate( QObject * parent ) : QAbstractItemDelegate(parent) {}
 
 
-void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const {
+void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const
+{
     /* retrieve data */
     const QAbstractItemModel *model = index.model();
     //    int itemValue = model->data(index).toInt();
@@ -35,8 +36,7 @@ void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & opti
     QStyleOptionViewItem opt = option;
     if(option.state & QStyle::State_Selected) {
         brushStyle = Qt::Dense3Pattern;
-    }
-    if(option.state & QStyle::State_HasFocus) {
+    } else if(option.state & QStyle::State_HasFocus) {
         brushStyle = Qt::Dense4Pattern;
     }
     QVariant value;
@@ -62,7 +62,12 @@ void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & opti
     value = model->data(index, Qt::DecorationRole);
     if(value.isValid()) {
         /* try colour */
-        QColor color = qvariant_cast<QColor>(value);
+        QColor color;
+        if (option.state & QStyle::State_Selected) {
+            color = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+        } else {
+            color = qvariant_cast<QColor>(value);
+        }
         if(color.isValid()) {
             painter->setBrush(QBrush(color,brushStyle));
             /* try brush */
@@ -103,15 +108,18 @@ ChartBarDelegate::ChartBarDelegate(QObject *parent)
 ChartBarDelegate::~ChartBarDelegate() {}
 
 
-QSize ChartBarDelegate::sizeHint( const QStyleOptionViewItem &, const QModelIndex & ) const {
+QSize ChartBarDelegate::sizeHint( const QStyleOptionViewItem &, const QModelIndex & ) const
+{
     return QSize();
 }
 
-void ChartBarDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &  ) const {
+void ChartBarDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &  ) const
+{
     painter->drawRect(option.rect);
 }
 
-void ChartLineDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &) const {
+void ChartLineDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &) const
+{
     int x = option.rect.x()+option.rect.width()/2;
     int y = option.rect.top();
     bool aa = painter->renderHints() & QPainter::Antialiasing;
@@ -121,15 +129,15 @@ void ChartLineDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem
     painter->setRenderHint(QPainter::Antialiasing, aa);
 }
 
-
-
 void ChartLineDelegate::drawConnector( QPainter *, const QStyleOptionViewItem &, const QModelIndex & ) const {}
 
-QSize ChartLineDelegate::sizeHint( const QStyleOptionViewItem &, const QModelIndex & ) const {
+QSize ChartLineDelegate::sizeHint( const QStyleOptionViewItem &, const QModelIndex & ) const
+{
     return QSize();
 }
 
-void ChartPointDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &) const {
+void ChartPointDelegate::drawItem( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &) const
+{
     int x = option.rect.x()+option.rect.width()/2;
     int y = option.rect.top();
     bool aa = painter->renderHints() & QPainter::Antialiasing;

@@ -51,7 +51,7 @@ void StatisticView::init()
     m_ColumnView->setSelectionModel(sm);
     m_ColumnView->setCanvasMargins(QSize(50,50));
     m_ColumnView->setMinimumBarWidth(60);
-    m_ColumnView->setFlags(ColumnChartView::ChartTitle|ColumnChartView::XTitle|ColumnChartView::YTitle);
+    m_ColumnView->setFlags(ColumnChartView::ChartTitle|ColumnChartView::XTitle|ColumnChartView::YTitle|ColumnChartView::VerticalScale);
 }
 
 void StatisticView::setRepository(const QString&repository)
@@ -68,17 +68,20 @@ void StatisticView::setRepository(const QString&repository)
     QList<unsigned> values=_data.values();
     QList<QString> keys = _data.keys();
 
-    QColor a(160,160,160);
-    int offset = 10;
+    static int offset = 30;
+    static int colbegin = 50;
+    QColor a(colbegin,colbegin,colbegin);
     int r=0; int g=0;int b=0;
     uint colinc=0;
+    static int maxc=255-offset;
     QColor _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
     m_ColumnView->setYTitle(i18n("Commits"));
     m_ColumnView->setXTitle(i18n("Author"));
     _model->setHeaderData(0,Qt::Horizontal,i18n("Commits"));
 
     unsigned all = 0;
-    
+    QColor _block = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+
     for (int i=0; i<values.size();++i) {
         _model->appendRow(new QStandardItem(values[i]));
         _model->setData(_model->index(i,0),values[i]);
@@ -90,7 +93,7 @@ void StatisticView::setRepository(const QString&repository)
 
         a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
         _model->setData(_model->index(i,0), a, Qt::DecorationRole);
-        if ( a.red()>205||a.green()>205||a.blue()>205 ) {
+        if ( a.red()>maxc||a.green()>maxc||a.blue()>maxc ) {
             if (colinc==0) {
                 ++colinc;
             } else if (r>=50||g>=50||b>=50) {
@@ -110,7 +113,7 @@ void StatisticView::setRepository(const QString&repository)
             if (colinc & 0x4) {
                 b+=10;
             }
-            a.setRgb(160+r,160+g,160+b);
+            a.setRgb(colbegin+r,colbegin+g,colbegin+b);
         }
 
     }

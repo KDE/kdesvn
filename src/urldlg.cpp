@@ -145,17 +145,17 @@ KUrl UrlDlg::getUrl(QWidget*parent)
     UrlDlg dlg(parent);
     dlg.setCaption(i18n("Open"));
     dlg.exec();
-  
+
     // added by Wellu Mäkinen <wellu@wellu.org>
-    //	
+    //
     // get rid of leading whitespace
-    // that is %20 in encoded form 
+    // that is %20 in encoded form
     QString url = dlg.selectedUrl().prettyUrl();
 
     // decodes %20 to normal spaces
     // trims the whitespace from both ends
     // of the URL
-    return KUrl(QUrl::fromEncoded(url.toAscii()).toString().trimmed());
+    return KUrl(QUrl::fromEncoded(url.toUtf8()).toString().trimmed());
 }
 
 #include "urldlg.moc"

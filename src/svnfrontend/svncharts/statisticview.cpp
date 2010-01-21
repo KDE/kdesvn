@@ -59,9 +59,13 @@ void StatisticView::setRepository(const QString&repository)
     // shared pointer, delete itself so no destructor needed
     m_DbStatistic = new DbStatistic(repository);
     QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
+    _model->clear();
 
     DbStatistic::Usermap _data;
-    m_DbStatistic->getUserCommits(_data);
+    if (!m_DbStatistic->getUserCommits(_data)) {
+        m_ColumnView->setChartTitle(i18n("Could not get statistic data"));
+        return;
+    }
     QList<QStandardItem*> iList;
     _model->appendColumn(iList);
 
@@ -89,7 +93,15 @@ void StatisticView::setRepository(const QString&repository)
         if (m_ColumnView->maximumValue()<(int)values[i]) {
             m_ColumnView->setMaximumValue( qRound((double)values[i]/50.0+0.5)*50 );
         }
-        _model->setHeaderData(i, Qt::Vertical,keys[i]);
+        if (keys[i].isEmpty()) {
+            _model->setHeaderData(i, Qt::Vertical,i18n("No author"),Qt::DisplayRole);
+            QFont f = _model->headerData(i,Qt::Vertical,Qt::FontRole).value<QFont>();
+            f.setItalic(true);
+            _model->setHeaderData(i,Qt::Vertical,f,Qt::FontRole);
+        } else {
+            _model->setHeaderData(i, Qt::Vertical,keys[i],Qt::DisplayRole);
+        }
+        
 
         a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
         _model->setData(_model->index(i,0), a, Qt::DecorationRole);

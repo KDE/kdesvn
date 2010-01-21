@@ -44,16 +44,28 @@ bool DbStatistic::getUserCommits(Usermap&target)const
     if (!reposDB.isValid()) {
         return false;
     }
-    static QString s_aCount("select count(*),author from logentries where author != '' group by author");
+    static QString s_aCount("select count(*),author from logentries group by author");
     QSqlQuery acount(QString(),reposDB);
     acount.prepare(s_aCount);
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
+    
     if (!acount.exec()) {
         kDebug() << acount.lastError().text();
         //throw svn::cache::DatabaseException(QString("Could not retrieve authors count: ")+acount.lastError().text());
         return false;
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Time for getting db entries: "<<_counttime.elapsed();
+    _counttime.restart();
+#endif    
     while(acount.next()) {
         target[acount.value(1).toString()]=acount.value(0).toUInt();
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Time for copy db entries: "<<_counttime.elapsed();
+#endif
     return true;
 }

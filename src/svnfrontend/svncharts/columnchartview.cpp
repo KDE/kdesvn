@@ -358,8 +358,9 @@ void ColumnChartView::updateGeometries( )
         int minimumWidth = model()->columnCount()*model()->rowCount()*minimumBarWidth();
         int minimumHeight = _vertGridLines*(1+font().pointSize());
         setChartSize(QSize(minimumWidth, minimumHeight));
-    } else
+    } else {
         setChartSize(viewport()->size());
+    }
     int viswid = yTitleSize().height()+4+_legendwidth+8+valueSize().width();
     int vishei = xTitleSize().height()+chartTitleSize().height()+8+rowNameSize().height();
     setChartSize(QSize(qMax(chartSize().width(), viewport()->width()-viswid),

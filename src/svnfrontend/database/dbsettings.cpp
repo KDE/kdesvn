@@ -57,20 +57,33 @@ void DbSettings::setRepository(const QString&repository)
 
 void DbSettings::init()
 {
-    QStringList _v = svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"tree_exclude_list",QStringList());
-    dbcfg_exclude_box->setItems(_v);
+    dbcfg_exclude_box->setItems(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"tree_exclude_list",QStringList()));
     dbcfg_noCacheUpdate->setChecked(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"no_update_cache",false));
+    dbcfg_filter_empty_author->setChecked(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"filter_empty_author",false));
+    dbcfg_exclude_log_pattern->setItems(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"exclude_log_pattern",QStringList()));
+    dbcfg_exclude_userslog->setItems(svn::cache::ReposConfig::self()->readEntry(_data->m_repository,"exclude_log_users",QStringList()));
+}
+
+void DbSettings::store_list(KEditListBox*which,const QString&key)
+{
+    if (!which||key.isEmpty()) {
+        return;
+    }
+    QStringList _v = which->items();
+    if (_v.count()>0) {
+        svn::cache::ReposConfig::self()->setValue(_data->m_repository,key,_v);
+    } else {
+        svn::cache::ReposConfig::self()->eraseValue(_data->m_repository,key);
+    }
 }
 
 void DbSettings::store()
 {
-    QStringList _v = dbcfg_exclude_box->items();
-    if (_v.count()>0) {
-        svn::cache::ReposConfig::self()->setValue(_data->m_repository,"tree_exclude_list",_v);
-    } else {
-        svn::cache::ReposConfig::self()->eraseValue(_data->m_repository,"tree_exclude_list");
-    }
+    store_list(dbcfg_exclude_box,"tree_exclude_list");
+    store_list(dbcfg_exclude_userslog,"exclude_log_users");
+    store_list(dbcfg_exclude_log_pattern,"exclude_log_pattern");
     svn::cache::ReposConfig::self()->setValue(_data->m_repository,"no_update_cache",dbcfg_noCacheUpdate->isChecked());
+    svn::cache::ReposConfig::self()->setValue(_data->m_repository,"filter_empty_author",dbcfg_filter_empty_author->isChecked());
 }
 
 void DbSettings::showSettings(const QString&repository)

@@ -42,6 +42,7 @@ public:
 
 protected:
     void init();
+    void store_list(KEditListBox*,const QString&);
 private:
     DbSettingsData*_data;
 };

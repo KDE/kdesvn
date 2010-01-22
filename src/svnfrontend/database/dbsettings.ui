@@ -6,35 +6,105 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>399</width>
-    <height>217</height>
+    <width>414</width>
+    <height>431</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="QCheckBox" name="dbcfg_noCacheUpdate">
-     <property name="text">
-      <string>Don't update logcache on open</string>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Logcache settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QCheckBox" name="dbcfg_noCacheUpdate">
+         <property name="text">
+          <string>Don't update logcache on open</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="m_exclude_label">
+           <property name="text">
+            <string>Prefixes to filter out in revision tree</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="KEditListBox" name="dbcfg_exclude_box">
+           <property name="buttons">
+            <set>KEditListBox::Add|KEditListBox::Remove</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Log and statistic setting</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="m_logpattern_label">
+           <property name="text">
+            <string>Hide logs containing following words</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="KEditListBox" name="dbcfg_exclude_log_pattern">
+           <property name="toolTip">
+            <string>This is a list which words/substrings a log entry must contain so it will be hidden from log and statistic</string>
+           </property>
+           <property name="buttons">
+            <set>KEditListBox::Add|KEditListBox::Remove</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="2" column="0">
+          <widget class="KEditListBox" name="dbcfg_exclude_userslog">
+           <property name="toolTip">
+            <string>Don't display commits of listet users in logwindow and statistic view</string>
+           </property>
+           <property name="buttons">
+            <set>KEditListBox::Add|KEditListBox::Remove</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="m_hideuser_label">
+           <property name="text">
+            <string>Don't show commits from following users</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="dbcfg_filter_empty_author">
+           <property name="text">
+            <string>Don't disply commits without author</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="m_exclude_label">
-       <property name="text">
-        <string>Prefixes to filter out in revision tree</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="KEditListBox" name="dbcfg_exclude_box">
-       <property name="buttons">
-        <set>KEditListBox::Add|KEditListBox::Remove</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

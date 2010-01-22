@@ -19,7 +19,8 @@
  ***************************************************************************/
 
 #include "dbstatistic.h"
-#include "cache/LogCache.h"
+#include "src/svnqt/cache/LogCache.h"
+#include "src/svnqt/cache/ReposConfig.h"
 
 #include <kdebug.h>
 
@@ -44,14 +45,28 @@ bool DbStatistic::getUserCommits(Usermap&target)const
     if (!reposDB.isValid()) {
         return false;
     }
-    static QString s_aCount("select count(*),author from logentries group by author");
+    QStringList _v = svn::cache::ReposConfig::self()->readEntry(_reposName,"exclude_log_users",QStringList());
+    if (svn::cache::ReposConfig::self()->readEntry(_reposName,"filter_empty_author",false)) {
+        _v.append(QString());
+    }
+    static QString s_aCount("select count(*),author from logentries %1 group by author");
+
+    QString where;
+
+    if (_v.count()>0) {
+        where = QString("where author not in ('%1')").arg(_v.join("','"));
+    } else {
+        where = "";
+    }
+    QString r_aCount = s_aCount.arg(where);
+    kDebug()<<"Query: "<<r_aCount<<endl;
     QSqlQuery acount(QString(),reposDB);
-    acount.prepare(s_aCount);
+    acount.prepare(r_aCount);
 #ifdef DEBUG_TIMER
     QTime _counttime;
     _counttime.start();
 #endif
-    
+
     if (!acount.exec()) {
         kDebug() << acount.lastError().text();
         //throw svn::cache::DatabaseException(QString("Could not retrieve authors count: ")+acount.lastError().text());
@@ -60,7 +75,7 @@ bool DbStatistic::getUserCommits(Usermap&target)const
 #ifdef DEBUG_TIMER
     kDebug()<<"Time for getting db entries: "<<_counttime.elapsed();
     _counttime.restart();
-#endif    
+#endif
     while(acount.next()) {
         target[acount.value(1).toString()]=acount.value(0).toUInt();
     }

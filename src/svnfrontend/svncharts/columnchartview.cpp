@@ -596,7 +596,7 @@ void ColumnChartView::drawChartTitle( QPainter * p )
     if(v.isValid()) {
         align = (Qt::Alignment)v.toInt();
     }
-    QRect titleRect(2, 2, chartTitleSize().width(), chartTitleSize().height());
+    QRect titleRect(80, 2, chartTitleSize().width(), chartTitleSize().height());
 #ifdef DEBUG
 
     p->save();
@@ -634,7 +634,7 @@ void ColumnChartView::drawXTitle( QPainter * p )
         }
     }
     v = xTitle(Qt::TextAlignmentRole);
-    Qt::Alignment align = Qt::AlignCenter;
+    Qt::Alignment align = Qt::AlignLeft;
     if(v.isValid()) {
         align = (Qt::Alignment)v.toInt();
     }

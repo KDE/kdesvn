@@ -24,6 +24,7 @@
 
 #include <kcolorscheme.h>
 #include <kdebug.h>
+#include <kglobalsettings.h>
 
 #include <QStandardItemModel>
 
@@ -89,6 +90,13 @@ void StatisticView::simpleStatistic()
     QColor _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
     m_ColumnView->setYTitle(i18n("Commits"));
     m_ColumnView->setXTitle(i18n("Author"));
+    QFont _f = KGlobalSettings::generalFont();
+    _f.setPointSize(_f.pointSize()+2);
+    m_ColumnView->setXTitle(_f,Qt::FontRole);
+    m_ColumnView->setYTitle(_f,Qt::FontRole);
+    _f.setPointSize(_f.pointSize()+2);
+    m_ColumnView->setChartTitle(_f,Qt::FontRole);
+    m_ColumnView->setChartTitle(Qt::AlignLeft,Qt::TextAlignmentRole);
 
     _model->setColumnCount(SIMPLE_COLUMN_COUNT);
     _model->setRowCount(values.size());

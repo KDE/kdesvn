@@ -41,6 +41,8 @@ ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
     _legendwidth = 100;
     _minimumBarWidth = 40;
 
+    _firstColIsLegend=false;
+
     setItemDelegate(new ChartBarDelegate(this));
     updateGeometries();
 
@@ -49,6 +51,11 @@ ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
     connect(this, SIGNAL(yTitleChanged()), viewport(), SLOT(update()));
     connect(this, SIGNAL(chartTitleChanged()), viewport(), SLOT(update()));
 
+}
+
+int ColumnChartView::minColumn()const
+{
+    return _firstColIsLegend?1:0;
 }
 
 ColumnChartView::~ColumnChartView() {}
@@ -69,18 +76,21 @@ void ColumnChartView::scrollTo( const QModelIndex & index, ScrollHint /*hint*/ )
     } else if (logicalXL>horizontalScrollBar()->value()+viewport()->width()-margin) {
         horizontalScrollBar()->setValue(qMin(logicalXL-viewport()->width()+margin,horizontalScrollBar()->maximum()));
     }
+    //viewport()->update();
 }
 
-QModelIndex ColumnChartView::indexAt( const QPoint & point ) const {
+QModelIndex ColumnChartView::indexAt( const QPoint & point ) const
+{
     if(model()->rowCount(rootIndex())==0)
         return QModelIndex();
 
     int wx = point.x() + horizontalScrollBar()->value();
     int wy = point.y() + verticalScrollBar()->value();
     uint items = model()->rowCount(rootIndex());
+    // not series() 'cause we start at minColumn
     uint jtems = model()->columnCount(rootIndex());
-    for(uint ind = 0; ind < items; ind++) {
-        for(uint jnd = 0; jnd < jtems; jnd++) {
+    for(uint ind = 0; ind < items; ++ind) {
+        for(uint jnd = minColumn(); jnd < jtems; ++jnd) {
             QModelIndex i = model()->index(ind, jnd);
             QRect r = visualRect(i);
             if(r.contains(QPoint(wx,wy))) {
@@ -91,12 +101,22 @@ QModelIndex ColumnChartView::indexAt( const QPoint & point ) const {
     return QModelIndex();
 }
 
-QRect ColumnChartView::visualRect( const QModelIndex & index ) const {
-//qDebug(qPrintable(QString::number(__LINE__)));
+int ColumnChartView::series(const QModelIndex & index)const
+{
+    return (index.isValid()?index.model()->columnCount()-minColumn():0);
+}
+
+int ColumnChartView::series()const
+{
+    return model()->columnCount()-minColumn();
+}
+
+QRect ColumnChartView::visualRect(const QModelIndex & index ) const
+{
     if(!index.isValid())
         return QRect();
     int itemwidth = itemWidth();
-    int seriesCount = index.model()->columnCount();
+    int seriesCount = series(index);
     int columnWidth = itemWidth()/seriesCount;
     int maxh = chartSize().height();
     int valueSpan = _maxVal - _minVal;
@@ -107,7 +127,7 @@ QRect ColumnChartView::visualRect( const QModelIndex & index ) const {
     int h = qRound(1.0*maxh*(itemValue-_minVal)/valueSpan);
 
     QRect itemRect(
-        qRound(4+yTitleSize().height()+4+valueSize().width()+itemwidth/4+index.row()*itemwidth*3/2 +1.1*columnWidth*index.column()),
+        qRound(4+yTitleSize().height()+4+valueSize().width()+itemwidth/4+index.row()*itemwidth*3/2 +1.1*columnWidth*(index.column()-minColumn())),
         l-h,
         4*columnWidth/5,
         h
@@ -115,8 +135,8 @@ QRect ColumnChartView::visualRect( const QModelIndex & index ) const {
     return itemRect;
 }
 
-void ColumnChartView::paintEvent( QPaintEvent * ) {
-//    qDebug("PAINT EVENT");
+void ColumnChartView::paintEvent( QPaintEvent * )
+{
     QPainter painter(viewport());
     painter.save();
     painter.translate(- horizontalScrollBar()->value(), - verticalScrollBar()->value());
@@ -145,13 +165,13 @@ void ColumnChartView::paintEvent( QPaintEvent * ) {
     drawCanvas(&painter);
 }
 
-void ColumnChartView::drawCanvas( QPainter * p ) {
-
+void ColumnChartView::drawCanvas( QPainter * p )
+{
     int items = model()->rowCount(rootIndex());
     int jtems = model()->columnCount(rootIndex());
 
-    for(int i=0;i<items;i++) {
-        for(int j=jtems-1;j>=0;j--) {
+    for(int i=0;i<items;++i) {
+        for(int j=jtems-1;j>=minColumn();--j) {
             paintItem(p, model()->index(i,j, rootIndex()));
         }
     }
@@ -159,15 +179,18 @@ void ColumnChartView::drawCanvas( QPainter * p ) {
 
 }
 
-bool ColumnChartView::isIndexHidden( const QModelIndex & /*index*/ ) const {
+bool ColumnChartView::isIndexHidden( const QModelIndex & /*index*/ ) const
+{
     return true;
 }
 
-int ColumnChartView::horizontalOffset( ) const {
+int ColumnChartView::horizontalOffset( ) const
+{
     return horizontalScrollBar()->value();
 }
 
-QModelIndex ColumnChartView::moveCursor( CursorAction cursorAction, Qt::KeyboardModifiers /*modifiers*/ ) {
+QModelIndex ColumnChartView::moveCursor( CursorAction cursorAction, Qt::KeyboardModifiers /*modifiers*/ )
+{
     QModelIndex curr = currentIndex();
     switch (cursorAction) {
     case MoveUp:
@@ -203,7 +226,9 @@ QModelIndex ColumnChartView::moveCursor( CursorAction cursorAction, Qt::Keyboard
     return curr;
 }
 
-void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::SelectionFlags flags ) {
+void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::SelectionFlags flags )
+{
+    kDebug()<<"Rect "<<rect <<endl;
     QModelIndexList indexes;
     QRect contentsRect = rect.translated(horizontalScrollBar()->value(),
                                          verticalScrollBar()->value());
@@ -211,7 +236,7 @@ void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::Sel
     int columns = model()->columnCount(rootIndex());
     QRect adj = contentsRect.adjusted(-1,-1,1,1);
     for (int row = 0; row < rows; ++row) {
-        for(int column = 0; column < columns; ++column) {
+        for(int column = minColumn(); column < columns; ++column) {
             QModelIndex index = model()->index(row, column, rootIndex());
             QRect r = visualRect(index);
             if (adj.intersects(r)) {
@@ -243,8 +268,8 @@ void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::Sel
     selectionRect = rect;
 }
 
-QRegion ColumnChartView::visualRegionForSelection( const QItemSelection & selection ) const {
-//qDebug(qPrintable(QString::number(__LINE__)));
+QRegion ColumnChartView::visualRegionForSelection( const QItemSelection & selection ) const
+{
     int ranges = selection.count();
 
     if (ranges == 0)
@@ -355,7 +380,7 @@ void ColumnChartView::setMinimumBarWidth(uint v)
 void ColumnChartView::updateGeometries( )
 {
     if(model()) {
-        int minimumWidth = model()->columnCount()*model()->rowCount()*minimumBarWidth();
+        int minimumWidth = series()*model()->rowCount()*minimumBarWidth();
         int minimumHeight = _vertGridLines*(1+font().pointSize());
         setChartSize(QSize(minimumWidth, minimumHeight));
     } else {
@@ -438,36 +463,51 @@ void ColumnChartView::drawLegend( QPainter * painter )
     painter->restore();
 #endif
 
-    painter->drawRect(0, 0, _legendwidth, 6+(model()->columnCount(rootIndex()))*(font().pointSize()+4));
+    painter->drawRect(0, 0, _legendwidth, 6+(series(rootIndex()))*(font().pointSize()+4));
     if(_legend.flags() & ChartLegend::Shadow) {
         painter->save();
         QPen pn = painter->pen();
         pn.setWidth(3);
         pn.setColor(palette().color(QPalette::Shadow));
         painter->setPen(pn);
-        int dl = (model()->columnCount(rootIndex()))*(font().pointSize()+4);
+        int dl = (series(rootIndex()))*(font().pointSize()+4);
         painter->drawLine(5,8+dl, _legendwidth, 8+dl);
         painter->drawLine(2+_legendwidth, 5, 2+_legendwidth, 8+dl);
         painter->restore();
     }
-    for(int i=0;i<model()->columnCount();i++) {
+    for(int i=minColumn();i<model()->columnCount();++i) {
         painter->setBrush(qvariant_cast<QColor>(model()->headerData(i, Qt::Horizontal, Qt::DecorationRole)));
-        painter->drawRect(5, 6+i*(font().pointSize()+4), font().pointSize(), font().pointSize());
-        painter->drawText(5+font().pointSize()+4, font().pointSize()+6+i*(font().pointSize()+4), model()->headerData(i, Qt::Horizontal).toString());
+        painter->drawRect(5, 6+(i-minColumn())*(font().pointSize()+4), font().pointSize(), font().pointSize());
+        painter->drawText(5+font().pointSize()+4, font().pointSize()+6+(i-minColumn())*(font().pointSize()+4), model()->headerData(i, Qt::Horizontal).toString());
     }
     painter->restore();
 }
 
+QString ColumnChartView::rowLegendName(int row)const
+{
+    QVariant v = rowLegendValue(row,Qt::DisplayRole);
+    if (v.isValid()) {
+        return v.toString();
+    }
+    return QString();
+}
+
+QVariant ColumnChartView::rowLegendValue(int row,int role)const
+{
+    if (row >= model()->rowCount(rootIndex())) {
+        return QVariant();
+    }
+    if (firstColumnIsLegend()) {
+        return model()->index(row,0).data(role);
+    } else {
+        return model()->headerData(row, Qt::Vertical,role);
+    }
+}
+
 void ColumnChartView::drawRowNames( QPainter * p )
 {
-//qDebug(qPrintable(QString::number(__LINE__)));
     int itemwidth = itemWidth();
-    int seriesCount = model()->columnCount();
-    //    int columnWidth = itemWidth()/seriesCount;
     int maxh = chartSize().height();
-    //    int valueSpan = _maxVal - _minVal;
-    //QStyleOptionViewItem opt = viewOptions();
-    //opt.displayAlignment |= Qt::AlignHCenter;
     uint rowHeight = rowNameSize().height();//(_flags & XTitle) ? xTitleSize().height()+4-QFontMetrics(font()).height()-2 : 4;
     p->save();
     int _max = model()->rowCount(rootIndex());
@@ -476,7 +516,7 @@ void ColumnChartView::drawRowNames( QPainter * p )
         QStyleOptionViewItem opt = getOptionsForRowLabel(i);
         p->setFont(opt.font);
         p->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-        p->drawText(rect,opt.displayAlignment|Qt::TextWordWrap,QAbstractItemDelegate::elidedText(fontMetrics(), rect.width(),Qt::ElideRight,model()->headerData(i, Qt::Vertical).toString()));
+        p->drawText(rect,opt.displayAlignment|Qt::TextWordWrap,QAbstractItemDelegate::elidedText(fontMetrics(), rect.width(),Qt::ElideRight,rowLegendName(i)));
     }
     p->restore();
 }
@@ -488,11 +528,11 @@ QStyleOptionViewItem ColumnChartView::getOptionsForRowLabel( int row )
     opt.displayAlignment &= ~Qt::AlignVCenter;
     opt.displayAlignment |= Qt::AlignTop;
     QVariant value;
-    value = model()->headerData(row, Qt::Vertical, Qt::FontRole);
+    value = rowLegendValue(row,Qt::FontRole);
     if(value.isValid()) {
         opt.font = qvariant_cast<QFont>(value);
     }
-    value = model()->headerData(row, Qt::Vertical, Qt::TextColorRole);
+    value = rowLegendValue(row,Qt::TextColorRole);
     if(value.isValid() && qvariant_cast<QColor>(value).isValid()) {
         opt.palette.setColor(QPalette::Text, qvariant_cast<QColor>(value));
     }

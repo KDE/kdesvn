@@ -25,7 +25,9 @@
 
 #include <QStandardItemModel>
 
-#include <cmath>
+#define SIMPLE_AUTHOR_COLUMN 0
+#define SIMPLE_COUNT_COLUMN (SIMPLE_AUTHOR_COLUMN+1)
+#define SIMPLE_COLUMN_COUNT (SIMPLE_AUTHOR_COLUMN+2)
 
 StatisticView::StatisticView(QWidget*parent)
 :QWidget(parent),m_DbStatistic(0)
@@ -60,16 +62,21 @@ void StatisticView::setRepository(const QString&repository)
     m_DbStatistic = new DbStatistic(repository);
     QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
     _model->clear();
+    simpleStatistic();
+}
 
+void StatisticView::simpleStatistic()
+{
     DbStatistic::Usermap _data;
     if (!m_DbStatistic->getUserCommits(_data)) {
         m_ColumnView->setChartTitle(i18n("Could not get statistic data"));
         return;
     }
-
+    QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
+    
     QList<unsigned> values=_data.values();
     QList<QString> keys = _data.keys();
-
+    
     static int offset = 30;
     static int colbegin = 50;
     QColor a(colbegin,colbegin,colbegin);
@@ -80,32 +87,50 @@ void StatisticView::setRepository(const QString&repository)
     m_ColumnView->setYTitle(i18n("Commits"));
     m_ColumnView->setXTitle(i18n("Author"));
 
-    _model->setColumnCount(1);
+    _model->setColumnCount(SIMPLE_COLUMN_COUNT);
     _model->setRowCount(values.size());
     
-    _model->setHeaderData(0,Qt::Horizontal,i18n("Commits"));
+    _model->setHeaderData(SIMPLE_COUNT_COLUMN,Qt::Horizontal,i18n("Commits"));
+#if SIMPLE_AUTHOR_COLUMN>-1
+    _model->setHeaderData(SIMPLE_AUTHOR_COLUMN,Qt::Horizontal,i18n("Author"));
+    m_ColumnView->setFirstColumnIsLegend(true);
+#endif
 
     unsigned all = 0;
     QColor _block = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
-
+    
     for (int i=0; i<values.size();++i) {
-        _model->setData(_model->index(i,0),values[i]);
+        _model->setData(_model->index(i,SIMPLE_COUNT_COLUMN),values[i]);
         all+=values[i];
         if (m_ColumnView->maximumValue()<(int)values[i]) {
             m_ColumnView->setMaximumValue( qRound((double)values[i]/50.0+0.5)*50 );
         }
+#if SIMPLE_AUTHOR_COLUMN>-1
+        QModelIndex ind = _model->index(i,SIMPLE_AUTHOR_COLUMN);
+#endif
         if (keys[i].isEmpty()) {
+#if SIMPLE_AUTHOR_COLUMN>-1
+            _model->setData(ind,i18n("No author"),Qt::DisplayRole);
+            QFont f = _model->data(ind,Qt::FontRole).value<QFont>();
+            f.setItalic(true);
+            _model->setData(ind,f,Qt::FontRole);
+#else
             _model->setHeaderData(i, Qt::Vertical,i18n("No author"),Qt::DisplayRole);
             QFont f = _model->headerData(i,Qt::Vertical,Qt::FontRole).value<QFont>();
             f.setItalic(true);
             _model->setHeaderData(i,Qt::Vertical,f,Qt::FontRole);
+#endif
         } else {
+#if SIMPLE_AUTHOR_COLUMN>-1
+            _model->setData(ind,keys[i],Qt::DisplayRole);
+#else
             _model->setHeaderData(i, Qt::Vertical,keys[i],Qt::DisplayRole);
+#endif
         }
         
-
+        
         a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
-        _model->setData(_model->index(i,0), a, Qt::DecorationRole);
+        _model->setData(_model->index(i,SIMPLE_COUNT_COLUMN), a, Qt::DecorationRole);
         if ( a.red()>maxc||a.green()>maxc||a.blue()>maxc ) {
             if (colinc==0) {
                 ++colinc;
@@ -128,9 +153,9 @@ void StatisticView::setRepository(const QString&repository)
             }
             a.setRgb(colbegin+r,colbegin+g,colbegin+b);
         }
-
+        
     }
-    m_ColumnView->setChartTitle(i18n("%1 commits overall",all));
+    m_ColumnView->setChartTitle(i18n("Displayed %1 commits",all));
 }
 
 StatisticView::~StatisticView()

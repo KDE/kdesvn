@@ -35,6 +35,7 @@ public:
     virtual ~StatisticView();
 
     void setRepository(const QString&repository);
+    void simpleStatistic();
 
 public Q_SLOTS:
 

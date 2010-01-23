@@ -88,6 +88,17 @@ public:
     inline void setItemDelegate(ChartDelegate *dele){ QAbstractItemView::setItemDelegate(dele); }
 
     void setLegend(const ChartLegend &l){ _legend = l; }
+
+    void setFirstColumnIsLegend(bool how){_firstColIsLegend=how;}
+    bool firstColumnIsLegend()const{return _firstColIsLegend;}
+
+    QString rowLegendName(int row)const;
+    QVariant rowLegendValue(int row,int role=Qt::DisplayRole)const;
+
+    int minColumn()const;
+    int series(const QModelIndex&)const;
+    int series()const;
+
 Q_SIGNALS:
     void xTitleChanged();
     void yTitleChanged();
@@ -139,6 +150,8 @@ protected:
     virtual QSize yTitleSize() const;
     virtual QSize rowNameSize() const;
     virtual QSize valueSize() const;
+
+    bool _firstColIsLegend;
 
 protected Q_SLOTS:
     void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);

@@ -179,9 +179,41 @@ public:
             _q.exec("CREATE TABLE \"mergeditems\" (\"revision\" INTEGER,\"mergeditems\" TEXT, PRIMARY KEY(revision))");
             aDb.commit();
         }
+        if (list.indexOf("dbversion")==-1) {
+            aDb.transaction();
+            _q.exec("CREATE TABLE \"dbversion\" (\"version\" INTEGER)");
+            qDebug()<<_q.lastError();
+            _q.exec("insert into \"dbversion\" (version) values(0)");
+            aDb.commit();
+        }
         list = aDb.tables();
-        if (list.indexOf("logentries")==-1 || list.indexOf("changeditems")==-1 || list.indexOf("mergeditems")==-1) {
+        if (list.indexOf("logentries")==-1 || list.indexOf("changeditems")==-1 || list.indexOf("mergeditems")==-1||list.indexOf("dbversion")==-1) {
+            qDebug()<<"lists: "<<list;
             return false;
+        }
+        _q.exec("SELECT VERSION from dbversion limit 1");
+        if (_q.lastError().type()==QSqlError::NoError && _q.next()) {
+            int version = _q.value(0).toInt();
+            if (version == 0){
+                _q.exec("create index if not exists main.authorindex on logentries(author)");
+                if (_q.lastError().type()!=QSqlError::NoError) {
+                    qDebug()<<_q.lastError();
+                } else {
+                    _q.exec("UPDATE dbversion SET VERSION=1");
+                }
+                ++version;
+            }
+            if (version == 1){
+                _q.exec("create index if not exists main.dateindex on logentries(date)");
+                if (_q.lastError().type()!=QSqlError::NoError) {
+                    qDebug()<<_q.lastError();
+                } else {
+                    _q.exec("UPDATE dbversion SET VERSION=2");
+                }
+                ++version;
+            }
+        } else {
+            qDebug()<<"Select: "<<_q.lastError();
         }
         return true;
     }

@@ -2295,7 +2295,7 @@ void MainTreeWidget::slotSimpleStatistic()
         KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository."),i18n("SVN Error"));
     } else {
         StatisticView*ptr;
-        svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Statistic")),true,"statistic_dlg");
+        svn::SharedPointer<KDialog> dlg = createCloseDialog(&ptr,QString(i18n("Statistic")),"statistic_dlg");
         if (!dlg) {
             return;
         }

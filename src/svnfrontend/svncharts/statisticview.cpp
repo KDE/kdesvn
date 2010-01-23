@@ -66,8 +66,6 @@ void StatisticView::setRepository(const QString&repository)
         m_ColumnView->setChartTitle(i18n("Could not get statistic data"));
         return;
     }
-    QList<QStandardItem*> iList;
-    _model->appendColumn(iList);
 
     QList<unsigned> values=_data.values();
     QList<QString> keys = _data.keys();
@@ -81,13 +79,16 @@ void StatisticView::setRepository(const QString&repository)
     QColor _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
     m_ColumnView->setYTitle(i18n("Commits"));
     m_ColumnView->setXTitle(i18n("Author"));
+
+    _model->setColumnCount(1);
+    _model->setRowCount(values.size());
+    
     _model->setHeaderData(0,Qt::Horizontal,i18n("Commits"));
 
     unsigned all = 0;
     QColor _block = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
 
     for (int i=0; i<values.size();++i) {
-        _model->appendRow(new QStandardItem(values[i]));
         _model->setData(_model->index(i,0),values[i]);
         all+=values[i];
         if (m_ColumnView->maximumValue()<(int)values[i]) {

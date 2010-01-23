@@ -75,4 +75,9 @@ template<class T> inline KDialog*createOkDialog(T**ptr,const QString&_head,bool 
     return createDialog(ptr,_head,buttons,name,showHelp,modal,u1);
 }
 
+template<class T> inline KDialog*createCloseDialog(T**ptr,const QString&_head,const char*name="standard_dialog",bool showHelp=false,bool modal=true,const KGuiItem&u1=KGuiItem())
+{
+    return createDialog(ptr,_head,KDialog::Close,name,showHelp,modal,u1);
+}
+
 #endif

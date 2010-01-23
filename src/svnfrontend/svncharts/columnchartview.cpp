@@ -76,7 +76,7 @@ void ColumnChartView::scrollTo( const QModelIndex & index, ScrollHint /*hint*/ )
     } else if (logicalXL>horizontalScrollBar()->value()+viewport()->width()-margin) {
         horizontalScrollBar()->setValue(qMin(logicalXL-viewport()->width()+margin,horizontalScrollBar()->maximum()));
     }
-    //viewport()->update();
+    viewport()->update();
 }
 
 QModelIndex ColumnChartView::indexAt( const QPoint & point ) const
@@ -175,8 +175,6 @@ void ColumnChartView::drawCanvas( QPainter * p )
             paintItem(p, model()->index(i,j, rootIndex()));
         }
     }
-
-
 }
 
 bool ColumnChartView::isIndexHidden( const QModelIndex & /*index*/ ) const
@@ -413,7 +411,6 @@ void ColumnChartView::drawGridLines( QPainter * painter )
     QPen p(gridColor);
     QPen minorP(p);
     minorP.setStyle(Qt::DotLine);
-    //QPen nrcolor = palette().color(QPalette::WindowText);
     int lineh;
 
     float majorDist = 1.0*maxh/_vertGridLines;
@@ -532,7 +529,7 @@ QStyleOptionViewItem ColumnChartView::getOptionsForRowLabel( int row )
     if(value.isValid()) {
         opt.font = qvariant_cast<QFont>(value);
     }
-    value = rowLegendValue(row,Qt::TextColorRole);
+    value = rowLegendValue(row,Qt::ForegroundRole);
     if(value.isValid() && qvariant_cast<QColor>(value).isValid()) {
         opt.palette.setColor(QPalette::Text, qvariant_cast<QColor>(value));
     }
@@ -585,7 +582,7 @@ void ColumnChartView::drawChartTitle( QPainter * p )
         f = qvariant_cast<QFont>(v);
         p->setFont(f);
     }
-    v = chartTitle(Qt::TextColorRole);
+    v = chartTitle(Qt::ForegroundRole);
     if(v.isValid()) {
         QColor c = qvariant_cast<QColor>(v);
         if(c.isValid()) {
@@ -617,18 +614,17 @@ void ColumnChartView::drawChartTitle( QPainter * p )
     p->restore();
 }
 
-void ColumnChartView::drawXTitle( QPainter * p ) {
-//qDebug(qPrintable(QString::number(__LINE__)));
+void ColumnChartView::drawXTitle( QPainter * p )
+{
     QVariant v;
     QFont f = p->font();
     p->save();
-    //     p->setRenderHint(QPainter::TextAntialiasing, true);
     v = xTitle(Qt::FontRole);
     if(v.isValid()) {
         f = qvariant_cast<QFont>(v);
         p->setFont(f);
     }
-    v = xTitle(Qt::TextColorRole);
+    v = xTitle(Qt::ForegroundRole);
     if(v.isValid()) {
         QColor c = qvariant_cast<QColor>(v);
         if(c.isValid()) {
@@ -671,7 +667,7 @@ void ColumnChartView::drawYTitle( QPainter *p  ) {
         f = qvariant_cast<QFont>(v);
         p->setFont(f);
     }
-    v = yTitle(Qt::TextColorRole);
+    v = yTitle(Qt::ForegroundRole);
     if(v.isValid()) {
         QColor c = qvariant_cast<QColor>(v);
         if(c.isValid()) {

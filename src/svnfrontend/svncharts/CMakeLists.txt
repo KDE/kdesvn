@@ -37,6 +37,8 @@ SET(chartssrc
     dbstatistic.h
     statisticview.cpp
     statisticview.h
+    chartstandarditem.cpp
+    chartstandarditem.h
 )
 
 set (chartsui

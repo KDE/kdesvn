@@ -54,7 +54,7 @@ void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & opti
         opt.displayAlignment |= Qt::AlignHCenter;
 
     /* text colour */
-    value = model->data(index, Qt::TextColorRole);
+    value = model->data(index, Qt::ForegroundRole);
     if(value.isValid() && qvariant_cast<QColor>(value).isValid())
         opt.palette.setColor(QPalette::Text, qvariant_cast<QColor>(value));
 

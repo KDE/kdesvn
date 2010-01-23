@@ -20,8 +20,10 @@
 
 #include "statisticview.h"
 #include "dbstatistic.h"
+#include "chartstandarditem.h"
 
 #include <kcolorscheme.h>
+#include <kdebug.h>
 
 #include <QStandardItemModel>
 
@@ -46,6 +48,7 @@ void StatisticView::init()
 {
     setupUi(this);
     QStandardItemModel*_model = new QStandardItemModel;
+    _model->setItemPrototype(new ChartStandardItem());
     m_TableView->setModel(_model);
     m_ColumnView->setModel(m_TableView->model());
     QItemSelectionModel *sm = new QItemSelectionModel(_model);

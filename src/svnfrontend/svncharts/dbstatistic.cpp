@@ -56,8 +56,13 @@ bool DbStatistic::getUserCommits(Usermap&target)const
     if (_v.count()>0) {
         where = QString("where author not in ('%1')").arg(_v.join("','"));
     } else {
-        where = "";
+        where = "where 1";
     }
+    _v = svn::cache::ReposConfig::self()->readEntry(_reposName,"exclude_log_pattern",QStringList());
+    for (int i = 0; i<_v.count();++i) {
+        where.append(QString(" and message not like '%%1%'").arg(_v[i]));
+    }
+
     QString r_aCount = s_aCount.arg(where);
     kDebug()<<"Query: "<<r_aCount<<endl;
     QSqlQuery acount(QString(),reposDB);

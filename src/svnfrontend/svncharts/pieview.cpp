@@ -515,7 +515,9 @@ void PieView::updateGeometries()
     horizontalScrollBar()->setRange(0, qMax(0, 2*totalSize - viewport()->width()));
     verticalScrollBar()->setPageStep(viewport()->height());
     /// @todo set it to the value of height of legend
-    verticalScrollBar()->setRange(0, qMax(0, totalSize - viewport()->height()));
+    int row_height = model()->rowCount(rootIndex())*QFontMetrics(viewOptions().font).height();
+    int height = qMax(row_height,totalSize);
+    verticalScrollBar()->setRange(0, qMax(0, height));
 }
 
 int PieView::verticalOffset() const

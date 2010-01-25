@@ -24,6 +24,7 @@
 #include "svnqt/shared_pointer.h"
 
 class DbStatistic;
+class ChartBaseView;
 
 class StatisticView:public QWidget,public Ui_StatisticView
 {
@@ -43,6 +44,7 @@ private:
     svn::SharedPointer<DbStatistic> m_DbStatistic;
 
     void init();
+    ChartBaseView*m_ColumnView;
 };
 
 #endif

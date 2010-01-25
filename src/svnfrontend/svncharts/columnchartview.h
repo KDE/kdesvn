@@ -23,6 +23,7 @@
 #include <QAbstractItemView>
 #include <QFlags>
 #include "chartbardelegate.h"
+#include "chartbaseview.h"
 
 /**
 
@@ -49,22 +50,18 @@ protected:
 /**
     @author Witold Wysota <wysota@qtcentre.org>
 */
-class ColumnChartView : public QAbstractItemView {
+class ColumnChartView : public ChartBaseView
+{
     Q_OBJECT
 public:
     enum { Legend=1, ChartTitle=2, XTitle=4, YTitle=8, VerticalGrid=256, VerticalScale=512  };
     ColumnChartView(QWidget *parent = 0);
 
-    ~ColumnChartView();
+    virtual ~ColumnChartView();
     QModelIndex indexAt ( const QPoint & point ) const;
     void scrollTo ( const QModelIndex & index, ScrollHint hint = EnsureVisible );
     QRect visualRect ( const QModelIndex & index ) const;
 
-    void setCanvasMargins(QSize s);
-    QSize canvasMargins();
-    void setMinimumValue(const int& theValue);
-    int minimumValue() const;
-    int maximumValue() const;
     int itemWidth() const;
     QSize chartSize() const;
     quint32 flags() const;
@@ -75,22 +72,17 @@ public:
     QVariant yTitle(int role = Qt::DisplayRole) const;
     inline ChartLegend legend() const { return _legend; }
 
-    void setMaximumValue(const int& theValue);
-    void setVerticalGridLines(const uint& theValue);
-    void setChartSize(const QSize& theValue);
-    void setFlags(const quint32& theValue);
-    void setMinorVerticalGridLines(const uint& theValue);
-    void setChartTitle(const QVariant& theValue, int role = Qt::DisplayRole);
-    void setXTitle(const QVariant& theValue, int role = Qt::DisplayRole);
-    void setYTitle(const QVariant& theValue, int role = Qt::DisplayRole);
-    void setMinimumBarWidth(uint v);
-    uint minimumBarWidth()const{return _minimumBarWidth;}
-    inline void setItemDelegate(ChartDelegate *dele){ QAbstractItemView::setItemDelegate(dele); }
+    virtual void setVerticalGridLines(const uint& theValue);
+    virtual void setChartSize(const QSize& theValue);
+    virtual void setFlags(const quint32& theValue);
+    virtual void setMinorVerticalGridLines(const uint& theValue);
+    virtual void setChartTitle(const QVariant& theValue, int role = Qt::DisplayRole);
+    virtual void setXTitle(const QVariant& theValue, int role = Qt::DisplayRole);
+    virtual void setYTitle(const QVariant& theValue, int role = Qt::DisplayRole);
+    virtual void setMinimumBarWidth(uint v);
+    virtual uint minimumBarWidth()const{return _minimumBarWidth;}
 
     void setLegend(const ChartLegend &l){ _legend = l; }
-
-    void setFirstColumnIsLegend(bool how){_firstColIsLegend=how;}
-    bool firstColumnIsLegend()const{return _firstColIsLegend;}
 
     QString rowLegendName(int row)const;
     QVariant rowLegendValue(int row,int role=Qt::DisplayRole)const;
@@ -99,10 +91,13 @@ public:
     int series(const QModelIndex&)const;
     int series()const;
 
+    virtual int bartype()const{return BARVIEW;}
+
 Q_SIGNALS:
     void xTitleChanged();
     void yTitleChanged();
     void chartTitleChanged();
+
 protected:
     void paintEvent(QPaintEvent *event);
     void updateGeometries();
@@ -119,10 +114,6 @@ protected:
     void setSelection ( const QRect & rect, QItemSelectionModel::SelectionFlags flags);
     QRegion visualRegionForSelection ( const QItemSelection & selection ) const;
 
-    uint _canvasHMargin;
-    uint _canvasVMargin;
-    int _minVal;
-    int _maxVal;
     uint _vertGridLines;
     uint _minorVertGridLines;
     uint _minimumBarWidth;
@@ -150,8 +141,6 @@ protected:
     virtual QSize yTitleSize() const;
     virtual QSize rowNameSize() const;
     virtual QSize valueSize() const;
-
-    bool _firstColIsLegend;
 
 protected Q_SLOTS:
     void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);

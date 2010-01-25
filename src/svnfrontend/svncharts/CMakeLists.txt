@@ -39,6 +39,10 @@ SET(chartssrc
     statisticview.h
     chartstandarditem.cpp
     chartstandarditem.h
+    chartbaseview.cpp
+    chartbaseview.h
+    pieview.cpp
+    pieview.h
 )
 
 set (chartsui

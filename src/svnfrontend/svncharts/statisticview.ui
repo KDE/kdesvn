@@ -20,18 +20,11 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QTableView" name="m_TableView"/>
-     <widget class="ColumnChartView" name="m_ColumnView"/>
+     <widget class="QWidget" name="m_ChartHolderWidget" native="true"/>
     </widget>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ColumnChartView</class>
-   <extends>QTableView</extends>
-   <header>columnchartview.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

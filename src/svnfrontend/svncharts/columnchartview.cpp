@@ -28,7 +28,7 @@
 
 #include <kdebug.h>
 
-ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
+ColumnChartView::ColumnChartView(QWidget *parent) : ChartBaseView(parent) {
 
     _minVal = 0;
     _maxVal = 100;
@@ -40,8 +40,6 @@ ColumnChartView::ColumnChartView(QWidget *parent) : QAbstractItemView(parent) {
     _minorVertGridLines = 0;
     _legendwidth = 100;
     _minimumBarWidth = 40;
-
-    _firstColIsLegend=false;
 
     setItemDelegate(new ChartBarDelegate(this));
     updateGeometries();
@@ -765,39 +763,6 @@ void ColumnChartView::setVerticalGridLines( const uint & theValue )
     _vertGridLines = theValue;
     if(_flags & VerticalGrid)
         viewport()->update();
-}
-
-void ColumnChartView::setMaximumValue( const int & theValue )
-{
-    _maxVal = theValue;
-    viewport()->update();
-}
-
-void ColumnChartView::setMinimumValue( const int & theValue )
-{
-    _minVal = theValue;
-    viewport()->update();
-}
-
-int ColumnChartView::minimumValue( ) const
-{
-    return _minVal;
-}
-
-QSize ColumnChartView::canvasMargins( )
-{
-    return QSize(_canvasHMargin, _canvasVMargin);
-}
-
-void ColumnChartView::setCanvasMargins( QSize s )
-{
-    _canvasHMargin = s.width();
-    _canvasVMargin = s.height();
-}
-
-int ColumnChartView::maximumValue( ) const
-{
-    return _maxVal;
 }
 
 void ColumnChartView::setChartSize( const QSize & theValue ) {

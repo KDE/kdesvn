@@ -21,6 +21,8 @@
 #include "statisticview.h"
 #include "dbstatistic.h"
 #include "chartstandarditem.h"
+#include "columnchartview.h"
+#include "pieview.h"
 
 #include <kcolorscheme.h>
 #include <kdebug.h>
@@ -31,6 +33,8 @@
 #define SIMPLE_AUTHOR_COLUMN 0
 #define SIMPLE_COUNT_COLUMN (SIMPLE_AUTHOR_COLUMN+1)
 #define SIMPLE_COLUMN_COUNT (SIMPLE_AUTHOR_COLUMN+2)
+
+#define SIMPLEVIEW 1
 
 StatisticView::StatisticView(QWidget*parent)
 :QWidget(parent),m_DbStatistic(0)
@@ -48,6 +52,18 @@ StatisticView::StatisticView(const QString&repository,QWidget*parent)
 void StatisticView::init()
 {
     setupUi(this);
+    // setup first chart view
+    QVBoxLayout*verticalLayout = new QVBoxLayout(m_ChartHolderWidget);
+#if SIMPLEVIEW == 0
+    ColumnChartView*_bv = new ColumnChartView(m_ChartHolderWidget);
+    m_ColumnView = _bv;
+#else
+    PieView*_pv = new PieView(m_ChartHolderWidget);
+    m_ColumnView = _pv;
+#endif
+
+    verticalLayout->addWidget(m_ColumnView);
+
     QStandardItemModel*_model = new QStandardItemModel;
     _model->setItemPrototype(new ChartStandardItem());
     m_TableView->setModel(_model);
@@ -56,31 +72,31 @@ void StatisticView::init()
     m_TableView->setSelectionModel(sm);
     m_ColumnView->setSelectionModel(sm);
     m_ColumnView->setCanvasMargins(QSize(50,50));
-    m_ColumnView->setMinimumBarWidth(60);
-    m_ColumnView->setFlags(ColumnChartView::ChartTitle|ColumnChartView::XTitle|ColumnChartView::YTitle|ColumnChartView::VerticalScale);
+#if SIMPLEVIEW == 0
+    _bv->setMinimumBarWidth(60);
+    _bv->setFlags(ColumnChartView::ChartTitle|ColumnChartView::XTitle|ColumnChartView::YTitle|ColumnChartView::VerticalScale);
+#endif
 }
 
 void StatisticView::setRepository(const QString&repository)
 {
     // shared pointer, delete itself so no destructor needed
     m_DbStatistic = new DbStatistic(repository);
-    QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
-    _model->clear();
     simpleStatistic();
 }
 
 void StatisticView::simpleStatistic()
 {
+    QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
+    _model->clear();
     DbStatistic::Usermap _data;
     if (!m_DbStatistic->getUserCommits(_data)) {
         m_ColumnView->setChartTitle(i18n("Could not get statistic data"));
         return;
     }
-    QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
-    
     QList<unsigned> values=_data.values();
     QList<QString> keys = _data.keys();
-    
+
     static int offset = 30;
     static int colbegin = 50;
     QColor a(colbegin,colbegin,colbegin);
@@ -100,7 +116,7 @@ void StatisticView::simpleStatistic()
 
     _model->setColumnCount(SIMPLE_COLUMN_COUNT);
     _model->setRowCount(values.size());
-    
+
     _model->setHeaderData(SIMPLE_COUNT_COLUMN,Qt::Horizontal,i18n("Commits"));
 #if SIMPLE_AUTHOR_COLUMN>-1
     _model->setHeaderData(SIMPLE_AUTHOR_COLUMN,Qt::Horizontal,i18n("Author"));
@@ -109,7 +125,7 @@ void StatisticView::simpleStatistic()
 
     unsigned all = 0;
     QColor _block = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
-    
+
     for (int i=0; i<values.size();++i) {
         _model->setData(_model->index(i,SIMPLE_COUNT_COLUMN),values[i]);
         all+=values[i];
@@ -138,10 +154,14 @@ void StatisticView::simpleStatistic()
             _model->setHeaderData(i, Qt::Vertical,keys[i],Qt::DisplayRole);
 #endif
         }
-        
-        
+
+
         a.setRgb(a.red()+offset,a.green()+offset,a.blue()+offset);
+#if SIMPLE_AUTHOR_COLUMN>-1
+        _model->setData(_model->index(i,SIMPLE_AUTHOR_COLUMN), a, Qt::DecorationRole);
+#else
         _model->setData(_model->index(i,SIMPLE_COUNT_COLUMN), a, Qt::DecorationRole);
+#endif
         if ( a.red()>maxc||a.green()>maxc||a.blue()>maxc ) {
             if (colinc==0) {
                 ++colinc;
@@ -164,7 +184,7 @@ void StatisticView::simpleStatistic()
             }
             a.setRgb(colbegin+r,colbegin+g,colbegin+b);
         }
-        
+
     }
     m_ColumnView->setChartTitle(i18n("Displayed %1 commits",all));
 }

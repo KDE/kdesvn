@@ -43,19 +43,18 @@ class SimpleChartModelData
         }
         QVariant countColor(int row)const;
 
+    protected:
         typedef QMap<int,QVariant> valuesmap;
         typedef QMap<int,valuesmap> columnslist;
         typedef QMap<int,columnslist> rowslist;
 
         mutable rowslist _data;
+        mutable QColor a;
+        mutable int r,g,b;
+        mutable uint colinc;
 
         static const int color_offset = 30;
         static const int color_begin = 50;
-
-        mutable QColor a;
-
-        mutable int r,g,b;
-        mutable uint colinc;
         static const int maxc=255-color_offset;
 };
 
@@ -65,12 +64,13 @@ QVariant SimpleChartModelData::countColor(int row)const
     if (_v.isValid()) {
         return _v;
     }
+
+    // generating new value
+    a.setRgb(a.red()+color_offset,a.green()+color_offset,a.blue()+color_offset);
     // setting color value
     _v=qVariantFromValue(a);
     _data[row][1][Qt::DecorationRole]=_v;
 
-    // generating new value
-    a.setRgb(a.red()+color_offset,a.green()+color_offset,a.blue()+color_offset);
     if( a.red()>maxc||a.green()>maxc||a.blue()>maxc ) {
         if (colinc==0) {
             ++colinc;
@@ -119,7 +119,6 @@ QVariant SimpleChartModel::data(const QModelIndex &item, int role) const
     if (!item.isValid()) {
         return QVariant();
     }
-    QVariant _v;
     if (role==Qt::DisplayRole) {
         return QSqlQueryModel::data(item,role);
     }
@@ -127,7 +126,7 @@ QVariant SimpleChartModel::data(const QModelIndex &item, int role) const
     if (item.column()==1 && role==Qt::DecorationRole) {
         return m_Data->countColor(item.row());
     }
-    return _v;
+    return m_Data->value(item.row(),item.column(),role);
 }
 
 #include "simplechartmodel.moc"

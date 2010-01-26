@@ -39,6 +39,7 @@
 **
 ****************************************************************************/
 
+#include <kdebug.h>
 #include <math.h>
 #include <QtGui>
 
@@ -55,7 +56,7 @@ PieView::PieView(QWidget *parent)
     verticalScrollBar()->setRange(0, 0);
 
     margin = 8;
-    totalSize = 800;
+    totalSize = 500;
     pieSize = totalSize - 2*margin;
     validItems = 0;
     totalValue = 0.0;
@@ -514,10 +515,9 @@ void PieView::updateGeometries()
     horizontalScrollBar()->setPageStep(viewport()->width());
     horizontalScrollBar()->setRange(0, qMax(0, 2*totalSize - viewport()->width()));
     verticalScrollBar()->setPageStep(viewport()->height());
-    /// @todo set it to the value of height of legend
     int row_height = model()->rowCount(rootIndex())*QFontMetrics(viewOptions().font).height();
-    int height = qMax(row_height,totalSize);
-    verticalScrollBar()->setRange(0, qMax(0, height));
+    int _height = qMax(row_height,totalSize);
+    verticalScrollBar()->setRange(0, qMax(0, _height-viewport()->height()));
 }
 
 int PieView::verticalOffset() const

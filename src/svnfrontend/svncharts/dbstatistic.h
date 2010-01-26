@@ -17,12 +17,14 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-
-#include "cache/ReposLog.h"
-#include <QMap>
-
 #ifndef DB_STATISTIC_H
 #define DB_STATISTIC_H
+
+#include "src/svnqt/cache/ReposLog.h"
+
+#include <QMap>
+
+class QAbstractItemModel;
 
 class DbStatistic
 {
@@ -35,6 +37,7 @@ class DbStatistic
         DbStatistic(const QString&reposName);
         virtual ~DbStatistic();
 
+        QAbstractItemModel*getUserCommits()const;
         bool getUserCommits(Usermap&)const;
         const QString&repository()const{return _reposName;}
         void repository(const QString&repository){_reposName = repository;}

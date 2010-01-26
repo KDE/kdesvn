@@ -23,8 +23,8 @@
 #include <QPainter>
 #include <kcolorscheme.h>
 
-ChartDelegate::ChartDelegate( QObject * parent ) : QAbstractItemDelegate(parent) {}
-
+ChartDelegate::ChartDelegate(QObject * parent):QAbstractItemDelegate(parent)
+{}
 
 void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {

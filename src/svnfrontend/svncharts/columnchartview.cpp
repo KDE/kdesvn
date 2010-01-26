@@ -41,7 +41,7 @@ ColumnChartView::ColumnChartView(QWidget *parent) : ChartBaseView(parent) {
     _legendwidth = 100;
     _minimumBarWidth = 40;
 
-    setItemDelegate(new ChartBarDelegate(this));
+    QAbstractItemView::setItemDelegate(new ChartBarDelegate(this));
     updateGeometries();
 
     _flags = 0 | VerticalGrid | VerticalScale | ChartTitle;
@@ -167,6 +167,9 @@ void ColumnChartView::drawCanvas( QPainter * p )
 {
     int items = model()->rowCount(rootIndex());
     int jtems = model()->columnCount(rootIndex());
+    if (items==0 || jtems==0) {
+        return;
+    }
 
     for(int i=0;i<items;++i) {
         for(int j=jtems-1;j>=minColumn();--j) {
@@ -224,7 +227,6 @@ QModelIndex ColumnChartView::moveCursor( CursorAction cursorAction, Qt::Keyboard
 
 void ColumnChartView::setSelection( const QRect & rect, QItemSelectionModel::SelectionFlags flags )
 {
-    kDebug()<<"Rect "<<rect <<endl;
     QModelIndexList indexes;
     QRect contentsRect = rect.translated(horizontalScrollBar()->value(),
                                          verticalScrollBar()->value());

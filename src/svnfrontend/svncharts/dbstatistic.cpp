@@ -21,6 +21,7 @@
 #include "dbstatistic.h"
 #include "src/svnqt/cache/LogCache.h"
 #include "src/svnqt/cache/ReposConfig.h"
+#include "simplechartmodel.h"
 
 #include <kdebug.h>
 
@@ -37,6 +38,37 @@ DbStatistic::DbStatistic(const QString&reposName)
 
 DbStatistic::~DbStatistic()
 {
+}
+
+QAbstractItemModel*DbStatistic::getUserCommits()const
+{
+    getdb();
+    if (!reposDB.isValid()) {
+        return 0;
+    }
+    QStringList _v = svn::cache::ReposConfig::self()->readEntry(_reposName,"exclude_log_users",QStringList());
+    if (svn::cache::ReposConfig::self()->readEntry(_reposName,"filter_empty_author",false)) {
+        _v.append(QString());
+    }
+    static QString s_aCount("select author,count(*) from logentries %1 group by author");
+    
+    QString where;
+    
+    if (_v.count()>0) {
+        where = QString("where author not in ('%1')").arg(_v.join("','"));
+    } else {
+        where = "where 1";
+    }
+    _v = svn::cache::ReposConfig::self()->readEntry(_reposName,"exclude_log_pattern",QStringList());
+    for (int i = 0; i<_v.count();++i) {
+        where.append(QString(" and message not like '%%1%'").arg(_v[i]));
+    }
+    
+    QString r_aCount = s_aCount.arg(where);
+    kDebug()<<"Query: "<<r_aCount<<endl;
+    SimpleChartModel*model = new SimpleChartModel;
+    model->setQuery(r_aCount,reposDB);
+    return model;
 }
 
 bool DbStatistic::getUserCommits(Usermap&target)const

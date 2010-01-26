@@ -34,7 +34,7 @@
 #define SIMPLE_COUNT_COLUMN (SIMPLE_AUTHOR_COLUMN+1)
 #define SIMPLE_COLUMN_COUNT (SIMPLE_AUTHOR_COLUMN+2)
 
-#define SIMPLEVIEW 1
+#define SIMPLEVIEW 0
 
 StatisticView::StatisticView(QWidget*parent)
 :QWidget(parent),m_DbStatistic(0)
@@ -87,6 +87,20 @@ void StatisticView::setRepository(const QString&repository)
 
 void StatisticView::simpleStatistic()
 {
+    QAbstractItemModel*_model = m_DbStatistic->getUserCommits();
+    if (!_model) {
+        return;
+    }
+    _model->setHeaderData(SIMPLE_COUNT_COLUMN,Qt::Horizontal,i18n("Commits"));
+    _model->setHeaderData(SIMPLE_AUTHOR_COLUMN,Qt::Horizontal,i18n("Author"));
+    _model->fetchMore(QModelIndex());
+    m_TableView->setModel(_model);
+    m_ColumnView->setModel(_model);
+    QItemSelectionModel *sm = new QItemSelectionModel(_model);
+    m_TableView->setSelectionModel(sm);
+    m_ColumnView->setSelectionModel(sm);
+
+#if 0
     QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
     _model->clear();
     DbStatistic::Usermap _data;
@@ -186,6 +200,7 @@ void StatisticView::simpleStatistic()
 
     }
     m_ColumnView->setChartTitle(i18n("Displayed %1 commits",all));
+#endif
 }
 
 StatisticView::~StatisticView()

@@ -43,6 +43,8 @@ SET(chartssrc
     chartbaseview.h
     pieview.cpp
     pieview.h
+    simplechartmodel.cpp
+    simplechartmodel.h
 )
 
 set (chartsui

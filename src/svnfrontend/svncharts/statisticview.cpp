@@ -103,7 +103,7 @@ void StatisticView::simpleStatistic()
     int r=0; int g=0;int b=0;
     uint colinc=0;
     static int maxc=255-offset;
-    QColor _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+
     m_ColumnView->setYTitle(i18n("Commits"));
     m_ColumnView->setXTitle(i18n("Author"));
     QFont _f = KGlobalSettings::generalFont();
@@ -124,7 +124,6 @@ void StatisticView::simpleStatistic()
 #endif
 
     unsigned all = 0;
-    QColor _block = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
 
     for (int i=0; i<values.size();++i) {
         _model->setData(_model->index(i,SIMPLE_COUNT_COLUMN),values[i]);

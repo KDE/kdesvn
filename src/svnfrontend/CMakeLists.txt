@@ -131,4 +131,4 @@ SET_TARGET_PROPERTIES(svnfrontend
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-ADD_DEPENDENCIES(svnfrontend ksvnwidgets svncharts)
+#ADD_DEPENDENCIES(svnfrontend ksvnwidgets svncharts)

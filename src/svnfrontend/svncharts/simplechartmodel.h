@@ -34,7 +34,7 @@ class SimpleChartModel:public QSqlQueryModel
         virtual ~SimpleChartModel();
 
         virtual bool setData(const QModelIndex&,const QVariant&,int);
-        virtual QVariant data(const QModelIndex &item, int role) const;
+        virtual QVariant data(const QModelIndex &item, int role=Qt::DisplayRole) const;
 
     private:
         svn::SharedPointer<SimpleChartModelData> m_Data;

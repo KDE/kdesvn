@@ -23,6 +23,7 @@
 #include "chartstandarditem.h"
 #include "columnchartview.h"
 #include "pieview.h"
+#include "simplechartmodel.h"
 
 #include <kcolorscheme.h>
 #include <kdebug.h>
@@ -88,7 +89,7 @@ void StatisticView::setRepository(const QString&repository)
 void StatisticView::simpleStatistic()
 {
     QAbstractItemModel*_m = m_TableView->model();
-    QAbstractItemModel*_model = m_DbStatistic->getUserCommits();
+    SimpleChartModel*_model = m_DbStatistic->getUserCommits();
     if (!_model) {
         return;
     }

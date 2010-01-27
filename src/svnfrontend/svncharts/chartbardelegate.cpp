@@ -18,6 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "chartbardelegate.h"
+
+#include <kdebug.h>
+
 #include <QModelIndex>
 #include <QAbstractItemModel>
 #include <QPainter>
@@ -59,7 +62,8 @@ void ChartDelegate::paint( QPainter * painter, const QStyleOptionViewItem & opti
         opt.palette.setColor(QPalette::Text, qvariant_cast<QColor>(value));
 
     /* decoration (fill) */
-    value = model->data(index, Qt::DecorationRole);
+    value = model->data(model->index(index.row(),0),Qt::DecorationRole);
+    //value = model->data(index, Qt::DecorationRole);
     if(value.isValid()) {
         /* try colour */
         QColor color;

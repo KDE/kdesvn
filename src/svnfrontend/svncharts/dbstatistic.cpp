@@ -40,7 +40,7 @@ DbStatistic::~DbStatistic()
 {
 }
 
-QAbstractItemModel*DbStatistic::getUserCommits()const
+SimpleChartModel*DbStatistic::getUserCommits()const
 {
     getdb();
     if (!reposDB.isValid()) {

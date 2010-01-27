@@ -24,7 +24,7 @@
 
 #include <QMap>
 
-class QAbstractItemModel;
+class SimpleChartModel;
 
 class DbStatistic
 {
@@ -37,7 +37,7 @@ class DbStatistic
         DbStatistic(const QString&reposName);
         virtual ~DbStatistic();
 
-        QAbstractItemModel*getUserCommits()const;
+        SimpleChartModel*getUserCommits()const;
         bool getUserCommits(Usermap&)const;
         const QString&repository()const{return _reposName;}
         void repository(const QString&repository){_reposName = repository;}

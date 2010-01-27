@@ -20,10 +20,15 @@
 
 #include "simplechartmodel.h"
 
+
+#include <kdebug.h>
+
 #include <QList>
 #include <QMap>
 #include <QVariant>
 #include <QColor>
+
+#define AUTO_COLOR_COLUMN 0
 
 class SimpleChartModelData
 {
@@ -60,7 +65,7 @@ class SimpleChartModelData
 
 QVariant SimpleChartModelData::countColor(int row)const
 {
-    QVariant _v = value(row,1,Qt::DecorationRole);
+    QVariant _v = value(row,AUTO_COLOR_COLUMN,Qt::DecorationRole);
     if (_v.isValid()) {
         return _v;
     }
@@ -69,7 +74,7 @@ QVariant SimpleChartModelData::countColor(int row)const
     a.setRgb(a.red()+color_offset,a.green()+color_offset,a.blue()+color_offset);
     // setting color value
     _v=qVariantFromValue(a);
-    _data[row][1][Qt::DecorationRole]=_v;
+    _data[row][AUTO_COLOR_COLUMN][Qt::DecorationRole]=_v;
 
     if( a.red()>maxc||a.green()>maxc||a.blue()>maxc ) {
         if (colinc==0) {
@@ -122,8 +127,8 @@ QVariant SimpleChartModel::data(const QModelIndex &item, int role) const
     if (role==Qt::DisplayRole) {
         return QSqlQueryModel::data(item,role);
     }
-    // checking the color marker of the count column
-    if (item.column()==1 && role==Qt::DecorationRole) {
+    // checking the color marker of the authors column
+    if (item.column()==AUTO_COLOR_COLUMN && role==Qt::DecorationRole) {
         return m_Data->countColor(item.row());
     }
     return m_Data->value(item.row(),item.column(),role);

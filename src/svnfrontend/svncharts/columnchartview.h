@@ -98,6 +98,9 @@ Q_SIGNALS:
     void yTitleChanged();
     void chartTitleChanged();
 
+public Q_SLOTS:
+    void rowsInserted(const QModelIndex &parent, int start, int end);
+
 protected:
     void paintEvent(QPaintEvent *event);
     void updateGeometries();

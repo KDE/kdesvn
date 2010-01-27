@@ -87,6 +87,7 @@ void StatisticView::setRepository(const QString&repository)
 
 void StatisticView::simpleStatistic()
 {
+    QAbstractItemModel*_m = m_TableView->model();
     QAbstractItemModel*_model = m_DbStatistic->getUserCommits();
     if (!_model) {
         return;
@@ -99,6 +100,15 @@ void StatisticView::simpleStatistic()
     QItemSelectionModel *sm = new QItemSelectionModel(_model);
     m_TableView->setSelectionModel(sm);
     m_ColumnView->setSelectionModel(sm);
+    delete _m;
+    for (int i=0; i<_model->rowCount();++i) {
+        QModelIndex index = _model->index(i, 1, QModelIndex());
+        int value = _model->data(index).toInt();
+        if (value>m_ColumnView->maximumValue()) {
+            m_ColumnView->setMaximumValue( qRound((double)value/50.0+0.5)*50 );;
+        }
+
+    }
 
 #if 0
     QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());

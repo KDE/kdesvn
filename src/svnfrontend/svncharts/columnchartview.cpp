@@ -867,4 +867,17 @@ QSize ColumnChartView::valueSize( ) const
     return QSize(m+4, 0);
 }
 
+void ColumnChartView::rowsInserted(const QModelIndex &parent, int start, int end)
+{
+    for (int row = start; row <= end; ++row) {
+
+        QModelIndex index = model()->index(row, 1, rootIndex());
+        int value = model()->data(index).toInt();
+        if (value>maximumValue()) {
+            setMaximumValue(value);
+        }
+    }
+    QAbstractItemView::rowsInserted(parent, start, end);
+}
+
 #include "columnchartview.moc"

@@ -24,6 +24,8 @@
 #include "columnchartview.h"
 #include "pieview.h"
 #include "simplechartmodel.h"
+#include "src/svnfrontend/fronthelpers/createdlg.h"
+#include "src/settings/kdesvnsettings.h"
 
 #include <kcolorscheme.h>
 #include <kdebug.h>
@@ -91,6 +93,7 @@ void StatisticView::simpleStatistic()
     QAbstractItemModel*_m = m_TableView->model();
     SimpleChartModel*_model = m_DbStatistic->getUserCommits();
     if (!_model) {
+        m_ColumnView->setChartTitle(i18n("Could not get statistic data"));
         return;
     }
     _model->setHeaderData(SIMPLE_COUNT_COLUMN,Qt::Horizontal,i18n("Commits"));
@@ -110,6 +113,18 @@ void StatisticView::simpleStatistic()
         }
 
     }
+    m_ColumnView->setYTitle(i18n("Commits"));
+    m_ColumnView->setXTitle(i18n("Author"));
+    QFont _f = KGlobalSettings::generalFont();
+    _f.setPointSize(_f.pointSize()+2);
+    m_ColumnView->setXTitle(_f,Qt::FontRole);
+    m_ColumnView->setYTitle(_f,Qt::FontRole);
+    _f.setPointSize(_f.pointSize()+2);
+    m_ColumnView->setChartTitle(_f,Qt::FontRole);
+    m_ColumnView->setChartTitle(Qt::AlignLeft,Qt::TextAlignmentRole);
+    _model->setHeaderData(SIMPLE_COUNT_COLUMN,Qt::Horizontal,i18n("Commits"));
+    _model->setHeaderData(SIMPLE_AUTHOR_COLUMN,Qt::Horizontal,i18n("Author"));
+    m_ColumnView->setChartTitle(i18n("Commits by author"));
 
 #if 0
     QStandardItemModel*_model = static_cast<QStandardItemModel*>(m_TableView->model());
@@ -216,6 +231,19 @@ void StatisticView::simpleStatistic()
 
 StatisticView::~StatisticView()
 {
+}
+
+void StatisticView::showStatistic(const QString&repository)
+{
+    StatisticView*ptr;
+    svn::SharedPointer<KDialog> dlg = createCloseDialog(&ptr,QString(i18n("Statistic")),"statistic_dlg");
+    if (!dlg) {
+        return;
+    }
+    ptr->setRepository(repository);
+    dlg->exec();
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"statistic_dlg");
+    dlg->saveDialogSize(_k);
 }
 
 #include "statisticview.moc"

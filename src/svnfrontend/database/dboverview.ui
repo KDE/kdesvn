@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>348</width>
-    <height>347</height>
+    <width>365</width>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="m_ReposLayout">
        <item>
         <widget class="QLabel" name="m_RepositoryLabel">
@@ -33,7 +33,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
         <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
@@ -71,6 +71,13 @@
          </property>
         </widget>
        </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="m_StatisticButton">
+         <property name="text">
+          <string>Statistic for repository</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -93,12 +100,12 @@
    <slot>deleteCacheItems()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>289</x>
-     <y>475</y>
+     <x>354</x>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
-     <x>377</x>
-     <y>367</y>
+     <x>364</x>
+     <y>296</y>
     </hint>
    </hints>
   </connection>
@@ -109,12 +116,12 @@
    <slot>deleteRepository()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>433</x>
-     <y>475</y>
+     <x>354</x>
+     <y>218</y>
     </hint>
     <hint type="destinationlabel">
-     <x>602</x>
-     <y>374</y>
+     <x>364</x>
+     <y>296</y>
     </hint>
    </hints>
   </connection>
@@ -125,12 +132,28 @@
    <slot>repositorySettings()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>545</x>
-     <y>460</y>
+     <x>354</x>
+     <y>252</y>
     </hint>
     <hint type="destinationlabel">
-     <x>585</x>
-     <y>424</y>
+     <x>364</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_StatisticButton</sender>
+   <signal>clicked()</signal>
+   <receiver>DBOverView</receiver>
+   <slot>repositoryStatistic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>301</y>
     </hint>
    </hints>
   </connection>
@@ -140,5 +163,6 @@
   <slot>deleteCacheItems()</slot>
   <slot>deleteRepository()</slot>
   <slot>repositorySettings()</slot>
+  <slot>repositoryStatistic()</slot>
  </slots>
 </ui>

@@ -29,6 +29,7 @@
 #include "src/svnqt/cache/DatabaseException.h"
 #include "src/svnfrontend/fronthelpers/createdlg.h"
 #include "src/svnqt/client.h"
+#include "src/svnfrontend/svncharts/statisticview.h"
 #include "helpers/stringhelper.h"
 
 #include <QStringListModel>
@@ -106,6 +107,7 @@ void DbOverview::enableButtons(bool how)
     m_DeleteCacheButton->setEnabled(how);
     m_DeleteRepositoryButton->setEnabled(how);
     m_SettingsButton->setEnabled(how);
+    m_StatisticButton->setEnabled(how);
 }
 
 void DbOverview::itemActivated(const QItemSelection&indexes,const QItemSelection&deindexes)
@@ -175,6 +177,11 @@ void DbOverview::deleteRepository()
 void DbOverview::repositorySettings()
 {
     DbSettings::showSettings(selectedRepository());
+}
+
+void DbOverview::repositoryStatistic()
+{
+    StatisticView::showStatistic(selectedRepository());
 }
 
 #include "dboverview.moc"

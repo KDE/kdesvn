@@ -36,9 +36,13 @@ public:
     virtual ~StatisticView();
 
     void setRepository(const QString&repository);
-    void simpleStatistic();
+
+    static void showStatistic(const QString&repository);
 
 public Q_SLOTS:
+
+protected:
+    void simpleStatistic();
 
 private:
     svn::SharedPointer<DbStatistic> m_DbStatistic;

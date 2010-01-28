@@ -2294,15 +2294,7 @@ void MainTreeWidget::slotSimpleStatistic()
     if (inf.reposRoot().isEmpty()) {
         KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository."),i18n("SVN Error"));
     } else {
-        StatisticView*ptr;
-        svn::SharedPointer<KDialog> dlg = createCloseDialog(&ptr,QString(i18n("Statistic")),"statistic_dlg");
-        if (!dlg) {
-            return;
-        }
-        ptr->setRepository(inf.reposRoot());
-        dlg->exec();
-        KConfigGroup _k(Kdesvnsettings::self()->config(),"statistic_dlg");
-        dlg->saveDialogSize(_k);
+        StatisticView::showStatistic(inf.reposRoot());
     }
 }
 

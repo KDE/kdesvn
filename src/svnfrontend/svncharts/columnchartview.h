@@ -103,7 +103,6 @@ public Q_SLOTS:
 
 protected:
     void paintEvent(QPaintEvent *event);
-    void updateGeometries();
     void scrollContentsBy(int dx, int dy);
 
     void resizeEvent(QResizeEvent * /* event */);
@@ -143,10 +142,10 @@ protected:
     virtual QSize xTitleSize() const;
     virtual QSize yTitleSize() const;
     virtual QSize rowNameSize() const;
-    virtual QSize valueSize() const;
 
 protected Q_SLOTS:
-    void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
+    virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
+    virtual void updateGeometries();
 
 private:
     Q_DISABLE_COPY(ColumnChartView);

@@ -51,9 +51,9 @@ SimpleChartModel*DbStatistic::getUserCommits()const
         _v.append(QString());
     }
     static QString s_aCount("select author,count(*) from logentries %1 group by author");
-    
+
     QString where;
-    
+
     if (_v.count()>0) {
         where = QString("where author not in ('%1')").arg(_v.join("','"));
     } else {
@@ -63,7 +63,7 @@ SimpleChartModel*DbStatistic::getUserCommits()const
     for (int i = 0; i<_v.count();++i) {
         where.append(QString(" and message not like '%%1%'").arg(_v[i]));
     }
-    
+
     QString r_aCount = s_aCount.arg(where);
     kDebug()<<"Query: "<<r_aCount<<endl;
     SimpleChartModel*model = new SimpleChartModel;

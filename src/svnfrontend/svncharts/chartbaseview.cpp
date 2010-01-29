@@ -27,6 +27,12 @@
 ChartBaseView::ChartBaseView(QWidget *parent)
 :QAbstractItemView(parent),_firstColIsLegend(true)
 {
+    _minVal = 0;
+    _maxVal = 100;
+    _canvasHMargin = 30;
+    _canvasVMargin = 30;
+
+    _barBorder = 10;
 }
 
 ChartBaseView::~ChartBaseView()
@@ -62,6 +68,24 @@ void ChartBaseView::setCanvasMargins( QSize s )
 {
     _canvasHMargin = s.width();
     _canvasVMargin = s.height();
+}
+
+uint ChartBaseView::barBorder()const
+{
+    return _barBorder;
+}
+
+void ChartBaseView::setBarBorder(uint value)
+{
+    _barBorder=value;
+}
+
+QSize ChartBaseView::valueSize()const
+{
+    QString s = QString::number(maximumValue());
+    int m = QFontMetrics(font()).width(s);
+    int h = QFontMetrics(font()).height();
+    return QSize(m+4, h+4);
 }
 
 #include "chartbaseview.moc"

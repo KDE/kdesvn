@@ -56,6 +56,11 @@ class ChartBaseView : public QAbstractItemView
         virtual void setCanvasMargins(QSize s);
         virtual QSize canvasMargins();
 
+        virtual uint barBorder()const;
+        virtual void setBarBorder(uint);
+
+        virtual QSize valueSize() const;
+
     protected:
         bool _firstColIsLegend;
 
@@ -63,6 +68,8 @@ class ChartBaseView : public QAbstractItemView
         int _maxVal;
         uint _canvasHMargin;
         uint _canvasVMargin;
+
+        uint _barBorder;
 };
 
 #endif

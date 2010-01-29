@@ -45,6 +45,9 @@ SET(chartssrc
     pieview.h
     simplechartmodel.cpp
     simplechartmodel.h
+    barchartview.cpp
+    barchartview.h
+    barchartviewdata.h
 )
 
 set (chartsui

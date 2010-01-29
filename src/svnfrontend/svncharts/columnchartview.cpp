@@ -30,11 +30,6 @@
 
 ColumnChartView::ColumnChartView(QWidget *parent) : ChartBaseView(parent) {
 
-    _minVal = 0;
-    _maxVal = 100;
-
-    _canvasHMargin = 30;
-    _canvasVMargin = 30;
 
     _vertGridLines = 5;
     _minorVertGridLines = 0;
@@ -861,12 +856,6 @@ QSize ColumnChartView::rowNameSize( ) const
     return QSize(0, QFontMetrics(font()).height());
 }
 
-QSize ColumnChartView::valueSize( ) const
-{
-    int m = QFontMetrics(font()).width(QString::number(maximumValue()));
-    return QSize(m+4, 0);
-}
-
 void ColumnChartView::rowsInserted(const QModelIndex &parent, int start, int end)
 {
     for (int row = start; row <= end; ++row) {
@@ -874,7 +863,7 @@ void ColumnChartView::rowsInserted(const QModelIndex &parent, int start, int end
             QModelIndex index = model()->index(row, col, rootIndex());
             int value = model()->data(index).toInt();
             if (value>maximumValue()) {
-                setMaximumValue(value);
+                setMaximumValue(qRound((double)value/50.0+0.5)*50);
             }
         }
     }

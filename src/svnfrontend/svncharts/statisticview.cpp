@@ -109,7 +109,7 @@ void StatisticView::simpleStatistic()
         QModelIndex index = _model->index(i, 1, QModelIndex());
         int value = _model->data(index).toInt();
         if (value>m_ColumnView->maximumValue()) {
-            m_ColumnView->setMaximumValue( qRound((double)value/50.0+0.5)*50 );;
+            m_ColumnView->setMaximumValue(qRound((double)value/50.0+0.5)*50);
         }
 
     }

@@ -458,7 +458,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode*_parent,svn::StatusEntries&dlist)
         }
         node->setStat((*it));
 #ifdef DEBUG_TIMER
-        kDebug()<<"Time creating item: "<<_counttime.elapsed();
+//        kDebug()<<"Time creating item: "<<_counttime.elapsed();
         _counttime.restart();
 #endif
         if (m_Data->m_Display->isWorkingCopy() && m_Data->m_DirWatch) {
@@ -469,12 +469,12 @@ void SvnItemModel::insertDirs(SvnItemModelNode*_parent,svn::StatusEntries&dlist)
             }
         }
 #ifdef DEBUG_TIMER
-        kDebug()<<"Time add watch: "<<_counttime.elapsed();
+//        kDebug()<<"Time add watch: "<<_counttime.elapsed();
         _counttime.restart();
 #endif
         parent->m_Children.append(node);
 #ifdef DEBUG_TIMER
-        kDebug()<<"Time append node: "<<_counttime.elapsed();
+//        kDebug()<<"Time append node: "<<_counttime.elapsed();
 #endif
     }
 #ifdef DEBUG_TIMER
@@ -482,7 +482,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode*_parent,svn::StatusEntries&dlist)
 #endif
     endInsertRows();
 #ifdef DEBUG_TIMER
-    kDebug()<<"Time append all node: "<<_counttime.elapsed();
+//    kDebug()<<"Time append all node: "<<_counttime.elapsed();
 #endif
 }
 

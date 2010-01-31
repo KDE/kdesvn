@@ -76,7 +76,7 @@ void StatisticView::init()
     m_ColumnView->setSelectionModel(sm);
     m_ColumnView->setCanvasMargins(QSize(50,50));
 #if SIMPLEVIEW == 0
-    _bv->setMinimumBarWidth(60);
+    _bv->setMinimumBarWidth(40);
     _bv->setFlags(ColumnChartView::ChartTitle|ColumnChartView::XTitle|ColumnChartView::YTitle|ColumnChartView::VerticalScale);
 #endif
 }

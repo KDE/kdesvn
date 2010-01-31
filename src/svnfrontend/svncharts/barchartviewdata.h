@@ -27,7 +27,7 @@ class BarChartViewData
 {
     public:
         BarChartViewData()
-        : _chartSize(QSize()),_minimumBarWidth(40),_seriesWidth(0),_seriesBorder(20),_diagramWidth(0),_diagramOffset(0),_ytitleBorder(10),_verticalScaleWidth(20)
+        : _chartSize(QSize()),_minimumBarWidth(40),_seriesWidth(0),_seriesBorder(20),_diagramWidth(0),_diagramXOffset(0),_ytitleBorder(10),_verticalScaleWidth(20)
         {
         }
 
@@ -36,7 +36,7 @@ class BarChartViewData
     uint _seriesWidth;
     uint _seriesBorder;
     uint _diagramWidth;
-    uint _diagramOffset;
+    uint _diagramXOffset;
     uint _ytitleBorder;
     int _verticalScaleWidth;
 };

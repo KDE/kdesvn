@@ -21,6 +21,8 @@
 #include "barchartview.h"
 #include "barchartviewdata.h"
 
+#include <QScrollBar>
+
 BarChartView::BarChartView(QWidget *parent)
     :ChartBaseView(parent),_data(new BarChartViewData)
 {
@@ -35,8 +37,13 @@ void BarChartView::updateGeometries()
 {
     _data->_seriesWidth=calcColumnSeriesWidth();
     _data->_diagramWidth=calcColumnDiagramWidth();
-    _data->_diagramOffset=calcLeftOffset();
+    _data->_diagramXOffset=calcLeftOffset();
     _data->_chartSize.setWidth(_data->_diagramWidth+yTitleSize().height());
+
+    int viewWidth = _data->_diagramWidth+_data->_diagramXOffset+yTitleSize().height();
+
+    horizontalScrollBar()->setPageStep(viewport()->width());
+    horizontalScrollBar()->setRange(0, qMax(0, viewWidth-viewport()->width()));
 }
 
 void BarChartView::rowsInserted(const QModelIndex &parent, int start, int end)
@@ -123,7 +130,7 @@ uint BarChartView::columnSeriesStart(const QModelIndex&index)const
     if (!index.isValid()) {
         return 0;
     }
-    return qMax(0,(int)(_data->_diagramOffset+barBorder()+index.column()-minColumn()*(_data->_seriesWidth+_data->_seriesBorder)));
+    return qMax(0,(int)(_data->_diagramXOffset+barBorder()+index.column()-minColumn()*(_data->_seriesWidth+_data->_seriesBorder)));
 }
 
 uint BarChartView::columnItemBarLeft(const QModelIndex&index)const

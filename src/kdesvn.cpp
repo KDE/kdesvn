@@ -24,8 +24,9 @@
 #include "kdesvn_part.h"
 
 // #include <kprinter.h>
-#include <qpainter.h>
-#include <qcursor.h>
+#include <QPainter>
+#include <QCursor>
+#include <QTimer>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -203,6 +204,7 @@ void kdesvn::loadRescent(const KUrl& url)
 
 void kdesvn::load(const KUrl& url,bool addRescent)
 {
+    QTimer::singleShot(100,this,SLOT(slotResetExtraStatus()));
     if (m_part) {
         bool ret = m_part->openUrl(url);
         KRecentFilesAction*rac = 0;
@@ -287,6 +289,8 @@ void kdesvn::fileClose()
     if (memberList().count()>1) {
         close();
     } else {
+        enableClose(false);
+        QTimer::singleShot(100,this,SLOT(slotResetExtraStatus()));
         enableClose(false);
     }
 }
@@ -459,6 +463,13 @@ void kdesvn::slotLoadLast(bool how)
     KConfigGroup cs(KGlobal::config(),"startup");
     cs.writeEntry("load_last_on_start",how);
     cs.sync();
+}
+
+void kdesvn::slotResetExtraStatus()
+{
+    if (statusBar()->hasItem(1)) {
+        statusBar()->removeItem(1);
+    }
 }
 
 void kdesvn::slotExtraStatus(const QString&what)

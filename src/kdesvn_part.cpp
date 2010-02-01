@@ -229,10 +229,6 @@ void kdesvnpart::setupActions()
         t = new KAction(KIcon("help-contents"),i18n("Kdesvn Handbook"), this);
         connect(t,SIGNAL(triggered(bool) ), SLOT(appHelpActivated()));
         actionCollection()->addAction("help_kdesvn",t);
-
-        t = new KAction(i18n("Send Bugreport for kdesvn"), this);
-        connect(t,SIGNAL(triggered(bool) ), SLOT(reportBug()));
-        actionCollection()->addAction("report_bug",t);
     }
 }
 
@@ -317,18 +313,6 @@ void KdesvnBrowserExtension::properties()
 {
     static_cast<kdesvnpart*>(parent())->slotFileProperties();
 }
-
-
-#if KDE_VERSION_MAJOR<4
-/*!
-    \fn kdesvnpart::reportBug()
- */
-void kdesvnpart::reportBug()
-{
-  KBugReport dlg(m_view, true, createAboutData());
-  dlg.exec();
-}
-#endif
 
 /*!
     \fn kdesvnpart::showAboutApplication()

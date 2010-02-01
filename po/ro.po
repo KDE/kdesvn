@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 14:18+0100\n"
+"POT-Creation-Date: 2010-02-01 11:58+0100\n"
 "PO-Revision-Date: 2009-10-25 16:26+0100\n"
 "Last-Translator: Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>\n"
 "Language-Team: Romanian <kde-i18n-doc@lists.kde.org>\n"
@@ -91,19 +91,19 @@ msgstr "(Ultima parte)"
 msgid "(Un)Lock"
 msgstr "(De)Blochează"
 
-#: rc.cpp:234
+#: rc.cpp:228
 msgid "-1"
 msgstr "-1"
 
-#: rc.cpp:180
+#: rc.cpp:174
 msgid "-1 for Head"
 msgstr "-1 pentru HEAD"
 
-#: rc.cpp:183
+#: rc.cpp:177
 msgid "-1 for Start"
 msgstr "-1 pentru START"
 
-#: rc.cpp:402
+#: rc.cpp:396
 msgid "/there/"
 msgstr "/acolo/"
 
@@ -145,7 +145,7 @@ msgstr "<center>Intrarea<br>%1<br>nu este versionată - întrerupere.</center>"
 msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgstr "<center>Intrarea<br>%1<br>este versionată - întrerupere.</center>"
 
-#: rc.cpp:441
+#: rc.cpp:435
 msgid ""
 "<p ><b>Kind of depth</b>: </p>\n"
 "<p ><i>empty depth</i><br />\n"
@@ -178,7 +178,7 @@ msgstr ""
 "de asemena profunzimea infinită.<br />Echivalentul comportamentului implicit "
 "versiunilor pre-1.5. </p>"
 
-#: rc.cpp:610
+#: rc.cpp:604
 #, no-c-format
 msgid ""
 "<p align=\"left\">\n"
@@ -231,7 +231,7 @@ msgstr ""
 "încet pentru diferențele recursive!\n"
 "</p>"
 
-#: rc.cpp:839
+#: rc.cpp:833
 msgid ""
 "<p align=\"left\">\n"
 "Mark an items with non-normal state with an overlayed icon. When you wish "
@@ -248,7 +248,7 @@ msgstr ""
 "subversion.\n"
 "</p>"
 
-#: rc.cpp:753
+#: rc.cpp:747
 msgid ""
 "<p align=\"left\">When checked, kdesvn get more detailed info about file "
 "items when making a listing to remote repositories. So you may see remote "
@@ -263,11 +263,11 @@ msgstr ""
 "<p align=\"left\"><i>Atenție: aceasta poate face listarea FOARTE înceată!</"
 "i></p>"
 
-#: rc.cpp:393
+#: rc.cpp:387
 msgid "<p align=\"right\">Rename</p>"
 msgstr "<p align=\"right\">Redenumește</p>"
 
-#: rc.cpp:571
+#: rc.cpp:565
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -311,7 +311,7 @@ msgstr ""
 "Implicit: <tt>kdiff3 %o %m %n -o %t</tt>\n"
 "</p>"
 
-#: rc.cpp:597
+#: rc.cpp:591
 #, no-c-format
 msgid ""
 "<p>\n"
@@ -339,7 +339,7 @@ msgstr ""
 "<b><tt>%t</tt></b> Destinația locală pentru fuziune.\n"
 "</p>"
 
-#: rc.cpp:786
+#: rc.cpp:780
 msgid ""
 "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
 "instead of simple cleartext storage of subversion.</p>\n"
@@ -401,7 +401,7 @@ msgstr ""
 "nobr>"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:116
-#: svnfrontend/propertiesdlg.cpp:208 svnfrontend/propertiesdlg.cpp:257
+#: svnfrontend/propertiesdlg.cpp:214 svnfrontend/propertiesdlg.cpp:267
 msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
@@ -425,11 +425,11 @@ msgstr "Acceptă permanent"
 msgid "Accept temporarily"
 msgstr "Acceptă temporar"
 
-#: ksvnwidgets/models/commitmodel.cpp:248 rc.cpp:45
+#: ksvnwidgets/models/commitmodel.cpp:248 rc.cpp:39
 msgid "Action"
 msgstr "Acțiune"
 
-#: rc.cpp:961 rc.cpp:964 rc.cpp:967 rc.cpp:970
+#: rc.cpp:955 rc.cpp:958 rc.cpp:961 rc.cpp:964
 msgid "Actions"
 msgstr "Acțiuni"
 
@@ -437,19 +437,19 @@ msgstr "Acțiuni"
 msgid "Add and Commit"
 msgstr "Adaugă și comite"
 
-#: svnfrontend/propertiesdlg.cpp:121
+#: svnfrontend/propertiesdlg.cpp:122
 msgid "Add property"
 msgstr "Adaugă proprietate"
 
-#: svnfrontend/maintreewidget.cpp:571
+#: svnfrontend/maintreewidget.cpp:573
 msgid "Add selected files/dirs"
 msgstr "Adaugă fișierele/directoarele selectate"
 
-#: svnfrontend/maintreewidget.cpp:574
+#: svnfrontend/maintreewidget.cpp:576
 msgid "Add selected files/dirs recursive"
 msgstr "Adaugă recursiv fișierele/directoarele selectate"
 
-#: kdesvn.cpp:145
+#: kdesvn.cpp:146
 msgid "Add ssh identities to ssh-agent"
 msgstr "Adaugă identități ssh la ssh-agent"
 
@@ -457,7 +457,7 @@ msgstr "Adaugă identități ssh la ssh-agent"
 msgid "Add to revision control"
 msgstr "Adaugă la controlul reviziei"
 
-#: svnfrontend/svnactions.cpp:2385
+#: svnfrontend/svnactions.cpp:2384
 msgid "Add unversioned items"
 msgstr "Adaugă elementele neversionate"
 
@@ -473,7 +473,7 @@ msgstr "Adăugat la revizia %1 ca %2"
 msgid "Added in repository"
 msgstr "Adăugat in depozit"
 
-#: rc.cpp:646
+#: rc.cpp:640
 msgid "Added items:"
 msgstr "Elemente adăugate:"
 
@@ -485,11 +485,11 @@ msgstr "Se adaugă %1."
 msgid "Adding (bin) %1."
 msgstr "Se adaugă (bin) %1."
 
-#: svnfrontend/maintreewidget.cpp:572
+#: svnfrontend/maintreewidget.cpp:574
 msgid "Adding selected files and/or directories to repository"
 msgstr "Adaugă fișierele și/sau directoarele selectate la depozit"
 
-#: svnfrontend/maintreewidget.cpp:576
+#: svnfrontend/maintreewidget.cpp:578
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
@@ -501,11 +501,11 @@ msgstr ""
 msgid "Addition"
 msgstr "Adăugire"
 
-#: rc.cpp:771
+#: rc.cpp:765
 msgid "Always get properties on networked repositories"
 msgstr "Recuperează mereu proprietățile depozitelor din rețea"
 
-#: svnfrontend/svnlogdlgimp.cpp:503 rc.cpp:66
+#: svnfrontend/svnlogdlgimp.cpp:503 rc.cpp:60
 msgid "Annotate"
 msgstr "Adnotare"
 
@@ -513,7 +513,7 @@ msgstr "Adnotare"
 msgid "Annotate lines - hit cancel for abort"
 msgstr "Adnotare de linii - anulați pentru abandonare"
 
-#: rc.cpp:246
+#: rc.cpp:240
 msgid "Append source url name to subfolder"
 msgstr "Adaugă numele adresei URL sursă la subdirector"
 
@@ -521,19 +521,19 @@ msgstr "Adaugă numele adresei URL sursă la subdirector"
 msgid "Ask for revision when executing single command"
 msgstr "Întreabă de revizie la executarea unei singure comenzi "
 
-#: rc.cpp:516
+#: rc.cpp:510
 msgid "Authentication"
 msgstr "Autentificare"
 
-#: svnfrontend/models/logitemmodel.cpp:210 rc.cpp:78
+#: svnfrontend/models/logitemmodel.cpp:210 rc.cpp:72
 msgid "Author"
 msgstr "Autor"
 
-#: svnfrontend/maintreewidget.cpp:1758
+#: svnfrontend/maintreewidget.cpp:1774
 msgid "Automatic generated base layout by kdesvn"
 msgstr "Generare de dispunere de bază automată de către kdesvn"
 
-#: rc.cpp:279
+#: rc.cpp:273
 msgid "BDB"
 msgstr "BDB"
 
@@ -545,11 +545,11 @@ msgstr ""
 "S-a atins începutul documentului.\n"
 "Continuați de la sfîtșit?"
 
-#: svnfrontend/maintreewidget.cpp:522
+#: svnfrontend/maintreewidget.cpp:524
 msgid "Blame"
 msgstr "Blamare"
 
-#: svnfrontend/maintreewidget.cpp:525
+#: svnfrontend/maintreewidget.cpp:527
 msgid "Blame range"
 msgstr "Interval de blamare"
 
@@ -565,15 +565,15 @@ msgstr "Ambele surse par a fi identice, nu se fuzionează."
 msgid "Both sources must be same type!"
 msgstr "Ambele surse trebuie să fie de același tip!"
 
-#: rc.cpp:872
+#: rc.cpp:866
 msgid "Bottom to top"
 msgstr "De jos în sus"
 
-#: svnfrontend/maintreewidget.cpp:1264
+#: svnfrontend/maintreewidget.cpp:1271
 msgid "Break lock or ignore missing locks?"
 msgstr "Treceți peste blocare sau ignorați blocările lipsă?"
 
-#: svnfrontend/maintreewidget.cpp:556
+#: svnfrontend/maintreewidget.cpp:558
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 "Răsfoiți dosarele după elementele neversionate și adăugați-le dacă doriți"
@@ -594,7 +594,7 @@ msgstr "&Anulează"
 msgid "Cache filled up to revision %1"
 msgstr "Prestocare completată la revizia %1"
 
-#: rc.cpp:697
+#: rc.cpp:691
 msgid "Can KIO overwrite existing files?"
 msgstr "KIO poate suprascrie fișierele existente?"
 
@@ -606,15 +606,15 @@ msgstr "Nu se poate diferenția pentru că rețeaua este dezactivată."
 msgid "Can only switch one item at time"
 msgstr "Elementele pot fi schimbate pe rînd"
 
-#: kiosvn/kiosvn.cpp:315 kiosvn/kiosvn.cpp:376 kiosvn/kiosvn.cpp:528
+#: kiosvn/kiosvn.cpp:319 kiosvn/kiosvn.cpp:380 kiosvn/kiosvn.cpp:532
 msgid "Can only write on head revision!"
 msgstr "Poate scrie numai în revizia HEAD!"
 
-#: svnfrontend/maintreewidget.cpp:1965
+#: svnfrontend/maintreewidget.cpp:1982
 msgid "Cannot import into multiple targets!"
 msgstr "Nu se poate importa in destinații multiple!"
 
-#: svnfrontend/maintreewidget.cpp:1991
+#: svnfrontend/maintreewidget.cpp:2008
 msgid "Cannot import remote urls!"
 msgstr "Nu se pot importa adresele URL distante!"
 
@@ -622,11 +622,11 @@ msgstr "Nu se pot importa adresele URL distante!"
 msgid "Canonical repository url"
 msgstr "URL canonic al depozitului"
 
-#: svnfrontend/maintreewidget.cpp:529
+#: svnfrontend/maintreewidget.cpp:531
 msgid "Cat head"
 msgstr "Afișează antetul"
 
-#: svnfrontend/maintreewidget.cpp:532
+#: svnfrontend/maintreewidget.cpp:534
 msgid "Cat revision..."
 msgstr "Afișare revizie..."
 
@@ -634,49 +634,49 @@ msgstr "Afișare revizie..."
 msgid "Cat this version"
 msgstr "Afișează această versiune"
 
-#: svnfrontend/maintreewidget.cpp:554
+#: svnfrontend/maintreewidget.cpp:556
 msgid "Check for unversioned items"
 msgstr "Verifică după elemente neversionate"
 
-#: rc.cpp:720
+#: rc.cpp:714
 #, fuzzy
 msgid "Check for updated items every"
 msgstr "Verifică dacă există actualizări"
 
-#: svnfrontend/maintreewidget.cpp:516
+#: svnfrontend/maintreewidget.cpp:518
 msgid "Check for updates"
 msgstr "Verifică dacă există actualizări"
 
-#: svnfrontend/maintreewidget.cpp:517
+#: svnfrontend/maintreewidget.cpp:519
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Verifică dacă copia de lucru are elemente cu versiunea nouă din depozit"
 
-#: rc.cpp:747
+#: rc.cpp:741
 msgid "Check if items has \"svn:needs-lock\" property set"
 msgstr "Verifică dacă elementele au proprietatea \"svn:needs-lock\" activată"
 
-#: rc.cpp:904
+#: rc.cpp:898
 msgid "Check logcache fill before reading tree"
 msgstr ""
 "Verifică completarea jurnalului de prestocare înainte de citirea "
 "arboreșcenței"
 
-#: rc.cpp:711
+#: rc.cpp:705
 #, fuzzy
 msgid "Check modified items every"
 msgstr "Culoarea pentru elementele modificate:"
 
-#: svnfrontend/maintreewidget.cpp:519
+#: svnfrontend/maintreewidget.cpp:521
 msgid "Check updates"
 msgstr "Verificare actualizări"
 
-#: svnfrontend/svnactions.cpp:2531
+#: svnfrontend/svnactions.cpp:2532
 msgid "Checking for updates finished"
 msgstr "Verificare de actualizări terminată"
 
-#: svnfrontend/svnactions.cpp:2661
+#: svnfrontend/svnactions.cpp:2662
 msgid "Checking for updates started in background"
 msgstr "Verificarea actualizărilor lansată în fundal"
 
@@ -684,7 +684,7 @@ msgstr "Verificarea actualizărilor lansată în fundal"
 msgid "Checking out"
 msgstr "Verificare"
 
-#: kiosvn/kiosvn.cpp:408
+#: kiosvn/kiosvn.cpp:412
 #, fuzzy
 msgid "Checking out %1"
 msgstr "Verificare"
@@ -693,21 +693,21 @@ msgstr "Verificare"
 msgid "Checking out a file?"
 msgstr "Verificați un fișier?"
 
-#: svnfrontend/maintreewidget.cpp:626 svnfrontend/maintreewidget.cpp:634
+#: svnfrontend/maintreewidget.cpp:631 svnfrontend/maintreewidget.cpp:639
 #: svnfrontend/svnactions.cpp:1711
 msgid "Checkout"
 msgstr "Preluare"
 
-#: svnfrontend/maintreewidget.cpp:633 svnfrontend/svnactions.cpp:1627
+#: svnfrontend/maintreewidget.cpp:638 svnfrontend/svnactions.cpp:1627
 #: svnfrontend/svnactions.cpp:1649
 msgid "Checkout a repository"
 msgstr "Verifică un depozit"
 
-#: svnfrontend/maintreewidget.cpp:625
+#: svnfrontend/maintreewidget.cpp:630
 msgid "Checkout current repository path"
 msgstr "Verificarea căii depozitului curent"
 
-#: rc.cpp:237
+#: rc.cpp:231
 msgid "Checkout info"
 msgstr "Detaliile verificării"
 
@@ -715,7 +715,7 @@ msgstr "Detaliile verificării"
 msgid "Checksum"
 msgstr "Sumă de control"
 
-#: rc.cpp:387
+#: rc.cpp:381
 msgid "Clean logs"
 msgstr "Curăță jurnalele"
 
@@ -727,11 +727,11 @@ msgstr "Curăță prestocarea depozitului"
 msgid "Cleaning up folder"
 msgstr "Curățare de dosar"
 
-#: svnfrontend/maintreewidget.cpp:563 svnfrontend/svnactions.cpp:1900
+#: svnfrontend/maintreewidget.cpp:565 svnfrontend/svnactions.cpp:1900
 msgid "Cleanup"
 msgstr "Curăță"
 
-#: svnfrontend/maintreewidget.cpp:2147
+#: svnfrontend/maintreewidget.cpp:2164
 msgid "Click for navigate"
 msgstr "Clic pentru navigare"
 
@@ -739,7 +739,7 @@ msgstr "Clic pentru navigare"
 msgid "Click for short info about pre-defined property name"
 msgstr "Clicați pe detaliile sumare despre numele proprietății predefinite"
 
-#: svnfrontend/maintreewidget.cpp:646
+#: svnfrontend/maintreewidget.cpp:651
 msgid "Closes all branches of the file tree"
 msgstr "Închide toate ramurile arboreșcenței de fișiere"
 
@@ -747,27 +747,27 @@ msgstr "Închide toate ramurile arboreșcenței de fișiere"
 msgid "Color Settings"
 msgstr "Configurări culori"
 
-#: rc.cpp:881
+#: rc.cpp:875
 msgid "Color for added items:"
 msgstr "Culoarea pentru elementele adăugate:"
 
-#: rc.cpp:887
+#: rc.cpp:881
 msgid "Color for copied items:"
 msgstr "Culoarea pentru elemente copiate:"
 
-#: rc.cpp:884
+#: rc.cpp:878
 msgid "Color for deleted items:"
 msgstr "Culoarea pentru elementele șterse:"
 
-#: rc.cpp:893
+#: rc.cpp:887
 msgid "Color for modified items:"
 msgstr "Culoarea pentru elementele modificate:"
 
-#: rc.cpp:890
+#: rc.cpp:884
 msgid "Color for renamed items:"
 msgstr "Culoarea pentru elementele redenumite:"
 
-#: rc.cpp:631
+#: rc.cpp:625
 msgid "ColorSettings"
 msgstr "Configurăriculori"
 
@@ -783,8 +783,8 @@ msgstr "Conamda \"%1\" nu este implementată sau cunoscută"
 msgid "Commandline"
 msgstr "Linie de comandă"
 
-#: svnfrontend/maintreewidget.cpp:593 svnfrontend/maintreewidget.cpp:594
-#: svnfrontend/maintreewidget.cpp:652 svnfrontend/svnactions.cpp:1021
+#: svnfrontend/maintreewidget.cpp:598 svnfrontend/maintreewidget.cpp:599
+#: svnfrontend/maintreewidget.cpp:657 svnfrontend/svnactions.cpp:1021
 #: svnfrontend/svnactions.cpp:1061
 msgid "Commit"
 msgstr "Comite"
@@ -814,29 +814,29 @@ msgstr "Comite elementele înlocuite"
 msgid "Commit log"
 msgstr "Jurnalul comiterilor"
 
-#: kiosvn/kiosvn.cpp:459
+#: kiosvn/kiosvn.cpp:463
 #, fuzzy
 msgid "Commiting %1"
 msgstr "Comite"
 
-#: rc.cpp:462
+#: rc.cpp:456
 msgid "Commitmessage"
 msgstr "Commitmessage"
 
-#: svnfrontend/svnactions.cpp:1070 svnfrontend/svnactions.cpp:2216
-#: kiosvn/kiosvn.cpp:863
+#: svnfrontend/svnactions.cpp:1070 svnfrontend/svnactions.cpp:2215
+#: kiosvn/kiosvn.cpp:867
 msgid "Committed revision %1."
 msgstr "Revizie %1 propagată."
 
-#: rc.cpp:306
+#: rc.cpp:300
 msgid "Compatible to subversion prior 1.4"
 msgstr "Compatibilitate cu subversion anteriror versiunii 1.4"
 
-#: rc.cpp:315
+#: rc.cpp:309
 msgid "Compatible to subversion prior 1.5"
 msgstr "Compatibilitate cu subversion anteriror versiunii 1.5"
 
-#: rc.cpp:321
+#: rc.cpp:315
 msgid "Compatible to subversion prior 1.6"
 msgstr "Compatibilitate cu subversion anteriror versiunii 1.6"
 
@@ -848,15 +848,15 @@ msgstr "Configurare %1..."
 msgid "Conflict"
 msgstr "Conflict"
 
-#: rc.cpp:561
+#: rc.cpp:555
 msgid "Conflict resolver program:"
 msgstr "Program de rezilvat conflicte:"
 
-#: rc.cpp:652
+#: rc.cpp:646
 msgid "Conflicted items:"
 msgstr "Elemente conflictuale:"
 
-#: rc.cpp:81
+#: rc.cpp:75
 msgid "Content"
 msgstr "Conținut"
 
@@ -868,7 +868,7 @@ msgstr "Ultima modificare de conținut"
 msgid "Content of %1"
 msgstr "Conținutul lui %1"
 
-#: kiosvn/kiosvn.cpp:513
+#: kiosvn/kiosvn.cpp:517
 #, fuzzy
 msgid "Copied %1 to %2"
 msgstr "Copiat în %1 la revizia %2"
@@ -877,7 +877,7 @@ msgstr "Copiat în %1 la revizia %2"
 msgid "Copied to %1 at revision %2"
 msgstr "Copiat în %1 la revizia %2"
 
-#: svnfrontend/svnactions.cpp:2253 svnfrontend/svnactions.cpp:2278 rc.cpp:390
+#: svnfrontend/svnactions.cpp:2252 svnfrontend/svnactions.cpp:2277 rc.cpp:384
 msgid "Copy / Move"
 msgstr "Copiază / Mută"
 
@@ -885,7 +885,7 @@ msgstr "Copiază / Mută"
 msgid "Copy file/dir"
 msgstr "Copiază fișier/director"
 
-#: rc.cpp:51
+#: rc.cpp:45
 msgid "Copy from"
 msgstr "Copiază din"
 
@@ -893,7 +893,7 @@ msgstr "Copiază din"
 msgid "Copy from URL"
 msgstr "Copiază din URL"
 
-#: svnfrontend/svnactions.cpp:2253 svnfrontend/svnactions.cpp:2278
+#: svnfrontend/svnactions.cpp:2252 svnfrontend/svnactions.cpp:2277
 msgid "Copy or Moving entries"
 msgstr "Copiază sau mută intrări"
 
@@ -905,15 +905,15 @@ msgstr "Drepturi de autor (c) 2005-2009 Rajko Albrecht"
 msgid "Could not change to folder %1\n"
 msgstr "Nu s-a putut schimba pe dosarul %1\n"
 
-#: kdesvn.cpp:179
+#: kdesvn.cpp:178
 msgid "Could not find our part"
 msgstr "Nu s-a găsit componenta noastră"
 
-#: kdesvn.cpp:170
+#: kdesvn.cpp:169
 msgid "Could not load the part:\n"
 msgstr "Nu s-a putut încărca componenta:\n"
 
-#: kdesvnview.cpp:179
+#: kdesvnview.cpp:182
 msgid "Could not open repository"
 msgstr "Nu s-a putut deschide depozitul"
 
@@ -921,11 +921,11 @@ msgstr "Nu s-a putut deschide depozitul"
 msgid "Could not open tempfile %1 for writing."
 msgstr "Nu s-a putut deschide pentru scriere fișierul temporar %1."
 
-#: kiosvn/kiosvn.cpp:427
+#: kiosvn/kiosvn.cpp:431
 msgid "Could not open temporary file"
 msgstr "Nu s-a putut deschide fișierul temporar"
 
-#: kdesvn.cpp:225
+#: kdesvn.cpp:217
 msgid "Could not open url %1"
 msgstr "Nu s-a putut deschide adresa URL %1"
 
@@ -933,7 +933,7 @@ msgstr "Nu s-a putut deschide adresa URL %1"
 msgid "Could not retrieve conflict information - giving up."
 msgstr "Nu se pot prelua detaliile conflictului - se renunță."
 
-#: kiosvn/kiosvn.cpp:451
+#: kiosvn/kiosvn.cpp:455
 msgid "Could not retrieve data for write."
 msgstr "Nu s-au putut prelua datele pentru scriere."
 
@@ -946,11 +946,11 @@ msgstr ""
 "Nu s-au putut prelua jurnalele, cauza:\n"
 "%1"
 
-#: svnfrontend/maintreewidget.cpp:2058
+#: svnfrontend/maintreewidget.cpp:2075
 msgid "Could not retrieve repository of working copy."
 msgstr "Nu se poate prelua depozitul copiei de lucru."
 
-#: svnfrontend/maintreewidget.cpp:2246
+#: svnfrontend/maintreewidget.cpp:2263
 msgid "Could not retrieve repository."
 msgstr "Nu s-a putut prelua depozitul."
 
@@ -966,31 +966,31 @@ msgstr ""
 "Procesul s-a oprit cu mesajul:\n"
 "%2"
 
-#: kiosvn/kiosvn.cpp:421
+#: kiosvn/kiosvn.cpp:425
 msgid "Could not write to existing item."
 msgstr "Nu s-a putut scrie pe elementul existent."
 
-#: svnfrontend/maintreewidget.cpp:515
+#: svnfrontend/maintreewidget.cpp:517
 msgid "Create a copy of current item"
 msgstr "Creează o copie a elementului curent"
 
-#: svnfrontend/maintreewidget.cpp:545
+#: svnfrontend/maintreewidget.cpp:547
 msgid "Create a new folder"
 msgstr "Creează un dosar nou"
 
-#: kdesvn.cpp:121
+#: kdesvn.cpp:122
 msgid "Create and open new repository"
 msgstr "Creează și deschide un nou depozit"
 
-#: kdesvn.cpp:122
+#: kdesvn.cpp:123
 msgid "Create and opens a new local subversion repository"
 msgstr "Creează și deschide un nou depozit subversion local"
 
-#: rc.cpp:297
+#: rc.cpp:291
 msgid "Create main folders"
 msgstr "Creează dosarele principale"
 
-#: rc.cpp:264 kdesvnview.cpp:242
+#: rc.cpp:258 kdesvnview.cpp:245
 msgid "Create new repository"
 msgstr "Creează un depozit nou"
 
@@ -998,11 +998,11 @@ msgstr "Creează un depozit nou"
 msgid "Create subdir %1 on import"
 msgstr "Creare sub-director %1 la importare"
 
-#: rc.cpp:291
+#: rc.cpp:285
 msgid "Create trunk, tags and branches folder"
 msgstr "Creează trunchiul, etichetele și directorul de ramuri"
 
-#: svnfrontend/svnactions.cpp:1003 svnfrontend/svnactions.cpp:2351
+#: svnfrontend/svnactions.cpp:1003 svnfrontend/svnactions.cpp:2350
 msgid "Creating list / check status"
 msgstr "Creare listă / verificare stare"
 
@@ -1023,19 +1023,19 @@ msgstr ""
 msgid "D %1"
 msgstr "D %1"
 
-#: rc.cpp:916
+#: rc.cpp:910
 msgid "Database"
 msgstr "Bază de date"
 
-#: svnfrontend/models/logitemmodel.cpp:212 rc.cpp:75 rc.cpp:195 rc.cpp:216
+#: svnfrontend/models/logitemmodel.cpp:212 rc.cpp:69 rc.cpp:189 rc.cpp:210
 msgid "Date"
 msgstr "Dată"
 
-#: rc.cpp:420
+#: rc.cpp:414
 msgid "Default utf-8"
 msgstr "Implicit utf-8"
 
-#: rc.cpp:99 rc.cpp:102
+#: rc.cpp:93 rc.cpp:96
 msgid "Delete all entries and settings for selected repository"
 msgstr "Șterge toate intrările și configurările din depozitul selectat"
 
@@ -1043,27 +1043,32 @@ msgstr "Șterge toate intrările și configurările din depozitul selectat"
 msgid "Delete and Commit"
 msgstr "Șterge și comite"
 
-#: rc.cpp:96
+#: rc.cpp:90
 msgid "Delete cache"
 msgstr "Șterge prestocarea"
 
-#: rc.cpp:90 rc.cpp:93
+#: rc.cpp:84 rc.cpp:87
 msgid "Delete cache entries for current selected repository"
 msgstr "Șterge intrările de prestocare pentru depozitul curent"
+
+#: svnfrontend/maintreewidget.cpp:583
+#, fuzzy
+msgid "Delete folder"
+msgstr "Șterge proprietate"
 
 #: svnfrontend/svnactions.cpp:1575
 msgid "Delete from repository"
 msgstr "Șterge din depozit"
 
-#: svnfrontend/propertiesdlg.cpp:123 svnfrontend/propertiesdlg.cpp:145
+#: svnfrontend/propertiesdlg.cpp:124 svnfrontend/propertiesdlg.cpp:146
 msgid "Delete property"
 msgstr "Șterge proprietate"
 
-#: svnfrontend/database/dboverview.cpp:162 rc.cpp:105
+#: svnfrontend/database/dboverview.cpp:162 rc.cpp:99
 msgid "Delete repository"
 msgstr "Șterge depozitul"
 
-#: svnfrontend/maintreewidget.cpp:578
+#: svnfrontend/maintreewidget.cpp:580
 msgid "Delete selected files/dirs"
 msgstr "Șterge fișierele/directoarele selectate"
 
@@ -1075,7 +1080,7 @@ msgstr "Șters"
 msgid "Deleted at revision %1"
 msgstr "Șters la revizia %1"
 
-#: rc.cpp:649
+#: rc.cpp:643
 msgid "Deleted items:"
 msgstr "Elemente șterse:"
 
@@ -1083,7 +1088,12 @@ msgstr "Elemente șterse:"
 msgid "Deleting %1."
 msgstr "Se șterge %1."
 
-#: svnfrontend/maintreewidget.cpp:580
+#: svnfrontend/maintreewidget.cpp:584
+#, fuzzy
+msgid "Deleting selected directories from repository"
+msgstr "Șterge fișierele și/sau directoarele selectate din depozit"
+
+#: svnfrontend/maintreewidget.cpp:582
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Șterge fișierele și/sau directoarele selectate din depozit"
 
@@ -1091,11 +1101,11 @@ msgstr "Șterge fișierele și/sau directoarele selectate din depozit"
 msgid "Deletion"
 msgstr "Ștergere"
 
-#: rc.cpp:381
+#: rc.cpp:375
 msgid "Destination folder:"
 msgstr "Dosarul destinație:"
 
-#: svnfrontend/maintreewidget.cpp:510
+#: svnfrontend/maintreewidget.cpp:512
 msgid "Details"
 msgstr "Detalii"
 
@@ -1107,7 +1117,7 @@ msgstr "Dezvoltator"
 msgid "Diff & Merge"
 msgstr "Diferențe & Fuzionare"
 
-#: svnfrontend/maintreewidget.cpp:602
+#: svnfrontend/maintreewidget.cpp:607
 msgid "Diff against HEAD"
 msgstr "Diferențiază față de HEAD"
 
@@ -1115,40 +1125,40 @@ msgstr "Diferențiază față de HEAD"
 msgid "Diff display"
 msgstr "Afișor de diferențe"
 
-#: rc.cpp:543
+#: rc.cpp:537
 msgid "Diff ignores all white spaces"
 msgstr "Diferențierea ignoră toate spațiile goale"
 
-#: rc.cpp:534
+#: rc.cpp:528
 msgid "Diff ignores content type"
 msgstr "Diferențierea ignoră tipul conținutului"
 
-#: rc.cpp:540
+#: rc.cpp:534
 msgid "Diff ignores white space changes"
 msgstr "Diferențierea ignoră modificarea spațiilor goale"
 
-#: svnfrontend/graphtree/revgraphview.cpp:815 rc.cpp:537
+#: svnfrontend/graphtree/revgraphview.cpp:815 rc.cpp:531
 msgid "Diff in revisiontree is recursive"
 msgstr "Diferențiere recursivă în arboreșcența reviziilor"
 
-#: rc.cpp:495
+#: rc.cpp:489
 #, fuzzy
 msgid "Diff item"
 msgstr "Diferențiază elemente"
 
-#: svnfrontend/maintreewidget.cpp:606 svnfrontend/maintreewidget.cpp:609
+#: svnfrontend/maintreewidget.cpp:611 svnfrontend/maintreewidget.cpp:614
 msgid "Diff items"
 msgstr "Diferențiază elemente"
 
-#: svnfrontend/maintreewidget.cpp:596 svnfrontend/maintreewidget.cpp:598
+#: svnfrontend/maintreewidget.cpp:601 svnfrontend/maintreewidget.cpp:603
 msgid "Diff local changes"
 msgstr "Diferențiază modificările locale"
 
-#: svnfrontend/svnlogdlgimp.cpp:508 rc.cpp:54
+#: svnfrontend/svnlogdlgimp.cpp:508 rc.cpp:48
 msgid "Diff previous"
 msgstr "Diferențe față de precedentul"
 
-#: svnfrontend/maintreewidget.cpp:640 rc.cpp:60
+#: svnfrontend/maintreewidget.cpp:645 rc.cpp:54
 msgid "Diff revisions"
 msgstr "Diferențiază reviziile"
 
@@ -1160,11 +1170,11 @@ msgstr "Diferențe față de precedentul"
 msgid "Diff to selected item"
 msgstr "Diferențe față de elementul selectat"
 
-#: svnfrontend/maintreewidget.cpp:607 svnfrontend/maintreewidget.cpp:610
+#: svnfrontend/maintreewidget.cpp:612 svnfrontend/maintreewidget.cpp:615
 msgid "Diff two items"
 msgstr "Diferențiază două elemente"
 
-#: svnfrontend/maintreewidget.cpp:597 svnfrontend/maintreewidget.cpp:599
+#: svnfrontend/maintreewidget.cpp:602 svnfrontend/maintreewidget.cpp:604
 msgid ""
 "Diff working copy against BASE (last checked out version) - doesn't require "
 "access to repository"
@@ -1172,7 +1182,7 @@ msgstr ""
 "Diferențiază copia de lucru cu BAZA (ultima versiune verificată) - nu "
 "necesită accesul la depozit"
 
-#: svnfrontend/maintreewidget.cpp:603
+#: svnfrontend/maintreewidget.cpp:608
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
@@ -1184,7 +1194,7 @@ msgstr ""
 msgid "Diff-process could not started, check command."
 msgstr "Procesul de diferențiere nu poate fi lansat, verificați comanda."
 
-#: rc.cpp:531
+#: rc.cpp:525
 msgid "DiffMergeSettings"
 msgstr "Configurări diferențiere fuzionare"
 
@@ -1192,23 +1202,23 @@ msgstr "Configurări diferențiere fuzionare"
 msgid "Diffing - hit cancel for abort"
 msgstr "Diferențiere - anulați pentru abandonare"
 
-#: rc.cpp:866
+#: rc.cpp:860
 msgid "Direction of revision tree"
 msgstr "Direcția arborelui de revizii"
 
-#: rc.cpp:288
+#: rc.cpp:282
 msgid "Disable automatic log file removal (BDB only)"
 msgstr "Dezactivează înlăturarea automată a fișierului jurnal (BDB numai)"
 
-#: rc.cpp:285
+#: rc.cpp:279
 msgid "Disable fsync at commit (BDB only)"
 msgstr "Dezactivează „fsync” la propagare (BDB numai)"
 
-#: svnfrontend/maintreewidget.cpp:507
+#: svnfrontend/maintreewidget.cpp:509
 msgid "Display Properties"
 msgstr "Afișează proprietățile"
 
-#: rc.cpp:857
+#: rc.cpp:851
 msgid "Display colored annotate"
 msgstr "Afișează colorat adnotările"
 
@@ -1216,15 +1226,15 @@ msgstr "Afișează colorat adnotările"
 msgid "Display details"
 msgstr "Arată detaliile"
 
-#: kdesvn_part.cpp:197 rc.cpp:851
+#: kdesvn_part.cpp:197 rc.cpp:845
 msgid "Display ignored files"
 msgstr "Afișează fișierele ignorate"
 
-#: svnfrontend/maintreewidget.cpp:508
+#: svnfrontend/maintreewidget.cpp:510
 msgid "Display last changes"
 msgstr "Afisează ultimele modificări"
 
-#: svnfrontend/maintreewidget.cpp:509
+#: svnfrontend/maintreewidget.cpp:511
 msgid "Display last changes as difference to previous commit."
 msgstr "Afișează ultimele modificări ca diferență față de ultima propagare."
 
@@ -1236,11 +1246,11 @@ msgstr "Afișează fișierele necunoscute"
 msgid "Display-process could not started, check command."
 msgstr "Procesul de afișare nu a putut fi lansat, verificați comanda."
 
-#: svnfrontend/maintreewidget.cpp:491
+#: svnfrontend/maintreewidget.cpp:493
 msgid "Displays the history log of selected item"
 msgstr "Afișează jurnalul istoricului elementului slectat"
 
-#: svnfrontend/maintreewidget.cpp:494 svnfrontend/maintreewidget.cpp:498
+#: svnfrontend/maintreewidget.cpp:496 svnfrontend/maintreewidget.cpp:500
 msgid "Displays the history log of selected item without following copies"
 msgstr ""
 "Afișează jurnalul istoricului elementului selectat fără copiile următoare"
@@ -1249,20 +1259,20 @@ msgstr ""
 msgid "Document to open"
 msgstr "Document de deschis"
 
-#: rc.cpp:682
+#: rc.cpp:676
 msgid "Don't display contextmenu in Konqueror"
 msgstr "Nu afișa meniul contextual în konqueror/dolphin"
 
-#: rc.cpp:688
+#: rc.cpp:682
 msgid "Don't display entries in toplevel action menu"
 msgstr "Nu afișa intrări în nivelul superior al meniului acțiuni"
 
-#: rc.cpp:111
+#: rc.cpp:105
 msgid "Don't update logcache on open"
 msgstr "Nu actualiza jurnalului de prestocare la deschidere"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:116
-#: svnfrontend/propertiesdlg.cpp:208 svnfrontend/propertiesdlg.cpp:257
+#: svnfrontend/propertiesdlg.cpp:214 svnfrontend/propertiesdlg.cpp:267
 msgid "Double property"
 msgstr "Proprietate dublă"
 
@@ -1270,43 +1280,43 @@ msgstr "Proprietate dublă"
 msgid "Download - hit cancel for abort"
 msgstr "Descărcare - anulați pentru abandonare"
 
-#: rc.cpp:363
+#: rc.cpp:357
 msgid "Dry run"
 msgstr ""
 
-#: kdesvnview.cpp:395
+#: kdesvnview.cpp:398
 msgid "Dump a repository"
 msgstr "Dump un depozit"
 
-#: kdesvn.cpp:128
+#: kdesvn.cpp:129
 msgid "Dump a subversion repository to a file"
 msgstr "Videază un depozit subversion într-un fișier"
 
-#: rc.cpp:126
+#: rc.cpp:120
 msgid "Dump file:"
 msgstr "Fișier dump:"
 
-#: kdesvnview.cpp:444
+#: kdesvnview.cpp:447
 msgid "Dump finished."
 msgstr "Dump terminat."
 
-#: rc.cpp:162
+#: rc.cpp:156
 msgid "Dump into:"
 msgstr "Dump în:"
 
-#: rc.cpp:156
+#: rc.cpp:150
 msgid "Dump repo"
 msgstr "Dump depozit"
 
-#: kdesvn.cpp:127
+#: kdesvn.cpp:128
 msgid "Dump repository to file"
 msgstr "Dump depozit într-un fișier"
 
-#: rc.cpp:171
+#: rc.cpp:165
 msgid "Dump revision range"
 msgstr "Dump un interval de revizii"
 
-#: kdesvnview.cpp:442
+#: kdesvnview.cpp:445
 msgid "Dumping a repository"
 msgstr "Dump un depozit"
 
@@ -1314,11 +1324,11 @@ msgstr "Dump un depozit"
 msgid "Edit property"
 msgstr "Editează proprietatea"
 
-#: rc.cpp:450
+#: rc.cpp:444
 msgid "Empty Depth"
 msgstr "Profunzime vidă"
 
-#: kiosvn/kiosvn.cpp:909
+#: kiosvn/kiosvn.cpp:913
 msgid "Empty logs"
 msgstr "Jurnale goale"
 
@@ -1330,23 +1340,23 @@ msgstr ""
 "S-a atins capătul documentului.\n"
 "Continuați de la început?"
 
-#: rc.cpp:27
+#: rc.cpp:21
 msgid "End revision"
 msgstr "Oprește revizia"
 
-#: rc.cpp:174
+#: rc.cpp:168
 msgid "End revision:"
 msgstr "Revizie finală:"
 
-#: rc.cpp:243
+#: rc.cpp:237
 msgid "Enter URL:"
 msgstr "Introduceți adresa URL:"
 
-#: rc.cpp:498
+#: rc.cpp:492
 msgid "Enter a log message"
 msgstr "Introduceți un mesaj pentru jurnal"
 
-#: rc.cpp:519
+#: rc.cpp:513
 msgid "Enter authentication info for"
 msgstr "Introduceți informația de autentificare pentru"
 
@@ -1354,7 +1364,7 @@ msgstr "Introduceți informația de autentificare pentru"
 msgid "Enter folder name:"
 msgstr "Introduceți denumirea dosarului:"
 
-#: svnfrontend/mergedlg_impl.cpp:201
+#: svnfrontend/mergedlg_impl.cpp:210
 msgid "Enter merge range"
 msgstr "Introduceți intervalul de fuzionare"
 
@@ -1370,7 +1380,7 @@ msgstr "Intrare"
 msgid "Error getting content"
 msgstr "Eroare la preluarea conținutului"
 
-#: svnfrontend/maintreewidget.cpp:1925
+#: svnfrontend/maintreewidget.cpp:1942
 msgid "Error getting entry to relocate"
 msgstr "Eroare la restabilirea intrării"
 
@@ -1399,11 +1409,11 @@ msgid "Execute subversion command (\"exec help\" for more information)"
 msgstr ""
 "Execută o comandă subversion (\"exec help\" pentru mai multe informații)"
 
-#: svnfrontend/maintreewidget.cpp:635 svnfrontend/svnactions.cpp:1649
+#: svnfrontend/maintreewidget.cpp:640 svnfrontend/svnactions.cpp:1649
 msgid "Export a repository"
 msgstr "Exportă un depozit"
 
-#: svnfrontend/maintreewidget.cpp:628
+#: svnfrontend/maintreewidget.cpp:633
 msgid "Export current repository path"
 msgstr "Exportă calea depozitului curent"
 
@@ -1423,15 +1433,15 @@ msgstr "Exportați un fișier?"
 msgid "External"
 msgstr "Extern"
 
-#: rc.cpp:590
+#: rc.cpp:584
 msgid "External diff display:"
 msgstr "Afișor de diferențe extern:"
 
-#: rc.cpp:564
+#: rc.cpp:558
 msgid "External merge program:"
 msgstr "Program de fuzionare extern:"
 
-#: rc.cpp:276
+#: rc.cpp:270
 msgid "FSFS"
 msgstr "FSFS"
 
@@ -1455,7 +1465,7 @@ msgstr "Se preia elementul extern în %1."
 msgid "File %1 exists - overwrite?"
 msgstr "Fișierul %1 există - se suprascrie?"
 
-#: rc.cpp:453
+#: rc.cpp:447
 msgid "Files Depth"
 msgstr "Profunzimea fișierelor"
 
@@ -1467,7 +1477,7 @@ msgstr "Completarea prestocării anulată."
 msgid "Filling log cache in background"
 msgstr "Completare jurnal de prestocare în fundal"
 
-#: svnfrontend/svnactions.cpp:2634
+#: svnfrontend/svnactions.cpp:2635
 msgid "Filling log cache in background finished."
 msgstr "Completarea jurnalului de prestocare terminată."
 
@@ -1495,7 +1505,7 @@ msgstr "Referință externă terminată la revizia %1."
 msgid "Finished external."
 msgstr "Referință externă terminată."
 
-#: svnfrontend/maintreewidget.cpp:645
+#: svnfrontend/maintreewidget.cpp:650
 msgid "Fold File Tree"
 msgstr "Pliază arboreșcența de fișiere"
 
@@ -1503,51 +1513,56 @@ msgstr "Pliază arboreșcența de fișiere"
 msgid "Folder"
 msgstr "Dosar"
 
-#: rc.cpp:147 rc.cpp:351
+#: rc.cpp:141 rc.cpp:345
 msgid "Force"
 msgstr "Forțează"
 
-#: kdesvn.cpp:146
+#: kdesvn.cpp:147
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
 "Forțează adăugarea de identități ssh la agentul ssh pentru utilizări "
 "viitoare."
 
-#: rc.cpp:426
+#: rc.cpp:420
 #, fuzzy
 msgid "Force delete of changed items"
 msgstr "Elemente locale modificate:"
 
-#: rc.cpp:348
+#: rc.cpp:342
 #, fuzzy
 msgid "Force delete on modified/unversioned items"
 msgstr "Forțează ștergerea fișierelor modificate/neversionate"
 
-#: rc.cpp:405 main.cpp:49
+#: rc.cpp:399 main.cpp:49
 msgid "Force operation"
 msgstr "Forțează operația"
 
-#: rc.cpp:84 rc.cpp:423 rc.cpp:708
+#: rc.cpp:78 rc.cpp:417 rc.cpp:702
 msgid "Form"
 msgstr "Formă"
 
-#: rc.cpp:414 rc.cpp:432
+#: rc.cpp:408 rc.cpp:426
 msgid "Form1"
 msgstr "Forma1"
 
-#: svnfrontend/maintreewidget.cpp:540
+#: svnfrontend/svnactions.cpp:2502
+#, fuzzy
+msgid "Found %1 modified items"
+msgstr "Culoarea pentru elementele modificate:"
+
+#: svnfrontend/maintreewidget.cpp:542
 msgid "Free existing lock on current item"
 msgstr "Deblochează elemntul curent"
 
-#: svnfrontend/maintreewidget.cpp:500
+#: svnfrontend/maintreewidget.cpp:502
 msgid "Full revision tree"
 msgstr "Arboreșcentă completă de revizie"
 
-#: rc.cpp:761
+#: rc.cpp:755
 msgid "Gain item info recursive"
 msgstr "Obține recursiv informațiile elementelor"
 
-#: kdesvn_part.cpp:371 rc.cpp:943
+#: kdesvn_part.cpp:371 rc.cpp:937
 msgid "General"
 msgstr "General"
 
@@ -1555,15 +1570,15 @@ msgstr "General"
 msgid "General Settings"
 msgstr "Configurări generale"
 
-#: rc.cpp:492
+#: rc.cpp:486
 msgid "Generates and display difference against repository of selected item"
 msgstr "Generează și afișează diferența față de depozit a elementului selectat"
 
-#: rc.cpp:30
+#: rc.cpp:24
 msgid "Get Logs"
 msgstr "Recuperează jurnalele"
 
-#: rc.cpp:758
+#: rc.cpp:752
 msgid "Get file details while remote listing"
 msgstr "Recuperează detaliile fișierelor la o listare distantă"
 
@@ -1595,15 +1610,15 @@ msgstr "Nici o intrare de jurnal obținută"
 msgid "Goto line"
 msgstr "Megi la linia"
 
-#: rc.cpp:201 rc.cpp:222
+#: rc.cpp:195 rc.cpp:216
 msgid "HEAD"
 msgstr "HEAD"
 
-#: rc.cpp:342
+#: rc.cpp:336
 msgid "Handle unrelated as related items"
 msgstr "Tratează elementele neînrudite ca înrudite"
 
-#: rc.cpp:830
+#: rc.cpp:824
 msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
@@ -1612,11 +1627,11 @@ msgstr ""
 "fișier, doriți să se afișeze o mică fereastră popup cu informații "
 "suplimentare despre acel fișier"
 
-#: rc.cpp:471
+#: rc.cpp:465
 msgid "Hide new items"
 msgstr "Ascunde elementele noi"
 
-#: rc.cpp:821
+#: rc.cpp:815
 msgid "Hide new items in commit box"
 msgstr "Ascunde elementele noi în căsuța de propagare"
 
@@ -1624,8 +1639,8 @@ msgstr "Ascunde elementele noi în căsuța de propagare"
 msgid "Hide unchanged files"
 msgstr "Ascunde fișierele nemodificate"
 
-#: svnfrontend/maintreewidget.cpp:490 svnfrontend/maintreewidget.cpp:493
-#: svnfrontend/maintreewidget.cpp:497
+#: svnfrontend/maintreewidget.cpp:492 svnfrontend/maintreewidget.cpp:495
+#: svnfrontend/maintreewidget.cpp:499
 msgid "History"
 msgstr "Istoric"
 
@@ -1633,15 +1648,15 @@ msgstr "Istoric"
 msgid "History of %1"
 msgstr "Istoricul lui %1"
 
-#: svnfrontend/maintreewidget.cpp:489
+#: svnfrontend/maintreewidget.cpp:491
 msgid "History of item"
 msgstr "Istoricul elementului"
 
-#: svnfrontend/maintreewidget.cpp:492 svnfrontend/maintreewidget.cpp:496
+#: svnfrontend/maintreewidget.cpp:494 svnfrontend/maintreewidget.cpp:498
 msgid "History of item ignoring copies"
 msgstr "Istoricul elementului ignorînd copiile"
 
-#: svnfrontend/maintreewidget.cpp:2141
+#: svnfrontend/maintreewidget.cpp:2158
 msgid "Hold CTRL key while click on selected item for unselect"
 msgstr ""
 "Apăsați tasta CTRL cînd faceți clic pe un element selecționat pentru a-l "
@@ -1651,23 +1666,23 @@ msgstr ""
 msgid "Host"
 msgstr "Gazdă"
 
-#: kdesvnview.cpp:287 kdesvnview.cpp:322 kdesvn.cpp:133
+#: kdesvnview.cpp:290 kdesvnview.cpp:325 kdesvn.cpp:134
 msgid "Hotcopy a repository"
 msgstr "Copiază la cald un depozit"
 
-#: kdesvn.cpp:134
+#: kdesvn.cpp:135
 msgid "Hotcopy a subversion repository to a new folder"
 msgstr "Copiază la cald un depozit subversion într-un dosar nou"
 
-#: kdesvnview.cpp:311
+#: kdesvnview.cpp:314
 msgid "Hotcopy finished."
 msgstr "Copiere la cald terminată."
 
-#: rc.cpp:510
+#: rc.cpp:504
 msgid "If checked commit will not release locks."
 msgstr "Dacă este bifat, comiterea nu va elibera fișierele blocate."
 
-#: rc.cpp:546
+#: rc.cpp:540
 msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
@@ -1675,7 +1690,7 @@ msgstr ""
 "Dacă trebuie utilizat un afișor și/sau generator extern de diferențe. Dacă "
 "nu este bifat se va utiliza funcția internă kdesvn pentru afișare."
 
-#: rc.cpp:120 rc.cpp:135
+#: rc.cpp:114 rc.cpp:129
 msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
@@ -1693,7 +1708,7 @@ msgstr ""
 "fi definită pe un director. O utilizare nerecursivă va eșua, o utilizare "
 "recursivă va defini proprietatea numai pe fișierele din director."
 
-#: rc.cpp:717
+#: rc.cpp:711
 msgid ""
 "If set check for updates on working copy when network is enabled on regular "
 "base"
@@ -1705,13 +1720,13 @@ msgstr ""
 "Dacă este definit, adaugă fișierele sau directoarele ce conțin modelele de "
 "ignorat"
 
-#: rc.cpp:679
+#: rc.cpp:673
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
 msgstr ""
 "Dacă este definit, kdesvn nu va afișa un meniu în meniul „Acțiuni” din "
 "konqueror/dolphin"
 
-#: rc.cpp:685
+#: rc.cpp:679
 msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "konqueror/dolphin"
@@ -1719,7 +1734,7 @@ msgstr ""
 "Dacă este definit, kdesvn nu va afișa acțiunile suplimentare în meniul "
 "„Acțiuni” din konqueror/dolphin"
 
-#: rc.cpp:303
+#: rc.cpp:297
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.4. This "
 "is only useful when svnqt is running with subversion 1.4 or above."
@@ -1728,7 +1743,7 @@ msgstr ""
 "versiunii 1.4. Aceasta nu este necesară decît dacă svnqt rulează cu o "
 "subversion posterior versiunii 1.4."
 
-#: rc.cpp:312
+#: rc.cpp:306
 msgid ""
 "If set, the repository created will compatible to subversion prior 1.5. This "
 "is only useful when svnqt is running with subversion 1.5 or above."
@@ -1737,7 +1752,7 @@ msgstr ""
 "versiunii 1.5. Aceasta nu este necesară decît dacă svnqt rulează cu o "
 "subversion posterior versiunii 1.5."
 
-#: rc.cpp:700
+#: rc.cpp:694
 msgid ""
 "If this flag is set, you're have a simple write support for existing items. "
 "Eg. you can open files in your editor and save them direct without checking "
@@ -1751,7 +1766,7 @@ msgstr ""
 "\n"
 "Folosiți această opțiune numai cînd sînteți sigur de ceea de faceți!"
 
-#: rc.cpp:294
+#: rc.cpp:288
 msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
@@ -1760,20 +1775,20 @@ msgstr ""
 "branches</tt> și <tt>/tags</tt>) va fi creată după deschiderea noului "
 "depozit."
 
-#: rc.cpp:144
+#: rc.cpp:138
 msgid "Ignore"
 msgstr "Ignoră"
 
-#: rc.cpp:345
+#: rc.cpp:339
 #, fuzzy
 msgid "Ignore ancestry"
 msgstr "Ignoră referințele externe"
 
-#: rc.cpp:258
+#: rc.cpp:252
 msgid "Ignore externals"
 msgstr "Ignoră referințele externe"
 
-#: rc.cpp:255
+#: rc.cpp:249
 msgid "Ignore externals while operation"
 msgstr "Ignoră referințele externe în timpul operației"
 
@@ -1789,7 +1804,7 @@ msgstr ""
 msgid "Ignore unknown node types"
 msgstr "Ignoră nodurile de tip necunoscut"
 
-#: svnfrontend/maintreewidget.cpp:588
+#: svnfrontend/maintreewidget.cpp:593
 msgid "Ignore/Unignore current item"
 msgstr "Ignoră/Nu ignora elementul curent"
 
@@ -1797,19 +1812,19 @@ msgstr "Ignoră/Nu ignora elementul curent"
 msgid "Ignored"
 msgstr "Ignorat"
 
-#: rc.cpp:456
+#: rc.cpp:450
 msgid "Immediate Depth"
 msgstr "Profunzime imediată"
 
-#: svnfrontend/maintreewidget.cpp:567
+#: svnfrontend/maintreewidget.cpp:569
 msgid "Import folder content into current url"
 msgstr "Importă conținutul unui director în adresa URL curentă"
 
-#: svnfrontend/maintreewidget.cpp:565
+#: svnfrontend/maintreewidget.cpp:567
 msgid "Import folders into current"
 msgstr "Importă directoare în directorul curent"
 
-#: svnfrontend/maintreewidget.cpp:2000 svnfrontend/maintreewidget.cpp:2004
+#: svnfrontend/maintreewidget.cpp:2017 svnfrontend/maintreewidget.cpp:2021
 msgid "Import log"
 msgstr "Jurnal de importare"
 
@@ -1821,11 +1836,11 @@ msgstr "Importare elemente"
 msgid "Incomplete"
 msgstr "Incomplet"
 
-#: rc.cpp:459
+#: rc.cpp:453
 msgid "Infinity Depth (recurse)"
 msgstr "Profunzime infinită (recursie)"
 
-#: kdesvn.cpp:151
+#: kdesvn.cpp:152
 msgid "Info about kdesvn part"
 msgstr "Informații despre componenta kdesvn"
 
@@ -1833,23 +1848,23 @@ msgstr "Informații despre componenta kdesvn"
 msgid "Infolist"
 msgstr "Listă de informații"
 
-#: rc.cpp:507
+#: rc.cpp:501
 msgid "Insert Textfile"
 msgstr "Inserează fișier text"
 
-#: kdesvnview.cpp:489
+#: kdesvnview.cpp:492
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%v intrări din jurnal fără prestocare inserate pentru %m."
 
-#: rc.cpp:300
+#: rc.cpp:294
 msgid "Is created repository compatible to subversion prior 1.4"
 msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.4"
 
-#: rc.cpp:309
+#: rc.cpp:303
 msgid "Is created repository compatible to subversion prior 1.5"
 msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.5"
 
-#: rc.cpp:318
+#: rc.cpp:312
 msgid "Is created repository compatible to subversion prior 1.6"
 msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.6"
 
@@ -1857,27 +1872,27 @@ msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.6"
 msgid "Issuer name"
 msgstr "Numele emitentului"
 
-#: rc.cpp:48
+#: rc.cpp:42
 msgid "Item"
 msgstr "Element"
 
-#: rc.cpp:661
+#: rc.cpp:655
 msgid "Item needs lock:"
 msgstr "Elemente necesitînd blocare:"
 
-#: rc.cpp:848
+#: rc.cpp:842
 msgid "Items sortorder is case sensitive"
 msgstr "Ordinea de sortare a elementelor este sensibilă la majuscule"
 
-#: rc.cpp:360
+#: rc.cpp:354
 msgid "Just dry run without modifications"
 msgstr "Pornire în gol fără modificări"
 
-#: rc.cpp:705
+#: rc.cpp:699
 msgid "KIO can overwrite"
 msgstr "KIO poate suprascrie"
 
-#: rc.cpp:691
+#: rc.cpp:685
 msgid "KIO operations use standard logmessage"
 msgstr "Operațiunile KIO utilizează jurnalul standard"
 
@@ -1885,12 +1900,12 @@ msgstr "Operațiunile KIO utilizează jurnalul standard"
 msgid "Kdesvn Handbook"
 msgstr "Îndrumar Kdesvn"
 
-#: rc.cpp:429
+#: rc.cpp:423
 #, fuzzy
 msgid "Keep local copies"
 msgstr "Păstrează blocările"
 
-#: rc.cpp:513
+#: rc.cpp:507
 msgid "Keep locks"
 msgstr "Păstrează blocările"
 
@@ -1914,7 +1929,7 @@ msgstr ""
 "LastChangedRevision</b> Ultima revizie la care obiectul s-a schimbat."
 "<br><b>Id</b> Un sumar compact al celor 4 cuvinte cheie precedente."
 
-#: rc.cpp:87
+#: rc.cpp:81
 msgid "Known repositories"
 msgstr "Depozite cunoscute"
 
@@ -1945,11 +1960,11 @@ msgstr "Ultima propagare"
 msgid "Last revision"
 msgstr "Ultima revizie"
 
-#: rc.cpp:501
+#: rc.cpp:495
 msgid "Last used log messages"
 msgstr "Ultimele mesaje utilizate din jurnal"
 
-#: rc.cpp:869
+#: rc.cpp:863
 msgid "Left to right"
 msgstr "De la stînga la dreapta"
 
@@ -1957,51 +1972,51 @@ msgstr "De la stînga la dreapta"
 msgid "Limit log output to <number>"
 msgstr "Limitează afișarea jurnalului la <number>"
 
-#: rc.cpp:69
+#: rc.cpp:63
 msgid "Line"
 msgstr "Linie"
 
-#: rc.cpp:63
+#: rc.cpp:57
 msgid "List entries"
 msgstr "Listează intrări"
 
-#: rc.cpp:812
+#: rc.cpp:806
 msgid "List items next commit will send or not"
 msgstr "Listează elementele pe care viitoarea propagare le va trimite sau nu"
 
-#: svnfrontend/propertiesdlg.cpp:120
+#: svnfrontend/propertiesdlg.cpp:121
 msgid "List of properties set"
 msgstr "Lista proprietăților definite"
 
-#: kdesvn.cpp:140
+#: kdesvn.cpp:141
 msgid "Load a dump file into a repository."
 msgstr "Încarcă un fișier dump într-un depozit."
 
-#: kdesvn.cpp:139
+#: kdesvn.cpp:140
 msgid "Load dump into repository"
 msgstr "Încarcă un dump într-un depozit"
 
-#: rc.cpp:123
+#: rc.cpp:117
 msgid "Load into folder:"
 msgstr "Încarcă în dosarul:"
 
-#: rc.cpp:129
+#: rc.cpp:123
 msgid "Load into repository:"
 msgstr "Încarcă în depozitul:"
 
-#: kdesvn.cpp:271
+#: kdesvn.cpp:263
 msgid "Load last opened URL on start"
 msgstr "Încarcă la pornire ultima adresă URL deschisă"
 
-#: kdesvnview.cpp:378
+#: kdesvnview.cpp:381
 msgid "Loading a dump into a repository."
 msgstr "Se încarcă un dump într-un depozit."
 
-#: kdesvnview.cpp:380
+#: kdesvnview.cpp:383
 msgid "Loading dump finished."
 msgstr "Încărcare dump terminată."
 
-#: rc.cpp:658
+#: rc.cpp:652
 msgid "Local changed items:"
 msgstr "Elemente locale modificate:"
 
@@ -2017,7 +2032,7 @@ msgstr "Modificat local"
 msgid "Lock comment"
 msgstr "Comentariu de blocare"
 
-#: svnfrontend/maintreewidget.cpp:536
+#: svnfrontend/maintreewidget.cpp:538
 msgid "Lock current items"
 msgstr "Blochează elementele curente"
 
@@ -2025,7 +2040,7 @@ msgstr "Blochează elementele curente"
 msgid "Lock failed"
 msgstr "Blocare eșuată"
 
-#: svnfrontend/maintreewidget.cpp:1222
+#: svnfrontend/maintreewidget.cpp:1229
 msgid "Lock message"
 msgstr "Mesaj de bloacare"
 
@@ -2037,7 +2052,7 @@ msgstr "Blochează jetonul"
 msgid "Locked by"
 msgstr "Blocat de către"
 
-#: rc.cpp:637
+#: rc.cpp:631
 msgid "Locked items:"
 msgstr "Elemente blocate:"
 
@@ -2053,7 +2068,7 @@ msgstr "Blocare"
 msgid "Log cache holds %1 logentries and consumes %2 on disk."
 msgstr "Jurnalul de prestocare conține %1 intrări și ocupă %2 spațiu pe disc."
 
-#: rc.cpp:800
+#: rc.cpp:794
 msgid "Log follows node changes"
 msgstr "Intrările din jurnal inregistrează modificările nodului"
 
@@ -2061,7 +2076,7 @@ msgstr "Intrările din jurnal inregistrează modificările nodului"
 msgid "Log message for revision"
 msgstr "Mesajul jurnalului pentru revizie"
 
-#: rc.cpp:955
+#: rc.cpp:949
 msgid "Logcache"
 msgstr "Jurnal prestocare"
 
@@ -2069,7 +2084,7 @@ msgstr "Jurnal prestocare"
 msgid "Logmessage for revision %1"
 msgstr "Mesajul jurnalului pentru revizia %1"
 
-#: rc.cpp:809
+#: rc.cpp:803
 msgid "Logs always reads list of changed files"
 msgstr "Intrările din jurnal citesc mereu lista fișierelor modificate"
 
@@ -2085,29 +2100,29 @@ msgstr "Efectuează operația recursiv."
 msgid "Making update - hit cancel for abort"
 msgstr "Actualizare - anulați pentru abandonare"
 
-#: rc.cpp:474
+#: rc.cpp:468
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr ""
 "Marchează toate ca noi, ex: elemente neversionate pentru adăugare și "
 "comitere."
 
-#: rc.cpp:634
+#: rc.cpp:628
 msgid "Mark changed and locked items colored"
 msgstr "Colorează elementele marcate ca modificate sau blocate"
 
-#: rc.cpp:845
+#: rc.cpp:839
 msgid "Mark item status with icon overlay"
 msgstr "Marchează starea elementului cu o pictogramă suprapusă"
 
-#: svnfrontend/maintreewidget.cpp:583
+#: svnfrontend/maintreewidget.cpp:588
 msgid "Mark resolved"
 msgstr "Marchează ca rezolvat"
 
-#: rc.cpp:836
+#: rc.cpp:830
 msgid "Mark subversion states with an overlayed icon"
 msgstr "Marchează stările subversion cu o pictogramă suprapusă"
 
-#: svnfrontend/maintreewidget.cpp:584
+#: svnfrontend/maintreewidget.cpp:589
 msgid "Marking files or dirs resolved"
 msgstr "Marchează fișierele sau directoarele ca rezolvate"
 
@@ -2115,15 +2130,15 @@ msgstr "Marchează fișierele sau directoarele ca rezolvate"
 msgid "Marking resolved"
 msgstr "Marchează ca rezolvat"
 
-#: rc.cpp:854
+#: rc.cpp:848
 msgid "Maximum logmessages in history:"
 msgstr "Numărul maxim de mesaje din jurnal în istoric:"
 
-#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125 rc.cpp:249
+#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:125 rc.cpp:243
 msgid "May existing unversioned items ovewritten"
 msgstr "Elementele existente neversionate pot fi suprascrise"
 
-#: svnfrontend/maintreewidget.cpp:1771
+#: svnfrontend/maintreewidget.cpp:1787
 msgid "May not make subdirs of a file"
 msgstr "Nu poate crea subdirectoare la un fișier"
 
@@ -2131,20 +2146,20 @@ msgstr "Nu poate crea subdirectoare la un fișier"
 msgid "May only switch one url at time!"
 msgstr "Adresele URL pot fi schimbate pe rînd!"
 
-#: svnfrontend/maintreewidget.cpp:615 svnfrontend/maintreewidget.cpp:1872
-#: svnfrontend/svnactions.cpp:2184
+#: svnfrontend/maintreewidget.cpp:620 svnfrontend/maintreewidget.cpp:1888
+#: svnfrontend/svnactions.cpp:2183
 msgid "Merge"
 msgstr "Fuzionează"
 
-#: rc.cpp:336
+#: rc.cpp:330
 msgid "Merge parameter"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:614
+#: svnfrontend/maintreewidget.cpp:619
 msgid "Merge two revisions"
 msgstr "Fuzionează două revizii"
 
-#: svnfrontend/maintreewidget.cpp:616
+#: svnfrontend/maintreewidget.cpp:621
 msgid "Merge two revisions of this entry into itself"
 msgstr "Fuzionează două revizii ale acestei intrări în ea însăși"
 
@@ -2152,11 +2167,11 @@ msgstr "Fuzionează două revizii ale acestei intrări în ea însăși"
 msgid "Merge-process could not started, check command."
 msgstr "Procesul de fuzionare nu poate fi lansat, verificați comanda."
 
-#: svnfrontend/maintreewidget.cpp:619
+#: svnfrontend/maintreewidget.cpp:624
 msgid "Merge..."
 msgstr "Fuzionare..."
 
-#: rc.cpp:324
+#: rc.cpp:318
 msgid "MergeSettings"
 msgstr "Configurare fuziune"
 
@@ -2164,7 +2179,7 @@ msgstr "Configurare fuziune"
 msgid "Merged"
 msgstr "Fuzionat"
 
-#: svnfrontend/svnactions.cpp:2184
+#: svnfrontend/svnactions.cpp:2183
 msgid "Merging items"
 msgstr "Fuzionare elemente"
 
@@ -2172,11 +2187,11 @@ msgstr "Fuzionare elemente"
 msgid "Message"
 msgstr "Mesaj"
 
-#: rc.cpp:670
+#: rc.cpp:664
 msgid "Minimum log lines to show:"
 msgstr "Numărul minim de linii de afișat din jurnal:"
 
-#: rc.cpp:655
+#: rc.cpp:649
 msgid "Missed items:"
 msgstr "Elemente lipsă:"
 
@@ -2184,7 +2199,7 @@ msgstr "Elemente lipsă:"
 msgid "Missing"
 msgstr "Lipsește"
 
-#: svnfrontend/propertiesdlg.cpp:158
+#: svnfrontend/propertiesdlg.cpp:159
 msgid "Missing SVN link"
 msgstr "Lipsește legătura SVN"
 
@@ -2204,11 +2219,12 @@ msgstr "Starea modificată conține modificări fuzionate."
 msgid "Modify (content or property)"
 msgstr "Modifică (proprietate sau conținut)"
 
-#: svnfrontend/propertiesdlg.cpp:53
+#: svnfrontend/propertiesdlg.cpp:54
 msgid "Modify properties"
 msgstr "Modifică proprietățile"
 
-#: svnfrontend/propertiesdlg.cpp:122
+#: svnfrontend/propertiesdlg.cpp:123 svnfrontend/propertiesdlg.cpp:202
+#: svnfrontend/propertiesdlg.cpp:253
 msgid "Modify property"
 msgstr "Modifică proprietate"
 
@@ -2216,19 +2232,19 @@ msgstr "Modifică proprietate"
 msgid "Move/Rename file/dir"
 msgstr "Mută/Redenumește fișier/director"
 
-#: svnfrontend/maintreewidget.cpp:513
+#: svnfrontend/maintreewidget.cpp:515
 msgid "Moves or renames current item"
 msgstr "Mută sau redenumește elementul curent"
 
-#: svnfrontend/svnactions.cpp:2226
+#: svnfrontend/svnactions.cpp:2225
 msgid "Moving entries"
 msgstr "Mutare intrări"
 
-#: svnfrontend/svnactions.cpp:2208
+#: svnfrontend/svnactions.cpp:2207
 msgid "Moving/Rename item "
 msgstr "Mută/Redenumește element"
 
-#: rc.cpp:192
+#: rc.cpp:186
 msgid "N&umber"
 msgstr "N&umăr"
 
@@ -2236,7 +2252,7 @@ msgstr "N&umăr"
 msgid "Name"
 msgstr "Denumire"
 
-#: svnfrontend/maintreewidget.cpp:2150
+#: svnfrontend/maintreewidget.cpp:2167
 msgid "Navigation"
 msgstr "Navigare"
 
@@ -2244,11 +2260,11 @@ msgstr "Navigare"
 msgid "Needs update"
 msgstr "Necesită actualizare"
 
-#: svnfrontend/maintreewidget.cpp:268
+#: svnfrontend/maintreewidget.cpp:270
 msgid "Networked URL to open but networking is disabled!"
 msgstr "Adresa URL de deschis, dar rețeaua este dezacivată!"
 
-#: svnfrontend/maintreewidget.cpp:544 svnfrontend/svnactions.cpp:661
+#: svnfrontend/maintreewidget.cpp:546 svnfrontend/svnactions.cpp:661
 msgid "New folder"
 msgstr "Dosar nou"
 
@@ -2274,16 +2290,16 @@ msgstr ""
 "Fără jurnal de prestocare datorită bazei de date corupte și accesului "
 "interzis la rețea."
 
-#: rc.cpp:676
+#: rc.cpp:670
 msgctxt "no limit"
 msgid "No minimum"
 msgstr "Fără minimum"
 
-#: kdesvnview.cpp:205
+#: kdesvnview.cpp:208
 msgid "No repository open"
 msgstr "Nici un depozit deschis"
 
-#: svnfrontend/svnactions.cpp:2382
+#: svnfrontend/svnactions.cpp:2381
 msgid "No unversioned items found."
 msgstr "Nici un element neversionat găsit."
 
@@ -2291,7 +2307,7 @@ msgstr "Nici un element neversionat găsit."
 msgid "Normal"
 msgstr "Normal"
 
-#: svnfrontend/svnactions.cpp:2656
+#: svnfrontend/svnactions.cpp:2657
 msgid "Not checking for updates because networking is disabled"
 msgstr ""
 "Nu s-au putut verifica actualizările pentru că rețeaua este dezactivată."
@@ -2307,7 +2323,7 @@ msgstr ""
 "Nu s-a completat jurnalul de prestocare pentru că este dezactivat din "
 "configurarea acestui depozit."
 
-#: svnfrontend/svnactions.cpp:2601
+#: svnfrontend/svnactions.cpp:2602
 msgid "Not filling logcache because networking is disabled"
 msgstr ""
 "Nu s-a putut completa jurnalul de prestocare pentru că rețeaua este "
@@ -2317,19 +2333,19 @@ msgstr ""
 msgid "Not versioned"
 msgstr "Fără versiune"
 
-#: rc.cpp:640
+#: rc.cpp:634
 msgid "Not versioned items:"
 msgstr "Elemente fără versiune:"
 
-#: svnfrontend/maintreewidget.cpp:1566
+#: svnfrontend/maintreewidget.cpp:1582
 msgid "Nothing selected for delete"
 msgstr "Nimic selectat pentru șters"
 
-#: svnfrontend/maintreewidget.cpp:1218 svnfrontend/maintreewidget.cpp:1261
+#: svnfrontend/maintreewidget.cpp:1225 svnfrontend/maintreewidget.cpp:1268
 msgid "Nothing selected for unlock"
 msgstr "Nimic selectat pentru deblocare"
 
-#: kiosvn/kiosvn.cpp:865
+#: kiosvn/kiosvn.cpp:869
 msgid "Nothing to commit."
 msgstr "Nimic de comis."
 
@@ -2337,7 +2353,7 @@ msgstr "Nimic de comis."
 msgid "Nothing to merge."
 msgstr "Nimic de fuzionat."
 
-#: rc.cpp:213
+#: rc.cpp:207
 msgid "Number"
 msgstr "Număr"
 
@@ -2349,20 +2365,20 @@ msgstr "Vechea versiune a fișierului în conflict"
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 msgstr "Unul din <b>'nativ'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 
-#: svnfrontend/maintreewidget.cpp:2067
+#: svnfrontend/maintreewidget.cpp:2084
 msgid "Only in working copy possible."
 msgstr "Posibil numai în copia de lucru."
 
-#: svnfrontend/maintreewidget.cpp:2071
+#: svnfrontend/maintreewidget.cpp:2088
 msgid "Only on single folder possible"
 msgstr "Posibil numai într-un singur dosar"
 
-#: rc.cpp:366
+#: rc.cpp:360
 msgid "Only write mergeinfo"
 msgstr ""
 
-#: svnfrontend/maintreewidget.cpp:621 svnfrontend/maintreewidget.cpp:1035
-#: svnfrontend/maintreewidget.cpp:1105
+#: svnfrontend/maintreewidget.cpp:626 svnfrontend/maintreewidget.cpp:1042
+#: svnfrontend/maintreewidget.cpp:1112
 msgid "Open With..."
 msgstr "Deschide cu..."
 
@@ -2370,11 +2386,11 @@ msgstr "Deschide cu..."
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Deschide un fișier cu un certificat #PKCS12"
 
-#: rc.cpp:261
+#: rc.cpp:255
 msgid "Open after job"
 msgstr "Deschide după lucru"
 
-#: svnfrontend/maintreewidget.cpp:559
+#: svnfrontend/maintreewidget.cpp:561
 msgid "Open repository of working copy"
 msgstr "Deschide depozitul copiei de lucru"
 
@@ -2382,15 +2398,15 @@ msgstr "Deschide depozitul copiei de lucru"
 msgid "Open repository or working copy"
 msgstr "Deschide depozit sau copie de lucru"
 
-#: svnfrontend/maintreewidget.cpp:644
+#: svnfrontend/maintreewidget.cpp:649
 msgid "Opens all branches of the file tree"
 msgstr "Deschide toate ramurile arboreșcenței de fișiere"
 
-#: svnfrontend/maintreewidget.cpp:561
+#: svnfrontend/maintreewidget.cpp:563
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "Deschide depozitul din care copia de lucru curentă a fost recuperată"
 
-#: rc.cpp:504
+#: rc.cpp:498
 msgid "Or insert one of the last:"
 msgstr "Sau inserează unul din ultimele:"
 
@@ -2402,13 +2418,13 @@ msgstr "Autor inițial și menținător"
 msgid "Other..."
 msgstr "Altul..."
 
-#: svnfrontend/maintreewidget.cpp:533
+#: svnfrontend/maintreewidget.cpp:535
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 "Afișează conținutul fișierelor sau adreselor URL specificate la o revizie "
 "dată."
 
-#: svnfrontend/maintreewidget.cpp:523 svnfrontend/maintreewidget.cpp:526
+#: svnfrontend/maintreewidget.cpp:525 svnfrontend/maintreewidget.cpp:528
 msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
@@ -2416,11 +2432,11 @@ msgstr ""
 "Afișează conținutul fișierelor sau adreselor URL specificate cu informațiile "
 "lor de revizie și autor."
 
-#: svnfrontend/maintreewidget.cpp:530
+#: svnfrontend/maintreewidget.cpp:532
 msgid "Output the content of specified files or URLs."
 msgstr "Afișează conținutul fișierelor sau adreselor URL specificate."
 
-#: rc.cpp:333
+#: rc.cpp:327
 msgid "Output to:"
 msgstr "Ieșire la:"
 
@@ -2428,11 +2444,11 @@ msgstr "Ieșire la:"
 msgid "Overview about cache database content"
 msgstr "Prezentare generală a conținutului bazei de date de prestocare"
 
-#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124 rc.cpp:252
+#: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:124 rc.cpp:246
 msgid "Overwrite existing"
 msgstr "Suprascrie existentul"
 
-#: kiosvn/kiosvn.cpp:397
+#: kiosvn/kiosvn.cpp:401
 msgid "Overwriting existing items is disabled in settings."
 msgstr "Suprascrierea elementelor existente este dezactivată în configurări."
 
@@ -2440,7 +2456,7 @@ msgstr "Suprascrierea elementelor existente este dezactivată în configurări."
 msgid "Owner"
 msgstr "Proprietar"
 
-#: svnfrontend/maintreewidget.cpp:502
+#: svnfrontend/maintreewidget.cpp:504
 msgid "Partial revision tree"
 msgstr "Arboreșcență parțială de revizie"
 
@@ -2448,15 +2464,15 @@ msgstr "Arboreșcență parțială de revizie"
 msgid "Password"
 msgstr "Parolă"
 
-#: rc.cpp:522
+#: rc.cpp:516
 msgid "Password:"
 msgstr "Parolă:"
 
-#: rc.cpp:117 rc.cpp:132
+#: rc.cpp:111 rc.cpp:126
 msgid "Path to load the dump into (see contexthelp)"
 msgstr "Calea în acre trebuie încărcat dump-ul (vezi contexthelp)"
 
-#: rc.cpp:282
+#: rc.cpp:276
 msgid "Path to repository:"
 msgstr "Calea către depozit:"
 
@@ -2472,15 +2488,15 @@ msgstr "Verificați dacă 'dot' este instalat (pachetul GraphViz)."
 msgid "Please enter your password below."
 msgstr "Introduceți parola mai jos."
 
-#: rc.cpp:555
+#: rc.cpp:549
 msgid "Prefer external merge program"
 msgstr "Preferință pentru un program extern de fuzionare"
 
-#: rc.cpp:114
+#: rc.cpp:108
 msgid "Prefixes to filter out in revision tree"
 msgstr "Prefixe pentru filtrarea în arborescența de revizie"
 
-#: rc.cpp:33
+#: rc.cpp:27
 msgid "Previous entries"
 msgstr "Intrările precedente"
 
@@ -2513,11 +2529,11 @@ msgid "Property value:"
 msgstr "Valoarea proprietății:"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:111
-#: svnfrontend/propertiesdlg.cpp:204 svnfrontend/propertiesdlg.cpp:253
+#: svnfrontend/propertiesdlg.cpp:210 svnfrontend/propertiesdlg.cpp:263
 msgid "Protected property"
 msgstr "Proprietate protejată"
 
-#: rc.cpp:922 rc.cpp:937
+#: rc.cpp:916 rc.cpp:931
 msgid "Quick settings"
 msgstr "Configurări rapide"
 
@@ -2525,11 +2541,11 @@ msgstr "Configurări rapide"
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: rc.cpp:803
+#: rc.cpp:797
 msgid "Read detailed change lists"
 msgstr "Citiți lista detaliată a modificărilor"
 
-#: rc.cpp:806
+#: rc.cpp:800
 msgid ""
 "Reading lists of changed files may sometimes a little bit slow down things. "
 "But if this feature is switched off, kdesvn may fail generating differences "
@@ -2540,15 +2556,15 @@ msgstr ""
 "generarea diferențelor dintre nodurile modificate în vizualizatorul de "
 "jurnal."
 
-#: kdesvn.cpp:354
+#: kdesvn.cpp:343
 msgid "Ready"
 msgstr "Pregătit"
 
-#: svnfrontend/maintreewidget.cpp:1584 svnfrontend/svnactions.cpp:1575
+#: svnfrontend/maintreewidget.cpp:1600 svnfrontend/svnactions.cpp:1575
 msgid "Really delete these entries?"
 msgstr "Chiar doriți să ștergeți aceste intrări?"
 
-#: rc.cpp:411
+#: rc.cpp:405
 msgid "Really revert these entries to pristine state?"
 msgstr "Chiar doriți restaurarea acestor intrări la starea inițială?"
 
@@ -2572,20 +2588,20 @@ msgstr ""
 "Chiar curățati prestocarea pentru depozitul\n"
 "%1?"
 
-#: kdesvn.cpp:260
+#: kdesvn.cpp:252
 msgid "Recent opened URLs"
 msgstr "Adrese URL deschise recent"
 
-#: rc.cpp:372
+#: rc.cpp:366
 msgid "Record only"
 msgstr ""
 
 #: svnfrontend/fronthelpers/checkoutinfo_impl.cpp:119
-#: ksvnwidgets/depthselector.cpp:44 rc.cpp:339
+#: ksvnwidgets/depthselector.cpp:44 rc.cpp:333
 msgid "Recursive"
 msgstr "Recursiv"
 
-#: svnfrontend/maintreewidget.cpp:564
+#: svnfrontend/maintreewidget.cpp:566
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
@@ -2593,15 +2609,15 @@ msgstr ""
 "Curăță copia de lucru curentă în mod recursiv, deblocînd fișierele, reluînd "
 "operațiunile neterminate, etc."
 
-#: svnfrontend/maintreewidget.cpp:638
+#: svnfrontend/maintreewidget.cpp:643
 msgid "Refresh"
 msgstr "Împrospătează"
 
-#: svnfrontend/maintreewidget.cpp:637
+#: svnfrontend/maintreewidget.cpp:642
 msgid "Refresh view"
 msgstr "Împrospătează afișarea"
 
-#: rc.cpp:357
+#: rc.cpp:351
 #, fuzzy
 msgid "Reintegrate merge"
 msgstr "Actualizare modul extern"
@@ -2610,17 +2626,17 @@ msgstr "Actualizare modul extern"
 msgid "Reject"
 msgstr "Respinge"
 
-#: kdesvn.cpp:274
+#: kdesvn.cpp:266
 msgid "Reload last opened url if no one is given on commandline"
 msgstr ""
 "Reîncarcă ultima adresă URL deschisă dacă nici una nu este specificată în "
 "linia de comandă"
 
-#: svnfrontend/maintreewidget.cpp:550
+#: svnfrontend/maintreewidget.cpp:552
 msgid "Relocate current working copy url"
 msgstr "Restabilește adresa URL a copiei de lucru curente"
 
-#: svnfrontend/maintreewidget.cpp:1932
+#: svnfrontend/maintreewidget.cpp:1949
 msgid "Relocate path %1"
 msgstr "Restabilește calea %1"
 
@@ -2632,11 +2648,11 @@ msgstr "Restabilește depozitul la noua adresă URL"
 msgid "Relocate url"
 msgstr "Restabilire URL"
 
-#: svnfrontend/maintreewidget.cpp:551
+#: svnfrontend/maintreewidget.cpp:553
 msgid "Relocate url of current working copy path to other url"
 msgstr "Restabilește adresa URL a copiei de lucru curente la altă adresă URL"
 
-#: rc.cpp:643
+#: rc.cpp:637
 msgid "Remote changed items:"
 msgstr "Elemente distante modificate:"
 
@@ -2648,7 +2664,7 @@ msgstr "Redenumește/mută"
 msgid "Renamed to %1 at revision %2"
 msgstr "Renumit în %1 la revizia %2"
 
-#: kiosvn/kiosvn.cpp:363
+#: kiosvn/kiosvn.cpp:367
 msgid "Renaming %1 to %2 succesfull"
 msgstr ""
 
@@ -2664,23 +2680,23 @@ msgstr "Înlocuit la revizia %1"
 msgid "Replacing %1."
 msgstr "Se înlocuiește"
 
-#: rc.cpp:949
+#: rc.cpp:943
 msgid "Repository"
 msgstr "Depozit"
 
-#: rc.cpp:108
+#: rc.cpp:102
 msgid "Repository Settings"
 msgstr "Configurări depozit"
 
-#: kdesvnview.cpp:133 kdesvnview.cpp:173
+#: kdesvnview.cpp:136 kdesvnview.cpp:176
 msgid "Repository opened"
 msgstr "Depozit deschis"
 
-#: rc.cpp:384
+#: rc.cpp:378
 msgid "Repository to copy:"
 msgstr "Depozit de copiat:"
 
-#: rc.cpp:159
+#: rc.cpp:153
 msgid "Repository to dump:"
 msgstr "Depozit către dump:"
 
@@ -2688,7 +2704,7 @@ msgstr "Depozit către dump:"
 msgid "Resolve"
 msgstr "Rezolvă"
 
-#: svnfrontend/maintreewidget.cpp:586
+#: svnfrontend/maintreewidget.cpp:591
 msgid "Resolve conflicts"
 msgstr "Rezolvă conflictele"
 
@@ -2717,11 +2733,11 @@ msgid "Retrieving infos - hit cancel for abort"
 msgstr "Preluare informații - anulați pentru abandonare"
 
 #: svnfrontend/svnactions.cpp:1784 svnfrontend/ccontextlistener.cpp:67
-#: rc.cpp:408
+#: rc.cpp:402
 msgid "Revert"
 msgstr "Revenire la starea inițială"
 
-#: svnfrontend/maintreewidget.cpp:581
+#: svnfrontend/maintreewidget.cpp:586
 msgid "Revert current changes"
 msgstr "Revenire la starea inițială"
 
@@ -2733,11 +2749,11 @@ msgstr "Restaurează intrările la starea inițială"
 msgid "Revert failed"
 msgstr "Revenirea la starea inițială a eșuat"
 
-#: rc.cpp:486
+#: rc.cpp:480
 msgid "Revert highlighted item"
 msgstr "Restaurează elementul evidențiat"
 
-#: rc.cpp:489
+#: rc.cpp:483
 #, fuzzy
 msgid "Revert item"
 msgstr "Se restaurează elementele la starea lor inițială"
@@ -2750,15 +2766,15 @@ msgstr "%1 restaurat la starea inițială."
 msgid "Reverting items"
 msgstr "Se restaurează elementele la starea lor inițială"
 
-#: rc.cpp:465
+#: rc.cpp:459
 msgid "Review affected items"
 msgstr "Trece în revistă elementele afectate"
 
-#: rc.cpp:815
+#: rc.cpp:809
 msgid "Review items before commit"
 msgstr "Treceți în revistă elemente eînainte să le comiteți"
 
-#: svnfrontend/models/logitemmodel.cpp:208 rc.cpp:72
+#: svnfrontend/models/logitemmodel.cpp:208 rc.cpp:66
 msgid "Revision"
 msgstr "Revizie"
 
@@ -2774,22 +2790,22 @@ msgstr "Arboreșcență revizii"
 msgid "Revision tree Settings"
 msgstr "Configurări arboreșcență revizii"
 
-#: rc.cpp:231
+#: rc.cpp:225
 msgid "RevisionButton"
 msgstr "Buton revizie"
 
-#: svnfrontend/maintreewidget.cpp:1150 svnfrontend/maintreewidget.cpp:1195
-#: svnfrontend/maintreewidget.cpp:1367 svnfrontend/maintreewidget.cpp:1454
-#: svnfrontend/maintreewidget.cpp:1524 svnfrontend/svnactions.cpp:1482
-#: rc.cpp:186
+#: svnfrontend/maintreewidget.cpp:1157 svnfrontend/maintreewidget.cpp:1202
+#: svnfrontend/maintreewidget.cpp:1374 svnfrontend/maintreewidget.cpp:1461
+#: svnfrontend/maintreewidget.cpp:1531 svnfrontend/svnactions.cpp:1482
+#: rc.cpp:180
 msgid "Revisions"
 msgstr "Revizii"
 
-#: rc.cpp:863
+#: rc.cpp:857
 msgid "Revisiontree Settings"
 msgstr "Configurări arbore de revizii"
 
-#: rc.cpp:875
+#: rc.cpp:869
 msgid "Right to left"
 msgstr "De la dreapta la stînga"
 
@@ -2801,21 +2817,21 @@ msgstr "Întoarce în sensul acelor de ceasornic"
 msgid "Rotate counter-clockwise"
 msgstr "Întoarce în sens contar acelor de ceasornic"
 
-#: rc.cpp:198
+#: rc.cpp:192
 msgid "S&TART"
 msgstr "S&TART"
 
-#: rc.cpp:219
+#: rc.cpp:213
 msgid "START"
 msgstr "START"
 
-#: svnfrontend/maintreewidget.cpp:941 svnfrontend/maintreewidget.cpp:2058
-#: svnfrontend/maintreewidget.cpp:2246 svnfrontend/commandexec.cpp:211
+#: svnfrontend/maintreewidget.cpp:947 svnfrontend/maintreewidget.cpp:2075
+#: svnfrontend/maintreewidget.cpp:2263 svnfrontend/commandexec.cpp:211
 #: svnfrontend/commandexec.cpp:333 svnfrontend/graphtree/revgraphview.cpp:959
 msgid "SVN Error"
 msgstr "Eroare SVN"
 
-#: svnfrontend/svnlogdlgimp.cpp:134 rc.cpp:21
+#: svnfrontend/svnlogdlgimp.cpp:134 rc.cpp:15
 msgid "SVN Log"
 msgstr "Jurnal SVN"
 
@@ -2847,32 +2863,32 @@ msgstr "Se analizează jurnalele pentru %1"
 msgid "Schedule"
 msgstr "Planificat"
 
-#: svnfrontend/maintreewidget.cpp:2144 rc.cpp:39 rc.cpp:42
+#: svnfrontend/maintreewidget.cpp:2161 rc.cpp:33 rc.cpp:36
 msgid "See context menu for more actions"
 msgstr "Vedeți menul contextual pentru acțiuni suplimentare"
 
-#: rc.cpp:468
+#: rc.cpp:462
 #, fuzzy
 msgid "Select all"
 msgstr "Selecționează elementul"
 
-#: svnfrontend/maintreewidget.cpp:629
+#: svnfrontend/maintreewidget.cpp:634
 msgid "Select browse revision"
 msgstr "Alegeți revizia de răsfoit"
 
-#: rc.cpp:204 rc.cpp:225
+#: rc.cpp:198 rc.cpp:219
 msgid "Select current working copy changes"
 msgstr "Selecționează modificările copiei de lucru curente"
 
-#: rc.cpp:435 rc.cpp:438
+#: rc.cpp:429 rc.cpp:432
 msgid "Select depth of operation"
 msgstr "Selectați profunzimea operației"
 
-#: rc.cpp:417
+#: rc.cpp:411
 msgid "Select encoding:"
 msgstr "Alegeți codarea de caractere:"
 
-#: rc.cpp:729
+#: rc.cpp:723
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
 "Specifică dacă se vor verifica actualizările cînd o copie de lucru este "
@@ -2882,7 +2898,7 @@ msgstr ""
 msgid "Select item"
 msgstr "Selecționează elementul"
 
-#: rc.cpp:477
+#: rc.cpp:471
 msgid "Select new items"
 msgstr "Selectează elementele noi"
 
@@ -2891,11 +2907,11 @@ msgstr "Selectează elementele noi"
 msgid "Select revision"
 msgstr "Alegeți o revizie"
 
-#: rc.cpp:57
+#: rc.cpp:51
 msgid "Select second revision with right mouse button"
 msgstr "Selectați a doua revizie cu butonul drept al șoricelului"
 
-#: rc.cpp:240
+#: rc.cpp:234
 msgid "Select target directory:"
 msgstr "Selecționați directorul destinație:"
 
@@ -2903,11 +2919,11 @@ msgstr "Selecționați directorul destinație:"
 msgid "Select textfile for insert"
 msgstr "Selectați fișierul text pentru inserare"
 
-#: rc.cpp:273
+#: rc.cpp:267
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
 msgstr "Selecționați tipul de stocare al depozitului  (FSFS sau Berkely DB)"
 
-#: rc.cpp:270
+#: rc.cpp:264
 msgid "Select type of storage"
 msgstr "Selecționează tipul de stocare"
 
@@ -2919,7 +2935,7 @@ msgstr "Raportați erori pentru kdesvn"
 msgid "Sending %1."
 msgstr "Se trimite %1."
 
-#: rc.cpp:552
+#: rc.cpp:546
 msgid ""
 "Set if merge with external program is preferred and not subversions merge"
 msgstr ""
@@ -2977,7 +2993,7 @@ msgstr "Stabilește versiunea de partea stîngă a diferenței"
 msgid "Set version as right side of diff"
 msgstr "Stabilește versiunea de partea dreaptă a diferenței"
 
-#: rc.cpp:824
+#: rc.cpp:818
 msgid "Settings"
 msgstr "Configurări"
 
@@ -2989,7 +3005,7 @@ msgstr "Configurări pentru %1"
 msgid "Settings for commandline and KIO execution"
 msgstr "Configurări pentru linia de comandă și execuțiile lui KIO"
 
-#: svnfrontend/maintreewidget.cpp:655
+#: svnfrontend/maintreewidget.cpp:660
 msgid "Settings for current repository"
 msgstr "Configurări pentru depozitul curent"
 
@@ -3002,11 +3018,11 @@ msgstr "Configurări pentru diferențe și fuzionare"
 msgid "Settings for timed jobs"
 msgstr "Configurări pentru %1"
 
-#: rc.cpp:567
+#: rc.cpp:561
 msgid "Setup an external program for conflict resolving"
 msgstr "Configurați un program extern pentru rezolvarea conflictelor"
 
-#: rc.cpp:593
+#: rc.cpp:587
 msgid "Setup an external program for merging"
 msgstr "Configurați un program extern pentru fuzionări"
 
@@ -3014,45 +3030,45 @@ msgstr "Configurați un program extern pentru fuzionări"
 msgid "Should files with unknown node types be ignored"
 msgstr "Fișierele unui nod de tip necunoscut ar trebui ignorate"
 
-#: rc.cpp:896
+#: rc.cpp:890
 msgid "Should kdesvn check content of logcache before starting the tree"
 msgstr ""
 "Ar trebui kdesvn să verifice conținutul jurnalului de prestocare înaintea "
 "generării arboreșcenței"
 
-#: rc.cpp:764
+#: rc.cpp:758
 msgid "Should kdesvn retrieves properties on selected item in repositories"
 msgstr ""
 "Ar trebui kdesvn să recupereze proprietățile elementului selecționat în "
 "depozite"
 
-#: rc.cpp:774
+#: rc.cpp:768
 msgid "Should subversion store passwords in default"
 msgstr "Subversion ar trebui să conserve parolele implicit"
 
-#: rc.cpp:818
+#: rc.cpp:812
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
 "Elementele neversionate ar trebui afișate în căsuța dialogului de propagare "
 "sau nu. "
 
-#: rc.cpp:664
+#: rc.cpp:658
 msgid "Show a small window containing the log after command executed"
 msgstr "Afișează o mică fereastră cu jurnalul execuției unei comenzi"
 
-#: kdesvn.cpp:155
+#: kdesvn.cpp:156
 msgid "Show database content"
 msgstr "Arată conținutul bazei de date"
 
-#: svnfrontend/maintreewidget.cpp:511
+#: svnfrontend/maintreewidget.cpp:513
 msgid "Show details about selected item"
 msgstr "Afișează detaliile elementului selecționat"
 
-#: rc.cpp:833
+#: rc.cpp:827
 msgid "Show file info"
 msgstr "Arată detaliile fișierului"
 
-#: rc.cpp:36
+#: rc.cpp:30
 msgid "Show from HEAD"
 msgstr "Arată din HEAD"
 
@@ -3064,25 +3080,25 @@ msgstr "Afișează linia"
 msgid "Show line number"
 msgstr "Afișează numărul liniei"
 
-#: rc.cpp:667
+#: rc.cpp:661
 msgid "Show log after executing a command"
 msgstr "Afișează jurnalul execuției unei comenzi"
 
-#: kdesvn.cpp:156
+#: kdesvn.cpp:157
 msgid "Show the content of logcache database"
 msgstr "Arată conținutul bazei de date de prestocare"
 
-#: svnfrontend/maintreewidget.cpp:501
+#: svnfrontend/maintreewidget.cpp:503
 msgid "Shows history of item as linked tree"
 msgstr "Afișează istoricul elementului ca un arbore înlănțuit"
 
-#: svnfrontend/maintreewidget.cpp:503
+#: svnfrontend/maintreewidget.cpp:505
 msgid "Shows history of item as linked tree for a revision range"
 msgstr ""
 "Afișează istoricul elementului ca un arbore înlănțuit pentru un interval de "
 "revizie"
 
-#: kdesvn.cpp:152
+#: kdesvn.cpp:153
 msgid "Shows info about the kdesvn plugin not the standalone app."
 msgstr "Afișează detalii despre modulul kdesvn, nu despre aplicația autonomă."
 
@@ -3090,7 +3106,7 @@ msgstr "Afișează detalii despre modulul kdesvn, nu despre aplicația autonomă
 msgid "Size"
 msgstr "Mărime"
 
-#: rc.cpp:827
+#: rc.cpp:821
 msgid "Size of Listviewicons"
 msgstr "Dimensiunea pictogramelor în listă"
 
@@ -3106,49 +3122,49 @@ msgstr "%1 omis."
 msgid "Skipped missing target %1."
 msgstr "S-a omis destinația lipsă %1."
 
-#: svnfrontend/maintreewidget.cpp:2076
+#: svnfrontend/maintreewidget.cpp:2093
 msgid "Sorry - internal error!"
 msgstr "Regrete - eroare internă!"
 
-#: rc.cpp:327
+#: rc.cpp:321
 msgid "Source 1:"
 msgstr "Sursa 1:"
 
-#: rc.cpp:330
+#: rc.cpp:324
 msgid "Source 2:"
 msgstr "Sursa 2:"
 
-#: rc.cpp:694
+#: rc.cpp:688
 msgid "Standard message:"
 msgstr "Mesaj standard:"
 
-#: rc.cpp:732
+#: rc.cpp:726
 msgid "Start check for updates when open a working copy"
 msgstr "Pornește verificarea de actualizări la deschiderea unei copii de lucru"
 
-#: kiosvn/kiosvn.cpp:405
+#: kiosvn/kiosvn.cpp:409
 msgid "Start checking out to temporary folder"
 msgstr ""
 
-#: rc.cpp:738
+#: rc.cpp:732
 msgid "Start fill log cache on open"
 msgstr "Începe completarea jurnalului de prestocare la deschidere"
 
-#: rc.cpp:735
+#: rc.cpp:729
 msgid "Start refresh the logcache for repository when networking enabled"
 msgstr ""
 "Pornește actualizarea jurnalului de prestocare a depozitului cînd rețeaua "
 "este activată"
 
-#: rc.cpp:24
+#: rc.cpp:18
 msgid "Start revision"
 msgstr "Pornește revizia"
 
-#: rc.cpp:177
+#: rc.cpp:171
 msgid "Start revision:"
 msgstr "Revizie inițială:"
 
-#: svnfrontend/fronthelpers/rangeinput_impl.cpp:189 rc.cpp:189
+#: svnfrontend/fronthelpers/rangeinput_impl.cpp:189 rc.cpp:183
 msgid "Start with revision"
 msgstr "Începe cu revizia"
 
@@ -3156,7 +3172,7 @@ msgstr "Începe cu revizia"
 msgid "Status"
 msgstr "Stare"
 
-#: svnfrontend/svnactions.cpp:1003 svnfrontend/svnactions.cpp:2351
+#: svnfrontend/svnactions.cpp:1003 svnfrontend/svnactions.cpp:2350
 msgid "Status / List"
 msgstr "Stare / Listă"
 
@@ -3168,31 +3184,31 @@ msgstr "Stare la revizia: %1."
 msgid "Status on external"
 msgstr "Stare externă"
 
-#: svnfrontend/maintreewidget.cpp:1230
+#: svnfrontend/maintreewidget.cpp:1237
 msgid "Steal lock?"
 msgstr "Depășiți blocarea?"
 
-#: svnfrontend/maintreewidget.cpp:786 svnfrontend/maintreewidget.cpp:1736
+#: svnfrontend/maintreewidget.cpp:792 svnfrontend/maintreewidget.cpp:1752
 msgid "Stop updating the logcache"
 msgstr "Oprește actualizarea jurnalului prestocării"
 
-#: rc.cpp:210
+#: rc.cpp:204
 msgid "Stop with revision"
 msgstr "Oprire la revizia"
 
-#: rc.cpp:528
+#: rc.cpp:522
 msgid "Store password"
 msgstr "Stochează parola"
 
-#: rc.cpp:780
+#: rc.cpp:774
 msgid "Store passwords for remote connections"
 msgstr "Conservă parolele pentru conexiunile distante"
 
-#: rc.cpp:791
+#: rc.cpp:785
 msgid "Store passwords into KDE Wallet"
 msgstr "Stochează parolele în gestionarul de portofel din KDE"
 
-#: rc.cpp:777
+#: rc.cpp:771
 msgid ""
 "Storing passwords is often a security problem. Kdesvn itself doesn't store "
 "any passwords, but the subversion itself inside the configuration area of "
@@ -3215,23 +3231,23 @@ msgstr ""
 "introdus. Acesta trebuie să conțină <b>%BUGID%</b> ce va fi înlocuit de "
 "numărul de referință al erorii."
 
-#: kdesvn_part.cpp:373 rc.cpp:913 rc.cpp:940
+#: kdesvn_part.cpp:373 rc.cpp:907 rc.cpp:934
 msgid "Subversion"
 msgstr "Subversion"
 
-#: rc.cpp:910
+#: rc.cpp:904
 msgid "Subversion Admin"
 msgstr "Administrator subversion"
 
-#: kdesvn_part.cpp:373 rc.cpp:726
+#: kdesvn_part.cpp:373 rc.cpp:720
 msgid "Subversion Settings"
 msgstr "Configurări Subversion"
 
-#: rc.cpp:934
+#: rc.cpp:928
 msgid "Subversion settings"
 msgstr "Configurări Subversion"
 
-#: rc.cpp:928 rc.cpp:973
+#: rc.cpp:922 rc.cpp:967
 msgid "Subversion toolbar"
 msgstr "Bara de unelte subversion"
 
@@ -3239,11 +3255,11 @@ msgstr "Bara de unelte subversion"
 msgid "Switch only on working copies!"
 msgstr "Schimbare numai între copiile de lucru!"
 
-#: svnfrontend/maintreewidget.cpp:546
+#: svnfrontend/maintreewidget.cpp:548
 msgid "Switch repository"
 msgstr "Schimbă depozitul"
 
-#: svnfrontend/maintreewidget.cpp:547
+#: svnfrontend/maintreewidget.cpp:549
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr "Schimbă calea depozitului copiei de lucru curente (\"svn switch\")"
 
@@ -3263,7 +3279,7 @@ msgstr "Destinația fuzionării trebuie să fie locală!"
 msgid "Target for merge must same type like sources!"
 msgstr "Destinația fuzionării trebuie să fie de același tip cu sursele!"
 
-#: kiosvn/kiosvn.cpp:417
+#: kiosvn/kiosvn.cpp:421
 msgid "Temporary checkout done."
 msgstr ""
 
@@ -3291,7 +3307,7 @@ msgstr ""
 msgid "The certificate is not yet valid."
 msgstr "Certificatul nu este încă valid."
 
-#: rc.cpp:369
+#: rc.cpp:363
 msgid ""
 "The merge isn't actually performed, but the mergeinfo for the revisions "
 "which would've been merged is recorded in the working copy"
@@ -3308,19 +3324,19 @@ msgstr ""
 "b> (sau cu mimetype absent) este tratat ca text. Orice altceva este tratat "
 "ca binar."
 
-#: rc.cpp:673
+#: rc.cpp:667
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single logwindow"
 msgstr ""
 "Numărul minim de linii ce trebuie să conțină o intrare din jurnal, înainte "
 "de-a fi afișată o singură fereastră jurnal de kdesvn"
 
-#: svnfrontend/svnactions.cpp:2533
+#: svnfrontend/svnactions.cpp:2534
 msgid "There are new items in repository"
 msgstr "Noi elemente sînt disponibile în depozit"
 
 #: svnfrontend/fronthelpers/propertylist.cpp:111
-#: svnfrontend/propertiesdlg.cpp:204 svnfrontend/propertiesdlg.cpp:253
+#: svnfrontend/propertiesdlg.cpp:210 svnfrontend/propertiesdlg.cpp:263
 msgid ""
 "This property may not set by users.\n"
 "Rejecting it."
@@ -3332,7 +3348,7 @@ msgstr ""
 msgid "Timed jobs"
 msgstr ""
 
-#: rc.cpp:878
+#: rc.cpp:872
 msgid "Top to bottom"
 msgstr "De sus în jos"
 
@@ -3344,7 +3360,7 @@ msgstr "Se transmite fișierul de date"
 msgid "Trust ssl certificate"
 msgstr "Certificat SSL de încredere"
 
-#: svnfrontend/maintreewidget.cpp:537
+#: svnfrontend/maintreewidget.cpp:539
 msgid "Try lock current item against changes from other users"
 msgstr ""
 "Încearcă blocarea elementului curent împotriva modificării de către ceilalți "
@@ -3364,7 +3380,7 @@ msgstr ""
 msgid "Type"
 msgstr "Tip"
 
-#: rc.cpp:267
+#: rc.cpp:261
 msgid "Type of repository:"
 msgstr "Tipul depozitului:"
 
@@ -3386,11 +3402,11 @@ msgstr ""
 msgid "UUID"
 msgstr "UUID"
 
-#: svnfrontend/propertiesdlg.cpp:143
+#: svnfrontend/propertiesdlg.cpp:144
 msgid "Undelete property"
 msgstr "Restaurează proprietate"
 
-#: svnfrontend/maintreewidget.cpp:643
+#: svnfrontend/maintreewidget.cpp:648
 msgid "Unfold File Tree"
 msgstr "Desfășoară arboreșcența de fișiere"
 
@@ -3398,7 +3414,7 @@ msgstr "Desfășoară arboreșcența de fișiere"
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: svnfrontend/maintreewidget.cpp:539
+#: svnfrontend/maintreewidget.cpp:541
 msgid "Unlock current items"
 msgstr "Deblochează elementele curente"
 
@@ -3410,11 +3426,11 @@ msgstr "Deblocare eșuată"
 msgid "Unlocked"
 msgstr "Deblocat"
 
-#: svnfrontend/maintreewidget.cpp:1264
+#: svnfrontend/maintreewidget.cpp:1271
 msgid "Unlocking items"
 msgstr "Deblochează elementele"
 
-#: rc.cpp:480
+#: rc.cpp:474
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr "Demarchează toate elementele neversionate spre a fi ignorate."
 
@@ -3422,7 +3438,7 @@ msgstr "Demarchează toate elementele neversionate spre a fi ignorate."
 msgid "Unselect item"
 msgstr "Deselecționează elementul"
 
-#: rc.cpp:483
+#: rc.cpp:477
 msgid "Unselect new items"
 msgstr "Deselectează elementele noi"
 
@@ -3430,11 +3446,11 @@ msgstr "Deselectează elementele noi"
 msgid "Unset version for diff"
 msgstr "Versiune nespecificată pentru diferențe"
 
-#: svnfrontend/maintreewidget.cpp:555
+#: svnfrontend/maintreewidget.cpp:557
 msgid "Unversioned"
 msgstr "Neversionat"
 
-#: svnfrontend/maintreewidget.cpp:591 svnfrontend/ccontextlistener.cpp:73
+#: svnfrontend/maintreewidget.cpp:596 svnfrontend/ccontextlistener.cpp:73
 msgid "Update"
 msgstr "Actualizează"
 
@@ -3450,65 +3466,65 @@ msgstr "Actualizare modul extern"
 msgid "Update finished."
 msgstr "Actualizare terminată."
 
-#: svnfrontend/maintreewidget.cpp:649 svnfrontend/maintreewidget.cpp:784
-#: svnfrontend/maintreewidget.cpp:1725 svnfrontend/maintreewidget.cpp:1741
+#: svnfrontend/maintreewidget.cpp:654 svnfrontend/maintreewidget.cpp:790
+#: svnfrontend/maintreewidget.cpp:1741 svnfrontend/maintreewidget.cpp:1757
 msgid "Update log cache"
 msgstr "Actualizează prestocarea jurnalului"
 
-#: svnfrontend/maintreewidget.cpp:650
+#: svnfrontend/maintreewidget.cpp:655
 msgid "Update the log cache for current repository"
 msgstr "Actualizează jurnalul prestocării pentru depozitul curent"
 
-#: svnfrontend/maintreewidget.cpp:590 svnfrontend/maintreewidget.cpp:653
+#: svnfrontend/maintreewidget.cpp:595 svnfrontend/maintreewidget.cpp:658
 msgid "Update to head"
 msgstr "Actualizare de antet"
 
-#: svnfrontend/maintreewidget.cpp:592
+#: svnfrontend/maintreewidget.cpp:597
 msgid "Update to revision..."
 msgstr "Actualizare la reviziea..."
 
-#: rc.cpp:794
+#: rc.cpp:788
 msgid "Use an internal password cache"
 msgstr "Utilizează o zonă internă de prestocare pentru parole"
 
-#: rc.cpp:168
+#: rc.cpp:162
 msgid "Use deltas"
 msgstr "Utilizează diferențiale"
 
-#: rc.cpp:549
+#: rc.cpp:543
 msgid "Use external diff display"
 msgstr "Utilizează un afișor de diferențe extern"
 
-#: rc.cpp:378
+#: rc.cpp:372
 #, fuzzy
 msgid "Use external merge"
 msgstr "Actualizare modul extern"
 
-#: rc.cpp:375
+#: rc.cpp:369
 msgid "Use external merge not subversions merge"
 msgstr "Utilizează fuziune externă, nu fuziunea din subversion"
 
-#: rc.cpp:797
+#: rc.cpp:791
 msgid "Use internal password cache"
 msgstr "Utilizează prestocarea de parole internă"
 
-#: rc.cpp:860
+#: rc.cpp:854
 msgid "Use navigation panel"
 msgstr "Utilizează panoul de navigare"
 
-#: rc.cpp:153
+#: rc.cpp:147
 msgid "Use post-commit hook"
 msgstr "Utilizează o buclă de post-propagare"
 
-#: rc.cpp:150
+#: rc.cpp:144
 msgid "Use pre-commit hook"
 msgstr "Utilizează o buclă de pre-propagare"
 
-#: rc.cpp:525
+#: rc.cpp:519
 msgid "Username:"
 msgstr "Utilizator:"
 
-#: rc.cpp:138
+#: rc.cpp:132
 msgid "Uuid action"
 msgstr "Acțiune UUID"
 
@@ -3524,15 +3540,15 @@ msgstr "Valid pînă la"
 msgid "Value"
 msgstr "Valoare"
 
-#: svnfrontend/propertiesdlg.cpp:119
+#: svnfrontend/propertiesdlg.cpp:120
 msgid "View and modify properties"
 msgstr "Afișează și modifică proprietățile"
 
-#: rc.cpp:207 rc.cpp:228
+#: rc.cpp:201 rc.cpp:222
 msgid "WORKING"
 msgstr "WORKING"
 
-#: rc.cpp:767
+#: rc.cpp:761
 msgid ""
 "When browsing kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -3547,7 +3563,7 @@ msgstr ""
 "întîlniți blocări dese la parcurgerea elementelor, ar trebui să dezactivați "
 "afișarea proprietăților."
 
-#: rc.cpp:744
+#: rc.cpp:738
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>But due this listings/updating on folders containing lot of "
@@ -3559,19 +3575,19 @@ msgstr ""
 "ce conțin multe elemente poate deveni lentă. Trebuie activată numai dacă un "
 "număr important de intrări posedă această proprietate."
 
-#: rc.cpp:741
+#: rc.cpp:735
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
 "La listarea unei copii de lcucru, kdesvn poate verifica această proprietate"
 
-#: rc.cpp:783
+#: rc.cpp:777
 msgid ""
 "When saving passwords, do it into KDE wallet instead of subversions storage?"
 msgstr ""
 "Înregistrarea parolelor se face în gestionarul de portofel din KDE în locul "
 "spațiului de stocare din subversion?"
 
-#: rc.cpp:899
+#: rc.cpp:893
 msgid ""
 "When starting the tree generation and reading data from log cache kdesvn may "
 "check for newer items in repository if network is enabled. \n"
@@ -3584,7 +3600,7 @@ msgstr ""
 "\n"
 "Dar aceasta încetinește generarea arboreșcenței și este dezactivată implicit."
 
-#: rc.cpp:750
+#: rc.cpp:744
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
@@ -3599,7 +3615,7 @@ msgstr "Care fișiere și dosare trebuiesc adăugate?"
 msgid "Work online"
 msgstr "Lucrează conectat"
 
-#: rc.cpp:946
+#: rc.cpp:940
 msgid "Working copy"
 msgstr "Copie de lucru"
 
@@ -3607,7 +3623,7 @@ msgstr "Copie de lucru"
 msgid "Working version of conflicted file"
 msgstr "Versiunea în lucru a fișierului în conflict"
 
-#: kiosvn/kiosvn.cpp:482
+#: kiosvn/kiosvn.cpp:486
 #, fuzzy
 msgid "Wrote %1 to repository"
 msgstr "Calea către depozit:"
@@ -3628,7 +3644,7 @@ msgstr ""
 "_: NUMELE TRADUCĂTORILOR\n"
 "Florin Cătălin RUSSEN"
 
-#: rc.cpp:165
+#: rc.cpp:159
 msgid "incremental Dump"
 msgstr "Dump incremental"
 
@@ -3664,16 +3680,16 @@ msgstr "kdesvn: NUMELE TRADUCĂTORILOR\\nFlorin Cătălin RUSSEN"
 msgid "kdesvnaskpass"
 msgstr "kdesvnaskpass"
 
-#: rc.cpp:354
+#: rc.cpp:348
 msgid "lump-merge all of source URL's unmerged changes"
 msgstr ""
 
-#: rc.cpp:714 rc.cpp:723
+#: rc.cpp:708 rc.cpp:717
 #, fuzzy
 msgid "minutes"
 msgstr " linii"
 
-#: rc.cpp:558
+#: rc.cpp:552
 msgid "see \"Whats this\" for details"
 msgstr "vezi „Ce este aceasta” pentru detalii"
 
@@ -3681,11 +3697,11 @@ msgstr "vezi „Ce este aceasta” pentru detalii"
 msgid "ssh-askpass for kdesvn"
 msgstr "ssh-askpass pentru kdesvn"
 
-#: rc.cpp:396
+#: rc.cpp:390
 msgid "this long text"
 msgstr "acest text lung"
 
-#: rc.cpp:399
+#: rc.cpp:393
 msgid "to"
 msgstr "la"
 

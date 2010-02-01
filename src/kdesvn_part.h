@@ -91,9 +91,6 @@ protected slots:
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
     virtual void slotUrlChanged(const QString&);
-#if KDE_VERSION_MAJOR<4
-    void reportBug();
-#endif
     void showAboutApplication();
     void appHelpActivated();
     virtual void slotShowSettings();

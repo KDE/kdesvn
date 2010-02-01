@@ -122,6 +122,7 @@ protected Q_SLOTS:
     virtual void applyNewToolbarConfig();
     virtual void slotLoadLast(bool);
     virtual void slotExtraStatus(const QString&);
+    virtual void slotResetExtraStatus();
 
 Q_SIGNALS:
     void sigSavestate();

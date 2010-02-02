@@ -27,14 +27,42 @@
 #include <QFlags>
 #include "chartbaseview.h"
 
+#include <bitset>
+
 class BarChartViewData;
 
 class BarChartView : public ChartBaseView
 {
     Q_OBJECT
     public:
+        enum DisplayFlag {
+            ShowYTitle = 0,
+            ShowXTitle = 1,
+            ShowChartTitle=2,
+            ShowHGrid=3,
+            ShowVGrid=4,
+            ShowXLegend=5,
+            ShowYLegend=6,
+
+            NotValid=7
+        };
+        // the c++ bitset is more usefull than the QFlags
+        typedef std::bitset<NotValid> DisplayFlags;
+
         BarChartView(QWidget *parent = 0);
         virtual ~BarChartView();
+
+        QVariant yTitle(int role = Qt::DisplayRole) const;
+        QVariant xTitle(int role = Qt::DisplayRole) const;
+        QVariant chartTitle(int role = Qt::DisplayRole) const;
+
+        void setYTitle(const QVariant&,int role = Qt::DisplayRole);
+        void setXTitle(const QVariant&,int role = Qt::DisplayRole);
+        void setChartTitle(const QVariant&,int role = Qt::DisplayRole);
+
+        void setDisplayFlag(DisplayFlag);
+        void eraseDisplayFlag(DisplayFlag);
+        const DisplayFlags&flags()const;
 
     public Q_SLOTS:
         void rowsInserted(const QModelIndex &parent, int start, int end);
@@ -60,8 +88,29 @@ class BarChartView : public ChartBaseView
         uint columnSeriesStart(const QModelIndex&index)const;
         uint columnItemBarLeft(const QModelIndex&index)const;
         uint calcLeftOffset()const;
+        uint calcBottomOffset()const;
+        uint calcTopOffset()const;
 
         QSize yTitleSize()const;
+        QSize xTitleSize()const;
+        QSize chartTitleSize()const;
+
+        DisplayFlags _displayFlags;
 };
+
+inline void BarChartView::setDisplayFlag(DisplayFlag fl)
+{
+    if (fl<NotValid) _displayFlags.set(fl);
+}
+
+inline void BarChartView::eraseDisplayFlag(DisplayFlag fl)
+{
+    if (fl<NotValid) _displayFlags.reset(fl);
+}
+
+inline const BarChartView::DisplayFlags& BarChartView::flags()const
+{
+    return _displayFlags;
+}
 
 #endif

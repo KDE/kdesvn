@@ -23,9 +23,20 @@
 
 #include <QScrollBar>
 
+#define KDESVN_DEFINE_SETGET(preg,pres)\
+    QVariant BarChartView::preg(int role)const\
+    {\
+        return _data->preg(role);\
+    }\
+    void BarChartView::pres(const QVariant&value,int role)\
+    {\
+        _data->pres(value,role);\
+    }
+
 BarChartView::BarChartView(QWidget *parent)
     :ChartBaseView(parent),_data(new BarChartViewData)
 {
+    _displayFlags.set();
     updateGeometries();
 }
 
@@ -35,15 +46,22 @@ BarChartView::~BarChartView()
 
 void BarChartView::updateGeometries()
 {
+    // x-direction
     _data->_seriesWidth=calcColumnSeriesWidth();
     _data->_diagramWidth=calcColumnDiagramWidth();
     _data->_diagramXOffset=calcLeftOffset();
-    _data->_chartSize.setWidth(_data->_diagramWidth+yTitleSize().height());
 
-    int viewWidth = _data->_diagramWidth+_data->_diagramXOffset+yTitleSize().height();
+    int viewWidth = _data->_diagramWidth+_data->_diagramXOffset+_canvasHMargin;
 
     horizontalScrollBar()->setPageStep(viewport()->width());
     horizontalScrollBar()->setRange(0, qMax(0, viewWidth-viewport()->width()));
+
+    // y-direction
+    _data->_diagramBottomOffset = calcBottomOffset();
+    _data->_diagramTopOffset = calcTopOffset();
+    int chartHeight = qMax(viewport()->height()-_data->_diagramBottomOffset-_data->_diagramTopOffset,_data->_minChartHeight+_data->_maxValueOffset);
+    verticalScrollBar()->setPageStep(viewport()->height());
+    verticalScrollBar()->setRange(0,qMax(0,chartHeight-viewport()->height()));
 }
 
 void BarChartView::rowsInserted(const QModelIndex &parent, int start, int end)
@@ -100,14 +118,94 @@ int BarChartView::columnSeries(const QModelIndex & index)const
 }
 
 /*
+ * Setters / Getters for Data
+ */
+
+KDESVN_DEFINE_SETGET(yTitle,setYTitle);
+KDESVN_DEFINE_SETGET(xTitle,setXTitle);
+KDESVN_DEFINE_SETGET(chartTitle,setChartTitle);
+
+QSize BarChartView::yTitleSize()const
+{
+    QSize s(0,0);
+    if (!_displayFlags.test(ShowYTitle)) {
+        return s;
+    }
+    QFont _f;
+    QVariant v = yTitle(Qt::FontRole);
+    if(v.isValid()) {
+        _f = qvariant_cast<QFont>(v);
+    } else {
+        _f = KGlobalSettings::generalFont();
+    }
+    s.setHeight(QFontMetrics(_f).height());
+
+    ///@todo use the height of the chart for the width of the line
+    v = yTitle(Qt::DisplayRole);
+    if (v.isValid()) {
+        s.setWidth(QFontMetrics(_f).width(qvariant_cast<QString>(v)));
+    }
+    return s;
+}
+
+QSize BarChartView::xTitleSize()const
+{
+    QSize s(0,0);
+    if (!_displayFlags.test(ShowXTitle)) {
+        return s;
+    }
+    QFont _f;
+    QVariant v = xTitle(Qt::FontRole);
+    if(v.isValid()) {
+        _f = qvariant_cast<QFont>(v);
+    } else {
+        _f = KGlobalSettings::generalFont();
+    }
+    s.setHeight(QFontMetrics(_f).height());
+    s.setWidth(_data->_diagramWidth);
+    return s;
+}
+
+QSize BarChartView::chartTitleSize()const
+{
+    QSize s(0,0);
+    if (!_displayFlags.test(ShowChartTitle)) {
+        return s;
+    }
+    QFont _f;
+    QVariant v = chartTitle(Qt::FontRole);
+    if(v.isValid()) {
+        _f = qvariant_cast<QFont>(v);
+    } else {
+        _f = KGlobalSettings::generalFont();
+    }
+    s.setHeight(QFontMetrics(_f).height());
+    s.setWidth(_data->_diagramWidth-barBorder());
+    return s;
+}
+
+/*
+ * Setters / Getters for Data end
+ */
+
+/*
  * general calculations
  */
 
 uint BarChartView::calcLeftOffset()const
 {
-    return _canvasHMargin+yTitleSize().height()+valueSize().width()+2*_data->_ytitleBorder;
+    return _canvasHMargin+yTitleSize().height()+_displayFlags.test(ShowYLegend)*valueSize().width()+_displayFlags.test(ShowYTitle)*_data->_ytitleBorder+_displayFlags.test(ShowYLegend)*_data->_ytitleBorder;
 }
 
+uint BarChartView::calcBottomOffset()const
+{
+    return _canvasVMargin+xTitleSize().height()+_displayFlags.test(ShowXTitle)*_data->_xtitleBorder+_displayFlags.test(ShowXLegend)*_data->_xtitleBorder;
+}
+
+uint BarChartView::calcTopOffset()const
+{
+    return _canvasVMargin+chartTitleSize().height()+_displayFlags.test(ShowChartTitle)*_data->_chartTitleYBorder;
+}
 /*
  * calculations for series in colums begin
  */

@@ -2,6 +2,7 @@ version 1.5.2:
     * Fixed an unicode translation error when open folders
     * german translation updated
     * minor ui tweaks fixed
+    * fix build and install on cygwin/win32 (patch taken from ticket #761, tnx)
 
 version 1.5.1:
     * added remove action to left pane context menu

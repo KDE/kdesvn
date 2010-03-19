@@ -566,14 +566,20 @@ QRegion PieView::visualRegionForSelection(const QItemSelection &selection) const
 
 void PieView::setChartTitle(const QVariant& theValue, int role)
 {
+	Q_UNUSED(theValue);
+	Q_UNUSED(role);
 }
 
 void PieView::setXTitle(const QVariant& theValue, int role)
 {
+	Q_UNUSED(theValue);
+	Q_UNUSED(role);
 }
 
 void PieView::setYTitle(const QVariant& theValue, int role)
 {
+	Q_UNUSED(theValue);
+	Q_UNUSED(role);
 }
 
 #include "pieview.moc"

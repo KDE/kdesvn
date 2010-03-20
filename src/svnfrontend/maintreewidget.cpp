@@ -1010,6 +1010,7 @@ void MainTreeWidget::slotRecAddIgnore()
     	}
     	m_Data->m_Model->svnWrapper()->makeIgnoreEntry(res[i]->path(),_pattern,unignore);
     }
+    refreshCurrentTree();
 }
 
 void MainTreeWidget::slotMakeLogNoFollow()const

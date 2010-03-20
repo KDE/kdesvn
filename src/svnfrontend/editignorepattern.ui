@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditIgnorePattern</class>
+ <widget class="QWidget" name="EditIgnorePattern">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>390</width>
+    <height>206</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="m_PatternLabel">
+       <property name="text">
+        <string>Patterns to add or remove:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KEditListBox" name="m_PatternEdit">
+       <property name="buttons">
+        <set>KEditListBox::Add|KEditListBox::Remove</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_RemoveCheckBox">
+     <property name="text">
+      <string>Remove patterns</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="m_DepthLabel">
+       <property name="text">
+        <string>Depth for ignore</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="DepthSelector" name="m_DepthSelector" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KEditListBox</class>
+   <extends>QGroupBox</extends>
+   <header>keditlistbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DepthSelector</class>
+   <extends>QWidget</extends>
+   <header>depthselector.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

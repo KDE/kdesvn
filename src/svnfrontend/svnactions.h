@@ -93,7 +93,9 @@ public:
 
     bool makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where, bool rec=false,bool all=true);
     bool makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where, bool rec,bool all,bool display_ignored,bool updates=false);
-    bool makeList(const QString&url,svn::DirEntries&dlist,const svn::Revision&where,bool rec=false);
+    bool makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where, svn::Depth depth,bool all,bool display_ignored,bool updates=false);
+
+    bool makeList(const QString&url,svn::DirEntries&dlist,const svn::Revision&where,svn::Depth depth=svn::DepthInfinity);
 
     bool createModifiedCache(const QString&base);
     bool checkModifiedCache(const QString&path);
@@ -104,6 +106,8 @@ public:
     void deleteFromModifiedCache(const QString&what);
 
     bool makeIgnoreEntry(SvnItem*which,bool unignore);
+    bool makeIgnoreEntry(const svn::Path&item,const QStringList&ignorePattern,bool unignore);
+
     bool isLockNeeded(SvnItem*which,const svn::Revision&where);
     QString searchProperty(QString&store, const QString&property, const QString&start,const svn::Revision&where,bool up=false);
     svn::PathPropertiesMapListPtr propList(const QString&which,const svn::Revision&where,bool cacheOnly);

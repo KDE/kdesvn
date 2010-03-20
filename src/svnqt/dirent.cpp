@@ -120,6 +120,11 @@ namespace svn
     return m->kind;
   }
 
+  bool DirEntry::isDir()const
+  {
+	  return kind()==svn_node_dir;
+  }
+
   QLONG
   DirEntry::size () const
   {

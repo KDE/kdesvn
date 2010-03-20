@@ -103,6 +103,7 @@ protected Q_SLOTS:
     void slotClientException(const QString&);
 
     void slotIgnore();
+    void slotRecAddIgnore();
     void slotMakeLog()const;
     void slotMakeLogNoFollow()const;
     void slotDirMakeLogNoFollow()const;

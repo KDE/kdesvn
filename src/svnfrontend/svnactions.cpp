@@ -2338,9 +2338,14 @@ bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, const 
 
 bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where,bool rec,bool all,bool display_ignores,bool updates)
 {
+    svn::Depth _d=rec?svn::DepthInfinity:svn::DepthImmediates;
+    return makeStatus(what,dlist,where,_d,all,display_ignores,updates);
+}
+
+bool SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist, const svn::Revision&where,svn::Depth _d,bool all,bool display_ignores,bool updates)
+{
     bool disp_remote_details = Kdesvnsettings::details_on_remote_listing();
     QString ex;
-    svn::Depth _d=rec?svn::DepthInfinity:svn::DepthImmediates;
     try {
 #ifdef DEBUG_TIMER
         QTime _counttime;
@@ -2691,22 +2696,13 @@ void SvnActions::clearUpdateCache()
     m_Data->m_UpdateCache.clear();
 }
 
-/*!
-    \fn SvnActions::makeIgnoreEntry(const QString&which)
- */
-bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
+bool SvnActions::makeIgnoreEntry(const svn::Path&item,const QStringList&ignorePattern,bool unignore)
 {
-    if (!which) return false;
-    QString parentName = which->getParentDir();
-    if (parentName.isEmpty()) return false;
-    QString name = which->shortName();
-    QString ex;
-    svn::Path p(parentName);
-    svn::Revision r(svn_opt_revision_unspecified);
+	svn::Revision r(svn::Revision::UNDEFINED);
 
     QPair<QLONG,svn::PathPropertiesMapList> pmp;
     try {
-        pmp = m_Data->m_Svnclient->propget("svn:ignore",p,r,r);
+        pmp = m_Data->m_Svnclient->propget("svn:ignore",item,r,r);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2719,28 +2715,41 @@ bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
     }
     bool result = false;
     QStringList lst = data.split('\n',QString::SkipEmptyParts);
-    QStringList::size_type it = lst.indexOf(name);
-    if (it != -1) {
-        if (unignore) {
-            lst.removeAt(it);
-            result = true;
-        }
-    } else {
-        if (!unignore) {
-            lst.append(name);
-            result = true;
-        }
-    }
+    QStringList::size_type it = -1;
+
+	for (int _current = 0; _current < ignorePattern.size(); ++_current) {
+		it = lst.indexOf(ignorePattern[_current]);
+		if (it != -1) {
+			if (unignore) {
+				lst.removeAt(it);
+				result = true;
+			}
+		} else {
+			if (!unignore) {
+				lst.append(ignorePattern[_current]);
+				result = true;
+			}
+		}
+	}
     if (result) {
         data = lst.join("\n");
         try {
-            m_Data->m_Svnclient->propset(svn::PropertiesParameter().propertyName("svn:ignore").propertyValue(data).path(p));
+            m_Data->m_Svnclient->propset(svn::PropertiesParameter().propertyName("svn:ignore").propertyValue(data).path(item));
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
             return false;
         }
     }
     return result;
+}
+
+bool SvnActions::makeIgnoreEntry(SvnItem*which,bool unignore)
+{
+    if (!which) return false;
+    QString parentName = which->getParentDir();
+    if (parentName.isEmpty()) return false;
+    QString name = which->shortName();
+    return makeIgnoreEntry(svn::Path(parentName),QStringList(name),unignore);
 }
 
 svn::PathPropertiesMapListPtr SvnActions::propList(const QString&which,const svn::Revision&where,bool cacheOnly)
@@ -2830,13 +2839,14 @@ QString SvnActions::searchProperty(QString&Store, const QString&property, const 
     return QString();
 }
 
-bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,const svn::Revision&where,bool rec)
+bool SvnActions::makeList(const QString&url,svn::DirEntries&dlist,const svn::Revision&where,svn::Depth depth)
 {
     if (!m_Data->m_CurrentContext) return false;
     QString ex;
     try {
-        dlist = m_Data->m_Svnclient->list(url,where,where,rec?svn::DepthInfinity:svn::DepthEmpty,false);
+        dlist = m_Data->m_Svnclient->list(url,where,where,depth,false);
     } catch (const svn::Exception&e) {
+    	kDebug()<< "List fehler: " <<e.msg();
         emit clientException(e.msg());
         return false;
     }

@@ -482,7 +482,7 @@ void CommandExec::slotCmd_list()
     } else if (m_pCPart->extraRevisions[0]) {
         rev = m_pCPart->extraRevisions[0];
     }
-    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,rev,false)) {
+    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0],res,rev,svn::DepthInfinity)) {
         return;
     }
     for (long i = 0; i < res.count();++i) {

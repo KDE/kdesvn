@@ -84,6 +84,8 @@ namespace svn
     svn_node_kind_t
     kind () const;
 
+    bool isDir()const;
+
     QLONG
     size () const;
 

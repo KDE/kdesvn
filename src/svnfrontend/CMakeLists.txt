@@ -51,6 +51,8 @@ SET(svnfrontendsrc
     fronthelpers/watchedprocess.cpp
     fronthelpers/watchedprocess.h
     fronthelpers/fronthelpers.h
+    fronthelpers/DialogStack.cpp
+    fronthelpers/DialogStack.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp
@@ -98,6 +100,8 @@ SET(svnfrontendsrc
     database/dboverview.h
     database/dbsettings.cpp
     database/dbsettings.h
+    EditIgnorePattern.cpp
+    EditIgnorePattern.h
     )
 
 SET(svnfrontendui
@@ -114,6 +118,7 @@ SET(svnfrontendui
     blamedisplay.ui
     svnlogdlg.ui
     treeWidget.ui
+    editignorepattern.ui
     database/dboverview.ui
     database/dbsettings.ui
     )

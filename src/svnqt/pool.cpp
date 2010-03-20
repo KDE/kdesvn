@@ -74,17 +74,6 @@ namespace svn
     }
     m_pool = pool_create (m_parent);
   }
-
-//TODO
-//   apr_pool_t *
-//   Pool::operator=(const Pool & pool)
-//   {
-//     return
-//     if (this == &path)
-//       return *this;
-//     m_path = path.c_str();
-//     return *this;
-//   }
 }
 
 /* -----------------------------------------------------------------

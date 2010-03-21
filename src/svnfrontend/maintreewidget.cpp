@@ -594,7 +594,8 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_try_resolve",i18n("Resolve conflicts"),KShortcut(),KIcon("kdesvnresolved"),this,SLOT(slotTryResolve()));
 
     tmp_action = add_action("make_svn_ignore",i18n("Ignore/Unignore current item"),KShortcut(),KIcon(),this,SLOT(slotIgnore()));
-    tmp_action = add_action("make_add_ignore_pattern",i18n("Add or Remove ignore pattern"),KShortcut(),KIcon(),this,SLOT(slotRecAddIgnore()));
+    tmp_action = add_action("make_left_add_ignore_pattern",i18n("Add or Remove ignore pattern"),KShortcut(),KIcon(),this,SLOT(slotLeftRecAddIgnore()));
+    tmp_action = add_action("make_right_add_ignore_pattern",i18n("Add or Remove ignore pattern"),KShortcut(),KIcon(),this,SLOT(slotRightRecAddIgnore()));
 
     tmp_action = add_action("make_svn_headupdate",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),m_Data->m_Model->svnWrapper(),SLOT(slotUpdateHeadRec()));
     tmp_action->setIconText(i18n("Update"));
@@ -727,7 +728,8 @@ void MainTreeWidget::enableActions()
     enableAction("make_svn_unlock",(multi||single));
 
     enableAction("make_svn_ignore",(single)&&si->parent()!=0&&!si->isRealVersioned());
-    enableAction("make_add_ignore_pattern",(d==1));
+    enableAction("make_left_add_ignore_pattern",(d==1)&& isWorkingCopy());
+    enableAction("make_right_add_ignore_pattern",dir && isWorkingCopy());
 
     enableAction("make_svn_rename",single && (!isWorkingCopy()||si!=m_Data->m_Model->firstRootChild()));
     enableAction("make_svn_copy",single && (!isWorkingCopy()||si!=m_Data->m_Model->firstRootChild()));
@@ -978,14 +980,29 @@ void MainTreeWidget::slotIgnore()
     m_Data->m_SortModel->invalidate();
 }
 
-void MainTreeWidget::slotRecAddIgnore()
+void MainTreeWidget::slotLeftRecAddIgnore()
 {
 	SvnItem* item = DirSelected();
-	if (!item) {
+	if (!item||!item->isDir()) {
 		return;
 	}
+	recAddIgnore(item);
+}
+
+void MainTreeWidget::slotRightRecAddIgnore()
+{
+	SvnItem* item = Selected();
+	if (!item||!item->isDir()) {
+		return;
+	}
+	recAddIgnore(item);
+}
+
+void MainTreeWidget::recAddIgnore(SvnItem*item)
+{
 	EditIgnorePattern * ptr = 0;
-	KDialog * dlg = createOkDialog(&ptr,QString(i18n("Edit pattern to ignore")),true,"ignore_pattern_dlg");
+	KDialog * dlg = createOkDialog(&ptr,QString(i18n("Edit pattern to ignore for \"%1\"").arg(item->shortName())),
+			true,"ignore_pattern_dlg");
     KConfigGroup _k(Kdesvnsettings::self()->config(),"ignore_pattern_dlg");
     DialogStack _s(dlg,_k);
     if (dlg->exec()!=QDialog::Accepted) {
@@ -999,7 +1016,6 @@ void MainTreeWidget::slotRecAddIgnore()
         start=baseRevision();
     }
 
-    kDebug()<<"Item: "<<item->fullName();
     svn::StatusEntries res;
     if (!m_Data->m_Model->svnWrapper()->makeStatus(item->fullName(),res,start,_d,true /* all entries */,false,false)) {
     	return;
@@ -1073,7 +1089,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     if ( (temp=filesActions()->action("make_svn_dir_log_nofollow")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_left_svn_property")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_remove_left")) && temp->isEnabled() && ++count) popup.addAction(temp);
-    if ( (temp=filesActions()->action("make_add_ignore_pattern")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("make_left_add_ignore_pattern")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
     OpenContextmenu*me=0;

@@ -102,6 +102,8 @@ SET(svnfrontendsrc
     database/dbsettings.h
     EditIgnorePattern.cpp
     EditIgnorePattern.h
+    setpropertywidget.cpp
+    setpropertywidget.h
     )
 
 SET(svnfrontendui
@@ -119,6 +121,7 @@ SET(svnfrontendui
     svnlogdlg.ui
     treeWidget.ui
     editignorepattern.ui
+    setproperty.ui
     database/dboverview.ui
     database/dbsettings.ui
     )

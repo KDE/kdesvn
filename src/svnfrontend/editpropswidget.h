@@ -17,19 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef EDITPROPERTY_IMPL_H
-#define EDITPROPERTY_IMPL_H
+#ifndef EDITPROPSWIDGET_H
+#define EDITPROPSWIDGET_H
 
 #include "ui_editpropsdlg.h"
 
 class QStringList;
 class QString;
 
-class EditProperty_impl: public QWidget, public Ui::EditPropsWidget {
-Q_OBJECT
+class EditPropsWidget: public QWidget, public Ui::EditPropsWidget {
+	Q_OBJECT
 public:
-    EditProperty_impl(QWidget *parent = 0, const char *name = 0);
-    ~EditProperty_impl();
+    EditPropsWidget(QWidget *parent = 0, const char *name = 0);
+    ~EditPropsWidget();
 
     QString propName()const;
     QString propValue()const;

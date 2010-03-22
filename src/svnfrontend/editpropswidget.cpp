@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "editproperty_impl.h"
+#include "editpropswidget.h"
 
 #include <QStringList>
 #include <QToolTip>
@@ -30,7 +30,7 @@
 #include <klocale.h>
 #include <kicon.h>
 
-EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
+EditPropsWidget::EditPropsWidget(QWidget *parent, const char *name)
     : QWidget(parent)
 {
     setupUi(this);
@@ -132,12 +132,12 @@ EditProperty_impl::EditProperty_impl(QWidget *parent, const char *name)
 }
 
 
-EditProperty_impl::~EditProperty_impl()
+EditPropsWidget::~EditPropsWidget()
 {
 }
 
 
-void EditProperty_impl::updateToolTip(const QString & selection)
+void EditPropsWidget::updateToolTip(const QString & selection)
 {
     int i;
 
@@ -159,7 +159,7 @@ void EditProperty_impl::updateToolTip(const QString & selection)
     m_NameEdit->setToolTip(comment);
 }
 
-void EditProperty_impl::setDir(bool dir)
+void EditPropsWidget::setDir(bool dir)
 {
     if (dir == isDir) {
         // Change not necessary
@@ -177,18 +177,18 @@ void EditProperty_impl::setDir(bool dir)
 }
 
 
-QString EditProperty_impl::propName()const
+QString EditPropsWidget::propName()const
 {
     return m_NameEdit->currentText();
 }
 
 
-QString EditProperty_impl::propValue()const
+QString EditPropsWidget::propValue()const
 {
     return m_ValueEdit->toPlainText();
 }
 
-void EditProperty_impl::setPropName(const QString&n)
+void EditPropsWidget::setPropName(const QString&n)
 {
     m_NameEdit->addToHistory(n);
     m_NameEdit->setCurrentItem(n);
@@ -196,12 +196,12 @@ void EditProperty_impl::setPropName(const QString&n)
 }
 
 
-void EditProperty_impl::setPropValue(const QString&v)
+void EditPropsWidget::setPropValue(const QString&v)
 {
     m_ValueEdit->setText(v);
 }
 
-void EditProperty_impl::showHelp()
+void EditPropsWidget::showHelp()
 {
     QPoint pos = m_ValueEdit->pos();
     pos.setX(pos.x() + m_ValueEdit->width()/2);
@@ -209,4 +209,4 @@ void EditProperty_impl::showHelp()
     QWhatsThis::showText(mapToGlobal(pos),comment);
 }
 
-#include "editproperty_impl.moc"
+#include "editpropswidget.moc"

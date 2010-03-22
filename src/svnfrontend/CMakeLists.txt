@@ -32,7 +32,7 @@ SET(svnfrontendsrc
     createrepo_impl.cpp
     dummydisplay.cpp
     dumprepo_impl.cpp
-    editproperty_impl.cpp
+    editpropswidget.cpp
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
     fronthelpers/rangeinput_impl.cpp

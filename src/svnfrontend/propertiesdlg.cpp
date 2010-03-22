@@ -22,7 +22,7 @@
 #include "src/svnfrontend/fronthelpers/propertyitem.h"
 #include "src/svnfrontend/fronthelpers/propertylist.h"
 #include "fronthelpers/createdlg.h"
-#include "editproperty_impl.h"
+#include "editpropswidget.h"
 #include "svnitem.h"
 #include "src/svnqt/client.h"
 
@@ -198,7 +198,7 @@ void PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem*)
 
 void PropertiesDlg::slotAdd()
 {
-    EditProperty_impl*ptr = 0L;
+    EditPropsWidget*ptr = 0L;
     svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Modify property")),true,"modify_properties");
     if (!dlg) {
         return;
@@ -249,7 +249,7 @@ void PropertiesDlg::slotModify()
     if (!qi) return;
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
     if (PropertyListViewItem::protected_Property(ki->currentName())) return;
-    EditProperty_impl*ptr = 0L;
+    EditPropsWidget*ptr = 0L;
     svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Modify property")),true,"modify_properties");
     if (!dlg) {
         return;

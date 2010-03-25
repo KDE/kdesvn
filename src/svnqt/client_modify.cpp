@@ -199,9 +199,6 @@ namespace svn
     apr_array_header_t *apr_revisions = apr_array_make (apr_pool,
                       path.size(),
                       sizeof (svn_revnum_t));
-    if (depth==DepthUnknown) {
-        depth=DepthInfinity;
-    }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error = svn_client_update3(&apr_revisions,path.array(pool),revision,internal::DepthToSvn(depth),sticky_depth,ignore_externals,allow_unversioned,*m_context,pool);
 #else

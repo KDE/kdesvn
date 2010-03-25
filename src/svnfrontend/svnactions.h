@@ -133,7 +133,7 @@ public:
 
     void makeBlame(const svn::Revision&start, const svn::Revision&end, SvnItem*k);
     void makeBlame(const svn::Revision&start, const svn::Revision&end, const QString&,QWidget*parent=0,const svn::Revision&peg=svn::Revision::UNDEFINED,SimpleLogCb*_acb=0);
-    void makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse);
+    void makeUpdate(const QStringList&what,const svn::Revision&rev,svn::Depth depth);
     bool makeSwitch(const QString&rUrl,const QString&tPath,const svn::Revision&r,svn::Depth depth,const svn::Revision&peg,bool stickydepth,bool ignore_externals,bool allow_unversioned);
     bool makeSwitch(const QString&path,const QString&what);
     bool makeRelocate(const QString&fUrl,const QString&tUrl,const QString&path,bool rec = true);

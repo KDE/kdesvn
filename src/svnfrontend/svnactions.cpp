@@ -252,13 +252,13 @@ void SvnActions::reInitClient()
 
 void SvnActions::makeLog(const svn::Revision&start,const svn::Revision&end,const svn::Revision&peg,const QString&which,bool follow,bool list_files,int limit)
 {
+    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,peg,which,list_files,limit,follow);
+    if (!logs) return;
     svn::InfoEntry info;
     if (!singleInfo(which,peg,info)) {
         return;
     }
     QString reposRoot = info.reposRoot();
-    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start,end,peg,which,list_files,limit,follow);
-    if (!logs) return;
     bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
     if (need_modal||!m_Data->m_LogDialog) {
         m_Data->m_LogDialog=new SvnLogDlgImp(this,0,"logdialog",need_modal);
@@ -387,15 +387,11 @@ bool SvnActions::hasMergeInfo(const QString&originpath)
     QVariant _m(false);
     QString path;
 
-    if (!svn::Url::isValid(originpath)) {
-        svn::InfoEntry e;
-        if (!singleInfo(originpath,svn::Revision::BASE,e)) {
-            return false;
-        }
-        path = e.reposRoot();
-    } else {
-        path = originpath;
+    svn::InfoEntry e;
+    if (!singleInfo(originpath,svn::Revision::UNDEFINED,e)) {
+        return false;
     }
+    path = e.reposRoot();
     if (!m_Data->m_MergeInfoCache.findSingleValid(path,_m)) {
         bool mergeinfo;
         try {
@@ -419,6 +415,11 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
     svn::Revision rev = _rev;
     svn::Revision peg = _peg;
     if (!m_Data->m_CurrentContext) return false;
+#ifdef DEBUG_TIMER
+    QTime _counttime;
+    _counttime.start();
+#endif
+
     if (!svn::Url::isValid(what)) {
         // working copy
         // url = svn::Wc::getUrl(what);
@@ -453,6 +454,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             try {
                 e = (m_Data->m_Svnclient->info(url,svn::DepthEmpty,_rev,peg));
             } catch (const svn::Exception&ce) {
+                kDebug()<<"single info: "<<ce.msg()<<endl;
                 emit clientException(ce.msg());
                 return false;
             }
@@ -474,6 +476,9 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
             }
         }
     }
+#ifdef DEBUG_TIMER
+    kDebug()<<"Time getting info for " << cacheKey <<": "<<_counttime.elapsed();
+#endif
 
     return true;
 }
@@ -1427,7 +1432,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
 /*!
     \fn SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
  */
-void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse)
+void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,svn::Depth depth)
 {
     if (!m_Data->m_CurrentContext) return;
     QString ex;
@@ -1438,12 +1443,12 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
             i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets pathes(what);
-        ret = m_Data->m_Svnclient->update(pathes,rev, recurse?svn::DepthInfinity:svn::DepthFiles,false,false,true);
+        ret = m_Data->m_Svnclient->update(pathes,rev, depth,false,false,true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
     }
-    removeFromUpdateCache(what,!recurse);
+    removeFromUpdateCache(what,depth!=svn::DepthFiles);
     EMIT_REFRESH;
     EMIT_FINISHED;
     m_Data->clearCaches();
@@ -1494,7 +1499,7 @@ void SvnActions::prepareUpdate(bool ask)
         delete dlg;
         if (result!=QDialog::Accepted) return;
     }
-    makeUpdate(what,r,true);
+    makeUpdate(what,r,svn::DepthUnknown);
 }
 
 

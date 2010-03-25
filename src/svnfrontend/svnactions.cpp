@@ -1432,7 +1432,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
 /*!
     \fn SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
  */
-void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool recurse)
+void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,svn::Depth depth)
 {
     if (!m_Data->m_CurrentContext) return;
     QString ex;
@@ -1443,12 +1443,12 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,bool 
             i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets pathes(what);
-        ret = m_Data->m_Svnclient->update(pathes,rev, recurse?svn::DepthInfinity:svn::DepthFiles,false,false,true);
+        ret = m_Data->m_Svnclient->update(pathes,rev, depth,false,false,true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
     }
-    removeFromUpdateCache(what,!recurse);
+    removeFromUpdateCache(what,depth!=svn::DepthFiles);
     EMIT_REFRESH;
     EMIT_FINISHED;
     m_Data->clearCaches();
@@ -1499,7 +1499,7 @@ void SvnActions::prepareUpdate(bool ask)
         delete dlg;
         if (result!=QDialog::Accepted) return;
     }
-    makeUpdate(what,r,true);
+    makeUpdate(what,r,svn::DepthUnknown);
 }
 
 

@@ -33,6 +33,7 @@
 #include "src/settings/kdesvnsettings.h"
 #include "helpers/sshagent.h"
 #include "src/svnqt/url.h"
+#include "src/svnqt/svnqttypes.h"
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"
@@ -2215,7 +2216,7 @@ void MainTreeWidget::slotDirUpdate()
             what.append((*liter)->fullName());
         }
     }
-    m_Data->m_Model->svnWrapper()->makeUpdate(what,svn::Revision::HEAD,true);
+    m_Data->m_Model->svnWrapper()->makeUpdate(what,svn::Revision::HEAD,svn::DepthUnknown);
 }
 
 void MainTreeWidget::slotRescanIcons()

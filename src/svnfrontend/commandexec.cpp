@@ -427,7 +427,7 @@ void CommandExec::slotCmd_get()
 void CommandExec::slotCmd_update()
 {
     m_pCPart->m_SvnWrapper->makeUpdate(m_pCPart->url,
-        (m_pCPart->rev_set?m_pCPart->start:svn::Revision::HEAD),true);
+        (m_pCPart->rev_set?m_pCPart->start:svn::Revision::HEAD),svn::DepthUnknown);
 }
 
 void CommandExec::slotCmd_diff()

@@ -854,7 +854,6 @@ void MainTreeWidget::refreshCurrentTree()
         m_Data->m_Model->svnWrapper()->createModifiedCache(baseUri());
     }
     m_Data->m_SortModel->invalidate();
-    //kDebug(9510)<<"Refresh time: "<<t.elapsed()<<" ms"<<endl;
     setUpdatesEnabled(true);
     //viewport()->repaint();
     QTimer::singleShot(1,this,SLOT(readSupportData()));
@@ -961,7 +960,6 @@ void MainTreeWidget::slotClientException(const QString&what)
 
 void MainTreeWidget::slotCacheDataChanged()
 {
-    //kDebug(9510)<<"Cache thread signaled"<<endl;
     m_Data->m_SortModel->invalidate();
     if (isWorkingCopy()) {
         if (!m_Data->m_TimeModified.isActive() && Kdesvnsettings::poll_modified()) {
@@ -1156,7 +1154,6 @@ void MainTreeWidget::execContextMenu(const SvnItemList&l)
     emit sigShowPopup(menuname,&target);
     QMenu* popup = static_cast<QMenu*>(target);
     if (!popup) {
-        //kDebug(9510)<<"Error getting popupMenu"<<endl;
         return;
     }
 
@@ -1551,11 +1548,8 @@ void MainTreeWidget::refreshItem(SvnItemModelNode*node)
 
 void MainTreeWidget::slotChangeProperties(const svn::PropertiesMap&pm,const QStringList&dellist,const QString&path)
 {
-    //kDebug(9510)<<"change it"<<endl;
     m_Data->m_Model->svnWrapper()->changeProperties(pm,dellist,path);
-    //kDebug(9510)<<"change it"<<endl;
     SvnItemModelNode* which = SelectedNode();
-    //kDebug(9510)<<(which?which->fullName():"nix") << " -> " << path<<endl;
     if (which && which->fullName()==path) {
         m_Data->m_Model->refreshItem(which);
         dispProperties(true);
@@ -1722,7 +1716,6 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
     } else {
         target=baseUri();
     }
-    //kDebug(9510)<<"Target: "<<target<<" "<<l<<endl;
     if (action==Qt::MoveAction) {
         m_Data->m_Model->svnWrapper()->makeMove(lst,target,false);
     } else if (action==Qt::CopyAction) {
@@ -1733,7 +1726,6 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
 
 void MainTreeWidget::slotUrlDropped(const KUrl::List&_lst,Qt::DropAction action,const QModelIndex&index,bool intern)
 {
-    //kDebug(9510)<<_lst<< " " << action<<" " << intern << endl;
     if (_lst.size()==0) {
         return;
     }
@@ -2178,7 +2170,6 @@ void MainTreeWidget::refreshCurrent(SvnItem*cur)
 void MainTreeWidget::slotReinitItem(SvnItem*item)
 {
     if (!item) {
-        //kDebug(9510)<<"MainTreeWidget::slotReinitItem(SvnItem*item): item == null" << endl;
         return;
     }
     SvnItemModelNode*k = item->sItem();

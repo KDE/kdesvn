@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Mario Palomo Torrero <mariopal@gmail.com>, 2008, 2009.
+# Alvaro Soliverez <asoliverez@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-01 11:58+0100\n"
-"PO-Revision-Date: 2009-10-15 01:08+0200\n"
-"Last-Translator: Mario Palomo Torrero <mariopal@gmail.com>\n"
-"Language-Team: Spanish <mariopal@gmail.com>\n"
+"PO-Revision-Date: 2010-05-02 22:37-0300\n"
+"Last-Translator: Alvaro Soliverez <asoliverez@gmail.com>\n"
+"Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -634,9 +635,8 @@ msgid "Check for unversioned items"
 msgstr "Chequear elementos no versionados"
 
 #: rc.cpp:714
-#, fuzzy
 msgid "Check for updated items every"
-msgstr "Comprobar actualizaciones"
+msgstr "Comprobar actualizaciones cada"
 
 #: svnfrontend/maintreewidget.cpp:518
 msgid "Check for updates"
@@ -3448,7 +3448,7 @@ msgstr "No versionado"
 
 #: svnfrontend/maintreewidget.cpp:596 svnfrontend/ccontextlistener.cpp:73
 msgid "Update"
-msgstr "Actualizado"
+msgstr "Actualizar"
 
 #: svnfrontend/ccontextlistener.cpp:74
 msgid "Update complete"

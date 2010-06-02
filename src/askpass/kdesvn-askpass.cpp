@@ -51,7 +51,8 @@ int main(int argc, char** argv)
         prompt = i18n("Please enter your password below.");
     } else {
         prompt = KCmdLineArgs::parsedArgs()->arg(0);
-        if (prompt.contains("Bad passphrase",Qt::CaseInsensitive)) {
+        if (prompt.contains("Bad passphrase",Qt::CaseInsensitive) ||
+            prompt.contains("Permission denied",Qt::CaseInsensitive) ) {
             error = true;
         }
         kfile = prompt.section(" ", -2).remove(":").simplified();

@@ -44,6 +44,7 @@
 #include "src/ksvnwidgets/deleteform_impl.h"
 #include "opencontextmenu.h"
 #include "EditIgnorePattern.h"
+#include "setpropertywidget.h"
 
 #include <kmessagebox.h>
 #include <kicon.h>
@@ -662,6 +663,7 @@ void MainTreeWidget::setupActions()
 
     tmp_action = add_action("make_dir_commit",i18n("Commit"),KShortcut(),KIcon("kdesvncommit"),this,SLOT(slotDirCommit()));
     tmp_action = add_action("make_dir_update",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),this,SLOT(slotDirUpdate()));
+    tmp_action = add_action("set_rec_property_dir",i18n("Set property recursive"),KShortcut(),KIcon(),this,SLOT(slotDirRecProperty()));
 
     tmp_action = add_action("show_repository_settings",i18n("Settings for current repository"),KShortcut(),KIcon(),this,SLOT(slotRepositorySettings()));
 
@@ -722,6 +724,7 @@ void MainTreeWidget::enableActions()
 
     enableAction("make_svn_property",single);
     enableAction("make_left_svn_property",d==1);
+    enableAction("set_rec_property_dir",d==1);
     enableAction("get_svn_property",single);
     enableAction("make_svn_remove",(multi||single));
     enableAction("make_svn_remove_left",d>0);
@@ -1089,6 +1092,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     if ( (temp=filesActions()->action("make_left_svn_property")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_svn_remove_left")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("make_left_add_ignore_pattern")) && temp->isEnabled() && ++count) popup.addAction(temp);
+    if ( (temp=filesActions()->action("set_rec_property_dir")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
     KService::List offers;
     OpenContextmenu*me=0;
@@ -2344,6 +2348,23 @@ void MainTreeWidget::slotSimpleStatistic()
     } else {
         StatisticView::showStatistic(inf.reposRoot());
     }
+}
+
+void MainTreeWidget::slotDirRecProperty()
+{
+    SvnItem*k = DirSelected();
+    if (!k) return;
+    SetPropertyWidget*ptr = 0;
+    KDialog*dlg = createOkDialog(&ptr,QString(i18n("Set/add property recursive")),true,"property_dlg");
+    if (!dlg) return;
+
+    KConfigGroup _k(Kdesvnsettings::self()->config(),"property_dlg");
+    DialogStack _s(dlg,_k);
+    if (dlg->exec()!=QDialog::Accepted) {
+        return;
+    }
+
+
 }
 
 #include "maintreewidget.moc"

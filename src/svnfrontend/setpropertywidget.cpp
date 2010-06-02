@@ -32,4 +32,19 @@ SetPropertyWidget::~SetPropertyWidget()
 {
 }
 
+QString SetPropertyWidget::getPropertyName()const
+{
+	return m_PropertyEditor->propName();
+}
+
+QString SetPropertyWidget::getPropertyValue()const
+{
+	return m_PropertyEditor->propValue();
+}
+
+svn::Depth SetPropertyWidget::getDepth()const
+{
+	return m_DepthSelector->getDepth();
+}
+
 #include "setpropertywidget.moc"

@@ -23,6 +23,7 @@
 #define SETPROPERTYWIDGET_H_
 
 #include "ui_setproperty.h"
+#include "src/svnqt/svnqttypes.h"
 
 #include <QWidget>
 
@@ -31,6 +32,10 @@ class SetPropertyWidget:virtual public QWidget,public Ui_SetPropertyWidget {
 public:
 	SetPropertyWidget(QWidget*parent=0);
 	virtual ~SetPropertyWidget();
+
+	QString getPropertyName()const;
+	QString getPropertyValue()const;
+	svn::Depth getDepth()const;
 };
 
 #endif /* SETPROPERTYWIDGET_H_ */

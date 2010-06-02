@@ -147,6 +147,7 @@ protected Q_SLOTS:
     void slotCommit();
     void slotDirCommit();
     void slotDirUpdate();
+    void slotDirRecProperty();
 
     void slotDirSelectionChanged(const QItemSelection&,const QItemSelection&);
 

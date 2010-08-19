@@ -53,6 +53,7 @@ private slots:
 
 private:
     bool startSshAgent();
+    void askPassEnv();
 
     QString        m_Output;
 

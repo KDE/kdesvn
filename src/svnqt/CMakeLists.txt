@@ -21,6 +21,7 @@
 include (SvnqtMacros)
 
 SET(SOURCES
+    client_update_parameter.cpp
     apr.cpp
     client_annotate.cpp
     client_cat.cpp
@@ -119,6 +120,7 @@ SET(INST_HEADERS
     repoparameter.h
     client_commit_parameter.h
     client_annotate_parameter.h
+    client_update_parameter.h
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

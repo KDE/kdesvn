@@ -32,6 +32,7 @@
 #include "src/svnqt/info_entry.h"
 #include "src/svnqt/client_parameter.h"
 #include "src/svnqt/client_commit_parameter.h"
+#include "src/svnqt/client_update_parameter.h"
 #include "src/svnqt/shared_pointer.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
@@ -790,7 +791,9 @@ void kio_svnProtocol::update(const KUrl&url,int revnumber,const QString&revkind)
         // always update externals, too. (third last parameter)
         // no unversioned items allowed (second last parameter)
         // sticky depth (last parameter)
-        m_pData->m_Svnclient->update(pathes, where,svn::DepthInfinity,false,false,true);
+        svn::UpdateParameter _params;
+        _params.targets(p.path()).revision(revnumber).depth(svn::DepthInfinity).ignore_externals(false).allow_unversioned(false).sticky_depth(true);
+        m_pData->m_Svnclient->update(_params);
     } catch (const svn::ClientException&e) {
         extraError(KIO::ERR_SLAVE_DEFINED,e.msg());
     }

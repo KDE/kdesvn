@@ -183,6 +183,7 @@ namespace svn
 
     /**
      * Updates the file or directory.
+     * @param params the parameter for subversion
      * @param path targets.
      * @param revision the revision number to checkout.
      *                 Revision::HEAD will checkout the
@@ -193,9 +194,7 @@ namespace svn
      * @exception ClientException
      */
     virtual Revisions
-    update (const Targets & path, const Revision & revision,
-            Depth depth,bool ignore_externals,bool allow_unversioned,
-            bool sticky_depth) throw (ClientException) = 0;
+    update (const UpdateParameter&params) throw (ClientException) = 0;
 
     /**
      * Retrieves the contents for a specific @a revision of

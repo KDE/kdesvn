@@ -49,6 +49,7 @@
 #include "src/svnqt/client_parameter.h"
 #include "src/svnqt/client_commit_parameter.h"
 #include "src/svnqt/client_annotate_parameter.h"
+#include "src/svnqt/client_update_parameter.h"
 #include "src/svnqt/cache/LogCache.h"
 #include "src/svnqt/cache/ReposLog.h"
 #include "src/svnqt/cache/ReposConfig.h"
@@ -1442,8 +1443,9 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,svn::
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,"Making update",
             i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        svn::Targets pathes(what);
-        ret = m_Data->m_Svnclient->update(pathes,rev, depth,false,false,true);
+        svn::UpdateParameter _params;
+        _params.targets(what).revision(rev).depth(depth).ignore_externals(false).allow_unversioned(false).sticky_depth(true);
+        ret = m_Data->m_Svnclient->update(_params);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;

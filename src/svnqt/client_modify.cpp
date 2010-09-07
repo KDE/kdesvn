@@ -43,6 +43,7 @@
 #include "svnqt/stringarray.h"
 #include "svnqt/client_parameter.h"
 #include "svnqt/client_commit_parameter.h"
+#include "svnqt/client_update_parameter.h"
 
 #include "svnqt/helper.h"
 
@@ -183,13 +184,7 @@ namespace svn
   }
 
   Revisions
-  Client_impl::update (const Targets & path,
-                  const Revision & revision,
-                  Depth depth,
-                  bool ignore_externals,
-                  bool allow_unversioned,
-                  bool sticky_depth
-                      ) throw (ClientException)
+  Client_impl::update (const UpdateParameter&params) throw (ClientException)
   {
     Pool pool;
     Revisions resulting;
@@ -197,15 +192,13 @@ namespace svn
 
     apr_pool_t *apr_pool = pool.pool();
     apr_array_header_t *apr_revisions = apr_array_make (apr_pool,
-                      path.size(),
+                      params.targets().size(),
                       sizeof (svn_revnum_t));
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    error = svn_client_update3(&apr_revisions,path.array(pool),revision,internal::DepthToSvn(depth),sticky_depth,ignore_externals,allow_unversioned,*m_context,pool);
+    error = svn_client_update3(&apr_revisions,params.targets().array(pool),params.revision(),internal::DepthToSvn(params.depth()),params.sticky_depth(),params.ignore_externals(),params.allow_unversioned(),*m_context,pool);
 #else
-    bool recurse = depth==DepthInfinity;
-    Q_UNUSED(sticky_depth);
-    Q_UNUSED(allow_unversioned);
-    error = svn_client_update2(&apr_revisions,path.array(pool),revision,recurse,ignore_externals,*m_context,pool);
+    bool recurse = params.depth()==DepthInfinity;
+    error = svn_client_update2(&apr_revisions,params.targets().array(pool),params.revision(),recurse,params.ignore_externals(),*m_context,pool);
 #endif
     if (error!=NULL) {
         throw ClientException(error);

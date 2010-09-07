@@ -56,6 +56,7 @@ namespace svn
     class CheckoutParameter;
     class CommitParameter;
     class AnnotateParameter;
+    class UpdateParameter;
 
     typedef QLIST<AnnotateLine> AnnotatedFile;
     typedef smart_pointer<svn::Context> ContextP;

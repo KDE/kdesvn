@@ -184,13 +184,6 @@ namespace svn
     /**
      * Updates the file or directory.
      * @param params the parameter for subversion
-     * @param path targets.
-     * @param revision the revision number to checkout.
-     *                 Revision::HEAD will checkout the
-     *                 latest revision.
-     * @param depth Depthness for operation
-     * @param ignore_externals ignore externals
-     * @param allow_unversioned will operation not fail if there are unversioned items in tree with same name.
      * @exception ClientException
      */
     virtual Revisions

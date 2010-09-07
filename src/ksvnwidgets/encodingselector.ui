@@ -1,48 +1,49 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Rajko Albrecht</author>
  <class>EncodingSelector</class>
- <widget class="QWidget" name="EncodingSelector" >
-  <property name="geometry" >
+ <widget class="QWidget" name="EncodingSelector">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>288</width>
-    <height>45</height>
+    <width>409</width>
+    <height>36</height>
    </rect>
   </property>
-  <property name="sizePolicy" >
-   <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form1</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" >
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QLabel" name="m_Mainlabel" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+    <widget class="QLabel" name="m_Mainlabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Select encoding:</string>
      </property>
-     <property name="alignment" >
+     <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>false</bool>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="KComboBox" name="m_encodingList" >
+    <widget class="KComboBox" name="m_encodingList">
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Default utf-8</string>
       </property>
      </item>
@@ -50,7 +51,7 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
    <class>KComboBox</class>
@@ -59,5 +60,25 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_encodingList</sender>
+   <signal>activated(int)</signal>
+   <receiver>EncodingSelector</receiver>
+   <slot>itemActivated(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>381</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>251</x>
+     <y>35</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>itemActivated(int)</slot>
+ </slots>
 </ui>

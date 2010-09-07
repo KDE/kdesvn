@@ -33,7 +33,7 @@ public:
 
     void setCurrentEncoding(const QString&cur);
 
-protected slots:
+protected Q_SLOTS:
     virtual void itemActivated(int);
 
 signals:

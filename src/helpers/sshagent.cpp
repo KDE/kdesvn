@@ -79,29 +79,6 @@ bool SshAgent::querySshAgent()
             m_authSock = QString::fromLocal8Bit(sock);
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
-#ifdef FORCE_ASKPASS
-        kDebug(9510)<<"Using test askpass"<<endl;
-#ifdef HAS_SETENV
-            ::setenv("SSH_ASKPASS",FORCE_ASKPASS,1);
-#else
-            ::putenv("SSH_ASKPASS="FORCE_ASKPASS);
-#endif
-#else
-            QString pro = BIN_INSTALL_DIR;
-            if (pro.size()>0) {
-                pro.append("/");
-            }
-            pro.append("kdesvnaskpass");
-#ifdef HAS_SETENV
-            ::setenv("SSH_ASKPASS", pro.toAscii(),1);
-#else
-            pro = "SSH_ASKPASS="+pro;
-            ::putenv(pro.toAscii());
-#endif
-/*
-        }
-*/
-#endif
         m_isOurAgent = false;
         m_isRunning  = true;
     }
@@ -111,8 +88,32 @@ bool SshAgent::querySshAgent()
         m_isOurAgent = true;
         m_isRunning  = startSshAgent();
     }
-
+    askPassEnv();
     return m_isRunning;
+}
+
+void SshAgent::askPassEnv()
+{
+#ifdef FORCE_ASKPASS
+    kDebug(9510)<<"Using test askpass"<<endl;
+#ifdef HAS_SETENV
+    ::setenv("SSH_ASKPASS",FORCE_ASKPASS,1);
+#else
+    ::putenv("SSH_ASKPASS="FORCE_ASKPASS);
+#endif
+#else
+    QString pro = BIN_INSTALL_DIR;
+    if (pro.size()>0) {
+        pro.append("/");
+    }
+    pro.append("kdesvnaskpass");
+#ifdef HAS_SETENV
+    ::setenv("SSH_ASKPASS", pro.toAscii(),1);
+#else
+    pro = "SSH_ASKPASS="+pro;
+    ::putenv(pro.toAscii());
+#endif
+#endif
 }
 
 
@@ -137,6 +138,7 @@ bool SshAgent::addSshIdentities(bool force)
     kDebug(9510)<<"Using test askpass"<<endl;
     proc.setEnv("SSH_ASKPASS",FORCE_ASKPASS);
 #else
+    kDebug(9510) << "Using kdesvnaskpass"<<endl;
     proc.setEnv("SSH_ASKPASS", "kdesvnaskpass");
 #endif
 
@@ -146,6 +148,7 @@ bool SshAgent::addSshIdentities(bool force)
     proc.waitForFinished(-1);
 
     m_addIdentitiesDone = proc.exitStatus()==QProcess::NormalExit && proc.exitStatus() == 0;
+    askPassEnv();
     return m_addIdentitiesDone;
 }
 

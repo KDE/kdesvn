@@ -194,7 +194,9 @@ void CContextListener::contextNotify (const char *path,
 
     QString msg;
     QString aString = NotifyAction(action);
-
+    /// @todo insert here back link to svnactions where updated items are inserted into a stringlist
+    /// depends on: action (svn_wc_notify_update_update, svn_wc_notify_update_add, svn_wc_notify_update_delete)
+    /// and a revision > -1
     if (!aString.isEmpty()) {
         QTextStream ts(&msg,QIODevice::WriteOnly);
         ts << NotifyAction(action) << " " << QString::FROMUTF8(path);

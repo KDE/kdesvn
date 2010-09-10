@@ -1448,7 +1448,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,svn::
         emit clientException(e.msg());
         return;
     }
-    removeFromUpdateCache(what,depth!=svn::DepthFiles);
+    removeFromUpdateCache(what,depth==svn::DepthFiles);
     EMIT_REFRESH;
     EMIT_FINISHED;
     m_Data->clearCaches();

@@ -46,10 +46,12 @@ public:
     QMutex m_CancelMutex;
 
     bool noDialogs;
+
+    QStringList m_updatedItems;
 };
 
 CContextListenerData::CContextListenerData()
-    : m_cancelMe(false),m_CancelMutex(),noDialogs(false)
+    : m_cancelMe(false),m_CancelMutex(),noDialogs(false),m_updatedItems()
 {
 }
 
@@ -194,7 +196,7 @@ void CContextListener::contextNotify (const char *path,
 
     QString msg;
     QString aString = NotifyAction(action);
-
+    extraNotify(QString::FROMUTF8(path),action,revision);
     if (!aString.isEmpty()) {
         QTextStream ts(&msg,QIODevice::WriteOnly);
         ts << NotifyAction(action) << " " << QString::FROMUTF8(path);
@@ -379,6 +381,30 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
         }
     }
     emit waitShow(false);
+}
+
+const QStringList&CContextListener::updatedItems()const
+{
+    return m_Data->m_updatedItems;
+}
+
+void CContextListener::cleanUpdatedItems()
+{
+    m_Data->m_updatedItems.clear();
+}
+
+void CContextListener::extraNotify(const QString&path,svn_wc_notify_action_t action,svn_revnum_t revision)
+{
+    Q_UNUSED(revision);
+    switch (action) {
+        case svn_wc_notify_update_update:
+        case svn_wc_notify_update_add:
+        case svn_wc_notify_update_delete:
+            m_Data->m_updatedItems.append(path);
+            break;
+        default:
+            break;
+    }
 }
 
 #include "ccontextlistener.moc"

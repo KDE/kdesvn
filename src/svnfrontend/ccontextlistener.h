@@ -81,10 +81,16 @@ public:
 
     virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring);
 
-public slots:
+    // used by SvnActions
+    //! get list of updated items when svn update is called
+    const QStringList&updatedItems()const;
+    //! cleans list of updatedItems, should called before calling svn::Client::update
+    void cleanUpdatedItems();
+
+public Q_SLOTS:
     virtual void setCanceled(bool);
 
-signals:
+Q_SIGNALS:
     void sendNotify(const QString&);
     void tickProgress();
     void waitShow(bool);
@@ -95,6 +101,9 @@ protected:
     static const QString action_strings[];
     static const QString notify_state_strings[];
     CContextListenerData*m_Data;
+
+private:
+    void extraNotify(const QString&path,svn_wc_notify_action_t action,svn_revnum_t revision);
 };
 
 #endif

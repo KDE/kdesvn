@@ -1443,12 +1443,14 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,svn::
             i18n("Making update - hit cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::Targets pathes(what);
+        m_Data->m_SvnContextListener->cleanUpdatedItems();
         ret = m_Data->m_Svnclient->update(pathes,rev, depth,false,false,true);
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return;
     }
-    removeFromUpdateCache(what,depth==svn::DepthFiles);
+    removeFromUpdateCache(m_Data->m_SvnContextListener->updatedItems(),true);
+    //removeFromUpdateCache(what,depth==svn::DepthFiles);
     EMIT_REFRESH;
     EMIT_FINISHED;
     m_Data->clearCaches();

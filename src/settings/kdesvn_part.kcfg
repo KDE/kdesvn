@@ -252,6 +252,10 @@
         <default>false</default>
         <label>Support overwrite for KIO modul</label>
     </entry>
+    <entry key="display_dockmsg" type="Bool">
+        <default>true</default>
+        <label>Print progress messages in kde dock area</label>
+    </entry>
   </group>
   <group name="timed_jobs">
     <entry key="poll_modified" type="Bool">

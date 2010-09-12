@@ -129,7 +129,8 @@ private:
 
 protected:
     QString getDefaultLog();
-    bool supportOverwrite();
+    bool supportOverwrite()const;
+    bool useKioprogress()const;
 };
 
 }

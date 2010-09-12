@@ -1090,7 +1090,7 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
                 processedSize(KIO::filesize_t(current));
             } else {
                 written(current);
-                to_dbus = true;
+                to_dbus = useKioprogress();
             }
             m_pData->_last = now;
         }
@@ -1104,10 +1104,16 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
     }
 }
 
-bool kio_svnProtocol::supportOverwrite()
+bool kio_svnProtocol::supportOverwrite()const
 {
     Kdesvnsettings::self()->readConfig();
     return Kdesvnsettings::kio_can_overwrite();
+}
+
+bool kio_svnProtocol::useKioprogress()const
+{
+    Kdesvnsettings::self()->readConfig();
+    return Kdesvnsettings::display_dockmsg();
 }
 
 /*!
@@ -1125,6 +1131,9 @@ QString kio_svnProtocol::getDefaultLog()
 
 void kio_svnProtocol::notify(const QString&text)
 {
+    if (!useKioprogress()) {
+        return;
+    }
     CON_DBUS;
     kdesvndInterface.notifyKioOperation(text);
 }
@@ -1140,6 +1149,9 @@ void kio_svnProtocol::extraError(int _errid,const QString&text)
 
 void kio_svnProtocol::registerToDaemon()
 {
+    if (!useKioprogress()) {
+        return;
+    }
     CON_DBUS;
     kdesvndInterface.registerKioFeedback(m_pData->m_Id);
 }
@@ -1151,6 +1163,9 @@ void kio_svnProtocol::unregisterFromDaemon()
 }
 bool kio_svnProtocol::checkKioCancel()const
 {
+    if (!useKioprogress()) {
+        return false;
+    }
     CON_DBUS_VAL(false);
     QDBusReply<bool> res=kdesvndInterface.canceldKioOperation(m_pData->m_Id);
     return res.isValid()?res.value():false;
@@ -1158,6 +1173,9 @@ bool kio_svnProtocol::checkKioCancel()const
 
 void kio_svnProtocol::startOp(qulonglong max, const QString&title)
 {
+    if (!useKioprogress()) {
+        return;
+    }
     CON_DBUS;
     kdesvndInterface.maxTransferKioOperation(m_pData->m_Id,max);
     kdesvndInterface.titleKioOperation(m_pData->m_Id,title,title);
@@ -1166,6 +1184,9 @@ void kio_svnProtocol::startOp(qulonglong max, const QString&title)
 
 void kio_svnProtocol::stopOp(const QString&message)
 {
+    if (!useKioprogress()) {
+        return;
+    }
     CON_DBUS;
     kdesvndInterface.setKioStatus(m_pData->m_Id,0,message);
     unregisterFromDaemon();

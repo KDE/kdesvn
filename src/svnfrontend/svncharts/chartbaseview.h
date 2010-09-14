@@ -33,7 +33,7 @@ class ChartBaseView : public QAbstractItemView
     Q_OBJECT
 
     public:
-        enum {BASE=0, BARVIEW=1,PIEVIEW=2};
+        enum VIEWTYPE {BASE=0, BARVIEW=1,PIEVIEW=2};
         ChartBaseView(QWidget *parent = 0);
         virtual ~ChartBaseView();
 

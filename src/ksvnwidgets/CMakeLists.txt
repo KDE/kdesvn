@@ -32,6 +32,7 @@ KDE_ADD_UI_FILES(
 )
 
 SET(ksvnwidgetsrc
+    commitbugtrackervalues.cpp
     authdialogimpl.cpp
     authdialogwidget.cpp
     commitmsg_impl.cpp
@@ -49,6 +50,7 @@ SET(ksvnwidgetsrc
     )
 
 SET(ksvnwidgethdr
+    commitbugtrackervalues.h
     authdialogimpl.h
     authdialogwidget.h
     commitmsg_impl.h

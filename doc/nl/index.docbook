@@ -5,7 +5,7 @@
   <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc -->
   <!ENTITY % addindex "IGNORE">
   <!ENTITY konqi "<application>konqueror</application>">
-  <!ENTITY krus "<application>dolphin</application>">
+  <!ENTITY krus "<application>krusader</application>">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 
 
@@ -39,7 +39,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <copyright>
 <year>2005</year>
-<year>2008</year>
+<year>2006</year>
 <holder>Rajko Albrecht</holder>
 </copyright>
 
@@ -366,43 +366,12 @@ Items verwijderen is altijd recursief. B.V.,wanneer een map verwijderd wordt, da
 </para>
 </sect3>
 </sect2>
-
-<sect2 id="logdisplay">
-<title>Logs tonen</title>
-<para>
-Het tonen van de log kan gestart worden met
-<keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo>
-waneer een of geen item in het overzicht is gemarkeerd. Af hankelijk van Uw instellingen (lees <xref linkend="subversion-settings" xreflabel="settings"/>) &kdesvn; haalt de log informatie startend bij head en toont het .
-</para>
-<sect3  id="logdisplay-dlg">
-<title>Het log display venster</title>
-<para>
-Aan de linkerzijde is de lijst met logentries te zien die  &kdesvn; ophaalde . Het  logbericht  is beperkt tot een regel . Wanneer een logentrie wordt gekozen is het volledige logbericht is rechtsboven te zien. 
-Rechtsonder is een lijst met de veranderde bestanden.Dit venster verschijnt ALLEEN als &kdesvn;  zo is ingesteld dat  deze lijst wordt opgehaald.
-</para>
-<para>
-Met de knoppen boven het venster kan een andere  bereik  (range) voor de logs gekozen worden.
-
-<important><para>Dit bereik wordt zonder vooringestelde grenzen verstuurd, denk dus goed na bij grote repositories.</para></important>
-
-</para>
-<para>
-De knoppen onder het venster werken altijd op het gekozen log item, maar niet op geselecteerde items in de lijst met veranderingen. Dus wanneer het volgende commando &quot;<literal>Vorige diff</literal>&quot; gekozen word, maakt het een diff over alle veranderde items in deze revisie als ze een gelijke of lagere revisie hebben. Hetzelfde geldt voor &quot;<literal>Diff revisie's</literal>&quot;
-</para>
-<para>
-&quot;<literal>Annotate</literal>&quot; werkt natuurlijk alleen als het item waarvan de log is een bestand is.
-</para>
-<para>
-Bij alle items in beide lijsten On all listentries (beide lijsten)kan een contekstmenu geopend worden voor extra mogelijkheden. In de linker lijst is dit &quot;Versie voor de linkerkant van diff&quot; (dwz., begin revisie) en &quot;Versie voor de rechterkant van diff&quot; (dwz., eind of doel van  diff, in unified wordt dit gedeelte gemarkeerd met een &quot;<computeroutput>+++</computeroutput>&quot;). De hier gekozen revisie's worden gemarkeerd met een pijltje.
-</para>
-</sect3>
-</sect2>
 </sect1>
 
 <sect1 id="working-with-repositories">
 <title>Werken met repositories</title>
 <para>
-Eenvoudig bladeren door de repository kan gedaan worden met &konqi; ,&krus; of vergelijkbare bestandsbeheerders: Open een URL met een protocool zoals beschreven in <xref linkend="kdesvn-features" xreflabel="Features" /> (Alle varianten die starten met &quot;k&quot;) en zij zullen de inhoud tonen. Hierdoor kunnen eenvoudige opdrachten zoals kopieren, verplaatsen en verwijderen uitgevoerd worden. Wanneer het volgende filter &quot;?rev=&lt;xxx&gt;&quot; wordt ingesteld, zijn alleen de gegevens van een specifiek revisie te zien. De syntax van een revisie-filter wordt beschreven in <xref linkend="revision-syntax" />, lees meer over KIO::ksvn in <xref linkend="kdesvn-kio" />
+Eenvoudig bladeren door de repository kan gedaan worden met &konqi; &krus; of vergelijkbare bestandsbeheerders: Open een URL met een protocool zoals beschreven in <xref linkend="kdesvn-features" xreflabel="Features" /> (Alle varianten die starten met &quot;k&quot;) en zij zullen de inhoud tonen. Hierdoor kunnen eenvoudige opdrachten zoals kopieren, verplaatsen en verwijderen uitgevoerd worden. Wanneer het volgende filter &quot;?rev=&lt;xxx&gt;&quot; wordt ingesteld, zijn alleen de gegevens van een specifiek revisie te zien. De syntax van een revisie-filter wordt beschreven in <xref linkend="revision-syntax" />, lees meer over KIO::ksvn in <xref linkend="kdesvn-kio" />
 </para>
 <para>
 Alle opdrachten behalve &quot;Kopieren&quot; kunnen alleen uitgevoerd worden in de revisie HEAD.
@@ -533,24 +502,7 @@ In afwijking met het interne (merge) samenvoeg-programma, mag het doel een gewon
 Indien recursief niet is ingeschakeld, wordt de export uitgevoerd als een platte export. Wees voorzichtig: wanneer dit wordt gedaan met werkkopiën, worden externals NIET geëxporteerd.
 </para>
 </sect3>
-</sect2>
 
-<sect2 id="op-resolve">
-<title>Konflicten oplossen</title>
-<para>
-&kappname; heeft zelf geen module om konflicten op te lossen maar er kan een extern programma gebruikt worden vanuit &kappname;. In <xref linkend="extern-resolve-setup"/> is een beschrijving hoe dit ingesteld kan worden.
-</para>
-<para>
-Wanneer een item de status heeft van &quot;konflict&quot; ( er is dan een rood kruis te zien bij zulke items) dan kan het volgende gekozen worden 
-<menuchoice>
-<guimenu>Subversion</guimenu>
-<guisubmenu>Werkkopie</guisubmenu>
-<guisubmenu>Konflict oplossen</guisubmenu>
-</menuchoice>.
-of vanuit het contextmenu <menuchoice><guisubmenu>konflict oplossen</guisubmenu></menuchoice> (alleen bij items met een konflict)
-&kappname; Nu start het programma dat door U is geinstalleerd  (of het standaard programma). Na dit opgelost te hebben, kan dit item als opgelost gemarkeerd worden 
-(<menuchoice><guimenu>Subversion</guimenu><guisubmenu>Werkkopie</guisubmenu><guisubmenu>Markeer als opgelost</guisubmenu></menuchoice>) , anders kunnen de veranderingen niet vastgelegd worden.
-</para>
 </sect2>
 </sect1>
 
@@ -612,35 +564,6 @@ Bij lokaal geopende repositories (b.v., <prompt>file://</prompt>-Protocool) en b
 </para>
 <para>
 Ondersteuning voor meervoudige sets van deze eigenschappen volgen mischien later, (b.v. in een submap een andere waarde voor een ander item) maar meestal is het opzoeken van van een enkele item genoeg.
-</para>
-</sect2>
-</sect1>
-
-<sect1 id="revision-tree">
-<title>De revisie boom</title>
-<para>
-De revisie probeert de hele geschiedenis van een item te laten zien, zodat de gebruiker een beter idee heeft over de geschiedenis van een item. Er moet daarom de complete log van respository gescan worden omdat er informatie verzameld moet worden dat subversion niet  (en ik denk niet zal) geven. Omdat dit veel verkeer zal geven, gebruikt gebruikt revisie boom de interne <link linkend="logcache-descr">logcache</link>.
-</para>
-<sect2>
-<title>Benodigheden</title>
-<para>
-De revisie boom is  ggenereerd met  <prompt>dot</prompt>. Dus moet voor een werkende revisie boom, het <prompt>graphviz</prompt> pakket zijn geinstalleerd.
-</para>
-</sect2>
-</sect1>
-
-<sect1 id="logcache-descr"> 
-<title>Interne log cache</title>
-<para>&kappname; kan een interne logcache gebruiken voor sommige operatie's. Meestal is dit in gebruik voor <link linkend="revision-tree">de revisie boom</link> maar ook wanneer een eenvoudige log in de offline modus wordt bekeken. De caches zijn als sqlite databases opgeslagen in <prompt>$HOME/.sqvnqt/logcache</prompt>. Elk genumberde bestand is een opslag voor een andere repository.<warning><para> De databases kunnen groot worden! Het automatische updaten van de logcache kan daarom uitgeschakeld worden in de instellingen.</para></warning> Ook kan eenvoudig een  database verwijdert worden, dan zal er geen  cached log terugkomen voor deze repository (en geen  revisie boom!) maar als het automatisch updaten van de cache niet is uitgeschakeld, zal de cache weer opnieuw gevuld worden wanneer de repository wordt geopend, of een bijbehorende werkkopie.
-</para>
-<sect2>
-<title>Offline mode</title>
-<para>Kdesvn kan werken zonder  netwerk-toegang, dwz..,het kan zo ingesteld worden dat netwerk-toegang niet toegestaan is. Dit kan handig zijn wannneer er gewerkt wordt zonder een netwerk zoals met een notebook. In zulke gevallen haalt  &kappname; altijd de logs vanuit de interne cache. Op dit moment (2008-06-23) is de log beperkt tot basisfuncties vanwege technische redenen, daarom kan de  cached log (maar niet moet) verschillen van de echte  log. Verschillen  betekent dat niet alle bewerkingen te zien zijn, zelfs als <prompt>&quot;Log volgt nodechanges&quot;</prompt> is ingeschakeld.</para>
-</sect2>
-<sect2>
-<title>Logcache en revisie boom</title>
-<para>
-De revisie boom gebruikt alleen de logcache omdat anders iedere keer de logs opnieuw moeten worden opgehaalt. Het ververst NIET de  logcache (maar dit kan veranderen in een latere release).
 </para>
 </sect2>
 </sect1>
@@ -761,62 +684,15 @@ Dit item - als het een map is - een item daarin heeft conflicten met (die opgelo
 
 </para>
 </sect1>
-<sect1 id="kdesvn-passwords">
-<title>&kappname; en wachtwoorden</title>
-<para>
-&kappname;/subversion kan wachtwoorden opslaan. Het opslaan van wachtwoorden heeft altijd een risico, maar het maakt de grafische userinterface wel meer gebruiksvriendelijk.
-</para>
-<sect2>
-<title>Wachtwoorden niet opslaan</title>
-<para>
-De meest veilige manier, maar soms onhandig met GUI's zoals &kappname;. Speciaal de achtergrond processen van...In particular the background processes of &kappname; zullen altijd een wachtwoord vragen als
-de respository de toegang heeft beperkt voor lees operaties zoals update en status. Hetzelfde geldt voor  &quot;commit&quot; enzovoorts. 
-Dus als U de wachtwoorden niet opslaat, kunt U beter  "Controleren voor updates wanneer een werkkopie geopend wordt" uitschakelen.
-</para>
-</sect2>
-<sect2>
-<title>Wachtwoorden opslaan in KDE Portefeuillebeheer</title>
-<para>
-Veilige opslag van wachtwoorden woordt veel gebruikt in KDE programma's zoals kmail en konqueror. 
-Als U wachtwoorden wil opslaan (en de meeste die kdesvn gebruiken, willen dit) , dat zou dit willen gebruiken. Bedenk wel dat versleutelde opslag geen heel erg veilige opslag (high-secure storage) is. Voor details lees de kdewallet documentatie.
-</para>
-</sect2>
-<sect2>
-<title>Wachtwoorden opslaan in  subversions eigen wachtwoord opslag</title>
-<para>
-Dit word niet aanbevolen omdat het wachtwoord als leesbare tekst word opgeslage, niet geloofwaardig? Kijk dan maar in de banstanden in <prompt>~/.subversion/auth/svn.simple</prompt>. 
-Doe dit alleen als ook regelmatig andere clients dan  &kappname; zoals rapidsvn of esvn of de originele svn commandline client. Als meestal de commandline client wordt gebruikt voor checkouts of updates die geen wachtwoord nodig hebben en &kappname; voor commit/move/copy, gebruik in dat geval KDE Portefeuillebeheer.
-</para>
-</sect2>
-<sect2>
-<title>Interne wachtwoord cache</title>
-<para>
-Het interne wachtwoord cache kan ingeschakeld worden, zodat het wachtwoord onthouden wordt zolang als &kappname; in het geheugen is. Het is dan niet nodig om een wachtwoord twee keer in te voeren als het biet in KDE Portefeuillebeheer is opgeslagen.
-</para>
-</sect2>
-<sect2>
-<title>Het speciale geval svn+ssh</title>
-<para>
-Waneer  subversion via svn+ssh wordt gebruikt, dan kan wachtwoord opslag gebruikt worden via  ssh en ssh-agent. Hiervoor is ssh-toegang tot de andere machine en en repository nodig. Wanneer hiervan gebruik wordt gemaakt dan moet gebruik gemaakt worden van de public key authentication van ssh, niet wachtwoord authentication. (In feite ssh geeft de voorkeur aan public key authentication). Hiervoor moet de  pulic ssh-key in het doel worden geplaatst, dwz. het repository systeem. SSH wachtwoorden worden gebruikt door subversion wachtwoord opslag of  KDE Portefeuillebeheer of de interne wachtwoord cache.
-</para>
-<para>
-Als de vraag voor het wachtwoord van de  ssh-key ongewenst is, dan kan de <prompt>ssh-agent</prompt>, met een keuze-menu gebruikt worden: 
-<menuchoice><guimenu>
-Subversion
-</guimenu>
-<guimenuitem>Voeg de  ssh identities toe aan ssh-agent</guimenuitem></menuchoice>
-Hier kan de  ssh-key-wachtwoord voor de huidige sessie bewaart worden, zodat het niet nodig is mo iedere keer het wachtwoord in te vullen.
-</para>
-</sect2>
 
-
+<!--
 <sect1>
 <title>Wat &kdesvn; niet is</title>
 <para>
 &kappname; heeft NIET de capaciteit om direct subversion repositories te wijzigen. Dit is niet omdat het niet is erin geprogrammeerd, dit is omdat behalve bij speciaal daarvoor ingestelde op webserver gebaseerde repositories, deze voorziening geen onderdeel van subversion zelf. Subversion is GEEN transferprotocool zoals FTP of SFTP. De data moet daarom eerst veranderd worden in een werkkopie. Het importeren van nieuwe bestanden of mappen via verslepen en loslaten is een ander idee.
 </para>
 </sect1>
-
+-->
 </chapter>
 
 <chapter id="kdesvn-kio">
@@ -1413,12 +1289,6 @@ Via het instellingenscherm kunnen de instellingen veranderd worden. Ze zijn inge
 <entry>Wanneer een werkkopie wordt geopend, start onmiddelijk een controle voor updates in de achtergrond.</entry>
 </row>
 <row>
-
-<entry>De log cache vullen bij het openen</entry>
-<entry>Indien ingeschakeld, gaat &kappname; de logcache opnieuw vullen waneer een repository of een werkkopie  wordt geopend repository als de  url niet lokaal is (<programlisting>file:&#047;&#047;</programlisting>)</entry>
-</row>
-<row>
-
 <entry>Controleer of items de eigenschap \"svn:needs-lock\" hebben</entry>
 <entry>Controleer bij werkkopie's of een item deze eigenschap heeft en toont in dat geval een speciaal icoontje ernaast. Dit inschakelen maakt het overzicht erg langzaam.</entry>
 </row>
@@ -1428,7 +1298,7 @@ Via het instellingenscherm kunnen de instellingen veranderd worden. Ze zijn inge
 </row>
 
 <row>
-<entry>Item-informatie recursief opvragen</entry>
+<entry>Iteminformatie recursief opvragen</entry>
 <entry>Wanneer &quot;info&quot; bij een map is ingeschakeld, zal informatie over alle items in deze map verzameld worden, kan erg langzaam zijn.</entry>
 </row>
 
@@ -1445,11 +1315,6 @@ Via het instellingenscherm kunnen de instellingen veranderd worden. Ze zijn inge
 <row>
 <entry>Wachtwoord opslaan in de KDE-portefeuille</entry>
 <entry>Bij het bewaren van wachtwoorden is het bestand met leesbare tekst een gat in de veiligheid. &kappname; kan de wachtwoorden opslaan en ook weer gebruiken in de versleutelde KDE-portefeuille in plaats van de normale plek (vanaf versie 0.12.0). Aan de andere kant kunnen andere subversion-cliënt's dit niet inlezen, dus moet bij het gebruik van programma's zoal svn-cmdline of rapidsvn ze toch opnieuw ingevoerd worden. Zolang subversion de opslag van wachtwoorden niet versleuteld is het mischien verstandiger om ze helemaal niet op te slaan.</entry>
-</row>
-
-<row>
-<entry>Interne wachtwoord cache gebruiken</entry>
-<entry>Een wachtwoord wordt niet definitief is opgelagen &kappname; zal het onthouden totdat &kappname; afsluit, het hoeft daarom niet bij iedere gebeurtenis opnieuw ingevoerd te worden. Deze cache is niet permanent, het wordt dus nergens opgeslagen.</entry>
 </row>
 
 <row>
@@ -1591,45 +1456,6 @@ Vervang door doel.
 
 </variablelist>
 
-</para>
-</sect3>
-</sect2>
-<sect2 id="extern-resolve-setup">
-<title>Programma voor het oplossen van konflikten</title>
-<para>
-Een extern programma zoals  <command>kdiff3</command> kan gebruikt worden voor het oplossen van konflikten, de standaard keuze is 
-<prompt>kdiff3 %o %m %n -o %t</prompt>.
-</para>
-<sect3>
-<title>Parameters aanpassen voor het extern konflikt oplossen</title>
-<para>
-Tussen haakjes na elke beschrijving een voorbeeld hoe subversion de bestanden oproept. Deze keuzes zijn ontworpen voor kdiff3, omdat op dit moment (2008-02-07) dit de enige manier is die ik ken om alle parameters die nodig zijn om een konflict goed op te lossen.
-<variablelist>
-<varlistentry>
-<term>%o or %l</term>
-<listitem><para>
-Oude (lokale,links) versie. Dit betekent dat de lagere revisienummer, is bijvoorbeeld het startpunt van de veranderingen waar een konflikt begint. (<prompt>foo.cc.r2</prompt>)
-</para></listitem>
-</varlistentry>
-<varlistentry>
-<term>%m or %w</term>
-<listitem><para>
-Mijn(werkende) versie van het bestand, byv. waar iets verrandert is tegenover de oude versie. (<prompt>foo.cc.mine</prompt>)
-</para></listitem>
-</varlistentry>
-<varlistentry>
-<term>%n or %r</term>
-<listitem><para>
-Nieuwe (remote, rechts) versie van het bestand, byv. de versie die een ander heeft gemaakt. (<prompt>foo.cc.r3</prompt>)
-</para></listitem>
-</varlistentry>
-<varlistentry>
-<term>%t</term>
-<listitem><para>
-Doel naam, byv. de orginele naam. Voor kdiff3 (als voorbeeld) moet dit achter <prompt>&quot;-o&quot;</prompt> parameter (= output file). (<prompt>foo.cc</prompt>)
-</para></listitem>
-</varlistentry>
-</variablelist>
 </para>
 </sect3>
 </sect2>
@@ -2089,6 +1915,9 @@ Het &quot;probleem&quot; is ssh zelf. Subversion maakt voor elk verzonden comman
 <para>
 Wanneer een ssh-agent wordt gestart voordat &kappname; is gestart, voeg dan Uw indentiteit toe aan de cache van deze ssh-agent, &kappname; zal dit niet veranderen vanwege de veiligheid, en vraagt daarom steeds opnieuw naar Uw wachtwoord. (Lees ook <ulink url="man:ssh-add">Manpage van ssh-add</ulink>)
 </para>
+<para>
+<ulink url="http://steamedpenguin.com/kdesvn-and-private-keys/">Steamedpenguin heeft een mooie beschrijving</ulink> hoe &kappname; te gebruiken met ssh en keychain.
+</para>
 </answer>
 </qandaentry>
 <qandaentry>
@@ -2098,16 +1927,6 @@ Wanneer een ssh-agent wordt gestart voordat &kappname; is gestart, voeg dan Uw i
 <answer>
 <para>
 Het mag niet uitgeschakeld worden. Dit is een eigenschap van ssh-agent zelf, wanneer het merkt dat het in een terminal is gestart, dan vraagt het voor een wachtwoord in een terminal en niet in een X-dialoog zoals kdesvnaskpass. (Lees ook <ulink url="man:ssh-add">Manpage van ssh-add</ulink>).
-</para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para>Hoe kan ik een andere poort of een andere gebruikersnaam gebruiken bij het svn+ssh protocoll?</para>
-</question>
-<answer>
-<para>
-Een entry in. <prompt>$HOME/.ssh/config</prompt> kan gebruikt worden, lees <ulink url="man:ssh_config">Ssh config manpage</ulink> voor de juiste syntax.
 </para>
 </answer>
 </qandaentry>
@@ -2135,11 +1954,11 @@ Het volgende probleem kan zijn dat bij het compileren de libsuffix voor 64-Bit s
 </para>
 <para>Als het probleem nog niet is opgelost, probeer dan het volgende in een terminal:
 <programlisting>
-  export LD_PRELOAD=/usr/lib/kde4/libkdesvnpart.so
+  export LD_PRELOAD=/usr/lib/kde3/libkdesvnpart.so
   kdesvn
   unset LD_PRELOAD
 </programlisting>
-(/usr/lib/kde4 kan op Uw systeem anders zijn, controleer daarom de plaats waar het is geinstalleerd)
+(/usr/lib/kde3 kan op Uw systeem anders zijn, controleer daarom de plaats waar het is geïnstalleerd)
 </para>
 <para>
 Met behulp van veel output is te zien waarom libkdesvnpart.so niet geladen kan worden, dit kan helpen om het probleem op te lossen.
@@ -2152,7 +1971,7 @@ Met behulp van veel output is te zien waarom libkdesvnpart.so niet geladen kan w
 <appendix id="revision-syntax">
 <title>Opbouw voor revisies</title>
 <para>
-Revisies kunnen in dezelfde vorm gegeven worden als bij de standaard svn - client. Dit betekent: een nummer, trefwoord of een datum.
+Revisies kunnen in dezelfde vorm gegeven worden als bij de standaard svn - cliënt. Dit betekent: een nummer, trefwoord of een datum.
 </para>
 <para>
 <variablelist>
@@ -2284,11 +2103,11 @@ Documentatie copyright 2005-2006 Rajko Albrecht <email>kdesvn@alwins-world.de</e
 <!-- Deze eerste item bevat een voorbeel (boiler plate) voor programma's die een onderdeel zijn van KDE CVS. Deze moet verwijderd worden wanneer U Uw programma releast. -->
 <para>
 &kappname; kan worden gevonden op
- <ulink url="http://kdesvn.alwins-world.de//trac.fcgi/downloads/">
+ <ulink url="http://kdesvn.alwins-world.de/downloads/">
 de &kappname; download area</ulink>.
 </para>
 <para>
-Op de <ulink url="http://kdesvn.alwins-world.de//trac.fcgi/browser/trunk">laatste repository versie</ulink> is te zien wat de laatste ontwikkelingen zijn.
+Op de <ulink url="http://kdesvn.alwins-world.de/browser/trunk">laatste repository versie</ulink> is te zien wat de laatste ontwikkelingen zijn.
 </para>
 <para>
 De homepage van het project is <ulink url="http://kdesvn.alwins-world.de/">http://kdesvn.alwins-world.de/</ulink>
@@ -2307,8 +2126,8 @@ kdelibs, of kdebase.
 -->
 
 <para>
-Subversion 1.3 of moderner en &kde; 4.1.x
-of moderner. Subversion ouder dan 1.3 wordt NIET ondersteund!
+Subversion 1.2 of moderner en &kde; 3.4.x
+of moderner. Subversion ouder dan 1.2 wordt NIET ondersteund!
 </para>
 <para>
 Subversion kan worden gevonden op <ulink url="http://subversion.tigris.org">its homepage</ulink> , maar Uw distributeur heeft waarschijnlijk pakketten voor Uw systeem en/of ditributie.
@@ -2316,7 +2135,7 @@ Subversion kan worden gevonden op <ulink url="http://subversion.tigris.org">its 
 <!-- Voor een lijst van updates, kunt U verwijzen naar de webpage van het Changelog- bestand, of ... -->
 <para>
 Een lijst met wijzigingen kan gevonden worden op <ulink
-url="http://kdesvn.alwins-world.de//trac.fcgi/browser/trunk/ChangeLog">http://kdesvn.alwins-world.de/browser/trunk/ChangeLog</ulink>.
+url="http://kdesvn.alwins-world.de/browser/trunk/ChangeLog">http://kdesvn.alwins-world.de/browser/trunk/ChangeLog</ulink>.
 </para>
 </sect1>
 
@@ -2340,3 +2159,16 @@ url="http://kdesvn.alwins-world.de//trac.fcgi/browser/trunk/ChangeLog">http://kd
 
 &documentation.index;
 </book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->
+

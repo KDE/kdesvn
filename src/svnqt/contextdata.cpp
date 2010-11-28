@@ -752,7 +752,7 @@ void ContextData::initMimeTypes()
 
     svn_config_get(cfg, &mimetypes_file,
                    SVN_CONFIG_SECTION_MISCELLANY,
-                   SVN_CONFIG_OPTION_MIMETYPES_FILE, SVN_CONFIG_FALSE);
+                   SVN_CONFIG_OPTION_MIMETYPES_FILE, 0);
     if (mimetypes_file && *mimetypes_file) {
         if ((err = svn_io_parse_mimetypes_file(&(m_ctx->mimetypes_map),
              mimetypes_file, pool))) {

@@ -59,6 +59,7 @@
 #include <kio/copyjob.h>
 #include <kfiledialog.h>
 #include <knotification.h>
+#include <unistd.h>
 
 #include <QSortFilterProxyModel>
 #include <QEvent>

@@ -132,7 +132,7 @@ FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 KDE_AUTOMOC(${svnfrontendsrc})
 KDE_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
 
-ADD_SUBDIRECTORY(svncharts)
+
 ADD_SUBDIRECTORY(background)
 
 ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})

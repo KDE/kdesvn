@@ -142,8 +142,6 @@ protected Q_SLOTS:
     void slotChangeToRepository();
     void slotCheckNewItems();
 
-    void slotSimpleStatistic();
-
     void slotCommit();
     void slotDirCommit();
     void slotDirUpdate();

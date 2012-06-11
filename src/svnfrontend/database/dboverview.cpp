@@ -29,7 +29,6 @@
 #include "src/svnqt/cache/DatabaseException.h"
 #include "src/svnfrontend/fronthelpers/createdlg.h"
 #include "src/svnqt/client.h"
-#include "src/svnfrontend/svncharts/statisticview.h"
 #include "helpers/stringhelper.h"
 
 #include <QStringListModel>
@@ -177,11 +176,6 @@ void DbOverview::deleteRepository()
 void DbOverview::repositorySettings()
 {
     DbSettings::showSettings(selectedRepository());
-}
-
-void DbOverview::repositoryStatistic()
-{
-    StatisticView::showStatistic(selectedRepository());
 }
 
 #include "dboverview.moc"

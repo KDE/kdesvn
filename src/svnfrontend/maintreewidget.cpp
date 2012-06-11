@@ -39,7 +39,6 @@
 #include "fronthelpers/widgetblockstack.h"
 #include "fronthelpers/fronthelpers.h"
 #include "fronthelpers/DialogStack.h"
-#include "svncharts/statisticview.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/deleteform_impl.h"
 #include "opencontextmenu.h"
@@ -2336,19 +2335,6 @@ void MainTreeWidget::slotLeftProperties()
     SvnItem*k = DirSelected();
     if (!k) return;
     m_Data->m_Model->svnWrapper()->editProperties(k,isWorkingCopy()?svn::Revision::WORKING:svn::Revision::HEAD);
-}
-
-void MainTreeWidget::slotSimpleStatistic()
-{
-    svn::InfoEntry inf;
-    if (!m_Data->m_Model->svnWrapper()->singleInfo(baseUri(),baseRevision(),inf)) {
-        return;
-    }
-    if (inf.reposRoot().isEmpty()) {
-        KMessageBox::sorry(KApplication::activeModalWidget(),i18n("Could not retrieve repository."),i18n("SVN Error"));
-    } else {
-        StatisticView::showStatistic(inf.reposRoot());
-    }
 }
 
 void MainTreeWidget::slotDirRecProperty()

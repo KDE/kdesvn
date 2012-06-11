@@ -44,7 +44,6 @@ protected Q_SLOTS:
     virtual void deleteCacheItems();
     virtual void deleteRepository();
     virtual void repositorySettings();
-    virtual void repositoryStatistic();
 
 protected:
     QString selectedRepository()const;

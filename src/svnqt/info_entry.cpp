@@ -26,6 +26,9 @@
 #include "svnqt/pool.h"
 #include <svn_client.h>
 #include <svn_path.h>
+#ifdef HAS_SVN_VERSION_H
+#include <svn_version.h>
+#endif
 
 namespace svn
 {

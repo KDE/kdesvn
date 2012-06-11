@@ -28,6 +28,10 @@
 
 #include <svn_wc.h>
 
+#ifdef HAS_SVN_VERSION_H
+#include <svn_version.h>
+#endif
+
 namespace svn
 {
     ConflictResult::ConflictResult()

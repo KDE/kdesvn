@@ -37,6 +37,8 @@
 
 #define SVNQT_SIZE_UNKNOWN QLONG(-1)
 
+#define HAS_SVN_VERSION_H @HAS_SVN_VERSION_H@
+
 /* the difference between qt3 and qt4 is too much... :( */
 class QSqlDatabase;
 typedef @QDATABASE@ QDataBase;

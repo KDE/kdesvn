@@ -108,6 +108,9 @@ IF (UNIX)
 
   CHECK_INCLUDE_FILES(execinfo.h HAS_BACKTRACE_H)
 
+  CHECK_INCLUDE_FILES("svn_version.h" HAS_SVN_VERSION_H)
+
+
 ENDIF (UNIX)
 
 #search libaries for Windows

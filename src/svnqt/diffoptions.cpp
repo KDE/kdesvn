@@ -27,6 +27,9 @@
 #include "pool.h"
 
 #include <svn_diff.h>
+#ifdef HAS_SVN_VERSION_H
+#include <svn_version.h>
+#endif
 
 namespace svn
 {

@@ -49,7 +49,7 @@ typedef svn::SharedPointer<KTemporaryFile> TempFilePtr;
 /**
 	@author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevGraphView : virtual public QGraphicsView
+class RevGraphView : public QGraphicsView
 {
     Q_OBJECT
 public:

@@ -78,7 +78,13 @@ namespace svn{
 
             bool sticky_depth()const;
             UpdateParameter&sticky_depth(bool);
-
+            
+            bool make_parents()const;
+            UpdateParameter&make_parents(bool);
+            
+            bool add_as_modification()const;
+            UpdateParameter&add_as_modification(bool);
+            
     };
 }
 

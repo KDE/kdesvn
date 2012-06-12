@@ -134,6 +134,14 @@
         <label>Is networking enabled</label>
         <default>true</default>
     </entry>
+    <entry key="update_add_as_modification" type="Bool">
+        <label>Local add results in modification instead of conflicts</label>
+        <default>true</default>
+    </entry>
+    <entry key="update_make_parents" type="Bool">
+        <label>create any non-existent parent at depth=empty</label>
+        <default>false</default>
+    </entry>
   </group>
   <group name="diffmerge_items">
     <entry key="external_merge_program" type="String" >

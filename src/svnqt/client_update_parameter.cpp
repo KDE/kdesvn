@@ -33,7 +33,7 @@ namespace svn {
     struct  SVNQT_NOEXPORT UpdateParameterData
     {
         UpdateParameterData()
-        :_destPaths(),_srcRevision(),_depth(DepthInfinity),_ignore_externals(false),_allow_unversioned(false),_sticky_depth(true)
+        :_destPaths(),_srcRevision(),_depth(DepthInfinity),_ignore_externals(false),_allow_unversioned(false),_sticky_depth(true),_make_parents(false),_add_as_modification(true)
         {}
         Targets _destPaths;
         Revision _srcRevision;
@@ -41,6 +41,8 @@ namespace svn {
         bool _ignore_externals;
         bool _allow_unversioned;
         bool _sticky_depth;
+        bool _make_parents;
+        bool _add_as_modification;
     };
 
     UpdateParameter::UpdateParameter()
@@ -59,5 +61,7 @@ namespace svn {
     GETSETSI(UpdateParameter,bool,_ignore_externals,ignore_externals);
     GETSETSI(UpdateParameter,bool,_allow_unversioned,allow_unversioned);
     GETSETSI(UpdateParameter,bool,_sticky_depth,sticky_depth);
+    GETSETSI(UpdateParameter,bool,_make_parents,make_parents);
+    GETSETSI(UpdateParameter,bool,_add_as_modification,add_as_modification);
 
 }

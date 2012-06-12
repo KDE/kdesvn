@@ -1,217 +1,287 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>SubversionSettings</class>
- <widget class="QWidget" name="SubversionSettings" >
-  <property name="geometry" >
+ <widget class="QWidget" name="SubversionSettings">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
-    <height>359</height>
+    <width>535</width>
+    <height>487</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Subversion Settings</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QCheckBox" name="kcfg_start_updates_check_on_open" >
-     <property name="toolTip" >
-      <string>Select if kdesvn should check for updates when open a working copy</string>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>false</bool>
      </property>
-     <property name="text" >
-      <string>Start check for updates when open a working copy</string>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
      </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_log_cache_on_open" >
-     <property name="toolTip" >
-      <string>Start refresh the logcache for repository when networking enabled</string>
-     </property>
-     <property name="text" >
-      <string>Start fill log cache on open</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_check_needslock" >
-     <property name="toolTip" >
-      <string>When listing on working copies kdesvn may check for this property</string>
-     </property>
-     <property name="whatsThis" >
-      <string>When listing on working copies kdesvn may check for &lt;tt>svn:needs-lock&lt;/tt> property.&lt;br>But due this listings/updating on folders containing lot of items may get slow. So you should only switch on if you have repositories containing lot of such entries.</string>
-     </property>
-     <property name="text" >
-      <string>Check if items has "svn:needs-lock" property set</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_details_on_remote_listing" >
-     <property name="toolTip" >
-      <string>Whether getting details about items when making listing on repositories or not</string>
-     </property>
-     <property name="whatsThis" >
-      <string>&lt;p align="left">When checked, kdesvn get more detailed info about file items when making a listing to remote repositories. So you may see remote locks in overview.
-&lt;/p>
-&lt;p align="left">&lt;i>Be careful: This may let listings REAL slow!&lt;/i>&lt;/p></string>
-     </property>
-     <property name="text" >
-      <string>Get file details while remote listing</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_info_recursive" >
-     <property name="text" >
-      <string>Gain item info recursive</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_properties_on_remote_items" >
-     <property name="toolTip" >
-      <string>Should kdesvn retrieves properties on selected item in repositories</string>
-     </property>
-     <property name="whatsThis" >
-      <string>When browsing kdesvn may try displaying properties below itemlist from a selected item. 
+     <widget class="QWidget" name="scrollAreaWidgetContents_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>646</width>
+        <height>600</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QCheckBox" name="kcfg_start_updates_check_on_open">
+             <property name="toolTip">
+              <string>Select if kdesvn should check for updates when open a working copy</string>
+             </property>
+             <property name="text">
+              <string>Start check for updates when open a working copy</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_log_cache_on_open">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Start refresh the logcache for repository when networking enabled</string>
+             </property>
+             <property name="text">
+              <string>Start fill log cache on open</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_check_needslock">
+             <property name="toolTip">
+              <string>When listing on working copies kdesvn may check for this property</string>
+             </property>
+             <property name="whatsThis">
+              <string>When listing on working copies kdesvn may check for &lt;tt&gt;svn:needs-lock&lt;/tt&gt; property.&lt;br&gt;But due this listings/updating on folders containing lot of items may get slow. So you should only switch on if you have repositories containing lot of such entries.</string>
+             </property>
+             <property name="text">
+              <string>Check if items has &quot;svn:needs-lock&quot; property set</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_details_on_remote_listing">
+             <property name="toolTip">
+              <string>Whether getting details about items when making listing on repositories or not</string>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;p align=&quot;left&quot;&gt;When checked, kdesvn get more detailed info about file items when making a listing to remote repositories. So you may see remote locks in overview.
+&lt;/p&gt;
+&lt;p align=&quot;left&quot;&gt;&lt;i&gt;Be careful: This may let listings REAL slow!&lt;/i&gt;&lt;/p&gt;</string>
+             </property>
+             <property name="text">
+              <string>Get file details while remote listing</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_info_recursive">
+             <property name="text">
+              <string>Gain item info recursive</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_properties_on_remote_items">
+             <property name="toolTip">
+              <string>Should kdesvn retrieves properties on selected item in repositories</string>
+             </property>
+             <property name="whatsThis">
+              <string>When browsing kdesvn may try displaying properties below itemlist from a selected item. 
 On networked repositories (eg., not opened via file:// protocol) this may get real slow. So if you have slow network connections or when browsing hangs often you should deactivate it.</string>
-     </property>
-     <property name="text" >
-      <string>Always get properties on networked repositories</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
+             </property>
+             <property name="text">
+              <string>Always get properties on networked repositories</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_store_passwords">
+             <property name="toolTip">
+              <string>Should subversion store passwords in default</string>
+             </property>
+             <property name="whatsThis">
+              <string>Storing passwords is often a security problem. Kdesvn itself doesn't store any passwords, but the subversion itself inside the configuration area of subversion. If this area is readable from others you should not set it, but you may select for single non critical accounts inside the authentication dialog.</string>
+             </property>
+             <property name="text">
+              <string>Store passwords for remote connections</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_passwords_in_wallet">
+             <property name="toolTip">
+              <string>When saving passwords, do it into KDE wallet instead of subversions storage?</string>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;p&gt;Tells if your passwords set in kdesvn should stored into kde wallet instead of simple cleartext storage of subversion.&lt;/p&gt;
+&lt;p&gt;This would be a little bit more secure 'cause KDE wallet is (mostly) encrypted with a password. On other hand you must re-enter your passwords with other subversion clients not accessing KDE wallet (eg. svn commandline itself, rapidsvn and so on).&lt;/p&gt;
+&lt;p&gt;If you're HOME storage eg. subversions configfolder is on a network drive you should hard think about not storing passwords in a plain text file like subversion does but put it into an encrypted storage like kde wallet or don't save passwords.&lt;/p&gt;</string>
+             </property>
+             <property name="text">
+              <string>Store passwords into KDE Wallet</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_use_password_cache">
+             <property name="toolTip">
+              <string>Use an internal password cache</string>
+             </property>
+             <property name="text">
+              <string>Use internal password cache</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_log_follows_nodes">
+             <property name="text">
+              <string>Log follows node changes</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_log_always_list_changed_files">
+             <property name="toolTip">
+              <string>Read detailed change lists</string>
+             </property>
+             <property name="whatsThis">
+              <string>Reading lists of changed files may sometimes a little bit slow down things. But if this feature is switched off, kdesvn may fail generating differences between nodechanges from within the logviewer.</string>
+             </property>
+             <property name="text">
+              <string>Logs always reads list of changed files</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_review_commit">
+             <property name="toolTip">
+              <string>List items next commit will send or not</string>
+             </property>
+             <property name="text">
+              <string>Review items before commit</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_commit_hide_new">
+             <property name="toolTip">
+              <string>Should unversioned items displayed in commit dialog or not.</string>
+             </property>
+             <property name="text">
+              <string>Hide new items in commit box</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_update_add_as_modification">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If set, a local addition at the same path as an incoming addition of the same node kind results in a normal node with a possible local modification, instead of a tree conflict.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="text">
+              <string>Update modifies instead of conflicts</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_update_make_parents">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If set, create any non-existent parent directories also by checking them out at depth=empty&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="text">
+              <string>Update makes missing parents</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="m_Spacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>48</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_store_passwords" >
-     <property name="toolTip" >
-      <string>Should subversion store passwords in default</string>
-     </property>
-     <property name="whatsThis" >
-      <string>Storing passwords is often a security problem. Kdesvn itself doesn't store any passwords, but the subversion itself inside the configuration area of subversion. If this area is readable from others you should not set it, but you may select for single non critical accounts inside the authentication dialog.</string>
-     </property>
-     <property name="text" >
-      <string>Store passwords for remote connections</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_passwords_in_wallet" >
-     <property name="toolTip" >
-      <string>When saving passwords, do it into KDE wallet instead of subversions storage?</string>
-     </property>
-     <property name="whatsThis" >
-      <string>&lt;p>Tells if your passwords set in kdesvn should stored into kde wallet instead of simple cleartext storage of subversion.&lt;/p>
-&lt;p>This would be a little bit more secure 'cause KDE wallet is (mostly) encrypted with a password. On other hand you must re-enter your passwords with other subversion clients not accessing KDE wallet (eg. svn commandline itself, rapidsvn and so on).&lt;/p>
-&lt;p>If you're HOME storage eg. subversions configfolder is on a network drive you should hard think about not storing passwords in a plain text file like subversion does but put it into an encrypted storage like kde wallet or don't save passwords.&lt;/p></string>
-     </property>
-     <property name="text" >
-      <string>Store passwords into KDE Wallet</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_use_password_cache" >
-     <property name="toolTip" >
-      <string>Use an internal password cache</string>
-     </property>
-     <property name="text" >
-      <string>Use internal password cache</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_log_follows_nodes" >
-     <property name="text" >
-      <string>Log follows node changes</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_log_always_list_changed_files" >
-     <property name="toolTip" >
-      <string>Read detailed change lists</string>
-     </property>
-     <property name="whatsThis" >
-      <string>Reading lists of changed files may sometimes a little bit slow down things. But if this feature is switched off, kdesvn may fail generating differences between nodechanges from within the logviewer.</string>
-     </property>
-     <property name="text" >
-      <string>Logs always reads list of changed files</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_review_commit" >
-     <property name="toolTip" >
-      <string>List items next commit will send or not</string>
-     </property>
-     <property name="text" >
-      <string>Review items before commit</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_commit_hide_new" >
-     <property name="toolTip" >
-      <string>Should unversioned items displayed in commit dialog or not.</string>
-     </property>
-     <property name="text" >
-      <string>Hide new items in commit box</string>
-     </property>
-     <property name="shortcut" >
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType" >
-      <enum>QSizePolicy::Expanding</enum>
-     </property>
-     <property name="sizeHint" stdset="0" >
-      <size>
-       <width>20</width>
-       <height>16</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <includes>
-  <include location="local" >knuminput.h</include>
-  <include location="local" >knuminput.h</include>
+  <include location="local">knuminput.h</include>
+  <include location="local">knuminput.h</include>
  </includes>
  <resources/>
  <connections/>

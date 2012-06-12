@@ -194,11 +194,15 @@ namespace svn
     apr_array_header_t *apr_revisions = apr_array_make (apr_pool,
                       params.targets().size(),
                       sizeof (svn_revnum_t));
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    error = svn_client_update3(&apr_revisions,params.targets().array(pool),params.revision(),internal::DepthToSvn(params.depth()),params.sticky_depth(),params.ignore_externals(),params.allow_unversioned(),*m_context,pool);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_update4(&apr_revisions,params.targets().array(pool),params.revision(),
+                               internal::DepthToSvn(params.depth()),params.sticky_depth(),
+                               params.ignore_externals(),params.allow_unversioned(),
+                               params.add_as_modification(),params.make_parents(),
+                               *m_context,pool
+                              );
 #else
-    bool recurse = params.depth()==DepthInfinity;
-    error = svn_client_update2(&apr_revisions,params.targets().array(pool),params.revision(),recurse,params.ignore_externals(),*m_context,pool);
+    error = svn_client_update3(&apr_revisions,params.targets().array(pool),params.revision(),internal::DepthToSvn(params.depth()),params.sticky_depth(),params.ignore_externals(),params.allow_unversioned(),*m_context,pool);
 #endif
     if (error!=NULL) {
         throw ClientException(error);

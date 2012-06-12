@@ -70,6 +70,7 @@ SET(SOURCES
     client_parameter.cpp
     client_commit_parameter.cpp
     client_annotate_parameter.cpp
+    reposnotify.cpp
     )
 
 SET(CACHEINST_HEADERS
@@ -121,6 +122,7 @@ SET(INST_HEADERS
     client_commit_parameter.h
     client_annotate_parameter.h
     client_update_parameter.h
+    reposnotify.h
     )
 
 FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
@@ -190,7 +192,7 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 SET(LIB_MAJOR 6)
-SET(LIB_MINOR 1)
+SET(LIB_MINOR 2)
 SET(LIB_RELEASE 0)
 
 SET(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})

@@ -86,7 +86,6 @@ int main(int argc,char**argv)
     {
         std::cerr << "Exception: " << ce.msg().TOUTF8().data() <<std::endl;
     }
-    svn::LogEntriesMap::ConstIterator lit = lm.begin();
     std::cout<<"Count: "<<lm.count()<<std::endl;
 
     svn::Revision r("{2006-09-27}");

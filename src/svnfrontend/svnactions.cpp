@@ -413,7 +413,6 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
     QString ex;
     QString cacheKey;
     QTime d; d.start();
-    svn::Revision rev = _rev;
     svn::Revision peg = _peg;
     if (!m_Data->m_CurrentContext) return false;
 #ifdef DEBUG_TIMER

@@ -363,8 +363,6 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
 
     QString path = _path;
     long lastrev = _last;
-    /* this is required if an item will modified AND copied at same revision.*/
-    long trev = -1;
 #ifdef DEBUG_PARSE
     kDebug(9510)<<"Searching for "<<path<< " at revision " << startrev
         << " recursion " << recurse << endl;
@@ -454,7 +452,6 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
                          * so check if lastrev==j must not be done but will cost cpu ticks so I always
                          * set trev and lastrev.
                          */
-                        trev = lastrev;
                         lastrev = j;
                     break;
                     case 'D':

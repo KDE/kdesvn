@@ -74,7 +74,6 @@ PwStorageData::cache_type*PwStorageData::getLoginCache()
 
 KWallet::Wallet*PwStorageData::getWallet()
 {
-    static bool walletOpenFailed = false;
     if ( (m_Wallet && m_Wallet->isOpen()) || !qApp) {
         return m_Wallet;
     }
@@ -90,9 +89,7 @@ KWallet::Wallet*PwStorageData::getWallet()
         delete m_Wallet;
         m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),window);
     }
-    if (!m_Wallet) {
-        walletOpenFailed = true;
-    } else {
+    if (m_Wallet) {
         if (!m_Wallet->hasFolder(WALLETNAME)) {
             m_Wallet->createFolder(WALLETNAME);
         }

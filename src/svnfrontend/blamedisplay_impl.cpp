@@ -233,7 +233,6 @@ void BlameDisplay_impl::setContent(const QString&what,const svn::AnnotatedFile&b
     int offset = 10;
     int r=0; int g=0;int b=0;
     uint colinc=0;
-    QColor _bgColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
 
     QTime t,s;
     t.start();

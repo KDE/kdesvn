@@ -66,7 +66,6 @@ void FillCacheThread::fillInfo()
 
 void FillCacheThread::run()
 {
-    svn::Revision where = svn::Revision::HEAD;
     QString ex;
     bool breakit=false;
     KApplication*k = KApplication::kApplication();

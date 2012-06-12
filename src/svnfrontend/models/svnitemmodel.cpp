@@ -397,7 +397,6 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
     svnWrapper()->getaddedItems(what,neweritems);
     dlist+=neweritems;
     svn::StatusEntries::iterator it = dlist.begin();
-    bool main_found = false;
     SvnItemModelNode*node = 0;
     for (;it!=dlist.end();++it) {
         if ((*it)->path()==what||QString::compare((*it)->entry().url(),what)==0){
@@ -414,7 +413,6 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
                 endInsertRows();
             }
             dlist.erase(it);
-            main_found = true;
             break;
         }
     }

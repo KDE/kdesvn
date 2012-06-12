@@ -321,6 +321,7 @@ QString Commitmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWi
 
     if (ok) *ok = _ok;
     if (rec) *rec = _depth;
+    if (keep_locks) *keep_locks = _keep_locks;
     return msg;
 }
 
@@ -374,7 +375,7 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,sv
 QString Commitmsg_impl::getLogmessage(const QMap<QString,QString>&items,
     bool*ok,svn::Depth*rec,bool*keep_locks,QWidget*parent)
 {
-    bool _ok,_rec,_keep_locks;
+    bool _ok,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
     QString msg("");
 
@@ -402,8 +403,6 @@ QString Commitmsg_impl::getLogmessage(const QMap<QString,QString>&items,
 
     if (dlg.exec()!=QDialog::Accepted) {
         _ok = false;
-        /* avoid compiler warnings */
-        _rec = false;
         _keep_locks=false;
     } else {
         _ok = true;

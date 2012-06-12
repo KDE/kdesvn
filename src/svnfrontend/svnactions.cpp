@@ -1257,6 +1257,8 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     QDir d1(tdir.name());
     d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
+    bool gitformat = Kdesvnsettings::diff_gitformat_default();
+    bool copy_as_add = Kdesvnsettings::diff_copies_as_add();
     QWidget*parent = p?p:m_Data->m_ParentList->realWidget();
     QStringList extraOptions;
     if (Kdesvnsettings::diff_ignore_spaces())
@@ -1271,7 +1273,8 @@ void SvnActions::makeDiffinternal(const QString&p1,const svn::Revision&r1,const 
     svn::DiffParameter _opts;
     _opts.path1(p1).path2(p2).tmpPath(tn).
         peg(peg).rev1(r1).rev2(r2).
-        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray());
+        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray()).
+        git_diff_format(gitformat).copies_as_adds(copy_as_add);
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,parent,0,"Diffing",

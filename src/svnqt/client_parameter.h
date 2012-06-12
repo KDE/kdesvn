@@ -184,6 +184,34 @@ namespace svn
         DiffParameter& rev1(const svn::Revision&_rev);
         DiffParameter& rev2(const svn::Revision&_rev);
         DiffParameter& noDiffDeleted(bool value);
+        
+        //! use gits diff format
+        /*!
+         * \since subversion  1.7
+         * \sa svn_client_diff_peg5,svn_client_diff5
+         */
+        DiffParameter& git_diff_format(bool value);
+        //! use gits diff format
+        /*!
+         * \since subversion  1.7
+         * \sa svn_client_diff_peg5,svn_client_diff5
+         */
+        bool git_diff_format()const;
+        
+        //! show copies as new add
+        /*!
+         * \since subversion  1.7
+         * \sa svn_client_diff_peg5,svn_client_diff5
+         */
+        DiffParameter& copies_as_adds(bool value);
+        //! show copies as new add
+        /*!
+         * \since subversion  1.7
+         * \sa svn_client_diff_peg5,svn_client_diff5
+         */
+        bool copies_as_adds()const;
+
+        
     };
 
     struct StatusParameterData;

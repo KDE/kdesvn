@@ -77,7 +77,8 @@ namespace svn
         DiffParameterData()
             :_tmpPath(),_path1(),_path2(),_relativeTo(),_changeList(),_ignoreAncestry(false),_noDiffDeleted(false),
                       _depth(DepthInfinity),_peg_revision(Revision::UNDEFINED),
-                      _rev1(Revision::START),_rev2(Revision::HEAD),_extra(),_ignore_contenttype(false)
+                      _rev1(Revision::START),_rev2(Revision::HEAD),_extra(),_ignore_contenttype(false),
+                      _copies_as_adds(false),_git_diff_format(false)
         {
         }
 
@@ -94,6 +95,9 @@ namespace svn
         Revision _rev2;
         StringArray _extra;
         bool _ignore_contenttype;
+        // subversion 1.7
+        bool _copies_as_adds;
+        bool _git_diff_format;
     };
 
     DiffParameter::DiffParameter()
@@ -119,6 +123,8 @@ namespace svn
     GETSETSI(DiffParameter,bool,_ignoreAncestry,ignoreAncestry);
     GETSETSI(DiffParameter,bool,_ignore_contenttype,ignoreContentType);
     GETSETSI(DiffParameter,bool,_noDiffDeleted,noDiffDeleted);
+    GETSETSI(DiffParameter,bool,_copies_as_adds,copies_as_adds);
+    GETSETSI(DiffParameter,bool,_git_diff_format,git_diff_format);
 
     struct StatusParameterData
     {

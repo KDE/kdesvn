@@ -62,8 +62,27 @@ namespace svn
     // svn_client_diff needs an options array, even if it is empty
     _options = options.extra().array(pool);
     DiffData ddata(options.tmpPath(),options.path1(),options.rev1(),options.path1(),options.rev2());
+    
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_diff_peg5(
+            _options,
+            options.path1().cstr(),
+            options.peg(),ddata.r1().revision(),ddata.r2().revision(),
+            options.relativeTo().length()>0?options.relativeTo().cstr():QByteArray(/*0*/),
+            internal::DepthToSvn(options.depth()),
+            options.ignoreAncestry(),options.noDiffDeleted(),
+                                 options.copies_as_adds(),
+                                 options.ignoreContentType(),
+            options.git_diff_format(),
+            APR_LOCALE_CHARSET,
+            ddata.outFile(),ddata.errFile(),
+            options.changeList().array(pool),
+            *m_context,
+            pool
+        );
+
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     //qDebug("pegged diff4 call");
     error = svn_client_diff_peg4(
                 _options,
@@ -113,7 +132,22 @@ namespace svn
         _options = options.extra().array(pool);
     DiffData ddata(options.tmpPath(),options.path1(),options.rev1(),options.path2(),options.rev2());
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_diff5(_options,
+                             options.path1().cstr (), ddata.r1().revision (),
+                             options.path2().cstr (), ddata.r2().revision (),
+                             options.relativeTo().length()>0?options.relativeTo().cstr():QByteArray(/*0*/),
+                             internal::DepthToSvn(options.depth()),
+                             options.ignoreAncestry(),options.noDiffDeleted(),
+                             options.copies_as_adds(),
+                             options.ignoreContentType(),
+                             options.git_diff_format(),
+                             APR_LOCALE_CHARSET,
+                             ddata.outFile(),ddata.errFile(),
+                             options.changeList().array(pool),
+                             *m_context,
+                             pool);    
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error = svn_client_diff4(_options,
                              options.path1().cstr (), ddata.r1().revision (),
                              options.path2().cstr (), ddata.r2().revision (),

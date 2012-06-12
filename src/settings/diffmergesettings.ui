@@ -1,205 +1,220 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>DiffMergeSettings</class>
- <widget class="QWidget" name="DiffMergeSettings" >
-  <property name="geometry" >
+ <widget class="QWidget" name="DiffMergeSettings">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>260</width>
-    <height>308</height>
+    <width>285</width>
+    <height>313</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>DiffMergeSettings</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QCheckBox" name="kcfg_diff_ignore_content" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_diff_ignore_content">
+     <property name="text">
       <string>Diff ignores content type</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_tree_diff_rec" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_tree_diff_rec">
+     <property name="text">
       <string>Diff in revisiontree is recursive</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_diff_ignore_spaces" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_diff_ignore_spaces">
+     <property name="text">
       <string>Diff ignores white space changes</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_diff_ignore_all_white_spaces" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_diff_ignore_all_white_spaces">
+     <property name="text">
       <string>Diff ignores all white spaces</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_use_external_diff" >
-     <property name="toolTip" >
+    <widget class="QCheckBox" name="kcfg_use_external_diff">
+     <property name="toolTip">
       <string>If kdesvn should use an external diff display and/or generator. If not checked use internal display.</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Use external diff display</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_extern_merge_default" >
-     <property name="toolTip" >
+    <widget class="QCheckBox" name="kcfg_extern_merge_default">
+     <property name="toolTip">
       <string>Set if merge with external program is preferred and not subversions merge</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Prefer external merge program</string>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" >
-     <item row="0" column="0" >
-      <widget class="QLabel" name="m_extern_hint" >
-       <property name="text" >
-        <string>see "Whats this" for details</string>
-       </property>
-       <property name="alignment" >
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="wordWrap" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <layout class="QGridLayout" >
-       <item row="2" column="0" >
-        <widget class="QLabel" name="resolveLabel" >
-         <property name="text" >
+    <widget class="QCheckBox" name="kcfg_diff_gitformat_default">
+     <property name="text">
+      <string>Use GIT diff format</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_diff_copies_as_add">
+     <property name="text">
+      <string>Show copies as add</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout">
+     <item row="1" column="0">
+      <layout class="QGridLayout">
+       <item row="2" column="0">
+        <widget class="QLabel" name="resolveLabel">
+         <property name="text">
           <string>Conflict resolver program:</string>
          </property>
-         <property name="alignment" >
+         <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
-         <property name="wordWrap" >
+         <property name="wordWrap">
           <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="textLabel1" >
-         <property name="text" >
+       <item row="1" column="0">
+        <widget class="QLabel" name="textLabel1">
+         <property name="text">
           <string>External merge program:</string>
          </property>
-         <property name="alignment" >
+         <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
-         <property name="wordWrap" >
+         <property name="wordWrap">
           <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" >
-        <widget class="KLineEdit" name="kcfg_conflict_resolver" >
-         <property name="toolTip" >
+       <item row="2" column="1">
+        <widget class="KLineEdit" name="kcfg_conflict_resolver">
+         <property name="toolTip">
           <string>Setup an external program for conflict resolving</string>
          </property>
-         <property name="whatsThis" >
-          <string>&lt;p>
+         <property name="whatsThis">
+          <string>&lt;p&gt;
 Enter how kdesvn should call the conflict resolver program. The form is
-&lt;p align="center">
-&lt;b>&lt;tt>&amp;lt;program&amp;gt; &amp;lt;programoptions&amp;gt;&lt;/tt>&lt;/b>
-&lt;/p>
-&lt;p>
+&lt;p align=&quot;center&quot;&gt;
+&lt;b&gt;&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;programoptions&amp;gt;&lt;/tt&gt;&lt;/b&gt;
+&lt;/p&gt;
+&lt;p&gt;
 Programoption may contain the place holders for substituting with filenames.
-&lt;/p>
-The substitutions means:&lt;br>
-&lt;b>&lt;tt>%o&lt;/tt>&lt;/b> Old version&lt;br>
-&lt;b>&lt;tt>%m&lt;/tt>&lt;/b> Mine or local edit version&lt;br>
-&lt;b>&lt;tt>%n&lt;/tt>&lt;/b> Newest version&lt;br>
-&lt;b>&lt;tt>%t&lt;/tt>&lt;/b> The target to save as, kdesvn will use the original file name for it.
-&lt;/p>
-&lt;p>
-Default: &lt;tt>kdiff3 %o %m %n -o %t&lt;/tt>
-&lt;/p></string>
+&lt;/p&gt;
+The substitutions means:&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%o&lt;/tt&gt;&lt;/b&gt; Old version&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%m&lt;/tt&gt;&lt;/b&gt; Mine or local edit version&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%n&lt;/tt&gt;&lt;/b&gt; Newest version&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%t&lt;/tt&gt;&lt;/b&gt; The target to save as, kdesvn will use the original file name for it.
+&lt;/p&gt;
+&lt;p&gt;
+Default: &lt;tt&gt;kdiff3 %o %m %n -o %t&lt;/tt&gt;
+&lt;/p&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="mdiff_display_label" >
-         <property name="text" >
+       <item row="0" column="0">
+        <widget class="QLabel" name="mdiff_display_label">
+         <property name="text">
           <string>External diff display:</string>
          </property>
-         <property name="alignment" >
+         <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
-         <property name="wordWrap" >
+         <property name="wordWrap">
           <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item row="1" column="1" >
-        <widget class="KLineEdit" name="kcfg_external_merge_program" >
-         <property name="toolTip" >
+       <item row="1" column="1">
+        <widget class="KLineEdit" name="kcfg_external_merge_program">
+         <property name="toolTip">
           <string>Setup an external program for merging</string>
          </property>
-         <property name="whatsThis" >
-          <string>&lt;p>
+         <property name="whatsThis">
+          <string>&lt;p&gt;
 Enter how kdesvn should call the external merge program. The form is
-&lt;p align="center">
-&lt;b>&lt;tt>&amp;lt;program&amp;gt; &amp;lt;programoptions&amp;gt; %s1 %s2 %t&lt;/tt>&lt;/b>
-&lt;/p>
-The substitutions means:&lt;br>
-&lt;b>&lt;tt>%s1&lt;/tt>&lt;/b> Source one for merge&lt;br>
-&lt;b>&lt;tt>%s2&lt;/tt>&lt;/b> Source two for merge, if it was not set equal to source one but other revision&lt;br>
-&lt;b>&lt;tt>%t&lt;/tt>&lt;/b> Local target for merge.
-&lt;/p></string>
+&lt;p align=&quot;center&quot;&gt;
+&lt;b&gt;&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;programoptions&amp;gt; %s1 %s2 %t&lt;/tt&gt;&lt;/b&gt;
+&lt;/p&gt;
+The substitutions means:&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%s1&lt;/tt&gt;&lt;/b&gt; Source one for merge&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%s2&lt;/tt&gt;&lt;/b&gt; Source two for merge, if it was not set equal to source one but other revision&lt;br&gt;
+&lt;b&gt;&lt;tt&gt;%t&lt;/tt&gt;&lt;/b&gt; Local target for merge.
+&lt;/p&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="KLineEdit" name="kcfg_external_diff_display" >
-         <property name="whatsThis" >
-          <string>&lt;p align="left">
+       <item row="0" column="1">
+        <widget class="KLineEdit" name="kcfg_external_diff_display">
+         <property name="whatsThis">
+          <string>&lt;p align=&quot;left&quot;&gt;
 Enter an external program in form
-&lt;p align="center">
-&lt;tt>&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %f&lt;/tt>
-&lt;/p>
+&lt;p align=&quot;center&quot;&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %f&lt;/tt&gt;
+&lt;/p&gt;
 or
-&lt;p align="center">
-&lt;tt>&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt>
-&lt;/p>
+&lt;p align=&quot;center&quot;&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt;&lt;/tt&gt;
+&lt;/p&gt;
 or
-&lt;p align="center">
-&lt;tt>&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %1 %2&lt;/tt>
-&lt;/p>
-&lt;br>
+&lt;p align=&quot;center&quot;&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %1 %2&lt;/tt&gt;
+&lt;/p&gt;
+&lt;br&gt;
 If using first or second form, svn itself will generate the diff. %f will replaced with a temporary filename. If %f is not given,
 the diff-display should able reading data from stdin.
-&lt;br>
+&lt;br&gt;
 When %1 and %2 is given, kdesvn let this display make the diff. For that it it makes a temporary export or get (if needed) and fill out the parameters with the right value. %1 will filled with the content of start-revision, %2 with the endrevision. On large recoursive diffs this may get real slow!
-&lt;/p></string>
+&lt;/p&gt;</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="m_extern_hint">
+       <property name="text">
+        <string>see &quot;Whats this&quot; for details</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Expanding</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>16</height>
@@ -209,7 +224,7 @@ When %1 and %2 is given, kdesvn let this display make the diff. For that it it m
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
    <class>KLineEdit</class>
@@ -218,9 +233,9 @@ When %1 and %2 is given, kdesvn let this display make the diff. For that it it m
   </customwidget>
  </customwidgets>
  <includes>
-  <include location="local" >klineedit.h</include>
-  <include location="local" >klineedit.h</include>
-  <include location="local" >klineedit.h</include>
+  <include location="local">klineedit.h</include>
+  <include location="local">klineedit.h</include>
+  <include location="local">klineedit.h</include>
  </includes>
  <resources/>
  <connections>
@@ -230,11 +245,11 @@ When %1 and %2 is given, kdesvn let this display make the diff. For that it it m
    <receiver>DiffMergeSettings</receiver>
    <slot>diffDispChanged(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>20</x>
      <y>20</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
     </hint>

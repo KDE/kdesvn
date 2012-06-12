@@ -35,6 +35,14 @@
       <label>Diff ignores all white space</label>
       <default>false</default>
     </entry>
+    <entry key="diff_gitformat_default" type="Bool">
+        <label>Show diff in GIT format</label>
+        <default>false</default>
+    </entry>
+    <entry key="diff_copies_as_add" type="Bool">
+        <label>Show copies as add</label>
+        <default>false</default>
+    </entry>
     <entry key="max_log_messages" type="Int" >
       <label>Maximum number of log messages</label>
       <default>20</default>

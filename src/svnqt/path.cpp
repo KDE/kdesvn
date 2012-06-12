@@ -31,6 +31,10 @@
 
 // subversion api
 #include "svn_path.h"
+#ifdef HAS_SVN_VERSION_H
+#include <svn_version.h>
+#endif
+
 
 // apr api
 #include "apr_file_io.h"

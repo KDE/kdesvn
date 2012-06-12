@@ -53,7 +53,6 @@ namespace svn
     static svn_error_t* ProplistReceiver(void*baton,const char*path,apr_hash_t*prop_hash,apr_pool_t*pool)
     {
         Client_impl::propBaton*_baton=(Client_impl::propBaton*)baton;
-        PropertiesMap prop_map;
         PathPropertiesMapList*mapList = (PathPropertiesMapList*)_baton->resultlist;
 
         Context*l_context = _baton->m_context;
@@ -62,18 +61,7 @@ namespace svn
             SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
         }
 
-        apr_hash_index_t *hi;
-        for (hi = apr_hash_first (pool, prop_hash); hi;
-             hi = apr_hash_next (hi))
-        {
-            const void *key;
-            void *val;
-
-            apr_hash_this (hi, &key, NULL, &val);
-            prop_map[ QString::FROMUTF8( (const char *)key ) ] =
-                    QString::FROMUTF8( ((const svn_string_t *)val)->data );
-        }
-        mapList->push_back(PathPropertiesMapEntry(QString::FROMUTF8(path), prop_map ));
+        mapList->push_back(PathPropertiesMapEntry(QString::FROMUTF8(path), Client_impl::hash2map(prop_hash,pool) ));
         return 0;
     }
 

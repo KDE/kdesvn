@@ -114,6 +114,27 @@ namespace svn
       return hash;
   }
 
+  PropertiesMap Client_impl::hash2map(apr_hash_t*hash, const svn::Pool&pool)
+  {
+    PropertiesMap _map;
+    
+    if (hash != NULL)
+    {
+        apr_hash_index_t *hi;
+        for (hi = apr_hash_first (pool, hash); hi;
+                hi = apr_hash_next (hi))
+        {
+            const void *key;
+            void *val;
+
+            apr_hash_this (hi, &key, NULL, &val);
+            _map[ QString::FROMUTF8( (const char *)key ) ] =
+                    QString::FROMUTF8( ((const svn_string_t *)val)->data );
+        }
+    }
+    return _map;
+  }
+  
   apr_array_header_t * Client_impl::revListToHeader(const RevisionRanges&_ranges,const Pool&pool)
   {
     apr_array_header_t * revision_ranges = apr_array_make(pool, 0, sizeof(svn_opt_revision_range_t *));

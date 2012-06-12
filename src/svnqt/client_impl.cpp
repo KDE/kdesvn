@@ -126,10 +126,13 @@ namespace svn
         {
             const void *key;
             void *val;
-
+            
             apr_hash_this (hi, &key, NULL, &val);
-            _map[ QString::FROMUTF8( (const char *)key ) ] =
-                    QString::FROMUTF8( ((const svn_string_t *)val)->data );
+            const char * _k = (const char *)key;
+            const char * _v = ((const svn_string_t *)val)->data;
+
+            _map[ QString::FROMUTF8(_k)] =
+                    QString::FROMUTF8(_v);
         }
     }
     return _map;

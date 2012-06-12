@@ -43,6 +43,33 @@
 namespace svn
 {
     static svn_error_t *
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+            annotateReceiver(void *baton, 
+                             svn_revnum_t start_revnum, 
+                             svn_revnum_t end_revnum, 
+                             apr_int64_t line_no,
+                             svn_revnum_t revision,
+                             apr_hash_t *rev_props, 
+                             svn_revnum_t merge_revision,
+                             apr_hash_t *merged_rev_props,
+                             const char *merge_path,
+                             const char *line, 
+                             svn_boolean_t local_change,
+                             apr_pool_t *pool)
+    {
+        AnnotatedFile * entries = (AnnotatedFile *) baton;
+        PropertiesMap _map = svn::Client_impl::hash2map(rev_props,pool);
+        PropertiesMap _merge_map = svn::Client_impl::hash2map(merged_rev_props,pool);
+        entries->push_back (AnnotateLine(line_no, 
+                                         revision,_map,
+                                         line,
+                                         merge_revision,_merge_map,merge_path,
+                                         start_revnum,end_revnum,local_change
+                                        )
+                           );
+        return NULL;
+    }
+#else
             annotateReceiver(void *baton,
                               apr_int64_t line_no,
                               svn_revnum_t revision,
@@ -61,13 +88,19 @@ namespace svn
                             merge_author,merge_date,merge_path));
         return NULL;
     }
-
+#endif
   void
   Client_impl::annotate (AnnotatedFile&target,const AnnotateParameter&params) throw (ClientException)
   {
     Pool pool;
     svn_error_t *error;
-    error = svn_client_blame4(
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    error = svn_client_blame5
+#else
+    error = svn_client_blame4
+#endif
+    
+    (
                 params.path().cstr(),
                 params.pegRevision().revision(),
                 params.revisionRange().first,

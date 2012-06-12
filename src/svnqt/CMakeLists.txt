@@ -71,6 +71,7 @@ SET(SOURCES
     client_commit_parameter.cpp
     client_annotate_parameter.cpp
     reposnotify.cpp
+    annotate_line.cpp
     )
 
 SET(CACHEINST_HEADERS

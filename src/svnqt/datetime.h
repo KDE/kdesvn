@@ -71,6 +71,12 @@ namespace svn
      * @param dt QDateTime class
      */
     DateTime(const QDateTime&dt);
+    
+    /**
+     * Constructor
+     * @param dt RFC822 compatible string
+     */
+    DateTime(const QString&dt);
 
     /**
      * Copy constructor

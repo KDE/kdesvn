@@ -27,10 +27,11 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#ifndef SVNQT_ANNOTATE_LINE_HPP
-#define SVNQT_ANNOTATE_LINE_HPP
+#ifndef SVNQT_ANNOTATE_LINE_H
+#define SVNQT_ANNOTATE_LINE_H
 
 #include "svnqt/svnqt_defines.h"
+#include "svnqt/svnqttypes.h"
 
 #include <qstring.h>
 #include <qdatetime.h>
@@ -40,23 +41,14 @@ namespace svn
   /**
    * This class holds the data for one line in an annotation
    */
-  class AnnotateLine
+  class SVNQT_EXPORT AnnotateLine
   {
   public:
       AnnotateLine (QLONG line_no,
                     QLONG revision,
                     const char *author,
                     const char *date,
-                    const char *line)
-    : m_line_no (line_no), m_revision (revision),
-      m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
-      m_line(line?line:""),m_author(author?author:""),
-      m_merge_revision(-1),
-      m_merge_date(QDateTime()),
-      m_merge_author(""),m_merge_path("")
-
-    {
-    }
+                    const char *line);
 
     AnnotateLine (QLONG line_no,
                   QLONG revision,
@@ -67,27 +59,23 @@ namespace svn
                   const char *merge_author,
                   const char *merge_date,
                   const char *merge_path
-                 )
-          : m_line_no (line_no), m_revision (revision),
-            m_date( (date&&strlen(date))?QDateTime::fromString(QString::FROMUTF8(date),Qt::ISODate):QDateTime()),
-            m_line(line?line:""),m_author(author?author:""),
-            m_merge_revision(merge_revision),
-            m_merge_date( (merge_date&&strlen(merge_date))?QDateTime::fromString(QString::FROMUTF8(merge_date),Qt::ISODate):QDateTime()),
-            m_merge_author(merge_author?merge_author:""),m_merge_path(merge_path?merge_path:"")
-        {
-        }
+                 );
 
-    AnnotateLine ( const AnnotateLine &other)
-          : m_line_no (other.m_line_no), m_revision (other.m_revision), m_date (other.m_date),
-            m_line (other.m_line), m_author (other.m_author)
-    {
-    }
-    AnnotateLine()
-          : m_line_no(0),m_revision(-1),m_date(),
-            m_line(), m_author()
-    {
-    }
+    AnnotateLine(
+        QLONG line_no,
+        QLONG revision,
+        PropertiesMap revisionproperties,
+        const char *line,
+        QLONG merge_revision,
+        PropertiesMap mergeproperties,
+        const char *merge_path,
+        QLONG revstart,
+        QLONG revend,
+        bool local
+    );
 
+    AnnotateLine ( const AnnotateLine &other);
+    AnnotateLine();
     /**
      * destructor
      */

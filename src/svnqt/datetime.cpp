@@ -58,6 +58,11 @@ namespace svn
   {
   }
 
+  DateTime::DateTime(const QString&dt)
+  {
+      SetRFC822Date(dt.toUtf8().constData());
+  }
+  
   const DateTime &
   DateTime::operator =(const DateTime & dateTime)
   {

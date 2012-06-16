@@ -81,7 +81,9 @@ public:
         _oldrev = notify->old_revision;
         _newrev = notify->new_revision;
         _node_action = notify->node_action;
-        _path = svn::Path(notify->path);
+        if (notify->path != 0L) {
+            _path = svn::Path(notify->path);
+        }
 #endif
     }
     
@@ -143,16 +145,39 @@ public:
                 {}
                 break;
                 case svn_repos_notify_load_txn_start:
-                {}
+                {
+                    _msg = QString("Start loading revision ").append(_rev.toString());
+                }
                 break;
                 case svn_repos_notify_load_txn_committed:
-                {}
+                {
+                    _msg = QString("Loading ").append(_rev.toString()).append(" finished");
+                }
                 break;
                 case svn_repos_notify_load_node_start:
-                {}
+                {
+                    QString action;
+                    switch(_node_action){
+                        case svn_node_action_change:
+                            action = "changing";
+                            break;
+                        case svn_node_action_add:
+                            action = "adding";
+                            break;
+                        case svn_node_action_delete:
+                            action = "deletion";
+                            break;
+                        case svn_node_action_replace:
+                            action = "replacing";
+                            break;
+                    }
+                    _msg = QString("Start ").append(action).append(" on node ").append(_path.native());
+                }
                 break;
                 case svn_repos_notify_load_node_done:
-                {}
+                {
+                    _msg = QString("Finished node ").append(_path.native());
+                }
                 break;
                 case svn_repos_notify_load_copied_node:
                 {}

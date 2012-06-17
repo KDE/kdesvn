@@ -61,7 +61,7 @@ namespace svn
             SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
         }
 
-        mapList->push_back(PathPropertiesMapEntry(QString::FROMUTF8(path), Client_impl::hash2map(prop_hash,pool) ));
+        mapList->push_back(PathPropertiesMapEntry(QString::FROMUTF8(path), svn::internal::Hash2Map(prop_hash,pool) ));
         return 0;
     }
 

@@ -101,6 +101,66 @@ namespace svn
                 }
 #endif
         };
+        
+        class Map2Hash
+        {
+            PropertiesMap _map;
+        public:
+            Map2Hash(const PropertiesMap&aMap):_map(aMap){}
+            
+            apr_hash_t * hash(const Pool&pool)const
+            {
+                if (_map.count()==0)
+                {
+                    return 0L;
+                }
+                apr_hash_t * hash = apr_hash_make(pool);
+                PropertiesMap::ConstIterator it;
+                const char*propval;
+                const char*propname;
+                QByteArray s,n;
+                for (it=_map.begin();it!=_map.end();++it) {
+                    s=it.value().TOUTF8();
+                    n=it.key().TOUTF8();
+                    propval=apr_pstrndup(pool,s,s.size());
+                    propname=apr_pstrndup(pool,n,n.size());
+                    apr_hash_set(hash,propname,APR_HASH_KEY_STRING,propval);
+                }
+                return hash;
+            }            
+        };
+        
+        class Hash2Map
+        {
+            PropertiesMap _map;
+        public:
+            Hash2Map(apr_hash_t* hash, const svn::Pool& pool)
+            :_map()
+            {
+                if (hash != 0L)
+                {
+                    apr_hash_index_t *hi;
+                    for (hi = apr_hash_first (pool, hash); hi;
+                         hi = apr_hash_next (hi))
+                         {
+                             const void *key;
+                             void *val;
+                             
+                             apr_hash_this (hi, &key, NULL, &val);
+                             const char * _k = (const char *)key;
+                             const char * _v = ((const svn_string_t *)val)->data;
+                             
+                             _map[ QString::FROMUTF8(_k)] =
+                             QString::FROMUTF8(_v);
+                         }
+                }
+            }
+            
+            operator const PropertiesMap&()const
+            {
+                return _map;
+            }
+        };
     }
 }
 #endif

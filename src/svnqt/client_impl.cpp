@@ -35,6 +35,7 @@
 #include "svnqt/client_impl.h"
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/exception.h"
+#include "svnqt/helper.h"
 
 #include "svn_opt.h"
 #include "svn_ra.h"
@@ -96,48 +97,9 @@ namespace svn
 
   apr_hash_t * Client_impl::map2hash(const PropertiesMap&aMap,const Pool&pool)
   {
-      if (aMap.count()==0) {
-          return 0;
-      }
-      apr_hash_t * hash = apr_hash_make(pool);
-      PropertiesMap::ConstIterator it;
-      const char*propval;
-      const char*propname;
-      QByteArray s,n;
-      for (it=aMap.begin();it!=aMap.end();++it) {
-          s=it.value().TOUTF8();
-          n=it.key().TOUTF8();
-          propval=apr_pstrndup(pool,s,s.size());
-          propname=apr_pstrndup(pool,n,n.size());
-          apr_hash_set(hash,propname,APR_HASH_KEY_STRING,propval);
-      }
-      return hash;
+      return svn::internal::Map2Hash(aMap).hash(pool);
   }
 
-  PropertiesMap Client_impl::hash2map(apr_hash_t*hash, const svn::Pool&pool)
-  {
-    PropertiesMap _map;
-    
-    if (hash != NULL)
-    {
-        apr_hash_index_t *hi;
-        for (hi = apr_hash_first (pool, hash); hi;
-                hi = apr_hash_next (hi))
-        {
-            const void *key;
-            void *val;
-            
-            apr_hash_this (hi, &key, NULL, &val);
-            const char * _k = (const char *)key;
-            const char * _v = ((const svn_string_t *)val)->data;
-
-            _map[ QString::FROMUTF8(_k)] =
-                    QString::FROMUTF8(_v);
-        }
-    }
-    return _map;
-  }
-  
   bool Client_impl::RepoHasCapability(const Path&repository,Capability capability)
   {
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)

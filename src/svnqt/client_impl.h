@@ -592,8 +592,6 @@ namespace svn
         throw ClientException (error);
     }
 
-    static PropertiesMap hash2map(apr_hash_t* hash, const svn::Pool& pool);
-
   private:
     ContextP m_context;
 

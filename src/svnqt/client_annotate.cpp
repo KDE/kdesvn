@@ -33,6 +33,7 @@
 // svncpp
 #include "svnqt/client_impl.h"
 #include "svnqt/svnqt_defines.h"
+#include "svnqt/helper.h"
 #include "src/svnqt/client_annotate_parameter.h"
 
 // Subversion api
@@ -58,8 +59,8 @@ namespace svn
                              apr_pool_t *pool)
     {
         AnnotatedFile * entries = (AnnotatedFile *) baton;
-        PropertiesMap _map = svn::Client_impl::hash2map(rev_props,pool);
-        PropertiesMap _merge_map = svn::Client_impl::hash2map(merged_rev_props,pool);
+        PropertiesMap _map = svn::internal::Hash2Map(rev_props,pool);
+        PropertiesMap _merge_map = svn::internal::Hash2Map(merged_rev_props,pool);
         entries->push_back (AnnotateLine(line_no, 
                                          revision,_map,
                                          line,

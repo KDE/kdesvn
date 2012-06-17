@@ -232,13 +232,13 @@ svn_error_t* RepositoryData::dump(const QString&output,const svn::Revision&start
     _e = end.revnum();
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
-    svn_repos_dump_fs3(m_Repository,
+    SVN_ERR(svn_repos_dump_fs3(m_Repository,
                    out, _s, _e,incremental,use_deltas,
                    RepositoryData::repo_notify_func,
                    this,
                    RepositoryData::cancel_func,
                    m_Listener,
-                   pool);
+                   pool));
 #else
     RepoOutStream backstream(this);
     SVN_ERR(svn_repos_dump_fs2(m_Repository,out,backstream,_s,_e,incremental,use_deltas,

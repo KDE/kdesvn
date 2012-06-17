@@ -95,14 +95,13 @@ namespace svn
      * @sa revnum()
      */
     static const svn_opt_revision_kind NUMBER;
-    /*@}*/
 
     /**
      * Constructor
      *
      * @param revision revision information
      */
-    Revision (const svn_opt_revision_t * revision);
+    Revision (const svn_opt_revision_t * revision = 0L);
 
     /**
      * Constructor
@@ -129,13 +128,6 @@ namespace svn
      * or a date in form {YYYY-MM-DD}.
      */
     Revision (const QString&revstring);
-
-    /**
-     * Constructor
-     *
-     * @param kind
-     */
-    Revision (const svn_opt_revision_kind kind = svn_opt_revision_unspecified);
 
     /**
      * Constructor
@@ -198,6 +190,7 @@ namespace svn
     QString toString()const;
 
     bool isRemote()const;
+    bool isValid()const;
 
     /**
      * @return valid date if kind is Revision::DATE

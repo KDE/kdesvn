@@ -247,7 +247,7 @@ svn_error_t* RepositoryData::dump(const QString&output,const svn::Revision&start
     return SVN_NO_ERROR;
 }
 
-svn_error_t* RepositoryData::loaddump(const QString&dump,svn_repos_load_uuid uuida, const QString&parentFolder, bool usePre, bool usePost)
+svn_error_t* RepositoryData::loaddump(const QString&dump,svn_repos_load_uuid uuida, const QString&parentFolder, bool usePre, bool usePost,bool validateProps)
 {
     if (!m_Repository) {
         return svn_error_create(SVN_ERR_CANCELLED,0,QObject::tr("No repository selected.").TOUTF8());
@@ -262,9 +262,17 @@ svn_error_t* RepositoryData::loaddump(const QString&dump,svn_repos_load_uuid uui
     } else {
         dest_path=apr_pstrdup (pool,parentFolder.TOUTF8());
     }
-
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
+    src_path = svn_dirent_internal_style(src_path, pool);
+    SVN_ERR(svn_repos_load_fs3(m_Repository,infile,uuida,dest_path,usePre?1:0,usePost?1:0,validateProps?1:0,
+                               RepositoryData::repo_notify_func,
+                               this,RepositoryData::cancel_func,m_Listener,pool));
+#else
+    Q_UNUSED(validateProps);
     src_path = svn_path_internal_style(src_path, pool);
     SVN_ERR(svn_repos_load_fs2(m_Repository,infile,backstream,uuida,dest_path,usePre?1:0,usePost?1:0,RepositoryData::cancel_func,m_Listener,pool));
+#endif
+
     return SVN_NO_ERROR;
 }
 
@@ -273,8 +281,13 @@ svn_error_t* RepositoryData::hotcopy(const QString&src,const QString&dest,bool c
     Pool pool;
     const char*src_path = apr_pstrdup (pool,src.TOUTF8());
     const char*dest_path = apr_pstrdup (pool,dest.TOUTF8());
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
+    src_path = svn_dirent_internal_style(src_path, pool);
+    dest_path = svn_dirent_internal_style(dest_path, pool);
+#else
     src_path = svn_path_internal_style(src_path, pool);
     dest_path = svn_path_internal_style(dest_path, pool);
+#endif
     SVN_ERR(svn_repos_hotcopy(src_path,dest_path,cleanlogs?1:0,pool));
     return SVN_NO_ERROR;
 }

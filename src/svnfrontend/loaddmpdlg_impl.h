@@ -29,6 +29,7 @@ public:
     virtual ~LoadDmpDlg_impl();
     bool usePost()const;
     bool usePre()const;
+    bool validateProps()const;
     int uuidAction()const;
     KUrl dumpFile()const;
     QString repository()const;

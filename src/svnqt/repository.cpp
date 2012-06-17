@@ -71,7 +71,7 @@ void Repository::dump(const QString&output,const svn::Revision&start,const svn::
     }
 }
 
-void Repository::loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost)throw (ClientException)
+void Repository::loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost, bool validateProps)throw (ClientException)
 {
     svn_repos_load_uuid uuid_action;
     switch (uuida) {
@@ -86,7 +86,7 @@ void Repository::loaddump(const QString&dump,LOAD_UUID uuida, const QString&pare
         uuid_action=svn_repos_load_uuid_default;
         break;
     }
-    svn_error_t * error = m_Data->loaddump(dump,uuid_action,parentFolder,usePre,usePost);
+    svn_error_t * error = m_Data->loaddump(dump,uuid_action,parentFolder,usePre,usePost,validateProps);
     if (error!=0) {
         throw ClientException (error);
     }

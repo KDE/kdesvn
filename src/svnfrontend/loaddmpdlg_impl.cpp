@@ -60,6 +60,10 @@ bool LoadDmpDlg_impl::usePre()const
     return m_UsePre->isChecked();
 }
 
+bool LoadDmpDlg_impl::validateProps()const
+{
+    return m_validateProps->isChecked();
+}
 
 /*!
     \fn LoadDmpDlg_impl::uuidAction()const

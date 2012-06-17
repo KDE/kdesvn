@@ -58,7 +58,7 @@ public:
 
     void reposFsWarning(const QString&msg);
     svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);
-    svn_error_t* loaddump(const QString&dump,svn_repos_load_uuid uuida, const QString&parentFolder, bool usePre, bool usePost);
+    svn_error_t* loaddump(const QString& dump, svn_repos_load_uuid uuida, const QString& parentFolder, bool usePre, bool usePost, bool validateProps);
     static svn_error_t* hotcopy(const QString&src,const QString&dest,bool cleanlogs);
 
 protected:

@@ -379,7 +379,7 @@ void kdesvnView::slotLoaddump()
 
     try {
         StopDlg sdlg(this,this,0,"Load Dump",i18n("Loading a dump into a repository."));
-        _rep.loaddump(_input,_act,ptr->parentPath(),ptr->usePre(),ptr->usePost());
+        _rep.loaddump(_input,_act,ptr->parentPath(),ptr->usePre(),ptr->usePost(),ptr->validateProps());
         slotAppendLog(i18n("Loading dump finished."));
     }catch (const svn::ClientException&e) {
         slotAppendLog(e.msg());

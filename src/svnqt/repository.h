@@ -96,9 +96,10 @@ public:
         \param parentFolder put content of dumpstream within folder in repository, if empty put into root-folder.
         \param usePre use pre-commit-hook
         \param usePost use post-commit-hook
+        \param validateProps validate properties (@since subversion 1.7)
         \exception ClientException will be thrown in case of an error
      */
-    void loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost)throw (ClientException);
+    void loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost,bool validateProps)throw (ClientException);
     //! copy a repository to a new location
     /*!
         \param src the repository path to copy

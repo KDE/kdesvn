@@ -58,10 +58,17 @@ namespace svn
   {
       if (revnum<0) {
         m_revision.kind = svn_opt_revision_unspecified;
+        m_revision.value.number = 0;
       } else {
         m_revision.kind = svn_opt_revision_number;
+        m_revision.value.number = revnum;
       }
-      m_revision.value.number = revnum;
+  }
+
+  Revision::Revision (const svn_opt_revision_kind kind)
+  {
+    m_revision.kind = kind;
+    m_revision.value.number = 0;
   }
 
   Revision::Revision (const int revnum, const QString&revstring)
@@ -72,7 +79,6 @@ namespace svn
         m_revision.kind = svn_opt_revision_number;
         m_revision.value.number = revnum;
     } else {
-        m_revision.value.number = -1;
         assign(revstring);
     }
   }
@@ -141,8 +147,6 @@ namespace svn
     if( !revision )
     {
       m_revision.kind = svn_opt_revision_unspecified;
-      m_revision.value.number = -1;
-      m_revision.value.date = 0;
     }
     else
     {
@@ -285,20 +289,6 @@ namespace svn
   {
       return kind()!=UNDEFINED && kind()!=BASE && kind()!=WORKING;
   }
-  
-    bool Revision::isValid() const
-    {
-        if (kind() != DATE)
-        {
-            if (kind()== UNDEFINED || (kind()==NUMBER && m_revision.value.number == -1))
-            {
-                return false;
-            }
-        }
-        // DATE will always handled as correct value
-        return true;
-    }
-
 
 }
 

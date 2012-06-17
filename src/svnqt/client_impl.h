@@ -624,7 +624,6 @@ namespace svn
                 svn::stream::SvnStream&);
 
     static apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
-    static apr_array_header_t * revListToHeader(const RevisionRanges&,const Pool&);
 
     //! helper method
     virtual void

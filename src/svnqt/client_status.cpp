@@ -412,7 +412,7 @@ namespace svn
     error = svn_client_log5 (
         params.targets().array (pool),
         params.peg().revision(),
-        revListToHeader(params.revisions(),pool),
+        svn::internal::RevisionRangesToHash(params.revisions()).array(pool),
         params.limit(),
         params.discoverChangedPathes() ? 1 : 0,
         params.strictNodeHistory() ? 1 : 0,

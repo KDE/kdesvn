@@ -24,6 +24,7 @@
 #include "svnqt/path.h"
 
 #include <svn_version.h>
+#include <svn_props.h>
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 7))
 
@@ -133,25 +134,34 @@ public:
                 }
                 break;
                 case svn_repos_notify_pack_shard_start:
-                {}
-                break;
-                case svn_repos_notify_pack_shard_end:
-                {}
-                break;
-                case svn_repos_notify_pack_shard_start_revprop:
-                {}
+                {
+                    _msg = QString("Packing revisions in shard %ul").arg(_shard);
+                }
                 break;
                 case svn_repos_notify_pack_shard_end_revprop:
-                {}
+                case svn_repos_notify_pack_shard_end:
+                case svn_repos_notify_load_node_done:
+                {
+                    _msg = QString("Done");
+                }
+                break;
+                case svn_repos_notify_pack_shard_start_revprop:
+                {
+                    _msg = QString("Packing revsion properties in shard %ul").arg(_shard);
+                }
                 break;
                 case svn_repos_notify_load_txn_start:
                 {
-                    _msg = QString("Start loading revision ").append(_rev.toString());
+                    _msg = QString("Start loading old revision ").append(_oldrev.toString());
                 }
                 break;
                 case svn_repos_notify_load_txn_committed:
                 {
-                    _msg = QString("Loading ").append(_rev.toString()).append(" finished");
+                    _msg = QString("Commited new revision ").append(_newrev.toString());
+                    if (_oldrev.isValid()) 
+                    {
+                        _msg.append(" loaded from orignal revision ").append(_oldrev.toString());
+                    }
                 }
                 break;
                 case svn_repos_notify_load_node_start:
@@ -174,16 +184,15 @@ public:
                     _msg = QString("Start ").append(action).append(" on node ").append(_path.native());
                 }
                 break;
-                case svn_repos_notify_load_node_done:
+                case svn_repos_notify_load_copied_node:
                 {
-                    _msg = QString("Finished node ").append(_path.native());
+                    _msg = QString("Copied");
                 }
                 break;
-                case svn_repos_notify_load_copied_node:
-                {}
-                break;
                 case svn_repos_notify_load_normalized_mergeinfo:
-                {}
+                {
+                    _msg = QString("Removing \\r from ").append(SVN_PROP_MERGEINFO);
+                }
                 break;
                 case svn_repos_notify_mutex_acquired:
                 {}

@@ -198,6 +198,7 @@ namespace svn
     QString toString()const;
 
     bool isRemote()const;
+    bool isValid()const;
 
     /**
      * @return valid date if kind is Revision::DATE

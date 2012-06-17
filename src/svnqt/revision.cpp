@@ -290,6 +290,10 @@ namespace svn
       return kind()!=UNDEFINED && kind()!=BASE && kind()!=WORKING;
   }
 
+    bool Revision::isValid() const
+    {
+        return kind()!=UNDEFINED;
+    }
 }
 
 /* -----------------------------------------------------------------

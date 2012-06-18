@@ -31,9 +31,7 @@
 
 // subversion api
 #include "svn_path.h"
-#ifdef HAS_SVN_VERSION_H
 #include <svn_version.h>
-#endif
 
 
 // apr api
@@ -74,24 +72,32 @@ namespace svn
     if (path.isEmpty()) {
       m_path = "";
     } else {
-      const char * int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
+        QByteArray int_path = path.TOUTF8();
+        
       if (Url::isValid(path) ) {
         if (!svn_path_is_uri_safe(int_path)) {
             int_path = svn_path_uri_encode(int_path,pool);
         }
+      } else {       
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        int_path = svn_dirent_internal_style(int_path, pool.pool () );
+#else
+        int_path = svn_path_internal_style (int_path, pool.pool () );
+#endif
       }
+
       m_path = QString::FROMUTF8(int_path);
-      if (Url::isValid(path) && m_path.indexOf("@")!=-1 ) {
+      if (Url::isValid(m_path) && m_path.indexOf("@")!=-1 ) {
         /// @todo make sure that "@" is never used as revision parameter
         QUrl uri = m_path;
         m_path = uri.path();
         m_path.replace('@',"%40");
         m_path = uri.scheme()+"://"+uri.authority()+m_path;
-        if (m_path.endsWith('/')) {
-            int_path = svn_path_internal_style (path.TOUTF8(), pool.pool () );
-            m_path = QString::FROMUTF8(int_path);
-        }
       }
+        
+        while (m_path.endsWith('/')) {
+            m_path.chop(1);
+        }
     }
   }
 
@@ -169,7 +175,6 @@ namespace svn
 
       svn_path_add_component (pathStringbuf,
                               component.TOUTF8());
-
       m_path = QString::FROMUTF8(pathStringbuf->data);
     }
   }
@@ -202,12 +207,20 @@ namespace svn
 
     const char * cdirpath;
     const char * cbasename;
-
+    
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)    
+    const char * int_path = prettyPath().TOUTF8().constData();
+    if (Url::isValid(m_path)) {
+        svn_uri_split(&cdirpath,&cbasename,int_path,pool);
+    } else {
+        svn_dirent_split(&cdirpath,&cbasename,int_path,pool);
+    }
+#else
     svn_path_split (prettyPath().TOUTF8(), &cdirpath, &cbasename, pool);
+#endif
     dirpath = QString::FROMUTF8(cdirpath);
     basename = QString::FROMUTF8(cbasename);
   }
-
 
   void
   Path::split (QString & dir, QString & filename, QString & ext) const
@@ -274,9 +287,16 @@ namespace svn
   QString
   Path::native () const
   {
+      if (isUrl()) 
+      {
+          return m_path;
+      }
     Pool pool;
-
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+    return QString::FROMUTF8(svn_dirent_local_style (m_path.TOUTF8(), pool));
+#else
     return QString::FROMUTF8(svn_path_local_style (m_path.TOUTF8(), pool));
+#endif
   }
 
 }

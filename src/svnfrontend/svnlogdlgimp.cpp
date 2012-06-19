@@ -426,7 +426,9 @@ QModelIndex SvnLogDlgImp::selectedRow(int column)
 void SvnLogDlgImp::slotCustomContextMenu(const QPoint&e)
 {
     QModelIndex ind=m_LogTreeView->indexAt(e);
+    QModelIndex bel;
     if (ind.isValid()) {
+        bel = m_LogTreeView->indexBelow(ind);
         ind = m_SortModel->mapToSource(ind);
     }
     int row = -1;
@@ -434,6 +436,12 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint&e)
         row = ind.row();
     } else {
         return;
+    }
+    
+    QLONG rev = -1;
+    if (bel.isValid()) {
+        bel = m_SortModel->mapToSource(bel);
+        rev = m_CurrentModel->toRevision(bel);
     }
     KMenu popup;
     QAction*ac;
@@ -454,6 +462,10 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint&e)
         ac = popup.addAction(i18n("Unset version for diff"));
         ac->setData(103);
     }
+    if (rev > -1) {
+        ac = popup.addAction(i18n("Revert this commit"));
+        ac->setData(104);
+    }
     ac = popup.exec(m_LogTreeView->viewport()->mapToGlobal(e));
     if (!ac) {
         return;
@@ -473,6 +485,15 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint&e)
         if (row!=m_CurrentModel->rightRow()) {
             m_CurrentModel->setRightRow(-1);
         }
+        break;
+    case 104:
+        {
+            svn::Revision previous(rev);
+            svn::Revision current(m_CurrentModel->toRevision(ind));
+            QString _path = m_PegUrl;
+            m_Actions->slotMergeWcRevisions(_path,current,previous,true,true,false,false);
+        }
+        break;
     }
     m_DispSpecDiff->setEnabled(m_CurrentModel->leftRow()!=-1 && m_CurrentModel->rightRow()!=-1 && m_CurrentModel->leftRow()!=m_CurrentModel->rightRow());
 }

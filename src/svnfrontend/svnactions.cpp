@@ -1037,13 +1037,8 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             return false;
         }
         svn::Pathes _add,_commit,_delete;
+        depth = svn::DepthInfinity;
         for (long i=0; i < _result.count();++i) {
-            if (_result[i].type()==CommitActionEntry::DELETE) {
-                QFileInfo fi(_result[i].name());
-                if (fi.isDir()) {
-                    depth = svn::DepthInfinity;
-                }
-            }
             _commit.append(_result[i].name());
             if (_result[i].type()==CommitActionEntry::ADD_COMMIT) {
                 _add.append(_result[i].name());

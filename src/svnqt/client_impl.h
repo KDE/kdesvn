@@ -120,8 +120,8 @@ namespace svn
      * @exception ClientException
      */
     virtual void
-    relocate (const Path & path, const QString &from_url,
-              const QString &to_url, bool recurse) throw (ClientException);
+    relocate (const Path & path, const Url &from_url,
+              const Url &to_url, bool recurse) throw (ClientException);
 
     /**
      * Sets files for deletion.
@@ -312,7 +312,7 @@ namespace svn
      */
     virtual Revision
     doSwitch (
-              const Path & path, const QString& url,
+              const Path & path, const Url& url,
               const Revision & revision,
               Depth depth,
               const Revision & peg=Revision::UNDEFINED,
@@ -333,7 +333,7 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-            import (const Path & path, const QString& url,
+            import (const Path & path, const Url& url,
                     const QString& message,
                     svn::Depth depth,
                     bool no_ignore,bool no_unknown_nodetype,

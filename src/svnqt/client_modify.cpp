@@ -44,9 +44,10 @@
 #include "svnqt/client_parameter.h"
 #include "svnqt/client_commit_parameter.h"
 #include "svnqt/client_update_parameter.h"
+#include "svnqt/url.h"
 
 #include "svnqt/helper.h"
-
+    
 namespace svn
 {
   Revision
@@ -516,7 +517,7 @@ namespace svn
 
   Revision
   Client_impl::doSwitch (
-                         const Path & path, const QString& url,
+                         const Path & path, const Url& url,
                          const Revision & revision,
                          Depth depth,
                          const Revision & peg,
@@ -528,12 +529,11 @@ namespace svn
     Pool pool;
     svn_revnum_t revnum = 0;
     svn_error_t * error = 0;
-
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+    
     error = svn_client_switch2(
                                &revnum,
                                path.cstr(),
-                               url.TOUTF8(),
+                               url,
                                peg.revision(),
                                revision.revision(),
                                internal::DepthToSvn(depth),
@@ -543,20 +543,6 @@ namespace svn
                                *m_context,
                                pool
                               );
-#else
-    bool recurse = depth==DepthInfinity;
-    Q_UNUSED(peg);
-    Q_UNUSED(sticky_depth);
-    Q_UNUSED(ignore_externals);
-    Q_UNUSED(allow_unversioned);
-    error = svn_client_switch (&revnum,
-                         path.cstr(),
-                         url.TOUTF8(),
-                         revision.revision (),
-                         recurse,
-                         *m_context,
-                         pool);
-#endif
     if(error != NULL) {
         throw ClientException (error);
     }
@@ -565,7 +551,7 @@ namespace svn
 
   Revision
   Client_impl::import (const Path & path,
-                  const QString& url,
+                  const Url& url,
                   const QString& message,
                   svn::Depth depth,
                   bool no_ignore,bool no_unknown_nodetype,
@@ -577,26 +563,11 @@ namespace svn
     Pool pool;
 
     m_context->setLogMessage (message);
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t * error =
-        svn_client_import3(&commit_info,path.cstr (),url.TOUTF8(),
+        svn_client_import3(&commit_info,path.cstr (),url,
             internal::DepthToSvn(depth),no_ignore,no_unknown_nodetype,
                                  map2hash(revProps,pool),
                                  *m_context,pool);
-#else
-    bool recurse = depth==DepthInfinity;
-    Q_UNUSED(revProps);
-    Q_UNUSED(no_unknown_nodetype);
-
-    svn_error_t * error =
-        svn_client_import2(&commit_info,
-                        path.cstr (),
-                        url.TOUTF8(),
-                        !recurse,
-                        no_ignore,
-                        *m_context,
-                        pool);
-#endif
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
 
@@ -611,15 +582,15 @@ namespace svn
 
   void
   Client_impl::relocate (const Path & path,
-                    const QString& from_url,
-                    const QString& to_url,
+                    const Url& from_url,
+                    const Url& to_url,
                     bool recurse) throw (ClientException)
   {
     Pool pool;
     svn_error_t * error =
       svn_client_relocate (path.cstr (),
-                         from_url.TOUTF8(),
-                         to_url.TOUTF8(),
+                         from_url,
+                         to_url,
                          recurse,
                          *m_context,
                          pool);

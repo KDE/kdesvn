@@ -32,19 +32,34 @@
 #define SVNQT_URL_H
 
 #include "svnqt/svnqt_defines.h"
+#include "svnqt/pool.h"
 
 #include <QString>
+#include <QByteArray>
 
 namespace svn
 {
   class SVNQT_EXPORT Url
   {
+  private:
+      QByteArray m_Uri;
+      Pool m_Pool;
+
   public:
     /** Constructor */
     Url ();
-
+    Url(const QString&);
+    Url(const QByteArray&);
+    Url(const Url&);
+    
     /** Destructor */
-    virtual ~Url ();
+    ~Url ();
+
+    void data(const QString&);
+    void data(const QByteArray&);
+
+    operator const char*()const;
+    operator const QByteArray&()const;
 
     /**
      * Checks if @a url is valid

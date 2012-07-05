@@ -35,16 +35,69 @@
 // svncpp
 #include "pool.h"
 #include "url.h"
+#include "svnqt_defines.h"
+
+
+#include <svn_dirent_uri.h>
+#include <svn_version.h>
 
 #include <qglobal.h>
 
 namespace svn
 {
 
-  Url::Url () {}
+    Url::Url ():m_Uri(),m_Pool() {}
 
-  Url::~Url () {}
+    Url::Url(const QString&a_uri)
+    :m_Pool()
+    {
+        data(a_uri);
+    }
+    
+    Url::Url(const Url& other)
+    :m_Pool()
+    {
+        m_Uri = other.m_Uri;
+    }
 
+    
+    Url::Url(const QByteArray&a_uri)
+    :m_Pool()
+    {
+        data(a_uri);
+    }
+
+    void Url::data(const QString&a_uri )
+    {
+        data(a_uri.toUtf8());
+    }
+    
+    void Url::data(const QByteArray& a_uri)
+    {
+        m_Uri = a_uri;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+        if (!svn_uri_is_canonical(m_Uri.constData(),m_Pool))
+        {
+            m_Uri = svn_uri_canonicalize(m_Uri.constData(),m_Pool);
+        }
+#endif
+    }
+
+    Url::operator const char*()const
+    {
+        return m_Uri.constData();
+    }
+    
+    Url::operator const QByteArray&()const
+    {
+        return m_Uri;
+    }
+
+    Url::~Url () {}
+    
+    
+
+    /* static helpers */
   bool Url::isLocal(const QString& url)
   {
     static Qt::CaseSensitivity cs=Qt::CaseInsensitive;

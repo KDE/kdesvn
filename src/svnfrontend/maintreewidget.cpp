@@ -667,7 +667,6 @@ void MainTreeWidget::setupActions()
 
     tmp_action = add_action("show_repository_settings",i18n("Settings for current repository"),KShortcut(),KIcon(),this,SLOT(slotRepositorySettings()));
 
-    add_action("repo_statistic",i18n("Show author statistic"),KShortcut(),KIcon(),this,SLOT(slotSimpleStatistic()));
     enableActions();
 }
 

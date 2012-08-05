@@ -462,7 +462,7 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint&e)
         ac = popup.addAction(i18n("Unset version for diff"));
         ac->setData(103);
     }
-    if (rev > -1) {
+    if (rev > -1 && !m_PegUrl.isUrl()) {
         ac = popup.addAction(i18n("Revert this commit"));
         ac->setData(104);
     }

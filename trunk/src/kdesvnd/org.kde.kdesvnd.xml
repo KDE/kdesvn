@@ -1,0 +1,84 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.kdesvnd">
+    <method name="get_login">
+        <arg type="as" direction="out"/>
+        <arg name="realm" type="s" direction="in"/>
+        <arg name="user" type="s" direction="in"/>
+    </method>
+    <method name="get_saved_login">
+        <arg type="as" direction="out"/>
+        <arg name="realm" type="s" direction="in"/>
+        <arg name="user" type="s" direction="in"/>
+    </method>
+    <method name="get_sslaccept">
+        <arg type="i" direction="out" />
+        <arg type="s" direction="in" name="hostname"/>
+        <arg type="s" direction="in" name="fingerprint"/>
+        <arg type="s" direction="in" name="validfrom"/>
+        <arg type="s" direction="in" name="validuntil"/>
+        <arg type="s" direction="in" name="issuerDName"/>
+        <arg type="s" direction="in" name="realm"/>
+    </method>
+    <method name="get_sslclientcertfile">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="get_logmsg">
+    <arg type="as" direction="out" />
+    </method>
+    <method name="load_sslclientcertpw">
+        <arg type="s" direction="out" />
+        <arg type="s" direction="in" name="realm"/>
+    </method>
+    <method name="get_sslclientcertpw">
+        <arg type="as" direction="out" />
+        <arg type="s" direction="in" name="realm"/>
+    </method>
+    <method name="getActionMenu">
+        <arg type="as" direction="out"/>
+        <arg name="wclist" type="as" direction="in"/>
+    </method>
+    <method name="getTopLevelActionMenu">
+        <arg type="as" direction="out"/>
+        <arg name="wclist" type="as" direction="in"/>
+    </method>
+    <method name="getSingleActionMenu">
+        <arg type="as" direction="out"/>
+        <arg name="wc" type="s" direction="in"/>
+    </method>
+    <method name="registerKioFeedback">
+        <arg type="t" name="kioid" direction="in"/>
+    </method>
+    <method name="unRegisterKioFeedback">
+        <arg type="t" name="kioid" direction="in"/>
+    </method>
+    <method name="setKioStatus">
+        <arg type="t" name="kioid" direction="in"/>
+        <arg type="i" name="status" direction="in"/>
+        <arg type="s" name="message" direction="in"/>
+    </method>
+    <method name="canceldKioOperation">
+       <arg type="t" name="kioid" direction="in"/>
+       <arg type="b" direction="out"/>
+    </method>
+    <method name="maxTransferKioOperation">
+        <arg type="t" name="kioid" direction="in"/>
+        <arg type="t" name="maxtransfer" direction="in"/>
+    </method>
+    <method name="transferedKioOperation">
+        <arg type="t" name="kioid" direction="in"/>
+        <arg type="t" name="transfered" direction="in"/>
+    </method>
+    <method name="titleKioOperation">
+        <arg type="t" name="kioid" direction="in"/>
+        <arg type="s" name="title" direction="in"/>
+        <arg type="s" name="label" direction="in"/>
+    </method>
+    <method name="notifyKioOperation">
+        <arg type="s" name="text" direction="in"/>
+    </method>
+    <method name="errorKioOperation">
+        <arg type="s" name="text" direction="in"/>
+    </method>
+    </interface>
+ </node>

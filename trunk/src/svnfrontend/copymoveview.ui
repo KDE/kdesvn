@@ -1,0 +1,90 @@
+<ui version="4.0" stdsetdef="1" >
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>CopyMoveView</class>
+  <widget class="QWidget" name="CopyMoveView" >
+    <property name="geometry" >
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>571</width>
+        <height>353</height>
+      </rect>
+    </property>
+    <property name="windowTitle" >
+      <string>Copy / Move</string>
+    </property>
+    <layout class="QVBoxLayout" >
+      <item>
+        <widget class="QLabel" name="m_HeadOneLabel" >
+          <property name="text" >
+            <string>&lt;p align="right">Rename&lt;/p></string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          </property>
+          <property name="wordWrap" >
+            <bool>true</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="KSqueezedTextLabel" name="m_OldNameLabel" >
+          <property name="text" >
+            <string>this long text</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignCenter</set>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <widget class="QLabel" name="m_HeadTwoLabel" >
+          <property name="text" >
+            <string>to</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          </property>
+          <property name="wordWrap" >
+            <bool>false</bool>
+          </property>
+        </widget>
+      </item>
+      <item>
+        <layout class="QGridLayout" >
+          <item row="0" column="0" >
+            <widget class="KSqueezedTextLabel" name="m_PrefixLabel" >
+              <property name="text" >
+                <string>/there/</string>
+              </property>
+              <property name="alignment" >
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1" >
+            <widget class="KLineEdit" name="m_NewNameInput" />
+          </item>
+        </layout>
+      </item>
+      <item>
+        <widget class="QCheckBox" name="m_ForceBox" >
+          <property name="text" >
+            <string>Force operation</string>
+          </property>
+          <property name="shortcut" >
+            <string/>
+          </property>
+        </widget>
+      </item>
+    </layout>
+  </widget>
+  <layoutdefault spacing="2" margin="2" />
+  <includes>
+    <include location="local" >ksqueezedtextlabel.h</include>
+    <include location="local" >ksqueezedtextlabel.h</include>
+    <include location="local" >klineedit.h</include>
+  </includes>
+</ui>

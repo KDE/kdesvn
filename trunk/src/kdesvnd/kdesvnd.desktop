@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=kdesvnd subversion module
+Name[de]=Subversion-Unterstützung von Kdesvn
+Name[es]=módulo para subversion kdesvnd
+Comment=Gives various subversion actions to filemananger and other software
+Comment[de]=Stellt verschieden Subversion-Aktionen für Dateimanager und andere Software zur Verfügung
+ServiceTypes=KDEDModule
+X-KDE-ServiceTypes=KDEDModule
+X-KDE-Library=kdesvnd
+X-KDE-DBus-ModuleName=kdesvnd
+X-KDE-Kded-autoload=false
+X-KDE-Kded-load-on-demand=true

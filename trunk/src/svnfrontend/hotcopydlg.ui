@@ -1,0 +1,82 @@
+<ui version="4.0" >
+ <class>HotcopyDlg</class>
+ <widget class="QWidget" name="HotcopyDlg" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>242</width>
+    <height>99</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <layout class="QGridLayout" name="m_MainGrid" >
+     <item row="1" column="0" >
+      <widget class="QLabel" name="m_Destlabel" >
+       <property name="text" >
+        <string>Destination folder:</string>
+       </property>
+       <property name="alignment" >
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="wordWrap" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" >
+      <widget class="KUrlRequester" name="m_SrcpathEditor" />
+     </item>
+     <item row="1" column="1" >
+      <widget class="KUrlRequester" name="m_DestpathEditor" />
+     </item>
+     <item row="0" column="0" >
+      <widget class="QLabel" name="m_Srclabel" >
+       <property name="text" >
+        <string>Repository to copy:</string>
+       </property>
+       <property name="alignment" >
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="wordWrap" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_Cleanlogs" >
+     <property name="text" >
+      <string>Clean logs</string>
+     </property>
+     <property name="shortcut" >
+      <string/>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
+  </customwidget>
+ </customwidgets>
+ <includes>
+  <include location="local" >kurlrequester.h</include>
+  <include location="local" >klineedit.h</include>
+  <include location="local" >kpushbutton.h</include>
+  <include location="local" >kurlrequester.h</include>
+  <include location="local" >klineedit.h</include>
+  <include location="local" >kpushbutton.h</include>
+ </includes>
+ <resources/>
+ <connections/>
+</ui>

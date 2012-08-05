@@ -1,0 +1,85 @@
+<ui version="4.0" >
+ <author>Rajko Albrecht</author>
+ <comment>Selector widget for depth enumeration</comment>
+ <class>DepthForm</class>
+ <widget class="QWidget" name="DepthForm" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>241</width>
+    <height>45</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form1</string>
+  </property>
+  <layout class="QHBoxLayout" name="hboxLayout" >
+   <item>
+    <widget class="KComboBox" name="m_DepthCombo" >
+     <property name="toolTip" >
+      <string>Select depth of operation</string>
+     </property>
+     <property name="statusTip" >
+      <string>Select depth of operation</string>
+     </property>
+     <property name="whatsThis" >
+      <string>&lt;p >&lt;b>Kind of depth&lt;/b>: &lt;/p>
+&lt;p >&lt;i>empty depth&lt;/i>&lt;br />
+Just the named directory, no entries. Updates will not pull in any files or subdirectories not already present. &lt;/p>
+&lt;p>&lt;i>Files depth&lt;/i>&lt;br />Folder and its file children, but not subdirs. Updates will pull in any files not already present, but not subdirectories. &lt;/p>
+&lt;p>&lt;i>Immediate depth&lt;/i>&lt;br />Folder and its entries. Updates will pull in any files or subdirectories not already present; those subdirectories entries will have depth-empty. &lt;/p>
+&lt;p>
+&lt;i>Infinity depth&lt;/i>&lt;br />Updates will pull in any files or subdirectories not already present; those subdirectories' this_dir entries will have depth-infinity.&lt;br />Equivalent to the pre-1.5 default update behavior. &lt;/p></string>
+     </property>
+     <item>
+      <property name="text" >
+       <string>Empty Depth</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Files Depth</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Immediate Depth</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Infinity Depth (recurse)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacerItem" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

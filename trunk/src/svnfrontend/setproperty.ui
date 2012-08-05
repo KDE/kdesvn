@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SetPropertyWidget</class>
+ <widget class="QWidget" name="SetPropertyWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>258</width>
+    <height>205</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="EditPropsWidget" name="m_PropertyEditor" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>250</width>
+       <height>160</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="DepthSelector" name="m_DepthSelector" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>166</width>
+       <height>33</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>33</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>EditPropsWidget</class>
+   <extends>QWidget</extends>
+   <header>editpropswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DepthSelector</class>
+   <extends>QWidget</extends>
+   <header>depthselector.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

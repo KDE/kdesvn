@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CommitMessage</class>
+ <widget class="QWidget" name="CommitMessage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>507</width>
+    <height>461</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Commitmessage</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QSplitter" name="m_MainSplitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QFrame" name="m_ReviewFrame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="m_Reviewlabel">
+           <property name="text">
+            <string>Review affected items</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTreeView" name="m_CommitItemTree">
+           <property name="verticalScrollMode">
+            <enum>QAbstractItemView::ScrollPerPixel</enum>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="allColumnsShowFocus">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="m_SelectAllButton">
+           <property name="text">
+            <string>Select all</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_HideNewItems">
+           <property name="text">
+            <string>Hide new items</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_MarkUnversioned">
+           <property name="toolTip">
+            <string>Mark all new e.g. not versioned items for add and commit.</string>
+           </property>
+           <property name="text">
+            <string>Select new items</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_UnmarkUnversioned">
+           <property name="toolTip">
+            <string>Unmark all unversioned items so they will be ignored.</string>
+           </property>
+           <property name="text">
+            <string>Unselect new items</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_RevertItemButton">
+           <property name="toolTip">
+            <string>Revert highlighted item</string>
+           </property>
+           <property name="text">
+            <string>Revert item</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_DiffItem">
+           <property name="toolTip">
+            <string>Generates and display difference against repository of selected item</string>
+           </property>
+           <property name="text">
+            <string>Diff item</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QFrame" name="m_EditFrame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="m_HeadLabel">
+         <property name="text">
+          <string>Enter a log message</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="KTextEdit" name="m_LogEdit"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout">
+     <item row="1" column="0">
+      <widget class="KComboBox" name="m_LogHistory">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>2</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Last used log messages</string>
+       </property>
+       <property name="duplicatesEnabled">
+        <bool>false</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="m_LogLabel">
+       <property name="text">
+        <string>Or insert one of the last:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="m_insert_file_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Insert Textfile</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="m_CheckBoxLayout">
+     <item>
+      <widget class="QCheckBox" name="m_keepLocksButton">
+       <property name="toolTip">
+        <string>If checked commit will not release locks.</string>
+       </property>
+       <property name="text">
+        <string>Keep locks</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="DepthSelector" name="m_DepthSelector" native="true"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="2" margin="2"/>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DepthSelector</class>
+   <extends>QWidget</extends>
+   <header>src/ksvnwidgets/depthselector.h</header>
+  </customwidget>
+ </customwidgets>
+ <includes>
+  <include location="local">ktextedit.h</include>
+  <include location="local">kcombobox.h</include>
+  <include location="local">src/ksvnwidgets/depthselector.h</include>
+ </includes>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_LogHistory</sender>
+   <signal>activated(int)</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotHistoryActivated(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>35</x>
+     <y>415</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_MarkUnversioned</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotMarkUnversioned()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_UnmarkUnversioned</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotUnmarkUnversioned()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_DiffItem</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotDiffSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>193</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_HideNewItems</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>hideNewItems(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_insert_file_button</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>insertFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>496</x>
+     <y>417</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_RevertItemButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotRevertSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>357</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_CommitItemTree</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotItemDoubleClicked(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>506</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_SelectAllButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotSelectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>456</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>507</x>
+     <y>381</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slotRevertSelected()</slot>
+  <slot>slotItemDoubleClicked(QModelIndex)</slot>
+  <slot>slotSelectAll()</slot>
+ </slots>
+</ui>

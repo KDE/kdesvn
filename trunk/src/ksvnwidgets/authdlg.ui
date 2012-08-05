@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AuthDialogWidget</class>
+ <widget class="QWidget" name="AuthDialogWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>362</width>
+    <height>135</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Authentication</string>
+  </property>
+  <property name="sizeGripEnabled" stdset="0">
+   <bool>false</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="m_RealmLabel">
+     <property name="text">
+      <string>Enter authentication info for</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="m_PasswordLabel">
+       <property name="text">
+        <string>Password:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="KLineEdit" name="m_PasswordEdit">
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="KLineEdit" name="m_UsernameEdit"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="m_UsernameLabel">
+       <property name="text">
+        <string>Username:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_StorePasswordButton">
+     <property name="text">
+      <string>Store password</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_UsernameEdit</tabstop>
+  <tabstop>m_PasswordEdit</tabstop>
+  <tabstop>m_StorePasswordButton</tabstop>
+ </tabstops>
+ <includes>
+  <include location="local">klineedit.h</include>
+  <include location="local">klineedit.h</include>
+ </includes>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,11 @@
+[GLOBAL]
+Iconname=kdesvn
+Comment=Kdesvn notification
+
+[Event/kdesvn-kio]
+Name=Kdesvn KIO Notification
+Action=Popup
+
+[Event/kdesvn-task]
+Name=Kdesvn task notification
+Action=Popup

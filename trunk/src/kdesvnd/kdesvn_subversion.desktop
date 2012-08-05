@@ -1,0 +1,322 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
+X-KDE-Submenu=Subversion (kdesvn)
+
+X-KDE-GetActionMenu=org.kde.kded /modules/kdesvnd org.kde.kdesvnd getActionMenu
+Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Blame;CreatePatch;Export;Diff;Update;Commit;Checkoutto;Exportto;Tree;
+
+[Desktop Action Log]
+Name=Subversion log (last 100)
+Name[es]=Mostrar registros (últimos 100)
+Icon=kdesvnlog
+Exec=kdesvn exec -r HEAD:1 -l 100 log %U
+Comment=Displays the subversion log
+Comment[es]=Muestra los registros de Subversion
+
+[Desktop Action Info]
+Name=Detailed subversion info
+Name[es]=Información detallada
+Icon=kdesvninfo
+Exec=kdesvn exec info %U
+
+[Desktop Action Add]
+Name=Add to Repository
+Name[bg]=Добавяне в хранилището
+Name[da]=Tilføj til lager
+Name[et]=Hoidlasse lisamine
+Name[sr]=Додај у складиште
+Name[sr@Latn]=Dodaj u skladište
+Name[sv]=Lägg till i arkiv
+Name[tr]=Depoya Ekle
+Name[es]=Añadir al Repositorio
+Icon=kdesvnadd
+Exec=kdesvn exec add %U
+
+[Desktop Action Addnew]
+Name=Check for unversioned items
+Name[es]=Mostrar elementos no versionados
+Icon=kdesvnaddrecursive
+Exec=kdesvn exec addnew %U
+
+[Desktop Action Delete]
+Name=Delete From Repository
+Name[bg]=Изтриване от хранилището
+Name[da]=Slet fra lager
+Name[et]=Hoidlast kustutamine
+Name[sr]=Обриши из складишта
+Name[sr@Latn]=Obriši iz skladišta
+Name[sv]=Ta bort från arkiv
+Name[tr]=Depodan Sil
+Name[es]=Eliminar del Repositorio
+Icon=kdesvndelete
+Exec=kdesvn exec rm %U
+
+[Desktop Action Revert]
+Name=Revert Local Changes
+Name[bg]=Игнориране на локалните промени
+Name[da]=Vend lokale ændringer om
+Name[et]=Kohalike muudatuste tühistamine
+Name[sr]=Одбаци локалне измене
+Name[sr@Latn]=Odbaci lokalne izmene
+Name[sv]=Återställ lokal ändring
+Name[tr]=Yerel Değişiklikleri Ters Çevir
+Name[es]=Deshacer cambios locales
+Icon=kdesvnreverse
+Exec=kdesvn exec revert %U
+Comment=Remove any changes made locally. Warning - this cannot be undone.
+Comment[bg]=Премахване на локалните промени, които са направени. Забележете, че данните ще се загубят безвъзвратно.
+Comment[da]=Fjern alle ændringer der er lavet lokalt. Advarsel - dette kan ikke fortrydes.
+Comment[et]=Eemaldab kõik kohalikud muudatused. Hoiatus: seda ei saa tagasi võtta.
+Comment[sr]=Уклони све локално направљене измене. Упозорење: ово се не може опозвати.
+Comment[sr@Latn]=Ukloni sve lokalno napravljene izmene. Upozorenje: ovo se ne može opozvati.
+Comment[sv]=Tar bort alla ändringar som gjorts lokalt. Varning: detta kan inte ångras.
+Comment[tr]=Yerel olarak yapılan değişiklikleri kaldır. Dikkat - bu işlem geri alınamaz.
+Comment[es]=Deshace cualquier cambio realizado localmente. Aviso - no se puede invertir el proceso.
+
+[Desktop Action Rename]
+Name=Rename...
+Name[bg]=Преименуване...
+Name[br]=Adenvel ...
+Name[cy]=Ail-enwi...
+Name[da]=Omdøb...
+Name[et]=Ümbernimetamine...
+Name[ga]=Athainmnigh...
+Name[sr]=Преименуј...
+Name[sr@Latn]=Preimenuj...
+Name[sv]=Byt namn...
+Name[tr]=Yeniden Adlandır...
+Name[es]=Renombrar...
+Icon=kdesvnmove
+Exec=kdesvn exec mv %U
+Comment=Rename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.
+Comment[bg]=Преименуване на файл локално и в хранилището. За предпочитане е да използвате този метод, вместо изтриване и добавяне.
+Comment[da]=Omdøb en fil lokalt og i lageret. Brug dette i stedet for at tilføje og slette fro at omdøbe en fil.
+Comment[et]=Faili ümbernimetamine nii kohalikult kui hoidlas. See on eelistatud viis faili ümbernimetamisel lisamise ja kustutamise asemel.
+Comment[sr]=Преименуј фајл локално и у складишту. Користите ово уместо трика са додавањем и брисањем фајла.
+Comment[sr@Latn]=Preimenuj fajl lokalno i u skladištu. Koristite ovo umesto trika sa dodavanjem i brisanjem fajla.
+Comment[sv]=Byt namn på en fil lokalt och i arkivet. Använd detta istället för att lägga till och ta bort för att byta namn på en fil.
+Comment[es]=Renombra un fichero localmente y en el repositorio. Utilizar ésto en lugar de añadir y borrar el fichero.
+
+[Desktop Action Import]
+Name=Import Repository
+Name[bg]=Импорт на директория
+Name[da]=Importér lager
+Name[et]=Hoidla import
+Name[sr]=Увези складиште
+Name[sr@Latn]=Uvezi skladište
+Name[sv]=Importera arkiv
+Name[tr]=Depoyu İçe Aktar
+Name[es]=Importar Repositorio
+Icon=svn_import
+Exec=kio_svn_helper -i %U
+Comment=Put folder into an existing repository to put it under revision control.
+Comment[bg]=Импорт на директория в съществуващо хранилище.
+Comment[da]=Put mappe ind i et eksisterende lager for at få den ind under revisionskontrol.
+Comment[et]=Kataloogi lisamine olemasolevasse versioonikontrolli süsteemi hoidlasse.
+Comment[sr]=Стави фасциклу у постојеће складиште, ради стављања под контролу ревизија.
+Comment[sr@Latn]=Stavi fasciklu u postojeće skladište, radi stavljanja pod kontrolu revizija.
+Comment[sv]=Lägg till katalog i ett befintligt arkiv för att få den under versionskontroll
+Comment[tr]=Dizini başka bie alt düzeltme controlünde var olan bir depo içine koy.
+Comment[es]=Poner la carpeta en un repositorio existente para tenerla bajo control de versiones.
+
+[Desktop Action Checkout]
+Name=Checkout From Repository...
+Name[bg]=Изтегляне от хранилището...
+Name[da]=Tjek ud fra lager...
+Name[et]=Hoidla väljavõte...
+Name[sr]=Довуци из складишта...
+Name[sr@Latn]=Dovuci iz skladišta...
+Name[sv]=Checka ut från ett arkiv...
+Name[tr]=Depodan Kontrol Et...
+Name[es]=Obtener del Repositorio...
+Icon=kdesvncheckout
+Exec=kdesvn exec checkout %U
+Comment=Checkout out files from an existing repository into this folder.
+Comment[bg]=Изтегляне на файлове от хранилището в текущата директория.
+Comment[da]=Tjek filer ud fra et eksisterende lager til denne mappe.
+Comment[et]=Olemasoleva hoidla failide väljavõte sellesse kataloogi.
+Comment[sr]=Довуци фајлове из постојећег складишта у ову фасциклу.
+Comment[sr@Latn]=Dovuci fajlove iz postojećeg skladišta u ovu fasciklu.
+Comment[sv]=Checka ut filer från ett befintligt arkiv till katalogen.
+Comment[tr]=Bu dizinde var olan bir depodan hatalı dosyaları kontrol et.
+Comment[es]=Extrae ficheros de un repositorio existente hacia esta carpeta.
+
+[Desktop Action Switch]
+Name=Switch...
+Name[bg]=Превключване...
+Name[et]=Lülitumine...
+Name[sr]=Пребаци...
+Name[sr@Latn]=Prebaci...
+Name[sv]=Byt...
+Name[tr]=Değiştir...
+Name[es]=Relocalizar...
+Icon=kdesvnswitch
+Comment=Switch given working copy to another branch
+Comment[bg]=Превключване на работното копие към друго разклонение.
+Comment[da]=Skift given arbejdskopi til en anden gren.
+Comment[et]=Antud töökoopia lülitamine teise harru
+Comment[sr]=Пребаци дату радну копију на другу грану
+Comment[sr@Latn]=Prebaci datu radnu kopiju na drugu granu
+Comment[sv]=Byt angiven arbetskopia till en annan gren
+Comment[tr]=Çalışan belirli bir kopyayı başka bölüme değiştir
+Comment[es]=Relocaliza la copia de trabajo hacia otra rama
+Exec=kdesvn exec switch %U
+
+[Desktop Action Merge]
+Name=Merge...
+Name[bg]=Смесване...
+Name[da]=Indflet...
+Name[et]=Ühendamine...
+Name[sr]=Стопи...
+Name[sr@Latn]=Stopi...
+Name[sv]=Sammanfoga...
+Name[tr]=Birleştir...
+Name[es]=Fusionar...
+Icon=kdesvnmerge
+Comment=Merge changes between this and another branch
+Comment[bg]=Смесване на промените от това разклонение с друго разклонение.
+Comment[da]=Indflet ændringer mellem denne og en anden gren
+Comment[et]=Selle ja teise haru muudatuste ühendamine
+Comment[sr]=Стопи измене између ове и друге гране
+Comment[sr@Latn]=Stopi izmene između ove i druge grane
+Comment[sv]=Sammanfoga ändringar mellan den här och en annan gren
+Comment[tr]=Bu ve başka bölüm arasındaki değişiklikleri birleştir
+Comment[es]=Fusionar cambios entre esta rama y otra
+Exec=kio_svn_helper -m %U
+
+[Desktop Action Blame]
+Name=Blame...
+Name[bg]=Информация...
+Name[et]=Autorsus...
+Name[pa]=ਬਲਾਮੀ...
+Name[sr]=Окриви...
+Name[sr@Latn]=Okrivi...
+Name[sv]=Klandra...
+Name[es]=Ver anotado...
+Icon=kdesvnblame
+Comment=See who wrote each line of the file and in what revision
+Comment[bg]=Информация за файла.
+Comment[da]=Se hvem der skrev hver linje i filen og i hvilken revision
+Comment[et]=Vaatamine, kes ja millises versioonis mingi faili rea kirjutas
+Comment[sr]=Прикажи за сваку линију фајла ко ју је написао и у којој ревизији
+Comment[sr@Latn]=Prikaži za svaku liniju fajla ko ju je napisao i u kojoj reviziji
+Comment[sv]=Se vem som skrev varje rad i filen och för vilken version
+Comment[es]=Ver quién escribió cada línea del fichero y en qué revisión
+Exec=kdesvn exec blame %U
+
+[Desktop Action CreatePatch]
+Name=Create Patch...
+Name[bg]=Създаване на кръпка...
+Name[da]=Lav rettelse...
+Name[et]=Paiga loomine...
+Name[pa]=ਪੈਂਚ ਬਣਾਓ...
+Name[sr]=Направи закрпу...
+Name[sr@Latn]=Napravi zakrpu...
+Name[sv]=Skapa programfix...
+Name[tr]=Yama Oluştur...
+Name[es]=Crear Parche...
+Exec=kio_svn_helper -p %U
+
+[Desktop Action Export]
+Name=Export...
+Name[bg]=Експорт...
+Name[br]=Ezporzh ...
+Name[cy]=Allforio...
+Name[da]=Eksportér...
+Name[et]=Eksport...
+Name[ga]=Easpórtáil...
+Name[sr]=Извези...
+Name[sr@Latn]=Izvezi...
+Name[sv]=Exportera...
+Name[tr]=Dışa Aktar...
+Name[es]=Exportar...
+Icon=kdesvnexport
+Exec=kdesvn exec export %U
+Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[bg]=Изтегляне на копие на дървото от хранилището.
+Comment[da]=Tjek en kopi uden version ud af et træ fra et lager
+Comment[et]=Hoidla failipuu versioonita koopia väljavõte
+Comment[sr]=Довуци неверзирану копију стабла из складишта
+Comment[sr@Latn]=Dovuci neverziranu kopiju stabla iz skladišta
+Comment[sv]=Checka ut en kopia utan versionskontroll från ett arkiv
+Comment[tr]=Depodaki bir ağaçtan kusurlu bir versionsuz kopyayı kontrol et
+Comment[es]=Obtener una copia no versionada de un árbol de un repositorio
+
+[Desktop Action Diff]
+Name=Diff (local)
+Name[bg]=Разлика (локално)
+Name[da]=Diff (lokal)
+Name[et]=Võrdlemine (kohalik)
+Name[ga]=Diff (logánta)
+Name[sr]=Разликуј (локално)
+Name[sr@Latn]=Razlikuj (lokalno)
+Name[sv]=Jämför (lokalt)
+Name[tr]=Diff (yerel)
+Name[es]=Ver diferencias (locales)
+Icon=kdesvndiff
+Exec=kdesvn exec diff %U
+Comment=Show local changes since last update
+Comment[bg]=Показване на локалните промени след последното обновяване.
+Comment[da]=Vis lokale ændringer siden sidste opdatering
+Comment[et]=Kohalike muudatuste näitamine pärast viimast uuendamist
+Comment[sr]=Прикажи локалне измене од последњег ажурирања
+Comment[sr@Latn]=Prikaži lokalne izmene od poslednjeg ažuriranja
+Comment[sv]=Visa lokala ändringar sedan senaste uppdateringen
+Comment[tr]=Son güncellemeden sonraki yerel değişiklikleri göster
+Comment[es]=Mostrar cambios locales desde la última actualización
+
+[Desktop Action Update]
+Name=KDESvn Update
+Name[bg]=Обновяване SVN
+Name[da]=SVN Opdatér
+Name[et]=SVN uuendamine
+Name[sr]=SVN ажурирање
+Name[sr@Latn]=SVN ažuriranje
+Name[sv]=SVN-uppdatera
+Name[tr]=SVN Güncelleme
+Name[es]=(SVN) Actualizar
+Icon=kdesvnupdate
+Exec=kdesvn exec update %U
+
+[Desktop Action Commit]
+Name=KDESvn Commit
+Name[bg]=Предаване SVN
+Name[et]=SVN sissekanne
+Name[sr]=SVN предаја
+Name[sr@Latn]=SVN predaja
+Name[sv]=SVN-arkivera
+Name[tr]=SVN Teslim Etme
+Name[es]=(SVN) Confirmar
+Icon=kdesvncommit
+Exec=kdesvn exec commit %U
+
+[Desktop Action Checkoutto]
+Name=Checkout from a repository...
+Name[de]=Checkout einer Repository
+Name[es]=Obtener de Subversion...
+Icon=kdesvncheckout
+Exec=kdesvn exec checkoutto %U
+Comment=Checkout out files from an existing repository into this folder.
+Comment[de]=Erzeuge eine Arbeitskopie von einer Repository
+Comment[es]=Extraer ficheros de un repositorio existente hacia esta carpeta.
+
+[Desktop Action Exportto]
+Name=Export from a subversion repository...
+Name[de]=Exportiere von einer Subversion Repository...
+Name[es]=Exportar de Subversion...
+Icon=kdesvnexport
+Exec=kdesvn exec exportto %U
+Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[de]=Hole eine unversionierte Kopie eines Baums von einer Repository
+Comment[es]=Obtener una copia no versionada del árbol de un repositorio
+
+[Desktop Action Tree]
+Name=Display revision tree
+Name[de]=Zeige Revisionsbaum
+Name[es]=Mostrar árbol de revisiones
+Icon=kdesvnlog
+Exec=kdesvn exec tree %U
+Comment[de]=Zeige den kompletten Revisionsbaum
+Comment=Show complete revision tree
+Comment[es]=Muestra el árbol de revisiones completo

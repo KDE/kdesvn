@@ -1,0 +1,302 @@
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+  <kcfgfile name="kdesvnpartrc" />
+  <include>qstring.h</include>
+  <group name="general_items" >
+    <entry key="case_sensitive_sort" type="Bool" >
+      <label>Set if items sortorder should be case sensitive or not</label>
+      <default>true</default>
+    </entry>
+    <entry key="listview_icon_size" type="Int" >
+      <label>Size of the icons</label>
+      <default>22</default>
+    </entry>
+    <entry key="display_file_tips" type="Bool" >
+      <label>Show file information in tooltip</label>
+      <default>true</default>
+    </entry>
+    <entry key="use_external_diff" type="Bool" >
+      <label>Use an external program for diff viewing/generating</label>
+      <default>false</default>
+    </entry>
+    <entry key="external_diff_display" type="String" >
+      <label>Use external program for diff viewing</label>
+      <default>kompare -on -</default>
+    </entry>
+    <entry key="diff_ignore_content" type="Bool" >
+      <label>Diff ignores content type</label>
+      <default>false</default>
+    </entry>
+    <entry key="diff_ignore_spaces" type="Bool" >
+      <label>Diff ignores white space changes</label>
+      <default>false</default>
+    </entry>
+    <entry key="diff_ignore_all_white_spaces" type="Bool" >
+      <label>Diff ignores all white space</label>
+      <default>false</default>
+    </entry>
+    <entry key="diff_gitformat_default" type="Bool">
+        <label>Show diff in GIT format</label>
+        <default>false</default>
+    </entry>
+    <entry key="diff_copies_as_add" type="Bool">
+        <label>Show copies as add</label>
+        <default>false</default>
+    </entry>
+    <entry key="max_log_messages" type="Int" >
+      <label>Maximum number of log messages</label>
+      <default>20</default>
+    </entry>
+    <entry key="colored_blame" type="Bool" >
+        <label>Display colored blame lines</label>
+        <default>true</default>
+    </entry>
+    <entry key="commit_splitter_height" type="IntList" >
+      <default>0,0</default>
+    </entry>
+    <entry key="commit_hide_new" type="Bool" >
+      <default>false</default>
+    </entry>
+    <entry key="show_navigation_panel" type="Bool" >
+        <default>true</default>
+    </entry>
+  </group>
+  <group name="subversion" >
+    <entry key="display_overlays" type="Bool" >
+      <label>Display icon overlays</label>
+      <default>true</default>
+    </entry>
+    <entry key="info_recursive" type="Bool" >
+      <label>Get item information recursively</label>
+      <default>false</default>
+    </entry>
+    <entry key="review_commit" type="Bool" >
+      <label>Review items before commit</label>
+      <default>true</default>
+    </entry>
+    <entry key="display_ignored_files" type="Bool" >
+      <label>Display ignored files</label>
+      <default>true</default>
+    </entry>
+    <entry key="display_unknown_files" type="Bool">
+      <label>Display unknown files</label>
+      <default>true</default>
+    </entry>
+    <entry key="hide_unchanged_files" type="Bool">
+      <label>Hide versioned unchanged files</label>
+      <default>false</default>
+    </entry>
+    <entry key="log_follows_nodes" type="Bool" >
+      <label>Log follows node changes</label>
+      <default>true</default>
+    </entry>
+    <entry key="log_always_list_changed_files" type="Bool" >
+      <label>Logs always reads list of changed files</label>
+      <default>true</default>
+    </entry>
+    <entry key="start_updates_check_on_open" type="Bool" >
+      <label>Start check for updates when open working copy</label>
+      <default>true</default>
+    </entry>
+    <entry key="log_cache_on_open" type="Bool">
+      <label>Start caching latest logs on open or commit</label>
+      <default>true</default>
+    </entry>
+    <entry key="details_on_remote_listing" type="Bool" >
+      <label>Get detailed infos when making a remote listing</label>
+      <default>false</default>
+    </entry>
+    <entry key="properties_on_remote_items" type="Bool">
+      <label>Get properties on selected item on networked protocols</label>
+      <default>false</default>
+    </entry>
+    <entry key="remote_special_properties" type="Bool">
+      <label>Use properties like bugtraq:url on repository listings</label>
+      <default>true</default>
+    </entry>
+    <entry key="check_needslock" type="Bool">
+        <label>Check for propertie svn:needs-lock on listings</label>
+        <default>false</default>
+    </entry>
+    <entry key="store_passwords" type="Bool" >
+      <label>Store passwords for remote connections</label>
+      <default>false</default>
+    </entry>
+    <entry key="passwords_in_wallet" type="Bool">
+        <label>Store passwords in KDE Wallet instead subversion storage</label>
+        <default>true</default>
+    </entry>
+    <entry key="use_password_cache" type="Bool">
+        <label>Use internal password cache</label>
+        <default>true</default>
+    </entry>
+    <entry key="network_on" type="Bool">
+        <label>Is networking enabled</label>
+        <default>true</default>
+    </entry>
+    <entry key="update_add_as_modification" type="Bool">
+        <label>Local add results in modification instead of conflicts</label>
+        <default>true</default>
+    </entry>
+    <entry key="update_make_parents" type="Bool">
+        <label>create any non-existent parent at depth=empty</label>
+        <default>false</default>
+    </entry>
+  </group>
+  <group name="diffmerge_items">
+    <entry key="external_merge_program" type="String" >
+      <label>Which program to use for external merges</label>
+      <default>kdiff3 %s1 %s2 %t</default>
+    </entry>
+    <entry key="conflict_resolver" type="String">
+      <label>Which program for resolving conflicts</label>
+      <default>kdiff3 %o %m %n -o %t</default>
+    </entry>
+    <entry name="extern_merge_default" type="Bool">
+        <label>Prefer external merge program</label>
+        <default>false</default>
+    </entry>
+  </group>
+  <group name="display" >
+    <entry key="colored_state" type="Bool" >
+      <label>Display different then normal states colored</label>
+      <default>true</default>
+    </entry>
+    <entry key="color_need_update" type="Color" >
+      <default>101,224,76</default>
+    </entry>
+    <entry key="color_missed_item" type="Color" >
+      <default>#CC0000</default>
+    </entry>
+    <entry key="color_notversioned_item" type="Color" >
+      <default>#BBBBBB</default>
+    </entry>
+    <entry key="color_locked_item" type="Color" >
+      <default>#c50003</default>
+    </entry>
+    <entry key="color_need_lock" type="Color" >
+      <default>#ff8888</default>
+    </entry>
+    <entry key="color_item_deleted" type="Color" >
+      <default>#a3a3a3</default>
+    </entry>
+    <entry key="color_item_added" type="Color" >
+      <default>#85bae0</default>
+    </entry>
+    <entry key="color_changed_item" type="Color" >
+      <default>#de5e5e</default>
+    </entry>
+    <entry key="color_conflicted_item" type="Color" >
+      <default>255,0,0</default>
+    </entry>
+  </group>
+  <group name="blame_dlg">
+    <entry key="locale_for_blame" type="String" >
+      <label>Locale for blame display</label>
+      <default></default>
+    </entry>
+  </group>
+  <group name="diff_display">
+    <entry key="locale_for_diff" type="String" >
+      <default></default>
+    </entry>
+  </group>
+  <group name="revision_tree" >
+    <entry key="fill_cache_on_tree" type="Bool">
+        <default>false</default>
+        <label>Check status of log cachen when starting revision tree</label>
+    </entry>
+    <entry key="tree_direction" type="Int" >
+      <default>0</default>
+      <label>Direction of revision tree</label>
+    </entry>
+    <entry key="tree_add_color" type="Color" >
+      <default>#00FF00</default>
+      <label>Color for added items</label>
+    </entry>
+    <entry key="tree_delete_color" type="Color" >
+      <default>#FF0000</default>
+      <label>Color for deleted items</label>
+    </entry>
+    <entry key="tree_copy_color" type="Color" >
+      <default>#C0C0C0</default>
+      <label>Color for copied items</label>
+    </entry>
+    <entry key="tree_rename_color" type="Color" >
+      <default>#C0C0C0</default>
+      <label>Color for renamed items</label>
+    </entry>
+    <entry key="tree_modify_color" type="Color" >
+      <default>#a0a0a4</default>
+      <label>Color for modified items</label>
+    </entry>
+    <entry key="tree_detail_height" type="IntList" >
+      <default>0,0</default>
+      <label>Height of detail view in tree widget</label>
+    </entry>
+    <entry key="tree_diff_rec" type="Bool">
+        <default>false</default>
+        <label>Diffs from Revisiontree are recursive</label>
+    </entry>
+  </group>
+  <group name="cmdline" >
+    <entry key="no_konqueror_contextmenu" type="Bool" >
+      <default>false</default>
+      <label>Should konqueror not display context menus for kdesvn?</label>
+    </entry>
+    <entry key="no_konqueror_toplevelmenu" type="Bool" >
+        <default>false</default>
+        <label>Should konqueror not display kdesvn entries in main action menu?</label>
+    </entry>
+    <entry key="cmdline_show_logwindow" type="Bool" >
+      <default>true</default>
+      <label>Show a small logwindow after executing a command.</label>
+    </entry>
+    <entry key="cmdline_log_minline" type="UInt" >
+      <default>0</default>
+      <label>Log must contain at least lines to show</label>
+    </entry>
+    <entry key="kio_use_standard_logmsg" type="Bool" >
+        <default>false</default>
+        <label>KIO::svn operations uses a standard logmessage</label>
+    </entry>
+    <entry key="kio_standard_logmsg" type="String">
+        <default>Revision made with kdesvn KIO.</default>
+        <label>The standard logmessage to use with KIO if not asking for it.</label>
+    </entry>
+    <entry key="kio_can_overwrite" type="Bool">
+        <default>false</default>
+        <label>Support overwrite for KIO modul</label>
+    </entry>
+    <entry key="display_dockmsg" type="Bool">
+        <default>true</default>
+        <label>Print progress messages in kde dock area</label>
+    </entry>
+  </group>
+  <group name="timed_jobs">
+    <entry key="poll_modified" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="poll_modified_minutes" type="UInt">
+        <default>10</default>
+    </entry>
+    <entry key="poll_updates" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="poll_updates_minutes" type="UInt">
+        <default>10</default>
+    </entry>
+  </group>
+  <group name="internals" >
+    <entry key="locale_is_casesensitive" type="Bool" >
+      <whatsthis>This value computes how casesensitive string ordering will made.
+Never overwrite the default computed value unless you know what you're doing.</whatsthis>
+      <default code="true" >QString(&quot;a&quot;).localeAwareCompare(&quot;B&quot;)>0</default>
+      <label>Check if current locale is case sensitive or not</label>
+    </entry>
+    <entry key="last_node_follow" type="Bool">
+        <whatsthis>This value holds for log dialog which kind of log is used, its internal only.</whatsthis>
+        <default>true</default>
+    </entry>
+  </group>
+</kcfg>

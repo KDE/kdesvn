@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainTreeWidget</class>
+ <widget class="QWidget" name="mainTreeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>368</width>
+    <height>271</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QSplitter" name="m_ViewSplitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="handleWidth">
+      <number>4</number>
+     </property>
+     <widget class="SvnTreeView" name="m_DirTreeView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="allColumnsShowFocus">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="SvnTreeView" name="m_TreeView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>2</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="verticalScrollMode">
+       <enum>QAbstractItemView::ScrollPerItem</enum>
+      </property>
+      <property name="rootIsDecorated">
+       <bool>false</bool>
+      </property>
+      <property name="uniformRowHeights">
+       <bool>true</bool>
+      </property>
+      <property name="itemsExpandable">
+       <bool>false</bool>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="allColumnsShowFocus">
+       <bool>true</bool>
+      </property>
+      <property name="expandsOnDoubleClick">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SvnTreeView</class>
+   <extends>QTreeView</extends>
+   <header>svntreeview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_TreeView</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>mainTreeWidget</receiver>
+   <slot>slotItemActivated(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_TreeView</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>mainTreeWidget</receiver>
+   <slot>slotContextMenu(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>42</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_TreeView</sender>
+   <signal>expanded(QModelIndex)</signal>
+   <receiver>mainTreeWidget</receiver>
+   <slot>slotItemExpanded(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>41</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_DirTreeView</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>mainTreeWidget</receiver>
+   <slot>slotDirContextMenu(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>100</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slotItemActivated(QModelIndex)</slot>
+  <slot>slotContextMenu(QPoint)</slot>
+  <slot>slotItemExpanded(QModelIndex)</slot>
+  <slot>slotDirItemActivated(QModelIndex)</slot>
+  <slot>slotDirContextMenu(QPoint)</slot>
+ </slots>
+</ui>

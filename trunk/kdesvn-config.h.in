@@ -1,0 +1,15 @@
+#ifndef _KDESVN_CONFIG_H
+#define _KDESVN_CONFIG_H
+
+#cmakedefine VERSION @KDESVN_VERSION@
+
+#cmakedefine SQLITE_FOUND
+#cmakedefine HAS_SETENV
+
+#define KDESVN_EXPORT @_KDESVN_EXPORT@
+#define KDESVN_NOEXPORT @_KDESVN_NOEXPORT@
+
+#define WALLETNAME "@PROJECT_NAME@"
+
+#define BIN_INSTALL_DIR "@BIN_INSTALL_DIR@"
+#endif

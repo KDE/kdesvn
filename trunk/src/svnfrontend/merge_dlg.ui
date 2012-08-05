@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MergeDlg</class>
+ <widget class="QWidget" name="MergeDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>715</width>
+    <height>450</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MergeSettings</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="m_SrcOneLabel">
+       <property name="text">
+        <string>Source 1:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="KUrlRequester" name="m_SrcOneInput"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="m_SrcTwoLabel">
+       <property name="text">
+        <string>Source 2:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="KUrlRequester" name="m_SrcTwoInput"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="m_OutLabel">
+       <property name="text">
+        <string>Output to:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KUrlRequester" name="m_OutInput"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="m_MergeParameter">
+     <property name="title">
+      <string>Merge parameter</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="Rangeinput_impl" name="m_RangeInput" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>500</width>
+          <height>300</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QCheckBox" name="m_RecursiveCheck">
+          <property name="text">
+           <string>Recursive</string>
+          </property>
+          <property name="shortcut">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_RelatedCheck">
+          <property name="toolTip">
+           <string>Handle unrelated as related items</string>
+          </property>
+          <property name="text">
+           <string>Ignore ancestry</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_ForceCheck">
+          <property name="toolTip">
+           <string>Force delete on modified/unversioned items</string>
+          </property>
+          <property name="text">
+           <string>Force</string>
+          </property>
+          <property name="shortcut">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_Reintegrate">
+          <property name="toolTip">
+           <string>lump-merge all of source URL's unmerged changes</string>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Reintegrate merge</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_DryCheck">
+          <property name="toolTip">
+           <string>Just dry run without modifications</string>
+          </property>
+          <property name="text">
+           <string>Dry run</string>
+          </property>
+          <property name="shortcut">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_RecordOnly">
+          <property name="toolTip">
+           <string>Only write mergeinfo</string>
+          </property>
+          <property name="whatsThis">
+           <string>The merge isn't actually performed, but the mergeinfo for the revisions which would've been merged is recorded in the working copy</string>
+          </property>
+          <property name="text">
+           <string>Record only</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_useExternMerge">
+          <property name="toolTip">
+           <string>Use external merge not subversions merge</string>
+          </property>
+          <property name="text">
+           <string>Use external merge</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="2" margin="2"/>
+ <customwidgets>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Rangeinput_impl</class>
+   <extends>QWidget</extends>
+   <header>rangeinput_impl.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_SrcOneInput</tabstop>
+  <tabstop>m_SrcTwoInput</tabstop>
+  <tabstop>m_OutInput</tabstop>
+  <tabstop>m_RecursiveCheck</tabstop>
+  <tabstop>m_RelatedCheck</tabstop>
+  <tabstop>m_ForceCheck</tabstop>
+  <tabstop>m_Reintegrate</tabstop>
+  <tabstop>m_DryCheck</tabstop>
+  <tabstop>m_RecordOnly</tabstop>
+  <tabstop>m_useExternMerge</tabstop>
+ </tabstops>
+ <includes>
+  <include location="local">kurlrequester.h</include>
+  <include location="local">klineedit.h</include>
+  <include location="local">kpushbutton.h</include>
+  <include location="local">kurlrequester.h</include>
+  <include location="local">klineedit.h</include>
+  <include location="local">kpushbutton.h</include>
+  <include location="local">kurlrequester.h</include>
+  <include location="local">klineedit.h</include>
+  <include location="local">kpushbutton.h</include>
+  <include location="local">rangeinput_impl.h</include>
+ </includes>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_useExternMerge</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MergeDlg</receiver>
+   <slot>externDisplayToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>693</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_RecordOnly</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MergeDlg</receiver>
+   <slot>recordOnlyToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>693</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>684</x>
+     <y>436</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_Reintegrate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MergeDlg</receiver>
+   <slot>reintegrateToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>561</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>715</x>
+     <y>438</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>recordOnlyToggled(bool)</slot>
+  <slot>reintegrateToggled(bool)</slot>
+ </slots>
+</ui>

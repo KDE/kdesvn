@@ -1,0 +1,512 @@
+<ui version="4.0" >
+ <author>Rajko Albrecht</author>
+ <class>LogDialog</class>
+ <widget class="KDialog" name="LogDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>494</width>
+    <height>428</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy" >
+   <enum>Qt::CustomContextMenu</enum>
+  </property>
+  <property name="windowTitle" >
+   <string>SVN Log</string>
+  </property>
+  <widget class="QWidget" native="1" name="mMainWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>4</x>
+     <y>4</y>
+     <width>481</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout" >
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout" >
+      <item>
+       <layout class="QGridLayout" name="gridLayout" >
+        <item row="0" column="0" >
+         <widget class="QLabel" name="startLabel" >
+          <property name="text" >
+           <string>Start revision</string>
+          </property>
+          <property name="wordWrap" >
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" >
+         <widget class="QLabel" name="endLabel" >
+          <property name="text" >
+           <string>End revision</string>
+          </property>
+          <property name="wordWrap" >
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" >
+         <widget class="RevisionButtonImpl" native="1" name="m_startRevButton" />
+        </item>
+        <item row="1" column="1" >
+         <widget class="RevisionButtonImpl" native="1" name="m_endRevButton" />
+        </item>
+        <item row="1" column="2" >
+         <widget class="KPushButton" name="m_goButton" >
+          <property name="text" >
+           <string>Get Logs</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4" >
+         <widget class="QPushButton" name="m_PrevFiftyButton" >
+          <property name="text" >
+           <string>Previous entries</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3" >
+         <widget class="QPushButton" name="m_NextFiftyButton" >
+          <property name="text" >
+           <string>Show from HEAD</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="spacer2" >
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType" >
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0" >
+         <size>
+          <width>188</width>
+          <height>44</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QSplitter" name="m_centralSplitter" >
+      <property name="sizePolicy" >
+       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="orientation" >
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QTreeView" name="m_LogTreeView" >
+       <property name="focusPolicy" >
+        <enum>Qt::WheelFocus</enum>
+       </property>
+       <property name="contextMenuPolicy" >
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
+       <property name="toolTip" >
+        <string>See context menu for more actions</string>
+       </property>
+       <property name="verticalScrollMode" >
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
+       </property>
+       <property name="rootIsDecorated" >
+        <bool>false</bool>
+       </property>
+       <property name="uniformRowHeights" >
+        <bool>true</bool>
+       </property>
+       <property name="itemsExpandable" >
+        <bool>false</bool>
+       </property>
+       <property name="sortingEnabled" >
+        <bool>true</bool>
+       </property>
+       <property name="allColumnsShowFocus" >
+        <bool>true</bool>
+       </property>
+       <property name="expandsOnDoubleClick" >
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QSplitter" name="m_rightSplitter" >
+       <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="KTextBrowser" name="m_LogDisplay" />
+       <widget class="QTreeWidget" name="m_ChangedList" >
+        <property name="contextMenuPolicy" >
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
+        <property name="toolTip" >
+         <string>See context menu for more actions</string>
+        </property>
+        <column>
+         <property name="text" >
+          <string>Action</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Item</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Copy from</string>
+         </property>
+        </column>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="m_ButtonLayout" >
+      <item>
+       <widget class="KPushButton" name="m_DispPrevButton" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>Diff previous</string>
+        </property>
+        <property name="shortcut" >
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KPushButton" name="m_DispSpecDiff" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip" >
+         <string>Select second revision with right mouse button</string>
+        </property>
+        <property name="text" >
+         <string>Diff revisions</string>
+        </property>
+        <property name="shortcut" >
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KPushButton" name="buttonListFiles" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>List entries</string>
+        </property>
+        <property name="shortcut" >
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KPushButton" name="buttonBlame" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>Annotate</string>
+        </property>
+        <property name="shortcut" >
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="Spacer1" >
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType" >
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0" >
+         <size>
+          <width>42</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="2" margin="2" />
+ <customwidgets>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>ktextbrowser.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RevisionButtonImpl</class>
+   <extends>QWidget</extends>
+   <header>revisionbuttonimpl.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_LogTreeView</tabstop>
+  <tabstop>m_LogDisplay</tabstop>
+  <tabstop>m_ChangedList</tabstop>
+  <tabstop>m_goButton</tabstop>
+  <tabstop>m_DispPrevButton</tabstop>
+  <tabstop>m_DispSpecDiff</tabstop>
+  <tabstop>buttonListFiles</tabstop>
+  <tabstop>buttonBlame</tabstop>
+ </tabstops>
+ <includes>
+  <include location="local" >kdialog.h</include>
+  <include location="local" >kpushbutton.h</include>
+  <include location="local" >revisionbuttonimpl.h</include>
+  <include location="local" >ktextbrowser.h</include>
+ </includes>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_DispPrevButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotDispPrevious()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>35</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_endRevButton</sender>
+   <signal>revisionChanged()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotRevisionSelected()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>110</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_startRevButton</sender>
+   <signal>revisionChanged()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotRevisionSelected()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>26</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_goButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotGetLogs()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>188</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_ChangedList</sender>
+   <signal>itemDoubleClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotSingleDoubleClicked(QTreeWidgetItem*,int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>383</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>271</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonListFiles</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotListEntries()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>309</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBlame</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotBlameItem()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>394</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_DispSpecDiff</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotDispSelected()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>214</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_ChangedList</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotChangedPathContextMenu(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>399</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>282</x>
+     <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_LogTreeView</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotCustomContextMenu(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>142</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>457</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_PrevFiftyButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotPrevFifty()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>297</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>487</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_NextFiftyButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LogDialog</receiver>
+   <slot>slotBeginHead()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>410</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>489</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slotSingleDoubleClicked(QTreeWidgetItem*,int)</slot>
+  <slot>slotChangedPathContextMenu(QPoint)</slot>
+  <slot>slotCustomContextMenu(QPoint)</slot>
+  <slot>slotPrevFifty()</slot>
+  <slot>slotBeginHead()</slot>
+ </slots>
+</ui>

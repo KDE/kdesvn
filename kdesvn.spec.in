@@ -9,13 +9,13 @@ Url:       http://kdesvn.alwins-world.de
 Group:     Development/Tools
 Source:    @PACKAGENAME@-%version.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-root
-Requires: subversion >= 1.3.0
+Requires: subversion >= 1.6.0
 Requires: /usr/bin/dot
 BuildRequires: cmake >= 2.4
 BuildRequires: gcc-c++
 BuildRequires: apr-devel
 BuildRequires: apr-util-devel
-BuildRequires: subversion-devel >= 1.3.0
+BuildRequires: subversion-devel >= 1.6.0
 BuildRequires: kdelibs-devel >= 4.1
 
 %description

@@ -273,7 +273,6 @@ public:
         if (!getMainDB().isValid()) {
             return QDataBase();
         }
-        bool checkDone = false;
         QString dbFile = getReposId(reposroot);
 
         if (dbFile.isEmpty()) {
@@ -281,7 +280,6 @@ public:
             if (dbFile.isEmpty()) {
                 return QSqlDatabase();
             }
-            checkDone=true;
         }
         QDataBase _db;
         if (m_mainDB.localData()->reposCacheNames.find(dbFile)!=m_mainDB.localData()->reposCacheNames.end()) {

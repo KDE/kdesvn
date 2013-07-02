@@ -67,7 +67,7 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr&propList,bool
             break;
         }
         svn::PropertiesMap::const_iterator pit;
-        for (pit=pmap.begin();pit!=pmap.end();++pit) {
+        for (pit=pmap.constBegin();pit!=pmap.constEnd();++pit) {
             PropertyListViewItem * ki = new PropertyListViewItem(this,
                     pit.key(),
                     pit.value());

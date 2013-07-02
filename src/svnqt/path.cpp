@@ -31,6 +31,7 @@
 
 // subversion api
 #include "svn_path.h"
+#include "svn_dirent_uri.h"
 #include <svn_version.h>
 
 

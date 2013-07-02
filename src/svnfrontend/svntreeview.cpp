@@ -97,8 +97,8 @@ void SvnTreeView::dropEvent(QDropEvent*event)
     bool intern = false;
     if (metaMap.find("kdesvn-source")!=metaMap.end()) {
         SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
-        QMap<QString, QString>::const_iterator it = metaMap.find("kdesvn-id");
-        if (it!=metaMap.end() && it.value()==itemModel->uniqueIdentifier()) {
+        QMap<QString, QString>::const_iterator it = metaMap.constFind("kdesvn-id");
+        if (it!=metaMap.constEnd() && it.value()==itemModel->uniqueIdentifier()) {
             intern=true;
         }
     }

@@ -392,13 +392,13 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
 const QString&RevGraphView::getLabelstring(const QString&nodeName)
 {
     QMap<QString,QString>::ConstIterator nIt;
-    nIt = m_LabelMap.find(nodeName);
-    if (nIt!=m_LabelMap.end()) {
+    nIt = m_LabelMap.constFind(nodeName);
+    if (nIt!=m_LabelMap.constEnd()) {
         return nIt.value();
     }
     trevTree::ConstIterator it1;
-    it1 = m_Tree.find(nodeName);
-    if (it1==m_Tree.end()) {
+    it1 = m_Tree.constFind(nodeName);
+    if (it1==m_Tree.constEnd()) {
         return m_LabelMap[""];
     }
     QString res;
@@ -481,7 +481,7 @@ void RevGraphView::dumpRevtree()
     //stream << QString("  overlap=false;\n  splines=true;\n");
 
     RevGraphView::trevTree::ConstIterator it1;
-    for (it1=m_Tree.begin();it1!=m_Tree.end();++it1) {
+    for (it1=m_Tree.constBegin();it1!=m_Tree.constEnd();++it1) {
         stream << "  " << it1.key()
             << "[ "
             << "shape=box, "
@@ -511,8 +511,8 @@ QString RevGraphView::toolTip(const QString&_nodename,bool full)const
 {
     QString res;
     trevTree::ConstIterator it;
-    it = m_Tree.find(_nodename);
-    if (it==m_Tree.end()) {
+    it = m_Tree.constFind(_nodename);
+    if (it==m_Tree.constEnd()) {
         return res;
     }
     QStringList sp = it.value().Message.split('\n');
@@ -907,8 +907,8 @@ void RevGraphView::makeCat(GraphTreeLabel*_l)
         return;
     }
     QString n1 = _l->nodename();
-    trevTree::ConstIterator it = m_Tree.find(n1);
-    if (it==m_Tree.end()) {
+    trevTree::ConstIterator it = m_Tree.constFind(n1);
+    if (it==m_Tree.constEnd()) {
         return;
     }
     svn::Revision tr(it.value().rev);
@@ -929,15 +929,15 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
 {
     if (n1.isEmpty()||n2.isEmpty()) return;
     trevTree::ConstIterator it;
-    it = m_Tree.find(n2);
-    if (it==m_Tree.end()) {
+    it = m_Tree.constFind(n2);
+    if (it==m_Tree.constEnd()) {
         return;
     }
     svn::Revision sr(it.value().rev);
     QString sp = _basePath+it.value().name;
 
-    it = m_Tree.find(n1);
-    if (it==m_Tree.end()) {
+    it = m_Tree.constFind(n1);
+    if (it==m_Tree.constEnd()) {
         return;
     }
     svn::Revision tr(it.value().rev);

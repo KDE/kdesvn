@@ -918,8 +918,8 @@ void kio_svnProtocol::svnlog(int revstart,const QString&revstringstart,int reven
             continue;
         }
 
-        svn::LogEntriesMap::const_iterator it = logs.begin();
-        for (;it!=logs.end();++it) {
+        svn::LogEntriesMap::const_iterator it = logs.constBegin();
+        for (;it!=logs.constEnd();++it) {
             setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+ "path",urls[j].path());
             setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified( 10,'0' )+ "rev",
                 QString::number( (*it).revision));

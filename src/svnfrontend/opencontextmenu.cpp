@@ -38,11 +38,11 @@ OpenContextmenu::~OpenContextmenu()
 void OpenContextmenu::setup()
 {
     m_mapPopup.clear();
-    KService::List::ConstIterator it = m_List.begin();
+    KService::List::ConstIterator it = m_List.constBegin();
     int id = 1;
     QAction*act;
     QStringList _found;
-    for( ; it != m_List.end(); ++it ) {
+    for( ; it != m_List.constEnd(); ++it ) {
         if (_found.indexOf((*it)->name())!=-1) {
             continue;
         }

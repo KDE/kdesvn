@@ -237,9 +237,9 @@ bool svn::cache::ReposLog::checkFill(svn::Revision&start,svn::Revision&end,bool 
         if (!m_Client->log(params.targets(m_ReposRoot).revisionRange(_rstart,_rend).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).strictNodeHistory(false),_internal)) {
             return false;
         }
-        LogEntriesMap::ConstIterator it=_internal.begin();
+        LogEntriesMap::ConstIterator it=_internal.constBegin();
 
-        for (;it!=_internal.end();++it) {
+        for (;it!=_internal.constEnd();++it) {
             _insertLogEntry((*it));
             if (cp && cp->getListener()) {
                 //cp->getListener()->contextProgress(++icount,_internal.size());

@@ -238,7 +238,7 @@ void Commitmsg_impl::initHistory()
         }
     }
     QStringList::const_iterator it;
-    for (it=sLogHistory.begin();it!=sLogHistory.end();++it) {
+    for (it=sLogHistory.constBegin();it!=sLogHistory.constEnd();++it) {
         if ((*it).length()<=40) {
             m_LogHistory->addItem((*it));
         } else {

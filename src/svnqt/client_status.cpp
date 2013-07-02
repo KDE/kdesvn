@@ -303,7 +303,7 @@ namespace svn
     QString url = params.path().path();
     url+=QString::FROMUTF8("/");
 
-    for (it = dirEntries.begin (); it != dirEntries.end (); ++it)
+    for (it = dirEntries.constBegin (); it != dirEntries.constEnd (); ++it)
     {
         DirEntryPtr dirEntry = *it;
         if (dirEntry->name().isEmpty())

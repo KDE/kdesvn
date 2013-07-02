@@ -610,14 +610,14 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     if (offers.count()==0 || offers.first()->exec().isEmpty()) {
         offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"), "Type == 'Application'");
     }
-    KService::List::ConstIterator it = offers.begin();
-    for( ; it != offers.end(); ++it ) {
+    KService::List::ConstIterator it = offers.constBegin();
+    for( ; it != offers.constEnd(); ++it ) {
         if ((*it)->noDisplay())
             continue;
         break;
     }
 
-    if (it!=offers.end()) {
+    if (it!=offers.constEnd()) {
         content.setAutoRemove(false);
         KRun::run(**it,KUrl(tname), KApplication::activeWindow(),true);
         return;
@@ -1477,8 +1477,8 @@ void SvnActions::prepareUpdate(bool ask)
     if (k.count()==0) {
         what.append(m_Data->m_ParentList->baseUri());
     } else {
-        SvnItemListConstIterator liter=k.begin();
-        for(;liter!=k.end();++liter){
+        SvnItemListConstIterator liter=k.constBegin();
+        for(;liter!=k.constEnd();++liter){
             what.append((*liter)->fullName());
         }
     }

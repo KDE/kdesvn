@@ -2266,8 +2266,8 @@ void MainTreeWidget::slotDirUpdate()
     if (which.count()==0) {
         what.append(baseUri());
     } else {
-        SvnItemListConstIterator liter=which.begin();
-        for(;liter!=which.end();++liter){
+        SvnItemListConstIterator liter=which.constBegin();
+        for(;liter!=which.constEnd();++liter){
             what.append((*liter)->fullName());
         }
     }

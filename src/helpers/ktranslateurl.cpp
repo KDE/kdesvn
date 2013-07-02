@@ -85,8 +85,8 @@ KUrl KTranslateUrl::findSystemBase(const QString&filename)
 {
     QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
 
-    QStringList::ConstIterator dirpath = dirList.begin();
-    QStringList::ConstIterator end = dirList.end();
+    QStringList::ConstIterator dirpath = dirList.constBegin();
+    QStringList::ConstIterator end = dirList.constEnd();
     for(; dirpath!=end; ++dirpath)
     {
         QDir dir = *dirpath;
@@ -98,8 +98,8 @@ KUrl KTranslateUrl::findSystemBase(const QString&filename)
 
         KIO::UDSEntry entry;
 
-        QStringList::ConstIterator name = filenames.begin();
-        QStringList::ConstIterator endf = filenames.end();
+        QStringList::ConstIterator name = filenames.constBegin();
+        QStringList::ConstIterator endf = filenames.constEnd();
 
         for(; name!=endf; ++name)
         {

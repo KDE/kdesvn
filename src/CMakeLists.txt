@@ -34,8 +34,8 @@ set(partsrc
     commandline_part.cpp
 )
 
-kde_automoc(${kdesvnsrc})
-kde_automoc(${partsrc})
+qt4_automoc(${kdesvnsrc})
+qt4_automoc(${partsrc})
 
 set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
 set(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
@@ -51,7 +51,7 @@ add_subdirectory(pics)
 add_subdirectory(icons)
 
 kde4_add_executable(kdesvn ${kdesvnsrc})
-kde_add_kpart(kdesvnpart ${partsrc})
+kde4_add_plugin(kdesvnpart ${partsrc})
 
 set(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}")
 

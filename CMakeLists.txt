@@ -49,34 +49,6 @@ include (MacroLibrary)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 
-macro(KDE_AUTOMOC)
- QT4_AUTOMOC(${ARGV})
-endmacro()
-
-macro(KDE_ADD_UI_FILES)
- KDE4_ADD_UI_FILES(${ARGV})
-endmacro()
-
-macro(KDE_ADD_KCFG_FILES)
- KDE4_ADD_KCFG_FILES(${ARGV})
-endmacro()
-
-macro(KDE_ADD_KPART)
- kde4_add_plugin(${ARGV})
-endmacro()
-
-macro(KDE_ADD_MOC_FILES)
- KDE4_MOC_HEADERS(${ARGV})
-endmacro()
-
-macro(KDESVN_INSTALL_ICONS)
- kde4_install_icons( ${ICON_INSTALL_DIR}  )
-endmacro()
-
-macro(KDESVN_GENERATE_LIBTOOL_FILE _subdir _target)
- KDE4_INSTALL_LIBTOOL_FILE(${_subdir} ${_target})
-endmacro()
-
 include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 ${QT_QTDBUS_INCLUDE_DIR})
 

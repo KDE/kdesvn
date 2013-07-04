@@ -32,8 +32,7 @@ qt4_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
 kde4_add_plugin(kded_kdesvnd ${kded_kdesvnd_src})
 
-
-kde_add_moc_files(kded_kdesvnd_src kdesvnd_dcop.h)
+kde4_moc_headers(kded_kdesvnd_src kdesvnd_dcop.h)
 
 target_link_libraries(kded_kdesvnd
     ksvnwidgets

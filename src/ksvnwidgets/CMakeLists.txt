@@ -20,7 +20,7 @@
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
 
-kde_add_ui_files(
+kde4_add_ui_files(
     kdesvn_shared_ui
     commitmessage.ui
     ssltrustprompt.ui
@@ -70,7 +70,7 @@ set(ksvnwidgethdr
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
 
-kde_automoc(${ksvnwidgetsrc})
+qt4_automoc(${ksvnwidgetsrc})
 
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 set_target_properties(ksvnwidgets

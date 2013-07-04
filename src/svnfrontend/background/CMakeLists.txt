@@ -35,7 +35,7 @@ set (backgroundsrc
     getinfothread.h
     )
 
-kde_automoc(${backgroundsrc})
+qt4_automoc(${backgroundsrc})
 
 add_library(svnbackground STATIC
     ${backgroundsrc}

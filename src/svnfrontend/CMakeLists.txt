@@ -129,8 +129,8 @@ set(svnfrontendui
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-kde_automoc(${svnfrontendsrc})
-kde_add_ui_files(frontend_ui_sources ${svnfrontendui})
+qt4_automoc(${svnfrontendsrc})
+kde4_add_ui_files(frontend_ui_sources ${svnfrontendui})
 
 
 add_subdirectory(background)

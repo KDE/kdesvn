@@ -20,11 +20,11 @@
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-kde_add_kcfg_files(cfgsrc
+kde4_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
 add_library(kdesvncfgreader STATIC ${cfgsrc})
 
-kde_add_ui_files(
+kde4_add_ui_files(
     settings_ui_sources
     dispcolor_settings.ui
     display_settings.ui
@@ -47,7 +47,7 @@ set(settings_sources
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-kde_automoc(${settings_sources})
+qt4_automoc(${settings_sources})
 add_library(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
 add_dependencies(settingsdlgs kdesvncfgreader)
 

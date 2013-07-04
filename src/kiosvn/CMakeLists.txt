@@ -25,7 +25,7 @@ set(kiosvn_src kiosvn.cpp kiolistener.cpp kiobytestream.cpp ../ksvnwidgets/pwsto
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 qt4_add_dbus_interfaces( kiosvn_src ../kdesvnd/org.kde.kdesvnd.xml )
 
-kde_add_kpart(kio_ksvn ${kiosvn_src} ${hdr})
+kde4_add_plugin(kio_ksvn ${kiosvn_src} ${hdr})
 
 target_link_libraries(kio_ksvn
     ${svnqt-name}

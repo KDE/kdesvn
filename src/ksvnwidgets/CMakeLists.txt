@@ -18,7 +18,7 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
+include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 
 kde4_add_ui_files(kdesvn_shared_ui
     authdlg.ui

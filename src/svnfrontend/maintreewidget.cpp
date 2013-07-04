@@ -386,7 +386,7 @@ void MainTreeWidget::SelectionList(SvnItemList&target)const
     if (_mi.count()<1) {
         QModelIndex ind = m_TreeView->rootIndex();
         if (ind.isValid()) {
-            // realy! it will remapped to this before setRootIndex! (see below)
+            // really! it will remapped to this before setRootIndex! (see below)
             target.push_back(m_Data->sourceNode(ind,false));
         }
         return;

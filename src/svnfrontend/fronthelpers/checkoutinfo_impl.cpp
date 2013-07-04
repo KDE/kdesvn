@@ -122,7 +122,7 @@ void CheckoutInfo_impl::hideDepth(bool how,bool overwriteAsRecurse)
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->show();
         m_overwriteButton->setText( i18n( "Overwrite existing" ) );
-        m_overwriteButton->setToolTip(i18n( "May existing unversioned items ovewritten" ));
+        m_overwriteButton->setToolTip(i18n( "May existing unversioned items overwritten" ));
     }
     adjustSize();
 }

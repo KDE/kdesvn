@@ -126,8 +126,7 @@ void DbOverview::itemActivated(const QItemSelection&indexes,const QItemSelection
 void DbOverview::genInfo(const QString&repo)
 {
     svn::cache::ReposLog rl(_data->_Client,repo);
-    const static QString info(i18n("Log cache holds %1 logentries and consumes %2 on disk."));
-    QString msg = info.arg(rl.count()).arg(helpers::ByteToString(rl.fileSize()));
+    QString msg = i18n("Log cache holds %1 log entries and consumes %2 on disk.",rl.count(),helpers::ByteToString(rl.fileSize()));
     m_RepostatusBrowser->setText(msg);
 }
 
@@ -142,7 +141,7 @@ QString DbOverview::selectedRepository()const
 
 void DbOverview::deleteCacheItems()
 {
-    int i = KMessageBox::questionYesNo(this,i18n("Realy clean cache for repository\n%1?").arg(selectedRepository()),i18n("Clean repository cache"));
+    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache for repository\n%1?").arg(selectedRepository()),i18n("Clean repository cache"));
     if (i != KMessageBox::Yes) {
         return;
     }
@@ -160,7 +159,7 @@ void DbOverview::deleteCacheItems()
 
 void DbOverview::deleteRepository()
 {
-    int i = KMessageBox::questionYesNo(this,i18n("Realy clean cache and data for repository\n%1?").arg(selectedRepository()),i18n("Delete repository"));
+    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache and data for repository\n%1?").arg(selectedRepository()),i18n("Delete repository"));
     if (i != KMessageBox::Yes) {
         return;
     }

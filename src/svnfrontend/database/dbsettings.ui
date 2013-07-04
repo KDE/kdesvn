@@ -18,13 +18,13 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Logcache settings</string>
+       <string>Log cache settings</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QCheckBox" name="dbcfg_noCacheUpdate">
          <property name="text">
-          <string>Don't update logcache on open</string>
+          <string>Do not update log cache on open</string>
          </property>
         </widget>
        </item>
@@ -50,7 +50,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Log and statistic setting</string>
+       <string>Log and statistics setting</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -65,7 +65,7 @@
          <item row="1" column="0">
           <widget class="KEditListBox" name="dbcfg_exclude_log_pattern">
            <property name="toolTip">
-            <string>This is a list which words/substrings a log entry must contain so it will be hidden from log and statistic</string>
+            <string>This is a list which words/substrings a log entry must contain so it will be hidden from log and statistics</string>
            </property>
            <property name="buttons">
             <set>KEditListBox::Add|KEditListBox::Remove</set>
@@ -79,7 +79,7 @@
          <item row="2" column="0">
           <widget class="KEditListBox" name="dbcfg_exclude_userslog">
            <property name="toolTip">
-            <string>Don't display commits of listet users in logwindow and statistic view</string>
+            <string>Do not display commits of listed users in logwindow and statistics view</string>
            </property>
            <property name="buttons">
             <set>KEditListBox::Add|KEditListBox::Remove</set>
@@ -89,14 +89,14 @@
          <item row="1" column="0">
           <widget class="QLabel" name="m_hideuser_label">
            <property name="text">
-            <string>Don't show commits from following users</string>
+            <string>Do not show commits from following users</string>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QCheckBox" name="dbcfg_filter_empty_author">
            <property name="text">
-            <string>Don't disply commits without author</string>
+            <string>Do not disply commits without author</string>
            </property>
           </widget>
          </item>

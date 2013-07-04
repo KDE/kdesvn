@@ -16,7 +16,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="textLabel5">
        <property name="toolTip">
-        <string>Path to load the dump into (see contexthelp)</string>
+        <string>Path to load the dump into (see context help)</string>
        </property>
        <property name="whatsThis">
         <string>If not empty, load the dump into a specific folder instead into root of repository. This folder must exist before loading the dump.</string>
@@ -64,7 +64,7 @@
      <item row="2" column="1">
       <widget class="KLineEdit" name="m_Rootfolder">
        <property name="toolTip">
-        <string>Path to load the dump into (see contexthelp)</string>
+        <string>Path to load the dump into (see context help)</string>
        </property>
        <property name="whatsThis">
         <string>If not empty, load the dump into a specific folder instead into root of repository. This folder must exist before loading the dump.</string>
@@ -141,7 +141,7 @@
    <item>
     <widget class="QCheckBox" name="m_validateProps">
      <property name="toolTip">
-      <string>Validate the properties on load (only subversion 1.7 or newer)</string>
+      <string>Validate the properties on load (only Subversion 1.7 or newer)</string>
      </property>
      <property name="text">
       <string>Validate properties</string>

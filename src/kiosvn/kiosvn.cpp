@@ -317,7 +317,7 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on HEAD revision."));
         return;
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
@@ -365,7 +365,7 @@ void kio_svnProtocol::rename(const KUrl&src,const KUrl&target,KIO::JobFlags flag
         }
         return;
     }
-    notify(i18n("Renaming %1 to %2 succesfull").arg(src.prettyUrl()).arg(target.prettyUrl()));
+    notify(i18n("Renaming %1 to %2 succesfull",src.prettyUrl(),target.prettyUrl()));
     finished();
 }
 
@@ -378,7 +378,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on HEAD revision."));
         return;
     }
     svn::Revision peg = rev;
@@ -410,7 +410,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
                 notify(i18n("Start checking out to temporary folder"));
                 m_pData->dispWritten = true;
                 registerToDaemon();
-                startOp(-1, i18n("Checking out %1").arg(path.native()));
+                startOp(-1, i18n("Checking out %1",path.native()));
                 svn::CheckoutParameter params;
                 params.moduleName(path).destination(svn::Path(_codir->name())).revision(rev).peg(peg).depth(svn::DepthFiles);
                 m_pData->m_Svnclient->checkout(params);
@@ -461,7 +461,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     written (0);
     m_pData->dispWritten = true;
     registerToDaemon();
-    startOp(processed_size, i18n("Commiting %1").arg(makeSvnUrl(url)));
+    startOp(processed_size, i18n("Commiting %1",makeSvnUrl(url)));
     bool err = false;
     if (exists) {
         svn::CommitParameter commit_parameters;
@@ -484,7 +484,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     }
     m_pData->dispWritten = false;
     if (!err) {
-        stopOp(i18n("Wrote %1 to repository").arg(helpers::ByteToString(processed_size)));
+        stopOp(i18n("Wrote %1 to repository",helpers::ByteToString(processed_size)));
         finished();
     }
 }
@@ -515,7 +515,7 @@ void kio_svnProtocol::copy(const KUrl&src,const KUrl&dest,int permissions,KIO::J
     }
     m_pData->dispProgress=false;
     kDebug(9510)<<"kio_svn::copy finished" <<  endl;
-    notify(i18n("Copied %1 to %2").arg(makeSvnUrl(src)).arg(makeSvnUrl(dest)));
+    notify(i18n("Copied %1 to %2",makeSvnUrl(src),makeSvnUrl(dest)));
     finished();
 }
 
@@ -530,7 +530,7 @@ void kio_svnProtocol::del(const KUrl&src,bool isfile)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on head revision!"));
+        extraError(KIO::ERR_SLAVE_DEFINED,i18n("Can only write on HEAD revision."));
         return;
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());

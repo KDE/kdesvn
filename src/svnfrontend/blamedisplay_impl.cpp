@@ -370,7 +370,7 @@ void BlameDisplay_impl::showCommit(BlameTreeItem*bit)
     }
     KDialog* dlg = new KDialog(KApplication::activeModalWidget());
     dlg->setButtons(KDialog::Close);
-    dlg->setCaption(i18n("Logmessage for revision %1",bit->rev()));
+    dlg->setCaption(i18n("Log message for revision %1",bit->rev()));
     QWidget* Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     KTextEdit*ptr = new KTextEdit(Dialog1Layout);
@@ -406,7 +406,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb*_cb,const QString&item,const sv
 {
     KDialog * dlg = new KDialog(KApplication::activeModalWidget());
     dlg->setButtons(KDialog::Close|KDialog::User1|KDialog::User2);
-    dlg->setButtonGuiItem(KDialog::User1,KGuiItem(i18n("Goto line")));
+    dlg->setButtonGuiItem(KDialog::User1,KGuiItem(i18n("Go to line")));
     dlg->setButtonGuiItem(KDialog::User2,KGuiItem(i18n("Log message for revision"),"kdesvnlog"));
     QWidget* Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);

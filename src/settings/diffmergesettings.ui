@@ -24,7 +24,7 @@
    <item>
     <widget class="QCheckBox" name="kcfg_tree_diff_rec">
      <property name="text">
-      <string>Diff in revisiontree is recursive</string>
+      <string>Diff in revision tree is recursive</string>
      </property>
     </widget>
    </item>
@@ -55,7 +55,7 @@
    <item>
     <widget class="QCheckBox" name="kcfg_extern_merge_default">
      <property name="toolTip">
-      <string>Set if merge with external program is preferred and not subversions merge</string>
+      <string>Set if merge with external program is preferred and not Subversion's merge</string>
      </property>
      <property name="text">
       <string>Prefer external merge program</string>
@@ -65,7 +65,7 @@
    <item>
     <widget class="QCheckBox" name="kcfg_diff_gitformat_default">
      <property name="text">
-      <string>Use GIT diff format</string>
+      <string>Use Git diff format</string>
      </property>
     </widget>
    </item>

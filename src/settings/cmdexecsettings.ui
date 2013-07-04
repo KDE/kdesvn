@@ -36,7 +36,7 @@
      <item row="0" column="1">
       <widget class="KIntNumInput" name="kcfg_cmdline_log_minline">
        <property name="toolTip">
-        <string>The minimum a log output must contain before kdesvn shows a single logwindow</string>
+        <string>The minimum a log output must contain before kdesvn shows a single log window</string>
        </property>
        <property name="minimum">
         <number>0</number>
@@ -54,27 +54,27 @@
    <item>
     <widget class="QCheckBox" name="kcfg_no_konqueror_contextmenu">
      <property name="toolTip">
-      <string>If set, kdesvn will not show a menu inside &quot;Action&quot; menu of konqueror</string>
+      <string>If set, kdesvn will not show a menu inside &quot;Action&quot; menu of Konqueror</string>
      </property>
      <property name="text">
-      <string>Don't display contextmenu in Konqueror</string>
+      <string>Do not display context menu in Konqueror</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="kcfg_no_konqueror_toplevelmenu">
      <property name="toolTip">
-      <string>If set, kdesvn will not show some extra actions inside &quot;Action&quot; menu of konqueror/dolphin</string>
+      <string>If set, kdesvn will not show some extra actions inside &quot;Action&quot; menu of Konqueror/Dolphin</string>
      </property>
      <property name="text">
-      <string>Don't display entries in toplevel action menu</string>
+      <string>Do not display entries in toplevel action menu</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="kcfg_kio_use_standard_logmsg">
      <property name="text">
-      <string>KIO operations use standard logmessage</string>
+      <string>KIO operations use standard log message</string>
      </property>
     </widget>
    </item>
@@ -104,9 +104,9 @@
       <string>Can KIO overwrite existing files?</string>
      </property>
      <property name="whatsThis">
-      <string>If this flag is set, you're have a simple write support for existing items. Eg. you can open files in your editor and save them direct without checking out them before (kdesvn will do it in background).
+      <string>If this flag is set, you are have a simple write support for existing items. E.g. you can open files in your editor and save them direct without checking out them before (kdesvn will do it in background).
 
-Use this only if you're sure what you're doing!</string>
+Use this only if you are sure what you are doing.</string>
      </property>
      <property name="text">
       <string>KIO can overwrite</string>
@@ -116,7 +116,7 @@ Use this only if you're sure what you're doing!</string>
    <item>
     <widget class="QCheckBox" name="kcfg_display_dockmsg">
      <property name="toolTip">
-      <string>If set KIO shows in KDE plasma detailed information about current operation</string>
+      <string>If set KIO shows in KDE's Plasma detailed information about current operation</string>
      </property>
      <property name="whatsThis">
       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;

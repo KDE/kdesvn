@@ -338,7 +338,7 @@ QStringList CContextListener::failure2Strings(apr_uint32_t acceptedFailures)
 {
     QStringList res;
     if (acceptedFailures&SVN_AUTH_SSL_UNKNOWNCA) {
-        res << i18n("The certificate is not issued by a trusted authority. Use the fingerprint to validate the certificate manually!");
+        res << i18n("The certificate is not issued by a trusted authority. Use the fingerprint to validate the certificate manually.");
     }
     if (acceptedFailures&SVN_AUTH_SSL_CNMISMATCH) {
         res<< i18n("The certificate hostname does not match.");
@@ -372,7 +372,7 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
 {
     emit waitShow(true);
     if (may_save_plaintext) {
-        QString question = i18n("%1\nRealy store password as plain text?",realmstring);
+        QString question = i18n("%1\nReally store password as plain text?",realmstring);
         QString head = i18n("Save password");
         if (KMessageBox::questionYesNo(0,question,head)==KMessageBox::Yes) {
             *may_save_plaintext = true;

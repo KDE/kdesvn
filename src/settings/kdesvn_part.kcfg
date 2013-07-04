@@ -36,7 +36,7 @@
       <default>false</default>
     </entry>
     <entry key="diff_gitformat_default" type="Bool">
-        <label>Show diff in GIT format</label>
+        <label>Show diff in Git format</label>
         <default>false</default>
     </entry>
     <entry key="diff_copies_as_add" type="Bool">
@@ -115,7 +115,7 @@
       <default>true</default>
     </entry>
     <entry key="check_needslock" type="Bool">
-        <label>Check for propertie svn:needs-lock on listings</label>
+        <label>Check for property svn:needs-lock on listings</label>
         <default>false</default>
     </entry>
     <entry key="store_passwords" type="Bool" >
@@ -123,7 +123,7 @@
       <default>false</default>
     </entry>
     <entry key="passwords_in_wallet" type="Bool">
-        <label>Store passwords in KDE Wallet instead subversion storage</label>
+        <label>Store passwords in KDE Wallet instead of Subversion' storage</label>
         <default>true</default>
     </entry>
     <entry key="use_password_cache" type="Bool">
@@ -236,21 +236,21 @@
     </entry>
     <entry key="tree_diff_rec" type="Bool">
         <default>false</default>
-        <label>Diffs from Revisiontree are recursive</label>
+        <label>Diffs from revision tree are recursive</label>
     </entry>
   </group>
   <group name="cmdline" >
     <entry key="no_konqueror_contextmenu" type="Bool" >
       <default>false</default>
-      <label>Should konqueror not display context menus for kdesvn?</label>
+      <label>Should Konqueror not display context menus for kdesvn?</label>
     </entry>
     <entry key="no_konqueror_toplevelmenu" type="Bool" >
         <default>false</default>
-        <label>Should konqueror not display kdesvn entries in main action menu?</label>
+        <label>Should Konqueror not display kdesvn entries in main action menu?</label>
     </entry>
     <entry key="cmdline_show_logwindow" type="Bool" >
       <default>true</default>
-      <label>Show a small logwindow after executing a command.</label>
+      <label>Show a small log window after executing a command.</label>
     </entry>
     <entry key="cmdline_log_minline" type="UInt" >
       <default>0</default>
@@ -258,19 +258,19 @@
     </entry>
     <entry key="kio_use_standard_logmsg" type="Bool" >
         <default>false</default>
-        <label>KIO::svn operations uses a standard logmessage</label>
+        <label>KIO::svn operations uses a standard log message</label>
     </entry>
     <entry key="kio_standard_logmsg" type="String">
         <default>Revision made with kdesvn KIO.</default>
-        <label>The standard logmessage to use with KIO if not asking for it.</label>
+        <label>The standard log message to use with KIO if not asking for it.</label>
     </entry>
     <entry key="kio_can_overwrite" type="Bool">
         <default>false</default>
-        <label>Support overwrite for KIO modul</label>
+        <label>Support overwrite for KIO module</label>
     </entry>
     <entry key="display_dockmsg" type="Bool">
         <default>true</default>
-        <label>Print progress messages in kde dock area</label>
+        <label>Print progress messages in KDE dock area</label>
     </entry>
   </group>
   <group name="timed_jobs">
@@ -289,8 +289,8 @@
   </group>
   <group name="internals" >
     <entry key="locale_is_casesensitive" type="Bool" >
-      <whatsthis>This value computes how casesensitive string ordering will made.
-Never overwrite the default computed value unless you know what you're doing.</whatsthis>
+      <whatsthis>This value computes how case sensitive string ordering will made.
+Never overwrite the default computed value unless you know what you are doing.</whatsthis>
       <default code="true" >QString(&quot;a&quot;).localeAwareCompare(&quot;B&quot;)>0</default>
       <label>Check if current locale is case sensitive or not</label>
     </entry>

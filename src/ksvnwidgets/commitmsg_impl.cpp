@@ -610,7 +610,7 @@ void Commitmsg_impl::insertFile(const QString&fname)
 
 void Commitmsg_impl::insertFile()
 {
-    QString head = i18n("Select textfile for insert");
+    QString head = i18n("Select text file for insert");
     KUrlRequesterDialog dlg(QString(),head,this);
     dlg.setCaption(head);
     KFile::Mode mode = static_cast<KFile::Mode>(KFile::File);

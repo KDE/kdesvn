@@ -115,14 +115,14 @@ void CheckoutInfo_impl::hideDepth(bool how,bool overwriteAsRecurse)
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->hide();
         if (overwriteAsRecurse) {
-            m_overwriteButton->setToolTip(i18n( "Make operation recursive." ));
+            m_overwriteButton->setToolTip(i18n( "Make operation recursive" ));
             m_overwriteButton->setText(i18n("Recursive"));
         }
     } else if (!how) {
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->show();
-        m_overwriteButton->setText( tr2i18n( "Overwrite existing" ) );
-        m_overwriteButton->setToolTip(tr2i18n( "May existing unversioned items ovewritten" ));
+        m_overwriteButton->setText( i18n( "Overwrite existing" ) );
+        m_overwriteButton->setToolTip(i18n( "May existing unversioned items ovewritten" ));
     }
     adjustSize();
 }

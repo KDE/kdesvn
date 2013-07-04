@@ -78,7 +78,7 @@ void FillCacheThread::run()
         if (m_startup && svn::cache::ReposConfig::self()->readEntry(m_what,"no_update_cache",false)) {
             m_SvnContextListener->contextNotify(i18n("Not filling logcache because it is disabled due setting for this repository."));
         } else {
-            m_SvnContextListener->contextNotify(i18n("Filling log cache in background"));
+            m_SvnContextListener->contextNotify(i18n("Filling log cache in background."));
 
             svn::cache::ReposLog rl(m_Svnclient,m_what);
             svn::Revision latestCache = rl.latestCachedRev();
@@ -121,7 +121,7 @@ void FillCacheThread::run()
                     rl.fillCache(Head.revnum());
                 }
                 i=Head.revnum();
-                m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1",i));
+                m_SvnContextListener->contextNotify(i18n("Cache filled up to revision %1.",i));
             }
         }
     } catch (const svn::Exception&e) {

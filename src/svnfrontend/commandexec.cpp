@@ -417,7 +417,7 @@ void CommandExec::slotCmd_get()
         m_pCPart->end = svn::Revision::HEAD;
     }
     if (!m_pCPart->outfile_set || m_pCPart->outfile.isEmpty()) {
-        clientException(i18n("\"GET\" requires output file!"));
+        clientException(i18n("\"GET\" requires output file"));
         return;
     }
     m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set?m_pCPart->start:m_pCPart->end),m_pCPart->url[0], m_pCPart->outfile,
@@ -611,11 +611,11 @@ void CommandExec::slotCmd_switch()
 {
     QString base;
     if (m_pCPart->url.count()>1) {
-        clientException(i18n("May only switch one url at time!"));
+        clientException(i18n("May only switch one URL at time"));
         return;
     }
     if (m_pCPart->baseUrls.find(0)==m_pCPart->baseUrls.end()) {
-        clientException(i18n("Switch only on working copies!"));
+        clientException(i18n("Switch only on working copies"));
         return;
     }
     base = m_pCPart->baseUrls[0];

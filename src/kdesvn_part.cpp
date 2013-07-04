@@ -218,7 +218,7 @@ void kdesvnpart::setupActions()
 
     KAction * t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection());
 
-    t->setText(i18n("Configure %1...",QString::fromLatin1("Kdesvn")));
+    t->setText(i18n("Configure Kdesvn..."));
     actionCollection()->addAction("kdesvnpart_pref",t);
 
     if (QString(kapp->applicationName())!=QString("kdesvn")) {
@@ -364,7 +364,7 @@ void kdesvnpart::slotShowSettings()
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0),
                      i18n("Revision tree"),"kdesvntree",i18n("Revision tree Settings"),true);
     dialog->addPage(new CmdExecSettings_impl(0),
-        "KIO/"+i18n("Commandline"),"kdesvnterminal",i18n("Settings for commandline and KIO execution"),true);
+        "KIO/"+i18n("Commandline"),"kdesvnterminal",i18n("Settings for command line and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged(const QString&)),this,SLOT(slotSettingsChanged(const QString&)));
     dialog->show();

@@ -121,19 +121,19 @@ kdesvn::kdesvn()
                                                        m_part->widget(),
                                                        SLOT(slotCreateRepo()));
             tmpAction->setText(i18n("Create and open new repository"));
-            tmpAction->setToolTip(i18n("Create and opens a new local subversion repository"));
+            tmpAction->setToolTip(i18n("Create and opens a new local Subversion repository"));
 
             tmpAction = actionCollection()->addAction("subversion_dump_repo",
                                                        m_part->widget(),
                                                        SLOT(slotDumpRepo()));
             tmpAction->setText(i18n("Dump repository to file"));
-            tmpAction->setToolTip(i18n("Dump a subversion repository to a file"));
+            tmpAction->setToolTip(i18n("Dump a Subversion repository to a file"));
 
             tmpAction = actionCollection()->addAction("subversion_hotcopy_repo",
                                                        m_part->widget(),
                                                        SLOT(slotHotcopy()));
             tmpAction->setText(i18n("Hotcopy a repository"));
-            tmpAction->setToolTip(i18n("Hotcopy a subversion repository to a new folder"));
+            tmpAction->setToolTip(i18n("Hotcopy a Subversion repository to a new folder"));
 
             tmpAction = actionCollection()->addAction("subversion_load_repo",
                                                        m_part->widget(),
@@ -167,7 +167,7 @@ kdesvn::kdesvn()
             connectActionCollection(m_part->actionCollection());
 
         } else {
-            KMessageBox::error(this, i18n("Could not load the part:\n")+KLibLoader::self()->lastErrorMessage());
+            KMessageBox::error(this, i18n("Could not load the part:\n%1", KLibLoader::self()->lastErrorMessage()));
             kapp->quit();
             return;
         }
@@ -176,7 +176,7 @@ kdesvn::kdesvn()
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not find our part")+QString(":\n")+KLibLoader::self()->lastErrorMessage());
+        KMessageBox::error(this, i18n("Could not find our part:\n%1", KLibLoader::self()->lastErrorMessage()));
         kapp->quit();
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...
@@ -216,7 +216,7 @@ void kdesvn::load(const KUrl& url,bool addRescent)
             }
         }
         if (!ret) {
-            changeStatusbar(i18n("Could not open url %1",url.prettyUrl()));
+            changeStatusbar(i18n("Could not open URL %1",url.prettyUrl()));
             if (rac) {
                 rac->removeUrl(url);
             }
@@ -265,7 +265,7 @@ void kdesvn::setupActions()
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"), this);
     actionCollection()->addAction("toggle_load_last_url", toggletemp);
     toggletemp->setObjectName("toggle_load_last_url");
-    toggletemp->setToolTip(i18n("Reload last opened url if no one is given on commandline"));
+    toggletemp->setToolTip(i18n("Reload last opened URL if no one is given on command line"));
     KConfigGroup cs(KGlobal::config(),"startup");
 //     toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));
     toggletemp->setChecked(cs.readEntry("load_last_on_start",false));

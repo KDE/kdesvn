@@ -250,7 +250,7 @@ void PropertiesDlg::slotModify()
     PropertyListViewItem*ki = static_cast<PropertyListViewItem*> (qi);
     if (PropertyListViewItem::protected_Property(ki->currentName())) return;
     EditPropsWidget*ptr = 0L;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Modify property")),true,"modify_properties");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,i18n("Modify property"),true,"modify_properties");
     if (!dlg) {
         return;
     }

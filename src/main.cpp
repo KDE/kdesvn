@@ -44,12 +44,12 @@ int main(int argc, char **argv)
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineOptions options;
-    options.add("r startrev[:endrev]",ki18n("Execute single subversion command on specific revision(-range)"));
+    options.add("r startrev[:endrev]",ki18n("Execute single Subversion command on specific revision(-range)"));
     options.add("R",ki18n("Ask for revision when executing single command"));
     options.add("f",ki18n("Force operation"));
-    options.add("o <file>",ki18n("Save output of subversion command (eg \"cat\") into file <file>"));
+    options.add("o <file>",ki18n("Save output of Subversion command (eg \"cat\") into file <file>"));
     options.add("l <number>",ki18n("Limit log output to <number>"));
-    options.add("+exec <command>",ki18n("Execute subversion command (\"exec help\" for more information)"));
+    options.add("+exec <command>",ki18n("Execute Subversion command (\"exec help\" for more information)"));
     options.add("+[URL]", ki18n( "Document to open" ));
     KCmdLineArgs::addCmdLineOptions(options);
 

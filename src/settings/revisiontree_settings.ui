@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Revisiontree Settings</string>
+   <string>Revision tree Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
@@ -167,7 +167,7 @@
    <item>
     <widget class="QCheckBox" name="kcfg_fill_cache_on_tree" >
      <property name="toolTip" >
-      <string>Should kdesvn check content of logcache before starting the tree</string>
+      <string>Should kdesvn check content of log cache before starting the tree</string>
      </property>
      <property name="whatsThis" >
       <string>When starting the tree generation and reading data from log cache kdesvn may check for newer items in repository if network is enabled. 
@@ -175,7 +175,7 @@
 But this may slow down tree generation so it is disabled by default.</string>
      </property>
      <property name="text" >
-      <string>Check logcache fill before reading tree</string>
+      <string>Check log cache fill before reading tree</string>
      </property>
     </widget>
    </item>

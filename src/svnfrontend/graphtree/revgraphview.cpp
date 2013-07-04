@@ -446,7 +446,7 @@ void RevGraphView::dumpRevtree()
     dotTmpFile->open();
 
     if (!dotTmpFile->open()) {
-        showText(i18n("Could not open tempfile %1 for writing.",dotTmpFile->fileName()));
+        showText(i18n("Could not open temporary file %1 for writing.",dotTmpFile->fileName()));
         return;
     }
     QTextStream stream(dotTmpFile);
@@ -812,11 +812,11 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent* e)
     popup.addAction(i18n("Rotate counter-clockwise"))->setData(101);
     popup.addAction(i18n("Rotate clockwise"))->setData(102);
     popup.addSeparator();
-    ac = popup.addAction(i18n("Diff in revisiontree is recursive"));
+    ac = popup.addAction(i18n("Diff in revision tree is recursive"));
     ac->setData(202);
     ac->setCheckable(true);
     ac->setChecked(Kdesvnsettings::tree_diff_rec());
-    popup.addAction(i18n("Save tree as png"))->setData(201);
+    popup.addAction(i18n("Save tree as PNG"))->setData(201);
 
     ac = popup.exec(e->globalPos());
     int r = 0;

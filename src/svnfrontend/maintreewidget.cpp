@@ -272,7 +272,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
                 setBaseUri("");
                 setNetworked(false);
                 clear();
-                KMessageBox::error(this,i18n("Networked URL to open but networking is disabled!"));
+                KMessageBox::error(this,i18n("Networked URL to open but networking is disabled."));
                 emit changeCaption("");
                 emit sigUrlOpend(false);
                 return false;
@@ -554,8 +554,8 @@ void MainTreeWidget::setupActions()
     tmp_action->setToolTip(i18n("Switch repository path of current working copy path (\"svn switch\")"));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
-    tmp_action = add_action("make_svn_relocate",i18n("Relocate current working copy url"),KShortcut(),KIcon("kdesvnrelocate"),this,SLOT(slotRelocate()));
-    tmp_action->setToolTip(i18n("Relocate url of current working copy path to other url"));
+    tmp_action = add_action("make_svn_relocate",i18n("Relocate current working copy URL"),KShortcut(),KIcon("kdesvnrelocate"),this,SLOT(slotRelocate()));
+    tmp_action->setToolTip(i18n("Relocate URL of current working copy path to other URL"));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
     tmp_action = add_action("make_check_unversioned",i18n("Check for unversioned items"),KShortcut(),KIcon("kdesvnaddrecursive"),this,SLOT(slotCheckNewItems()));
@@ -571,7 +571,7 @@ void MainTreeWidget::setupActions()
     tmp_action->setToolTip(i18n("Recursively clean up the working copy, removing locks, resuming unfinished operations, etc."));
     tmp_action=add_action("make_import_dirs_into_current",i18n("Import folders into current"),KShortcut(), KIcon("kdesvnimportfolder"),
                             this,SLOT(slotImportDirsIntoCurrent()));
-    tmp_action->setToolTip(i18n("Import folder content into current url"));
+    tmp_action->setToolTip(i18n("Import folder content into current URL"));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
@@ -606,9 +606,9 @@ void MainTreeWidget::setupActions()
     tmp_action->setIconText(i18n("Commit"));
 
     tmp_action = add_action("make_svn_basediff",i18n("Diff local changes"),KShortcut(Qt::CTRL+Qt::Key_D),KIcon("kdesvndiff"),this,SLOT(slotSimpleBaseDiff()));
-    tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
+    tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - does not require access to repository"));
     tmp_action = add_action("make_svn_dirbasediff",i18n("Diff local changes"),KShortcut(),KIcon("kdesvndiff"),this,SLOT(slotDirSimpleBaseDiff()));
-    tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - doesn't require access to repository"));
+    tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - does not require access to repository"));
 
     tmp_action =
         add_action("make_svn_headdiff",i18n("Diff against HEAD"),KShortcut(Qt::CTRL+Qt::Key_H),KIcon("kdesvndiff"),this,SLOT(slotSimpleHeadDiff()));
@@ -629,7 +629,7 @@ void MainTreeWidget::setupActions()
 
     tmp_action=
         add_action("make_svn_merge",i18n("Merge..."),KShortcut(),KIcon("kdesvnmerge"),this,SLOT(slotMerge()));
-    tmp_action->setToolTip("Merge repository path into current worky copy path or current repository path into a target");
+    tmp_action->setToolTip(i18n("Merge repository path into current worky copy path or current repository path into a target"));
     tmp_action=add_action("openwith",i18n("Open With..."),KShortcut(),KIcon(),this, SLOT(slotOpenWith()));
 
     /* remote actions only */
@@ -803,7 +803,7 @@ void MainTreeWidget::enableActions()
         if (!m_Data->m_Model->svnWrapper()->threadRunning(SvnActions::fillcachethread)) {
             temp->setText(i18n("Update log cache"));
         } else {
-            temp->setText(i18n("Stop updating the logcache"));
+            temp->setText(i18n("Stop updating the log cache"));
         }
     }
 }
@@ -1002,7 +1002,7 @@ void MainTreeWidget::slotRightRecAddIgnore()
 void MainTreeWidget::recAddIgnore(SvnItem*item)
 {
 	EditIgnorePattern * ptr = 0;
-	KDialog * dlg = createOkDialog(&ptr,QString(i18n("Edit pattern to ignore for \"%1\"").arg(item->shortName())),
+	KDialog * dlg = createOkDialog(&ptr,i18n("Edit pattern to ignore for \"%1\"",item->shortName()),
 			true,"ignore_pattern_dlg");
     KConfigGroup _k(Kdesvnsettings::self()->config(),"ignore_pattern_dlg");
     DialogStack _s(dlg,_k);
@@ -1261,7 +1261,7 @@ void MainTreeWidget::slotMakePartTree()
         return;
     }
     Rangeinput_impl*rdlg = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -1288,7 +1288,7 @@ void MainTreeWidget::slotLock()
         return;
     }
     Commitmsg_impl*ptr = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,QString(i18n("Lock message")),true,"locking_log_msg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,i18n("Lock message"),true,"locking_log_msg");
     if (!dlg) return;
     ptr->initHistory();
     ptr->hideDepth(true);
@@ -1433,7 +1433,7 @@ void MainTreeWidget::slotDiffRevisions()
         what = relativePath(k);
     }
     Rangeinput_impl*rdlg = 0;
-    KDialog*dlg = createOkDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -1520,7 +1520,7 @@ void MainTreeWidget::slotRangeBlame()
     SvnItem*k = Selected();
     if (!k) return;
     Rangeinput_impl*rdlg = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -1587,7 +1587,7 @@ void MainTreeWidget::slotRevisionCat()
     SvnItem*k = Selected();
     if (!k) return;
     Rangeinput_impl*rdlg = 0;
-    KDialog*dlg = createOkDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
     if (!dlg) {
         return;
     }
@@ -1656,7 +1656,7 @@ void MainTreeWidget::makeDelete(const SvnItemList&lst)
     }
 
     DeleteForm_impl*ptr = 0;
-    KDialog*dlg = createYesDialog(&ptr,QString(i18n("Really delete these entries?")),true,"delete_items_dialog",true);
+    KDialog*dlg = createYesDialog(&ptr,i18n("Really delete these entries?"),true,"delete_items_dialog",true);
     if (!dlg) {
         return;
     }
@@ -1806,7 +1806,7 @@ void MainTreeWidget::slotUpdateLogCache()
         if (!m_Data->m_Model->svnWrapper()->threadRunning(SvnActions::fillcachethread)) {
             m_Data->m_Model->svnWrapper()->startFillCache(baseUri());
             if (temp) {
-                temp->setText(i18n("Stop updating the logcache"));
+                temp->setText(i18n("Stop updating the log cache"));
             }
         } else {
             m_Data->m_Model->svnWrapper()->stopFillCache();
@@ -1841,7 +1841,7 @@ void MainTreeWidget::slotMkdir()
     QString parentDir;
     if (k) {
         if (!k->isDir()) {
-            KMessageBox::sorry(0,i18n("May not make subdirs of a file"));
+            KMessageBox::sorry(0,i18n("May not make subdirectories of a file"));
             return;
         }
         parentDir=k->fullName();
@@ -1942,7 +1942,7 @@ void MainTreeWidget::slotMerge()
     bool force,dry,rec,irelated,useExternal,recordOnly,reintegrate;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr = 0;
-    KDialog*dlg = createOkDialog(&ptr,QString(i18n("Merge")),true,"merge_dialog",true);
+    KDialog*dlg = createOkDialog(&ptr,i18n("Merge"),true,"merge_dialog",true);
     if (!dlg) {
         return;
     }
@@ -2036,7 +2036,7 @@ void MainTreeWidget::slotImportDirsIntoCurrent()
 void MainTreeWidget::slotImportIntoCurrent(bool dirs)
 {
     if (selectionCount()>1) {
-        KMessageBox::error(this,i18n("Cannot import into multiple targets!"));
+        KMessageBox::error(this,i18n("Cannot import into multiple targets"));
         return;
     }
     QString targetUri;
@@ -2046,8 +2046,8 @@ void MainTreeWidget::slotImportIntoCurrent(bool dirs)
         targetUri = SelectedNode()->Url();
     }
     KUrl uri;
-    if (dirs) uri = KFileDialog::getExistingDirectory(KUrl(),this,"Import files from folder");
-    else uri = KFileDialog::getImageOpenUrl(KUrl(),this,"Import file");
+    if (dirs) uri = KFileDialog::getExistingDirectory(KUrl(),this,i18n("Import files from folder"));
+    else uri = KFileDialog::getImageOpenUrl(KUrl(),this,i18n("Import file"));
 
     if (uri.url().isEmpty()) return;
 
@@ -2062,7 +2062,7 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
     KDialog*dlg;
     KUrl uri = importUrl;
     if ( !uri.protocol().isEmpty() && uri.protocol()!="file") {
-        KMessageBox::error(this,i18n("Cannot import remote urls!"));
+        KMessageBox::error(this,i18n("Cannot import remote URLs"));
         return;
     }
     QString targetUri = target;
@@ -2147,7 +2147,7 @@ void MainTreeWidget::slotCheckNewItems()
     }
     SvnItem*w = SelectedOrMain();
     if (!w) {
-        KMessageBox::sorry(0,i18n("Sorry - internal error!"),i18n("Error"));
+        KMessageBox::sorry(0,i18n("Sorry - internal error"),i18n("Error"));
         return;
     }
     m_Data->m_Model->svnWrapper()->checkAddItems(w->fullName(),true);

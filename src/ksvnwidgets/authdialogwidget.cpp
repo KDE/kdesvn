@@ -38,7 +38,7 @@ AuthDialogWidget::AuthDialogWidget(const QString & realm,const QString&user,QWid
     QString text = m_StorePasswordButton->text();
     m_StorePasswordButton->setText(
             m_StorePasswordButton->text()+QString(" (%1)")
-            .arg((Kdesvnsettings::passwords_in_wallet()?i18n("into KDE Wallet"):i18n("into subversions simple storage"))));
+            .arg((Kdesvnsettings::passwords_in_wallet()?i18n("into KDE Wallet"):i18n("into Subversion' simple storage"))));
     if (!realm.isEmpty()) {
         m_RealmLabel->setText(m_RealmLabel->text()+' '+realm);
         resize( QSize(334, 158).expandedTo(minimumSizeHint()) );

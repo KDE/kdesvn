@@ -152,7 +152,7 @@
            <string>Only write mergeinfo</string>
           </property>
           <property name="whatsThis">
-           <string>The merge isn't actually performed, but the mergeinfo for the revisions which would've been merged is recorded in the working copy</string>
+           <string>The merge is not actually performed, but the mergeinfo for the revisions which would have been merged is recorded in the working copy</string>
           </property>
           <property name="text">
            <string>Record only</string>
@@ -162,7 +162,7 @@
         <item>
          <widget class="QCheckBox" name="m_useExternMerge">
           <property name="toolTip">
-           <string>Use external merge not subversions merge</string>
+           <string>Use external merge not Subversion's merge</string>
           </property>
           <property name="text">
            <string>Use external merge</string>

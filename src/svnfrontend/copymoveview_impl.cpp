@@ -93,7 +93,7 @@ QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
 //     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     KDialog dlg(parent);
     dlg.setObjectName(name);
-    dlg.setCaption(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir"));
+    dlg.setCaption(move?i18n("Move/Rename file/directory"):i18n("Copy file/directory"));
     dlg.setModal(true);
     dlg.setButtons(KDialog::Ok | KDialog::Cancel);
     dlg.setDefaultButton(KDialog::Ok);

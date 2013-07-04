@@ -60,6 +60,7 @@ include(MacroEnsureVersion)
 include(FindSubversion)
 include(SetupCompiler)
 include(FindGettext)
+include(kdesvn-macros)
 
 if(__KDE_HAVE_GCC_VISIBILITY)
     set(HAVE_GCC_VISIBILITY On)

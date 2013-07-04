@@ -146,8 +146,8 @@ On networked repositories (e.g., not opened via file:// protocol) this may get r
              </property>
              <property name="whatsThis">
               <string>&lt;p&gt;Tells if your passwords set in kdesvn should stored into KDE Wallet instead of simple clear text storage of Subversion.&lt;/p&gt;
-&lt;p&gt;This would be a little bit more secure because KDE Wallet is (mostly) encrypted with a password. On other hand you must re-enter your passwords with other Subversion clients not accessing KDE wallet (e.g. svn commandline itself, rapidsvn and so on).&lt;/p&gt;
-&lt;p&gt;If you are HOME storage e.g. Subversions config folder is on a network drive you should hard think about not storing passwords in a plain text file like Subversion does but put it into an encrypted storage like KDE Wallet or do not save passwords.&lt;/p&gt;</string>
+&lt;p&gt;This would be a little bit more secure because KDE Wallet is (mostly) encrypted with a password. On other hand you must re-enter your passwords with other Subversion clients not accessing KDE wallet (e.g. svn command line itself, rapidsvn and so on).&lt;/p&gt;
+&lt;p&gt;If you are HOME storage e.g. Subversion's config folder is on a network drive you should hard think about not storing passwords in a plain text file like Subversion does but put it into an encrypted storage like KDE Wallet or do not save passwords.&lt;/p&gt;</string>
              </property>
              <property name="text">
               <string>Store passwords into KDE Wallet</string>

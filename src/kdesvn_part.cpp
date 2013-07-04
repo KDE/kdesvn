@@ -364,7 +364,7 @@ void kdesvnpart::slotShowSettings()
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0),
                      i18n("Revision tree"),"kdesvntree",i18n("Revision tree Settings"),true);
     dialog->addPage(new CmdExecSettings_impl(0),
-        "KIO/"+i18n("Commandline"),"kdesvnterminal",i18n("Settings for command line and KIO execution"),true);
+        i18n("KIO / Command line"),"kdesvnterminal",i18n("Settings for command line and KIO execution"),true);
 
     connect(dialog,SIGNAL(settingsChanged(const QString&)),this,SLOT(slotSettingsChanged(const QString&)));
     dialog->show();

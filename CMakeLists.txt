@@ -116,7 +116,6 @@ endif()
 
 set(svnqt-name svnqt)
 add_subdirectory(src)
-add_subdirectory(po)
 add_subdirectory(doc)
 
 configure_file(kdesvn-config.h.in kdesvn-config.h @ONLY)

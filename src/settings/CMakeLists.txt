@@ -25,24 +25,24 @@ kde4_add_kcfg_files(cfgsrc
 add_library(kdesvncfgreader STATIC ${cfgsrc})
 
 kde4_add_ui_files(
-    settings_ui_sources
-    dispcolor_settings.ui
-    display_settings.ui
-    revisiontree_settings.ui
-    subversion_settings.ui
     cmdexecsettings.ui
     diffmergesettings.ui
+    dispcolor_settings.ui
+    display_settings.ui
     polling_settings.ui
+    revisiontree_settings.ui
+    settings_ui_sources
+    subversion_settings.ui
 )
 
 set(settings_sources
-    dispcolorsettings_impl.cpp
-    displaysettings_impl.cpp
-    revisiontreesettingsdlg_impl.cpp
-    subversionsettings_impl.cpp
     cmdexecsettings_impl.cpp
     diffmergesettings_impl.cpp
+    dispcolorsettings_impl.cpp
+    displaysettings_impl.cpp
     polling_settings_impl.cpp
+    revisiontreesettingsdlg_impl.cpp
+    subversionsettings_impl.cpp
     )
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

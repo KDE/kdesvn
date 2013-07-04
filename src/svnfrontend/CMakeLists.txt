@@ -27,33 +27,40 @@ include_directories(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
                     ${CMAKE_BINARY_DIR}/src/ksvnwidgets)
 
 set(svnfrontendsrc
+    EditIgnorePattern.cpp
+    EditIgnorePattern.h
+    blamedisplay_impl.cpp
     ccontextlistener.cpp
     commandexec.cpp
     copymoveview_impl.cpp
     createrepo_impl.cpp
+    database/dboverview.cpp
+    database/dboverview.h
+    database/dbsettings.cpp
+    database/dbsettings.h
     dummydisplay.cpp
     dumprepo_impl.cpp
     editpropswidget.cpp
+    fronthelpers/DialogStack.cpp
+    fronthelpers/DialogStack.h
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
+    fronthelpers/cursorstack.h
+    fronthelpers/fronthelpers.h
+    fronthelpers/kmultilinedelegate.cpp
+    fronthelpers/kmultilinedelegate.h
+    fronthelpers/propertyitem.cpp
+    fronthelpers/propertyitem.h
+    fronthelpers/propertylist.cpp
+    fronthelpers/propertylist.h
     fronthelpers/rangeinput_impl.cpp
     fronthelpers/rangeinput_impl.h
     fronthelpers/revisionbuttonimpl.cpp
     fronthelpers/revisionbuttonimpl.h
-    fronthelpers/cursorstack.h
-    fronthelpers/widgetblockstack.cpp
-    fronthelpers/widgetblockstack.h
-    fronthelpers/propertylist.cpp
-    fronthelpers/propertylist.h
-    fronthelpers/propertyitem.cpp
-    fronthelpers/propertyitem.h
-    fronthelpers/kmultilinedelegate.cpp
-    fronthelpers/kmultilinedelegate.h
     fronthelpers/watchedprocess.cpp
     fronthelpers/watchedprocess.h
-    fronthelpers/fronthelpers.h
-    fronthelpers/DialogStack.cpp
-    fronthelpers/DialogStack.h
+    fronthelpers/widgetblockstack.cpp
+    fronthelpers/widgetblockstack.h
     graphtree/drawparams.cpp
     graphtree/drawparams.h
     graphtree/elogentry.cpp
@@ -68,49 +75,46 @@ set(svnfrontendsrc
     graphtree/revisiontree.h
     graphtree/revtreewidget.cpp
     graphtree/revtreewidget.h
-    models/logitemmodel.cpp
-    models/logitemmodel.h
-    models/logmodelhelper.cpp
-    models/logmodelhelper.h
-    models/svnitemnode.cpp
-    models/svnitemnode.h
-    models/svnitemmodelfwd.h
-    models/svnitemmodel.h
-    models/svnitemmodel.cpp
-    models/svnsortfilter.cpp
-    models/svnsortfilter.h
-    models/svndirsortfilter.cpp
-    models/svndirsortfilter.h
     hotcopydlg_impl.cpp
     importdir_logmsg.cpp
     itemdisplay.cpp
     loaddmpdlg_impl.cpp
+    maintreewidget.cpp
+    maintreewidget.h
     mergedlg_impl.cpp
+    models/logitemmodel.cpp
+    models/logitemmodel.h
+    models/logmodelhelper.cpp
+    models/logmodelhelper.h
+    models/svndirsortfilter.cpp
+    models/svndirsortfilter.h
+    models/svnitemmodel.cpp
+    models/svnitemmodel.h
+    models/svnitemmodelfwd.h
+    models/svnitemnode.cpp
+    models/svnitemnode.h
+    models/svnsortfilter.cpp
+    models/svnsortfilter.h
     opencontextmenu.cpp
     propertiesdlg.cpp
+    setpropertywidget.cpp
+    setpropertywidget.h
     stopdlg.cpp
     svnactions.cpp
     svnitem.cpp
     svnlogdlgimp.cpp
-    blamedisplay_impl.cpp
-    maintreewidget.h
-    maintreewidget.cpp
     svntreeview.cpp
     svntreeview.h
-    database/dboverview.cpp
-    database/dboverview.h
-    database/dbsettings.cpp
-    database/dbsettings.h
-    EditIgnorePattern.cpp
-    EditIgnorePattern.h
-    setpropertywidget.cpp
-    setpropertywidget.h
     )
 
 set(svnfrontendui
+    blamedisplay.ui
     copymoveview.ui
     createrepo_dlg.ui
+    database/dboverview.ui
+    database/dbsettings.ui
     dumprepo_dlg.ui
+    editignorepattern.ui
     editpropsdlg.ui
     fronthelpers/checkoutinfo.ui
     fronthelpers/rangeinput.ui
@@ -118,13 +122,9 @@ set(svnfrontendui
     hotcopydlg.ui
     loaddmpdlg.ui
     merge_dlg.ui
-    blamedisplay.ui
+    setproperty.ui
     svnlogdlg.ui
     treeWidget.ui
-    editignorepattern.ui
-    setproperty.ui
-    database/dboverview.ui
-    database/dbsettings.ui
     )
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

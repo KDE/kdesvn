@@ -21,7 +21,8 @@
 set(helperssrc
     ktranslateurl.cpp
     sshagent.cpp
-    sub2qt.cpp)
+    sub2qt.cpp
+   )
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 

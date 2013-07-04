@@ -21,17 +21,17 @@
 kde4_add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
 set(kdesvnsrc
-    main.cpp
-    kdesvn.cpp
-    urldlg.cpp
     commandline.cpp
+    kdesvn.cpp
+    main.cpp
+    urldlg.cpp
 )
 
 set(partsrc
+    commandline_part.cpp
     kdesvn_events.cpp
     kdesvn_part.cpp
     kdesvnview.cpp
-    commandline_part.cpp
 )
 
 qt4_automoc(${kdesvnsrc})

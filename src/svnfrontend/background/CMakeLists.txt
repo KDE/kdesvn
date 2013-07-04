@@ -23,6 +23,8 @@ include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 set (backgroundsrc
     fillcachethread.cpp
     fillcachethread.h
+    getinfothread.cpp
+    getinfothread.h
     modifiedthread.cpp
     modifiedthread.h
     svnthread.cpp
@@ -31,8 +33,6 @@ set (backgroundsrc
     tcontextlistener.h
     threadcontextlistenerdata.cpp
     threadcontextlistenerdata.h
-    getinfothread.cpp
-    getinfothread.h
     )
 
 qt4_automoc(${backgroundsrc})

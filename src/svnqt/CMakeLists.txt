@@ -21,65 +21,64 @@
 include(SvnqtMacros)
 
 set(SOURCES
-    client_update_parameter.cpp
+    annotate_line.cpp
     apr.cpp
-    client_annotate.cpp
-    client_cat.cpp
+    cache/DatabaseException.cpp
+    cache/LogCache.cpp
+    cache/ReposConfig.cpp
+    cache/ReposLog.cpp
     client.cpp
+    client_annotate.cpp
+    client_annotate_parameter.cpp
+    client_cat.cpp
+    client_commit_parameter.cpp
     client_diff.cpp
+    client_impl.cpp
+    client_lock.cpp
     client_ls.cpp
+    client_merge.cpp
     client_modify.cpp
+    client_parameter.cpp
     client_property.cpp
     client_status.cpp
+    client_update_parameter.cpp
+    commititem.cpp
+    conflictdescription.cpp
+    conflictresult.cpp
     context.cpp
+    contextdata.cpp
     datetime.cpp
+    diff_data.cpp
+    diffoptions.cpp
     dirent.cpp
     entry.cpp
     exception.cpp
+    info_entry.cpp
+    lock_entry.cpp
     log_entry.cpp
     path.cpp
     pool.cpp
+    repoparameter.cpp
+    repository.cpp
+    repositorydata.cpp
+    repositorylistener.cpp
+    reposnotify.cpp
     revision.cpp
     status.cpp
+    stringarray.cpp
+    svnfilestream.cpp
+    svnstream.cpp
     targets.cpp
     url.cpp
     version_check.cpp
     wc.cpp
-    lock_entry.cpp
-    client_lock.cpp
-    info_entry.cpp
-    client_impl.cpp
-    contextdata.cpp
-    commititem.cpp
-    repository.cpp
-    repositorydata.cpp
-    repositorylistener.cpp
-    repoparameter.cpp
-    svnstream.cpp
-    diff_data.cpp
-    svnfilestream.cpp
-    stringarray.cpp
-    diffoptions.cpp
-    conflictdescription.cpp
-    conflictresult.cpp
-    client_merge.cpp
-    cache/LogCache.cpp
-    cache/ReposLog.cpp
-    cache/DatabaseException.cpp
-    cache/ReposConfig.cpp
-    client_parameter.cpp
-    client_commit_parameter.cpp
-    client_annotate_parameter.cpp
-    reposnotify.cpp
-    annotate_line.cpp
     )
 
 set(CACHEINST_HEADERS
+    cache/DatabaseException.h
     cache/LogCache.h
-    cache/ReposLog.h
-    cache/DatabaseException.h
     cache/ReposConfig.h
-    cache/DatabaseException.h
+    cache/ReposLog.h
     cache/conversion_check.h
 )
 
@@ -88,10 +87,17 @@ set(INST_HEADERS
     apr.h
     check.h
     client.h
+    client_annotate_parameter.h
+    client_commit_parameter.h
+    client_parameter.h
+    client_update_parameter.h
     commititem.h
+    conflictdescription.h
+    conflictresult.h
     context.h
     context_listener.h
     datetime.h
+    diffoptions.h
     dirent.h
     entry.h
     exception.h
@@ -100,30 +106,23 @@ set(INST_HEADERS
     log_entry.h
     path.h
     pool.h
+    repoparameter.cpp
+    repoparameter.h
     repository.h
     repositorylistener.h
-    repoparameter.cpp
+    reposnotify.h
     revision.h
-    smart_pointer.h
     shared_pointer.h
+    smart_pointer.h
     status.h
+    stringarray.h
     svnfilestream.h
-    svnstream.h
     svnqttypes.h
+    svnstream.h
     targets.h
     url.h
     version_check.h
     wc.h
-    stringarray.h
-    diffoptions.h
-    conflictdescription.h
-    conflictresult.h
-    client_parameter.h
-    repoparameter.h
-    client_commit_parameter.h
-    client_annotate_parameter.h
-    client_update_parameter.h
-    reposnotify.h
     )
 
 file(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")

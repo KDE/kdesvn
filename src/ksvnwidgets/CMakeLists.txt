@@ -21,50 +21,50 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
 
 kde4_add_ui_files(
-    kdesvn_shared_ui
-    commitmessage.ui
-    ssltrustprompt.ui
     authdlg.ui
-    encodingselector.ui
-    depthform.ui
-    revertform.ui
+    commitmessage.ui
     deleteform.ui
+    depthform.ui
+    encodingselector.ui
+    kdesvn_shared_ui
+    revertform.ui
+    ssltrustprompt.ui
 )
 
 set(ksvnwidgetsrc
-    commitbugtrackervalues.cpp
     authdialogimpl.cpp
     authdialogwidget.cpp
+    commitbugtrackervalues.cpp
     commitmsg_impl.cpp
-    ssltrustprompt_impl.cpp
-    pwstorage.cpp
+    deleteform_impl.cpp
+    depthselector.cpp
     diffbrowser.cpp
     diffbrowserdata.cpp
     diffsyntax.cpp
     encodingselector_impl.cpp
-    depthselector.cpp
-    revertform_impl.cpp
-    deleteform_impl.cpp
-    models/commitmodelhelper.cpp
     models/commitmodel.cpp
+    models/commitmodelhelper.cpp
+    pwstorage.cpp
+    revertform_impl.cpp
+    ssltrustprompt_impl.cpp
     )
 
 set(ksvnwidgethdr
-    commitbugtrackervalues.h
     authdialogimpl.h
     authdialogwidget.h
+    commitbugtrackervalues.h
     commitmsg_impl.h
-    ssltrustprompt_impl.h
-    pwstorage.h
+    deleteform_impl.h
+    depthselector.h
     diffbrowser.h
     diffbrowserdata.h
     diffsyntax.h
     encodingselector_impl.h
-    depthselector.h
-    revertform_impl.h
-    deleteform_impl.h
-    models/commitmodelhelper.h
     models/commitmodel.h
+    models/commitmodelhelper.h
+    pwstorage.h
+    revertform_impl.h
+    ssltrustprompt_impl.h
 )
 
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)

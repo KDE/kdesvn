@@ -47,8 +47,6 @@ if(BUILD_TESTS)
   enable_testing()
 endif(BUILD_TESTS)
 
-
-
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 
 include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}

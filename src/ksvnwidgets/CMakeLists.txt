@@ -20,13 +20,12 @@
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
 
-kde4_add_ui_files(
+kde4_add_ui_files(kdesvn_shared_ui
     authdlg.ui
     commitmessage.ui
     deleteform.ui
     depthform.ui
     encodingselector.ui
-    kdesvn_shared_ui
     revertform.ui
     ssltrustprompt.ui
 )

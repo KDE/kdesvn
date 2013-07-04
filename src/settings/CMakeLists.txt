@@ -24,14 +24,13 @@ kde4_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
 add_library(kdesvncfgreader STATIC ${cfgsrc})
 
-kde4_add_ui_files(
+kde4_add_ui_files(settings_ui_sources
     cmdexecsettings.ui
     diffmergesettings.ui
     dispcolor_settings.ui
     display_settings.ui
     polling_settings.ui
     revisiontree_settings.ui
-    settings_ui_sources
     subversion_settings.ui
 )
 

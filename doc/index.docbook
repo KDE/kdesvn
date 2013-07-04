@@ -237,7 +237,7 @@ First of all you must create a working copy of your repository. For that select
 <guimenu>Subversion</guimenu>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Checkout a repository</guimenuitem>
-</menuchoice>. Inside the following dialog you must select the URL of the repository you want to use, &eg;, something like
+</menuchoice>. Inside the following dialog you must select the &URL; of the repository you want to use, &eg;, something like
 <prompt>http://localhost/repos/myproject</prompt>. Subfolders of a repository are possible, too, &eg;,
 <prompt>http://localhost/repos/myproject/trunk</prompt> or similar.
 </para>
@@ -249,7 +249,7 @@ Last but not least, the revision to checkout. Mostly that should be &quot;HEAD&q
 is the referenced version.
 </para>
 <para>
-After clicking on &quot;[OK]&quot; &kdesvn; will create your new working copy and (if the box was checked) opens it.
+  After clicking on <guibutton>OK</guibutton> &kdesvn; will create your new working copy and (if the box was checked) opens it.
 </para>
 <para>
 When you have opened a repository for browsing you may mark a folder and than select
@@ -352,7 +352,7 @@ You may check if there are somewhere in working copy unversioned items. After se
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Check for unversioned items</guimenuitem>
-</menuchoice> a dialog appears where all not versioned items are listed. Hitting ok adds all marked items to working copy, items you don't want versioned you should unmark before.
+</menuchoice> a dialog appears where all not versioned items are listed. Hitting <guibutton>OK</guibutton> adds all marked items to working copy, items you don't want versioned you should unmark before.
 </para></listitem>
 </varlistentry>
 
@@ -367,7 +367,7 @@ Mark in &konqueror; or any other compatible filebrowser items you want to add an
 <sect3>
 <title>Deleting items from working copy and unversion</title>
 <para>
-Deleting items is always recursive. For example, when you delete a folder all subitems will deleted, too. Mark what you want and select &quot;Delete selected items&quot; from general menu. Items will unversioned and removed from disk.
+  Deleting items is always recursive. For example, when you delete a folder all subitems will deleted, too. Mark what you want and select <guimenuitem>Delete selected items</guimenuitem> from general menu. Items will unversioned and removed from disk.
 </para>
 </sect3>
 </sect2>
@@ -392,8 +392,8 @@ With the buttons above you may select another range of logs to display.
 </para>
 <para>
 The buttons below displays always work on item selected for log, not on item selected in list of changed files. So when you select 
-&quot;<literal>Diff previous</literal>&quot; there it makes the diff over all changed items in this revision if them are equivalent or below the subversion 
-entry selected for retrieving logs before. Same for &quot;<literal>Diff revisions</literal>&quot;
+<guibutton>Diff previous</guibutton> there it makes the diff over all changed items in this revision if them are equivalent or below the subversion 
+entry selected for retrieving logs before. Same for <guibutton>Diff revisions</guibutton>.
 </para>
 <para>
 &quot;<literal>Annotate</literal>&quot; of course works only if item to log is a file.
@@ -430,7 +430,7 @@ and enter the wanted revision. Now &kdesvn; displays the content at this term. M
 <guimenu>Subversion</guimenu>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Copy</guimenuitem>
-</menuchoice>. Inside the following dialog the target is always at HEAD revision, the source is at revision you selected for browsing. Fill out the path click &quot;OK&quot; and copy starts. After successful copy switch browsing back to HEAD revision and the restored item should appear.
+</menuchoice>. Inside the following dialog the target is always at HEAD revision, the source is at revision you selected for browsing. Fill out the path click <guibutton>OK</guibutton> and copy starts. After successful copy switch browsing back to HEAD revision and the restored item should appear.
 </para>
 </sect2>
 <sect2>
@@ -468,7 +468,7 @@ Open repository or working copy, mark item you want to merge and select
 <guisubmenu>General</guisubmenu>
 <guisubmenu>Merge</guisubmenu>
 </menuchoice>.
-Enter in the following dialog the values wanted. If opend from repository, source 1 and source 2 are filled, when open from within working copy, target is filled with current selected item. The handling of this parameter is a little bit different between using the internal diff of subversion or an external merge-program like kdiff3. The target must ALWAYS a local folder or file. You may switch between external or internal merge with the checkbox &quot;Use external merge&quot;.
+  Enter in the following dialog the values wanted. If opened from repository, source 1 and source 2 are filled, when open from within working copy, target is filled with current selected item. The handling of this parameter is a little bit different between using the internal diff of subversion or an external merge-program like kdiff3. The target must ALWAYS a local folder or file. You may switch between external or internal merge with the checkbox <guilabel>Use external merge</guilabel>.
 </para>
 <sect3>
 <title>Internal merge</title>
@@ -1441,12 +1441,12 @@ Setting may changed from the setup dialog. Them are separated into some subdialo
 
 <row>
 <entry>Store passwords for remote connections</entry>
-<entry>Storing passwords is often a security problem. Subversion stores its passwords into a flat file, &eg;, passwords in cleartext! So be careful setting this flag and see next entry, too. This item only says if saving passwords is the default, you may change it for specific realms inside login dialog.</entry>
+<entry>Storing passwords is often a security problem. Subversion stores its passwords into a flat file, &eg;, passwords in plain text! So be careful setting this flag and see next entry, too. This item only says if saving passwords is the default, you may change it for specific realms inside login dialog.</entry>
 </row>
 
 <row>
 <entry>Store passwords into KDE wallet</entry>
-<entry>When saving passwords, the cleartext file from subversion is a security hole. &kappname; is able saving them into encrypted &kde; wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like svn-cmdline or rapidsvn, too. As long as subversion don't encrypt password storage you should think twice about it.</entry>
+<entry>When saving passwords, the plain text file from subversion is a security hole. &kappname; is able saving them into encrypted &kde; wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like svn-cmdline or rapidsvn, too. As long as subversion don't encrypt password storage you should think twice about it.</entry>
 </row>
 
 <row>
@@ -1466,7 +1466,7 @@ Setting may changed from the setup dialog. Them are separated into some subdialo
 
 <row>
 <entry>Review items before commit</entry>
-<entry>When doing a commit &kdesvn; may make a check what to do. Eg., if unversioned items are below which may added, list items changed and current operation will commit. This cost a depending on tree more or less time.</entry>
+<entry>When doing a commit &kdesvn; may make a check what to do. For example, if unversioned items are below which may added, list items changed and current operation will commit. This cost a depending on tree more or less time.</entry>
 </row>
 <row>
 <entry>Maximum displayed logs when full log</entry>
@@ -1549,7 +1549,7 @@ This may used with for instance with a simple call to less or textviewer.
 <varlistentry>
 <term>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
 <listitem><para>
-&kappname; let the external program make the difference. %1 and %2 will replaced with required values (filenames or foldernames). &kappname;
+&kappname; let the external program make the difference. %1 and %2 will be replaced with required values (filenames or foldernames). &kappname;
 stores content to compare in a temporary environment (when folders do a &quot;export&quot;, when single file, does a &quot;cat&quot;) when needed and
 cleans up after closing external program or closing itself.
 </para></listitem>
@@ -1740,13 +1740,13 @@ or menu bars. -->
 </para>
 </sect2>
 <sect2>
-<title>The <guimenu>Bookmark</guimenu> Menu</title>
+<title>The Bookmark Menu</title>
 <para>
-see &konqueror; help
+See <ulink url="help:/konqueror">&konqueror; help</ulink>.
 </para>
 </sect2>
 <sect2 id="kdesvn-subversion-menu">
-<title>The <guimenu>Subversion</guimenu> Menu</title>
+<title>The Subversion Menu</title>
 <variablelist>
 
 <varlistentry>
@@ -2045,7 +2045,7 @@ last state the working copy was updated to, not against the version in repositor
 </sect3>
 </sect2>
 <sect2>
-<title>The <guimenu>Help</guimenu> Menu</title>
+<title>The Help Menu</title>
 
 <!-- Assuming you have a standard help menu (help, what's this, about -->
 <!-- &kdesvn;, about KDE) then the documentation is already written. -->

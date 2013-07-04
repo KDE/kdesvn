@@ -176,8 +176,6 @@ KAboutData* kdesvnpart::createAboutData()
     about.setHomepage("http://kdesvn.alwins-world.de/");
     about.setBugAddress("kdesvn-bugs@alwins-world.de");
     about.setProgramIconName("kdesvn");
-    about.setTranslator(ki18n("kdesvn: NAME OF TRANSLATORS\\nYour names"),
-        ki18n("kdesvn: EMAIL OF TRANSLATORS\\nYour emails"));
     return &about;
 }
 

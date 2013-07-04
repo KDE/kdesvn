@@ -24,6 +24,12 @@ set(BASE_VERSION 1.6.0)
 
 option(BUILD_TESTS "Building the tests" OFF)
 
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
+
+find_package(KDE4 REQUIRED)
+include (KDE4Defaults)
+include (MacroLibrary)
+
 set(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 if(TESTINGBUILD)
     if(CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
@@ -41,11 +47,7 @@ if(BUILD_TESTS)
   enable_testing()
 endif(BUILD_TESTS)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
 
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include (MacroLibrary)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 

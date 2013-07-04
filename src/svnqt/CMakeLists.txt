@@ -161,7 +161,7 @@ if(QT_LUPDATE_EXECUTABLE)
         set(LANGFILES "-ts ${_p} ${LANGFILES}")
     endforeach()
     configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/update-language.sh.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/update-language.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
     IMMEDIATE
     @ONLY)

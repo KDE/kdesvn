@@ -24,7 +24,7 @@ set(BASE_VERSION 1.6.0)
 
 option(BUILD_TESTS "Building the tests" OFF)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
@@ -129,13 +129,13 @@ configure_file(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 
 set(DIST_EXCLUDE "Helperstuff/pic_design")
 configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/makedist.sh.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/makedist.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/makedist.sh"
     IMMEDIATE
     @ONLY)
 
 configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
 
@@ -154,7 +154,7 @@ endforeach()
 
 set(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
 configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/package_messages.sh.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/package_messages.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/package_messages.sh"
     IMMEDIATE
     @ONLY)

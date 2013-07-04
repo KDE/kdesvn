@@ -28,7 +28,7 @@ endif()
 # check if we can use setenv
 try_compile(HAS_SETENV
         ${CMAKE_BINARY_DIR}
-        ${CMAKE_SOURCE_DIR}/cmakemodules/TestSetenv.cxx
+        ${CMAKE_SOURCE_DIR}/cmake/TestSetenv.cxx
         OUTPUT_VARIABLE OUTPUT
 )
 

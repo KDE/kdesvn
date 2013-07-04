@@ -18,5 +18,5 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-FILE(GLOB _LANGFILES *.ts)
-LRELEASE_TRANSLATION(${QT_LRELEASE_EXECUTABLE} ${_LANGFILES})
+file(GLOB _LANGFILES *.ts)
+lrelease_translation(${QT_LRELEASE_EXECUTABLE} ${_LANGFILES})

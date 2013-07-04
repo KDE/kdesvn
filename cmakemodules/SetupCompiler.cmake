@@ -18,22 +18,22 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-INCLUDE(TestCXXAcceptsFlag)
+include(TestCXXAcceptsFlag)
 
-CHECK_CXX_ACCEPTS_FLAG("-fexceptions" CXX_EXCEPTION)
-IF (CXX_EXCEPTION)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
-ENDIF (CXX_EXCEPTION)
+check_cxx_accepts_flag("-fexceptions" CXX_EXCEPTION)
+if(CXX_EXCEPTION)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
+endif()
 
 # check if we can use setenv
-TRY_COMPILE(HAS_SETENV
+try_compile(HAS_SETENV
         ${CMAKE_BINARY_DIR}
         ${CMAKE_SOURCE_DIR}/cmakemodules/TestSetenv.cxx
         OUTPUT_VARIABLE OUTPUT
 )
 
-IF (HAS_SETENV)
-    MESSAGE(STATUS "Checking for setenv - yes")
-ELSE (HAS_SETENV)
-    MESSAGE(STATUS "Checking for setenv - no")
-ENDIF (HAS_SETENV)
+if(HAS_SETENV)
+    message(STATUS "Checking for setenv - yes")
+else()
+    message(STATUS "Checking for setenv - no")
+endif()

@@ -18,9 +18,9 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
+include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_BINARY_DIR}/src/svnqt)
 
-KDE_ADD_UI_FILES(
+kde_add_ui_files(
     kdesvn_shared_ui
     commitmessage.ui
     ssltrustprompt.ui
@@ -31,7 +31,7 @@ KDE_ADD_UI_FILES(
     deleteform.ui
 )
 
-SET(ksvnwidgetsrc
+set(ksvnwidgetsrc
     commitbugtrackervalues.cpp
     authdialogimpl.cpp
     authdialogwidget.cpp
@@ -49,7 +49,7 @@ SET(ksvnwidgetsrc
     models/commitmodel.cpp
     )
 
-SET(ksvnwidgethdr
+set(ksvnwidgethdr
     commitbugtrackervalues.h
     authdialogimpl.h
     authdialogwidget.h
@@ -70,11 +70,11 @@ SET(ksvnwidgethdr
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
 
-KDE_AUTOMOC(${ksvnwidgetsrc})
+kde_automoc(${ksvnwidgetsrc})
 
-ADD_LIBRARY(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
-SET_TARGET_PROPERTIES(ksvnwidgets
+add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
+set_target_properties(ksvnwidgets
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-ADD_DEPENDENCIES(ksvnwidgets kdesvncfgreader)
+add_dependencies(ksvnwidgets kdesvncfgreader)

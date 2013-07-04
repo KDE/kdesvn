@@ -18,26 +18,26 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-MACRO(BUILD_TEST tname)
-  SET(${tname}-src ${tname}.cpp)
-  IF (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${tname}.h)
-        SET(${tname}-src ${${tname}-src} ${tname}.h)
-  ENDIF (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${tname}.h)
-  ADD_EXECUTABLE(${tname} ${${tname}-src})
-  TARGET_LINK_LIBRARIES(${tname} ${svnqt-name} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY})
-  ADD_TEST(${tname} ${CMAKE_CURRENT_BINARY_DIR}/${tname})
-ENDMACRO(BUILD_TEST)
+macro(BUILD_TEST tname)
+  set(${tname}-src ${tname}.cpp)
+  if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${tname}.h)
+        set(${tname}-src ${${tname}-src} ${tname}.h)
+  endif()
+  add_executable(${tname} ${${tname}-src})
+  target_link_libraries(${tname} ${svnqt-name} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY})
+  add_test(${tname} ${CMAKE_CURRENT_BINARY_DIR}/${tname})
+endmacro(BUILD_TEST)
 
-IF (BUILD_TESTS)
-    CONFIGURE_FILE(
+if(BUILD_TESTS)
+    configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/testconfig.h.in
         ${CMAKE_CURRENT_BINARY_DIR}/testconfig.h
     )
-    ADD_TEST(rmrepo "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/repo")
-    ADD_TEST(rmco "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/co")
-    BUILD_TEST(crepo)
-    BUILD_TEST(lsdir)
-    BUILD_TEST(ckpath)
-ENDIF(BUILD_TESTS)
+    add_test(rmrepo "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/repo")
+    add_test(rmco "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/co")
+    build_test(crepo)
+    build_test(lsdir)
+    build_test(ckpath)
+endif()

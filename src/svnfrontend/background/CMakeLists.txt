@@ -18,9 +18,7 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
 ############################################################################
 
-INCLUDE_DIRECTORIES(
-                    ${CMAKE_BINARY_DIR}/src/svnqt
-                    )
+include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 
 set (backgroundsrc
     fillcachethread.cpp
@@ -37,14 +35,14 @@ set (backgroundsrc
     getinfothread.h
     )
 
-KDE_AUTOMOC(${backgroundsrc})
+kde_automoc(${backgroundsrc})
 
-ADD_LIBRARY(svnbackground STATIC
+add_library(svnbackground STATIC
     ${backgroundsrc}
 )
 
-SET_TARGET_PROPERTIES(svnbackground
+set_target_properties(svnbackground
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-ADD_DEPENDENCIES(svnbackground ksvnwidgets)
+add_dependencies(svnbackground ksvnwidgets)

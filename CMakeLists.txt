@@ -18,95 +18,90 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-PROJECT(kdesvn)
-SET(PACKAGENAME "${CMAKE_PROJECT_NAME}")
-IF (CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
-    CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
-ELSE (CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
-    CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-ENDIF (CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
-SET(BASE_VERSION 1.6.0)
+project(kdesvn)
+set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
+set(BASE_VERSION 1.6.0)
 
-OPTION(BUILD_TESTS "Building the tests yes or no (default off)")
+option(BUILD_TESTS "Building the tests" OFF)
 
-SET(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
-IF (TESTINGBUILD)
-    IF (CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
-        ADD_DEFINITIONS("-DTESTING_RC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\"")
-        ADD_DEFINITIONS("-DFORCE_ASKPASS=\"\\\"\${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\\\"\"")
-    ELSE (CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
-        ADD_DEFINITIONS(-DTESTING_RC=\"${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\" -DTESTING_PARTRC=\"${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\")
-        ADD_DEFINITIONS(-DFORCE_ASKPASS=\"${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\")
-        ADD_DEFINITIONS(-DEXTRA_KDE_LIBPATH=\"${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4\")
-    ENDIF (CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
-    ADD_DEFINITIONS(-DDEBUG_TIMER=1)
-ENDIF (TESTINGBUILD)
+set(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
+if(TESTINGBUILD)
+    if(CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION EQUAL 4)
+        add_definitions("-DTESTING_RC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"\${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\"")
+        add_definitions("-DFORCE_ASKPASS=\"\\\"\${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\\\"\"")
+    else()
+        add_definitions(-DTESTING_RC=\"${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\" -DTESTING_PARTRC=\"${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\")
+        add_definitions(-DFORCE_ASKPASS=\"${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\")
+        add_definitions(-DEXTRA_KDE_LIBPATH=\"${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4\")
+    endif()
+    add_definitions(-DDEBUG_TIMER=1)
+endif()
 
-IF(BUILD_TESTS)
-  ENABLE_TESTING()
-ENDIF(BUILD_TESTS)
+if(BUILD_TESTS)
+  enable_testing()
+endif(BUILD_TESTS)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmakemodules ${CMAKE_SOURCE_DIR}/src/svnqt/cmakemodules)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include (MacroLibrary)
 
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 
-MACRO(KDE_AUTOMOC)
+macro(KDE_AUTOMOC)
  QT4_AUTOMOC(${ARGV})
-ENDMACRO(KDE_AUTOMOC)
+endmacro()
 
-MACRO(KDE_ADD_UI_FILES)
+macro(KDE_ADD_UI_FILES)
  KDE4_ADD_UI_FILES(${ARGV})
-ENDMACRO(KDE_ADD_UI_FILES)
+endmacro()
 
-MACRO(KDE_ADD_KCFG_FILES)
+macro(KDE_ADD_KCFG_FILES)
  KDE4_ADD_KCFG_FILES(${ARGV})
-ENDMACRO(KDE_ADD_KCFG_FILES)
+endmacro()
 
-MACRO(KDE_ADD_KPART)
+macro(KDE_ADD_KPART)
  kde4_add_plugin(${ARGV})
-ENDMACRO(KDE_ADD_KPART)
+endmacro()
 
-MACRO(KDE_ADD_MOC_FILES)
+macro(KDE_ADD_MOC_FILES)
  KDE4_MOC_HEADERS(${ARGV})
-ENDMACRO(KDE_ADD_MOC_FILES)
+endmacro()
 
-MACRO(KDESVN_INSTALL_ICONS)
+macro(KDESVN_INSTALL_ICONS)
  kde4_install_icons( ${ICON_INSTALL_DIR}  )
-ENDMACRO(KDESVN_INSTALL_ICONS)
+endmacro()
 
-MACRO(KDESVN_GENERATE_LIBTOOL_FILE _subdir _target)
+macro(KDESVN_GENERATE_LIBTOOL_FILE _subdir _target)
  KDE4_INSTALL_LIBTOOL_FILE(${_subdir} ${_target})
-ENDMACRO(KDESVN_GENERATE_LIBTOOL_FILE)
+endmacro()
 
 include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 ${QT_QTDBUS_INCLUDE_DIR})
 
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 
-INCLUDE(MacroEnsureVersion)
-INCLUDE(FindSubversion)
-INCLUDE(SetupCompiler)
-INCLUDE(FindGettext)
+include(MacroEnsureVersion)
+include(FindSubversion)
+include(SetupCompiler)
+include(FindGettext)
 
-IF (__KDE_HAVE_GCC_VISIBILITY)
-    SET(HAVE_GCC_VISIBILITY On)
-    SET(_KDESVN_EXPORT "__attribute__ ((visibility(\"default\")))")
-    SET(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
-ENDIF (__KDE_HAVE_GCC_VISIBILITY)
+if(__KDE_HAVE_GCC_VISIBILITY)
+    set(HAVE_GCC_VISIBILITY On)
+    set(_KDESVN_EXPORT "__attribute__ ((visibility(\"default\")))")
+    set(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
+endif(__KDE_HAVE_GCC_VISIBILITY)
 
 # from http://www.kdedevelopers.org/node/3171 and http://kdesvn.alwins-world.de/ticket/595#comment:5
-ADD_DEFINITIONS(-DKDE_DEFAULT_DEBUG_AREA=9510)
+add_definitions(-DKDE_DEFAULT_DEBUG_AREA=9510)
 
-INCLUDE_DIRECTORIES (
+include_directories(
     BEFORE
     ${CMAKE_SOURCE_DIR}/src/svnqt
 )
 
-INCLUDE_DIRECTORIES (
+include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/svnfrontend
     ${CMAKE_SOURCE_DIR}
@@ -120,78 +115,78 @@ INCLUDE_DIRECTORIES (
     ${SUBVERSION_INCLUDE_DIR}
 )
 
-ADD_DEFINITIONS(${APR_CPP_FLAGS})
+add_definitions(${APR_CPP_FLAGS})
 
-IF(CMAKE_BUILD_TYPE MATCHES Debug)
+if(CMAKE_BUILD_TYPE MATCHES Debug)
   # FindKde3 always make a "-O2" into it. That isn't nice.
-  STRING(REGEX REPLACE "-O2 " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-ENDIF(CMAKE_BUILD_TYPE MATCHES Debug)
+  string(REGEX REPLACE "-O2 " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+endif()
 
 #we requires exeptions!!!!
-STRING(REGEX REPLACE "-fno-exceptions " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+string(REGEX REPLACE "-fno-exceptions " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-SET(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+set(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
 
 # current version
-IF (DAILY_BUILD)
-    EXECUTE_PROCESS(COMMAND "date" "+%Y%m%d" OUTPUT_VARIABLE BUILDDATE)
-    STRING(REPLACE "\n" "" BUILDDATE ${BUILDDATE})
-    SET(VERSION "${BASE_VERSION}.${BUILDDATE}")
-    SET(KDESVN_VERSION "\"${BASE_VERSION}-${BUILDDATE}\"")
-ELSE(DAILY_BUILD)
-    SET(VERSION "$ENV{KDESVN_VERSION}")
-    IF(NOT VERSION)
-        SET(VERSION ${BASE_VERSION})
-    ENDIF(NOT VERSION)
-    SET(KDESVN_VERSION \"${VERSION}\")
-ENDIF(DAILY_BUILD)
+if(DAILY_BUILD)
+    execute_process(COMMAND "date" "+%Y%m%d" OUTPUT_VARIABLE BUILDDATE)
+    string(REPLACE "\n" "" BUILDDATE ${BUILDDATE})
+    set(VERSION "${BASE_VERSION}.${BUILDDATE}")
+    set(KDESVN_VERSION "\"${BASE_VERSION}-${BUILDDATE}\"")
+else()
+    set(VERSION "$ENV{KDESVN_VERSION}")
+    if(NOT VERSION)
+        set(VERSION ${BASE_VERSION})
+    endif(NOT VERSION)
+    set(KDESVN_VERSION \"${VERSION}\")
+endif()
 
-SET(svnqt-name svnqt)
-ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(po)
-ADD_SUBDIRECTORY(doc)
+set(svnqt-name svnqt)
+add_subdirectory(src)
+add_subdirectory(po)
+add_subdirectory(doc)
 
-CONFIGURE_FILE(kdesvn-config.h.in kdesvn-config.h @ONLY)
-CONFIGURE_FILE(kdesvn.spec.in ${PROJECT_NAME}.spec @ONLY)
-CONFIGURE_FILE(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/${PROJECT_NAME}.spec @ONLY)
-CONFIGURE_FILE(Doxyfile.in Doxyfile @ONLY)
-CONFIGURE_FILE(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
+configure_file(kdesvn-config.h.in kdesvn-config.h @ONLY)
+configure_file(kdesvn.spec.in ${PROJECT_NAME}.spec @ONLY)
+configure_file(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/${PROJECT_NAME}.spec @ONLY)
+configure_file(Doxyfile.in Doxyfile @ONLY)
+configure_file(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 
-SET(DIST_EXCLUDE "Helperstuff/pic_design")
-CONFIGURE_FILE(
+set(DIST_EXCLUDE "Helperstuff/pic_design")
+configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/makedist.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/makedist.sh"
     IMMEDIATE
     @ONLY)
 
-CONFIGURE_FILE(
+configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
 
-ADD_CUSTOM_TARGET(uninstall
+add_custom_target(uninstall
     "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
-ADD_CUSTOM_TARGET(dist
+add_custom_target(dist
     "${CMAKE_BINARY_DIR}/makedist.sh"
     DEPENDS doc
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
-FILE(GLOB _POFILES po/*.po)
-FOREACH(_p ${_POFILES})
-  SET(POFILES "${_p} ${POFILES}")
-ENDFOREACH(_p)
+file(GLOB _POFILES po/*.po)
+foreach(_p ${_POFILES})
+  set(POFILES "${_p} ${POFILES}")
+endforeach()
 
-SET(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
-CONFIGURE_FILE(
+set(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
+configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/package_messages.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/package_messages.sh"
     IMMEDIATE
     @ONLY)
-ADD_CUSTOM_TARGET(package-messages
+add_custom_target(package-messages
     "${CMAKE_CURRENT_BINARY_DIR}/package_messages.sh")
 
-ADD_CUSTOM_TARGET(apidox
+add_custom_target(apidox
     "doxygen" "${CMAKE_BINARY_DIR}/Doxyfile"
     DEPENDS "${CMAKE_BINARY_DIR}/Doxyfile")

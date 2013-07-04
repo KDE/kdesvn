@@ -18,13 +18,13 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-KDE_ADD_KCFG_FILES(cfgsrc
+kde_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
-ADD_LIBRARY(kdesvncfgreader STATIC ${cfgsrc})
+add_library(kdesvncfgreader STATIC ${cfgsrc})
 
-KDE_ADD_UI_FILES(
+kde_add_ui_files(
     settings_ui_sources
     dispcolor_settings.ui
     display_settings.ui
@@ -35,7 +35,7 @@ KDE_ADD_UI_FILES(
     polling_settings.ui
 )
 
-SET(settings_sources
+set(settings_sources
     dispcolorsettings_impl.cpp
     displaysettings_impl.cpp
     revisiontreesettingsdlg_impl.cpp
@@ -45,26 +45,26 @@ SET(settings_sources
     polling_settings_impl.cpp
     )
 
-FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE_AUTOMOC(${settings_sources})
-ADD_LIBRARY(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
-ADD_DEPENDENCIES(settingsdlgs kdesvncfgreader)
+kde_automoc(${settings_sources})
+add_library(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
+add_dependencies(settingsdlgs kdesvncfgreader)
 
-SET_TARGET_PROPERTIES(kdesvncfgreader settingsdlgs
+set_target_properties(kdesvncfgreader settingsdlgs
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 
-INSTALL(
+install(
     FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnpartrc-use-external.upd
     DESTINATION
     ${DATA_INSTALL_DIR}/kconf_update
 )
 
-INSTALL(
+install(
     FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn-use-external-update.sh
     DESTINATION

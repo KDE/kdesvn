@@ -18,17 +18,17 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-SET(helperssrc
+set(helperssrc
     ktranslateurl.cpp
     sshagent.cpp
     sub2qt.cpp)
 
-FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE_AUTOMOC(${helperssrc} )
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
-ADD_LIBRARY(kdesvnhelpers STATIC ${helperssrc} ${hdr})
+kde_automoc(${helperssrc} )
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+add_library(kdesvnhelpers STATIC ${helperssrc} ${hdr})
 
-SET_TARGET_PROPERTIES(kdesvnhelpers
+set_target_properties(kdesvnhelpers
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

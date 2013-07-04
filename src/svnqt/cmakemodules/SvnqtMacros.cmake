@@ -18,20 +18,20 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-MACRO(LRELEASE_TRANSLATION lrelease)
-    SET(_qmFiles)
-    FOREACH(tsfile ${ARGN})
-        SET(_qmFile)
-        GET_FILENAME_COMPONENT(_absFile ${tsfile} ABSOLUTE)
-        GET_FILENAME_COMPONENT(_lang ${tsfile} NAME_WE)
-        SET(_qmFile "${_lang}.qm")
-        ADD_CUSTOM_COMMAND(
+macro(LRELEASE_TRANSLATION lrelease)
+    set(_qmFiles)
+    foreach(tsfile ${ARGN})
+        set(_qmFile)
+        get_filename_component(_absFile ${tsfile} ABSOLUTE)
+        get_filename_component(_lang ${tsfile} NAME_WE)
+        set(_qmFile "${_lang}.qm")
+        add_custom_command(
             OUTPUT ${_qmFile}
             COMMAND ${lrelease} ${tsfile} -qm ${_qmFile}
             DEPENDS ${_absFile}
         )
-        INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${_qmFile} DESTINATION share/svnqt/i18n)
-        SET(_qmFiles ${_qmFile} ${_qmFiles})
-    ENDFOREACH(tsfile)
-    ADD_CUSTOM_TARGET(svnqt-translations ALL DEPENDS ${_qmFiles})
-ENDMACRO(LRELEASE_TRANSLATION)
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${_qmFile} DESTINATION share/svnqt/i18n)
+        set(_qmFiles ${_qmFile} ${_qmFiles})
+    endforeach()
+    add_custom_target(svnqt-translations ALL DEPENDS ${_qmFiles})
+endmacro()

@@ -18,10 +18,10 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
-FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
+file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-SET(kded_kdesvnd_src
+set(kded_kdesvnd_src
     kdesvnd.cpp
     kdesvnd_listener.cpp
     ksvnjobview.cpp
@@ -30,12 +30,12 @@ SET(kded_kdesvnd_src
 
 qt4_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
-KDE4_ADD_PLUGIN(kded_kdesvnd ${kded_kdesvnd_src})
+kde4_add_plugin(kded_kdesvnd ${kded_kdesvnd_src})
 
 
-KDE_ADD_MOC_FILES(kded_kdesvnd_src kdesvnd_dcop.h)
+kde_add_moc_files(kded_kdesvnd_src kdesvnd_dcop.h)
 
-TARGET_LINK_LIBRARIES(kded_kdesvnd
+target_link_libraries(kded_kdesvnd
     ksvnwidgets
     kdesvnhelpers
     kdesvncfgreader
@@ -43,17 +43,17 @@ TARGET_LINK_LIBRARIES(kded_kdesvnd
     ${KDE4_KIO_LIBS}
 )
 
-INSTALL(TARGETS kded_kdesvnd
+install(TARGETS kded_kdesvnd
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion_toplevel.desktop
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion_toplevel.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/kded)
 
-install( FILES org.kde.kdesvnd.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
+install(FILES org.kde.kdesvnd.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})

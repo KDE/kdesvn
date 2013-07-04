@@ -18,21 +18,21 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-IF($ENV{DESTDIR} MATCHES ".+")
-    SET(DESTDIR $ENV{DESTDIR})
-ELSE($ENV{DESTDIR} MATCHES ".+")
-    SET(DESTDIR "")
-ENDIF($ENV{DESTDIR} MATCHES ".+")
+if($ENV{DESTDIR} MATCHES ".+")
+    set(DESTDIR $ENV{DESTDIR})
+else()
+    set(DESTDIR "")
+endif()
 
-SET(COMMONLINK "${DESTDIR}${CMAKE_INSTALL_PREFIX}/share/doc/HTML/en/kdesvn/common")
+set(COMMONLINK "${DESTDIR}${CMAKE_INSTALL_PREFIX}/share/doc/HTML/en/kdesvn/common")
 
-MESSAGE(STATUS "Generating ${COMMONLINK}")
+message(STATUS "Generating ${COMMONLINK}")
 
-EXECUTE_PROCESS(
+execute_process(
     COMMAND "rm" "-f" "common"
     COMMAND ln "-s" "../common" "common"
     WORKING_DIRECTORY "${DESTDIR}/${CMAKE_INSTALL_PREFIX}/share/doc/HTML/en/kdesvn"
     )
 
-SET(CMAKE_INSTALL_MANIFEST_FILES ${CMAKE_INSTALL_MANIFEST_FILES} "${CMAKE_INSTALL_PREFIX}/share/doc/HTML/en/kdesvn/common")
+set(CMAKE_INSTALL_MANIFEST_FILES ${CMAKE_INSTALL_MANIFEST_FILES} "${CMAKE_INSTALL_PREFIX}/share/doc/HTML/en/kdesvn/common")
 

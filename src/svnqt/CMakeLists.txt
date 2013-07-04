@@ -18,9 +18,9 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-include (SvnqtMacros)
+include(SvnqtMacros)
 
-SET(SOURCES
+set(SOURCES
     client_update_parameter.cpp
     apr.cpp
     client_annotate.cpp
@@ -74,7 +74,7 @@ SET(SOURCES
     annotate_line.cpp
     )
 
-SET(CACHEINST_HEADERS
+set(CACHEINST_HEADERS
     cache/LogCache.h
     cache/ReposLog.h
     cache/DatabaseException.h
@@ -83,7 +83,7 @@ SET(CACHEINST_HEADERS
     cache/conversion_check.h
 )
 
-SET(INST_HEADERS
+set(INST_HEADERS
     annotate_line.h
     apr.h
     check.h
@@ -126,114 +126,114 @@ SET(INST_HEADERS
     reposnotify.h
     )
 
-FILE(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
-SET(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
+file(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+set(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
 
-SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}")
-MESSAGE(STATUS "Qt: ${QT_LIBRARIES}")
-SET(TOUTF8 "toUtf8")
-SET(FROMUTF8 "fromUtf8")
-SET(QLIST "QList")
-SET(TOASCII "toAscii")
-SET(HOMEDIR "homePath")
-IF(NOT svnqt-name)
-SET(svnqt-name svnqt)
-ENDIF(NOT svnqt-name)
+set(QT_LIBRARIES "${QT_QTCORE_LIBRARY}")
+message(STATUS "Qt: ${QT_LIBRARIES}")
+set(TOUTF8 "toUtf8")
+set(FROMUTF8 "fromUtf8")
+set(QLIST "QList")
+set(TOASCII "toAscii")
+set(HOMEDIR "homePath")
+if(NOT svnqt-name)
+  set(svnqt-name svnqt)
+endif()
 
-SET(QDATABASE "QSqlDatabase")
-SET(QLONG "qlonglong")
+set(QDATABASE "QSqlDatabase")
+set(QLONG "qlonglong")
 
 # must set from caller before - here no checks of compiler will done!
-IF (HAVE_GCC_VISIBILITY)
-    SET(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
-    SET(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
-ENDIF (HAVE_GCC_VISIBILITY)
+if(HAVE_GCC_VISIBILITY)
+    set(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
+    set(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
+endif()
 
-IF (WIN32)
-    SET(_SVNQT_EXPORT "__declspec(dllexport)")
-ENDIF (WIN32)
+if(WIN32)
+    set(_SVNQT_EXPORT "__declspec(dllexport)")
+endif()
 
-IF (QT_LUPDATE_EXECUTABLE)
-    MESSAGE(STATUS "Setting up language target")
+if(QT_LUPDATE_EXECUTABLE)
+    message(STATUS "Setting up language target")
 
-    FILE(GLOB _LANGFILES lang/*.ts)
-    FOREACH(_p ${_LANGFILES})
-        SET(LANGFILES "-ts ${_p} ${LANGFILES}")
-    ENDFOREACH(_p)
-    CONFIGURE_FILE(
+    file(GLOB _LANGFILES lang/*.ts)
+    foreach(_p ${_LANGFILES})
+        set(LANGFILES "-ts ${_p} ${LANGFILES}")
+    endforeach()
+    configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmakemodules/update-language.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
     IMMEDIATE
     @ONLY)
-    ADD_CUSTOM_TARGET(svnqt_update_translation
+    add_custom_target(svnqt_update_translation
         "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         VERBATIM
     )
-    ADD_SUBDIRECTORY(lang)
-ENDIF (QT_LUPDATE_EXECUTABLE)
+    add_subdirectory(lang)
+endif()
 
-CONFIGURE_FILE(
+configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/svnqt_defines.h.in"
     "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h"
     IMMEDIATE
     @ONLY)
 
-SET(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h)
-INCLUDE_DIRECTORIES(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
+set(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h)
+include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
-ADD_LIBRARY(${svnqt-name} SHARED ${SOURCES} ${svnhdr})
-IF(WIN32)
-    ADD_DEFINITIONS(-D_USE_32BIT_TIME_T)
-ELSE(WIN32)
-    SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX})
-    SET_TARGET_PROPERTIES(${svnqt-name}
+add_library(${svnqt-name} SHARED ${SOURCES} ${svnhdr})
+if(WIN32)
+    add_definitions(-D_USE_32BIT_TIME_T)
+else()
+    set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX})
+    set_target_properties(${svnqt-name}
         PROPERTIES
         COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
-ENDIF(WIN32)
+endif()
 
-SET(LIB_MAJOR 7)
-SET(LIB_MINOR 0)
-SET(LIB_RELEASE 1)
+set(LIB_MAJOR 7)
+set(LIB_MINOR 0)
+set(LIB_RELEASE 1)
 
-SET(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
+set(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
 
-SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES
+set_target_properties(${svnqt-name} PROPERTIES
     SOVERSION ${LIB_MAJOR}
     VERSION ${_soversion})
 
-SET(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
-SET(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
+set(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
+set(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
 
-IF(WIN32 OR APPLE)
-    SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
-ELSE(WIN32 OR APPLE)
-    SET_TARGET_PROPERTIES(${svnqt-name} PROPERTIES LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
-ENDIF(WIN32 OR APPLE)
+if(WIN32 OR APPLE)
+    set_target_properties(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+else()
+    set_target_properties(${svnqt-name} PROPERTIES LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+endif()
 
-TARGET_LINK_LIBRARIES(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS} ${QT_QTSQL_LIBRARY})
+target_link_libraries(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS} ${QT_QTSQL_LIBRARY})
 
-IF (WIN32)
-    TARGET_LINK_LIBRARIES( ${svnqt-name} wsock32.lib  )
-ENDIF (WIN32)
+if(WIN32)
+    target_link_libraries(${svnqt-name} wsock32.lib)
+endif()
 
 # Just a small linking test
-IF (BUILD_TESTS)
-    ADD_EXECUTABLE(testlink testmain.cpp)
-    TARGET_LINK_LIBRARIES(testlink ${svnqt-name})
-ENDIF (BUILD_TESTS)
+if(BUILD_TESTS)
+    add_executable(testlink testmain.cpp)
+    target_link_libraries(testlink ${svnqt-name})
+endif()
 
 # install rules
 # in win32 we don't install it
-IF(NOT WIN32)
-    INSTALL(TARGETS ${svnqt-name} LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+if(NOT WIN32)
+    install(TARGETS ${svnqt-name} LIBRARY DESTINATION ${LIB_INSTALL_DIR}
             RUNTIME DESTINATION ${BIN_INSTALL_DIR}
             ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
-    INSTALL(FILES ${INST_HEADERS} DESTINATION include/svnqt)
-    INSTALL(FILES ${CACHEINST_HEADERS} DESTINATION include/svnqt/cache)
-ENDIF(NOT WIN32)
+    install(FILES ${INST_HEADERS} DESTINATION include/svnqt)
+    install(FILES ${CACHEINST_HEADERS} DESTINATION include/svnqt/cache)
+endif()
 
-IF (BUILD_TESTS)
-  ADD_SUBDIRECTORY(tests)
-  ADD_SUBDIRECTORY(cache/test)
-ENDIF (BUILD_TESTS)
+if(BUILD_TESTS)
+  add_subdirectory(tests)
+  add_subdirectory(cache/test)
+endif()

@@ -18,7 +18,7 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
+include_directories(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
                     ${CMAKE_SOURCE_DIR}/src/svnfrontend/background
                     ${CMAKE_SOURCE_DIR}/src/svnfrontend/svncharts
                     ${CMAKE_SOURCE_DIR}/src/ksvnwidgets
@@ -26,7 +26,7 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
                     ${CMAKE_BINARY_DIR}/src/svnqt
                     ${CMAKE_BINARY_DIR}/src/ksvnwidgets)
 
-SET(svnfrontendsrc
+set(svnfrontendsrc
     ccontextlistener.cpp
     commandexec.cpp
     copymoveview_impl.cpp
@@ -107,7 +107,7 @@ SET(svnfrontendsrc
     setpropertywidget.h
     )
 
-SET(svnfrontendui
+set(svnfrontendui
     copymoveview.ui
     createrepo_dlg.ui
     dumprepo_dlg.ui
@@ -127,17 +127,17 @@ SET(svnfrontendui
     database/dbsettings.ui
     )
 
-FILE(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-KDE_AUTOMOC(${svnfrontendsrc})
-KDE_ADD_UI_FILES(frontend_ui_sources ${svnfrontendui})
+kde_automoc(${svnfrontendsrc})
+kde_add_ui_files(frontend_ui_sources ${svnfrontendui})
 
 
-ADD_SUBDIRECTORY(background)
+add_subdirectory(background)
 
-ADD_LIBRARY(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
-SET_TARGET_PROPERTIES(svnfrontend
+add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
+set_target_properties(svnfrontend
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-ADD_DEPENDENCIES(svnfrontend ksvnwidgets svncharts)
+add_dependencies(svnfrontend ksvnwidgets svncharts)

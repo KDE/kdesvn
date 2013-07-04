@@ -18,29 +18,27 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-MACRO (GENBOOK _language_code)
-    FILE(GLOB docimages RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} hi128-filesys-*.png)
+macro(GENBOOK _language_code)
+    file(GLOB docimages RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} hi128-filesys-*.png)
     kde4_create_handbook(index.docbook
         INSTALL_DESTINATION ${HTML_INSTALL_DIR}/${_language_code} SUBDIR kdesvn)
 
-    FOREACH(_img ${docimages})
-        CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/${_img}
+    foreach(_img ${docimages})
+        configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${_img}
                         ${CMAKE_CURRENT_BINARY_DIR}/${_img}
                         COPYONLY
                         )
-        INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${_img}
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${_img}
                 DESTINATION ${HTML_INSTALL_DIR}/${_language_code}/kdesvn
                 )
-    ENDFOREACH(_img)
-    ADD_DEPENDENCIES(doc ${_language_code}-handbook)
+    endforeach()
+    add_dependencies(doc ${_language_code}-handbook)
+endmacro ()
 
-ENDMACRO (GENBOOK)
+add_custom_target(doc ALL)
 
-ADD_CUSTOM_TARGET(doc ALL)
+add_subdirectory(en)
+add_subdirectory(nl)
+install(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/makelink.cmake)
 
-ADD_SUBDIRECTORY(en)
-ADD_SUBDIRECTORY(nl)
-INSTALL(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/makelink.cmake)
-
-ADD_SUBDIRECTORY(man)
-
+add_subdirectory(man)

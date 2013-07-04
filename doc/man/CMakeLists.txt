@@ -18,11 +18,11 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-SET(MANFILES
+set(MANFILES
     kdesvn.1
     kdesvnaskpass.1)
 
-INSTALL(FILES
+install(FILES
     ${MANFILES}
     DESTINATION share/man/man1)
 

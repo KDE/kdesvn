@@ -18,9 +18,9 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-FILE(GLOB pofiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.po)
+file(GLOB pofiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.po)
 
 # disable unfinished/ancient translations
-LIST(REMOVE_ITEM pofiles "nl.po")
+list(REMOVE_ITEM pofiles "nl.po")
 
-GETTEXT_CREATE_TRANSLATIONS("kdesvn.pot" "ALL" ${pofiles} )
+gettext_create_translations("kdesvn.pot" "ALL" ${pofiles} )

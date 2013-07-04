@@ -18,71 +18,72 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-KDE4_ADD_EXECUTABLE(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+kde4_add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
-SET(kdesvnsrc
+set(kdesvnsrc
     main.cpp
     kdesvn.cpp
     urldlg.cpp
     commandline.cpp
 )
 
-SET(partsrc
+set(partsrc
     kdesvn_events.cpp
     kdesvn_part.cpp
     kdesvnview.cpp
     commandline_part.cpp
 )
 
-KDE_AUTOMOC(${kdesvnsrc})
-KDE_AUTOMOC(${partsrc})
+kde_automoc(${kdesvnsrc})
+kde_automoc(${partsrc})
 
-SET(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
-SET(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
+set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
+set(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
 
-ADD_SUBDIRECTORY(svnqt)
-ADD_SUBDIRECTORY(ksvnwidgets)
-ADD_SUBDIRECTORY(settings)
-ADD_SUBDIRECTORY(svnfrontend)
-ADD_SUBDIRECTORY(helpers)
-ADD_SUBDIRECTORY(kdesvnd)
-ADD_SUBDIRECTORY(kiosvn)
-ADD_SUBDIRECTORY(pics)
-ADD_SUBDIRECTORY(icons)
+add_subdirectory(svnqt)
+add_subdirectory(ksvnwidgets)
+add_subdirectory(settings)
+add_subdirectory(svnfrontend)
+add_subdirectory(helpers)
+add_subdirectory(kdesvnd)
+add_subdirectory(kiosvn)
+add_subdirectory(pics)
+add_subdirectory(icons)
 
-KDE4_ADD_EXECUTABLE(kdesvn ${kdesvnsrc})
-KDE_ADD_KPART(kdesvnpart ${partsrc})
+kde4_add_executable(kdesvn ${kdesvnsrc})
+kde_add_kpart(kdesvnpart ${partsrc})
 
-SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}" )
+set(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}")
 
-TARGET_LINK_LIBRARIES(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnbackground ${svnqt-name}
+target_link_libraries(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnbackground ${svnqt-name}
     ${QT_LIBRARIES}
     ${KDE4_KDECORE_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}
     ${KDE4_KIO_LIBRARY}
     ${KDE4_KPARTS_LIBRARY}
     )
-SET_TARGET_PROPERTIES(kdesvnpart
+
+set_target_properties(kdesvnpart
     PROPERTIES
     LINK_FLAGS "${_BASE_LDADD} ${APR_EXTRA_LDFLAGS} ${APU_EXTRA_LDFLAGS} ${LINK_NO_UNDEFINED}")
 
-INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src/svnqt)
+include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 
-TARGET_LINK_LIBRARIES(kdesvnaskpass #${QT_QTCORE_LIBRARY} ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBRARY}
+target_link_libraries(kdesvnaskpass #${QT_QTCORE_LIBRARY} ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBRARY}
     ${QT_LIBRARIES} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY}
 )
-TARGET_LINK_LIBRARIES(kdesvn #${QT_AND_KDECORE_LIBS}
+target_link_libraries(kdesvn #${QT_AND_KDECORE_LIBS}
     ${QT_LIBRARIES} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY}
     ${KDE4_KPARTS_LIBRARY}
 )
 
-INSTALL(TARGETS kdesvn kdesvnaskpass kdesvnpart
+install(TARGETS kdesvn kdesvnaskpass kdesvnpart
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
 # the resources
-INSTALL(FILES kdesvnui.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)
-INSTALL(FILES kdesvn_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvnpart)
-INSTALL(FILES kdesvn.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-INSTALL(FILES kdesvnpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
-INSTALL(FILES kdesvn.notifyrc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)
+install(FILES kdesvnui.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)
+install(FILES kdesvn_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvnpart)
+install(FILES kdesvn.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES kdesvnpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES kdesvn.notifyrc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)

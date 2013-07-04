@@ -17,14 +17,16 @@
  #   Free Software Foundation, Inc.,                                       #
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
-
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
 set(BASE_VERSION 1.6.0)
 
-option(BUILD_TESTS "Building the tests" OFF)
-
+# Where to look for Findxxx.cmake modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
+# Automatically include the current source and binary dirs
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+option(BUILD_TESTS "Building the tests" OFF)
 
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)

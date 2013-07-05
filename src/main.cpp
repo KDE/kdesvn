@@ -40,7 +40,6 @@ int main(int argc, char **argv)
                      KAboutData::License_GPL,ki18n("(C) 2005-2009 Rajko Albrecht"));
     about.addAuthor( ki18n("Rajko Albrecht"),ki18n("Developer"),QByteArray("ral@alwins-world.de"),QByteArray());
     about.setHomepage("http://kdesvn.alwins-world.de/");
-    about.setBugAddress("kdesvn-bugs@alwins-world.de");
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineOptions options;

@@ -174,7 +174,6 @@ KAboutData* kdesvnpart::createAboutData()
     about.addAuthor(ki18n("Rajko Albrecht"), ki18n("Original author and maintainer"), "ral@alwins-world.de" );
     about.setOtherText(m_Extratext);
     about.setHomepage("http://kdesvn.alwins-world.de/");
-    about.setBugAddress("kdesvn-bugs@alwins-world.de");
     about.setProgramIconName("kdesvn");
     return &about;
 }

@@ -318,9 +318,8 @@ root</para>
 </refsect1>
 
 <refsect1 id='example'><title>EXAMPLE</title>
-<para>kdesvn file:///path/to/local/working/copy
-<!-- .br -->
-kdesvn <ulink url='http://remote/svn/project/trunk'>http://remote/svn/project/trunk</ulink></para>
+<para>kdesvn file:///<replaceable>path/to/local/working/copy</replaceable></para>
+<para>kdesvn http://<replaceable>remote/svn/project/trunk</replaceable></para>
 
 </refsect1>
 

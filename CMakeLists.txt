@@ -79,7 +79,6 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 include(MacroEnsureVersion)
 include(FindSubversion)
 include(SetupCompiler)
-include(FindGettext)
 include(kdesvn-macros)
 
 if(__KDE_HAVE_GCC_VISIBILITY)
@@ -144,13 +143,6 @@ add_custom_target(dist
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
-configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/package_messages.sh.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/package_messages.sh"
-    IMMEDIATE
-    @ONLY)
-add_custom_target(package-messages
-    "${CMAKE_CURRENT_BINARY_DIR}/package_messages.sh")
 
 add_custom_target(apidox
     "doxygen" "${CMAKE_BINARY_DIR}/Doxyfile"

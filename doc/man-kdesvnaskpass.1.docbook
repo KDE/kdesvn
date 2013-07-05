@@ -32,7 +32,7 @@
 
 <refsect1 id='options'><title>OPTIONS</title>
 
-<refsect2 id='ss_arguments'><title>.SS Arguments:</title>
+<refsect2 id='ss_arguments'><title>Arguments:</title>
 <variablelist>
   <varlistentry>
   <term><emphasis>prompt</emphasis></term>
@@ -264,9 +264,9 @@ root</para>
   </listitem>
   </varlistentry>
   <varlistentry>
-  <term><option>--stylesheet</option></term>
+  <term><option>--stylesheet &lt;file.qss&gt;</option></term>
   <listitem>
-<para>&lt;file.qss&gt;   applies the Qt stylesheet to the application widgets</para>
+    <para>applies the Qt stylesheet to the application widgets</para>
   </listitem>
   </varlistentry>
 </variablelist>
@@ -282,7 +282,6 @@ root</para>
 <refsect1 id='authors'><title>AUTHORS</title>
 <literallayout>
 Rajko Albrecht &lt;ral@alwins-world.de&gt;
-<!-- .br -->
 </literallayout></refsect1>
 </refentry>
 

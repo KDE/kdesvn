@@ -35,12 +35,11 @@
 
 <refsect1 id='options'><title>OPTIONS</title>
 
-<refsect2 id='ss_arguments'><title>.SS Arguments:</title>
+<refsect2 id='ss_arguments'><title>Arguments:</title>
 <variablelist>
   <varlistentry>
-  <term><emphasis>exec</emphasis></term>
-  <listitem>
-<para>&lt;command&gt;            Execute subversion command ("exec help" for more information, opens KDE Help Center)</para>
+  <term><emphasis>exec</emphasis> &lt;command&gt;</term>
+  <listitem><para>Execute subversion command ("exec help" for more information, opens KDE Help Center)</para>
   </listitem>
   </varlistentry>
   <varlistentry>
@@ -337,7 +336,6 @@ from the command-line.</para>
 <refsect1 id='authors'><title>AUTHORS</title>
 <literallayout>
 Rajko Albrecht &lt;ral@alwins-world.de&gt;
-<!-- .br -->
 </literallayout></refsect1>
 </refentry>
 

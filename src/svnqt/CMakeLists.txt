@@ -217,7 +217,7 @@ if(WIN32)
 endif()
 
 # Just a small linking test
-if(BUILD_TESTS)
+if(KDE4_BUILD_TESTS)
     add_executable(testlink testmain.cpp)
     target_link_libraries(testlink ${svnqt-name})
 endif()
@@ -232,7 +232,7 @@ if(NOT WIN32)
     install(FILES ${CACHEINST_HEADERS} DESTINATION include/svnqt/cache)
 endif()
 
-if(BUILD_TESTS)
+if(KDE4_BUILD_TESTS)
   add_subdirectory(tests)
   add_subdirectory(cache/test)
 endif()

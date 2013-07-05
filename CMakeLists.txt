@@ -25,8 +25,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cm
 # Automatically include the current source and binary dirs
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-option(BUILD_TESTS "Building the tests" OFF)
-
 find_package(KDE4 4.9.0 REQUIRED)
 include (KDE4Defaults)
 include (MacroLibrary)
@@ -64,10 +62,6 @@ if(TESTINGBUILD)
     endif()
     add_definitions(-DDEBUG_TIMER=1)
 endif()
-
-if(BUILD_TESTS)
-  enable_testing()
-endif(BUILD_TESTS)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 

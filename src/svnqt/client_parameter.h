@@ -472,7 +472,7 @@ namespace svn
          */
         MergeParameter&reintegrate(bool reintegrate);
         /**
-         * Check wheter the parameters are for a reintegrate merge or not. If yes, than parameters are used as follows:
+         * Check whether the parameters are for a reintegrate merge or not. If yes, than parameters are used as follows:
          *   - peg() - setup the required peg revision
          *   - path1() gives the source path
          *   - localPath() the local working copy to merge into

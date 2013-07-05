@@ -461,7 +461,7 @@ void kio_svnProtocol::put(const KUrl&url,int permissions,KIO::JobFlags flags)
     written (0);
     m_pData->dispWritten = true;
     registerToDaemon();
-    startOp(processed_size, i18n("Commiting %1",makeSvnUrl(url)));
+    startOp(processed_size, i18n("Committing %1",makeSvnUrl(url)));
     bool err = false;
     if (exists) {
         svn::CommitParameter commit_parameters;

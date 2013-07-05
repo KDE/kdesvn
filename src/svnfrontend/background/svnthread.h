@@ -51,7 +51,7 @@ protected:
 
     //! a base method often needed
     /*!
-     * Exceptions will NOT catched, the caller has to do it!
+     * Exceptions will NOT be caught, the caller has to do it!
      */
     void itemInfo(const QString&what,svn::InfoEntry&target,const svn::Revision&_rev=svn::Revision::UNDEFINED,const svn::Revision&_peg = svn::Revision::UNDEFINED);
 };

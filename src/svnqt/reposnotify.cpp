@@ -157,10 +157,10 @@ public:
                 break;
                 case svn_repos_notify_load_txn_committed:
                 {
-                    _msg = QString("Commited new revision ").append(_newrev.toString());
+                    _msg = QString("Committed new revision ").append(_newrev.toString());
                     if (_oldrev.isValid()) 
                     {
-                        _msg.append(" loaded from orignal revision ").append(_oldrev.toString());
+                        _msg.append(" loaded from original revision ").append(_oldrev.toString());
                     }
                 }
                 break;

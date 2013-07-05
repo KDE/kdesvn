@@ -19,7 +19,6 @@
  ####
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
-set(BASE_VERSION 1.6.0)
 
 # Where to look for Findxxx.cmake modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
@@ -31,6 +30,27 @@ option(BUILD_TESTS "Building the tests" OFF)
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include (MacroLibrary)
+
+# Set the version
+set(KDESVN_VERSION_MAJOR 1)
+set(KDESVN_VERSION_MINOR 6)
+set(KDESVN_VERSION_PATCH 40)
+set(KDESVN_VERSION_STRING ${KDESVN_VERSION_MAJOR}.${KDESVN_VERSION_MINOR}.${KDESVN_VERSION_PATCH})
+
+# Append the git revision if available
+# If Git is installed and a '.git' directory is found,
+# we append the Git revision to KDESVN_VERSION_STRING
+if(EXISTS "${kdesvn_SOURCE_DIR}/.git")
+  find_package(Git)
+  if(GIT_FOUND)
+    message(STATUS "Found git: ${GIT_EXECUTABLE}")
+    execute_process(COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD
+                    WORKING_DIRECTORY ${kdesvn_SOURCE_DIR}
+                    OUTPUT_VARIABLE kdesvn_git_revision
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(KDESVN_VERSION_STRING "${KDESVN_VERSION_STRING} (rev: ${kdesvn_git_revision})")
+  endif()
+endif()
 
 set(TESTINGBUILD OFF CACHE BOOL "Enable/Disable special testing flags")
 if(TESTINGBUILD)
@@ -102,20 +122,6 @@ string(REGEX REPLACE "-fno-exceptions " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
-
-# current version
-if(DAILY_BUILD)
-    execute_process(COMMAND "date" "+%Y%m%d" OUTPUT_VARIABLE BUILDDATE)
-    string(REPLACE "\n" "" BUILDDATE ${BUILDDATE})
-    set(VERSION "${BASE_VERSION}.${BUILDDATE}")
-    set(KDESVN_VERSION "\"${BASE_VERSION}-${BUILDDATE}\"")
-else()
-    set(VERSION "$ENV{KDESVN_VERSION}")
-    if(NOT VERSION)
-        set(VERSION ${BASE_VERSION})
-    endif(NOT VERSION)
-    set(KDESVN_VERSION \"${VERSION}\")
-endif()
 
 set(svnqt-name svnqt)
 add_subdirectory(src)

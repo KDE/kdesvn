@@ -128,8 +128,6 @@ add_subdirectory(src)
 add_subdirectory(doc)
 
 configure_file(kdesvn-config.h.in kdesvn-config.h @ONLY)
-configure_file(kdesvn.spec.in ${PROJECT_NAME}.spec @ONLY)
-configure_file(Helperstuff/BuildService/kdesvn.spec.in Helperstuff/BuildService/${PROJECT_NAME}.spec @ONLY)
 configure_file(Doxyfile.in Doxyfile @ONLY)
 configure_file(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 

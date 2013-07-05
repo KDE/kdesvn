@@ -105,26 +105,14 @@ KUrl KTranslateUrl::findSystemBase(const QString&filename)
         {
             if (*name==filename+".desktop")
             {
-#if QT_VERSION < 0x040000
-                KDesktopFile desktop(*dirpath+filename+".desktop", true);
-#else
                 KDesktopFile desktop(*dirpath+filename+".desktop");
-#endif
-#if QT_VERSION < 0x040000
-                if ( desktop.readURL().isEmpty() )
-#else
                 if ( desktop.readUrl().isEmpty() )
-#endif
                 {
                     KUrl url;
                     url.setPath( desktop.readPath() );
                     return url;
                 }
-#if QT_VERSION < 0x040000
-                return desktop.readURL();
-#else
                 return desktop.readUrl();
-#endif
             }
         }
     }

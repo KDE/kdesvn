@@ -54,9 +54,9 @@
 <refsect2 id='options2'><title>Options:</title>
 <variablelist>
   <varlistentry>
-  <term><option>-r startrev</option></term>
+  <term><option>-r startrev[:endrev]</option></term>
   <listitem>
-<para>[:endrev]      Execute single subversion command on specific revision(-range)</para>
+<para>Execute single subversion command on specific revision(-range)</para>
   </listitem>
   </varlistentry>
   <varlistentry>

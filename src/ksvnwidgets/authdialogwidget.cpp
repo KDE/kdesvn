@@ -35,12 +35,12 @@ AuthDialogWidget::AuthDialogWidget(const QString & realm,const QString&user,QWid
     m_UsernameEdit->setText(user);
     m_PasswordEdit->setText("");
     m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());
-    QString text = m_StorePasswordButton->text();
     m_StorePasswordButton->setText(
-            m_StorePasswordButton->text()+QString(" (%1)")
-            .arg((Kdesvnsettings::passwords_in_wallet()?i18n("into KDE Wallet"):i18n("into Subversion' simple storage"))));
+            Kdesvnsettings::passwords_in_wallet()
+            ? i18n("Store password (into KDE Wallet)")
+            : i18n("Store password (into Subversion' simple storage)"));
     if (!realm.isEmpty()) {
-        m_RealmLabel->setText(m_RealmLabel->text()+' '+realm);
+        m_RealmLabel->setText(i18n("Enter authentication info for %1",realm));
         resize( QSize(334, 158).expandedTo(minimumSizeHint()) );
     }
 }

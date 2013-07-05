@@ -76,7 +76,7 @@ void FillCacheThread::run()
             return;
         }
         if (m_startup && svn::cache::ReposConfig::self()->readEntry(m_what,"no_update_cache",false)) {
-            m_SvnContextListener->contextNotify(i18n("Not filling logcache because it is disabled due setting for this repository."));
+            m_SvnContextListener->contextNotify(i18n("Not filling log cache because it is disabled due setting for this repository."));
         } else {
             m_SvnContextListener->contextNotify(i18n("Filling log cache in background."));
 

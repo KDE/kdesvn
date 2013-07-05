@@ -9,10 +9,10 @@ Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Bl
 Name=Subversion log (last 100)
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
-Comment=Displays the subversion log
+Comment=Displays the Subversion log
 
 [Desktop Action Info]
-Name=Detailed subversion info
+Name=Detailed Subversion info
 Icon=kdesvninfo
 Exec=kdesvn exec info %U
 
@@ -106,7 +106,7 @@ Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
 
 [Desktop Action Exportto]
-Name=Export from a subversion repository...
+Name=Export from a Subversion repository...
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository

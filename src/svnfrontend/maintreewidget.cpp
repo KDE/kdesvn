@@ -629,7 +629,7 @@ void MainTreeWidget::setupActions()
 
     tmp_action=
         add_action("make_svn_merge",i18n("Merge..."),KShortcut(),KIcon("kdesvnmerge"),this,SLOT(slotMerge()));
-    tmp_action->setToolTip(i18n("Merge repository path into current worky copy path or current repository path into a target"));
+    tmp_action->setToolTip(i18n("Merge repository path into current working copy path or current repository path into a target"));
     tmp_action=add_action("openwith",i18n("Open With..."),KShortcut(),KIcon(),this, SLOT(slotOpenWith()));
 
     /* remote actions only */
@@ -2211,7 +2211,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection&_item,const QI
     QModelIndexList _indexes = _item.indexes();
     switch (DirselectionCount()) {
     case 1:
-        m_DirTreeView->setStatusTip(i18n("Hold CTRL key while click on selected item for unselect"));
+        m_DirTreeView->setStatusTip(i18n("Hold Ctrl key while click on selected item for unselect"));
         break;
     case 2:
         m_DirTreeView->setStatusTip(i18n("See context menu for more actions"));

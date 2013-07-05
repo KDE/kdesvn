@@ -9,7 +9,7 @@ Actions=Checkout;Export;Update;Commit;Log;Exportto;Checkoutto;
 Name=kdesvn log (last 100)
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
-Comment=Displays the subversion log
+Comment=Displays the Subversion log
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
@@ -40,7 +40,7 @@ Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
 
 [Desktop Action Exportto]
-Name=Export from a subversion repository...
+Name=Export from a Subversion repository...
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository

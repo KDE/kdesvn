@@ -1382,7 +1382,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
             }
             return;
         } else {
-            emit sendNotify(i18n("Display-process could not started, check command."));
+            emit sendNotify(i18n("Display process could not started, check command."));
         }
     }
     bool need_modal = m_Data->runblocked||KApplication::activeModalWidget()!=0;
@@ -2129,7 +2129,7 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
             proc->waitForFinished(-1);
         }
     } else {
-        emit sendNotify(i18n("Merge-process could not started, check command."));
+        emit sendNotify(i18n("Merge process could not started, check command."));
     }
 }
 
@@ -2210,7 +2210,7 @@ bool SvnActions::makeMove(const QString&Old,const QString&New,bool _force)
     svn::Revision nnum;
 
     try {
-        StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item "));
+        StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         nnum = m_Data->m_Svnclient->move(params.force(_force).asChild(false).makeParent(false));
     } catch (const svn::Exception&e) {

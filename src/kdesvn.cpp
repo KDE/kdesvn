@@ -151,11 +151,11 @@ kdesvn::kdesvn()
                                                        m_part,
                                                        SLOT(showAboutApplication()));
             tmpAction->setText(i18n("Info about kdesvn part"));
-            tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin not the standalone app."));
+            tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin and not the standalone application."));
 
             tmpAction = actionCollection()->addAction("db_show_status",m_part,SLOT(showDbStatus()));
             tmpAction->setText(i18n("Show database content"));
-            tmpAction->setToolTip(i18n("Show the content of logcache database"));
+            tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
             connectActionCollection(actionCollection());
 

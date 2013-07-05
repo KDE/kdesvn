@@ -55,7 +55,7 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>$Date$</date>
+<date>2013-07-05</date>
 <releaseinfo>0.4</releaseinfo>
 
 <!-- Abstract about this handbook -->
@@ -643,7 +643,7 @@ The revisiontree is generated via <prompt>dot</prompt>. So for a working revisio
 </para>
 <sect2>
 <title>Offline mode</title>
-<para>&kdesvn; may work without network access, &eg;, you may switch that no network access is allowed. This may useful when working without network like on notebooks. In such cases &kappname; always get the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <prompt>&quot;Log follows nodechanges&quot;</prompt> is set.</para>
+<para>&kdesvn; may work without network access, &eg;, you may switch that no network access is allowed. This may useful when working without network like on notebooks. In such cases &kappname; always get the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <prompt>&quot;Log follows node changes&quot;</prompt> is set.</para>
 </sect2>
 <sect2>
 <title>Logcache and revisiontree</title>
@@ -1460,7 +1460,7 @@ Setting may changed from the setup dialog. Them are separated into some subdialo
 </row>
 
 <row>
-<entry>Logs always reads list of changed files</entry>
+<entry>Log always reads list of changed files</entry>
 <entry>The logcommand may read list of changed files in commit. This is useful and in most cases it cost not real more traffic.</entry>
 </row>
 

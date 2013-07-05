@@ -91,7 +91,7 @@
       <default>true</default>
     </entry>
     <entry key="log_always_list_changed_files" type="Bool" >
-      <label>Logs always reads list of changed files</label>
+      <label>Log always reads list of changed files</label>
       <default>true</default>
     </entry>
     <entry key="start_updates_check_on_open" type="Bool" >
@@ -204,7 +204,7 @@
   <group name="revision_tree" >
     <entry key="fill_cache_on_tree" type="Bool">
         <default>false</default>
-        <label>Check status of log cachen when starting revision tree</label>
+        <label>Check status of log cache when starting revision tree</label>
     </entry>
     <entry key="tree_direction" type="Int" >
       <default>0</default>
@@ -258,7 +258,7 @@
     </entry>
     <entry key="kio_use_standard_logmsg" type="Bool" >
         <default>false</default>
-        <label>KIO::svn operations uses a standard log message</label>
+        <label>KIO::svn operations use a standard log message</label>
     </entry>
     <entry key="kio_standard_logmsg" type="String">
         <default>Revision made with kdesvn KIO.</default>

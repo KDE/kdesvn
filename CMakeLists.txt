@@ -143,11 +143,6 @@ add_custom_target(dist
     DEPENDS doc
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
-file(GLOB _POFILES po/*.po)
-foreach(_p ${_POFILES})
-  set(POFILES "${_p} ${POFILES}")
-endforeach()
-
 set(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/package_messages.sh.in"

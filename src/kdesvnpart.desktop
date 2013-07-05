@@ -1,14 +1,11 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=kdesvnpart
 GenericName=SVN Client
 Icon=kdesvn
 Type=Service
-DocPath=kdesvn/index.html
+X-KDE-DocPath=kdesvn/index.html
 Comment=A Subversion client for KDE
-Terminal=false
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
 X-KDE-BrowserView-Args=DetailedList
 X-KDE-Library=kdesvnpart
-Categories=Qt;KDE;Development;RevisionControl;
 MimeType=inode/directory;

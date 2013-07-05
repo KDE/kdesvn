@@ -2,7 +2,6 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
 X-KDE-Priority=TopLevel
-
 X-KDE-GetActionMenu=org.kde.kded /modules/kdesvnd org.kde.kdesvnd getTopLevelActionMenu
 Actions=Checkout;Export;Update;Commit;Log;Exportto;Checkoutto;
 

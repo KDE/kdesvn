@@ -2,7 +2,6 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
 X-KDE-Submenu=Subversion (kdesvn)
-
 X-KDE-GetActionMenu=org.kde.kded /modules/kdesvnd org.kde.kdesvnd getActionMenu
 Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Blame;CreatePatch;Export;Diff;Update;Commit;Checkoutto;Exportto;Tree;
 

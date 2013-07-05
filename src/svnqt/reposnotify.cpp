@@ -228,3 +228,4 @@ ReposNotify::operator const QString&()const
 
 }
 }
+

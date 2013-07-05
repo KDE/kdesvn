@@ -65,3 +65,4 @@ namespace svn {
     GETSETSI(UpdateParameter,bool,_add_as_modification,add_as_modification);
 
 }
+

@@ -27,7 +27,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 option(BUILD_TESTS "Building the tests" OFF)
 
-find_package(KDE4 REQUIRED)
+find_package(KDE4 4.9.0 REQUIRED)
 include (KDE4Defaults)
 include (MacroLibrary)
 

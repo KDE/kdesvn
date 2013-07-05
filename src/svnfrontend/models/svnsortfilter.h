@@ -57,14 +57,6 @@ protected:
     SvnItemModel*m_sourceModel;
     Qt::SortOrder m_order;
     svnmodel::ItemTypeFlag m_ShowFilter;
-
-#if QT_VERSION<0x040500
-    int m_SortColumn;
-    int sortColumn()const
-    {
-        return m_SortColumn;
-    }
-#endif
 };
 
 #endif

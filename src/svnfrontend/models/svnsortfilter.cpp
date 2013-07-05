@@ -26,9 +26,6 @@
 
 SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
     :QSortFilterProxyModel(parent),m_sourceModel(0),m_order(Qt::AscendingOrder),m_ShowFilter(svnmodel::All)
-#if QT_VERSION<0x040500
-    ,m_SortColumn(0)
-#endif
 {
 }
 
@@ -39,10 +36,6 @@ SvnSortFilterProxy::~SvnSortFilterProxy()
 void SvnSortFilterProxy::sort(int column,Qt::SortOrder order)
 {
     m_order = order;
-#if QT_VERSION<0x040500
-    m_SortColumn = column;
-#endif
-
     QSortFilterProxyModel::sort(column,order);
 }
 

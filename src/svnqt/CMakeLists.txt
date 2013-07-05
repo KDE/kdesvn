@@ -185,7 +185,6 @@ add_library(${svnqt-name} SHARED ${SOURCES} ${svnhdr})
 if(WIN32)
     add_definitions(-D_USE_32BIT_TIME_T)
 else()
-    set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX})
     set_target_properties(${svnqt-name}
         PROPERTIES
         COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

@@ -63,12 +63,8 @@ if(TESTINGBUILD)
     add_definitions(-DDEBUG_TIMER=1)
 endif()
 
-set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
-
 include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
 ${QT_QTDBUS_INCLUDE_DIR})
-
-set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX}/kde4)
 
 include(MacroEnsureVersion)
 include(FindSubversion)

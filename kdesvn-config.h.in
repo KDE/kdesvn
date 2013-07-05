@@ -2,7 +2,7 @@
 #define _KDESVN_CONFIG_H
 
 /* The KDESvn version */
-#define VERSION "@KDESVN_VERSION_STRING@"
+#define KDESVN_VERSION "@KDESVN_VERSION_STRING@"
 
 #cmakedefine SQLITE_FOUND
 #cmakedefine HAS_SETENV

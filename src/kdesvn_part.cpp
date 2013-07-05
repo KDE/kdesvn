@@ -57,7 +57,7 @@
 K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>();registerPlugin<commandline_part>("commandline_part");)
 K_EXPORT_PLUGIN(KdesvnFactory("kdesvnpart","kdesvn"))
 
-static const char version[] = VERSION;
+static const char version[] = KDESVN_VERSION;
 
 kdesvnpart::kdesvnpart( QWidget *parentWidget, QObject *parent, const QVariantList& args)
     : KParts::ReadOnlyPart(parent)

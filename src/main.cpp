@@ -31,7 +31,7 @@
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (standalone application)");
 
-static const char version[] = VERSION;
+static const char version[] = KDESVN_VERSION;
 
 
 int main(int argc, char **argv)

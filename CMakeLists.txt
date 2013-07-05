@@ -77,6 +77,10 @@ if(__KDE_HAVE_GCC_VISIBILITY)
     set(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
 endif(__KDE_HAVE_GCC_VISIBILITY)
 
+
+# Enable exceptions
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
+
 # from http://www.kdedevelopers.org/node/3171 and http://kdesvn.alwins-world.de/ticket/595#comment:5
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=9510)
 
@@ -106,8 +110,7 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   string(REGEX REPLACE "-O2 " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 endif()
 
-#we requires exeptions!!!!
-string(REGEX REPLACE "-fno-exceptions " "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")

@@ -494,14 +494,14 @@ If set, unrelated items will be diffed as if they were related. Otherwise subver
 </varlistentry>
 
 <varlistentry>
-<term>Force delete on modified/unversioned</term>
+<term>Force delete on modified/unversioned items</term>
 <listitem><para>
 If not set and merge would require deletion of an modified or unversioned item the subversion merge fails. Otherwise this items will deleted.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Just dry run without modifications.</term>
+<term>Just dry run without modifications</term>
 <listitem><para>
 If set, subversions sends only notifications what it would do but doesn't modify the working copy.
 </para></listitem>
@@ -533,10 +533,10 @@ Generate the call to your external merge program as you setup in Settings. The e
 </listitem>
 </orderedlist>
 
-In difference to internal merge target may a flat folder/file not under sourcecontrol 'cause external tools doesn't care about it.
+In difference to internal merge target may a flat folder/file not under version control because external tools do not care about it.
 </para>
 <para>
-If recursive isn't set, the export is done as a flat export. Be care: when doing this with working copies externals will NOT exported.
+If recursive is not set, the export is done as a flat export. Be care: when doing this with working copies externals will <emphasis>not</emphasis> be exported.
 </para>
 </sect3>
 </sect2>

@@ -164,7 +164,7 @@ Standard web browser protocol.
 <varlistentry>
 <term>https</term>
 <listitem><para>
-Standard encrypted web browser protocol
+Standard encrypted web browser protocol.
 </para></listitem>
 </varlistentry>
 
@@ -185,14 +185,14 @@ Standard encrypted web browser protocol. May be used to let &konqueror; automati
 <varlistentry>
 <term>(k)svn+file</term>
 <listitem><para>
-Local repository protocol. May used to let &konqueror; automatic call &kdesvn;.
+Local repository protocol. May be used to let &konqueror; automatic call &kdesvn;.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>(k)svn</term>
 <listitem><para>
-Subversions own server protocol.
+Subversion's own server protocol.
 </para></listitem>
 </varlistentry>
 
@@ -275,7 +275,7 @@ Mark the entry or entries you want to send and select
 </menuchoice>
 </para>
 <para>
-If you try to commit if no item is selected, &kdesvn; uses the top-most element of opened working copy, eg, the working copy path itself.
+If you try to commit if no item is selected, &kdesvn; uses the top-most element of opened working copy, &eg;, the working copy path itself.
 </para>
 <para>
 This operation is always recursive, means, if selecting a folder &kdesvn; always send all changed items below it. When you setup that you want to review all items before commit inside the following dialog all items &kdesvn; would send are listed. There you may unmark items you don't want to send. In that case &kdesvn; sends all items alone, &eg;, not recursive. Or you may select items not versioned for add and commit (if them are not marked to be ignored). So you may see if there are newer items you forgot.
@@ -399,7 +399,7 @@ entry selected for retrieving logs before. Same for <guibutton>Diff revisions</g
 &quot;<literal>Annotate</literal>&quot; of course works only if item to log is a file.
 </para>
 <para>
-On all listentries (both lists) you have context menu enabled for some extra operations. In left list this is &quot;Set version as left side of diff&quot; (eg, beginning revision) and &quot;Set version as right side of diff&quot; (&eg;, end or target of diff, in unified the part marked with a &quot;<computeroutput>+++</computeroutput>&quot;). If you selected these revisions them are marked with some small arrows.
+On all listentries (both lists) you have context menu enabled for some extra operations. In left list this is &quot;Set version as left side of diff&quot; (&eg;, beginning revision) and &quot;Set version as right side of diff&quot; (&eg;, end or target of diff, in unified the part marked with a &quot;<computeroutput>+++</computeroutput>&quot;). If you selected these revisions them are marked with some small arrows.
 </para>
 </sect3>
 </sect2>

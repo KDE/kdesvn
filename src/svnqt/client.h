@@ -496,7 +496,7 @@ class Url;
      * set property in @a path no matter whether local or
      * repository
      *
-     * @param params svn::PropertiesParamter holding required values.
+     * @param params svn::PropertiesParameter holding required values.
      * Following is used:<br>
      * <ul>
      * <li> svn::PropertiesParameter::propertyName()

@@ -269,7 +269,7 @@ namespace svn
         }
 #if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR < 5) )
         Revision rev;
-        if (parameter.srcPath().size()>1 && !paramter.getAsChild())
+        if (parameter.srcPath().size()>1 && !parameter.getAsChild())
         {
             throw ClientException("Multiple sources not allowed");
         }
@@ -279,7 +279,7 @@ namespace svn
         for (size_t j=0;j<parameter.srcPath().size();++j)
         {
             _dest=parameter.destination();
-            if (paramter.asChild()) {
+            if (parameter.asChild()) {
                 sparameter.srcPath()[j].split(dir,base);
                 _dest.addComponent(base);
             }

@@ -1,5 +1,8 @@
-<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
-<kcfg>
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="kdesvnpartrc" />
   <include>qstring.h</include>
   <group name="general_items" >
@@ -103,7 +106,7 @@
       <default>true</default>
     </entry>
     <entry key="details_on_remote_listing" type="Bool" >
-      <label>Get detailed infos when making a remote listing</label>
+      <label>Get detailed information when making a remote listing</label>
       <default>false</default>
     </entry>
     <entry key="properties_on_remote_items" type="Bool">

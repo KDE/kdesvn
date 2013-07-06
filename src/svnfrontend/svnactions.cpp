@@ -703,7 +703,7 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
     if (recursive) {
         try {
             StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,"Details",
-                         i18n("Retrieving infos - hit Cancel for abort"));
+                         i18n("Retrieving information - hit Cancel for abort"));
             connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
             svn::InfoEntries e;
             entries = (m_Data->m_Svnclient->info(_what+
@@ -1437,7 +1437,7 @@ void SvnActions::makeUpdate(const QStringList&what,const svn::Revision&rev,svn::
     svn::Revisions ret;
     stopCheckUpdateThread();
     try {
-        StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,"Making update",
+        StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Making update"),
             i18n("Making update - hit Cancel for abort"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
         svn::UpdateParameter _params;

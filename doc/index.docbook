@@ -1967,7 +1967,7 @@ last state the working copy was updated to, not against the version in repositor
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Resolve recursive</guimenuitem>
 </menuchoice></term>
-<listitem><para>Mark conflicted items as not conflicted and removes associated files.</para></listitem>
+<listitem><para>Mark conflicted items as not conflicted and remove associated files.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1991,7 +1991,7 @@ last state the working copy was updated to, not against the version in repositor
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Cleanup</guimenuitem>
 </menuchoice></term>
-<listitem><para>Clean up the working copy and removes (commit-)locks if any</para></listitem>
+<listitem><para>Clean up the working copy and remove (commit-)locks if any</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -2223,7 +2223,7 @@ Appending a specific revision to an url will always made via &quot;?rev=&lt;revi
 <sect1>
 <title>Reporting bugs / Feedback</title>
 <para>
-  Bugreports and wishes may be filed on <ulink url="https://bugs.kde.org/">&kde; Bugtracking System</ulink>.<!-- questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>-->.
+  Bug reports and wishes may be filed on <ulink url="https://bugs.kde.org/">&kde; Bugtracking System</ulink>.<!-- questions about usage or any other feedback to <email>kdesvn@alwins-world.de</email>-->
 </para>
 <!--
 <para>
@@ -2242,6 +2242,7 @@ Program copyright 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail;
 </para>
 <para>
 Many thanks to contributors:
+</para>
 <itemizedlist>
 <listitem><para>Andreas Richter <email>ar@oszine.de</email> - for qt4 port of svnqt</para>
 </listitem>
@@ -2250,6 +2251,7 @@ Many thanks to contributors:
 <listitem><para>Bram Schoenmakers <email>bramschoenmakers@kde.nl</email> - for &kde;-specific hints, dutch translation, cleaning up my code.</para>
 </listitem>
 </itemizedlist>
+<para>
 And thanks to all other translators (I never thought that I get that fast such a lot of translations!) and for all of your positive and negative feedback. It helped a lot.
 </para>
 <para>

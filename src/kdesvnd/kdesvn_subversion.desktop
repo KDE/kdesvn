@@ -2,11 +2,19 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
 X-KDE-Submenu=Subversion (kdesvn)
+X-KDE-Submenu[ca]=Subversion (kdesvn)
+X-KDE-Submenu[pt]=Subversion (kdesvn)
+X-KDE-Submenu[uk]=Subversion (kdesvn)
+X-KDE-Submenu[x-test]=xxSubversion (kdesvn)xx
 X-KDE-GetActionMenu=org.kde.kded /modules/kdesvnd org.kde.kdesvnd getActionMenu
 Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Blame;CreatePatch;Export;Diff;Update;Commit;Checkoutto;Exportto;Tree;
 
 [Desktop Action Log]
 Name=Subversion log (last 100)
+Name[ca]=Registre de subversion (últims 100)
+Name[pt]=Histórico do Subversion (últimos 100)
+Name[uk]=Журнал Subversion (останні 100 записів)
+Name[x-test]=xxSubversion log (last 100)xx
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
@@ -18,101 +26,240 @@ Exec=kdesvn exec info %U
 
 [Desktop Action Add]
 Name=Add to Repository
+Name[ca]=Afegeix al repositori
+Name[nl]=Toevoegen aan repository
+Name[pt]=Adicionar ao Repositório
+Name[uk]=Додати до сховища
+Name[x-test]=xxAdd to Repositoryxx
 Icon=kdesvnadd
 Exec=kdesvn exec add %U
 
 [Desktop Action Addnew]
 Name=Check for unversioned items
+Name[ca]=Comprova per elements sense versió
+Name[pt]=Procurar por itens não-adicionados
+Name[uk]=Знайти елементи поза системою керування версіями
+Name[x-test]=xxCheck for unversioned itemsxx
 Icon=kdesvnaddrecursive
 Exec=kdesvn exec addnew %U
 
 [Desktop Action Delete]
 Name=Delete From Repository
+Name[ca]=Elimina del repositori
+Name[nl]=Verwijderen uit repository
+Name[pt]=Remover do Repositório
+Name[uk]=Вилучити зі сховища
+Name[x-test]=xxDelete From Repositoryxx
 Icon=kdesvndelete
 Exec=kdesvn exec rm %U
 
 [Desktop Action Revert]
 Name=Revert Local Changes
+Name[ca]=Reverteix els canvis locals
+Name[nl]=Lokale wijzigingen ongedaan maken
+Name[pt]=Reverter as Modificações Locais
+Name[uk]=Повернути локальні зміни
+Name[x-test]=xxRevert Local Changesxx
 Icon=kdesvnreverse
 Exec=kdesvn exec revert %U
 Comment=Remove any changes made locally. Warning - this cannot be undone.
+Comment[ca]=Elimina qualsevol canvi local. Avís: No es pot desfer.
+Comment[nl]=Lokale wijzigingen ongedaan maken. Let op: dit kan niet teruggedraaid worden.
+Comment[pt]=Remover as alterações que tenham sido feitas a nível local. Atenção - isto não pode ser anulado.
+Comment[uk]=Вилучити всі зміни, які було зроблено локально. Попередження: зміни буде вилучено назавжди.
+Comment[x-test]=xxRemove any changes made locally. Warning - this cannot be undone.xx
 
 [Desktop Action Rename]
 Name=Rename...
+Name[ca]=Reanomena...
+Name[nl]=Hernoemen...
+Name[pt]=Mudar o Nome...
+Name[uk]=Перейменувати…
+Name[x-test]=xxRename...xx
 Icon=kdesvnmove
 Exec=kdesvn exec mv %U
 Comment=Rename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.
+Comment[ca]=Reanomena un fitxer localment i en el repositori. Use-ho en comptes d'afegir i eliminar per a reanomenar un fitxer.
+Comment[nl]=Hernoem een bestand lokaal en in de repository. Gebruik dit bij voorkeur boven het verwijderen van een bestand en het toevoegen onder een andere naam.
+Comment[pt]=Muda o nome de um ficheiro a nível local e no repositório. Use isto em vez de adicionar e remover o ficheiro para mudar o nome.
+Comment[uk]=Перейменувати файл локально і в сховищі. Використовуйте замість додавання і вилучення файла, щоб його перейменувати.
+Comment[x-test]=xxRename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.xx
 
 [Desktop Action Import]
 Name=Import Repository
+Name[ca]=Importa un repositori
+Name[nl]=Repository importeren
+Name[pt]=Importar um Repositório
+Name[uk]=Імпортувати сховище
+Name[x-test]=xxImport Repositoryxx
 Icon=svn_import
 Exec=kio_svn_helper -i %U
 Comment=Put folder into an existing repository to put it under revision control.
+Comment[ca]=Situa la carpeta en un repositori existent per a posar-la sota el control de revisions.
+Comment[nl]=Plaats een map in een bestaande repository zodat het onder het versiebeheer system valt.
+Comment[pt]=Coloca a pasta num repositório existente para a colocar sob controlo de versões.
+Comment[uk]=Вставити теку до наявного сховища, щоб уможливити для неї керування версіями.
+Comment[x-test]=xxPut folder into an existing repository to put it under revision control.xx
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
+Name[ca]=Obtén del repositori...
+Name[nl]=Repository uitchecken...
+Name[pt]=Obter do Repositório...
+Name[uk]=Взяти зі сховища…
+Name[x-test]=xxCheckout From Repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
+Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
+Comment[pt]=Obtém todos os ficheiros de um repositório existente para esta pasta.
+Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
+Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 
 [Desktop Action Switch]
 Name=Switch...
+Name[ca]=Canvia...
+Name[nl]=Omzetten (switch)...
+Name[pt]=Mudar...
+Name[uk]=Перемкнути…
+Name[x-test]=xxSwitch...xx
 Icon=kdesvnswitch
 Comment=Switch given working copy to another branch
+Comment[ca]=Canvia una còpia de treball indicada a una altra branca
+Comment[nl]=Opgegeven werkkopie wisselen naar andere branch
+Comment[pt]=Muda a cópia de trabalho actual para outra ramificação
+Comment[uk]=Перемкнути поточну робочу копію на іншу гілку
+Comment[x-test]=xxSwitch given working copy to another branchxx
 Exec=kdesvn exec switch %U
 
 [Desktop Action Merge]
 Name=Merge...
+Name[ca]=Fusiona...
+Name[nl]=Samenvoegen...
+Name[pt]=Reunir...
+Name[uk]=Об’єднати…
+Name[x-test]=xxMerge...xx
 Icon=kdesvnmerge
 Comment=Merge changes between this and another branch
+Comment[ca]=Fusiona els canvis entre aquesta i una altra branca
+Comment[nl]=Deze en een andere tak samenvoegen
+Comment[pt]=Junta as modificações entre esta ramificação e outra
+Comment[uk]=Об’єднати зміни в цій та іншій гілках
+Comment[x-test]=xxMerge changes between this and another branchxx
 Exec=kio_svn_helper -m %U
 
 [Desktop Action Blame]
 Name=Blame...
+Name[ca]=Responsable...
+Name[nl]=Annotatie...
+Name[pt]=Culpar...
+Name[uk]=Визначити автора…
+Name[x-test]=xxBlame...xx
 Icon=kdesvnblame
 Comment=See who wrote each line of the file and in what revision
+Comment[ca]=Veu qui va escriure cada línia del fitxer i en quina revisió
+Comment[nl]=Bekijk wie welke regel van het bestand geschreven heeft en in welke revisie
+Comment[pt]=Vê quem escreveu uma dada linha no ficheiro e em que versão
+Comment[uk]=Подивитись, хто написав кожний рядок файла і в якій модифікації
+Comment[x-test]=xxSee who wrote each line of the file and in what revisionxx
 Exec=kdesvn exec blame %U
 
 [Desktop Action CreatePatch]
 Name=Create Patch...
+Name[ca]=Crea un pedaç...
+Name[nl]=Patch aanmaken...
+Name[pt]=Criar um 'Patch'...
+Name[uk]=Створити латку…
+Name[x-test]=xxCreate Patch...xx
 Exec=kio_svn_helper -p %U
 
 [Desktop Action Export]
 Name=Export...
+Name[ca]=Exporta...
+Name[nl]=Exporteren...
+Name[pt]=Exportar...
+Name[uk]=Експортувати…
+Name[x-test]=xxExport...xx
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
+Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
+Comment[pt]=Obtém uma cópia sem controlo de versões de uma árvore do repositório
+Comment[uk]=Взяти зі сховища копію дерева без версій
+Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 
 [Desktop Action Diff]
 Name=Diff (local)
+Name[ca]=Diff (local)
+Name[nl]=Diff (lokaal)
+Name[pt]=Diferenças (local)
+Name[uk]=Розбіжності (локальні)
+Name[x-test]=xxDiff (local)xx
 Icon=kdesvndiff
 Exec=kdesvn exec diff %U
 Comment=Show local changes since last update
+Comment[ca]=Mostra els canvis locals des de l'última actualització
+Comment[nl]=Lokale wijzigingen sinds de laatste update tonen
+Comment[pt]=Mostra as modificações locais desde a última actualização
+Comment[uk]=Показати локальні зміни з часу останнього оновлення
+Comment[x-test]=xxShow local changes since last updatexx
 
 [Desktop Action Update]
 Name=KDESvn Update
+Name[ca]=KDESvn Actualitza
+Name[pt]=KDESvn Actualizar
+Name[uk]=Оновлення KDESvn
+Name[x-test]=xxKDESvn Updatexx
 Icon=kdesvnupdate
 Exec=kdesvn exec update %U
 
 [Desktop Action Commit]
 Name=KDESvn Commit
+Name[ca]=KDESvn Publica
+Name[pt]=KDESvn Enviar
+Name[uk]=Надсилання KDESvn
+Name[x-test]=xxKDESvn Commitxx
 Icon=kdesvncommit
 Exec=kdesvn exec commit %U
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
+Name[ca]=Obtén des d'un repositori...
+Name[pt]=Obter de um repositório...
+Name[uk]=Взяти зі сховища…
+Name[x-test]=xxCheckout from a repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
+Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
+Comment[pt]=Obtém todos os ficheiros de um repositório existente para esta pasta.
+Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
+Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
+Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
+Comment[pt]=Obtém uma cópia sem controlo de versões de uma árvore do repositório
+Comment[uk]=Взяти зі сховища копію дерева без версій
+Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 
 [Desktop Action Tree]
 Name=Display revision tree
+Name[ca]=Mostra l'arbre de revisions
+Name[pt]=Mostrar a árvore de versões
+Name[uk]=Показати дерево модифікацій
+Name[x-test]=xxDisplay revision treexx
 Icon=kdesvnlog
 Exec=kdesvn exec tree %U
 Comment=Show complete revision tree
+Comment[ca]=Mostra l'arbre de revisions complet
+Comment[pt]=Mostrar a árvore de versões completa
+Comment[uk]=Показати повне дерево модифікацій
+Comment[x-test]=xxShow complete revision treexx

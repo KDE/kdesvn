@@ -7,40 +7,86 @@ Actions=Checkout;Export;Update;Commit;Log;Exportto;Checkoutto;
 
 [Desktop Action Log]
 Name=kdesvn log (last 100)
+Name[ca]=Registre del kdesvn (últims 100)
+Name[pt]=histórico do kdesvn (últimos 100)
+Name[uk]=Журнал kdesvn (останні 100 записів)
+Name[x-test]=xxkdesvn log (last 100)xx
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
+Name[ca]=Obtén del repositori...
+Name[nl]=Repository uitchecken...
+Name[pt]=Obter do Repositório...
+Name[uk]=Взяти зі сховища…
+Name[x-test]=xxCheckout From Repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
+Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
+Comment[pt]=Obtém todos os ficheiros de um repositório existente para esta pasta.
+Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
+Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 
 [Desktop Action Export]
 Name=Export...
+Name[ca]=Exporta...
+Name[nl]=Exporteren...
+Name[pt]=Exportar...
+Name[uk]=Експортувати…
+Name[x-test]=xxExport...xx
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
+Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
+Comment[pt]=Obtém uma cópia sem controlo de versões de uma árvore do repositório
+Comment[uk]=Взяти зі сховища копію дерева без версій
+Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 
 [Desktop Action Update]
 Name=Update (Kdesvn)
+Name[ca]=Actualitza (Kdesvn)
+Name[pt]=Actualizar (Kdesvn)
+Name[uk]=Оновити (Kdesvn)
+Name[x-test]=xxUpdate (Kdesvn)xx
 Icon=kdesvnupdate
 Exec=kdesvn exec update %U
 
 [Desktop Action Commit]
 Name=Commit (Kdesvn)
+Name[ca]=Publica (Kdesvn)
+Name[pt]=Enviar (Kdesvn)
+Name[uk]=Надіслати (Kdesvn)
+Name[x-test]=xxCommit (Kdesvn)xx
 Icon=kdesvncommit
 Exec=kdesvn exec commit %U
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
+Name[ca]=Obtén des d'un repositori...
+Name[pt]=Obter de um repositório...
+Name[uk]=Взяти зі сховища…
+Name[x-test]=xxCheckout from a repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
+Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
+Comment[pt]=Obtém todos os ficheiros de um repositório existente para esta pasta.
+Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
+Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
+Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
+Comment[pt]=Obtém uma cópia sem controlo de versões de uma árvore do repositório
+Comment[uk]=Взяти зі сховища копію дерева без версій
+Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx

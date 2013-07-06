@@ -1,11 +1,23 @@
 [GLOBAL]
 Iconname=kdesvn
 Comment=Kdesvn notification
+Comment[ca]=Notificació del Kdesvn
+Comment[pt]=Notificação do Kdesvn
+Comment[uk]=Сповіщення Kdesvn
+Comment[x-test]=xxKdesvn notificationxx
 
 [Event/kdesvn-kio]
 Name=Kdesvn KIO Notification
+Name[ca]=Notificació KIO del Kdesvn
+Name[pt]=Notificação do KIO do Kdesvn
+Name[uk]=Сповіщення KIO Kdesvn
+Name[x-test]=xxKdesvn KIO Notificationxx
 Action=Popup
 
 [Event/kdesvn-task]
 Name=Kdesvn task notification
+Name[ca]=Notificació de tasca del Kdesvn
+Name[pt]=Notificação da tarefa do Kdesvn
+Name[uk]=Сповіщення щодо завдання kdesvn
+Name[x-test]=xxKdesvn task notificationxx
 Action=Popup

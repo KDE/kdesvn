@@ -98,8 +98,8 @@ Q_SIGNALS:
 
 protected:
     static const int smax_actionstring;
-    static const QString action_strings[];
-    static const QString notify_state_strings[];
+    static const char * action_strings[];
+    static const char * notify_state_strings[];
     CContextListenerData*m_Data;
 
 private:

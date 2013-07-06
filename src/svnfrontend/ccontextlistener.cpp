@@ -61,7 +61,7 @@ CContextListenerData::~CContextListenerData()
 
 const int CContextListener::smax_actionstring=svn_wc_notify_failed_unlock+1;
 
-const QString CContextListener::action_strings[]={
+const char * CContextListener::action_strings[]={
     I18N_NOOP("Add to revision control"),
     I18N_NOOP("Copy"),
     I18N_NOOP("Delete"),
@@ -75,28 +75,28 @@ const QString CContextListener::action_strings[]={
     I18N_NOOP("Update"), //svn_wc_notify_update_update
     I18N_NOOP("Update complete"),
     I18N_NOOP("Update external module"),
-    QString(), // status completed - will not send is just noisy
+    "", // status completed - will not send is just noisy
     I18N_NOOP("Status on external"), //svn_wc_notify_status_external
     I18N_NOOP("Commit Modified"),
     I18N_NOOP("Commit Added"),
     I18N_NOOP("Commit Deleted"),
     I18N_NOOP("Commit Replaced"),
-    QString(), //tx delta -> making ticks instead
-    QString(), //svn_wc_notify_blame_revision - using ticks
+    "", //tx delta -> making ticks instead
+    "", //svn_wc_notify_blame_revision - using ticks
     I18N_NOOP("Locking"),
     I18N_NOOP("Unlocked"),
     I18N_NOOP("Lock failed"),
     I18N_NOOP("Unlock failed")
 };
 
-const QString CContextListener::notify_state_strings[]={
-    QString(), // = 0
-    QString(),
+const char * CContextListener::notify_state_strings[]={
+    "", // = 0
+    "",
     I18N_NOOP("unchanged"),
     I18N_NOOP("item wasn't present"),
     I18N_NOOP("unversioned item obstructed work"),
     // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
-    QString(),
+    "",
     I18N_NOOP("Modified state had mods merged in."),
     I18N_NOOP("Modified state got conflicting mods.")
 };
@@ -106,13 +106,13 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
     if (action>=smax_actionstring||action<0) {
         return QString();
     }
-    return action_strings[action].isEmpty() ? QString(): /*i18n(*/action_strings[action]/*)*/;
+    return (action_strings[action] == NULL) ? QString(): i18n(action_strings[action]);
 }
 
 QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 {
     if (state > svn_wc_notify_state_conflicted || state<0) return QString();
-    return notify_state_strings[state].isEmpty()?QString():/*i18n(*/notify_state_strings[state]/*)*/;
+    return (notify_state_strings[state] == NULL) ? QString(): i18n(notify_state_strings[state]);
 }
 
 CContextListener::CContextListener(QObject *parent, const char *name)

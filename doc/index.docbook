@@ -128,7 +128,7 @@ A flat copy of a repository on local filesystem. This is used like any normal fi
 RCS-information you can read with clients like &kdesvn;.
 </para>
 <para>
-Remember that subversion doesn't know something about KIO, so a working copy must reside in an area where it may reached without any specific protocol, &eg; &quot;fish://&quot; or such isn't possible.
+  Remember that subversion does not know anything about KIO, so a working copy must reside in an area where it may reached without any specific protocol, &eg; <quote>fish://</quote> or such is not possible.
 </para>
 </listitem>
 </varlistentry>
@@ -137,8 +137,8 @@ Remember that subversion doesn't know something about KIO, so a working copy mus
 <listitem><para>
 WebDav is a protocol which let you modify files on a remote webserver. Subversion is a special kind of WebDAV when repositories are accessed
 via webserver. In normal use this is read-only. With special configurations you may get a read-write enabled WebDAV which you may access via
-specialized browser. &kdesvn; is NOT a webdav-client, but &konqueror; is via the &quot;webdav://&quot; protocol. But with &kdesvn; you
-may browse through the version tree of a repository (via &quot;http://&quot;)
+specialized browser. &kdesvn; is NOT a webdav-client, but &konqueror; is via the <quote>webdav://</quote> protocol. But with &kdesvn; you
+may browse through the version tree of a repository (via <quote>http://</quote>)
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -245,7 +245,7 @@ First of all you must create a working copy of your repository. For that select
 Select and/or create a local folder, where the working copy should reside.
 </para>
 <para>
-Last but not least, the revision to checkout. Mostly that should be &quot;HEAD&quot;. This ensures that the last stored version
+Last but not least, the revision to checkout. Mostly that should be <quote>HEAD</quote>. This ensures that the last stored version
 is the referenced version.
 </para>
 <para>

@@ -207,27 +207,27 @@ Subversion over ssh. See <link linkend="faq">FAQ</link> for details about some s
 <term>file</term>
 <listitem><para>
 Direct repository access. &kdesvn; checks if a given path is a repository or a working copy and opens it in the right mode. For subversion
-<prompt>file:///dir</prompt> and <prompt>/dir</prompt> is not the same!
+  <filename class="directory">file:///dir</filename> and <filename class="directory">/dir</filename> is not the same!
 </para></listitem>
 </varlistentry>
 </variablelist>
 </para>
 <para>
-This list may used for urls given for <link linkend="kdesvn-commandline">command line</link>, too.
+This list may be used for &URL;s given for <link linkend="kdesvn-commandline">command line</link>, too.
 </para>
 </sect1>
 <sect1 id="first_steps">
 <title>Beginning with subversion and &kdesvn;</title>
 <para>
-This section is mostly for beginners not familiar with subversion and explains how subversion and/or RCS works.
+  This section is mostly for beginners not familiar with subversion and explains how subversion and/or revision control systems (<acronym>RCS</acronym>) works.
 </para>
 
 <sect2>
 <title>Creating a working copy</title>
 <caution>
 <para>
-Working copies MUST be accessible via local paths. Subversion doesn't know something about pseudo file systems like
-<prompt>smb://</prompt> or <prompt>fish://</prompt>. &kdesvn; translates some of them if possible (like <prompt>system:/home</prompt>) but it isn't possible over a network.
+Working copies MUST be accessible via local paths. Subversion does not know anything about pseudo file systems like
+<filename class="directory">smb://</filename> or <filename class="directory">fish://</filename>. &kdesvn; translates some of them if possible (like <filename class="directory">system:/home</filename>) but it is not possible over a network.
 </para>
 </caution>
 <para>
@@ -238,8 +238,8 @@ First of all you must create a working copy of your repository. For that select
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Checkout a repository</guimenuitem>
 </menuchoice>. Inside the following dialog you must select the &URL; of the repository you want to use, &eg;, something like
-<prompt>http://localhost/repos/myproject</prompt>. Subfolders of a repository are possible, too, &eg;,
-<prompt>http://localhost/repos/myproject/trunk</prompt> or similar.
+<literal>http://localhost/repos/myproject</literal>. Subfolders of a repository are possible, too, &eg;,
+<literal>http://localhost/repos/myproject/trunk</literal> or similar.
 </para>
 <para>
 Select and/or create a local folder, where the working copy should reside.
@@ -382,7 +382,7 @@ when one or none item is marked in overview. Depending on your settings (see <xr
 <sect3  id="logdisplay-dlg">
 <title>The log display dialog</title>
 <para>
-On left side you see the list of logentries &kdesvn; retrieved. The log message is stripped-down to one line to fit. The full logmessage appears in right upper window when marking an entry. In the right lower window you'll the list of changed files. This windows ONLY appears if this list is fetched depending on your settings.
+  On left side you see the list of log entries &kdesvn; retrieved. The log message is stripped-down to one line to fit. The full log message appears in right upper window when marking an entry. In the right lower window you will see the list of changed files. This windows <emphasis>only</emphasis> appears if this list is fetched depending on your settings.
 </para>
 <para>
 With the buttons above you may select another range of logs to display.
@@ -396,10 +396,10 @@ The buttons below displays always work on item selected for log, not on item sel
 entry selected for retrieving logs before. Same for <guibutton>Diff revisions</guibutton>.
 </para>
 <para>
-&quot;<literal>Annotate</literal>&quot; of course works only if item to log is a file.
+<guibutton>Annotate</guibutton> of course works only if item to log is a file.
 </para>
 <para>
-On all list entries (both lists) you have context menu enabled for some extra operations. In left list this is &quot;Set version as left side of diff&quot; (&eg;, beginning revision) and &quot;Set version as right side of diff&quot; (&eg;, end or target of diff, in unified the part marked with a &quot;<computeroutput>+++</computeroutput>&quot;). If you selected these revisions them are marked with some small arrows.
+  On all list entries (both lists) you have context menu enabled for some extra operations. In left list this is <guimenuitem>Set version as left side of diff</guimenuitem> (&eg;, beginning revision) and <guimenuitem>Set version as right side of diff</guimenuitem> (&eg;, end or target of diff, in unified the part marked with a <computeroutput>+++</computeroutput>). If you selected these revisions them are marked with some small arrows.
 </para>
 </sect3>
 </sect2>
@@ -468,7 +468,7 @@ Open repository or working copy, mark item you want to merge and select
 <guisubmenu>General</guisubmenu>
 <guisubmenu>Merge</guisubmenu>
 </menuchoice>.
-  Enter in the following dialog the values wanted. If opened from repository, source 1 and source 2 are filled, when open from within working copy, target is filled with current selected item. The handling of this parameter is a little bit different between using the internal diff of subversion or an external merge-program like <application>kdiff3</application>. The target must ALWAYS a local folder or file. You may switch between external or internal merge with the check box <guilabel>Use external merge</guilabel>.
+  Enter in the following dialog the values wanted. If opened from repository, source 1 and source 2 are filled, when open from within working copy, target is filled with current selected item. The handling of this parameter is a little bit different between using the internal diff of subversion or an external merge-program like &kdiff3;. The target must ALWAYS a local folder or file. You may switch between external or internal merge with the check box <guilabel>Use external merge</guilabel>.
 </para>
 <sect3>
 <title>Internal merge</title>
@@ -583,32 +583,41 @@ subversion GUI. This moment &kdesvn; doesn't support extra fields in commit box 
 </thead>
 <tbody>
 <row>
-<entry><prompt>bugtraq:url</prompt></entry>
-<entry>Holds the url to bugtracker. It has to contain the <prompt>%BUGID%</prompt> marker.</entry>
+<entry><literal>bugtraq:url</literal></entry>
+<entry>Holds the &URL; to bugtracker. It has to contain the <literal>%BUGID%</literal> marker.</entry>
 <entry>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
 </row>
 
 <row>
-<entry><prompt>bugtraq:logregex</prompt></entry>
+<entry><literal>bugtraq:logregex</literal></entry>
 <entry>
 <para>Contains one or two regular expressions, separated by a newline.</para>
-<para>If only one expression is set, then the bare bug ID's must be matched in the groups of the regex string. If two expressions are set, then the first expression is used to find a string which relates to the bug ID but may contain more than just the bug ID (&eg; "Issue #123" or "resolves issue 123"). The second expression is then used to extract the bare bug ID from the string extracted with the first expression.</para>
+<para>If only one expression is set, then the bare bug ID's must be matched in the groups of the regex string. If two expressions are set, then the first expression is used to find a string which relates to the bug ID but may contain more than just the bug ID (&eg; <quote>Issue #123</quote> or <quote>resolves issue 123</quote>). The second expression is then used to extract the bare bug ID from the string extracted with the first expression.</para>
 <para>Please keep care about not wanted spaces after the regular expression and don't forget the brackets around the number description.</para>
 </entry>
 <entry>
-<para>Single (useable with TRAC):
+<para>
+  Single (usable with TRAC):
+</para>
 <programlisting>
 #(\d+)
 </programlisting>
-Now all numbers like <prompt>#190</prompt> will parsed and translated to an url in logoutput.</para>
+<para>
+  Now all numbers like <replaceable>#190</replaceable> will parsed and translated to an &URL; in log output.
+</para>
 <para>
 Two expressions:
+</para>
 <programlisting>
 [Ii]ssue #?(\d+)(,? ?#(\d+))*
 (\d+)
 </programlisting>
-Remember: Keep care of white spaces after the <prompt>(\d+)</prompt>! This is one of the most errors while this expressions doesn't match!
-</para>
+<important>
+  <title>Remember</title>
+  <para>
+    Keep care of white spaces after the <literal>(\d+)</literal>! This is one of the most common errors causing these expressions do not match!
+  </para>
+</important>
 </entry>
 </row>
 </tbody>
@@ -616,7 +625,7 @@ Remember: Keep care of white spaces after the <prompt>(\d+)</prompt>! This is on
 </table>
 </para>
 <para>
-On local opened repositories (&eg;, <prompt>file://</prompt>-Protocol) and on working copies this properties will searched upward from opened folder until found or the subversion top level is reached. On repositories opened via network (all except <prompt>file://</prompt> protocol) it is only searched on opened folder itself.
+On local opened repositories (&eg;, <filename class="directory">file://</filename> protocol) and on working copies this properties will searched upward from opened folder until found or the subversion top level is reached. On repositories opened via network (all except <filename class="directory">file://</filename> protocol) it is only searched on opened folder itself.
 </para>
 <para>
 Support for multiple sets of this properties may follow later, (&eg;, in subfolder extra values for other tracker &etc;) but in most cases evaluating single tracker links should be enough.
@@ -632,23 +641,32 @@ The revision tree try display the whole history of an item so user may get a bet
 <sect2>
 <title>Requirements</title>
 <para>
-The revision tree is generated via <prompt>dot</prompt>. So for a working revision tree the <prompt>graphviz</prompt> package must installed.
+The revision tree is generated via <application>dot</application>. So for a working revision tree the <application>graphviz</application> package must installed.
 </para>
 </sect2>
 </sect1>
 
 <sect1 id="logcache-descr"> 
 <title>Internal log cache</title>
-<para>&kdesvn; may use an internal log cache for some operations. Mostly it is used for <link linkend="revision-tree">the revision tree</link> but when viewing simplified log in offline mode, too. The caches are organized as sqlite databases stored in <prompt>$HOME/.sqvnqt/logcache</prompt>. Every numbered file is a storage for a different repository.<warning><para>The databases may get large! So you may disable automatic update of log cache in settings.</para></warning>You may simply remove a database, than no cached log will given back for that repository (and no revision tree!) but when you don't disable automatic filling the cache on next open this repository or an associated working copy of it the cache will refilled again.
+<para>
+  &kdesvn; may use an internal log cache for some operations. Mostly it is used for <link linkend="revision-tree">the revision tree</link> but when viewing simplified log in offline mode, too. The caches are organized as <application>SQLite</application> databases stored in <filename class="directory">$HOME/.sqvnqt/logcache</filename>. Every numbered file is a storage for a different repository.
+</para>
+<warning>
+  <para>
+    The databases may get large! So you may disable automatic update of log cache in settings.
+  </para>
+</warning>
+<para>
+  You may simply remove a database, than no cached log will given back for that repository (and no revision tree!) but when you do not disable automatic filling the cache on next open this repository or an associated working copy of it the cache will refilled again.
 </para>
 <sect2>
 <title>Offline mode</title>
-<para>&kdesvn; may work without network access, &eg;, you may switch that no network access is allowed. This may useful when working without network like on notebooks. In such cases &kdesvn; always get the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <prompt>&quot;Log follows node changes&quot;</prompt> is set.</para>
+<para>&kdesvn; may work without network access, &eg;, you may switch that no network access is allowed. This may useful when working without network like on notebooks. In such cases &kdesvn; always get the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <guilabel>Log follows node changes</guilabel> is set.</para>
 </sect2>
 <sect2>
 <title>Log cache and revision tree</title>
 <para>
-The revision tree will only use the log cache 'cause otherwise it must get always the logs again. It will NOT refresh the log cache (but this may changed in later releases).
+  The revision tree will only use the log cache because otherwise it must get always the logs again. It will <emphasis>not</emphasis> refresh the log cache (but this may changed in later releases).
 </para>
 </sect2>
 </sect1>
@@ -656,7 +674,7 @@ The revision tree will only use the log cache 'cause otherwise it must get alway
 <sect1 id="overlay-meaning">
 <title>Meaning of icon overlays</title>
 <para>
-Entries may be marked with overlayed icons when not in &quot;normal&quot; state.
+  Entries may be marked with overlayed icons when not in <quote>normal</quote> state.
 <variablelist>
 
 <varlistentry>
@@ -773,7 +791,7 @@ This entry (or entry below if folder) got conflicts to resolve with last update.
 <sect1 id="kdesvn-passwords">
 <title>&kdesvn; and passwords</title>
 <para>
-&kdesvn;/subversion is able to save passwords. Saving passwords is always a security risk, but may let a graphical frontend more useable.
+&kdesvn;/subversion is able to save passwords. Saving passwords is always a security risk, but may let a graphical frontend more usable.
 </para>
 <sect2>
 <title>Not saving passwords</title>
@@ -790,7 +808,7 @@ Secured password storage used by a lot of &kde; programs like &kmail; and &konqu
 <sect2>
 <title>Saving to subversion's own password storage</title>
 <para>
-This is not recommended 'cause the passwords are stored as clear text! Not believing? Take a look into the files in <prompt>~/.subversion/auth/svn.simple</prompt>. You should only use this if you're using frequently other clients than &kdesvn; like rapidsvn or esvn or the original svn command line client. If you're using the command line client mostly for checkouts or updates which doesn't require a password and &kdesvn; for commit/move/copy you should use &kwallet; instead.
+  This is not recommended 'cause the passwords are stored as clear text! Not believing? Take a look into the files in <filename class="directory">~/.subversion/auth/svn.simple</filename>. You should only use this if you are frequently using other clients than &kdesvn; like <application>rapidsvn</application> or <application>esvn</application> or the original <application>svn</application> command line client. If you're using the command line client mostly for checkouts or updates which doesn't require a password and &kdesvn; for commit/move/copy you should use &kwallet; instead.
 </para>
 </sect2>
 <sect2>
@@ -805,7 +823,7 @@ You may activate an internal password cache which will hold passwords as long &k
 When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote machine and repository. When want to store you must using the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your public ssh-key on the target, &eg;, the repository system. SSH passwords will never handled by subversion passwords storage or &kwallet; or internal password cache.
 </para>
 <para>
-If you don't want asked for the password of you ssh-key you may use the <prompt>ssh-agent</prompt>, with selecting the menu
+If you don't want asked for the password of you ssh-key you may use the <application>ssh-agent</application>, with selecting the menu
 <menuchoice><guimenu>
 Subversion
 </guimenu>
@@ -840,7 +858,7 @@ These protocols are designed only for repositories, not for working copies. E.g.
 Working copies may browsed with &konqueror;.
 </para>
 <para>
-For browsing at a specific revision you may append the query <link linkend="revision-syntax">&quot;?rev=&lt;revision&gt;&quot;</link> to the url.
+For browsing at a specific revision you may append the query <link linkend="revision-syntax">&quot;?rev=&lt;revision&gt;&quot;</link> to the &URL;.
 </para>
 </listitem>
 </varlistentry>
@@ -897,7 +915,7 @@ KIO::ksvn::special knows the following operations, these are made almost equal i
 
 <thead>
 <row>
-<entry>Name&#047;command</entry>
+<entry>Command name</entry>
 <entry>Numeric id</entry>
 <entry>Parameter list</entry>
 <entry>Implemented in the current version?</entry>
@@ -925,7 +943,7 @@ http://server/repos/project/trunk, target /home/user/proj/ then the contents of 
 <row>
 <entry>Update</entry>
 <entry>2</entry>
-<entry><para>KURL url,int revnum, QString revstring</para>
+<entry><para>KURL url, int revnum, QString revstring</para>
 <para>
 If revnum &lt; 0 the revstring is parsed.
 Format of revstring is described in <link linkend="revision-syntax">Appendix</link>.
@@ -948,7 +966,7 @@ Format of revstring is described in <link linkend="revision-syntax">Appendix</li
 <entry>4</entry>
 <entry>
 <para>
-int startrevnumber,QString startrevstring,int endrevnumber,QString endrevstring,KURL::List
+int startrevnumber, QString startrevstring, int endrevnumber, QString endrevstring, KURL::List
 </para>
 <para>
 Use this with care - this may produce a lot of data.
@@ -990,7 +1008,7 @@ Use this with care - this may produce a lot of data.
 <row>
 <entry>Status</entry>
 <entry>9</entry>
-<entry><para>KURL item,bool checkRepos, bool recurse</para>
+<entry><para>KURL item, bool checkRepos, bool recurse</para>
 <para>item - the item check info about, checkRepos - check if there are newer versions in repository, recurse - check recursive or not.</para>
 </entry>
 <entry>Yes</entry>
@@ -1013,7 +1031,7 @@ Use this with care - this may produce a lot of data.
 <row>
 <entry>Switch</entry>
 <entry>12</entry>
-<entry>KURL working_copy_path,KURL new_repository_url,bool recursive,int revnumber, QString revkind</entry>
+<entry>KURL working_copy_path, KURL new_repository_url, bool recursive,int revnumber, QString revkind</entry>
 <entry>Yes</entry>
 </row>
 
@@ -1064,7 +1082,7 @@ Return values may given via metadata, see apidoc for details.
 
 <row>
 <entry>kind</entry>
-<entry>kind of item (mostly directory or file)</entry>
+<entry>kind of item (mostly folder or file)</entry>
 </row>
 
 <row>
@@ -1098,11 +1116,11 @@ Return values may given via metadata, see apidoc for details.
 </row>
 <row>
 <entry>loggedcopyfrompath</entry>
-<entry>If copied from which path? (may empty)</entry>
+<entry>If copied from which path? (may be empty)</entry>
 </row>
 <row>
 <entry>loggedcopyfromrevision</entry>
-<entry>If copied at which revision? (may &lt; 0)</entry>
+<entry>If copied at which revision? (may be &lt; 0)</entry>
 </row>
 <row>
 <entry>loggedpath</entry>
@@ -1141,7 +1159,7 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 <sect1 id="kdesvn-command-list">
 <title>Command list</title>
 <para>
-  If in following overview as possible parameter <option>-r <replaceable>revision</replaceable></option> is given, this revision may set as <userinput><replaceable>url</replaceable>?rev=<replaceable>the-revision</replaceable></userinput>.
+  If in following overview as possible parameter <option>-r <replaceable>revision</replaceable></option> is given, this revision may be set as <userinput><replaceable>url</replaceable>?rev=<replaceable>the-revision</replaceable></userinput>.
 <table id="svn-commands-table">
 <title>Subversion commands</title>
 <tgroup cols="3">
@@ -1232,7 +1250,7 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 </row>
 <row>
 <entry>add</entry>
-<entry>add url to working copy. url must belong to a working copy (its not an import!)</entry>
+<entry>add &URL; to working copy. &URL; must belong to a working copy (its not an import!)</entry>
 <entry></entry>
 </row>
 <row>
@@ -1242,7 +1260,7 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 </row>
 <row>
 <entry>checknew (or addnew)</entry>
-<entry>check in given url for new, unversioned items and add them to working copy if wanted.</entry>
+<entry>check in given &URL; for new, unversioned items and add them to working copy if wanted.</entry>
 <entry></entry>
 </row>
 <row>
@@ -1283,28 +1301,28 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 </thead>
 <tbody>
 <row>
-<entry>-r</entry>
-<entry><prompt>revision</prompt> or <prompt>startrev:endrev</prompt></entry>
+  <entry><option>-r</option></entry>
+<entry><replaceable>revision</replaceable> or <replaceable>startrev:endrev</replaceable></entry>
 <entry>all except commit</entry>
 </row>
 <row>
-<entry>-R</entry>
+  <entry><option>-R</option></entry>
 <entry>(none)</entry>
 <entry>all except commit</entry>
 </row>
 <row>
-<entry><prompt>-o</prompt></entry>
-<entry><prompt>&lt;filename&gt;</prompt></entry>
+<entry><option>-o</option></entry>
+<entry><replaceable>filename</replaceable></entry>
 <entry>get</entry>
 </row>
 <row>
-<entry><prompt>-l</prompt></entry>
-<entry><prompt>&lt;number&gt;</prompt></entry>
+<entry><option>-l</option></entry>
+<entry><replaceable>number</replaceable></entry>
 <entry>log</entry>
 </row>
 <row>
-<entry><prompt>-f</prompt></entry>
-<entry><prompt></prompt></entry>
+<entry><option>-f</option></entry>
+<entry>(none)</entry>
 <entry>(un-)lock</entry>
 </row>
 
@@ -1314,9 +1332,9 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 
 </para>
 <sect2>
-<title>The &quot;log&quot; command</title>
+  <title>The <quote>log</quote> command</title>
 <para>
-Log command displays a dialog containing the log of the given url. With subversion 1.2 or above it accepts a limit &eg; how many entries it has to display.
+Log command displays a dialog containing the log of the given &URL;. With subversion 1.2 or above it accepts a limit &eg; how many entries it has to display.
 </para>
 <para>
 Inside that dialog you may select log entries and get the differences between them.
@@ -1333,8 +1351,7 @@ the first 20 entries.</para>
 <sect2>
 <title>The &quot;diff&quot; command</title>
 <para>
-You get differences between revisions of an item or between to items inside same working copy or repository. When diff'ing revisions of an item that revisions
-may be given as <prompt>-r STARTREV:ENDREV</prompt>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
+You get differences between revisions of an item or between to items inside same working copy or repository. When diff'ing revisions of an item, revisions may be given as <option>-r <replaceable>STARTREV</replaceable>:<replaceable>ENDREV</replaceable></option>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
 <example>
 <title>Print difference against repository, &eg; local changes</title>
 <programlisting>
@@ -1349,7 +1366,7 @@ kdesvn exec diff -r 21:20 myfile.c
 </example>
 </para>
 <para>
-When diffing two items revisions may be appended to url of items. &eg;:
+When diffing two items revisions may be appended to &URL; of items. &eg;:
 <programlisting>http://server/path/item?rev=HEAD</programlisting>
 <example>
 <title>Diffing two tagged versions</title>
@@ -1418,7 +1435,7 @@ Setting may changed from the setup dialog. Them are separated into some subdialo
 </row>
 <row>
 <entry>Start fill log cache on open</entry>
-<entry>If set &kdesvn; start (re-)filling the log cache when open a repository or working copy if repository url is not assigned local (<filename role="directory">file://</filename>)</entry>
+<entry>If set &kdesvn; start (re-)filling the log cache when open a repository or working copy if repository &URL; is not assigned local (<filename class="directory">file://</filename>)</entry>
 </row>
 <row>
   <entry>Check if items has <quote>svn:needs-lock</quote> set</entry>
@@ -1554,8 +1571,7 @@ cleans up after closing external program or closing itself.
 <sect2>
 <title>External merge program</title>
 <para>
-Setup the program and options for using when subversions builtin merge isn't wanted. The default is <prompt>kdiff3 %s1 %s2 %t</prompt>. The order of substitution variables isn't important, and them may there more than once, &eg; like <prompt>kdiff3 -o %t %s1 %s2 %t</prompt>. This stuff is only tested with &quot;meld&quot;
- and &quot;kdiff3&quot;. Think about that external programs mostly doesn't know any about subversion ignore-parameter so them may show lot more than expected.
+  Setup the program and options for using when subversions builtin merge isn't wanted. The default is <command>kdiff3 %s1 %s2 %t</command>. The order of substitution variables isn't important, and them may there more than once, &eg; like <literal>kdiff3 -o %t %s1 %s2 %t</literal>. This stuff is only tested with <application>meld</application> and &kdiff3;. Think about that external programs mostly do not know anything about subversion <command>ignore</command> parameter so them may show lot more than expected.
 </para>
 <sect3>
 <title>Variable substitutions for external merge program</title>
@@ -1573,7 +1589,7 @@ Substituted with source number one.
 <term>%s2</term>
 <listitem><para>
 Substituted with source number two. If this is empty or this is equal to source one and start and end revision is same, this variable
-will skipped. So be careful setting up command lines like <prompt>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</prompt>.
+will skipped. So be careful setting up command lines like <command>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command>.
 </para></listitem>
 </varlistentry>
 
@@ -1592,36 +1608,36 @@ Substituted with target.
 <sect2 id="extern-resolve-setup">
 <title>Conflict resolver program</title>
 <para>
-You may use an external program like <command>kdiff3</command> for resolving conflicts, the default is 
-<prompt>kdiff3 %o %m %n -o %t</prompt>.
+You may use an external program like &kdiff3; for resolving conflicts, the default is 
+<command>kdiff3 %o %m %n -o %t</command>.
 </para>
 <sect3>
 <title>Variable substitution for external conflict resolver</title>
 <para>
-In parenthesis after each description an example how subversion would call the files. This options meaning are designed for kdiff3, 'cause this moment (2008-02-07) this is the only one I know supporting all parameters required for a good conflict resolving.
+In parenthesis after each description an example how subversion would call the files. This options meaning are designed for &kdiff3;, because at this moment this is the only one supporting all parameters required for a good conflict resolving.
 <variablelist>
 <varlistentry>
 <term>%o or %l</term>
 <listitem><para>
-Old (local,left) version. This means the lower revision number, &eg;, the start point of conflicted changes. (<prompt>foo.cc.r2</prompt>)
+Old (local,left) version. This means the lower revision number, &eg;, the start point of conflicted changes. (<filename>foo.cc.r2</filename>)
 </para></listitem>
 </varlistentry>
 <varlistentry>
 <term>%m or %w</term>
 <listitem><para>
-Mine (working) version of file, &eg;, what you had changed against old version. (<prompt>foo.cc.mine</prompt>)
+Mine (working) version of file, &eg;, what you had changed against old version. (<filename>foo.cc.mine</filename>)
 </para></listitem>
 </varlistentry>
 <varlistentry>
 <term>%n or %r</term>
 <listitem><para>
-New (remote, right) version of file. For example, version someone other had made. (<prompt>foo.cc.r3</prompt>)
+New (remote, right) version of file. For example, version someone other had made. (<filename>foo.cc.r3</filename>)
 </para></listitem>
 </varlistentry>
 <varlistentry>
 <term>%t</term>
 <listitem><para>
-Target name, &eg;, the origin name. For &kdiff3; (as an example) this would be name after the <prompt>&quot;-o&quot;</prompt> parameter (= output file). (<prompt>foo.cc</prompt>)
+Target name, &eg;, the origin name. For &kdiff3; (as an example) this would be name after the <option>-o</option> parameter (= output file). (<filename>foo.cc</filename>)
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -1630,7 +1646,7 @@ Target name, &eg;, the origin name. For &kdiff3; (as an example) this would be n
 </sect2>
 </sect1>
 <sect1 id="kio-cmdline-settings">
-<title>KIO &#047; command line</title>
+<title>KIO / command line</title>
 <para>
 <variablelist>
 
@@ -1951,7 +1967,7 @@ last state the working copy was updated to, not against the version in repositor
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Add selected files/dirs</guimenuitem>
 </menuchoice></term>
-<listitem><para>Add selected files and/or directories to version control.</para></listitem>
+<listitem><para>Add selected files and/or folders to version control.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -1983,7 +1999,7 @@ last state the working copy was updated to, not against the version in repositor
 <guisubmenu>Working copy</guisubmenu>
 <guimenuitem>Ignore/Unignore current item</guimenuitem>
 </menuchoice></term>
-<listitem><para>Edit property of parent directory of current item so that selected item will marked as ignored if not set, otherwise remove it from ignore list.</para></listitem>
+<listitem><para>Edit property of parent folder of the current item so that selected item will be marked as ignored if not set, otherwise remove it from ignore list.</para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
@@ -2105,7 +2121,7 @@ in a X-Dialog like kdesvnaskpass. (see <ulink url="man:ssh-add">Manpage of ssh-a
 </question>
 <answer>
 <para>
-You may use an entry in <prompt>$HOME/.ssh/config</prompt>, see <ulink url="man:ssh_config">Ssh config manpage</ulink> for exact syntax.
+You may use an entry in <filename class="directory">$HOME/.ssh/config</filename>, see <ulink url="man:ssh_config">Ssh config manpage</ulink> for exact syntax.
 </para>
 </answer>
 </qandaentry>
@@ -2131,18 +2147,19 @@ There are many reasons why the program couldn't load. This mostly happens when y
 check out <ulink url="http://kdesvn.alwins-world.de/ticket/128">issue entry</ulink>.
 </para>
 <para>
-The next big thing could that you forgot to give a libsuffix on 64-Bit systems at compile-time. So the part will installed in <prompt>$PREFIX/lib</prompt> instead of <prompt>$PREFIX/lib64</prompt>. So give <prompt>-DLIB_SUFFIX=64</prompt> as parameter to cmake.
+  The next big thing could that you forgot to give a lib suffix on 64-bit systems at compile-time. So the part will installed in <filename class="directory">$PREFIX/lib</filename> instead of <filename class="directory">$PREFIX/lib64</filename>. So give <option>-DLIB_SUFFIX=64</option> as parameter to <command>cmake</command>.
 </para>
-<para>If this does not solve your problem, you may try out on a console:
+<para>If this does not solve your problem, you may try out on a console:</para>
 <programlisting>
   export LD_PRELOAD=/usr/lib/kde4/libkdesvnpart.so
   kdesvn
   unset LD_PRELOAD
 </programlisting>
-(/usr/lib/kde4 depends of course on your system, please check where it is installed)
+<para>
+  (<filename class="directory">/usr/lib/kde4</filename> depends of course on your system, please check where it is installed)
 </para>
 <para>
-You should see a lot of output why loading of libkdesvnpart.so isn't possible, that may help solving your problem.
+  You should see a lot of output why loading of <filename>libkdesvnpart.so</filename> is not possible, that may help solving your problem.
 </para>
 </answer>
 </qandaentry>
@@ -2160,7 +2177,7 @@ Revisions may given in same form like to the standard svn - client. That means: 
 <varlistentry>
 <term>Number</term>
 <listitem><para>
-A number greater or equal -1. -1 means "unspecified revision", 0 is the beginning. Normally, these numbers shouldn't used (most operations will fail with that).
+  A number greater or equal -1. -1 means <quote>unspecified revision</quote>, 0 is the beginning. Normally, these numbers shouldn't used (most operations will fail with that).
 </para></listitem>
 </varlistentry>
 
@@ -2198,7 +2215,7 @@ WORKING
 
 </para>
 <para>
-The keywords are case sensitive! For example, head is not the same like HEAD.
+The keywords are case sensitive! For example, head is not the same as HEAD.
 </para>
 </listitem>
 </varlistentry>
@@ -2214,7 +2231,7 @@ Date in form {YYYY-MM-DD}. It must real MM or DD - &eg; 2005-1-1 must written as
 
 </para>
 <para>
-Appending a specific revision to an url will always made via &quot;?rev=&lt;revision&gt;.
+Appending a specific revision to an &URL; will always made via &quot;?rev=&lt;revision&gt;.
 </para>
 </appendix>
 
@@ -2333,7 +2350,7 @@ url="https://projects.kde.org/projects/playground/devtools/kdesvn/activity">this
 <title>Compilation and Installation</title>
 <para>
 &kdesvn; requires at least cmake 2.8 for building, automake isn't supported. The following steps works with both distribution tarball or tarball from repository. Unpack the archive
-or checkout / export a copy from repository and change to the resulting source directory.
+or clone the repository and change to the resulting source directory.
 </para>
 <para>
 <screen>

@@ -275,10 +275,10 @@ Mark the entry or entries you want to send and select
 </menuchoice>
 </para>
 <para>
-If you try to commit if no item is selected, &kdesvn; uses the top-most element of opened working copy, &eg;, the working copy path itself.
+If you try to commit if no item is selected, &kdesvn; uses the top-most element of opened working copy, &ie;, the working copy path itself.
 </para>
 <para>
-This operation is always recursive, means, if selecting a folder &kdesvn; always send all changed items below it. When you setup that you want to review all items before commit inside the following dialog all items &kdesvn; would send are listed. There you may unmark items you don't want to send. In that case &kdesvn; sends all items alone, &eg;, not recursive. Or you may select items not versioned for add and commit (if them are not marked to be ignored). So you may see if there are newer items you forgot.
+This operation is always recursive, means, if selecting a folder &kdesvn; always send all changed items below it. When you setup that you want to review all items before commit inside the following dialog all items &kdesvn; would send are listed. There you may unmark items you don't want to send. In that case &kdesvn; sends all items alone, &ie;, not recursive. Or you may select items not versioned for add and commit (if them are not marked to be ignored). So you may see if there are newer items you forgot.
 </para>
 <para>
   Enter a log message what you're sending and hit <guibutton>OK</guibutton> and the transfer starts.
@@ -851,14 +851,14 @@ As of version 0.7.0 of &kdesvn; it comes with some modules integrating some comm
 <listitem><para>ksvn+ssh</para></listitem>
 <listitem><para>ksvn</para></listitem>
 </itemizedlist>
-The same maybe for &quot;svn+...&quot; but as from &kde; 3.4, kdesdk has it own small svn-kio called &quot;svn+http&quot;etc. So packages are organized that way - or should that &quot;svn+...&quot; comes as an extra package so it may installed if kdesdk hasn't installed it.
+The same may be said for <quote>svn+...</quote>. But as from &kde; 3.4, kdesdk has it own small svn-kio called <quote>svn+http</quote> &etc; So packages are organized that way - or should that <quote>svn+...</quote> comes as an extra package so it may installed if kdesdk hasn't installed it.
 </para>
 <para>
-These protocols are designed only for repositories, not for working copies. E.g. &quot;ksvn+file:///&lt;path&gt;&quot; must point to the beginning of a repository different to the application itself or KPart.
+These protocols are designed only for repositories, not for working copies. For example, <filename class="directory">ksvn+file:///<replaceable>path</replaceable></filename> must point to the beginning of a repository different to the application itself or KPart.
 Working copies may browsed with &konqueror;.
 </para>
 <para>
-For browsing at a specific revision you may append the query <link linkend="revision-syntax">&quot;?rev=&lt;revision&gt;&quot;</link> to the &URL;.
+For browsing at a specific revision you may append the query <link linkend="revision-syntax"><quote>?rev=<replaceable>revision</replaceable></quote></link> to the &URL;.
 </para>
 </listitem>
 </varlistentry>

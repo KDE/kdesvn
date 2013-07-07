@@ -378,7 +378,7 @@ when one or none item is marked in overview. Depending on your settings (see <xr
 <sect3  id="logdisplay-dlg">
 <title>The log display dialog</title>
 <para>
-  On left side you see the list of log entries &kdesvn; retrieved. The log message is stripped-down to one line to fit. The full log message appears in right upper window when marking an entry. In the right lower window you will see the list of changed files. This windows <emphasis>only</emphasis> appears if this list is fetched depending on your settings.
+  On left side you see the list of log entries &kdesvn; retrieved. The log message is stripped-down to one line to fit. The full log message appears in right upper window when marking an entry. In the right lower window you will see the list of changed files. These windows <emphasis>only</emphasis> appears if this list is fetched depending on your settings.
 </para>
 <para>
 With the buttons above you may select another range of logs to display.
@@ -404,7 +404,7 @@ entry selected for retrieving logs before. Same for <guibutton>Diff revisions</g
 <sect1 id="working-with-repositories">
 <title>Working on repositories</title>
 <para>
-Simple repository browsing may done within &konqi;, &krus; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with &quot;k&quot;) and them will display the content. So simple operations like copy, move and delete may work. When appending a query &quot;?rev=&lt;xxx&gt;&quot; the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
+  Simple repository browsing may done within &konqi;, &krus; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with <quote>k</quote>) and them will display the content. So simple operations like copy, move and delete may work. When appending a query <quote>?rev=<replaceable>xxx</replaceable></quote> the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
 </para>
 <para>
 All work except <guimenuitem>Copy</guimenuitem> may only done when browsing at revision HEAD.
@@ -524,7 +524,7 @@ Make an export into temporary folder. If a simple merge only source1 at start-re
 
 <listitem>
 <para>
-Generate the call to your external merge program as you setup in Settings. The error output will displayed in log window so you may see whats going wrong (if something is gone wrong).
+  Generate the call to your external merge program as you setup in <link linkend="diffmerge-settings">Settings</link>. The error output will displayed in log window so you may see whats going wrong (if something is gone wrong).
 </para>
 </listitem>
 </orderedlist>
@@ -543,7 +543,7 @@ If recursive is not set, the export is done as a flat export. Be care: when doin
 &kdesvn; itself hasn't a module for resolving conflicts but you may use external software from within &kdesvn;. In <xref linkend="extern-resolve-setup"/> is a description how to setup up this application.
 </para>
 <para>
-When marking an item with status set to &quot;conflicted&quot; (you'll see a red cross in listview on such items) you may select 
+  When marking an item with status set to <quote>conflicted</quote> (you'll see a red cross in listview on such items) you may select 
 <menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
@@ -714,7 +714,7 @@ This entry must be locked before edit and commit. Until you'll not set a lock su
 </inlinemediaobject>
 </term>
 <listitem><para>
-This entry or - if a folder - an entry below has newer version in repository. Works only with subversion &#061;&gt;1.2 on local and remote.
+This entry or - if a folder - an entry below has newer version in repository.
 </para></listitem>
 </varlistentry>
 
@@ -792,7 +792,7 @@ This entry (or entry below if folder) got conflicts to resolve with last update.
 <sect2>
 <title>Not saving passwords</title>
 <para>
-Most secure way, but sometimes unhandy with GUIs like &kdesvn;. In particular the background processes of &kdesvn; would always ask for a password in case the repository has restricted access for reading operations like update and status. The same for &quot;commit&quot; and so on. So if you not saving passwords you should disable "Check for updates on open working copy" and so on.
+  Most secure way, but sometimes unhandy with GUIs like &kdesvn;. In particular the background processes of &kdesvn; would always ask for a password in case the repository has restricted access for reading operations like update and status. The same for <quote>commit</quote> and so on. So if you not saving passwords you should disable <guilabel>Start check for updates when open a working copy</guilabel> and <link linkend="subversion-settings">so on</link>.
 </para>
 </sect2>
 <sect2>
@@ -1261,17 +1261,17 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 </row>
 <row>
 <entry>tree</entry>
-<entry>displays revision tree of item (only first argument), if &URL; with &quot;?rev=xxx&quot; given, this revision is the peg-revision.</entry>
+<entry>displays revision tree of item (only first argument), if &URL; with <quote>?rev=<replaceable>xxx</replaceable></quote> given, this revision is the peg-revision.</entry>
 <entry>-r startrev:endrev</entry>
 </row>
 <row>
 <entry>lock</entry>
-<entry>lock url(s), if &quot;-f&quot; is given then existing locks are broken.</entry>
+<entry>lock url(s), if <option>-f</option> is given then existing locks are broken.</entry>
 <entry>-f</entry>
 </row>
 <row>
 <entry>unlock</entry>
-<entry>unlock url(s), if &quot;-f&quot; is given then not owned locks are broken or non
+<entry>unlock url(s), if <option>-f</option> is given then not owned locks are broken or non
  existing locks are ignored.</entry>
 <entry>-f</entry>
 </row>
@@ -1345,7 +1345,7 @@ the first 20 entries.</para>
 </para>
 </sect2>
 <sect2>
-<title>The &quot;diff&quot; command</title>
+  <title>The <quote>diff</quote> command</title>
 <para>
 You get differences between revisions of an item or between to items inside same working copy or repository. When diff'ing revisions of an item, revisions may be given as <option>-r <replaceable>STARTREV</replaceable>:<replaceable>ENDREV</replaceable></option>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
 <example>
@@ -1378,7 +1378,7 @@ kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://w
 <chapter id="setup">
 <title>Settings</title>
 <para>
-Setting may changed from the setup dialog. Them are separated into some subdialogs.
+Settings can be changed from the setup dialog. They are separated into some subdialogs.
 </para>
 <sect1 id="general-settings">
 <title>General</title>
@@ -1444,7 +1444,7 @@ Setting may changed from the setup dialog. Them are separated into some subdialo
 
 <row>
 <entry>Gain item info recursive</entry>
-<entry>When activated, &quot;info&quot; on folders will gain information about all items below, may be real slow.</entry>
+<entry>When activated, <command>info</command> on folders will gain information about all items below, may be real slow.</entry>
 </row>
 
 <row>
@@ -1544,7 +1544,7 @@ The difference will generated with subversion and put direct into standard input
 <varlistentry>
 <term>&lt;program&gt; &lt;parameter&gt; %f</term>
 <listitem><para>
-The difference will generated with subversion, saved into a temporary file and the parameter &quot;%f&quot; will replaced with that file name.
+  The difference will generated with subversion, saved into a temporary file and the parameter <option>%f</option> will replaced with that file name.
   This may used with for instance with a simple call to <application>less</application> or text viewer.
 </para></listitem>
 </varlistentry>
@@ -1553,7 +1553,7 @@ The difference will generated with subversion, saved into a temporary file and t
 <term>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
 <listitem><para>
 &kdesvn; let the external program make the difference. %1 and %2 will be replaced with required values (file names or folder names). &kdesvn;
-stores content to compare in a temporary environment (when folders do an &quot;export&quot;, when single file, does a &quot;cat&quot;) when needed and
+  stores content to compare in a temporary environment (when folders do an <quote>export</quote>, when single file, does a <quote>cat</quote>) when needed and
 cleans up after closing external program or closing itself.
 </para></listitem>
 </varlistentry>
@@ -1649,14 +1649,14 @@ Target name, &eg;, the origin name. For &kdiff3; (as an example) this would be n
 <varlistentry>
 <term>Show log after executing a command</term>
 <listitem><para>
-Should a dialog open with the log of last made subversion command when it where done via command line or &konqueror; action menu.
+Should a dialog open with the log of last subversion command when it was executed via command line or &konqueror; action menu.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>Minimum log lines to show</term>
 <listitem><para>
-If &quot;Show log...&quot; is set, what is the minimum of lines before such a dialog will shown. So you may set that such window will
+  If <guilabel>Show log...</guilabel> is set, what is the minimum of lines before such a dialog will shown. So you may set that such window will
 only shown when interesting output was generated (commit log and so on)
 </para></listitem>
 </varlistentry>
@@ -1670,7 +1670,7 @@ If set, no action menu entry for &kdesvn; is made in &konqueror;.</para></listit
 <varlistentry>
 <term>KIO operations use standard log message</term>
 <listitem><para>
-When making operations on a repository via the &kdesvn; KIO protocol from within &konqueror; (&eg;, &quot;ksvn+...&quot; protocols) on large operations like moving or copy folders &kdesvn; would ask for a log message for each item. This is a behavior of &konqueror;.
+  When making operations on a repository via the &kdesvn; KIO protocol from within &konqueror; (&eg;, <quote>ksvn+...</quote> protocols) on large operations like moving or copy folders &kdesvn; would ask for a log message for each item. This is a behavior of &konqueror;.
 When this option is set, the KIO implementation from &kdesvn; will not ask for a log message but set a standard log message. This flags not the operations from
 &kdesvn; action menu for &konqueror; but only copy/move/mkdir/delete made with &konqueror; or other file managers on a KIO-url.
 </para></listitem>
@@ -1743,7 +1743,7 @@ or menu bars. -->
 <sect2>
 <title>The Bookmark Menu</title>
 <para>
-See <ulink url="help:/konqueror">&konqueror; help</ulink>.
+See <ulink url="help:/konqueror/bookmarks.html">&konqueror; help</ulink>.
 </para>
 </sect2>
 <sect2 id="kdesvn-subversion-menu">
@@ -2089,7 +2089,7 @@ application work. -->
 </question>
 <answer>
 <para>
-The &quot;problem&quot; is ssh itself. Subversion creates for each command sending a tunnel
+  The <quote>problem</quote> is ssh itself. Subversion creates for each command sending a tunnel
 to the repository. And on each tunnel it is a new ssh connection. And for every connection ssh must
 authenticate. This may you fix when you store your local public identity to the host containing the
 repository. If your public identity has a password, ssh-agent will asked (when ssh-agent is installed).
@@ -2135,7 +2135,7 @@ repository to newer subversion.
 </qandaentry>
 <qandaentry>
 <question>
-<para>When starting &kdesvn; it sends a dialog &quot;Could not find our part&quot; and shows an empty window, why?</para>
+  <para>When starting &kdesvn; it sends a dialog <quote>Could not find our part</quote> and shows an empty window, why?</para>
 </question>
 <answer>
 <para>
@@ -2227,7 +2227,7 @@ Date in form {YYYY-MM-DD}. It must real MM or DD - &eg; 2005-1-1 must written as
 
 </para>
 <para>
-Appending a specific revision to an &URL; will always made via &quot;?rev=&lt;revision&gt;.
+  Appending a specific revision to an &URL; will always made via <quote>?rev=<replaceable>revision</replaceable></quote>.
 </para>
 </appendix>
 

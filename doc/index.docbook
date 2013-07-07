@@ -3,7 +3,6 @@
   <!ENTITY kdesvn "<application>kdesvn</application>">
   <!ENTITY kwallet "<application>KWallet</application>">
   <!ENTITY kdiff3 "<application>KDiff3</application>">
-  <!ENTITY krusader "<application>Krusader</application>">
   <!ENTITY kappname "&kdesvn;"><!-- Do *not* replace kappname-->
   <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc -->
   <!ENTITY % addindex "IGNORE">
@@ -351,7 +350,7 @@ You may check if there are somewhere in working copy unversioned items. After se
 <varlistentry>
 <term>Drag and drop</term>
 <listitem><para>
-Mark in &konqueror; or any other compatible file browser items you want to add and drag them to &kdesvn;. You may drop them on folders inside the opened working copy and than &kdesvn; copy the dropped items to it and add the items.
+Mark in &konqueror; or any other compatible file browser items you want to add and drag them to &kdesvn;. You may drop them on folders inside the opened working copy and then &kdesvn; copy the dropped items to it and add the items.
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -359,7 +358,12 @@ Mark in &konqueror; or any other compatible file browser items you want to add a
 <sect3>
 <title>Deleting items from working copy and unversion</title>
 <para>
-  Deleting items is always recursive. For example, when you delete a folder all subitems will deleted, too. Mark what you want and select <guimenuitem>Delete selected items</guimenuitem> from general menu. Items will unversioned and removed from disk.
+Deleting items is always recursive. For example, when you delete a folder all subitems will be deleted, too. Mark what you want and select
+<menuchoice>
+<guimenu>Subversion</guimenu>
+<guisubmenu>General</guisubmenu>
+<guimenuitem>Delete selected files/dirs</guimenuitem>
+</menuchoice> menu item. Items will be unversioned and removed from disk.
 </para>
 </sect3>
 </sect2>
@@ -369,7 +373,7 @@ Mark in &konqueror; or any other compatible file browser items you want to add a
 <para>
 The log display may start with
 <keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo>
-when one or none item is marked in overview. Depending on your settings (see <xref linkend="subversion-settings" xreflabel="settings"/>) &kdesvn; retrieves some log entries beginning on head and displays them.
+when one or none item is marked in overview. Depending on your settings (see <xref linkend="subversion-settings" xreflabel="settings"/>) &kdesvn; retrieves some log entries beginning on <quote>HEAD</quote> and displays them.
 </para>
 <sect3  id="logdisplay-dlg">
 <title>The log display dialog</title>
@@ -403,7 +407,7 @@ entry selected for retrieving logs before. Same for <guibutton>Diff revisions</g
 Simple repository browsing may done within &konqi;, &krus; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with &quot;k&quot;) and them will display the content. So simple operations like copy, move and delete may work. When appending a query &quot;?rev=&lt;xxx&gt;&quot; the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
 </para>
 <para>
-All work except &quot;Copy&quot; may only done when browsing at revision HEAD.
+All work except <guimenuitem>Copy</guimenuitem> may only done when browsing at revision HEAD.
 </para>
 <sect2>
 <title>Restoring deleted items</title>
@@ -488,7 +492,7 @@ If set, unrelated items will be diffed as if they were related. Otherwise subver
 <varlistentry>
 <term>Force delete on modified/unversioned items</term>
 <listitem><para>
-If not set and merge would require deletion of an modified or unversioned item the subversion merge fails. Otherwise this items will deleted.
+If not set and merge would require deletion of an modified or unversioned item the subversion merge fails. Otherwise this items will be deleted.
 </para></listitem>
 </varlistentry>
 
@@ -857,7 +861,7 @@ For browsing at a specific revision you may append the query <link linkend="revi
 <varlistentry>
 <term>Context menus</term>
 <listitem><para>
-&kdesvn; installs context menus for &konqueror;. Them may be seen with right mouse click in the browser window (only in standard view, not any KPart) so it is possible to do most used actions direct from within &konqueror; (or any other file managers that read &konqueror; context menus like &krusader;). This is done via a call
+&kdesvn; installs context menus for &konqueror;. Them may be seen with right mouse click in the browser window (only in standard view, not any KPart) so it is possible to do most used actions direct from within &konqueror; (or any other file managers that read &konqueror; context menus like &krus;). This is done via a call
 to the <link linkend="kdesvn-commandline">command line variant of &kdesvn;</link>.
 </para>
 </listitem>

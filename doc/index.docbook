@@ -287,15 +287,7 @@ This operation is always recursive, means, if selecting a folder &kdesvn; always
 <sect2>
 <title>Update working copy</title>
 <para>
-This brings you local working copy in sync with the repository. You may setup that &kdesvn; checks on opening a working copy for newer/modified items in repository. This runs in background and you may work meanwhile with &kdesvn;. Or start check with
-<menuchoice>
-<guimenu>Subversion</guimenu>
-<guisubmenu>Working copy</guisubmenu>
-<guimenuitem>Check for updates</guimenuitem>
-</menuchoice>.
-</para>
-<para>
-When this is finished, items with newer versions or folders with items where newer items are below are marked.
+This brings you local working copy in sync with the repository. You may setup that &kdesvn; checks on opening a working copy for newer/modified items in repository. This runs in background and you may work meanwhile with &kdesvn;. When this is finished, items with newer versions or folders with items where newer items are below are marked.
 </para>
 <para>
 To retrieve the changes, select

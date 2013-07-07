@@ -956,7 +956,7 @@ Format of revstring is described in <link linkend="revision-syntax">Appendix</li
 <entry>Commit</entry>
 <entry>3</entry>
 <entry><para>KURL::List urls</para>
-<para>urls a list of local urls to commit. Will ask for log.</para>
+<para>urls is a list of local urls to commit. Will ask for log message.</para>
 </entry>
 <entry>Yes</entry>
 </row>
@@ -1353,13 +1353,13 @@ the first 20 entries.</para>
 <para>
 You get differences between revisions of an item or between to items inside same working copy or repository. When diff'ing revisions of an item, revisions may be given as <option>-r <replaceable>STARTREV</replaceable>:<replaceable>ENDREV</replaceable></option>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
 <example>
-<title>Print difference against repository, &eg; local changes</title>
+<title>Print difference against repository, &ie; local changes</title>
 <programlisting>
 kdesvn exec diff myfile.c
 </programlisting>
 </example>
 <example>
-<title>print difference between revisions</title>
+<title>Print difference between revisions</title>
 <programlisting>
 kdesvn exec diff -r 21:20 myfile.c
 </programlisting>

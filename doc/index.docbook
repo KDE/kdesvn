@@ -395,7 +395,7 @@ entry selected for retrieving logs before. Same for <guibutton>Diff revisions</g
 <guibutton>Annotate</guibutton> of course works only if item to log is a file.
 </para>
 <para>
-  On all list entries (both lists) you have context menu enabled for some extra operations. In left list this is <guimenuitem>Set version as left side of diff</guimenuitem> (&eg;, beginning revision) and <guimenuitem>Set version as right side of diff</guimenuitem> (&eg;, end or target of diff, in unified the part marked with a <computeroutput>+++</computeroutput>). If you selected these revisions them are marked with some small arrows.
+  On all list entries (both lists) you have context menu enabled for some extra operations. In left list this is <guimenuitem>Set version as left side of diff</guimenuitem> (&ie; beginning revision) and <guimenuitem>Set version as right side of diff</guimenuitem> (&ie; end or target of diff, in unified the part marked with a <computeroutput>+++</computeroutput>). If you selected these revisions them are marked with some small arrows.
 </para>
 </sect3>
 </sect2>
@@ -404,7 +404,7 @@ entry selected for retrieving logs before. Same for <guibutton>Diff revisions</g
 <sect1 id="working-with-repositories">
 <title>Working on repositories</title>
 <para>
-  Simple repository browsing may done within &konqi;, &krus; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with <quote>k</quote>) and them will display the content. So simple operations like copy, move and delete may work. When appending a query <quote>?rev=<replaceable>xxx</replaceable></quote> the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
+  Simple repository browsing may be done within &konqi;, &krus; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with <quote>k</quote>) and them will display the content. So simple operations like copy, move and delete may work. When appending a query <quote>?rev=<replaceable>xxx</replaceable></quote> the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
 </para>
 <para>
 All work except <guimenuitem>Copy</guimenuitem> may only done when browsing at revision HEAD.
@@ -421,12 +421,12 @@ In subversion restoring deleted items is a copy operation of item at specific re
 and enter the wanted revision. Now &kdesvn; displays the content at this term. Mark the entry you want to restore, select
 <menuchoice>
 <shortcut>
-<keycombo action="simul"><keycap>C</keycap></keycombo>
+<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
 </shortcut>
 <guimenu>Subversion</guimenu>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Copy</guimenuitem>
-</menuchoice>. Inside the following dialog the target is always at HEAD revision, the source is at revision you selected for browsing. Fill out the path click <guibutton>OK</guibutton> and copy starts. After successful copy switch browsing back to HEAD revision and the restored item should appear.
+</menuchoice>. Inside the following dialog the target is always at HEAD revision, the source is at revision you selected for browsing. Fill in the path and click <guibutton>OK</guibutton> and copy starts. After successful copy switch browsing back to HEAD revision and the restored item should appear.
 </para>
 </sect2>
 <sect2>
@@ -515,16 +515,16 @@ See <xref linkend="diffmerge-settings"/> for details how to setup the external m
 <orderedlist>
 
 <listitem><para>
-Assign start-revision as revision to source 1 and end-revision to source 2. Then checks if them are different (path and/or revision). If yes, its a three-way merge otherwise a simple merge from source to target. If source 2 is left empty it is a simple merge, too.
+Assign start-revision as revision to source 1 and end-revision to source 2. Then checks if them are different (path and/or revision). If yes, it is a three-way merge otherwise a simple merge from source to target. If source 2 is left empty it is a simple merge, too.
 </para></listitem>
 
 <listitem><para>
-Make an export into temporary folder. If a simple merge only source1 at start-revision, otherwise both sources with there revisions. If item is a file and not a folder than get the content at a specific revision.
+Make an export into temporary folder. If it is a simple merge only source 1 at start-revision, otherwise both sources with their revisions. If item is a file and not a folder then get the content at a specific revision.
 </para></listitem>
 
 <listitem>
 <para>
-  Generate the call to your external merge program as you setup in <link linkend="diffmerge-settings">Settings</link>. The error output will displayed in log window so you may see whats going wrong (if something is gone wrong).
+  Generate the call to your external merge program as you setup in <link linkend="diffmerge-settings">Settings</link>. The error output will displayed in log window so you may see what is going wrong (if something is gone wrong).
 </para>
 </listitem>
 </orderedlist>
@@ -549,7 +549,7 @@ If recursive is not set, the export is done as a flat export. Be care: when doin
 <guisubmenu>Working copy</guisubmenu>
 <guisubmenu>Resolve conflict</guisubmenu>
 </menuchoice>.
-or from within context menu <menuchoice><guisubmenu>Resolve conflict</guisubmenu></menuchoice> (only on conflicted items)
+or from within context menu <guimenuitem>Resolve conflict</guimenuitem> (only on conflicted items)
 &kdesvn; now starts the program you setup (or the default one). After finish this job you should mark item as resolved 
 (<menuchoice><guimenu>Subversion</guimenu><guisubmenu>Working copy</guisubmenu><guisubmenu>Mark resolved</guisubmenu></menuchoice>) otherwise you will not able to commit your changes.
 </para>
@@ -563,7 +563,7 @@ or from within context menu <menuchoice><guisubmenu>Resolve conflict</guisubmenu
 <title>Bugtracker integration</title>
 <para>The <ulink url="http://tortoisesvn.tigris.org/">TortoiseSVN project</ulink> designed a nice property system
 <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"> for integrating bugtracker</ulink> into
-subversion GUI. This moment &kdesvn; doesn't support extra fields in commit box (will follow later) and doesn't understand all but following properties:
+subversion GUI. The current version of &kdesvn; does not support extra fields in commit box (will follow later) and doesn't understand all but following properties:
 </para>
 <para>
 <table id="bugtracker-properties">
@@ -621,10 +621,10 @@ Two expressions:
 </table>
 </para>
 <para>
-On local opened repositories (&eg;, <filename class="directory">file://</filename> protocol) and on working copies this properties will searched upward from opened folder until found or the subversion top level is reached. On repositories opened via network (all except <filename class="directory">file://</filename> protocol) it is only searched on opened folder itself.
+On local opened repositories (&ie; <filename class="directory">file://</filename> protocol) and on working copies these properties will searched upward from opened folder until found or the subversion top level is reached. On repositories opened via network (all except <filename class="directory">file://</filename> protocol) it is only searched on opened folder itself.
 </para>
 <para>
-Support for multiple sets of this properties may follow later, (&eg;, in subfolder extra values for other tracker &etc;) but in most cases evaluating single tracker links should be enough.
+Support for multiple sets of these properties may follow later, (&eg;, in subfolder extra values for other tracker &etc;) but in most cases evaluating single tracker links should be enough.
 </para>
 </sect2>
 </sect1>
@@ -632,7 +632,7 @@ Support for multiple sets of this properties may follow later, (&eg;, in subfold
 <sect1 id="revision-tree">
 <title>The revision tree</title>
 <para>
-The revision tree try display the whole history of an item so user may get a better feeling about the history of an item. It has to scan the complete log of the repository 'cause it requires some information subversion does not (and I think will not) give. Because this produces a lot of traffic the revision tree uses always the internal <link linkend="logcache-descr">log cache</link>.
+The revision tree try to display the whole history of an item so user may get a better feeling about the history of an item. It has to scan the complete log of the repository 'cause it requires some information subversion does not (and I think will not) give. Because this produces a lot of traffic the revision tree uses always the internal <link linkend="logcache-descr">log cache</link>.
 </para>
 <sect2>
 <title>Requirements</title>
@@ -657,7 +657,7 @@ The revision tree is generated via <application>dot</application>. So for a work
 </para>
 <sect2>
 <title>Offline mode</title>
-<para>&kdesvn; may work without network access, &eg;, you may switch that no network access is allowed. This may useful when working without network like on notebooks. In such cases &kdesvn; always get the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <guilabel>Log follows node changes</guilabel> is set.</para>
+<para>&kdesvn; may work without network access, &ie; you can switch off the network access for &kdesvn;. This may useful when working without network like on notebooks. In such cases &kdesvn; always gets the logs from the internal cache. At this time (2008-06-23) this log is reduced to base functions due technical reasons, so the cached log may (but not must) differ from real log. Differ means that it will not display all copy operations even <guilabel>Log follows node changes</guilabel> is set.</para>
 </sect2>
 <sect2>
 <title>Log cache and revision tree</title>
@@ -792,19 +792,19 @@ This entry (or entry below if folder) got conflicts to resolve with last update.
 <sect2>
 <title>Not saving passwords</title>
 <para>
-  Most secure way, but sometimes unhandy with GUIs like &kdesvn;. In particular the background processes of &kdesvn; would always ask for a password in case the repository has restricted access for reading operations like update and status. The same for <quote>commit</quote> and so on. So if you not saving passwords you should disable <guilabel>Start check for updates when open a working copy</guilabel> and <link linkend="subversion-settings">so on</link>.
+  Most secure way, but sometimes unhandy with GUIs like &kdesvn;. In particular the background processes of &kdesvn; would always ask for a password in case the repository has restricted access for reading operations like update and status. The same for <quote>commit</quote> and so on. So if you are not saving passwords you should disable <guilabel>Start check for updates when open a working copy</guilabel> and <link linkend="subversion-settings">so on</link>.
 </para>
 </sect2>
 <sect2>
 <title>Saving passwords in &kwallet;</title>
 <para>
-Secured password storage used by a lot of &kde; programs like &kmail; and &konqueror;. If you are saving passwords and mostly using &kdesvn; you should use this. Keep care that the encrypted storage isn't a high-secure storage. Details see &kwallet; documentation.
+  Secured password storage used by a lot of &kde; programs like &kmail; and &konqueror;. If you are saving passwords and mostly using &kdesvn; you should use this. Keep care that the encrypted storage isn't a high-secure storage. Details see <ulink url="help:/kwallet">&kwallet; documentation</ulink>.
 </para>
 </sect2>
 <sect2>
 <title>Saving to subversion's own password storage</title>
 <para>
-  This is not recommended 'cause the passwords are stored as clear text! Not believing? Take a look into the files in <filename class="directory">~/.subversion/auth/svn.simple</filename>. You should only use this if you are frequently using other clients than &kdesvn; like <application>rapidsvn</application> or <application>esvn</application> or the original <application>svn</application> command line client. If you're using the command line client mostly for checkouts or updates which doesn't require a password and &kdesvn; for commit/move/copy you should use &kwallet; instead.
+  This is not recommended 'cause the passwords are stored as clear text! Not believing? Take a look into the files in <filename class="directory">~/.subversion/auth/svn.simple</filename>. You should only use this if you are frequently using other clients than &kdesvn; like <application>rapidsvn</application> or <application>esvn</application> or the original <application>svn</application> command line client. If you're using the command line client mostly for checkouts or updates which do not require a password and &kdesvn; for commit/move/copy you should use &kwallet; instead.
 </para>
 </sect2>
 <sect2>
@@ -816,15 +816,15 @@ You may activate an internal password cache which will hold passwords as long &k
 <sect2>
 <title>Special case svn+ssh</title>
 <para>
-When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote machine and repository. When want to store you must using the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your public ssh-key on the target, &eg;, the repository system. SSH passwords will never handled by subversion passwords storage or &kwallet; or internal password cache.
+When using subversion via svn+ssh password storage may done via ssh and ssh-agent. For this you must have ssh access to the remote machine and repository. When want to store something you should use the public key authentication of ssh, not the password authentication. (In fact ssh prefer the public key authentication). For this you must put your public ssh-key on the target, &eg;, the repository system. SSH passwords will never be handled by subversion passwords storage or &kwallet; or internal password cache.
 </para>
 <para>
-If you don't want asked for the password of you ssh-key you may use the <application>ssh-agent</application>, with selecting the menu
+If you don't want asked for the password of your SSH key you can use the <application>ssh-agent</application>, with selecting the menu
 <menuchoice><guimenu>
 Subversion
 </guimenu>
 <guimenuitem>Add ssh identities to ssh-agent</guimenuitem></menuchoice>
-you may store you ssh-key-password for your current session so no further entering of your password is needed.
+you may store your SSH-key password for your current session so no further entering of your password is needed.
 </para>
 </sect2>
 </sect1>
@@ -839,7 +839,7 @@ As of version 0.7.0 of &kdesvn; it comes with some modules integrating some comm
 <variablelist>
 <varlistentry>
 <term>KIO protocols</term>
-<listitem><para>Implements handlers for following protocols:
+<listitem><para>Implements handlers for the following protocols:</para>
 <itemizedlist>
 <listitem><para>ksvn+http</para></listitem>
 <listitem><para>ksvn+https</para></listitem>
@@ -847,7 +847,7 @@ As of version 0.7.0 of &kdesvn; it comes with some modules integrating some comm
 <listitem><para>ksvn+ssh</para></listitem>
 <listitem><para>ksvn</para></listitem>
 </itemizedlist>
-The same may be said for <quote>svn+...</quote>. But as from &kde; 3.4, kdesdk has it own small svn-kio called <quote>svn+http</quote> &etc; So packages are organized that way - or should that <quote>svn+...</quote> comes as an extra package so it may installed if kdesdk hasn't installed it.
+<para>The same may be said for <quote>svn+...</quote>. But as from &kde; 3.4, kdesdk has it own small svn-kio called <quote>svn+http</quote> &etc; So packages are organized that way - or should that <quote>svn+...</quote> comes as an extra package so it may installed if kdesdk hasn't installed it.
 </para>
 <para>
 These protocols are designed only for repositories, not for working copies. For example, <filename class="directory">ksvn+file:///<replaceable>path</replaceable></filename> must point to the beginning of a repository different to the application itself or KPart.
@@ -1050,7 +1050,7 @@ Use this with care - this may produce a lot of data.
 <sect2>
 <title>Return values</title>
 <para>
-Return values may given via metadata, see apidoc for details.
+Return values may be given via metadata, see apidoc for details.
 </para>
 <para>
 <table id="kio-ksvn-metadata">
@@ -1141,14 +1141,14 @@ Return values may given via metadata, see apidoc for details.
 <sect1 id="kdesvn-commandline-overview">
 <title>Overview</title>
 <para>
-  Some subversion operations may used via the command line, &eg;, like a standard command line client but user interaction is made via &kde; <acronym>UI</acronym>. The standard syntax is <userinput>kdesvn exec <replaceable>command</replaceable> <replaceable>parameter</replaceable> <replaceable>url</replaceable></userinput>.
+  Some subversion operations may be used via the command line, &eg;, like a standard command line client but user interaction is made via &kde; <acronym>UI</acronym>. The standard syntax is <userinput>kdesvn exec <replaceable>command</replaceable> <replaceable>parameter</replaceable> <replaceable>url</replaceable></userinput>.
 </para>
 <para>
 If a single revision on a single &URL; is wanted it may be set as a parameter of the &URL;
 <programlisting>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting> This will overwrite the option <option>-r &lt;rev&gt;</option>.
 </para>
 <para>
-A revision may given as
+A revision may be given as
 a number or one of <option>HEAD</option> or <option>BASE</option> or as date format like {YYYY-MM-DD}.
 </para>
 </sect1>
@@ -1330,7 +1330,7 @@ a number or one of <option>HEAD</option> or <option>BASE</option> or as date for
 <sect2>
   <title>The <quote>log</quote> command</title>
 <para>
-Log command displays a dialog containing the log of the given &URL;. With subversion 1.2 or above it accepts a limit &eg; how many entries it has to display.
+Log command displays a dialog containing the log of the given &URL;. With subversion 1.2 or above it accepts a limit, &ie; how many entries it has to display.
 </para>
 <para>
 Inside that dialog you may select log entries and get the differences between them.
@@ -1347,7 +1347,7 @@ the first 20 entries.</para>
 <sect2>
   <title>The <quote>diff</quote> command</title>
 <para>
-You get differences between revisions of an item or between to items inside same working copy or repository. When diff'ing revisions of an item, revisions may be given as <option>-r <replaceable>STARTREV</replaceable>:<replaceable>ENDREV</replaceable></option>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
+You get differences between revisions of an item or between two items inside same working copy or repository. When diff'ing revisions of an item, revisions may be given as <option>-r <replaceable>STARTREV</replaceable>:<replaceable>ENDREV</replaceable></option>. When diffing an item inside a working copy without any revisions it prints the diff against repository.
 <example>
 <title>Print difference against repository, &ie; local changes</title>
 <programlisting>
@@ -1400,7 +1400,7 @@ Settings can be changed from the setup dialog. They are separated into some subd
 </row>
 <row>
 <entry>Items sorting order is case sensitive</entry>
-<entry>If the sort order in main window is case sensitive or not, &eg;, if <quote>a</quote> not equal to <quote>A</quote>.</entry>
+<entry>If the sort order in main window is case sensitive or not, &ie; if <quote>a</quote> not equal to <quote>A</quote>.</entry>
 </row>
 <row>
 <entry>Display ignored files</entry>
@@ -1449,17 +1449,17 @@ Settings can be changed from the setup dialog. They are separated into some subd
 
 <row>
 <entry>Store passwords for remote connections</entry>
-<entry>Storing passwords is often a security problem. Subversion stores its passwords into a flat file, &eg;, passwords in plain text! So be careful setting this flag and see next entry, too. This item only says if saving passwords is the default, you may change it for specific realms inside login dialog.</entry>
+<entry>Storing passwords is often a security problem. Subversion stores its passwords into a flat file, &ie; passwords in the plain text! So be careful setting this flag and see next entry, too. This item only says if saving passwords is the default, you may change it for specific realms inside login dialog.</entry>
 </row>
 
 <row>
 <entry>Store passwords into KDE Wallet</entry>
-<entry>When saving passwords, the plain text file from subversion is a security hole. &kdesvn; is able saving them into encrypted &kde; wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like svn-cmdline or rapidsvn, too. As long as subversion don't encrypt password storage you should think twice about it.</entry>
+<entry>When saving passwords, the plain text file from subversion is a security hole. &kdesvn; is able saving them into encrypted &kde; wallet instead there (starting with version 0.12.0) and use them. On other hand other subversion clients aren't able reading them so you must enter them if using tools like <application>svn</application> command line tool or <application>rapidsvn</application>, too. As long as subversion does not encrypt password storage you should think twice about it.</entry>
 </row>
 
 <row>
 <entry>Use internal password cache</entry>
-<entry>When a password isn't stored persistent &kdesvn; may hold is until &kdesvn; ends so you may not need enter it again on each operation. This cache is never persistent, &eg;, it will not saved anywhere.</entry>
+<entry>When a password isn't stored persistent &kdesvn; may hold is until &kdesvn; ends so you may not need enter it again on each operation. This cache is never persistent, &ie; it will not be saved anywhere.</entry>
 </row>
 
 <row>
@@ -1474,7 +1474,7 @@ Settings can be changed from the setup dialog. They are separated into some subd
 
 <row>
 <entry>Review items before commit</entry>
-<entry>When doing a commit &kdesvn; may make a check what to do. For example, if unversioned items are below which may added, list items changed and current operation will commit. This cost a depending on tree more or less time.</entry>
+<entry>When doing a commit &kdesvn; may make a check what to do. For example, if unversioned items are below which may be added, list items changed and current operation will commit. This cost a depending on tree more or less time.</entry>
 </row>
 
 </tbody>
@@ -1530,22 +1530,22 @@ Selects an external application to display diffs. Default is &kompare;.
 <sect2>
 <title>External diff display</title>
 <para>
-Defines what &kdesvn; is using for external display and how it will called. There are three ways:
+Defines what &kdesvn; is using for external display of differences and how it will be called. There are three ways:
 </para>
 <para>
 <variablelist>
 <varlistentry>
 <term>&lt;program&gt; &lt;parameter&gt;</term>
 <listitem><para>
-The difference will generated with subversion and put direct into standard input of the external program (&eg;, no temporary files needed)
+The difference will generated with subversion and put direct into standard input of the external program (&ie;, no temporary files needed)
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term>&lt;program&gt; &lt;parameter&gt; %f</term>
 <listitem><para>
-  The difference will generated with subversion, saved into a temporary file and the parameter <option>%f</option> will replaced with that file name.
-  This may used with for instance with a simple call to <application>less</application> or text viewer.
+  The difference will be generated with subversion, saved into a temporary file and the parameter <option>%f</option> will replaced with that file name.
+  This may be used, for instance, with a simple call to <application>less</application> or text viewer.
 </para></listitem>
 </varlistentry>
 
@@ -1553,13 +1553,13 @@ The difference will generated with subversion and put direct into standard input
 <term>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
 <listitem><para>
 &kdesvn; let the external program make the difference. %1 and %2 will be replaced with required values (file names or folder names). &kdesvn;
-  stores content to compare in a temporary environment (when folders do an <quote>export</quote>, when single file, does a <quote>cat</quote>) when needed and
+  stores content to compare in a temporary environment (when folders does an <quote>export</quote>, when single file, does a <quote>cat</quote>) when needed and
 cleans up after closing external program or closing itself.
 </para></listitem>
 </varlistentry>
 <varlistentry>
 <term>Prefer external merge program</term>
-<listitem><para>Select if in merge dialog "Use external program" should be checked or not as default.</para></listitem>
+<listitem><para>Select if in merge dialog <guilabel>Use external merge</guilabel> should be checked or not as default.</para></listitem>
 </varlistentry>
 </variablelist>
 </para>
@@ -1610,18 +1610,18 @@ You may use an external program like &kdiff3; for resolving conflicts, the defau
 <sect3>
 <title>Variable substitution for external conflict resolver</title>
 <para>
-In parenthesis after each description an example how subversion would call the files. This options meaning are designed for &kdiff3;, because at this moment this is the only one supporting all parameters required for a good conflict resolving.
+In parenthesis after each description is an example how subversion would call the files. These options are designed for &kdiff3;, because at this moment this is the only one application supporting all parameters required for a good conflict resolving.
 <variablelist>
 <varlistentry>
 <term>%o or %l</term>
 <listitem><para>
-Old (local,left) version. This means the lower revision number, &eg;, the start point of conflicted changes. (<filename>foo.cc.r2</filename>)
+Old (local, left) version. This means the lower revision number, &ie; the start point of conflicted changes. (<filename>foo.cc.r2</filename>)
 </para></listitem>
 </varlistentry>
 <varlistentry>
 <term>%m or %w</term>
 <listitem><para>
-Mine (working) version of file, &eg;, what you had changed against old version. (<filename>foo.cc.mine</filename>)
+Mine (working) version of file, &ie; what you had changed against old version. (<filename>foo.cc.mine</filename>)
 </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -1633,7 +1633,7 @@ New (remote, right) version of file. For example, version someone other had made
 <varlistentry>
 <term>%t</term>
 <listitem><para>
-Target name, &eg;, the origin name. For &kdiff3; (as an example) this would be name after the <option>-o</option> parameter (= output file). (<filename>foo.cc</filename>)
+Target name, &eg; the origin name. For &kdiff3; (as an example) this would be name after the <option>-o</option> parameter (= output file). (<filename>foo.cc</filename>)
 </para></listitem>
 </varlistentry>
 </variablelist>
@@ -1671,7 +1671,7 @@ If set, no action menu entry for &kdesvn; is made in &konqueror;.</para></listit
 <term>KIO operations use standard log message</term>
 <listitem><para>
   When making operations on a repository via the &kdesvn; KIO protocol from within &konqueror; (&eg;, <quote>ksvn+...</quote> protocols) on large operations like moving or copy folders &kdesvn; would ask for a log message for each item. This is a behavior of &konqueror;.
-When this option is set, the KIO implementation from &kdesvn; will not ask for a log message but set a standard log message. This flags not the operations from
+When this option is set, the KIO implementation from &kdesvn; will not ask for a log message but set a standard log message. This flag is not for the operations from
 &kdesvn; action menu for &konqueror; but only copy/move/mkdir/delete made with &konqueror; or other file managers on a KIO-url.
 </para></listitem>
 </varlistentry>
@@ -1876,7 +1876,7 @@ Be careful, this list may be really big!</para>
 <guisubmenu>General</guisubmenu>
 <guimenuitem>Export a repository</guimenuitem>
 </menuchoice></term>
-<listitem><para>Exports a repository to file system, &eg; creates a clean revision tree without
+<listitem><para>Exports a repository to file system, &ie; creates a clean revision tree without
 subversion information.
 </para></listitem>
 </varlistentry>
@@ -1977,7 +1977,7 @@ last state the working copy was updated to, not against the version in repositor
 <term><menuchoice>
 <guimenu>Subversion</guimenu>
 <guisubmenu>Working copy</guisubmenu>
-<guimenuitem>Resolve recursive</guimenuitem>
+<guimenuitem>Mark resolved</guimenuitem>
 </menuchoice></term>
 <listitem><para>Mark conflicted items as not conflicted and remove associated files.</para></listitem>
 </varlistentry>
@@ -2165,7 +2165,7 @@ check out <ulink url="http://kdesvn.alwins-world.de/ticket/128">issue entry</uli
 <appendix id="revision-syntax">
 <title>Syntax for revisions</title>
 <para>
-Revisions may given in same form like to the standard svn - client. That means: number, keyword or date.
+  Revisions may be given in the same form as for the standard <application>svn</application> client. That means: number, keyword or date.
 </para>
 <para>
 <variablelist>

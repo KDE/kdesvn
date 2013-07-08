@@ -1544,7 +1544,7 @@ The difference will generated with subversion and put direct into standard input
 <varlistentry>
 <term>&lt;program&gt; &lt;parameter&gt; %f</term>
 <listitem><para>
-  The difference will be generated with subversion, saved into a temporary file and the parameter <option>%f</option> will replaced with that file name.
+  The difference will be generated with subversion, saved into a temporary file and the parameter <option>%f</option> will be replaced with that file name.
   This may be used, for instance, with a simple call to <application>less</application> or text viewer.
 </para></listitem>
 </varlistentry>
@@ -1567,7 +1567,7 @@ cleans up after closing external program or closing itself.
 <sect2>
 <title>External merge program</title>
 <para>
-  Setup the program and options for using when subversions builtin merge isn't wanted. The default is <command>kdiff3 %s1 %s2 %t</command>. The order of substitution variables isn't important, and them may there more than once, &eg; like <literal>kdiff3 -o %t %s1 %s2 %t</literal>. This stuff is only tested with <application>meld</application> and &kdiff3;. Think about that external programs mostly do not know anything about subversion <command>ignore</command> parameter so them may show lot more than expected.
+  Setup the program and options for using when subversion's builtin merge isn't wanted. The default is <command>kdiff3 %s1 %s2 %t</command>. The order of substitution variables isn't important, and them may there more than once, &eg; like <literal>kdiff3 -o %t %s1 %s2 %t</literal>. This stuff is only tested with <application>meld</application> and &kdiff3;. Think about that external programs mostly do not know anything about subversion <command>ignore</command> parameter so them may show lot more than expected.
 </para>
 <sect3>
 <title>Variable substitutions for external merge program</title>
@@ -1670,7 +1670,7 @@ If set, no action menu entry for &kdesvn; is made in &konqueror;.</para></listit
 <varlistentry>
 <term>KIO operations use standard log message</term>
 <listitem><para>
-  When making operations on a repository via the &kdesvn; KIO protocol from within &konqueror; (&eg;, <quote>ksvn+...</quote> protocols) on large operations like moving or copy folders &kdesvn; would ask for a log message for each item. This is a behavior of &konqueror;.
+  When making operations on a repository via the &kdesvn; KIO protocol from within &konqueror; (&ie;, <quote>ksvn+...</quote> protocols) on large operations like moving or copy folders &kdesvn; would ask for a log message for each item. This is a behavior of &konqueror;.
 When this option is set, the KIO implementation from &kdesvn; will not ask for a log message but set a standard log message. This flag is not for the operations from
 &kdesvn; action menu for &konqueror; but only copy/move/mkdir/delete made with &konqueror; or other file managers on a KIO-url.
 </para></listitem>
@@ -2091,8 +2091,8 @@ application work. -->
 <para>
   The <quote>problem</quote> is ssh itself. Subversion creates for each command sending a tunnel
 to the repository. And on each tunnel it is a new ssh connection. And for every connection ssh must
-authenticate. This may you fix when you store your local public identity to the host containing the
-repository. If your public identity has a password, ssh-agent will asked (when ssh-agent is installed).
+authenticate. This can be fixed if you store your local public identity to the host containing the
+repository. If your public identity has a password, <application>ssh-agent</application> will be asked (when ssh-agent is installed).
 </para>
 <para>
 When you're running a ssh-agent before starting &kdesvn;, you should add your identity to its cache, &kdesvn; will not
@@ -2143,7 +2143,7 @@ There are many reasons why the program couldn't load. This mostly happens when y
 check out <ulink url="http://kdesvn.alwins-world.de/ticket/128">issue entry</ulink>.
 </para>
 <para>
-  The next big thing could that you forgot to give a lib suffix on 64-bit systems at compile-time. So the part will installed in <filename class="directory">$PREFIX/lib</filename> instead of <filename class="directory">$PREFIX/lib64</filename>. So give <option>-DLIB_SUFFIX=64</option> as parameter to <command>cmake</command>.
+  The next big thing could that you forgot to give a lib suffix on 64-bit systems at compile-time. So the part was installed in <filename class="directory">$PREFIX/lib</filename> instead of <filename class="directory">$PREFIX/lib64</filename>. So give <option>-DLIB_SUFFIX=64</option> as parameter to <command>cmake</command>.
 </para>
 <para>If this does not solve your problem, you may try out on a console:</para>
 <programlisting>

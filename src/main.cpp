@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     KAboutData about(QByteArray("kdesvn"),QByteArray("kdesvn"),ki18n("kdesvn"),QByteArray(version),ki18n(description),
                      KAboutData::License_GPL,ki18n("(C) 2005-2009 Rajko Albrecht"));
     about.addAuthor( ki18n("Rajko Albrecht"),ki18n("Developer"),QByteArray("ral@alwins-world.de"),QByteArray());
-    about.setHomepage("http://kdesvn.alwins-world.de/");
+    about.setHomepage("https://projects.kde.org/projects/playground/devtools/kdesvn");
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineOptions options;

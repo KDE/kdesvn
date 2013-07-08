@@ -169,11 +169,11 @@ KAboutData* kdesvnpart::createAboutData()
                                       ki18n("(C) 2005-2009 Rajko Albrecht"),
                                       KLocalizedString(),
                                       QByteArray(),
-                                      "kdesvn-bugs@alwins-world.de");
+                                      0L);
 
     about.addAuthor(ki18n("Rajko Albrecht"), ki18n("Original author and maintainer"), "ral@alwins-world.de" );
     about.setOtherText(m_Extratext);
-    about.setHomepage("http://kdesvn.alwins-world.de/");
+    about.setHomepage("https://projects.kde.org/projects/playground/devtools/kdesvn");
     about.setProgramIconName("kdesvn");
     return &about;
 }

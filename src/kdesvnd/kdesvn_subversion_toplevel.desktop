@@ -18,6 +18,7 @@ Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
 Comment[ca]=Mostra el registre de Subversion
+Comment[hu]=Megjeleníti a Subversion naplót
 Comment[it]=Visualizza il log di Subversion
 Comment[pt]=Mostra o registo histórico do Subversion
 Comment[pt_BR]=Mostra o registro (log) do Subversion

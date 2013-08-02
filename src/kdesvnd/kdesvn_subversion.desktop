@@ -2,6 +2,7 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
 X-KDE-Submenu=Subversion (kdesvn)
+X-KDE-Submenu[bs]=Subversion (kdesvn)
 X-KDE-Submenu[ca]=Subversion (kdesvn)
 X-KDE-Submenu[fr]=Subversion (kdesvn)
 X-KDE-Submenu[hu]=Subversion (kdesvn)
@@ -57,6 +58,7 @@ Exec=kdesvn exec info %U
 
 [Desktop Action Add]
 Name=Add to Repository
+Name[bs]=Add to Repository
 Name[ca]=Afegeix al repositori
 Name[fr]=Ajouter au dépôt
 Name[hu]=Hozzáadás a tárolóhoz
@@ -87,6 +89,7 @@ Exec=kdesvn exec addnew %U
 
 [Desktop Action Delete]
 Name=Delete From Repository
+Name[bs]=Delete From Repository
 Name[ca]=Elimina del repositori
 Name[fr]=Supprimer du dépôt
 Name[it]=Elimina dal deposito
@@ -102,6 +105,7 @@ Exec=kdesvn exec rm %U
 
 [Desktop Action Revert]
 Name=Revert Local Changes
+Name[bs]=Poništi lokalne promjene
 Name[ca]=Reverteix els canvis locals
 Name[fr]=Revenir sur les changements locaux
 Name[nl]=Lokale wijzigingen ongedaan maken
@@ -114,6 +118,7 @@ Name[x-test]=xxRevert Local Changesxx
 Icon=kdesvnreverse
 Exec=kdesvn exec revert %U
 Comment=Remove any changes made locally. Warning - this cannot be undone.
+Comment[bs]=Ukloni bilo koje promjene napravljene lokalno. Upozorenje - ovo ne može biti ponovno vraćeno.
 Comment[ca]=Elimina qualsevol canvi local. Avís: No es pot desfer.
 Comment[fr]=Supprimez tous changements effectués localement. Avertissement - il est impossible d'annuler cette action.
 Comment[nl]=Lokale wijzigingen ongedaan maken. Let op: dit kan niet teruggedraaid worden.
@@ -126,6 +131,7 @@ Comment[x-test]=xxRemove any changes made locally. Warning - this cannot be undo
 
 [Desktop Action Rename]
 Name=Rename...
+Name[bs]=Preimenuj...
 Name[ca]=Reanomena...
 Name[fr]=Renommer...
 Name[it]=Rinomina...
@@ -139,6 +145,7 @@ Name[x-test]=xxRename...xx
 Icon=kdesvnmove
 Exec=kdesvn exec mv %U
 Comment=Rename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.
+Comment[bs]=Preimenuj datoteku lokalno i u spremištu. Koristi ovo radije nego dodavanje i brisanje za preimenovanje datoteke.
 Comment[ca]=Reanomena un fitxer localment i en el repositori. Use-ho en comptes d'afegir i eliminar per a reanomenar un fitxer.
 Comment[fr]=Renommez un fichier localement et dans le dépôt. Utilisez cette fonction plutôt que l'ajout et la suppression pour renommer un fichier.
 Comment[nl]=Hernoem een bestand lokaal en in de repository. Gebruik dit bij voorkeur boven het verwijderen van een bestand en het toevoegen onder een andere naam.
@@ -176,6 +183,7 @@ Comment[x-test]=xxPut folder into an existing repository to put it under revisio
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
+Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Obtén del repositori...
 Name[fr]=Extraire du dépôt...
 Name[nl]=Repository uitchecken...
@@ -188,6 +196,7 @@ Name[x-test]=xxCheckout From Repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
 Comment[fr]=Extrait des fichiers d'un dépôt existant dans ce dossier.
 Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
@@ -200,6 +209,7 @@ Comment[x-test]=xxCheckout out files from an existing repository into this folde
 
 [Desktop Action Switch]
 Name=Switch...
+Name[bs]=Prebaci...
 Name[ca]=Canvia...
 Name[fr]=Basculer...
 Name[nl]=Omzetten (switch)...
@@ -211,6 +221,7 @@ Name[uk]=Перемкнути…
 Name[x-test]=xxSwitch...xx
 Icon=kdesvnswitch
 Comment=Switch given working copy to another branch
+Comment[bs]=Switch given working copy to another branch
 Comment[ca]=Canvia una còpia de treball indicada a una altra branca
 Comment[fr]=Bascule une copie opérationnelle donnée vers une autre branche
 Comment[nl]=Opgegeven werkkopie wisselen naar andere branch
@@ -224,6 +235,7 @@ Exec=kdesvn exec switch %U
 
 [Desktop Action Merge]
 Name=Merge...
+Name[bs]=Merge...
 Name[ca]=Fusiona...
 Name[fr]=Fusionner...
 Name[nl]=Samenvoegen...
@@ -235,6 +247,7 @@ Name[uk]=Об’єднати…
 Name[x-test]=xxMerge...xx
 Icon=kdesvnmerge
 Comment=Merge changes between this and another branch
+Comment[bs]=Merge changes between this and another branch
 Comment[ca]=Fusiona els canvis entre aquesta i una altra branca
 Comment[fr]=Fusionne les changements entre cette branche et une autre branche
 Comment[nl]=Deze en een andere tak samenvoegen
@@ -248,6 +261,7 @@ Exec=kio_svn_helper -m %U
 
 [Desktop Action Blame]
 Name=Blame...
+Name[bs]=Blame...
 Name[ca]=Responsable...
 Name[fr]=Blâmer...
 Name[nl]=Annotatie...
@@ -259,6 +273,7 @@ Name[uk]=Визначити автора…
 Name[x-test]=xxBlame...xx
 Icon=kdesvnblame
 Comment=See who wrote each line of the file and in what revision
+Comment[bs]=Pogledaj ko je napisao svaku liniju u datoteci i pod kakvom kontrolom
 Comment[ca]=Veu qui va escriure cada línia del fitxer i en quina revisió
 Comment[fr]=Voit qui a écrit chaque ligne du fichier et dans quelle révision
 Comment[nl]=Bekijk wie welke regel van het bestand geschreven heeft en in welke revisie
@@ -272,6 +287,7 @@ Exec=kdesvn exec blame %U
 
 [Desktop Action CreatePatch]
 Name=Create Patch...
+Name[bs]=Create Patch...
 Name[ca]=Crea un pedaç...
 Name[fr]=Créer un correctif...
 Name[nl]=Patch aanmaken...
@@ -285,6 +301,7 @@ Exec=kio_svn_helper -p %U
 
 [Desktop Action Export]
 Name=Export...
+Name[bs]=Export...
 Name[ca]=Exporta...
 Name[fr]=Exporter...
 Name[it]=Esporta...
@@ -298,6 +315,7 @@ Name[x-test]=xxExport...xx
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[bs]=Checkout out an unversioned copy of a tree from a repository
 Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
 Comment[fr]=Extraire d'un dépôt une copie non versionnée d'une arborescence
 Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
@@ -310,6 +328,7 @@ Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 
 [Desktop Action Diff]
 Name=Diff (local)
+Name[bs]=Diff (lokalno)
 Name[ca]=Diff (local)
 Name[fr]=Diff (local)
 Name[nl]=Diff (lokaal)
@@ -322,6 +341,7 @@ Name[x-test]=xxDiff (local)xx
 Icon=kdesvndiff
 Exec=kdesvn exec diff %U
 Comment=Show local changes since last update
+Comment[bs]=Show local changes since last update
 Comment[ca]=Mostra els canvis locals des de l'última actualització
 Comment[fr]=Afficher les changements locaux depuis la dernière mise à jour
 Comment[nl]=Lokale wijzigingen sinds de laatste update tonen
@@ -360,6 +380,7 @@ Exec=kdesvn exec commit %U
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
+Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Obtén des d'un repositori...
 Name[fr]=Extraire d'un dépôt...
 Name[pt]=Obter de um repositório...
@@ -371,6 +392,7 @@ Name[x-test]=xxCheckout from a repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
 Comment[fr]=Extrait des fichiers d'un dépôt existant dans ce dossier.
 Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
@@ -383,6 +405,7 @@ Comment[x-test]=xxCheckout out files from an existing repository into this folde
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
+Name[bs]=Izvoz iz Subversion repozitorija
 Name[ca]=Exporta des d'un repositori de Subversion...
 Name[fr]=Exporter à partir d'un dépôt Subversion...
 Name[pt]=Exportar de um repositório de Subversion...
@@ -394,6 +417,7 @@ Name[x-test]=xxExport from a Subversion repository...xx
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[bs]=Checkout out an unversioned copy of a tree from a repository
 Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
 Comment[fr]=Extraire d'un dépôt une copie non versionnée d'une arborescence
 Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
@@ -406,6 +430,7 @@ Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 
 [Desktop Action Tree]
 Name=Display revision tree
+Name[bs]=Prikaz stabla revizija
 Name[ca]=Mostra l'arbre de revisions
 Name[fr]=Afficher l'arbre de révision
 Name[pt]=Mostrar a árvore de versões

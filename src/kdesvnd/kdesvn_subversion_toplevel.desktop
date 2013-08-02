@@ -7,6 +7,7 @@ Actions=Checkout;Export;Update;Commit;Log;Exportto;Checkoutto;
 
 [Desktop Action Log]
 Name=kdesvn log (last 100)
+Name[bs]=kdesvn dnevnik (zadnjih 100)
 Name[ca]=Registre del kdesvn (últims 100)
 Name[fr]=journal de kdesvn (les 100 dernières lignes)
 Name[pt]=histórico do kdesvn (últimos 100)
@@ -31,6 +32,7 @@ Comment[x-test]=xxDisplays the Subversion logxx
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
+Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Obtén del repositori...
 Name[fr]=Extraire du dépôt...
 Name[nl]=Repository uitchecken...
@@ -43,6 +45,7 @@ Name[x-test]=xxCheckout From Repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
 Comment[fr]=Extrait des fichiers d'un dépôt existant dans ce dossier.
 Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
@@ -55,6 +58,7 @@ Comment[x-test]=xxCheckout out files from an existing repository into this folde
 
 [Desktop Action Export]
 Name=Export...
+Name[bs]=Export...
 Name[ca]=Exporta...
 Name[fr]=Exporter...
 Name[it]=Esporta...
@@ -68,6 +72,7 @@ Name[x-test]=xxExport...xx
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[bs]=Checkout out an unversioned copy of a tree from a repository
 Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
 Comment[fr]=Extraire d'un dépôt une copie non versionnée d'une arborescence
 Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository
@@ -106,6 +111,7 @@ Exec=kdesvn exec commit %U
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
+Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Obtén des d'un repositori...
 Name[fr]=Extraire d'un dépôt...
 Name[pt]=Obter de um repositório...
@@ -117,6 +123,7 @@ Name[x-test]=xxCheckout from a repository...xx
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
 Comment[fr]=Extrait des fichiers d'un dépôt existant dans ce dossier.
 Comment[nl]=Bestanden van een bestaande repository uitchecken in deze map.
@@ -129,6 +136,7 @@ Comment[x-test]=xxCheckout out files from an existing repository into this folde
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
+Name[bs]=Izvoz iz Subversion repozitorija
 Name[ca]=Exporta des d'un repositori de Subversion...
 Name[fr]=Exporter à partir d'un dépôt Subversion...
 Name[pt]=Exportar de um repositório de Subversion...
@@ -140,6 +148,7 @@ Name[x-test]=xxExport from a Subversion repository...xx
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[bs]=Checkout out an unversioned copy of a tree from a repository
 Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
 Comment[fr]=Extraire d'un dépôt une copie non versionnée d'une arborescence
 Comment[nl]=Een niet onder versiebeheer vallende kopie uitchecken van een tak uit de repository

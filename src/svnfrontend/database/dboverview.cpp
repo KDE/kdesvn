@@ -141,7 +141,7 @@ QString DbOverview::selectedRepository()const
 
 void DbOverview::deleteCacheItems()
 {
-    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache for repository\n%1?").arg(selectedRepository()),i18n("Clean repository cache"));
+    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache for repository\n%1?", selectedRepository()),i18n("Clean repository cache"));
     if (i != KMessageBox::Yes) {
         return;
     }
@@ -159,7 +159,7 @@ void DbOverview::deleteCacheItems()
 
 void DbOverview::deleteRepository()
 {
-    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache and data for repository\n%1?").arg(selectedRepository()),i18n("Delete repository"));
+    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache and data for repository\n%1?", selectedRepository()),i18n("Delete repository"));
     if (i != KMessageBox::Yes) {
         return;
     }

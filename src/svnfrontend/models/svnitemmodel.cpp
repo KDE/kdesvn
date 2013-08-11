@@ -34,7 +34,6 @@
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kdirwatch.h>
-#include <kdebug.h>
 
 #include <QItemSelectionModel>
 #include <QFileInfo>

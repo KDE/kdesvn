@@ -1940,7 +1940,10 @@ void SvnActions::slotResolve(const QString&p)
         return;
     }
     QFileInfo fi(p);
-    QString base = fi.absolutePath();
+    QString base = "";
+    if (fi.isRelative()) {
+        base = fi.absolutePath()+"/";
+    }
     if (!i1.conflictNew().length()||
            !i1.conflictOld().length()||
            !i1.conflictWrk().length() ) {
@@ -1951,11 +1954,11 @@ void SvnActions::slotResolve(const QString&p)
     WatchedProcess*proc = new WatchedProcess(this);
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%o"||*it=="%l") {
-            *proc<<(base+'/'+i1.conflictOld());
+            *proc<<(base+i1.conflictOld());
         } else if (*it=="%m" || *it=="%w") {
-            *proc<<(base+'/'+i1.conflictWrk());
+            *proc<<(base+i1.conflictWrk());
         } else if (*it=="%n"||*it=="%r") {
-            *proc<<(base+'/'+i1.conflictNew());
+            *proc<<(base+i1.conflictNew());
         } else if (*it=="%t") {
             *proc<<p;
         } else {

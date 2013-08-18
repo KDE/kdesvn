@@ -31,6 +31,13 @@
 
 #include <qstring.h>
 
+#ifdef HAS_SVN_VERSION_H
+#include <svn_version.h>
+#endif
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+struct svn_client_info2_t;
+#endif
 struct svn_info_t;
 
 namespace svn {

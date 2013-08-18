@@ -176,7 +176,11 @@ namespace svn
 
   static svn_error_t * InfoEntryFunc(void*baton,
                             const char*path,
+#if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR>=7)) || (SVN_VER_MAJOR > 1)
+                            const svn_client_info2_t*info,
+#else
                             const svn_info_t*info,
+#endif
                             apr_pool_t *)
   {
     InfoEntriesBaton* seb = (InfoEntriesBaton*)baton;
@@ -498,31 +502,33 @@ namespace svn
         }
     }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error =
-            svn_client_info2(truepath,
-                        internal_peg?&pegr:peg_revision.revision(),
-                        rev.revision (),
-                        &InfoEntryFunc,
-                        &baton,
-                        internal::DepthToSvn(depth),
-                        changelists.array(pool),
-                        *m_context,    //client ctx
-                        pool);
+#if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR>=7)) || (SVN_VER_MAJOR > 1)
+            svn_client_info3
+                (truepath,
+                 internal_peg?&pegr:peg_revision.revision(),
+                 rev.revision (),
+                 internal::DepthToSvn(depth),
+                 false, // TODO parameter for fetch exclueded
+                 false, // TODO parameter for fetch_actual_only
+                 changelists.array(pool),
+                 &InfoEntryFunc,
+                 &baton,
+                 *m_context,
+                 pool);
 #else
-    bool rec = depth==DepthInfinity;
-    Q_UNUSED(changelists);
-    error =
-            svn_client_info(truepath,
-                      internal_peg?&pegr:peg_revision.revision(),
-                      rev.revision (),
-                      &InfoEntryFunc,
-                      &baton,
-                      rec,
-                      *m_context,    //client ctx
-                      pool);
+            svn_client_info2
+                (truepath,
+                    internal_peg?&pegr:peg_revision.revision(),
+                    rev.revision (),
+                    &InfoEntryFunc,
+                    &baton,
+                    internal::DepthToSvn(depth),
+                    changelists.array(pool),
+                    *m_context,    //client ctx
+                    pool);
 #endif
-
+                
     checkErrorThrow(error);
     return baton.entries;
   }

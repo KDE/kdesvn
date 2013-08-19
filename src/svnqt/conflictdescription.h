@@ -25,6 +25,7 @@
 #define SVNCONFLICTDESCRIPTION_H
 
 struct svn_wc_conflict_description_t;
+struct svn_wc_conflict_description2_t;
 
 #include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
@@ -54,14 +55,17 @@ public:
         ReasonDeleted,
         ReasonMissing,
         ReasonUnversioned,
-        ReasonAdded
+        ReasonAdded,
+        ReasonReplaced
     };
     enum ConflictAction {
         ConflictEdit,
         ConflictAdd,
-        ConflictDelete
+        ConflictDelete,
+        ConflictReplace
     };
-    explicit ConflictDescription(const svn_wc_conflict_description_t * = NULL);
+    explicit ConflictDescription(const svn_wc_conflict_description_t *);
+    explicit ConflictDescription(const svn_wc_conflict_description2_t *);
     ~ConflictDescription();
 
     ConflictAction action() const;
@@ -96,6 +100,9 @@ protected:
     QString m_theirFile;
     svn_node_kind_t m_nodeKind;
 };
+
+typedef SharedPointer<ConflictDescription> ConflictDescriptionP;
+typedef QList<ConflictDescriptionP> ConflictDescriptionList;
 
 }
 

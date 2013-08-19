@@ -102,7 +102,6 @@ namespace svn
 
   bool Client_impl::RepoHasCapability(const Path&repository,Capability capability)
   {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
         svn_error_t* error = 0;
         Pool pool;
 
@@ -140,12 +139,6 @@ namespace svn
             throw ClientException(error);
         }
         return has;
-#else
-      Q_UNUSED(repository);
-      Q_UNUSED(capability);
-      return false;
-#endif
-
   }
 }
 

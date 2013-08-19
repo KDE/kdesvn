@@ -65,7 +65,6 @@ Client_impl::checkout(const CheckoutParameter &parameters) throw (ClientExceptio
     Pool subPool;
     svn_revnum_t revnum = 0;
     svn_error_t *error = 0;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error = svn_client_checkout3(&revnum,
                                  parameters.moduleName().cstr(),
                                  parameters.destination().cstr(),
@@ -76,19 +75,6 @@ Client_impl::checkout(const CheckoutParameter &parameters) throw (ClientExceptio
                                  parameters.overWrite(),
                                  *m_context,
                                  subPool);
-#else
-    bool recurse = parameters.depth() == DepthInfinity;
-    Q_UNUSED(overwrite);
-    error = svn_client_checkout2(&revnum,
-                                 parameters.moduleName().cstr(),
-                                 parameters.destination().cstr(),
-                                 parameters.peg().revision(),
-                                 parameters.revision().revision(),
-                                 recurse,
-                                 parameters.ignoreExternals(),
-                                 *m_context,
-                                 subPool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }
@@ -107,7 +93,6 @@ Client_impl::remove(const Targets &targets,
     svn_commit_info_t *commit_info = 0;
 
     svn_error_t *error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
         svn_client_delete3(
             &commit_info,
             targets.array(pool),
@@ -117,16 +102,6 @@ Client_impl::remove(const Targets &targets,
             *m_context,
             pool
         );
-#else
-        svn_client_delete2
-        (&commit_info,
-         const_cast<apr_array_header_t *>(targets.array(pool)),
-         force,
-         *m_context,
-         pool);
-    Q_UNUSED(keep_local);
-    Q_UNUSED(revProps);
-#endif
     if (error != 0) {
         throw ClientException(error);
     }
@@ -144,23 +119,12 @@ Client_impl::revert(const Targets &targets,
 {
     Pool pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error =
         svn_client_revert2((targets.array(pool)),
                            internal::DepthToSvn(depth),
                            changelist.array(pool),
                            *m_context,
                            pool);
-
-#else
-    bool recurse = depth == DepthInfinity;
-    Q_UNUSED(changelist);
-    svn_error_t *error =
-        svn_client_revert((targets.array(pool)),
-                          recurse,
-                          *m_context,
-                          pool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }
@@ -171,7 +135,6 @@ Client_impl::add(const Path &path,
                  svn::Depth depth, bool force, bool no_ignore, bool add_parents) throw (ClientException)
 {
     Pool pool;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error =
         svn_client_add4(path.cstr(),
                         internal::DepthToSvn(depth),
@@ -180,16 +143,6 @@ Client_impl::add(const Path &path,
                         add_parents,
                         *m_context,
                         pool);
-#else
-    Q_UNUSED(add_parents);
-    svn_error_t *error =
-        svn_client_add3(path.cstr(),
-                        depth == DepthInfinity,
-                        force,
-                        no_ignore,
-                        *m_context,
-                        pool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }
@@ -204,8 +157,8 @@ Client_impl::update(const UpdateParameter &params) throw (ClientException)
 
     apr_pool_t *apr_pool = pool.pool();
     apr_array_header_t *apr_revisions = apr_array_make(apr_pool,
-                                        params.targets().size(),
-                                        sizeof(svn_revnum_t));
+                                                       params.targets().size(),
+                                                       sizeof(svn_revnum_t));
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
     error = svn_client_update4(&apr_revisions, params.targets().array(pool), params.revision(),
                                internal::DepthToSvn(params.depth()), params.sticky_depth(),
@@ -263,8 +216,7 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
             commit_info,
             *m_context,
             pool);
-#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-
+#else
     svn_error_t *error =
         svn_client_commit4(
             &commit_info,
@@ -276,17 +228,6 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
             map2hash(parameters.revisionProperties(), pool),
             *m_context,
             pool);
-#else
-    bool recurse = parameters.depth() == DepthInfinity;
-
-    svn_error_t *error =
-        svn_client_commit3
-        (&commit_info,
-         parameters.targets().array(pool),
-         recurse,
-         parameters.keepLocks(),
-         *m_context,
-         pool);
 #endif
     if (error != NULL) {
         throw ClientException(error);
@@ -305,24 +246,7 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
     if (parameter.srcPath().size() < 1) {
         throw ClientException("Wrong size of sources.");
     }
-#if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR < 5) )
-    Revision rev;
-    if (parameter.srcPath().size() > 1 && !parameter.getAsChild()) {
-        throw ClientException("Multiple sources not allowed");
-    }
 
-    Path _dest;
-    QString base, dir;
-    for (size_t j = 0; j < parameter.srcPath().size(); ++j) {
-        _dest = parameter.destination();
-        if (parameter.asChild()) {
-            sparameter.srcPath()[j].split(dir, base);
-            _dest.addComponent(base);
-        }
-        rev  = copy(parameter.srcPath()[j], srcRevision, _dest);
-    }
-    return rev;
-#else
     Pool pool;
     svn_commit_info_t *commit_info = 0L;
     apr_array_header_t *sources = apr_array_make(pool, parameter.srcPath().size(), sizeof(svn_client_copy_source_t *));
@@ -355,7 +279,6 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
         return commit_info->revision;
     }
     return Revision::UNDEFINED;
-#endif
 }
 
 Revision
@@ -363,33 +286,11 @@ Client_impl::copy(const Path &srcPath,
                   const Revision &srcRevision,
                   const Path &destPath) throw (ClientException)
 {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     return copy(CopyParameter(srcPath, destPath).srcRevision(srcRevision).asChild(true).makeParent(false));
-#else
-    Pool pool;
-    svn_commit_info_t *commit_info = NULL;
-    svn_error_t *error =
-        svn_client_copy2
-        (&commit_info,
-         srcPath.cstr(),
-         srcRevision.revision(),
-         destPath.cstr(),
-         *m_context,
-         pool);
-
-    if (error != 0) {
-        throw ClientException(error);
-    }
-    if (commit_info) {
-        return commit_info->revision;
-    }
-    return Revision::UNDEFINED;
-#endif
 }
 
 svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientException)
 {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     Pool pool;
     svn_commit_info_t *commit_info = 0;
     svn_error_t *error = svn_client_move5(
@@ -410,23 +311,6 @@ svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientExc
         return commit_info->revision;
     }
     return Revision::UNDEFINED;
-#else
-    Revision rev;
-    if (srcPaths.size() > 1 && !asChild) {
-        throw ClientException("Multiple sources not allowed");
-    }
-    QString base, dir;
-    Path _dest;
-    for (size_t j = 0; j < srcPaths.size(); ++j) {
-        _dest = destPath;
-        if (asChild) {
-            srcPaths[j].split(dir, base);
-            _dest.addComponent(base);
-        }
-        rev = move(srcPaths[j], _dest, force);
-    }
-    return rev;
-#endif
 }
 
 svn::Revision
@@ -443,21 +327,12 @@ Client_impl::mkdir(const Targets &targets,
 
     svn_error_t *error = 0;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error = svn_client_mkdir3
             (&commit_info,
              const_cast<apr_array_header_t *>(targets.array(pool)),
              makeParent,
              map2hash(revProps, pool),
              *m_context, pool);
-#else
-    Q_UNUSED(makeParent);
-    Q_UNUSED(revProps);
-    error = svn_client_mkdir2
-            (&commit_info,
-             const_cast<apr_array_header_t *>(targets.array(pool)),
-             *m_context, pool);
-#endif
 
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
@@ -488,19 +363,9 @@ Client_impl::cleanup(const Path &path) throw (ClientException)
 void Client_impl::resolve(const Path &path, Depth depth, const ConflictResult &resolution) throw (ClientException)
 {
     Pool pool;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     const svn_wc_conflict_result_t *aResult = resolution.result(pool);
     svn_error_t *error = svn_client_resolve(path.cstr(), internal::DepthToSvn(depth), aResult->choice, *m_context, pool);
 
-#else
-    Q_UNUSED(resolution);
-    bool recurse = depth == DepthInfinity;
-    svn_error_t *error =
-        svn_client_resolved(path.cstr(),
-                            recurse,
-                            *m_context,
-                            pool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }
@@ -517,7 +382,6 @@ Client_impl::doExport(const CheckoutParameter &params) throw (ClientException)
     } else {
         _neol = params.nativeEol().toUtf8();
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error =
         svn_client_export4(&revnum,
                            params.moduleName().cstr(),
@@ -530,21 +394,6 @@ Client_impl::doExport(const CheckoutParameter &params) throw (ClientException)
                            _neol,
                            *m_context,
                            pool);
-#else
-    bool recurse = params.depth() == svn::DepthInfinity;
-    svn_error_t *error =
-        svn_client_export3(&revnum,
-                           params.moduleName().cstr(),
-                           params.destination().cstr(),
-                           params.peg().revision(),
-                           params.revision().revision(),
-                           params.overWrite(),
-                           params.ignoreExternals(),
-                           recurse,
-                           _neol,
-                           *m_context,
-                           pool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }

@@ -44,6 +44,7 @@
 #include "helper.h"
 #include <QCoreApplication>
 
+
 namespace svn
 {
 
@@ -76,7 +77,6 @@ Client_impl::proplist(const Path &path,
 
     PathPropertiesMapListPtr path_prop_map_list = PathPropertiesMapListPtr(new PathPropertiesMapList);
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     propBaton baton;
     baton.m_context = m_context;
     baton.resultlist = path_prop_map_list;
@@ -91,46 +91,10 @@ Client_impl::proplist(const Path &path,
             &baton,
             *m_context,
             pool);
-#else
-    Q_UNUSED(changelists);
-    Q_UNUSED(ProplistReceiver);
-    bool recurse = depth == DepthInfinity;
-    apr_array_header_t *props;
-    svn_error_t *error =
-        svn_client_proplist2(&props,
-                             path.cstr(),
-                             peg.revision(),
-                             revision.revision(),
-                             recurse,
-                             *m_context,
-                             pool);
-
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 5))
-    for (int j = 0; j < props->nelts; ++j) {
-        svn_client_proplist_item_t *item =
-            ((svn_client_proplist_item_t **)props->elts)[j];
-
-        PropertiesMap prop_map;
-
-        apr_hash_index_t *hi;
-        for (hi = apr_hash_first(pool, item->prop_hash); hi;
-                hi = apr_hash_next(hi)) {
-            const void *key;
-            void *val;
-
-            apr_hash_this(hi, &key, NULL, &val);
-            prop_map[ QString::fromUtf8((const char *)key) ] =
-                QString::fromUtf8(((const svn_string_t *)val)->data);
-        }
-
-        path_prop_map_list->push_back(PathPropertiesMapEntry(QString::fromUtf8(item->node_name->data), prop_map));
-    }
-#endif
     return path_prop_map_list;
 }
 
@@ -147,7 +111,6 @@ Client_impl::propget(const QString &propName,
 
     apr_hash_t *props;
     svn_revnum_t actual = svn_revnum_t(-1);
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error = svn_client_propget3(&props,
                                              propName.toUtf8(),
                                              path.cstr(),
@@ -159,25 +122,12 @@ Client_impl::propget(const QString &propName,
                                              *m_context,
                                              pool
                                             );
-#else
-    bool recurse = depth == DepthInfinity;
-    Q_UNUSED(changelists);
-    svn_error_t *error =
-        svn_client_propget2(&props,
-                            propName.toUtf8(),
-                            path.cstr(),
-                            peg.revision(),
-                            revision.revision(),
-                            recurse,
-                            *m_context,
-                            pool);
-#endif
-
     if (error != NULL) {
         throw ClientException(error);
     }
 
     PathPropertiesMapList path_prop_map_list;
+
 
     apr_hash_index_t *hi;
     for (hi = apr_hash_first(pool, props); hi;
@@ -208,7 +158,6 @@ Client_impl::propset(const PropertiesParameter &params)
     }
 
     svn_error_t *error = 0;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_commit_info_t *commit_info;
     svn_client_propset3(
         &commit_info,
@@ -219,13 +168,6 @@ Client_impl::propset(const PropertiesParameter &params)
         params.changeList().array(pool),
         map2hash(params.revisionProperties(), pool),
         *m_context, pool);
-#else
-    bool recurse = params.depth() == DepthInfinity;
-    svn_client_propset2(
-        params.propertyName().toUtf8(),
-        propval, params.path().cstr(),
-        recurse, params.skipCheck(), *m_context, pool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }

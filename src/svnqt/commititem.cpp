@@ -68,7 +68,6 @@ CommitItem::CommitItem(const svn_client_commit_item3_t *_item)
     init();
 
     if (_item) {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
         m_Path = QString::fromUtf8(_item->path);
         m_Kind = _item->kind;
         m_Url = QString::fromUtf8(_item->url);
@@ -80,7 +79,6 @@ CommitItem::CommitItem(const svn_client_commit_item3_t *_item)
         if (_item->outgoing_prop_changes) {
             convertprop(_item->outgoing_prop_changes);
         }
-#endif
     }
 }
 

@@ -43,7 +43,6 @@ ConflictResult::ConflictResult(const svn_wc_conflict_result_t *aResult)
     if (!aResult) {
         return;
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     switch (aResult->choice) {
     case svn_wc_conflict_choose_base:
         m_choice = ChooseBase;
@@ -73,10 +72,6 @@ ConflictResult::ConflictResult(const svn_wc_conflict_result_t *aResult)
     } else {
         m_MergedFile.clear();
     }
-#else
-    m_choice = ChooseMerged;
-    Q_UNUSED(aResult);
-#endif
 }
 
 void ConflictResult::setMergedFile(const QString &aMergedfile)
@@ -91,7 +86,6 @@ void ConflictResult::setChoice(ConflictChoice aValue)
 
 void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, const Pool &pool)const
 {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_wc_conflict_choice_t _choice;
     switch (choice()) {
     case ConflictResult::ChooseBase:
@@ -125,10 +119,6 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, const Pool
         (*aResult)->choice = _choice;
         (*aResult)->merged_file = _merged_file;
     }
-#else
-    Q_UNUSED(aResult);
-    Q_UNUSED(pool);
-#endif
 }
 
 const svn_wc_conflict_result_t *ConflictResult::result(const Pool &pool)const

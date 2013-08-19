@@ -63,6 +63,7 @@ Client_impl::setContext(const ContextP &context)
     m_context = context;
 }
 
+
 void
 Client_impl::url2Revision(const QString &revstring,
                           Revision &start, Revision &end)
@@ -97,7 +98,6 @@ apr_hash_t *Client_impl::map2hash(const PropertiesMap &aMap, const Pool &pool)
 
 bool Client_impl::RepoHasCapability(const Path &repository, Capability capability)
 {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error = 0;
     Pool pool;
 
@@ -135,12 +135,6 @@ bool Client_impl::RepoHasCapability(const Path &repository, Capability capabilit
         throw ClientException(error);
     }
     return has;
-#else
-    Q_UNUSED(repository);
-    Q_UNUSED(capability);
-    return false;
-#endif
-
 }
 }
 

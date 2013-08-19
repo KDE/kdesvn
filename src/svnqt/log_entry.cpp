@@ -34,10 +34,7 @@
 
 // subversion api
 #include "svn_time.h"
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
 #include "svn_compat.h"
-#endif
-
 
 namespace svn
 {
@@ -87,7 +84,6 @@ namespace svn
   {
   }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
   LogEntry::LogEntry(svn_log_entry_t*log_entry,const StringArray&excludeList)
     : revision(-1),date(0),author(""),message("")
   {
@@ -95,6 +91,7 @@ namespace svn
       const char *author_;
       const char *date_;
       const char *message_;
+      // TODO remove this obsolete call with own method
       svn_compat_log_revprops_out(&author_, &date_, &message_, log_entry->revprops);
 
       author = author_ == 0 ? QString::fromLatin1("") : QString::FROMUTF8(author_);
@@ -134,7 +131,6 @@ namespace svn
         }
       }
   }
-#endif
 
   LogEntry::LogEntry (
     const svn_revnum_t revision_,

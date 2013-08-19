@@ -51,16 +51,11 @@ namespace svn
                         m_tmpPath.path().TOUTF8(),
                         svn_io_file_del_on_pool_cleanup, m_Pool,scratchPool);
 
-#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#else
         error = svn_io_open_unique_file2(&m_outFile, &m_outFileName,
                         m_tmpPath.path().TOUTF8(),
                         ".tmp",
                         svn_io_file_del_on_pool_cleanup, m_Pool);
-#else
-        error = svn_io_open_unique_file (&m_outFile, &m_outFileName,
-                        m_tmpPath.path().TOUTF8(),
-                        ".tmp",
-                        false, m_Pool);
 #endif
         if (error!=0) {
             clean();
@@ -70,23 +65,16 @@ namespace svn
         error = svn_io_open_unique_file3(&m_errFile, &m_errFileName,
                         m_tmpPath.path().TOUTF8(),
                         svn_io_file_del_on_pool_cleanup, m_Pool,scratchPool);
-#elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#else
         error = svn_io_open_unique_file2(&m_errFile, &m_errFileName,
                         m_tmpPath.path().TOUTF8(),
                         ".tmp",
                         svn_io_file_del_on_pool_cleanup, m_Pool);
-#else
-        error = svn_io_open_unique_file (&m_errFile, &m_errFileName,
-                        m_tmpPath.path().TOUTF8(),
-                        ".tmp",
-                        false, m_Pool);
 #endif
         if (error!=0) {
             clean();
             throw ClientException (error);
         }
-//        qDebug("Ausgabe: %s",m_outFileName);
-//        qDebug("Fehler: %s",m_errFileName);
         if (svn_path_is_url(m_p1.cstr())) {
             m_url_is_present = true;
         } else {
@@ -114,16 +102,6 @@ namespace svn
     void DiffData::clean()
     {
         close();
-#if !((SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4))
-        if (m_outFileName != 0) {
-            svn_error_clear (svn_io_remove_file (m_outFileName, m_Pool));
-            m_outFileName=0;
-        }
-        if (m_errFileName != 0) {
-            svn_error_clear (svn_io_remove_file (m_errFileName, m_Pool));
-            m_errFileName=0;
-        }
-#endif
     }
 
     void DiffData::close()

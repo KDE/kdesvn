@@ -73,6 +73,7 @@ public:
     virtual void
     setContext(const ContextP &context);
 
+
     /**
      * Enumerates all files/dirs at a given path.
      *
@@ -136,6 +137,7 @@ public:
            Depth depth,
            const StringArray &changelist = StringArray()
           ) throw (ClientException);
+
 
     /**
      * Adds a file to the repository.
@@ -613,24 +615,12 @@ private:
 
     static apr_hash_t *map2hash(const PropertiesMap &, const Pool &);
 
-    //! helper method
-    virtual void
-    merge_peg(const Path &src,
-              const RevisionRange &range,
-              const Revision &peg,
-              const Path &targetWc,
-              Depth depth,
-              bool notice_ancestry,
-              bool dry_run,
-              bool force,
-              const StringArray &merge_options
-             ) throw (ClientException);
-
     /** helper method
      * @sa svn_client_merge_reintegrate
      */
     virtual void merge_reintegrate(const MergeParameter &parameters) throw (ClientException);
 };
+
 
 }
 

@@ -41,7 +41,6 @@ namespace svn
     {
         class DepthToSvn
         {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
             protected:
                 svn_depth_t _value;
             public:
@@ -74,12 +73,10 @@ namespace svn
                 {
                     return _value;
                 }
-#endif
         };
 
         class RevisionRangesToHash
         {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
             protected:
                 RevisionRanges m_ranges;
             public:
@@ -99,7 +96,6 @@ namespace svn
                     }
                     return ranges;
                 }
-#endif
         };
         
         class Map2Hash

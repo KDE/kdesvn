@@ -54,7 +54,6 @@
 namespace svn
 {
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
 static svn_error_t *
 logMapReceiver2(
     void *baton,
@@ -92,67 +91,6 @@ logMapReceiver2(
     }
     return SVN_NO_ERROR;
 }
-#else
-static svn_error_t *
-logMapReceiver(void *baton,
-               apr_hash_t *changedPaths,
-               svn_revnum_t rev,
-               const char *author,
-               const char *date,
-               const char *msg,
-               apr_pool_t *pool
-              )
-{
-    Client_impl::sBaton *l_baton = (Client_impl::sBaton *)baton;
-    LogEntriesMap *entries =
-        (LogEntriesMap *) l_baton->m_data;
-
-    /* check every loop for cancel of operation */
-    ContextP l_context = l_baton->m_context;
-    if (l_context.isNull()) {
-        return SVN_NO_ERROR;
-    }
-    svn_client_ctx_t *ctx = l_context->ctx();
-    if (ctx && ctx->cancel_func) {
-        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
-    }
-    (*entries)[rev] = LogEntry(rev, author, date, msg);
-    if (changedPaths != NULL) {
-        LogEntry &entry = (*entries)[rev];
-
-        for (apr_hash_index_t *hi = apr_hash_first(pool, changedPaths);
-                hi != NULL;
-                hi = apr_hash_next(hi)) {
-            const void *pv;
-            void *val;
-            apr_hash_this(hi, &pv, NULL, &val);
-
-            svn_log_changed_path_t *log_item = static_cast<svn_log_changed_path_t *>(val);
-            const char *path = static_cast<const char *>(pv);
-
-            bool blocked = false;
-            if (l_baton->excludeList) {
-                QString _p(path);
-                for (int _exnr = 0; _exnr < l_baton->excludeList.size(); ++_exnr) {
-                    if (_p.startsWith(l_baton->excludeList[_exnr])) {
-                        blocked = true;
-                        break;
-                    }
-                }
-            }
-            if (!blocked) {
-                entry.changedPaths.push_back(
-                    LogChangePathEntry(path,
-                                       log_item->action,
-                                       log_item->copyfrom_path,
-                                       log_item->copyfrom_rev));
-            }
-        }
-    }
-
-    return NULL;
-}
-#endif
 
 struct StatusEntriesBaton {
     StatusEntries entries;
@@ -241,8 +179,6 @@ localStatus(const StatusParameter &params,
 
     baton.pool = pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
     error = svn_client_status4(
 #else
@@ -261,21 +197,6 @@ localStatus(const StatusParameter &params,
                 params.changeList().array(pool),
                 *context,          //client ctx
                 pool);
-#else
-    error = svn_client_status2(
-                &revnum,      // revnum
-                params.path().path().toUtf8(),         // path
-                rev,
-                StatusEntriesFunc, // status func
-                &baton,        // status baton
-                (params.depth() == DepthInfinity), //recurse
-                params.all(),       // get all not only interesting
-                params.update(),        // check for updates
-                params.noIgnore(),     // hide ignored files or not
-                params.ignoreExternals(), // hide external
-                *context,    //client ctx
-                pool);
-#endif
 
     Client_impl::checkErrorThrow(error);
     return baton.entries;
@@ -333,8 +254,6 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
 
     baton.pool = pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
     error = svn_client_status4(
 #else
@@ -353,21 +272,6 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
                 0,
                 *context,          //client ctx
                 pool);
-#else
-    error = svn_client_status2(
-                &revnum,      // revnum
-                path.path().toUtf8(),         // path
-                rev,
-                StatusEntriesFunc, // status func
-                &baton,        // status baton
-                false,
-                true,
-                update,
-                false,
-                false,
-                *context,    //client ctx
-                pool);
-#endif
     Client_impl::checkErrorThrow(error);
     if (baton.entries.isEmpty()) {
         return StatusPtr(new Status());
@@ -421,7 +325,7 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target) throw (C
                 &l_baton,
                 *m_context, // client ctx
                 pool);
-#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5))
+#else
     error = svn_client_log4(
                 params.targets().array(pool),
                 params.peg().revision(),
@@ -433,31 +337,6 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target) throw (C
                 params.includeMergedRevisions() ? 1 : 0,
                 params.revisionProperties().array(pool),
                 logMapReceiver2,
-                &l_baton,
-                *m_context, // client ctx
-                pool);
-#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 4)) || (SVN_VER_MAJOR > 1)
-    error = svn_client_log3(
-                params.targets().array(pool),
-                params.peg().revision(),
-                params.revisionRange().first.revision(),
-                params.revisionRange().second.revision(),
-                params.limit(),
-                params.discoverChangedPathes() ? 1 : 0,
-                params.strictNodeHistory() ? 1 : 0,
-                logMapReceiver,
-                &l_baton,
-                *m_context, // client ctx
-                pool);
-#else
-    error = svn_client_log2(
-                params.targets().array(pool),
-                params.revisionRange().first.revision(),
-                params.revisionRange().second.revision(),
-                params.limit(),
-                params.discoverChangedPathes() ? 1 : 0,
-                params.strictNodeHistory() ? 1 : 0,
-                logMapReceiver,
                 &l_baton,
                 *m_context, // client ctx
                 pool);

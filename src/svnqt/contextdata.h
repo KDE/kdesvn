@@ -30,9 +30,7 @@
 #include "svnqt/svnqt_defines.h"
 
 #include <svn_client.h>
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
 #include <svn_auth.h>
-#endif
 #include <qstring.h>
 
 struct svn_wc_conflict_result_t;
@@ -187,7 +185,6 @@ protected:
               void *baton,
               apr_pool_t * pool);
 
-#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 2))
     /**
      * this function gets called by the subversion api function
      * when a log message is needed. This is the case on a commit
@@ -199,7 +196,6 @@ protected:
               const apr_array_header_t * commit_items,
               void *baton,
               apr_pool_t * pool);
-#endif
 
     /**
      * this is the callback function for the subversion
@@ -324,12 +320,11 @@ protected:
     svn_error_t *
         generate_cancel_error();
 
-#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5) || (SVN_VER_MAJOR > 1))
     /** read in mimetypes map
      * @since subversion 1.5
      */
     void initMimeTypes();
-#endif
+
 protected:
     Apr apr;
 

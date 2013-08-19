@@ -597,17 +597,6 @@ private:
      */
     Client_impl(const Client_impl &);
 
-    DirEntries
-    list_simple(const Path &pathOrUrl,
-                const Revision &revision,
-                const Revision &peg,
-                bool recurse) throw (ClientException);
-    DirEntries
-    list_locks(const Path &pathOrUrl,
-               const Revision &revision,
-               const Revision &peg,
-               bool recurse) throw (ClientException);
-
     svn_error_t *internal_cat(const Path &path,
                               const Revision &revision,
                               const Revision &peg_revision,

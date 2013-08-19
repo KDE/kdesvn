@@ -808,6 +808,7 @@ QString SvnActions::getInfo(const svn::InfoEntries&entries,const QString&_what,b
             if ((*it).propTime()>0) {
                 text+=rb+i18n("Property last changed")+cs+helpers::sub2qt::DateTime2qtString((*it).propTime())+re;
             }
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             if ((*it).conflictNew().length()) {
                 text+=rb+i18n("New version of conflicted file")+cs+((*it).conflictNew())+re;
             }
@@ -818,6 +819,12 @@ QString SvnActions::getInfo(const svn::InfoEntries&entries,const QString&_what,b
                 text+=rb+i18n("Working version of conflicted file")+
                     cs+((*it).conflictWrk())+re;
             }
+#else
+            for (int _cfi = 0; _cfi < (*it).conflicts().size();++_cfi)
+            {
+                text+=rb+i18n("New version of conflicted file")+cs+((*it).conflicts()[_cfi]->theirFile());
+            }
+#endif
             if ((*it).prejfile().length()) {
                 text+=rb+i18n("Property reject file")+
                     cs+((*it).prejfile())+re;
@@ -1944,21 +1951,39 @@ void SvnActions::slotResolve(const QString&p)
     if (fi.isRelative()) {
         base = fi.absolutePath()+"/";
     }
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
     if (!i1.conflictNew().length()||
            !i1.conflictOld().length()||
-           !i1.conflictWrk().length() ) {
+           !i1.conflictWrk().length() )
+#else
+    if (i1.conflicts().size() == 0) 
+#endif
+    {
         emit sendNotify(i18n("Could not retrieve conflict information - giving up."));
         return;
     }
-
+           
     WatchedProcess*proc = new WatchedProcess(this);
     for ( QStringList::Iterator it = wlist.begin();it!=wlist.end();++it) {
         if (*it=="%o"||*it=="%l") {
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             *proc<<(base+i1.conflictOld());
+#else
+            *proc<<i1.conflicts()[0]->baseFile();
+#endif
         } else if (*it=="%m" || *it=="%w") {
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             *proc<<(base+i1.conflictWrk());
+#else
+            *proc<<i1.conflicts()[0]->myFile();
+#endif
+            
         } else if (*it=="%n"||*it=="%r") {
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             *proc<<(base+i1.conflictNew());
+#else
+            *proc<<i1.conflicts()[0]->theirFile();
+#endif
         } else if (*it=="%t") {
             *proc<<p;
         } else {

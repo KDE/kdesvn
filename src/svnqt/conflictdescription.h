@@ -103,6 +103,8 @@ protected:
 };
 
 typedef SharedPointer<ConflictDescription> ConflictDescriptionP;
+typedef QLIST<ConflictDescriptionP> ConflictDescriptionList;
+
 }
 
 #endif

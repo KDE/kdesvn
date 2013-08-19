@@ -28,17 +28,19 @@
 #include <svnqt/datetime.h>
 #include <svnqt/revision.h>
 #include <svnqt/svnqttypes.h>
+#include <svnqt/conflictdescription.h>
 
 #include <QString>
 
-#ifdef HAS_SVN_VERSION_H
 #include <svn_version.h>
-#endif
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#undef SVN_INFO_SIMPLE_CONFLICT_TYPE
 struct svn_client_info2_t;
-#endif
+#else
+#define SVN_INFO_SIMPLE_CONFLICT_TYPE 1
 struct svn_info_t;
+#endif
 
 namespace svn
 {
@@ -47,13 +49,23 @@ class SVNQT_EXPORT InfoEntry
 public:
     static const qlonglong SVNQT_SIZE_UNKNOWN = -1;
     InfoEntry();
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    InfoEntry(const svn_client_info2_t *, const char *path);
+    InfoEntry(const svn_client_info2_t *, const QString &path);
+#else
     InfoEntry(const svn_info_t *, const char *path);
     InfoEntry(const svn_info_t *, const QString &path);
+#endif
     InfoEntry(const InfoEntry &);
     ~InfoEntry();
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    void init(const svn_client_info2_t *, const char *path);
+    void init(const svn_client_info2_t *, const QString &path);
+#else
     void init(const svn_info_t *, const char *path);
     void init(const svn_info_t *, const QString &path);
+#endif
 
     DateTime cmtDate()const;
     DateTime textTime()const;
@@ -71,9 +83,15 @@ public:
     const QString &Name()const;
 
     const QString &checksum()const;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    const ConflictDescriptionList &conflicts()const;
+#else
     const QString &conflictNew()const;
     const QString &conflictOld()const;
     const QString &conflictWrk()const;
+#endif
+
     const QString &copyfromUrl()const;
     const QString &prejfile()const;
     const QString &reposRoot()const;
@@ -103,9 +121,13 @@ protected:
     LockEntry m_Lock;
     QString m_name;
     QString m_checksum;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    ConflictDescriptionList m_conflicts;
+#else
     QString m_conflict_new;
     QString m_conflict_old;
     QString m_conflict_wrk;
+#endif
     QString m_copyfrom_url;
     QString m_last_author;
     QString m_prejfile;

@@ -21,9 +21,11 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
+
 #include "info_entry.h"
 #include "svnqt_defines.h"
 #include "pool.h"
+#include "conflictdescription.h"
 #include <svn_client.h>
 #include <svn_path.h>
 #include <svn_version.h>
@@ -36,6 +38,17 @@ InfoEntry::InfoEntry()
     init();
 }
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+InfoEntry::InfoEntry(const svn_client_info2_t *info, const char *path)
+{
+    init(info, path);
+}
+
+InfoEntry::InfoEntry(const svn_client_info2_t *info, const QString &path)
+{
+    init(info, path);
+}
+#else
 InfoEntry::InfoEntry(const svn_info_t *info, const char *path)
 {
     init(info, path);
@@ -45,6 +58,7 @@ InfoEntry::InfoEntry(const svn_info_t *info, const QString &path)
 {
     init(info, path);
 }
+#endif
 
 InfoEntry::~InfoEntry()
 {
@@ -82,6 +96,12 @@ const QString &InfoEntry::checksum()const
 {
     return m_checksum;
 }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+const ConflictDescriptionList &InfoEntry::conflicts()const
+{
+    return m_conflicts;
+}
+#else
 const QString &InfoEntry::conflictNew()const
 {
     return m_conflict_new;
@@ -94,6 +114,7 @@ const QString &InfoEntry::conflictWrk()const
 {
     return m_conflict_wrk;
 }
+#endif
 const QString &InfoEntry::copyfromUrl()const
 {
     return m_copyfrom_url;
@@ -172,9 +193,12 @@ void svn::InfoEntry::init()
     m_hasWc = false;
     m_Lock = LockEntry();
     m_checksum.clear();
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#else
     m_conflict_new.clear();
     m_conflict_old.clear();
     m_conflict_wrk.clear();
+#endif
     m_copyfrom_url.clear();
     m_last_author.clear();
     m_prejfile.clear();
@@ -192,6 +216,79 @@ void svn::InfoEntry::init()
     m_changeList.clear();
     m_depth = DepthUnknown;
 }
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+void svn::InfoEntry::init(const svn_client_info2_t *item, const char *path)
+{
+    init(item, QString::fromUtf8(path));
+}
+
+void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
+{
+    if (!item) {
+        init();
+        return;
+    }
+    m_name = path;
+    m_last_changed_date = item->last_changed_date;
+    if (item->lock) {
+        m_Lock.init(item->lock);
+    } else {
+        m_Lock = LockEntry();
+    }
+    m_size = item->size != SVN_INVALID_FILESIZE ? qlonglong(item->size) : SVNQT_SIZE_UNKNOWN;
+    m_repos_root = QString::fromUtf8(item->repos_root_URL);
+    m_url = QString::fromUtf8(item->URL);
+    m_pUrl = prettyUrl(item->URL);
+    m_UUID = QString::fromUtf8(item->repos_UUID);
+    m_kind = item->kind;
+    m_revision = item->rev;
+    m_last_changed_rev = item->last_changed_rev;
+    m_last_author = QString::fromUtf8(item->last_changed_author);
+    if (item->wc_info != 0) {
+        m_hasWc = true;
+        m_schedule = item->wc_info->schedule;
+        m_copyfrom_url = QString::fromUtf8(item->wc_info->copyfrom_url);
+        m_copy_from_rev = item->wc_info->copyfrom_rev;
+        if (item->wc_info->changelist) {
+            m_changeList = QByteArray(item->wc_info->changelist, strlen(item->wc_info->changelist));
+        } else {
+            m_changeList = QByteArray();
+        }
+        if (item->wc_info->conflicts != 0) {
+            for (int j = 0; j < item->wc_info->conflicts->nelts; ++j) {
+                svn_wc_conflict_description2_t *_desc = ((svn_wc_conflict_description2_t **)item->wc_info->conflicts->elts)[j];
+                m_conflicts.push_back(ConflictDescriptionP(new ConflictDescription(_desc)));
+            }
+        }
+
+        switch (item->wc_info->depth) {
+        case svn_depth_exclude:
+            m_depth = DepthExclude;
+            break;
+        case svn_depth_empty:
+            m_depth = DepthEmpty;
+            break;
+        case svn_depth_files:
+            m_depth = DepthFiles;
+            break;
+        case svn_depth_immediates:
+            m_depth = DepthImmediates;
+            break;
+        case svn_depth_infinity:
+            m_depth = DepthInfinity;
+            break;
+        case svn_depth_unknown:
+        default:
+            m_depth = DepthUnknown;
+            break;
+        }
+    } else {
+        m_hasWc = false;
+    }
+}
+
+#else
 
 void svn::InfoEntry::init(const svn_info_t *item, const char *path)
 {
@@ -240,12 +337,11 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     if (m_working_size == SVNQT_SIZE_UNKNOWN) {
         m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->working_size) : SVNQT_SIZE_UNKNOWN;
     }
-#elif (SVN_VER_MINOR == 5)
+#else
     m_size = item->size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->size) : SVNQT_SIZE_UNKNOWN;
     m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->working_size) : SVNQT_SIZE_UNKNOWN;
 #endif
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     if (item->changelist) {
         m_changeList = QByteArray(item->changelist, strlen(item->changelist));
     } else {
@@ -273,13 +369,8 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
         m_depth = DepthUnknown;
         break;
     }
-#else
-    m_size = SVNQT_SIZE_UNKNOWN;
-    m_working_size = SVNQT_SIZE_UNKNOWN;
-    m_changeList.clear();
-    m_depth = DepthUnknown;
-#endif
 }
+#endif
 
 QString svn::InfoEntry::prettyUrl(const char *_url)const
 {
@@ -299,9 +390,13 @@ svn::InfoEntry::InfoEntry(const InfoEntry &other)
     m_prop_time = other.m_prop_time;
     m_Lock = other.m_Lock;
     m_checksum = other.m_checksum;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    m_conflicts = other.m_conflicts;
+#else
     m_conflict_new = other.m_conflict_new;
     m_conflict_old = other.m_conflict_old;
     m_conflict_wrk = other.m_conflict_wrk;
+#endif
     m_copyfrom_url = other.m_copyfrom_url;
     m_last_author = other.m_last_author;
     m_prejfile = other.m_prejfile;
@@ -319,5 +414,4 @@ svn::InfoEntry::InfoEntry(const InfoEntry &other)
     m_working_size = other.m_working_size;
     m_changeList = other.m_changeList;
     m_depth = other.m_depth;
-
 }

@@ -32,6 +32,8 @@ struct svn_wc_conflict_description2_t;
 #include <svn_types.h>
 
 #include <QString>
+#include <QSharedPointer>
+#include <QVector>
 
 namespace svn
 {
@@ -101,8 +103,8 @@ protected:
     svn_node_kind_t m_nodeKind;
 };
 
-typedef SharedPointer<ConflictDescription> ConflictDescriptionP;
-typedef QList<ConflictDescriptionP> ConflictDescriptionList;
+typedef QSharedPointer<ConflictDescription> ConflictDescriptionP;
+typedef QVector<ConflictDescriptionP> ConflictDescriptionList;
 
 }
 

@@ -162,7 +162,7 @@ public:
             return;
         }
         svn_config_t *cfg_config = static_cast<svn_config_t *>(apr_hash_get(m_CurrentContext->ctx()->config, SVN_CONFIG_CATEGORY_CONFIG,
-                                   APR_HASH_KEY_STRING));
+                                                                            APR_HASH_KEY_STRING));
         if (!cfg_config) {
             return;
         }
@@ -613,7 +613,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     KMimeType::Ptr mptr;
     mptr = KMimeType::findByFileContent(tname);
     KService::List offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"),
-                            "Type == 'Application' or (exist Exec)");
+                                                           "Type == 'Application' or (exist Exec)");
     if (offers.isEmpty() || offers.first()->exec().isEmpty()) {
         offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"), "Type == 'Application'");
     }
@@ -825,6 +825,7 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
             if ((*it).propTime() > 0) {
                 text += rb + i18n("Property last changed") + cs + helpers::sub2qt::DateTime2qtString((*it).propTime()) + re;
             }
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             if ((*it).conflictNew().length()) {
                 text += rb + i18n("New version of conflicted file") + cs + ((*it).conflictNew()) + re;
             }
@@ -835,6 +836,11 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                 text += rb + i18n("Working version of conflicted file") +
                         cs + ((*it).conflictWrk()) + re;
             }
+#else
+            for (int _cfi = 0; _cfi < (*it).conflicts().size(); ++_cfi) {
+                text += rb + i18n("New version of conflicted file") + cs + ((*it).conflicts()[_cfi]->theirFile());
+            }
+#endif
             if ((*it).prejfile().length()) {
                 text += rb + i18n("Property reject file") +
                         cs + ((*it).prejfile()) + re;
@@ -1451,6 +1457,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
     }
 }
 
+
 /*!
     \fn SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
  */
@@ -1487,6 +1494,7 @@ void SvnActions::slotUpdateHeadRec()
 {
     prepareUpdate(false);
 }
+
 
 /*!
     \fn SvnActions::prepareUpdate(bool ask)
@@ -1527,6 +1535,7 @@ void SvnActions::prepareUpdate(bool ask)
     makeUpdate(svn::Targets(what), r, svn::DepthUnknown);
 }
 
+
 /*!
     \fn SvnActions::slotUpdateTo()
  */
@@ -1534,6 +1543,7 @@ void SvnActions::slotUpdateTo()
 {
     prepareUpdate(true);
 }
+
 
 /*!
     \fn SvnActions::slotAdd()
@@ -1566,7 +1576,7 @@ void SvnActions::makeAdd(bool rec)
     Q_FOREACH(const SvnItem *cur, lst) {
         if (cur->isVersioned()) {
             KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br>%1<br>is versioned - break.</center>",
-                               cur->fullName()));
+                                                                        cur->fullName()));
             return;
         }
         items.push_back(svn::Path(cur->fullName()));
@@ -1971,9 +1981,14 @@ void SvnActions::slotResolve(const QString &p)
     if (fi.isRelative()) {
         base = fi.absolutePath() + QLatin1Char('/');
     }
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
     if (i1.conflictNew().isEmpty() ||
             i1.conflictOld().isEmpty() ||
-            i1.conflictWrk().isEmpty()) {
+            i1.conflictWrk().isEmpty())
+#else
+    if (i1.conflicts().isEmpty())
+#endif
+    {
         emit sendNotify(i18n("Could not retrieve conflict information - giving up."));
         return;
     }
@@ -1981,11 +1996,24 @@ void SvnActions::slotResolve(const QString &p)
     WatchedProcess *proc = new WatchedProcess(this);
     for (QStringList::Iterator it = wlist.begin(); it != wlist.end(); ++it) {
         if (*it == "%o" || *it == "%l") {
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             *proc << (base + i1.conflictOld());
+#else
+            *proc << i1.conflicts()[0]->baseFile();
+#endif
         } else if (*it == "%m" || *it == "%w") {
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             *proc << (base + i1.conflictWrk());
+#else
+            *proc << i1.conflicts()[0]->myFile();
+#endif
+
         } else if (*it == "%n" || *it == "%r") {
+#ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             *proc << (base + i1.conflictNew());
+#else
+            *proc << i1.conflicts()[0]->theirFile();
+#endif
         } else if (*it == "%t") {
             *proc << p;
         } else {
@@ -2253,7 +2281,7 @@ bool SvnActions::makeMove(const QString &Old, const QString &New, bool _force)
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Move"), i18n("Moving/Rename item"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        nnum = m_Data->m_Svnclient->move(params.force(_force).asChild(false).makeParent(false));
+        nnum = m_Data->m_Svnclient->move(params.asChild(false).makeParent(false));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;
@@ -2330,6 +2358,7 @@ void SvnActions::makeLock(const QStringList &what, const QString &_msg, bool bre
     }
 }
 
+
 /*!
     \fn SvnActions::makeUnlock(const QStringList&)
  */
@@ -2349,6 +2378,7 @@ void SvnActions::makeUnlock(const QStringList &what, bool breakit)
     }
 //    m_Data->m_repoLockCache.dump_tree();
 }
+
 
 /*!
     \fn SvnActions::makeStatus(const QString&what, svn::StatusEntries&dlist)

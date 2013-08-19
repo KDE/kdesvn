@@ -623,19 +623,6 @@ namespace svn
 
     static apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
 
-    //! helper method
-    virtual void
-    merge_peg(const Path&src,
-              const RevisionRange&range,
-              const Revision&peg,
-              const Path&targetWc,
-              Depth depth,
-              bool notice_ancestry,
-              bool dry_run,
-              bool force,
-              const StringArray&merge_options
-            ) throw (ClientException);
-
     /** helper method
      * @sa svn_client_merge_reintegrate
      */

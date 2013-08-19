@@ -42,11 +42,79 @@ ConflictDescription::~ConflictDescription()
 {
 }
 
+ConflictDescription::ConflictDescription(const svn_wc_conflict_description2_t*conflict)
+{
+    init();
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    if (!conflict) {
+        return;
+    }
+    m_baseFile=QString::FROMUTF8(conflict->base_abspath);
+    m_mergedFile=QString::FROMUTF8(conflict->merged_file);
+    m_mimeType=QString::FROMUTF8(conflict->mime_type);
+    m_myFile=QString::FROMUTF8(conflict->my_abspath);
+    m_Path=QString::FROMUTF8(conflict->local_abspath);
+    m_propertyName=QString::FROMUTF8(conflict->property_name);
+    m_theirFile=QString::FROMUTF8(conflict->their_abspath);
+    switch(conflict->action) {
+        case svn_wc_conflict_action_edit:
+            m_action=ConflictEdit;
+            break;
+        case svn_wc_conflict_action_add:
+            m_action=ConflictAdd;
+            break;
+        case svn_wc_conflict_action_delete:
+            m_action=ConflictDelete;
+            break;
+        case svn_wc_conflict_action_replace:
+            m_action = ConflictReplace;
+            break;
+    }
+    switch (conflict->kind) {
+        case svn_wc_conflict_kind_text:
+            m_Type=ConflictText;
+            break;
+        case svn_wc_conflict_kind_property:
+            m_Type=ConflictProperty;
+            break;
+        case svn_wc_conflict_kind_tree:
+            m_Type=ConflictTree;
+            break;
+    }
+    m_nodeKind=conflict->node_kind;
+    m_binary=conflict->is_binary;
+    switch (conflict->reason) {
+        case svn_wc_conflict_reason_edited:
+            m_reason=ReasonEdited;
+            break;
+        case svn_wc_conflict_reason_obstructed:
+            m_reason=ReasonObstructed;
+            break;
+        case svn_wc_conflict_reason_deleted:
+            m_reason=ReasonDeleted;
+            break;
+        case svn_wc_conflict_reason_missing:
+            m_reason=ReasonMissing;
+            break;
+        case svn_wc_conflict_reason_unversioned:
+            m_reason=ReasonUnversioned;
+            break;
+        case svn_wc_conflict_reason_added:
+            m_reason = ReasonAdded;
+            break;  
+        case svn_wc_conflict_reason_replaced:
+            m_reason = ReasonReplaced;
+            break;
+    }
+#else
+    Q_UNUSED(conflict);
+#endif    
+}
+
 ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t*conflict)
     :m_pool()
 {
     init();
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     if (!conflict) {
         return;
     }
@@ -67,6 +135,11 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t*con
         case svn_wc_conflict_action_delete:
             m_action=ConflictDelete;
             break;
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+        case svn_wc_conflict_action_replace:
+            m_action = ConflictReplace;
+            break;
+#endif
     }
     switch (conflict->kind) {
         case svn_wc_conflict_kind_text:
@@ -104,10 +177,12 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t*con
             m_reason = ReasonAdded;
             break;
 #endif
-    }
-#else
-    Q_UNUSED(conflict);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+        case svn_wc_conflict_reason_replaced:
+            m_reason = ReasonReplaced;
+            break;
 #endif
+    }
 }
 
 ConflictDescription::ConflictDescription(const ConflictDescription&)

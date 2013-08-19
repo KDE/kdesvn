@@ -93,9 +93,7 @@ public:
              const char *author,
              const char *date,
              const char *message);
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     LogEntry(svn_log_entry_t *, const StringArray &excludeList);
-#endif
     void setDate(const char *date);
 
     //! if -1 the entry is a fake entry and not real usable!

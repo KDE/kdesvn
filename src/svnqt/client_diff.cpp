@@ -82,8 +82,7 @@ namespace svn
             pool
         );
 
-#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    //qDebug("pegged diff4 call");
+#else
     error = svn_client_diff_peg4(
                 _options,
                 options.path1().cstr(),
@@ -97,18 +96,6 @@ namespace svn
                 *m_context,
                 pool
             );
-#else
-    bool recurse = options.depth()==DepthInfinity;
-    error = svn_client_diff_peg3(
-                                 _options,
-                                 options.path1().cstr(),
-                                 options.peg(),ddata.r1().revision(),ddata.r2().revision(),
-                                 recurse?1:0,options.ignoreAncestry(),options.noDiffDeleted(),options.ignoreContentType(),
-                                 APR_LOCALE_CHARSET,
-                                 ddata.outFile(),ddata.errFile(),
-                                 *m_context,
-                                 pool
-                                );
 #endif
     if (error != NULL)
     {
@@ -147,7 +134,7 @@ namespace svn
                              options.changeList().array(pool),
                              *m_context,
                              pool);    
-#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#else
     error = svn_client_diff4(_options,
                              options.path1().cstr (), ddata.r1().revision (),
                              options.path2().cstr (), ddata.r2().revision (),
@@ -157,17 +144,6 @@ namespace svn
                              APR_LOCALE_CHARSET,
                              ddata.outFile(),ddata.errFile(),
                              options.changeList().array(pool),
-                             *m_context,
-                             pool);
-#else
-    bool recurse = options.depth()==DepthInfinity;
-    // run diff
-    error = svn_client_diff3 (_options,
-                             options.path1().cstr (), ddata.r1().revision (),
-                             options.path2().cstr (), ddata.r2().revision (),
-                             recurse?1:0,options.ignoreAncestry(),options.noDiffDeleted(),options.ignoreContentType(),
-                             APR_LOCALE_CHARSET,
-                             ddata.outFile(),ddata.errFile(),
                              *m_context,
                              pool);
 #endif

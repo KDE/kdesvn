@@ -91,7 +91,6 @@ namespace svn
     }
 
     svn_error_t * error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
       svn_wc_ensure_adm3(
                          dirPath.path().TOUTF8(),    // path
                          uuid.TOUTF8(),                // UUID
@@ -100,15 +99,6 @@ namespace svn
                          revision.revnum (),  // revision
                          internal::DepthToSvn(depth),
                          pool);
-#else
-      svn_wc_ensure_adm2(
-                         dirPath.path().TOUTF8(),    // path
-                         uuid.TOUTF8(),                // UUID
-                         urlPath.path().TOUTF8(),    // url
-                         rep,
-                         revision.revnum (),  // revision
-                         pool);
-#endif
     if(error != NULL)
       throw ClientException (error);
   }

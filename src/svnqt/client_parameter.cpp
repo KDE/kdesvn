@@ -246,13 +246,13 @@ public:
     MergeParameterData()
         : _path1(), _path2(), _localPath(),
           _peg(Revision::UNDEFINED), _ranges(),
-          _force(false), _notice_ancestry(true), _dry_run(false), _record_only(false), _reintegrate(false),
+          _force(false), _notice_ancestry(true), _dry_run(false), _record_only(false), _reintegrate(false), _allow_mixed_rev(false),
           _depth(DepthInfinity), _merge_options()
     {}
     Path _path1, _path2, _localPath;
     Revision _peg;
     RevisionRanges _ranges;
-    bool _force, _notice_ancestry, _dry_run, _record_only, _reintegrate;
+    bool _force, _notice_ancestry, _dry_run, _record_only, _reintegrate, _allow_mixed_rev;
     Depth _depth;
     StringArray _merge_options;
 };
@@ -277,6 +277,7 @@ GETSETSI(MergeParameter, bool, _dry_run, dry_run);
 GETSETSI(MergeParameter, bool, _record_only, record_only);
 GETSETSI(MergeParameter, Depth, _depth, depth);
 GETSETSI(MergeParameter, bool, _reintegrate, reintegrate);
+GETSETSI(MergeParameter, bool, _allow_mixed_rev, allow_mixed_rev);
 
 const RevisionRange &MergeParameter::revisionRange()const
 {

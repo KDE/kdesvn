@@ -482,6 +482,13 @@ namespace svn
          * All other parameters are ignored in that case.
          */
         bool reintegrate()const;
+        
+        /**
+         * @param allow_mixed_rev true if merging into mixed rev working copy is allowed. If false, merge fails if mixed rev WC
+         * @since subversion 1.7
+         */
+        MergeParameter&allow_mixed_rev(bool allow_mixed_rev);
+        bool allow_mixed_rev()const;
     };
 
     struct CheckoutParameterData;

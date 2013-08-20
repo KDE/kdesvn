@@ -64,7 +64,13 @@ void Client_impl::merge(const MergeParameter&parameters) throw (ClientException)
     if (parameters.reintegrate()) {
         merge_reintegrate(parameters);
     } else {
-        error = svn_client_merge3(parameters.path1().cstr (),
+        error =
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+            svn_client_merge4
+#else
+            svn_client_merge3
+#endif
+                (parameters.path1().cstr (),
                                   parameters.revision1().revision(),
                                   parameters.path2().cstr(),
                                   parameters.revision2().revision(),
@@ -74,6 +80,9 @@ void Client_impl::merge(const MergeParameter&parameters) throw (ClientException)
                                   parameters.force(),
                                   parameters.record_only(),
                                   parameters.dry_run(),
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+                                  parameters.allow_mixed_rev(),
+#endif
                                   parameters.merge_options().array(pool),
                                   *m_context,
                                   pool);
@@ -91,7 +100,13 @@ void Client_impl::merge(const MergeParameter&parameters) throw (ClientException)
 
       svn_error_t*error;
 
-      error = svn_client_merge_peg3(
+      error = 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+            svn_client_merge_peg4
+#else
+            svn_client_merge_peg3
+#endif
+                                (
                                     parameters.path1().cstr(),
                                     _rhash.array(pool),
                                     parameters.peg(),
@@ -101,6 +116,9 @@ void Client_impl::merge(const MergeParameter&parameters) throw (ClientException)
                                     parameters.force(),
                                     parameters.record_only(),
                                     parameters.dry_run(),
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+                                    parameters.allow_mixed_rev(),
+#endif
                                     parameters.merge_options().array(pool),
                                     *m_context,
                                     pool

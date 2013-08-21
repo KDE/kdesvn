@@ -35,6 +35,9 @@
 #ifdef HAS_SVN_VERSION_H
 #include <svn_version.h>
 #endif
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
+#include <svn_dirent_uri.h>
+#endif
 
 namespace svn {
 
@@ -90,6 +93,7 @@ void RepositoryData::warning_func(void *baton, svn_error_t *err)
     }
 }
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
 void RepositoryData::repo_notify_func(void* baton, const svn_repos_notify_t* notify, apr_pool_t* scratch_pool)
 {
     Q_UNUSED(scratch_pool)
@@ -102,6 +106,7 @@ void RepositoryData::repo_notify_func(void* baton, const svn_repos_notify_t* not
         _r->reposFsWarning(msg);
     }
 }
+#endif
 
 void RepositoryData::reposFsWarning(const QString&msg)
 {
@@ -264,12 +269,16 @@ svn_error_t* RepositoryData::loaddump(const QString&dump,svn_repos_load_uuid uui
     }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
     src_path = svn_dirent_internal_style(src_path, pool);
+#else
+    src_path = svn_path_internal_style(src_path, pool);
+#endif
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
     SVN_ERR(svn_repos_load_fs3(m_Repository,infile,uuida,dest_path,usePre?1:0,usePost?1:0,validateProps?1:0,
                                RepositoryData::repo_notify_func,
                                this,RepositoryData::cancel_func,m_Listener,pool));
 #else
     Q_UNUSED(validateProps);
-    src_path = svn_path_internal_style(src_path, pool);
     SVN_ERR(svn_repos_load_fs2(m_Repository,infile,backstream,uuida,dest_path,usePre?1:0,usePost?1:0,RepositoryData::cancel_func,m_Listener,pool));
 #endif
 

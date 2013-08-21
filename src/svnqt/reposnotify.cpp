@@ -26,13 +26,7 @@
 #include <svn_version.h>
 #include <svn_props.h>
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR < 7))
-
-typedef struct svn_repos_notify_t
-{
-}
-
-#else
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
 #include <svn_repos.h>
 #endif 
 
@@ -41,11 +35,12 @@ namespace repository {
     
 class ReposNotifyData
 {
+    QString _warning_msg;
+    
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
     /// TODO own datatype
     svn_repos_notify_action_t _action;
     svn::Revision _rev;
-    QString _warning_msg;
     /// TODO own datatype
     svn_repos_notify_warning_t _warning;
     qlonglong _shard;
@@ -57,7 +52,6 @@ class ReposNotifyData
     svn_node_action _node_action;
     
     svn::Path _path;
-
 #endif
     
     mutable QString _msg;
@@ -66,11 +60,11 @@ public:
     ReposNotifyData(const svn_repos_notify_t* notify)
         : _warning_msg(QString()),_msg(QString())
     {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
         if (!notify) 
         {
             return;
         }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
         _action = notify->action;
         _rev = notify->revision;
         if (notify->warning_str)

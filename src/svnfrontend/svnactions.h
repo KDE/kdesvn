@@ -223,10 +223,10 @@ public Q_SLOTS:
     virtual void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
     virtual void slotImport(const QString&,const QString&,const QString&,svn::Depth,bool noIgnore,bool noUnknown);
-    virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool);
+    virtual void slotMergeWcRevisions(const QString&,const svn::Revision&,const svn::Revision&,bool,bool,bool,bool,bool);
     virtual void slotMerge(const QString&,const QString&, const QString&,
                             const svn::Revision&,const svn::Revision&,const svn::Revision&,
-                            bool,bool,bool,bool,bool,bool);
+                            bool,bool,bool,bool,bool,bool,bool);
     virtual void slotMergeExternal(const QString&src1,const QString&src2, const QString&target,
                                     const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,bool);
     virtual void slotExtraLogMsg(const QString&);

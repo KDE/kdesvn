@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>715</width>
+    <width>758</width>
     <height>450</height>
    </rect>
   </property>
@@ -166,6 +166,17 @@
           </property>
           <property name="text">
            <string>Use external merge</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_AllowMixedRev">
+          <property name="toolTip">
+           <string>If checked, allow merge into mixed revision working copy, otherwise raises error in that case</string>
+          </property>
+          <property name="text">
+           <string>Merge into mixed revision
+working copy</string>
           </property>
          </widget>
         </item>

@@ -2163,14 +2163,14 @@ void SvnActions::slotMergeExternal(const QString&_src1,const QString&_src2, cons
 
 void SvnActions::slotMergeWcRevisions(const QString&_entry,const svn::Revision&rev1,
                                        const svn::Revision&rev2,
-                                       bool rec,bool ancestry,bool forceIt,bool dry)
+                                       bool rec,bool ancestry,bool forceIt,bool dry,bool allow_mixed_rev)
 {
-    slotMerge(_entry,_entry,_entry,rev1,rev2,svn::Revision::UNDEFINED,rec,ancestry,forceIt,dry,false,false);
+    slotMerge(_entry,_entry,_entry,rev1,rev2,svn::Revision::UNDEFINED,rec,ancestry,forceIt,dry,false,false,allow_mixed_rev);
 }
 
 void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&target,
                             const svn::Revision&rev1,const svn::Revision&rev2,const svn::Revision&_peg,
-                            bool rec,bool ancestry,bool forceIt,bool dry,bool recordOnly,bool reintegrate)
+                            bool rec,bool ancestry,bool forceIt,bool dry,bool recordOnly,bool reintegrate,bool allow_mixed_rev)
 {
     Q_UNUSED(_peg);
     if (!m_Data->m_CurrentContext) return;
@@ -2197,7 +2197,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
     svn::MergeParameter _merge_parameter;
     ranges.append(svn::RevisionRange(rev1,rev2));
     _merge_parameter.revisions(ranges).path1(p1).path2(p2).depth(rec?svn::DepthInfinity:svn::DepthFiles).notice_ancestry(ancestry).force(forceIt)
-        .dry_run(dry).record_only(recordOnly).reintegrate(reintegrate)
+        .dry_run(dry).record_only(recordOnly).reintegrate(reintegrate).allow_mixed_rev(allow_mixed_rev)
         .localPath(svn::Path(target)).merge_options(svn::StringArray());
 
     if(!reintegrate && (!p2.isset() || src1==src2)) {

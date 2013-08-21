@@ -1900,13 +1900,13 @@ void MainTreeWidget::slotMergeRevisions()
     if (!which) {
         return;
     }
-    bool force,dry,rec,irelated,useExternal;
+    bool force,dry,rec,irelated,useExternal,allowmixedrevs;
     Rangeinput_impl::revision_range range;
-    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,&useExternal,this,"merge_range")) {
+    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,&useExternal,&allowmixedrevs,this,"merge_range")) {
         return;
     }
     if (!useExternal) {
-        m_Data->m_Model->svnWrapper()->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,!irelated,force,dry);
+        m_Data->m_Model->svnWrapper()->slotMergeWcRevisions(which->fullName(),range.first,range.second,rec,!irelated,force,dry,allowmixedrevs);
     } else {
         m_Data->m_Model->svnWrapper()->slotMergeExternal(which->fullName(),which->fullName(),which->fullName(),
                                                           range.first,range.second,
@@ -1939,7 +1939,7 @@ void MainTreeWidget::slotMerge()
         target = m_Data->merge_Target;
     }
     src2 = m_Data->merge_Src2;
-    bool force,dry,rec,irelated,useExternal,recordOnly,reintegrate;
+    bool force,dry,rec,irelated,useExternal,recordOnly,reintegrate,allowmixedrevs;
     Rangeinput_impl::revision_range range;
     MergeDlg_impl*ptr = 0;
     KDialog*dlg = createOkDialog(&ptr,i18n("Merge"),true,"merge_dialog",true);
@@ -1965,13 +1965,14 @@ void MainTreeWidget::slotMerge()
         rec = ptr->recursive();
         irelated = ptr->ignorerelated();
         useExternal = ptr->useExtern();
+        allowmixedrevs = ptr->allowmixedrevs();
         recordOnly = ptr->recordOnly();
         range = ptr->getRange();
         reintegrate=ptr->reintegrate();
         if (!useExternal) {
             m_Data->m_Model->svnWrapper()->slotMerge(src1,src2,target,range.first,range.second,
                                                       isWorkingCopy()?svn::Revision::UNDEFINED:m_Data->m_remoteRevision,
-                                                      rec,!irelated,force,dry,recordOnly,reintegrate);
+                                                     rec,!irelated,force,dry,recordOnly,reintegrate,allowmixedrevs);
         } else {
             m_Data->m_Model->svnWrapper()->slotMergeExternal(src1,src2,target,range.first,range.second,
                                                               isWorkingCopy()?svn::Revision::UNDEFINED:m_Data->m_remoteRevision,

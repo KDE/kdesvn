@@ -244,6 +244,7 @@ void SvnLogDlgImp::slotSelectionChanged(const QItemSelection &current, const QIt
     buttonBlame->setEnabled(true);
 }
 
+
 /*!
     \fn SvnLogDlgImp::slotDispPrevious()
  */
@@ -271,6 +272,7 @@ void SvnLogDlgImp::slotDispPrevious()
     e = _base + p->realName();
     emit makeDiff(e, p->revision(), s, k->revision(), this);
 }
+
 
 /*!
     \fn SvnLogDlgImp::saveSize()
@@ -484,7 +486,7 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint &e)
         svn::Revision previous(rev);
         svn::Revision current(m_CurrentModel->toRevision(ind));
         QString _path = m_PegUrl;
-        m_Actions->slotMergeWcRevisions(_path, current, previous, true, true, false, false);
+        m_Actions->slotMergeWcRevisions(_path, current, previous, true, true, false, false, false);
     }
     break;
     }

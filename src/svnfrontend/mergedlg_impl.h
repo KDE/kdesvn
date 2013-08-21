@@ -42,6 +42,7 @@ public:
     bool useExtern()const;
     bool recordOnly()const;
     bool reintegrate()const;
+    bool allowmixedrevs()const;
 
     QString Src1()const;
     QString Src2()const;
@@ -57,7 +58,7 @@ public:
      * This simplyfies the call if only some revision into a working copy should merged.
      */
     static bool getMergeRange(Rangeinput_impl::revision_range &range,
-                              bool *force, bool *recursive, bool *ignorerelated, bool *dry, bool *useExternal, QWidget *parent = 0);
+                              bool *force, bool *recursive, bool *ignorerelated, bool *dry, bool *useExternal, bool *allowmixedrevs, QWidget *parent = 0);
 protected Q_SLOTS:
     virtual void externDisplayToggled(bool);
     virtual void recordOnlyToggled(bool);

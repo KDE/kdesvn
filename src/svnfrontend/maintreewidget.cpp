@@ -624,6 +624,7 @@ void MainTreeWidget::setupActions()
         add_action("make_svn_diritemsdiff", i18n("Diff items"), KShortcut(), KIcon("kdesvndiff"), this, SLOT(slotDiffPathes()));
     tmp_action->setToolTip(i18n("Diff two items"));
 
+
     tmp_action =
         add_action("make_svn_merge_revisions", i18n("Merge two revisions"), KShortcut(), KIcon("kdesvnmerge"), this, SLOT(slotMergeRevisions()));
     tmp_action->setIconText(i18n("Merge"));
@@ -1073,6 +1074,7 @@ void MainTreeWidget::doLog(bool use_follow_settings, bool left)const
     m_Data->m_Model->svnWrapper()->makeLog(start, end, (isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision()), what, follow, list, l);
 }
 
+
 void MainTreeWidget::slotContextMenu(const QPoint &)
 {
     execContextMenu(SelectionList());
@@ -1330,6 +1332,7 @@ void MainTreeWidget::slotLock()
 
     delete dlg;
 }
+
 
 /*!
     \fn MainTreeWidget::slotUnlock()
@@ -1591,7 +1594,7 @@ void MainTreeWidget::slotCat()
         return;
     }
     m_Data->m_Model->svnWrapper()->slotMakeCat(isWorkingCopy() ? svn::Revision::HEAD : baseRevision(), k->fullName(), k->shortName(),
-            isWorkingCopy() ? svn::Revision::HEAD : baseRevision(), 0);
+                                               isWorkingCopy() ? svn::Revision::HEAD : baseRevision(), 0);
 }
 
 void MainTreeWidget::slotRevisionCat()
@@ -1920,13 +1923,13 @@ void MainTreeWidget::slotMergeRevisions()
     if (!which) {
         return;
     }
-    bool force, dry, rec, irelated, useExternal;
+    bool force, dry, rec, irelated, useExternal, allowmixedrevs;
     Rangeinput_impl::revision_range range;
-    if (!MergeDlg_impl::getMergeRange(range, &force, &rec, &irelated, &dry, &useExternal, this)) {
+    if (!MergeDlg_impl::getMergeRange(range, &force, &rec, &irelated, &dry, &useExternal, &allowmixedrevs, this)) {
         return;
     }
     if (!useExternal) {
-        m_Data->m_Model->svnWrapper()->slotMergeWcRevisions(which->fullName(), range.first, range.second, rec, !irelated, force, dry);
+        m_Data->m_Model->svnWrapper()->slotMergeWcRevisions(which->fullName(), range.first, range.second, rec, !irelated, force, dry, allowmixedrevs);
     } else {
         m_Data->m_Model->svnWrapper()->slotMergeExternal(which->fullName(), which->fullName(), which->fullName(),
                                                          range.first, range.second,
@@ -1980,13 +1983,14 @@ void MainTreeWidget::slotMerge()
         bool rec = ptr->recursive();
         bool irelated = ptr->ignorerelated();
         bool useExternal = ptr->useExtern();
+        bool allowmixedrevs = ptr->allowmixedrevs();
         bool recordOnly = ptr->recordOnly();
         Rangeinput_impl::revision_range range = ptr->getRange();
         bool reintegrate = ptr->reintegrate();
         if (!useExternal) {
             m_Data->m_Model->svnWrapper()->slotMerge(src1, src2, target, range.first, range.second,
                                                      isWorkingCopy() ? svn::Revision::UNDEFINED : m_Data->m_remoteRevision,
-                                                     rec, !irelated, force, dry, recordOnly, reintegrate);
+                                                     rec, !irelated, force, dry, recordOnly, reintegrate, allowmixedrevs);
         } else {
             m_Data->m_Model->svnWrapper()->slotMergeExternal(src1, src2, target, range.first, range.second,
                                                              isWorkingCopy() ? svn::Revision::UNDEFINED : m_Data->m_remoteRevision,

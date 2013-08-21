@@ -31,6 +31,7 @@
 
 #include <qlabel.h>
 #include <qcheckbox.h>
+#include <svnqt/version_check.h>
 
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1, bool src2, bool out, bool record_only, bool reintegrate)
     : QWidget(parent), Ui::MergeDlg()
@@ -61,6 +62,10 @@ MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1, bool src2, bool out, bo
     if (!reintegrate) {
         m_Reintegrate->setEnabled(false);
         m_Reintegrate->hide();
+    }
+    if (svn::Version::version_major() == 1 && svn::Version::version_minor() < 7) {
+        m_AllowMixedRev->setEnabled(false);
+        m_AllowMixedRev->hide();
     }
     adjustSize();
     setMinimumSize(minimumSizeHint());
@@ -137,6 +142,11 @@ bool MergeDlg_impl::reintegrate()const
     return m_Reintegrate->isChecked();
 }
 
+bool MergeDlg_impl::allowmixedrevs()const
+{
+    return m_AllowMixedRev->isChecked();
+}
+
 QString MergeDlg_impl::Src1()const
 {
     KUrl uri(m_SrcOneInput->url());
@@ -176,11 +186,12 @@ Rangeinput_impl::revision_range MergeDlg_impl::getRange()const
     return m_RangeInput->getRange();
 }
 
+
 /*!
     \fn MergeDlg_impl::getMergeRange(bool*force,bool*recursive,bool*related,bool*dry)
  */
 bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *force, bool *recursive, bool *ignorerelated, bool *dry,
-                                  bool *useExternal,
+                                  bool *useExternal, bool *allowmixedrevs,
                                   QWidget *parent)
 {
     QPointer<KDialog> dlg(new KDialog(parent));
@@ -204,6 +215,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
         *ignorerelated = ptr->ignorerelated();
         *dry = ptr->dryrun();
         *useExternal = ptr->useExtern();
+        *allowmixedrevs = ptr->allowmixedrevs();
         ret = true;
     }
     if (dlg) {

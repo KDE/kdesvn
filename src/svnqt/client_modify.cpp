@@ -50,6 +50,7 @@
     
 namespace svn
 {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
     struct mBaton {
         mBaton():m_context(0),m_revision(Revision::UNDEFINED),m_date(),author(),commit_error(),repos_root(){}
         Context*m_context;
@@ -73,6 +74,7 @@ namespace svn
         m_baton->m_revision = commit_info->revision;
         return SVN_NO_ERROR;
     }
+#endif
 
   Revision
   Client_impl::checkout (const CheckoutParameter&parameters) throw (ClientException)

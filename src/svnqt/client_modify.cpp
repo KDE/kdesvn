@@ -46,16 +46,34 @@
 #include "url.h"
 #include "helper.h"
 
+#include <QCoreApplication>
+
 namespace svn
 {
-static svn_error_t *
-svnqt_commit_callback2_func(
-    const svn_commit_info_t *commit_info,
-    void *baton,
-    apr_pool_t *)
+struct mBaton {
+    mBaton(): m_context(), m_revision(Revision::UNDEFINED), m_date(), author(), commit_error(), repos_root() {}
+    ContextWP m_context;
+    svn::Revision m_revision;
+    QString m_date, author, commit_error, repos_root;
+};
+
+static svn_error_t *commit_callback2(const svn_commit_info_t *commit_info, void *baton, apr_pool_t *pool)
 {
-    svn_commit_info_t *ci = static_cast<svn_commit_info_t *>(baton);
-    *ci = *commit_info;
+    Q_UNUSED(pool);
+    mBaton *m_baton = (mBaton *)baton;
+    ContextP m_context = m_baton->m_context;
+    if (!m_context) {
+        return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+    }
+    svn_client_ctx_t *ctx = m_context->ctx();
+    if (ctx && ctx->cancel_func) {
+        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+    }
+    m_baton->author = QString::fromUtf8(commit_info->author);
+    m_baton->commit_error = QString::fromUtf8(commit_info->post_commit_err);
+    m_baton->m_date = QString::fromUtf8(commit_info->date);
+    m_baton->repos_root = QString::fromUtf8(commit_info->repos_root);
+    m_baton->m_revision = commit_info->revision;
     return SVN_NO_ERROR;
 }
 
@@ -89,10 +107,24 @@ Client_impl::remove(const Targets &targets,
                    ) throw (ClientException)
 {
     Pool pool;
+    svn_error_t *error;
 
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    mBaton _baton;
+    _baton.m_context = m_context;
+    error = svn_client_delete4(
+                targets.array(pool),
+                force,
+                keep_local,
+                map2hash(revProps, pool),
+                commit_callback2,
+                &_baton,
+                *m_context,
+                pool
+            );
+#else
     svn_commit_info_t *commit_info = 0;
-
-    svn_error_t *error =
+    error =
         svn_client_delete3(
             &commit_info,
             targets.array(pool),
@@ -102,13 +134,18 @@ Client_impl::remove(const Targets &targets,
             *m_context,
             pool
         );
+#endif
     if (error != 0) {
         throw ClientException(error);
     }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    return _baton.m_revision;
+#else
     if (commit_info) {
         return commit_info->revision;
     }
     return Revision::UNDEFINED;
+#endif
 }
 
 void

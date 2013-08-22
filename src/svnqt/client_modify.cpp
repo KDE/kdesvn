@@ -50,6 +50,30 @@
     
 namespace svn
 {
+    struct mBaton {
+        mBaton():m_context(0),m_revision(Revision::UNDEFINED),m_date(),author(),commit_error(),repos_root(){}
+        Context*m_context;
+        svn::Revision m_revision;
+        QString m_date,author,commit_error,repos_root;
+    };
+    
+    static svn_error_t * commit_callback2 (const svn_commit_info_t * commit_info, void *baton, apr_pool_t *pool)
+    {
+        Q_UNUSED(pool);
+        mBaton * m_baton = (mBaton*)baton;
+        Context*m_context = m_baton->m_context;
+        svn_client_ctx_t*ctx = m_context->ctx();
+        if (ctx&&ctx->cancel_func) {
+            SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+        }
+        m_baton->author = QString::FROMUTF8(commit_info->author);
+        m_baton->commit_error = QString::FROMUTF8(commit_info->post_commit_err);
+        m_baton->m_date = QString::FROMUTF8(commit_info->date);
+        m_baton->repos_root = QString::FROMUTF8(commit_info->repos_root);
+        m_baton->m_revision = commit_info->revision;
+        return SVN_NO_ERROR;
+    }
+
   Revision
   Client_impl::checkout (const CheckoutParameter&parameters) throw (ClientException)
   {
@@ -79,10 +103,24 @@ namespace svn
                       ) throw (ClientException)
   {
     Pool pool;
+    svn_error_t * error;
 
-    svn_commit_info_t *commit_info = 0;
-
-    svn_error_t * error =
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    mBaton _baton;
+    _baton.m_context = m_context;
+    error = svn_client_delete4(
+        targets.array(pool),
+        force,
+        keep_local,
+        map2hash(revProps,pool),
+        commit_callback2,
+        &_baton,
+        *m_context,
+        pool
+        );
+#else
+    svn_commit_info_t * commit_info = 0;
+    error =
             svn_client_delete3(
                                &commit_info,
                                targets.array(pool),
@@ -92,13 +130,18 @@ namespace svn
                                *m_context,
                                pool
                               );
+#endif
     if(error != 0) {
         throw ClientException (error);
     }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    return _baton.m_revision;
+#else
     if (commit_info) {
         return commit_info->revision;
     }
     return Revision::UNDEFINED;
+#endif
   }
 
   void

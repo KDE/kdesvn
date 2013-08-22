@@ -33,6 +33,9 @@
 #include "svn_path.h"
 #include "svn_dirent_uri.h"
 #include <svn_version.h>
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
+#include <svn_dirent_uri.h>
+#endif
 
 
 // apr api

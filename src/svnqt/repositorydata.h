@@ -68,9 +68,11 @@ protected:
 
 private:
     static void warning_func(void *baton, svn_error_t *err);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
     static void repo_notify_func(void *baton,
                                         const svn_repos_notify_t *notify,
                                         apr_pool_t *scratch_pool);
+#endif
     static svn_error_t*cancel_func(void*baton);
 };
 

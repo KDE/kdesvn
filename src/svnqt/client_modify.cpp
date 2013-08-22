@@ -339,6 +339,23 @@ namespace svn
   svn::Revision Client_impl::move (const CopyParameter&parameter) throw (ClientException)
   {
       Pool pool;
+      
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+      mBaton _baton;
+      _baton.m_context = m_context;
+      svn_error_t * error = svn_client_move6(
+            parameter.srcPath().array(pool),
+            parameter.destination().cstr(),
+            parameter.asChild(),
+            parameter.makeParent(),
+            map2hash(parameter.properties(),pool),
+            commit_callback2,
+            &_baton,
+            *m_context,
+            pool
+      );
+      
+#else
       svn_commit_info_t *commit_info = 0;
       svn_error_t * error = svn_client_move5(
                                              &commit_info,
@@ -351,13 +368,19 @@ namespace svn
                                              *m_context,
                                              pool
                                             );
+#endif
       if (error!=0) {
           throw ClientException (error);
       }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+        return _baton.m_revision;
+#else
       if (commit_info) {
           return commit_info->revision;
       }
       return Revision::UNDEFINED;
+#endif
+      
   }
 
   svn::Revision

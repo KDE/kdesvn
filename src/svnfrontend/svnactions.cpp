@@ -2269,7 +2269,7 @@ void SvnActions::slotMerge(const QString &src1, const QString &src2, const QStri
 /*!
     \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)
  */
-bool SvnActions::makeMove(const QString &Old, const QString &New, bool _force)
+bool SvnActions::makeMove(const QString &Old, const QString &New)
 {
     if (!m_Data->m_CurrentContext) {
         return false;
@@ -2293,14 +2293,14 @@ bool SvnActions::makeMove(const QString &Old, const QString &New, bool _force)
     return true;
 }
 
-bool SvnActions::makeMove(const KUrl::List &Old, const QString &New, bool force)
+bool SvnActions::makeMove(const KUrl::List &Old, const QString &New)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Move"), i18n("Moving entries"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
         const svn::Targets t(helpers::sub2qt::fromUrlList(Old));
-        m_Data->m_Svnclient->move(svn::CopyParameter(t, svn::Path(New)).force(force).asChild(true).makeParent(false));
+        m_Data->m_Svnclient->move(svn::CopyParameter(t, svn::Path(New)).asChild(true).makeParent(false));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;

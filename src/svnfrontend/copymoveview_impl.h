@@ -33,7 +33,7 @@ public:
     ~CopyMoveView_impl();
     QString newName() const;
     bool force() const;
-    static QString getMoveCopyTo(bool *ok, bool *force, bool move, const QString &old,
+    static QString getMoveCopyTo(bool *ok, bool move, const QString &old,
                                  const QString &base, QWidget *parent = 0);
     /*$PUBLIC_FUNCTIONS$*/
 

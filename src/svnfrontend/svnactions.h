@@ -163,8 +163,8 @@ public:
     bool makeCopy(const QString &, const QString &, const svn::Revision &rev);
     bool makeCopy(const KUrl::List &, const QString &, const svn::Revision &rev);
 
-    bool makeMove(const QString &, const QString &, bool);
-    bool makeMove(const KUrl::List &, const QString &, bool);
+    bool makeMove(const QString &, const QString &);
+    bool makeMove(const KUrl::List &, const QString &);
 
     virtual bool makeCleanup(const QString &);
 

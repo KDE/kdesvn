@@ -18,6 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
+
 #include "copymoveview_impl.h"
 #include <ksqueezedtextlabel.h>
 #include <qcheckbox.h>
@@ -51,13 +52,13 @@ CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sou
         m_HeadOneLabel->setText(i18n("Rename/move"));
     } else {
         m_HeadOneLabel->setText(i18n("Copy"));
-        m_ForceBox->hide();
     }
 }
 
 CopyMoveView_impl::~CopyMoveView_impl()
 {
 }
+
 
 /*!
     \fn CopyMoveView_impl::newName()
@@ -67,24 +68,13 @@ QString CopyMoveView_impl::newName() const
     return m_BaseName + m_NewNameInput->text();
 }
 
-/*!
-    \fn CopyMoveView_impl::force()
- */
-bool CopyMoveView_impl::force() const
-{
-    return m_ForceBox->isChecked();
-}
 
 /*!
-    \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,const QString&old,const QString&base,QWidget*)
+    \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,const QString&old,const QString&base,QWidget*)
  */
-QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool *force, bool move,
-        const QString &old, const QString &base, QWidget *parent)
+QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move,
+                                         const QString &old, const QString &base, QWidget *parent)
 {
-//     KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
-//             KDialogBase::Ok|KDialogBase::Cancel,
-//             KDialogBase::NoDefault);
-//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     QPointer<KDialog> dlg(new KDialog(parent));
     dlg->setCaption(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
@@ -102,9 +92,6 @@ QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool *force, bool move,
             *ok = false;
         }
     } else {
-        if (force) {
-            *force = ptr->force();
-        }
         nName = ptr->newName();
         if (ok) {
             *ok = true;

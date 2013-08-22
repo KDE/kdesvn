@@ -110,6 +110,7 @@ CommandExec::CommandExec(QObject *parent)
     m_pCPart->m_SvnWrapper->reInitClient();
 }
 
+
 CommandExec::~CommandExec()
 {
     delete m_pCPart;
@@ -328,6 +329,8 @@ int CommandExec::exec(KCmdLineArgs *args)
     return 0;
 }
 
+
+
 /*!
     \fn CommandExec::clientException(const QString&)
  */
@@ -336,6 +339,7 @@ void CommandExec::clientException(const QString &what)
     m_pCPart->Stderr << what << endl;
     KMessageBox::sorry(0, what, i18n("SVN Error"));
 }
+
 
 void CommandExec::slotCmd_log()
 {
@@ -509,9 +513,9 @@ void CommandExec::slotCmd_copy()
 {
     QString target;
     if (m_pCPart->urls.count() < 2) {
-        bool force_move, ok;
-        target = CopyMoveView_impl::getMoveCopyTo(&ok, &force_move, false,
-                 m_pCPart->urls.at(0), QString(), 0);
+        bool ok;
+        target = CopyMoveView_impl::getMoveCopyTo(&ok, false,
+                                                  m_pCPart->urls.at(0), QString(), 0);
         if (!ok) {
             return;
         }
@@ -530,19 +534,18 @@ void CommandExec::slotCmd_copy()
 
 void CommandExec::slotCmd_move()
 {
-    bool force_move, ok;
-    force_move = false;
+    bool ok;
     QString target;
     if (m_pCPart->urls.count() < 2) {
-        target = CopyMoveView_impl::getMoveCopyTo(&ok, &force_move, true,
-                 m_pCPart->urls.at(0), QString(), 0);
+        target = CopyMoveView_impl::getMoveCopyTo(&ok, true,
+                                                  m_pCPart->urls.at(0), QString(), 0);
         if (!ok) {
             return;
         }
     } else {
         target = m_pCPart->urls.at(1);
     }
-    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->urls.at(0), target, force_move);
+    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->urls.at(0), target);
 }
 
 void CommandExec::slotCmd_delete()
@@ -617,6 +620,7 @@ bool CommandExec::askRevision()
     delete dlg;
     return ret;
 }
+
 
 /*!
     \fn CommandExec::slotCmd_switch()

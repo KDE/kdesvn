@@ -375,7 +375,7 @@ svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientExc
                              &commit_info,
                              parameter.srcPath().array(pool),
                              parameter.destination().cstr(),
-                             parameter.force(),
+                             false, // is ignored since subversion 1.7 so we ignore it, too
                              parameter.asChild(),
                              parameter.makeParent(),
                              map2hash(parameter.properties(), pool),

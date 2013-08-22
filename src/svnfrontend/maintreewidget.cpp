@@ -1734,7 +1734,7 @@ void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action,
         target = baseUri();
     }
     if (action == Qt::MoveAction) {
-        m_Data->m_Model->svnWrapper()->makeMove(lst, target, false);
+        m_Data->m_Model->svnWrapper()->makeMove(lst, target);
     } else if (action == Qt::CopyAction) {
         m_Data->m_Model->svnWrapper()->makeCopy(lst, target, (isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision()));
     }
@@ -1881,17 +1881,17 @@ void MainTreeWidget::copy_move(bool move)
     if (isWorkingCopy() && SelectedNode() == m_Data->m_Model->firstRootChild()) {
         return;
     }
-    bool ok, force;
+    bool ok;
     SvnItemModelNode *which = SelectedNode();
     if (!which) {
         return;
     }
-    QString nName = CopyMoveView_impl::getMoveCopyTo(&ok, &force, move, which->fullName(), baseUri(), this);
+    QString nName = CopyMoveView_impl::getMoveCopyTo(&ok, move, which->fullName(), baseUri(), this);
     if (!ok) {
         return;
     }
     if (move) {
-        m_Data->m_Model->svnWrapper()->makeMove(which->fullName(), nName, force);
+        m_Data->m_Model->svnWrapper()->makeMove(which->fullName(), nName);
     } else {
         m_Data->m_Model->svnWrapper()->makeCopy(which->fullName(), nName, isWorkingCopy() ? svn::Revision::HEAD : baseRevision());
     }

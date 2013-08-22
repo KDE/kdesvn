@@ -80,7 +80,13 @@ public:
     CommitParameter &keepChangeList(bool _keep);
     //! default false
     bool keepChangeList()const;
+    //! default false
+    CommitParameter &commitAsOperations(bool _keep);
+    //! default false
+    bool commitAsOperations()const;
+
 };
 }
+
 
 #endif

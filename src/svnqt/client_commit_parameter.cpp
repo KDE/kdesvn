@@ -31,14 +31,14 @@ namespace svn
 struct CommitParameterData {
     CommitParameterData()
         : _targets(), _message(QString()), _depth(DepthInfinity), _changeList(StringArray()),
-          _revProps(PropertiesMap()), _keepLocks(false), _keepChangeList(false)
+          _revProps(PropertiesMap()), _keepLocks(false), _keepChangeList(false), _commit_as_operations(false)
     {}
     Targets _targets;
     QString _message;
     Depth _depth;
     StringArray _changeList;
     PropertiesMap _revProps;
-    bool _keepLocks, _keepChangeList;
+    bool _keepLocks, _keepChangeList, _commit_as_operations;
 };
 
 CommitParameter::CommitParameter()
@@ -55,4 +55,5 @@ GETSET(CommitParameter, PropertiesMap, _revProps, revisionProperties)
 GETSETSI(CommitParameter, Depth, _depth, depth)
 GETSETSI(CommitParameter, bool, _keepLocks, keepLocks)
 GETSETSI(CommitParameter, bool, _keepChangeList, keepChangeList)
+GETSETSI(CommitParameter, bool, _commit_as_operations, commitAsOperations)
 }

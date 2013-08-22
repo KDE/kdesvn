@@ -28,28 +28,32 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-
+#if defined( _MSC_VER) && _MSC_VER <= 1200
+#pragma warning( disable: 4786 )// debug symbol truncated
+#endif
 // svncpp
-#include "client_impl.h"
+#include "svnqt/client_impl.h"
 
 // subversion api
-#include <svn_client.h>
+#include "svn_client.h"
 
-#include "exception.h"
-#include "pool.h"
-#include "targets.h"
-#include "svnqt_defines.h"
-#include "stringarray.h"
-#include "client_parameter.h"
-#include "client_commit_parameter.h"
-#include "client_update_parameter.h"
-#include "url.h"
-#include "helper.h"
+#include "svnqt/exception.h"
+#include "svnqt/pool.h"
+#include "svnqt/targets.h"
+#include "svnqt/svnqt_defines.h"
+#include "svnqt/stringarray.h"
+#include "svnqt/client_parameter.h"
+#include "svnqt/client_commit_parameter.h"
+#include "svnqt/client_update_parameter.h"
+#include "svnqt/url.h"
+
+#include "svnqt/helper.h"
 
 #include <QCoreApplication>
 
 namespace svn
 {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
 struct mBaton {
     mBaton(): m_context(), m_revision(Revision::UNDEFINED), m_date(), author(), commit_error(), repos_root() {}
     ContextWP m_context;
@@ -76,6 +80,7 @@ static svn_error_t *commit_callback2(const svn_commit_info_t *commit_info, void 
     m_baton->m_revision = commit_info->revision;
     return SVN_NO_ERROR;
 }
+#endif
 
 Revision
 Client_impl::checkout(const CheckoutParameter &parameters) throw (ClientException)
@@ -223,16 +228,15 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
 {
     Pool pool;
 
-    m_context->setLogMessage(parameters.message());
-    svn_commit_info_t *commit_info = NULL;
-
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
-    svn_commit_info_t ci;
-    commit_info = &ci;
-    memset(commit_info, 0, sizeof(svn_commit_info_t));
-    commit_info->revision = SVN_INVALID_REVNUM;
-
+    mBaton _baton;
+    _baton.m_context = m_context;
+#else
+    svn_commit_info_t *commit_info = NULL;
+#endif
+    m_context->setLogMessage(parameters.message());
     svn_error_t *error =
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
         svn_client_commit6(
 #else
@@ -242,19 +246,19 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
             internal::DepthToSvn(parameters.depth()),
             parameters.keepLocks(),
             parameters.keepChangeList(),
-            true, /* commit_as_operations */
+            parameters.commitAsOperations(),
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
             false, /* file externals */
             false, /* dir externals */
 #endif
             parameters.changeList().array(pool),
             map2hash(parameters.revisionProperties(), pool),
-            &svnqt_commit_callback2_func,
-            commit_info,
+            commit_callback2,
+            &_baton,
             *m_context,
-            pool);
+            pool
+        );
 #else
-    svn_error_t *error =
         svn_client_commit4(
             &commit_info,
             parameters.targets().array(pool),
@@ -269,11 +273,13 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
     if (error != NULL) {
         throw ClientException(error);
     }
-
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    return _baton.m_revision;
+#else
     if (commit_info && SVN_IS_VALID_REVNUM(commit_info->revision)) {
         return (commit_info->revision);
     }
-
+#endif
     return svn::Revision::UNDEFINED;
 }
 

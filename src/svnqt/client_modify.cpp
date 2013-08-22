@@ -218,12 +218,31 @@ namespace svn
   Client_impl::commit (const CommitParameter&parameters) throw (ClientException)
   {
     Pool pool;
-
-    m_context->setLogMessage (parameters.message());
+   
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)    
+    mBaton _baton;
+    _baton.m_context = m_context;
+#else
     svn_commit_info_t *commit_info = NULL;
-
+#endif
+    m_context->setLogMessage (parameters.message());
     svn_error_t * error =
-            svn_client_commit4 (
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)    
+        svn_client_commit5(
+            parameters.targets().array(pool),
+                           internal::DepthToSvn(parameters.depth()),
+                           parameters.keepLocks(),
+                           parameters.keepChangeList(),
+                           parameters.commitAsOperations(),
+                           parameters.changeList().array(pool),
+                           map2hash(parameters.revisionProperties(),pool),
+                           commit_callback2,
+                           &_baton,
+                           *m_context,
+                           pool
+        );
+#else
+        svn_client_commit4 (
                 &commit_info,
                 parameters.targets().array (pool),
                 internal::DepthToSvn(parameters.depth()),
@@ -233,13 +252,16 @@ namespace svn
                 map2hash(parameters.revisionProperties(),pool),
                 *m_context,
                 pool);
-    if (error != NULL) {
+#endif
+    if (error != 0) {
         throw ClientException (error);
     }
-
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)    
+    return _baton.m_revision;
+#else    
     if (commit_info && SVN_IS_VALID_REVNUM (commit_info->revision))
       return (commit_info->revision);
-
+#endif
     return svn::Revision::UNDEFINED;
   }
 

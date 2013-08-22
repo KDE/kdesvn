@@ -276,7 +276,6 @@ namespace svn
         }
 
         Pool pool;
-        svn_commit_info_t *commit_info = 0L;
         apr_array_header_t * sources = apr_array_make(pool,parameter.srcPath().size(),sizeof(svn_client_copy_source_t *));
         // not using .array() 'cause some extra information is needed for copy
         for (size_t j=0;j<parameter.srcPath().size();++j)
@@ -287,26 +286,45 @@ namespace svn
             source->peg_revision=parameter.pegRevision().revision();
             APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
         }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+        mBaton _baton;
+        _baton.m_context = m_context;
+
         svn_error_t * error =
-                svn_client_copy5(&commit_info,
-                    sources,
-                    parameter.destination().cstr(),
-                    parameter.asChild(),parameter.makeParent(),parameter.ignoreExternal(),
-                    map2hash(parameter.properties(),pool),*m_context,pool);
+            svn_client_copy6(
+                            sources,
+                            parameter.destination().cstr(),
+                            parameter.asChild(),parameter.makeParent(),parameter.ignoreExternal(),
+                            map2hash(parameter.properties(),pool),
+                            commit_callback2,&_baton,
+                            *m_context,pool);
+
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+        svn_commit_info_t *commit_info = 0L;
+        svn_error_t * error =
+            svn_client_copy5(&commit_info,
+                sources,
+                parameter.destination().cstr(),
+                parameter.asChild(),parameter.makeParent(),parameter.ignoreExternal(),
+                map2hash(parameter.properties(),pool),*m_context,pool);
 #else
+        svn_commit_info_t *commit_info = 0L;
         svn_error_t * error =
-                svn_client_copy4(&commit_info,
-                    sources,
-                    parameter.destination().cstr(),
-                    parameter.asChild(),parameter.makeParent(),map2hash(parameter.properties(),pool),*m_context,pool);
+            svn_client_copy4(&commit_info,
+                sources,
+                parameter.destination().cstr(),
+                parameter.asChild(),parameter.makeParent(),map2hash(parameter.properties(),pool),*m_context,pool);
 #endif
         if (error!=0){
             throw ClientException (error);
         }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+        return _baton.m_revision;
+#else
         if (commit_info) {
             return commit_info->revision;
         }
+#endif
         return Revision::UNDEFINED;
     }
 

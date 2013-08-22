@@ -88,13 +88,6 @@ namespace svn
         //! return value for asChild
         bool makeParent()const;
 
-        //! set move operation parameter force to true
-        /*! this is ignored for copy operation */
-        CopyParameter&force(bool);
-        //! return value for force
-        /*! this is ignored for copy operation */
-        bool force()const;
-
         //! set the source revision for the copy operation
         CopyParameter&srcRevision(const Revision&);
         //! get the source revision for the copy operation

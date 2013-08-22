@@ -33,7 +33,7 @@ namespace svn
     struct SVNQT_NOEXPORT CopyParameterData
     {
         CopyParameterData()
-            :_srcPath(),_srcRevision(),_pegRevision(),_destPath(),_asChild(false),_makeParent(false),_ignoreExternal(false),_force(false),_properties()
+            :_srcPath(),_srcRevision(),_pegRevision(),_destPath(),_asChild(false),_makeParent(false),_ignoreExternal(false),_properties()
         {
         }
         Targets  _srcPath;
@@ -43,8 +43,6 @@ namespace svn
         bool _asChild;
         bool _makeParent;
         bool _ignoreExternal;
-        //! used for move operation instead of copy
-        bool _force;
         PropertiesMap _properties;
     };
 
@@ -68,7 +66,6 @@ namespace svn
 
     GETSETSI(CopyParameter,bool,_asChild,asChild);
     GETSETSI(CopyParameter,bool,_makeParent,makeParent);
-    GETSETSI(CopyParameter,bool,_force,force);
     GETSETSI(CopyParameter,bool,_ignoreExternal,ignoreExternal);
 
     struct SVNQT_NOEXPORT DiffParameterData

@@ -2231,7 +2231,7 @@ void SvnActions::slotMerge(const QString&src1,const QString&src2, const QString&
 /*!
     \fn SvnActions::slotCopyMove(bool,const QString&,const QString&)
  */
-bool SvnActions::makeMove(const QString&Old,const QString&New,bool _force)
+bool SvnActions::makeMove(const QString&Old,const QString&New)
 {
     if (!m_Data->m_CurrentContext) return false;
     svn::CopyParameter params(Old,New);
@@ -2240,7 +2240,7 @@ bool SvnActions::makeMove(const QString&Old,const QString&New,bool _force)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener,m_Data->m_ParentList->realWidget(),0,i18n("Move"),i18n("Moving/Rename item"));
         connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
-        nnum = m_Data->m_Svnclient->move(params.force(_force).asChild(false).makeParent(false));
+        nnum = m_Data->m_Svnclient->move(params.asChild(false).makeParent(false));
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;
@@ -2252,7 +2252,7 @@ bool SvnActions::makeMove(const QString&Old,const QString&New,bool _force)
     return true;
 }
 
-bool SvnActions::makeMove(const KUrl::List&Old,const QString&New,bool force)
+bool SvnActions::makeMove(const KUrl::List&Old,const QString&New)
 {
     svn::Revision nnum;
     try {
@@ -2271,7 +2271,7 @@ bool SvnActions::makeMove(const KUrl::List&Old,const QString&New,bool force)
         }
         svn::Targets t(p);
         svn::Path NPath(New);
-        m_Data->m_Svnclient->move(svn::CopyParameter(t,NPath).force(force).asChild(true).makeParent(false));
+        m_Data->m_Svnclient->move(svn::CopyParameter(t,NPath).asChild(true).makeParent(false));
     } catch (const svn::Exception&e) {
         emit clientException(e.msg());
         return false;

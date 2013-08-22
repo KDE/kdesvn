@@ -498,8 +498,8 @@ void CommandExec::slotCmd_copy()
 {
     QString target;
     if (m_pCPart->url.count()<2) {
-        bool force_move,ok;
-        target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,false,
+        bool ok;
+        target = CopyMoveView_impl::getMoveCopyTo(&ok,false,
             m_pCPart->url[0],"",0,"move_name");
         if (!ok) {
             return;
@@ -518,11 +518,10 @@ void CommandExec::slotCmd_copy()
 
 void CommandExec::slotCmd_move()
 {
-    bool force_move,ok;
-    force_move = false;
+    bool ok;
     QString target;
     if (m_pCPart->url.count()<2) {
-        target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,true,
+        target = CopyMoveView_impl::getMoveCopyTo(&ok,true,
             m_pCPart->url[0],"",0,"move_name");
         if (!ok) {
             return;
@@ -530,7 +529,7 @@ void CommandExec::slotCmd_move()
     } else {
         target = m_pCPart->url[1];
     }
-    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->url[0],target,force_move);
+    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->url[0],target);
 }
 
 void CommandExec::slotCmd_delete()

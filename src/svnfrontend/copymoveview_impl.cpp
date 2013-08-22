@@ -54,7 +54,6 @@ CopyMoveView_impl::CopyMoveView_impl(const QString&baseName,const QString&source
         m_HeadOneLabel->setText(i18n("Rename/move"));
     } else {
         m_HeadOneLabel->setText(i18n("Copy"));
-        m_ForceBox->hide();
     }
 }
 
@@ -73,24 +72,11 @@ QString CopyMoveView_impl::newName()
 
 
 /*!
-    \fn CopyMoveView_impl::force()
+    \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,const QString&old,const QString&base,QWidget*)
  */
-bool CopyMoveView_impl::force()
-{
-    return m_ForceBox->isChecked();
-}
-
-
-/*!
-    \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,const QString&old,const QString&base,QWidget*)
- */
-QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
+QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool move,
     const QString&old,const QString&base,QWidget*parent,const char*name)
 {
-//     KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
-//             KDialogBase::Ok|KDialogBase::Cancel,
-//             KDialogBase::NoDefault);
-//     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     KDialog dlg(parent);
     dlg.setObjectName(name);
     dlg.setCaption(move?i18n("Move/Rename file/directory"):i18n("Copy file/directory"));
@@ -108,7 +94,6 @@ QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
     if (dlg.exec()!=QDialog::Accepted) {
         if (ok) *ok = false;
     } else {
-        if (force) *force = ptr->force();
         nName = ptr->newName();
         if (ok) *ok=true;
     }

@@ -2012,6 +2012,7 @@ void MainTreeWidget::slotRelocate()
         ptr->disableRange(true);
         ptr->disableOpen(true);
         ptr->disableExternals(true);
+        // TODO ignore_externals as parameter for svn 1.7 and recurse hidden
         ptr->hideDepth(true,true);
         bool done = false;
         KConfigGroup _k(Kdesvnsettings::self()->config(),"relocate_dlg");

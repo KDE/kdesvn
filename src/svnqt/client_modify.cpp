@@ -571,15 +571,27 @@ namespace svn
                     const Url& to_url,
                     bool recurse) throw (ClientException)
   {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+      Q_UNUSED(recurse);
+#endif
     Pool pool;
     svn_error_t * error =
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    svn_client_relocate2 (path.cstr (),
+                        from_url,
+                        to_url,
+                        false, // TODO ignore_externals as parameter for svn 1.7 
+                        *m_context,
+                        pool);
+
+#else
       svn_client_relocate (path.cstr (),
                          from_url,
                          to_url,
                          recurse,
                          *m_context,
                          pool);
-
+#endif
     if(error != NULL)
       throw ClientException (error);
   }

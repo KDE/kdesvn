@@ -545,25 +545,41 @@ Client_impl::import(const Path &path,
                    ) throw (ClientException)
 
 {
-    svn_commit_info_t *commit_info = NULL;
     Pool pool;
 
     m_context->setLogMessage(message);
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    mBaton _baton;
+    _baton.m_context = m_context;
+    svn_error_t *error =
+        svn_client_import4(path.cstr(), url,
+                           internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
+                           map2hash(revProps, pool),
+                           commit_callback2, &_baton,
+                           *m_context, pool);
+#else
+    svn_commit_info_t *commit_info = NULL;
     svn_error_t *error =
         svn_client_import3(&commit_info, path.cstr(), url,
                            internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
                            map2hash(revProps, pool),
                            *m_context, pool);
+#endif
+
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
 
     if (error != 0) {
         throw ClientException(error);
     }
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    return _baton.m_revision;
+#else
     if (commit_info) {
         return commit_info->revision;
     }
     return Revision::UNDEFINED;
+#endif
 }
 
 void

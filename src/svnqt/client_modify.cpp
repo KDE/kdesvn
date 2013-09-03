@@ -467,7 +467,22 @@ namespace svn
     } else {
         _neol = params.nativeEol().TOUTF8();
     }
+    // TODO ignoreKeywords into UI
     svn_error_t * error =
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+            svn_client_export5(&revnum,
+                            params.moduleName().cstr(),
+                            params.destination().cstr(),
+                            params.peg().revision(),
+                            params.revision().revision(),
+                            params.overWrite(),
+                            params.ignoreExternals(),
+                            params.ignoreKeywords(),
+                            internal::DepthToSvn(params.depth()),
+                            _neol,
+                            *m_context,
+                            pool);
+#else
             svn_client_export4(&revnum,
                                 params.moduleName().cstr(),
                                 params.destination().cstr(),
@@ -479,6 +494,7 @@ namespace svn
                                 _neol,
                                 *m_context,
                                 pool);
+#endif
     if(error != NULL)
       throw ClientException (error);
     return Revision(revnum);

@@ -546,6 +546,10 @@ namespace svn
          * Used only from Client::doExport, QString() is default (will used as NULL for subversion)
          */
         const QString&nativeEol()const;
+        
+        //!if true, don't expand keywords
+        CheckoutParameter&ignoreKeywords(bool ignore);
+        bool ignoreKeywords()const;
     };
 }
 

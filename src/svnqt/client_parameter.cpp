@@ -322,12 +322,12 @@ namespace svn
     {
         CheckoutParameterData()
             :_moduleName(),_destination(),_revision(Revision::UNDEFINED),_peg(Revision::UNDEFINED),_depth(DepthInfinity),
-             _ignoreExternals(false),_overWrite(false),_nativeEol(QString())
+            _ignoreExternals(false),_overWrite(false),_ignoreKeywords(false),_nativeEol(QString())
         {}
         Path _moduleName,_destination;
         Revision _revision,_peg;
         Depth _depth;
-        bool _ignoreExternals,_overWrite;
+        bool _ignoreExternals,_overWrite,_ignoreKeywords;
         QString _nativeEol;
     };
 
@@ -349,4 +349,5 @@ namespace svn
     GETSETSI(CheckoutParameter,Depth,_depth,depth)
     GETSETSI(CheckoutParameter,bool,_ignoreExternals,ignoreExternals)
     GETSETSI(CheckoutParameter,bool,_overWrite,overWrite)
+    GETSETSI(CheckoutParameter,bool,_ignoreKeywords,ignoreKeywords)
 }

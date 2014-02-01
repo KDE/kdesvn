@@ -20,6 +20,7 @@ Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Bl
 
 [Desktop Action Log]
 Name=Subversion log (last 100)
+Name[bs]=Subverzije zapisnik (zadnji 100)
 Name[ca]=Registre de Subversion (últims 100)
 Name[de]=Subversions-Protokoll (letzte 100)
 Name[es]=Registro de Subversion (últimos 100)
@@ -34,6 +35,7 @@ Name[x-test]=xxSubversion log (last 100)xx
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
+Comment[bs]=Prikazi Subverzije zapisnik
 Comment[ca]=Mostra el registre de Subversion
 Comment[de]=Zeigt das Subversion-Protokoll
 Comment[es]=Muestra el registro de Subversion
@@ -49,6 +51,7 @@ Comment[x-test]=xxDisplays the Subversion logxx
 
 [Desktop Action Info]
 Name=Detailed Subversion info
+Name[bs]=Detaljna Subverzija info
 Name[ca]=Informació detallada de Subversion
 Name[de]=Ausführliche Subversion-Informationen
 Name[es]=Información detallada de Subversion
@@ -87,6 +90,7 @@ Exec=kdesvn exec add %U
 
 [Desktop Action Addnew]
 Name=Check for unversioned items
+Name[bs]=Provjerite unversioned predmete
 Name[ca]=Comprova per elements sense versió
 Name[de]=Suche nach nichtversionierten Einträgen
 Name[es]=Comprobar elementos sin versión
@@ -188,6 +192,7 @@ Comment[x-test]=xxRename a file locally and in the repository.  Use this rather 
 
 [Desktop Action Import]
 Name=Import Repository
+Name[bs]=Uvezi spremište
 Name[ca]=Importa un repositori
 Name[cs]=Importovat repozitář
 Name[de]=Repository importieren
@@ -204,6 +209,7 @@ Name[x-test]=xxImport Repositoryxx
 Icon=svn_import
 Exec=kio_svn_helper -i %U
 Comment=Put folder into an existing repository to put it under revision control.
+Comment[bs]=Stavi direktorij na postojeće spremište radi kontrole revizija.
 Comment[ca]=Situa la carpeta en un repositori existent per a posar-la sota el control de revisions.
 Comment[cs]=Zařadit složku do repozitáře a správy verzí
 Comment[de]=Schiebt den Ordner in ein existierendes Repository, um ihn in die Versionsverwaltung aufzunehmen.
@@ -432,6 +438,7 @@ Comment[x-test]=xxShow local changes since last updatexx
 
 [Desktop Action Update]
 Name=KDESvn Update
+Name[bs]=KDESvn Azuriranje
 Name[ca]=KDESvn Actualitza
 Name[de]=KDESvn-Aktualisierung
 Name[es]=Actualización de KDESvn
@@ -447,6 +454,7 @@ Exec=kdesvn exec update %U
 
 [Desktop Action Commit]
 Name=KDESvn Commit
+Name[bs]=KDESvn obavezati
 Name[ca]=KDESvn Publica
 Name[de]=KDESvn-Einspielung
 Name[es]=Envío de KDESvn
@@ -536,6 +544,7 @@ Name[x-test]=xxDisplay revision treexx
 Icon=kdesvnlog
 Exec=kdesvn exec tree %U
 Comment=Show complete revision tree
+Comment[bs]=Prikazi kompletno revizija stablo
 Comment[ca]=Mostra l'arbre de revisions complet
 Comment[de]=Zeigt den gesamten Revisionsbaum an
 Comment[es]=Mostrar el árbol de revisiones completo

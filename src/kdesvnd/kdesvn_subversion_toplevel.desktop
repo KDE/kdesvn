@@ -21,6 +21,7 @@ Name[x-test]=xxkdesvn log (last 100)xx
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
+Comment[bs]=Prikazi Subverzije zapisnik
 Comment[ca]=Mostra el registre de Subversion
 Comment[de]=Zeigt das Subversion-Protokoll
 Comment[es]=Muestra el registro de Subversion
@@ -102,6 +103,7 @@ Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 
 [Desktop Action Update]
 Name=Update (Kdesvn)
+Name[bs]=Azuriranje(Kdesvn)
 Name[ca]=Actualitza (Kdesvn)
 Name[de]=Aktualisieren (Kdesvn)
 Name[es]=Actualizar (Kdesvn)
@@ -117,6 +119,7 @@ Exec=kdesvn exec update %U
 
 [Desktop Action Commit]
 Name=Commit (Kdesvn)
+Name[bs]=Izvrsiti (Kdesvn)
 Name[ca]=Publica (Kdesvn)
 Name[de]=Einspielen (Kdesvn)
 Name[es]=Enviar (Kdesvn)

@@ -8,8 +8,6 @@
   <!ENTITY % addindex "IGNORE">
   <!ENTITY Rajko.Albrecht '<personname><firstname>Rajko</firstname><surname>Albrecht</surname></personname>'>
   <!ENTITY Rajko.Albrecht.mail '<email>ral@alwins-world.de</email>'>
-  <!ENTITY konqi "<application>konqueror</application>">
-  <!ENTITY krus "<application>dolphin</application>">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 
 
@@ -404,7 +402,7 @@ entry selected for retrieving logs before. Same for <guibutton>Diff revisions</g
 <sect1 id="working-with-repositories">
 <title>Working on repositories</title>
 <para>
-  Simple repository browsing may be done within &konqi;, &krus; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with <quote>k</quote>) and them will display the content. So simple operations like copy, move and delete may work. When appending a query <quote>?rev=<replaceable>xxx</replaceable></quote> the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
+  Simple repository browsing may be done within &konqueror;, &dolphin; or similar file browsers: Open a URL with protocol described in <xref linkend="kdesvn-features" xreflabel="Features" /> (the variants starting with <quote>k</quote>) and them will display the content. So simple operations like copy, move and delete may work. When appending a query <quote>?rev=<replaceable>xxx</replaceable></quote> the listing comes from a specific revision. Format of revision-query is described in <xref linkend="revision-syntax" />, some more information about KIO::ksvn are in <xref linkend="kdesvn-kio" />
 </para>
 <para>
 All work except <guimenuitem>Copy</guimenuitem> may only done when browsing at revision HEAD.
@@ -861,7 +859,7 @@ For browsing at a specific revision you may append the query <link linkend="revi
 <varlistentry>
 <term>Context menus</term>
 <listitem><para>
-&kdesvn; installs context menus for &konqueror;. Them may be seen with right mouse click in the browser window (only in standard view, not any KPart) so it is possible to do most used actions direct from within &konqueror; (or any other file managers that read &konqueror; context menus like &krus;). This is done via a call
+&kdesvn; installs context menus for &konqueror;. Them may be seen with right mouse click in the browser window (only in standard view, not any KPart) so it is possible to do most used actions direct from within &konqueror; (or any other file managers that read &konqueror; context menus like &dolphin;). This is done via a call
 to the <link linkend="kdesvn-commandline">command line variant of &kdesvn;</link>.
 </para>
 </listitem>

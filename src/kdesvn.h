@@ -76,7 +76,7 @@ protected:
      * with @ref saveProperties
      */
     virtual void readProperties(const KConfigGroup&);
-    virtual bool queryExit();
+    void closeEvent(QCloseEvent *event);
     void enableClose(bool how);
 
 

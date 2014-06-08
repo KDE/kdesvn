@@ -424,9 +424,9 @@ void kdesvn::optionsConfigureKeys()
 
 
 /*!
-    \fn kdesvn::queryExit()
+    \fn kdesvn::closeEvent()
  */
-bool kdesvn::queryExit()
+void kdesvn::closeEvent(QCloseEvent *ev)
 {
     emit sigSavestate();
     if (m_part) {
@@ -434,7 +434,7 @@ bool kdesvn::queryExit()
         cs.writeEntry("lastURL", m_part->url().prettyUrl());
         cs.sync();
     }
-    return KParts::MainWindow::queryExit();
+    return KParts::MainWindow::closeEvent(ev);
 }
 
 

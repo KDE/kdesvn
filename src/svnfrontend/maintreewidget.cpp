@@ -600,7 +600,7 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_right_add_ignore_pattern",i18n("Add or Remove ignore pattern"),KShortcut(),KIcon(),this,SLOT(slotRightRecAddIgnore()));
 
     tmp_action = add_action("make_svn_headupdate",i18n("Update to head"),KShortcut(),KIcon("kdesvnupdate"),m_Data->m_Model->svnWrapper(),SLOT(slotUpdateHeadRec()));
-    tmp_action->setIconText(i18n("Update"));
+    tmp_action->setIconText(i18nc("Menu item", "Update"));
     tmp_action = add_action("make_svn_revupdate",i18n("Update to revision..."),KShortcut(),KIcon("kdesvnupdate"),m_Data->m_Model->svnWrapper(),SLOT(slotUpdateTo()));
     tmp_action = add_action("make_svn_commit",i18n("Commit"),KShortcut("CTRL+#"),KIcon("kdesvncommit"),this,SLOT(slotCommit()));
     tmp_action->setIconText(i18n("Commit"));

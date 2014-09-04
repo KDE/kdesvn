@@ -75,14 +75,14 @@ const char *CContextListener::action_strings[] = {
     I18N_NOOP("Update"), //svn_wc_notify_update_update
     I18N_NOOP("Update complete"),
     I18N_NOOP("Update external module"),
-    "", // status completed - will not send is just noisy
+    NULL, // status completed - will not send is just noisy
     I18N_NOOP("Status on external"), //svn_wc_notify_status_external
     I18N_NOOP("Commit Modified"),
     I18N_NOOP("Commit Added"),
     I18N_NOOP("Commit Deleted"),
     I18N_NOOP("Commit Replaced"),
-    "", //tx delta -> making ticks instead
-    "", //svn_wc_notify_blame_revision - using ticks
+    NULL, //tx delta -> making ticks instead
+    NULL, //svn_wc_notify_blame_revision - using ticks
     I18N_NOOP("Locking"),
     I18N_NOOP("Unlocked"),
     I18N_NOOP("Lock failed"),
@@ -90,13 +90,13 @@ const char *CContextListener::action_strings[] = {
 };
 
 const char *CContextListener::notify_state_strings[] = {
-    "", // = 0
-    "",
+    NULL, // = 0
+    NULL,
     I18N_NOOP("unchanged"),
     I18N_NOOP("item wasn't present"),
     I18N_NOOP("unversioned item obstructed work"),
     // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
-    "",
+    NULL,
     I18N_NOOP("Modified state had mods merged in."),
     I18N_NOOP("Modified state got conflicting mods.")
 };

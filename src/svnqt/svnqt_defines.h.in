@@ -35,6 +35,9 @@
 #define HOMEDIR @HOMEDIR@
 #define QLONG @QLONG@
 
+#cmakedefine HAS_BACKTRACE_H 1
+#cmakedefine USE_BACKTRACE 1
+
 #define SVNQT_SIZE_UNKNOWN QLONG(-1)
 
 #define HAS_SVN_VERSION_H @HAS_SVN_VERSION_H@

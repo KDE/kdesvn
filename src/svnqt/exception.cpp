@@ -116,17 +116,17 @@ namespace svn
       message = QString::FROMUTF8(error->message);
     else
     {
-      message = "Unknown error!\n";
+      message = QLatin1String("Unknown error!\n");
       if (error->file)
       {
-        message += QString::FROMUTF8("In file ");
+        message += QLatin1String("In file ");
         message += QString::FROMUTF8(error->file);
-        message += QString(" Line %1").arg(error->line);
+        message += QLatin1String(" Line ") + QString::number(error->line);
       }
     }
     while (next != NULL && next->message != NULL)
     {
-      message = message + '\n' + QString::FROMUTF8(next->message);
+      message = message + QLatin1Char('\n') + QString::FROMUTF8(next->message);
 
       next = next->child;
     }
@@ -146,7 +146,7 @@ namespace svn
   }
 
   ClientException::ClientException (svn_error_t * error) throw ()
-    : Exception ("")
+    : Exception (QString())
   {
     init();
     if (error == 0)
@@ -158,10 +158,10 @@ namespace svn
   }
 
   ClientException::ClientException (apr_status_t status) throw ()
-    : Exception ("")
+    : Exception (QString())
   {
-      init();
-      m->apr_err = status;
+    init();
+    m->apr_err = status;
   }
 
 
@@ -177,8 +177,8 @@ namespace svn
 
   void ClientException::init()
   {
-#ifdef USEBACKTRACE
-    if (m_backTraceConstr.length()==0) {
+#ifdef USE_BACKTRACE
+    if (m_backTraceConstr.isEmpty()) {
         m_backTraceConstr = getBackTrace();
         m->message=m_backTraceConstr;
     }
@@ -190,14 +190,10 @@ namespace svn
   QString ClientException::getBackTrace()
   {
     QString Result;
-    //qDebug("getBackTrace");
 #ifdef HAS_BACKTRACE_H
-    //qDebug("Generating backtrace");
     void *array[SVNQT_BACKTRACE_LENGTH];
-    size_t size;
-    size_t i;
 
-    size = backtrace (array, SVNQT_BACKTRACE_LENGTH);
+    int size = backtrace (array, SVNQT_BACKTRACE_LENGTH);
     if (!size) {
         return Result;
     }
@@ -205,12 +201,15 @@ namespace svn
     char ** strings = backtrace_symbols (array, size);
 
     QStringList r;
-    for (i = 0; i < size; ++i) {
+    r.reserve(size);
+    for (int i = 0; i < size; ++i) {
         r.push_back(QString::number(i) +
-             QString::FROMUTF8(": ") +
+             QLatin1String(": ") +
              QString::FROMUTF8(strings[i]));
     }
-    Result = QString::FROMUTF8("[\n")+r.join("\n")+QString::FROMUTF8("]\n");
+    Result = QLatin1String("[\n")+
+            r.join(QLatin1String("\n"))+
+            QLatin1String("]\n");
     free (strings);
 #endif
     return Result;

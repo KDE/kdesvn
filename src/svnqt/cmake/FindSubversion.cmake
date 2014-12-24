@@ -107,6 +107,9 @@ if(UNIX)
   message(STATUS "Found apu extra ldflags: ${APU_EXTRA_LDFLAGS}")
 
   check_include_files(execinfo.h HAS_BACKTRACE_H)
+  if(HAS_BACKTRACE_H)
+    option(USE_BACKTRACE "Generate a backtrace when a svnclient exception is thrown" OFF)
+  endif()
 
   check_include_files("svn_version.h" HAS_SVN_VERSION_H)
 

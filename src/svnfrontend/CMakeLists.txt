@@ -138,5 +138,3 @@ add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 set_target_properties(svnfrontend
     PROPERTIES
     COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
-
-add_dependencies(svnfrontend ksvnwidgets svncharts)

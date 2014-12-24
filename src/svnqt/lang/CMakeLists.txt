@@ -19,4 +19,5 @@
  ####
 
 file(GLOB _LANGFILES *.ts)
-lrelease_translation(${QT_LRELEASE_EXECUTABLE} ${_LANGFILES})
+qt4_add_translation(_qm_files ${_LANGFILES})
+install(FILES ${_qm_files} DESTINATION share/svnqt/i18n)

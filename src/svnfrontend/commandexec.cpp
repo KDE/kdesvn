@@ -71,14 +71,22 @@ public:
 };
 
 pCPart::pCPart()
-    :cmd(""),url(),ask_revision(false),rev_set(false),outfile_set(false),single_revision(false),log_limit(0),Stdout(stdout),Stderr(stderr)
-{
-    m_SvnWrapper = 0;
-    start = svn::Revision::UNDEFINED;
-    end = svn::Revision::UNDEFINED;
-    disp = new DummyDisplay();
-    m_SvnWrapper = new SvnActions(disp,0,true);
-}
+    : cmd()
+    , url()
+    , ask_revision(false)
+    , rev_set(false)
+    , outfile_set(false)
+    , single_revision(false)
+    , force(false)
+    , log_limit(0)
+    , m_SvnWrapper(new SvnActions(disp,0,true))
+    , args(NULL)
+    , start(svn::Revision::UNDEFINED)
+    , end(svn::Revision::UNDEFINED)
+    , Stdout(stdout)
+    , Stderr(stderr)
+    , disp(new DummyDisplay())
+{}
 
 pCPart::~pCPart()
 {

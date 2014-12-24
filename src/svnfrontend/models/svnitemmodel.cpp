@@ -49,7 +49,7 @@ class SvnItemModelData
 {
 public:
     SvnItemModelData(SvnItemModel*aCb,MainTreeWidget*display)
-        :m_rootNode(0),m_Cb(aCb),m_Display(display),m_DirWatch(0)
+        :m_rootNode(0),m_SvnActions(NULL),m_Cb(aCb),m_Display(display),m_DirWatch(NULL)
     {
         m_Uid = QUuid::createUuid().toString();
         m_InfoThread = new GetInfoThread(aCb);

@@ -41,7 +41,6 @@ public:
     QByteArray m_content;
     KFindDialog *srchdialog;
 
-    int last_search,last_finished_search;
     QString pattern;
 };
 

@@ -1756,7 +1756,7 @@ void MainTreeWidget::slotUrlDropped(const KUrl::List&_lst,Qt::DropAction action,
         }
         slotImportIntoDir(_lst[0],target,fi.isDir());
     } else {
-        WidgetBlockStack(this);
+        WidgetBlockStack w(this);
         //m_pList->stopScan();
         KIO::Job * job = KIO::copy(_lst,target);
         connect(job, SIGNAL(result(KJob*)),SLOT(slotCopyFinished( KJob*)));

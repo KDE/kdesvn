@@ -232,7 +232,6 @@ void DiffBrowser::doSearchAgain(bool back)
     if (!m_Data->srchdialog || m_Data->pattern.isEmpty()) {
         startSearch();
     } else {
-        m_Data->last_search = m_Data->last_finished_search;
         doSearch(m_Data->pattern,back);
     }
 }

@@ -57,6 +57,7 @@ StoredDrawParams::StoredDrawParams()
   _current = false;
   _shaded = true;
   _rotated = false;
+  _drawFrame = false;
 
   _backColor = Qt::white;
 

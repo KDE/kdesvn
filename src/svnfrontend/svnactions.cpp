@@ -110,8 +110,10 @@ class SvnActionsData:public svn::ref_count
 public:
     SvnActionsData():ref_count()
     {
+        m_ParentList = NULL;
         m_Svnclient = svn::Client::getobject(0,0);
         m_CurrentContext = 0;
+        runblocked = false;
     }
 
     virtual ~SvnActionsData()

@@ -152,15 +152,17 @@ KFileItem&SvnItem_p::createItem(const svn::Revision&peg)
 }
 
 SvnItem::SvnItem()
-    : p_Item(new SvnItem_p())
+    : m_overlaycolor(false)
+    , m_bgColor(NONE)
+    , p_Item(new SvnItem_p())
 {
-    m_overlaycolor = false;
 }
 
 SvnItem::SvnItem(const svn::StatusPtr&aStat)
-    : p_Item(new SvnItem_p(aStat))
+    : m_overlaycolor(false)
+    , m_bgColor(NONE)
+    , p_Item(new SvnItem_p(aStat))
 {
-    m_overlaycolor = false;
 }
 
 SvnItem::~SvnItem()

@@ -134,6 +134,8 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap>&_log,con
         setWindowTitle(i18n("SVN Log"));
     }
     _name = what;
+    if(!_name.startsWith(QLatin1Char('/')))
+      _name = QLatin1Char('/') + _name;
     dispLog(_log);
 }
 
@@ -325,7 +327,7 @@ void SvnLogDlgImp::slotGetLogs()
 {
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
             m_endRevButton->revision(),m_peg,
-            _base+'/'+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,Kdesvnsettings::last_node_follow(),this);
+            _base+_name,Kdesvnsettings::self()->log_always_list_changed_files(),0,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -343,7 +345,7 @@ void SvnLogDlgImp::slotPrevFifty()
     }
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(begin,
                             (begin.revnum()>50?svn::Revision::START:svn::Revision::HEAD),m_peg,
-                            _base+'/'+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
+                            _base+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }
@@ -353,7 +355,7 @@ void SvnLogDlgImp::slotBeginHead()
 {
     svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(svn::Revision::HEAD,
                                         1,m_peg,
-                                        _base+'/'+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
+                                        _base+_name,Kdesvnsettings::self()->log_always_list_changed_files(),50,Kdesvnsettings::last_node_follow(),this);
     if (lm) {
         dispLog(lm);
     }

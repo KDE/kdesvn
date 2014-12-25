@@ -77,6 +77,7 @@ protected Q_SLOTS:
     virtual void slotItemReverted(const QStringList&);
     virtual void slotItemDoubleClicked(const QModelIndex&);
     virtual void slotSelectAll();
+    virtual void slotUnselectAll();
 
 protected:
     static QStringList sLogHistory;

@@ -551,6 +551,7 @@ void Commitmsg_impl::hideButtons(bool how)
         m_DiffItem->hide();
         m_HideNewItems->hide();
         m_SelectAllButton->hide();
+        m_UnselectAllButton->hide();
     }
     else
     {
@@ -559,6 +560,7 @@ void Commitmsg_impl::hideButtons(bool how)
         m_DiffItem->show();
         m_HideNewItems->show();
         m_SelectAllButton->show();
+        m_UnselectAllButton->show();
     }
 }
 
@@ -579,6 +581,14 @@ void Commitmsg_impl::slotSelectAll()
         return;
     }
     m_CurrentModel->markItems(true,CommitActionEntry::ALL);
+}
+
+void Commitmsg_impl::slotUnselectAll()
+{
+    if (!m_CurrentModel) {
+        return;
+    }
+    m_CurrentModel->markItems(false,CommitActionEntry::ALL);
 }
 
 void Commitmsg_impl::hideNewItems(bool how)

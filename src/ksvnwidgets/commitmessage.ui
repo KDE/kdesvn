@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
-    <height>461</height>
+    <width>600</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,6 +69,13 @@
           <widget class="QPushButton" name="m_SelectAllButton">
            <property name="text">
             <string>Select all</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_UnselectAllButton">
+           <property name="text">
+            <string>Unselect all</string>
            </property>
           </widget>
          </item>
@@ -403,10 +410,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_UnselectAllButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CommitMessage</receiver>
+   <slot>slotUnselectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotRevertSelected()</slot>
   <slot>slotItemDoubleClicked(QModelIndex)</slot>
   <slot>slotSelectAll()</slot>
+  <slot>slotUnselectAll()</slot>
  </slots>
 </ui>

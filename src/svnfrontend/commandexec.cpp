@@ -79,14 +79,16 @@ pCPart::pCPart()
     , single_revision(false)
     , force(false)
     , log_limit(0)
-    , m_SvnWrapper(new SvnActions(disp,0,true))
+    , m_SvnWrapper(NULL)
     , args(NULL)
     , start(svn::Revision::UNDEFINED)
     , end(svn::Revision::UNDEFINED)
     , Stdout(stdout)
     , Stderr(stderr)
     , disp(new DummyDisplay())
-{}
+{
+    m_SvnWrapper = new SvnActions(disp,0,true);
+}
 
 pCPart::~pCPart()
 {

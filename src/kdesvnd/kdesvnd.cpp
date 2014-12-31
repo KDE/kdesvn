@@ -100,12 +100,11 @@ QStringList kdesvnd::getActionMenu(const KUrl::List& list,bool toplevel)
     }
     QString base;
 
-    bool parentIsWc = false;
     bool itemIsWc = isWorkingCopy(list[0],base);
     bool itemIsRepository = false;
 
     QString _par = list[0].directory(KUrl::IgnoreTrailingSlash);
-    parentIsWc = isWorkingCopy(_par,base);
+    bool parentIsWc = isWorkingCopy(_par,base);
 
     if (!parentIsWc && !itemIsWc) {
         itemIsRepository = isRepository(list[0]);

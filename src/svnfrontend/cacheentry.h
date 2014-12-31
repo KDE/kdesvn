@@ -171,7 +171,6 @@ template<class C> inline  bool cacheEntry<C>::find(QStringList&what,QLIST<C>&t)c
         }
         it->second.appendValidSub(t);
         return true;
-        return false;
     }
     what.erase(what.begin());
     return it->second.find(what,t);

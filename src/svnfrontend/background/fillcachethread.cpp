@@ -20,18 +20,13 @@
 #include "fillcachethread.h"
 #include "tcontextlistener.h"
 
-#include "src/svnqt/cache/LogCache.h"
 #include "src/svnqt/cache/ReposLog.h"
 #include "src/svnqt/cache/ReposConfig.h"
-#include "src/svnqt/cache/DatabaseException.h"
 #include "src/kdesvn_events.h"
 #include "src/svnqt/url.h"
 
-#include <QObject>
-#include <kdebug.h>
-#include <kapplication.h>
-#include <klocale.h>
-#include <kurl.h>
+#include <KLocale>
+#include <QCoreApplication>
 
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&aPath,bool startup)
     : SvnThread(_parent),mutex()
@@ -65,9 +60,7 @@ void FillCacheThread::fillInfo()
 
 void FillCacheThread::run()
 {
-    QString ex;
     bool breakit=false;
-    KApplication*k = KApplication::kApplication();
     try {
         fillInfo();
 
@@ -91,11 +84,8 @@ void FillCacheThread::run()
             qlonglong _max=j-i;
             qlonglong _cur=0;
 
-            FillCacheStatusEvent*fev;
-            if (k) {
-                fev = new FillCacheStatusEvent(_cur,_max);
-                k->postEvent(m_Parent,fev);
-            }
+            FillCacheStatusEvent*fev = new FillCacheStatusEvent(_cur,_max);
+            QCoreApplication::postEvent(m_Parent,fev);
 
             if (i<j) {
                 for (;i<j;i+=200) {
@@ -110,10 +100,9 @@ void FillCacheThread::run()
                     if (latestCache==rl.latestCachedRev()) {
                         break;
                     }
-                    if (k) {
-                        fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
-                        k->postEvent(m_Parent,fev);
-                    }
+                    fev = new FillCacheStatusEvent(_cur>_max?_max:_cur,_max);
+                    QCoreApplication::postEvent(m_Parent,fev);
+
                     latestCache=rl.latestCachedRev();
                 }
                 if (latestCache.revnum()<Head.revnum()) {
@@ -126,9 +115,9 @@ void FillCacheThread::run()
     } catch (const svn::Exception&e) {
         m_SvnContextListener->contextNotify(e.msg());
     }
-    if (k && !breakit) {
+    if (!breakit) {
         DataEvent*ev = new DataEvent(EVENT_LOGCACHE_FINISHED);
         ev->setData((void*)this);
-        k->postEvent(m_Parent,ev);
+        QCoreApplication::postEvent(m_Parent,ev);
     }
 }

@@ -370,8 +370,6 @@ SvnActions*SvnItemModel::svnWrapper()
 
 int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
 {
-    QModelIndex parent_index = _parent?m_Data->indexForNode(_parent):QModelIndex();
-
     QString what = _what;
     svn::StatusEntries dlist;
     while (what.endsWith(QLatin1Char('/'))) {
@@ -899,7 +897,7 @@ int SvnItemModel::checkUnversionedDirs(SvnItemModelNode* _parent)
         return 0;
     }
     QDir d(_parent->fullName());
-    d.setFilter( QDir::Files | QDir::Dirs );
+    d.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot );
     QFileInfoList list = d.entryInfoList();
     if (list.isEmpty()) {
         return 0;
@@ -907,9 +905,6 @@ int SvnItemModel::checkUnversionedDirs(SvnItemModelNode* _parent)
     svn::StatusEntries dlist;
     SvnItemModelNodeDir*n = static_cast<SvnItemModelNodeDir*>(_parent);
     for (QFileInfoList::size_type i = 0; i<list.size(); ++i) {
-        if (list[i].fileName()=="."||list[i].fileName()=="..") {
-            continue;
-        }
         if ( !(n->contains(list[i].absoluteFilePath())||list[i].absoluteFilePath()==n->fullName()) ) {
             svn::StatusPtr stat(new svn::Status(list[i].absoluteFilePath()));
             dlist.append(stat);

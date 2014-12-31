@@ -263,8 +263,6 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
         } else if (isModified()) {
             mod = true;
         } else if (isDir()&&wrap) {
-            svn::StatusEntries dlist;
-            svn::StatusEntries::const_iterator it;
             if (isRemoteAdded() || wrap->checkUpdateCache(fullName())) {
                 if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvnupdates",KIconLoader::Desktop,size);
                 m_bgColor = UPDATES;

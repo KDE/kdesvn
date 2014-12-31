@@ -25,9 +25,6 @@
 #include "src/svnqt/status.h"
 #include "svnthread.h"
 
-#include <qthread.h>
-#include <qevent.h>
-
 class QObject;
 
 class CheckModifiedThread:public SvnThread

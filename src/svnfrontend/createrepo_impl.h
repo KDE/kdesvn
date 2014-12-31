@@ -25,7 +25,7 @@
 #include "src/svnqt/svnqttypes.h"
 #include "src/svnqt/shared_pointer.h"
 
-class CreateRepoData;
+struct CreateRepoData;
 
 class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg {
     Q_OBJECT

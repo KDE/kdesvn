@@ -19,15 +19,13 @@
  ***************************************************************************/
 
 #include "modifiedthread.h"
-#include "tcontextlistener.h"
 #include "src/kdesvn_events.h"
 
 #include "src/svnqt/svnqttypes.h"
 #include "src/svnqt/client_parameter.h"
 
-#include <qobject.h>
-#include <kdebug.h>
-#include <kapplication.h>
+#include <KLocale>
+#include <QCoreApplication>
 
 CheckModifiedThread::CheckModifiedThread(QObject*_parent,const QString&what,bool _updates)
     : SvnThread(_parent),mutex()
@@ -54,10 +52,7 @@ void CheckModifiedThread::run()
     } catch (const svn::Exception&e) {
         m_SvnContextListener->contextNotify(e.msg());
     }
-    KApplication*k = KApplication::kApplication();
-    if (k) {
-        DataEvent*ev = new DataEvent(m_updates?EVENT_UPDATE_CACHE_FINISHED:EVENT_CACHE_THREAD_FINISHED);
-        ev->setData((void*)this);
-        k->postEvent(m_Parent,ev);
-    }
+    DataEvent*ev = new DataEvent(m_updates?EVENT_UPDATE_CACHE_FINISHED:EVENT_CACHE_THREAD_FINISHED);
+    ev->setData((void*)this);
+    QCoreApplication::postEvent(m_Parent,ev);
 }

@@ -486,9 +486,7 @@ bool svn::cache::ReposLog::log(const svn::Path&what,const svn::Revision&_start, 
     static QString s_m("select mergeditems from mergeditems where mergeditems.revision='%1'");
 
     svn::Revision peg = date2numberRev(_peg,true);
-    svn::Revision end = date2numberRev(_end,true);
-    svn::Revision start = date2numberRev(_start,true);
-    QString query_string = QString(s_q).arg(what.native()).arg(what.native()).arg((peg==svn::Revision::UNDEFINED?"":QString(" AND revision<=%1").arg(peg.revnum())));
+    QString query_string = QString(s_q).arg(what.native()).arg(what.native()).arg((peg==svn::Revision::UNDEFINED?QString():QString(" AND revision<=%1").arg(peg.revnum())));
     if (peg==svn::Revision::UNDEFINED) {
         peg = latestCachedRev();
     }

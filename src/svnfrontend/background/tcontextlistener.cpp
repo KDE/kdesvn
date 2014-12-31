@@ -27,9 +27,9 @@
 #include "threadcontextlistenerdata.h"
 #include "src/kdesvn_events.h"
 
-#include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
+#include <QCoreApplication>
 
 ThreadContextListener::ThreadContextListener(QObject* parent)
     : CContextListener(parent)
@@ -62,7 +62,7 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     DataEvent*ev = new DataEvent(EVENT_THREAD_LOGIN_PROMPT);
     void*t = (void*)&_data;
     ev->setData(t);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     username = _data.user;
@@ -85,7 +85,7 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     DataEvent*ev = new DataEvent(EVENT_THREAD_LOGIN_SAVED);
     void*t = (void*)&_data;
     ev->setData(t);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     username = _data.user;
@@ -103,7 +103,7 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
     DataEvent*ev = new DataEvent(EVENT_THREAD_LOGMSG_PROMPT);
     void*t = (void*)&log;
     ev->setData(t);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     msg = log.msg;
@@ -119,7 +119,7 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
     scertf.ok = false;
     DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
     ev->setData((void*)&scertf);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     certFile = scertf.certfile;
@@ -136,7 +136,7 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
     scert_data.realm=realm;
     DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_PW_PROMPT);
     ev->setData((void*)&scert_data);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     password = scert_data.password;
@@ -153,7 +153,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
     trust_answer.m_SslTrustAnswer=DONT_ACCEPT;
     trust_answer.m_Trustdata = &data;
     ev->setData((void*)&trust_answer);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     return trust_answer.m_SslTrustAnswer;
@@ -167,7 +167,7 @@ void ThreadContextListener::contextNotify(const QString&aMsg)
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     _notify->msg = aMsg;
     ev->setData((void*)_notify);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
 }
 
 /*!
@@ -192,7 +192,7 @@ void ThreadContextListener::contextProgress(long long int current, long long int
     }
     _notify->msg = msg;
     ev->setData((void*)_notify);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
 }
 
 void ThreadContextListener::sendTick()
@@ -202,7 +202,7 @@ void ThreadContextListener::sendTick()
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
     ev->setData((void*)_notify);
-    kapp->postEvent(this,ev);
+    QCoreApplication::postEvent(this,ev);
 }
 
 /* methods below may only called from mainthread! (via event) */

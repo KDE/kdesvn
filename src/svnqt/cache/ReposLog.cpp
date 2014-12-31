@@ -40,6 +40,36 @@
 #include <QBuffer>
 #define Q_LLONG qlonglong
 
+class DatabaseLocker
+{
+public:
+    DatabaseLocker(QSqlDatabase *db)
+        : m_commited(false)
+        , m_db(db)
+    {
+        m_db->transaction();
+    }
+    ~DatabaseLocker()
+    {
+        if (!m_commited) {
+            m_db->rollback();
+        }
+    }
+
+    void commit()
+    {
+        if (m_commited) {
+            return;
+        }
+        m_db->commit();
+        m_commited = true;
+    }
+
+protected:
+    bool m_commited;
+    QSqlDatabase *m_db;
+};
+
 /*!
     \fn svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&)
  */
@@ -237,6 +267,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
         }
         LogEntriesMap::ConstIterator it = _internal.constBegin();
 
+        DatabaseLocker l(&m_Database);
         for (; it != _internal.constEnd(); ++it) {
             _insertLogEntry((*it));
             if (cp && cp->getListener()) {
@@ -246,6 +277,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
                 }
             }
         }
+        l.commit();
     }
     return true;
 }
@@ -313,6 +345,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         return false;
     }
 
+    bcur.setForwardOnly(true);
     bcur.prepare(sEntry);
     bcur.bindValue(0, Q_LLONG(end.revnum()));
     bcur.bindValue(1, Q_LLONG(start.revnum()));
@@ -323,6 +356,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
     }
     Q_LLONG revision;
     while (bcur.next()) {
+        cur.setForwardOnly(true);
         cur.prepare(sItems);
         revision = bcur.value(0).toLongLong();
         cur.bindValue(0, revision);
@@ -411,7 +445,6 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision &aRev, bo
  */
 bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
 {
-    m_Database.transaction();
     qlonglong j = aEntry.revision;
     static QString qEntry("insert into logentries (revision,date,author,message) values (?,?,?,?)");
     static QString qPathes("insert into changeditems (revision,changeditem,action,copyfrom,copyfromrev) values (?,?,?,?,?)");
@@ -422,7 +455,6 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
     _q.bindValue(2, aEntry.author);
     _q.bindValue(3, aEntry.message);
     if (!_q.exec()) {
-        m_Database.rollback();
         //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
         //qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("_insertLogEntry_0: Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
@@ -436,7 +468,6 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         _q.bindValue(3, (*cpit).copyFromPath);
         _q.bindValue(4, Q_LLONG((*cpit).copyFromRevision));
         if (!_q.exec()) {
-            m_Database.rollback();
             //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
             //qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
@@ -454,19 +485,22 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         _q.bindValue(0, j);
         _q.bindValue(1, _merges.data());
         if (!_q.exec()) {
-            m_Database.rollback();
             //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
             //qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
         }
     }
-    m_Database.commit();
     return true;
 }
 
 bool svn::cache::ReposLog::insertLogEntry(const svn::LogEntry &aEntry)
 {
-    return _insertLogEntry(aEntry);
+    DatabaseLocker l(&m_Database);
+    if (!_insertLogEntry(aEntry)) {
+        return false;
+    }
+    l.commit();
+    return true;
 }
 
 /*!
@@ -491,8 +525,9 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
     if (limit > 0) {
         query_string += QString(" LIMIT %1").arg(limit);
     }
-    QSqlQuery _q(QString(), m_Database);
-    QSqlQuery _q2(QString(), m_Database);
+    QSqlQuery _q(m_Database);
+    QSqlQuery _q2(m_Database);
+    _q.setForwardOnly(true);
     _q.prepare(query_string);
     if (!_q.exec()) {
         //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
@@ -506,6 +541,7 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
         target[revision].date = _q.value(2).toLongLong();
         target[revision].message = _q.value(3).toString();
         query_string = s_e.arg(revision);
+        _q2.setForwardOnly(true);
         _q2.prepare(query_string);
         if (!_q2.exec()) {
             //qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
@@ -586,21 +622,18 @@ void svn::cache::ReposLog::cleanLogEntries()
     if (!isValid()) {
         return;
     }
-    m_Database.transaction();
+    DatabaseLocker l(&m_Database);
     QSqlQuery _q(QString(), m_Database);
     if (!_q.exec("delete from logentries")) {
-        m_Database.rollback();
         return;
     }
     if (!_q.exec("delete from changeditems")) {
-        m_Database.rollback();
         return;
     }
     if (!_q.exec("delete from mergeditems")) {
-        m_Database.rollback();
         return;
     }
 
-    m_Database.commit();
+    l.commit();
     _q.exec("vacuum");
 }

@@ -67,17 +67,17 @@ public:
     CommitModelNodePtr currentCommitItem(int column=0);
 
 protected Q_SLOTS:
-    virtual void slotHistoryActivated(int);
-    virtual void slotUnmarkUnversioned();
-    virtual void slotDiffSelected();
-    virtual void slotRevertSelected();
-    virtual void slotMarkUnversioned();
-    virtual void hideNewItems(bool);
-    virtual void insertFile();
-    virtual void slotItemReverted(const QStringList&);
-    virtual void slotItemDoubleClicked(const QModelIndex&);
-    virtual void slotSelectAll();
-    virtual void slotUnselectAll();
+    void slotHistoryActivated(int);
+    void slotUnmarkUnversioned();
+    void slotDiffSelected();
+    void slotRevertSelected();
+    void slotMarkUnversioned();
+    void hideNewItems(bool);
+    void insertFile();
+    void slotItemReverted(const QStringList&);
+    void slotItemDoubleClicked(const QModelIndex&);
+    void slotSelectAll();
+    void slotUnselectAll();
 
 protected:
     static QStringList sLogHistory;

@@ -552,7 +552,7 @@ bool kio_svnProtocol::getLogMsg(QString&t)
     return m_pData->m_Listener.contextGetLogMessage(t,_items);
 }
 
-bool kio_svnProtocol::checkWc(const KUrl&url)
+bool kio_svnProtocol::checkWc(const KUrl&url) const
 {
     m_pData->resetListener();
     if (url.isEmpty()||!url.isLocalFile()) return false;
@@ -571,31 +571,23 @@ bool kio_svnProtocol::checkWc(const KUrl&url)
     return false;
 }
 
-QString kio_svnProtocol::makeSvnUrl(const KUrl&url,bool check_Wc)
+QString kio_svnProtocol::makeSvnUrl(const KUrl&url,bool check_Wc) const
 {
-    QString res;
-    QString proto = svn::Url::transformProtokoll(url.protocol());
-    if (proto=="file" && check_Wc)
+    const QString proto = svn::Url::transformProtokoll(url.protocol());
+    if (proto==QLatin1String("file") && check_Wc)
     {
         if (checkWc(url))
         {
             return url.path();
         }
     }
+    KUrl tmpUrl(url);
+    tmpUrl.setProtocol(proto);
 
-    QStringList s = res.split("://");
-    QString base = url.path();
-    QString host = url.host();
-    QString user = (url.hasUser()?url.user()+(url.hasPass()?':'+url.pass():""):"");
-    if (host.isEmpty()) {
-        res=proto+"://"+base;
-    } else {
-        res = proto+"://"+(user.isEmpty()?"":user+"@")+host+base;
+    if (url.path().isEmpty()) {
+        throw svn::ClientException(QLatin1Char('\'')+url.url()+QLatin1String("' is not a valid subversion url"));
     }
-    if (base.isEmpty()) {
-        throw svn::ClientException(QString("'")+res+QString("' is not a valid subversion url"));
-    }
-    return res;
+    return tmpUrl.url();
 }
 
 bool kio_svnProtocol::createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry)

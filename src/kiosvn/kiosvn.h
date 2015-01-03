@@ -117,9 +117,9 @@ protected:
 
 private:
     KioSvnData*m_pData;
-    bool createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);
-    QString makeSvnUrl(const KUrl&url,bool check_wc=true);
-    bool checkWc(const KUrl&url);
+    static bool createUDSEntry( const QString& filename, const QString& user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry& entry);
+    QString makeSvnUrl(const KUrl&url,bool check_wc=true) const;
+    bool checkWc(const KUrl&url) const;
     bool getLogMsg(QString&);
 
     void registerToDaemon();

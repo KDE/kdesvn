@@ -87,7 +87,7 @@ SvnItem_p::~SvnItem_p()
 void SvnItem_p::init()
 {
     m_full = m_Stat->path();
-    m_kdename="";
+    m_kdename.clear();
     mptr = 0;
     lRev=svn::Revision::UNDEFINED;
     while (m_full.endsWith('/')) {
@@ -388,7 +388,7 @@ bool SvnItem::isLocalAdded()const
 
 QString SvnItem::infoText()const
 {
-    QString info_text = "";
+    QString info_text;
     if (!isVersioned()) {
         info_text = i18n("Not versioned");
     } else if (getWrapper()->isUpdated(p_Item->m_Stat->path())) {
@@ -469,7 +469,7 @@ QString SvnItem::lockOwner()const
     if (getWrapper()->checkReposLockCache(fullName(),tmp) && tmp) {
         return tmp->lockEntry().Owner();
     }
-    return "";
+    return QString();
 }
 
 

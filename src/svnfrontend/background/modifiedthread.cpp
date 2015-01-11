@@ -48,7 +48,6 @@ const svn::StatusEntries&CheckModifiedThread::getList()const
 void CheckModifiedThread::run()
 {
     // what must be cleaned!
-    QString ex;
     svn::StatusParameter params(m_what);
     try {
         m_Cache = m_Svnclient->status(params.depth(svn::DepthInfinity).all(false).update(m_updates).noIgnore(false).revision(svn::Revision::HEAD));

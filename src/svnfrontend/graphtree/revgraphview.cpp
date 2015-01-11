@@ -75,7 +75,6 @@ RevGraphView::RevGraphView(QObject*aListener,svn::Client*_client,QWidget * paren
     m_LastAutoPosition = TopLeft;
     _isMoving = false;
     _noUpdateZoomerPos = false;
-    m_LabelMap[""]="";
 }
 
 RevGraphView::~RevGraphView()
@@ -389,7 +388,7 @@ QColor RevGraphView::getBgColor(const QString&nodeName)const
     return res;
 }
 
-const QString&RevGraphView::getLabelstring(const QString&nodeName)
+QString RevGraphView::getLabelstring(const QString&nodeName)
 {
     QMap<QString,QString>::ConstIterator nIt;
     nIt = m_LabelMap.constFind(nodeName);
@@ -399,7 +398,7 @@ const QString&RevGraphView::getLabelstring(const QString&nodeName)
     trevTree::ConstIterator it1;
     it1 = m_Tree.constFind(nodeName);
     if (it1==m_Tree.constEnd()) {
-        return m_LabelMap[""];
+        return QString();
     }
     QString res;
     QString revstring = svn::Revision(it1.value().rev).toString();
@@ -439,7 +438,7 @@ void RevGraphView::dumpRevtree()
         dotTmpFile->close();
     }
     clear();
-    dotOutput = "";
+    dotOutput.clear();
     dotTmpFile = new KTemporaryFile;
     dotTmpFile->setSuffix(".dot");
     dotTmpFile->setAutoRemove(true);

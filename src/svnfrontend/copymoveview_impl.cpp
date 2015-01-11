@@ -85,7 +85,7 @@ bool CopyMoveView_impl::force()
     \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,const QString&old,const QString&base,QWidget*)
  */
 QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
-    const QString&old,const QString&base,QWidget*parent,const char*name)
+    const QString&old,const QString&base,QWidget*parent,const QString &name)
 {
 //     KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
 //             KDialogBase::Ok|KDialogBase::Cancel,

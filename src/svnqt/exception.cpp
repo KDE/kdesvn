@@ -107,7 +107,7 @@ namespace svn
 
   QString Exception::error2msg(svn_error_t*error)
   {
-    QString message = "";
+    QString message;
     if (error==0) {
         return message;
     }
@@ -183,7 +183,7 @@ namespace svn
         m->message=m_backTraceConstr;
     }
 #else
-    m_backTraceConstr="";
+    m_backTraceConstr.clear();
 #endif
   }
 

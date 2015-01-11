@@ -291,7 +291,7 @@ bool kdesvnpart::closeUrl()
     KParts::ReadOnlyPart::closeUrl();
     setUrl(KUrl());
     m_view->closeMe();
-    emit setWindowCaption("");
+    emit setWindowCaption(QString());
     return true;
 }
 

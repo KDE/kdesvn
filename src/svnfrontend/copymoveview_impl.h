@@ -32,8 +32,8 @@ public:
   ~CopyMoveView_impl();
     virtual QString newName();
     bool force();
-    static QString getMoveCopyTo(bool*ok,bool*force,bool move, const QString&old,const QString&base,
-            QWidget*,const char*name);
+    static QString getMoveCopyTo(bool*ok, bool*force, bool move, const QString&old, const QString&base,
+            QWidget*, const QString &name);
   /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

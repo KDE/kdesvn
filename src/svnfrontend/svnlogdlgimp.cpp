@@ -46,7 +46,7 @@
 const char* SvnLogDlgImp::groupName = "log_dialog_size";
 
 SvnLogDlgImp::SvnLogDlgImp(SvnActions*ac,QWidget *parent, const char *name,bool modal)
-    :KDialog(parent),_name("")
+    :KDialog(parent)
 {
     setupUi(this);
     setMainWidget(mMainWidget);
@@ -179,7 +179,7 @@ QString SvnLogDlgImp::genReplace(const QString&r1match)
     static QString anf("<a href=\"");
     static QString mid("\">");
     static QString end("</a>");
-    QString res("");
+    QString res;
     if (_r2.pattern().length()<1) {
         res = _bugurl;
         res.replace("%BUGID%",_r1.cap(1));

@@ -67,11 +67,6 @@ public:
     QString currentUrl();
 
     /**
-     * Random 'set' function accessed by DCOP
-     */
-    virtual bool openUrl(QString url);
-
-    /**
      * Random 'set' function
      */
     virtual bool openUrl(const KUrl& url);

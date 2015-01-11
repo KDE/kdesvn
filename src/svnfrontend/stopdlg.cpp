@@ -53,7 +53,7 @@ StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QStrin
     setMainWidget( m_mainWidget );
 
     m_lastLogLines = 0;
-    m_lastLog = "";
+    m_lastLog.clear();
 
     mShowTimer = new QTimer(this);
     m_StopTick.start();

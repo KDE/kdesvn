@@ -55,7 +55,7 @@ namespace svn
     m_targets.clear();
     for (int i = 0; i < targets.size();++i) {
         if (targets[i].isEmpty()) {
-            m_targets.push_back("");
+            m_targets.push_back(QString());
         } else {
             m_targets.push_back(targets[i]);
         }

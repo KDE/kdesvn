@@ -121,7 +121,7 @@ int CommandExec::exec(KCmdLineArgs*args)
     if (!m_pCPart->args) {
         return -1;
     }
-    m_lastMessages = "";
+    m_lastMessages.clear();
     m_lastMessagesLines = 0;
     m_pCPart->m_SvnWrapper->reInitClient();
     bool dont_check_second = false;
@@ -222,21 +222,13 @@ int CommandExec::exec(KCmdLineArgs*args)
         return -1;
     }
 
-    QString tmp,query,proto,v;
-    QMap<QString,QString> q;
-
-    KUrl tmpurl;
+    QString tmp;
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j<m_pCPart->args->count();++j) {
-        tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyUrl());
-        query = tmpurl.query();
-        q = m_pCPart->args->url(j).queryItems();
-        if (q.find("rev")!=q.end()) {
-             v = q["rev"];
-        } else {
-            v = "";
-        }
+        KUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyUrl());
+        const QMap<QString,QString> q = m_pCPart->args->url(j).queryItems();
+        QString v = q.value("rev");
         tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
         if (tmpurl.protocol().indexOf("ssh")!=-1) {
             SshAgent ag;
@@ -246,14 +238,14 @@ int CommandExec::exec(KCmdLineArgs*args)
         m_pCPart->extraRevisions[j-2]=svn::Revision::HEAD;
 
         if (tmpurl.isLocalFile() && (j==2 || !dont_check_second) && !dont_check_all) {
-            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy("file://"+tmpurl.path(),_baseurl)) {
+            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(KUrl::fromLocalFile(tmpurl.path()),_baseurl)) {
                 tmp = tmpurl.path();
                 m_pCPart->baseUrls[j-2]=_baseurl;
                 m_pCPart->extraRevisions[j-2]=svn::Revision::WORKING;
-                if (j==2) mainProto = "";
+                if (j==2) mainProto.clear();
             } else {
-                tmp = "file://"+tmpurl.path();
-                if (j==2) mainProto = "file://";
+                tmp = tmpurl.url();
+                if (j==2) mainProto = QLatin1String("file://");
             }
         } else if (path_only){
             tmp = tmpurl.path();
@@ -510,7 +502,7 @@ void CommandExec::slotCmd_copy()
     if (m_pCPart->url.count()<2) {
         bool force_move,ok;
         target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,false,
-            m_pCPart->url[0],"",0,"move_name");
+            m_pCPart->url[0],QString(),0,QLatin1String("move_name"));
         if (!ok) {
             return;
         }
@@ -533,7 +525,7 @@ void CommandExec::slotCmd_move()
     QString target;
     if (m_pCPart->url.count()<2) {
         target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,true,
-            m_pCPart->url[0],"",0,"move_name");
+            m_pCPart->url[0],QString(),0,QLatin1String("move_name"));
         if (!ok) {
             return;
         }
@@ -635,7 +627,7 @@ void CommandExec::slotCmd_switch()
 void CommandExec::slotCmd_lock()
 {
 //     m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
-    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url,"",m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url,QString(),m_pCPart->force);
 }
 
 void CommandExec::slotCmd_unlock()

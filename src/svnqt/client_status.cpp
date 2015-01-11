@@ -117,7 +117,6 @@ namespace svn
     if (changedPaths != NULL)
     {
       LogEntry &entry = (*entries)[rev];
-      bool blocked = false;
 
       for (apr_hash_index_t *hi = apr_hash_first (pool, changedPaths);
            hi != NULL;
@@ -127,10 +126,10 @@ namespace svn
         void *val;
         apr_hash_this (hi, &pv, NULL, &val);
 
-        svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *> (val);
-        const char* path = reinterpret_cast<const char*>(pv);
+        svn_log_changed_path_t *log_item = static_cast<svn_log_changed_path_t *> (val);
+        const char* path = static_cast<const char*>(pv);
 
-        blocked = false;
+        bool blocked = false;
         if (l_baton->excludeList) {
             QString _p(path);
             for (int _exnr=0;_exnr < l_baton->excludeList.size();++_exnr) {
@@ -179,7 +178,7 @@ namespace svn
                             const svn_info_t*info,
                             apr_pool_t *)
   {
-    InfoEntriesBaton* seb = (InfoEntriesBaton*)baton;
+    InfoEntriesBaton* seb = static_cast<InfoEntriesBaton*>(baton);
     if (seb->m_Context) {
         /* check every loop for cancel of operation */
         Context*l_context = seb->m_Context;
@@ -200,7 +199,7 @@ namespace svn
   {
         // use own pool - the parameter will cleared between loops!
         Q_UNUSED(pool);
-        StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
+        StatusEntriesBaton* seb = static_cast<StatusEntriesBaton*>(baton);
         if (seb->m_Context) {
             /* check every loop for cancel of operation */
             Context*l_context = seb->m_Context;
@@ -218,7 +217,7 @@ namespace svn
                                  const char *path,
                                  svn_wc_status2_t *status)
   {
-      StatusEntriesBaton* seb = (StatusEntriesBaton*)baton;
+      StatusEntriesBaton* seb = static_cast<StatusEntriesBaton*>(baton);
       seb->entries.push_back (StatusPtr(new Status(path,status)));
   }
 #endif
@@ -228,7 +227,6 @@ namespace svn
                Context * context)
   {
     svn_error_t *error;
-    StatusEntries entries;
     svn_revnum_t revnum;
     Revision rev (Revision::HEAD);
     Pool pool;
@@ -279,9 +277,7 @@ namespace svn
   static StatusPtr
   dirEntryToStatus (const Path& path, DirEntryPtr dirEntry)
   {
-    QString url = path.path();
-    url += QString::FROMUTF8("/");
-    url += dirEntry->name();
+    QString url = path.path() + QLatin1Char('/') + dirEntry->name();
     return StatusPtr(new Status (url, dirEntry));
   }
 
@@ -300,9 +296,6 @@ namespace svn
     DirEntries::const_iterator it;
 
     StatusEntries entries;
-    QString url = params.path().path();
-    url+=QString::FROMUTF8("/");
-
     for (it = dirEntries.constBegin (); it != dirEntries.constEnd (); ++it)
     {
         DirEntryPtr dirEntry = *it;

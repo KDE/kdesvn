@@ -25,7 +25,7 @@
 
 
 ItemDisplay::ItemDisplay()
-    :m_LastException(""),m_isWorkingCopy(false),m_isNetworked(false),m_baseUri("")
+    :m_isWorkingCopy(false),m_isNetworked(false)
 {
 }
 

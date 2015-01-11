@@ -167,23 +167,23 @@ namespace svn
  */
 void svn::InfoEntry::init()
 {
-  m_name = "";
+  m_name.clear();
   m_last_changed_date=0;
   m_text_time = 0;
   m_prop_time = 0;
   m_hasWc = false;
   m_Lock = LockEntry();
-  m_checksum = "";
-  m_conflict_new = "";
-  m_conflict_old = "";
-  m_conflict_wrk = "";
-  m_copyfrom_url = "";
-  m_last_author = "";
-  m_prejfile = "";
-  m_repos_root = "";
-  m_url = "";
-  m_pUrl = "";
-  m_UUID = "";
+  m_checksum.clear();
+  m_conflict_new.clear();
+  m_conflict_old.clear();
+  m_conflict_wrk.clear();
+  m_copyfrom_url.clear();
+  m_last_author.clear();
+  m_prejfile.clear();
+  m_repos_root.clear();
+  m_url.clear();
+  m_pUrl.clear();
+  m_UUID.clear();
   m_kind = svn_node_none;
   m_copy_from_rev = SVN_INVALID_REVNUM;
   m_last_changed_rev = SVN_INVALID_REVNUM;
@@ -191,7 +191,7 @@ void svn::InfoEntry::init()
   m_schedule = svn_wc_schedule_normal;
 
   m_size = m_working_size = SVNQT_SIZE_UNKNOWN;
-  m_changeList=QByteArray();
+  m_changeList.clear();
   m_depth = DepthUnknown;
 }
 
@@ -290,7 +290,7 @@ QString svn::InfoEntry::prettyUrl(const char*_url)const
         _url = svn_path_uri_decode(_url,pool);
         return QString::FROMUTF8(_url);
     }
-    return QString::FROMUTF8("");
+    return QString();
 }
 
 svn::InfoEntry::InfoEntry(const InfoEntry&other)

@@ -53,7 +53,7 @@ static QList<int> asIntList(const QByteArray& string)
 
 QByteArray ReposConfigPrivate::serializeList(const QList<QByteArray> &list)
 {
-    QByteArray value = "";
+    QByteArray value;
 
     if (!list.isEmpty()) {
         QList<QByteArray>::ConstIterator it = list.constBegin();
@@ -197,7 +197,6 @@ void ReposConfig::setValue(const QString&repository,const QString&key,const QVar
     QByteArray data;
     switch( value.type() ) {
         case QVariant::Invalid:
-            data = "";
             break;
         case QVariant::ByteArray:
             data = value.toByteArray();

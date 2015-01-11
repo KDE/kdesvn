@@ -181,7 +181,7 @@ class BlameDisplayData
             min=INT_MAX-1;
             rev_count=0;
             up=false;
-            m_cb=0;m_File="";
+            m_cb=0;
             m_dlg = 0;
         }
         ~BlameDisplayData(){}

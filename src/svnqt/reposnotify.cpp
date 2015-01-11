@@ -106,7 +106,7 @@ public:
                         _msg = "Invalid path: ";
                         break;
                     default:
-                        _msg = "";
+                        _msg.clear();
                     }
                     _msg += _warning_msg;
                 }

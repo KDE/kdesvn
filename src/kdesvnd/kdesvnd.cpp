@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "kdesvn-config.h"
 #include "kdesvnd.h"
+#include "kdesvn-config.h"
 #include "kdesvnd_listener.h"
 #include "src/ksvnwidgets/authdialogimpl.h"
 #include "src/ksvnwidgets/ssltrustprompt_impl.h"
@@ -283,8 +283,7 @@ bool kdesvnd::isRepository(const KUrl&url)
     QString proto = svn::Url::transformProtokoll(url.protocol());
     if (proto=="file") {
         // local access - may a repository
-        svn::StatusEntries dlist;
-        svn::StatusParameter params("file://"+cleanUrl(url));
+        svn::StatusParameter params(svn::Path(QLatin1String("file://")+cleanUrl(url)));
         try {
             m_Listener->m_Svnclient->status(params.depth(svn::DepthEmpty).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD));
         } catch (const svn::ClientException&e) {
@@ -299,9 +298,8 @@ bool kdesvnd::isRepository(const KUrl&url)
 
 bool kdesvnd::isWorkingCopy(const KUrl&_url,QString&base)
 {
-    base = "";
-    KUrl url = _url;
-    url = helpers::KTranslateUrl::translateSystemUrl(url);
+    base.clear();
+    KUrl url = helpers::KTranslateUrl::translateSystemUrl(_url);
 
     if (url.isEmpty()||!url.isLocalFile()||url.protocol()!="file") return false;
     svn::Revision peg(svn_opt_revision_unspecified);

@@ -28,7 +28,6 @@ class EncodingSelector_impl: public QWidget, public Ui::EncodingSelector {
 Q_OBJECT
 public:
     EncodingSelector_impl(QWidget *parent = 0);
-    EncodingSelector_impl(const QString&cur, QWidget *parent = 0, const char *name = 0);
     virtual ~EncodingSelector_impl(){}
 
     void setCurrentEncoding(const QString&cur);

@@ -17,8 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "kdesvn-config.h"
 #include "kiosvn.h"
+#include "kdesvn-config.h"
 #include "kiolistener.h"
 
 #include <QFile>
@@ -263,13 +263,13 @@ void kio_svnProtocol::stat(const KUrl& url)
     KIO::UDSEntry entry;
     QDateTime dt;
     if (dummy) {
-        createUDSEntry(url.fileName(),"",0,true,dt.toTime_t(),entry);
+        createUDSEntry(url.fileName(),QString(),0,true,dt.toTime_t(),entry);
     } else {
         dt = svn::DateTime(e[0].cmtDate());
         if (e[0].kind()==svn_node_file) {
-            createUDSEntry(url.fileName(),"",0,false,dt.toTime_t(),entry);
+            createUDSEntry(url.fileName(),QString(),0,false,dt.toTime_t(),entry);
         } else {
-            createUDSEntry(url.fileName(),"",0,true,dt.toTime_t(),entry);
+            createUDSEntry(url.fileName(),QString(),0,true,dt.toTime_t(),entry);
         }
     }
     statEntry(entry);
@@ -982,7 +982,7 @@ void kio_svnProtocol::diff(const KUrl&uri1,const KUrl&uri2,int rnum1,const QStri
         _opts.path1(u1).path2(u2).tmpPath(tdir.name()).
             rev1(r1).rev2(r2).
             ignoreContentType(false).extra(svn::StringArray()).depth(rec?svn::DepthInfinity:svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).
-            relativeTo(svn::Path((u1==u2?u1:""))).changeList(svn::StringArray());
+            relativeTo(svn::Path((u1==u2?u1:QString()))).changeList(svn::StringArray());
 
         tdir.setAutoRemove(true);
         ex = m_pData->m_Svnclient->diff(_opts);

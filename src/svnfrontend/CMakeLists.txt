@@ -43,6 +43,7 @@ set(svnfrontendsrc
     fronthelpers/DialogStack.h
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
+    fronthelpers/createdlg.h
     fronthelpers/cursorstack.h
     fronthelpers/fronthelpers.h
     fronthelpers/kmultilinedelegate.cpp

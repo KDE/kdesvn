@@ -52,7 +52,7 @@ void GetInfoThread::run()
             SvnItemModelNode*current = 0;
             {
                 QMutexLocker ml(&m_QueueLock);
-                if (m_NodeQueue.count()>0) {
+                if (!m_NodeQueue.isEmpty()) {
                     current = m_NodeQueue.dequeue ();
                 }
             }

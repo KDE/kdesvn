@@ -358,13 +358,13 @@ void kdesvn::openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardM
 
 QString kdesvn::currentUrl () const
 {
-    if (!m_part) return "";
+    if (!m_part) return QString();
     return m_part->url().prettyUrl();
 }
 
 QString kdesvn::currentTitle() const
 {
-    if (!m_part) return "";
+    if (!m_part) return QString();
     return m_part->url().fileName();
 }
 

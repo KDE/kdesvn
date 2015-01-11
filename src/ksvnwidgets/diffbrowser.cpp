@@ -39,10 +39,10 @@
 #include <QTextCodec>
 
 /*!
-    \fn DiffBrowser::DiffBrowser(QWidget*parent=0,const char*name=0)
+    \fn DiffBrowser::DiffBrowser(QWidget*parent=0)
  */
-DiffBrowser::DiffBrowser(QWidget*parent,const char*name)
-    : KTextBrowser( parent, name)
+DiffBrowser::DiffBrowser(QWidget*parent)
+    : KTextBrowser( parent )
 {
 //     setTextFormat(Qt::PlainText);
     setLineWrapMode(QTextEdit::NoWrap);

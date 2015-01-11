@@ -58,7 +58,7 @@ QString CheckoutInfo_impl::reposURL()
     KUrl uri(m_UrlEdit->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
     if (proto=="file"&&!m_UrlEdit->url().url().startsWith("ksvn+file:")) {
-        uri.setProtocol("");
+        uri.setProtocol(QString());
     } else {
         uri.setProtocol(proto);
     }

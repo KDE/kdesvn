@@ -67,7 +67,7 @@ RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const c
             SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*))
            );
 
-    m_Detailstext = new KTextBrowser( m_Splitter, "m_Detailstext" );
+    m_Detailstext = new KTextBrowser( m_Splitter );
     m_Detailstext->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     //m_Detailstext->setResizePolicy( KTextBrowser::Manual );
     RevTreeWidgetLayout->addWidget( m_Splitter );

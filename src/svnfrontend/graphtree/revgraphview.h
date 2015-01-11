@@ -69,12 +69,11 @@ public:
     struct targetData {
         char Action;
         QString key;
-        targetData(const QString&n,char _a)
+        targetData(const QString &n,char _a)
+            : Action(_a)
+            , key(n)
         {
-            key = n;
-            Action = _a;
         }
-        targetData(){Action=0;key="";}
     };
     typedef QList<targetData> tlist;
 
@@ -120,7 +119,7 @@ protected:
     QColor getBgColor(const QString&nodeName)const;
     bool isStart(const QString&nodeName)const;
     char getAction(const QString&)const;
-    const QString&getLabelstring(const QString&nodeName);
+    QString getLabelstring(const QString&nodeName);
 
     QMap<QString,GraphTreeLabel*> m_NodeList;
     QMap<QString,QString> m_LabelMap;

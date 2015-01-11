@@ -40,7 +40,7 @@ namespace stream {
 class SVNQT_NOEXPORT SvnStream_private
 {
 public:
-    SvnStream_private(){m_Stream=0;m_LastError="";_context=0;/*cancel_timeout.start();*/}
+    SvnStream_private(){m_Stream=0;_context=0;/*cancel_timeout.start();*/}
     ~SvnStream_private(){/*qDebug("Time elapsed: %i ",cancel_timeout.elapsed());*/}
 
     static svn_error_t * stream_write(void*baton,const char*data,apr_size_t*len);

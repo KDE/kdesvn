@@ -154,9 +154,8 @@ void PropertiesDlg::slotCurrentItemChanged(QTreeWidgetItem*item,QTreeWidgetItem*
  */
 void PropertiesDlg::initItem()
 {
-    QString ex;
     if (!m_Client) {
-        ex = i18n("Missing SVN link");
+        QString ex = i18n("Missing SVN link");
         emit clientException(ex);
         return;
     }

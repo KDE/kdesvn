@@ -215,7 +215,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
     CursorStack a;
     m_Data->m_Model->svnWrapper()->killallThreads();
     clear();
-    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,false,QString(""));
+    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()),false,false,QString());
 
     if (!noReinit) m_Data->m_Model->svnWrapper()->reInitClient();
     QString query = url.query();
@@ -269,11 +269,11 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
         } else {
             setNetworked(true);
             if (!Kdesvnsettings::network_on()) {
-                setBaseUri("");
+                setBaseUri(QString());
                 setNetworked(false);
                 clear();
                 KMessageBox::error(this,i18n("Networked URL to open but networking is disabled."));
-                emit changeCaption("");
+                emit changeCaption(QString());
                 emit sigUrlOpend(false);
                 return false;
             }
@@ -308,7 +308,7 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
     resizeAllColumns();
 
     if (!result) {
-        setBaseUri("");
+        setBaseUri(QString());
         setNetworked(false);
         clear();
     }
@@ -834,14 +834,14 @@ void MainTreeWidget::closeMe()
     m_Data->m_Model->svnWrapper()->killallThreads();
 
     clear();
-    setWorkingCopy("");
+    setWorkingCopy(true);
     setNetworked(false);
     setWorkingCopy(false);
-    setBaseUri("");
+    setBaseUri(QString());
 
-    emit changeCaption("");
+    emit changeCaption(QString());
     emit sigUrlOpend(false);
-    emit sigUrlChanged("");
+    emit sigUrlChanged(QString());
 
     enableActions();
     m_Data->m_Model->svnWrapper()->reInitClient();
@@ -1694,9 +1694,7 @@ void MainTreeWidget::internalDrop(const KUrl::List&_lst,Qt::DropAction action,co
     QString target;
     QString nProto;
 
-    if (isWorkingCopy()) {
-        nProto="";
-    } else {
+    if (!isWorkingCopy()) {
         nProto = svn::Url::transformProtokoll(lst[0].protocol());
     }
     KUrl::List::iterator it = lst.begin();
@@ -1871,7 +1869,7 @@ void MainTreeWidget::copy_move(bool move)
     bool ok, force;
     SvnItemModelNode*which = SelectedNode();
     if (!which) return;
-    QString nName =  CopyMoveView_impl::getMoveCopyTo(&ok,&force,move,which->fullName(),baseUri(),this,"move_name");
+    QString nName = CopyMoveView_impl::getMoveCopyTo(&ok,&force,move,which->fullName(),baseUri(),this,QLatin1String("move_name"));
     if (!ok) {
         return;
     }
@@ -2093,7 +2091,7 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
     QString logMessage = ptr->getMessage();
     svn::Depth rec = ptr->getDepth();
     ptr->saveHistory(false);
-    uri.setProtocol("");
+    uri.setProtocol(QString());
     QString iurl = uri.path();
     while (iurl.endsWith('/')) {
         iurl.truncate(iurl.length()-1);

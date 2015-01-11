@@ -145,15 +145,13 @@ namespace svn
 
   QString Wc::getUrl(const QString&path)const throw (ClientException)
   {
-    QString result = "";
     Entry entry = getEntry( path );
-    return entry.isValid()?entry.url():"";
+    return entry.isValid()?entry.url():QString();
   }
 
   QString Wc::getRepos(const QString&path)const throw (ClientException)
   {
-    QString result = "";
     Entry entry = getEntry( path );
-    return entry.isValid() ? entry.repos():QString::fromLatin1("");
+    return entry.isValid() ? entry.repos():QString();
   }
 }

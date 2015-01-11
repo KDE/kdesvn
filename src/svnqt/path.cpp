@@ -74,9 +74,9 @@ namespace svn
     Pool pool;
 
     if (path.isEmpty()) {
-      m_path = "";
+      m_path.clear();
     } else {
-        QByteArray int_path = path.TOUTF8();
+      QByteArray int_path = path.TOUTF8();
         
       if (Url::isValid(path) ) {
         if (!svn_path_is_uri_safe(int_path)) {
@@ -202,7 +202,7 @@ namespace svn
   {
     Pool pool;
     if (m_path.length()<=1) {
-        m_path=QString::FROMUTF8("");
+        m_path.clear();
     }
     svn_stringbuf_t*pathStringbuf=
             svn_stringbuf_create (m_path.TOUTF8(), pool);
@@ -246,7 +246,7 @@ namespace svn
     if (pos == -1)
     {
       filename = basename;
-      ext = QString::fromLatin1("");
+      ext = QString();
     }
     else
     {

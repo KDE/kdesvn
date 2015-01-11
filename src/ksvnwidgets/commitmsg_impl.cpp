@@ -173,7 +173,7 @@ void Commitmsg_impl::checkSplitterSize()
 void Commitmsg_impl::slotHistoryActivated(int number)
 {
     if (number < 1||number>sLogHistory.size()) {
-        m_LogEdit->setText("");
+        m_LogEdit->clear();
     } else {
         m_LogEdit->setText(sLogHistory[number-1]);
     }
@@ -283,7 +283,7 @@ QString Commitmsg_impl::getLogmessage(bool*ok,svn::Depth*rec,bool*keep_locks,QWi
 {
     bool _ok,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
-    QString msg("");
+    QString msg;
 
     Commitmsg_impl*ptr=0;
     KDialog dlg(parent);
@@ -329,7 +329,7 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList&items,bool*ok,sv
 {
     bool _ok,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
-    QString msg("");
+    QString msg;
 
     Commitmsg_impl*ptr=0;
     KDialog dlg(parent);
@@ -377,7 +377,7 @@ QString Commitmsg_impl::getLogmessage(const QMap<QString,QString>&items,
 {
     bool _ok,_keep_locks;
     svn::Depth _depth = svn::DepthUnknown;
-    QString msg("");
+    QString msg;
 
     Commitmsg_impl*ptr=0;
     KDialog dlg(parent);
@@ -426,7 +426,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries&_on,
             bool*ok,bool*keep_locks,QWidget*parent)
 {
     bool _ok,_keep_locks;
-    QString msg("");
+    QString msg;
 
     Commitmsg_impl*ptr=0;
     KDialog dlg(parent);

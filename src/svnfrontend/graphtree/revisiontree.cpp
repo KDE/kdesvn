@@ -522,8 +522,8 @@ void RevisionTree::fillItem(long rev,int pathIndex,const QString&nodeName,const 
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(m_Data->m_History[rev].date);
     } else {
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Action=0;
-        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author="";
-        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message="";
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author.clear();
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message.clear();
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date=helpers::sub2qt::apr_time2qtString(0);
     }
 }

@@ -56,7 +56,7 @@
 
 kdesvnView::kdesvnView(KActionCollection*aCollection,QWidget *parent,bool full)
     : QWidget(parent),svn::repository::RepositoryListener(),m_Collection(aCollection),
-      m_currentUrl("")
+      m_currentUrl()
 {
     Q_UNUSED(full);
     setFocusPolicy(Qt::StrongFocus);
@@ -141,25 +141,19 @@ QString kdesvnView::currentUrl()
     return m_currentUrl;
 }
 
-bool kdesvnView::openUrl(QString url)
-{
-    return openUrl(KUrl(url));
-}
-
 bool kdesvnView::openUrl(const KUrl& url)
 {
     /* transform of url must be done in part! otherwise we will run into different troubles! */
-    m_currentUrl = "";
-    KUrl _url;
+    m_currentUrl.clear();
+    KUrl _url(url);
     bool open = false;
-    _url = url;
     if (_url.isLocalFile()) {
         QString query = _url.query();
-        _url.setQuery("");
+        _url.setQuery(QString());
         QString _f = _url.path();
         QFileInfo f(_f);
         if (!f.isDir()) {
-            m_currentUrl="";
+            m_currentUrl.clear();
             return open;
         }
         if (query.length()>1) {
@@ -170,7 +164,7 @@ bool kdesvnView::openUrl(const KUrl& url)
             return open;
         }
     }
-    m_LogWindow->setText("");
+    m_LogWindow->clear();
     slotSetTitle(url.prettyUrl());
     if (m_TreeWidget->openUrl(url)) {
         slotOnURL(i18n("Repository opened"));
@@ -204,7 +198,7 @@ void kdesvnView::slotSetTitle(const QString& title)
 void kdesvnView::closeMe()
 {
     m_TreeWidget->closeMe();
-    m_LogWindow->setText("");
+    m_LogWindow->clear();
     slotOnURL(i18n("No repository open"));
 }
 

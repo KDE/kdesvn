@@ -88,12 +88,7 @@ KUrl LoadDmpDlg_impl::dumpFile()const
  */
 QString LoadDmpDlg_impl::repository()const
 {
-    KUrl u = m_Repository->url();
-    QString res = u.path();
-    while (res.endsWith('/')) {
-        res.truncate(res.length()-1);
-    }
-    return res;
+    return m_Repository->url().path(KUrl::RemoveTrailingSlash);
 }
 
 
@@ -103,8 +98,8 @@ QString LoadDmpDlg_impl::repository()const
 QString LoadDmpDlg_impl::parentPath()const
 {
     QString res = m_Rootfolder->text();
-    while (res.endsWith('/')) {
-        res.truncate(res.length()-1);
+    while (res.endsWith(QLatin1Char('/'))) {
+        res.chop(1);
     }
     return res;
 }

@@ -104,8 +104,8 @@ namespace svn
         m_path = uri.scheme()+"://"+uri.authority()+m_path;
       }
       */
-        
-        while (m_path.endsWith('/')) {
+
+        while (m_path.endsWith(QLatin1Char('/'))) {
             m_path.chop(1);
         }
     }
@@ -165,7 +165,7 @@ namespace svn
   {
     Pool pool;
     QString component = _component;
-    while (component.endsWith('/') && component.size()>0) {
+    while (component.endsWith(QLatin1Char('/'))) {
         component.chop(1);
     }
     if (Url::isValid (m_path))

@@ -83,12 +83,7 @@ void Createrepo_impl::fsTypeChanged(int which)
 
 QString Createrepo_impl::targetDir()const
 {
-    KUrl u = m_ReposPathinput->url();
-    QString res = u.path();
-    while (res.endsWith('/')) {
-        res.truncate(res.length()-1);
-    }
-    return res;
+    return m_ReposPathinput->url().path(KUrl::RemoveTrailingSlash);
 }
 
 bool Createrepo_impl::createMain()const

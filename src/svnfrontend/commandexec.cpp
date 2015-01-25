@@ -258,12 +258,12 @@ int CommandExec::exec(KCmdLineArgs*args)
                 tmp = tmpurl.path();
             }
         }
-        QStringList l = tmp.split('?',QString::SkipEmptyParts);
-        if (l.count()>0) {
+        QStringList l = tmp.split(QLatin1Char('?'),QString::SkipEmptyParts);
+        if (!l.isEmpty()) {
             tmp=l[0];
         }
-        while (tmp.endsWith('/')) {
-            tmp.truncate(tmp.length()-1);
+        while (tmp.endsWith(QLatin1Char('/'))) {
+            tmp.chop(1);
         }
         m_pCPart->url.append(tmp);
         if ( (j>2 && dont_check_second) || dont_check_all) {

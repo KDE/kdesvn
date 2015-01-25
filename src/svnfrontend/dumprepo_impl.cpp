@@ -45,35 +45,25 @@ void DumpRepo_impl::slotDumpRange(bool how)
 /*!
     \fn DumpRepo_impl::reposPath()
  */
-QString DumpRepo_impl::reposPath()
+QString DumpRepo_impl::reposPath() const
 {
-    KUrl u = m_ReposPath->url();
-    QString res = u.path();
-    while (res.endsWith('/')) {
-        res.truncate(res.length()-1);
-    }
-    return res;
+    return m_ReposPath->url().path(KUrl::RemoveTrailingSlash);
 }
 
 
 /*!
     \fn DumpRepo_impl::targetFile()
  */
-QString DumpRepo_impl::targetFile()
+QString DumpRepo_impl::targetFile() const
 {
-    KUrl u = m_OutputFile->url();
-    QString res = u.path();
-    while (res.endsWith('/')) {
-        res.truncate(res.length()-1);
-    }
-    return res;
+    return m_OutputFile->url().path(KUrl::RemoveTrailingSlash);
 }
 
 
 /*!
     \fn DumpRepo_impl::incremental()
  */
-bool DumpRepo_impl::incremental()
+bool DumpRepo_impl::incremental() const
 {
     return m_incrementalDump->isChecked();
 }
@@ -82,7 +72,7 @@ bool DumpRepo_impl::incremental()
 /*!
     \fn DumpRepo_impl::use_dumps()
  */
-bool DumpRepo_impl::use_deltas()
+bool DumpRepo_impl::use_deltas() const
 {
     return m_UseDeltas->isChecked();
 }
@@ -91,15 +81,15 @@ bool DumpRepo_impl::use_deltas()
 /*!
     \fn DumpRepo_impl::useNumbers()
  */
-bool DumpRepo_impl::useNumbers()
+bool DumpRepo_impl::useNumbers() const
 {
     return m_Rangeonly->isChecked();
 }
 
 /*!
-    \fn DumpRepo_impl::startNumber()
+    \fn DumpRepo_impl::startNumber() const
  */
-int DumpRepo_impl::startNumber()
+int DumpRepo_impl::startNumber() const
 {
     return useNumbers()?m_StartNumber->value():-1;
 }
@@ -107,7 +97,7 @@ int DumpRepo_impl::startNumber()
 /*!
     \fn DumpRepo_impl::endNumber()
  */
-int DumpRepo_impl::endNumber()
+int DumpRepo_impl::endNumber() const
 {
     return useNumbers()?m_EndNumber->value():-1;
 }

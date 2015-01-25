@@ -35,11 +35,6 @@ public:
     QString destPath()const;
     bool cleanLogs()const;
 
-private:
-    QString checkPath(const QString&)const;
-
-public slots:
-
 };
 
 #endif

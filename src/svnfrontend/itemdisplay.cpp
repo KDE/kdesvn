@@ -61,8 +61,8 @@ void ItemDisplay::setBaseUri(const QString&uri)
 {
     m_baseUri = uri;
     /* otherwise subversion lib asserts! */
-    while (m_baseUri.endsWith('/')) {
-        m_baseUri.truncate(m_baseUri.length()-1);
+    while (m_baseUri.endsWith(QLatin1Char('/'))) {
+        m_baseUri.chop(1);
     }
 }
 

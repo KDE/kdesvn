@@ -374,8 +374,8 @@ int SvnItemModel::checkDirs(const QString&_what,SvnItemModelNode*_parent)
 
     QString what = _what;
     svn::StatusEntries dlist;
-    while (what.endsWith('/')) {
-        what.truncate(what.length()-1);
+    while (what.endsWith(QLatin1Char('/'))) {
+        what.chop(1);
     }
     // prevent this from checking unversioned folder. FIXME: what happen when we do open url on a non-working-copy folder??
 #ifdef DEBUG_TIMER
@@ -719,8 +719,8 @@ void SvnItemModel::checkAddNewItems(const QModelIndex&ind)
     SvnItemModelNodeDir*n = static_cast<SvnItemModelNodeDir*>(ind.internalPointer());
     QString what = n->fullName();
     svn::StatusEntries dlist;
-    while (what.endsWith('/')) {
-        what.truncate(what.length()-1);
+    while (what.endsWith(QLatin1Char('/'))) {
+        what.chop(1);
     }
     if (!svnWrapper()->makeStatus(what,dlist,m_Data->m_Display->baseRevision(),false,true,true) ) {
         return;
@@ -915,7 +915,7 @@ int SvnItemModel::checkUnversionedDirs(SvnItemModelNode* _parent)
             dlist.append(stat);
         }
     }
-    if (dlist.size()>0) {
+    if (!dlist.isEmpty()) {
         insertDirs(_parent,dlist);
     }
     return dlist.size();

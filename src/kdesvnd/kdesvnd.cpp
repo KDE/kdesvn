@@ -270,10 +270,7 @@ QStringList kdesvnd::get_logmsg()
 
 QString kdesvnd::cleanUrl(const KUrl&url)
 {
-    QString cleanpath = url.path();
-    while (cleanpath.endsWith('/')) {
-        cleanpath.truncate(cleanpath.length()-1);
-    }
+    QString cleanpath = url.path(KUrl::RemoveTrailingSlash);
     return cleanpath;
 }
 
@@ -281,9 +278,9 @@ QString kdesvnd::cleanUrl(const KUrl&url)
 bool kdesvnd::isRepository(const KUrl&url)
 {
     QString proto = svn::Url::transformProtokoll(url.protocol());
-    if (proto=="file") {
+    if (proto==QLatin1String("file")) {
         // local access - may a repository
-        svn::StatusParameter params(svn::Path(QLatin1String("file://")+cleanUrl(url)));
+        svn::StatusParameter params(QLatin1String("file://")+cleanUrl(url));
         try {
             m_Listener->m_Svnclient->status(params.depth(svn::DepthEmpty).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD));
         } catch (const svn::ClientException&e) {

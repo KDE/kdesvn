@@ -241,17 +241,14 @@ bool MainTreeWidget::openUrl(const KUrl &url,bool noReinit)
         setBaseUri("file://"+url.path());
     } else {
         if (url.isLocalFile()) {
-            QString s = url.path();
-            while(s.endsWith('/')) {
-                s.remove(s.length()-1,1);
-            }
+            QString s = url.path(KUrl::RemoveTrailingSlash);
             QFileInfo fi(s);
             if (fi.exists() && fi.isSymLink()) {
                 QString sl = fi.readLink();
-                if (sl.startsWith('/')) {
+                if (sl.startsWith(QLatin1Char('/'))) {
                     setBaseUri(sl);
                 } else {
-                    fi.setFile(fi.path()+'/'+sl);
+                    fi.setFile(fi.path()+QLatin1Char('/')+sl);
                     setBaseUri(fi.absoluteFilePath());
                 }
             } else {
@@ -2051,21 +2048,21 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
 
     KDialog*dlg;
     KUrl uri = importUrl;
-    if ( !uri.protocol().isEmpty() && uri.protocol()!="file") {
+    if ( !uri.protocol().isEmpty() && !uri.isLocalFile()) {
         KMessageBox::error(this,i18n("Cannot import remote URLs"));
         return;
     }
     QString targetUri = target;
-    while (targetUri.endsWith('/')) {
-        targetUri.truncate(targetUri.length()-1);
+    while (targetUri.endsWith(QLatin1Char('/'))) {
+        targetUri.chop(1);
     }
 
     if (dirs) {
-        dlg = createOkDialog(&ptr2,QString(i18n("Import log")),true,"import_log_msg");
+        dlg = createOkDialog(&ptr2,i18n("Import log"),true,"import_log_msg");
         ptr = ptr2;
-        ptr2->createDirboxDir("\""+uri.fileName()+"\"");
+        ptr2->createDirboxDir(QLatin1Char('"')+uri.fileName()+QLatin1Char('"'));
     } else {
-        dlg = createOkDialog(&ptr,QString(i18n("Import log")),true,"import_log_msg");
+        dlg = createOkDialog(&ptr,i18n("Import log"),true,"import_log_msg");
     }
 
     if (!dlg) return;
@@ -2084,12 +2081,9 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
     svn::Depth rec = ptr->getDepth();
     ptr->saveHistory(false);
     uri.setProtocol(QString());
-    QString iurl = uri.path();
-    while (iurl.endsWith('/')) {
-        iurl.truncate(iurl.length()-1);
-    }
+    QString iurl = uri.path(KUrl::RemoveTrailingSlash);
     if (dirs && ptr2 && ptr2->createDir()) {
-        targetUri+= '/'+uri.fileName();
+        targetUri+= QLatin1Char('/')+uri.fileName();
     }
     if (ptr2) {
         m_Data->m_Model->svnWrapper()->slotImport(iurl,targetUri,logMessage,rec,ptr2->noIgnore(),ptr2->ignoreUnknownNodes());

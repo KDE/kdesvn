@@ -90,11 +90,11 @@ void SvnItem_p::init()
     m_kdename.clear();
     mptr = 0;
     lRev=svn::Revision::UNDEFINED;
-    while (m_full.endsWith('/')) {
+    while (m_full.endsWith(QLatin1Char('/'))) {
         /* dir name possible */
-        m_full.truncate(m_full.length()-1);
+        m_full.chop(1);
     }
-    int p = m_full.lastIndexOf("/");
+    int p = m_full.lastIndexOf(QLatin1Char('/'));
     if (p>-1) {
         ++p;
         m_short = m_full.right(m_full.length()-p);
@@ -245,13 +245,13 @@ QPixmap SvnItem::getPixmap(const QPixmap&_p,int size,bool overlay)
                 p2 = KIconLoader::global()->loadIcon("kdesvnconflicted",KIconLoader::Desktop,size);
         } else if (p_Item->m_Stat->textStatus ()==svn_wc_status_missing) {
             m_bgColor = MISSING;
-        } else if (isLocked()||wrap->checkReposLockCache(fullName())) {
+        } else if (isLocked()||(wrap && wrap->checkReposLockCache(fullName()))) {
             if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvnlocked",KIconLoader::Desktop,size);
             m_bgColor = LOCKED;
-        } else if (Kdesvnsettings::check_needslock() && !isRemoteAdded() && wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
+        } else if (Kdesvnsettings::check_needslock() && !isRemoteAdded() && wrap && wrap->isLockNeeded(this,svn::Revision::UNDEFINED) ) {
             if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvnneedlock",KIconLoader::Desktop,size);
             m_bgColor = NEEDLOCK;
-        } else if (wrap->isUpdated(p_Item->m_Stat->path())) {
+        } else if (wrap && wrap->isUpdated(p_Item->m_Stat->path())) {
             if (overlay) p2 = KIconLoader::global()->loadIcon("kdesvnupdates",KIconLoader::Desktop,size);
             m_bgColor = UPDATES;
         } else if (p_Item->m_Stat->textStatus()==svn_wc_status_deleted) {

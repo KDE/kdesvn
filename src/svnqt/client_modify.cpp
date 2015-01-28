@@ -47,6 +47,17 @@
 
 namespace svn
 {
+static svn_error_t *
+svnqt_commit_callback2_func(
+    const svn_commit_info_t *commit_info,
+    void *baton,
+    apr_pool_t *)
+{
+    svn_commit_info_t *ci = static_cast<svn_commit_info_t *>(baton);
+    *ci = *commit_info;
+    return SVN_NO_ERROR;
+}
+
 Revision
 Client_impl::checkout(const CheckoutParameter &parameters) throw (ClientException)
 {
@@ -224,7 +235,35 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
     m_context->setLogMessage(parameters.message());
     svn_commit_info_t *commit_info = NULL;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    svn_commit_info_t ci;
+    commit_info = &ci;
+    memset(commit_info, 0, sizeof(svn_commit_info_t));
+    commit_info->revision = SVN_INVALID_REVNUM;
+
+    svn_error_t *error =
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
+        svn_client_commit6(
+#else
+        svn_client_commit5(
+#endif
+            parameters.targets().array(pool),
+            internal::DepthToSvn(parameters.depth()),
+            parameters.keepLocks(),
+            parameters.keepChangeList(),
+            TRUE, /* commit_as_operations */
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
+            FALSE, /* file externals */
+            FALSE, /* dir externals */
+#endif
+            parameters.changeList().array(pool),
+            map2hash(parameters.revisionProperties(), pool),
+            &svnqt_commit_callback2_func,
+            commit_info,
+            *m_context,
+            pool);
+#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
+
     svn_error_t *error =
         svn_client_commit4(
             &commit_info,

@@ -49,9 +49,8 @@ class PropertiesDlg : public KDialog
     Q_OBJECT
 
 public:
-    PropertiesDlg(SvnItem*, svn::Client*,
-        const svn::Revision&aRev=svn::Revision(svn_opt_revision_working),
-        QWidget* parent = 0, const char* name = 0, bool modal = true);
+    PropertiesDlg(SvnItem*which, svn::Client*aClient,
+        const svn::Revision&aRev, QWidget *parent = 0);
     ~PropertiesDlg();
 
     bool hasChanged()const;

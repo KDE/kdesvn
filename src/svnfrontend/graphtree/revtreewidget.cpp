@@ -36,18 +36,14 @@
  *  Constructs a RevTreeWidget as a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'.
  */
-RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent, const char* name)
+RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent)
     : QWidget(parent)
 {
-    if ( !name )
-        setObjectName("RevTreeWidget");
-    else
-        setObjectName(name);
     RevTreeWidgetLayout = new QVBoxLayout(this);//, 11, 6, "RevTreeWidgetLayout");
 
     m_Splitter = new QSplitter(Qt::Vertical,this);
 
-    m_RevGraphView = new RevGraphView(lt,cl, m_Splitter, "m_RevGraphView");
+    m_RevGraphView = new RevGraphView(lt,cl, m_Splitter);
     m_RevGraphView->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
     connect(m_RevGraphView,SIGNAL(dispDetails(const QString&)),this,SLOT(setDetailText(const QString&)));

@@ -33,7 +33,7 @@ class DbOverview: public QWidget,public Ui::DBOverView
 {
     Q_OBJECT
 public:
-    DbOverview(QWidget *parent = 0, const char *name = 0);
+    DbOverview(QWidget *parent = 0);
     virtual ~DbOverview();
 
     static void showDbOverview(svn::Client*aClient = 0);

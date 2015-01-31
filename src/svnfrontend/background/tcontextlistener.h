@@ -37,7 +37,7 @@ class ThreadContextListener : public CContextListener
 {
     Q_OBJECT
 public:
-    ThreadContextListener(QObject* parent, const char* name=0);
+    ThreadContextListener(QObject* parent);
 
     virtual ~ThreadContextListener();
 

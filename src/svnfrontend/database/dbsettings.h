@@ -32,7 +32,7 @@ class DbSettings:public QWidget,Ui::DbSettings
 {
     Q_OBJECT
 public:
-    DbSettings(QWidget *parent = 0, const char *name = 0);
+    DbSettings(QWidget *parent = 0);
     virtual ~DbSettings();
 
     void setRepository(const QString&repository);

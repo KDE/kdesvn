@@ -29,7 +29,7 @@ class AuthDialogImpl: public KDialog
 {
     Q_OBJECT
 public:
-    AuthDialogImpl(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);
+    AuthDialogImpl(const QString & realm, const QString&user, QWidget *parent = 0);
     virtual ~AuthDialogImpl(){}
 
     const QString Username()const;

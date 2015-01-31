@@ -37,44 +37,29 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 
-/*
- *  Constructs a PropertiesDlg as a child of 'parent', with the
- *  name 'name' and widget flags set to 'f'.
- *
- *  The dialog will by default be modeless, unless you set 'modal' to
- *  TRUE to construct a modal dialog.
- */
-PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget* parent, const char* name, bool modal)
+PropertiesDlg::PropertiesDlg(SvnItem*which, svn::Client*aClient, const svn::Revision&aRev, QWidget*parent)
     : KDialog(parent),
       m_Item(which),m_changed(false),
       m_Client(aClient),m_Rev(aRev)
 {
-    setModal(modal);
+    setModal(true);
     setButtons(KDialog::Ok|KDialog::Cancel);
     setCaption(i18n("Modify properties"));
-    if ( !name ) {
-        setObjectName( "PropertiesDlg" );
-    } else {
-        setObjectName(name);
-    }
     QWidget * m = new QWidget(this);
     setMainWidget(m);
     PropertiesDlgLayout = new QHBoxLayout(m);
 
-    m_PropertiesListview = new Propertylist(m, "m_PropertiesListview" );
+    m_PropertiesListview = new Propertylist(m);
     m_PropertiesListview->setAllColumnsShowFocus(true);
     m_PropertiesListview->setCommitchanges(false);
     PropertiesDlgLayout->addWidget( m_PropertiesListview);
 
     m_rightLayout = new QVBoxLayout();
     m_AddButton = new KPushButton(m);
-    m_AddButton->setObjectName("m_AddButton");
     m_rightLayout->addWidget(m_AddButton);
     m_ModifyButton = new KPushButton(m);
-    m_ModifyButton->setObjectName("m_ModifyButton" );
     m_rightLayout->addWidget(m_ModifyButton);
     m_DeleteButton = new KPushButton(m);
-    m_DeleteButton->setObjectName("m_DeleteButton");
     m_rightLayout->addWidget( m_DeleteButton );
     m_rightSpacer = new QSpacerItem( 20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding );
     m_rightLayout->addItem(m_rightSpacer);

@@ -71,7 +71,7 @@ public:
         checkmodifiedthread
     };
 
-    explicit SvnActions(ItemDisplay *parent, const char *name = 0,bool processes_blocked=false);
+    explicit SvnActions(ItemDisplay *parent, bool processes_blocked=false);
     ~SvnActions();
     void reInitClient();
     //svn::Client&svnClient(){return m_Svnclient;}

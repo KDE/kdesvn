@@ -41,7 +41,6 @@ class GraphTreeLabel;
 class GraphMark;
 class PannerView;
 class QGraphicsScene;
-class CContextListener;
 class GraphTreeLabel;
 
 typedef svn::SharedPointer<KTemporaryFile> TempFilePtr;
@@ -57,7 +56,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(QObject*,svn::Client*,QWidget * parent = 0, const char * name = 0);
+    RevGraphView(QObject*aListener,svn::Client*_client,QWidget * parent = 0);
     virtual ~RevGraphView();
 
     void showText(const QString&s);

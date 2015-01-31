@@ -27,16 +27,13 @@
 #include <kapplication.h>
 #include <klocale.h>
 
-// #include <qvbox.h>
 #include <KVBox>
 
-RevisionButtonImpl::RevisionButtonImpl(QWidget *parent, const char *name)
-//     :RevisionButton(parent, name),
+RevisionButtonImpl::RevisionButtonImpl(QWidget *parent)
     : QWidget(parent),
     m_Rev(svn::Revision::UNDEFINED),m_noWorking(false)
 {
     setupUi(this);
-    setObjectName(name);
 }
 
 RevisionButtonImpl::~RevisionButtonImpl()

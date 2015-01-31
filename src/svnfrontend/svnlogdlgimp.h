@@ -26,14 +26,11 @@
 #include "src/svnqt/client.h"
 #include "src/svnqt/shared_pointer.h"
 
-#include <qsize.h>
 #include <QKeyEvent>
-#include <qregexp.h>
+#include <QRegExp>
 
-class LogListViewItem;
 class QTreeWidgetItem;
 class SvnActions;
-class QTreeWidget;
 class SvnLogModel;
 class QSortFilterProxyModel;
 class QModelIndex;
@@ -42,7 +39,7 @@ class SvnLogDlgImp: public KDialog,public Ui::LogDialog,public SimpleLogCb
 {
 Q_OBJECT
 public:
-    SvnLogDlgImp(SvnActions*,QWidget *parent = 0, const char *name = 0, bool modal=true);
+    SvnLogDlgImp(SvnActions*ac, bool modal, QWidget *parent = 0);
     virtual ~SvnLogDlgImp();
     void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&,const svn::Revision&peg,const QString&pegUrl);
     void saveSize();

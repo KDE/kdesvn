@@ -30,7 +30,6 @@ class QVBoxLayout;
 class RevGraphView;
 class QSplitter;
 class KTextBrowser;
-class CContextListener;
 
 namespace svn {
     class LogEntry;
@@ -42,7 +41,7 @@ class RevTreeWidget : public QWidget
     Q_OBJECT
 
 public:
-    RevTreeWidget(QObject*,svn::Client*,QWidget* parent = 0, const char* name = 0);
+    RevTreeWidget(QObject*,svn::Client*,QWidget* parent = 0);
     ~RevTreeWidget();
 
     QSplitter* m_Splitter;

@@ -32,7 +32,6 @@
 Importdir_logmsg::Importdir_logmsg(QWidget *parent)
  : Commitmsg_impl(parent)
 {
-    setObjectName(QString::fromUtf8("Importdir_logmsg"));
     m_createDirBox = new QCheckBox(this);
     hideKeepsLock(true);
     createDirboxDir();

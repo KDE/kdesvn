@@ -31,12 +31,10 @@
 #include <KVBox>
 #include <ktextbrowser.h>
 
-SslTrustPrompt_impl::SslTrustPrompt_impl(const QString&host,QWidget *parent, const char *name)
-//     :SslTrustPrompt(parent, name)
+SslTrustPrompt_impl::SslTrustPrompt_impl(const QString&host,QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
 
     m_MainLabel->setText("<p align=\"center\"><b>"+
         i18n("Error validating server certificate for '%1'",host)+

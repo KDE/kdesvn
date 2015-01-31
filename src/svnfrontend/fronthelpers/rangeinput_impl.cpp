@@ -28,12 +28,10 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-Rangeinput_impl::Rangeinput_impl(QWidget *parent, const char *name)
-//     :RangeInputDlg(parent, name)
+Rangeinput_impl::Rangeinput_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
 
     m_startRevInput->setRange(0,INT_MAX,1,false);
     m_endRevInput->setRange(0,INT_MAX,1,false);

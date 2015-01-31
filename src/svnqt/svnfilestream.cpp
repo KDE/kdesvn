@@ -39,12 +39,11 @@ public:
     SvnFileStream_private(const QString&fn,openmode mode);
     virtual ~SvnFileStream_private();
 
-    QString m_FileName;
     QFile m_File;
 };
 
 SvnFileStream_private::SvnFileStream_private(const QString&fn,openmode mode)
-    : m_FileName(fn),m_File(fn)
+    : m_File(fn)
 {
     m_File.open(mode);
 }

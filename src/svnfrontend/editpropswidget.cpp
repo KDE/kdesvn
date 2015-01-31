@@ -30,11 +30,10 @@
 #include <klocale.h>
 #include <kicon.h>
 
-EditPropsWidget::EditPropsWidget(QWidget *parent, const char *name)
+EditPropsWidget::EditPropsWidget(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
 
     helpButton->setIcon(KIcon("help-hint"));
 

@@ -36,7 +36,6 @@
 FillCacheThread::FillCacheThread(QObject*_parent,const QString&aPath,bool startup)
     : SvnThread(_parent),mutex()
 {
-    setObjectName("fillcachethread");
     m_path = aPath;
     m_startup = startup;
 }

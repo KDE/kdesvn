@@ -25,11 +25,10 @@
 /*!
     \fn RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
  */
- RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
+ RevertFormImpl::RevertFormImpl(QWidget*parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
 
     setMinimumSize(minimumSizeHint());
 }

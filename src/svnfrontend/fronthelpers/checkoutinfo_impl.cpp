@@ -31,12 +31,10 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent, const char *name)
-//     :CheckoutInfo(parent, name)
+CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
 
     m_RangeInput->setStartOnly(true);
     m_RangeInput->setHeadDefault();

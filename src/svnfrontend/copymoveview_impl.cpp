@@ -29,15 +29,13 @@
 #include <KDialog>
 #include <KVBox>
 
-CopyMoveView_impl::CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,QWidget* parent, const char* name, Qt::WFlags /*fl*/)
-// : CopyMoveView(parent,name,fl)
+CopyMoveView_impl::CopyMoveView_impl(const QString&baseName, const QString&sourceName, bool move, QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
 
     m_BaseName = baseName;
-    if (m_BaseName.length()>0 && !m_BaseName.endsWith('/')) {
+    if (!m_BaseName.isEmpty() && !m_BaseName.endsWith('/')) {
         m_BaseName+='/';
     }
     m_PrefixLabel->setText(m_BaseName);
@@ -66,7 +64,7 @@ CopyMoveView_impl::~CopyMoveView_impl()
 /*!
     \fn CopyMoveView_impl::newName()
  */
-QString CopyMoveView_impl::newName()
+QString CopyMoveView_impl::newName() const
 {
     return m_BaseName+m_NewNameInput->text();
 }
@@ -75,7 +73,7 @@ QString CopyMoveView_impl::newName()
 /*!
     \fn CopyMoveView_impl::force()
  */
-bool CopyMoveView_impl::force()
+bool CopyMoveView_impl::force() const
 {
     return m_ForceBox->isChecked();
 }
@@ -85,14 +83,13 @@ bool CopyMoveView_impl::force()
     \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,const QString&old,const QString&base,QWidget*)
  */
 QString CopyMoveView_impl::getMoveCopyTo(bool*ok,bool*force,bool move,
-    const QString&old,const QString&base,QWidget*parent,const QString &name)
+                                         const QString&old,const QString&base,QWidget*parent)
 {
 //     KDialogBase dlg(parent,name,true,(move?i18n("Move/Rename file/dir"):i18n("Copy file/dir")),
 //             KDialogBase::Ok|KDialogBase::Cancel,
 //             KDialogBase::NoDefault);
 //     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
     KDialog dlg(parent);
-    dlg.setObjectName(name);
     dlg.setCaption(move?i18n("Move/Rename file/directory"):i18n("Copy file/directory"));
     dlg.setModal(true);
     dlg.setButtons(KDialog::Ok | KDialog::Cancel);

@@ -187,9 +187,9 @@ namespace svn
       bool maySave;
 
       SslServerTrustData (const apr_uint32_t failures_)
-        : failures (failures_), hostname (""), fingerprint (""),
-          validFrom (""), validUntil (""), issuerDName (""),
-          realm (""), maySave (true)
+        : failures (failures_), hostname (), fingerprint (),
+          validFrom (), validUntil (), issuerDName (),
+          realm (), maySave (true)
       {
       }
     };

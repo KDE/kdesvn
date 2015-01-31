@@ -27,12 +27,10 @@
 
 #include <qcheckbox.h>
 
-DumpRepo_impl::DumpRepo_impl(QWidget *parent, const char *name)
-//     :DumpRepoDlg(parent, name)
+DumpRepo_impl::DumpRepo_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
     m_ReposPath->setMode(KFile::Directory|KFile::LocalOnly);
     m_OutputFile->setMode(KFile::File|KFile::LocalOnly);
 }

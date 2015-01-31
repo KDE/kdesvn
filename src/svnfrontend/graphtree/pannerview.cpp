@@ -64,10 +64,9 @@ int GraphPanMark::type()const
     return GRAPHTREE_PANMARK;
 }
 
-PannerView::PannerView(QWidget* parent, const char* name)
+PannerView::PannerView(QWidget* parent)
     : QGraphicsView(parent)// KDE4 check , /*Qt::WNoAutoErase |*/ Qt::WA_StaticContents/*WStaticContents*/ )
 {
-    setObjectName(name?name:"PannerView");
     m_Mark=0;
     m_Moving = false;
     viewport()->setFocusPolicy(Qt::NoFocus);

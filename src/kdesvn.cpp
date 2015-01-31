@@ -264,7 +264,6 @@ void kdesvn::setupActions()
 //             actionCollection(),"toggle_load_last_url");
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"), this);
     actionCollection()->addAction("toggle_load_last_url", toggletemp);
-    toggletemp->setObjectName("toggle_load_last_url");
     toggletemp->setToolTip(i18n("Reload last opened URL if no one is given on command line"));
     KConfigGroup cs(KGlobal::config(),"startup");
 //     toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));

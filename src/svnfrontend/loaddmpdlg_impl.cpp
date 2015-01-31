@@ -26,15 +26,10 @@
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 
-LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent, const char *name)
+LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    if (name) {
-        setObjectName(name);
-    } else {
-        setObjectName("LoadDmpDlg_impl");
-    }
     m_Dumpfile->setMode(KFile::File);
     m_Repository->setMode(KFile::Directory|KFile::LocalOnly);
 }

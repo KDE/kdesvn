@@ -26,14 +26,13 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 
-AuthDialogWidget::AuthDialogWidget(const QString & realm,const QString&user,QWidget *parent, const char *name)
-    :QWidget(parent),Ui::AuthDialogWidget(),curPass("")
+AuthDialogWidget::AuthDialogWidget(const QString & realm,const QString&user,QWidget *parent)
+    :QWidget(parent),Ui::AuthDialogWidget(),curPass()
 {
     setupUi(this);
-    setObjectName(name);
 
     m_UsernameEdit->setText(user);
-    m_PasswordEdit->setText("");
+    m_PasswordEdit->clear();
     m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());
     m_StorePasswordButton->setText(
             Kdesvnsettings::passwords_in_wallet()
@@ -54,7 +53,7 @@ const QString AuthDialogWidget::Username()const
     return m_UsernameEdit->text();
 }
 
-const QString AuthDialogWidget::Password()
+const QString AuthDialogWidget::Password() const
 {
     return m_PasswordEdit->text();
 }

@@ -115,10 +115,9 @@ QString CContextListener::NotifyState(svn_wc_notify_state_t state)
     return (notify_state_strings[state] == NULL) ? QString(): i18n(notify_state_strings[state]);
 }
 
-CContextListener::CContextListener(QObject *parent, const char *name)
+CContextListener::CContextListener(QObject *parent)
  : QObject(parent), svn::ContextListener(),ref_count()
 {
-    setObjectName(name);
     m_Data = new CContextListenerData();
 }
 

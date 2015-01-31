@@ -27,10 +27,9 @@
 
 #include <QKeyEvent>
 
-Propertylist::Propertylist(QWidget *parent, const char *name)
+Propertylist::Propertylist(QWidget *parent)
     : QTreeWidget(parent),m_commitit(false)
 {
-    setObjectName(name);
     setItemDelegate(new KMultilineDelegate(this));
     m_Dir=false;
 

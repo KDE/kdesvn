@@ -31,7 +31,7 @@ PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent,const QString&aNa
 }
 
 PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent)
-    : QTreeWidgetItem(parent,_RTTI_),m_currentName(""),m_startName(""),m_currentValue(""),m_startValue(""),m_deleted(false)
+    : QTreeWidgetItem(parent,_RTTI_),m_currentName(),m_startName(),m_currentValue(),m_startValue(),m_deleted(false)
 {
 }
 

@@ -231,10 +231,6 @@ void kdesvnView::slotSettingsChanged()
 void kdesvnView::slotCreateRepo()
 {
     KDialog * dlg = new KDialog(KApplication::activeModalWidget());
-    if (!dlg) {
-        return;
-    }
-    dlg->setObjectName("create_repository");
     dlg->setModal(true);
     dlg->setCaption(i18n("Create new repository"));
     dlg->setButtons(KDialog::Ok|KDialog::Cancel);
@@ -278,8 +274,6 @@ void kdesvnView::slotCreateRepo()
 void kdesvnView::slotHotcopy()
 {
     KDialog* dlg = new KDialog(KApplication::activeModalWidget());
-    if (!dlg) return;
-    dlg->setObjectName("hotcopy_repository");
     dlg->setModal(true);
     dlg->setCaption(i18n("Hotcopy a repository"));
     dlg->setButtons(KDialog::Ok|KDialog::Cancel);
@@ -314,9 +308,8 @@ void kdesvnView::slotHotcopy()
 void kdesvnView::slotLoaddump()
 {
     KDialog dlg(KApplication::activeModalWidget());
-    dlg.setObjectName("hotcopy_repository");
     dlg.setModal(true);
-    dlg.setCaption(i18n("Hotcopy a repository"));
+    dlg.setCaption(i18n("Load a repository from a svndump"));
     dlg.setButtons(KDialog::Ok|KDialog::Cancel);
     QWidget* Dialog1Layout = new KVBox(&dlg);
     dlg.setMainWidget(Dialog1Layout);
@@ -372,7 +365,7 @@ void kdesvnView::slotLoaddump()
     }
 
     try {
-        StopDlg sdlg(this,this,0,"Load Dump",i18n("Loading a dump into a repository."));
+        StopDlg sdlg(this,this,i18n("Load Dump"),i18n("Loading a dump into a repository."));
         _rep.loaddump(_input,_act,ptr->parentPath(),ptr->usePre(),ptr->usePost(),ptr->validateProps());
         slotAppendLog(i18n("Loading dump finished."));
     }catch (const svn::ClientException&e) {
@@ -386,8 +379,6 @@ void kdesvnView::slotLoaddump()
 void kdesvnView::slotDumpRepo()
 {
     KDialog * dlg = new KDialog(KApplication::activeModalWidget());
-    if (!dlg) return;
-    dlg->setObjectName("dump_repository");
     dlg->setModal(true);
     dlg->setCaption(i18n("Dump a repository"));
     dlg->setButtons(KDialog::Ok|KDialog::Cancel);
@@ -436,7 +427,7 @@ void kdesvnView::slotDumpRepo()
     }
 
     try {
-        StopDlg sdlg(this,this,0,"Dump",i18n("Dumping a repository"));
+        StopDlg sdlg(this,this,i18n("Dump"),i18n("Dumping a repository"));
         _rep->dump(out,st,en,incr,diffs);
         slotAppendLog(i18n("Dump finished."));
     }catch (const svn::ClientException&e) {

@@ -33,8 +33,8 @@
 class CommandLineData
 {
 public:
-    CommandLineData():cmd(""){};
-    virtual ~CommandLineData(){};
+    CommandLineData():cmd(){}
+    virtual ~CommandLineData(){}
 
     void displayHelp();
 

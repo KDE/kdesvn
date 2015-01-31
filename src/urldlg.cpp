@@ -31,13 +31,12 @@
 #include <KHistoryComboBox>
 #include <qlabel.h>
 
-UrlDlg::UrlDlg(QWidget *parent, const char *name)
+UrlDlg::UrlDlg(QWidget *parent)
     : KDialog(parent)
 {
     setButtons(Ok | Cancel | User1);
     setDefaultButton(Ok);
     showButtonSeparator(true);
-    setObjectName(name);
 
     m_plainPage = new QWidget(this);
     setMainWidget(m_plainPage);
@@ -74,7 +73,6 @@ void UrlDlg::init_dlg()
     }
 
     urlRequester_ = new KUrlRequester(combo, m_plainPage);
-    urlRequester_->setObjectName("urlRequester");
     topLayout->addWidget( urlRequester_ );
     urlRequester_->setFocus();
     urlRequester_->setMode(KFile::ExistingOnly|KFile::Directory);

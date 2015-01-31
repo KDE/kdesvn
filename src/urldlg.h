@@ -32,12 +32,12 @@ class UrlDlg : public KDialog
 {
 Q_OBJECT
 public:
-    UrlDlg(QWidget *parent = 0, const char *name = 0);
+    UrlDlg(QWidget *parent = 0);
     virtual ~UrlDlg();
     KUrl selectedUrl();
     static KUrl getUrl(QWidget*parent=0);
 protected:
-    virtual void init_dlg();
+    void init_dlg();
     KUrlRequester*urlRequester_;
     QWidget * m_plainPage;
 protected slots:

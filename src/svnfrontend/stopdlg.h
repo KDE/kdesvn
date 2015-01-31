@@ -33,8 +33,6 @@
 #include <QLabel>
 
 class QTimer;
-
-class CContextListener;
 class QLabel;
 class QProgressBar;
 class KTextBrowser;
@@ -46,7 +44,7 @@ class StopDlg : public KDialog
 {
 Q_OBJECT
 public:
-    StopDlg(QObject*,QWidget *parent = 0, const char *name = 0,const QString&caption=QString(),const QString&text=QString());
+    StopDlg(QObject*listener, QWidget *parent, const QString&caption, const QString&text);
     virtual ~StopDlg();
 
     bool cancelld();
@@ -87,25 +85,6 @@ protected slots:
     virtual void slotNetProgres(long long int, long long int);
 signals:
     void sigCancel(bool how);
-};
-
-class StopSimpleDlg:public StopDlg
-{
-    Q_OBJECT
-public:
-    StopSimpleDlg(QWidget *parent = 0, const char *name = 0,const QString&caption=QString(),const QString&text=QString());
-    virtual ~StopSimpleDlg(){}
-
-    bool isCanceld()const{return cancelld;}
-
-public slots:
-    virtual void makeCancel();
-
-protected slots:
-    virtual void slotSimpleCancel(bool);
-
-protected:
-    bool cancelld;
 };
 
 #endif

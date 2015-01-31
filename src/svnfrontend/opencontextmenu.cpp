@@ -24,10 +24,9 @@
 #include <kapplication.h>
 #include <kdebug.h>
 
-OpenContextmenu::OpenContextmenu(const KUrl&aPath,const KService::List&aList,QWidget* parent, const char* name)
+OpenContextmenu::OpenContextmenu(const KUrl&aPath,const KService::List&aList,QWidget* parent)
     : KMenu(parent),m_Path(aPath),m_List(aList)
 {
-    setObjectName(name);
     setup();
 }
 

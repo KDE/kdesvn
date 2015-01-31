@@ -131,7 +131,7 @@ public:
 typedef cacheEntry<svn::StatusPtr> statusEntry;
 
 template<class C> inline cacheEntry<C>::cacheEntry()
-    : m_key(""),m_isValid(false),m_content()
+    : m_key(),m_isValid(false),m_content()
 {
 }
 

@@ -122,7 +122,6 @@ public:
 MainTreeWidget::MainTreeWidget(KActionCollection*aCollection,QWidget*parent,Qt::WindowFlags f)
     :QWidget(parent,f),m_Data(new MainTreeWidgetData)
 {
-    setObjectName("MainTreeWidget");
     setupUi(this);
     setFocusPolicy(Qt::StrongFocus);
     m_TreeView->setFocusPolicy(Qt::StrongFocus);
@@ -1093,15 +1092,14 @@ void MainTreeWidget::slotDirContextMenu(const QPoint&vp)
     if ( (temp=filesActions()->action("make_left_add_ignore_pattern")) && temp->isEnabled() && ++count) popup.addAction(temp);
     if ( (temp=filesActions()->action("set_rec_property_dir")) && temp->isEnabled() && ++count) popup.addAction(temp);
 
-    KService::List offers;
     OpenContextmenu*me=0;
     QAction*menuAction = 0;
 
     if (l.count()==1 && l.at(0)) {
-        offers = offersList(l.at(0),l.at(0)->isDir());
-        if (offers.count()>0) {
+        const KService::List offers = offersList(l.at(0),l.at(0)->isDir());
+        if (!offers.isEmpty()) {
             svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision());
-            me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0,0);
+            me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0);
             me->setTitle(i18n("Open With..."));
             menuAction=popup.addMenu(me);
             ++count;
@@ -1160,17 +1158,15 @@ void MainTreeWidget::execContextMenu(const SvnItemList&l)
         return;
     }
 
-    KService::List offers;
     OpenContextmenu*me=0;
     QAction*temp = 0;
     QAction*menuAction = 0;
 
-    if (l.count()==1) offers = offersList(l.at(0),l.at(0)->isDir());
-
     if (l.count()==1/*&&!l.at(0)->isDir()*/) {
-        if (offers.count()>0) {
+        KService::List offers = offersList(l.at(0),l.at(0)->isDir());
+        if (!offers.isEmpty()) {
             svn::Revision rev(isWorkingCopy()?svn::Revision::UNDEFINED:baseRevision());
-            me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0,0);
+            me= new OpenContextmenu(l.at(0)->kdeName(rev),offers,0);
             me->setTitle(i18n("Open With..."));
             menuAction=popup->addMenu(me);
         } else {
@@ -1294,9 +1290,7 @@ void MainTreeWidget::slotLock()
     ptr->hideDepth(true);
     ptr->keepsLocks(false);
 
-    QCheckBox*_stealLock = new QCheckBox();//"",0,"create_dir_checkbox");
-    _stealLock->setObjectName("create_dir_checkbox");
-    _stealLock->setText(i18n("Steal lock?"));
+    QCheckBox*_stealLock = new QCheckBox(i18n("Steal lock?"));
     ptr->addItemWidget(_stealLock);
 
     if (dlg->exec()!=QDialog::Accepted) {
@@ -1869,7 +1863,7 @@ void MainTreeWidget::copy_move(bool move)
     bool ok, force;
     SvnItemModelNode*which = SelectedNode();
     if (!which) return;
-    QString nName = CopyMoveView_impl::getMoveCopyTo(&ok,&force,move,which->fullName(),baseUri(),this,QLatin1String("move_name"));
+    QString nName = CopyMoveView_impl::getMoveCopyTo(&ok,&force,move,which->fullName(),baseUri(),this);
     if (!ok) {
         return;
     }
@@ -1900,7 +1894,7 @@ void MainTreeWidget::slotMergeRevisions()
     }
     bool force,dry,rec,irelated,useExternal;
     Rangeinput_impl::revision_range range;
-    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,&useExternal,this,"merge_range")) {
+    if (!MergeDlg_impl::getMergeRange(range,&force,&rec,&irelated,&dry,&useExternal,this)) {
         return;
     }
     if (!useExternal) {

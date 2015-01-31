@@ -31,8 +31,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-ThreadContextListener::ThreadContextListener(QObject* parent, const char* name)
-    : CContextListener(parent, name)
+ThreadContextListener::ThreadContextListener(QObject* parent)
+    : CContextListener(parent)
 {
     m_Data = new ThreadContextListenerData;
 }
@@ -99,7 +99,6 @@ bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitI
     m_WaitMutex.lock();
     ThreadContextListenerData::slog_message log;
     log.ok = false;
-    log.msg = "";
     log._items = &_items;
     DataEvent*ev = new DataEvent(EVENT_THREAD_LOGMSG_PROMPT);
     void*t = (void*)&log;
@@ -118,7 +117,6 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
 
     ThreadContextListenerData::scert_file scertf;
     scertf.ok = false;
-    scertf.certfile="";
     DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
     ev->setData((void*)&scertf);
     kapp->postEvent(this,ev);
@@ -135,7 +133,6 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
     ThreadContextListenerData::scert_pw scert_data;
     scert_data.ok=false;
     scert_data.maysave=false;
-    scert_data.password="";
     scert_data.realm=realm;
     DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_PW_PROMPT);
     ev->setData((void*)&scert_data);
@@ -204,7 +201,6 @@ void ThreadContextListener::sendTick()
     DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
     ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
-    _notify->msg = "";
     ev->setData((void*)_notify);
     kapp->postEvent(this,ev);
 }

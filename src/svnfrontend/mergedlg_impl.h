@@ -55,7 +55,7 @@ public:
      * This simplyfies the call if only some revision into a working copy should merged.
      */
     static bool getMergeRange(Rangeinput_impl::revision_range&range,
-        bool*force,bool*recursive,bool*ignorerelated,bool*dry,bool*useExternal,QWidget*parent=0,const char*name=0);
+        bool*force, bool*recursive, bool*ignorerelated, bool*dry, bool*useExternal, QWidget*parent=0);
 protected Q_SLOTS:
     virtual void externDisplayToggled(bool);
     virtual void recordOnlyToggled(bool);

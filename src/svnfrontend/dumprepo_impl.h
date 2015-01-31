@@ -25,7 +25,7 @@
 class DumpRepo_impl: public QWidget, public Ui::DumpRepoDlg {
 Q_OBJECT
 public:
-    DumpRepo_impl(QWidget *parent = 0, const char *name = 0);
+    DumpRepo_impl(QWidget *parent = 0);
     QString reposPath();
     QString targetFile();
     bool incremental();

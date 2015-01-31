@@ -200,12 +200,11 @@ Rangeinput_impl::revision_range MergeDlg_impl::getRange()const
  */
 bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*force,bool*recursive,bool*ignorerelated,bool*dry,
     bool*useExternal,
-    QWidget*parent,const char*name)
+    QWidget*parent)
 {
     MergeDlg_impl*ptr = 0;
     KDialog dlg(parent);
     dlg.setButtons(KDialog::Ok|KDialog::Cancel|KDialog::Help);
-    dlg.setObjectName( name );
     dlg.setModal(true);
     dlg.setCaption(i18n("Enter merge range"));
     dlg.setDefaultButton(KDialog::Ok);
@@ -214,9 +213,6 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range&range,bool*for
     dlg.setMainWidget(Dialog1Layout);
 
     ptr = new MergeDlg_impl(Dialog1Layout,false,false,false,false,false);
-    if (name) {
-        ptr->setObjectName(name);
-    }
     dlg.resize( QSize(480,360).expandedTo(dlg.minimumSizeHint()) );
     KConfigGroup _kc(Kdesvnsettings::self()->config(),"merge_range");
     dlg.restoreDialogSize(_kc);

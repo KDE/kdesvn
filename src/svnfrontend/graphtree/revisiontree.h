@@ -30,7 +30,6 @@
 
 class RtreeData;
 class QWidget;
-class CContextListener;
 
 namespace svn
 {

@@ -21,14 +21,10 @@
 #ifndef SVNTHREAD_H
 #define SVNTHREAD_H
 
-#include "ccontextlistener.h"
+#include "tcontextlistener.h"
 #include "frontendtypes.h"
 
 #include <QThread>
-#include <QEvent>
-#include <QQueue>
-#include <QMutex>
-#include <QReadWriteLock>
 
 //! Base class for creating threads holding an subversion connection
 class SvnThread:public QThread

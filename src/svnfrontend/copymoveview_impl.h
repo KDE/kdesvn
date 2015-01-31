@@ -28,12 +28,13 @@ class CopyMoveView_impl : public QWidget, public Ui::CopyMoveView
   Q_OBJECT
 
 public:
-  CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0 );
+  CopyMoveView_impl(const QString&baseName,const QString&sourceName,bool move,
+                    QWidget* parent);
   ~CopyMoveView_impl();
-    virtual QString newName();
-    bool force();
-    static QString getMoveCopyTo(bool*ok, bool*force, bool move, const QString&old, const QString&base,
-            QWidget*, const QString &name);
+  QString newName() const;
+  bool force() const;
+  static QString getMoveCopyTo(bool*ok, bool*force, bool move, const QString&old,
+                               const QString&base,QWidget*parent=0);
   /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

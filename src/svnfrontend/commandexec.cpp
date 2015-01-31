@@ -87,7 +87,7 @@ pCPart::pCPart()
     , Stderr(stderr)
     , disp(new DummyDisplay())
 {
-    m_SvnWrapper = new SvnActions(disp,0,true);
+    m_SvnWrapper = new SvnActions(disp,true);
 }
 
 pCPart::~pCPart()
@@ -502,7 +502,7 @@ void CommandExec::slotCmd_copy()
     if (m_pCPart->url.count()<2) {
         bool force_move,ok;
         target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,false,
-            m_pCPart->url[0],QString(),0,QLatin1String("move_name"));
+                                                  m_pCPart->url[0],QString(),0);
         if (!ok) {
             return;
         }
@@ -525,7 +525,7 @@ void CommandExec::slotCmd_move()
     QString target;
     if (m_pCPart->url.count()<2) {
         target = CopyMoveView_impl::getMoveCopyTo(&ok,&force_move,true,
-            m_pCPart->url[0],QString(),0,QLatin1String("move_name"));
+                                                  m_pCPart->url[0],QString(),0);
         if (!ok) {
             return;
         }

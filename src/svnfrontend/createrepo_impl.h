@@ -30,16 +30,16 @@ class CreateRepoData;
 class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg {
     Q_OBJECT
 public:
-    Createrepo_impl(QWidget *parent = 0, const char *name = 0);
+    Createrepo_impl(QWidget *parent = 0);
     const svn::repository::CreateRepoParameter&parameter()const;
     bool createMain()const;
     QString targetDir()const;
 
 protected Q_SLOTS:
-    virtual void fsTypeChanged(int);
-    virtual void compatChanged15(bool);
-    virtual void compatChanged14(bool);
-    virtual void compatChanged13(bool);
+    void fsTypeChanged(int);
+    void compatChanged15(bool);
+    void compatChanged14(bool);
+    void compatChanged13(bool);
 
 private:
     svn::SharedPointer<CreateRepoData> _data;

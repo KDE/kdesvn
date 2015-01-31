@@ -28,7 +28,7 @@ class QString;
 class EditPropsWidget: public QWidget, public Ui::EditPropsWidget {
 	Q_OBJECT
 public:
-    EditPropsWidget(QWidget *parent = 0, const char *name = 0);
+    EditPropsWidget(QWidget *parent = 0);
     ~EditPropsWidget();
 
     QString propName()const;

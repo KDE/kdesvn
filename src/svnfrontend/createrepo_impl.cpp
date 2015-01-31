@@ -42,16 +42,10 @@ struct CreateRepoData
     mutable svn::repository::CreateRepoParameter params;
 };
 
-Createrepo_impl::Createrepo_impl(QWidget *parent, const char *name)
-//     :CreateRepo_Dlg(parent, name)
+Createrepo_impl::Createrepo_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    if (name) {
-        setObjectName(name);
-    } else {
-        setObjectName("Createrepo_impl");
-    }
     m_ReposPathinput->setMode(KFile::Directory|KFile::LocalOnly);
     _data = new CreateRepoData;
 

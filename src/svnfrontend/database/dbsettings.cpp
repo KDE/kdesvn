@@ -35,11 +35,10 @@ public:
     QString m_repository;
 };
 
-DbSettings::DbSettings(QWidget*parent,const char*name)
+DbSettings::DbSettings(QWidget*parent)
     :QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
     _data = new DbSettingsData;
 }
 

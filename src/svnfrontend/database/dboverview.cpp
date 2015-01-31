@@ -56,11 +56,10 @@ public:
     }
 };
 
-DbOverview::DbOverview(QWidget *parent, const char *name)
+DbOverview::DbOverview(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    setObjectName(name);
     enableButtons(false);
     _data = new DbOverViewData;
 

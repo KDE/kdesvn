@@ -27,11 +27,11 @@
 class AuthDialogWidget: public QWidget, public Ui::AuthDialogWidget {
     Q_OBJECT
 public:
-    AuthDialogWidget(const QString & realm = "",const QString&user="", QWidget *parent = 0, const char *name = 0);
+    AuthDialogWidget(const QString & realm, const QString&user, QWidget *parent = 0);
     virtual ~AuthDialogWidget(){}
 
     const QString Username()const;
-    const QString Password();
+    const QString Password()const;
     bool maySave()const;
 protected slots:
     virtual void slotHelp();

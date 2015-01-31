@@ -98,7 +98,7 @@ bool RtreeData::getLogs(const QString&reposRoot,const svn::Revision&startr,const
     try {
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener,dlgParent,
-                     0,"Logs",i18n("Getting logs - hit Cancel for abort"));
+                     i18n("Logs"),i18n("Getting logs - hit Cancel for abort"));
         if (svn::Url::isLocal(reposRoot) ) {
             m_Client->log(params.excludeList(ex),m_OldHistory);
         } else {

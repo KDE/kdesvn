@@ -28,10 +28,9 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 
-AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent, const char *name)
+AuthDialogImpl::AuthDialogImpl(const QString & realm,const QString&user,QWidget *parent)
     :KDialog(parent)
 {
-    setObjectName(name);
     m_AuthWidget = new AuthDialogWidget(realm,user,parent);
     setMainWidget(m_AuthWidget);
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Help);

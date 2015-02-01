@@ -39,8 +39,6 @@
 #include "ksvnjobview.h"
 
 #include <kdebug.h>
-#include <kapplication.h>
-#include <kmessagebox.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kfiledialog.h>
@@ -48,10 +46,8 @@
 #include <kaboutdata.h>
 
 #include <kpluginfactory.h>
-#include <kpluginloader.h>
 #include <knotification.h>
 
-#include <QDir>
 #include <QVariant>
 #include <QList>
 #include <QDBusConnection>

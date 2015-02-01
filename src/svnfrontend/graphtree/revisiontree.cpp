@@ -35,15 +35,10 @@
 #include <kdebug.h>
 #include <kprogressdialog.h>
 #include <klocale.h>
-#include <kapplication.h>
 #include <kcodecs.h>
 #include <kmessagebox.h>
 
 #include <qwidget.h>
-#include <qdatetime.h>
-#include <qlabel.h>
-#include <qfile.h>
-#include <qregexp.h>
 
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
@@ -151,7 +146,7 @@ RevisionTree::RevisionTree(svn::Client*aClient,
     unsigned count = 0;
     for (it=m_Data->m_OldHistory.begin();it!=m_Data->m_OldHistory.end();++it) {
         m_Data->progress->progressBar()->setValue(count);
-        kapp->processEvents();
+        QCoreApplication::processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
@@ -220,7 +215,7 @@ bool RevisionTree::topDownScan()
     QString olabel = m_Data->progress->labelText();
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         m_Data->progress->progressBar()->setValue(m_Data->max_rev-j);
-        kapp->processEvents();
+        QCoreApplication::processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
@@ -233,7 +228,7 @@ bool RevisionTree::topDownScan()
                 }
                 label = i18n("%1<br>Check change entry %2 of %3",olabel,i,m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabelText(label);
-                kapp->processEvents();
+                QCoreApplication::processEvents();
             }
             /* find min revision of item */
             if (m_Data->m_OldHistory[j].changedPaths[i].action=='A'&&
@@ -260,7 +255,7 @@ bool RevisionTree::topDownScan()
     /* find forward references and filter them out */
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         m_Data->progress->progressBar()->setValue(m_Data->max_rev-j);
-        kapp->processEvents();
+        QCoreApplication::processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
@@ -273,7 +268,7 @@ bool RevisionTree::topDownScan()
                 }
                 label = i18n("%1<br>Check change entry %2 of %3",olabel,i,m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabelText(label);
-                kapp->processEvents();
+                QCoreApplication::processEvents();
             }
             if (!m_Data->m_OldHistory[j].changedPaths[i].copyFromPath.isEmpty()) {
                 long r = m_Data->m_OldHistory[j].changedPaths[i].copyFromRevision;
@@ -306,7 +301,7 @@ bool RevisionTree::topDownScan()
     m_Data->progress->setLabelText(olabel);
     for (long j=m_Data->max_rev;j>=m_Data->min_rev;--j) {
         m_Data->progress->progressBar()->setValue(m_Data->max_rev-j);
-        kapp->processEvents();
+        QCoreApplication::processEvents();
         if (m_Data->progress->wasCancelled()) {
             cancel=true;
             break;
@@ -322,7 +317,7 @@ bool RevisionTree::topDownScan()
                 }
                 label = i18n("%1<br>Check change entry %2 of %3",olabel,i,m_Data->m_OldHistory[j].changedPaths.count());
                 m_Data->progress->setLabelText(label);
-                kapp->processEvents();
+                QCoreApplication::processEvents();
             }
             m_Data->m_History[j].addCopyTo(m_Data->m_OldHistory[j].changedPaths[i].path,QString(),-1,m_Data->m_OldHistory[j].changedPaths[i].action);
         }
@@ -371,7 +366,7 @@ bool RevisionTree::bottomUpScan(long startrev,unsigned recurse,const QString&_pa
     for (long j=startrev;j<=m_Data->max_rev;++j) {
         if (m_Data->m_stopTick.elapsed()>500) {
             m_Data->progress->progressBar()->setValue(m_Data->progress->progressBar()->value()+1);
-            kapp->processEvents();
+            QCoreApplication::processEvents();
             m_Data->m_stopTick.restart();
         }
         if (m_Data->progress->wasCancelled()) {

@@ -22,21 +22,12 @@
 #include "settings/kdesvnsettings.h"
 #include "helpers/stringhelper.h"
 
-#include <kapplication.h>
-#include <klocale.h>
-#include <kvbox.h>
-#include <kwindowsystem.h>
 #include <kdebug.h>
 #include <ktextbrowser.h>
-#include <kiconloader.h>
 
 #include <QTimer>
-#include <QPushButton>
-#include <QLayout>
 #include <QLabel>
 #include <QWidget>
-#include <QShowEvent>
-#include <QHideEvent>
 #include <QVBoxLayout>
 #include <QProgressBar>
 
@@ -116,7 +107,7 @@ StopDlg::~StopDlg()
 void StopDlg::slotAutoShow()
 {
     bool hasDialogs = false;
-    QWidget * w = kapp->activeModalWidget();
+    QWidget * w = QApplication::activeModalWidget();
     if (w && w!=this && w!=parentWidget() ) {
         hasDialogs = true;
     }
@@ -137,7 +128,7 @@ void StopDlg::slotAutoShow()
     m_BarShown=false;
     m_netBarShown=false;
     show();
-    kapp->processEvents();
+    QCoreApplication::processEvents();
     mShown = true;
     mShowTimer->setSingleShot(true);
     mShowTimer->start(m_MinDuration);
@@ -167,7 +158,7 @@ void StopDlg::slotTick()
             m_ProgressBar->setValue(m_ProgressBar->value()+1);
         }
         m_StopTick.restart();
-        kapp->processEvents();
+        QCoreApplication::processEvents();
     }
 }
 
@@ -185,7 +176,7 @@ void StopDlg::slotExtraMessage(const QString&msg)
         slotAutoShow();
     }
     m_LogWindow->append(msg);
-    kapp->processEvents();
+    QCoreApplication::processEvents();
 }
 
 void StopDlg::slotNetProgres(long long int current, long long int max)
@@ -211,7 +202,7 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
         }
         m_NetBar->setValue(current);
         m_StopTick.restart();
-        kapp->processEvents();
+        QCoreApplication::processEvents();
     }
 }
 

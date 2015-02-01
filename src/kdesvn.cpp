@@ -23,9 +23,6 @@
 #include "urldlg.h"
 #include "kdesvn_part.h"
 
-// #include <kprinter.h>
-#include <QPainter>
-#include <QCursor>
 #include <QTimer>
 
 #include <kglobal.h>
@@ -35,17 +32,14 @@
 #include <kstatusbar.h>
 #include <kbookmarkmenu.h>
 
-// #include <kaccel.h>
+#include <kapplication.h>
 #include <kio/netaccess.h>
-#include <kfiledialog.h>
 #include <kconfig.h>
 #include <kurl.h>
-// #include <kurldrag.h>
 #include <kurlrequesterdlg.h>
 #include <khelpmenu.h>
 #include <kmenubar.h>
 #include <kmenu.h>
-// #include <kactionclasses.h>
 #include <kmessagebox.h>
 #include <kstdaccel.h>
 #include <kaction.h>
@@ -58,9 +52,7 @@
 #include <kdebug.h>
 #include <klibloader.h>
 #include <kedittoolbar.h>
-// #include <kkeydialog.h>
 #include <KShortcutsDialog>
-#include <kdirselectdialog.h>
 
 #ifdef TESTING_RC
 #include <kcrash.h>

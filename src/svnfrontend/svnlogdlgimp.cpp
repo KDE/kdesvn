@@ -25,19 +25,10 @@
 #include "src/svnfrontend/models/logitemmodel.h"
 #include "src/svnfrontend/models/logmodelhelper.h"
 
-#include <ktextbrowser.h>
-#include <kpushbutton.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kapplication.h>
-#include <kconfigbase.h>
 #include <kconfig.h>
-#include <ktabwidget.h>
 #include <kmenu.h>
 #include <kdebug.h>
 
-#include <QDateTime>
-#include <QSplitter>
 #include <QKeyEvent>
 #include <QDesktopWidget>
 #include <QSortFilterProxyModel>
@@ -411,7 +402,7 @@ void SvnLogDlgImp::slotBlameItem()
     }
     QLONG rev = m_CurrentModel->toRevision(ind);
     svn::Revision start(svn::Revision::START);
-    m_Actions->makeBlame(start,rev,_base+m_CurrentModel->realName(ind),kapp->activeModalWidget(),rev,this);
+    m_Actions->makeBlame(start,rev,_base+m_CurrentModel->realName(ind),QApplication::activeModalWidget(),rev,this);
 }
 
 /* it works 'cause we use single selection only */
@@ -546,7 +537,7 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint&e)
     {
         case 101:
         {
-            m_Actions->makeBlame(start,rev,_base+name,kapp->activeModalWidget(),rev,this);
+            m_Actions->makeBlame(start,rev,_base+name,QApplication::activeModalWidget(),rev,this);
             break;
         }
         case 102:
@@ -556,7 +547,7 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint&e)
         }
         case 103:
         {
-            emit makeCat(rev,_base+source,source,rev,kapp->activeModalWidget());
+            emit makeCat(rev,_base+source,source,rev,QApplication::activeModalWidget());
         }
         default:
             break;
@@ -582,7 +573,7 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QTreeWidgetItem*_item,int)
     QString source =item->revision()>-1?item->source():item->path();
     svn::Revision start(svn::Revision::START);
     if (action != "D") {
-        m_Actions->makeBlame(start,rev,_base+name,kapp->activeModalWidget(),rev,this);
+        m_Actions->makeBlame(start,rev,_base+name,QApplication::activeModalWidget(),rev,this);
     }
 }
 

@@ -35,14 +35,11 @@
 #include "helpers/sshagent.h"
 #include "svnfrontend/database/dboverview.h"
 
-#include <kcomponentdata.h>
 #include <kaction.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
-#include <kfiledialog.h>
 #include <kdebug.h>
-#include <kbugreport.h>
 #include <kxmlguifactory.h>
 #include <kaboutapplicationdialog.h>
 #include <kapplication.h>
@@ -50,8 +47,6 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 #include <klocalizedstring.h>
-
-#include <qcursor.h>
 #include <ktoolinvocation.h>
 
 K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>();registerPlugin<commandline_part>("commandline_part");)
@@ -218,7 +213,7 @@ void kdesvnpart::setupActions()
     t->setText(i18n("Configure Kdesvn..."));
     actionCollection()->addAction("kdesvnpart_pref",t);
 
-    if (QString(kapp->applicationName())!=QString("kdesvn")) {
+    if (QCoreApplication::applicationName()!=QLatin1String("kdesvn")) {
         t = new KAction(KIcon("kdesvn"),i18n("About kdesvn part"),this);
         connect(t,SIGNAL(triggered(bool) ), SLOT(showAboutApplication()));
         actionCollection()->addAction("help_about_kdesvnpart",t);

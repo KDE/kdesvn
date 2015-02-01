@@ -22,14 +22,12 @@
 #include "src/settings/kdesvnsettings.h"
 
 #include <kwallet.h>
-#include <kwindowsystem.h>
-#include <kapplication.h>
 
-#include <qthread.h>
-#include <QMutex>
-#include <qmap.h>
-#include <qpair.h>
+#include <QApplication>
 #include <QWidget>
+#include <QMutex>
+#include <QMap>
+#include <QPair>
 
 
 class PwStorageData
@@ -79,12 +77,10 @@ KWallet::Wallet*PwStorageData::getWallet()
     }
     if (KWallet::Wallet::isEnabled()) {
         WId window = 0;
-        if (qApp) {
-            if (qApp->activeModalWidget()) {
-                window = qApp->activeModalWidget()->winId();
-            } else if (qApp->activeWindow()) {
-                window = qApp->activeWindow()->winId();
-            }
+        if (QApplication::activeModalWidget()) {
+            window = QApplication::activeModalWidget()->winId();
+        } else if (QApplication::activeWindow()) {
+            window = QApplication::activeWindow()->winId();
         }
         delete m_Wallet;
         m_Wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(),window);

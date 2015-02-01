@@ -40,7 +40,6 @@
 
 #include <kurl.h>
 #include <ktrader.h>
-#include <kapplication.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
 #include <krun.h>
@@ -230,7 +229,7 @@ void kdesvnView::slotSettingsChanged()
  */
 void kdesvnView::slotCreateRepo()
 {
-    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+    KDialog * dlg = new KDialog(QApplication::activeModalWidget());
     dlg->setModal(true);
     dlg->setCaption(i18n("Create new repository"));
     dlg->setButtons(KDialog::Ok|KDialog::Cancel);

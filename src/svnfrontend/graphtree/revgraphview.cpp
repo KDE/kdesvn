@@ -25,7 +25,6 @@
 #include "../stopdlg.h"
 #include "src/svnqt/client.h"
 
-#include <kapplication.h>
 #include <kdebug.h>
 #include <ktemporaryfile.h>
 #include <ktempdir.h>
@@ -911,7 +910,7 @@ void RevGraphView::makeCat(GraphTreeLabel*_l)
     }
     svn::Revision tr(it.value().rev);
     QString tp = _basePath+it.value().name;
-    emit makeCat(tr,tp,it.value().name,tr,kapp->activeModalWidget());
+    emit makeCat(tr,tp,it.value().name,tr,QApplication::activeModalWidget());
 }
 
 void RevGraphView::makeDiffPrev(GraphTreeLabel*_l)
@@ -941,9 +940,9 @@ void RevGraphView::makeDiff(const QString&n1,const QString&n2)
     svn::Revision tr(it.value().rev);
     QString tp = _basePath+it.value().name;
     if (Kdesvnsettings::tree_diff_rec()) {
-        emit makeRecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
+        emit makeRecDiff(sp,sr,tp,tr,QApplication::activeModalWidget());
     } else {
-        emit makeNorecDiff(sp,sr,tp,tr,kapp->activeModalWidget());
+        emit makeNorecDiff(sp,sr,tp,tr,QApplication::activeModalWidget());
     }
 }
 

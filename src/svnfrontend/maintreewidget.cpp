@@ -52,7 +52,6 @@
 #include <kactioncollection.h>
 #include <kauthorized.h>
 #include <ktrader.h>
-#include <kapplication.h>
 #include <kmenu.h>
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
@@ -60,11 +59,8 @@
 #include <knotification.h>
 #include <unistd.h>
 
-#include <QSortFilterProxyModel>
-#include <QEvent>
-#include <QToolTip>
+#include <QKeyEvent>
 #include <QTimer>
-#include <QHelpEvent>
 #include <QMap>
 #include <QCheckBox>
 
@@ -942,7 +938,7 @@ void MainTreeWidget::slotCheckModified()
 void MainTreeWidget::slotNotifyMessage(const QString&what)
 {
     emit sigLogMessage(what);
-    kapp->processEvents();
+    QCoreApplication::processEvents();
 }
 
 void MainTreeWidget::readSupportData()
@@ -2143,7 +2139,7 @@ void MainTreeWidget::refreshCurrent(SvnItem*cur)
         refreshCurrentTree();
         return;
     }
-    kapp->processEvents();
+    QCoreApplication::processEvents();
     setUpdatesEnabled(false);
     if (cur->isDir()) {
         m_Data->m_Model->refreshDirnode(static_cast<SvnItemModelNodeDir*>(cur->sItem()));

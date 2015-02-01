@@ -21,13 +21,8 @@
 #include "kdesvn_part.h"
 #include "commandline_part.h"
 #include <kcmdlineargs.h>
-// #include <kdialogbase.h>
-#include <KDialog>
-#include <ktextbrowser.h>
-#include <kapplication.h>
 #include <klocale.h>
 #include <qstring.h>
-#include <qlayout.h>
 #include <ktoolinvocation.h>
 
 class CommandLineData

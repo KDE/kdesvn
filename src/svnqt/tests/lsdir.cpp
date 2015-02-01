@@ -44,7 +44,7 @@ int main(int,char**)
 
     try {
         dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,true);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException& e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
@@ -59,7 +59,7 @@ int main(int,char**)
     }
     try {
         dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthImmediates,false);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException& e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
@@ -78,7 +78,7 @@ int main(int,char**)
     svn::StatusParameter params(p);
     try {
         slist = m_Svnclient->status(params.depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::HEAD).detailedRemote(true).ignoreExternals(false));
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException& e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
@@ -91,7 +91,7 @@ int main(int,char**)
 
     try {
         slist = m_Svnclient->status(params.path(l).depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::WORKING).detailedRemote(true).ignoreExternals(false));
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException& e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;

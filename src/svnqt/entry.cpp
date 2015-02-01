@@ -170,7 +170,6 @@ namespace svn
         _text_time=src._text_time;
         _prop_time=src._prop_time;
         _cmt_date=src._cmt_date;
-        _kind = src._kind;
         m_Lock=src.m_Lock;
         m_valid=src.m_valid;
     }

@@ -69,7 +69,9 @@ namespace svn {
 
     AnnotateLine::AnnotateLine ( const AnnotateLine &other)
           : m_line_no (other.m_line_no), m_revision (other.m_revision), m_date (other.m_date),
-            m_line (other.m_line), m_author (other.m_author)
+            m_line (other.m_line), m_author (other.m_author),
+            m_merge_revision(other.m_merge_revision), m_merge_date(other.m_merge_date),
+            m_merge_author(other.m_merge_author), m_merge_path(other.m_merge_path)
     {
     }
     AnnotateLine::AnnotateLine()

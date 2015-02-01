@@ -42,7 +42,8 @@
 
 StopDlg::StopDlg(QObject*listener,QWidget *parent, const char *name,const QString&caption,const QString&text)
  : KDialog(parent)
-    ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false),
+    ,m_Context(listener),m_MinDuration(1000),mCancelled(false),mShown(false),m_BarShown(false)
+    ,m_netBarShown(false),
     cstack(0)
 {
     setObjectName(name);

@@ -46,8 +46,8 @@ int main(int,char**)
     try {
         m_Svnclient->log(params.targets("http://www.alwins-world.de/repos/kdesvn/trunk").revisionRange(svn::Revision::HEAD,20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
         strictNodeHistory(false).limit(0),m_OldHistory);
-    } catch (svn::ClientException ce) {
+    } catch (const svn::ClientException& ce) {
         gotit = false;
     }
-  return 1;
+    return 1;
 }

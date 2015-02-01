@@ -71,7 +71,7 @@ namespace svn
   };
 
   Status_private::Status_private()
-    :m_Path(),m_isVersioned(false),m_hasReal(false)
+    :m_Path(),m_isVersioned(false),m_hasReal(false),_copied(false),_switched(false)
   {
   }
 

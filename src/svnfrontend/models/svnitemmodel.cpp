@@ -47,6 +47,8 @@
  *****************************/
 class SvnItemModelData
 {
+    SvnItemModelData(const SvnItemModelData&);
+    SvnItemModelData &operator=(const SvnItemModelData&);
 public:
     SvnItemModelData(SvnItemModel*aCb,MainTreeWidget*display)
         :m_rootNode(0),m_SvnActions(NULL),m_Cb(aCb),m_Display(display),m_DirWatch(NULL)
@@ -830,7 +832,6 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool
 
     svn::StatusEntries::iterator it = dlist.begin();
 
-    int index;
     for (it=dlist.begin();it!=dlist.end();++it) {
         if ((*it)->path()==what) {
             dlist.erase(it);
@@ -857,7 +858,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir*node,bool check_empty,bool
     }
 
     for (it=dlist.begin();it!=dlist.end();) {
-        index = node->indexOf((*it)->path());
+        int index = node->indexOf((*it)->path());
         if (index!=-1) {
             node->m_Children[index]->setStat((*it));
             if (node->m_Children[index]->NodeIsDir()!=node->m_Children[index]->isDir()) {

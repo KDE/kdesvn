@@ -58,7 +58,7 @@ int main(int,char**)
     svn::repository::Repository rp(&ls);
     try {
         rp.CreateOpen(svn::repository::CreateRepoParameter().path(p).fstype("fsfs"));
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException& e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
@@ -80,7 +80,7 @@ int main(int,char**)
     try {
         m_Svnclient->mkdir(svn::Targets(s),"Test mkdir");
         m_Svnclient->checkout(cparams);
-    } catch (svn::ClientException e) {
+    } catch (const svn::ClientException& e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;

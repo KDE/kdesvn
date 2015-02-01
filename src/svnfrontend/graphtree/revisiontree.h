@@ -68,6 +68,10 @@ protected:
     static bool isParent(const QString&_par,const QString&tar);
 
     void fillItem(long revIndex,int pathIndex,const QString&nodeName,const QString&path);
+private:
+    RevisionTree(const RevisionTree&);
+    RevisionTree &operator=(const RevisionTree&);
+
 };
 
 #endif

@@ -450,7 +450,7 @@ bool SvnActions::singleInfo(const QString&what,const svn::Revision&_rev,svn::Inf
                 emit clientException(ce.msg());
                 return false;
             }
-            if (e.count()<1||e[0].reposRoot().isEmpty()) {
+            if (e.isEmpty()||e[0].reposRoot().isEmpty()) {
                 emit clientException(i18n("Got no info."));
                 return false;
             }
@@ -487,8 +487,6 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
         stopFillCache();
     }
 
-    QWidget*disp;
-
     KDialog dlg(m_Data->m_ParentList->realWidget());
     dlg.setObjectName("historylist");
     dlg.setCaption(i18n("History of %1",info.url().mid(reposRoot.length())));
@@ -502,7 +500,7 @@ void SvnActions::makeTree(const QString&what,const svn::Revision&_rev,const svn:
             startr,endr,
             info.prettyUrl().mid(reposRoot.length()),_rev,Dialog1Layout,m_Data->m_ParentList->realWidget());
     if (rt.isValid()) {
-        disp = rt.getView();
+        QWidget *disp = rt.getView();
         if (disp) {
             connect(
                 disp,SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
@@ -597,7 +595,7 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     mptr = KMimeType::findByFileContent(tname);
     KService::List offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"),
         "Type == 'Application' or (exist Exec)");
-    if (offers.count()==0 || offers.first()->exec().isEmpty()) {
+    if (offers.isEmpty() || offers.first()->exec().isEmpty()) {
         offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"), "Type == 'Application'");
     }
     KService::List::ConstIterator it = offers.constBegin();
@@ -637,7 +635,7 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
 
 bool SvnActions::makeMkdir(const QStringList&which,const QString&logMessage)
 {
-    if (!m_Data->m_CurrentContext||which.count()<1) return false;
+    if (!m_Data->m_CurrentContext||which.isEmpty()) return false;
     svn::Targets targets(which);
     try {
         m_Data->m_Svnclient->mkdir(targets,logMessage);
@@ -691,8 +689,13 @@ QString SvnActions::getInfo(const QString& _what,const svn::Revision&rev,const s
                          i18n("Retrieving information - hit Cancel for abort"));
             connect(this,SIGNAL(sigExtraLogMsg(const QString&)),&sdlg,SLOT(slotExtraMessage(const QString&)));
             svn::InfoEntries e;
-            entries = (m_Data->m_Svnclient->info(_what+
-                    (_what.indexOf("@")>-1&&!svn::Url::isValid(_what)?"@BASE":""),recursive?svn::DepthInfinity:svn::DepthEmpty,rev,peg));
+            QString path = _what;
+            if(_what.indexOf(QLatin1Char('@')) > -1 && !svn::Url::isValid(_what))
+                path += QLatin1String("@BASE");
+            entries = (m_Data->m_Svnclient->info(path,
+                                                 recursive?svn::DepthInfinity:svn::DepthEmpty,
+                                                 rev,
+                                                 peg));
         } catch (const svn::Exception&e) {
             emit clientException(e.msg());
             return QString();
@@ -937,7 +940,7 @@ void SvnActions::doCommit(const SvnItemList&which)
     SvnItemList::const_iterator liter = which.begin();
 
     svn::Pathes targets;
-    if (which.count()==0) {
+    if (which.isEmpty()) {
         targets.push_back(svn::Path("."));
     } else {
         for (;liter!=which.end();++liter) {
@@ -1016,7 +1019,7 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
             }
         }
         msg = Commitmsg_impl::getLogmessage(_check,_uncheck,this,_result,&ok,&keeplocks,m_Data->m_ParentList->realWidget());
-        if (!ok||_result.count()==0) {
+        if (!ok||_result.isEmpty()) {
             return false;
         }
         svn::Pathes _add,_commit,_delete;
@@ -1029,12 +1032,12 @@ bool SvnActions::makeCommit(const svn::Targets&targets)
                 _delete.append(_result[i].name());
             }
         }
-        if (_add.count()>0) {
+        if (!_add.isEmpty()) {
             if (!addItems(_add,svn::DepthEmpty)) {
                 return false;
             }
         }
-        if (_delete.count()>0) {
+        if (!_delete.isEmpty()) {
             makeDelete(_delete);
         }
         commit_parameters.targets(svn::Targets(_commit));
@@ -1456,7 +1459,7 @@ void SvnActions::prepareUpdate(bool ask)
     m_Data->m_ParentList->SelectionList(k);
 
     QStringList what;
-    if (k.count()==0) {
+    if (k.isEmpty()) {
         what.append(m_Data->m_ParentList->baseUri());
     } else {
         SvnItemListConstIterator liter=k.constBegin();
@@ -1514,15 +1517,14 @@ void SvnActions::makeAdd(bool rec)
     if (!m_Data->m_ParentList) return;
     SvnItemList lst;
     m_Data->m_ParentList->SelectionList(lst);
-    if (lst.count()==0) {
+    if (lst.isEmpty()) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("Which files or directories should I add?"));
         return;
     }
     svn::Pathes items;
-    SvnItemListIterator liter = lst.begin();
-    SvnItem*cur;
-    for (;liter!=lst.end();++liter){
-        cur=(*liter);
+    SvnItemListConstIterator liter = lst.constBegin();
+    for (;liter!=lst.constEnd();++liter){
+        const SvnItem *cur=(*liter);
         if (cur->isVersioned()) {
             KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is versioned - break.</center>",
                                                                         cur->fullName()));
@@ -1720,11 +1722,10 @@ void SvnActions::slotRevert()
     SvnItemList lst;
     m_Data->m_ParentList->SelectionList(lst);
     QStringList displist;
-    SvnItemListIterator liter = lst.begin();
-    SvnItem*cur;
-    if (lst.count()>0) {
-        for(;liter!=lst.end();++liter){
-            cur=(*liter);
+    if (!lst.isEmpty()) {
+        SvnItemListConstIterator liter = lst.constBegin();
+        for(;liter!=lst.constEnd();++liter){
+            const SvnItem *cur=(*liter);
             if (!cur->isVersioned()) {
                 KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("<center>The entry<br>%1<br>is not versioned - break.</center>",cur->fullName()));
                 return;
@@ -1741,7 +1742,7 @@ void SvnActions::slotRevert()
 void SvnActions::slotRevertItems(const QStringList&displist, bool rec_default)
 {
     if (!m_Data->m_CurrentContext) return;
-    if (displist.count()==0) {
+    if (displist.isEmpty()) {
         return;
     }
 
@@ -2388,7 +2389,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
                 }
                 ++it;
             }
-            if (displist.count()>0) {
+            if (!displist.isEmpty()) {
                 addItems(displist,svn::DepthEmpty);
             }
         }

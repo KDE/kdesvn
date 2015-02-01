@@ -615,7 +615,7 @@ void SvnActions::slotMakeCat(const svn::Revision&start, const QString&what, cons
     QByteArray co = file.readAll();
 
     if (co.size()) {
-        KDialog*dlg = createOkDialog(&ptr,QString(i18n("Content of %1",disp)),false,"cat_display_dlg");
+        KDialog*dlg = createOkDialog(&ptr,i18n("Content of %1",disp),false,QLatin1String("cat_display_dlg"));
         if (dlg) {
             ptr->setFont(KGlobalSettings::fixedFont());
             ptr->setWordWrapMode(QTextOption::NoWrap);
@@ -853,11 +853,11 @@ void SvnActions::makeInfo(const SvnItemList& lst,const svn::Revision&rev,const s
     }
     res+="</body></html>";
     KTextBrowser*ptr = 0;
-    KDialog*dlg = createOkDialog(&ptr,i18n("Infolist"),false,"info_dialog");
+    KDialog*dlg = createOkDialog(&ptr,i18n("Infolist"),false,QLatin1String("info_dialog"));
     if (dlg) {
         ptr->setText(res);
         dlg->exec();
-        KConfigGroup _kc(Kdesvnsettings::self()->config(),"info_dialog");
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),QLatin1String("info_dialog"));
     dlg->saveDialogSize(_kc);
         delete dlg;
     }
@@ -875,11 +875,11 @@ void SvnActions::makeInfo(const QStringList&lst,const svn::Revision&rev,const sv
     }
     text = "<html><head></head><body>"+text+"</body></html>";
     KTextBrowser*ptr = 0;
-    KDialog*dlg = createOkDialog(&ptr,i18n("Infolist"),false,"info_dialog");
+    KDialog*dlg = createOkDialog(&ptr,i18n("Infolist"),false,QLatin1String("info_dialog"));
     if (dlg) {
         ptr->setText(text);
         dlg->exec();
-        KConfigGroup _kc(Kdesvnsettings::self()->config(),"info_dialog");
+        KConfigGroup _kc(Kdesvnsettings::self()->config(),QLatin1String("info_dialog"));
         dlg->saveDialogSize(_kc);
         delete dlg;
     }
@@ -1381,7 +1381,7 @@ void SvnActions::dispDiff(const QByteArray&ex)
             delete m_Data->m_DiffBrowserPtr;
         }
         KDialog*dlg = createOkDialog(&ptr,i18n("Diff display"),false,
-                                     "diff_display",false,need_modal,
+                                     QLatin1String("diff_display"),false,need_modal,
                                      KStandardGuiItem::saveAs());
         if (dlg) {
             QWidget*wd = dlg->mainWidget();
@@ -1472,7 +1472,7 @@ void SvnActions::prepareUpdate(bool ask)
     svn::Revision r(svn::Revision::HEAD);
     if (ask) {
         Rangeinput_impl*rdlg = 0;
-        KDialog*dlg = createOkDialog(&rdlg,QString(i18n("Revisions")),true);
+        KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true);
         if (!dlg) {
             return;
         }
@@ -1614,7 +1614,8 @@ void SvnActions::slotExportCurrent()
 void SvnActions::CheckoutExport(bool _exp)
 {
     CheckoutInfo_impl*ptr=0;
-    KDialog * dlg = createOkDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),true,"checkout_export_dialog");
+    KDialog * dlg = createOkDialog(&ptr,(_exp?i18n("Export repository"):i18n("Checkout a repository")),
+                                   true,QLatin1String("checkout_export_dialog"));
     if (dlg) {
         if (dlg->exec()==QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
@@ -1864,7 +1865,7 @@ void SvnActions::slotSwitch()
 bool SvnActions::makeSwitch(const QString&path,const QString&what)
 {
     CheckoutInfo_impl*ptr;
-    KDialog * dlg = createOkDialog(&ptr,i18n("Switch URL"),true,"switch_url_dlg");
+    KDialog * dlg = createOkDialog(&ptr,i18n("Switch URL"),true,QLatin1String("switch_url_dlg"));
     bool done = false;
     if (dlg) {
         ptr->setStartUrl(what);
@@ -2385,7 +2386,7 @@ void SvnActions::checkAddItems(const QString&path,bool print_error_box)
         if (print_error_box) KMessageBox::error(m_Data->m_ParentList->realWidget(),i18n("No unversioned items found."));
     } else {
         QTreeWidget*ptr = 0;
-        KDialog * dlg = createOkDialog(&ptr,i18n("Add unversioned items"),true,"add_items_dlg");
+        KDialog * dlg = createOkDialog(&ptr,i18n("Add unversioned items"),true,QLatin1String("add_items_dlg"));
         ptr->headerItem()->setText(0,"Item");
         for (long j = 0; j<displist.size();++j) {
             QTreeWidgetItem * n = new QTreeWidgetItem(ptr);

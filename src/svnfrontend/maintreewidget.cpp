@@ -1205,7 +1205,7 @@ void MainTreeWidget::slotSelectBrowsingRevision()
 {
     if (isWorkingCopy()) return;
     Rangeinput_impl*rdlg = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,QString(i18n("Revisions")),true,"revisions_dlg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,QLatin1String("revisions_dlg"));
     if (!dlg) {
         return;
     }
@@ -1250,7 +1250,7 @@ void MainTreeWidget::slotMakePartTree()
         return;
     }
     Rangeinput_impl*rdlg = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,QLatin1String("revisions_dlg"));
     if (!dlg) {
         return;
     }
@@ -1277,7 +1277,7 @@ void MainTreeWidget::slotLock()
         return;
     }
     Commitmsg_impl*ptr = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,i18n("Lock message"),true,"locking_log_msg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr,i18n("Lock message"),true,QLatin1String("locking_log_msg"));
     if (!dlg) return;
     ptr->initHistory();
     ptr->hideDepth(true);
@@ -1420,7 +1420,7 @@ void MainTreeWidget::slotDiffRevisions()
         what = relativePath(k);
     }
     Rangeinput_impl*rdlg = 0;
-    KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
+    KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true,QLatin1String("revisions_dlg"));
     if (!dlg) {
         return;
     }
@@ -1507,7 +1507,7 @@ void MainTreeWidget::slotRangeBlame()
     SvnItem*k = Selected();
     if (!k) return;
     Rangeinput_impl*rdlg = 0;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
+    svn::SharedPointer<KDialog> dlg = createOkDialog(&rdlg,i18n("Revisions"),true,QLatin1String("revisions_dlg"));
     if (!dlg) {
         return;
     }
@@ -1574,7 +1574,7 @@ void MainTreeWidget::slotRevisionCat()
     SvnItem*k = Selected();
     if (!k) return;
     Rangeinput_impl*rdlg = 0;
-    KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true,"revisions_dlg");
+    KDialog*dlg = createOkDialog(&rdlg,i18n("Revisions"),true,QLatin1String("revisions_dlg"));
     if (!dlg) {
         return;
     }
@@ -1643,7 +1643,7 @@ void MainTreeWidget::makeDelete(const SvnItemList&lst)
     }
 
     DeleteForm_impl*ptr = 0;
-    KDialog*dlg = createYesDialog(&ptr,i18n("Really delete these entries?"),true,"delete_items_dialog",true);
+    KDialog*dlg = createYesDialog(&ptr,i18n("Really delete these entries?"),true,QLatin1String("delete_items_dialog"),true);
     if (!dlg) {
         return;
     }
@@ -1925,7 +1925,7 @@ void MainTreeWidget::slotMerge()
     }
     src2 = m_Data->merge_Src2;
     MergeDlg_impl*ptr = 0;
-    KDialog*dlg = createOkDialog(&ptr,i18n("Merge"),true,"merge_dialog",true);
+    KDialog*dlg = createOkDialog(&ptr,i18n("Merge"),true,QLatin1String("merge_dialog"),true);
     if (!dlg) {
         return;
     }
@@ -1986,7 +1986,7 @@ void MainTreeWidget::slotRelocate()
     path = k->fullName();
     fromUrl = k->Url();
     CheckoutInfo_impl*ptr = 0;
-    KDialog * dlg = createOkDialog(&ptr,i18n("Relocate path %1",path),true,"relocate_dlg");
+    KDialog * dlg = createOkDialog(&ptr,i18n("Relocate path %1",path),true,QLatin1String("relocate_dlg"));
     if (dlg) {
         ptr->setStartUrl(fromUrl);
         ptr->disableAppend(true);
@@ -2054,11 +2054,11 @@ void MainTreeWidget::slotImportIntoDir(const KUrl&importUrl,const QString&target
     }
 
     if (dirs) {
-        dlg = createOkDialog(&ptr2,i18n("Import log"),true,"import_log_msg");
+        dlg = createOkDialog(&ptr2,i18n("Import log"),true,QLatin1String("import_log_msg"));
         ptr = ptr2;
         ptr2->createDirboxDir(QLatin1Char('"')+uri.fileName()+QLatin1Char('"'));
     } else {
-        dlg = createOkDialog(&ptr,i18n("Import log"),true,"import_log_msg");
+        dlg = createOkDialog(&ptr,i18n("Import log"),true,QLatin1String("import_log_msg"));
     }
 
     if (!dlg) return;
@@ -2321,7 +2321,7 @@ void MainTreeWidget::slotDirRecProperty()
     SvnItem*k = DirSelected();
     if (!k) return;
     SetPropertyWidget*ptr = 0;
-    KDialog*dlg = createOkDialog(&ptr,QString(i18n("Set/add property recursive")),true,"property_dlg");
+    KDialog*dlg = createOkDialog(&ptr,i18n("Set/add property recursive"),true,QLatin1String("property_dlg"));
     if (!dlg) return;
 
     KConfigGroup _k(Kdesvnsettings::self()->config(),"property_dlg");

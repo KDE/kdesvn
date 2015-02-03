@@ -257,8 +257,23 @@
    <class>DepthSelector</class>
    <extends>QWidget</extends>
    <header>src/ksvnwidgets/depthselector.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_CommitItemTree</tabstop>
+  <tabstop>m_LogEdit</tabstop>
+  <tabstop>m_SelectAllButton</tabstop>
+  <tabstop>m_UnselectAllButton</tabstop>
+  <tabstop>m_HideNewItems</tabstop>
+  <tabstop>m_MarkUnversioned</tabstop>
+  <tabstop>m_UnmarkUnversioned</tabstop>
+  <tabstop>m_RevertItemButton</tabstop>
+  <tabstop>m_DiffItem</tabstop>
+  <tabstop>m_LogHistory</tabstop>
+  <tabstop>m_insert_file_button</tabstop>
+  <tabstop>m_keepLocksButton</tabstop>
+ </tabstops>
  <includes>
   <include location="local">ktextedit.h</include>
   <include location="local">kcombobox.h</include>

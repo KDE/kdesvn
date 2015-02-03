@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>SslTrustPrompt</class>
- <widget class="QWidget" name="SslTrustPrompt" >
-  <property name="geometry" >
+ <widget class="QWidget" name="SslTrustPrompt">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,23 +10,23 @@
     <height>185</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout">
    <item>
-    <widget class="QLabel" name="m_MainLabel" >
-     <property name="text" >
+    <widget class="QLabel" name="m_MainLabel">
+     <property name="text">
       <string/>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>false</bool>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="KTextBrowser" name="m_ContentText" />
+    <widget class="KTextBrowser" name="m_ContentText"/>
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="2" margin="2" />
+ <layoutdefault spacing="2" margin="2"/>
  <customwidgets>
   <customwidget>
    <class>KTextBrowser</class>
@@ -34,7 +35,7 @@
   </customwidget>
  </customwidgets>
  <includes>
-  <include location="local" >ktextbrowser.h</include>
+  <include location="local">ktextbrowser.h</include>
  </includes>
  <resources/>
  <connections/>

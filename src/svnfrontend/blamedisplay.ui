@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>BlameDisplay</class>
- <widget class="QWidget" name="BlameDisplay" >
-  <property name="geometry" >
+ <widget class="QWidget" name="BlameDisplay">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,10 +10,10 @@
     <height>261</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="EncodingSelector_impl" native="1" name="m_encodingSel" >
-     <property name="minimumSize" >
+    <widget class="EncodingSelector_impl" name="m_encodingSel" native="true">
+     <property name="minimumSize">
       <size>
        <width>0</width>
        <height>20</height>
@@ -21,41 +22,41 @@
     </widget>
    </item>
    <item>
-    <widget class="KTreeWidgetSearchLineWidget" name="m_TreeSearch" />
+    <widget class="KTreeWidgetSearchLineWidget" name="m_TreeSearch"/>
    </item>
    <item>
-    <widget class="QTreeWidget" name="m_BlameTree" >
-     <property name="contextMenuPolicy" >
+    <widget class="QTreeWidget" name="m_BlameTree">
+     <property name="contextMenuPolicy">
       <enum>Qt::ActionsContextMenu</enum>
      </property>
-     <property name="rootIsDecorated" >
+     <property name="rootIsDecorated">
       <bool>false</bool>
      </property>
-     <property name="allColumnsShowFocus" >
+     <property name="allColumnsShowFocus">
       <bool>true</bool>
      </property>
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Line</string>
       </property>
      </column>
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Revision</string>
       </property>
      </column>
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Date</string>
       </property>
      </column>
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Author</string>
       </property>
      </column>
      <column>
-      <property name="text" >
+      <property name="text">
        <string>Content</string>
       </property>
      </column>
@@ -63,7 +64,7 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
    <class>KTreeWidgetSearchLineWidget</class>
@@ -80,8 +81,6 @@
    </slots>
   </customwidget>
  </customwidgets>
- <includes>
- </includes>
  <resources/>
  <connections>
   <connection>
@@ -90,11 +89,11 @@
    <receiver>BlameDisplay</receiver>
    <slot>slotItemDoubleClicked(QTreeWidgetItem*,int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>187</x>
      <y>199</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>187</x>
      <y>130</y>
     </hint>
@@ -106,11 +105,11 @@
    <receiver>BlameDisplay</receiver>
    <slot>slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>187</x>
      <y>199</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>187</x>
      <y>130</y>
     </hint>

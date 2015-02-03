@@ -232,6 +232,19 @@ When %1 and %2 is given, kdesvn let this display make the diff. For that it it m
    <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>kcfg_diff_ignore_content</tabstop>
+  <tabstop>kcfg_tree_diff_rec</tabstop>
+  <tabstop>kcfg_diff_ignore_spaces</tabstop>
+  <tabstop>kcfg_diff_ignore_all_white_spaces</tabstop>
+  <tabstop>kcfg_use_external_diff</tabstop>
+  <tabstop>kcfg_extern_merge_default</tabstop>
+  <tabstop>kcfg_diff_gitformat_default</tabstop>
+  <tabstop>kcfg_diff_copies_as_add</tabstop>
+  <tabstop>kcfg_external_diff_display</tabstop>
+  <tabstop>kcfg_external_merge_program</tabstop>
+  <tabstop>kcfg_conflict_resolver</tabstop>
+ </tabstops>
  <includes>
   <include location="local">klineedit.h</include>
   <include location="local">klineedit.h</include>

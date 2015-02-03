@@ -113,18 +113,20 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KHistoryComboBox</class>
-   <extends>KComboBox</extends>
-   <header>khistorycombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>KHistoryComboBox</class>
+   <extends>KComboBox</extends>
+   <header>khistorycombobox.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>m_NameEdit</tabstop>
   <tabstop>m_ValueEdit</tabstop>
+  <tabstop>helpButton</tabstop>
  </tabstops>
  <includes>
   <include location="local">kcombobox.h</include>

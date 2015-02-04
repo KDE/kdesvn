@@ -23,25 +23,31 @@
 #include <qevent.h>
 #include "src/svnqt/svnqt_defines.h"
 
-class FillCacheStatusEvent:public QEvent
+class FillCacheStatusEvent: public QEvent
 {
-    public:
-        FillCacheStatusEvent(qlonglong current,qlonglong max);
-        qlonglong current()const{return m_current;}
-        qlonglong max()const{return m_max;}
-    private:
-        qlonglong m_current,m_max;
+public:
+    FillCacheStatusEvent(qlonglong current, qlonglong max);
+    qlonglong current()const
+    {
+        return m_current;
+    }
+    qlonglong max()const
+    {
+        return m_max;
+    }
+private:
+    qlonglong m_current, m_max;
 };
 
-class DataEvent:public QEvent
+class DataEvent: public QEvent
 {
-    public:
-        DataEvent(QEvent::Type);
+public:
+    DataEvent(QEvent::Type);
 
-        void setData(void*data);
-        void*data()const;
-    private:
-        void*_data;
+    void setData(void *data);
+    void *data()const;
+private:
+    void *_data;
 };
 
 #endif

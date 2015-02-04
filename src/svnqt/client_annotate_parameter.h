@@ -41,34 +41,33 @@
 
 namespace svn
 {
-    class DiffOptions;
-    struct AnnotateParameterData;
-    class SVNQT_EXPORT AnnotateParameter
-    {
-    private:
-        SharedPointer<AnnotateParameterData> _data;
+class DiffOptions;
+struct AnnotateParameterData;
+class SVNQT_EXPORT AnnotateParameter
+{
+private:
+    SharedPointer<AnnotateParameterData> _data;
 
-    public:
-        AnnotateParameter();
-        ~AnnotateParameter();
+public:
+    AnnotateParameter();
+    ~AnnotateParameter();
 
-        //!file to annotate.
-        AnnotateParameter&path(const Path&path);
-        //!file to annotate.
-        const Path&path()const;
+    //!file to annotate.
+    AnnotateParameter &path(const Path &path);
+    //!file to annotate.
+    const Path &path()const;
 
-        AnnotateParameter&revisionRange(const RevisionRange&range);
-        const RevisionRange&revisionRange()const;
-        AnnotateParameter&pegRevision(const Revision&peg);
-        const Revision&pegRevision()const;
-        AnnotateParameter&diffOptions(const DiffOptions&options);
-        const DiffOptions&diffOptions()const;
-        AnnotateParameter&ignoreMimeTypes(bool ignore);
-        bool ignoreMimeTypes()const;
-        AnnotateParameter&includeMerged(bool inc);
-        bool includeMerged()const;
-    };
+    AnnotateParameter &revisionRange(const RevisionRange &range);
+    const RevisionRange &revisionRange()const;
+    AnnotateParameter &pegRevision(const Revision &peg);
+    const Revision &pegRevision()const;
+    AnnotateParameter &diffOptions(const DiffOptions &options);
+    const DiffOptions &diffOptions()const;
+    AnnotateParameter &ignoreMimeTypes(bool ignore);
+    bool ignoreMimeTypes()const;
+    AnnotateParameter &includeMerged(bool inc);
+    bool includeMerged()const;
+};
 }
-
 
 #endif

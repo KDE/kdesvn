@@ -26,27 +26,29 @@
 
 #include "svnstream.h"
 
-namespace svn {
+namespace svn
+{
 
-namespace stream {
+namespace stream
+{
 
 class SvnFileStream_private;
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
     @short Writeonly filestream
 */
 class SVNQT_EXPORT SvnFileOStream : public SvnStream
 {
 public:
-    explicit SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx=0);
+    explicit SvnFileOStream(const QString &fn, svn_client_ctx_t *ctx = 0);
 
     virtual ~SvnFileOStream();
 
     virtual bool isOk() const;
-    virtual long write(const char* data, const unsigned long max);
+    virtual long write(const char *data, const unsigned long max);
 private:
-    SvnFileStream_private*m_FileData;
+    SvnFileStream_private *m_FileData;
 };
 
 /**
@@ -56,14 +58,14 @@ private:
 class SVNQT_EXPORT SvnFileIStream : public SvnStream
 {
 public:
-    explicit SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx=0);
+    explicit SvnFileIStream(const QString &fn, svn_client_ctx_t *ctx = 0);
 
     virtual ~SvnFileIStream();
     virtual bool isOk() const;
-    virtual long read(char* data, const unsigned long max);
+    virtual long read(char *data, const unsigned long max);
 
 private:
-    SvnFileStream_private*m_FileData;
+    SvnFileStream_private *m_FileData;
 };
 
 }

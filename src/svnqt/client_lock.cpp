@@ -35,33 +35,35 @@
 namespace svn
 {
 
-  void
-  Client_impl::lock (const Targets & targets,
-    const QString& message,
-    bool steal_lock)  throw (ClientException)
-  {
+void
+Client_impl::lock(const Targets &targets,
+                  const QString &message,
+                  bool steal_lock)  throw (ClientException)
+{
     Pool pool;
-    svn_error_t * error =
-      svn_client_lock(const_cast<apr_array_header_t*> (targets.array (pool)),
-                      message.TOUTF8(),
-                      steal_lock,
-                      *m_context,
-                      pool);
-    if(error != NULL)
-       throw ClientException (error);
-  }
-
-  void
-  Client_impl::unlock (const Targets&targets,
-            bool break_lock)  throw (ClientException)
-  {
-    Pool pool;
-    svn_error_t * error =
-      svn_client_unlock(const_cast<apr_array_header_t*> (targets.array (pool)),
-                        break_lock,
+    svn_error_t *error =
+        svn_client_lock(const_cast<apr_array_header_t *>(targets.array(pool)),
+                        message.TOUTF8(),
+                        steal_lock,
                         *m_context,
                         pool);
-    if(error != NULL)
-       throw ClientException (error);
-  }
+    if (error != NULL) {
+        throw ClientException(error);
+    }
+}
+
+void
+Client_impl::unlock(const Targets &targets,
+                    bool break_lock)  throw (ClientException)
+{
+    Pool pool;
+    svn_error_t *error =
+        svn_client_unlock(const_cast<apr_array_header_t *>(targets.array(pool)),
+                          break_lock,
+                          *m_context,
+                          pool);
+    if (error != NULL) {
+        throw ClientException(error);
+    }
+}
 }

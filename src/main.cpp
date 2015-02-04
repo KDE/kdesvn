@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #include "kdesvn.h"
 #include "commandline.h"
 #include "kdesvn-config.h"
@@ -33,55 +32,46 @@ static const char description[] =
 
 static const char version[] = KDESVN_VERSION;
 
-
 int main(int argc, char **argv)
 {
-    KAboutData about(QByteArray("kdesvn"),QByteArray("kdesvn"),ki18n("kdesvn"),QByteArray(version),ki18n(description),
-                     KAboutData::License_GPL,ki18n("(C) 2005-2009 Rajko Albrecht"));
-    about.addAuthor( ki18n("Rajko Albrecht"),ki18n("Developer"),QByteArray("ral@alwins-world.de"),QByteArray());
+    KAboutData about(QByteArray("kdesvn"), QByteArray("kdesvn"), ki18n("kdesvn"), QByteArray(version), ki18n(description),
+                     KAboutData::License_GPL, ki18n("(C) 2005-2009 Rajko Albrecht"));
+    about.addAuthor(ki18n("Rajko Albrecht"), ki18n("Developer"), QByteArray("ral@alwins-world.de"), QByteArray());
     about.setHomepage("https://projects.kde.org/projects/playground/devtools/kdesvn");
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineOptions options;
-    options.add("r startrev[:endrev]",ki18n("Execute single Subversion command on specific revision(-range)"));
-    options.add("R",ki18n("Ask for revision when executing single command"));
-    options.add("f",ki18n("Force operation"));
-    options.add("o <file>",ki18n("Save output of Subversion command (eg \"cat\") into file <file>"));
-    options.add("l <number>",ki18n("Limit log output to <number>"));
-    options.add("+exec <command>",ki18n("Execute Subversion command (\"exec help\" for more information)"));
-    options.add("+[URL]", ki18n( "Document to open" ));
+    options.add("r startrev[:endrev]", ki18n("Execute single Subversion command on specific revision(-range)"));
+    options.add("R", ki18n("Ask for revision when executing single command"));
+    options.add("f", ki18n("Force operation"));
+    options.add("o <file>", ki18n("Save output of Subversion command (eg \"cat\") into file <file>"));
+    options.add("l <number>", ki18n("Limit log output to <number>"));
+    options.add("+exec <command>", ki18n("Execute Subversion command (\"exec help\" for more information)"));
+    options.add("+[URL]", ki18n("Document to open"));
     KCmdLineArgs::addCmdLineOptions(options);
-
 
     KApplication app;
 
     // see if we are starting with session management
-    if (app.isSessionRestored())
-    {
+    if (app.isSessionRestored()) {
         RESTORE(kdesvn);
-    }
-    else
-    {
+    } else {
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        if (args->count() == 0)
-        {
+        if (args->count() == 0) {
             kdesvn *widget = new kdesvn;
             widget->show();
             widget->checkReload();
-        }
-        else
-        {
-            if (QString(args->arg(0))==QString("exec")) {
+        } else {
+            if (QString(args->arg(0)) == QString("exec")) {
                 CommandLine cl(args);
                 return cl.exec();
             } else {
                 int i = 0;
-                for (; i < args->count(); i++)
-                {
+                for (; i < args->count(); i++) {
                     kdesvn *widget = new kdesvn;
                     widget->show();
-                    widget->load(args->url(i),true);
+                    widget->load(args->url(i), true);
                 }
             }
         }

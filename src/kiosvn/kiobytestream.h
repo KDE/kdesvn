@@ -30,30 +30,33 @@
 class StreamWrittenCb
 {
 public:
-    StreamWrittenCb(){}
-    virtual ~StreamWrittenCb(){}
+    StreamWrittenCb() {}
+    virtual ~StreamWrittenCb() {}
     virtual void streamWritten(const KIO::filesize_t current) = 0;
-    virtual void streamPushData(QByteArray)=0;
-    virtual void streamSendMime(KMimeType::Ptr)=0;
+    virtual void streamPushData(QByteArray) = 0;
+    virtual void streamSendMime(KMimeType::Ptr) = 0;
 };
 
 /**
-	@author Rajko Albrecht
+    @author Rajko Albrecht
 */
 class KioByteStream : public svn::stream::SvnStream
 {
 public:
-    KioByteStream(StreamWrittenCb*,const QString&filename);
+    KioByteStream(StreamWrittenCb *, const QString &filename);
 
     ~KioByteStream();
 
     virtual bool isOk() const;
-    virtual long write(const char* data, const unsigned long max);
+    virtual long write(const char *data, const unsigned long max);
 
-    KIO::filesize_t written(){return m_Written;}
+    KIO::filesize_t written()
+    {
+        return m_Written;
+    }
 
 protected:
-    StreamWrittenCb*m_Cb;
+    StreamWrittenCb *m_Cb;
     KIO::filesize_t m_Written;
     bool m_mimeSend;
     QString m_Filename;

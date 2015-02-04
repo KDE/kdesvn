@@ -23,17 +23,19 @@
 #include "ui_revisionbutton.h"
 #include "svnqt/revision.h"
 
-class RevisionButtonImpl: public QWidget, public Ui::RevisionButton {
+class RevisionButtonImpl: public QWidget, public Ui::RevisionButton
+{
     Q_OBJECT
 
 public:
     RevisionButtonImpl(QWidget *parent = 0);
     virtual ~RevisionButtonImpl();
 
-    virtual void setRevision(const svn::Revision&aRev);
+    virtual void setRevision(const svn::Revision &aRev);
 
     virtual void setNoWorking(bool);
-    const svn::Revision& revision()const {
+    const svn::Revision &revision()const
+    {
         return m_Rev;
     }
 

@@ -41,8 +41,8 @@
 /*!
     \fn DiffBrowser::DiffBrowser(QWidget*parent=0)
  */
-DiffBrowser::DiffBrowser(QWidget*parent)
-    : KTextBrowser( parent )
+DiffBrowser::DiffBrowser(QWidget *parent)
+    : KTextBrowser(parent)
 {
 //     setTextFormat(Qt::PlainText);
     setLineWrapMode(QTextEdit::NoWrap);
@@ -59,30 +59,30 @@ DiffBrowser::DiffBrowser(QWidget*parent)
 /*!
     \fn DiffBrowser::~DiffBrowser()
  */
- DiffBrowser::~DiffBrowser()
+DiffBrowser::~DiffBrowser()
 {
     delete m_Data;
 }
 
-void DiffBrowser::setText(const QString&aText)
+void DiffBrowser::setText(const QString &aText)
 {
-    m_Data->m_content.fromRawData(aText.toLocal8Bit(),aText.toLocal8Bit().size());
+    m_Data->m_content.fromRawData(aText.toLocal8Bit(), aText.toLocal8Bit().size());
     KTextBrowser::setText(aText);
     moveCursor(QTextCursor::Start);
 }
 
-void DiffBrowser::setText(const QByteArray&aText)
+void DiffBrowser::setText(const QByteArray &aText)
 {
-    m_Data->m_content=aText;
+    m_Data->m_content = aText;
     printContent();
     moveCursor(QTextCursor::Start);
 }
 
 void DiffBrowser::printContent()
 {
-    QTextCodec * cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_diff().toLocal8Bit());
+    QTextCodec *cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_diff().toLocal8Bit());
     if (!cc) {
-        KTextBrowser::setText(QString::fromLocal8Bit(m_Data->m_content,m_Data->m_content.size()));
+        KTextBrowser::setText(QString::fromLocal8Bit(m_Data->m_content, m_Data->m_content.size()));
     } else {
         KTextBrowser::setText(cc->toUnicode(m_Data->m_content));
     }
@@ -94,28 +94,28 @@ void DiffBrowser::printContent()
 void DiffBrowser::saveDiff()
 {
     QString saveTo = KFileDialog::getSaveFileName(KUrl(),
-                                                   "text/x-patch text/plain",
-                                                   this
-                                                   );
+                     "text/x-patch text/plain",
+                     this
+                                                 );
     if (saveTo.isEmpty()) {
         return;
     }
     QFile tfile(saveTo);
     if (tfile.exists()) {
         if (KMessageBox::warningYesNo(KApplication::activeModalWidget(),
-                                     i18n("File %1 exists - overwrite?",saveTo))
-            !=KMessageBox::Yes) {
+                                      i18n("File %1 exists - overwrite?", saveTo))
+                != KMessageBox::Yes) {
             return;
         }
     }
-    tfile.open(QIODevice::Truncate|QIODevice::WriteOnly|QIODevice::Unbuffered);
-    QDataStream stream( &tfile );
-    stream.writeRawData(m_Data->m_content.data(),m_Data->m_content.size());
+    tfile.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Unbuffered);
+    QDataStream stream(&tfile);
+    stream.writeRawData(m_Data->m_content.data(), m_Data->m_content.size());
 }
 
-void DiffBrowser::keyPressEvent(QKeyEvent*ev)
+void DiffBrowser::keyPressEvent(QKeyEvent *ev)
 {
-    if ( ev->key() == Qt::Key_Return) {
+    if (ev->key() == Qt::Key_Return) {
         ev->ignore();
         return;
     }
@@ -125,9 +125,9 @@ void DiffBrowser::keyPressEvent(QKeyEvent*ev)
         } else {
             searchagain_slot();
         }
-    } else if (ev->key()==Qt::Key_F && ev->modifiers() == Qt::ControlModifier) {
+    } else if (ev->key() == Qt::Key_F && ev->modifiers() == Qt::ControlModifier) {
         startSearch();
-    } else if (ev->key()==Qt::Key_S && ev->modifiers() == Qt::ControlModifier) {
+    } else if (ev->key() == Qt::Key_S && ev->modifiers() == Qt::ControlModifier) {
         saveDiff();
     } else {
         KTextBrowser::keyPressEvent(ev);
@@ -136,13 +136,13 @@ void DiffBrowser::keyPressEvent(QKeyEvent*ev)
 
 void DiffBrowser::startSearch()
 {
-    if( !m_Data->srchdialog ) {
+    if (!m_Data->srchdialog) {
         m_Data->srchdialog = new KFindDialog(this);
         m_Data->srchdialog->setSupportsWholeWordsFind(true);
         m_Data->srchdialog->setHasCursor(false);
         m_Data->srchdialog->setHasSelection(false);
         m_Data->srchdialog->setSupportsRegularExpressionFind(false);
-        connect(m_Data->srchdialog,SIGNAL(okClicked()),this,SLOT(search_slot()));
+        connect(m_Data->srchdialog, SIGNAL(okClicked()), this, SLOT(search_slot()));
     }
     QString _st = m_Data->srchdialog->pattern();
     m_Data->srchdialog->setPattern(_st.isEmpty() ? m_Data->pattern : _st);
@@ -154,23 +154,23 @@ void DiffBrowser::startSearch()
  */
 void DiffBrowser::search_slot()
 {
-    if( !m_Data->srchdialog ) {
+    if (!m_Data->srchdialog) {
         return;
     }
     doSearch(m_Data->srchdialog->pattern(),
-              m_Data->srchdialog->options() & KFind::FindBackwards?true:false);
+             m_Data->srchdialog->options() & KFind::FindBackwards ? true : false);
 }
 
-void DiffBrowser::doSearch(const QString&to_find_string,bool back)
+void DiffBrowser::doSearch(const QString &to_find_string, bool back)
 {
-    if( !m_Data->srchdialog ) {
+    if (!m_Data->srchdialog) {
         return;
     }
     while (1) {
         bool result;
         QTextDocument::FindFlags f;
         if (back) {
-            f=QTextDocument::FindBackward;
+            f = QTextDocument::FindBackward;
         }
         if (m_Data->srchdialog->options()&KFind::WholeWordsOnly) {
             f |= QTextDocument::FindWholeWords;
@@ -179,36 +179,36 @@ void DiffBrowser::doSearch(const QString&to_find_string,bool back)
             f |= QTextDocument::FindCaseSensitively;
         }
 
-        result=find(to_find_string,f);
+        result = find(to_find_string, f);
 
         if (result) {
-            m_Data->pattern=to_find_string;
+            m_Data->pattern = to_find_string;
             break;
         }
-        QWidget * _parent = m_Data->srchdialog->isVisible()?m_Data->srchdialog:parentWidget();
+        QWidget *_parent = m_Data->srchdialog->isVisible() ? m_Data->srchdialog : parentWidget();
         QTextCursor tc = textCursor();
         if (!back) {
             int query = KMessageBox::questionYesNo(
-                    _parent,
-                    i18n("End of document reached.\n"\
-                         "Continue from the beginning?"),
-                    i18n("Find"),
-                    KStandardGuiItem::yes(),
-                    KStandardGuiItem::no());
-            if (query == KMessageBox::Yes){
+                            _parent,
+                            i18n("End of document reached.\n"\
+                                 "Continue from the beginning?"),
+                            i18n("Find"),
+                            KStandardGuiItem::yes(),
+                            KStandardGuiItem::no());
+            if (query == KMessageBox::Yes) {
                 moveCursor(QTextCursor::Start);
             } else {
                 break;
             }
         } else {
             int query = KMessageBox::questionYesNo(
-                    _parent,
-                    i18n("Beginning of document reached.\n"\
-                         "Continue from the end?"),
-                    i18n("Find"),
-                    KStandardGuiItem::yes(),
-                    KStandardGuiItem::no());
-            if (query == KMessageBox::Yes){
+                            _parent,
+                            i18n("Beginning of document reached.\n"\
+                                 "Continue from the end?"),
+                            i18n("Find"),
+                            KStandardGuiItem::yes(),
+                            KStandardGuiItem::no());
+            if (query == KMessageBox::Yes) {
                 moveCursor(QTextCursor::End);
             } else {
                 break;
@@ -232,13 +232,13 @@ void DiffBrowser::doSearchAgain(bool back)
     if (!m_Data->srchdialog || m_Data->pattern.isEmpty()) {
         startSearch();
     } else {
-        doSearch(m_Data->pattern,back);
+        doSearch(m_Data->pattern, back);
     }
 }
 
-void DiffBrowser::slotTextCodecChanged(const QString&codec)
+void DiffBrowser::slotTextCodecChanged(const QString &codec)
 {
-    if (Kdesvnsettings::locale_for_diff()!=codec) {
+    if (Kdesvnsettings::locale_for_diff() != codec) {
         Kdesvnsettings::setLocale_for_diff(codec);
         printContent();
         Kdesvnsettings::self()->writeConfig();

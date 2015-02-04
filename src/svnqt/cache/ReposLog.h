@@ -32,7 +32,6 @@
 #include <QString>
 #include <QStringList>
 
-
 namespace svn
 {
 
@@ -44,16 +43,16 @@ namespace cache
 class SVNQT_EXPORT ReposLog
 {
 protected:
-    svn::Client*m_Client;
+    svn::Client *m_Client;
     mutable QDataBase m_Database;
     QString m_ReposRoot;
     svn::Revision m_latestHead;
     //! internal insert.
-    bool _insertLogEntry(const svn::LogEntry&);
-    bool checkFill(svn::Revision&_start,svn::Revision&_end,bool checkHead);
+    bool _insertLogEntry(const svn::LogEntry &);
+    bool checkFill(svn::Revision &_start, svn::Revision &_end, bool checkHead);
 
 public:
-    explicit ReposLog(svn::Client*aClient,const QString&aRepository=QString());
+    explicit ReposLog(svn::Client *aClient, const QString &aRepository = QString());
 
     QString ReposRoot() const
     {
@@ -79,13 +78,13 @@ public:
      * @return true if entries found and no error, if no entries found false
      * @exception svn::DatabaseException in case of errors
      */
-    bool simpleLog(LogEntriesMap&target,const svn::Revision&start,const svn::Revision&end,bool noNetwork=false,const QStringList&exclude=QStringList());
-    svn::Revision date2numberRev(const svn::Revision&,bool noNetwork=false);
-    bool fillCache(const svn::Revision&end);
-    bool insertLogEntry(const svn::LogEntry&);
+    bool simpleLog(LogEntriesMap &target, const svn::Revision &start, const svn::Revision &end, bool noNetwork = false, const QStringList &exclude = QStringList());
+    svn::Revision date2numberRev(const svn::Revision &, bool noNetwork = false);
+    bool fillCache(const svn::Revision &end);
+    bool insertLogEntry(const svn::LogEntry &);
     void cleanLogEntries();
-    bool log(const svn::Path&,const svn::Revision&start, const svn::Revision&end,const svn::Revision&peg,svn::LogEntriesMap&target, bool strictNodeHistory,int limit);
-    bool itemExists(const svn::Revision&,const svn::Path&);
+    bool log(const svn::Path &, const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, svn::LogEntriesMap &target, bool strictNodeHistory, int limit);
+    bool itemExists(const svn::Revision &, const svn::Path &);
 
     qlonglong count()const;
     qlonglong itemCount()const;

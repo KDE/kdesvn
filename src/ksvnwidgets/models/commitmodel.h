@@ -32,53 +32,53 @@ class CommitModelData;
 
 typedef svn::SharedPointer<CommitModelData> CommitModelDataPtr;
 
-class CommitModel:public QAbstractItemModel
+class CommitModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    CommitModel(const svn::CommitItemList&,QObject*parent=0);
-    CommitModel(const QMap<QString,QString>&,QObject*parent=0);
-    CommitModel(const CommitActionEntries&,const CommitActionEntries&,QObject*parent=0);
+    CommitModel(const svn::CommitItemList &, QObject *parent = 0);
+    CommitModel(const QMap<QString, QString> &, QObject *parent = 0);
+    CommitModel(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = 0);
 
-    void setCommitData(const svn::CommitItemList&);
-    void setCommitData(const QMap<QString,QString>&);
-    void setCommitData(const CommitActionEntries&,const CommitActionEntries&);
+    void setCommitData(const svn::CommitItemList &);
+    void setCommitData(const QMap<QString, QString> &);
+    void setCommitData(const CommitActionEntries &, const CommitActionEntries &);
 
     virtual ~CommitModel();
 
-    virtual QModelIndex index(int row,int column = 0,const QModelIndex & parent = QModelIndex())const;
-    virtual QModelIndex parent(const QModelIndex&)const;
+    virtual QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const;
+    virtual QModelIndex parent(const QModelIndex &)const;
     QVariant data(const QModelIndex &index, int role) const;
 
-    virtual int rowCount(const QModelIndex&) const;
-    virtual int columnCount(const QModelIndex&) const;
+    virtual int rowCount(const QModelIndex &) const;
+    virtual int columnCount(const QModelIndex &) const;
 
-    virtual QVariant headerData(int section, Qt::Orientation orientation,int role = Qt::DisplayRole) const;
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
     virtual int ActionColumn()const;
     virtual int ItemColumn()const;
 
-    CommitModelNodePtr node(const QModelIndex&);
+    CommitModelNodePtr node(const QModelIndex &);
     CommitActionEntries checkedEntries()const;
-    virtual void markItems(bool,CommitActionEntry::ACTION_TYPE _type=CommitActionEntry::ADD_COMMIT);
-    virtual void hideItems(bool,CommitActionEntry::ACTION_TYPE _type=CommitActionEntry::ADD_COMMIT);
-    void removeEntries(const QStringList&);
+    virtual void markItems(bool, CommitActionEntry::ACTION_TYPE _type = CommitActionEntry::ADD_COMMIT);
+    virtual void hideItems(bool, CommitActionEntry::ACTION_TYPE _type = CommitActionEntry::ADD_COMMIT);
+    void removeEntries(const QStringList &);
 
 protected:
     CommitModelDataPtr m_Content;
 };
 
-class CommitModelCheckitem:public CommitModel
+class CommitModelCheckitem: public CommitModel
 {
     Q_OBJECT
 public:
-    CommitModelCheckitem(const CommitActionEntries&,const CommitActionEntries&,QObject*parent=0);
+    CommitModelCheckitem(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = 0);
     virtual ~CommitModelCheckitem();
 
-    virtual Qt::ItemFlags flags(const QModelIndex & index) const;
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant data(const QModelIndex &index, int role) const;
 
-    virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
+    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     virtual int ActionColumn()const;
     virtual int ItemColumn()const;
 

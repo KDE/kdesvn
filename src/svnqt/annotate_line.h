@@ -38,28 +38,28 @@
 
 namespace svn
 {
-  /**
-   * This class holds the data for one line in an annotation
-   */
-  class SVNQT_EXPORT AnnotateLine
-  {
-  public:
-      AnnotateLine (QLONG line_no,
-                    QLONG revision,
-                    const char *author,
-                    const char *date,
-                    const char *line);
+/**
+ * This class holds the data for one line in an annotation
+ */
+class SVNQT_EXPORT AnnotateLine
+{
+public:
+    AnnotateLine(QLONG line_no,
+                 QLONG revision,
+                 const char *author,
+                 const char *date,
+                 const char *line);
 
-    AnnotateLine (QLONG line_no,
-                  QLONG revision,
-                  const char *author,
-                  const char *date,
-                  const char *line,
-                  QLONG merge_revision,
-                  const char *merge_author,
-                  const char *merge_date,
-                  const char *merge_path
-                 );
+    AnnotateLine(QLONG line_no,
+                 QLONG revision,
+                 const char *author,
+                 const char *date,
+                 const char *line,
+                 QLONG merge_revision,
+                 const char *merge_author,
+                 const char *merge_date,
+                 const char *merge_path
+                );
 
     AnnotateLine(
         QLONG line_no,
@@ -74,48 +74,45 @@ namespace svn
         bool local
     );
 
-    AnnotateLine ( const AnnotateLine &other);
+    AnnotateLine(const AnnotateLine &other);
     AnnotateLine();
     /**
      * destructor
      */
-    virtual ~AnnotateLine ()
+    virtual ~AnnotateLine()
     {
     }
 
     QLONG
-    lineNumber () const
+    lineNumber() const
     {
         return m_line_no;
     }
     QLONG
-    revision () const
+    revision() const
     {
         return m_revision;
     }
 
-
     const QByteArray &
-    author () const
+    author() const
     {
         return m_author;
     }
 
-
     const QDateTime &
-    date () const
+    date() const
     {
         return m_date;
     }
 
-
     const QByteArray &
-    line () const
+    line() const
     {
         return m_line;
     }
 
-  protected:
+protected:
     QLONG m_line_no;
     QLONG m_revision;
     QDateTime m_date;
@@ -126,7 +123,7 @@ namespace svn
     QDateTime m_merge_date;
     QByteArray m_merge_author;
     QByteArray m_merge_path;
-  };
+};
 }
 
 #endif

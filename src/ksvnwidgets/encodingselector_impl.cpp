@@ -28,13 +28,13 @@ EncodingSelector_impl::EncodingSelector_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    m_encodingList->addItems( KGlobal::charsets()->availableEncodingNames());
+    m_encodingList->addItems(KGlobal::charsets()->availableEncodingNames());
 }
 
-void EncodingSelector_impl::setCurrentEncoding(const QString&cur)
+void EncodingSelector_impl::setCurrentEncoding(const QString &cur)
 {
-    for (int j = 1;j<m_encodingList->count();++j ) {
-        if(m_encodingList->itemText(j)==cur) {
+    for (int j = 1; j < m_encodingList->count(); ++j) {
+        if (m_encodingList->itemText(j) == cur) {
             m_encodingList->setCurrentIndex(j);
             break;
         }

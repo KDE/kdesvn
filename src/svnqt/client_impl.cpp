@@ -45,108 +45,107 @@
 namespace svn
 {
 
-  Client_impl::Client_impl (const ContextP&context)
-	: Client()
-  {
-    setContext (context);
-  }
+Client_impl::Client_impl(const ContextP &context)
+    : Client()
+{
+    setContext(context);
+}
 
-  Client_impl::~Client_impl ()
-  {
-  }
+Client_impl::~Client_impl()
+{
+}
 
-  const ContextP
-  Client_impl::getContext () const
-  {
+const ContextP
+Client_impl::getContext() const
+{
     return m_context;
-  }
+}
 
-  void
-  Client_impl::setContext (const ContextP&context)
-  {
+void
+Client_impl::setContext(const ContextP &context)
+{
     m_context = context;
-  }
+}
 
-
-  void
-  Client_impl::url2Revision(const QString&revstring,
-        Revision&start,Revision&end)
-  {
+void
+Client_impl::url2Revision(const QString &revstring,
+                          Revision &start, Revision &end)
+{
     Pool pool;
-    int n = svn_opt_parse_revision(start,end,revstring.TOUTF8(),pool);
+    int n = svn_opt_parse_revision(start, end, revstring.TOUTF8(), pool);
 
-    if (n<0) {
+    if (n < 0) {
         start = Revision::UNDEFINED;
         end = Revision::UNDEFINED;
     }
-  }
+}
 
-    void Client_impl::url2Revision(const QString&revstring,Revision&start)
-    {
-        if (revstring=="WORKING") {
-            start = Revision::WORKING;
-        } else if (revstring=="BASE"){
-            start = Revision::BASE;
-        } else if (revstring=="START"){
-            start = Revision::START;
-        } else {
-            Revision end;
-            url2Revision(revstring,start,end);
-        }
-  }
+void Client_impl::url2Revision(const QString &revstring, Revision &start)
+{
+    if (revstring == "WORKING") {
+        start = Revision::WORKING;
+    } else if (revstring == "BASE") {
+        start = Revision::BASE;
+    } else if (revstring == "START") {
+        start = Revision::START;
+    } else {
+        Revision end;
+        url2Revision(revstring, start, end);
+    }
+}
 
-  apr_hash_t * Client_impl::map2hash(const PropertiesMap&aMap,const Pool&pool)
-  {
-      return svn::internal::Map2Hash(aMap).hash(pool);
-  }
+apr_hash_t *Client_impl::map2hash(const PropertiesMap &aMap, const Pool &pool)
+{
+    return svn::internal::Map2Hash(aMap).hash(pool);
+}
 
-  bool Client_impl::RepoHasCapability(const Path&repository,Capability capability)
-  {
+bool Client_impl::RepoHasCapability(const Path &repository, Capability capability)
+{
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-        svn_error_t* error = 0;
-        Pool pool;
+    svn_error_t *error = 0;
+    Pool pool;
 
-        svn_ra_session_t*session=0;
-        error = svn_client_open_ra_session(&session,
-                                            repository.cstr(),
-                                            *m_context,
-                                            pool);
-        if (error != 0) {
-            throw ClientException(error);
-        }
-        if (!session) {
-            return false;
-        }
-        const char*capa=0;
-        switch (capability) {
-            case CapabilityMergeinfo:
-                capa = SVN_RA_CAPABILITY_MERGEINFO;
-                break;
-            case CapabilityDepth:
-                capa = SVN_RA_CAPABILITY_DEPTH;
-                break;
-            case CapabilityCommitRevProps:
-                capa = SVN_RA_CAPABILITY_COMMIT_REVPROPS;
-                break;
-            case CapabilityLogRevProps:
-                capa = SVN_RA_CAPABILITY_LOG_REVPROPS;
-                break;
-            default:
-                return false;
-        }
-        svn_boolean_t has=0;
-        error = svn_ra_has_capability(session,&has,capa,pool);
-        if (error != 0) {
-            throw ClientException(error);
-        }
-        return has;
+    svn_ra_session_t *session = 0;
+    error = svn_client_open_ra_session(&session,
+                                       repository.cstr(),
+                                       *m_context,
+                                       pool);
+    if (error != 0) {
+        throw ClientException(error);
+    }
+    if (!session) {
+        return false;
+    }
+    const char *capa = 0;
+    switch (capability) {
+    case CapabilityMergeinfo:
+        capa = SVN_RA_CAPABILITY_MERGEINFO;
+        break;
+    case CapabilityDepth:
+        capa = SVN_RA_CAPABILITY_DEPTH;
+        break;
+    case CapabilityCommitRevProps:
+        capa = SVN_RA_CAPABILITY_COMMIT_REVPROPS;
+        break;
+    case CapabilityLogRevProps:
+        capa = SVN_RA_CAPABILITY_LOG_REVPROPS;
+        break;
+    default:
+        return false;
+    }
+    svn_boolean_t has = 0;
+    error = svn_ra_has_capability(session, &has, capa, pool);
+    if (error != 0) {
+        throw ClientException(error);
+    }
+    return has;
 #else
-      Q_UNUSED(repository);
-      Q_UNUSED(capability);
-      return false;
+    Q_UNUSED(repository);
+    Q_UNUSED(capability);
+    return false;
 #endif
 
-  }
+}
 }
 
 /* -----------------------------------------------------------------

@@ -25,7 +25,8 @@
 #include <QWidget>
 #include <QString>
 
-class HotcopyDlg_impl: public QWidget, public Ui::HotcopyDlg {
+class HotcopyDlg_impl: public QWidget, public Ui::HotcopyDlg
+{
     Q_OBJECT
 public:
     HotcopyDlg_impl(QWidget *parent = 0);

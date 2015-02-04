@@ -24,21 +24,21 @@
 #include <QTreeView>
 #include "src/svnqt/shared_pointer.h"
 
-class SvnTreeView:public QTreeView
+class SvnTreeView: public QTreeView
 {
     Q_OBJECT
 private:
     static bool _isDrag;
 public:
-    SvnTreeView(QWidget * parent=0);
+    SvnTreeView(QWidget *parent = 0);
     virtual ~SvnTreeView();
 
 protected:
     virtual void startDrag(Qt::DropActions supportedActions);
-    virtual void dropEvent(QDropEvent*event);
+    virtual void dropEvent(QDropEvent *event);
 
 protected Q_SLOTS:
-    virtual void doDrop(const KUrl::List&,const QModelIndex&,bool,Qt::DropAction,Qt::KeyboardModifiers);
+    virtual void doDrop(const KUrl::List &, const QModelIndex &, bool, Qt::DropAction, Qt::KeyboardModifiers);
 };
 
 #endif

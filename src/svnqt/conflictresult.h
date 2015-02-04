@@ -33,48 +33,49 @@ struct svn_wc_conflict_result_t;
 
 #include <qstring.h>
 
-namespace svn {
+namespace svn
+{
 
 class SVNQT_EXPORT ConflictResult
 {
-    public:
-        enum ConflictChoice {
-            //! let user make a call to resolve
-            ChoosePostpone,
-            ChooseBase,
-            ChooseTheirsFull,
-            ChooseMineFull,
-            ChooseTheirsConflict,
-            ChooseMineConflict,
-            ChooseMerged
-        };
-        ConflictResult();
-        //! Copy constructor
-        /*! only useful wenn build with subversion 1.5 or newer
-         */
-        ConflictResult(const svn_wc_conflict_result_t*);
+public:
+    enum ConflictChoice {
+        //! let user make a call to resolve
+        ChoosePostpone,
+        ChooseBase,
+        ChooseTheirsFull,
+        ChooseMineFull,
+        ChooseTheirsConflict,
+        ChooseMineConflict,
+        ChooseMerged
+    };
+    ConflictResult();
+    //! Copy constructor
+    /*! only useful wenn build with subversion 1.5 or newer
+     */
+    ConflictResult(const svn_wc_conflict_result_t *);
 
-        const QString& mergedFile()const
-        {
-            return m_MergedFile;
-        }
-        void setMergedFile(const QString&aMergedfile);
+    const QString &mergedFile()const
+    {
+        return m_MergedFile;
+    }
+    void setMergedFile(const QString &aMergedfile);
 
-        ConflictChoice choice()const
-        {
-            return m_choice;
-        }
-        void setChoice(ConflictChoice aValue);
+    ConflictChoice choice()const
+    {
+        return m_choice;
+    }
+    void setChoice(ConflictChoice aValue);
 
-        const svn_wc_conflict_result_t*result(const Pool&pool)const;
-        void assignResult(svn_wc_conflict_result_t**aResult,const Pool&pool)const;
+    const svn_wc_conflict_result_t *result(const Pool &pool)const;
+    void assignResult(svn_wc_conflict_result_t **aResult, const Pool &pool)const;
 
-    protected:
-        ConflictChoice m_choice;
-        //! Merged file
-        /*! will only used if m_choice is ChooseMerged
-         */
-        QString m_MergedFile;
+protected:
+    ConflictChoice m_choice;
+    //! Merged file
+    /*! will only used if m_choice is ChooseMerged
+     */
+    QString m_MergedFile;
 };
 
 }

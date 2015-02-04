@@ -19,10 +19,10 @@
  ***************************************************************************/
 #include "kiobytestream.h"
 
-KioByteStream::KioByteStream(StreamWrittenCb*aCb,const QString&filename)
-    : svn::stream::SvnStream(false,true,0L),
-    m_Cb(aCb),m_Written(0),
-    m_mimeSend(false),m_Filename(filename)
+KioByteStream::KioByteStream(StreamWrittenCb *aCb, const QString &filename)
+    : svn::stream::SvnStream(false, true, 0L),
+      m_Cb(aCb), m_Written(0),
+      m_mimeSend(false), m_Filename(filename)
 {
     m_MessageTick.start();
 }
@@ -36,22 +36,22 @@ bool KioByteStream::isOk() const
     return m_Cb != 0;
 }
 
-long KioByteStream::write(const char* data, const unsigned long max)
+long KioByteStream::write(const char *data, const unsigned long max)
 {
     bool forceInfo = !m_mimeSend;
     if (m_Cb) {
         if (!m_mimeSend) {
             m_mimeSend = true;
             array = QByteArray::fromRawData(data, max);
-            KMimeType::Ptr result = KMimeType::findByNameAndContent(m_Filename,array);
+            KMimeType::Ptr result = KMimeType::findByNameAndContent(m_Filename, array);
             m_Cb->streamSendMime(result);
             array.clear();
         }
         array = QByteArray::fromRawData(data, max);
         m_Cb->streamPushData(array);
         array.clear();
-        m_Written+=max;
-        if (m_MessageTick.elapsed() >=100 || forceInfo) {
+        m_Written += max;
+        if (m_MessageTick.elapsed() >= 100 || forceInfo) {
             m_Cb->streamWritten(m_Written);
             m_MessageTick.restart();
         }

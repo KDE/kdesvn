@@ -42,8 +42,8 @@ class DbOverViewData
 {
 
 public:
-    QStringListModel*repo_model;
-    svn::Client*_Client;
+    QStringListModel *repo_model;
+    svn::Client *_Client;
 
     DbOverViewData()
     {
@@ -65,14 +65,14 @@ DbOverview::DbOverview(QWidget *parent)
 
     try {
         _data->repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
-    }catch (const svn::cache::DatabaseException&e) {
-        kDebug()<<e.msg()<<endl;
+    } catch (const svn::cache::DatabaseException &e) {
+        kDebug() << e.msg() << endl;
     }
 
     m_ReposListView->setModel(_data->repo_model);
-    QItemSelectionModel * _sel = m_ReposListView->selectionModel();
+    QItemSelectionModel *_sel = m_ReposListView->selectionModel();
     if (_sel) {
-        connect(_sel,SIGNAL(selectionChanged (const QItemSelection&,const QItemSelection&)),this,SLOT(itemActivated(const QItemSelection&,const QItemSelection&)));
+        connect(_sel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(itemActivated(QItemSelection,QItemSelection)));
     }
 }
 
@@ -81,12 +81,12 @@ DbOverview::~DbOverview()
     delete _data;
 }
 
-void DbOverview::showDbOverview(svn::Client*aClient)
+void DbOverview::showDbOverview(svn::Client *aClient)
 {
-    DbOverview*ptr = 0;
+    DbOverview *ptr = 0;
     static const char cfg_text[] = "db_overview_dlg";
-    KConfigGroup _kc(Kdesvnsettings::self()->config(),QLatin1String(cfg_text));
-    KDialog*dlg = createDialog(&ptr,i18n("Overview about cache database content"),KDialog::Close,QLatin1String(cfg_text));
+    KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String(cfg_text));
+    KDialog *dlg = createDialog(&ptr, i18n("Overview about cache database content"), KDialog::Close, QLatin1String(cfg_text));
     ptr->setClient(aClient);
     dlg->restoreDialogSize(_kc);
     dlg->exec();
@@ -95,7 +95,7 @@ void DbOverview::showDbOverview(svn::Client*aClient)
     delete dlg;
 }
 
-void DbOverview::setClient(svn::Client*aClient)
+void DbOverview::setClient(svn::Client *aClient)
 {
     _data->_Client = aClient;
 }
@@ -108,31 +108,31 @@ void DbOverview::enableButtons(bool how)
     m_StatisticButton->setEnabled(how);
 }
 
-void DbOverview::itemActivated(const QItemSelection&indexes,const QItemSelection&deindexes)
+void DbOverview::itemActivated(const QItemSelection &indexes, const QItemSelection &deindexes)
 {
     Q_UNUSED(deindexes);
 
     enableButtons(false);
     QModelIndexList _indexes = indexes.indexes();
-    if (_indexes.count()!=1) {
-        kDebug()<<"Handle only with single selection"<<endl;
+    if (_indexes.count() != 1) {
+        kDebug() << "Handle only with single selection" << endl;
         return;
     }
     genInfo(_indexes[0].data().toString());
     enableButtons(true);
 }
 
-void DbOverview::genInfo(const QString&repo)
+void DbOverview::genInfo(const QString &repo)
 {
-    svn::cache::ReposLog rl(_data->_Client,repo);
-    QString msg = i18n("Log cache holds %1 log entries and consumes %2 on disk.",rl.count(),helpers::ByteToString(rl.fileSize()));
+    svn::cache::ReposLog rl(_data->_Client, repo);
+    QString msg = i18n("Log cache holds %1 log entries and consumes %2 on disk.", rl.count(), helpers::ByteToString(rl.fileSize()));
     m_RepostatusBrowser->setText(msg);
 }
 
 QString DbOverview::selectedRepository()const
 {
     QModelIndexList _indexes = m_ReposListView->selectionModel()->selectedIndexes();
-    if (_indexes.size()!=1) {
+    if (_indexes.size() != 1) {
         return QString();
     }
     return _indexes[0].data().toString();
@@ -140,25 +140,22 @@ QString DbOverview::selectedRepository()const
 
 void DbOverview::deleteCacheItems()
 {
-    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache for repository\n%1?", selectedRepository()),i18n("Clean repository cache"));
+    int i = KMessageBox::questionYesNo(this, i18n("Really clean cache for repository\n%1?", selectedRepository()), i18n("Clean repository cache"));
     if (i != KMessageBox::Yes) {
         return;
     }
-    try
-    {
-        svn::cache::ReposLog rl(_data->_Client,selectedRepository());
+    try {
+        svn::cache::ReposLog rl(_data->_Client, selectedRepository());
         rl.cleanLogEntries();
-    }
-    catch (const svn::cache::DatabaseException&e)
-    {
-        kDebug()<<e.msg();
+    } catch (const svn::cache::DatabaseException &e) {
+        kDebug() << e.msg();
     }
     genInfo(selectedRepository());
 }
 
 void DbOverview::deleteRepository()
 {
-    int i = KMessageBox::questionYesNo(this,i18n("Really clean cache and data for repository\n%1?", selectedRepository()),i18n("Delete repository"));
+    int i = KMessageBox::questionYesNo(this, i18n("Really clean cache and data for repository\n%1?", selectedRepository()), i18n("Delete repository"));
     if (i != KMessageBox::Yes) {
         return;
     }
@@ -166,8 +163,8 @@ void DbOverview::deleteRepository()
     try {
         svn::cache::LogCache::self()->deleteRepository(selectedRepository());
         _data->repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
-    }catch (const svn::cache::DatabaseException&e) {
-        kDebug()<<e.msg()<<endl;
+    } catch (const svn::cache::DatabaseException &e) {
+        kDebug() << e.msg() << endl;
     }
 }
 

@@ -33,24 +33,24 @@ class DiffBrowser : public KTextBrowser
     Q_OBJECT
 
 public:
-    DiffBrowser(QWidget*parent=0);
+    DiffBrowser(QWidget *parent = 0);
     virtual ~DiffBrowser();
 
 public slots:
-    virtual void setText(const QString&aText);
-    virtual void setText(const QByteArray&ex);
+    virtual void setText(const QString &aText);
+    virtual void setText(const QByteArray &ex);
     virtual void saveDiff();
-    virtual void slotTextCodecChanged(const QString&);
+    virtual void slotTextCodecChanged(const QString &);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent*);
+    virtual void keyPressEvent(QKeyEvent *);
 
     virtual void startSearch();
-    virtual void doSearch(const QString&to_find_string,bool back);
+    virtual void doSearch(const QString &to_find_string, bool back);
     virtual void doSearchAgain(bool back);
 
 protected:
-    DiffBrowserData*m_Data;
+    DiffBrowserData *m_Data;
 
     void printContent();
 

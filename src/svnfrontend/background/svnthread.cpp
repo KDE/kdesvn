@@ -26,25 +26,25 @@
 #include <kurl.h>
 #include <kdebug.h>
 
-SvnThread::SvnThread(QObject*_parent)
-: QThread(),m_Parent(_parent)
+SvnThread::SvnThread(QObject *_parent)
+    : QThread(), m_Parent(_parent)
 {
     m_CurrentContext = new svn::Context();
 
     m_SvnContextListener = new ThreadContextListener(m_Parent);
     if (m_Parent) {
-        QObject::connect(m_SvnContextListener,SIGNAL(sendNotify(const QString&)),m_Parent,SLOT(slotNotifyMessage(const QString&)));
+        QObject::connect(m_SvnContextListener, SIGNAL(sendNotify(QString)), m_Parent, SLOT(slotNotifyMessage(QString)));
     }
 
     m_CurrentContext->setListener(m_SvnContextListener);
-    m_Svnclient = svn::Client::getobject(m_CurrentContext,0);
+    m_Svnclient = svn::Client::getobject(m_CurrentContext, 0);
 }
 
 SvnThread::~SvnThread()
 {
     m_CurrentContext->setListener(0);
     delete m_Svnclient;
-    m_SvnContextListener=0;
+    m_SvnContextListener = 0;
 }
 
 void SvnThread::cancelMe()
@@ -52,9 +52,9 @@ void SvnThread::cancelMe()
     m_SvnContextListener->setCanceled(true);
 }
 
-void SvnThread::itemInfo(const QString&what,svn::InfoEntry&target,const svn::Revision&_rev,const svn::Revision&_peg)
+void SvnThread::itemInfo(const QString &what, svn::InfoEntry &target, const svn::Revision &_rev, const svn::Revision &_peg)
 {
-    QString url,cacheKey;
+    QString url, cacheKey;
     svn::Revision rev = _rev;
     svn::Revision peg = _peg;
 
@@ -62,28 +62,26 @@ void SvnThread::itemInfo(const QString&what,svn::InfoEntry&target,const svn::Rev
         // working copy
         // url = svn::Wc::getUrl(what);
         url = what;
-        if (url.indexOf("@")!=-1) {
-            url+="@BASE";
+        if (url.indexOf("@") != -1) {
+            url += "@BASE";
         }
         peg = svn::Revision::UNDEFINED;
-        cacheKey=url;
+        cacheKey = url;
     } else {
         KUrl _uri = what;
         QString prot = svn::Url::transformProtokoll(_uri.protocol());
         _uri.setProtocol(prot);
         url = _uri.prettyUrl();
-        if (peg==svn::Revision::UNDEFINED)
-        {
+        if (peg == svn::Revision::UNDEFINED) {
             peg = rev;
         }
-        if (peg==svn::Revision::UNDEFINED)
-        {
-            peg=svn::Revision::HEAD;
+        if (peg == svn::Revision::UNDEFINED) {
+            peg = svn::Revision::HEAD;
         }
     }
     svn::InfoEntries _e;
-    _e = (m_Svnclient->info(url,svn::DepthEmpty,rev,peg));
-    if (_e.count()>0) {
+    _e = (m_Svnclient->info(url, svn::DepthEmpty, rev, peg));
+    if (_e.count() > 0) {
         target = _e[0];
     }
 }

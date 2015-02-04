@@ -31,12 +31,12 @@ class DummyDisplay : public ItemDisplay
 public:
     DummyDisplay();
     virtual ~DummyDisplay();
-    virtual QWidget*realWidget();
-    virtual SvnItem*Selected()const;
-    virtual void SelectionList(QList<SvnItem*>&)const;
-    virtual bool openUrl( const KUrl &url,bool noReinit=false );
-    virtual SvnItem*SelectedOrMain()const;
-    virtual const svn::Revision&baseRevision()const;
+    virtual QWidget *realWidget();
+    virtual SvnItem *Selected()const;
+    virtual void SelectionList(QList<SvnItem *> &)const;
+    virtual bool openUrl(const KUrl &url, bool noReinit = false);
+    virtual SvnItem *SelectedOrMain()const;
+    virtual const svn::Revision &baseRevision()const;
 };
 
 #endif

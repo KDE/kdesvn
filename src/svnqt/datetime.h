@@ -38,101 +38,99 @@
 // subversion api
 #include "svn_types.h"
 
-
 namespace svn
 {
-  /**
-   * Class that encapsulates apr_time_t.
-   *
-   * @see apr_time_t
-   */
-  class SVNQT_EXPORT DateTime
-  {
-  private:
+/**
+ * Class that encapsulates apr_time_t.
+ *
+ * @see apr_time_t
+ */
+class SVNQT_EXPORT DateTime
+{
+private:
     QDateTime m_time;
 
-  public:
+public:
 
     /**
      * Default Constructor
      */
-    DateTime ();
+    DateTime();
 
     /**
      * Constructor
      *
      * @param time number of microseconds since 00:00:00 january 1, 1970 UTC
      */
-    DateTime (const apr_time_t time);
+    DateTime(const apr_time_t time);
 
     /**
      * Constructor
      *
      * @param dt QDateTime class
      */
-    DateTime(const QDateTime&dt);
-    
+    DateTime(const QDateTime &dt);
+
     /**
      * Constructor
      * @param dt RFC822 compatible string
      */
-    DateTime(const QString&dt);
+    DateTime(const QString &dt);
 
     /**
      * Copy constructor
      *
      * @param dateTime Source
      */
-    DateTime (const DateTime & dateTime);
+    DateTime(const DateTime &dateTime);
 
     /**
      * @param dateTime Source
      */
     const DateTime &
-    operator =(const DateTime & dateTime);
+    operator =(const DateTime &dateTime);
 
     bool
-    operator<(const DateTime&dateTime)const;
+    operator<(const DateTime &dateTime)const;
     bool
-    operator>(const DateTime&dateTime)const;
+    operator>(const DateTime &dateTime)const;
     bool
-    operator!=(const DateTime&dateTime)const;
+    operator!=(const DateTime &dateTime)const;
     bool
-    operator==(const DateTime&dateTime)const;
+    operator==(const DateTime &dateTime)const;
     bool
-    operator<=(const DateTime&dateTime)const;
+    operator<=(const DateTime &dateTime)const;
     bool
-    operator>=(const DateTime&dateTime)const;
-
+    operator>=(const DateTime &dateTime)const;
 
     /**
      * @return Is a valid (non-zero) date
      */
     bool
-    IsValid () const;
+    IsValid() const;
 
     /**
      * @return APR apr_time_t
      */
     apr_time_t
-    GetAPRTimeT () const;
+    GetAPRTimeT() const;
 
     /**
      * @return QDateTime object
      */
-    operator const QDateTime&()const;
+    operator const QDateTime &()const;
 
     /**
      * @return QDateTime object
      */
-    const QDateTime&toQDateTime()const;
+    const QDateTime &toQDateTime()const;
 
     /**
      * @param format format string
      * @return formatted string
      * @see QDateTime::toString
      */
-    QString toString(const QString&format)const;
+    QString toString(const QString &format)const;
 
     /**
      * Set from date string of the form below, using apr_date_parse_rfc
@@ -145,12 +143,12 @@ namespace svn
      * @return Successfully parsed
      */
     bool
-    SetRFC822Date (const char* date);
+    SetRFC822Date(const char *date);
 
     void setAprTime(apr_time_t aTime);
     unsigned int toTime_t()const;
     void setTime_t(unsigned int sec);
-  };
+};
 }
 
 #endif

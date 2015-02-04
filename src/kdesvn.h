@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #ifndef KDESVN_H
 #define KDESVN_H
 
@@ -44,7 +43,7 @@ class KBookmarkActionMenu;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version $Rev$
  */
-class kdesvn : public KParts::MainWindow,public KBookmarkOwner
+class kdesvn : public KParts::MainWindow, public KBookmarkOwner
 {
     Q_OBJECT
 public:
@@ -58,8 +57,8 @@ public:
      */
     virtual ~kdesvn();
 
-    virtual void openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
-    virtual QString currentUrl () const;
+    virtual void openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
+    virtual QString currentUrl() const;
     virtual QString currentTitle() const;
     void checkReload();
 
@@ -68,51 +67,51 @@ protected:
      * This function is called when it is time for the app to save its
      * properties for session management purposes.
      */
-    virtual void saveProperties(KConfigGroup&);
+    virtual void saveProperties(KConfigGroup &);
 
     /**
      * This function is called when this app is restored.  The KConfig
      * object points to the session management config file that was saved
      * with @ref saveProperties
      */
-    virtual void readProperties(const KConfigGroup&);
+    virtual void readProperties(const KConfigGroup &);
     void closeEvent(QCloseEvent *event);
     void enableClose(bool how);
-
 
 public Q_SLOTS:
     virtual void slotUrlOpened(bool);
     /**
      * Use this method to load whatever file/URL you have
      */
-    virtual void load(const KUrl&_url) {
-        load(_url,true);
+    virtual void load(const KUrl &_url)
+    {
+        load(_url, true);
     }
-    virtual void loadRescent(const KUrl&);
-    virtual void load(const KUrl&,bool);
+    virtual void loadRescent(const KUrl &);
+    virtual void load(const KUrl &, bool);
 
 private slots:
     void fileOpen();
     void fileNew();
     void fileClose();
     void optionsShowStatusbar();
-    void changeStatusbar(const QString&);
+    void changeStatusbar(const QString &);
     void resetStatusBar();
 #if 0
-    void actionHovered(QAction*action);
+    void actionHovered(QAction *action);
 #endif
 
 private:
     void setupAccel();
     void setupActions();
-    void connectActionCollection( KActionCollection *coll );
+    void connectActionCollection(KActionCollection *coll);
 
     KActionMenu *m_FileMenu;
     QString m_bookmarkFile;
-    KBookmarkManager * m_BookmarkManager;
-    KBookmarkActionMenu* m_BookmarksActionmenu;
-    KActionCollection*m_Bookmarkactions;
-    KBookmarkMenu * m_pBookmarkMenu;
+    KBookmarkManager *m_BookmarkManager;
+    KBookmarkActionMenu *m_BookmarksActionmenu;
+    KActionCollection *m_Bookmarkactions;
+    KBookmarkMenu *m_pBookmarkMenu;
     KParts::ReadOnlyPart *m_part;
     KToggleAction *m_statusbarAction;
 
@@ -121,7 +120,7 @@ protected Q_SLOTS:
     virtual void optionsConfigureKeys();
     virtual void applyNewToolbarConfig();
     virtual void slotLoadLast(bool);
-    virtual void slotExtraStatus(const QString&);
+    virtual void slotExtraStatus(const QString &);
     virtual void slotResetExtraStatus();
 
 Q_SIGNALS:

@@ -25,9 +25,11 @@
 
 #include <qfile.h>
 
-namespace svn {
+namespace svn
+{
 
-namespace stream {
+namespace stream
+{
 
 typedef QIODevice::OpenMode openmode;
 #define READONLY QIODevice::ReadOnly
@@ -36,13 +38,13 @@ typedef QIODevice::OpenMode openmode;
 class SVNQT_NOEXPORT SvnFileStream_private
 {
 public:
-    SvnFileStream_private(const QString&fn,openmode mode);
+    SvnFileStream_private(const QString &fn, openmode mode);
     virtual ~SvnFileStream_private();
 
     QFile m_File;
 };
 
-SvnFileStream_private::SvnFileStream_private(const QString&fn,openmode mode)
+SvnFileStream_private::SvnFileStream_private(const QString &fn, openmode mode)
     : m_File(fn)
 {
     m_File.open(mode);
@@ -52,67 +54,63 @@ SvnFileStream_private::~SvnFileStream_private()
 {
 }
 
-SvnFileOStream::SvnFileOStream(const QString&fn,svn_client_ctx_t*ctx)
-    :SvnStream(false,true,ctx)
+SvnFileOStream::SvnFileOStream(const QString &fn, svn_client_ctx_t *ctx)
+    : SvnStream(false, true, ctx)
 {
-    m_FileData = new SvnFileStream_private(fn,WRITEONLY);
+    m_FileData = new SvnFileStream_private(fn, WRITEONLY);
     if (!m_FileData->m_File.isOpen()) {
         setError(m_FileData->m_File.errorString());
     }
 }
-
 
 SvnFileOStream::~SvnFileOStream()
 {
     delete m_FileData;
 }
 
-
 bool SvnFileOStream::isOk() const
 {
     return m_FileData->m_File.isOpen();
 }
 
-long SvnFileOStream::write(const char* data, const unsigned long max)
+long SvnFileOStream::write(const char *data, const unsigned long max)
 {
     if (!m_FileData->m_File.isOpen()) {
         return -1;
     }
-    long res = m_FileData->m_File.write(data,max);
-    if (res<0) {
+    long res = m_FileData->m_File.write(data, max);
+    if (res < 0) {
         setError(m_FileData->m_File.errorString());
     }
     return res;
 }
 
-SvnFileIStream::SvnFileIStream(const QString&fn,svn_client_ctx_t*ctx)
-    :SvnStream(true,false,ctx)
+SvnFileIStream::SvnFileIStream(const QString &fn, svn_client_ctx_t *ctx)
+    : SvnStream(true, false, ctx)
 {
-    m_FileData = new SvnFileStream_private(fn,READONLY);
+    m_FileData = new SvnFileStream_private(fn, READONLY);
     if (!m_FileData->m_File.isOpen()) {
         setError(m_FileData->m_File.errorString());
     }
 }
-
 
 SvnFileIStream::~SvnFileIStream()
 {
     delete m_FileData;
 }
 
-
 bool SvnFileIStream::isOk() const
 {
     return m_FileData->m_File.isOpen();
 }
 
-long SvnFileIStream::read(char* data, const unsigned long max)
+long SvnFileIStream::read(char *data, const unsigned long max)
 {
     if (!m_FileData->m_File.isOpen()) {
         return -1;
     }
-    long res = m_FileData->m_File.read(data,max);
-    if (res<0) {
+    long res = m_FileData->m_File.read(data, max);
+    if (res < 0) {
         setError(m_FileData->m_File.errorString());
     }
     return res;

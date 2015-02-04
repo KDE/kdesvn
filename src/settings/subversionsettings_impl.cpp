@@ -18,11 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #include "subversionsettings_impl.h"
 
-SubversionSettings_impl::SubversionSettings_impl(QWidget* parent)
-: QWidget(parent)
+SubversionSettings_impl::SubversionSettings_impl(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
 }
@@ -32,7 +31,6 @@ SubversionSettings_impl::~SubversionSettings_impl()
 }
 
 /*$SPECIALIZATION$*/
-
 
 #include "subversionsettings_impl.moc"
 

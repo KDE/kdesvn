@@ -25,18 +25,21 @@
 #define REPOSITORYLISTENER_HPP
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
 
 #include "svnqt/svnqt_defines.h"
 #include <qstring.h>
 
-namespace svn {
+namespace svn
+{
 
-namespace repository {
+namespace repository
+{
 
 //! class for callbacks on repository operations
-class SVNQT_EXPORT RepositoryListener{
+class SVNQT_EXPORT RepositoryListener
+{
 
 public:
     //! constructor
@@ -45,11 +48,11 @@ public:
     virtual ~RepositoryListener();
 
     //! sends a warning or informative message
-    virtual void sendWarning(const QString&)=0;
+    virtual void sendWarning(const QString &) = 0;
     //! sends an error message
-    virtual void sendError(const QString&)=0;
+    virtual void sendError(const QString &) = 0;
     //! check if running operation should cancelled
-    virtual bool isCanceld() =0;
+    virtual bool isCanceld() = 0;
 
 };
 

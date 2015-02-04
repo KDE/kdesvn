@@ -47,26 +47,26 @@
 namespace svn
 {
 
-  class StringArray;
-  class SVNQT_EXPORT LogChangePathEntry
-  {
-  public:
-    LogChangePathEntry (const char *path_,
-                        char action_,
-                        const char *copyFromPath_,
-                        const svn_revnum_t copyFromRevision_);
+class StringArray;
+class SVNQT_EXPORT LogChangePathEntry
+{
+public:
+    LogChangePathEntry(const char *path_,
+                       char action_,
+                       const char *copyFromPath_,
+                       const svn_revnum_t copyFromRevision_);
 
-    LogChangePathEntry (const QString &path_,
-                        char action_,
-                        const QString &copyFromPath_,
-                        const svn_revnum_t copyFromRevision_);
+    LogChangePathEntry(const QString &path_,
+                       char action_,
+                       const QString &copyFromPath_,
+                       const svn_revnum_t copyFromRevision_);
 
-    LogChangePathEntry (const QString &path_,
-                        char action_,
-                        const QString &copyFromPath_,
-                        const svn_revnum_t copyFromRevision_,
-                        const QString &copyToPath_,
-                        const svn_revnum_t copyToRevision_);
+    LogChangePathEntry(const QString &path_,
+                       char action_,
+                       const QString &copyFromPath_,
+                       const svn_revnum_t copyFromRevision_,
+                       const QString &copyToPath_,
+                       const svn_revnum_t copyToRevision_);
 
     LogChangePathEntry();
 
@@ -79,23 +79,23 @@ namespace svn
     QLONG copyFromRevision;
     //! future use or useful in backends
     QLONG copyToRevision;
-  };
+};
 
-  typedef QList<LogChangePathEntry> LogChangePathEntries;
+typedef QList<LogChangePathEntry> LogChangePathEntries;
 
-  class SVNQT_EXPORT LogEntry
-  {
-  public:
-    LogEntry ();
+class SVNQT_EXPORT LogEntry
+{
+public:
+    LogEntry();
 
-    LogEntry (const svn_revnum_t revision,
-              const char * author,
-              const char * date,
-              const char * message);
+    LogEntry(const svn_revnum_t revision,
+             const char *author,
+             const char *date,
+             const char *message);
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-    LogEntry(svn_log_entry_t*,const StringArray&excludeList);
+    LogEntry(svn_log_entry_t *, const StringArray &excludeList);
 #endif
-    void setDate(const char*date);
+    void setDate(const char *date);
 
     //! if -1 the entry is a fake entry and not real usable!
     QLONG revision;
@@ -104,14 +104,14 @@ namespace svn
     QString message;
     LogChangePathEntries changedPaths;
     QLIST<QLONG> m_MergedInRevisions;
-  };
+};
 }
 
-SVNQT_EXPORT QDataStream &operator<<(QDataStream&s,const svn::LogEntry&r);
-SVNQT_EXPORT QDataStream &operator<<(QDataStream&s,const svn::LogChangePathEntry&r);
+SVNQT_EXPORT QDataStream &operator<<(QDataStream &s, const svn::LogEntry &r);
+SVNQT_EXPORT QDataStream &operator<<(QDataStream &s, const svn::LogChangePathEntry &r);
 
-SVNQT_EXPORT QDataStream &operator>>(QDataStream&s,svn::LogEntry&r);
-SVNQT_EXPORT QDataStream &operator>>(QDataStream&s,svn::LogChangePathEntry&r);
+SVNQT_EXPORT QDataStream &operator>>(QDataStream &s, svn::LogEntry &r);
+SVNQT_EXPORT QDataStream &operator>>(QDataStream &s, svn::LogChangePathEntry &r);
 
 #endif
 /* -----------------------------------------------------------------

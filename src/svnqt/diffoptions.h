@@ -32,49 +32,49 @@ class QStringList;
 
 namespace svn
 {
-    class Pool;
-    struct DiffOptionsData;
-    /** c++ wrapper for svn_diffoptions_t
-     *
-     * This is needed until svnqt stops support for subversion prior 1.4
-     */
-    class SVNQT_EXPORT DiffOptions
-    {
-        public:
-            enum IgnoreSpace {
-                IgnoreSpaceNone,
-                IgnoreSpaceChange,
-                IgnoreSpaceAll
-            };
-        protected:
-            DiffOptionsData* m_data;
-            void init(const svn_diff_file_options_t*options);
-
-        public:
-            DiffOptions();
-            /** Initialize options with values depending on options.
-             * Supported types are:
-             * - --ignore-space-change, -b
-             * - --ignore-all-space, -w
-             * - --ignore-eol-style
-             * - --unified, -u (for compatibility, does nothing).
-             * @sa svn_diff_file_options_parse
-             */
-            DiffOptions(const QStringList&options);
-
-            /** Initialize options with values depending on options.
-             * Only if build against subversion 1.4 or newer.
-             */
-            DiffOptions(const svn_diff_file_options_t*options);
-
-            /** copy operator
-             */
-            DiffOptions(const DiffOptions&old);
-
-            ~DiffOptions();
-
-            svn_diff_file_options_t*options(const Pool&pool)const;
+class Pool;
+struct DiffOptionsData;
+/** c++ wrapper for svn_diffoptions_t
+ *
+ * This is needed until svnqt stops support for subversion prior 1.4
+ */
+class SVNQT_EXPORT DiffOptions
+{
+public:
+    enum IgnoreSpace {
+        IgnoreSpaceNone,
+        IgnoreSpaceChange,
+        IgnoreSpaceAll
     };
+protected:
+    DiffOptionsData *m_data;
+    void init(const svn_diff_file_options_t *options);
+
+public:
+    DiffOptions();
+    /** Initialize options with values depending on options.
+     * Supported types are:
+     * - --ignore-space-change, -b
+     * - --ignore-all-space, -w
+     * - --ignore-eol-style
+     * - --unified, -u (for compatibility, does nothing).
+     * @sa svn_diff_file_options_parse
+     */
+    DiffOptions(const QStringList &options);
+
+    /** Initialize options with values depending on options.
+     * Only if build against subversion 1.4 or newer.
+     */
+    DiffOptions(const svn_diff_file_options_t *options);
+
+    /** copy operator
+     */
+    DiffOptions(const DiffOptions &old);
+
+    ~DiffOptions();
+
+    svn_diff_file_options_t *options(const Pool &pool)const;
+};
 }
 
 #endif

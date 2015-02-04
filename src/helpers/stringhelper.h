@@ -37,11 +37,11 @@ protected:
 
 public:
     explicit ByteToString(qulonglong value)
-    :m_value (value),m_text(KGlobal::locale()->formatByteSize(value))
+        : m_value(value), m_text(KGlobal::locale()->formatByteSize(value))
     {
     };
 
-    operator const QString&()const
+    operator const QString &()const
     {
         return m_text;
     }

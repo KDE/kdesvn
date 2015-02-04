@@ -31,9 +31,10 @@ class RevGraphView;
 class QSplitter;
 class KTextBrowser;
 
-namespace svn {
-    class LogEntry;
-    class Client;
+namespace svn
+{
+class LogEntry;
+class Client;
 }
 
 class RevTreeWidget : public QWidget
@@ -41,26 +42,26 @@ class RevTreeWidget : public QWidget
     Q_OBJECT
 
 public:
-    RevTreeWidget(QObject*,svn::Client*,QWidget* parent = 0);
+    RevTreeWidget(QObject *, svn::Client *, QWidget *parent = 0);
     ~RevTreeWidget();
 
-    QSplitter* m_Splitter;
-    RevGraphView* m_RevGraphView;
+    QSplitter *m_Splitter;
+    RevGraphView *m_RevGraphView;
 
-    void setBasePath(const QString&);
+    void setBasePath(const QString &);
     void dumpRevtree();
 
 protected:
-    QVBoxLayout* RevTreeWidgetLayout;
-    KTextBrowser* m_Detailstext;
+    QVBoxLayout *RevTreeWidgetLayout;
+    KTextBrowser *m_Detailstext;
 
 signals:
-    void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
-    void makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
-    void makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
+    void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
+    void makeNorecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
+    void makeRecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
 
 protected slots:
-    virtual void setDetailText(const QString&);
+    virtual void setDetailText(const QString &);
 
 private:
     QPixmap image0;

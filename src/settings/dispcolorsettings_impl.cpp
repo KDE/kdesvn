@@ -22,7 +22,7 @@
 #include <qcheckbox.h>
 
 DispColorSettings_impl::DispColorSettings_impl(QWidget *parent)
-    :QWidget(parent)
+    : QWidget(parent)
 {
     setupUi(this);
     coloredStateToggled(kcfg_colored_state->isChecked());
@@ -43,6 +43,5 @@ void DispColorSettings_impl::coloredStateToggled(bool how)
     kcfg_color_notversioned_item->setEnabled(how);
     kcfg_color_conflicted_item->setEnabled(how);
 }
-
 
 #include "dispcolorsettings_impl.moc"

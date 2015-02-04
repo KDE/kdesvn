@@ -44,114 +44,114 @@
 
 namespace svn
 {
-    const char * Wc::ADM_DIR_NAME = SVN_WC_ADM_DIR_NAME;
+const char *Wc::ADM_DIR_NAME = SVN_WC_ADM_DIR_NAME;
 
-    Wc::Wc(const ContextP&context)
-        :_context(context)
-    {
-    }
+Wc::Wc(const ContextP &context)
+    : _context(context)
+{
+}
 
-    Wc::~Wc()
-    {
-        _context = 0;
-    }
+Wc::~Wc()
+{
+    _context = 0;
+}
 
-  bool
-  Wc::checkWc (const QString& dir)
-  {
+bool
+Wc::checkWc(const QString &dir)
+{
     Pool pool;
-    Path path (dir);
+    Path path(dir);
     int wc;
 
-    svn_error_t * error = svn_wc_check_wc (
-        path.path().TOUTF8(),
-        &wc, pool);
+    svn_error_t *error = svn_wc_check_wc(
+                             path.path().TOUTF8(),
+                             &wc, pool);
 
-    if ((error != NULL) || (wc == 0))
-    {
-      return false;
+    if ((error != NULL) || (wc == 0)) {
+        return false;
     }
 
     return true;
-  }
+}
 
-  void
-  Wc::ensureAdm (const QString& dir, const QString& uuid,
-                const QString& url, const Revision & revision,
-                const QString&repository, Depth depth) throw (ClientException)
-  {
+void
+Wc::ensureAdm(const QString &dir, const QString &uuid,
+              const QString &url, const Revision &revision,
+              const QString &repository, Depth depth) throw (ClientException)
+{
     Pool pool;
-    Path dirPath (dir);
-    Path urlPath (url);
+    Path dirPath(dir);
+    Path urlPath(url);
 
-    const char*rep = 0;
+    const char *rep = 0;
 
     if (!repository.isNull()) {
         rep = repository.TOUTF8();
     }
 
-    svn_error_t * error =
+    svn_error_t *error =
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
-      svn_wc_ensure_adm3(
-                         dirPath.path().TOUTF8(),    // path
-                         uuid.TOUTF8(),                // UUID
-                         urlPath.path().TOUTF8(),    // url
-                         rep,
-                         revision.revnum (),  // revision
-                         internal::DepthToSvn(depth),
-                         pool);
+        svn_wc_ensure_adm3(
+            dirPath.path().TOUTF8(),    // path
+            uuid.TOUTF8(),                // UUID
+            urlPath.path().TOUTF8(),    // url
+            rep,
+            revision.revnum(),   // revision
+            internal::DepthToSvn(depth),
+            pool);
 #else
-      svn_wc_ensure_adm2(
-                         dirPath.path().TOUTF8(),    // path
-                         uuid.TOUTF8(),                // UUID
-                         urlPath.path().TOUTF8(),    // url
-                         rep,
-                         revision.revnum (),  // revision
-                         pool);
+        svn_wc_ensure_adm2(
+            dirPath.path().TOUTF8(),    // path
+            uuid.TOUTF8(),                // UUID
+            urlPath.path().TOUTF8(),    // url
+            rep,
+            revision.revnum(),   // revision
+            pool);
 #endif
-    if(error != NULL)
-      throw ClientException (error);
-  }
+    if (error != NULL) {
+        throw ClientException(error);
+    }
+}
 
-  Entry Wc::getEntry( const QString &path )const throw ( ClientException )
-  {
+Entry Wc::getEntry(const QString &path)const throw (ClientException)
+{
     Pool pool;
     Path itemPath(path);
-    svn_error_t * error = 0;
+    svn_error_t *error = 0;
     svn_wc_adm_access_t *adm_access;
     const svn_wc_entry_t *entry;
 
-    svn_client_ctx_t*ctx = _context?_context->ctx():0;
+    svn_client_ctx_t *ctx = _context ? _context->ctx() : 0;
 
-    error = svn_wc_adm_probe_open3(&adm_access,0,itemPath.path().TOUTF8(),false,0,
-        ctx?ctx->cancel_func:0,ctx?ctx->cancel_baton:0,pool);
-    if (error!=0) {
+    error = svn_wc_adm_probe_open3(&adm_access, 0, itemPath.path().TOUTF8(), false, 0,
+                                   ctx ? ctx->cancel_func : 0, ctx ? ctx->cancel_baton : 0, pool);
+    if (error != 0) {
         throw ClientException(error);
     }
-    error = svn_wc_entry(&entry,itemPath.path().TOUTF8(),adm_access,false,pool);
-    if (error!=0) {
+    error = svn_wc_entry(&entry, itemPath.path().TOUTF8(), adm_access, false, pool);
+    if (error != 0) {
         throw ClientException(error);
     }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
-    error = svn_wc_adm_close2(adm_access,pool);
+    error = svn_wc_adm_close2(adm_access, pool);
 #else
     error = svn_wc_adm_close(adm_access);
 #endif
-    if (error!=0) {
+    if (error != 0) {
         throw ClientException(error);
     }
     return Entry(entry);
-  }
+}
 
-  QString Wc::getUrl(const QString&path)const throw (ClientException)
-  {
-    Entry entry = getEntry( path );
-    return entry.isValid()?entry.url():QString();
-  }
+QString Wc::getUrl(const QString &path)const throw (ClientException)
+{
+    Entry entry = getEntry(path);
+    return entry.isValid() ? entry.url() : QString();
+}
 
-  QString Wc::getRepos(const QString&path)const throw (ClientException)
-  {
-    Entry entry = getEntry( path );
-    return entry.isValid() ? entry.repos():QString();
-  }
+QString Wc::getRepos(const QString &path)const throw (ClientException)
+{
+    Entry entry = getEntry(path);
+    return entry.isValid() ? entry.repos() : QString();
+}
 }

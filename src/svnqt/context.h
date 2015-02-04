@@ -46,18 +46,18 @@
 
 namespace svn
 {
-  // forward declarations
-  class ContextListener;
-  class ContextData;
+// forward declarations
+class ContextListener;
+class ContextData;
 
-  /**
-   * This class will hold the client context
-   * and replace the old notification and baton
-   * stuff
-   */
-  class SVNQT_EXPORT Context:public ref_count
-  {
-  public:
+/**
+ * This class will hold the client context
+ * and replace the old notification and baton
+ * stuff
+ */
+class SVNQT_EXPORT Context: public ref_count
+{
+public:
     /**
      * default constructor
      *
@@ -65,78 +65,78 @@ namespace svn
      *                  subversion api stores its
      *                  configuration
      */
-    Context (const QString & configDir=QString());
+    Context(const QString &configDir = QString());
 
     /**
      * copy constructor
      *
      * @param src
      */
-    Context (const Context &src);
+    Context(const Context &src);
 
     /**
      * destructor
      */
-    virtual ~Context ();
+    virtual ~Context();
 
     /**
      * enable/disable authentication caching
      *
      * @param value true=enable/false=disable
      */
-    void setAuthCache (bool value);
+    void setAuthCache(bool value);
 
     /**
      * set username/password for authentication
      */
-    void setLogin (const QString& username, const QString& password);
+    void setLogin(const QString &username, const QString &password);
 
     /**
      * operator to get svn_client_ctx object
      */
-    operator svn_client_ctx_t * ()const;
+    operator svn_client_ctx_t *()const;
 
     /**
      * return the svn_client_ctx object
      */
-    svn_client_ctx_t * ctx ()const;
+    svn_client_ctx_t *ctx()const;
 
     /**
      * this will be called at the beginning of an action.
      * the log message will be reset.
      */
-    void reset ();
+    void reset();
 
     /**
      * set log message
      *
      * @param msg
      */
-    void setLogMessage (const QString& msg);
+    void setLogMessage(const QString &msg);
 
     /**
      * get log message
      *
      * @return log message
      */
-    const QString&
-    getLogMessage () const;
+    const QString &
+    getLogMessage() const;
 
     /**
      * get username
      *
      * @return username
      */
-    const QString&
-    getUsername () const;
+    const QString &
+    getUsername() const;
 
     /**
      * get password
      *
      * @return password
      */
-    const QString&
-    getPassword () const;
+    const QString &
+    getPassword() const;
 
     /**
      * set the listener for the context. The listener will be
@@ -146,7 +146,7 @@ namespace svn
      * @param listener
      */
     void
-    setListener (ContextListener * listener);
+    setListener(ContextListener *listener);
 
     /**
      * get the listener
@@ -154,7 +154,7 @@ namespace svn
      * @return the listener
      */
     ContextListener *
-    getListener () const;
+    getListener() const;
 
     /** Callback for generating list entries
      * This base implementation just adds items to @a entries. This may used for special listener like the one from KIO
@@ -165,16 +165,16 @@ namespace svn
      * @param path the path of the item
      * @return true if inserted/displayd, false if dirent or entries aren't valid.
      */
-    virtual bool contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
+    virtual bool contextAddListItem(DirEntries *entries, const svn_dirent_t *dirent, const svn_lock_t *lock, const QString &path);
 
-  private:
-    ContextData * m;
+private:
+    ContextData *m;
 
     /**
      * disable assignment operator
      */
-    Context & operator = (const Context &);
-  };
+    Context &operator = (const Context &);
+};
 }
 
 #endif

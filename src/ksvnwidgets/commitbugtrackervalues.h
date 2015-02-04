@@ -40,34 +40,34 @@ public:
     //! constructor
     CommitBugtrackerValues();
     //! copy constructor
-    CommitBugtrackerValues(const CommitBugtrackerValues&old);
+    CommitBugtrackerValues(const CommitBugtrackerValues &old);
     //! destructor
     ~CommitBugtrackerValues();
 
     //! bugtraq:warnifnoissue
     bool Warnifnoissue()const;
     //! bugtraq:warnifnoissue
-    CommitBugtrackerValues& Warnifnoissue(bool);
+    CommitBugtrackerValues &Warnifnoissue(bool);
 
     //! bugtraq:label
-    const QString&Label()const;
+    const QString &Label()const;
     //! bugtraq:label
-    CommitBugtrackerValues&Label(const QString&);
+    CommitBugtrackerValues &Label(const QString &);
 
     //! bugtraq:message
-    const QString&Message()const;
+    const QString &Message()const;
     //! bugtraq:message
-    CommitBugtrackerValues&Message(const QString&);
+    CommitBugtrackerValues &Message(const QString &);
 
     //! bugtraq:number
     bool Number()const;
     //! bugtraq:number
-    CommitBugtrackerValues&Number(bool);
+    CommitBugtrackerValues &Number(bool);
 
     //! bugtraq:append
     bool Append()const;
     //! bugtraq:append
-    CommitBugtrackerValues&Append(bool);
+    CommitBugtrackerValues &Append(bool);
 };
 
 #endif // COMMITBUGTRACKERVALUES_H

@@ -37,22 +37,22 @@ class KUrl;
 
 namespace svn
 {
-    class Revision;
+class Revision;
 }
 
 class SvnItem
 {
 public:
     SvnItem();
-    SvnItem(const svn::StatusPtr&);
+    SvnItem(const svn::StatusPtr &);
     virtual ~SvnItem();
 
-    virtual const QString&fullName()const;
-    virtual const QString&shortName()const;
-    virtual const QString&Url()const;
-    virtual const KUrl&kdeName(const svn::Revision&);
+    virtual const QString &fullName()const;
+    virtual const QString &shortName()const;
+    virtual const QString &Url()const;
+    virtual const KUrl &kdeName(const svn::Revision &);
     virtual KMimeType::Ptr mimeType();
-    virtual const QDateTime&fullDate()const;
+    virtual const QDateTime &fullDate()const;
     virtual bool isDir()const;
     virtual bool isVersioned()const;
     virtual bool isConflicted()const;
@@ -67,25 +67,28 @@ public:
     virtual long int cmtRev()const;
     virtual bool isLocked()const;
     virtual QString lockOwner()const;
-    virtual QString getParentDir()const=0;
-    virtual SvnItem* getParentItem()const=0;
-    virtual const svn::Revision&correctPeg()const=0;
+    virtual QString getParentDir()const = 0;
+    virtual SvnItem *getParentItem()const = 0;
+    virtual const svn::Revision &correctPeg()const = 0;
     virtual svn::Revision revision()const;
-    virtual void refreshStatus(bool children=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false)=0;
+    virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false) = 0;
 
-    QPixmap getPixmap(int size,bool overlay=true);
-    QPixmap getPixmap(const QPixmap&,int size,bool overlay=true);
+    QPixmap getPixmap(int size, bool overlay = true);
+    QPixmap getPixmap(const QPixmap &, int size, bool overlay = true);
 
-    virtual SvnItemModelNode*sItem(){return 0;}
-    virtual void setStat(const svn::StatusPtr&);
-    virtual const svn::StatusPtr& stat()const;
+    virtual SvnItemModelNode *sItem()
+    {
+        return 0;
+    }
+    virtual void setStat(const svn::StatusPtr &);
+    virtual const svn::StatusPtr &stat()const;
     virtual bool isModified()const;
     virtual bool isChildModified()const;
     bool isNormal()const;
     bool isMissing()const;
     bool isDeleted()const;
-    const QString& getToolTipText();
-    virtual void generateToolTip(const svn::InfoEntry&entry);
+    const QString &getToolTipText();
+    virtual void generateToolTip(const svn::InfoEntry &entry);
     bool hasToolTipText();
     KFileItem fileItem();
 
@@ -105,9 +108,9 @@ protected:
     };
     color_type m_bgColor;
     svn::smart_pointer<SvnItem_p> p_Item;
-    virtual SvnActions*getWrapper()const = 0;
+    virtual SvnActions *getWrapper()const = 0;
 
-    static QPixmap internalTransform(const QPixmap&,int size);
+    static QPixmap internalTransform(const QPixmap &, int size);
 
 };
 

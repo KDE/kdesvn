@@ -39,7 +39,8 @@ namespace svn
 {
 
 //! simple reference counter class
-class ref_count {
+class ref_count
+{
 protected:
     //! reference count member
     long m_RefCount;
@@ -47,26 +48,32 @@ protected:
 public:
     //! first reference must be added after "new" via Pointer()
     ref_count() : m_RefCount(0)
-                  ,m_RefcountMutex()
+        , m_RefcountMutex()
     {}
     virtual ~ref_count() {}
     //! add a reference
-    void Incr() {
+    void Incr()
+    {
         QMutexLocker a(&m_RefcountMutex);
         ++m_RefCount;
     }
     //! delete a reference
-    bool Decr() {
+    bool Decr()
+    {
         QMutexLocker a(&m_RefcountMutex);
         --m_RefCount;
         return Shared();
     }
     //! is it referenced
-    bool Shared() { return (m_RefCount > 0); }
+    bool Shared()
+    {
+        return (m_RefCount > 0);
+    }
 };
 
 //! reference counting wrapper class
-template<class T> class smart_pointer {
+template<class T> class smart_pointer
+{
     //! pointer to object
     /*!
      * this object must contain Incr(), Decr() and Shared()
@@ -76,7 +83,10 @@ template<class T> class smart_pointer {
     T *ptr;
 public:
     //! standart constructor
-    smart_pointer() { ptr = 0; }
+    smart_pointer()
+    {
+        ptr = 0;
+    }
     //! standart destructor
     /*!
      * release the reference, if it were the last reference, destroys
@@ -89,51 +99,99 @@ public:
         }
     }
     //! construction
-    smart_pointer(T* t) { if ( (ptr = t) ) ptr->Incr(); }
+    smart_pointer(T *t)
+    {
+        if ((ptr = t)) {
+            ptr->Incr();
+        }
+    }
     //! Pointer copy
-    smart_pointer(const smart_pointer<T>& p)
-    { if ( (ptr = p.ptr) ) ptr->Incr(); }
+    smart_pointer(const smart_pointer<T> &p)
+    {
+        if ((ptr = p.ptr)) {
+            ptr->Incr();
+        }
+    }
     //! pointer copy by assignment
-    smart_pointer<T>& operator= (const smart_pointer<T>& p)
+    smart_pointer<T> &operator= (const smart_pointer<T> &p)
     {
         // already same: nothing to do
-        if (ptr == p.ptr) return *this;
+        if (ptr == p.ptr) {
+            return *this;
+        }
         // decouple reference
-        if ( ptr && !ptr->Decr()) delete ptr;
+        if (ptr && !ptr->Decr()) {
+            delete ptr;
+        }
         // establish new reference
-        if ( (ptr = p.ptr) ) ptr->Incr();
+        if ((ptr = p.ptr)) {
+            ptr->Incr();
+        }
         return *this;
     }
-    smart_pointer<T>& operator= (T*p)
+    smart_pointer<T> &operator= (T *p)
     {
-        if (ptr==p)return *this;
-        if (ptr && !ptr->Decr()) delete ptr;
-        if ( (ptr=p) ) ptr->Incr();
+        if (ptr == p) {
+            return *this;
+        }
+        if (ptr && !ptr->Decr()) {
+            delete ptr;
+        }
+        if ((ptr = p)) {
+            ptr->Incr();
+        }
         return *this;
     }
 
     //! cast to conventional pointer
-    operator T* () const { return ptr; }
+    operator T *() const
+    {
+        return ptr;
+    }
 
     //! deref: fails for 0 pointer
-    T& operator* () {return *ptr; }
+    T &operator* ()
+    {
+        return *ptr;
+    }
     //! deref: fails for 0 pointer
-    const T& operator* ()const {return *ptr; }
+    const T &operator* ()const
+    {
+        return *ptr;
+    }
 
     //! deref with method call
-    T* operator-> () {return ptr; }
+    T *operator-> ()
+    {
+        return ptr;
+    }
     //! deref with const method call
-    const T* operator-> ()const {return ptr; }
+    const T *operator-> ()const
+    {
+        return ptr;
+    }
 
     //! supports "if (pointer)"
-    operator bool () const { return (ptr != 0); }
+    operator bool () const
+    {
+        return (ptr != 0);
+    }
     //! "if (pointer)" as non const
-    operator bool () { return ptr != 0;}
+    operator bool ()
+    {
+        return ptr != 0;
+    }
 
     //! support if (!pointer)"
-    bool operator! () const { return (ptr == 0); }
+    bool operator!() const
+    {
+        return (ptr == 0);
+    }
     //! support if (!pointer)" as non const
-    bool operator! () { return (ptr == 0); }
+    bool operator!()
+    {
+        return (ptr == 0);
+    }
 };
 
 } // namespace svn

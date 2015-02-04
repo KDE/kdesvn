@@ -29,8 +29,8 @@ class AuthDialogImpl: public KDialog
 {
     Q_OBJECT
 public:
-    AuthDialogImpl(const QString & realm, const QString&user, QWidget *parent = 0);
-    virtual ~AuthDialogImpl(){}
+    AuthDialogImpl(const QString &realm, const QString &user, QWidget *parent = 0);
+    virtual ~AuthDialogImpl() {}
 
     const QString Username()const;
     const QString Password();
@@ -38,7 +38,7 @@ public:
 
 protected:
     QString curPass;
-    AuthDialogWidget * m_AuthWidget;
+    AuthDialogWidget *m_AuthWidget;
 };
 
 #endif

@@ -20,10 +20,9 @@
 #include "threadcontextlistenerdata.h"
 
 ThreadContextListenerData::ThreadContextListenerData()
-    :noProgress(true)
+    : noProgress(true)
 {
 }
-
 
 ThreadContextListenerData::~ThreadContextListenerData()
 {

@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #include "kdesvn.h"
 #include "urldlg.h"
 #include "kdesvn_part.h"
@@ -65,7 +64,7 @@ kdesvn::kdesvn()
     m_part = 0;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
-    kDebug(9510)<<"Using test rc file in " << TESTING_RC << endl;
+    kDebug(9510) << "Using test rc file in " << TESTING_RC << endl;
     // I hate this crashhandler in development
     KCrash::setCrashHandler(0);
 #else
@@ -77,75 +76,72 @@ kdesvn::kdesvn()
     // and a status bar
     statusBar()->show();
 
-    m_bookmarkFile = KStandardDirs::locateLocal("appdata",QString::fromLatin1("bookmarks.xml"),true);
+    m_bookmarkFile = KStandardDirs::locateLocal("appdata", QString::fromLatin1("bookmarks.xml"), true);
 
     m_BookmarkManager = KBookmarkManager::managerForExternalFile(m_bookmarkFile);
     m_BookmarksActionmenu = new KBookmarkActionMenu(m_BookmarkManager->root(),
-                                              i18n( "&Bookmarks" ), this);
+                                                    i18n("&Bookmarks"), this);
 
-    actionCollection()->addAction( "bookmarks", m_BookmarksActionmenu );
-    m_Bookmarkactions = new KActionCollection(static_cast<QWidget*>(this));
-    m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager,this,m_BookmarksActionmenu->menu(),m_Bookmarkactions);
+    actionCollection()->addAction("bookmarks", m_BookmarksActionmenu);
+    m_Bookmarkactions = new KActionCollection(static_cast<QWidget *>(this));
+    m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
 
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
     KLibFactory *factory = 0;
 #ifdef EXTRA_KDE_LIBPATH
-    factory = KLibLoader::self()->factory(EXTRA_KDE_LIBPATH+QString("/kdesvnpart.so"));
+    factory = KLibLoader::self()->factory(EXTRA_KDE_LIBPATH + QString("/kdesvnpart.so"));
     if (!factory)
 #endif
-    factory = KLibLoader::self()->factory("kdesvnpart");
+        factory = KLibLoader::self()->factory("kdesvnpart");
 
-
-    if (factory)
-    {
+    if (factory) {
         m_part = factory->create<KParts::ReadOnlyPart>(this);
-        if (m_part)
-        {
+        if (m_part) {
             // tell the KParts::MainWindow that this is indeed the main widget
             setCentralWidget(m_part->widget());
-            connect(this,SIGNAL(sigSavestate()),m_part->widget(),SLOT(slotSavestate()));
-            connect(m_part->widget(),SIGNAL(sigExtraStatusMessage(const QString&)),this,SLOT(slotExtraStatus(const QString&)));
+            connect(this, SIGNAL(sigSavestate()), m_part->widget(), SLOT(slotSavestate()));
+            connect(m_part->widget(), SIGNAL(sigExtraStatusMessage(QString)), this, SLOT(slotExtraStatus(QString)));
 
-            KAction*tmpAction;
+            KAction *tmpAction;
             tmpAction = actionCollection()->addAction("subversion_create_repo",
-                                                       m_part->widget(),
-                                                       SLOT(slotCreateRepo()));
+                                                      m_part->widget(),
+                                                      SLOT(slotCreateRepo()));
             tmpAction->setText(i18n("Create and open new repository"));
             tmpAction->setToolTip(i18n("Create and opens a new local Subversion repository"));
 
             tmpAction = actionCollection()->addAction("subversion_dump_repo",
-                                                       m_part->widget(),
-                                                       SLOT(slotDumpRepo()));
+                                                      m_part->widget(),
+                                                      SLOT(slotDumpRepo()));
             tmpAction->setText(i18n("Dump repository to file"));
             tmpAction->setToolTip(i18n("Dump a Subversion repository to a file"));
 
             tmpAction = actionCollection()->addAction("subversion_hotcopy_repo",
-                                                       m_part->widget(),
-                                                       SLOT(slotHotcopy()));
+                                                      m_part->widget(),
+                                                      SLOT(slotHotcopy()));
             tmpAction->setText(i18n("Hotcopy a repository"));
             tmpAction->setToolTip(i18n("Hotcopy a Subversion repository to a new folder"));
 
             tmpAction = actionCollection()->addAction("subversion_load_repo",
-                                                       m_part->widget(),
-                                                       SLOT(slotLoaddump()));
+                                                      m_part->widget(),
+                                                      SLOT(slotLoaddump()));
             tmpAction->setText(i18n("Load dump into repository"));
             tmpAction->setToolTip(i18n("Load a dump file into a repository."));
 
             tmpAction = actionCollection()->addAction("kdesvn_ssh_add",
-                                                       m_part,
-                                                       SLOT(slotSshAdd()));
+                                                      m_part,
+                                                      SLOT(slotSshAdd()));
             tmpAction->setText(i18n("Add ssh identities to ssh-agent"));
             tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
 
             tmpAction = actionCollection()->addAction("help_about_kdesvnpart",
-                                                       m_part,
-                                                       SLOT(showAboutApplication()));
+                                                      m_part,
+                                                      SLOT(showAboutApplication()));
             tmpAction->setText(i18n("Info about kdesvn part"));
             tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin and not the standalone application."));
 
-            tmpAction = actionCollection()->addAction("db_show_status",m_part,SLOT(showDbStatus()));
+            tmpAction = actionCollection()->addAction("db_show_status", m_part, SLOT(showDbStatus()));
             tmpAction->setText(i18n("Show database content"));
             tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
@@ -163,9 +159,7 @@ kdesvn::kdesvn()
             kapp->quit();
             return;
         }
-    }
-    else
-    {
+    } else {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
         KMessageBox::error(this, i18n("Could not find our part:\n%1", KLibLoader::self()->lastErrorMessage()));
@@ -177,11 +171,13 @@ kdesvn::kdesvn()
     setAutoSaveSettings();
 }
 
-void kdesvn::connectActionCollection( KActionCollection *coll )
+void kdesvn::connectActionCollection(KActionCollection *coll)
 {
-    if (!coll)return;
+    if (!coll) {
+        return;
+    }
 #if 0
-    connect(coll,SIGNAL(actionHovered(QAction*)),this,SLOT(actionHovered(QAction*)));
+    connect(coll, SIGNAL(actionHovered(QAction*)), this, SLOT(actionHovered(QAction*)));
 #endif
 }
 
@@ -189,26 +185,26 @@ kdesvn::~kdesvn()
 {
 }
 
-void kdesvn::loadRescent(const KUrl& url)
+void kdesvn::loadRescent(const KUrl &url)
 {
-    load(url,true);
+    load(url, true);
 }
 
-void kdesvn::load(const KUrl& url,bool addRescent)
+void kdesvn::load(const KUrl &url, bool addRescent)
 {
-    QTimer::singleShot(100,this,SLOT(slotResetExtraStatus()));
+    QTimer::singleShot(100, this, SLOT(slotResetExtraStatus()));
     if (m_part) {
         bool ret = m_part->openUrl(url);
-        KRecentFilesAction*rac = 0;
+        KRecentFilesAction *rac = 0;
         if (addRescent) {
 //             KAction * ac = actionCollection()->action("file_open_recent");
-            QAction * ac = actionCollection()->action("file_open_recent");
+            QAction *ac = actionCollection()->action("file_open_recent");
             if (ac) {
-                rac = (KRecentFilesAction*)ac;
+                rac = (KRecentFilesAction *)ac;
             }
         }
         if (!ret) {
-            changeStatusbar(i18n("Could not open URL %1",url.prettyUrl()));
+            changeStatusbar(i18n("Could not open URL %1", url.prettyUrl()));
             if (rac) {
                 rac->removeUrl(url);
             }
@@ -219,7 +215,7 @@ void kdesvn::load(const KUrl& url,bool addRescent)
             }
         }
         if (rac) {
-            KConfigGroup cg(KGlobal::config(),"recent_files");
+            KConfigGroup cg(KGlobal::config(), "recent_files");
 //             rac->saveEntries(KGlobal::config(),"recent_files");
             rac->saveEntries(cg);
         }
@@ -228,20 +224,19 @@ void kdesvn::load(const KUrl& url,bool addRescent)
 
 void kdesvn::setupActions()
 {
-    KAction*ac;
+    KAction *ac;
     KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
-    KStandardAction::openNew(this,SLOT(fileNew()),actionCollection());
-    ac = KStandardAction::close(this,SLOT(fileClose()),actionCollection());
+    KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
+    ac = KStandardAction::close(this, SLOT(fileClose()), actionCollection());
 //     ac->setEnabled(getMemberList()->count()>1);
-    ac->setEnabled(memberList().count()>1);
+    ac->setEnabled(memberList().count() > 1);
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 
-    KRecentFilesAction*rac = KStandardAction::openRecent(this,SLOT(loadRescent(const KUrl&)),actionCollection());
-    if (rac)
-    {
+    KRecentFilesAction *rac = KStandardAction::openRecent(this, SLOT(loadRescent(KUrl)), actionCollection());
+    if (rac) {
         rac->setMaxItems(8);
 //         rac->loadEntries(KGlobal::config(),"recent_files");
-        KConfigGroup cg(KGlobal::config(),"recent_files");
+        KConfigGroup cg(KGlobal::config(), "recent_files");
         rac->loadEntries(cg);
         rac->setText(i18n("Recent opened URLs"));
     }
@@ -257,31 +252,34 @@ void kdesvn::setupActions()
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"), this);
     actionCollection()->addAction("toggle_load_last_url", toggletemp);
     toggletemp->setToolTip(i18n("Reload last opened URL if no one is given on command line"));
-    KConfigGroup cs(KGlobal::config(),"startup");
+    KConfigGroup cs(KGlobal::config(), "startup");
 //     toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));
-    toggletemp->setChecked(cs.readEntry("load_last_on_start",false));
-    connect(toggletemp,SIGNAL(toggled(bool)),this,SLOT(slotLoadLast(bool)));
+    toggletemp->setChecked(cs.readEntry("load_last_on_start", false));
+    connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotLoadLast(bool)));
 }
 
 void kdesvn::optionsShowStatusbar()
 {
     // this is all very cut and paste code for showing/hiding the
     // statusbar
-    if (m_statusbarAction->isChecked())
+    if (m_statusbarAction->isChecked()) {
         statusBar()->show();
-    else
+    } else {
         statusBar()->hide();
+    }
 }
 
 void kdesvn::fileClose()
 {
-    if (m_part) m_part->closeUrl();
+    if (m_part) {
+        m_part->closeUrl();
+    }
 //     if (getMemberList()->count()>1) {
-    if (memberList().count()>1) {
+    if (memberList().count() > 1) {
         close();
     } else {
         enableClose(false);
-        QTimer::singleShot(100,this,SLOT(slotResetExtraStatus()));
+        QTimer::singleShot(100, this, SLOT(slotResetExtraStatus()));
         enableClose(false);
     }
 }
@@ -291,13 +289,15 @@ void kdesvn::saveProperties(KConfigGroup &config)
     // the 'config' object points to the session managed
     // config file.  anything you write here will be available
     // later when this app is restored
-    if (!m_part) return;
+    if (!m_part) {
+        return;
+    }
     if (!m_part->url().isEmpty()) {
         config.writeEntry("lastURL", m_part->url().prettyUrl());
     }
 }
 
-void kdesvn::readProperties(const KConfigGroup&config)
+void kdesvn::readProperties(const KConfigGroup &config)
 {
     // the 'config' object points to the session managed
     // config file.  this function is automatically called whenever
@@ -306,8 +306,9 @@ void kdesvn::readProperties(const KConfigGroup&config)
 
     QString url = config.readPathEntry("lastURL", QString());
 
-    if (!url.isEmpty() && m_part)
+    if (!url.isEmpty() && m_part) {
         m_part->openUrl(KUrl(url));
+    }
 }
 
 void kdesvn::fileNew()
@@ -324,46 +325,51 @@ void kdesvn::fileNew()
 void kdesvn::fileOpen()
 {
     KUrl url = UrlDlg::getUrl(this);
-    if (!url.isEmpty())
-        load(url,true);
+    if (!url.isEmpty()) {
+        load(url, true);
+    }
 }
 
-void kdesvn::changeStatusbar(const QString& text)
+void kdesvn::changeStatusbar(const QString &text)
 {
     statusBar()->showMessage(text);
 }
 
 void kdesvn::resetStatusBar()
 {
-    statusBar()->showMessage(i18n("Ready"),4000);
+    statusBar()->showMessage(i18n("Ready"), 4000);
 }
 
 // kde4 port - pv
-void kdesvn::openBookmark(const KBookmark&bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km)
+void kdesvn::openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km)
 {
     Q_UNUSED(mb);
     Q_UNUSED(km);
-    if (!bm.url().isEmpty() && m_part)
-        load(bm.url(),false);
+    if (!bm.url().isEmpty() && m_part) {
+        load(bm.url(), false);
+    }
 }
 
-QString kdesvn::currentUrl () const
+QString kdesvn::currentUrl() const
 {
-    if (!m_part) return QString();
+    if (!m_part) {
+        return QString();
+    }
     return m_part->url().prettyUrl();
 }
 
 QString kdesvn::currentTitle() const
 {
-    if (!m_part) return QString();
+    if (!m_part) {
+        return QString();
+    }
     return m_part->url().fileName();
 }
 
 void kdesvn::enableClose(bool how)
 {
-//     KAction * ac;
-    QAction * ac;
-    if ( (ac=actionCollection()->action("file_close"))) {
+    QAction *ac;
+    if ((ac = actionCollection()->action("file_close"))) {
         ac->setEnabled(how);
     }
 }
@@ -375,7 +381,6 @@ void kdesvn::slotUrlOpened(bool how)
 {
     enableClose(how);
 }
-
 
 /*!
     \fn kdesvn::optionsConfigureToolbars()
@@ -392,7 +397,6 @@ void kdesvn::optionsConfigureToolbars()
     dlg.exec();
 }
 
-
 /*!
     \fn kdesvn::applyNewToolbarConfig()
  */
@@ -405,14 +409,13 @@ void kdesvn::applyNewToolbarConfig()
 void kdesvn::optionsConfigureKeys()
 {
     KShortcutsDialog kdlg(KShortcutsEditor::AllActions,
-                           KShortcutsEditor::LetterShortcutsAllowed,
-                           m_part->widget());
+                          KShortcutsEditor::LetterShortcutsAllowed,
+                          m_part->widget());
     kdlg.addCollection(actionCollection());
     kdlg.addCollection(m_part->actionCollection());
 
     kdlg.configure(true);
 }
-
 
 /*!
     \fn kdesvn::closeEvent()
@@ -421,38 +424,37 @@ void kdesvn::closeEvent(QCloseEvent *ev)
 {
     emit sigSavestate();
     if (m_part) {
-        KConfigGroup cs(KGlobal::config(),"startup");
+        KConfigGroup cs(KGlobal::config(), "startup");
         cs.writeEntry("lastURL", m_part->url().prettyUrl());
         cs.sync();
     }
     return KParts::MainWindow::closeEvent(ev);
 }
 
-
 /*!
     \fn kdesvn::checkReload()
  */
 void kdesvn::checkReload()
 {
-    KConfigGroup cs(KGlobal::config(),"startup");
-    if (!cs.readEntry("load_last_on_start",false)) {
+    KConfigGroup cs(KGlobal::config(), "startup");
+    if (!cs.readEntry("load_last_on_start", false)) {
         return;
     }
 
     QString url = cs.readPathEntry("lastURL", QString());
 
-    if (!url.isEmpty() && m_part)
-        load(KUrl(url),false);
+    if (!url.isEmpty() && m_part) {
+        load(KUrl(url), false);
+    }
 }
-
 
 /*!
     \fn kdesvn::slotLoadLast(bool)
  */
 void kdesvn::slotLoadLast(bool how)
 {
-    KConfigGroup cs(KGlobal::config(),"startup");
-    cs.writeEntry("load_last_on_start",how);
+    KConfigGroup cs(KGlobal::config(), "startup");
+    cs.writeEntry("load_last_on_start", how);
     cs.sync();
 }
 
@@ -463,12 +465,12 @@ void kdesvn::slotResetExtraStatus()
     }
 }
 
-void kdesvn::slotExtraStatus(const QString&what)
+void kdesvn::slotExtraStatus(const QString &what)
 {
     if (!statusBar()->hasItem(1)) {
-        statusBar()->insertItem(what,1);
+        statusBar()->insertItem(what, 1);
     } else {
-        statusBar()->changeItem(what,1);
+        statusBar()->changeItem(what, 1);
     }
 }
 

@@ -26,7 +26,7 @@
 
 class SvnItem;
 /**
-	@author
+    @author
 */
 class Propertylist : public QTreeWidget
 {
@@ -35,26 +35,32 @@ public:
     Propertylist(QWidget *parent = 0);
     ~Propertylist();
 
-    bool checkExisting(const QString&aName,QTreeWidgetItem*it=0);
-    bool commitchanges()const{return m_commitit;}
-    void setCommitchanges(bool how){m_commitit=how;}
-    void addCallback(QObject*);
+    bool checkExisting(const QString &aName, QTreeWidgetItem *it = 0);
+    bool commitchanges()const
+    {
+        return m_commitit;
+    }
+    void setCommitchanges(bool how)
+    {
+        m_commitit = how;
+    }
+    void addCallback(QObject *);
 
 public slots:
-    virtual void displayList(const svn::PathPropertiesMapListPtr&,bool,bool,const QString&);
+    virtual void displayList(const svn::PathPropertiesMapListPtr &, bool, bool, const QString &);
     virtual void clear();
 
 protected slots:
-    virtual void slotItemChanged(QTreeWidgetItem*item,int col );
+    virtual void slotItemChanged(QTreeWidgetItem *item, int col);
 
 signals:
-    void sigSetProperty(const svn::PropertiesMap&,const QStringList&,const QString&);
+    void sigSetProperty(const svn::PropertiesMap &, const QStringList &, const QString &);
 protected:
     bool m_commitit;
     QString m_current;
     bool m_Dir;
 
-    virtual void keyPressEvent(QKeyEvent*);
+    virtual void keyPressEvent(QKeyEvent *);
 };
 
 #endif

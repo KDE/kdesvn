@@ -31,7 +31,7 @@ class CContextListenerData;
 /**
 @author Rajko Albrecht
 */
-class CContextListener : public QObject, public svn::ContextListener,public svn::ref_count
+class CContextListener : public QObject, public svn::ContextListener, public svn::ref_count
 {
     Q_OBJECT
 public:
@@ -39,24 +39,22 @@ public:
     virtual ~CContextListener();
 
     /* context-listener methods */
-    virtual bool contextGetLogin (const QString & realm,
-                     QString & username,
-                     QString & password,
-                     bool & maySave);
-    virtual bool contextGetSavedLogin (const QString & realm,QString & username,QString & password);
-    virtual bool contextGetCachedLogin(const QString & realm,QString & username,QString & password);
+    virtual bool contextGetLogin(const QString &realm,
+                                 QString &username,
+                                 QString &password,
+                                 bool &maySave);
+    virtual bool contextGetSavedLogin(const QString &realm, QString &username, QString &password);
+    virtual bool contextGetCachedLogin(const QString &realm, QString &username, QString &password);
 
-
-    virtual void contextNotify (const char *path,
-                   svn_wc_notify_action_t action,
-                   svn_node_kind_t kind,
-                   const char *mime_type,
-                   svn_wc_notify_state_t content_state,
-                   svn_wc_notify_state_t prop_state,
-                   svn_revnum_t revision);
-    virtual void contextNotify (const svn_wc_notify_t *action);
-    virtual void contextNotify(const QString&);
-
+    virtual void contextNotify(const char *path,
+                               svn_wc_notify_action_t action,
+                               svn_node_kind_t kind,
+                               const char *mime_type,
+                               svn_wc_notify_state_t content_state,
+                               svn_wc_notify_state_t prop_state,
+                               svn_revnum_t revision);
+    virtual void contextNotify(const svn_wc_notify_t *action);
+    virtual void contextNotify(const QString &);
 
     virtual void sendTick();
 
@@ -64,14 +62,14 @@ public:
     /*!
      * Get logmessage for checkin and so on...
      */
-    virtual bool contextGetLogMessage (QString & msg,const svn::CommitItemList&);
-    virtual SslServerTrustAnswer contextSslServerTrustPrompt (const SslServerTrustData & data,
-                                 apr_uint32_t & acceptedFailures);
-    virtual bool contextSslClientCertPrompt (QString & certFile);
-    virtual bool contextSslClientCertPwPrompt (QString & password,
-                                   const QString & realm, bool & maySave);
-    virtual bool contextLoadSslClientCertPw(QString&password,const QString&realm);
-    virtual QString translate(const QString&what);
+    virtual bool contextGetLogMessage(QString &msg, const svn::CommitItemList &);
+    virtual SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data,
+            apr_uint32_t &acceptedFailures);
+    virtual bool contextSslClientCertPrompt(QString &certFile);
+    virtual bool contextSslClientCertPwPrompt(QString &password,
+            const QString &realm, bool &maySave);
+    virtual bool contextLoadSslClientCertPw(QString &password, const QString &realm);
+    virtual QString translate(const QString &what);
 
     static QString NotifyAction(svn_wc_notify_action_t action);
     static QString NotifyState(svn_wc_notify_state_t);
@@ -79,11 +77,11 @@ public:
     static QStringList failure2Strings(apr_uint32_t acceptedFailures);
     virtual void contextProgress(long long int current, long long int max);
 
-    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring);
+    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString &realmstring);
 
     // used by SvnActions
     //! get list of updated items when svn update is called
-    const QStringList&updatedItems()const;
+    const QStringList &updatedItems()const;
     //! cleans list of updatedItems, should called before calling svn::Client::update
     void cleanUpdatedItems();
 
@@ -91,19 +89,19 @@ public Q_SLOTS:
     virtual void setCanceled(bool);
 
 Q_SIGNALS:
-    void sendNotify(const QString&);
+    void sendNotify(const QString &);
     void tickProgress();
     void waitShow(bool);
     void netProgress(long long int, long long int);
 
 protected:
     static const int smax_actionstring;
-    static const char * action_strings[];
-    static const char * notify_state_strings[];
-    CContextListenerData*m_Data;
+    static const char *action_strings[];
+    static const char *notify_state_strings[];
+    CContextListenerData *m_Data;
 
 private:
-    void extraNotify(const QString&path,svn_wc_notify_action_t action,svn_revnum_t revision);
+    void extraNotify(const QString &path, svn_wc_notify_action_t action, svn_revnum_t revision);
 };
 
 #endif

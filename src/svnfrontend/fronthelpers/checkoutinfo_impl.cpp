@@ -38,7 +38,7 @@ CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent)
 
     m_RangeInput->setStartOnly(true);
     m_RangeInput->setHeadDefault();
-    m_TargetSelector->setMode(KFile::LocalOnly|KFile::Directory);
+    m_TargetSelector->setMode(KFile::LocalOnly | KFile::Directory);
     m_UrlEdit->setMode(KFile::Directory);
 }
 
@@ -59,7 +59,7 @@ QString CheckoutInfo_impl::reposURL() const
     // proto is the protocol given to the svn api
     // why ksvn+file needs a different handling than svn+file is
     // currently unknown but this logic is used in other places too
-    if (proto==QLatin1String("file") &&
+    if (proto == QLatin1String("file") &&
             uri.protocol() != QLatin1String("ksvn+file")) {
         uri.setProtocol(QString());
     } else {
@@ -74,11 +74,11 @@ QString CheckoutInfo_impl::targetDir() const
         return  m_TargetSelector->url().url();
     }
     QString _uri = reposURL();
-    QStringList l = _uri.split(QLatin1Char('/'),QString::SkipEmptyParts);
+    QStringList l = _uri.split(QLatin1Char('/'), QString::SkipEmptyParts);
     if (l.isEmpty()) {
         return m_TargetSelector->url().url();
     }
-    return  m_TargetSelector->url().path()+QLatin1Char('/')+l[l.count()-1];
+    return  m_TargetSelector->url().path() + QLatin1Char('/') + l[l.count() - 1];
 }
 
 bool CheckoutInfo_impl::overwrite() const
@@ -89,15 +89,15 @@ bool CheckoutInfo_impl::overwrite() const
 /*!
     \fn CheckoutInfo_impl::setTargetUrl(const QString&)
  */
-void CheckoutInfo_impl::setTargetUrl(const QString&what)
+void CheckoutInfo_impl::setTargetUrl(const QString &what)
 {
     m_TargetSelector->setUrl(what);
 }
 
-void CheckoutInfo_impl::setStartUrl(const QString&what)
+void CheckoutInfo_impl::setStartUrl(const QString &what)
 {
     KUrl uri(what);
-    if (uri.protocol()=="file") {
+    if (uri.protocol() == "file") {
         if (what.startsWith("file:")) {
             uri.setProtocol("ksvn+file");
         } else {
@@ -109,20 +109,20 @@ void CheckoutInfo_impl::setStartUrl(const QString&what)
     m_UrlEdit->setUrl(uri.prettyUrl());
 }
 
-void CheckoutInfo_impl::hideDepth(bool how,bool overwriteAsRecurse)
+void CheckoutInfo_impl::hideDepth(bool how, bool overwriteAsRecurse)
 {
     if (how) {
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->hide();
         if (overwriteAsRecurse) {
-            m_overwriteButton->setToolTip(i18n( "Make operation recursive" ));
+            m_overwriteButton->setToolTip(i18n("Make operation recursive"));
             m_overwriteButton->setText(i18n("Recursive"));
         }
     } else if (!how) {
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->show();
-        m_overwriteButton->setText( i18n( "Overwrite existing" ) );
-        m_overwriteButton->setToolTip(i18n( "May existing unversioned items overwritten" ));
+        m_overwriteButton->setText(i18n("Overwrite existing"));
+        m_overwriteButton->setToolTip(i18n("May existing unversioned items overwritten"));
     }
     adjustSize();
 }
@@ -159,7 +159,6 @@ void CheckoutInfo_impl::disableOpen(bool how)
     }
 }
 
-
 /*!
     \fn CheckoutInfo_impl::openAfterJob()
  */
@@ -182,7 +181,7 @@ void CheckoutInfo_impl::disableRange(bool how)
     }
 }
 
-void CheckoutInfo_impl::urlChanged(const QString&)
+void CheckoutInfo_impl::urlChanged(const QString &)
 {
 }
 

@@ -31,7 +31,7 @@
 #include <klocale.h>
 #include <QCoreApplication>
 
-ThreadContextListener::ThreadContextListener(QObject* parent)
+ThreadContextListener::ThreadContextListener(QObject *parent)
     : CContextListener(parent)
 {
     m_Data = new ThreadContextListenerData;
@@ -42,27 +42,27 @@ ThreadContextListener::~ThreadContextListener()
     delete m_Data;
 }
 
-QMutex*ThreadContextListener::callbackMutex()
+QMutex *ThreadContextListener::callbackMutex()
 {
     static QMutex s_CallbackMutex;
     return &s_CallbackMutex;
 }
 
-bool ThreadContextListener::contextGetLogin(const QString& realm, QString& username, QString& password, bool& maySave)
+bool ThreadContextListener::contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave)
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
     ThreadContextListenerData::slogin_data _data;
-    _data.realm=realm;
-    _data.user=username;
-    _data.password=password;
-    _data.maysave=maySave;
-    _data.ok=false;
+    _data.realm = realm;
+    _data.user = username;
+    _data.password = password;
+    _data.maysave = maySave;
+    _data.ok = false;
 
-    DataEvent*ev = new DataEvent(EVENT_THREAD_LOGIN_PROMPT);
-    void*t = (void*)&_data;
+    DataEvent *ev = new DataEvent(EVENT_THREAD_LOGIN_PROMPT);
+    void *t = (void *)&_data;
     ev->setData(t);
-    QCoreApplication::postEvent(this,ev);
+    QCoreApplication::postEvent(this, ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     username = _data.user;
@@ -71,21 +71,21 @@ bool ThreadContextListener::contextGetLogin(const QString& realm, QString& usern
     return _data.ok;
 }
 
-bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString & username,QString & password)
+bool ThreadContextListener::contextGetSavedLogin(const QString &realm, QString &username, QString &password)
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
     ThreadContextListenerData::slogin_data _data;
-    _data.realm=realm;
-    _data.user=username;
-    _data.password=password;
-    _data.maysave=false;
-    _data.ok=false;
+    _data.realm = realm;
+    _data.user = username;
+    _data.password = password;
+    _data.maysave = false;
+    _data.ok = false;
 
-    DataEvent*ev = new DataEvent(EVENT_THREAD_LOGIN_SAVED);
-    void*t = (void*)&_data;
+    DataEvent *ev = new DataEvent(EVENT_THREAD_LOGIN_SAVED);
+    void *t = (void *)&_data;
     ev->setData(t);
-    QCoreApplication::postEvent(this,ev);
+    QCoreApplication::postEvent(this, ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     username = _data.user;
@@ -93,50 +93,50 @@ bool ThreadContextListener::contextGetSavedLogin(const QString & realm,QString &
     return _data.ok;
 }
 
-bool ThreadContextListener::contextGetLogMessage(QString& msg,const svn::CommitItemList&_items)
+bool ThreadContextListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &_items)
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
     ThreadContextListenerData::slog_message log;
     log.ok = false;
     log._items = &_items;
-    DataEvent*ev = new DataEvent(EVENT_THREAD_LOGMSG_PROMPT);
-    void*t = (void*)&log;
+    DataEvent *ev = new DataEvent(EVENT_THREAD_LOGMSG_PROMPT);
+    void *t = (void *)&log;
     ev->setData(t);
-    QCoreApplication::postEvent(this,ev);
+    QCoreApplication::postEvent(this, ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     msg = log.msg;
     return log.ok;
 }
 
-bool ThreadContextListener::contextSslClientCertPrompt(QString& certFile)
+bool ThreadContextListener::contextSslClientCertPrompt(QString &certFile)
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
 
     ThreadContextListenerData::scert_file scertf;
     scertf.ok = false;
-    DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
-    ev->setData((void*)&scertf);
-    QCoreApplication::postEvent(this,ev);
+    DataEvent *ev = new DataEvent(EVENT_THREAD_CERT_SELECT_PROMPT);
+    ev->setData((void *)&scertf);
+    QCoreApplication::postEvent(this, ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     certFile = scertf.certfile;
     return scertf.ok;
 }
 
-bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, const QString& realm, bool& maySave)
+bool ThreadContextListener::contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave)
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
     ThreadContextListenerData::scert_pw scert_data;
-    scert_data.ok=false;
-    scert_data.maysave=false;
-    scert_data.realm=realm;
-    DataEvent*ev = new DataEvent(EVENT_THREAD_CERT_PW_PROMPT);
-    ev->setData((void*)&scert_data);
-    QCoreApplication::postEvent(this,ev);
+    scert_data.ok = false;
+    scert_data.maysave = false;
+    scert_data.realm = realm;
+    DataEvent *ev = new DataEvent(EVENT_THREAD_CERT_PW_PROMPT);
+    ev->setData((void *)&scert_data);
+    QCoreApplication::postEvent(this, ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     password = scert_data.password;
@@ -144,30 +144,30 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString& password, cons
     return scert_data.ok;
 }
 
-svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServerTrustPrompt(const SslServerTrustData& data, apr_uint32_t&/* acceptedFailures*/)
+svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &/* acceptedFailures*/)
 {
     QMutexLocker lock(callbackMutex());
     m_WaitMutex.lock();
-    DataEvent*ev = new DataEvent(EVENT_THREAD_SSL_TRUST_PROMPT);
+    DataEvent *ev = new DataEvent(EVENT_THREAD_SSL_TRUST_PROMPT);
     ThreadContextListenerData::strust_answer trust_answer;
-    trust_answer.m_SslTrustAnswer=DONT_ACCEPT;
+    trust_answer.m_SslTrustAnswer = DONT_ACCEPT;
     trust_answer.m_Trustdata = &data;
-    ev->setData((void*)&trust_answer);
-    QCoreApplication::postEvent(this,ev);
+    ev->setData((void *)&trust_answer);
+    QCoreApplication::postEvent(this, ev);
     m_Data->m_trustpromptWait.wait(&m_WaitMutex);
     m_WaitMutex.unlock();
     return trust_answer.m_SslTrustAnswer;
 }
 
-void ThreadContextListener::contextNotify(const QString&aMsg)
+void ThreadContextListener::contextNotify(const QString &aMsg)
 {
     QMutexLocker lock(callbackMutex());
-    DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
+    DataEvent *ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
-    ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
+    ThreadContextListenerData::snotify *_notify = new ThreadContextListenerData::snotify();
     _notify->msg = aMsg;
-    ev->setData((void*)_notify);
-    QCoreApplication::postEvent(this,ev);
+    ev->setData((void *)_notify);
+    QCoreApplication::postEvent(this, ev);
 }
 
 /*!
@@ -175,100 +175,100 @@ void ThreadContextListener::contextNotify(const QString&aMsg)
  */
 void ThreadContextListener::contextProgress(long long int current, long long int max)
 {
-    if (m_Data->noProgress||current==0) {
+    if (m_Data->noProgress || current == 0) {
         return;
     }
     QMutexLocker lock(callbackMutex());
-    DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
+    DataEvent *ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
-    ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
+    ThreadContextListenerData::snotify *_notify = new ThreadContextListenerData::snotify();
     QString msg;
     QString s1 = helpers::ByteToString(current);
-    if (max>-1) {
+    if (max > -1) {
         QString s2 = helpers::ByteToString(max);
-        msg = i18n("%1 of %2 transferred.",s1,s2);
+        msg = i18n("%1 of %2 transferred.", s1, s2);
     } else {
-        msg = i18n("%1 transferred.",s1);
+        msg = i18n("%1 transferred.", s1);
     }
     _notify->msg = msg;
-    ev->setData((void*)_notify);
-    QCoreApplication::postEvent(this,ev);
+    ev->setData((void *)_notify);
+    QCoreApplication::postEvent(this, ev);
 }
 
 void ThreadContextListener::sendTick()
 {
     QMutexLocker lock(callbackMutex());
-    DataEvent*ev = new DataEvent(EVENT_THREAD_NOTIFY);
+    DataEvent *ev = new DataEvent(EVENT_THREAD_NOTIFY);
     // receiver must delete data!
-    ThreadContextListenerData::snotify* _notify = new ThreadContextListenerData::snotify();
-    ev->setData((void*)_notify);
-    QCoreApplication::postEvent(this,ev);
+    ThreadContextListenerData::snotify *_notify = new ThreadContextListenerData::snotify();
+    ev->setData((void *)_notify);
+    QCoreApplication::postEvent(this, ev);
 }
 
 /* methods below may only called from mainthread! (via event) */
-void ThreadContextListener::event_contextGetLogin(void*data)
+void ThreadContextListener::event_contextGetLogin(void *data)
 {
     QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
     }
-    ThreadContextListenerData::slogin_data*_data = (ThreadContextListenerData::slogin_data*)data;
+    ThreadContextListenerData::slogin_data *_data = (ThreadContextListenerData::slogin_data *)data;
 
     _data->ok = CContextListener::contextGetLogin(_data->realm, _data->user, _data->password, _data->maysave);
     m_Data->m_trustpromptWait.wakeAll();
 }
 
-void ThreadContextListener::event_contextGetSavedLogin(void*data)
+void ThreadContextListener::event_contextGetSavedLogin(void *data)
 {
     QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
     }
-    ThreadContextListenerData::slogin_data*_data = (ThreadContextListenerData::slogin_data*)data;
+    ThreadContextListenerData::slogin_data *_data = (ThreadContextListenerData::slogin_data *)data;
     _data->ok = CContextListener::contextGetSavedLogin(_data->realm, _data->user, _data->password);
     m_Data->m_trustpromptWait.wakeAll();
 }
 
-void ThreadContextListener::event_contextGetLogMessage(void * data)
+void ThreadContextListener::event_contextGetLogMessage(void *data)
 {
     QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
     }
-    ThreadContextListenerData::slog_message * _log = (ThreadContextListenerData::slog_message*)data;
+    ThreadContextListenerData::slog_message *_log = (ThreadContextListenerData::slog_message *)data;
 
-    _log->ok = CContextListener::contextGetLogMessage(_log->msg,(_log->_items?*(_log->_items):svn::CommitItemList()));
+    _log->ok = CContextListener::contextGetLogMessage(_log->msg, (_log->_items ? * (_log->_items) : svn::CommitItemList()));
     m_Data->m_trustpromptWait.wakeAll();
 }
 
-void ThreadContextListener::event_contextSslClientCertPrompt(void*data)
+void ThreadContextListener::event_contextSslClientCertPrompt(void *data)
 {
     QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
     }
-    ThreadContextListenerData::scert_file*scertf = (ThreadContextListenerData::scert_file*)data;
+    ThreadContextListenerData::scert_file *scertf = (ThreadContextListenerData::scert_file *)data;
     scertf->ok = CContextListener::contextSslClientCertPrompt(scertf->certfile);
     m_Data->m_trustpromptWait.wakeAll();
 }
 
-void ThreadContextListener::event_contextSslClientCertPwPrompt(void*data)
+void ThreadContextListener::event_contextSslClientCertPwPrompt(void *data)
 {
     QMutexLocker lock(&m_WaitMutex);
     if (!data) {
         m_Data->m_trustpromptWait.wakeAll();
         return;
     }
-    ThreadContextListenerData::scert_pw*scert_data = (ThreadContextListenerData::scert_pw*)data;
+    ThreadContextListenerData::scert_pw *scert_data = (ThreadContextListenerData::scert_pw *)data;
     scert_data->ok = CContextListener::contextSslClientCertPwPrompt(scert_data->password, scert_data->realm, scert_data->maysave);
     m_Data->m_trustpromptWait.wakeAll();
 }
 
-void ThreadContextListener::event_contextSslServerTrustPrompt(void*data)
+void ThreadContextListener::event_contextSslServerTrustPrompt(void *data)
 {
     QMutexLocker lock(&m_WaitMutex);
     /*
@@ -278,54 +278,54 @@ void ThreadContextListener::event_contextSslServerTrustPrompt(void*data)
         m_Data->m_trustpromptWait.wakeAll();
         return;
     }
-    ThreadContextListenerData::strust_answer*_data = (ThreadContextListenerData::strust_answer*)data;
+    ThreadContextListenerData::strust_answer *_data = (ThreadContextListenerData::strust_answer *)data;
     apr_uint32_t _t = _data->m_Trustdata->failures;
-    _data->m_SslTrustAnswer =  CContextListener::contextSslServerTrustPrompt(*(_data->m_Trustdata),_t);
+    _data->m_SslTrustAnswer =  CContextListener::contextSslServerTrustPrompt(*(_data->m_Trustdata), _t);
     m_Data->m_trustpromptWait.wakeAll();
 }
 
-void ThreadContextListener::event_contextNotify(void*data)
+void ThreadContextListener::event_contextNotify(void *data)
 {
     if (!data) {
         return;
     }
-    ThreadContextListenerData::snotify* _notify = (ThreadContextListenerData::snotify*)data;
+    ThreadContextListenerData::snotify *_notify = (ThreadContextListenerData::snotify *)data;
     CContextListener::contextNotify(_notify->msg);
     delete _notify;
 }
 
-void ThreadContextListener::customEvent(QEvent*_ev)
+void ThreadContextListener::customEvent(QEvent *_ev)
 {
-    if (_ev->type()<QEvent::User) {
+    if (_ev->type() < QEvent::User) {
         return;
     }
-    DataEvent*ev = (DataEvent*)_ev;
-    if (ev->type()==EVENT_THREAD_SSL_TRUST_PROMPT) {
+    DataEvent *ev = (DataEvent *)_ev;
+    if (ev->type() == EVENT_THREAD_SSL_TRUST_PROMPT) {
         event_contextSslServerTrustPrompt(ev->data());
-    }else if (ev->type()==EVENT_THREAD_LOGIN_PROMPT) {
+    } else if (ev->type() == EVENT_THREAD_LOGIN_PROMPT) {
         event_contextGetLogin(ev->data());
-    }else if (ev->type()==EVENT_THREAD_LOGMSG_PROMPT) {
+    } else if (ev->type() == EVENT_THREAD_LOGMSG_PROMPT) {
         event_contextGetLogMessage(ev->data());
-    }else if (ev->type()==EVENT_THREAD_CERT_PW_PROMPT) {
+    } else if (ev->type() == EVENT_THREAD_CERT_PW_PROMPT) {
         event_contextSslClientCertPwPrompt(ev->data());
-    }else if (ev->type()==EVENT_THREAD_CERT_SELECT_PROMPT) {
+    } else if (ev->type() == EVENT_THREAD_CERT_SELECT_PROMPT) {
         event_contextSslClientCertPrompt(ev->data());
-    }else if (ev->type()==EVENT_THREAD_NOTIFY) {
+    } else if (ev->type() == EVENT_THREAD_NOTIFY) {
         event_contextNotify(ev->data());
     } else if (ev->type() == EVENT_THREAD_LOGIN_SAVED) {
         event_contextGetSavedLogin(ev->data());
     }
 }
 
-void ThreadContextListener::contextNotify (const char *path,
-                svn_wc_notify_action_t action,
-                svn_node_kind_t kind,
-                const char *mime_type,
-                svn_wc_notify_state_t content_state,
-                svn_wc_notify_state_t prop_state,
-                svn_revnum_t revision)
+void ThreadContextListener::contextNotify(const char *path,
+        svn_wc_notify_action_t action,
+        svn_node_kind_t kind,
+        const char *mime_type,
+        svn_wc_notify_state_t content_state,
+        svn_wc_notify_state_t prop_state,
+        svn_revnum_t revision)
 {
-    CContextListener::contextNotify(path,action,kind,mime_type,content_state,prop_state,revision);
+    CContextListener::contextNotify(path, action, kind, mime_type, content_state, prop_state, revision);
 }
 
 #include "tcontextlistener.moc"

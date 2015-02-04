@@ -26,18 +26,19 @@
 
 class QCheckBox;
 
-class DepthSelector: public QWidget, Ui::DepthForm {
+class DepthSelector: public QWidget, Ui::DepthForm
+{
     Q_OBJECT
 public:
     DepthSelector(QWidget *parent = 0);
     virtual ~DepthSelector();
     svn::Depth getDepth()const;
-    void addItemWidget(QWidget*);
+    void addItemWidget(QWidget *);
     void hideDepth(bool hide);
     void setRecursive(bool rec);
 
 protected:
-    QCheckBox*m_recurse;
+    QCheckBox *m_recurse;
 };
 
 #endif

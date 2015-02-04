@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #include "cmdexecsettings_impl.h"
 
 #include <kdeversion.h>
@@ -27,8 +26,8 @@
 #include <qcheckbox.h>
 #include <klineedit.h>
 
-CmdExecSettings_impl::CmdExecSettings_impl(QWidget* parent)
-: QWidget(parent)
+CmdExecSettings_impl::CmdExecSettings_impl(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
     kcfg_cmdline_log_minline->setSuffix(ki18np(" line", " lines"));

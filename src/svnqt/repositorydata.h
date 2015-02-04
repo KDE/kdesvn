@@ -35,45 +35,48 @@
 #include <svn_error.h>
 #include <svn_version.h>
 
-namespace svn {
+namespace svn
+{
 
-namespace repository {
+namespace repository
+{
 
 class Repository;
 class RepositoryListener;
 class CreateRepoParameter;
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
-class SVNQT_NOEXPORT RepositoryData{
+class SVNQT_NOEXPORT RepositoryData
+{
     friend class Repository;
 
 public:
-    RepositoryData(RepositoryListener*);
+    RepositoryData(RepositoryListener *);
 
     virtual ~RepositoryData();
     void Close();
-    svn_error_t * Open(const QString&);
-    svn_error_t * CreateOpen(const CreateRepoParameter&params);
+    svn_error_t *Open(const QString &);
+    svn_error_t *CreateOpen(const CreateRepoParameter &params);
 
-    void reposFsWarning(const QString&msg);
-    svn_error_t* dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas);
-    svn_error_t* loaddump(const QString& dump, svn_repos_load_uuid uuida, const QString& parentFolder, bool usePre, bool usePost, bool validateProps);
-    static svn_error_t* hotcopy(const QString&src,const QString&dest,bool cleanlogs);
+    void reposFsWarning(const QString &msg);
+    svn_error_t *dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas);
+    svn_error_t *loaddump(const QString &dump, svn_repos_load_uuid uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps);
+    static svn_error_t *hotcopy(const QString &src, const QString &dest, bool cleanlogs);
 
 protected:
     Pool m_Pool;
-    svn_repos_t*m_Repository;
-    RepositoryListener*m_Listener;
+    svn_repos_t *m_Repository;
+    RepositoryListener *m_Listener;
 
 private:
     static void warning_func(void *baton, svn_error_t *err);
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
     static void repo_notify_func(void *baton,
-                                        const svn_repos_notify_t *notify,
-                                        apr_pool_t *scratch_pool);
+                                 const svn_repos_notify_t *notify,
+                                 apr_pool_t *scratch_pool);
 #endif
-    static svn_error_t*cancel_func(void*baton);
+    static svn_error_t *cancel_func(void *baton);
 };
 
 }

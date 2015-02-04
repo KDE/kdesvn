@@ -42,46 +42,45 @@
 
 namespace svn
 {
-    struct CommitParameterData;
-    class SVNQT_EXPORT CommitParameter
-    {
-    private:
-        SharedPointer<CommitParameterData> _data;
+struct CommitParameterData;
+class SVNQT_EXPORT CommitParameter
+{
+private:
+    SharedPointer<CommitParameterData> _data;
 
-    public:
-        CommitParameter();
-        ~CommitParameter();
+public:
+    CommitParameter();
+    ~CommitParameter();
 
-        //!files to commit.
-        CommitParameter&targets(const Targets&targets);
-        //!files to commit.
-        const Targets&targets()const;
-        //! log message. if QString() svnqt ask for a message
-        CommitParameter&message(const QString&message);
-        //! log message. if QString() svnqt ask for a message
-        const QString&message()const;
-        //! default empty
-        CommitParameter&changeList(const StringArray&_changeList);
-        //! default empty
-        const StringArray&changeList()const;
-        //! default empty
-        CommitParameter&revisionProperties(const PropertiesMap&_revProps);
-        //! default empty
-        const PropertiesMap&revisionProperties()const;
-        //! default DepthInfinity
-        CommitParameter&depth(Depth depth);
-        //! default DepthInfinity
-        Depth depth()const;
-        //! if false unlock items in path (default)
-        CommitParameter&keepLocks(bool _keep);
-        //! if false unlock items in path (default)
-        bool keepLocks()const;
-        //! default false
-        CommitParameter&keepChangeList(bool _keep);
-        //! default false
-        bool keepChangeList()const;
-    };
+    //!files to commit.
+    CommitParameter &targets(const Targets &targets);
+    //!files to commit.
+    const Targets &targets()const;
+    //! log message. if QString() svnqt ask for a message
+    CommitParameter &message(const QString &message);
+    //! log message. if QString() svnqt ask for a message
+    const QString &message()const;
+    //! default empty
+    CommitParameter &changeList(const StringArray &_changeList);
+    //! default empty
+    const StringArray &changeList()const;
+    //! default empty
+    CommitParameter &revisionProperties(const PropertiesMap &_revProps);
+    //! default empty
+    const PropertiesMap &revisionProperties()const;
+    //! default DepthInfinity
+    CommitParameter &depth(Depth depth);
+    //! default DepthInfinity
+    Depth depth()const;
+    //! if false unlock items in path (default)
+    CommitParameter &keepLocks(bool _keep);
+    //! if false unlock items in path (default)
+    bool keepLocks()const;
+    //! default false
+    CommitParameter &keepChangeList(bool _keep);
+    //! default false
+    bool keepChangeList()const;
+};
 }
-
 
 #endif

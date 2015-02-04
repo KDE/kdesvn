@@ -20,7 +20,7 @@
 #include "src/settings/revisiontreesettingsdlg_impl.h"
 
 RevisiontreeSettingsDlg_impl::RevisiontreeSettingsDlg_impl(QWidget *parent)
-    :QWidget(parent)
+    : QWidget(parent)
 {
     setupUi(this);
 }

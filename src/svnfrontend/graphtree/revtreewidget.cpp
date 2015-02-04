@@ -36,40 +36,40 @@
  *  Constructs a RevTreeWidget as a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'.
  */
-RevTreeWidget::RevTreeWidget(QObject*lt,svn::Client*cl, QWidget* parent)
+RevTreeWidget::RevTreeWidget(QObject *lt, svn::Client *cl, QWidget *parent)
     : QWidget(parent)
 {
     RevTreeWidgetLayout = new QVBoxLayout(this);//, 11, 6, "RevTreeWidgetLayout");
 
-    m_Splitter = new QSplitter(Qt::Vertical,this);
+    m_Splitter = new QSplitter(Qt::Vertical, this);
 
-    m_RevGraphView = new RevGraphView(lt,cl, m_Splitter);
-    m_RevGraphView->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
+    m_RevGraphView = new RevGraphView(lt, cl, m_Splitter);
+    m_RevGraphView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
-    connect(m_RevGraphView,SIGNAL(dispDetails(const QString&)),this,SLOT(setDetailText(const QString&)));
+    connect(m_RevGraphView, SIGNAL(dispDetails(QString)), this, SLOT(setDetailText(QString)));
     connect(m_RevGraphView,
-                    SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
-                    this,
-                    SIGNAL(makeNorecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
-           );
-    connect(m_RevGraphView,
-            SIGNAL(makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*)),
+            SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
             this,
-            SIGNAL(makeRecDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*))
+            SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))
            );
     connect(m_RevGraphView,
-            SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*)),
+            SIGNAL(makeRecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
             this,
-            SIGNAL(makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*))
+            SIGNAL(makeRecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))
+           );
+    connect(m_RevGraphView,
+            SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
+            this,
+            SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*))
            );
 
-    m_Detailstext = new KTextBrowser( m_Splitter );
-    m_Detailstext->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    m_Detailstext = new KTextBrowser(m_Splitter);
+    m_Detailstext->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     //m_Detailstext->setResizePolicy( KTextBrowser::Manual );
-    RevTreeWidgetLayout->addWidget( m_Splitter );
-    resize( QSize(600, 480).expandedTo(minimumSizeHint()) );
+    RevTreeWidgetLayout->addWidget(m_Splitter);
+    resize(QSize(600, 480).expandedTo(minimumSizeHint()));
     QList<int> list = Kdesvnsettings::tree_detail_height();
-    if (list.count()==2 && (list[0]>0||list[1]>0)) {
+    if (list.count() == 2 && (list[0] > 0 || list[1] > 0)) {
         m_Splitter->setSizes(list);
     }
 }
@@ -81,13 +81,13 @@ RevTreeWidget::~RevTreeWidget()
 {
     // no need to delete child widgets, Qt does it all for us
     QList<int> list = m_Splitter->sizes();
-    if (list.count()==2) {
+    if (list.count() == 2) {
         Kdesvnsettings::setTree_detail_height(list);
         Kdesvnsettings::self()->writeConfig();
     }
 }
 
-void RevTreeWidget::setBasePath(const QString&_p)
+void RevTreeWidget::setBasePath(const QString &_p)
 {
     m_RevGraphView->setBasePath(_p);
 }
@@ -97,16 +97,18 @@ void RevTreeWidget::dumpRevtree()
     m_RevGraphView->dumpRevtree();
 }
 
-void RevTreeWidget::setDetailText(const QString&_s)
+void RevTreeWidget::setDetailText(const QString &_s)
 {
     m_Detailstext->setText(_s);
     QList<int> list = m_Splitter->sizes();
-    if (list.count()!=2) return;
-    if (list[1]==0) {
+    if (list.count() != 2) {
+        return;
+    }
+    if (list[1] == 0) {
         int h = height();
-        int th = h/10;
-        list[0]=h-th;
-        list[1]=th;
+        int th = h / 10;
+        list[0] = h - th;
+        list[1] = th;
         m_Splitter->setSizes(list);
     }
 }

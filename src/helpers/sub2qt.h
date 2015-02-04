@@ -25,18 +25,20 @@
 #include <qstring.h>
 #include <svn_time.h>
 
-namespace helpers {
+namespace helpers
+{
 
 /**
 @author Rajko Albrecht
 */
-class sub2qt{
+class sub2qt
+{
 public:
     sub2qt();
     ~sub2qt();
 
     static QString apr_time2qtString(apr_time_t _time);
-    static QString DateTime2qtString(const svn::DateTime&_time);
+    static QString DateTime2qtString(const svn::DateTime &_time);
 };
 
 }

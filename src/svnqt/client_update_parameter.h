@@ -31,61 +31,62 @@
 #include "svnqt/targets.h"
 #include "svnqt/shared_pointer.h"
 
-namespace svn{
+namespace svn
+{
 
-    struct UpdateParameterData;
+struct UpdateParameterData;
 
-    class SVNQT_EXPORT UpdateParameter
-    {
-        private:
-            //! internal data
-            SharedPointer<UpdateParameterData> _data;
+class SVNQT_EXPORT UpdateParameter
+{
+private:
+    //! internal data
+    SharedPointer<UpdateParameterData> _data;
 
-        public:
-            //! constructor
-            UpdateParameter();
-            //! non-virtual destructor
-            ~UpdateParameter();
+public:
+    //! constructor
+    UpdateParameter();
+    //! non-virtual destructor
+    ~UpdateParameter();
 
-            //! returns the targets for update
-            const Targets&targets()const;
-            //! set the targets for update
-            UpdateParameter&targets(const Targets&_target);
+    //! returns the targets for update
+    const Targets &targets()const;
+    //! set the targets for update
+    UpdateParameter &targets(const Targets &_target);
 
-            //! returns the revision the update should work on
-            const Revision&revision()const;
-            //! set the revision the update should work on
-            UpdateParameter&revision(const Revision&rev);
+    //! returns the revision the update should work on
+    const Revision &revision()const;
+    //! set the revision the update should work on
+    UpdateParameter &revision(const Revision &rev);
 
-            //! return depth of update operation
-            /*!
-             * \sa svn::Depth
-             */
-            Depth depth()const;
-            //! set depth of update operation
-            /*!
-             * \sa svn::Depth
-             */
-            UpdateParameter&depth(Depth depth);
+    //! return depth of update operation
+    /*!
+     * \sa svn::Depth
+     */
+    Depth depth()const;
+    //! set depth of update operation
+    /*!
+     * \sa svn::Depth
+     */
+    UpdateParameter &depth(Depth depth);
 
-            //! return if update should ignore external definitions
-            bool ignore_externals()const;
-            //! set if update should ignore external definitions
-            UpdateParameter&ignore_externals(bool);
+    //! return if update should ignore external definitions
+    bool ignore_externals()const;
+    //! set if update should ignore external definitions
+    UpdateParameter &ignore_externals(bool);
 
-            bool allow_unversioned()const;
-            UpdateParameter&allow_unversioned(bool);
+    bool allow_unversioned()const;
+    UpdateParameter &allow_unversioned(bool);
 
-            bool sticky_depth()const;
-            UpdateParameter&sticky_depth(bool);
-            
-            bool make_parents()const;
-            UpdateParameter&make_parents(bool);
-            
-            bool add_as_modification()const;
-            UpdateParameter&add_as_modification(bool);
-            
-    };
+    bool sticky_depth()const;
+    UpdateParameter &sticky_depth(bool);
+
+    bool make_parents()const;
+    UpdateParameter &make_parents(bool);
+
+    bool add_as_modification()const;
+    UpdateParameter &add_as_modification(bool);
+
+};
 }
 
 #endif // CLIENT_UPDATE_PARAMETER_H

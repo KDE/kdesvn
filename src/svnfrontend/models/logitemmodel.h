@@ -25,7 +25,6 @@
 
 #include "src/svnqt/svnqttypes.h"
 
-
 class SvnLogModelData;
 class SvnLogModelNode;
 class QTreeWidget;
@@ -33,23 +32,23 @@ class QTreeWidget;
 typedef svn::SharedPointer<SvnLogModelData> SvnLogModelDataPtr;
 typedef svn::SharedPointer<SvnLogModelNode> SvnLogModelNodePtr;
 
-class SvnLogModel:public QAbstractItemModel
+class SvnLogModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString&_name,QObject*parent);
+    SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name, QObject *parent);
     virtual ~SvnLogModel();
-    void setLogData(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString&_name);
+    void setLogData(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name);
     QVariant data(const QModelIndex &index, int role) const;
 
-    virtual QModelIndex index(int row,int column = 0,const QModelIndex & parent = QModelIndex())const;
-    virtual QModelIndex parent(const QModelIndex&)const;
+    virtual QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const;
+    virtual QModelIndex parent(const QModelIndex &)const;
 
-    QLONG toRevision(const QModelIndex&)const;
-    const QString& fullMessage(const QModelIndex&index)const;
-    void fillChangedPaths(const QModelIndex&index,QTreeWidget*target);
-    const QString&realName(const QModelIndex&index);
-    virtual Qt::ItemFlags flags(const QModelIndex & index) const;
+    QLONG toRevision(const QModelIndex &)const;
+    const QString &fullMessage(const QModelIndex &index)const;
+    void fillChangedPaths(const QModelIndex &index, QTreeWidget *target);
+    const QString &realName(const QModelIndex &index);
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
     enum Columns {
         Author = 0,
@@ -60,8 +59,8 @@ public:
     };
     virtual int rowCount(const QModelIndex &parent)const;
     virtual SvnLogModelNodePtr indexNode(const QModelIndex &)const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation,int role = Qt::DisplayRole) const;
-    virtual int columnCount(const QModelIndex&)const;
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+    virtual int columnCount(const QModelIndex &)const;
 
     long leftRow()const;
     long rightRow()const;

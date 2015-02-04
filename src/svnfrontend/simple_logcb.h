@@ -22,8 +22,8 @@
 
 namespace svn
 {
-    class LogEntry;
-    class Revision;
+class LogEntry;
+class Revision;
 }
 
 class QString;
@@ -33,9 +33,9 @@ class SimpleLogCb
 {
 public:
     //! empty constructor
-    SimpleLogCb(){}
+    SimpleLogCb() {}
     //! destructor
-    virtual ~SimpleLogCb(){}
+    virtual ~SimpleLogCb() {}
     //! retrieve a logentry
     /*!
      * @param logtarget target buffer where to store logentry
@@ -45,7 +45,7 @@ public:
      * @param root the root repository of item, if not given, it has to get detected in implementation from \a what and used.
      * @return true if logentry and root found, otherwise false.
      */
-    virtual bool getSingleLog(svn::LogEntry&logtarget,const svn::Revision&rev,const QString&what,const svn::Revision&peg,QString&root) = 0;
+    virtual bool getSingleLog(svn::LogEntry &logtarget, const svn::Revision &rev, const QString &what, const svn::Revision &peg, QString &root) = 0;
 };
 
 #endif

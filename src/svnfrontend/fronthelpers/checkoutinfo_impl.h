@@ -25,8 +25,9 @@
 #include "src/svnqt/svnqttypes.h"
 #include "kurl.h"
 
-class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo {
-Q_OBJECT
+class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo
+{
+    Q_OBJECT
 public:
     CheckoutInfo_impl(QWidget *parent = 0);
     virtual ~CheckoutInfo_impl();
@@ -37,7 +38,7 @@ public:
 
     bool overwrite() const;
     svn::Depth getDepth() const;
-    void setStartUrl(const QString&);
+    void setStartUrl(const QString &);
 
     void disableForce(bool how);
     void disableTargetDir(bool how);
@@ -46,11 +47,11 @@ public:
     void disableExternals(bool how);
     bool openAfterJob() const;
     void disableRange(bool how);
-    void setTargetUrl(const QString&);
+    void setTargetUrl(const QString &);
     bool ignoreExternals() const;
-    void hideDepth(bool hide,bool overwriteAsRecurse);
+    void hideDepth(bool hide, bool overwriteAsRecurse);
 protected slots:
-    void urlChanged(const QString&);
+    void urlChanged(const QString &);
 };
 
 #endif

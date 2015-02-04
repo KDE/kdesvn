@@ -25,7 +25,7 @@
 #include <kdebug.h>
 
 SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
-    :QSortFilterProxyModel(parent),m_sourceModel(0),m_order(Qt::AscendingOrder),m_ShowFilter(svnmodel::All)
+    : QSortFilterProxyModel(parent), m_sourceModel(0), m_order(Qt::AscendingOrder), m_ShowFilter(svnmodel::All)
 {
 }
 
@@ -33,13 +33,13 @@ SvnSortFilterProxy::~SvnSortFilterProxy()
 {
 }
 
-void SvnSortFilterProxy::sort(int column,Qt::SortOrder order)
+void SvnSortFilterProxy::sort(int column, Qt::SortOrder order)
 {
     m_order = order;
-    QSortFilterProxyModel::sort(column,order);
+    QSortFilterProxyModel::sort(column, order);
 }
 
-bool SvnSortFilterProxy::hasChildren(const QModelIndex & parent)const
+bool SvnSortFilterProxy::hasChildren(const QModelIndex &parent)const
 {
     if (!parent.isValid()) {
         return true;
@@ -52,45 +52,45 @@ bool SvnSortFilterProxy::hasChildren(const QModelIndex & parent)const
     }
 }
 
-void SvnSortFilterProxy::setSourceSvnModel(SvnItemModel*sourceModel)
+void SvnSortFilterProxy::setSourceSvnModel(SvnItemModel *sourceModel)
 {
-    m_sourceModel=sourceModel;
+    m_sourceModel = sourceModel;
     setSourceModel(sourceModel);
 }
 
-bool SvnSortFilterProxy::lessThan(const QModelIndex & left,const QModelIndex & right)const
+bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right)const
 {
     if (!(left.isValid() && right.isValid())) {
-        return QSortFilterProxyModel::lessThan(left,right);
+        return QSortFilterProxyModel::lessThan(left, right);
     }
-    SvnItemModelNode *n1,*n2;
-    n1 = static_cast<SvnItemModelNode*>(left.internalPointer());
-    n2 = static_cast<SvnItemModelNode*>(right.internalPointer());
+    SvnItemModelNode *n1, *n2;
+    n1 = static_cast<SvnItemModelNode *>(left.internalPointer());
+    n2 = static_cast<SvnItemModelNode *>(right.internalPointer());
     /*
      * when having valid model indexes the internal pointer MUST be valid, too.
      * so we may skip if for this.
      */
     Q_ASSERT(n1 && n2);
-    if (n1->sortChar()==n2->sortChar()) {
-        if (sortColumn()==SvnItemModel::LastRevision) {
-            return n1->cmtRev()<n2->cmtRev();
+    if (n1->sortChar() == n2->sortChar()) {
+        if (sortColumn() == SvnItemModel::LastRevision) {
+            return n1->cmtRev() < n2->cmtRev();
         }
-        return QSortFilterProxyModel::lessThan(left,right);
+        return QSortFilterProxyModel::lessThan(left, right);
     }
     // we want folders always @first
-    if (m_order==Qt::AscendingOrder) {
-        return n1->sortChar()<n2->sortChar();
+    if (m_order == Qt::AscendingOrder) {
+        return n1->sortChar() < n2->sortChar();
     } else {
-        return n1->sortChar()>n2->sortChar();
+        return n1->sortChar() > n2->sortChar();
     }
 }
 
-bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex & source_parent)const
+bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex &source_parent)const
 {
-    if (m_sourceModel->filterIndex(source_parent,source_row,m_ShowFilter)) {
+    if (m_sourceModel->filterIndex(source_parent, source_row, m_ShowFilter)) {
         return false;
     }
-    return QSortFilterProxyModel::filterAcceptsRow(source_row,source_parent);
+    return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 
 void SvnSortFilterProxy::setShowFilter(svnmodel::ItemTypeFlag fl)

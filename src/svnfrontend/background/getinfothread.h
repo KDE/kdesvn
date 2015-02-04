@@ -31,19 +31,19 @@
 
 class SvnItemModelNode;
 
-class GetInfoThread:public SvnThread
+class GetInfoThread: public SvnThread
 {
 public:
-    GetInfoThread(QObject*parent);
+    GetInfoThread(QObject *parent);
     virtual ~GetInfoThread();
     virtual void run();
     virtual void cancelMe();
 
-    void appendNode(SvnItemModelNode*);
+    void appendNode(SvnItemModelNode *);
     void clearNodes();
 
 protected:
-    QQueue<SvnItemModelNode*> m_NodeQueue;
+    QQueue<SvnItemModelNode *> m_NodeQueue;
     bool m_Cancel;
     QMutex m_QueueLock;
     QReadWriteLock m_CancelLock;

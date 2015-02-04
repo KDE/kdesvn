@@ -22,35 +22,47 @@
 
 #include "src/ksvnwidgets/jobviewinterface.h"
 
-class KsvnJobView:public org::kde::JobView
+class KsvnJobView: public org::kde::JobView
 {
     Q_OBJECT
 
-    public:
-        KsvnJobView(qulonglong id, const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
-        virtual ~KsvnJobView(){}
+public:
+    KsvnJobView(qulonglong id, const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
+    virtual ~KsvnJobView() {}
 
-        enum jobstate {
-            STOPPED = 0,
-            RUNNING,
-            CANCELD
-        };
+    enum jobstate {
+        STOPPED = 0,
+        RUNNING,
+        CANCELD
+    };
 
-        jobstate state()const{return m_state;}
-        void setState(jobstate aState){m_state = aState;}
-        qulonglong id()const{return m_id;}
+    jobstate state()const
+    {
+        return m_state;
+    }
+    void setState(jobstate aState)
+    {
+        m_state = aState;
+    }
+    qulonglong id()const
+    {
+        return m_id;
+    }
 
-        unsigned long percent(qulonglong amount);
+    unsigned long percent(qulonglong amount);
 
-        virtual void setTotal(qlonglong max);
-        qlonglong max()const{return m_max;}
+    virtual void setTotal(qlonglong max);
+    qlonglong max()const
+    {
+        return m_max;
+    }
 
-    protected Q_SLOTS:
-        virtual void killJob();
-    private:
-        qulonglong m_id;
-        jobstate m_state;
-        qlonglong m_max;
+protected Q_SLOTS:
+    virtual void killJob();
+private:
+    qulonglong m_id;
+    jobstate m_state;
+    qlonglong m_max;
 };
 
 #endif

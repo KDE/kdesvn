@@ -28,30 +28,30 @@
 #include <qstringlist.h>
 #include <qdir.h>
 
-namespace helpers {
+namespace helpers
+{
 
 KTranslateUrl::KTranslateUrl()
 {
 }
 
-
 KTranslateUrl::~KTranslateUrl()
 {
 }
 
-KUrl KTranslateUrl::translateSystemUrl(const KUrl&_url)
+KUrl KTranslateUrl::translateSystemUrl(const KUrl &_url)
 {
     QString proto = _url.protocol();
     KUrl res;
-    QString name,path;
+    QString name, path;
 
-    if (proto!="system") {
+    if (proto != "system") {
         return _url;
     }
     KGlobal::dirs()->addResourceType("system_entries",
-    KStandardDirs::kde_default("data") + "systemview");
+                                     KStandardDirs::kde_default("data") + "systemview");
     QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
-    if (!parseURL(_url,name,path)) {
+    if (!parseURL(_url, name, path)) {
         return _url;
     }
     res = findSystemBase(name);
@@ -63,17 +63,14 @@ KUrl KTranslateUrl::translateSystemUrl(const KUrl&_url)
     return res;
 }
 
-bool KTranslateUrl::parseURL(const KUrl&url,QString&name,QString&path)
+bool KTranslateUrl::parseURL(const KUrl &url, QString &name, QString &path)
 {
     QString url_path = url.path();
-    int i = url_path.indexOf('/',1);
-    if (i > 0)
-    {
-        name = url_path.mid(1, i-1);
-        path = url_path.mid(i+1);
-    }
-    else
-    {
+    int i = url_path.indexOf('/', 1);
+    if (i > 0) {
+        name = url_path.mid(1, i - 1);
+        path = url_path.mid(i + 1);
+    } else {
         name = url_path.mid(1);
         path.clear();
     }
@@ -81,35 +78,32 @@ bool KTranslateUrl::parseURL(const KUrl&url,QString&name,QString&path)
     return !name.isEmpty();
 }
 
-KUrl KTranslateUrl::findSystemBase(const QString&filename)
+KUrl KTranslateUrl::findSystemBase(const QString &filename)
 {
     QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
 
     QStringList::ConstIterator dirpath = dirList.constBegin();
     QStringList::ConstIterator end = dirList.constEnd();
-    for(; dirpath!=end; ++dirpath)
-    {
+    for (; dirpath != end; ++dirpath) {
         QDir dir = *dirpath;
-        if (!dir.exists()) continue;
+        if (!dir.exists()) {
+            continue;
+        }
 
         QStringList filenames
-                = dir.entryList( QDir::Files | QDir::Readable );
-
+            = dir.entryList(QDir::Files | QDir::Readable);
 
         KIO::UDSEntry entry;
 
         QStringList::ConstIterator name = filenames.constBegin();
         QStringList::ConstIterator endf = filenames.constEnd();
 
-        for(; name!=endf; ++name)
-        {
-            if (*name==filename+".desktop")
-            {
-                KDesktopFile desktop(*dirpath+filename+".desktop");
-                if ( desktop.readUrl().isEmpty() )
-                {
+        for (; name != endf; ++name) {
+            if (*name == filename + ".desktop") {
+                KDesktopFile desktop(*dirpath + filename + ".desktop");
+                if (desktop.readUrl().isEmpty()) {
                     KUrl url;
-                    url.setPath( desktop.readPath() );
+                    url.setPath(desktop.readPath());
                     return url;
                 }
                 return desktop.readUrl();
@@ -122,19 +116,18 @@ KUrl KTranslateUrl::findSystemBase(const QString&filename)
 
 }
 
-
 /*!
     \fn helpers::KTranslateUrl::makeKdeUrl(const QString&inUrl)
  */
-QString helpers::KTranslateUrl::makeKdeUrl(const QString&_proto)
+QString helpers::KTranslateUrl::makeKdeUrl(const QString &_proto)
 {
     QString proto;
-    if (_proto.startsWith("svn+")){
-        proto = 'k'+_proto;
-    } else if (_proto== QString("svn")){
+    if (_proto.startsWith("svn+")) {
+        proto = 'k' + _proto;
+    } else if (_proto == QString("svn")) {
         proto = "ksvn";
     } else {
-        proto = "ksvn+"+_proto;
+        proto = "ksvn+" + _proto;
     }
     return proto;
 }

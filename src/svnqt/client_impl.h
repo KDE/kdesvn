@@ -48,20 +48,21 @@ class QStringList;
 
 namespace svn
 {
-  namespace stream {
-    class SvnStream;
-  }
+namespace stream
+{
+class SvnStream;
+}
 
-  /**
-   * Subversion client API.
-   */
-  class SVNQT_NOEXPORT Client_impl:public Client
-  {
-  public:
+/**
+ * Subversion client API.
+ */
+class SVNQT_NOEXPORT Client_impl: public Client
+{
+public:
     /**
      * Initializes the primary memory pool.
      */
-    Client_impl(const ContextP&context);
+    Client_impl(const ContextP &context);
 
     virtual ~Client_impl();
 
@@ -69,7 +70,7 @@ namespace svn
      * @return returns the Client context
      */
     virtual const ContextP
-    getContext () const;
+    getContext() const;
 
     /**
      * sets the client context
@@ -79,8 +80,7 @@ namespace svn
      * @param context new context to use
      */
     virtual void
-    setContext (const ContextP&context);
-
+    setContext(const ContextP &context);
 
     /**
      * Enumerates all files/dirs at a given path.
@@ -91,7 +91,7 @@ namespace svn
      * @return vector with Status entries.
      */
     virtual StatusEntries
-    status (const StatusParameter&params) throw (ClientException);
+    status(const StatusParameter &params) throw (ClientException);
 
     /**
      * Returns the status of a single file in the path.
@@ -104,7 +104,7 @@ namespace svn
      * @return a Status with Statis.isVersioned = FALSE
      */
     virtual StatusPtr
-    singleStatus (const Path& path,bool update=false,const Revision revision = svn::Revision::HEAD) throw (ClientException);
+    singleStatus(const Path &path, bool update = false, const Revision revision = svn::Revision::HEAD) throw (ClientException);
 
     /**
      * Executes a revision checkout.
@@ -113,15 +113,15 @@ namespace svn
      * @exception ClientException
      */
     virtual Revision
-    checkout (const CheckoutParameter&params) throw (ClientException);
+    checkout(const CheckoutParameter &params) throw (ClientException);
 
     /**
      * relocate wc @a from to @a to
      * @exception ClientException
      */
     virtual void
-    relocate (const Path & path, const Url &from_url,
-              const Url &to_url, bool recurse) throw (ClientException);
+    relocate(const Path &path, const Url &from_url,
+             const Url &to_url, bool recurse) throw (ClientException);
 
     /**
      * Sets files for deletion.
@@ -131,21 +131,20 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    remove (const Targets & targets,
-            bool force,
-            bool keep_local = true,
-            const PropertiesMap&revProps = PropertiesMap()) throw (ClientException);
+    remove(const Targets &targets,
+           bool force,
+           bool keep_local = true,
+           const PropertiesMap &revProps = PropertiesMap()) throw (ClientException);
 
     /**
      * Reverts a couple of files to a pristiner state.
      * @exception ClientException
      */
     virtual void
-            revert (const Targets & targets,
-                    Depth depth,
-                    const StringArray&changelist=StringArray()
-                   ) throw (ClientException);
-
+    revert(const Targets &targets,
+           Depth depth,
+           const StringArray &changelist = StringArray()
+          ) throw (ClientException);
 
     /**
      * Adds a file to the repository.
@@ -157,7 +156,7 @@ namespace svn
      * @exception ClientException
      * @sa svn::Depth
      */
-    virtual void add (const Path & path, svn::Depth depth,bool force=false, bool no_ignore=false, bool add_parents = true) throw (ClientException);
+    virtual void add(const Path &path, svn::Depth depth, bool force = false, bool no_ignore = false, bool add_parents = true) throw (ClientException);
 
     /**
      * Updates the file or directory.
@@ -165,7 +164,7 @@ namespace svn
      * @exception ClientException
      */
     virtual Revisions
-    update (const UpdateParameter&params) throw (ClientException);
+    update(const UpdateParameter &params) throw (ClientException);
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -178,9 +177,9 @@ namespace svn
      * @return contents of the file
      */
     virtual QByteArray
-    cat (const Path & path,
-          const Revision & revision,
-          const Revision & peg_revision=Revision::UNDEFINED) throw (ClientException);
+    cat(const Path &path,
+        const Revision &revision,
+        const Revision &peg_revision = Revision::UNDEFINED) throw (ClientException);
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
@@ -192,10 +191,10 @@ namespace svn
      * @exception ClientException
      */
     virtual void
-    cat(svn::stream::SvnStream&buffer,
-            const Path & path,
-            const Revision & revision,
-            const Revision & peg_revision) throw (ClientException);
+    cat(svn::stream::SvnStream &buffer,
+        const Path &path,
+        const Revision &revision,
+        const Revision &peg_revision) throw (ClientException);
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -208,10 +207,10 @@ namespace svn
      * @param peg_revision Revision to look at
      */
     virtual void
-    get (const Path & path,
-          const QString  & target,
-          const Revision & revision,
-          const Revision & peg_revision=Revision::UNDEFINED) throw (ClientException);
+    get(const Path &path,
+        const QString   &target,
+        const Revision &revision,
+        const Revision &peg_revision = Revision::UNDEFINED) throw (ClientException);
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -224,7 +223,7 @@ namespace svn
      * @param peg indicates in which revision path is valid
      */
     virtual void
-    annotate (AnnotatedFile&target,const AnnotateParameter&params) throw (ClientException);
+    annotate(AnnotatedFile &target, const AnnotateParameter &params) throw (ClientException);
 
     /**
      * Commits changes to the repository. This usually requires
@@ -234,16 +233,16 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    commit (const CommitParameter&parameters) throw (ClientException);
+    commit(const CommitParameter &parameters) throw (ClientException);
 
     /**
      * Copies a versioned file with the history preserved.
      * @exception ClientException
      */
     virtual svn::Revision
-    copy (const Path & srcPath,
-          const Revision & srcRevision,
-          const Path & destPath) throw (ClientException);
+    copy(const Path &srcPath,
+         const Revision &srcRevision,
+         const Path &destPath) throw (ClientException);
     /**
      * Copies a versioned file with the history preserved.
      * @since subversion 1.5 api
@@ -252,7 +251,7 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    copy (const CopyParameter&parameter) throw (ClientException);
+    copy(const CopyParameter &parameter) throw (ClientException);
 
     /**
      * Moves or renames a file.
@@ -260,7 +259,7 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    move (const CopyParameter&parameter) throw (ClientException);
+    move(const CopyParameter &parameter) throw (ClientException);
 
     /**
      * Creates a directory directly in a repository or creates a
@@ -273,11 +272,11 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-    mkdir (const Targets & targets,
-           const QString& message,
-           bool makeParent=true,
-           const PropertiesMap&revProps=PropertiesMap()
-          ) throw (ClientException);
+    mkdir(const Targets &targets,
+          const QString &message,
+          bool makeParent = true,
+          const PropertiesMap &revProps = PropertiesMap()
+         ) throw (ClientException);
 
     /**
      * Recursively cleans up a local directory, finishing any
@@ -286,13 +285,13 @@ namespace svn
      * @exception ClientException
      */
     virtual void
-    cleanup (const Path & path) throw (ClientException);
+    cleanup(const Path &path) throw (ClientException);
 
     /**
      * Removes the 'conflicted' state on a file.
      * @exception ClientException
      */
-    virtual void resolve (const Path & path,Depth depth,const ConflictResult&resolution=ConflictResult()) throw (ClientException);
+    virtual void resolve(const Path &path, Depth depth, const ConflictResult &resolution = ConflictResult()) throw (ClientException);
 
     /**
      * Exports the contents of either a subversion repository into a
@@ -303,7 +302,7 @@ namespace svn
      * @return revision exported
      */
     virtual Revision
-    doExport (const CheckoutParameter&params) throw (ClientException);
+    doExport(const CheckoutParameter &params) throw (ClientException);
 
     /**
      * Update local copy to mirror a new url. This excapsulates the
@@ -311,15 +310,15 @@ namespace svn
      * @exception ClientException
      */
     virtual Revision
-    doSwitch (
-              const Path & path, const Url& url,
-              const Revision & revision,
-              Depth depth,
-              const Revision & peg=Revision::UNDEFINED,
-              bool sticky_depth = true,
-              bool ignore_externals=false,
-              bool allow_unversioned=false
-             ) throw (ClientException);
+    doSwitch(
+        const Path &path, const Url &url,
+        const Revision &revision,
+        Depth depth,
+        const Revision &peg = Revision::UNDEFINED,
+        bool sticky_depth = true,
+        bool ignore_externals = false,
+        bool allow_unversioned = false
+    ) throw (ClientException);
 
     /**
      * Import file or directory PATH into repository directory URL at
@@ -333,11 +332,11 @@ namespace svn
      * @exception ClientException
      */
     virtual svn::Revision
-            import (const Path & path, const Url& url,
-                    const QString& message,
-                    svn::Depth depth,
-                    bool no_ignore,bool no_unknown_nodetype,
-                    const PropertiesMap&revProps=PropertiesMap()) throw (ClientException);
+    import(const Path &path, const Url &url,
+           const QString &message,
+           svn::Depth depth,
+           bool no_ignore, bool no_unknown_nodetype,
+           const PropertiesMap &revProps = PropertiesMap()) throw (ClientException);
 
     /**
      * Merge changes from two paths into a new local path. For reintegrate merge see svn::MergeParameter!
@@ -345,10 +344,10 @@ namespace svn
      * @sa svn::MergeParameter
      */
     virtual void
-    merge (const MergeParameter&parameters) throw (ClientException);
+    merge(const MergeParameter &parameters) throw (ClientException);
 
     virtual void
-    merge_peg(const MergeParameter&parameters) throw (ClientException);
+    merge_peg(const MergeParameter &parameters) throw (ClientException);
 
     /**
      * Retrieve information for the given path
@@ -365,9 +364,9 @@ namespace svn
     virtual InfoEntries
     info(const Path &path,
          Depth depth,
-         const Revision & rev,
-         const Revision & peg_revision=Revision::UNDEFINED,
-         const StringArray&changelists=StringArray()
+         const Revision &rev,
+         const Revision &peg_revision = Revision::UNDEFINED,
+         const StringArray &changelists = StringArray()
         ) throw (ClientException);
 
     /**
@@ -384,7 +383,7 @@ namespace svn
      * @sa LogParameter
      */
     virtual bool
-    log (const LogParameter&params,LogEntriesMap&target) throw (ClientException);
+    log(const LogParameter &params, LogEntriesMap &target) throw (ClientException);
 
     /**
      * Produce diff output which describes the delta between
@@ -399,8 +398,8 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-            diff_peg (const DiffParameter&options)
-            throw (ClientException);
+    diff_peg(const DiffParameter &options)
+    throw (ClientException);
 
     /**
      * Produce diff output which describes the delta between
@@ -415,8 +414,8 @@ namespace svn
      * @exception ClientException
      */
     virtual QByteArray
-            diff (const DiffParameter&options)
-            throw (ClientException);
+    diff(const DiffParameter &options)
+    throw (ClientException);
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or
@@ -431,10 +430,10 @@ namespace svn
      *         a relative path (only filename)
      */
     virtual DirEntries
-    list (const Path& pathOrUrl,
-          const Revision& revision,
-          const Revision& peg,
-          svn::Depth depth,bool retrieve_locks) throw (ClientException);
+    list(const Path &pathOrUrl,
+         const Revision &revision,
+         const Revision &peg,
+         svn::Depth depth, bool retrieve_locks) throw (ClientException);
 
     /**
      * lists properties in @a path no matter whether local or
@@ -450,8 +449,8 @@ namespace svn
     proplist(const Path &path,
              const Revision &revision,
              const Revision &peg,
-             Depth depth=DepthEmpty,
-             const StringArray&changelists=StringArray());
+             Depth depth = DepthEmpty,
+             const StringArray &changelists = StringArray());
 
     /**
      * lists one property in @a path no matter whether local or
@@ -464,13 +463,13 @@ namespace svn
      * @param recurse
      * @return PathPropertiesMapList
      */
-    virtual QPair<QLONG,PathPropertiesMapList>
-    propget(const QString& propName,
+    virtual QPair<QLONG, PathPropertiesMapList>
+    propget(const QString &propName,
             const Path &path,
             const Revision &revision,
             const Revision &peg,
             Depth depth = svn::DepthEmpty,
-            const StringArray&changelists=StringArray());
+            const StringArray &changelists = StringArray());
 
     /**
      * set property in @a path no matter whether local or
@@ -489,7 +488,7 @@ namespace svn
      * </ul>
      */
     virtual void
-    propset(const PropertiesParameter&params);
+    propset(const PropertiesParameter &params);
 
     /**
      * lists revision properties in @a path no matter whether local or
@@ -499,7 +498,7 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<QLONG,PropertiesMap>
+    virtual QPair<QLONG, PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision);
 
@@ -512,8 +511,8 @@ namespace svn
      * @param revision
      * @return PropertiesList
      */
-    QPair<QLONG,QString>
-    revpropget(const QString& propName,
+    QPair<QLONG, QString>
+    revpropget(const QString &propName,
                const Path &path,
                const Revision &revision);
 
@@ -526,7 +525,7 @@ namespace svn
      * @sa PropertiesParameter
      */
     virtual QLONG
-    revpropset(const PropertiesParameter&params);
+    revpropset(const PropertiesParameter &params);
 
     /**
      * delete revision property in @a path no matter whether local or
@@ -539,109 +538,108 @@ namespace svn
      * @return Revision
      */
     virtual QLONG
-    revpropdel(const QString& propName,
+    revpropdel(const QString &propName,
                const Path &path,
                const Revision &revision);
 
-  /**
-   * lock files in repository or working copy
-   * @param targets items to be locked
-   * @param message if non null stored with each lock in repository
-   * @param steal_lock if true locks in wc will stolen.
-   * @since subversion 1.2
-   */
-   virtual void
-   lock (const Targets & targets,
-        const QString& message,
-        bool steal_lock) throw (ClientException);
+    /**
+     * lock files in repository or working copy
+     * @param targets items to be locked
+     * @param message if non null stored with each lock in repository
+     * @param steal_lock if true locks in wc will stolen.
+     * @since subversion 1.2
+     */
+    virtual void
+    lock(const Targets &targets,
+         const QString &message,
+         bool steal_lock) throw (ClientException);
     /**
      * unlock files in repository or working copy
      * @param targets items to unlock
      * @param break_lock ignore any errors
      */
     virtual void
-    unlock (const Targets&targets,
-            bool break_lock) throw (ClientException);
+    unlock(const Targets &targets,
+           bool break_lock) throw (ClientException);
 
     virtual void
-    url2Revision(const QString&revstring,
-        Revision&start,Revision&end);
+    url2Revision(const QString &revstring,
+                 Revision &start, Revision &end);
     virtual void
-    url2Revision(const QString&revstring,
-            Revision&start);
+    url2Revision(const QString &revstring,
+                 Revision &start);
 
-    virtual bool RepoHasCapability(const Path&repository,Capability capability);
+    virtual bool RepoHasCapability(const Path &repository, Capability capability);
 
     struct sBaton {
-        sBaton():m_context(0),m_data(0),m_revstack(0),excludeList(0){}
-        Context*m_context;
-        void*m_data;
-        void*m_revstack;
-        const StringArray*excludeList;
+        sBaton(): m_context(0), m_data(0), m_revstack(0), excludeList(0) {}
+        Context *m_context;
+        void *m_data;
+        void *m_revstack;
+        const StringArray *excludeList;
     };
 
     struct propBaton {
-        Context*m_context;
-        PathPropertiesMapList*resultlist;
+        Context *m_context;
+        PathPropertiesMapList *resultlist;
     };
-    static void checkErrorThrow(svn_error_t*error)throw(ClientException)
+    static void checkErrorThrow(svn_error_t *error)throw(ClientException)
     {
-        if (!error || error->apr_err==APR_SUCCESS) {
+        if (!error || error->apr_err == APR_SUCCESS) {
             return;
         }
-        throw ClientException (error);
+        throw ClientException(error);
     }
 
-  private:
+private:
     ContextP m_context;
 
     /**
      * disallow assignment operator
      */
-    Client_impl & operator= (const Client &);
+    Client_impl &operator= (const Client &);
 
     /**
      * disallow copy constructor
      */
-    Client_impl (const Client &);
+    Client_impl(const Client &);
 
     DirEntries
-    list_simple(const Path& pathOrUrl,
-          const Revision& revision,
-          const Revision& peg,
-          bool recurse) throw (ClientException);
+    list_simple(const Path &pathOrUrl,
+                const Revision &revision,
+                const Revision &peg,
+                bool recurse) throw (ClientException);
     DirEntries
-    list_locks(const Path& pathOrUrl,
-          const Revision& revision,
-          const Revision& peg,
-          bool recurse) throw (ClientException);
+    list_locks(const Path &pathOrUrl,
+               const Revision &revision,
+               const Revision &peg,
+               bool recurse) throw (ClientException);
 
-    svn_error_t * internal_cat(const Path & path,
-                const Revision & revision,
-                const Revision & peg_revision,
-                svn::stream::SvnStream&);
+    svn_error_t *internal_cat(const Path &path,
+                              const Revision &revision,
+                              const Revision &peg_revision,
+                              svn::stream::SvnStream &);
 
-    static apr_hash_t * map2hash(const PropertiesMap&,const Pool&);
+    static apr_hash_t *map2hash(const PropertiesMap &, const Pool &);
 
     //! helper method
     virtual void
-    merge_peg(const Path&src,
-              const RevisionRange&range,
-              const Revision&peg,
-              const Path&targetWc,
+    merge_peg(const Path &src,
+              const RevisionRange &range,
+              const Revision &peg,
+              const Path &targetWc,
               Depth depth,
               bool notice_ancestry,
               bool dry_run,
               bool force,
-              const StringArray&merge_options
-            ) throw (ClientException);
+              const StringArray &merge_options
+             ) throw (ClientException);
 
     /** helper method
      * @sa svn_client_merge_reintegrate
      */
-    virtual void merge_reintegrate(const MergeParameter&parameters) throw (ClientException);
-  };
-
+    virtual void merge_reintegrate(const MergeParameter &parameters) throw (ClientException);
+};
 
 }
 

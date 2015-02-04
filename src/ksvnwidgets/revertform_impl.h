@@ -25,14 +25,14 @@
 
 class QStringList;
 
-class RevertFormImpl:public QWidget, public Ui::RevertForm
+class RevertFormImpl: public QWidget, public Ui::RevertForm
 {
     Q_OBJECT
 public:
-    RevertFormImpl(QWidget*parent=0);
+    RevertFormImpl(QWidget *parent = 0);
     virtual ~RevertFormImpl();
     svn::Depth getDepth()const;
-    void setDispList(const QStringList&_list);
+    void setDispList(const QStringList &_list);
     void setRecursive(bool rec);
 };
 

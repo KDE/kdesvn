@@ -45,122 +45,117 @@
 
 namespace svn
 {
-  Targets::Targets (const svn::Pathes & targets)
-  {
+Targets::Targets(const svn::Pathes &targets)
+{
     m_targets = targets;
-  }
+}
 
-  Targets::Targets(const QStringList&targets)
-  {
+Targets::Targets(const QStringList &targets)
+{
     m_targets.clear();
-    for (int i = 0; i < targets.size();++i) {
+    for (int i = 0; i < targets.size(); ++i) {
         if (targets[i].isEmpty()) {
             m_targets.push_back(QString());
         } else {
             m_targets.push_back(targets[i]);
         }
     }
-  }
+}
 
-  Targets::Targets (const apr_array_header_t * apr_targets)
-  {
+Targets::Targets(const apr_array_header_t *apr_targets)
+{
     int i;
 
-    m_targets.clear ();
+    m_targets.clear();
     //m_targets.reserve (apr_targets->nelts);
 
-    for (i = 0; i < apr_targets->nelts; i++)
-    {
-      const char ** target =
-        &APR_ARRAY_IDX (apr_targets, i, const char *);
+    for (i = 0; i < apr_targets->nelts; i++) {
+        const char **target =
+            &APR_ARRAY_IDX(apr_targets, i, const char *);
 
-      m_targets.push_back (Path (*target));
+        m_targets.push_back(Path(*target));
     }
-  }
+}
 
-  Targets::Targets (const Targets & targets)
-  {
-    m_targets = targets.targets ();
-  }
+Targets::Targets(const Targets &targets)
+{
+    m_targets = targets.targets();
+}
 
-  Targets::Targets (const QString& target)
-  {
+Targets::Targets(const QString &target)
+{
     if (!target.isEmpty()) {
         m_targets.push_back(target);
     }
-  }
+}
 
-  Targets::Targets (const Path& target)
-  {
+Targets::Targets(const Path &target)
+{
     if (!target.cstr().isEmpty()) {
         m_targets.push_back(target);
     }
-  }
+}
 
-  Targets::Targets (const char* target)
-  {
+Targets::Targets(const char *target)
+{
     if (target) {
-      m_targets.push_back(QString::FROMUTF8(target));
+        m_targets.push_back(QString::FROMUTF8(target));
     }
-  }
+}
 
-  Targets::~Targets ()
-  {
-  }
+Targets::~Targets()
+{
+}
 
-  apr_array_header_t *
-  Targets::array (const Pool & pool) const
-  {
+apr_array_header_t *
+Targets::array(const Pool &pool) const
+{
     Pathes::const_iterator it;
 
-    apr_pool_t *apr_pool = pool.pool ();
+    apr_pool_t *apr_pool = pool.pool();
     apr_array_header_t *apr_targets =
-      apr_array_make (apr_pool,
-                      m_targets.size(),
-                      sizeof (const char *));
+        apr_array_make(apr_pool,
+                       m_targets.size(),
+                       sizeof(const char *));
 
-    for (it = m_targets.begin (); it != m_targets.end (); ++it)
-    {
-      QByteArray s = (*it).path().TOUTF8();
+    for (it = m_targets.begin(); it != m_targets.end(); ++it) {
+        QByteArray s = (*it).path().TOUTF8();
 
-      char * t2 =
-        apr_pstrndup (apr_pool,s,s.size());
+        char *t2 =
+            apr_pstrndup(apr_pool, s, s.size());
 
-      (*((const char **) apr_array_push (apr_targets))) = t2;
+        (*((const char **) apr_array_push(apr_targets))) = t2;
     }
 
     return apr_targets;
-  }
+}
 
-  const Pathes &
-  Targets::targets () const
-  {
+const Pathes &
+Targets::targets() const
+{
     return m_targets;
-  }
+}
 
-  size_t
-  Targets::size () const
-  {
-    return m_targets.size ();
-  }
+size_t
+Targets::size() const
+{
+    return m_targets.size();
+}
 
-  const Path& Targets::operator [](size_t which)const
-  {
+const Path &Targets::operator [](size_t which)const
+{
     return m_targets[which];
-  }
+}
 
-  const Path
-  Targets::target (Pathes::size_type which) const
-  {
-    if (m_targets.size () > which)
-    {
-      return m_targets[which];
+const Path
+Targets::target(Pathes::size_type which) const
+{
+    if (m_targets.size() > which) {
+        return m_targets[which];
+    } else {
+        return Path();
     }
-    else
-    {
-      return Path();
-    }
-  }
+}
 }
 
 /* -----------------------------------------------------------------

@@ -28,20 +28,22 @@
 
 class QString;
 
-namespace svn {
-    class SVNQT_EXPORT Version {
+namespace svn
+{
+class SVNQT_EXPORT Version
+{
 
-    public:
-        Version(){}
-        ~Version(){}
+public:
+    Version() {}
+    ~Version() {}
 
-        static bool client_version_compatible();
-        static const QString linked_version();
-        static const QString running_version();
+    static bool client_version_compatible();
+    static const QString linked_version();
+    static const QString running_version();
 
-        static int version_major();
-        static int version_minor();
-    };
+    static int version_major();
+    static int version_minor();
+};
 }
 
 #endif

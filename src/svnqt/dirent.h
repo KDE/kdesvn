@@ -42,35 +42,35 @@
 
 namespace svn
 {
-  class DirEntry_Data;
+class DirEntry_Data;
 
-  class SVNQT_EXPORT DirEntry
-  {
-  public:
+class SVNQT_EXPORT DirEntry
+{
+public:
     /**
      * default constructor
      */
-    DirEntry ();
+    DirEntry();
 
     /**
      * constructor for existing @a svn_dirent_t entries
      */
-    DirEntry (const QString& name, const svn_dirent_t * dirEntry);
+    DirEntry(const QString &name, const svn_dirent_t *dirEntry);
     /**
      * constructor for existing @a svn_dirent_t entries
      */
-    DirEntry (const QString& name, const svn_dirent_t * dirEntry,const svn_lock_t*lockEntry);
+    DirEntry(const QString &name, const svn_dirent_t *dirEntry, const svn_lock_t *lockEntry);
 
-    DirEntry (const QString& name, const svn_dirent_t * dirEntry,const LockEntry&lockEntry);
+    DirEntry(const QString &name, const svn_dirent_t *dirEntry, const LockEntry &lockEntry);
     /**
      * copy constructor
      */
-    DirEntry (const DirEntry & src);
+    DirEntry(const DirEntry &src);
 
     /**
      * destructor
      */
-    ~DirEntry ();
+    ~DirEntry();
 
     /**
      * assignment operator
@@ -78,35 +78,35 @@ namespace svn
     DirEntry &
     operator = (const DirEntry &);
 
-    const QString&
-    name () const;
+    const QString &
+    name() const;
 
     svn_node_kind_t
-    kind () const;
+    kind() const;
 
     bool isDir()const;
 
     QLONG
-    size () const;
+    size() const;
 
     bool
-    hasProps () const;
+    hasProps() const;
 
     svn_revnum_t
-    createdRev () const;
+    createdRev() const;
 
-    const DateTime&
-    time () const;
+    const DateTime &
+    time() const;
 
-    const QString&
-    lastAuthor () const;
+    const QString &
+    lastAuthor() const;
 
     //! The assigned lock entry
     /*!
      * returns the assigned lock entry if set
      * \return a valid or an empty lock
      */
-    const LockEntry&
+    const LockEntry &
     lockEntry() const;
 
     //! initialize and convert the internal lock entry
@@ -116,13 +116,12 @@ namespace svn
      * \param aLock the subversion lock description to convert.
      */
     void
-    setLock(const svn_lock_t*aLock);
+    setLock(const svn_lock_t *aLock);
 
+private:
+    DirEntry_Data *m;
 
-  private:
-    DirEntry_Data * m;
-
-  };
+};
 }
 
 #endif

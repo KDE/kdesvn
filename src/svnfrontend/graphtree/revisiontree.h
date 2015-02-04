@@ -33,24 +33,25 @@ class QWidget;
 
 namespace svn
 {
-    class Client;
+class Client;
 }
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevisionTree{
+class RevisionTree
+{
 public:
-    RevisionTree(svn::Client*,
-        QObject*aListener,
-        const QString& reposRoot,
-        const svn::Revision&startr,const svn::Revision&endr,
-        const QString&,const svn::Revision& baserevision,QWidget*treeParent,
-        QWidget*parent=0);
+    RevisionTree(svn::Client *,
+                 QObject *aListener,
+                 const QString &reposRoot,
+                 const svn::Revision &startr, const svn::Revision &endr,
+                 const QString &, const svn::Revision &baserevision, QWidget *treeParent,
+                 QWidget *parent = 0);
     virtual ~RevisionTree();
 
     bool isValid()const;
-    QWidget*getView();
+    QWidget *getView();
 
 protected:
     long m_Baserevision;
@@ -58,18 +59,18 @@ protected:
     QString m_Path;
     bool m_Valid;
 
-    RtreeData*m_Data;
+    RtreeData *m_Data;
 
     bool topDownScan();
-    bool bottomUpScan(long startrev,unsigned recurse,const QString&path,long sRev = -1);
-    bool isDeleted(long revision,const QString&);
+    bool bottomUpScan(long startrev, unsigned recurse, const QString &path, long sRev = -1);
+    bool isDeleted(long revision, const QString &);
 
-    static bool isParent(const QString&_par,const QString&tar);
+    static bool isParent(const QString &_par, const QString &tar);
 
-    void fillItem(long revIndex,int pathIndex,const QString&nodeName,const QString&path);
+    void fillItem(long revIndex, int pathIndex, const QString &nodeName, const QString &path);
 private:
-    RevisionTree(const RevisionTree&);
-    RevisionTree &operator=(const RevisionTree&);
+    RevisionTree(const RevisionTree &);
+    RevisionTree &operator=(const RevisionTree &);
 
 };
 

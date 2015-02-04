@@ -25,21 +25,21 @@
 
 class PollingSettings_impl : public QWidget, public Ui::PollingSettings
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  PollingSettings_impl(QWidget* parent = 0);
-  ~PollingSettings_impl();
-  /*$PUBLIC_FUNCTIONS$*/
+    PollingSettings_impl(QWidget *parent = 0);
+    ~PollingSettings_impl();
+    /*$PUBLIC_FUNCTIONS$*/
 
 public slots:
-  /*$PUBLIC_SLOTS$*/
+    /*$PUBLIC_SLOTS$*/
 
 protected:
-  /*$PROTECTED_FUNCTIONS$*/
+    /*$PROTECTED_FUNCTIONS$*/
 
 protected slots:
-  /*$PROTECTED_SLOTS$*/
+    /*$PROTECTED_SLOTS$*/
 
 };
 

@@ -35,20 +35,20 @@ class SvnLogModel;
 class QSortFilterProxyModel;
 class QModelIndex;
 
-class SvnLogDlgImp: public KDialog,public Ui::LogDialog,public SimpleLogCb
+class SvnLogDlgImp: public KDialog, public Ui::LogDialog, public SimpleLogCb
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    SvnLogDlgImp(SvnActions*ac, bool modal, QWidget *parent = 0);
+    SvnLogDlgImp(SvnActions *ac, bool modal, QWidget *parent = 0);
     virtual ~SvnLogDlgImp();
-    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&,const QString&,const QString&,const svn::Revision&peg,const QString&pegUrl);
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap> &, const QString &, const QString &, const svn::Revision &peg, const QString &pegUrl);
     void saveSize();
     void loadSize();
-    virtual bool getSingleLog(svn::LogEntry&t,const svn::Revision&r,const QString&what,const svn::Revision&peg,QString&root);
+    virtual bool getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root);
 
 signals:
-    void makeDiff(const QString&,const svn::Revision&,const QString&,const svn::Revision&,QWidget*);
-    void makeCat(const svn::Revision&,const QString&,const QString&,const svn::Revision&,QWidget*);
+    void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
+    void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
 
 protected slots:
     virtual void slotDispPrevious();
@@ -60,36 +60,36 @@ protected slots:
 protected:
     QString _name;
     QString _base;
-    static const char* groupName;
-    SvnActions*m_Actions;
+    static const char *groupName;
+    SvnActions *m_Actions;
     bool m_ControlKeyDown;
-    virtual void keyPressEvent (QKeyEvent * e);
-    virtual void keyReleaseEvent (QKeyEvent * e);
+    virtual void keyPressEvent(QKeyEvent *e);
+    virtual void keyReleaseEvent(QKeyEvent *e);
     svn::SharedPointer<svn::LogEntriesMap> m_Entries;
-    SvnLogModel*m_CurrentModel;
-    QSortFilterProxyModel*m_SortModel;
+    SvnLogModel *m_CurrentModel;
+    QSortFilterProxyModel *m_SortModel;
 
     QString _bugurl;
 
-    void dispLog(const svn::SharedPointer<svn::LogEntriesMap>&);
+    void dispLog(const svn::SharedPointer<svn::LogEntriesMap> &);
 
-    QRegExp _r1,_r2;
+    QRegExp _r1, _r2;
 
 protected slots:
     virtual void slotListEntries();
-    virtual void slotChangedPathContextMenu(const QPoint&);
-    virtual void slotSingleDoubleClicked(QTreeWidgetItem*,int);
+    virtual void slotChangedPathContextMenu(const QPoint &);
+    virtual void slotSingleDoubleClicked(QTreeWidgetItem *, int);
     virtual void slotGetLogs();
     virtual void slotBlameItem();
 
-    virtual void slotSelectionChanged(const QItemSelection&, const QItemSelection&);
-    virtual void slotCustomContextMenu(const QPoint&);
+    virtual void slotSelectionChanged(const QItemSelection &, const QItemSelection &);
+    virtual void slotCustomContextMenu(const QPoint &);
 
 protected:
     /* it works 'cause we use single selection only */
-    QModelIndex selectedRow(int column=0);
-    void replaceBugids(QString&msg);
-    QString genReplace(const QString&);
+    QModelIndex selectedRow(int column = 0);
+    void replaceBugids(QString &msg);
+    QString genReplace(const QString &);
     svn::Revision m_peg;
     svn::Path m_PegUrl;
 };

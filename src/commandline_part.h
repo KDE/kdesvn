@@ -33,11 +33,11 @@ class commandline_part : public QObject
 {
     Q_OBJECT
 public:
-    commandline_part(QObject *parent, const QVariantList& args = QVariantList());
+    commandline_part(QObject *parent, const QVariantList &args = QVariantList());
     virtual ~commandline_part();
-    virtual int exec(KCmdLineArgs*);
+    virtual int exec(KCmdLineArgs *);
 private:
-    CommandExec*m_pCPart;
+    CommandExec *m_pCPart;
 
 };
 

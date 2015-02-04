@@ -28,8 +28,8 @@
 #include <QReadLocker>
 #include <QWriteLocker>
 
-GetInfoThread::GetInfoThread(QObject*_parent)
-: SvnThread(_parent),m_NodeQueue(),m_Cancel(false),m_QueueLock(),m_CancelLock()
+GetInfoThread::GetInfoThread(QObject *_parent)
+    : SvnThread(_parent), m_NodeQueue(), m_Cancel(false), m_QueueLock(), m_CancelLock()
 {
 }
 
@@ -49,11 +49,11 @@ void GetInfoThread::run()
                     break;
                 }
             }
-            SvnItemModelNode*current = 0;
+            SvnItemModelNode *current = 0;
             {
                 QMutexLocker ml(&m_QueueLock);
                 if (!m_NodeQueue.isEmpty()) {
-                    current = m_NodeQueue.dequeue ();
+                    current = m_NodeQueue.dequeue();
                 }
             }
             if (current) {
@@ -64,7 +64,7 @@ void GetInfoThread::run()
                         } else {
                             rev = svn::Revision::UNDEFINED;
                         }
-                        itemInfo(current->fullName(),info,rev,current->correctPeg());
+                        itemInfo(current->fullName(), info, rev, current->correctPeg());
                     }
                     current->generateToolTip(info);
                 }
@@ -72,7 +72,7 @@ void GetInfoThread::run()
                 break;
             }
         }
-    } catch (const svn::Exception&e) {
+    } catch (const svn::Exception &e) {
         m_SvnContextListener->contextNotify(e.msg());
     }
 }
@@ -86,16 +86,16 @@ void GetInfoThread::cancelMe()
     }
 }
 
-void GetInfoThread::appendNode(SvnItemModelNode*node)
+void GetInfoThread::appendNode(SvnItemModelNode *node)
 {
     if (!node) {
         return;
     }
     QMutexLocker ml(&m_QueueLock);
     bool found = false;
-    QQueue<SvnItemModelNode*>::const_iterator it=m_NodeQueue.constBegin();
-    for (;it!=m_NodeQueue.constEnd();++it) {
-        if ((*it)->fullName()==node->fullName()) {
+    QQueue<SvnItemModelNode *>::const_iterator it = m_NodeQueue.constBegin();
+    for (; it != m_NodeQueue.constEnd(); ++it) {
+        if ((*it)->fullName() == node->fullName()) {
             found = true;
             break;
         }

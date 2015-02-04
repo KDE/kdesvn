@@ -37,86 +37,90 @@ class SvnLogModelData
 {
 public:
     SvnLogModelData()
-        : m_List(),m_rowCount(-1),m_Empty(),_min(-1),_max(-1),_name(),_left(-1),_right(-1)
+        : m_List(), m_rowCount(-1), m_Empty(), _min(-1), _max(-1), _name(), _left(-1), _right(-1)
     {
     }
     QList<SvnLogModelNodePtr> m_List;
     int m_rowCount;
     QString m_Empty;
-    long _min,_max;
+    long _min, _max;
     QString _name;
-    long _left,_right;
+    long _left, _right;
 };
 
-SvnLogModel::SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString&_name,QObject*parent)
-    :QAbstractItemModel(parent),m_data(new SvnLogModelData)
+SvnLogModel::SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name, QObject *parent)
+    : QAbstractItemModel(parent), m_data(new SvnLogModelData)
 {
-    setLogData(_log,_name);
+    setLogData(_log, _name);
 }
 
 SvnLogModel::~SvnLogModel()
 {
 }
 
-QModelIndex SvnLogModel::index(int row,int column,const QModelIndex & parent)const
+QModelIndex SvnLogModel::index(int row, int column, const QModelIndex &parent)const
 {
     Q_UNUSED(parent);
-    if (row >= m_data->m_List.count()||row<0) {
+    if (row >= m_data->m_List.count() || row < 0) {
         return QModelIndex();
     }
-    SvnLogModelNode*n=m_data->m_List[row];
-    return createIndex(row,column,n);
+    SvnLogModelNode *n = m_data->m_List[row];
+    return createIndex(row, column, n);
 }
 
-Qt::ItemFlags SvnLogModel::flags(const QModelIndex & index) const
+Qt::ItemFlags SvnLogModel::flags(const QModelIndex &index) const
 {
     if (index.isValid()) {
-        return Qt::ItemIsSelectable|Qt::ItemIsEnabled/*|Qt::ItemIsUserCheckable*/;
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled/*|Qt::ItemIsUserCheckable*/;
     }
     return 0;
 }
 
-QModelIndex SvnLogModel::parent(const QModelIndex&)const
+QModelIndex SvnLogModel::parent(const QModelIndex &)const
 {
     // we have no tree...
     return QModelIndex();
 }
 
-void SvnLogModel::setLogData(const svn::SharedPointer<svn::LogEntriesMap>&_log,const QString&_name)
+void SvnLogModel::setLogData(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name)
 {
-    beginRemoveRows(QModelIndex(),0,m_data->m_List.count());
+    beginRemoveRows(QModelIndex(), 0, m_data->m_List.count());
     m_data->m_List.clear();
     endRemoveRows();
     m_data->_name = _name;
     m_data->_left = m_data->_right = -1;
 
-    QMap<long int,QString> namesMap;
-    QMap<long int,SvnLogModelNodePtr> itemMap;
+    QMap<long int, QString> namesMap;
+    QMap<long int, SvnLogModelNodePtr> itemMap;
 
     m_data->_min = m_data->_max = -1;
 
-    beginInsertRows(QModelIndex(),0,_log->count());
+    beginInsertRows(QModelIndex(), 0, _log->count());
     svn::LogEntriesMap::const_iterator it = _log->begin();
-    for (;it!=_log->end();++it) {
+    for (; it != _log->end(); ++it) {
         SvnLogModelNodePtr np = new SvnLogModelNode((*it));
         m_data->m_List.append(np);
-        if ((*it).revision>m_data->_max) m_data->_max = (*it).revision;
-        if ((*it).revision<m_data->_min || m_data->_min == -1) m_data->_min = (*it).revision;
-        itemMap[(*it).revision]=np;
+        if ((*it).revision > m_data->_max) {
+            m_data->_max = (*it).revision;
+        }
+        if ((*it).revision < m_data->_min || m_data->_min == -1) {
+            m_data->_min = (*it).revision;
+        }
+        itemMap[(*it).revision] = np;
     }
     endInsertRows();
     QString bef = m_data->_name;
     long rev;
     // YES! I'd checked it: this is much faster than getting list of keys
     // and iterating over that list!
-    for (long c=m_data->_max;c>-1;--c) {
+    for (long c = m_data->_max; c > -1; --c) {
         if (!itemMap.contains(c)) {
             continue;
         }
         if (itemMap[c]->realName().isEmpty()) {
             itemMap[c]->setRealName(bef);
         }
-        itemMap[c]->copiedFrom(bef,rev);
+        itemMap[c]->copiedFrom(bef, rev);
     }
 }
 
@@ -138,10 +142,10 @@ int SvnLogModel::rowCount(const QModelIndex &parent)const
 
 QVariant SvnLogModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()||index.row()>=m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return QVariant();
     }
-    const SvnLogModelNodePtr & _l = m_data->m_List[index.row()];
+    const SvnLogModelNodePtr &_l = m_data->m_List[index.row()];
 
     switch (role) {
     case Qt::DisplayRole:
@@ -156,7 +160,7 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
             return _l->shortMessage();
         }
     case Qt::DecorationRole:
-        if (index.column()==0){
+        if (index.column() == 0) {
             if (index.row() == m_data->_left) {
                 return KIcon("kdesvnleft");
             } else if (index.row() == m_data->_right) {
@@ -169,36 +173,36 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QLONG SvnLogModel::toRevision(const QModelIndex&index)const
+QLONG SvnLogModel::toRevision(const QModelIndex &index)const
 {
-    if (!index.isValid()||index.row()>=m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return -1;
     }
     return m_data->m_List[index.row()]->revision();
 }
 
-const QString& SvnLogModel::fullMessage(const QModelIndex&index)const
+const QString &SvnLogModel::fullMessage(const QModelIndex &index)const
 {
-    if (!index.isValid()||index.row()>=m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return m_data->m_Empty;
     }
     return m_data->m_List[index.row()]->message();
 }
 
-const QString&SvnLogModel::realName(const QModelIndex&index)
+const QString &SvnLogModel::realName(const QModelIndex &index)
 {
-    if (!index.isValid()||index.row()>=m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return m_data->m_Empty;
     }
     return m_data->m_List[index.row()]->realName();
 }
 
-int SvnLogModel::columnCount(const QModelIndex&)const
+int SvnLogModel::columnCount(const QModelIndex &)const
 {
     return Count;
 }
 
-QVariant SvnLogModel::headerData(int section, Qt::Orientation orientation,int role) const
+QVariant SvnLogModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     Q_UNUSED(orientation);
     switch (role) {
@@ -217,26 +221,26 @@ QVariant SvnLogModel::headerData(int section, Qt::Orientation orientation,int ro
     return QVariant();
 }
 
-SvnLogModelNodePtr SvnLogModel::indexNode(const QModelIndex & index)const
+SvnLogModelNodePtr SvnLogModel::indexNode(const QModelIndex &index)const
 {
-    if (!index.isValid()||index.row()>=m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return SvnLogModelNodePtr();
     }
     return m_data->m_List[index.row()];
 }
 
-void SvnLogModel::fillChangedPaths(const QModelIndex&index,QTreeWidget*where)
+void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
 {
-    if (!where || !index.isValid()||index.row()>=m_data->m_List.count()) {
+    if (!where || !index.isValid() || index.row() >= m_data->m_List.count()) {
         return;
     }
     where->clear();
-    const SvnLogModelNodePtr & _l = m_data->m_List[index.row()];
-    if (_l->changedPaths().count()==0) {
+    const SvnLogModelNodePtr &_l = m_data->m_List[index.row()];
+    if (_l->changedPaths().count() == 0) {
         return;
     }
-    QList<QTreeWidgetItem*> _list;
-    for (int i = 0; i < _l->changedPaths().count();++i) {
+    QList<QTreeWidgetItem *> _list;
+    for (int i = 0; i < _l->changedPaths().count(); ++i) {
         _list.append(new LogChangePathItem(_l->changedPaths()[i]));
     }
     where->addTopLevelItems(_list);
@@ -258,18 +262,18 @@ long SvnLogModel::rightRow()const
 
 void SvnLogModel::setLeftRow(long v)
 {
-    if (m_data->_right==v) {
-        m_data->_right=-1;
+    if (m_data->_right == v) {
+        m_data->_right = -1;
     }
-    m_data->_left=v;
+    m_data->_left = v;
 }
 
 void SvnLogModel::setRightRow(long v)
 {
-    if (m_data->_left==v) {
-        m_data->_left=-1;
+    if (m_data->_left == v) {
+        m_data->_left = -1;
     }
-    m_data->_right=v;
+    m_data->_right = v;
 }
 
 #include "logitemmodel.moc"

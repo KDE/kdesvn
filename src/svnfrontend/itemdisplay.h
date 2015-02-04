@@ -32,32 +32,32 @@ class SvnItem;
 
 namespace svn
 {
-    class Status;
-    class Revision;
+class Status;
+class Revision;
 }
 
 class ItemDisplay
 {
 public:
     ItemDisplay();
-    virtual ~ItemDisplay(){}
+    virtual ~ItemDisplay() {}
     virtual bool isWorkingCopy()const;
-    virtual QWidget*realWidget() = 0;
-    virtual SvnItem*Selected()const=0;
-    virtual void SelectionList(QList<SvnItem*>&)const=0;
-    virtual const QString&baseUri()const;
-    virtual const svn::Revision&baseRevision()const=0;
-    virtual bool openUrl( const KUrl &url,bool noReinit=false )=0;
-    virtual SvnItem*SelectedOrMain()const=0;
+    virtual QWidget *realWidget() = 0;
+    virtual SvnItem *Selected()const = 0;
+    virtual void SelectionList(QList<SvnItem *> &)const = 0;
+    virtual const QString &baseUri()const;
+    virtual const svn::Revision &baseRevision()const = 0;
+    virtual bool openUrl(const KUrl &url, bool noReinit = false) = 0;
+    virtual SvnItem *SelectedOrMain()const = 0;
     virtual bool isNetworked()const;
-    virtual const QString&lastError()const;
-    virtual bool filterOut(const SvnItem*);
-    QString relativePath(const SvnItem*item);
+    virtual const QString &lastError()const;
+    virtual bool filterOut(const SvnItem *);
+    QString relativePath(const SvnItem *item);
 
 protected:
     void setWorkingCopy(bool);
     void setNetworked(bool);
-    void setBaseUri(const QString&);
+    void setBaseUri(const QString &);
     QString m_LastException;
 
 private:

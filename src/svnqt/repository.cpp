@@ -24,82 +24,81 @@
 #include "repository.h"
 #include "repositorydata.h"
 
-namespace svn {
-
-namespace repository {
-
-Repository::Repository(svn::repository::RepositoryListener*aListener)
+namespace svn
 {
-    m_Data=new RepositoryData(aListener);
-}
 
+namespace repository
+{
+
+Repository::Repository(svn::repository::RepositoryListener *aListener)
+{
+    m_Data = new RepositoryData(aListener);
+}
 
 Repository::~Repository()
 {
     delete m_Data;
 }
 
-
 /*!
     \fn svn::Repository::Open(const QString&)
  */
-void Repository::Open(const QString&name) throw (ClientException)
+void Repository::Open(const QString &name) throw (ClientException)
 {
-    svn_error_t * error = m_Data->Open(name);
-    if (error!=0) {
-        throw ClientException (error);
+    svn_error_t *error = m_Data->Open(name);
+    if (error != 0) {
+        throw ClientException(error);
     }
 }
 
-void Repository::CreateOpen(const CreateRepoParameter&params) throw (ClientException)
+void Repository::CreateOpen(const CreateRepoParameter &params) throw (ClientException)
 {
-    svn_error_t * error = m_Data->CreateOpen(params);
-    if (error!=0) {
-        throw ClientException (error);
+    svn_error_t *error = m_Data->CreateOpen(params);
+    if (error != 0) {
+        throw ClientException(error);
     }
 }
-
 
 /*!
     \fn svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
  */
-void Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+void Repository::dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas)throw (ClientException)
 {
-    svn_error_t * error = m_Data->dump(output,start,end,incremental,use_deltas);
-    if (error!=0) {
-        throw ClientException (error);
+    svn_error_t *error = m_Data->dump(output, start, end, incremental, use_deltas);
+    if (error != 0) {
+        throw ClientException(error);
     }
 }
 
-void Repository::loaddump(const QString&dump,LOAD_UUID uuida, const QString&parentFolder, bool usePre, bool usePost, bool validateProps)throw (ClientException)
+void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)throw (ClientException)
 {
     svn_repos_load_uuid uuid_action;
     switch (uuida) {
     case UUID_IGNORE_ACTION:
-        uuid_action=svn_repos_load_uuid_ignore;
+        uuid_action = svn_repos_load_uuid_ignore;
         break;
     case UUID_FORCE_ACTION:
-        uuid_action=svn_repos_load_uuid_force ;
+        uuid_action = svn_repos_load_uuid_force ;
         break;
     case UUID_DEFAULT_ACTION:
     default:
-        uuid_action=svn_repos_load_uuid_default;
+        uuid_action = svn_repos_load_uuid_default;
         break;
     }
-    svn_error_t * error = m_Data->loaddump(dump,uuid_action,parentFolder,usePre,usePost,validateProps);
-    if (error!=0) {
-        throw ClientException (error);
+    svn_error_t *error = m_Data->loaddump(dump, uuid_action, parentFolder, usePre, usePost, validateProps);
+    if (error != 0) {
+        throw ClientException(error);
     }
 }
 
 /*!
     \fn svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)
  */
-void Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)throw (ClientException)
+void Repository::hotcopy(const QString &src, const QString &dest, bool cleanlogs)throw (ClientException)
 {
-    svn_error_t * error = RepositoryData::hotcopy(src,dest,cleanlogs);
-    if (error!=0) {
-        throw ClientException (error);
+    svn_error_t *error = RepositoryData::hotcopy(src, dest, cleanlogs);
+    if (error != 0) {
+        throw ClientException(error);
     }
 }
 

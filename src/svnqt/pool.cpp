@@ -31,49 +31,46 @@
 // svncpp
 #include "pool.h"
 
-
 namespace svn
 {
-   bool Pool::s_initialized = false;
+bool Pool::s_initialized = false;
 
-  apr_pool_t *
-  Pool::pool_create (apr_pool_t * parent)
-  {
+apr_pool_t *
+Pool::pool_create(apr_pool_t *parent)
+{
     if (!s_initialized) {
         apr_pool_initialize();
-        s_initialized=true;
+        s_initialized = true;
     }
-    return svn_pool_create (parent);
-  }
+    return svn_pool_create(parent);
+}
 
-  Pool::Pool (apr_pool_t * parent)
-    : m_parent (parent), m_pool (pool_create (parent))
-  {
-  }
+Pool::Pool(apr_pool_t *parent)
+    : m_parent(parent), m_pool(pool_create(parent))
+{
+}
 
-  Pool::~Pool ()
-  {
-    if(m_pool)
-    {
-        svn_pool_destroy (m_pool);
+Pool::~Pool()
+{
+    if (m_pool) {
+        svn_pool_destroy(m_pool);
     }
-  }
+}
 
-  apr_pool_t *
-  Pool::pool () const
-  {
+apr_pool_t *
+Pool::pool() const
+{
     return m_pool;
-  }
+}
 
-  void
-  Pool::renew ()
-  {
-    if (m_pool)
-    {
-      svn_pool_destroy (m_pool);
+void
+Pool::renew()
+{
+    if (m_pool) {
+        svn_pool_destroy(m_pool);
     }
-    m_pool = pool_create (m_parent);
-  }
+    m_pool = pool_create(m_parent);
+}
 }
 
 /* -----------------------------------------------------------------

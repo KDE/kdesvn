@@ -36,16 +36,25 @@ class SshAgent : public QObject
     Q_OBJECT
 
 public:
-    SshAgent(QObject* parent = 0);
+    SshAgent(QObject *parent = 0);
     ~SshAgent();
 
     bool querySshAgent();
-    bool addSshIdentities(bool force=false);
+    bool addSshIdentities(bool force = false);
     void killSshAgent();
 
-    bool isRunning() const { return m_isRunning; }
-    QString pid() const { return m_pid; }
-    QString authSock() const { return m_authSock; }
+    bool isRunning() const
+    {
+        return m_isRunning;
+    }
+    QString pid() const
+    {
+        return m_pid;
+    }
+    QString authSock() const
+    {
+        return m_authSock;
+    }
 
 private slots:
     void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
@@ -63,8 +72,7 @@ private:
     static QString m_authSock;
     static QString m_pid;
 
-    KProcess*sshAgent;
+    KProcess *sshAgent;
 };
-
 
 #endif

@@ -28,17 +28,18 @@ class CommandLineData;
 /**
 @author Rajko Albrecht
 */
-class CommandLine:public QObject{
+class CommandLine: public QObject
+{
     Q_OBJECT
 public:
-    CommandLine(KCmdLineArgs*);
+    CommandLine(KCmdLineArgs *);
     virtual ~CommandLine();
 
     virtual int exec();
 
 protected:
-    KCmdLineArgs*m_args;
-    CommandLineData*m_data;
+    KCmdLineArgs *m_args;
+    CommandLineData *m_data;
 };
 
 #endif

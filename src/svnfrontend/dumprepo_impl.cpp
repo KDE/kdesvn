@@ -31,8 +31,8 @@ DumpRepo_impl::DumpRepo_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    m_ReposPath->setMode(KFile::Directory|KFile::LocalOnly);
-    m_OutputFile->setMode(KFile::File|KFile::LocalOnly);
+    m_ReposPath->setMode(KFile::Directory | KFile::LocalOnly);
+    m_OutputFile->setMode(KFile::File | KFile::LocalOnly);
 }
 
 void DumpRepo_impl::slotDumpRange(bool how)
@@ -40,7 +40,6 @@ void DumpRepo_impl::slotDumpRange(bool how)
     m_StartNumber->setEnabled(how);
     m_EndNumber->setEnabled(how);
 }
-
 
 /*!
     \fn DumpRepo_impl::reposPath()
@@ -50,7 +49,6 @@ QString DumpRepo_impl::reposPath() const
     return m_ReposPath->url().path(KUrl::RemoveTrailingSlash);
 }
 
-
 /*!
     \fn DumpRepo_impl::targetFile()
  */
@@ -58,7 +56,6 @@ QString DumpRepo_impl::targetFile() const
 {
     return m_OutputFile->url().path(KUrl::RemoveTrailingSlash);
 }
-
 
 /*!
     \fn DumpRepo_impl::incremental()
@@ -68,7 +65,6 @@ bool DumpRepo_impl::incremental() const
     return m_incrementalDump->isChecked();
 }
 
-
 /*!
     \fn DumpRepo_impl::use_dumps()
  */
@@ -76,7 +72,6 @@ bool DumpRepo_impl::use_deltas() const
 {
     return m_UseDeltas->isChecked();
 }
-
 
 /*!
     \fn DumpRepo_impl::useNumbers()
@@ -91,7 +86,7 @@ bool DumpRepo_impl::useNumbers() const
  */
 int DumpRepo_impl::startNumber() const
 {
-    return useNumbers()?m_StartNumber->value():-1;
+    return useNumbers() ? m_StartNumber->value() : -1;
 }
 
 /*!
@@ -99,7 +94,7 @@ int DumpRepo_impl::startNumber() const
  */
 int DumpRepo_impl::endNumber() const
 {
-    return useNumbers()?m_EndNumber->value():-1;
+    return useNumbers() ? m_EndNumber->value() : -1;
 }
 
 #include "dumprepo_impl.moc"

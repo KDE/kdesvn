@@ -29,7 +29,8 @@
 /**
 @author Rajko Albrecht
 */
-class ThreadContextListenerData{
+class ThreadContextListenerData
+{
 public:
     ThreadContextListenerData();
 
@@ -46,39 +47,33 @@ public:
     /* Trust ssl realm* */
     struct strust_answer {
         svn::ContextListener::SslServerTrustAnswer m_SslTrustAnswer;
-        const svn::ContextListener::SslServerTrustData*m_Trustdata;
+        const svn::ContextListener::SslServerTrustData *m_Trustdata;
     };
-
 
     /* login into server */
-    struct slogin_data
-    {
-        QString user,password,realm;
-        bool maysave,ok;
+    struct slogin_data {
+        QString user, password, realm;
+        bool maysave, ok;
     };
 
-    struct slog_message
-    {
+    struct slog_message {
         QString msg;
         bool ok;
-        const svn::CommitItemList*_items;
-        slog_message() :ok(false),_items(NULL) {}
+        const svn::CommitItemList *_items;
+        slog_message() : ok(false), _items(NULL) {}
     };
 
-    struct scert_pw
-    {
-        QString password,realm;
-        bool ok,maysave;
+    struct scert_pw {
+        QString password, realm;
+        bool ok, maysave;
     };
 
-    struct scert_file
-    {
+    struct scert_file {
         QString certfile;
         bool ok;
     };
 
-    struct snotify
-    {
+    struct snotify {
         QString msg;
     };
 };

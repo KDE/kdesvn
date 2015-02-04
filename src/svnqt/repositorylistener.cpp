@@ -23,14 +23,15 @@
  ***************************************************************************/
 #include "repositorylistener.h"
 
-namespace svn {
+namespace svn
+{
 
-namespace repository {
+namespace repository
+{
 
 RepositoryListener::RepositoryListener()
 {
 }
-
 
 RepositoryListener::~RepositoryListener()
 {

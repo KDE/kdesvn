@@ -25,20 +25,21 @@
 class QStringList;
 class QString;
 
-class EditPropsWidget: public QWidget, public Ui::EditPropsWidget {
-	Q_OBJECT
+class EditPropsWidget: public QWidget, public Ui::EditPropsWidget
+{
+    Q_OBJECT
 public:
     EditPropsWidget(QWidget *parent = 0);
     ~EditPropsWidget();
 
     QString propName()const;
     QString propValue()const;
-    void setPropName(const QString&);
-    void setPropValue(const QString&);
+    void setPropName(const QString &);
+    void setPropValue(const QString &);
     void setDir(bool dir);
 
 protected slots:
-    void updateToolTip(const QString&);
+    void updateToolTip(const QString &);
 
 private:
     QStringList fileProperties;

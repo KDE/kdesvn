@@ -21,7 +21,7 @@
 
 #include <kdebug.h>
 
-eLog_Entry::eLog_Entry(const svn::LogEntry&old)
+eLog_Entry::eLog_Entry(const svn::LogEntry &old)
     : svn::LogEntry(old)
 {
 }
@@ -35,34 +35,34 @@ eLog_Entry::~eLog_Entry()
 {
 }
 
-void eLog_Entry::addCopyTo(const QString&current,const QString&target,
-                            svn_revnum_t target_rev,char _action,svn_revnum_t from_rev)
+void eLog_Entry::addCopyTo(const QString &current, const QString &target,
+                           svn_revnum_t target_rev, char _action, svn_revnum_t from_rev)
 {
     svn::LogChangePathEntry _entry;
-    _entry.copyToPath=target;
+    _entry.copyToPath = target;
     _entry.path = current;
     _entry.copyToRevision = target_rev;
-    _entry.action=_action;
+    _entry.action = _action;
     _entry.copyFromRevision = from_rev;
     switch (_action) {
-        case 'A':
-            if (!target.isEmpty()) {
-                _entry.action = 'H';
-            }else{
-            }
-            break;
-        case 'D':
-            break;
-        case 'R':
-            break;
-        case 'M':
-            break;
-        default:
-            break;
+    case 'A':
+        if (!target.isEmpty()) {
+            _entry.action = 'H';
+        } else {
+        }
+        break;
+    case 'D':
+        break;
+    case 'R':
+        break;
+    case 'M':
+        break;
+    default:
+        break;
     }
     /* make sure that ALL writing operations are BEFORE deletion of item,
      * otherwise search will fail */
-    if (_action=='D') {
+    if (_action == 'D') {
         changedPaths.push_back(_entry);
     } else {
         changedPaths.push_front(_entry);

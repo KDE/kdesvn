@@ -30,14 +30,19 @@
 
 class RecurseCheck
 {
-    bool&value;
+    bool &value;
 public:
-    RecurseCheck(bool&aValue):value(aValue){ value=true;}
-    ~RecurseCheck(){value = false;}
+    RecurseCheck(bool &aValue): value(aValue)
+    {
+        value = true;
+    }
+    ~RecurseCheck()
+    {
+        value = false;
+    }
 };
 
-struct CreateRepoData
-{
+struct CreateRepoData {
     bool inChangeCompat;
     mutable svn::repository::CreateRepoParameter params;
 };
@@ -46,39 +51,39 @@ Createrepo_impl::Createrepo_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    m_ReposPathinput->setMode(KFile::Directory|KFile::LocalOnly);
+    m_ReposPathinput->setMode(KFile::Directory | KFile::LocalOnly);
     _data = new CreateRepoData;
 
-   _data->inChangeCompat=true;
+    _data->inChangeCompat = true;
     m_DisableFsync->setEnabled(false);
     m_LogKeep->setEnabled(false);
 
-    if ( svn::Version::version_major()>1||svn::Version::version_minor()>3 ){
+    if (svn::Version::version_major() > 1 || svn::Version::version_minor() > 3) {
         m_svn13compat->setEnabled(true);
     } else {
         m_svn13compat->setEnabled(false);
         m_svn13compat->hide();
     }
-    if (svn::Version::version_major()>1||svn::Version::version_minor()>4){
+    if (svn::Version::version_major() > 1 || svn::Version::version_minor() > 4) {
         m_svn14compat->setEnabled(true);
     } else {
         m_svn14compat->setEnabled(false);
         m_svn14compat->hide();
     }
-    if (svn::Version::version_major()>1||svn::Version::version_minor()>5){
+    if (svn::Version::version_major() > 1 || svn::Version::version_minor() > 5) {
         m_svn15compat->setEnabled(true);
     } else {
         m_svn15compat->setEnabled(false);
         m_svn15compat->hide();
     }
 
-   _data->inChangeCompat=false;
+    _data->inChangeCompat = false;
 }
 
 void Createrepo_impl::fsTypeChanged(int which)
 {
-    m_DisableFsync->setEnabled(which==1);
-    m_LogKeep->setEnabled(which==1);
+    m_DisableFsync->setEnabled(which == 1);
+    m_LogKeep->setEnabled(which == 1);
 }
 
 QString Createrepo_impl::targetDir()const
@@ -133,11 +138,11 @@ void Createrepo_impl::compatChanged13(bool)
     }
 }
 
-const svn::repository::CreateRepoParameter&Createrepo_impl::parameter()const
+const svn::repository::CreateRepoParameter &Createrepo_impl::parameter()const
 {
     _data->params.path(targetDir());
-    _data->params.pre14_compat((m_svn13compat->isChecked()||!m_svn13compat->isEnabled()));
-    _data->params.pre15_compat((m_svn14compat->isChecked()||!m_svn14compat->isEnabled()));
+    _data->params.pre14_compat((m_svn13compat->isChecked() || !m_svn13compat->isEnabled()));
+    _data->params.pre15_compat((m_svn14compat->isChecked() || !m_svn14compat->isEnabled()));
     _data->params.fstype(m_FilesystemSelector->currentText());
     _data->params.bdbnosync(m_DisableFsync->isChecked());
     _data->params.bdbautologremove(!m_LogKeep->isChecked());

@@ -21,14 +21,14 @@
 
 #include <ktextedit.h>
 
-KMultilineDelegate::KMultilineDelegate(QObject*parent)
-    :QItemDelegate(parent)
+KMultilineDelegate::KMultilineDelegate(QObject *parent)
+    : QItemDelegate(parent)
 {
 }
 
 QWidget *KMultilineDelegate::createEditor(QWidget *parent,
-    const QStyleOptionViewItem &/* option */,
-    const QModelIndex &/* index */) const
+        const QStyleOptionViewItem &/* option */,
+        const QModelIndex &/* index */) const
 {
     KTextEdit *editor = new KTextEdit(parent);
     //editor->setMinimumHeight(35);
@@ -36,31 +36,31 @@ QWidget *KMultilineDelegate::createEditor(QWidget *parent,
 }
 
 void KMultilineDelegate::setEditorData(QWidget *editor,
-                                    const QModelIndex &index) const
+                                       const QModelIndex &index) const
 {
     QString value = index.model()->data(index, Qt::EditRole).toString();
 
-    KTextEdit *editBox = static_cast<KTextEdit*>(editor);
+    KTextEdit *editBox = static_cast<KTextEdit *>(editor);
     editBox->setText(value);
 }
 
- void KMultilineDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
-                                    const QModelIndex &index) const
+void KMultilineDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                      const QModelIndex &index) const
 {
-    KTextEdit *editBox = static_cast<KTextEdit*>(editor);
+    KTextEdit *editBox = static_cast<KTextEdit *>(editor);
     model->setData(index, editBox->toPlainText(), Qt::EditRole);
 }
 
 void KMultilineDelegate::updateEditorGeometry(QWidget *editor,
-    const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
+        const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
 {
     editor->setGeometry(option.rect);
 }
 
-QSize KMultilineDelegate::sizeHint(const QStyleOptionViewItem & option,const QModelIndex & index)const
+QSize KMultilineDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index)const
 {
-    QSize s = QItemDelegate::sizeHint(option,index);
-    if (s.height()<35) {
+    QSize s = QItemDelegate::sizeHint(option, index);
+    if (s.height() < 35) {
         s.setHeight(35);
     }
     return s;

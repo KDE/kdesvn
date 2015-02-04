@@ -22,14 +22,14 @@
 
 #include "svnsortfilter.h"
 
-class SvnDirSortFilterProxy:public SvnSortFilterProxy
+class SvnDirSortFilterProxy: public SvnSortFilterProxy
 {
     Q_OBJECT
 public:
     SvnDirSortFilterProxy(QObject *parent = 0);
     virtual ~SvnDirSortFilterProxy();
 
-    virtual int columnCount(const QModelIndex & parent = QModelIndex())const;
+    virtual int columnCount(const QModelIndex &parent = QModelIndex())const;
 };
 
 #endif

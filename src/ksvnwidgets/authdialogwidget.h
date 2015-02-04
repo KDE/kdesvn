@@ -24,11 +24,12 @@
 #include <qstring.h>
 #include <QWidget>
 
-class AuthDialogWidget: public QWidget, public Ui::AuthDialogWidget {
+class AuthDialogWidget: public QWidget, public Ui::AuthDialogWidget
+{
     Q_OBJECT
 public:
-    AuthDialogWidget(const QString & realm, const QString&user, QWidget *parent = 0);
-    virtual ~AuthDialogWidget(){}
+    AuthDialogWidget(const QString &realm, const QString &user, QWidget *parent = 0);
+    virtual ~AuthDialogWidget() {}
 
     const QString Username()const;
     const QString Password()const;

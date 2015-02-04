@@ -28,7 +28,6 @@
  * ====================================================================
  */
 
-
 // svncpp
 #include "exception.h"
 #include "svnqt/svnqt_defines.h"
@@ -44,176 +43,171 @@
 namespace svn
 {
 
-  struct Exception::Data
-  {
-  private:
-  public:
+struct Exception::Data {
+private:
+public:
     QString message;
     apr_status_t apr_err;
 
-    Data (const char * msg)
-      : message(QString::FROMUTF8(msg)),apr_err(0)
+    Data(const char *msg)
+        : message(QString::FROMUTF8(msg)), apr_err(0)
     {
     }
 
-    Data (const QString& msg)
-      : message(msg),apr_err(0)
+    Data(const QString &msg)
+        : message(msg), apr_err(0)
     {
     }
 
-
-    Data (const Data& other)
-      : message(other.message), apr_err(other.apr_err)
+    Data(const Data &other)
+        : message(other.message), apr_err(other.apr_err)
     {
     }
-  };
+};
 
-  Exception::Exception (const char * message) throw ()
-  {
-    m = new Data (message);
-  }
+Exception::Exception(const char *message) throw ()
+{
+    m = new Data(message);
+}
 
-  Exception::Exception (const QString& message) throw ()
-  {
-    m = new Data (message);
-  }
+Exception::Exception(const QString &message) throw ()
+{
+    m = new Data(message);
+}
 
-  Exception::Exception (const Exception & other) throw ()
-  {
-    m = new Data (*other.m);
-  }
+Exception::Exception(const Exception &other) throw ()
+{
+    m = new Data(*other.m);
+}
 
-  Exception::~Exception () throw ()
-  {
+Exception::~Exception() throw ()
+{
     delete m;
-  }
+}
 
-  apr_status_t
-  Exception::apr_err () const
-  {
+apr_status_t
+Exception::apr_err() const
+{
     return m->apr_err;
-  }
+}
 
-  const QString&
-  Exception::msg () const
-  {
+const QString &
+Exception::msg() const
+{
     return m->message;
-  }
+}
 
-  void Exception::setMessage(const QString&aMsg)
-  {
-      m->message=aMsg;
-  }
+void Exception::setMessage(const QString &aMsg)
+{
+    m->message = aMsg;
+}
 
-  QString Exception::error2msg(svn_error_t*error)
-  {
+QString Exception::error2msg(svn_error_t *error)
+{
     QString message;
-    if (error==0) {
+    if (error == 0) {
         return message;
     }
-    svn_error_t * next = error->child;
-    if (error->message)
-      message = QString::FROMUTF8(error->message);
-    else
-    {
-      message = QLatin1String("Unknown error!\n");
-      if (error->file)
-      {
-        message += QLatin1String("In file ");
-        message += QString::FROMUTF8(error->file);
-        message += QLatin1String(" Line ") + QString::number(error->line);
-      }
+    svn_error_t *next = error->child;
+    if (error->message) {
+        message = QString::FROMUTF8(error->message);
+    } else {
+        message = QLatin1String("Unknown error!\n");
+        if (error->file) {
+            message += QLatin1String("In file ");
+            message += QString::FROMUTF8(error->file);
+            message += QLatin1String(" Line ") + QString::number(error->line);
+        }
     }
-    while (next != NULL && next->message != NULL)
-    {
-      message = message + QLatin1Char('\n') + QString::FROMUTF8(next->message);
+    while (next != NULL && next->message != NULL) {
+        message = message + QLatin1Char('\n') + QString::FROMUTF8(next->message);
 
-      next = next->child;
+        next = next->child;
     }
 
     return message;
 
-  }
+}
 
-  ClientException::ClientException (const char*msg) throw ()
-    : Exception (msg)
-  {
-  }
+ClientException::ClientException(const char *msg) throw ()
+    : Exception(msg)
+{
+}
 
-  ClientException::ClientException (const QString&msg) throw ()
-    : Exception (msg)
-  {
-  }
+ClientException::ClientException(const QString &msg) throw ()
+    : Exception(msg)
+{
+}
 
-  ClientException::ClientException (svn_error_t * error) throw ()
-    : Exception (QString())
-  {
+ClientException::ClientException(svn_error_t *error) throw ()
+    : Exception(QString())
+{
     init();
-    if (error == 0)
+    if (error == 0) {
         return;
+    }
 
     m->apr_err = error->apr_err;
     m->message += error2msg(error);
-    svn_error_clear (error);
-  }
+    svn_error_clear(error);
+}
 
-  ClientException::ClientException (apr_status_t status) throw ()
-    : Exception (QString())
-  {
+ClientException::ClientException(apr_status_t status) throw ()
+    : Exception(QString())
+{
     init();
     m->apr_err = status;
-  }
+}
 
+ClientException::~ClientException() throw ()
+{
+}
 
-  ClientException::~ClientException () throw ()
-  {
-  }
-
-  ClientException::ClientException (const ClientException & src) throw ()
-    : Exception (src.msg())
-  {
+ClientException::ClientException(const ClientException &src) throw ()
+    : Exception(src.msg())
+{
     m->apr_err = src.apr_err();
-  }
+}
 
-  void ClientException::init()
-  {
+void ClientException::init()
+{
 #ifdef USE_BACKTRACE
     if (m_backTraceConstr.isEmpty()) {
         m_backTraceConstr = getBackTrace();
-        m->message=m_backTraceConstr;
+        m->message = m_backTraceConstr;
     }
 #else
     m_backTraceConstr.clear();
 #endif
-  }
+}
 
-  QString ClientException::getBackTrace()
-  {
+QString ClientException::getBackTrace()
+{
     QString Result;
 #ifdef HAS_BACKTRACE_H
     void *array[SVNQT_BACKTRACE_LENGTH];
 
-    int size = backtrace (array, SVNQT_BACKTRACE_LENGTH);
+    int size = backtrace(array, SVNQT_BACKTRACE_LENGTH);
     if (!size) {
         return Result;
     }
 
-    char ** strings = backtrace_symbols (array, size);
+    char **strings = backtrace_symbols(array, size);
 
     QStringList r;
     r.reserve(size);
     for (int i = 0; i < size; ++i) {
         r.push_back(QString::number(i) +
-             QLatin1String(": ") +
-             QString::FROMUTF8(strings[i]));
+                    QLatin1String(": ") +
+                    QString::FROMUTF8(strings[i]));
     }
-    Result = QLatin1String("[\n")+
-            r.join(QLatin1String("\n"))+
-            QLatin1String("]\n");
-    free (strings);
+    Result = QLatin1String("[\n") +
+             r.join(QLatin1String("\n")) +
+             QLatin1String("]\n");
+    free(strings);
 #endif
     return Result;
-  }
+}
 
 }
 /* -----------------------------------------------------------------

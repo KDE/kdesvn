@@ -23,14 +23,16 @@
 #include "ui_merge_dlg.h"
 #include "rangeinput_impl.h"
 
-namespace svn{
-    class MergeParameter;
+namespace svn
+{
+class MergeParameter;
 }
 
-class MergeDlg_impl: public QWidget, public Ui::MergeDlg {
-Q_OBJECT
+class MergeDlg_impl: public QWidget, public Ui::MergeDlg
+{
+    Q_OBJECT
 public:
-    MergeDlg_impl(QWidget *parent = 0, bool src1=true,bool src2=true,bool out=true,bool record_only=true,bool reintegrate=true);
+    MergeDlg_impl(QWidget *parent = 0, bool src1 = true, bool src2 = true, bool out = true, bool record_only = true, bool reintegrate = true);
     virtual ~MergeDlg_impl();
 
     bool recursive()const;
@@ -46,16 +48,16 @@ public:
     QString Dest()const;
     Rangeinput_impl::revision_range getRange()const;
 
-    void setSrc1(const QString&);
-    void setSrc2(const QString&);
-    void setDest(const QString&);
+    void setSrc1(const QString &);
+    void setSrc2(const QString &);
+    void setDest(const QString &);
 
     //! simple caller
     /*!
      * This simplyfies the call if only some revision into a working copy should merged.
      */
-    static bool getMergeRange(Rangeinput_impl::revision_range&range,
-        bool*force, bool*recursive, bool*ignorerelated, bool*dry, bool*useExternal, QWidget*parent=0);
+    static bool getMergeRange(Rangeinput_impl::revision_range &range,
+                              bool *force, bool *recursive, bool *ignorerelated, bool *dry, bool *useExternal, QWidget *parent = 0);
 protected Q_SLOTS:
     virtual void externDisplayToggled(bool);
     virtual void recordOnlyToggled(bool);

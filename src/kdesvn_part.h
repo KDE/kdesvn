@@ -53,26 +53,26 @@ public:
      * Default constructor
      */
     kdesvnpart(QWidget *parentWidget,
-                    QObject *parent, const QVariantList& args = QVariantList());
+               QObject *parent, const QVariantList &args = QVariantList());
 
     kdesvnpart(QWidget *parentWidget,
-               QObject *parent, bool ownapp, const QVariantList& args = QVariantList());
+               QObject *parent, bool ownapp, const QVariantList &args = QVariantList());
 
     /**
      * Destructor
      */
     virtual ~kdesvnpart();
     virtual bool closeUrl();
-    static KAboutData* createAboutData();
+    static KAboutData *createAboutData();
 
 Q_SIGNALS:
     void refreshTree();
     void settingsChanged();
 
 public slots:
-    virtual void slotDispPopup(const QString&,QWidget**target);
+    virtual void slotDispPopup(const QString &, QWidget **target);
     virtual void slotFileProperties();
-    virtual bool openUrl(const KUrl&);
+    virtual bool openUrl(const KUrl &);
     virtual void slotSshAdd();
     virtual void showDbStatus();
 
@@ -82,7 +82,7 @@ protected:
      */
     virtual bool openFile();
     virtual void setupActions();
-    KAboutApplicationDialog* m_aboutDlg;
+    KAboutApplicationDialog *m_aboutDlg;
 
     void init(QWidget *parentWidget, bool full);
 
@@ -90,17 +90,17 @@ protected slots:
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
-    virtual void slotUrlChanged(const QString&);
+    virtual void slotUrlChanged(const QString &);
     void showAboutApplication();
     void appHelpActivated();
     virtual void slotShowSettings();
 
 private:
     kdesvnView *m_view;
-    KdesvnBrowserExtension*m_browserExt;
+    KdesvnBrowserExtension *m_browserExt;
 
 protected slots:
-    void slotSettingsChanged(const QString&);
+    void slotSettingsChanged(const QString &);
 
 protected slots:
     virtual void slotHideUnchanged(bool);
@@ -114,7 +114,7 @@ class KPARTS_EXPORT KdesvnBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 public:
-    KdesvnBrowserExtension(kdesvnpart*);
+    KdesvnBrowserExtension(kdesvnpart *);
     virtual ~KdesvnBrowserExtension();
 
 public slots:

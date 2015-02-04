@@ -37,20 +37,20 @@ class kdesvnd :  public KDEDModule
 {
     Q_OBJECT
 public:
-    kdesvnd(QObject* parent, const QList<QVariant>&);
+    kdesvnd(QObject *parent, const QList<QVariant> &);
     virtual ~kdesvnd();
 
 protected:
-    bool isWorkingCopy(const KUrl&url,QString&base);
-    bool isRepository(const KUrl&url);
-    static QString cleanUrl(const KUrl&url);
-    KdesvndListener*m_Listener;
-    QStringList getActionMenu(const KUrl::List&,bool toplevel);
+    bool isWorkingCopy(const KUrl &url, QString &base);
+    bool isRepository(const KUrl &url);
+    static QString cleanUrl(const KUrl &url);
+    KdesvndListener *m_Listener;
+    QStringList getActionMenu(const KUrl::List &, bool toplevel);
     KComponentData m_componentData;
 
     org::kde::JobViewServer m_uiserver;
 
-    QHash<qulonglong,KsvnJobView*> progressJobView;
+    QHash<qulonglong, KsvnJobView *> progressJobView;
 
 public Q_SLOTS:
     //! get a subversion login
@@ -59,18 +59,18 @@ public Q_SLOTS:
     * \param user default username
     * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
     */
-    QStringList get_login(const QString&,const QString&);
+    QStringList get_login(const QString &, const QString &);
     //! get a saved subversion login
     /*!
     * \param realm the realm
     * \param user default username
     * \return a stringlist containing username-password
     */
-    QStringList get_saved_login(const QString&realm,const QString&user);
+    QStringList get_saved_login(const QString &realm, const QString &user);
 
     // return: -1 don't accept 0 accept temporary 1 accept always
     //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
-    int get_sslaccept(const QString&, const QString&, const QString& , const QString& , const QString&, const QString&);
+    int get_sslaccept(const QString &, const QString &, const QString &, const QString &, const QString &, const QString &);
 
     // returns cert file or empty string
     QString get_sslclientcertfile();
@@ -78,12 +78,12 @@ public Q_SLOTS:
     QStringList get_logmsg();
 
     // return pw loaded from wallet if existent
-    QString load_sslclientcertpw(const QString& realm);
+    QString load_sslclientcertpw(const QString &realm);
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
-    QStringList get_sslclientcertpw(const QString&);
-    QStringList getActionMenu(const KUrl::List&);
-    QStringList getTopLevelActionMenu(const KUrl::List&);
-    QStringList getSingleActionMenu(const QString&);
+    QStringList get_sslclientcertpw(const QString &);
+    QStringList getActionMenu(const KUrl::List &);
+    QStringList getTopLevelActionMenu(const KUrl::List &);
+    QStringList getSingleActionMenu(const QString &);
 
     bool canceldKioOperation(qulonglong kioid);
     void maxTransferKioOperation(qulonglong kioid, qulonglong maxtransfer);
@@ -92,13 +92,13 @@ public Q_SLOTS:
     void transferedKioOperation(qulonglong kioid, qulonglong transfered);
     void unRegisterKioFeedback(qulonglong kioid);
     void notifyKioOperation(const QString &text);
-    void errorKioOperation(const QString&text);
+    void errorKioOperation(const QString &text);
     //! set status from KIO
     /*!
      * \param kioid the kio makes an action
      * \param status the status to set: 0 - stopped (terminated) 1 - running 2 - canceld (terminated)
      * \param message a message to print when not running
      */
-    void setKioStatus(qulonglong kioid, int status, const QString&message);
+    void setKioStatus(qulonglong kioid, int status, const QString &message);
 };
 #endif

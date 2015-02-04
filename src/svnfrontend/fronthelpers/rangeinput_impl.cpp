@@ -33,12 +33,12 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent)
 {
     setupUi(this);
 
-    m_startRevInput->setRange(0,INT_MAX,1,false);
-    m_endRevInput->setRange(0,INT_MAX,1,false);
+    m_startRevInput->setRange(0, INT_MAX, 1, false);
+    m_endRevInput->setRange(0, INT_MAX, 1, false);
     m_startRevInput->setValue(1);
     m_endRevInput->setValue(1);
-    m_startDateInput->setDateTime(QDateTime::currentDateTime ());
-    m_stopDateInput->setDateTime(QDateTime::currentDateTime ());
+    m_startDateInput->setDateTime(QDateTime::currentDateTime());
+    m_stopDateInput->setDateTime(QDateTime::currentDateTime());
     m_stopDateInput->setEnabled(false);
     m_startDateInput->setEnabled(false);
     m_stopHeadButton->setChecked(true);
@@ -90,7 +90,6 @@ void Rangeinput_impl::onHelp()
 {
 }
 
-
 void Rangeinput_impl::stopHeadToggled(bool how)
 {
     if (how) {
@@ -99,7 +98,6 @@ void Rangeinput_impl::stopHeadToggled(bool how)
     }
 }
 
-
 void Rangeinput_impl::stopBaseToggled(bool how)
 {
     if (how) {
@@ -107,7 +105,6 @@ void Rangeinput_impl::stopBaseToggled(bool how)
         m_stopDateInput->setEnabled(!how);
     }
 }
-
 
 void Rangeinput_impl::stopNumberToggled(bool how)
 {
@@ -127,7 +124,7 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
     } else if (m_startNumberButton->isChecked()) {
         ret.first = m_startRevInput->value();
     } else if (m_startDateButton->isChecked()) {
-        ret.first=m_startDateInput->dateTime();
+        ret.first = m_startDateInput->dateTime();
     } else if (m_startWorkingButton->isChecked()) {
         ret.first = svn::Revision::WORKING;
     }
@@ -138,7 +135,7 @@ Rangeinput_impl::revision_range Rangeinput_impl::getRange()
     } else if (m_stopNumberButton->isChecked()) {
         ret.second = m_endRevInput->value();
     } else if (m_stopDateButton->isChecked()) {
-        ret.second=m_stopDateInput->dateTime();
+        ret.second = m_stopDateInput->dateTime();
     } else if (m_stopWorkingButton->isChecked()) {
         ret.second = svn::Revision::WORKING;
     }
@@ -153,7 +150,6 @@ void Rangeinput_impl::stopDateToggled(bool how)
     }
 }
 
-
 void Rangeinput_impl::startDateToggled(bool how)
 {
     m_startDateInput->setEnabled(how);
@@ -161,7 +157,6 @@ void Rangeinput_impl::startDateToggled(bool how)
         m_startRevInput->setEnabled(!how);
     }
 }
-
 
 bool Rangeinput_impl::StartOnly() const
 {
@@ -184,11 +179,11 @@ void Rangeinput_impl::setStartOnly(bool theValue)
     } else {
         layout()->addWidget(m_stopRevBox);
         m_stopRevBox->show();
-        m_startRevBox->setTitle(i18n( "Start with revision" ));
+        m_startRevBox->setTitle(i18n("Start with revision"));
     }
     updateGeometry();
     setMinimumSize(minimumSizeHint());
-    resize( QSize(397, 272).expandedTo(minimumSizeHint()) );
+    resize(QSize(397, 272).expandedTo(minimumSizeHint()));
 }
 
 #include "rangeinput_impl.moc"

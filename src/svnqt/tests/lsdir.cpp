@@ -29,11 +29,11 @@
 #include "src/svnqt/client_parameter.h"
 #include <iostream>
 
-int main(int,char**)
+int main(int, char **)
 {
     svn::ContextP m_CurrentContext;
-    svn::Client* m_Svnclient;
-    m_Svnclient=svn::Client::getobject(0,0);
+    svn::Client *m_Svnclient;
+    m_Svnclient = svn::Client::getobject(0, 0);
     m_CurrentContext = new svn::Context();
 
     m_Svnclient->setContext(m_CurrentContext);
@@ -43,61 +43,61 @@ int main(int,char**)
     QString l = QString("%1").arg(TESTCOPATH);
 
     try {
-        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthInfinity,true);
-    } catch (const svn::ClientException& e) {
+        dlist = m_Svnclient->list(svn::Path(p), svn::Revision::HEAD, svn::Revision::HEAD, svn::DepthInfinity, true);
+    } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
-    std::cout << "List 1 "<<dlist.size()<<std::endl;
-    for (int i=0; i < dlist.size();++i) {
+    std::cout << "List 1 " << dlist.size() << std::endl;
+    for (int i = 0; i < dlist.size(); ++i) {
         QDateTime dt = svn::DateTime(dlist[i]->time());
         std::cout << dlist[i]->name().TOUTF8().data() << " "
-                << dlist[i]->lastAuthor().TOUTF8().data() << " "
-                << dlist[i]->size() << " "
-                << dt.toTime_t() << std::endl;
+                  << dlist[i]->lastAuthor().TOUTF8().data() << " "
+                  << dlist[i]->size() << " "
+                  << dt.toTime_t() << std::endl;
     }
     try {
-        dlist = m_Svnclient->list(svn::Path(p),svn::Revision::HEAD,svn::Revision::HEAD,svn::DepthImmediates,false);
-    } catch (const svn::ClientException& e) {
+        dlist = m_Svnclient->list(svn::Path(p), svn::Revision::HEAD, svn::Revision::HEAD, svn::DepthImmediates, false);
+    } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
-    std::cout << "================"<<std::endl;
-    std::cout << "List 2 "<<dlist.size()<<std::endl;
-    for (int i=0; i < dlist.size();++i) {
+    std::cout << "================" << std::endl;
+    std::cout << "List 2 " << dlist.size() << std::endl;
+    for (int i = 0; i < dlist.size(); ++i) {
         QDateTime dt = svn::DateTime(dlist[i]->time());
         std::cout << dlist[i]->name().TOUTF8().data() << " "
-                << dlist[i]->lastAuthor().TOUTF8().data() << " "
-                << dlist[i]->size() << " "
-                << dt.toTime_t() << std::endl;
+                  << dlist[i]->lastAuthor().TOUTF8().data() << " "
+                  << dlist[i]->size() << " "
+                  << dt.toTime_t() << std::endl;
     }
-    std::cout << "================"<<std::endl;
+    std::cout << "================" << std::endl;
     svn::StatusEntries slist;
     svn::StatusParameter params(p);
     try {
         slist = m_Svnclient->status(params.depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::HEAD).detailedRemote(true).ignoreExternals(false));
-    } catch (const svn::ClientException& e) {
+    } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
-    for (int i=0; i < slist.size();++i) {
-        std::cout << slist[i]->path().TOUTF8().data()<< std::endl;
+    for (int i = 0; i < slist.size(); ++i) {
+        std::cout << slist[i]->path().TOUTF8().data() << std::endl;
     }
-    std::cout << "================"<<std::endl;
-    std::cout << "Second status:"<<std::endl;
+    std::cout << "================" << std::endl;
+    std::cout << "Second status:" << std::endl;
 
     try {
         slist = m_Svnclient->status(params.path(l).depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::WORKING).detailedRemote(true).ignoreExternals(false));
-    } catch (const svn::ClientException& e) {
+    } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
-    for (int i=0; i < slist.size();++i) {
-        std::cout << slist[i]->path().TOUTF8().data()<< std::endl;
+    for (int i = 0; i < slist.size(); ++i) {
+        std::cout << slist[i]->path().TOUTF8().data() << std::endl;
     }
 
     return 0;

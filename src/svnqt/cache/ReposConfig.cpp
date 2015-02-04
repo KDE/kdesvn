@@ -40,14 +40,15 @@ class ReposConfigPrivate
 public:
     static QByteArray serializeList(const QList<QByteArray> &list);
     static QStringList deserializeList(const QByteArray &data);
-    static QVariant convertToQVariant(const QByteArray& value, const QVariant& aDefault);
+    static QVariant convertToQVariant(const QByteArray &value, const QVariant &aDefault);
 };
 
-static QList<int> asIntList(const QByteArray& string)
+static QList<int> asIntList(const QByteArray &string)
 {
     QList<int> list;
-    Q_FOREACH(const QByteArray& s, string.split(','))
+    Q_FOREACH (const QByteArray &s, string.split(',')) {
         list << s.toInt();
+    }
     return list;
 }
 
@@ -71,8 +72,9 @@ QByteArray ReposConfigPrivate::serializeList(const QList<QByteArray> &list)
         }
 
         // To be able to distinguish an empty list from a list with one empty element.
-        if (value.isEmpty())
+        if (value.isEmpty()) {
             value = "\\0";
+        }
     }
 
     return value;
@@ -80,10 +82,12 @@ QByteArray ReposConfigPrivate::serializeList(const QList<QByteArray> &list)
 
 QStringList ReposConfigPrivate::deserializeList(const QByteArray &data)
 {
-    if (data.isEmpty())
+    if (data.isEmpty()) {
         return QStringList();
-    if (data == "\\0")
+    }
+    if (data == "\\0") {
         return QStringList(QString());
+    }
     QStringList value;
     QString val;
     val.reserve(data.size());
@@ -107,81 +111,84 @@ QStringList ReposConfigPrivate::deserializeList(const QByteArray &data)
     return value;
 }
 
-QVariant ReposConfigPrivate::convertToQVariant(const QByteArray& value, const QVariant& aDefault)
+QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QVariant &aDefault)
 {
     // if a type handler is added here you must add a QVConversions definition
     // to conversion_check.h, or ConversionCheck::to_QVariant will not allow
     // readEntry<T> to convert to QVariant.
-    switch( aDefault.type() ) {
-        case QVariant::Invalid:
-            return QVariant();
-        case QVariant::String:
-            // this should return the raw string not the dollar expanded string.
-            // imho if processed string is wanted should call
-            // readEntry(key, QString) not readEntry(key, QVariant)
-            return QString::fromUtf8(value);
-        case QVariant::List:
-        case QVariant::StringList:
-            return deserializeList(value);
-        case QVariant::ByteArray:
-            return value;
-        case QVariant::Bool: {
-            const QByteArray lower(value.toLower());
-            if (lower == "false" || lower == "no" || lower == "off" || lower == "0")
-                return false;
-            return true;
+    switch (aDefault.type()) {
+    case QVariant::Invalid:
+        return QVariant();
+    case QVariant::String:
+        // this should return the raw string not the dollar expanded string.
+        // imho if processed string is wanted should call
+        // readEntry(key, QString) not readEntry(key, QVariant)
+        return QString::fromUtf8(value);
+    case QVariant::List:
+    case QVariant::StringList:
+        return deserializeList(value);
+    case QVariant::ByteArray:
+        return value;
+    case QVariant::Bool: {
+        const QByteArray lower(value.toLower());
+        if (lower == "false" || lower == "no" || lower == "off" || lower == "0") {
+            return false;
         }
-        case QVariant::Double:
-        case QMetaType::Float:
-        case QVariant::Int:
-        case QVariant::UInt:
-        case QVariant::LongLong:
-        case QVariant::ULongLong: {
-            QVariant tmp = value;
-            if ( !tmp.convert(aDefault.type()) )
-                tmp = aDefault;
-            return tmp;
+        return true;
+    }
+    case QVariant::Double:
+    case QMetaType::Float:
+    case QVariant::Int:
+    case QVariant::UInt:
+    case QVariant::LongLong:
+    case QVariant::ULongLong: {
+        QVariant tmp = value;
+        if (!tmp.convert(aDefault.type())) {
+            tmp = aDefault;
         }
-        case QVariant::DateTime: {
-            const QList<int> list = asIntList(value);
-            if ( list.count() != 6 ) {
-                return aDefault;
-            }
-            const QDate date( list.at( 0 ), list.at( 1 ), list.at( 2 ) );
-            const QTime time( list.at( 3 ), list.at( 4 ), list.at( 5 ) );
-            const QDateTime dt( date, time );
-            if ( !dt.isValid() ) {
-                return aDefault;
-            }
-            return dt;
+        return tmp;
+    }
+    case QVariant::DateTime: {
+        const QList<int> list = asIntList(value);
+        if (list.count() != 6) {
+            return aDefault;
         }
-        case QVariant::Date: {
-            QList<int> list = asIntList(value);
-            if ( list.count() == 6 )
-                list = list.mid(0, 3); // don't break config files that stored QDate as QDateTime
-            if ( list.count() != 3 ) {
-                return aDefault;
-            }
-            const QDate date( list.at( 0 ), list.at( 1 ), list.at( 2 ) );
-            if ( !date.isValid() ) {
-                return aDefault;
-            }
-            return date;
+        const QDate date(list.at(0), list.at(1), list.at(2));
+        const QTime time(list.at(3), list.at(4), list.at(5));
+        const QDateTime dt(date, time);
+        if (!dt.isValid()) {
+            return aDefault;
         }
-        default:
-            break;
+        return dt;
+    }
+    case QVariant::Date: {
+        QList<int> list = asIntList(value);
+        if (list.count() == 6) {
+            list = list.mid(0, 3);    // don't break config files that stored QDate as QDateTime
+        }
+        if (list.count() != 3) {
+            return aDefault;
+        }
+        const QDate date(list.at(0), list.at(1), list.at(2));
+        if (!date.isValid()) {
+            return aDefault;
+        }
+        return date;
+    }
+    default:
+        break;
     }
 
-    qWarning("unhandled type %s",aDefault.typeName());
+    qWarning("unhandled type %s", aDefault.typeName());
     return QVariant();
 }
 
-ReposConfig* ReposConfig::mSelf = 0;
+ReposConfig *ReposConfig::mSelf = 0;
 
-ReposConfig*ReposConfig::self()
+ReposConfig *ReposConfig::self()
 {
     if (!mSelf) {
-        mSelf=new ReposConfig();
+        mSelf = new ReposConfig();
     }
     return mSelf;
 }
@@ -190,124 +197,124 @@ ReposConfig::ReposConfig()
 {
 }
 
-
-void ReposConfig::setValue(const QString&repository,const QString&key,const QVariant&value)
+void ReposConfig::setValue(const QString &repository, const QString &key, const QVariant &value)
 {
 
     QByteArray data;
-    switch( value.type() ) {
-        case QVariant::Invalid:
-            break;
-        case QVariant::ByteArray:
-            data = value.toByteArray();
-            break;
-        case QVariant::String:
-        case QVariant::Int:
-        case QVariant::UInt:
-        case QVariant::Double:
-        case QMetaType::Float:
-        case QVariant::Bool:
-        case QVariant::LongLong:
-        case QVariant::ULongLong:
-            data = value.toString().toUtf8();
-            break;
-        case QVariant::List:
-        case QVariant::StringList:
-            setValue(repository, key, value.toList());
-            return;
-        case QVariant::Date: {
-            QVariantList list;
-            const QDate date = value.toDate();
+    switch (value.type()) {
+    case QVariant::Invalid:
+        break;
+    case QVariant::ByteArray:
+        data = value.toByteArray();
+        break;
+    case QVariant::String:
+    case QVariant::Int:
+    case QVariant::UInt:
+    case QVariant::Double:
+    case QMetaType::Float:
+    case QVariant::Bool:
+    case QVariant::LongLong:
+    case QVariant::ULongLong:
+        data = value.toString().toUtf8();
+        break;
+    case QVariant::List:
+    case QVariant::StringList:
+        setValue(repository, key, value.toList());
+        return;
+    case QVariant::Date: {
+        QVariantList list;
+        const QDate date = value.toDate();
 
-            list.insert( 0, date.year() );
-            list.insert( 1, date.month() );
-            list.insert( 2, date.day() );
+        list.insert(0, date.year());
+        list.insert(1, date.month());
+        list.insert(2, date.day());
 
-            setValue(repository, key, list);
-            return;
-        }
-        case QVariant::DateTime: {
-            QVariantList list;
-            const QDateTime rDateTime = value.toDateTime();
+        setValue(repository, key, list);
+        return;
+    }
+    case QVariant::DateTime: {
+        QVariantList list;
+        const QDateTime rDateTime = value.toDateTime();
 
-            const QTime time = rDateTime.time();
-            const QDate date = rDateTime.date();
+        const QTime time = rDateTime.time();
+        const QDate date = rDateTime.date();
 
-            list.insert( 0, date.year() );
-            list.insert( 1, date.month() );
-            list.insert( 2, date.day() );
+        list.insert(0, date.year());
+        list.insert(1, date.month());
+        list.insert(2, date.day());
 
-            list.insert( 3, time.hour() );
-            list.insert( 4, time.minute() );
-            list.insert( 5, time.second() );
+        list.insert(3, time.hour());
+        list.insert(4, time.minute());
+        list.insert(5, time.second());
 
-            setValue(repository, key, list);
-            return;
-        }
+        setValue(repository, key, list);
+        return;
+    }
 
-        default:
-            qWarning("ReposConfig: Unhandled type");
-            return;
-        }
+    default:
+        qWarning("ReposConfig: Unhandled type");
+        return;
+    }
 
-        svn::cache::LogCache::self()->setRepositoryParameter(svn::Path(repository),key,data);
+    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path(repository), key, data);
 }
 
-void ReposConfig::eraseValue(const QString&repository,const QString&key)
+void ReposConfig::eraseValue(const QString &repository, const QString &key)
 {
-    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path(repository),key,QVariant());
+    svn::cache::LogCache::self()->setRepositoryParameter(svn::Path(repository), key, QVariant());
 }
 
-void ReposConfig::setValue(const QString&repository,const QString&key,const QVariantList&list)
+void ReposConfig::setValue(const QString &repository, const QString &key, const QVariantList &list)
 {
     QList<QByteArray> data;
 
-    foreach(const QVariant& v, list) {
-        if (v.type() == QVariant::ByteArray)
+    foreach (const QVariant &v, list) {
+        if (v.type() == QVariant::ByteArray) {
             data << v.toByteArray();
-        else
+        } else {
             data << v.toString().toUtf8();
+        }
     }
 
     setValue(repository, key, ReposConfigPrivate::serializeList(data));
 }
 
-void ReposConfig::setValue(const QString&repository,const QString&key,const QStringList&list)
+void ReposConfig::setValue(const QString &repository, const QString &key, const QStringList &list)
 {
     QList<QByteArray> balist;
-    foreach(const QString &entry, list) {
+    foreach (const QString &entry, list) {
         balist.append(entry.toUtf8());
     }
-    setValue(repository,key,ReposConfigPrivate::serializeList(balist));
+    setValue(repository, key, ReposConfigPrivate::serializeList(balist));
 }
 
-void ReposConfig::setValue(const QString&repository,const QString&key,const QString&value)
+void ReposConfig::setValue(const QString &repository, const QString &key, const QString &value)
 {
-    setValue(repository,key,value.toUtf8());
+    setValue(repository, key, value.toUtf8());
 }
 
-QVariant ReposConfig::readEntry(const QString&repository,const QString&key, const QVariant&aDefault)
+QVariant ReposConfig::readEntry(const QString &repository, const QString &key, const QVariant &aDefault)
 {
-    QVariant v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path(repository),key);
+    QVariant v = svn::cache::LogCache::self()->getRepositoryParameter(svn::Path(repository), key);
     if (!v.isValid()) {
         return aDefault;
     }
-    return ReposConfigPrivate::convertToQVariant(v.toByteArray(),aDefault);
+    return ReposConfigPrivate::convertToQVariant(v.toByteArray(), aDefault);
 }
 
-int ReposConfig::readEntry(const QString&repository,const QString&key,int aDefault)
+int ReposConfig::readEntry(const QString &repository, const QString &key, int aDefault)
 {
-    return readEntry(repository,key,QVariant(aDefault)).toInt();
+    return readEntry(repository, key, QVariant(aDefault)).toInt();
 }
 
-bool ReposConfig::readEntry(const QString&repository,const QString&key,bool aDefault)
+bool ReposConfig::readEntry(const QString &repository, const QString &key, bool aDefault)
 {
-    return readEntry(repository,key,QVariant(aDefault)).toBool();
+    return readEntry(repository, key, QVariant(aDefault)).toBool();
 }
 
-QStringList ReposConfig::readEntry(const QString&repository,const QString&key,const QStringList&aDefault)
+QStringList ReposConfig::readEntry(const QString &repository, const QString &key, const QStringList &aDefault)
 {
-    return readEntry(repository,key,QVariant(aDefault)).toStringList();
+    return readEntry(repository, key, QVariant(aDefault)).toStringList();
 }
 
 } // namespace cache

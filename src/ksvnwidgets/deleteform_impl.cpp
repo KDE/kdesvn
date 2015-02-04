@@ -20,8 +20,8 @@
 
 #include "deleteform_impl.h"
 
-DeleteForm_impl::DeleteForm_impl(QWidget*parent)
-    :QWidget(parent),DeleteForm()
+DeleteForm_impl::DeleteForm_impl(QWidget *parent)
+    : QWidget(parent), DeleteForm()
 {
     setupUi(this);
 }
@@ -36,10 +36,10 @@ void DeleteForm_impl::showExtraButtons(bool show)
     m_forceDelete->setVisible(show);
 }
 
-void DeleteForm_impl::setStringList(const QStringList&aList)
+void DeleteForm_impl::setStringList(const QStringList &aList)
 {
     m_ItemsList->clear();
-    m_ItemsList->insertItems(0,aList);
+    m_ItemsList->insertItems(0, aList);
 }
 
 bool DeleteForm_impl::keep_local()const

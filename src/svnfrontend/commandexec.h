@@ -27,8 +27,9 @@ class KCmdLineArgs;
 class KUrl;
 class pCPart;
 
-namespace svn {
-    class Revision;
+namespace svn
+{
+class Revision;
 }
 
 /**
@@ -36,15 +37,15 @@ namespace svn {
 */
 class CommandExec : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    CommandExec(QObject*parent);
+    CommandExec(QObject *parent);
     virtual ~CommandExec();
-    virtual int exec(KCmdLineArgs*args);
+    virtual int exec(KCmdLineArgs *args);
 
 protected slots:
-    virtual void clientException(const QString&);
-    virtual void slotNotifyMessage(const QString&);
+    virtual void clientException(const QString &);
+    virtual void slotNotifyMessage(const QString &);
     virtual void slotCmd_log();
     virtual void slotCmd_update();
     virtual void slotCmd_diff();
@@ -78,7 +79,7 @@ protected:
     unsigned int m_lastMessagesLines;
 
 private:
-    pCPart*m_pCPart;
+    pCPart *m_pCPart;
 
 protected slots:
     void slotCmd_switch();

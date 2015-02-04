@@ -28,9 +28,9 @@ class SvnItem;
 
 typedef svn::smart_pointer<ThreadContextListener> ThreadContextListenerP;
 
-typedef QList<SvnItem*> SvnItemList;
-typedef QList<SvnItem*>::iterator SvnItemListIterator;
-typedef QList<SvnItem*>::const_iterator SvnItemListConstIterator;
+typedef QList<SvnItem *> SvnItemList;
+typedef QList<SvnItem *>::iterator SvnItemListIterator;
+typedef QList<SvnItem *>::const_iterator SvnItemListConstIterator;
 
 #endif
 

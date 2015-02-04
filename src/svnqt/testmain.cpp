@@ -29,14 +29,14 @@
 
 #include <qdatastream.h>
 
-int main(int,char**)
+int main(int, char **)
 {
-    svn::Client::getobject(0,0);
+    svn::Client::getobject(0, 0);
     svn::repository::Repository rep(0L);
     svn::ContextP myContext = new svn::Context();
 
     QByteArray tout;
-    svn::Client*m_Svnclient = svn::Client::getobject(0,0);
+    svn::Client *m_Svnclient = svn::Client::getobject(0, 0);
     svn::ContextP m_CurrentContext = new svn::Context();
     m_Svnclient->setContext(m_CurrentContext);
     bool gotit = true;
@@ -44,9 +44,9 @@ int main(int,char**)
     svn::LogParameter params;
 
     try {
-        m_Svnclient->log(params.targets("http://www.alwins-world.de/repos/kdesvn/trunk").revisionRange(svn::Revision::HEAD,20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
-        strictNodeHistory(false).limit(0),m_OldHistory);
-    } catch (const svn::ClientException& ce) {
+        m_Svnclient->log(params.targets("http://www.alwins-world.de/repos/kdesvn/trunk").revisionRange(svn::Revision::HEAD, 20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
+                         strictNodeHistory(false).limit(0), m_OldHistory);
+    } catch (const svn::ClientException &ce) {
         gotit = false;
     }
     return 1;

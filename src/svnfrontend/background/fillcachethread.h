@@ -28,15 +28,15 @@
 
 class QObject;
 
-class FillCacheThread:public SvnThread
+class FillCacheThread: public SvnThread
 {
 public:
-    FillCacheThread(QObject*,const QString&aPath,bool startup);
+    FillCacheThread(QObject *, const QString &aPath, bool startup);
     virtual ~FillCacheThread();
     virtual void run();
 
-    const QString&reposRoot()const;
-    const QString&Path()const;
+    const QString &reposRoot()const;
+    const QString &Path()const;
 
 protected:
     void fillInfo();

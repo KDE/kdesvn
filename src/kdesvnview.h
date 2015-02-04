@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #ifndef KDESVNVIEW_H
 #define KDESVNVIEW_H
 
@@ -37,7 +36,6 @@ class KTextBrowser;
 class QProgressBar;
 class MainTreeWidget;
 
-
 /**
  * This is the main view class for kdesvn.  Most of the non-menu,
  * non-toolbar, and non-statusbar (e.g., non frame) GUI code should go
@@ -47,14 +45,14 @@ class MainTreeWidget;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
-class kdesvnView : public QWidget,public svn::repository::RepositoryListener
+class kdesvnView : public QWidget, public svn::repository::RepositoryListener
 {
     Q_OBJECT
 public:
     /**
      * Default constructor
      */
-    kdesvnView(KActionCollection*,QWidget *parent,bool full=false);
+    kdesvnView(KActionCollection *, QWidget *parent, bool full = false);
 
     /**
      * Destructor
@@ -69,11 +67,11 @@ public:
     /**
      * Random 'set' function
      */
-    virtual bool openUrl(const KUrl& url);
+    virtual bool openUrl(const KUrl &url);
 
     /* repositorylistener methods */
-    virtual void sendWarning(const QString&);
-    virtual void sendError(const QString&);
+    virtual void sendWarning(const QString &);
+    virtual void sendError(const QString &);
     virtual bool isCanceld();
     virtual void stopCacheThreads();
 
@@ -81,21 +79,21 @@ Q_SIGNALS:
     /**
      * Use this signal to change the content of the statusbar
      */
-    void signalChangeStatusbar(const QString&);
+    void signalChangeStatusbar(const QString &);
     /**
      * Extra messages for a temporary status bar
      */
-    void sigExtraStatusMessage(const QString&);
+    void sigExtraStatusMessage(const QString &);
 
     /**
      * Use this signal to change the content of the caption
      */
-    void signalChangeCaption(const QString&);
+    void signalChangeCaption(const QString &);
 
-    void sigShowPopup(const QString&,QWidget**);
-    void sigSwitchUrl(const KUrl&);
-    void setWindowCaption(const QString&);
-    void sigUrlChanged(const QString&);
+    void sigShowPopup(const QString &, QWidget **);
+    void sigSwitchUrl(const KUrl &);
+    void setWindowCaption(const QString &);
+    void sigUrlChanged(const QString &);
     void sigMakeBaseDirs();
 
     /* repositorylistener methods */
@@ -104,7 +102,7 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     virtual void closeMe();
-    virtual void slotDispPopup(const QString&,QWidget**);
+    virtual void slotDispPopup(const QString &, QWidget **);
     virtual void refreshCurrentTree();
     virtual void slotSettingsChanged();
     virtual void slotCreateRepo();
@@ -114,26 +112,26 @@ public Q_SLOTS:
 
     /* repositorylistener methods */
     virtual void setCanceled(bool);
-    virtual void fillCacheStatus(qlonglong,qlonglong);
+    virtual void fillCacheStatus(qlonglong, qlonglong);
 
     virtual void slotSavestate();
 
 protected Q_SLOTS:
-    virtual void slotOnURL(const QString& url);
-    virtual void slotSetTitle(const QString& title);
-    virtual void slotAppendLog(const QString& text);
-    virtual void slotUrlChanged(const QString&);
+    virtual void slotOnURL(const QString &url);
+    virtual void slotSetTitle(const QString &title);
+    virtual void slotAppendLog(const QString &text);
+    virtual void slotUrlChanged(const QString &);
 
 protected:
     //kdesvnfilelist*m_flist;
-    MainTreeWidget*m_TreeWidget;
-    KActionCollection*m_Collection;
+    MainTreeWidget *m_TreeWidget;
+    KActionCollection *m_Collection;
 
-    QSplitter *m_Splitter,*m_infoSplitter;
+    QSplitter *m_Splitter, *m_infoSplitter;
     QString m_currentUrl;
-    KTextBrowser*m_LogWindow;
-    QVBoxLayout*m_topLayout;
-    QProgressBar*m_CacheProgressBar;
+    KTextBrowser *m_LogWindow;
+    QVBoxLayout *m_topLayout;
+    QProgressBar *m_CacheProgressBar;
 
 protected:
     virtual void setupActions();

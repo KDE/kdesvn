@@ -25,20 +25,20 @@
 
 class CmdExecSettings_impl : public QWidget, public Ui::CmdExecSettings
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  CmdExecSettings_impl(QWidget* parent = 0);
-  ~CmdExecSettings_impl();
-  /*$PUBLIC_FUNCTIONS$*/
+    CmdExecSettings_impl(QWidget *parent = 0);
+    ~CmdExecSettings_impl();
+    /*$PUBLIC_FUNCTIONS$*/
 
 public slots:
-  /*$PUBLIC_SLOTS$*/
+    /*$PUBLIC_SLOTS$*/
 
 protected:
 
 protected slots:
-  /*$PROTECTED_SLOTS$*/
+    /*$PROTECTED_SLOTS$*/
 
 };
 

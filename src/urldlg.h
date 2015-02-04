@@ -30,19 +30,19 @@ class KUrlRequester;
 */
 class UrlDlg : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     UrlDlg(QWidget *parent = 0);
     virtual ~UrlDlg();
     KUrl selectedUrl();
-    static KUrl getUrl(QWidget*parent=0);
+    static KUrl getUrl(QWidget *parent = 0);
 protected:
     void init_dlg();
-    KUrlRequester*urlRequester_;
-    QWidget * m_plainPage;
+    KUrlRequester *urlRequester_;
+    QWidget *m_plainPage;
 protected slots:
     virtual void accept();
-    virtual void slotTextChanged(const QString&);
+    virtual void slotTextChanged(const QString &);
     virtual void slotClear();
 };
 

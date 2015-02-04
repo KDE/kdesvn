@@ -37,7 +37,7 @@ public:
 
 //     enum {NONE, FORWARD, BACKWARD};
 
-    DiffSyntax*m_Syntax;
+    DiffSyntax *m_Syntax;
     QByteArray m_content;
     KFindDialog *srchdialog;
 

@@ -22,11 +22,11 @@
 #include <kurl.h>
 
 HotcopyDlg_impl::HotcopyDlg_impl(QWidget *parent)
-    :QWidget(parent),Ui::HotcopyDlg()
+    : QWidget(parent), Ui::HotcopyDlg()
 {
     setupUi(this);
-    m_SrcpathEditor->setMode(KFile::Directory|KFile::LocalOnly);
-    m_DestpathEditor->setMode(KFile::Directory|KFile::LocalOnly);
+    m_SrcpathEditor->setMode(KFile::Directory | KFile::LocalOnly);
+    m_DestpathEditor->setMode(KFile::Directory | KFile::LocalOnly);
 }
 
 HotcopyDlg_impl::~HotcopyDlg_impl()

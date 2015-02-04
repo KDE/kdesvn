@@ -41,13 +41,13 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-int main(int argc,char**argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc,argv);
+    QApplication app(argc, argv);
 
     svn::ContextP m_CurrentContext;
-    svn::Client* m_Svnclient;
-    m_Svnclient=svn::Client::getobject(0,0);
+    svn::Client *m_Svnclient;
+    m_Svnclient = svn::Client::getobject(0, 0);
     m_CurrentContext = new svn::Context();
 
     m_Svnclient->setContext(m_CurrentContext);
@@ -58,73 +58,62 @@ int main(int argc,char**argv)
     new svn::cache::LogCache(TESTDBPATH);
     list = QSqlDatabase::drivers();
     it = list.begin();
-    while( it != list.end() ) {
+    while (it != list.end()) {
         std::cout << (*it).TOUTF8().data() << std::endl;
         ++it;
     }
-    svn::cache::ReposLog rl(m_Svnclient,"http://www.alwins-world.de/repos/kdesvn");
+    svn::cache::ReposLog rl(m_Svnclient, "http://www.alwins-world.de/repos/kdesvn");
     QDataBase db = rl.Database();
     if (!db.isValid()) {
-        std::cerr << "No database object."<<std::endl;
+        std::cerr << "No database object." << std::endl;
         exit(-1);
     }
     list = db.tables();
     it = list.begin();
-    while( it != list.end() ) {
-        std::cout << "Table: "<<( *it ).TOUTF8().data() << std::endl;
+    while (it != list.end()) {
+        std::cout << "Table: " << (*it).TOUTF8().data() << std::endl;
         ++it;
     }
     svn::LogEntriesMap lm;
     try {
-        rl.simpleLog(lm,100,svn::Revision::HEAD);
+        rl.simpleLog(lm, 100, svn::Revision::HEAD);
+    } catch (const svn::cache::DatabaseException &cl) {
+        std::cerr << cl.msg().TOUTF8().data() << std::endl;
+    } catch (const svn::Exception &ce) {
+        std::cerr << "Exception: " << ce.msg().TOUTF8().data() << std::endl;
     }
-    catch (const svn::cache::DatabaseException&cl)
-    {
-        std::cerr << cl.msg().TOUTF8().data() <<std::endl;
-    }
-    catch (const svn::Exception&ce)
-    {
-        std::cerr << "Exception: " << ce.msg().TOUTF8().data() <<std::endl;
-    }
-    std::cout<<"Count: "<<lm.count()<<std::endl;
+    std::cout << "Count: " << lm.count() << std::endl;
 
     svn::Revision r("{2006-09-27}");
-    std::cout << r.toString().TOUTF8().data() << " -> " << rl.date2numberRev(r).toString().TOUTF8().data()<<std::endl;
+    std::cout << r.toString().TOUTF8().data() << " -> " << rl.date2numberRev(r).toString().TOUTF8().data() << std::endl;
     r = svn::Revision::HEAD;
-    std::cout << rl.date2numberRev(r).toString().TOUTF8().data()<<std::endl;
+    std::cout << rl.date2numberRev(r).toString().TOUTF8().data() << std::endl;
     try {
         rl.insertLogEntry(lm[100]);
-    }
-    catch (const svn::cache::DatabaseException&cl)
-    {
+    } catch (const svn::cache::DatabaseException &cl) {
         std::cerr << cl.msg().TOUTF8().data() << std::endl;
     }
-    QSqlQuery q("insert into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')",db);
+    QSqlQuery q("insert into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')", db);
     q.exec();
-    std::cerr << "\nSelf: \n" << q.lastError().text().TOUTF8().data()<<std::endl;
+    std::cerr << "\nSelf: \n" << q.lastError().text().TOUTF8().data() << std::endl;
 
-
-    db=QSqlDatabase();
+    db = QSqlDatabase();
     try {
-        rl.log("/trunk/src/svnqt",1,1000,svn::Revision::UNDEFINED,lm,false,-1);
+        rl.log("/trunk/src/svnqt", 1, 1000, svn::Revision::UNDEFINED, lm, false, -1);
+    } catch (const svn::cache::DatabaseException &cl) {
+        std::cerr << cl.msg().TOUTF8().data() << std::endl;
+    } catch (const svn::Exception &ce) {
+        std::cerr << "Exception: " << ce.msg().TOUTF8().data() << std::endl;
     }
-    catch (const svn::cache::DatabaseException&cl)
-    {
-        std::cerr << cl.msg().TOUTF8().data() <<std::endl;
-    }
-    catch (const svn::Exception&ce)
-    {
-        std::cerr << "Exception: " << ce.msg().TOUTF8().data() <<std::endl;
-    }
-    std::cout<<"Count: "<<lm.count()<<std::endl;
+    std::cout << "Count: " << lm.count() << std::endl;
 
     QStringList s; s << "a" << "b" << "c";
 
-    svn::cache::ReposConfig::self()->setValue("http://www.alwins-world.de/repos/kdesvn","bommel",s);
-    list = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn","bommel",QStringList());
-    std::cout<<"Value: ";
-    foreach(const QString &entry, list) {
-        std::cout << entry.TOUTF8().data()<<",";
+    svn::cache::ReposConfig::self()->setValue("http://www.alwins-world.de/repos/kdesvn", "bommel", s);
+    list = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn", "bommel", QStringList());
+    std::cout << "Value: ";
+    foreach (const QString &entry, list) {
+        std::cout << entry.TOUTF8().data() << ",";
     }
     std::cout << std::endl;
     return 0;

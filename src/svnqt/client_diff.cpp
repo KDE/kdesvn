@@ -52,132 +52,131 @@
 
 namespace svn
 {
-  QByteArray
-          Client_impl::diff_peg (const DiffParameter&options) throw (ClientException)
-  {
+QByteArray
+Client_impl::diff_peg(const DiffParameter &options) throw (ClientException)
+{
     Pool pool;
-    svn_error_t * error;
-    const apr_array_header_t * _options;
+    svn_error_t *error;
+    const apr_array_header_t *_options;
 
     // svn_client_diff needs an options array, even if it is empty
     _options = options.extra().array(pool);
-    DiffData ddata(options.tmpPath(),options.path1(),options.rev1(),options.path1(),options.rev2());
-    
+    DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path1(), options.rev2());
+
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
 
     error = svn_client_diff_peg5(
-            _options,
-            options.path1().cstr(),
-            options.peg(),ddata.r1().revision(),ddata.r2().revision(),
-            options.relativeTo().length()>0?options.relativeTo().cstr():QByteArray(/*0*/),
-            internal::DepthToSvn(options.depth()),
-            options.ignoreAncestry(),options.noDiffDeleted(),
-                                 options.copies_as_adds(),
-                                 options.ignoreContentType(),
-            options.git_diff_format(),
-            APR_LOCALE_CHARSET,
-            ddata.outFile(),ddata.errFile(),
-            options.changeList().array(pool),
-            *m_context,
-            pool
-        );
+                _options,
+                options.path1().cstr(),
+                options.peg(), ddata.r1().revision(), ddata.r2().revision(),
+                options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
+                internal::DepthToSvn(options.depth()),
+                options.ignoreAncestry(), options.noDiffDeleted(),
+                options.copies_as_adds(),
+                options.ignoreContentType(),
+                options.git_diff_format(),
+                APR_LOCALE_CHARSET,
+                ddata.outFile(), ddata.errFile(),
+                options.changeList().array(pool),
+                *m_context,
+                pool
+            );
 
 #elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     //qDebug("pegged diff4 call");
     error = svn_client_diff_peg4(
                 _options,
                 options.path1().cstr(),
-                options.peg(),ddata.r1().revision(),ddata.r2().revision(),
-                options.relativeTo().length()>0?options.relativeTo().cstr():QByteArray(/*0*/),
+                options.peg(), ddata.r1().revision(), ddata.r2().revision(),
+                options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
                 internal::DepthToSvn(options.depth()),
-                options.ignoreAncestry(),options.noDiffDeleted(),options.ignoreContentType(),
+                options.ignoreAncestry(), options.noDiffDeleted(), options.ignoreContentType(),
                 APR_LOCALE_CHARSET,
-                ddata.outFile(),ddata.errFile(),
+                ddata.outFile(), ddata.errFile(),
                 options.changeList().array(pool),
                 *m_context,
                 pool
             );
 #else
-    bool recurse = options.depth()==DepthInfinity;
+    bool recurse = options.depth() == DepthInfinity;
     error = svn_client_diff_peg3(
-                                 _options,
-                                 options.path1().cstr(),
-                                 options.peg(),ddata.r1().revision(),ddata.r2().revision(),
-                                 recurse?1:0,options.ignoreAncestry(),options.noDiffDeleted(),options.ignoreContentType(),
-                                 APR_LOCALE_CHARSET,
-                                 ddata.outFile(),ddata.errFile(),
-                                 *m_context,
-                                 pool
-                                );
+                _options,
+                options.path1().cstr(),
+                options.peg(), ddata.r1().revision(), ddata.r2().revision(),
+                recurse ? 1 : 0, options.ignoreAncestry(), options.noDiffDeleted(), options.ignoreContentType(),
+                APR_LOCALE_CHARSET,
+                ddata.outFile(), ddata.errFile(),
+                *m_context,
+                pool
+            );
 #endif
-    if (error != NULL)
-    {
-        throw ClientException (error);
+    if (error != NULL) {
+        throw ClientException(error);
     }
     return ddata.content();
-  }
+}
 
-  QByteArray
-  Client_impl::diff (const DiffParameter&options) throw (ClientException)
-  {
+QByteArray
+Client_impl::diff(const DiffParameter &options) throw (ClientException)
+{
 
     Pool pool;
-    svn_error_t * error;
-    const apr_array_header_t * _options;
+    svn_error_t *error;
+    const apr_array_header_t *_options;
 
     // svn_client_diff needs an options array, even if it is empty
-    if(options.extra().isNull())
+    if (options.extra().isNull()) {
         _options = apr_array_make(pool, 0, 0);
-    else
+    } else {
         _options = options.extra().array(pool);
-    DiffData ddata(options.tmpPath(),options.path1(),options.rev1(),options.path2(),options.rev2());
+    }
+    DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path2(), options.rev2());
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
     error = svn_client_diff5(_options,
-                             options.path1().cstr (), ddata.r1().revision (),
-                             options.path2().cstr (), ddata.r2().revision (),
-                             options.relativeTo().length()>0?options.relativeTo().cstr():QByteArray(/*0*/),
+                             options.path1().cstr(), ddata.r1().revision(),
+                             options.path2().cstr(), ddata.r2().revision(),
+                             options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
                              internal::DepthToSvn(options.depth()),
-                             options.ignoreAncestry(),options.noDiffDeleted(),
+                             options.ignoreAncestry(), options.noDiffDeleted(),
                              options.copies_as_adds(),
                              options.ignoreContentType(),
                              options.git_diff_format(),
                              APR_LOCALE_CHARSET,
-                             ddata.outFile(),ddata.errFile(),
+                             ddata.outFile(), ddata.errFile(),
                              options.changeList().array(pool),
                              *m_context,
-                             pool);    
+                             pool);
 #elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     error = svn_client_diff4(_options,
-                             options.path1().cstr (), ddata.r1().revision (),
-                             options.path2().cstr (), ddata.r2().revision (),
-                             options.relativeTo().length()>0?options.relativeTo().cstr():QByteArray(/*0*/),
+                             options.path1().cstr(), ddata.r1().revision(),
+                             options.path2().cstr(), ddata.r2().revision(),
+                             options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
                              internal::DepthToSvn(options.depth()),
-                             options.ignoreAncestry(),options.noDiffDeleted(),options.ignoreContentType(),
+                             options.ignoreAncestry(), options.noDiffDeleted(), options.ignoreContentType(),
                              APR_LOCALE_CHARSET,
-                             ddata.outFile(),ddata.errFile(),
+                             ddata.outFile(), ddata.errFile(),
                              options.changeList().array(pool),
                              *m_context,
                              pool);
 #else
-    bool recurse = options.depth()==DepthInfinity;
+    bool recurse = options.depth() == DepthInfinity;
     // run diff
-    error = svn_client_diff3 (_options,
-                             options.path1().cstr (), ddata.r1().revision (),
-                             options.path2().cstr (), ddata.r2().revision (),
-                             recurse?1:0,options.ignoreAncestry(),options.noDiffDeleted(),options.ignoreContentType(),
+    error = svn_client_diff3(_options,
+                             options.path1().cstr(), ddata.r1().revision(),
+                             options.path2().cstr(), ddata.r2().revision(),
+                             recurse ? 1 : 0, options.ignoreAncestry(), options.noDiffDeleted(), options.ignoreContentType(),
                              APR_LOCALE_CHARSET,
-                             ddata.outFile(),ddata.errFile(),
+                             ddata.outFile(), ddata.errFile(),
                              *m_context,
                              pool);
 #endif
-    if (error != NULL)
-    {
-        throw ClientException (error);
+    if (error != NULL) {
+        throw ClientException(error);
     }
     return ddata.content();
 
-  }
+}
 }
 
 /* -----------------------------------------------------------------

@@ -24,20 +24,20 @@
 
 class ProcessData;
 
-class WatchedProcess:public KProcess
+class WatchedProcess: public KProcess
 {
     Q_OBJECT
 public:
-    WatchedProcess(QObject*parent=0);
+    WatchedProcess(QObject *parent = 0);
     virtual ~WatchedProcess();
 
-    void appendTempFile(const QString&);
-    void appendTempDir(const QString&);
+    void appendTempFile(const QString &);
+    void appendTempDir(const QString &);
     void setAutoDelete(bool);
     bool autoDelete()const;
 
 private:
-    ProcessData*m_Data;
+    ProcessData *m_Data;
 
 protected Q_SLOTS:
     void slotError(QProcess::ProcessError);
@@ -48,13 +48,13 @@ protected Q_SLOTS:
     void slotStateChanged(QProcess::ProcessState);
 
 Q_SIGNALS:
-    void dataStderrRead(const QByteArray&,WatchedProcess*);
-    void dataStdoutRead(const QByteArray&,WatchedProcess*);
+    void dataStderrRead(const QByteArray &, WatchedProcess *);
+    void dataStdoutRead(const QByteArray &, WatchedProcess *);
 
-    void error(QProcess::ProcessError,WatchedProcess*);
-    void finished(int,QProcess::ExitStatus,WatchedProcess*);
-    void started(WatchedProcess*);
-    void stateChanged(QProcess::ProcessState newState,WatchedProcess*);
+    void error(QProcess::ProcessError, WatchedProcess *);
+    void finished(int, QProcess::ExitStatus, WatchedProcess *);
+    void started(WatchedProcess *);
+    void stateChanged(QProcess::ProcessState newState, WatchedProcess *);
 };
 
 #endif

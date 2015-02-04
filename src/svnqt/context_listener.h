@@ -40,24 +40,23 @@
 // Subversion api
 #include <svn_client.h>
 
-
 namespace svn
 {
-    class ConflictResult;
-    class ConflictDescription;
-  /**
-   * This is the interface that is used by @a Context
-   * for callbacks.
-   * To use this you will have to inherit from this
-   * interface and overwrite the virtual methods.
-   */
-  class SVNQT_EXPORT ContextListener
-  {
-  public:
+class ConflictResult;
+class ConflictDescription;
+/**
+ * This is the interface that is used by @a Context
+ * for callbacks.
+ * To use this you will have to inherit from this
+ * interface and overwrite the virtual methods.
+ */
+class SVNQT_EXPORT ContextListener
+{
+public:
     /**
      * empty destructor avoids a lot of compiler warnings
      */
-    virtual ~ContextListener(){}
+    virtual ~ContextListener() {}
     /**
      * this method will be called to retrieve
      * authentication information. This will called until valid information were
@@ -71,10 +70,10 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetLogin (const QString & realm,
-                     QString & username,
-                     QString & password,
-                     bool & maySave) = 0;
+    contextGetLogin(const QString &realm,
+                    QString &username,
+                    QString &password,
+                    bool &maySave) = 0;
     /**
      * this method will be called to retrieve
      * authentication information stored not by subversion. This
@@ -87,9 +86,9 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetSavedLogin(const QString & realm,
-                         QString & username,
-                         QString & password) = 0;
+    contextGetSavedLogin(const QString &realm,
+                         QString &username,
+                         QString &password) = 0;
     /**
      * this method will be called to retrieve
      * authentication information stored not persistent. This
@@ -102,9 +101,9 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetCachedLogin(const QString & realm,
-                         QString & username,
-                         QString & password) = 0;
+    contextGetCachedLogin(const QString &realm,
+                          QString &username,
+                          QString &password) = 0;
 
     /**
      * this method will be called to notify about
@@ -133,7 +132,7 @@ namespace svn
      * @param action the action got notified about
      * @since subversion 1.2
      */
-    virtual void contextNotify (const svn_wc_notify_t *action)=0;
+    virtual void contextNotify(const svn_wc_notify_t *action) = 0;
 
     /**
      * this method will be called periodically to allow
@@ -157,43 +156,39 @@ namespace svn
      * @retval true continue
      */
     virtual bool
-    contextGetLogMessage (QString & msg,const CommitItemList&) = 0;
+    contextGetLogMessage(QString &msg, const CommitItemList &) = 0;
 
-    typedef enum
-    {
-      DONT_ACCEPT = 0,
-      ACCEPT_TEMPORARILY,
-      ACCEPT_PERMANENTLY
+    typedef enum {
+        DONT_ACCEPT = 0,
+        ACCEPT_TEMPORARILY,
+        ACCEPT_PERMANENTLY
     } SslServerTrustAnswer;
-
 
     /**
      * @see contextSslServerTrust
      * @see svn_auth_cred_ssl_server_trust_t
      */
-    struct SslServerTrustData
-    {
+    struct SslServerTrustData {
     public:
-      /** bit coded failures */
-      const apr_uint32_t failures;
+        /** bit coded failures */
+        const apr_uint32_t failures;
 
-      /** certificate information */
-      QString hostname;
-      QString fingerprint;
-      QString validFrom;
-      QString validUntil;
-      QString issuerDName;
-      QString realm;
-      bool maySave;
+        /** certificate information */
+        QString hostname;
+        QString fingerprint;
+        QString validFrom;
+        QString validUntil;
+        QString issuerDName;
+        QString realm;
+        bool maySave;
 
-      SslServerTrustData (const apr_uint32_t failures_)
-        : failures (failures_), hostname (), fingerprint (),
-          validFrom (), validUntil (), issuerDName (),
-          realm (), maySave (true)
-      {
-      }
+        SslServerTrustData(const apr_uint32_t failures_)
+            : failures(failures_), hostname(), fingerprint(),
+              validFrom(), validUntil(), issuerDName(),
+              realm(), maySave(true)
+        {
+        }
     };
-
 
     /**
      * this method is called if there is ssl server
@@ -204,15 +199,15 @@ namespace svn
      * @return @a SslServerTrustAnswer
      */
     virtual SslServerTrustAnswer
-    contextSslServerTrustPrompt (const SslServerTrustData & data,
-                                 apr_uint32_t & acceptedFailures) = 0;
+    contextSslServerTrustPrompt(const SslServerTrustData &data,
+                                apr_uint32_t &acceptedFailures) = 0;
 
     /**
      * this method is called to retrieve client side
      * information
      */
     virtual bool
-    contextSslClientCertPrompt (QString & certFile) = 0;
+    contextSslClientCertPrompt(QString &certFile) = 0;
 
     /**
      * this method is called to retrieve the password
@@ -223,9 +218,9 @@ namespace svn
      * @param maySave
      */
     virtual bool
-    contextSslClientCertPwPrompt (QString & password,
-                                  const QString & realm,
-                                  bool & maySave) = 0;
+    contextSslClientCertPwPrompt(QString &password,
+                                 const QString &realm,
+                                 bool &maySave) = 0;
     /**
      * this method is called to retrieve the password
      * for the client certificate from a local storage or such. it will called only once.
@@ -234,7 +229,7 @@ namespace svn
      * @param realm
      */
     virtual bool
-    contextLoadSslClientCertPw(QString&password,const QString&realm)=0;
+    contextLoadSslClientCertPw(QString &password, const QString &realm) = 0;
 
     virtual void
     contextProgress(long long int current, long long int max) = 0;
@@ -246,7 +241,10 @@ namespace svn
      * @param what text to translate
      * @return translated text or origin.
      */
-    virtual QString translate(const QString&what){return what;}
+    virtual QString translate(const QString &what)
+    {
+        return what;
+    }
 
     /** Callback for svn_wc_conflict_resolver_func_t in subversion 1.5
      * This method is only useful when build with subverion 1.5 or above. The default implementation sets
@@ -259,12 +257,12 @@ namespace svn
      * @sa svn_wc_conflict_description_t, svn_wc_conflict_result_t
      * @since subversion 1.5
      */
-    virtual bool contextConflictResolve(ConflictResult&result,const ConflictDescription&description);
+    virtual bool contextConflictResolve(ConflictResult &result, const ConflictDescription &description);
     /** Callback for svn_auth_plaintext_prompt_func_t in subversion 1.6
      * @param may_save call back memory where to store true (yes, save plaintext) or false (no save of plaintext passwords)
      * The default implementation set it to "true"
      */
-    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString&realmstring);
+    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString &realmstring);
     /** Callback for generating list entries
      * This base implementation just adds items to @a entries. This may used for special listener like the one from KIO
      * where items may displayed direkt on call and not stored into @a entries.
@@ -274,8 +272,8 @@ namespace svn
      * @param path the path of the item
      * @return true if inserted/displayd, false if dirent or entries aren't valid.
      */
-    virtual bool contextAddListItem(DirEntries*entries, const svn_dirent_t*dirent,const svn_lock_t*lock,const QString&path);
-  };
+    virtual bool contextAddListItem(DirEntries *entries, const svn_dirent_t *dirent, const svn_lock_t *lock, const QString &path);
+};
 }
 
 #endif

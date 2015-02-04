@@ -29,40 +29,40 @@
 
 #include "svnqt/client_parameter_macros.h"
 
-namespace svn {
-    struct  SVNQT_NOEXPORT UpdateParameterData
-    {
-        UpdateParameterData()
-        :_destPaths(),_srcRevision(),_depth(DepthInfinity),_ignore_externals(false),_allow_unversioned(false),_sticky_depth(true),_make_parents(false),_add_as_modification(true)
-        {}
-        Targets _destPaths;
-        Revision _srcRevision;
-        Depth _depth;
-        bool _ignore_externals;
-        bool _allow_unversioned;
-        bool _sticky_depth;
-        bool _make_parents;
-        bool _add_as_modification;
-    };
+namespace svn
+{
+struct  SVNQT_NOEXPORT UpdateParameterData {
+    UpdateParameterData()
+        : _destPaths(), _srcRevision(), _depth(DepthInfinity), _ignore_externals(false), _allow_unversioned(false), _sticky_depth(true), _make_parents(false), _add_as_modification(true)
+    {}
+    Targets _destPaths;
+    Revision _srcRevision;
+    Depth _depth;
+    bool _ignore_externals;
+    bool _allow_unversioned;
+    bool _sticky_depth;
+    bool _make_parents;
+    bool _add_as_modification;
+};
 
-    UpdateParameter::UpdateParameter()
-    {
-        _data = new UpdateParameterData();
-    }
-    UpdateParameter::~UpdateParameter()
-    {
-        _data = 0;
-    }
+UpdateParameter::UpdateParameter()
+{
+    _data = new UpdateParameterData();
+}
+UpdateParameter::~UpdateParameter()
+{
+    _data = 0;
+}
 
-    GETSET(UpdateParameter,Targets,_destPaths,targets);
-    GETSET(UpdateParameter,Revision,_srcRevision,revision);
+GETSET(UpdateParameter, Targets, _destPaths, targets);
+GETSET(UpdateParameter, Revision, _srcRevision, revision);
 
-    GETSETSI(UpdateParameter,Depth,_depth,depth);
-    GETSETSI(UpdateParameter,bool,_ignore_externals,ignore_externals);
-    GETSETSI(UpdateParameter,bool,_allow_unversioned,allow_unversioned);
-    GETSETSI(UpdateParameter,bool,_sticky_depth,sticky_depth);
-    GETSETSI(UpdateParameter,bool,_make_parents,make_parents);
-    GETSETSI(UpdateParameter,bool,_add_as_modification,add_as_modification);
+GETSETSI(UpdateParameter, Depth, _depth, depth);
+GETSETSI(UpdateParameter, bool, _ignore_externals, ignore_externals);
+GETSETSI(UpdateParameter, bool, _allow_unversioned, allow_unversioned);
+GETSETSI(UpdateParameter, bool, _sticky_depth, sticky_depth);
+GETSETSI(UpdateParameter, bool, _make_parents, make_parents);
+GETSETSI(UpdateParameter, bool, _add_as_modification, add_as_modification);
 
 }
 

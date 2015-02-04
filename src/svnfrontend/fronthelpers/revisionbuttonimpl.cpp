@@ -31,7 +31,7 @@
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent)
     : QWidget(parent),
-    m_Rev(svn::Revision::UNDEFINED),m_noWorking(false)
+      m_Rev(svn::Revision::UNDEFINED), m_noWorking(false)
 {
     setupUi(this);
 }
@@ -40,7 +40,7 @@ RevisionButtonImpl::~RevisionButtonImpl()
 {
 }
 
-void RevisionButtonImpl::setRevision(const svn::Revision&aRev)
+void RevisionButtonImpl::setRevision(const svn::Revision &aRev)
 {
     m_Rev = aRev;
     m_RevisionButton->setText(m_Rev.toString());
@@ -49,16 +49,16 @@ void RevisionButtonImpl::setRevision(const svn::Revision&aRev)
 
 void RevisionButtonImpl::askRevision()
 {
-    Rangeinput_impl*rdlg;
+    Rangeinput_impl *rdlg;
 //     int buttons = KDialog::Ok|KDialog::Cancel;
 
 //     KDialogBase * dlg = new KDialogBase(KApplication::activeModalWidget(),"Revinput",
 //                                          true,i18n("Select revision"),buttons);
-    KDialog * dlg = new KDialog(KApplication::activeModalWidget());
+    KDialog *dlg = new KDialog(KApplication::activeModalWidget());
     dlg->setCaption(i18n("Select revision"));
     dlg->setModal(true);
-    dlg->setButtons(KDialog::Ok|KDialog::Cancel);
-    dlg->showButtonSeparator( false );
+    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg->showButtonSeparator(false);
 
     if (!dlg) {
         return;
@@ -71,7 +71,7 @@ void RevisionButtonImpl::askRevision()
     rdlg->setStartOnly(true);
     rdlg->setNoWorking(m_noWorking);
 // KDE4 port    dlg->resize(dlg->configDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg"));
-    if (dlg->exec()==QDialog::Accepted) {
+    if (dlg->exec() == QDialog::Accepted) {
         setRevision(rdlg->getRange().first);
     }
 // KDE4 port    dlg->saveDialogSize(*(Kdesvnsettings::self()->config()),"log_revisions_dlg",false);

@@ -35,52 +35,55 @@
 #include <unistd.h>
 #include <qstringlist.h>
 
-class Listener:public svn::repository::RepositoryListener
+class Listener: public svn::repository::RepositoryListener
 {
-    public:
-        Listener(){}
-        virtual ~Listener(){}
-        virtual void sendWarning(const QString&msg)
-        {
-            std::cout << msg.toAscii().data() << std::endl;
-        }
-        virtual void sendError(const QString&msg)
-        {
-            std::cout << msg.toAscii().data() << std::endl;
-        }
-        virtual bool isCanceld(){return false;}
+public:
+    Listener() {}
+    virtual ~Listener() {}
+    virtual void sendWarning(const QString &msg)
+    {
+        std::cout << msg.toAscii().data() << std::endl;
+    }
+    virtual void sendError(const QString &msg)
+    {
+        std::cout << msg.toAscii().data() << std::endl;
+    }
+    virtual bool isCanceld()
+    {
+        return false;
+    }
 };
 
-int main(int,char**)
+int main(int, char **)
 {
     QString p = TESTREPOPATH;
     Listener ls;
     svn::repository::Repository rp(&ls);
     try {
         rp.CreateOpen(svn::repository::CreateRepoParameter().path(p).fstype("fsfs"));
-    } catch (const svn::ClientException& e) {
+    } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;
     }
 
     svn::ContextP m_CurrentContext;
-    svn::Client* m_Svnclient;
-    m_Svnclient=svn::Client::getobject(0,0);
+    svn::Client *m_Svnclient;
+    m_Svnclient = svn::Client::getobject(0, 0);
     TestListener tl;
     m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(&tl);
-    p = "file://"+p;
+    p = "file://" + p;
 
     m_Svnclient->setContext(m_CurrentContext);
-    QStringList s; s.append(p+"/trunk"); s.append(p+"/branches"); s.append(p+"/tags");
+    QStringList s; s.append(p + "/trunk"); s.append(p + "/branches"); s.append(p + "/tags");
     svn::CheckoutParameter cparams;
     cparams.moduleName(p).destination(TESTCOPATH).revision(svn::Revision::HEAD).peg(svn::Revision::HEAD).depth(svn::DepthInfinity);
 
     try {
-        m_Svnclient->mkdir(svn::Targets(s),"Test mkdir");
+        m_Svnclient->mkdir(svn::Targets(s), "Test mkdir");
         m_Svnclient->checkout(cparams);
-    } catch (const svn::ClientException& e) {
+    } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.TOUTF8().data() << std::endl;
         return -1;

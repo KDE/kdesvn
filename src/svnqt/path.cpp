@@ -28,7 +28,6 @@
  * ====================================================================
  */
 
-
 // subversion api
 #include "svn_path.h"
 #include "svn_dirent_uri.h"
@@ -36,7 +35,6 @@
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
 #include <svn_dirent_uri.h>
 #endif
-
 
 // apr api
 #include "apr_file_io.h"
@@ -53,261 +51,251 @@
 
 namespace svn
 {
-  Path::Path (const char * path)
-  {
+Path::Path(const char *path)
+{
     init(QString::FROMUTF8(path));
-  }
+}
 
-  Path::Path (const QString & path)
-  {
-    init (path);
-  }
+Path::Path(const QString &path)
+{
+    init(path);
+}
 
-  Path::Path (const Path & path)
+Path::Path(const Path &path)
     : m_path(path.m_path)
-  {
-  }
+{
+}
 
-  void
-  Path::init (const QString& path)
-  {
+void
+Path::init(const QString &path)
+{
     Pool pool;
 
     if (path.isEmpty()) {
-      m_path.clear();
+        m_path.clear();
     } else {
-      QByteArray int_path = path.TOUTF8();
-        
-      if (Url::isValid(path) ) {
-        if (!svn_path_is_uri_safe(int_path)) {
-            int_path = svn_path_uri_encode(int_path,pool);
-        }
-      } else {       
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
-        int_path = svn_dirent_internal_style(int_path, pool.pool () );
-#else
-        int_path = svn_path_internal_style (int_path, pool.pool () );
-#endif
-      }
+        QByteArray int_path = path.TOUTF8();
 
-      m_path = QString::FROMUTF8(int_path);
-      /* the following block is a problem and thats why commented out: since a while subversion raises
-       * an assert because of wrong url if replacing the @ sign with entity and kdesvn dies. 
-       * So using the scheme on ubuntu that it just don't display the content of such a folder/file.
-       */
-      /*
-       if (Url::isValid(m_path) && m_path.indexOf("@")!=-1 ) {
-        /// @todo make sure that "@" is never used as revision parameter
-        QUrl uri = m_path;
-        m_path = uri.path();
-        m_path.replace('@',"%40");
-        m_path = uri.scheme()+"://"+uri.authority()+m_path;
-      }
-      */
+        if (Url::isValid(path)) {
+            if (!svn_path_is_uri_safe(int_path)) {
+                int_path = svn_path_uri_encode(int_path, pool);
+            }
+        } else {
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+            int_path = svn_dirent_internal_style(int_path, pool.pool());
+#else
+            int_path = svn_path_internal_style(int_path, pool.pool());
+#endif
+        }
+
+        m_path = QString::FROMUTF8(int_path);
+        /* the following block is a problem and thats why commented out: since a while subversion raises
+         * an assert because of wrong url if replacing the @ sign with entity and kdesvn dies.
+         * So using the scheme on ubuntu that it just don't display the content of such a folder/file.
+         */
+        /*
+         if (Url::isValid(m_path) && m_path.indexOf("@")!=-1 ) {
+          /// @todo make sure that "@" is never used as revision parameter
+          QUrl uri = m_path;
+          m_path = uri.path();
+          m_path.replace('@',"%40");
+          m_path = uri.scheme()+"://"+uri.authority()+m_path;
+        }
+        */
 
         while (m_path.endsWith(QLatin1Char('/'))) {
             m_path.chop(1);
         }
     }
-  }
+}
 
-  bool Path::isUrl()const
-  {
-      return Url::isValid(m_path);
-  }
+bool Path::isUrl()const
+{
+    return Url::isValid(m_path);
+}
 
-  const QString &
-  Path::path () const
-  {
+const QString &
+Path::path() const
+{
     return m_path;
-  }
+}
 
-  Path::operator const QString&()const
-  {
+Path::operator const QString &()const
+{
     return m_path;
-  }
+}
 
-  QString Path::prettyPath()const
-  {
+QString Path::prettyPath()const
+{
     if (!Url::isValid(m_path)) {
         return m_path;
     }
     Pool pool;
-    const char * int_path = svn_path_uri_decode(m_path.TOUTF8(), pool.pool () );
+    const char *int_path = svn_path_uri_decode(m_path.TOUTF8(), pool.pool());
     QString _p = QString::FROMUTF8(int_path);
-    _p.replace("%40","@");
+    _p.replace("%40", "@");
     return _p;
-  }
+}
 
-  const QByteArray
-  Path::cstr() const
-  {
+const QByteArray
+Path::cstr() const
+{
     return m_path.TOUTF8();
-  }
+}
 
-  Path&
-  Path::operator=(const Path & path)
-  {
-    if (this == &path)
-      return *this;
+Path &
+Path::operator=(const Path &path)
+{
+    if (this == &path) {
+        return *this;
+    }
     m_path = path.path();
     return *this;
-  }
+}
 
-  bool
-  Path::isset () const
-  {
-    return m_path.length () > 0;
-  }
+bool
+Path::isset() const
+{
+    return m_path.length() > 0;
+}
 
-  void
-  Path::addComponent (const QString& _component)
-  {
+void
+Path::addComponent(const QString &_component)
+{
     Pool pool;
     QString component = _component;
     while (component.endsWith(QLatin1Char('/'))) {
         component.chop(1);
     }
-    if (Url::isValid (m_path))
-    {
-      const char * newPath =
+    if (Url::isValid(m_path)) {
+        const char *newPath =
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
-        svn_path_url_add_component2(m_path.TOUTF8(), component.TOUTF8(), pool);
+            svn_path_url_add_component2(m_path.TOUTF8(), component.TOUTF8(), pool);
 #else
-        svn_path_url_add_component(m_path.TOUTF8(), component.TOUTF8(), pool);
+            svn_path_url_add_component(m_path.TOUTF8(), component.TOUTF8(), pool);
 #endif
-      m_path = QString::FROMUTF8(newPath);
+        m_path = QString::FROMUTF8(newPath);
+    } else {
+        svn_stringbuf_t *pathStringbuf =
+            svn_stringbuf_create(m_path.TOUTF8(), pool);
+
+        svn_path_add_component(pathStringbuf,
+                               component.TOUTF8());
+        m_path = QString::FROMUTF8(pathStringbuf->data);
     }
-    else
-    {
-      svn_stringbuf_t * pathStringbuf =
-          svn_stringbuf_create (m_path.TOUTF8(), pool);
+}
 
-      svn_path_add_component (pathStringbuf,
-                              component.TOUTF8());
-      m_path = QString::FROMUTF8(pathStringbuf->data);
-    }
-  }
+void
+Path::addComponent(const char *component)
+{
+    addComponent(QString::FROMUTF8(component));
+}
 
-
-  void
-  Path::addComponent (const char* component)
-  {
-    addComponent (QString::FROMUTF8(component));
-  }
-
-
-  void
-  Path::removeLast()
-  {
+void
+Path::removeLast()
+{
     Pool pool;
-    if (m_path.length()<=1) {
+    if (m_path.length() <= 1) {
         m_path.clear();
     }
-    svn_stringbuf_t*pathStringbuf=
-            svn_stringbuf_create (m_path.TOUTF8(), pool);
+    svn_stringbuf_t *pathStringbuf =
+        svn_stringbuf_create(m_path.TOUTF8(), pool);
     svn_path_remove_component(pathStringbuf);
     m_path = QString::FROMUTF8(pathStringbuf->data);
-  }
+}
 
-  void
-  Path::split (QString & dirpath, QString & basename) const
-  {
+void
+Path::split(QString &dirpath, QString &basename) const
+{
     Pool pool;
 
-    const char * cdirpath;
-    const char * cbasename;
-    
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)    
-    const char * int_path = prettyPath().TOUTF8().constData();
+    const char *cdirpath;
+    const char *cbasename;
+
+#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+    const char *int_path = prettyPath().TOUTF8().constData();
     if (Url::isValid(m_path)) {
-        svn_uri_split(&cdirpath,&cbasename,int_path,pool);
+        svn_uri_split(&cdirpath, &cbasename, int_path, pool);
     } else {
-        svn_dirent_split(&cdirpath,&cbasename,int_path,pool);
+        svn_dirent_split(&cdirpath, &cbasename, int_path, pool);
     }
 #else
-    svn_path_split (prettyPath().TOUTF8(), &cdirpath, &cbasename, pool);
+    svn_path_split(prettyPath().TOUTF8(), &cdirpath, &cbasename, pool);
 #endif
     dirpath = QString::FROMUTF8(cdirpath);
     basename = QString::FROMUTF8(cbasename);
-  }
+}
 
-  void
-  Path::split (QString & dir, QString & filename, QString & ext) const
-  {
+void
+Path::split(QString &dir, QString &filename, QString &ext) const
+{
     QString basename;
 
     // first split path into dir and filename+ext
-    split (dir, basename);
+    split(dir, basename);
 
     // next search for last .
     int pos = basename.lastIndexOf(QChar('.'));
 
-    if (pos == -1)
-    {
-      filename = basename;
-      ext = QString();
+    if (pos == -1) {
+        filename = basename;
+        ext = QString();
+    } else {
+        filename = basename.left(pos);
+        ext = basename.mid(pos + 1);
     }
-    else
-    {
-      filename = basename.left(pos);
-      ext = basename.mid(pos+1);
-    }
-  }
+}
 
-  Path
-  Path::getTempDir ()
-  {
-    const char * tempdir = 0;
+Path
+Path::getTempDir()
+{
+    const char *tempdir = 0;
     Pool pool;
 
-    if (apr_temp_dir_get (&tempdir, pool) != APR_SUCCESS)
-    {
-      tempdir = 0;
+    if (apr_temp_dir_get(&tempdir, pool) != APR_SUCCESS) {
+        tempdir = 0;
     }
 
     return tempdir;
-  }
+}
 
-    void
-    Path::parsePeg(const QString&pathorurl,Path&_path,svn::Revision&_peg)
-    {
-        const char *truepath = 0;
-        svn_opt_revision_t pegr;
-        svn_error_t *error = 0;
-        QByteArray _buf = pathorurl.TOUTF8();
+void
+Path::parsePeg(const QString &pathorurl, Path &_path, svn::Revision &_peg)
+{
+    const char *truepath = 0;
+    svn_opt_revision_t pegr;
+    svn_error_t *error = 0;
+    QByteArray _buf = pathorurl.TOUTF8();
 
-        Pool pool;
-        error = svn_opt_parse_path(&pegr, &truepath,_buf,pool);
-        if (error != 0) {
-            throw ClientException (error);
-        }
-        //qDebug("Path: %s",truepath);
-        _peg = svn::Revision(&pegr);
-        _path=Path(truepath);
+    Pool pool;
+    error = svn_opt_parse_path(&pegr, &truepath, _buf, pool);
+    if (error != 0) {
+        throw ClientException(error);
     }
+    //qDebug("Path: %s",truepath);
+    _peg = svn::Revision(&pegr);
+    _path = Path(truepath);
+}
 
-  unsigned int
-  Path::length () const
-  {
-    return m_path.length ();
-  }
+unsigned int
+Path::length() const
+{
+    return m_path.length();
+}
 
-
-  QString
-  Path::native () const
-  {
-      if (isUrl()) 
-      {
-          return m_path;
-      }
+QString
+Path::native() const
+{
+    if (isUrl()) {
+        return m_path;
+    }
     Pool pool;
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
-    return QString::FROMUTF8(svn_dirent_local_style (m_path.TOUTF8(), pool));
+    return QString::FROMUTF8(svn_dirent_local_style(m_path.TOUTF8(), pool));
 #else
-    return QString::FROMUTF8(svn_path_local_style (m_path.TOUTF8(), pool));
+    return QString::FROMUTF8(svn_path_local_style(m_path.TOUTF8(), pool));
 #endif
-  }
+}
 
 }
 

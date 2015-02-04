@@ -46,56 +46,56 @@ class SVNQT_EXPORT ReposConfig
 {
 
 private:
-    static ReposConfig* mSelf;
+    static ReposConfig *mSelf;
 protected:
     ReposConfig();
-    template <typename T> void writeCheck(const QString&repository,const QString&key, const T &value);
-    template <typename T> void writeListCheck(const QString&repository,const QString&key, const QList<T> &value);
+    template <typename T> void writeCheck(const QString &repository, const QString &key, const T &value);
+    template <typename T> void writeListCheck(const QString &repository, const QString &key, const QList<T> &value);
 
 public:
-    static ReposConfig*self();
+    static ReposConfig *self();
 
-    template<typename T> void setValue(const QString&repository,const QString&key,const T&value);
-    template<typename T> void setValue(const QString&repository,const QString&key,const QList<T>&value);
-    void setValue(const QString&repository,const QString&key,const QStringList&value);
-    void setValue(const QString&repository,const QString&key,const QVariant&value);
-    void setValue(const QString&repository,const QString&key,const QVariantList&list);
-    void setValue(const QString&repository,const QString&key,const QString&value);
+    template<typename T> void setValue(const QString &repository, const QString &key, const T &value);
+    template<typename T> void setValue(const QString &repository, const QString &key, const QList<T> &value);
+    void setValue(const QString &repository, const QString &key, const QStringList &value);
+    void setValue(const QString &repository, const QString &key, const QVariant &value);
+    void setValue(const QString &repository, const QString &key, const QVariantList &list);
+    void setValue(const QString &repository, const QString &key, const QString &value);
 
     //! special setter
-    void eraseValue(const QString&repository,const QString&key);
+    void eraseValue(const QString &repository, const QString &key);
 
-    QVariant readEntry(const QString&repository,const QString&key, const QVariant&aDefault);
-    int readEntry(const QString&repository,const QString&key,int aDefault);
-    bool readEntry(const QString&repository,const QString&key,bool aDefault);
-    QStringList readEntry(const QString&repository,const QString&key,const QStringList&aDefault);
+    QVariant readEntry(const QString &repository, const QString &key, const QVariant &aDefault);
+    int readEntry(const QString &repository, const QString &key, int aDefault);
+    bool readEntry(const QString &repository, const QString &key, bool aDefault);
+    QStringList readEntry(const QString &repository, const QString &key, const QStringList &aDefault);
 };
 
-template<typename T> inline void ReposConfig::setValue(const QString&repository,const QString&key,const T&value)
+template<typename T> inline void ReposConfig::setValue(const QString &repository, const QString &key, const T &value)
 {
-    writeCheck(repository,key,value);
+    writeCheck(repository, key, value);
 }
 
 template <typename T> inline
-void ReposConfig::writeCheck(const QString&repository,const QString&key, const T &value)
+void ReposConfig::writeCheck(const QString &repository, const QString &key, const T &value)
 {
-     ConversionCheck::to_QVariant<T>();
-     setValue(repository,key, qVariantFromValue(value));
+    ConversionCheck::to_QVariant<T>();
+    setValue(repository, key, qVariantFromValue(value));
 }
 
 template<typename T> inline
-void ReposConfig::setValue(const QString&repository,const QString&key,const QList<T>&value)
+void ReposConfig::setValue(const QString &repository, const QString &key, const QList<T> &value)
 {
-    writeListCheck(repository,key,value);
+    writeListCheck(repository, key, value);
 }
 
 template <typename T> inline
-void ReposConfig::writeListCheck(const QString&repository,const QString&key, const QList<T> & list)
+void ReposConfig::writeListCheck(const QString &repository, const QString &key, const QList<T> &list)
 {
     ConversionCheck::to_QVariant<T>();
     ConversionCheck::to_QString<T>();
     QVariantList data;
-    Q_FOREACH(const T &value, list) {
+    Q_FOREACH (const T &value, list) {
         data.append(qVariantFromValue(value));
     }
     setValue(repository, key, data);

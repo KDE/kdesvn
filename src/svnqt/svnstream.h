@@ -31,16 +31,19 @@
 #include <svn_io.h>
 struct svn_client_ctx_t;
 
-namespace svn {
+namespace svn
+{
 
-namespace stream {
+namespace stream
+{
 class SvnStream_private;
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
     @short wrapper class around the svn_stream_t structure
 */
-class SVNQT_EXPORT SvnStream{
+class SVNQT_EXPORT SvnStream
+{
     friend class SvnStream_private;
 public:
     //! Constructor
@@ -52,7 +55,7 @@ public:
      * \param ctx a client context for calls to cancel_func inside. you should this only set with functions not using it itself
      * like svn_client_cat2:
      */
-    SvnStream(bool readit, bool writeit, svn_client_ctx_t * ctx = 0);
+    SvnStream(bool readit, bool writeit, svn_client_ctx_t *ctx = 0);
     //! frees all structures and releases memory pool.
     virtual ~SvnStream();
 
@@ -60,7 +63,7 @@ public:
     /*!
         \return a svn_stream_t structure for use with subversion api.
      */
-    operator svn_stream_t* ()const;
+    operator svn_stream_t *()const;
 
     //! write operation
     /*!
@@ -72,7 +75,7 @@ public:
         \return should return the amount of data real written, in case of error must return -1
         \sa setError(int ioError), setError(const QString&error), read(char*data,const unsigned long max)
      */
-    virtual long write(const char*data,const unsigned long max);
+    virtual long write(const char *data, const unsigned long max);
     //! read operation
     /*! implements the wrapper for svn_stream_read, eg. data are read FROM class (eg, file, string or whatever)
         into subversion-api. This implementation always returns -1 (eg, error), must reimplemented for real usage.
@@ -81,13 +84,13 @@ public:
         \return amount of data read or -1 in case of error
         \sa setError(int ioError), setError(const QString&error), write(const char*data,const unsigned long max)
     */
-    virtual long read(char*data,const unsigned long max);
+    virtual long read(char *data, const unsigned long max);
 
     //! returns the error set
     /*!
         \return a human readable message about the reason the last operation failed.
      */
-    virtual const QString& lastError()const;
+    virtual const QString &lastError()const;
     //! is that stream usable
     /*!
         Gives information about if the stream object is usable. May if the file is real open or such.
@@ -95,7 +98,7 @@ public:
      */
     virtual bool isOk()const = 0;
 
-    svn_client_ctx_t * context();
+    svn_client_ctx_t *context();
 
 protected:
     //! set a human readable errormessage
@@ -104,14 +107,14 @@ protected:
         write and/or read if them will return -1 (for error)
         \param error the errormessage assigned.
      */
-    virtual void setError(const QString&error)const;
+    virtual void setError(const QString &error)const;
 
 protected:
     int cancelElapsed()const;
     void cancelTimeReset();
 
 private:
-    SvnStream_private*m_Data;
+    SvnStream_private *m_Data;
     /* disable default contructor */
     SvnStream();
 };
@@ -119,7 +122,7 @@ private:
 class SvnByteStream_private;
 
 //! a class let subversion print into a QByteArray
-class SVNQT_EXPORT SvnByteStream:public SvnStream
+class SVNQT_EXPORT SvnByteStream: public SvnStream
 {
 public:
     //! constructor
@@ -128,7 +131,7 @@ public:
      * \param ctx a client context for calls to cancel_func inside. you should this only set with functions not using it itself
      * like svn_client_cat2:
      */
-    SvnByteStream(svn_client_ctx_t * ctx = 0);
+    SvnByteStream(svn_client_ctx_t *ctx = 0);
     //! release internal buffer
     virtual ~SvnByteStream();
     //! fill internal buffer with data
@@ -138,7 +141,7 @@ public:
         \param max length of data to store
         \return data real stored or -1 if error.
     */
-    virtual long write(const char*data,const unsigned long max);
+    virtual long write(const char *data, const unsigned long max);
 
     //! return the data stored
     /*!
@@ -152,7 +155,7 @@ public:
     virtual bool isOk()const;
 
 private:
-    SvnByteStream_private*m_ByteData;
+    SvnByteStream_private *m_ByteData;
 };
 
 } // namespace stream

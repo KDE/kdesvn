@@ -27,11 +27,12 @@
 
 struct CreateRepoData;
 
-class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg {
+class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg
+{
     Q_OBJECT
 public:
     Createrepo_impl(QWidget *parent = 0);
-    const svn::repository::CreateRepoParameter&parameter()const;
+    const svn::repository::CreateRepoParameter &parameter()const;
     bool createMain()const;
     QString targetDir()const;
 

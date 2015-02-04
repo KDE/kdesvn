@@ -27,13 +27,13 @@
 
 class QObject;
 
-class CheckModifiedThread:public SvnThread
+class CheckModifiedThread: public SvnThread
 {
 public:
-    CheckModifiedThread(QObject*,const QString&what,bool _updates=false);
+    CheckModifiedThread(QObject *, const QString &what, bool _updates = false);
     virtual ~CheckModifiedThread();
     virtual void run();
-    virtual const svn::StatusEntries&getList()const;
+    virtual const svn::StatusEntries &getList()const;
 
 protected:
     QMutex mutex;

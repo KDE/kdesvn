@@ -34,116 +34,118 @@
 // svncpp
 #include "datetime.h"
 
-
 namespace svn
 {
-  DateTime::DateTime ()
-  : m_time()
-  {
-  }
+DateTime::DateTime()
+    : m_time()
+{
+}
 
-  DateTime::DateTime (const apr_time_t time)
-  : m_time()
-  {
-      setAprTime(time);
-  }
+DateTime::DateTime(const apr_time_t time)
+    : m_time()
+{
+    setAprTime(time);
+}
 
-  DateTime::DateTime(const QDateTime&dt)
+DateTime::DateTime(const QDateTime &dt)
     : m_time(dt)
-  {
-  }
+{
+}
 
-  DateTime::DateTime (const DateTime & dateTime)
-  : m_time(dateTime.m_time)
-  {
-  }
+DateTime::DateTime(const DateTime &dateTime)
+    : m_time(dateTime.m_time)
+{
+}
 
-  DateTime::DateTime(const QString&dt)
-  {
-      SetRFC822Date(dt.toUtf8().constData());
-  }
-  
-  const DateTime &
-  DateTime::operator =(const DateTime & dateTime)
-  {
+DateTime::DateTime(const QString &dt)
+{
+    SetRFC822Date(dt.toUtf8().constData());
+}
+
+const DateTime &
+DateTime::operator =(const DateTime &dateTime)
+{
     m_time = dateTime.m_time;
     return *this;
-  }
+}
 
-  bool DateTime::operator<(const DateTime&dateTime)const
-  {
-    return m_time<dateTime.m_time;
-  }
+bool DateTime::operator<(const DateTime &dateTime)const
+{
+    return m_time < dateTime.m_time;
+}
 
-  bool DateTime::operator>(const DateTime&dateTime)const
-  {
-    return dateTime<*this;
-  }
+bool DateTime::operator>(const DateTime &dateTime)const
+{
+    return dateTime < *this;
+}
 
-  bool DateTime::operator!=(const DateTime&dateTime)const
-  {
-    return *this<dateTime||dateTime<*this;
-  }
-  
-  bool DateTime::operator==(const DateTime&dateTime)const
-  {
-    return !(*this!=dateTime);
-  }
+bool DateTime::operator!=(const DateTime &dateTime)const
+{
+    return *this < dateTime || dateTime < *this;
+}
 
-  bool
-  DateTime::operator<=(const DateTime&dateTime)const
-  {
-      return *this==dateTime||*this<dateTime;
-  }
-  bool
-  DateTime::operator>=(const DateTime&dateTime)const
-  {
-      return *this==dateTime||*this>dateTime;
-  }
+bool DateTime::operator==(const DateTime &dateTime)const
+{
+    return !(*this != dateTime);
+}
 
-  bool
-  DateTime::IsValid () const
-  {
+bool
+DateTime::operator<=(const DateTime &dateTime)const
+{
+    return *this == dateTime || *this < dateTime;
+}
+bool
+DateTime::operator>=(const DateTime &dateTime)const
+{
+    return *this == dateTime || *this > dateTime;
+}
+
+bool
+DateTime::IsValid() const
+{
     return m_time.isValid();
-  }
+}
 
-  apr_time_t
-  DateTime::GetAPRTimeT () const
-  {
+apr_time_t
+DateTime::GetAPRTimeT() const
+{
     apr_time_t aTime;
-    apr_time_ansi_put(&aTime,m_time.toTime_t());
+    apr_time_ansi_put(&aTime, m_time.toTime_t());
     return aTime;
-  }
+}
 
-  bool
-  DateTime::SetRFC822Date (const char* date)
-  {
+bool
+DateTime::SetRFC822Date(const char *date)
+{
     apr_time_t aTime = apr_date_parse_rfc(date);
     setAprTime(aTime);
     return IsValid();
-  }
+}
 
-  DateTime::operator const QDateTime&()const
-  {
+DateTime::operator const QDateTime &()const
+{
     return m_time;
-  }
+}
 
-  const QDateTime&DateTime::toQDateTime()const
-  {
-      return *this;
-  }
+const QDateTime &DateTime::toQDateTime()const
+{
+    return *this;
+}
 
-  void DateTime::setAprTime(apr_time_t aTime)
-  {
+void DateTime::setAprTime(apr_time_t aTime)
+{
     m_time.setTimeSpec(Qt::LocalTime);
-    if (aTime<0)m_time.setTime_t(0);
-    else m_time.setTime_t(aTime/(1000*1000));
-  }
+    if (aTime < 0) {
+        m_time.setTime_t(0);
+    } else {
+        m_time.setTime_t(aTime / (1000 * 1000));
+    }
+}
 
-  QString DateTime::toString(const QString&format)const
-  {
+QString DateTime::toString(const QString &format)const
+{
     return m_time.toString(format);
-  }
+}
 }
 
 /*!

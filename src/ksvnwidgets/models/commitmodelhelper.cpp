@@ -22,18 +22,18 @@
 
 #include <klocale.h>
 
-CommitActionEntry::CommitActionEntry(const QString&name,const QString&actiondesc,ACTION_TYPE kind)
-    : _name(name),_actionDesc(actiondesc),_kind(kind)
+CommitActionEntry::CommitActionEntry(const QString &name, const QString &actiondesc, ACTION_TYPE kind)
+    : _name(name), _actionDesc(actiondesc), _kind(kind)
 {
 }
 
 CommitActionEntry::CommitActionEntry()
-    : _name(),_actionDesc(),_kind(COMMIT)
+    : _name(), _actionDesc(), _kind(COMMIT)
 {
 }
 
-CommitActionEntry::CommitActionEntry(const CommitActionEntry&src)
-    : _name(src._name),_actionDesc(src._actionDesc),_kind(src._kind)
+CommitActionEntry::CommitActionEntry(const CommitActionEntry &src)
+    : _name(src._name), _actionDesc(src._actionDesc), _kind(src._kind)
 {
 }
 
@@ -41,12 +41,12 @@ CommitActionEntry::~CommitActionEntry()
 {
 }
 
-const QString&CommitActionEntry::action()const
+const QString &CommitActionEntry::action()const
 {
     return _actionDesc;
 }
 
-const QString&CommitActionEntry::name()const
+const QString &CommitActionEntry::name()const
 {
     return _name;
 }
@@ -56,9 +56,8 @@ CommitActionEntry::ACTION_TYPE CommitActionEntry::type()const
     return _kind;
 }
 
-
-CommitModelNode::CommitModelNode(const svn::CommitItem&aItem)
-    :m_Content(),m_Checkable(false),m_Checked(false)
+CommitModelNode::CommitModelNode(const svn::CommitItem &aItem)
+    : m_Content(), m_Checkable(false), m_Checked(false)
 {
     QString what;
     QString action;
@@ -93,16 +92,16 @@ CommitModelNode::CommitModelNode(const svn::CommitItem&aItem)
     } else {
         what = aItem.path();
     }
-    m_Content = CommitActionEntry(what,action);
+    m_Content = CommitActionEntry(what, action);
 }
 
-CommitModelNode::CommitModelNode(const QString&pathorurl,const QString&actiondesc)
-    :m_Content(pathorurl,actiondesc),m_Checkable(false),m_Checked(false)
+CommitModelNode::CommitModelNode(const QString &pathorurl, const QString &actiondesc)
+    : m_Content(pathorurl, actiondesc), m_Checkable(false), m_Checked(false)
 {
 }
 
-CommitModelNode::CommitModelNode(const CommitActionEntry&aContent,bool checked)
-    :m_Content(aContent),m_Checkable(true),m_Checked(checked)
+CommitModelNode::CommitModelNode(const CommitActionEntry &aContent, bool checked)
+    : m_Content(aContent), m_Checkable(true), m_Checked(checked)
 {
 }
 

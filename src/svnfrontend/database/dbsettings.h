@@ -28,23 +28,23 @@
 
 class DbSettingsData;
 
-class DbSettings:public QWidget,Ui::DbSettings
+class DbSettings: public QWidget, Ui::DbSettings
 {
     Q_OBJECT
 public:
     DbSettings(QWidget *parent = 0);
     virtual ~DbSettings();
 
-    void setRepository(const QString&repository);
+    void setRepository(const QString &repository);
     void store();
 
-    static void showSettings(const QString&repository);
+    static void showSettings(const QString &repository);
 
 protected:
     void init();
-    void store_list(KEditListBox*,const QString&);
+    void store_list(KEditListBox *, const QString &);
 private:
-    DbSettingsData*_data;
+    DbSettingsData *_data;
 };
 
 #endif

@@ -24,9 +24,9 @@ class QWidget;
 
 class WidgetBlockStack
 {
-    QWidget*_w;
+    QWidget *_w;
 public:
-    WidgetBlockStack(QWidget*);
+    WidgetBlockStack(QWidget *);
     ~WidgetBlockStack();
 };
 

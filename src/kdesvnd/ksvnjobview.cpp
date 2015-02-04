@@ -21,15 +21,15 @@
 #include "ksvnjobview.h"
 
 KsvnJobView::KsvnJobView(qulonglong id, const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent)
-: org::kde::JobView(service,path,connection,parent),m_id(id),m_state(STOPPED),m_max(0)
+    : org::kde::JobView(service, path, connection, parent), m_id(id), m_state(STOPPED), m_max(0)
 {
-    connect(this, SIGNAL(cancelRequested()),this,
-                     SLOT(killJob()));
+    connect(this, SIGNAL(cancelRequested()), this,
+            SLOT(killJob()));
 #if 0
-        QObject::connect(jobView, SIGNAL(suspendRequested()), this,
-                         SLOT(suspend()));
-        QObject::connect(jobView, SIGNAL(resumeRequested()), this,
-                         SLOT(resume()));
+    QObject::connect(jobView, SIGNAL(suspendRequested()), this,
+                     SLOT(suspend()));
+    QObject::connect(jobView, SIGNAL(resumeRequested()), this,
+                     SLOT(resume()));
 #endif
 }
 
@@ -40,14 +40,14 @@ void KsvnJobView::killJob()
 
 unsigned long KsvnJobView::percent(qulonglong amount)
 {
-    return (unsigned long)((float)(amount)/(float)(m_max)*100.0);
+    return (unsigned long)((float)(amount) / (float)(m_max) * 100.0);
 }
 
 void KsvnJobView::setTotal(qlonglong amount)
 {
     static const QString unit("bytes");
     m_max = amount;
-    setTotalAmount(amount,unit);
+    setTotalAmount(amount, unit);
 }
 
 #include "ksvnjobview.moc"

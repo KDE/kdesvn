@@ -40,8 +40,9 @@ class KPushButton;
 class FileListViewItem;
 class SvnItem;
 
-namespace svn {
-    class Client;
+namespace svn
+{
+class Client;
 }
 
 class PropertiesDlg : public KDialog
@@ -49,48 +50,48 @@ class PropertiesDlg : public KDialog
     Q_OBJECT
 
 public:
-    PropertiesDlg(SvnItem*which, svn::Client*aClient,
-        const svn::Revision&aRev, QWidget *parent = 0);
+    PropertiesDlg(SvnItem *which, svn::Client *aClient,
+                  const svn::Revision &aRev, QWidget *parent = 0);
     ~PropertiesDlg();
 
     bool hasChanged()const;
-    void changedItems(svn::PropertiesMap&toSet,QStringList&toDelete);
+    void changedItems(svn::PropertiesMap &toSet, QStringList &toDelete);
 
 protected:
-    Propertylist* m_PropertiesListview;
-    KPushButton* m_AddButton;
-    KPushButton* m_DeleteButton;
-    KPushButton* m_ModifyButton;
+    Propertylist *m_PropertiesListview;
+    KPushButton *m_AddButton;
+    KPushButton *m_DeleteButton;
+    KPushButton *m_ModifyButton;
 
-    QHBoxLayout* PropertiesDlgLayout;
-    QVBoxLayout* m_rightLayout;
-    QSpacerItem* m_rightSpacer;
+    QHBoxLayout *PropertiesDlgLayout;
+    QVBoxLayout *m_rightLayout;
+    QSpacerItem *m_rightSpacer;
 
     SvnItem *m_Item;
     bool m_changed;
     bool initDone;
-    svn::Client*m_Client;
+    svn::Client *m_Client;
     svn::Revision m_Rev;
 
 protected slots:
     virtual void languageChange();
 
     virtual void slotHelp();
-    virtual void slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*);
-    virtual void slotSelectionExecuted(QTreeWidgetItem*);
+    virtual void slotCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *);
+    virtual void slotSelectionExecuted(QTreeWidgetItem *);
     virtual void slotAdd();
     virtual void slotDelete();
     virtual void slotModify();
 
 protected:
     virtual void initItem();
-    virtual bool event (QEvent * event);
+    virtual bool event(QEvent *event);
 
 public slots:
     int exec();
 
 signals:
-    void clientException(const QString&);
+    void clientException(const QString &);
 };
 
 #endif // PROPERTIESDLG_H

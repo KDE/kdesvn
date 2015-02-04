@@ -28,58 +28,58 @@
 
 #define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType+1
 
-LogChangePathItem::LogChangePathItem(QTreeWidget*parent,const svn::LogChangePathEntry&e)
-    :QTreeWidgetItem(parent,TREE_PATH_ITEM_TYPE)
+LogChangePathItem::LogChangePathItem(QTreeWidget *parent, const svn::LogChangePathEntry &e)
+    : QTreeWidgetItem(parent, TREE_PATH_ITEM_TYPE)
 {
     init(e);
 }
 
-LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry&e)
-    :QTreeWidgetItem(TREE_PATH_ITEM_TYPE)
+LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry &e)
+    : QTreeWidgetItem(TREE_PATH_ITEM_TYPE)
 {
     init(e);
 }
 
-void LogChangePathItem::init(const svn::LogChangePathEntry&e)
+void LogChangePathItem::init(const svn::LogChangePathEntry &e)
 {
     _action = QChar(e.action);
-    setText(0,_action);
+    setText(0, _action);
     _path = e.path;
-    setText(1,e.path);
+    setText(1, e.path);
     _revision = e.copyFromRevision;
     _source = e.copyFromPath;
-    if (e.copyFromRevision>-1) {
-        setText(2,i18n("%1 at revision %2",e.copyFromPath,e.copyFromRevision));
+    if (e.copyFromRevision > -1) {
+        setText(2, i18n("%1 at revision %2", e.copyFromPath, e.copyFromRevision));
     }
 }
 
-SvnLogModelNode::SvnLogModelNode(const svn::LogEntry&_entry)
-    :_data(_entry),_realName(QString())
+SvnLogModelNode::SvnLogModelNode(const svn::LogEntry &_entry)
+    : _data(_entry), _realName(QString())
 {
     _date = svn::DateTime(_entry.date);
     QStringList sp = _entry.message.split('\n');
-    if (sp.count()==0) {
-        _shortMessage=_entry.message;
+    if (sp.count() == 0) {
+        _shortMessage = _entry.message;
     } else {
-        _shortMessage=sp[0];
+        _shortMessage = sp[0];
     }
 }
 
-const QList<svn::LogChangePathEntry>& SvnLogModelNode::changedPaths()const
+const QList<svn::LogChangePathEntry> &SvnLogModelNode::changedPaths()const
 {
     return _data.changedPaths;
 }
 
-bool SvnLogModelNode::copiedFrom(QString&_n,long&_rev)const
+bool SvnLogModelNode::copiedFrom(QString &_n, long &_rev)const
 {
-    for (int i = 0; i < changedPaths().count();++i) {
-        if (changedPaths()[i].action=='A' &&
-            !changedPaths()[i].copyFromPath.isEmpty() &&
-            isParent(changedPaths()[i].path,_realName)) {
+    for (int i = 0; i < changedPaths().count(); ++i) {
+        if (changedPaths()[i].action == 'A' &&
+                !changedPaths()[i].copyFromPath.isEmpty() &&
+                isParent(changedPaths()[i].path, _realName)) {
             QString tmpPath = _realName;
             QString r = _realName.mid(changedPaths()[i].path.length());
-            _n=changedPaths()[i].copyFromPath;
-            _n+=r;
+            _n = changedPaths()[i].copyFromPath;
+            _n += r;
             _rev = changedPaths()[i].copyFromRevision;
             return true;
         }
@@ -87,14 +87,16 @@ bool SvnLogModelNode::copiedFrom(QString&_n,long&_rev)const
     return false;
 }
 
-bool SvnLogModelNode::isParent(const QString&_par,const QString&tar)
+bool SvnLogModelNode::isParent(const QString &_par, const QString &tar)
 {
-    if (_par==tar) return true;
-    QString par = _par.endsWith('/')?_par:_par+'/';
+    if (_par == tar) {
+        return true;
+    }
+    QString par = _par.endsWith('/') ? _par : _par + '/';
     return tar.startsWith(par);
 }
 
-void SvnLogModelNode::setChangedPaths(const svn::LogEntry&le)
+void SvnLogModelNode::setChangedPaths(const svn::LogEntry &le)
 {
     _data.changedPaths = le.changedPaths;
 }

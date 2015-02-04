@@ -23,11 +23,12 @@
 // #include "src/ksvnwidgets/ssltrustprompt.h"
 #include "ksvnwidgets/ui_ssltrustprompt.h"
 
-class SslTrustPrompt_impl: public QWidget, public Ui::SslTrustPrompt {//public SslTrustPrompt {
-Q_OBJECT
+class SslTrustPrompt_impl: public QWidget, public Ui::SslTrustPrompt  //public SslTrustPrompt {
+{
+    Q_OBJECT
 public:
-    SslTrustPrompt_impl(const QString&,QWidget *parent = 0);
-    static bool sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,const QStringList&reasons,bool*ok,bool*saveit);
+    SslTrustPrompt_impl(const QString &, QWidget *parent = 0);
+    static bool sslTrust(const QString &host, const QString &fingerprint, const QString &validFrom, const QString &validUntil, const QString &issuerName, const QString &realm, const QStringList &reasons, bool *ok, bool *saveit);
 };
 
 #endif

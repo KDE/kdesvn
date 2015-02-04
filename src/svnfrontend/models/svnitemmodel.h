@@ -37,7 +37,7 @@ class QMimeData;
 
 namespace svn
 {
-    class Path;
+class Path;
 }
 
 typedef svn::SharedPointer<SvnItemModelData> SvnItemModelDataPtr;
@@ -46,17 +46,17 @@ typedef svn::SharedPointer<SvnItemModelData> SvnItemModelDataPtr;
 #define FILTER_ROLE Qt::UserRole+2
 #define BG_ROLE Qt::UserRole+3
 
-class SvnItemModel:public QAbstractItemModel
+class SvnItemModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    SvnItemModel(MainTreeWidget*,QObject*parent=0);
+    SvnItemModel(MainTreeWidget *, QObject *parent = 0);
     virtual ~SvnItemModel();
 
     void clear();
 
     enum Column {
-        Name=0,
+        Name = 0,
         Status,
         LastRevision,
         LastAuthor,
@@ -65,82 +65,82 @@ public:
         ColumnCount
     };
 
-    virtual QModelIndex index(int row, int column, const QModelIndex & parent = QModelIndex())const;
-    virtual QVariant data(const QModelIndex& index,int role = Qt::DisplayRole )const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation,int role = Qt::DisplayRole)const;
-    virtual int columnCount(const QModelIndex & parent = QModelIndex())const;
-    virtual int rowCount(const QModelIndex & parent = QModelIndex())const;
-    virtual QModelIndex parent (const QModelIndex & index )const;
-    virtual bool hasChildren(const QModelIndex & parent = QModelIndex())const;
-    virtual bool canFetchMore(const QModelIndex & parent)const;
-    virtual void fetchMore(const QModelIndex&parent);
-    virtual Qt::ItemFlags flags(const QModelIndex&index)const;
+    virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex())const;
+    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole)const;
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole)const;
+    virtual int columnCount(const QModelIndex &parent = QModelIndex())const;
+    virtual int rowCount(const QModelIndex &parent = QModelIndex())const;
+    virtual QModelIndex parent(const QModelIndex &index)const;
+    virtual bool hasChildren(const QModelIndex &parent = QModelIndex())const;
+    virtual bool canFetchMore(const QModelIndex &parent)const;
+    virtual void fetchMore(const QModelIndex &parent);
+    virtual Qt::ItemFlags flags(const QModelIndex &index)const;
 
     //! Returns the very first item in list.
     /*!
      * This item marks the working copy itself when a working copy is opened.
      * When opened a repository it is just an entry.
      */
-    SvnItemModelNode* firstRootChild();
-    SvnItemModelNode* nodeForIndex(const QModelIndex&index);
+    SvnItemModelNode *firstRootChild();
+    SvnItemModelNode *nodeForIndex(const QModelIndex &index);
     QModelIndex firstRootIndex();
-    void setRootNodeStat(const svn::StatusPtr&);
+    void setRootNodeStat(const svn::StatusPtr &);
 
-    SvnActions*svnWrapper();
+    SvnActions *svnWrapper();
 
-    int checkDirs(const QString&_what,SvnItemModelNode*parent);
+    int checkDirs(const QString &_what, SvnItemModelNode *parent);
     virtual Qt::DropActions supportedDropActions()const;
     virtual QStringList mimeTypes()const;
-    QMimeData* mimeData(const QModelIndexList & indexes )const;
+    QMimeData *mimeData(const QModelIndexList &indexes)const;
 
-    virtual bool dropUrls(const KUrl::List& data, Qt::DropAction action, int row, int column,const QModelIndex & parent,bool intern);
+    virtual bool dropUrls(const KUrl::List &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern);
 
-    bool filterIndex(const QModelIndex&,int,svnmodel::ItemTypeFlag)const;
+    bool filterIndex(const QModelIndex &, int, svnmodel::ItemTypeFlag)const;
 
     /* svn actions starts here */
-    void makeIgnore(const QModelIndex&);
+    void makeIgnore(const QModelIndex &);
 
     //! looks if \a aPath exists in tree
     /*! Looks always for perfect match,
      * \return node of matched item or 0
      */
-    SvnItemModelNode* findPath(const svn::Path&aPath);
+    SvnItemModelNode *findPath(const svn::Path &aPath);
     //! looks if \a aPath exists in tree
     /*! Looks always for perfect match,
      * \return QModelIndex of matched item or invalid QModelIndex
      */
-    QModelIndex findIndex(const svn::Path&aPath);
+    QModelIndex findIndex(const svn::Path &aPath);
     void initDirWatch();
     bool refreshCurrentTree();
-    bool refreshDirnode(SvnItemModelNodeDir*,bool check_empty=false,bool notrec=false);
-    bool refreshItem(SvnItemModelNode*);
-    bool refreshIndex(const QModelIndex&,bool sendSignal=true);
+    bool refreshDirnode(SvnItemModelNodeDir *, bool check_empty = false, bool notrec = false);
+    bool refreshItem(SvnItemModelNode *);
+    bool refreshIndex(const QModelIndex &, bool sendSignal = true);
 
-    void clearNodeDir(SvnItemModelNodeDir*);
+    void clearNodeDir(SvnItemModelNodeDir *);
 
-    const QString&uniqueIdentifier()const;
+    const QString &uniqueIdentifier()const;
 
 Q_SIGNALS:
-    void urlDropped(const KUrl::List&,Qt::DropAction,const QModelIndex &,bool);
-    void clientException(const QString&);
-    void itemsFetched(const QModelIndex&);
+    void urlDropped(const KUrl::List &, Qt::DropAction, const QModelIndex &, bool);
+    void clientException(const QString &);
+    void itemsFetched(const QModelIndex &);
 
 protected:
-   /* the parent entry must removed from list before */
-   void insertDirs(SvnItemModelNode* _parent,svn::StatusEntries&);
-   //! \a ind must be a directory index
-   void checkAddNewItems(const QModelIndex&ind);
-   bool checkRootNode();
-   int checkUnversionedDirs(SvnItemModelNode* _parent);
-   void beginRemoveRows( const QModelIndex & parent, int first, int last );
+    /* the parent entry must removed from list before */
+    void insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &);
+    //! \a ind must be a directory index
+    void checkAddNewItems(const QModelIndex &ind);
+    bool checkRootNode();
+    int checkUnversionedDirs(SvnItemModelNode *_parent);
+    void beginRemoveRows(const QModelIndex &parent, int first, int last);
 
 public Q_SLOTS:
-    virtual void slotNotifyMessage(const QString&);
+    virtual void slotNotifyMessage(const QString &);
 
 protected Q_SLOTS:
-    void slotCreated(const QString&);
-    void slotDeleted(const QString&);
-    void slotDirty(const QString&);
+    void slotCreated(const QString &);
+    void slotDeleted(const QString &);
+    void slotDirty(const QString &);
 
 private:
     friend class SvnItemModelData;

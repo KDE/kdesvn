@@ -41,19 +41,18 @@
 // subversion api
 #include "svn_wc.h"
 
-
 #include <qstring.h>
 
 namespace svn
 {
-    class Entry_private;
-  /**
-   * C++ API for Subversion.
-   * This class wraps around @a svn_wc_entry_t.
-   */
-  class SVNQT_EXPORT Entry
-  {
-  public:
+class Entry_private;
+/**
+ * C++ API for Subversion.
+ * This class wraps around @a svn_wc_entry_t.
+ */
+class SVNQT_EXPORT Entry
+{
+public:
     /**
      * default constructor. if @a src is set,
      * copy its contents.
@@ -64,26 +63,26 @@ namespace svn
      *
      * @param src another entry to copy from
      */
-    Entry (const svn_wc_entry_t * src = 0);
+    Entry(const svn_wc_entry_t *src = 0);
 
     /**
      * copy constructor
      */
-    Entry (const Entry & src);
+    Entry(const Entry &src);
 
     /**
      * converting constructr
      */
-    Entry (const QString&url,const DirEntryPtr&src);
+    Entry(const QString &url, const DirEntryPtr &src);
     /**
      * converting constructr
      */
-    Entry (const QString&url,const InfoEntry&src);
+    Entry(const QString &url, const InfoEntry &src);
 
     /**
      * destructor
      */
-    virtual ~Entry ();
+    virtual ~Entry();
 
     /**
      * returns whether this is a valid=versioned
@@ -93,131 +92,131 @@ namespace svn
      * @retval true valid entry
      * @retval false invalid or unversioned entry
      */
-    bool isValid () const;
+    bool isValid() const;
     /**
      * @return entry's name
      */
-    const QString&
-    name () const;
+    const QString &
+    name() const;
     /**
      * @return base revision
      */
     svn_revnum_t
-    revision () const;
+    revision() const;
     /**
      * @return url in repository
      */
-    const QString&
-    url () const;
+    const QString &
+    url() const;
 
     /**
      * @return canonical repository url
      */
-    const QString&
-    repos () const;
+    const QString &
+    repos() const;
     /**
      * @return repository uuid
      */
-    const QString&
-    uuid () const;
+    const QString &
+    uuid() const;
     /**
      * @return node kind (file, dir, ...)
      */
     svn_node_kind_t
-    kind () const;
+    kind() const;
     /**
      * @return scheduling (add, delete, replace)
      */
     svn_wc_schedule_t
-    schedule () const;
+    schedule() const;
     /**
      * @return TRUE if copied
      */
     bool
-    isCopied () const;
+    isCopied() const;
     /**
      * @return true if deleted
      */
     bool
-    isDeleted () const;
+    isDeleted() const;
     /**
      * @return true if deleted
      */
     bool
-    isAbsent () const;
+    isAbsent() const;
     /**
      * @return copyfrom location
      */
-    const QString&
-    copyfromUrl () const;
+    const QString &
+    copyfromUrl() const;
     /**
      * @return copyfrom revision
      */
     svn_revnum_t
-    copyfromRev () const;
+    copyfromRev() const;
     /**
      * @return old version of conflicted file
      */
-    const QString&
-    conflictOld () const;
+    const QString &
+    conflictOld() const;
     /**
      * @return new version of conflicted file
      */
-    const QString&
-    conflictNew () const;
+    const QString &
+    conflictNew() const;
     /**
      * @return working version of conflicted file
      */
-    const QString&
-    conflictWrk () const;
+    const QString &
+    conflictWrk() const;
     /**
      * @return property reject file
      */
-    const QString&
-    prejfile () const;
+    const QString &
+    prejfile() const;
     /**
      * @return last up-to-date time for text contents
      * @retval 0 no information available
      */
-    const DateTime&
-    textTime () const;
+    const DateTime &
+    textTime() const;
     /**
      * @return last up-to-date time for properties
      * @retval 0 no information available
      */
-    const DateTime&
+    const DateTime &
     propTime()const;
 
     /**
      * @return base64 encoded checksum
      * @retval NULL for backwards compatibility
      */
-    const QString&
-    checksum () const;
+    const QString &
+    checksum() const;
 
     /**
      * @return last revision this was changed
      */
     svn_revnum_t
-    cmtRev () const;
+    cmtRev() const;
 
     /**
      * @return last date this was changed
      */
-    const DateTime&
-    cmtDate () const;
+    const DateTime &
+    cmtDate() const;
 
     /**
      * @return last commit author of this file
      */
-    const QString&
-    cmtAuthor () const;
+    const QString &
+    cmtAuthor() const;
 
     /**
      * @return lock for that entry
      * @since subversion 1.2
      */
-    const LockEntry&
+    const LockEntry &
     lockEntry()const;
 
     /**
@@ -231,9 +230,9 @@ namespace svn
     operator = (const Entry &);
     bool isFile()const;
 
-  private:
-    Entry_private*m_Data;
- };
+private:
+    Entry_private *m_Data;
+};
 
 }
 

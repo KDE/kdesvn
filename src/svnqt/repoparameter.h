@@ -29,9 +29,11 @@
 #include "svnqt/shared_pointer.h"
 #include "svnqt/svnqt_defines.h"
 
-namespace svn {
+namespace svn
+{
 
-namespace repository {
+namespace repository
+{
 
 struct CreateRepoParameterData;
 
@@ -46,21 +48,21 @@ public:
     /** path to create
      * default is emtpy
      */
-    const QString&path()const;
+    const QString &path()const;
     /** path to create
      * default is emtpy
      */
-    CreateRepoParameter&path(const QString&);
+    CreateRepoParameter &path(const QString &);
     /** fs type of repository
      *
      * default is "fsfs"
      */
-    const QString&fstype()const;
+    const QString &fstype()const;
     /** fs type of repository
      *
      * default is "fsfs"
      */
-    CreateRepoParameter&fstype(const QString&);
+    CreateRepoParameter &fstype(const QString &);
     /** switch of syncing of bdb
      *
      * default is false
@@ -70,7 +72,7 @@ public:
      *
      * default is false
      */
-    CreateRepoParameter&bdbnosync(bool);
+    CreateRepoParameter &bdbnosync(bool);
     /** bdb automatic remove log
      *
      * default is true
@@ -80,19 +82,19 @@ public:
      *
      * default is true
      */
-    CreateRepoParameter&bdbautologremove(bool);
+    CreateRepoParameter &bdbautologremove(bool);
     /** default is false */
     bool pre14_compat()const;
     /** default is false */
-    CreateRepoParameter&pre14_compat(bool);
+    CreateRepoParameter &pre14_compat(bool);
     /** default is false */
     bool pre15_compat()const;
     /** default is false */
-    CreateRepoParameter&pre15_compat(bool);
+    CreateRepoParameter &pre15_compat(bool);
     /** default is false */
     bool pre16_compat()const;
     /** default is false */
-    CreateRepoParameter&pre16_compat(bool);
+    CreateRepoParameter &pre16_compat(bool);
 
 };
 

@@ -28,11 +28,10 @@
 /*!
     \fn DiffSyntax::DiffSyntax(QTextEdit*)
  */
- DiffSyntax::DiffSyntax(QTextEdit*aTextEdit)
+DiffSyntax::DiffSyntax(QTextEdit *aTextEdit)
     : QSyntaxHighlighter(aTextEdit)
 {
 }
-
 
 /*!
     \fn DiffSyntax::highlightParagraph ( const QString & text, int endStateOfLastPara )
@@ -51,7 +50,7 @@
 //             ret = 2;
 //         }
 //     }
-// 
+//
 //     if (a.indexIn(aText)>-1) {
 //         c = QColor("#660033");
 //         if (endStateOfLastPara==1||endStateOfLastPara==2) {
@@ -98,19 +97,19 @@ void DiffSyntax::highlightBlock(const QString &aText)
     if (previousBlockState() == 1) {
         setCurrentBlockState(2);
     } else if (previousBlockState() == 2) {
-        if (b.indexIn(aText)!=0) {
+        if (b.indexIn(aText) != 0) {
             setCurrentBlockState(2);
         }
     }
 
-    if (a.indexIn(aText)>-1) {
+    if (a.indexIn(aText) > -1) {
         format.setForeground(QColor("#660033"));
-        if (previousBlockState()==1 || previousBlockState()==2) {
+        if (previousBlockState() == 1 || previousBlockState() == 2) {
             format.setFontWeight(QFont::Bold);
         } else {
             format.setFontItalic(true);
         }
-    } else if (aText.startsWith("_____" )) {
+    } else if (aText.startsWith("_____")) {
         setCurrentBlockState(1);
         format.setForeground(QColor("#1D1D8F"));
     } else if (aText.startsWith('+')) {
@@ -126,7 +125,7 @@ void DiffSyntax::highlightBlock(const QString &aText)
     } else if (aText.startsWith("@@")) {
         format.setForeground(QColor("#1D1D8F"));
     }
-    if (previousBlockState()==2 && currentBlockState()==2) {
+    if (previousBlockState() == 2 && currentBlockState() == 2) {
         if (aText.startsWith("   +")) {
             format.setForeground(QColor("#008B00"));
         } else if (aText.startsWith("   -")) {
@@ -136,10 +135,9 @@ void DiffSyntax::highlightBlock(const QString &aText)
     setFormat(0, aText.length(), format);
 }
 
-
 /*!
     \fn DiffSyntax::~DiffSyntax()
  */
- DiffSyntax::~DiffSyntax()
+DiffSyntax::~DiffSyntax()
 {
 }

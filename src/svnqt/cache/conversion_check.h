@@ -33,8 +33,10 @@
 #include <QtCore/QRect>
 #include <QtCore/QVariant>
 
-namespace svn {
-namespace ConversionCheck {
+namespace svn
+{
+namespace ConversionCheck
+{
 
 // used to distinguish between supported/unsupported types
 struct supported { };
@@ -42,43 +44,45 @@ struct unsupported { };
 
 // traits type class to define support for constraints
 template <typename T>
-struct QVconvertible
-{
-  typedef unsupported toQString;
-  typedef unsupported toQVariant;
+struct QVconvertible {
+    typedef unsupported toQString;
+    typedef unsupported toQVariant;
 };
 
 // constraint classes
 template <typename T>
-struct type_toQString
-{
-  void constraint() { supported x = y; }
-  typename QVconvertible<T>::toQString y;
+struct type_toQString {
+    void constraint()
+    {
+        supported x = y;
+    }
+    typename QVconvertible<T>::toQString y;
 };
 
 template <typename T>
-struct type_toQVariant
-{
-  void constraint() { supported x = y; }
-  typename QVconvertible<T>::toQVariant y;
+struct type_toQVariant {
+    void constraint()
+    {
+        supported x = y;
+    }
+    typename QVconvertible<T>::toQVariant y;
 };
-
 
 // check if T is convertible to QString thru QVariant
 // if not supported can't be used in QList<T> functions
 template <typename T>
 inline void to_QString()
 {
-  void (type_toQString<T>::*x)() = &type_toQString<T>::constraint;
-  Q_UNUSED(x);
+    void (type_toQString<T>::*x)() = &type_toQString<T>::constraint;
+    Q_UNUSED(x);
 }
 
 // check if T is convertible to QVariant & supported in readEntry/writeEntry
 template <typename T>
 inline void to_QVariant()
 {
-  void (type_toQVariant<T>::*x)() = &type_toQVariant<T>::constraint;
-  Q_UNUSED(x);
+    void (type_toQVariant<T>::*x)() = &type_toQVariant<T>::constraint;
+    Q_UNUSED(x);
 }
 
 // define for all types handled in readEntry/writeEntry
@@ -86,10 +90,10 @@ inline void to_QVariant()
 //                  can be used in QList<T> functions
 // variant_support - has a QVariant constructor
 #define QVConversions(type, string_support, variant_support) \
-template <> struct QVconvertible<type> {\
- typedef string_support toQString;\
- typedef variant_support toQVariant;\
-}
+    template <> struct QVconvertible<type> {\
+        typedef string_support toQString;\
+        typedef variant_support toQVariant;\
+    }
 
 // The only types needed here are the types handled in readEntry/writeEntry
 // the default QVconvertible will take care of the rest.

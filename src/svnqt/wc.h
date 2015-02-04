@@ -46,17 +46,17 @@
 
 namespace svn
 {
-  /**
-   * Class that deals with a working copy
-   */
-  class SVNQT_EXPORT Wc
-  {
-  public:
+/**
+ * Class that deals with a working copy
+ */
+class SVNQT_EXPORT Wc
+{
+public:
 
     /** initialize
      * @param context the context to use for cancel operations, if 0 then no cancel operation possible
      */
-    Wc(const ContextP&context);
+    Wc(const ContextP &context);
     ~Wc();
     /**
      * check if Path is a valid working directory
@@ -65,7 +65,7 @@ namespace svn
      * @return true=valid working copy
      */
     static bool
-    checkWc (const QString& dir);
+    checkWc(const QString &dir);
 
     /**
      * ensure that an administrative area exists for @a dir, so that @a dir
@@ -80,31 +80,31 @@ namespace svn
      * @sa svn_wc_ensure_adm3 for more details
      */
     static void
-    ensureAdm (const QString& dir, const QString& uuid,
-               const QString& url, const Revision & revision,
-               const QString&repository, Depth depth) throw (ClientException);
+    ensureAdm(const QString &dir, const QString &uuid,
+              const QString &url, const Revision &revision,
+              const QString &repository, Depth depth) throw (ClientException);
 
     /**
      * retrieve the url of a given working copy item
      * @param path the working copy item to check
      * @return the repository url of @a path
      */
-    QString getUrl(const QString&path)const throw (ClientException);
-    QString getRepos(const QString&path)const throw (ClientException);
-    Entry getEntry(const QString &path)const throw ( ClientException );
+    QString getUrl(const QString &path)const throw (ClientException);
+    QString getRepos(const QString &path)const throw (ClientException);
+    Entry getEntry(const QString &path)const throw (ClientException);
 
     /**
      * @return returns the context (may 0)
      */
-    const ContextP getContext () const;
+    const ContextP getContext() const;
 
-    static const char * ADM_DIR_NAME;
+    static const char *ADM_DIR_NAME;
 
-  private:
+private:
     Wc();
-    Wc(const Wc&);
+    Wc(const Wc &);
     ContextP _context;
-  };
+};
 }
 
 #endif

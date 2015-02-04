@@ -36,102 +36,101 @@
 #include "svn_time.h"
 #include "svn_version.h"
 
-
 namespace svn
 {
-  LockEntry::LockEntry ()
-    : date(0),exp(0),locked(false)
-  {
-  }
+LockEntry::LockEntry()
+    : date(0), exp(0), locked(false)
+{
+}
 
-  LockEntry::LockEntry (
+LockEntry::LockEntry(
     const apr_time_t lock_time,
     const apr_time_t expiration_time,
-    const char * lock_owner,
-    const char * lock_comment,
-    const char * lock_token)
-    : date(lock_time),exp(expiration_time),
-    owner(lock_owner?QString::FROMUTF8(lock_owner):QString()),
-    comment(lock_comment?QString::FROMUTF8(lock_comment):QString()),
-    token(lock_token?QString::FROMUTF8(lock_token):QString()),
-      locked(lock_token?true:false)
-  {
-  }
-  const QString&LockEntry::Comment()const
-  {
+    const char *lock_owner,
+    const char *lock_comment,
+    const char *lock_token)
+    : date(lock_time), exp(expiration_time),
+      owner(lock_owner ? QString::FROMUTF8(lock_owner) : QString()),
+      comment(lock_comment ? QString::FROMUTF8(lock_comment) : QString()),
+      token(lock_token ? QString::FROMUTF8(lock_token) : QString()),
+      locked(lock_token ? true : false)
+{
+}
+const QString &LockEntry::Comment()const
+{
     return comment;
-  }
-  const QString&LockEntry::Owner()const
-  {
+}
+const QString &LockEntry::Owner()const
+{
     return owner;
-  }
-  const QString&LockEntry::Token()const
-  {
+}
+const QString &LockEntry::Token()const
+{
     return token;
-  }
-  const DateTime&LockEntry::Date()const
-  {
+}
+const DateTime &LockEntry::Date()const
+{
     return date;
-  }
-  const DateTime&LockEntry::Expiration()const
-  {
+}
+const DateTime &LockEntry::Expiration()const
+{
     return exp;
-  }
-  bool LockEntry::Locked()const
-  {
+}
+bool LockEntry::Locked()const
+{
     return locked;
-  }
-  void LockEntry::init(const svn_wc_entry_t * src)
-  {
+}
+void LockEntry::init(const svn_wc_entry_t *src)
+{
     if (src) {
-      date = src->lock_creation_date;
-      locked = src->lock_token?true:false;
-      token = (src->lock_token?QString::FROMUTF8(src->lock_token):QString());
-      comment = (src->lock_comment?QString::FROMUTF8(src->lock_comment):QString());
-      owner = (src->lock_owner?QString::FROMUTF8(src->lock_owner):QString());
+        date = src->lock_creation_date;
+        locked = src->lock_token ? true : false;
+        token = (src->lock_token ? QString::FROMUTF8(src->lock_token) : QString());
+        comment = (src->lock_comment ? QString::FROMUTF8(src->lock_comment) : QString());
+        owner = (src->lock_owner ? QString::FROMUTF8(src->lock_owner) : QString());
     } else {
-      date = 0;
-      owner.clear();
-      comment.clear();
-      token.clear();
-      locked = false;
+        date = 0;
+        owner.clear();
+        comment.clear();
+        token.clear();
+        locked = false;
     }
     exp = 0;
-  }
+}
 
-  void LockEntry::init(const svn_lock_t* src)
-  {
+void LockEntry::init(const svn_lock_t *src)
+{
     if (src) {
-      date = src->creation_date;
-      locked = src->token?true:false;
-      token = (src->token?QString::FROMUTF8(src->token):QString());
-      comment = (src->comment?QString::FROMUTF8(src->comment):QString());
-      owner = (src->owner?QString::FROMUTF8(src->owner):QString());
+        date = src->creation_date;
+        locked = src->token ? true : false;
+        token = (src->token ? QString::FROMUTF8(src->token) : QString());
+        comment = (src->comment ? QString::FROMUTF8(src->comment) : QString());
+        owner = (src->owner ? QString::FROMUTF8(src->owner) : QString());
     } else {
-      date = 0;
-      exp = 0;
-      owner.clear();
-      comment.clear();
-      token.clear();
-      locked = false;
+        date = 0;
+        exp = 0;
+        owner.clear();
+        comment.clear();
+        token.clear();
+        locked = false;
     }
 
-  }
+}
 
-  void LockEntry::init(
+void LockEntry::init(
     const apr_time_t lock_time,
     const apr_time_t expiration_time,
-    const char * lock_owner,
-    const char * lock_comment,
-    const char * lock_token)
-  {
+    const char *lock_owner,
+    const char *lock_comment,
+    const char *lock_token)
+{
     date = lock_time;
     exp = expiration_time;
-    locked = lock_token?true:false;
-    token = lock_token?QString::FROMUTF8(lock_token):QString();
-    owner = lock_owner?QString::FROMUTF8(lock_owner):QString();
-    comment = lock_comment?QString::FROMUTF8(lock_comment):QString();
-  }
+    locked = lock_token ? true : false;
+    token = lock_token ? QString::FROMUTF8(lock_token) : QString();
+    owner = lock_owner ? QString::FROMUTF8(lock_owner) : QString();
+    comment = lock_comment ? QString::FROMUTF8(lock_comment) : QString();
+}
 }
 
 /* -----------------------------------------------------------------

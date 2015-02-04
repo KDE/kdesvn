@@ -35,8 +35,8 @@
 #include <KUrl>
 #include <KLocale>
 
-SvnTreeView::SvnTreeView(QWidget * parent)
-    :QTreeView(parent)
+SvnTreeView::SvnTreeView(QWidget *parent)
+    : QTreeView(parent)
 {
 
 }
@@ -49,26 +49,28 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
 {
     // only one dragging at time
     static bool isDrag = false;
-    if (isDrag) return;
+    if (isDrag) {
+        return;
+    }
     isDrag = true;
     QModelIndexList indexes = selectionModel()->selectedRows();
-    if (indexes.count()>0) {
-        QMimeData * data = model()->mimeData(indexes);
+    if (indexes.count() > 0) {
+        QMimeData *data = model()->mimeData(indexes);
         if (data == 0) {
             isDrag = false;
             return;
         }
-        QDrag* drag = new QDrag(this);
+        QDrag *drag = new QDrag(this);
         QPixmap pixmap;
         if (indexes.count() == 1) {
-            QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
-            SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
+            QAbstractProxyModel *proxyModel = static_cast<QAbstractProxyModel *>(model());
+            SvnItemModel *itemModel = static_cast<SvnItemModel *>(proxyModel->sourceModel());
             const QModelIndex index = proxyModel->mapToSource(indexes.first());
 
-            SvnItemModelNode*item = itemModel->nodeForIndex(index);
-            pixmap = item->getPixmap(KIconLoader::SizeMedium,false);
+            SvnItemModelNode *item = itemModel->nodeForIndex(index);
+            pixmap = item->getPixmap(KIconLoader::SizeMedium, false);
         } else {
-            pixmap = KIcon("document-multiple").pixmap(KIconLoader::SizeMedium,KIconLoader::SizeMedium);
+            pixmap = KIcon("document-multiple").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
         }
         drag->setPixmap(pixmap);
         drag->setMimeData(data);
@@ -77,86 +79,85 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
     isDrag = false;
 }
 
-void SvnTreeView::dropEvent(QDropEvent*event)
+void SvnTreeView::dropEvent(QDropEvent *event)
 {
     if (!KUrl::List::canDecode(event->mimeData())) {
         return;
     }
 
-    QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
+    QAbstractProxyModel *proxyModel = static_cast<QAbstractProxyModel *>(model());
 
     const QModelIndex index = indexAt(event->pos());
     QModelIndex index2;
     QMap<QString, QString> metaMap;
     if (index.isValid()) {
-         index2 = proxyModel->mapToSource(index);
+        index2 = proxyModel->mapToSource(index);
     }
 
     Qt::DropAction action = event->dropAction();
-    KUrl::List list = KUrl::List::fromMimeData(event->mimeData(),&metaMap);
+    KUrl::List list = KUrl::List::fromMimeData(event->mimeData(), &metaMap);
     bool intern = false;
-    if (metaMap.find("kdesvn-source")!=metaMap.end()) {
-        SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
+    if (metaMap.find("kdesvn-source") != metaMap.end()) {
+        SvnItemModel *itemModel = static_cast<SvnItemModel *>(proxyModel->sourceModel());
         QMap<QString, QString>::const_iterator it = metaMap.constFind("kdesvn-id");
-        if (it!=metaMap.constEnd() && it.value()==itemModel->uniqueIdentifier()) {
-            intern=true;
+        if (it != metaMap.constEnd() && it.value() == itemModel->uniqueIdentifier()) {
+            intern = true;
         }
     }
     Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
 
-
-    QMetaObject::invokeMethod(this,"doDrop",
-        Q_ARG(KUrl::List,list),
-        Q_ARG(QModelIndex,index2),
-        Q_ARG(bool,intern),
-        Q_ARG(Qt::DropAction,action),
-        Q_ARG(Qt::KeyboardModifiers,modifiers)
-        );
+    QMetaObject::invokeMethod(this, "doDrop",
+                              Q_ARG(KUrl::List, list),
+                              Q_ARG(QModelIndex, index2),
+                              Q_ARG(bool, intern),
+                              Q_ARG(Qt::DropAction, action),
+                              Q_ARG(Qt::KeyboardModifiers, modifiers)
+                             );
     event->acceptProposedAction();
 }
 
-void SvnTreeView::doDrop(const KUrl::List&list,const QModelIndex&parent,bool intern,Qt::DropAction action,Qt::KeyboardModifiers modifiers)
+void SvnTreeView::doDrop(const KUrl::List &list, const QModelIndex &parent, bool intern, Qt::DropAction action, Qt::KeyboardModifiers modifiers)
 {
     if (intern && ((modifiers & Qt::ControlModifier) == 0) &&
-         ((modifiers & Qt::ShiftModifier) == 0) ) {
+            ((modifiers & Qt::ShiftModifier) == 0)) {
 
         QMenu popup;
-        QString seq = QKeySequence( Qt::ShiftModifier ).toString();
+        QString seq = QKeySequence(Qt::ShiftModifier).toString();
         seq.chop(1); // chop superfluous '+'
-        QAction* popupMoveAction = new QAction(i18n( "&Move Here" ) + '\t' + seq, this);
+        QAction *popupMoveAction = new QAction(i18n("&Move Here") + '\t' + seq, this);
         popupMoveAction->setIcon(KIcon("go-jump"));
-        seq = QKeySequence( Qt::ControlModifier ).toString();
+        seq = QKeySequence(Qt::ControlModifier).toString();
         seq.chop(1);
-        QAction* popupCopyAction = new QAction(i18n( "&Copy Here" ) + '\t' + seq, this);
+        QAction *popupCopyAction = new QAction(i18n("&Copy Here") + '\t' + seq, this);
         popupCopyAction->setIcon(KIcon("edit-copy"));
-        QAction* popupCancelAction = new QAction(i18n( "C&ancel" ) + '\t' + QKeySequence( Qt::Key_Escape ).toString(), this);
+        QAction *popupCancelAction = new QAction(i18n("C&ancel") + '\t' + QKeySequence(Qt::Key_Escape).toString(), this);
         popupCancelAction->setIcon(KIcon("process-stop"));
 
         popup.addAction(popupMoveAction);
         popup.addAction(popupCopyAction);
         popup.addSeparator();
         popup.addAction(popupCancelAction);
-        QAction* result = popup.exec(QCursor::pos());
+        QAction *result = popup.exec(QCursor::pos());
 
-        if(result == popupCopyAction) {
+        if (result == popupCopyAction) {
             action = Qt::CopyAction;
-        } else if(result == popupMoveAction) {
+        } else if (result == popupMoveAction) {
             action = Qt::MoveAction;
-        } else if(result == popupCancelAction || !result) {
+        } else if (result == popupCancelAction || !result) {
             return;
         }
     }
 
-    QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
-    SvnItemModel* itemModel = static_cast<SvnItemModel*>(proxyModel->sourceModel());
+    QAbstractProxyModel *proxyModel = static_cast<QAbstractProxyModel *>(model());
+    SvnItemModel *itemModel = static_cast<SvnItemModel *>(proxyModel->sourceModel());
     QModelIndex _p;
-    if (!parent.isValid() && (_p = rootIndex()).isValid() ) {
-        QAbstractProxyModel* proxyModel = static_cast<QAbstractProxyModel*>(model());
+    if (!parent.isValid() && (_p = rootIndex()).isValid()) {
+        QAbstractProxyModel *proxyModel = static_cast<QAbstractProxyModel *>(model());
         _p = proxyModel->mapToSource(_p);
     } else {
         _p = parent;
     }
-    itemModel->dropUrls(list,action,parent.row(),parent.column(),_p,intern);
+    itemModel->dropUrls(list, action, parent.row(), parent.column(), _p, intern);
 }
 
 #include "svntreeview.moc"

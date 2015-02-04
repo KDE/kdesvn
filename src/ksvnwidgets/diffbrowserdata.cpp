@@ -23,17 +23,16 @@
 /*!
     \fn DiffBrowserData::DiffBrowserData()
  */
- DiffBrowserData::DiffBrowserData()
+DiffBrowserData::DiffBrowserData()
 {
-    m_Syntax=0;
-    srchdialog=0;
+    m_Syntax = 0;
+    srchdialog = 0;
 }
-
 
 /*!
     \fn DiffBrowserData::~DiffBrowserData()
  */
- DiffBrowserData::~DiffBrowserData()
+DiffBrowserData::~DiffBrowserData()
 {
     delete m_Syntax;
     delete srchdialog;

@@ -21,18 +21,16 @@
 
 #include <qwidget.h>
 
-WidgetBlockStack::WidgetBlockStack(QWidget*w)
+WidgetBlockStack::WidgetBlockStack(QWidget *w)
 {
-    if ( (_w=w))
-    {
+    if ((_w = w)) {
         _w->setEnabled(false);
     }
 }
 
 WidgetBlockStack::~WidgetBlockStack()
 {
-    if (_w)
-    {
+    if (_w) {
         _w->setEnabled(true);
     }
 }

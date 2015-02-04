@@ -31,62 +31,65 @@ class SvnActions;
 class MainTreeWidget;
 class SvnItemModel;
 
-class SvnItemModelNode:public SvnItem
+class SvnItemModelNode: public SvnItem
 {
 public:
-    SvnItemModelNode(SvnItemModelNodeDir*_parent,SvnActions*,MainTreeWidget*);
+    SvnItemModelNode(SvnItemModelNodeDir *_parent, SvnActions *, MainTreeWidget *);
     virtual ~SvnItemModelNode();
 
     int rowNumber() const;
 
-    SvnItemModelNodeDir*parent()const;
+    SvnItemModelNodeDir *parent()const;
 
     /************************
      * Methods from SvnItem *
      ************************/
     virtual QString getParentDir()const;
-    virtual SvnItem* getParentItem()const;
-    virtual const svn::Revision& correctPeg()const;
-    virtual void refreshStatus(bool children=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false);
-    virtual SvnActions* getWrapper() const;
+    virtual SvnItem *getParentItem()const;
+    virtual const svn::Revision &correctPeg()const;
+    virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false);
+    virtual SvnActions *getWrapper() const;
     virtual bool NodeIsDir();
     virtual bool NodeHasChilds();
 
     virtual char sortChar();
-    virtual SvnItemModelNode*sItem(){return this;}
+    virtual SvnItemModelNode *sItem()
+    {
+        return this;
+    }
 
     QColor backgroundColor();
 
 protected:
-    SvnItemModelNodeDir* _parentNode;
-    SvnActions*_actions;
-    MainTreeWidget*_display;
+    SvnItemModelNodeDir *_parentNode;
+    SvnActions *_actions;
+    MainTreeWidget *_display;
 };
 
-class SvnItemModelNodeDir:public SvnItemModelNode
+class SvnItemModelNodeDir: public SvnItemModelNode
 {
     friend class SvnItemModel;
 public:
-    SvnItemModelNodeDir(SvnActions*,MainTreeWidget*);
-    SvnItemModelNodeDir(SvnItemModelNodeDir*_parent,SvnActions*,MainTreeWidget*);
+    SvnItemModelNodeDir(SvnActions *, MainTreeWidget *);
+    SvnItemModelNodeDir(SvnItemModelNodeDir *_parent, SvnActions *, MainTreeWidget *);
     virtual ~SvnItemModelNodeDir();
     virtual bool NodeIsDir();
 
-    const QList<SvnItemModelNode*>& childList()const;
-    SvnItemModelNode* child(int row)const;
+    const QList<SvnItemModelNode *> &childList()const;
+    SvnItemModelNode *child(int row)const;
 
-    SvnItemModelNode* findPath(const QStringList&parts);
-    int indexOf(const QString&fullPath);
+    SvnItemModelNode *findPath(const QStringList &parts);
+    int indexOf(const QString &fullPath);
     virtual char sortChar();
 
-    bool contains(const QString&fullName);
-    virtual void refreshStatus(bool children=false,const QList<SvnItem*>&exclude=QList<SvnItem*>(),bool depsonly=false);
+    bool contains(const QString &fullName);
+    virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false);
 
     void clear();
     virtual bool NodeHasChilds();
 
 protected:
-    QList<SvnItemModelNode*> m_Children;
+    QList<SvnItemModelNode *> m_Children;
 };
 
 #endif

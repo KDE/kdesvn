@@ -26,9 +26,10 @@
 #include <svn_client.h>
 #include <svn_props.h>
 
-namespace svn {
+namespace svn
+{
 
-CommitItem::CommitItem(const svn_client_commit_item_t*_item)
+CommitItem::CommitItem(const svn_client_commit_item_t *_item)
 {
     init();
     if (_item) {
@@ -46,7 +47,7 @@ CommitItem::CommitItem(const svn_client_commit_item_t*_item)
     }
 }
 
-CommitItem::CommitItem(const svn_client_commit_item2_t*_item)
+CommitItem::CommitItem(const svn_client_commit_item2_t *_item)
 {
     init();
 
@@ -62,7 +63,7 @@ CommitItem::CommitItem(const svn_client_commit_item2_t*_item)
     }
 }
 
-CommitItem::CommitItem(const svn_client_commit_item3_t*_item)
+CommitItem::CommitItem(const svn_client_commit_item3_t *_item)
 {
     init();
 
@@ -76,31 +77,32 @@ CommitItem::CommitItem(const svn_client_commit_item3_t*_item)
         m_CopyFromUrl = QString::FROMUTF8(_item->copyfrom_url);
         m_State = _item->state_flags;
         convertprop(_item->incoming_prop_changes);
-        if (_item->outgoing_prop_changes)
-        {
+        if (_item->outgoing_prop_changes) {
             convertprop(_item->outgoing_prop_changes);
         }
 #endif
     }
 }
 
-void CommitItem::convertprop(apr_array_header_t * list)
+void CommitItem::convertprop(apr_array_header_t *list)
 {
     if (!list) {
         m_CommitProperties.clear();
         return;
     }
     for (int j = 0; j < list->nelts; ++j) {
-        svn_prop_t * item = ((svn_prop_t **)list->elts)[j];
-        if (!item) continue;
-        m_CommitProperties[QString::FROMUTF8(item->name)]=QString::FROMUTF8(item->value->data,item->value->len);
+        svn_prop_t *item = ((svn_prop_t **)list->elts)[j];
+        if (!item) {
+            continue;
+        }
+        m_CommitProperties[QString::FROMUTF8(item->name)] = QString::FROMUTF8(item->value->data, item->value->len);
     }
 }
 
 void CommitItem::init()
 {
     m_Kind = svn_node_unknown;
-    m_Revision=m_CopyFromRevision = -1;
+    m_Revision = m_CopyFromRevision = -1;
     m_State = 0;
     m_CommitProperties.clear();
 }
@@ -109,22 +111,22 @@ CommitItem::~CommitItem()
 {
 }
 
-const QString& CommitItem::path()const
+const QString &CommitItem::path()const
 {
     return m_Path;
 }
 
-const QString& CommitItem::url()const
+const QString &CommitItem::url()const
 {
     return m_Url;
 }
 
-const QString& CommitItem::copyfromurl()const
+const QString &CommitItem::copyfromurl()const
 {
     return m_CopyFromUrl;
 }
 
-const PropertiesMap& CommitItem::properties()const
+const PropertiesMap &CommitItem::properties()const
 {
     return m_CommitProperties;
 }
@@ -151,17 +153,17 @@ apr_byte_t CommitItem::state()const
 
 char CommitItem::actionType()const
 {
-    char r=0;
+    char r = 0;
     if (m_State & SVN_CLIENT_COMMIT_ITEM_IS_COPY) {
         r = 'C';
-    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_ADD){
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_ADD) {
         r = 'A';
-    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_DELETE){
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_DELETE) {
         r = 'D';
     } else if (m_State & SVN_CLIENT_COMMIT_ITEM_PROP_MODS ||
-        m_State & SVN_CLIENT_COMMIT_ITEM_TEXT_MODS){
+               m_State & SVN_CLIENT_COMMIT_ITEM_TEXT_MODS) {
         r = 'M';
-    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_LOCK_TOKEN){
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_LOCK_TOKEN) {
         r = 'L';
     }
     return r;

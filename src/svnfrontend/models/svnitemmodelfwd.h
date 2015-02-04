@@ -29,17 +29,18 @@ class SvnItemModelNode;
 class SvnItemModelNodeDir;
 class SvnItemModel;
 
-namespace svnmodel {
+namespace svnmodel
+{
 
-    enum ItemType {
-        None = 0x0,
-        Dir  = 1,
-        File = 2,
-        All = Dir|File
-    };
+enum ItemType {
+    None = 0x0,
+    Dir  = 1,
+    File = 2,
+    All = Dir | File
+};
 
-    Q_DECLARE_FLAGS(ItemTypeFlag, ItemType);
-    Q_DECLARE_OPERATORS_FOR_FLAGS(svnmodel::ItemTypeFlag);
+Q_DECLARE_FLAGS(ItemTypeFlag, ItemType);
+Q_DECLARE_OPERATORS_FOR_FLAGS(svnmodel::ItemTypeFlag);
 }
 
 #endif

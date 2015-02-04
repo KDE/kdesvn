@@ -41,26 +41,28 @@ template<class T> class SharedPointer;
 /*!
  * Data container for svn::SharedPointer
  */
-template<class T> class SharedPointerData:public ref_count
+template<class T> class SharedPointerData: public ref_count
 {
     friend class SharedPointer<T>;
 protected:
     //! The protected pointer
-    T*data;
+    T *data;
 public:
     //! Constructor
     /*!
      * Take ownership of pointer dt
      * \param dt the data to wrap
      **/
-    SharedPointerData(T*dt){
+    SharedPointerData(T *dt)
+    {
         data = dt;
     }
     //! Destructor
     /*!
      * Release content data
      */
-    ~SharedPointerData() {
+    ~SharedPointerData()
+    {
         delete data;
     }
 };
@@ -74,10 +76,11 @@ public:
 template<class T> class SharedPointer
 {
     typedef SharedPointerData<T> Data;
-    Data*data;
+    Data *data;
 
     //! count down reference of data and release if it was the last share
-    void unref(){
+    void unref()
+    {
         if (data) {
             data->Decr();
             if (!data->Shared()) {
@@ -88,23 +91,25 @@ template<class T> class SharedPointer
     }
 public:
     //! empty constructor
-    SharedPointer():data(0){}
+    SharedPointer(): data(0) {}
     //! copy constructor
     /*!
      * \param p Data to increase reference for
      */
-    SharedPointer(const SharedPointer<T>& p)
+    SharedPointer(const SharedPointer<T> &p)
     {
-        if ( (data = p.data) ) data->Incr();
+        if ((data = p.data)) {
+            data->Incr();
+        }
     }
     //! assignment constructor
     /*!
      * Take ownership of data pointer t
      * \param t data pointer to store inside
      */
-    SharedPointer(T*t)
+    SharedPointer(T *t)
     {
-        data = new Data(t);data->Incr();
+        data = new Data(t); data->Incr();
     }
     //! destructor
     /*!
@@ -119,21 +124,25 @@ public:
     /*!
      * \param p Data to increase reference for
      */
-    SharedPointer<T> &operator=(const SharedPointer<T>&p)
+    SharedPointer<T> &operator=(const SharedPointer<T> &p)
     {
         // we always have a reference to the data
-        if (data==p.data) return *this;
+        if (data == p.data) {
+            return *this;
+        }
         unref();
-        if ((data=p.data)) data->Incr();
+        if ((data = p.data)) {
+            data->Incr();
+        }
         return *this;
     }
     //! assignment operator
     /*!
      * \param p Data to increase reference for
      */
-    SharedPointer<T> &operator=(T*p)
+    SharedPointer<T> &operator=(T *p)
     {
-        if (data && data->data==p) {
+        if (data && data->data == p) {
             return *this;
         }
         unref();
@@ -147,54 +156,87 @@ public:
      * Use this operator with care!
      * \return pointer to wrapped data
      */
-    operator T*()const       {return data->data;}
+    operator T *()const
+    {
+        return data->data;
+    }
     //! access operator
     /*!
      * \return reference to wrapped data
      */
-    T& operator*()           {return *data->data;}
+    T &operator*()
+    {
+        return *data->data;
+    }
     //! access operator
     /*!
      * \return const reference to wrapped data
      */
-    const T& operator*()const{return *data->data;}
+    const T &operator*()const
+    {
+        return *data->data;
+    }
     //! access operator
     /*!
      * \return pointer to wrapped data
      */
-    T*operator->()           {return data->data;}
+    T *operator->()
+    {
+        return data->data;
+    }
     //! access operator
     /*!
      * \return const pointer to wrapped data
      */
-    const T*operator->()const{return data->data;}
+    const T *operator->()const
+    {
+        return data->data;
+    }
 
     //! Bool operator
     /*!
      * \return true if content set and not a null-pointer, otherwise false
      */
-    operator bool () const { return (data != 0 && data->data != 0); }
+    operator bool () const
+    {
+        return (data != 0 && data->data != 0);
+    }
     //! Bool operator
     /*!
      * \return true if content set and not a null-pointer, otherwise false
      */
-    operator bool () { return ( data != 0 && data->data != 0 );}
+    operator bool ()
+    {
+        return (data != 0 && data->data != 0);
+    }
 
     //! Negation operator
     /*!
      * \return true if content not set or a null-pointer, otherwise false
      */
-    bool operator! () const { return (data == 0 || data->data == 0); }
+    bool operator!() const
+    {
+        return (data == 0 || data->data == 0);
+    }
     //! Negation operator
     /*!
      * \return true if content not set or a null-pointer, otherwise false
      */
-    bool operator! () { return (data == 0 || data->data == 0); }
+    bool operator!()
+    {
+        return (data == 0 || data->data == 0);
+    }
 
     //! required for searches in lists etc.
-    bool operator==(const T*p)const{return (data != 0 && data->data==p);}
+    bool operator==(const T *p)const
+    {
+        return (data != 0 && data->data == p);
+    }
     //! required for searches in lists etc.
-    bool operator==(T*p){return (data && data->data==p);}
+    bool operator==(T *p)
+    {
+        return (data && data->data == p);
+    }
 };
 
 }

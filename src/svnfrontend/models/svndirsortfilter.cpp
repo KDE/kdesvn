@@ -24,7 +24,7 @@
 #include <kdebug.h>
 
 SvnDirSortFilterProxy::SvnDirSortFilterProxy(QObject *parent)
-    :SvnSortFilterProxy(parent)
+    : SvnSortFilterProxy(parent)
 {
     setShowFilter(svnmodel::Dir);
 }
@@ -33,7 +33,7 @@ SvnDirSortFilterProxy::~SvnDirSortFilterProxy()
 {
 }
 
-int SvnDirSortFilterProxy::columnCount(const QModelIndex & parent)const
+int SvnDirSortFilterProxy::columnCount(const QModelIndex &parent)const
 {
     Q_UNUSED(parent);
     return 1;

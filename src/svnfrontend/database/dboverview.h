@@ -26,21 +26,21 @@ class DbOverViewData;
 
 namespace svn
 {
-    class Client;
+class Client;
 }
 
-class DbOverview: public QWidget,public Ui::DBOverView
+class DbOverview: public QWidget, public Ui::DBOverView
 {
     Q_OBJECT
 public:
     DbOverview(QWidget *parent = 0);
     virtual ~DbOverview();
 
-    static void showDbOverview(svn::Client*aClient = 0);
+    static void showDbOverview(svn::Client *aClient = 0);
 
 protected Q_SLOTS:
-    virtual void itemActivated(const QItemSelection&,const QItemSelection&);
-    virtual void setClient(svn::Client*aClient);
+    virtual void itemActivated(const QItemSelection &, const QItemSelection &);
+    virtual void setClient(svn::Client *aClient);
     virtual void deleteCacheItems();
     virtual void deleteRepository();
     virtual void repositorySettings();
@@ -48,10 +48,10 @@ protected Q_SLOTS:
 protected:
     QString selectedRepository()const;
     void enableButtons(bool);
-    void genInfo(const QString&);
+    void genInfo(const QString &);
 
 private:
-    DbOverViewData * _data;
+    DbOverViewData *_data;
 };
 
 #endif

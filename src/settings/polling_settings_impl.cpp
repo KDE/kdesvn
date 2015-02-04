@@ -18,11 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #include "polling_settings_impl.h"
 
-PollingSettings_impl::PollingSettings_impl(QWidget* parent)
-: QWidget(parent)
+PollingSettings_impl::PollingSettings_impl(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
 }
@@ -32,7 +31,6 @@ PollingSettings_impl::~PollingSettings_impl()
 }
 
 /*$SPECIALIZATION$*/
-
 
 #include "polling_settings_impl.moc"
 

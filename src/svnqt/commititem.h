@@ -36,12 +36,14 @@ struct svn_client_commit_item2_t;
 // only used if build against svn 1.5 api
 struct svn_client_commit_item3_t;
 
-namespace svn {
+namespace svn
+{
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
-class SVNQT_EXPORT CommitItem{
+class SVNQT_EXPORT CommitItem
+{
 
 private:
     void init();
@@ -49,33 +51,33 @@ private:
 
 protected:
     PropertiesMap m_CommitProperties;
-    QString m_Path,m_Url,m_CopyFromUrl;
+    QString m_Path, m_Url, m_CopyFromUrl;
     svn_node_kind_t m_Kind;
-    svn_revnum_t m_Revision,m_CopyFromRevision;
+    svn_revnum_t m_Revision, m_CopyFromRevision;
     apr_byte_t m_State;
 
 public:
     //! constructor
-    CommitItem(const svn_client_commit_item_t*aSource=0);
+    CommitItem(const svn_client_commit_item_t *aSource = 0);
     //! constructor
     /*!
      * This one will only do something if build against subversion 1.3
      */
-    CommitItem(const svn_client_commit_item2_t*);
+    CommitItem(const svn_client_commit_item2_t *);
     /*!
      * This one will only do something if build against subversion 1.5
      */
-    CommitItem(const svn_client_commit_item3_t*);
+    CommitItem(const svn_client_commit_item3_t *);
     //! Destructor
     /*!
      * Not virtual 'cause no child class is needed
      */
     ~CommitItem();
 
-    const QString& path()const;
-    const QString& url()const;
-    const QString& copyfromurl()const;
-    const PropertiesMap& properties()const;
+    const QString &path()const;
+    const QString &url()const;
+    const QString &copyfromurl()const;
+    const PropertiesMap &properties()const;
     svn_revnum_t revision()const;
     svn_revnum_t copyfromrevision()const;
     svn_node_kind_t kind()const;

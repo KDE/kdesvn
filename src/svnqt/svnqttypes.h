@@ -34,99 +34,100 @@
 
 namespace svn
 {
-    // forward declarations
-    class AnnotateLine;
-    class Context;
-    class DirEntry;
-    class Entry;
-    class InfoEntry;
-    class LogEntry;
-    class Revision;
-    class Status;
-    class Targets;
-    class Path;
-    class StringArray;
-    class CommitItem;
-    class CopyParameter;
-    class DiffParameter;
-    class StatusParameter;
-    class LogParameter;
-    class PropertiesParameter;
-    class MergeParameter;
-    class CheckoutParameter;
-    class CommitParameter;
-    class AnnotateParameter;
-    class UpdateParameter;
+// forward declarations
+class AnnotateLine;
+class Context;
+class DirEntry;
+class Entry;
+class InfoEntry;
+class LogEntry;
+class Revision;
+class Status;
+class Targets;
+class Path;
+class StringArray;
+class CommitItem;
+class CopyParameter;
+class DiffParameter;
+class StatusParameter;
+class LogParameter;
+class PropertiesParameter;
+class MergeParameter;
+class CheckoutParameter;
+class CommitParameter;
+class AnnotateParameter;
+class UpdateParameter;
 
-    typedef QLIST<AnnotateLine> AnnotatedFile;
-    typedef smart_pointer<svn::Context> ContextP;
+typedef QLIST<AnnotateLine> AnnotatedFile;
+typedef smart_pointer<svn::Context> ContextP;
 
-    typedef SharedPointer<DirEntry> DirEntryPtr;
-    typedef QLIST<DirEntryPtr> DirEntries;
-    typedef QLIST<InfoEntry> InfoEntries;
-    /// simple list of log entries
-    typedef QLIST<LogEntry> LogEntries;
-    /// shared_pointer for LogEntriesMap
-    typedef SharedPointer<LogEntries> LogEntriesPtr;
+typedef SharedPointer<DirEntry> DirEntryPtr;
+typedef QLIST<DirEntryPtr> DirEntries;
+typedef QLIST<InfoEntry> InfoEntries;
+/// simple list of log entries
+typedef QLIST<LogEntry> LogEntries;
+/// shared_pointer for LogEntriesMap
+typedef SharedPointer<LogEntries> LogEntriesPtr;
 
-    /// map of logentries - key is revision
-    typedef QMap<long,LogEntry> LogEntriesMap;
-    /// shared_pointer for LogEntriesMap
-    typedef SharedPointer<LogEntriesMap> LogEntriesMapPtr;
+/// map of logentries - key is revision
+typedef QMap<long, LogEntry> LogEntriesMap;
+/// shared_pointer for LogEntriesMap
+typedef SharedPointer<LogEntriesMap> LogEntriesMapPtr;
 
-    typedef SharedPointer<Status> StatusPtr;
-    typedef QLIST<StatusPtr> StatusEntries;
-    typedef QLIST<Revision> Revisions;
+typedef SharedPointer<Status> StatusPtr;
+typedef QLIST<StatusPtr> StatusEntries;
+typedef QLIST<Revision> Revisions;
 
-    /** Range of Revision */
-    typedef QPair<Revision,Revision> RevisionRange;
-    /** list of revision ranges */
-    typedef QLIST<RevisionRange> RevisionRanges;
+/** Range of Revision */
+typedef QPair<Revision, Revision> RevisionRange;
+/** list of revision ranges */
+typedef QLIST<RevisionRange> RevisionRanges;
 
-    /// map of property names to values
-    typedef QMap<QString,QString> PropertiesMap;
-    /// pair of path, PropertiesMap
-    typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
-    /// vector of path, Properties pairs
-    typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
-    /// shared pointer for properties
-    typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
+/// map of property names to values
+typedef QMap<QString, QString> PropertiesMap;
+/// pair of path, PropertiesMap
+typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
+/// vector of path, Properties pairs
+typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
+/// shared pointer for properties
+typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 
-    typedef QLIST<Path> Pathes;
+typedef QLIST<Path> Pathes;
 
-    typedef QLIST<CommitItem> CommitItemList;
+typedef QLIST<CommitItem> CommitItemList;
 
-    //! Mapper enum for svn_depth_t
-    /*!
-     * Until subversion prior 1.5 is supported by this lib we must hide the svn_depth_t enum from interface.
-     * \since subversion 1.5 / svnqt 1.0
-     * \sa svn_depth_t
-     */
-    enum Depth {
-        DepthUnknown,
-        DepthExclude,
-        DepthEmpty,
-        DepthFiles,
-        DepthImmediates,
-        DepthInfinity
-    };
+//! Mapper enum for svn_depth_t
+/*!
+ * Until subversion prior 1.5 is supported by this lib we must hide the svn_depth_t enum from interface.
+ * \since subversion 1.5 / svnqt 1.0
+ * \sa svn_depth_t
+ */
+enum Depth {
+    DepthUnknown,
+    DepthExclude,
+    DepthEmpty,
+    DepthFiles,
+    DepthImmediates,
+    DepthInfinity
+};
 
-    //! For search specific server capabilities
-    /*!
-     * \since subversion 1.5
-     * when build with subversion earlier 1.5 this will not used.
-     * \sa svn_repos_has_capability
-     */
-    enum Capability {
-        CapabilityMergeinfo=0,
-        CapabilityDepth,
-        CapabilityCommitRevProps,
-        CapabilityLogRevProps
-    };
+//! For search specific server capabilities
+/*!
+ * \since subversion 1.5
+ * when build with subversion earlier 1.5 this will not used.
+ * \sa svn_repos_has_capability
+ */
+enum Capability {
+    CapabilityMergeinfo = 0,
+    CapabilityDepth,
+    CapabilityCommitRevProps,
+    CapabilityLogRevProps
+};
 
-    namespace repository {
-        class CreateRepoParameter;
-    }
+namespace repository
+{
+class CreateRepoParameter;
+}
 }
 
 #endif

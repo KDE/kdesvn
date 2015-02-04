@@ -22,18 +22,19 @@
 
 #include "src/ksvnwidgets/ui_deleteform.h"
 
-class DeleteForm_impl: public QWidget, Ui::DeleteForm {
+class DeleteForm_impl: public QWidget, Ui::DeleteForm
+{
     Q_OBJECT
-    public:
-        DeleteForm_impl(QWidget *parent = 0);
-        virtual ~DeleteForm_impl();
+public:
+    DeleteForm_impl(QWidget *parent = 0);
+    virtual ~DeleteForm_impl();
 
-        void setStringList(const QStringList&);
+    void setStringList(const QStringList &);
 
-        bool keep_local()const;
-        bool force_delete()const;
+    bool keep_local()const;
+    bool force_delete()const;
 
-        void showExtraButtons(bool show);
+    void showExtraButtons(bool show);
 };
 
 #endif

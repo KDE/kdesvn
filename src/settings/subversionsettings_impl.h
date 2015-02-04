@@ -25,21 +25,21 @@
 
 class SubversionSettings_impl : public QWidget, public Ui::SubversionSettings
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  SubversionSettings_impl(QWidget* parent = 0);
-  ~SubversionSettings_impl();
-  /*$PUBLIC_FUNCTIONS$*/
+    SubversionSettings_impl(QWidget *parent = 0);
+    ~SubversionSettings_impl();
+    /*$PUBLIC_FUNCTIONS$*/
 
 public slots:
-  /*$PUBLIC_SLOTS$*/
+    /*$PUBLIC_SLOTS$*/
 
 protected:
-  /*$PROTECTED_FUNCTIONS$*/
+    /*$PROTECTED_FUNCTIONS$*/
 
 protected slots:
-  /*$PROTECTED_SLOTS$*/
+    /*$PROTECTED_SLOTS$*/
 
 };
 

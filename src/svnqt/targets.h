@@ -34,7 +34,6 @@
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
 
-
 // apr api
 #include "apr_tables.h"
 
@@ -42,27 +41,27 @@ class QStringList;
 
 namespace svn
 {
-  // forward declarations
-  class Pool;
+// forward declarations
+class Pool;
 
-  /**
-   * Encapsulation for Subversion target arrays handling
-   */
-  class SVNQT_EXPORT Targets
-  {
-  public:
+/**
+ * Encapsulation for Subversion target arrays handling
+ */
+class SVNQT_EXPORT Targets
+{
+public:
     /**
      * Constructor
      *
      * @param targets vector of paths
      */
-    Targets (const svn::Pathes & targets);
+    Targets(const svn::Pathes &targets);
 
     /**
      * Constructor
      * @param path a single paths
      */
-    Targets (const svn::Path & target);
+    Targets(const svn::Path &target);
 
     /**
      * Constructor from an APR array containing
@@ -70,7 +69,7 @@ namespace svn
      *
      * @param targets APR array header
      */
-    Targets (const apr_array_header_t * targets);
+    Targets(const apr_array_header_t *targets);
 
     /**
      * Constructor. Initializes list with just
@@ -78,31 +77,31 @@ namespace svn
      *
      * @param target
      */
-    Targets (const QString& target = QString());
+    Targets(const QString &target = QString());
     /**
      * Constructor. Initializes list with just
      * one entry
      *
      * @param target
      */
-    Targets (const char * target);
+    Targets(const char *target);
     /**
      * Constructor. Convert stringlist into target list.
      * @param targets
      */
-    Targets(const QStringList&targets);
+    Targets(const QStringList &targets);
 
     /**
      * Copy Constructor
      *
      * @param targets Source
      */
-    Targets (const Targets & targets);
+    Targets(const Targets &targets);
 
     /**
      * Destructor
      */
-    virtual ~Targets ();
+    virtual ~Targets();
 
     /**
      * Returns an apr array containing
@@ -111,7 +110,7 @@ namespace svn
      * @param pool Pool used for conversion
      */
     apr_array_header_t *
-    array (const Pool & pool) const;
+    array(const Pool &pool) const;
 
     /**
      * Returns a vector of paths
@@ -124,19 +123,19 @@ namespace svn
     /**
      * @return the number of targets
      */
-    size_t size () const;
+    size_t size() const;
 
     /**
      * operator to return the vector
      *
      * @return vector with targets
      */
-    operator const Pathes & () const
+    operator const Pathes &() const
     {
-      return m_targets;
+        return m_targets;
     }
 
-    const Path& operator [](size_t which)const;
+    const Path &operator [](size_t which)const;
     /**
      * returns one single target.
      * the first in the vector, if no parameter given if there are more
@@ -148,10 +147,9 @@ namespace svn
     const Path
     target(Pathes::size_type which) const;
 
-
-  private:
+private:
     Pathes m_targets;
-  };
+};
 }
 
 #endif

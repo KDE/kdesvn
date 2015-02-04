@@ -24,15 +24,15 @@
 #define CON_DBUS_BASE OrgKdeKdesvndInterface kdesvndInterface( "org.kde.kded", "/modules/kdesvnd", QDBusConnection::sessionBus() );\
     if(!kdesvndInterface.isValid()) {\
         kWarning() << "Communication with KDED:KdeSvnd failed";
-    
+
 #define CON_DBUS\
-        CON_DBUS_BASE\
-        return;\
+    CON_DBUS_BASE\
+    return;\
     }
-    
+
 #define CON_DBUS_VAL(x)\
-        CON_DBUS_BASE\
-        return x;\
+    CON_DBUS_BASE\
+    return x;\
     }
 
 #endif

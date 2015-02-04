@@ -31,7 +31,7 @@ LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent)
 {
     setupUi(this);
     m_Dumpfile->setMode(KFile::File);
-    m_Repository->setMode(KFile::Directory|KFile::LocalOnly);
+    m_Repository->setMode(KFile::Directory | KFile::LocalOnly);
 }
 
 LoadDmpDlg_impl::~LoadDmpDlg_impl()
@@ -45,7 +45,6 @@ bool LoadDmpDlg_impl::usePost()const
 {
     return m_UsePost->isChecked();
 }
-
 
 /*!
     \fn LoadDmpDlg_impl::usePre()const
@@ -73,7 +72,6 @@ int LoadDmpDlg_impl::uuidAction()const
     return 0;
 }
 
-
 /*!
     \fn LoadDmpDlg_impl::dumpFile()const
  */
@@ -82,7 +80,6 @@ KUrl LoadDmpDlg_impl::dumpFile()const
     return m_Dumpfile->url();
 }
 
-
 /*!
     \fn LoadDmpDlg_impl::repository()const
  */
@@ -90,7 +87,6 @@ QString LoadDmpDlg_impl::repository()const
 {
     return m_Repository->url().path(KUrl::RemoveTrailingSlash);
 }
-
 
 /*!
     \fn LoadDmpDlg_impl::parentPath()const

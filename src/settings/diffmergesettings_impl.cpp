@@ -26,7 +26,7 @@
 #include <kdebug.h>
 
 DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent)
-    :QWidget(parent)
+    : QWidget(parent)
 {
     setupUi(this);
     kcfg_external_diff_display->setEnabled(Kdesvnsettings::use_external_diff());

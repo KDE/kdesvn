@@ -26,23 +26,23 @@
 #include <QPixmap>
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
-class GraphTreeLabel : public QGraphicsRectItem,StoredDrawParams
+class GraphTreeLabel : public QGraphicsRectItem, StoredDrawParams
 {
 public:
-    GraphTreeLabel(const QString&,const QString&,const QRectF&r,QGraphicsItem*p=0);
+    GraphTreeLabel(const QString &, const QString &, const QRectF &r, QGraphicsItem *p = 0);
     virtual ~GraphTreeLabel();
 
     virtual int type()const;
     //virtual void drawShape(QPainter& p);
-    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+    virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
-    void setBgColor(const QColor&);
+    void setBgColor(const QColor &);
 
-    const QString&nodename()const;
-    const QString&source()const;
-    void setSource(const QString&);
+    const QString &nodename()const;
+    const QString &source()const;
+    void setSource(const QString &);
     virtual void setSelected(bool);
 
 protected:
@@ -52,45 +52,45 @@ protected:
 
 class GraphEdge;
 
-class GraphEdgeArrow:public QGraphicsPolygonItem
+class GraphEdgeArrow: public QGraphicsPolygonItem
 {
 public:
-    GraphEdgeArrow(GraphEdge*,QGraphicsItem*p=0);
-    GraphEdge*edge();
-    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+    GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = 0);
+    GraphEdge *edge();
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
     virtual int type()const;
 
 private:
-    GraphEdge*_edge;
+    GraphEdge *_edge;
 };
 
 /* line */
-class GraphEdge:public QGraphicsPathItem
+class GraphEdge: public QGraphicsPathItem
 {
 public:
-    GraphEdge(QGraphicsItem*p=0);
+    GraphEdge(QGraphicsItem *p = 0);
     virtual ~GraphEdge();
 
-    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
-    const QPolygonF& controlPoints()const;
-    void setControlPoints(const QPolygonF& a);
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+    const QPolygonF &controlPoints()const;
+    void setControlPoints(const QPolygonF &a);
     virtual int type()const;
 
 private:
     QPolygonF _points;
 };
 
-class GraphMark:public QGraphicsRectItem
+class GraphMark: public QGraphicsRectItem
 {
 public:
-    GraphMark(GraphTreeLabel*,QGraphicsItem*p=0);
+    GraphMark(GraphTreeLabel *, QGraphicsItem *p = 0);
     virtual ~GraphMark();
     virtual int type()const;
-    virtual bool hit(const QPoint&)const;
-    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+    virtual bool hit(const QPoint &)const;
+    virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
 private:
-    static QPixmap*_p;
+    static QPixmap *_p;
 };
 
 #endif

@@ -23,25 +23,25 @@
 
 class CommitBugtrackerValuesData
 {
-    public:
-        CommitBugtrackerValuesData()
-        :_warnifnoissue(false),_label(i18n("Issue-Number")),_message(QString()),_number(true),_append(false)
-        {}
+public:
+    CommitBugtrackerValuesData()
+        : _warnifnoissue(false), _label(i18n("Issue-Number")), _message(QString()), _number(true), _append(false)
+    {}
 
-        bool _warnifnoissue;
-        QString _label;
-        QString _message;
-        bool _number;
-        bool _append;
+    bool _warnifnoissue;
+    QString _label;
+    QString _message;
+    bool _number;
+    bool _append;
 };
 
 CommitBugtrackerValues::CommitBugtrackerValues()
-    :_data(new CommitBugtrackerValuesData())
+    : _data(new CommitBugtrackerValuesData())
 {
 }
 
-CommitBugtrackerValues::CommitBugtrackerValues(const CommitBugtrackerValues&old)
-    :_data(new CommitBugtrackerValuesData())
+CommitBugtrackerValues::CommitBugtrackerValues(const CommitBugtrackerValues &old)
+    : _data(new CommitBugtrackerValuesData())
 {
     _data->_warnifnoissue = old._data->_warnifnoissue;
     _data->_label = old._data->_label;
@@ -60,29 +60,29 @@ bool CommitBugtrackerValues::Warnifnoissue()const
     return _data->_warnifnoissue;
 }
 
-CommitBugtrackerValues& CommitBugtrackerValues::Warnifnoissue(bool value)
+CommitBugtrackerValues &CommitBugtrackerValues::Warnifnoissue(bool value)
 {
     _data->_warnifnoissue = value;
     return *this;
 }
 
-const QString&CommitBugtrackerValues::Label()const
+const QString &CommitBugtrackerValues::Label()const
 {
     return _data->_label;
 }
 
-CommitBugtrackerValues&CommitBugtrackerValues::Label(const QString&value)
+CommitBugtrackerValues &CommitBugtrackerValues::Label(const QString &value)
 {
-    _data->_label=value;
+    _data->_label = value;
     return *this;
 }
 
-const QString&CommitBugtrackerValues::Message()const
+const QString &CommitBugtrackerValues::Message()const
 {
     return _data->_message;
 }
 
-CommitBugtrackerValues&CommitBugtrackerValues::Message(const QString&value)
+CommitBugtrackerValues &CommitBugtrackerValues::Message(const QString &value)
 {
     _data->_message = value;
     return *this;
@@ -93,9 +93,9 @@ bool CommitBugtrackerValues::Number()const
     return _data->_number;
 }
 
-CommitBugtrackerValues&CommitBugtrackerValues::Number(bool value)
+CommitBugtrackerValues &CommitBugtrackerValues::Number(bool value)
 {
-    _data->_number=value;
+    _data->_number = value;
     return *this;
 }
 
@@ -104,8 +104,8 @@ bool CommitBugtrackerValues::Append()const
     return _data->_append;
 }
 
-CommitBugtrackerValues&CommitBugtrackerValues::Append(bool value)
+CommitBugtrackerValues &CommitBugtrackerValues::Append(bool value)
 {
-    _data->_append=value;
+    _data->_append = value;
     return *this;
 }

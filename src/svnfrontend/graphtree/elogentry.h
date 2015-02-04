@@ -23,15 +23,14 @@
 #include <svnqt/log_entry.h>
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
-struct eLog_Entry : public svn::LogEntry
-{
+struct eLog_Entry : public svn::LogEntry {
     eLog_Entry();
-    eLog_Entry(const svn::LogEntry&);
+    eLog_Entry(const svn::LogEntry &);
     ~eLog_Entry();
 
-    void addCopyTo(const QString&,const QString&,svn_revnum_t,char _action,svn_revnum_t fromRev=-1);
-    void addAction(const QString&,char _action);
+    void addCopyTo(const QString &, const QString &, svn_revnum_t, char _action, svn_revnum_t fromRev = -1);
+    void addAction(const QString &, char _action);
 };
 #endif

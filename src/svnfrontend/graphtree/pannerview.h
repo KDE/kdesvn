@@ -24,37 +24,36 @@
 #include <QMouseEvent>
 #include <QPointF>
 
-
 class GraphPanMark;
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
 class PannerView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    PannerView(QWidget* parent=0);
+    PannerView(QWidget *parent = 0);
     virtual ~PannerView();
 
-    void setZoomRect(const QRectF& theValue);
+    void setZoomRect(const QRectF &theValue);
     void updateCurrentRect();
-    virtual void setScene(QGraphicsScene*sc);
+    virtual void setScene(QGraphicsScene *sc);
 
 signals:
     void zoomRectMoved(qreal dx, qreal dy);
     void zoomRectMoveFinished();
 
 protected:
-    virtual void mousePressEvent(QMouseEvent*);
-    virtual void mouseMoveEvent(QMouseEvent*);
-    virtual void mouseReleaseEvent(QMouseEvent*);
+    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseMoveEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
 
 protected:
     QRectF m_ZoomRect;
     bool m_Moving;
     QPoint m_LastPos;
 
-    GraphPanMark*m_Mark;
+    GraphPanMark *m_Mark;
 };
 
 #endif

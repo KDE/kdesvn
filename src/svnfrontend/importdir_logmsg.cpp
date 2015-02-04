@@ -28,22 +28,21 @@
 #include <qwhatsthis.h>
 #include <qtooltip.h>
 
-
 Importdir_logmsg::Importdir_logmsg(QWidget *parent)
- : Commitmsg_impl(parent)
+    : Commitmsg_impl(parent)
 {
     m_createDirBox = new QCheckBox(this);
     hideKeepsLock(true);
     createDirboxDir();
     addItemWidget(m_createDirBox);
     m_createDirBox->setChecked(true);
-    QHBoxLayout* tmpLayout = new QHBoxLayout();
+    QHBoxLayout *tmpLayout = new QHBoxLayout();
     m_noIgnore = new QCheckBox(this);
     m_noIgnore->setText(i18n("No ignore"));
     m_noIgnore->setToolTip(i18n("If set, add files or directories that match ignore patterns."));
     tmpLayout->addWidget(m_noIgnore);
     //LogmessageDataLayout->addWidget(m_createDirBox);
-    if (svn::Version::version_major()>1|| svn::Version::version_minor()>4 ) {
+    if (svn::Version::version_major() > 1 || svn::Version::version_minor() > 4) {
         m_ignoreUnknownNodes = new QCheckBox(this);
         m_ignoreUnknownNodes->setText(i18n("Ignore unknown node types"));
         m_ignoreUnknownNodes->setToolTip(i18n("Should files with unknown node types be ignored"));
@@ -51,9 +50,9 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent)
         tmpLayout->addWidget(m_ignoreUnknownNodes);
         //addItemWidget(m_ignoreUnknownNodes);
     } else {
-        m_ignoreUnknownNodes=0;
+        m_ignoreUnknownNodes = 0;
     }
-    QSpacerItem* m_leftspacer = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
+    QSpacerItem *m_leftspacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     tmpLayout->addItem(m_leftspacer);
     if (layout()) {
         layout()->addItem(tmpLayout);
@@ -71,7 +70,7 @@ bool Importdir_logmsg::noIgnore()
 
 bool Importdir_logmsg::ignoreUnknownNodes()
 {
-    return m_ignoreUnknownNodes?m_ignoreUnknownNodes->isChecked():false;
+    return m_ignoreUnknownNodes ? m_ignoreUnknownNodes->isChecked() : false;
 }
 
 bool Importdir_logmsg::createDir()
@@ -79,9 +78,9 @@ bool Importdir_logmsg::createDir()
     return m_createDirBox->isChecked();
 }
 
-void Importdir_logmsg::createDirboxDir(const QString & which)
+void Importdir_logmsg::createDirboxDir(const QString &which)
 {
-    m_createDirBox->setText(i18n("Create subdirectory %1 on import",(which.isEmpty()?i18n("(Last part)"):which)));
+    m_createDirBox->setText(i18n("Create subdirectory %1 on import", (which.isEmpty() ? i18n("(Last part)") : which)));
 }
 
 #include "importdir_logmsg.moc"

@@ -28,24 +28,24 @@
 #include <QMap>
 
 /**
-	@author Rajko Albrecht <ral@alwins-world.de>
+    @author Rajko Albrecht <ral@alwins-world.de>
 */
 class OpenContextmenu : public KMenu
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    OpenContextmenu(const KUrl&aPath, const KService::List&aList, QWidget* parent);
+    OpenContextmenu(const KUrl &aPath, const KService::List &aList, QWidget *parent);
     virtual ~OpenContextmenu();
 protected:
     KUrl m_Path;
     KService::List m_List;
-    QMap<int,KService::Ptr> m_mapPopup;
+    QMap<int, KService::Ptr> m_mapPopup;
 
     void setup();
 
 protected slots:
     virtual void slotOpenWith();
-    virtual void slotRunService(QAction*);
+    virtual void slotRunService(QAction *);
 };
 
 #endif

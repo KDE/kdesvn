@@ -36,38 +36,50 @@ struct apr_file_t;
 
 namespace svn
 {
-    class Path;
+class Path;
 
-    class SVNQT_NOEXPORT DiffData
+class SVNQT_NOEXPORT DiffData
+{
+protected:
+    Pool m_Pool;
+    Path m_tmpPath;
+    apr_file_t *m_outFile;
+    apr_file_t *m_errFile;
+    const char *m_outFileName;
+    const char *m_errFileName;
+
+    Path m_p1, m_p2;
+    Revision m_r1, m_r2;
+
+    bool m_working_copy_present, m_url_is_present;
+
+    void init();
+    void clean();
+    void close();
+
+public:
+    DiffData(const Path &aTmpPath, const Path &, const Revision &, const Path &, const Revision &);
+    virtual ~DiffData();
+
+    apr_file_t *outFile()
     {
-        protected:
-            Pool m_Pool;
-            Path m_tmpPath;
-            apr_file_t*m_outFile;
-            apr_file_t*m_errFile;
-            const char*m_outFileName;
-            const char*m_errFileName;
+        return m_outFile;
+    }
+    apr_file_t *errFile()
+    {
+        return m_errFile;
+    }
+    const Revision &r1()const
+    {
+        return m_r1;
+    }
+    const Revision &r2()const
+    {
+        return m_r2;
+    }
 
-            Path m_p1,m_p2;
-            Revision m_r1,m_r2;
-
-            bool m_working_copy_present,m_url_is_present;
-
-            void init();
-            void clean();
-            void close();
-
-        public:
-            DiffData(const Path&aTmpPath,const Path&,const Revision&,const Path&,const Revision&);
-            virtual ~DiffData();
-
-            apr_file_t*outFile(){return m_outFile;}
-            apr_file_t*errFile(){return m_errFile;}
-            const Revision& r1()const{return m_r1;}
-            const Revision& r2()const{return m_r2;}
-
-            QByteArray content();
-    };
+    QByteArray content();
+};
 }
 
 #endif

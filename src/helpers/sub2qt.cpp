@@ -24,12 +24,12 @@
 #include "klocale.h"
 #include <qmap.h>
 
-namespace helpers {
+namespace helpers
+{
 
 sub2qt::sub2qt()
 {
 }
-
 
 sub2qt::~sub2qt()
 {
@@ -40,7 +40,7 @@ QString sub2qt::apr_time2qtString(apr_time_t _time)
     return DateTime2qtString(_time);
 }
 
-QString sub2qt::DateTime2qtString(const svn::DateTime&_time)
+QString sub2qt::DateTime2qtString(const svn::DateTime &_time)
 {
     return KGlobal::locale()->formatDateTime(_time);
 }

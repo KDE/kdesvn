@@ -24,19 +24,19 @@
 #include "src/svnqt/revision.h"
 #include <qpair.h>
 
-class Rangeinput_impl: public QWidget, public Ui::RangeInput {
-Q_OBJECT
+class Rangeinput_impl: public QWidget, public Ui::RangeInput
+{
+    Q_OBJECT
 public:
     Rangeinput_impl(QWidget *parent = 0);
     virtual ~Rangeinput_impl();
 
-    typedef QPair<svn::Revision,svn::Revision> revision_range;
+    typedef QPair<svn::Revision, svn::Revision> revision_range;
 
     revision_range getRange();
 
     virtual void setStartOnly(bool theValue);
     virtual void setNoWorking(bool aValue);
-
 
     bool StartOnly() const;
     void setHeadDefault();

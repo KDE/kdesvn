@@ -31,15 +31,11 @@ namespace helpers
 /**
 @author Rajko Albrecht
 */
-class sub2qt
+namespace sub2qt
 {
-public:
-    sub2qt();
-    ~sub2qt();
-
-    static QString apr_time2qtString(apr_time_t _time);
-    static QString DateTime2qtString(const svn::DateTime &_time);
-};
+QString apr_time2qtString(apr_time_t _time);
+QString DateTime2qtString(const svn::DateTime &_time);
+}
 
 }
 #endif

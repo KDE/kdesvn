@@ -19,7 +19,6 @@
  ***************************************************************************/
 #include "svnlogdlgimp.h"
 #include "src/settings/kdesvnsettings.h"
-#include "helpers/sub2qt.h"
 #include "svnactions.h"
 #include "src/svnfrontend/fronthelpers/revisionbuttonimpl.h"
 #include "src/svnfrontend/models/logitemmodel.h"

@@ -33,7 +33,6 @@ kde4_add_ui_files(kdesvn_shared_ui
 set(ksvnwidgetsrc
     authdialogimpl.cpp
     authdialogwidget.cpp
-    commitbugtrackervalues.cpp
     commitmsg_impl.cpp
     deleteform_impl.cpp
     depthselector.cpp
@@ -51,7 +50,6 @@ set(ksvnwidgetsrc
 set(ksvnwidgethdr
     authdialogimpl.h
     authdialogwidget.h
-    commitbugtrackervalues.h
     commitmsg_impl.h
     deleteform_impl.h
     depthselector.h

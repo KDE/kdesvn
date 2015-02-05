@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "rangeinput_impl.h"
-#include "helpers/sub2qt.h"
 
 #include <qpushbutton.h>
 #include <qlayout.h>

@@ -22,7 +22,6 @@
 #include "logmodelhelper.h"
 
 #include "src/svnqt/client.h"
-#include "helpers/sub2qt.h"
 
 #include <klocale.h>
 #include <kdebug.h>

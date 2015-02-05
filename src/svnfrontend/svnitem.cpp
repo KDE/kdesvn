@@ -25,7 +25,6 @@
 #include "src/svnqt/status.h"
 #include "src/svnqt/smart_pointer.h"
 #include "src/svnqt/url.h"
-#include "helpers/sub2qt.h"
 #include "helpers/ktranslateurl.h"
 
 #include <kglobal.h>

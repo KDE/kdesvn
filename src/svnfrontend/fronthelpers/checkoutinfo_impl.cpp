@@ -96,17 +96,8 @@ void CheckoutInfo_impl::setTargetUrl(const QString &what)
 
 void CheckoutInfo_impl::setStartUrl(const QString &what)
 {
-    KUrl uri(what);
-    if (uri.protocol() == "file") {
-        if (what.startsWith("file:")) {
-            uri.setProtocol("ksvn+file");
-        } else {
-            uri.setProtocol("");
-        }
-    } else {
-        uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
-    }
-    m_UrlEdit->setUrl(uri.prettyUrl());
+    KUrl uri(helpers::KTranslateUrl::string2Uri(what));
+    m_UrlEdit->setUrl(uri);
 }
 
 void CheckoutInfo_impl::hideDepth(bool how, bool overwriteAsRecurse)

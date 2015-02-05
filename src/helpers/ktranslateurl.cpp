@@ -30,31 +30,25 @@
 
 namespace helpers
 {
-
-KTranslateUrl::KTranslateUrl()
+namespace KTranslateUrl
 {
-}
+static bool parseURL(const KUrl &url, QString &name, QString &path);
+static KUrl findSystemBase(const QString &name);
 
-KTranslateUrl::~KTranslateUrl()
-{
-}
-
-KUrl KTranslateUrl::translateSystemUrl(const KUrl &_url)
+KUrl translateSystemUrl(const KUrl &_url)
 {
     QString proto = _url.protocol();
-    KUrl res;
-    QString name, path;
 
-    if (proto != "system") {
+    if (proto != QLatin1String("system")) {
         return _url;
     }
     KGlobal::dirs()->addResourceType("system_entries",
                                      KStandardDirs::kde_default("data") + "systemview");
-    QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
+    QString name, path;
     if (!parseURL(_url, name, path)) {
         return _url;
     }
-    res = findSystemBase(name);
+    KUrl res = findSystemBase(name);
     if (!res.isValid()) {
         return _url;
     }
@@ -63,10 +57,10 @@ KUrl KTranslateUrl::translateSystemUrl(const KUrl &_url)
     return res;
 }
 
-bool KTranslateUrl::parseURL(const KUrl &url, QString &name, QString &path)
+bool parseURL(const KUrl &url, QString &name, QString &path)
 {
-    QString url_path = url.path();
-    int i = url_path.indexOf('/', 1);
+    const QString url_path = url.path();
+    int i = url_path.indexOf(QLatin1Char('/'), 1);
     if (i > 0) {
         name = url_path.mid(1, i - 1);
         path = url_path.mid(i + 1);
@@ -78,14 +72,14 @@ bool KTranslateUrl::parseURL(const KUrl &url, QString &name, QString &path)
     return !name.isEmpty();
 }
 
-KUrl KTranslateUrl::findSystemBase(const QString &filename)
+KUrl findSystemBase(const QString &filename)
 {
-    QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
+    const QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
 
     QStringList::ConstIterator dirpath = dirList.constBegin();
     QStringList::ConstIterator end = dirList.constEnd();
     for (; dirpath != end; ++dirpath) {
-        QDir dir = *dirpath;
+        QDir dir(*dirpath);
         if (!dir.exists()) {
             continue;
         }
@@ -93,14 +87,13 @@ KUrl KTranslateUrl::findSystemBase(const QString &filename)
         QStringList filenames
             = dir.entryList(QDir::Files | QDir::Readable);
 
-        KIO::UDSEntry entry;
-
         QStringList::ConstIterator name = filenames.constBegin();
         QStringList::ConstIterator endf = filenames.constEnd();
 
         for (; name != endf; ++name) {
-            if (*name == filename + ".desktop") {
-                KDesktopFile desktop(*dirpath + filename + ".desktop");
+            const QString fn = filename + QLatin1String(".desktop");
+            if (*name == fn) {
+                KDesktopFile desktop(*dirpath + fn);
                 if (desktop.readUrl().isEmpty()) {
                     KUrl url;
                     url.setPath(desktop.readPath());
@@ -114,20 +107,34 @@ KUrl KTranslateUrl::findSystemBase(const QString &filename)
     return KUrl();
 }
 
-}
-
-/*!
-    \fn helpers::KTranslateUrl::makeKdeUrl(const QString&inUrl)
- */
-QString helpers::KTranslateUrl::makeKdeUrl(const QString &_proto)
+QString makeKdeUrl(const QString &_proto)
 {
     QString proto;
-    if (_proto.startsWith("svn+")) {
-        proto = 'k' + _proto;
-    } else if (_proto == QString("svn")) {
-        proto = "ksvn";
+    if (_proto.startsWith(QLatin1String("svn+"))) {
+        proto = QLatin1Char('k') + _proto;
+    } else if (_proto == QLatin1String("svn")) {
+        proto = QLatin1String("ksvn");
     } else {
-        proto = "ksvn+" + _proto;
+        proto = QLatin1String("ksvn+") + _proto;
     }
     return proto;
 }
+
+KUrl string2Uri(const QString &what)
+{
+    KUrl uri(what);
+    if (uri.protocol() == QLatin1String("file")) {
+        if (what.startsWith(QLatin1String("file:"))) {
+            uri.setProtocol(QLatin1String("ksvn+file"));
+        } else {
+            uri.setProtocol(QString());
+        }
+    } else {
+        uri.setProtocol(makeKdeUrl(uri.protocol()));
+    }
+    return uri;
+}
+
+}   // namespace KTranslateUrl
+
+}   // namespace helpers

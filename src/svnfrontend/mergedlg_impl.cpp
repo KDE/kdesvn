@@ -74,49 +74,31 @@ MergeDlg_impl::~MergeDlg_impl()
 void MergeDlg_impl::setSrc1(const QString &what)
 {
     if (what.isEmpty()) {
-        m_SrcOneInput->setUrl(QString(""));
+        m_SrcOneInput->clear();
         return;
     }
-    KUrl uri(what);
-    if (uri.protocol() == "file") {
-        if (what.startsWith("file:")) {
-            uri.setProtocol("ksvn+file");
-        } else {
-            uri.setProtocol("");
-        }
-    } else {
-        uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
-    }
+    KUrl uri(helpers::KTranslateUrl::string2Uri(what));
     m_SrcOneInput->setUrl(uri);
 }
 
 void MergeDlg_impl::setSrc2(const QString &what)
 {
     if (what.isEmpty()) {
-        m_SrcTwoInput->setUrl(QString(""));
+        m_SrcTwoInput->clear();
         return;
     }
-    KUrl uri(what);
-    if (uri.protocol() == "file") {
-        if (what.startsWith("file:")) {
-            uri.setProtocol("ksvn+file");
-        } else {
-            uri.setProtocol("");
-        }
-    } else {
-        uri.setProtocol(helpers::KTranslateUrl::makeKdeUrl(uri.protocol()));
-    }
+    KUrl uri(helpers::KTranslateUrl::string2Uri(what));
     m_SrcTwoInput->setUrl(uri);
 }
 
 void MergeDlg_impl::setDest(const QString &what)
 {
     if (what.isEmpty()) {
-        m_OutInput->setUrl(QString(""));
+        m_OutInput->clear();
         return;
     }
     KUrl uri(what);
-    uri.setProtocol("");
+    uri.setProtocol(QString());
     m_OutInput->setUrl(uri);
 }
 

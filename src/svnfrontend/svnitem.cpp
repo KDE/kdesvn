@@ -123,13 +123,11 @@ KMimeType::Ptr SvnItem_p::mimeType(bool dir)
 KUrl &SvnItem_p::kdeName(const svn::Revision &r)
 {
     isWc = !svn::Url::isValid(m_Stat->path());
-    QString name;
     if (!(r == lRev) || m_kdename.isEmpty()) {
         lRev = r;
         if (!isWc) {
             m_kdename = m_Stat->entry().url();
-            QString proto;
-            proto = helpers::KTranslateUrl::makeKdeUrl(m_kdename.protocol());
+            QString proto = helpers::KTranslateUrl::makeKdeUrl(m_kdename.protocol());
             m_kdename.setProtocol(proto);
             QString revstr = lRev.toString();
             if (revstr.length() > 0) {

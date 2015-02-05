@@ -112,7 +112,7 @@ SvnItem *SvnItemModelNode::getParentItem()const
     return _parentNode;
 }
 
-const svn::Revision &SvnItemModelNode::correctPeg()const
+svn::Revision SvnItemModelNode::correctPeg()const
 {
     /// @todo backlink to remote revision storage
     return _display->baseRevision();

@@ -222,7 +222,7 @@ bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel
         if ((child->isDir() && !showOnly.testFlag(svnmodel::Dir))  || (!child->isDir() && !showOnly.testFlag(svnmodel::File))) {
             return true;
         }
-        return m_Data->m_Display->filterOut(child);
+        return ItemDisplay::filterOut(child);
     }
     return false;
 }

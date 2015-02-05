@@ -22,17 +22,14 @@
 #define ITEMDISPLAY_H
 
 #include "src/svnqt/svnqttypes.h"
+#include "frontendtypes.h"
 #include <QString>
 #include <kurl.h>
-#include <QObject>
 
 class QWidget;
 
-class SvnItem;
-
 namespace svn
 {
-class Status;
 class Revision;
 }
 
@@ -41,17 +38,18 @@ class ItemDisplay
 public:
     ItemDisplay();
     virtual ~ItemDisplay() {}
-    virtual bool isWorkingCopy()const;
     virtual QWidget *realWidget() = 0;
     virtual SvnItem *Selected()const = 0;
-    virtual void SelectionList(QList<SvnItem *> &)const = 0;
-    virtual const QString &baseUri()const;
-    virtual const svn::Revision &baseRevision()const = 0;
+    virtual SvnItemList SelectionList()const = 0;
+    virtual svn::Revision baseRevision()const = 0;
     virtual bool openUrl(const KUrl &url, bool noReinit = false) = 0;
     virtual SvnItem *SelectedOrMain()const = 0;
-    virtual bool isNetworked()const;
-    virtual const QString &lastError()const;
-    virtual bool filterOut(const SvnItem *);
+
+    bool isWorkingCopy()const;
+    QString baseUri()const;
+    bool isNetworked()const;
+    QString lastError()const;
+    static bool filterOut(const SvnItem *item);
     QString relativePath(const SvnItem *item);
 
 protected:

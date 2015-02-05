@@ -21,7 +21,6 @@
 #define DUMMYDISPLAY_H
 
 #include "itemdisplay.h"
-#include <QList>
 
 /**
 @author Rajko Albrecht
@@ -33,10 +32,10 @@ public:
     virtual ~DummyDisplay();
     virtual QWidget *realWidget();
     virtual SvnItem *Selected()const;
-    virtual void SelectionList(QList<SvnItem *> &)const;
+    virtual SvnItemList SelectionList()const;
+    virtual svn::Revision baseRevision()const;
     virtual bool openUrl(const KUrl &url, bool noReinit = false);
     virtual SvnItem *SelectedOrMain()const;
-    virtual const svn::Revision &baseRevision()const;
 };
 
 #endif

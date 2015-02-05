@@ -47,19 +47,20 @@ public:
     explicit MainTreeWidget(KActionCollection *aCollection, QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~MainTreeWidget();
 
-    virtual bool openUrl(const KUrl &url, bool noReinit = false);
     virtual QWidget *realWidget();
     virtual SvnItem *Selected()const;
-    virtual SvnItem *DirSelected()const;
-    virtual QModelIndex SelectedIndex()const;
-    virtual QModelIndex DirSelectedIndex()const;
+    virtual SvnItemList SelectionList()const;
+    virtual svn::Revision baseRevision()const;
+    virtual bool openUrl(const KUrl &url, bool noReinit = false);
+    virtual SvnItem *SelectedOrMain()const;
+
+    SvnItem *DirSelected()const;
+    QModelIndex SelectedIndex()const;
+    QModelIndex DirSelectedIndex()const;
     SvnItemModelNode *SelectedNode()const;
     SvnItemModelNode *DirSelectedNode()const;
-    virtual void SelectionList(SvnItemList &target)const;
-    virtual void DirSelectionList(SvnItemList &target)const;
-    virtual SvnItem *SelectedOrMain()const;
-    virtual SvnItem *DirSelectedOrMain()const;
-    virtual const svn::Revision &baseRevision()const;
+    SvnItemList DirSelectionList()const;
+    SvnItem *DirSelectedOrMain()const;
     void refreshItem(SvnItemModelNode *node);
 
     void clear();
@@ -78,16 +79,16 @@ Q_SIGNALS:
     void sigCacheStatus(qlonglong, qlonglong);
 
 public Q_SLOTS:
-    virtual void closeMe();
-    virtual void refreshCurrentTree();
-    virtual void slotSettingsChanged();
-    virtual void slotSelectionChanged(const QItemSelection &, const QItemSelection &);
-    virtual void slotNotifyMessage(const QString &);
-    virtual void slotMkBaseDirs();
-    virtual void slotMkdir();
-    virtual void refreshCurrent(SvnItem *);
-    virtual void slotReinitItem(SvnItem *);
-    virtual void stopLogCache();
+    void closeMe();
+    void refreshCurrentTree();
+    void slotSettingsChanged();
+    void slotSelectionChanged(const QItemSelection &, const QItemSelection &);
+    void slotNotifyMessage(const QString &);
+    void slotMkBaseDirs();
+    void slotMkdir();
+    void refreshCurrent(SvnItem *);
+    void slotReinitItem(SvnItem *);
+    void stopLogCache();
 
 protected Q_SLOTS:
     void slotCacheDataChanged();

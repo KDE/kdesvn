@@ -33,7 +33,7 @@ bool ItemDisplay::isWorkingCopy()const
     return m_isWorkingCopy;
 }
 
-const QString &ItemDisplay::baseUri()const
+QString ItemDisplay::baseUri()const
 {
     return m_baseUri;
 }
@@ -65,7 +65,7 @@ void ItemDisplay::setBaseUri(const QString &uri)
     }
 }
 
-const QString &ItemDisplay::lastError()const
+QString ItemDisplay::lastError()const
 {
     return m_LastException;
 }

@@ -348,7 +348,7 @@ void MainTreeWidget::clear()
     m_Data->m_Model->clear();
 }
 
-const svn::Revision &MainTreeWidget::baseRevision()const
+svn::Revision MainTreeWidget::baseRevision()const
 {
     return m_Data->m_remoteRevision;
 }
@@ -374,32 +374,35 @@ int MainTreeWidget::DirselectionCount()const
     return m_DirTreeView->selectionModel()->selectedRows(0).count();
 }
 
-void MainTreeWidget::SelectionList(SvnItemList &target)const
+SvnItemList MainTreeWidget::SelectionList()const
 {
-    QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
-    if (_mi.count() < 1) {
+    SvnItemList ret;
+    const QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
+    ret.reserve(_mi.size());
+    if (_mi.isEmpty()) {
         QModelIndex ind = m_TreeView->rootIndex();
         if (ind.isValid()) {
             // really! it will remapped to this before setRootIndex! (see below)
-            target.push_back(m_Data->sourceNode(ind, false));
+            ret.push_back(m_Data->sourceNode(ind, false));
         }
-        return;
+        return ret;
     }
+    ret.reserve(_mi.size());
     for (int i = 0; i < _mi.count(); ++i) {
-        target.push_back(m_Data->sourceNode(_mi[i], false));
+        ret.push_back(m_Data->sourceNode(_mi[i], false));
     }
+    return ret;
 }
 
-void MainTreeWidget::DirSelectionList(SvnItemList &target)const
+SvnItemList MainTreeWidget::DirSelectionList()const
 {
-    target.clear();
-    QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
-    if (_mi.count() < 1) {
-        return;
-    }
+    SvnItemList ret;
+    const QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
+    ret.reserve(_mi.size());
     for (int i = 0; i < _mi.count(); ++i) {
-        target.push_back(m_Data->sourceNode(_mi[i], true));
+        ret.push_back(m_Data->sourceNode(_mi[i], true));
     }
+    return ret;
 }
 
 QModelIndex MainTreeWidget::SelectedIndex()const
@@ -1065,15 +1068,11 @@ void MainTreeWidget::doLog(bool use_follow_settings, bool left)const
 
 void MainTreeWidget::slotContextMenu(const QPoint &)
 {
-    SvnItemList l;
-    SelectionList(l);
-    execContextMenu(l);
+    execContextMenu(SelectionList());
 }
 
 void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
 {
-    SvnItemList l;
-    DirSelectionList(l);
     KMenu popup;
     QAction *temp = 0;
     int count = 0;
@@ -1108,6 +1107,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
     OpenContextmenu *me = 0;
     QAction *menuAction = 0;
 
+    const SvnItemList l = DirSelectionList();
     if (l.count() == 1 && l.at(0)) {
         const KService::List offers = offersList(l.at(0), l.at(0)->isDir());
         if (!offers.isEmpty()) {
@@ -1292,9 +1292,8 @@ void MainTreeWidget::slotMakePartTree()
 
 void MainTreeWidget::slotLock()
 {
-    SvnItemList lst;
-    SelectionList(lst);
-    if (lst.count() == 0) {
+    const SvnItemList lst = SelectionList();
+    if (lst.isEmpty()) {
         KMessageBox::error(this, i18n("Nothing selected for unlock"));
         return;
     }
@@ -1334,9 +1333,8 @@ void MainTreeWidget::slotLock()
  */
 void MainTreeWidget::slotUnlock()
 {
-    SvnItemList lst;
-    SelectionList(lst);
-    if (lst.count() == 0) {
+    const SvnItemList lst = SelectionList();
+    if (lst.isEmpty()) {
         KMessageBox::error(this, i18n("Nothing selected for unlock"));
         return;
     }
@@ -1464,9 +1462,9 @@ void MainTreeWidget::slotDiffPathes()
 
     if (tr == filesActions()->action("make_svn_diritemsdiff")) {
         unique = true;
-        DirSelectionList(lst);
+        lst = DirSelectionList();
     } else {
-        SelectionList(lst);
+        lst = SelectionList();
     }
 
     if (lst.count() != 2 || (!unique && !uniqueTypeSelected())) {
@@ -1494,13 +1492,12 @@ void MainTreeWidget::slotDiffPathes()
 
 void MainTreeWidget::slotInfo()
 {
-    SvnItemList lst;
-    SelectionList(lst);
     svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
     if (!isWorkingCopy()) {
         rev = baseRevision();
     }
-    if (lst.count() == 0) {
+    SvnItemList lst = SelectionList();
+    if (lst.isEmpty()) {
         if (!isWorkingCopy()) {
             QStringList _sl(baseUri());
             m_Data->m_Model->svnWrapper()->makeInfo(_sl, rev, svn::Revision::UNDEFINED, Kdesvnsettings::info_recursive());
@@ -1508,7 +1505,7 @@ void MainTreeWidget::slotInfo()
             lst.append(SelectedOrMain());
         }
     }
-    if (lst.count() > 0) {
+    if (!lst.isEmpty()) {
         m_Data->m_Model->svnWrapper()->makeInfo(lst, rev, rev, Kdesvnsettings::info_recursive());
     }
 }
@@ -1644,16 +1641,12 @@ void MainTreeWidget::slotTryResolve()
 
 void MainTreeWidget::slotLeftDelete()
 {
-    SvnItemList lst;
-    DirSelectionList(lst);
-    makeDelete(lst);
+    makeDelete(DirSelectionList());
 }
 
 void MainTreeWidget::slotDelete()
 {
-    SvnItemList lst;
-    SelectionList(lst);
-    makeDelete(lst);
+    makeDelete(SelectionList());
 }
 
 void MainTreeWidget::makeDelete(const SvnItemList &lst)
@@ -2284,24 +2277,19 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
 
 void MainTreeWidget::slotCommit()
 {
-    SvnItemList which;
-    SelectionList(which);
-    m_Data->m_Model->svnWrapper()->doCommit(which);
+    m_Data->m_Model->svnWrapper()->doCommit(SelectionList());
 }
 
 void MainTreeWidget::slotDirCommit()
 {
-    SvnItemList which;
-    DirSelectionList(which);
-    m_Data->m_Model->svnWrapper()->doCommit(which);
+    m_Data->m_Model->svnWrapper()->doCommit(DirSelectionList());
 }
 
 void MainTreeWidget::slotDirUpdate()
 {
-    SvnItemList which;
-    DirSelectionList(which);
+    const SvnItemList which = DirSelectionList();
     QStringList what;
-    if (which.count() == 0) {
+    if (which.isEmpty()) {
         what.append(baseUri());
     } else {
         SvnItemListConstIterator liter = which.constBegin();

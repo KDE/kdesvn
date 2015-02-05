@@ -40,8 +40,9 @@ SvnItem *DummyDisplay::Selected()const
     return 0L;
 }
 
-void DummyDisplay::SelectionList(QList<SvnItem *> &)const
+SvnItemList DummyDisplay::SelectionList()const
 {
+    return SvnItemList();
 }
 
 bool DummyDisplay::openUrl(const KUrl &, bool)
@@ -54,7 +55,7 @@ SvnItem *DummyDisplay::SelectedOrMain()const
     return 0;
 }
 
-const svn::Revision &DummyDisplay::baseRevision()const
+svn::Revision DummyDisplay::baseRevision()const
 {
     static svn::Revision fake(svn::Revision::UNDEFINED);
     return fake;

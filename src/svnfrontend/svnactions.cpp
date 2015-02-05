@@ -1484,8 +1484,7 @@ void SvnActions::prepareUpdate(bool ask)
     if (!m_Data->m_ParentList || !m_Data->m_ParentList->isWorkingCopy()) {
         return;
     }
-    SvnItemList k;
-    m_Data->m_ParentList->SelectionList(k);
+    const SvnItemList k = m_Data->m_ParentList->SelectionList();
 
     QStringList what;
     if (k.isEmpty()) {
@@ -1548,8 +1547,7 @@ void SvnActions::makeAdd(bool rec)
     if (!m_Data->m_ParentList) {
         return;
     }
-    SvnItemList lst;
-    m_Data->m_ParentList->SelectionList(lst);
+    const SvnItemList lst = m_Data->m_ParentList->SelectionList();
     if (lst.isEmpty()) {
         KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("Which files or directories should I add?"));
         return;
@@ -1765,8 +1763,7 @@ void SvnActions::slotRevert()
     if (!m_Data->m_ParentList || !m_Data->m_ParentList->isWorkingCopy()) {
         return;
     }
-    SvnItemList lst;
-    m_Data->m_ParentList->SelectionList(lst);
+    const SvnItemList lst = m_Data->m_ParentList->SelectionList();
     QStringList displist;
     if (!lst.isEmpty()) {
         SvnItemListConstIterator liter = lst.constBegin();
@@ -1892,23 +1889,19 @@ void SvnActions::slotSwitch()
         return;
     }
 
-    SvnItemList lst;
-    m_Data->m_ParentList->SelectionList(lst);
-
+    const SvnItemList lst = m_Data->m_ParentList->SelectionList();
     if (lst.count() > 1) {
         KMessageBox::error(0, i18n("Can only switch one item at time"));
         return;
     }
-    SvnItem *k;
 
-    k = m_Data->m_ParentList->SelectedOrMain();
+    SvnItem *k = m_Data->m_ParentList->SelectedOrMain();
     if (!k) {
         KMessageBox::error(0, i18n("Error getting entry to switch"));
         return;
     }
-    QString path, what;
-    path = k->fullName();
-    what = k->Url();
+    QString path = k->fullName();
+    QString what = k->Url();
     if (makeSwitch(path, what)) {
         emit reinitItem(k);
     }

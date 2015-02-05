@@ -46,7 +46,7 @@ public:
      ************************/
     virtual QString getParentDir()const;
     virtual SvnItem *getParentItem()const;
-    virtual const svn::Revision &correctPeg()const;
+    virtual svn::Revision correctPeg()const;
     virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false);
     virtual SvnActions *getWrapper() const;
     virtual bool NodeIsDir();

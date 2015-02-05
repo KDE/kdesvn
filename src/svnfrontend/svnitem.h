@@ -69,7 +69,7 @@ public:
     virtual QString lockOwner()const;
     virtual QString getParentDir()const = 0;
     virtual SvnItem *getParentItem()const = 0;
-    virtual const svn::Revision &correctPeg()const = 0;
+    virtual svn::Revision correctPeg()const = 0;
     virtual svn::Revision revision()const;
     virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false) = 0;
 

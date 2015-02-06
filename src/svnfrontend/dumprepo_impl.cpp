@@ -31,14 +31,15 @@ DumpRepo_impl::DumpRepo_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    m_ReposPath->setMode(KFile::Directory | KFile::LocalOnly);
-    m_OutputFile->setMode(KFile::File | KFile::LocalOnly);
+    slotDumpRange(m_Rangeonly->isChecked());
 }
 
 void DumpRepo_impl::slotDumpRange(bool how)
 {
     m_StartNumber->setEnabled(how);
     m_EndNumber->setEnabled(how);
+    m_lblStart->setEnabled(how);
+    m_lblEnd->setEnabled(how);
 }
 
 /*!

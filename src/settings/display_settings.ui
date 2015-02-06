@@ -2,20 +2,12 @@
 <ui version="4.0">
  <class>DisplaySettings</class>
  <widget class="QWidget" name="DisplaySettings">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>361</width>
-    <height>272</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Settings</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QGridLayout">
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="m_ListIconsSize_label">
        <property name="text">
@@ -45,54 +37,30 @@
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_display_file_tips">
-     <property name="whatsThis">
-      <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
-     </property>
-     <property name="text">
-      <string>Show file info</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_display_overlays">
-     <property name="toolTip">
-      <string>Mark Subversion states with an overlayed icon</string>
-     </property>
-     <property name="whatsThis">
-      <string>&lt;p align=&quot;left&quot;&gt;
+     <item row="2" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_display_overlays">
+       <property name="toolTip">
+        <string>Mark Subversion states with an overlayed icon</string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;p align=&quot;left&quot;&gt;
 Mark items with non-normal state with an overlayed icon. When you wish to
 see which items has newer items in repository you may have to set &quot;Check for updates on open&quot; in Subversion-Dialog.
 &lt;/p&gt;</string>
-     </property>
-     <property name="text">
-      <string>Mark item status with icon overlay</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_case_sensitive_sort">
-     <property name="text">
-      <string>Items sorting order is case sensitive</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_display_ignored_files">
-     <property name="text">
-      <string>Display ignored files</string>
-     </property>
-     <property name="shortcut">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QGridLayout">
-     <item row="0" column="0">
+       </property>
+       <property name="text">
+        <string>Mark item status with icon overlay</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_case_sensitive_sort">
+       <property name="text">
+        <string>Items sorting order is case sensitive</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
       <widget class="QLabel" name="m_MaxLogLabel">
        <property name="text">
         <string>Maximum log messages in history:</string>
@@ -102,7 +70,7 @@ see which items has newer items in repository you may have to set &quot;Check fo
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="5" column="1">
       <widget class="KIntSpinBox" name="kcfg_max_log_messages">
        <property name="maxValue" stdset="0">
         <number>150</number>
@@ -112,23 +80,56 @@ see which items has newer items in repository you may have to set &quot;Check fo
        </property>
       </widget>
      </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_display_ignored_files">
+       <property name="text">
+        <string>Display ignored files</string>
+       </property>
+       <property name="shortcut">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_display_file_tips">
+       <property name="whatsThis">
+        <string>Here you can control if, when moving the mouse over a file, you want to see a small popup window with additional information about that file</string>
+       </property>
+       <property name="text">
+        <string>Show file info</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_colored_blame">
+       <property name="text">
+        <string>Display colored annotate</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_show_navigation_panel">
+       <property name="text">
+        <string>Use navigation panel</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_colored_blame">
-     <property name="text">
-      <string>Display colored annotate</string>
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_show_navigation_panel">
-     <property name="text">
-      <string>Use navigation panel</string>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
      </property>
-    </widget>
+    </spacer>
    </item>
-   <item>
+   <item row="1" column="0" colspan="2">
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -139,7 +140,7 @@ see which items has newer items in repository you may have to set &quot;Check fo
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>16</height>
+       <height>0</height>
       </size>
      </property>
     </spacer>

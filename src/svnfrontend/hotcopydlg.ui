@@ -2,9 +2,29 @@
 <ui version="4.0">
  <class>HotcopyDlg</class>
  <widget class="QWidget" name="HotcopyDlg">
-  <layout class="QVBoxLayout">
-   <item>
-    <layout class="QGridLayout" name="m_MainGrid">
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="m_Srclabel">
+       <property name="text">
+        <string>Repository to copy:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="KUrlRequester" name="m_SrcpathEditor">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="m_Destlabel">
        <property name="text">
@@ -25,40 +45,33 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="m_Srclabel">
+     <item row="2" column="0" colspan="2">
+      <widget class="QCheckBox" name="m_Cleanlogs">
        <property name="text">
-        <string>Repository to copy:</string>
+        <string>Clean logs</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       <property name="shortcut">
+        <string/>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="KUrlRequester" name="m_SrcpathEditor">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item>
-    <widget class="QCheckBox" name="m_Cleanlogs">
-     <property name="text">
-      <string>Clean logs</string>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="shortcut">
-      <string/>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
      </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
+    </spacer>
    </item>
   </layout>
  </widget>

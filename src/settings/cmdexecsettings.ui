@@ -2,132 +2,141 @@
 <ui version="4.0">
  <class>CmdExecSettings</class>
  <widget class="QWidget" name="CmdExecSettings">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>431</width>
-    <height>248</height>
-   </rect>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QCheckBox" name="kcfg_cmdline_show_logwindow">
-     <property name="toolTip">
-      <string>Show a small window containing the log after command executed</string>
-     </property>
-     <property name="text">
-      <string>Show log after executing a command</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QGridLayout">
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="textLabel1">
-       <property name="text">
-        <string>Minimum log lines to show:</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="KIntNumInput" name="kcfg_cmdline_log_minline">
+      <widget class="QCheckBox" name="kcfg_cmdline_show_logwindow">
        <property name="toolTip">
-        <string>The minimum a log output must contain before kdesvn shows a single log window</string>
+        <string>Show a small window containing the log after command executed</string>
        </property>
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="specialValueText">
-        <string comment="no limit">No minimum</string>
-       </property>
-       <property name="minValue" stdset="0">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_no_konqueror_contextmenu">
-     <property name="toolTip">
-      <string>If set, kdesvn will not show a menu inside &quot;Action&quot; menu of Konqueror</string>
-     </property>
-     <property name="text">
-      <string>Do not display context menu in Konqueror</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_no_konqueror_toplevelmenu">
-     <property name="toolTip">
-      <string>If set, kdesvn will not show some extra actions inside &quot;Action&quot; menu of Konqueror/Dolphin</string>
-     </property>
-     <property name="text">
-      <string>Do not display entries in toplevel action menu</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_kio_use_standard_logmsg">
-     <property name="text">
-      <string>KIO operations use standard log message</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QGridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="stdLogmsgLabel">
        <property name="text">
-        <string>Standard message:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
+        <string>Show log after executing a command</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="KLineEdit" name="kcfg_kio_standard_logmsg"/>
+     <item row="1" column="0">
+      <layout class="QGridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="textLabel1">
+         <property name="text">
+          <string>Minimum log lines to show:</string>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="KIntNumInput" name="kcfg_cmdline_log_minline">
+         <property name="toolTip">
+          <string>The minimum a log output must contain before kdesvn shows a single log window</string>
+         </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="specialValueText">
+          <string comment="no limit">No minimum</string>
+         </property>
+         <property name="minValue" stdset="0">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_kio_can_overwrite">
-     <property name="toolTip">
-      <string>Can KIO overwrite existing files?</string>
-     </property>
-     <property name="whatsThis">
-      <string>If this flag is set, you will have a simple write support for existing items. E.g. you can open files in your editor and save them direct without checking out them before (kdesvn will do it in background).
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="kcfg_no_konqueror_contextmenu">
+       <property name="toolTip">
+        <string>If set, kdesvn will not show a menu inside &quot;Action&quot; menu of Konqueror</string>
+       </property>
+       <property name="text">
+        <string>Do not display context menu in Konqueror</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="kcfg_no_konqueror_toplevelmenu">
+       <property name="toolTip">
+        <string>If set, kdesvn will not show some extra actions inside &quot;Action&quot; menu of Konqueror/Dolphin</string>
+       </property>
+       <property name="text">
+        <string>Do not display entries in toplevel action menu</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QCheckBox" name="kcfg_kio_use_standard_logmsg">
+       <property name="text">
+        <string>KIO operations use standard log message</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <layout class="QGridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="stdLogmsgLabel">
+         <property name="text">
+          <string>Standard message:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="KLineEdit" name="kcfg_kio_standard_logmsg"/>
+       </item>
+      </layout>
+     </item>
+     <item row="6" column="0">
+      <widget class="QCheckBox" name="kcfg_kio_can_overwrite">
+       <property name="toolTip">
+        <string>Can KIO overwrite existing files?</string>
+       </property>
+       <property name="whatsThis">
+        <string>If this flag is set, you will have a simple write support for existing items. E.g. you can open files in your editor and save them direct without checking out them before (kdesvn will do it in background).
 
 Use this only if you are sure what you are doing.</string>
-     </property>
-     <property name="text">
-      <string>KIO can overwrite</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_display_dockmsg">
-     <property name="toolTip">
-      <string>If set KIO shows in KDE's Plasma detailed information about current operation</string>
-     </property>
-     <property name="whatsThis">
-      <string>&lt;p&gt;If set, the kdesvn KIO shows detailed messages in KDE's Plasma control area.&lt;br/&gt;
+       </property>
+       <property name="text">
+        <string>KIO can overwrite</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QCheckBox" name="kcfg_display_dockmsg">
+       <property name="toolTip">
+        <string>If set KIO shows in KDE's Plasma detailed information about current operation</string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;p&gt;If set, the kdesvn KIO shows detailed messages in KDE's Plasma control area.&lt;br/&gt;
 Error messages of KIO will always displayed and can &lt;i&gt;not&lt;/i&gt; switched off.&lt;/p&gt;</string>
-     </property>
-     <property name="text">
-      <string>KIO shows progress messages</string>
-     </property>
-    </widget>
+       </property>
+       <property name="text">
+        <string>KIO shows progress messages</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item>
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>

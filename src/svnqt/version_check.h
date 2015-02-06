@@ -24,7 +24,7 @@
 #ifndef SVNQT_VERSION_CHECK_H
 #define SVNQT_VERSION_CHECK_H
 
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqt_defines.h>
 
 class QString;
 

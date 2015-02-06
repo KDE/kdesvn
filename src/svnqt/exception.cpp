@@ -30,9 +30,7 @@
 
 // svncpp
 #include "exception.h"
-#include "svnqt/svnqt_defines.h"
-
-#include <qstring.h>
+#include "svnqt_defines.h"
 
 #ifdef HAS_BACKTRACE_H
 #include <execinfo.h>

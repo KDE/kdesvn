@@ -31,16 +31,16 @@
 #define SVNQT_STATUS_H
 
 // subversion api
-#include "svn_wc.h"
+#include <svn_wc.h>
 
 // svncpp
-#include "svnqt/svnqttypes.h"
-#include "svnqt/entry.h"
-#include "svnqt/pool.h"
-#include "svnqt/lock_entry.h"
-#include "svnqt/dirent.h"
-#include "svnqt/info_entry.h"
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqttypes.h>
+#include <svnqt/entry.h>
+#include <svnqt/pool.h>
+#include <svnqt/lock_entry.h>
+#include <svnqt/dirent.h>
+#include <svnqt/info_entry.h>
+#include <svnqt/svnqt_defines.h>
 
 namespace svn
 {

@@ -33,8 +33,8 @@
 #include "pool.h"
 
 // subversion api
-#include "svn_time.h"
-#include "svn_version.h"
+#include <svn_time.h>
+#include <svn_version.h>
 
 namespace svn
 {

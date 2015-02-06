@@ -32,7 +32,7 @@
 #define SVNQT_CHECK_H
 
 // subversion api
-#include "svn_version.h"
+#include <svn_version.h>
 
 /**
  * Check if the current version of the subversion

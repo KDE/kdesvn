@@ -28,11 +28,10 @@
  * ====================================================================
  */
 
-// apr
-#include "apr_general.h"
-
-// svncpp
 #include "apr.h"
+
+// apr
+#include <apr_general.h>
 
 /**
  * SvnCpp namespace.

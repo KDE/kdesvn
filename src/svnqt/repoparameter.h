@@ -26,8 +26,8 @@
 
 #include <QString>
 
-#include "svnqt/shared_pointer.h"
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/shared_pointer.h>
+#include <svnqt/svnqt_defines.h>
 
 namespace svn
 {

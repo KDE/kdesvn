@@ -28,20 +28,21 @@
  * ====================================================================
  */
 
+#include "targets.h"
+
 // subversion api
-#include "svn_types.h"
+#include <svn_types.h>
 
 // apr api
-#include "apr_pools.h"
-#include "apr_strings.h"
+#include <apr_pools.h>
+#include <apr_strings.h>
 
 // svncpp
-#include "svnqt/targets.h"
-#include "svnqt/path.h"
-#include "svnqt/pool.h"
-#include "svnqt/svnqt_defines.h"
+#include "path.h"
+#include "pool.h"
+#include "svnqt_defines.h"
 
-#include <qstringlist.h>
+#include <QStringList>
 
 namespace svn
 {

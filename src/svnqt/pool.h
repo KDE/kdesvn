@@ -32,7 +32,7 @@
 #define SVNQT_POOL_H
 
 // subversion api
-#include "svn_pools.h"
+#include <svn_pools.h>
 
 namespace svn
 {

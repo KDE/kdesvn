@@ -31,8 +31,8 @@
 #ifndef SVNQT_URL_H
 #define SVNQT_URL_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/pool.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/pool.h>
 
 #include <QString>
 #include <QByteArray>

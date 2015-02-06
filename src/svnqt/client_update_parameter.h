@@ -25,11 +25,11 @@
 #ifndef CLIENT_UPDATE_PARAMETER_H
 #define CLIENT_UPDATE_PARAMETER_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
-#include "svnqt/revision.h"
-#include "svnqt/targets.h"
-#include "svnqt/shared_pointer.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
+#include <svnqt/revision.h>
+#include <svnqt/targets.h>
+#include <svnqt/shared_pointer.h>
 
 namespace svn
 {

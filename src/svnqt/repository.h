@@ -24,16 +24,11 @@
 #ifndef SVNREPOSITORY_H
 #define SVNREPOSITORY_H
 
-// Ignore MSVC 7, 2005 & 2008 compiler warning: C++ exception specification
-#if defined (_MSC_VER) && _MSC_VER > 1200 && _MSC_VER <= 1550
-#pragma warning (disable: 4290)
-#endif
+#include <svnqt/exception.h>
+#include <svnqt/revision.h>
+#include <svnqt/svnqt_defines.h>
 
-#include "svnqt/exception.h"
-#include "svnqt/revision.h"
-#include "svnqt/svnqt_defines.h"
-
-#include <qstring.h>
+#include <QString>
 
 namespace svn
 {

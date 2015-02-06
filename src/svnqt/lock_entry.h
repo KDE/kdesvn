@@ -31,17 +31,17 @@
 #ifndef SVNQT_LOCK_ENTRY_H
 #define SVNQT_LOCK_ENTRY_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/datetime.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/datetime.h>
 
-#include <qstring.h>
+#include <QString>
 
 // apr
-#include "apr_time.h"
+#include <apr_time.h>
 
 // subversion api
-#include "svn_types.h"
-#include "svn_wc.h"
+#include <svn_types.h>
+#include <svn_wc.h>
 
 namespace svn
 {

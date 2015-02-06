@@ -29,11 +29,7 @@
  */
 
 // svncpp
-#include "svnqt/dirent.h"
-#include "svnqt/lock_entry.h"
-#include "svnqt/svnqt_defines.h"
-
-#include <qstring.h>
+#include "dirent.h"
 
 namespace svn
 {

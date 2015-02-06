@@ -28,19 +28,18 @@
  * ====================================================================
  */
 
+#include "wc.h"
+
 // subversion api
-#include "svn_wc.h"
+#include <svn_wc.h>
 
 // svncpp
+#include "context.h"
+#include "entry.h"
 #include "exception.h"
+#include "helper.h"
 #include "path.h"
 #include "pool.h"
-#include "wc.h"
-#include "context.h"
-
-#include "entry.h"
-
-#include "svnqt/helper.h"
 
 namespace svn
 {

@@ -24,12 +24,12 @@
 #ifndef SVNREPOSITORYDATA_H
 #define SVNREPOSITORYDATA_H
 
-#include "svnqt/pool.h"
-#include "svnqt/revision.h"
-#include "svnqt/apr.h"
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/pool.h>
+#include <svnqt/revision.h>
+#include <svnqt/apr.h>
+#include <svnqt/svnqt_defines.h>
 
-#include <qstring.h>
+#include <QString>
 
 #include <svn_repos.h>
 #include <svn_error.h>

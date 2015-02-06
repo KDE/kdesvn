@@ -28,8 +28,8 @@
     @author Rajko Albrecht <ral@alwins-world.de>
 */
 
-#include "svnqt/svnqt_defines.h"
-#include <qstring.h>
+#include <svnqt/svnqt_defines.h>
+#include <QString>
 
 namespace svn
 {

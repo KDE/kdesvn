@@ -24,16 +24,16 @@
 #ifndef SVNCONTEXTDATA_HPP
 #define SVNCONTEXTDATA_HPP
 
-#include "svnqt/pool.h"
-#include "svnqt/apr.h"
-#include "svnqt/commititem.h"
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/pool.h>
+#include <svnqt/apr.h>
+#include <svnqt/commititem.h>
+#include <svnqt/svnqt_defines.h>
 
 #include <svn_client.h>
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
 #include <svn_auth.h>
 #endif
-#include <qstring.h>
+#include <QString>
 
 struct svn_wc_conflict_result_t;
 struct svn_wc_conflict_description_t;

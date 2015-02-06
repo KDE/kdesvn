@@ -31,18 +31,17 @@
 #ifndef SVNQT_CONTEXT_H
 #define SVNQT_CONTEXT_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
-
 // qt
-#include <qstring.h>
+#include <QString>
 
 // Subversion api
-#include "svn_client.h"
+#include <svn_client.h>
 
 // svncpp
-#include "svnqt/pool.h"
-#include "svnqt/smart_pointer.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
+#include <svnqt/pool.h>
+#include <svnqt/smart_pointer.h>
 
 namespace svn
 {

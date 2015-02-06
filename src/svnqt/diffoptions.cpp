@@ -22,14 +22,13 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 
+#include "svnqt_defines.h"
 #include "diffoptions.h"
 #include "stringarray.h"
 #include "pool.h"
 
 #include <svn_diff.h>
-#ifdef HAS_SVN_VERSION_H
 #include <svn_version.h>
-#endif
 
 namespace svn
 {

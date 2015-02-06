@@ -20,9 +20,9 @@
 #ifndef REPOSNOTIFY_H
 #define REPOSNOTIFY_H
 
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqt_defines.h>
 
-#include <qstring.h>
+#include <QString>
 
 struct svn_repos_notify_t;
 

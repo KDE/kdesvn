@@ -37,10 +37,10 @@
 
 #cmakedefine HAS_BACKTRACE_H 1
 #cmakedefine USE_BACKTRACE 1
+// svn_version.h is here since svn 1.0 (or earlier)
+#define HAS_SVN_VERSION_H 1
 
 #define SVNQT_SIZE_UNKNOWN QLONG(-1)
-
-#define HAS_SVN_VERSION_H @HAS_SVN_VERSION_H@
 
 /* the difference between qt3 and qt4 is too much... :( */
 class QSqlDatabase;

@@ -21,18 +21,16 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "svnqt/svnstream.h"
-#include "svnqt/pool.h"
-#include "svnqt/apr.h"
+#include "svnstream.h"
+
+#include "pool.h"
+#include "apr.h"
 
 // Subversion api
-#include "svn_client.h"
+#include <svn_client.h>
 
-#include <qbuffer.h>
-#include <qdatetime.h>
-#include <qfile.h>
-
-#define MAX_TIME 300
+#include <QBuffer>
+#include <QTime>
 
 namespace svn
 {
@@ -179,7 +177,7 @@ public:
 SvnByteStream_private::SvnByteStream_private()
     : mBuf(&m_Content, 0)
 {
-    mBuf.open(QFile::WriteOnly);
+    mBuf.open(QIODevice::WriteOnly);
 }
 
 /* ByteStream implementation start */

@@ -25,13 +25,13 @@
 #ifndef STRING_ARRAY_H
 #define STRING_ARRAY_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
 
 #include <QStringList>
 
 // apr api
-#include "apr_tables.h"
+#include <apr_tables.h>
 
 namespace svn
 {

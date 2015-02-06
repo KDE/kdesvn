@@ -32,9 +32,8 @@
 #include <svn_fs.h>
 #include <svn_path.h>
 #include <svn_config.h>
-#ifdef HAS_SVN_VERSION_H
 #include <svn_version.h>
-#endif
+
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
 #include <svn_dirent_uri.h>
 #endif

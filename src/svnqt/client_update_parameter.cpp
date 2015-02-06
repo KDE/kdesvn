@@ -23,11 +23,11 @@
  ***************************************************************************/
 
 #include "client_update_parameter.h"
-#include "svnqt/svnqttypes.h"
-#include "svnqt/targets.h"
-#include "svnqt/path.h"
+#include "svnqttypes.h"
+#include "targets.h"
+#include "path.h"
 
-#include "svnqt/client_parameter_macros.h"
+#include "client_parameter_macros.h"
 
 namespace svn
 {

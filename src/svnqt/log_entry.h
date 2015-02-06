@@ -31,18 +31,18 @@
 #ifndef SVNQT_LOG_ENTRY_H
 #define SVNQT_LOG_ENTRY_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/datetime.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/datetime.h>
 
 #include <QString>
 #include <QList>
 
 // apr
-#include "apr_time.h"
+#include <apr_time.h>
 
 // subversion api
-#include "svn_types.h"
-#include "svn_version.h"
+#include <svn_types.h>
+#include <svn_version.h>
 
 namespace svn
 {

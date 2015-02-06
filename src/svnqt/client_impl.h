@@ -31,18 +31,8 @@
 #ifndef SVNQT_CLIENT_IMPL_H
 #define SVNQT_CLIENT_IMPL_H
 
-#include "svnqt/client.h"
-#include "svnqt/svnqt_defines.h"
-
-// Ignore MSVC 6 compiler warning: debug symbol truncated
-#if defined (_MSC_VER) && _MSC_VER <= 1200
-#pragma warning (disable: 4786)
-#endif
-
-// Ignore MSVC 7, 2005 & 2008 compiler warning: C++ exception specification
-#if defined (_MSC_VER) && _MSC_VER > 1200 && _MSC_VER <= 1550
-#pragma warning (disable: 4290)
-#endif
+#include <svnqt/client.h>
+#include <svnqt/svnqt_defines.h>
 
 class QStringList;
 

@@ -25,10 +25,10 @@
 #ifndef SVNQT_DIFF_DATA_H
 #define SVNQT_DIFF_DATA_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/pool.h"
-#include "path.h"
-#include "revision.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/pool.h>
+#include <svnqt/path.h>
+#include <svnqt/revision.h>
 
 #include <QByteArray>
 

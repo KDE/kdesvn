@@ -22,9 +22,9 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 #include "client_commit_parameter.h"
-#include "svnqt/svnqttypes.h"
-#include "svnqt/stringarray.h"
-#include "svnqt/client_parameter_macros.h"
+#include "svnqttypes.h"
+#include "stringarray.h"
+#include "client_parameter_macros.h"
 
 namespace svn
 {

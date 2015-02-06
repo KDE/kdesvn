@@ -22,10 +22,9 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 #include "diff_data.h"
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/exception.h"
+#include "exception.h"
 
-#include <qfile.h>
+#include <QFile>
 
 #include <svn_version.h>
 #include <svn_io.h>

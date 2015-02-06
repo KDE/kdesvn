@@ -29,7 +29,7 @@
 #include <svnqt/revision.h>
 #include <svnqt/svnqttypes.h>
 
-#include <qstring.h>
+#include <QString>
 
 struct svn_info_t;
 

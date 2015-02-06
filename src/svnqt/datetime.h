@@ -31,12 +31,12 @@
 #ifndef SVNQT_DATETIME_H
 #define SVNQT_DATETIME_H
 
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqt_defines.h>
 
-#include <qdatetime.h>
+#include <QDateTime>
 
 // subversion api
-#include "svn_types.h"
+#include <svn_types.h>
 
 namespace svn
 {

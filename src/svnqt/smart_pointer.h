@@ -26,7 +26,7 @@
 
 #include <QMutex>
 
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqt_defines.h>
 
 /*!
  * \file smart_pointer.h

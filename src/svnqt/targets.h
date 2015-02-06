@@ -31,11 +31,11 @@
 #ifndef SVNQT_TARGETS_H
 #define SVNQT_TARGETS_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
 
 // apr api
-#include "apr_tables.h"
+#include <apr_tables.h>
 
 class QStringList;
 

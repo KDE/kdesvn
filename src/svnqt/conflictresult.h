@@ -27,11 +27,11 @@
 
 struct svn_wc_conflict_result_t;
 
-#include "svnqt/pool.h"
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/pool.h>
+#include <svnqt/svnqt_defines.h>
 #include <svn_types.h>
 
-#include <qstring.h>
+#include <QString>
 
 namespace svn
 {

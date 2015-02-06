@@ -25,7 +25,7 @@
 #ifndef DIFF_OPTIONS_HPP
 #define DIFF_OPTIONS_HPP
 
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqt_defines.h>
 
 struct svn_diff_file_options_t;
 class QStringList;

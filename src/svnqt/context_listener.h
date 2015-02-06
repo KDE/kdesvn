@@ -32,11 +32,11 @@
 #define SVNQT_CONTEXT_LISTENER_H
 
 // svncpp
-#include "svnqt/pool.h"
-#include "svnqt/commititem.h"
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/pool.h>
+#include <svnqt/commititem.h>
+#include <svnqt/svnqt_defines.h>
 // qt
-#include <qstring.h>
+#include <QString>
 // Subversion api
 #include <svn_client.h>
 

@@ -31,9 +31,9 @@
 #ifndef SVNQT_PATH_H
 #define SVNQT_PATH_H
 
-#include <qstring.h>
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
+#include <QString>
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
 
 namespace svn
 {

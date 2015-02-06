@@ -21,19 +21,18 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "svnqt/client_impl.h"
+#include "client_impl.h"
 
 // subversion api
-#include "svn_client.h"
+#include <svn_client.h>
 
-#include "svnqt/exception.h"
-#include "svnqt/pool.h"
-#include "svnqt/targets.h"
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/stringarray.h"
-
-#include "svnqt/helper.h"
-#include "svnqt/client_parameter.h"
+#include "exception.h"
+#include "pool.h"
+#include "targets.h"
+#include "svnqt_defines.h"
+#include "stringarray.h"
+#include "helper.h"
+#include "client_parameter.h"
 
 #include <QDebug>
 

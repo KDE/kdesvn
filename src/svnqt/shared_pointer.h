@@ -25,7 +25,7 @@
 #ifndef SVNQT_SHARED_POINTER_HPP
 #define SVNQT_SHARED_POINTER_HPP
 
-#include "svnqt/smart_pointer.h"
+#include <svnqt/smart_pointer.h>
 
 /*!
  * \file shared_pointer.h

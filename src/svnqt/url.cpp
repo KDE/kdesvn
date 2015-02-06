@@ -27,13 +27,11 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#if defined( _MSC_VER) && _MSC_VER <= 1200
-#pragma warning( disable: 4786 )// debug symbol truncated
-#endif
+
+#include "url.h"
 
 // svncpp
 #include "pool.h"
-#include "url.h"
 #include "svnqt_defines.h"
 
 #include <svn_dirent_uri.h>

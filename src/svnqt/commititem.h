@@ -24,7 +24,7 @@
 #ifndef SVNCOMMITITEM_H
 #define SVNCOMMITITEM_H
 
-#include "client.h"
+#include <svnqt/client.h>
 
 #include <svn_types.h>
 #include <apr.h>

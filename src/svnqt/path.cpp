@@ -28,24 +28,24 @@
  * ====================================================================
  */
 
+#include "path.h"
+
 // subversion api
-#include "svn_path.h"
-#include "svn_dirent_uri.h"
+#include <svn_path.h>
 #include <svn_version.h>
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
 #include <svn_dirent_uri.h>
 #endif
 
 // apr api
-#include "apr_file_io.h"
+#include <apr_file_io.h>
 
 // svncpp
-#include "svnqt/path.h"
-#include "svnqt/pool.h"
-#include "svnqt/url.h"
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/revision.h"
-#include "svnqt/exception.h"
+#include "pool.h"
+#include "url.h"
+#include "svnqt_defines.h"
+#include "revision.h"
+#include "exception.h"
 
 #include <qurl.h>
 

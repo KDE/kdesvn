@@ -31,14 +31,14 @@
 #ifndef SVNQT_DIRENT_H
 #define SVNQT_DIRENT_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/lock_entry.h"
-#include "svnqt/datetime.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/lock_entry.h>
+#include <svnqt/datetime.h>
 
 // subversion api
-#include "svn_client.h"
+#include <svn_client.h>
 
-#include <qstring.h>
+#include <QString>
 
 namespace svn
 {

@@ -31,32 +31,21 @@
 #ifndef SVNQT_CLIENT_H
 #define SVNQT_CLIENT_H
 
-// Ignore MSVC 6 compiler warning: debug symbol truncated
-#if defined (_MSC_VER) && _MSC_VER <= 1200
-#pragma warning (disable: 4786)
-#endif
-
-// Ignore MSVC 7, 2005 & 2008 compiler warning: C++ exception specification
-#if defined (_MSC_VER) && _MSC_VER > 1200 && _MSC_VER <= 1550
-#pragma warning (disable: 4290)
-#endif
-
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
-#include "svnqt/svnstream.h"
-
 // svnqt
-#include "svnqt/context.h"
-#include "svnqt/exception.h"
-#include "svnqt/path.h"
-#include "svnqt/entry.h"
-#include "svnqt/revision.h"
-#include "svnqt/log_entry.h"
-#include "svnqt/info_entry.h"
-#include "svnqt/annotate_line.h"
-#include "svnqt/stringarray.h"
-#include "svnqt/diffoptions.h"
-#include "svnqt/conflictresult.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
+#include <svnqt/svnstream.h>
+#include <svnqt/context.h>
+#include <svnqt/exception.h>
+#include <svnqt/path.h>
+#include <svnqt/entry.h>
+#include <svnqt/revision.h>
+#include <svnqt/log_entry.h>
+#include <svnqt/info_entry.h>
+#include <svnqt/annotate_line.h>
+#include <svnqt/stringarray.h>
+#include <svnqt/diffoptions.h>
+#include <svnqt/conflictresult.h>
 
 class QStringList;
 

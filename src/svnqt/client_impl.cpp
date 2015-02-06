@@ -27,21 +27,16 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#if defined( _MSC_VER) && _MSC_VER <= 1200
-#pragma warning( disable: 4786 )// debug symbol truncated
-#endif
 
 // svncpp
-#include "svnqt/client_impl.h"
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/exception.h"
-#include "svnqt/helper.h"
+#include "client_impl.h"
+#include "svnqt_defines.h"
+#include "exception.h"
+#include "helper.h"
 
-#include "svn_opt.h"
-#include "svn_ra.h"
+#include <svn_opt.h>
+#include <svn_ra.h>
 
-#include <qmap.h>
-#include <qstringlist.h>
 namespace svn
 {
 

@@ -27,24 +27,20 @@
  * history and logs, available at http://rapidsvn.tigris.org/.
  * ====================================================================
  */
-#if defined( _MSC_VER) && _MSC_VER <= 1200
-#pragma warning( disable: 4786 )// debug symbol truncated
-#endif
+
 // svncpp
-#include "svnqt/client_impl.h"
+#include "client_impl.h"
 
 // subversion api
-#include "svn_client.h"
-//#include "svn_utf.h"
+#include <svn_client.h>
 
-#include "svnqt/path.h"
-#include "svnqt/exception.h"
-#include "svnqt/pool.h"
-#include "svnqt/revision.h"
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/client_parameter.h"
-
-#include "svnqt/helper.h"
+#include "path.h"
+#include "exception.h"
+#include "pool.h"
+#include "revision.h"
+#include "svnqt_defines.h"
+#include "client_parameter.h"
+#include "helper.h"
 
 namespace svn
 {

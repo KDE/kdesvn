@@ -31,10 +31,11 @@
 #ifndef SVNQT_EXCEPTION_H
 #define SVNQT_EXCEPTION_H
 
-#include "svnqt/svnqt_defines.h"
+#include <svnqt/svnqt_defines.h>
+
 // subversion api
-#include "svn_client.h"
-#include <qstring.h>
+#include <svn_client.h>
+#include <QString>
 
 namespace svn
 {

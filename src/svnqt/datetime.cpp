@@ -28,11 +28,10 @@
  * ====================================================================
  */
 
-// apr
-#include "apr_date.h"
-
-// svncpp
 #include "datetime.h"
+
+// apr
+#include <apr_date.h>
 
 namespace svn
 {

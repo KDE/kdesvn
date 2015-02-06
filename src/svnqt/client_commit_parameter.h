@@ -33,12 +33,12 @@
 #ifndef CLIENT_COMMIT_PARAMETER_H
 #define CLIENT_COMMIT_PARAMETER_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/svnqttypes.h"
-#include "svnqt/revision.h"
-#include "svnqt/targets.h"
-#include "svnqt/path.h"
-#include "svnqt/shared_pointer.h"
+#include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
+#include <svnqt/revision.h>
+#include <svnqt/targets.h>
+#include <svnqt/path.h>
+#include <svnqt/shared_pointer.h>
 
 namespace svn
 {

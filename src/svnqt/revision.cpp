@@ -32,9 +32,6 @@
 #include "revision.h"
 #include "pool.h"
 
-// qt
-#include "qdatetime.h"
-
 namespace svn
 {
 const svn_opt_revision_kind Revision::START = svn_opt_revision_number;

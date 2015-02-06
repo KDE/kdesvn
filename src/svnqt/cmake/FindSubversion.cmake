@@ -111,9 +111,6 @@ if(UNIX)
     option(USE_BACKTRACE "Generate a backtrace when a svnclient exception is thrown" OFF)
   endif()
 
-  check_include_files("svn_version.h" HAS_SVN_VERSION_H)
-
-
 endif()
 
 #search libaries for Windows

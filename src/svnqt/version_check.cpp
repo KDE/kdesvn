@@ -23,14 +23,10 @@
  ***************************************************************************/
 #include "version_check.h"
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <svn_version.h>
 #include <svn_client.h>
 
-#include <qstring.h>
+#include <QString>
 
 namespace svn
 {

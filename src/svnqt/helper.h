@@ -28,9 +28,7 @@
 #include "svnqttypes.h"
 #include "revision.h"
 #include <svn_types.h>
-#ifdef HAS_SVN_VERSION_H
 #include <svn_version.h>
-#endif
 
 #include <iostream>
 

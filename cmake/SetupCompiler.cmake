@@ -24,16 +24,3 @@ check_cxx_accepts_flag("-fexceptions" CXX_EXCEPTION)
 if(CXX_EXCEPTION)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
 endif()
-
-# check if we can use setenv
-try_compile(HAS_SETENV
-        ${CMAKE_BINARY_DIR}
-        ${CMAKE_SOURCE_DIR}/cmake/TestSetenv.cxx
-        OUTPUT_VARIABLE OUTPUT
-)
-
-if(HAS_SETENV)
-    message(STATUS "Checking for setenv - yes")
-else()
-    message(STATUS "Checking for setenv - no")
-endif()

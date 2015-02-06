@@ -24,13 +24,9 @@
 #include "sshagent.h"
 #include "kdesvn-config.h"
 
-#include <qregexp.h>
-#include <kapplication.h>
-#include <kdeversion.h>
-#include <kprocess.h>
-#include <kdebug.h>
-
-#include <stdlib.h>
+#include <KProcess>
+#include <KDebug>
+#include <QRegExp>
 
 // initialize static member variables
 bool    SshAgent::m_isRunning  = false;
@@ -42,7 +38,7 @@ QString SshAgent::m_pid;
 class SshClean
 {
 public:
-    SshClean() {};
+    SshClean() {}
 
     ~SshClean()
     {
@@ -72,7 +68,7 @@ bool SshAgent::querySshAgent()
         m_pid = QString::fromLocal8Bit(pid);
 
         QByteArray sock = qgetenv("SSH_AUTH_SOCK");
-        if (sock.length() > 0) {
+        if (!sock.isEmpty()) {
             m_authSock = QString::fromLocal8Bit(sock);
         }
         /* make sure that we have a askpass program.
@@ -93,23 +89,14 @@ void SshAgent::askPassEnv()
 {
 #ifdef FORCE_ASKPASS
     kDebug(9510) << "Using test askpass" << endl;
-#ifdef HAS_SETENV
-    ::setenv("SSH_ASKPASS", FORCE_ASKPASS, 1);
+    qputenv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
-    ::putenv("SSH_ASKPASS="FORCE_ASKPASS);
-#endif
-#else
-    QString pro = BIN_INSTALL_DIR;
-    if (pro.size() > 0) {
-        pro.append("/");
+    QByteArray pro = BIN_INSTALL_DIR;
+    if (!pro.endsWith('/')) {
+        pro.append('/');
     }
     pro.append("kdesvnaskpass");
-#ifdef HAS_SETENV
-    ::setenv("SSH_ASKPASS", pro.toAscii(), 1);
-#else
-    pro = "SSH_ASKPASS=" + pro;
-    ::putenv(pro.toAscii());
-#endif
+    qputenv("SSH_ASKPASS", pro);
 #endif
 }
 

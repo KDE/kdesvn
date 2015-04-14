@@ -19,22 +19,34 @@
  ####
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.1.0)
+if(POLICY CMP0063)
+  CMAKE_POLICY(SET CMP0063 NEW) # Honor visibility properties for all target types.
+endif()
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Honor visibility properties for all target types (since cmake 3.3)
 endif()
 
 # Where to look for Findxxx.cmake modules
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
+find_package(ECM 5.10.0 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
 # Automatically include the current source and binary dirs
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED 11)
+set(TRANSLATION_DOMAIN "kdesvn")
 
-find_package(KDE4 4.9.0 REQUIRED)
-include (KDE4Defaults)
-include (MacroLibrary)
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
+include(FeatureSummary)
+include(ECMInstallIcons)
+
+find_package(KF5 REQUIRED COMPONENTS Bookmarks Config ConfigWidgets CoreAddons DBusAddons I18n ItemViews JobWidgets KDELibs4Support Service TextEditor Wallet WidgetsAddons)
+find_package(Qt5 REQUIRED COMPONENTS Core DBus Gui Sql Widgets)
 
 # Set the version
 set(KDESVN_VERSION_MAJOR 1)
@@ -76,7 +88,7 @@ add_definitions(-DQT_DEPRECATED_WARNINGS)
 #add_definitions(-DQT_NO_DEPRECATED)
 add_definitions(-DQT_STRICT_ITERATORS)
 
-include(MacroEnsureVersion)
+# include(MacroEnsureVersion)
 include(FindSubversion)
 include(kdesvn-macros)
 

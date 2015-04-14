@@ -125,7 +125,7 @@ set(svnfrontendui
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-kde4_add_ui_files(frontend_ui_sources ${svnfrontendui})
+ki18n_wrap_ui(frontend_ui_sources ${svnfrontendui})
 
 
 add_subdirectory(background)
@@ -134,6 +134,9 @@ add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 
 target_link_libraries(svnfrontend
     PUBLIC
+        KF5::ItemViews
+        KF5::JobWidgets
+        KF5::Service
         ksvnwidgets
         svnqt
 )

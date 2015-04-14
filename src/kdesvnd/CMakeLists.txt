@@ -27,18 +27,16 @@ set(kded_kdesvnd_src
     ${hdr}
    )
 
-qt4_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
+qt5_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
-kde4_add_plugin(kded_kdesvnd ${kded_kdesvnd_src})
-
-kde4_moc_headers(kded_kdesvnd_src kdesvnd_dcop.h)
+add_library(kded_kdesvnd MODULE ${kded_kdesvnd_src})
 
 target_link_libraries(kded_kdesvnd
     ksvnwidgets
     kdesvnhelpers
     kdesvncfgreader
     svnqt
-    ${KDE4_KIO_LIBS}
+    KF5::DBusAddons
 )
 install(TARGETS kded_kdesvnd
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}

@@ -18,7 +18,7 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-kde4_add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
 set(kdesvnsrc
     commandline.cpp
@@ -41,21 +41,17 @@ add_subdirectory(ksvnwidgets)
 add_subdirectory(settings)
 add_subdirectory(svnfrontend)
 add_subdirectory(helpers)
-add_subdirectory(kdesvnd)
+# KF5: TODO
+#add_subdirectory(kdesvnd)
 add_subdirectory(kiosvn)
 add_subdirectory(pics)
 add_subdirectory(icons)
 
-kde4_add_executable(kdesvn ${kdesvnsrc})
-kde4_add_plugin(kdesvnpart ${partsrc})
+add_executable(kdesvn ${kdesvnsrc})
+add_library(kdesvnpart MODULE ${partsrc})
 
 target_link_libraries(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnbackground svnqt
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    ${KDE4_KDECORE_LIBRARY}
-    ${KDE4_KDEUI_LIBRARY}
-    ${KDE4_KIO_LIBRARY}
-    ${KDE4_KPARTS_LIBRARY}
+    KF5::KDELibs4Support
     )
 
 set_target_properties(kdesvnpart
@@ -63,16 +59,14 @@ set_target_properties(kdesvnpart
     LINK_FLAGS "${APR_EXTRA_LDFLAGS} ${APU_EXTRA_LDFLAGS} ${LINK_NO_UNDEFINED}")
 
 target_link_libraries(kdesvnaskpass
-    ${QT_QTCORE_LIBRARY}
-    ${KDE4_KDECORE_LIBRARY}
-    ${KDE4_KDEUI_LIBRARY}
+    KF5::CoreAddons
+    KF5::I18n
+    KF5::WidgetsAddons
+    KF5::Wallet
 )
 target_link_libraries(kdesvn
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    ${KDE4_KDECORE_LIBRARY}
-    ${KDE4_KDEUI_LIBRARY}
-    ${KDE4_KPARTS_LIBRARY}
+    KF5::Parts
+    KF5::KDELibs4Support
 )
 
 install(TARGETS kdesvn kdesvnaskpass kdesvnpart
@@ -80,8 +74,8 @@ install(TARGETS kdesvn kdesvnaskpass kdesvnpart
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
 # the resources
-install(FILES kdesvnui.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)
-install(FILES kdesvn_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdesvnpart)
+install(FILES kdesvnui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/kdesvn)
+install(FILES kdesvn_part.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/kdesvn)
 install(FILES kdesvn.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES kdesvnpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES kdesvn.notifyrc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)

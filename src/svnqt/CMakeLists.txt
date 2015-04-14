@@ -121,9 +121,11 @@ else()
 endif()
 
 target_link_libraries(svnqt
-    ${SUBVERSION_ALL_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTSQL_LIBRARY}
+    PUBLIC
+        ${SUBVERSION_ALL_LIBS}
+        KF5::ConfigCore
+        Qt5::Core
+        Qt5::Sql
 )
 target_include_directories(svnqt
     PUBLIC

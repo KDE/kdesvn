@@ -37,7 +37,7 @@ add_library(svnbackground STATIC
 )
 
 target_link_libraries(svnbackground
-    ${QT_QTCORE_LIBRARY}
+    Qt5::Core
     svnfrontend
     svnqt
 )

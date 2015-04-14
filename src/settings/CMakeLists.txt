@@ -18,11 +18,11 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-kde4_add_kcfg_files(cfgsrc
+kconfig_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
 add_library(kdesvncfgreader STATIC ${cfgsrc})
 
-kde4_add_ui_files(settings_ui_sources
+ki18n_wrap_ui(settings_ui_sources
     cmdexecsettings.ui
     diffmergesettings.ui
     dispcolor_settings.ui

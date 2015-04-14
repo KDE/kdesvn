@@ -18,7 +18,7 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-kde4_add_ui_files(kdesvn_shared_ui
+qt5_wrap_ui(kdesvn_shared_ui
     authdlg.ui
     commitmessage.ui
     deleteform.ui
@@ -62,8 +62,8 @@ set(ksvnwidgethdr
     ssltrustprompt_impl.h
 )
 
-qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
-qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
+qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
+qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
 
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 target_include_directories(ksvnwidgets
@@ -74,6 +74,8 @@ target_include_directories(ksvnwidgets
 target_link_libraries(ksvnwidgets
     PRIVATE
         kdesvncfgreader
+        KF5::Wallet
     PUBLIC
         svnqt
+        KF5::TextEditor
 )

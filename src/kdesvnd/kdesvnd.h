@@ -28,7 +28,6 @@
 #include <kurl.h>
 #include <kdedmodule.h>
 #include <QDBusVariant>
-#include <kcomponentdata.h>
 
 class KdesvndListener;
 class KsvnJobView;
@@ -46,7 +45,6 @@ protected:
     static QString cleanUrl(const KUrl &url);
     KdesvndListener *m_Listener;
     QStringList getActionMenu(const KUrl::List &, bool toplevel);
-    KComponentData m_componentData;
 
     org::kde::JobViewServer m_uiserver;
 

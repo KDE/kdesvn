@@ -22,7 +22,7 @@
 #include "commandline_part.h"
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <qstring.h>
+#include <QString>
 #include <ktoolinvocation.h>
 #include <klibloader.h>
 #include <KHelpClient>

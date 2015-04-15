@@ -43,7 +43,7 @@
 #include <kglobal.h>
 #include <kfiledialog.h>
 #include <kpassworddialog.h>
-#include <kaboutdata.h>
+#include <KAboutData>
 
 #include <kpluginfactory.h>
 #include <knotification.h>
@@ -51,6 +51,7 @@
 #include <QVariant>
 #include <QList>
 #include <QDBusConnection>
+#include <QApplication>
 
 K_PLUGIN_FACTORY(KdeSvndFactory,
                  registerPlugin<kdesvnd>();
@@ -61,7 +62,7 @@ K_EXPORT_PLUGIN(KdeSvndFactory("kio_kdesvn"))
         return;\
     }
 
-kdesvnd::kdesvnd(QObject *parent, const QList<QVariant> &) : KDEDModule(parent), m_componentData("kdesvn"),
+kdesvnd::kdesvnd(QObject *parent, const QList<QVariant> &) : KDEDModule(parent),
     m_uiserver("org.kde.JobViewServer", "/JobViewServer", QDBusConnection::sessionBus())
 {
     KGlobal::locale()->insertCatalog("kdesvn");
@@ -327,12 +328,9 @@ void kdesvnd::registerKioFeedback(qulonglong kioid)
     if (progressJobView.contains(kioid)) {
         return;
     }
-    QString programIconName = m_componentData.aboutData()->programIconName();
-    if (programIconName.isEmpty()) {
-        programIconName = m_componentData.aboutData()->appName();
-    }
-    QDBusReply<QDBusObjectPath> reply = m_uiserver.requestView(m_componentData.aboutData()->programName(),
-                                        programIconName,
+    QApplication* qapp = QApplication::instance();
+    QDBusReply<QDBusObjectPath> reply = m_uiserver.requestView(qapp->applicationName(),
+                                        qapp->applicationDisplayName(),
                                         0x0003);
     if (reply.isValid()) {
         KsvnJobView *jobView = new KsvnJobView(kioid, "org.kde.JobViewServer",

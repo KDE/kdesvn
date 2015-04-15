@@ -21,45 +21,54 @@
 #include "kdesvn.h"
 #include "commandline.h"
 #include "kdesvn-config.h"
-#include <kapplication.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <QApplication>
+#include <KAboutData>
+
 #include <klocale.h>
 #include <kdebug.h>
+#include <QCommandLineParser>
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (standalone application)");
 
-static const char version[] = KDESVN_VERSION;
-
 int main(int argc, char **argv)
 {
-    KAboutData about(QByteArray("kdesvn"), QByteArray("kdesvn"), ki18n("kdesvn"), QByteArray(version), ki18n(description),
-                     KAboutData::License_GPL, ki18n("(C) 2005-2009 Rajko Albrecht"));
-    about.addAuthor(ki18n("Rajko Albrecht"), ki18n("Original author and maintainer"), "ral@alwins-world.de");
-    about.addAuthor(ki18n("Christian Ehrlicher"), ki18n("Developer"), "ch.ehrlicher@gmx.de");
+    KAboutData about(QString("kdesvn"), QString("kdesvn"), QString(KDESVN_VERSION), i18n(description),
+                     KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));
+    about.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));
+    about.addAuthor(i18n("Ovidiu-Florin BOGDAN"), i18n("KF5/Qt5 Porting"), QString("ovidiu.b13@gmail.com"));
+    about.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
     about.setHomepage("https://projects.kde.org/kdesvn");
 
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineOptions options;
-    options.add("r startrev[:endrev]", ki18n("Execute single Subversion command on specific revision(-range)"));
-    options.add("R", ki18n("Ask for revision when executing single command"));
-    options.add("f", ki18n("Force operation"));
-    options.add("o <file>", ki18n("Save output of Subversion command (eg \"cat\") into file <file>"));
-    options.add("l <number>", ki18n("Limit log output to <number>"));
-    options.add("+exec <command>", ki18n("Execute Subversion command (\"exec help\" for more information)"));
-    options.add("+[URL]", ki18n("Document to open"));
-    KCmdLineArgs::addCmdLineOptions(options);
+    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    aboutData.setupCommandLine(&parser);
+    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    aboutData.processCommandLine(&parser);
+    options.add("r startrev[:endrev]", i18n("Execute single Subversion command on specific revision(-range)"));
+    options.add("R", i18n("Ask for revision when executing single command"));
+    options.add("f", i18n("Force operation"));
+    options.add("o <file>", i18n("Save output of Subversion command (eg \"cat\") into file <file>"));
+    options.add("l <number>", i18n("Limit log output to <number>"));
+    options.add("+exec <command>", i18n("Execute Subversion command (\"exec help\" for more information)"));
+    options.add("+[URL]", i18n("Document to open"));
 
-    KApplication app;
+    QApplication app(argc, argv);
+    app.setApplicationName("kdesvn");
+    app.setApplicationDisplayName("kdesvn");
+    app.setOrganizationDomain("kde.org");
+    app.setApplicationVersion(KDESVN_VERSION);
 
     // see if we are starting with session management
     if (app.isSessionRestored()) {
         RESTORE(kdesvn);
     } else {
         // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        if (args->count() == 0) {
+        if (parser.positionalArguments().count() == 0) {
             kdesvn *widget = new kdesvn;
             widget->show();
             widget->checkReload();
@@ -69,14 +78,13 @@ int main(int argc, char **argv)
                 return cl.exec();
             } else {
                 int i = 0;
-                for (; i < args->count(); i++) {
+                for (; i < parser.positionalArguments().count(); i++) {
                     kdesvn *widget = new kdesvn;
                     widget->show();
                     widget->load(args->url(i), true);
                 }
             }
         }
-        args->clear();
     }
     return app.exec();
 }

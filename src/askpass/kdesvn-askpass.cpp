@@ -19,26 +19,35 @@
  ***************************************************************************/
 #include <qregexp.h>
 #include <kaboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+
+
 #include <kpassworddialog.h>
 #include <kdebug.h>
 #include <kwallet.h>
 #include <KLocalizedString>
 #include <QPointer>
 #include <QTextStream>
+#include <QApplication>
+#include <KAboutData>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 
 int main(int argc, char **argv)
 {
     KAboutData about(QByteArray("kdesvnaskpass"), QByteArray("kdesvnaskpass"), ki18n("kdesvnaskpass"), QByteArray("0.2"),
                      ki18n("ssh-askpass for kdesvn"),
-                     KAboutData::License_LGPL,
+                     KAboutLicense::LGPL,
                      ki18n("Copyright (c) 2005-2009 Rajko Albrecht"));
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineOptions options;
-    options.add("+[prompt]", ki18n("Prompt"));
-    KCmdLineArgs::addCmdLineOptions(options);
-    KApplication app;
+    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    aboutData.setupCommandLine(&parser);
+    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    aboutData.processCommandLine(&parser);
+    parser.addPositionalArgument(QLatin1String("[prompt]"), i18n("Prompt"));
     // no need for session management
     app.disableSessionManagement();
     KGlobal::locale()->insertCatalog("kdesvn");

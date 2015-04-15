@@ -161,7 +161,7 @@ KAboutData *kdesvnpart::createAboutData()
                             ki18n("kdesvn Part"),
                             version,
                             ki18n("A Subversion Client for KDE (dynamic Part component)"),
-                            KAboutData::License_LGPL_V2,
+                            KAboutLicense::LGPL_V2,
                             ki18n("(C) 2005-2009 Rajko Albrecht"),
                             KLocalizedString(),
                             QByteArray(),

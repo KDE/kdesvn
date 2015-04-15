@@ -18,5 +18,15 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-ecm_install_icons(${ICON_INSTALL_DIR})
+ecm_install_icons(ICONS
+    128-apps-kdesvn.png
+    16-apps-kdesvn.png
+    22-apps-kdesvn.png
+    32-apps-kdesvn.png
+    48-apps-kdesvn.png
+    64-apps-kdesvn.png
+    sc-apps-kdesvn.svgz
+    DESTINATION ${ICON_INSTALL_DIR}
+    THEME hicolor
+)
 

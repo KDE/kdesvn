@@ -25,6 +25,7 @@
 #include <qstring.h>
 #include <ktoolinvocation.h>
 #include <klibloader.h>
+#include <KHelpClient>
 
 class CommandLineData
 {
@@ -81,5 +82,5 @@ int CommandLine::exec()
 
 void CommandLineData::displayHelp()
 {
-    KToolInvocation::invokeHelp("kdesvn-commandline", "kdesvn");
+    KHelpClient::invokeHelp("kdesvn-commandline", "kdesvn");
 }

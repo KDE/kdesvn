@@ -25,15 +25,16 @@
 
 #include <kapplication.h>
 #include <kparts/mainwindow.h>
+#include <kparts/readonlypart.h>
 #include <qtimer.h>
-#include <kbookmarkmanager.h>
+#include <KBookmarks/KBookmarkManager>
+#include <KBookmarks/KBookmarkMenu>
+#include <KBookmarks/KBookmarkActionMenu>
 
 class KUrl;
 class KAction;
 class KActionMenu;
 class KToggleAction;
-class KBookmarkMenu;
-class KBookmarkActionMenu;
 
 /**
  * This class serves as the main window for kdesvn.  It handles the
@@ -58,7 +59,7 @@ public:
     virtual ~kdesvn();
 
     virtual void openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
-    virtual QString currentUrl() const;
+    virtual QUrl currentUrl() const;
     virtual QString currentTitle() const;
     void checkReload();
 

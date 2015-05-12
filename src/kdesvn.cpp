@@ -35,12 +35,10 @@
 #include <kio/netaccess.h>
 #include <kconfig.h>
 #include <kurl.h>
-#include <kurlrequesterdlg.h>
 #include <khelpmenu.h>
 #include <kmenubar.h>
 #include <kmenu.h>
 #include <kmessagebox.h>
-#include <kstdaccel.h>
 #include <kaction.h>
 #include <KActionCollection>
 #include <KToggleAction>
@@ -150,7 +148,7 @@ kdesvn::kdesvn()
             connectActionCollection(actionCollection());
 
             setHelpMenuEnabled(false);
-            (void) new KHelpMenu(this, componentData().aboutData(), false, actionCollection());
+            (void) new KHelpMenu(this, componentData().applicationData(), false);
 
             // and integrate the part's GUI with the shells
             createGUI(m_part);
@@ -295,7 +293,7 @@ void kdesvn::saveProperties(KConfigGroup &config)
         return;
     }
     if (!m_part->url().isEmpty()) {
-        config.writeEntry("lastURL", m_part->url().prettyUrl());
+        config.writeEntry("lastURL", m_part->url().toDisplayString());
     }
 }
 
@@ -352,12 +350,12 @@ void kdesvn::openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::Keyboard
     }
 }
 
-QString kdesvn::currentUrl() const
+QUrl kdesvn::currentUrl() const
 {
     if (!m_part) {
-        return QString();
+        return QUrl();
     }
-    return m_part->url().prettyUrl();
+    return m_part->url();
 }
 
 QString kdesvn::currentTitle() const
@@ -427,7 +425,7 @@ void kdesvn::closeEvent(QCloseEvent *ev)
     emit sigSavestate();
     if (m_part) {
         KConfigGroup cs(KGlobal::config(), "startup");
-        cs.writeEntry("lastURL", m_part->url().prettyUrl());
+        cs.writeEntry("lastURL", m_part->url().toDisplayString());
         cs.sync();
     }
     return KParts::MainWindow::closeEvent(ev);
@@ -462,16 +460,11 @@ void kdesvn::slotLoadLast(bool how)
 
 void kdesvn::slotResetExtraStatus()
 {
-    if (statusBar()->hasItem(1)) {
-        statusBar()->removeItem(1);
-    }
+    statusBar()->clearMessage();
 }
 
-void kdesvn::slotExtraStatus(const QString &what)
+void kdesvn::slotExtraStatus(const QString &message)
 {
-    if (!statusBar()->hasItem(1)) {
-        statusBar()->insertItem(what, 1);
-    } else {
-        statusBar()->changeItem(what, 1);
-    }
+    statusBar()->clearMessage();
+    statusBar()->showMessage(message);
 }

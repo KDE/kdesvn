@@ -95,6 +95,10 @@ include(kdesvn-macros)
 # Enable exceptions
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 
+# hide deprecated warnings, for now
+# TODO remove this ↓
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+
 # from http://www.kdedevelopers.org/node/3171 and http://kdesvn.alwins-world.de/ticket/595#comment:5
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=9510)
 

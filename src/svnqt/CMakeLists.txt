@@ -73,17 +73,9 @@ set(SOURCES
     )
 
 
-set(TOUTF8 "toUtf8")
-set(FROMUTF8 "fromUtf8")
-set(QLIST "QList")
-set(TOASCII "toAscii")
-set(HOMEDIR "homePath")
 if(NOT svnqt-name)
   set(svnqt-name svnqt_private)
 endif()
-
-set(QDATABASE "QSqlDatabase")
-set(QLONG "qlonglong")
 
 # must set from caller before - here no checks of compiler will done!
 if(HAVE_GCC_VISIBILITY)

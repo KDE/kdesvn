@@ -100,7 +100,7 @@ Targets::Targets(const Path &target)
 Targets::Targets(const char *target)
 {
     if (target) {
-        m_targets.push_back(QString::FROMUTF8(target));
+        m_targets.push_back(QString::fromUtf8(target));
     }
 }
 
@@ -120,7 +120,7 @@ Targets::array(const Pool &pool) const
                        sizeof(const char *));
 
     for (it = m_targets.begin(); it != m_targets.end(); ++it) {
-        QByteArray s = (*it).path().TOUTF8();
+        QByteArray s = (*it).path().toUtf8();
 
         char *t2 =
             apr_pstrndup(apr_pool, s, s.size());

@@ -130,7 +130,7 @@ svn::Revision svn::cache::ReposLog::latestCachedRev()
     }
     int _r;
     if (_q.isActive() && _q.next()) {
-        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        //qDebug("Sel result: %s",_q.value(0).toString().toUtf8().data());
         _r = _q.value(0).toInt();
     } else {
         //qDebug() << _q.lastError().text();
@@ -156,7 +156,7 @@ qlonglong svn::cache::ReposLog::count()const
     qlonglong _r;
     QVariant v;
     if (_q.isActive() && _q.next()) {
-        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        //qDebug("Sel result: %s",_q.value(0).toString().toUtf8().data());
         v = _q.value(0);
         if (v.canConvert(QVariant::LongLong)) {
             bool ok = false;
@@ -201,7 +201,7 @@ qlonglong svn::cache::ReposLog::itemCount()const
     qlonglong _r;
     QVariant v;
     if (_q.isActive() && _q.next()) {
-        //qDebug("Sel result: %s",_q.value(0).toString().TOUTF8().data());
+        //qDebug("Sel result: %s",_q.value(0).toString().toUtf8().data());
         v = _q.value(0);
         if (v.canConvert(QVariant::LongLong)) {
             bool ok = false;
@@ -227,7 +227,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
 
     svn::Revision _latest = latestCachedRev();
 //    //qDebug("Latest cached rev: %i",_latest.revnum());
-//    //qDebug("End revision is: %s",end.toString().TOUTF8().data());
+//    //qDebug("End revision is: %s",end.toString().toUtf8().data());
 
     if (checkHead && _latest.revnum() >= latestHeadRev().revnum()) {
         return true;
@@ -252,7 +252,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
     if (_rstart == 0) {
         _rstart = 1;
     }
-//    //qDebug("Getting log %s -> %s",_rstart.toString().TOUTF8().data(),_rend.toString().TOUTF8().data());
+//    //qDebug("Getting log %s -> %s",_rstart.toString().toUtf8().data(),_rend.toString().toUtf8().data());
     if (_rend == svn::Revision::HEAD) {
         _rend = latestHeadRev();
     }
@@ -455,7 +455,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
     _q.bindValue(2, aEntry.author);
     _q.bindValue(3, aEntry.message);
     if (!_q.exec()) {
-        //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+        //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
         //qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("_insertLogEntry_0: Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
     }
@@ -468,7 +468,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         _q.bindValue(3, (*cpit).copyFromPath);
         _q.bindValue(4, Q_LLONG((*cpit).copyFromRevision));
         if (!_q.exec()) {
-            //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+            //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
         }
@@ -485,7 +485,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         _q.bindValue(0, j);
         _q.bindValue(1, _merges.data());
         if (!_q.exec()) {
-            //qDebug("Could not insert values: %s",_q.lastError().text().TOUTF8().data());
+            //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();
             throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
         }
@@ -530,7 +530,7 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
     _q.setForwardOnly(true);
     _q.prepare(query_string);
     if (!_q.exec()) {
-        //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
+        //qDebug("Could not select values: %s",_q.lastError().text().toUtf8().data());
         //qDebug() << _q.lastQuery();
         throw svn::cache::DatabaseException(QString("Could not select values: ") + _q.lastError().text(), _q.lastError().number());
     }
@@ -544,7 +544,7 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
         _q2.setForwardOnly(true);
         _q2.prepare(query_string);
         if (!_q2.exec()) {
-            //qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
+            //qDebug("Could not select values: %s",_q2.lastError().text().toUtf8().data());
         } else {
             while (_q2.next()) {
                 target[revision].changedPaths.push_back(
@@ -559,7 +559,7 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
         query_string = s_m.arg(revision);
         _q2.prepare(query_string);
         if (!_q2.exec()) {
-            //qDebug("Could not select values: %s",_q2.lastError().text().TOUTF8().data());
+            //qDebug("Could not select values: %s",_q2.lastError().text().toUtf8().data());
         } else {
             if (_q2.next()) {
                 QByteArray byteArray = _q2.value(0).toByteArray();
@@ -587,11 +587,11 @@ bool svn::cache::ReposLog::itemExists(const svn::Revision &peg, const svn::Path 
     QSqlQuery _q(QString(), m_Database);
     QString query_string = QString(_s1).arg(path.native()).arg(peg.revnum());
     if (!_q.exec(query_string)) {
-        //qDebug("Could not select values: %s",_q.lastError().text().TOUTF8().data());
-        //qDebug(_q.lastQuery().TOUTF8().data());
+        //qDebug("Could not select values: %s",_q.lastError().text().toUtf8().data());
+        //qDebug(_q.lastQuery().toUtf8().data());
         throw svn::cache::DatabaseException(QString("Could not select values: ") + _q.lastError().text(), _q.lastError().number());
     }
-    //qDebug(_q.lastQuery().TOUTF8().data());
+    //qDebug(_q.lastQuery().toUtf8().data());
 
     svn::Path _p = path;
     static QString _s2("select revision from changeditem where changeditem in (%1) and action='D' and revision>%2 and revision<=%3 order by revision desc limit 1");

@@ -38,6 +38,7 @@ namespace svn
 class SVNQT_EXPORT InfoEntry
 {
 public:
+    static const qlonglong SVNQT_SIZE_UNKNOWN = -1;
     InfoEntry();
     InfoEntry(const svn_info_t *, const char *path);
     InfoEntry(const svn_info_t *, const QString &path);
@@ -77,8 +78,8 @@ public:
     const Revision &revision()const;
     svn_wc_schedule_t Schedule()const;
 
-    QLONG size()const;
-    QLONG working_size()const;
+    qlonglong size()const;
+    qlonglong working_size()const;
     const QByteArray &changeList()const;
     svn::Depth depth()const;
 
@@ -111,8 +112,8 @@ protected:
     Revision m_revision;
     svn_wc_schedule_t m_schedule;
 
-    QLONG m_size;
-    QLONG m_working_size;
+    qlonglong m_size;
+    qlonglong m_working_size;
     QByteArray m_changeList;
     svn::Depth m_depth;
 

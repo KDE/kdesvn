@@ -47,17 +47,17 @@ void DiffData::init()
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 6)
     Pool scratchPool;
     error = svn_io_open_unique_file3(&m_outFile, &m_outFileName,
-                                     m_tmpPath.path().TOUTF8(),
+                                     m_tmpPath.path().toUtf8(),
                                      svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
 
 #elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
     error = svn_io_open_unique_file2(&m_outFile, &m_outFileName,
-                                     m_tmpPath.path().TOUTF8(),
+                                     m_tmpPath.path().toUtf8(),
                                      ".tmp",
                                      svn_io_file_del_on_pool_cleanup, m_Pool);
 #else
     error = svn_io_open_unique_file(&m_outFile, &m_outFileName,
-                                    m_tmpPath.path().TOUTF8(),
+                                    m_tmpPath.path().toUtf8(),
                                     ".tmp",
                                     false, m_Pool);
 #endif
@@ -67,16 +67,16 @@ void DiffData::init()
     }
 #if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 6)
     error = svn_io_open_unique_file3(&m_errFile, &m_errFileName,
-                                     m_tmpPath.path().TOUTF8(),
+                                     m_tmpPath.path().toUtf8(),
                                      svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
 #elif (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
     error = svn_io_open_unique_file2(&m_errFile, &m_errFileName,
-                                     m_tmpPath.path().TOUTF8(),
+                                     m_tmpPath.path().toUtf8(),
                                      ".tmp",
                                      svn_io_file_del_on_pool_cleanup, m_Pool);
 #else
     error = svn_io_open_unique_file(&m_errFile, &m_errFileName,
-                                    m_tmpPath.path().TOUTF8(),
+                                    m_tmpPath.path().toUtf8(),
                                     ".tmp",
                                     false, m_Pool);
 #endif

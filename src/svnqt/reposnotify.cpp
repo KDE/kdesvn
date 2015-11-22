@@ -68,7 +68,7 @@ public:
         _action = notify->action;
         _rev = notify->revision;
         if (notify->warning_str) {
-            _warning_msg = QString::FROMUTF8(notify->warning_str);
+            _warning_msg = QString::fromUtf8(notify->warning_str);
         }
         _warning = notify->warning;
         _shard = notify->shard;

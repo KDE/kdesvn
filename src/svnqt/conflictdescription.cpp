@@ -48,13 +48,13 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     if (!conflict) {
         return;
     }
-    m_baseFile = QString::FROMUTF8(conflict->base_file);
-    m_mergedFile = QString::FROMUTF8(conflict->merged_file);
-    m_mimeType = QString::FROMUTF8(conflict->mime_type);
-    m_myFile = QString::FROMUTF8(conflict->my_file);
-    m_Path = QString::FROMUTF8(conflict->path);
-    m_propertyName = QString::FROMUTF8(conflict->property_name);
-    m_theirFile = QString::FROMUTF8(conflict->their_file);
+    m_baseFile = QString::fromUtf8(conflict->base_file);
+    m_mergedFile = QString::fromUtf8(conflict->merged_file);
+    m_mimeType = QString::fromUtf8(conflict->mime_type);
+    m_myFile = QString::fromUtf8(conflict->my_file);
+    m_Path = QString::fromUtf8(conflict->path);
+    m_propertyName = QString::fromUtf8(conflict->property_name);
+    m_theirFile = QString::fromUtf8(conflict->their_file);
     switch (conflict->action) {
     case svn_wc_conflict_action_edit:
         m_action = ConflictEdit;

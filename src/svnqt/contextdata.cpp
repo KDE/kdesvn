@@ -39,7 +39,7 @@ ContextData::ContextData(const QString &configDir_)
 {
     const char *c_configDir = 0;
     if (m_ConfigDir.length() > 0) {
-        c_configDir = m_ConfigDir.TOUTF8();
+        c_configDir = m_ConfigDir.toUtf8();
     }
 
     // make sure the configuration directory exists
@@ -294,8 +294,8 @@ bool ContextData::retrieveLogin(const char *username_,
         return false;
     }
 
-    username = QString::FROMUTF8(username_);
-    ok = listener->contextGetLogin(QString::FROMUTF8(realm), username, password, may_save);
+    username = QString::fromUtf8(username_);
+    ok = listener->contextGetLogin(QString::fromUtf8(realm), username, password, may_save);
 
     return ok;
 }
@@ -311,8 +311,8 @@ bool ContextData::retrieveSavedLogin(const char *username_,
         return false;
     }
 
-    username = QString::FROMUTF8(username_);
-    ok = listener->contextGetSavedLogin(QString::FROMUTF8(realm), username, password);
+    username = QString::fromUtf8(username_);
+    ok = listener->contextGetSavedLogin(QString::fromUtf8(realm), username, password);
     return ok;
 }
 
@@ -327,8 +327,8 @@ bool ContextData::retrieveCachedLogin(const char *username_,
         return false;
     }
 
-    username = QString::FROMUTF8(username_);
-    ok = listener->contextGetCachedLogin(QString::FROMUTF8(realm), username, password);
+    username = QString::fromUtf8(username_);
+    ok = listener->contextGetCachedLogin(QString::fromUtf8(realm), username, password);
     return ok;
 }
 
@@ -347,13 +347,13 @@ ContextData::getContextData(void *baton, ContextData **data)
 {
     if (baton == NULL)
         return svn_error_create(SVN_ERR_CANCELLED, NULL,
-                                QObject::tr("invalid baton").TOUTF8());
+                                QObject::tr("invalid baton").toUtf8());
 
     ContextData *data_ = static_cast <ContextData *>(baton);
 
     if (data_->listener == 0)
         return svn_error_create(SVN_ERR_CANCELLED, NULL,
-                                QObject::tr("invalid listener").TOUTF8());
+                                QObject::tr("invalid listener").toUtf8());
 
     *data = data_;
     return SVN_NO_ERROR;
@@ -374,8 +374,8 @@ void ContextData::setLogin(const QString &usr, const QString &pwd)
     username = usr;
     password = pwd;
     svn_auth_baton_t *ab = m_ctx->auth_baton;
-    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_USERNAME, username.TOUTF8());
-    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD, password.TOUTF8());
+    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_USERNAME, username.toUtf8());
+    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD, password.toUtf8());
 }
 
 void ContextData::setLogMessage(const QString &msg)
@@ -411,7 +411,7 @@ svn_error_t *ContextData::onLogMsg(const char **log_msg,
         }
     }
 
-    *log_msg = apr_pstrdup(pool, msg.TOUTF8());
+    *log_msg = apr_pstrdup(pool, msg.toUtf8());
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
@@ -440,7 +440,7 @@ svn_error_t *ContextData::onLogMsg2(const char **log_msg,
         }
     }
 
-    *log_msg = apr_pstrdup(pool, msg.TOUTF8());
+    *log_msg = apr_pstrdup(pool, msg.toUtf8());
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
@@ -470,7 +470,7 @@ svn_error_t *ContextData::onLogMsg3(const char **log_msg,
         }
     }
 
-    *log_msg = apr_pstrdup(pool, msg.TOUTF8());
+    *log_msg = apr_pstrdup(pool, msg.toUtf8());
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
@@ -531,9 +531,9 @@ svn_error_t *ContextData::onCachedPrompt(svn_auth_cred_simple_t **cred,
     svn_auth_cred_simple_t *lcred = (svn_auth_cred_simple_t *)
                                     apr_palloc(pool, sizeof(svn_auth_cred_simple_t));
     QByteArray l;
-    l = data->getPassword().TOUTF8();
+    l = data->getPassword().toUtf8();
     lcred->password = apr_pstrndup(pool, l, l.size());
-    l = data->getUsername().TOUTF8();
+    l = data->getUsername().toUtf8();
     lcred->username = apr_pstrndup(pool, l, l.size());
 
     // tell svn if the credentials need to be saved
@@ -559,9 +559,9 @@ svn_error_t *ContextData::onSavedPrompt(svn_auth_cred_simple_t **cred,
     svn_auth_cred_simple_t *lcred = (svn_auth_cred_simple_t *)
                                     apr_palloc(pool, sizeof(svn_auth_cred_simple_t));
     QByteArray l;
-    l = data->getPassword().TOUTF8();
+    l = data->getPassword().toUtf8();
     lcred->password = apr_pstrndup(pool, l, l.size());
-    l = data->getUsername().TOUTF8();
+    l = data->getUsername().toUtf8();
     lcred->username = apr_pstrndup(pool, l, l.size());
 
     // tell svn if the credentials need to be saved
@@ -588,9 +588,9 @@ svn_error_t *ContextData::onSimplePrompt(svn_auth_cred_simple_t **cred,
     svn_auth_cred_simple_t *lcred = (svn_auth_cred_simple_t *)
                                     apr_palloc(pool, sizeof(svn_auth_cred_simple_t));
     QByteArray l;
-    l = data->getPassword().TOUTF8();
+    l = data->getPassword().toUtf8();
     lcred->password = apr_pstrndup(pool, l, l.size());
-    l = data->getUsername().TOUTF8();
+    l = data->getUsername().toUtf8();
     lcred->username = apr_pstrndup(pool, l, l.size());
 
     // tell svn if the credentials need to be saved
@@ -662,7 +662,7 @@ svn_error_t *ContextData::onSslClientCertPrompt(svn_auth_cred_ssl_client_cert_t 
         (svn_auth_cred_ssl_client_cert_t *)
         apr_palloc(pool, sizeof(svn_auth_cred_ssl_client_cert_t));
 
-    cred_->cert_file = certFile.TOUTF8();
+    cred_->cert_file = certFile.toUtf8();
 
     *cred = cred_;
     return SVN_NO_ERROR;
@@ -680,7 +680,7 @@ svn_error_t *ContextData::onFirstSslClientCertPw(
 
     QString password;
     bool may_save = maySave != 0;
-    if (!data->listener->contextLoadSslClientCertPw(password, QString::FROMUTF8(realm))) {
+    if (!data->listener->contextLoadSslClientCertPw(password, QString::fromUtf8(realm))) {
         return SVN_NO_ERROR;
     }
 
@@ -688,7 +688,7 @@ svn_error_t *ContextData::onFirstSslClientCertPw(
         (svn_auth_cred_ssl_client_cert_pw_t *)
         apr_palloc(pool, sizeof(svn_auth_cred_ssl_client_cert_pw_t));
 
-    cred_->password = password.TOUTF8();
+    cred_->password = password.toUtf8();
     cred_->may_save = may_save;
     *cred = cred_;
 
@@ -707,7 +707,7 @@ svn_error_t *ContextData::onSslClientCertPwPrompt(
 
     QString password;
     bool may_save = maySave != 0;
-    if (!data->listener->contextSslClientCertPwPrompt(password, QString::FROMUTF8(realm), may_save)) {
+    if (!data->listener->contextSslClientCertPwPrompt(password, QString::fromUtf8(realm), may_save)) {
         return data->generate_cancel_error();
     }
 
@@ -715,7 +715,7 @@ svn_error_t *ContextData::onSslClientCertPwPrompt(
         (svn_auth_cred_ssl_client_cert_pw_t *)
         apr_palloc(pool, sizeof(svn_auth_cred_ssl_client_cert_pw_t));
 
-    cred_->password = password.TOUTF8();
+    cred_->password = password.toUtf8();
     cred_->may_save = may_save;
     *cred = cred_;
 
@@ -740,7 +740,7 @@ void ContextData::reset()
 
 svn_error_t *ContextData::generate_cancel_error()
 {
-    return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("Cancelled by user.").TOUTF8());
+    return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("Cancelled by user.").toUtf8());
 }
 
 void ContextData::onProgress(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *)
@@ -799,13 +799,13 @@ svn_error_t *ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, co
 #if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
     ContextData *data = 0;
     SVN_ERR(getContextData(baton, &data));
-    data->getListener()->maySavePlaintext(may_save_plaintext, QString::FROMUTF8(realmstring));
+    data->getListener()->maySavePlaintext(may_save_plaintext, QString::fromUtf8(realmstring));
     return SVN_NO_ERROR;
 #else
     Q_UNUSED(may_save_plaintext);
     Q_UNUSED(realmstring);
     Q_UNUSED(baton);
-    return svn_error_create(SVN_ERR_CANCELLED, NULL, QObject::tr("invalid subversion version.").TOUTF8());
+    return svn_error_create(SVN_ERR_CANCELLED, NULL, QObject::tr("invalid subversion version.").toUtf8());
 #endif
 }
 
@@ -815,7 +815,7 @@ bool ContextData::contextAddListItem(DirEntries *entries, const svn_dirent_t *di
         if (!entries || !dirent) {
             return false;
         }
-        entries->push_back(new DirEntry(/*QString::FROMUTF8(path)*/path, dirent, lock));
+        entries->push_back(new DirEntry(/*QString::fromUtf8(path)*/path, dirent, lock));
         return true;
     }
     return getListener()->contextAddListItem(entries, dirent, lock, path);
@@ -837,7 +837,7 @@ bool ContextListener::contextAddListItem(DirEntries *entries, const svn_dirent_t
     if (!entries || !dirent) {
         return false;
     }
-    entries->push_back(new DirEntry(/*QString::FROMUTF8(path)*/path, dirent, lock));
+    entries->push_back(new DirEntry(/*QString::fromUtf8(path)*/path, dirent, lock));
     return true;
 }
 

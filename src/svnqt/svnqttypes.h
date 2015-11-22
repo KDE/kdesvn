@@ -58,14 +58,14 @@ class CommitParameter;
 class AnnotateParameter;
 class UpdateParameter;
 
-typedef QLIST<AnnotateLine> AnnotatedFile;
+typedef QList<AnnotateLine> AnnotatedFile;
 typedef smart_pointer<svn::Context> ContextP;
 
 typedef SharedPointer<DirEntry> DirEntryPtr;
-typedef QLIST<DirEntryPtr> DirEntries;
-typedef QLIST<InfoEntry> InfoEntries;
+typedef QList<DirEntryPtr> DirEntries;
+typedef QList<InfoEntry> InfoEntries;
 /// simple list of log entries
-typedef QLIST<LogEntry> LogEntries;
+typedef QList<LogEntry> LogEntries;
 /// shared_pointer for LogEntriesMap
 typedef SharedPointer<LogEntries> LogEntriesPtr;
 
@@ -75,26 +75,26 @@ typedef QMap<long, LogEntry> LogEntriesMap;
 typedef SharedPointer<LogEntriesMap> LogEntriesMapPtr;
 
 typedef SharedPointer<Status> StatusPtr;
-typedef QLIST<StatusPtr> StatusEntries;
-typedef QLIST<Revision> Revisions;
+typedef QList<StatusPtr> StatusEntries;
+typedef QList<Revision> Revisions;
 
 /** Range of Revision */
 typedef QPair<Revision, Revision> RevisionRange;
 /** list of revision ranges */
-typedef QLIST<RevisionRange> RevisionRanges;
+typedef QList<RevisionRange> RevisionRanges;
 
 /// map of property names to values
 typedef QMap<QString, QString> PropertiesMap;
 /// pair of path, PropertiesMap
 typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
 /// vector of path, Properties pairs
-typedef QLIST<PathPropertiesMapEntry> PathPropertiesMapList;
+typedef QList<PathPropertiesMapEntry> PathPropertiesMapList;
 /// shared pointer for properties
 typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 
-typedef QLIST<Path> Pathes;
+typedef QList<Path> Pathes;
 
-typedef QLIST<CommitItem> CommitItemList;
+typedef QList<CommitItem> CommitItemList;
 
 //! Mapper enum for svn_depth_t
 /*!

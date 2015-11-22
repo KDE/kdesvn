@@ -146,11 +146,11 @@ const QByteArray &InfoEntry::changeList()const
 {
     return m_changeList;
 }
-QLONG InfoEntry::size()const
+qlonglong InfoEntry::size()const
 {
     return m_size;
 }
-QLONG InfoEntry::working_size()const
+qlonglong InfoEntry::working_size()const
 {
     return m_working_size;
 }
@@ -195,7 +195,7 @@ void svn::InfoEntry::init()
 
 void svn::InfoEntry::init(const svn_info_t *item, const char *path)
 {
-    init(item, QString::FROMUTF8(path));
+    init(item, QString::fromUtf8(path));
 }
 
 /*!
@@ -216,17 +216,17 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     } else {
         m_Lock = LockEntry();
     }
-    m_checksum = QString::FROMUTF8(item->checksum);
-    m_conflict_new = QString::FROMUTF8(item->conflict_new);
-    m_conflict_old = QString::FROMUTF8(item->conflict_old);
-    m_conflict_wrk = QString::FROMUTF8(item->conflict_wrk);
-    m_copyfrom_url = QString::FROMUTF8(item->copyfrom_url);
-    m_last_author = QString::FROMUTF8(item->last_changed_author);
-    m_prejfile = QString::FROMUTF8(item->prejfile);
-    m_repos_root = QString::FROMUTF8(item->repos_root_URL);
-    m_url = QString::FROMUTF8(item->URL);
+    m_checksum = QString::fromUtf8(item->checksum);
+    m_conflict_new = QString::fromUtf8(item->conflict_new);
+    m_conflict_old = QString::fromUtf8(item->conflict_old);
+    m_conflict_wrk = QString::fromUtf8(item->conflict_wrk);
+    m_copyfrom_url = QString::fromUtf8(item->copyfrom_url);
+    m_last_author = QString::fromUtf8(item->last_changed_author);
+    m_prejfile = QString::fromUtf8(item->prejfile);
+    m_repos_root = QString::fromUtf8(item->repos_root_URL);
+    m_url = QString::fromUtf8(item->URL);
     m_pUrl = prettyUrl(item->URL);
-    m_UUID = QString::FROMUTF8(item->repos_UUID);
+    m_UUID = QString::fromUtf8(item->repos_UUID);
     m_kind = item->kind;
     m_copy_from_rev = item->copyfrom_rev;
     m_last_changed_rev = item->last_changed_rev;
@@ -235,14 +235,14 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     m_schedule = item->schedule;
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
-    m_size = item->size64 != SVN_INVALID_FILESIZE ? QLONG(item->size64) : SVNQT_SIZE_UNKNOWN;
-    m_working_size = item->working_size64 != SVN_INVALID_FILESIZE ? QLONG(item->working_size64) : SVNQT_SIZE_UNKNOWN;
+    m_size = item->size64 != SVN_INVALID_FILESIZE ? qlonglong(item->size64) : SVNQT_SIZE_UNKNOWN;
+    m_working_size = item->working_size64 != SVN_INVALID_FILESIZE ? qlonglong(item->working_size64) : SVNQT_SIZE_UNKNOWN;
     if (m_working_size == SVNQT_SIZE_UNKNOWN) {
-        m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? QLONG(item->working_size) : SVNQT_SIZE_UNKNOWN;
+        m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->working_size) : SVNQT_SIZE_UNKNOWN;
     }
 #elif (SVN_VER_MINOR == 5)
-    m_size = item->size != SVN_INFO_SIZE_UNKNOWN ? QLONG(item->size) : SVNQT_SIZE_UNKNOWN;
-    m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? QLONG(item->working_size) : SVNQT_SIZE_UNKNOWN;
+    m_size = item->size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->size) : SVNQT_SIZE_UNKNOWN;
+    m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->working_size) : SVNQT_SIZE_UNKNOWN;
 #endif
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
@@ -286,7 +286,7 @@ QString svn::InfoEntry::prettyUrl(const char *_url)const
     if (_url) {
         Pool pool;
         _url = svn_path_uri_decode(_url, pool);
-        return QString::FROMUTF8(_url);
+        return QString::fromUtf8(_url);
     }
     return QString();
 }

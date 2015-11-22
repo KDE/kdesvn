@@ -76,9 +76,9 @@ public:
     //! future use or useful in backends
     QString copyToPath;
 
-    QLONG copyFromRevision;
+    qlonglong copyFromRevision;
     //! future use or useful in backends
-    QLONG copyToRevision;
+    qlonglong copyToRevision;
 };
 
 typedef QList<LogChangePathEntry> LogChangePathEntries;
@@ -98,12 +98,12 @@ public:
     void setDate(const char *date);
 
     //! if -1 the entry is a fake entry and not real usable!
-    QLONG revision;
-    QLONG date;
+    qlonglong revision;
+    qlonglong date;
     QString author;
     QString message;
     LogChangePathEntries changedPaths;
-    QLIST<QLONG> m_MergedInRevisions;
+    QList<qlonglong> m_MergedInRevisions;
 };
 }
 

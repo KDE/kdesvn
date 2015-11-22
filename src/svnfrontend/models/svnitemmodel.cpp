@@ -238,7 +238,7 @@ QVariant SvnItemModel::data(const QModelIndex &index, int role)const
         case Status:
             return node->infoText();
         case LastRevision:
-            return QVariant(QLONG(node->cmtRev()));
+            return QVariant(qlonglong(node->cmtRev()));
         case LastAuthor:
             return node->cmtAuthor();
         case LastDate:

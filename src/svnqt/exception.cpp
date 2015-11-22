@@ -48,7 +48,7 @@ public:
     apr_status_t apr_err;
 
     Data(const char *msg)
-        : message(QString::FROMUTF8(msg)), apr_err(0)
+        : message(QString::fromUtf8(msg)), apr_err(0)
     {
     }
 
@@ -108,17 +108,17 @@ QString Exception::error2msg(svn_error_t *error)
     }
     svn_error_t *next = error->child;
     if (error->message) {
-        message = QString::FROMUTF8(error->message);
+        message = QString::fromUtf8(error->message);
     } else {
         message = QLatin1String("Unknown error!\n");
         if (error->file) {
             message += QLatin1String("In file ");
-            message += QString::FROMUTF8(error->file);
+            message += QString::fromUtf8(error->file);
             message += QLatin1String(" Line ") + QString::number(error->line);
         }
     }
     while (next != NULL && next->message != NULL) {
-        message = message + QLatin1Char('\n') + QString::FROMUTF8(next->message);
+        message = message + QLatin1Char('\n') + QString::fromUtf8(next->message);
 
         next = next->child;
     }
@@ -197,7 +197,7 @@ QString ClientException::getBackTrace()
     for (int i = 0; i < size; ++i) {
         r.push_back(QString::number(i) +
                     QLatin1String(": ") +
-                    QString::FROMUTF8(strings[i]));
+                    QString::fromUtf8(strings[i]));
     }
     Result = QLatin1String("[\n") +
              r.join(QLatin1String("\n")) +

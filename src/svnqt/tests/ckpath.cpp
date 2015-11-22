@@ -40,7 +40,7 @@ int main(int, char **)
     }
     unsigned j = 0;
     while (pa.length() > 0) {
-        std::cout << pa.path().TOASCII().data() << std::endl;
+        std::cout << pa.path().toLocal8Bit().data() << std::endl;
         pa.removeLast();
         ++j;
     }

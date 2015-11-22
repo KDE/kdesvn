@@ -45,7 +45,7 @@ public:
     {
         return _source;
     }
-    QLONG revision() const
+    qlonglong revision() const
     {
         return _revision;
     }
@@ -53,7 +53,7 @@ public:
 protected:
     QString _path, _source;
     QChar _action;
-    QLONG _revision;
+    qlonglong _revision;
 
     void init(const svn::LogChangePathEntry &);
 };
@@ -67,7 +67,7 @@ public:
     const QList<svn::LogChangePathEntry> &changedPaths()const;
     void setChangedPaths(const svn::LogEntry &);
 
-    QLONG revision()const
+    qlonglong revision()const
     {
         return _data.revision;
     }

@@ -471,7 +471,7 @@ public:
      * @param recurse
      * @return PathPropertiesMapList and revision where the properties are taken from (svn 1.5) or undefined revision (prior 1.5)
      */
-    virtual QPair<QLONG, PathPropertiesMapList>
+    virtual QPair<qlonglong, PathPropertiesMapList>
     propget(const QString &propName,
             const Path &path,
             const Revision &revision,
@@ -506,7 +506,7 @@ public:
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<QLONG, PropertiesMap>
+    virtual QPair<qlonglong, PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision) = 0;
 
@@ -519,7 +519,7 @@ public:
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<QLONG, QString>
+    virtual QPair<qlonglong, QString>
     revpropget(const QString &propName,
                const Path &path,
                const Revision &revision) = 0;
@@ -532,7 +532,7 @@ public:
      * @return Revision
      * @sa PropertiesParameter
      */
-    virtual QLONG
+    virtual qlonglong
     revpropset(const PropertiesParameter &params) = 0;
 
     /**
@@ -545,7 +545,7 @@ public:
      * @param force
      * @return Revision
      */
-    virtual QLONG
+    virtual qlonglong
     revpropdel(const QString &propName,
                const Path &path,
                const Revision &revision) = 0;

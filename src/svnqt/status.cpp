@@ -85,8 +85,8 @@ void Status_private::setPath(const QString &aPath)
     if (!Url::isValid(aPath)) {
         m_Path = aPath;
     } else {
-        const char *int_path = svn_path_uri_decode(aPath.TOUTF8(), pool.pool());
-        m_Path = QString::FROMUTF8(int_path);
+        const char *int_path = svn_path_uri_decode(aPath.toUtf8(), pool.pool());
+        m_Path = QString::fromUtf8(int_path);
     }
 }
 
@@ -192,7 +192,7 @@ Status::Status(const QString &path, svn_wc_status2_t *status)
 Status::Status(const char *path, svn_wc_status2_t *status)
     : m_Data(new Status_private())
 {
-    m_Data->init(QString::FROMUTF8(path), status);
+    m_Data->init(QString::fromUtf8(path), status);
 }
 
 Status::Status(const QString &url, const DirEntryPtr &src)

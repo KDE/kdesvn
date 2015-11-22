@@ -328,7 +328,7 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
     // not using .array() 'cause some extra information is needed for copy
     for (size_t j = 0; j < parameter.srcPath().size(); ++j) {
         svn_client_copy_source_t *source = (svn_client_copy_source_t *)apr_palloc(pool, sizeof(svn_client_copy_source_t));
-        source->path = apr_pstrdup(pool, parameter.srcPath()[j].path().TOUTF8());
+        source->path = apr_pstrdup(pool, parameter.srcPath()[j].path().toUtf8());
         source->revision = parameter.srcRevision().revision();
         source->peg_revision = parameter.pegRevision().revision();
         APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
@@ -514,7 +514,7 @@ Client_impl::doExport(const CheckoutParameter &params) throw (ClientException)
     if (params.nativeEol().isNull()) {
         _neol = (const char *)0;
     } else {
-        _neol = params.nativeEol().TOUTF8();
+        _neol = params.nativeEol().toUtf8();
     }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error =

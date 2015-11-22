@@ -67,7 +67,7 @@ ConflictResult::ConflictResult(const svn_wc_conflict_result_t *aResult)
         break;
     }
     if (aResult->merged_file) {
-        m_MergedFile = QString::FROMUTF8(aResult->merged_file);
+        m_MergedFile = QString::fromUtf8(aResult->merged_file);
     } else {
         m_MergedFile.clear();
     }
@@ -115,7 +115,7 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, const Pool
         break;
 
     }
-    const char *_merged_file = mergedFile().isNull() ? 0 : apr_pstrdup(pool, mergedFile().TOUTF8());
+    const char *_merged_file = mergedFile().isNull() ? 0 : apr_pstrdup(pool, mergedFile().toUtf8());
     if ((*aResult) == 0) {
         (*aResult) = svn_wc_create_conflict_result(_choice, _merged_file, pool);
     } else {

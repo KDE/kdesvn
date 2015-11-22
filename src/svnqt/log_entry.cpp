@@ -45,8 +45,8 @@ LogChangePathEntry::LogChangePathEntry(
     char action_,
     const char *copyFromPath_,
     const svn_revnum_t copyFromRevision_)
-    : path(QString::FROMUTF8(path_)), action(action_),
-      copyFromPath(QString::FROMUTF8(copyFromPath_)),
+    : path(QString::fromUtf8(path_)), action(action_),
+      copyFromPath(QString::fromUtf8(copyFromPath_)),
       copyFromRevision(copyFromRevision_)
 {
 }
@@ -96,8 +96,8 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
     const char *message_;
     svn_compat_log_revprops_out(&author_, &date_, &message_, log_entry->revprops);
 
-    author = author_ == 0 ? QString() : QString::FROMUTF8(author_);
-    message = message_ == 0 ? QString() : QString::FROMUTF8(message_);
+    author = author_ == 0 ? QString() : QString::fromUtf8(author_);
+    message = message_ == 0 ? QString() : QString::fromUtf8(message_);
     setDate(date_);
     revision = log_entry->revision;
     if (log_entry->changed_paths) {
@@ -143,8 +143,8 @@ LogEntry::LogEntry(
     setDate(date_);
 
     revision = revision_;
-    author = author_ == 0 ? QString() : QString::FROMUTF8(author_);
-    message = message_ == 0 ? QString() : QString::FROMUTF8(message_);
+    author = author_ == 0 ? QString() : QString::fromUtf8(author_);
+    message = message_ == 0 ? QString() : QString::fromUtf8(message_);
 }
 
 void LogEntry::setDate(const char *date_)

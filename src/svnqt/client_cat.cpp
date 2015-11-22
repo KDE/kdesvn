@@ -89,7 +89,7 @@ svn_error_t *Client_impl::internal_cat(const Path &path,
 {
     Pool pool;
     return svn_client_cat2(buffer,
-                           path.path().TOUTF8(),
+                           path.path().toUtf8(),
                            peg_revision.revision(),
                            revision.revision(),
                            *m_context,

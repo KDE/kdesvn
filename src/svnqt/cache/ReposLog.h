@@ -44,7 +44,7 @@ class SVNQT_EXPORT ReposLog
 {
 protected:
     svn::Client *m_Client;
-    mutable QDataBase m_Database;
+    mutable QSqlDatabase m_Database;
     QString m_ReposRoot;
     svn::Revision m_latestHead;
     //! internal insert.
@@ -59,7 +59,7 @@ public:
         return m_ReposRoot;
     }
 
-    QDataBase Database() const
+    QSqlDatabase Database() const
     {
         return m_Database;
     }

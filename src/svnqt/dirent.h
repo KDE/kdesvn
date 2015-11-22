@@ -86,7 +86,7 @@ public:
 
     bool isDir()const;
 
-    QLONG
+    qlonglong
     size() const;
 
     bool

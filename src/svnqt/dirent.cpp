@@ -38,7 +38,7 @@ class SVNQT_NOEXPORT DirEntry_Data
 public:
     QString name;
     svn_node_kind_t kind;
-    QLONG size;
+    qlonglong size;
     bool hasProps;
     svn_revnum_t createdRev;
     DateTime time;
@@ -56,7 +56,7 @@ public:
           hasProps(dirEntry->has_props != 0),
           createdRev(dirEntry->created_rev), time(dirEntry->time), m_Lock()
     {
-        lastAuthor = dirEntry->last_author == 0 ? QString() : QString::FROMUTF8(dirEntry->last_author);
+        lastAuthor = dirEntry->last_author == 0 ? QString() : QString::fromUtf8(dirEntry->last_author);
     }
 
     DirEntry_Data(const DirEntry &src)
@@ -121,7 +121,7 @@ bool DirEntry::isDir()const
     return kind() == svn_node_dir;
 }
 
-QLONG
+qlonglong
 DirEntry::size() const
 {
     return m->size;

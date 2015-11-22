@@ -197,10 +197,10 @@ void CContextListener::contextNotify(const char *path,
 
     QString msg;
     QString aString = NotifyAction(action);
-    extraNotify(QString::FROMUTF8(path), action, revision);
+    extraNotify(QString::fromUtf8(path), action, revision);
     if (!aString.isEmpty()) {
         QTextStream ts(&msg, QIODevice::WriteOnly);
-        ts << NotifyAction(action) << " " << QString::FROMUTF8(path);
+        ts << NotifyAction(action) << " " << QString::fromUtf8(path);
         if (revision > -1) {
             ts << " (Rev " << revision << ")";
         }

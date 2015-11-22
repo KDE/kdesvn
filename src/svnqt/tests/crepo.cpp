@@ -63,7 +63,7 @@ int main(int, char **)
         rp.CreateOpen(svn::repository::CreateRepoParameter().path(p).fstype("fsfs"));
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8().data() << std::endl;
+        std::cout << ex.toUtf8().data() << std::endl;
         return -1;
     }
 
@@ -85,7 +85,7 @@ int main(int, char **)
         m_Svnclient->checkout(cparams);
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
-        std::cout << ex.TOUTF8().data() << std::endl;
+        std::cout << ex.toUtf8().data() << std::endl;
         return -1;
     }
     return 0;

@@ -82,8 +82,8 @@ public:
             m_tLine = cc->toUnicode(line().data(), line().size());
             m_tAuthor = cc->toUnicode(author().data(), author().size());
         } else {
-            m_tLine = QString::FROMUTF8(line().data(), line().size());
-            m_tAuthor = QString::FROMUTF8(author().data(), author().size());
+            m_tLine = QString::fromUtf8(line().data(), line().size());
+            m_tAuthor = QString::fromUtf8(author().data(), author().size());
         }
     }
 

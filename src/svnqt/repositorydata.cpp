@@ -69,7 +69,7 @@ RepoOutStream::RepoOutStream(RepositoryData *aBack)
 long RepoOutStream::write(const char *data, const unsigned long max)
 {
     if (m_Back) {
-        QString msg = QString::FROMUTF8(data, max);
+        QString msg = QString::fromUtf8(data, max);
         m_Back->reposFsWarning(msg);
     }
     return max;
@@ -124,7 +124,7 @@ svn_error_t *RepositoryData::cancel_func(void *baton)
 {
     RepositoryListener *m_L = (RepositoryListener *)baton;
     if (m_L && m_L->isCanceld()) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("Cancelled by user.").TOUTF8());
+        return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("Cancelled by user.").toUtf8());
     }
     return SVN_NO_ERROR;
 }
@@ -145,9 +145,9 @@ svn_error_t *RepositoryData::Open(const QString &path)
 {
     Close();
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
-    svn_error_t *error = svn_repos_open2(&m_Repository, path.TOUTF8(), NULL, m_Pool);
+    svn_error_t *error = svn_repos_open2(&m_Repository, path.toUtf8(), NULL, m_Pool);
 #else
-    svn_error_t *error = svn_repos_open(&m_Repository, path.TOUTF8(), m_Pool);
+    svn_error_t *error = svn_repos_open(&m_Repository, path.toUtf8(), m_Pool);
 #endif
     if (error != 0L) {
         m_Repository = 0;
@@ -204,7 +204,7 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
     /// @todo config as extra parameter? Meanwhile default config only
     /// (see svn::ContextData)
     SVN_ERR(svn_config_get_config(&config, 0, m_Pool));
-    const char *repository_path = apr_pstrdup(m_Pool, params.path().TOUTF8());
+    const char *repository_path = apr_pstrdup(m_Pool, params.path().toUtf8());
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
     repository_path = svn_dirent_internal_style(repository_path, m_Pool);
@@ -214,7 +214,7 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
 
     if (svn_path_is_url(repository_path)) {
         return svn_error_createf(SVN_ERR_CL_ARG_PARSING_ERROR, NULL,
-                                 QObject::tr("'%s' is an URL when it should be a path").TOUTF8(), repository_path);
+                                 QObject::tr("'%s' is an URL when it should be a path").toUtf8(), repository_path);
     }
     SVN_ERR(svn_repos_create(&m_Repository, repository_path,
                              NULL, NULL, config, fs_config, m_Pool));
@@ -230,7 +230,7 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
 svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas)
 {
     if (!m_Repository) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("No repository selected.").TOUTF8());
+        return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("No repository selected.").toUtf8());
     }
     Pool pool;
     svn::stream::SvnFileOStream out(output);
@@ -257,17 +257,17 @@ svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &st
 svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)
 {
     if (!m_Repository) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("No repository selected.").TOUTF8());
+        return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("No repository selected.").toUtf8());
     }
     svn::stream::SvnFileIStream infile(dump);
     RepoOutStream backstream(this);
     Pool pool;
-    const char *src_path = apr_pstrdup(pool, dump.TOUTF8());
+    const char *src_path = apr_pstrdup(pool, dump.toUtf8());
     const char *dest_path;
     if (parentFolder.isEmpty()) {
         dest_path = 0;
     } else {
-        dest_path = apr_pstrdup(pool, parentFolder.TOUTF8());
+        dest_path = apr_pstrdup(pool, parentFolder.toUtf8());
     }
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
     src_path = svn_dirent_internal_style(src_path, pool);
@@ -290,8 +290,8 @@ svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid u
 svn_error_t *RepositoryData::hotcopy(const QString &src, const QString &dest, bool cleanlogs)
 {
     Pool pool;
-    const char *src_path = apr_pstrdup(pool, src.TOUTF8());
-    const char *dest_path = apr_pstrdup(pool, dest.TOUTF8());
+    const char *src_path = apr_pstrdup(pool, src.toUtf8());
+    const char *dest_path = apr_pstrdup(pool, dest.toUtf8());
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || SVN_VER_MAJOR>1)
     src_path = svn_dirent_internal_style(src_path, pool);
     dest_path = svn_dirent_internal_style(dest_path, pool);

@@ -27,6 +27,7 @@
 #include <QString>
 #include <QDir>
 #include <QVariant>
+#include <QSqlDatabase>
 
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/shared_pointer.h"
@@ -59,7 +60,7 @@ public:
     LogCache(const QString &aBasePath);
     virtual ~LogCache();
     static LogCache *self();
-    QDataBase reposDb(const QString &aRepository);
+    QSqlDatabase reposDb(const QString &aRepository);
     QStringList cachedRepositories()const;
 
     bool valid()const;

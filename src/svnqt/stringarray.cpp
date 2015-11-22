@@ -59,7 +59,7 @@ svn::StringArray::StringArray(const apr_array_header_t *apr_targets)
         const char **target =
             &APR_ARRAY_IDX(apr_targets, i, const char *);
 
-        m_content.push_back(QString::FROMUTF8(*target));
+        m_content.push_back(QString::fromUtf8(*target));
     }
 }
 
@@ -99,7 +99,7 @@ apr_array_header_t *svn::StringArray::array(const Pool &pool) const
         apr_array_make(apr_pool, m_content.size(), sizeof(const char *));
 
     for (it = m_content.begin(); it != m_content.end(); ++it) {
-        QByteArray s = (*it).TOUTF8();
+        QByteArray s = (*it).toUtf8();
         char *t2 = apr_pstrndup(apr_pool, s, s.size());
 
         (*((const char **) apr_array_push(apr_targets))) = t2;

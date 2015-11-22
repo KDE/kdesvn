@@ -44,33 +44,33 @@ namespace svn
 class SVNQT_EXPORT AnnotateLine
 {
 public:
-    AnnotateLine(QLONG line_no,
-                 QLONG revision,
+    AnnotateLine(qlonglong line_no,
+                 qlonglong revision,
                  const char *author,
                  const char *date,
                  const char *line);
 
-    AnnotateLine(QLONG line_no,
-                 QLONG revision,
+    AnnotateLine(qlonglong line_no,
+                 qlonglong revision,
                  const char *author,
                  const char *date,
                  const char *line,
-                 QLONG merge_revision,
+                 qlonglong merge_revision,
                  const char *merge_author,
                  const char *merge_date,
                  const char *merge_path
                 );
 
     AnnotateLine(
-        QLONG line_no,
-        QLONG revision,
+        qlonglong line_no,
+        qlonglong revision,
         PropertiesMap revisionproperties,
         const char *line,
-        QLONG merge_revision,
+        qlonglong merge_revision,
         PropertiesMap mergeproperties,
         const char *merge_path,
-        QLONG revstart,
-        QLONG revend,
+        qlonglong revstart,
+        qlonglong revend,
         bool local
     );
 
@@ -83,12 +83,12 @@ public:
     {
     }
 
-    QLONG
+    qlonglong
     lineNumber() const
     {
         return m_line_no;
     }
-    QLONG
+    qlonglong
     revision() const
     {
         return m_revision;
@@ -113,13 +113,13 @@ public:
     }
 
 protected:
-    QLONG m_line_no;
-    QLONG m_revision;
+    qlonglong m_line_no;
+    qlonglong m_revision;
     QDateTime m_date;
     QByteArray m_line;
     QByteArray m_author;
 
-    QLONG m_merge_revision;
+    qlonglong m_merge_revision;
     QDateTime m_merge_date;
     QByteArray m_merge_author;
     QByteArray m_merge_path;

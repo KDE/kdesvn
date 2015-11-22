@@ -62,7 +62,7 @@ public:
 
     virtual ~cacheEntry() {};
 
-    virtual bool find(QStringList &, QLIST<C> &)const;
+    virtual bool find(QStringList &, QList<C> &)const;
     //! Checks if cache contains a specific item
     /*!
      * the keylist will manipulated - so copy-operations aren't needed.
@@ -89,7 +89,7 @@ public:
     virtual bool findSingleValid(QStringList &what, bool check_valid_subs)const;
     template<class T> void listsubs_if(QStringList &_what, T &oper)const;
 
-    virtual void appendValidSub(QLIST<C> &)const;
+    virtual void appendValidSub(QList<C> &)const;
     virtual bool isValid()const
     {
         return m_isValid;
@@ -159,7 +159,7 @@ template<class C> inline cacheEntry<C> &cacheEntry<C>::operator=(const cacheEntr
     return *this;
 }
 
-template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QLIST<C> &t)const
+template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &t)const
 {
     if (what.count() == 0) {
         return false;
@@ -230,7 +230,7 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, 
     return it->second.findSingleValid(what, check_valid_subs);
 }
 
-template<class C> inline void cacheEntry<C>::appendValidSub(QLIST<C> &t)const
+template<class C> inline void cacheEntry<C>::appendValidSub(QList<C> &t)const
 {
     citer it;
     for (it = m_subMap.begin(); it != m_subMap.end(); ++it) {
@@ -334,7 +334,7 @@ public:
     itemCache(): m_contentMap(), m_RWLock() {}
     virtual ~itemCache() {};
 
-    void setContent(const QLIST<C> &dlist);
+    void setContent(const QList<C> &dlist);
     void clear()
     {
         QWriteLocker locker(&m_RWLock);
@@ -347,7 +347,7 @@ public:
      * \return true if found (may or may not valid!) otherwise false
      */
     virtual bool find(const QString &what)const;
-    virtual bool find(const QString &, QLIST<C> &)const;
+    virtual bool find(const QString &, QList<C> &)const;
 
     virtual void deleteKey(const QString &what, bool exact);
     virtual void insertKey(const C &, const QString &path);
@@ -359,7 +359,7 @@ public:
     void dump_tree();
 };
 
-template<class C> inline void itemCache<C>::setContent(const QLIST<C> &dlist)
+template<class C> inline void itemCache<C>::setContent(const QList<C> &dlist)
 {
     QWriteLocker locker(&m_RWLock);
     m_contentMap.clear();
@@ -423,7 +423,7 @@ template<class C> inline bool itemCache<C>::find(const QString &what)const
     return it->second.find(_keys);
 }
 
-template<class C> inline bool itemCache<C>::find(const QString &_what, QLIST<C> &dlist)const
+template<class C> inline bool itemCache<C>::find(const QString &_what, QList<C> &dlist)const
 {
     QReadLocker locker(&m_RWLock);
 

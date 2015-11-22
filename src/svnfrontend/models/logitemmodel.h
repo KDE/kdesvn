@@ -44,7 +44,7 @@ public:
     virtual QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const;
     virtual QModelIndex parent(const QModelIndex &)const;
 
-    QLONG toRevision(const QModelIndex &)const;
+    qlonglong toRevision(const QModelIndex &)const;
     const QString &fullMessage(const QModelIndex &index)const;
     void fillChangedPaths(const QModelIndex &index, QTreeWidget *target);
     const QString &realName(const QModelIndex &index);

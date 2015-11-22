@@ -67,7 +67,7 @@ Client_impl::url2Revision(const QString &revstring,
                           Revision &start, Revision &end)
 {
     Pool pool;
-    int n = svn_opt_parse_revision(start, end, revstring.TOUTF8(), pool);
+    int n = svn_opt_parse_revision(start, end, revstring.toUtf8(), pool);
 
     if (n < 0) {
         start = Revision::UNDEFINED;

@@ -632,7 +632,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
             ptr->setFont(KGlobalSettings::fixedFont());
             ptr->setWordWrapMode(QTextOption::NoWrap);
             ptr->setReadOnly(true);
-            ptr->setText(QString::FROMUTF8(co, co.size()));
+            ptr->setText(QString::fromUtf8(co, co.size()));
             dlg->exec();
             KConfigGroup _kc(Kdesvnsettings::self()->config(), "cat_display_dlg");
             dlg->saveDialogSize(_kc);
@@ -775,9 +775,9 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
         text += re;
         if ((*it).kind() == svn_node_file) {
             text += rb + i18n("Size") + cs;
-            if ((*it).size() != SVNQT_SIZE_UNKNOWN) {
+            if ((*it).size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
                 text += QString("%1").arg(helpers::ByteToString((*it).size()));
-            } else if ((*it).working_size() != SVNQT_SIZE_UNKNOWN) {
+            } else if ((*it).working_size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
                 text += QString("%1").arg(helpers::ByteToString((*it).working_size()));
             }
             text += re;
@@ -2769,7 +2769,7 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
 {
     svn::Revision r(svn::Revision::UNDEFINED);
 
-    QPair<QLONG, svn::PathPropertiesMapList> pmp;
+    QPair<qlonglong, svn::PathPropertiesMapList> pmp;
     try {
         pmp = m_Data->m_Svnclient->propget("svn:ignore", item, r, r);
     } catch (const svn::Exception &e) {
@@ -2859,7 +2859,7 @@ bool SvnActions::isLockNeeded(SvnItem *which, const svn::Revision &where)
     }
     svn::Path p(which->fullName());
 
-    QPair<QLONG, svn::PathPropertiesMapList> pmp;
+    QPair<qlonglong, svn::PathPropertiesMapList> pmp;
     try {
         pmp = m_Data->m_Svnclient->propget("svn:needs-lock", p, where, where);
     } catch (const svn::Exception &e) {

@@ -453,7 +453,7 @@ public:
      * @param recurse
      * @return PathPropertiesMapList
      */
-    virtual QPair<QLONG, PathPropertiesMapList>
+    virtual QPair<qlonglong, PathPropertiesMapList>
     propget(const QString &propName,
             const Path &path,
             const Revision &revision,
@@ -488,7 +488,7 @@ public:
      * @param revision
      * @return PropertiesList
      */
-    virtual QPair<QLONG, PropertiesMap>
+    virtual QPair<qlonglong, PropertiesMap>
     revproplist(const Path &path,
                 const Revision &revision);
 
@@ -501,7 +501,7 @@ public:
      * @param revision
      * @return PropertiesList
      */
-    QPair<QLONG, QString>
+    QPair<qlonglong, QString>
     revpropget(const QString &propName,
                const Path &path,
                const Revision &revision);
@@ -514,7 +514,7 @@ public:
      * @return Revision
      * @sa PropertiesParameter
      */
-    virtual QLONG
+    virtual qlonglong
     revpropset(const PropertiesParameter &params);
 
     /**
@@ -527,7 +527,7 @@ public:
      * @param force
      * @return Revision
      */
-    virtual QLONG
+    virtual qlonglong
     revpropdel(const QString &propName,
                const Path &path,
                const Revision &revision);

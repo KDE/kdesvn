@@ -59,7 +59,7 @@ SvnInit::SvnInit()
 {
     svn_cmdline_init("svnqt", 0);
     //qDebug("svn_cmdline_init done");
-    QString BasePath = QDir::HOMEDIR();
+    QString BasePath = QDir::homePath();
     QDir d;
     if (!d.exists(BasePath)) {
         d.mkdir(BasePath);

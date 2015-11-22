@@ -231,10 +231,10 @@ void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action,
     default:
         break;
     }
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "path" , QString::FROMUTF8(path));
+    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "path" , QString::fromUtf8(path));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "action", QString::number(action));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "kind", QString::number(kind));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "mime_t", QString::FROMUTF8(mime_type));
+    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "mime_t", QString::fromUtf8(mime_type));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "content", QString::number(content_state));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "prop", QString::number(prop_state));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "rev", QString::number(revision));

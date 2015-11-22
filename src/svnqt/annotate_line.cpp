@@ -33,13 +33,13 @@
 
 namespace svn
 {
-AnnotateLine::AnnotateLine(QLONG line_no,
-                           QLONG revision,
+AnnotateLine::AnnotateLine(qlonglong line_no,
+                           qlonglong revision,
                            const char *author,
                            const char *date,
                            const char *line)
     : m_line_no(line_no), m_revision(revision),
-      m_date((date &&strlen(date)) ? QDateTime::fromString(QString::FROMUTF8(date), Qt::ISODate) : QDateTime()),
+      m_date((date &&strlen(date)) ? QDateTime::fromString(QString::fromUtf8(date), Qt::ISODate) : QDateTime()),
       m_line(line ? line : ""), m_author(author ? author : ""),
       m_merge_revision(-1),
       m_merge_date(QDateTime()),
@@ -48,35 +48,35 @@ AnnotateLine::AnnotateLine(QLONG line_no,
 {
 }
 
-AnnotateLine::AnnotateLine(QLONG line_no,
-                           QLONG revision,
+AnnotateLine::AnnotateLine(qlonglong line_no,
+                           qlonglong revision,
                            const char *author,
                            const char *date,
                            const char *line,
-                           QLONG merge_revision,
+                           qlonglong merge_revision,
                            const char *merge_author,
                            const char *merge_date,
                            const char *merge_path
                           )
     : m_line_no(line_no), m_revision(revision),
-      m_date((date &&strlen(date)) ? QDateTime::fromString(QString::FROMUTF8(date), Qt::ISODate) : QDateTime()),
+      m_date((date &&strlen(date)) ? QDateTime::fromString(QString::fromUtf8(date), Qt::ISODate) : QDateTime()),
       m_line(line ? line : ""), m_author(author ? author : ""),
       m_merge_revision(merge_revision),
-      m_merge_date((merge_date &&strlen(merge_date)) ? QDateTime::fromString(QString::FROMUTF8(merge_date), Qt::ISODate) : QDateTime()),
+      m_merge_date((merge_date &&strlen(merge_date)) ? QDateTime::fromString(QString::fromUtf8(merge_date), Qt::ISODate) : QDateTime()),
       m_merge_author(merge_author ? merge_author : ""), m_merge_path(merge_path ? merge_path : "")
 {
 }
 
 AnnotateLine::AnnotateLine(
-    QLONG line_no,
-    QLONG revision,
+    qlonglong line_no,
+    qlonglong revision,
     PropertiesMap revisionproperties,
     const char *line,
-    QLONG merge_revision,
+    qlonglong merge_revision,
     PropertiesMap mergeproperties,
     const char *merge_path,
-    QLONG revstart,
-    QLONG revend,
+    qlonglong revstart,
+    qlonglong revend,
     bool local
 )
     : m_line_no(line_no), m_revision(revision), m_date(QDateTime()), m_line(line ? line : ""), m_merge_revision(merge_revision), m_merge_path(merge_path ? merge_path : "")

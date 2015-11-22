@@ -172,7 +172,7 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QLONG SvnLogModel::toRevision(const QModelIndex &index)const
+qlonglong SvnLogModel::toRevision(const QModelIndex &index)const
 {
     if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return -1;

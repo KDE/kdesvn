@@ -43,7 +43,7 @@ Client_impl::lock(const Targets &targets,
     Pool pool;
     svn_error_t *error =
         svn_client_lock(const_cast<apr_array_header_t *>(targets.array(pool)),
-                        message.TOUTF8(),
+                        message.toUtf8(),
                         steal_lock,
                         *m_context,
                         pool);

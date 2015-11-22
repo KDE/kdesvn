@@ -115,8 +115,8 @@ public:
         const char *propname;
         QByteArray s, n;
         for (it = _map.begin(); it != _map.end(); ++it) {
-            s = it.value().TOUTF8();
-            n = it.key().TOUTF8();
+            s = it.value().toUtf8();
+            n = it.key().toUtf8();
             propval = apr_pstrndup(pool, s, s.size());
             propname = apr_pstrndup(pool, n, n.size());
             apr_hash_set(hash, propname, APR_HASH_KEY_STRING, propval);
@@ -143,8 +143,8 @@ public:
                 const char *_k = (const char *)key;
                 const char *_v = ((const svn_string_t *)val)->data;
 
-                _map[ QString::FROMUTF8(_k)] =
-                    QString::FROMUTF8(_v);
+                _map[ QString::fromUtf8(_k)] =
+                    QString::fromUtf8(_v);
             }
         }
     }

@@ -64,8 +64,8 @@ logMapReceiver2(
     LogEntriesMap *entries =
         (LogEntriesMap *) l_baton->m_data;
     Context *l_context = l_baton->m_context;
-    QLIST<QLONG> *rstack =
-        (QLIST<QLONG> *)l_baton->m_revstack;
+    QList<qlonglong> *rstack =
+        (QList<qlonglong> *)l_baton->m_revstack;
     svn_client_ctx_t *ctx = l_context->ctx();
     if (ctx && ctx->cancel_func) {
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
@@ -236,7 +236,7 @@ localStatus(const StatusParameter &params,
     error = svn_client_status3(
 #endif
                 & revnum,          // revnum
-                params.path().path().TOUTF8(),         // path
+                params.path().path().toUtf8(),         // path
                 rev,
                 StatusEntriesFunc, // status func
                 &baton,            // status baton
@@ -251,7 +251,7 @@ localStatus(const StatusParameter &params,
 #else
     error = svn_client_status2(
                 &revnum,      // revnum
-                params.path().path().TOUTF8(),         // path
+                params.path().path().toUtf8(),         // path
                 rev,
                 StatusEntriesFunc, // status func
                 &baton,        // status baton
@@ -329,7 +329,7 @@ localSingleStatus(const Path &path, Context *context, bool update = false)
     error = svn_client_status3(
 #endif
                 & revnum,          // revnum
-                path.path().TOUTF8(),         // path
+                path.path().toUtf8(),         // path
                 rev,
                 StatusEntriesFunc, // status func
                 &baton,            // status baton
@@ -344,7 +344,7 @@ localSingleStatus(const Path &path, Context *context, bool update = false)
 #else
     error = svn_client_status2(
                 &revnum,      // revnum
-                path.path().TOUTF8(),         // path
+                path.path().toUtf8(),         // path
                 rev,
                 StatusEntriesFunc, // status func
                 &baton,        // status baton
@@ -390,7 +390,7 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target) throw (C
 {
     Pool pool;
     sBaton l_baton;
-    QLIST<QLONG> revstack;
+    QList<qlonglong> revstack;
     l_baton.m_context = m_context;
     l_baton.m_data = &log_target;
     l_baton.m_revstack = &revstack;

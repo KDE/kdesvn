@@ -401,7 +401,7 @@ void SvnLogDlgImp::slotBlameItem()
         buttonBlame->setEnabled(false);
         return;
     }
-    QLONG rev = m_CurrentModel->toRevision(ind);
+    qlonglong rev = m_CurrentModel->toRevision(ind);
     svn::Revision start(svn::Revision::START);
     m_Actions->makeBlame(start, rev, _base + m_CurrentModel->realName(ind), QApplication::activeModalWidget(), rev, this);
 }
@@ -431,7 +431,7 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint &e)
         return;
     }
 
-    QLONG rev = -1;
+    qlonglong rev = -1;
     if (bel.isValid()) {
         bel = m_SortModel->mapToSource(bel);
         rev = m_CurrentModel->toRevision(bel);
@@ -505,7 +505,7 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint &e)
     if (!ind.isValid()) {
         return;
     }
-    QLONG rev = m_CurrentModel->toRevision(ind);
+    qlonglong rev = m_CurrentModel->toRevision(ind);
     KMenu popup;
     QString name = item->path();
     QString action = item->action();
@@ -560,7 +560,7 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QTreeWidgetItem *_item, int)
     if (!ind.isValid()) {
         return;
     }
-    QLONG rev = m_CurrentModel->toRevision(ind);
+    qlonglong rev = m_CurrentModel->toRevision(ind);
 
     QString name = item->path();
     QString action = item->action();

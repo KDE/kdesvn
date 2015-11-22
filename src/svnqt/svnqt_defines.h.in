@@ -25,24 +25,7 @@
 #define SVNQT_EXPORT @_SVNQT_EXPORT@
 #define SVNQT_NOEXPORT @_SVNQT_NOEXPORT@
 
-/* cmake trick: so we make sure that the define in installs
-   is always set as in library used at build time
- */
-#define TOUTF8 @TOUTF8@
-#define FROMUTF8 @FROMUTF8@
-#define QLIST @QLIST@
-#define TOASCII @TOASCII@
-#define HOMEDIR @HOMEDIR@
-#define QLONG @QLONG@
-
 #cmakedefine HAS_BACKTRACE_H 1
 #cmakedefine USE_BACKTRACE 1
-// svn_version.h is here since svn 1.0 (or earlier)
-#define HAS_SVN_VERSION_H 1
 
-#define SVNQT_SIZE_UNKNOWN QLONG(-1)
-
-/* the difference between qt3 and qt4 is too much... :( */
-class QSqlDatabase;
-typedef @QDATABASE@ QDataBase;
 #endif

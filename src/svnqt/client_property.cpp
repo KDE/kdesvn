@@ -56,7 +56,7 @@ static svn_error_t *ProplistReceiver(void *baton, const char *path, apr_hash_t *
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
     }
 
-    mapList->push_back(PathPropertiesMapEntry(QString::FROMUTF8(path), svn::internal::Hash2Map(prop_hash, pool)));
+    mapList->push_back(PathPropertiesMapEntry(QString::fromUtf8(path), svn::internal::Hash2Map(prop_hash, pool)));
     return 0;
 }
 
@@ -119,17 +119,17 @@ Client_impl::proplist(const Path &path,
             void *val;
 
             apr_hash_this(hi, &key, NULL, &val);
-            prop_map[ QString::FROMUTF8((const char *)key) ] =
-                QString::FROMUTF8(((const svn_string_t *)val)->data);
+            prop_map[ QString::fromUtf8((const char *)key) ] =
+                QString::fromUtf8(((const svn_string_t *)val)->data);
         }
 
-        path_prop_map_list->push_back(PathPropertiesMapEntry(QString::FROMUTF8(item->node_name->data), prop_map));
+        path_prop_map_list->push_back(PathPropertiesMapEntry(QString::fromUtf8(item->node_name->data), prop_map));
     }
 #endif
     return path_prop_map_list;
 }
 
-QPair<QLONG, PathPropertiesMapList>
+QPair<qlonglong, PathPropertiesMapList>
 Client_impl::propget(const QString &propName,
                      const Path &path,
                      const Revision &revision,
@@ -144,22 +144,22 @@ Client_impl::propget(const QString &propName,
     svn_revnum_t actual = svn_revnum_t(-1);
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 5)) || (SVN_VER_MAJOR > 1)
     svn_error_t *error = svn_client_propget3(&props,
-                         propName.TOUTF8(),
-                         path.cstr(),
-                         peg.revision(),
-                         revision.revision(),
-                         &actual,
-                         internal::DepthToSvn(depth),
-                         changelists.array(pool),
-                         *m_context,
-                         pool
+                                             propName.toUtf8(),
+                                             path.cstr(),
+                                             peg.revision(),
+                                             revision.revision(),
+                                             &actual,
+                                             internal::DepthToSvn(depth),
+                                             changelists.array(pool),
+                                             *m_context,
+                                             pool
                                             );
 #else
     bool recurse = depth == DepthInfinity;
     Q_UNUSED(changelists);
     svn_error_t *error =
         svn_client_propget2(&props,
-                            propName.TOUTF8(),
+                            propName.toUtf8(),
                             path.cstr(),
                             peg.revision(),
                             revision.revision(),
@@ -183,11 +183,11 @@ Client_impl::propget(const QString &propName,
         void *val;
 
         apr_hash_this(hi, &key, NULL, &val);
-        prop_map[propName] = QString::FROMUTF8(((const svn_string_t *)val)->data);
-        path_prop_map_list.push_back(PathPropertiesMapEntry(QString::FROMUTF8((const char *)key), prop_map));
+        prop_map[propName] = QString::fromUtf8(((const svn_string_t *)val)->data);
+        path_prop_map_list.push_back(PathPropertiesMapEntry(QString::fromUtf8((const char *)key), prop_map));
     }
 
-    return QPair<QLONG, PathPropertiesMapList>(actual, path_prop_map_list);
+    return QPair<qlonglong, PathPropertiesMapList>(actual, path_prop_map_list);
 }
 
 void
@@ -199,7 +199,7 @@ Client_impl::propset(const PropertiesParameter &params)
     if (params.propertyValue().isNull()) {
         propval = 0;
     } else {
-        propval = svn_string_create(params.propertyValue().TOUTF8(), pool);
+        propval = svn_string_create(params.propertyValue().toUtf8(), pool);
     }
 
     svn_error_t *error = 0;
@@ -207,7 +207,7 @@ Client_impl::propset(const PropertiesParameter &params)
     svn_commit_info_t *commit_info;
     svn_client_propset3(
         &commit_info,
-        params.propertyName().TOUTF8(),
+        params.propertyName().toUtf8(),
         propval, params.path().cstr(),
         internal::DepthToSvn(params.depth()), params.skipCheck(),
         params.revision(),
@@ -217,7 +217,7 @@ Client_impl::propset(const PropertiesParameter &params)
 #else
     bool recurse = params.depth() == DepthInfinity;
     svn_client_propset2(
-        params.propertyName().TOUTF8(),
+        params.propertyName().toUtf8(),
         propval, params.path().cstr(),
         recurse, params.skipCheck(), *m_context, pool);
 #endif
@@ -240,7 +240,7 @@ Client_impl::propset(const PropertiesParameter &params)
  * @param recurse
  * @return PropertiesList
  */
-QPair<QLONG, PropertiesMap>
+QPair<qlonglong, PropertiesMap>
 Client_impl::revproplist(const Path &path,
                          const Revision &revision)
 {
@@ -268,10 +268,10 @@ Client_impl::revproplist(const Path &path,
         void *val;
 
         apr_hash_this(hi, &key, NULL, &val);
-        prop_map[ QString::FROMUTF8((const char *)key) ] = QString::FROMUTF8(((const svn_string_t *)val)->data);
+        prop_map[ QString::fromUtf8((const char *)key) ] = QString::fromUtf8(((const svn_string_t *)val)->data);
     }
 
-    return QPair<QLONG, PropertiesMap>(revnum, prop_map);
+    return QPair<qlonglong, PropertiesMap>(revnum, prop_map);
 }
 
 /**
@@ -284,7 +284,7 @@ Client_impl::revproplist(const Path &path,
  * @return PropertiesList
  */
 
-QPair<QLONG, QString>
+QPair<qlonglong, QString>
 Client_impl::revpropget(const QString &propName,
                         const Path &path,
                         const Revision &revision)
@@ -295,7 +295,7 @@ Client_impl::revpropget(const QString &propName,
     svn_revnum_t revnum;
     svn_error_t *error =
         svn_client_revprop_get(
-            propName.TOUTF8(),
+            propName.toUtf8(),
             &propval,
             path.cstr(),
             revision.revision(),
@@ -308,26 +308,26 @@ Client_impl::revpropget(const QString &propName,
 
     // if the property does not exist NULL is returned
     if (propval == NULL) {
-        return QPair<QLONG, QString>(0, QString());
+        return QPair<qlonglong, QString>(0, QString());
     }
 
-    return QPair<QLONG, QString>(revnum, QString::FROMUTF8(propval->data));
+    return QPair<qlonglong, QString>(revnum, QString::fromUtf8(propval->data));
 }
 
-QLONG
+qlonglong
 Client_impl::revpropset(const PropertiesParameter &param)
 {
     Pool pool;
 
     const svn_string_t *propval
-        = param.propertyValue().isNull() ? 0 : svn_string_create(param.propertyValue().TOUTF8(), pool);
+        = param.propertyValue().isNull() ? 0 : svn_string_create(param.propertyValue().toUtf8(), pool);
 
     svn_revnum_t revnum;
 
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
-    const svn_string_t *oldpropval = param.propertyOriginalValue().isNull() ? 0 : svn_string_create(param.propertyOriginalValue().TOUTF8(), pool);
+    const svn_string_t *oldpropval = param.propertyOriginalValue().isNull() ? 0 : svn_string_create(param.propertyOriginalValue().toUtf8(), pool);
     svn_error_t *error = svn_client_revprop_set2(
-                             param.propertyName().TOUTF8(),
+                             param.propertyName().toUtf8(),
                              propval,
                              oldpropval,
                              param.path().cstr(),
@@ -338,7 +338,7 @@ Client_impl::revpropset(const PropertiesParameter &param)
                              pool);
 #else
     svn_error_t *error = svn_client_revprop_set(
-                             param.propertyName().TOUTF8(),
+                             param.propertyName().toUtf8(),
                              propval,
                              param.path().cstr(),
                              param.revision().revision(),
@@ -354,7 +354,7 @@ Client_impl::revpropset(const PropertiesParameter &param)
     return revnum;
 }
 
-QLONG
+qlonglong
 Client_impl::revpropdel(const QString &propName,
                         const Path &path,
                         const Revision &revision)
@@ -365,7 +365,7 @@ Client_impl::revpropdel(const QString &propName,
     svn_error_t *error =
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
         svn_client_revprop_set2(
-            propName.TOUTF8(),
+            propName.toUtf8(),
             0, // value = NULL
             0,
             path.cstr(),
@@ -377,7 +377,7 @@ Client_impl::revpropdel(const QString &propName,
 
 #else
         svn_client_revprop_set(
-            propName.TOUTF8(),
+            propName.toUtf8(),
             0, // value = NULL
             path.cstr(),
             revision.revision(),

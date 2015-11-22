@@ -141,29 +141,29 @@ void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action,
 
             if (kind == svn_node_file) {
                 if (content_state == svn_wc_notify_state_conflicted) {
-                    userstring = "C";
+                    userstring = QLatin1Char('C');
                 } else if (content_state == svn_wc_notify_state_merged) {
-                    userstring = "G";
+                    userstring = QLatin1Char('G');
                 } else if (content_state == svn_wc_notify_state_changed) {
-                    userstring = "U";
+                    userstring = QLatin1Char('U');
                 }
             }
 
             if (prop_state == svn_wc_notify_state_conflicted) {
-                userstring += 'C';
+                userstring += QLatin1Char('C');
             } else if (prop_state == svn_wc_notify_state_merged) {
-                userstring += 'G';
+                userstring += QLatin1Char('G');
             } else if (prop_state == svn_wc_notify_state_changed) {
-                userstring += 'U';
+                userstring += QLatin1Char('U');
             } else {
-                userstring += ' ';
+                userstring += QLatin1Char(' ');
             }
 
             if (!((content_state == svn_wc_notify_state_unchanged
                     || content_state == svn_wc_notify_state_unknown)
                     && (prop_state == svn_wc_notify_state_unchanged
                         || prop_state == svn_wc_notify_state_unknown))) {
-                userstring += QString(' ') + path;
+                userstring += QLatin1Char(' ') + path;
             }
         }
         break;
@@ -221,7 +221,7 @@ void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action,
             // check fullstops!
             userstring = i18n("Transmitting file data ");
         } else {
-            userstring = ".";
+            userstring = QLatin1Char('.');
         }
         break;
 

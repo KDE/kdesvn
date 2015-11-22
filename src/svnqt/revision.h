@@ -116,8 +116,8 @@ public:
      * @param revnum a revision number
      * @param revstring a revision string
      *
-     * The revision string MUST uppercase, it may some of "HEAD", "BASE", "WORKING", "COMMITED", "PREV",
-     * or a date in form {YYYY-MM-DD}.
+     * The revision string MUST uppercase, it may some of "WORKING", "BASE", "START", "PREV",
+     * a svn revision number/range or a date in form {YYYY-MM-DD}.
      */
     Revision(const int revnum, const QString &revstring);
 
@@ -125,8 +125,8 @@ public:
      * Constructor
      * @param revstring a revision string
      *
-     * The revision string MUST uppercase, it may some of "HEAD", "BASE", "WORKING", "COMMITED", "PREV",
-     * or a date in form {YYYY-MM-DD}.
+     * The revision string MUST uppercase, it may some of "WORKING", "BASE", "START", "PREV",
+     * a svn revision number/range or a date in form {YYYY-MM-DD}.
      */
     Revision(const QString &revstring);
 

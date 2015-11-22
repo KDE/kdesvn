@@ -351,16 +351,16 @@ void kdesvnd::titleKioOperation(qulonglong kioid, const QString &title, const QS
     progressJobView[kioid]->setDescriptionField(0, i18n("Current task"), label);
 }
 
-void kdesvnd::transferedKioOperation(qulonglong kioid, qulonglong transfered)
+void kdesvnd::transferredKioOperation(qulonglong kioid, qulonglong transferred)
 {
     CHECK_KIO;
     if (progressJobView[kioid]->max() > -1) {
-        progressJobView[kioid]->setProcessedAmount(transfered, "bytes");
-        progressJobView[kioid]->setPercent(progressJobView[kioid]->percent(transfered));
+        progressJobView[kioid]->setProcessedAmount(transferred, "bytes");
+        progressJobView[kioid]->setPercent(progressJobView[kioid]->percent(transferred));
         progressJobView[kioid]->clearDescriptionField(1);
     } else {
         progressJobView[kioid]->setPercent(100.0);
-        progressJobView[kioid]->setDescriptionField(1, i18n("Current transfer"), helpers::ByteToString(transfered));
+        progressJobView[kioid]->setDescriptionField(1, i18n("Current transfer"), helpers::ByteToString(transferred));
     }
 }
 

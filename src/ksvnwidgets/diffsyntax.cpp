@@ -109,26 +109,26 @@ void DiffSyntax::highlightBlock(const QString &aText)
         } else {
             format.setFontItalic(true);
         }
-    } else if (aText.startsWith("_____")) {
+    } else if (aText.startsWith(QLatin1String("_____"))) {
         setCurrentBlockState(1);
         format.setForeground(QColor("#1D1D8F"));
-    } else if (aText.startsWith('+')) {
+    } else if (aText.startsWith(QLatin1Char('+'))) {
         format.setForeground(QColor("#008B00"));
-        if (aText.startsWith("+++")) {
+        if (aText.startsWith(QLatin1String("+++"))) {
             format.setFontWeight(QFont::Bold);
         }
-    } else if (aText.startsWith('-')) {
+    } else if (aText.startsWith(QLatin1Char('-'))) {
         format.setForeground(QColor("#CD3333"));
-        if (aText.startsWith("---")) {
+        if (aText.startsWith(QLatin1String("---"))) {
             format.setFontWeight(QFont::Bold);
         }
-    } else if (aText.startsWith("@@")) {
+    } else if (aText.startsWith(QLatin1String("@@"))) {
         format.setForeground(QColor("#1D1D8F"));
     }
     if (previousBlockState() == 2 && currentBlockState() == 2) {
-        if (aText.startsWith("   +")) {
+        if (aText.startsWith(QLatin1String("   +"))) {
             format.setForeground(QColor("#008B00"));
-        } else if (aText.startsWith("   -")) {
+        } else if (aText.startsWith(QLatin1String("   -"))) {
             format.setForeground(QColor("#CD3333"));
         }
     }

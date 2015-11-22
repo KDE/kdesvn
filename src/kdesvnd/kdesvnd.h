@@ -89,7 +89,7 @@ public Q_SLOTS:
     void maxTransferKioOperation(qulonglong kioid, qulonglong maxtransfer);
     void registerKioFeedback(qulonglong kioid);
     void titleKioOperation(qulonglong kioid, const QString &title, const QString &label);
-    void transferedKioOperation(qulonglong kioid, qulonglong transfered);
+    void transferredKioOperation(qulonglong kioid, qulonglong transferred);
     void unRegisterKioFeedback(qulonglong kioid);
     void notifyKioOperation(const QString &text);
     void errorKioOperation(const QString &text);

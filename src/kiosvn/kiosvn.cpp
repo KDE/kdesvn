@@ -1077,7 +1077,7 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
         if (max > -1) {
             kdesvndInterface.maxTransferKioOperation(m_pData->m_Id, max);
         }
-        kdesvndInterface.transferedKioOperation(m_pData->m_Id, current);
+        kdesvndInterface.transferredKioOperation(m_pData->m_Id, current);
     }
 }
 

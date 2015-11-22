@@ -2692,13 +2692,13 @@ bool SvnActions::doNetworking()
     if (m_Data->m_ParentList->isNetworked()) {
         // if called http:// etc.pp.
         is_url = true;
-    } else if (m_Data->m_ParentList->baseUri().startsWith('/')) {
+    } else if (m_Data->m_ParentList->baseUri().startsWith(QLatin1Char('/'))) {
         // if opened a working copy we must check if it points to a networking repository
         svn::InfoEntry e;
         if (!singleInfo(m_Data->m_ParentList->baseUri(), svn::Revision::UNDEFINED, e)) {
             return false;
         }
-        is_url = !e.reposRoot().startsWith("file:/");
+        is_url = !e.reposRoot().startsWith(QLatin1String("file:/"));
     }
     return !is_url;
 }

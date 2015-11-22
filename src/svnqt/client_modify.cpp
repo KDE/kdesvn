@@ -251,10 +251,10 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
             internal::DepthToSvn(parameters.depth()),
             parameters.keepLocks(),
             parameters.keepChangeList(),
-            TRUE, /* commit_as_operations */
+            true, /* commit_as_operations */
 #if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
-            FALSE, /* file externals */
-            FALSE, /* dir externals */
+            false, /* file externals */
+            false, /* dir externals */
 #endif
             parameters.changeList().array(pool),
             map2hash(parameters.revisionProperties(), pool),

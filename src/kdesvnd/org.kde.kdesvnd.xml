@@ -65,9 +65,9 @@
         <arg type="t" name="kioid" direction="in"/>
         <arg type="t" name="maxtransfer" direction="in"/>
     </method>
-    <method name="transferedKioOperation">
+    <method name="transferredKioOperation">
         <arg type="t" name="kioid" direction="in"/>
-        <arg type="t" name="transfered" direction="in"/>
+        <arg type="t" name="transferred" direction="in"/>
     </method>
     <method name="titleKioOperation">
         <arg type="t" name="kioid" direction="in"/>

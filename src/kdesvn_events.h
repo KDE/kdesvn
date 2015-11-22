@@ -42,7 +42,7 @@ private:
 class DataEvent: public QEvent
 {
 public:
-    DataEvent(QEvent::Type);
+    explicit DataEvent(QEvent::Type);
 
     void setData(void *data);
     void *data()const;

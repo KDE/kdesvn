@@ -26,7 +26,7 @@ class SvnDirSortFilterProxy: public SvnSortFilterProxy
 {
     Q_OBJECT
 public:
-    SvnDirSortFilterProxy(QObject *parent = 0);
+    explicit SvnDirSortFilterProxy(QObject *parent = 0);
     virtual ~SvnDirSortFilterProxy();
 
     virtual int columnCount(const QModelIndex &parent = QModelIndex())const;

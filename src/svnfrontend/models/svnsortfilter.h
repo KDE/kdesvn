@@ -28,7 +28,7 @@ class SvnSortFilterProxy: public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    SvnSortFilterProxy(QObject *parent = 0);
+    explicit SvnSortFilterProxy(QObject *parent = 0);
     virtual ~SvnSortFilterProxy();
 
     virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;

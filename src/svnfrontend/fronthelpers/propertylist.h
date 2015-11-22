@@ -32,7 +32,7 @@ class Propertylist : public QTreeWidget
 {
     Q_OBJECT
 public:
-    Propertylist(QWidget *parent = 0);
+    explicit Propertylist(QWidget *parent = 0);
     ~Propertylist();
 
     bool checkExisting(const QString &aName, QTreeWidgetItem *it = 0);

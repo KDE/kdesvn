@@ -29,7 +29,7 @@ class HotcopyDlg_impl: public QWidget, public Ui::HotcopyDlg
 {
     Q_OBJECT
 public:
-    HotcopyDlg_impl(QWidget *parent = 0);
+    explicit HotcopyDlg_impl(QWidget *parent = 0);
     virtual ~HotcopyDlg_impl();
 
     QString srcPath()const;

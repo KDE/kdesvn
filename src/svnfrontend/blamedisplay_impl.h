@@ -32,7 +32,7 @@ class BlameDisplay_impl: public QWidget, public Ui::BlameDisplay
 {
     Q_OBJECT
 public:
-    BlameDisplay_impl(QWidget *parent = 0);
+    explicit BlameDisplay_impl(QWidget *parent = 0);
     virtual ~BlameDisplay_impl();
 
     virtual void setContent(const QString &, const svn::AnnotatedFile &);

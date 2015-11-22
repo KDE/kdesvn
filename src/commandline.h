@@ -32,7 +32,7 @@ class CommandLine: public QObject
 {
     Q_OBJECT
 public:
-    CommandLine(KCmdLineArgs *);
+    explicit CommandLine(KCmdLineArgs *);
     virtual ~CommandLine();
 
     virtual int exec();

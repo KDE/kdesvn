@@ -39,7 +39,7 @@ class CommandExec : public QObject
 {
     Q_OBJECT
 public:
-    CommandExec(QObject *parent);
+    explicit CommandExec(QObject *parent);
     virtual ~CommandExec();
     virtual int exec(KCmdLineArgs *args);
 

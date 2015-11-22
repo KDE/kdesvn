@@ -32,7 +32,7 @@ class UrlDlg : public KDialog
 {
     Q_OBJECT
 public:
-    UrlDlg(QWidget *parent = 0);
+    explicit UrlDlg(QWidget *parent = 0);
     virtual ~UrlDlg();
     KUrl selectedUrl();
     static KUrl getUrl(QWidget *parent = 0);

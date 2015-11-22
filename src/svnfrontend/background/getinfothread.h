@@ -34,7 +34,7 @@ class SvnItemModelNode;
 class GetInfoThread: public SvnThread
 {
 public:
-    GetInfoThread(QObject *parent);
+    explicit GetInfoThread(QObject *parent);
     virtual ~GetInfoThread();
     virtual void run();
     virtual void cancelMe();

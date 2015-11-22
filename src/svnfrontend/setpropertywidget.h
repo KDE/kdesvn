@@ -31,7 +31,7 @@ class SetPropertyWidget: virtual public QWidget, public Ui_SetPropertyWidget
 {
     Q_OBJECT
 public:
-    SetPropertyWidget(QWidget *parent = 0);
+    explicit SetPropertyWidget(QWidget *parent = 0);
     virtual ~SetPropertyWidget();
 
     QString getPropertyName()const;

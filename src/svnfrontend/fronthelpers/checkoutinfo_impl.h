@@ -29,7 +29,7 @@ class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo
 {
     Q_OBJECT
 public:
-    CheckoutInfo_impl(QWidget *parent = 0);
+    explicit CheckoutInfo_impl(QWidget *parent = 0);
     virtual ~CheckoutInfo_impl();
 
     svn::Revision toRevision() const;

@@ -30,7 +30,7 @@ class SvnTreeView: public QTreeView
 private:
     static bool _isDrag;
 public:
-    SvnTreeView(QWidget *parent = 0);
+    explicit SvnTreeView(QWidget *parent = 0);
     virtual ~SvnTreeView();
 
 protected:

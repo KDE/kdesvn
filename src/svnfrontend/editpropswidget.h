@@ -29,7 +29,7 @@ class EditPropsWidget: public QWidget, public Ui::EditPropsWidget
 {
     Q_OBJECT
 public:
-    EditPropsWidget(QWidget *parent = 0);
+    explicit EditPropsWidget(QWidget *parent = 0);
     ~EditPropsWidget();
 
     QString propName()const;

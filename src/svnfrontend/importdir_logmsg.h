@@ -30,7 +30,7 @@ class Importdir_logmsg : public Commitmsg_impl
 {
     Q_OBJECT
 public:
-    Importdir_logmsg(QWidget *parent = 0);
+    explicit Importdir_logmsg(QWidget *parent = 0);
 
     virtual ~Importdir_logmsg();
 

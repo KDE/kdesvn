@@ -34,7 +34,7 @@ class PropertyListViewItem: public QTreeWidgetItem
 public:
     static const int _RTTI_ = QTreeWidgetItem::UserType + 2;
     PropertyListViewItem(QTreeWidget *parent, const QString &, const QString &);
-    PropertyListViewItem(QTreeWidget *parent);
+    explicit PropertyListViewItem(QTreeWidget *parent);
     virtual ~PropertyListViewItem();
 
     const QString &startName()const

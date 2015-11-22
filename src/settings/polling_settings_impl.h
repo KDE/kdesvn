@@ -28,7 +28,7 @@ class PollingSettings_impl : public QWidget, public Ui::PollingSettings
     Q_OBJECT
 
 public:
-    PollingSettings_impl(QWidget *parent = 0);
+    explicit PollingSettings_impl(QWidget *parent = 0);
     ~PollingSettings_impl();
     /*$PUBLIC_FUNCTIONS$*/
 

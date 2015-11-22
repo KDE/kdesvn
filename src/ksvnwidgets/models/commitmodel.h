@@ -36,9 +36,9 @@ class CommitModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    CommitModel(const svn::CommitItemList &, QObject *parent = 0);
-    CommitModel(const QMap<QString, QString> &, QObject *parent = 0);
-    CommitModel(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = 0);
+    explicit CommitModel(const svn::CommitItemList &, QObject *parent = 0);
+    explicit CommitModel(const QMap<QString, QString> &, QObject *parent = 0);
+    explicit CommitModel(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = 0);
 
     void setCommitData(const svn::CommitItemList &);
     void setCommitData(const QMap<QString, QString> &);

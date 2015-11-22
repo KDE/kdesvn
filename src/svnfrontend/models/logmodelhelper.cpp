@@ -28,14 +28,8 @@
 
 #define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType+1
 
-LogChangePathItem::LogChangePathItem(QTreeWidget *parent, const svn::LogChangePathEntry &e)
-    : QTreeWidgetItem(parent, TREE_PATH_ITEM_TYPE)
-{
-    init(e);
-}
-
-LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry &e)
-    : QTreeWidgetItem(TREE_PATH_ITEM_TYPE)
+LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry &e, QTreeWidget *view)
+    : QTreeWidgetItem(view, TREE_PATH_ITEM_TYPE)
 {
     init(e);
 }

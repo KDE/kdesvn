@@ -114,7 +114,7 @@ class KPARTS_EXPORT KdesvnBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 public:
-    KdesvnBrowserExtension(kdesvnpart *);
+    explicit KdesvnBrowserExtension(kdesvnpart *);
     virtual ~KdesvnBrowserExtension();
 
 public slots:

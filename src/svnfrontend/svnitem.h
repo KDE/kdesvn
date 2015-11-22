@@ -44,7 +44,7 @@ class SvnItem
 {
 public:
     SvnItem();
-    SvnItem(const svn::StatusPtr &);
+    explicit SvnItem(const svn::StatusPtr &);
     virtual ~SvnItem();
 
     virtual const QString &fullName()const;

@@ -37,11 +37,11 @@ public:
         ALL            = COMMIT | ADD_COMMIT | DELETE | MISSING_DELETE,
     };
 
-    CommitActionEntry(const QString &, const QString &, ACTION_TYPE kind = COMMIT);
-    CommitActionEntry(const CommitActionEntry &);
+    explicit CommitActionEntry(const QString &, const QString &, ACTION_TYPE kind = COMMIT);
+    explicit CommitActionEntry(const CommitActionEntry &);
     CommitActionEntry();
 
-    virtual ~CommitActionEntry();
+    ~CommitActionEntry();
 
     const QString &action()const;
     const QString &name()const;
@@ -57,9 +57,9 @@ protected:
 class CommitModelNode
 {
 public:
-    CommitModelNode(const svn::CommitItem &);
-    CommitModelNode(const QString &, const QString &);
-    CommitModelNode(const CommitActionEntry &, bool checked);
+    explicit CommitModelNode(const svn::CommitItem &);
+    explicit CommitModelNode(const QString &, const QString &);
+    explicit CommitModelNode(const CommitActionEntry &, bool checked);
 
     virtual ~CommitModelNode();
 

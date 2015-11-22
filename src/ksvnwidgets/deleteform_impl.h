@@ -26,7 +26,7 @@ class DeleteForm_impl: public QWidget, Ui::DeleteForm
 {
     Q_OBJECT
 public:
-    DeleteForm_impl(QWidget *parent = 0);
+    explicit DeleteForm_impl(QWidget *parent = 0);
     virtual ~DeleteForm_impl();
 
     void setStringList(const QStringList &);

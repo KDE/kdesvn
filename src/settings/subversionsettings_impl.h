@@ -28,7 +28,7 @@ class SubversionSettings_impl : public QWidget, public Ui::SubversionSettings
     Q_OBJECT
 
 public:
-    SubversionSettings_impl(QWidget *parent = 0);
+    explicit SubversionSettings_impl(QWidget *parent = 0);
     ~SubversionSettings_impl();
     /*$PUBLIC_FUNCTIONS$*/
 

@@ -119,9 +119,10 @@ public:
 class StoredDrawParams: public DrawParams
 {
 public:
-    StoredDrawParams();
-    StoredDrawParams(QColor c,
-                     bool selected = false, bool current = false);
+    explicit StoredDrawParams();
+    explicit StoredDrawParams(const QColor &c,
+                              bool selected = false,
+                              bool current = false);
 
     // getters
     QString  text(int) const;
@@ -226,7 +227,7 @@ private:
 class RectDrawing
 {
 public:
-    RectDrawing(QRect);
+    explicit RectDrawing(const QRect &r);
     ~RectDrawing();
 
     // The default DrawParams object used.

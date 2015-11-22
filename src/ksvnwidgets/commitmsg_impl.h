@@ -36,11 +36,11 @@ class Commitmsg_impl: public QWidget, Ui::CommitMessage
     Q_OBJECT
 
 protected:
-    Commitmsg_impl(const svn::CommitItemList &_items, QWidget *parent = 0);
-    Commitmsg_impl(const QMap<QString, QString> &_items, QWidget *parent = 0);
-    Commitmsg_impl(const CommitActionEntries &, const CommitActionEntries &, QWidget *parent = 0);
+    explicit Commitmsg_impl(const svn::CommitItemList &_items, QWidget *parent = 0);
+    explicit Commitmsg_impl(const QMap<QString, QString> &_items, QWidget *parent = 0);
+    explicit Commitmsg_impl(const CommitActionEntries &, const CommitActionEntries &, QWidget *parent = 0);
 public:
-    Commitmsg_impl(QWidget *parent = 0);
+    explicit Commitmsg_impl(QWidget *parent = 0);
     virtual ~Commitmsg_impl();
 
     QString getMessage()const;

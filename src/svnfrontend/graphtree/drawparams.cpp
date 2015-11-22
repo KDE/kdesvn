@@ -61,8 +61,9 @@ StoredDrawParams::StoredDrawParams()
     // field array has size 0
 }
 
-StoredDrawParams::StoredDrawParams(QColor c,
-                                   bool selected, bool current)
+StoredDrawParams::StoredDrawParams(const QColor &c,
+                                   bool selected,
+                                   bool current)
 {
     _backColor = c;
 
@@ -192,7 +193,7 @@ void StoredDrawParams::setMaxLines(int f, int m)
 // RectDrawing
 //
 
-RectDrawing::RectDrawing(QRect r)
+RectDrawing::RectDrawing(const QRect &r)
 {
     _fm = 0;
     _dp = 0;

@@ -29,7 +29,7 @@ class RevertFormImpl: public QWidget, public Ui::RevertForm
 {
     Q_OBJECT
 public:
-    RevertFormImpl(QWidget *parent = 0);
+    explicit RevertFormImpl(QWidget *parent = 0);
     virtual ~RevertFormImpl();
     svn::Depth getDepth()const;
     void setDispList(const QStringList &_list);

@@ -39,7 +39,7 @@ public:
      * Create instance and changes the application cursor to \a c
      * \param c cursortype to set.
      */
-    CursorStack(Qt::CursorShape c = Qt::WaitCursor)
+    explicit CursorStack(Qt::CursorShape c = Qt::WaitCursor)
     {
         KApplication::setOverrideCursor(QCursor(c));
     }

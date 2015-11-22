@@ -28,7 +28,7 @@ class CmdExecSettings_impl : public QWidget, public Ui::CmdExecSettings
     Q_OBJECT
 
 public:
-    CmdExecSettings_impl(QWidget *parent = 0);
+    explicit CmdExecSettings_impl(QWidget *parent = 0);
     ~CmdExecSettings_impl();
     /*$PUBLIC_FUNCTIONS$*/
 

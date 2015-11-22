@@ -30,7 +30,7 @@ class KdesvndListener: public svn::ContextListener
 
     kdesvnd *m_back;
 public:
-    KdesvndListener(kdesvnd *p);
+    explicit KdesvndListener(kdesvnd *p);
     virtual ~KdesvndListener();
     /* context-listener methods */
     virtual bool contextGetLogin(const QString &realm,

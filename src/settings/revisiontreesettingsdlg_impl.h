@@ -26,7 +26,7 @@ class RevisiontreeSettingsDlg_impl: public QWidget, public Ui::RevisionTreeSetti
 {
     Q_OBJECT
 public:
-    RevisiontreeSettingsDlg_impl(QWidget *parent = 0);
+    explicit RevisiontreeSettingsDlg_impl(QWidget *parent = 0);
     virtual ~RevisiontreeSettingsDlg_impl();
 };
 

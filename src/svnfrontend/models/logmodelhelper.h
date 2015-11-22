@@ -30,8 +30,7 @@
 class LogChangePathItem: public QTreeWidgetItem
 {
 public:
-    LogChangePathItem(QTreeWidget *parent, const svn::LogChangePathEntry &);
-    LogChangePathItem(const svn::LogChangePathEntry &);
+    explicit LogChangePathItem(const svn::LogChangePathEntry &, QTreeWidget *view = 0);
     virtual ~LogChangePathItem() {}
 
     QChar action() const
@@ -63,7 +62,7 @@ class SvnLogModelNode
 {
 
 public:
-    SvnLogModelNode(const svn::LogEntry &_entry);
+    explicit SvnLogModelNode(const svn::LogEntry &_entry);
 
     const QList<svn::LogChangePathEntry> &changedPaths()const;
     void setChangedPaths(const svn::LogEntry &);

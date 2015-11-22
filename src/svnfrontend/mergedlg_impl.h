@@ -32,7 +32,7 @@ class MergeDlg_impl: public QWidget, public Ui::MergeDlg
 {
     Q_OBJECT
 public:
-    MergeDlg_impl(QWidget *parent = 0, bool src1 = true, bool src2 = true, bool out = true, bool record_only = true, bool reintegrate = true);
+    explicit MergeDlg_impl(QWidget *parent = 0, bool src1 = true, bool src2 = true, bool out = true, bool record_only = true, bool reintegrate = true);
     virtual ~MergeDlg_impl();
 
     bool recursive()const;

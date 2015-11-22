@@ -27,7 +27,7 @@ class SslTrustPrompt_impl: public QWidget, public Ui::SslTrustPrompt  //public S
 {
     Q_OBJECT
 public:
-    SslTrustPrompt_impl(const QString &, QWidget *parent = 0);
+    explicit SslTrustPrompt_impl(const QString &, QWidget *parent = 0);
     static bool sslTrust(const QString &host, const QString &fingerprint, const QString &validFrom, const QString &validUntil, const QString &issuerName, const QString &realm, const QStringList &reasons, bool *ok, bool *saveit);
 };
 

@@ -33,7 +33,7 @@ class DiffBrowserData
 {
 public:
     DiffBrowserData();
-    virtual ~DiffBrowserData();
+    ~DiffBrowserData();
 
 //     enum {NONE, FORWARD, BACKWARD};
 

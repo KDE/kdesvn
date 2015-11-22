@@ -34,7 +34,7 @@ class kio_svnProtocol;
 class KioListener : public svn::ContextListener
 {
 public:
-    KioListener(KIO::kio_svnProtocol *_par);
+    explicit KioListener(KIO::kio_svnProtocol *_par);
     virtual ~KioListener();
 
     /* context-listener methods */

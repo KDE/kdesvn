@@ -25,7 +25,7 @@
 class DiffSyntax : public QSyntaxHighlighter
 {
 public:
-    DiffSyntax(QTextEdit *);
+    explicit  DiffSyntax(QTextEdit *);
 //     virtual int highlightParagraph ( const QString & text, int endStateOfLastPara );
     virtual  ~DiffSyntax();
 

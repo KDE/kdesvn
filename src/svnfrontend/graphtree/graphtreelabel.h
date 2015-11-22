@@ -55,7 +55,7 @@ class GraphEdge;
 class GraphEdgeArrow: public QGraphicsPolygonItem
 {
 public:
-    GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = 0);
+    explicit GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = 0);
     GraphEdge *edge();
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
     virtual int type()const;
@@ -68,7 +68,7 @@ private:
 class GraphEdge: public QGraphicsPathItem
 {
 public:
-    GraphEdge(QGraphicsItem *p = 0);
+    explicit GraphEdge(QGraphicsItem *p = 0);
     virtual ~GraphEdge();
 
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
@@ -83,7 +83,7 @@ private:
 class GraphMark: public QGraphicsRectItem
 {
 public:
-    GraphMark(GraphTreeLabel *, QGraphicsItem *p = 0);
+    explicit GraphMark(GraphTreeLabel *, QGraphicsItem *p = 0);
     virtual ~GraphMark();
     virtual int type()const;
     virtual bool hit(const QPoint &)const;

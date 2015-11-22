@@ -33,7 +33,7 @@ class DiffBrowser : public KTextBrowser
     Q_OBJECT
 
 public:
-    DiffBrowser(QWidget *parent = 0);
+    explicit DiffBrowser(QWidget *parent = 0);
     virtual ~DiffBrowser();
 
 public slots:

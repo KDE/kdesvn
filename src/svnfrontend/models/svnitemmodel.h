@@ -50,7 +50,7 @@ class SvnItemModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    SvnItemModel(MainTreeWidget *, QObject *parent = 0);
+    explicit SvnItemModel(MainTreeWidget *, QObject *parent = 0);
     virtual ~SvnItemModel();
 
     void clear();

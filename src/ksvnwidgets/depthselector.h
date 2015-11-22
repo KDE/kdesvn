@@ -30,7 +30,7 @@ class DepthSelector: public QWidget, Ui::DepthForm
 {
     Q_OBJECT
 public:
-    DepthSelector(QWidget *parent = 0);
+    explicit DepthSelector(QWidget *parent = 0);
     virtual ~DepthSelector();
     svn::Depth getDepth()const;
     void addItemWidget(QWidget *);

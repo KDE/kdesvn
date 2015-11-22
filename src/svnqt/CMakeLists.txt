@@ -25,11 +25,11 @@ set(SOURCES
     cache/LogCache.cpp
     cache/ReposConfig.cpp
     cache/ReposLog.cpp
-    client.cpp
     client_annotate.cpp
     client_annotate_parameter.cpp
     client_cat.cpp
     client_commit_parameter.cpp
+    client.cpp
     client_diff.cpp
     client_impl.cpp
     client_lock.cpp
@@ -72,69 +72,14 @@ set(SOURCES
     wc.cpp
     )
 
-set(CACHEINST_HEADERS
-    cache/DatabaseException.h
-    cache/LogCache.h
-    cache/ReposConfig.h
-    cache/ReposLog.h
-    cache/conversion_check.h
-)
 
-set(INST_HEADERS
-    annotate_line.h
-    apr.h
-    check.h
-    client.h
-    client_annotate_parameter.h
-    client_commit_parameter.h
-    client_parameter.h
-    client_update_parameter.h
-    commititem.h
-    conflictdescription.h
-    conflictresult.h
-    context.h
-    context_listener.h
-    datetime.h
-    diffoptions.h
-    dirent.h
-    entry.h
-    exception.h
-    info_entry.h
-    lock_entry.h
-    log_entry.h
-    path.h
-    pool.h
-    repoparameter.cpp
-    repoparameter.h
-    repository.h
-    repositorylistener.h
-    reposnotify.h
-    revision.h
-    shared_pointer.h
-    smart_pointer.h
-    status.h
-    stringarray.h
-    svnfilestream.h
-    svnqttypes.h
-    svnstream.h
-    targets.h
-    url.h
-    version_check.h
-    wc.h
-    )
-
-file(GLOB svnhdr RELATIVE  ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
-set(svnhdr ${svnhdr} ${CACHE_INST_HEADERS})
-
-set(QT_LIBRARIES "${QT_QTCORE_LIBRARY}")
-message(STATUS "Qt: ${QT_LIBRARIES}")
 set(TOUTF8 "toUtf8")
 set(FROMUTF8 "fromUtf8")
 set(QLIST "QList")
 set(TOASCII "toAscii")
 set(HOMEDIR "homePath")
 if(NOT svnqt-name)
-  set(svnqt-name svnqt)
+  set(svnqt-name svnqt_private)
 endif()
 
 set(QDATABASE "QSqlDatabase")
@@ -175,39 +120,28 @@ configure_file(
     "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h"
     IMMEDIATE
     @ONLY)
-
-set(INST_HEADERS ${INST_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
-add_library(${svnqt-name} SHARED ${SOURCES} ${svnhdr})
+add_library(${svnqt-name} SHARED ${SOURCES})
 if(WIN32)
-    add_definitions(-D_USE_32BIT_TIME_T)
-else()
-    set_target_properties(${svnqt-name}
-        PROPERTIES
-        COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
+    target_compile_definitions(${svnqt-name} PUBLIC _USE_32BIT_TIME_T)
 endif()
 
-set(LIB_MAJOR 7)
-set(LIB_MINOR 0)
-set(LIB_RELEASE 1)
-
-set(_soversion ${LIB_MAJOR}.${LIB_MINOR}.${LIB_RELEASE})
-
-set_target_properties(${svnqt-name} PROPERTIES
-    SOVERSION ${LIB_MAJOR}
-    VERSION ${_soversion})
-
-set(ALL_LINKFLAGS ${APR_EXTRA_LIBFLAGS})
-set(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LIBFLAGS}")
+set(ALL_LINKFLAGS ${APR_EXTRA_LDFLAGS})
+set(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LDFLAGS}")
 
 if(WIN32 OR APPLE)
-    set_target_properties(${svnqt-name} PROPERTIES LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+    set_property(TARGET ${svnqt-name} PROPERTY LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}" APPEND)
 else()
-    set_target_properties(${svnqt-name} PROPERTIES LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+    set_property(TARGET ${svnqt-name} PROPERTY LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}" APPEND)
 endif()
 
-target_link_libraries(${svnqt-name} ${QT_LIBRARIES} ${SUBVERSION_ALL_LIBS} ${QT_QTSQL_LIBRARY})
+target_link_libraries(${svnqt-name}
+    ${SUBVERSION_ALL_LIBS}
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTSQL_LIBRARY}
+)
+set_property(TARGET ${svnqt-name} PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS} APPEND)
 
 if(WIN32)
     target_link_libraries(${svnqt-name} wsock32.lib)
@@ -217,16 +151,6 @@ endif()
 if(KDE4_BUILD_TESTS)
     add_executable(testlink testmain.cpp)
     target_link_libraries(testlink ${svnqt-name})
-endif()
-
-# install rules
-# in win32 we don't install it
-if(NOT WIN32)
-    install(TARGETS ${svnqt-name} LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-            RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-            ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
-    install(FILES ${INST_HEADERS} DESTINATION include/svnqt)
-    install(FILES ${CACHEINST_HEADERS} DESTINATION include/svnqt/cache)
 endif()
 
 if(KDE4_BUILD_TESTS)

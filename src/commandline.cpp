@@ -24,6 +24,7 @@
 #include <klocale.h>
 #include <qstring.h>
 #include <ktoolinvocation.h>
+#include <klibloader.h>
 
 class CommandLineData
 {

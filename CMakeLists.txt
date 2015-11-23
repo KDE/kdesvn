@@ -71,13 +71,6 @@ include(FindSubversion)
 include(SetupCompiler)
 include(kdesvn-macros)
 
-if(__KDE_HAVE_GCC_VISIBILITY)
-    set(HAVE_GCC_VISIBILITY On)
-    set(_KDESVN_EXPORT "__attribute__ ((visibility(\"default\")))")
-    set(_KDESVN_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
-endif(__KDE_HAVE_GCC_VISIBILITY)
-
-
 # Enable exceptions
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 

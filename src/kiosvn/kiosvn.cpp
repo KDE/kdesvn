@@ -170,7 +170,7 @@ kio_svnProtocol::~kio_svnProtocol()
 
 extern "C"
 {
-    KDESVN_EXPORT int kdemain(int argc, char **argv);
+    Q_DECL_EXPORT int kdemain(int argc, char **argv);
 }
 
 int kdemain(int argc, char **argv)

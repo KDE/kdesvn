@@ -24,16 +24,12 @@
 #include "kdesvn-config.h"
 
 #include <kparts/part.h>
-#include <kparts/genericfactory.h>
-#include <kparts/factory.h>
 #include <kparts/statusbarextension.h>
 #include <kparts/browserextension.h>
 
-#include <KComponentData>
+#include <KAboutData>
 
 class kdesvnView;
-class QPainter;
-class KUrl;
 class KdesvnBrowserExtension;
 class KAboutApplicationDialog;
 
@@ -45,7 +41,7 @@ class KAboutApplicationDialog;
  * @author Rajko Albrecht <ral@alwins-world.de>
  * @version 0.1
  */
-class KDESVN_EXPORT kdesvnpart : public KParts::ReadOnlyPart
+class kdesvnpart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 public:
@@ -110,7 +106,7 @@ protected slots:
 class commandline_part;
 class KCmdLineArgs;
 
-class KPARTS_EXPORT KdesvnBrowserExtension : public KParts::BrowserExtension
+class KdesvnBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 public:

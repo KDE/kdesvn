@@ -77,16 +77,6 @@ if(NOT svnqt-name)
   set(svnqt-name svnqt_private)
 endif()
 
-# must set from caller before - here no checks of compiler will done!
-if(HAVE_GCC_VISIBILITY)
-    set(_SVNQT_EXPORT "__attribute__ ((visibility(\"default\")))")
-    set(_SVNQT_NOEXPORT "__attribute__ ((visibility(\"hidden\")))")
-endif()
-
-if(WIN32)
-    set(_SVNQT_EXPORT "__declspec(dllexport)")
-endif()
-
 if(QT_LUPDATE_EXECUTABLE)
     message(STATUS "Setting up language target")
 

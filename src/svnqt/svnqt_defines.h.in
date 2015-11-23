@@ -21,9 +21,14 @@
 #ifndef _SVNQT_DEFINES_H
 #define _SVNQT_DEFINES_H
 
-/* defines if we setup against a compiler with working "-fvisibility=hidden" */
-#define SVNQT_EXPORT @_SVNQT_EXPORT@
-#define SVNQT_NOEXPORT @_SVNQT_NOEXPORT@
+#include <QtCore/qglobal.h>
+
+#ifdef svnqt_private_EXPORTS
+  #define SVNQT_EXPORT Q_DECL_EXPORT
+#else
+  #define SVNQT_EXPORT Q_DECL_IMPORT
+#endif
+#define SVNQT_NOEXPORT Q_DECL_HIDDEN
 
 #cmakedefine HAS_BACKTRACE_H 1
 #cmakedefine USE_BACKTRACE 1

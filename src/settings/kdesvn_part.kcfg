@@ -4,7 +4,6 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="kdesvnpartrc" />
-  <include>qstring.h</include>
   <group name="general_items" >
     <entry key="case_sensitive_sort" type="Bool" >
       <label>Set if items sortorder should be case sensitive or not</label>

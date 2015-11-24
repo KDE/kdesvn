@@ -54,7 +54,7 @@ int main(int argc, char **argv)
                 prompt.contains("Permission denied", Qt::CaseInsensitive)) {
             error = true;
         }
-        kfile = prompt.section(" ", -2).remove(":").simplified();
+        kfile = prompt.section(QLatin1Char(' '), -2).remove(QLatin1Char(':')).simplified();
     }
     QString pw;
     QString wfolder = about.appName();

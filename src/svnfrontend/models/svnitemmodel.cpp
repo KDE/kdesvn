@@ -574,7 +574,7 @@ QMimeData *SvnItemModel::mimeData(const QModelIndexList &indexes)const
     }
     QMimeData *data = new QMimeData();
     KUrl::MetaDataMap metaMap;
-    metaMap["kdesvn-source"] = "t";
+    metaMap["kdesvn-source"] = QLatin1Char('t');
     metaMap["kdesvn-id"] = uniqueIdentifier();
     urls.populateMimeData(data, metaMap);
     return data;

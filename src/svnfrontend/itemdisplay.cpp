@@ -96,12 +96,12 @@ QString ItemDisplay::relativePath(const SvnItem *item)
     }
     QString name = item->fullName();
     if (name == baseUri()) {
-        name = ".";
+        name = QLatin1Char('.');
     } else {
         name = name.right(name.length() - baseUri().length() - 1);
     }
     if (name.isEmpty()) {
-        name = ".";
+        name = QLatin1Char('.');
     }
     return name;
 }

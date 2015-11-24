@@ -1977,9 +1977,9 @@ void SvnActions::slotResolve(const QString &p)
         return;
     }
     QFileInfo fi(p);
-    QString base = "";
+    QString base;
     if (fi.isRelative()) {
-        base = fi.absolutePath() + "/";
+        base = fi.absolutePath() + QLatin1Char('/');
     }
     if (!i1.conflictNew().length() ||
             !i1.conflictOld().length() ||

@@ -1238,7 +1238,7 @@ void MainTreeWidget::slotSelectBrowsingRevision()
         m_Data->m_remoteRevision = r.first;
         clear();
         m_Data->m_Model->checkDirs(baseUri(), 0);
-        emit changeCaption(baseUri() + "@" + r.first.toString());
+        emit changeCaption(baseUri() + QLatin1Char('@') + r.first.toString());
     }
     KConfigGroup _k(Kdesvnsettings::self()->config(), "revisions_dlg");
     dlg->saveDialogSize(_k);
@@ -1416,7 +1416,7 @@ void MainTreeWidget::simpleWcDiff(SvnItem *kitem, const svn::Revision &first, co
     }
 
     if (!kitem) {
-        what = ".";
+        what = QLatin1Char('.');
     } else {
         what = relativePath(kitem);
     }

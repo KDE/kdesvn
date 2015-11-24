@@ -49,8 +49,8 @@ public:
     /**
      * Constructor.  Assigns the exception reason.
      */
-    Exception(const char *message) throw ();
-    Exception(const QString &message) throw();
+    explicit Exception(const char *message) throw ();
+    explicit Exception(const QString &message) throw();
 
     virtual ~Exception() throw ();
 
@@ -92,22 +92,22 @@ public:
      * @param error the error to display. This will get cleared inside with svn_error_clear
      * so it isn't usable after that!
      */
-    ClientException(svn_error_t *error) throw ();
+    explicit ClientException(svn_error_t *error) throw ();
 
     /**
      * Constructor that takes only an apr errorcode
      */
-    ClientException(apr_status_t status) throw ();
+    explicit ClientException(apr_status_t status) throw ();
 
     /**
      * Constructor
      */
-    ClientException(const char *msg) throw ();
+    explicit ClientException(const char *msg) throw ();
 
     /**
      * Constructor
      */
-    ClientException(const QString &message) throw();
+    explicit ClientException(const QString &message) throw();
 
     /**
      * Copy constructor

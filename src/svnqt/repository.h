@@ -56,7 +56,7 @@ public:
     /*!
      * \param aListener callback object, the object will NOT take the ownership.
      */
-    Repository(svn::repository::RepositoryListener *aListener);
+    explicit Repository(svn::repository::RepositoryListener *aListener);
     //! destructor
     virtual ~Repository();
 

@@ -42,7 +42,7 @@ class DepthToSvn
 protected:
     svn_depth_t _value;
 public:
-    DepthToSvn(const svn::Depth &val): _value(svn_depth_unknown)
+    explicit DepthToSvn(const svn::Depth &val): _value(svn_depth_unknown)
     {
         switch (val) {
         case DepthUnknown:
@@ -80,7 +80,7 @@ class RevisionRangesToHash
 protected:
     RevisionRanges m_ranges;
 public:
-    RevisionRangesToHash(const RevisionRanges &_input): m_ranges(_input) {}
+    explicit RevisionRangesToHash(const RevisionRanges &_input): m_ranges(_input) {}
 
     apr_array_header_t *array(const Pool &pool)
     {
@@ -102,7 +102,7 @@ class Map2Hash
 {
     PropertiesMap _map;
 public:
-    Map2Hash(const PropertiesMap &aMap): _map(aMap) {}
+    explicit Map2Hash(const PropertiesMap &aMap): _map(aMap) {}
 
     apr_hash_t *hash(const Pool &pool)const
     {

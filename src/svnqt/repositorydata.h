@@ -52,7 +52,7 @@ class SVNQT_NOEXPORT RepositoryData
     friend class Repository;
 
 public:
-    RepositoryData(RepositoryListener *);
+    explicit RepositoryData(RepositoryListener *);
 
     virtual ~RepositoryData();
     void Close();

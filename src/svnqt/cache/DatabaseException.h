@@ -38,7 +38,7 @@ private:
     int m_number;
 
 public:
-    DatabaseException(const QString &msg)throw()
+    explicit DatabaseException(const QString &msg)throw()
         : Exception(msg), m_number(-1)
     {}
 

@@ -53,7 +53,7 @@ public:
     //! Copy constructor
     /*! only useful wenn build with subversion 1.5 or newer
      */
-    ConflictResult(const svn_wc_conflict_result_t *);
+    explicit ConflictResult(const svn_wc_conflict_result_t *);
 
     const QString &mergedFile()const
     {

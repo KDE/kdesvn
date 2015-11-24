@@ -57,7 +57,7 @@ protected:
 
 public:
     ///! should used for testing only!
-    LogCache(const QString &aBasePath);
+    explicit LogCache(const QString &aBasePath);
     virtual ~LogCache();
     static LogCache *self();
     QSqlDatabase reposDb(const QString &aRepository);

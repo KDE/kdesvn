@@ -51,7 +51,7 @@ public:
     /** initialize
      * @param context the context to use for cancel operations, if 0 then no cancel operation possible
      */
-    Wc(const ContextP &context);
+    explicit Wc(const ContextP &context);
     ~Wc();
     /**
      * check if Path is a valid working directory

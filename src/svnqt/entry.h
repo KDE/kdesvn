@@ -63,7 +63,7 @@ public:
      *
      * @param src another entry to copy from
      */
-    Entry(const svn_wc_entry_t *src = 0);
+    explicit Entry(const svn_wc_entry_t *src = 0);
 
     /**
      * copy constructor

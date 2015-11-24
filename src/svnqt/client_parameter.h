@@ -220,7 +220,7 @@ class SVNQT_EXPORT StatusParameter
 private:
     SharedPointer<StatusParameterData> _data;
 public:
-    StatusParameter(const Path &_path);
+    explicit StatusParameter(const Path &_path);
     ~StatusParameter();
 
     //! path to explore

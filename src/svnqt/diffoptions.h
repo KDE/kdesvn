@@ -60,12 +60,12 @@ public:
      * - --unified, -u (for compatibility, does nothing).
      * @sa svn_diff_file_options_parse
      */
-    DiffOptions(const QStringList &options);
+    explicit DiffOptions(const QStringList &options);
 
     /** Initialize options with values depending on options.
      * Only if build against subversion 1.4 or newer.
      */
-    DiffOptions(const svn_diff_file_options_t *options);
+    explicit DiffOptions(const svn_diff_file_options_t *options);
 
     /** copy operator
      */

@@ -49,7 +49,7 @@ class ContextListener;
 class SVNQT_NOEXPORT ContextData
 {
 public:
-    ContextData(const QString &configDir_);
+    explicit ContextData(const QString &configDir_);
     ~ContextData();
 
     // data methods

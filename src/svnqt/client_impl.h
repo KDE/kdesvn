@@ -52,7 +52,7 @@ public:
     /**
      * Initializes the primary memory pool.
      */
-    Client_impl(const ContextP &context);
+    explicit Client_impl(const ContextP &context);
 
     virtual ~Client_impl();
 
@@ -592,7 +592,7 @@ private:
     /**
      * disallow copy constructor
      */
-    Client_impl(const Client &);
+    Client_impl(const Client_impl &);
 
     DirEntries
     list_simple(const Path &pathOrUrl,

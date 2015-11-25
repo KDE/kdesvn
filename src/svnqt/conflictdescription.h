@@ -61,8 +61,7 @@ public:
         ConflictAdd,
         ConflictDelete
     };
-    ConflictDescription();
-    ConflictDescription(const svn_wc_conflict_description_t *);
+    explicit ConflictDescription(const svn_wc_conflict_description_t * = NULL);
     ~ConflictDescription();
 
     ConflictAction action() const;

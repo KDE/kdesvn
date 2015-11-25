@@ -30,12 +30,6 @@
 namespace svn
 {
 
-ConflictDescription::ConflictDescription()
-    : m_pool()
-{
-    init();
-}
-
 ConflictDescription::~ConflictDescription()
 {
 }

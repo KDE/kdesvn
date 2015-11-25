@@ -779,7 +779,7 @@ svn_error_t *ContextData::onWcConflictResolver(svn_wc_conflict_result_t **result
     ContextData *data = 0;
     SVN_ERR(getContextData(baton, &data));
     ConflictResult cresult;
-    if (!data->getListener()->contextConflictResolve(cresult, description)) {
+    if (!data->getListener()->contextConflictResolve(cresult, ConflictDescription(description))) {
         return data->generate_cancel_error();
     }
     cresult.assignResult(result, pool);

@@ -64,7 +64,7 @@ public:
      *                  subversion api stores its
      *                  configuration
      */
-    Context(const QString &configDir = QString());
+    explicit Context(const QString &configDir = QString());
 
     /**
      * copy constructor

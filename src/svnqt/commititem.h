@@ -58,16 +58,16 @@ protected:
 
 public:
     //! constructor
-    CommitItem(const svn_client_commit_item_t *aSource = 0);
+    explicit CommitItem(const svn_client_commit_item_t *aSource = 0);
     //! constructor
     /*!
      * This one will only do something if build against subversion 1.3
      */
-    CommitItem(const svn_client_commit_item2_t *);
+    explicit CommitItem(const svn_client_commit_item2_t *);
     /*!
      * This one will only do something if build against subversion 1.5
      */
-    CommitItem(const svn_client_commit_item3_t *);
+    explicit CommitItem(const svn_client_commit_item3_t *);
     //! Destructor
     /*!
      * Not virtual 'cause no child class is needed

@@ -37,8 +37,8 @@ class SVNQT_EXPORT ReposNotify
     ReposNotifyData *m_data;
 
 public:
-    ReposNotify(const svn_repos_notify_t *notify);
-    virtual ~ReposNotify();
+    explicit ReposNotify(const svn_repos_notify_t *notify);
+    ~ReposNotify();
 
     operator const QString &()const;
 };

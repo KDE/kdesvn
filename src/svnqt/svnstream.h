@@ -55,7 +55,7 @@ public:
      * \param ctx a client context for calls to cancel_func inside. you should this only set with functions not using it itself
      * like svn_client_cat2:
      */
-    SvnStream(bool readit, bool writeit, svn_client_ctx_t *ctx = 0);
+    explicit SvnStream(bool readit, bool writeit, svn_client_ctx_t *ctx = 0);
     //! frees all structures and releases memory pool.
     virtual ~SvnStream();
 

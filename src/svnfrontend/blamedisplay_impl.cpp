@@ -66,7 +66,7 @@
 class LocalizedAnnotatedLine: public svn::AnnotateLine
 {
 public:
-    LocalizedAnnotatedLine(const svn::AnnotateLine &al)
+    explicit LocalizedAnnotatedLine(const svn::AnnotateLine &al)
         : svn::AnnotateLine(al)
     {
         localeChanged();

@@ -158,7 +158,7 @@ void DiffBrowser::search_slot()
         return;
     }
     doSearch(m_Data->srchdialog->pattern(),
-             m_Data->srchdialog->options() & KFind::FindBackwards ? true : false);
+             (m_Data->srchdialog->options() & KFind::FindBackwards) == KFind::FindBackwards);
 }
 
 void DiffBrowser::doSearch(const QString &to_find_string, bool back)

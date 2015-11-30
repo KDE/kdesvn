@@ -45,7 +45,7 @@ svn::StringArray::StringArray()
 svn::StringArray::StringArray(const QStringList &aList)
     : m_content(aList)
 {
-    setNull(false);
+    setNull(m_content.isEmpty());
 }
 
 /*!
@@ -54,13 +54,13 @@ svn::StringArray::StringArray(const QStringList &aList)
 svn::StringArray::StringArray(const apr_array_header_t *apr_targets)
     : m_content()
 {
-    int i;
-    for (i = 0; i < apr_targets->nelts; i++) {
+    for (int i = 0; i < apr_targets->nelts; i++) {
         const char **target =
             &APR_ARRAY_IDX(apr_targets, i, const char *);
 
         m_content.push_back(QString::fromUtf8(*target));
     }
+    setNull(m_content.isEmpty());
 }
 
 /*!

@@ -32,7 +32,7 @@ class RecurseCheck
 {
     bool &value;
 public:
-    RecurseCheck(bool &aValue): value(aValue)
+    explicit RecurseCheck(bool &aValue): value(aValue)
     {
         value = true;
     }

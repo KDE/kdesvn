@@ -69,8 +69,8 @@ namespace KIO
 class KioSvnData
 {
 public:
-    KioSvnData(kio_svnProtocol *);
-    virtual ~KioSvnData();
+    explicit KioSvnData(kio_svnProtocol *);
+    ~KioSvnData();
 
     void reInitClient();
     void resetListener();

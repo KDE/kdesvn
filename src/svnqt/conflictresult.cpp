@@ -72,6 +72,7 @@ ConflictResult::ConflictResult(const svn_wc_conflict_result_t *aResult)
         m_MergedFile.clear();
     }
 #else
+    m_choice = ChooseMerged;
     Q_UNUSED(aResult);
 #endif
 }

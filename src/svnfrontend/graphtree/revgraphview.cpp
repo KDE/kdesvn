@@ -152,18 +152,19 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
     // remove line breaks when lines to long
     QRegExp endslash("\\\\\\n");
     dotOutput.remove(endslash);
-    double scale = 1.0, scaleX = 1.0, scaleY = 1.0;
-    double dotWidth, dotHeight;
-    QTextStream *dotStream = new QTextStream(&dotOutput, QIODevice::ReadOnly);
-    QString line, cmd;
+    double scale = 1.0;
+    double dotWidth = 1.0, dotHeight = 1.0;
+    QTextStream dotStream(&dotOutput, QIODevice::ReadOnly);
+    QString cmd;
     int lineno = 0;
     beginInsert();
     clear();
     /* mostly taken from kcachegrind */
-    scaleX = scale * 60; scaleY = scale * 70;
-    QRect startRect;
-    while (1) {
-        line = dotStream->readLine();
+    double scaleX = scale * 60;
+    double scaleY = scale * 70;
+    QRectF startRect;
+    while (!dotStream.atEnd()) {
+        QString line = dotStream.readLine();
         if (line.isNull()) {
             break;
         }
@@ -179,8 +180,8 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
 
         if (cmd == "graph") {
             lineStream >> scale >> dotWidth >> dotHeight;
-            int w = (int)(scaleX * dotWidth);
-            int h = (int)(scaleY * dotHeight);
+            int w = qRound(scaleX * dotWidth);
+            int h = qRound(scaleY * dotHeight);
             _xMargin = 50;
             if (w < QApplication::desktop()->width()) {
                 _xMargin += (QApplication::desktop()->width() - w) / 2;
@@ -210,11 +211,11 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             // better here 'cause dot may scramble utf8 labels so we regenerate it better
             // and do not read it in.
             label = getLabelstring(nodeName);
-            int xx = (int)(scaleX * x + _xMargin);
-            int yy = (int)(scaleY * (dotHeight - y) + _yMargin);
-            int w = (int)(scaleX * width);
-            int h = (int)(scaleY * height);
-            QRect r(xx - w / 2, yy - h / 2, w, h);
+            double xx = (scaleX * x + _xMargin);
+            double yy = (scaleY * (dotHeight - y) + _yMargin);
+            double w = (scaleX * width);
+            double h = (scaleY * height);
+            QRectF r(xx - w / 2, yy - h / 2, w, h);
             GraphTreeLabel *t = new GraphTreeLabel(label, nodeName, r);
             m_Scene->addItem(t);
             if (isStart(nodeName)) {
@@ -242,8 +243,8 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                 lineStream >> _x >> _y;
                 x = _x.toDouble();
                 y = _y.toDouble();
-                double xx = (double)(scaleX * x + _xMargin);
-                double yy = (double)(scaleY * (dotHeight - y) + _yMargin);
+                double xx = (scaleX * x + _xMargin);
+                double yy = (scaleY * (dotHeight - y) + _yMargin);
 #if 0
                 if (0) qDebug("   P %d: ( %f / %f ) => ( %d / %d)",
                                   i, x, y, xx, yy);
@@ -640,14 +641,13 @@ void RevGraphView::updateZoomerPos()
     QPoint oldZoomPos = m_CompleteView->pos();
     QPoint newZoomPos = QPoint(0, 0);
 
-    ZoomPosition zp = m_LastAutoPosition;
     int tlCols = items(QRect(0, 0, cvW, cvH)).count();
     int trCols = items(QRect(x, 0, cvW, cvH)).count();
     int blCols = items(QRect(0, y, cvW, cvH)).count();
     int brCols = items(QRect(x, y, cvW, cvH)).count();
     int minCols = tlCols;
 
-    zp = m_LastAutoPosition;
+    ZoomPosition zp = m_LastAutoPosition;
     switch (zp) {
     case TopRight:    minCols = trCols; break;
     case BottomLeft:  minCols = blCols; break;
@@ -761,8 +761,8 @@ void RevGraphView::mouseDoubleClickEvent(QMouseEvent *e)
         if (i == 0) {
             return;
         }
-        makeSelected((GraphTreeLabel *)i);
-        emit dispDetails(toolTip(((GraphTreeLabel *)i)->nodename(), true));
+        makeSelected(i);
+        emit dispDetails(toolTip((i)->nodename(), true));
     }
 }
 
@@ -834,14 +834,14 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
 
     KMenu popup;
     if (i) {
-        if (!((GraphTreeLabel *)i)->source().isEmpty() && getAction(((GraphTreeLabel *)i)->nodename()) != 'D') {
+        if (!i->source().isEmpty() && getAction(i->nodename()) != 'D') {
             popup.addAction(i18n("Diff to previous"))->setData(301);
         }
         if (m_Selected && m_Selected != i && getAction(m_Selected->nodename()) != 'D'
-                && getAction(((GraphTreeLabel *)i)->nodename()) != 'D') {
+                && getAction(i->nodename()) != 'D') {
             popup.addAction(i18n("Diff to selected item"))->setData(302);
         }
-        if (getAction(((GraphTreeLabel *)i)->nodename()) != 'D') {
+        if (getAction(i->nodename()) != 'D') {
             popup.addAction(i18n("Cat this version"))->setData(303);
         }
         if (m_Selected == i) {
@@ -913,7 +913,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
     }
     break;
     case 301:
-        if (i && i->type() == GRAPHTREE_LABEL && !((GraphTreeLabel *)i)->source().isEmpty()) {
+        if (i && i->type() == GRAPHTREE_LABEL && !i->source().isEmpty()) {
             makeDiffPrev(i);
         }
         break;
@@ -934,7 +934,9 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
         makeSelected(i);
         break;
     case 403:
-        emit dispDetails(toolTip(i->nodename(), true));
+        if (i) {
+            emit dispDetails(toolTip(i->nodename(), true));
+        }
         break;
     default:
         break;

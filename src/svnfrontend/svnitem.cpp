@@ -47,7 +47,7 @@ class SvnItem_p: public svn::ref_count
     friend class SvnItem;
 public:
     SvnItem_p();
-    SvnItem_p(const svn::StatusPtr &);
+    explicit SvnItem_p(const svn::StatusPtr &);
     virtual ~SvnItem_p();
     KFileItem &createItem(const svn::Revision &peg);
     KUrl &kdeName(const svn::Revision &);

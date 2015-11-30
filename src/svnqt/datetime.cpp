@@ -62,7 +62,7 @@ DateTime::DateTime(const QString &dt)
     SetRFC822Date(dt.toUtf8().constData());
 }
 
-const DateTime &
+DateTime &
 DateTime::operator =(const DateTime &dateTime)
 {
     m_time = dateTime.m_time;

@@ -2715,8 +2715,8 @@ void SvnActions::customEvent(QEvent *e)
         emit sendNotify(i18n("Filling log cache in background finished."));
         QTimer::singleShot(1, this, SLOT(stopFillCache()));
         return;
-    } else if (e && e->type() == EVENT_LOGCACHE_STATUS && m_FCThread && m_FCThread->isRunning()) {
-        FillCacheStatusEvent *fev = (FillCacheStatusEvent *)e;
+    } else if (e->type() == EVENT_LOGCACHE_STATUS && m_FCThread && m_FCThread->isRunning()) {
+        FillCacheStatusEvent *fev = static_cast<FillCacheStatusEvent *>(e);
         emit sigCacheStatus(fev->current(), fev->max());
     } else if (e->type() == EVENT_UPDATE_CACHE_FINISHED) {
         QTimer::singleShot(2, this, SLOT(checkUpdateThread()));

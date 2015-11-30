@@ -728,7 +728,7 @@ void MainTreeWidget::enableActions()
     enableAction("make_svn_lock", (multi || single));
     enableAction("make_svn_unlock", (multi || single));
 
-    enableAction("make_svn_ignore", (single) && si->parent() != 0 && !si->isRealVersioned());
+    enableAction("make_svn_ignore", (single) && si && si->parent() != 0 && !si->isRealVersioned());
     enableAction("make_left_add_ignore_pattern", (d == 1) && isWorkingCopy());
     enableAction("make_right_add_ignore_pattern", dir && isWorkingCopy());
 

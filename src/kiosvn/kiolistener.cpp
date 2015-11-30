@@ -224,8 +224,6 @@ void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action,
             userstring = QLatin1Char('.');
         }
         break;
-
-        break;
     case svn_wc_notify_blame_revision: //blame_revision
         break;
     default:

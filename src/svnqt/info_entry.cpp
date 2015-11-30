@@ -249,7 +249,7 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     if (item->changelist) {
         m_changeList = QByteArray(item->changelist, strlen(item->changelist));
     } else {
-        m_changeList = QByteArray();
+        m_changeList.clear();
     }
 
     switch (item->depth) {
@@ -276,7 +276,7 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
 #else
     m_size = SVNQT_SIZE_UNKNOWN;
     m_working_size = SVNQT_SIZE_UNKNOWN;
-    m_changeList = QByteArray();
+    m_changeList.clear();
     m_depth = DepthUnknown;
 #endif
 }
@@ -317,5 +317,7 @@ svn::InfoEntry::InfoEntry(const InfoEntry &other)
     m_schedule = other.m_schedule;
     m_size = other.m_size;
     m_working_size = other.m_working_size;
+    m_changeList = other.m_changeList;
+    m_depth = other.m_depth;
 
 }

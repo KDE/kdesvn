@@ -88,7 +88,7 @@ public:
     /**
      * @param dateTime Source
      */
-    const DateTime &
+    DateTime &
     operator =(const DateTime &dateTime);
 
     bool

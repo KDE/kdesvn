@@ -166,6 +166,7 @@ ClientException::ClientException(const ClientException &src) throw ()
     : Exception(src.msg())
 {
     m->apr_err = src.apr_err();
+    m_backTraceConstr = src.m_backTraceConstr;
 }
 
 void ClientException::init()

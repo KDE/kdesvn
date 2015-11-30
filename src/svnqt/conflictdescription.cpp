@@ -102,11 +102,6 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
 #endif
 }
 
-ConflictDescription::ConflictDescription(const ConflictDescription &)
-    : m_pool()
-{
-}
-
 }
 
 svn::ConflictDescription::ConflictAction svn::ConflictDescription::action() const

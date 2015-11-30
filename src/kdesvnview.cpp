@@ -225,8 +225,7 @@ void kdesvnView::slotSettingsChanged()
  */
 void kdesvnView::slotCreateRepo()
 {
-    KDialog *dlg = new KDialog(QApplication::activeModalWidget());
-    dlg->setModal(true);
+    QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
     dlg->setCaption(i18n("Create new repository"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
 
@@ -236,13 +235,11 @@ void kdesvnView::slotCreateRepo()
     Createrepo_impl *ptr = new Createrepo_impl(Dialog1Layout);
     KConfigGroup _kc(Kdesvnsettings::self()->config(), "create_repo_size");
     dlg->restoreDialogSize(_kc);
-    int i = dlg->exec();
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
-
-    if (i != QDialog::Accepted) {
+    if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
+    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
     svn::repository::Repository *_rep = new svn::repository::Repository(this);
     bool ok = true;
     bool createdirs;
@@ -268,8 +265,7 @@ void kdesvnView::slotCreateRepo()
 
 void kdesvnView::slotHotcopy()
 {
-    KDialog *dlg = new KDialog(KApplication::activeModalWidget());
-    dlg->setModal(true);
+    QPointer<KDialog> dlg(new KDialog(KApplication::activeModalWidget()));
     dlg->setCaption(i18n("Hotcopy a repository"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
 
@@ -278,13 +274,11 @@ void kdesvnView::slotHotcopy()
     HotcopyDlg_impl *ptr = new HotcopyDlg_impl(Dialog1Layout);
     KConfigGroup _kc(Kdesvnsettings::self()->config(), "hotcopy_repo_size");
     dlg->restoreDialogSize(_kc);
-    int i = dlg->exec();
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
-
-    if (i != QDialog::Accepted) {
+    if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
+    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
     bool cleanlogs = ptr->cleanLogs();
     QString src = ptr->srcPath();
     QString dest = ptr->destPath();
@@ -302,23 +296,22 @@ void kdesvnView::slotHotcopy()
 
 void kdesvnView::slotLoaddump()
 {
-    KDialog dlg(KApplication::activeModalWidget());
-    dlg.setModal(true);
-    dlg.setCaption(i18n("Load a repository from a svndump"));
-    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
-    QWidget *Dialog1Layout = new KVBox(&dlg);
-    dlg.setMainWidget(Dialog1Layout);
+    QPointer<KDialog> dlg(new KDialog(this));
+    dlg->setCaption(i18n("Load a repository from a svndump"));
+    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
+    QWidget *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
     LoadDmpDlg_impl *ptr = new LoadDmpDlg_impl(Dialog1Layout);
 
     KConfigGroup _kc(Kdesvnsettings::self()->config(), "loaddump_repo_size");
-    dlg.restoreDialogSize(_kc);
-    int i = dlg.exec();
-
-    dlg.saveDialogSize(_kc, KConfigGroup::Normal);
-    if (i != QDialog::Accepted) {
+    dlg->restoreDialogSize(_kc);
+    if (dlg->exec() != QDialog::Accepted)
+    {
+        delete dlg;
         return;
     }
+    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
     svn::repository::Repository _rep(this);
     m_ReposCancel = false;
 
@@ -369,12 +362,12 @@ void kdesvnView::slotLoaddump()
     if (networked && tmpfile.length() > 0) {
         KIO::NetAccess::removeTempFile(tmpfile);
     }
+    delete dlg;
 }
 
 void kdesvnView::slotDumpRepo()
 {
-    KDialog *dlg = new KDialog(KApplication::activeModalWidget());
-    dlg->setModal(true);
+    QPointer<KDialog> dlg(new KDialog(KApplication::activeModalWidget()));
     dlg->setCaption(i18n("Dump a repository"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     QWidget *Dialog1Layout = new KVBox(dlg);
@@ -383,13 +376,11 @@ void kdesvnView::slotDumpRepo()
     DumpRepo_impl *ptr = new DumpRepo_impl(Dialog1Layout);
     KConfigGroup _kc(Kdesvnsettings::self()->config(), "dump_repo_size");
     dlg->restoreDialogSize(_kc);
-    int i = dlg->exec();
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
-
-    if (i != QDialog::Accepted) {
+    if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
+    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
     svn::repository::Repository *_rep = new svn::repository::Repository(this);
     QString re, out;
     bool incr, diffs;

@@ -154,25 +154,26 @@ bool CContextListener::contextGetLogin(
     QString &password,
     bool &maySave)
 {
+    bool ret = false;
     maySave = false;
     emit waitShow(true);
     emit sendNotify(realm);
-    AuthDialogImpl auth(realm, username);
-    if (auth.exec() == QDialog::Accepted) {
-        username = auth.Username();
-        password = auth.Password();
-        maySave = (Kdesvnsettings::passwords_in_wallet() ? false : auth.maySave());
-        if (Kdesvnsettings::passwords_in_wallet() && auth.maySave()) {
+    QPointer<AuthDialogImpl> auth(new AuthDialogImpl(realm, username));
+    if (auth->exec() == QDialog::Accepted) {
+        username = auth->Username();
+        password = auth->Password();
+        maySave = (Kdesvnsettings::passwords_in_wallet() ? false : auth->maySave());
+        if (Kdesvnsettings::passwords_in_wallet() && auth->maySave()) {
             PwStorage::self()->setLogin(realm, username, password);
         }
         if (Kdesvnsettings::use_password_cache()) {
             PwStorage::self()->setCachedLogin(realm, username, password);
         }
-        emit waitShow(false);
-        return true;
+        ret = true;
     }
+    delete auth;
     emit waitShow(false);
-    return false;
+    return ret;
 }
 
 void CContextListener::contextNotify(const QString &aMsg)

@@ -85,20 +85,19 @@ QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool *force, bool move,
 //             KDialogBase::Ok|KDialogBase::Cancel,
 //             KDialogBase::NoDefault);
 //     QWidget* Dialog1Layout = dlg.makeVBoxMainWidget();
-    KDialog dlg(parent);
-    dlg.setCaption(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
-    dlg.setModal(true);
-    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg.setDefaultButton(KDialog::Ok);
-    dlg.showButtonSeparator(false);
+    QPointer<KDialog> dlg(new KDialog(parent));
+    dlg->setCaption(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
+    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg->setDefaultButton(KDialog::Ok);
+    dlg->showButtonSeparator(false);
 
-    KVBox *Dialog1Layout = new KVBox(&dlg);
-    dlg.setMainWidget(Dialog1Layout);
+    KVBox *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
     CopyMoveView_impl *ptr = new CopyMoveView_impl(base, old, (move), Dialog1Layout);
     QString nName;
-    dlg.resize(QSize(500, 160).expandedTo(dlg.minimumSizeHint()));
-    if (dlg.exec() != QDialog::Accepted) {
+    dlg->resize(QSize(500, 160).expandedTo(dlg->minimumSizeHint()));
+    if (dlg->exec() != QDialog::Accepted) {
         if (ok) {
             *ok = false;
         }
@@ -111,6 +110,7 @@ QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool *force, bool move,
             *ok = true;
         }
     }
+    delete dlg;
     return nName;
 }
 

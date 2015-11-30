@@ -30,6 +30,7 @@
 #include <KDialog>
 #include <KVBox>
 #include <ktextbrowser.h>
+#include <QPointer>
 
 SslTrustPrompt_impl::SslTrustPrompt_impl(const QString &host, QWidget *parent)
     : QWidget(parent)
@@ -47,14 +48,14 @@ SslTrustPrompt_impl::SslTrustPrompt_impl(const QString &host, QWidget *parent)
 bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerprint, const QString &validFrom, const QString &validUntil, const QString &issuerName, const QString &realm, const QStringList &reasons, bool *ok, bool *saveit)
 {
     SslTrustPrompt_impl *ptr = 0;
-    KDialog dlg(0);
-    dlg.setCaption(i18n("Trust SSL certificate"));
+    QPointer<KDialog> dlg(new KDialog(0));
+    dlg->setCaption(i18n("Trust SSL certificate"));
     QFlags<KDialog::ButtonCode> buttons = KDialog::Yes | KDialog::Cancel | KDialog::No;
 
-    dlg.setButtons(buttons);
-    dlg.setButtonText(KDialog::Yes, i18n("Accept permanently"));
-    dlg.setButtonText(KDialog::No, i18n("Accept temporarily"));
-    dlg.setButtonText(KDialog::Cancel, i18n("Reject"));
+    dlg->setButtons(buttons);
+    dlg->setButtonText(KDialog::Yes, i18n("Accept permanently"));
+    dlg->setButtonText(KDialog::No, i18n("Accept temporarily"));
+    dlg->setButtonText(KDialog::Cancel, i18n("Reject"));
 
     static QString rb = "<tr><td>";
     static QString rs = "</td><td>";
@@ -78,14 +79,21 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
     text += rb + i18n("Fingerprint") + rs + fingerprint + re;
     text += "</table></p></body></html>";
 
-    KVBox *Dialog1Layout = new KVBox(&dlg);
-    dlg.setMainWidget(Dialog1Layout);
+    KVBox *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
-// KDE4 port - pv    dlg.resize(dlg.configDialogSize(*(Kdesvnsettings::self()->config()),"trustssldlg"));
     ptr = new SslTrustPrompt_impl(host, Dialog1Layout);
     ptr->m_ContentText->setText(text);
-    int i = dlg.exec();
-// KDE4 port - pv    dlg.saveDialogSize(*(Kdesvnsettings::self()->config()),"trustssldlg",false);
+    static const char cfg_text[] = "trustssldlg";
+    KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String(cfg_text));
+    dlg->restoreDialogSize(_kc);
+    int i = dlg->exec();
+    if (dlg) {
+        dlg->saveDialogSize(_kc);
+        _kc.sync();
+        delete dlg;
+    }
+
     *saveit = i == KDialog::Yes;
     *ok = (i == KDialog::Yes || i == KDialog::No);
     return *ok;

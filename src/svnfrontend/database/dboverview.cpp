@@ -31,6 +31,7 @@
 #include "src/svnqt/client.h"
 #include "helpers/stringhelper.h"
 
+#include <QPointer>
 #include <QStringListModel>
 #include <QItemSelectionModel>
 
@@ -86,13 +87,15 @@ void DbOverview::showDbOverview(svn::Client *aClient)
     DbOverview *ptr = 0;
     static const char cfg_text[] = "db_overview_dlg";
     KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String(cfg_text));
-    KDialog *dlg = createDialog(&ptr, i18n("Overview about cache database content"), KDialog::Close, QLatin1String(cfg_text));
+    QPointer<KDialog> dlg(createDialog(&ptr, i18n("Overview about cache database content"), KDialog::Close, QLatin1String(cfg_text)));
     ptr->setClient(aClient);
     dlg->restoreDialogSize(_kc);
     dlg->exec();
-    dlg->saveDialogSize(_kc);
-    _kc.sync();
-    delete dlg;
+    if (dlg) {
+        dlg->saveDialogSize(_kc);
+        _kc.sync();
+        delete dlg;
+    }
 }
 
 void DbOverview::setClient(svn::Client *aClient)

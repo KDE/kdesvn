@@ -25,6 +25,7 @@
 #include "src/svnqt/shared_pointer.h"
 #include "src/svnqt/cache/ReposConfig.h"
 #include "src/svnfrontend/fronthelpers/createdlg.h"
+#include <QPointer>
 
 class DbSettingsData
 {
@@ -90,15 +91,17 @@ void DbSettings::showSettings(const QString &repository)
     DbSettings *ptr = 0;
     static const char cfg_text[] = "db_settings_dlg";
     KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String(cfg_text));
-    KDialog *dlg = createOkDialog(&ptr, i18n("Settings for %1", repository), true, QLatin1String(cfg_text));
+    QPointer<KDialog> dlg(createOkDialog(&ptr, i18n("Settings for %1", repository), true, QLatin1String(cfg_text)));
     dlg->restoreDialogSize(_kc);
     ptr->setRepository(repository);
     if (dlg->exec() == QDialog::Accepted) {
         ptr->store();
     }
-    dlg->saveDialogSize(_kc);
-    _kc.sync();
-    delete dlg;
+    if (dlg) {
+        dlg->saveDialogSize(_kc);
+        _kc.sync();
+        delete dlg;
+    }
 }
 
 #include "dbsettings.moc"

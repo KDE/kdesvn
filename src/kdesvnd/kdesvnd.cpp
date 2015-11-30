@@ -178,17 +178,18 @@ QStringList kdesvnd::get_saved_login(const QString &realm, const QString &user)
 
 QStringList kdesvnd::get_login(const QString &realm, const QString &user)
 {
-    AuthDialogImpl auth(realm, user);
+    QPointer<AuthDialogImpl> auth(new AuthDialogImpl(realm, user));
     QStringList res;
-    if (auth.exec() == QDialog::Accepted) {
-        res.append(auth.Username());
-        res.append(auth.Password());
-        if (auth.maySave()) {
+    if (auth->exec() == QDialog::Accepted) {
+        res.append(auth->Username());
+        res.append(auth->Password());
+        if (auth->maySave()) {
             res.append("true");
         } else {
             res.append("false");
         }
     }
+    delete auth;
     return res;
 }
 
@@ -224,19 +225,19 @@ QString kdesvnd::load_sslclientcertpw(const QString &realm)
 QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
 {
     QStringList resList;
-    KPasswordDialog dlg(0, KPasswordDialog::DomainReadOnly | KPasswordDialog::ShowKeepPassword);
-    dlg.setDomain(realm);
-    dlg.setCaption(i18n("Enter password for realm %1", realm));
-    dlg.setKeepPassword(true);
-    if (dlg.exec() != KPasswordDialog::Accepted) {
-        return resList;
+    QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, KPasswordDialog::DomainReadOnly | KPasswordDialog::ShowKeepPassword));
+    dlg->setDomain(realm);
+    dlg->setCaption(i18n("Enter password for realm %1", realm));
+    dlg->setKeepPassword(true);
+    if (dlg->exec() == KPasswordDialog::Accepted) {
+        resList.append(dlg->password());
+        if (dlg->keepPassword()) {
+            resList.append("true");
+        } else {
+            resList.append("false");
+        }
     }
-    resList.append(dlg.password());
-    if (dlg.keepPassword()) {
-        resList.append("true");
-    } else {
-        resList.append("false");
-    }
+    delete dlg;
     return resList;
 }
 

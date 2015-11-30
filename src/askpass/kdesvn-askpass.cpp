@@ -25,6 +25,7 @@
 #include <kdebug.h>
 #include <kwallet.h>
 #include <KLocalizedString>
+#include <QPointer>
 #include <QTextStream>
 
 int main(int argc, char **argv)
@@ -59,28 +60,29 @@ int main(int argc, char **argv)
     QString pw;
     QString wfolder = about.appName();
 
-    KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0);
+    QScopedPointer<KWallet::Wallet> wallet(KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0));
     if (!error && wallet && wallet->hasFolder(wfolder)) {
         wallet->setFolder(wfolder);
         wallet->readPassword(kfile, pw);
     }
 
     if (pw.isEmpty()) {
-        KPasswordDialog dlg(0, (wallet ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags));
-        dlg.setPrompt(prompt);
-        dlg.setCaption(i18n("Password"));
-        if (dlg.exec() != KPasswordDialog::Accepted) {
-            delete wallet;
+        QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, (wallet ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags)));
+        dlg->setPrompt(prompt);
+        dlg->setCaption(i18n("Password"));
+        if (dlg->exec() != KPasswordDialog::Accepted) {
+            delete dlg;
             return 1;
         }
-        pw = dlg.password();
-        if (wallet && dlg.keepPassword()) {
+        pw = dlg->password();
+        if (wallet && dlg->keepPassword()) {
             if (!wallet->hasFolder(wfolder)) {
                 wallet->createFolder(wfolder);
             }
             wallet->setFolder(wfolder);
             wallet->writePassword(kfile, pw);
         }
+        delete dlg;
     }
 
     QTextStream out(stdout);

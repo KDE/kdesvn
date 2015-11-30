@@ -183,23 +183,21 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
                                   bool *useExternal,
                                   QWidget *parent)
 {
-    MergeDlg_impl *ptr = 0;
-    KDialog dlg(parent);
-    dlg.setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
-    dlg.setModal(true);
-    dlg.setCaption(i18n("Enter merge range"));
-    dlg.setDefaultButton(KDialog::Ok);
-    dlg.setHelp("merging-items", "kdesvn");
-    KVBox *Dialog1Layout = new KVBox(&dlg);
-    dlg.setMainWidget(Dialog1Layout);
+    QPointer<KDialog> dlg(new KDialog(parent));
+    dlg->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
+    dlg->setCaption(i18n("Enter merge range"));
+    dlg->setDefaultButton(KDialog::Ok);
+    dlg->setHelp("merging-items", "kdesvn");
+    KVBox *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
-    ptr = new MergeDlg_impl(Dialog1Layout, false, false, false, false, false);
-    dlg.resize(QSize(480, 360).expandedTo(dlg.minimumSizeHint()));
+    MergeDlg_impl *ptr = new MergeDlg_impl(Dialog1Layout, false, false, false, false, false);
+    dlg->resize(QSize(480, 360).expandedTo(dlg->minimumSizeHint()));
     KConfigGroup _kc(Kdesvnsettings::self()->config(), "merge_range");
-    dlg.restoreDialogSize(_kc);
+    dlg->restoreDialogSize(_kc);
 
     bool ret = false;
-    if (dlg.exec() == QDialog::Accepted) {
+    if (dlg->exec() == QDialog::Accepted) {
         range = ptr->getRange();
         *force = ptr->force();
         *recursive = ptr->recursive();
@@ -208,8 +206,11 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
         *useExternal = ptr->useExtern();
         ret = true;
     }
-    dlg.saveDialogSize(_kc);
-    _kc.sync();
+    if (dlg) {
+        dlg->saveDialogSize(_kc);
+        _kc.sync();
+        delete dlg;
+    }
 
     return ret;
 }

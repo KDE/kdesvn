@@ -311,15 +311,18 @@ int CommandExec::exec(KCmdLineArgs *args)
     emit executeMe();
     if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
             m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
-        KDialog dlg(KApplication::activeModalWidget());
-        KVBox *Dialog1Layout = new KVBox(&dlg);
-        dlg.setMainWidget(Dialog1Layout);
+        QPointer<KDialog> dlg(new KDialog(KApplication::activeModalWidget()));
+        KVBox *Dialog1Layout = new KVBox(dlg);
+        dlg->setMainWidget(Dialog1Layout);
         KTextBrowser *ptr = new KTextBrowser(Dialog1Layout);
         ptr->setText(m_lastMessages);
         KConfigGroup _k(Kdesvnsettings::self()->config(), "kdesvn_cmd_log");
-        dlg.restoreDialogSize(_k);
-        dlg.exec();
-        dlg.saveDialogSize(_k);
+        dlg->restoreDialogSize(_k);
+        dlg->exec();
+        if (dlg) {
+            dlg->saveDialogSize(_k);
+            delete dlg;
+        }
     }
     return 0;
 }
@@ -584,24 +587,25 @@ void CommandExec::slotNotifyMessage(const QString &msg)
 
 bool CommandExec::askRevision()
 {
-    QString _head = m_pCPart->cmd + " - Revision";
-    KDialog dlg(0);
-    dlg.setButtons(KDialog::Ok | KDialog::Cancel);
-    KVBox *Dialog1Layout = new KVBox(&dlg);
-    dlg.setMainWidget(Dialog1Layout);
+    QPointer<KDialog> dlg(new KDialog(0));
+    dlg->setCaption(i18n("Revision"));
+    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
+    KVBox *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
-    Rangeinput_impl *rdlg;
-    rdlg = new Rangeinput_impl(Dialog1Layout);
-    dlg.resize(QSize(120, 60).expandedTo(dlg.minimumSizeHint()));
+    bool ret = false;
+    Rangeinput_impl *rdlg = new Rangeinput_impl(Dialog1Layout);
+    dlg->resize(QSize(120, 60).expandedTo(dlg->minimumSizeHint()));
     rdlg->setStartOnly(m_pCPart->single_revision);
-    if (dlg.exec() == QDialog::Accepted) {
+    if (dlg->exec() == KDialog::Accepted) {
         Rangeinput_impl::revision_range range = rdlg->getRange();
         m_pCPart->start = range.first;
         m_pCPart->end = range.second;
         m_pCPart->rev_set = true;
-        return true;
+        ret = true;
     }
-    return false;
+    delete dlg;
+    return ret;
 }
 
 /*!

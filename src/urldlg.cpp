@@ -134,20 +134,23 @@ KUrl UrlDlg::selectedUrl()
  */
 KUrl UrlDlg::getUrl(QWidget *parent)
 {
-    UrlDlg dlg(parent);
-    dlg.setCaption(i18n("Open"));
-    dlg.exec();
+    KUrl ret;
+    QPointer<UrlDlg> dlg(new UrlDlg(parent));
+    dlg->setCaption(i18n("Open"));
+    if (dlg->exec() == KDialog::Accepted) {
+        // added by Wellu Mäkinen <wellu@wellu.org>
+        //
+        // get rid of leading whitespace
+        // that is %20 in encoded form
+        QString url = dlg->selectedUrl().prettyUrl();
 
-    // added by Wellu Mäkinen <wellu@wellu.org>
-    //
-    // get rid of leading whitespace
-    // that is %20 in encoded form
-    QString url = dlg.selectedUrl().prettyUrl();
-
-    // decodes %20 to normal spaces
-    // trims the whitespace from both ends
-    // of the URL
-    return KUrl(QUrl::fromEncoded(url.toUtf8()).toString().trimmed());
+        // decodes %20 to normal spaces
+        // trims the whitespace from both ends
+        // of the URL
+        ret = KUrl(url.trimmed());
+    }
+    delete dlg;
+    return ret;
 }
 
 #include "urldlg.moc"

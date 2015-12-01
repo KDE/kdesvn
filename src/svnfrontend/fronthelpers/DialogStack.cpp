@@ -22,12 +22,10 @@
 #include "DialogStack.h"
 #include <kdialog.h>
 
-DialogStack::DialogStack(KDialog *aDlg, const KConfigGroup &group)
-{
-    _dlg = aDlg;
-    _k = group;
-
-}
+DialogStack::DialogStack(const QPointer<KDialog> &aDlg, const KConfigGroup &group)
+  : _dlg(aDlg)
+  , _k(group)
+{}
 
 DialogStack::~DialogStack()
 {

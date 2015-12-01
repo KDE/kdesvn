@@ -389,7 +389,7 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
             text = m_Data->m_logCache[bit->rev()].message;
         }
     }
-    KDialog *dlg = new KDialog(KApplication::activeModalWidget());
+    QPointer<KDialog> dlg(new KDialog(this));
     dlg->setButtons(KDialog::Close);
     dlg->setCaption(i18n("Log message for revision %1", bit->rev()));
     QWidget *Dialog1Layout = new KVBox(dlg);
@@ -402,7 +402,8 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
     KConfigGroup k(Kdesvnsettings::self()->config(), "simplelog_display");
     dlg->restoreDialogSize(k);
     dlg->exec();
-    dlg->saveDialogSize(k);
+    if (dlg)
+        dlg->saveDialogSize(k);
 }
 
 void BlameDisplay_impl::slotShowCurrentCommit()
@@ -429,7 +430,7 @@ void BlameDisplay_impl::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidge
 
 void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *)
 {
-    KDialog *dlg = new KDialog(KApplication::activeModalWidget());
+    QPointer<KDialog> dlg(new KDialog(KApplication::activeModalWidget()));
     dlg->setButtons(KDialog::Close | KDialog::User1 | KDialog::User2);
     dlg->setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Go to line")));
     dlg->setButtonGuiItem(KDialog::User2, KGuiItem(i18n("Log message for revision"), "kdesvnlog"));
@@ -449,8 +450,8 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, cons
     connect(dlg, SIGNAL(user2Clicked()), ptr, SLOT(slotShowCurrentCommit()));
     Dialog1Layout->adjustSize();
     dlg->exec();
-
-    dlg->saveDialogSize(k);
+    if (dlg)
+        dlg->saveDialogSize(k);
 }
 
 void BlameDisplay_impl::slotItemDoubleClicked(QTreeWidgetItem *item, int)

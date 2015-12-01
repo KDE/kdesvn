@@ -27,11 +27,12 @@
 
 #include <QApplication>
 #include <QString>
+#include <QPointer>
 
 template<class T>
-inline KDialog *createDialog(T **ptr, const QString &_head, const KDialog::ButtonCodes &_buttons,
-                             const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
-                             bool modal = true, const KGuiItem &u1 = KGuiItem())
+inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDialog::ButtonCodes &_buttons,
+                                      const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
+                                      bool modal = true, const KGuiItem &u1 = KGuiItem())
 {
     KDialog::ButtonCodes buttons = _buttons;
     if (showHelp) {
@@ -40,9 +41,8 @@ inline KDialog *createDialog(T **ptr, const QString &_head, const KDialog::Butto
     if (!u1.text().isEmpty()) {
         buttons = buttons | KDialog::User1;
     }
-    KDialog *dlg = new KDialog(modal ? QApplication::activeModalWidget() : 0);
+    QPointer<KDialog> dlg(new KDialog(modal ? QApplication::activeModalWidget() : 0));
     dlg->setCaption(_head);
-    dlg->setModal(modal);
     dlg->setButtons(buttons);
     if (!u1.text().isEmpty()) {
         dlg->setButtonGuiItem(KDialog::User1, u1);
@@ -57,9 +57,9 @@ inline KDialog *createDialog(T **ptr, const QString &_head, const KDialog::Butto
 }
 
 template<class T>
-inline KDialog *createYesDialog(T **ptr, const QString &_head, bool YesNo = false,
-                                const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
-                                bool modal = true, const KGuiItem &u1 = KGuiItem())
+inline QPointer<KDialog> createYesDialog(T **ptr, const QString &_head, bool YesNo = false,
+                                         const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
+                                         bool modal = true, const KGuiItem &u1 = KGuiItem())
 {
     KDialog::ButtonCodes buttons = KDialog::Yes;
     if (YesNo) {
@@ -69,9 +69,9 @@ inline KDialog *createYesDialog(T **ptr, const QString &_head, bool YesNo = fals
 }
 
 template<class T>
-inline KDialog *createOkDialog(T **ptr, const QString &_head, bool OkCancel = false,
-                               const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
-                               bool modal = true, const KGuiItem &u1 = KGuiItem())
+inline QPointer<KDialog> createOkDialog(T **ptr, const QString &_head, bool OkCancel = false,
+                                        const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
+                                        bool modal = true, const KGuiItem &u1 = KGuiItem())
 {
     KDialog::ButtonCodes buttons = KDialog::Ok;
     if (OkCancel) {

@@ -491,13 +491,12 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
         stopFillCache();
     }
 
-    KDialog dlg(m_Data->m_ParentList->realWidget());
-    dlg.setCaption(i18n("History of %1", info.url().mid(reposRoot.length())));
-    dlg.setButtons(KDialog::Ok);
-    dlg.setModal(true);
+    QPointer<KDialog> dlg(new KDialog(m_Data->m_ParentList->realWidget()));
+    dlg->setCaption(i18n("History of %1", info.url().mid(reposRoot.length())));
+    dlg->setButtons(KDialog::Ok);
 
-    QWidget *Dialog1Layout = new KVBox(&dlg);
-    dlg.setMainWidget(Dialog1Layout);
+    QWidget *Dialog1Layout = new KVBox(dlg);
+    dlg->setMainWidget(Dialog1Layout);
 
     RevisionTree rt(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
                     startr, endr,
@@ -516,9 +515,11 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
             connect(disp, SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
                     this, SLOT(slotMakeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)));
             KConfigGroup _kc(Kdesvnsettings::self()->config(), "revisiontree_dlg");
-            dlg.restoreDialogSize(_kc);
-            dlg.exec();
-            dlg.saveDialogSize(_kc);
+            dlg->restoreDialogSize(_kc);
+            dlg->exec();
+            if (dlg) {
+                dlg->saveDialogSize(_kc);
+            }
         }
     }
 }
@@ -627,13 +628,13 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     QByteArray co = file.readAll();
 
     if (co.size()) {
-        KDialog *dlg = createOkDialog(&ptr, i18n("Content of %1", disp), false, QLatin1String("cat_display_dlg"));
+        QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Content of %1", disp), false, QLatin1String("cat_display_dlg"));
+        ptr->setFont(KGlobalSettings::fixedFont());
+        ptr->setWordWrapMode(QTextOption::NoWrap);
+        ptr->setReadOnly(true);
+        ptr->setText(QString::fromUtf8(co, co.size()));
+        dlg->exec();
         if (dlg) {
-            ptr->setFont(KGlobalSettings::fixedFont());
-            ptr->setWordWrapMode(QTextOption::NoWrap);
-            ptr->setReadOnly(true);
-            ptr->setText(QString::fromUtf8(co, co.size()));
-            dlg->exec();
             KConfigGroup _kc(Kdesvnsettings::self()->config(), "cat_display_dlg");
             dlg->saveDialogSize(_kc);
             delete dlg;
@@ -874,10 +875,10 @@ void SvnActions::makeInfo(const SvnItemList &lst, const svn::Revision &rev, cons
     }
     res += "</body></html>";
     KTextBrowser *ptr = 0;
-    KDialog *dlg = createOkDialog(&ptr, i18n("Infolist"), false, QLatin1String("info_dialog"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Infolist"), false, QLatin1String("info_dialog"));
+    ptr->setText(res);
+    dlg->exec();
     if (dlg) {
-        ptr->setText(res);
-        dlg->exec();
         KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String("info_dialog"));
         dlg->saveDialogSize(_kc);
         delete dlg;
@@ -896,10 +897,10 @@ void SvnActions::makeInfo(const QStringList &lst, const svn::Revision &rev, cons
     }
     text = "<html><head></head><body>" + text + "</body></html>";
     KTextBrowser *ptr = 0;
-    KDialog *dlg = createOkDialog(&ptr, i18n("Infolist"), false, QLatin1String("info_dialog"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Infolist"), false, QLatin1String("info_dialog"));
+    ptr->setText(text);
+    dlg->exec();
     if (dlg) {
-        ptr->setText(text);
-        dlg->exec();
         KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String("info_dialog"));
         dlg->saveDialogSize(_kc);
         delete dlg;
@@ -914,20 +915,22 @@ void SvnActions::editProperties(SvnItem *k, const svn::Revision &rev)
     if (!k) {
         return;
     }
-    PropertiesDlg dlg(k, svnclient(), rev);
-    connect(&dlg, SIGNAL(clientException(QString)), m_Data->m_ParentList->realWidget(), SLOT(slotClientException(QString)));
+    QPointer<PropertiesDlg> dlg(new PropertiesDlg(k, svnclient(), rev));
+    connect(dlg, SIGNAL(clientException(QString)), m_Data->m_ParentList->realWidget(), SLOT(slotClientException(QString)));
     KConfigGroup _kc(Kdesvnsettings::self()->config(), "properties_dlg");
-    dlg.restoreDialogSize(_kc);
-    if (dlg.exec() != QDialog::Accepted) {
+    dlg->restoreDialogSize(_kc);
+    if (dlg->exec() != QDialog::Accepted) {
+        delete dlg;
         return;
     }
-    dlg.saveDialogSize(_kc);
+    dlg->saveDialogSize(_kc);
     svn::PropertiesMap setList;
     QStringList delList;
-    dlg.changedItems(setList, delList);
+    dlg->changedItems(setList, delList);
     changeProperties(setList, delList, k->fullName());
     k->refreshStatus();
     EMIT_FINISHED;
+    delete dlg;
 }
 
 bool SvnActions::changeProperties(const svn::PropertiesMap &setList, const QStringList &delList, const QString &path, const svn::Depth &depth)
@@ -1405,9 +1408,9 @@ void SvnActions::dispDiff(const QByteArray &ex)
         if (!need_modal && m_Data->m_DiffBrowserPtr) {
             delete m_Data->m_DiffBrowserPtr;
         }
-        KDialog *dlg = createOkDialog(&ptr, i18n("Diff display"), false,
-                                      QLatin1String("diff_display"), false, need_modal,
-                                      KStandardGuiItem::saveAs());
+        QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Diff display"), false,
+                                               QLatin1String("diff_display"), false, need_modal,
+                                               KStandardGuiItem::saveAs());
         if (dlg) {
             QWidget *wd = dlg->mainWidget();
             if (wd) {
@@ -1420,9 +1423,11 @@ void SvnActions::dispDiff(const QByteArray &ex)
             if (need_modal) {
                 ptr->setFocus();
                 dlg->exec();
-                KConfigGroup _kc(Kdesvnsettings::self()->config(), "diff_display");
-                dlg->saveDialogSize(_kc);
-                delete dlg;
+                if (dlg) {
+                    KConfigGroup _kc(Kdesvnsettings::self()->config(), "diff_display");
+                    dlg->saveDialogSize(_kc);
+                    delete dlg;
+                }
                 return;
             } else {
                 m_Data->m_DiffBrowserPtr = ptr;
@@ -1498,10 +1503,7 @@ void SvnActions::prepareUpdate(bool ask)
     svn::Revision r(svn::Revision::HEAD);
     if (ask) {
         Rangeinput_impl *rdlg = 0;
-        KDialog *dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-        if (!dlg) {
-            return;
-        }
+        QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
         rdlg->setStartOnly(true);
         /* just here cause layout has changed meanwhile */
         dlg->resize(QSize(120, 60).expandedTo(dlg->minimumSizeHint()));
@@ -1645,8 +1647,8 @@ void SvnActions::slotExportCurrent()
 void SvnActions::CheckoutExport(bool _exp)
 {
     CheckoutInfo_impl *ptr = 0;
-    KDialog *dlg = createOkDialog(&ptr, (_exp ? i18n("Export repository") : i18n("Checkout a repository")),
-                                  true, QLatin1String("checkout_export_dialog"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, (_exp ? i18n("Export repository") : i18n("Checkout a repository")),
+                                           true, QLatin1String("checkout_export_dialog"));
     if (dlg) {
         if (dlg->exec() == QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
@@ -1659,16 +1661,18 @@ void SvnActions::CheckoutExport(bool _exp)
                          ignoreExternal,
                          ptr->overwrite(), 0);
         }
-        KConfigGroup _kc(Kdesvnsettings::self()->config(), "checkout_export_dialog");
-        dlg->saveDialogSize(_kc);
-        delete dlg;
+        if (dlg) {
+          KConfigGroup _kc(Kdesvnsettings::self()->config(), "checkout_export_dialog");
+          dlg->saveDialogSize(_kc);
+          delete dlg;
+        }
     }
 }
 
 void SvnActions::CheckoutExport(const QString &what, bool _exp, bool urlisTarget)
 {
     CheckoutInfo_impl *ptr = 0;
-    KDialog *dlg = createOkDialog(&ptr, _exp ? i18n("Export a repository") : i18n("Checkout a repository"), true);
+    QPointer<KDialog> dlg = createOkDialog(&ptr, _exp ? i18n("Export a repository") : i18n("Checkout a repository"), true);
     if (dlg) {
         if (!urlisTarget) {
             ptr->setStartUrl(what);
@@ -1793,10 +1797,7 @@ void SvnActions::slotRevertItems(const QStringList &displist, bool rec_default)
 
     svn::Depth depth;
     RevertFormImpl *ptr = 0;
-    KDialog *dlg = createOkDialog(&ptr, i18n("Revert entries"), true);
-    if (!dlg) {
-        return;
-    }
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Revert entries"), true);
     ptr->setDispList(displist);
     ptr->setRecursive(rec_default);
     if (dlg->exec() != QDialog::Accepted) {
@@ -1804,6 +1805,7 @@ void SvnActions::slotRevertItems(const QStringList &displist, bool rec_default)
         return;
     }
     depth = ptr->getDepth();
+    delete dlg;
 
     svn::Pathes items;
     for (long j = 0; j < displist.count(); ++j) {
@@ -1910,7 +1912,7 @@ void SvnActions::slotSwitch()
 bool SvnActions::makeSwitch(const QString &path, const QString &what)
 {
     CheckoutInfo_impl *ptr;
-    KDialog *dlg = createOkDialog(&ptr, i18n("Switch URL"), true, QLatin1String("switch_url_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Switch URL"), true, QLatin1String("switch_url_dlg"));
     bool done = false;
     if (dlg) {
         ptr->setStartUrl(what);
@@ -1921,9 +1923,11 @@ bool SvnActions::makeSwitch(const QString &path, const QString &what)
             svn::Revision r = ptr->toRevision();
             done = makeSwitch(ptr->reposURL(), path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
         }
-        KConfigGroup _kc(Kdesvnsettings::self()->config(), "switch_url_dlg");
-        dlg->saveDialogSize(_kc);
-        delete dlg;
+        if (dlg) {
+            KConfigGroup _kc(Kdesvnsettings::self()->config(), "switch_url_dlg");
+            dlg->saveDialogSize(_kc);
+            delete dlg;
+        }
     }
     return done;
 }
@@ -2451,7 +2455,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
         }
     } else {
         QTreeWidget *ptr = 0;
-        KDialog *dlg = createOkDialog(&ptr, i18n("Add unversioned items"), true, QLatin1String("add_items_dlg"));
+        QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Add unversioned items"), true, QLatin1String("add_items_dlg"));
         ptr->headerItem()->setText(0, "Item");
         for (long j = 0; j < displist.size(); ++j) {
             QTreeWidgetItem *n = new QTreeWidgetItem(ptr);
@@ -2473,9 +2477,11 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
                 addItems(displist, svn::DepthEmpty);
             }
         }
-        KConfigGroup _kc(Kdesvnsettings::self()->config(), "add_items_dlg");
-        dlg->saveDialogSize(_kc);
-        delete dlg;
+        if (dlg) {
+          KConfigGroup _kc(Kdesvnsettings::self()->config(), "add_items_dlg");
+          dlg->saveDialogSize(_kc);
+          delete dlg;
+        }
     }
 }
 

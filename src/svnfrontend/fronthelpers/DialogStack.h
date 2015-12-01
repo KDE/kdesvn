@@ -24,16 +24,17 @@
 
 class KDialog;
 
+#include <QPointer>
 #include <kconfiggroup.h>
 
 class DialogStack
 {
-    KDialog *_dlg;
+    QPointer<KDialog> _dlg;
     KConfigGroup _k;
 
 public:
-    DialogStack(KDialog *aDlg, const KConfigGroup &group);
-    virtual ~DialogStack();
+    DialogStack(const QPointer<KDialog> &aDlg, const KConfigGroup &group);
+    ~DialogStack();
 };
 
 #endif /* DIALOGSTACK_H_ */

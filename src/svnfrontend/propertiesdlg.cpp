@@ -183,10 +183,7 @@ void PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem *)
 void PropertiesDlg::slotAdd()
 {
     EditPropsWidget *ptr = 0L;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Modify property"), true, QLatin1String("modify_properties"));
-    if (!dlg) {
-        return;
-    }
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Modify property"), true, QLatin1String("modify_properties"));
     ptr->setDir(m_Item->isDir());
 
     if (dlg->exec() == QDialog::Accepted) {
@@ -204,6 +201,8 @@ void PropertiesDlg::slotAdd()
         ki->checkName();
         ki->checkValue();
     }
+
+    delete dlg;
 }
 
 /*!
@@ -241,10 +240,7 @@ void PropertiesDlg::slotModify()
         return;
     }
     EditPropsWidget *ptr = 0L;
-    svn::SharedPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Modify property"), true, QLatin1String("modify_properties"));
-    if (!dlg) {
-        return;
-    }
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Modify property"), true, QLatin1String("modify_properties"));
     ptr->setDir(m_Item->isDir());
     ptr->setPropName(ki->currentName());
     ptr->setPropValue(ki->currentValue());
@@ -263,6 +259,8 @@ void PropertiesDlg::slotModify()
         ki->checkName();
         ki->checkValue();
     }
+
+    delete dlg;
 }
 
 void PropertiesDlg::changedItems(svn::PropertiesMap &toSet, QStringList &toDelete)

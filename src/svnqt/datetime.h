@@ -63,20 +63,20 @@ public:
      *
      * @param time number of microseconds since 00:00:00 january 1, 1970 UTC
      */
-    DateTime(const apr_time_t time);
+    DateTime(const apr_time_t time);    //krazy:exclude=explicit
 
     /**
      * Constructor
      *
      * @param dt QDateTime class
      */
-    DateTime(const QDateTime &dt);
+    DateTime(const QDateTime &dt);    //krazy:exclude=explicit
 
     /**
      * Constructor
      * @param dt RFC822 compatible string
      */
-    DateTime(const QString &dt);
+    DateTime(const QString &dt);    //krazy:exclude=explicit
 
     /**
      * Copy constructor

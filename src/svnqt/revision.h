@@ -103,14 +103,14 @@ public:
      *
      * @param revision revision information
      */
-    Revision(const svn_opt_revision_t *revision);
+    Revision(const svn_opt_revision_t *revision);    //krazy:exclude=explicit
 
     /**
      * Constructor
      *
      * @param revnum revision number
      */
-    Revision(const svn_revnum_t revnum);
+    Revision(const svn_revnum_t revnum);    //krazy:exclude=explicit
 
     /**
      * Constructor
@@ -129,14 +129,14 @@ public:
      * The revision string MUST uppercase, it may some of "WORKING", "BASE", "START", "PREV",
      * a svn revision number/range or a date in form {YYYY-MM-DD}.
      */
-    Revision(const QString &revstring);
+    Revision(const QString &revstring);    //krazy:exclude=explicit
 
     /**
      * Constructor
      *
      * @param kind
      */
-    Revision(const svn_opt_revision_kind kind = svn_opt_revision_unspecified);
+    Revision(const svn_opt_revision_kind kind = svn_opt_revision_unspecified);    //krazy:exclude=explicit
 
     /**
      * Constructor
@@ -144,20 +144,20 @@ public:
      * @param dateTime DateTime wrapper for apr_time_t
      * @todo change it to referenced parameter (requires interface upgrade of lib)
      */
-    Revision(const DateTime dateTime);
+    Revision(const DateTime dateTime);    //krazy:exclude=explicit
     /**
      * Constructor
      *
      * @param dateTime QDateTime type
      */
-    Revision(const QDateTime &dateTime);
+    Revision(const QDateTime &dateTime);    //krazy:exclude=explicit
 
     /**
      * Copy constructor
      *
      * @param revision Source
      */
-    Revision(const Revision &revision);
+    Revision(const Revision &revision);    //krazy:exclude=explicit
 
     /**
      * @return revision information

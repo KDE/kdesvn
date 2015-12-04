@@ -56,13 +56,13 @@ public:
      *
      * @param targets vector of paths
      */
-    Targets(const svn::Pathes &targets);
+    Targets(const svn::Pathes &targets);    //krazy:exclude=explicit
 
     /**
      * Constructor
      * @param path a single paths
      */
-    Targets(const svn::Path &target);
+    Targets(const svn::Path &target);    //krazy:exclude=explicit
 
     /**
      * Constructor from an APR array containing
@@ -70,7 +70,7 @@ public:
      *
      * @param targets APR array header
      */
-    Targets(const apr_array_header_t *targets);
+    Targets(const apr_array_header_t *targets);    //krazy:exclude=explicit
 
     /**
      * Constructor. Initializes list with just
@@ -78,19 +78,19 @@ public:
      *
      * @param target
      */
-    Targets(const QString &target = QString());
+    Targets(const QString &target = QString());    //krazy:exclude=explicit
     /**
      * Constructor. Initializes list with just
      * one entry
      *
      * @param target
      */
-    Targets(const char *target);
+    Targets(const char *target);    //krazy:exclude=explicit
     /**
      * Constructor. Convert stringlist into target list.
      * @param targets
      */
-    Targets(const QStringList &targets);
+    Targets(const QStringList &targets);    //krazy:exclude=explicit
 
     /**
      * Copy Constructor

@@ -49,8 +49,8 @@ private:
 public:
     /** Constructor */
     Url();
-    Url(const QString &);
-    Url(const QByteArray &);
+    Url(const QString &);    //krazy:exclude=explicit
+    Url(const QByteArray &); //krazy:exclude=explicit
     Url(const Url &);
 
     /** Destructor */

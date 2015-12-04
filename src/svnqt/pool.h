@@ -48,7 +48,7 @@ public:
      *
      * @param parent NULL -> global pool
      */
-    Pool(apr_pool_t *parent = (apr_pool_t *)0);
+    Pool(apr_pool_t *parent = (apr_pool_t *)0);    //krazy:exclude=explicit
 
     virtual ~ Pool();
 

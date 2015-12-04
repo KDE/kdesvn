@@ -131,7 +131,7 @@ public:
      * \param ctx a client context for calls to cancel_func inside. you should this only set with functions not using it itself
      * like svn_client_cat2:
      */
-    SvnByteStream(svn_client_ctx_t *ctx = 0);
+    explicit SvnByteStream(svn_client_ctx_t *ctx = 0);
     //! release internal buffer
     virtual ~SvnByteStream();
     //! fill internal buffer with data

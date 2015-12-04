@@ -61,7 +61,7 @@ public:
      *
      * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
-    Path(const QString &path = QString());
+    Path(const QString &path = QString());    //krazy:exclude=explicit
 
     /**
      * Constructor
@@ -69,7 +69,7 @@ public:
      * @see Path::Path (const QString &)
      * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
-    Path(const char *path);
+    Path(const char *path);    //krazy:exclude=explicit
 
     /**
      * Copy constructor

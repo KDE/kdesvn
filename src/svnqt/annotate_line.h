@@ -62,18 +62,17 @@ public:
                  const char *merge_path
                 );
 
-    AnnotateLine(
-        qlonglong line_no,
-        qlonglong revision,
-        PropertiesMap revisionproperties,
-        const char *line,
-        qlonglong merge_revision,
-        PropertiesMap mergeproperties,
-        const char *merge_path,
-        qlonglong revstart,
-        qlonglong revend,
-        bool local
-    );
+    AnnotateLine(qlonglong line_no,
+                 qlonglong revision,
+                 PropertiesMap revisionproperties,
+                 const char *line,
+                 qlonglong merge_revision,
+                 PropertiesMap mergeproperties,
+                 const char *merge_path,
+                 qlonglong revstart,
+                 qlonglong revend,
+                 bool local
+                 );
 
     AnnotateLine(const AnnotateLine &other);
     AnnotateLine();

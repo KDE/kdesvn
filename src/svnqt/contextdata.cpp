@@ -61,14 +61,14 @@ ContextData::ContextData(const QString &configDir_)
     // 11 providers (+1 for windowsvariant)
 
     apr_array_header_t *providers =
-#if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)  //krazy:exclude=cpp
         apr_array_make(pool, 12, sizeof(svn_auth_provider_object_t *));
 #else
         apr_array_make(pool, 11, sizeof(svn_auth_provider_object_t *));
 #endif
     svn_auth_provider_object_t *provider;
 
-#if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)
+#if defined(WIN32) && (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 4)  //krazy:exclude=cpp
     svn_auth_get_windows_simple_provider(&provider, pool);
     APR_ARRAY_PUSH(providers, svn_auth_provider_object_t *) = provider;
 #endif

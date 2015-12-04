@@ -21,12 +21,12 @@
 #ifndef SVN_ITEM_H
 #define SVN_ITEM_H
 
-#include "src/svnqt/smart_pointer.h"
-#include "src/svnqt/svnqttypes.h"
+#include "src/svnqt/status.h"
 #include <kmimetype.h>
 #include <QString>
-#include <qdatetime.h>
+#include <QDateTime>
 #include <QPixmap>
+#include <QScopedPointer>
 #include <QList>
 
 class SvnItemModelNode;
@@ -107,7 +107,7 @@ protected:
         NEEDLOCK = 9
     };
     color_type m_bgColor;
-    svn::smart_pointer<SvnItem_p> p_Item;
+    QScopedPointer<SvnItem_p> p_Item;
     virtual SvnActions *getWrapper()const = 0;
 
     static QPixmap internalTransform(const QPixmap &, int size);

@@ -37,7 +37,7 @@
 #include <svnqt/svnqttypes.h>
 #include <svnqt/revision.h>
 #include <svnqt/path.h>
-#include <svnqt/shared_pointer.h>
+#include <QScopedPointer>
 
 namespace svn
 {
@@ -46,7 +46,7 @@ struct AnnotateParameterData;
 class SVNQT_EXPORT AnnotateParameter
 {
 private:
-    SharedPointer<AnnotateParameterData> _data;
+    QScopedPointer<AnnotateParameterData> _data;
 
 public:
     AnnotateParameter();

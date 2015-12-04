@@ -38,7 +38,7 @@
 #include <svnqt/revision.h>
 #include <svnqt/targets.h>
 #include <svnqt/path.h>
-#include <svnqt/shared_pointer.h>
+#include <QScopedPointer>
 
 namespace svn
 {
@@ -46,7 +46,7 @@ struct CommitParameterData;
 class SVNQT_EXPORT CommitParameter
 {
 private:
-    SharedPointer<CommitParameterData> _data;
+    QScopedPointer<CommitParameterData> _data;
 
 public:
     CommitParameter();

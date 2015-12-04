@@ -42,13 +42,12 @@ struct CommitParameterData {
 };
 
 CommitParameter::CommitParameter()
-{
-    _data = new CommitParameterData;
-}
+    : _data(new CommitParameterData)
+{}
+
 CommitParameter::~CommitParameter()
-{
-    _data = 0;
-}
+{}
+
 GETSET(CommitParameter, Targets, _targets, targets)
 GETSET(CommitParameter, QString, _message, message)
 GETSET(CommitParameter, StringArray, _changeList, changeList)

@@ -169,7 +169,7 @@ SvnItem::~SvnItem()
 void SvnItem::setStat(const svn::StatusPtr &aStat)
 {
     m_overlaycolor = false;
-    p_Item = new SvnItem_p(aStat);
+    p_Item.reset(new SvnItem_p(aStat));
     SvnActions *wrap = getWrapper();
     if (isChanged() || isConflicted()) {
         wrap->addModifiedCache(aStat);

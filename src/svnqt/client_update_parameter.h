@@ -29,7 +29,7 @@
 #include <svnqt/svnqttypes.h>
 #include <svnqt/revision.h>
 #include <svnqt/targets.h>
-#include <svnqt/shared_pointer.h>
+#include <QScopedPointer>
 
 namespace svn
 {
@@ -40,7 +40,7 @@ class SVNQT_EXPORT UpdateParameter
 {
 private:
     //! internal data
-    SharedPointer<UpdateParameterData> _data;
+    QScopedPointer<UpdateParameterData> _data;
 
 public:
     //! constructor

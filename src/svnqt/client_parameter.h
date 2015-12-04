@@ -38,7 +38,7 @@
 #include <svnqt/revision.h>
 #include <svnqt/targets.h>
 #include <svnqt/path.h>
-#include <svnqt/shared_pointer.h>
+#include <QScopedPointer>
 
 namespace svn
 {
@@ -53,7 +53,7 @@ struct CopyParameterData;
 class SVNQT_EXPORT CopyParameter
 {
 private:
-    SharedPointer<CopyParameterData> _data;
+    QScopedPointer<CopyParameterData> _data;
 public:
     CopyParameter(const Targets &_srcPath, const Path &_destPath);
     ~CopyParameter();
@@ -121,7 +121,7 @@ struct DiffParameterData;
 class SVNQT_EXPORT DiffParameter
 {
 private:
-    SharedPointer<DiffParameterData> _data;
+    QScopedPointer<DiffParameterData> _data;
 public:
     DiffParameter();
     ~DiffParameter();
@@ -218,7 +218,7 @@ struct StatusParameterData;
 class SVNQT_EXPORT StatusParameter
 {
 private:
-    SharedPointer<StatusParameterData> _data;
+    QScopedPointer<StatusParameterData> _data;
 public:
     explicit StatusParameter(const Path &_path);
     ~StatusParameter();
@@ -258,7 +258,7 @@ struct LogParameterData;
 class SVNQT_EXPORT LogParameter
 {
 private:
-    SharedPointer<LogParameterData> _data;
+    QScopedPointer<LogParameterData> _data;
 
 public:
     LogParameter();
@@ -310,7 +310,7 @@ struct PropertiesParameterData;
 class SVNQT_EXPORT PropertiesParameter
 {
 private:
-    SharedPointer<PropertiesParameterData> _data;
+    QScopedPointer<PropertiesParameterData> _data;
 public:
     PropertiesParameter();
     ~PropertiesParameter();
@@ -399,7 +399,7 @@ struct MergeParameterData;
 class SVNQT_EXPORT MergeParameter
 {
 private:
-    SharedPointer<MergeParameterData> _data;
+    QScopedPointer<MergeParameterData> _data;
 public:
     MergeParameter();
     ~MergeParameter();
@@ -488,7 +488,7 @@ struct CheckoutParameterData;
 class SVNQT_EXPORT CheckoutParameter
 {
 private:
-    SharedPointer<CheckoutParameterData> _data;
+    QScopedPointer<CheckoutParameterData> _data;
 
 public:
     CheckoutParameter();

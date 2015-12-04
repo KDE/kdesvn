@@ -23,7 +23,8 @@
 #include "ui_createrepo_dlg.h"
 
 #include "src/svnqt/svnqttypes.h"
-#include "src/svnqt/shared_pointer.h"
+
+#include <QScopedPointer>
 
 struct CreateRepoData;
 
@@ -44,7 +45,7 @@ protected Q_SLOTS:
     void compatChanged13(bool);
 
 private:
-    svn::SharedPointer<CreateRepoData> _data;
+    QScopedPointer<CreateRepoData> _data;
 
 protected:
     void checkCompatList();

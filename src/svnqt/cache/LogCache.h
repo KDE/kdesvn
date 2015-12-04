@@ -30,7 +30,7 @@
 #include <QSqlDatabase>
 
 #include "svnqt/svnqt_defines.h"
-#include "svnqt/shared_pointer.h"
+#include <QScopedPointer>
 
 namespace svn
 {
@@ -43,7 +43,7 @@ class LogCacheData;
 class SVNQT_EXPORT LogCache
 {
 private:
-    svn::SharedPointer<LogCacheData> m_CacheData;
+    QScopedPointer<LogCacheData> m_CacheData;
 
 protected:
     LogCache();

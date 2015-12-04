@@ -25,8 +25,8 @@
 #define REPOPARAMETER_H
 
 #include <QString>
+#include <QScopedPointer>
 
-#include <svnqt/shared_pointer.h>
 #include <svnqt/svnqt_defines.h>
 
 namespace svn
@@ -39,7 +39,7 @@ struct CreateRepoParameterData;
 
 class SVNQT_EXPORT CreateRepoParameter
 {
-    SharedPointer<CreateRepoParameterData> _data;
+    QScopedPointer<CreateRepoParameterData> _data;
 
 public:
     CreateRepoParameter();

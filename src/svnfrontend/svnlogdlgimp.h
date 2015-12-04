@@ -24,7 +24,6 @@
 #include "simple_logcb.h"
 #include "src/svnqt/log_entry.h"
 #include "src/svnqt/client.h"
-#include "src/svnqt/shared_pointer.h"
 
 #include <QKeyEvent>
 #include <QRegExp>

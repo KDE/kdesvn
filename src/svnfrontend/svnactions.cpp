@@ -209,7 +209,7 @@ SvnActions::SvnActions(ItemDisplay *parent, bool processes_blocked)
     m_CThread = 0;
     m_UThread = 0;
     m_FCThread = 0;
-    m_Data = new SvnActionsData();
+    m_Data.reset(new SvnActionsData);
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContextListener = new CContextListener(this);
     m_Data->runblocked = processes_blocked;

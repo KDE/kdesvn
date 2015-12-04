@@ -47,16 +47,14 @@ struct SVNQT_NOEXPORT CopyParameterData {
 };
 
 CopyParameter::CopyParameter(const Targets &_srcPath, const Path &_destPath)
+    : _data(new CopyParameterData)
 {
-    _data = new CopyParameterData();
     _data->_srcPath = _srcPath;
     _data->_destPath = _destPath;
 }
 
 CopyParameter::~CopyParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(CopyParameter, Targets, _srcPath, srcPath);
 GETSET(CopyParameter, Path, _destPath, destination);
@@ -98,13 +96,11 @@ public:
 };
 
 DiffParameter::DiffParameter()
-{
-    _data = new DiffParameterData();
-}
+    : _data(new DiffParameterData)
+{}
+
 DiffParameter::~DiffParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(DiffParameter, Path, _path1, path1);
 GETSET(DiffParameter, Path, _path2, path2);
@@ -141,13 +137,12 @@ struct StatusParameterData {
 };
 
 StatusParameter::StatusParameter(const Path &path)
-{
-    _data = new StatusParameterData(path);
-}
+    : _data(new StatusParameterData(path))
+{}
+
 StatusParameter::~StatusParameter()
-{
-    _data = 0;
-}
+{}
+
 GETSET(StatusParameter, Path, _path, path);
 GETSET(StatusParameter, Revision, _revision, revision);
 GETSET(StatusParameter, StringArray, _changeList, changeList);
@@ -177,13 +172,11 @@ public:
 };
 
 LogParameter::LogParameter()
-{
-    _data = new LogParameterData();
-}
+    : _data(new LogParameterData)
+{}
+
 LogParameter::~LogParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(LogParameter, Targets, _targets, targets);
 GETSET(LogParameter, RevisionRanges, _ranges, revisions);
@@ -229,13 +222,11 @@ struct PropertiesParameterData {
 };
 
 PropertiesParameter::PropertiesParameter()
-{
-    _data = new PropertiesParameterData();
-}
+    : _data(new PropertiesParameterData)
+{}
+
 PropertiesParameter::~PropertiesParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(PropertiesParameter, QString, _name, propertyName);
 GETSET(PropertiesParameter, QString, _value, propertyValue);
@@ -267,14 +258,11 @@ public:
 };
 
 MergeParameter::MergeParameter()
-{
-    _data = new MergeParameterData;
-}
+    : _data(new MergeParameterData)
+{}
 
 MergeParameter::~MergeParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(MergeParameter, Path, _path1, path1);
 GETSET(MergeParameter, Path, _path2, path2);
@@ -326,13 +314,11 @@ struct CheckoutParameterData {
 };
 
 CheckoutParameter::CheckoutParameter()
-{
-    _data = new CheckoutParameterData;
-}
+    : _data(new CheckoutParameterData)
+{}
+
 CheckoutParameter::~CheckoutParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(CheckoutParameter, Path, _moduleName, moduleName)
 GETSET(CheckoutParameter, Path, _destination, destination)

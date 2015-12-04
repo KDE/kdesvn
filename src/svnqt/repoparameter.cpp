@@ -46,12 +46,12 @@ struct CreateRepoParameterData {
 };
 
 CreateRepoParameter::CreateRepoParameter()
-{
-    _data = new CreateRepoParameterData();
-}
+    : _data(new CreateRepoParameterData)
+{}
+
 CreateRepoParameter::~CreateRepoParameter()
-{
-}
+{}
+
 const QString &CreateRepoParameter::path()const
 {
     return _data->path;

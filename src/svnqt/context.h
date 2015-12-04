@@ -42,7 +42,6 @@
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
 #include <svnqt/pool.h>
-#include <svnqt/smart_pointer.h>
 
 namespace svn
 {

@@ -42,13 +42,12 @@ struct AnnotateParameterData {
 };
 
 AnnotateParameter::AnnotateParameter()
-{
-    _data = new AnnotateParameterData;
-}
+    : _data(new AnnotateParameterData)
+{}
+
 AnnotateParameter::~AnnotateParameter()
-{
-    _data = 0;
-}
+{}
+
 GETSET(AnnotateParameter, Path, _path, path)
 GETSET(AnnotateParameter, RevisionRange, _revisions, revisionRange)
 GETSET(AnnotateParameter, Revision, _peg, pegRevision)

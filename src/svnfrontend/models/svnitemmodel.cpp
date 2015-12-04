@@ -57,7 +57,7 @@ public:
         m_InfoThread = new GetInfoThread(aCb);
     }
 
-    virtual ~SvnItemModelData()
+    ~SvnItemModelData()
     {
         m_InfoThread->cancelMe();
         if (!m_InfoThread->wait(500)) {
@@ -143,7 +143,6 @@ SvnItemModel::SvnItemModel(MainTreeWidget *display, QObject *parent)
 
 SvnItemModel::~SvnItemModel()
 {
-    m_Data = 0;
 }
 
 SvnItemModelNode *SvnItemModel::firstRootChild()

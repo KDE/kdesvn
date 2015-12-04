@@ -49,10 +49,10 @@ struct CreateRepoData {
 
 Createrepo_impl::Createrepo_impl(QWidget *parent)
     : QWidget(parent)
+    , _data(new CreateRepoData)
 {
     setupUi(this);
     m_ReposPathinput->setMode(KFile::Directory | KFile::LocalOnly);
-    _data = new CreateRepoData;
 
     _data->inChangeCompat = true;
     m_DisableFsync->setEnabled(false);

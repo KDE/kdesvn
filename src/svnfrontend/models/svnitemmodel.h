@@ -24,10 +24,10 @@
 
 #include "svnitemmodelfwd.h"
 
-#include "src/svnqt/shared_pointer.h"
 #include "src/svnqt/svnqttypes.h"
 
-#include <kurl.h>
+#include <KUrl>
+#include <QScopedPointer>
 
 class SvnItemModelData;
 class QItemSelectionModel;
@@ -40,8 +40,6 @@ namespace svn
 class Path;
 }
 
-typedef svn::SharedPointer<SvnItemModelData> SvnItemModelDataPtr;
-
 #define SORT_ROLE Qt::UserRole+1
 #define FILTER_ROLE Qt::UserRole+2
 #define BG_ROLE Qt::UserRole+3
@@ -50,7 +48,7 @@ class SvnItemModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit SvnItemModel(MainTreeWidget *, QObject *parent = 0);
+    explicit SvnItemModel(MainTreeWidget *display, QObject *parent = 0);
     virtual ~SvnItemModel();
 
     void clear();
@@ -144,7 +142,7 @@ protected Q_SLOTS:
 
 private:
     friend class SvnItemModelData;
-    SvnItemModelDataPtr m_Data;
+    QScopedPointer<SvnItemModelData> m_Data;
     virtual bool insertRows(int , int, const QModelIndex & = QModelIndex());
     virtual bool insertColumns(int, int, const QModelIndex & = QModelIndex());
     virtual bool removeRows(int, int, const QModelIndex & = QModelIndex());

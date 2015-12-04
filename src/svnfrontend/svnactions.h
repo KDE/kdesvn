@@ -22,8 +22,6 @@
 
 #include "src/svnqt/client.h"
 #include "src/svnqt/revision.h"
-#include "src/svnqt/smart_pointer.h"
-#include "src/svnqt/shared_pointer.h"
 #include "src/svnqt/svnqttypes.h"
 
 #include "simple_logcb.h"
@@ -34,6 +32,7 @@
 
 #include <QObject>
 #include <QDateTime>
+#include <QScopedPointer>
 #include <QStringList>
 #include <QList>
 
@@ -191,7 +190,7 @@ public:
     virtual void editProperties(SvnItem *k, const svn::Revision &rev);
 
 protected:
-    svn::smart_pointer<SvnActionsData> m_Data;
+    QScopedPointer<SvnActionsData> m_Data;
 
     void CheckoutExport(bool _exp);
     void CheckoutExportCurrent(bool _exp);

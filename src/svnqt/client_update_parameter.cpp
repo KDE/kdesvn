@@ -46,13 +46,11 @@ struct  SVNQT_NOEXPORT UpdateParameterData {
 };
 
 UpdateParameter::UpdateParameter()
-{
-    _data = new UpdateParameterData();
-}
+    : _data(new UpdateParameterData)
+{}
+
 UpdateParameter::~UpdateParameter()
-{
-    _data = 0;
-}
+{}
 
 GETSET(UpdateParameter, Targets, _destPaths, targets);
 GETSET(UpdateParameter, Revision, _srcRevision, revision);

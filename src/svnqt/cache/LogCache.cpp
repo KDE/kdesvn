@@ -373,7 +373,7 @@ LogCache::~LogCache()
  */
 void LogCache::setupCachePath()
 {
-    m_CacheData = new LogCacheData;
+    m_CacheData.reset(new LogCacheData);
     m_CacheData->m_BasePath = m_BasePath;
     QDir d;
     if (!d.exists(m_BasePath)) {

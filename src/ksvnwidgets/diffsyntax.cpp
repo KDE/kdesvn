@@ -28,8 +28,8 @@
 /*!
     \fn DiffSyntax::DiffSyntax(QTextEdit*)
  */
-DiffSyntax::DiffSyntax(QTextEdit *aTextEdit)
-    : QSyntaxHighlighter(aTextEdit)    //krazy:exclude=qclasses
+DiffSyntax::DiffSyntax(QTextEdit *aTextEdit)  //krazy:exclude=qclasses
+    : QSyntaxHighlighter(aTextEdit)
 {
 }
 

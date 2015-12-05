@@ -32,6 +32,7 @@ class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg
     Q_OBJECT
 public:
     explicit Createrepo_impl(QWidget *parent = 0);
+    ~Createrepo_impl();
     const svn::repository::CreateRepoParameter &parameter()const;
     bool createMain()const;
     QString targetDir()const;

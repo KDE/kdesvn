@@ -80,6 +80,9 @@ Createrepo_impl::Createrepo_impl(QWidget *parent)
     _data->inChangeCompat = false;
 }
 
+Createrepo_impl::~Createrepo_impl()
+{}
+
 void Createrepo_impl::fsTypeChanged(int which)
 {
     m_DisableFsync->setEnabled(which == 1);

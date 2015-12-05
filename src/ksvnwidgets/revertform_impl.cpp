@@ -57,5 +57,3 @@ void RevertFormImpl::setDispList(const QStringList &_list)
 {
     m_ItemsList->addItems(_list);
 }
-
-#include "revertform_impl.moc"

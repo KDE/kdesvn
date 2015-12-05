@@ -51,5 +51,3 @@ bool DeleteForm_impl::force_delete()const
 {
     return m_forceDelete->isChecked();
 }
-
-#include "deleteform_impl.moc"

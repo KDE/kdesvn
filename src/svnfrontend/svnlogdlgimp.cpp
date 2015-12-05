@@ -570,5 +570,3 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QTreeWidgetItem *_item, int)
         m_Actions->makeBlame(start, rev, _base + name, QApplication::activeModalWidget(), rev, this);
     }
 }
-
-#include "svnlogdlgimp.moc"

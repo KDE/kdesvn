@@ -274,5 +274,3 @@ void SvnLogModel::setRightRow(long v)
     }
     m_data->_right = v;
 }
-
-#include "logitemmodel.moc"

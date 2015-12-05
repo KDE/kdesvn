@@ -98,5 +98,3 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
     *ok = (i == KDialog::Yes || i == KDialog::No);
     return *ok;
 }
-
-#include "ssltrustprompt_impl.moc"

@@ -67,8 +67,6 @@ set(ksvnwidgethdr
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
 
-qt4_automoc(${ksvnwidgetsrc})
-
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 set_target_properties(ksvnwidgets
     PROPERTIES

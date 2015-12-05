@@ -34,5 +34,3 @@ DisplaySettings_impl::DisplaySettings_impl(QWidget *parent)
 DisplaySettings_impl::~DisplaySettings_impl()
 {
 }
-
-#include "displaysettings_impl.moc"

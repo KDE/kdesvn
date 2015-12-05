@@ -2385,5 +2385,3 @@ void MainTreeWidget::slotDirRecProperty()
     }
 
 }
-
-#include "maintreewidget.moc"

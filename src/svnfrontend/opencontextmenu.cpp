@@ -81,5 +81,3 @@ void OpenContextmenu::slotOpenWith()
     lst.append(m_Path);
     KRun::displayOpenWithDialog(lst, KApplication::activeWindow());
 }
-
-#include "opencontextmenu.moc"

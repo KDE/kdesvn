@@ -83,5 +83,3 @@ void CommandLineData::displayHelp()
 {
     KToolInvocation::invokeHelp("kdesvn-commandline", "kdesvn");
 }
-
-#include "commandline.moc"

@@ -203,5 +203,3 @@ void CheckoutInfo_impl::disableExternals(bool how)
         m_ignoreExternals->show();
     }
 }
-
-#include "checkoutinfo_impl.moc"

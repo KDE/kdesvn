@@ -35,8 +35,6 @@ set (backgroundsrc
     threadcontextlistenerdata.h
     )
 
-qt4_automoc(${backgroundsrc})
-
 add_library(svnbackground STATIC
     ${backgroundsrc}
 )

@@ -202,5 +202,3 @@ void EditPropsWidget::showHelp()
     pos.setY(pos.y() + m_ValueEdit->height() / 4);
     QWhatsThis::showText(mapToGlobal(pos), comment);
 }
-
-#include "editpropswidget.moc"

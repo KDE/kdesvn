@@ -1002,5 +1002,3 @@ void RevGraphView::slotClientException(const QString &what)
 {
     KMessageBox::sorry(KApplication::activeModalWidget(), what, i18n("SVN Error"));
 }
-
-#include "revgraphview.moc"

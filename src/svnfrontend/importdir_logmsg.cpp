@@ -82,5 +82,3 @@ void Importdir_logmsg::createDirboxDir(const QString &which)
 {
     m_createDirBox->setText(i18n("Create subdirectory %1 on import", (which.isEmpty() ? i18n("(Last part)") : which)));
 }
-
-#include "importdir_logmsg.moc"

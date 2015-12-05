@@ -26,7 +26,6 @@ set(helperssrc
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-qt4_automoc(${helperssrc})
 add_library(kdesvnhelpers STATIC ${helperssrc} ${hdr})
 
 set_target_properties(kdesvnhelpers

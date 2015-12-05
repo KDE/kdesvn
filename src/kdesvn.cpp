@@ -473,5 +473,3 @@ void kdesvn::slotExtraStatus(const QString &what)
         statusBar()->changeItem(what, 1);
     }
 }
-
-#include "kdesvn.moc"

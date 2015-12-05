@@ -44,7 +44,6 @@ set(settings_sources
 
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
-qt4_automoc(${settings_sources})
 add_library(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
 add_dependencies(settingsdlgs kdesvncfgreader)
 

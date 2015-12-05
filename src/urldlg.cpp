@@ -152,5 +152,3 @@ KUrl UrlDlg::getUrl(QWidget *parent)
     delete dlg;
     return ret;
 }
-
-#include "urldlg.moc"

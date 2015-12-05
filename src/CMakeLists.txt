@@ -34,9 +34,6 @@ set(partsrc
     kdesvnview.cpp
 )
 
-qt4_automoc(${kdesvnsrc})
-qt4_automoc(${partsrc})
-
 set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
 set(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
 

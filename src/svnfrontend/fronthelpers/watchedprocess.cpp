@@ -122,5 +122,3 @@ void WatchedProcess::appendTempDir(const QString &aDir)
 {
     m_Data->_tempDirs.append(aDir);
 }
-
-#include "watchedprocess.moc"

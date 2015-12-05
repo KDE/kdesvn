@@ -43,5 +43,3 @@ void DispColorSettings_impl::coloredStateToggled(bool how)
     kcfg_color_notversioned_item->setEnabled(how);
     kcfg_color_conflicted_item->setEnabled(how);
 }
-
-#include "dispcolorsettings_impl.moc"

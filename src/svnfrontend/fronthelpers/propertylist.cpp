@@ -174,5 +174,3 @@ void Propertylist::keyPressEvent(QKeyEvent *key)
     }
     key->ignore();
 }
-
-#include "propertylist.moc"

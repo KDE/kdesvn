@@ -159,5 +159,3 @@ void SvnTreeView::doDrop(const KUrl::List &list, const QModelIndex &parent, bool
     }
     itemModel->dropUrls(list, action, parent.row(), parent.column(), _p, intern);
 }
-
-#include "svntreeview.moc"

@@ -925,4 +925,3 @@ void SvnItemModel::slotNotifyMessage(const QString &msg)
 {
     kDebug() << msg;
 }
-#include "svnitemmodel.moc"

@@ -476,5 +476,3 @@ void kdesvnView::stopCacheThreads()
 {
     m_TreeWidget->stopLogCache();
 }
-
-#include "kdesvnview.moc"

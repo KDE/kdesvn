@@ -150,6 +150,3 @@ void PannerView::updateCurrentRect()
     if (m_ZoomRect.isValid()) {
     }
 }
-
-#include "pannerview.moc"
-

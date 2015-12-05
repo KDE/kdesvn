@@ -244,5 +244,3 @@ void DiffBrowser::slotTextCodecChanged(const QString &codec)
         Kdesvnsettings::self()->writeConfig();
     }
 }
-
-#include "diffbrowser.h.moc"

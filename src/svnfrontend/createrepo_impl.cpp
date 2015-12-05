@@ -152,4 +152,3 @@ const svn::repository::CreateRepoParameter &Createrepo_impl::parameter()const
     return _data->params;
 }
 
-#include "createrepo_impl.moc"

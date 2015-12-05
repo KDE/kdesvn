@@ -175,5 +175,3 @@ void DbOverview::repositorySettings()
 {
     DbSettings::showSettings(selectedRepository());
 }
-
-#include "dboverview.moc"

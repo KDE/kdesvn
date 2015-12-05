@@ -47,5 +47,3 @@ bool HotcopyDlg_impl::cleanLogs()const
 {
     return m_Cleanlogs->isChecked();
 }
-
-#include "hotcopydlg_impl.moc"

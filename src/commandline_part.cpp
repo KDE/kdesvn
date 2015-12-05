@@ -48,5 +48,3 @@ int commandline_part::exec(KCmdLineArgs *args)
 {
     return m_pCPart->exec(args);
 }
-
-#include "commandline_part.moc"

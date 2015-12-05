@@ -113,5 +113,3 @@ QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool *force, bool move,
     delete dlg;
     return nName;
 }
-
-#include "copymoveview_impl.moc"

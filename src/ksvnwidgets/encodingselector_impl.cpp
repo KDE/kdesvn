@@ -49,6 +49,3 @@ void EncodingSelector_impl::itemActivated(int which)
         emit TextCodecChanged(m_encodingList->currentText());
     }
 }
-
-#include "encodingselector_impl.moc"
-

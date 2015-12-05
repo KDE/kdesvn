@@ -3006,5 +3006,3 @@ bool SvnActions::threadRunning(ThreadType which)
     }
     return false;
 }
-
-#include "svnactions.moc"

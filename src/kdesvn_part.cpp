@@ -392,5 +392,3 @@ void kdesvnpart::showDbStatus()
         DbOverview::showDbOverview();
     }
 }
-
-#include "kdesvn_part.moc"

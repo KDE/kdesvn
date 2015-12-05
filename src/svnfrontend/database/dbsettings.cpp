@@ -103,5 +103,3 @@ void DbSettings::showSettings(const QString &repository)
         delete dlg;
     }
 }
-
-#include "dbsettings.moc"

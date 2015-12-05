@@ -99,5 +99,3 @@ QString LoadDmpDlg_impl::parentPath()const
     }
     return res;
 }
-
-#include "loaddmpdlg_impl.moc"

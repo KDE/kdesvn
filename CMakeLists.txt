@@ -19,11 +19,13 @@
  ####
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
+cmake_minimum_required(VERSION 2.8.12)
 
 # Where to look for Findxxx.cmake modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
 # Automatically include the current source and binary dirs
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
 
 find_package(KDE4 4.9.0 REQUIRED)
 include (KDE4Defaults)
@@ -63,9 +65,6 @@ if(TESTINGBUILD)
     add_definitions(-DDEBUG_TIMER=1)
 endif()
 
-include_directories (${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
-${QT_QTDBUS_INCLUDE_DIR})
-
 include(MacroEnsureVersion)
 include(FindSubversion)
 include(SetupCompiler)
@@ -89,7 +88,7 @@ include_directories(
     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_BINARY_DIR}/src/svnfrontend
     ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDE_DIR}
+    ${KDE4_INCLUDES}
     ${QT_INCLUDE_DIR}
     ${APR_INCLUDE_DIR}
     ${APU_INCLUDE_DIR}

@@ -51,5 +51,3 @@ bool AuthDialogImpl::maySave()const
 {
     return m_AuthWidget->maySave();
 }
-
-#include "authdialogimpl.moc"

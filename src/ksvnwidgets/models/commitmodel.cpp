@@ -336,5 +336,3 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
 /************************************
  * end CommitModelCheckitem         *
  ************************************/
-
-#include "commitmodel.moc"

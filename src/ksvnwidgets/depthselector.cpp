@@ -107,5 +107,3 @@ void DepthSelector::hideDepth(bool hide)
         w->show();
     }
 }
-
-#include "depthselector.moc"

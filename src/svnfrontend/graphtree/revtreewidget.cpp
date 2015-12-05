@@ -112,6 +112,3 @@ void RevTreeWidget::setDetailText(const QString &_s)
         m_Splitter->setSizes(list);
     }
 }
-
-#include "revtreewidget.moc"
-

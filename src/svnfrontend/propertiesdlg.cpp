@@ -288,5 +288,3 @@ void PropertiesDlg::changedItems(svn::PropertiesMap &toSet, QStringList &toDelet
         }
     }
 }
-
-#include "propertiesdlg.moc"

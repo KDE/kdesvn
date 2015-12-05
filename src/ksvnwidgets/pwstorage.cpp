@@ -200,5 +200,3 @@ bool PwStorage::setCachedLogin(const QString &realm, const QString &user, const 
     (*_Cache)[realm] = PwStorageData::userpw_type(user, pw);
     return true;
 }
-
-#include "pwstorage.moc"

@@ -682,5 +682,3 @@ void Commitmsg_impl::slotItemDoubleClicked(const QModelIndex &index)
     Q_UNUSED(index);
     slotDiffSelected();
 }
-
-#include "commitmsg_impl.moc"

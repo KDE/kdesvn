@@ -46,5 +46,3 @@ svn::Depth SetPropertyWidget::getDepth()const
 {
     return m_DepthSelector->getDepth();
 }
-
-#include "setpropertywidget.moc"

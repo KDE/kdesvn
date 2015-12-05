@@ -327,5 +327,3 @@ void ThreadContextListener::contextNotify(const char *path,
 {
     CContextListener::contextNotify(path, action, kind, mime_type, content_state, prop_state, revision);
 }
-
-#include "tcontextlistener.moc"

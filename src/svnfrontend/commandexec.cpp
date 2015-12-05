@@ -637,5 +637,3 @@ void CommandExec::slotCmd_unlock()
 //     m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
     m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url, m_pCPart->force);
 }
-
-#include "commandexec.moc"

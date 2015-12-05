@@ -184,5 +184,3 @@ void Rangeinput_impl::setStartOnly(bool theValue)
     setMinimumSize(minimumSizeHint());
     resize(QSize(397, 272).expandedTo(minimumSizeHint()));
 }
-
-#include "rangeinput_impl.moc"

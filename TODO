@@ -1,1 +1,6 @@
-See ticket tracker on http://kdesvn.alwins-world.de
+- See ticket tracker on https://bugs.kde.org/
+- Port to Qt5/KF5
+- Rework inidrect dialog creation to centralize to dialog logic
+- make StopDlg more robust to not crash when the application exists and the StopDlg is in front
+- Remove support for Subversion < 1.6 (or 1.7?)
+- Cleanup svnqt (esp. not thread-safe smart/shared_pointer, explicit ctors, unused functions, ...)

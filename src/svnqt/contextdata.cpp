@@ -33,14 +33,18 @@
 namespace svn
 {
 
+static inline char *toAprCharPtr(const QString &str, apr_pool_t *pool)
+{
+  const QByteArray l = str.toUtf8();
+  return apr_pstrndup(pool, l.data(), l.size());
+}
+
 ContextData::ContextData(const QString &configDir_)
     : listener(0), logIsSet(false),
       m_promptCounter(0), m_ConfigDir(configDir_)
 {
-    const char *c_configDir = 0;
-    if (m_ConfigDir.length() > 0) {
-        c_configDir = m_ConfigDir.toUtf8();
-    }
+    const QByteArray cfgDirBa = m_ConfigDir.toUtf8();
+    const char *c_configDir = cfgDirBa.isEmpty() ? NULL : cfgDirBa.constData();
 
     // make sure the configuration directory exists
     svn_config_ensure(c_configDir, pool);
@@ -411,7 +415,7 @@ svn_error_t *ContextData::onLogMsg(const char **log_msg,
         }
     }
 
-    *log_msg = apr_pstrdup(pool, msg.toUtf8());
+    *log_msg = toAprCharPtr(msg, pool);
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
@@ -440,7 +444,7 @@ svn_error_t *ContextData::onLogMsg2(const char **log_msg,
         }
     }
 
-    *log_msg = apr_pstrdup(pool, msg.toUtf8());
+    *log_msg = toAprCharPtr(msg, pool);
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
@@ -470,7 +474,7 @@ svn_error_t *ContextData::onLogMsg3(const char **log_msg,
         }
     }
 
-    *log_msg = apr_pstrdup(pool, msg.toUtf8());
+    *log_msg = toAprCharPtr(msg, pool);
     *tmp_file = NULL;
     return SVN_NO_ERROR;
 }
@@ -530,11 +534,8 @@ svn_error_t *ContextData::onCachedPrompt(svn_auth_cred_simple_t **cred,
     }
     svn_auth_cred_simple_t *lcred = (svn_auth_cred_simple_t *)
                                     apr_palloc(pool, sizeof(svn_auth_cred_simple_t));
-    QByteArray l;
-    l = data->getPassword().toUtf8();
-    lcred->password = apr_pstrndup(pool, l, l.size());
-    l = data->getUsername().toUtf8();
-    lcred->username = apr_pstrndup(pool, l, l.size());
+    lcred->password = toAprCharPtr(data->getPassword(), pool);
+    lcred->username = toAprCharPtr(data->getUsername(), pool);
 
     // tell svn if the credentials need to be saved
     lcred->may_save = may_save;
@@ -558,11 +559,8 @@ svn_error_t *ContextData::onSavedPrompt(svn_auth_cred_simple_t **cred,
     }
     svn_auth_cred_simple_t *lcred = (svn_auth_cred_simple_t *)
                                     apr_palloc(pool, sizeof(svn_auth_cred_simple_t));
-    QByteArray l;
-    l = data->getPassword().toUtf8();
-    lcred->password = apr_pstrndup(pool, l, l.size());
-    l = data->getUsername().toUtf8();
-    lcred->username = apr_pstrndup(pool, l, l.size());
+    lcred->password = toAprCharPtr(data->getPassword(), pool);
+    lcred->username = toAprCharPtr(data->getUsername(), pool);
 
     // tell svn if the credentials need to be saved
     lcred->may_save = may_save;
@@ -587,11 +585,8 @@ svn_error_t *ContextData::onSimplePrompt(svn_auth_cred_simple_t **cred,
 
     svn_auth_cred_simple_t *lcred = (svn_auth_cred_simple_t *)
                                     apr_palloc(pool, sizeof(svn_auth_cred_simple_t));
-    QByteArray l;
-    l = data->getPassword().toUtf8();
-    lcred->password = apr_pstrndup(pool, l, l.size());
-    l = data->getUsername().toUtf8();
-    lcred->username = apr_pstrndup(pool, l, l.size());
+    lcred->password = toAprCharPtr(data->getPassword(), pool);
+    lcred->username = toAprCharPtr(data->getUsername(), pool);
 
     // tell svn if the credentials need to be saved
     lcred->may_save = may_save;
@@ -662,7 +657,7 @@ svn_error_t *ContextData::onSslClientCertPrompt(svn_auth_cred_ssl_client_cert_t 
         (svn_auth_cred_ssl_client_cert_t *)
         apr_palloc(pool, sizeof(svn_auth_cred_ssl_client_cert_t));
 
-    cred_->cert_file = certFile.toUtf8();
+    cred_->cert_file = toAprCharPtr(certFile, pool);
 
     *cred = cred_;
     return SVN_NO_ERROR;
@@ -688,7 +683,7 @@ svn_error_t *ContextData::onFirstSslClientCertPw(
         (svn_auth_cred_ssl_client_cert_pw_t *)
         apr_palloc(pool, sizeof(svn_auth_cred_ssl_client_cert_pw_t));
 
-    cred_->password = password.toUtf8();
+    cred_->password = toAprCharPtr(password, pool);
     cred_->may_save = may_save;
     *cred = cred_;
 
@@ -715,7 +710,7 @@ svn_error_t *ContextData::onSslClientCertPwPrompt(
         (svn_auth_cred_ssl_client_cert_pw_t *)
         apr_palloc(pool, sizeof(svn_auth_cred_ssl_client_cert_pw_t));
 
-    cred_->password = password.toUtf8();
+    cred_->password = toAprCharPtr(password, pool);
     cred_->may_save = may_save;
     *cred = cred_;
 

@@ -43,7 +43,7 @@ int SvnItemModelNode::rowNumber()const
     return _parentNode->childList().indexOf(const_cast<SvnItemModelNode *>(this));
 }
 
-bool SvnItemModelNode::NodeIsDir()
+bool SvnItemModelNode::NodeIsDir() const
 {
     return false;
 }
@@ -53,45 +53,36 @@ SvnItemModelNodeDir *SvnItemModelNode::parent()const
     return _parentNode;
 }
 
-QColor SvnItemModelNode::backgroundColor()
+QColor SvnItemModelNode::backgroundColor() const
 {
-    if (Kdesvnsettings::colored_state() && m_bgColor != NONE) {
+    if (Kdesvnsettings::colored_state()) {
         switch (m_bgColor) {
         case UPDATES:
             return Kdesvnsettings::color_need_update();
-            break;
         case  LOCKED:
             return Kdesvnsettings::color_locked_item();
-            break;
         case  ADDED:
             return Kdesvnsettings::color_item_added();
-            break;
         case  DELETED:
             return Kdesvnsettings::color_item_deleted();
-            break;
         case  MODIFIED:
             return Kdesvnsettings::color_changed_item();
-            break;
         case MISSING:
             return Kdesvnsettings::color_missed_item();
-            break;
         case NOTVERSIONED:
             return Kdesvnsettings::color_notversioned_item();
-            break;
         case CONFLICT:
             return Kdesvnsettings::color_conflicted_item();
-            break;
         case NEEDLOCK:
             return Kdesvnsettings::color_need_lock();
-            break;
-        default:
+        case NONE:
             break;
         }
     }
     return QColor();
 }
 
-bool SvnItemModelNode::NodeHasChilds()
+bool SvnItemModelNode::NodeHasChilds() const
 {
     return false;
 }
@@ -133,7 +124,7 @@ SvnActions *SvnItemModelNode::getWrapper() const
     return _actions;
 }
 
-char SvnItemModelNode::sortChar()
+char SvnItemModelNode::sortChar() const
 {
     return 3;
 }
@@ -164,7 +155,7 @@ const QList<SvnItemModelNode *> &SvnItemModelNodeDir::childList()const
     return m_Children;
 }
 
-bool SvnItemModelNodeDir::NodeIsDir()
+bool SvnItemModelNodeDir::NodeIsDir() const
 {
     if (isValid()) {
         return isDir();
@@ -183,7 +174,7 @@ SvnItemModelNode *SvnItemModelNodeDir::child(int row)const
     return m_Children[row];
 }
 
-char SvnItemModelNodeDir::sortChar()
+char SvnItemModelNodeDir::sortChar() const
 {
     return 1;
 }
@@ -204,12 +195,12 @@ SvnItemModelNode *SvnItemModelNodeDir::findPath(const QStringList &parts)
     return 0;
 }
 
-bool SvnItemModelNodeDir::contains(const QString &fullName)
+bool SvnItemModelNodeDir::contains(const QString &fullName) const
 {
     return indexOf(fullName) != -1;
 }
 
-int SvnItemModelNodeDir::indexOf(const QString &fullPath)
+int SvnItemModelNodeDir::indexOf(const QString &fullPath) const
 {
     for (int i = 0; i < m_Children.size(); ++i) {
         if (m_Children[i]->fullName() == fullPath) {
@@ -232,7 +223,7 @@ void SvnItemModelNodeDir::refreshStatus(bool children, const QList<SvnItem *> &e
     }
 }
 
-bool SvnItemModelNodeDir::NodeHasChilds()
+bool SvnItemModelNodeDir::NodeHasChilds() const
 {
     return !isIgnored();
 }

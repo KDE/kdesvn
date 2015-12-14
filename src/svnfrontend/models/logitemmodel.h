@@ -67,8 +67,8 @@ public:
     void setLeftRow(long);
     void setRightRow(long);
 
-    long min();
-    long max();
+    long min() const;
+    long max() const;
 
 private:
     SvnLogModelDataPtr m_data;

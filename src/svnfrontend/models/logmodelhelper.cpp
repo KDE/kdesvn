@@ -24,8 +24,6 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <QList>
-
 #define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType+1
 
 LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry &e, QTreeWidget *view)
@@ -51,30 +49,30 @@ SvnLogModelNode::SvnLogModelNode(const svn::LogEntry &_entry)
     : _data(_entry), _realName(QString())
 {
     _date = svn::DateTime(_entry.date);
-    QStringList sp = _entry.message.split('\n');
-    if (sp.count() == 0) {
+    const QStringList sp = _entry.message.split(QLatin1Char('\n'));
+    if (sp.isEmpty()) {
         _shortMessage = _entry.message;
     } else {
         _shortMessage = sp[0];
     }
 }
 
-const QList<svn::LogChangePathEntry> &SvnLogModelNode::changedPaths()const
+const svn::LogChangePathEntries &SvnLogModelNode::changedPaths()const
 {
     return _data.changedPaths;
 }
 
 bool SvnLogModelNode::copiedFrom(QString &_n, long &_rev)const
 {
-    for (int i = 0; i < changedPaths().count(); ++i) {
-        if (changedPaths()[i].action == 'A' &&
-                !changedPaths()[i].copyFromPath.isEmpty() &&
-                isParent(changedPaths()[i].path, _realName)) {
-            QString tmpPath = _realName;
-            QString r = _realName.mid(changedPaths()[i].path.length());
-            _n = changedPaths()[i].copyFromPath;
+    for (int i = 0; i < _data.changedPaths.count(); ++i) {
+        const svn::LogChangePathEntry &entry =_data.changedPaths.at(i);
+        if (entry.action == 'A' &&
+                !entry.copyFromPath.isEmpty() &&
+                isParent(entry.path, _realName)) {
+            QString r = _realName.mid(entry.path.length());
+            _n = entry.copyFromPath;
             _n += r;
-            _rev = changedPaths()[i].copyFromRevision;
+            _rev = entry.copyFromRevision;
             return true;
         }
     }

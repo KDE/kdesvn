@@ -36,7 +36,7 @@
 #include <svnqt/datetime.h>
 
 #include <QString>
-#include <QList>
+#include <QVector>
 
 // apr
 #include <apr_time.h>
@@ -82,7 +82,7 @@ public:
     qlonglong copyToRevision;
 };
 
-typedef QList<LogChangePathEntry> LogChangePathEntries;
+typedef QVector<LogChangePathEntry> LogChangePathEntries;
 
 class SVNQT_EXPORT LogEntry
 {

@@ -123,12 +123,12 @@ void SvnLogModel::setLogData(const svn::SharedPointer<svn::LogEntriesMap> &_log,
     }
 }
 
-long SvnLogModel::min()
+long SvnLogModel::min() const
 {
     return m_data->_min;
 }
 
-long SvnLogModel::max()
+long SvnLogModel::max() const
 {
     return m_data->_max;
 }

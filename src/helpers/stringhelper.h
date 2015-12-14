@@ -28,25 +28,11 @@
 namespace helpers
 {
 
-class ByteToString
+inline QString ByteToString(qulonglong value)
 {
-protected:
-
-    qulonglong m_value;
-    QString m_text;
-
-public:
-    explicit ByteToString(qulonglong value)
-        : m_value(value), m_text(KGlobal::locale()->formatByteSize(value))
-    {
-    };
-
-    operator const QString &()const
-    {
-        return m_text;
-    }
-};
-
+    return KGlobal::locale()->formatByteSize(value);
 }
+
+} // namespace helpers
 
 #endif

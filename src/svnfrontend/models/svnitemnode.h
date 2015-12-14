@@ -49,16 +49,16 @@ public:
     virtual svn::Revision correctPeg()const;
     virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false);
     virtual SvnActions *getWrapper() const;
-    virtual bool NodeIsDir();
-    virtual bool NodeHasChilds();
+    virtual bool NodeIsDir() const;
+    virtual bool NodeHasChilds() const;
 
-    virtual char sortChar();
+    virtual char sortChar() const;
     virtual SvnItemModelNode *sItem()
     {
         return this;
     }
 
-    QColor backgroundColor();
+    QColor backgroundColor() const;
 
 protected:
     SvnItemModelNodeDir *_parentNode;
@@ -73,20 +73,20 @@ public:
     SvnItemModelNodeDir(SvnActions *, MainTreeWidget *);
     SvnItemModelNodeDir(SvnItemModelNodeDir *_parent, SvnActions *, MainTreeWidget *);
     virtual ~SvnItemModelNodeDir();
-    virtual bool NodeIsDir();
+    virtual bool NodeIsDir() const;
 
     const QList<SvnItemModelNode *> &childList()const;
     SvnItemModelNode *child(int row)const;
 
     SvnItemModelNode *findPath(const QStringList &parts);
-    int indexOf(const QString &fullPath);
-    virtual char sortChar();
+    int indexOf(const QString &fullPath) const;
+    virtual char sortChar() const;
 
-    bool contains(const QString &fullName);
+    bool contains(const QString &fullName) const;
     virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false);
 
     void clear();
-    virtual bool NodeHasChilds();
+    virtual bool NodeHasChilds() const;
 
 protected:
     QList<SvnItemModelNode *> m_Children;

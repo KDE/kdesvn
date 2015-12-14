@@ -64,7 +64,7 @@ class SvnLogModelNode
 public:
     explicit SvnLogModelNode(const svn::LogEntry &_entry);
 
-    const QList<svn::LogChangePathEntry> &changedPaths()const;
+    const svn::LogChangePathEntries &changedPaths()const;
     void setChangedPaths(const svn::LogEntry &);
 
     qlonglong revision()const

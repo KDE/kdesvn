@@ -113,9 +113,9 @@ set(ALL_LINKFLAGS ${APR_EXTRA_LDFLAGS})
 set(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LDFLAGS}")
 
 if(WIN32 OR APPLE)
-    set_property(TARGET ${svnqt-name} PROPERTY LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}" APPEND)
+    set_property(TARGET ${svnqt-name} APPEND PROPERTY LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
 else()
-    set_property(TARGET ${svnqt-name} PROPERTY LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}" APPEND)
+    set_property(TARGET ${svnqt-name} APPEND PROPERTY LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
 endif()
 
 target_link_libraries(${svnqt-name}
@@ -123,7 +123,8 @@ target_link_libraries(${svnqt-name}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTSQL_LIBRARY}
 )
-set_property(TARGET ${svnqt-name} PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS} APPEND)
+set_property(TARGET ${svnqt-name} APPEND PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS})
+set_property(TARGET ${svnqt-name} PROPERTY CXX_VISIBILITY_PRESET hidden)
 
 if(WIN32)
     target_link_libraries(${svnqt-name} wsock32.lib)

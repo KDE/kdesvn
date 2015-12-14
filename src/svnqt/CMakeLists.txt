@@ -69,7 +69,6 @@ set(SOURCES
     targets.cpp
     url.cpp
     version_check.cpp
-    wc.cpp
     )
 
 

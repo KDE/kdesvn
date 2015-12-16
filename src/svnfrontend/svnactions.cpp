@@ -359,9 +359,12 @@ bool SvnActions::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QS
         svn::LogEntriesMap _m;
         try {
             svn::cache::ReposLog rl(m_Data->m_Svnclient , root);
-            if (rl.isValid() && rl.simpleLog(_m, r, r, true) && _m.find(r.revnum()) != _m.end()) {
-                t = _m[r.revnum()];
-                res = true;
+            if (rl.isValid() && rl.simpleLog(_m, r, r, true)) {
+                const svn::LogEntriesMap::const_iterator it = _m.constFind(r.revnum());
+                if (it != _m.constEnd()) {
+                    t = it.value();
+                    res = true;
+                }
             }
         } catch (const svn::Exception &e) {
             emit clientException(e.msg());
@@ -371,8 +374,9 @@ bool SvnActions::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QS
     if (!res) {
         svn::SharedPointer<svn::LogEntriesMap> log = getLog(r, r, peg, root, true, 1);
         if (log) {
-            if (log->find(r.revnum()) != log->end()) {
-                t = (*log)[r.revnum()];
+            const svn::LogEntriesMap::const_iterator it = log->constFind(r.revnum());
+            if (it != log->constEnd()) {
+                t = it.value();
                 res = true;
             }
         }
@@ -1972,8 +1976,8 @@ void SvnActions::slotResolve(const QString &p)
         return;
     }
     QString eresolv = Kdesvnsettings::conflict_resolver();
-    QStringList wlist = eresolv.split(' ');
-    if (wlist.size() == 0) {
+    QStringList wlist = eresolv.split(QLatin1Char(' '));
+    if (wlist.isEmpty()) {
         return;
     }
     svn::InfoEntry i1;
@@ -1985,9 +1989,9 @@ void SvnActions::slotResolve(const QString &p)
     if (fi.isRelative()) {
         base = fi.absolutePath() + QLatin1Char('/');
     }
-    if (!i1.conflictNew().length() ||
-            !i1.conflictOld().length() ||
-            !i1.conflictWrk().length()) {
+    if (i1.conflictNew().isEmpty() ||
+            i1.conflictOld().isEmpty() ||
+            i1.conflictWrk().isEmpty()) {
         emit sendNotify(i18n("Could not retrieve conflict information - giving up."));
         return;
     }

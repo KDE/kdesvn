@@ -303,10 +303,11 @@ void SvnLogDlgImp::slotDispSelected()
 bool SvnLogDlgImp::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root)
 {
     root = _base;
-    if (m_Entries->find(r.revnum()) == m_Entries->end()) {
+    const svn::LogEntriesMap::const_iterator it = m_Entries->constFind(r.revnum());
+    if (it == m_Entries->constEnd()) {
         return m_Actions->getSingleLog(t, r, what, peg, root);
     }
-    t = (*m_Entries)[r.revnum()];
+    t = it.value();
     return true;
 }
 

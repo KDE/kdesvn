@@ -29,6 +29,7 @@ class QObject;
 
 class CheckModifiedThread: public SvnThread
 {
+    Q_OBJECT
 public:
     CheckModifiedThread(QObject *, const QString &what, bool _updates = false);
     virtual ~CheckModifiedThread();

@@ -379,14 +379,15 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
     }
     WidgetBlockStack a(m_BlameTree);
     QString text;
-    if (m_Data->m_logCache.find(bit->rev()) != m_Data->m_logCache.end()) {
-        text = m_Data->m_logCache[bit->rev()].message;
+    const QMap<svn_revnum_t, svn::LogEntry>::const_iterator it = m_Data->m_logCache.constFind(bit->rev());
+    if (it != m_Data->m_logCache.constEnd()) {
+        text = it.value().message;
     } else {
         CursorStack a(Qt::BusyCursor);
         svn::LogEntry t;
         if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t, bit->rev(), m_Data->m_File, m_Data->max, m_Data->reposRoot)) {
             m_Data->m_logCache[bit->rev()] = t;
-            text = m_Data->m_logCache[bit->rev()].message;
+            text = t.message;
         }
     }
     QPointer<KDialog> dlg(new KDialog(this));

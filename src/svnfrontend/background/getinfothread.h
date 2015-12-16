@@ -33,6 +33,7 @@ class SvnItemModelNode;
 
 class GetInfoThread: public SvnThread
 {
+    Q_OBJECT
 public:
     explicit GetInfoThread(QObject *parent);
     virtual ~GetInfoThread();

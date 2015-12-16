@@ -30,6 +30,7 @@ class QObject;
 
 class FillCacheThread: public SvnThread
 {
+    Q_OBJECT
 public:
     FillCacheThread(QObject *, const QString &aPath, bool startup);
     virtual ~FillCacheThread();

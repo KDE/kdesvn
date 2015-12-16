@@ -29,6 +29,7 @@
 //! Base class for creating threads holding an subversion connection
 class SvnThread: public QThread
 {
+    Q_OBJECT
 public:
     //! Creator
     /*!

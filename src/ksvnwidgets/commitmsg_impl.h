@@ -37,7 +37,6 @@ class Commitmsg_impl: public QWidget, Ui::CommitMessage
 
 protected:
     explicit Commitmsg_impl(const svn::CommitItemList &_items, QWidget *parent = 0);
-    explicit Commitmsg_impl(const QMap<QString, QString> &_items, QWidget *parent = 0);
     explicit Commitmsg_impl(const CommitActionEntries &, const CommitActionEntries &, QWidget *parent = 0);
 public:
     explicit Commitmsg_impl(QWidget *parent = 0);
@@ -51,7 +50,6 @@ public:
 
     static QString getLogmessage(bool *ok, svn::Depth *rec, bool *keeps_locks, QWidget *parent = 0);
     static QString getLogmessage(const svn::CommitItemList &, bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent = 0);
-    static QString getLogmessage(const QMap<QString, QString> &, bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent = 0);
 
     static QString getLogmessage(const CommitActionEntries &, const CommitActionEntries &,
                                  QObject *callback,

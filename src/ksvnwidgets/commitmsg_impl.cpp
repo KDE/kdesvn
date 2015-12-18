@@ -82,27 +82,7 @@ Commitmsg_impl::Commitmsg_impl(const svn::CommitItemList &_items, QWidget *paren
     m_SortModel = 0;
     m_LogEdit->setFocus();
     hideButtons(true);
-    if (_items.count() > 0) {
-        m_CurrentModel = new CommitModel(_items);
-        setupModel();
-        m_hidden = false;
-    } else {
-        m_Reviewlabel->hide();
-        m_CommitItemTree->hide();
-        m_hidden = true;
-    }
-    checkSplitterSize();
-}
-
-Commitmsg_impl::Commitmsg_impl(const QMap<QString, QString> &_items, QWidget *parent)
-    : QWidget(parent), CommitMessage()
-{
-    setupUi(this);
-    m_CurrentModel = 0;
-    m_SortModel = 0;
-    m_LogEdit->setFocus();
-    hideButtons(true);
-    if (_items.count() > 0) {
+    if (!_items.isEmpty()) {
         m_CurrentModel = new CommitModel(_items);
         setupModel();
         m_hidden = false;
@@ -366,60 +346,6 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
         _depth = ptr->getDepth();
         _keep_locks = ptr->isKeeplocks();
         msg = ptr->getMessage();
-    }
-    if (dlg) {
-        ptr->saveHistory(!_ok);
-        dlg->saveDialogSize(_k);
-        delete dlg;
-    }
-
-    if (ok) {
-        *ok = _ok;
-    }
-    if (rec) {
-        *rec = _depth;
-    }
-    if (keep_locks) {
-        *keep_locks = _keep_locks;
-    }
-    return msg;
-}
-
-QString Commitmsg_impl::getLogmessage(const QMap<QString, QString> &items,
-                                      bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent)
-{
-    bool _ok, _keep_locks;
-    svn::Depth _depth = svn::DepthUnknown;
-    QString msg;
-
-    QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setCaption(i18n("Commit log"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg->setDefaultButton(KDialog::Ok);
-    dlg->showButtonSeparator(true);
-
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    Commitmsg_impl *ptr = new Commitmsg_impl(items, Dialog1Layout);
-    if (!rec) {
-        ptr->m_DepthSelector->hide();
-    }
-    if (!keep_locks) {
-        ptr->m_keepLocksButton->hide();
-    }
-    ptr->initHistory();
-    KConfigGroup _k(Kdesvnsettings::self()->config(), groupName);
-    dlg->restoreDialogSize(_k);
-
-    if (dlg->exec() != QDialog::Accepted) {
-        _ok = false;
-        _keep_locks = false;
-    } else {
-        _ok = true;
-        _depth = ptr->getDepth();
-        msg = ptr->getMessage();
-        _keep_locks = ptr->isKeeplocks();
     }
     if (dlg) {
         ptr->saveHistory(!_ok);

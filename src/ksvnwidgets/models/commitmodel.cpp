@@ -48,12 +48,6 @@ CommitModel::CommitModel(const svn::CommitItemList &aList, QObject *parent)
 /*********************
  * Begin CommitModel *
  *********************/
-CommitModel::CommitModel(const QMap<QString, QString> &aList, QObject *parent)
-    : QAbstractItemModel(parent), m_Content(new CommitModelData)
-{
-    setCommitData(aList);
-}
-
 CommitModel::CommitModel(const CommitActionEntries &_checked, const CommitActionEntries &_notchecked, QObject *parent)
     : QAbstractItemModel(parent), m_Content(new CommitModelData)
 {
@@ -70,22 +64,8 @@ void CommitModel::setCommitData(const svn::CommitItemList &aList)
     m_Content->m_List.clear();
     endRemoveRows();
     beginInsertRows(QModelIndex(), 0, aList.size());
-    int j;
-    for (j = 0; j < aList.size(); ++j) {
+    for (int j = 0; j < aList.size(); ++j) {
         m_Content->m_List.append(new CommitModelNode(aList[j]));
-    }
-    endInsertRows();
-}
-
-void CommitModel::setCommitData(const QMap<QString, QString> &aList)
-{
-    beginRemoveRows(QModelIndex(), 0, m_Content->m_List.count());
-    m_Content->m_List.clear();
-    endRemoveRows();
-    beginInsertRows(QModelIndex(), 0, aList.size());
-    QMap<QString, QString>::ConstIterator it = aList.begin();
-    for (; it != aList.end(); ++it) {
-        m_Content->m_List.append(new CommitModelNode(it.key(), it.value()));
     }
     endInsertRows();
 }
@@ -97,11 +77,10 @@ void CommitModel::setCommitData(const CommitActionEntries &checked, const Commit
     endRemoveRows();
 
     beginInsertRows(QModelIndex(), 0, checked.size() + notchecked.size());
-    int j;
-    for (j = 0; j < checked.size(); ++j) {
+    for (int j = 0; j < checked.size(); ++j) {
         m_Content->m_List.append(new CommitModelNode(checked[j], true));
     }
-    for (j = 0; j < notchecked.size(); ++j) {
+    for (int j = 0; j < notchecked.size(); ++j) {
         m_Content->m_List.append(new CommitModelNode(notchecked[j], false));
     }
     endInsertRows();
@@ -127,14 +106,13 @@ CommitModelNodePtr CommitModel::node(const QModelIndex &index)
 
 CommitActionEntries CommitModel::checkedEntries()const
 {
-    int i;
     CommitActionEntries res;
-    for (i = 0; i < m_Content->m_List.count(); ++i) {
+    for (int i = 0; i < m_Content->m_List.count(); ++i) {
         if (m_Content->m_List[i]->checked()) {
             res.append(m_Content->m_List[i]->actionEntry());
         }
     }
-    for (i = 0; i < m_Content->m_hiddenList.count(); ++i) {
+    for (int i = 0; i < m_Content->m_hiddenList.count(); ++i) {
         if (m_Content->m_hiddenList[i]->checked()) {
             res.append(m_Content->m_hiddenList[i]->actionEntry());
         }
@@ -156,13 +134,11 @@ void CommitModel::markItems(bool mark, CommitActionEntry::ACTION_TYPE _type)
 
 void CommitModel::hideItems(bool hide, CommitActionEntry::ACTION_TYPE _type)
 {
-    int i;
-    QModelIndex _index;
     if (hide) {
         QVariant v = 0;
-        for (i = 0; i < m_Content->m_List.count(); ++i) {
+        for (int i = 0; i < m_Content->m_List.count(); ++i) {
             if (m_Content->m_List[i]->actionEntry().type() == _type) {
-                _index = index(i, 0, QModelIndex());
+                QModelIndex _index = index(i, 0, QModelIndex());
                 setData(_index, v, Qt::CheckStateRole);
                 m_Content->m_hiddenList.append(m_Content->m_List[i]);
                 beginRemoveRows(QModelIndex(), i, i);
@@ -173,7 +149,7 @@ void CommitModel::hideItems(bool hide, CommitActionEntry::ACTION_TYPE _type)
             }
         }
     } else {
-        for (i = 0; i < m_Content->m_hiddenList.count(); ++i) {
+        for (int i = 0; i < m_Content->m_hiddenList.count(); ++i) {
             if (m_Content->m_hiddenList[i]->actionEntry().type() == _type) {
                 beginInsertRows(QModelIndex(), 0, 0);
                 m_Content->m_List.prepend(m_Content->m_hiddenList[i]);
@@ -191,7 +167,6 @@ void CommitModel::hideItems(bool hide, CommitActionEntry::ACTION_TYPE _type)
  */
 void CommitModel::removeEntries(const QStringList &items)
 {
-    QModelIndex _index;
     for (int i = 0; i < items.size(); ++i) {
         for (int j = 0; j < m_Content->m_List.count(); ++j) {
             if (m_Content->m_List[j]->actionEntry().name() == items[i]) {

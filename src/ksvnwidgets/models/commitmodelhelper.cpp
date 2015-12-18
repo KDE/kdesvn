@@ -95,11 +95,6 @@ CommitModelNode::CommitModelNode(const svn::CommitItem &aItem)
     m_Content = CommitActionEntry(what, action);
 }
 
-CommitModelNode::CommitModelNode(const QString &pathorurl, const QString &actiondesc)
-    : m_Content(pathorurl, actiondesc), m_Checkable(false), m_Checked(false)
-{
-}
-
 CommitModelNode::CommitModelNode(const CommitActionEntry &aContent, bool checked)
     : m_Content(aContent), m_Checkable(true), m_Checked(checked)
 {

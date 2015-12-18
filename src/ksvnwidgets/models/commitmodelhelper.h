@@ -58,10 +58,9 @@ class CommitModelNode
 {
 public:
     explicit CommitModelNode(const svn::CommitItem &);
-    explicit CommitModelNode(const QString &, const QString &);
     explicit CommitModelNode(const CommitActionEntry &, bool checked);
 
-    virtual ~CommitModelNode();
+    ~CommitModelNode();
 
     void setCheckable(bool how)
     {

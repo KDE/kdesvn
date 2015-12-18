@@ -223,7 +223,7 @@ void Commitmsg_impl::initHistory()
             m_LogHistory->addItem((*it).left(37) + "...");
         }
     }
-    if (sLastMessage.length() > 0) {
+    if (!sLastMessage.isEmpty()) {
         m_LogEdit->setText(sLastMessage);
         sLastMessage.clear();
     }
@@ -235,7 +235,7 @@ void Commitmsg_impl::initHistory()
 void Commitmsg_impl::saveHistory(bool canceld)
 {
     QString _text = m_LogEdit->toPlainText();
-    if (_text.length() == 0 || _text.length() > 512) {
+    if (_text.isEmpty() || _text.length() > 512) {
         return;
     }
     /// @todo make static threadsafe

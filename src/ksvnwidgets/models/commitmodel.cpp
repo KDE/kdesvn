@@ -25,16 +25,8 @@
 
 #include <klocale.h>
 
-class CommitModelData
+struct CommitModelData
 {
-public:
-    CommitModelData() {}
-    virtual ~CommitModelData() {}
-
-    int completeCount()const
-    {
-        return m_List.size() + m_hiddenList.size();
-    }
     CommitModelNodeList m_List;
     CommitModelNodeList m_hiddenList;
 };
@@ -65,7 +57,7 @@ void CommitModel::setCommitData(const svn::CommitItemList &aList)
     endRemoveRows();
     beginInsertRows(QModelIndex(), 0, aList.size());
     for (int j = 0; j < aList.size(); ++j) {
-        m_Content->m_List.append(new CommitModelNode(aList[j]));
+        m_Content->m_List.append(CommitModelNodePtr(new CommitModelNode(aList[j])));
     }
     endInsertRows();
 }
@@ -78,10 +70,10 @@ void CommitModel::setCommitData(const CommitActionEntries &checked, const Commit
 
     beginInsertRows(QModelIndex(), 0, checked.size() + notchecked.size());
     for (int j = 0; j < checked.size(); ++j) {
-        m_Content->m_List.append(new CommitModelNode(checked[j], true));
+        m_Content->m_List.append(CommitModelNodePtr(new CommitModelNode(checked[j], true)));
     }
     for (int j = 0; j < notchecked.size(); ++j) {
-        m_Content->m_List.append(new CommitModelNode(notchecked[j], false));
+        m_Content->m_List.append(CommitModelNodePtr(new CommitModelNode(notchecked[j], false)));
     }
     endInsertRows();
 }
@@ -122,11 +114,10 @@ CommitActionEntries CommitModel::checkedEntries()const
 
 void CommitModel::markItems(bool mark, CommitActionEntry::ACTION_TYPE _type)
 {
-    QModelIndex _index;
     QVariant v = mark ? int(2) : int(0);
     for (int i = 0; i < m_Content->m_List.count(); ++i) {
         if (m_Content->m_List[i]->actionEntry().type() & _type) {
-            _index = index(i, 0, QModelIndex());
+            QModelIndex _index = index(i, 0, QModelIndex());
             setData(_index, v, Qt::CheckStateRole);
         }
     }
@@ -185,11 +176,11 @@ void CommitModel::removeEntries(const QStringList &items)
  ************************************/
 QModelIndex CommitModel::index(int row, int column, const QModelIndex & /*parent*/)const
 {
-    if (row >= m_Content->m_List.count()) {
+    if (row < 0 || row >= m_Content->m_List.count()) {
         return QModelIndex();
     }
-    CommitModelNode *n = m_Content->m_List[row];
-    return createIndex(row, column, n);
+    CommitModelNodePtr n = m_Content->m_List[row];
+    return createIndex(row, column, n.data());
 }
 
 QModelIndex CommitModel::parent(const QModelIndex &)const
@@ -270,19 +261,15 @@ int CommitModelCheckitem::ItemColumn()const
 
 Qt::ItemFlags CommitModelCheckitem::flags(const QModelIndex &index) const
 {
-    if (index.isValid()) {
-        if (index.column() == 0) {
-            return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
-        } else {
-            return CommitModel::flags(index);
-        }
+    if (index.isValid() && index.column() == ItemColumn()) {
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     }
-    return 0;
+    return CommitModel::flags(index);
 }
 
 QVariant CommitModelCheckitem::data(const QModelIndex &index, int role) const
 {
-    if (index.column() != 0 || role != Qt::CheckStateRole || !index.isValid() || index.row() >= m_Content->m_List.count()) {
+    if (index.column() != ItemColumn() || role != Qt::CheckStateRole || !index.isValid() || index.row() >= m_Content->m_List.count()) {
         return CommitModel::data(index, role);
     }
     if (m_Content->m_List[index.row()]->checked()) {
@@ -293,7 +280,7 @@ QVariant CommitModelCheckitem::data(const QModelIndex &index, int role) const
 
 bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (role != Qt::CheckStateRole || !index.isValid() || index.row() >= m_Content->m_List.count() || index.column() != 0) {
+    if (index.column() != ItemColumn() || role != Qt::CheckStateRole || !index.isValid() || index.row() >= m_Content->m_List.count()) {
         return CommitModel::setData(index, value, role);
     }
     if (value.type() == QVariant::Int) {

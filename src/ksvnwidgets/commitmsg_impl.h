@@ -24,8 +24,6 @@
 #include "src/ksvnwidgets/models/commitmodelfwd.h"
 #include "src/svnqt/commititem.h"
 
-#include <QList>
-#include <QPair>
 
 class QStringList;
 class CommitModel;

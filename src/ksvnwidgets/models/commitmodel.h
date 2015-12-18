@@ -23,14 +23,14 @@
 
 #include "commitmodelfwd.h"
 #include "commitmodelhelper.h"
-#include "src/svnqt/shared_pointer.h"
 #include "src/svnqt/svnqttypes.h"
 
 #include <QAbstractListModel>
+#include <QScopedPointer>
 
-class CommitModelData;
+struct CommitModelData;
 
-typedef svn::SharedPointer<CommitModelData> CommitModelDataPtr;
+typedef QScopedPointer<CommitModelData> CommitModelDataPtr;
 
 class CommitModel: public QAbstractItemModel
 {

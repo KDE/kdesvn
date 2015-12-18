@@ -109,13 +109,11 @@ svn::Revision SvnItemModelNode::correctPeg()const
     return _display->baseRevision();
 }
 
-void SvnItemModelNode::refreshStatus(bool children, const QList<SvnItem *> &exclude, bool depsonly)
+void SvnItemModelNode::refreshStatus(bool children)
 {
-    if (!depsonly) {
-        _display->refreshItem(this);
-    }
+    _display->refreshItem(this);
     if (!children && _parentNode) {
-        _parentNode->refreshStatus(false, exclude, depsonly);
+        _parentNode->refreshStatus(false);
     }
 }
 
@@ -210,15 +208,15 @@ int SvnItemModelNodeDir::indexOf(const QString &fullPath) const
     return -1;
 }
 
-void SvnItemModelNodeDir::refreshStatus(bool children, const QList<SvnItem *> &exclude, bool depsonly)
+void SvnItemModelNodeDir::refreshStatus(bool children)
 {
-    SvnItemModelNode::refreshStatus(children, exclude, depsonly);
+    SvnItemModelNode::refreshStatus(children);
     if (!isValid()) {
         return;
     }
     if (children) {
         for (int i = 0; i < m_Children.size(); ++i) {
-            m_Children[i]->refreshStatus(children, exclude, depsonly);
+            m_Children[i]->refreshStatus(children);
         }
     }
 }

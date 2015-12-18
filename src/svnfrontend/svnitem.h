@@ -71,7 +71,7 @@ public:
     virtual SvnItem *getParentItem()const = 0;
     virtual svn::Revision correctPeg()const = 0;
     virtual svn::Revision revision()const;
-    virtual void refreshStatus(bool children = false, const QList<SvnItem *> &exclude = QList<SvnItem *>(), bool depsonly = false) = 0;
+    virtual void refreshStatus(bool children = false) = 0;
 
     QPixmap getPixmap(int size, bool overlay = true);
     QPixmap getPixmap(const QPixmap &, int size, bool overlay = true);

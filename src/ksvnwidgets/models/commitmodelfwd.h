@@ -22,7 +22,7 @@
 #define COMMITMODELFWD_H
 
 #include <QSharedPointer>
-#include <QList>
+#include <QVector>
 
 class CommitActionEntry;
 class CommitModelNode;
@@ -30,7 +30,7 @@ class CommitModelNode;
 typedef QSharedPointer<CommitActionEntry> CommitActionEntryPtr;
 typedef QSharedPointer<CommitModelNode> CommitModelNodePtr;
 
-typedef QList<CommitActionEntry> CommitActionEntries;
-typedef QList<CommitModelNodePtr> CommitModelNodeList;
+typedef QVector<CommitActionEntry> CommitActionEntries;
+typedef QVector<CommitModelNodePtr> CommitModelNodeList;
 
 #endif

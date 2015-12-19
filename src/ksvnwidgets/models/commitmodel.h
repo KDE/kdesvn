@@ -27,10 +27,7 @@
 
 #include <QAbstractListModel>
 #include <QScopedPointer>
-
-struct CommitModelData;
-
-typedef QScopedPointer<CommitModelData> CommitModelDataPtr;
+#include <QSortFilterProxyModel>
 
 class CommitModel: public QAbstractItemModel
 {
@@ -58,12 +55,12 @@ public:
 
     CommitModelNodePtr node(const QModelIndex &);
     CommitActionEntries checkedEntries()const;
-    virtual void markItems(bool, CommitActionEntry::ACTION_TYPE _type = CommitActionEntry::ADD_COMMIT);
-    virtual void hideItems(bool, CommitActionEntry::ACTION_TYPE _type = CommitActionEntry::ADD_COMMIT);
-    void removeEntries(const QStringList &);
+    void markItems(bool mark, CommitActionEntry::ACTION_TYPE _type);
+    void removeEntries(const QStringList &_items);
 
+    const CommitModelNodePtr dataForRow(int row) const;
 protected:
-    CommitModelDataPtr m_Content;
+    CommitModelNodeList m_List;
 };
 
 class CommitModelCheckitem: public CommitModel
@@ -80,6 +77,22 @@ public:
     virtual int ActionColumn()const;
     virtual int ItemColumn()const;
 
+};
+
+class CommitFilterModel : public QSortFilterProxyModel
+{
+    Q_OBJECT
+ public:
+    explicit CommitFilterModel(QObject *parent);
+    ~CommitFilterModel();
+
+    void setSourceModel(QAbstractItemModel *sourceModel);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+
+    void hideItems(bool bHide, CommitActionEntry::ACTION_TYPE aType);
+private:
+    CommitModel *m_sourceModel;
+    CommitActionEntry::ActionTypes m_visibleTypes;
 };
 
 #endif

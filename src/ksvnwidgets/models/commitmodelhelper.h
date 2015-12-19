@@ -36,6 +36,8 @@ public:
 
         ALL            = COMMIT | ADD_COMMIT | DELETE | MISSING_DELETE,
     };
+    Q_FLAGS(ACTION_TYPE)
+    Q_DECLARE_FLAGS(ActionTypes, ACTION_TYPE)
 
     explicit CommitActionEntry(const QString &, const QString &, ACTION_TYPE kind = COMMIT);
     explicit CommitActionEntry(const CommitActionEntry &);

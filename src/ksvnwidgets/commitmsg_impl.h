@@ -27,7 +27,7 @@
 
 class QStringList;
 class CommitModel;
-class QSortFilterProxyModel;
+class CommitFilterModel;
 
 class Commitmsg_impl: public QWidget, Ui::CommitMessage
 {
@@ -69,10 +69,11 @@ protected Q_SLOTS:
     void slotDiffSelected();
     void slotRevertSelected();
     void slotMarkUnversioned();
-    void hideNewItems(bool);
+    void hideNewItems(bool hide);
     void insertFile();
     void slotItemReverted(const QStringList &);
-    void slotItemDoubleClicked(const QModelIndex &);
+    void slotItemDoubleClicked(const QModelIndex &index);
+    void slotCurrentItemChanged(const QModelIndex &current);
     void slotSelectAll();
     void slotUnselectAll();
 
@@ -91,7 +92,7 @@ protected:
     virtual void hideKeepsLock(bool);
 
     CommitModel *m_CurrentModel;
-    QSortFilterProxyModel *m_SortModel;
+    CommitFilterModel *m_SortModel;
 
 Q_SIGNALS:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);

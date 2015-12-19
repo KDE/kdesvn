@@ -125,7 +125,7 @@ Commitmsg_impl::~Commitmsg_impl()
 
 void Commitmsg_impl::setupModel()
 {
-    m_SortModel = new QSortFilterProxyModel(m_CommitItemTree);
+    m_SortModel = new CommitFilterModel(m_CommitItemTree);
     m_CommitItemTree->setModel(m_SortModel);
     m_SortModel->setSourceModel(m_CurrentModel);
 
@@ -133,6 +133,9 @@ void Commitmsg_impl::setupModel()
     m_CommitItemTree->resizeColumnToContents(m_CurrentModel->ActionColumn());
 
     m_SortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort() ? Qt::CaseSensitive : Qt::CaseInsensitive);
+    connect(m_CommitItemTree->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            this, SLOT(slotCurrentItemChanged(QModelIndex)));
+    slotCurrentItemChanged(QModelIndex()); // update pushbuttons
 }
 
 void Commitmsg_impl::checkSplitterSize()
@@ -476,7 +479,7 @@ CommitModelNodePtr Commitmsg_impl::currentCommitItem(int column)
         return res;
     }
     QModelIndexList _mi = m_CommitItemTree->selectionModel()->selectedRows(column);
-    if (_mi.count() < 1) {
+    if (_mi.isEmpty()) {
         return res;
     }
     QModelIndex ind = m_SortModel->mapToSource(_mi[0]);
@@ -540,13 +543,14 @@ void Commitmsg_impl::slotUnselectAll()
     m_CurrentModel->markItems(false, CommitActionEntry::ALL);
 }
 
-void Commitmsg_impl::hideNewItems(bool how)
+void Commitmsg_impl::hideNewItems(bool hide)
 {
     if (!m_CurrentModel) {
         return;
     }
-    Kdesvnsettings::setCommit_hide_new(how);
-    m_CurrentModel->hideItems(how, CommitActionEntry::ADD_COMMIT);
+    Kdesvnsettings::setCommit_hide_new(hide);
+    m_SortModel->hideItems(hide, CommitActionEntry::ADD_COMMIT);
+    m_HideNewItems->setText(hide ? i18n("Show new items") : i18n("Hide new items"));
 }
 
 /*!
@@ -613,4 +617,16 @@ void Commitmsg_impl::slotItemDoubleClicked(const QModelIndex &index)
 {
     Q_UNUSED(index);
     slotDiffSelected();
+}
+
+void Commitmsg_impl::slotCurrentItemChanged(const QModelIndex &current)
+{
+    bool bDiffRevertEnabled = false;
+
+    const CommitModelNodePtr node = m_CurrentModel->dataForRow(m_SortModel->mapToSource(current).row());
+    if (!node.isNull()) {
+        bDiffRevertEnabled = (node->actionEntry().type() == CommitActionEntry::COMMIT);
+    }
+    m_RevertItemButton->setEnabled(bDiffRevertEnabled);
+    m_DiffItem->setEnabled(bDiffRevertEnabled);
 }

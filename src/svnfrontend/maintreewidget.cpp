@@ -688,12 +688,13 @@ void MainTreeWidget::enableAction(const QString &name, bool how)
     QAction *temp = filesActions()->action(name);
     if (temp) {
         temp->setEnabled(how);
+        temp->setVisible(how);
     }
 }
 
 void MainTreeWidget::enableActions()
 {
-    bool isopen = baseUri().length() > 0;
+    bool isopen = !baseUri().isEmpty();
     int c = m_TreeView->selectionModel()->selectedRows(0).count();
     int d = m_DirTreeView->selectionModel()->selectedRows(0).count();
     SvnItemModelNode *si = SelectedNode();
@@ -709,7 +710,7 @@ void MainTreeWidget::enableActions()
     }
 
     bool conflicted = single && si && si->isConflicted();
-    QAction *temp = 0;
+
     /* local and remote actions */
     /* 1. actions on dirs AND files */
     enableAction("make_svn_log_nofollow", single || none);
@@ -752,7 +753,7 @@ void MainTreeWidget::enableActions()
     /* local only actions */
     /* 1. actions on files AND dirs*/
     enableAction("make_svn_add", (multi || single) && isWorkingCopy());
-    enableAction("make_svn_revert", (multi || single) && isWorkingCopy());
+    enableAction("make_svn_revert", (multi || single) && isWorkingCopy() && si && (si->isChanged() || si->isLocalAdded()));
     enableAction("make_resolved", (multi || single) && isWorkingCopy());
     enableAction("make_try_resolve", conflicted && !dir);
 
@@ -795,7 +796,7 @@ void MainTreeWidget::enableActions()
 
     enableAction("repo_statistic", isopen);
 
-    temp = filesActions()->action("update_log_cache");
+    QAction *temp = filesActions()->action("update_log_cache");
     if (temp) {
         temp->setEnabled(remote_enabled);
         if (!m_Data->m_Model->svnWrapper()->threadRunning(SvnActions::fillcachethread)) {

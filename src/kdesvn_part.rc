@@ -104,8 +104,10 @@
 </MenuBar>
  <Menu name="local_context_single_conflicted">
      <text>Actions</text>
+     <Action name="make_svn_revert" />
      <Action name="make_resolved" />
      <Action name="make_try_resolve"/>
+     <Action name="make_svn_basediff" />
  </Menu>
  <Menu name="local_context_single_versioned" >
   <text>Actions</text>

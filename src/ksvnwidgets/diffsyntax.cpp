@@ -21,78 +21,22 @@
 #include "diffsyntax.h"
 #include <kglobalsettings.h>
 #include <kglobal.h>
-#include <kdebug.h>
-
 #include <qregexp.h>
 
-/*!
-    \fn DiffSyntax::DiffSyntax(QTextEdit*)
- */
 DiffSyntax::DiffSyntax(QTextEdit *aTextEdit)  //krazy:exclude=qclasses
     : QSyntaxHighlighter(aTextEdit)
-{
-}
+{}
 
-/*!
-    \fn DiffSyntax::highlightParagraph ( const QString & text, int endStateOfLastPara )
- */
-// int DiffSyntax::highlightParagraph ( const QString & aText, int endStateOfLastPara)
-// {
-//     static QRegExp a("^\\w+:\\s.*$");
-//     static QRegExp b("^\\W+$");
-//     QColor c(0,0,0);
-//     QFont f(KGlobalSettings::fixedFont());
-//     int ret = 0;
-//     if (endStateOfLastPara == 1) {
-//         ret = 2;
-//     } else if (endStateOfLastPara == 2) {
-//         if (b.indexIn(aText)!=0) {
-//             ret = 2;
-//         }
-//     }
-//
-//     if (a.indexIn(aText)>-1) {
-//         c = QColor("#660033");
-//         if (endStateOfLastPara==1||endStateOfLastPara==2) {
-//             f.setBold(true);
-//         } else {
-//             f.setItalic(true);
-//         }
-//     } else if (aText.startsWith("_____" )) {
-//         ret = 1;
-//         c = QColor("#1D1D8F");
-//     } else if (aText.startsWith("+")) {
-//         c = QColor("#008B00");
-//         if (aText.startsWith("+++")) {
-//             f.setBold(true);
-//         }
-//     } else if (aText.startsWith("-")) {
-//         c = QColor("#CD3333");
-//         if (aText.startsWith("---")) {
-//             f.setBold(true);
-//         }
-//     } else if (aText.startsWith("@@")) {
-//         c = QColor("#1D1D8F");
-//     }
-//     if (endStateOfLastPara==2 && ret==2) {
-//         if (aText.startsWith("   +")) {
-//             c = QColor("#008B00");
-//         } else if (aText.startsWith("   -")) {
-//             c = QColor("#CD3333");
-//         }
-//     }
-//     setFormat(0,(int)aText.length(),f,c);
-//     return ret;
-// }
+DiffSyntax::~DiffSyntax()
+{}
 
 void DiffSyntax::highlightBlock(const QString &aText)
 {
-    static QRegExp a("^\\w+:\\s.*$");
-    static QRegExp b("^\\W+$");
+    static const QRegExp a(QLatin1String("^\\w+:\\s.*$")); // filename (Index: foo/bar.txt)
+    static const QRegExp b(QLatin1String("^\\W+$"));
     QTextCharFormat format;
-//     QColor c(0,0,0);
-//     QFont f(KGlobalSettings::fixedFont());
     format.setFont(KGlobalSettings::fixedFont());
+    bool bIsModifiedLine = false;
 
     if (previousBlockState() == 1) {
         setCurrentBlockState(2);
@@ -102,7 +46,7 @@ void DiffSyntax::highlightBlock(const QString &aText)
         }
     }
 
-    if (a.indexIn(aText) > -1) {
+    if (a.indexIn(aText) > -1) {  // filename (Index: foo/bar.txt)
         format.setForeground(QColor("#660033"));
         if (previousBlockState() == 1 || previousBlockState() == 2) {
             format.setFontWeight(QFont::Bold);
@@ -112,17 +56,21 @@ void DiffSyntax::highlightBlock(const QString &aText)
     } else if (aText.startsWith(QLatin1String("_____"))) {
         setCurrentBlockState(1);
         format.setForeground(QColor("#1D1D8F"));
-    } else if (aText.startsWith(QLatin1Char('+'))) {
+    } else if (aText.startsWith(QLatin1Char('+'))) {  // added line in new file
         format.setForeground(QColor("#008B00"));
-        if (aText.startsWith(QLatin1String("+++"))) {
+        if (aText.startsWith(QLatin1String("+++"))) { // new file name
             format.setFontWeight(QFont::Bold);
+        } else {
+            bIsModifiedLine = true;
         }
-    } else if (aText.startsWith(QLatin1Char('-'))) {
+    } else if (aText.startsWith(QLatin1Char('-'))) {  // removed line in old file
         format.setForeground(QColor("#CD3333"));
-        if (aText.startsWith(QLatin1String("---"))) {
+        if (aText.startsWith(QLatin1String("---"))) { // old file name
             format.setFontWeight(QFont::Bold);
+        } else {
+            bIsModifiedLine = true;
         }
-    } else if (aText.startsWith(QLatin1String("@@"))) {
+    } else if (aText.startsWith(QLatin1String("@@"))) { // line numbers
         format.setForeground(QColor("#1D1D8F"));
     }
     if (previousBlockState() == 2 && currentBlockState() == 2) {
@@ -133,11 +81,11 @@ void DiffSyntax::highlightBlock(const QString &aText)
         }
     }
     setFormat(0, aText.length(), format);
-}
-
-/*!
-    \fn DiffSyntax::~DiffSyntax()
- */
-DiffSyntax::~DiffSyntax()
-{
+    // highlight trailing spaces
+    if (bIsModifiedLine && aText.endsWith(QLatin1Char(' '))) {
+        static const QRegExp hlTrailingSpaceRx(QRegExp(QLatin1String("[^\\s]"))); // search the last non-space
+        const int idx = aText.lastIndexOf(hlTrailingSpaceRx);
+        format.setBackground(format.foreground());
+        setFormat(idx + 1, aText.length() - idx - 1, format); // only spaces in this range
+    }
 }

@@ -867,7 +867,6 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
 
 void SvnActions::makeInfo(const SvnItemList &lst, const svn::Revision &rev, const svn::Revision &peg, bool recursive)
 {
-    QStringList l;
     QString res = "<html><head></head><body>";
     SvnItemList::const_iterator item;
     for (item = lst.begin(); item != lst.end(); ++item) {
@@ -945,13 +944,11 @@ bool SvnActions::changeProperties(const svn::PropertiesMap &setList, const QStri
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Applying properties"), i18n("<center>Applying<br>hit cancel for abort</center>"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        long pos;
         // propertyValue == QString::null -> delete property
-        for (pos = 0; pos < delList.size(); ++pos) {
-            m_Data->m_Svnclient->propset(params.propertyName(delList[pos]));
+        for (int pos = 0; pos < delList.size(); ++pos) {
+            m_Data->m_Svnclient->propset(params.propertyName(delList.at(pos)));
         }
-        svn::PropertiesMap::ConstIterator it;
-        for (it = setList.begin(); it != setList.end(); ++it) {
+        for (svn::PropertiesMap::ConstIterator it = setList.begin(); it != setList.end(); ++it) {
             m_Data->m_Svnclient->propset(params.propertyName(it.key()).propertyValue(it.value()));
         }
     } catch (const svn::Exception &e) {
@@ -999,7 +996,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
     svn::Depth depth;
     svn::Revision nnum;
     bool review = Kdesvnsettings::review_commit();
-    QString msg, _p;
+    QString msg;
 
     if (!doNetworking()) {
         emit clientException(i18n("Not commit because networking is disabled"));
@@ -1021,7 +1018,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         svn::StatusParameter params("");
         params.depth(svn::DepthInfinity).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD);
         /// @todo filter out double entries
-        for (unsigned j = 0; j < targets.size(); ++j) {
+        for (size_t j = 0; j < targets.size(); ++j) {
             try {
                 StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                              i18n("Status / List"), i18n("Creating list / check status"));
@@ -1030,23 +1027,24 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
                 emit clientException(e.msg());
                 return false;
             }
-            for (long i = 0; i < _Cache.count(); ++i) {
-                _p = _Cache[i]->path();
-                if (_Cache[i]->isRealVersioned() && (
-                            _Cache[i]->textStatus() == svn_wc_status_modified ||
-                            _Cache[i]->textStatus() == svn_wc_status_added ||
-                            _Cache[i]->textStatus() == svn_wc_status_replaced ||
-                            _Cache[i]->textStatus() == svn_wc_status_deleted ||
-                            _Cache[i]->propStatus() == svn_wc_status_modified
+            for (int i = 0; i < _Cache.count(); ++i) {
+                const svn::StatusPtr ptr = _Cache.at(i);
+                const QString _p = ptr->path();
+                if (ptr->isRealVersioned() && (
+                            ptr->textStatus() == svn_wc_status_modified ||
+                            ptr->textStatus() == svn_wc_status_added ||
+                            ptr->textStatus() == svn_wc_status_replaced ||
+                            ptr->textStatus() == svn_wc_status_deleted ||
+                            ptr->propStatus() == svn_wc_status_modified
                         )) {
-                    if (_Cache[i]->textStatus() == svn_wc_status_deleted) {
+                    if (ptr->textStatus() == svn_wc_status_deleted) {
                         _check.append(CommitActionEntry(_p, i18n("Delete"), CommitActionEntry::DELETE));
                     } else {
                         _check.append(CommitActionEntry(_p, i18n("Commit"), CommitActionEntry::COMMIT));
                     }
-                } else if (_Cache[i]->textStatus() == svn_wc_status_missing) {
+                } else if (ptr->textStatus() == svn_wc_status_missing) {
                     _uncheck.append(CommitActionEntry(_p, i18n("Delete and Commit"), CommitActionEntry::MISSING_DELETE));
-                } else if (!_Cache[i]->isVersioned()) {
+                } else if (!ptr->isVersioned()) {
                     _uncheck.append(CommitActionEntry(_p, i18n("Add and Commit"), CommitActionEntry::ADD_COMMIT));
                 }
             }
@@ -2447,13 +2445,14 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
     if (!makeStatus(path, dlist, where, true, true, false, false)) {
         return;
     }
-    for (long i = 0; i < dlist.size(); ++i) {
-        if (!dlist[i]->isVersioned()) {
-            rlist.append(dlist[i]);
-            displist.append(dlist[i]->path());
+    for (int i = 0; i < dlist.size(); ++i) {
+        const svn::StatusPtr &ptr = dlist.at(i);
+        if (!ptr->isVersioned()) {
+            rlist.append(ptr);
+            displist.append(ptr->path());
         }
     }
-    if (rlist.size() == 0) {
+    if (rlist.isEmpty()) {
         if (print_error_box) {
             KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("No unversioned items found."));
         }
@@ -2566,22 +2565,22 @@ void SvnActions::checkModthread()
     }
     m_Data->m_Cache.clear();
     m_Data->m_conflictCache.clear();
-    long i = 0;
-    for (; i < m_CThread->getList().count(); ++i) {
-        svn::StatusPtr ptr = m_CThread->getList()[i];
-        if (m_CThread->getList()[i]->isRealVersioned() && (
-                    m_CThread->getList()[i]->textStatus() == svn_wc_status_modified ||
-                    m_CThread->getList()[i]->textStatus() == svn_wc_status_added ||
-                    m_CThread->getList()[i]->textStatus() == svn_wc_status_deleted ||
-                    m_CThread->getList()[i]->textStatus() == svn_wc_status_replaced ||
-                    m_CThread->getList()[i]->propStatus() == svn_wc_status_modified
+    const svn::StatusEntries &sEntries = m_CThread->getList();
+    for (int i = 0; i < sEntries.size(); ++i) {
+        const svn::StatusPtr ptr = sEntries.at(i);
+        if (ptr->isRealVersioned() && (
+                    ptr->textStatus() == svn_wc_status_modified ||
+                    ptr->textStatus() == svn_wc_status_added ||
+                    ptr->textStatus() == svn_wc_status_deleted ||
+                    ptr->textStatus() == svn_wc_status_replaced ||
+                    ptr->propStatus() == svn_wc_status_modified
                 )) {
             m_Data->m_Cache.insertKey(ptr, ptr->path());
-        } else if (m_CThread->getList()[i]->textStatus() == svn_wc_status_conflicted) {
+        } else if (ptr->textStatus() == svn_wc_status_conflicted) {
             m_Data->m_conflictCache.insertKey(ptr, ptr->path());
         }
     }
-    sigExtraStatusMessage(i18np("Found %1 modified item", "Found %1 modified items", i));
+    sigExtraStatusMessage(i18np("Found %1 modified item", "Found %1 modified items", sEntries.size()));
     delete m_CThread;
     m_CThread = 0;
     emit sigCacheDataChanged();
@@ -2597,8 +2596,9 @@ void SvnActions::checkUpdateThread()
         return;
     }
     bool newer = false;
-    for (long i = 0; i < m_UThread->getList().count(); ++i) {
-        svn::StatusPtr ptr = m_UThread->getList()[i];
+    const svn::StatusEntries &sEntries = m_UThread->getList();
+    for (int i = 0; i < sEntries.size(); ++i) {
+        const svn::StatusPtr ptr = sEntries.at(i);
         if (ptr->validReposStatus()) {
             m_Data->m_UpdateCache.insertKey(ptr, ptr->path());
             ptr->textStatus();
@@ -2754,8 +2754,8 @@ bool SvnActions::checkUpdateCache(const QString &path)const
 
 void SvnActions::removeFromUpdateCache(const QStringList &what, bool exact_only)
 {
-    for (long i = 0; i < what.count(); ++i) {
-        m_Data->m_UpdateCache.deleteKey(what[i], exact_only);
+    for (int i = 0; i < what.size(); ++i) {
+        m_Data->m_UpdateCache.deleteKey(what.at(i), exact_only);
     }
 }
 
@@ -2794,10 +2794,9 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
     }
     bool result = false;
     QStringList lst = data.split('\n', QString::SkipEmptyParts);
-    QStringList::size_type it = -1;
 
     for (int _current = 0; _current < ignorePattern.size(); ++_current) {
-        it = lst.indexOf(ignorePattern[_current]);
+        int it = lst.indexOf(ignorePattern[_current]);
         if (it != -1) {
             if (unignore) {
                 lst.removeAt(it);
@@ -2811,7 +2810,7 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
         }
     }
     if (result) {
-        data = lst.join("\n");
+        data = lst.join(QLatin1String("\n"));
         try {
             m_Data->m_Svnclient->propset(svn::PropertiesParameter().propertyName("svn:ignore").propertyValue(data).path(item));
         } catch (const svn::Exception &e) {

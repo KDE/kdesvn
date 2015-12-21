@@ -28,13 +28,10 @@
 #include "frontendtypes.h"
 
 #include <kurl.h>
-#include <kguiitem.h>
 
 #include <QObject>
-#include <QDateTime>
 #include <QScopedPointer>
 #include <QStringList>
-#include <QList>
 
 class ItemDisplay;
 class SvnItem;

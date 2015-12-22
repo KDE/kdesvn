@@ -25,19 +25,18 @@
 #include "src/svnqt/status.h"
 #include "svnthread.h"
 
-class QObject;
-
 class CheckModifiedThread: public SvnThread
 {
     Q_OBJECT
 public:
-    CheckModifiedThread(QObject *, const QString &what, bool _updates = false);
+    CheckModifiedThread(QObject *parent, const QString &what, bool updates);
     virtual ~CheckModifiedThread();
-    virtual void run();
-    virtual const svn::StatusEntries &getList()const;
-
+    const svn::StatusEntries &getList()const;
+Q_SIGNALS:
+    void checkModifiedFinished();
 protected:
-    QMutex mutex;
+    virtual void run();
+
     QString m_what;
     bool m_updates;
     svn::StatusEntries m_Cache;

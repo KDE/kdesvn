@@ -37,7 +37,6 @@
 #include "src/ksvnwidgets/revertform_impl.h"
 #include "graphtree/revisiontree.h"
 #include "src/settings/kdesvnsettings.h"
-#include "src/kdesvn_events.h"
 #include "src/svnqt/client.h"
 #include "src/svnqt/annotate_line.h"
 #include "src/svnqt/context_listener.h"
@@ -2488,7 +2487,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
     }
 }
 
-void SvnActions::stopCheckModThread()
+void SvnActions::stopCheckModifiedThread()
 {
     if (m_CThread) {
         m_CThread->cancelMe();
@@ -2541,26 +2540,28 @@ void SvnActions::stopMain()
 void SvnActions::killallThreads()
 {
     stopMain();
-    stopCheckModThread();
+    stopCheckModifiedThread();
     stopCheckUpdateThread();
     stopFillCache();
 }
 
 bool SvnActions::createModifiedCache(const QString &what)
 {
-    stopCheckModThread();
-    m_CThread = new CheckModifiedThread(this, what);
+    stopCheckModifiedThread();
+    m_CThread = new CheckModifiedThread(this, what, false);
+    connect(m_CThread, SIGNAL(checkModifiedFinished()),
+            this, SLOT(checkModifiedThread()));
     m_CThread->start();
     return true;
 }
 
-void SvnActions::checkModthread()
+void SvnActions::checkModifiedThread()
 {
     if (!m_CThread) {
         return;
     }
     if (m_CThread->isRunning()) {
-        QTimer::singleShot(2, this, SLOT(checkModthread()));
+        QTimer::singleShot(2, this, SLOT(checkModifiedThread()));
         return;
     }
     m_Data->m_Cache.clear();
@@ -2688,8 +2689,11 @@ void SvnActions::startFillCache(const QString &path, bool startup)
     }
 
     m_FCThread = new FillCacheThread(this, path, startup);
+    connect(m_FCThread, SIGNAL(fillCacheStatus(qlonglong,qlonglong)),
+            this, SIGNAL(sigCacheStatus(qlonglong,qlonglong)));
+    connect(m_FCThread, SIGNAL(fillCacheFinished()),
+            this, SLOT(stopFillCache()));
     m_FCThread->start();
-
 }
 
 bool SvnActions::doNetworking()
@@ -2713,22 +2717,6 @@ bool SvnActions::doNetworking()
     return !is_url;
 }
 
-void SvnActions::customEvent(QEvent *e)
-{
-    if (e->type() == EVENT_LOGCACHE_FINISHED) {
-        emit sendNotify(i18n("Filling log cache in background finished."));
-        QTimer::singleShot(1, this, SLOT(stopFillCache()));
-        return;
-    } else if (e->type() == EVENT_LOGCACHE_STATUS && m_FCThread && m_FCThread->isRunning()) {
-        FillCacheStatusEvent *fev = static_cast<FillCacheStatusEvent *>(e);
-        emit sigCacheStatus(fev->current(), fev->max());
-    } else if (e->type() == EVENT_UPDATE_CACHE_FINISHED) {
-        QTimer::singleShot(2, this, SLOT(checkUpdateThread()));
-    } else if (e->type() == EVENT_CACHE_THREAD_FINISHED) {
-        QTimer::singleShot(2, this, SLOT(checkModthread()));
-    }
-}
-
 /*!
     \fn SvnActions::createUpdateCache(const QString&what)
  */
@@ -2742,6 +2730,8 @@ bool SvnActions::createUpdateCache(const QString &what)
         return false;
     }
     m_UThread = new CheckModifiedThread(this, what, true);
+    connect(m_CThread, SIGNAL(checkModifiedFinished()),
+            this, SLOT(checkUpdateThread()));
     m_UThread->start();
     emit sigExtraStatusMessage(i18n("Checking for updates started in background"));
     return true;

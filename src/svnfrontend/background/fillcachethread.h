@@ -34,15 +34,18 @@ class FillCacheThread: public SvnThread
 public:
     FillCacheThread(QObject *, const QString &aPath, bool startup);
     virtual ~FillCacheThread();
-    virtual void run();
 
     const QString &reposRoot()const;
     const QString &Path()const;
 
+Q_SIGNALS:
+    void fillCacheStatus(qlonglong current, qlonglong max);
+    void fillCacheFinished();
+
 protected:
+    virtual void run();
     void fillInfo();
 
-    QMutex mutex;
     QString m_what;
     QString m_path;
     bool m_startup;

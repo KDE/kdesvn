@@ -153,7 +153,7 @@ public:
     bool getUpdated(const QString &path, svn::SharedPointer<svn::Status> &d)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList &what, bool exact_only);
-    void stopCheckModThread();
+    void stopCheckModifiedThread();
     void stopCheckUpdateThread();
     void startFillCache(const QString &path, bool startup = false);
     void stopMain();
@@ -179,8 +179,6 @@ public:
     QString getContextData(const QString &)const;
 
     bool threadRunning(ThreadType which);
-
-    virtual void customEvent(QEvent *e);
 
     bool doNetworking();
     virtual void doCommit(const SvnItemList &);
@@ -247,7 +245,7 @@ Q_SIGNALS:
     void sigExtraStatusMessage(const QString &);
 
 protected Q_SLOTS:
-    virtual void checkModthread();
+    virtual void checkModifiedThread();
     virtual void checkUpdateThread();
     virtual void slotProcessDataRead(const QByteArray &, WatchedProcess *);
 };

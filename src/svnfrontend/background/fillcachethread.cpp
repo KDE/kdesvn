@@ -22,26 +22,23 @@
 
 #include "src/svnqt/cache/ReposLog.h"
 #include "src/svnqt/cache/ReposConfig.h"
-#include "src/kdesvn_events.h"
 #include "src/svnqt/url.h"
 
 #include <KLocale>
-#include <QCoreApplication>
 
+// FillCacheThread
 FillCacheThread::FillCacheThread(QObject *_parent, const QString &aPath, bool startup)
-    : SvnThread(_parent), mutex()
-{
-    m_path = aPath;
-    m_startup = startup;
-}
+    : SvnThread(_parent)
+    , m_path(aPath)
+    , m_startup(startup)
+{}
+
+FillCacheThread::~FillCacheThread()
+{}
 
 const QString &FillCacheThread::Path()const
 {
     return m_path;
-}
-
-FillCacheThread::~FillCacheThread()
-{
 }
 
 const QString &FillCacheThread::reposRoot()const
@@ -84,8 +81,7 @@ void FillCacheThread::run()
             qlonglong _max = j - i;
             qlonglong _cur = 0;
 
-            FillCacheStatusEvent *fev = new FillCacheStatusEvent(_cur, _max);
-            QCoreApplication::postEvent(m_Parent, fev);
+            emit fillCacheStatus(_cur, _max);
 
             if (i < j) {
                 for (; i < j; i += 200) {
@@ -100,8 +96,7 @@ void FillCacheThread::run()
                     if (latestCache == rl.latestCachedRev()) {
                         break;
                     }
-                    fev = new FillCacheStatusEvent(_cur > _max ? _max : _cur, _max);
-                    QCoreApplication::postEvent(m_Parent, fev);
+                    emit fillCacheStatus(_cur > _max ? _max : _cur, _max);
 
                     latestCache = rl.latestCachedRev();
                 }
@@ -116,8 +111,7 @@ void FillCacheThread::run()
         m_SvnContextListener->contextNotify(e.msg());
     }
     if (!breakit) {
-        DataEvent *ev = new DataEvent(EVENT_LOGCACHE_FINISHED);
-        ev->setData((void *)this);
-        QCoreApplication::postEvent(m_Parent, ev);
+        m_SvnContextListener->contextNotify(i18n("Filling log cache in background finished."));
+        emit fillCacheFinished();
     }
 }

@@ -22,60 +22,60 @@
 
 #include "src/svnqt/context_listener.h"
 
-#include <QThread>
 #include <QString>
-#include <QWaitCondition>
+#include <QMutex>
 
 /**
 @author Rajko Albrecht
 */
-class ThreadContextListenerData
+struct ThreadContextListenerData
 {
-public:
-    ThreadContextListenerData();
-
-    virtual ~ThreadContextListenerData();
+    ThreadContextListenerData()
+        : noProgress(true)
+        , bReturnValue(false)
+    {}
 
     /* sometimes suppress progress messages */
     bool noProgress;
 
-    /* only one callback at time */
-    QWaitCondition m_trustpromptWait;
+    static QMutex *callbackMutex(); // only one callback at a time
 
     /* safed due condition above */
     /* this variables are for the event handling across threads */
-    /* Trust ssl realm* */
+    bool bReturnValue;
     struct strust_answer {
-        svn::ContextListener::SslServerTrustAnswer m_SslTrustAnswer;
-        const svn::ContextListener::SslServerTrustData *m_Trustdata;
-    };
+        svn::ContextListener::SslServerTrustAnswer sslTrustAnswer;
+        svn::ContextListener::SslServerTrustData trustdata;
+        strust_answer()
+            : sslTrustAnswer(svn::ContextListener::DONT_ACCEPT)
+        {}
+    } m_strust_answer;
 
     /* login into server */
     struct slogin_data {
         QString user, password, realm;
-        bool maysave, ok;
-    };
+        bool maysave;
+        slogin_data()
+            : maysave(false)
+        {}
+    } m_slogin_data;
 
     struct slog_message {
         QString msg;
-        bool ok;
-        const svn::CommitItemList *_items;
-        slog_message() : ok(false), _items(NULL) {}
-    };
+        svn::CommitItemList items;
+    } m_slog_message;
 
     struct scert_pw {
         QString password, realm;
-        bool ok, maysave;
-    };
+        bool maysave;
+        scert_pw()
+            : maysave(false)
+        {}
+    } m_scert_pw;
 
     struct scert_file {
         QString certfile;
-        bool ok;
-    };
-
-    struct snotify {
-        QString msg;
-    };
+    } m_scert_file;
 };
 
 #endif

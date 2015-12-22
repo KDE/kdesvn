@@ -24,14 +24,17 @@
 
 #include "ccontextlistener.h"
 
-#include <qevent.h>
-#include <qmutex.h>
-#include <qwaitcondition.h>
-
 class ThreadContextListenerData;
 
 /**
-@author Rajko Albrecht
+  @author Rajko Albrecht
+  Same as CContextListener but make sure the user actions are executed in the main thread
+  Therefore all events have to be passed through the Qt signal/slot system to make sure
+  a context switch to the main thread occurs.
+  This is done by a signal 'signalFoo()' which is executed and catched inside this class.
+  The slot is then passed to CContextListener::foo()
+
+  This Listener *must* be instanciated in the main thread!
 */
 class ThreadContextListener : public CContextListener
 {
@@ -41,9 +44,9 @@ public:
 
     virtual ~ThreadContextListener();
 
+    // called from a thread != main thread
     virtual bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave);
     virtual bool contextGetSavedLogin(const QString &realm, QString &username, QString &password);
-
     virtual bool contextGetLogMessage(QString &msg, const svn::CommitItemList &);
     virtual bool contextSslClientCertPrompt(QString &certFile);
     virtual bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave);
@@ -51,32 +54,28 @@ public:
     virtual void sendTick();
     virtual void contextProgress(long long int current, long long int max);
 
-    virtual void contextNotify(const char *path,
-                               svn_wc_notify_action_t action,
-                               svn_node_kind_t kind,
-                               const char *mime_type,
-                               svn_wc_notify_state_t content_state,
-                               svn_wc_notify_state_t prop_state,
-                               svn_revnum_t revision);
-    virtual void contextNotify(const svn_wc_notify_t *action)
-    {
-        CContextListener::contextNotify(action);
-    }
+    using CContextListener::contextNotify;
     virtual void contextNotify(const QString &);
-    static QMutex *callbackMutex();
 
-protected:
-    virtual void event_contextGetLogin(void *_data);
-    virtual void event_contextGetSavedLogin(void *_data);
-    virtual void event_contextGetLogMessage(void *data);
-    virtual void event_contextSslClientCertPrompt(void *data);
-    virtual void event_contextSslClientCertPwPrompt(void *data);
-    virtual void event_contextSslServerTrustPrompt(void *data);
-    virtual void event_contextNotify(void *data);
-    virtual void customEvent(QEvent *);
+Q_SIGNALS:
+    void signal_contextGetLogin();
+    void signal_contextGetSavedLogin();
+    void signal_contextGetLogMessage();
+    void signal_contextSslClientCertPrompt();
+    void signal_contextSslClientCertPwPrompt();
+    void signal_contextSslServerTrustPrompt();
+    void signal_contextNotify(const QString &msg);
+protected Q_SLOTS:  // executed in main thread
+    virtual void event_contextGetLogin();
+    virtual void event_contextGetSavedLogin();
+    virtual void event_contextGetLogMessage();
+    virtual void event_contextSslClientCertPrompt();
+    virtual void event_contextSslClientCertPwPrompt();
+    virtual void event_contextSslServerTrustPrompt();
+    virtual void event_contextNotify(const QString &msg);
 
+private:
     /* stores all internals */
-    QMutex m_WaitMutex;
     ThreadContextListenerData *m_Data;
 };
 

@@ -172,7 +172,7 @@ public:
     struct SslServerTrustData {
     public:
         /** bit coded failures */
-        const apr_uint32_t failures;
+        apr_uint32_t failures;
 
         /** certificate information */
         QString hostname;
@@ -183,7 +183,7 @@ public:
         QString realm;
         bool maySave;
 
-        SslServerTrustData(const apr_uint32_t failures_)
+        SslServerTrustData(const apr_uint32_t failures_ = 0)
             : failures(failures_), hostname(), fingerprint(),
               validFrom(), validUntil(), issuerDName(),
               realm(), maySave(true)

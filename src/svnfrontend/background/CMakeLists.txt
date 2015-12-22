@@ -31,7 +31,6 @@ set (backgroundsrc
     svnthread.h
     tcontextlistener.cpp
     tcontextlistener.h
-    threadcontextlistenerdata.cpp
     threadcontextlistenerdata.h
     )
 

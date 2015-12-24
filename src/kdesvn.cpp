@@ -61,6 +61,7 @@ kdesvn::kdesvn()
     : KParts::MainWindow(),
       KBookmarkOwner()
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     m_part = 0;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
@@ -85,6 +86,7 @@ kdesvn::kdesvn()
     actionCollection()->addAction("bookmarks", m_BookmarksActionmenu);
     m_Bookmarkactions = new KActionCollection(static_cast<QWidget *>(this));
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
+    m_pBookmarkMenu->setParent(m_BookmarkManager);
 
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this

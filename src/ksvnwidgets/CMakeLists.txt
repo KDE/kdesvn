@@ -66,11 +66,14 @@ qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobVie
 qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
 
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
-target_link_libraries(ksvnwidgets
-    kdesvncfgreader
-)
 target_include_directories(ksvnwidgets
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/../
         ${CMAKE_CURRENT_BINARY_DIR}/../
+)
+target_link_libraries(ksvnwidgets
+    PRIVATE
+        kdesvncfgreader
+    PUBLIC
+        svnqt
 )

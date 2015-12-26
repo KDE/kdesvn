@@ -74,12 +74,12 @@ ContextData::ContextData(const QString &configDir_)
 #endif
     svn_auth_provider_object_t *provider;
 
-#if defined(WIN32) && (SVN_VER_MAJOR >= 1)  //krazy:exclude=cpp
+#if defined(WIN32)  //krazy:exclude=cpp
     svn_auth_get_windows_simple_provider(&provider, pool);
     APR_ARRAY_PUSH(providers, svn_auth_provider_object_t *) = provider;
 #endif
 
-#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
+#if  SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     svn_auth_get_simple_provider2
     (&provider, maySavePlaintext, this, pool);
 #else
@@ -109,7 +109,7 @@ ContextData::ContextData(const QString &configDir_)
     svn_auth_get_ssl_client_cert_file_provider(&provider, pool);
     *(svn_auth_provider_object_t **)apr_array_push(providers) = provider;
 
-#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
+#if  SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     svn_auth_get_ssl_client_cert_pw_file_provider2(&provider, maySavePlaintext, this, pool);
 #else
     svn_auth_get_ssl_client_cert_pw_file_provider(&provider, pool);
@@ -728,7 +728,7 @@ svn_error_t *ContextData::onWcConflictResolver(svn_wc_conflict_result_t **result
 svn_error_t *ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool)
 {
     Q_UNUSED(pool);
-#if  ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6) || (SVN_VER_MAJOR > 2))
+#if  SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     ContextData *data = 0;
     SVN_ERR(getContextData(baton, &data));
     data->getListener()->maySavePlaintext(may_save_plaintext, QString::fromUtf8(realmstring));

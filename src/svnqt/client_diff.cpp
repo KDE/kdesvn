@@ -59,8 +59,7 @@ Client_impl::diff_peg(const DiffParameter &options) throw (ClientException)
     _options = options.extra().array(pool);
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path1(), options.rev2());
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
-
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_diff_peg5(
                 _options,
                 options.path1().cstr(),
@@ -115,7 +114,7 @@ Client_impl::diff(const DiffParameter &options) throw (ClientException)
     }
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path2(), options.rev2());
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_diff5(_options,
                              options.path1().cstr(), ddata.r1().revision(),
                              options.path2().cstr(), ddata.r2().revision(),

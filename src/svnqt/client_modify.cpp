@@ -53,7 +53,7 @@
 
 namespace svn
 {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 struct mBaton {
     mBaton(): m_context(), m_revision(Revision::UNDEFINED), m_date(), author(), commit_error(), repos_root() {}
     ContextWP m_context;
@@ -114,7 +114,7 @@ Client_impl::remove(const Targets &targets,
     Pool pool;
     svn_error_t *error;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     error = svn_client_delete4(
@@ -143,7 +143,7 @@ Client_impl::remove(const Targets &targets,
     if (error != 0) {
         throw ClientException(error);
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
 #else
     if (commit_info) {
@@ -201,7 +201,7 @@ Client_impl::update(const UpdateParameter &params) throw (ClientException)
     apr_array_header_t *apr_revisions = apr_array_make(apr_pool,
                                                        params.targets().size(),
                                                        sizeof(svn_revnum_t));
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_update4(&apr_revisions, params.targets().array(pool), params.revision(),
                                internal::DepthToSvn(params.depth()), params.sticky_depth(),
                                params.ignore_externals(), params.allow_unversioned(),
@@ -228,7 +228,7 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
 {
     Pool pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
 #else
@@ -236,8 +236,8 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
 #endif
     m_context->setLogMessage(parameters.message());
     svn_error_t *error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
         svn_client_commit6(
 #else
         svn_client_commit5(
@@ -247,7 +247,7 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
             parameters.keepLocks(),
             parameters.keepChangeList(),
             parameters.commitAsOperations(),
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 8)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
             false, /* file externals */
             false, /* dir externals */
 #endif
@@ -273,7 +273,7 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
     if (error != NULL) {
         throw ClientException(error);
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
 #else
     if (commit_info && SVN_IS_VALID_REVNUM(commit_info->revision)) {
@@ -300,7 +300,7 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
         source->peg_revision = parameter.pegRevision().revision();
         APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
 
@@ -313,7 +313,7 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
             commit_callback2, &_baton,
             *m_context, pool);
 
-#elif ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#elif SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     svn_commit_info_t *commit_info = 0L;
     svn_error_t *error =
         svn_client_copy5(&commit_info,
@@ -332,7 +332,7 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
     if (error != 0) {
         throw ClientException(error);
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
 #else
     if (commit_info) {
@@ -354,7 +354,7 @@ svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientExc
 {
     Pool pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     svn_error_t *error = svn_client_move6(
@@ -386,7 +386,7 @@ svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientExc
     if (error != 0) {
         throw ClientException(error);
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
 #else
     if (commit_info) {
@@ -410,7 +410,7 @@ Client_impl::mkdir(const Targets &targets,
 
 
     svn_error_t *error = 0;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     error = svn_client_mkdir4
@@ -437,7 +437,7 @@ Client_impl::mkdir(const Targets &targets,
         throw ClientException(error);
     }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
 #else
     if (commit_info) {
@@ -548,7 +548,7 @@ Client_impl::import(const Path &path,
     Pool pool;
 
     m_context->setLogMessage(message);
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     svn_error_t *error =
@@ -572,7 +572,7 @@ Client_impl::import(const Path &path,
     if (error != 0) {
         throw ClientException(error);
     }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
 #else
     if (commit_info) {
@@ -588,12 +588,12 @@ Client_impl::relocate(const Path &path,
                       const Url &to_url,
                       bool recurse) throw (ClientException)
 {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     Q_UNUSED(recurse);
 #endif
     Pool pool;
     svn_error_t *error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_relocate2(path.cstr(),
                              from_url,
                              to_url,

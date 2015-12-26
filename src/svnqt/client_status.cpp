@@ -110,7 +110,7 @@ struct InfoEntriesBaton {
 
 static svn_error_t *InfoEntryFunc(void *baton,
                                   const char *path,
-#if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR>=7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
                                   const svn_client_info2_t *info,
 #else
                                   const svn_info_t *info,
@@ -133,7 +133,7 @@ static svn_error_t *InfoEntryFunc(void *baton,
     return NULL;
 }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
 static svn_error_t *StatusEntriesFunc(void *baton,
                                       const char *path,
                                       svn_wc_status2_t *status,
@@ -179,7 +179,7 @@ localStatus(const StatusParameter &params,
 
     baton.pool = pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_status4(
 #else
     error = svn_client_status3(
@@ -254,7 +254,7 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
 
     baton.pool = pool;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_status4(
 #else
     error = svn_client_status3(
@@ -311,7 +311,7 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target) throw (C
     l_baton.excludeList = & (params.excludeList());
     svn_error_t *error;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_log5(
                 params.targets().array(pool),
                 params.peg().revision(),
@@ -377,7 +377,7 @@ Client_impl::info(const Path &_p,
     }
 
     error =
-#if ((SVN_VER_MAJOR==1) && (SVN_VER_MINOR>=7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_info3
         (truepath,
          internal_peg ? &pegr : peg_revision.revision(),

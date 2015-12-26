@@ -271,7 +271,7 @@ Client_impl::revpropset(const PropertiesParameter &param)
 
     svn_revnum_t revnum;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     const svn_string_t *oldpropval = param.propertyOriginalValue().isNull() ? 0 : svn_string_create(param.propertyOriginalValue().toUtf8(), pool);
     svn_error_t *error = svn_client_revprop_set2(
                              param.propertyName().toUtf8(),
@@ -310,7 +310,7 @@ Client_impl::revpropdel(const QString &propName,
 
     svn_revnum_t revnum;
     svn_error_t *error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
         svn_client_revprop_set2(
             propName.toUtf8(),
             0, // value = NULL

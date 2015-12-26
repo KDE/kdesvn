@@ -18,6 +18,11 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
+option(OVERRIDE_SVN_API_VERSION "Override the current API version (e.g. to compile against 1.6 api when 1.8 is installed)" OFF)
+if(OVERRIDE_SVN_API_VERSION)
+  set(OVERRIDE_SVN_API_VERSION_STR 0x10600 CACHE STRING "svn api version to use, hex format, two digits per major/minor/patch")
+endif()
+
 set(SOURCES
     annotate_line.cpp
     apr.cpp
@@ -101,6 +106,9 @@ configure_file(
 add_library(svnqt STATIC ${SOURCES})
 if(WIN32)
     target_compile_definitions(svnqt PUBLIC _USE_32BIT_TIME_T)
+endif()
+if(OVERRIDE_SVN_API_VERSION)
+    target_compile_definitions(svnqt PUBLIC OVERRIDE_SVN_API_VERSION=${OVERRIDE_SVN_API_VERSION_STR})
 endif()
 
 set(ALL_LINKFLAGS ${APR_EXTRA_LDFLAGS})

@@ -34,9 +34,9 @@
 // svncpp
 #include "pool.h"
 #include "svnqt_defines.h"
+#include "helper.h"
 
 #include <svn_dirent_uri.h>
-#include <svn_version.h>
 
 #include <qglobal.h>
 
@@ -71,7 +71,7 @@ void Url::data(const QString &a_uri)
 void Url::data(const QByteArray &a_uri)
 {
     m_Uri = a_uri;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     if (!svn_uri_is_canonical(m_Uri.constData(), m_Pool)) {
         m_Uri = svn_uri_canonicalize(m_Uri.constData(), m_Pool);
     }

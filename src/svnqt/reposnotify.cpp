@@ -21,11 +21,11 @@
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/revision.h"
 #include "svnqt/path.h"
+#include "svnqt/helper.h"
 
-#include <svn_version.h>
 #include <svn_props.h>
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #include <svn_repos.h>
 #endif
 
@@ -38,7 +38,7 @@ class ReposNotifyData
 {
     QString _warning_msg;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     /// TODO own datatype
     svn_repos_notify_action_t _action;
     svn::Revision _rev;
@@ -61,7 +61,7 @@ public:
     ReposNotifyData(const svn_repos_notify_t *notify)
         : _warning_msg(QString()), _msg(QString())
     {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         if (!notify) {
             return;
         }
@@ -87,7 +87,7 @@ public:
 
     const QString &toString()const
     {
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7) || SVN_VER_MAJOR>1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         if (_msg.length() == 0) {
             switch (_action) {
             case svn_repos_notify_warning: {

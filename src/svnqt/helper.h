@@ -26,12 +26,20 @@
 #define SVNQT_HELPER_H
 
 #include "svnqttypes.h"
+#include "pool.h"
 #include "revision.h"
+#include <svn_string.h>
 #include <svn_types.h>
 #include <svn_version.h>
 
-
 #include <iostream>
+
+#define SVN_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+#ifdef OVERRIDE_SVN_API_VERSION
+#define SVN_API_VERSION OVERRIDE_SVN_API_VERSION
+#else
+#define SVN_API_VERSION (SVN_VERSION_CHECK(SVN_VER_MAJOR, SVN_VER_MINOR, SVN_VER_PATCH))
+#endif
 
 namespace svn
 {

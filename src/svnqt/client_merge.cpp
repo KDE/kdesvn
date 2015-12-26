@@ -64,7 +64,7 @@ void Client_impl::merge(const MergeParameter &parameters) throw (ClientException
         merge_reintegrate(parameters);
     } else {
         error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
             svn_client_merge4
 #else
             svn_client_merge3
@@ -79,7 +79,7 @@ void Client_impl::merge(const MergeParameter &parameters) throw (ClientException
              parameters.force(),
              parameters.record_only(),
              parameters.dry_run(),
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
              parameters.allow_mixed_rev(),
 #endif
              parameters.merge_options().array(pool),
@@ -100,7 +100,7 @@ void Client_impl::merge_peg(const MergeParameter &parameters) throw (ClientExcep
     svn_error_t *error;
 
     error =
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_merge_peg4
 #else
         svn_client_merge_peg3
@@ -115,7 +115,7 @@ void Client_impl::merge_peg(const MergeParameter &parameters) throw (ClientExcep
             parameters.force(),
             parameters.record_only(),
             parameters.dry_run(),
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
             parameters.allow_mixed_rev(),
 #endif
             parameters.merge_options().array(pool),

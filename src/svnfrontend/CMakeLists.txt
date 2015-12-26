@@ -133,9 +133,9 @@ add_subdirectory(background)
 add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 
 target_link_libraries(svnfrontend
-    ${QT_QTCORE_LIBRARY}
-    ksvnwidgets
-    svnqt
+    PUBLIC
+        ksvnwidgets
+        svnqt
 )
 target_include_directories(svnfrontend
     PUBLIC

@@ -38,7 +38,7 @@ InfoEntry::InfoEntry()
     init();
 }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 InfoEntry::InfoEntry(const svn_client_info2_t *info, const char *path)
 {
     init(info, path);
@@ -96,7 +96,7 @@ const QString &InfoEntry::checksum()const
 {
     return m_checksum;
 }
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 const ConflictDescriptionList &InfoEntry::conflicts()const
 {
     return m_conflicts;
@@ -193,7 +193,7 @@ void svn::InfoEntry::init()
     m_hasWc = false;
     m_Lock = LockEntry();
     m_checksum.clear();
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #else
     m_conflict_new.clear();
     m_conflict_old.clear();
@@ -217,7 +217,7 @@ void svn::InfoEntry::init()
     m_depth = DepthUnknown;
 }
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 void svn::InfoEntry::init(const svn_client_info2_t *item, const char *path)
 {
     init(item, QString::fromUtf8(path));
@@ -331,7 +331,7 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     m_hasWc = item->has_wc_info;
     m_schedule = item->schedule;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     m_size = item->size64 != SVN_INVALID_FILESIZE ? qlonglong(item->size64) : SVNQT_SIZE_UNKNOWN;
     m_working_size = item->working_size64 != SVN_INVALID_FILESIZE ? qlonglong(item->working_size64) : SVNQT_SIZE_UNKNOWN;
     if (m_working_size == SVNQT_SIZE_UNKNOWN) {
@@ -390,7 +390,7 @@ svn::InfoEntry::InfoEntry(const InfoEntry &other)
     m_prop_time = other.m_prop_time;
     m_Lock = other.m_Lock;
     m_checksum = other.m_checksum;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     m_conflicts = other.m_conflicts;
 #else
     m_conflict_new = other.m_conflict_new;

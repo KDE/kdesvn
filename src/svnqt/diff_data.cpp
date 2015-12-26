@@ -23,10 +23,10 @@
  ***************************************************************************/
 #include "diff_data.h"
 #include "exception.h"
+#include "helper.h"
 
 #include <QFile>
 
-#include <svn_version.h>
 #include <svn_io.h>
 #include <svn_path.h>
 
@@ -44,7 +44,7 @@ DiffData::DiffData(const Path &aTmpPath, const Path &_p1, const Revision &_r1, c
 void DiffData::init()
 {
     svn_error_t *error;
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 6)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     Pool scratchPool;
     error = svn_io_open_unique_file3(&m_outFile, &m_outFileName,
                                      m_tmpPath.path().toUtf8(),
@@ -60,7 +60,7 @@ void DiffData::init()
         clean();
         throw ClientException(error);
     }
-#if (SVN_VER_MAJOR >= 1) && (SVN_VER_MINOR >= 6)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_io_open_unique_file3(&m_errFile, &m_errFileName,
                                      m_tmpPath.path().toUtf8(),
                                      svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);

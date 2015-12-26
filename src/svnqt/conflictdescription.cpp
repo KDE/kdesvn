@@ -25,7 +25,7 @@
 #include "svnqt_defines.h"
 
 #include <svn_wc.h>
-#include <svn_version.h>
+#include "helper.h"
 
 namespace svn
 {
@@ -37,7 +37,7 @@ ConflictDescription::~ConflictDescription()
 ConflictDescription::ConflictDescription(const svn_wc_conflict_description2_t *conflict)
 {
     init();
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     if (!conflict) {
         return;
     }
@@ -127,7 +127,7 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_action_delete:
         m_action = ConflictDelete;
         break;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     case svn_wc_conflict_action_replace:
         m_action = ConflictReplace;
         break;
@@ -140,7 +140,7 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_kind_property:
         m_Type = ConflictProperty;
         break;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     case svn_wc_conflict_kind_tree:
         m_Type = ConflictTree;
         break;
@@ -164,12 +164,12 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_reason_unversioned:
         m_reason = ReasonUnversioned;
         break;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 6)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     case svn_wc_conflict_reason_added:
         m_reason = ReasonAdded;
         break;
 #endif
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     case svn_wc_conflict_reason_replaced:
         m_reason = ReasonReplaced;
         break;

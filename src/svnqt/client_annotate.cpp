@@ -41,7 +41,7 @@
 namespace svn
 {
 static svn_error_t *
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 annotateReceiver(void *baton,
                  svn_revnum_t start_revnum,
                  svn_revnum_t end_revnum,
@@ -92,7 +92,7 @@ Client_impl::annotate(AnnotatedFile &target, const AnnotateParameter &params) th
 {
     Pool pool;
     svn_error_t *error;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_blame5
 #else
     error = svn_client_blame4

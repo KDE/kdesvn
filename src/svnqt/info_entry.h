@@ -24,6 +24,7 @@
 #ifndef SVNQT_INFO_ENTRY_H
 #define SVNQT_INFO_ENTRY_H
 
+#include <svnqt/helper.h>
 #include <svnqt/lock_entry.h>
 #include <svnqt/datetime.h>
 #include <svnqt/revision.h>
@@ -34,7 +35,7 @@
 
 #include <svn_version.h>
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #undef SVN_INFO_SIMPLE_CONFLICT_TYPE
 struct svn_client_info2_t;
 #else
@@ -49,7 +50,7 @@ class SVNQT_EXPORT InfoEntry
 public:
     static const qlonglong SVNQT_SIZE_UNKNOWN = -1;
     InfoEntry();
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     InfoEntry(const svn_client_info2_t *, const char *path);
     InfoEntry(const svn_client_info2_t *, const QString &path);
 #else
@@ -59,7 +60,7 @@ public:
     InfoEntry(const InfoEntry &);
     ~InfoEntry();
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     void init(const svn_client_info2_t *, const char *path);
     void init(const svn_client_info2_t *, const QString &path);
 #else
@@ -84,7 +85,7 @@ public:
 
     const QString &checksum()const;
 
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     const ConflictDescriptionList &conflicts()const;
 #else
     const QString &conflictNew()const;
@@ -121,7 +122,7 @@ protected:
     LockEntry m_Lock;
     QString m_name;
     QString m_checksum;
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     ConflictDescriptionList m_conflicts;
 #else
     QString m_conflict_new;

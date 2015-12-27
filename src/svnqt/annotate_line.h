@@ -45,12 +45,7 @@ namespace svn
 class SVNQT_EXPORT AnnotateLine
 {
 public:
-    AnnotateLine(qlonglong line_no,
-                 qlonglong revision,
-                 const char *author,
-                 const char *date,
-                 const char *line);
-
+    AnnotateLine();
     AnnotateLine(qlonglong line_no,
                  qlonglong revision,
                  const char *author,
@@ -64,24 +59,15 @@ public:
 
     AnnotateLine(qlonglong line_no,
                  qlonglong revision,
-                 PropertiesMap revisionproperties,
+                 const PropertiesMap &revisionproperties,
                  const char *line,
                  qlonglong merge_revision,
-                 PropertiesMap mergeproperties,
+                 const PropertiesMap &mergeproperties,
                  const char *merge_path,
                  qlonglong revstart,
                  qlonglong revend,
                  bool local
                  );
-
-    AnnotateLine(const AnnotateLine &other);
-    AnnotateLine();
-    /**
-     * destructor
-     */
-    virtual ~AnnotateLine()
-    {
-    }
 
     qlonglong
     lineNumber() const

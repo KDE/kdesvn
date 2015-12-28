@@ -21,13 +21,9 @@
 #define DBOVERVIEW_H
 
 #include "ui_dboverview.h"
+#include <svnqt/client.h>
 
 class DbOverViewData;
-
-namespace svn
-{
-class Client;
-}
 
 class DbOverview: public QWidget, public Ui::DBOverView
 {
@@ -36,11 +32,11 @@ public:
     explicit DbOverview(QWidget *parent = 0);
     virtual ~DbOverview();
 
-    static void showDbOverview(svn::Client *aClient = 0);
+    static void showDbOverview(const svn::ClientP &aClient);
 
 protected Q_SLOTS:
     virtual void itemActivated(const QItemSelection &, const QItemSelection &);
-    virtual void setClient(svn::Client *aClient);
+    virtual void setClient(const svn::ClientP &aClient);
     virtual void deleteCacheItems();
     virtual void deleteRepository();
     virtual void repositorySettings();

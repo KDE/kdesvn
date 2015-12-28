@@ -54,6 +54,8 @@ namespace svn
 {
 
 class Url;
+class Client;
+typedef QSharedPointer<Client> ClientP;
 /** Subversion client API.
  *
  * Never use an object of this as global static! This will make problems with subversion
@@ -91,7 +93,7 @@ public:
      * \param context The context to use
      * \return an instance of client or 0L if error.
      */
-    static Client *getobject(const ContextP &context);
+    static ClientP getobject(const ContextP &context);
 
     /**
      * Enumerates all files/dirs at a given path.

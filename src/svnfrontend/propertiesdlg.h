@@ -26,6 +26,7 @@
 #include <qstring.h>
 #include <QStringList>
 
+#include "src/svnqt/client.h"
 #include "src/svnqt/svnqttypes.h"
 #include "src/svnqt/revision.h"
 
@@ -40,17 +41,13 @@ class KPushButton;
 class FileListViewItem;
 class SvnItem;
 
-namespace svn
-{
-class Client;
-}
 
 class PropertiesDlg : public KDialog
 {
     Q_OBJECT
 
 public:
-    PropertiesDlg(SvnItem *which, svn::Client *aClient,
+    PropertiesDlg(SvnItem *which, const svn::ClientP &aClient,
                   const svn::Revision &aRev, QWidget *parent = 0);
     ~PropertiesDlg();
 
@@ -70,7 +67,7 @@ protected:
     SvnItem *m_Item;
     bool m_changed;
     bool initDone;
-    svn::Client *m_Client;
+    svn::ClientP m_Client;
     svn::Revision m_Rev;
 
 protected slots:

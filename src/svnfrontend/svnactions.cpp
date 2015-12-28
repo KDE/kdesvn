@@ -116,9 +116,6 @@ public:
             m_LogDialog->saveSize();
             delete m_LogDialog;
         }
-
-        delete m_Svnclient;
-        m_Svnclient = 0L;
     }
 
     bool isExternalDiff() const
@@ -176,7 +173,7 @@ public:
 
     svn::smart_pointer<CContextListener> m_SvnContextListener;
     svn::ContextP m_CurrentContext;
-    svn::Client *m_Svnclient;
+    svn::ClientP m_Svnclient;
 
     helpers::statusCache m_UpdateCache;
     helpers::statusCache m_Cache;
@@ -214,7 +211,7 @@ SvnActions::SvnActions(ItemDisplay *parent, bool processes_blocked)
     connect(m_Data->m_SvnContextListener, SIGNAL(sendNotify(QString)), this, SLOT(slotNotifyMessage(QString)));
 }
 
-svn::Client *SvnActions::svnclient()
+svn::ClientP SvnActions::svnclient()
 {
     return m_Data->m_Svnclient;
 }

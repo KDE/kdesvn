@@ -32,7 +32,7 @@
 int main(int, char **)
 {
     svn::ContextP m_CurrentContext(new svn::Context);
-    svn::Client *m_Svnclient = svn::Client::getobject(m_CurrentContext);
+    svn::ClientP m_Svnclient = svn::Client::getobject(m_CurrentContext);
 
     svn::DirEntries dlist;
     QString p = QString("file://%1").arg(TESTREPOPATH);

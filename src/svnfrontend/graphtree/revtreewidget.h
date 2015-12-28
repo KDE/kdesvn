@@ -20,9 +20,9 @@
 #ifndef REVTREEWIDGET_H
 #define REVTREEWIDGET_H
 
+#include <svnqt/client.h>
 #include <svnqt/revision.h>
 
-#include <qvariant.h>
 #include <qpixmap.h>
 #include <qwidget.h>
 
@@ -34,7 +34,6 @@ class KTextBrowser;
 namespace svn
 {
 class LogEntry;
-class Client;
 }
 
 class RevTreeWidget : public QWidget
@@ -42,7 +41,7 @@ class RevTreeWidget : public QWidget
     Q_OBJECT
 
 public:
-    RevTreeWidget(QObject *, svn::Client *, QWidget *parent = 0);
+    RevTreeWidget(QObject *lt, const svn::ClientP &cl, QWidget *parent = 0);
     ~RevTreeWidget();
 
     QSplitter *m_Splitter;

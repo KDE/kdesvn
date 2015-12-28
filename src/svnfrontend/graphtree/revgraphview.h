@@ -20,6 +20,7 @@
 #ifndef REVGRAPHVIEW_H
 #define REVGRAPHVIEW_H
 
+#include <svnqt/client.h>
 #include <svnqt/revision.h>
 
 #include <QContextMenuEvent>
@@ -31,7 +32,6 @@
 namespace svn
 {
 class LogEntry;
-class Client;
 }
 
 class KTemporaryFile;
@@ -54,7 +54,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(QObject *aListener, svn::Client *_client, QWidget *parent = 0);
+    RevGraphView(QObject *aListener, const svn::ClientP &_client, QWidget *parent = 0);
     virtual ~RevGraphView();
 
     void showText(const QString &s);
@@ -106,7 +106,7 @@ protected slots:
 protected:
     QGraphicsScene *m_Scene;
     GraphMark *m_Marker;
-    svn::Client *m_Client;
+    svn::ClientP m_Client;
     GraphTreeLabel *m_Selected;
     QObject *m_Listener;
     KTemporaryFile *m_dotTmpFile;

@@ -34,7 +34,7 @@ int main(int, char **)
     svn::repository::Repository rep(0L);
 
     svn::ContextP m_CurrentContext(new svn::Context);
-    svn::Client *m_Svnclient = svn::Client::getobject(m_CurrentContext);
+    svn::ClientP m_Svnclient = svn::Client::getobject(m_CurrentContext);
     bool gotit = true;
     svn::LogEntriesMap m_OldHistory;
     svn::LogParameter params;

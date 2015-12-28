@@ -389,6 +389,6 @@ void kdesvnpart::showDbStatus()
 {
     if (m_view) {
         m_view->stopCacheThreads();
-        DbOverview::showDbOverview();
+        DbOverview::showDbOverview(svn::ClientP());
     }
 }

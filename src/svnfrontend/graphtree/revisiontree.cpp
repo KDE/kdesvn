@@ -60,7 +60,7 @@ public:
     QWidget *dlgParent;
     RevTreeWidget *m_TreeDisplay;
 
-    svn::Client *m_Client;
+    svn::ClientP m_Client;
     QObject *m_Listener;
 
     bool getLogs(const QString &, const svn::Revision &startr, const svn::Revision &endr, const QString &origin);
@@ -71,7 +71,6 @@ RtreeData::RtreeData()
 {
     progress = 0;
     m_TreeDisplay = 0;
-    m_Client = 0;
     dlgParent = 0;
     m_Listener = 0;
 }
@@ -114,7 +113,7 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
     return true;
 }
 
-RevisionTree::RevisionTree(svn::Client *aClient,
+RevisionTree::RevisionTree(const svn::ClientP &aClient,
                            QObject *aListener,
                            const QString &reposRoot,
                            const svn::Revision &startr, const svn::Revision &endr,

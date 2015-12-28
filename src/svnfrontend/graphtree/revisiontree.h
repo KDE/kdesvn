@@ -42,7 +42,7 @@ class Client;
 class RevisionTree
 {
 public:
-    RevisionTree(svn::Client *,
+    RevisionTree(const svn::ClientP &,
                  QObject *aListener,
                  const QString &reposRoot,
                  const svn::Revision &startr, const svn::Revision &endr,

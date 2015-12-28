@@ -37,7 +37,7 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 
-PropertiesDlg::PropertiesDlg(SvnItem *which, svn::Client *aClient, const svn::Revision &aRev, QWidget *parent)
+PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent)
     : KDialog(parent),
       m_Item(which), m_changed(false),
       m_Client(aClient), m_Rev(aRev)

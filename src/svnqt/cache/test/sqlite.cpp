@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
 
     svn::ContextP m_CurrentContext(new svn::Context);
-    svn::Client *m_Svnclient = svn::Client::getobject(m_CurrentContext);
+    svn::ClientP m_Svnclient = svn::Client::getobject(m_CurrentContext);
 
     QStringList list;
     QStringList::Iterator it;

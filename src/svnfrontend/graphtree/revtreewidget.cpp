@@ -36,7 +36,7 @@
  *  Constructs a RevTreeWidget as a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'.
  */
-RevTreeWidget::RevTreeWidget(QObject *lt, svn::Client *cl, QWidget *parent)
+RevTreeWidget::RevTreeWidget(QObject *lt, const svn::ClientP &cl, QWidget *parent)
     : QWidget(parent)
 {
     RevTreeWidgetLayout = new QVBoxLayout(this);//, 11, 6, "RevTreeWidgetLayout");

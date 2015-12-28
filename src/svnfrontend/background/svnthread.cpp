@@ -29,6 +29,7 @@
 SvnThread::SvnThread(QObject *_parent)
     : QThread()
     , m_CurrentContext(new svn::Context)
+    , m_Svnclient(svn::Client::getobject(m_CurrentContext))
     , m_Parent(_parent)
 {
     m_SvnContextListener = new ThreadContextListener(m_Parent);
@@ -37,13 +38,11 @@ SvnThread::SvnThread(QObject *_parent)
     }
 
     m_CurrentContext->setListener(m_SvnContextListener);
-    m_Svnclient = svn::Client::getobject(m_CurrentContext);
 }
 
 SvnThread::~SvnThread()
 {
     m_CurrentContext->setListener(0);
-    delete m_Svnclient;
     m_SvnContextListener = 0;
 }
 

@@ -71,8 +71,7 @@ public:
     explicit SvnActions(ItemDisplay *parent, bool processes_blocked = false);
     ~SvnActions();
     void reInitClient();
-    //svn::Client&svnClient(){return m_Svnclient;}
-    svn::Client *svnclient();
+    svn::ClientP svnclient();
     void prepareUpdate(bool ask);
 
     bool makeGet(const svn::Revision &start, const QString &what, const QString &target,

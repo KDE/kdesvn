@@ -50,7 +50,7 @@ Client::~Client()
 {
 }
 
-Client *Client::getobject(const ContextP &context)
+ClientP Client::getobject(const ContextP &context)
 {
     static bool s_initialized = false;
     if (!s_initialized) {
@@ -65,7 +65,7 @@ Client *Client::getobject(const ContextP &context)
             d.mkdir(basePath);
         }
     }
-    return new Client_impl(context);
+    return ClientP(new Client_impl(context));
 }
 }
 

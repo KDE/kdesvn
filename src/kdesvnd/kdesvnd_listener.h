@@ -64,7 +64,7 @@ public:
 
 protected:
     svn::ContextP m_CurrentContext;
-    svn::Client *m_Svnclient;
+    svn::ClientP m_Svnclient;
 };
 
 #endif

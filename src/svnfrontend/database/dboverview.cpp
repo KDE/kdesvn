@@ -44,12 +44,11 @@ class DbOverViewData
 
 public:
     QStringListModel *repo_model;
-    svn::Client *_Client;
+    svn::ClientP _Client;
 
     DbOverViewData()
     {
         repo_model = new QStringListModel();
-        _Client = 0;
     }
     ~DbOverViewData()
     {
@@ -82,7 +81,7 @@ DbOverview::~DbOverview()
     delete _data;
 }
 
-void DbOverview::showDbOverview(svn::Client *aClient)
+void DbOverview::showDbOverview(const svn::ClientP &aClient)
 {
     DbOverview *ptr = 0;
     static const char cfg_text[] = "db_overview_dlg";
@@ -98,7 +97,7 @@ void DbOverview::showDbOverview(svn::Client *aClient)
     }
 }
 
-void DbOverview::setClient(svn::Client *aClient)
+void DbOverview::setClient(const svn::ClientP &aClient)
 {
     _data->_Client = aClient;
 }

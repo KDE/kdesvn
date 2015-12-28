@@ -67,7 +67,7 @@ int main(int, char **)
         return -1;
     }
 
-    svn::Client *m_Svnclient = svn::Client::getobject(svn::ContextP());
+    svn::ClientP m_Svnclient = svn::Client::getobject(svn::ContextP());
     TestListener tl;
     svn::ContextP m_CurrentContext(new svn::Context);
     m_CurrentContext->setListener(&tl);

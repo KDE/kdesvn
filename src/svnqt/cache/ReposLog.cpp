@@ -73,12 +73,12 @@ protected:
 /*!
     \fn svn::cache::ReposLog::ReposLog(svn::Client*aClient,const QString&)
  */
-svn::cache::ReposLog::ReposLog(svn::Client *aClient, const QString &aRepository)
-    : m_Client(),
-      m_Database(),
-      m_ReposRoot(aRepository), m_latestHead(svn::Revision::UNDEFINED)
+svn::cache::ReposLog::ReposLog(const svn::ClientP &aClient, const QString &aRepository)
+    : m_Client(aClient)
+    , m_Database()
+    , m_ReposRoot(aRepository)
+    , m_latestHead(svn::Revision::UNDEFINED)
 {
-    m_Client = aClient;
     if (!aRepository.isEmpty()) {
         m_Database = LogCache::self()->reposDb(aRepository);
     }

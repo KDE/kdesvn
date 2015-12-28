@@ -41,8 +41,8 @@ public:
     virtual void cancelMe();
 
 protected:
-    svn::Client *m_Svnclient;
     svn::ContextP m_CurrentContext;
+    svn::ClientP m_Svnclient;
     svn::smart_pointer<ThreadContextListener> m_SvnContextListener;
     QObject *m_Parent;
 

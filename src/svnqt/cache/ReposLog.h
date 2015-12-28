@@ -27,6 +27,7 @@
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
 #include "svnqt/revision.h"
+#include "svnqt/client.h"
 
 #include <QSqlDatabase>
 #include <QString>
@@ -35,15 +36,13 @@
 namespace svn
 {
 
-class Client;
-
 namespace cache
 {
 
 class SVNQT_EXPORT ReposLog
 {
 protected:
-    svn::Client *m_Client;
+    svn::ClientP m_Client;
     mutable QSqlDatabase m_Database;
     QString m_ReposRoot;
     svn::Revision m_latestHead;
@@ -52,7 +51,7 @@ protected:
     bool checkFill(svn::Revision &_start, svn::Revision &_end, bool checkHead);
 
 public:
-    explicit ReposLog(svn::Client *aClient, const QString &aRepository = QString());
+    explicit ReposLog(const svn::ClientP &aClient, const QString &aRepository = QString());
 
     QString ReposRoot() const
     {

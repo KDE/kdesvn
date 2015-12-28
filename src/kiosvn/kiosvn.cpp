@@ -79,7 +79,7 @@ public:
     bool dispProgress;
     bool dispWritten;
     svn::ContextP m_CurrentContext;
-    svn::Client *m_Svnclient;
+    svn::ClientP m_Svnclient;
     svn::Revision urlToRev(const KUrl &);
     QTime m_last;
     qulonglong m_Id;
@@ -124,7 +124,6 @@ KioSvnData::~KioSvnData()
     m_Listener.setCancel(true);
     /* wait a little bit */
     sleep(1);
-    delete m_Svnclient;
     m_CurrentContext->setListener(0L);
 }
 

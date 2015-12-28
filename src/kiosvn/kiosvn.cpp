@@ -82,20 +82,19 @@ public:
     svn::ContextP m_CurrentContext;
     svn::Client *m_Svnclient;
     svn::Revision urlToRev(const KUrl &);
-    QTime _last;
+    QTime m_last;
     qulonglong m_Id;
 };
 
 KioSvnData::KioSvnData(kio_svnProtocol *par)
-    : m_Listener(par), first_done(false)
+    : m_Listener(par)
+    , first_done(false)
+    , dispProgress(false)
+    , dispWritten(false)
+    , m_Svnclient(svn::Client::getobject(svn::ContextP()))
+    , m_last(QTime::currentTime())
+    , m_Id(0)    // null is an invalid id
 {
-    m_Svnclient = svn::Client::getobject(0, 0);
-    m_CurrentContext = 0;
-    dispProgress = false;
-    dispWritten = false;
-    _last = QTime::currentTime();
-    // null is an invalid id
-    m_Id = 0;
     reInitClient();
 }
 
@@ -108,7 +107,7 @@ void KioSvnData::reInitClient()
     ag.querySshAgent();
 
     first_done = true;
-    m_CurrentContext = new svn::Context();
+    m_CurrentContext = svn::ContextP(new svn::Context);
     m_CurrentContext->setListener(&m_Listener);
     m_Svnclient->setContext(m_CurrentContext);
 }
@@ -128,7 +127,6 @@ KioSvnData::~KioSvnData()
     sleep(1);
     delete m_Svnclient;
     m_CurrentContext->setListener(0L);
-    m_CurrentContext = 0;
 }
 
 svn::Revision KioSvnData::urlToRev(const KUrl &url)
@@ -1062,14 +1060,14 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
     bool to_dbus = false;
     if (m_pData->dispProgress || m_pData->dispWritten || max > -1) {
         QTime now = QTime::currentTime();
-        if (m_pData->_last.msecsTo(now) >= 90) {
+        if (m_pData->m_last.msecsTo(now) >= 90) {
             if (m_pData->dispProgress) {
                 processedSize(KIO::filesize_t(current));
             } else {
                 written(current);
                 to_dbus = useKioprogress();
             }
-            m_pData->_last = now;
+            m_pData->m_last = now;
         }
     }
     if (to_dbus) {

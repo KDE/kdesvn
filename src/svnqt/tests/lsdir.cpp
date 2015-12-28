@@ -31,14 +31,10 @@
 
 int main(int, char **)
 {
-    svn::ContextP m_CurrentContext;
-    svn::Client *m_Svnclient;
-    m_Svnclient = svn::Client::getobject(0, 0);
-    m_CurrentContext = new svn::Context();
+    svn::ContextP m_CurrentContext(new svn::Context);
+    svn::Client *m_Svnclient = svn::Client::getobject(m_CurrentContext);
 
-    m_Svnclient->setContext(m_CurrentContext);
     svn::DirEntries dlist;
-
     QString p = QString("file://%1").arg(TESTREPOPATH);
     QString l = QString("%1").arg(TESTCOPATH);
 

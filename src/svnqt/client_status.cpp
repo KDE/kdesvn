@@ -48,6 +48,7 @@
 #include "svnqt_defines.h"
 #include "context_listener.h"
 #include "client_parameter.h"
+#include <QCoreApplication>
 
 namespace svn
 {
@@ -64,7 +65,10 @@ logMapReceiver2(
     Client_impl::sBaton *l_baton = (Client_impl::sBaton *)baton;
     LogEntriesMap *entries =
         (LogEntriesMap *) l_baton->m_data;
-    Context *l_context = l_baton->m_context;
+    ContextP l_context = l_baton->m_context;
+    if (l_context.isNull()) {
+        return SVN_NO_ERROR;
+    }
     QList<qlonglong> *rstack =
         (QList<qlonglong> *)l_baton->m_revstack;
     svn_client_ctx_t *ctx = l_context->ctx();
@@ -103,7 +107,10 @@ logMapReceiver(void *baton,
         (LogEntriesMap *) l_baton->m_data;
 
     /* check every loop for cancel of operation */
-    Context *l_context = l_baton->m_context;
+    ContextP l_context = l_baton->m_context;
+    if (l_context.isNull()) {
+        return SVN_NO_ERROR;
+    }
     svn_client_ctx_t *ctx = l_context->ctx();
     if (ctx && ctx->cancel_func) {
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
@@ -149,23 +156,17 @@ logMapReceiver(void *baton,
 struct StatusEntriesBaton {
     StatusEntries entries;
     apr_pool_t *pool;
-    Context *m_Context;
-    StatusEntriesBaton(): entries()
-    {
-        pool = 0;
-        m_Context = 0;
-    }
+    ContextWP m_Context;
+    StatusEntriesBaton(): entries(), pool(0)
+    {}
 };
 
 struct InfoEntriesBaton {
     InfoEntries entries;
     apr_pool_t *pool;
-    Context *m_Context;
-    InfoEntriesBaton(): entries()
-    {
-        pool = 0;
-        m_Context = 0;
-    }
+    ContextWP m_Context;
+    InfoEntriesBaton(): entries(), pool(0)
+    {}
 };
 
 static svn_error_t *InfoEntryFunc(void *baton,
@@ -176,7 +177,10 @@ static svn_error_t *InfoEntryFunc(void *baton,
     InfoEntriesBaton *seb = static_cast<InfoEntriesBaton *>(baton);
     if (seb->m_Context) {
         /* check every loop for cancel of operation */
-        Context *l_context = seb->m_Context;
+        ContextP l_context = seb->m_Context;
+        if (!l_context) {
+            return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+        }
         svn_client_ctx_t *ctx = l_context->ctx();
         if (ctx && ctx->cancel_func) {
             SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
@@ -197,7 +201,10 @@ static svn_error_t *StatusEntriesFunc(void *baton,
     StatusEntriesBaton *seb = static_cast<StatusEntriesBaton *>(baton);
     if (seb->m_Context) {
         /* check every loop for cancel of operation */
-        Context *l_context = seb->m_Context;
+        ContextP l_context = seb->m_Context;
+        if (!l_context) {
+            return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+        }
         svn_client_ctx_t *ctx = l_context->ctx();
         if (ctx && ctx->cancel_func) {
             SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
@@ -219,7 +226,7 @@ static void StatusEntriesFunc(void *baton,
 
 static StatusEntries
 localStatus(const StatusParameter &params,
-            Context *context)
+            const ContextP &context)
 {
     svn_error_t *error;
     svn_revnum_t revnum;
@@ -285,7 +292,7 @@ infoEntryToStatus(const Path &, const InfoEntry &infoEntry)
 static StatusEntries
 remoteStatus(Client *client,
              const StatusParameter &params,
-             Context *)
+             const ContextP &)
 {
     DirEntries dirEntries = client->list(params.path(), params.revision(), params.revision(), params.depth(), params.detailedRemote());
     DirEntries::const_iterator it;
@@ -306,13 +313,12 @@ Client_impl::status(const StatusParameter &params) throw (ClientException)
 {
     if (Url::isValid(params.path().path())) {
         return remoteStatus(this, params, m_context);
-    } else {
-        return localStatus(params, m_context);
     }
+    return localStatus(params, m_context);
 }
 
 static StatusPtr
-localSingleStatus(const Path &path, Context *context, bool update = false)
+localSingleStatus(const Path &path, const ContextP &context, bool update = false)
 {
     svn_error_t *error;
     Pool pool;
@@ -366,7 +372,7 @@ localSingleStatus(const Path &path, Context *context, bool update = false)
 };
 
 static StatusPtr
-remoteSingleStatus(Client *client, const Path &path, const Revision revision, Context *)
+remoteSingleStatus(Client *client, const Path &path, const Revision revision, const ContextP &)
 {
     InfoEntries infoEntries = client->info(path, DepthEmpty, revision, Revision(Revision::UNDEFINED));
     if (infoEntries.size() == 0) {
@@ -381,9 +387,8 @@ Client_impl::singleStatus(const Path &path, bool update, const Revision revision
 {
     if (Url::isValid(path.path())) {
         return remoteSingleStatus(this, path, revision, m_context);
-    } else {
-        return localSingleStatus(path, m_context, update);
     }
+    return localSingleStatus(path, m_context, update);
 }
 
 bool

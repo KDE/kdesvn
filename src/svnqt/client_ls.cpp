@@ -167,7 +167,10 @@ static svn_error_t *s_list_func
     }
     /* check every loop for cancel of operation */
     Client_impl::sBaton *l_baton = (Client_impl::sBaton *)baton;
-    Context *l_context = l_baton->m_context;
+    ContextP l_context = l_baton->m_context;
+    if (l_context.isNull()) {
+        return SVN_NO_ERROR;
+    }
     DirEntries *entries = static_cast<DirEntries *>(l_baton->m_data);
     svn_client_ctx_t *ctx = l_context->ctx();
     if (ctx && ctx->cancel_func) {

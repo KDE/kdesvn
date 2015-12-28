@@ -63,8 +63,8 @@ public:
     /* context listener virtuals end */
 
 protected:
-    svn::Client *m_Svnclient;
     svn::ContextP m_CurrentContext;
+    svn::Client *m_Svnclient;
 };
 
 #endif

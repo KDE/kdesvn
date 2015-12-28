@@ -26,12 +26,11 @@
 
 KdesvndListener::KdesvndListener(kdesvnd *p)
     : svn::ContextListener()
+    , m_back(p)
+    , m_CurrentContext(new svn::Context)
+    , m_Svnclient(svn::Client::getobject(m_CurrentContext))
 {
-    m_Svnclient = svn::Client::getobject(0, 0);
-    m_back = p;
-    m_CurrentContext = new svn::Context();
     m_CurrentContext->setListener(this);
-    m_Svnclient->setContext(m_CurrentContext);
 }
 
 KdesvndListener::~KdesvndListener()

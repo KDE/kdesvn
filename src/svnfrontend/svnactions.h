@@ -46,7 +46,6 @@ class WatchedProcess;
 
 namespace svn
 {
-class Context;
 class LogEntry;
 class InfoEntry;
 }

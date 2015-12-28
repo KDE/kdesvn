@@ -42,6 +42,7 @@
 #include "svnqt_defines.h"
 #include "client_parameter.h"
 #include "helper.h"
+#include <QCoreApplication>
 
 namespace svn
 {
@@ -51,14 +52,17 @@ static svn_error_t *ProplistReceiver(void *baton, const char *path, apr_hash_t *
     Client_impl::propBaton *_baton = (Client_impl::propBaton *)baton;
     PathPropertiesMapList *mapList = (PathPropertiesMapList *)_baton->resultlist;
 
-    Context *l_context = _baton->m_context;
+    ContextP l_context = _baton->m_context;
+    if (!l_context) {
+        return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+    }
     svn_client_ctx_t *ctx = l_context->ctx();
     if (ctx && ctx->cancel_func) {
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
     }
 
     mapList->push_back(PathPropertiesMapEntry(QString::fromUtf8(path), svn::internal::Hash2Map(prop_hash, pool)));
-    return 0;
+    return SVN_NO_ERROR;
 }
 
 PathPropertiesMapListPtr

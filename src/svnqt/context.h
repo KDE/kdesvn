@@ -54,7 +54,7 @@ class ContextData;
  * and replace the old notification and baton
  * stuff
  */
-class SVNQT_EXPORT Context: public ref_count
+class SVNQT_EXPORT Context
 {
 public:
     /**

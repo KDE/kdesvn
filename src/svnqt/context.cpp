@@ -47,13 +47,11 @@
 namespace svn
 {
 Context::Context(const QString &configDir)
-    : ref_count()
 {
     m = new ContextData(configDir);
 }
 
 Context::Context(const Context &src)
-    : ref_count()
 {
     m = new ContextData(src.m->configDir());
     setLogin(src.getUsername(), src.getPassword());

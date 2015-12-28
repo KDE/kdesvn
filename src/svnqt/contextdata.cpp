@@ -29,6 +29,7 @@
 
 #include <svn_config.h>
 #include <svn_wc.h>
+#include <QCoreApplication>
 
 namespace svn
 {
@@ -351,13 +352,13 @@ ContextData::getContextData(void *baton, ContextData **data)
 {
     if (baton == NULL)
         return svn_error_create(SVN_ERR_CANCELLED, NULL,
-                                QObject::tr("invalid baton").toUtf8());
+                                QCoreApplication::translate("svnqt", "invalid baton").toUtf8());
 
     ContextData *data_ = static_cast <ContextData *>(baton);
 
     if (data_->listener == 0)
         return svn_error_create(SVN_ERR_CANCELLED, NULL,
-                                QObject::tr("invalid listener").toUtf8());
+                                QCoreApplication::translate("svnqt", "invalid listener").toUtf8());
 
     *data = data_;
     return SVN_NO_ERROR;
@@ -735,7 +736,7 @@ void ContextData::reset()
 
 svn_error_t *ContextData::generate_cancel_error()
 {
-    return svn_error_create(SVN_ERR_CANCELLED, 0, QObject::tr("Cancelled by user.").toUtf8());
+    return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
 }
 
 void ContextData::onProgress(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *)
@@ -784,7 +785,7 @@ svn_error_t *ContextData::onWcConflictResolver(svn_wc_conflict_result_t **result
     Q_UNUSED(description);
     Q_UNUSED(baton);
     Q_UNUSED(pool);
-    return svn_error_create(SVN_ERR_CANCELLED, NULL, tr("invalid subversion version."));
+    return svn_error_create(SVN_ERR_CANCELLED, NULL, QCoreApplication::translate("svnqt", "invalid subversion version."));
 #endif
 }
 
@@ -800,7 +801,7 @@ svn_error_t *ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, co
     Q_UNUSED(may_save_plaintext);
     Q_UNUSED(realmstring);
     Q_UNUSED(baton);
-    return svn_error_create(SVN_ERR_CANCELLED, NULL, QObject::tr("invalid subversion version.").toUtf8());
+    return svn_error_create(SVN_ERR_CANCELLED, NULL, QCoreApplication::translate("svnqt", "invalid subversion version.").toUtf8());
 #endif
 }
 

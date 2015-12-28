@@ -100,8 +100,7 @@ public:
     SvnActionsData()
     {
         m_ParentList = NULL;
-        m_Svnclient = svn::Client::getobject(0, 0);
-        m_CurrentContext = 0;
+        m_Svnclient = svn::Client::getobject(svn::ContextP());
         runblocked = false;
     }
 
@@ -236,7 +235,7 @@ void SvnActions::reInitClient()
     if (m_Data->m_CurrentContext) {
         m_Data->m_CurrentContext->setListener(0L);
     }
-    m_Data->m_CurrentContext = new svn::Context();
+    m_Data->m_CurrentContext = svn::ContextP(new svn::Context);
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContextListener);
     m_Data->m_Svnclient->setContext(m_Data->m_CurrentContext);
     ///@todo workaround has to be replaced

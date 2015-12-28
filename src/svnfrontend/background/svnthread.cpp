@@ -27,17 +27,17 @@
 #include <kdebug.h>
 
 SvnThread::SvnThread(QObject *_parent)
-    : QThread(), m_Parent(_parent)
+    : QThread()
+    , m_CurrentContext(new svn::Context)
+    , m_Parent(_parent)
 {
-    m_CurrentContext = new svn::Context();
-
     m_SvnContextListener = new ThreadContextListener(m_Parent);
     if (m_Parent) {
         QObject::connect(m_SvnContextListener, SIGNAL(sendNotify(QString)), m_Parent, SLOT(slotNotifyMessage(QString)));
     }
 
     m_CurrentContext->setListener(m_SvnContextListener);
-    m_Svnclient = svn::Client::getobject(m_CurrentContext, 0);
+    m_Svnclient = svn::Client::getobject(m_CurrentContext);
 }
 
 SvnThread::~SvnThread()

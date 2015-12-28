@@ -67,11 +67,9 @@ int main(int, char **)
         return -1;
     }
 
-    svn::ContextP m_CurrentContext;
-    svn::Client *m_Svnclient;
-    m_Svnclient = svn::Client::getobject(0, 0);
+    svn::Client *m_Svnclient = svn::Client::getobject(svn::ContextP());
     TestListener tl;
-    m_CurrentContext = new svn::Context();
+    svn::ContextP m_CurrentContext(new svn::Context);
     m_CurrentContext->setListener(&tl);
     p = "file://" + p;
 

@@ -31,6 +31,7 @@
 #include <QList>
 #include <QMap>
 #include <QPair>
+#include <QSharedPointer>
 
 namespace svn
 {
@@ -59,7 +60,8 @@ class AnnotateParameter;
 class UpdateParameter;
 
 typedef QList<AnnotateLine> AnnotatedFile;
-typedef smart_pointer<svn::Context> ContextP;
+typedef QSharedPointer<svn::Context> ContextP;
+typedef QWeakPointer<svn::Context> ContextWP;
 
 typedef SharedPointer<DirEntry> DirEntryPtr;
 typedef QList<DirEntryPtr> DirEntries;

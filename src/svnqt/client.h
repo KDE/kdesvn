@@ -89,10 +89,9 @@ public:
     /**
      * get a real instance. Result must cleaned with delete.
      * \param context The context to use
-     * \param subtype the wanted implementation - this moment only 0 allowed.
      * \return an instance of client or 0L if error.
      */
-    static Client *getobject(ContextP context, int subtype = 0);
+    static Client *getobject(const ContextP &context);
 
     /**
      * Enumerates all files/dirs at a given path.

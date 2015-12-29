@@ -63,11 +63,11 @@ bool SshAgent::querySshAgent()
     }
 
     // Did the user already start a ssh-agent process?
-    QByteArray pid = qgetenv("SSH_AGENT_PID");
-    if (pid.length() != 0) {
+    const QByteArray pid = qgetenv("SSH_AGENT_PID");
+    if (!pid.isEmpty()) {
         m_pid = QString::fromLocal8Bit(pid);
 
-        QByteArray sock = qgetenv("SSH_AUTH_SOCK");
+        const QByteArray sock = qgetenv("SSH_AUTH_SOCK");
         if (!sock.isEmpty()) {
             m_authSock = QString::fromLocal8Bit(sock);
         }
@@ -106,7 +106,8 @@ bool SshAgent::addSshIdentities(bool force)
         return true;
     }
 
-    if (!m_isRunning || (!m_isOurAgent && !force)) {
+    if (!m_isRunning) {
+        kWarning() << "No ssh-agent is running, can not execute ssh-add";
         return false;
     }
 

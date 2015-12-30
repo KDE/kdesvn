@@ -2286,9 +2286,9 @@ void MainTreeWidget::slotDirUpdate()
     if (which.isEmpty()) {
         what.append(baseUri());
     } else {
-        SvnItemListConstIterator liter = which.constBegin();
-        for (; liter != which.constEnd(); ++liter) {
-            what.append((*liter)->fullName());
+        what.reserve(which.size());
+        Q_FOREACH(const SvnItem *item, which) {
+            what.append(item->fullName());
         }
     }
     m_Data->m_Model->svnWrapper()->makeUpdate(what, svn::Revision::HEAD, svn::DepthUnknown);

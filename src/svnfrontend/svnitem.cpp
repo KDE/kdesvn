@@ -23,7 +23,6 @@
 #include "kdesvn_part.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/svnqt/status.h"
-#include "src/svnqt/smart_pointer.h"
 #include "src/svnqt/url.h"
 #include "helpers/ktranslateurl.h"
 
@@ -559,7 +558,8 @@ const QString &SvnItem::getToolTipText()
                 /* local */
             }
             if (wrap) {
-                QList<SvnItem *> lst; lst.append(this);
+                SvnItemList lst;
+                lst.append(this);
                 text = wrap->getInfo(lst, rev, peg, false, false);
                 kDebug() << text << endl;
                 if (!p_Item->m_fitem.isNull()) {

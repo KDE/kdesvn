@@ -52,6 +52,7 @@
 #include "src/svnqt/cache/LogCache.h"
 #include "src/svnqt/cache/ReposLog.h"
 #include "src/svnqt/cache/ReposConfig.h"
+#include "src/svnqt/shared_pointer.h"
 
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"
@@ -1495,9 +1496,9 @@ void SvnActions::prepareUpdate(bool ask)
     if (k.isEmpty()) {
         what.append(m_Data->m_ParentList->baseUri());
     } else {
-        SvnItemListConstIterator liter = k.constBegin();
-        for (; liter != k.constEnd(); ++liter) {
-            what.append((*liter)->fullName());
+        what.reserve(k.size());
+        Q_FOREACH(const SvnItem *item, k) {
+            what.append(item->fullName());
         }
     }
     svn::Revision r(svn::Revision::HEAD);
@@ -1556,9 +1557,7 @@ void SvnActions::makeAdd(bool rec)
     }
     svn::Paths items;
     items.reserve(lst.size());
-    SvnItemListConstIterator liter = lst.constBegin();
-    for (; liter != lst.constEnd(); ++liter) {
-        const SvnItem *cur = (*liter);
+    Q_FOREACH(const SvnItem *cur, lst) {
         if (cur->isVersioned()) {
             KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br>%1<br>is versioned - break.</center>",
                                cur->fullName()));
@@ -1757,9 +1756,8 @@ void SvnActions::slotRevert()
     const SvnItemList lst = m_Data->m_ParentList->SelectionList();
     QStringList displist;
     if (!lst.isEmpty()) {
-        SvnItemListConstIterator liter = lst.constBegin();
-        for (; liter != lst.constEnd(); ++liter) {
-            const SvnItem *cur = (*liter);
+        displist.reserve(lst.size());
+        Q_FOREACH(const SvnItem *cur, lst) {
             if (!cur->isVersioned()) {
                 KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br>%1<br>is not versioned - break.</center>", cur->fullName()));
                 return;

@@ -20,13 +20,9 @@
 #ifndef FRONTEND_TYPES_H
 #define FRONTEND_TYPES_H
 
-#include "svnqt/smart_pointer.h"
 #include <QVector>
 
-class ThreadContextListener;
 class SvnItem;
-
-typedef svn::smart_pointer<ThreadContextListener> ThreadContextListenerP;
 
 typedef QVector<SvnItem *> SvnItemList;
 

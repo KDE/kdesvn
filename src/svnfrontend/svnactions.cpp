@@ -52,7 +52,6 @@
 #include "src/svnqt/cache/LogCache.h"
 #include "src/svnqt/cache/ReposLog.h"
 #include "src/svnqt/cache/ReposConfig.h"
-#include "src/svnqt/shared_pointer.h"
 
 #include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"

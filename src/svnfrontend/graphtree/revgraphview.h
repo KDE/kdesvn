@@ -21,7 +21,6 @@
 #define REVGRAPHVIEW_H
 
 #include <svnqt/revision.h>
-#include <svnqt/shared_pointer.h>
 
 #include <QContextMenuEvent>
 #include <QGraphicsView>
@@ -43,8 +42,6 @@ class GraphMark;
 class PannerView;
 class QGraphicsScene;
 class GraphTreeLabel;
-
-typedef svn::SharedPointer<KTemporaryFile> TempFilePtr;
 
 /**
     @author Rajko Albrecht <ral@alwins-world.de>
@@ -112,7 +109,7 @@ protected:
     svn::Client *m_Client;
     GraphTreeLabel *m_Selected;
     QObject *m_Listener;
-    TempFilePtr dotTmpFile;
+    KTemporaryFile *m_dotTmpFile;
     QString dotOutput;
     KProcess *renderProcess;
     trevTree m_Tree;

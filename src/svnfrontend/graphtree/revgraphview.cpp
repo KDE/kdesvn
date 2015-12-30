@@ -57,7 +57,7 @@ RevGraphView::RevGraphView(QObject *aListener, svn::Client *_client, QWidget *pa
     m_Scene = 0L;
     m_Client = _client;
     m_Listener = aListener;
-    dotTmpFile = 0;
+    m_dotTmpFile = 0;
     m_Selected = 0;
     renderProcess = 0;
     m_Marker = 0;
@@ -79,7 +79,7 @@ RevGraphView::~RevGraphView()
 {
     setScene(0);
     delete m_Scene;
-    dotTmpFile = 0;
+    delete m_dotTmpFile;
     delete m_CompleteView;
     delete renderProcess;
 }
@@ -194,9 +194,9 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             m_Scene->setBackgroundBrush(Qt::white);
             continue;
         }
-        if ((cmd != "node") && (cmd != "edge")) {
+        if (m_dotTmpFile && (cmd != "node") && (cmd != "edge")) {
             kWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
-                       << dotTmpFile->fileName() << ":" << lineno << ")" << endl;
+                       << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
             continue;
         }
         if (cmd == "node") {
@@ -447,21 +447,22 @@ QString RevGraphView::getLabelstring(const QString &nodeName)
 
 void RevGraphView::dumpRevtree()
 {
-    if (dotTmpFile) {
-        dotTmpFile->close();
+    if (m_dotTmpFile) {
+        m_dotTmpFile->close();
+        delete m_dotTmpFile;
     }
     clear();
     dotOutput.clear();
-    dotTmpFile = new KTemporaryFile;
-    dotTmpFile->setSuffix(".dot");
-    dotTmpFile->setAutoRemove(true);
-    dotTmpFile->open();
+    m_dotTmpFile = new KTemporaryFile;
+    m_dotTmpFile->setSuffix(".dot");
+    m_dotTmpFile->setAutoRemove(true);
+    m_dotTmpFile->open();
 
-    if (!dotTmpFile->open()) {
-        showText(i18n("Could not open temporary file %1 for writing.", dotTmpFile->fileName()));
+    if (!m_dotTmpFile->open()) {
+        showText(i18n("Could not open temporary file %1 for writing.", m_dotTmpFile->fileName()));
         return;
     }
-    QTextStream stream(dotTmpFile);
+    QTextStream stream(m_dotTmpFile);
     QFont f = KGlobalSettings::fixedFont();
     QFontMetrics _fm(KGlobalSettings::fixedFont());
     int _fontsize = _fm.height();
@@ -510,7 +511,7 @@ void RevGraphView::dumpRevtree()
     renderProcess = new KProcess();
     renderProcess->setEnv("LANG", "C");
     *renderProcess << "dot";
-    *renderProcess << dotTmpFile->fileName() << "-Tplain";
+    *renderProcess << m_dotTmpFile->fileName() << "-Tplain";
     connect(renderProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
             this, SLOT(dotExit(int,QProcess::ExitStatus)));
     connect(renderProcess, SIGNAL(readyReadStandardOutput()),

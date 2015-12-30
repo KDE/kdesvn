@@ -814,7 +814,7 @@ bool ContextData::contextAddListItem(DirEntries *entries, const svn_dirent_t *di
         if (!entries || !dirent) {
             return false;
         }
-        entries->push_back(new DirEntry(/*QString::fromUtf8(path)*/path, dirent, lock));
+        entries->push_back(DirEntry(path, dirent, lock));
         return true;
     }
     return getListener()->contextAddListItem(entries, dirent, lock, path);
@@ -836,7 +836,7 @@ bool ContextListener::contextAddListItem(DirEntries *entries, const svn_dirent_t
     if (!entries || !dirent) {
         return false;
     }
-    entries->push_back(new DirEntry(/*QString::fromUtf8(path)*/path, dirent, lock));
+    entries->push_back(DirEntry(path, dirent, lock));
     return true;
 }
 

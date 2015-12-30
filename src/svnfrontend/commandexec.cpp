@@ -487,12 +487,12 @@ void CommandExec::slotCmd_list()
     if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0], res, rev, svn::DepthInfinity)) {
         return;
     }
-    for (long i = 0; i < res.count(); ++i) {
-        QString d = svn::DateTime(res[i]->time()).toString(QString("yyyy-MM-dd hh:mm::ss"));
+    Q_FOREACH(const svn::DirEntry &entry, res) {
+        QString d = svn::DateTime(entry.time()).toString(QString("yyyy-MM-dd hh:mm::ss"));
         m_pCPart->Stdout
-                << (res[i]->kind() == svn_node_dir ? "D" : "F") << " "
+                << (entry.kind() == svn_node_dir ? "D" : "F") << " "
                 << d << " "
-                << res[i]->name() << endl;
+                << entry.name() << endl;
     }
 }
 

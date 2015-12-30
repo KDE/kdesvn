@@ -79,7 +79,7 @@ public:
     /**
      * converting constructor
      */
-    Status(const QString &path, const DirEntryPtr &src);
+    Status(const QString &path, const DirEntry &src);
     /**
      * converting constructor
      */

@@ -79,6 +79,8 @@ public:
     DirEntry &
     operator = (const DirEntry &);
 
+    bool isEmpty() const { return name().isEmpty(); }
+
     const QString &
     name() const;
 

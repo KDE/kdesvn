@@ -277,9 +277,9 @@ localStatus(const StatusParameter &params,
 }
 
 static StatusPtr
-dirEntryToStatus(const Path &path, DirEntryPtr dirEntry)
+dirEntryToStatus(const Path &path, const DirEntry &dirEntry)
 {
-    QString url = path.path() + QLatin1Char('/') + dirEntry->name();
+    QString url = path.path() + QLatin1Char('/') + dirEntry.name();
     return StatusPtr(new Status(url, dirEntry));
 }
 
@@ -299,8 +299,8 @@ remoteStatus(Client *client,
 
     StatusEntries entries;
     for (it = dirEntries.constBegin(); it != dirEntries.constEnd(); ++it) {
-        DirEntryPtr dirEntry = *it;
-        if (dirEntry->name().isEmpty()) {
+        DirEntry dirEntry = *it;
+        if (dirEntry.name().isEmpty()) {
             continue;
         }
         entries.push_back(dirEntryToStatus(params.path(), dirEntry));
@@ -364,22 +364,21 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
                 pool);
 #endif
     Client_impl::checkErrorThrow(error);
-    if (baton.entries.size() == 0) {
+    if (baton.entries.isEmpty()) {
         return StatusPtr(new Status());
     }
 
-    return baton.entries[0];
-};
+    return baton.entries.at(0);
+}
 
 static StatusPtr
 remoteSingleStatus(Client *client, const Path &path, const Revision revision, const ContextP &)
 {
-    InfoEntries infoEntries = client->info(path, DepthEmpty, revision, Revision(Revision::UNDEFINED));
-    if (infoEntries.size() == 0) {
+    const InfoEntries infoEntries = client->info(path, DepthEmpty, revision, Revision(Revision::UNDEFINED));
+    if (infoEntries.isEmpty()) {
         return StatusPtr(new Status());
-    } else {
-        return infoEntryToStatus(path, infoEntries [0]);
     }
+    return infoEntryToStatus(path, infoEntries.at(0));
 }
 
 StatusPtr

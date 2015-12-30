@@ -74,7 +74,7 @@ public:
     /**
      * converting constructr
      */
-    Entry(const QString &url, const DirEntryPtr &src);
+    Entry(const QString &url, const DirEntry &src);
     /**
      * converting constructr
      */

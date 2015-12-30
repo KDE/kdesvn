@@ -28,7 +28,6 @@
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/shared_pointer.h"
 
-#include <QList>
 #include <QMap>
 #include <QPair>
 #include <QSharedPointer>
@@ -60,38 +59,33 @@ class CommitParameter;
 class AnnotateParameter;
 class UpdateParameter;
 
-typedef QList<AnnotateLine> AnnotatedFile;
+typedef QVector<AnnotateLine> AnnotatedFile;
 typedef QSharedPointer<svn::Context> ContextP;
 typedef QWeakPointer<svn::Context> ContextWP;
 
-typedef SharedPointer<DirEntry> DirEntryPtr;
-typedef QList<DirEntryPtr> DirEntries;
-typedef QList<InfoEntry> InfoEntries;
+typedef QVector<DirEntry> DirEntries;
+typedef QVector<InfoEntry> InfoEntries;
 /// simple list of log entries
-typedef QList<LogEntry> LogEntries;
-/// shared_pointer for LogEntriesMap
-typedef SharedPointer<LogEntries> LogEntriesPtr;
+typedef QVector<LogEntry> LogEntries;
 
 /// map of logentries - key is revision
 typedef QMap<long, LogEntry> LogEntriesMap;
-/// shared_pointer for LogEntriesMap
-typedef SharedPointer<LogEntriesMap> LogEntriesMapPtr;
 
 typedef SharedPointer<Status> StatusPtr;
-typedef QList<StatusPtr> StatusEntries;
-typedef QList<Revision> Revisions;
+typedef QVector<StatusPtr> StatusEntries;
+typedef QVector<Revision> Revisions;
 
 /** Range of Revision */
 typedef QPair<Revision, Revision> RevisionRange;
 /** list of revision ranges */
-typedef QList<RevisionRange> RevisionRanges;
+typedef QVector<RevisionRange> RevisionRanges;
 
 /// map of property names to values
 typedef QMap<QString, QString> PropertiesMap;
 /// pair of path, PropertiesMap
 typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
 /// vector of path, Properties pairs
-typedef QList<PathPropertiesMapEntry> PathPropertiesMapList;
+typedef QVector<PathPropertiesMapEntry> PathPropertiesMapList;
 /// shared pointer for properties
 typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 

@@ -61,7 +61,7 @@ public:
     void
     init(const Entry_private &src);
     void
-    init(const QString &url, const DirEntryPtr &src);
+    init(const QString &url, const DirEntry &src);
     void
     init(const QString &url, const InfoEntry &src);
 };
@@ -175,21 +175,21 @@ Entry_private::init(const Entry_private &src)
     m_valid = src.m_valid;
 }
 
-void Entry_private::init(const QString &url, const DirEntryPtr &dirEntry)
+void Entry_private::init(const QString &url, const DirEntry &dirEntry)
 {
     init(0);
     _url = url;
-    if (dirEntry) {
-        _name = dirEntry->name();
-        _revision = dirEntry->createdRev();
-        _kind = dirEntry->kind();
+    if (!dirEntry.isEmpty()) {
+        _name = dirEntry.name();
+        _revision = dirEntry.createdRev();
+        _kind = dirEntry.kind();
         _schedule = svn_wc_schedule_normal;
-        _text_time = dirEntry->time();
-        _prop_time = dirEntry->time();
-        _cmt_rev = dirEntry->createdRev();
-        _cmt_date = dirEntry->time();
-        _cmt_author = dirEntry->lastAuthor();
-        m_Lock = dirEntry->lockEntry();
+        _text_time = dirEntry.time();
+        _prop_time = dirEntry.time();
+        _cmt_rev = dirEntry.createdRev();
+        _cmt_date = dirEntry.time();
+        _cmt_author = dirEntry.lastAuthor();
+        m_Lock = dirEntry.lockEntry();
         m_valid = true;
     }
 }
@@ -227,7 +227,7 @@ Entry::Entry(const Entry &src)
     }
 }
 
-Entry::Entry(const QString &url, const DirEntryPtr &src)
+Entry::Entry(const QString &url, const DirEntry &src)
     : m_Data(new Entry_private())
 {
     m_Data->init(url, src);

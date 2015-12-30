@@ -55,7 +55,7 @@ public:
     void
     init(const QString &path, const Status_private &src);
     void
-    init(const QString &url, const DirEntryPtr &src);
+    init(const QString &url, const DirEntry &src);
     void
     init(const QString &url, const InfoEntry &src);
 
@@ -143,14 +143,14 @@ Status_private::init(const QString &path, const Status_private &src)
     _switched = src._switched;
 }
 
-void Status_private::init(const QString &url, const DirEntryPtr &src)
+void Status_private::init(const QString &url, const DirEntry &src)
 {
     m_entry = Entry(url, src);
     setPath(url);
     _text_status = svn_wc_status_normal;
     _prop_status = svn_wc_status_normal;
-    if (src) {
-        m_Lock = src->lockEntry();
+    if (!src.isEmpty()) {
+        m_Lock = src.lockEntry();
         m_isVersioned = true;
         m_hasReal = true;
     }
@@ -196,7 +196,7 @@ Status::Status(const char *path, svn_wc_status2_t *status)
     m_Data->init(QString::fromUtf8(path), status);
 }
 
-Status::Status(const QString &url, const DirEntryPtr &src)
+Status::Status(const QString &url, const DirEntry &src)
     : m_Data(new Status_private())
 {
     m_Data->init(url, src);

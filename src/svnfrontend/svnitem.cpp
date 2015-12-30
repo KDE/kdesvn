@@ -38,22 +38,19 @@
 #include <QFileInfo>
 #include <QImage>
 #include <QPainter>
-#include <QBitmap>
 #include <QPixmap>
 #include <QMutexLocker>
 
-class SvnItem_p: public svn::ref_count
+class SvnItem_p
 {
-    friend class SvnItem;
 public:
     SvnItem_p();
     explicit SvnItem_p(const svn::StatusPtr &);
-    virtual ~SvnItem_p();
+
     KFileItem &createItem(const svn::Revision &peg);
     KUrl &kdeName(const svn::Revision &);
-    KMimeType::Ptr mimeType(bool dir = false);
+    KMimeType::Ptr mimeType(bool dir);
 
-protected:
     svn::StatusPtr m_Stat;
     void init();
     QString m_url, m_full, m_short;
@@ -68,23 +65,21 @@ protected:
 };
 
 SvnItem_p::SvnItem_p()
-    : ref_count(), m_Stat(new svn::Status())
+    : m_Stat(new svn::Status())
 {
     init();
 }
 
 SvnItem_p::SvnItem_p(const svn::StatusPtr &aStat)
-    : ref_count(), m_Stat(aStat)
+    : m_Stat(aStat)
 {
     init();
 }
 
-SvnItem_p::~SvnItem_p()
-{
-}
 
 void SvnItem_p::init()
 {
+    isWc = false;
     m_full = m_Stat->path();
     m_kdename.clear();
     mptr = 0;

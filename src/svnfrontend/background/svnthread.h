@@ -43,7 +43,7 @@ public:
 protected:
     svn::ContextP m_CurrentContext;
     svn::ClientP m_Svnclient;
-    svn::smart_pointer<ThreadContextListener> m_SvnContextListener;
+    ThreadContextListener *m_SvnContextListener;
     QObject *m_Parent;
 
     //! a base method often needed

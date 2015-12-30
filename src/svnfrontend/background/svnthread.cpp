@@ -30,11 +30,12 @@ SvnThread::SvnThread(QObject *_parent)
     : QThread()
     , m_CurrentContext(new svn::Context)
     , m_Svnclient(svn::Client::getobject(m_CurrentContext))
+    , m_SvnContextListener(new ThreadContextListener(_parent))
     , m_Parent(_parent)
 {
-    m_SvnContextListener = new ThreadContextListener(m_Parent);
     if (m_Parent) {
-        QObject::connect(m_SvnContextListener, SIGNAL(sendNotify(QString)), m_Parent, SLOT(slotNotifyMessage(QString)));
+        QObject::connect(m_SvnContextListener, SIGNAL(sendNotify(QString)),
+                         m_Parent, SLOT(slotNotifyMessage(QString)));
     }
 
     m_CurrentContext->setListener(m_SvnContextListener);
@@ -43,7 +44,7 @@ SvnThread::SvnThread(QObject *_parent)
 SvnThread::~SvnThread()
 {
     m_CurrentContext->setListener(0);
-    m_SvnContextListener = 0;
+    delete m_SvnContextListener;
 }
 
 void SvnThread::cancelMe()

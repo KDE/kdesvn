@@ -99,10 +99,11 @@ class SvnActionsData
 {
 public:
     SvnActionsData()
+        : m_ParentList(NULL)
+        , m_SvnContextListener(NULL)
+        , m_Svnclient(svn::Client::getobject(svn::ContextP()))
+        , runblocked(false)
     {
-        m_ParentList = NULL;
-        m_Svnclient = svn::Client::getobject(svn::ContextP());
-        runblocked = false;
     }
 
     ~SvnActionsData()
@@ -116,6 +117,7 @@ public:
             m_LogDialog->saveSize();
             delete m_LogDialog;
         }
+        delete m_SvnContextListener;
     }
 
     bool isExternalDiff() const
@@ -171,7 +173,7 @@ public:
 
     ItemDisplay *m_ParentList;
 
-    svn::smart_pointer<CContextListener> m_SvnContextListener;
+    CContextListener *m_SvnContextListener;
     svn::ContextP m_CurrentContext;
     svn::ClientP m_Svnclient;
 

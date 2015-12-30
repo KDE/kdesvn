@@ -21,7 +21,6 @@
 #define CCONTEXTLISTENER_H
 
 #include "src/svnqt/context_listener.h"
-#include "src/svnqt/smart_pointer.h"
 
 #include <QObject>
 #include <QString>
@@ -31,7 +30,7 @@ class CContextListenerData;
 /**
 @author Rajko Albrecht
 */
-class CContextListener : public QObject, public svn::ContextListener, public svn::ref_count
+class CContextListener : public QObject, public svn::ContextListener
 {
     Q_OBJECT
 public:

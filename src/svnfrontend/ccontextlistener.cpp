@@ -33,7 +33,7 @@
 #include <kmessagebox.h>
 
 #include <QTextStream>
-#include <qthread.h>
+#include <QMutex>
 
 class CContextListenerData
 {
@@ -118,9 +118,10 @@ QString CContextListener::NotifyState(svn_wc_notify_state_t state)
 }
 
 CContextListener::CContextListener(QObject *parent)
-    : QObject(parent), svn::ContextListener(), ref_count()
+    : QObject(parent)
+    , svn::ContextListener()
+    , m_Data(new CContextListenerData())
 {
-    m_Data = new CContextListenerData();
 }
 
 CContextListener::~CContextListener()

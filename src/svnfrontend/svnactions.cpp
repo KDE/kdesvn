@@ -94,11 +94,10 @@
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
 
-class SvnActionsData: public svn::ref_count
+class SvnActionsData
 {
-    typedef svn::SharedPointer<svn::PathPropertiesMapList> sPPlist;
 public:
-    SvnActionsData(): ref_count()
+    SvnActionsData()
     {
         m_ParentList = NULL;
         m_Svnclient = svn::Client::getobject(0, 0);
@@ -106,7 +105,7 @@ public:
         runblocked = false;
     }
 
-    virtual ~SvnActionsData()
+    ~SvnActionsData()
     {
         if (m_DiffDialog) {
             KConfigGroup _kc(Kdesvnsettings::self()->config(), "diff_display");
@@ -122,7 +121,7 @@ public:
         m_Svnclient = 0L;
     }
 
-    bool isExternalDiff()
+    bool isExternalDiff() const
     {
         if (Kdesvnsettings::use_external_diff()) {
             QString edisp = Kdesvnsettings::external_diff_display();

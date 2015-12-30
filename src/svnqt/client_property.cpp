@@ -49,8 +49,8 @@ namespace svn
 
 static svn_error_t *ProplistReceiver(void *baton, const char *path, apr_hash_t *prop_hash, apr_pool_t *pool)
 {
-    Client_impl::propBaton *_baton = (Client_impl::propBaton *)baton;
-    PathPropertiesMapList *mapList = (PathPropertiesMapList *)_baton->resultlist;
+    Client_impl::propBaton *_baton = static_cast<Client_impl::propBaton *>(baton);
+    PathPropertiesMapListPtr mapList = _baton->resultlist;
 
     ContextP l_context = _baton->m_context;
     if (!l_context) {

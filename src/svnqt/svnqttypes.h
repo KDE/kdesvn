@@ -25,9 +25,6 @@
 #ifndef SVNQT_TYPES_H
 #define SVNQT_TYPES_H
 
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/shared_pointer.h"
-
 #include <QMap>
 #include <QPair>
 #include <QSharedPointer>
@@ -70,8 +67,9 @@ typedef QVector<LogEntry> LogEntries;
 
 /// map of logentries - key is revision
 typedef QMap<long, LogEntry> LogEntriesMap;
+typedef QSharedPointer<LogEntriesMap> LogEntriesMapPtr;
 
-typedef SharedPointer<Status> StatusPtr;
+typedef QSharedPointer<Status> StatusPtr;
 typedef QVector<StatusPtr> StatusEntries;
 typedef QVector<Revision> Revisions;
 
@@ -87,7 +85,7 @@ typedef QPair<QString, PropertiesMap> PathPropertiesMapEntry;
 /// vector of path, Properties pairs
 typedef QVector<PathPropertiesMapEntry> PathPropertiesMapList;
 /// shared pointer for properties
-typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
+typedef QSharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 
 typedef QVector<Path> Paths;
 

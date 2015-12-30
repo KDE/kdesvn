@@ -35,9 +35,9 @@ class SvnLogModel: public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name, QObject *parent);
+    SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent);
     virtual ~SvnLogModel();
-    void setLogData(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name);
+    void setLogData(const svn::LogEntriesMapPtr &_log, const QString &_name);
     QVariant data(const QModelIndex &index, int role) const;
 
     virtual QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const;

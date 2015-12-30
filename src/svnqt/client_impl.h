@@ -572,7 +572,7 @@ public:
 
     struct propBaton {
         ContextWP m_context;
-        PathPropertiesMapList *resultlist;
+        PathPropertiesMapListPtr resultlist;
     };
     static void checkErrorThrow(svn_error_t *error)throw(ClientException)
     {

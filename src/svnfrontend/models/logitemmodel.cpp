@@ -47,7 +47,7 @@ public:
     long _left, _right;
 };
 
-SvnLogModel::SvnLogModel(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name, QObject *parent)
+SvnLogModel::SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent)
     : QAbstractItemModel(parent), m_data(new SvnLogModelData)
 {
     setLogData(_log, _name);
@@ -81,7 +81,7 @@ QModelIndex SvnLogModel::parent(const QModelIndex &)const
     return QModelIndex();
 }
 
-void SvnLogModel::setLogData(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &_name)
+void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &_log, const QString &_name)
 {
     beginRemoveRows(QModelIndex(), 0, m_data->m_List.count());
     m_data->m_List.clear();

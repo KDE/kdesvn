@@ -95,7 +95,7 @@ public:
     bool checkModifiedCache(const QString &path);
     bool checkConflictedCache(const QString &path);
     bool checkReposLockCache(const QString &path);
-    bool checkReposLockCache(const QString &path, svn::SharedPointer<svn::Status> &t);
+    bool checkReposLockCache(const QString &path, svn::StatusPtr &t);
     void addModifiedCache(const svn::StatusPtr &what);
     void deleteFromModifiedCache(const QString &what);
 
@@ -121,8 +121,8 @@ public:
                   const svn::Revision &startr = svn::Revision(1),
                   const svn::Revision &endr = svn::Revision::HEAD);
     void makeLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool follow, bool list_files = false, int limit = 0);
-    svn::SharedPointer<svn::LogEntriesMap> getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, QWidget *parent = 0);
-    svn::SharedPointer<svn::LogEntriesMap> getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, bool follow_nodes, QWidget *parent = 0);
+    svn::LogEntriesMapPtr getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, QWidget *parent = 0);
+    svn::LogEntriesMapPtr getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, bool follow_nodes, QWidget *parent = 0);
     virtual bool getSingleLog(svn::LogEntry &, const svn::Revision &, const QString &, const svn::Revision &, QString &root);
 
     void makeBlame(const svn::Revision &start, const svn::Revision &end, SvnItem *k);
@@ -147,7 +147,7 @@ public:
     bool createUpdateCache(const QString &what);
     bool checkUpdateCache(const QString &path)const;
     bool isUpdated(const QString &path)const;
-    bool getUpdated(const QString &path, svn::SharedPointer<svn::Status> &d)const;
+    bool getUpdated(const QString &path, svn::StatusPtr &d)const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList &what, bool exact_only);
     void stopCheckModifiedThread();

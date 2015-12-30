@@ -93,7 +93,7 @@ void SvnLogDlgImp::loadSize()
     restoreDialogSize(_k);
 }
 
-void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap> &_log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl)
+void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl)
 {
     m_peg = peg;
     m_PegUrl = pegUrl;
@@ -116,7 +116,7 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap> &_log, c
         }
     }
     _base = root;
-    m_Entries = _log;
+    m_Entries = log;
     if (!what.isEmpty()) {
         setWindowTitle(i18n("SVN Log of %1", what));
     } else {
@@ -126,10 +126,10 @@ void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap> &_log, c
     if (!_name.startsWith(QLatin1Char('/'))) {
         _name = QLatin1Char('/') + _name;
     }
-    dispLog(_log);
+    dispLog(log);
 }
 
-void SvnLogDlgImp::dispLog(const svn::SharedPointer<svn::LogEntriesMap> &_log)
+void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &_log)
 {
     if (!_log) {
         return;
@@ -313,9 +313,9 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const 
 
 void SvnLogDlgImp::slotGetLogs()
 {
-    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(m_startRevButton->revision(),
-            m_endRevButton->revision(), m_peg,
-            _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 0, Kdesvnsettings::last_node_follow(), this);
+    svn::LogEntriesMapPtr lm = m_Actions->getLog(m_startRevButton->revision(),
+                                                 m_endRevButton->revision(), m_peg,
+                                                 _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 0, Kdesvnsettings::last_node_follow(), this);
     if (lm) {
         dispLog(lm);
     }
@@ -331,9 +331,9 @@ void SvnLogDlgImp::slotPrevFifty()
     if (begin.revnum() < 1) {
         begin = 1;
     }
-    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(begin,
-            (begin.revnum() > 50 ? svn::Revision::START : svn::Revision::HEAD), m_peg,
-            _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 50, Kdesvnsettings::last_node_follow(), this);
+    svn::LogEntriesMapPtr lm = m_Actions->getLog(begin,
+                                                 (begin.revnum() > 50 ? svn::Revision::START : svn::Revision::HEAD), m_peg,
+                                                 _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 50, Kdesvnsettings::last_node_follow(), this);
     if (lm) {
         dispLog(lm);
     }
@@ -341,9 +341,9 @@ void SvnLogDlgImp::slotPrevFifty()
 
 void SvnLogDlgImp::slotBeginHead()
 {
-    svn::SharedPointer<svn::LogEntriesMap> lm = m_Actions->getLog(svn::Revision::HEAD,
-            1, m_peg,
-            _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 50, Kdesvnsettings::last_node_follow(), this);
+    svn::LogEntriesMapPtr lm = m_Actions->getLog(svn::Revision::HEAD,
+                                                 1, m_peg,
+                                                 _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 50, Kdesvnsettings::last_node_follow(), this);
     if (lm) {
         dispLog(lm);
     }
@@ -357,17 +357,17 @@ void SvnLogDlgImp::slotListEntries()
         buttonListFiles->setEnabled(false);
         return;
     }
-    if (ptr->changedPaths().count() == 0) {
-        svn::SharedPointer<svn::LogEntriesMap>_log = m_Actions->getLog(ptr->revision(), ptr->revision(), ptr->revision(),
-                _name, true, 0, Kdesvnsettings::last_node_follow());
+    if (ptr->changedPaths().isEmpty()) {
+        svn::LogEntriesMapPtr _log = m_Actions->getLog(ptr->revision(), ptr->revision(), ptr->revision(),
+                                                       _name, true, 0, Kdesvnsettings::last_node_follow());
         if (!_log) {
             return;
         }
-        if (_log->count() > 0) {
+        if (!_log->isEmpty()) {
             ptr->setChangedPaths((*_log)[ptr->revision()]);
         }
     }
-    if (ptr->changedPaths().count() == 0) {
+    if (ptr->changedPaths().isEmpty()) {
         m_CurrentModel->fillChangedPaths(_index, m_ChangedList);
     }
     buttonListFiles->setEnabled(false);

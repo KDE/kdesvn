@@ -244,7 +244,7 @@ void SvnActions::reInitClient()
 
 void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &which, bool follow, bool list_files, int limit)
 {
-    svn::SharedPointer<svn::LogEntriesMap> logs = getLog(start, end, peg, which, list_files, limit, follow);
+    svn::LogEntriesMapPtr logs = getLog(start, end, peg, which, list_files, limit, follow);
     if (!logs) {
         return;
     }
@@ -281,18 +281,18 @@ void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, c
     EMIT_FINISHED;
 }
 
-svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &which, bool list_files,
-        int limit, QWidget *parent)
+svn::LogEntriesMapPtr SvnActions::getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &which, bool list_files,
+                                         int limit, QWidget *parent)
 {
     return getLog(start, end, peg, which, list_files, limit, Kdesvnsettings::log_follows_nodes(), parent);
 }
 
-svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &which, bool list_files,
-        int limit, bool follow, QWidget *parent)
+svn::LogEntriesMapPtr SvnActions::getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &which, bool list_files,
+                                         int limit, bool follow, QWidget *parent)
 {
-    svn::SharedPointer<svn::LogEntriesMap> logs = new svn::LogEntriesMap;
+    svn::LogEntriesMapPtr logs;
     if (!m_Data->m_CurrentContext) {
-        return 0;
+        return logs;
     }
 
     bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().size() > 0 ? m_Data->m_ParentList->baseUri() : which);
@@ -304,35 +304,43 @@ svn::SharedPointer<svn::LogEntriesMap> SvnActions::getLog(const svn::Revision &s
         StopDlg sdlg(m_Data->m_SvnContextListener, (parent ? parent : m_Data->m_ParentList->realWidget()),
                      i18n("Logs"), i18n("Getting logs - hit Cancel for abort"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        logs = svn::LogEntriesMapPtr(new svn::LogEntriesMap);
         if (doNetworking()) {
-            m_Data->m_Svnclient->log(params, *logs);
+            if (!m_Data->m_Svnclient->log(params, *logs)) {
+                logs.clear();
+                return logs;
+            }
         } else {
             svn::InfoEntry e;
             if (!singleInfo(m_Data->m_ParentList->baseUri(), svn::Revision::BASE, e)) {
-                return 0;
+                logs.clear();
+                return logs;
             }
             if (svn::Url::isLocal(e.reposRoot())) {
-                m_Data->m_Svnclient->log(params, *logs);
+                if (!m_Data->m_Svnclient->log(params, *logs)) {
+                    logs.clear();
+                    return logs;
+                }
             } else {
                 svn::cache::ReposLog rl(m_Data->m_Svnclient, e.reposRoot());
                 QString s1, s2, what;
                 s1 = e.url().mid(e.reposRoot().length());
-                if (which == ".") {
+                if (which == QLatin1String(".")) {
                     what = s1;
                 } else {
                     s2 = which.mid(m_Data->m_ParentList->baseUri().length());
-                    what = s1 + '/' + s2;
+                    what = s1 + QLatin1Char('/') + s2;
                 }
                 rl.log(what, start, end, peg, *logs, !follow, limit);
             }
         }
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
-        return 0;
+        logs.clear();
     }
-    if (!logs) {
+    if (logs && logs->isEmpty()) {
+        logs.clear();
         emit clientException(i18n("Got no logs"));
-        return 0;
     }
     return logs;
 }
@@ -369,7 +377,7 @@ bool SvnActions::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QS
     }
 
     if (!res) {
-        svn::SharedPointer<svn::LogEntriesMap> log = getLog(r, r, peg, root, true, 1);
+        svn::LogEntriesMapPtr log = getLog(r, r, peg, root, true, 1);
         if (log) {
             const svn::LogEntriesMap::const_iterator it = log->constFind(r.revnum());
             if (it != log->constEnd()) {
@@ -846,7 +854,7 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                 text += rb + i18n("Lock comment") + cs +
                         (*it).lockEntry().Comment() + re;
             } else {
-                svn::SharedPointer<svn::Status> d;
+                svn::StatusPtr d;
                 if (checkReposLockCache(_what, d) && d && d->lockEntry().Locked()) {
                     text += rb + i18n("Lock token") + cs + (d->lockEntry().Token()) + re;
                     text += rb + i18n("Owner") + cs + (d->lockEntry().Owner()) + re;
@@ -2608,7 +2616,7 @@ bool SvnActions::checkReposLockCache(const QString &path)
     return m_Data->m_repoLockCache.findSingleValid(path, false);
 }
 
-bool SvnActions::checkReposLockCache(const QString &path, svn::SharedPointer<svn::Status> &t)
+bool SvnActions::checkReposLockCache(const QString &path, svn::StatusPtr &t)
 {
     /// @todo create a method where svn::Status* will be a parameter so no copy is needed but just reading content
     return m_Data->m_repoLockCache.findSingleValid(path, t);
@@ -2698,11 +2706,11 @@ void SvnActions::removeFromUpdateCache(const QStringList &what, bool exact_only)
 
 bool SvnActions::isUpdated(const QString &path)const
 {
-    svn::SharedPointer<svn::Status> d;
-    return m_Data->m_UpdateCache.findSingleValid(path, d);
+    svn::StatusPtr d;
+    return getUpdated(path, d);
 }
 
-bool SvnActions::getUpdated(const QString &path, svn::SharedPointer<svn::Status> &d)const
+bool SvnActions::getUpdated(const QString &path, svn::StatusPtr &d)const
 {
     return m_Data->m_UpdateCache.findSingleValid(path, d);
 }

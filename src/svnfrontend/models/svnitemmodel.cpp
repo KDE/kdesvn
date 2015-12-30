@@ -596,7 +596,7 @@ bool SvnItemModel::refreshItem(SvnItemModelNode *item)
     try {
         item->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(item->fullName(), false, m_Data->m_Display->baseRevision()));
     } catch (const svn::ClientException &e) {
-        item->setStat(new svn::Status());
+        item->setStat(svn::StatusPtr());
         return false;
     }
     return true;
@@ -755,7 +755,7 @@ bool SvnItemModel::checkRootNode()
         m_Data->m_rootNode->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(m_Data->m_Display->baseUri(),
                                                                                     false, m_Data->m_Display->baseRevision()));
     } catch (const svn::ClientException &e) {
-        m_Data->m_rootNode->setStat(new svn::Status());
+        m_Data->m_rootNode->setStat(svn::StatusPtr());
         emit clientException(e.msg());
         return false;
     }

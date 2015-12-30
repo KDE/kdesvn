@@ -78,11 +78,10 @@ public:
     bool makeGet(const svn::Revision &start, const QString &what, const QString &target,
                  const svn::Revision &peg = svn::Revision::UNDEFINED, QWidget *dlgparent = 0);
 
-    bool addItems(const svn::Pathes &items, svn::Depth depth = svn::DepthEmpty);
-    bool addItems(const QStringList &w, svn::Depth depth = svn::DepthEmpty);
+    bool addItems(const svn::Paths &items, svn::Depth depth = svn::DepthEmpty);
     void checkAddItems(const QString &path, bool print_error_box = true);
 
-    bool makeDelete(const svn::Pathes &, bool keep_local = true, bool force = false);
+    bool makeDelete(const svn::Targets &target, bool keep_local = true, bool force = false);
     bool makeDelete(const QStringList &);
     void makeLock(const QStringList &, const QString &, bool);
     void makeUnlock(const QStringList &, bool);

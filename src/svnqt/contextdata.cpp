@@ -407,6 +407,7 @@ svn_error_t *ContextData::onLogMsg(const char **log_msg,
         msg = data->getLogMessage();
     } else {
         CommitItemList _items;
+        _items.reserve(commit_items->nelts);
         for (int j = 0; j < commit_items->nelts; ++j) {
             svn_client_commit_item_t *item = ((svn_client_commit_item_t **)commit_items->elts)[j];
             _items.push_back(CommitItem(item));
@@ -435,6 +436,7 @@ svn_error_t *ContextData::onLogMsg2(const char **log_msg,
         msg = data->getLogMessage();
     } else {
         CommitItemList _items;
+        _items.reserve(commit_items->nelts);
         for (int j = 0; j < commit_items->nelts; ++j) {
             svn_client_commit_item2_t *item = ((svn_client_commit_item2_t **)commit_items->elts)[j];
             _items.push_back(CommitItem(item));
@@ -465,6 +467,7 @@ svn_error_t *ContextData::onLogMsg3(const char **log_msg,
         msg = data->getLogMessage();
     } else {
         CommitItemList _items;
+        _items.reserve(commit_items->nelts);
         for (int j = 0; j < commit_items->nelts; ++j) {
             svn_client_commit_item3_t *item = ((svn_client_commit_item3_t **)commit_items->elts)[j];
             _items.push_back(CommitItem(item));

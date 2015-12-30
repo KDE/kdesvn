@@ -41,6 +41,7 @@
 #include "fronthelpers/DialogStack.h"
 #include "src/ksvnwidgets/commitmsg_impl.h"
 #include "src/ksvnwidgets/deleteform_impl.h"
+#include "src/helpers/sub2qt.h"
 #include "opencontextmenu.h"
 #include "EditIgnorePattern.h"
 #include "setpropertywidget.h"
@@ -1652,7 +1653,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
         KMessageBox::error(this, i18n("Nothing selected for delete"));
         return;
     }
-    svn::Pathes items;
+    svn::Paths items;
     QStringList displist;
     KUrl::List kioList;
     SvnItemList::const_iterator liter;
@@ -1669,7 +1670,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     DeleteForm_impl *ptr = 0;
     QPointer<KDialog> dlg = createYesDialog(&ptr, i18n("Really delete these entries?"), true, QLatin1String("delete_items_dialog"), true);
     ptr->setStringList(displist);
-    ptr->showExtraButtons(isWorkingCopy() && items.size() > 0);
+    ptr->showExtraButtons(isWorkingCopy() && !items.isEmpty());
 
     if (dlg->exec() == KDialog::Yes) {
         bool force = ptr->force_delete();
@@ -1682,8 +1683,8 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
                 return;
             }
         }
-        if (items.size() > 0) {
-            m_Data->m_Model->svnWrapper()->makeDelete(items, keep, force);
+        if (!items.isEmpty()) {
+            m_Data->m_Model->svnWrapper()->makeDelete(svn::Targets(items), keep, force);
         }
         refreshCurrentTree();
     }
@@ -1696,7 +1697,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
 
 void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action, const QModelIndex &index)
 {
-    if (_lst.size() == 0) {
+    if (_lst.isEmpty()) {
         return;
     }
     KUrl::List lst = _lst;
@@ -1715,7 +1716,8 @@ void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action,
         } else if (isWorkingCopy()) {
             (*it) = KUrl::fromPathOrUrl((*it).path());
         }
-        (*it).setProtocol(nProto);
+        if (!nProto.isEmpty())
+            (*it).setProtocol(nProto);
         kDebug() << "Dropped: " << (*it) << endl;
     }
 
@@ -1772,23 +1774,22 @@ void MainTreeWidget::slotUrlDropped(const KUrl::List &_lst, Qt::DropAction actio
 
 void MainTreeWidget::slotCopyFinished(KJob *_job)
 {
-    if (!_job) {
+    KIO::CopyJob *job = dynamic_cast<KIO::CopyJob *>(_job);
+    if (!job) {
         return;
     }
-    KIO::Job *job = static_cast<KIO::Job *>(_job);
     bool ok = true;
     if (job->error()) {
         job->showErrorDialog(this);
         ok = false;
     }
     if (ok) {
-        KUrl::List lst = static_cast<KIO::CopyJob *>(job)->srcUrls();
-        KUrl turl = static_cast<KIO::CopyJob *>(job)->destUrl();
-        QString base = turl.path(KUrl::AddTrailingSlash);
-        KUrl::List::iterator iter;
-        svn::Pathes tmp;
-        for (iter = lst.begin(); iter != lst.end(); ++iter) {
-            QString _ne = base + (*iter).fileName(KUrl::IgnoreTrailingSlash);
+        const KUrl::List lst = job->srcUrls();
+        const QString base = job->destUrl().path(KUrl::AddTrailingSlash);
+        svn::Paths tmp;
+        tmp.reserve(lst.size());
+        Q_FOREACH(const KUrl &url, lst) {
+            QString _ne = base + url.fileName(KUrl::IgnoreTrailingSlash);
             tmp.push_back(svn::Path(_ne));
         }
         m_Data->m_Model->svnWrapper()->addItems(tmp, svn::DepthInfinity);

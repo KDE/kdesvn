@@ -965,10 +965,11 @@ void SvnActions::doCommit(const SvnItemList &which)
     }
     SvnItemList::const_iterator liter = which.begin();
 
-    svn::Pathes targets;
+    svn::Paths targets;
     if (which.isEmpty()) {
         targets.push_back(svn::Path("."));
     } else {
+        targets.reserve(which.size());
         for (; liter != which.end(); ++liter) {
             targets.push_back(svn::Path(
                                   m_Data->m_ParentList->relativePath((*liter))
@@ -982,7 +983,7 @@ void SvnActions::doCommit(const SvnItemList &which)
             emit sendNotify(msg);
         }
     }
-    if (makeCommit(targets) && Kdesvnsettings::log_cache_on_open()) {
+    if (makeCommit(svn::Targets(targets)) && Kdesvnsettings::log_cache_on_open()) {
         startFillCache(m_Data->m_ParentList->baseUri(), true);
     }
 }
@@ -1050,7 +1051,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         if (!ok || _result.isEmpty()) {
             return false;
         }
-        svn::Pathes _add, _commit, _delete;
+        svn::Paths _add, _commit, _delete;
         depth = svn::DepthInfinity;
         for (long i = 0; i < _result.count(); ++i) {
             _commit.append(_result[i].name());
@@ -1066,7 +1067,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
             }
         }
         if (!_delete.isEmpty()) {
-            makeDelete(_delete);
+            makeDelete(svn::Targets(_delete));
         }
         commit_parameters.targets(svn::Targets(_commit));
     }
@@ -1553,7 +1554,8 @@ void SvnActions::makeAdd(bool rec)
         KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("Which files or directories should I add?"));
         return;
     }
-    svn::Pathes items;
+    svn::Paths items;
+    items.reserve(lst.size());
     SvnItemListConstIterator liter = lst.constBegin();
     for (; liter != lst.constEnd(); ++liter) {
         const SvnItem *cur = (*liter);
@@ -1568,19 +1570,10 @@ void SvnActions::makeAdd(bool rec)
     emit sigRefreshCurrent(0);
 }
 
-bool SvnActions::addItems(const QStringList &w, svn::Depth depth)
-{
-    svn::Pathes items;
-    for (long i = 0; i < w.count(); ++i) {
-        items.push_back(w[i]);
-    }
-    return addItems(items, depth);
-}
-
-bool SvnActions::addItems(const svn::Pathes &items, svn::Depth depth)
+bool SvnActions::addItems(const svn::Paths &items, svn::Depth depth)
 {
     try {
-        svn::Pathes::const_iterator piter;
+        svn::Paths::const_iterator piter;
         for (piter = items.begin(); piter != items.end(); ++piter) {
             m_Data->m_Svnclient->add((*piter), depth);
         }
@@ -1597,23 +1590,18 @@ bool SvnActions::makeDelete(const QStringList &w)
     if (answer != KMessageBox::Yes) {
         return false;
     }
-    svn::Pathes items;
-    for (long i = 0; i < w.count(); ++i) {
-        items.push_back(w[i]);
-    }
-    return makeDelete(items);
+    return makeDelete(helpers::sub2qt::fromStringList(w));
 }
 
 /*!
     \fn SvnActions::makeDelete()
  */
-bool SvnActions::makeDelete(const svn::Pathes &items, bool keep_local, bool force)
+bool SvnActions::makeDelete(const svn::Targets &target, bool keep_local, bool force)
 {
     if (!m_Data->m_CurrentContext) {
         return false;
     }
     try {
-        svn::Targets target(items);
         m_Data->m_Svnclient->remove(target, force, keep_local);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1806,24 +1794,19 @@ void SvnActions::slotRevertItems(const QStringList &displist, bool rec_default)
     depth = ptr->getDepth();
     delete dlg;
 
-    svn::Pathes items;
-    for (long j = 0; j < displist.count(); ++j) {
-        items.push_back(svn::Path(displist[j]));
-    }
-
+    const svn::Targets target(helpers::sub2qt::fromStringList(displist));
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Revert"), i18n("Reverting items"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        svn::Targets target(items);
         m_Data->m_Svnclient->revert(target, depth);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;
     }
     // remove them from cache
-    for (long j = 0; j < items.count(); ++j) {
-        m_Data->m_Cache.deleteKey(items[j].path(), depth != svn::DepthInfinity);
+    for (size_t j = 0; j < target.size(); ++j) {
+        m_Data->m_Cache.deleteKey(target[j].path(), depth != svn::DepthInfinity);
     }
     emit sigItemsReverted(displist);
     EMIT_FINISHED;
@@ -2284,20 +2267,8 @@ bool SvnActions::makeMove(const KUrl::List &Old, const QString &New, bool force)
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Move"), i18n("Moving entries"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        KUrl::List::ConstIterator it = Old.begin();
-        bool local = false;
-
-        if ((*it).protocol().isEmpty()) {
-            local = true;
-        }
-        it = Old.begin();
-        svn::Pathes p;
-        for (; it != Old.end(); ++it) {
-            p.append((local ? (*it).path() : (*it).url()));
-        }
-        svn::Targets t(p);
-        svn::Path NPath(New);
-        m_Data->m_Svnclient->move(svn::CopyParameter(t, NPath).force(force).asChild(true).makeParent(false));
+        const svn::Targets t(helpers::sub2qt::fromUrlList(Old));
+        m_Data->m_Svnclient->move(svn::CopyParameter(t, svn::Path(New)).force(force).asChild(true).makeParent(false));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;
@@ -2325,16 +2296,7 @@ bool SvnActions::makeCopy(const QString &Old, const QString &New, const svn::Rev
 
 bool SvnActions::makeCopy(const KUrl::List &Old, const QString &New, const svn::Revision &rev)
 {
-    KUrl::List::ConstIterator it = Old.begin();
-    svn::Pathes p;
-    bool local = false;
-    if ((*it).protocol().isEmpty()) {
-        local = true;
-    }
-    for (; it != Old.end(); ++it) {
-        p.append((local ? (*it).path() : (*it).url()));
-    }
-    svn::Targets t(p);
+    const svn::Targets t(helpers::sub2qt::fromUrlList(Old));
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
@@ -2356,12 +2318,8 @@ void SvnActions::makeLock(const QStringList &what, const QString &_msg, bool bre
     if (!m_Data->m_CurrentContext) {
         return;
     }
-    svn::Pathes targets;
-    for (long i = 0; i < what.count(); ++i) {
-        targets.push_back(svn::Path(what[i]));
-    }
     try {
-        m_Data->m_Svnclient->lock(svn::Targets(targets), _msg, breakit);
+        m_Data->m_Svnclient->lock(helpers::sub2qt::fromStringList(what), _msg, breakit);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;
@@ -2376,13 +2334,8 @@ void SvnActions::makeUnlock(const QStringList &what, bool breakit)
     if (!m_Data->m_CurrentContext) {
         return;
     }
-    svn::Pathes targets;
-    for (long i = 0; i < what.count(); ++i) {
-        targets.push_back(svn::Path(what[i]));
-    }
-
     try {
-        m_Data->m_Svnclient->unlock(svn::Targets(targets), breakit);
+        m_Data->m_Svnclient->unlock(helpers::sub2qt::fromStringList(what), breakit);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;
@@ -2474,7 +2427,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
                 ++it;
             }
             if (!displist.isEmpty()) {
-                addItems(displist, svn::DepthEmpty);
+                addItems(helpers::sub2qt::fromStringList(displist).targets(), svn::DepthEmpty);
             }
         }
         if (dlg) {

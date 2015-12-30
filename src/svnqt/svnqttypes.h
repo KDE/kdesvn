@@ -32,6 +32,7 @@
 #include <QMap>
 #include <QPair>
 #include <QSharedPointer>
+#include <QVector>
 
 namespace svn
 {
@@ -94,9 +95,9 @@ typedef QList<PathPropertiesMapEntry> PathPropertiesMapList;
 /// shared pointer for properties
 typedef SharedPointer<PathPropertiesMapList> PathPropertiesMapListPtr;
 
-typedef QList<Path> Pathes;
+typedef QVector<Path> Paths;
 
-typedef QList<CommitItem> CommitItemList;
+typedef QVector<CommitItem> CommitItemList;
 
 //! Mapper enum for svn_depth_t
 /*!

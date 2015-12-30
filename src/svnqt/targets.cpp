@@ -47,7 +47,7 @@
 
 namespace svn
 {
-Targets::Targets(const svn::Pathes &targets)
+Targets::Targets(const svn::Paths &targets)
 {
     m_targets = targets;
 }
@@ -112,7 +112,7 @@ Targets::~Targets()
 apr_array_header_t *
 Targets::array(const Pool &pool) const
 {
-    Pathes::const_iterator it;
+    Paths::const_iterator it;
 
     apr_pool_t *apr_pool = pool.pool();
     apr_array_header_t *apr_targets =
@@ -132,7 +132,7 @@ Targets::array(const Pool &pool) const
     return apr_targets;
 }
 
-const Pathes &
+const Paths &
 Targets::targets() const
 {
     return m_targets;
@@ -150,7 +150,7 @@ const Path &Targets::operator [](size_t which)const
 }
 
 const Path
-Targets::target(Pathes::size_type which) const
+Targets::target(Paths::size_type which) const
 {
     if (m_targets.size() > which) {
         return m_targets[which];

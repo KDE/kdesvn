@@ -20,9 +20,9 @@
 #include "sub2qt.h"
 
 #include "src/svnqt/datetime.h"
+#include "src/svnqt/path.h"
 #include "kglobal.h"
 #include "klocale.h"
-#include <qmap.h>
 
 namespace helpers
 {
@@ -37,6 +37,26 @@ QString apr_time2qtString(apr_time_t _time)
 QString DateTime2qtString(const svn::DateTime &_time)
 {
     return KGlobal::locale()->formatDateTime(_time);
+}
+
+svn::Targets fromStringList(const QStringList &paths)
+{
+    svn::Paths ret;
+    ret.reserve(paths.size());
+    Q_FOREACH(const QString &path, paths) {
+        ret.push_back(svn::Path(path));
+    }
+    return svn::Targets(ret);
+}
+
+svn::Targets fromUrlList(const KUrl::List &urls)
+{
+    svn::Paths ret;
+    ret.reserve(urls.size());
+    Q_FOREACH(const KUrl &url, urls) {
+        ret.push_back(svn::Path(url.isLocalFile() ? url.toLocalFile() : url.url()));
+    }
+    return svn::Targets(ret);
 }
 
 }

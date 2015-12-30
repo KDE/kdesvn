@@ -56,7 +56,7 @@ public:
      *
      * @param targets vector of paths
      */
-    Targets(const svn::Pathes &targets);    //krazy:exclude=explicit
+    explicit Targets(const svn::Paths &targets);
 
     /**
      * Constructor
@@ -118,7 +118,7 @@ public:
      *
      * @return vector of paths
      */
-    const Pathes &
+    const Paths &
     targets() const;
 
     /**
@@ -131,7 +131,7 @@ public:
      *
      * @return vector with targets
      */
-    operator const Pathes &() const
+    operator const Paths &() const
     {
         return m_targets;
     }
@@ -146,10 +146,10 @@ public:
      * @return single path
      */
     const Path
-    target(Pathes::size_type which) const;
+    target(Paths::size_type which) const;
 
 private:
-    Pathes m_targets;
+    Paths m_targets;
 };
 }
 

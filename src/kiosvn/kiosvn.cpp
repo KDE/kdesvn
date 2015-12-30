@@ -330,13 +330,8 @@ void kio_svnProtocol::mkdir(const KUrl &url, int)
 
 void kio_svnProtocol::mkdir(const KUrl::List &urls, int)
 {
-    svn::Pathes p;
-    m_pData->resetListener();
-    for (KUrl::List::const_iterator it = urls.begin(); it != urls.end() ; ++it) {
-        p.append((*it).path());
-    }
     try {
-        m_pData->m_Svnclient->mkdir(svn::Targets(p), getDefaultLog());
+        m_pData->m_Svnclient->mkdir(helpers::sub2qt::fromUrlList(urls), getDefaultLog());
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
         return;
@@ -825,13 +820,9 @@ void kio_svnProtocol::commit(const KUrl::List &url)
         return;
     }
     msg = lt[0];
-    svn::Pathes targets;
-    for (long j = 0; j < url.count(); ++j) {
-        targets.push_back(svn::Path(url[j].path()));
-    }
     svn::Revision nnum = svn::Revision::UNDEFINED;
     svn::CommitParameter commit_parameters;
-    commit_parameters.targets(svn::Targets(targets)).message(msg).depth(svn::DepthInfinity).keepLocks(false);
+    commit_parameters.targets(helpers::sub2qt::fromUrlList(url)).message(msg).depth(svn::DepthInfinity).keepLocks(false);
 
     try {
         nnum = m_pData->m_Svnclient->commit(commit_parameters);
@@ -923,13 +914,8 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
 
 void kio_svnProtocol::revert(const KUrl::List &l)
 {
-    svn::Pathes list;
-    for (long j = 0; j < l.count(); ++j) {
-        list.append(svn::Path(l[j].path()));
-    }
-    svn::Targets target(list);
     try {
-        m_pData->m_Svnclient->revert(target, svn::DepthEmpty);
+        m_pData->m_Svnclient->revert(helpers::sub2qt::fromUrlList(l), svn::DepthEmpty);
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
     }
@@ -1008,12 +994,8 @@ void kio_svnProtocol::add(const KUrl &wc)
 
 void kio_svnProtocol::wc_delete(const KUrl::List &l)
 {
-    svn::Pathes p;
-    for (KUrl::List::const_iterator it = l.begin(); it != l.end() ; ++it) {
-        p.append((*it).path());
-    }
     try {
-        m_pData->m_Svnclient->remove(svn::Targets(p), false);
+        m_pData->m_Svnclient->remove(helpers::sub2qt::fromUrlList(l), false);
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
         return;

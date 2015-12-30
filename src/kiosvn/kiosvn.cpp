@@ -33,7 +33,6 @@
 #include "src/svnqt/client_parameter.h"
 #include "src/svnqt/client_commit_parameter.h"
 #include "src/svnqt/client_update_parameter.h"
-#include "src/svnqt/shared_pointer.h"
 #include "src/settings/kdesvnsettings.h"
 #include "src/helpers/sub2qt.h"
 #include "src/helpers/stringhelper.h"
@@ -392,15 +391,15 @@ void kio_svnProtocol::put(const KUrl &url, int permissions, KIO::JobFlags flags)
             return;
         }
     }
-    svn::SharedPointer<QFile> tmpfile = 0;
-    svn::SharedPointer<KTempDir> _codir = 0;
+    QSharedPointer<QFile> tmpfile;
+    QSharedPointer<KTempDir> _codir;
     if (exists) {
         if (flags & KIO::Overwrite) {
             if (!supportOverwrite()) {
                 extraError(KIO::ERR_SLAVE_DEFINED, i18n("Overwriting existing items is disabled in settings."));
                 return;
             }
-            _codir = new KTempDir;
+            _codir = QSharedPointer<KTempDir>(new KTempDir);
             _codir->setAutoRemove(true);
             svn::Path path = makeSvnUrl(url.url());
             path.removeLast();
@@ -418,7 +417,7 @@ void kio_svnProtocol::put(const KUrl &url, int permissions, KIO::JobFlags flags)
             }
             m_pData->dispWritten = false;
             stopOp(i18n("Temporary checkout done."));
-            tmpfile = new QFile(_codir->name() + url.fileName());
+            tmpfile = QSharedPointer<QFile>(new QFile(_codir->name() + url.fileName()));
             tmpfile->open(QIODevice::ReadWrite | QIODevice::Truncate);
         } else {
             extraError(KIO::ERR_FILE_ALREADY_EXIST, i18n("Could not write to existing item."));
@@ -431,7 +430,7 @@ void kio_svnProtocol::put(const KUrl &url, int permissions, KIO::JobFlags flags)
             delete _tmpfile;
             return;
         }
-        tmpfile = _tmpfile;
+        tmpfile = QSharedPointer<QFile>(_tmpfile);
     }
     int result = 0;
     QByteArray buffer;

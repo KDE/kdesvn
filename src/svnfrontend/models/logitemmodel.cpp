@@ -39,7 +39,7 @@ public:
         : m_List(), m_rowCount(-1), m_Empty(), _min(-1), _max(-1), _name(), _left(-1), _right(-1)
     {
     }
-    QList<SvnLogModelNodePtr> m_List;
+    QVector<SvnLogModelNodePtr> m_List;
     int m_rowCount;
     QString m_Empty;
     long _min, _max;
@@ -63,8 +63,8 @@ QModelIndex SvnLogModel::index(int row, int column, const QModelIndex &parent)co
     if (row >= m_data->m_List.count() || row < 0) {
         return QModelIndex();
     }
-    SvnLogModelNode *n = m_data->m_List[row];
-    return createIndex(row, column, n);
+    SvnLogModelNodePtr n = m_data->m_List.at(row);
+    return createIndex(row, column, n.data());
 }
 
 Qt::ItemFlags SvnLogModel::flags(const QModelIndex &index) const
@@ -89,15 +89,15 @@ void SvnLogModel::setLogData(const svn::SharedPointer<svn::LogEntriesMap> &_log,
     m_data->_name = _name;
     m_data->_left = m_data->_right = -1;
 
-    QMap<long int, QString> namesMap;
     QMap<long int, SvnLogModelNodePtr> itemMap;
 
     m_data->_min = m_data->_max = -1;
 
+    m_data->m_List.reserve(_log->count());
     beginInsertRows(QModelIndex(), 0, _log->count());
     svn::LogEntriesMap::const_iterator it = _log->begin();
     for (; it != _log->end(); ++it) {
-        SvnLogModelNodePtr np = new SvnLogModelNode((*it));
+        SvnLogModelNodePtr np(new SvnLogModelNode((*it)));
         m_data->m_List.append(np);
         if ((*it).revision > m_data->_max) {
             m_data->_max = (*it).revision;
@@ -144,7 +144,7 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return QVariant();
     }
-    const SvnLogModelNodePtr &_l = m_data->m_List[index.row()];
+    const SvnLogModelNodePtr &_l = m_data->m_List.at(index.row());
 
     switch (role) {
     case Qt::DisplayRole:
@@ -225,7 +225,7 @@ SvnLogModelNodePtr SvnLogModel::indexNode(const QModelIndex &index)const
     if (!index.isValid() || index.row() >= m_data->m_List.count()) {
         return SvnLogModelNodePtr();
     }
-    return m_data->m_List[index.row()];
+    return m_data->m_List.at(index.row());
 }
 
 void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
@@ -234,7 +234,7 @@ void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
         return;
     }
     where->clear();
-    const SvnLogModelNodePtr &_l = m_data->m_List[index.row()];
+    const SvnLogModelNodePtr &_l = m_data->m_List.at(index.row());
     if (_l->changedPaths().count() == 0) {
         return;
     }

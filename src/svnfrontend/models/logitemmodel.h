@@ -29,8 +29,7 @@ class SvnLogModelData;
 class SvnLogModelNode;
 class QTreeWidget;
 
-typedef svn::SharedPointer<SvnLogModelData> SvnLogModelDataPtr;
-typedef svn::SharedPointer<SvnLogModelNode> SvnLogModelNodePtr;
+typedef QSharedPointer<SvnLogModelNode> SvnLogModelNodePtr;
 
 class SvnLogModel: public QAbstractItemModel
 {
@@ -71,7 +70,7 @@ public:
     long max() const;
 
 private:
-    SvnLogModelDataPtr m_data;
+    QSharedPointer<SvnLogModelData> m_data;
 };
 
 #endif

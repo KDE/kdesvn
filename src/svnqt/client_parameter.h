@@ -220,7 +220,7 @@ class SVNQT_EXPORT StatusParameter
 private:
     QScopedPointer<StatusParameterData> _data;
 public:
-    explicit StatusParameter(const Path &_path);
+    explicit StatusParameter(const Path &_path = Path());
     ~StatusParameter();
 
     //! path to explore

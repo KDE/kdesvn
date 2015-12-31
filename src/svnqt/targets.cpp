@@ -48,40 +48,13 @@
 namespace svn
 {
 Targets::Targets(const svn::Paths &targets)
+    : m_targets(targets)
 {
-    m_targets = targets;
 }
 
-Targets::Targets(const QStringList &targets)
+Targets::Targets(const Targets &other)
+    : m_targets(other.targets())
 {
-    m_targets.clear();
-    for (int i = 0; i < targets.size(); ++i) {
-        if (targets[i].isEmpty()) {
-            m_targets.push_back(QString());
-        } else {
-            m_targets.push_back(targets[i]);
-        }
-    }
-}
-
-Targets::Targets(const apr_array_header_t *apr_targets)
-{
-    int i;
-
-    m_targets.clear();
-    //m_targets.reserve (apr_targets->nelts);
-
-    for (i = 0; i < apr_targets->nelts; i++) {
-        const char **target =
-            &APR_ARRAY_IDX(apr_targets, i, const char *);
-
-        m_targets.push_back(Path(*target));
-    }
-}
-
-Targets::Targets(const Targets &targets)
-{
-    m_targets = targets.targets();
 }
 
 Targets::Targets(const QString &target)
@@ -95,13 +68,6 @@ Targets::Targets(const Path &target)
 {
     if (!target.cstr().isEmpty()) {
         m_targets.push_back(target);
-    }
-}
-
-Targets::Targets(const char *target)
-{
-    if (target) {
-        m_targets.push_back(QString::fromUtf8(target));
     }
 }
 
@@ -158,10 +124,5 @@ Targets::target(Paths::size_type which) const
         return Path();
     }
 }
-}
 
-/* -----------------------------------------------------------------
- * local variables:
- * eval: (load-file "../../rapidsvn-dev.el")
- * end:
- */
+}

@@ -429,7 +429,8 @@ void CommandExec::slotCmd_get()
 
 void CommandExec::slotCmd_update()
 {
-    m_pCPart->m_SvnWrapper->makeUpdate(m_pCPart->url,
+    const svn::Targets targets = helpers::sub2qt::fromStringList(m_pCPart->url);
+    m_pCPart->m_SvnWrapper->makeUpdate(targets,
                                        (m_pCPart->rev_set ? m_pCPart->start : svn::Revision::HEAD), svn::DepthUnknown);
 }
 
@@ -469,9 +470,10 @@ void CommandExec::slotCmd_info()
 
 void CommandExec::slotCmd_commit()
 {
-    QStringList targets;
-    for (long j = 0; j < m_pCPart->url.count(); ++j) {
-        targets.push_back(svn::Path(m_pCPart->url[j]));
+    svn::Paths targets;
+    targets.reserve(m_pCPart->url.size());
+    Q_FOREACH(const QString &str, m_pCPart->url) {
+        targets.push_back(svn::Path(str));
     }
     m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
 }

@@ -64,14 +64,6 @@ public:
     Path(const QString &path = QString());    //krazy:exclude=explicit
 
     /**
-     * Constructor
-     *
-     * @see Path::Path (const QString &)
-     * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
-     */
-    Path(const char *path);    //krazy:exclude=explicit
-
-    /**
      * Copy constructor
      *
      * @param path Path to be copied

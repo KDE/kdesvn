@@ -48,15 +48,11 @@
 #include "revision.h"
 #include "exception.h"
 
-#include <qurl.h>
+#include <QUrl>
+#include <QDir>
 
 namespace svn
 {
-Path::Path(const char *path)
-{
-    init(QString::fromUtf8(path));
-}
-
 Path::Path(const QString &path)
 {
     init(path);
@@ -157,7 +153,7 @@ Path::operator=(const Path &path)
 bool
 Path::isset() const
 {
-    return m_path.length() > 0;
+    return !m_path.isEmpty();
 }
 
 void
@@ -254,10 +250,10 @@ Path::getTempDir()
     Pool pool;
 
     if (apr_temp_dir_get(&tempdir, pool) != APR_SUCCESS) {
-        tempdir = 0;
+        return svn::Path(QDir::tempPath());
     }
 
-    return tempdir;
+    return svn::Path(QString::fromUtf8(tempdir));
 }
 
 void

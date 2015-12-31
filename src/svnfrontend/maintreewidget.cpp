@@ -1826,17 +1826,17 @@ void MainTreeWidget::slotUpdateLogCache()
 
 void MainTreeWidget::slotMkBaseDirs()
 {
-    bool isopen = baseUri().length() > 0;
+    bool isopen = !baseUri().isEmpty();
     if (!isopen) {
         return;
     }
     QString parentDir = baseUri();
-    QStringList targets;
-    targets.append(parentDir + "/trunk");
-    targets.append(parentDir + "/branches");
-    targets.append(parentDir + "/tags");
+    svn::Paths targets;
+    targets.append(svn::Path(parentDir + QLatin1String("/trunk")));
+    targets.append(svn::Path(parentDir + QLatin1String("/branches")));
+    targets.append(svn::Path(parentDir + QLatin1String("/tags")));
     QString msg = i18n("Automatic generated base layout by kdesvn");
-    isopen = m_Data->m_Model->svnWrapper()->makeMkdir(targets, msg);
+    isopen = m_Data->m_Model->svnWrapper()->makeMkdir(svn::Targets(targets), msg);
     if (isopen) {
         refreshCurrentTree();
     }
@@ -2282,16 +2282,16 @@ void MainTreeWidget::slotDirCommit()
 void MainTreeWidget::slotDirUpdate()
 {
     const SvnItemList which = DirSelectionList();
-    QStringList what;
+    svn::Paths what;
     if (which.isEmpty()) {
-        what.append(baseUri());
+        what.append(svn::Path(baseUri()));
     } else {
         what.reserve(which.size());
         Q_FOREACH(const SvnItem *item, which) {
-            what.append(item->fullName());
+            what.append(svn::Path(item->fullName()));
         }
     }
-    m_Data->m_Model->svnWrapper()->makeUpdate(what, svn::Revision::HEAD, svn::DepthUnknown);
+    m_Data->m_Model->svnWrapper()->makeUpdate(svn::Targets(what), svn::Revision::HEAD, svn::DepthUnknown);
 }
 
 void MainTreeWidget::slotRescanIcons()

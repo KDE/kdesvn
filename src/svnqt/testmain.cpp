@@ -27,8 +27,6 @@
 #include "datetime.h"
 #include "client_parameter.h"
 
-#include <qdatastream.h>
-
 int main(int, char **)
 {
     svn::repository::Repository rep(0L);
@@ -38,12 +36,14 @@ int main(int, char **)
     bool gotit = true;
     svn::LogEntriesMap m_OldHistory;
     svn::LogParameter params;
+    svn::Paths s;
+    s.append(svn::Path(QLatin1String("svn://anonsvn.kde.org/home/kde/")));
 
     try {
-        m_Svnclient->log(params.targets("http://www.alwins-world.de/repos/kdesvn/trunk").revisionRange(svn::Revision::HEAD, 20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
+        m_Svnclient->log(params.targets(svn::Targets(s)).revisionRange(svn::Revision::HEAD, 20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
                          strictNodeHistory(false).limit(0), m_OldHistory);
     } catch (const svn::ClientException &ce) {
         gotit = false;
     }
-    return 1;
+    return gotit ? 0 : 1;
 }

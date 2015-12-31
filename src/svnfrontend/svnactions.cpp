@@ -653,12 +653,11 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     }
 }
 
-bool SvnActions::makeMkdir(const QStringList &which, const QString &logMessage)
+bool SvnActions::makeMkdir(const svn::Targets &targets, const QString &logMessage)
 {
-    if (!m_Data->m_CurrentContext || which.isEmpty()) {
+    if (!m_Data->m_CurrentContext || targets.targets().isEmpty()) {
         return false;
     }
-    svn::Targets targets(which);
     try {
         m_Data->m_Svnclient->mkdir(targets, logMessage);
     } catch (const svn::Exception &e) {
@@ -1021,7 +1020,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         CommitActionEntries _check, _uncheck, _result;
         svn::StatusEntries _Cache;
         depth = svn::DepthEmpty;
-        svn::StatusParameter params("");
+        svn::StatusParameter params;
         params.depth(svn::DepthInfinity).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD);
         /// @todo filter out double entries
         for (size_t j = 0; j < targets.size(); ++j) {
@@ -1300,7 +1299,7 @@ void SvnActions::makeDiffinternal(const QString &p1, const svn::Revision &r1, co
         if (p1 == p2 && (r1.isRemote() || r2.isRemote())) {
             ex = m_Data->m_Svnclient->diff_peg(_opts);
         } else {
-            ex = m_Data->m_Svnclient->diff(_opts.relativeTo(p1 == p2 ? svn::Path(p1) : ("")));
+            ex = m_Data->m_Svnclient->diff(_opts.relativeTo(p1 == p2 ? svn::Path(p1) : svn::Path()));
         }
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1455,7 +1454,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
 /*!
     \fn SvnActions::makeUpdate(const QString&what,const svn::Revision&rev,bool recurse)
  */
-void SvnActions::makeUpdate(const QStringList &what, const svn::Revision &rev, svn::Depth depth)
+void SvnActions::makeUpdate(const svn::Targets &targets, const svn::Revision &rev, svn::Depth depth)
 {
     if (!m_Data->m_CurrentContext) {
         return;
@@ -1468,7 +1467,7 @@ void SvnActions::makeUpdate(const QStringList &what, const svn::Revision &rev, s
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
         svn::UpdateParameter _params;
         m_Data->m_SvnContextListener->cleanUpdatedItems();
-        _params.targets(what).revision(rev).depth(depth).ignore_externals(false).allow_unversioned(false).sticky_depth(true);
+        _params.targets(targets).revision(rev).depth(depth).ignore_externals(false).allow_unversioned(false).sticky_depth(true);
         ret = m_Data->m_Svnclient->update(_params);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1499,13 +1498,13 @@ void SvnActions::prepareUpdate(bool ask)
     }
     const SvnItemList k = m_Data->m_ParentList->SelectionList();
 
-    QStringList what;
+    svn::Paths what;
     if (k.isEmpty()) {
-        what.append(m_Data->m_ParentList->baseUri());
+        what.append(svn::Path(m_Data->m_ParentList->baseUri()));
     } else {
         what.reserve(k.size());
         Q_FOREACH(const SvnItem *item, k) {
-            what.append(item->fullName());
+            what.append(svn::Path(item->fullName()));
         }
     }
     svn::Revision r(svn::Revision::HEAD);
@@ -1525,7 +1524,7 @@ void SvnActions::prepareUpdate(bool ask)
             return;
         }
     }
-    makeUpdate(what, r, svn::DepthUnknown);
+    makeUpdate(svn::Targets(what), r, svn::DepthUnknown);
 }
 
 /*!

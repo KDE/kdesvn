@@ -74,9 +74,12 @@ int main(int, char **)
     p = "file://" + p;
 
     m_Svnclient->setContext(m_CurrentContext);
-    QStringList s; s.append(p + "/trunk"); s.append(p + "/branches"); s.append(p + "/tags");
+    svn::Paths s;
+    s.append(svn::Path(p + QLatin1String("/trunk")));
+    s.append(svn::Path(p + QLatin1String("/branches")));
+    s.append(svn::Path(p + QLatin1String("/tags")));
     svn::CheckoutParameter cparams;
-    cparams.moduleName(p).destination(TESTCOPATH).revision(svn::Revision::HEAD).peg(svn::Revision::HEAD).depth(svn::DepthInfinity);
+    cparams.moduleName(p).destination(QString::fromLatin1(TESTCOPATH)).revision(svn::Revision::HEAD).peg(svn::Revision::HEAD).depth(svn::DepthInfinity);
 
     try {
         m_Svnclient->mkdir(svn::Targets(s), "Test mkdir");

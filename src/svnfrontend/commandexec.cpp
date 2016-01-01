@@ -51,7 +51,7 @@ public:
     ~pCPart();
 
     QString cmd;
-    QStringList url;
+    QStringList urls;
     bool ask_revision;
     bool rev_set;
     bool outfile_set;
@@ -72,7 +72,7 @@ public:
 
 pCPart::pCPart()
     : cmd()
-    , url()
+    , urls()
     , ask_revision(false)
     , rev_set(false)
     , outfile_set(false)
@@ -264,14 +264,14 @@ int CommandExec::exec(KCmdLineArgs *args)
                 tmp = tmpurl.path();
             }
         }
-        QStringList l = tmp.split(QLatin1Char('?'), QString::SkipEmptyParts);
+        const QStringList l = tmp.split(QLatin1Char('?'), QString::SkipEmptyParts);
         if (!l.isEmpty()) {
             tmp = l[0];
         }
         while (tmp.endsWith(QLatin1Char('/'))) {
             tmp.chop(1);
         }
-        m_pCPart->url.append(tmp);
+        m_pCPart->urls.append(tmp);
         if ((j > 2 && dont_check_second) || dont_check_all) {
             continue;
         }
@@ -280,8 +280,8 @@ int CommandExec::exec(KCmdLineArgs *args)
             m_pCPart->extraRevisions[j - 2] = re;
         }
     }
-    if (m_pCPart->url.count() == 0) {
-        m_pCPart->url.append(".");
+    if (m_pCPart->urls.isEmpty()) {
+        m_pCPart->urls.append(QLatin1String("."));
     }
 
     if (!no_revision) {
@@ -350,7 +350,8 @@ void CommandExec::slotCmd_log()
     if (m_pCPart->extraRevisions[0] == svn::Revision::WORKING) {
         m_pCPart->extraRevisions[0] = svn::Revision::UNDEFINED;
     }
-    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start, m_pCPart->end, m_pCPart->extraRevisions[0], m_pCPart->url[0],
+    m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start, m_pCPart->end,
+                                    m_pCPart->extraRevisions.value(0), m_pCPart->urls.at(0),
                                     Kdesvnsettings::log_follows_nodes(),
                                     list,
                                     limit);
@@ -364,27 +365,28 @@ void CommandExec::slotCmd_tree()
     if (m_pCPart->start == svn::Revision::UNDEFINED) {
         m_pCPart->start = 1;
     }
-    m_pCPart->m_SvnWrapper->makeTree(m_pCPart->url[0], m_pCPart->extraRevisions[0], m_pCPart->start, m_pCPart->end);
+    m_pCPart->m_SvnWrapper->makeTree(m_pCPart->urls.at(0), m_pCPart->extraRevisions.value(0),
+                                     m_pCPart->start, m_pCPart->end);
 }
 
 void CommandExec::slotCmd_checkout()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0], false);
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), false);
 }
 
 void CommandExec::slotCmd_checkoutto()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0], false, true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), false, true);
 }
 
 void CommandExec::slotCmd_export()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0], true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), true);
 }
 
 void CommandExec::slotCmd_exportto()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->url[0], true, true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), true, true);
 }
 
 void CommandExec::slotCmd_blame()
@@ -395,19 +397,20 @@ void CommandExec::slotCmd_blame()
     if (!m_pCPart->start) {
         m_pCPart->start = 1;
     }
-    m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start, m_pCPart->end, m_pCPart->url[0]);
+    m_pCPart->m_SvnWrapper->makeBlame(m_pCPart->start, m_pCPart->end, m_pCPart->urls.at(0));
 }
 
 void CommandExec::slotCmd_cat()
 {
-    if (m_pCPart->extraRevisions.find(0) != m_pCPart->extraRevisions.end()) {
+    QMap<int, svn::Revision>::const_iterator cIt = m_pCPart->extraRevisions.constFind(0);
+    if (cIt != m_pCPart->extraRevisions.constEnd()) {
         m_pCPart->rev_set = true;
-        m_pCPart->start = m_pCPart->extraRevisions[0];
+        m_pCPart->start = cIt.value();
     } else {
         m_pCPart->end = svn::Revision::HEAD;
     }
     m_pCPart->m_SvnWrapper->slotMakeCat(
-        (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), m_pCPart->url[0], m_pCPart->url[0]
+        (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), m_pCPart->urls.at(0), m_pCPart->urls.at(0)
         , (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), 0);
 }
 
@@ -423,56 +426,59 @@ void CommandExec::slotCmd_get()
         clientException(i18n("\"GET\" requires output file"));
         return;
     }
-    m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), m_pCPart->url[0], m_pCPart->outfile,
+    m_pCPart->m_SvnWrapper->makeGet((m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), m_pCPart->urls.at(0), m_pCPart->outfile,
                                     (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end));
 }
 
 void CommandExec::slotCmd_update()
 {
-    const svn::Targets targets = helpers::sub2qt::fromStringList(m_pCPart->url);
+    const svn::Targets targets = helpers::sub2qt::fromStringList(m_pCPart->urls);
     m_pCPart->m_SvnWrapper->makeUpdate(targets,
                                        (m_pCPart->rev_set ? m_pCPart->start : svn::Revision::HEAD), svn::DepthUnknown);
 }
 
 void CommandExec::slotCmd_diff()
 {
-    if (m_pCPart->url.count() == 1) {
-        if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->url[0])) {
+    if (m_pCPart->urls.count() == 1) {
+        if (!m_pCPart->rev_set && !svn::Url::isValid(m_pCPart->urls.at(0))) {
             m_pCPart->start = svn::Revision::BASE;
             m_pCPart->end = svn::Revision::WORKING;
         }
-        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0], m_pCPart->start, m_pCPart->url[0], m_pCPart->end);
+        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->urls.at(0), m_pCPart->start, m_pCPart->urls.at(0), m_pCPart->end);
     } else {
         svn::Revision r1 = svn::Revision::HEAD;
         svn::Revision r2 = svn::Revision::HEAD;
-        if (m_pCPart->extraRevisions.find(0) != m_pCPart->extraRevisions.end()) {
-            r1 = m_pCPart->extraRevisions[0];
-        } else if (!svn::Url::isValid(m_pCPart->url[0])) {
+        QMap<int, svn::Revision>::const_iterator cIt = m_pCPart->extraRevisions.constFind(0);
+        if (cIt != m_pCPart->extraRevisions.constEnd()) {
+            r1 = cIt.value();
+        } else if (!svn::Url::isValid(m_pCPart->urls.at(0))) {
             r1 = svn::Revision::WORKING;
         }
         if (m_pCPart->extraRevisions.find(1) != m_pCPart->extraRevisions.end()) {
             r2 = m_pCPart->extraRevisions[1];
-        } else if (!svn::Url::isValid(m_pCPart->url[1])) {
+        } else if (!svn::Url::isValid(m_pCPart->urls.at(1))) {
             r2 = svn::Revision::WORKING;
         }
-        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->url[0], r1, m_pCPart->url[1], r2);
+        m_pCPart->m_SvnWrapper->makeDiff(m_pCPart->urls.at(0), r1, m_pCPart->urls.at(1), r2);
     }
 }
 
 void CommandExec::slotCmd_info()
 {
-    if (m_pCPart->extraRevisions.find(0) != m_pCPart->extraRevisions.end()) {
+    QMap<int, svn::Revision>::const_iterator cIt = m_pCPart->extraRevisions.constFind(0);
+    if (cIt != m_pCPart->extraRevisions.constEnd()) {
         m_pCPart->rev_set = true;
-        m_pCPart->start = m_pCPart->extraRevisions[0];
+        m_pCPart->start = cIt.value();
     }
-    m_pCPart->m_SvnWrapper->makeInfo(m_pCPart->url, (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), svn::Revision::UNDEFINED, false);
+    m_pCPart->m_SvnWrapper->makeInfo(m_pCPart->urls, (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end),
+                                     svn::Revision::UNDEFINED, false);
 }
 
 void CommandExec::slotCmd_commit()
 {
     svn::Paths targets;
-    targets.reserve(m_pCPart->url.size());
-    Q_FOREACH(const QString &str, m_pCPart->url) {
+    targets.reserve(m_pCPart->urls.size());
+    Q_FOREACH(const QString &str, m_pCPart->urls) {
         targets.push_back(svn::Path(str));
     }
     m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
@@ -487,7 +493,7 @@ void CommandExec::slotCmd_list()
     } else if (m_pCPart->extraRevisions[0]) {
         rev = m_pCPart->extraRevisions[0];
     }
-    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->url[0], res, rev, svn::DepthInfinity)) {
+    if (!m_pCPart->m_SvnWrapper->makeList(m_pCPart->urls.at(0), res, rev, svn::DepthInfinity)) {
         return;
     }
     Q_FOREACH(const svn::DirEntry &entry, res) {
@@ -502,23 +508,24 @@ void CommandExec::slotCmd_list()
 void CommandExec::slotCmd_copy()
 {
     QString target;
-    if (m_pCPart->url.count() < 2) {
+    if (m_pCPart->urls.count() < 2) {
         bool force_move, ok;
         target = CopyMoveView_impl::getMoveCopyTo(&ok, &force_move, false,
-                 m_pCPart->url[0], QString(), 0);
+                 m_pCPart->urls.at(0), QString(), 0);
         if (!ok) {
             return;
         }
     } else {
-        target = m_pCPart->url[1];
+        target = m_pCPart->urls.at(1);
     }
-    if (m_pCPart->extraRevisions.find(0) != m_pCPart->extraRevisions.end()) {
+    QMap<int, svn::Revision>::const_iterator cIt = m_pCPart->extraRevisions.constFind(0);
+    if (cIt != m_pCPart->extraRevisions.constEnd()) {
         m_pCPart->rev_set = true;
-        m_pCPart->start = m_pCPart->extraRevisions[0];
+        m_pCPart->start = cIt.value();
     } else {
         m_pCPart->end = svn::Revision::HEAD;
     }
-    m_pCPart->m_SvnWrapper->makeCopy(m_pCPart->url[0], target, (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end));
+    m_pCPart->m_SvnWrapper->makeCopy(m_pCPart->urls.at(0), target, (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end));
 }
 
 void CommandExec::slotCmd_move()
@@ -526,36 +533,36 @@ void CommandExec::slotCmd_move()
     bool force_move, ok;
     force_move = false;
     QString target;
-    if (m_pCPart->url.count() < 2) {
+    if (m_pCPart->urls.count() < 2) {
         target = CopyMoveView_impl::getMoveCopyTo(&ok, &force_move, true,
-                 m_pCPart->url[0], QString(), 0);
+                 m_pCPart->urls.at(0), QString(), 0);
         if (!ok) {
             return;
         }
     } else {
-        target = m_pCPart->url[1];
+        target = m_pCPart->urls.at(1);
     }
-    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->url[0], target, force_move);
+    m_pCPart->m_SvnWrapper->makeMove(m_pCPart->urls.at(0), target, force_move);
 }
 
 void CommandExec::slotCmd_delete()
 {
-    m_pCPart->m_SvnWrapper->makeDelete(m_pCPart->url);
+    m_pCPart->m_SvnWrapper->makeDelete(m_pCPart->urls);
 }
 
 void CommandExec::slotCmd_add()
 {
-    m_pCPart->m_SvnWrapper->addItems(helpers::sub2qt::fromStringList(m_pCPart->url), svn::DepthInfinity);
+    m_pCPart->m_SvnWrapper->addItems(helpers::sub2qt::fromStringList(m_pCPart->urls), svn::DepthInfinity);
 }
 
 void CommandExec::slotCmd_revert()
 {
-    m_pCPart->m_SvnWrapper->slotRevertItems(m_pCPart->url, false);
+    m_pCPart->m_SvnWrapper->slotRevertItems(m_pCPart->urls, false);
 }
 
 void CommandExec::slotCmd_addnew()
 {
-    m_pCPart->m_SvnWrapper->checkAddItems(m_pCPart->url[0]);
+    m_pCPart->m_SvnWrapper->checkAddItems(m_pCPart->urls.at(0));
 }
 
 /*!
@@ -617,7 +624,7 @@ bool CommandExec::askRevision()
 void CommandExec::slotCmd_switch()
 {
     QString base;
-    if (m_pCPart->url.count() > 1) {
+    if (m_pCPart->urls.count() > 1) {
         clientException(i18n("May only switch one URL at time"));
         return;
     }
@@ -626,17 +633,17 @@ void CommandExec::slotCmd_switch()
         return;
     }
     base = m_pCPart->baseUrls[0];
-    m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->url[0], base);
+    m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->urls.at(0), base);
 }
 
 void CommandExec::slotCmd_lock()
 {
-//     m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url[0],"",m_pCPart->force);
-    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->url, QString(), m_pCPart->force);
+//     m_pCPart->m_SvnWrapper->makeLock(m_pCPart->urls.at(0),"",m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeLock(m_pCPart->urls, QString(), m_pCPart->force);
 }
 
 void CommandExec::slotCmd_unlock()
 {
-//     m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url[0],m_pCPart->force);
-    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->url, m_pCPart->force);
+//     m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->urls.at(0),m_pCPart->force);
+    m_pCPart->m_SvnWrapper->makeUnlock(m_pCPart->urls, m_pCPart->force);
 }

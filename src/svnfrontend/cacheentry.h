@@ -160,11 +160,10 @@ template<class C> inline cacheEntry<C> &cacheEntry<C>::operator=(const cacheEntr
 
 template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &t)const
 {
-    if (what.count() == 0) {
+    if (what.empty()) {
         return false;
     }
-    citer it;
-    it = m_subMap.find(what[0]);
+    citer it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -181,10 +180,10 @@ template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &
 
 template<class C> inline bool cacheEntry<C>::find(QStringList &what)const
 {
-    if (what.count() == 0) {
+    if (what.isEmpty()) {
         return false;
     }
-    citer it = m_subMap.find(what[0]);
+    citer it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -197,11 +196,10 @@ template<class C> inline bool cacheEntry<C>::find(QStringList &what)const
 
 template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, C &t)const
 {
-    if (what.count() == 0) {
+    if (what.isEmpty()) {
         return false;
     }
-    citer it;
-    it = m_subMap.find(what[0]);
+    citer it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -215,10 +213,10 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, 
 
 template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, bool check_valid_subs)const
 {
-    if (what.count() == 0) {
+    if (what.isEmpty()) {
         return false;
     }
-    citer it = m_subMap.find(what[0]);
+    citer it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -242,10 +240,10 @@ template<class C> inline void cacheEntry<C>::appendValidSub(QList<C> &t)const
 
 template<class C> inline bool cacheEntry<C>::deleteKey(QStringList &what, bool exact)
 {
-    if (what.count() == 0) {
+    if (what.isEmpty()) {
         return true;
     }
-    iter it = m_subMap.find(what[0]);
+    iter it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return true;
     }
@@ -283,10 +281,10 @@ template<class C> inline bool cacheEntry<C>::hasValidSubs()const
 
 template<class C> inline void cacheEntry<C>::insertKey(QStringList &what, const C &st)
 {
-    if (what.count() == 0) {
+    if (what.isEmpty()) {
         return;
     }
-    QString m = what[0];
+    const QString m = what.at(0);
 
     if (m_subMap.find(m) == m_subMap.end()) {
         m_subMap[m].m_key = m;
@@ -301,13 +299,13 @@ template<class C> inline void cacheEntry<C>::insertKey(QStringList &what, const 
 
 template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStringList &what, T &oper)const
 {
-    if (what.count() == 0) {
+    if (what.isEmpty()) {
         /* we are the one to get the list for*/
         oper = for_each(m_subMap.begin(), m_subMap.end(), oper);
         return;
     }
     /* otherwise find next */
-    citer it = m_subMap.find(what[0]);
+    citer it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         /* not found */
         return;
@@ -331,9 +329,8 @@ protected:
 
 public:
     itemCache(): m_contentMap(), m_RWLock() {}
-    virtual ~itemCache() {};
+    virtual ~itemCache() {}
 
-    void setContent(const QList<C> &dlist);
     void clear()
     {
         QWriteLocker locker(&m_RWLock);
@@ -346,7 +343,6 @@ public:
      * \return true if found (may or may not valid!) otherwise false
      */
     virtual bool find(const QString &what)const;
-    virtual bool find(const QString &, QList<C> &)const;
 
     virtual void deleteKey(const QString &what, bool exact);
     virtual void insertKey(const C &, const QString &path);
@@ -358,43 +354,24 @@ public:
     void dump_tree();
 };
 
-template<class C> inline void itemCache<C>::setContent(const QList<C> &dlist)
-{
-    QWriteLocker locker(&m_RWLock);
-    m_contentMap.clear();
-    citer it;
-    for (it = dlist.begin(); it != dlist.end(); ++it) {
-        QStringList _keys = (*it).path().split("/");
-        if (_keys.count() == 0) {
-            continue;
-        }
-        m_contentMap[_keys[0]] = statusEntry(_keys[0]);
-        if (_keys.count() == 1) {
-            m_contentMap[_keys[0]].setValidContent(_keys[0], (*it));
-        } else {
-            _keys.erase(_keys.begin());
-            m_contentMap[_keys[0]].insertKey(_keys, (*it));
-        }
-    }
-}
 
 template<class C> inline void itemCache<C>::insertKey(const C &st, const QString &path)
 {
-    QStringList _keys = path.split("/");
-    if (_keys.count() == 0) {
+    QStringList _keys = path.split(QLatin1Char('/'));
+    if (_keys.isEmpty()) {
         return;
     }
     QWriteLocker locker(&m_RWLock);
 
-    iter it = m_contentMap.find(_keys[0]);
+    const QString m = _keys.at(0);
+    citer it = m_contentMap.find(m);
 
     if (it == m_contentMap.end()) {
-        m_contentMap[_keys[0]] = cache_type(_keys[0]);
+        m_contentMap[m] = cache_type(m);
     }
     if (_keys.count() == 1) {
-        m_contentMap[_keys[0]].setValidContent(_keys[0], st);
+        m_contentMap[m].setValidContent(m, st);
     } else {
-        QString m = _keys[0];
         _keys.erase(_keys.begin());
         m_contentMap[m].insertKey(_keys, st);
     }
@@ -404,14 +381,14 @@ template<class C> inline bool itemCache<C>::find(const QString &what)const
 {
     QReadLocker locker(&m_RWLock);
 
-    if (m_contentMap.size() == 0) {
+    if (m_contentMap.empty()) {
         return false;
     }
-    QStringList _keys = what.split("/");
-    if (_keys.count() == 0) {
+    QStringList _keys = what.split(QLatin1Char('/'));
+    if (_keys.isEmpty()) {
         return false;
     }
-    citer it = m_contentMap.find(_keys[0]);
+    citer it = m_contentMap.find(_keys.at(0));
     if (it == m_contentMap.end()) {
         return false;
     }
@@ -422,37 +399,18 @@ template<class C> inline bool itemCache<C>::find(const QString &what)const
     return it->second.find(_keys);
 }
 
-template<class C> inline bool itemCache<C>::find(const QString &_what, QList<C> &dlist)const
-{
-    QReadLocker locker(&m_RWLock);
-
-    if (m_contentMap.size() == 0) {
-        return false;
-    }
-    QStringList what = _what.split("/");
-    if (what.count() == 0) {
-        return false;
-    }
-    citer it = m_contentMap.find(what[0]);
-    if (it == m_contentMap.end()) {
-        return false;
-    }
-    what.erase(what.begin());
-    return it->second.find(what, dlist);
-}
-
 template<class C> inline void itemCache<C>::deleteKey(const QString &_what, bool exact)
 {
     QWriteLocker locker(&m_RWLock);
 
-    if (m_contentMap.size() == 0) {
+    if (m_contentMap.empty()) {
         return;
     }
-    QStringList what = _what.split("/");
-    if (what.count() == 0) {
+    QStringList what = _what.split(QLatin1Char('/'));
+    if (what.isEmpty()) {
         return;
     }
-    iter it = m_contentMap.find(what[0]);
+    iter it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return;
     }
@@ -490,14 +448,14 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what
 {
     QReadLocker locker(&m_RWLock);
 
-    if (m_contentMap.size() == 0) {
+    if (m_contentMap.empty()) {
         return false;
     }
-    QStringList what = _what.split("/");
-    if (what.count() == 0) {
+    QStringList what = _what.split(QLatin1Char('/'));
+    if (what.isEmpty()) {
         return false;
     }
-    citer it = m_contentMap.find(what[0]);
+    citer it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return false;
     }
@@ -516,14 +474,14 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what
 {
     QReadLocker locker(&m_RWLock);
 
-    if (m_contentMap.size() == 0) {
+    if (m_contentMap.empty()) {
         return false;
     }
-    QStringList what = _what.split("/");
-    if (what.count() == 0) {
+    QStringList what = _what.split(QLatin1Char('/'));
+    if (what.isEmpty()) {
         return false;
     }
-    citer it = m_contentMap.find(what[0]);
+    citer it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return false;
     }
@@ -538,14 +496,14 @@ template<class C> template<class T> inline void itemCache<C>::listsubs_if(const 
 {
     QReadLocker locker(&m_RWLock);
 
-    if (m_contentMap.size() == 0) {
+    if (m_contentMap.empty()) {
         return;
     }
-    QStringList what = _what.split("/");
-    if (what.count() == 0) {
+    QStringList what = _what.split(QLatin1Char('/'));
+    if (what.isEmpty()) {
         return;
     }
-    citer it = m_contentMap.find(what[0]);
+    citer it = m_contentMap.find(what.at(0));
 
     if (it == m_contentMap.end()) {
         return;

@@ -61,7 +61,7 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
     static QString rs = "</td><td>";
     static QString re = "</td></tr>";
     QString text = "<html><body>";
-    if (reasons.count() > 0) {
+    if (!reasons.isEmpty()) {
         text += "<p align=\"center\">";
         text += "<h2>" + i18n("Failure reasons") + "</h2><hline>";
         for (int i = 0; i < reasons.count(); ++i) {

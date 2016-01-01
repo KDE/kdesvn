@@ -68,8 +68,8 @@ void DbSettings::store_list(KEditListBox *which, const QString &key)
     if (!which || key.isEmpty()) {
         return;
     }
-    QStringList _v = which->items();
-    if (_v.count() > 0) {
+    const QStringList _v = which->items();
+    if (!_v.isEmpty()) {
         svn::cache::ReposConfig::self()->setValue(_data->m_repository, key, _v);
     } else {
         svn::cache::ReposConfig::self()->eraseValue(_data->m_repository, key);

@@ -76,7 +76,7 @@ logMapReceiver2(
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
     }
     if (! SVN_IS_VALID_REVNUM(log_entry->revision)) {
-        if (rstack && rstack->size() > 0) {
+        if (rstack && !rstack->isEmpty()) {
             rstack->pop_front();
         }
         return SVN_NO_ERROR;

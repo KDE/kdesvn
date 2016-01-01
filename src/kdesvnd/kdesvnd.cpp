@@ -88,7 +88,7 @@ QStringList kdesvnd::getActionMenu(const KUrl::List &list, bool toplevel)
 {
     QStringList result;
     Kdesvnsettings::self()->readConfig();
-    if (Kdesvnsettings::no_konqueror_contextmenu() || list.count() == 0 ||
+    if (Kdesvnsettings::no_konqueror_contextmenu() || list.isEmpty() ||
             (toplevel && Kdesvnsettings::no_konqueror_toplevelmenu())) {
         return result;
     }

@@ -55,7 +55,7 @@ void OpenContextmenu::setup()
         m_mapPopup[ id++ ] = *it;
     }
     connect(this, SIGNAL(triggered(QAction*)), this, SLOT(slotRunService(QAction*)));
-    if (m_List.count() > 0) {
+    if (!m_List.isEmpty()) {
         addSeparator();
     }
     act = new KAction(i18n("Other..."), this);

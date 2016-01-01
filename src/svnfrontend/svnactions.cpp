@@ -294,7 +294,7 @@ svn::LogEntriesMapPtr SvnActions::getLog(const svn::Revision &start, const svn::
         return logs;
     }
 
-    bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().size() > 0 ? m_Data->m_ParentList->baseUri() : which);
+    bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().isEmpty() ? which : m_Data->m_ParentList->baseUri());
 
     svn::LogParameter params;
     params.targets(which).revisionRange(start, end).peg(peg).includeMergedRevisions(mergeinfo).limit(limit).discoverChangedPathes(list_files).strictNodeHistory(!follow);
@@ -2819,10 +2819,10 @@ bool SvnActions::isLockNeeded(SvnItem *which, const svn::Revision &where)
         //emit clientException(e.msg());
         return false;
     }
-    svn::PathPropertiesMapList pm = pmp.second;
-    if (pm.size() > 0) {
-        svn::PropertiesMap &mp = pm[0].second;
-        if (mp.find("svn:needs-lock") != mp.end()) {
+    const svn::PathPropertiesMapList pm = pmp.second;
+    if (!pm.isEmpty()) {
+        const svn::PropertiesMap &mp = pm.at(0).second;
+        if (mp.contains("svn:needs-lock")) {
             return true;
         }
     }
@@ -2838,14 +2838,15 @@ QString SvnActions::searchProperty(QString &Store, const QString &property, cons
         return QString();
     }
     while (pa.length() > 0) {
-        svn::PathPropertiesMapListPtr pm = propList(pa, where, false);
+        const svn::PathPropertiesMapListPtr pm = propList(pa, where, false);
         if (!pm) {
             return QString();
         }
-        if (pm->size() > 0) {
-            svn::PropertiesMap &mp = (*pm)[0].second;
-            if (mp.find(property) != mp.end()) {
-                Store = mp[property];
+        if (!pm->isEmpty()) {
+            const svn::PropertiesMap &mp = pm->at(0).second;
+            const svn::PropertiesMap::ConstIterator it = mp.find(property);
+            if (it != mp.end()) {
+                Store = *it;
                 return pa;
             }
         }

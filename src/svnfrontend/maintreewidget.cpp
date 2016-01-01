@@ -410,7 +410,7 @@ QModelIndex MainTreeWidget::SelectedIndex()const
 {
     QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
     if (_mi.count() != 1) {
-        if (_mi.count() == 0) {
+        if (_mi.isEmpty()) {
             QModelIndex ind = m_TreeView->rootIndex();
             if (ind.isValid()) {
                 ind = m_Data->m_SortModel->mapToSource(ind);
@@ -906,10 +906,10 @@ void MainTreeWidget::itemActivated(const QModelIndex &index, bool keypress)
             KUrl::List lst;
             lst.append(item->kdeName(rev));
             KService::List li = offersList(item, true);
-            if (li.count() == 0 || li.first()->exec().isEmpty()) {
+            if (li.isEmpty() || li.first()->exec().isEmpty()) {
                 li = offersList(item);
             }
-            if (li.count() > 0 && !li.first()->exec().isEmpty()) {
+            if (!li.isEmpty() && !li.first()->exec().isEmpty()) {
                 KService::Ptr ptr = li.first();
                 KRun::run(*ptr, lst, KApplication::activeWindow());
             } else {
@@ -1144,7 +1144,7 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
     } else {
         menuname = "remote";
     }
-    if (l.count() == 0) {
+    if (l.isEmpty()) {
         menuname += "_general";
     } else if (l.count() > 1) {
         menuname += "_context_multi";
@@ -1649,7 +1649,7 @@ void MainTreeWidget::slotDelete()
 
 void MainTreeWidget::makeDelete(const SvnItemList &lst)
 {
-    if (lst.size() == 0) {
+    if (lst.isEmpty()) {
         KMessageBox::error(this, i18n("Nothing selected for delete"));
         return;
     }
@@ -1676,7 +1676,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
         bool force = ptr->force_delete();
         bool keep = ptr->keep_local();
         WidgetBlockStack st(this);
-        if (kioList.count() > 0) {
+        if (!kioList.isEmpty()) {
             KIO::Job *aJob = KIO::del(kioList);
             if (!aJob->exec()) {
                 aJob->showErrorDialog(this);
@@ -1737,7 +1737,7 @@ void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action,
 
 void MainTreeWidget::slotUrlDropped(const KUrl::List &_lst, Qt::DropAction action, const QModelIndex &index, bool intern)
 {
-    if (_lst.size() == 0) {
+    if (_lst.isEmpty()) {
         return;
     }
     if (intern) {

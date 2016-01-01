@@ -532,17 +532,17 @@ QString RevGraphView::toolTip(const QString &_nodename, bool full)const
     if (it == m_Tree.constEnd()) {
         return res;
     }
-    QStringList sp = it.value().Message.split('\n');
+    const QStringList sp = it.value().Message.split(QLatin1Char('\n'));
     QString sm;
-    if (sp.count() == 0) {
+    if (sp.isEmpty()) {
         sm = it.value().Message;
     } else {
         if (!full) {
-            sm = sp[0] + "...";
+            sm = sp[0] + QLatin1String("...");
         } else {
             for (int j = 0; j < sp.count(); ++j) {
                 if (j > 0) {
-                    sm += "<br>";
+                    sm += QLatin1String("<br>");
                 }
                 sm += sp[j];
             }
@@ -552,26 +552,26 @@ QString RevGraphView::toolTip(const QString &_nodename, bool full)const
         sm.truncate(47);
         sm += "...";
     }
-    static QString csep = "</td><td>";
-    static QString rend = "</td></tr>";
-    static QString rstart = "<tr><td>";
-    res = QString("<html><body>");
+    static QLatin1String csep("</td><td>");
+    static QLatin1String rend("</td></tr>");
+    static QLatin1String rstart("<tr><td>");
+    res = QLatin1String("<html><body>");
 
     if (!full) {
-        res += QString("<b>%1</b>").arg(it.value().name);
+        res += QString(QLatin1String("<b>%1</b>")).arg(it.value().name);
         res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>",
                     it.value().rev,
                     it.value().Author,
                     it.value().Date,
                     sm);
     } else {
-        res += "<table><tr><th colspan=\"2\"><b>" + it.value().name + "</b></th></tr>";
-        res += rstart;
-        res += i18n("<b>Revision</b>%1%2%3", csep, it.value().rev, rend);
-        res += rstart + i18n("<b>Author</b>%1%2%3", csep, it.value().Author, rend);
-        res += rstart + i18n("<b>Date</b>%1%2%3", csep, it.value().Date, rend);
-        res += rstart + i18n("<b>Log</b>%1%2%3", csep, sm, rend);
-        res += "</table></body></html>";
+        res += QLatin1String("<table><tr><th colspan=\"2\"><b>") + it.value().name + QLatin1String("</b></th></tr>") +
+            rstart +
+            i18n("<b>Revision</b>%1%2%3", csep, it.value().rev, rend) +
+            rstart + i18n("<b>Author</b>%1%2%3", csep, it.value().Author, rend) +
+            rstart + i18n("<b>Date</b>%1%2%3", csep, it.value().Date, rend) +
+            rstart + i18n("<b>Log</b>%1%2%3", csep, sm, rend) +
+            QLatin1String("</table></body></html>");
     }
     return res;
 }
@@ -590,7 +590,7 @@ void RevGraphView::updateSizes(QSize s)
     qreal cHeight = m_Scene->height() - 2 * m_yMargin + 100;
 
     // hide birds eye view if no overview needed
-    if (((cWidth < s.width()) && cHeight < s.height()) || m_NodeList.count() == 0) {
+    if (((cWidth < s.width()) && cHeight < s.height()) || m_NodeList.isEmpty()) {
         m_CompleteView->hide();
         return;
     }

@@ -90,8 +90,8 @@ bool KdesvndListener::contextCancel()
 
 bool KdesvndListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &)
 {
-    QStringList res = m_back->get_logmsg();
-    if (res.count() == 0) {
+    const QStringList res = m_back->get_logmsg();
+    if (res.isEmpty()) {
         return false;
     }
     msg = res[1];

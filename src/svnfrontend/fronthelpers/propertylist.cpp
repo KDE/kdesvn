@@ -58,20 +58,17 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bo
     m_Dir = isDir;
     if (propList) {
         m_current = aCur;
-        svn::PathPropertiesMapList::const_iterator lit;
-        svn::PropertiesMap pmap;
-        for (lit = propList->begin(); lit != propList->end(); ++lit) {
-            pmap = (*lit).second;
+        if (!propList->isEmpty()) {
             /* just want the first one */
-            break;
-        }
-        svn::PropertiesMap::const_iterator pit;
-        for (pit = pmap.constBegin(); pit != pmap.constEnd(); ++pit) {
-            PropertyListViewItem *ki = new PropertyListViewItem(this,
-                    pit.key(),
-                    pit.value());
-            if (editable && !PropertyListViewItem::protected_Property(ki->currentName())) {
-                ki->setFlags(ki->flags() | Qt::ItemIsEditable);
+            const svn::PropertiesMap pmap = propList->at(0).second;
+            svn::PropertiesMap::const_iterator pit;
+            for (pit = pmap.constBegin(); pit != pmap.constEnd(); ++pit) {
+                PropertyListViewItem *ki = new PropertyListViewItem(this,
+                                                                    pit.key(),
+                                                                    pit.value());
+                if (editable && !PropertyListViewItem::protected_Property(ki->currentName())) {
+                    ki->setFlags(ki->flags() | Qt::ItemIsEditable);
+                }
             }
         }
     }

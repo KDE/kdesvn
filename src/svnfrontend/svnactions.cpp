@@ -745,6 +745,7 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
         if (val > 0) {
             text += "<hline>";
         }
+        ++val;
         text += "<p align=\"center\">";
         text += "<table cellspacing=0 cellpadding=0>";
         if ((*it).Name().length()) {
@@ -2551,8 +2552,6 @@ void SvnActions::checkUpdateThread()
         const svn::StatusPtr ptr = sEntries.at(i);
         if (ptr->validReposStatus()) {
             m_Data->m_UpdateCache.insertKey(ptr, ptr->path());
-            ptr->textStatus();
-            ptr->propStatus();
             if (!(ptr->validLocalStatus())) {
                 newer = true;
             }

@@ -167,6 +167,7 @@ protected Q_SLOTS:
     void slotRightProperties();
     void slotLeftProperties();
 
+    void resizeAllColumns();
 protected:
     virtual void keyPressEvent(QKeyEvent *);
     void setupActions();
@@ -179,7 +180,6 @@ protected:
     void itemActivated(const QModelIndex &index, bool keypress = false);
 
     void internalDrop(const KUrl::List &_lst, Qt::DropAction action, const QModelIndex &index);
-    void resizeAllColumns();
     void execContextMenu(const SvnItemList &);
     void simpleWcDiff(SvnItem *which, const svn::Revision &, const svn::Revision &);
     void doLog(bool, bool)const;

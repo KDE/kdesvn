@@ -113,7 +113,7 @@ public:
     svn::Revision m_remoteRevision;
     QString merge_Target, merge_Src2, merge_Src1;
 
-    QTimer m_TimeModified, m_TimeUpdates;
+    QTimer m_TimeModified, m_TimeUpdates, m_resizeColumnsTimer;
 };
 
 MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, Qt::WindowFlags f)
@@ -178,6 +178,9 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     connect(&(m_Data->m_TimeModified), SIGNAL(timeout()), this, SLOT(slotCheckModified()));
     m_Data->m_TimeUpdates.setParent(this);
     connect(&(m_Data->m_TimeUpdates), SIGNAL(timeout()), this, SLOT(slotCheckUpdates()));
+    m_Data->m_resizeColumnsTimer.setSingleShot(true);
+    m_Data->m_resizeColumnsTimer.setParent(this);
+    connect(&(m_Data->m_resizeColumnsTimer), SIGNAL(timeout()), this, SLOT(resizeAllColumns()));
 }
 
 MainTreeWidget::~MainTreeWidget()
@@ -2226,7 +2229,7 @@ void MainTreeWidget::slotItemExpanded(const QModelIndex &)
 
 void MainTreeWidget::slotItemsInserted(const QModelIndex &)
 {
-    resizeAllColumns();
+    m_Data->m_resizeColumnsTimer.start(50);
 }
 
 void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const QItemSelection &)

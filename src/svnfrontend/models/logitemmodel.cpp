@@ -158,6 +158,7 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
         case Message:
             return _l->shortMessage();
         }
+        break;
     case Qt::DecorationRole:
         if (index.column() == 0) {
             if (index.row() == m_data->_left) {
@@ -168,6 +169,7 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
                 return QString("   ");
             }
         }
+        break;
     }
     return QVariant();
 }

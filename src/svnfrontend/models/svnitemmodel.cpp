@@ -231,32 +231,6 @@ QVariant SvnItemModel::data(const QModelIndex &index, int role)const
     SvnItemModelNode *node = m_Data->nodeForIndex(index);
     switch (role) {
     case Qt::DisplayRole:
-        switch (index.column()) {
-        case Name:
-            return node->shortName();
-        case Status:
-            return node->infoText();
-        case LastRevision:
-            return QVariant(qlonglong(node->cmtRev()));
-        case LastAuthor:
-            return node->cmtAuthor();
-        case LastDate:
-            return node->fullDate();
-        case Locked:
-            return node->lockOwner();
-        }
-    case Qt::DecorationRole:
-        if (index.column() == 0) {
-            int size = Kdesvnsettings::listview_icon_size();
-            bool overlay = Kdesvnsettings::display_overlays();
-            return node->getPixmap(size, overlay);
-        }
-    case Qt::EditRole:
-        switch (index.column()) {
-        case Name:
-            return node->shortName();
-        }
-        break;
     case SORT_ROLE:
         switch (index.column()) {
         case Name:
@@ -264,7 +238,7 @@ QVariant SvnItemModel::data(const QModelIndex &index, int role)const
         case Status:
             return node->infoText();
         case LastRevision:
-            return QString("%1").arg(node->cmtRev());
+            return QString::number(node->cmtRev());
         case LastAuthor:
             return node->cmtAuthor();
         case LastDate:
@@ -272,11 +246,26 @@ QVariant SvnItemModel::data(const QModelIndex &index, int role)const
         case Locked:
             return node->lockOwner();
         }
+        break;
+    case Qt::DecorationRole:
+        if (index.column() == 0) {
+            int size = Kdesvnsettings::listview_icon_size();
+            bool overlay = Kdesvnsettings::display_overlays();
+            return node->getPixmap(size, overlay);
+        }
+        break;
+    case Qt::EditRole:
+        switch (index.column()) {
+        case Name:
+            return node->shortName();
+        }
+        break;
     case Qt::BackgroundRole: {
         QColor cl = node->backgroundColor();
         if (cl.isValid()) {
             return QBrush(cl);
         }
+        break;
     }
     case Qt::ToolTipRole: {
         switch (index.column()) {
@@ -288,6 +277,7 @@ QVariant SvnItemModel::data(const QModelIndex &index, int role)const
                 return QVariant();
             }
         }
+        break;
     }
     }
     return QVariant();

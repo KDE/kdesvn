@@ -339,8 +339,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         throw svn::cache::DatabaseException(QString("Could not retrieve count: ") + bcount.lastError().text());
         return false;
     }
-    bcount.next();
-    if (bcount.value(0).toLongLong() < 1) {
+    if (!bcount.next() || bcount.value(0).toLongLong() < 1) {
         // we didn't found logs with this parameters
         return false;
     }
@@ -422,11 +421,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision &aRev, bo
     }
     query.prepare(_q);
     query.bindValue(0, Q_LLONG(aRev.date()));
-    query.exec();
-    if (query.lastError().type() != QSqlError::NoError) {
-        //qDebug() << query.lastError().text();
-    }
-    if (query.next()) {
+    if (query.exec() && query.next()) {
         return query.value(0).toInt();
     }
     // not found...

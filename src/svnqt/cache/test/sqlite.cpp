@@ -90,7 +90,9 @@ int main(int argc, char **argv)
         std::cerr << cl.msg().toUtf8().data() << std::endl;
     }
     QSqlQuery q("insert into logentries(revision,date,author,message) values ('100','1122591406','alwin','copy and moving works now in basic form')", db);
-    q.exec();
+    if (!q.exec()) {
+        return 1;
+    }
     std::cerr << "\nSelf: \n" << q.lastError().text().toUtf8().data() << std::endl;
 
     db = QSqlDatabase();

@@ -238,9 +238,8 @@ public:
         QSqlQuery query(QString(), _mdb);
         query.prepare(s_reposSelect);
         query.bindValue(0, reposroot.native());
-        query.exec();
         QString db;
-        if (query.lastError().type() == QSqlError::NoError && query.next()) {
+        if (query.exec() && query.next()) {
             db = query.value(0).toString();
         } else {
             //qDebug() << "Error select_01: " << query.lastError().text() << "(" << query.lastQuery() << ")";
@@ -264,10 +263,9 @@ public:
         QSqlQuery c(QString(), getMainDB());
         c.prepare(s_reposSelect);
         c.bindValue(0, reposroot.native());
-        c.exec();
 
         // only the first one
-        if (c.next()) {
+        if (c.exec() && c.next()) {
             return c.value(0).toString();
         }
         return QString();

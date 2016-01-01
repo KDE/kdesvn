@@ -414,7 +414,7 @@ int SvnItemModel::checkDirs(const QString &_what, SvnItemModelNode *_parent)
 
 void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dlist)
 {
-    if (dlist.size() == 0) {
+    if (dlist.isEmpty()) {
         return;
     }
     QModelIndex ind = m_Data->indexForNode(_parent);
@@ -476,7 +476,7 @@ bool SvnItemModel::canFetchMore(const QModelIndex &parent)const
         return false;
     }
     SvnItemModelNode *node = static_cast<SvnItemModelNode *>(parent.internalPointer());
-    return node->NodeHasChilds() && static_cast<SvnItemModelNodeDir *>(node)->childList().count() == 0;
+    return node->NodeHasChilds() && static_cast<SvnItemModelNodeDir *>(node)->childList().isEmpty();
 }
 
 void SvnItemModel::fetchMore(const QModelIndex &parent)
@@ -720,7 +720,7 @@ void SvnItemModel::checkAddNewItems(const QModelIndex &ind)
             ++it;
         }
     }
-    if (dlist.count() > 0) {
+    if (!dlist.isEmpty()) {
         insertDirs(n, dlist);
     }
 }
@@ -770,8 +770,8 @@ bool SvnItemModel::refreshCurrentTree()
     }
     SvnItemModelNodeDir *_start = m_Data->m_rootNode;
     if (m_Data->m_Display->isWorkingCopy()) {
-        if (m_Data->m_rootNode->m_Children.size() > 0 && m_Data->m_rootNode->m_Children[0]->NodeIsDir()) {
-            _start = static_cast<SvnItemModelNodeDir *>(m_Data->m_rootNode->m_Children[0]);
+        if (!m_Data->m_rootNode->m_Children.isEmpty() && m_Data->m_rootNode->m_Children.at(0)->NodeIsDir()) {
+            _start = static_cast<SvnItemModelNodeDir *>(m_Data->m_rootNode->m_Children.at(0));
             refreshItem(_start);
         } else {
             return false;
@@ -800,7 +800,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     }
     QString what = (node != m_Data->m_rootNode) ? node->fullName() : m_Data->m_Display->baseUri();
 
-    if (node->m_Children.size() == 0 && !check_empty) {
+    if (node->m_Children.isEmpty() && !check_empty) {
         if (node->fullName() == m_Data->m_Display->baseUri()) {
             return refreshItem(node);
         }
@@ -863,7 +863,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     }
 
     // make sure that we do not read in the whole tree when just refreshing the current tree.
-    if (node->m_Children.size() > 0 && !notrec) {
+    if (!node->m_Children.isEmpty() && !notrec) {
         for (int i = 0; i < node->m_Children.size(); ++i) {
             if (node->m_Children[i]->NodeIsDir()) {
                 // both other parameters makes no sense at this point - defaults
@@ -873,7 +873,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     }
     // after so we don't recurse about it.
     insertDirs(node, dlist);
-    if (dlist.size() > 0) {
+    if (!dlist.isEmpty()) {
         itemsFetched(m_Data->indexForNode(node));
     }
     return true;

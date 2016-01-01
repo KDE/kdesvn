@@ -468,7 +468,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
             throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
         }
     }
-    if (aEntry.m_MergedInRevisions.size() > 0) {
+    if (!aEntry.m_MergedInRevisions.isEmpty()) {
         static QString qMerges("insert into mergeditems(revision,mergeditems) values(?,?)");
         _q.prepare(qMerges);
         QByteArray _merges;

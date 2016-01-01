@@ -237,7 +237,7 @@ void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
     }
     where->clear();
     const SvnLogModelNodePtr &_l = m_data->m_List.at(index.row());
-    if (_l->changedPaths().count() == 0) {
+    if (_l->changedPaths().isEmpty()) {
         return;
     }
     QList<QTreeWidgetItem *> _list;

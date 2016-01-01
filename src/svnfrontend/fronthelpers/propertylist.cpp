@@ -140,7 +140,7 @@ void Propertylist::slotItemChanged(QTreeWidgetItem *_item, int col)
 bool Propertylist::checkExisting(const QString &aName, QTreeWidgetItem *it)
 {
     if (!it) {
-        return findItems(aName, Qt::MatchExactly | Qt::MatchRecursive, 0).size() != 0;
+        return !findItems(aName, Qt::MatchExactly | Qt::MatchRecursive, 0).isEmpty();
     }
     QTreeWidgetItemIterator iter(this);
     while (*iter) {

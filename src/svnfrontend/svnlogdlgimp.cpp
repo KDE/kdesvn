@@ -105,11 +105,11 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what
             QString reg;
             s = m_Actions->searchProperty(reg, "bugtraq:logregex", pegUrl, peg, true);
             if (!s.isNull() && !reg.isEmpty()) {
-                QStringList s1 = reg.split('\n');
-                if (s1.size() > 0) {
-                    _r1.setPattern(s1[0]);
+                const QStringList s1 = reg.split(QLatin1Char('\n'));
+                if (!s1.isEmpty()) {
+                    _r1.setPattern(s1.at(0));
                     if (s1.size() > 1) {
-                        _r2.setPattern(s1[1]);
+                        _r2.setPattern(s1.at(1));
                     }
                 }
             }
@@ -364,7 +364,7 @@ void SvnLogDlgImp::slotListEntries()
             return;
         }
         if (!_log->isEmpty()) {
-            ptr->setChangedPaths((*_log)[ptr->revision()]);
+            ptr->setChangedPaths(_log->value(ptr->revision()));
         }
     }
     if (ptr->changedPaths().isEmpty()) {

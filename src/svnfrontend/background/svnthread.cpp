@@ -79,9 +79,8 @@ void SvnThread::itemInfo(const QString &what, svn::InfoEntry &target, const svn:
             peg = svn::Revision::HEAD;
         }
     }
-    svn::InfoEntries _e;
-    _e = (m_Svnclient->info(url, svn::DepthEmpty, rev, peg));
-    if (_e.count() > 0) {
+    const svn::InfoEntries _e = (m_Svnclient->info(url, svn::DepthEmpty, rev, peg));
+    if (!_e.isEmpty()) {
         target = _e[0];
     }
 }

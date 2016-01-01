@@ -252,7 +252,7 @@ void kio_svnProtocol::stat(const KUrl &url)
         return;
     }
 
-    if (e.count() == 0) {
+    if (e.isEmpty()) {
         dummy = true;
     }
 
@@ -287,8 +287,8 @@ void kio_svnProtocol::get(const KUrl &url)
         QString _url = makeSvnUrl(url);
         svn::InfoEntries e;
         e = m_pData->m_Svnclient->info(_url, svn::DepthEmpty, rev, rev);
-        if (e.size() > 0) {
-            totalSize(e[0].size());
+        if (!e.isEmpty()) {
+            totalSize(e.at(0).size());
         }
         m_pData->m_Svnclient->cat(dstream, _url, rev, rev);
     } catch (const svn::ClientException &e) {
@@ -874,7 +874,7 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
             extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
             break;
         }
-        if (logs.size() == 0) {
+        if (logs.isEmpty()) {
             setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "path", urls[j].path());
             setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "string",
                         i18n("Empty logs"));

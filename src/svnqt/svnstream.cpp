@@ -113,10 +113,6 @@ SvnStream::SvnStream(bool read, bool write, svn_client_ctx_t *ctx)
     }
 }
 
-SvnStream::SvnStream()
-{
-}
-
 SvnStream::~SvnStream()
 {
     delete m_Data;

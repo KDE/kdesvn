@@ -170,6 +170,8 @@ RevisionTree::RevisionTree(svn::Client *aClient,
         m_Baserevision = baserevision.revnum();
     } else if (baserevision.kind() == svn_opt_revision_date) {
         m_Baserevision = possible_rev;
+    } else {
+        m_Baserevision = m_Data->min_rev;
     }
     if (!cancel) {
         if (topDownScan()) {

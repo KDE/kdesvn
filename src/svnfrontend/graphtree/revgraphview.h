@@ -110,8 +110,8 @@ protected:
     GraphTreeLabel *m_Selected;
     QObject *m_Listener;
     KTemporaryFile *m_dotTmpFile;
-    QString dotOutput;
-    KProcess *renderProcess;
+    QString m_dotOutput;
+    KProcess *m_renderProcess;
     trevTree m_Tree;
     QColor getBgColor(const QString &nodeName)const;
     bool isStart(const QString &nodeName)const;
@@ -121,9 +121,9 @@ protected:
     QMap<QString, GraphTreeLabel *> m_NodeList;
     QMap<QString, QString> m_LabelMap;
 
-    int _xMargin, _yMargin;
+    int m_xMargin, m_yMargin;
     PannerView *m_CompleteView;
-    double _cvZoom;
+    double m_cvZoom;
     ZoomPosition m_LastAutoPosition;
 
     virtual void resizeEvent(QResizeEvent *);
@@ -136,12 +136,12 @@ protected:
 
     GraphTreeLabel *firstLabelAt(const QPoint &pos)const;
 
-    bool _isMoving;
-    QPoint _lastPos;
+    bool m_isMoving;
+    QPoint m_lastPos;
 
-    bool _noUpdateZoomerPos;
+    bool m_noUpdateZoomerPos;
 
-    QString _basePath;
+    QString m_basePath;
 
 private:
     void updateSizes(QSize s = QSize(0, 0));

@@ -41,14 +41,15 @@
 
 namespace svn
 {
-LogChangePathEntry::LogChangePathEntry(
-    const char *path_,
-    char action_,
-    const char *copyFromPath_,
-    const svn_revnum_t copyFromRevision_)
-    : path(QString::fromUtf8(path_)), action(action_),
-      copyFromPath(QString::fromUtf8(copyFromPath_)),
-      copyFromRevision(copyFromRevision_)
+LogChangePathEntry::LogChangePathEntry(const char *path_,
+                                       char action_,
+                                       const char *copyFromPath_,
+                                       const svn_revnum_t copyFromRevision_)
+    : path(QString::fromUtf8(path_))
+    , action(action_)
+    , copyFromPath(QString::fromUtf8(copyFromPath_))
+    , copyFromRevision(copyFromRevision_)
+    , copyToRevision(SVN_INVALID_REVNUM)
 {
 }
 
@@ -56,18 +57,22 @@ LogChangePathEntry::LogChangePathEntry(const QString &path_,
                                        char action_,
                                        const QString &copyFromPath_,
                                        const svn_revnum_t copyFromRevision_)
-    : path(path_),
-      action(action_),
-      copyFromPath(copyFromPath_),
-      copyToPath(),
-      copyFromRevision(copyFromRevision_),
-      copyToRevision(-1)
+    : path(path_)
+    , action(action_)
+    , copyFromPath(copyFromPath_)
+    , copyToPath()
+    , copyFromRevision(copyFromRevision_)
+    , copyToRevision(SVN_INVALID_REVNUM)
 {
 }
 
 LogChangePathEntry::LogChangePathEntry()
-    : path(), action(0), copyFromPath(), copyToPath(),
-      copyFromRevision(-1), copyToRevision(-1)
+    : path()
+    , action(0)
+    , copyFromPath()
+    , copyToPath()
+    , copyFromRevision(SVN_INVALID_REVNUM)
+    , copyToRevision(SVN_INVALID_REVNUM)
 {
 }
 

@@ -53,15 +53,22 @@
 
 RevGraphView::RevGraphView(QObject *aListener, svn::Client *_client, QWidget *parent)
     : QGraphicsView(parent)
+    , m_Scene(0)
+    , m_Marker(0)
+    , m_Client(_client)
+    , m_Selected(0)
+    , m_Listener(aListener)
+    , m_dotTmpFile(0)
+    , m_renderProcess(0)
+    , m_xMargin(0)
+    , m_yMargin(0)
+    , m_CompleteView(new PannerView(this))
+    , m_cvZoom(0)
+    , m_LastAutoPosition(TopLeft)
+    , m_isMoving(0)
+    , m_noUpdateZoomerPos(false)
+
 {
-    m_Scene = 0L;
-    m_Client = _client;
-    m_Listener = aListener;
-    m_dotTmpFile = 0;
-    m_Selected = 0;
-    renderProcess = 0;
-    m_Marker = 0;
-    m_CompleteView = new PannerView(this);
     m_CompleteView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_CompleteView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_CompleteView->raise();
@@ -70,9 +77,6 @@ RevGraphView::RevGraphView(QObject *aListener, svn::Client *_client, QWidget *pa
             this, SLOT(zoomRectMoved(qreal,qreal)));
     connect(m_CompleteView, SIGNAL(zoomRectMoveFinished()),
             this, SLOT(zoomRectMoveFinished()));
-    m_LastAutoPosition = TopLeft;
-    _isMoving = false;
-    _noUpdateZoomerPos = false;
 }
 
 RevGraphView::~RevGraphView()
@@ -81,7 +85,7 @@ RevGraphView::~RevGraphView()
     delete m_Scene;
     delete m_dotTmpFile;
     delete m_CompleteView;
-    delete renderProcess;
+    delete m_renderProcess;
 }
 
 void RevGraphView::showText(const QString &s)
@@ -130,31 +134,31 @@ void RevGraphView::endInsert()
 
 void RevGraphView::readDotOutput()
 {
-    if (!renderProcess) {
+    if (!m_renderProcess) {
         return;
     }
-    dotOutput += QString::fromLocal8Bit(renderProcess->readAllStandardOutput());
+    m_dotOutput += QString::fromLocal8Bit(m_renderProcess->readAllStandardOutput());
 }
 
 void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
 {
-    if (!renderProcess) {
+    if (!m_renderProcess) {
         return;
     }
     if (exitStatus != QProcess::NormalExit || exitcode != 0) {
-        QString error = i18n("Could not run process \"%1\".\n\nProcess stopped with message:\n%2", renderProcess->program().join(" "),
-                             QString::fromLocal8Bit(renderProcess->readAllStandardError()));
+        QString error = i18n("Could not run process \"%1\".\n\nProcess stopped with message:\n%2", m_renderProcess->program().join(" "),
+                             QString::fromLocal8Bit(m_renderProcess->readAllStandardError()));
         showText(error);
-        delete renderProcess;
-        renderProcess = 0;
+        delete m_renderProcess;
+        m_renderProcess = 0;
         return;
     }
     // remove line breaks when lines to long
     QRegExp endslash("\\\\\\n");
-    dotOutput.remove(endslash);
+    m_dotOutput.remove(endslash);
     double scale = 1.0;
     double dotWidth = 1.0, dotHeight = 1.0;
-    QTextStream dotStream(&dotOutput, QIODevice::ReadOnly);
+    QTextStream dotStream(&m_dotOutput, QIODevice::ReadOnly);
     QString cmd;
     int lineno = 0;
     beginInsert();
@@ -182,15 +186,15 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             lineStream >> scale >> dotWidth >> dotHeight;
             int w = qRound(scaleX * dotWidth);
             int h = qRound(scaleY * dotHeight);
-            _xMargin = 50;
+            m_xMargin = 50;
             if (w < QApplication::desktop()->width()) {
-                _xMargin += (QApplication::desktop()->width() - w) / 2;
+                m_xMargin += (QApplication::desktop()->width() - w) / 2;
             }
-            _yMargin = 50;
+            m_yMargin = 50;
             if (h < QApplication::desktop()->height()) {
-                _yMargin += (QApplication::desktop()->height() - h) / 2;
+                m_yMargin += (QApplication::desktop()->height() - h) / 2;
             }
-            m_Scene = new QGraphicsScene(0.0, 0.0, qreal(w + 2 * _xMargin), qreal(h + 2 * _yMargin));
+            m_Scene = new QGraphicsScene(0.0, 0.0, qreal(w + 2 * m_xMargin), qreal(h + 2 * m_yMargin));
             m_Scene->setBackgroundBrush(Qt::white);
             continue;
         }
@@ -211,8 +215,8 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             // better here 'cause dot may scramble utf8 labels so we regenerate it better
             // and do not read it in.
             label = getLabelstring(nodeName);
-            double xx = (scaleX * x + _xMargin);
-            double yy = (scaleY * (dotHeight - y) + _yMargin);
+            double xx = (scaleX * x + m_xMargin);
+            double yy = (scaleY * (dotHeight - y) + m_yMargin);
             double w = (scaleX * width);
             double h = (scaleY * height);
             QRectF r(xx - w / 2, yy - h / 2, w, h);
@@ -243,8 +247,8 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                 lineStream >> _x >> _y;
                 x = _x.toDouble();
                 y = _y.toDouble();
-                double xx = (scaleX * x + _xMargin);
-                double yy = (scaleY * (dotHeight - y) + _yMargin);
+                double xx = (scaleX * x + m_xMargin);
+                double yy = (scaleY * (dotHeight - y) + m_yMargin);
 #if 0
                 if (0) qDebug("   P %d: ( %f / %f ) => ( %d / %d)",
                                   i, x, y, xx, yy);
@@ -338,8 +342,8 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
         }
     }
     endInsert();
-    delete renderProcess;
-    renderProcess = 0;
+    delete m_renderProcess;
+    m_renderProcess = 0;
 }
 
 bool RevGraphView::isStart(const QString &nodeName)const
@@ -452,7 +456,7 @@ void RevGraphView::dumpRevtree()
         delete m_dotTmpFile;
     }
     clear();
-    dotOutput.clear();
+    m_dotOutput.clear();
     m_dotTmpFile = new KTemporaryFile;
     m_dotTmpFile->setSuffix(".dot");
     m_dotTmpFile->setAutoRemove(true);
@@ -508,16 +512,16 @@ void RevGraphView::dumpRevtree()
         }
     }
     stream << "}\n" << flush;
-    renderProcess = new KProcess();
-    renderProcess->setEnv("LANG", "C");
-    *renderProcess << "dot";
-    *renderProcess << m_dotTmpFile->fileName() << "-Tplain";
-    connect(renderProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
+    m_renderProcess = new KProcess();
+    m_renderProcess->setEnv("LANG", "C");
+    *m_renderProcess << "dot";
+    *m_renderProcess << m_dotTmpFile->fileName() << "-Tplain";
+    connect(m_renderProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
             this, SLOT(dotExit(int,QProcess::ExitStatus)));
-    connect(renderProcess, SIGNAL(readyReadStandardOutput()),
+    connect(m_renderProcess, SIGNAL(readyReadStandardOutput()),
             this, SLOT(readDotOutput()));
-    renderProcess->setOutputChannelMode(KProcess::SeparateChannels);
-    renderProcess->start();
+    m_renderProcess->setOutputChannelMode(KProcess::SeparateChannels);
+    m_renderProcess->start();
 }
 
 QString RevGraphView::toolTip(const QString &_nodename, bool full)const
@@ -582,8 +586,8 @@ void RevGraphView::updateSizes(QSize s)
     }
 
     // the part of the canvas that should be visible
-    qreal cWidth  = m_Scene->width()  - 2 * _xMargin + 100;
-    qreal cHeight = m_Scene->height() - 2 * _yMargin + 100;
+    qreal cWidth  = m_Scene->width()  - 2 * m_xMargin + 100;
+    qreal cHeight = m_Scene->height() - 2 * m_yMargin + 100;
 
     // hide birds eye view if no overview needed
     if (((cWidth < s.width()) && cHeight < s.height()) || m_NodeList.count() == 0) {
@@ -615,8 +619,8 @@ void RevGraphView::updateSizes(QSize s)
         zoom = .33;
     }
 
-    if (zoom != _cvZoom) {
-        _cvZoom = zoom;
+    if (zoom != m_cvZoom) {
+        m_cvZoom = zoom;
         QMatrix wm;
         m_CompleteView->setMatrix(wm.scale(zoom, zoom));
 
@@ -696,12 +700,12 @@ void RevGraphView::zoomRectMoved(qreal dx, qreal dy)
 {
     //if (leftMargin()>0) dx = 0;
     //if (topMargin()>0) dy = 0;
-    _noUpdateZoomerPos = true;
+    m_noUpdateZoomerPos = true;
     QScrollBar *hBar = horizontalScrollBar();
     QScrollBar *vBar = verticalScrollBar();
     hBar->setValue(hBar->value() + int(dx));
     vBar->setValue(vBar->value() + int(dy));
-    _noUpdateZoomerPos = false;
+    m_noUpdateZoomerPos = false;
 }
 
 void RevGraphView::zoomRectMoveFinished()
@@ -771,19 +775,19 @@ void RevGraphView::mousePressEvent(QMouseEvent *e)
 {
     setFocus();
     if (e->button() == Qt::LeftButton) {
-        _isMoving = true;
-        _lastPos = e->pos();
+        m_isMoving = true;
+        m_lastPos = e->pos();
     }
 }
 
 void RevGraphView::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (e->button() == Qt::LeftButton && _isMoving) {
+    if (e->button() == Qt::LeftButton && m_isMoving) {
         QPointF topLeft = mapToScene(QPoint(0, 0));
         QPointF bottomRight = mapToScene(QPoint(width(), height()));
         QRectF z(topLeft, bottomRight);
         m_CompleteView->setZoomRect(z);
-        _isMoving = false;
+        m_isMoving = false;
         updateZoomerPos();
     }
 }
@@ -796,20 +800,20 @@ void RevGraphView::scrollContentsBy(int dx, int dy)
     QPointF topLeft = mapToScene(QPoint(0, 0));
     QPointF bottomRight = mapToScene(QPoint(width(), height()));
     m_CompleteView->setZoomRect(QRectF(topLeft, bottomRight));
-    if (!_noUpdateZoomerPos && !_isMoving) {
+    if (!m_noUpdateZoomerPos && !m_isMoving) {
         updateZoomerPos();
     }
 }
 
 void RevGraphView::mouseMoveEvent(QMouseEvent *e)
 {
-    if (_isMoving) {
-        QPoint delta = e->pos() - _lastPos;
+    if (m_isMoving) {
+        QPoint delta = e->pos() - m_lastPos;
         QScrollBar *hBar = horizontalScrollBar();
         QScrollBar *vBar = verticalScrollBar();
         hBar->setValue(hBar->value() - delta.x());
         vBar->setValue(vBar->value() - delta.y());
-        _lastPos = e->pos();
+        m_lastPos = e->pos();
     }
 }
 
@@ -882,8 +886,8 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
     break;
     case 201: {
         QString fn = KFileDialog::getSaveFileName(KUrl(),
-                     "image/png",
-                     this
+                                                  i18n("image/png"),
+                                                  this
                                                  );
         if (!fn.isEmpty()) {
             if (m_Marker) {
@@ -908,11 +912,10 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
             }
         }
     }
-    case 202: {
+    break;
+    case 202:
         Kdesvnsettings::setTree_diff_rec(!Kdesvnsettings::tree_diff_rec());
         break;
-    }
-    break;
     case 301:
         if (i && i->type() == GRAPHTREE_LABEL && !i->source().isEmpty()) {
             makeDiffPrev(i);
@@ -955,7 +958,7 @@ void RevGraphView::makeCat(GraphTreeLabel *_l)
         return;
     }
     svn::Revision tr(it.value().rev);
-    QString tp = _basePath + it.value().name;
+    QString tp = m_basePath + it.value().name;
     emit makeCat(tr, tp, it.value().name, tr, QApplication::activeModalWidget());
 }
 
@@ -981,14 +984,14 @@ void RevGraphView::makeDiff(const QString &n1, const QString &n2)
         return;
     }
     svn::Revision sr(it.value().rev);
-    QString sp = _basePath + it.value().name;
+    QString sp = m_basePath + it.value().name;
 
     it = m_Tree.constFind(n1);
     if (it == m_Tree.constEnd()) {
         return;
     }
     svn::Revision tr(it.value().rev);
-    QString tp = _basePath + it.value().name;
+    QString tp = m_basePath + it.value().name;
     if (Kdesvnsettings::tree_diff_rec()) {
         emit makeRecDiff(sp, sr, tp, tr, QApplication::activeModalWidget());
     } else {
@@ -998,7 +1001,7 @@ void RevGraphView::makeDiff(const QString &n1, const QString &n2)
 
 void RevGraphView::setBasePath(const QString &_path)
 {
-    _basePath = _path;
+    m_basePath = _path;
 }
 
 void RevGraphView::slotClientException(const QString &what)

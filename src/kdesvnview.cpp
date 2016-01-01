@@ -53,8 +53,10 @@
 #include <kio/netaccess.h>
 
 kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool full)
-    : QWidget(parent), svn::repository::RepositoryListener(), m_Collection(aCollection),
-      m_currentUrl()
+    : QWidget(parent), svn::repository::RepositoryListener()
+    , m_Collection(aCollection)
+    , m_currentUrl()
+    , m_ReposCancel(false)
 {
     Q_UNUSED(full);
     setFocusPolicy(Qt::StrongFocus);

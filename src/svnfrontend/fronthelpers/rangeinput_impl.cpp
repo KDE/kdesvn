@@ -29,6 +29,7 @@
 
 Rangeinput_impl::Rangeinput_impl(QWidget *parent)
     : QWidget(parent)
+    , m_StartOnly(false)
 {
     setupUi(this);
 

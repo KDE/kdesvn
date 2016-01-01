@@ -98,6 +98,7 @@ pCPart::~pCPart()
 
 CommandExec::CommandExec(QObject *parent)
     : QObject(parent)
+    , m_lastMessagesLines(0)
 {
     m_pCPart = new pCPart;
     m_pCPart->args = 0;

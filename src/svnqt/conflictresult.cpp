@@ -32,11 +32,13 @@
 namespace svn
 {
 ConflictResult::ConflictResult()
-    : m_choice(ChooseMerged), m_MergedFile()
+    : m_choice(ChooseMerged)
+    , m_MergedFile()
 {
 }
 
 ConflictResult::ConflictResult(const svn_wc_conflict_result_t *aResult)
+    : m_choice(ChooseMerged)
 {
     if (!aResult) {
         return;

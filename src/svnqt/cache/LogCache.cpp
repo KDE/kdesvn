@@ -139,7 +139,7 @@ public:
         }
         qDebug() << "Removed " << fi.fileName() << endl;
         mainDB.transaction();
-        QSqlQuery _q(QString(), mainDB);
+        QSqlQuery _q(mainDB);
         _q.prepare(s_q);
         _q.bindValue(0, id);
         if (!_q.exec()) {
@@ -166,7 +166,7 @@ public:
             return false;
         }
 
-        QSqlQuery _q(QString(), aDb);
+        QSqlQuery _q(aDb);
         QStringList list = aDb.tables();
 
         if (list.indexOf("logentries") == -1) {
@@ -229,13 +229,15 @@ public:
 
         QSqlDatabase _mdb = getMainDB();
 
-        QSqlQuery query1(QString(), _mdb);
-        QString q("insert into " + QString(SQLMAINTABLE) + " (reposroot) VALUES('" + reposroot + "')");
         _mdb.transaction();
+        QSqlQuery query(_mdb);
+        QString q(QLatin1String("insert into ") + QLatin1String(SQLMAINTABLE) + QLatin1String(" (reposroot) VALUES('") + reposroot.path() + QLatin1String("')"));
 
-        query1.exec(q);
+        if (!query.exec(q)) {
+            return QString();
+        }
+
         _mdb.commit();
-        QSqlQuery query(QString(), _mdb);
         query.prepare(s_reposSelect);
         query.bindValue(0, reposroot.native());
         QString db;
@@ -260,7 +262,7 @@ public:
         if (!getMainDB().isValid()) {
             return QString();
         }
-        QSqlQuery c(QString(), getMainDB());
+        QSqlQuery c(getMainDB());
         c.prepare(s_reposSelect);
         c.bindValue(0, reposroot.native());
 
@@ -394,7 +396,7 @@ void LogCache::setupMainDb()
         qWarning("Failed to open main database.");
     } else {
         QStringList list = mainDB.tables();
-        QSqlQuery q(QString(), mainDB);
+        QSqlQuery q(mainDB);
         if (list.indexOf(SQLSTATUS) == -1) {
             mainDB.transaction();
             if (q.exec("CREATE TABLE \"" + SQLSTATUS + "\" (\"key\" TEXT PRIMARY KEY NOT NULL, \"value\" TEXT);")) {
@@ -434,7 +436,7 @@ void LogCache::databaseVersion(int newversion)
         return;
     }
     static QString _qs("update \"" + SQLSTATUS + "\" SET value = ? WHERE \"key\" = \"version\"");
-    QSqlQuery cur(QString(), mainDB);
+    QSqlQuery cur(mainDB);
     cur.prepare(_qs);
     cur.bindValue(0, newversion);
     if (!cur.exec()) {
@@ -449,7 +451,7 @@ int LogCache::databaseVersion()const
         return -1;
     }
     static QString _qs("select value from \"" + SQLSTATUS + "\" WHERE \"key\" = \"version\"");
-    QSqlQuery cur(QString(), mainDB);
+    QSqlQuery cur(mainDB);
     cur.prepare(_qs);
     if (!cur.exec()) {
         qDebug() << "Error select version: " << cur.lastError().text() << "(" << cur.lastQuery() << ")";
@@ -469,7 +471,7 @@ QVariant LogCache::getRepositoryParameter(const svn::Path &repository, const QSt
         return QVariant();
     }
     static QString qs("select \"value\",\"repoparameter\".\"parameter\" as \"key\" from \"" + QString(SQLREPOSPARAMETER) + "\" INNER JOIN \"" + QString(SQLMAINTABLE) + "\" ON (\"" + QString(SQLREPOSPARAMETER) + "\".id = \"" + QString(SQLMAINTABLE) + "\".id and \"" + QString(SQLMAINTABLE) + "\".reposroot = ?)  WHERE \"parameter\" = ?;");
-    QSqlQuery cur(QString(), mainDB);
+    QSqlQuery cur(mainDB);
     cur.prepare(qs);
     cur.bindValue(0, repository.native());
     cur.bindValue(1, key);
@@ -496,7 +498,7 @@ bool LogCache::setRepositoryParameter(const svn::Path &repository, const QString
     static QString qs("INSERT OR REPLACE INTO \"" + QString(SQLREPOSPARAMETER) + "\" (\"id\",\"parameter\",\"value\") values (\"%1\",\"%2\",?);");
     static QString dqs("DELETE FROM \"" + QString(SQLREPOSPARAMETER) + "\" WHERE \"id\"=? and \"parameter\" = ?");
     mainDB.transaction();
-    QSqlQuery cur(QString(), mainDB);
+    QSqlQuery cur(mainDB);
     if (value.isValid()) {
         QString _qs = qs.arg(id).arg(key);//.arg(value.toByteArray());
         cur.prepare(_qs);
@@ -557,7 +559,7 @@ QStringList svn::cache::LogCache::cachedRepositories()const
         qWarning("Failed to open main database.");
         return _res;
     }
-    QSqlQuery cur(QString(), mainDB);
+    QSqlQuery cur(mainDB);
     cur.prepare(s_q);
     if (!cur.exec()) {
         throw svn::cache::DatabaseException(QString("Could not retrieve values: ") + cur.lastError().text());

@@ -43,13 +43,15 @@ public:
     static QVariant convertToQVariant(const QByteArray &value, const QVariant &aDefault);
 };
 
-static QList<int> asIntList(const QByteArray &string)
+static QVector<int> asIntVec(const QByteArray &string)
 {
-    QList<int> list;
-    Q_FOREACH (const QByteArray &s, string.split(',')) {
-        list << s.toInt();
+    const QList<QByteArray> strList = string.split(',');
+    QVector<int> vec;
+    vec.reserve(strList.size());
+    Q_FOREACH (const QByteArray &s, strList) {
+        vec << s.toInt();
     }
-    return list;
+    return vec;
 }
 
 QByteArray ReposConfigPrivate::serializeList(const QList<QByteArray> &list)
@@ -149,7 +151,7 @@ QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QV
         return tmp;
     }
     case QVariant::DateTime: {
-        const QList<int> list = asIntList(value);
+        const QVector<int> list = asIntVec(value);
         if (list.count() != 6) {
             return aDefault;
         }
@@ -162,7 +164,7 @@ QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QV
         return dt;
     }
     case QVariant::Date: {
-        QList<int> list = asIntList(value);
+        QVector<int> list = asIntVec(value);
         if (list.count() == 6) {
             list = list.mid(0, 3);    // don't break config files that stored QDate as QDateTime
         }

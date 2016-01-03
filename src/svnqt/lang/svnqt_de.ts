@@ -2,46 +2,42 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="de_DE">
 <context>
-    <name>QObject</name>
+    <name>svnqt</name>
     <message>
-        <location filename="../contextdata.cpp" line="349"/>
-        <source>invalid baton</source>
-        <translation>Fehlerhafter Zusammenhang</translation>
-    </message>
-    <message>
-        <location filename="../contextdata.cpp" line="355"/>
-        <source>invalid listener</source>
-        <translation>Fehlerhafter Rückrufer</translation>
-    </message>
-    <message>
-        <location filename="../contextdata.cpp" line="731"/>
-        <location filename="../repositorydata.cpp" line="100"/>
+        <location filename="../client_property.cpp" line="57"/>
+        <location filename="../client_status.cpp" line="182"/>
+        <location filename="../client_status.cpp" line="206"/>
+        <location filename="../contextdata.cpp" line="742"/>
+        <location filename="../repositorydata.cpp" line="128"/>
         <source>Cancelled by user.</source>
         <translation>Abbruch durch den Benutzer.</translation>
     </message>
     <message>
-        <location filename="../contextdata.cpp" line="797"/>
+        <location filename="../contextdata.cpp" line="355"/>
+        <source>invalid baton</source>
+        <translation>Fehlerhafter Zusammenhang</translation>
+    </message>
+    <message>
+        <location filename="../contextdata.cpp" line="361"/>
+        <source>invalid listener</source>
+        <translation>Fehlerhafter Rückrufer</translation>
+    </message>
+    <message>
+        <location filename="../contextdata.cpp" line="791"/>
+        <location filename="../contextdata.cpp" line="807"/>
         <source>invalid subversion version.</source>
         <translation>Fehlerhafte Subversion version.</translation>
     </message>
     <message>
-        <location filename="../repositorydata.cpp" line="184"/>
-        <source>&apos;%s&apos; is an URL when it should be a path</source>
-        <translation>&apos;%s&apos; ist eine URL sollte aber ein Pfad sein</translation>
+        <location filename="../repositorydata.cpp" line="218"/>
+        <source>&apos;%1&apos; is an URL when it should be a path</source>
+        <translation>&apos;%1&apos; ist eine Url, sollte aber ein Pfad sein</translation>
     </message>
     <message>
-        <location filename="../repositorydata.cpp" line="201"/>
-        <location filename="../repositorydata.cpp" line="218"/>
+        <location filename="../repositorydata.cpp" line="234"/>
+        <location filename="../repositorydata.cpp" line="261"/>
         <source>No repository selected.</source>
         <translation>Kein Repository ausgewählt.</translation>
-    </message>
-</context>
-<context>
-    <name>svn::ContextData</name>
-    <message>
-        <location filename="../contextdata.cpp" line="781"/>
-        <source>invalid subversion version.</source>
-        <translation type="unfinished">Fehlerhafte Subversion version.</translation>
     </message>
 </context>
 </TS>

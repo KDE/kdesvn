@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 ####
  #   Copyright (C) 2005-2009 by Rajko Albrecht  ral@alwins-world.de        #
  #   http://kdesvn.alwins-world.de/                                        #
@@ -23,4 +23,4 @@ LUPDATE="@QT_LUPDATE_EXECUTABLE@"
 LANGFILES="@LANGFILES@"
 SDIR="@CMAKE_CURRENT_SOURCE_DIR@"
 
-$LUPDATE $SDIR $LANGFILES
+$LUPDATE -no-obsolete $SDIR $LANGFILES

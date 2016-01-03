@@ -84,10 +84,10 @@ if(QT_LUPDATE_EXECUTABLE)
         set(LANGFILES "-ts ${_p} ${LANGFILES}")
     endforeach()
     configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/update-language.sh.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
-    IMMEDIATE
-    @ONLY)
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/update-language.sh.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
+        IMMEDIATE
+        @ONLY)
     add_custom_target(svnqt_update_translation
         "${CMAKE_CURRENT_BINARY_DIR}/update-language.sh"
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

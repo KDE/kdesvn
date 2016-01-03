@@ -109,16 +109,6 @@ configure_file(Doxyfile.in Doxyfile @ONLY)
 configure_file(Doxyfile.svnqt.in Doxyfile.svnqt @ONLY)
 
 set(DIST_EXCLUDE "Helperstuff/pic_design")
-configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/makedist.sh.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/makedist.sh"
-    IMMEDIATE
-    @ONLY)
-
-add_custom_target(dist
-    "${CMAKE_BINARY_DIR}/makedist.sh"
-    DEPENDS doc
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
 

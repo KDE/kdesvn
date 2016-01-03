@@ -20,8 +20,6 @@
 #ifndef TCONTEXTLISTENER_H
 #define TCONTEXTLISTENER_H
 
-#include "eventnumbers.h"
-
 #include "ccontextlistener.h"
 
 class ThreadContextListenerData;

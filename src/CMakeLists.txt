@@ -29,7 +29,6 @@ set(kdesvnsrc
 
 set(partsrc
     commandline_part.cpp
-    kdesvn_events.cpp
     kdesvn_part.cpp
     kdesvnview.cpp
 )

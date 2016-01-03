@@ -49,7 +49,7 @@ target_link_libraries(kio_ksvn
 
 set_target_properties(kio_ksvn
     PROPERTIES
-    LINK_FLAG "${LINK_NO_UNDEFINED}  ${_BASE_LDADD}")
+    LINK_FLAG "${LINK_NO_UNDEFINED}")
 
 install(TARGETS kio_ksvn
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR} )

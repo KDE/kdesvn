@@ -98,7 +98,6 @@ include_directories(
 add_definitions(${APR_CPP_FLAGS})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-set(_BASE_LDADD "-L${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
 
 set(svnqt-name svnqt_private)
 add_subdirectory(src)

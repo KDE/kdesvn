@@ -61,7 +61,7 @@ target_link_libraries(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsd
 
 set_target_properties(kdesvnpart
     PROPERTIES
-    LINK_FLAGS "${_BASE_LDADD} ${APR_EXTRA_LDFLAGS} ${APU_EXTRA_LDFLAGS} ${LINK_NO_UNDEFINED}")
+    LINK_FLAGS "${APR_EXTRA_LDFLAGS} ${APU_EXTRA_LDFLAGS} ${LINK_NO_UNDEFINED}")
 
 include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 

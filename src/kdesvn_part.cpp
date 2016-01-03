@@ -168,8 +168,9 @@ KAboutData *kdesvnpart::createAboutData()
                             0L);
 
     about.addAuthor(ki18n("Rajko Albrecht"), ki18n("Original author and maintainer"), "ral@alwins-world.de");
+    about.addAuthor(ki18n("Christian Ehrlicher"), ki18n("Developer"), "ch.ehrlicher@gmx.de");
+    about.setHomepage("https://projects.kde.org/kdesvn");
     about.setOtherText(m_Extratext);
-    about.setHomepage("https://projects.kde.org/projects/playground/devtools/kdesvn");
     about.setProgramIconName("kdesvn");
     return &about;
 }

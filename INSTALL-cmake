@@ -1,24 +1,6 @@
-Note for failed linking
-=======================
-Seems that on some systems linking fails due missing references. You may
-solve it with
-
-. /etc/profile.d/qt.sh
-export QTLIB=${QTDIR}/lib QTINC=${QTDIR}/include
-
-before running cmake.
-On some systems cmake doesn't detect that it is a threaded qt-version. So you should
-do
-
-export CXXFLAGS="-DQT_THREAD_SUPPORT"
-
-before running cmake.
-(Or give it as parameter to cmake with -DCMAKE_CXX_FLAGS="-DQT_THREAD_SUPPORT")
-
-
 Prepare install
 ===============
-You require at least cmake 2.4, kde 4.2 and subversion 1.4. In source-tree-build are mostly unwanted, so
+You require at least cmake 2.8.12, kde 4.9 and subversion 1.4. In source-tree-build are mostly unwanted, so
 make a subdir called "kdesvn-build" and change to it.
 
 Basic installation
@@ -33,20 +15,16 @@ Important parameters to cmake:
 
 -DCMAKE_BUILD_TYPE=<buildtype>
 <buildtype> may current one of "Debug", "Release", "ReleaseWithDebInfo"
-or "MINSIZEREL"
+or "MinSizeRel"
 
 -DCMAKE_INSTALL_PREFIX=<prefix>
 Default to "/usr/local"
 
 -DSUBVERSION_INSTALL_PATH=<subversionlib-install-prefix>
-Where is subversion-lib installed. Default check in /usr and /usr/local
+Where is subversion-lib installed if not in default path. Default check in /usr and /usr/local
 
 -DCMAKE_CXX_FLAGS=<some extra flags>
 Extra flags for the c++ compiler for your system required.
-
--DLIB_SUFFIX=<suffix>
-Mostly for 64bit systems, there suffix may be 64 so libs will installed
-in /usr/lib64 and not /usr/lib for instance.
 
 After calling cmake just type
     make
@@ -68,5 +46,3 @@ If you require extra flags for compiler and linker you may give them via environ
   "CXXFLAGS" (c++ compiler)
   "LDFLAGS" (for linker)
   "CFLAGS"  (for c-compiler, not needed in kdesvn build)
-
-eg., it may usefull on 64bit systems "-m64" to CXXFLAGS and LDFLAGS.

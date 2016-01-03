@@ -1,3 +1,22 @@
+version 1.7.0:
+    * Bug 322021 - Action and notification strings are not really translatable
+    * Bug 322182 - kdesvn mangles options passed to external conflict resolver
+    * Bug 323403 - Add "Revert" option to context menu for files
+    * Bug 323712 - Subversion 1.6.x support
+    * Bug 324158 - kdesvn crash when a directory name contains the at (@) symbol
+    * Bug 325074, 330624 - kdesvn crashed when getting logs.
+    * Bug 332863 - Wish: Please add an "Unselect all"-buttton to commit dialoge
+    * Bug 340772 - Committing two moves together leads to out-of-date errors
+    * Bug 357297 - kdesvn crash after entering password
+    * ubuntu bug: 619249 tcp ports specified in urls are being ignored when using svn:https
+    * speedup db insertions into log-cache
+    * various code cleanups (krazy, cppcheck, preparation for KF5)
+    * libsvnqt is now a private helper lib to be able to do a major cleanup
+    * remove last pieces from Qt3support
+    * don't show disabled actions in contextmenu
+    * highlight trailing spaces in diff output on modified lines
+    * fix filtering in commit dialog 
+
 version 1.6.0:
     * User may add (or remove) patterns to ignore recursive
     * greek translation

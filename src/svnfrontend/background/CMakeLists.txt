@@ -38,8 +38,9 @@ add_library(svnbackground STATIC
     ${backgroundsrc}
 )
 
-set_target_properties(svnbackground
-    PROPERTIES
-    COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-add_dependencies(svnbackground ksvnwidgets)
+target_link_libraries(svnbackground
+    ${QT_QTCORE_LIBRARY}
+    svnfrontend
+    svnqt
+)

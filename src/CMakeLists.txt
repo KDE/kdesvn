@@ -49,10 +49,9 @@ add_subdirectory(icons)
 kde4_add_executable(kdesvn ${kdesvnsrc})
 kde4_add_plugin(kdesvnpart ${partsrc})
 
-set(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}")
-
-target_link_libraries(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnbackground ${svnqt-name}
-    ${QT_LIBRARIES}
+target_link_libraries(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnbackground svnqt
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTGUI_LIBRARY}
     ${KDE4_KDECORE_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}
     ${KDE4_KIO_LIBRARY}
@@ -66,10 +65,15 @@ set_target_properties(kdesvnpart
 include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 
 target_link_libraries(kdesvnaskpass #${QT_QTCORE_LIBRARY} ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBRARY}
-    ${QT_LIBRARIES} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY}
+    ${QT_QTCORE_LIBRARY}
+    ${KDE4_KDECORE_LIBRARY}
+    ${KDE4_KDEUI_LIBRARY}
 )
 target_link_libraries(kdesvn #${QT_AND_KDECORE_LIBS}
-    ${QT_LIBRARIES} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY}
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTGUI_LIBRARY}
+    ${KDE4_KDECORE_LIBRARY}
+    ${KDE4_KDEUI_LIBRARY}
     ${KDE4_KPARTS_LIBRARY}
 )
 

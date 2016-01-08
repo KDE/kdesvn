@@ -72,10 +72,6 @@ set(SOURCES
     )
 
 
-if(NOT svnqt-name)
-  set(svnqt-name svnqt_private)
-endif()
-
 if(QT_LUPDATE_EXECUTABLE)
     message(STATUS "Setting up language target")
 
@@ -101,42 +97,41 @@ configure_file(
     "${CMAKE_CURRENT_BINARY_DIR}/svnqt_defines.h"
     IMMEDIATE
     @ONLY)
-include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
-add_library(${svnqt-name} SHARED ${SOURCES})
+add_library(svnqt STATIC ${SOURCES})
 if(WIN32)
-    target_compile_definitions(${svnqt-name} PUBLIC _USE_32BIT_TIME_T)
+    target_compile_definitions(svnqt PUBLIC _USE_32BIT_TIME_T)
 endif()
 
 set(ALL_LINKFLAGS ${APR_EXTRA_LDFLAGS})
 set(ALL_LINKFLAGS "${ALL_LINKFLAGS} ${APU_EXTRA_LDFLAGS}")
 
 if(WIN32 OR APPLE)
-    set_property(TARGET ${svnqt-name} APPEND PROPERTY LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+    set_property(TARGET svnqt APPEND PROPERTY LINK_FLAGS "${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
 else()
-    set_property(TARGET ${svnqt-name} APPEND PROPERTY LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
+    set_property(TARGET svnqt APPEND PROPERTY LINK_FLAGS "-Wl,--as-needed ${ALL_LINKFLAGS} ${LINK_NO_UNDEFINED}")
 endif()
 
-target_link_libraries(${svnqt-name}
+target_link_libraries(svnqt
     ${SUBVERSION_ALL_LIBS}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTSQL_LIBRARY}
 )
-set_property(TARGET ${svnqt-name} APPEND PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS})
-set_property(TARGET ${svnqt-name} PROPERTY CXX_VISIBILITY_PRESET hidden)
+set_property(TARGET svnqt APPEND PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS})
+set_property(TARGET svnqt PROPERTY CXX_VISIBILITY_PRESET hidden)
 
 if(WIN32)
-    target_link_libraries(${svnqt-name} wsock32.lib)
+    target_link_libraries(svnqt wsock32.lib)
 endif()
 
 # Just a small linking test
 if(KDE4_BUILD_TESTS)
     add_executable(testlink testmain.cpp)
-    target_link_libraries(testlink ${svnqt-name})
+    target_link_libraries(testlink svnqt)
 endif()
 
 # install rules
-install(TARGETS ${svnqt-name} LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+install(TARGETS svnqt LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
 

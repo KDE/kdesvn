@@ -27,7 +27,3 @@ set(helperssrc
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 add_library(kdesvnhelpers STATIC ${helperssrc} ${hdr})
-
-set_target_properties(kdesvnhelpers
-    PROPERTIES
-    COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})

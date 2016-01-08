@@ -134,8 +134,9 @@ kde4_add_ui_files(frontend_ui_sources ${svnfrontendui})
 add_subdirectory(background)
 
 add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
-set_target_properties(svnfrontend
-    PROPERTIES
-    COMPILE_FLAGS ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
-add_dependencies(svnfrontend ksvnwidgets)
+target_link_libraries(svnfrontend
+    ${QT_QTCORE_LIBRARY}
+    ksvnwidgets
+    svnqt
+)

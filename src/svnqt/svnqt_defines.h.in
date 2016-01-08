@@ -23,7 +23,7 @@
 
 #include <QtCore/qglobal.h>
 
-#ifdef svnqt_private_EXPORTS
+#ifdef svnqt_EXPORTS
   #define SVNQT_EXPORT Q_DECL_EXPORT
 #else
   #define SVNQT_EXPORT Q_DECL_IMPORT

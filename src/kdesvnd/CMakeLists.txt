@@ -38,7 +38,7 @@ target_link_libraries(kded_kdesvnd
     ksvnwidgets
     kdesvnhelpers
     kdesvncfgreader
-    ${svnqt-name}
+    svnqt
     ${KDE4_KIO_LIBS}
 )
 

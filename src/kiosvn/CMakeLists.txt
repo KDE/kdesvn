@@ -41,7 +41,7 @@ qt4_add_dbus_interfaces( kiosvn_src ../kdesvnd/org.kde.kdesvnd.xml )
 kde4_add_plugin(kio_ksvn ${kiosvn_src} ${kiosvn_hdr})
 
 target_link_libraries(kio_ksvn
-    ${svnqt-name}
+    svnqt
     kdesvnhelpers
     kdesvncfgreader
     ${KDE4_KIO_LIBS}

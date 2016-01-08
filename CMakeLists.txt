@@ -26,6 +26,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cm
 # Automatically include the current source and binary dirs
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 find_package(KDE4 4.9.0 REQUIRED)
 include (KDE4Defaults)
@@ -73,7 +74,6 @@ add_definitions(-DQT_STRICT_ITERATORS)
 
 include(MacroEnsureVersion)
 include(FindSubversion)
-include(SetupCompiler)
 include(kdesvn-macros)
 
 # Enable exceptions
@@ -81,11 +81,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 
 # from http://www.kdedevelopers.org/node/3171 and http://kdesvn.alwins-world.de/ticket/595#comment:5
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=9510)
-
-include_directories(
-    BEFORE
-    ${CMAKE_SOURCE_DIR}/src/svnqt
-)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
@@ -105,7 +100,6 @@ add_definitions(${APR_CPP_FLAGS})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-set(svnqt-name svnqt_private)
 add_subdirectory(src)
 add_subdirectory(doc)
 

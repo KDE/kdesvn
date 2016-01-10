@@ -102,22 +102,22 @@ DiffParameter::DiffParameter()
 DiffParameter::~DiffParameter()
 {}
 
-GETSET(DiffParameter, Path, _path1, path1);
-GETSET(DiffParameter, Path, _path2, path2);
-GETSET(DiffParameter, Path, _tmpPath, tmpPath);
-GETSET(DiffParameter, Path, _relativeTo, relativeTo);
-GETSET(DiffParameter, Revision, _peg_revision, peg);
-GETSET(DiffParameter, Revision, _rev1, rev1);
-GETSET(DiffParameter, Revision, _rev2, rev2);
-GETSET(DiffParameter, StringArray, _changeList, changeList);
-GETSET(DiffParameter, StringArray, _extra, extra);
+GETSET(DiffParameter, Path, _path1, path1)
+GETSET(DiffParameter, Path, _path2, path2)
+GETSET(DiffParameter, Path, _tmpPath, tmpPath)
+GETSET(DiffParameter, Path, _relativeTo, relativeTo)
+GETSET(DiffParameter, Revision, _peg_revision, peg)
+GETSET(DiffParameter, Revision, _rev1, rev1)
+GETSET(DiffParameter, Revision, _rev2, rev2)
+GETSET(DiffParameter, StringArray, _changeList, changeList)
+GETSET(DiffParameter, StringArray, _extra, extra)
 
-GETSETSI(DiffParameter, Depth, _depth, depth);
-GETSETSI(DiffParameter, bool, _ignoreAncestry, ignoreAncestry);
-GETSETSI(DiffParameter, bool, _ignore_contenttype, ignoreContentType);
-GETSETSI(DiffParameter, bool, _noDiffDeleted, noDiffDeleted);
-GETSETSI(DiffParameter, bool, _copies_as_adds, copies_as_adds);
-GETSETSI(DiffParameter, bool, _git_diff_format, git_diff_format);
+GETSETSI(DiffParameter, Depth, _depth, depth)
+GETSETSI(DiffParameter, bool, _ignoreAncestry, ignoreAncestry)
+GETSETSI(DiffParameter, bool, _ignore_contenttype, ignoreContentType)
+GETSETSI(DiffParameter, bool, _noDiffDeleted, noDiffDeleted)
+GETSETSI(DiffParameter, bool, _copies_as_adds, copies_as_adds)
+GETSETSI(DiffParameter, bool, _git_diff_format, git_diff_format)
 
 struct StatusParameterData {
     StatusParameterData(const Path &path)
@@ -143,16 +143,16 @@ StatusParameter::StatusParameter(const Path &path)
 StatusParameter::~StatusParameter()
 {}
 
-GETSET(StatusParameter, Path, _path, path);
-GETSET(StatusParameter, Revision, _revision, revision);
-GETSET(StatusParameter, StringArray, _changeList, changeList);
+GETSET(StatusParameter, Path, _path, path)
+GETSET(StatusParameter, Revision, _revision, revision)
+GETSET(StatusParameter, StringArray, _changeList, changeList)
 
-GETSETSI(StatusParameter, Depth, _depth, depth);
-GETSETSI(StatusParameter, bool, _getAll, all);
-GETSETSI(StatusParameter, bool, _update, update);
-GETSETSI(StatusParameter, bool, _noIgnore, noIgnore);
-GETSETSI(StatusParameter, bool, _ignoreExternals, ignoreExternals);
-GETSETSI(StatusParameter, bool, _detailedRemote, detailedRemote);
+GETSETSI(StatusParameter, Depth, _depth, depth)
+GETSETSI(StatusParameter, bool, _getAll, all)
+GETSETSI(StatusParameter, bool, _update, update)
+GETSETSI(StatusParameter, bool, _noIgnore, noIgnore)
+GETSETSI(StatusParameter, bool, _ignoreExternals, ignoreExternals)
+GETSETSI(StatusParameter, bool, _detailedRemote, detailedRemote)
 
 struct LogParameterData {
 public:

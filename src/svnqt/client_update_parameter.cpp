@@ -52,15 +52,14 @@ UpdateParameter::UpdateParameter()
 UpdateParameter::~UpdateParameter()
 {}
 
-GETSET(UpdateParameter, Targets, _destPaths, targets);
-GETSET(UpdateParameter, Revision, _srcRevision, revision);
+GETSET(UpdateParameter, Targets, _destPaths, targets)
+GETSET(UpdateParameter, Revision, _srcRevision, revision)
 
-GETSETSI(UpdateParameter, Depth, _depth, depth);
-GETSETSI(UpdateParameter, bool, _ignore_externals, ignore_externals);
-GETSETSI(UpdateParameter, bool, _allow_unversioned, allow_unversioned);
-GETSETSI(UpdateParameter, bool, _sticky_depth, sticky_depth);
-GETSETSI(UpdateParameter, bool, _make_parents, make_parents);
-GETSETSI(UpdateParameter, bool, _add_as_modification, add_as_modification);
-
+GETSETSI(UpdateParameter, Depth, _depth, depth)
+GETSETSI(UpdateParameter, bool, _ignore_externals, ignore_externals)
+GETSETSI(UpdateParameter, bool, _allow_unversioned, allow_unversioned)
+GETSETSI(UpdateParameter, bool, _sticky_depth, sticky_depth)
+GETSETSI(UpdateParameter, bool, _make_parents, make_parents)
+GETSETSI(UpdateParameter, bool, _add_as_modification, add_as_modification)
 }
 

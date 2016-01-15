@@ -86,7 +86,7 @@ kdesvn::kdesvn()
     actionCollection()->addAction("bookmarks", m_BookmarksActionmenu);
     m_Bookmarkactions = new KActionCollection(static_cast<QWidget *>(this));
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
-    m_pBookmarkMenu->setParent(m_BookmarkManager);
+    m_pBookmarkMenu->setParent(this); // clear when kdesvn window gets destroyed
 
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
@@ -232,7 +232,7 @@ void kdesvn::setupActions()
     ac = KStandardAction::close(this, SLOT(fileClose()), actionCollection());
 //     ac->setEnabled(getMemberList()->count()>1);
     ac->setEnabled(memberList().count() > 1);
-    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KStandardAction::quit(this, SLOT(close()), actionCollection());
 
     KRecentFilesAction *rac = KStandardAction::openRecent(this, SLOT(loadRescent(KUrl)), actionCollection());
     if (rac) {

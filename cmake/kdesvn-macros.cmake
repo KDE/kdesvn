@@ -5,7 +5,7 @@ macro(BUILD_TEST tname)
         set(${tname}-src ${${tname}-src} ${tname}.h)
   endif()
   add_executable(${tname} ${${tname}-src})
-  target_link_libraries(${tname} ${svnqt-name} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY})
+  target_link_libraries(${tname} ${svnqt-name} ${QT_QTCORE_LIBRARY})
   add_test(${tname} ${CMAKE_CURRENT_BINARY_DIR}/${tname})
 endmacro()
 

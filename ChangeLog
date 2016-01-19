@@ -8,10 +8,11 @@ version 1.7.0:
     * Bug 332863 - Wish: Please add an "Unselect all"-buttton to commit dialoge
     * Bug 340772 - Committing two moves together leads to out-of-date errors
     * Bug 357297 - kdesvn crash after entering password
+    * Bug 358032 - Crash after closing KDESVN
     * ubuntu bug: 619249 tcp ports specified in urls are being ignored when using svn:https
     * speedup db insertions into log-cache
     * various code cleanups (krazy, cppcheck, preparation for KF5)
-    * libsvnqt is now a private helper lib to be able to do a major cleanup
+    * libsvnqt is no longer a public api
     * remove last pieces from Qt3support
     * don't show disabled actions in contextmenu
     * highlight trailing spaces in diff output on modified lines

@@ -153,6 +153,12 @@
         <property name="toolTip">
          <string>See context menu for more actions</string>
         </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <attribute name="headerShowSortIndicator" stdset="0">
+         <bool>true</bool>
+        </attribute>
         <column>
          <property name="text">
           <string>Action</string>

@@ -248,7 +248,7 @@ void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
     where->resizeColumnToContents(0);
     where->resizeColumnToContents(1);
     where->resizeColumnToContents(2);
-
+    where->sortByColumn(1, Qt::AscendingOrder);
 }
 
 long SvnLogModel::leftRow()const

@@ -103,7 +103,12 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
 
     author = author_ == 0 ? QString() : QString::fromUtf8(author_);
     message = message_ == 0 ? QString() : QString::fromUtf8(message_);
-    setDate(date_);
+    apr_time_t apr_time = 0;
+    if (date_) {
+        svn_error_t *err = svn_time_from_cstring(&apr_time, date_, pool);
+        svn_error_clear(err); // clear possible error
+    }
+    date = apr_time;
     revision = log_entry->revision;
     if (log_entry->changed_paths) {
         bool blocked = false;
@@ -124,7 +129,7 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
             svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *>(val);
 #endif
             const char *path = reinterpret_cast<const char *>(pv);
-            QString _p(path);
+            QString _p(QString::fromUtf8(path));
             for (int _exnr = 0; _exnr < excludeList.size(); ++_exnr) {
                 if (_p.startsWith(excludeList[_exnr])) {
                     blocked = true;
@@ -136,32 +141,6 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
             }
         }
     }
-}
-
-LogEntry::LogEntry(
-    const svn_revnum_t revision_,
-    const char *author_,
-    const char *date_,
-    const char *message_)
-{
-    setDate(date_);
-
-    revision = revision_;
-    author = author_ == 0 ? QString() : QString::fromUtf8(author_);
-    message = message_ == 0 ? QString() : QString::fromUtf8(message_);
-}
-
-void LogEntry::setDate(const char *date_)
-{
-    apr_time_t date__ = 0;
-    if (date_ != 0) {
-        Pool pool;
-
-        if (svn_time_from_cstring(&date__, date_, pool) != 0) {
-            date__ = 0;
-        }
-    }
-    date = date__;
 }
 }
 

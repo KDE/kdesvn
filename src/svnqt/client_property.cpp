@@ -50,9 +50,14 @@
 namespace svn
 {
 
+struct ProplistBaton {
+    ContextWP m_context;
+    PathPropertiesMapListPtr resultlist;
+};
+
 static svn_error_t *ProplistReceiver(void *baton, const char *path, apr_hash_t *prop_hash, apr_pool_t *pool)
 {
-    Client_impl::propBaton *_baton = static_cast<Client_impl::propBaton *>(baton);
+    ProplistBaton *_baton = static_cast<ProplistBaton *>(baton);
     PathPropertiesMapListPtr mapList = _baton->resultlist;
 
     ContextP l_context = _baton->m_context;
@@ -79,7 +84,7 @@ Client_impl::proplist(const Path &path,
 
     PathPropertiesMapListPtr path_prop_map_list = PathPropertiesMapListPtr(new PathPropertiesMapList);
 
-    propBaton baton;
+    ProplistBaton baton;
     baton.m_context = m_context;
     baton.resultlist = path_prop_map_list;
     // todo svn 1.8: svn_client_proplist4

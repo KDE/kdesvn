@@ -564,18 +564,6 @@ public:
 
     virtual bool RepoHasCapability(const Path &repository, Capability capability);
 
-    struct sBaton {
-        sBaton(): m_data(0), m_revstack(0), excludeList(0) {}
-        ContextWP m_context;
-        void *m_data;
-        void *m_revstack;
-        const StringArray *excludeList;
-    };
-
-    struct propBaton {
-        ContextWP m_context;
-        PathPropertiesMapListPtr resultlist;
-    };
     static void checkErrorThrow(svn_error_t *error)throw(ClientException)
     {
         if (!error || error->apr_err == APR_SUCCESS) {

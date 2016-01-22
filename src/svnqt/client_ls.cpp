@@ -46,6 +46,11 @@
 namespace svn
 {
 
+struct ListBaton {
+    ContextWP context;
+    DirEntries dirEntries;
+};
+
 static svn_error_t *s_list_func
 (void *baton, const char *path, const svn_dirent_t *dirent, const svn_lock_t *lock, const char *abs_path, apr_pool_t *)
 {
@@ -54,18 +59,16 @@ static svn_error_t *s_list_func
         return 0;
     }
     /* check every loop for cancel of operation */
-    Client_impl::sBaton *l_baton = (Client_impl::sBaton *)baton;
-    ContextP l_context = l_baton->m_context;
+    ListBaton *l_baton = static_cast<ListBaton *>(baton);
+    ContextP l_context = l_baton->context;
     if (l_context.isNull()) {
         return SVN_NO_ERROR;
     }
-    DirEntries *entries = static_cast<DirEntries *>(l_baton->m_data);
     svn_client_ctx_t *ctx = l_context->ctx();
     if (ctx && ctx->cancel_func) {
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
     }
-    l_context->contextAddListItem(entries, dirent, lock, QString::fromUtf8(path));
-    //entries->push_back(new DirEntry(QString::fromUtf8(path),dirent,lock));
+    l_context->contextAddListItem(&l_baton->dirEntries, dirent, lock, QString::fromUtf8(path));
     return 0;
 }
 
@@ -76,12 +79,10 @@ Client_impl::list(const Path &pathOrUrl,
                   Depth depth, bool retrieve_locks) throw (ClientException)
 {
 
-    sBaton _baton;
+    ListBaton _baton;
     Pool pool;
-    DirEntries entries;
-    _baton.m_data = &entries;
-    _baton.m_context = m_context;
     // todo svn 1.8: svn_client_list3
+    _baton.context = m_context;
     svn_error_t *error = svn_client_list2(pathOrUrl.cstr(),
                                           peg,
                                           revision,
@@ -96,7 +97,7 @@ Client_impl::list(const Path &pathOrUrl,
     if (error != 0) {
         throw ClientException(error);
     }
-    return entries;
+    return _baton.dirEntries;
 }
 }
 

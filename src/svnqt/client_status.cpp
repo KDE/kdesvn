@@ -54,43 +54,16 @@
 namespace svn
 {
 
-static svn_error_t *
-logMapReceiver2(
-    void *baton,
-    svn_log_entry_t *log_entry,
-    apr_pool_t *pool
-)
-{
-    Q_UNUSED(pool);
-    Client_impl::sBaton *l_baton = (Client_impl::sBaton *)baton;
-    LogEntriesMap *entries =
-        (LogEntriesMap *) l_baton->m_data;
-    ContextP l_context = l_baton->m_context;
-    if (l_context.isNull()) {
-        return SVN_NO_ERROR;
-    }
-    QList<qlonglong> *rstack =
-        (QList<qlonglong> *)l_baton->m_revstack;
-    svn_client_ctx_t *ctx = l_context->ctx();
-    if (ctx && ctx->cancel_func) {
-        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
-    }
-    if (! SVN_IS_VALID_REVNUM(log_entry->revision)) {
-        if (rstack && !rstack->isEmpty()) {
-            rstack->pop_front();
-        }
-        return SVN_NO_ERROR;
-    }
-    (*entries)[log_entry->revision] = LogEntry(log_entry, (l_baton->excludeList ? * (l_baton->excludeList) : svn::StringArray()));
-    /// @TODO insert it into last logentry
-    if (rstack) {
-        (*entries)[log_entry->revision].m_MergedInRevisions = (*rstack);
-        if (log_entry->has_children) {
-            rstack->push_front(log_entry->revision);
-        }
-    }
-    return SVN_NO_ERROR;
-}
+struct LogBaton {
+    ContextWP context;
+    LogEntriesMap *logEntries;
+    QList<qlonglong> *revstack;
+    StringArray excludeList;
+    LogBaton()
+        : logEntries(0)
+        , revstack(0)
+    {}
+};
 
 struct StatusEntriesBaton {
     StatusEntries entries;
@@ -107,6 +80,42 @@ struct InfoEntriesBaton {
     InfoEntriesBaton(): entries(), pool(0)
     {}
 };
+
+static svn_error_t *
+logMapReceiver2(
+    void *baton,
+    svn_log_entry_t *log_entry,
+    apr_pool_t *pool
+)
+{
+    Q_UNUSED(pool);
+    LogBaton *l_baton = static_cast<LogBaton*>(baton);
+    ContextP l_context = l_baton->context;
+    if (l_context.isNull()) {
+        return SVN_NO_ERROR;
+    }
+    svn_client_ctx_t *ctx = l_context->ctx();
+    if (ctx && ctx->cancel_func) {
+        SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
+    }
+    QList<qlonglong> *rstack = l_baton->revstack;
+    if (! SVN_IS_VALID_REVNUM(log_entry->revision)) {
+        if (rstack && !rstack->isEmpty()) {
+            rstack->pop_front();
+        }
+        return SVN_NO_ERROR;
+    }
+    LogEntriesMap *entries = l_baton->logEntries;
+    (*entries)[log_entry->revision] = LogEntry(log_entry, l_baton->excludeList);
+    /// @TODO insert it into last logentry
+    if (rstack) {
+        (*entries)[log_entry->revision].m_MergedInRevisions = (*rstack);
+        if (log_entry->has_children) {
+            rstack->push_front(log_entry->revision);
+        }
+    }
+    return SVN_NO_ERROR;
+}
 
 static svn_error_t *InfoEntryFunc(void *baton,
                                   const char *path,
@@ -344,12 +353,12 @@ bool
 Client_impl::log(const LogParameter &params, LogEntriesMap &log_target) throw (ClientException)
 {
     Pool pool;
-    sBaton l_baton;
+    LogBaton l_baton;
     QList<qlonglong> revstack;
-    l_baton.m_context = m_context;
-    l_baton.m_data = &log_target;
-    l_baton.m_revstack = &revstack;
-    l_baton.excludeList = & (params.excludeList());
+    l_baton.context = m_context;
+    l_baton.excludeList = params.excludeList();
+    l_baton.logEntries = &log_target;
+    l_baton.revstack = &revstack;
     svn_error_t *error;
 
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)

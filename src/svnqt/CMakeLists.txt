@@ -135,11 +135,6 @@ if(KDE4_BUILD_TESTS)
     target_link_libraries(testlink svnqt)
 endif()
 
-# install rules
-install(TARGETS svnqt LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
-
 if(KDE4_BUILD_TESTS)
   add_subdirectory(tests)
   add_subdirectory(cache/test)

@@ -21,8 +21,8 @@
 #define CHECKOUTINFO_IMPL_H
 
 #include "ui_checkoutinfo.h"
-#include "src/svnqt/revision.h"
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/revision.h"
+#include "svnqt/svnqttypes.h"
 #include "kurl.h"
 
 class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo

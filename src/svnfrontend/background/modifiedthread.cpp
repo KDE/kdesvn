@@ -20,8 +20,8 @@
 
 #include "modifiedthread.h"
 
-#include "src/svnqt/svnqttypes.h"
-#include "src/svnqt/client_parameter.h"
+#include "svnqt/svnqttypes.h"
+#include "svnqt/client_parameter.h"
 
 // CheckModifiedThread
 CheckModifiedThread::CheckModifiedThread(QObject *parent, const QString &what, bool updates)

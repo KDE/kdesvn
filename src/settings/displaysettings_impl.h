@@ -20,7 +20,7 @@
 #ifndef DISPLAYSETTINGS_IMPL_H
 #define DISPLAYSETTINGS_IMPL_H
 
-#include "src/settings/ui_display_settings.h"
+#include "settings/ui_display_settings.h"
 
 class DisplaySettings_impl: public QWidget, public Ui::DisplaySettings
 {

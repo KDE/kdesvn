@@ -20,9 +20,9 @@
 #ifndef DEPTHSELECTOR_H
 #define DEPTHSELECTOR_H
 
-#include "src/ksvnwidgets/ui_depthform.h"
+#include "ksvnwidgets/ui_depthform.h"
 
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 class QCheckBox;
 

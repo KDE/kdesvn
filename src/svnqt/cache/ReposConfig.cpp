@@ -28,7 +28,7 @@
  ***************************************************************************/
 #include "ReposConfig.h"
 #include "LogCache.h"
-#include "src/svnqt/path.h"
+#include "svnqt/path.h"
 
 namespace svn
 {

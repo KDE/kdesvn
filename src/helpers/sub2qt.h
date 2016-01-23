@@ -20,8 +20,8 @@
 #ifndef HELPERSSUB2QT_H
 #define HELPERSSUB2QT_H
 
-#include "src/svnqt/datetime.h"
-#include "src/svnqt/targets.h"
+#include "svnqt/datetime.h"
+#include "svnqt/targets.h"
 #include <svn_time.h>
 
 #include <QDateTime>

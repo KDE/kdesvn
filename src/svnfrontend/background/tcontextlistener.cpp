@@ -19,11 +19,11 @@
  ***************************************************************************/
 #include "tcontextlistener.h"
 
-#include "ccontextlistener.h"
-#include "src/ksvnwidgets/authdialogimpl.h"
-#include "src/ksvnwidgets/commitmsg_impl.h"
-#include "src/ksvnwidgets/ssltrustprompt_impl.h"
-#include "src/helpers/stringhelper.h"
+#include "svnfrontend/ccontextlistener.h"
+#include "ksvnwidgets/authdialogimpl.h"
+#include "ksvnwidgets/commitmsg_impl.h"
+#include "ksvnwidgets/ssltrustprompt_impl.h"
+#include "helpers/stringhelper.h"
 #include "threadcontextlistenerdata.h"
 
 #include <kdebug.h>

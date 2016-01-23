@@ -20,7 +20,7 @@
 #include "commitmsg_impl.h"
 #include "models/commitmodelhelper.h"
 #include "models/commitmodel.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include "depthselector.h"
 
 #include <ktextedit.h>

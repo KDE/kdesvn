@@ -18,7 +18,6 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 set(kded_kdesvnd_src
@@ -41,7 +40,6 @@ target_link_libraries(kded_kdesvnd
     svnqt
     ${KDE4_KIO_LIBS}
 )
-
 install(TARGETS kded_kdesvnd
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})

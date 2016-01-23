@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "propertylist.h"
 #include "kmultilinedelegate.h"
-#include "src/svnfrontend/fronthelpers/propertyitem.h"
+#include "svnfrontend/fronthelpers/propertyitem.h"
 
 #include <klocale.h>
 #include <kdebug.h>

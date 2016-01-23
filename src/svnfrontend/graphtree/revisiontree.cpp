@@ -19,18 +19,18 @@
  ***************************************************************************/
 #include "revisiontree.h"
 #include "../stopdlg.h"
-#include "src/svnqt/log_entry.h"
-#include "src/svnqt/cache/LogCache.h"
-#include "src/svnqt/cache/ReposLog.h"
-#include "src/svnqt/cache/ReposConfig.h"
-#include "src/svnqt/url.h"
-#include "src/svnqt/client_parameter.h"
+#include "svnqt/log_entry.h"
+#include "svnqt/cache/LogCache.h"
+#include "svnqt/cache/ReposLog.h"
+#include "svnqt/cache/ReposConfig.h"
+#include "svnqt/url.h"
+#include "svnqt/client_parameter.h"
 #include "helpers/sub2qt.h"
 #include "revtreewidget.h"
 #include "revgraphview.h"
 #include "elogentry.h"
-#include "src/svnfrontend/fronthelpers/cursorstack.h"
-#include "src/settings/kdesvnsettings.h"
+#include "svnfrontend/fronthelpers/cursorstack.h"
+#include "settings/kdesvnsettings.h"
 
 #include <kdebug.h>
 #include <kprogressdialog.h>

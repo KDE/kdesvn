@@ -21,7 +21,7 @@
 #include "svnsortfilter.h"
 #include "svnitemmodel.h"
 #include "svnitemnode.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include <kdebug.h>
 
 SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)

@@ -23,7 +23,7 @@
 #define SETPROPERTYWIDGET_H_
 
 #include "ui_setproperty.h"
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 #include <QWidget>
 

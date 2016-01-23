@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "depthselector.h"
-#include "src/svnqt/version_check.h"
+#include "svnqt/version_check.h"
 
 #include <klocale.h>
 

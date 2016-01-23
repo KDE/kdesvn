@@ -22,7 +22,7 @@
 
 #include "ui_createrepo_dlg.h"
 
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 #include <QScopedPointer>
 

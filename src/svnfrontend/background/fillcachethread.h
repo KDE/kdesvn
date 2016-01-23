@@ -20,10 +20,10 @@
 #ifndef FILLCACHE_THREAD_H
 #define FILLCACHE_THREAD_H
 
-#include "src/svnqt/client.h"
-#include "src/svnqt/revision.h"
-#include "src/svnqt/status.h"
-#include "frontendtypes.h"
+#include "svnqt/client.h"
+#include "svnqt/revision.h"
+#include "svnqt/status.h"
+#include "svnfrontend/frontendtypes.h"
 #include "svnthread.h"
 
 class QObject;

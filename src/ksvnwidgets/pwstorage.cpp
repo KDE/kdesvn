@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "pwstorage.h"
 #include "kdesvn-config.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 
 #include <kwallet.h>
 

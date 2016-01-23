@@ -20,8 +20,8 @@
 
 #include "itemdisplay.h"
 #include "svnitem.h"
-#include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/status.h"
+#include "settings/kdesvnsettings.h"
+#include "svnqt/status.h"
 
 ItemDisplay::ItemDisplay()
     : m_isWorkingCopy(false), m_isNetworked(false)

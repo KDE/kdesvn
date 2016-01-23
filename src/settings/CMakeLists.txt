@@ -48,6 +48,11 @@ add_library(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr
 target_link_libraries(settingsdlgs
     kdesvncfgreader
 )
+include_directories(settingsdlgs
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/../
+        ${CMAKE_CURRENT_BINARY_DIR}/../
+)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 

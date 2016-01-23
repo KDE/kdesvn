@@ -21,7 +21,7 @@
 #ifndef SUBVERSIONSETTINGS_IMPL_H
 #define SUBVERSIONSETTINGS_IMPL_H
 
-#include "src/settings/ui_subversion_settings.h"
+#include "settings/ui_subversion_settings.h"
 
 class SubversionSettings_impl : public QWidget, public Ui::SubversionSettings
 {

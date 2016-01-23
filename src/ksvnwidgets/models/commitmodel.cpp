@@ -21,7 +21,7 @@
 #include "commitmodel.h"
 #include "commitmodelhelper.h"
 
-#include "src/svnqt/commititem.h"
+#include "svnqt/commititem.h"
 
 #include <klocale.h>
 

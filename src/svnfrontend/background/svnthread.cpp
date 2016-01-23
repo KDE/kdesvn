@@ -21,7 +21,7 @@
 #include "svnthread.h"
 #include "tcontextlistener.h"
 
-#include "src/svnqt/url.h"
+#include "svnqt/url.h"
 
 #include <kurl.h>
 #include <kdebug.h>

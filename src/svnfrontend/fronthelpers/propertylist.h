@@ -22,7 +22,7 @@
 
 #include <QTreeWidget>
 #include <QStringList>
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 class SvnItem;
 /**

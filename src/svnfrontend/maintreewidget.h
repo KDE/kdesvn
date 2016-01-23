@@ -20,12 +20,12 @@
 #ifndef MAINTREEWIDGET_H
 #define MAINTREEWIDGET_H
 
-#include "src/svnfrontend/ui_treeWidget.h"
+#include "ui_treeWidget.h"
 #include "itemdisplay.h"
 #include "frontendtypes.h"
 
-#include "src/svnqt/status.h"
-#include "src/svnqt/client.h"
+#include "svnqt/status.h"
+#include "svnqt/client.h"
 
 #include <kservice.h>
 #include <krun.h>

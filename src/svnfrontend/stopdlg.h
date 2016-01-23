@@ -20,7 +20,7 @@
 #ifndef STOPDLG_H
 #define STOPDLG_H
 
-#include "src/svnfrontend/fronthelpers/cursorstack.h"
+#include "svnfrontend/fronthelpers/cursorstack.h"
 
 #include <kdialog.h>
 

@@ -19,8 +19,8 @@
  ***************************************************************************/
 #include "sub2qt.h"
 
-#include "src/svnqt/datetime.h"
-#include "src/svnqt/path.h"
+#include "svnqt/datetime.h"
+#include "svnqt/path.h"
 #include "kglobal.h"
 #include "klocale.h"
 

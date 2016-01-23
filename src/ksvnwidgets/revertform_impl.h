@@ -20,8 +20,8 @@
 #ifndef REVERT_FORM_IMPL_H
 #define REVERT_FORM_IMPL_H
 
-#include "ui_revertform.h"
-#include "src/svnqt/svnqttypes.h"
+#include "ksvnwidgets/ui_revertform.h"
+#include "svnqt/svnqttypes.h"
 
 class QStringList;
 

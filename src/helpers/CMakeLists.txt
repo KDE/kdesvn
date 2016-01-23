@@ -27,3 +27,12 @@ set(helperssrc
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 add_library(kdesvnhelpers STATIC ${helperssrc} ${hdr})
+target_include_directories(kdesvnhelpers
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/../
+)
+target_link_libraries(kdesvnhelpers
+    PUBLIC
+        svnqt
+)
+

@@ -20,9 +20,9 @@
 #include "fillcachethread.h"
 #include "tcontextlistener.h"
 
-#include "src/svnqt/cache/ReposLog.h"
-#include "src/svnqt/cache/ReposConfig.h"
-#include "src/svnqt/url.h"
+#include "svnqt/cache/ReposLog.h"
+#include "svnqt/cache/ReposConfig.h"
+#include "svnqt/url.h"
 
 #include <KLocale>
 

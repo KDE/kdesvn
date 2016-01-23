@@ -62,14 +62,12 @@ set_target_properties(kdesvnpart
     PROPERTIES
     LINK_FLAGS "${APR_EXTRA_LDFLAGS} ${APU_EXTRA_LDFLAGS} ${LINK_NO_UNDEFINED}")
 
-include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
-
-target_link_libraries(kdesvnaskpass #${QT_QTCORE_LIBRARY} ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBRARY}
+target_link_libraries(kdesvnaskpass
     ${QT_QTCORE_LIBRARY}
     ${KDE4_KDECORE_LIBRARY}
     ${KDE4_KDEUI_LIBRARY}
 )
-target_link_libraries(kdesvn #${QT_AND_KDECORE_LIBS}
+target_link_libraries(kdesvn
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     ${KDE4_KDECORE_LIBRARY}

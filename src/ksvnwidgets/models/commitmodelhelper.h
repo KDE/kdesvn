@@ -21,7 +21,7 @@
 #ifndef COMMITMODELHELPER_H
 #define COMMITMODELHELPER_H
 
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 #include <QString>
 

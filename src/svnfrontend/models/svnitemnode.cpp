@@ -19,9 +19,9 @@
  ***************************************************************************/
 
 #include "svnitemnode.h"
-#include "src/svnfrontend/maintreewidget.h"
-#include "src/svnqt/revision.h"
-#include "src/settings/kdesvnsettings.h"
+#include "svnfrontend/maintreewidget.h"
+#include "svnqt/revision.h"
+#include "settings/kdesvnsettings.h"
 
 #include <kdebug.h>
 

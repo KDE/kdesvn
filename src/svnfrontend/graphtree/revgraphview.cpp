@@ -21,9 +21,9 @@
 #include "graphtreelabel.h"
 #include "pannerview.h"
 #include "graphtree_defines.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include "../stopdlg.h"
-#include "src/svnqt/client.h"
+#include "svnqt/client.h"
 
 #include <kdebug.h>
 #include <ktemporaryfile.h>

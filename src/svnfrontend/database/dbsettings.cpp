@@ -22,8 +22,8 @@
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
 #include "dbsettings.h"
-#include "src/svnqt/cache/ReposConfig.h"
-#include "src/svnfrontend/fronthelpers/createdlg.h"
+#include "svnqt/cache/ReposConfig.h"
+#include "svnfrontend/fronthelpers/createdlg.h"
 #include <QPointer>
 
 class DbSettingsData

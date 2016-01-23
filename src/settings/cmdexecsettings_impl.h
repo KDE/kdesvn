@@ -21,7 +21,7 @@
 #ifndef CMDEXECSETTINGS_IMPL_H
 #define CMDEXECSETTINGS_IMPL_H
 
-#include "src/settings/ui_cmdexecsettings.h"
+#include "settings/ui_cmdexecsettings.h"
 
 class CmdExecSettings_impl : public QWidget, public Ui::CmdExecSettings
 {

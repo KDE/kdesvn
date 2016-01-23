@@ -19,10 +19,10 @@
  ***************************************************************************/
 
 #include "getinfothread.h"
-#include "src/svnfrontend/models/svnitemnode.h"
+#include "svnfrontend/models/svnitemnode.h"
 #include "tcontextlistener.h"
-#include "src/svnqt/status.h"
-#include "src/svnqt/url.h"
+#include "svnqt/status.h"
+#include "svnqt/url.h"
 
 #include <QMutexLocker>
 #include <QReadLocker>

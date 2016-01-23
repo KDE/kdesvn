@@ -22,7 +22,7 @@
 #define SVNTHREAD_H
 
 #include "tcontextlistener.h"
-#include "frontendtypes.h"
+#include "svnfrontend/frontendtypes.h"
 
 #include <QThread>
 

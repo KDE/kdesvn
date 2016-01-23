@@ -20,7 +20,7 @@
 #ifndef DISPCOLORSETTINGS_IMPL_H
 #define DISPCOLORSETTINGS_IMPL_H
 
-#include "src/settings/ui_dispcolor_settings.h"
+#include "settings/ui_dispcolor_settings.h"
 
 class DispColorSettings_impl: public QWidget, public Ui::DispColorSettings
 {

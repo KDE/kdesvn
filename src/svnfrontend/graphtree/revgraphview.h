@@ -54,7 +54,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(QObject *aListener, const svn::ClientP &_client, QWidget *parent = 0);
+    RevGraphView(const svn::ClientP &_client, QWidget *parent = 0);
     virtual ~RevGraphView();
 
     void showText(const QString &s);
@@ -108,7 +108,6 @@ protected:
     GraphMark *m_Marker;
     svn::ClientP m_Client;
     GraphTreeLabel *m_Selected;
-    QObject *m_Listener;
     KTemporaryFile *m_dotTmpFile;
     QString m_dotOutput;
     KProcess *m_renderProcess;

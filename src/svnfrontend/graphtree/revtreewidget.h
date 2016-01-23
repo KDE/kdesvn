@@ -23,7 +23,6 @@
 #include <svnqt/client.h>
 #include <svnqt/revision.h>
 
-#include <qpixmap.h>
 #include <qwidget.h>
 
 class QVBoxLayout;
@@ -41,7 +40,7 @@ class RevTreeWidget : public QWidget
     Q_OBJECT
 
 public:
-    RevTreeWidget(QObject *lt, const svn::ClientP &cl, QWidget *parent = 0);
+    RevTreeWidget(const svn::ClientP &cl, QWidget *parent = 0);
     ~RevTreeWidget();
 
     QSplitter *m_Splitter;
@@ -61,10 +60,6 @@ signals:
 
 protected slots:
     virtual void setDetailText(const QString &);
-
-private:
-    QPixmap image0;
-
 };
 
 #endif // REVTREEWIDGET_H

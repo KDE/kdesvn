@@ -51,13 +51,12 @@
 #define LABEL_WIDTH 160
 #define LABEL_HEIGHT 90
 
-RevGraphView::RevGraphView(QObject *aListener, const svn::ClientP &_client, QWidget *parent)
+RevGraphView::RevGraphView(const svn::ClientP &_client, QWidget *parent)
     : QGraphicsView(parent)
     , m_Scene(0)
     , m_Marker(0)
     , m_Client(_client)
     , m_Selected(0)
-    , m_Listener(aListener)
     , m_dotTmpFile(0)
     , m_renderProcess(0)
     , m_xMargin(0)

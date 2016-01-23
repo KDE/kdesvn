@@ -20,7 +20,7 @@
 #ifndef ENCODINGSELECTOR_IMPL_H
 #define ENCODINGSELECTOR_IMPL_H
 
-#include "ui_encodingselector.h"
+#include "ksvnwidgets/ui_encodingselector.h"
 
 class QTextCodec;
 

@@ -22,13 +22,13 @@
 #include "svnitemnode.h"
 #include "svnactions.h"
 #include "getinfothread.h"
-#include "src/svnfrontend/maintreewidget.h"
-#include "src/settings/kdesvnsettings.h"
+#include "svnfrontend/maintreewidget.h"
+#include "settings/kdesvnsettings.h"
 
-#include "src/svnqt/status.h"
-#include "src/svnqt/client.h"
-#include "src/svnqt/path.h"
-#include "src/svnqt/svnqt_defines.h"
+#include "svnqt/status.h"
+#include "svnqt/client.h"
+#include "svnqt/path.h"
+#include "svnqt/svnqt_defines.h"
 
 #include <klocale.h>
 #include <kdebug.h>

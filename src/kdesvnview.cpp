@@ -26,11 +26,11 @@
 #include "svnfrontend/loaddmpdlg_impl.h"
 #include "svnfrontend/stopdlg.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
-#include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/url.h"
-#include "src/svnqt/repository.h"
-#include "src/svnqt/version_check.h"
-#include "src/svnqt/svnqttypes.h"
+#include "settings/kdesvnsettings.h"
+#include "svnqt/url.h"
+#include "svnqt/repository.h"
+#include "svnqt/version_check.h"
+#include "svnqt/svnqttypes.h"
 
 #include <QPainter>
 #include <QLayout>

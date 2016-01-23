@@ -20,9 +20,9 @@
 #ifndef COMMITMSG_IMPL_H
 #define COMMITMSG_IMPL_H
 
-#include "src/ksvnwidgets/ui_commitmessage.h"
-#include "src/ksvnwidgets/models/commitmodelfwd.h"
-#include "src/svnqt/commititem.h"
+#include "ksvnwidgets/ui_commitmessage.h"
+#include "ksvnwidgets/models/commitmodelfwd.h"
+#include "svnqt/commititem.h"
 
 
 class QStringList;

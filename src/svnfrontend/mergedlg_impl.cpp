@@ -19,9 +19,9 @@
  ***************************************************************************/
 #include "mergedlg_impl.h"
 #include "rangeinput_impl.h"
-#include "src/svnqt/url.h"
+#include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 
 #include <kurlrequester.h>
 #include <kdialog.h>

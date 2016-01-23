@@ -24,7 +24,7 @@
 
 #include "svnitemmodelfwd.h"
 
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 #include <KUrl>
 #include <QScopedPointer>

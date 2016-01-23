@@ -18,17 +18,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandexec.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include "svnfrontend/svnactions.h"
 #include "svnfrontend/dummydisplay.h"
-#include "src/svnqt/targets.h"
-#include "src/svnqt/url.h"
-#include "src/svnqt/dirent.h"
-#include "src/helpers/sub2qt.h"
-#include "src/helpers/ktranslateurl.h"
-#include "src/helpers/sshagent.h"
-#include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
-#include "src/svnfrontend/copymoveview_impl.h"
+#include "svnqt/targets.h"
+#include "svnqt/url.h"
+#include "svnqt/dirent.h"
+#include "helpers/sub2qt.h"
+#include "helpers/ktranslateurl.h"
+#include "helpers/sshagent.h"
+#include "svnfrontend/fronthelpers/rangeinput_impl.h"
+#include "svnfrontend/copymoveview_impl.h"
 
 #include <kapplication.h>
 #include <kglobal.h>

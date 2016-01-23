@@ -20,7 +20,7 @@
 #ifndef KIOBYTESTREAM_H
 #define KIOBYTESTREAM_H
 
-#include "src/svnqt/svnstream.h"
+#include "svnqt/svnstream.h"
 
 #include <kio/global.h>
 #include <kmimetype.h>

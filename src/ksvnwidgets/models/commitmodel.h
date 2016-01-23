@@ -23,7 +23,7 @@
 
 #include "commitmodelfwd.h"
 #include "commitmodelhelper.h"
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 #include <QAbstractListModel>
 #include <QScopedPointer>

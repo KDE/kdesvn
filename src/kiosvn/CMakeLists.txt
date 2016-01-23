@@ -18,11 +18,6 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-include_directories(
-    ${CMAKE_BINARY_DIR}/src/svnqt
-    ${CMAKE_BINARY_DIR}/src/ksvnwidgets
-)
-
 set(kiosvn_src
     kiosvn.cpp
     kiolistener.cpp
@@ -46,7 +41,6 @@ target_link_libraries(kio_ksvn
     kdesvncfgreader
     ${KDE4_KIO_LIBS}
 )
-
 set_target_properties(kio_ksvn
     PROPERTIES
     LINK_FLAG "${LINK_NO_UNDEFINED}")

@@ -20,7 +20,7 @@
 #ifndef CCONTEXTLISTENER_H
 #define CCONTEXTLISTENER_H
 
-#include "src/svnqt/context_listener.h"
+#include "svnqt/context_listener.h"
 
 #include <QObject>
 #include <QString>

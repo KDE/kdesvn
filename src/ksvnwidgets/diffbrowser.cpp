@@ -20,7 +20,7 @@
 
 #include "diffbrowser.h"
 #include "diffbrowserdata.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 
 #include <KGlobalSettings>
 #include <KGlobal>

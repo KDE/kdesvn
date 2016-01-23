@@ -20,9 +20,9 @@
 #ifndef MODIFIED_THREAD_H
 #define MODIFIED_THREAD_H
 
-#include "src/svnqt/client.h"
-#include "src/svnqt/revision.h"
-#include "src/svnqt/status.h"
+#include "svnqt/client.h"
+#include "svnqt/revision.h"
+#include "svnqt/status.h"
 #include "svnthread.h"
 
 class CheckModifiedThread: public SvnThread

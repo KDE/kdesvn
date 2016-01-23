@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisionbuttonimpl.h"
-#include "src/svnfrontend/fronthelpers/rangeinput_impl.h"
-#include "src/settings/kdesvnsettings.h"
+#include "svnfrontend/fronthelpers/rangeinput_impl.h"
+#include "settings/kdesvnsettings.h"
 
 #include <kpushbutton.h>
 #include <kdialog.h>

@@ -22,8 +22,8 @@
 
 #include "ui_svnlogdlg.h"
 #include "simple_logcb.h"
-#include "src/svnqt/log_entry.h"
-#include "src/svnqt/client.h"
+#include "svnqt/log_entry.h"
+#include "svnqt/client.h"
 
 #include <QKeyEvent>
 #include <QRegExp>

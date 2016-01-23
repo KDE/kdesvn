@@ -18,11 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "svnlogdlgimp.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include "svnactions.h"
-#include "src/svnfrontend/fronthelpers/revisionbuttonimpl.h"
-#include "src/svnfrontend/models/logitemmodel.h"
-#include "src/svnfrontend/models/logmodelhelper.h"
+#include "svnfrontend/fronthelpers/revisionbuttonimpl.h"
+#include "svnfrontend/models/logitemmodel.h"
+#include "svnfrontend/models/logmodelhelper.h"
 
 #include <kconfig.h>
 #include <kmenu.h>

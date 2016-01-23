@@ -23,8 +23,8 @@
 #include <QTreeWidgetItem>
 #include <QString>
 
-#include "src/svnqt/svnqttypes.h"
-#include "src/svnqt/log_entry.h"
+#include "svnqt/svnqttypes.h"
+#include "svnqt/log_entry.h"
 
 class LogChangePathItem: public QTreeWidgetItem
 {

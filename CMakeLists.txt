@@ -35,7 +35,7 @@ include (MacroLibrary)
 # Set the version
 set(KDESVN_VERSION_MAJOR 1)
 set(KDESVN_VERSION_MINOR 7)
-set(KDESVN_VERSION_PATCH 0)
+set(KDESVN_VERSION_PATCH 40)
 set(KDESVN_VERSION_STRING ${KDESVN_VERSION_MAJOR}.${KDESVN_VERSION_MINOR}.${KDESVN_VERSION_PATCH})
 
 # Append the git revision if available
@@ -83,11 +83,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=9510)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/src/svnfrontend
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}/src
-    ${CMAKE_BINARY_DIR}/src/svnfrontend
     ${CMAKE_BINARY_DIR}
     ${KDE4_INCLUDES}
     ${QT_INCLUDE_DIR}

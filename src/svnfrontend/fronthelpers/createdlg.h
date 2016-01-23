@@ -20,7 +20,7 @@
 #ifndef CREATEDLG_H
 #define CREATEDLG_H
 
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include <kdialog.h>
 #include <kconfig.h>
 #include <kvbox.h>

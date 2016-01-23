@@ -117,6 +117,11 @@ target_link_libraries(svnqt
     ${QT_QTCORE_LIBRARY}
     ${QT_QTSQL_LIBRARY}
 )
+target_include_directories(svnqt
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/../
+        ${CMAKE_CURRENT_BINARY_DIR}/../
+)
 set_property(TARGET svnqt APPEND PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS})
 set_property(TARGET svnqt PROPERTY CXX_VISIBILITY_PRESET hidden)
 

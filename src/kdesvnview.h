@@ -21,7 +21,7 @@
 #ifndef KDESVNVIEW_H
 #define KDESVNVIEW_H
 
-#include "src/svnqt/repositorylistener.h"
+#include "svnqt/repositorylistener.h"
 #include <qwidget.h>
 #include <kparts/part.h>
 

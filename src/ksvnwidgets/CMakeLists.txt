@@ -18,8 +18,6 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-include_directories(${CMAKE_BINARY_DIR}/src/svnqt)
-
 kde4_add_ui_files(kdesvn_shared_ui
     authdlg.ui
     commitmessage.ui
@@ -70,4 +68,9 @@ qt4_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobVie
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 target_link_libraries(ksvnwidgets
     kdesvncfgreader
+)
+target_include_directories(ksvnwidgets
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/../
+        ${CMAKE_CURRENT_BINARY_DIR}/../
 )

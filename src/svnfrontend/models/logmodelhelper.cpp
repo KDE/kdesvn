@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "logmodelhelper.h"
-#include "src/svnqt/log_entry.h"
+#include "svnqt/log_entry.h"
 
 #include <klocale.h>
 #include <kdebug.h>

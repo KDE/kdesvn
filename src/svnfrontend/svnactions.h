@@ -20,9 +20,9 @@
 #ifndef SVNACTIONS_H
 #define SVNACTIONS_H
 
-#include "src/svnqt/client.h"
-#include "src/svnqt/revision.h"
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/client.h"
+#include "svnqt/revision.h"
+#include "svnqt/svnqttypes.h"
 
 #include "simple_logcb.h"
 #include "frontendtypes.h"

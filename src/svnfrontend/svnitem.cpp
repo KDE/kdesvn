@@ -21,9 +21,9 @@
 #include "svnitem.h"
 #include "svnactions.h"
 #include "kdesvn_part.h"
-#include "src/settings/kdesvnsettings.h"
-#include "src/svnqt/status.h"
-#include "src/svnqt/url.h"
+#include "settings/kdesvnsettings.h"
+#include "svnqt/status.h"
+#include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
 
 #include <kglobal.h>

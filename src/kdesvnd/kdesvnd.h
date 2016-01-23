@@ -21,7 +21,7 @@
 #ifndef kdesvnd_H
 #define kdesvnd_H
 
-#include "src/ksvnwidgets/jobviewserverinterface.h"
+#include "ksvnwidgets/jobviewserverinterface.h"
 
 #include <qstringlist.h>
 #include <qstring.h>

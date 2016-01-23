@@ -20,7 +20,7 @@
 #ifndef DELETEFORM_IMPL_H
 #define DELETEFORM_IMPL_H
 
-#include "src/ksvnwidgets/ui_deleteform.h"
+#include "ksvnwidgets/ui_deleteform.h"
 
 class DeleteForm_impl: public QWidget, Ui::DeleteForm
 {

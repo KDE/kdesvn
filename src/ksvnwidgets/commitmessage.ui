@@ -256,7 +256,7 @@
   <customwidget>
    <class>DepthSelector</class>
    <extends>QWidget</extends>
-   <header>src/ksvnwidgets/depthselector.h</header>
+   <header>ksvnwidgets/depthselector.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -277,7 +277,7 @@
  <includes>
   <include location="local">ktextedit.h</include>
   <include location="local">kcombobox.h</include>
-  <include location="local">src/ksvnwidgets/depthselector.h</include>
+  <include location="local">ksvnwidgets/depthselector.h</include>
  </includes>
  <resources/>
  <connections>

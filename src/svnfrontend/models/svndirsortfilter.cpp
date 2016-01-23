@@ -20,7 +20,7 @@
 
 #include "svndirsortfilter.h"
 #include "svnitemnode.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include <kdebug.h>
 
 SvnDirSortFilterProxy::SvnDirSortFilterProxy(QObject *parent)

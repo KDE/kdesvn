@@ -18,11 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "ccontextlistener.h"
-#include "src/settings/kdesvnsettings.h"
-#include "src/ksvnwidgets/authdialogimpl.h"
-#include "src/ksvnwidgets/commitmsg_impl.h"
-#include "src/ksvnwidgets/ssltrustprompt_impl.h"
-#include "src/ksvnwidgets/pwstorage.h"
+#include "settings/kdesvnsettings.h"
+#include "ksvnwidgets/authdialogimpl.h"
+#include "ksvnwidgets/commitmsg_impl.h"
+#include "ksvnwidgets/ssltrustprompt_impl.h"
+#include "ksvnwidgets/pwstorage.h"
 
 #include <klocale.h>
 #include <kapplication.h>

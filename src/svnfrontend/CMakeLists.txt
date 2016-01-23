@@ -19,10 +19,7 @@
  ####
 
 include_directories(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
-                    ${CMAKE_SOURCE_DIR}/src/svnfrontend/background
-                    ${CMAKE_SOURCE_DIR}/src/ksvnwidgets
-                    ${CMAKE_BINARY_DIR}/src/svnqt
-                    ${CMAKE_BINARY_DIR}/src/ksvnwidgets)
+                    ${CMAKE_SOURCE_DIR}/src/svnfrontend/background)
 
 set(svnfrontendsrc
     EditIgnorePattern.cpp
@@ -139,4 +136,8 @@ target_link_libraries(svnfrontend
     ${QT_QTCORE_LIBRARY}
     ksvnwidgets
     svnqt
+)
+target_include_directories(svnfrontend
+    PUBLIC
+        ${CMAKE_CURRENT_BINARY_DIR}
 )

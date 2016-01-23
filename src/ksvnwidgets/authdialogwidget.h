@@ -20,7 +20,7 @@
 #ifndef AUTHDIALOGWIDGET_H
 #define AUTHDIALOGWIDGET_H
 
-#include "src/ksvnwidgets/ui_authdlg.h"
+#include "ksvnwidgets/ui_authdlg.h"
 #include <qstring.h>
 #include <QWidget>
 

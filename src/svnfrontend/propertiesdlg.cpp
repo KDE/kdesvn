@@ -19,12 +19,12 @@
  ***************************************************************************/
 
 #include "propertiesdlg.h"
-#include "src/svnfrontend/fronthelpers/propertyitem.h"
-#include "src/svnfrontend/fronthelpers/propertylist.h"
+#include "svnfrontend/fronthelpers/propertyitem.h"
+#include "svnfrontend/fronthelpers/propertylist.h"
 #include "fronthelpers/createdlg.h"
 #include "editpropswidget.h"
 #include "svnitem.h"
-#include "src/svnqt/client.h"
+#include "svnqt/client.h"
 
 #include <qvariant.h>
 #include <qlabel.h>

@@ -21,7 +21,7 @@
 #include "logitemmodel.h"
 #include "logmodelhelper.h"
 
-#include "src/svnqt/client.h"
+#include "svnqt/client.h"
 
 #include <klocale.h>
 #include <kdebug.h>

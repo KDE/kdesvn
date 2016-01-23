@@ -145,7 +145,7 @@
   <customwidget>
    <class>DepthSelector</class>
    <extends>QWidget</extends>
-   <header>src/ksvnwidgets/depthselector.h</header>
+   <header>ksvnwidgets/depthselector.h</header>
   </customwidget>
  </customwidgets>
  <includes>
@@ -156,7 +156,7 @@
   <include location="local" >klineedit.h</include>
   <include location="local" >kpushbutton.h</include>
   <include location="local" >rangeinput_impl.h</include>
-  <include location="local" >src/ksvnwidgets/depthselector.h</include>
+  <include location="local" >ksvnwidgets/depthselector.h</include>
  </includes>
  <resources/>
  <connections/>

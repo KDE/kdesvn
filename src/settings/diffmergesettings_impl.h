@@ -20,7 +20,7 @@
 #ifndef DIFFMERGESETTINGS_IMPL_H
 #define DIFFMERGESETTINGS_IMPL_H
 
-#include "src/settings/ui_diffmergesettings.h"
+#include "settings/ui_diffmergesettings.h"
 
 class DiffMergeSettings_impl: public QWidget, public Ui::DiffMergeSettings
 {

@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "revtreewidget.h"
 #include "revgraphview.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 
 #include <ktextbrowser.h>
 

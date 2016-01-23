@@ -21,7 +21,7 @@
 #ifndef POLLING_SETTINGS_IMPL_H
 #define POLLING_SETTINGS_IMPL_H
 
-#include "src/settings/ui_polling_settings.h"
+#include "settings/ui_polling_settings.h"
 
 class PollingSettings_impl : public QWidget, public Ui::PollingSettings
 {

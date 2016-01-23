@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "kdesvn_part.h"
-#include "src/settings/kdesvnsettings.h"
+#include "settings/kdesvnsettings.h"
 #include "settings/displaysettings_impl.h"
 #include "settings/dispcolorsettings_impl.h"
 #include "settings/revisiontreesettingsdlg_impl.h"
@@ -29,8 +29,8 @@
 #include "settings/polling_settings_impl.h"
 #include "kdesvnview.h"
 #include "commandline_part.h"
-#include "src/svnqt/version_check.h"
-#include "src/svnqt/url.h"
+#include "svnqt/version_check.h"
+#include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
 #include "helpers/sshagent.h"
 #include "svnfrontend/database/dboverview.h"

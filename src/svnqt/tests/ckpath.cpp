@@ -21,7 +21,7 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#include "src/svnqt/path.h"
+#include "svnqt/path.h"
 #include <qstring.h>
 #include "svnqt/svnqt_defines.h"
 #include <iostream>

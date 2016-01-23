@@ -21,7 +21,7 @@
 #ifndef SVN_ITEM_H
 #define SVN_ITEM_H
 
-#include "src/svnqt/status.h"
+#include "svnqt/status.h"
 #include <kmimetype.h>
 #include <QString>
 #include <QDateTime>

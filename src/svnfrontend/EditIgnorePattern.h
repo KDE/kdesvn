@@ -23,7 +23,7 @@
 
 #include "ui_editignorepattern.h"
 
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 
 #include <QWidget>
 #include <QStringList>

@@ -22,7 +22,7 @@
 
 #include "svnitemmodelfwd.h"
 
-#include "src/svnfrontend/svnitem.h"
+#include "svnfrontend/svnitem.h"
 
 #include <QAbstractItemModel>
 #include <QColor>

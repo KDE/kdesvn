@@ -21,7 +21,7 @@
 #ifndef ITEMDISPLAY_H
 #define ITEMDISPLAY_H
 
-#include "src/svnqt/svnqttypes.h"
+#include "svnqt/svnqttypes.h"
 #include "frontendtypes.h"
 #include <QString>
 #include <kurl.h>

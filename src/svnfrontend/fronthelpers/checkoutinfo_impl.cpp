@@ -19,8 +19,8 @@
  ***************************************************************************/
 #include "checkoutinfo_impl.h"
 #include "rangeinput_impl.h"
-#include "src/ksvnwidgets/depthselector.h"
-#include "src/svnqt/url.h"
+#include "ksvnwidgets/depthselector.h"
+#include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
 #include <kurlrequester.h>
 #include <qlabel.h>

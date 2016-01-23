@@ -20,7 +20,7 @@
 #ifndef SSLTRUSTPROMPT_IMPL_H
 #define SSLTRUSTPROMPT_IMPL_H
 
-// #include "src/ksvnwidgets/ssltrustprompt.h"
+// #include "ksvnwidgets/ssltrustprompt.h"
 #include "ksvnwidgets/ui_ssltrustprompt.h"
 
 class SslTrustPrompt_impl: public QWidget, public Ui::SslTrustPrompt  //public SslTrustPrompt {

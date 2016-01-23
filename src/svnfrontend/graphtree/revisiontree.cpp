@@ -178,7 +178,7 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
             m_Data->progress->progressBar()->setRange(0, 100);
             m_Data->progress->progressBar()->setTextVisible(false);
             m_Data->m_stopTick.restart();
-            m_Data->m_TreeDisplay = new RevTreeWidget(m_Data->m_Listener, m_Data->m_Client, treeParent);
+            m_Data->m_TreeDisplay = new RevTreeWidget(m_Data->m_Client, treeParent);
             if (bottomUpScan(m_InitialRevsion, 0, m_Path, 0)) {
                 m_Valid = true;
                 m_Data->m_TreeDisplay->setBasePath(reposRoot);

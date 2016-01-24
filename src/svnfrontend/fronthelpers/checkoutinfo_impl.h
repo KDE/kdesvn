@@ -50,8 +50,10 @@ public:
     void setTargetUrl(const QString &);
     bool ignoreExternals() const;
     void hideDepth(bool hide);
-    void overwriteAsRecursive(bool overwriteAsRecurse);
+    void overwriteAsRecursive();
     void hideOverwrite(bool hide);
+    void hideIgnoreKeywords(bool hide);
+    bool ignoreKeywords() const;
 protected slots:
     void urlChanged(const QString &);
 };

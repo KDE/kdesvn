@@ -40,6 +40,7 @@ CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent)
     m_RangeInput->setHeadDefault();
     m_TargetSelector->setMode(KFile::LocalOnly | KFile::Directory);
     m_UrlEdit->setMode(KFile::Directory);
+    hideIgnoreKeywords(true);
 }
 
 CheckoutInfo_impl::~CheckoutInfo_impl()
@@ -112,15 +113,10 @@ void CheckoutInfo_impl::hideDepth(bool how)
     adjustSize();
 }
 
-void CheckoutInfo_impl::overwriteAsRecursive(bool overwriteAsRecurse)
+void CheckoutInfo_impl::overwriteAsRecursive()
 {
-  if (overwriteAsRecurse) {
-      m_overwriteButton->setToolTip(i18n("Make operation recursive"));
-      m_overwriteButton->setText(i18n("Recursive"));
-  } else {
-      m_overwriteButton->setText(i18n("Overwrite existing"));
-      m_overwriteButton->setToolTip(i18n("May existing unversioned items overwritten"));
-  }
+    m_overwriteButton->setToolTip(i18n("Make operation recursive"));
+    m_overwriteButton->setText(i18n("Recursive"));
 }
 
 void CheckoutInfo_impl::hideOverwrite(bool hide)
@@ -128,6 +124,15 @@ void CheckoutInfo_impl::hideOverwrite(bool hide)
     m_overwriteButton->setHidden(hide);
 }
 
+void CheckoutInfo_impl::hideIgnoreKeywords(bool hide)
+{
+    m_IgnoreKeywords->setHidden(hide);
+}
+
+bool CheckoutInfo_impl::ignoreKeywords() const
+{
+    return m_IgnoreKeywords->isChecked();
+}
 
 svn::Depth CheckoutInfo_impl::getDepth() const
 {

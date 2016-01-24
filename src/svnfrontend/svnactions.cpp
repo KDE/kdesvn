@@ -1659,13 +1659,14 @@ void SvnActions::CheckoutExport(const QString &what, bool _exp, bool urlisTarget
                 ptr->setTargetUrl(what);
             }
         }
+        ptr->hideIgnoreKeywords(!_exp);
+        ptr->hideOverwrite(!_exp);
         if (dlg->exec() == QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             bool openit = ptr->openAfterJob();
             bool ignoreExternal = ptr->ignoreExternals();
-            // TODO: false -> ignoreKeywords
             makeCheckout(ptr->reposURL(), ptr->targetDir(), r, r, ptr->getDepth(), _exp,
-                         openit, ignoreExternal, ptr->overwrite(), false, 0);
+                         openit, ignoreExternal, ptr->overwrite(), ptr->ignoreKeywords(), 0);
         }
         if (dlg) {
           KConfigGroup _kc(Kdesvnsettings::self()->config(), "checkout_export_dialog");

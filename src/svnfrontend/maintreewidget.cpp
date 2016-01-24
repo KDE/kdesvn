@@ -2037,7 +2037,7 @@ void MainTreeWidget::slotRelocate()
         ptr->hideOverwrite(true);
 #else
         ptr->hideDepth(true);
-        ptr->overwriteAsRecursive(true);
+        ptr->overwriteAsRecursive();
         ptr->disableExternals(true);
 #endif
         bool done = false;

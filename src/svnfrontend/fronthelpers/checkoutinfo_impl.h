@@ -49,7 +49,9 @@ public:
     void disableRange(bool how);
     void setTargetUrl(const QString &);
     bool ignoreExternals() const;
-    void hideDepth(bool hide, bool overwriteAsRecurse);
+    void hideDepth(bool hide);
+    void overwriteAsRecursive(bool overwriteAsRecurse);
+    void hideOverwrite(bool hide);
 protected slots:
     void urlChanged(const QString &);
 };

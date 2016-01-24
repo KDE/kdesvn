@@ -113,7 +113,7 @@ public:
      */
     virtual void
     relocate(const Path &path, const Url &from_url,
-             const Url &to_url, bool recurse) throw (ClientException);
+             const Url &to_url, bool recurse, bool ignore_externals) throw (ClientException);
 
     /**
      * Sets files for deletion.

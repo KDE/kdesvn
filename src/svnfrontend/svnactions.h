@@ -130,7 +130,7 @@ public:
     void makeUpdate(const svn::Targets &targets, const svn::Revision &rev, svn::Depth depth);
     bool makeSwitch(const QString &rUrl, const QString &tPath, const svn::Revision &r, svn::Depth depth, const svn::Revision &peg, bool stickydepth, bool ignore_externals, bool allow_unversioned);
     bool makeSwitch(const QString &path, const QString &what);
-    bool makeRelocate(const QString &fUrl, const QString &tUrl, const QString &path, bool rec = true);
+    bool makeRelocate(const QString &fUrl, const QString &tUrl, const QString &path, bool recursive, bool ignore_externals);
     bool makeCheckout(const QString &, const QString &, const svn::Revision &, const svn::Revision &, svn::Depth, bool isExport, bool openit, bool ignore_externals, bool overwrite, QWidget *p);
     void makeInfo(const SvnItemList &lst, const svn::Revision &, const svn::Revision &, bool recursive = true);
     void makeInfo(const QStringList &lst, const svn::Revision &, const svn::Revision &, bool recursive = true);

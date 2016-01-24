@@ -1850,7 +1850,7 @@ bool SvnActions::makeSwitch(const QString &rUrl, const QString &tPath, const svn
     return true;
 }
 
-bool SvnActions::makeRelocate(const QString &fUrl, const QString &tUrl, const QString &path, bool rec)
+bool SvnActions::makeRelocate(const QString &fUrl, const QString &tUrl, const QString &path, bool recursive, bool ignore_externals)
 {
     if (!m_Data->m_CurrentContext) {
         return false;
@@ -1868,7 +1868,7 @@ bool SvnActions::makeRelocate(const QString &fUrl, const QString &tUrl, const QS
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Relocate Repository"), i18n("Relocate repository to new URL"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        m_Data->m_Svnclient->relocate(p, _f, _t, rec);
+        m_Data->m_Svnclient->relocate(p, _f, _t, recursive, ignore_externals);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;

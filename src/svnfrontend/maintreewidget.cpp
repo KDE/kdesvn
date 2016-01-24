@@ -2032,14 +2032,19 @@ void MainTreeWidget::slotRelocate()
         ptr->disableTargetDir(true);
         ptr->disableRange(true);
         ptr->disableOpen(true);
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+        ptr->hideDepth(true);
+        ptr->hideOverwrite(true);
+#else
+        ptr->hideDepth(true);
+        ptr->overwriteAsRecursive(true);
         ptr->disableExternals(true);
-        // TODO ignore_externals as parameter for svn 1.7 and recurse hidden
-        ptr->hideDepth(true, true);
+#endif
         bool done = false;
         KConfigGroup _k(Kdesvnsettings::self()->config(), "relocate_dlg");
         dlg->restoreDialogSize(_k);
         if (dlg->exec() == QDialog::Accepted) {
-            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite());
+            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
         }
         if (dlg) {
             dlg->saveDialogSize(_k);

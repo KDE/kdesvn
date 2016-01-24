@@ -586,7 +586,8 @@ void
 Client_impl::relocate(const Path &path,
                       const Url &from_url,
                       const Url &to_url,
-                      bool recurse) throw (ClientException)
+                      bool recurse,
+                      bool ignore_externals) throw (ClientException)
 {
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     Q_UNUSED(recurse);
@@ -597,7 +598,7 @@ Client_impl::relocate(const Path &path,
         svn_client_relocate2(path.cstr(),
                              from_url,
                              to_url,
-                             false, // TODO ignore_externals as parameter for svn 1.7
+                             ignore_externals,
                              *m_context,
                              pool);
 

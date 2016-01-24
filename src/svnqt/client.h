@@ -134,7 +134,7 @@ public:
      */
     virtual void
     relocate(const Path &path, const Url &from_url,
-             const Url &to_url, bool recurse) throw (ClientException) = 0;
+             const Url &to_url, bool recurse, bool ignore_externals) throw (ClientException) = 0;
 
     /**
      * Sets entries for deletion.

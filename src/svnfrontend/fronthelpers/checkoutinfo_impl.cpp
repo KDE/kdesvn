@@ -100,23 +100,34 @@ void CheckoutInfo_impl::setStartUrl(const QString &what)
     m_UrlEdit->setUrl(uri);
 }
 
-void CheckoutInfo_impl::hideDepth(bool how, bool overwriteAsRecurse)
+void CheckoutInfo_impl::hideDepth(bool how)
 {
     if (how) {
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->hide();
-        if (overwriteAsRecurse) {
-            m_overwriteButton->setToolTip(i18n("Make operation recursive"));
-            m_overwriteButton->setText(i18n("Recursive"));
-        }
     } else if (!how) {
         m_DepthSelector->setEnabled(false);
         m_DepthSelector->show();
-        m_overwriteButton->setText(i18n("Overwrite existing"));
-        m_overwriteButton->setToolTip(i18n("May existing unversioned items overwritten"));
     }
     adjustSize();
 }
+
+void CheckoutInfo_impl::overwriteAsRecursive(bool overwriteAsRecurse)
+{
+  if (overwriteAsRecurse) {
+      m_overwriteButton->setToolTip(i18n("Make operation recursive"));
+      m_overwriteButton->setText(i18n("Recursive"));
+  } else {
+      m_overwriteButton->setText(i18n("Overwrite existing"));
+      m_overwriteButton->setToolTip(i18n("May existing unversioned items overwritten"));
+  }
+}
+
+void CheckoutInfo_impl::hideOverwrite(bool hide)
+{
+    m_overwriteButton->setHidden(hide);
+}
+
 
 svn::Depth CheckoutInfo_impl::getDepth() const
 {

@@ -111,6 +111,7 @@ Client_impl::propget(const QString &propName,
 
     apr_hash_t *props;
     svn_revnum_t actual = svn_revnum_t(-1);
+    // TODO: svn_client_propget4
     svn_error_t *error = svn_client_propget3(&props,
                                              propName.toUtf8(),
                                              path.cstr(),
@@ -159,6 +160,7 @@ Client_impl::propset(const PropertiesParameter &params)
 
     svn_error_t *error = 0;
     svn_commit_info_t *commit_info;
+    // TODO: svn_client_propset_local / svn_client_propset_remove
     svn_client_propset3(
         &commit_info,
         params.propertyName().toUtf8(),

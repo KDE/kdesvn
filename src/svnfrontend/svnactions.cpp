@@ -1203,7 +1203,7 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
             }
         } else {
             if (!makeCheckout(p1, first, start, peg,
-                              rec ? svn::DepthInfinity : svn::DepthFiles, true, false, false, false, p)) {
+                              rec ? svn::DepthInfinity : svn::DepthFiles, true, false, false, false, false, p)) {
                 return;
             }
         }
@@ -1215,7 +1215,7 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
             }
         } else {
             if (!makeCheckout(p2, second, end, peg,
-                              rec ? svn::DepthInfinity : svn::DepthFiles, true, false, false, false, p)) {
+                              rec ? svn::DepthInfinity : svn::DepthFiles, true, false, false, false, false, p)) {
                 return;
             }
         }
@@ -1628,12 +1628,12 @@ bool SvnActions::makeDelete(const svn::Targets &target, bool keep_local, bool fo
 
 void SvnActions::slotCheckout()
 {
-    CheckoutExport(false);
+    CheckoutExport(QString(), false);
 }
 
 void SvnActions::slotExport()
 {
-    CheckoutExport(true);
+    CheckoutExport(QString(), true);
 }
 
 void SvnActions::slotCheckoutCurrent()
@@ -1646,48 +1646,32 @@ void SvnActions::slotExportCurrent()
     CheckoutExportCurrent(true);
 }
 
-void SvnActions::CheckoutExport(bool _exp)
+void SvnActions::CheckoutExport(const QString &what, bool _exp, bool urlisTarget)
 {
     CheckoutInfo_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, (_exp ? i18n("Export repository") : i18n("Checkout a repository")),
+    QPointer<KDialog> dlg = createOkDialog(&ptr, _exp ? i18n("Export a repository") : i18n("Checkout a repository"),
                                            true, QLatin1String("checkout_export_dialog"));
     if (dlg) {
+        if (!what.isEmpty()) {
+            if (!urlisTarget) {
+                ptr->setStartUrl(what);
+            } else {
+                ptr->setTargetUrl(what);
+            }
+        }
         if (dlg->exec() == QDialog::Accepted) {
             svn::Revision r = ptr->toRevision();
             bool openit = ptr->openAfterJob();
             bool ignoreExternal = ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(), ptr->targetDir(), r, r,
-                         ptr->getDepth(),
-                         _exp,
-                         openit,
-                         ignoreExternal,
-                         ptr->overwrite(), 0);
+            // TODO: false -> ignoreKeywords
+            makeCheckout(ptr->reposURL(), ptr->targetDir(), r, r, ptr->getDepth(), _exp,
+                         openit, ignoreExternal, ptr->overwrite(), false, 0);
         }
         if (dlg) {
           KConfigGroup _kc(Kdesvnsettings::self()->config(), "checkout_export_dialog");
           dlg->saveDialogSize(_kc);
           delete dlg;
         }
-    }
-}
-
-void SvnActions::CheckoutExport(const QString &what, bool _exp, bool urlisTarget)
-{
-    CheckoutInfo_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, _exp ? i18n("Export a repository") : i18n("Checkout a repository"), true);
-    if (dlg) {
-        if (!urlisTarget) {
-            ptr->setStartUrl(what);
-        } else {
-            ptr->setTargetUrl(what);
-        }
-        if (dlg->exec() == QDialog::Accepted) {
-            svn::Revision r = ptr->toRevision();
-            bool openIt = ptr->openAfterJob();
-            bool ignoreExternal = ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(), ptr->targetDir(), r, r, ptr->getDepth(), _exp, openIt, ignoreExternal, ptr->overwrite(), 0);
-        }
-        delete dlg;
     }
 }
 
@@ -1720,6 +1704,8 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
                               bool ignoreExternal,
                               // overwrite/force not versioned items
                               bool overwrite,
+                              // do not replace svn:keywords on export
+                              bool ignoreKeywords,
                               QWidget *_p
                              )
 {
@@ -1736,7 +1722,7 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
         reInitClient();
     }
     svn::CheckoutParameter cparams;
-    cparams.moduleName(fUrl).destination(p).revision(r).peg(peg).depth(depth).ignoreExternals(ignoreExternal).overWrite(overwrite);
+    cparams.moduleName(fUrl).destination(p).revision(r).peg(peg).depth(depth).ignoreExternals(ignoreExternal).overWrite(overwrite).ignoreKeywords(ignoreKeywords);
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, _p ? _p : m_Data->m_ParentList->realWidget(),
@@ -2108,7 +2094,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
 
     QString s1 = f1.fileName() + '-' + rev1.toString();
     QString s2 = f2.fileName() + '-' + rev2.toString();
-    QString first, second, out;
+    QString first, second;
     if (rev1 != svn::Revision::WORKING) {
         first = tdir1.name() + '/' + s1;
     } else {
@@ -2133,10 +2119,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
         if (isDir) {
             if (!makeCheckout(src1, first, rev1, svn::Revision::UNDEFINED,
                               rec ? svn::DepthInfinity : svn::DepthFiles,
-                              true,
-                              false,
-                              false,
-                              false, 0)) {
+                              true, false, false, false, false, 0)) {
                 return;
             }
         } else {
@@ -2151,7 +2134,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
             if (isDir) {
                 if (!makeCheckout(src2, second, rev2, svn::Revision::UNDEFINED,
                                   rec ? svn::DepthInfinity : svn::DepthFiles,
-                                  true, false, false, false, 0)) {
+                                  true, false, false, false, false, 0)) {
                     return;
                 }
             } else {

@@ -477,20 +477,30 @@ Client_impl::doExport(const CheckoutParameter &params) throw (ClientException)
 {
     Pool pool;
     svn_revnum_t revnum = 0;
+    QByteArray _neolBA;
     const char *_neol;
     if (params.nativeEol().isNull()) {
         _neol = (const char *)0;
     } else {
-        _neol = params.nativeEol().toUtf8();
+        _neolBA = params.nativeEol().toUtf8();
+        _neol = _neolBA.constData();
     }
     svn_error_t *error =
-        svn_client_export4(&revnum,
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+        svn_client_export5(
+#else
+        svn_client_export4(
+#endif
+                           &revnum,
                            params.moduleName().cstr(),
                            params.destination().cstr(),
                            params.peg().revision(),
                            params.revision().revision(),
                            params.overWrite(),
                            params.ignoreExternals(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+                           params.ignoreKeywords(),
+#endif
                            internal::DepthToSvn(params.depth()),
                            _neol,
                            *m_context,
@@ -515,7 +525,7 @@ Client_impl::doSwitch(
     Pool pool;
     svn_revnum_t revnum = 0;
     svn_error_t *error = 0;
-
+  // TODO: svn_client_switch3
     error = svn_client_switch2(
                 &revnum,
                 path.cstr(),

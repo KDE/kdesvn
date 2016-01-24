@@ -535,6 +535,9 @@ public:
     CheckoutParameter &overWrite(bool overwrite);
     //!if true overwrite existing not versioned items.
     bool overWrite()const;
+    //! do not replace svn:keywords on export
+    bool ignoreKeywords()const;
+    CheckoutParameter &ignoreKeywords(bool ignorekeywords);
 
     //!Either "LF", "CR" or "CRLF" or QString().
     /*!

@@ -179,6 +179,7 @@ localStatus(const StatusParameter &params,
 
     baton.pool = pool;
 
+    // TODO: svn_client_status5
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_status4(
 #else
@@ -254,6 +255,7 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
 
     baton.pool = pool;
 
+    // TODO: svn_client_status5
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_status4(
 #else

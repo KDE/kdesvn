@@ -87,11 +87,6 @@ public:
     operator const QString &()const;
 
     /**
-     * @return Path as pretty url
-     */
-    QString prettyPath()const;
-
-    /**
      * @return Path string as c string
      */
     const QByteArray cstr() const;
@@ -112,14 +107,6 @@ public:
      * @param component new component to add
      */
     void
-    addComponent(const char *component);
-
-    /**
-     * adds a new URL component to the path
-     *
-     * @param component new component to add
-     */
-    void
     addComponent(const QString &component);
 
     /** Reduce path to its parent folder.
@@ -129,32 +116,6 @@ public:
      */
     void
     removeLast();
-
-    /**
-     * split path in its components
-     *
-     * @param dirpath directory/path component
-     * @param basename filename
-     */
-    void
-    split(QString &dirpath, QString &basename) const;
-
-    /**
-     * split path in its components including
-     * file extension
-     *
-     * @param dir directory component
-     * @param filename filename
-     * @param ext extension (including leading dot ".")
-     */
-    void
-    split(QString &dir, QString &filename, QString &ext) const;
-
-    /**
-     * returns the temporary directory
-     */
-    static Path
-    getTempDir();
 
     /** Parse a string for a peg revision
      * @param pathorurl url to parse

@@ -122,18 +122,6 @@ Path::operator const QString &()const
     return m_path;
 }
 
-QString Path::prettyPath()const
-{
-    if (!Url::isValid(m_path)) {
-        return m_path;
-    }
-    Pool pool;
-    const char *int_path = svn_path_uri_decode(m_path.toUtf8(), pool.pool());
-    QString _p = QString::fromUtf8(int_path);
-    _p.replace("%40", "@");
-    return _p;
-}
-
 const QByteArray
 Path::cstr() const
 {
@@ -183,12 +171,6 @@ Path::addComponent(const QString &_component)
 }
 
 void
-Path::addComponent(const char *component)
-{
-    addComponent(QString::fromUtf8(component));
-}
-
-void
 Path::removeLast()
 {
     Pool pool;
@@ -199,61 +181,6 @@ Path::removeLast()
         svn_stringbuf_create(m_path.toUtf8(), pool);
     svn_path_remove_component(pathStringbuf);
     m_path = QString::fromUtf8(pathStringbuf->data);
-}
-
-void
-Path::split(QString &dirpath, QString &basename) const
-{
-    Pool pool;
-
-    const char *cdirpath;
-    const char *cbasename;
-
-#if ((SVN_VER_MAJOR == 1) && (SVN_VER_MINOR >= 7)) || (SVN_VER_MAJOR > 1)
-    const char *int_path = prettyPath().toUtf8().constData();
-    if (Url::isValid(m_path)) {
-        svn_uri_split(&cdirpath, &cbasename, int_path, pool);
-    } else {
-        svn_dirent_split(&cdirpath, &cbasename, int_path, pool);
-    }
-#else
-    svn_path_split(prettyPath().toUtf8(), &cdirpath, &cbasename, pool);
-#endif
-    dirpath = QString::fromUtf8(cdirpath);
-    basename = QString::fromUtf8(cbasename);
-}
-
-void
-Path::split(QString &dir, QString &filename, QString &ext) const
-{
-    QString basename;
-
-    // first split path into dir and filename+ext
-    split(dir, basename);
-
-    // next search for last .
-    int pos = basename.lastIndexOf(QChar('.'));
-
-    if (pos == -1) {
-        filename = basename;
-        ext = QString();
-    } else {
-        filename = basename.left(pos);
-        ext = basename.mid(pos + 1);
-    }
-}
-
-Path
-Path::getTempDir()
-{
-    const char *tempdir = 0;
-    Pool pool;
-
-    if (apr_temp_dir_get(&tempdir, pool) != APR_SUCCESS) {
-        return svn::Path(QDir::tempPath());
-    }
-
-    return svn::Path(QString::fromUtf8(tempdir));
 }
 
 void

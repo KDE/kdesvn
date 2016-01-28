@@ -1666,8 +1666,23 @@ void SvnActions::CheckoutExport(const QString &what, bool _exp, bool urlisTarget
             svn::Revision r = ptr->toRevision();
             bool openit = ptr->openAfterJob();
             bool ignoreExternal = ptr->ignoreExternals();
-            makeCheckout(ptr->reposURL(), ptr->targetDir(), r, r, ptr->getDepth(), _exp,
-                         openit, ignoreExternal, ptr->overwrite(), ptr->ignoreKeywords(), 0);
+            if (!ptr->reposURL().isValid()) {
+                KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+                                   _exp ? i18n("Export repository") : i18n("Checkout a repository"));
+                delete dlg;
+                return;
+            }
+            // svn::Path should not take a QString but a QByteArray ...
+            const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
+            makeCheckout(rUrl,
+                         ptr->targetDir(), r, r,
+                         ptr->getDepth(),
+                         _exp,
+                         openit,
+                         ignoreExternal,
+                         ptr->overwrite(),
+                         ptr->ignoreKeywords(),
+                         0);
         }
         if (dlg) {
           KConfigGroup _kc(Kdesvnsettings::self()->config(), "checkout_export_dialog");
@@ -1904,8 +1919,16 @@ bool SvnActions::makeSwitch(const QString &path, const QString &what)
         ptr->disableTargetDir(true);
         ptr->disableOpen(true);
         if (dlg->exec() == QDialog::Accepted) {
+            if (!ptr->reposURL().isValid()) {
+                KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+                                   i18n("Switch URL"));
+                delete dlg;
+                return false;
+            }
             svn::Revision r = ptr->toRevision();
-            done = makeSwitch(ptr->reposURL(), path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
+            // svn::Path should not take a QString but a QByteArray ...
+            const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
+            done = makeSwitch(rUrl, path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
         }
         if (dlg) {
             KConfigGroup _kc(Kdesvnsettings::self()->config(), "switch_url_dlg");

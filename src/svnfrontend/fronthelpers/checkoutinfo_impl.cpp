@@ -52,21 +52,11 @@ svn::Revision CheckoutInfo_impl::toRevision() const
     return m_RangeInput->getRange().first;
 }
 
-QString CheckoutInfo_impl::reposURL() const
+KUrl CheckoutInfo_impl::reposURL() const
 {
     KUrl uri(m_UrlEdit->url());
-    QString proto = svn::Url::transformProtokoll(uri.protocol());
-    // uri.protocol() is the internal (or kioslave?) protocol
-    // proto is the protocol given to the svn api
-    // why ksvn+file needs a different handling than svn+file is
-    // currently unknown but this logic is used in other places too
-    if (proto == QLatin1String("file") &&
-            uri.protocol() != QLatin1String("ksvn+file")) {
-        uri.setProtocol(QString());
-    } else {
-        uri.setProtocol(proto);
-    }
-    return uri.prettyUrl(KUrl::RemoveTrailingSlash);
+    uri.setProtocol(svn::Url::transformProtokoll(uri.protocol()));
+    return uri;
 }
 
 QString CheckoutInfo_impl::targetDir() const
@@ -74,12 +64,13 @@ QString CheckoutInfo_impl::targetDir() const
     if (!m_CreateDirButton->isChecked()) {
         return  m_TargetSelector->url().url();
     }
-    QString _uri = reposURL();
-    QStringList l = _uri.split(QLatin1Char('/'), QString::SkipEmptyParts);
+    // append last source url path to the target directory
+    const QString _uri = reposURL().path(KUrl::RemoveTrailingSlash);
+    const QStringList l = _uri.split(QLatin1Char('/'), QString::SkipEmptyParts);
     if (l.isEmpty()) {
         return m_TargetSelector->url().url();
     }
-    return  m_TargetSelector->url().path() + QLatin1Char('/') + l[l.count() - 1];
+    return  m_TargetSelector->url().path() + QLatin1Char('/') + l.last();
 }
 
 bool CheckoutInfo_impl::overwrite() const

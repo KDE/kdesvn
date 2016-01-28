@@ -133,21 +133,20 @@ bool Url::isValid(const QString &url)
 QString
 Url::transformProtokoll(const QString &prot)
 {
-    QString _prot = prot.toLower();
-    if (QString::compare(_prot, "svn+http") == 0 ||
-            QString::compare(_prot, "ksvn+http") == 0) {
+    const QString _prot = prot.toLower();
+    if (_prot == QLatin1String("svn+http") ||
+        _prot == QLatin1String("ksvn+http"))
         return QString("http");
-    } else if (QString::compare(_prot, "svn+https") == 0 ||
-               QString::compare(_prot, "ksvn+https") == 0) {
+    if (_prot == QLatin1String("svn+https") ||
+        _prot == QLatin1String("ksvn+https"))
         return QString("https");
-    } else if (QString::compare(_prot, "svn+file") == 0 ||
-               QString::compare(_prot, "ksvn+file") == 0) {
+    if (_prot == QLatin1String("svn+file") ||
+        _prot == QLatin1String("ksvn+file"))
         return QString("file");
-    } else if (QString::compare(_prot, "ksvn+ssh") == 0) {
+    if (_prot == QLatin1String("ksvn+ssh"))
         return QString("svn+ssh");
-    } else if (QString::compare(_prot, "ksvn") == 0) {
+    if (_prot == QLatin1String("ksvn"))
         return QString("svn");
-    }
     return _prot;
 }
 }

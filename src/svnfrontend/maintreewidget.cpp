@@ -2044,7 +2044,15 @@ void MainTreeWidget::slotRelocate()
         KConfigGroup _k(Kdesvnsettings::self()->config(), "relocate_dlg");
         dlg->restoreDialogSize(_k);
         if (dlg->exec() == QDialog::Accepted) {
-            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
+            if (!ptr->reposURL().isValid()) {
+                KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+                                   i18n("Relocate path %1", path));
+                delete dlg;
+                return;
+            }
+            // svn::Path should not take a QString but a QByteArray ...
+            const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
+            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, rUrl, path, ptr->overwrite(), ptr->ignoreExternals());
         }
         if (dlg) {
             dlg->saveDialogSize(_k);

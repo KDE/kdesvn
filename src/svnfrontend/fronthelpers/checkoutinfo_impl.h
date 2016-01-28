@@ -33,7 +33,7 @@ public:
     virtual ~CheckoutInfo_impl();
 
     svn::Revision toRevision() const;
-    QString reposURL() const;
+    KUrl reposURL() const;
     QString targetDir() const;
 
     bool overwrite() const;

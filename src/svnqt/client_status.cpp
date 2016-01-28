@@ -136,7 +136,11 @@ static svn_error_t *InfoEntryFunc(void *baton,
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
 static svn_error_t *StatusEntriesFunc(void *baton,
                                       const char *path,
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+                                      const svn_client_status_t *status,
+#else
                                       svn_wc_status2_t *status,
+#endif
                                       apr_pool_t *pool)
 {
     // use own pool - the parameter will cleared between loops!
@@ -179,7 +183,24 @@ localStatus(const StatusParameter &params,
 
     baton.pool = pool;
 
-    // TODO: svn_client_status5
+
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    error = svn_client_status5(&revnum,
+                               *context,
+                               params.path().path().toUtf8(),
+                               rev,
+                               internal::DepthToSvn(params.depth()), // see svn::Depth
+                               params.all(),           // get all not only interesting
+                               params.update(),            // check for updates
+                               params.noIgnore(),         // hide ignored files or not
+                               params.ignoreExternals(),    // hide external
+                               true,          // depth as sticky  - TODO
+                               params.changeList().array(pool),
+                               StatusEntriesFunc,
+                               &baton,
+                               pool
+                               );
+#else
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_status4(
 #else
@@ -198,7 +219,7 @@ localStatus(const StatusParameter &params,
                 params.changeList().array(pool),
                 *context,          //client ctx
                 pool);
-
+#endif
     Client_impl::checkErrorThrow(error);
     return baton.entries;
 }
@@ -255,7 +276,24 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
 
     baton.pool = pool;
 
-    // TODO: svn_client_status5
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    error = svn_client_status5(&revnum,
+                               *context,
+                               path.path().toUtf8(),
+                               rev,
+                               svn_depth_empty, // not recurse
+                               true,           // get all not only interesting
+                               update,         // check for updates
+                               false,          // hide ignored files or not
+                               false,          // hide external
+                               true,          // depth as sticky
+                               0,
+                               StatusEntriesFunc,
+                               &baton,
+                               pool
+                               );
+
+#else
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_status4(
 #else
@@ -274,6 +312,7 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
                 0,
                 *context,          //client ctx
                 pool);
+#endif
     Client_impl::checkErrorThrow(error);
     if (baton.entries.isEmpty()) {
         return StatusPtr(new Status());

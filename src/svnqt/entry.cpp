@@ -46,18 +46,22 @@ public:
     bool m_valid;
     LockEntry m_Lock;
 
-    QString _name, _url, _repos, _uuid, _copyfrom_url, _conflict_old, _conflict_new, _conflict_wrk, _prejfile, _checksum, _cmt_author;
-    bool _copied, _deleted, _absent, _incomplete;
-    svn_revnum_t _revision, _copyfrom_rev, _cmt_rev;
+    QString _name, _url, _repos, _uuid, _cmt_author;
+    bool _copied;
+    svn_revnum_t _revision, _cmt_rev;
     svn_node_kind_t _kind;
-    svn_wc_schedule_t _schedule;
-    DateTime _text_time, _prop_time, _cmt_date;
+    DateTime _cmt_date;
 
     /**
     * initializes the members
     */
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    void
+    init(const svn_client_status_t *src);
+#else
     void
     init(const svn_wc_entry_t *src);
+#endif
     void
     init(const Entry_private &src);
     void
@@ -72,18 +76,11 @@ void Entry_private::init_clean()
     _url.clear();
     _repos.clear();
     _uuid.clear();
-    _copyfrom_url.clear();
-    _conflict_old.clear();
-    _conflict_new.clear();
-    _conflict_wrk.clear();
-    _prejfile.clear();
-    _checksum.clear();
     _cmt_author.clear();
-    _revision = _copyfrom_rev = _cmt_rev = -1;
+    _revision = _cmt_rev = -1;
     _kind = svn_node_unknown;
-    _schedule = svn_wc_schedule_normal;
-    _text_time = _prop_time = _cmt_date = 0;
-    _copied = _deleted = _absent = _incomplete = false;
+    _cmt_date = 0;
+    _copied = false;
 }
 
 Entry_private::Entry_private()
@@ -103,6 +100,29 @@ Entry_private::~Entry_private()
 {
 }
 
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+void
+Entry_private::init(const svn_client_status_t *src)
+{
+    if (src) {
+        // copy & convert the contents of src
+        _name = QString::fromUtf8(src->local_abspath);
+        _revision = src->revision;
+        _repos = QString::fromUtf8(src->repos_root_url);
+        _url = _repos + QLatin1Char('/') + QString::fromUtf8(src->repos_relpath);
+        _uuid = QString::fromUtf8(src->repos_uuid);
+        _kind = src->kind;
+        _copied = src->copied != 0;
+        _cmt_rev = src->changed_rev;
+        _cmt_date = src->changed_date;
+        _cmt_author = QString::fromUtf8(src->changed_author);
+        m_Lock.init(src->lock);
+        m_valid = true;
+    } else {
+        init_clean();
+    }
+}
+#else
 void
 Entry_private::init(const svn_wc_entry_t *src)
 {
@@ -114,37 +134,18 @@ Entry_private::init(const svn_wc_entry_t *src)
         _repos = QString::fromUtf8(src->repos);
         _uuid = QString::fromUtf8(src->uuid);
         _kind = src->kind;
-        _schedule = src->schedule;
         _copied = src->copied != 0;
-        _deleted = src->deleted != 0;
-        _absent = src->absent != 0;
-        _incomplete = src->incomplete != 0;
-        _copyfrom_url = QString::fromUtf8(src->copyfrom_url);
-        _copyfrom_rev = src->copyfrom_rev;
-        _conflict_old = QString::fromUtf8(src->conflict_old);
-        _conflict_new = QString::fromUtf8(src->conflict_new);
-        _conflict_wrk = QString::fromUtf8(src->conflict_wrk);
-        _prejfile = QString::fromUtf8(src->prejfile);
-        _text_time = src->text_time;
-        _prop_time = src->prop_time;
-        _checksum = QString::fromUtf8(src->checksum);
         _cmt_rev = src->cmt_rev;
         _cmt_date = src->cmt_date;
         _cmt_author = QString::fromUtf8(src->cmt_author);
         m_Lock.init(src);
         m_valid = true;
     } else {
-        m_valid = false;
-        m_Lock = LockEntry();
-        _name.clear();
-        _url.clear(); _repos.clear(); _uuid.clear(); _copyfrom_url.clear(); _conflict_old.clear(); _conflict_new.clear(); _conflict_wrk.clear();
-        _prejfile.clear(); _checksum.clear(); _cmt_author.clear();
-        _copied = _deleted = _absent = _incomplete = false;
-        _kind = svn_node_unknown;
-        _schedule = svn_wc_schedule_normal;
-        _text_time = _prop_time = _cmt_date = 0;
+        init_clean();
     }
 }
+#endif
+
 void
 Entry_private::init(const Entry_private &src)
 {
@@ -152,24 +153,11 @@ Entry_private::init(const Entry_private &src)
     _url = src._url;
     _repos = src._repos;
     _uuid = src._uuid;
-    _copyfrom_url = src._copyfrom_url;
-    _conflict_old = src._conflict_old;
-    _conflict_new = src._conflict_new;
-    _conflict_wrk = src._conflict_wrk;
-    _prejfile = src._prejfile;
-    _checksum = src._checksum;
     _cmt_author = src._cmt_author;
     _copied = src._copied;
-    _deleted = src._deleted;
-    _absent = src._absent;
-    _incomplete = src._incomplete;
     _revision = src._revision;
-    _copyfrom_rev = src._copyfrom_rev;
     _cmt_rev = src._cmt_rev;
     _kind = src._kind;
-    _schedule = src._schedule;
-    _text_time = src._text_time;
-    _prop_time = src._prop_time;
     _cmt_date = src._cmt_date;
     m_Lock = src.m_Lock;
     m_valid = src.m_valid;
@@ -183,9 +171,6 @@ void Entry_private::init(const QString &url, const DirEntry &dirEntry)
         _name = dirEntry.name();
         _revision = dirEntry.createdRev();
         _kind = dirEntry.kind();
-        _schedule = svn_wc_schedule_normal;
-        _text_time = dirEntry.time();
-        _prop_time = dirEntry.time();
         _cmt_rev = dirEntry.createdRev();
         _cmt_date = dirEntry.time();
         _cmt_author = dirEntry.lastAuthor();
@@ -201,9 +186,6 @@ void Entry_private::init(const QString &url, const InfoEntry &src)
     _url = url;
     _revision = src.revision();
     _kind = src.kind();
-    _schedule = svn_wc_schedule_normal;
-    _text_time = src.textTime();
-    _prop_time = src.propTime();
     _cmt_rev = src.cmtRev();
     _cmt_date = src.cmtDate();
     _cmt_author = src.cmtAuthor();
@@ -211,7 +193,11 @@ void Entry_private::init(const QString &url, const InfoEntry &src)
     m_valid = true;
 }
 
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+Entry::Entry(const svn_client_status_t *src)
+#else
 Entry::Entry(const svn_wc_entry_t *src)
+#endif
     : m_Data(new Entry_private())
 {
     m_Data->init(src);
@@ -281,75 +267,13 @@ Entry::cmtRev() const
 {
     return m_Data->_cmt_rev;
 }
-const QString &
-Entry::checksum() const
-{
-    return m_Data->_checksum;
-}
 
-const DateTime &
-Entry::propTime() const
-{
-    return m_Data->_prop_time;
-}
-
-const DateTime &
-Entry::textTime() const
-{
-    return m_Data->_text_time;
-}
-const QString &
-Entry::prejfile() const
-{
-    return m_Data->_prejfile;
-}
-const QString &
-Entry::conflictWrk() const
-{
-    return m_Data->_conflict_wrk;
-}
-
-const QString &
-Entry::conflictNew() const
-{
-    return m_Data->_conflict_new;
-}
-const QString &
-Entry::conflictOld() const
-{
-    return m_Data->_conflict_old;
-}
-svn_revnum_t
-Entry::copyfromRev() const
-{
-    return m_Data->_copyfrom_rev;
-}
-const QString &
-Entry::copyfromUrl() const
-{
-    return m_Data->_copyfrom_url;
-}
-
-bool
-Entry::isAbsent() const
-{
-    return m_Data->_absent;
-}
-bool
-Entry::isDeleted() const
-{
-    return m_Data->_deleted != 0;
-}
 bool
 Entry::isCopied() const
 {
     return m_Data->_copied != 0;
 }
-svn_wc_schedule_t
-Entry::schedule() const
-{
-    return m_Data->_schedule;
-}
+
 svn_node_kind_t
 Entry::kind() const
 {

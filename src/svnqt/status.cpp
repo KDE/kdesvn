@@ -50,8 +50,11 @@ public:
      * @param path
      * @param status if NULL isVersioned will be false
      */
-    void
-    init(const QString &path, const svn_wc_status2_t *status);
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    void init(const QString &path, const svn_client_status_t *status);
+#else
+    void init(const QString &path, const svn_wc_status2_t *status);
+#endif
     void
     init(const QString &path, const Status_private &src);
     void
@@ -99,7 +102,11 @@ void Status_private::setPath(const QString &aPath)
     }
 }
 
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+void Status_private::init(const QString &path, const svn_client_status_t *status)
+#else
 void Status_private::init(const QString &path, const svn_wc_status2_t *status)
+#endif
 {
     setPath(path);
     if (!status) {
@@ -112,11 +119,15 @@ void Status_private::init(const QString &path, const svn_wc_status2_t *status)
         m_hasReal = m_isVersioned &&
                     status->text_status != svn_wc_status_ignored;
         // now duplicate the contents
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+        m_entry = Entry(status);
+#else
         if (status->entry) {
             m_entry = Entry(status->entry);
         } else {
             m_entry = Entry();
         }
+#endif
         m_text_status = status->text_status;
         m_prop_status = status->prop_status;
         m_copied = status->copied != 0;
@@ -192,16 +203,23 @@ Status::Status(const Status &src)
     }
 }
 
-Status::Status(const QString &path, svn_wc_status2_t *status)
-    : m_Data(new Status_private())
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+Status::Status(const char *path, const svn_client_status_t *status)
+  : m_Data(new Status_private())
 {
     m_Data->init(path, status);
 }
-
-Status::Status(const char *path, svn_wc_status2_t *status)
+#else
+Status::Status(const char *path, const svn_wc_status2_t *status)
+  : m_Data(new Status_private())
+{
+    m_Data->init(path, status);
+}
+#endif
+Status::Status(const QString &path)
     : m_Data(new Status_private())
 {
-    m_Data->init(QString::fromUtf8(path), status);
+    m_Data->init(path, NULL);
 }
 
 Status::Status(const QString &url, const DirEntry &src)

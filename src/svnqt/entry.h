@@ -64,7 +64,11 @@ public:
      *
      * @param src another entry to copy from
      */
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    explicit Entry(const svn_client_status_t *src = 0);
+#else
     explicit Entry(const svn_wc_entry_t *src = 0);
+#endif
 
     /**
      * copy constructor
@@ -125,75 +129,12 @@ public:
      */
     svn_node_kind_t
     kind() const;
-    /**
-     * @return scheduling (add, delete, replace)
-     */
-    svn_wc_schedule_t
-    schedule() const;
+
     /**
      * @return TRUE if copied
      */
     bool
     isCopied() const;
-    /**
-     * @return true if deleted
-     */
-    bool
-    isDeleted() const;
-    /**
-     * @return true if deleted
-     */
-    bool
-    isAbsent() const;
-    /**
-     * @return copyfrom location
-     */
-    const QString &
-    copyfromUrl() const;
-    /**
-     * @return copyfrom revision
-     */
-    svn_revnum_t
-    copyfromRev() const;
-    /**
-     * @return old version of conflicted file
-     */
-    const QString &
-    conflictOld() const;
-    /**
-     * @return new version of conflicted file
-     */
-    const QString &
-    conflictNew() const;
-    /**
-     * @return working version of conflicted file
-     */
-    const QString &
-    conflictWrk() const;
-    /**
-     * @return property reject file
-     */
-    const QString &
-    prejfile() const;
-    /**
-     * @return last up-to-date time for text contents
-     * @retval 0 no information available
-     */
-    const DateTime &
-    textTime() const;
-    /**
-     * @return last up-to-date time for properties
-     * @retval 0 no information available
-     */
-    const DateTime &
-    propTime()const;
-
-    /**
-     * @return base64 encoded checksum
-     * @retval NULL for backwards compatibility
-     */
-    const QString &
-    checksum() const;
 
     /**
      * @return last revision this was changed

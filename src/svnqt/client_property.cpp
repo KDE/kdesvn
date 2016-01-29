@@ -34,6 +34,7 @@
 
 // subversion api
 #include <svn_client.h>
+#include <svn_path.h>
 
 #include "path.h"
 #include "exception.h"
@@ -159,9 +160,37 @@ Client_impl::propset(const PropertiesParameter &params)
     }
 
     svn_error_t *error = 0;
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
+    const QByteArray tgtTmp = params.path().cstr();
+    if (svn_path_is_url(tgtTmp)) {
+        error = svn_client_propset_remote(params.propertyName().toUtf8(),
+                                          propval,
+                                          tgtTmp,
+                                          params.skipCheck(),
+                                          params.revision(),
+                                          map2hash(params.revisionProperties(), pool),
+                                          NULL, // we don't need a commit info - ignore
+                                          NULL,
+                                          *m_context,
+                                          pool
+                                          );
+    } else {
+        apr_array_header_t *targets = apr_array_make(pool, 1,
+                                                     sizeof(const char *));
+        APR_ARRAY_PUSH(targets, const char *) = tgtTmp;
+        error = svn_client_propset_local(params.propertyName().toUtf8(),
+                                         propval,
+                                         targets,
+                                         internal::DepthToSvn(params.depth()),
+                                         params.skipCheck(),
+                                         params.changeList().array(pool),
+                                         *m_context,
+                                         pool);
+
+    }
+#else
     svn_commit_info_t *commit_info;
-    // TODO: svn_client_propset_local / svn_client_propset_remote
-    svn_client_propset3(
+    error = svn_client_propset3(
         &commit_info,
         params.propertyName().toUtf8(),
         propval, params.path().cstr(),
@@ -170,6 +199,7 @@ Client_impl::propset(const PropertiesParameter &params)
         params.changeList().array(pool),
         map2hash(params.revisionProperties(), pool),
         *m_context, pool);
+#endif
     if (error != NULL) {
         throw ClientException(error);
     }

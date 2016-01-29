@@ -82,6 +82,7 @@ Client_impl::proplist(const Path &path,
     propBaton baton;
     baton.m_context = m_context;
     baton.resultlist = path_prop_map_list;
+    // todo svn 1.8: svn_client_proplist4
     svn_error_t *error =
         svn_client_proplist3(
             path.cstr(),

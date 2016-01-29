@@ -97,6 +97,7 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description2_t *c
     case svn_wc_conflict_reason_replaced:
         m_reason = ReasonReplaced;
         break;
+    // todo svn 1.8: svn_wc_conflict_reason_moved_away/svn_wc_conflict_reason_moved_here
     }
 #else
     Q_UNUSED(conflict);

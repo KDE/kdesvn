@@ -272,6 +272,7 @@ svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid u
     src_path = svn_path_internal_style(src_path, pool);
 #endif
 
+    // todo svn 1.8: svn_repos_load_fs4
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     SVN_ERR(svn_repos_load_fs3(m_Repository, infile, uuida, dest_path, usePre ? 1 : 0, usePost ? 1 : 0, validateProps ? 1 : 0,
                                RepositoryData::repo_notify_func,
@@ -296,6 +297,7 @@ svn_error_t *RepositoryData::hotcopy(const QString &src, const QString &dest, bo
     src_path = svn_path_internal_style(src_path, pool);
     dest_path = svn_path_internal_style(dest_path, pool);
 #endif
+    // todo svn 1.8: svn_repos_hotcopy2
     SVN_ERR(svn_repos_hotcopy(src_path, dest_path, cleanlogs ? 1 : 0, pool));
     return SVN_NO_ERROR;
 }

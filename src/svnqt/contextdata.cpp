@@ -130,6 +130,7 @@ ContextData::ContextData(const QString &configDir_)
     svn_auth_baton_t *ab;
     svn_auth_open(&ab, providers, pool);
 
+    // todo svn 1.8: svn_client_create_context2
     // initialize ctx structure
     svn_client_create_context(&m_ctx, pool);
 

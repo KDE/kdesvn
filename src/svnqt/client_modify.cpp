@@ -177,6 +177,7 @@ Client_impl::add(const Path &path,
                  svn::Depth depth, bool force, bool no_ignore, bool add_parents) throw (ClientException)
 {
     Pool pool;
+    // todo svn 1.8: svn_client_add5
     svn_error_t *error =
         svn_client_add4(path.cstr(),
                         internal::DepthToSvn(depth),
@@ -354,6 +355,7 @@ svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientExc
 {
     Pool pool;
 
+    // todo svn 1.8: svn_client_move7
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
@@ -565,6 +567,7 @@ Client_impl::import(const Path &path,
     Pool pool;
 
     m_context->setLogMessage(message);
+    // todo svn 1.8: svn_client_import5
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;

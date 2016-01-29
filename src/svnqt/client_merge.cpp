@@ -63,6 +63,7 @@ void Client_impl::merge(const MergeParameter &parameters) throw (ClientException
     if (parameters.reintegrate()) {
         merge_reintegrate(parameters);
     } else {
+      // todo svn 1.8: svn_client_merge5
         error =
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
             svn_client_merge4
@@ -97,9 +98,8 @@ void Client_impl::merge_peg(const MergeParameter &parameters) throw (ClientExcep
     Pool pool;
     internal::RevisionRangesToHash _rhash(parameters.revisions());
 
-    svn_error_t *error;
-
-    error =
+    // todo svn 1.8: svn_client_merge_peg5
+    svn_error_t *error =
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_merge_peg4
 #else

@@ -81,6 +81,7 @@ Client_impl::list(const Path &pathOrUrl,
     DirEntries entries;
     _baton.m_data = &entries;
     _baton.m_context = m_context;
+    // todo svn 1.8: svn_client_list3
     svn_error_t *error = svn_client_list2(pathOrUrl.cstr(),
                                           peg,
                                           revision,

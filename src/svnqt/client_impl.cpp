@@ -102,6 +102,7 @@ bool Client_impl::RepoHasCapability(const Path &repository, Capability capabilit
     Pool pool;
 
     svn_ra_session_t *session = 0;
+    // todo svn 1.8: svn_client_open_ra_session2
     error = svn_client_open_ra_session(&session,
                                        repository.cstr(),
                                        *m_context,

@@ -303,15 +303,15 @@ public:
      * @exception ClientException
      */
     virtual Revision
-    doSwitch(
-        const Path &path, const Url &url,
+    doSwitch(const Path &path, const Url &url,
         const Revision &revision,
         Depth depth,
         const Revision &peg = Revision::UNDEFINED,
         bool sticky_depth = true,
         bool ignore_externals = false,
-        bool allow_unversioned = false
-    ) throw (ClientException);
+        bool allow_unversioned = false,
+        bool ignore_ancestry = false
+      ) throw (ClientException);
 
     /**
      * Import file or directory PATH into repository directory URL at

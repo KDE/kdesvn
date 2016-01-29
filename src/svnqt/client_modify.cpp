@@ -519,14 +519,18 @@ Client_impl::doSwitch(
     const Revision &peg,
     bool sticky_depth,
     bool ignore_externals,
-    bool allow_unversioned
+    bool allow_unversioned,
+    bool ignore_ancestry
 ) throw (ClientException)
 {
     Pool pool;
     svn_revnum_t revnum = 0;
-    svn_error_t *error = 0;
-  // TODO: svn_client_switch3
-    error = svn_client_switch2(
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    svn_error_t *error = svn_client_switch3(
+#else
+    Q_UNUSED(ignore_ancestry);
+    svn_error_t *error = svn_client_switch2(
+#endif
                 &revnum,
                 path.cstr(),
                 url,
@@ -536,6 +540,9 @@ Client_impl::doSwitch(
                 sticky_depth,
                 ignore_externals,
                 allow_unversioned,
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+                ignore_ancestry,
+#endif
                 *m_context,
                 pool
             );

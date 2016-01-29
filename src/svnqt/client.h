@@ -328,7 +328,8 @@ public:
         const Revision &peg = Revision::UNDEFINED,
         bool sticky_depth = true,
         bool ignore_externals = false,
-        bool allow_unversioned = false
+        bool allow_unversioned = false,
+        bool ignore_ancestry = false
     ) throw (ClientException) = 0;
 
     /**

@@ -160,7 +160,7 @@ Client_impl::propset(const PropertiesParameter &params)
 
     svn_error_t *error = 0;
     svn_commit_info_t *commit_info;
-    // TODO: svn_client_propset_local / svn_client_propset_remove
+    // TODO: svn_client_propset_local / svn_client_propset_remote
     svn_client_propset3(
         &commit_info,
         params.propertyName().toUtf8(),

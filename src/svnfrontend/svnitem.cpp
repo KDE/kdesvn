@@ -230,12 +230,12 @@ QPixmap SvnItem::getPixmap(const QPixmap &_p, int size, bool overlay)
         SvnActions *wrap = getWrapper();
         bool mod = false;
         QPixmap p2 = QPixmap();
-        if (p_Item->m_Stat->textStatus() == svn_wc_status_conflicted) {
+        if (p_Item->m_Stat->nodeStatus() == svn_wc_status_conflicted) {
             m_bgColor = CONFLICT;
             if (overlay) {
                 p2 = KIconLoader::global()->loadIcon("kdesvnconflicted", KIconLoader::Desktop, size);
             }
-        } else if (p_Item->m_Stat->textStatus() == svn_wc_status_missing) {
+        } else if (p_Item->m_Stat->nodeStatus() == svn_wc_status_missing) {
             m_bgColor = MISSING;
         } else if (isLocked() || (wrap && wrap->checkReposLockCache(fullName()))) {
             if (overlay) {
@@ -252,12 +252,12 @@ QPixmap SvnItem::getPixmap(const QPixmap &_p, int size, bool overlay)
                 p2 = KIconLoader::global()->loadIcon("kdesvnupdates", KIconLoader::Desktop, size);
             }
             m_bgColor = UPDATES;
-        } else if (p_Item->m_Stat->textStatus() == svn_wc_status_deleted) {
+        } else if (p_Item->m_Stat->nodeStatus() == svn_wc_status_deleted) {
             if (overlay) {
                 p2 = KIconLoader::global()->loadIcon("kdesvndeleted", KIconLoader::Desktop, size);
             }
             m_bgColor = DELETED;
-        } else if (p_Item->m_Stat->textStatus() == svn_wc_status_added) {
+        } else if (p_Item->m_Stat->nodeStatus() == svn_wc_status_added) {
             if (overlay) {
                 p2 = KIconLoader::global()->loadIcon("kdesvnadded", KIconLoader::Desktop, size);
             }
@@ -377,7 +377,7 @@ bool SvnItem::isRealVersioned()const
 
 bool SvnItem::isIgnored()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_ignored;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_ignored;
 }
 
 bool SvnItem::isRemoteAdded()const
@@ -388,7 +388,7 @@ bool SvnItem::isRemoteAdded()const
 
 bool SvnItem::isLocalAdded()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_added;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_added;
 }
 
 QString SvnItem::infoText()const
@@ -403,7 +403,7 @@ QString SvnItem::infoText()const
             info_text = i18n("Needs update");
         }
     } else {
-        switch (p_Item->m_Stat->textStatus()) {
+        switch (p_Item->m_Stat->nodeStatus()) {
         case svn_wc_status_modified:
             info_text = i18n("Locally modified");
             break;
@@ -434,11 +434,9 @@ QString SvnItem::infoText()const
         case svn_wc_status_incomplete:
             info_text = i18n("Incomplete");
             break;
-        default:
-            break;
         }
         if (info_text.isEmpty()) {
-            switch (p_Item->m_Stat->propStatus()) {
+            switch (p_Item->m_Stat->nodeStatus()) {
             case svn_wc_status_modified:
                 info_text = i18n("Property modified");
                 break;
@@ -482,8 +480,8 @@ QString SvnItem::lockOwner()const
  */
 bool SvnItem::isModified()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_modified || p_Item->m_Stat->propStatus() == svn_wc_status_modified
-           || p_Item->m_Stat->textStatus() == svn_wc_status_replaced;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_modified
+           || p_Item->m_Stat->nodeStatus() == svn_wc_status_replaced;
 }
 
 bool SvnItem::isChanged()const
@@ -506,22 +504,22 @@ const svn::StatusPtr &SvnItem::stat()const
  */
 bool SvnItem::isNormal()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_normal;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_normal;
 }
 
 bool SvnItem::isMissing()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_missing;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_missing;
 }
 
 bool SvnItem::isDeleted()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_deleted;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_deleted;
 }
 
 bool SvnItem::isConflicted()const
 {
-    return p_Item->m_Stat->textStatus() == svn_wc_status_conflicted;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_conflicted;
 }
 
 bool SvnItem::hasToolTipText()

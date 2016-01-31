@@ -107,6 +107,13 @@ public:
     const Entry &
     entry() const;
     /**
+     * @return The status of the node, based on the restructuring changes and if the
+     * node has no restructuring changes the text and prop status
+     */
+    svn_wc_status_kind
+    nodeStatus() const;
+
+    /**
      * @return file status property enum of the "textual" component.
      */
     svn_wc_status_kind

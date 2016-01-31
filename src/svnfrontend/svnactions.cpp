@@ -1041,19 +1041,20 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
             for (int i = 0; i < _Cache.count(); ++i) {
                 const svn::StatusPtr ptr = _Cache.at(i);
                 const QString _p = ptr->path();
+                // check the node status, not the text status (it does not cover the prop status)
                 if (ptr->isRealVersioned() && (
-                            ptr->textStatus() == svn_wc_status_modified ||
-                            ptr->textStatus() == svn_wc_status_added ||
-                            ptr->textStatus() == svn_wc_status_replaced ||
-                            ptr->textStatus() == svn_wc_status_deleted ||
-                            ptr->propStatus() == svn_wc_status_modified
+                            ptr->nodeStatus() == svn_wc_status_modified ||
+                            ptr->nodeStatus() == svn_wc_status_added ||
+                            ptr->nodeStatus() == svn_wc_status_replaced ||
+                            ptr->nodeStatus() == svn_wc_status_deleted ||
+                            ptr->nodeStatus() == svn_wc_status_modified
                         )) {
-                    if (ptr->textStatus() == svn_wc_status_deleted) {
+                    if (ptr->nodeStatus() == svn_wc_status_deleted) {
                         _check.append(CommitActionEntry(_p, i18n("Delete"), CommitActionEntry::DELETE));
                     } else {
                         _check.append(CommitActionEntry(_p, i18n("Commit"), CommitActionEntry::COMMIT));
                     }
-                } else if (ptr->textStatus() == svn_wc_status_missing) {
+                } else if (ptr->nodeStatus() == svn_wc_status_missing) {
                     _uncheck.append(CommitActionEntry(_p, i18n("Delete and Commit"), CommitActionEntry::MISSING_DELETE));
                 } else if (!ptr->isVersioned()) {
                     _uncheck.append(CommitActionEntry(_p, i18n("Add and Commit"), CommitActionEntry::ADD_COMMIT));
@@ -2539,14 +2540,14 @@ void SvnActions::checkModifiedThread()
     for (int i = 0; i < sEntries.size(); ++i) {
         const svn::StatusPtr ptr = sEntries.at(i);
         if (ptr->isRealVersioned() && (
-                    ptr->textStatus() == svn_wc_status_modified ||
-                    ptr->textStatus() == svn_wc_status_added ||
-                    ptr->textStatus() == svn_wc_status_deleted ||
-                    ptr->textStatus() == svn_wc_status_replaced ||
-                    ptr->propStatus() == svn_wc_status_modified
+                    ptr->nodeStatus() == svn_wc_status_modified ||
+                    ptr->nodeStatus() == svn_wc_status_added ||
+                    ptr->nodeStatus() == svn_wc_status_deleted ||
+                    ptr->nodeStatus() == svn_wc_status_replaced ||
+                    ptr->nodeStatus() == svn_wc_status_modified
                 )) {
             m_Data->m_Cache.insertKey(ptr, ptr->path());
-        } else if (ptr->textStatus() == svn_wc_status_conflicted) {
+        } else if (ptr->nodeStatus() == svn_wc_status_conflicted) {
             m_Data->m_conflictCache.insertKey(ptr, ptr->path());
         }
     }
@@ -2604,7 +2605,7 @@ bool SvnActions::checkUpdatesRunning()
 
 void SvnActions::addModifiedCache(const svn::StatusPtr &what)
 {
-    if (what->textStatus() == svn_wc_status_conflicted) {
+    if (what->nodeStatus() == svn_wc_status_conflicted) {
         m_Data->m_conflictCache.insertKey(what, what->path());
     } else {
         m_Data->m_Cache.insertKey(what, what->path());

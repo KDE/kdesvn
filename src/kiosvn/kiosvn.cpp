@@ -781,21 +781,19 @@ void kio_svnProtocol::status(const KUrl &wc, bool cR, bool rec)
         return;
     }
     kDebug(9510) << "Status got " << dlist.count() << " entries." << endl;
-    for (long j = 0; j < dlist.count(); ++j) {
-        if (!dlist[j]) {
+    Q_FOREACH (const svn::StatusPtr &s, dlist) {
+        if (!s) {
             continue;
         }
+        const QString cntStr(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0'));
         //QDataStream stream(params, QIODevice::WriteOnly);
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "path", dlist[j]->path());
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "text", QString::number(dlist[j]->textStatus()));
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "prop",
-                    QString::number(dlist[j]->propStatus()));
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "reptxt",
-                    QString::number(dlist[j]->reposTextStatus()));
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "repprop",
-                    QString::number(dlist[j]->reposPropStatus()));
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "rev",
-                    QString::number(dlist[j]->entry().cmtRev()));
+        setMetaData(cntStr + QLatin1String("path"), s->path());
+        setMetaData(cntStr + QLatin1String("node"), QString::number(s->nodeStatus()));
+        setMetaData(cntStr + QLatin1String("text"), QString::number(s->textStatus()));
+        setMetaData(cntStr + QLatin1String("prop"), QString::number(s->propStatus()));
+        setMetaData(cntStr + QLatin1String("reptxt"), QString::number(s->reposTextStatus()));
+        setMetaData(cntStr + QLatin1String("repprop"), QString::number(s->reposPropStatus()));
+        setMetaData(cntStr + QLatin1String("rev"), QString::number(s->entry().cmtRev()));
         m_pData->m_Listener.incCounter();
     }
 }

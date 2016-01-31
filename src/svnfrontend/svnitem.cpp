@@ -190,7 +190,9 @@ const QString &SvnItem::Url()const
 bool SvnItem::isDir()const
 {
     if (isRemoteAdded() || p_Item->m_Stat->entry().isValid()) {
-        return p_Item->m_Stat->entry().kind() == svn_node_dir;
+        if (p_Item->m_Stat->entry().kind() != svn_node_unknown) {
+            return p_Item->m_Stat->entry().kind() == svn_node_dir;
+        }
     }
     /* must be a local file */
     QFileInfo f(fullName());

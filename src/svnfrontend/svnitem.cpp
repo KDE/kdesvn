@@ -406,9 +406,19 @@ QString SvnItem::infoText()const
         }
     } else {
         switch (p_Item->m_Stat->nodeStatus()) {
-        case svn_wc_status_modified:
-            info_text = i18n("Locally modified");
+        case svn_wc_status_none:
+        case svn_wc_status_normal:
             break;
+        case svn_wc_status_unversioned:
+            info_text = i18n("Not versioned");
+            break;
+        case svn_wc_status_modified: {
+            if (p_Item->m_Stat->textStatus() == svn_wc_status_modified)
+                info_text = i18n("Locally modified");
+            else
+                info_text = i18n("Property modified");
+            break;
+        }
         case svn_wc_status_added:
             info_text = i18n("Locally added");
             break;
@@ -427,24 +437,22 @@ QString SvnItem::infoText()const
         case svn_wc_status_external:
             info_text = i18n("External");
             break;
-        case svn_wc_status_conflicted:
-            info_text = i18n("Conflict");
+        case svn_wc_status_conflicted: {
+            if (p_Item->m_Stat->textStatus() == svn_wc_status_modified)
+                info_text = i18n("Conflict");
+            else
+                info_text = i18n("Property conflicted");
             break;
+        }
         case svn_wc_status_merged:
             info_text = i18n("Merged");
             break;
         case svn_wc_status_incomplete:
             info_text = i18n("Incomplete");
             break;
-        }
-        if (info_text.isEmpty()) {
-            switch (p_Item->m_Stat->nodeStatus()) {
-            case svn_wc_status_modified:
-                info_text = i18n("Property modified");
-                break;
-            default:
-                break;
-            }
+        case svn_wc_status_obstructed:
+            info_text = i18n("Obstructed");
+            break;
         }
     }
     return info_text;

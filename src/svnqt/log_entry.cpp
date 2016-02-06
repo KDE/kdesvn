@@ -38,6 +38,8 @@
 #include "svn_time.h"
 #include "svn_compat.h"
 
+#include <QDataStream>
+
 namespace svn
 {
 LogChangePathEntry::LogChangePathEntry(const char *path_,

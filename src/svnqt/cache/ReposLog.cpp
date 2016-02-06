@@ -33,6 +33,7 @@
 
 #include <qsqldatabase.h>
 
+#include <QDataStream>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>

@@ -22,7 +22,6 @@
 
 #include "diffsyntax.h"
 
-// #include <keditcl.h>
 #include <KTextEditor/Editor>
 #include <KFindDialog>
 
